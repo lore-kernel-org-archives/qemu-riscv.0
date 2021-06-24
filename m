@@ -1,36 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lwNHj-0004QE-Qg
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:12:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45278)
+	id 1lwNIH-0005OF-1G
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:13:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45506)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNHd-0004ME-Oo; Thu, 24 Jun 2021 07:12:37 -0400
-Received: from mail142-27.mail.alibaba.com ([198.11.142.27]:49341)
+ id 1lwNI9-0005JR-Fv; Thu, 24 Jun 2021 07:13:06 -0400
+Received: from mail142-26.mail.alibaba.com ([198.11.142.26]:36107)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNHb-0005n9-K5; Thu, 24 Jun 2021 07:12:33 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07437834|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_system_inform|0.537522-0.00564209-0.456836;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047201; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKIVos_1624533132; 
+ id 1lwNI6-00062G-6u; Thu, 24 Jun 2021 07:13:05 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1482758|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_system_inform|0.566915-0.00750245-0.425582;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047192; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKmmKo_1624533162; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KXKIVos_1624533132)
- by smtp.aliyun-inc.com(10.147.42.198);
- Thu, 24 Jun 2021 19:12:12 +0800
+ fp:SMTPD_---.KXKmmKo_1624533162)
+ by smtp.aliyun-inc.com(10.147.40.233);
+ Thu, 24 Jun 2021 19:12:42 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 31/37] target/riscv: RV64 Only SIMD Q15 saturating Multiply
- Instructions
-Date: Thu, 24 Jun 2021 18:55:15 +0800
-Message-Id: <20210624105521.3964-32-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 32/37] target/riscv: RV64 Only 32-bit Multiply Instructions
+Date: Thu, 24 Jun 2021 18:55:16 +0800
+Message-Id: <20210624105521.3964-33-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
 References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
-Received-SPF: none client-ip=198.11.142.27; envelope-from=zhiwei_liu@c-sky.com;
- helo=mail142-27.mail.alibaba.com
+Received-SPF: none client-ip=198.11.142.26; envelope-from=zhiwei_liu@c-sky.com;
+ helo=mail142-26.mail.alibaba.com
 X-Spam_score_int: -25
 X-Spam_score: -2.6
 X-Spam_bar: --
@@ -49,228 +48,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2021 11:12:38 -0000
+X-List-Received-Date: Thu, 24 Jun 2021 11:13:08 -0000
 
-Q15 saturation limits the result to the range [INT16_MIN, INT16_MAX].
+Multiply the straight or crossed 32-bit elements of two registers.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |  10 ++
- target/riscv/insn32.decode              |  10 ++
- target/riscv/insn_trans/trans_rvp.c.inc |  19 ++++
- target/riscv/packed_helper.c            | 139 ++++++++++++++++++++++++
- 4 files changed, 178 insertions(+)
+ target/riscv/helper.h                   |  3 +++
+ target/riscv/insn32.decode              |  3 +++
+ target/riscv/insn_trans/trans_rvp.c.inc |  4 ++++
+ target/riscv/packed_helper.c            | 21 +++++++++++++++++++++
+ 4 files changed, 31 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index d992859747..5edaf389e4 100644
+index 5edaf389e4..0fa48955d8 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1443,3 +1443,13 @@ DEF_HELPER_3(umin32, i64, env, i64, i64)
- DEF_HELPER_3(smax32, i64, env, i64, i64)
- DEF_HELPER_3(umax32, i64, env, i64, i64)
- DEF_HELPER_2(kabs32, tl, env, tl)
+@@ -1453,3 +1453,6 @@ DEF_HELPER_3(kdmtt16, i64, env, i64, i64)
+ DEF_HELPER_4(kdmabb16, tl, env, tl, tl, tl)
+ DEF_HELPER_4(kdmabt16, tl, env, tl, tl, tl)
+ DEF_HELPER_4(kdmatt16, tl, env, tl, tl, tl)
 +
-+DEF_HELPER_3(khmbb16, i64, env, i64, i64)
-+DEF_HELPER_3(khmbt16, i64, env, i64, i64)
-+DEF_HELPER_3(khmtt16, i64, env, i64, i64)
-+DEF_HELPER_3(kdmbb16, i64, env, i64, i64)
-+DEF_HELPER_3(kdmbt16, i64, env, i64, i64)
-+DEF_HELPER_3(kdmtt16, i64, env, i64, i64)
-+DEF_HELPER_4(kdmabb16, tl, env, tl, tl, tl)
-+DEF_HELPER_4(kdmabt16, tl, env, tl, tl, tl)
-+DEF_HELPER_4(kdmatt16, tl, env, tl, tl, tl)
++DEF_HELPER_3(smbt32, i64, env, i64, i64)
++DEF_HELPER_3(smtt32, i64, env, i64, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index ee5f855f28..a7b5643d5f 100644
+index a7b5643d5f..d06075c062 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -1066,3 +1066,13 @@ umin32     1010000  ..... ..... 010 ..... 1110111 @r
- smax32     1001001  ..... ..... 010 ..... 1110111 @r
- umax32     1010001  ..... ..... 010 ..... 1110111 @r
- kabs32     1010110  10010 ..... 000 ..... 1110111 @r2
+@@ -1076,3 +1076,6 @@ kdmtt16    1111101  ..... ..... 001 ..... 1110111 @r
+ kdmabb16   1101100  ..... ..... 001 ..... 1110111 @r
+ kdmabt16   1110100  ..... ..... 001 ..... 1110111 @r
+ kdmatt16   1111100  ..... ..... 001 ..... 1110111 @r
 +
-+khmbb16    1101110  ..... ..... 001 ..... 1110111 @r
-+khmbt16    1110110  ..... ..... 001 ..... 1110111 @r
-+khmtt16    1111110  ..... ..... 001 ..... 1110111 @r
-+kdmbb16    1101101  ..... ..... 001 ..... 1110111 @r
-+kdmbt16    1110101  ..... ..... 001 ..... 1110111 @r
-+kdmtt16    1111101  ..... ..... 001 ..... 1110111 @r
-+kdmabb16   1101100  ..... ..... 001 ..... 1110111 @r
-+kdmabt16   1110100  ..... ..... 001 ..... 1110111 @r
-+kdmatt16   1111100  ..... ..... 001 ..... 1110111 @r
++smbt32     0001100  ..... ..... 010 ..... 1110111 @r
++smtt32     0010100  ..... ..... 010 ..... 1110111 @r
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index 77586e07e4..aa97161697 100644
+index aa97161697..a88ce7a5c4 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -1103,3 +1103,22 @@ static bool trans_##NAME(DisasContext *s, arg_r2 *a)   \
- }
- 
- GEN_RVP64_R2_OOL(kabs32);
+@@ -1122,3 +1122,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)    \
+ GEN_RVP64_R_ACC_OOL(kdmabb16);
+ GEN_RVP64_R_ACC_OOL(kdmabt16);
+ GEN_RVP64_R_ACC_OOL(kdmatt16);
 +
-+/* (RV64 Only) SIMD Q15 saturating Multiply Instructions */
-+GEN_RVP64_R_OOL(khmbb16);
-+GEN_RVP64_R_OOL(khmbt16);
-+GEN_RVP64_R_OOL(khmtt16);
-+GEN_RVP64_R_OOL(kdmbb16);
-+GEN_RVP64_R_OOL(kdmbt16);
-+GEN_RVP64_R_OOL(kdmtt16);
-+
-+#define GEN_RVP64_R_ACC_OOL(NAME)                      \
-+static bool trans_##NAME(DisasContext *s, arg_r *a)    \
-+{                                                      \
-+    REQUIRE_64BIT(s);                                  \
-+    return r_acc_ool(s, a, gen_helper_##NAME);         \
-+}
-+
-+GEN_RVP64_R_ACC_OOL(kdmabb16);
-+GEN_RVP64_R_ACC_OOL(kdmabt16);
-+GEN_RVP64_R_ACC_OOL(kdmatt16);
++/* (RV64 Only) 32-bit Multiply Instructions */
++GEN_RVP64_R_OOL(smbt32);
++GEN_RVP64_R_OOL(smtt32);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index a808dae9d8..32e0af2ef6 100644
+index 32e0af2ef6..eb086b775f 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -3422,3 +3422,142 @@ static inline void do_kabs32(CPURISCVState *env, void *vd, void *va, uint8_t i)
+@@ -3561,3 +3561,24 @@ static inline void do_kdmatt16(CPURISCVState *env, void *vd, void *va,
  }
  
- RVPR2(kabs32, 1, 4);
+ RVPR_ACC(kdmatt16, 2, 2);
 +
-+/* (RV64 Only) SIMD Q15 saturating Multiply Instructions */
-+static inline void do_khmbb16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++/* (RV64 Only) 32-bit Multiply Instructions */
++static inline void do_smbt32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    d[H4(i / 2)] = sat64(env, (int64_t)a[H2(i)] * b[H2(i)] >> 15, 15);
++    int64_t *d = vd;
++    int32_t *a = va, *b = vb;
++    *d = (int64_t)a[H4(2 * i)] * b[H4(2 * i + 1)];
 +}
 +
-+RVPR64_64_64(khmbb16, 2, 2);
++RVPR64_64_64(smbt32, 1, 8);
 +
-+static inline void do_khmbt16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++static inline void do_smtt32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
 +{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    d[H4(i / 2)] = sat64(env, (int64_t)a[H2(i)] * b[H2(i + 1)] >> 15, 15);
++    int64_t *d = vd;
++    int32_t *a = va, *b = vb;
++    *d = (int64_t)a[H4(2 * i + 1)] * b[H4(2 * i + 1)];
 +}
 +
-+RVPR64_64_64(khmbt16, 2, 2);
-+
-+static inline void do_khmtt16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    d[H4(i / 2)] = sat64(env, (int64_t)a[H2(i + 1)] * b[H2(i + 1)] >> 15, 15);
-+}
-+
-+RVPR64_64_64(khmtt16, 2, 2);
-+
-+static inline void do_kdmbb16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    if (a[H2(i)] == INT16_MIN && b[H2(i)] == INT16_MIN) {
-+        d[H4(i / 2)] = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        d[H4(i / 2)] = (int64_t)a[H2(i)] * b[H2(i)] << 1;
-+    }
-+}
-+
-+RVPR64_64_64(kdmbb16, 2, 2);
-+
-+static inline void do_kdmbt16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    if (a[H2(i)] == INT16_MIN && b[H2(i + 1)] == INT16_MIN) {
-+        d[H4(i / 2)] = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        d[H4(i / 2)] = (int64_t)a[H2(i)] * b[H2(i + 1)] << 1;
-+    }
-+}
-+
-+RVPR64_64_64(kdmbt16, 2, 2);
-+
-+static inline void do_kdmtt16(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+
-+    if (a[H2(i + 1)] == INT16_MIN && b[H2(i + 1)] == INT16_MIN) {
-+        d[H4(i / 2)] = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        d[H4(i / 2)] = (int64_t)a[H2(i + 1)] * b[H2(i + 1)] << 1;
-+    }
-+}
-+
-+RVPR64_64_64(kdmtt16, 2, 2);
-+
-+static inline void do_kdmabb16(CPURISCVState *env, void *vd, void *va,
-+                               void *vb, void *vc, uint8_t i)
-+
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+    int32_t *c = vc, m0;
-+
-+    if (a[H2(i)] == INT16_MIN && b[H2(i)] == INT16_MIN) {
-+        m0 = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        m0 = (int32_t)a[H2(i)] * b[H2(i)] << 1;
-+    }
-+    d[H4(i / 2)] = sadd32(env, 0, c[H4(i / 2)], m0);
-+}
-+
-+RVPR_ACC(kdmabb16, 2, 2);
-+
-+static inline void do_kdmabt16(CPURISCVState *env, void *vd, void *va,
-+                               void *vb, void *vc, uint8_t i)
-+
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+    int32_t *c = vc, m0;
-+
-+    if (a[H2(i)] == INT16_MIN && b[H2(i + 1)] == INT16_MIN) {
-+        m0 = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        m0 = (int32_t)a[H2(i)] * b[H2(i + 1)] << 1;
-+    }
-+    d[H4(i / 2)] = sadd32(env, 0, c[H4(i / 2)], m0);
-+}
-+
-+RVPR_ACC(kdmabt16, 2, 2);
-+
-+static inline void do_kdmatt16(CPURISCVState *env, void *vd, void *va,
-+                               void *vb, void *vc, uint8_t i)
-+
-+{
-+    int32_t *d = vd;
-+    int16_t *a = va, *b = vb;
-+    int32_t *c = vc, m0;
-+
-+    if (a[H2(i + 1)] == INT16_MIN && b[H2(i + 1)] == INT16_MIN) {
-+        m0 = INT32_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        m0 = (int32_t)a[H2(i + 1)] * b[H2(i + 1)] << 1;
-+    }
-+    d[H4(i / 2)] = sadd32(env, 0, c[H4(i / 2)], m0);
-+}
-+
-+RVPR_ACC(kdmatt16, 2, 2);
++RVPR64_64_64(smtt32, 1, 8);
 -- 
 2.17.1
 
