@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lwNFf-0000VM-L9
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:10:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44768)
+	id 1lwNGG-0001ag-Dh
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:11:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44922)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNFd-0000MQ-Ee; Thu, 24 Jun 2021 07:10:29 -0400
-Received: from mail142-27.mail.alibaba.com ([198.11.142.27]:20108)
+ id 1lwNGE-0001Qa-24; Thu, 24 Jun 2021 07:11:06 -0400
+Received: from mail142-29.mail.alibaba.com ([198.11.142.29]:26525)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNFY-00050b-Cx; Thu, 24 Jun 2021 07:10:29 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_system_inform|0.773602-0.00839421-0.218004;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047187; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKR8OH_1624533010; 
+ id 1lwNGB-0005K8-7t; Thu, 24 Jun 2021 07:11:05 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0760825|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_system_inform|0.582977-0.00815396-0.408869;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047193; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKIsy9_1624533040; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KXKR8OH_1624533010)
- by smtp.aliyun-inc.com(10.147.44.145);
- Thu, 24 Jun 2021 19:10:10 +0800
+ fp:SMTPD_---.KXKIsy9_1624533040) by smtp.aliyun-inc.com(10.147.40.7);
+ Thu, 24 Jun 2021 19:10:40 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 27/37] target/riscv: Non-SIMD Miscellaneous Instructions
-Date: Thu, 24 Jun 2021 18:55:11 +0800
-Message-Id: <20210624105521.3964-28-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 28/37] target/riscv: RV64 Only SIMD 32-bit Add/Subtract
+ Instructions
+Date: Thu, 24 Jun 2021 18:55:12 +0800
+Message-Id: <20210624105521.3964-29-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
 References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
-Received-SPF: none client-ip=198.11.142.27; envelope-from=zhiwei_liu@c-sky.com;
- helo=mail142-27.mail.alibaba.com
+Received-SPF: none client-ip=198.11.142.29; envelope-from=zhiwei_liu@c-sky.com;
+ helo=mail142-29.mail.alibaba.com
 X-Spam_score_int: -25
 X-Spam_score: -2.6
 X-Spam_bar: --
@@ -48,419 +48,472 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2021 11:10:30 -0000
+X-List-Received-Date: Thu, 24 Jun 2021 11:11:06 -0000
 
-Bit reverse, average, rounding shift, extract and insert byte
-instructions.
+SIMD 32-bit straight or crossed add/subtract with rounding, havling,
+or saturation.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |   6 +
- target/riscv/insn32.decode              |  16 ++
- target/riscv/insn_trans/trans_rvp.c.inc | 241 ++++++++++++++++++++++++
- target/riscv/packed_helper.c            |  77 ++++++++
- 4 files changed, 340 insertions(+)
+ target/riscv/helper.h                   |  29 +++
+ target/riscv/insn32.decode              |  32 +++
+ target/riscv/insn_trans/trans_rvp.c.inc |  84 ++++++++
+ target/riscv/packed_helper.c            | 276 ++++++++++++++++++++++++
+ 4 files changed, 421 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 3063b583f3..bdd5ca1251 100644
+index bdd5ca1251..0f02e140f5 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1393,3 +1393,9 @@ DEF_HELPER_3(maxw, tl, env, tl, tl)
- DEF_HELPER_3(minw, tl, env, tl, tl)
- DEF_HELPER_3(mulr64, i64, env, tl, tl)
- DEF_HELPER_3(mulsr64, i64, env, tl, tl)
+@@ -1399,3 +1399,32 @@ DEF_HELPER_3(sra_u, tl, env, tl, tl)
+ DEF_HELPER_3(bitrev, tl, env, tl, tl)
+ DEF_HELPER_3(wext, tl, env, i64, tl)
+ DEF_HELPER_4(bpick, tl, env, tl, tl, tl)
 +
-+DEF_HELPER_3(ave, tl, env, tl, tl)
-+DEF_HELPER_3(sra_u, tl, env, tl, tl)
-+DEF_HELPER_3(bitrev, tl, env, tl, tl)
-+DEF_HELPER_3(wext, tl, env, i64, tl)
-+DEF_HELPER_4(bpick, tl, env, tl, tl, tl)
++DEF_HELPER_3(radd32, i64, env, i64, i64)
++DEF_HELPER_3(uradd32, i64, env, i64, i64)
++DEF_HELPER_3(kadd32, i64, env, i64, i64)
++DEF_HELPER_3(ukadd32, i64, env, i64, i64)
++DEF_HELPER_3(rsub32, i64, env, i64, i64)
++DEF_HELPER_3(ursub32, i64, env, i64, i64)
++DEF_HELPER_3(ksub32, i64, env, i64, i64)
++DEF_HELPER_3(uksub32, i64, env, i64, i64)
++DEF_HELPER_3(cras32, i64, env, i64, i64)
++DEF_HELPER_3(rcras32, i64, env, i64, i64)
++DEF_HELPER_3(urcras32, i64, env, i64, i64)
++DEF_HELPER_3(kcras32, i64, env, i64, i64)
++DEF_HELPER_3(ukcras32, i64, env, i64, i64)
++DEF_HELPER_3(crsa32, i64, env, i64, i64)
++DEF_HELPER_3(rcrsa32, i64, env, i64, i64)
++DEF_HELPER_3(urcrsa32, i64, env, i64, i64)
++DEF_HELPER_3(kcrsa32, i64, env, i64, i64)
++DEF_HELPER_3(ukcrsa32, i64, env, i64, i64)
++DEF_HELPER_3(stas32, i64, env, i64, i64)
++DEF_HELPER_3(rstas32, i64, env, i64, i64)
++DEF_HELPER_3(urstas32, i64, env, i64, i64)
++DEF_HELPER_3(kstas32, i64, env, i64, i64)
++DEF_HELPER_3(ukstas32, i64, env, i64, i64)
++DEF_HELPER_3(stsa32, i64, env, i64, i64)
++DEF_HELPER_3(rstsa32, i64, env, i64, i64)
++DEF_HELPER_3(urstsa32, i64, env, i64, i64)
++DEF_HELPER_3(kstsa32, i64, env, i64, i64)
++DEF_HELPER_3(ukstsa32, i64, env, i64, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 9cfe5570b0..b70f6f0dc2 100644
+index b70f6f0dc2..05151c6c51 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -26,6 +26,7 @@
- %sh7    20:7
- %sh4    20:4
- %sh3    20:3
-+%sh6    20:6
- %csr    20:12
- %rm     12:3
- %nf     29:3                     !function=ex_plus_1
-@@ -44,6 +45,7 @@
- &j    imm rd
- &r    rd rs1 rs2
- &r2   rd rs1
-+&r4   rd rs1 rs2 rs3
- &s    imm rs1 rs2
- &u    imm rd
- &shift     shamt rs1 rd
-@@ -65,6 +67,7 @@
- @sh      ......  ...... .....  ... ..... ....... &shift  shamt=%sh7     %rs1 %rd
- @sh4     ......  ...... .....  ... ..... ....... &shift  shamt=%sh4      %rs1 %rd
- @sh3     ......  ...... .....  ... ..... ....... &shift  shamt=%sh3      %rs1 %rd
-+@sh6     ......  ...... .....  ... ..... ....... &shift  shamt=%sh6      %rs1 %rd
- @csr     ............   .....  ... ..... .......               %csr     %rs1 %rd
- 
- @atom_ld ..... aq:1 rl:1 ..... ........ ..... ....... &atomic rs2=0     %rs1 %rd
-@@ -74,6 +77,7 @@
- @r_rm    .......   ..... ..... ... ..... ....... %rs2 %rs1 %rm %rd
- @r2_rm   .......   ..... ..... ... ..... ....... %rs1 %rm %rd
- @r2      .......   ..... ..... ... ..... ....... &r2 %rs1 %rd
-+@r4      ..... ..  ..... ..... ... ..... ....... %rs3 %rs2 %rs1 %rd
- @r2_nfvm ... ... vm:1 ..... ..... ... ..... ....... &r2nfvm %nf %rs1 %rd
- @r2_vm   ...... vm:1 ..... ..... ... ..... ....... &rmr %rs2 %rd
- @r1_vm   ...... vm:1 ..... ..... ... ..... ....... %rd
-@@ -997,3 +1001,15 @@ maxw       1111001  ..... ..... 000 ..... 1110111 @r
- minw       1111000  ..... ..... 000 ..... 1110111 @r
- mulr64     1111000  ..... ..... 001 ..... 1110111 @r
- mulsr64    1110000  ..... ..... 001 ..... 1110111 @r
+@@ -1013,3 +1013,35 @@ bpick      .....00  ..... ..... 011 ..... 1110111 @r4
+ insb       1010110  00 ... ..... 000 ..... 1110111 @sh3
+ maddr32    1100010  ..... ..... 001 ..... 1110111 @r
+ msubr32    1100011  ..... ..... 001 ..... 1110111 @r
 +
-+ave        1110000  ..... ..... 000 ..... 1110111 @r
-+sra_u      0010010  ..... ..... 001 ..... 1110111 @r
-+srai_u     110101  ...... ..... 001 ..... 1110111 @sh6
-+bitrev     1110011  ..... ..... 000 ..... 1110111 @r
-+bitrevi    111010  ...... ..... 000 ..... 1110111 @sh6
-+wext       1100111  ..... ..... 000 ..... 1110111 @r
-+wexti      1101111  ..... ..... 000 ..... 1110111 @sh5
-+bpick      .....00  ..... ..... 011 ..... 1110111 @r4
-+insb       1010110  00 ... ..... 000 ..... 1110111 @sh3
-+maddr32    1100010  ..... ..... 001 ..... 1110111 @r
-+msubr32    1100011  ..... ..... 001 ..... 1110111 @r
++# *** RV64P Standard Extension (in addition to RV32P) ***
++add32      0100000  ..... ..... 010 ..... 1110111 @r
++radd32     0000000  ..... ..... 010 ..... 1110111 @r
++uradd32    0010000  ..... ..... 010 ..... 1110111 @r
++kadd32     0001000  ..... ..... 010 ..... 1110111 @r
++ukadd32    0011000  ..... ..... 010 ..... 1110111 @r
++sub32      0100001  ..... ..... 010 ..... 1110111 @r
++rsub32     0000001  ..... ..... 010 ..... 1110111 @r
++ursub32    0010001  ..... ..... 010 ..... 1110111 @r
++ksub32     0001001  ..... ..... 010 ..... 1110111 @r
++uksub32    0011001  ..... ..... 010 ..... 1110111 @r
++cras32     0100010  ..... ..... 010 ..... 1110111 @r
++rcras32    0000010  ..... ..... 010 ..... 1110111 @r
++urcras32   0010010  ..... ..... 010 ..... 1110111 @r
++kcras32    0001010  ..... ..... 010 ..... 1110111 @r
++ukcras32   0011010  ..... ..... 010 ..... 1110111 @r
++crsa32     0100011  ..... ..... 010 ..... 1110111 @r
++rcrsa32    0000011  ..... ..... 010 ..... 1110111 @r
++urcrsa32   0010011  ..... ..... 010 ..... 1110111 @r
++kcrsa32    0001011  ..... ..... 010 ..... 1110111 @r
++ukcrsa32   0011011  ..... ..... 010 ..... 1110111 @r
++stas32     1111000  ..... ..... 010 ..... 1110111 @r
++rstas32    1011000  ..... ..... 010 ..... 1110111 @r
++urstas32   1101000  ..... ..... 010 ..... 1110111 @r
++kstas32    1100000  ..... ..... 010 ..... 1110111 @r
++ukstas32   1110000  ..... ..... 010 ..... 1110111 @r
++stsa32     1111001  ..... ..... 010 ..... 1110111 @r
++rstsa32    1011001  ..... ..... 010 ..... 1110111 @r
++urstsa32   1101001  ..... ..... 010 ..... 1110111 @r
++kstsa32    1100001  ..... ..... 010 ..... 1110111 @r
++ukstsa32   1110001  ..... ..... 010 ..... 1110111 @r
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index b720c6e037..51e140d157 100644
+index 51e140d157..293c2c4597 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -708,3 +708,244 @@ GEN_RVP_R_OOL(minw);
- GEN_RVP_R_OOL(maxw);
- GEN_RVP_R_D64_OOL(mulr64);
- GEN_RVP_R_D64_OOL(mulsr64);
+@@ -949,3 +949,87 @@ static bool trans_msubr32(DisasContext *ctx, arg_r *a)
+     tcg_temp_free_i32(w3);
+     return true;
+ }
 +
-+/* Non-SIMD Miscellaneous Instructions */
-+GEN_RVP_R_OOL(ave);
-+GEN_RVP_R_OOL(sra_u);
-+GEN_RVP_SHIFTI(srai_u, NULL, gen_helper_sra_u);
-+GEN_RVP_R_OOL(bitrev);
-+GEN_RVP_SHIFTI(bitrevi, NULL, gen_helper_bitrev);
++/*
++ *** RV64 Only Instructions
++ */
++/* RV64 Only) SIMD 32-bit Add/Subtract Instructions */
++#define GEN_RVP64_R_INLINE(NAME, VECOP, OP)              \
++static bool trans_##NAME(DisasContext *s, arg_r *a)      \
++{                                                        \
++    REQUIRE_64BIT(s);                                    \
++    return r_inline(s, a, VECOP, OP);                    \
++}
++
++GEN_RVP64_R_INLINE(add32, tcg_gen_vec_add32_tl, tcg_gen_add_tl);
++GEN_RVP64_R_INLINE(sub32, tcg_gen_vec_sub32_tl, tcg_gen_sub_tl);
 +
 +static bool
-+r_s64_ool(DisasContext *ctx, arg_r *a,
-+          void (* fn)(TCGv, TCGv_ptr, TCGv_i64, TCGv))
++r_64_ool(DisasContext *ctx, arg_r *a,
++         void (* fn)(TCGv_i64, TCGv_ptr, TCGv_i64, TCGv_i64))
 +{
-+    TCGv_i64 src1;
-+    TCGv src2, dst;
++    TCGv t1, t2;
++    TCGv_i64 src1, src2, dst;
 +
-+    if (!has_ext(ctx, RVP) || !ctx->ext_psfoperand) {
++    if (!has_ext(ctx, RVP)) {
 +        return false;
 +    }
 +
 +    src1 = tcg_temp_new_i64();
-+    src2 = tcg_temp_new();
-+    dst = tcg_temp_new();
++    src2 = tcg_temp_new_i64();
++    dst = tcg_temp_new_i64();
 +
-+    if (is_32bit(ctx)) {
-+        TCGv t0, t1;
-+        t0 = tcg_temp_new();
-+        t1 = tcg_temp_new();
-+        gen_get_gpr(t0, a->rs1);
-+        gen_get_gpr(t1, a->rs1 + 1);
-+        tcg_gen_concat_tl_i64(src1, t0, t1);
-+        tcg_temp_free(t0);
-+        tcg_temp_free(t1);
-+    } else {
-+        TCGv t0;
-+        t0 = tcg_temp_new();
-+        gen_get_gpr(t0, a->rs1);
-+        tcg_gen_ext_tl_i64(src1, t0);
-+        tcg_temp_free(t0);
-+    }
-+    gen_get_gpr(src2, a->rs2);
++    t1 = tcg_temp_new();
++    t2 = tcg_temp_new();
++    gen_get_gpr(t1, a->rs1);
++    tcg_gen_ext_tl_i64(src1, t1);
++    gen_get_gpr(t2, a->rs2);
++    tcg_gen_ext_tl_i64(src2, t2);
++
 +    fn(dst, cpu_env, src1, src2);
-+    gen_set_gpr(a->rd, dst);
++    tcg_gen_trunc_i64_tl(t1, dst);
++    gen_set_gpr(a->rd, t1);
 +
++    tcg_temp_free(t1);
++    tcg_temp_free(t2);
 +    tcg_temp_free_i64(src1);
-+    tcg_temp_free(src2);
-+    tcg_temp_free(dst);
++    tcg_temp_free_i64(src2);
++    tcg_temp_free_i64(dst);
 +    return true;
 +}
 +
-+#define GEN_RVP_R_S64_OOL(NAME)                        \
++#define GEN_RVP64_R_OOL(NAME)                          \
 +static bool trans_##NAME(DisasContext *s, arg_r *a)    \
 +{                                                      \
-+    return r_s64_ool(s, a, gen_helper_##NAME);         \
++    REQUIRE_64BIT(s);                                  \
++    return r_64_ool(s, a, gen_helper_##NAME);          \
 +}
 +
-+GEN_RVP_R_S64_OOL(wext);
-+
-+static bool rvp_shifti_s64_ool(DisasContext *ctx, arg_shift *a,
-+                               void (* fn)(TCGv, TCGv_ptr, TCGv_i64, TCGv))
-+{
-+    TCGv_i64 src1;
-+    TCGv shift, dst;
-+
-+    if (!has_ext(ctx, RVP) || !ctx->ext_psfoperand) {
-+        return false;
-+    }
-+
-+    src1 = tcg_temp_new_i64();
-+    dst = tcg_temp_new();
-+
-+    if (is_32bit(ctx)) {
-+        TCGv t0, t1;
-+        t0 = tcg_temp_new();
-+        t1 = tcg_temp_new();
-+        gen_get_gpr(t0, a->rs1);
-+        gen_get_gpr(t1, a->rs1 + 1);
-+        tcg_gen_concat_tl_i64(src1, t0, t1);
-+        tcg_temp_free(t0);
-+        tcg_temp_free(t1);
-+    } else {
-+        TCGv t0;
-+        t0 = tcg_temp_new();
-+        gen_get_gpr(t0, a->rs1);
-+        tcg_gen_ext_tl_i64(src1, t0);
-+        tcg_temp_free(t0);
-+    }
-+    shift = tcg_const_tl(a->shamt);
-+    fn(dst, cpu_env, src1, shift);
-+    gen_set_gpr(a->rd, dst);
-+
-+    tcg_temp_free_i64(src1);
-+    tcg_temp_free(shift);
-+    tcg_temp_free(dst);
-+    return true;
-+}
-+
-+#define GEN_RVP_SHIFTI_S64_OOL(NAME, OP)                    \
-+static bool trans_##NAME(DisasContext *s, arg_shift *a)     \
-+{                                                           \
-+    return rvp_shifti_s64_ool(s, a, gen_helper_##OP);       \
-+}
-+
-+GEN_RVP_SHIFTI_S64_OOL(wexti, wext);
-+
-+typedef void gen_helper_rvp_r4(TCGv, TCGv_ptr, TCGv, TCGv, TCGv);
-+
-+static bool r4_ool(DisasContext *ctx, arg_r4 *a, gen_helper_rvp_r4 *fn)
-+{
-+    TCGv src1, src2, src3, dst;
-+    if (!has_ext(ctx, RVP)) {
-+        return false;
-+    }
-+
-+    src1 = tcg_temp_new();
-+    src2 = tcg_temp_new();
-+    src3 = tcg_temp_new();
-+    dst = tcg_temp_new();
-+
-+    gen_get_gpr(src1, a->rs1);
-+    gen_get_gpr(src2, a->rs2);
-+    gen_get_gpr(src3, a->rs3);
-+    fn(dst, cpu_env, src1, src2, src3);
-+    gen_set_gpr(a->rd, dst);
-+
-+    tcg_temp_free(src1);
-+    tcg_temp_free(src2);
-+    tcg_temp_free(src3);
-+    tcg_temp_free(dst);
-+    return true;
-+}
-+
-+#define GEN_RVP_R4_OOL(NAME)                           \
-+static bool trans_##NAME(DisasContext *s, arg_r4 *a)   \
-+{                                                      \
-+    return r4_ool(s, a, gen_helper_##NAME);            \
-+}
-+
-+GEN_RVP_R4_OOL(bpick);
-+
-+static bool trans_insb(DisasContext *ctx, arg_shift *a)
-+{
-+    TCGv src1, dst, b0;
-+    uint8_t shift;
-+    if (!has_ext(ctx, RVP)) {
-+        return false;
-+    }
-+    if (is_32bit(ctx)) {
-+        shift = a->shamt & 0x3;
-+    } else {
-+        shift = a->shamt;
-+    }
-+    src1 = tcg_temp_new();
-+    dst = tcg_temp_new();
-+    b0 = tcg_temp_new();
-+
-+    gen_get_gpr(src1, a->rs1);
-+    gen_get_gpr(dst, a->rd);
-+
-+    tcg_gen_andi_tl(b0, src1, 0xff);
-+    tcg_gen_deposit_tl(dst, dst, b0, shift * 8, 8);
-+    gen_set_gpr(a->rd, dst);
-+
-+    tcg_temp_free(src1);
-+    tcg_temp_free(dst);
-+    tcg_temp_free(b0);
-+    return true;
-+}
-+
-+static bool trans_maddr32(DisasContext *ctx, arg_r *a)
-+{
-+    TCGv src1, src2, dst;
-+    TCGv_i32 w1, w2, w3;
-+    if (!has_ext(ctx, RVP)) {
-+        return false;
-+    }
-+
-+    src1 = tcg_temp_new();
-+    src2 = tcg_temp_new();
-+    dst = tcg_temp_new();
-+    w1 = tcg_temp_new_i32();
-+    w2 = tcg_temp_new_i32();
-+    w3 = tcg_temp_new_i32();
-+
-+    gen_get_gpr(src1, a->rs1);
-+    gen_get_gpr(src2, a->rs2);
-+    gen_get_gpr(dst, a->rd);
-+
-+    tcg_gen_trunc_tl_i32(w1, src1);
-+    tcg_gen_trunc_tl_i32(w2, src2);
-+    tcg_gen_trunc_tl_i32(w3, dst);
-+
-+    tcg_gen_mul_i32(w1, w1, w2);
-+    tcg_gen_add_i32(w3, w3, w1);
-+    tcg_gen_ext_i32_tl(dst, w3);
-+    gen_set_gpr(a->rd, dst);
-+
-+    tcg_temp_free(src1);
-+    tcg_temp_free(src2);
-+    tcg_temp_free(dst);
-+    tcg_temp_free_i32(w1);
-+    tcg_temp_free_i32(w2);
-+    tcg_temp_free_i32(w3);
-+    return true;
-+}
-+
-+static bool trans_msubr32(DisasContext *ctx, arg_r *a)
-+{
-+    TCGv src1, src2, dst;
-+    TCGv_i32 w1, w2, w3;
-+    if (!has_ext(ctx, RVP)) {
-+        return false;
-+    }
-+
-+    src1 = tcg_temp_new();
-+    src2 = tcg_temp_new();
-+    dst = tcg_temp_new();
-+    w1 = tcg_temp_new_i32();
-+    w2 = tcg_temp_new_i32();
-+    w3 = tcg_temp_new_i32();
-+
-+    gen_get_gpr(src1, a->rs1);
-+    gen_get_gpr(src2, a->rs2);
-+    gen_get_gpr(dst, a->rd);
-+
-+    tcg_gen_trunc_tl_i32(w1, src1);
-+    tcg_gen_trunc_tl_i32(w2, src2);
-+    tcg_gen_trunc_tl_i32(w3, dst);
-+
-+    tcg_gen_mul_i32(w1, w1, w2);
-+    tcg_gen_sub_i32(w3, w3, w1);
-+    tcg_gen_ext_i32_tl(dst, w3);
-+    gen_set_gpr(a->rd, dst);
-+
-+    tcg_temp_free(src1);
-+    tcg_temp_free(src2);
-+    tcg_temp_free(dst);
-+    tcg_temp_free_i32(w1);
-+    tcg_temp_free_i32(w2);
-+    tcg_temp_free_i32(w3);
-+    return true;
-+}
++GEN_RVP64_R_OOL(radd32);
++GEN_RVP64_R_OOL(uradd32);
++GEN_RVP64_R_OOL(kadd32);
++GEN_RVP64_R_OOL(ukadd32);
++GEN_RVP64_R_OOL(rsub32);
++GEN_RVP64_R_OOL(ursub32);
++GEN_RVP64_R_OOL(ksub32);
++GEN_RVP64_R_OOL(uksub32);
++GEN_RVP64_R_OOL(cras32);
++GEN_RVP64_R_OOL(rcras32);
++GEN_RVP64_R_OOL(urcras32);
++GEN_RVP64_R_OOL(kcras32);
++GEN_RVP64_R_OOL(ukcras32);
++GEN_RVP64_R_OOL(crsa32);
++GEN_RVP64_R_OOL(rcrsa32);
++GEN_RVP64_R_OOL(urcrsa32);
++GEN_RVP64_R_OOL(kcrsa32);
++GEN_RVP64_R_OOL(ukcrsa32);
++GEN_RVP64_R_OOL(stas32);
++GEN_RVP64_R_OOL(rstas32);
++GEN_RVP64_R_OOL(urstas32);
++GEN_RVP64_R_OOL(kstas32);
++GEN_RVP64_R_OOL(ukstas32);
++GEN_RVP64_R_OOL(stsa32);
++GEN_RVP64_R_OOL(rstsa32);
++GEN_RVP64_R_OOL(urstsa32);
++GEN_RVP64_R_OOL(kstsa32);
++GEN_RVP64_R_OOL(ukstsa32);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index c0e3b6bbdb..4e0c7a92eb 100644
+index 4e0c7a92eb..305c515132 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -2910,3 +2910,80 @@ static inline void do_mulsr64(CPURISCVState *env, void *vd, void *va,
+@@ -2987,3 +2987,279 @@ static inline void do_bpick(CPURISCVState *env, void *vd, void *va,
  }
  
- RVPR64(mulsr64);
+ RVPR_ACC(bpick, 1, sizeof(target_ulong));
 +
-+/* Miscellaneous Instructions */
-+static inline void do_ave(CPURISCVState *env, void *vd, void *va,
-+                          void *vb, uint8_t i)
++/*
++ *** RV64 Only Instructions
++ */
++/* (RV64 Only) SIMD 32-bit Add/Subtract Instructions */
++static inline void do_radd32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint16_t i)
 +{
-+    target_long *d = vd, *a = va, *b = vb, half;
-+
-+    half = hadd64(*a, *b);
-+    if ((*a ^ *b) & 0x1) {
-+        half++;
-+    }
-+    *d = half;
++    int32_t *d = vd, *a = va, *b = vb;
++    d[i] = hadd32(a[i], b[i]);
 +}
 +
-+RVPR(ave, 1, sizeof(target_ulong));
++RVPR64_64_64(radd32, 1, 4);
 +
-+static inline void do_sra_u(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void do_uradd32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint16_t i)
 +{
-+    target_long *d = vd, *a = va;
-+    uint8_t *b = vb;
-+    uint8_t shift = riscv_has_ext(env, RV32) ? (*b & 0x1f) : (*b & 0x3f);
-+
-+    *d = vssra64(env, 0, *a, shift);
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[i] = haddu32(a[i], b[i]);
 +}
 +
-+RVPR(sra_u, 1, sizeof(target_ulong));
++RVPR64_64_64(uradd32, 1, 4);
 +
-+static inline void do_bitrev(CPURISCVState *env, void *vd, void *va,
++static inline void do_kadd32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint16_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[i] = sadd32(env, 0, a[i], b[i]);
++}
++
++RVPR64_64_64(kadd32, 1, 4);
++
++static inline void do_ukadd32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint16_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[i] = saddu32(env, 0, a[i], b[i]);
++}
++
++RVPR64_64_64(ukadd32, 1, 4);
++
++static inline void do_rsub32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint16_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[i] = hsub32(a[i], b[i]);
++}
++
++RVPR64_64_64(rsub32, 1, 4);
++
++static inline void do_ursub32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint16_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[i] = hsubu64(a[i], b[i]);
++}
++
++RVPR64_64_64(ursub32, 1, 4);
++
++static inline void do_ksub32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint16_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[i] = ssub32(env, 0, a[i], b[i]);
++}
++
++RVPR64_64_64(ksub32, 1, 4);
++
++static inline void do_uksub32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint16_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[i] = ssubu32(env, 0, a[i], b[i]);
++}
++
++RVPR64_64_64(uksub32, 1, 4);
++
++static inline void do_cras32(CPURISCVState *env, void *vd, void *va,
 +                             void *vb, uint8_t i)
 +{
-+    target_ulong *d = vd, *a = va;
-+    uint8_t *b = vb;
-+    uint8_t shift = riscv_has_ext(env, RV32) ? (*b & 0x1f) : (*b & 0x3f);
-+
-+    *d = revbit64(*a) >> (64 - shift - 1);
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = a[H4(i)] - b[H4(i + 1)];
++    d[H4(i + 1)] = a[H4(i + 1)] + b[H4(i)];
 +}
 +
-+RVPR(bitrev, 1, sizeof(target_ulong));
++RVPR64_64_64(cras32, 2, 4);
 +
-+static inline target_ulong
-+rvpr_64(CPURISCVState *env, uint64_t a, target_ulong b, PackedFn3 *fn)
++static inline void do_rcras32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
 +{
-+    target_ulong result = 0;
-+
-+    fn(env, &result, &a, &b);
-+    return result;
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hsub32(a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = hadd32(a[H4(i + 1)], b[H4(i)]);
 +}
 +
-+#define RVPR_64(NAME)                                       \
-+target_ulong HELPER(NAME)(CPURISCVState *env, uint64_t a,   \
-+                          target_ulong b)                   \
-+{                                                           \
-+    return rvpr_64(env, a, b, (PackedFn3 *)do_##NAME);      \
-+}
++RVPR64_64_64(rcras32, 2, 4);
 +
-+static inline void do_wext(CPURISCVState *env, void *vd, void *va,
-+                           void *vb, uint8_t i)
++static inline void do_urcras32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
 +{
-+    target_long *d = vd;
-+    int64_t *a = va;
-+    uint8_t b = *(uint8_t *)vb & 0x1f;
-+
-+    *d = sextract64(*a, b, 32);
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hsubu64(a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = haddu32(a[H4(i + 1)], b[H4(i)]);
 +}
 +
-+RVPR_64(wext);
++RVPR64_64_64(urcras32, 2, 4);
 +
-+static inline void do_bpick(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, void *vc, uint8_t i)
++static inline void do_kcras32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
 +{
-+    target_long *d = vd, *a = va, *b = vb, *c = vc;
-+
-+    *d = (*c & *a) | (~*c & *b);
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = ssub32(env, 0, a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = sadd32(env, 0, a[H4(i + 1)], b[H4(i)]);
 +}
 +
-+RVPR_ACC(bpick, 1, sizeof(target_ulong));
++RVPR64_64_64(kcras32, 2, 4);
++
++static inline void do_ukcras32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = ssubu32(env, 0, a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = saddu32(env, 0, a[H4(i + 1)], b[H4(i)]);
++}
++
++RVPR64_64_64(ukcras32, 2, 4);
++
++static inline void do_crsa32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = a[H4(i)] + b[H4(i + 1)];
++    d[H4(i + 1)] = a[H4(i + 1)] - b[H4(i)];
++}
++
++RVPR64_64_64(crsa32, 2, 4);
++
++static inline void do_rcrsa32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hadd32(a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = hsub32(a[H4(i + 1)], b[H4(i)]);
++}
++
++RVPR64_64_64(rcrsa32, 2, 4);
++
++static inline void do_urcrsa32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = haddu32(a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = hsubu64(a[H4(i + 1)], b[H4(i)]);
++}
++
++RVPR64_64_64(urcrsa32, 2, 4);
++
++static inline void do_kcrsa32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = sadd32(env, 0, a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = ssub32(env, 0, a[H4(i + 1)], b[H4(i)]);
++}
++
++RVPR64_64_64(kcrsa32, 2, 4);
++
++static inline void do_ukcrsa32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = saddu32(env, 0, a[H4(i)], b[H4(i + 1)]);
++    d[H4(i + 1)] = ssubu32(env, 0, a[H4(i + 1)], b[H4(i)]);
++}
++
++RVPR64_64_64(ukcrsa32, 2, 4);
++
++static inline void do_stas32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = a[H4(i)] - b[H4(i)];
++    d[H4(i + 1)] = a[H4(i + 1)] + b[H4(i + 1)];
++}
++
++RVPR64_64_64(stas32, 2, 4);
++
++static inline void do_rstas32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hsub32(a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = hadd32(a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(rstas32, 2, 4);
++
++static inline void do_urstas32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hsubu64(a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = haddu32(a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(urstas32, 2, 4);
++
++static inline void do_kstas32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = ssub32(env, 0, a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = sadd32(env, 0, a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(kstas32, 2, 4);
++
++static inline void do_ukstas32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = ssubu32(env, 0, a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = saddu32(env, 0, a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(ukstas32, 2, 4);
++
++static inline void do_stsa32(CPURISCVState *env, void *vd, void *va,
++                             void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = a[H4(i)] + b[H4(i)];
++    d[H4(i + 1)] = a[H4(i + 1)] - b[H4(i + 1)];
++}
++
++RVPR64_64_64(stsa32, 2, 4);
++
++static inline void do_rstsa32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = hadd32(a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = hsub32(a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(rstsa32, 2, 4);
++
++static inline void do_urstsa32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = haddu32(a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = hsubu64(a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(urstsa32, 2, 4);
++
++static inline void do_kstsa32(CPURISCVState *env, void *vd, void *va,
++                              void *vb, uint8_t i)
++{
++    int32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = sadd32(env, 0, a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = ssub32(env, 0, a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(kstsa32, 2, 4);
++
++static inline void do_ukstsa32(CPURISCVState *env, void *vd, void *va,
++                               void *vb, uint8_t i)
++{
++    uint32_t *d = vd, *a = va, *b = vb;
++    d[H4(i)] = saddu32(env, 0, a[H4(i)], b[H4(i)]);
++    d[H4(i + 1)] = ssubu32(env, 0, a[H4(i + 1)], b[H4(i + 1)]);
++}
++
++RVPR64_64_64(ukstsa32, 2, 4);
 -- 
 2.17.1
 
