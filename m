@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lwNCX-00033u-QQ
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:07:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44092)
+	id 1lwND5-0004LF-Vz
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:07:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNCW-0002y7-9t; Thu, 24 Jun 2021 07:07:16 -0400
-Received: from out28-195.mail.aliyun.com ([115.124.28.195]:55864)
+ id 1lwND2-0004Fm-A0; Thu, 24 Jun 2021 07:07:48 -0400
+Received: from out28-98.mail.aliyun.com ([115.124.28.98]:58762)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwNCT-0003nS-9q; Thu, 24 Jun 2021 07:07:16 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436552|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.589756-0.0109956-0.399248;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047205; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXK8cMW_1624532827; 
+ id 1lwNCx-0004Nk-JA; Thu, 24 Jun 2021 07:07:48 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07608557|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.686434-0.0129696-0.300597;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047209; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKIqSD_1624532857; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KXK8cMW_1624532827)
- by smtp.aliyun-inc.com(10.147.43.95); Thu, 24 Jun 2021 19:07:07 +0800
+ fp:SMTPD_---.KXKIqSD_1624532857) by smtp.aliyun-inc.com(10.147.40.7);
+ Thu, 24 Jun 2021 19:07:38 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 21/37] target/riscv: 64-bit Add/Subtract Instructions
-Date: Thu, 24 Jun 2021 18:55:05 +0800
-Message-Id: <20210624105521.3964-22-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 22/37] target/riscv: 32-bit Multiply 64-bit Add/Subtract
+ Instructions
+Date: Thu, 24 Jun 2021 18:55:06 +0800
+Message-Id: <20210624105521.3964-23-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
 References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
-Received-SPF: none client-ip=115.124.28.195; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-195.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.98; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-98.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -47,278 +48,291 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2021 11:07:16 -0000
+X-List-Received-Date: Thu, 24 Jun 2021 11:07:48 -0000
 
-64-bit add/subtract with saturation or halving operation.
+32x32 multiply as an operand for 64-bit add/subtract operation
+with saturation or not.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/helper.h                   |  11 ++
- target/riscv/insn32.decode              |  11 ++
- target/riscv/insn_trans/trans_rvp.c.inc |  74 +++++++++++++
- target/riscv/packed_helper.c            | 132 ++++++++++++++++++++++++
- 4 files changed, 228 insertions(+)
+ target/riscv/helper.h                   |   9 ++
+ target/riscv/insn32.decode              |   9 ++
+ target/riscv/insn_trans/trans_rvp.c.inc |  67 ++++++++++
+ target/riscv/packed_helper.c            | 155 ++++++++++++++++++++++++
+ 4 files changed, 240 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index a0e3131512..192ef42d2a 100644
+index 192ef42d2a..c3c086bed0 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1330,3 +1330,14 @@ DEF_HELPER_4(pbsada, tl, env, tl, tl, tl)
- DEF_HELPER_4(smaqa, tl, env, tl, tl, tl)
- DEF_HELPER_4(umaqa, tl, env, tl, tl, tl)
- DEF_HELPER_4(smaqa_su, tl, env, tl, tl, tl)
+@@ -1341,3 +1341,12 @@ DEF_HELPER_3(rsub64, i64, env, i64, i64)
+ DEF_HELPER_3(ursub64, i64, env, i64, i64)
+ DEF_HELPER_3(ksub64, i64, env, i64, i64)
+ DEF_HELPER_3(uksub64, i64, env, i64, i64)
 +
-+DEF_HELPER_3(add64, i64, env, i64, i64)
-+DEF_HELPER_3(radd64, i64, env, i64, i64)
-+DEF_HELPER_3(uradd64, i64, env, i64, i64)
-+DEF_HELPER_3(kadd64, i64, env, i64, i64)
-+DEF_HELPER_3(ukadd64, i64, env, i64, i64)
-+DEF_HELPER_3(sub64, i64, env, i64, i64)
-+DEF_HELPER_3(rsub64, i64, env, i64, i64)
-+DEF_HELPER_3(ursub64, i64, env, i64, i64)
-+DEF_HELPER_3(ksub64, i64, env, i64, i64)
-+DEF_HELPER_3(uksub64, i64, env, i64, i64)
++DEF_HELPER_4(smar64, i64, env, tl, tl, i64)
++DEF_HELPER_4(smsr64, i64, env, tl, tl, i64)
++DEF_HELPER_4(umar64, i64, env, tl, tl, i64)
++DEF_HELPER_4(umsr64, i64, env, tl, tl, i64)
++DEF_HELPER_4(kmar64, i64, env, tl, tl, i64)
++DEF_HELPER_4(kmsr64, i64, env, tl, tl, i64)
++DEF_HELPER_4(ukmar64, i64, env, tl, tl, i64)
++DEF_HELPER_4(ukmsr64, i64, env, tl, tl, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 96288370a6..5156fa060e 100644
+index 5156fa060e..5d123bbb97 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -933,3 +933,14 @@ pbsada     1111111  ..... ..... 000 ..... 1110111 @r
- smaqa      1100100  ..... ..... 000 ..... 1110111 @r
- umaqa      1100110  ..... ..... 000 ..... 1110111 @r
- smaqa_su   1100101  ..... ..... 000 ..... 1110111 @r
+@@ -944,3 +944,12 @@ rsub64     1000001  ..... ..... 001 ..... 1110111 @r
+ ursub64    1010001  ..... ..... 001 ..... 1110111 @r
+ ksub64     1001001  ..... ..... 001 ..... 1110111 @r
+ uksub64    1011001  ..... ..... 001 ..... 1110111 @r
 +
-+add64      1100000  ..... ..... 001 ..... 1110111 @r
-+radd64     1000000  ..... ..... 001 ..... 1110111 @r
-+uradd64    1010000  ..... ..... 001 ..... 1110111 @r
-+kadd64     1001000  ..... ..... 001 ..... 1110111 @r
-+ukadd64    1011000  ..... ..... 001 ..... 1110111 @r
-+sub64      1100001  ..... ..... 001 ..... 1110111 @r
-+rsub64     1000001  ..... ..... 001 ..... 1110111 @r
-+ursub64    1010001  ..... ..... 001 ..... 1110111 @r
-+ksub64     1001001  ..... ..... 001 ..... 1110111 @r
-+uksub64    1011001  ..... ..... 001 ..... 1110111 @r
++smar64     1000010  ..... ..... 001 ..... 1110111 @r
++smsr64     1000011  ..... ..... 001 ..... 1110111 @r
++umar64     1010010  ..... ..... 001 ..... 1110111 @r
++umsr64     1010011  ..... ..... 001 ..... 1110111 @r
++kmar64     1001010  ..... ..... 001 ..... 1110111 @r
++kmsr64     1001011  ..... ..... 001 ..... 1110111 @r
++ukmar64    1011010  ..... ..... 001 ..... 1110111 @r
++ukmsr64    1011011  ..... ..... 001 ..... 1110111 @r
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index 1a10f13318..e04c79931d 100644
+index e04c79931d..63b6810227 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -516,3 +516,77 @@ GEN_RVP_R_ACC_OOL(pbsada);
- GEN_RVP_R_ACC_OOL(smaqa);
- GEN_RVP_R_ACC_OOL(umaqa);
- GEN_RVP_R_ACC_OOL(smaqa_su);
+@@ -590,3 +590,70 @@ GEN_RVP_R_D64_S64_S64_OOL(rsub64);
+ GEN_RVP_R_D64_S64_S64_OOL(ursub64);
+ GEN_RVP_R_D64_S64_S64_OOL(ksub64);
+ GEN_RVP_R_D64_S64_S64_OOL(uksub64);
 +
-+/*
-+ *** 64-bit Profile Instructions
-+ */
-+/* 64-bit Addition & Subtraction Instructions */
++/* 32-bit Multiply with 64-bit Add/Subtract Instructions */
++
++/* Function to accumulate 64bit destination register */
 +static bool
-+r_d64_s64_s64_ool(DisasContext *ctx, arg_r *a,
-+                  void (* fn)(TCGv_i64, TCGv_ptr, TCGv_i64, TCGv_i64))
++r_d64_acc_ool(DisasContext *ctx, arg_r *a,
++              void (* fn)(TCGv_i64, TCGv_ptr, TCGv, TCGv, TCGv_i64))
 +{
-+    TCGv t1, t2;
-+    TCGv_i64 src1, src2, dst;
++    TCGv src1, src2;
++    TCGv_i64 dst, src3;
 +
 +    if (!has_ext(ctx, RVP) || !ctx->ext_psfoperand) {
 +        return false;
 +    }
 +
-+    src1 = tcg_temp_new_i64();
-+    src2 = tcg_temp_new_i64();
++    src1 = tcg_temp_new();
++    src2 = tcg_temp_new();
++    src3 = tcg_temp_new_i64();
 +    dst = tcg_temp_new_i64();
 +
++    gen_get_gpr(src1, a->rs1);
++    gen_get_gpr(src2, a->rs2);
++
 +    if (is_32bit(ctx)) {
-+        TCGv a0, a1, b0, b1;
-+        a0 = tcg_temp_new();
-+        a1 = tcg_temp_new();
-+        b0 = tcg_temp_new();
-+        b1 = tcg_temp_new();
-+
-+        gen_get_gpr(a0, a->rs1);
-+        gen_get_gpr(a1, a->rs1 + 1);
-+        tcg_gen_concat_tl_i64(src1, a0, a1);
-+        gen_get_gpr(b0, a->rs2);
-+        gen_get_gpr(b1, a->rs2 + 1);
-+        tcg_gen_concat_tl_i64(src2, b0, b1);
-+
-+        tcg_temp_free(a0);
-+        tcg_temp_free(a1);
-+        tcg_temp_free(b0);
-+        tcg_temp_free(b1);
-+    } else {
++        TCGv t0, t1;
++        t0 = tcg_temp_new();
 +        t1 = tcg_temp_new();
-+        t2 = tcg_temp_new();
-+        gen_get_gpr(t1, a->rs1);
-+        tcg_gen_ext_tl_i64(src1, t1);
-+        gen_get_gpr(t2, a->rs2);
-+        tcg_gen_ext_tl_i64(src2, t2);
++
++        gen_get_gpr(t0, a->rd);
++        gen_get_gpr(t1, a->rd + 1);
++        tcg_gen_concat_tl_i64(src3, t0, t1);
++        tcg_temp_free(t0);
 +        tcg_temp_free(t1);
-+        tcg_temp_free(t2);
++    } else {
++        TCGv t0;
++        t0 = tcg_temp_new();
++
++        gen_get_gpr(t0, a->rd);
++        tcg_gen_ext_tl_i64(src3, t0);
++        tcg_temp_free(t0);
 +    }
 +
-+    fn(dst, cpu_env, src1, src2);
++    fn(dst, cpu_env, src1, src2, src3);
++
 +    set_pair_regs(ctx, dst, a->rd);
 +
-+    tcg_temp_free_i64(src1);
-+    tcg_temp_free_i64(src2);
++    tcg_temp_free(src1);
++    tcg_temp_free(src2);
++    tcg_temp_free_i64(src3);
 +    tcg_temp_free_i64(dst);
 +    return true;
 +}
 +
-+#define GEN_RVP_R_D64_S64_S64_OOL(NAME)                   \
-+static bool trans_##NAME(DisasContext *s, arg_r *a)       \
-+{                                                         \
-+    return r_d64_s64_s64_ool(s, a, gen_helper_##NAME);    \
++#define GEN_RVP_R_D64_ACC_OOL(NAME)                    \
++static bool trans_##NAME(DisasContext *s, arg_r *a)    \
++{                                                      \
++    return r_d64_acc_ool(s, a, gen_helper_##NAME);     \
 +}
 +
-+GEN_RVP_R_D64_S64_S64_OOL(add64);
-+GEN_RVP_R_D64_S64_S64_OOL(radd64);
-+GEN_RVP_R_D64_S64_S64_OOL(uradd64);
-+GEN_RVP_R_D64_S64_S64_OOL(kadd64);
-+GEN_RVP_R_D64_S64_S64_OOL(ukadd64);
-+GEN_RVP_R_D64_S64_S64_OOL(sub64);
-+GEN_RVP_R_D64_S64_S64_OOL(rsub64);
-+GEN_RVP_R_D64_S64_S64_OOL(ursub64);
-+GEN_RVP_R_D64_S64_S64_OOL(ksub64);
-+GEN_RVP_R_D64_S64_S64_OOL(uksub64);
++GEN_RVP_R_D64_ACC_OOL(smar64);
++GEN_RVP_R_D64_ACC_OOL(smsr64);
++GEN_RVP_R_D64_ACC_OOL(umar64);
++GEN_RVP_R_D64_ACC_OOL(umsr64);
++GEN_RVP_R_D64_ACC_OOL(kmar64);
++GEN_RVP_R_D64_ACC_OOL(kmsr64);
++GEN_RVP_R_D64_ACC_OOL(ukmar64);
++GEN_RVP_R_D64_ACC_OOL(ukmsr64);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index 02178d6e61..b8be234d97 100644
+index b8be234d97..59a06c604d 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -2088,3 +2088,135 @@ static inline void do_smaqa_su(CPURISCVState *env, void *vd, void *va,
+@@ -2220,3 +2220,158 @@ static inline void do_uksub64(CPURISCVState *env, void *vd, void *va,
  }
  
- RVPR_ACC(smaqa_su, 1, 4);
+ RVPR64_64_64(uksub64, 1, 8);
 +
-+/*
-+ *** 64-bit Profile Instructions
-+ */
-+/* 64-bit Addition & Subtraction Instructions */
-+
-+/* Define a common function to loop elements in packed register */
++/* 32-bit Multiply with 64-bit Add/Subtract Instructions */
 +static inline uint64_t
-+rvpr64_64_64(CPURISCVState *env, uint64_t a, uint64_t b,
-+             uint8_t step, uint8_t size, PackedFn3i *fn)
++rvpr64_acc(CPURISCVState *env, target_ulong a,
++           target_ulong b, uint64_t c,
++           uint8_t step, uint8_t size, PackedFn4i *fn)
 +{
-+    int i, passes = sizeof(uint64_t) / size;
++    int i, passes = sizeof(target_ulong) / size;
 +    uint64_t result = 0;
 +
 +    for (i = 0; i < passes; i += step) {
-+        fn(env, &result, &a, &b, i);
++        fn(env, &result, &a, &b, &c, i);
 +    }
 +    return result;
 +}
 +
-+#define RVPR64_64_64(NAME, STEP, SIZE)                                    \
-+uint64_t HELPER(NAME)(CPURISCVState *env, uint64_t a, uint64_t b)         \
-+{                                                                         \
-+    return rvpr64_64_64(env, a, b, STEP, SIZE, (PackedFn3i *)do_##NAME);  \
++#define RVPR64_ACC(NAME, STEP, SIZE)                                     \
++uint64_t HELPER(NAME)(CPURISCVState *env, target_ulong a,                \
++                      target_ulong b, uint64_t c)                        \
++{                                                                        \
++    return rvpr64_acc(env, a, b, c, STEP, SIZE, (PackedFn4i *)do_##NAME);\
 +}
 +
-+static inline void do_add64(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void do_smar64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = *a + *b;
++    int32_t *a = va, *b = vb;
++    int64_t *d = vd, *c = vc;
++    if (i == 0) {
++        *d = *c;
++    }
++    *d += (int64_t)a[H4(i)] * b[H4(i)];
 +}
 +
-+RVPR64_64_64(add64, 1, 8);
++RVPR64_ACC(smar64, 1, 4);
 +
-+static inline int64_t hadd64(int64_t a, int64_t b)
++static inline void do_smsr64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    int64_t res = a + b;
-+    int64_t over = (res ^ a) & (res ^ b) & INT64_MIN;
-+
-+    /* With signed overflow, bit 64 is inverse of bit 63. */
-+    return (res >> 1) ^ over;
++    int32_t *a = va, *b = vb;
++    int64_t *d = vd, *c = vc;
++    if (i == 0) {
++        *d = *c;
++    }
++    *d -= (int64_t)a[H4(i)] * b[H4(i)];
 +}
 +
-+static inline void do_radd64(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
++RVPR64_ACC(smsr64, 1, 4);
++
++static inline void do_umar64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = hadd64(*a, *b);
++    uint32_t *a = va, *b = vb;
++    uint64_t *d = vd, *c = vc;
++    if (i == 0) {
++        *d = *c;
++    }
++    *d += (uint64_t)a[H4(i)] * b[H4(i)];
 +}
 +
-+RVPR64_64_64(radd64, 1, 8);
++RVPR64_ACC(umar64, 1, 4);
 +
-+static inline uint64_t haddu64(uint64_t a, uint64_t b)
++static inline void do_umsr64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    uint64_t res = a + b;
-+    bool over = res < a;
-+
-+    return over ? ((res >> 1) | INT64_MIN) : (res >> 1);
++    uint32_t *a = va, *b = vb;
++    uint64_t *d = vd, *c = vc;
++    if (i == 0) {
++        *d = *c;
++    }
++    *d -= (uint64_t)a[H4(i)] * b[H4(i)];
 +}
 +
-+static inline void do_uradd64(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++RVPR64_ACC(umsr64, 1, 4);
++
++static inline void do_kmar64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    uint64_t *d = vd, *a = va, *b = vb;
-+    *d = haddu64(*a, *b);
++    int32_t *a = va, *b = vb;
++    int64_t *d = vd, *c = vc;
++    int64_t m0 =  (int64_t)a[H4(i)] * b[H4(i)];
++    if (!riscv_cpu_is_32bit(env)) {
++        int64_t m1 =  (int64_t)a[H4(i + 1)] * b[H4(i + 1)];
++        if (a[H4(i)] == INT32_MIN && b[H4(i)] == INT32_MIN &&
++            a[H4(i + 1)] == INT32_MIN && b[H4(i + 1)] == INT32_MIN) {
++            if (*c >= 0) {
++                *d = INT64_MAX;
++                env->vxsat = 1;
++            } else {
++                *d = sadd64(env, 0, *c + m0, m1);
++            }
++        } else {
++            *d = sadd64(env, 0, *c, m0 + m1);
++        }
++    } else {
++        *d = sadd64(env, 0, *c, m0);
++    }
 +}
 +
-+RVPR64_64_64(uradd64, 1, 8);
++RVPR64_ACC(kmar64, 1, sizeof(target_ulong));
 +
-+static inline void do_kadd64(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
++static inline void do_kmsr64(CPURISCVState *env, void *vd, void *va,
++                             void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = sadd64(env, 0, *a, *b);
++    int32_t *a = va, *b = vb;
++    int64_t *d = vd, *c = vc;
++
++    int64_t m0 =  (int64_t)a[H4(i)] * b[H4(i)];
++    if (!riscv_cpu_is_32bit(env)) {
++        int64_t m1 =  (int64_t)a[H4(i + 1)] * b[H4(i + 1)];
++        if (a[H4(i)] == INT32_MIN && b[H4(i)] == INT32_MIN &&
++            a[H4(i + 1)] == INT32_MIN && b[H4(i + 1)] == INT32_MIN) {
++            if (*c <= 0) {
++                *d = INT64_MIN;
++                env->vxsat = 1;
++            } else {
++                *d = ssub64(env, 0, *c - m0, m1);
++            }
++        } else {
++            *d = ssub64(env, 0, *c, m0 + m1);
++        }
++    } else {
++        *d = ssub64(env, 0, *c, m0);
++    }
 +}
 +
-+RVPR64_64_64(kadd64, 1, 8);
++RVPR64_ACC(kmsr64, 1, sizeof(target_ulong));
 +
-+static inline void do_ukadd64(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++static inline void do_ukmar64(CPURISCVState *env, void *vd, void *va,
++                              void *vb, void *vc, uint8_t i)
 +{
-+    uint64_t *d = vd, *a = va, *b = vb;
-+    *d = saddu64(env, 0, *a, *b);
++    uint32_t *a = va, *b = vb;
++    uint64_t *d = vd, *c = vc;
++
++    if (i == 0) {
++        *d = *c;
++    }
++    *d = saddu64(env, 0, *d, (uint64_t)a[H4(i)] * b[H4(i)]);
 +}
 +
-+RVPR64_64_64(ukadd64, 1, 8);
++RVPR64_ACC(ukmar64, 1, 4);
 +
-+static inline void do_sub64(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void do_ukmsr64(CPURISCVState *env, void *vd, void *va,
++                              void *vb, void *vc, uint8_t i)
 +{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = *a - *b;
++    uint32_t *a = va, *b = vb;
++    uint64_t *d = vd, *c = vc;
++
++    if (i == 0) {
++        *d = *c;
++    }
++    *d = ssubu64(env, 0, *d, (uint64_t)a[i] * b[i]);
 +}
 +
-+RVPR64_64_64(sub64, 1, 8);
-+
-+static inline void do_rsub64(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
-+{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = hsub64(*a, *b);
-+}
-+
-+RVPR64_64_64(rsub64, 1, 8);
-+
-+static inline void do_ursub64(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    uint64_t *d = vd, *a = va, *b = vb;
-+    *d = hsubu64(*a, *b);
-+}
-+
-+RVPR64_64_64(ursub64, 1, 8);
-+
-+static inline void do_ksub64(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
-+{
-+    int64_t *d = vd, *a = va, *b = vb;
-+    *d = ssub64(env, 0, *a, *b);
-+}
-+
-+RVPR64_64_64(ksub64, 1, 8);
-+
-+static inline void do_uksub64(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
-+{
-+    uint64_t *d = vd, *a = va, *b = vb;
-+    *d = ssubu64(env, 0, *a, *b);
-+}
-+
-+RVPR64_64_64(uksub64, 1, 8);
++RVPR64_ACC(ukmsr64, 1, 4);
 -- 
 2.17.1
 
