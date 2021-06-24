@@ -1,41 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lwN87-00031c-J5
-	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:02:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43322)
+	id 1lwN8f-0003jQ-JI
+	for mharc-qemu-riscv@gnu.org; Thu, 24 Jun 2021 07:03:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43428)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwN85-0002vc-Pv; Thu, 24 Jun 2021 07:02:41 -0400
-Received: from out28-217.mail.aliyun.com ([115.124.28.217]:32861)
+ id 1lwN8b-0003ce-UB; Thu, 24 Jun 2021 07:03:13 -0400
+Received: from out28-196.mail.aliyun.com ([115.124.28.196]:45105)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lwN82-00006m-QJ; Thu, 24 Jun 2021 07:02:41 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07439592|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.393761-0.0133688-0.59287;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXK-hDz_1624532553; 
+ id 1lwN8X-0000Rv-Js; Thu, 24 Jun 2021 07:03:13 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07458639|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_system_inform|0.76618-0.00882805-0.224992;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047203; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KXKCj-P_1624532583; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KXK-hDz_1624532553)
- by smtp.aliyun-inc.com(10.147.41.158);
- Thu, 24 Jun 2021 19:02:33 +0800
+ fp:SMTPD_---.KXKCj-P_1624532583)
+ by smtp.aliyun-inc.com(10.147.42.22); Thu, 24 Jun 2021 19:03:04 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 12/37] target/riscv: SIMD 8-bit Miscellaneous Instructions
-Date: Thu, 24 Jun 2021 18:54:56 +0800
-Message-Id: <20210624105521.3964-13-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 13/37] target/riscv: 8-bit Unpacking Instructions
+Date: Thu, 24 Jun 2021 18:54:57 +0800
+Message-Id: <20210624105521.3964-14-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
 References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
-Received-SPF: none client-ip=115.124.28.217; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-217.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.196; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-196.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -48,205 +47,207 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2021 11:02:42 -0000
+X-List-Received-Date: Thu, 24 Jun 2021 11:03:15 -0000
 
-Instructions include signed or unsigned minimum, maximum,
-clip value, absolute value, and leading zero, leading one
-count instructions.
+Sign-extend or zero-extend selected 8-bit elements to
+16-bit elements.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/helper.h                   |  12 +++
- target/riscv/insn32.decode              |  12 +++
- target/riscv/insn_trans/trans_rvp.c.inc |  13 +++
- target/riscv/packed_helper.c            | 115 ++++++++++++++++++++++++
- 4 files changed, 152 insertions(+)
+ target/riscv/helper.h                   |  11 +++
+ target/riscv/insn32.decode              |  11 +++
+ target/riscv/insn_trans/trans_rvp.c.inc |  12 +++
+ target/riscv/packed_helper.c            | 121 ++++++++++++++++++++++++
+ 4 files changed, 155 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 88035aafad..240df8b766 100644
+index 240df8b766..9fd2a70f7d 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1243,3 +1243,15 @@ DEF_HELPER_2(kabs16, tl, env, tl)
- DEF_HELPER_2(clrs16, tl, env, tl)
- DEF_HELPER_2(clz16, tl, env, tl)
- DEF_HELPER_2(clo16, tl, env, tl)
+@@ -1255,3 +1255,14 @@ DEF_HELPER_2(clrs8, tl, env, tl)
+ DEF_HELPER_2(clz8, tl, env, tl)
+ DEF_HELPER_2(clo8, tl, env, tl)
+ DEF_HELPER_2(swap8, tl, env, tl)
 +
-+DEF_HELPER_3(smin8, tl, env, tl, tl)
-+DEF_HELPER_3(umin8, tl, env, tl, tl)
-+DEF_HELPER_3(smax8, tl, env, tl, tl)
-+DEF_HELPER_3(umax8, tl, env, tl, tl)
-+DEF_HELPER_3(sclip8, tl, env, tl, tl)
-+DEF_HELPER_3(uclip8, tl, env, tl, tl)
-+DEF_HELPER_2(kabs8, tl, env, tl)
-+DEF_HELPER_2(clrs8, tl, env, tl)
-+DEF_HELPER_2(clz8, tl, env, tl)
-+DEF_HELPER_2(clo8, tl, env, tl)
-+DEF_HELPER_2(swap8, tl, env, tl)
++DEF_HELPER_2(sunpkd810, tl, env, tl)
++DEF_HELPER_2(sunpkd820, tl, env, tl)
++DEF_HELPER_2(sunpkd830, tl, env, tl)
++DEF_HELPER_2(sunpkd831, tl, env, tl)
++DEF_HELPER_2(sunpkd832, tl, env, tl)
++DEF_HELPER_2(zunpkd810, tl, env, tl)
++DEF_HELPER_2(zunpkd820, tl, env, tl)
++DEF_HELPER_2(zunpkd830, tl, env, tl)
++DEF_HELPER_2(zunpkd831, tl, env, tl)
++DEF_HELPER_2(zunpkd832, tl, env, tl)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 847c796874..4c34f0f4f4 100644
+index 4c34f0f4f4..9b8ea0f9ab 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -846,3 +846,15 @@ kabs16     1010110  10001 ..... 000 ..... 1110111 @r2
- clrs16     1010111  01000 ..... 000 ..... 1110111 @r2
- clz16      1010111  01001 ..... 000 ..... 1110111 @r2
- clo16      1010111  01011 ..... 000 ..... 1110111 @r2
+@@ -858,3 +858,14 @@ clrs8      1010111  00000 ..... 000 ..... 1110111 @r2
+ clz8       1010111  00001 ..... 000 ..... 1110111 @r2
+ clo8       1010111  00011 ..... 000 ..... 1110111 @r2
+ swap8      1010110  11000 ..... 000 ..... 1110111 @r2
 +
-+smin8      1000100  ..... ..... 000 ..... 1110111 @r
-+umin8      1001100  ..... ..... 000 ..... 1110111 @r
-+smax8      1000101  ..... ..... 000 ..... 1110111 @r
-+umax8      1001101  ..... ..... 000 ..... 1110111 @r
-+sclip8     1000110  00... ..... 000 ..... 1110111 @sh3
-+uclip8     1000110  10... ..... 000 ..... 1110111 @sh3
-+kabs8      1010110  10000 ..... 000 ..... 1110111 @r2
-+clrs8      1010111  00000 ..... 000 ..... 1110111 @r2
-+clz8       1010111  00001 ..... 000 ..... 1110111 @r2
-+clo8       1010111  00011 ..... 000 ..... 1110111 @r2
-+swap8      1010110  11000 ..... 000 ..... 1110111 @r2
++sunpkd810  1010110  01000 ..... 000 ..... 1110111 @r2
++sunpkd820  1010110  01001 ..... 000 ..... 1110111 @r2
++sunpkd830  1010110  01010 ..... 000 ..... 1110111 @r2
++sunpkd831  1010110  01011 ..... 000 ..... 1110111 @r2
++sunpkd832  1010110  10011 ..... 000 ..... 1110111 @r2
++zunpkd810  1010110  01100 ..... 000 ..... 1110111 @r2
++zunpkd820  1010110  01101 ..... 000 ..... 1110111 @r2
++zunpkd830  1010110  01110 ..... 000 ..... 1110111 @r2
++zunpkd831  1010110  01111 ..... 000 ..... 1110111 @r2
++zunpkd832  1010110  10111 ..... 000 ..... 1110111 @r2
 diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
-index 3e6307cdc3..c5ec530fd7 100644
+index c5ec530fd7..5af2c7c2cc 100644
 --- a/target/riscv/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/insn_trans/trans_rvp.c.inc
-@@ -335,3 +335,16 @@ GEN_RVP_R2_OOL(kabs16);
- GEN_RVP_R2_OOL(clrs16);
- GEN_RVP_R2_OOL(clz16);
- GEN_RVP_R2_OOL(clo16);
+@@ -348,3 +348,15 @@ GEN_RVP_R2_OOL(clrs8);
+ GEN_RVP_R2_OOL(clz8);
+ GEN_RVP_R2_OOL(clo8);
+ GEN_RVP_R2_OOL(swap8);
 +
-+/* SIMD 8-bit Miscellaneous Instructions */
-+GEN_RVP_R_OOL(smin8);
-+GEN_RVP_R_OOL(umin8);
-+GEN_RVP_R_OOL(smax8);
-+GEN_RVP_R_OOL(umax8);
-+GEN_RVP_SHIFTI(sclip8, NULL, gen_helper_sclip8);
-+GEN_RVP_SHIFTI(uclip8, NULL, gen_helper_uclip8);
-+GEN_RVP_R2_OOL(kabs8);
-+GEN_RVP_R2_OOL(clrs8);
-+GEN_RVP_R2_OOL(clz8);
-+GEN_RVP_R2_OOL(clo8);
-+GEN_RVP_R2_OOL(swap8);
++/* 8-bit Unpacking Instructions */
++GEN_RVP_R2_OOL(sunpkd810);
++GEN_RVP_R2_OOL(sunpkd820);
++GEN_RVP_R2_OOL(sunpkd830);
++GEN_RVP_R2_OOL(sunpkd831);
++GEN_RVP_R2_OOL(sunpkd832);
++GEN_RVP_R2_OOL(zunpkd810);
++GEN_RVP_R2_OOL(zunpkd820);
++GEN_RVP_R2_OOL(zunpkd830);
++GEN_RVP_R2_OOL(zunpkd831);
++GEN_RVP_R2_OOL(zunpkd832);
 diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
-index e4a9463135..3d3d2bf3e4 100644
+index 3d3d2bf3e4..8226dbd079 100644
 --- a/target/riscv/packed_helper.c
 +++ b/target/riscv/packed_helper.c
-@@ -1078,3 +1078,118 @@ static inline void do_clo16(CPURISCVState *env, void *vd, void *va, uint8_t i)
+@@ -1193,3 +1193,124 @@ static inline void do_swap8(CPURISCVState *env, void *vd, void *va, uint8_t i)
  }
  
- RVPR2(clo16, 1, 2);
+ RVPR2(swap8, 2, 1);
 +
-+/* SIMD 8-bit Miscellaneous Instructions */
-+static inline void do_smin8(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++/* 8-bit Unpacking Instructions */
++static inline void
++do_sunpkd810(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va, *b = vb;
++    int8_t *a = va;
++    int16_t *d = vd;
 +
-+    d[i] = (a[i] < b[i]) ? a[i] : b[i];
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 1)];
 +}
 +
-+RVPR(smin8, 1, 1);
++RVPR2(sunpkd810, 4, 1);
 +
-+static inline void do_umin8(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void
++do_sunpkd820(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    uint8_t *d = vd, *a = va, *b = vb;
++    int8_t *a = va;
++    int16_t *d = vd;
 +
-+    d[i] = (a[i] < b[i]) ? a[i] : b[i];
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 2)];
 +}
 +
-+RVPR(umin8, 1, 1);
++RVPR2(sunpkd820, 4, 1);
 +
-+static inline void do_smax8(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void
++do_sunpkd830(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va, *b = vb;
++    int8_t *a = va;
++    int16_t *d = vd;
 +
-+    d[i] = (a[i] > b[i]) ? a[i] : b[i];
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR(smax8, 1, 1);
++RVPR2(sunpkd830, 4, 1);
 +
-+static inline void do_umax8(CPURISCVState *env, void *vd, void *va,
-+                            void *vb, uint8_t i)
++static inline void
++do_sunpkd831(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    uint8_t *d = vd, *a = va, *b = vb;
++    int8_t *a = va;
++    int16_t *d = vd;
 +
-+    d[i] = (a[i] > b[i]) ? a[i] : b[i];
++    d[H2(i / 2)] = a[H1(i) + 1];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR(umax8, 1, 1);
++RVPR2(sunpkd831, 4, 1);
 +
-+static inline void do_sclip8(CPURISCVState *env, void *vd, void *va,
-+                             void *vb, uint8_t i)
++static inline void
++do_sunpkd832(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
-+    uint8_t shift = *(uint8_t *)vb & 0x7;
++    int8_t *a = va;
++    int16_t *d = vd;
 +
-+    d[i] = sat64(env, a[i], shift);
++    d[H2(i / 2)] = a[H1(i) + 2];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR(sclip8, 1, 1);
++RVPR2(sunpkd832, 4, 1);
 +
-+static inline void do_uclip8(CPURISCVState *env, void *vd, void *va,
-+                              void *vb, uint8_t i)
++static inline void
++do_zunpkd810(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
-+    uint8_t shift = *(uint8_t *)vb & 0x7;
++    uint8_t *a = va;
++    uint16_t *d = vd;
 +
-+    if (a[i] < 0) {
-+        d[i] = 0;
-+        env->vxsat = 0x1;
-+    } else {
-+        d[i] = satu64(env, a[i], shift);
-+    }
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 1)];
 +}
 +
-+RVPR(uclip8, 1, 1);
++RVPR2(zunpkd810, 4, 1);
 +
-+static inline void do_kabs8(CPURISCVState *env, void *vd, void *va, uint8_t i)
++static inline void
++do_zunpkd820(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
++    uint8_t *a = va;
++    uint16_t *d = vd;
 +
-+    if (a[i] == INT8_MIN) {
-+        d[i] = INT8_MAX;
-+        env->vxsat = 0x1;
-+    } else {
-+        d[i] = abs(a[i]);
-+    }
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 2)];
 +}
 +
-+RVPR2(kabs8, 1, 1);
++RVPR2(zunpkd820, 4, 1);
 +
-+static inline void do_clrs8(CPURISCVState *env, void *vd, void *va, uint8_t i)
++static inline void
++do_zunpkd830(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
-+    d[i] = clrsb32(a[i]) - 24;
++    uint8_t *a = va;
++    uint16_t *d = vd;
++
++    d[H2(i / 2)] = a[H1(i)];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR2(clrs8, 1, 1);
++RVPR2(zunpkd830, 4, 1);
 +
-+static inline void do_clz8(CPURISCVState *env, void *vd, void *va, uint8_t i)
++static inline void
++do_zunpkd831(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
-+    d[i] = (a[i] < 0) ? 0 : (clz32(a[i]) - 24);
++    uint8_t *a = va;
++    uint16_t *d = vd;
++
++    d[H2(i / 2)] = a[H1(i) + 1];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR2(clz8, 1, 1);
++RVPR2(zunpkd831, 4, 1);
 +
-+static inline void do_clo8(CPURISCVState *env, void *vd, void *va, uint8_t i)
++static inline void
++do_zunpkd832(CPURISCVState *env, void *vd, void *va, uint8_t i)
 +{
-+    int8_t *d = vd, *a = va;
-+    d[i] = (a[i] >= 0) ? 0 : (clo32(a[i]) - 24);
++    uint8_t *a = va;
++    uint16_t *d = vd;
++
++    d[H2(i / 2)] = a[H1(i) + 2];
++    d[H2(i / 2 + 1)] = a[H1(i + 3)];
 +}
 +
-+RVPR2(clo8, 1, 1);
-+
-+static inline void do_swap8(CPURISCVState *env, void *vd, void *va, uint8_t i)
-+{
-+    int8_t *d = vd, *a = va;
-+    d[H1(i)] = a[H1(i + 1)];
-+    d[H1(i + 1)] = a[H1(i)];
-+}
-+
-+RVPR2(swap8, 2, 1);
++RVPR2(zunpkd832, 4, 1);
 -- 
 2.17.1
 
