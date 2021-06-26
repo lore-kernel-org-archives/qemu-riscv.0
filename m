@@ -1,70 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lx9qa-00037N-TC
-	for mharc-qemu-riscv@gnu.org; Sat, 26 Jun 2021 11:03:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56780)
+	id 1lxA6g-0000gv-9v
+	for mharc-qemu-riscv@gnu.org; Sat, 26 Jun 2021 11:20:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lx9qZ-00036z-1E
- for qemu-riscv@nongnu.org; Sat, 26 Jun 2021 11:03:51 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:35626)
+ id 1lxA6f-0000fN-Dc
+ for qemu-riscv@nongnu.org; Sat, 26 Jun 2021 11:20:29 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:40808)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lx9qS-0005m6-1g
- for qemu-riscv@nongnu.org; Sat, 26 Jun 2021 11:03:50 -0400
-Received: by mail-pf1-x431.google.com with SMTP id d12so2223752pfj.2
- for <qemu-riscv@nongnu.org>; Sat, 26 Jun 2021 08:03:43 -0700 (PDT)
+ id 1lxA6V-0007hZ-Bp
+ for qemu-riscv@nongnu.org; Sat, 26 Jun 2021 11:20:29 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id
+ bb10-20020a17090b008ab029016eef083425so9762148pjb.5
+ for <qemu-riscv@nongnu.org>; Sat, 26 Jun 2021 08:20:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=O6xTEIG+uodTA1RnHqYUf80Cpi+r00GjxDNxhwTmTtM=;
- b=TdMYk96ycqVmAE7sLUlSA6V9poU2o3TJbeoBUOh5/qrf3K450mHHYDEH4hoIztCcO3
- 2tyA/0/67CMI60kPSi/jhc06gmFLDbPiuzwDHIZNT/16vn7mM3pMzgKYOOe6FCL1YeI5
- 2Z5pjmuWhnRnqoxECG7gQX+DQWKdqzpg9HthOCsHYHRaKxbyo7mkC44Q5108+BCUx485
- 17+FgfCKQ1JFWC+8qObJEmggkPEDHZrYSlVDpqtdnU00uOz+dnPXsGUo15JzKIQz5LwK
- DNI2EsAuV6CPXNUKRYvpGU5axGwoeEfszzkFiDOxhJw7tZODSNXSbmGadbxhS8p1FLiY
- xoDg==
+ :cc; bh=8kd/siBZOsVVqE60BtE/tTCvVvIQBUhM6eYltLrgVA8=;
+ b=LNp+gbXUE3+ReT0asRq0Va3DcfC4QJa3ylf0Rftt2YHaLR7ymAC9w/cS2iCZHN+Fp0
+ MuZExoER8IiTBiYzn9690vXvvLjPu5eN3W+GN0JYcyqp5JZETzhMm3CvPEh475jepqpT
+ Jc0oBylbXJkWSnOjKmoIAztWrVNU9NjjtslcZCNAPStrcCn/Kik0G0T5+0xWqcs5zLIi
+ XBKtqcchrXoKBD3jVgm/9eK19+5XdFkX4gNvY7cPpqTOA63YjIvIAW+AFfSFtVbyWS2Q
+ TJFzvKLAnoQsrqmpOmdckkwI7rMgvF3nlSbNKLKcerXE4j7oeTv3JZc62Fjhr+2DGZNM
+ 2cNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=O6xTEIG+uodTA1RnHqYUf80Cpi+r00GjxDNxhwTmTtM=;
- b=IQCbkrW2j6D4NGLpdvI9PybDC3Q/Ahk3o/puHdvzMd1qcjqWt9nlWU1xshQWfNrPxS
- DdL2Kr+zB5TRLlnn6ENmgGG+T+uJfrDGC2iKnqj2+Imx8vqfQM8AylksSKIToa+CwxdF
- LJ/zU94kmOgp38AGIZSv5RCTi+mffSvAQ06q0EIgGQebwASgKYR4XtDNBBcxAmLTgyor
- FuVf3nwiJwDci3yvEZEZ1rDNuRuLIH+qQZPEjcoMKPxULBI69u74HLl1LuLv0YuVptyb
- qNgmXsAbc8Q23ZkurkBf5pMOJwIlUASXN/vj90DKHsyu4sNjkemfzhJzoHgKlT6pLDDP
- vGlA==
-X-Gm-Message-State: AOAM530fr3BpXHu3MpWj0yzWKbegtdxN1H4Qz4/RiouexmbFVJzmL1CX
- 1SBlCR65Zmny0CeXlWXveq3kNQ==
-X-Google-Smtp-Source: ABdhPJzP6NcTe+tuOZ8SgRXOFUgLmovv5ASIGOY83Q5Y7yt4ZxUcHeOmsAU9/kTox1tkGop95zC8WA==
-X-Received: by 2002:a63:1c0e:: with SMTP id c14mr2014147pgc.11.1624719822279; 
- Sat, 26 Jun 2021 08:03:42 -0700 (PDT)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com.
- [209.85.214.169])
- by smtp.gmail.com with ESMTPSA id k25sm8916745pfa.213.2021.06.26.08.03.41
+ bh=8kd/siBZOsVVqE60BtE/tTCvVvIQBUhM6eYltLrgVA8=;
+ b=cbzmhn4HC2QgicFBikjmhbXSm87njOd+V7V2OlGDQHnJOeMrroQkydngi2hKjzXuep
+ 8D/4WCxQL7ZuFFL2psa+rEphH2X7mDPrGST5bWNksXN0l611mu35fd/Jbbd9dJ/ZCa/G
+ CzHZGyzTNSEibPYMIBKYw3cEgKlwiCbbzasK/VoSu96lYBxJ1xjaznkFv+sV5dZArSf+
+ 31NTsXhoRg5Igk7d6k6F4iwllJ8+gpdtdthL54ESn9xHEoUBxTYJUDKtDLiEyWec2P0v
+ MG83i1UAePQLA6oSLljVX+DGg7YHHxwWFaEyOYGzKGrfnpGNGT96KTy1p6EwKRiKjeFY
+ HBAQ==
+X-Gm-Message-State: AOAM530cJIYimoVmDQ2AT8xLYxD5tz0tU/CR48iYuyRebU9gqxsWedHL
+ CpnsiD5a+pEHp2ON8VKAJkyrig==
+X-Google-Smtp-Source: ABdhPJx51Y7K5oKQj6k3D3xcC/bw/EHxyR+3BnQLN2GkDDk0+tLUTy3uQ9GW3MkMgJcvYC+SLOOf2Q==
+X-Received: by 2002:a17:902:7893:b029:123:4c2b:3db with SMTP id
+ q19-20020a1709027893b02901234c2b03dbmr4160264pll.71.1624720817646; 
+ Sat, 26 Jun 2021 08:20:17 -0700 (PDT)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com.
+ [209.85.214.179])
+ by smtp.gmail.com with ESMTPSA id o1sm8448113pjf.56.2021.06.26.08.20.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 26 Jun 2021 08:03:41 -0700 (PDT)
-Received: by mail-pl1-f169.google.com with SMTP id 69so6281800plc.5;
- Sat, 26 Jun 2021 08:03:41 -0700 (PDT)
-X-Received: by 2002:a17:902:728e:b029:101:c3b7:a47f with SMTP id
- d14-20020a170902728eb0290101c3b7a47fmr14032594pll.21.1624719820889; Sat, 26
- Jun 2021 08:03:40 -0700 (PDT)
+ Sat, 26 Jun 2021 08:20:16 -0700 (PDT)
+Received: by mail-pl1-f179.google.com with SMTP id x22so6282336pll.11;
+ Sat, 26 Jun 2021 08:20:16 -0700 (PDT)
+X-Received: by 2002:a17:902:c611:b029:122:847c:66e9 with SMTP id
+ r17-20020a170902c611b0290122847c66e9mr14291145plr.82.1624720816137; Sat, 26
+ Jun 2021 08:20:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
  <20210409074857.166082-4-zhiwei_liu@c-sky.com>
 In-Reply-To: <20210409074857.166082-4-zhiwei_liu@c-sky.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Sat, 26 Jun 2021 23:03:28 +0800
-X-Gmail-Original-Message-ID: <CANzO1D2vPxsOfpfLKROyHhD5rRGPn7YpGwx-PE9vCByzeMG15A@mail.gmail.com>
-Message-ID: <CANzO1D2vPxsOfpfLKROyHhD5rRGPn7YpGwx-PE9vCByzeMG15A@mail.gmail.com>
+Date: Sat, 26 Jun 2021 23:20:04 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0Mxg6-AfPYb36=e4EebcSNF=u+yM5c=L+chLNq-n3xKw@mail.gmail.com>
+Message-ID: <CANzO1D0Mxg6-AfPYb36=e4EebcSNF=u+yM5c=L+chLNq-n3xKw@mail.gmail.com>
 Subject: Re: [RFC PATCH 03/11] hw/intc: Add CLIC device
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
-Content-Type: multipart/alternative; boundary="000000000000c8a0dc05c5ac8f4e"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x431.google.com
+Content-Type: multipart/alternative; boundary="0000000000001ae92905c5accb7d"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,9 +86,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jun 2021 15:03:51 -0000
+X-List-Received-Date: Sat, 26 Jun 2021 15:20:29 -0000
 
---000000000000c8a0dc05c5ac8f4e
+--0000000000001ae92905c5accb7d
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -244,24 +246,6 @@ T
 > +    /* unused level bits are set to 1 */
 > +    return (intctl & mask_il) | mask_padding;
 > +}
->
-
-According to spec:
-  if the nlbits > CLICINTCTLBITS, then the lower bits of the 8-bit
-  interrupt level are assumed to be all 1s.
-
-That is, the valid nlbits should be: min(clic->nlbits, CLICINTCTLBITS);
-The cliccfg example in spec also shows that:
-
-CLICINTCTLBITS  nlbits  clicintctl[i]  interrupt levels
-      0                       2         ........         255
-      1                       2         l.......         127,255
-      2                       2         ll......         63,127,191,255
-      3                       3         lll.....
- 31,63,95,127,159,191,223,255
-      4                       1         lppp....      127,255
-
-
 > +
 > +static uint8_t
 > +riscv_clic_get_interrupt_priority(RISCVCLICState *clic, uint8_t intctl)
@@ -295,22 +279,7 @@ CLICINTCTLBITS  nlbits  clicintctl[i]  interrupt levels
 > CLIC
 > + * regions for all harts. (Section 3.11)
 > + */
->
-
-The above description is not true any more in the latest spec:
-  The CLIC specification does not dictate how CLIC memory-mapped registers
-are
-  split between M/S/U regions as well as the layout of multiple harts as
-this is generally
-  a platform issue and each platform needs to define a discovery mechanism
-to determine
-  the memory map locations.
-
-But I think we can just keep the current design for now anyway, as it's
-also one of legal memory layout.
-Otherwise, the design would be more complicated I think.
-
-+static size_t
+> +static size_t
 > +riscv_clic_get_irq_offset(RISCVCLICState *clic, int mode, int hartid, in=
 t
 > irq)
@@ -543,33 +512,9 @@ i)
 ;
 > +        size_t elem =3D (result - active_list) /
 > sizeof(CLICActiveInterrupt);
->
-
-I think what you are trying to do here is to get the number of elements
-right after the active interrupt to be deleted in order to calculate the
-size of
-active interrupts to be memmoved.
-
-However, according to C spec:
-  When two pointers are subtracted, both shall point to elements of the
-same array object,
-  or one past the last element of the array object; the result is the
-difference of the
-  subscripts of the two array elements.
-
-So I think: (result - active_list) is already the number of elements you
-want.
-You don't have to divide it with sizeof(CLICActiveInterrupt) again.
-
-
 > +        size_t sz =3D (--(*active_count) - elem) *
 > sizeof(CLICActiveInterrupt);
 > +        assert(result);
->
-
-Nit: assert(result) can be moved above size_t elem statement.
-
-
 > +        memmove(&result[0], &result[1], sz);
 > +    }
 > +
@@ -605,27 +550,12 @@ Nit: assert(result) can be moved above size_t elem statement.
 > +    }
 > +
 > +    switch (req) {
->
-
-Spec. says that it's legal to write 32-bit value to set
-{clicintctl[i], clicintattr[i], clicintie[i] ,clicintip[i]} at the same
-time:
-  A 32-bit write to {clicintctl,clicintattr,clicintie,clicintip} is legal.
-  However, there is no specified order in which the effects of
-  the individual byte updates take effect.
-
-
 > +    case 0: /* clicintip[i] */
 > +        if (riscv_clic_validate_intip(clic, mode, hartid, irq)) {
 > +            /*
 > +             * The actual pending bit is located at bit 0 (i.e., the
 > +             * leastsignificant bit). In case future extensions expand
 > the bit
->
-
-Typo: leastsignificant =3D> least significant
-
-
 > +             * field, from FW perspective clicintip[i]=3Dzero means no
 > interrupt
 > +             * pending, and clicintip[i]!=3D0 (not just 1) indicates an
@@ -661,11 +591,6 @@ Typo: leastsignificant =3D> least significant
 > +    case 3: /* clicintctl[i] */
 > +        if (value !=3D clic->clicintctl[irq_offset]) {
 > +            clic->clicintctl[irq_offset] =3D value;
->
-
-If irq i is already in the active_list, when will its intcfg been synced?
-
-
 > +            riscv_clic_next_interrupt(clic, hartid);
 > +        }
 > +        break;
@@ -710,11 +635,6 @@ If irq i is already in the active_list, when will its intcfg been synced?
 > +         */
 > +        return clic->clicintattr[irq_offset] & ~0x38;
 > +    case 3: /* clicintctrl */
->
-
-Typo: clicintctl
-
-
 > +        /*
 > +         * The implemented bits are kept left-justified in the
 > most-significant
@@ -772,13 +692,6 @@ e)
 > +    int hartid, mode, irq;
 > +
 > +    if (addr < clic_size) {
->
-
-Is this necessary?
-I think memory region size already limits the request address to be within
-the range of clic_size.
-
-
 > +        if (addr < 0x1000) {
 > +            assert(addr % 4 =3D=3D 0);
 > +            int index =3D addr / 4;
@@ -873,14 +786,6 @@ x
 > +    int hartid, mode, irq;
 > +
 > +    if (addr < clic_size) {
->
-
-Same to riscv_clic_write().
-
-Thanks,
-Frank Chang
-
-
 > +        if (addr < 0x1000) {
 > +            assert(addr % 4 =3D=3D 0);
 > +            int index =3D addr / 4;
@@ -901,13 +806,6 @@ Frank Chang
 > +                 * 12:0 num_interrupt
 > +                 */
 > +                return clic->clicinfo & ~INT32_MAX;
->
-
-clic->clicinfo should represent the CLIC setting information.
-I think it's better to add clic reset function or in riscv_clic_realize()
-to initialize clic->clicinfo.
-
-
 > +            case 0x10 ... 0x2F: /* clicinttrig */
 > +                /*
 > +                 * clicinttrig register layout
@@ -1050,11 +948,6 @@ c,
 > +    clic->clicintattr =3D g_new0(uint8_t, irqs);
 > +    clic->clicintctl =3D g_new0(uint8_t, irqs);
 > +    clic->active_list =3D g_new0(CLICActiveInterrupt, irqs);
->
-
-Should the size of clic->active_list be: harts_x_sources?
-
-
 > +    clic->active_count =3D g_new0(size_t, clic->num_harts);
 > +    clic->exccode =3D g_new0(uint32_t, clic->num_harts);
 > +    clic->cpu_irqs =3D g_new0(qemu_irq, clic->num_harts);
@@ -1139,6 +1032,20 @@ Should the size of clic->active_list be: harts_x_sources?
 > +    qdev_prop_set_uint32(dev, "num-sources", num_sources);
 > +    qdev_prop_set_uint32(dev, "clicintctlbits", clicintctlbits);
 > +    qdev_prop_set_uint64(dev, "mclicbase", addr);
+>
+
+According to spec:
+  Since the CLIC memory map must be aligned at a 4KiB boundary,
+  the mclicbase CSR has its 12 least-significant bits hardwired to zero.
+  It is used to inform software about the location of CLIC memory mappped
+registers.
+
+I think it's better to add another addr check to ensure it's 4KiB aligned.
+
+Thanks,
+Frank Chang
+
+
 > +    qdev_prop_set_string(dev, "version", version);
 > +
 > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
@@ -1341,7 +1248,7 @@ T
 >
 >
 
---000000000000c8a0dc05c5ac8f4e
+--0000000000001ae92905c5accb7d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -1520,28 +1427,7 @@ nlbits);<br>
 +=C2=A0 =C2=A0 uint8_t mask_padding =3D (1 &lt;&lt; (8 - nlbits)) - 1;<br>
 +=C2=A0 =C2=A0 /* unused level bits are set to 1 */<br>
 +=C2=A0 =C2=A0 return (intctl &amp; mask_il) | mask_padding;<br>
-+}<br></blockquote><div><br></div><div>According to spec:</div><div>=C2=A0 =
-if the nlbits &gt; CLICINTCTLBITS, then the lower bits of the 8-bit</div><d=
-iv>=C2=A0 interrupt level are assumed to be all 1s.<br></div><div><br></div=
-><div>That is, the valid nlbits should be: min(clic-&gt;nlbits, CLICINTCTLB=
-ITS);</div><div>The cliccfg example in spec also shows that:</div><div><br>=
-</div><div>CLICINTCTLBITS=C2=A0 nlbits=C2=A0 clicintctl[i]=C2=A0 interrupt =
-levels<br>=C2=A0 =C2=A0 =C2=A0 0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A02=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0........=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0255<br>=C2=A0 =C2=A0 =C2=A0 1=
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A02=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0l.......=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0127,255<br>=C2=A0 =C2=A0 =C2=A0 2=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A02=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0ll......=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A063,127,191,255<b=
-r>=C2=A0 =C2=A0 =C2=A0 3=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A03=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0lll...=
-..=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A031,63,95,127,159,191,223,255<br>=C2=A0 =
-=C2=A0 =C2=A0 4=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A01=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0lppp....=C2=A0 =
-=C2=A0 =C2=A0 127,255<br></div><div>=C2=A0</div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">
++}<br>
 +<br>
 +static uint8_t<br>
 +riscv_clic_get_interrupt_priority(RISCVCLICState *clic, uint8_t intctl)<br=
@@ -1580,17 +1466,7 @@ rts<br>
 + * are placed contiguously in the memory space, followed by the S-mode CLI=
 C<br>
 + * regions for all harts. (Section 3.11)<br>
-+ */<br></blockquote><div><br></div><div>The above description is not true =
-any more in the latest spec:</div><div>=C2=A0 The CLIC specification does n=
-ot dictate how CLIC memory-mapped registers are</div><div>=C2=A0 split betw=
-een M/S/U regions as well as the layout of multiple harts as this is genera=
-lly</div><div>=C2=A0 a platform issue and each platform needs to define a d=
-iscovery mechanism to determine</div><div>=C2=A0 the memory map locations.<=
-br></div><div><br></div><div>But I think we can just keep the current desig=
-n for now anyway, as it&#39;s also one of legal memory layout.</div><div>Ot=
-herwise, the design would be more complicated I think.</div><div><br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
++ */<br>
 +static size_t<br>
 +riscv_clic_get_irq_offset(RISCVCLICState *clic, int mode, int hartid, int =
 irq)<br>
@@ -1864,25 +1740,10 @@ ey,<br>
 =A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
 =C2=A0 =C2=A0 riscv_clic_active_compare);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 size_t elem =3D (result - active_list) / sizeo=
-f(CLICActiveInterrupt);<br></blockquote><div><br></div><div>I think what yo=
-u are trying to do here is to get the number of elements</div><div>right af=
-ter the active interrupt to be deleted in order to calculate the size of</d=
-iv><div>active interrupts to be memmoved.</div><div><br></div><div>However,=
- according to C spec:</div><div>=C2=A0 When two pointers are subtracted, bo=
-th shall point to elements of the same array object,</div>=C2=A0 or one pas=
-t the last element of the array object; the result is the difference of the=
-<br>=C2=A0 subscripts of the two array elements.</div><div class=3D"gmail_q=
-uote"><br></div><div class=3D"gmail_quote">So I think: (result - active_lis=
-t) is already the number of elements you want.</div><div class=3D"gmail_quo=
-te">You don&#39;t have to divide it with sizeof(CLICActiveInterrupt) again.=
-<br><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+f(CLICActiveInterrupt);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 size_t sz =3D (--(*active_count) - elem) * siz=
 eof(CLICActiveInterrupt);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(result);<br></blockquote><div><br></div=
-><div>Nit: assert(result) can be moved above size_t elem statement.</div><d=
-iv>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(result);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 memmove(&amp;result[0], &amp;result[1], sz);<b=
 r>
 +=C2=A0 =C2=A0 }<br>
@@ -1924,14 +1785,7 @@ addr);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
 +=C2=A0 =C2=A0 }<br>
 +<br>
-+=C2=A0 =C2=A0 switch (req) {<br></blockquote><div><br></div><div>Spec. say=
-s that it&#39;s legal to write 32-bit value to set<br></div><div>{clicintct=
-l[i], clicintattr[i], clicintie[i] ,clicintip[i]} at the same time:<br></di=
-v><div>=C2=A0 A 32-bit write to {clicintctl,clicintattr,clicintie,clicintip=
-} is legal.<br></div><div>=C2=A0 However, there is no specified order in wh=
-ich the effects of</div><div>=C2=A0 the individual byte updates take effect=
-.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 switch (req) {<br>
 +=C2=A0 =C2=A0 case 0: /* clicintip[i] */<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_clic_validate_intip(clic, mode, hart=
 id, irq)) {<br>
@@ -1939,10 +1793,7 @@ id, irq)) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* The actual pending bit i=
 s located at bit 0 (i.e., the<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* leastsignificant bit). I=
-n case future extensions expand the bit<br></blockquote><div><br></div><div=
->Typo: leastsignificant =3D&gt; least significant</div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">
+n case future extensions expand the bit<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* field, from FW perspecti=
 ve clicintip[i]=3Dzero means no interrupt<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* pending, and clicintip[i=
@@ -1996,10 +1847,7 @@ terrupt(clic, hartid);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (value !=3D clic-&gt;clicintctl[irq_offset]=
 ) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 clic-&gt;clicintctl[irq_offset] =
-=3D value;<br></blockquote><div><br></div><div>If irq i is already in the a=
-ctive_list, when will its=C2=A0intcfg been synced?<br></div><div>=C2=A0</di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;borde=
-r-left:1px solid rgb(204,204,204);padding-left:1ex">
+=3D value;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_clic_next_interrupt(clic, =
 hartid);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
@@ -2050,10 +1898,7 @@ addr);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return clic-&gt;clicintattr[irq_offset] &amp; =
 ~0x38;<br>
-+=C2=A0 =C2=A0 case 3: /* clicintctrl */<br></blockquote><div><br></div><di=
-v>Typo:=C2=A0clicintctl</div><div>=C2=A0</div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">
++=C2=A0 =C2=A0 case 3: /* clicintctrl */<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* The implemented bits are kept left-jus=
 tified in the most-significant<br>
@@ -2116,11 +1961,7 @@ ces;<br>
 +=C2=A0 =C2=A0 hwaddr clic_size =3D clic-&gt;clic_size;<br>
 +=C2=A0 =C2=A0 int hartid, mode, irq;<br>
 +<br>
-+=C2=A0 =C2=A0 if (addr &lt; clic_size) {<br></blockquote><div><br></div><d=
-iv>Is this necessary?<br></div><div>I think memory region size already limi=
-ts the request address to be within the range of clic_size.</div><div>=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 if (addr &lt; clic_size) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (addr &lt; 0x1000) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(addr % 4 =3D=3D 0);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 int index =3D addr / 4;<br>
@@ -2264,11 +2105,7 @@ br>
 +=C2=A0 =C2=A0 hwaddr clic_size =3D clic-&gt;clic_size;<br>
 +=C2=A0 =C2=A0 int hartid, mode, irq;<br>
 +<br>
-+=C2=A0 =C2=A0 if (addr &lt; clic_size) {<br></blockquote><div><br></div><d=
-iv>Same to riscv_clic_write().<br></div><div><br></div><div>Thanks,</div><d=
-iv>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">
++=C2=A0 =C2=A0 if (addr &lt; clic_size) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (addr &lt; 0x1000) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(addr % 4 =3D=3D 0);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 int index =3D addr / 4;<br>
@@ -2299,12 +2136,7 @@ ion (for version control)<br>
 nterrupt<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return clic-&gt;cl=
-icinfo &amp; ~INT32_MAX;<br></blockquote><div><br></div><div>clic-&gt;clici=
-nfo should represent the CLIC setting information.</div><div>I think it&#39=
-;s better to add clic reset function or in=C2=A0riscv_clic_realize() to ini=
-tialize clic-&gt;clicinfo.</div><div>=C2=A0</div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">
+icinfo &amp; ~INT32_MAX;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case 0x10 ... 0x2F: /* clicinttr=
 ig */<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
@@ -2478,10 +2310,7 @@ riscv_clic_ops, clic,<br>
 +=C2=A0 =C2=A0 clic-&gt;clicintattr =3D g_new0(uint8_t, irqs);<br>
 +=C2=A0 =C2=A0 clic-&gt;clicintctl =3D g_new0(uint8_t, irqs);<br>
 +=C2=A0 =C2=A0 clic-&gt;active_list =3D g_new0(CLICActiveInterrupt, irqs);<=
-br></blockquote><div><br></div><div>Should the size of clic-&gt;active_list=
- be: harts_x_sources?</div><div>=C2=A0</div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">
+br>
 +=C2=A0 =C2=A0 clic-&gt;active_count =3D g_new0(size_t, clic-&gt;num_harts)=
 ;<br>
 +=C2=A0 =C2=A0 clic-&gt;exccode =3D g_new0(uint32_t, clic-&gt;num_harts);<b=
@@ -2591,7 +2420,16 @@ ces,<br>
 es);<br>
 +=C2=A0 =C2=A0 qdev_prop_set_uint32(dev, &quot;clicintctlbits&quot;, clicin=
 tctlbits);<br>
-+=C2=A0 =C2=A0 qdev_prop_set_uint64(dev, &quot;mclicbase&quot;, addr);<br>
++=C2=A0 =C2=A0 qdev_prop_set_uint64(dev, &quot;mclicbase&quot;, addr);<br><=
+/blockquote><div><br></div><div>According to spec:</div><div>=C2=A0 Since t=
+he CLIC memory map must be aligned at a 4KiB boundary,</div><div>=C2=A0 the=
+ mclicbase CSR has its 12 least-significant bits hardwired to zero.</div><d=
+iv>=C2=A0 It is used to inform software about the location of CLIC memory m=
+appped registers.<br></div><div><br></div><div>I think it&#39;s better to a=
+dd another addr check to ensure it&#39;s 4KiB aligned.</div><div><br></div>=
+<div>Thanks,<br></div><div>Frank Chang</div><div>=C2=A0</div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex">
 +=C2=A0 =C2=A0 qdev_prop_set_string(dev, &quot;version&quot;, version);<br>
 +<br>
 +=C2=A0 =C2=A0 sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &amp;error_fat=
@@ -2810,5 +2648,5 @@ index a5eab26a69..9e389d7bbf 100644<br>
 <br>
 </blockquote></div></div>
 
---000000000000c8a0dc05c5ac8f4e--
+--0000000000001ae92905c5accb7d--
 
