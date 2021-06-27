@@ -1,71 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lxOdJ-0004kH-U5
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Jun 2021 02:51:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59494)
+	id 1lxQ4g-0001sq-B2
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Jun 2021 04:23:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38704)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lxOdH-0004jw-Ps
- for qemu-riscv@nongnu.org; Sun, 27 Jun 2021 02:51:07 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:34345)
+ id 1lxQ4e-0001s9-EC
+ for qemu-riscv@nongnu.org; Sun, 27 Jun 2021 04:23:28 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:42782)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lxOdE-0008CG-CU
- for qemu-riscv@nongnu.org; Sun, 27 Jun 2021 02:51:06 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id a7so1733003pga.1
- for <qemu-riscv@nongnu.org>; Sat, 26 Jun 2021 23:51:03 -0700 (PDT)
+ id 1lxQ4b-0007EO-BP
+ for qemu-riscv@nongnu.org; Sun, 27 Jun 2021 04:23:27 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 13-20020a17090a08cdb029016eed209ca4so8318997pjn.1
+ for <qemu-riscv@nongnu.org>; Sun, 27 Jun 2021 01:23:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pBvp7SbkEAv+4B2nNrJHjMc00zsodc4YKwKXlhDA/eI=;
- b=ZS4P03Bubo1RQxw2wZUaHMRBF8mWT98vqHPwXIrl1ayd9I2D3ku+4m/GHfInrS8VX+
- a78YpmH268rYfNweyRRet50SzfPpMcZWDltqFuJHT2e/DA9IVVRR+S8EJ2KEsPCZrN/L
- /W6oPE27XCAo/IaLihFtD5eXHoGFNTttn8+8L4rnE4zFiB3eIDIbTmWs9pmestu1Eptf
- X6Sc86EBQ/VGfXJqG19mymaTHYturvTLSzxLNCNHRIHy19ghz4cyV0ntappuaCyaZFSh
- tKDf3KyvTgz5bhY8qY4pcRRjHLYaQ/w0a4C97MsylV/FpKLEcdbojeA0qm+ncGfozH54
- 1QRA==
+ :cc; bh=5i9IUgBfT6NaVGKfHVWUsW8gsCLvhr7FPh7VMw6JEeM=;
+ b=jS4QkjhNd70UPbfJ6XMZPSGCwtDXzq6oXWaLDS8397HYeIawMzulB87upzGVJsHBvm
+ WplRYrvyOPxA2N5Dv2B4V0O98L73pGQEK28Ka1oZGF/3qWT8gMp/X757na96vNWGc1AH
+ 5CzSlIR7CfV9WQ+E1XuHb5ezHkhmufLM6W/gy7dRI2mPxw4Ez+xyDz2SxvFSF6WmJLji
+ k1Gm3LfWyZ5YFSYTu2ZtIL5Q7UxqyBSsW7WVQ5zmnVCPYC1oQjAj9soCb5j47l49nhow
+ 4PU7Zgmv2qWqQNgLHzJAEFUn3eAZGFsvmC0iVvg5LKGduvTnSulTWNNQxjdypQTKU7Mb
+ tlSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=pBvp7SbkEAv+4B2nNrJHjMc00zsodc4YKwKXlhDA/eI=;
- b=dgAtf/nHR2RBlMn+mMSpPIFQgWbFM1axIU/LPs2dXleOsDEDPhs47Hv8brHh9u5tOY
- zyze6v4tMZTZFJbuxonGTR8mOJnkVquqaqAOkQzXqBnra+l3DKc0sG0A5j9HwwYZUOZ8
- SI997+gCjLBBbOCedLSTHgKEM72W4sSnnnPmFS6BPxRk9xsVL3fzj7iRt9JpRoiA7ae+
- nYatvmdZVcVhPZ44HWe2FDYFTFQc2XuhLUTMPT+nYWczNvWTIVZSJKOzqYAliO1AXLDu
- NDVM2xaK81Idems8GFA4ZKgIZi63SimSU556J1FlnlUDxpKxlVbhwb8MW1T0L6ACtPXu
- fQIw==
-X-Gm-Message-State: AOAM530azdICpI36KeS2kcAyYlX1PQHVbROIaxy1MnxcjZ+kUwSSl5N4
- bPDacuZOWYJ+DiUvHovOrJ5+vQ==
-X-Google-Smtp-Source: ABdhPJxc4W0JYCPEc0E6AS0NWbQdbjZzqJm/h5Y/VcKMXd45vlLu1xOWN0xE8TWazD9nHJ/umfrEuQ==
-X-Received: by 2002:a05:6a00:6:b029:305:4ab6:90ba with SMTP id
- h6-20020a056a000006b02903054ab690bamr6294455pfk.1.1624776662582; 
- Sat, 26 Jun 2021 23:51:02 -0700 (PDT)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com.
- [209.85.210.182])
- by smtp.gmail.com with ESMTPSA id n5sm10201674pfv.159.2021.06.26.23.51.02
+ bh=5i9IUgBfT6NaVGKfHVWUsW8gsCLvhr7FPh7VMw6JEeM=;
+ b=XRbhQYXA/9UAE7ooc+8rcOj6Ua4YjChzarFvO9XWodIfSQD5OUHLja1LaJ3DuXuh5Q
+ ImdbJQ5EyTEIPFJx++BkJi5aOTqlTEH5M7Ze+En5KNl1z4dbkH7s2KA4cer98n9TBvCr
+ 37m036ytgwNWxR9Juu5vNFdXnPQbrn9XCDNdBzu0YoMAXabHIiVHXTgx+h/tTE3oUVJy
+ AGbRUihX37mjMK2VFUonVq2i68eXLs/sgoJ9f1yVCQqcK2Ag0O1Rb29YIHS3IG4dlRzH
+ 831hJCEw+jSUNrm3GxmfnGx6eGljILgkTG8xNkgg3SJay5GZ77qTGZns/vktxPAOhmuU
+ bQVA==
+X-Gm-Message-State: AOAM533SVO1fGFXTXb76bpKqAxol+Y/JKDvn+IkwAEo+vfInA0cO8MQb
+ GcZ541vNb2uihPqSz9ZwDkwL6g==
+X-Google-Smtp-Source: ABdhPJwNw8cqVAqI0vYNGLv5jb7VEnS8+DwbgVGueOFM8bD4SyqMSOlx2iEnZsp6nW0s/M7VjcSFAQ==
+X-Received: by 2002:a17:90a:1b42:: with SMTP id
+ q60mr30829204pjq.8.1624782203856; 
+ Sun, 27 Jun 2021 01:23:23 -0700 (PDT)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com.
+ [209.85.216.53])
+ by smtp.gmail.com with ESMTPSA id z27sm10872216pfg.91.2021.06.27.01.23.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 26 Jun 2021 23:51:02 -0700 (PDT)
-Received: by mail-pf1-f182.google.com with SMTP id y4so11268821pfi.9;
- Sat, 26 Jun 2021 23:51:02 -0700 (PDT)
-X-Received: by 2002:a62:b40c:0:b029:2de:4a1e:a753 with SMTP id
- h12-20020a62b40c0000b02902de4a1ea753mr18962975pfn.64.1624776661891; Sat, 26
- Jun 2021 23:51:01 -0700 (PDT)
+ Sun, 27 Jun 2021 01:23:23 -0700 (PDT)
+Received: by mail-pj1-f53.google.com with SMTP id
+ p4-20020a17090a9304b029016f3020d867so8302675pjo.3; 
+ Sun, 27 Jun 2021 01:23:22 -0700 (PDT)
+X-Received: by 2002:a17:90a:6be6:: with SMTP id
+ w93mr20759803pjj.171.1624782202542; 
+ Sun, 27 Jun 2021 01:23:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
- <20210409074857.166082-5-zhiwei_liu@c-sky.com>
-In-Reply-To: <20210409074857.166082-5-zhiwei_liu@c-sky.com>
+ <20210409074857.166082-3-zhiwei_liu@c-sky.com>
+ <CANzO1D0kMsGwXWMHZrSQQdX3yDAScE6_psJPK+854TvWx4tW=A@mail.gmail.com>
+In-Reply-To: <CANzO1D0kMsGwXWMHZrSQQdX3yDAScE6_psJPK+854TvWx4tW=A@mail.gmail.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Sun, 27 Jun 2021 14:50:51 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0Tx0oB=t8aLhFN95Kq00OP-=wv5mPOYesof_dG6Bap-w@mail.gmail.com>
-Message-ID: <CANzO1D0Tx0oB=t8aLhFN95Kq00OP-=wv5mPOYesof_dG6Bap-w@mail.gmail.com>
-Subject: Re: [RFC PATCH 04/11] target/riscv: Update CSR xie in CLIC mode
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Sun, 27 Jun 2021 16:23:10 +0800
+X-Gmail-Original-Message-ID: <CANzO1D1FEfVrRwC-QT=BGqnpbTWSOMtMq5mt2W07u-E1Y7F_3A@mail.gmail.com>
+Message-ID: <CANzO1D1FEfVrRwC-QT=BGqnpbTWSOMtMq5mt2W07u-E1Y7F_3A@mail.gmail.com>
+Subject: Re: [RFC PATCH 02/11] target/riscv: Update CSR xintthresh in CLIC mode
+To: Frank Chang <frank.chang@sifive.com>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
-Content-Type: multipart/alternative; boundary="000000000000c5813805c5b9cb20"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52c.google.com
+Content-Type: multipart/alternative; boundary="000000000000051fd705c5bb162d"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,207 +89,326 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jun 2021 06:51:08 -0000
+X-List-Received-Date: Sun, 27 Jun 2021 08:23:28 -0000
 
---000000000000c5813805c5b9cb20
+--000000000000051fd705c5bb162d
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=97=
-=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=883:51=E5=AF=AB=E9=81=93=EF=BC=9A
+Frank Chang <frank.chang@sifive.com> =E6=96=BC 2021=E5=B9=B46=E6=9C=8827=E6=
+=97=A5 =E9=80=B1=E6=97=A5 =E4=B8=8A=E5=8D=881:23=E5=AF=AB=E9=81=93=EF=BC=9A
 
-> The xie CSR appears hardwired to zero in CLIC mode, replaced by separate
-> memory-mapped interrupt enables (clicintie[i]). Writes to xie will be
-> ignored and will not trap (i.e., no access faults).
+> LIU Zhiwei <zhiwei_liu@c-sky.com> =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=
+=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=883:52=E5=AF=AB=E9=81=93=EF=BC=9A
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/csr.c | 19 ++++++++++++++++---
->  1 file changed, 16 insertions(+), 3 deletions(-)
+>> The interrupt-level threshold (xintthresh) CSR holds an 8-bit field
+>> for the threshold level of the associated privilege mode.
+>>
+>> For horizontal interrupts, only the ones with higher interrupt levels
+>> than the threshold level are allowed to preempt.
+>>
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>>
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 4c31364967..74bc7a08aa 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -23,6 +23,10 @@
->  #include "qemu/main-loop.h"
->  #include "exec/exec-all.h"
->
-> +#if !defined(CONFIG_USER_ONLY)
-> +#include "hw/intc/riscv_clic.h"
-> +#endif
-> +
->  /* CSR function table public API */
->  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
->  {
-> @@ -611,13 +615,17 @@ static int write_mideleg(CPURISCVState *env, int
-> csrno, target_ulong val)
->
->  static int read_mie(CPURISCVState *env, int csrno, target_ulong *val)
->  {
-> -    *val =3D env->mie;
-> +    /* The xie CSR appears hardwired to zero in CLIC mode, (Section 4.3)
-> */
-> +    *val =3D riscv_clic_is_clic_mode(env) ? 0 : env->mie;
->      return 0;
->  }
->
->  static int write_mie(CPURISCVState *env, int csrno, target_ulong val)
->  {
-> -    env->mie =3D (env->mie & ~all_ints) | (val & all_ints);
-> +    /* Writes to xie will be ignored and will not trap. (Section 4.3) */
-> +    if (!riscv_clic_is_clic_mode(env)) {
-> +        env->mie =3D (env->mie & ~all_ints) | (val & all_ints);
-> +    }
->      return 0;
->  }
->
-> @@ -785,7 +793,8 @@ static int read_sie(CPURISCVState *env, int csrno,
-> target_ulong *val)
->      if (riscv_cpu_virt_enabled(env)) {
->          read_vsie(env, CSR_VSIE, val);
->      } else {
-> -        *val =3D env->mie & env->mideleg;
-> +        /* The xie CSR appears hardwired to zero in CLIC mode. (Section
-> 4.3) */
-> +        *val =3D riscv_clic_is_clic_mode(env) ? 0 : env->mie & env->mide=
-leg;
->      }
->      return 0;
->  }
-> @@ -805,6 +814,10 @@ static int write_sie(CPURISCVState *env, int csrno,
-> target_ulong val)
->      } else {
->          target_ulong newval =3D (env->mie & ~S_MODE_INTERRUPTS) |
->                                (val & S_MODE_INTERRUPTS);
-> +        /* Writes to xie will be ignored and will not trap. (Section 4.3=
-)
-> */
-> +        if (riscv_clic_is_clic_mode(env)) {
-> +            return 0;
->
-+        }
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 >
 
-Minor:
-This one can be omitted as write_sie() will eventually call write_mie().
+Sorry, recall that mintthresh description is vague in v0.8 CLIC spec[1].
+If mintthresh is a CLIC memory-mapped register in v0.8 CLIC.
+Then I think you should restrict the CSR accesses to mintthresh and
+sintthresh when CLIC is v0.8.
 
-Anyway,
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+[1] https://github.com/riscv/riscv-fast-interrupt/blob/74f86c3858/clic.adoc
+
+Regards,
+Frank Chang
 
 
->          write_mie(env, CSR_MIE, newval);
->      }
->
-> --
-> 2.25.1
->
 >
 >
+>> ---
+>>  target/riscv/cpu.h      |  2 ++
+>>  target/riscv/cpu_bits.h |  2 ++
+>>  target/riscv/csr.c      | 28 ++++++++++++++++++++++++++++
+>>  3 files changed, 32 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> index 1a44ca62c7..a5eab26a69 100644
+>> --- a/target/riscv/cpu.h
+>> +++ b/target/riscv/cpu.h
+>> @@ -160,6 +160,7 @@ struct CPURISCVState {
+>>
+>>      uint32_t miclaim;
+>>      uint32_t mintstatus; /* clic-spec */
+>> +    target_ulong mintthresh; /* clic-spec */
+>>
+>>      target_ulong mie;
+>>      target_ulong mideleg;
+>> @@ -173,6 +174,7 @@ struct CPURISCVState {
+>>      target_ulong stvec;
+>>      target_ulong sepc;
+>>      target_ulong scause;
+>> +    target_ulong sintthresh; /* clic-spec */
+>>
+>>      target_ulong mtvec;
+>>      target_ulong mepc;
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index c4ce6ec3d9..9447801d22 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -166,6 +166,7 @@
+>>  #define CSR_MTVAL           0x343
+>>  #define CSR_MIP             0x344
+>>  #define CSR_MINTSTATUS      0x346 /* clic-spec-draft */
+>> +#define CSR_MINTTHRESH      0x347 /* clic-spec-draft */
+>>
+>>  /* Legacy Machine Trap Handling (priv v1.9.1) */
+>>  #define CSR_MBADADDR        0x343
+>> @@ -185,6 +186,7 @@
+>>  #define CSR_STVAL           0x143
+>>  #define CSR_SIP             0x144
+>>  #define CSR_SINTSTATUS      0x146 /* clic-spec-draft */
+>> +#define CSR_SINTTHRESH      0x147 /* clic-spec-draft */
+>>
+>>  /* Legacy Supervisor Trap Handling (priv v1.9.1) */
+>>  #define CSR_SBADADDR        0x143
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index 320b18ab60..4c31364967 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -746,6 +746,18 @@ static int read_mintstatus(CPURISCVState *env, int
+>> csrno, target_ulong *val)
+>>      return 0;
+>>  }
+>>
+>> +static int read_mintthresh(CPURISCVState *env, int csrno, target_ulong
+>> *val)
+>> +{
+>> +    *val =3D env->mintthresh;
+>> +    return 0;
+>> +}
+>> +
+>> +static int write_mintthresh(CPURISCVState *env, int csrno, target_ulong
+>> val)
+>> +{
+>> +    env->mintthresh =3D val;
+>> +    return 0;
+>> +}
+>> +
+>>  /* Supervisor Trap Setup */
+>>  static int read_sstatus(CPURISCVState *env, int csrno, target_ulong *va=
+l)
+>>  {
+>> @@ -912,6 +924,18 @@ static int read_sintstatus(CPURISCVState *env, int
+>> csrno, target_ulong *val)
+>>      return 0;
+>>  }
+>>
+>> +static int read_sintthresh(CPURISCVState *env, int csrno, target_ulong
+>> *val)
+>> +{
+>> +    *val =3D env->sintthresh;
+>> +    return 0;
+>> +}
+>> +
+>> +static int write_sintthresh(CPURISCVState *env, int csrno, target_ulong
+>> val)
+>> +{
+>> +    env->sintthresh =3D val;
+>> +    return 0;
+>> +}
+>> +
+>>  /* Supervisor Protection and Translation */
+>>  static int read_satp(CPURISCVState *env, int csrno, target_ulong *val)
+>>  {
+>> @@ -1666,9 +1690,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
+{
+>>
+>>      /* Machine Mode Core Level Interrupt Controller */
+>>      [CSR_MINTSTATUS] =3D { "mintstatus", clic,  read_mintstatus },
+>> +    [CSR_MINTTHRESH] =3D { "mintthresh", clic,  read_mintthresh,
+>> +                         write_mintthresh },
+>>
+>>      /* Supervisor Mode Core Level Interrupt Controller */
+>>      [CSR_SINTSTATUS] =3D { "sintstatus", clic,  read_sintstatus },
+>> +    [CSR_SINTTHRESH] =3D { "sintthresh", clic,  read_sintthresh,
+>> +                         write_sintthresh },
+>>
+>>  #endif /* !CONFIG_USER_ONLY */
+>>  };
+>> --
+>> 2.25.1
+>>
+>>
+>>
 
---000000000000c5813805c5b9cb20
+--000000000000051fd705c5bb162d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_l=
-iu@c-sky.com">zhiwei_liu@c-sky.com</a>&gt; =E6=96=BC 2021=E5=B9=B44=E6=9C=
-=889=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=883:51=E5=AF=AB=E9=81=93=
-=EF=BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">The xie CSR appears hardwired to zero in CLIC mode, re=
-placed by separate<br>
-memory-mapped interrupt enables (clicintie[i]). Writes to xie will be<br>
-ignored and will not trap (i.e., no access faults).<br>
+<div dir=3D"ltr"><div dir=3D"ltr">Frank Chang &lt;<a href=3D"mailto:frank.c=
+hang@sifive.com">frank.chang@sifive.com</a>&gt; =E6=96=BC 2021=E5=B9=B46=E6=
+=9C=8827=E6=97=A5 =E9=80=B1=E6=97=A5 =E4=B8=8A=E5=8D=881:23=E5=AF=AB=E9=81=
+=93=EF=BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">LIU Zhiwei &lt;<a=
+ href=3D"mailto:zhiwei_liu@c-sky.com" target=3D"_blank">zhiwei_liu@c-sky.co=
+m</a>&gt; =E6=96=BC 2021=E5=B9=B44=E6=9C=889=E6=97=A5 =E9=80=B1=E4=BA=94 =
+=E4=B8=8B=E5=8D=883:52=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><div class=3D"gm=
+ail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">The interrupt-=
+level threshold (xintthresh) CSR holds an 8-bit field<br>
+for the threshold level of the associated privilege mode.<br>
+<br>
+For horizontal interrupts, only the ones with higher interrupt levels<br>
+than the threshold level are allowed to preempt.<br>
 <br>
 Signed-off-by: LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@c-sky.com" targe=
-t=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;<br>
+t=3D"_blank">zhiwei_liu@c-sky.com</a>&gt;<br></blockquote><div><br></div><d=
+iv>Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" t=
+arget=3D"_blank">frank.chang@sifive.com</a>&gt;</div></div></div></blockquo=
+te><div><br></div><div>Sorry, recall that=C2=A0mintthresh description is va=
+gue in v0.8 CLIC spec[1].</div><div>If mintthresh is a CLIC memory-mapped r=
+egister in v0.8 CLIC.</div><div>Then I think you should restrict the CSR ac=
+cesses to mintthresh=C2=A0and sintthresh when CLIC is v0.8.</div><div><br><=
+/div><div>[1]=C2=A0<a href=3D"https://github.com/riscv/riscv-fast-interrupt=
+/blob/74f86c3858/clic.adoc" target=3D"_blank">https://github.com/riscv/risc=
+v-fast-interrupt/blob/74f86c3858/<span class=3D"gmail-il">clic</span>.adoc<=
+/a><br></div><div><br></div><div>Regards,</div><div>Frank Chang</div><div>=
+=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"l=
+tr"><div class=3D"gmail_quote"><div>=C2=A0</div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
+204);padding-left:1ex">
 ---<br>
-=C2=A0target/riscv/csr.c | 19 ++++++++++++++++---<br>
-=C2=A01 file changed, 16 insertions(+), 3 deletions(-)<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 |=C2=A0 2 ++<br>
+=C2=A0target/riscv/cpu_bits.h |=C2=A0 2 ++<br>
+=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 | 28 +++++++++++++++++++++++++=
++++<br>
+=C2=A03 files changed, 32 insertions(+)<br>
 <br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index 1a44ca62c7..a5eab26a69 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -160,6 +160,7 @@ struct CPURISCVState {<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t miclaim;<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t mintstatus; /* clic-spec */<br>
++=C2=A0 =C2=A0 target_ulong mintthresh; /* clic-spec */<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mie;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mideleg;<br>
+@@ -173,6 +174,7 @@ struct CPURISCVState {<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong stvec;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong sepc;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong scause;<br>
++=C2=A0 =C2=A0 target_ulong sintthresh; /* clic-spec */<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mtvec;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mepc;<br>
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h<br>
+index c4ce6ec3d9..9447801d22 100644<br>
+--- a/target/riscv/cpu_bits.h<br>
++++ b/target/riscv/cpu_bits.h<br>
+@@ -166,6 +166,7 @@<br>
+=C2=A0#define CSR_MTVAL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x343<br>
+=C2=A0#define CSR_MIP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x344<=
+br>
+=C2=A0#define CSR_MINTSTATUS=C2=A0 =C2=A0 =C2=A0 0x346 /* clic-spec-draft *=
+/<br>
++#define CSR_MINTTHRESH=C2=A0 =C2=A0 =C2=A0 0x347 /* clic-spec-draft */<br>
+<br>
+=C2=A0/* Legacy Machine Trap Handling (priv v1.9.1) */<br>
+=C2=A0#define CSR_MBADADDR=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x343<br>
+@@ -185,6 +186,7 @@<br>
+=C2=A0#define CSR_STVAL=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x143<br>
+=C2=A0#define CSR_SIP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x144<=
+br>
+=C2=A0#define CSR_SINTSTATUS=C2=A0 =C2=A0 =C2=A0 0x146 /* clic-spec-draft *=
+/<br>
++#define CSR_SINTTHRESH=C2=A0 =C2=A0 =C2=A0 0x147 /* clic-spec-draft */<br>
+<br>
+=C2=A0/* Legacy Supervisor Trap Handling (priv v1.9.1) */<br>
+=C2=A0#define CSR_SBADADDR=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x143<br>
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 4c31364967..74bc7a08aa 100644<br>
+index 320b18ab60..4c31364967 100644<br>
 --- a/target/riscv/csr.c<br>
 +++ b/target/riscv/csr.c<br>
-@@ -23,6 +23,10 @@<br>
-=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
-=C2=A0#include &quot;exec/exec-all.h&quot;<br>
+@@ -746,6 +746,18 @@ static int read_mintstatus(CPURISCVState *env, int csr=
+no, target_ulong *val)<br>
+=C2=A0 =C2=A0 =C2=A0return 0;<br>
+=C2=A0}<br>
 <br>
-+#if !defined(CONFIG_USER_ONLY)<br>
-+#include &quot;hw/intc/riscv_clic.h&quot;<br>
-+#endif<br>
++static int read_mintthresh(CPURISCVState *env, int csrno, target_ulong *va=
+l)<br>
++{<br>
++=C2=A0 =C2=A0 *val =3D env-&gt;mintthresh;<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
 +<br>
-=C2=A0/* CSR function table public API */<br>
-=C2=A0void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)<br>
++static int write_mintthresh(CPURISCVState *env, int csrno, target_ulong va=
+l)<br>
++{<br>
++=C2=A0 =C2=A0 env-&gt;mintthresh =3D val;<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
+=C2=A0/* Supervisor Trap Setup */<br>
+=C2=A0static int read_sstatus(CPURISCVState *env, int csrno, target_ulong *=
+val)<br>
 =C2=A0{<br>
-@@ -611,13 +615,17 @@ static int write_mideleg(CPURISCVState *env, int csrn=
-o, target_ulong val)<br>
-<br>
-=C2=A0static int read_mie(CPURISCVState *env, int csrno, target_ulong *val)=
-<br>
-=C2=A0{<br>
--=C2=A0 =C2=A0 *val =3D env-&gt;mie;<br>
-+=C2=A0 =C2=A0 /* The xie CSR appears hardwired to zero in CLIC mode, (Sect=
-ion 4.3) */<br>
-+=C2=A0 =C2=A0 *val =3D riscv_clic_is_clic_mode(env) ? 0 : env-&gt;mie;<br>
+@@ -912,6 +924,18 @@ static int read_sintstatus(CPURISCVState *env, int csr=
+no, target_ulong *val)<br>
 =C2=A0 =C2=A0 =C2=A0return 0;<br>
 =C2=A0}<br>
 <br>
-=C2=A0static int write_mie(CPURISCVState *env, int csrno, target_ulong val)=
-<br>
++static int read_sintthresh(CPURISCVState *env, int csrno, target_ulong *va=
+l)<br>
++{<br>
++=C2=A0 =C2=A0 *val =3D env-&gt;sintthresh;<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static int write_sintthresh(CPURISCVState *env, int csrno, target_ulong va=
+l)<br>
++{<br>
++=C2=A0 =C2=A0 env-&gt;sintthresh =3D val;<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
+=C2=A0/* Supervisor Protection and Translation */<br>
+=C2=A0static int read_satp(CPURISCVState *env, int csrno, target_ulong *val=
+)<br>
 =C2=A0{<br>
--=C2=A0 =C2=A0 env-&gt;mie =3D (env-&gt;mie &amp; ~all_ints) | (val &amp; a=
-ll_ints);<br>
-+=C2=A0 =C2=A0 /* Writes to xie will be ignored and will not trap. (Section=
- 4.3) */<br>
-+=C2=A0 =C2=A0 if (!riscv_clic_is_clic_mode(env)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;mie =3D (env-&gt;mie &amp; ~all_ints) =
-| (val &amp; all_ints);<br>
-+=C2=A0 =C2=A0 }<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
+@@ -1666,9 +1690,13 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<b=
+r>
 <br>
-@@ -785,7 +793,8 @@ static int read_sie(CPURISCVState *env, int csrno, targ=
-et_ulong *val)<br>
-=C2=A0 =C2=A0 =C2=A0if (riscv_cpu_virt_enabled(env)) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0read_vsie(env, CSR_VSIE, val);<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D env-&gt;mie &amp; env-&gt;mideleg;<br=
->
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* The xie CSR appears hardwired to zero in CL=
-IC mode. (Section 4.3) */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D riscv_clic_is_clic_mode(env) ? 0 : en=
-v-&gt;mie &amp; env-&gt;mideleg;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0return 0;<br>
-=C2=A0}<br>
-@@ -805,6 +814,10 @@ static int write_sie(CPURISCVState *env, int csrno, ta=
-rget_ulong val)<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong newval =3D (env-&gt;mie &amp=
-; ~S_MODE_INTERRUPTS) |<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(val &amp; S_MODE_INTERRUPTS);<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Writes to xie will be ignored and will not =
-trap. (Section 4.3) */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_clic_is_clic_mode(env)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br></blockquote><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<=
-br></blockquote><div><br></div><div>Minor:</div><div>This one can be omitte=
-d as write_sie() will eventually call write_mie().</div><div><br></div><div=
->Anyway,</div><div>Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.cha=
-ng@sifive.com">frank.chang@sifive.com</a>&gt;</div><div>=C2=A0</div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex">
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0write_mie(env, CSR_MIE, newval);<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
+=C2=A0 =C2=A0 =C2=A0/* Machine Mode Core Level Interrupt Controller */<br>
+=C2=A0 =C2=A0 =C2=A0[CSR_MINTSTATUS] =3D { &quot;mintstatus&quot;, clic,=C2=
+=A0 read_mintstatus },<br>
++=C2=A0 =C2=A0 [CSR_MINTTHRESH] =3D { &quot;mintthresh&quot;, clic,=C2=A0 r=
+ead_mintthresh,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0write_mintthresh },<br>
 <br>
+=C2=A0 =C2=A0 =C2=A0/* Supervisor Mode Core Level Interrupt Controller */<b=
+r>
+=C2=A0 =C2=A0 =C2=A0[CSR_SINTSTATUS] =3D { &quot;sintstatus&quot;, clic,=C2=
+=A0 read_sintstatus },<br>
++=C2=A0 =C2=A0 [CSR_SINTTHRESH] =3D { &quot;sintthresh&quot;, clic,=C2=A0 r=
+ead_sintthresh,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0write_sintthresh },<br>
+<br>
+=C2=A0#endif /* !CONFIG_USER_ONLY */<br>
+=C2=A0};<br>
 -- <br>
 2.25.1<br>
 <br>
 <br>
 </blockquote></div></div>
+</blockquote></div></div>
 
---000000000000c5813805c5b9cb20--
+--000000000000051fd705c5bb162d--
 
