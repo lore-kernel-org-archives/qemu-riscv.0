@@ -1,70 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lxoKC-0006DD-3J
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Jun 2021 06:17:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57288)
+	id 1lxoSm-0003Yv-Tj
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Jun 2021 06:26:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59194)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lxoK9-0006Ck-Vr
- for qemu-riscv@nongnu.org; Mon, 28 Jun 2021 06:17:06 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d]:33287)
+ id 1lxoSj-0003YT-Ou
+ for qemu-riscv@nongnu.org; Mon, 28 Jun 2021 06:25:58 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:51876)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1lxoJz-0007fz-C3
- for qemu-riscv@nongnu.org; Mon, 28 Jun 2021 06:17:05 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id e20so15104645pgg.0
- for <qemu-riscv@nongnu.org>; Mon, 28 Jun 2021 03:16:54 -0700 (PDT)
+ id 1lxoRt-0003z1-Vp
+ for qemu-riscv@nongnu.org; Mon, 28 Jun 2021 06:25:57 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id n11so4602001pjo.1
+ for <qemu-riscv@nongnu.org>; Mon, 28 Jun 2021 03:25:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=c/TA4WbR51sCvNp+4rB/e+q1sXKtTqUPYXPvhpgrhaM=;
- b=X7KHEIB93Ar2/drO+GF6OQVhjWEIUk1N+vNRuvfe41/cEG2F48i64b/SCwD3nSbbvE
- X2luW0rA3L6sEbaZQY0itx7YrUsqRN5pVvL/J7Bi1w7hOZDLGDA/e4qOgnyVNlkIgPEc
- Rr38G6dzzkAymEqIYuTLURhnBgx79S9D7ekQ8u/EZnMJG9p6BDL9DwZXTcBJ0agVxKKl
- tgwl/LzqicFyo7mVlhox22idypBATb0DzrKsFDrA59mPhezn76n9vHI61agbAmI0eeER
- y2aqB5P7li//CYwAZH0kvLqkeLAuop6NHRYhF8Aw01+UCkuD2GXxiPLqYq9vT9r4wvTo
- 9jGg==
+ :cc; bh=8BJzWMkJeh9BplZSL7zhaIR0fhwOD329Nfh9r45VcfU=;
+ b=Q0x8lOUbNCYbAKoO2kWdP3Xi02Jj/WH1Wh+y44EI2q1L5O982baUsVdwfkfX+W8x/T
+ vveiHBD+QSvxSR5Hr/2vUbHpR1KT4Rm67wqrq1IE4j0W4Mq09HI6m58cbw84nJXdntBe
+ fKIEzsT9t19WhJrD8YSciYkXDtrBRK8HGOjqb0bCHv5IdwnslJrE5YlwMSio0dl0Rgoa
+ sTCcZ7UZV21eAZXeKpYmUGiyXvS2D0u+cvNa7kqOS9FSCdiT2aNHQgUEA53rLKItOrVG
+ 0wtLqXD8tOGC/SBcXtc4k/adnn8OpyGjvrj/CSq2F9aooZx0hQWoVlfST/4Pfj6rrwHZ
+ 3naQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=c/TA4WbR51sCvNp+4rB/e+q1sXKtTqUPYXPvhpgrhaM=;
- b=uE56kCgkRNLfmBuBYz6k9kkIMJxO3J+YLfV5hy6kMLpbAg52DKzP4L9wOGdWP/5SSc
- 9FsMY4VY7SpvPMjaIIDflN6cT76ZAXZig3Ej2XDS/Bu4Rl0a0cJHYEAzvxHuS1NjZUPV
- owKu4/Vk74cdAZzYtnOYrNwzCv3XEmDsaqi4/pi61x/Debp1w2UXmHA+SrBShuqECuVq
- 5TMGBYXbE9w/P4YhadahBa6paPPcIgIkmIFf3v9GbgySBAweHyoqmWQ4KvpKWmh8CXNk
- EefaacVeFe39rWX0PKdADhkOKlaazER1rJCxdfZiyE4DOAMoFvdOSVa0tbeSVGqna8OK
- QQqQ==
-X-Gm-Message-State: AOAM533YhzxfO3dU7Cg0tdiyQs3M/D1CDwEJ5awj3AZvuHejb1Zv+TNl
- zzra3dAx7rpxU8XLzuB60vex5A==
-X-Google-Smtp-Source: ABdhPJyMz6QG6Guq7B1pnD8nHiGlbko9ZTfAVOZuTDVtSnmm81MJ9ZnWnHMFHGnkVCiLDCsGIbJS9w==
-X-Received: by 2002:a65:40c6:: with SMTP id u6mr9045538pgp.390.1624875413084; 
- Mon, 28 Jun 2021 03:16:53 -0700 (PDT)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com.
- [209.85.214.178])
- by smtp.gmail.com with ESMTPSA id y1sm13968502pfe.72.2021.06.28.03.16.52
+ bh=8BJzWMkJeh9BplZSL7zhaIR0fhwOD329Nfh9r45VcfU=;
+ b=TTfYCO2Yie4aORhtvxLziN312k0xTeCMZroiIyRHIDJrCPQ7XX7ICVdYsmkrKNeXve
+ Nq4nQtik4Dq1wswrhImgyNkXzUjjn/Zq2c/zXcCDNuyt0+2xHx1xglfCoWBNw1LWosQ5
+ OXp03oxMnX8ArP/pj1DgjV3cE/5oHBEGU3UVDLwNEeaHpR1FkP28nBSMUH5kaXaYQlAD
+ FJuE6Cpx9LEeL201wYD9XVTl/2CEBSMQz9dY8I8kwh/xXtXlkQyy6k9IAv0/LjAvfz8u
+ msqm2ymj4diCnt/riuMWZ7+nnKj8AZQVZZ+jSckz/t8UI+RfscSG2pSaLOnR+/neQgQq
+ SHhg==
+X-Gm-Message-State: AOAM532Lz1DbOH+pgBIodo+xSqftZ23TzJicjaxZZv6o8Ubia8CMC7I5
+ veN3ejLJMyiZHd/mBJVK0nnPpw==
+X-Google-Smtp-Source: ABdhPJxb9geN/CU4c+gSWzRTdFFfYwoiwKbprFnZ3vfahq9zLLMwv9iCIFTwFC2lebO00BAqFS4sSQ==
+X-Received: by 2002:a17:90b:1c02:: with SMTP id
+ oc2mr37495289pjb.36.1624875902910; 
+ Mon, 28 Jun 2021 03:25:02 -0700 (PDT)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com.
+ [209.85.215.173])
+ by smtp.gmail.com with ESMTPSA id o14sm14194357pjj.6.2021.06.28.03.25.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Jun 2021 03:16:52 -0700 (PDT)
-Received: by mail-pl1-f178.google.com with SMTP id h1so8667576plt.1;
- Mon, 28 Jun 2021 03:16:52 -0700 (PDT)
-X-Received: by 2002:a17:90a:6be6:: with SMTP id
- w93mr26751231pjj.171.1624875412144; 
- Mon, 28 Jun 2021 03:16:52 -0700 (PDT)
+ Mon, 28 Jun 2021 03:25:02 -0700 (PDT)
+Received: by mail-pg1-f173.google.com with SMTP id m2so15079044pgk.7;
+ Mon, 28 Jun 2021 03:25:02 -0700 (PDT)
+X-Received: by 2002:a62:8847:0:b029:30d:4c44:7e99 with SMTP id
+ l68-20020a6288470000b029030d4c447e99mr1618750pfd.64.1624875902127; Mon, 28
+ Jun 2021 03:25:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
  <20210409074857.166082-4-zhiwei_liu@c-sky.com>
 In-Reply-To: <20210409074857.166082-4-zhiwei_liu@c-sky.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 28 Jun 2021 18:16:40 +0800
-X-Gmail-Original-Message-ID: <CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com>
-Message-ID: <CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com>
+Date: Mon, 28 Jun 2021 18:24:50 +0800
+X-Gmail-Original-Message-ID: <CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com>
+Message-ID: <CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com>
 Subject: Re: [RFC PATCH 03/11] hw/intc: Add CLIC device
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
-Content-Type: multipart/alternative; boundary="000000000000bec72c05c5d0c942"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52d.google.com
+Content-Type: multipart/alternative; boundary="000000000000f3514605c5d0e69c"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -84,9 +85,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2021 10:17:06 -0000
+X-List-Received-Date: Mon, 28 Jun 2021 10:25:58 -0000
 
---000000000000bec72c05c5d0c942
+--000000000000f3514605c5d0e69c
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -382,16 +383,6 @@ l
 > irq);
 > +    if (!clic->prv_s && !clic->prv_u) { /* M */
 > +        return mode =3D=3D PRV_M;
->
-
-Does the mode here to be checked should be the current hart's privilege mod=
-e
-at the time register is been accessed?
-
-Regards,
-Frank Chang
-
-
 > +    } else if (!clic->prv_s) { /* M/U */
 > +        switch (clic->nmbits) {
 > +        case 0:
@@ -419,6 +410,14 @@ RV_M)
 RV_S);
 > +        case 2:
 > +            return mode =3D=3D clic->clicintattr[irq_offset];
+>
+
+Should be: return mode =3D=3D (clic->clicintattr[irq_offset] >> 6);
+
+Regards,
+Frank Chang
+
+
 > +        case 3:
 > +            qemu_log_mask(LOG_GUEST_ERROR,
 > +                "clic: nmbits can only be 0 or 1 or 2 for M/S/U hart");
@@ -1242,7 +1241,7 @@ T
 >
 >
 
---000000000000bec72c05c5d0c942
+--000000000000f3514605c5d0e69c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -1588,12 +1587,7 @@ rq)<br>
 hartid, irq);<br>
 +=C2=A0 =C2=A0 if (!clic-&gt;prv_s &amp;&amp; !clic-&gt;prv_u) { /* M */<br=
 >
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return mode =3D=3D PRV_M;<br></blockquote><div=
-><br></div><div>Does the mode here to be checked should be the current hart=
-&#39;s privilege mode</div><div>at the time register is been accessed?</div=
-><div><br></div><div>Regards,</div><div>Frank Chang</div><div>=C2=A0</div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return mode =3D=3D PRV_M;<br>
 +=C2=A0 =C2=A0 } else if (!clic-&gt;prv_s) { /* M/U */<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (clic-&gt;nmbits) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case 0:<br>
@@ -1625,7 +1619,11 @@ offset] &amp; 0x80 ? (mode =3D=3D PRV_M) :<br>
 ;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case 2:<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return mode =3D=3D clic-&gt;clic=
-intattr[irq_offset];<br>
+intattr[irq_offset];<br></blockquote><div><br></div><div>Should be: return =
+mode =3D=3D (clic-&gt;clicintattr[irq_offset] &gt;&gt; 6);</div><div><br></=
+div><div>Regards,</div><div>Frank Chang</div><div>=C2=A0</div><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
+d rgb(204,204,204);padding-left:1ex">
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case 3:<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<b=
 r>
@@ -2638,5 +2636,5 @@ index a5eab26a69..9e389d7bbf 100644<br>
 <br>
 </blockquote></div></div>
 
---000000000000bec72c05c5d0c942--
+--000000000000f3514605c5d0e69c--
 
