@@ -1,23 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lxoqQ-0006WS-Eq
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Jun 2021 06:50:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35396)
+	id 1lxqq1-0002Dq-6U
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Jun 2021 08:58:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34648)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lxoqL-0006W5-AJ; Mon, 28 Jun 2021 06:50:21 -0400
-Received: from out28-77.mail.aliyun.com ([115.124.28.77]:46250)
+ id 1lxqpy-000280-IN; Mon, 28 Jun 2021 08:58:06 -0400
+Received: from out28-170.mail.aliyun.com ([115.124.28.170]:53754)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1lxoq9-0002eD-OV; Mon, 28 Jun 2021 06:50:20 -0400
+ id 1lxqpn-0003b9-2b; Mon, 28 Jun 2021 08:58:06 -0400
 X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07860123|-1; CH=green;
  DM=|CONTINUE|false|;
  DS=CONTINUE|ham_regular_dialog|0.0507277-0.000746422-0.948526;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KZEiHXZ_1624877401; 
+ FP=13831509654316254130|2|2|6|0|-1|-1|-1; HT=ay29a033018047204;
+ MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=6; RT=6; SR=0;
+ TI=SMTPD_---.KZHun74_1624885068; 
 Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KZEiHXZ_1624877401)
- by smtp.aliyun-inc.com(10.147.42.198);
- Mon, 28 Jun 2021 18:50:01 +0800
+ fp:SMTPD_---.KZHun74_1624885068) by smtp.aliyun-inc.com(10.147.40.7);
+ Mon, 28 Jun 2021 20:57:48 +0800
 Subject: Re: [RFC PATCH 03/11] hw/intc: Add CLIC device
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -26,19 +26,19 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <Alistair.Francis@wdc.com>, wxy194768@alibaba-inc.com
 References: <20210409074857.166082-1-zhiwei_liu@c-sky.com>
  <20210409074857.166082-4-zhiwei_liu@c-sky.com>
- <CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com>
+ <CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <b8e58db8-95f3-337e-e15f-0c500d9bb443@c-sky.com>
-Date: Mon, 28 Jun 2021 18:48:45 +0800
+Message-ID: <2f624c76-8972-5bde-39fc-bf93156ee161@c-sky.com>
+Date: Mon, 28 Jun 2021 20:56:29 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com>
+In-Reply-To: <CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com>
 Content-Type: multipart/alternative;
- boundary="------------4B55DBED0724320DA4009D27"
+ boundary="------------8D2EDDEF3A71391F64F32C4F"
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.77; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-77.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.170; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-170.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -58,15 +58,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2021 10:50:23 -0000
+X-List-Received-Date: Mon, 28 Jun 2021 12:58:07 -0000
 
 This is a multi-part message in MIME format.
---------------4B55DBED0724320DA4009D27
+--------------8D2EDDEF3A71391F64F32C4F
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
-On 2021/6/28 下午6:24, Frank Chang wrote:
+On 2021/6/28 下午6:16, Frank Chang wrote:
 > LIU Zhiwei <zhiwei_liu@c-sky.com <mailto:zhiwei_liu@c-sky.com>> 於 
 > 2021年4月9日 週五 下午3:57寫道：
 >
@@ -362,6 +362,33 @@ On 2021/6/28 下午6:24, Frank Chang wrote:
 >     hartid, irq);
 >     +    if (!clic->prv_s && !clic->prv_u) { /* M */
 >     +        return mode == PRV_M;
+>
+>
+> Does the mode here to be checked should be the current hart's 
+> privilege mode
+> at the time register is been accessed?
+>
+Yes, it is.
+
+After review the latest specification,  I think I have a  wrong 
+understanding of CLIC
+memory map.
+
+S-mode or U-mode interrupt regions should just be a restricted view of 
+M-mode interrupts.
+
+The check of visible  should not use the irq_offset here. And all writes 
+to S-mode or U-mode
+interrupt region should also update the M-mode corresponding registers.
+
+Thanks,
+Zhiwei
+
+
+
+> Regards,
+> Frank Chang
+>
 >     +    } else if (!clic->prv_s) { /* M/U */
 >     +        switch (clic->nmbits) {
 >     +        case 0:
@@ -385,17 +412,6 @@ On 2021/6/28 下午6:24, Frank Chang wrote:
 >     + (mode == PRV_S);
 >     +        case 2:
 >     +            return mode == clic->clicintattr[irq_offset];
->
->
-> Should be: return mode == (clic->clicintattr[irq_offset] >> 6);
->
-Agree, thanks.
-
-Zhiwei
-
-> Regards,
-> Frank Chang
->
 >     +        case 3:
 >     +            qemu_log_mask(LOG_GUEST_ERROR,
 >     +                "clic: nmbits can only be 0 or 1 or 2 for M/S/U
@@ -1225,7 +1241,7 @@ Zhiwei
 >
 >
 
---------------4B55DBED0724320DA4009D27
+--------------8D2EDDEF3A71391F64F32C4F
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
@@ -1236,10 +1252,10 @@ Content-Transfer-Encoding: 8bit
   <body>
     <p><br>
     </p>
-    <div class="moz-cite-prefix">On 2021/6/28 下午6:24, Frank Chang wrote:<br>
+    <div class="moz-cite-prefix">On 2021/6/28 下午6:16, Frank Chang wrote:<br>
     </div>
     <blockquote type="cite"
-cite="mid:CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com">
+cite="mid:CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com">
       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
       <div dir="ltr">
         <div dir="ltr">LIU Zhiwei &lt;<a
@@ -1578,6 +1594,45 @@ cite="mid:CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com">
             +    if (!clic-&gt;prv_s &amp;&amp; !clic-&gt;prv_u) { /* M
             */<br>
             +        return mode == PRV_M;<br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>Does the mode here to be checked should be the current
+            hart's privilege mode</div>
+          <div>at the time register is been accessed?</div>
+          <div><br>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <p>Yes, it is.<br>
+    </p>
+    <p>After review the latest specification,  I think I have a  wrong
+      understanding of CLIC<br>
+      memory map.</p>
+    <p>S-mode or U-mode interrupt regions should just be a restricted
+      view of M-mode interrupts.</p>
+    <p>The check of visible  should not use the irq_offset here. And all
+      writes to S-mode or U-mode<br>
+      interrupt region should also update the M-mode corresponding
+      registers.</p>
+    <p>Thanks,<br>
+      Zhiwei<br>
+    </p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    <blockquote type="cite"
+cite="mid:CANzO1D14y5+4BNC0_wqgM7H2EdaNfs2DWpfgkS4f3npCjE=g-Q@mail.gmail.com">
+      <div dir="ltr">
+        <div class="gmail_quote">
+          <div>Regards,</div>
+          <div>Frank Chang</div>
+          <div> </div>
+          <blockquote class="gmail_quote" style="margin:0px 0px 0px
+            0.8ex;border-left:1px solid
+            rgb(204,204,204);padding-left:1ex">
             +    } else if (!clic-&gt;prv_s) { /* M/U */<br>
             +        switch (clic-&gt;nmbits) {<br>
             +        case 0:<br>
@@ -1605,29 +1660,6 @@ cite="mid:CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com">
             +        case 2:<br>
             +            return mode ==
             clic-&gt;clicintattr[irq_offset];<br>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>Should be: return mode ==
-            (clic-&gt;clicintattr[irq_offset] &gt;&gt; 6);</div>
-          <div><br>
-          </div>
-        </div>
-      </div>
-    </blockquote>
-    <p>Agree, thanks.</p>
-    <p>Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-cite="mid:CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div>Regards,</div>
-          <div>Frank Chang</div>
-          <div> </div>
-          <blockquote class="gmail_quote" style="margin:0px 0px 0px
-            0.8ex;border-left:1px solid
-            rgb(204,204,204);padding-left:1ex">
             +        case 3:<br>
             +            qemu_log_mask(LOG_GUEST_ERROR,<br>
             +                "clic: nmbits can only be 0 or 1 or 2 for
@@ -2549,5 +2581,5 @@ cite="mid:CANzO1D2EUaEacmVHRoW+dCnp0u8O+UutGMMGM2DXqrXDe=Uxjg@mail.gmail.com">
   </body>
 </html>
 
---------------4B55DBED0724320DA4009D27--
+--------------8D2EDDEF3A71391F64F32C4F--
 
