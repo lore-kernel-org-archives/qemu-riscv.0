@@ -1,56 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lylXY-0008W4-3M
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Jun 2021 21:30:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45944)
+	id 1lym32-00055L-Sn
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Jun 2021 22:03:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51538)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lylXW-0008Vc-E4; Wed, 30 Jun 2021 21:30:50 -0400
-Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:37650)
+ id 1lym30-00054u-OW; Wed, 30 Jun 2021 22:03:22 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:40815)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lylXU-0007fW-Dh; Wed, 30 Jun 2021 21:30:50 -0400
-Received: by mail-il1-x132.google.com with SMTP id i13so4867969ilu.4;
- Wed, 30 Jun 2021 18:30:47 -0700 (PDT)
+ id 1lym2x-0002Km-2q; Wed, 30 Jun 2021 22:03:22 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id l5so5602123iok.7;
+ Wed, 30 Jun 2021 19:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kVEczltBvKdboLpIh/D87dPz2NT7/sXIHyPZqxVNB98=;
- b=HbQk/WQxdlw8asLvMTpqww4LU+aHcwlsEJac4fa9U/i7+S0EV9CfA1KowjjZqIh4wD
- 6cUqzF5JXmunSTPWTIEFfrgEbxJUkaaKYj0X1toJOryUVbynOT9MQtkrez8zG9HXqVPu
- LHtRy5hsnV6QWCK3A/6vElX0/HL7lQyYQvV66J8+o6ZsStzoZcl4WtStLdCb9dSkubRU
- EeO0+uCNgJIAry9RUI8rgIpEDci4KzGKEyvlt6T2FSw7XozHbfwYgh4OOEpqhoF8NssL
- U0x4REMbCiWz1obFTyGCs4NgrafZ0QohX9MtOxPVzEs4xUuieacZmakJvPWSXVt3MyGp
- A8xw==
+ :cc; bh=U0tVy7jp/5QP/jyC02T0sD2saAoodO+yJQr7WotAlFk=;
+ b=dL+lj3PqQsQT3tY9IO7NfP1EKPIGCblWcBvIMghmMwT2WxlDHCXi4NWR0Tqn+JtI2T
+ XPTbbDgwpCew5KHTt7tcckqYZVehGcQxtOmcOhx1RuVlcl+9URpGwFNuKhpBWiZXRsw+
+ P9lUrO04PfGAzL6INiKopOj2s9Ofx5ci/R0wsEMv/ZvlGawus0lfyvFEGKBiCrCxs9yh
+ a2oXvSsSmGF84////b2RQb2BGXAJDudvPZVI5YM0Y9xo4xWe6x5CyqFfGeAksFX2O8Mv
+ zo6esHMolfxuC+NsyaNz5Gg+AucW43tmbYu4e1CNy1uqgcLf53KU481s9vpsPnGvXQda
+ 3jZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=kVEczltBvKdboLpIh/D87dPz2NT7/sXIHyPZqxVNB98=;
- b=OwzepgMJN2ioc0YbrVFJEMrCDR1JeRUa9yxCjyr8MSYo78+rjj/PtsXnELg3xbg7mL
- kQQMfR+Euviy458nCtiPHT0wqFQB01xLeEVyakbTiDoMvEoQhnKPICmo8mPzN8VYxZZu
- x70oRfNX4woXer35vhpDzgMTbyxq51lVA0uAhu8FctRhb7LXehYpRuZI1Of3+dzSPNxF
- hy68Bj6YCCtahQFjSwSKmgwlazw5h7Gq1cH9lgUgl7ylTROJxHw2ycA77VZAFtuxoGrr
- uGlJ4rb9vIfEL9E4CPvsjbna0DtzrC/01vOyRzY+ug4xDU6FxXNpew4ugYbcFEJ9ZOTk
- ilaA==
-X-Gm-Message-State: AOAM530UpVP1qSoFII18stu+1WCGRwrwO91ZilVeAEEDqjK799r8TtJk
- k0D5Ca7TUUEIa6JqqnuZSzFSd6LaIA+CmTJXyTI=
-X-Google-Smtp-Source: ABdhPJw8Sh4rrSrqV67OI6oQDR1Hw5owe5qAWu3hObRnfiR4Z+QFaxEZG+fGNXueG4HNM26Y1cpZtVubUT18braod1Q=
-X-Received: by 2002:a92:c886:: with SMTP id w6mr27752241ilo.227.1625103046630; 
- Wed, 30 Jun 2021 18:30:46 -0700 (PDT)
+ bh=U0tVy7jp/5QP/jyC02T0sD2saAoodO+yJQr7WotAlFk=;
+ b=P+QzUL82hs1BIKY/F54wE4jjyqorEu+0iBveFN0uyniZ5LpTSQZYF8bnkRiQixwQUL
+ 1D4+1Uki72wKLAqBwkzWfNx0QqTMwxm8yM5SoUpUh343gd/Htl1KD1yPxWWnkoICiT5E
+ RYQnmn5ifKfj/3Zx9JHTQpCinuE+olouJQf86X6xJ3lvD8KYmSaJI6UsVwLQUpAQhCtW
+ Cu161aZnTk1PYz29tC70XIPNWe+EJPbCbHWJBV40Hjdyp3MkVJ68QtDDsUZr9Ucnj7kH
+ 2mdSejiaJi/OK8u9Y4PrrsL1uH79o4wotJ1Obq6Hfv55JGM6vmgkaMOO/o5Y3pnkDWMI
+ ngHQ==
+X-Gm-Message-State: AOAM5331AcJ68Xa8JmZHYfiZDT6l5TRusb4NL/ywhshjBgwbb9WaAUz6
+ Z0i7Ts3lE38guhKsxTSOot0FNi7OQ9jWD1VSC7E=
+X-Google-Smtp-Source: ABdhPJxHrQ5n6kro6iQ19pZfstNm2WSBNvEfHoXPCGoB9X4A4vqFGx140tkQLpEEz4eFj5lrWcUOHiYkdkW/v5+P5/8=
+X-Received: by 2002:a5e:9703:: with SMTP id w3mr10169267ioj.118.1625104997377; 
+ Wed, 30 Jun 2021 19:03:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
-In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
+ <20210624105521.3964-4-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210624105521.3964-4-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 1 Jul 2021 11:30:20 +1000
-Message-ID: <CAKmqyKNw2Vr=fqGqnGBRF1mF6FAk-qn=ecNuSdrWAv1rGro7hw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/37] target/riscv: support packed extension v0.9.4
+Date: Thu, 1 Jul 2021 12:02:51 +1000
+Message-ID: <CAKmqyKNVesMi4-FTTjuC5P11zV7HHqUM=pt9ZTzbR=zpGyEN3A@mail.gmail.com>
+Subject: Re: [PATCH v3 03/37] target/riscv: 16-bit Addition & Subtraction
+ Instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,89 +73,615 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2021 01:30:50 -0000
+X-List-Received-Date: Thu, 01 Jul 2021 02:03:23 -0000
 
-On Thu, Jun 24, 2021 at 9:14 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Thu, Jun 24, 2021 at 9:08 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> This patchset implements the packed extension for RISC-V on QEMU.
+> Include 5 groups: Wrap-around (dropping overflow), Signed Halving,
+> Unsigned Halving, Signed Saturation, and Unsigned Saturation.
 >
-> You can also find this patch set on my
-> repo(https://github.com/romanheros/qemu.git branch:packed-upstream-v3).
->
-> Features:
-> * support specification packed extension
->   v0.9.4(https://github.com/riscv/riscv-p-spec/)
-> * support basic packed extension.
-> * support Zpsoperand.
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-There is now a 0.9.5, do you have plans to support that?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> v3:
-> * split 32 bit vector operations.
->
-> v2:
-> * remove all the TARGET_RISCV64 macro.
-> * use tcg_gen_vec_* to accelabrate.
-> * update specficication to latest v0.9.4
-> * fix kmsxda32, kmsda32,kslra32,smal
->
-> LIU Zhiwei (37):
->   target/riscv: implementation-defined constant parameters
->   target/riscv: Make the vector helper functions public
->   target/riscv: 16-bit Addition & Subtraction Instructions
->   target/riscv: 8-bit Addition & Subtraction Instruction
->   target/riscv: SIMD 16-bit Shift Instructions
->   target/riscv: SIMD 8-bit Shift Instructions
->   target/riscv: SIMD 16-bit Compare Instructions
->   target/riscv: SIMD 8-bit Compare Instructions
->   target/riscv: SIMD 16-bit Multiply Instructions
->   target/riscv: SIMD 8-bit Multiply Instructions
->   target/riscv: SIMD 16-bit Miscellaneous Instructions
->   target/riscv: SIMD 8-bit Miscellaneous Instructions
->   target/riscv: 8-bit Unpacking Instructions
->   target/riscv: 16-bit Packing Instructions
->   target/riscv: Signed MSW 32x32 Multiply and Add Instructions
->   target/riscv: Signed MSW 32x16 Multiply and Add Instructions
->   target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
->   target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
->   target/riscv: Partial-SIMD Miscellaneous Instructions
->   target/riscv: 8-bit Multiply with 32-bit Add Instructions
->   target/riscv: 64-bit Add/Subtract Instructions
->   target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
->   target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
->     Instructions
->   target/riscv: Non-SIMD Q15 saturation ALU Instructions
->   target/riscv: Non-SIMD Q31 saturation ALU Instructions
->   target/riscv: 32-bit Computation Instructions
->   target/riscv: Non-SIMD Miscellaneous Instructions
->   target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
->   target/riscv: RV64 Only SIMD 32-bit Shift Instructions
->   target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
->   target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
->   target/riscv: RV64 Only 32-bit Multiply Instructions
->   target/riscv: RV64 Only 32-bit Multiply & Add Instructions
->   target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
->   target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
->   target/riscv: RV64 Only 32-bit Packing Instructions
->   target/riscv: configure and turn on packed extension from command line
->
->  target/riscv/cpu.c                      |   34 +
->  target/riscv/cpu.h                      |    6 +
->  target/riscv/helper.h                   |  330 ++
->  target/riscv/insn32.decode              |  370 +++
->  target/riscv/insn_trans/trans_rvp.c.inc | 1155 +++++++
->  target/riscv/internals.h                |   50 +
->  target/riscv/meson.build                |    1 +
->  target/riscv/packed_helper.c            | 3851 +++++++++++++++++++++++
->  target/riscv/translate.c                |    3 +
->  target/riscv/vector_helper.c            |   82 +-
->  10 files changed, 5824 insertions(+), 58 deletions(-)
+> ---
+>  target/riscv/helper.h                   |  30 ++
+>  target/riscv/insn32.decode              |  32 +++
+>  target/riscv/insn_trans/trans_rvp.c.inc | 117 ++++++++
+>  target/riscv/meson.build                |   1 +
+>  target/riscv/packed_helper.c            | 354 ++++++++++++++++++++++++
+>  target/riscv/translate.c                |   1 +
+>  6 files changed, 535 insertions(+)
 >  create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
 >  create mode 100644 target/riscv/packed_helper.c
 >
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 415e37bc37..b6a71ade33 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -1149,3 +1149,33 @@ DEF_HELPER_6(vcompress_vm_b, void, ptr, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vcompress_vm_h, void, ptr, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vcompress_vm_w, void, ptr, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vcompress_vm_d, void, ptr, ptr, ptr, ptr, env, i32)
+> +
+> +/* P extension function */
+> +DEF_HELPER_3(radd16, tl, env, tl, tl)
+> +DEF_HELPER_3(uradd16, tl, env, tl, tl)
+> +DEF_HELPER_3(kadd16, tl, env, tl, tl)
+> +DEF_HELPER_3(ukadd16, tl, env, tl, tl)
+> +DEF_HELPER_3(rsub16, tl, env, tl, tl)
+> +DEF_HELPER_3(ursub16, tl, env, tl, tl)
+> +DEF_HELPER_3(ksub16, tl, env, tl, tl)
+> +DEF_HELPER_3(uksub16, tl, env, tl, tl)
+> +DEF_HELPER_3(cras16, tl, env, tl, tl)
+> +DEF_HELPER_3(rcras16, tl, env, tl, tl)
+> +DEF_HELPER_3(urcras16, tl, env, tl, tl)
+> +DEF_HELPER_3(kcras16, tl, env, tl, tl)
+> +DEF_HELPER_3(ukcras16, tl, env, tl, tl)
+> +DEF_HELPER_3(crsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(rcrsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(urcrsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(kcrsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(ukcrsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(stas16, tl, env, tl, tl)
+> +DEF_HELPER_3(rstas16, tl, env, tl, tl)
+> +DEF_HELPER_3(urstas16, tl, env, tl, tl)
+> +DEF_HELPER_3(kstas16, tl, env, tl, tl)
+> +DEF_HELPER_3(ukstas16, tl, env, tl, tl)
+> +DEF_HELPER_3(stsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(rstsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(urstsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(kstsa16, tl, env, tl, tl)
+> +DEF_HELPER_3(ukstsa16, tl, env, tl, tl)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index f09f8d5faf..57f72fabf6 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -732,3 +732,35 @@ greviw     0110100 .......... 101 ..... 0011011 @sh5
+>  gorciw     0010100 .......... 101 ..... 0011011 @sh5
+>
+>  slli_uw    00001. ........... 001 ..... 0011011 @sh
+> +
+> +# *** RV32P Extension ***
+> +add16      0100000  ..... ..... 000 ..... 1110111 @r
+> +radd16     0000000  ..... ..... 000 ..... 1110111 @r
+> +uradd16    0010000  ..... ..... 000 ..... 1110111 @r
+> +kadd16     0001000  ..... ..... 000 ..... 1110111 @r
+> +ukadd16    0011000  ..... ..... 000 ..... 1110111 @r
+> +sub16      0100001  ..... ..... 000 ..... 1110111 @r
+> +rsub16     0000001  ..... ..... 000 ..... 1110111 @r
+> +ursub16    0010001  ..... ..... 000 ..... 1110111 @r
+> +ksub16     0001001  ..... ..... 000 ..... 1110111 @r
+> +uksub16    0011001  ..... ..... 000 ..... 1110111 @r
+> +cras16     0100010  ..... ..... 000 ..... 1110111 @r
+> +rcras16    0000010  ..... ..... 000 ..... 1110111 @r
+> +urcras16   0010010  ..... ..... 000 ..... 1110111 @r
+> +kcras16    0001010  ..... ..... 000 ..... 1110111 @r
+> +ukcras16   0011010  ..... ..... 000 ..... 1110111 @r
+> +crsa16     0100011  ..... ..... 000 ..... 1110111 @r
+> +rcrsa16    0000011  ..... ..... 000 ..... 1110111 @r
+> +urcrsa16   0010011  ..... ..... 000 ..... 1110111 @r
+> +kcrsa16    0001011  ..... ..... 000 ..... 1110111 @r
+> +ukcrsa16   0011011  ..... ..... 000 ..... 1110111 @r
+> +stas16     1111010  ..... ..... 010 ..... 1110111 @r
+> +rstas16    1011010  ..... ..... 010 ..... 1110111 @r
+> +urstas16   1101010  ..... ..... 010 ..... 1110111 @r
+> +kstas16    1100010  ..... ..... 010 ..... 1110111 @r
+> +ukstas16   1110010  ..... ..... 010 ..... 1110111 @r
+> +stsa16     1111011  ..... ..... 010 ..... 1110111 @r
+> +rstsa16    1011011  ..... ..... 010 ..... 1110111 @r
+> +urstsa16   1101011  ..... ..... 010 ..... 1110111 @r
+> +kstsa16    1100011  ..... ..... 010 ..... 1110111 @r
+> +ukstsa16   1110011  ..... ..... 010 ..... 1110111 @r
+> diff --git a/target/riscv/insn_trans/trans_rvp.c.inc b/target/riscv/insn_trans/trans_rvp.c.inc
+> new file mode 100644
+> index 0000000000..43f395657a
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_rvp.c.inc
+> @@ -0,0 +1,117 @@
+> +/*
+> + * RISC-V translation routines for the RVP Standard Extension.
+> + *
+> + * Copyright (c) 2021 T-Head Semiconductor Co., Ltd. All rights reserved.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "tcg/tcg-op-gvec.h"
+> +#include "tcg/tcg-gvec-desc.h"
+> +#include "tcg/tcg.h"
+> +
+> +/*
+> + *** SIMD Data Processing Instructions
+> + */
+> +
+> +/* 16-bit Addition & Subtraction Instructions */
+> +
+> +/*
+> + * For some instructions, such as add16, an oberservation can be utilized:
+> + * 1) If any reg is zero, it can be reduced to an inline op on the whole reg.
+> + * 2) Otherwise, it can be acclebrated by an vec op.
+> + */
+> +static inline bool
+> +r_inline(DisasContext *ctx, arg_r *a,
+> +         void (* vecop)(TCGv, TCGv, TCGv),
+> +         void (* op)(TCGv, TCGv, TCGv))
+> +{
+> +    if (!has_ext(ctx, RVP)) {
+> +        return false;
+> +    }
+> +    if (a->rd && a->rs1 && a->rs2) {
+> +        vecop(cpu_gpr[a->rd], cpu_gpr[a->rs1], cpu_gpr[a->rs2]);
+> +    } else {
+> +        gen_arith(ctx, a, op);
+> +    }
+> +    return true;
+> +}
+> +
+> +/* Complete inline implementation */
+> +#define GEN_RVP_R_INLINE(NAME, VECOP, OP)                \
+> +static bool trans_##NAME(DisasContext *s, arg_r *a)      \
+> +{                                                        \
+> +    return r_inline(s, a, VECOP, OP);                    \
+> +}
+> +
+> +GEN_RVP_R_INLINE(add16, tcg_gen_vec_add16_tl, tcg_gen_add_tl);
+> +GEN_RVP_R_INLINE(sub16, tcg_gen_vec_sub16_tl, tcg_gen_sub_tl);
+> +
+> +/* Out of line helpers for R format packed instructions */
+> +static inline bool
+> +r_ool(DisasContext *ctx, arg_r *a, void (* fn)(TCGv, TCGv_ptr, TCGv, TCGv))
+> +{
+> +    TCGv src1, src2, dst;
+> +    if (!has_ext(ctx, RVP)) {
+> +        return false;
+> +    }
+> +
+> +    src1 = tcg_temp_new();
+> +    src2 = tcg_temp_new();
+> +    dst = tcg_temp_new();
+> +
+> +    gen_get_gpr(src1, a->rs1);
+> +    gen_get_gpr(src2, a->rs2);
+> +    fn(dst, cpu_env, src1, src2);
+> +    gen_set_gpr(a->rd, dst);
+> +
+> +    tcg_temp_free(src1);
+> +    tcg_temp_free(src2);
+> +    tcg_temp_free(dst);
+> +    return true;
+> +}
+> +
+> +#define GEN_RVP_R_OOL(NAME)                            \
+> +static bool trans_##NAME(DisasContext *s, arg_r *a)    \
+> +{                                                      \
+> +    return r_ool(s, a, gen_helper_##NAME);             \
+> +}
+> +
+> +GEN_RVP_R_OOL(radd16);
+> +GEN_RVP_R_OOL(uradd16);
+> +GEN_RVP_R_OOL(kadd16);
+> +GEN_RVP_R_OOL(ukadd16);
+> +GEN_RVP_R_OOL(rsub16);
+> +GEN_RVP_R_OOL(ursub16);
+> +GEN_RVP_R_OOL(ksub16);
+> +GEN_RVP_R_OOL(uksub16);
+> +GEN_RVP_R_OOL(cras16);
+> +GEN_RVP_R_OOL(rcras16);
+> +GEN_RVP_R_OOL(urcras16);
+> +GEN_RVP_R_OOL(kcras16);
+> +GEN_RVP_R_OOL(ukcras16);
+> +GEN_RVP_R_OOL(crsa16);
+> +GEN_RVP_R_OOL(rcrsa16);
+> +GEN_RVP_R_OOL(urcrsa16);
+> +GEN_RVP_R_OOL(kcrsa16);
+> +GEN_RVP_R_OOL(ukcrsa16);
+> +GEN_RVP_R_OOL(stas16);
+> +GEN_RVP_R_OOL(rstas16);
+> +GEN_RVP_R_OOL(urstas16);
+> +GEN_RVP_R_OOL(kstas16);
+> +GEN_RVP_R_OOL(ukstas16);
+> +GEN_RVP_R_OOL(stsa16);
+> +GEN_RVP_R_OOL(rstsa16);
+> +GEN_RVP_R_OOL(urstsa16);
+> +GEN_RVP_R_OOL(kstsa16);
+> +GEN_RVP_R_OOL(ukstsa16);
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index d5e0bc93ea..cc169e1b2c 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -17,6 +17,7 @@ riscv_ss.add(files(
+>    'op_helper.c',
+>    'vector_helper.c',
+>    'bitmanip_helper.c',
+> +  'packed_helper.c',
+>    'translate.c',
+>  ))
+>
+> diff --git a/target/riscv/packed_helper.c b/target/riscv/packed_helper.c
+> new file mode 100644
+> index 0000000000..b84abaaf25
+> --- /dev/null
+> +++ b/target/riscv/packed_helper.c
+> @@ -0,0 +1,354 @@
+> +/*
+> + * RISC-V P Extension Helpers for QEMU.
+> + *
+> + * Copyright (c) 2021 T-Head Semiconductor Co., Ltd. All rights reserved.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +#include "qemu/osdep.h"
+> +#include "cpu.h"
+> +#include "exec/exec-all.h"
+> +#include "exec/helper-proto.h"
+> +#include "exec/cpu_ldst.h"
+> +#include "fpu/softfloat.h"
+> +#include <math.h>
+> +#include "internals.h"
+> +
+> +/*
+> + *** SIMD Data Processing Instructions
+> + */
+> +
+> +/* 16-bit Addition & Subtraction Instructions */
+> +typedef void PackedFn3i(CPURISCVState *, void *, void *, void *, uint8_t);
+> +
+> +/* Define a common function to loop elements in packed register */
+> +static inline target_ulong
+> +rvpr(CPURISCVState *env, target_ulong a, target_ulong b,
+> +     uint8_t step, uint8_t size, PackedFn3i *fn)
+> +{
+> +    int i, passes = sizeof(target_ulong) / size;
+> +    target_ulong result = 0;
+> +
+> +    for (i = 0; i < passes; i += step) {
+> +        fn(env, &result, &a, &b, i);
+> +    }
+> +    return result;
+> +}
+> +
+> +#define RVPR(NAME, STEP, SIZE)                                  \
+> +target_ulong HELPER(NAME)(CPURISCVState *env, target_ulong a,   \
+> +                          target_ulong b)                       \
+> +{                                                               \
+> +    return rvpr(env, a, b, STEP, SIZE, (PackedFn3i *)do_##NAME);\
+> +}
+> +
+> +static inline int32_t hadd32(int32_t a, int32_t b)
+> +{
+> +    return ((int64_t)a + b) >> 1;
+> +}
+> +
+> +static inline void do_radd16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = hadd32(a[i], b[i]);
+> +}
+> +
+> +RVPR(radd16, 1, 2);
+> +
+> +static inline uint32_t haddu32(uint32_t a, uint32_t b)
+> +{
+> +    return ((uint64_t)a + b) >> 1;
+> +}
+> +
+> +static inline void do_uradd16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = haddu32(a[i], b[i]);
+> +}
+> +
+> +RVPR(uradd16, 1, 2);
+> +
+> +static inline void do_kadd16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = sadd16(env, 0, a[i], b[i]);
+> +}
+> +
+> +RVPR(kadd16, 1, 2);
+> +
+> +static inline void do_ukadd16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = saddu16(env, 0, a[i], b[i]);
+> +}
+> +
+> +RVPR(ukadd16, 1, 2);
+> +
+> +static inline int32_t hsub32(int32_t a, int32_t b)
+> +{
+> +    return ((int64_t)a - b) >> 1;
+> +}
+> +
+> +static inline int64_t hsub64(int64_t a, int64_t b)
+> +{
+> +    int64_t res = a - b;
+> +    int64_t over = (res ^ a) & (a ^ b) & INT64_MIN;
+> +
+> +    /* With signed overflow, bit 64 is inverse of bit 63. */
+> +    return (res >> 1) ^ over;
+> +}
+> +
+> +static inline void do_rsub16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = hsub32(a[i], b[i]);
+> +}
+> +
+> +RVPR(rsub16, 1, 2);
+> +
+> +static inline uint64_t hsubu64(uint64_t a, uint64_t b)
+> +{
+> +    return (a - b) >> 1;
+> +}
+> +
+> +static inline void do_ursub16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = hsubu64(a[i], b[i]);
+> +}
+> +
+> +RVPR(ursub16, 1, 2);
+> +
+> +static inline void do_ksub16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = ssub16(env, 0, a[i], b[i]);
+> +}
+> +
+> +RVPR(ksub16, 1, 2);
+> +
+> +static inline void do_uksub16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[i] = ssubu16(env, 0, a[i], b[i]);
+> +}
+> +
+> +RVPR(uksub16, 1, 2);
+> +
+> +static inline void do_cras16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = a[H2(i)] - b[H2(i + 1)];
+> +    d[H2(i + 1)] = a[H2(i + 1)] + b[H2(i)];
+> +}
+> +
+> +RVPR(cras16, 2, 2);
+> +
+> +static inline void do_rcras16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hsub32(a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = hadd32(a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(rcras16, 2, 2);
+> +
+> +static inline void do_urcras16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hsubu64(a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = haddu32(a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(urcras16, 2, 2);
+> +
+> +static inline void do_kcras16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = ssub16(env, 0, a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = sadd16(env, 0, a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(kcras16, 2, 2);
+> +
+> +static inline void do_ukcras16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = ssubu16(env, 0, a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = saddu16(env, 0, a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(ukcras16, 2, 2);
+> +
+> +static inline void do_crsa16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = a[H2(i)] + b[H2(i + 1)];
+> +    d[H2(i + 1)] = a[H2(i + 1)] - b[H2(i)];
+> +}
+> +
+> +RVPR(crsa16, 2, 2);
+> +
+> +static inline void do_rcrsa16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hadd32(a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = hsub32(a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(rcrsa16, 2, 2);
+> +
+> +static inline void do_urcrsa16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = haddu32(a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = hsubu64(a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(urcrsa16, 2, 2);
+> +
+> +static inline void do_kcrsa16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = sadd16(env, 0, a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = ssub16(env, 0, a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(kcrsa16, 2, 2);
+> +
+> +static inline void do_ukcrsa16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = saddu16(env, 0, a[H2(i)], b[H2(i + 1)]);
+> +    d[H2(i + 1)] = ssubu16(env, 0, a[H2(i + 1)], b[H2(i)]);
+> +}
+> +
+> +RVPR(ukcrsa16, 2, 2);
+> +
+> +static inline void do_stas16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = a[H2(i)] - b[H2(i)];
+> +    d[H2(i + 1)] = a[H2(i + 1)] + b[H2(i + 1)];
+> +}
+> +
+> +RVPR(stas16, 2, 2);
+> +
+> +static inline void do_rstas16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hsub32(a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = hadd32(a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(rstas16, 2, 2);
+> +
+> +static inline void do_urstas16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hsubu64(a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = haddu32(a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(urstas16, 2, 2);
+> +
+> +static inline void do_kstas16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = ssub16(env, 0, a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = sadd16(env, 0, a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(kstas16, 2, 2);
+> +
+> +static inline void do_ukstas16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = ssubu16(env, 0, a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = saddu16(env, 0, a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(ukstas16, 2, 2);
+> +
+> +static inline void do_stsa16(CPURISCVState *env, void *vd, void *va,
+> +                             void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = a[H2(i)] + b[H2(i)];
+> +    d[H2(i + 1)] = a[H2(i + 1)] - b[H2(i + 1)];
+> +}
+> +
+> +RVPR(stsa16, 2, 2);
+> +
+> +static inline void do_rstsa16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = hadd32(a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = hsub32(a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(rstsa16, 2, 2);
+> +
+> +static inline void do_urstsa16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = haddu32(a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = hsubu64(a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(urstsa16, 2, 2);
+> +
+> +static inline void do_kstsa16(CPURISCVState *env, void *vd, void *va,
+> +                              void *vb, uint8_t i)
+> +{
+> +    int16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = sadd16(env, 0, a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = ssub16(env, 0, a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(kstsa16, 2, 2);
+> +
+> +static inline void do_ukstsa16(CPURISCVState *env, void *vd, void *va,
+> +                               void *vb, uint8_t i)
+> +{
+> +    uint16_t *d = vd, *a = va, *b = vb;
+> +    d[H2(i)] = saddu16(env, 0, a[H2(i)], b[H2(i)]);
+> +    d[H2(i + 1)] = ssubu16(env, 0, a[H2(i + 1)], b[H2(i + 1)]);
+> +}
+> +
+> +RVPR(ukstsa16, 2, 2);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 0e6ede4d71..51b144e9be 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -908,6 +908,7 @@ static bool gen_unary(DisasContext *ctx, arg_r2 *a,
+>  #include "insn_trans/trans_rvh.c.inc"
+>  #include "insn_trans/trans_rvv.c.inc"
+>  #include "insn_trans/trans_rvb.c.inc"
+> +#include "insn_trans/trans_rvp.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
+>
+>  /* Include the auto-generated decoder for 16 bit insn */
 > --
 > 2.17.1
 >
