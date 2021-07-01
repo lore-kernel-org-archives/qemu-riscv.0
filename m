@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lylUi-0006qg-2o
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Jun 2021 21:27:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45280)
+	id 1lylXY-0008W4-3M
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Jun 2021 21:30:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45944)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lylUe-0006nw-UM; Wed, 30 Jun 2021 21:27:52 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:37628)
+ id 1lylXW-0008Vc-E4; Wed, 30 Jun 2021 21:30:50 -0400
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:37650)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1lylUb-0005sP-R4; Wed, 30 Jun 2021 21:27:52 -0400
-Received: by mail-il1-x12a.google.com with SMTP id i13so4862850ilu.4;
- Wed, 30 Jun 2021 18:27:48 -0700 (PDT)
+ id 1lylXU-0007fW-Dh; Wed, 30 Jun 2021 21:30:50 -0400
+Received: by mail-il1-x132.google.com with SMTP id i13so4867969ilu.4;
+ Wed, 30 Jun 2021 18:30:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MGugVe3FmRzC0IMdUAvn2yBv3VmysespYls7FeKoAIY=;
- b=CMb4333OD7HsBVy9ZPsRRqGF9POUelEtRC0Y7f67vY0FdBkGc/CtZN9FB6FTnIOdJf
- nvYKPFkVDtvJUhl+b+oJkIMs3jxsGanRX1swozn7S9oVj5kJiznl7qVG9uxOwQa4c+3w
- MdNMbaVi43GWubDxHpxDUoMmIMxAZ7lfREfzL+itCSeHbrXqJ0tJQIRB6qk3A2mpuwJW
- uRuslM58C18vQEmDdaKPeRGIfI82k3jRFVBRnaN1syINuOWxrT7x/lka0HWbtdRQjcqm
- RwvptRLB5Ur1xQRuXwGNXC00k+BS4H8D3d9HhyrOa41rxGTvO+aNiSCyDb+xOkOnmGe+
- Z2Cg==
+ :cc; bh=kVEczltBvKdboLpIh/D87dPz2NT7/sXIHyPZqxVNB98=;
+ b=HbQk/WQxdlw8asLvMTpqww4LU+aHcwlsEJac4fa9U/i7+S0EV9CfA1KowjjZqIh4wD
+ 6cUqzF5JXmunSTPWTIEFfrgEbxJUkaaKYj0X1toJOryUVbynOT9MQtkrez8zG9HXqVPu
+ LHtRy5hsnV6QWCK3A/6vElX0/HL7lQyYQvV66J8+o6ZsStzoZcl4WtStLdCb9dSkubRU
+ EeO0+uCNgJIAry9RUI8rgIpEDci4KzGKEyvlt6T2FSw7XozHbfwYgh4OOEpqhoF8NssL
+ U0x4REMbCiWz1obFTyGCs4NgrafZ0QohX9MtOxPVzEs4xUuieacZmakJvPWSXVt3MyGp
+ A8xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=MGugVe3FmRzC0IMdUAvn2yBv3VmysespYls7FeKoAIY=;
- b=UbC+DK3UGDY/Qeavw11Tu11Gbj7+/StgobGWSYx61Gw0sYQEKDVPiF7icMttxzLboa
- 4msLbGoLbAgwudilI88SEon1KvKnSbfkzPxQzCoUP27+0HwOctIizcwhB188NQCBCZfT
- yt252wZ+AGpxBMc0lnQe4meM1ewBgBnIz63m4VJuTzCHCAXxqZqbbvkCPrcfxNKF0Ge4
- uXvh8mD45byd58lt6OKCZF73wQER8DYXi7rdzzXeEHruOjWLbSgC6vbpbOnHkOV6Ld2/
- qTC8lKjb5DUsqiyplYt7seeQp3NY02a1zI1QcbF4ux6EJHbJWYrYaEaoQQf9jZP2MwHe
- kLmQ==
-X-Gm-Message-State: AOAM530HPjC+2R5UB6Oc4OrXZCDXcDRIMYwjc9TmEDl7keqn2rIHIbmT
- ACSUC1l2miQgu9Z7oIQuz9YV5fn4NZuGrHZVs5w=
-X-Google-Smtp-Source: ABdhPJwfV8tuT8hpl703rxdnQZPjKOYmUFG3o4gRp03lBxQ1qjUI/+XOXx15CWoXSDuhR1out1NxeaBxE82XzhTlzk4=
-X-Received: by 2002:a05:6e02:184a:: with SMTP id
- b10mr3171052ilv.40.1625102867737; 
- Wed, 30 Jun 2021 18:27:47 -0700 (PDT)
+ bh=kVEczltBvKdboLpIh/D87dPz2NT7/sXIHyPZqxVNB98=;
+ b=OwzepgMJN2ioc0YbrVFJEMrCDR1JeRUa9yxCjyr8MSYo78+rjj/PtsXnELg3xbg7mL
+ kQQMfR+Euviy458nCtiPHT0wqFQB01xLeEVyakbTiDoMvEoQhnKPICmo8mPzN8VYxZZu
+ x70oRfNX4woXer35vhpDzgMTbyxq51lVA0uAhu8FctRhb7LXehYpRuZI1Of3+dzSPNxF
+ hy68Bj6YCCtahQFjSwSKmgwlazw5h7Gq1cH9lgUgl7ylTROJxHw2ycA77VZAFtuxoGrr
+ uGlJ4rb9vIfEL9E4CPvsjbna0DtzrC/01vOyRzY+ug4xDU6FxXNpew4ugYbcFEJ9ZOTk
+ ilaA==
+X-Gm-Message-State: AOAM530UpVP1qSoFII18stu+1WCGRwrwO91ZilVeAEEDqjK799r8TtJk
+ k0D5Ca7TUUEIa6JqqnuZSzFSd6LaIA+CmTJXyTI=
+X-Google-Smtp-Source: ABdhPJw8Sh4rrSrqV67OI6oQDR1Hw5owe5qAWu3hObRnfiR4Z+QFaxEZG+fGNXueG4HNM26Y1cpZtVubUT18braod1Q=
+X-Received: by 2002:a92:c886:: with SMTP id w6mr27752241ilo.227.1625103046630; 
+ Wed, 30 Jun 2021 18:30:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210627115716.3552-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210627115716.3552-1-bmeng.cn@gmail.com>
+References: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210624105521.3964-1-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 1 Jul 2021 11:27:21 +1000
-Message-ID: <CAKmqyKP6ZW=LYY7wHxk2Gxa_0s8z5xFhG=JdoX2SqJGLW6pAKA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: pmp: Fix some typos
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Thu, 1 Jul 2021 11:30:20 +1000
+Message-ID: <CAKmqyKNw2Vr=fqGqnGBRF1mF6FAk-qn=ecNuSdrWAv1rGro7hw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/37] target/riscv: support packed extension v0.9.4
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,77 +71,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2021 01:27:53 -0000
+X-List-Received-Date: Thu, 01 Jul 2021 01:30:50 -0000
 
-On Sun, Jun 27, 2021 at 9:57 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Thu, Jun 24, 2021 at 9:14 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> %s/CSP/CSR
-> %s/thie/the
+> This patchset implements the packed extension for RISC-V on QEMU.
 >
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> You can also find this patch set on my
+> repo(https://github.com/romanheros/qemu.git branch:packed-upstream-v3).
+>
+> Features:
+> * support specification packed extension
+>   v0.9.4(https://github.com/riscv/riscv-p-spec/)
+> * support basic packed extension.
+> * support Zpsoperand.
 
-Thanks!
-
-Applied to riscv-to-apply.next
+There is now a 0.9.5, do you have plans to support that?
 
 Alistair
 
-> ---
 >
->  target/riscv/pmp.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+> v3:
+> * split 32 bit vector operations.
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 82ed020b10..54abf42583 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -456,7 +456,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->  }
+> v2:
+> * remove all the TARGET_RISCV64 macro.
+> * use tcg_gen_vec_* to accelabrate.
+> * update specficication to latest v0.9.4
+> * fix kmsxda32, kmsda32,kslra32,smal
 >
->  /*
-> - * Handle a write to a pmpcfg CSP
-> + * Handle a write to a pmpcfg CSR
->   */
->  void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
->      target_ulong val)
-> @@ -483,7 +483,7 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+> LIU Zhiwei (37):
+>   target/riscv: implementation-defined constant parameters
+>   target/riscv: Make the vector helper functions public
+>   target/riscv: 16-bit Addition & Subtraction Instructions
+>   target/riscv: 8-bit Addition & Subtraction Instruction
+>   target/riscv: SIMD 16-bit Shift Instructions
+>   target/riscv: SIMD 8-bit Shift Instructions
+>   target/riscv: SIMD 16-bit Compare Instructions
+>   target/riscv: SIMD 8-bit Compare Instructions
+>   target/riscv: SIMD 16-bit Multiply Instructions
+>   target/riscv: SIMD 8-bit Multiply Instructions
+>   target/riscv: SIMD 16-bit Miscellaneous Instructions
+>   target/riscv: SIMD 8-bit Miscellaneous Instructions
+>   target/riscv: 8-bit Unpacking Instructions
+>   target/riscv: 16-bit Packing Instructions
+>   target/riscv: Signed MSW 32x32 Multiply and Add Instructions
+>   target/riscv: Signed MSW 32x16 Multiply and Add Instructions
+>   target/riscv: Signed 16-bit Multiply 32-bit Add/Subtract Instructions
+>   target/riscv: Signed 16-bit Multiply 64-bit Add/Subtract Instructions
+>   target/riscv: Partial-SIMD Miscellaneous Instructions
+>   target/riscv: 8-bit Multiply with 32-bit Add Instructions
+>   target/riscv: 64-bit Add/Subtract Instructions
+>   target/riscv: 32-bit Multiply 64-bit Add/Subtract Instructions
+>   target/riscv: Signed 16-bit Multiply with 64-bit Add/Subtract
+>     Instructions
+>   target/riscv: Non-SIMD Q15 saturation ALU Instructions
+>   target/riscv: Non-SIMD Q31 saturation ALU Instructions
+>   target/riscv: 32-bit Computation Instructions
+>   target/riscv: Non-SIMD Miscellaneous Instructions
+>   target/riscv: RV64 Only SIMD 32-bit Add/Subtract Instructions
+>   target/riscv: RV64 Only SIMD 32-bit Shift Instructions
+>   target/riscv: RV64 Only SIMD 32-bit Miscellaneous Instructions
+>   target/riscv: RV64 Only SIMD Q15 saturating Multiply Instructions
+>   target/riscv: RV64 Only 32-bit Multiply Instructions
+>   target/riscv: RV64 Only 32-bit Multiply & Add Instructions
+>   target/riscv: RV64 Only 32-bit Parallel Multiply & Add Instructions
+>   target/riscv: RV64 Only Non-SIMD 32-bit Shift Instructions
+>   target/riscv: RV64 Only 32-bit Packing Instructions
+>   target/riscv: configure and turn on packed extension from command line
 >
+>  target/riscv/cpu.c                      |   34 +
+>  target/riscv/cpu.h                      |    6 +
+>  target/riscv/helper.h                   |  330 ++
+>  target/riscv/insn32.decode              |  370 +++
+>  target/riscv/insn_trans/trans_rvp.c.inc | 1155 +++++++
+>  target/riscv/internals.h                |   50 +
+>  target/riscv/meson.build                |    1 +
+>  target/riscv/packed_helper.c            | 3851 +++++++++++++++++++++++
+>  target/riscv/translate.c                |    3 +
+>  target/riscv/vector_helper.c            |   82 +-
+>  10 files changed, 5824 insertions(+), 58 deletions(-)
+>  create mode 100644 target/riscv/insn_trans/trans_rvp.c.inc
+>  create mode 100644 target/riscv/packed_helper.c
 >
->  /*
-> - * Handle a read from a pmpcfg CSP
-> + * Handle a read from a pmpcfg CSR
->   */
->  target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
->  {
-> @@ -502,7 +502,7 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
->
->
->  /*
-> - * Handle a write to a pmpaddr CSP
-> + * Handle a write to a pmpaddr CSR
->   */
->  void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->      target_ulong val)
-> @@ -540,7 +540,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->
->
->  /*
-> - * Handle a read from a pmpaddr CSP
-> + * Handle a read from a pmpaddr CSR
->   */
->  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index)
->  {
-> @@ -593,7 +593,7 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
->
->  /*
->   * Calculate the TLB size if the start address or the end address of
-> - * PMP entry is presented in thie TLB page.
-> + * PMP entry is presented in the TLB page.
->   */
->  static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
->                                       target_ulong tlb_sa, target_ulong tlb_ea)
 > --
-> 2.25.1
+> 2.17.1
 >
 >
 
