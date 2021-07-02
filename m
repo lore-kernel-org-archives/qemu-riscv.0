@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1lzBb8-0004vh-VD
-	for mharc-qemu-riscv@gnu.org; Fri, 02 Jul 2021 01:20:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58690)
+	id 1lzBbc-0005Tl-8d
+	for mharc-qemu-riscv@gnu.org; Fri, 02 Jul 2021 01:20:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=8103b7a7b=alistair.francis@wdc.com>)
- id 1lzBb6-0004sB-Pc; Fri, 02 Jul 2021 01:20:16 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:49442)
+ id 1lzBbZ-0005QA-Nk; Fri, 02 Jul 2021 01:20:46 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:22401)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=8103b7a7b=alistair.francis@wdc.com>)
- id 1lzBb4-0000nJ-JQ; Fri, 02 Jul 2021 01:20:16 -0400
+ id 1lzBbV-000186-QU; Fri, 02 Jul 2021 01:20:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1625203216; x=1656739216;
+ t=1625203241; x=1656739241;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=L5/2XTtnypOpyLaq2mlybZl4M7VFrYo69Jw/vMdSO24=;
- b=FATVIwUylgODBeD5dCxDFQCNk5imMgV6RTz1yfxZ1frw/ZVnTxFXJvwu
- F4w/jkEH+n3i6PNA9zrDmzo19P1lit8zOUwIKP22AWb8t0/koJcnR0jnp
- z5QmLhgB3kZI8BmeXMYhYlY7yU3OBZZ1e7fclL6tQkKhGEQVvWW9hLoFW
- CEd1kixaSDuBDjnxWYAA9G5OnsgnrcESFf1w1rEXVDuvDKEh1eiprdFwV
- ByceCy28WwzZLKBQBWZ3O6kX3Ucmz1qyYv+pE48BTGWlqkJVi9/l4nMYW
- iFBLbIqbobC+FARlY3DcNWmB9CcD1WhkmDDWk58OmWDzHU5DPYsViWk1y g==;
-IronPort-SDR: jUlhmDbu5rQqeoxygXIN9OK+jRFYbbzH5uEHa6pLiKYGoWx0uozc7kjnobebBsD33PsmHmBAn1
- IO6BjutUwnV+0A/r4uFUevjLtNIn/m4SjErJOTMx13t0VomXGozDIln+dF9fpBJx8T+9NC2sXg
- WHGZEScYQQHIDZfPz4sqmNdta9EGjh0V6Qu47LhFg8qko1CPASaNdUONL6tBZcrpW/OH30yBoT
- i87gpNkJulpfNaydlw5U8a8ZsQ6SJ7JZjOMpqnWggz1z/10OOr9cuIVT+TUp5bVDOVVuo2WufY
- SuM=
-X-IronPort-AV: E=Sophos;i="5.83,316,1616428800"; d="scan'208";a="277327945"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ bh=AOJ/PADTDzw72zRUjnPf2wU1GJiBwuccU7jFDcejIEM=;
+ b=STLfSMo2tECirhe//EoLCUujVkpDE9ahpDoKIuMV7lJglrWSQy9fxSNk
+ kTfXxD1Bh3YaelrrHkvAY1WXa0iFhKtCE3Un03cJDb1drRaiKeW+m9q9W
+ IFAvqvApEeNa46GcDLdmF64ct5Ybk2SJqc9bKAkM/LXrsnMIxkTsH8XuH
+ Ia3s8QvK4EbPIy7f/9CW+kd5zxah0xGHz5ntJcmZcpYuDj21EIVvfFMM/
+ Hb5hFzb9pBRZlu67WMXeZDnAwss0OXr4PFg3ZTueqMAutKYwuKabBAIri
+ np8b8zSbzLQR2ew5v0E7hyL3uGIWOpncAb3HsChIT5SUe+1jSoM5E21uy w==;
+IronPort-SDR: +O9+Ri9PM+rwk7+runuqiWFJbrE9k3f/APaqAEUsSLSCoeQxcHEn7tOdd7ZYHACsjh68b3ZeWH
+ Mgx6+NmUgVzBjzADOYXATPiKFaCwdM7Vb1AZ4fhbNLckOg2O00iXAC05g2laqXWtCx2AiRfkVv
+ j9Hp6GxVs0PppSFVV+fMjq8w6MfGAyE9i38HXNNHxJtP42puw0ARocTmG9uaoCHH+tIaz6v5D9
+ e+Z9HN2VeexWagktg8/93IEkQLXBaTuinHGxngn5sp8p94vd2Og6bLQsmDlU2Q1LQJ0JSkBstD
+ gBE=
+X-IronPort-AV: E=Sophos;i="5.83,316,1616428800"; d="scan'208";a="178330334"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2021 13:20:12 +0800
-IronPort-SDR: DU4+55IX0eTn61WaEOi3WcYFRN18PlA3TDTez/AfQ24M+uJCI5BzO5Cd8u0RS6T4sqyQHgR8Ys
- jXl6fXBeAXIfhllrcvPAuJca3U3sV/zg1sokuaF42AWTpgwZf0fBtdXF0aJY6ZRx9ibw5Zv+Iu
- a5z0mcHXxnCyR+0rqVj+Vb4LX1AE/WWsuyT3AvflKMEI2kB5AHwHxUoqwA6RIsJzN7bhlWrdf2
- x9Bz/8srGOij5qnR7FTDpNlwKEL5pwO3OblmIXtO6SxBKGFPKITwSiP81Ek1Bro7V31SqbstsD
- hDJgGFba7R06HrGXojluQ8xO
+ by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2021 13:20:37 +0800
+IronPort-SDR: yAbc0jtdqawQL26L2wl2SGwcm5v2FwSzaOup90gyMYYjOY+NiO7vAgRx4guovzxrNzuaiAJzsz
+ EoWtTKaGIuYqrUz/z3tmMC52b7EQTALnAg3X8BHWPEleZ+u0iCs5MFVKGTW6r8EPbO/64M2B7o
+ rtWkJd5YatWtrx7f/UNzpLQx+plnp0v5OH0oQHXLGo6tq5HYDUYv6vYNqnpeouR2NgPAUhnysL
+ DbbUt4uGXm0YnsbjM65vOMaReI7RCGj9kRcH8IegaO69d/v15R7Zt8cBTVE82ozE/egLr8FND0
+ 7HdvBgVi+MBhEs8sdNcI3fxo
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jul 2021 21:58:34 -0700
-IronPort-SDR: 9muDPsHM39LlqiDqcxlOKgmhODvcJV18HxCqwOjfQvw5J8HwdyeQ94RoYmhm6KJcqrN7MrXd0l
- XY0QsrCAL8sgwRZ/T2xAh7wrZiyEZ9D9+5oKzues/TihdpBwKJvZZHB+wWbyN2HBkynuSyjACA
- DSQ5rBrUDHKB16gc03qHdya49ePLV4TFxSb3OfWiek+nuZqteUIptpoQKlHm12YGmAJaA4jnAL
- E0/36fXsN2NYb69caS386+jSGaVUXRvXn0GFMwwROb3qu7GsEBJDjNt9kHWKt0blZ8/DmVaB2W
- NjA=
+ 01 Jul 2021 21:59:01 -0700
+IronPort-SDR: RRNQXL/RmS5sCYMDuG4KymnHipZP2YWOlWwaqzRfieYKwWGcnEyZUr6hxRBIsFIsk7k2XO5Mfa
+ Q278tRbLdzBvt4wnx4H6LkFoaPwM5bWM5H0o0LvsJ34Hqjz1zcHm7pcxv+fJRtSD0hzlfhaP/J
+ IWQ1U9+CXzrNfe5dLq3cHczyiVRLivalESXym4juoApTYf9BheOxYy3bm22CCejdUTrRemfitT
+ 9tX8VNILfWUWxoL+Cmpf/s2RBMogirVQWObAgI4w2dx1wspflxY/2UtMxaJvFBlMUPUn9jX8jC
+ 2Ho=
 WDCIronportException: Internal
 Received: from unknown (HELO localhost.localdomain) ([10.225.165.102])
- by uls-op-cesaip02.wdc.com with ESMTP; 01 Jul 2021 22:20:07 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 01 Jul 2021 22:20:33 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 2/3] hw/riscv: opentitan: Add the unimplement
- rv_core_ibex_peri
-Date: Fri,  2 Jul 2021 15:19:49 +1000
-Message-Id: <2675adc73be8ed35dd9d36198c519e4f46b285c2.1625202999.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 3/3] hw/riscv: opentitan: Add the flash alias
+Date: Fri,  2 Jul 2021 15:20:14 +1000
+Message-Id: <ee1dfb6bffc5e7f59da0b7de549d5f8b7eccad2e.1625202999.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1625202999.git.alistair.francis@wdc.com>
 References: <cover.1625202999.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=68.232.143.124;
+Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=8103b7a7b=alistair.francis@wdc.com;
- helo=esa2.hgst.iphmx.com
+ helo=esa3.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -84,47 +83,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2021 05:20:17 -0000
+X-List-Received-Date: Fri, 02 Jul 2021 05:20:46 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- include/hw/riscv/opentitan.h | 1 +
- hw/riscv/opentitan.c         | 3 +++
- 2 files changed, 4 insertions(+)
+ include/hw/riscv/opentitan.h | 2 ++
+ hw/riscv/opentitan.c         | 6 ++++++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index 86cceef698..a488f5e8ec 100644
+index a488f5e8ec..9f93bebdac 100644
 --- a/include/hw/riscv/opentitan.h
 +++ b/include/hw/riscv/opentitan.h
-@@ -81,6 +81,7 @@ enum {
-     IBEX_DEV_ALERT_HANDLER,
-     IBEX_DEV_NMI_GEN,
-     IBEX_DEV_OTBN,
-+    IBEX_DEV_PERI,
+@@ -40,6 +40,7 @@ struct LowRISCIbexSoCState {
+ 
+     MemoryRegion flash_mem;
+     MemoryRegion rom;
++    MemoryRegion flash_alias;
  };
  
- enum {
+ typedef struct OpenTitanState {
+@@ -54,6 +55,7 @@ enum {
+     IBEX_DEV_ROM,
+     IBEX_DEV_RAM,
+     IBEX_DEV_FLASH,
++    IBEX_DEV_FLASH_VIRTUAL,
+     IBEX_DEV_UART,
+     IBEX_DEV_GPIO,
+     IBEX_DEV_SPI,
 diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index c5a7e3bacb..933c211b11 100644
+index 933c211b11..36a41c8b5b 100644
 --- a/hw/riscv/opentitan.c
 +++ b/hw/riscv/opentitan.c
-@@ -58,6 +58,7 @@ static const MemMapEntry ibex_memmap[] = {
-     [IBEX_DEV_ALERT_HANDLER] =  {  0x411b0000,  0x1000  },
+@@ -59,6 +59,7 @@ static const MemMapEntry ibex_memmap[] = {
      [IBEX_DEV_NMI_GEN] =        {  0x411c0000,  0x1000  },
      [IBEX_DEV_OTBN] =           {  0x411d0000,  0x10000 },
-+    [IBEX_DEV_PERI] =           {  0x411f0000,  0x10000 },
+     [IBEX_DEV_PERI] =           {  0x411f0000,  0x10000 },
++    [IBEX_DEV_FLASH_VIRTUAL] =  {  0x80000000,  0x80000 },
  };
  
  static void opentitan_board_init(MachineState *machine)
-@@ -217,6 +218,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-         memmap[IBEX_DEV_NMI_GEN].base, memmap[IBEX_DEV_NMI_GEN].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.otbn",
-         memmap[IBEX_DEV_OTBN].base, memmap[IBEX_DEV_OTBN].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.peri",
-+        memmap[IBEX_DEV_PERI].base, memmap[IBEX_DEV_PERI].size);
- }
+@@ -134,8 +135,13 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     /* Flash memory */
+     memory_region_init_rom(&s->flash_mem, OBJECT(dev_soc), "riscv.lowrisc.ibex.flash",
+                            memmap[IBEX_DEV_FLASH].size, &error_fatal);
++    memory_region_init_alias(&s->flash_alias, OBJECT(dev_soc),
++                             "riscv.lowrisc.ibex.flash_virtual", &s->flash_mem, 0,
++                             memmap[IBEX_DEV_FLASH_VIRTUAL].size);
+     memory_region_add_subregion(sys_mem, memmap[IBEX_DEV_FLASH].base,
+                                 &s->flash_mem);
++    memory_region_add_subregion(sys_mem, memmap[IBEX_DEV_FLASH_VIRTUAL].base,
++                                &s->flash_alias);
  
- static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
+     /* PLIC */
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->plic), errp)) {
 -- 
 2.31.1
 
