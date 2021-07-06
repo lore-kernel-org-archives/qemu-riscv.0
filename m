@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m0hij-0007dg-Ce
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Jul 2021 05:50:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39502)
+	id 1m0iH1-0006qg-1v
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Jul 2021 06:25:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47666)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m0hih-0007ZD-9n; Tue, 06 Jul 2021 05:50:23 -0400
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629]:46928)
+ id 1m0iGy-0006il-Oz; Tue, 06 Jul 2021 06:25:48 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d]:44966)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m0hif-0003Yc-8r; Tue, 06 Jul 2021 05:50:23 -0400
-Received: by mail-ej1-x629.google.com with SMTP id c17so33164822ejk.13;
- Tue, 06 Jul 2021 02:50:20 -0700 (PDT)
+ id 1m0iGv-0007Rs-Rx; Tue, 06 Jul 2021 06:25:48 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id he13so14701731ejc.11;
+ Tue, 06 Jul 2021 03:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=fY7hbtR5nAg5Ha144ZKkJXuGDOU3o/3kVizCyviJB3U=;
- b=ak5MDuIwGL5EVE8oM0DohVr915EWylktRr1XD6DqMrlfjOEQjWWbs+RksZcTV/Q8M3
- 29PXgBl8WGlZKaByFui+S1iGm8svHUd9RoPufNK2Wz6iADr/9FrPfElIpiT3XQLkVr4M
- FGAsKppuZ86MKp2SVox4bEhVD2PMYzmVIX6tY7W06aVdn5W3pVq0JzN5HD+CcqMri1Ri
- C3YfW/xITknsy0oaqiOEHzlR5b1T0k0plxKngv+mZORbrgK0YzeksJWRV27MtTkwK1RT
- 6r8Nkxg0PRR/6nexDRlFSBURCx6sPxvo1liSms+Uy7c+Fh561eYeNRRJA71TFNzs7jhI
- 3IbQ==
+ bh=W/JuhvKQLOnsIlTO9avFmh0xmJK3sQ76sT8oXdcL4bE=;
+ b=iiN8l1Fb4GHIFNMpF/TKUKCbEA7CuLsdTfvm2ps2EHac70HawujaflDLaOAA4Bg71w
+ W6chgNsuN2z1Tq4Hhyxt7RYwwgnJorD5TpHVzsMYoOHLx/ev0IhYVUkaQmk4izQOHaxp
+ hH3ILaCXE9qUuUGpgm8pmTl0FYr1ev/M8fyqTNl8AEXle2XW/YDaa9Uq/KRjC/PCBjdm
+ 7v8xlo2tfqwIvHXoQnns0+ji7dWhJ6LAP6CgFrGvbzZ9zVl9S8LbNFl45zdYGJuo/Q02
+ ZFrMT9l7SIVuq4WDHF6KaEAJ+OKL1W/2Pfkob0viVLHPqU19/2kS+L/OHz9po7rkXCtE
+ oHyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=fY7hbtR5nAg5Ha144ZKkJXuGDOU3o/3kVizCyviJB3U=;
- b=lao0vbCkySFbi+KlluI+z2gjWly4KvyF0ArTtq4WdKuMt+lVG/Am9ej3n86YweLTXM
- G4veNpu+3wkKK8ImXGp+u92MuiHG09Im+LH948xoGCKK+ZGUe9Huhyd6deW6pTdRzbAn
- dG4emkz67Sjhvd1cckm6GEpxBAp5cliortvNZCiMgrdD9IDbQSNAxs2bgdt00mKChHkg
- bVCDXHz5hwxD4DX9eNm+eXDksKD3FY3XC7ljRl+ZVkHbI5xDODd7iFU884pfkyxJX0nu
- we0tKTEFzAnzM1862h2lpbA1fh2I/yVum4/kuW3LLsktoKK3ShUkpPIyCWoxE3j9ZReE
- Cm1g==
-X-Gm-Message-State: AOAM531h9Edp/+N/belrNXIvKim48CBFerM63dKsSPeBMotXmRVXbKiu
- kVLDBygU4ebJpPgZG0GzwWs=
-X-Google-Smtp-Source: ABdhPJz3XrHV2K5CXsh6FeFb3nvAXGi7HPGPlsjonuTadqE+sxlbpmFUjSSs9aHoPzbMeGDPF7otNg==
-X-Received: by 2002:a17:906:7711:: with SMTP id
- q17mr10163109ejm.437.1625565017967; 
- Tue, 06 Jul 2021 02:50:17 -0700 (PDT)
+ bh=W/JuhvKQLOnsIlTO9avFmh0xmJK3sQ76sT8oXdcL4bE=;
+ b=LhBKDOViaBU6YZwOkXHKx0u+ljh16hzxUn5gAaZvigzjT+T8FEQFbWR2BrgO5MxYwJ
+ ej3iOt8IknSV9X+Zw7z658G+zZPYMnrP79zbuPtQueWK5NDGviM0RCZQkcQ+2vHklvqO
+ IsbufqEkb92eOTZw91LywfQnKq3NACo9d+ywvhSoj2/S7CxauI0IzmG8oPE0NPAMIvMf
+ HWFaDkjRnIA9DaXjQNKHiF0Rb20xVzbWgmegtZmEs6RV2DK7ks8uAUU69QbTFl1Txfia
+ iDc1BYnjqXCTIGvky66pOuOPn6x5gxhJxjeM6VX20uB52BmmhsARq7Tm3UUGVMi3K+R3
+ tQrA==
+X-Gm-Message-State: AOAM530dB8DdTxuqsv3ay5BdLymSBjrkcITJttcbFtj0J1NviTSlkwZl
+ KvaHzlS1MHMm0DUYqIy/SQ2gVl9joN4=
+X-Google-Smtp-Source: ABdhPJxQl7lILzUz+6bTtWO32MUhRK0dca/1gmMkJtWS9i2NfTzZbIXG+oJdTMmwBfnbi7eO3gLtSA==
+X-Received: by 2002:a17:906:1701:: with SMTP id
+ c1mr17866292eje.425.1625567143806; 
+ Tue, 06 Jul 2021 03:25:43 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com
  (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
- by smtp.gmail.com with ESMTPSA id s6sm5223106ejo.4.2021.07.06.02.50.13
+ by smtp.gmail.com with ESMTPSA id cq6sm5074158edb.1.2021.07.06.03.25.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jul 2021 02:50:17 -0700 (PDT)
+ Tue, 06 Jul 2021 03:25:43 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] docs/system: riscv: Update Microchip Icicle Kit for direct
- kernel boot
-Date: Tue,  6 Jul 2021 17:50:45 +0800
-Message-Id: <20210706095045.1917913-1-bmeng.cn@gmail.com>
+Subject: [PATCH] hw/riscv: sifive_u: Correct the CLINT timebase frequency
+Date: Tue,  6 Jul 2021 18:26:16 +0800
+Message-Id: <20210706102616.1922469-1-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::629;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x629.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,94 +74,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2021 09:50:23 -0000
+X-List-Received-Date: Tue, 06 Jul 2021 10:25:49 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This adds a new section in the documentation to demonstrate how to
-use the new direct kernel boot feature for Microchip Icicle Kit,
-other than the HSS bootflow, using an upstream U-Boot v2021.07 image
-as an example.
-
-It also updates the truth table to have a new '-dtb' column which is
-required by direct kernel boot.
+At present the CLINT timebase frequency is set to 10MHz on sifive_u,
+but on the real hardware the timebase frequency is 1Mhz.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- docs/system/riscv/microchip-icicle-kit.rst | 54 +++++++++++++++++++---
- 1 file changed, 47 insertions(+), 7 deletions(-)
+ hw/riscv/sifive_u.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-index 54ced661e3..817d2aec9c 100644
---- a/docs/system/riscv/microchip-icicle-kit.rst
-+++ b/docs/system/riscv/microchip-icicle-kit.rst
-@@ -47,13 +47,13 @@ The user provided DTB should have the following requirements:
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 273c86418c..e75ca38783 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -62,6 +62,9 @@
  
- QEMU follows below truth table to select which payload to execute:
+ #include <libfdt.h>
  
--=====  ========== =======
---bios     -kernel payload
--=====  ========== =======
--    N           N     HSS
--    Y  don't care     HSS
--    N           Y  kernel
--=====  ========== =======
-+===== ========== ========== =======
-+-bios    -kernel       -dtb payload
-+===== ========== ========== =======
-+    N          N don't care     HSS
-+    Y don't care don't care     HSS
-+    N          Y          Y  kernel
-+===== ========== ========== =======
++/* CLINT timebase frequency */
++#define CLINT_TIMEBASE_FREQ 1000000
++
+ static const MemMapEntry sifive_u_memmap[] = {
+     [SIFIVE_U_DEV_DEBUG] =    {        0x0,      0x100 },
+     [SIFIVE_U_DEV_MROM] =     {     0x1000,     0xf000 },
+@@ -165,7 +168,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
  
- The memory is set to 1537 MiB by default which is the minimum required high
- memory size by HSS. A sanity check on ram size is performed in the machine
-@@ -106,4 +106,44 @@ HSS output is on the first serial port (stdio) and U-Boot outputs on the
- second serial port. U-Boot will automatically load the Linux kernel from
- the SD card image.
+     qemu_fdt_add_subnode(fdt, "/cpus");
+     qemu_fdt_setprop_cell(fdt, "/cpus", "timebase-frequency",
+-        SIFIVE_CLINT_TIMEBASE_FREQ);
++        CLINT_TIMEBASE_FREQ);
+     qemu_fdt_setprop_cell(fdt, "/cpus", "#size-cells", 0x0);
+     qemu_fdt_setprop_cell(fdt, "/cpus", "#address-cells", 0x1);
  
-+Direct Kernel Boot
-+------------------
-+
-+Sometimes we just want to test booting a new kernel, and transforming the
-+kernel image to the format required by the HSS bootflow is tedious. We can
-+use '-kernel' for direct kernel booting just like other RISC-V machines do.
-+
-+In this mode, the OpenSBI fw_dynamic BIOS image for 'generic' platform is
-+used to boot an S-mode payload like U-Boot or OS kernel directly.
-+
-+For example, the following commands show building a U-Boot image from U-Boot
-+mainline v2021.07 for the Microchip Icicle Kit board:
-+
-+.. code-block:: bash
-+
-+  $ export CROSS_COMPILE=riscv64-linux-
-+  $ make microchip_mpfs_icicle_defconfig
-+
-+Then we can boot the machine by:
-+
-+.. code-block:: bash
-+
-+  $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
-+      -sd path/to/sdcard.img \
-+      -nic user,model=cadence_gem \
-+      -nic tap,ifname=tap,model=cadence_gem,script=no \
-+      -display none -serial stdio \
-+      -kernel path/to/u-boot/build/dir/u-boot.bin \
-+      -dtb path/to/u-boot/build/dir/u-boot.dtb
-+
-+CAVEATS:
-+
-+* Check the "stdout-path" property in the /chosen node in the DTB to determine
-+  which serial port is used for the serial console, e.g.: if the console is set
-+  to the second serial port, change to use "-serial null -serial stdio".
-+* The default U-Boot configuration uses CONFIG_OF_SEPARATE hence the ELF image
-+  ``u-boot`` cannot be passed to "-kernel" as it does not contain the DTB hence
-+  ``u-boot.bin`` has to be used which does contain one. To use the ELF image,
-+  we need to change to CONFIG_OF_EMBED or CONFIG_OF_PRIOR_STAGE.
-+
- .. _HSS: https://github.com/polarfire-soc/hart-software-services
+@@ -847,7 +850,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     sifive_clint_create(memmap[SIFIVE_U_DEV_CLINT].base,
+         memmap[SIFIVE_U_DEV_CLINT].size, 0, ms->smp.cpus,
+         SIFIVE_SIP_BASE, SIFIVE_TIMECMP_BASE, SIFIVE_TIME_BASE,
+-        SIFIVE_CLINT_TIMEBASE_FREQ, false);
++        CLINT_TIMEBASE_FREQ, false);
+ 
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->prci), errp)) {
+         return;
 -- 
 2.25.1
 
