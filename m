@@ -1,57 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m0dzJ-0002HY-CW
-	for mharc-qemu-riscv@gnu.org; Tue, 06 Jul 2021 01:51:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55060)
+	id 1m0hij-0007dg-Ce
+	for mharc-qemu-riscv@gnu.org; Tue, 06 Jul 2021 05:50:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39502)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m0dzH-0002H9-Su; Tue, 06 Jul 2021 01:51:15 -0400
-Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:44867)
+ id 1m0hih-0007ZD-9n; Tue, 06 Jul 2021 05:50:23 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629]:46928)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m0dzG-0001MC-2b; Tue, 06 Jul 2021 01:51:15 -0400
-Received: by mail-yb1-xb36.google.com with SMTP id g19so32487978ybe.11;
- Mon, 05 Jul 2021 22:51:13 -0700 (PDT)
+ id 1m0hif-0003Yc-8r; Tue, 06 Jul 2021 05:50:23 -0400
+Received: by mail-ej1-x629.google.com with SMTP id c17so33164822ejk.13;
+ Tue, 06 Jul 2021 02:50:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rs7CgglGZGHMEXtjP9nb8ttTdEeYUOYnRKc6v6qD+IQ=;
- b=IPZRUpyF2zp3JD551D8m3wsktqh5las08p+H0Pi2rdFrnib0jGSsMCeYJPLkr9XYos
- 6kf84BWFbvSFr2XL7BWxJCo0GrXt7TW5NEPyf8tQF2WjgnpEbPxD/aBV1xfgTQMNI7Sn
- YKkU1iqp8zoXxw9TmpFV+6U9/6rzrdHE2MB2YBuXSbr4yxL3ypMfPyMeHS8llckmrVUy
- pm25erdc7Xsfh0vYVkplpu14KO5o0/F6Cz800sIfiyqmfEuxtCA9gfRmS09sIdljC7eI
- 5NghoZrD4DOGCBLZRCyoJorPRA5Lzg4Mb6veTZhIkpFIq5QXkVKkTMuxn/wiITHk065B
- g+8A==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=fY7hbtR5nAg5Ha144ZKkJXuGDOU3o/3kVizCyviJB3U=;
+ b=ak5MDuIwGL5EVE8oM0DohVr915EWylktRr1XD6DqMrlfjOEQjWWbs+RksZcTV/Q8M3
+ 29PXgBl8WGlZKaByFui+S1iGm8svHUd9RoPufNK2Wz6iADr/9FrPfElIpiT3XQLkVr4M
+ FGAsKppuZ86MKp2SVox4bEhVD2PMYzmVIX6tY7W06aVdn5W3pVq0JzN5HD+CcqMri1Ri
+ C3YfW/xITknsy0oaqiOEHzlR5b1T0k0plxKngv+mZORbrgK0YzeksJWRV27MtTkwK1RT
+ 6r8Nkxg0PRR/6nexDRlFSBURCx6sPxvo1liSms+Uy7c+Fh561eYeNRRJA71TFNzs7jhI
+ 3IbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rs7CgglGZGHMEXtjP9nb8ttTdEeYUOYnRKc6v6qD+IQ=;
- b=UiXJ2lat4ArdNPftdTKdIBSvSQ1qGnQcC/v3FcDbtgo7MtJ/ZkLKW657zCDx6gNkYA
- UQgudKyCQkICRyRTvGBxfckwuwETomaYAUYcHfgLMykbCnzGlAlLYWVDOjGKLnUitYco
- SLQ3gRKkx/kSW3UPfiVwgNi0eDk1qBjr/bVIeu9T+6Ks8ybfrURtTH8Na7QixkwYPCe4
- m6CqOGIoKV4VSKfvy+WhXXzi25Ctf6Ji08k3MIWp/9zgakfjsJDYnKVPRs5eDAFF4ZnF
- XZCbfp5vKp0cCMRMWJrdfNo39qlym4a4tQSrK9fBCg8Nb0+MWeyd90I8vujkn2k6rGYL
- HkiA==
-X-Gm-Message-State: AOAM530v712GnsrbEPL0t9oJ8vzC3zcSY5VFyy9EAT/ZI2o3tfT1cBNC
- MuUFZ9enx2Y+IMg9KMU8sgMekgT4zZJ2Nt2P7BA=
-X-Google-Smtp-Source: ABdhPJyMbdfd3RSlCxTj5E4OBTbXjWUp5SZ/XXXa7LU/8R9JoP2S0oQOCismOCoNk4Gjshb3Ko+eucz4JC0P5f7ZR20=
-X-Received: by 2002:a25:6c04:: with SMTP id h4mr22839624ybc.122.1625550672686; 
- Mon, 05 Jul 2021 22:51:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210706035015.122899-1-kito.cheng@sifive.com>
-In-Reply-To: <20210706035015.122899-1-kito.cheng@sifive.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=fY7hbtR5nAg5Ha144ZKkJXuGDOU3o/3kVizCyviJB3U=;
+ b=lao0vbCkySFbi+KlluI+z2gjWly4KvyF0ArTtq4WdKuMt+lVG/Am9ej3n86YweLTXM
+ G4veNpu+3wkKK8ImXGp+u92MuiHG09Im+LH948xoGCKK+ZGUe9Huhyd6deW6pTdRzbAn
+ dG4emkz67Sjhvd1cckm6GEpxBAp5cliortvNZCiMgrdD9IDbQSNAxs2bgdt00mKChHkg
+ bVCDXHz5hwxD4DX9eNm+eXDksKD3FY3XC7ljRl+ZVkHbI5xDODd7iFU884pfkyxJX0nu
+ we0tKTEFzAnzM1862h2lpbA1fh2I/yVum4/kuW3LLsktoKK3ShUkpPIyCWoxE3j9ZReE
+ Cm1g==
+X-Gm-Message-State: AOAM531h9Edp/+N/belrNXIvKim48CBFerM63dKsSPeBMotXmRVXbKiu
+ kVLDBygU4ebJpPgZG0GzwWs=
+X-Google-Smtp-Source: ABdhPJz3XrHV2K5CXsh6FeFb3nvAXGi7HPGPlsjonuTadqE+sxlbpmFUjSSs9aHoPzbMeGDPF7otNg==
+X-Received: by 2002:a17:906:7711:: with SMTP id
+ q17mr10163109ejm.437.1625565017967; 
+ Tue, 06 Jul 2021 02:50:17 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com
+ (ec2-44-242-66-180.us-west-2.compute.amazonaws.com. [44.242.66.180])
+ by smtp.gmail.com with ESMTPSA id s6sm5223106ejo.4.2021.07.06.02.50.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jul 2021 02:50:17 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 6 Jul 2021 13:51:01 +0800
-Message-ID: <CAEUhbmWxsKV26wN2viPVtTLfWsbZHEghM-nGJePH7qROEp7MFg@mail.gmail.com>
-Subject: Re: [PATCH v3] linux-user/elfload: Implement ELF_HWCAP for RISC-V
-To: Kito Cheng <kito.cheng@sifive.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, frank.chang@sifive.com, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Richard Henderson <richard.henderson@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] docs/system: riscv: Update Microchip Icicle Kit for direct
+ kernel boot
+Date: Tue,  6 Jul 2021 17:50:45 +0800
+Message-Id: <20210706095045.1917913-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,52 +75,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2021 05:51:16 -0000
+X-List-Received-Date: Tue, 06 Jul 2021 09:50:23 -0000
 
-On Tue, Jul 6, 2021 at 11:50 AM Kito Cheng <kito.cheng@sifive.com> wrote:
->
-> Set I, M, A, F, D and C bit for hwcap if misa is set.
->
-> V3 Changes:
-> - Simplify logic of getting hwcap.
->
-> V2 Changes:
-> - Only set imafdc bits, sync with upstream linux kernel.
+From: Bin Meng <bin.meng@windriver.com>
 
-These changelogs should not be in the commit message, but should be
-put below ---
+This adds a new section in the documentation to demonstrate how to
+use the new direct kernel boot feature for Microchip Icicle Kit,
+other than the HSS bootflow, using an upstream U-Boot v2021.07 image
+as an example.
 
->
-> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
-> ---
->  linux-user/elfload.c | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/linux-user/elfload.c b/linux-user/elfload.c
-> index 598ab8aa13..42ef2a1148 100644
-> --- a/linux-user/elfload.c
-> +++ b/linux-user/elfload.c
-> @@ -1434,6 +1434,19 @@ static void elf_core_copy_regs(target_elf_gregset_t *regs,
->  #define ELF_CLASS ELFCLASS64
->  #endif
->
-> +#define ELF_HWCAP get_elf_hwcap()
-> +
-> +static uint32_t get_elf_hwcap(void)
-> +{
-> +#define MISA_BIT(EXT) (1 << (EXT - 'A'))
-> +    RISCVCPU *cpu = RISCV_CPU(thread_cpu);
-> +    uint32_t mask = MISA_BIT('I') | MISA_BIT('M') | MISA_BIT('A')
-> +                    | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C');
-> +
-> +    return cpu->env.misa & mask;
-> +#undef MISA_BIT
-> +}
-> +
->  static inline void init_thread(struct target_pt_regs *regs,
->                                 struct image_info *infop)
->  {
+It also updates the truth table to have a new '-dtb' column which is
+required by direct kernel boot.
 
-Regards,
-Bin
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
+
+ docs/system/riscv/microchip-icicle-kit.rst | 54 +++++++++++++++++++---
+ 1 file changed, 47 insertions(+), 7 deletions(-)
+
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 54ced661e3..817d2aec9c 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -47,13 +47,13 @@ The user provided DTB should have the following requirements:
+ 
+ QEMU follows below truth table to select which payload to execute:
+ 
+-=====  ========== =======
+--bios     -kernel payload
+-=====  ========== =======
+-    N           N     HSS
+-    Y  don't care     HSS
+-    N           Y  kernel
+-=====  ========== =======
++===== ========== ========== =======
++-bios    -kernel       -dtb payload
++===== ========== ========== =======
++    N          N don't care     HSS
++    Y don't care don't care     HSS
++    N          Y          Y  kernel
++===== ========== ========== =======
+ 
+ The memory is set to 1537 MiB by default which is the minimum required high
+ memory size by HSS. A sanity check on ram size is performed in the machine
+@@ -106,4 +106,44 @@ HSS output is on the first serial port (stdio) and U-Boot outputs on the
+ second serial port. U-Boot will automatically load the Linux kernel from
+ the SD card image.
+ 
++Direct Kernel Boot
++------------------
++
++Sometimes we just want to test booting a new kernel, and transforming the
++kernel image to the format required by the HSS bootflow is tedious. We can
++use '-kernel' for direct kernel booting just like other RISC-V machines do.
++
++In this mode, the OpenSBI fw_dynamic BIOS image for 'generic' platform is
++used to boot an S-mode payload like U-Boot or OS kernel directly.
++
++For example, the following commands show building a U-Boot image from U-Boot
++mainline v2021.07 for the Microchip Icicle Kit board:
++
++.. code-block:: bash
++
++  $ export CROSS_COMPILE=riscv64-linux-
++  $ make microchip_mpfs_icicle_defconfig
++
++Then we can boot the machine by:
++
++.. code-block:: bash
++
++  $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
++      -sd path/to/sdcard.img \
++      -nic user,model=cadence_gem \
++      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -display none -serial stdio \
++      -kernel path/to/u-boot/build/dir/u-boot.bin \
++      -dtb path/to/u-boot/build/dir/u-boot.dtb
++
++CAVEATS:
++
++* Check the "stdout-path" property in the /chosen node in the DTB to determine
++  which serial port is used for the serial console, e.g.: if the console is set
++  to the second serial port, change to use "-serial null -serial stdio".
++* The default U-Boot configuration uses CONFIG_OF_SEPARATE hence the ELF image
++  ``u-boot`` cannot be passed to "-kernel" as it does not contain the DTB hence
++  ``u-boot.bin`` has to be used which does contain one. To use the ELF image,
++  we need to change to CONFIG_OF_EMBED or CONFIG_OF_PRIOR_STAGE.
++
+ .. _HSS: https://github.com/polarfire-soc/hart-software-services
+-- 
+2.25.1
+
 
