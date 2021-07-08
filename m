@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1LzS-00066u-1X
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 00:50:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40382)
+	id 1m1V5p-0003a9-LL
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 10:33:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40132)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m1LzM-00066M-Ov; Thu, 08 Jul 2021 00:50:17 -0400
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:35670)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1m1V5o-0003Xq-7S; Thu, 08 Jul 2021 10:33:32 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:37420)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m1LzK-0002sc-PO; Thu, 08 Jul 2021 00:50:16 -0400
-Received: by mail-io1-xd29.google.com with SMTP id d9so6639246ioo.2;
- Wed, 07 Jul 2021 21:50:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1m1V5m-0001J4-N8; Thu, 08 Jul 2021 10:33:32 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 22-20020a17090a0c16b0290164a5354ad0so6001233pjs.2; 
+ Thu, 08 Jul 2021 07:33:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WpzdiDhls4D95tQ7c4dngG6Rcd06VXk1ViS3ksao6iE=;
- b=jqtCRgfMgmbZ+BtmbLJlF7xsxxPN8BsLA04t4CAdZKJJzh5Kg9MKNB24xEPiqHNJkp
- oSjni//L8YNu2A8Ej+olgEeSMihmQZUmO4uatuqbWaYsgXVk05qYj7D5SajiygYFGU7t
- scpZmCNjTXk2Dl8ozPHNZUTfaj+F+10u3OwUPubSZEAecIPSPsKvF+l6CIeVqQnv0wNh
- XCk9tdVJhL1m/Q429JzpjlPCBnUan9xOgpWZLKQag+ketcLN4+RDjmKV4V1t6r3pmqmc
- NnsnygUbJCzqH/Uz5wSzqH8OpySPdxLXg+wY2U7YGby99oj2QppWIsEtk5Pm3at7Ot91
- HZkw==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=9S2uSS3W0hK5SUoIufNlDDDlKwis8Kwh7YaicD3Lk8o=;
+ b=pzwgp4591Ln9CSJTkjV0+kId1P1liPBf0H4wkK86kp5fiSGQvXZJqF9MYLu0JRcRXN
+ +w6P2piDUvcwy004q5SLKIauOCwxhDZoZgoO2UN9uzkUaj6Y6v04N6YGzaKjwV2jy2L9
+ 1sbndgKjZ+4K7ax//4vS/Azqiy+WXIY0NhnYlF6t4SiU4yKQmEayi8LF15gUs5NRBVmv
+ EdLheVyTTEmEd87MSbusJLLZU07wfodxoIuu8vGxF2bPGYcKAACR5lsT9D7r/YMaa+SJ
+ nzoi6Z2UHY3fAflFgOZT/nbUWgMI5g6kgDU0lsNfkINxCYUK8rDwhQh08jPn50nj6au/
+ ug+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WpzdiDhls4D95tQ7c4dngG6Rcd06VXk1ViS3ksao6iE=;
- b=mI2EelJgB0NWeTcIduUho45o1oDptLxlY4iTFvsfneMR4drT8fSExgGNMYJz7JaOX5
- 6S/EOvXqp5egfMJmUWolwQ8+FbXNW1QXqgz7u/ol8+q7iB47st7Wi71RYQfF1e8OlG3s
- 4WoK1swvP94UZfaMfx/d59VY0RsQJPZOq+gda1plT8kihUtXCdHdYg6GfEv/JRVeNvt8
- vNWrIX/a+GK8HPbwBrQOvfV+NaeU5Hs0rUAikpXRfGgplJE3ZydAycM1fFA/CPVqzjSI
- YXMY1OgR3pYAiLSUGDHvV63eUZT0KuKH5qPqJp6SiW1PCSWx74LEzA0f/yCrCVMzRAOf
- a6uQ==
-X-Gm-Message-State: AOAM533xQWw6NoJ+H5gdaxUyB0cbD4dER3RHDdIuJNluOwaRSCiYKbil
- YIEjV6+i5oc+5xgp4tZ1TB0GshGu7rw3W+9AJO0=
-X-Google-Smtp-Source: ABdhPJzbjXVZdcM7xZ1yydTEOtYSrVSEHl4ItrJaCJDPCDlyJPSKgyWIW1j9ucZLxzdNn+jq1eeQWEYN85PT7uhIEhI=
-X-Received: by 2002:a05:6602:140e:: with SMTP id
- t14mr22929000iov.42.1625719813019; 
- Wed, 07 Jul 2021 21:50:13 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=9S2uSS3W0hK5SUoIufNlDDDlKwis8Kwh7YaicD3Lk8o=;
+ b=gVw8ChFJiIMbOST74QQTGd01QsoXe1QtqYww1RRRpDPCE4YE+z9jskPNXKNRQF0NLR
+ GVIgdg9ktAKcvGolpVdpBeMRa0ISJle3M+3kuBNvDqsmSDXCUaD+YdrOcneONwKUUgKI
+ h98Bvh2Yqx/t9i1rFNCsGs+22IoCyshWefj4uPlBBA7VLg+udM0UVyPyB3NmOxub1hPR
+ odXbmVA0+gr173ynqctuDKd64O18Nb6c0PTmXGfI9fJU/wWCmn3BnYEaAck2DMtJ1Jxx
+ jrbe/WCbnvEwPB9u+IaVNxwwYk3xeR7t4dQghmTtuLaWZGpQwP5K7DFEisLsRi4TO7CW
+ oqrQ==
+X-Gm-Message-State: AOAM5308xqpGnO8nllMkdlIPDZD32GOQeu+45JGnuth5iClEX6VVHeht
+ KImO4SNegJlo8lqG+vlFADk=
+X-Google-Smtp-Source: ABdhPJy+7ytBgXbdZlME4kSoC2EgWY4FnOHWcBTQ40EB3trDU17OYr1i/nAuWWgzeb14RNk+5Ua4ww==
+X-Received: by 2002:a17:90a:3f87:: with SMTP id
+ m7mr5291319pjc.128.1625754809016; 
+ Thu, 08 Jul 2021 07:33:29 -0700 (PDT)
+Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
+ [144.168.56.201])
+ by smtp.gmail.com with ESMTPSA id u7sm3669115pgl.30.2021.07.08.07.33.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jul 2021 07:33:28 -0700 (PDT)
+From: Bin Meng <bmeng.cn@gmail.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH] hw/riscv: sifive_u: Make sure firmware info is 8-byte aligned
+Date: Thu,  8 Jul 2021 22:33:19 +0800
+Message-Id: <20210708143319.10441-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210706095045.1917913-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210706095045.1917913-1-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 8 Jul 2021 14:49:46 +1000
-Message-ID: <CAKmqyKPU_NJNoLECp7Su3yxShCxKwrfZLg3iV97=N7FajVCCEg@mail.gmail.com>
-Subject: Re: [PATCH] docs/system: riscv: Update Microchip Icicle Kit for
- direct kernel boot
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,103 +75,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jul 2021 04:50:19 -0000
+X-List-Received-Date: Thu, 08 Jul 2021 14:33:32 -0000
 
-On Tue, Jul 6, 2021 at 7:50 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This adds a new section in the documentation to demonstrate how to
-> use the new direct kernel boot feature for Microchip Icicle Kit,
-> other than the HSS bootflow, using an upstream U-Boot v2021.07 image
-> as an example.
->
-> It also updates the truth table to have a new '-dtb' column which is
-> required by direct kernel boot.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Currently the firmware dynamic info (fw_dyn) is put right after
+the reset vector, which is not 8-byte aligned on RV64. OpenSBI
+fw_dynamic uses ld to read contents from 'struct fw_dynamic_info',
+which expects fw_dyn to be on the 8-byte boundary, otherwise the
+misaligned load exception may happen. Fortunately this does not
+cause any issue on QEMU, as QEMU does support misaligned load.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+RV32 does not have any issue as it is 4-byte aligned already.
+Change to make sure it is 8-byte aligned which works for both
+RV32 and RV64.
 
-Alistair
+Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
-> ---
->
->  docs/system/riscv/microchip-icicle-kit.rst | 54 +++++++++++++++++++---
->  1 file changed, 47 insertions(+), 7 deletions(-)
->
-> diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-> index 54ced661e3..817d2aec9c 100644
-> --- a/docs/system/riscv/microchip-icicle-kit.rst
-> +++ b/docs/system/riscv/microchip-icicle-kit.rst
-> @@ -47,13 +47,13 @@ The user provided DTB should have the following requirements:
->
->  QEMU follows below truth table to select which payload to execute:
->
-> -=====  ========== =======
-> --bios     -kernel payload
-> -=====  ========== =======
-> -    N           N     HSS
-> -    Y  don't care     HSS
-> -    N           Y  kernel
-> -=====  ========== =======
-> +===== ========== ========== =======
-> +-bios    -kernel       -dtb payload
-> +===== ========== ========== =======
-> +    N          N don't care     HSS
-> +    Y don't care don't care     HSS
-> +    N          Y          Y  kernel
-> +===== ========== ========== =======
->
->  The memory is set to 1537 MiB by default which is the minimum required high
->  memory size by HSS. A sanity check on ram size is performed in the machine
-> @@ -106,4 +106,44 @@ HSS output is on the first serial port (stdio) and U-Boot outputs on the
->  second serial port. U-Boot will automatically load the Linux kernel from
->  the SD card image.
->
-> +Direct Kernel Boot
-> +------------------
-> +
-> +Sometimes we just want to test booting a new kernel, and transforming the
-> +kernel image to the format required by the HSS bootflow is tedious. We can
-> +use '-kernel' for direct kernel booting just like other RISC-V machines do.
-> +
-> +In this mode, the OpenSBI fw_dynamic BIOS image for 'generic' platform is
-> +used to boot an S-mode payload like U-Boot or OS kernel directly.
-> +
-> +For example, the following commands show building a U-Boot image from U-Boot
-> +mainline v2021.07 for the Microchip Icicle Kit board:
-> +
-> +.. code-block:: bash
-> +
-> +  $ export CROSS_COMPILE=riscv64-linux-
-> +  $ make microchip_mpfs_icicle_defconfig
-> +
-> +Then we can boot the machine by:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
-> +      -sd path/to/sdcard.img \
-> +      -nic user,model=cadence_gem \
-> +      -nic tap,ifname=tap,model=cadence_gem,script=no \
-> +      -display none -serial stdio \
-> +      -kernel path/to/u-boot/build/dir/u-boot.bin \
-> +      -dtb path/to/u-boot/build/dir/u-boot.dtb
-> +
-> +CAVEATS:
-> +
-> +* Check the "stdout-path" property in the /chosen node in the DTB to determine
-> +  which serial port is used for the serial console, e.g.: if the console is set
-> +  to the second serial port, change to use "-serial null -serial stdio".
-> +* The default U-Boot configuration uses CONFIG_OF_SEPARATE hence the ELF image
-> +  ``u-boot`` cannot be passed to "-kernel" as it does not contain the DTB hence
-> +  ``u-boot.bin`` has to be used which does contain one. To use the ELF image,
-> +  we need to change to CONFIG_OF_EMBED or CONFIG_OF_PRIOR_STAGE.
-> +
->  .. _HSS: https://github.com/polarfire-soc/hart-software-services
-> --
-> 2.25.1
->
->
+ hw/riscv/sifive_u.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 273c86418c..4d99566e62 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -599,10 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
+     }
+ 
+     /* reset vector */
+-    uint32_t reset_vec[11] = {
++    uint32_t reset_vec[12] = {
+         s->msel,                       /* MSEL pin state */
+         0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+-        0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
++        0x02c28613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
+         0xf1402573,                    /*     csrr   a0, mhartid  */
+         0,
+         0,
+@@ -610,6 +610,7 @@ static void sifive_u_machine_init(MachineState *machine)
+         start_addr,                    /* start: .dword */
+         start_addr_hi32,
+         fdt_load_addr,                 /* fdt_laddr: .dword */
++        0x00000000,
+         0x00000000,
+                                        /* fw_dyn: */
+     };
+-- 
+2.25.1
+
 
