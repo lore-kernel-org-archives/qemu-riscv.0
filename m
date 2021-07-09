@@ -1,69 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1i6Q-0007Kx-30
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Jul 2021 00:27:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54062)
+	id 1m1iKu-0003mz-CH
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Jul 2021 00:42:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57202)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1m1i6A-0006eP-JH
- for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:47 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:34788)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m1iKo-0003k3-Eo; Fri, 09 Jul 2021 00:41:55 -0400
+Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:40520)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1m1i5k-0001XQ-4T
- for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:46 -0400
-Received: by mail-pg1-x534.google.com with SMTP id 62so8727811pgf.1
- for <qemu-riscv@nongnu.org>; Thu, 08 Jul 2021 21:26:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=6HbbkfJ+bykUVMcUtfXP5XxX4C861myEUuDfLalAZI0=;
- b=bA2CT54Lu4kcSuld9DUdIeLYl7mM/2c9emyxQ3OUo5dtYApfa9ev2OGiqsMktR2YTO
- QOt3vUKJAbOtGYCjSqtgVMa0Q6xpYEIqeOJ1xXFz7Tho+BLtzVSxLx60u0OqNNjjwy6/
- DcA2UQ5kwVDIUpao3tIadXCXuBPbUOfKSYDh4InrfASe7iMclS879Qt9YGpDst+Xw9sB
- iFMioM2exSM+UMHpeFawzBwNic7T70twU1FWUPHZBxblRHLjyHilsF34O9zh8PYG/2Iz
- ta7S2IV+sT1mrMgbKU/xOSDjgpZc3dv3PfyTrp3LuZpj6yAHVz1JOaGwN7+EL0ximckI
- 1VhQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m1iKm-00013v-S6; Fri, 09 Jul 2021 00:41:54 -0400
+Received: by mail-il1-x12f.google.com with SMTP id g3so8985308ilj.7;
+ Thu, 08 Jul 2021 21:41:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=krTryoSyT66RTMkeZeD5wOuwdaEU7P+yqEXE2VfaUA0=;
+ b=T9xhmw5m3S7RwacxnYB9r4KMgEDxSMqgVJ80wG4yemwf3lPjydevlwOYueacYsEwEO
+ WLhE022gwsGkzE1ncIg0aHV+5x2lPtJc5K3guIEbm+kTpBiJefyLsQyFH2zaJZ8retsT
+ SePE3HpgSBsf79BI7h26OodxtOvPwThA7DUK+q1Y+VmYqQ5yLxwIcd7mTTVzegHRAqFI
+ I8DmE8asn+auvDrBMuZxCbXqKQ5msCU9s6SBYYLJFr9/GKyOLoZgoQpbWr7cFO5N/bhp
+ HCbBp3LovEWmMkjLLYnW9vMnN1YuI/B2PVNBhTKU3hCwnuWX5oDPh95CRLNEi0Hwelo4
+ O8Jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=6HbbkfJ+bykUVMcUtfXP5XxX4C861myEUuDfLalAZI0=;
- b=avi3OWZtpnh9Ld7HhM4wRB8kAYAomC5xL7AXnmzlaxiyXhgsYup0ul8RaYfQoaiCKT
- tiYPQziMkqRxLw7/ZwkfXCM0Ml9FWj7o/sracGmj7r0+hShXCOoicn7QZmEeA8ucC0x1
- Qn+bZCzWRmLODmQhJgzB/0oJCEWC7DQN6jE8TkFk3v8cW7v6HcGOw99SiaPoHo2ZKjxM
- SzFTHKGckroPCkUHF2M5gdmds9wJbAyk9eXF/2FmwveO86wGOICAp4InGOMaSc/hm4Ol
- UiKqEQTPTLeYL9IKKG+xU9Uh+NMJsrN/nzMutyXH8OJcWkitVKaZIFqxYWMT81s0FHOT
- Ek1A==
-X-Gm-Message-State: AOAM533az2kwazBQK/vI3BUdtATdkft+e4zvvRTcRVxRrIjdtzNRrcsA
- E/GeY622rcRVBYeO5e5Ove1q3iRKQL6+sw==
-X-Google-Smtp-Source: ABdhPJye2O4F6nSkGVy67hgN6lR4mVGRGMNUfJK/6ODwvJ8ARHrQ4OQejLMA2znjXXmgyUbO1aaxvQ==
-X-Received: by 2002:a65:5186:: with SMTP id h6mr35499502pgq.62.1625804777586; 
- Thu, 08 Jul 2021 21:26:17 -0700 (PDT)
-Received: from localhost.localdomain ([71.212.149.176])
- by smtp.gmail.com with ESMTPSA id y16sm4406727pfe.70.2021.07.08.21.26.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jul 2021 21:26:17 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
-	alistair.francis@wdc.com
-Subject: [PATCH 13/17] target/riscv: Use gpr_{src,dst} for RVD
-Date: Thu,  8 Jul 2021 21:26:04 -0700
-Message-Id: <20210709042608.883256-14-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210709042608.883256-1-richard.henderson@linaro.org>
-References: <20210709042608.883256-1-richard.henderson@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=krTryoSyT66RTMkeZeD5wOuwdaEU7P+yqEXE2VfaUA0=;
+ b=Vv/m+kR9Adcy9lcG9sOr3HVd8VDo/KbZX1nBZpopSouX1gmjYylIthUT3pMjBSlupH
+ hQQp5nE10PhZUm5onmQUHSqRKoPaDO6+kmZ1j4JSo9zQgizZRBbJ5h/+fFefQD24Gvr0
+ NLYh3jfiSU97fe8F+zc3MSCO+Ok59pMPxNuNo8IbNYxjppIdcfma8uC80vSGUPKAvqjj
+ QesezJ2tKLIZeVZWBdU61mGitPJSbgXhhmWmXSOAQ86qeTVsAfH+dStZfX3CxEDhZ55P
+ Sb0Om2KnjMTViWek0k+b8J0QxlU2SG7N7k6Nl9qOBmnxOx8a0YyJ4n8xEPU3jNJfoVbQ
+ z0pw==
+X-Gm-Message-State: AOAM530mk0jzuqYRu5rQ+DDaKDoB/ajIkFti0qpU+xs6RbOAIJuceuPO
+ ewZk6oAap4+Qk73BgIo4mUfNIMmA3fc98kOiw9M=
+X-Google-Smtp-Source: ABdhPJzlxTGl+3KvSStJj7R9eiWuHAjZUI5MzgkAEa8wIDnxU0OgDhRGZ2d0r0peLgiZpRB8ex/+OrLChMKtQZNR1P0=
+X-Received: by 2002:a05:6e02:1ba9:: with SMTP id
+ n9mr25344003ili.267.1625805711400; 
+ Thu, 08 Jul 2021 21:41:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20210708143319.10441-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210708143319.10441-1-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 9 Jul 2021 14:41:25 +1000
+Message-ID: <CAKmqyKOLKOtiY4asmvHx0bepDw7OUZHkD+HM6Yoqs__EXHVxDw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: sifive_u: Make sure firmware info is 8-byte
+ aligned
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,252 +72,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2021 04:26:48 -0000
+X-List-Received-Date: Fri, 09 Jul 2021 04:41:59 -0000
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/insn_trans/trans_rvd.c.inc | 116 +++++++++---------------
- 1 file changed, 44 insertions(+), 72 deletions(-)
+On Fri, Jul 9, 2021 at 12:33 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Currently the firmware dynamic info (fw_dyn) is put right after
+> the reset vector, which is not 8-byte aligned on RV64. OpenSBI
+> fw_dynamic uses ld to read contents from 'struct fw_dynamic_info',
+> which expects fw_dyn to be on the 8-byte boundary, otherwise the
+> misaligned load exception may happen. Fortunately this does not
+> cause any issue on QEMU, as QEMU does support misaligned load.
+>
+> RV32 does not have any issue as it is 4-byte aligned already.
+> Change to make sure it is 8-byte aligned which works for both
+> RV32 and RV64.
+>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 7e45538ae0..9bb15fdc12 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -22,14 +22,22 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
- {
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
- 
--    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEQ);
-+    TCGv addr = gpr_src(ctx, a->rs1);
-+    TCGv temp = NULL;
- 
-+    if (a->imm) {
-+        temp = tcg_temp_new();
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEQ);
-+
-+    if (temp) {
-+        tcg_temp_free(temp);
-+    }
-     mark_fs_dirty(ctx);
--    tcg_temp_free(t0);
-     return true;
- }
- 
-@@ -37,13 +45,21 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
- {
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
- 
--    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
-+    TCGv addr = gpr_src(ctx, a->rs1);
-+    TCGv temp = NULL;
- 
--    tcg_temp_free(t0);
-+    if (a->imm) {
-+        temp = tcg_temp_new();
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEQ);
-+
-+    if (temp) {
-+        tcg_temp_free(temp);
-+    }
-     return true;
- }
- 
-@@ -252,11 +268,8 @@ static bool trans_feq_d(DisasContext *ctx, arg_feq_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_helper_feq_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
--
-+    gen_helper_feq_d(gpr_dst(ctx, a->rd), cpu_env,
-+                     cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-     return true;
- }
- 
-@@ -265,11 +278,8 @@ static bool trans_flt_d(DisasContext *ctx, arg_flt_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_helper_flt_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
--
-+    gen_helper_flt_d(gpr_dst(ctx, a->rd), cpu_env,
-+                     cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-     return true;
- }
- 
-@@ -278,11 +288,8 @@ static bool trans_fle_d(DisasContext *ctx, arg_fle_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_helper_fle_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
--
-+    gen_helper_fle_d(gpr_dst(ctx, a->rd), cpu_env,
-+                     cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-     return true;
- }
- 
-@@ -291,10 +298,7 @@ static bool trans_fclass_d(DisasContext *ctx, arg_fclass_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_helper_fclass_d(t0, cpu_fpr[a->rs1]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fclass_d(gpr_dst(ctx, a->rd), cpu_fpr[a->rs1]);
-     return true;
- }
- 
-@@ -303,12 +307,8 @@ static bool trans_fcvt_w_d(DisasContext *ctx, arg_fcvt_w_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_w_d(t0, cpu_env, cpu_fpr[a->rs1]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
--
-+    gen_helper_fcvt_w_d(gpr_dst(ctx, a->rd), cpu_env, cpu_fpr[a->rs1]);
-     return true;
- }
- 
-@@ -317,12 +317,8 @@ static bool trans_fcvt_wu_d(DisasContext *ctx, arg_fcvt_wu_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_wu_d(t0, cpu_env, cpu_fpr[a->rs1]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
--
-+    gen_helper_fcvt_wu_d(gpr_dst(ctx, a->rd), cpu_env, cpu_fpr[a->rs1]);
-     return true;
- }
- 
-@@ -331,12 +327,8 @@ static bool trans_fcvt_d_w(DisasContext *ctx, arg_fcvt_d_w *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_d_w(cpu_fpr[a->rd], cpu_env, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_d_w(cpu_fpr[a->rd], cpu_env, gpr_src(ctx, a->rs1));
- 
-     mark_fs_dirty(ctx);
-     return true;
-@@ -347,12 +339,8 @@ static bool trans_fcvt_d_wu(DisasContext *ctx, arg_fcvt_d_wu *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_d_wu(cpu_fpr[a->rd], cpu_env, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_d_wu(cpu_fpr[a->rd], cpu_env, gpr_src(ctx, a->rs1));
- 
-     mark_fs_dirty(ctx);
-     return true;
-@@ -364,11 +352,8 @@ static bool trans_fcvt_l_d(DisasContext *ctx, arg_fcvt_l_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_l_d(t0, cpu_env, cpu_fpr[a->rs1]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_l_d(gpr_dst(ctx, a->rd), cpu_env, cpu_fpr[a->rs1]);
-     return true;
- }
- 
-@@ -378,11 +363,8 @@ static bool trans_fcvt_lu_d(DisasContext *ctx, arg_fcvt_lu_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_lu_d(t0, cpu_env, cpu_fpr[a->rs1]);
--    gen_set_gpr(a->rd, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_lu_d(gpr_dst(ctx, a->rd), cpu_env, cpu_fpr[a->rs1]);
-     return true;
- }
- 
-@@ -406,12 +388,9 @@ static bool trans_fcvt_d_l(DisasContext *ctx, arg_fcvt_d_l *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_d_l(cpu_fpr[a->rd], cpu_env, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_d_l(cpu_fpr[a->rd], cpu_env, gpr_src(ctx, a->rs1));
-+
-     mark_fs_dirty(ctx);
-     return true;
- }
-@@ -422,12 +401,9 @@ static bool trans_fcvt_d_lu(DisasContext *ctx, arg_fcvt_d_lu *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--
-     gen_set_rm(ctx, a->rm);
--    gen_helper_fcvt_d_lu(cpu_fpr[a->rd], cpu_env, t0);
--    tcg_temp_free(t0);
-+    gen_helper_fcvt_d_lu(cpu_fpr[a->rd], cpu_env, gpr_src(ctx, a->rs1));
-+
-     mark_fs_dirty(ctx);
-     return true;
- }
-@@ -439,11 +415,7 @@ static bool trans_fmv_d_x(DisasContext *ctx, arg_fmv_d_x *a)
-     REQUIRE_EXT(ctx, RVD);
- 
- #ifdef TARGET_RISCV64
--    TCGv t0 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--
--    tcg_gen_mov_tl(cpu_fpr[a->rd], t0);
--    tcg_temp_free(t0);
-+    tcg_gen_mov_tl(cpu_fpr[a->rd], gpr_src(ctx, a->rs1));
-     mark_fs_dirty(ctx);
-     return true;
- #else
--- 
-2.25.1
+Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
+>
+>  hw/riscv/sifive_u.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 273c86418c..4d99566e62 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -599,10 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
+>      }
+>
+>      /* reset vector */
+> -    uint32_t reset_vec[11] = {
+> +    uint32_t reset_vec[12] = {
+>          s->msel,                       /* MSEL pin state */
+>          0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
+> -        0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
+> +        0x02c28613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
+>          0xf1402573,                    /*     csrr   a0, mhartid  */
+>          0,
+>          0,
+> @@ -610,6 +610,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>          start_addr,                    /* start: .dword */
+>          start_addr_hi32,
+>          fdt_load_addr,                 /* fdt_laddr: .dword */
+> +        0x00000000,
+>          0x00000000,
+>                                         /* fw_dyn: */
+>      };
+> --
+> 2.25.1
+>
+>
 
