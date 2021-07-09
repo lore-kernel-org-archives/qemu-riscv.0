@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1i6A-0006fC-O5
-	for mharc-qemu-riscv@gnu.org; Fri, 09 Jul 2021 00:26:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53822)
+	id 1m1i6C-0006gE-0S
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Jul 2021 00:26:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53916)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1m1i5t-0006GT-42
- for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:29 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:37533)
+ id 1m1i60-0006RY-Jx
+ for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:36 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:40797)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1m1i5f-0001Uw-HO
- for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:28 -0400
-Received: by mail-pg1-x530.google.com with SMTP id t9so8708362pgn.4
- for <qemu-riscv@nongnu.org>; Thu, 08 Jul 2021 21:26:14 -0700 (PDT)
+ id 1m1i5h-0001Wx-HV
+ for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:36 -0400
+Received: by mail-pl1-x634.google.com with SMTP id j3so2430413plx.7
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jul 2021 21:26:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=szhSmb+IJx7ewakRoFrjDYHYotl3MpERiZt5zOnrFx0=;
- b=q7uMINchCES1mQq+pX+G8iVgE775IJn5ShMM9umTHDf3gf//6wdJ/f2A2FhH2l5z1k
- u7GrAC/UF8rqBX3vcd1s13JDghVlPsLNYulg2TBTE+bAFAn0E8gIl4lCnYSQA2ZWOLc6
- awBgUQIzKRqjU0Wj9ftICavliqUWYhP3dPLiSZeVSrVXVqZIYRZ7rl+86nb0IUbL6ew1
- YCLEZdjBAW5839prdg/q90nzY/WG/FaS9D14r6bCTB0avK+LADa4OtIEXqPrLtA85ZY6
- HFe+0NP8RwSss60qGlZVOJBUCAW/ctwyJQlLizccbJa0Np/Qm2h2wQH8h5xEFgWzNuTd
- S9vA==
+ bh=a9fFt/OsBBNeqd2GgITsOvAQFQxqc8/6WAR/vy/k/Xw=;
+ b=eMr3FHxZndFr8anybtBF8DTSreUootsdK/Y8ylvRqqU1dABB2W6nsZbIkawnCtvKmi
+ IlicbULInGKvZEO4HXVy4K+qjYXGV8Ae/welJYNTBQExgQ6tt2nii9EPZwA/gdDbJ0Qh
+ NrMgadsjszUPUzH3VGMS8+GlKzLeUhVMhAgzx5vT1n++2rQpTc0IES9IfS8EiVzUVRzb
+ vx3R9GDUjb5XiPReWXVxVPkOWYBv/s053ZrwsjnKJSX9E6n+NNUFOa6E87GvEte7P7H1
+ 439anK0E6dk9QnsQBT7xdU1d0jvkSACEs1zG8pk3cDaTNcrtCa//EzOUqSiCH40kDQ2u
+ vU8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=szhSmb+IJx7ewakRoFrjDYHYotl3MpERiZt5zOnrFx0=;
- b=l5OUr56Gw/to8nFt/FDO5oLJLKg5Ha/8aBCpGceznPzVdhbkkz0HTSuTMas7RLWP6f
- frI+743wyBeoIsAPJETYbWjCvKPtyGahRVN0qBz+lnqom8W8Zcd433IlI3ySHDk+4zFl
- 8ptM7a6bezlvUeS+kHfmYOKet/cEtq/gz2qvhkvlQFQC/ZNXIW752b6x8ANBYW/GiBdt
- UK26cWtECQY+bzYVZGpyNikgZJG3qSVNmtjdRIOpYG03uASEWMfRYsMwwmtTgFqJlQB8
- 4RNofZaiZbWLfsXk62/8RPoRVd79rJaLUdEEOu/yi0m0FYZucByZCy16Wh8UbsvtPjHz
- 5VZA==
-X-Gm-Message-State: AOAM530a/Nj6WKaRWnc66xTbMoqJkn0OTNkkI1p2/BpxsWmoGNJSbQ4f
- yC7en3VcaqOjxw4cOMlRJuQBzQ==
-X-Google-Smtp-Source: ABdhPJzDFJlA+1adNAVf/9FyK+TJL+Y74duNcirZaBVNmcrKGHnGuvXpLXRDkmCOlh96fTwnnoPm2w==
-X-Received: by 2002:a63:170b:: with SMTP id x11mr8807075pgl.253.1625804773889; 
- Thu, 08 Jul 2021 21:26:13 -0700 (PDT)
+ bh=a9fFt/OsBBNeqd2GgITsOvAQFQxqc8/6WAR/vy/k/Xw=;
+ b=o1AO1+/UigWmnzCaBeRBrxuWHjGNozkWzG1kb/qxLOUJLGOV0SXgd23UpnCFlwfzRi
+ 9wm2LoE1Rzy5Ifdou4EAx6lch4aXZry1NbL/dGZF+EZEAffIqjaKZASSqoN4i8LxYZnw
+ q12mxxLlii+dIUu06b89Y0gxNzYpKNaQBf8QcaUECrHQPUoieuFR4QEDAyKJBRxox/It
+ BqeiQY9NA4lVka7VkpfAGImO6fmphl3OMr7Nqf86OrnAwj1dIbOf3Qv86+5mO3Mezhf/
+ Ytvv0Ayv8pkSDXA9+kFZicAsM6n1xMMsz0R78FptGOHb/PSUxRNONr0QpGEOb83cQoma
+ POzg==
+X-Gm-Message-State: AOAM533WTJ2bfK/82/HAjBmNFWMWy7dFDhEMjZy6kkQI6LrsP4wdV3In
+ fmrjCNcgLS+w86N9RJjSHu/pww==
+X-Google-Smtp-Source: ABdhPJzwEKWVTVtwCE9l7sse8HUklrbzGbU9RKe18KfMFeGVRxrul7WnibjJ+Yd9IU6fSSzgKEhDOw==
+X-Received: by 2002:a17:90a:880c:: with SMTP id
+ s12mr31960030pjn.72.1625804776357; 
+ Thu, 08 Jul 2021 21:26:16 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.149.176])
- by smtp.gmail.com with ESMTPSA id y16sm4406727pfe.70.2021.07.08.21.26.13
+ by smtp.gmail.com with ESMTPSA id y16sm4406727pfe.70.2021.07.08.21.26.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jul 2021 21:26:13 -0700 (PDT)
+ Thu, 08 Jul 2021 21:26:16 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	alistair.francis@wdc.com
-Subject: [PATCH 07/17] target/riscv: Use gpr_{src,dst} for integer load/store
-Date: Thu,  8 Jul 2021 21:25:58 -0700
-Message-Id: <20210709042608.883256-8-richard.henderson@linaro.org>
+Subject: [PATCH 11/17] target/riscv: Use gpr_{src,dst} for RVB
+Date: Thu,  8 Jul 2021 21:26:02 -0700
+Message-Id: <20210709042608.883256-12-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210709042608.883256-1-richard.henderson@linaro.org>
 References: <20210709042608.883256-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,81 +77,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2021 04:26:29 -0000
+X-List-Received-Date: Fri, 09 Jul 2021 04:26:37 -0000
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 45 +++++++++++++++----------
- 1 file changed, 28 insertions(+), 17 deletions(-)
+ target/riscv/insn_trans/trans_rvb.c.inc | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index a603925637..a422dc9ef4 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -138,15 +138,21 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index 9e81f6e3de..58921f3224 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -423,16 +423,13 @@ static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
+     REQUIRE_64BIT(ctx);
+     REQUIRE_EXT(ctx, RVB);
  
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
--    TCGv t0 = tcg_temp_new();
--    TCGv t1 = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
+-    TCGv source1 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
 +    TCGv dest = gpr_dst(ctx, a->rd);
-+    TCGv addr = gpr_src(ctx, a->rs1);
-+    TCGv temp = NULL;
++    TCGv src1 = gpr_src(ctx, a->rs1);
  
--    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx, memop);
--    gen_set_gpr(a->rd, t1);
--    tcg_temp_free(t0);
--    tcg_temp_free(t1);
-+    if (a->imm) {
-+        temp = tcg_temp_new();
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+
-+    if (temp) {
-+        tcg_temp_free(temp);
-+    }
-     return true;
- }
- 
-@@ -177,19 +183,24 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- 
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
--    TCGv t0 = tcg_temp_new();
--    TCGv dat = tcg_temp_new();
--    gen_get_gpr(t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
--    gen_get_gpr(dat, a->rs2);
-+    TCGv addr = gpr_src(ctx, a->rs1);
-+    TCGv data = gpr_src(ctx, a->rs2);
-+    TCGv temp = NULL;
- 
--    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx, memop);
--    tcg_temp_free(t0);
--    tcg_temp_free(dat);
-+    if (a->imm) {
-+        temp = tcg_temp_new();
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-+
-+    if (temp) {
-+        tcg_temp_free(temp);
-+    }
-     return true;
- }
- 
+     if (a->shamt < 32) {
+-        tcg_gen_deposit_z_tl(source1, source1, a->shamt, 32);
++        tcg_gen_deposit_z_tl(dest, src1, a->shamt, 32);
+     } else {
+-        tcg_gen_shli_tl(source1, source1, a->shamt);
++        tcg_gen_shli_tl(dest, src1, a->shamt);
+     }
 -
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
- {
-     return gen_store(ctx, a, MO_SB);
+-    gen_set_gpr(a->rd, source1);
+-    tcg_temp_free(source1);
+     return true;
+ }
 -- 
 2.25.1
 
