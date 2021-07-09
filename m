@@ -1,62 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1hZ0-0003hx-Ki
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 23:52:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47100)
+	id 1m1i5z-0006OA-MT
+	for mharc-qemu-riscv@gnu.org; Fri, 09 Jul 2021 00:26:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53758)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m1hYz-0003fz-GM; Thu, 08 Jul 2021 23:52:29 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:40640)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1m1i5q-0006DX-31
+ for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:27 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:34779)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m1hYx-0001OM-W9; Thu, 08 Jul 2021 23:52:29 -0400
-Received: by mail-io1-xd36.google.com with SMTP id l5so10891791iok.7;
- Thu, 08 Jul 2021 20:52:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FW1yrI4pHTh1eq2Z1nXQViayvoWE6bFysOqUtsjOJkk=;
- b=SdpqbR0kase9UbGPlKOiltBNYREtNzBJHf9t2RA7OD53eIjT/AbhkXJXWQRDSnddRX
- mfEHst/SNziUt3Fdz8UNqKv0+wLiYjaWxEiUEmQL8Tu2jV58knva7Ly/mHwJuLaUNCFv
- KTmPfBRVNSxaH2Q4KKs/U47t8Upp5EzCiFsod/EB56OESeDMvOgtHB3ZLcktoQoN/YSt
- vpq3YHiMErBTSzu1jv3XNDFYvIiLX6wI5axTobGSKjjfVks5fulA5cyM2IWQg8Iv/iAT
- apT37LmtOHCOywJFN2MH2NxMfR6l+cjweQcmbA3WThYthO1MReo9Ft5Ext1NEfUfSEc5
- Aujw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1m1i5d-0001UG-Up
+ for qemu-riscv@nongnu.org; Fri, 09 Jul 2021 00:26:25 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id 62so8727638pgf.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 Jul 2021 21:26:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=xyZhbP2MZlS3npwt40wzKePMMUn3bMJXYN7FzSUZsjk=;
+ b=cZteOHr+bvPu/BxKx1Yk14ZXKUUEiXfbuvgagIwzZ9hqoav5CX5zg7dThcmBGo36tf
+ V20b0E/3qVpsIb0PrhtAxJnzcrYm24F7bDiwPfIYkoh7rODqcfwp4Bs+ONUVAt3uw00W
+ JB4msXKUVQbaFtbBArQq4j4NjoZOTjemXN9CccCD+qz72qbuzonqiiyFXSGaGeYXteig
+ 8EQOtQeyN/xtYCApsHPxngKXIGfSr/vCEkPgca+hxtB9qV0s7bnIgAcT8leosXEf9GFX
+ THVMrpVT94ECvUpucLU0Y6dvoO1OW2BmkQzbpNBwjBr07ye1cmKDXK6rcpjT+RTpPbij
+ oHfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FW1yrI4pHTh1eq2Z1nXQViayvoWE6bFysOqUtsjOJkk=;
- b=p6wKMu7OIIp3zAAfrgZ/JkOCvbln6gHx7hNq0pBAqoFinJuUKgQa/+GYI3/f9L2/Jc
- v8j9VXQygNIrsMl5qBPYtRsTPz9V62mzvWBbBXmsnNQV41Mo6ltIpCaVaEr4gjRcbYRF
- JJsAXS2gy0cL8L6h0qdtfVeKcORb1I40mTlaGvlayraZbFQRcCj7TeX2r8ldgYojddo9
- ax6SXlNyxju69RZpFQf/b2fM20ODEjqfYA8jEqIMDgTzkpGq7Lf3shn0Wous9+dCgMaU
- T154qB0oONxuTHg0wiAba58mWwyJrkIw77QJv7jncdxl1ef+Y1o+5zUxZBnwhZ6kgo5A
- fAWg==
-X-Gm-Message-State: AOAM5317ippvrAOaCWhBI3zj43jL4QHdgFbaCRTFuhWf2fN5aRxVoMD9
- tkBOapnS6BgvrlxHGDAJYW3R0Q366yn76l0J1uk=
-X-Google-Smtp-Source: ABdhPJyLLxeu+FeCNe0GdE5vEjtf3gcaD2eZw9QOt5zRvudEa8fqFnSeS2lOSChY0Y+M7rNv1SoT+G05bBjkIGV100s=
-X-Received: by 2002:a6b:7905:: with SMTP id i5mr27220888iop.175.1625802746345; 
- Thu, 08 Jul 2021 20:52:26 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=xyZhbP2MZlS3npwt40wzKePMMUn3bMJXYN7FzSUZsjk=;
+ b=gAD5EFUJXXVqgFZcSLQuViwzKvBPGYhizoRCydH3LnF0mrwxsJPo5N/1SUfDZ+JnmD
+ 1AdVB1zs5fCcSBppUed+gpLSWtC/mbLqMfz/FbHuHHD9Tj5qzt+fjlTG2EOAsh5rjh33
+ BDmCCadg6IQtjNr6Qcb4sc0qc0zFjHbFVSz98WIfaNhzCwZaUZxvNmaJxd9CVvy5935T
+ Hp4IOapYgLAKZM7qiSd0bTu3mYhXh75k6VjyoOJQgkT8KhzfcNI16/eB0DRB8fzxSRoR
+ J9wmHQ5s/Z43Vk1y8myvxqvV4zXgrKZv6uktOve3Hs5Pg6PDPISS1BSxdxm0KhrdJ5LS
+ fHvg==
+X-Gm-Message-State: AOAM5308kg0IOixWACYF6xG3Fy981axiK6vitukoP7Z4t/VFFKzTYrYA
+ nTp8B6Ke3LZDyjHf3h7A1F6jBg==
+X-Google-Smtp-Source: ABdhPJwE+++LQq8kETIRo/S+wMDzqQngOYswS9vOYavj5G11r0CbtTYSwUD3CJodlOiF4XshlZhOIg==
+X-Received: by 2002:a63:6586:: with SMTP id z128mr8861382pgb.446.1625804772713; 
+ Thu, 08 Jul 2021 21:26:12 -0700 (PDT)
+Received: from localhost.localdomain ([71.212.149.176])
+ by smtp.gmail.com with ESMTPSA id y16sm4406727pfe.70.2021.07.08.21.26.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Jul 2021 21:26:12 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,
+	alistair.francis@wdc.com
+Subject: [PATCH 05/17] target/riscv: Use gpr_{src,
+ dst} and tcg_constant_tl in gen_grevi
+Date: Thu,  8 Jul 2021 21:25:56 -0700
+Message-Id: <20210709042608.883256-6-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210709042608.883256-1-richard.henderson@linaro.org>
+References: <20210709042608.883256-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
-References: <20210708143319.10441-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210708143319.10441-1-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 9 Jul 2021 13:52:00 +1000
-Message-ID: <CAKmqyKNTuOB=7UV9GsO5exvbcgqv7Wo0iGum1oz+zLfph1x7kA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: sifive_u: Make sure firmware info is 8-byte
- aligned
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -71,59 +77,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2021 03:52:29 -0000
+X-List-Received-Date: Fri, 09 Jul 2021 04:26:28 -0000
 
-On Fri, Jul 9, 2021 at 12:33 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Currently the firmware dynamic info (fw_dyn) is put right after
-> the reset vector, which is not 8-byte aligned on RV64. OpenSBI
-> fw_dynamic uses ld to read contents from 'struct fw_dynamic_info',
-> which expects fw_dyn to be on the 8-byte boundary, otherwise the
-> misaligned load exception may happen. Fortunately this does not
-> cause any issue on QEMU, as QEMU does support misaligned load.
->
-> RV32 does not have any issue as it is 4-byte aligned already.
-> Change to make sure it is 8-byte aligned which works for both
-> RV32 and RV64.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/translate.c | 17 +++++------------
+ 1 file changed, 5 insertions(+), 12 deletions(-)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 7dedfd548b..6ad40e43b0 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -620,23 +620,16 @@ static void gen_sro(TCGv ret, TCGv arg1, TCGv arg2)
+ 
+ static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
+ {
+-    TCGv source1 = tcg_temp_new();
+-    TCGv source2;
+-
+-    gen_get_gpr(source1, a->rs1);
++    TCGv dest = gpr_dst(ctx, a->rd);
++    TCGv src1 = gpr_src(ctx, a->rs1);
+ 
+     if (a->shamt == (TARGET_LONG_BITS - 8)) {
+         /* rev8, byte swaps */
+-        tcg_gen_bswap_tl(source1, source1);
++        tcg_gen_bswap_tl(dest, src1);
+     } else {
+-        source2 = tcg_temp_new();
+-        tcg_gen_movi_tl(source2, a->shamt);
+-        gen_helper_grev(source1, source1, source2);
+-        tcg_temp_free(source2);
++        TCGv src2 = tcg_constant_tl(a->shamt);
++        gen_helper_grev(dest, src1, src2);
+     }
+-
+-    gen_set_gpr(a->rd, source1);
+-    tcg_temp_free(source1);
+     return true;
+ }
+ 
+-- 
+2.25.1
 
-Alistair
-
-> ---
->
->  hw/riscv/sifive_u.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 273c86418c..4d99566e62 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -599,10 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
->      }
->
->      /* reset vector */
-> -    uint32_t reset_vec[11] = {
-> +    uint32_t reset_vec[12] = {
->          s->msel,                       /* MSEL pin state */
->          0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
-> -        0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
-> +        0x02c28613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
->          0xf1402573,                    /*     csrr   a0, mhartid  */
->          0,
->          0,
-> @@ -610,6 +610,7 @@ static void sifive_u_machine_init(MachineState *machine)
->          start_addr,                    /* start: .dword */
->          start_addr_hi32,
->          fdt_load_addr,                 /* fdt_laddr: .dword */
-> +        0x00000000,
->          0x00000000,
->                                         /* fw_dyn: */
->      };
-> --
-> 2.25.1
->
->
 
