@@ -1,76 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1hLj-0006bK-3e
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 23:38:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41034)
+	id 1m1hLn-0006jW-Nc
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 23:38:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41050)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=81790befc=alistair.francis@wdc.com>)
- id 1m1hLd-0006Zy-7d; Thu, 08 Jul 2021 23:38:41 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:20838)
+ id 1m1hLl-0006eB-8x; Thu, 08 Jul 2021 23:38:49 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:47757)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=81790befc=alistair.francis@wdc.com>)
- id 1m1hLa-0001L9-Ge; Thu, 08 Jul 2021 23:38:41 -0400
+ id 1m1hLj-0001Oq-78; Thu, 08 Jul 2021 23:38:49 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1625801917; x=1657337917;
+ t=1625801926; x=1657337926;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=Va/QI/0pXbJcOTp35xblyv2FFoQ/OeR8biIch+I7WzA=;
- b=mic6G8J9ZOZ37gZtDOUS7YIKVmJgOxSuDX4BBnUJH8Htvcqfj01UNOA7
- Paf6hMqOugutpASzFvlXtJnxxHl1KcGr4eVqoTuKYKCKKnzxX4PTpcS6O
- 60bPTF6Q4DWau0wo/fk3s4K4UzMW0F9BscJ+kcXLS+IHJgN5oHlqmFhwT
- jUKmsPeD3OzRqlZLTKlh3bj7hDlKpXRJxdlb8eU7NRd1gF6AcF5Go0Svk
- 73DrPIYJGzkgjjt8hN1ETym+WhQnagrhR67UheR3VA3VjHkX1f9gZOoCw
- Qg/vXKRaqExNrKXpsCVnz7VEbYPMx00WE37ygmvq1RpAG/0yArzaDjm1B w==;
-IronPort-SDR: UYX7kkPu6/woH38y4q/Bfei9AlNLaLG13nR1PoWCoaELm7NFcgNMFnaJ5RRU76i68If+3XNJqy
- 3wt+mMb91QVKhrjFBuNkFB5coasojN924bxEufgJi9vqWoVu6m9s4vZZve+1DRGyNNEvkcuuBd
- YDtv2pJcxe/g5cNgZlL7j2weRSJXs8fJUapBkH14vkzfM1SQAbZFW/84gJ16r+E2RQFbaSkjTr
- +4EQwaAf5Mz0A2k8UcgEzHOA1t3v7afKfvCQ0cBsprtNski+NIBJYpvmHAQwBcN2swAVtGvzuT
- goE=
-X-IronPort-AV: E=Sophos;i="5.84,225,1620662400"; d="scan'208";a="174125679"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 09 Jul 2021 11:38:35 +0800
-IronPort-SDR: 58Ea4uiqu8eKPdsmq7JopIB8aTOzNHF+L2alorUXVoTvO5eQF/4dSxIu6ulSYBSQWKAEiXp+Tl
- q41vTd07ldSzg50dWVV6GrM7LaBR5SpiWfJ6w5TImiUXawcNcL/0fx6uJZYIBlE4So+h7UYdO2
- VMajVHV+UDrIebN1u3avdtIu82qFPwNpgvao8ZP3GoKmJJG12Z27Q2uYMhxW4VOkW1PWxfB+i9
- s7C1KgRzL2HyVxLnj5t0Y7ZueGnV1ntRgioM8nTYWX1MyISzkpYDBYYc/nqorsUF/ixw1A2g3t
- nStjRMUQr71lhHFRKTiBtjzS
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Jul 2021 20:15:34 -0700
-IronPort-SDR: PCJ0nLkta6HlAyUa5lkExjM2WBTjCEI/y5ERbrFpnMI06h6C+xGNdDj5k43723Qjr7TVovwn7v
- ecvEtBokxaZycIKXWSjcjBbib4UqNBuqyD2eT8O5yaw1/HQivBovisfStDsNn9etr8V8Drh/T1
- 8wCOGxd7u4xPsAi5N2krfBVtVEuuAc1wvsdIBl9FbXaqiFVVMQtlG0YvGrH0NIgntsLFG9/F1I
- 34li5UxV08kukl4IM364F4p4J3FCoqKZpp+OSTfvOV2oUIg8CSWUgaVmJ2MKJkgGFw55U7Jdb9
- sV0=
+ bh=OGqBAplPI0Fe/WO9NdGMvjc3gZz30M3zXEeZ5/TqlI0=;
+ b=Wo1LtKfsCeqazI+mmHnSanK3eHEdJ3o/B8bvST69CXm9jZ2Jiowi1dEx
+ s9T2MtSYh9MbBirbIHbQCtmrm72EKGRvY1agcG/UvRXpT736Jp7rmQBtJ
+ cWSIcGGxtJ1auPyEpYHgeV0a/p+v+Psh39trmkcQWJwLioZM6S7jnpibw
+ 4svLNLzqVOCQJZMqnybvOmWLP72R3GkKqs6LdNE4K0eDk2sFpvPKvh0aW
+ cwdP5u6J1eGN528ob9f8mf4psDCGV5r2UwwwFyJwsW1cIcM+MZIN1oTzT
+ 34laDffTSJAXt3Wpf1j8KpX3YEu5r/L4ogoEXHgDjrg5Psi57IczcrORa g==;
+IronPort-SDR: 4xgC7Oolrt9oFuUw0nS77zJ5+2Zp6b6YyXGcUbRJ2yfKR89eUKv3mB6Mm8LmkR3BY2nhd3B6ii
+ MIIqVuIr8OLXqWmHUR1OBFZf53Be0akhvo2bcwomeuJLgxSjeaTgoz/rPl2LQ2AhDJfsTdAtCz
+ OX0Y98GVGhBygQOFtVC4QneLTC4Cl/V/Bw5x0xdS3SPw2hGdZwaxlS24MfVIeIGDt1b2c63u1P
+ 5o2TnmblV4bsMvRKTGwobGcasn+G3Km7lzB7o/3Jj5ZFPTEBKVmSKJoivRB1e/VSia3g6okQt3
+ QHY=
+X-IronPort-AV: E=Sophos;i="5.84,225,1620662400"; d="scan'208";a="178928252"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Jul 2021 11:38:45 +0800
+IronPort-SDR: K/5Dp5bDgQCJQPylVdL05nLvITVH2jtAzZj6K0GlX9nWN2yt8bU4zCUTFKik0S4a/BzvHfUS4H
+ piDBe+/QJruVHrzKVIVT3gZEu2bCSmhnzHgpdjsaiy2Xlx/a4Hr/emGn7Xwev9R5h50US+Xg/V
+ eXviQYIbka44on/GeFjX+XGnwboVeZxJrFqkQAP5SNP1GgnadBzS+eA+mrblOd1aNcrXoIe+2b
+ Oi861g06GuygmnPtQgahUJyCFF6mde5We12/Dm56lW0TJv+l9vRJYSHyttIW57lRg+wLs7zZLN
+ HWQhcMDyUmwmI+Gy5sgD7PGu
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Jul 2021 20:16:57 -0700
+IronPort-SDR: wcYvKcETCxkin4x3IDz7uXJF0QWCmXjGEPtucGBWqnknQii7cJbwkjmVj/rRfo1MeF0bxJ00+u
+ LHd+86VJTJ9Gg7n9x/dZi0vBQf0L2Ia6mBHqwBP6tdmRT+4lUm3iBKUYGYuA/iHhvLPf8/JbLg
+ DQMqNdvUryPSETaawE5PBp7synOoPg/bPU70hBR0DQQGasU2yWu6E2rw+lZXBGHlaCYZ0zeYac
+ XR6hcqhIwEcnzzimox0Yh9xuRT18jg6MDhKz6gLywjUVHjiD0pxLve1QBuJh6kGfXdf07g6os8
+ r/M=
 WDCIronportException: Internal
 Received: from unknown (HELO toolbox.wdc.com) ([10.225.165.107])
- by uls-op-cesaip02.wdc.com with ESMTP; 08 Jul 2021 20:38:32 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 08 Jul 2021 20:38:42 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v2 1/3] char: ibex_uart: Update the register layout
-Date: Fri,  9 Jul 2021 13:38:30 +1000
-Message-Id: <25c8377d32f3e0f0a1a862c8a5092f8a9e3f9928.1625801868.git.alistair.francis@wdc.com>
+Subject: [PATCH v2 2/3] hw/riscv: opentitan: Add the unimplement
+ rv_core_ibex_peri
+Date: Fri,  9 Jul 2021 13:38:39 +1000
+Message-Id: <ed707782e84118e1b06a32fd79b70fecfb54ff82.1625801868.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1625801868.git.alistair.francis@wdc.com>
 References: <cover.1625801868.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
+Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=81790befc=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
+ helo=esa3.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- UPPERCASE_50_75=0.008 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -83,64 +84,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2021 03:38:43 -0000
-
-Update the register layout to match the latest OpenTitan bitstream.
+X-List-Received-Date: Fri, 09 Jul 2021 03:38:49 -0000
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- hw/char/ibex_uart.c | 19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+ include/hw/riscv/opentitan.h | 1 +
+ hw/riscv/opentitan.c         | 3 +++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-index fe4b6c3c9e..6b0c9330bf 100644
---- a/hw/char/ibex_uart.c
-+++ b/hw/char/ibex_uart.c
-@@ -42,7 +42,8 @@ REG32(INTR_STATE, 0x00)
-     FIELD(INTR_STATE, RX_OVERFLOW, 3, 1)
- REG32(INTR_ENABLE, 0x04)
- REG32(INTR_TEST, 0x08)
--REG32(CTRL, 0x0C)
-+REG32(ALERT_TEST, 0x0C)
-+REG32(CTRL, 0x10)
-     FIELD(CTRL, TX_ENABLE, 0, 1)
-     FIELD(CTRL, RX_ENABLE, 1, 1)
-     FIELD(CTRL, NF, 2, 1)
-@@ -52,25 +53,25 @@ REG32(CTRL, 0x0C)
-     FIELD(CTRL, PARITY_ODD, 7, 1)
-     FIELD(CTRL, RXBLVL, 8, 2)
-     FIELD(CTRL, NCO, 16, 16)
--REG32(STATUS, 0x10)
-+REG32(STATUS, 0x14)
-     FIELD(STATUS, TXFULL, 0, 1)
-     FIELD(STATUS, RXFULL, 1, 1)
-     FIELD(STATUS, TXEMPTY, 2, 1)
-     FIELD(STATUS, RXIDLE, 4, 1)
-     FIELD(STATUS, RXEMPTY, 5, 1)
--REG32(RDATA, 0x14)
--REG32(WDATA, 0x18)
--REG32(FIFO_CTRL, 0x1c)
-+REG32(RDATA, 0x18)
-+REG32(WDATA, 0x1C)
-+REG32(FIFO_CTRL, 0x20)
-     FIELD(FIFO_CTRL, RXRST, 0, 1)
-     FIELD(FIFO_CTRL, TXRST, 1, 1)
-     FIELD(FIFO_CTRL, RXILVL, 2, 3)
-     FIELD(FIFO_CTRL, TXILVL, 5, 2)
--REG32(FIFO_STATUS, 0x20)
-+REG32(FIFO_STATUS, 0x24)
-     FIELD(FIFO_STATUS, TXLVL, 0, 5)
-     FIELD(FIFO_STATUS, RXLVL, 16, 5)
--REG32(OVRD, 0x24)
--REG32(VAL, 0x28)
--REG32(TIMEOUT_CTRL, 0x2c)
-+REG32(OVRD, 0x28)
-+REG32(VAL, 0x2C)
-+REG32(TIMEOUT_CTRL, 0x30)
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+index 86cceef698..a488f5e8ec 100644
+--- a/include/hw/riscv/opentitan.h
++++ b/include/hw/riscv/opentitan.h
+@@ -81,6 +81,7 @@ enum {
+     IBEX_DEV_ALERT_HANDLER,
+     IBEX_DEV_NMI_GEN,
+     IBEX_DEV_OTBN,
++    IBEX_DEV_PERI,
+ };
  
- static void ibex_uart_update_irqs(IbexUartState *s)
- {
+ enum {
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index c5a7e3bacb..933c211b11 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -58,6 +58,7 @@ static const MemMapEntry ibex_memmap[] = {
+     [IBEX_DEV_ALERT_HANDLER] =  {  0x411b0000,  0x1000  },
+     [IBEX_DEV_NMI_GEN] =        {  0x411c0000,  0x1000  },
+     [IBEX_DEV_OTBN] =           {  0x411d0000,  0x10000 },
++    [IBEX_DEV_PERI] =           {  0x411f0000,  0x10000 },
+ };
+ 
+ static void opentitan_board_init(MachineState *machine)
+@@ -217,6 +218,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+         memmap[IBEX_DEV_NMI_GEN].base, memmap[IBEX_DEV_NMI_GEN].size);
+     create_unimplemented_device("riscv.lowrisc.ibex.otbn",
+         memmap[IBEX_DEV_OTBN].base, memmap[IBEX_DEV_OTBN].size);
++    create_unimplemented_device("riscv.lowrisc.ibex.peri",
++        memmap[IBEX_DEV_PERI].base, memmap[IBEX_DEV_PERI].size);
+ }
+ 
+ static void lowrisc_ibex_soc_class_init(ObjectClass *oc, void *data)
 -- 
 2.31.1
 
