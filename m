@@ -1,67 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m1V5p-0003a9-LL
-	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 10:33:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40132)
+	id 1m1hEP-0006br-MG
+	for mharc-qemu-riscv@gnu.org; Thu, 08 Jul 2021 23:31:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39884)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m1V5o-0003Xq-7S; Thu, 08 Jul 2021 10:33:32 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:37420)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m1V5m-0001J4-N8; Thu, 08 Jul 2021 10:33:32 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 22-20020a17090a0c16b0290164a5354ad0so6001233pjs.2; 
- Thu, 08 Jul 2021 07:33:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=9S2uSS3W0hK5SUoIufNlDDDlKwis8Kwh7YaicD3Lk8o=;
- b=pzwgp4591Ln9CSJTkjV0+kId1P1liPBf0H4wkK86kp5fiSGQvXZJqF9MYLu0JRcRXN
- +w6P2piDUvcwy004q5SLKIauOCwxhDZoZgoO2UN9uzkUaj6Y6v04N6YGzaKjwV2jy2L9
- 1sbndgKjZ+4K7ax//4vS/Azqiy+WXIY0NhnYlF6t4SiU4yKQmEayi8LF15gUs5NRBVmv
- EdLheVyTTEmEd87MSbusJLLZU07wfodxoIuu8vGxF2bPGYcKAACR5lsT9D7r/YMaa+SJ
- nzoi6Z2UHY3fAflFgOZT/nbUWgMI5g6kgDU0lsNfkINxCYUK8rDwhQh08jPn50nj6au/
- ug+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=9S2uSS3W0hK5SUoIufNlDDDlKwis8Kwh7YaicD3Lk8o=;
- b=gVw8ChFJiIMbOST74QQTGd01QsoXe1QtqYww1RRRpDPCE4YE+z9jskPNXKNRQF0NLR
- GVIgdg9ktAKcvGolpVdpBeMRa0ISJle3M+3kuBNvDqsmSDXCUaD+YdrOcneONwKUUgKI
- h98Bvh2Yqx/t9i1rFNCsGs+22IoCyshWefj4uPlBBA7VLg+udM0UVyPyB3NmOxub1hPR
- odXbmVA0+gr173ynqctuDKd64O18Nb6c0PTmXGfI9fJU/wWCmn3BnYEaAck2DMtJ1Jxx
- jrbe/WCbnvEwPB9u+IaVNxwwYk3xeR7t4dQghmTtuLaWZGpQwP5K7DFEisLsRi4TO7CW
- oqrQ==
-X-Gm-Message-State: AOAM5308xqpGnO8nllMkdlIPDZD32GOQeu+45JGnuth5iClEX6VVHeht
- KImO4SNegJlo8lqG+vlFADk=
-X-Google-Smtp-Source: ABdhPJy+7ytBgXbdZlME4kSoC2EgWY4FnOHWcBTQ40EB3trDU17OYr1i/nAuWWgzeb14RNk+5Ua4ww==
-X-Received: by 2002:a17:90a:3f87:: with SMTP id
- m7mr5291319pjc.128.1625754809016; 
- Thu, 08 Jul 2021 07:33:29 -0700 (PDT)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id u7sm3669115pgl.30.2021.07.08.07.33.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jul 2021 07:33:28 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH] hw/riscv: sifive_u: Make sure firmware info is 8-byte aligned
-Date: Thu,  8 Jul 2021 22:33:19 +0800
-Message-Id: <20210708143319.10441-1-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=81790befc=alistair.francis@wdc.com>)
+ id 1m1hEK-0006HQ-ET; Thu, 08 Jul 2021 23:31:08 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:23409)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=81790befc=alistair.francis@wdc.com>)
+ id 1m1hEE-0006R9-02; Thu, 08 Jul 2021 23:31:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1625801461; x=1657337461;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=FGftd06KQUZ7tDQ5OGzIJ1X9u0u0bQAockp3XcvLTxU=;
+ b=gkfQhiFZXLXL49BLAwz6cQvvj5l3DEZP1a8mLWfKDpIkpgbxVKVL+gpi
+ 1LSQeCMvN1Oe0lDbNITf+D3cNvBGZyL36WfUoOYWo3cKfViF0P7bzs4wS
+ U9lsd31J8+N/nOYiwbfBr8MTeeR1nHtpijjPVuILencMtpaoOceAnFb+3
+ 06FWOcF9l7z8iIYKyxck+d2FpoLZ66PGWhdJfGLAdegJJ45eqeUR47xtD
+ 9voBgxDbZZ+SE10emNVpa5BdWCPIaR5pk8JM1ivTno+mMm6IDW4so8sc7
+ EEI+CNLs4cd3t5yMeVERycvKS8FO1Du9Wi6tlb8qRj62/s5x0ThO4bAwt g==;
+IronPort-SDR: /W2okUXLjoRwCiyaLlB591g9cJ4sePw48O/qCThKGv44xAUiSYn+ZfQxAQvhzTl8747Ew3pcat
+ fH6emdp4waqk8sLs7637j8ig7KFz620h5XM/qhEW/CSLnw8+lNEhA31my9pOhidbmUjeyXfZ/G
+ hlUIeofQdSQamRkZcXhUMPgenIg1lTcVGHO4hSgdkzTLIiRmP02wufqA819e2KHSIC1O2lBX5v
+ tvuK+9FgRwYgcPtvgjDIQmoFNbWbxL1SDVhX/2eztb9pnWdlVKhXE4Z+v0MAQC2DWCHfIhUtpV
+ Ang=
+X-IronPort-AV: E=Sophos;i="5.84,225,1620662400"; d="scan'208";a="285648619"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Jul 2021 11:30:55 +0800
+IronPort-SDR: oVPcahEAOFREzQ3uaxnhm09R2DnRKVwAa70FRfsluCl0nJ46EKdiTN2SnMy9uoacYxP+zkQyft
+ cptLvBLPtCJzPbTmt57IRYbkNYoiTWjKEjCdymMvvqyYnXXT7B/G7ZEice44NYI5QjAeOD/QCX
+ VDupBAPyC5eLapOoo+mxGyd2oC0dIo2Wydi/qX3JJMFdWwvlLAOEFc3oyqHTJEsQtX8+XYWPZL
+ SExYNHRdeXUfKXqyzIAW3Vn9G1/G98aOI74c3DRX1sqYYm/ayKPrYbiAtYjb47rHM911RjA9k1
+ t6JrsajjBKHFvaUb1QjtM+JH
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Jul 2021 20:07:53 -0700
+IronPort-SDR: O6zxN4L7z/gW8LFnjvYIoqgvYDnoTZ9cjepdq8DtkCS4B42lP3oW08/9JFN8PJHVskDkcPH/iZ
+ NdlgE1M6Fq55yZL8onJP8MG9sPbMubJfXRno7PC96WK0vM4aNQsYdhBM3xSslUo9X2nWpw++nx
+ i0kStOtWLy5Oi3wdFrfh9qe4/b8IHI6ibkSALYiLPHdSfDWNGyQbybV1ZOmYc4aVzn4Jny0QMS
+ vxM78mYvX5D6f1jyO5CWc5Ln06diwRNC2A3966YsWzTv6RGagbRW1Qy2Cn1HQH7SXeYCUnBTe3
+ bCE=
+WDCIronportException: Internal
+Received: from unknown (HELO toolbox.wdc.com) ([10.225.165.107])
+ by uls-op-cesaip01.wdc.com with ESMTP; 08 Jul 2021 20:30:51 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v1 1/5] target/riscv: Expose interrupt pending bits as GPIO
+ lines
+Date: Fri,  9 Jul 2021 13:30:48 +1000
+Message-Id: <37f8680b1ae39de82f9594d8e7a0d9596de9be8b.1625801410.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1036.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=81790befc=alistair.francis@wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,51 +82,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jul 2021 14:33:32 -0000
+X-List-Received-Date: Fri, 09 Jul 2021 03:31:08 -0000
 
-Currently the firmware dynamic info (fw_dyn) is put right after
-the reset vector, which is not 8-byte aligned on RV64. OpenSBI
-fw_dynamic uses ld to read contents from 'struct fw_dynamic_info',
-which expects fw_dyn to be on the 8-byte boundary, otherwise the
-misaligned load exception may happen. Fortunately this does not
-cause any issue on QEMU, as QEMU does support misaligned load.
+Expose the 12 interrupt pending bits in MIP as GPIO lines.
 
-RV32 does not have any issue as it is 4-byte aligned already.
-Change to make sure it is 8-byte aligned which works for both
-RV32 and RV64.
-
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
+ target/riscv/cpu.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
- hw/riscv/sifive_u.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 273c86418c..4d99566e62 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -599,10 +599,10 @@ static void sifive_u_machine_init(MachineState *machine)
-     }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 991a6bb760..86321baf9f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -565,11 +565,41 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     mcc->parent_realize(dev, errp);
+ }
  
-     /* reset vector */
--    uint32_t reset_vec[11] = {
-+    uint32_t reset_vec[12] = {
-         s->msel,                       /* MSEL pin state */
-         0x00000297,                    /* 1:  auipc  t0, %pcrel_hi(fw_dyn) */
--        0x02828613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
-+        0x02c28613,                    /*     addi   a2, t0, %pcrel_lo(1b) */
-         0xf1402573,                    /*     csrr   a0, mhartid  */
-         0,
-         0,
-@@ -610,6 +610,7 @@ static void sifive_u_machine_init(MachineState *machine)
-         start_addr,                    /* start: .dword */
-         start_addr_hi32,
-         fdt_load_addr,                 /* fdt_laddr: .dword */
-+        0x00000000,
-         0x00000000,
-                                        /* fw_dyn: */
-     };
++#ifndef CONFIG_USER_ONLY
++static void riscv_cpu_set_irq(void *opaque, int irq, int level)
++{
++    RISCVCPU *cpu = RISCV_CPU(opaque);
++
++    switch (irq) {
++    case IRQ_U_SOFT:
++    case IRQ_S_SOFT:
++    case IRQ_VS_SOFT:
++    case IRQ_M_SOFT:
++    case IRQ_U_TIMER:
++    case IRQ_S_TIMER:
++    case IRQ_VS_TIMER:
++    case IRQ_M_TIMER:
++    case IRQ_U_EXT:
++    case IRQ_S_EXT:
++    case IRQ_VS_EXT:
++    case IRQ_M_EXT:
++        riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level));
++        break;
++    default:
++        g_assert_not_reached();
++    }
++}
++#endif /* CONFIG_USER_ONLY */
++
+ static void riscv_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+ 
+     cpu_set_cpustate_pointers(cpu);
++
++#ifndef CONFIG_USER_ONLY
++    qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq, 12);
++#endif /* CONFIG_USER_ONLY */
+ }
+ 
+ static Property riscv_cpu_properties[] = {
 -- 
-2.25.1
+2.31.1
 
 
