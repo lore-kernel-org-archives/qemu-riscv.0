@@ -1,66 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m39gP-0004QN-5n
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Jul 2021 00:06:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59142)
+	id 1m39kv-0006BG-4I
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Jul 2021 00:10:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59572)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m39gN-0004Q5-CN
- for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 00:06:07 -0400
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434]:45857)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m39kt-00069s-Ih; Tue, 13 Jul 2021 00:10:47 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:44871)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m39gK-0008Mq-J4
- for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 00:06:07 -0400
-Received: by mail-wr1-x434.google.com with SMTP id t5so14716192wrw.12
- for <qemu-riscv@nongnu.org>; Mon, 12 Jul 2021 21:06:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m39ko-0003mB-37; Tue, 13 Jul 2021 00:10:47 -0400
+Received: by mail-il1-x12e.google.com with SMTP id r16so14866113ilt.11;
+ Mon, 12 Jul 2021 21:10:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=031Pod1KbCCvKM0qkC5w5g65jVqWCxebY6KViuOg9Gs=;
- b=X6+WCTS+pbd7MT/e+qF5a64SzgWYJOpZ6L3YRBdhCDNC/tbaoUGZ3ZRU10vA2IHx1E
- TAWnJgQl0/OGpGDQTdC3e9daoM4ekn3ddjYM2hPTvIaHb/e1vL5oMndCZijz2wCCRs0k
- c+Or5rEP/ai1repIg7jg/hl/0k9KVf7Ln90a+ofUX+Ax6MfRw9CEnNgxlapAutVfLzRu
- hYvYTlbd8up7V2wj6za0OLulSkRq+HeBNmT4xVjvo5eJIRBbcbu6SXopOtCiJeDaOp+b
- HYgp4ykhwtbTGIBV8BUc6o1S7aObcHYVw6YWcvgXwLLSJgyPfjZz6Iee/kFREA7QYxiv
- gaYQ==
+ :cc; bh=ADMnpfMlSis2I/L0LO3Jub9IdziaaoxeH5za35/zw10=;
+ b=Zo+8PKD6gG5x2zZ1nOxffUChRwsFf7e0M4RsaDyjx/x+ghTS3/p/XlFSO42qJqCCHJ
+ a8euRWXU7ke93harknguaOxSbokPjF36vyjaW7jOTS9PwbFBbYEo1kakfp03CmRtIAcC
+ tBepJSn9lWRLpg/+TsmM4pC6Np9wjzYf17lhrdE9t+I8yDy3tArIKWwpWy+nxh5H6tIZ
+ Q/bn2o+8xlMEKX5RPQ0Y6j0dX+lkIeWe0+a9jZ3kZPBoULRr5vHmc32/arbYVLrJoyvs
+ dbwoK/Ru7AOyD2pN0JWFlTT+PN1q+gzFIDWkH1DT6fjgqnLJRSoBCn2nlnE/TDLzt80g
+ 8sgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=031Pod1KbCCvKM0qkC5w5g65jVqWCxebY6KViuOg9Gs=;
- b=ZyCat5aXw69vmO7WGxN8GiaILkz9+F1MkFBSRVbNcyHUl3eKorpDfBHsVp3SV/8Gkc
- j6mwUfuoQMPzBhqpGzLsWR1nYf+x+dhdutSqU3gzPmIWtx8g2nS3HnWZty0PUUHKF5qD
- Pdnol21VC+39032ScWYzZZ5ykXHDq8aASxnztDhnmXnBV9WoAkcw8Esgz7Spcb9APTFm
- G4pmNpSrJDAhQiH4utQvF+4WLweS93FKF08374obrMpKZ6Y2EWZDC/FOlRBMpi/3q4HE
- +99aXwGkEeAxXkH0+USy3oKjrvIFJ6zHCqiOQlmjyB7P4i7KYWfAuZV99E4+peXJLZO5
- sGOQ==
-X-Gm-Message-State: AOAM531PsHCy7ITX0+jcaJM8MBkm9O8FW5mGrG1/1MU4NZoRPdQQhzdP
- EkTFeQCVnK58CrYyAjeBoCG333ark2pOca4n+mcxKg==
-X-Google-Smtp-Source: ABdhPJzWhgLY3YxHahIP0f3PHIA0pyIkvkl2wibSPcd9vVL1jldz/LzP2rpxcW3exUmgzUpygw9IIAtSckwJzgPAE5w=
-X-Received: by 2002:a5d:4d4b:: with SMTP id a11mr2860857wru.325.1626149162126; 
- Mon, 12 Jul 2021 21:06:02 -0700 (PDT)
+ bh=ADMnpfMlSis2I/L0LO3Jub9IdziaaoxeH5za35/zw10=;
+ b=ss//A020jclzphKj6PLNBcU1KHdWaCuKLOalzc17plQXTxmQOaw/30q2hrm9oR+wrq
+ Nn/3mnt06SEEN07KdBpMjjp0WdXeO3OhHgwgqS3CWohHlZVNMyERxvY75yVgEF49iThx
+ QK93L13j/Y+0apVKqgzT8/k5EHpNFRQ9xcOP8KWtEyqHfnVXfHWIkQTTIKz1ZmY4sexG
+ vdvjd11FUTy3Jn06oq10JhVb/t6yrtrFEhoHsUtXE7VDgVjFLA7rya6cF6zpN+wd2ZQP
+ /oXRJ5/+7NNcnX+9UpJSBqbKN3fzGr+c5OdtBeqis3HNMsSclvP7vhnOkhzhS8KeWvly
+ 1jFg==
+X-Gm-Message-State: AOAM531Mrx4j5ZL+PS2RhE7gHQULV25xAbTFLpf/3V+ezT1eSROKZnh3
+ 81J35WitpLP4eH7sKrPEkMsnEQNFwdvVRb4E5rA=
+X-Google-Smtp-Source: ABdhPJw2SiWF5sAt68Tguga9NV93iT8fijqCZy74f4CAh5hWIOrUpywIKUVOzE1VaU2/1+Ge0NYIyB0xR2VguBzzZtw=
+X-Received: by 2002:a92:c907:: with SMTP id t7mr1494253ilp.267.1626149440639; 
+ Mon, 12 Jul 2021 21:10:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <37f8680b1ae39de82f9594d8e7a0d9596de9be8b.1625801410.git.alistair.francis@wdc.com>
- <3a9be7f66702c6fb18ab09ad9db0fdd50b1a7df6.1625801410.git.alistair.francis@wdc.com>
-In-Reply-To: <3a9be7f66702c6fb18ab09ad9db0fdd50b1a7df6.1625801410.git.alistair.francis@wdc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Tue, 13 Jul 2021 09:35:51 +0530
-Message-ID: <CAAhSdy3w7NbJLjUd3V2i98a4e3V9TKzQHic8inz1TERXMmW4+A@mail.gmail.com>
-Subject: Re: [PATCH v1 2/5] hw/intc: sifive_clint: Use RISC-V CPU GPIO lines
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair23@gmail.com>
+References: <20210709042608.883256-1-richard.henderson@linaro.org>
+ <20210709042608.883256-4-richard.henderson@linaro.org>
+In-Reply-To: <20210709042608.883256-4-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 13 Jul 2021 14:10:14 +1000
+Message-ID: <CAKmqyKMuBs-ykLVPVFvgO2XSyj3doFgEHFijhAxO35-Up6ugZQ@mail.gmail.com>
+Subject: Re: [PATCH 03/17] target/riscv: Use gpr_{src, dst} in shift operations
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::434;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x434.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,208 +71,134 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2021 04:06:08 -0000
+X-List-Received-Date: Tue, 13 Jul 2021 04:10:47 -0000
 
-On Fri, Jul 9, 2021 at 9:01 AM Alistair Francis
-<alistair.francis@wdc.com> wrote:
+On Fri, Jul 9, 2021 at 2:43 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> Instead of using riscv_cpu_update_mip() let's instead use the new RISC-V
-> CPU GPIO lines to set the timer and soft MIP bits.
+> These operations are slightly more complicated since
+> we need to crop the shift operand.
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->  include/hw/intc/sifive_clint.h |  2 +
->  hw/intc/sifive_clint.c         | 72 ++++++++++++++++++++++++----------
->  2 files changed, 54 insertions(+), 20 deletions(-)
+>  target/riscv/translate.c | 68 +++++++++++++++-------------------------
+>  1 file changed, 26 insertions(+), 42 deletions(-)
 >
-> diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/sifive_clint.h
-> index a30be0f3d6..921b1561dd 100644
-> --- a/include/hw/intc/sifive_clint.h
-> +++ b/include/hw/intc/sifive_clint.h
-> @@ -40,6 +40,8 @@ typedef struct SiFiveCLINTState {
->      uint32_t time_base;
->      uint32_t aperture_size;
->      uint32_t timebase_freq;
-> +    qemu_irq *timer_irqs;
-> +    qemu_irq *soft_irqs;
->  } SiFiveCLINTState;
->
->  DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> diff --git a/hw/intc/sifive_clint.c b/hw/intc/sifive_clint.c
-> index 0f41e5ea1c..c635a47507 100644
-> --- a/hw/intc/sifive_clint.c
-> +++ b/hw/intc/sifive_clint.c
-> @@ -28,6 +28,12 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/intc/sifive_clint.h"
->  #include "qemu/timer.h"
-> +#include "hw/irq.h"
-> +
-> +typedef struct sifive_clint_callback {
-> +    SiFiveCLINTState *s;
-> +    int num;
-> +} sifive_clint_callback;
->
->  static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 2cfcb849b8..a60b198623 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -778,18 +778,14 @@ static bool gen_arith(DisasContext *ctx, arg_r *a,
+>  static bool gen_shift(DisasContext *ctx, arg_r *a,
+>                          void(*func)(TCGv, TCGv, TCGv))
 >  {
-> @@ -39,7 +45,9 @@ static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
->   * Called when timecmp is written to update the QEMU timer or immediately
->   * trigger timer interrupt if mtimecmp <= current timer value.
->   */
-> -static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> +static void sifive_clint_write_timecmp(SiFiveCLINTState *s, RISCVCPU *cpu,
-> +                                       int hartid,
-> +                                       uint64_t value,
->                                         uint32_t timebase_freq)
->  {
->      uint64_t next;
-> @@ -51,12 +59,12 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
->      if (cpu->env.timecmp <= rtc_r) {
->          /* if we're setting an MTIMECMP value in the "past",
->             immediately raise the timer interrupt */
-> -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +        qemu_irq_raise(s->timer_irqs[hartid]);
-
-This breaks multi-socket support.
-
-Please use "hartid - s->hartid_base" as an index.
-
->          return;
->      }
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +    TCGv src2 = gpr_src(ctx, a->rs2);
+> +    TCGv ext2 = tcg_temp_new();
 >
->      /* otherwise, set up the future timer interrupt */
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> +    qemu_irq_lower(s->timer_irqs[hartid]);
->      diff = cpu->env.timecmp - rtc_r;
->      /* back to ns (note args switched in muldiv64) */
->      next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> @@ -70,8 +78,9 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
->   */
->  static void sifive_clint_timer_cb(void *opaque)
->  {
-> -    RISCVCPU *cpu = opaque;
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +    sifive_clint_callback *state = opaque;
-> +
-> +    qemu_irq_raise(state->s->timer_irqs[state->num]);
->  }
->
->  /* CPU wants to read rtc or timecmp register */
-> @@ -137,7 +146,11 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
->          if (!env) {
->              error_report("clint: invalid timecmp hartid: %zu", hartid);
->          } else if ((addr & 0x3) == 0) {
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MSIP, BOOL_TO_MASK(value));
-> +            if (value) {
-> +                qemu_irq_raise(clint->soft_irqs[hartid]);
-> +            } else {
-> +                qemu_irq_lower(clint->soft_irqs[hartid]);
-> +            }
-
-Eventthis is broken for multi-socket.
-
-Use "hartid - clint->hartid_base" as index.
-
->          } else {
->              error_report("clint: invalid sip write: %08x", (uint32_t)addr);
->          }
-> @@ -153,13 +166,13 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
->          } else if ((addr & 0x7) == 0) {
->              /* timecmp_lo */
->              uint64_t timecmp_hi = env->timecmp >> 32;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
->                  timecmp_hi << 32 | (value & 0xFFFFFFFF), clint->timebase_freq);
->              return;
->          } else if ((addr & 0x7) == 4) {
->              /* timecmp_hi */
->              uint64_t timecmp_lo = env->timecmp;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
->                  value << 32 | (timecmp_lo & 0xFFFFFFFF), clint->timebase_freq);
->          } else {
->              error_report("clint: invalid timecmp write: %08x", (uint32_t)addr);
-> @@ -205,6 +218,12 @@ static void sifive_clint_realize(DeviceState *dev, Error **errp)
->      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_clint_ops, s,
->                            TYPE_SIFIVE_CLINT, s->aperture_size);
->      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    s->timer_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> +    qdev_init_gpio_out(dev, s->timer_irqs, s->num_harts);
-> +
-> +    s->soft_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> +    qdev_init_gpio_out(dev, s->soft_irqs, s->num_harts);
->  }
->
->  static void sifive_clint_class_init(ObjectClass *klass, void *data)
-> @@ -228,7 +247,6 @@ static void sifive_clint_register_types(void)
->
->  type_init(sifive_clint_register_types)
->
+> -    gen_get_gpr(source1, a->rs1);
+> -    gen_get_gpr(source2, a->rs2);
 > -
->  /*
->   * Create CLINT device.
->   */
-> @@ -238,29 +256,43 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
->      bool provide_rdtime)
+> -    tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+> -    (*func)(source1, source1, source2);
+> -
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> +    tcg_gen_andi_tl(ext2, src2, TARGET_LONG_BITS - 1);
+> +    (*func)(dest, src1, ext2);
+> +    tcg_temp_free(ext2);
+>      return true;
+>  }
+>
+> @@ -805,58 +801,46 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>  static bool gen_shifti(DisasContext *ctx, arg_shift *a,
+>                         void(*func)(TCGv, TCGv, TCGv))
 >  {
->      int i;
+> +    TCGv dest, src1, src2;
 > +
-> +    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> +    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> +    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> +    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> +    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> +    qdev_prop_set_uint32(dev, "time-base", time_base);
-> +    qdev_prop_set_uint32(dev, "aperture-size", size);
-> +    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +
->      for (i = 0; i < num_harts; i++) {
->          CPUState *cpu = qemu_get_cpu(hartid_base + i);
-> +        RISCVCPU *rvcpu = RISCV_CPU(cpu);
->          CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        sifive_clint_callback *cb = g_malloc0(sizeof(sifive_clint_callback));
-> +
->          if (!env) {
-> +            g_free(cb);
->              continue;
->          }
->          if (provide_rdtime) {
->              riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, timebase_freq);
->          }
-> +
-> +        cb->s = SIFIVE_CLINT(dev);
-> +        cb->num = i;
->          env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> -                                  &sifive_clint_timer_cb, cpu);
-> +                                  &sifive_clint_timer_cb, cb);
->          env->timecmp = 0;
-> +
-> +        qdev_connect_gpio_out_named(dev, NULL, i,
-> +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
-> +        qdev_connect_gpio_out_named(dev, NULL, num_harts + i,
-> +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_SOFT));
+>      if (a->shamt >= TARGET_LONG_BITS) {
+>          return false;
 >      }
 >
-> -    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> -    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> -    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> -    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> -    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> -    qdev_prop_set_uint32(dev, "time-base", time_base);
-> -    qdev_prop_set_uint32(dev, "aperture-size", size);
-> -    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> -    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
->      return dev;
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+> +    dest = gpr_dst(ctx, a->rd);
+> +    src1 = gpr_src(ctx, a->rs1);
+> +    src2 = tcg_constant_tl(a->shamt);
+>
+> -    gen_get_gpr(source1, a->rs1);
+> -
+> -    tcg_gen_movi_tl(source2, a->shamt);
+> -    (*func)(source1, source1, source2);
+> -
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> +    (*func)(dest, src1, src2);
+>      return true;
 >  }
+>
+>  static bool gen_shiftw(DisasContext *ctx, arg_r *a,
+>                         void(*func)(TCGv, TCGv, TCGv))
+>  {
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +    TCGv src2 = gpr_src(ctx, a->rs2);
+> +    TCGv ext2 = tcg_temp_new();
+>
+> -    gen_get_gpr(source1, a->rs1);
+> -    gen_get_gpr(source2, a->rs2);
+> +    tcg_gen_andi_tl(ext2, src2, 31);
+> +    (*func)(dest, src1, ext2);
+> +    tcg_gen_ext32s_tl(dest, dest);
+>
+> -    tcg_gen_andi_tl(source2, source2, 31);
+> -    (*func)(source1, source1, source2);
+> -    tcg_gen_ext32s_tl(source1, source1);
+> -
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> +    tcg_temp_free(ext2);
+>      return true;
+>  }
+>
+>  static bool gen_shiftiw(DisasContext *ctx, arg_shift *a,
+>                          void(*func)(TCGv, TCGv, TCGv))
+>  {
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +    TCGv src2 = tcg_constant_tl(a->shamt);
+>
+> -    gen_get_gpr(source1, a->rs1);
+> -    tcg_gen_movi_tl(source2, a->shamt);
+> +    (*func)(dest, src1, src2);
+> +    tcg_gen_ext32s_tl(dest, dest);
+>
+> -    (*func)(source1, source1, source2);
+> -    tcg_gen_ext32s_tl(source1, source1);
+> -
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+>      return true;
+>  }
+>
 > --
-> 2.31.1
+> 2.25.1
 >
 >
-
-Regards,
-Anup
 
