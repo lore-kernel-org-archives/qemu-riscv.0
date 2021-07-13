@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3A4v-0003S9-CP
-	for mharc-qemu-riscv@gnu.org; Tue, 13 Jul 2021 00:31:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33870)
+	id 1m3Aew-0006UV-VX
+	for mharc-qemu-riscv@gnu.org; Tue, 13 Jul 2021 01:08:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38190)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m3A4r-0003QQ-4Z
- for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 00:31:26 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e]:36404)
+ id 1m3Aev-0006TA-Dw
+ for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 01:08:41 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:42657)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m3A4p-0004h8-5S
- for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 00:31:24 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id v5so28639172wrt.3
- for <qemu-riscv@nongnu.org>; Mon, 12 Jul 2021 21:31:22 -0700 (PDT)
+ id 1m3Aet-0004eF-EH
+ for qemu-riscv@nongnu.org; Tue, 13 Jul 2021 01:08:41 -0400
+Received: by mail-wr1-x429.google.com with SMTP id r11so23453405wro.9
+ for <qemu-riscv@nongnu.org>; Mon, 12 Jul 2021 22:08:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vm0eg8ogQQaVfVEkF7oSohLUoXs+wl4ihDscPZHTMqQ=;
- b=Uxbl1R3mFG2Sfqqg9a/z1iaGBRVltJjvyiZEfybwPa8EKg2soEWOk3Uh8/ydHpGxqe
- C9sEqQB2Ipnzp6Xy9h8HFUIwqdc2y2h5ywvo1RcpMjhBotxGf1bUlW2M6F/0mC7COU7G
- jbw8MB50d9D8Dw1/cm7IUI0NMYbfG8UjokNhySLIfTz7B5ypqOCUsoqbxQ9Ri24cu6fT
- yLIp7aAm4pu/f+fCN0z9R9BxJ9ABKl9pGAFqN15SNpA8LwyzSRjrNHOsFOM3OIHzytE1
- V4pVPNR0rHApofuVdY+mEloxPMcc6DvtZMBl0EJ3hw2KMWxgbYq/CV4MC8RPDtGbrjyM
- 3kFA==
+ :cc; bh=hGKITZMuQWykn+nuptJW5bZMVk0A6lheh44dlerEhdw=;
+ b=tSUvoN6dFPsBI1w9GwaRKDrMENRaEkCUyj/PBKcbP0HiEBvgP5ViSg1R1SUYONQ1DT
+ 94aLVoDpQ/z3xMyYVfCMPPZyZHbiB4oEfnnmXTYEWjXwbquW0mK1jeCVhesze0reB7qo
+ qX7ebb0r9tGsWzT/qKWG3o212GPJ4YmmdHbNhBQ9BxvQ8Pko2VbT0jJvejgdKM6qIw1w
+ XprOtKcwuyNpJTGPXIpaWf6XmFgYF3mYkw2Fk8JnJjH5M897MKV7umA32AlLgvdVIv7m
+ 1hvL4ZiBMpuq506Kxjmc2aWmukYWLQDe1025qAov1VOglBP/FSv5Nupv6lZLANh/X6di
+ AgFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=vm0eg8ogQQaVfVEkF7oSohLUoXs+wl4ihDscPZHTMqQ=;
- b=HPYP5f2BRHm+hPZFRKuDrV/+fPMe3QtzlJU4vIO1d+sw2LFM0PQpZXPOfaKRD1H4mw
- C70W7gpnmn5uMAfA1V4Xm+5hmxOkyjYfJVQN10JDm3Tor5zGXytDUPZFwTw04JP5TMcO
- 63djBehyZUPJKPdFfbjnKGYt7lYxeTY7gp5gEeIcfK2PyZHuCTDXsUDk7zGU2Of4d1G+
- d8TfjVj5Mxh2P8yYRHJUpxnVe6Oh4S11HCFBnbPZtEPxsmkp4NgP3W7YXWoPsrj41mIQ
- fwZCmK5pJZqL7PaJL7rymUXkO4SAY05qT4iaH7ldDM9Gtau6pLxFoT1J1G4s3LKG7Utw
- l7hg==
-X-Gm-Message-State: AOAM533v7IHdlmtak/JQssgUeiRes1T+JJmecRS1CVtx4ifjN+7Lvhap
- gbbGm8NcqWdOMYQNJIcGlDahttX6nz5Ic6wUfdjPMQ==
-X-Google-Smtp-Source: ABdhPJxaUT9gjks+OBTvSTioLWe+DGeyuiJbAM6OStSaHSV4nP40F9psGa/bxTWkMDZhpIjPybNQtiYqe+NeLVCUtuI=
-X-Received: by 2002:a05:6000:2a1:: with SMTP id
- l1mr2925308wry.128.1626150680883; 
- Mon, 12 Jul 2021 21:31:20 -0700 (PDT)
+ bh=hGKITZMuQWykn+nuptJW5bZMVk0A6lheh44dlerEhdw=;
+ b=ZuL73no67D62Q4mQr7YK8j4iXXzOWFh1w7xy58wdo6rLuev2ARvYozZskgjB5NkyJy
+ Q03GE9g54xrf4AGzOFoAfR1/2jw0nbZ5e8JPrKeinmwfIfzBp1POY/RUzK5PsPjyIhj0
+ H9ekizpABO4g5Pmfrwz7e/L1qKauvsE0M38fr7Te37WQBxI0cD7W6r9LlcYE7Ucsnhha
+ bNUQep+2afU3WCg44tsky/NMDI0z0T94eRbJzBXXU7eZIpya0PidXvrztOEiprHplegr
+ tjP/ndIvCaoCuDGc257+L2rz2ZswLx3bCh6l7Mk6rU0Ip/0ldOlYWnD3uGEnwxQz3Fuk
+ OIcA==
+X-Gm-Message-State: AOAM533mHZKGaoE/Zvxu0V5zAB13RJXvqxeIYDanoe3MXAuCJsguVEwD
+ DT1mTAciRtTS9qyYK6YV50dCnEz9fyTdX3MNX4RRjg==
+X-Google-Smtp-Source: ABdhPJxcQFEaZQjPFqrSPSNVWcbZucxcOPCuYx0w9iikvHhM/5e53hvTx+RUtdVjn0ot0GIo030/D6HvFAN5Uucshaw=
+X-Received: by 2002:a5d:6e81:: with SMTP id k1mr3180625wrz.144.1626152917006; 
+ Mon, 12 Jul 2021 22:08:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <37f8680b1ae39de82f9594d8e7a0d9596de9be8b.1625801410.git.alistair.francis@wdc.com>
  <a5f2909ca7fd9637ad90da0be9661f1e718e3dc5.1625801410.git.alistair.francis@wdc.com>
 In-Reply-To: <a5f2909ca7fd9637ad90da0be9661f1e718e3dc5.1625801410.git.alistair.francis@wdc.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Tue, 13 Jul 2021 10:01:09 +0530
-Message-ID: <CAAhSdy0haNO6fyMzrej1dDNpsAvxO3As=vhsaOkvEUw3Pvyp3g@mail.gmail.com>
+Date: Tue, 13 Jul 2021 10:38:25 +0530
+Message-ID: <CAAhSdy3mFcQAjyAjoJO9rE4_rnxa3hVBNES6PzGNnpJWSj63NQ@mail.gmail.com>
 Subject: Re: [PATCH v1 4/5] hw/intc: sifive_plic: Convert the PLIC to use
  RISC-V CPU GPIO lines
 To: Alistair Francis <alistair.francis@wdc.com>
@@ -55,14 +54,14 @@ Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::42e;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x42e.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::429;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,7 +74,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2021 04:31:27 -0000
+X-List-Received-Date: Tue, 13 Jul 2021 05:08:41 -0000
 
 On Fri, Jul 9, 2021 at 9:06 AM Alistair Francis
 <alistair.francis@wdc.com> wrote:
@@ -151,14 +150,6 @@ On Fri, Jul 9, 2021 at 9:06 AM Alistair Francis
 > +            } else {
 > +                qemu_irq_lower(plic->s_external_irqs[hartid]);
 > +            }
-
-All qemu_irq_xyz() calls are broken for multi-socket, just like CLINT.
-
-Please use "hartid - plic->hartid_base" as index.
-
-Regards,
-Anup
-
 >              break;
 >          default:
 >              break;
@@ -285,6 +276,10 @@ Anup
 >              memmap[VIRT_PLIC].base + i * memmap[VIRT_PLIC].size,
 > -            plic_hart_config, base_hartid,
 > +            plic_hart_config, ms->smp.cpus, base_hartid,
+
+Use "hart_count" instead of "ms->smp.cpus", otherwise it breaks multi-socket
+support in virt machine.
+
 >              VIRT_PLIC_NUM_SOURCES,
 >              VIRT_PLIC_NUM_PRIORITIES,
 >              VIRT_PLIC_PRIORITY_BASE,
@@ -292,4 +287,7 @@ Anup
 > 2.31.1
 >
 >
+
+Regards,
+Anup
 
