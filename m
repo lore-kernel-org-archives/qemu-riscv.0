@@ -1,77 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3ZGo-00057F-OL
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Jul 2021 03:25:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40010)
+	id 1m3ZNQ-0006l3-7u
+	for mharc-qemu-riscv@gnu.org; Wed, 14 Jul 2021 03:32:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40840)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8220343f1=alistair.francis@wdc.com>)
- id 1m3ZGi-00054o-Vo; Wed, 14 Jul 2021 03:25:21 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:61797)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8220343f1=alistair.francis@wdc.com>)
- id 1m3ZGg-0007eb-Sk; Wed, 14 Jul 2021 03:25:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1626247517; x=1657783517;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=aK5q1LfWMp0Zj3X51JFq8pt1YpO/bfu94V3Z/HHoSvI=;
- b=G9/SoyboF7MvvF5rPbjzhOrgoJz+q7ADwgzkzpGKKpqVza9fvm9xGnM4
- 3I5jDfxkopZqTd5BVVv2SoBMWXDsxebiCCTA7jfoiUUbt9PaOHi1hQSMN
- vV55POg7so73Rpl5kvhpgVFj0P6456wKy38RBi10ljebYnANaO+vvGdmO
- 3GEctxy2uPDFTClGaxUgqY+dFd6UkDzGpB5+pFr2ITTaEd3pV5UbF1LDk
- 2uHoKNaT1F80kkPnAXs8eX1PJfO33GMRgN7CO3jixCNboJEkRZ2Nn3kCy
- EIUOziFMKwRtVL6C/y1ACwwTbObuNRZxHqy/ijVKSur/waoRr/VeRwNTq w==;
-IronPort-SDR: KP/SBNPBVtHld5ySvdXn1BuslhBUJ+LOXOPUMU3RgLRfLcHp1vYOjzTJOwVRqddFpzFqI3AI3n
- eYYKU7eRRmiL9CZr+lLcFEVKy+lscKY1rwOsw6JGBcn9u2HdKYuLe2kwwM6LkHOvBFUHiDqNC4
- PPDRZjIZE3rI292gpniTb9i6lGQMb95GyOmdlpiaoclhYWfSzmbj8YYQur7djgcmyClj+t5k2Y
- dBvsKK+vG3255BDd0efC7X1klToAOjEL05nWj5RF5ffOvJRa6LGZuL3MnqInMTh2yV6dXu6K4H
- F6s=
-X-IronPort-AV: E=Sophos;i="5.84,238,1620662400"; d="scan'208";a="179344528"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 14 Jul 2021 15:25:15 +0800
-IronPort-SDR: /m2P4vKkH6K81q7QRVeHJV5qWbdyy4ml3UmYMfgXDnb9UM/LrPiyUex23NS+LHARcJj62PkagW
- mmR3Kx0krc7NG+Y4W+FbUAJ4YkutkUDVCQ9gQttNFxeXh/H2heNodGulEAPXtx5NVQ549KuhkL
- azM/AamOTK/1lb0PqjD5xPYRJLUIJzplrFmrVVMW5Qyevnp6Lx1XsDxnCRE9ywujhRy15BKEBV
- XnXbBJnsM7Sze/5wWwEXxd3Hwh1zbxIlDe6ffQTGPbM6EqZe/s2d/NLhPIfcj14PanQcClG4V2
- 30iAFMUrsvKQQaCStBx23biB
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jul 2021 00:01:59 -0700
-IronPort-SDR: 7jT0YsNB27Vu9jALH7fWStT7SujC0L7pjqr3+Fx5yHPj/5mlK6um4xRfvC9L2IMqPeOeJMYCaF
- jhL2qOftSdj6Y2QDPZiQwNAbkvd92cm+2J4ycjYfWzH3iR85F/ZyxRmY1Bbf4VUOOB1pW2r7so
- GfJULDht792Sc0WWklXJtJdsOKkqCRlEDXXuicYqHEysG7V7FRkDM7MceH46RpQ8WlTyAkdeLH
- +rJeKl3FshAbtA/FHhSBDkyk5V5s+W8jhpW3OweVybq/zn88QkrJRdy7aep1vhETYjarG+5Tn9
- WKY=
-WDCIronportException: Internal
-Received: from unknown (HELO toolbox.wdc.com) ([10.225.165.112])
- by uls-op-cesaip01.wdc.com with ESMTP; 14 Jul 2021 00:25:13 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v2 5/5] hw/intc: ibex_timer: Convert the timer to use RISC-V
- CPU GPIO lines
-Date: Wed, 14 Jul 2021 17:25:11 +1000
-Message-Id: <78eb66f16d6096a60479759e2c1deb524c39757e.1626247467.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <5ebc64a6885af5cc3812beb71621cb7615556a1e.1626247467.git.alistair.francis@wdc.com>
-References: <5ebc64a6885af5cc3812beb71621cb7615556a1e.1626247467.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1m3ZNO-0006fO-1h; Wed, 14 Jul 2021 03:32:14 -0400
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:33431)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1m3ZNL-000422-Qo; Wed, 14 Jul 2021 03:32:13 -0400
+Received: by mail-yb1-xb36.google.com with SMTP id r135so1742441ybc.0;
+ Wed, 14 Jul 2021 00:32:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ewqIiJpJKsLoIWoXeZdlkmpcoVdtLvtbDas4wbIhZCE=;
+ b=sX2pW/KHJnd0C+NHMUKeEAN9KNcdCNK1KBRXX+J8RSNcM8z/fA+no+GJGGIRw5pAV1
+ j8pciU5SOSKapL7h9r/EBr7UqQXQBp72r3u25imVX1+dw6hdgCIF9cR6c8Fmr7oQJU5p
+ 9LaL/CvrAdxYFralJ+cIZ/WEbk+aPAq+6kjmZ5r30qCMNcR4DnvDZj9kgrIzygiTjn2a
+ f/yXNVeakc+31IAoHVR2Ez+3iH6i+enC5AnuZSRIzD6H1Sa3EinigWtKzzP23G0NWouo
+ pJZ2HICK0+OFNdCo948mw+EQEe2hAgpmt/1KrXVhjtrvJYhpW7powhKAlAj9wmz/Wi4h
+ q5SA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ewqIiJpJKsLoIWoXeZdlkmpcoVdtLvtbDas4wbIhZCE=;
+ b=ZlemwWCbNllvHRSZVLh7ivTTw8B8ybkJ1YYRp5YALEyX5oAKqZ2+QqEAZduSU3wt12
+ /kLpogmd34cQo9wWQ0iMBPAlKnhOr/3Om9f2+sE4ol+idBXcbT5p32xz/1t8aP9qJT8y
+ enuRDYwGhfpCwiN/D/xdA4FfJGBC6A+iPfdzbvNn+awOhr4qGQHzP1HtBwQIbpF/AUzH
+ g4u49OzMPXNjeYN50bVs8wVItHXASs2r9M2W1sn302TZniZ/uB6cJ1QRICgdLGuL2LFT
+ H9L8M316KhNMbW8Q4s07qJ2Y5QsiH9759mEclFuVw+6brn6gqwRvBNmvGbAOrl7iOwRC
+ ee+w==
+X-Gm-Message-State: AOAM532grh12JE3xUr2meOngF5na7CpiQZPgMZQ/opQ1MXZTM5mQwitf
+ iyFV+fZIgzWG6CVbjbP5FxghOfIKS4s4um5/+Mo=
+X-Google-Smtp-Source: ABdhPJx2qSknV2jw+F7cEGksO7Csez20bnhrdPMKTSZA3IJycOemHaUjs2waRAjHIh3Omg1URX/dVAY9YKd1+3v8GX4=
+X-Received: by 2002:a25:be09:: with SMTP id h9mr12136140ybk.239.1626247930150; 
+ Wed, 14 Jul 2021 00:32:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.141;
- envelope-from=prvs=8220343f1=alistair.francis@wdc.com;
- helo=esa3.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+References: <da5acadd07eabd5a6e9fc8870fecb435173b8f47.1626247332.git.alistair.francis@wdc.com>
+In-Reply-To: <da5acadd07eabd5a6e9fc8870fecb435173b8f47.1626247332.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 14 Jul 2021 15:31:59 +0800
+Message-ID: <CAEUhbmVBOYZ85fMFKywAXMhHT-3zqybOwXsTEOvWz5gwPx0Hhw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] hw/riscv/boot: Check the error of fdt_pack()
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>, 
+ Peter Maydell <peter.maydell@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb36.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,103 +70,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2021 07:25:22 -0000
+X-List-Received-Date: Wed, 14 Jul 2021 07:32:14 -0000
 
-Instead of using riscv_cpu_update_mip() let's instead use the new RISC-V
-CPU GPIO lines to set the timer MIP bits.
+On Wed, Jul 14, 2021 at 3:22 PM Alistair Francis
+<alistair.francis@wdc.com> wrote:
+>
+> Coverity reports that we don't check the error result of fdt_pack(), so
+> let's save the result and assert that it is 0.
+>
+> Fixes: Coverity CID 1458136
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/boot.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+>
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- include/hw/timer/ibex_timer.h |  2 ++
- hw/riscv/opentitan.c          |  3 +++
- hw/timer/ibex_timer.c         | 17 ++++++++++++-----
- 3 files changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
-index 6a43537003..b6f69b38ee 100644
---- a/include/hw/timer/ibex_timer.h
-+++ b/include/hw/timer/ibex_timer.h
-@@ -48,5 +48,7 @@ struct IbexTimerState {
-     uint32_t timebase_freq;
- 
-     qemu_irq irq;
-+
-+    qemu_irq m_timer_irq;
- };
- #endif /* HW_IBEX_TIMER_H */
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 88a0200972..fb0750c16f 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -176,6 +176,9 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer),
-                        0, qdev_get_gpio_in(DEVICE(&s->plic),
-                        IBEX_TIMER_TIMEREXPIRED0_0));
-+    qdev_connect_gpio_out_named(DEVICE(&s->timer), NULL, 0,
-+                                qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
-+                                                 IRQ_M_TIMER));
- 
-     create_unimplemented_device("riscv.lowrisc.ibex.gpio",
-         memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
-diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-index 5befb53506..66e1f8e48c 100644
---- a/hw/timer/ibex_timer.c
-+++ b/hw/timer/ibex_timer.c
-@@ -77,7 +77,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
-         /*
-          * If the mtimecmp was in the past raise the interrupt now.
-          */
--        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-+        qemu_irq_raise(s->m_timer_irq);
-         if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
-             s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
-             qemu_set_irq(s->irq, true);
-@@ -86,7 +86,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
-     }
- 
-     /* Setup a timer to trigger the interrupt in the future */
--    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-+    qemu_irq_lower(s->m_timer_irq);
-     qemu_set_irq(s->irq, false);
- 
-     diff = cpu->env.timecmp - now;
-@@ -106,10 +106,8 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
- static void ibex_timer_cb(void *opaque)
- {
-     IbexTimerState *s = opaque;
--    CPUState *cs = qemu_get_cpu(0);
--    RISCVCPU *cpu = RISCV_CPU(cs);
- 
--    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-+    qemu_irq_raise(s->m_timer_irq);
-     if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
-         s->timer_intr_state |= R_INTR_STATE_IS_0_MASK;
-         qemu_set_irq(s->irq, true);
-@@ -280,12 +278,21 @@ static void ibex_timer_init(Object *obj)
-     sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
- }
- 
-+static void ibex_timer_realize(DeviceState *dev, Error **errp)
-+{
-+    IbexTimerState *s = IBEX_TIMER(dev);
-+
-+    qdev_init_gpio_out(dev, &s->m_timer_irq, 1);
-+}
-+
-+
- static void ibex_timer_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
- 
-     dc->reset = ibex_timer_reset;
-     dc->vmsd = &vmstate_ibex_timer;
-+    dc->realize = ibex_timer_realize;
-     device_class_set_props(dc, ibex_timer_properties);
- }
- 
--- 
-2.31.1
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
