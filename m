@@ -1,73 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3nsp-0002GX-KQ
-	for mharc-qemu-riscv@gnu.org; Wed, 14 Jul 2021 19:01:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56470)
+	id 1m3tJb-000749-8S
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 00:49:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39042)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8220343f1=alistair.francis@wdc.com>)
- id 1m3nsn-0002Fe-4j; Wed, 14 Jul 2021 19:01:37 -0400
-Received: from esa5.hgst.iphmx.com ([216.71.153.144]:27003)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8220343f1=alistair.francis@wdc.com>)
- id 1m3nsj-0007Ly-Gj; Wed, 14 Jul 2021 19:01:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1626303692; x=1657839692;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=HEx7hskJBkjo4DXZJz2WBuEWdngpJD/Ko2p0QxEhjek=;
- b=McvGIsIZVZvbktyRvyzy7v5Bwbavck5LOOn2Bf/6kl7Mk1i+mTmivdx8
- ehy9IfqOl9h5rwOWePZI7sUxFNDjX1b5b1zAkg2CDp4iwQmTUCYHnj9+6
- vpU8MUzpYFfiyx38rar1AUs8esWDSGj20l2qxkugm6ypNGjyhMmzoYf5Z
- WLzy40568IxVrfbkRm51i/7+H0O6X5Ynp6QtT38ConfEepaM1njMhZ3C8
- 7+nAmzbB33hCCZD+PAqmJlzXrzvxrtPWr8P6wq9PJxAwH1Fw+LNk8o9NA
- NDs5G31b0GJ+BJR4Sa5k7so4i8F68nGqasNWTQ8rKV4VKQ82tI99BXSAh A==;
-IronPort-SDR: +JhpM9dCoTFN7Q6th3F4ULH+agMjJBImGAzePStAYuRym4RYLdD4nQI0939SeyqprijVfcyv/B
- /1TMBxg6WFsyjsHrcPtKsPkGoCsR10/dt3fNfJSQZIskTSm0eohpRNcjdMH3VmneYuyCk5LxoL
- 82KnVLqjmJLD84nhtQAVZyr1s69Gz6xvBN+8gA33kSZZTw5pf/4ggzgo99mtLCZeG2yIbgGcst
- lpvtXPyIo8CA62H/ngkecdqpehlwuRB3VoXwti+tRjLb52etICLKHn9TkaeU0xkxCM3JJLUySC
- SLs=
-X-IronPort-AV: E=Sophos;i="5.84,240,1620662400"; d="scan'208";a="174602868"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 15 Jul 2021 07:01:28 +0800
-IronPort-SDR: O1kcYHFlYWILyrRgUZuKFuu3MmctFG10qJ7X3WYNoVm5tS24NTpQql9zCqOhD2DtFKTSHB6bOn
- GHsVEW29XlfXFFlhB8tsHxVwMVs0ptaHXqCUmVKXNj5/RJgjGylImxKQuFOgbUfi3HwPEAAY3J
- eUwXJWFvdgSl63b07WRv3IJDb57DhsEjW0GIcN2WtMbh3E4jNgP/ahs4qLWUXMI3/v5fJA2sTj
- G5dOazf+u9WspnQzMxLWVk0bMgG0BiegH8wC1tCR5NF6PHmFBcS75zW57EWTgvSAzz5zknRHNC
- eL8YFJ4f/IgawR2BaPJmBPwh
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 14 Jul 2021 15:39:33 -0700
-IronPort-SDR: rdN4kbgAdUBn8UwMUeB5z4DZiw8VI1Po5KLpu0Bt49ZdiOMRcGgXihfZelIVVmhUZkje+YaGnb
- QJHpaPP4HpKYlirgO0XmH+Cw6ATotYyFb8vGMAbOAQvqgWNrWbUN6+or79bklzxIbSR2m+yC5d
- 53CWKlqr878kseYFWIvIjPiNrXVWzE3cI9Iu+4GZvgvmvrvSU/oDKf0kcppVA39gsa9D8w/hlI
- MzmC/Dy62kdEDSqREpyDOVEHQYARN5GEofMEkae9L0sfTmfOCM5TNuvRUuwl0G5D+EE2Ki2ARl
- 7BU=
-WDCIronportException: Internal
-Received: from unknown (HELO toolbox.wdc.com) ([10.225.165.113])
- by uls-op-cesaip01.wdc.com with ESMTP; 14 Jul 2021 16:01:25 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, peter.maydell@linaro.org
-Subject: [PATCH v2 1/1] hw/riscv/boot: Check the error of fdt_pack()
-Date: Thu, 15 Jul 2021 09:01:22 +1000
-Message-Id: <07325315b49d5555269f76094e4bc5296e0643b9.1626303527.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m3tJa-00073m-2R; Thu, 15 Jul 2021 00:49:38 -0400
+Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:45859)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m3tJX-0003bV-Ry; Thu, 15 Jul 2021 00:49:37 -0400
+Received: by mail-il1-x12d.google.com with SMTP id b6so3828754iln.12;
+ Wed, 14 Jul 2021 21:49:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zEnTSQZ9xL2sljjpgyxutCwixfXGMkto0/nmeDwiJvk=;
+ b=PiiApamr7ULYtpefdQdu1JIB3mHP7m2AUIL3ywPmcJRJSVuJ4kkOc0NHK8Tc51DPzK
+ I02kNUZgGKQaVY4k/OVrkDnpeR0lSykjUKv8FvG/m2xebupBots0hDu//jofOGaXjnBq
+ fFjyhlamKyXLcEPF+YX677q1dwARIH2KHBtjg1tQ2P2Z7vP60M3KiKUkW+PZXapzNN4J
+ EL+spPp/Y7+rgLszyK8sfj9O3MFHo4C7Oxo0Di/QHqtb+9lZrn5o+jxhQjUtTGpVgBQo
+ gbkQCArFOeg5dd3iUdKvBAl/PlDBVlIbfybxncQHg/g+TsEauLKYsjO1IWEU/Kd6wXSe
+ OhAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zEnTSQZ9xL2sljjpgyxutCwixfXGMkto0/nmeDwiJvk=;
+ b=STzqrknJfS0+MuApU/eR0wc5UHKLilPJZTIV++uhfvnzpzc4yzSUfF68BL7HaeIsT0
+ 6VkyAbcazjdYYXnmAVSrlloV9eH/1AjGFUfyc5cTz//FfcvQeZLc0iBGzt/fd6edxma3
+ S+YHmh4pjzO2REAAx90vEvH2/+7lI7Pc3AkiUKpA14PAeDgYMfecHsQNKkqYYWOJBTQM
+ 3BikEU71mHBivaZN8G74T5AVvRv+kxHJLiSuVvOwlMA/hsv/EiNaRuyJJqAUCpbHm+CR
+ ogz7lqDQAxuEcgikjWhI8pMKObTjOfZediBxAVyipgyvxYdQcMe2eqvUYZ8bV7z5hvUZ
+ EImg==
+X-Gm-Message-State: AOAM533jhxGMg+g9Q2hH+1USBrJhM2PMY7Z3pI7KAuxGbxL+xx/HUUoo
+ h/ObuctlDz9wvvEVvR6TwWqtoXOz1t7Rjs3utYE=
+X-Google-Smtp-Source: ABdhPJyvPduaxnHQ6+xrniIn2a7LbG75ZRIOozCn4VC7Uf1Y2TSs6giRaynDaGrJXaE2VqU5WpqN7TSURuhsPERpjF4=
+X-Received: by 2002:a92:c907:: with SMTP id t7mr1223938ilp.267.1626324573918; 
+ Wed, 14 Jul 2021 21:49:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.71.153.144;
- envelope-from=prvs=8220343f1=alistair.francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20210709042608.883256-1-richard.henderson@linaro.org>
+ <20210709042608.883256-9-richard.henderson@linaro.org>
+In-Reply-To: <20210709042608.883256-9-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 15 Jul 2021 14:49:07 +1000
+Message-ID: <CAKmqyKPPHemj+a5qEWQSSknWBfpbm2qsYhQcMu4sx4j5fCNJyQ@mail.gmail.com>
+Subject: Re: [PATCH 08/17] target/riscv: Use gpr_{src,
+ dst} for word shift operations
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,43 +72,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2021 23:01:37 -0000
+X-List-Received-Date: Thu, 15 Jul 2021 04:49:38 -0000
 
-Coverity reports that we don't check the error result of fdt_pack(), so
-let's save the result and assert that it is 0.
+On Fri, Jul 9, 2021 at 2:35 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> For trans_sllw, we can just use gen_shiftw.  The others use
+> various tricks to reduce the tcg operation count.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Fixes: Coverity CID 1458136
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- hw/riscv/boot.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 0d38bb7426..993bf89064 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -182,7 +182,7 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
- {
-     uint32_t temp, fdt_addr;
-     hwaddr dram_end = dram_base + mem_size;
--    int fdtsize = fdt_totalsize(fdt);
-+    int ret, fdtsize = fdt_totalsize(fdt);
- 
-     if (fdtsize <= 0) {
-         error_report("invalid device-tree");
-@@ -198,7 +198,9 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-     temp = MIN(dram_end, 3072 * MiB);
-     fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 16 * MiB);
- 
--    fdt_pack(fdt);
-+    ret = fdt_pack(fdt);
-+    /* Should only fail if we've built a corrupted tree */
-+    g_assert(ret == 0);
-     /* copy in the device tree */
-     qemu_fdt_dumpdtb(fdt, fdtsize);
- 
--- 
-2.31.1
+Alistair
 
+> ---
+>  target/riscv/insn_trans/trans_rvi.c.inc | 82 ++++++++++---------------
+>  1 file changed, 31 insertions(+), 51 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index a422dc9ef4..840187a4d6 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -352,24 +352,23 @@ static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
+>  static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> -    TCGv t = tcg_temp_new();
+> -    gen_get_gpr(t, a->rs1);
+> -    tcg_gen_extract_tl(t, t, a->shamt, 32 - a->shamt);
+> -    /* sign-extend for W instructions */
+> -    tcg_gen_ext32s_tl(t, t);
+> -    gen_set_gpr(a->rd, t);
+> -    tcg_temp_free(t);
+> +
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +
+> +    tcg_gen_extract_tl(dest, src1, a->shamt, 32 - a->shamt);
+> +    tcg_gen_ext32s_tl(dest, dest);
+>      return true;
+>  }
+>
+>  static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> -    TCGv t = tcg_temp_new();
+> -    gen_get_gpr(t, a->rs1);
+> -    tcg_gen_sextract_tl(t, t, a->shamt, 32 - a->shamt);
+> -    gen_set_gpr(a->rd, t);
+> -    tcg_temp_free(t);
+> +
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +
+> +    tcg_gen_sextract_tl(dest, src1, a->shamt, 32 - a->shamt);
+>      return true;
+>  }
+>
+> @@ -388,64 +387,45 @@ static bool trans_subw(DisasContext *ctx, arg_subw *a)
+>  static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+> -
+> -    gen_get_gpr(source1, a->rs1);
+> -    gen_get_gpr(source2, a->rs2);
+> -
+> -    tcg_gen_andi_tl(source2, source2, 0x1F);
+> -    tcg_gen_shl_tl(source1, source1, source2);
+> -
+> -    tcg_gen_ext32s_tl(source1, source1);
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> -    return true;
+> +    return gen_shiftw(ctx, a, tcg_gen_shl_tl);
+>  }
+>
+>  static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+>
+> -    gen_get_gpr(source1, a->rs1);
+> -    gen_get_gpr(source2, a->rs2);
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +    TCGv src2 = gpr_src(ctx, a->rs2);
+> +    TCGv ext2 = tcg_temp_new();
+>
+> -    /* clear upper 32 */
+> -    tcg_gen_ext32u_tl(source1, source1);
+> -    tcg_gen_andi_tl(source2, source2, 0x1F);
+> -    tcg_gen_shr_tl(source1, source1, source2);
+> +    tcg_gen_andi_tl(ext2, src2, 31);
+> +    tcg_gen_ext32u_tl(dest, src1);
+> +    tcg_gen_shr_tl(dest, dest, ext2);
+> +    tcg_gen_ext32s_tl(dest, dest);
+>
+> -    tcg_gen_ext32s_tl(source1, source1);
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> +    tcg_temp_free(ext2);
+>      return true;
+>  }
+>
+>  static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> -    TCGv source1 = tcg_temp_new();
+> -    TCGv source2 = tcg_temp_new();
+>
+> -    gen_get_gpr(source1, a->rs1);
+> -    gen_get_gpr(source2, a->rs2);
+> +    TCGv dest = gpr_dst(ctx, a->rd);
+> +    TCGv src1 = gpr_src(ctx, a->rs1);
+> +    TCGv src2 = gpr_src(ctx, a->rs2);
+> +    TCGv ext2 = tcg_temp_new();
+>
+> +    tcg_gen_andi_tl(ext2, src2, 31);
+>      /*
+> -     * first, trick to get it to act like working on 32 bits (get rid of
+> -     * upper 32, sign extend to fill space)
+> +     * First, trick to get it to act like working on 32 bits
+> +     * (get rid of upper 32, sign extend to fill space)
+>       */
+> -    tcg_gen_ext32s_tl(source1, source1);
+> -    tcg_gen_andi_tl(source2, source2, 0x1F);
+> -    tcg_gen_sar_tl(source1, source1, source2);
+> -
+> -    gen_set_gpr(a->rd, source1);
+> -    tcg_temp_free(source1);
+> -    tcg_temp_free(source2);
+> +    tcg_gen_ext32s_tl(dest, src1);
+> +    tcg_gen_sar_tl(dest, dest, ext2);
+>
+> +    tcg_temp_free(ext2);
+>      return true;
+>  }
+>
+> --
+> 2.25.1
+>
+>
 
