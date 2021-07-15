@@ -1,56 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3tcb-00086Q-Ch
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 01:09:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41892)
+	id 1m3vK4-0004hC-9I
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 02:58:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59436)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m3tcY-00085H-G6; Thu, 15 Jul 2021 01:09:15 -0400
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:35726)
+ id 1m3vK3-0004f8-59; Thu, 15 Jul 2021 02:58:15 -0400
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:33413)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m3tcW-0003DT-Ju; Thu, 15 Jul 2021 01:09:13 -0400
-Received: by mail-io1-xd2f.google.com with SMTP id d9so4989451ioo.2;
- Wed, 14 Jul 2021 22:09:11 -0700 (PDT)
+ id 1m3vK1-00047F-Od; Thu, 15 Jul 2021 02:58:14 -0400
+Received: by mail-il1-x131.google.com with SMTP id z1so4131794ils.0;
+ Wed, 14 Jul 2021 23:58:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OWAXONnNX8s8BQVLZeMMayfMjQ0HyUkVjVy51UJhlJc=;
- b=BWFcv64Hew+mzWSQ0fBGcjiJKxTQ1HIEkcnYstPpJ5WU8PD2AWaMRLIRJXRTNk6SqW
- oyPZrmvbzhVZlBTQ1GM0RyIQOmj/ZniqZbOMUJG+aZi+JTsxKK+gWVh1RkRgGmo+caOe
- CpYHeM23p5ASEzZnzqdbbz71gJk/zy+GP1d4VnzxmTDNC7TktYc7M0c9Img81XS7iouj
- XzNDpvurUIFfh1pZfFQwooId2j20lISqjTzIqVvRt9b6YDQUuzfXaVQBlabwQ7xBJC+N
- bEQ4nK9zPoUqx6QB7X1OJvuz9Vk95+vYcqvefWkUaT4FXay8BdtO2hDKyXec5Q82LNwC
- PJPg==
+ :cc; bh=3eoFtijaYrWwKtf7NTtMCkMOQW9Z50/BQzxQut73gyU=;
+ b=HlhLOI5SbpuDtpHXt3Mk5KIUN9e2t6j4bIVqe666s8o0fQ6p1fSo82rlWAX1Dq3osG
+ CAhUQUQwwR1YBOwkXp9JYYAUjXo+QwiXGlelwspQ9m6wHvAlZA7js9nXgqVzxqm4lXno
+ vbKndFq+7e9QiIZP2WIDX49yQDrpSfvfeGXlCpgbA2DRD9VboPFB6Hkg8FQaSXSFCaJU
+ CPuKpNcEfC9bPeR30ye4KlPk0JyxNrrDhTKDrzjgDdiDR0nXp1WX/nvHm55zOygnpHF5
+ g0o/NteUz5W+6wE3ekhu6lUhSVfvmr+awq7WZQo6DR13AQuAWeQeDBdWE2D6h2/lF+dZ
+ YeeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=OWAXONnNX8s8BQVLZeMMayfMjQ0HyUkVjVy51UJhlJc=;
- b=sUSpN0+usqkTJGgyscDAxm70jUrBSbcEXcw9M6JaEZvOmsL2tuFVoFsOIiEpmhdNSZ
- 9xAfARdfgeZyV6BZXJHnqkc4BHSV+fgYhMfZG1N8P/87zRUZkBgjhSp47RoNjxAY8FpE
- yqkCdRizinok+2WkGTC38CCQ2zz6I4hPt212zC2JkI2CbpbBOFJMcCwqlk7F1j/RUX7M
- n2Olg9MQIGJT2Vel2/UdbNfAVCgdzrk/UzUBT4Y63RkqXvY1VKLM6EBnRoddZqUipwwx
- e2s85KIEfZ2kZFQfpwhG71xNmfPYvpp6m1qBObpTgrHAwwqIeBc2QnOYIojLstq/QIZp
- Y4UA==
-X-Gm-Message-State: AOAM5319OL2LkSrvYAqFCu+nnnANxS8fSP0T6HNjuM3jWdKGtBnG6Pwf
- C6Z6ldoOWXWNxCHkcuWubOKjYoUmp1gGQN6fPOM=
-X-Google-Smtp-Source: ABdhPJzVTZVxv9rDX1bcni9oq33xwSAywdBfWtsY6qcSfSOOii+R4gK2MvBV8L3D25OkylqXiYxUxoAb7T54gUEEhoE=
-X-Received: by 2002:a5e:9703:: with SMTP id w3mr1658253ioj.118.1626325750985; 
- Wed, 14 Jul 2021 22:09:10 -0700 (PDT)
+ bh=3eoFtijaYrWwKtf7NTtMCkMOQW9Z50/BQzxQut73gyU=;
+ b=PP5O+viCwehsmwyGwu+GCTMNjFCKM6ZOeORDhQz3yFCAuVnncT+zXcn3zZylE9Bgjh
+ yQFnQgptwZF/GHK/kwOSVZKYlEShbN4NWYrFNKoYtaKwe5QjjWlPTr9IgfubGZ2yLBAc
+ WQ5ESo4ZPfmGCdREnEZ/KS6+4uhR2086ooqj3A3JjM2ZOUWs27l9MYxmgaRqmBn7Lz15
+ wV++A0ZT0WBtRkkXXJ8ZOWPy/SvNmK4N8alUhhk9zYIGB6FQKzVkZvBwHJMXeFy74eIC
+ mszzzTvZlCImy2kKwxR3HS3m9456SOKEtYCwHvBqRD+QgUWRqMB9vr9kfJm6CszKZRoM
+ PY5w==
+X-Gm-Message-State: AOAM5314iueOLU3mwRKfZGd8MQbeZ+BYee6jLiEDIlXyVo4Sc8ZmgsVp
+ Ue5a30bZ8KCLEF9yRZin69EPchPtcNcUsQHBVq0=
+X-Google-Smtp-Source: ABdhPJwjI7Q6Xf8qCtrSOTRdg7dzpkM+snv6Tv+36v48vzt76O+pp5Alq4a9JaybjWTLUaXhmYIoLbvt+kXy1XzziNs=
+X-Received: by 2002:a92:8707:: with SMTP id m7mr1672686ild.177.1626332292321; 
+ Wed, 14 Jul 2021 23:58:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210709042608.883256-1-richard.henderson@linaro.org>
- <20210709042608.883256-18-richard.henderson@linaro.org>
-In-Reply-To: <20210709042608.883256-18-richard.henderson@linaro.org>
+References: <da5acadd07eabd5a6e9fc8870fecb435173b8f47.1626247332.git.alistair.francis@wdc.com>
+ <CAFEAcA_naB0ysANAZYhEEVG4XgN0He4zj7UTwUrKHY4SxJ76UA@mail.gmail.com>
+In-Reply-To: <CAFEAcA_naB0ysANAZYhEEVG4XgN0He4zj7UTwUrKHY4SxJ76UA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 15 Jul 2021 15:08:42 +1000
-Message-ID: <CAKmqyKOVVVKCmeZKjOjp3x4OLKhqgbZX0rpfUH_hKj7Uu0Xe7g@mail.gmail.com>
-Subject: Re: [PATCH 17/17] target/riscv: Remove gen_get_gpr
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Thu, 15 Jul 2021 16:57:46 +1000
+Message-ID: <CAKmqyKMaM9kjJ9mxta-u0DR057oFCu4_sV2MOy8K=NNmJdtKsQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] hw/riscv/boot: Check the error of fdt_pack()
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,61 +72,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2021 05:09:16 -0000
+X-List-Received-Date: Thu, 15 Jul 2021 06:58:15 -0000
 
-On Fri, Jul 9, 2021 at 2:48 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Jul 14, 2021 at 6:46 PM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> This function is now unused.
-> The corresponding gen_set_gpr function is still in use.
+> On Wed, 14 Jul 2021 at 08:22, Alistair Francis <alistair.francis@wdc.com> wrote:
+> >
+> > Coverity reports that we don't check the error result of fdt_pack(), so
+> > let's save the result and assert that it is 0.
+> >
+> > Fixes: Coverity CID 1458136
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/boot.c | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > index 0d38bb7426..25406a3f67 100644
+> > --- a/hw/riscv/boot.c
+> > +++ b/hw/riscv/boot.c
+> > @@ -182,7 +182,7 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+> >  {
+> >      uint32_t temp, fdt_addr;
+> >      hwaddr dram_end = dram_base + mem_size;
+> > -    int fdtsize = fdt_totalsize(fdt);
+> > +    int ret, fdtsize = fdt_totalsize(fdt);
+> >
+> >      if (fdtsize <= 0) {
+> >          error_report("invalid device-tree");
+> > @@ -198,7 +198,8 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+> >      temp = MIN(dram_end, 3072 * MiB);
+> >      fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 16 * MiB);
+> >
+> > -    fdt_pack(fdt);
+> > +    ret = fdt_pack(fdt);
+> > +    g_assert(ret == 0);
+> >      /* copy in the device tree */
+> >      qemu_fdt_dumpdtb(fdt, fdtsize);
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Are we in the same situation as spapr.c where we believe the call
+> will only fail if the fdt was corrupt somehow? If so, it would be
+> nice to also have the comment from spapr.c:
+>         /* Should only fail if we've built a corrupted tree */
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yes, we are the same. I added the comment.
 
 Alistair
 
-> ---
->  target/riscv/translate.c | 17 +++++------------
->  1 file changed, 5 insertions(+), 12 deletions(-)
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 8ff75a5798..a6c850e9d3 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -195,15 +195,6 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
->  /* Wrapper for getting reg values - need to check of reg is zero since
->   * cpu_gpr[0] is not actually allocated
->   */
-> -static inline void gen_get_gpr(TCGv t, int reg_num)
-> -{
-> -    if (reg_num == 0) {
-> -        tcg_gen_movi_tl(t, 0);
-> -    } else {
-> -        tcg_gen_mov_tl(t, cpu_gpr[reg_num]);
-> -    }
-> -}
-> -
->  static TCGv gpr_src(DisasContext *ctx, int reg_num)
->  {
->      if (reg_num == 0) {
-> @@ -1046,9 +1037,11 @@ void riscv_translate_init(void)
->  {
->      int i;
->
-> -    /* cpu_gpr[0] is a placeholder for the zero register. Do not use it. */
-> -    /* Use the gen_set_gpr and gen_get_gpr helper functions when accessing */
-> -    /* registers, unless you specifically block reads/writes to reg 0 */
-> +    /*
-> +     * cpu_gpr[0] is a placeholder for the zero register. Do not use it.
-> +     * Use the gpr_src and gpr_dst helper functions when accessing regs,
-> +     * unless you specifically block reads/writes to reg 0.
-> +     */
->      cpu_gpr[0] = NULL;
->
->      for (i = 1; i < 32; i++) {
-> --
-> 2.25.1
->
->
+> thanks
+> -- PMM
 
