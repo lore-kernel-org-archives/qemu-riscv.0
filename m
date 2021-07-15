@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3wct-0001Un-UD
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 04:21:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44720)
+	id 1m3wd3-0002KX-Nd
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 04:21:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44748)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m3wcr-0001Ie-De; Thu, 15 Jul 2021 04:21:45 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:40661)
+ id 1m3wd1-0002Bq-Q7; Thu, 15 Jul 2021 04:21:55 -0400
+Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:36497)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1m3wcp-0007ji-Eg; Thu, 15 Jul 2021 04:21:45 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id p22so7737508yba.7;
- Thu, 15 Jul 2021 01:21:42 -0700 (PDT)
+ id 1m3wd0-0007rg-06; Thu, 15 Jul 2021 04:21:55 -0400
+Received: by mail-yb1-xb31.google.com with SMTP id v189so7770279ybg.3;
+ Thu, 15 Jul 2021 01:21:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=kcKms3E7D2OTx2ZJ+Y8HzAdPh2Cp1IbNVydl4clRSjs=;
- b=Mq2HUbDFiE0MRU3B0CCGLx0qNvw8UERpW6xjd4soUMgchY6X/IoA2FxpwSvJXst7Li
- xG9Nsf7d42d2IkOoCLTIoty7w5uLi8nhpyj5lGYV44GkcTYZfpb99JjIh1eG93JlcMt3
- NJERCVDY0bF4G9BkbwZmXx1Zmr7e41hYaDdBeRNlR91wRpoJO4Ov0Wj90LH10uzwEjOX
- c+fX0CM/shuym34Yn9bY/m/fZ+4dgiCtcp+0oVAGXCG3LH9OpRZkLvZjJvcok5YDK14t
- N9vCMjw/drAt+HpvKSCYFt9Z3BTfzUuNuFZ4nou9oD8wyyRnXmEi4ZJOghnmjb0XwMRm
- qtEw==
+ bh=BfiXfXKTErfn1gaJS0X7zvEh4RsL0n5NHPiDERzs+aE=;
+ b=M8qXxwgD3AbgBiSHWje1o1EXxKynOg4C4cPKTSi4Av59s4NiZyNy9RhAY/fzQklf4u
+ vEzT4fXWrgMWKLm81fSXiE4QMmt/MaifVxAeA74g6M8abfcvX5RugZ4dIIiHWppjmraC
+ ofiVOKqJ5Yl+zm1hkeTSjasAItevTrE/mAYupYu60PpIiDPS22SFKc03pVc1QcxW9zJs
+ rRqIx1lbH7FwEmUIaEjTKNC0AalP27F1ZyZoNL1Tr1EqYAtfJ5n82rWA1RPCQfzesone
+ qsSJmP8GrYVaCi7Ii0zU2mYMPAwodEByKt7hplvAyGQlSFckVvJTZp0Mh8hojTzEvJdL
+ bk+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=kcKms3E7D2OTx2ZJ+Y8HzAdPh2Cp1IbNVydl4clRSjs=;
- b=HMN1kordTdCCFWtpFIFDdNexVPAdQShD6q+4SJZ/vF1O2HWqDZAJcMRs5cYCePqN0c
- LK/1LngkcjJx0vhHOJtD5plInRqhAvkSW10YEJ7Mlc05cTDRul74E3SajUAua1AuDjMb
- BhKtn6hLtI8LHMNjh290cuxb6YZIIoGBD8iJzRZCl3PC0eqIQ9poKZOt9ZtWjfmDkCWI
- qs8OmR0d8XYhg02J8yXqppcj8X2Hv5/aVUry9iyMjBAdNBAtGKtKPavtWq9yau1ZOzU0
- auab6qGEWt5FylO6/9OgC+ynFfgYzTER0oCGOF3SprIm4EekKsFVtEGiLKnC9jyjUUQt
- yqKw==
-X-Gm-Message-State: AOAM530oKz+Jg/oMf6lne85c+6hTLgCpuZE7T+g7EXJiEpnC9FdgtEwd
- Wvhsuc1oMHaW0dq5xF5nxvqkYduyO/b31v/WC2Q=
-X-Google-Smtp-Source: ABdhPJx5UzKV5irJxDg3f04JpYyoRy5/2IBFJfeOa+ZS92yQYoAkK3Q1xQyPjTJR2D9C7Q05c2+J63v9nfvptDBNkHc=
-X-Received: by 2002:a25:2c01:: with SMTP id s1mr4066088ybs.387.1626337302333; 
- Thu, 15 Jul 2021 01:21:42 -0700 (PDT)
+ bh=BfiXfXKTErfn1gaJS0X7zvEh4RsL0n5NHPiDERzs+aE=;
+ b=B54Jp4KBJJkfPR14TqcUBNYfKb/J41FFJyTsTiGxhNqHriCe4BN8rJTd3RKU81ofGI
+ /bW5ONymUIbh7g7Wb9m9ZFlMnKT/elJ+gPffM52iNWY3gw6rrBZHCXQDXIOcqqvHgW4n
+ GOqJ+LF4krtFNoiEyticlRZ6RLVVCOoMmPmUcckY6CCpvbXYeIRK6oy/RAm2/mIFCA5q
+ PddhWoFn7A4TivCT2lHORtcw5It3RBEb9DCznlXnFdQoi8PC86bpeX6HSQiCxP/CxiXU
+ 8piVt7jkhQnCWni5dyicm5JfgEmSlHIA860Glkbb4NdK1SX/O9sDw71PtUI4kd5CEvxN
+ aO5A==
+X-Gm-Message-State: AOAM530rSWfsSXaHckCAuZ+iCxurR37nLmI8tl8ozQl8jhEJUZx0G8jP
+ i7F40mybmmoqWltyY5tENUaPSHhhsS45KSXW+iU=
+X-Google-Smtp-Source: ABdhPJy52fW5rwKVp0e3JkSyJYtXKv5gvpyHSLIUNqVYQQUHNU2bv94HkmqdMmTaTra5tLTQctPP/YCy8Yjh2ANoCaQ=
+X-Received: by 2002:a25:6c04:: with SMTP id h4mr3853250ybc.122.1626337312789; 
+ Thu, 15 Jul 2021 01:21:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <5ebc64a6885af5cc3812beb71621cb7615556a1e.1626247467.git.alistair.francis@wdc.com>
- <389a6f1d9b73c6a8ee7c2e62c8324ee0dc135302.1626247467.git.alistair.francis@wdc.com>
-In-Reply-To: <389a6f1d9b73c6a8ee7c2e62c8324ee0dc135302.1626247467.git.alistair.francis@wdc.com>
+ <78eb66f16d6096a60479759e2c1deb524c39757e.1626247467.git.alistair.francis@wdc.com>
+In-Reply-To: <78eb66f16d6096a60479759e2c1deb524c39757e.1626247467.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 15 Jul 2021 16:21:30 +0800
-Message-ID: <CAEUhbmWxO7JKWs81oCBhhvP+soEutEkvJ52j_fir4XMq6d6AkA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] hw/intc: sifive_plic: Convert the PLIC to use
+Date: Thu, 15 Jul 2021 16:21:41 +0800
+Message-ID: <CAEUhbmUKULm0kc8xeKyh+4uUT+fBW6juRh7mmVSB+uD56rxuKw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] hw/intc: ibex_timer: Convert the timer to use
  RISC-V CPU GPIO lines
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -52,8 +52,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,224 +73,116 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2021 08:21:46 -0000
+X-List-Received-Date: Thu, 15 Jul 2021 08:21:56 -0000
 
 On Wed, Jul 14, 2021 at 3:25 PM Alistair Francis
 <alistair.francis@wdc.com> wrote:
 >
 > Instead of using riscv_cpu_update_mip() let's instead use the new RISC-V
-> CPU GPIO lines to set the external MIP bits.
+> CPU GPIO lines to set the timer MIP bits.
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  include/hw/intc/sifive_plic.h |  4 ++++
->  hw/intc/sifive_plic.c         | 30 +++++++++++++++++++++++-------
->  hw/riscv/microchip_pfsoc.c    |  2 +-
->  hw/riscv/shakti_c.c           |  3 ++-
->  hw/riscv/sifive_e.c           |  2 +-
->  hw/riscv/sifive_u.c           |  2 +-
->  hw/riscv/virt.c               |  2 +-
->  7 files changed, 33 insertions(+), 12 deletions(-)
+>  include/hw/timer/ibex_timer.h |  2 ++
+>  hw/riscv/opentitan.c          |  3 +++
+>  hw/timer/ibex_timer.c         | 17 ++++++++++++-----
+>  3 files changed, 17 insertions(+), 5 deletions(-)
 >
-> diff --git a/include/hw/intc/sifive_plic.h b/include/hw/intc/sifive_plic.=
+> diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.=
 h
-> index 1e451a270c..da1dc64c6d 100644
-> --- a/include/hw/intc/sifive_plic.h
-> +++ b/include/hw/intc/sifive_plic.h
-> @@ -72,9 +72,13 @@ struct SiFivePLICState {
->      uint32_t context_base;
->      uint32_t context_stride;
->      uint32_t aperture_size;
+> index 6a43537003..b6f69b38ee 100644
+> --- a/include/hw/timer/ibex_timer.h
+> +++ b/include/hw/timer/ibex_timer.h
+> @@ -48,5 +48,7 @@ struct IbexTimerState {
+>      uint32_t timebase_freq;
+>
+>      qemu_irq irq;
 > +
-> +    qemu_irq *s_external_irqs;
-> +    qemu_irq *m_external_irqs;
-
-nits: it's better we put M-mode IRQs before S-mode IRQs.
-
+> +    qemu_irq m_timer_irq;
 >  };
->
->  DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
-> +    uint32_t num_harts,
->      uint32_t hartid_base, uint32_t num_sources,
->      uint32_t num_priorities, uint32_t priority_base,
->      uint32_t pending_base, uint32_t enable_base,
-> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-> index 78903beb06..7a795f0a61 100644
-> --- a/hw/intc/sifive_plic.c
-> +++ b/hw/intc/sifive_plic.c
-> @@ -29,6 +29,7 @@
->  #include "hw/intc/sifive_plic.h"
->  #include "target/riscv/cpu.h"
->  #include "migration/vmstate.h"
-> +#include "hw/irq.h"
->
->  #define RISCV_DEBUG_PLIC 0
->
-> @@ -139,18 +140,14 @@ static void sifive_plic_update(SiFivePLICState *pli=
-c)
->      for (addrid =3D 0; addrid < plic->num_addrs; addrid++) {
->          uint32_t hartid =3D plic->addr_config[addrid].hartid;
->          PLICMode mode =3D plic->addr_config[addrid].mode;
-> -        CPUState *cpu =3D qemu_get_cpu(hartid);
-> -        CPURISCVState *env =3D cpu ? cpu->env_ptr : NULL;
-> -        if (!env) {
-> -            continue;
-> -        }
->          int level =3D sifive_plic_irqs_pending(plic, addrid);
-> +
->          switch (mode) {
->          case PLICMode_M:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MEIP, BOOL_TO_MASK(=
-level));
-> +            qemu_set_irq(plic->m_external_irqs[hartid - plic->hartid_bas=
-e], level);
->              break;
->          case PLICMode_S:
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_SEIP, BOOL_TO_MASK(=
-level));
-> +            qemu_set_irq(plic->s_external_irqs[hartid - plic->hartid_bas=
-e], level);
->              break;
->          default:
->              break;
-> @@ -456,6 +453,12 @@ static void sifive_plic_realize(DeviceState *dev, Er=
-ror **errp)
->      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &plic->mmio);
->      qdev_init_gpio_in(dev, sifive_plic_irq_request, plic->num_sources);
->
-> +    plic->s_external_irqs =3D g_malloc(sizeof(qemu_irq) * plic->num_hart=
-s);
-> +    qdev_init_gpio_out(dev, plic->s_external_irqs, plic->num_harts);
-> +
-> +    plic->m_external_irqs =3D g_malloc(sizeof(qemu_irq) * plic->num_hart=
-s);
-> +    qdev_init_gpio_out(dev, plic->m_external_irqs, plic->num_harts);
-> +
->      /* We can't allow the supervisor to control SEIP as this would allow=
- the
->       * supervisor to clear a pending external interrupt which will resul=
-t in
->       * lost a interrupt in the case a PLIC is attached. The SEIP bit mus=
-t be
-> @@ -520,6 +523,7 @@ type_init(sifive_plic_register_types)
->   * Create PLIC device.
->   */
->  DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
-> +    uint32_t num_harts,
->      uint32_t hartid_base, uint32_t num_sources,
->      uint32_t num_priorities, uint32_t priority_base,
->      uint32_t pending_base, uint32_t enable_base,
-> @@ -527,6 +531,8 @@ DeviceState *sifive_plic_create(hwaddr addr, char *ha=
-rt_config,
->      uint32_t context_stride, uint32_t aperture_size)
->  {
->      DeviceState *dev =3D qdev_new(TYPE_SIFIVE_PLIC);
-> +    int i;
-> +
->      assert(enable_stride =3D=3D (enable_stride & -enable_stride));
->      assert(context_stride =3D=3D (context_stride & -context_stride));
->      qdev_prop_set_string(dev, "hart-config", hart_config);
-> @@ -542,5 +548,15 @@ DeviceState *sifive_plic_create(hwaddr addr, char *h=
-art_config,
->      qdev_prop_set_uint32(dev, "aperture-size", aperture_size);
->      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
->      sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +
-> +    for (i =3D 0; i < num_harts; i++) {
-> +        CPUState *cpu =3D qemu_get_cpu(hartid_base + i);
-> +
-> +        qdev_connect_gpio_out_named(dev, NULL, i,
+>  #endif /* HW_IBEX_TIMER_H */
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 88a0200972..fb0750c16f 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -176,6 +176,9 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev=
+_soc, Error **errp)
+>      sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer),
+>                         0, qdev_get_gpio_in(DEVICE(&s->plic),
+>                         IBEX_TIMER_TIMEREXPIRED0_0));
+> +    qdev_connect_gpio_out_named(DEVICE(&s->timer), NULL, 0,
 
 nits: use qdev_connect_gpio_out
 
-> +                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_S_=
-EXT));
-> +        qdev_connect_gpio_out_named(dev, NULL, num_harts + i,
-> +                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_M_=
-EXT));
-> +    }
-> +
->      return dev;
->  }
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index eb8e79e0a1..eef55f69fd 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -274,7 +274,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *=
-dev, Error **errp)
->
->      /* PLIC */
->      s->plic =3D sifive_plic_create(memmap[MICROCHIP_PFSOC_PLIC].base,
-> -        plic_hart_config, 0,
-> +        plic_hart_config, ms->smp.cpus, 0,
->          MICROCHIP_PFSOC_PLIC_NUM_SOURCES,
->          MICROCHIP_PFSOC_PLIC_NUM_PRIORITIES,
->          MICROCHIP_PFSOC_PLIC_PRIORITY_BASE,
-> diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-> index 18f70fadaa..09d4e1433e 100644
-> --- a/hw/riscv/shakti_c.c
-> +++ b/hw/riscv/shakti_c.c
-> @@ -106,13 +106,14 @@ type_init(shakti_c_machine_type_info_register)
->
->  static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
->  {
-> +    MachineState *ms =3D MACHINE(qdev_get_machine());
->      ShaktiCSoCState *sss =3D RISCV_SHAKTI_SOC(dev);
->      MemoryRegion *system_memory =3D get_system_memory();
->
->      sysbus_realize(SYS_BUS_DEVICE(&sss->cpus), &error_abort);
->
->      sss->plic =3D sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base=
+> +                                qdev_get_gpio_in(DEVICE(qemu_get_cpu(0))=
 ,
-> -        (char *)SHAKTI_C_PLIC_HART_CONFIG, 0,
-> +        (char *)SHAKTI_C_PLIC_HART_CONFIG, ms->smp.cpus, 0,
->          SHAKTI_C_PLIC_NUM_SOURCES,
->          SHAKTI_C_PLIC_NUM_PRIORITIES,
->          SHAKTI_C_PLIC_PRIORITY_BASE,
-> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-> index ddc658c8d6..03bff21527 100644
-> --- a/hw/riscv/sifive_e.c
-> +++ b/hw/riscv/sifive_e.c
-> @@ -198,7 +198,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Er=
-ror **errp)
->
->      /* MMIO */
->      s->plic =3D sifive_plic_create(memmap[SIFIVE_E_DEV_PLIC].base,
-> -        (char *)SIFIVE_E_PLIC_HART_CONFIG, 0,
-> +        (char *)SIFIVE_E_PLIC_HART_CONFIG, ms->smp.cpus, 0,
->          SIFIVE_E_PLIC_NUM_SOURCES,
->          SIFIVE_E_PLIC_NUM_PRIORITIES,
->          SIFIVE_E_PLIC_PRIORITY_BASE,
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 273c86418c..6d1f9464c2 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -829,7 +829,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Er=
-ror **errp)
->
->      /* MMIO */
->      s->plic =3D sifive_plic_create(memmap[SIFIVE_U_DEV_PLIC].base,
-> -        plic_hart_config, 0,
-> +        plic_hart_config, ms->smp.cpus, 0,
->          SIFIVE_U_PLIC_NUM_SOURCES,
->          SIFIVE_U_PLIC_NUM_PRIORITIES,
->          SIFIVE_U_PLIC_PRIORITY_BASE,
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4a3cd2599a..4db40bacae 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -619,7 +619,7 @@ static void virt_machine_init(MachineState *machine)
->          /* Per-socket PLIC */
->          s->plic[i] =3D sifive_plic_create(
->              memmap[VIRT_PLIC].base + i * memmap[VIRT_PLIC].size,
-> -            plic_hart_config, base_hartid,
-> +            plic_hart_config, hart_count, base_hartid,
->              VIRT_PLIC_NUM_SOURCES,
->              VIRT_PLIC_NUM_PRIORITIES,
->              VIRT_PLIC_PRIORITY_BASE,
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+Does this timer device only support one CPU?
+
+> +                                                 IRQ_M_TIMER));
+>
+>      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+>          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
+> diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
+> index 5befb53506..66e1f8e48c 100644
+> --- a/hw/timer/ibex_timer.c
+> +++ b/hw/timer/ibex_timer.c
+> @@ -77,7 +77,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+>          /*
+>           * If the mtimecmp was in the past raise the interrupt now.
+>           */
+> -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
+> +        qemu_irq_raise(s->m_timer_irq);
+>          if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
+>              s->timer_intr_state |=3D R_INTR_STATE_IS_0_MASK;
+>              qemu_set_irq(s->irq, true);
+> @@ -86,7 +86,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+>      }
+>
+>      /* Setup a timer to trigger the interrupt in the future */
+> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
+> +    qemu_irq_lower(s->m_timer_irq);
+>      qemu_set_irq(s->irq, false);
+>
+>      diff =3D cpu->env.timecmp - now;
+> @@ -106,10 +106,8 @@ static void ibex_timer_update_irqs(IbexTimerState *s=
+)
+>  static void ibex_timer_cb(void *opaque)
+>  {
+>      IbexTimerState *s =3D opaque;
+> -    CPUState *cs =3D qemu_get_cpu(0);
+> -    RISCVCPU *cpu =3D RISCV_CPU(cs);
+>
+> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
+> +    qemu_irq_raise(s->m_timer_irq);
+>      if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
+>          s->timer_intr_state |=3D R_INTR_STATE_IS_0_MASK;
+>          qemu_set_irq(s->irq, true);
+> @@ -280,12 +278,21 @@ static void ibex_timer_init(Object *obj)
+>      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+>  }
+>
+> +static void ibex_timer_realize(DeviceState *dev, Error **errp)
+> +{
+> +    IbexTimerState *s =3D IBEX_TIMER(dev);
+> +
+> +    qdev_init_gpio_out(dev, &s->m_timer_irq, 1);
+> +}
+> +
+> +
+>  static void ibex_timer_class_init(ObjectClass *klass, void *data)
+>  {
+>      DeviceClass *dc =3D DEVICE_CLASS(klass);
+>
+>      dc->reset =3D ibex_timer_reset;
+>      dc->vmsd =3D &vmstate_ibex_timer;
+> +    dc->realize =3D ibex_timer_realize;
+>      device_class_set_props(dc, ibex_timer_properties);
+>  }
+>
+
+Regards,
+Bin
 
