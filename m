@@ -1,47 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m3zdF-0002UA-IO
-	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 07:34:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49434)
+	id 1m441A-0005Xp-MY
+	for mharc-qemu-riscv@gnu.org; Thu, 15 Jul 2021 12:15:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48380)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1m3zdD-0002T8-1h; Thu, 15 Jul 2021 07:34:19 -0400
-Received: from out28-49.mail.aliyun.com ([115.124.28.49]:35044)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1m3zdA-0006X2-2u; Thu, 15 Jul 2021 07:34:18 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436284|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.002014-0.00119973-0.996786;
- FP=17741766544139683762|1|1|2|0|-1|-1|-1; HT=ay29a033018047213;
- MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=6; RT=6; SR=0;
- TI=SMTPD_---.Ki2jrPY_1626348847; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Ki2jrPY_1626348847)
- by smtp.aliyun-inc.com(10.147.43.95); Thu, 15 Jul 2021 19:34:07 +0800
-Subject: Re: [PATCH v2 2/5] hw/intc: sifive_clint: Use RISC-V CPU GPIO lines
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <5ebc64a6885af5cc3812beb71621cb7615556a1e.1626247467.git.alistair.francis@wdc.com>
- <f1335c317c3930706a9220271a012804ec6b0e04.1626247467.git.alistair.francis@wdc.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <b196e0ee-efdd-dcf1-0298-60b7e0886148@c-sky.com>
-Date: Thu, 15 Jul 2021 19:32:51 +0800
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1m4419-0005XU-DA
+ for qemu-riscv@nongnu.org; Thu, 15 Jul 2021 12:15:19 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:39659)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1m4414-0001a3-FM
+ for qemu-riscv@nongnu.org; Thu, 15 Jul 2021 12:15:19 -0400
+Received: by mail-pf1-x431.google.com with SMTP id b12so5917235pfv.6
+ for <qemu-riscv@nongnu.org>; Thu, 15 Jul 2021 09:15:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=SPwtlGI5qoEXvXGdhfVcsvqgdXqh3H6e2job1n4NMqE=;
+ b=rKQRCSltJcMJ7OZbC6h7RUj0kL0fVXWsw2kvO5Xjl86QE1vdqqzq6ub+fO81vJilAC
+ FIJxsLIhXkaN8aPtZ+ebhX24RnDLqBGnhqvVaJRDajIGSc1sEDcrUEVauCNPY/i/4tRT
+ XanQzzUXRgo9fl3prKLlhdl3Ct8TXeYp0T1w5+nvPeUF2qxc6iaiyvRO9/3DpQARs8mO
+ s4DUFzwMzrfzyFx2eX+9iSbRoNBunp38USUKnUP6PD3ujPBZxofWoiy7BgbsojNXJWty
+ Wx+VivYyz7LLRT4CpNkOJlLYyP7SEBZPAN82sLhgU8Y1aDRS4949Re1C4iahJjFoLQvO
+ DI5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=SPwtlGI5qoEXvXGdhfVcsvqgdXqh3H6e2job1n4NMqE=;
+ b=BKSMy8rNwrXVAYtQ3vK0oQW6+RcHXTkk4kFmTFPAyxQAUD5KQsHLWjJvGRYFyCnOd/
+ BGVw/FGK9L+Pw0Ukd5K3hO9ztvrl98kHXs3cYzC83PsXFdBVS7NxPF36KJRoi+Y7lNtM
+ ctEhkheQB7xtzDN7WO7B8VFSctVa3DtPxkv+9OV+APVyragyVrg68Bxle/j8WNEGVApJ
+ qy9u+ig8dH0eEGUhDdYLR2nr5oMYb+b7b3BNJC5a4ZtQvNa3Fz0dAQy1kO7cHRgbFhb0
+ N/6tfwnyNWDx3ZlEvvWYre2e8U0HuUDhxILXVDDnJDoMYpngvOaSDSd5QmM0ZY/d471c
+ eA6g==
+X-Gm-Message-State: AOAM5332jQ+rHyiRrq2D4wgesDig4J1FDe2kRrm+ccA777jsigNzj9W7
+ mxYMJz5/Nx3z6NjZG7aQ3L//GocK1ltYNA==
+X-Google-Smtp-Source: ABdhPJyyRf2ZtTv+6fclonfpexJi1syigGwksUEaGbFEa0ufD2z75kESs87WF2J3jxRWzxaGPsddqw==
+X-Received: by 2002:a63:e316:: with SMTP id f22mr5381536pgh.100.1626365712442; 
+ Thu, 15 Jul 2021 09:15:12 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.149.176])
+ by smtp.gmail.com with ESMTPSA id b19sm5946096pjh.29.2021.07.15.09.15.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Jul 2021 09:15:11 -0700 (PDT)
+Subject: Re: [PATCH 00/17] target/riscv: Use tcg_constant_*
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, qemu-riscv@nongnu.org
+References: <20210709042608.883256-1-richard.henderson@linaro.org>
+ <2a5cfe45-3fdf-9a2f-c0f3-682d30d521a3@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <0b70aaf7-b337-3b73-cdbf-c5693a826204@linaro.org>
+Date: Thu, 15 Jul 2021 09:15:10 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <f1335c317c3930706a9220271a012804ec6b0e04.1626247467.git.alistair.francis@wdc.com>
+In-Reply-To: <2a5cfe45-3fdf-9a2f-c0f3-682d30d521a3@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.49; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-49.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x431.google.com
+X-Spam_score_int: -1
+X-Spam_score: -0.2
+X-Spam_bar: /
+X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,194 +80,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2021 11:34:19 -0000
+X-List-Received-Date: Thu, 15 Jul 2021 16:15:19 -0000
+
+On 7/15/21 4:21 AM, LIU Zhiwei wrote:
+> Also on a side note, could you give me some advice for the following question?
+> 
+> I have been supporting  running 32bit application on qemu-riscv64. After this patch set,
+> it is hard to define a  method,  such as gpr_dst_s or gpr_dst_u, to extend the destination
+> register. I can only extend the destination register(ext32s or ext32u) in each instruction
+> with scattered code.
+> 
+> Can we just omit the extension of the destination register?
+
+It's hard to give advice on code that I haven't seen.
+
+In general I would think that the destination register need not be extended for 32-bit 
+mode, unless the architecture says otherwise.  (What does the architecture say about the 
+contents of the registers when transitioning from a 32-bit mode user program to a 64-bit 
+mode kernel?)
 
 
-On 2021/7/14 下午3:24, Alistair Francis wrote:
-> Instead of using riscv_cpu_update_mip() let's instead use the new RISC-V
-> CPU GPIO lines to set the timer and soft MIP bits.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   include/hw/intc/sifive_clint.h |  2 +
->   hw/intc/sifive_clint.c         | 68 ++++++++++++++++++++++++----------
->   2 files changed, 50 insertions(+), 20 deletions(-)
->
-> diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/sifive_clint.h
-> index a30be0f3d6..921b1561dd 100644
-> --- a/include/hw/intc/sifive_clint.h
-> +++ b/include/hw/intc/sifive_clint.h
-> @@ -40,6 +40,8 @@ typedef struct SiFiveCLINTState {
->       uint32_t time_base;
->       uint32_t aperture_size;
->       uint32_t timebase_freq;
-> +    qemu_irq *timer_irqs;
-> +    qemu_irq *soft_irqs;
->   } SiFiveCLINTState;
->   
->   DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> diff --git a/hw/intc/sifive_clint.c b/hw/intc/sifive_clint.c
-> index 0f41e5ea1c..8a460fdf00 100644
-> --- a/hw/intc/sifive_clint.c
-> +++ b/hw/intc/sifive_clint.c
-> @@ -28,6 +28,12 @@
->   #include "hw/qdev-properties.h"
->   #include "hw/intc/sifive_clint.h"
->   #include "qemu/timer.h"
-> +#include "hw/irq.h"
-> +
-> +typedef struct sifive_clint_callback {
-> +    SiFiveCLINTState *s;
-> +    int num;
-> +} sifive_clint_callback;
->   
->   static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
->   {
-> @@ -39,7 +45,9 @@ static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
->    * Called when timecmp is written to update the QEMU timer or immediately
->    * trigger timer interrupt if mtimecmp <= current timer value.
->    */
-> -static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> +static void sifive_clint_write_timecmp(SiFiveCLINTState *s, RISCVCPU *cpu,
-> +                                       int hartid,
-> +                                       uint64_t value,
->                                          uint32_t timebase_freq)
->   {
->       uint64_t next;
-> @@ -51,12 +59,12 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
->       if (cpu->env.timecmp <= rtc_r) {
->           /* if we're setting an MTIMECMP value in the "past",
->              immediately raise the timer interrupt */
-> -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +        qemu_irq_raise(s->timer_irqs[hartid - s->hartid_base]);
->           return;
->       }
->   
->       /* otherwise, set up the future timer interrupt */
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> +    qemu_irq_lower(s->timer_irqs[hartid - s->hartid_base]);
->       diff = cpu->env.timecmp - rtc_r;
->       /* back to ns (note args switched in muldiv64) */
->       next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> @@ -70,8 +78,9 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
->    */
->   static void sifive_clint_timer_cb(void *opaque)
->   {
-> -    RISCVCPU *cpu = opaque;
-> -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> +    sifive_clint_callback *state = opaque;
-> +
-> +    qemu_irq_raise(state->s->timer_irqs[state->num]);
->   }
->   
->   /* CPU wants to read rtc or timecmp register */
-> @@ -137,7 +146,7 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
->           if (!env) {
->               error_report("clint: invalid timecmp hartid: %zu", hartid);
->           } else if ((addr & 0x3) == 0) {
-> -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MSIP, BOOL_TO_MASK(value));
-> +            qemu_set_irq(clint->soft_irqs[hartid - clint->hartid_base], value);
->           } else {
->               error_report("clint: invalid sip write: %08x", (uint32_t)addr);
->           }
-> @@ -153,13 +162,13 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
->           } else if ((addr & 0x7) == 0) {
->               /* timecmp_lo */
->               uint64_t timecmp_hi = env->timecmp >> 32;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
->                   timecmp_hi << 32 | (value & 0xFFFFFFFF), clint->timebase_freq);
->               return;
->           } else if ((addr & 0x7) == 4) {
->               /* timecmp_hi */
->               uint64_t timecmp_lo = env->timecmp;
-> -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
->                   value << 32 | (timecmp_lo & 0xFFFFFFFF), clint->timebase_freq);
->           } else {
->               error_report("clint: invalid timecmp write: %08x", (uint32_t)addr);
-> @@ -205,6 +214,12 @@ static void sifive_clint_realize(DeviceState *dev, Error **errp)
->       memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_clint_ops, s,
->                             TYPE_SIFIVE_CLINT, s->aperture_size);
->       sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> +
-> +    s->timer_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> +    qdev_init_gpio_out(dev, s->timer_irqs, s->num_harts);
-> +
-> +    s->soft_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> +    qdev_init_gpio_out(dev, s->soft_irqs, s->num_harts);
->   }
->   
->   static void sifive_clint_class_init(ObjectClass *klass, void *data)
-> @@ -228,7 +243,6 @@ static void sifive_clint_register_types(void)
->   
->   type_init(sifive_clint_register_types)
->   
-> -
->   /*
->    * Create CLINT device.
->    */
-> @@ -238,29 +252,43 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
->       bool provide_rdtime)
->   {
->       int i;
-> +
-> +    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> +    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> +    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> +    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> +    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> +    qdev_prop_set_uint32(dev, "time-base", time_base);
-> +    qdev_prop_set_uint32(dev, "aperture-size", size);
-> +    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> +
->       for (i = 0; i < num_harts; i++) {
->           CPUState *cpu = qemu_get_cpu(hartid_base + i);
-> +        RISCVCPU *rvcpu = RISCV_CPU(cpu);
->           CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> +        sifive_clint_callback *cb = g_malloc0(sizeof(sifive_clint_callback));
-> +
->           if (!env) {
-> +            g_free(cb);
->               continue;
->           }
->           if (provide_rdtime) {
->               riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, timebase_freq);
->           }
-> +
-> +        cb->s = SIFIVE_CLINT(dev);
-> +        cb->num = i;
->           env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> -                                  &sifive_clint_timer_cb, cpu);
-> +                                  &sifive_clint_timer_cb, cb);
->           env->timecmp = 0;
-> +
-> +        qdev_connect_gpio_out_named(dev, NULL, i,
-> +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
-
-Just qdev_connect_gpio_out is enough.
-
-> +        qdev_connect_gpio_out_named(dev, NULL, num_harts + i,
-> +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_SOFT));
->       }
-
-Same here. Otherwise,
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-
->   
-> -    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> -    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> -    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> -    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> -    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> -    qdev_prop_set_uint32(dev, "time-base", time_base);
-> -    qdev_prop_set_uint32(dev, "aperture-size", size);
-> -    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> -    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
->       return dev;
->   }
+r~
 
