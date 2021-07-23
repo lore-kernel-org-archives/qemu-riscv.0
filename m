@@ -1,54 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m6nL9-00085k-64
-	for mharc-qemu-riscv@gnu.org; Fri, 23 Jul 2021 01:03:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34774)
+	id 1m6p0D-0006WU-FY
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Jul 2021 02:49:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48098)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m6nL7-00084D-1D; Fri, 23 Jul 2021 01:03:13 -0400
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:36695)
+ id 1m6p0B-0006VV-Iz; Fri, 23 Jul 2021 02:49:43 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:41552)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1m6nL1-00051a-VW; Fri, 23 Jul 2021 01:03:11 -0400
-Received: by mail-io1-xd30.google.com with SMTP id f11so1158178ioj.3;
- Thu, 22 Jul 2021 22:03:07 -0700 (PDT)
+ id 1m6p09-0001kF-SV; Fri, 23 Jul 2021 02:49:43 -0400
+Received: by mail-io1-xd30.google.com with SMTP id r6so1315886ioj.8;
+ Thu, 22 Jul 2021 23:49:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UiJ2Cs923dLjiLorNvsRYNQaf9q2rzVrU0UIw/eddXo=;
- b=JY5NVJ9K4wD34w8XNYLh3Mm0jn4z1fcBurPGaPs9m+MvWWb4GZ91qroKM/OisMZE+8
- pRBs/88gWGxAS+GfgXXSX1Z7tW8Q8V38+YPH62gKebNkQK5mdQLfA2Igov1Tw/XYTIPw
- 0byDnMOV13zL3U5O+QoNJGl1/aYHCpGayQSOinDWsJnYmd26HSSOHt4mqt076mQdxdst
- gKl5kSSEeiITh/XjsPtz3NucWAt3/TJwpcdmi2nO+B9+D8159nHwOAw5TJvoY8Izmr6K
- ZpMCPSVtW7dwyHFOpuBeeH/KUliJWGb6LYshWBJKq79wK62hRO9Tf9ai0S5jQcFyZLI1
- 4A/g==
+ :cc:content-transfer-encoding;
+ bh=2CH9A/tfe+xMt3Y7V7bY7+S5mOk+r4qtWWfwZSVA5JI=;
+ b=iI9plTLfbMp+yveUx9CEEBrH8vfu3GMX7+8/zPwzQpE9m3wxlfp8DfrIbEQO5fFRfV
+ 9LeVB0fvML1M4sG+iHqARfZbjwqCKDXCbr/IBeFXDKNl5V/H5Iasn2DYzteGQ4J9TzWm
+ +Kd+pCSMkhPz3utLpg9r3WSdgCZq5/0nplatLM9IvYOiCFSC5R+4ZtBTSwsvQ/6jUfmH
+ la4IhUK843t1uTuszmE2/88EIKz/K+94lQWIFRChVJ334NncsM5sUAByOB/ucsZ7yMDf
+ nOY1p4oEZ58zB6MsVaL5CB+1/0fVnLbDiIvhGnXmDLDAakaxwtVf2OyJqgsQQRHS7dYj
+ RrhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=UiJ2Cs923dLjiLorNvsRYNQaf9q2rzVrU0UIw/eddXo=;
- b=m6rwb/B8+8VyIb+n85br5twp6HRYINcoTnwh2ujNBZKEMchbCi5ZhNWuT5HOSJUEDA
- PjRXIKtW6UeeoyoIrUc+dwdqc85FOTJ1wsrq5xcZa5VXEM3m6zo7ProqEQ7ojv2/o+jW
- 3X61iGiUUQYOw9Kc0XaJea4ZUy6T2kx/xjnQOcliYg21FiW8SxF2/37cTA74yhna9xxq
- D+WzOew/fFOaAfwSFHG7INstH7iji9I8m/kHDM8y52HPLjfYJjO2+dReHmid9SnjGA96
- MGkGzEmNwWQm3//59q7aVLchb02oeaKAQS4+ZbCHXIRoBC6z/I3nIIt3qzI55QUjv/We
- OmLA==
-X-Gm-Message-State: AOAM530Fj9LMnUV5DtdIcKiZp5ERMco01KcZCX9mHAOOyaWJFjTaEwVF
- oB7cdif3nPiyqSL3IfQ9yk0By3dcarV2vltlePI=
-X-Google-Smtp-Source: ABdhPJxIA8qjdI8ZGCDS3P/LJ/t+gLtpHMlaqhGjMtbIdtGNpNCR0Iupw2iK2mvaqLbr6c2rI33pCYQflRTHN49IOBk=
-X-Received: by 2002:a02:90d0:: with SMTP id c16mr2612136jag.106.1627016585346; 
- Thu, 22 Jul 2021 22:03:05 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=2CH9A/tfe+xMt3Y7V7bY7+S5mOk+r4qtWWfwZSVA5JI=;
+ b=XCP5FDggrSIGg8bACFFXy70fltv4LdZuqh3IGa2GOUAx8ClpzGtdX5uAnoVuAMMs1B
+ 1Fk1GFUfiJKG2aaifJSedt58iCYB0YEaxx/+qhyonvwStexfTlYOYfGSNj9sEmC2rlgn
+ Zjf5gtuYjaUA/bKBwSaKTiBmtT+IWsCikTHUKMdb5RLEkv7KyTAGH7gnuXYlK36oZeMZ
+ P1AuvLEvIumO4w3ZntCk41YrBNJUHqufb3elg+dQ3vbTSG0Q9QkbP2bJ4Es2Xh6hZCh1
+ bPv0ak0PrdQlLz7inZ2seWk72+gvTWpponXIqIp2cWMwKZ0h0OXGEXdVNM1Dsi3/5Aeo
+ 91gQ==
+X-Gm-Message-State: AOAM532yljDSSZfF3Br0pZaIHVFbCieqP7csbAS2wkJoPb/dVfbSCQLs
+ 0gtyTPBWaDKwaoH5LJsNW/EWpJtvc70/o2r+rCI=
+X-Google-Smtp-Source: ABdhPJz7WKdFJc36bPDRAp/SdFCETc0Vpt5ZuoeqmlFdAvUvhyudvNuHz+H2HF4/lBYcxtXq3jTZjrx1YRqwALYLwcI=
+X-Received: by 2002:a6b:f101:: with SMTP id e1mr2841276iog.118.1627022980409; 
+ Thu, 22 Jul 2021 23:49:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210709042608.883256-1-richard.henderson@linaro.org>
- <20210709042608.883256-15-richard.henderson@linaro.org>
-In-Reply-To: <20210709042608.883256-15-richard.henderson@linaro.org>
+References: <5ebc64a6885af5cc3812beb71621cb7615556a1e.1626247467.git.alistair.francis@wdc.com>
+ <78eb66f16d6096a60479759e2c1deb524c39757e.1626247467.git.alistair.francis@wdc.com>
+ <CAEUhbmUKULm0kc8xeKyh+4uUT+fBW6juRh7mmVSB+uD56rxuKw@mail.gmail.com>
+In-Reply-To: <CAEUhbmUKULm0kc8xeKyh+4uUT+fBW6juRh7mmVSB+uD56rxuKw@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 23 Jul 2021 15:02:39 +1000
-Message-ID: <CAKmqyKNDz2P6Am10E097e6vvhahbSZU_x3hvtiOKJ6db=LiQjQ@mail.gmail.com>
-Subject: Re: [PATCH 14/17] target/riscv: Tidy trans_rvh.c.inc
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Fri, 23 Jul 2021 16:49:14 +1000
+Message-ID: <CAKmqyKOPns5F6Na0VOBaBuH+rXzU=CDrxV7=XWAH+bYGfN1kYQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] hw/intc: ibex_timer: Convert the timer to use
+ RISC-V CPU GPIO lines
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
  envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
@@ -71,400 +76,124 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2021 05:03:13 -0000
+X-List-Received-Date: Fri, 23 Jul 2021 06:49:43 -0000
 
-On Fri, Jul 9, 2021 at 2:52 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Jul 15, 2021 at 6:21 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Exit early if check_access fails.
-> Split out do_hlv, do_hsv, do_hlvx subroutines.
-> Use gpr_src, gpr_dst in the new subroutines.
+> On Wed, Jul 14, 2021 at 3:25 PM Alistair Francis
+> <alistair.francis@wdc.com> wrote:
+> >
+> > Instead of using riscv_cpu_update_mip() let's instead use the new RISC-=
+V
+> > CPU GPIO lines to set the timer MIP bits.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> > ---
+> >  include/hw/timer/ibex_timer.h |  2 ++
+> >  hw/riscv/opentitan.c          |  3 +++
+> >  hw/timer/ibex_timer.c         | 17 ++++++++++++-----
+> >  3 files changed, 17 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_time=
+r.h
+> > index 6a43537003..b6f69b38ee 100644
+> > --- a/include/hw/timer/ibex_timer.h
+> > +++ b/include/hw/timer/ibex_timer.h
+> > @@ -48,5 +48,7 @@ struct IbexTimerState {
+> >      uint32_t timebase_freq;
+> >
+> >      qemu_irq irq;
+> > +
+> > +    qemu_irq m_timer_irq;
+> >  };
+> >  #endif /* HW_IBEX_TIMER_H */
+> > diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> > index 88a0200972..fb0750c16f 100644
+> > --- a/hw/riscv/opentitan.c
+> > +++ b/hw/riscv/opentitan.c
+> > @@ -176,6 +176,9 @@ static void lowrisc_ibex_soc_realize(DeviceState *d=
+ev_soc, Error **errp)
+> >      sysbus_connect_irq(SYS_BUS_DEVICE(&s->timer),
+> >                         0, qdev_get_gpio_in(DEVICE(&s->plic),
+> >                         IBEX_TIMER_TIMEREXPIRED0_0));
+> > +    qdev_connect_gpio_out_named(DEVICE(&s->timer), NULL, 0,
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> nits: use qdev_connect_gpio_out
+>
+> > +                                qdev_get_gpio_in(DEVICE(qemu_get_cpu(0=
+)),
+>
+> Does this timer device only support one CPU?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yes, it does.
 
 Alistair
 
-> ---
->  target/riscv/insn32.decode              |   1 +
->  target/riscv/insn_trans/trans_rvh.c.inc | 264 +++++-------------------
->  2 files changed, 55 insertions(+), 210 deletions(-)
 >
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index f09f8d5faf..2cd921d51c 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -42,6 +42,7 @@
->  &j    imm rd
->  &r    rd rs1 rs2
->  &r2   rd rs1
-> +&r2_s rs1 rs2
->  &s    imm rs1 rs2
->  &u    imm rd
->  &shift     shamt rs1 rd
-> diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
-> index 6b5edf82b7..dac732024b 100644
-> --- a/target/riscv/insn_trans/trans_rvh.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvh.c.inc
-> @@ -17,281 +17,137 @@
->   */
+> > +                                                 IRQ_M_TIMER));
+> >
+> >      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+> >          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
+> > diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
+> > index 5befb53506..66e1f8e48c 100644
+> > --- a/hw/timer/ibex_timer.c
+> > +++ b/hw/timer/ibex_timer.c
+> > @@ -77,7 +77,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+> >          /*
+> >           * If the mtimecmp was in the past raise the interrupt now.
+> >           */
+> > -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
+> > +        qemu_irq_raise(s->m_timer_irq);
+> >          if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
+> >              s->timer_intr_state |=3D R_INTR_STATE_IS_0_MASK;
+> >              qemu_set_irq(s->irq, true);
+> > @@ -86,7 +86,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+> >      }
+> >
+> >      /* Setup a timer to trigger the interrupt in the future */
+> > -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
+> > +    qemu_irq_lower(s->m_timer_irq);
+> >      qemu_set_irq(s->irq, false);
+> >
+> >      diff =3D cpu->env.timecmp - now;
+> > @@ -106,10 +106,8 @@ static void ibex_timer_update_irqs(IbexTimerState =
+*s)
+> >  static void ibex_timer_cb(void *opaque)
+> >  {
+> >      IbexTimerState *s =3D opaque;
+> > -    CPUState *cs =3D qemu_get_cpu(0);
+> > -    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> >
+> > -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
+> > +    qemu_irq_raise(s->m_timer_irq);
+> >      if (s->timer_intr_enable & R_INTR_ENABLE_IE_0_MASK) {
+> >          s->timer_intr_state |=3D R_INTR_STATE_IS_0_MASK;
+> >          qemu_set_irq(s->irq, true);
+> > @@ -280,12 +278,21 @@ static void ibex_timer_init(Object *obj)
+> >      sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+> >  }
+> >
+> > +static void ibex_timer_realize(DeviceState *dev, Error **errp)
+> > +{
+> > +    IbexTimerState *s =3D IBEX_TIMER(dev);
+> > +
+> > +    qdev_init_gpio_out(dev, &s->m_timer_irq, 1);
+> > +}
+> > +
+> > +
+> >  static void ibex_timer_class_init(ObjectClass *klass, void *data)
+> >  {
+> >      DeviceClass *dc =3D DEVICE_CLASS(klass);
+> >
+> >      dc->reset =3D ibex_timer_reset;
+> >      dc->vmsd =3D &vmstate_ibex_timer;
+> > +    dc->realize =3D ibex_timer_realize;
+> >      device_class_set_props(dc, ibex_timer_properties);
+> >  }
+> >
 >
->  #ifndef CONFIG_USER_ONLY
-> -static void check_access(DisasContext *ctx) {
-> +static bool check_access(DisasContext *ctx)
-> +{
->      if (!ctx->hlsx) {
->          if (ctx->virt_enabled) {
->              generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
->          } else {
->              generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
->          }
-> +        return false;
->      }
-> +    return true;
->  }
->  #endif
->
-> +static bool do_hlv(DisasContext *ctx, arg_r2 *a, MemOp mop)
-> +{
-> +#ifdef CONFIG_USER_ONLY
-> +    return false;
-> +#else
-> +    if (check_access(ctx)) {
-> +        TCGv dest = gpr_dst(ctx, a->rd);
-> +        TCGv addr = gpr_src(ctx, a->rs1);
-> +        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +        tcg_gen_qemu_ld_tl(dest, addr, mem_idx, mop);
-> +    }
-> +    return true;
-> +#endif
-> +}
-> +
->  static bool trans_hlv_b(DisasContext *ctx, arg_hlv_b *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_SB);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_SB);
->  }
->
->  static bool trans_hlv_h(DisasContext *ctx, arg_hlv_h *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESW);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_TESW);
->  }
->
->  static bool trans_hlv_w(DisasContext *ctx, arg_hlv_w *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESL);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_TESL);
->  }
->
->  static bool trans_hlv_bu(DisasContext *ctx, arg_hlv_bu *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_UB);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_UB);
->  }
->
->  static bool trans_hlv_hu(DisasContext *ctx, arg_hlv_hu *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> +    return do_hlv(ctx, a, MO_TEUW);
-> +}
->
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEUW);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> +static bool do_hsv(DisasContext *ctx, arg_r2_s *a, MemOp mop)
-> +{
-> +#ifdef CONFIG_USER_ONLY
->      return false;
-> +#else
-> +    if (check_access(ctx)) {
-> +        TCGv addr = gpr_src(ctx, a->rs1);
-> +        TCGv data = gpr_src(ctx, a->rs2);
-> +        int mem_idx = ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-> +        tcg_gen_qemu_ld_tl(data, addr, mem_idx, mop);
-> +    }
-> +    return true;
->  #endif
->  }
->
->  static bool trans_hsv_b(DisasContext *ctx, arg_hsv_b *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv dat = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -    gen_get_gpr(dat, a->rs2);
-> -
-> -    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_SB);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(dat);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hsv(ctx, a, MO_SB);
->  }
->
->  static bool trans_hsv_h(DisasContext *ctx, arg_hsv_h *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv dat = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -    gen_get_gpr(dat, a->rs2);
-> -
-> -    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESW);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(dat);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hsv(ctx, a, MO_TESW);
->  }
->
->  static bool trans_hsv_w(DisasContext *ctx, arg_hsv_w *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv dat = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -    gen_get_gpr(dat, a->rs2);
-> -
-> -    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESL);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(dat);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hsv(ctx, a, MO_TESL);
->  }
->
->  static bool trans_hlv_wu(DisasContext *ctx, arg_hlv_wu *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_EXT(ctx, RVH);
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEUL);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_TEUL);
->  }
->
->  static bool trans_hlv_d(DisasContext *ctx, arg_hlv_d *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_EXT(ctx, RVH);
-> -
-> -#ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEQ);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> -#else
-> -    return false;
-> -#endif
-> +    return do_hlv(ctx, a, MO_TEQ);
->  }
->
->  static bool trans_hsv_d(DisasContext *ctx, arg_hsv_d *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_EXT(ctx, RVH);
-> +    return do_hsv(ctx, a, MO_TEQ);
-> +}
->
->  #ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv dat = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -    gen_get_gpr(dat, a->rs2);
-> -
-> -    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEQ);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(dat);
-> +static bool do_hlvx(DisasContext *ctx, arg_r2 *a,
-> +                    void (*func)(TCGv, TCGv_env, TCGv))
-> +{
-> +    if (check_access(ctx)) {
-> +        TCGv dest = gpr_dst(ctx, a->rd);
-> +        TCGv addr = gpr_src(ctx, a->rs1);
-> +        func(dest, cpu_env, addr);
-> +    }
->      return true;
-> -#else
-> -    return false;
-> -#endif
->  }
-> +#endif
->
->  static bool trans_hlvx_hu(DisasContext *ctx, arg_hlvx_hu *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
->  #ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    gen_helper_hyp_hlvx_hu(t1, cpu_env, t0);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> +    return do_hlvx(ctx, a, gen_helper_hyp_hlvx_hu);
->  #else
->      return false;
->  #endif
-> @@ -301,19 +157,7 @@ static bool trans_hlvx_wu(DisasContext *ctx, arg_hlvx_wu *a)
->  {
->      REQUIRE_EXT(ctx, RVH);
->  #ifndef CONFIG_USER_ONLY
-> -    TCGv t0 = tcg_temp_new();
-> -    TCGv t1 = tcg_temp_new();
-> -
-> -    check_access(ctx);
-> -
-> -    gen_get_gpr(t0, a->rs1);
-> -
-> -    gen_helper_hyp_hlvx_wu(t1, cpu_env, t0);
-> -    gen_set_gpr(a->rd, t1);
-> -
-> -    tcg_temp_free(t0);
-> -    tcg_temp_free(t1);
-> -    return true;
-> +    return do_hlvx(ctx, a, gen_helper_hyp_hlvx_wu);
->  #else
->      return false;
->  #endif
-> --
-> 2.25.1
->
->
+> Regards,
+> Bin
 
