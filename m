@@ -1,69 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1m6m0V-0004Dj-4e
-	for mharc-qemu-riscv@gnu.org; Thu, 22 Jul 2021 23:37:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53098)
+	id 1m6nJ1-0005t9-IB
+	for mharc-qemu-riscv@gnu.org; Fri, 23 Jul 2021 01:01:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34324)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m6m0T-0004CF-EY
- for qemu-riscv@nongnu.org; Thu, 22 Jul 2021 23:37:49 -0400
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a]:39741)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m6nIz-0005s7-HT; Fri, 23 Jul 2021 01:01:01 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:41928)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1m6m0R-00082q-Bo
- for qemu-riscv@nongnu.org; Thu, 22 Jul 2021 23:37:49 -0400
-Received: by mail-wr1-x42a.google.com with SMTP id e2so808130wrq.6
- for <qemu-riscv@nongnu.org>; Thu, 22 Jul 2021 20:37:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1m6nIx-0003CB-Dp; Fri, 23 Jul 2021 01:01:01 -0400
+Received: by mail-io1-xd35.google.com with SMTP id r6so1100338ioj.8;
+ Thu, 22 Jul 2021 22:00:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=i1VgRKwgeIyCsVpbdoyW+mMK5yP/IHPHBH8FJzXnoAY=;
- b=NeK4JoczZWJEe9wC+e5xXo4zvZbXk6y2AF3Nnrz3gzlaRhyfusbSNxS9WCIY3FwlEg
- 5jhg7LSpqQU85Pj1AiiWVO11tbVN7DbLnA2pgsU98phDXglrQUKaeK4fzogIhdanYLB1
- ud7YIwIOMM6mzeEE6GtE2dYqjeHpQQNVAi9aHYUzub5o08PjjMrJgMO0VmNKhQNlYUOT
- IV1odLoYnlG/cw70WEz8JDkMCcsUqCQgQyu6CVTllR5N4vLzfJJe80hQWFn53LiqElyJ
- FtwTxbLaKLQiU84dTt9mkmW08nRBAfxIefcG9av0OHDv/q2m6gcY0pGJKmZtNi2UODH5
- O6sw==
+ :cc; bh=mxaE6AqI9YTeeBF9i5cgZ8gliHZbM+FExyY00Z0VqxE=;
+ b=MnsW58kWkwodsK56Rr8p46RTR879B1lIv/YOGdOmcfJIApR9r2bhU4CXn8YKZFeSC0
+ Chj0iZr7LO/uV4lCxWWULm94f6TZ0jgXAneb4Qn1OSzXUU+Ad4e6AnlZ5IcWVPKNyU1m
+ cZCRp96czrB1kWnS+IY+vlJsUG/8Dt81zNP4LmlojJPGpQyIOnPy79/9lRfDsLo/+Wzq
+ YcZRXeW9SEYtoAE1B7kHYhFqWJidQ7MwbfcAjLmPV3DIctOwGBjxPQVQfX3ZHTQEK4/6
+ WkxAJ5MCNDCZO+cgBJeaxGF4LMPEcI7DLvx7nPbbMqVjNlvjk3LLPb9+VylsTBNH7W/P
+ u0OQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=i1VgRKwgeIyCsVpbdoyW+mMK5yP/IHPHBH8FJzXnoAY=;
- b=p0gw0vJG1ff1shZ17nNvXyl6K6FodApHaW8b+qiwieuXNt6k32GCVVgTD0kFzSB1AR
- MCsVyy5hiOtBuJImybhaxSnS+vMpzSaMkUT7jYb1/rzMaOcQQA2SyF3SEk0Um0Po2YvN
- YuKg7HxATYFDZ1UNqRr1Waf2qEi+vc/TAh9to7zSzn46szy13VWMyWLaP8HjDB3BqyJ7
- huyf+AnqXYTVu6ZBvRVs/bE5ExmTKJr1TGcNlFofqfGOubxiZZN6I8L218TaHcX+DyJp
- OW1ys/73Kl06ti4eF2UHzvclaqiZFr3qadS61019n3RzDlsg8zw5dkoTzOUwcfSYgzt/
- iY2g==
-X-Gm-Message-State: AOAM533OSsNn5OynHbb/MTn02rOnxSXiKqoyUOrPoa2inEZUVUwIz9wN
- u4LmXwCRlpMdK77bnhKmST6pSsEHm5XSVel8l3cI3w==
-X-Google-Smtp-Source: ABdhPJykTMWIJR65zwI2geHIutj1k2FnplSD0B3X7CL81kdY9WgWhVu1W5SDZuujVx34KaUaf7nnHmRh2VexvY2p6yM=
-X-Received: by 2002:a05:6000:2a1:: with SMTP id
- l1mr2837862wry.128.1627011464934; 
- Thu, 22 Jul 2021 20:37:44 -0700 (PDT)
+ bh=mxaE6AqI9YTeeBF9i5cgZ8gliHZbM+FExyY00Z0VqxE=;
+ b=FpoGXNtAcDcMbQM4k6Rq29d/SVVrYq8T7jj4FVi7e+CFfhc3oasTVlE9ZIhIC4yTW0
+ a1XXriJGisPbRVSc6+u33RZ3/tLwvgmm+1ATK2eIg9YLpXWBes3dCFx6feSk3rt+d+DP
+ 3JvyRQ5VaSejbsKwv4hfQChJBQ2rbHJXe+Lxd+rIoraknQnlS6Qd4LjcaBTqpEBVEQSy
+ 2HfCdQ/uEXK23UxECsR7FGYTRtdN8pEEXaTaX/LOQaooo0vpz/lWieW6JjWyYR8D+UVD
+ u0VFkTVaE1RV+3/GcfzCxBPPwAJ14chIn82r0DUlBLSoRMmhlYG3DuO/JPnHQV5Nrbcx
+ AwQQ==
+X-Gm-Message-State: AOAM532kEPnTHk/F9DcROxcNMDdDbtysj5vBKFXpd9OeJUjIed8s+CZZ
+ 18Gjbt1KwLahpA+4eJEg3Gw4HADw9Bk4HNeShEs=
+X-Google-Smtp-Source: ABdhPJwFzsD6hYsqSXkRYa56TdEYW5Ttiq71xwGJPte54/EGQKbDof9btFjnt7urG4xlOtOzAWGGQ8vN8RSC02arQGY=
+X-Received: by 2002:a5d:8453:: with SMTP id w19mr2519184ior.105.1627016457295; 
+ Thu, 22 Jul 2021 22:00:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <37f8680b1ae39de82f9594d8e7a0d9596de9be8b.1625801410.git.alistair.francis@wdc.com>
- <3a9be7f66702c6fb18ab09ad9db0fdd50b1a7df6.1625801410.git.alistair.francis@wdc.com>
- <CAAhSdy3w7NbJLjUd3V2i98a4e3V9TKzQHic8inz1TERXMmW4+A@mail.gmail.com>
- <CAKmqyKOvS7hvYk3OHSkh97SDWkoRrTdMhf=Qvi8qsDdifm7q1w@mail.gmail.com>
-In-Reply-To: <CAKmqyKOvS7hvYk3OHSkh97SDWkoRrTdMhf=Qvi8qsDdifm7q1w@mail.gmail.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 22 Jul 2021 17:45:01 +0530
-Message-ID: <CAAhSdy1gmXUTP-A+nUEiV=C9cb7EOBh1WsUw17azyQyyohL1xQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/5] hw/intc: sifive_clint: Use RISC-V CPU GPIO lines
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- QEMU Developers <qemu-devel@nongnu.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+References: <20210709042608.883256-1-richard.henderson@linaro.org>
+ <20210709042608.883256-10-richard.henderson@linaro.org>
+In-Reply-To: <20210709042608.883256-10-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 23 Jul 2021 15:00:31 +1000
+Message-ID: <CAKmqyKPTZ7hQYL9AOKDJ5N61RE-T=q6nM4mfNxYG5peL--YD_w@mail.gmail.com>
+Subject: Re: [PATCH 09/17] target/riscv: Reorg csr instructions
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::42a;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x42a.google.com
-X-Spam_score_int: -7
-X-Spam_score: -0.8
-X-Spam_bar: /
-X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_12_24=1.049,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,224 +71,303 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2021 03:37:49 -0000
+X-List-Received-Date: Fri, 23 Jul 2021 05:01:01 -0000
 
-On Wed, Jul 14, 2021 at 11:41 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Fri, Jul 9, 2021 at 2:46 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> On Tue, Jul 13, 2021 at 2:06 PM Anup Patel <anup@brainfault.org> wrote:
-> >
-> > On Fri, Jul 9, 2021 at 9:01 AM Alistair Francis
-> > <alistair.francis@wdc.com> wrote:
-> > >
-> > > Instead of using riscv_cpu_update_mip() let's instead use the new RISC-V
-> > > CPU GPIO lines to set the timer and soft MIP bits.
-> > >
-> > > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  include/hw/intc/sifive_clint.h |  2 +
-> > >  hw/intc/sifive_clint.c         | 72 ++++++++++++++++++++++++----------
-> > >  2 files changed, 54 insertions(+), 20 deletions(-)
-> > >
-> > > diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/sifive_clint.h
-> > > index a30be0f3d6..921b1561dd 100644
-> > > --- a/include/hw/intc/sifive_clint.h
-> > > +++ b/include/hw/intc/sifive_clint.h
-> > > @@ -40,6 +40,8 @@ typedef struct SiFiveCLINTState {
-> > >      uint32_t time_base;
-> > >      uint32_t aperture_size;
-> > >      uint32_t timebase_freq;
-> > > +    qemu_irq *timer_irqs;
-> > > +    qemu_irq *soft_irqs;
-> > >  } SiFiveCLINTState;
-> > >
-> > >  DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> > > diff --git a/hw/intc/sifive_clint.c b/hw/intc/sifive_clint.c
-> > > index 0f41e5ea1c..c635a47507 100644
-> > > --- a/hw/intc/sifive_clint.c
-> > > +++ b/hw/intc/sifive_clint.c
-> > > @@ -28,6 +28,12 @@
-> > >  #include "hw/qdev-properties.h"
-> > >  #include "hw/intc/sifive_clint.h"
-> > >  #include "qemu/timer.h"
-> > > +#include "hw/irq.h"
-> > > +
-> > > +typedef struct sifive_clint_callback {
-> > > +    SiFiveCLINTState *s;
-> > > +    int num;
-> > > +} sifive_clint_callback;
-> > >
-> > >  static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> > >  {
-> > > @@ -39,7 +45,9 @@ static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
-> > >   * Called when timecmp is written to update the QEMU timer or immediately
-> > >   * trigger timer interrupt if mtimecmp <= current timer value.
-> > >   */
-> > > -static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> > > +static void sifive_clint_write_timecmp(SiFiveCLINTState *s, RISCVCPU *cpu,
-> > > +                                       int hartid,
-> > > +                                       uint64_t value,
-> > >                                         uint32_t timebase_freq)
-> > >  {
-> > >      uint64_t next;
-> > > @@ -51,12 +59,12 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> > >      if (cpu->env.timecmp <= rtc_r) {
-> > >          /* if we're setting an MTIMECMP value in the "past",
-> > >             immediately raise the timer interrupt */
-> > > -        riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> > > +        qemu_irq_raise(s->timer_irqs[hartid]);
-> >
-> > This breaks multi-socket support.
-> >
-> > Please use "hartid - s->hartid_base" as an index.
-> >
-> > >          return;
-> > >      }
-> > >
-> > >      /* otherwise, set up the future timer interrupt */
-> > > -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
-> > > +    qemu_irq_lower(s->timer_irqs[hartid]);
-> > >      diff = cpu->env.timecmp - rtc_r;
-> > >      /* back to ns (note args switched in muldiv64) */
-> > >      next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> > > @@ -70,8 +78,9 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu, uint64_t value,
-> > >   */
-> > >  static void sifive_clint_timer_cb(void *opaque)
-> > >  {
-> > > -    RISCVCPU *cpu = opaque;
-> > > -    riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(1));
-> > > +    sifive_clint_callback *state = opaque;
-> > > +
-> > > +    qemu_irq_raise(state->s->timer_irqs[state->num]);
-> > >  }
-> > >
-> > >  /* CPU wants to read rtc or timecmp register */
-> > > @@ -137,7 +146,11 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
-> > >          if (!env) {
-> > >              error_report("clint: invalid timecmp hartid: %zu", hartid);
-> > >          } else if ((addr & 0x3) == 0) {
-> > > -            riscv_cpu_update_mip(RISCV_CPU(cpu), MIP_MSIP, BOOL_TO_MASK(value));
-> > > +            if (value) {
-> > > +                qemu_irq_raise(clint->soft_irqs[hartid]);
-> > > +            } else {
-> > > +                qemu_irq_lower(clint->soft_irqs[hartid]);
-> > > +            }
-> >
-> > Eventthis is broken for multi-socket.
-> >
-> > Use "hartid - clint->hartid_base" as index.
+> Introduce csrr and csrw helpers, for read-only and write-only insns.
 >
-> Thanks for testing this. I have fixed this and will send a v2. I also
-> added multi-socket tests to my automated tests.
+> Note that we do not properly implement this in riscv_csrrw, in that
+> we cannot distinguish true read-only (rs1 == 0) from any other zero
+> write_mask another source register -- this should still raise an
+> exception for read-only registers.
+>
+> Only issue gen_io_start for CF_USE_ICOUNT.
+> Use ctx->zero for csrrc.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Thanks, I will rebase the ACLINT series on your v2 series.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Regards,
-Anup
+Alistair
 
+> ---
+>  target/riscv/helper.h                   |   6 +-
+>  target/riscv/op_helper.c                |  18 +--
+>  target/riscv/insn_trans/trans_rvi.c.inc | 170 +++++++++++++++++-------
+>  3 files changed, 129 insertions(+), 65 deletions(-)
 >
-> Alistair
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 415e37bc37..460eee9988 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -65,9 +65,9 @@ DEF_HELPER_FLAGS_2(gorc, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+>  DEF_HELPER_FLAGS_2(gorcw, TCG_CALL_NO_RWG_SE, tl, tl, tl)
 >
-> >
-> > >          } else {
-> > >              error_report("clint: invalid sip write: %08x", (uint32_t)addr);
-> > >          }
-> > > @@ -153,13 +166,13 @@ static void sifive_clint_write(void *opaque, hwaddr addr, uint64_t value,
-> > >          } else if ((addr & 0x7) == 0) {
-> > >              /* timecmp_lo */
-> > >              uint64_t timecmp_hi = env->timecmp >> 32;
-> > > -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> > > +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
-> > >                  timecmp_hi << 32 | (value & 0xFFFFFFFF), clint->timebase_freq);
-> > >              return;
-> > >          } else if ((addr & 0x7) == 4) {
-> > >              /* timecmp_hi */
-> > >              uint64_t timecmp_lo = env->timecmp;
-> > > -            sifive_clint_write_timecmp(RISCV_CPU(cpu),
-> > > +            sifive_clint_write_timecmp(clint, RISCV_CPU(cpu), hartid,
-> > >                  value << 32 | (timecmp_lo & 0xFFFFFFFF), clint->timebase_freq);
-> > >          } else {
-> > >              error_report("clint: invalid timecmp write: %08x", (uint32_t)addr);
-> > > @@ -205,6 +218,12 @@ static void sifive_clint_realize(DeviceState *dev, Error **errp)
-> > >      memory_region_init_io(&s->mmio, OBJECT(dev), &sifive_clint_ops, s,
-> > >                            TYPE_SIFIVE_CLINT, s->aperture_size);
-> > >      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-> > > +
-> > > +    s->timer_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> > > +    qdev_init_gpio_out(dev, s->timer_irqs, s->num_harts);
-> > > +
-> > > +    s->soft_irqs = g_malloc(sizeof(qemu_irq) * s->num_harts);
-> > > +    qdev_init_gpio_out(dev, s->soft_irqs, s->num_harts);
-> > >  }
-> > >
-> > >  static void sifive_clint_class_init(ObjectClass *klass, void *data)
-> > > @@ -228,7 +247,6 @@ static void sifive_clint_register_types(void)
-> > >
-> > >  type_init(sifive_clint_register_types)
-> > >
-> > > -
-> > >  /*
-> > >   * Create CLINT device.
-> > >   */
-> > > @@ -238,29 +256,43 @@ DeviceState *sifive_clint_create(hwaddr addr, hwaddr size,
-> > >      bool provide_rdtime)
-> > >  {
-> > >      int i;
-> > > +
-> > > +    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> > > +    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> > > +    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> > > +    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> > > +    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> > > +    qdev_prop_set_uint32(dev, "time-base", time_base);
-> > > +    qdev_prop_set_uint32(dev, "aperture-size", size);
-> > > +    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> > > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > > +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> > > +
-> > >      for (i = 0; i < num_harts; i++) {
-> > >          CPUState *cpu = qemu_get_cpu(hartid_base + i);
-> > > +        RISCVCPU *rvcpu = RISCV_CPU(cpu);
-> > >          CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
-> > > +        sifive_clint_callback *cb = g_malloc0(sizeof(sifive_clint_callback));
-> > > +
-> > >          if (!env) {
-> > > +            g_free(cb);
-> > >              continue;
-> > >          }
-> > >          if (provide_rdtime) {
-> > >              riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, timebase_freq);
-> > >          }
-> > > +
-> > > +        cb->s = SIFIVE_CLINT(dev);
-> > > +        cb->num = i;
-> > >          env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > > -                                  &sifive_clint_timer_cb, cpu);
-> > > +                                  &sifive_clint_timer_cb, cb);
-> > >          env->timecmp = 0;
-> > > +
-> > > +        qdev_connect_gpio_out_named(dev, NULL, i,
-> > > +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
-> > > +        qdev_connect_gpio_out_named(dev, NULL, num_harts + i,
-> > > +                           qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_SOFT));
-> > >      }
-> > >
-> > > -    DeviceState *dev = qdev_new(TYPE_SIFIVE_CLINT);
-> > > -    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-> > > -    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-> > > -    qdev_prop_set_uint32(dev, "sip-base", sip_base);
-> > > -    qdev_prop_set_uint32(dev, "timecmp-base", timecmp_base);
-> > > -    qdev_prop_set_uint32(dev, "time-base", time_base);
-> > > -    qdev_prop_set_uint32(dev, "aperture-size", size);
-> > > -    qdev_prop_set_uint32(dev, "timebase-freq", timebase_freq);
-> > > -    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > > -    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-> > >      return dev;
-> > >  }
-> > > --
-> > > 2.31.1
-> > >
-> > >
-> >
-> > Regards,
-> > Anup
+>  /* Special functions */
+> -DEF_HELPER_3(csrrw, tl, env, tl, tl)
+> -DEF_HELPER_4(csrrs, tl, env, tl, tl, tl)
+> -DEF_HELPER_4(csrrc, tl, env, tl, tl, tl)
+> +DEF_HELPER_2(csrr, tl, env, int)
+> +DEF_HELPER_3(csrw, void, env, int, tl)
+> +DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
+>  #ifndef CONFIG_USER_ONLY
+>  DEF_HELPER_2(sret, tl, env, tl)
+>  DEF_HELPER_2(mret, tl, env, tl)
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 3c48e739ac..ee7c24efe7 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -37,11 +37,10 @@ void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+>      riscv_raise_exception(env, exception, 0);
+>  }
+>
+> -target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
+> -        target_ulong csr)
+> +target_ulong helper_csrr(CPURISCVState *env, int csr)
+>  {
+>      target_ulong val = 0;
+> -    RISCVException ret = riscv_csrrw(env, csr, &val, src, -1);
+> +    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
+>
+>      if (ret != RISCV_EXCP_NONE) {
+>          riscv_raise_exception(env, ret, GETPC());
+> @@ -49,23 +48,20 @@ target_ulong helper_csrrw(CPURISCVState *env, target_ulong src,
+>      return val;
+>  }
+>
+> -target_ulong helper_csrrs(CPURISCVState *env, target_ulong src,
+> -        target_ulong csr, target_ulong rs1_pass)
+> +void helper_csrw(CPURISCVState *env, int csr, target_ulong src)
+>  {
+> -    target_ulong val = 0;
+> -    RISCVException ret = riscv_csrrw(env, csr, &val, -1, rs1_pass ? src : 0);
+> +    RISCVException ret = riscv_csrrw(env, csr, NULL, src, -1);
+>
+>      if (ret != RISCV_EXCP_NONE) {
+>          riscv_raise_exception(env, ret, GETPC());
+>      }
+> -    return val;
+>  }
+>
+> -target_ulong helper_csrrc(CPURISCVState *env, target_ulong src,
+> -        target_ulong csr, target_ulong rs1_pass)
+> +target_ulong helper_csrrw(CPURISCVState *env, int csr,
+> +                          target_ulong src, target_ulong write_mask)
+>  {
+>      target_ulong val = 0;
+> -    RISCVException ret = riscv_csrrw(env, csr, &val, 0, rs1_pass ? src : 0);
+> +    RISCVException ret = riscv_csrrw(env, csr, &val, src, write_mask);
+>
+>      if (ret != RISCV_EXCP_NONE) {
+>          riscv_raise_exception(env, ret, GETPC());
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index 840187a4d6..3705aad380 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -452,80 +452,148 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+>      return true;
+>  }
+>
+> -#define RISCV_OP_CSR_PRE do {\
+> -    source1 = tcg_temp_new(); \
+> -    csr_store = tcg_temp_new(); \
+> -    dest = tcg_temp_new(); \
+> -    rs1_pass = tcg_temp_new(); \
+> -    gen_get_gpr(source1, a->rs1); \
+> -    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next); \
+> -    tcg_gen_movi_tl(rs1_pass, a->rs1); \
+> -    tcg_gen_movi_tl(csr_store, a->csr); \
+> -    gen_io_start();\
+> -} while (0)
+> +static bool do_csr_post(DisasContext *ctx)
+> +{
+> +    /* We may have changed important cpu state -- exit to main loop. */
+> +    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+> +    exit_tb(ctx);
+> +    ctx->base.is_jmp = DISAS_NORETURN;
+> +    return true;
+> +}
+>
+> -#define RISCV_OP_CSR_POST do {\
+> -    gen_set_gpr(a->rd, dest); \
+> -    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
+> -    exit_tb(ctx); \
+> -    ctx->base.is_jmp = DISAS_NORETURN; \
+> -    tcg_temp_free(source1); \
+> -    tcg_temp_free(csr_store); \
+> -    tcg_temp_free(dest); \
+> -    tcg_temp_free(rs1_pass); \
+> -} while (0)
+> +static bool do_csrr(DisasContext *ctx, int rd, int rc)
+> +{
+> +    TCGv dest = gpr_dst(ctx, rd);
+> +    TCGv_i32 csr = tcg_constant_i32(rc);
+>
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
+> +    }
+> +    gen_helper_csrr(dest, cpu_env, csr);
+> +    return do_csr_post(ctx);
+> +}
+> +
+> +static bool do_csrw(DisasContext *ctx, int rc, TCGv src)
+> +{
+> +    TCGv_i32 csr = tcg_constant_i32(rc);
+> +
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
+> +    }
+> +    gen_helper_csrw(cpu_env, csr, src);
+> +    return do_csr_post(ctx);
+> +}
+> +
+> +static bool do_csrrw(DisasContext *ctx, int rd, int rc, TCGv src, TCGv mask)
+> +{
+> +    TCGv dest = gpr_dst(ctx, rd);
+> +    TCGv_i32 csr = tcg_constant_i32(rc);
+> +
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
+> +    }
+> +    gen_helper_csrrw(dest, cpu_env, csr, src, mask);
+> +    return do_csr_post(ctx);
+> +}
+>
+>  static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrw(dest, cpu_env, source1, csr_store);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    TCGv src = gpr_src(ctx, a->rs1);
+> +
+> +    /*
+> +     * If rd == 0, the insn shall not read the csr, nor cause any of the
+> +     * side effects that might occur on a csr read.
+> +     */
+> +    if (a->rd == 0) {
+> +        return do_csrw(ctx, a->csr, src);
+> +    }
+> +
+> +    TCGv mask = tcg_constant_tl(-1);
+> +    return do_csrrw(ctx, a->rd, a->csr, src, mask);
+>  }
+>
+>  static bool trans_csrrs(DisasContext *ctx, arg_csrrs *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrs(dest, cpu_env, source1, csr_store, rs1_pass);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    /*
+> +     * If rs1 == 0, the insn shall not write to the csr at all, nor
+> +     * cause any of the side effects that might occur on a csr write.
+> +     * Note that if rs1 specifies a register other than x0, holding
+> +     * a zero value, the instruction will still attempt to write the
+> +     * unmodified value back to the csr and will cause side effects.
+> +     */
+> +    if (a->rs1 == 0) {
+> +        return do_csrr(ctx, a->rd, a->csr);
+> +    }
+> +
+> +    TCGv ones = tcg_constant_tl(-1);
+> +    TCGv mask = gpr_src(ctx, a->rs1);
+> +    return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+>  }
+>
+>  static bool trans_csrrc(DisasContext *ctx, arg_csrrc *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrc(dest, cpu_env, source1, csr_store, rs1_pass);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    /*
+> +     * If rs1 == 0, the insn shall not write to the csr at all, nor
+> +     * cause any of the side effects that might occur on a csr write.
+> +     * Note that if rs1 specifies a register other than x0, holding
+> +     * a zero value, the instruction will still attempt to write the
+> +     * unmodified value back to the csr and will cause side effects.
+> +     */
+> +    if (a->rs1 == 0) {
+> +        return do_csrr(ctx, a->rd, a->csr);
+> +    }
+> +
+> +    TCGv mask = gpr_src(ctx, a->rs1);
+> +    return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+>  }
+>
+>  static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrw(dest, cpu_env, rs1_pass, csr_store);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    TCGv src = tcg_constant_tl(a->rs1);
+> +
+> +    /*
+> +     * If rd == 0, the insn shall not read the csr, nor cause any of the
+> +     * side effects that might occur on a csr read.
+> +     */
+> +    if (a->rd == 0) {
+> +        return do_csrw(ctx, a->csr, src);
+> +    }
+> +
+> +    TCGv mask = tcg_constant_tl(-1);
+> +    return do_csrrw(ctx, a->rd, a->csr, src, mask);
+>  }
+>
+>  static bool trans_csrrsi(DisasContext *ctx, arg_csrrsi *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrs(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    /*
+> +     * If rs1 == 0, the insn shall not write to the csr at all, nor
+> +     * cause any of the side effects that might occur on a csr write.
+> +     * Note that if rs1 specifies a register other than x0, holding
+> +     * a zero value, the instruction will still attempt to write the
+> +     * unmodified value back to the csr and will cause side effects.
+> +     */
+> +    if (a->rs1 == 0) {
+> +        return do_csrr(ctx, a->rd, a->csr);
+> +    }
+> +
+> +    TCGv ones = tcg_constant_tl(-1);
+> +    TCGv mask = tcg_constant_tl(a->rs1);
+> +    return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+>  }
+>
+>  static bool trans_csrrci(DisasContext *ctx, arg_csrrci *a)
+>  {
+> -    TCGv source1, csr_store, dest, rs1_pass;
+> -    RISCV_OP_CSR_PRE;
+> -    gen_helper_csrrc(dest, cpu_env, rs1_pass, csr_store, rs1_pass);
+> -    RISCV_OP_CSR_POST;
+> -    return true;
+> +    /*
+> +     * If rs1 == 0, the insn shall not write to the csr at all, nor
+> +     * cause any of the side effects that might occur on a csr write.
+> +     * Note that if rs1 specifies a register other than x0, holding
+> +     * a zero value, the instruction will still attempt to write the
+> +     * unmodified value back to the csr and will cause side effects.
+> +     */
+> +    if (a->rs1 == 0) {
+> +        return do_csrr(ctx, a->rd, a->csr);
+> +    }
+> +
+> +    TCGv mask = tcg_constant_tl(a->rs1);
+> +    return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+>  }
+> --
+> 2.25.1
+>
+>
 
