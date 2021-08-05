@@ -1,70 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBWct-000706-NW
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 02:13:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41352)
+	id 1mBXbp-0007M1-PD
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 03:16:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49436)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mBWcq-0006zS-Aq; Thu, 05 Aug 2021 02:13:04 -0400
-Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:34639)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mBWco-00055A-Dl; Thu, 05 Aug 2021 02:13:04 -0400
-Received: by mail-il1-x132.google.com with SMTP id a14so4022439ila.1;
- Wed, 04 Aug 2021 23:13:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+2eH+ityX6DFApHcVez8VOFjizWl3DW5ckWR+eYOx0A=;
- b=PlvlRU7SEVcQddQN8Rbb16PBUgsCGXVKRBkRZPZsJGEe90zMJR0rDyINjnbXuRtPJ2
- yATVnxxXKIe0VKv4Hq+9IlzKbKgTknazvxnE89a3kzZ2wCk+TM+QHBPv12M4ZmgIkJbJ
- bfYn8IdNukEduz8gSum+cvudGrn/Nj3oyRi4xchJN3D2lc39VVI6HP3a+btg48EhuwQL
- 1MVU3jVZRU+EnMxKFTFEiC1UTIFV7myT7vOnn4TgALR0/lWYlU9UBlce4dWMXLX7Rtg1
- oYs5qd8cSrlb08oZ69fHqTSZkDafVh76hrnzpixxik/CkGzIf19s7VC3fXLY/Pat8zx+
- btyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+2eH+ityX6DFApHcVez8VOFjizWl3DW5ckWR+eYOx0A=;
- b=MAuVlikgApuKeaBmX93of8P/F/C/H6hy7/xmLfjtY9MXhmCi6beC1H7tU8FeFoKSoY
- 7GntuzyAbOUYvjkgaEugR+Yv272HUr0yfQpwmhoyVRqH19BJndPBIHK2ZC91U4Zr2Xzl
- 7pymT/B4pTblIvOLsXNUfEiUcOheb9CaTvKwb2FdQsMt/z0bWNoLI3LnoF19piDmf1BW
- Hj79KviRYuCyIJmTcz3uIBZczsktvuWKlAoQUru/CyF97+eSvpKG3OKzu+2zfAA2EvqH
- ApHKpV5tJ/wz9BqRp4mHXLP0WU+mCmMQ+BFf4sF3qNZLYhXPcUJmaapGVlnNUzY8N9c+
- L2VA==
-X-Gm-Message-State: AOAM5314F515/67j3v8coJ+nwRYTl0i9cAckg1vjN7auFcXLqG2I+ZvR
- Ml44WZXRhA3+q5KcrevAx3quKYl76CMm+5Tkf28=
-X-Google-Smtp-Source: ABdhPJxTpdRRchqt7tXHpEyqerCkJnRICV/DzPavZCs+VeuQzdw8UhbQscgqr1q2k5u9u3LkNfUAoSS3AljAdbq9lvI=
-X-Received: by 2002:a92:8707:: with SMTP id m7mr889ild.177.1628143980788; Wed,
- 04 Aug 2021 23:13:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mBXbn-0007LO-Ak; Thu, 05 Aug 2021 03:16:03 -0400
+Received: from out28-75.mail.aliyun.com ([115.124.28.75]:37295)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mBXbi-0008KU-Ru; Thu, 05 Aug 2021 03:16:02 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1239193|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0150263-0.00069011-0.984284;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KvfdKuw_1628147748; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KvfdKuw_1628147748)
+ by smtp.aliyun-inc.com(10.147.42.135);
+ Thu, 05 Aug 2021 15:15:49 +0800
+Subject: Re: [RFC PATCH 00/13] Support UXL field in mstatus
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
+Date: Thu, 5 Aug 2021 15:14:05 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-References: <20210724122407.2486558-1-anup.patel@wdc.com>
- <20210724122407.2486558-5-anup.patel@wdc.com>
- <CAKmqyKN2J7_Sa69bxuzEpaQqDu42EYTQR48Rf7Lkb_EdLcKaRA@mail.gmail.com>
-In-Reply-To: <CAKmqyKN2J7_Sa69bxuzEpaQqDu42EYTQR48Rf7Lkb_EdLcKaRA@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 5 Aug 2021 16:12:34 +1000
-Message-ID: <CAKmqyKNSg6D4=-grY5Pdd--MoVDmEU3h9=gWba7qjUYvOuFXhg@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] hw/riscv: virt: Add optional ACLINT support to
- virt machine
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.75; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-75.mail.aliyun.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.132,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,36 +57,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2021 06:13:04 -0000
+X-List-Received-Date: Thu, 05 Aug 2021 07:16:03 -0000
 
-On Thu, Aug 5, 2021 at 4:09 PM Alistair Francis <alistair23@gmail.com> wrote:
+
+On 2021/8/5 下午2:01, Alistair Francis wrote:
+> On Thu, Aug 5, 2021 at 12:55 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> This patch set implements UXL field in mstatus register. Programmer can change
+>> UXLEN by writting to this field. So that you can run a 32 bit program
+>> on a 64 bit CPU.
+> Awesome! Do you have any steps for building a rootFS to test this?
+
+Not yet.  It depends on Linux support which  will not start until  
+October.  Maybe as a rough test,
+we can run the 32 glibc test cases on qemu-riscv64 with an option 
+uxl32=true(not implement yet).
+
+Zhiwei
+
 >
-> On Sat, Jul 24, 2021 at 10:27 PM Anup Patel <anup.patel@wdc.com> wrote:
-> >
-> > We extend virt machine to emulate ACLINT devices only when "aclint=on"
-> > parameter is passed along with machine name in QEMU command-line.
-> >
-> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> > ---
-> >  hw/riscv/virt.c         | 113 +++++++++++++++++++++++++++++++++++++++-
-> >  include/hw/riscv/virt.h |   2 +
-> >  2 files changed, 114 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index 48c8b4aeb2..7259057a74 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -49,6 +49,7 @@ static const MemMapEntry virt_memmap[] = {
-> >      [VIRT_TEST] =        {   0x100000,        0x1000 },
-> >      [VIRT_RTC] =         {   0x101000,        0x1000 },
-> >      [VIRT_CLINT] =       {  0x2000000,       0x10000 },
-> > +    [VIRT_ACLINT_SSWI] = {  0x2F00000,        0x4000 },
+> Alistair
 >
-> Couldn't we use the same address as the current CLINT?
-
-Whoops, nevermind.
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
+>> This patch set depends on one patch set by Richard Henderson
+>> https://lists.gnu.org/archive/html/qemu-riscv/2021-07/msg00059.html.
+>>
+>> LIU Zhiwei (13):
+>>    target/riscv: Add UXL to tb flags
+>>    target/riscv: Support UXL32 for branch instructions
+>>    target/riscv: Support UXL32 on 64-bit cpu for load/store
+>>    target/riscv: Support UXL32 for slit/sltiu
+>>    target/riscv: Support UXL32 for shift instruction
+>>    target/riscv: Fix div instructions
+>>    target/riscv: Support UXL32 for RVM
+>>    target/riscv: Support UXL32 for vector instructions
+>>    target/riscv: Support UXL32 for atomic instructions
+>>    target/riscv: Support UXL32 for float instructions
+>>    target/riscv: Fix srow
+>>    target/riscv: Support UXL32 for RVB
+>>    target/riscv: Changing the width of U-mode CSR
+>>
+>>   target/riscv/cpu.h                      |  18 +++
+>>   target/riscv/csr.c                      |  42 +++++-
+>>   target/riscv/insn_trans/trans_rva.c.inc |  36 ++++-
+>>   target/riscv/insn_trans/trans_rvb.c.inc |  51 +++++--
+>>   target/riscv/insn_trans/trans_rvd.c.inc |   4 +-
+>>   target/riscv/insn_trans/trans_rvf.c.inc |   4 +-
+>>   target/riscv/insn_trans/trans_rvi.c.inc |  62 ++++++--
+>>   target/riscv/insn_trans/trans_rvm.c.inc |  24 ++-
+>>   target/riscv/insn_trans/trans_rvv.c.inc |  44 +++---
+>>   target/riscv/translate.c                | 186 ++++++++++++++++++++----
+>>   target/riscv/vector_helper.c            |  54 +++++--
+>>   11 files changed, 414 insertions(+), 111 deletions(-)
+>>
+>> --
+>> 2.17.1
+>>
+>>
 
