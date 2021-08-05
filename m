@@ -1,75 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBikn-0002Wt-TA
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 15:10:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36526)
+	id 1mBlfz-0001f6-Na
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 18:17:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56374)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mBikf-0002Vm-W8
- for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:10:03 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:53152)
+ id 1mBlfz-0001er-2d
+ for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 18:17:19 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:44681)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mBike-0001Cx-GX
- for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:09:57 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id nh14so11253282pjb.2
- for <qemu-riscv@nongnu.org>; Thu, 05 Aug 2021 12:09:55 -0700 (PDT)
+ id 1mBlfx-0005aC-KV
+ for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 18:17:18 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ e2-20020a17090a4a02b029016f3020d867so13073841pjh.3
+ for <qemu-riscv@nongnu.org>; Thu, 05 Aug 2021 15:17:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=HCrMpI2T3In3b/FzNBAI4OCu7zAIXYMW2VkiDuK6sHE=;
- b=wNPegbV0K9HqHWrpU/+sQc7RDbN4aS6R+GGZsC4SdL//kvAZva12A/Yw+TGgotA9b4
- rx7o0seKhKmNh3FBGJIJJrdeVyZvscLCum90L0/VnGYW4byzXSjA/bCZ5iWDWPtNJs1Z
- hhYVi6U3cBOGBoVahdx/+3N3gDLQGyg+ipZbIp1kzd6eZtxMd31SYJ3x9jAhRNiJhDUb
- saUy97kdhNMD6wUlPwPW76xSravpQLBuHn8K+w8UKHkQ8anjMQbNrISjGK1AH+qNPlNl
- fy+b90RDLQv5yia63wpRRaIOKZBzXDkSio0SzxHRM7X0ni8kxi3Uz6h8VJGA3aQzxdTZ
- 1RWA==
+ bh=KqCkH3tgZRA7AcC7ENRyfj5iXPhzk9y5YCjpKSv8Fik=;
+ b=CPaBgUXnw5OhZubUqHvRV+e9JR5vTiw3pWKwZfHC15y3KOa6Pto0NfNGuRymgRPxtj
+ u867dnQ41fSKmJKHktqoXuv0v7M+0G4HjmFNiT1D+lCmJgWXUtRYyD+VMhfhCPNE6KiS
+ Tux4eNUC/BPdKx8MRrLBxjeMrzQd7hXHa05/d1uaDnACkzWGuBPzKcpFwY/BIs936NNn
+ x0zRBYK33+ZCJfRUD1K087YlB0Qkrwz0yOJ7cKX9S2pDI1alp3cJzgWRenPQzzjgJV33
+ zq7iN3YYwAjW7IuPjGLbN3sa/Mkx7cVBSwnpSgXu39wF0msdi4F9AtsOYyNrEsxbdSIQ
+ YFeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=HCrMpI2T3In3b/FzNBAI4OCu7zAIXYMW2VkiDuK6sHE=;
- b=V7/N4vq1bBxkk18Ob/8TXtgTMMs7JbNYcyfN1ACMUbNYTxkBQVnpspPFl3Q4wTN4bb
- Dnb6GRDBDTdM1wnT4XES8PHg+hEZph+Ng1AivPhDWkkO/AaeNQpQPRUflVMYFIT2OTEa
- wOpXMuauD3PJNn4eeDFuxkYvU/QPxhRohIopuYVFq6YC4zPnupIKPMJdN9qE45XRcLJG
- lOhI8hjCcL2cIjc6WSLfMnulPUtBXb8TBYn0Vravr+xq5xNmjXEyP2FjXbkCSeeHBt8x
- /WcxE5y391osoKPGY6obJ2jXlmej5KXMT4cVnAdN/7tY3/rFijJ/9aJucxIumerb3STg
- 8WEg==
-X-Gm-Message-State: AOAM532zn+tcRa+k30isSeC+SG2IPg08kw7/9nz0L2jc6A1d60jz53kj
- NxTkoi5cF8MDxdiaDp3hzl6JyOyqGxsXhQ==
-X-Google-Smtp-Source: ABdhPJwGunEW2i7T4E+JhAVMfHd5FGChTW7Di4BzSqRj0yKbLC9CUuN8foub/vNQgl2UXiidza8Bjg==
-X-Received: by 2002:a63:e74c:: with SMTP id j12mr117265pgk.121.1628190593983; 
- Thu, 05 Aug 2021 12:09:53 -0700 (PDT)
+ bh=KqCkH3tgZRA7AcC7ENRyfj5iXPhzk9y5YCjpKSv8Fik=;
+ b=UxPjI0hqxCq5BF1t6ZtSIgxKVlD1ZUP93et/Diw5YznzExH/Kmb+bl1swbRyBt+4Cr
+ bP1CdB2U/IuYIghN05QL+GsycsD0B0rEIvk6JJlxjsqY342c123yjKCttqDBr8zZ42m8
+ ywZ43sKQkZq616JrnFOMZVHiD5+y+NhFCPmRIiUbf1EwGpSnPt9ssjXQKZtRg8oMuiCQ
+ PAi5vt2NIvfjSNSsMh9VMvpS1F4JF+b4s4StcLNt8y/69bV5gR118Ik40mJ/J9ihAsYQ
+ odAhNo47wJFRlSPbQ6CBiL5VM5SqHZHPeosRuJiUg1eV79zvbsC8zfQdptQjnT4YuwRQ
+ epiw==
+X-Gm-Message-State: AOAM533FEEVFOHUNIIHn7QZVd6FKf/QCV0H4HRNlg9TMWwCFI7CKEWf3
+ fI2lhY7jPfN0f613ZAJCZZv8WQ==
+X-Google-Smtp-Source: ABdhPJwVwW1NVjKl1nKzIHkPI0C2+sDWn++jFnkUSHfGW2RmyfxgShVoDd3MK+eUCELudrSrpnsVow==
+X-Received: by 2002:a65:6493:: with SMTP id e19mr2701596pgv.218.1628201834238; 
+ Thu, 05 Aug 2021 15:17:14 -0700 (PDT)
 Received: from [192.168.6.169] (rrcs-173-198-77-218.west.biz.rr.com.
  [173.198.77.218])
- by smtp.gmail.com with ESMTPSA id b26sm7810332pfo.47.2021.08.05.12.09.52
+ by smtp.gmail.com with ESMTPSA id d2sm9409815pgk.57.2021.08.05.15.17.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Aug 2021 12:09:53 -0700 (PDT)
-Subject: Re: [RFC PATCH 04/13] target/riscv: Support UXL32 for slit/sltiu
+ Thu, 05 Aug 2021 15:17:13 -0700 (PDT)
+Subject: Re: [RFC PATCH 05/13] target/riscv: Support UXL32 for shift
+ instruction
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
- <20210805025312.15720-5-zhiwei_liu@c-sky.com>
+ <20210805025312.15720-6-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <5c33ecc6-3b61-2bb0-f331-548d5e58e129@linaro.org>
-Date: Thu, 5 Aug 2021 09:09:50 -1000
+Message-ID: <78383182-7c74-72dc-7bf6-e45c54b97a7e@linaro.org>
+Date: Thu, 5 Aug 2021 12:17:10 -1000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210805025312.15720-5-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210805025312.15720-6-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -2
-X-Spam_score: -0.3
-X-Spam_bar: /
-X-Spam_report: (-0.3 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.132,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.132,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,32 +84,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2021 19:10:04 -0000
+X-List-Received-Date: Thu, 05 Aug 2021 22:17:19 -0000
 
 On 8/4/21 4:53 PM, LIU Zhiwei wrote:
-> +static bool gen_arith_simm_tl(DisasContext *ctx, arg_i *a,
-> +                              void (*func)(TCGv, TCGv, TCGv))
-> +{
-> +    TCGv dest = gpr_dst(ctx, a->rd);
-> +    TCGv src1 = gpr_src_s(ctx, a->rs1);
-> +    TCGv src2 = tcg_constant_tl(a->imm);
-> +
-> +    (*func)(dest, src1, src2);
-> +    return true;
-> +}
-> +
-> +static bool gen_arith_uimm_tl(DisasContext *ctx, arg_i *a,
-> +                              void (*func)(TCGv, TCGv, TCGv))
-> +{
-> +    TCGv dest = gpr_dst(ctx, a->rd);
-> +    TCGv src1 = gpr_src_u(ctx, a->rs1);
-> +    TCGv src2 = tcg_constant_tl(ctx->uxl32 ? a->imm & UINT32_MAX : a->imm);
-> +
-> +    (*func)(dest, src1, src2);
-> +    return true;
-> +}
+>   static bool trans_srli(DisasContext *ctx, arg_srli *a)
+>   {
+> +    if (ctx->uxl32) {
+> +        return trans_srliw(ctx, a);
+> +    }
+>       return gen_shifti(ctx, a, tcg_gen_shr_tl);
+>   }
 
-Again, unsigned comparisions work fine with sign-extended inputs.
+First, trans_srliw begins with REQUIRE_64BIT, which *should* fail when RV32 is in effect. 
+  This means there's a missing change to is_32bit().
+
+Second, the current decode for srli allows 7 bits of shift, while srilw only allows 5.  As 
+a consequence, gen_shifti contains a check for TARGET_LONG_BITS and trans_srliw does not 
+contain a check at all.  We need to diagnose an out-of-range shift for RV32 somewhere.
+
+I recommend extending the gen_shift* family of helpers.
+
+static bool gen_shifti_imm(DisasContext *ctx, arg_shift *a, int width,
+                            void (*func)(TCGv, TCGv, target_long))
+{
+     TCGv dest, src1;
+
+     if (a->shamt >= width) {
+         return false;
+     }
+     dest = gpr_dst(ctx, a->rd);
+     src1 = gpr_src(ctx, a->rs1);
+     func(dest, src1, a->shamt);
+     return true;
+}
+
+static bool gen_shifti(DisasContext *ctx, arg_shift *a, int width,
+                        void (*func)(TCGv, TCGv, TCGv))
+{...}
+
+static void gen_srliw(TCGv dest, TCGv src1, target_long shamt)
+{
+     tcg_gen_extract_tl(dest, src1, shamt, 32 - shamt);
+     tcg_gen_ext32s_tl(dest, dest);
+}
+
+static bool trans_srliw(DisasContext *ctx, arg_shift *a)
+{
+     REQUIRE_64BIT(ctx);
+     return gen_shifti_imm(ctx, a, 32, gen_srliw);
+}
+
+static bool trans_srli(DisasContext *ctx, arg_shift *a)
+{
+     int xlen = is_32bit(ctx) ? 32 : 64;
+     return gen_shifti_imm(ctx, a, xlen,
+                           xlen == TARGET_LONG_BITS
+                           ? tcg_gen_shri_tl : gen_srliw);
+}
+
+etc.  Perhaps that is_32bit() check above could be consolidated into some macro/inline.
 
 
 r~
