@@ -1,50 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBXbp-0007M1-PD
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 03:16:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49436)
+	id 1mBXgh-0000cI-Kl
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 03:21:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49936)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBXbn-0007LO-Ak; Thu, 05 Aug 2021 03:16:03 -0400
-Received: from out28-75.mail.aliyun.com ([115.124.28.75]:37295)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBXbi-0008KU-Ru; Thu, 05 Aug 2021 03:16:02 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1239193|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0150263-0.00069011-0.984284;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KvfdKuw_1628147748; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KvfdKuw_1628147748)
- by smtp.aliyun-inc.com(10.147.42.135);
- Thu, 05 Aug 2021 15:15:49 +0800
-Subject: Re: [RFC PATCH 00/13] Support UXL field in mstatus
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mBXgf-0000bo-St; Thu, 05 Aug 2021 03:21:05 -0400
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:38820)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mBXgc-00049K-NW; Thu, 05 Aug 2021 03:21:05 -0400
+Received: by mail-yb1-xb2b.google.com with SMTP id c137so7260341ybf.5;
+ Thu, 05 Aug 2021 00:21:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=i7Vil66YHPO9qPvZHVcWlCr7ThezLJiFeSAfRfXL9eQ=;
+ b=pjLbjGo/zQTIJdVMaMrXh3NJMFxq52TXfxsZamctXKy7jfc75ZTnhndsBtHxGJHP1r
+ hFPtFt6vVxmitVBKdtsh/G197YIYfJMP/yzXfxh6mOFvTQGiQqcDdi7d/Jp9H8Ls1PeL
+ qIy/da23ynlzkJhoh32VX4qs4ix3Clor0FUxxAg1h3kQiTuKZOAsetZt7zMuQp5VErkp
+ iQFT6e8T5UTuN4A1bK5yK9GQ0nqkh6z1M//5r3HM01CM12U1UNeIlcQGA5TXgHo8vEE4
+ lQ0cUcJxk2T0ClZ1DeDkhojSlbWpCua49MStir5ii+zbnwvfzz92AHI6sBDo599t1KyI
+ mELQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=i7Vil66YHPO9qPvZHVcWlCr7ThezLJiFeSAfRfXL9eQ=;
+ b=dGC0CeUqD12veBpZYY1pFGu1kxpCeDy45Z2Fltpnj6mwuqlfkyT+tUu6yxy+eI0p7M
+ 8t41hKP+JPizhJ3EqI5IIgWququyHk5TFSNt1mnMnVrJsAIGt56yPjjxf8LEyW3efZ4O
+ cFVlnGhOkYwhOa60lLiojud7bUnLH6FIMv+fJ0rM1hKlssnR7zmxjB24nontKYp9ZeNm
+ z2PNEJrXJegIOzvpb9p0wfisqmGUJ3YBBM2Nl4BdQUCze/HgWoAZ9k1LsY7BgDWyQrfo
+ +QOyhgxzqZ8H2Our1rfHgxYf7OXBfJo0g+WKmF0N49Mb3Lc9yuUK19LWcwXcmpX4MkCY
+ xd4A==
+X-Gm-Message-State: AOAM530fWCCqS4U9sB0q9FDVaZvGdmoso40GmqezcugjOMvtB3UVhxLs
+ XDx/2K9VVE6h+t4m9hlq6xbwYHWusbzeUL910YI=
+X-Google-Smtp-Source: ABdhPJwG9uzjvUWfPSXVAvC+QxOipxzW9mfVCbkgMbCRFanudBxvATzkWNknMIYHq/X44q792Fu57qMvWyLb3MXP3iw=
+X-Received: by 2002:a5b:304:: with SMTP id j4mr4219057ybp.314.1628148061076;
+ Thu, 05 Aug 2021 00:21:01 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
  <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
-Date: Thu, 5 Aug 2021 15:14:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.75; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-75.mail.aliyun.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+ <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
+In-Reply-To: <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 5 Aug 2021 15:20:50 +0800
+Message-ID: <CAEUhbmU0TVvMvUi52kBYNJR0zjpoBmR6+3-PjOUu2r+6HL5qaA@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/13] Support UXL field in mstatus
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.132,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -57,59 +77,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2021 07:16:03 -0000
+X-List-Received-Date: Thu, 05 Aug 2021 07:21:06 -0000
 
-
-On 2021/8/5 下午2:01, Alistair Francis wrote:
-> On Thu, Aug 5, 2021 at 12:55 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->> This patch set implements UXL field in mstatus register. Programmer can change
->> UXLEN by writting to this field. So that you can run a 32 bit program
->> on a 64 bit CPU.
-> Awesome! Do you have any steps for building a rootFS to test this?
-
-Not yet.  It depends on Linux support which  will not start until  
-October.  Maybe as a rough test,
-we can run the 32 glibc test cases on qemu-riscv64 with an option 
-uxl32=true(not implement yet).
-
-Zhiwei
-
+On Thu, Aug 5, 2021 at 3:16 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> Alistair
 >
->> This patch set depends on one patch set by Richard Henderson
->> https://lists.gnu.org/archive/html/qemu-riscv/2021-07/msg00059.html.
->>
->> LIU Zhiwei (13):
->>    target/riscv: Add UXL to tb flags
->>    target/riscv: Support UXL32 for branch instructions
->>    target/riscv: Support UXL32 on 64-bit cpu for load/store
->>    target/riscv: Support UXL32 for slit/sltiu
->>    target/riscv: Support UXL32 for shift instruction
->>    target/riscv: Fix div instructions
->>    target/riscv: Support UXL32 for RVM
->>    target/riscv: Support UXL32 for vector instructions
->>    target/riscv: Support UXL32 for atomic instructions
->>    target/riscv: Support UXL32 for float instructions
->>    target/riscv: Fix srow
->>    target/riscv: Support UXL32 for RVB
->>    target/riscv: Changing the width of U-mode CSR
->>
->>   target/riscv/cpu.h                      |  18 +++
->>   target/riscv/csr.c                      |  42 +++++-
->>   target/riscv/insn_trans/trans_rva.c.inc |  36 ++++-
->>   target/riscv/insn_trans/trans_rvb.c.inc |  51 +++++--
->>   target/riscv/insn_trans/trans_rvd.c.inc |   4 +-
->>   target/riscv/insn_trans/trans_rvf.c.inc |   4 +-
->>   target/riscv/insn_trans/trans_rvi.c.inc |  62 ++++++--
->>   target/riscv/insn_trans/trans_rvm.c.inc |  24 ++-
->>   target/riscv/insn_trans/trans_rvv.c.inc |  44 +++---
->>   target/riscv/translate.c                | 186 ++++++++++++++++++++----
->>   target/riscv/vector_helper.c            |  54 +++++--
->>   11 files changed, 414 insertions(+), 111 deletions(-)
->>
->> --
->> 2.17.1
->>
->>
+> On 2021/8/5 =E4=B8=8B=E5=8D=882:01, Alistair Francis wrote:
+> > On Thu, Aug 5, 2021 at 12:55 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote=
+:
+> >> This patch set implements UXL field in mstatus register. Programmer ca=
+n change
+> >> UXLEN by writting to this field. So that you can run a 32 bit program
+> >> on a 64 bit CPU.
+> > Awesome! Do you have any steps for building a rootFS to test this?
+>
+> Not yet.  It depends on Linux support which  will not start until
+> October.  Maybe as a rough test,
+> we can run the 32 glibc test cases on qemu-riscv64 with an option
+> uxl32=3Dtrue(not implement yet).
+
+That's my understanding as well. Currently there is no software stack
+that supports mode switch, e.g.: OpenSBI boots in 64-bit but loading a
+32-bit payload to execute.
+
+Do you plan to support SXL as well?
+
+Regards,
+Bin
 
