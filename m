@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBicp-00018g-Gi
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 15:01:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33354)
+	id 1mBihG-0004wt-0a
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 15:06:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35036)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mBicm-00016m-FT
- for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:01:48 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:55148)
+ id 1mBihE-0004wF-Az
+ for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:06:24 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:35423)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mBick-0003sJ-Ss
- for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:01:48 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id a8so11166290pjk.4
- for <qemu-riscv@nongnu.org>; Thu, 05 Aug 2021 12:01:46 -0700 (PDT)
+ id 1mBihB-0007BO-Nd
+ for qemu-riscv@nongnu.org; Thu, 05 Aug 2021 15:06:24 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id
+ s22-20020a17090a1c16b0290177caeba067so17287104pjs.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Aug 2021 12:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=fx0nKJq2nwgGGk+UWNrnOAev+kg1mpALrTBulYKo2iA=;
- b=bFMYOZTTncDf0VzNFwlw5K64a9NWLRhBl8YNz6NrpKMWo2e4o6HsBHhe3xfkIeZg2k
- dLyV2NWOYNpj2Vx4uUTgOUfBJE0KFytFt2Us+BrRz57gfEK8JkNvSscQgb6MIMjDE96n
- 5ZYQut3DHA7MQo+R75XhfbE+MB9Gsap4jFXZET0LD/U9MFkKaS0T25r8dXJgWJdoAnsf
- DkQ2C/3LSgR8/TZu7oc0gxkz3UHGjmEOJE2eg1KcSwid/JeljKfSeIF5/v26BKCKuFDu
- fektu9d8MArgrMW2pXwpNC8ZvZFsJZcD50AspDY/iZUUP5TLzH9ckV/NWQFy4J9rDyQF
- Vocw==
+ bh=4gvLYCXxB4MyLjLcp/e6UucQLw2KGFMLI/GrPHsJvWQ=;
+ b=mTAhkEWnPvKypWL8TbtmxuXQLVnJXZ0Z7tP/fRx6i1aTyAjz3kQ+hTQ5JjkqMBR882
+ v7diwYDRhlh35A6clDDR/LMr5Jj25a8DmrGZU++gk4fGX7oc4WK/gUPw1V4SzIeEdDOZ
+ BWNEX55834SArtx9pexJ5I7rI+mygETxrYDvwaalvauoPOsAsiWvlfpczcY4vxnfEajW
+ gVhlu2y9i1KqQ3IIq66QA7XXvp0Vuxv4f/x9oZAQO0CTnt5OvxzwnbopccrmKaj0P3bo
+ iqTdesYNLS3fo7CqJyq+MSkkckAB2Mjy2ppCLJEpo8JGv2UXZ+43axtu9TMqNSvruu8t
+ i6Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=fx0nKJq2nwgGGk+UWNrnOAev+kg1mpALrTBulYKo2iA=;
- b=dLEJn0SlTSExlmKjcazj/DFF40IhSnPtmbIdEXRRaZO3QAJMUvrCKEH3oYv5/EKqF6
- ijkc3dCpOcp8OQzovh7Qcfj+bt/3QHHvDgywu6JGe32xfMneJ7F6uCoLnJy8QH/3tbts
- lKFJkMZBDUx8tIZmJ9IzHZQXEkhLtdYy2YMILi6EJY+sIW5IwOSa6LSgqccXIJrnOPxG
- KQBzc5tGmieDhDJcHXBqVuxbBtkiPxfeYxzGsPxjMwr5F3W4MGEWpkgm3AN7uMSawjVJ
- Xu69LIu8sTUZ+DjGhXNdQ/LMjSNXtOUs0NsximYGIXu34LxJJnmDmePCh+BniKmXFUMD
- 7DqQ==
-X-Gm-Message-State: AOAM5316SM+FYSmiIKcIo9WznUeLZ7alWB7yO/++UrpEbhbz+5T5XhTB
- KttsCS0Qr6CUWZaMWvx0NUTCOw==
-X-Google-Smtp-Source: ABdhPJzTccBrVul20CBfSl75KCitvIJj5ArwdXTQWvFaENKXcAppzgXhWyOtrsFOYpchv2bJ4QiTNg==
-X-Received: by 2002:a62:d447:0:b029:291:19f7:ddcd with SMTP id
- u7-20020a62d4470000b029029119f7ddcdmr887486pfl.54.1628190104974; 
- Thu, 05 Aug 2021 12:01:44 -0700 (PDT)
+ bh=4gvLYCXxB4MyLjLcp/e6UucQLw2KGFMLI/GrPHsJvWQ=;
+ b=J0rF3jL8isBkeOQDMochisDHwYnXNHweKdLo8I8BaLTS7wxx80T2W3mva9MhOoPKaB
+ E7imq5p5TE6ca8/I4lXOa1D+8NzA5QDQBQ4xtUYMmAVvg5iwKdUamhcNg0qh4RBLGjbv
+ +dPiTb9gkhNAkTJYMuwJ6UfWmVZRprjaW74UBXFWTUh+kAzV6ErkejqvQQOFci30MiBt
+ qoRup2U+LtctTdm1jbOYzBu8PAoBMUDImaXkpc5vjWDo+xRwz+fK/jfqxA8SOlwYzYG6
+ k7jZbJU01iVRxxGWzNkPE8KAmCTMP83aQOceaDqSAnXFN6y5khDbdAY4NP2i5DG1D9RN
+ fLKQ==
+X-Gm-Message-State: AOAM531hz6wBkepYXg5QaesXEjMOsmG4iYiExDArNBFx2iqQCKqI0ZF9
+ 90vvitNGAV+1w21nBZNNSa7mew==
+X-Google-Smtp-Source: ABdhPJxr9qOrPeDga7FWXHaJAcCoGDMC1NIE4/gNEZ6mGLxuwczdiK+g0kJk/culDhtb9IU5k6kVCw==
+X-Received: by 2002:a17:90a:c706:: with SMTP id
+ o6mr16250866pjt.113.1628190380266; 
+ Thu, 05 Aug 2021 12:06:20 -0700 (PDT)
 Received: from [192.168.6.169] (rrcs-173-198-77-218.west.biz.rr.com.
  [173.198.77.218])
- by smtp.gmail.com with ESMTPSA id m1sm4995493pfk.84.2021.08.05.12.01.43
+ by smtp.gmail.com with ESMTPSA id c3sm6591754pjs.35.2021.08.05.12.06.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Aug 2021 12:01:44 -0700 (PDT)
-Subject: Re: [RFC PATCH 01/13] target/riscv: Add UXL to tb flags
+ Thu, 05 Aug 2021 12:06:19 -0700 (PDT)
+Subject: Re: [RFC PATCH 02/13] target/riscv: Support UXL32 for branch
+ instructions
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
- <20210805025312.15720-2-zhiwei_liu@c-sky.com>
+ <20210805025312.15720-3-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org>
-Date: Thu, 5 Aug 2021 09:01:40 -1000
+Message-ID: <840d76cc-fd1c-6324-19cc-a6ec0075d032@linaro.org>
+Date: Thu, 5 Aug 2021 09:06:16 -1000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210805025312.15720-2-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210805025312.15720-3-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
@@ -83,91 +85,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2021 19:01:49 -0000
+X-List-Received-Date: Thu, 05 Aug 2021 19:06:24 -0000
 
 On 8/4/21 4:53 PM, LIU Zhiwei wrote:
-> For 32-bit applications run on 64-bit cpu, it may share some code
-> with other 64-bit applictions. Thus we should distinguish the translated
-> cache of the share code with a tb flag.
-> 
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->   target/riscv/cpu.h       | 15 +++++++++++++++
->   target/riscv/translate.c |  3 +++
->   2 files changed, 18 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index bf1c899c00..2b3ba21a78 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -394,9 +394,20 @@ FIELD(TB_FLAGS, SEW, 5, 3)
->   FIELD(TB_FLAGS, VILL, 8, 1)
->   /* Is a Hypervisor instruction load/store allowed? */
->   FIELD(TB_FLAGS, HLSX, 9, 1)
-> +FIELD(TB_FLAGS, UXL, 10, 2)
-
-Are you intending to reserve space for RV128 here?
-Otherwise this could be a single bit.
-
-Also, you probably don't want to name it "UXL", since it should indicate the current 
-operating XLEN, taking MXL, SXL and UXL into account.
-
-Perhaps just name the field XLEN32, and make it a single bit?
-
-> +static inline bool riscv_cpu_is_uxl32(CPURISCVState *env)
+> +static TCGv gpr_src_u(DisasContext *ctx, int reg_num)
 > +{
-> +#ifndef CONFIG_USER_ONLY
-> +    return (get_field(env->mstatus, MSTATUS64_UXL) == 1) &&
-> +           !riscv_cpu_is_32bit(env) &&
-> +           (env->priv == PRV_U);
-> +#endif
-> +    return false;
+> +    if (reg_num == 0) {
+> +        return ctx->zero;
+> +    }
+> +    if (ctx->uxl32) {
+> +        tcg_gen_ext32u_tl(cpu_gpr[reg_num], cpu_gpr[reg_num]);
+> +    }
+> +    return cpu_gpr[reg_num];
+> +}
+> +
+> +static TCGv gpr_src_s(DisasContext *ctx, int reg_num)
+> +{
+> +    if (reg_num == 0) {
+> +        return ctx->zero;
+> +    }
+> +    if (ctx->uxl32) {
+> +        tcg_gen_ext32s_tl(cpu_gpr[reg_num], cpu_gpr[reg_num]);
+> +    }
+> +    return cpu_gpr[reg_num];
 > +}
 
-Again, naming could be better?
-It seems trivial to handle all of the fields here.  Perhaps
+This is bad: you cannot modify the source registers like this.
 
+These incorrect modifications will be visible to the kernel on transition back to S-mode.
 
-static inline bool riscv_cpu_is_xlen32(env)
-{
-#if defined(TARGET_RISCV32)
-     return true;
-#elif defined(CONFIG_USER_ONLY)
-     return false;
-#else
-     /* When emulating a 32-bit-only cpu, use RV32. */
-     if (riscv_cpu_is_32bit(env)) {
-         return true;
-     }
-     /*
-      * If MXL has been reduced to RV32, MSTATUSH doesn't have UXL/SXL,
-      * therefore, XLEN cannot be widened back to RV64 for lower privs.
-      */
-     if (get_field(env->misa, MISA64_MXL) == 1) {
-         return true;
-     }
-     switch (env->priv) {
-     case PRV_M:
-         return false;
-     case PRV_U:
-         return get_field(env->mstatus, MSTATUS64_UXL) == 1;
-     default: /* PRV_S & PRV_H */
-         return get_field(env->mstatus, MSTATUS64_SXL) == 1;
-     }
-#endif
-}
+> 
+> +static bool gen_branch_u(DisasContext *ctx, arg_b *a, TCGCond cond)
+> +{
+> +    TCGv src1 = gpr_src_u(ctx, a->rs1);
+> +    TCGv src2 = gpr_src_u(ctx, a->rs2);
+> +
+> +    return gen_branch_internal(ctx, a, cond, src1, src2);
+> +}
 
-
-> @@ -451,6 +462,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->               flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->           }
->       }
-> +    if (riscv_cpu_is_uxl32(env)) {
-> +        flags = FIELD_DP32(flags, TB_FLAGS, UXL,
-> +                           get_field(env->mstatus, MSTATUS64_UXL));
-
-   flags = FIELD_DP32(flags, TB_FLAGS, XLEN32,
-                      riscv_cpu_is_xlen32(env));
+This is unnecessary.  Unsigned comparisons work just fine with sign-extended values.  It 
+will be simpler to keep all values sign-extended.
 
 
 r~
