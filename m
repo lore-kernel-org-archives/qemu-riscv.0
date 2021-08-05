@@ -1,39 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBTXS-00043l-VC
-	for mharc-qemu-riscv@gnu.org; Wed, 04 Aug 2021 22:55:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47352)
+	id 1mBTXp-0004bH-Rj
+	for mharc-qemu-riscv@gnu.org; Wed, 04 Aug 2021 22:55:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47376)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBTXP-00043D-29; Wed, 04 Aug 2021 22:55:16 -0400
-Received: from out28-147.mail.aliyun.com ([115.124.28.147]:49862)
+ id 1mBTXn-0004X6-Rq; Wed, 04 Aug 2021 22:55:39 -0400
+Received: from out28-122.mail.aliyun.com ([115.124.28.122]:38930)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBTXL-0004zf-TS; Wed, 04 Aug 2021 22:55:14 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.2728854|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0104754-0.000411257-0.989113;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KvY9egp_1628132099; 
+ id 1mBTXl-0005Uk-VV; Wed, 04 Aug 2021 22:55:39 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07566033|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0121746-6.56494e-05-0.98776;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047208; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KvYquy-_1628132130; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KvY9egp_1628132099)
- by smtp.aliyun-inc.com(10.147.41.121);
- Thu, 05 Aug 2021 10:55:00 +0800
+ fp:SMTPD_---.KvYquy-_1628132130)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Thu, 05 Aug 2021 10:55:30 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [RFC PATCH 00/13] Support UXL field in mstatus 
-Date: Thu,  5 Aug 2021 10:52:59 +0800
-Message-Id: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+Subject: [RFC PATCH 01/13] target/riscv: Add UXL to tb flags
+Date: Thu,  5 Aug 2021 10:53:00 +0800
+Message-Id: <20210805025312.15720-2-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: none client-ip=115.124.28.147; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-147.mail.aliyun.com
+In-Reply-To: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+Received-SPF: none client-ip=115.124.28.122; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-122.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -46,43 +49,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2021 02:55:16 -0000
+X-List-Received-Date: Thu, 05 Aug 2021 02:55:40 -0000
 
-This patch set implements UXL field in mstatus register. Programmer can change
-UXLEN by writting to this field. So that you can run a 32 bit program
-on a 64 bit CPU.
+For 32-bit applications run on 64-bit cpu, it may share some code
+with other 64-bit applictions. Thus we should distinguish the translated
+cache of the share code with a tb flag.
 
-This patch set depends on one patch set by Richard Henderson
-https://lists.gnu.org/archive/html/qemu-riscv/2021-07/msg00059.html.
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/cpu.h       | 15 +++++++++++++++
+ target/riscv/translate.c |  3 +++
+ 2 files changed, 18 insertions(+)
 
-LIU Zhiwei (13):
-  target/riscv: Add UXL to tb flags
-  target/riscv: Support UXL32 for branch instructions
-  target/riscv: Support UXL32 on 64-bit cpu for load/store
-  target/riscv: Support UXL32 for slit/sltiu
-  target/riscv: Support UXL32 for shift instruction
-  target/riscv: Fix div instructions
-  target/riscv: Support UXL32 for RVM
-  target/riscv: Support UXL32 for vector instructions
-  target/riscv: Support UXL32 for atomic instructions
-  target/riscv: Support UXL32 for float instructions
-  target/riscv: Fix srow
-  target/riscv: Support UXL32 for RVB
-  target/riscv: Changing the width of U-mode CSR
-
- target/riscv/cpu.h                      |  18 +++
- target/riscv/csr.c                      |  42 +++++-
- target/riscv/insn_trans/trans_rva.c.inc |  36 ++++-
- target/riscv/insn_trans/trans_rvb.c.inc |  51 +++++--
- target/riscv/insn_trans/trans_rvd.c.inc |   4 +-
- target/riscv/insn_trans/trans_rvf.c.inc |   4 +-
- target/riscv/insn_trans/trans_rvi.c.inc |  62 ++++++--
- target/riscv/insn_trans/trans_rvm.c.inc |  24 ++-
- target/riscv/insn_trans/trans_rvv.c.inc |  44 +++---
- target/riscv/translate.c                | 186 ++++++++++++++++++++----
- target/riscv/vector_helper.c            |  54 +++++--
- 11 files changed, 414 insertions(+), 111 deletions(-)
-
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index bf1c899c00..2b3ba21a78 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -394,9 +394,20 @@ FIELD(TB_FLAGS, SEW, 5, 3)
+ FIELD(TB_FLAGS, VILL, 8, 1)
+ /* Is a Hypervisor instruction load/store allowed? */
+ FIELD(TB_FLAGS, HLSX, 9, 1)
++FIELD(TB_FLAGS, UXL, 10, 2)
+ 
+ bool riscv_cpu_is_32bit(CPURISCVState *env);
+ 
++static inline bool riscv_cpu_is_uxl32(CPURISCVState *env)
++{
++#ifndef CONFIG_USER_ONLY
++    return (get_field(env->mstatus, MSTATUS64_UXL) == 1) &&
++           !riscv_cpu_is_32bit(env) &&
++           (env->priv == PRV_U);
++#endif
++    return false;
++}
++
+ /*
+  * A simplification for VLMAX
+  * = (1 << LMUL) * VLEN / (8 * (1 << SEW))
+@@ -451,6 +462,10 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+             flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
+         }
+     }
++    if (riscv_cpu_is_uxl32(env)) {
++        flags = FIELD_DP32(flags, TB_FLAGS, UXL,
++                           get_field(env->mstatus, MSTATUS64_UXL));
++    }
+ #endif
+ 
+     *pflags = flags;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 076f28b9c1..ac4a545da8 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -67,6 +67,8 @@ typedef struct DisasContext {
+     CPUState *cs;
+     TCGv zero;
+     TCGv sink;
++    /* UXLEN is 32 bit for 64-bit CPU */
++    bool uxl32;
+ } DisasContext;
+ 
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -912,6 +914,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
+     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+     ctx->cs = cs;
++    ctx->uxl32 = FIELD_EX32(tb_flags, TB_FLAGS, UXL) == 1;
+ }
+ 
+ static void riscv_tr_tb_start(DisasContextBase *dcbase, CPUState *cpu)
 -- 
 2.17.1
 
