@@ -1,48 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBpxr-0007Fn-0r
-	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 22:52:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37894)
+	id 1mBqeL-0002YV-7y
+	for mharc-qemu-riscv@gnu.org; Thu, 05 Aug 2021 23:35:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44772)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBpxo-0007FA-Ra; Thu, 05 Aug 2021 22:52:00 -0400
-Received: from out28-171.mail.aliyun.com ([115.124.28.171]:32807)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mBpxh-00013T-25; Thu, 05 Aug 2021 22:52:00 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07449705|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.270346-0.00510486-0.724549;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047198; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.Kw1xmlF_1628218277; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Kw1xmlF_1628218277) by smtp.aliyun-inc.com(10.147.40.7);
- Fri, 06 Aug 2021 10:51:17 +0800
-Subject: Re: [RFC PATCH 01/13] target/riscv: Add UXL to tb flags
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
-References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
- <20210805025312.15720-2-zhiwei_liu@c-sky.com>
- <94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <1030e7cf-63d3-27e7-a7ed-448b134763cb@c-sky.com>
-Date: Fri, 6 Aug 2021 10:49:21 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mBqeG-0002Xi-9d; Thu, 05 Aug 2021 23:35:54 -0400
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:43611)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mBqeE-0005iC-En; Thu, 05 Aug 2021 23:35:52 -0400
+Received: by mail-yb1-xb32.google.com with SMTP id z128so12729240ybc.10;
+ Thu, 05 Aug 2021 20:35:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=bJF9FcXTaeHdOWOs5HG1C6ujOZIT/QgWHJKHXzoQNNo=;
+ b=iPwzWhyC6blbT1IWZfkHV/+1RfCpfMqpmFbUjCWs4mBjK67ZWy4kgftRwnGWgFakyh
+ xw2WxicWdfu19qadBzPkl2Not7kGB74PjbhanyX0QpPbXTKMgp8AfXTRLXMDI12s64Xn
+ MVkvUl4KCxl15GTGAODNtlkNELQQqpJgpwvoe5dDS3nUypD4Ksde0DT6WFbjMUh2HfcH
+ u3aMEPILjdfTCt+ugQjjnt80x1+x6yeSMMcmVFBYH9cCBUcF3NDw9E/D6ujHfMMkWb+E
+ 0FwtNUn8S0eBbdSQ8qEbqBl01BeBPEUwWu3KL4eijOJaKyms2cTYwh1/c6WdybV+ZhdB
+ YGbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=bJF9FcXTaeHdOWOs5HG1C6ujOZIT/QgWHJKHXzoQNNo=;
+ b=pPqryslkVz2mhF65oECu2vDuysUep0GUipNTYChX+cbSokXYIOx1HvrptQ/xktG6lf
+ Lq3FLUGNoojiCT0wbCnASQDkLazsTxbIw5xUPgl9NPw7kCg+ve6yKaX8gqYr0SXvs0MJ
+ uPRZfxUxbnTH7FNMRiUb5KF1JXiV89rMAD40ONY2pWElhyFCbmZ2Lb4aDqRdmBMfR7tb
+ M3V2G8FN5RXBSAHPmbYsakjpsCmMEovAkyP8Dm0LUuLOCwj0Uf7JR/dIaYV6Y5f1UvBD
+ XMfKjGwNL+lXmV2NbfOvzMU/kdlFdhRzw+R5CdA6jhvcWNCFpG68lxGImS37+yC9OBah
+ ESXQ==
+X-Gm-Message-State: AOAM532s68rBZ0yjDc27RfMuOSMIe4L1fK7+TFkibXZTCeyymRJEVjYb
+ +inBc/ghAFOvz17OHX0JKnZt06/lvoj+YiSu5eI=
+X-Google-Smtp-Source: ABdhPJz3SqDhQjEqDMQQZR6YqC/paMyATaU5f8ufuAzA0mD+FVh4FZLhayOpGyWq8NgQGRmQDsb5kmxh1Ee3CwM+0Lc=
+X-Received: by 2002:a25:bb08:: with SMTP id z8mr10606259ybg.306.1628220948447; 
+ Thu, 05 Aug 2021 20:35:48 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org>
-Content-Type: multipart/alternative;
- boundary="------------4517E86A2B7F8CF8536EAC3F"
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.171; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-171.mail.aliyun.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+References: <20210805175626.11573-1-ruinland@andestech.com>
+ <20210805175626.11573-3-ruinland@andestech.com>
+In-Reply-To: <20210805175626.11573-3-ruinland@andestech.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 6 Aug 2021 11:35:36 +0800
+Message-ID: <CAEUhbmWXZBwvsDC5VYvQs+3zssNaRFwKz14fJPnPQHJCpwVUPg@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 2/4] Adding basic custom/vendor CSR handling
+ mechanism
+To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, 
+ Dylan Jhong <dylan@andestech.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.132, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -55,348 +73,389 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2021 02:52:01 -0000
+X-List-Received-Date: Fri, 06 Aug 2021 03:35:55 -0000
 
-This is a multi-part message in MIME format.
---------------4517E86A2B7F8CF8536EAC3F
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
++Alistair
 
-
-On 2021/8/6 上午3:01, Richard Henderson wrote:
-> On 8/4/21 4:53 PM, LIU Zhiwei wrote:
->> For 32-bit applications run on 64-bit cpu, it may share some code
->> with other 64-bit applictions. Thus we should distinguish the translated
->> cache of the share code with a tb flag.
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
->> ---
->>   target/riscv/cpu.h       | 15 +++++++++++++++
->>   target/riscv/translate.c |  3 +++
->>   2 files changed, 18 insertions(+)
->>
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index bf1c899c00..2b3ba21a78 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -394,9 +394,20 @@ FIELD(TB_FLAGS, SEW, 5, 3)
->>   FIELD(TB_FLAGS, VILL, 8, 1)
->>   /* Is a Hypervisor instruction load/store allowed? */
->>   FIELD(TB_FLAGS, HLSX, 9, 1)
->> +FIELD(TB_FLAGS, UXL, 10, 2)
+On Fri, Aug 6, 2021 at 1:58 AM Ruinland Chuan-Tzu Tsai
+<ruinland@andestech.com> wrote:
 >
-> Are you intending to reserve space for RV128 here?
-> Otherwise this could be a single bit.
+> From: Ruinalnd ChuanTzu Tsai <ruinland@andestech.com>
 >
-Yes.
-> Also, you probably don't want to name it "UXL", since it should 
-> indicate the current operating XLEN, taking MXL, SXL and UXL into 
-> account.
+> For now we add a custom CSR handling mechanism to handle non-standard CSR read
+> or write.
 >
-Hi Richard,
-
-I don't have the ambitious to define a XLEN32 at least for this patch 
-set. I think it is much more difficult.
-
-The only purpose of this patch set is that we can run 32-bit application 
-on  a 64 bit Linux from qemu-system-riscv64.
-
-So  I didn't change the default behavior of every instruction except when
-
- 1. Current CPU is 64 bit CPU, i.s. TARGET_LONG_BITS is 64.
- 2. Current privileged is U-mode.
- 3. UXL is 1.
-
-I know that Alistair has done a lot to support 32-bit CPU on 
-qemu-system-riscv64. But We are doing different things,
-and it maybe a little confusing.
-
-I still do not find a good to combine them. In my opinion, some code in 
-this patch set can be reused for SXL32.
-If you have any advice, please let me know.
-
-Best Regards,
-Zhiwei
-
-> Perhaps just name the field XLEN32, and make it a single bit?
+> The write_stub() and read_zero() are provided for quick placeholder usage if
+> such CSRs' behavior are expected to fail-over in its user code.
 >
->> +static inline bool riscv_cpu_is_uxl32(CPURISCVState *env)
->> +{
->> +#ifndef CONFIG_USER_ONLY
->> +    return (get_field(env->mstatus, MSTATUS64_UXL) == 1) &&
->> +           !riscv_cpu_is_32bit(env) &&
->> +           (env->priv == PRV_U);
->> +#endif
->> +    return false;
->> +}
+> Signed-off-by: Dylan Jhong <dylan@andestech.com>
+> ---
+>  target/riscv/cpu.c             | 23 ++++++++++
+>  target/riscv/cpu.h             | 31 ++++++++++++-
+>  target/riscv/cpu_bits.h        |  4 ++
+>  target/riscv/csr.c             | 83 ++++++++++++++++++++++++++++------
+>  target/riscv/custom_cpu_bits.h |  8 ++++
+>  5 files changed, 134 insertions(+), 15 deletions(-)
+>  create mode 100644 target/riscv/custom_cpu_bits.h
 >
-> Again, naming could be better?
-> It seems trivial to handle all of the fields here.  Perhaps
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7401325..3a638b5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -144,6 +144,29 @@ static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
+>  #endif
+>  }
 >
->
-> static inline bool riscv_cpu_is_xlen32(env)
-> {
-> #if defined(TARGET_RISCV32)
->     return true;
-> #elif defined(CONFIG_USER_ONLY)
->     return false;
-> #else
->     /* When emulating a 32-bit-only cpu, use RV32. */
->     if (riscv_cpu_is_32bit(env)) {
->         return true;
->     }
->     /*
->      * If MXL has been reduced to RV32, MSTATUSH doesn't have UXL/SXL,
->      * therefore, XLEN cannot be widened back to RV64 for lower privs.
->      */
->     if (get_field(env->misa, MISA64_MXL) == 1) {
->         return true;
->     }
->     switch (env->priv) {
->     case PRV_M:
->         return false;
->     case PRV_U:
->         return get_field(env->mstatus, MSTATUS64_UXL) == 1;
->     default: /* PRV_S & PRV_H */
->         return get_field(env->mstatus, MSTATUS64_SXL) == 1;
->     }
-> #endif
-> }
->
->
->> @@ -451,6 +462,10 @@ static inline void 
->> cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->>               flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->>           }
->>       }
->> +    if (riscv_cpu_is_uxl32(env)) {
->> +        flags = FIELD_DP32(flags, TB_FLAGS, UXL,
->> +                           get_field(env->mstatus, MSTATUS64_UXL));
->
->   flags = FIELD_DP32(flags, TB_FLAGS, XLEN32,
->                      riscv_cpu_is_xlen32(env));
->
->
-> r~
+> +#if defined(CONFIG_RISCV_CUSTOM)
+> +static void setup_custom_csr(CPURISCVState *env,
+> +                             riscv_custom_csr_operations csr_map_struct[]
+> +                             ) {
 
---------------4517E86A2B7F8CF8536EAC3F
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+{ should be put to the next line, per QEMU coding convention. Please
+fix this globally in this series.
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021/8/6 上午3:01, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org">On
-      8/4/21 4:53 PM, LIU Zhiwei wrote:
-      <br>
-      <blockquote type="cite">For 32-bit applications run on 64-bit cpu,
-        it may share some code
-        <br>
-        with other 64-bit applictions. Thus we should distinguish the
-        translated
-        <br>
-        cache of the share code with a tb flag.
-        <br>
-        <br>
-        Signed-off-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@c-sky.com">&lt;zhiwei_liu@c-sky.com&gt;</a>
-        <br>
-        ---
-        <br>
-          target/riscv/cpu.h       | 15 +++++++++++++++
-        <br>
-          target/riscv/translate.c |  3 +++
-        <br>
-          2 files changed, 18 insertions(+)
-        <br>
-        <br>
-        diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-        <br>
-        index bf1c899c00..2b3ba21a78 100644
-        <br>
-        --- a/target/riscv/cpu.h
-        <br>
-        +++ b/target/riscv/cpu.h
-        <br>
-        @@ -394,9 +394,20 @@ FIELD(TB_FLAGS, SEW, 5, 3)
-        <br>
-          FIELD(TB_FLAGS, VILL, 8, 1)
-        <br>
-          /* Is a Hypervisor instruction load/store allowed? */
-        <br>
-          FIELD(TB_FLAGS, HLSX, 9, 1)
-        <br>
-        +FIELD(TB_FLAGS, UXL, 10, 2)
-        <br>
-      </blockquote>
-      <br>
-      Are you intending to reserve space for RV128 here?
-      <br>
-      Otherwise this could be a single bit.
-      <br>
-      <br>
-    </blockquote>
-    Yes.<br>
-    <blockquote type="cite"
-      cite="mid:94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org">Also,
-      you probably don't want to name it "UXL", since it should indicate
-      the current operating XLEN, taking MXL, SXL and UXL into account.
-      <br>
-      <br>
-    </blockquote>
-    <p>Hi Richard,<br>
-    </p>
-    <p>I don't have the ambitious to define a XLEN32 at least for this
-      patch set. I think it is much more difficult.</p>
-    <p>The only purpose of this patch set is that we can run 32-bit
-      application on  a 64 bit Linux from qemu-system-riscv64.</p>
-    <p>So  I didn't change the default behavior of every instruction
-      except when <br>
-    </p>
-    <ol>
-      <li>Current CPU is 64 bit CPU, i.s. TARGET_LONG_BITS is 64.<br>
-      </li>
-      <li>Current privileged is U-mode.</li>
-      <li>UXL is 1.</li>
-    </ol>
-    <p>I know that Alistair has done a lot to support 32-bit CPU on
-      qemu-system-riscv64. But We are doing different things,<br>
-      and it maybe a little confusing.</p>
-    <p>I still do not find a good to combine them. In my opinion, some
-      code in this patch set can be reused for SXL32. <br>
-      If you have any advice, please let me know.</p>
-    <p>Best Regards,<br>
-      Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:94c93e5e-3469-e81c-33b8-9a6ba7f4922a@linaro.org">Perhaps
-      just name the field XLEN32, and make it a single bit?
-      <br>
-      <br>
-      <blockquote type="cite">+static inline bool
-        riscv_cpu_is_uxl32(CPURISCVState *env)
-        <br>
-        +{
-        <br>
-        +#ifndef CONFIG_USER_ONLY
-        <br>
-        +    return (get_field(env-&gt;mstatus, MSTATUS64_UXL) == 1)
-        &amp;&amp;
-        <br>
-        +           !riscv_cpu_is_32bit(env) &amp;&amp;
-        <br>
-        +           (env-&gt;priv == PRV_U);
-        <br>
-        +#endif
-        <br>
-        +    return false;
-        <br>
-        +}
-        <br>
-      </blockquote>
-      <br>
-      Again, naming could be better?
-      <br>
-      It seems trivial to handle all of the fields here.  Perhaps
-      <br>
-      <br>
-      <br>
-      static inline bool riscv_cpu_is_xlen32(env)
-      <br>
-      {
-      <br>
-      #if defined(TARGET_RISCV32)
-      <br>
-          return true;
-      <br>
-      #elif defined(CONFIG_USER_ONLY)
-      <br>
-          return false;
-      <br>
-      #else
-      <br>
-          /* When emulating a 32-bit-only cpu, use RV32. */
-      <br>
-          if (riscv_cpu_is_32bit(env)) {
-      <br>
-              return true;
-      <br>
-          }
-      <br>
-          /*
-      <br>
-           * If MXL has been reduced to RV32, MSTATUSH doesn't have
-      UXL/SXL,
-      <br>
-           * therefore, XLEN cannot be widened back to RV64 for lower
-      privs.
-      <br>
-           */
-      <br>
-          if (get_field(env-&gt;misa, MISA64_MXL) == 1) {
-      <br>
-              return true;
-      <br>
-          }
-      <br>
-          switch (env-&gt;priv) {
-      <br>
-          case PRV_M:
-      <br>
-              return false;
-      <br>
-          case PRV_U:
-      <br>
-              return get_field(env-&gt;mstatus, MSTATUS64_UXL) == 1;
-      <br>
-          default: /* PRV_S &amp; PRV_H */
-      <br>
-              return get_field(env-&gt;mstatus, MSTATUS64_SXL) == 1;
-      <br>
-          }
-      <br>
-      #endif
-      <br>
-      }
-      <br>
-      <br>
-      <br>
-      <blockquote type="cite">@@ -451,6 +462,10 @@ static inline void
-        cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-        <br>
-                      flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
-        <br>
-                  }
-        <br>
-              }
-        <br>
-        +    if (riscv_cpu_is_uxl32(env)) {
-        <br>
-        +        flags = FIELD_DP32(flags, TB_FLAGS, UXL,
-        <br>
-        +                           get_field(env-&gt;mstatus,
-        MSTATUS64_UXL));
-        <br>
-      </blockquote>
-      <br>
-        flags = FIELD_DP32(flags, TB_FLAGS, XLEN32,
-      <br>
-                           riscv_cpu_is_xlen32(env));
-      <br>
-      <br>
-      <br>
-      r~
-      <br>
-    </blockquote>
-  </body>
-</html>
+> +
+> +    env->custom_csr_map = g_hash_table_new_full(g_direct_hash, \
+> +                                                g_direct_equal, \
+> +                                                NULL, NULL);
 
---------------4517E86A2B7F8CF8536EAC3F--
+Is it possible to juse use g_hash_table_new() directly, with both 2
+parameters being NULL, given you don't provide the destroy hooks?
+like:
+
+    env->custom_csr_map = g_hash_table_new(NULL, NULL);
+
+> +
+> +
+> +    int i;
+
+nits: please move this to the beginning of this function.
+
+> +    for (i = 0; i < MAX_CUSTOM_CSR_NUM; i++) {
+> +        if (csr_map_struct[i].csrno != 0) {
+> +            g_hash_table_insert(env->custom_csr_map,
+> +                GINT_TO_POINTER(csr_map_struct[i].csrno),
+> +                &csr_map_struct[i].csr_opset);
+> +        } else {
+> +            break;
+
+break? I think we should continue the loop.
+
+> +        }
+> +    }
+> +}
+> +#endif
+> +
+>  static void riscv_any_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 0edb282..52df9bb 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -239,6 +239,16 @@ struct CPURISCVState {
+>
+>      /* Fields from here on are preserved across CPU reset. */
+>      QEMUTimer *timer; /* Internal timer */
+> +
+> +    /*
+> +     * The reason why we have an opset map for custom CSRs and a seperated
+> +     * storage map is that we might have heterogeneous architecture, in which
+> +     * different harts have different custom CSRs.
+> +     * Custom CSR opset map
+> +     */
+> +    GHashTable *custom_csr_map;
+> +    /* Custom CSR val holder */
+> +    void *custom_csr_val;
+>  };
+>
+>  OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
+> @@ -485,17 +495,36 @@ typedef struct {
+>      riscv_csr_op_fn op;
+>  } riscv_csr_operations;
+>
+> +typedef struct {
+> +    int csrno;
+> +    riscv_csr_operations csr_opset;
+> +    } riscv_custom_csr_operations;
+
+} should be put in the beginning without space. Please fix this
+globally in this series.
+
+> +
+> +/*
+> + * The reason why we have an abstraction here is that : We could have CSR
+> + * number M on hart A is an alias of CSR number N on hart B. So we make a
+> + * CSR number to value address map.
+> + */
+> +typedef struct  {
+> +    int csrno;
+> +    target_ulong val;
+> +    } riscv_custom_csr_vals;
+> +
+
+It looks this struct is not used by any patch in this series?
+
+>  /* CSR function table constants */
+>  enum {
+> -    CSR_TABLE_SIZE = 0x1000
+> +    CSR_TABLE_SIZE = 0x1000,
+> +    MAX_CUSTOM_CSR_NUM = 100
+
+To be consistent, name this to be: CUSTOM_CSR_TABLE_SIZE
+
+>  };
+>
+>  /* CSR function table */
+> +extern int andes_custom_csr_size;
+> +extern riscv_custom_csr_operations andes_custom_csr_table[MAX_CUSTOM_CSR_NUM];
+
+The above 2 should not be in this patch.
+
+>  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+>
+>  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+>  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+>
+> +
+
+This is unnecessary.
+
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+>
+>  #endif /* RISCV_CPU_H */
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index caf4599..de77242 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -593,3 +593,7 @@
+>  #define MIE_SSIE                           (1 << IRQ_S_SOFT)
+>  #define MIE_USIE                           (1 << IRQ_U_SOFT)
+>  #endif
+> +
+> +#if defined(CONFIG_RISCV_CUSTOM)
+> +#include "custom_cpu_bits.h"
+> +#endif
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fd2e636..1c4dc94 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -137,7 +137,8 @@ static int ctr32(CPURISCVState *env, int csrno)
+>      return ctr(env, csrno);
+>  }
+>
+> -#if !defined(CONFIG_USER_ONLY)
+> +#pragma GCC diagnostic push
+> +#pragma GCC diagnostic ignored "-Wunused-function"
+
+Use __attribute__((__unused__)), so we don't need to use GCC push/pop
+
+>  static int any(CPURISCVState *env, int csrno)
+>  {
+>      return 0;
+> @@ -152,6 +153,25 @@ static int any32(CPURISCVState *env, int csrno)
+>      return any(env, csrno);
+>
+>  }
+> +#pragma GCC diagnostic pop
+> +
+> +/* Machine Information Registers */
+> +static int read_zero(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    return *val = 0;
+> +}
+> +
+> +/*
+> + * XXX: This is just a write stub for developing custom CSR handler,
+
+Remove XXX
+
+> + * if the behavior of writting such CSR is not presentable in QEMU and doesn't
+
+typo: writing.
+
+Is that present, or presentable?
+
+> + * affect the functionality, just stub it.
+> + */
+> +static int write_stub(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    return 0;
+> +}
+> +
+> +#if !defined(CONFIG_USER_ONLY)
+>
+>  static int smode(CPURISCVState *env, int csrno)
+>  {
+> @@ -435,11 +455,6 @@ static const char valid_vm_1_10_64[16] = {
+>      [VM_1_10_SV57] = 1
+>  };
+>
+> -/* Machine Information Registers */
+> -static int read_zero(CPURISCVState *env, int csrno, target_ulong *val)
+> -{
+> -    return *val = 0;
+> -}
+>
+>  static int read_mhartid(CPURISCVState *env, int csrno, target_ulong *val)
+>  {
+> @@ -1264,6 +1279,18 @@ static int write_pmpaddr(CPURISCVState *env, int csrno, target_ulong val)
+>
+>  #endif
+>
+> +
+> +#if defined(CONFIG_RISCV_CUSTOM)
+> +/* Custom CSR related routines and data structures */
+> +
+> +static gpointer is_custom_csr(CPURISCVState *env, int csrno)
+
+The function name suggests that the return value should be of bool
+type. Suggest we do:
+
+static bool is_custom_csr(CPURISCVState *env, int csrno,
+riscv_custom_csr_operations *custom_csr_ops)
+
+> +{
+> +    gpointer ret;
+> +    ret = g_hash_table_lookup(env->custom_csr_map, GINT_TO_POINTER(csrno));
+> +    return ret;
+> +}
+> +#endif
+> +
+>  /*
+>   * riscv_csrrw - read and/or update control and status register
+>   *
+> @@ -1273,12 +1300,19 @@ static int write_pmpaddr(CPURISCVState *env, int csrno, target_ulong val)
+>   * csrrc  <->  riscv_csrrw(env, csrno, ret_value, 0, value);
+>   */
+>
+> +
+> +
+
+Unnecessary changes
+
+>  int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>                  target_ulong new_value, target_ulong write_mask)
+>  {
+>      int ret;
+>      target_ulong old_value;
+>      RISCVCPU *cpu = env_archcpu(env);
+> +    #if !defined(CONFIG_RISCV_CUSTOM)
+
+Please make sure #if starts from the beginning of this line, without space ahead
+
+> +    riscv_csr_operations *csrop = &csr_ops[csrno];
+
+nits: name this variable to csr_ops
+
+> +    #else
+> +    riscv_csr_operations *csrop;
+> +    #endif
+>
+>      /* check privileges and return -1 if check fails */
+>  #if !defined(CONFIG_USER_ONLY)
+> @@ -1300,6 +1334,7 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>          (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+> +
+>  #endif
+>
+>      /* ensure the CSR extension is enabled. */
+> @@ -1307,27 +1342,43 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> +    /* try handle_custom_csr */
+> +
+> +    #if defined(CONFIG_RISCV_CUSTOM)
+> +    if (unlikely(env->custom_csr_map != NULL)) {
+> +        riscv_csr_operations *custom_csr_opset = (riscv_csr_operations *)
+> +            is_custom_csr(env, csrno);
+> +        if (NULL != custom_csr_opset) {
+> +            csrop = custom_csr_opset;
+> +            } else {
+> +            csrop = &csr_ops[csrno];
+> +            }
+> +        } else {
+> +        csrop = &csr_ops[csrno];
+> +        }
+> +    #endif
+> +
+>      /* check predicate */
+> -    if (!csr_ops[csrno].predicate) {
+> +    if (!csrop->predicate) {
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+> -    ret = csr_ops[csrno].predicate(env, csrno);
+> +    ret = csrop->predicate(env, csrno);
+>      if (ret < 0) {
+>          return ret;
+>      }
+>
+>      /* execute combined read/write operation if it exists */
+> -    if (csr_ops[csrno].op) {
+> -        return csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
+> +    if (csrop->op) {
+> +        return csrop->op(env, csrno, ret_value, new_value, write_mask);
+>      }
+>
+>      /* if no accessor exists then return failure */
+> -    if (!csr_ops[csrno].read) {
+> +    if (!csrop->read) {
+>          return -RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+>      /* read old value */
+> -    ret = csr_ops[csrno].read(env, csrno, &old_value);
+> +    ret = csrop->read(env, csrno, &old_value);
+>      if (ret < 0) {
+>          return ret;
+>      }
+> @@ -1335,8 +1386,8 @@ int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>      /* write value if writable and write mask set, otherwise drop writes */
+>      if (write_mask) {
+>          new_value = (old_value & ~write_mask) | (new_value & write_mask);
+> -        if (csr_ops[csrno].write) {
+> -            ret = csr_ops[csrno].write(env, csrno, new_value);
+> +        if (csrop->write) {
+> +            ret = csrop->write(env, csrno, new_value);
+>              if (ret < 0) {
+>                  return ret;
+>              }
+> @@ -1369,6 +1420,10 @@ int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
+>      return ret;
+>  }
+>
+> +#if defined(CONFIG_RISCV_CUSTOM)
+> +/* Include the custom CSR table here. */
+
+nits: remove the ending .
+
+> +#endif
+> +
+>  /* Control and Status Register function table */
+>  riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      /* User Floating-Point CSRs */
+> diff --git a/target/riscv/custom_cpu_bits.h b/target/riscv/custom_cpu_bits.h
+> new file mode 100644
+> index 0000000..5df31f8
+> --- /dev/null
+> +++ b/target/riscv/custom_cpu_bits.h
+> @@ -0,0 +1,8 @@
+> +/*
+> + * RISC-V cpu bits for custom CSR logic.
+> + *
+> + * Copyright (c) 2021 Andes Technology Corp.
+> + * SPDX-License-Identifier: GPL-2.0+
+> + */
+> +
+> +/* This file is intentionally left blank at this commit. */
+
+nits: remove the ending .
+
+%s/at/in
+
+Regards,
+Bin
 
