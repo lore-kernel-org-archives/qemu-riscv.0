@@ -1,69 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBwjt-0002Aa-6b
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Aug 2021 06:06:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51664)
+	id 1mC78I-0007cd-JW
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Aug 2021 17:11:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39440)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mBwjq-00029I-TR; Fri, 06 Aug 2021 06:06:02 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:33621)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mBwjp-0005d5-5B; Fri, 06 Aug 2021 06:06:02 -0400
-Received: by mail-il1-x12c.google.com with SMTP id y4so8310650ilp.0;
- Fri, 06 Aug 2021 03:05:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=PWMmefiGpc9vzQDx52OUoZ+PL+lhEEr9ix5Ofw3iTpY=;
- b=Xh5SF8T+ZRkDMa3EaOnjbMFWlHRc7x89tWMSyv4ONyUQJGWf3NX8NDCcAiPJi0eOFp
- UtwR9rLLbm0CngTQD0853HNaos2nJQ1f5iEQgmAueSmaoxUymPJFxu4THXyau0N94y3W
- cwDcAEJg6lEPPZCEdg0d5nQqKW172iLAHefG8U9a1ATzgqlHhcIdA/e9OfRuQl9SSrl/
- 1dHduUSifpBN/1Hf+nWpPe4LWYk/GbOzItJTZK7ErYFUmBNwXcY8Bym9x586YmaApt02
- WwJwrcZj36Vt/dy84OrOqGa4zxOlOVWss1NY7g2/1eOOCNOJ7y9rbLffzfkAII77FguS
- sXXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=PWMmefiGpc9vzQDx52OUoZ+PL+lhEEr9ix5Ofw3iTpY=;
- b=p2/hDHzPvj7CBbvzR38FryI/BS2G/uArzPkwQTY4UKLjeTw7l5hFt9YC+J8ecDe4mh
- YWyoXQtcssuUPI10Fkl/MhmzbvHzkQsO4O2AbbpU16VdyRsriF8mZcJ37mJvZeZily4j
- RyKr/PbVcx26RrAno7mK76PaSBUqN+OC+BGlGiOGSGsl3F+bn6ielsWEckxS+AYb0KsN
- T7fjE7Mjsw72PPufEP1eWj5jdlAnBt0xXJmcol5Y+tHKuqlMKee0BCItk7r16WBzxPVc
- 9y626NqgeqIGcJLRfo7CS9h7GONyEB03PmoQWzh+2I9vuL6fxcQD+ufQ3v4lfnm5tC2U
- vkOw==
-X-Gm-Message-State: AOAM531FT/C3Va/APg3xCG9CuslO7bRVGuZBrg448vqXOHDTuGRI9VQz
- at5wCOpsKgdB9cMXEIQAHKnc0av6/kJlGAwQYg0=
-X-Google-Smtp-Source: ABdhPJy9woPnNeeHJRxiButx/cEG2NmV9U337wz9jdOaEujb7lUPcZ7r8+u3WKJmB1SOpNOnqxsm4TNcb73THULbMrE=
-X-Received: by 2002:a92:c24d:: with SMTP id k13mr139982ilo.227.1628244359241; 
- Fri, 06 Aug 2021 03:05:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1mC78G-0007Y6-QM
+ for qemu-riscv@nongnu.org; Fri, 06 Aug 2021 17:11:56 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:25339)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ehabkost@redhat.com>)
+ id 1mC78F-0003qS-7g
+ for qemu-riscv@nongnu.org; Fri, 06 Aug 2021 17:11:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1628284314;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=u8xKfaOtV5YirFJnawF8BSMsjQ2Cw5AAkSNjpNee/go=;
+ b=HAPk2yBwH7trgw4LEWUZrJrPVokMW5HF68C3VdkpYPZ/tV1yQ+/yxzBu4y4Y9DVFlBZ1g1
+ Zclg5vvdsAAqxXDAvDrQCkv2xg5jeeCy1buJe6DFZN8xe3ID0J0ZEJydagVLze8I5zDe0G
+ j11crkVHRb29SYtkY6hFiOVqa0i9QsU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-568-KmFyneedNCSGqwvltEhAJA-1; Fri, 06 Aug 2021 17:11:51 -0400
+X-MC-Unique: KmFyneedNCSGqwvltEhAJA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AADA4760C5;
+ Fri,  6 Aug 2021 21:11:49 +0000 (UTC)
+Received: from localhost (unknown [10.22.11.9])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4F70A5C1A3;
+ Fri,  6 Aug 2021 21:11:46 +0000 (UTC)
+From: Eduardo Habkost <ehabkost@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: "Daniel P. Berrange" <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Thomas Huth <huth@tuxfamily.org>,
+ Havard Skinnemoen <hskinnemoen@google.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Vijai Kumar K <vijai@behindbytes.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, qemu-arm@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH for-6.2 04/12] [automated] Add struct names to typedefs used
+ by QOM types
+Date: Fri,  6 Aug 2021 17:11:19 -0400
+Message-Id: <20210806211127.646908-5-ehabkost@redhat.com>
+In-Reply-To: <20210806211127.646908-1-ehabkost@redhat.com>
+References: <20210806211127.646908-1-ehabkost@redhat.com>
 MIME-Version: 1.0
-References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
- <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
- <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
-In-Reply-To: <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 6 Aug 2021 20:05:32 +1000
-Message-ID: <CAKmqyKPEadYomK36PadYFNvuxL-icLOr7VXPOJjoS3LmZsxSzg@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/13] Support UXL field in mstatus
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=ehabkost@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=ehabkost@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.7,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,79 +79,129 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2021 10:06:03 -0000
+X-List-Received-Date: Fri, 06 Aug 2021 21:11:57 -0000
 
-On Thu, Aug 5, 2021 at 5:15 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
->
-> On 2021/8/5 =E4=B8=8B=E5=8D=882:01, Alistair Francis wrote:
-> > On Thu, Aug 5, 2021 at 12:55 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote=
-:
-> >> This patch set implements UXL field in mstatus register. Programmer ca=
-n change
-> >> UXLEN by writting to this field. So that you can run a 32 bit program
-> >> on a 64 bit CPU.
-> > Awesome! Do you have any steps for building a rootFS to test this?
->
-> Not yet.  It depends on Linux support which  will not start until
-> October.  Maybe as a rough test,
-> we can run the 32 glibc test cases on qemu-riscv64 with an option
-> uxl32=3Dtrue(not implement yet).
+Anonymous structs on QOM typedefs make the code harder to convert
+to OBJECT_DEFINE* macros, as the macros expect the struct name to
+exist.
 
-Hmmm... That's a pain. We really need some way to test this (and
-ensure no future breakages occur). But I see the problem of no
-software support until this exists.
+Use a codeconverter rule to automatically add names to the
+structs used in QOM typedefs.
 
-It sounds like you or a colleague is planning on adding Linux support.
-Maybe we will have to wait until that at least exists before this can
-go upstream. We could at least review this before hand though, so
-thanks for sending the series.
+Generated using:
 
-A 32-bit glibc test on qemu-riscv64 would probably also be enough, at
-least as a start.
+ $ ./scripts/codeconverter/converter.py -i \
+   --pattern=AddNamesToTypedefs $(git grep -l '' -- '*.[ch]')
 
-Alistair
+Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+---
+Cc: "Marc-André Lureau" <marcandre.lureau@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Thomas Huth <huth@tuxfamily.org>
+Cc: Havard Skinnemoen <hskinnemoen@google.com>
+Cc: Tyrone Ting <kfting@nuvoton.com>
+Cc: Vijai Kumar K <vijai@behindbytes.com>
+Cc: Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+Cc: qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org
+Cc: qemu-riscv@nongnu.org
+---
+ include/hw/adc/npcm7xx_adc.h            | 2 +-
+ include/hw/char/shakti_uart.h           | 2 +-
+ include/hw/tricore/tricore_testdevice.h | 2 +-
+ chardev/char-parallel.c                 | 4 ++--
+ hw/m68k/mcf5206.c                       | 2 +-
+ hw/misc/sbsa_ec.c                       | 2 +-
+ 6 files changed, 7 insertions(+), 7 deletions(-)
 
->
-> Zhiwei
->
-> >
-> > Alistair
-> >
-> >> This patch set depends on one patch set by Richard Henderson
-> >> https://lists.gnu.org/archive/html/qemu-riscv/2021-07/msg00059.html.
-> >>
-> >> LIU Zhiwei (13):
-> >>    target/riscv: Add UXL to tb flags
-> >>    target/riscv: Support UXL32 for branch instructions
-> >>    target/riscv: Support UXL32 on 64-bit cpu for load/store
-> >>    target/riscv: Support UXL32 for slit/sltiu
-> >>    target/riscv: Support UXL32 for shift instruction
-> >>    target/riscv: Fix div instructions
-> >>    target/riscv: Support UXL32 for RVM
-> >>    target/riscv: Support UXL32 for vector instructions
-> >>    target/riscv: Support UXL32 for atomic instructions
-> >>    target/riscv: Support UXL32 for float instructions
-> >>    target/riscv: Fix srow
-> >>    target/riscv: Support UXL32 for RVB
-> >>    target/riscv: Changing the width of U-mode CSR
-> >>
-> >>   target/riscv/cpu.h                      |  18 +++
-> >>   target/riscv/csr.c                      |  42 +++++-
-> >>   target/riscv/insn_trans/trans_rva.c.inc |  36 ++++-
-> >>   target/riscv/insn_trans/trans_rvb.c.inc |  51 +++++--
-> >>   target/riscv/insn_trans/trans_rvd.c.inc |   4 +-
-> >>   target/riscv/insn_trans/trans_rvf.c.inc |   4 +-
-> >>   target/riscv/insn_trans/trans_rvi.c.inc |  62 ++++++--
-> >>   target/riscv/insn_trans/trans_rvm.c.inc |  24 ++-
-> >>   target/riscv/insn_trans/trans_rvv.c.inc |  44 +++---
-> >>   target/riscv/translate.c                | 186 ++++++++++++++++++++--=
---
-> >>   target/riscv/vector_helper.c            |  54 +++++--
-> >>   11 files changed, 414 insertions(+), 111 deletions(-)
-> >>
-> >> --
-> >> 2.17.1
-> >>
-> >>
+diff --git a/include/hw/adc/npcm7xx_adc.h b/include/hw/adc/npcm7xx_adc.h
+index 7d8442107ae..8e5a1897b4b 100644
+--- a/include/hw/adc/npcm7xx_adc.h
++++ b/include/hw/adc/npcm7xx_adc.h
+@@ -42,7 +42,7 @@
+  * @iref: The internal reference voltage, initialized at launch time.
+  * @rv: The calibrated output values of 0.5V and 1.5V for the ADC.
+  */
+-typedef struct {
++typedef struct NPCM7xxADCState {
+     SysBusDevice parent;
+ 
+     MemoryRegion iomem;
+diff --git a/include/hw/char/shakti_uart.h b/include/hw/char/shakti_uart.h
+index 526c408233f..25f7cbcaa55 100644
+--- a/include/hw/char/shakti_uart.h
++++ b/include/hw/char/shakti_uart.h
+@@ -51,7 +51,7 @@
+ #define SHAKTI_UART(obj) \
+     OBJECT_CHECK(ShaktiUartState, (obj), TYPE_SHAKTI_UART)
+ 
+-typedef struct {
++typedef struct ShaktiUartState {
+     /* <private> */
+     SysBusDevice parent_obj;
+ 
+diff --git a/include/hw/tricore/tricore_testdevice.h b/include/hw/tricore/tricore_testdevice.h
+index 2c56c51bcb8..e93c883872d 100644
+--- a/include/hw/tricore/tricore_testdevice.h
++++ b/include/hw/tricore/tricore_testdevice.h
+@@ -26,7 +26,7 @@
+ #define TRICORE_TESTDEVICE(obj) \
+     OBJECT_CHECK(TriCoreTestDeviceState, (obj), TYPE_TRICORE_TESTDEVICE)
+ 
+-typedef struct {
++typedef struct TriCoreTestDeviceState {
+     /* <private> */
+     SysBusDevice parent_obj;
+ 
+diff --git a/chardev/char-parallel.c b/chardev/char-parallel.c
+index 05e7efbd6ca..acf9fb8afa0 100644
+--- a/chardev/char-parallel.c
++++ b/chardev/char-parallel.c
+@@ -49,7 +49,7 @@
+ 
+ #if defined(__linux__)
+ 
+-typedef struct {
++typedef struct ParallelChardev {
+     Chardev parent;
+     int fd;
+     int mode;
+@@ -177,7 +177,7 @@ static void qemu_chr_open_pp_fd(Chardev *chr,
+ 
+ #if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)
+ 
+-typedef struct {
++typedef struct ParallelChardev {
+     Chardev parent;
+     int fd;
+ } ParallelChardev;
+diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
+index 6d93d761a5e..72a815dbbd0 100644
+--- a/hw/m68k/mcf5206.c
++++ b/hw/m68k/mcf5206.c
+@@ -160,7 +160,7 @@ static m5206_timer_state *m5206_timer_init(qemu_irq irq)
+ 
+ /* System Integration Module.  */
+ 
+-typedef struct {
++typedef struct m5206_mbar_state {
+     SysBusDevice parent_obj;
+ 
+     M68kCPU *cpu;
+diff --git a/hw/misc/sbsa_ec.c b/hw/misc/sbsa_ec.c
+index 83020fe9ac9..9e3c40a23dc 100644
+--- a/hw/misc/sbsa_ec.c
++++ b/hw/misc/sbsa_ec.c
+@@ -16,7 +16,7 @@
+ #include "hw/sysbus.h"
+ #include "sysemu/runstate.h"
+ 
+-typedef struct {
++typedef struct SECUREECState {
+     SysBusDevice parent_obj;
+     MemoryRegion iomem;
+ } SECUREECState;
+-- 
+2.31.1
+
 
