@@ -1,57 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mBt8T-0001tU-OX
-	for mharc-qemu-riscv@gnu.org; Fri, 06 Aug 2021 02:15:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35178)
+	id 1mBtCV-0003cK-KN
+	for mharc-qemu-riscv@gnu.org; Fri, 06 Aug 2021 02:19:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35418)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mBt8Q-0001s8-NG; Fri, 06 Aug 2021 02:15:10 -0400
-Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:34672)
+ id 1mBtCT-0003bS-Ue; Fri, 06 Aug 2021 02:19:21 -0400
+Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:43919)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mBt8O-0008JJ-AW; Fri, 06 Aug 2021 02:15:10 -0400
-Received: by mail-yb1-xb30.google.com with SMTP id a93so13323152ybi.1;
- Thu, 05 Aug 2021 23:15:07 -0700 (PDT)
+ id 1mBtCS-0003IM-7u; Fri, 06 Aug 2021 02:19:21 -0400
+Received: by mail-yb1-xb2f.google.com with SMTP id z128so13261376ybc.10;
+ Thu, 05 Aug 2021 23:19:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Jp7LzJiWOoc1knVrCSsWyS9DsjK/djWlG20UeAyK1xo=;
- b=spHp75IJH0sm6OBA5VpnQ5spcrgK0N95VwRQZjp7UOFOLWUrePZhOHrkN/CNQUOrk4
- TQf5x0gOyW7v7rbi42XqnJITW37c/IvIDSYi5OM2Uom/b8SckT21cukvZbA3syz3p+fW
- w4PplUc8pftj6xYoJuwhrVTR8P3xXfdmPcsciz02jlOhwDVKN/hhQ8NBfHK7rn9DbkEZ
- BKWCSh3T2pWZ1VAurEX2AWx4Z88lH2YjRLzpOYxWT8/Or1e6jzYR5syChLnrCMOuj6zd
- fNsynlPPQH2HTQ2bOaps0PXk8OxAVUiU+hP4kT7yfIxxYED+I2h7GwnSec54SdqXLQuG
- YKSQ==
+ :cc:content-transfer-encoding;
+ bh=5ejm+HJehpA2MmcNsd6+rAYcwfRzXLgp5riq3MM2z7k=;
+ b=Hk3U67fYwObytyzL7kMytqIHG9t+yhNtr6Cv+C6o79o4BOyAzS/qzmNwscoU9iRnlq
+ 8zs/xtbYxgyMKa9yiWTO/LAwCVAnAG4ldY+fn2IPQlzpXs/tO7/Qm67DfiOkhsGi33nt
+ anVG4cu+7819Kxw5+1nmgBy+lHkQ53IXCr52VL1Ehyvf+9k9dfDQdup6qnV0y6uPlNpJ
+ 0y3QtTBdh6b94Qgr1tRR5h08L3ZAk8dEfIZeM+K09JNJkqx5rhymKXP3AxCFh35E49+B
+ w4VmoT86W29pumi11UrALhpgGLOkoxR27pOkUDUNvaRzkAqIEbROpCXuwcYdj+TmoAiY
+ skqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Jp7LzJiWOoc1knVrCSsWyS9DsjK/djWlG20UeAyK1xo=;
- b=D2sQU+rxNZb0hXk9XaAphHguI9KtB/k2BonWMz1D4KTIJ8J7EkD4XDSj1gze7S1lef
- fBBjLrV3WmL8v5u9Q7zYqqaKBuv15QXfK7L74h2fLawVmzGo95IOlJU1oUJAux177d47
- +ruvQJN+F+OEChDVjvxp6eKDdtjMKKnsU+653jWomCd8F7wn9BiIDxl5p13j9BYPNo3l
- ZNxjdRqG3lB5tZiC3pLNHy6GWkdfgNdA5j1pB741zQljCLepzQCHgiS92rvXYk9a1t+B
- LXarMTcg1phT0Pvixl7QfHqcnZNDnhN1P/Yr62WjnNKBx4c/QCyOikLlaA/UGC7IksJi
- OgvQ==
-X-Gm-Message-State: AOAM533CRJcWh4Skqj/j7FKstho2CgTPI/+sM1z1qUD3aRzTO3/1KK/R
- +nxYi8ETnQDAsceSzow0eQpaDIzutD4JJ/z3IygGLcu/Uas=
-X-Google-Smtp-Source: ABdhPJy/eRrb2YNAFvqldVPH0PNTf3+HUSm7F2GVzk9eRx7aoOqq9Z6USbkzIzFf93+CU4Y1jBfBKhLAlfOYnQFhNcY=
-X-Received: by 2002:a25:be09:: with SMTP id h9mr11402311ybk.239.1628230506354; 
- Thu, 05 Aug 2021 23:15:06 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=5ejm+HJehpA2MmcNsd6+rAYcwfRzXLgp5riq3MM2z7k=;
+ b=uGMPiKoEBpqiSBSBSscuLUP41MKHJw9XyV2/aD8XgTGb1ZXGjzLWQqMWJ1aSnRm+rc
+ 5untV2o0mmegb4uWdE+aSPLRXahuQC8J4KBJjXwpF8AcivtX0rRUDwB7Mfn1F1jNBPZx
+ K6iiovNvKKj0EzH8jtHiW6WYqPumkKlfjOgBFoCXxIvXoOwSv7/y86ly6z+/ZdRDS38v
+ 7S+6AJHTG2bdY5ZGLhKiIKuMpXMGkvY5JdWbMAMmxK0Sps8nlPU4weH9DFMcrcmH1dkn
+ meFRRRvOfXmTjfyTFdcZQdteBg8p9+llkEFy5CIfvmdkypsqK9jDpz5Q/E3+dwGm+7Wz
+ AoRw==
+X-Gm-Message-State: AOAM530VNyb7UvBkXyKuaCSqy462ZFizqdyKHOWDpGDWN1+bKowR6heg
+ NkgwbspkwJROMYVe7kx85O2c/w4NQz4u2DAropU=
+X-Google-Smtp-Source: ABdhPJzueFP0VwQFQ9p1hf8mKZIsvblw4VbGpXpiLo7qpGPYsgoUgb4QS7Z9nIxZCU/6jXBi0eDAiU+y2WtQo2u3uYM=
+X-Received: by 2002:a5b:304:: with SMTP id j4mr10808235ybp.314.1628230758943; 
+ Thu, 05 Aug 2021 23:19:18 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210805175626.11573-1-ruinland@andestech.com>
- <20210805175626.11573-5-ruinland@andestech.com>
-In-Reply-To: <20210805175626.11573-5-ruinland@andestech.com>
+ <20210805175626.11573-3-ruinland@andestech.com>
+ <CAEUhbmWXZBwvsDC5VYvQs+3zssNaRFwKz14fJPnPQHJCpwVUPg@mail.gmail.com>
+ <SG2PR03MB4263FC66699A8EEF805DDAF3D5F39@SG2PR03MB4263.apcprd03.prod.outlook.com>
+In-Reply-To: <SG2PR03MB4263FC66699A8EEF805DDAF3D5F39@SG2PR03MB4263.apcprd03.prod.outlook.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 6 Aug 2021 14:14:54 +0800
-Message-ID: <CAEUhbmU+EezdH8pFBndukUzBwhO-WpOUw8Dpq7Z_f2RggaBwCw@mail.gmail.com>
-Subject: Re: [RFC PATCH v4 4/4] Enable custom CSR logic for Andes AX25 and A25
-To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 6 Aug 2021 14:19:07 +0800
+Message-ID: <CAEUhbmXGJe7HvXAkedcNY7S4wE3fM_wUr3JPx=WD4k0pNM_QQQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 2/4] Adding basic custom/vendor CSR handling
+ mechanism
+To: =?UTF-8?B?UnVpbmxhbmQgQ2h1YW4tVHp1IFRzYSjolKHlgrPos4cp?=
+ <ruinland@andestech.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, 
- Dylan Jhong <dylan@andestech.com>
+ =?UTF-8?B?RHlsYW4gRGFpLVJvbmcgSmhvbmco6Y2+5bKx6J6NKQ==?= <dylan@andestech.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b30;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb30.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,394 +78,215 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2021 06:15:11 -0000
+X-List-Received-Date: Fri, 06 Aug 2021 06:19:22 -0000
 
-On Fri, Aug 6, 2021 at 1:57 AM Ruinland Chuan-Tzu Tsai
+On Fri, Aug 6, 2021 at 2:08 PM Ruinland Chuan-Tzu Tsa(=E8=94=A1=E5=82=B3=E8=
+=B3=87)
 <ruinland@andestech.com> wrote:
 >
-> From: Ruinalnd ChuanTzu Tsai <ruinland@andestech.com>
 >
-> In this patch we enabled custom CSR logic for Andes AX25 and A25 logic.
-> Hence csr_andes.inc.c and andes_cpu_bits.h is added.
+> Hi Bin and Alistair,
 >
-> Signed-off-by: Dylan Jhong <dylan@andestech.com>
-> ---
->  target/riscv/andes_cpu_bits.h  | 124 +++++++++++++++++++++++++
->  target/riscv/cpu.c             |  12 +++
->  target/riscv/csr.c             |   2 +-
->  target/riscv/csr_andes.inc.c   | 160 +++++++++++++++++++++++++++++++++
->  target/riscv/custom_cpu_bits.h |   6 +-
->  5 files changed, 302 insertions(+), 2 deletions(-)
->  create mode 100644 target/riscv/andes_cpu_bits.h
->  create mode 100644 target/riscv/csr_andes.inc.c
 >
-> diff --git a/target/riscv/andes_cpu_bits.h b/target/riscv/andes_cpu_bits.h
-> new file mode 100644
-> index 0000000..bd2b7d1
-> --- /dev/null
-> +++ b/target/riscv/andes_cpu_bits.h
-> @@ -0,0 +1,124 @@
-> +/*
-> + * Andes custom CSRs bit definitions
-> + *
-> + * Copyright (c) 2021 Andes Technology Corp.
-> + * SPDX-License-Identifier: GPL-2.0+
-
-nits: please put the license at the beginning of this comment block
-
-> + */
-> +
-> +/* ========= Missing drafted/standard CSR definitions */
-> +/* Although TINFO is in official debug sepc, it's not in cpu_bits.h yet. */
-> +#define CSR_TINFO           0x7a4
-> +
-> +/* ========= AndeStar V5 machine mode CSRs ========= */
-> +/* Configuration Registers */
-> +#define CSR_MICM_CFG            0xfc0
-> +#define CSR_MDCM_CFG            0xfc1
-> +#define CSR_MMSC_CFG            0xfc2
-> +#define CSR_MMSC_CFG2           0xfc3
-> +#define CSR_MVEC_CFG            0xfc7
-> +
-> +/* Crash Debug CSRs */
-> +#define CSR_MCRASH_STATESAVE    0xfc8
-> +#define CSR_MSTATUS_CRASHSAVE   0xfc9
-> +
-> +/* Memory CSRs */
-> +#define CSR_MILMB               0x7c0
-> +#define CSR_MDLMB               0x7c1
-> +#define CSR_MECC_CODE           0x7C2
-
-nits: please make 0x7C2 lower cases
-
-> +#define CSR_MNVEC               0x7c3
-> +#define CSR_MCACHE_CTL          0x7ca
-> +#define CSR_MCCTLBEGINADDR      0x7cb
-> +#define CSR_MCCTLCOMMAND        0x7cc
-> +#define CSR_MCCTLDATA           0x7cd
-> +#define CSR_MPPIB               0x7f0
-> +#define CSR_MFIOB               0x7f1
-> +
-> +/* Hardware Stack Protection & Recording */
-> +#define CSR_MHSP_CTL            0x7c6
-> +#define CSR_MSP_BOUND           0x7c7
-> +#define CSR_MSP_BASE            0x7c8
-> +#define CSR_MXSTATUS            0x7c4
-> +#define CSR_MDCAUSE             0x7c9
-> +#define CSR_MSLIDELEG           0x7d5
-> +#define CSR_MSAVESTATUS         0x7d6
-> +#define CSR_MSAVEEPC1           0x7d7
-> +#define CSR_MSAVECAUSE1         0x7d8
-> +#define CSR_MSAVEEPC2           0x7d9
-> +#define CSR_MSAVECAUSE2         0x7da
-> +#define CSR_MSAVEDCAUSE1        0x7db
-> +#define CSR_MSAVEDCAUSE2        0x7dc
-> +
-> +/* Control CSRs */
-> +#define CSR_MPFT_CTL            0x7c5
-> +#define CSR_MMISC_CTL           0x7d0
-> +#define CSR_MCLK_CTL            0x7df
-> +
-> +/* Counter related CSRs */
-> +#define CSR_MCOUNTERWEN         0x7ce
-> +#define CSR_MCOUNTERINTEN       0x7cf
-> +#define CSR_MCOUNTERMASK_M      0x7d1
-> +#define CSR_MCOUNTERMASK_S      0x7d2
-> +#define CSR_MCOUNTERMASK_U      0x7d3
-> +#define CSR_MCOUNTEROVF         0x7d4
-> +
-> +/* Enhanced CLIC CSRs */
-> +#define CSR_MIRQ_ENTRY          0x7ec
-> +#define CSR_MINTSEL_JAL         0x7ed
-> +#define CSR_PUSHMCAUSE          0x7ee
-> +#define CSR_PUSHMEPC            0x7ef
-> +#define CSR_PUSHMXSTATUS        0x7eb
-> +
-> +/* Andes Physical Memory Attribute(PMA) CSRs */
-> +#define CSR_PMACFG0             0xbc0
-> +#define CSR_PMACFG1             0xbc1
-> +#define CSR_PMACFG2             0xbc2
-> +#define CSR_PMACFG3             0xbc3
-> +#define CSR_PMAADDR0            0xbd0
-> +#define CSR_PMAADDR1            0xbd1
-> +#define CSR_PMAADDR2            0xbd2
-> +#define CSR_PMAADDR3            0xbd2
-> +#define CSR_PMAADDR4            0xbd4
-> +#define CSR_PMAADDR5            0xbd5
-> +#define CSR_PMAADDR6            0xbd6
-> +#define CSR_PMAADDR7            0xbd7
-> +#define CSR_PMAADDR8            0xbd8
-> +#define CSR_PMAADDR9            0xbd9
-> +#define CSR_PMAADDR10           0xbda
-> +#define CSR_PMAADDR11           0xbdb
-> +#define CSR_PMAADDR12           0xbdc
-> +#define CSR_PMAADDR13           0xbdd
-> +#define CSR_PMAADDR14           0xbde
-> +#define CSR_PMAADDR15           0xbdf
-> +
-> +/* ========= AndeStar V5 supervisor mode CSRs ========= */
-> +/* Supervisor trap registers */
-> +#define CSR_SLIE                0x9c4
-> +#define CSR_SLIP                0x9c5
-> +#define CSR_SDCAUSE             0x9c9
-> +
-> +/* Supervisor counter registers */
-> +#define CSR_SCOUNTERINTEN       0x9cf
-> +#define CSR_SCOUNTERMASK_M      0x9d1
-> +#define CSR_SCOUNTERMASK_S      0x9d2
-> +#define CSR_SCOUNTERMASK_U      0x9d3
-> +#define CSR_SCOUNTEROVF         0x9d4
-> +#define CSR_SCOUNTINHIBIT       0x9e0
-> +#define CSR_SHPMEVENT3          0x9e3
-> +#define CSR_SHPMEVENT4          0x9e4
-> +#define CSR_SHPMEVENT5          0x9e5
-> +#define CSR_SHPMEVENT6          0x9e6
-> +
-> +/* Supervisor control registers */
-> +#define CSR_SCCTLDATA           0x9cd
-> +#define CSR_SMISC_CTL           0x9d0
-> +
-> +/* ========= AndeStar V5 user mode CSRs ========= */
-> +/* User mode control registers */
-> +#define CSR_UITB                0x800
-> +#define CSR_UCODE               0x801
-> +#define CSR_UDCAUSE             0x809
-> +#define CSR_UCCTLBEGINADDR      0x80b
-> +#define CSR_UCCTLCOMMAND        0x80c
-> +#define CSR_WFE                 0x810
-> +#define CSR_SLEEPVALUE          0x811
-> +#define CSR_TXEVT               0x812
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9eb1e3a..d1d4773 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -187,6 +187,12 @@ static void ax25_cpu_init(Object *obj)
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
->      set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
->      set_priv_version(env, PRIV_VERSION_1_10_0);
-> +
-> +    #if defined(CONFIG_RISCV_CUSTOM)
-
-nits: no space before #if
-
-> +    /* setup custom csr handler hash table */
-> +    setup_custom_csr(env, andes_custom_csr_table);
-> +    env->custom_csr_val = g_malloc(andes_custom_csr_size);
-> +    #endif
->  }
+> >> +#if defined(CONFIG_RISCV_CUSTOM)
+> >> +static void setup_custom_csr(CPURISCVState *env,
+> >> +                             riscv_custom_csr_operations csr_map_stru=
+ct[]
+> >> +                             ) {
 >
->  static void rv64_sifive_u_cpu_init(Object *obj)
-> @@ -248,6 +254,12 @@ static void a25_cpu_init(Object *obj)
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
->      set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
->      set_priv_version(env, PRIV_VERSION_1_10_0);
-> +
-> +    #if defined(CONFIG_RISCV_CUSTOM)
-> +    /* setup custom csr handler hash table */
-> +    setup_custom_csr(env, andes_custom_csr_table);
-> +    env->custom_csr_val = g_malloc(andes_custom_csr_size);
-> +    #endif
->  }
->  #endif
+> >{ should be put to the next line, per QEMU coding convention. Please
+> >fix this globally in this series.
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 1c4dc94..9c16b88 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1421,7 +1421,7 @@ int riscv_csrrw_debug(CPURISCVState *env, int csrno, target_ulong *ret_value,
->  }
+> Will do
 >
->  #if defined(CONFIG_RISCV_CUSTOM)
-> -/* Include the custom CSR table here. */
-> +#include "csr_andes.inc.c"
->  #endif
+> >> +
+> >> +    env->custom_csr_map =3D g_hash_table_new_full(g_direct_hash, \
+> >> +                                                g_direct_equal, \
+> >> +                                                NULL, NULL);
 >
->  /* Control and Status Register function table */
-> diff --git a/target/riscv/csr_andes.inc.c b/target/riscv/csr_andes.inc.c
-> new file mode 100644
-> index 0000000..da226b0
-> --- /dev/null
-> +++ b/target/riscv/csr_andes.inc.c
-> @@ -0,0 +1,160 @@
-> +/*
-> + * Andes custom CSR table and handling functions
-> + *
-> + * Copyright (c) 2021 Andes Technology Corp.
-> + * SPDX-License-Identifier: GPL-2.0+
-> + */
-> +
-> +static int write_uitb(CPURISCVState *env, int csrno, target_ulong val);
-> +static int read_uitb(CPURISCVState *env, int csrno, target_ulong *val);
-> +
-> +struct andes_csr_val {
-> +    target_long uitb;
-> +};
-> +
-> +static int read_mmsc_cfg(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    /* enable pma probe */
-> +    *val = 0x40000000;
-> +    return 0;
-> +}
-> +
-> +static int write_uitb(CPURISCVState *env, int csrno, target_ulong val)
-> +{
-> +    struct andes_csr_val *andes_csr = env->custom_csr_val;
-> +    andes_csr->uitb = val;
-> +    return 0;
-> +}
-> +
-> +static int read_uitb(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    struct andes_csr_val *andes_csr = env->custom_csr_val;
-> +    *val = andes_csr->uitb;
-> +    return 0;
-> +}
-> +
-> +
-> +int andes_custom_csr_size = sizeof(struct andes_csr_val);
-> +riscv_custom_csr_operations andes_custom_csr_table[MAX_CUSTOM_CSR_NUM] = {
-> +    /* ==================== AndeStar V5 machine mode CSRs ==================== */
-> +    /* Configuration Registers */
-> +    {CSR_MICM_CFG,         { "micm_cfg",          any, read_zero, write_stub} },
-> +    {CSR_MDCM_CFG,         { "mdcm_cfg",          any, read_zero, write_stub} },
-> +    {CSR_MMSC_CFG,         { "mmsc_cfg",          any, read_mmsc_cfg, write_stub} },
-> +    {CSR_MMSC_CFG2,        { "mmsc_cfg2",         any, read_zero, write_stub} },
-> +    {CSR_MVEC_CFG,         { "mvec_cfg",          any, read_zero, write_stub} },
-> +
-> +    /* Crash Debug CSRs */
-> +    {CSR_MCRASH_STATESAVE,  { "mcrash_statesave",  any, read_zero, write_stub} },
-> +    {CSR_MSTATUS_CRASHSAVE, { "mstatus_crashsave", any, read_zero, write_stub} },
-> +
-> +    /* Memory CSRs */
-> +    {CSR_MILMB,            { "milmb",             any, read_zero, write_stub} },
-> +    {CSR_MDLMB,            { "mdlmb",             any, read_zero, write_stub} },
-> +    {CSR_MECC_CODE,        { "mecc_code",         any, read_zero, write_stub} },
-> +    {CSR_MNVEC,            { "mnvec",             any, read_zero, write_stub} },
-> +    {CSR_MCACHE_CTL,       { "mcache_ctl",        any, read_zero, write_stub} },
-> +    {CSR_MCCTLBEGINADDR,   { "mcctlbeginaddr",    any, read_zero, write_stub} },
-> +    {CSR_MCCTLCOMMAND,     { "mcctlcommand",      any, read_zero, write_stub} },
-> +    {CSR_MCCTLDATA,        { "mcctldata",         any, read_zero, write_stub} },
-> +    {CSR_MPPIB,            { "mppib",             any, read_zero, write_stub} },
-> +    {CSR_MFIOB,            { "mfiob",             any, read_zero, write_stub} },
-> +
-> +    /* Hardware Stack Protection & Recording */
-> +    {CSR_MHSP_CTL,         { "mhsp_ctl",          any, read_zero, write_stub} },
-> +    {CSR_MSP_BOUND,        { "msp_bound",         any, read_zero, write_stub} },
-> +    {CSR_MSP_BASE,         { "msp_base",          any, read_zero, write_stub} },
-> +    {CSR_MXSTATUS,         { "mxstatus",          any, read_zero, write_stub} },
-> +    {CSR_MDCAUSE,          { "mdcause",           any, read_zero, write_stub} },
-> +    {CSR_MSLIDELEG,        { "mslideleg",         any, read_zero, write_stub} },
-> +    {CSR_MSAVESTATUS,      { "msavestatus",       any, read_zero, write_stub} },
-> +    {CSR_MSAVEEPC1,        { "msaveepc1",         any, read_zero, write_stub} },
-> +    {CSR_MSAVECAUSE1,      { "msavecause1",       any, read_zero, write_stub} },
-> +    {CSR_MSAVEEPC2,        { "msaveepc2",         any, read_zero, write_stub} },
-> +    {CSR_MSAVECAUSE2,      { "msavecause2",       any, read_zero, write_stub} },
-> +    {CSR_MSAVEDCAUSE1,     { "msavedcause1",      any, read_zero, write_stub} },
-> +    {CSR_MSAVEDCAUSE2,     { "msavedcause2",      any, read_zero, write_stub} },
-> +
-> +    /* Control CSRs */
-> +    {CSR_MPFT_CTL,         { "mpft_ctl",          any, read_zero, write_stub} },
-> +    {CSR_MMISC_CTL,        { "mmisc_ctl",         any, read_zero, write_stub} },
-> +    {CSR_MCLK_CTL,         { "mclk_ctl",          any, read_zero, write_stub} },
-> +
-> +    /* Counter related CSRs */
-> +    {CSR_MCOUNTERWEN,      { "mcounterwen",       any, read_zero, write_stub} },
-> +    {CSR_MCOUNTERINTEN,    { "mcounterinten",     any, read_zero, write_stub} },
-> +    {CSR_MCOUNTERMASK_M,   { "mcountermask_m",    any, read_zero, write_stub} },
-> +    {CSR_MCOUNTERMASK_S,   { "mcountermask_s",    any, read_zero, write_stub} },
-> +    {CSR_MCOUNTERMASK_U,   { "mcountermask_u",    any, read_zero, write_stub} },
-> +    {CSR_MCOUNTEROVF,      { "mcounterovf",       any, read_zero, write_stub} },
-> +
-> +    /* Enhanced CLIC CSRs */
-> +    {CSR_MIRQ_ENTRY,       { "mirq_entry",        any, read_zero, write_stub} },
-> +    {CSR_MINTSEL_JAL,      { "mintsel_jal",       any, read_zero, write_stub} },
-> +    {CSR_PUSHMCAUSE,       { "pushmcause",        any, read_zero, write_stub} },
-> +    {CSR_PUSHMEPC,         { "pushmepc",          any, read_zero, write_stub} },
-> +    {CSR_PUSHMXSTATUS,     { "pushmxstatus",      any, read_zero, write_stub} },
-> +
-> +    /* Andes Physical Memory Attribute(PMA) CSRs */
-> +    {CSR_PMACFG0,          { "pmacfg0",           any, read_zero, write_stub} },
-> +    {CSR_PMACFG1,          { "pmacfg1",           any, read_zero, write_stub} },
-> +    {CSR_PMACFG2,          { "pmacfg2",           any, read_zero, write_stub} },
-> +    {CSR_PMACFG3,          { "pmacfg3",           any, read_zero, write_stub} },
-> +    {CSR_PMAADDR0,         { "pmaaddr0",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR1,         { "pmaaddr1",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR2,         { "pmaaddr2",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR3,         { "pmaaddr3",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR4,         { "pmaaddr4",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR5,         { "pmaaddr5",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR6,         { "pmaaddr6",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR7,         { "pmaaddr7",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR8,         { "pmaaddr8",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR9,         { "pmaaddr9",          any, read_zero, write_stub} },
-> +    {CSR_PMAADDR10,        { "pmaaddr10",         any, read_zero, write_stub} },
-> +    {CSR_PMAADDR11,        { "pmaaddr11",         any, read_zero, write_stub} },
-> +    {CSR_PMAADDR12,        { "pmaaddr12",         any, read_zero, write_stub} },
-> +    {CSR_PMAADDR13,        { "pmaaddr13",         any, read_zero, write_stub} },
-> +    {CSR_PMAADDR14,        { "pmaaddr14",         any, read_zero, write_stub} },
-> +    {CSR_PMAADDR15,        { "pmaaddr15",         any, read_zero, write_stub} },
-> +
-> +    /* Debug/Trace Registers (shared with Debug Mode) */
-> +    {CSR_TSELECT,          { "tselect",           any, read_zero, write_stub} },
-> +    {CSR_TDATA1,           { "tdata1",            any, read_zero, write_stub} },
-> +    {CSR_TDATA2,           { "tdata2",            any, read_zero, write_stub} },
-> +    {CSR_TDATA3,           { "tdata3",            any, read_zero, write_stub} },
-> +    {CSR_TINFO,            { "tinfo",             any, read_zero, write_stub} },
-> +
-> +    /* ================== AndeStar V5 supervisor mode CSRs ================== */
-> +    /* Supervisor trap registers */
-> +    {CSR_SLIE,             { "slie",              any, read_zero, write_stub} },
-> +    {CSR_SLIP,             { "slip",              any, read_zero, write_stub} },
-> +    {CSR_SDCAUSE,          { "sdcause",           any, read_zero, write_stub} },
-> +
-> +    /* Supervisor counter registers */
-> +    {CSR_SCOUNTERINTEN,    { "scounterinten",     any, read_zero, write_stub} },
-> +    {CSR_SCOUNTERMASK_M,   { "scountermask_m",    any, read_zero, write_stub} },
-> +    {CSR_SCOUNTERMASK_S,   { "scountermask_s",    any, read_zero, write_stub} },
-> +    {CSR_SCOUNTERMASK_U,   { "scountermask_u",    any, read_zero, write_stub} },
-> +    {CSR_SCOUNTEROVF,      { "scounterovf",       any, read_zero, write_stub} },
-> +    {CSR_SCOUNTINHIBIT,    { "scountinhibit",     any, read_zero, write_stub} },
-> +    {CSR_SHPMEVENT3,       { "shpmevent3",        any, read_zero, write_stub} },
-> +    {CSR_SHPMEVENT4,       { "shpmevent4",        any, read_zero, write_stub} },
-> +    {CSR_SHPMEVENT5,       { "shpmevent5",        any, read_zero, write_stub} },
-> +    {CSR_SHPMEVENT6,       { "shpmevent6",        any, read_zero, write_stub} },
-> +
-> +    /* Supervisor control registers */
-> +    {CSR_SCCTLDATA,        { "scctldata",         any, read_zero, write_stub} },
-> +    {CSR_SMISC_CTL,        { "smisc_ctl",         any, read_zero, write_stub} },
-> +
-> +    /* ===================== AndeStar V5 user mode CSRs ===================== */
-> +    /* User mode control registers */
-> +    {CSR_UITB,             { "uitb",              any, read_uitb, write_uitb} },
-> +    {CSR_UCODE,            { "ucode",             any, read_zero, write_stub} },
-> +    {CSR_UDCAUSE,          { "udcause",           any, read_zero, write_stub} },
-> +    {CSR_UCCTLBEGINADDR,   { "ucctlbeginaddr",    any, read_zero, write_stub} },
-> +    {CSR_UCCTLCOMMAND,     { "ucctlcommand",      any, read_zero, write_stub} },
-> +    {CSR_WFE,              { "wfe",               any, read_zero, write_stub} },
-> +    {CSR_SLEEPVALUE,       { "sleepvalue",        any, read_zero, write_stub} },
-> +    {CSR_TXEVT,            { "csr_txevt",         any, read_zero, write_stub} },
-> +    {0, { "", NULL, NULL, NULL } },
-> +    };
-> diff --git a/target/riscv/custom_cpu_bits.h b/target/riscv/custom_cpu_bits.h
-> index 5df31f8..ba67e95 100644
-> --- a/target/riscv/custom_cpu_bits.h
-> +++ b/target/riscv/custom_cpu_bits.h
-> @@ -5,4 +5,8 @@
->   * SPDX-License-Identifier: GPL-2.0+
->   */
+> > Is it possible to juse use g_hash_table_new() directly, with both 2
+> > parameters being NULL, given you don't provide the destroy hooks?
+> > like:
+> >
+> >    env->custom_csr_map =3D g_hash_table_new(NULL, NULL);
 >
-> -/* This file is intentionally left blank at this commit. */
-> +/*
-> + * XXX: Maybe we should add a "target-list"-like option to toggle enabled
-> + * custom CSR variations ?
+> I can try.
+>
+> >> +
+> >> +
+> >> +    int i;
+>
+> >nits: please move this to the beginning of this function.
+>
+> Will do.
+>
+> >> +    for (i =3D 0; i < MAX_CUSTOM_CSR_NUM; i++) {
+> >> +        if (csr_map_struct[i].csrno !=3D 0) {
+> >> +            g_hash_table_insert(env->custom_csr_map,
+> >> +                GINT_TO_POINTER(csr_map_struct[i].csrno),
+> >> +                &csr_map_struct[i].csr_opset);
+> >> +        } else {
+> >> +            break;
+>
+> >break? I think we should continue the loop.
+>
+> Please refer to Patch 4.
+> The table is null-ended.
+> Thus it's a break here.
+>
+>
+> >> +typedef struct {
+> >> +    int csrno;
+> >> +    riscv_csr_operations csr_opset;
+> >> +    } riscv_custom_csr_operations;
+>
+> > } should be put in the beginning without space. Please fix this
+> > globally in this series.
+>
+> Will do.
+>
+> > +
+> > +/*
+> > + * The reason why we have an abstraction here is that : We could have =
+CSR
+> > + * number M on hart A is an alias of CSR number N on hart B. So we mak=
+e a
+> > + * CSR number to value address map.
+> > + */
+> > +typedef struct  {
+> > +    int csrno;
+> > +    target_ulong val;
+> > +    } riscv_custom_csr_vals;
+> > +
+>
+> It looks this struct is not used by any patch in this series?
+>
+> >>  /* CSR function table constants */
+> >>  enum {
+> >> -    CSR_TABLE_SIZE =3D 0x1000
+> >> +    CSR_TABLE_SIZE =3D 0x1000,
+> >> +    MAX_CUSTOM_CSR_NUM =3D 100
+>
+> >To be consistent, name this to be: CUSTOM_CSR_TABLE_SIZE
+>
+> Sounds reasonable.
+>
+> >>  /* CSR function table */
+> >> +extern int andes_custom_csr_size;
+> >> +extern riscv_custom_csr_operations andes_custom_csr_table[MAX_CUSTOM_=
+CSR_NUM];
+>
+> >The above 2 should not be in this patch.
+> Could you elaborate a little bit more ?
 
-As I mentioned in patch 1, we'd better use a Kconfig option. This
-Koption option should be selected by the Andes machine.
+These 2 should belong to patch 4 where Andes custom CSR is added.
 
-> + */
-> +#include "andes_cpu_bits.h"
-> --
+>
+> >>  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+> >>
+> >>  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+> >>  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+> >>
+> >> +
+>
+> >This is unnecessary.
+> Sorry for the newline.
+>
+> >> -#if !defined(CONFIG_USER_ONLY)
+> >> +#pragma GCC diagnostic push
+> >> +#pragma GCC diagnostic ignored "-Wunused-function"
+>
+> >Use __attribute__((__unused__)), so we don't need to use GCC push/pop
+> Thanks for the tips.
+> Will do.
+>
+> >> +/*
+> >> + * XXX: This is just a write stub for developing custom CSR handler,
+>
+> >Remove XXX
+> Will do.
+>
+> >> + * if the behavior of writting such CSR is not presentable in QEMU an=
+d doesn't
+>
+> >typo: writing.
+>
+> >Is that present, or presentable?
+>
+> It's not a writing typo. I mean "presentable" with its literal meaning.
+> If we cannot demonstrate a hardware feature inside QEMU, we can just stub=
+ it.
+>
+>
+> >> +#if defined(CONFIG_RISCV_CUSTOM)
+> >> +/* Custom CSR related routines and data structures */
+> >> +
+> >> +static gpointer is_custom_csr(CPURISCVState *env, int csrno)
+>
+> >The function name suggests that the return value should be of bool
+> >type. Suggest we do:
+>
+> >static bool is_custom_csr(CPURISCVState *env, int csrno,
+> >riscv_custom_csr_operations *custom_csr_ops)
+>
+> Thanks for the advice, will modify it for V5.
+>
+>
+> >> +
+> >> +
+>
+> >Unnecessary changes
+> Sorry for the newline.
+>
+> >>  int riscv_csrrw(CPURISCVState *env, int csrno, target_ulong *ret_valu=
+e,
+> >>                  target_ulong new_value, target_ulong write_mask)
+> >>  {
+> >>      int ret;
+> >>      target_ulong old_value;
+> >>      RISCVCPU *cpu =3D env_archcpu(env);
+> >> +    #if !defined(CONFIG_RISCV_CUSTOM)
+>
+> >Please make sure #if starts from the beginning of this line, without spa=
+ce ahead
+> Will do.
+>
+> >> +    riscv_csr_operations *csrop =3D &csr_ops[csrno];
+>
+> >nits: name this variable to csr_ops
+>
+> It will collide with original csr_ops.
+
+Maybe csr_op ?
+
+> I'll change to another name.
+>
+>
+> >>
+> >> +#if defined(CONFIG_RISCV_CUSTOM)
+> >> +/* Include the custom CSR table here. */
+>
+> >nits: remove the ending .
+> Will do.
+> Sorry for all these style format issues.
+> I must I cherry-picked a wrong before I ran checkpatch.pl.
+>
+> >> +/* This file is intentionally left blank at this commit. */
+>
+> >nits: remove the ending .
+>
+> >%s/at/in
+>
+> Will do.
+>
+> >Regards,
+> >Bin
+>
+> Thanks for the quick reply and advice.
+> I'll cook the v5 ASAP.
+
+Note: one more place you need to modify in this patch, is the
+riscv_gen_dynamic_csr_xml() in target/riscv/gdbstub.c
 
 Regards,
 Bin
