@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mCtiL-0000vO-9W
-	for mharc-qemu-riscv@gnu.org; Sun, 08 Aug 2021 21:04:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36152)
+	id 1mCtj9-0001yX-RC
+	for mharc-qemu-riscv@gnu.org; Sun, 08 Aug 2021 21:05:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36216)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCtiJ-0000ue-8g; Sun, 08 Aug 2021 21:04:23 -0400
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:47020)
+ id 1mCtj1-0001x8-BQ; Sun, 08 Aug 2021 21:05:07 -0400
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:37601)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCtiH-0006B4-Mr; Sun, 08 Aug 2021 21:04:23 -0400
-Received: by mail-io1-xd2d.google.com with SMTP id x10so14560814iop.13;
- Sun, 08 Aug 2021 18:04:20 -0700 (PDT)
+ id 1mCtj0-0006dG-1c; Sun, 08 Aug 2021 21:05:07 -0400
+Received: by mail-il1-x131.google.com with SMTP id f8so9681662ilr.4;
+ Sun, 08 Aug 2021 18:05:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vyXpBfLKYmEel/4yI8QTznzGTwOwMm1jVN7pG67MAEY=;
- b=R176N1bE3KTVhL6HWcHMaC4l2wqgEr3vICi1lsyO19Ja3Va3gk1Kr3D7mAxMiWMdbM
- VqdleCHfPFigc1U+Y16BpsRLcsyAaN+ojcwKuEOQuqNiL8ZVEIBlQIRSoF/F7nJ906Hz
- 8YA9z3n4i/zvFRWlLjdQ8F+tD7LcoVNObw1kAbl/Vo6ahJDmxOFdmiZ4BasV4Zid3iRq
- GwXyMm4eCsFyBpZNunYFwNdsbwdD0gQCkYZ9iO9m1VTR4no/SnjZboB3CmnaQxrRwQPI
- 5Y2ODdJKL8WNrUdniEoOO353Q9TIX63pxWpqayboOhjpMXka42iXa5BvqkA60J3zG16M
- 2yfA==
+ :cc; bh=YBOWwCIYShnZW0nVMlMs76lRibVThBc7InTIpWaTdP0=;
+ b=jppbyiDvSBsv5rxGkfkvkpoxYRmFG5u1WWje0b+8KTy1xa/Nfx+d3l7TKmqI4h9PMR
+ xHysZRlFORtqdyE7y4ct9/SAH6uAEkSdsJ8Di/YRc0Mhc2kmdfCXkvXvlDTe3I7RPh8u
+ s85GtAfUDrKzLWlBD76HoDt55ZD8wW9SmomjapG499WH/HUk/YxNMEgZrScuB32OxaIn
+ eyM2iyLl3yyYnfyBALrMylKpKbNGki56TaCAz7qr/tN2t4O2wP5/omnSVb/VkEl2aUP9
+ sbIjq5JyC591jUweLyrMYH9rmdu9/3lqkNg27vCk3ow7UbW7K3LxLiSwusuKzS3+01lG
+ eETg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=vyXpBfLKYmEel/4yI8QTznzGTwOwMm1jVN7pG67MAEY=;
- b=BEuBa7O2bcT0mh/uJEKHPy7H3UQij6OXM0p41RFHkrLCZcOzCfwLm0sfd0jKio4vLX
- cWin4HtDc4ppSIKw3TX7NEP98NlR25Yxdq6N+AxAdT3SyCd4tWkK+zxdTyJz1tHARbIo
- YaYurAJSLN52uH4UJ8EvAHIm+oQlsVtiyrqe4juYYhdXGa2LiLV0yMDHoIWyWcjjng7q
- zT7ocj/6RO9A9DHOppNijTAsaO9k8q9LMl017k0HVEtJ1UsMeNAm1V0AHwLrCuuikNav
- G9Q7nsoHDpQk1Bviw1p9SYISUxYzwN4S0gy6Lj2zue1jdrnxltO0jRDk27agpkDHkCP4
- y23A==
-X-Gm-Message-State: AOAM530oXTjs5QH5cjQWK0H4+Mut8H/GZV14QkluPmpPEziHmRgLxF4x
- /+jIZD4/i+Z/0OVV3ZUGAS0fLmyFmwvzWL2gMdw=
-X-Google-Smtp-Source: ABdhPJyhTWWOdENc6YAuiMM5mIIbgI8ZrlPSdwpTrTQIn7fRLYmAMw5ZEgO4TdXh5MPmk6MNogx8OTViJEbLWAAHvsY=
-X-Received: by 2002:a05:6638:240d:: with SMTP id
- z13mr6440300jat.8.1628471059664; 
- Sun, 08 Aug 2021 18:04:19 -0700 (PDT)
+ bh=YBOWwCIYShnZW0nVMlMs76lRibVThBc7InTIpWaTdP0=;
+ b=mcZy+Z8KcWSWza7kHQvIp5LGAeEiHw/CvGE/IMgcf678NKda/hq5psq7mXnqcrimhf
+ inSkLEfjH+XDa8AkUR53zUKiR8ZaQ3bfkReSYUER6aDCh519iPZUE6E8oTnVpZ/i3L3P
+ 5OdmsR4zMYB3NQPXlpWkoCl+9arbyfBWNRB+Y19pQV9uzNqjSYGVE0S2TiDUoZYeeVUR
+ M52QUcSrqzlIs1TDITpqQpYTtbl8eNJgPfv83khZqSdftsDqTrihWYPp9dukkQqdbWTA
+ IXqah0mpyAT9hZsJA+6uMx/iVTKJy3UVD+OVBZGCKlvAOPYxY1TG0cjJR1U7JTmcdcox
+ CJCg==
+X-Gm-Message-State: AOAM532tHqPqbhq5Wjb73kxif17yNhDxFdPQS9JFIG1NP5oAwAHq/uGp
+ +DNCh9aznlg282yEzzvTntWLDSJ5tjkqThp/6Fc=
+X-Google-Smtp-Source: ABdhPJzZbnDnPS2A0QoErx73IvADLKPhzEGq5EVip3nFN7XYl1rPoJfm+xYGDmmcmCyb2J/U+d+f+A+7YAckGMnK1ew=
+X-Received: by 2002:a05:6e02:12c9:: with SMTP id
+ i9mr346673ilm.131.1628471104645; 
+ Sun, 08 Aug 2021 18:05:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210807035641.22449-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210807035641.22449-1-bmeng.cn@gmail.com>
+References: <20210807141025.31808-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210807141025.31808-1-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Aug 2021 11:03:53 +1000
-Message-ID: <CAKmqyKPTX6_OuEzwZqBy5NqNWTudSvrbhUhdkAjxFy8gXCeScg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: Move flash node to root
+Date: Mon, 9 Aug 2021 11:04:38 +1000
+Message-ID: <CAKmqyKPNE4+BJTau9_JhQsS8z2rsxzRbTjt3HGdnA-aD4irdoA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Correct a comment in riscv_csrrw()
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,12 +71,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2021 01:04:23 -0000
+X-List-Received-Date: Mon, 09 Aug 2021 01:05:09 -0000
 
-On Sat, Aug 7, 2021 at 1:57 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sun, Aug 8, 2021 at 12:10 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> The flash is not inside the SoC, so it's inappropriate to put it
-> under the /soc node. Move it to root instead.
+> When privilege check fails, RISCV_EXCP_ILLEGAL_INST is returned,
+> not -1 (RISCV_EXCP_NONE).
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
@@ -88,22 +88,22 @@ Alistair
 
 > ---
 >
->  hw/riscv/virt.c | 2 +-
+>  target/riscv/csr.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 4a3cd2599a..89fb607c47 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -455,7 +455,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
->      qemu_fdt_setprop_cell(fdt, name, "interrupts", RTC_IRQ);
->      g_free(name);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9a4ed18ac5..e747fbe0e9 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1423,7 +1423,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>      target_ulong old_value;
+>      RISCVCPU *cpu = env_archcpu(env);
 >
-> -    name = g_strdup_printf("/soc/flash@%" PRIx64, flashbase);
-> +    name = g_strdup_printf("/flash@%" PRIx64, flashbase);
->      qemu_fdt_add_subnode(mc->fdt, name);
->      qemu_fdt_setprop_string(mc->fdt, name, "compatible", "cfi-flash");
->      qemu_fdt_setprop_sized_cells(mc->fdt, name, "reg",
+> -    /* check privileges and return -1 if check fails */
+> +    /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+>  #if !defined(CONFIG_USER_ONLY)
+>      int effective_priv = env->priv;
+>      int read_only = get_field(csrno, 0xC00) == 3;
 > --
 > 2.25.1
 >
