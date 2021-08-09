@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mCVeS-0007nI-SU
-	for mharc-qemu-riscv@gnu.org; Sat, 07 Aug 2021 19:22:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52490)
+	id 1mCtiL-0000vO-9W
+	for mharc-qemu-riscv@gnu.org; Sun, 08 Aug 2021 21:04:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36152)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCVeQ-0007jV-UU; Sat, 07 Aug 2021 19:22:46 -0400
-Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:43764)
+ id 1mCtiJ-0000ue-8g; Sun, 08 Aug 2021 21:04:23 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:47020)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCVeP-00057Q-Cp; Sat, 07 Aug 2021 19:22:46 -0400
-Received: by mail-io1-xd2e.google.com with SMTP id y1so20310249iod.10;
- Sat, 07 Aug 2021 16:22:44 -0700 (PDT)
+ id 1mCtiH-0006B4-Mr; Sun, 08 Aug 2021 21:04:23 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id x10so14560814iop.13;
+ Sun, 08 Aug 2021 18:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=udEyjpnTy5oFsfLKzYpD09hfAryNDTWYHdtmOPpxxb4=;
- b=EHjEEr0LCtfAbEn4m6sd3kSYU9e7rBtsifEQ5q1BLxYVVoTQKmAW+y61y/MLeO4C/Z
- WlI6EfFpNgEOSbfOc/KNlbZFUJ6JxBKpJYZj1Gq5OEi1WN9rbRLHuopWLRGUjvo9SCmE
- YuqJgOrprcyP+3+qAi843BYn1NwYeODOWmxV1M1fzkS/ZGar9MVKlw0IzLndTezm/02Q
- sVzeLr1daDgoweItAfG8OPJ7iBKKG6GOPnyusNpp5ne2MK1HvseLvUFdiPIrCZ4duW6/
- vChRx99ofWjzMS4Snylu3FNgGIwpaJQPXG4S3W7scftEexMde57vN/y/m/aXE3oX9mfC
- wuGw==
+ :cc; bh=vyXpBfLKYmEel/4yI8QTznzGTwOwMm1jVN7pG67MAEY=;
+ b=R176N1bE3KTVhL6HWcHMaC4l2wqgEr3vICi1lsyO19Ja3Va3gk1Kr3D7mAxMiWMdbM
+ VqdleCHfPFigc1U+Y16BpsRLcsyAaN+ojcwKuEOQuqNiL8ZVEIBlQIRSoF/F7nJ906Hz
+ 8YA9z3n4i/zvFRWlLjdQ8F+tD7LcoVNObw1kAbl/Vo6ahJDmxOFdmiZ4BasV4Zid3iRq
+ GwXyMm4eCsFyBpZNunYFwNdsbwdD0gQCkYZ9iO9m1VTR4no/SnjZboB3CmnaQxrRwQPI
+ 5Y2ODdJKL8WNrUdniEoOO353Q9TIX63pxWpqayboOhjpMXka42iXa5BvqkA60J3zG16M
+ 2yfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=udEyjpnTy5oFsfLKzYpD09hfAryNDTWYHdtmOPpxxb4=;
- b=WmZbE6l9SlDWe54FPQudetOHhOwWs/BJYSEicHJHj0ebzmfSvaOmxwtFBWk0js6M1t
- YSUynmGUwPEtGk9/hXU+pZgSCyEmpedo04GY5kX3DOXkwTjLBzKfyc16YuZ38jgKk4KV
- NgeC89n4+qaL+DA/FV5MWYWbex8Cm09zDsIXfl2B0PnKp2TIGAc1JBKCB4VEk+G/CFh8
- jLjUGWhucYZiWaM+fw1/yCtWu0VoLwD/on991Mi90MTlDS0Om//lNEz550BkWycSZteY
- kB5JK3oqPMb9L2D8TtYd93B36AXprIQzEOI/S3QSR4imnUaeyoEpg9RVvKqocQZs38Az
- TW4A==
-X-Gm-Message-State: AOAM533EWoo3vJ4Ze4Tr7qi1IkmtZTGIQ89WeI1KKLYu82YuKeXCwW5w
- HAoqib5wJlEJqGBDMMNziQBe4RPz8EpyUzqOW4w=
-X-Google-Smtp-Source: ABdhPJz5prXZtVLrvwdAC8YJeKGWKIzBrhFhQX+Bb4b4qc8AGGHW8Tka5zWPBcqWXkw8Ohj8oxq5sHxyD0v5/GVjy80=
-X-Received: by 2002:a05:6e02:12c9:: with SMTP id
- i9mr493431ilm.131.1628378564245; 
- Sat, 07 Aug 2021 16:22:44 -0700 (PDT)
+ bh=vyXpBfLKYmEel/4yI8QTznzGTwOwMm1jVN7pG67MAEY=;
+ b=BEuBa7O2bcT0mh/uJEKHPy7H3UQij6OXM0p41RFHkrLCZcOzCfwLm0sfd0jKio4vLX
+ cWin4HtDc4ppSIKw3TX7NEP98NlR25Yxdq6N+AxAdT3SyCd4tWkK+zxdTyJz1tHARbIo
+ YaYurAJSLN52uH4UJ8EvAHIm+oQlsVtiyrqe4juYYhdXGa2LiLV0yMDHoIWyWcjjng7q
+ zT7ocj/6RO9A9DHOppNijTAsaO9k8q9LMl017k0HVEtJ1UsMeNAm1V0AHwLrCuuikNav
+ G9Q7nsoHDpQk1Bviw1p9SYISUxYzwN4S0gy6Lj2zue1jdrnxltO0jRDk27agpkDHkCP4
+ y23A==
+X-Gm-Message-State: AOAM530oXTjs5QH5cjQWK0H4+Mut8H/GZV14QkluPmpPEziHmRgLxF4x
+ /+jIZD4/i+Z/0OVV3ZUGAS0fLmyFmwvzWL2gMdw=
+X-Google-Smtp-Source: ABdhPJyhTWWOdENc6YAuiMM5mIIbgI8ZrlPSdwpTrTQIn7fRLYmAMw5ZEgO4TdXh5MPmk6MNogx8OTViJEbLWAAHvsY=
+X-Received: by 2002:a05:6638:240d:: with SMTP id
+ z13mr6440300jat.8.1628471059664; 
+ Sun, 08 Aug 2021 18:04:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210807035641.22449-1-bmeng.cn@gmail.com>
 In-Reply-To: <20210807035641.22449-1-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Sun, 8 Aug 2021 09:22:16 +1000
-Message-ID: <CAKmqyKN1AgHndPjJP8=Dyz4k7xsX9drwTu8CK6aXEgH8Ys6Stg@mail.gmail.com>
+Date: Mon, 9 Aug 2021 11:03:53 +1000
+Message-ID: <CAKmqyKPTX6_OuEzwZqBy5NqNWTudSvrbhUhdkAjxFy8gXCeScg@mail.gmail.com>
 Subject: Re: [PATCH] hw/riscv: virt: Move flash node to root
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,7 +71,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Aug 2021 23:22:47 -0000
+X-List-Received-Date: Mon, 09 Aug 2021 01:04:23 -0000
 
 On Sat, Aug 7, 2021 at 1:57 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
@@ -80,7 +80,9 @@ On Sat, Aug 7, 2021 at 1:57 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
