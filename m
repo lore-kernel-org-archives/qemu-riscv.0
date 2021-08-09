@@ -1,64 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mCtj9-0001yX-RC
-	for mharc-qemu-riscv@gnu.org; Sun, 08 Aug 2021 21:05:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36216)
+	id 1mCu57-000638-6A
+	for mharc-qemu-riscv@gnu.org; Sun, 08 Aug 2021 21:27:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38018)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCtj1-0001x8-BQ; Sun, 08 Aug 2021 21:05:07 -0400
-Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:37601)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mCtj0-0006dG-1c; Sun, 08 Aug 2021 21:05:07 -0400
-Received: by mail-il1-x131.google.com with SMTP id f8so9681662ilr.4;
- Sun, 08 Aug 2021 18:05:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=YBOWwCIYShnZW0nVMlMs76lRibVThBc7InTIpWaTdP0=;
- b=jppbyiDvSBsv5rxGkfkvkpoxYRmFG5u1WWje0b+8KTy1xa/Nfx+d3l7TKmqI4h9PMR
- xHysZRlFORtqdyE7y4ct9/SAH6uAEkSdsJ8Di/YRc0Mhc2kmdfCXkvXvlDTe3I7RPh8u
- s85GtAfUDrKzLWlBD76HoDt55ZD8wW9SmomjapG499WH/HUk/YxNMEgZrScuB32OxaIn
- eyM2iyLl3yyYnfyBALrMylKpKbNGki56TaCAz7qr/tN2t4O2wP5/omnSVb/VkEl2aUP9
- sbIjq5JyC591jUweLyrMYH9rmdu9/3lqkNg27vCk3ow7UbW7K3LxLiSwusuKzS3+01lG
- eETg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=YBOWwCIYShnZW0nVMlMs76lRibVThBc7InTIpWaTdP0=;
- b=mcZy+Z8KcWSWza7kHQvIp5LGAeEiHw/CvGE/IMgcf678NKda/hq5psq7mXnqcrimhf
- inSkLEfjH+XDa8AkUR53zUKiR8ZaQ3bfkReSYUER6aDCh519iPZUE6E8oTnVpZ/i3L3P
- 5OdmsR4zMYB3NQPXlpWkoCl+9arbyfBWNRB+Y19pQV9uzNqjSYGVE0S2TiDUoZYeeVUR
- M52QUcSrqzlIs1TDITpqQpYTtbl8eNJgPfv83khZqSdftsDqTrihWYPp9dukkQqdbWTA
- IXqah0mpyAT9hZsJA+6uMx/iVTKJy3UVD+OVBZGCKlvAOPYxY1TG0cjJR1U7JTmcdcox
- CJCg==
-X-Gm-Message-State: AOAM532tHqPqbhq5Wjb73kxif17yNhDxFdPQS9JFIG1NP5oAwAHq/uGp
- +DNCh9aznlg282yEzzvTntWLDSJ5tjkqThp/6Fc=
-X-Google-Smtp-Source: ABdhPJzZbnDnPS2A0QoErx73IvADLKPhzEGq5EVip3nFN7XYl1rPoJfm+xYGDmmcmCyb2J/U+d+f+A+7YAckGMnK1ew=
-X-Received: by 2002:a05:6e02:12c9:: with SMTP id
- i9mr346673ilm.131.1628471104645; 
- Sun, 08 Aug 2021 18:05:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mCu54-00062c-IZ; Sun, 08 Aug 2021 21:27:54 -0400
+Received: from out28-3.mail.aliyun.com ([115.124.28.3]:44216)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mCu50-0004WA-ES; Sun, 08 Aug 2021 21:27:54 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07625144|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0134383-0.000455989-0.986106;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047190; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.KxBBszF_1628472447; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KxBBszF_1628472447)
+ by smtp.aliyun-inc.com(10.147.41.138);
+ Mon, 09 Aug 2021 09:27:28 +0800
+Subject: Re: [RFC PATCH 00/13] Support UXL field in mstatus
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKOCRXbEhZrZSQN-X2ObrX=_aoxgyCsevE05LY9S-TS4hQ@mail.gmail.com>
+ <a404e8dd-eb20-4d4a-6aa0-7c444b46c706@c-sky.com>
+ <CAKmqyKPEadYomK36PadYFNvuxL-icLOr7VXPOJjoS3LmZsxSzg@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <0b548151-00b7-1991-8a11-ac58b8425257@c-sky.com>
+Date: Mon, 9 Aug 2021 09:25:42 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-References: <20210807141025.31808-1-bmeng.cn@gmail.com>
-In-Reply-To: <20210807141025.31808-1-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Aug 2021 11:04:38 +1000
-Message-ID: <CAKmqyKPNE4+BJTau9_JhQsS8z2rsxzRbTjt3HGdnA-aD4irdoA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Correct a comment in riscv_csrrw()
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+In-Reply-To: <CAKmqyKPEadYomK36PadYFNvuxL-icLOr7VXPOJjoS3LmZsxSzg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.3; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-3.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -71,41 +60,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2021 01:05:09 -0000
+X-List-Received-Date: Mon, 09 Aug 2021 01:27:54 -0000
 
-On Sun, Aug 8, 2021 at 12:10 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> When privilege check fails, RISCV_EXCP_ILLEGAL_INST is returned,
-> not -1 (RISCV_EXCP_NONE).
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-Thanks!
+On 2021/8/6 下午6:05, Alistair Francis wrote:
+> On Thu, Aug 5, 2021 at 5:15 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>>
+>> On 2021/8/5 下午2:01, Alistair Francis wrote:
+>>> On Thu, Aug 5, 2021 at 12:55 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>>>> This patch set implements UXL field in mstatus register. Programmer can change
+>>>> UXLEN by writting to this field. So that you can run a 32 bit program
+>>>> on a 64 bit CPU.
+>>> Awesome! Do you have any steps for building a rootFS to test this?
+>> Not yet.  It depends on Linux support which  will not start until
+>> October.  Maybe as a rough test,
+>> we can run the 32 glibc test cases on qemu-riscv64 with an option
+>> uxl32=true(not implement yet).
+> Hmmm... That's a pain. We really need some way to test this (and
+> ensure no future breakages occur). But I see the problem of no
+> software support until this exists.
+>
+> It sounds like you or a colleague is planning on adding Linux support.
+> Maybe we will have to wait until that at least exists before this can
+> go upstream. We could at least review this before hand though
 
-Applied to riscv-to-apply.next
+Enough for me. Thanks. I will also think more about Richard's advice, 
+maybe we can merge 32bit cpu and UXL32 into one in the future.
 
-Alistair
+Zhiwei
 
-> ---
+> , so
+> thanks for sending the series.
 >
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> A 32-bit glibc test on qemu-riscv64 would probably also be enough, at
+> least as a start.
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9a4ed18ac5..e747fbe0e9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1423,7 +1423,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
->      target_ulong old_value;
->      RISCVCPU *cpu = env_archcpu(env);
+> Alistair
 >
-> -    /* check privileges and return -1 if check fails */
-> +    /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
->  #if !defined(CONFIG_USER_ONLY)
->      int effective_priv = env->priv;
->      int read_only = get_field(csrno, 0xC00) == 3;
-> --
-> 2.25.1
->
->
+>> Zhiwei
+>>
+>>> Alistair
+>>>
+>>>> This patch set depends on one patch set by Richard Henderson
+>>>> https://lists.gnu.org/archive/html/qemu-riscv/2021-07/msg00059.html.
+>>>>
+>>>> LIU Zhiwei (13):
+>>>>     target/riscv: Add UXL to tb flags
+>>>>     target/riscv: Support UXL32 for branch instructions
+>>>>     target/riscv: Support UXL32 on 64-bit cpu for load/store
+>>>>     target/riscv: Support UXL32 for slit/sltiu
+>>>>     target/riscv: Support UXL32 for shift instruction
+>>>>     target/riscv: Fix div instructions
+>>>>     target/riscv: Support UXL32 for RVM
+>>>>     target/riscv: Support UXL32 for vector instructions
+>>>>     target/riscv: Support UXL32 for atomic instructions
+>>>>     target/riscv: Support UXL32 for float instructions
+>>>>     target/riscv: Fix srow
+>>>>     target/riscv: Support UXL32 for RVB
+>>>>     target/riscv: Changing the width of U-mode CSR
+>>>>
+>>>>    target/riscv/cpu.h                      |  18 +++
+>>>>    target/riscv/csr.c                      |  42 +++++-
+>>>>    target/riscv/insn_trans/trans_rva.c.inc |  36 ++++-
+>>>>    target/riscv/insn_trans/trans_rvb.c.inc |  51 +++++--
+>>>>    target/riscv/insn_trans/trans_rvd.c.inc |   4 +-
+>>>>    target/riscv/insn_trans/trans_rvf.c.inc |   4 +-
+>>>>    target/riscv/insn_trans/trans_rvi.c.inc |  62 ++++++--
+>>>>    target/riscv/insn_trans/trans_rvm.c.inc |  24 ++-
+>>>>    target/riscv/insn_trans/trans_rvv.c.inc |  44 +++---
+>>>>    target/riscv/translate.c                | 186 ++++++++++++++++++++----
+>>>>    target/riscv/vector_helper.c            |  54 +++++--
+>>>>    11 files changed, 414 insertions(+), 111 deletions(-)
+>>>>
+>>>> --
+>>>> 2.17.1
+>>>>
+>>>>
 
