@@ -1,34 +1,33 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mDGrz-0000rh-OP
-	for mharc-qemu-riscv@gnu.org; Mon, 09 Aug 2021 21:47:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60288)
+	id 1mDIXx-0005lb-3G
+	for mharc-qemu-riscv@gnu.org; Mon, 09 Aug 2021 23:35:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46282)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDGrx-0000rM-2Q; Mon, 09 Aug 2021 21:47:53 -0400
-Received: from out28-2.mail.aliyun.com ([115.124.28.2]:35110)
+ id 1mDIXv-0005lG-2N; Mon, 09 Aug 2021 23:35:19 -0400
+Received: from out28-49.mail.aliyun.com ([115.124.28.49]:37870)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDGru-0007r0-Cy; Mon, 09 Aug 2021 21:47:52 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08794905|-1; CH=green;
+ id 1mDIXs-0006z2-2H; Mon, 09 Aug 2021 23:35:18 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07520134|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0359106-0.000300569-0.963789;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047192; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.Kxi8Aqp_1628560060; 
+ DS=CONTINUE|ham_regular_dialog|0.0738865-0.00113084-0.924983;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047203; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KxldK2P_1628566507; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Kxi8Aqp_1628560060)
- by smtp.aliyun-inc.com(10.147.41.187);
- Tue, 10 Aug 2021 09:47:40 +0800
+ fp:SMTPD_---.KxldK2P_1628566507)
+ by smtp.aliyun-inc.com(10.147.40.26); Tue, 10 Aug 2021 11:35:07 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 1/1] target/riscv: Add User CSRs read-only check
-Date: Tue, 10 Aug 2021 09:45:52 +0800
-Message-Id: <20210810014552.4884-1-zhiwei_liu@c-sky.com>
+Subject: [PATCH] target/riscv: Don't wrongly overide isa version
+Date: Tue, 10 Aug 2021 11:33:10 +0800
+Message-Id: <20210810033310.7252-1-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: none client-ip=115.124.28.2; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-2.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.49; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-49.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -47,49 +46,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2021 01:47:53 -0000
+X-List-Received-Date: Tue, 10 Aug 2021 03:35:19 -0000
 
-For U-mode CSRs, read-only check is also needed.
+For some cpu, the isa version has already been set in cpu init function.
+Thus only overide the isa version when isa version is not set, or
+users set different isa version explicitly by cpu parameters.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/csr.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 9a4ed18ac5..5499cae94a 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1422,11 +1422,11 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-     RISCVException ret;
-     target_ulong old_value;
-     RISCVCPU *cpu = env_archcpu(env);
-+    int read_only = get_field(csrno, 0xC00) == 3;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 991a6bb760..425efba0c8 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPU *cpu = RISCV_CPU(dev);
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+-    int priv_version = PRIV_VERSION_1_11_0;
+-    int bext_version = BEXT_VERSION_0_93_0;
+-    int vext_version = VEXT_VERSION_0_07_1;
++    int priv_version = env->priv_ver;
+     target_ulong target_misa = env->misa;
+     Error *local_err = NULL;
  
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
-     int effective_priv = env->priv;
--    int read_only = get_field(csrno, 0xC00) == 3;
- 
-     if (riscv_has_ext(env, RVH) &&
-         env->priv == PRV_S &&
-@@ -1439,11 +1439,13 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-         effective_priv++;
+@@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
      }
  
--    if ((write_mask && read_only) ||
--        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
-+    if (!env->debugger && (effective_priv < get_field(csrno, 0x300))) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-+    if (write_mask && read_only) {
-+        return RISCV_EXCP_ILLEGAL_INST;
+-    set_priv_version(env, priv_version);
+-    set_bext_version(env, bext_version);
+-    set_vext_version(env, vext_version);
++    if (!env->priv_ver) {
++        set_priv_version(env, PRIV_VERSION_1_11_0);
++    } else if (env->priv_ver != priv_version) {
++        set_priv_version(env, priv_version);
 +    }
  
-     /* ensure the CSR extension is enabled. */
-     if (!cpu->cfg.ext_icsr) {
+     if (cpu->cfg.mmu) {
+         set_feature(env, RISCV_FEATURE_MMU);
+@@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             target_misa |= RVH;
+         }
+         if (cpu->cfg.ext_b) {
++            int bext_version = BEXT_VERSION_0_93_0;
+             target_misa |= RVB;
+ 
+             if (cpu->cfg.bext_spec) {
+@@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             set_bext_version(env, bext_version);
+         }
+         if (cpu->cfg.ext_v) {
++            int vext_version = VEXT_VERSION_0_07_1;
+             target_misa |= RVV;
+             if (!is_power_of_2(cpu->cfg.vlen)) {
+                 error_setg(errp,
 -- 
 2.17.1
 
