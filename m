@@ -1,55 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mDmir-0007QV-0m
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 07:48:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49878)
+	id 1mDotG-0008Kv-85
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 10:07:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mDmip-0007Pp-6c; Wed, 11 Aug 2021 07:48:35 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:46386)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mDotD-0008J6-Vz; Wed, 11 Aug 2021 10:07:28 -0400
+Received: from out28-170.mail.aliyun.com ([115.124.28.170]:35328)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mDmim-00066m-R2; Wed, 11 Aug 2021 07:48:34 -0400
-Received: from [172.17.10.6] (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPSA id CB70C20775;
- Wed, 11 Aug 2021 11:48:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1628682509;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wzs2NFwPuG719KTe/soPKO5Ez+myyWARvjsCBwdObx0=;
- b=nehRqIjRDFngUL0me/gGz8GCZQgqnKKIFFHmW71DhIp7daVJ/01SKi5cryYczv6H6UbuCB
- cP4XJoKB3eqcufDeV0UFE5yYiwo4ZXbPH+HqcguCGyIiooTjbgvcN/deJaW7jeNMq0eE6k
- QmLrwkyJhBWBipzmeTzcv8NpBU+txAo=
-Subject: Re: [PATCH 0/2] Set user creatable for flag ibex uart and plic
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Mark Burton <mark.burton@greensocs.com>,
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mDotB-0006jj-4Z; Wed, 11 Aug 2021 10:07:27 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07439106|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_regular_dialog|0.175162-0.00193328-0.822905;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047203; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KyXUvdo_1628690811; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KyXUvdo_1628690811)
+ by smtp.aliyun-inc.com(10.147.41.187);
+ Wed, 11 Aug 2021 22:07:14 +0800
+Subject: Re: [PATCH] target/riscv: Don't wrongly overide isa version
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>
-References: <20210811093838.18719-1-damien.hedde@greensocs.com>
- <CAFEAcA9xYv0942TB7szESLCDct2H4d2MT5kzZMHL6_d=rQh0Cw@mail.gmail.com>
-From: Damien Hedde <damien.hedde@greensocs.com>
-Message-ID: <fd9ea72a-e4b5-c68a-27e1-91751324cbcf@greensocs.com>
-Date: Wed, 11 Aug 2021 13:48:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20210810033310.7252-1-zhiwei_liu@c-sky.com>
+ <CAEUhbmUdLzc7Xt0VEFQaOPRWy-BZqv-p_9pipSzOVzQ+6mo-ig@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <b3a5feb1-e257-ad91-d0bf-30f1645af848@c-sky.com>
+Date: Wed, 11 Aug 2021 22:06:51 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CAFEAcA9xYv0942TB7szESLCDct2H4d2MT5kzZMHL6_d=rQh0Cw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US-large
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=5.135.226.135;
- envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <CAEUhbmUdLzc7Xt0VEFQaOPRWy-BZqv-p_9pipSzOVzQ+6mo-ig@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.170; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-170.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -62,49 +56,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2021 11:48:35 -0000
+X-List-Received-Date: Wed, 11 Aug 2021 14:07:28 -0000
 
 
-
-On 8/11/21 1:15 PM, Peter Maydell wrote:
-> On Wed, 11 Aug 2021 at 10:43, Damien Hedde <damien.hedde@greensocs.com> wrote:
->> This small series only consist in setting the user_creatable flag
->> of ibex_uart and ibex_plic devices. These two devices are already
->> using properties to configure themselves so nothing else is required.
+On 2021/8/11 下午5:26, Bin Meng wrote:
+> On Tue, Aug 10, 2021 at 11:35 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> For some cpu, the isa version has already been set in cpu init function.
+>> Thus only overide the isa version when isa version is not set, or
+> typo: override, please fix the commit title as well
+OK
+>
+>> users set different isa version explicitly by cpu parameters.
 >>
->> Note that this change alone will not allow creation of these devices
->> using -device cli option or device_add qmp command as they are sysbus
->> devices.
+>> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>> ---
+>>   target/riscv/cpu.c | 14 ++++++++------
+>>   1 file changed, 8 insertions(+), 6 deletions(-)
 >>
->> We do that because we are currently working on adding the possibily
->> to configure/build a machine from qmp commands (see this rfc:
->> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html).
->> We are using these simple devices in order to test our additions.
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 991a6bb760..425efba0c8 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>       RISCVCPU *cpu = RISCV_CPU(dev);
+>>       CPURISCVState *env = &cpu->env;
+>>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>> -    int priv_version = PRIV_VERSION_1_11_0;
+>> -    int bext_version = BEXT_VERSION_0_93_0;
+>> -    int vext_version = VEXT_VERSION_0_07_1;
+>> +    int priv_version = env->priv_ver;
+>>       target_ulong target_misa = env->misa;
+>>       Error *local_err = NULL;
 >>
->> We prefer to send these 2 patches on a separate series as they are not
->> really related to the main topic. We will send a following series
->> for the additions.
-> 
-> No, these patches should go in with your other series that
-> requires them, please. As standalone patches they are definitely
-> wrong, because (as you note) you cannot usefully user-create a
-> sysbus device like these from the command line.
-> 
-> Even there I'm not convinced that just marking the devices
-> user-creatable is the right thing -- if we support creating
-> a complete machine from QMP commands we probably want to think
-> about whether that means we need to have separate categories
-> of "only creatable from C code", "only creatable as part of
-> QMP machine creation", "creatable on commandline but only
-> for cold-plug", and "hotpluggable".
-> 
-> -- PMM
-> 
+>> @@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>           }
+>>       }
+>>
+>> -    set_priv_version(env, priv_version);
+>> -    set_bext_version(env, bext_version);
+>> -    set_vext_version(env, vext_version);
+>> +    if (!env->priv_ver) {
+>> +        set_priv_version(env, PRIV_VERSION_1_11_0);
+>> +    } else if (env->priv_ver != priv_version) {
+>> +        set_priv_version(env, priv_version);
+>> +    }
+> This logic seems incorrect to me. So if cpu init function does not set
+> the priv, and cfg set it to v1.10, v1.11 will be set in the new logic.
 
-I understand, we will put them in the main series where
-we will discuss all of this.
+Yes,  it's also here.
 
 Thanks,
---
-Damien
+Zhiwei
+
+> The previous logic makes sure the cfg value overrides the cpu init
+> value which seems to be intended.
+>
+>>       if (cpu->cfg.mmu) {
+>>           set_feature(env, RISCV_FEATURE_MMU);
+>> @@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>               target_misa |= RVH;
+>>           }
+>>           if (cpu->cfg.ext_b) {
+>> +            int bext_version = BEXT_VERSION_0_93_0;
+>>               target_misa |= RVB;
+>>
+>>               if (cpu->cfg.bext_spec) {
+>> @@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>               set_bext_version(env, bext_version);
+>>           }
+>>           if (cpu->cfg.ext_v) {
+>> +            int vext_version = VEXT_VERSION_0_07_1;
+>>               target_misa |= RVV;
+>>               if (!is_power_of_2(cpu->cfg.vlen)) {
+>>                   error_setg(errp,
+>> --
+> Regards,
+> Bin
 
