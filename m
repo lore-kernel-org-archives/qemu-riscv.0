@@ -1,41 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mDpUz-00055R-BL
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 10:46:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47362)
+	id 1mDpfz-00039q-0f
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 10:57:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49594)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDpUx-00053j-9e; Wed, 11 Aug 2021 10:46:27 -0400
-Received: from out28-77.mail.aliyun.com ([115.124.28.77]:45783)
+ id 1mDpfv-000367-Ao; Wed, 11 Aug 2021 10:57:48 -0400
+Received: from out28-171.mail.aliyun.com ([115.124.28.171]:57981)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDpUu-0003g0-9m; Wed, 11 Aug 2021 10:46:26 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07578637|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0738865-0.00113084-0.924983;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KyYECHP_1628693174; 
-Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.KyYECHP_1628693174)
- by smtp.aliyun-inc.com(10.147.42.22); Wed, 11 Aug 2021 22:46:15 +0800
+ id 1mDpfr-0002oB-Fq; Wed, 11 Aug 2021 10:57:45 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0772766|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_news_journal|0.0309488-0.002032-0.967019;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047188; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.KyY759V_1628693854; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.KyY759V_1628693854)
+ by smtp.aliyun-inc.com(10.147.40.200);
+ Wed, 11 Aug 2021 22:57:34 +0800
+Subject: Re: [RFC PATCH 02/13] target/riscv: Support UXL32 for branch
+ instructions
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
+References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
+ <20210805025312.15720-3-zhiwei_liu@c-sky.com>
+ <840d76cc-fd1c-6324-19cc-a6ec0075d032@linaro.org>
+ <5ae8f7a7-7659-aeee-9b4b-3521e19f4c75@c-sky.com>
+ <249ce5f9-333a-7186-36bb-a2ecadb19254@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2] target/riscv: Don't wrongly override isa version
-Date: Wed, 11 Aug 2021 22:46:12 +0800
-Message-Id: <20210811144612.68674-1-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.25.1
+Message-ID: <538f3928-f681-cb9e-7850-48469ea4ccd5@c-sky.com>
+Date: Wed, 11 Aug 2021 22:57:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <249ce5f9-333a-7186-36bb-a2ecadb19254@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.77; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-77.mail.aliyun.com
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.171; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-171.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -48,64 +57,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2021 14:46:27 -0000
+X-List-Received-Date: Wed, 11 Aug 2021 14:57:49 -0000
 
-For some cpu, the isa version has already been set in cpu init function.
-Thus only override the isa version when isa version is not set, or
-users set different isa version explicitly by cpu parameters.
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
----
- target/riscv/cpu.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+On 2021/8/10 上午3:34, Richard Henderson wrote:
+> On 8/8/21 3:45 PM, LIU Zhiwei wrote:
+>>
+>> On 2021/8/6 上午3:06, Richard Henderson wrote:
+>>> On 8/4/21 4:53 PM, LIU Zhiwei wrote:
+>>>> +static TCGv gpr_src_u(DisasContext *ctx, int reg_num)
+>>>> +{
+>>>> +    if (reg_num == 0) {
+>>>> +        return ctx->zero;
+>>>> +    }
+>>>> +    if (ctx->uxl32) {
+>>>> +        tcg_gen_ext32u_tl(cpu_gpr[reg_num], cpu_gpr[reg_num]);
+>>>> +    }
+>>>> +    return cpu_gpr[reg_num];
+>>>> +}
+>>>> +
+>>>> +static TCGv gpr_src_s(DisasContext *ctx, int reg_num)
+>>>> +{
+>>>> +    if (reg_num == 0) {
+>>>> +        return ctx->zero;
+>>>> +    }
+>>>> +    if (ctx->uxl32) {
+>>>> +        tcg_gen_ext32s_tl(cpu_gpr[reg_num], cpu_gpr[reg_num]);
+>>>> +    }
+>>>> +    return cpu_gpr[reg_num];
+>>>> +}
+>>>
+>>> This is bad: you cannot modify the source registers like this.
+>>
+>> In my opinion, when uxl32, the only meaningful part is the low 32 
+>> bits, and it doesn't matter to modify the high parts.
+>
+> Then why does the architecture manual specify that when registers are 
+> modified the value written sign-extended?  This effect should be 
+> visible...
+>
+Hi Richard,
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 991a6bb760..1a2b03d579 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     RISCVCPU *cpu = RISCV_CPU(dev);
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
--    int priv_version = PRIV_VERSION_1_11_0;
--    int bext_version = BEXT_VERSION_0_93_0;
--    int vext_version = VEXT_VERSION_0_07_1;
-+    int priv_version = 0;
-     target_ulong target_misa = env->misa;
-     Error *local_err = NULL;
- 
-@@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         }
-     }
- 
--    set_priv_version(env, priv_version);
--    set_bext_version(env, bext_version);
--    set_vext_version(env, vext_version);
-+    if (priv_version) {
-+        set_priv_version(env, priv_version);
-+    } else if (!env->priv_ver) {
-+        set_priv_version(env, PRIV_VERSION_1_11_0);
-+    }
- 
-     if (cpu->cfg.mmu) {
-         set_feature(env, RISCV_FEATURE_MMU);
-@@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             target_misa |= RVH;
-         }
-         if (cpu->cfg.ext_b) {
-+            int bext_version = BEXT_VERSION_0_93_0;
-             target_misa |= RVB;
- 
-             if (cpu->cfg.bext_spec) {
-@@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             set_bext_version(env, bext_version);
-         }
-         if (cpu->cfg.ext_v) {
-+            int vext_version = VEXT_VERSION_0_07_1;
-             target_misa |= RVV;
-             if (!is_power_of_2(cpu->cfg.vlen)) {
-                 error_setg(errp,
--- 
-2.25.1
+I  still don't know why the value written sign-extended.  If that's the 
+the rule of final specification, I will try to obey it although our 
+Linux will not depend on the high part.
 
+Thanks,
+Zhiwei
+
+>>
+>>>
+>>> These incorrect modifications will be visible to the kernel on 
+>>> transition back to S-mode.
+>>
+>> When transition back to S-mode, I think the kernel will save the 
+>> U-mode registers to memory.
+>
+> ... here.  Once we're in S-mode, we have SXLEN, and if SXLEN > UXLEN, 
+> the high part of the register will be visible.  It really must be 
+> either (1) sign-extended because U-mode wrote to the register or (2) 
+> unmodified from the last time S-mode wrote to the register.
+>
+>
+> r~
 
