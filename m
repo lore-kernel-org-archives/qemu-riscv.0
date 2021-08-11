@@ -1,62 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mDkVy-0005rW-Dv
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 05:27:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46414)
+	id 1mDkhO-0003iG-FE
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 05:38:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49030)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mDkVv-0005pL-Md; Wed, 11 Aug 2021 05:27:08 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:46688)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mDkVu-0005WV-77; Wed, 11 Aug 2021 05:27:07 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id k65so3252449yba.13;
- Wed, 11 Aug 2021 02:27:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vn2WSiytS/ICNdAummAe25jU+YXSVH8uxM+WI1Ny3EM=;
- b=k2LXAFxZ9CeCdR18fSp6CKHzXpwmCqQ4fWDK+j73IASjhovDqS3AhWQv1Ax741i5Ly
- MzOhLaZchDd0WilVrpZDK+q48NO3aHK6xC8bVOKfdE/Xb1JDkXL7PR+AuQRkUi5cVp07
- K7UPBMQSef8fd0XQ6zbWC6mjwACXjFFlwXfqhozo7YmAipG61tw8GGxx+5tg1bdsNK18
- vnSQQyEo9z9RslGjMl1yTLjgehfkuVh37zWfOytAciNDsm+8Nrwnf8qwBt6RZ8NZbsKT
- hUsLGmxhCaqsk/VKW9DN12M9Gmr7l6eaV3Aw5R8W0ezmmOVRTBUiQkcvf3B+VL5gJHOe
- 6ong==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vn2WSiytS/ICNdAummAe25jU+YXSVH8uxM+WI1Ny3EM=;
- b=J8VfTuVk5lnmDyA+No4g7oCZ563yWdgkz/ZBo9VjkJLG9SF1YCQw5yOV+iBvd8x33/
- RMctmjXrOAWCD8MAZxlg/gATelKIynfSB8TXQQ/JcAI8vEuJy1XCJfhKVkSu5GYxu8Cz
- tP70N+U17c02QtjV2ts+gX/Zb1z2umVMg3pir7ElHCskmOE48zjehaMY/bKnwI4QfdoW
- 1NfoZf5paNnFd2DfMZqz1mnVT1FImOBND36m7/qmGOVJpMUHd+Y1NgggIEukF/VO1U0T
- iKPiArV9Tmo8t7mBpVOMg5EADX4yrtpM8ND2OVc/3Ypl2vqdOsooNH42U2Bwo3G2guzr
- O2EQ==
-X-Gm-Message-State: AOAM530hPmYQ6dZ3DaVXK8vbPRSsWm3YigS9aTsAJ1JFnFVa1POLj2i9
- a5ap/H2LmpBFzmdWG27gqUHbDNq7LBt6/3vDp/0=
-X-Google-Smtp-Source: ABdhPJwhP8Yaa+66noxpIjXruv+1aiQMoKvusjiZljY/pPIunJXffim3Ko6v77Yt5aOjVD+LAAUfXc5gYoVJ/vl6fxg=
-X-Received: by 2002:a25:6d44:: with SMTP id i65mr41813086ybc.517.1628674023239; 
- Wed, 11 Aug 2021 02:27:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1mDkhL-0003hE-DJ; Wed, 11 Aug 2021 05:38:55 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:45396)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1mDkhI-0005jL-VW; Wed, 11 Aug 2021 05:38:54 -0400
+Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
+ by beetle.greensocs.com (Postfix) with ESMTPS id 4257820777;
+ Wed, 11 Aug 2021 09:38:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+ s=mail; t=1628674728;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=D4zb2SZOxmLMnMu7AmwkeIsHGrNGKpd/txgGlzDcaVE=;
+ b=N1kYEi+f1VxmK56wryRkfJTi1m5Y/7tu4IEk3xd9PEjrkTdlcpT9hZxMATSr2ITgl2YJLn
+ khUtjYRPayEHpFgVoVzNFDmIyGORLXqafHnomVS11ichkSlK/EPOVJJH48Cen4k4U/I0+c
+ ABiBej9/7i9RjxnoB9zRF+BPZ6gmKpk=
+From: Damien Hedde <damien.hedde@greensocs.com>
+To: damien.hedde@greensocs.com,
+	qemu-devel@nongnu.org
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Mark Burton <mark.burton@greensocs.com>
+Subject: [PATCH 0/2] Set user creatable for flag ibex uart and plic
+Date: Wed, 11 Aug 2021 11:38:36 +0200
+Message-Id: <20210811093838.18719-1-damien.hedde@greensocs.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-References: <20210810033310.7252-1-zhiwei_liu@c-sky.com>
-In-Reply-To: <20210810033310.7252-1-zhiwei_liu@c-sky.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 11 Aug 2021 17:26:52 +0800
-Message-ID: <CAEUhbmUdLzc7Xt0VEFQaOPRWy-BZqv-p_9pipSzOVzQ+6mo-ig@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Don't wrongly overide isa version
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=5.135.226.135;
+ envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -70,77 +54,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2021 09:27:09 -0000
+X-List-Received-Date: Wed, 11 Aug 2021 09:38:57 -0000
 
-On Tue, Aug 10, 2021 at 11:35 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> For some cpu, the isa version has already been set in cpu init function.
-> Thus only overide the isa version when isa version is not set, or
+Hi,
 
-typo: override, please fix the commit title as well
+This small series only consist in setting the user_creatable flag
+of ibex_uart and ibex_plic devices. These two devices are already
+using properties to configure themselves so nothing else is required.
 
-> users set different isa version explicitly by cpu parameters.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> ---
->  target/riscv/cpu.c | 14 ++++++++------
->  1 file changed, 8 insertions(+), 6 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 991a6bb760..425efba0c8 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      RISCVCPU *cpu = RISCV_CPU(dev);
->      CPURISCVState *env = &cpu->env;
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-> -    int priv_version = PRIV_VERSION_1_11_0;
-> -    int bext_version = BEXT_VERSION_0_93_0;
-> -    int vext_version = VEXT_VERSION_0_07_1;
-> +    int priv_version = env->priv_ver;
->      target_ulong target_misa = env->misa;
->      Error *local_err = NULL;
->
-> @@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          }
->      }
->
-> -    set_priv_version(env, priv_version);
-> -    set_bext_version(env, bext_version);
-> -    set_vext_version(env, vext_version);
-> +    if (!env->priv_ver) {
-> +        set_priv_version(env, PRIV_VERSION_1_11_0);
-> +    } else if (env->priv_ver != priv_version) {
-> +        set_priv_version(env, priv_version);
-> +    }
+Note that this change alone will not allow creation of these devices
+using -device cli option or device_add qmp command as they are sysbus
+devices.
 
-This logic seems incorrect to me. So if cpu init function does not set
-the priv, and cfg set it to v1.10, v1.11 will be set in the new logic.
+We do that because we are currently working on adding the possibily
+to configure/build a machine from qmp commands (see this rfc:
+https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html). 
+We are using these simple devices in order to test our additions.
 
-The previous logic makes sure the cfg value overrides the cpu init
-value which seems to be intended.
+We prefer to send these 2 patches on a separate series as they are not
+really related to the main topic. We will send a following series
+for the additions.
 
->
->      if (cpu->cfg.mmu) {
->          set_feature(env, RISCV_FEATURE_MMU);
-> @@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              target_misa |= RVH;
->          }
->          if (cpu->cfg.ext_b) {
-> +            int bext_version = BEXT_VERSION_0_93_0;
->              target_misa |= RVB;
->
->              if (cpu->cfg.bext_spec) {
-> @@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              set_bext_version(env, bext_version);
->          }
->          if (cpu->cfg.ext_v) {
-> +            int vext_version = VEXT_VERSION_0_07_1;
->              target_misa |= RVV;
->              if (!is_power_of_2(cpu->cfg.vlen)) {
->                  error_setg(errp,
-> --
+Thanks,
+Damien
 
-Regards,
-Bin
+Damien Hedde (2):
+  hw/char/ibex_uart: set user-creatable
+  hw/char/ibex_plic: set user-creatable
+
+ hw/char/ibex_uart.c | 1 +
+ hw/intc/ibex_plic.c | 1 +
+ 2 files changed, 2 insertions(+)
+
+-- 
+2.32.0
+
 
