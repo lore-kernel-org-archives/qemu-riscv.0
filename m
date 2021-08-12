@@ -1,54 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mDwuO-0004IT-TH
-	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 18:41:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33364)
+	id 1mDzrL-0003JR-FY
+	for mharc-qemu-riscv@gnu.org; Wed, 11 Aug 2021 21:50:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48210)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDwuL-0004Gp-Q0; Wed, 11 Aug 2021 18:41:09 -0400
-Received: from out28-74.mail.aliyun.com ([115.124.28.74]:34315)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mDwuG-0003wK-Ug; Wed, 11 Aug 2021 18:41:09 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.09886604|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.162518-0.0540106-0.783471;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.Kyg0Mnv_1628721653; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Kyg0Mnv_1628721653)
- by smtp.aliyun-inc.com(10.147.41.137);
- Thu, 12 Aug 2021 06:40:53 +0800
-Subject: Re: [RFC PATCH 02/13] target/riscv: Support UXL32 for branch
- instructions
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
-References: <20210805025312.15720-1-zhiwei_liu@c-sky.com>
- <20210805025312.15720-3-zhiwei_liu@c-sky.com>
- <840d76cc-fd1c-6324-19cc-a6ec0075d032@linaro.org>
- <5ae8f7a7-7659-aeee-9b4b-3521e19f4c75@c-sky.com>
- <249ce5f9-333a-7186-36bb-a2ecadb19254@linaro.org>
- <538f3928-f681-cb9e-7850-48469ea4ccd5@c-sky.com>
- <15f69497-3baf-abf1-ba9e-91ac1e883d63@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <bbc67da3-3eef-6e57-8610-6b496f30b777@c-sky.com>
-Date: Thu, 12 Aug 2021 06:40:53 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mDzrG-0003Fy-4c; Wed, 11 Aug 2021 21:50:10 -0400
+Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:34489)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mDzrE-0006Dq-MA; Wed, 11 Aug 2021 21:50:09 -0400
+Received: by mail-yb1-xb2e.google.com with SMTP id a93so8539340ybi.1;
+ Wed, 11 Aug 2021 18:50:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=effbWKpzm7BzOABnJ82MnLshCA8/xfFegnLDOCOTUwg=;
+ b=he94cOQzGWUzaK04WVGfdtJ+ZoKSNoNfPv+e+egHxwcCWLaTnBUbXjO8FWD0XZDLSK
+ cCpK5iCnJCK5+7AynGMOuEvKxrI7YmI6dgDCoM56yEM9z+/4bFNSTdlKlzaaq5mKfYtF
+ gyO12sdLeBGXPm8R69ui/lznY2i7Fz6UoJPaKnD/ZdzByK0emGn7Qcq3083VKw1CWrl/
+ Rur081ivoznNWrPBHkgh1QjO2FEO8mrMMR/5cFzwKVsrz4zymI46bBQzY3B9TcId7UOk
+ rHgFf+CYiQz746k1WW1ofVIKeaRfQAD29JuQ1y4zuv3tUK4JYLtXZeiWDQgNwi4lfdUR
+ GEWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=effbWKpzm7BzOABnJ82MnLshCA8/xfFegnLDOCOTUwg=;
+ b=LSjcZLKB8F49fqTMuYaIVJ79+jpeLakgHory1cLLlvEzZnLQD35bTamzHSSNuGkf0R
+ itGDAlkIflXy+YT/18DALaNa3NLTQfxLU+YoCbVy0EyvCdmonRAzvt9EY31h+TSBKqZs
+ VYZWvRvItmhypl1nNQlDlbMYEBMLK+f0pMv5SavMpSaR5386Kh9wQeSOCvRQAaGYMwLK
+ b78YqXMEG6mS2fa/XuvygczIKE1VVvEo0bJHJil3D/iFdle+uwsIeAUBY5VC85tcJtsa
+ wOyO8AmWjx2IuRyOQpzhkOvMCwwvf/mjEWFYA5Ajn4EOYEKBi3vEjJPAc0PcEm4KnaE+
+ GeaA==
+X-Gm-Message-State: AOAM530fMxEmYbj8g0R63EI4ZMbHv68zUL4f6ILuRKHn6mPVCQVtTYZo
+ uA78WO+3TuY8qHKDWIt1enkXYzuhjKXZVbNVjqA=
+X-Google-Smtp-Source: ABdhPJwAp66qEV4R0Mdq/jQfgwUuofX/jGgYH3i6gmbuamO9Ai84kmzvCWnsWT3Tt/GJtZ3gYXIPcDVnhvMBF8vuJ94=
+X-Received: by 2002:a25:6c04:: with SMTP id h4mr1265749ybc.122.1628733006939; 
+ Wed, 11 Aug 2021 18:50:06 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <15f69497-3baf-abf1-ba9e-91ac1e883d63@linaro.org>
-Content-Type: multipart/alternative;
- boundary="------------BBC96D59B64C6FCB336E4FD6"
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.74; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-74.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <20210811144612.68674-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210811144612.68674-1-zhiwei_liu@c-sky.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 12 Aug 2021 09:49:56 +0800
+Message-ID: <CAEUhbmVK32k271Z6gjFV8yMPFng6OoAvjfNXeR6fv4zMMoBYdg@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Don't wrongly override isa version
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -61,111 +70,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2021 22:41:10 -0000
+X-List-Received-Date: Thu, 12 Aug 2021 01:50:10 -0000
 
-This is a multi-part message in MIME format.
---------------BBC96D59B64C6FCB336E4FD6
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-
-On 2021/8/12 上午1:56, Richard Henderson wrote:
-> On 8/11/21 4:57 AM, LIU Zhiwei wrote:
->> I  still don't know why the value written sign-extended.  If that's 
->> the the rule of final specification, I will try to obey it although 
->> our Linux will not depend on the high part.
+On Wed, Aug 11, 2021 at 10:46 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> The text that I'm looking at is
+> For some cpu, the isa version has already been set in cpu init function.
+> Thus only override the isa version when isa version is not set, or
+> users set different isa version explicitly by cpu parameters.
 >
-> https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMFDQC-and-Priv-v1.11/riscv-privileged-20190608.pdf 
->
->
-> 3.1.6.2 Base ISA Control in mstatus Register
->
-> In the fifth paragraph, the requirement for sign-extension is detailed.
->
-Thanks. I have already seen this rule.
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>  target/riscv/cpu.c | 14 ++++++++------
+>  1 file changed, 8 insertions(+), 6 deletions(-)
 
-/"Whenever XLEN in any mode is set to a value less than the widest 
-supported XLEN, all operations////must ignore source operand register bits above the configured XLEN, and 
-must sign-extend results////to fill the entire widest supported XLEN in the destination register.//" /
-
-I still don't know why the specification has this constraint. It just 
-requires that fill hardware registers with defined sign-extension value.
-But it doesn't give the real benefit of this constraint.
-
-If the software doesn't use the high part, who cares the really value in 
-high part? Do you know the benefit?  Thanks again.
-
-Best Regards,
-Zhiwei//
+Please include a changelog in the newer version in the future.
 
 >
-> r~
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 991a6bb760..1a2b03d579 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      RISCVCPU *cpu = RISCV_CPU(dev);
+>      CPURISCVState *env = &cpu->env;
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+> -    int priv_version = PRIV_VERSION_1_11_0;
+> -    int bext_version = BEXT_VERSION_0_93_0;
+> -    int vext_version = VEXT_VERSION_0_07_1;
+> +    int priv_version = 0;
+>      target_ulong target_misa = env->misa;
+>      Error *local_err = NULL;
+>
+> @@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          }
+>      }
+>
+> -    set_priv_version(env, priv_version);
+> -    set_bext_version(env, bext_version);
+> -    set_vext_version(env, vext_version);
+> +    if (priv_version) {
+> +        set_priv_version(env, priv_version);
+> +    } else if (!env->priv_ver) {
+> +        set_priv_version(env, PRIV_VERSION_1_11_0);
+> +    }
+>
+>      if (cpu->cfg.mmu) {
+>          set_feature(env, RISCV_FEATURE_MMU);
+> @@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              target_misa |= RVH;
+>          }
+>          if (cpu->cfg.ext_b) {
+> +            int bext_version = BEXT_VERSION_0_93_0;
+>              target_misa |= RVB;
+>
+>              if (cpu->cfg.bext_spec) {
+> @@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              set_bext_version(env, bext_version);
+>          }
+>          if (cpu->cfg.ext_v) {
+> +            int vext_version = VEXT_VERSION_0_07_1;
+>              target_misa |= RVV;
+>              if (!is_power_of_2(cpu->cfg.vlen)) {
+>                  error_setg(errp,
+> --
 
---------------BBC96D59B64C6FCB336E4FD6
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2021/8/12 上午1:56, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:15f69497-3baf-abf1-ba9e-91ac1e883d63@linaro.org">On
-      8/11/21 4:57 AM, LIU Zhiwei wrote:
-      <br>
-      <blockquote type="cite">I  still don't know why the value written
-        sign-extended.  If that's the the rule of final specification, I
-        will try to obey it although our Linux will not depend on the
-        high part.
-        <br>
-      </blockquote>
-      <br>
-      The text that I'm looking at is
-      <br>
-      <br>
-<a class="moz-txt-link-freetext" href="https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMFDQC-and-Priv-v1.11/riscv-privileged-20190608.pdf">https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMFDQC-and-Priv-v1.11/riscv-privileged-20190608.pdf</a>
-      <br>
-      <br>
-      3.1.6.2 Base ISA Control in mstatus Register
-      <br>
-      <br>
-      In the fifth paragraph, the requirement for sign-extension is
-      detailed.
-      <br>
-      <br>
-    </blockquote>
-    <p>Thanks. I have already seen this rule.</p>
-    <pre><i>"Whenever XLEN in any mode is set to a value less than the widest supported XLEN, all operations</i><i>
-</i><i>must ignore source operand register bits above the configured XLEN, and must sign-extend results</i><i>
-</i><i>to fill the entire widest supported XLEN in the destination register.</i><i>"
-</i></pre>
-    <p>I still don't know why the specification has this constraint. It
-      just requires that fill hardware registers with defined 
-      sign-extension value. <br>
-      But it doesn't give the real benefit of this constraint. <br>
-    </p>
-    <p>If the software doesn't use the high part, who cares the really
-      value in high part? Do you know the benefit?  Thanks again.<br>
-    </p>
-    <pre>Best Regards,
-Zhiwei<i>
-</i></pre>
-    <blockquote type="cite"
-      cite="mid:15f69497-3baf-abf1-ba9e-91ac1e883d63@linaro.org">
-      <br>
-      r~
-      <br>
-    </blockquote>
-  </body>
-</html>
-
---------------BBC96D59B64C6FCB336E4FD6--
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
