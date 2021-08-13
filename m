@@ -1,56 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mELRR-0002gF-E5
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Aug 2021 20:52:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33872)
+	id 1mELW3-0004Qa-VC
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Aug 2021 20:57:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34328)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mELRP-0002ee-Au; Thu, 12 Aug 2021 20:52:55 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:35693)
+ id 1mELW1-0004Pv-QS; Thu, 12 Aug 2021 20:57:41 -0400
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:45023)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mELRN-0004ua-MW; Thu, 12 Aug 2021 20:52:55 -0400
-Received: by mail-il1-x12a.google.com with SMTP id k3so9108914ilu.2;
- Thu, 12 Aug 2021 17:52:51 -0700 (PDT)
+ id 1mELW0-0008DK-C3; Thu, 12 Aug 2021 20:57:41 -0400
+Received: by mail-il1-x136.google.com with SMTP id i13so9090005ilm.11;
+ Thu, 12 Aug 2021 17:57:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LgCLtd4XEqu36l6wN1FQLF9Wv498wnwHYFD+X0t0D8w=;
- b=R57luwf8guvA5D40r/qAJvZn9m48OWH3h42U8swJf9NSEqRbSw6Wad0IySS+1K+COD
- VG48opba/LFvrWLwM+Jk2fpF89qmAXcBrXoXlMxSJlwb8G6m/vDnaF1bIgyXMPAU+URM
- xaHZHapox6fZ6B3QcjPtttkj4inorWELowaR5I8UwCnJs5GM21eKrc1XvADrQqyBQnGY
- hKXCWk7lL6gZkaEe1DOVwsW6TM1L3hmR/qutK2XXYXMSu7+ESrj2HXePShYxizVheFW5
- /ue8cFDLXcN8zDDKO/5AMC8/aITIfzbg5t/tKxnZt+iu+dUAdWyXYstFX8LmYRh6I6Q9
- xSjw==
+ :cc:content-transfer-encoding;
+ bh=BJELDdo/Vw8F6VWMt1U+3Qx7I97Tle9WvtxsfBgqfVE=;
+ b=SlRsXN51XIUUIVs2WDOf6UOQN8GcPm/FHEGwOwdrR6HvnAO3uDTz1jmuqtVEeNL4iZ
+ 4B6yeZeOBchEFIh0EBjmvPGtwWHKLtBWY91htJjGGE5KA3XJm/hFhXpCtfNoLFFypYPV
+ BleYXS1aPBvwTDd3VkMmgtrp1+jIv7jEz+dW2I1W2/1jEz/hATh6JyJpDfY0JBsMSp1U
+ 7WOAf2Qzk7BmkooJc5Mf2C794poV2yLwUyJjHUaeIJvPColiEQw0bDQhMz7oXJjhEmD2
+ uv++dzXznX9z2TocHpH1RngLYf1f5RalRmfVdhjX0RxHv3xalx8uCQhGoVQe2kGVlU/s
+ iRPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LgCLtd4XEqu36l6wN1FQLF9Wv498wnwHYFD+X0t0D8w=;
- b=RgOTAjfSAzMHw0eBOnVohCpXEmFxot0wu03ZWK7a9nadUaEMZ3Jw4N+xdJsXVY0bXj
- jOdzFhNq09LLPvdMHJtsJumKSN99BXP4U1nI7AiuzMXwSSBKKkGWcx25QMZ3NXpmmCbq
- ovW5/V7uqwpfYvBlXeTTaqd31GDtpC+Ch09ZQM2RboNdNJ+jFWLOsQfGnOgi/F7iohL/
- fSXFECpLP/LheWNax4yzBa8J75IZ0h/dJ18P5/lmyP7tnrfJNfrssmIXIwtj5DZHxxOF
- dFGMZcbO0fCMq0XnHkuS/mvEJoD6Xqd2ROVt6EyeY9MXKStFUHq+nU1GU3Yyxj45Ga+v
- BhUA==
-X-Gm-Message-State: AOAM5313iJtwKCHxuN4ajmDzWmBjSJ3EFItb8sTgmgcCT7FuiGx8HEgg
- 5frJsV9Voc3I5hxmrNUmU5mztLTkeu/uicAwy/0=
-X-Google-Smtp-Source: ABdhPJy6SFVFHd/Bk8OFHhPghdrLGyS/Ibxt+vQXdMIOZlemjNNXzQ3Lq01oOpfNnwYudK3T9cm+tHG9ho9rH6EcUeM=
-X-Received: by 2002:a92:8707:: with SMTP id m7mr880285ild.177.1628815970985;
- Thu, 12 Aug 2021 17:52:50 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=BJELDdo/Vw8F6VWMt1U+3Qx7I97Tle9WvtxsfBgqfVE=;
+ b=OB0jLB20i0ciRyVaBafT3gTuUhfkBYca2KdOnhV87c36Ov5d9OSVQXKqWw7bWelFtS
+ VAvFSYAIuRO0wPjfYXdWPOA2510J3IUpuSnhO/rOIhwa8S8iNbOhur8HcGDy2ke6kmRX
+ 6GYe0Ncru5Qy8e+cStheTtYKPqQjP+uxZkf3IwCpVxpTrY2CpDxS4Zk73/xqnjOrpUjb
+ 4wPBlCg6wZE6GZw1eqZaQicm0xQsxD7LpI7TZaCODMjDCDt5HWn2gqNk1xbnP7rrJgfr
+ m6O2bGP0bjftgXcGUvyDGw9387OPQDw/rZW8qdsHz4yIpky6B+12N1kF2daIGSyu8hv5
+ NPVQ==
+X-Gm-Message-State: AOAM532VXJwKjIPA8ZIwObdvS66i4AF3AYBfrHBU18lb7trlhkaZuzPo
+ mzqt/bGulVzb/2ZUsyze9ctmY6AZW6Ugxjo15OI=
+X-Google-Smtp-Source: ABdhPJxqq2PRlLW5I3l3Mw5qxLe8w3BwpWAXZaMgjSWiSKbqq4W9CJPIIm0zGlEwGmin1m+ikjDn8MTvo9QtCfGOEmI=
+X-Received: by 2002:a92:c24d:: with SMTP id k13mr876016ilo.227.1628816258825; 
+ Thu, 12 Aug 2021 17:57:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210811144612.68674-1-zhiwei_liu@c-sky.com>
-In-Reply-To: <20210811144612.68674-1-zhiwei_liu@c-sky.com>
+References: <20210812144647.10516-1-peter.maydell@linaro.org>
+ <2465bcc8-7e8b-8b5c-71ed-d696f69e0f78@amsat.org>
+In-Reply-To: <2465bcc8-7e8b-8b5c-71ed-d696f69e0f78@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 13 Aug 2021 10:52:25 +1000
-Message-ID: <CAKmqyKPxDPY2KxwQmQYRq7ot7TTOq6P35Z9_VkiGmFdq+YtqBw@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Don't wrongly override isa version
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
+Date: Fri, 13 Aug 2021 10:57:12 +1000
+Message-ID: <CAKmqyKNFpPJqQ5DTTvSQGBWfB9UW2xrhFf6DJQgB6Zt4ZGp+mw@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv/virt.c: Assemble plic_hart_config string with
+ g_strjoinv()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -71,72 +76,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2021 00:52:55 -0000
+X-List-Received-Date: Fri, 13 Aug 2021 00:57:42 -0000
 
-On Thu, Aug 12, 2021 at 12:46 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Aug 13, 2021 at 2:17 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
 >
-> For some cpu, the isa version has already been set in cpu init function.
-> Thus only override the isa version when isa version is not set, or
-> users set different isa version explicitly by cpu parameters.
+> Hi Peter,
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> On 8/12/21 4:46 PM, Peter Maydell wrote:
+> > In the riscv virt machine init function, We assemble a string
+> > plic_hart_config which is a comma-separated list of N copies of the
+> > VIRT_PLIC_HART_CONFIG string.  The code that does this has a
+> > misunderstanding of the strncat() length argument.  If the source
+> > string is too large strncat() will write a maximum of length+1 bytes
+> > (length bytes from the source string plus a trailing NUL), but the
+> > code here assumes that it will write only length bytes at most.
+> >
+> > This isn't an actual bug because the code has correctly precalculated
+> > the amount of memory it needs to allocate so that it will never be
+> > too small (i.e.  we could have used plain old strcat()), but it does
+> > mean that the code looks like it has a guard against accidental
+> > overrun when it doesn't.
+> >
+> > Rewrite the string handling here to use the glib g_strjoinv()
+> > function, which means we don't need to do careful accountancy of
+> > string lengths, and makes it clearer that what we're doing is
+> > "create a comma-separated string".
+> >
+> > Fixes: Coverity 1460752
+> > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> > ---
+> >  hw/riscv/virt.c | 33 ++++++++++++++++++++-------------
+> >  1 file changed, 20 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 4a3cd2599a5..26bc8d289ba 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -541,6 +541,24 @@ static FWCfgState *create_fw_cfg(const MachineStat=
+e *mc)
+> >      return fw_cfg;
+> >  }
+> >
+> > +/*
+> > + * Return the per-socket PLIC hart topology configuration string
+> > + * (caller must free with g_free())
+> > + */
+> > +static char *plic_hart_config_string(int hart_count)
+> > +{
+> > +    g_autofree const char **vals =3D g_new(const char *, hart_count + =
+1);
+> > +    int i;
+> > +
+> > +    for (i =3D 0; i < hart_count; i++) {
+> > +        vals[i] =3D VIRT_PLIC_HART_CONFIG;
+>
+> Have you considered adding plic_hart_config_string() an extra
+> 'const char *plic_config' argument (declaring it in a new
+> include/hw/riscv/plic_hart.h)?
+> We could use it in the other boards:
+>
+> hw/riscv/microchip_pfsoc.c:267:            strncat(plic_hart_config, ","
+> MICROCHIP_PFSOC_PLIC_HART_CONFIG,
+> hw/riscv/microchip_pfsoc.c:268:                    plic_hart_config_len);
+> hw/riscv/microchip_pfsoc.c:270:            strncat(plic_hart_config,
+> "M", plic_hart_config_len);
+>
+> hw/riscv/sifive_u.c:826:            strncat(plic_hart_config, ","
+> SIFIVE_U_PLIC_HART_CONFIG,
+> hw/riscv/sifive_u.c:827:                    plic_hart_config_len);
+> hw/riscv/sifive_u.c:829:            strncat(plic_hart_config, "M",
+> plic_hart_config_len);
+>
+> hw/riscv/virt.c:612:                strncat(plic_hart_config, ",",
+> plic_hart_config_len);
+> hw/riscv/virt.c:614:            strncat(plic_hart_config,
+> VIRT_PLIC_HART_CONFIG,
+> hw/riscv/virt.c:615:                plic_hart_config_len);
+>
+> include/hw/riscv/microchip_pfsoc.h:141:#define
+> MICROCHIP_PFSOC_PLIC_HART_CONFIG        "MS"
+> include/hw/riscv/shakti_c.h:63:#define SHAKTI_C_PLIC_HART_CONFIG "MS"
+> include/hw/riscv/sifive_e.h:83:#define SIFIVE_E_PLIC_HART_CONFIG "M"
+> include/hw/riscv/sifive_u.h:147:#define SIFIVE_U_PLIC_HART_CONFIG "MS"
+> include/hw/riscv/virt.h:74:#define VIRT_PLIC_HART_CONFIG "MS"
+>
+> Obviously someone else could do that as bytetask, so meanwhile
+> for Coverity 1460752:
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+
+Thanks for fixing this Peter. Would you like this in for 6.1?
+
+If you want I can fix the other boards?
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
-
-> ---
->  target/riscv/cpu.c | 14 ++++++++------
->  1 file changed, 8 insertions(+), 6 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 991a6bb760..1a2b03d579 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -392,9 +392,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      RISCVCPU *cpu = RISCV_CPU(dev);
->      CPURISCVState *env = &cpu->env;
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-> -    int priv_version = PRIV_VERSION_1_11_0;
-> -    int bext_version = BEXT_VERSION_0_93_0;
-> -    int vext_version = VEXT_VERSION_0_07_1;
-> +    int priv_version = 0;
->      target_ulong target_misa = env->misa;
->      Error *local_err = NULL;
->
-> @@ -417,9 +415,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          }
->      }
->
-> -    set_priv_version(env, priv_version);
-> -    set_bext_version(env, bext_version);
-> -    set_vext_version(env, vext_version);
-> +    if (priv_version) {
-> +        set_priv_version(env, priv_version);
-> +    } else if (!env->priv_ver) {
-> +        set_priv_version(env, PRIV_VERSION_1_11_0);
-> +    }
->
->      if (cpu->cfg.mmu) {
->          set_feature(env, RISCV_FEATURE_MMU);
-> @@ -497,6 +497,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              target_misa |= RVH;
->          }
->          if (cpu->cfg.ext_b) {
-> +            int bext_version = BEXT_VERSION_0_93_0;
->              target_misa |= RVB;
->
->              if (cpu->cfg.bext_spec) {
-> @@ -515,6 +516,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              set_bext_version(env, bext_version);
->          }
->          if (cpu->cfg.ext_v) {
-> +            int vext_version = VEXT_VERSION_0_07_1;
->              target_misa |= RVV;
->              if (!is_power_of_2(cpu->cfg.vlen)) {
->                  error_setg(errp,
-> --
-> 2.25.1
->
->
 
