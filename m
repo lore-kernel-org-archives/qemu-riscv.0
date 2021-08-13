@@ -1,67 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mEPfJ-0002es-1Y
-	for mharc-qemu-riscv@gnu.org; Fri, 13 Aug 2021 01:23:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49424)
+	id 1mEPpa-0008Nq-TU
+	for mharc-qemu-riscv@gnu.org; Fri, 13 Aug 2021 01:34:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52018)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mEPfG-0002eD-T3; Fri, 13 Aug 2021 01:23:31 -0400
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:39913)
+ id 1mEPpZ-0008NR-LQ; Fri, 13 Aug 2021 01:34:09 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:43578)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mEPfF-0001cf-Cv; Fri, 13 Aug 2021 01:23:30 -0400
-Received: by mail-io1-xd29.google.com with SMTP id r72so11690567iod.6;
- Thu, 12 Aug 2021 22:23:28 -0700 (PDT)
+ id 1mEPpY-0002eM-3R; Fri, 13 Aug 2021 01:34:09 -0400
+Received: by mail-io1-xd30.google.com with SMTP id y1so11674843iod.10;
+ Thu, 12 Aug 2021 22:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=XmHUaft2EOprVPVVbSoMGqjzfiaDUCJL7guujVz29tU=;
- b=DU51W2DAwwJYgC0fqQpzacBY1MVgIEyAxnEsnKPw4dv9sx3AKmQz2D36XUZFF7pBED
- TOZzW2+a9q8jrnoZyKvZzl7NHc3U1RsRlHZNVFTry2qRuYrtc8qQCld6L51TG3G9KLz9
- iyo1KdKTysInQoR2LV2Q7NXNrdhxHyq5YnEN7c/CUbaXlDG+HhWrNCxtqe5QXmRpzzNt
- xdeDU8z+aKFUPLqMt5EE0Ro1nV1qXx8Zt4u5Is6fwYaCFvqiVVo9Qe+YhR+21F7MPek3
- 0RRUXFTJcRnzUrHaHOXn1/RUg2/XR9IYs1BVhf+Iy2iXv7RIjoy8paTcEWFc2taFJFAY
- ZpsA==
+ :cc; bh=0iXR9zOGQqtbhDnjO+IHjjf9eGkOLZosT7GkeNQp2DA=;
+ b=ST1oR+UyARJZVIxmCalXuxgBBBqhBJdTkuHwI6bRx+LVsbFLRgagpgGyfO42sDdIyw
+ zFhuZgdfUXTMNw6zYD5xLsEW1xJqBJqxzpW0KBHc6m2C/lJTFME6/vTPdMzHMieStztJ
+ MUXaY0cCeDmUBI4p+Lz0agTaWUVC/KPVXQvPX/CYPcigMXtkyzLGhSfUqW/e1ix9ypG/
+ MxPkhy9M5dJIHQGANSVFgYEL9n0rSQtNzit4+oq+vw1au2Z7SX5bWsiuZyeu/Cpf/q/i
+ 8HSpOblTsOX7OUzVxbvotpvcgMTl4CeLUDLarB0wNgHSL1WEHf2SAeo8+CYDFFIvl2Dl
+ HcbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=XmHUaft2EOprVPVVbSoMGqjzfiaDUCJL7guujVz29tU=;
- b=ulYI09lyvV7rfYEF4vP3QRlkb9dZcDMGTlXCMqJ7tsrIxvy1QNIr8ClYQs6P/GV38k
- xKUxviH9JKLnVe9fxnSg5z+A7qoN3IF5fPLYpdnTKlNGwIpepxvJ7Vzj8u+/sSVd5YtA
- ZrHdtOani1DVsHWYbV30NgFZyXtymp37Iw02Evw+oY50Zjz1zzYAwo3ZzvJhRU6zqJ65
- r/H3NADM2+oKXSfLX5o/X0QDmPGcoJmh7dEiAlxQwik4RoQU6UH4YQH+JWZ7UFdh/Uuo
- uaZb45BMBQwh9E88BpBgyOd2ToG9LyC9aHwSsVIDozxO0s6No+h6PRFVHNrB9pt827ZX
- NeDw==
-X-Gm-Message-State: AOAM531u1CZNgARW3EpmL1L2xtUkMnk3n/xtCGlJ3T96z5qOVs7tUTSS
- +75bR4oAvV/JP7J/Hn9+knpJ7lul35X1IrQgqBg=
-X-Google-Smtp-Source: ABdhPJzTi58xxbm3oDiigIc4gXYAfGNodf838oMIJBI3M59qv/Sy0fgzbp4WLIkquPp0KCO+OdSa37nf0k/kiAvg9C8=
-X-Received: by 2002:a05:6638:3048:: with SMTP id
- u8mr567634jak.91.1628832207963; 
- Thu, 12 Aug 2021 22:23:27 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=0iXR9zOGQqtbhDnjO+IHjjf9eGkOLZosT7GkeNQp2DA=;
+ b=MXIG1N0PGwSZ1jpMWhVL75LoVE6vbIMPCcLkcho5s9pY+6cfZIJoDvKHbzHKBEgHFK
+ IYJ4kM/lvMQtxMtCHaHoOSTwOVoGxe79K370Tt2lys58Ot55MEBLC1Eg0ofShz4SpnyK
+ K/yofbKyycTLRm5kM8EsigQO9wskswXRXesG1NZsd8VqxoG4T4gtCZRj/eLvSZ+mxfl1
+ t82OkL67PZ6GFwnSx3s6Fx5TnwACIRPhxD++7ZuoPORsCH4TgBdYX3xzFTyeyxg9FNCK
+ zAax6VN8kXTLoxX+qSNGlHkVEdXZBxVHo4ILWvp+ndJS4IK9bLFgsL0dN7Uq0vmjdiRU
+ UCqQ==
+X-Gm-Message-State: AOAM532s4dGCZTHunUclzF94TrhDOHS6t7CGBEL/enRmOCzuqy9Rodxo
+ LHg+CJ1/y8N/t6315AseB2EhuXcFlL1fOj2uEkU=
+X-Google-Smtp-Source: ABdhPJxc9uiNGmELsVNgljclmbrEv1LpIvIma+j6scDcHbRjJt5vUeiXnUKAUaAunbrTOTh6sMpZZ6Oenqo/Bk6RF0Y=
+X-Received: by 2002:a5d:8e19:: with SMTP id e25mr701542iod.175.1628832846749; 
+ Thu, 12 Aug 2021 22:34:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210805175626.11573-1-ruinland@andestech.com>
- <20210805175626.11573-4-ruinland@andestech.com>
- <CAEUhbmU=PN0K+jQzYsbw+0WK6C6w85t2tNGhW0uHJMgfeKvCfw@mail.gmail.com>
- <SG2PR03MB4263ED48818608B30AE3C801D5F39@SG2PR03MB4263.apcprd03.prod.outlook.com>
- <CAEUhbmXqR0COjJEE5vOvydc06FMtxXnJB-bwsf1v_6+yATPmPA@mail.gmail.com>
-In-Reply-To: <CAEUhbmXqR0COjJEE5vOvydc06FMtxXnJB-bwsf1v_6+yATPmPA@mail.gmail.com>
+In-Reply-To: <20210805175626.11573-1-ruinland@andestech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 13 Aug 2021 15:23:02 +1000
-Message-ID: <CAKmqyKOM1FEaeeWssCBzxT9YeuEODHkPUFDdsj+g5oQzVvyuVg@mail.gmail.com>
-Subject: Re: [RFC PATCH v4 3/4] Adding Andes AX25 and A25 CPU model
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: =?UTF-8?B?UnVpbmxhbmQgQ2h1YW4tVHp1IFRzYSjolKHlgrPos4cp?=
- <ruinland@andestech.com>, 
- =?UTF-8?B?RHlsYW4gRGFpLVJvbmcgSmhvbmco6Y2+5bKx6J6NKQ==?= <dylan@andestech.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- Bin Meng <bin.meng@windriver.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>
+Date: Fri, 13 Aug 2021 15:33:41 +1000
+Message-ID: <CAKmqyKPXe0HZ1nzy3N+Z+=97bzM=yjjOVubT-8=ZvMG4_LABdg@mail.gmail.com>
+Subject: Re: [RFC PATCH v4 0/4] Add basic support for custom CSR
+To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -82,40 +70,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2021 05:23:31 -0000
+X-List-Received-Date: Fri, 13 Aug 2021 05:34:10 -0000
 
-On Fri, Aug 6, 2021 at 7:51 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Aug 6, 2021 at 3:59 AM Ruinland Chuan-Tzu Tsai
+<ruinland@andestech.com> wrote:
 >
-> On Fri, Aug 6, 2021 at 2:12 PM Ruinland Chuan-Tzu Tsa(=E8=94=A1=E5=82=B3=
-=E8=B3=87)
-> <ruinland@andestech.com> wrote:
-> >
-> > Hi Bin and Alistair,
-> >
-> > >> Adding Andes AX25 and A25 CPU model into cpu.h and cpu.c without
-> >
-> > > The latest RISC-V core from Andes is AX45 and A45. Should we just
-> > > support the latest one?
-> >
-> > Maybe we can have them all ?
-> > AX25 and A25 is still in production, and we still have new clients usin=
-g these CPU models.
-> >
+> From: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
 >
-> Does AX25 and AX45 have any significant difference?
+> Dear all,
+>
+> In this patch, the implementation of custom CSR handling logic is introduced.
+>
+> If --enable-riscv-custom is set during configuration, custom CSR logic will be
+> turned on. During CPU model initialization, setup_custom_csr() is invoked to
+> register vendor-provided custom CSR opsets into a hash table.
+> When accessing a CSR, in riscv_csrrw(), is_custom_csr() will be called to check
+> whether the encountering csrno is a custom CSR. If that's a custom one, a
+> struct riscv_csr_operations will be returned and such CSR will be served
+> accordingly.
 
-My hope is that the way the custom CSRs are implemented means that the
-Andes CPUs can be self contained. That way QEMU can support whatever
-Andes upstreams and it shouldn't add a maintenance burden on anyone
-else.
+Thanks for adding this. I don't think we need to expose it via the
+config logic. A Kconfig option would be enough, it can be enabled by
+default and users can choose to disable it if they really want.
 
-Starting with a AX25 is fine with me. Whatever Andes is willing to
-upstream, maintain and test works for me.
+>
+> The performance slowdown could be easily tested with a simple program running
+> on linux-user mode.
+>
+> /* test_csr.c */
+> #include <stdio.h>
+> #include <unistd.h>
+> #include <sys/time.h>
+>
+> int main (int ac, char *av[]) {
+>    struct  timeval start;
+>    struct  timeval end;
+>    gettimeofday(&start,NULL);
+>    unsigned int loop_n = 999999 ;
+>    unsigned char i;
+>    unsigned char o;
+>    do {
+>        for(i=0; i<32; i++) {
+>        #if defined(FCSR)
+>        __asm__("csrw fcsr, %0;"::"r"(i));
+>        __asm__("csrr %0, fcsr;":"=r"(o));
+>        #elif defined(UITB)
+>        __asm__("csrw 0x800, %0;"::"r"(i));
+>        __asm__("csrr %0, 0x800;":"=r"(o));
+>        #endif
+>        }
+>        --loop_n;
+>    } while (loop_n > 0);
+>    gettimeofday(&end,NULL);
+>    unsigned long diff = 1000000 * (end.tv_sec-start.tv_sec)+end.tv_usec-start.tv_usec;
+>    printf("%f\n", (double)(diff)/1000000);
+>    return 0;
+> }
+>
+> $ riscv64-linux-gnu-gcc -static -DUITB ./test_csr.c -o ./u
+> $ riscv64-linux-gnu-gcc -static -DFCSR ./test_csr.c -o ./f
+>
+> For a custom CSR, uitb, being accessed on andes-ax25 :
+> $ ./build/qemu-riscv64 -cpu andes-ax25 ./u
+> 4.283091
+>
+> For a stock CSR, fcsr, being accessed on andes-ax25:
+> $ ./build/qemu-riscv64 ./f
+> 3.875519
+>
+> For a custom CSR being accessed on stock rv64:
+> $ ./build/qemu-riscv64 -cpu rv64 ./u
+> Illegal instruction (core dumped)
+> # This is expected to fail.
+>
+> Currently, the statics on my hands shows that :
+> When the custom CSR handling mechanism is activated, we will suffer a 17% slow-
+> down on stock CSRs and the penalty of accessing to a custom CSR will be another
+> 7% more.
+
+Thanks for testing this.
+
+The critical number here is what is the impact for a CPU that doesn't
+have the custom CSRs. So for example what impact does this have on the
+rv64 accessing a standard CSR? We don't want to affect performance of
+other CPUs. CPUs with custom CSRs can take the performance hit as it
+adds a useful feature for them.
 
 Alistair
 
 >
-> Regards,
-> Bin
+> Cordially yours,
+> Ruinland ChuanTzu Tsai
+>
+> Changes from v3 :
+> * Adding options in configure and meson files to turn on/off custom CSR logic.
+> * Adding unlikely() to check if custom_csr_map is set.
+> * Moving any32 and any out of !(CONFIG_USER_ONLY) for enabling linux-user mode.
+> * Fix comment style, add missing license boilerplate.
+>
+>
+> Ruinalnd ChuanTzu Tsai (4):
+>   Adding basic custom/vendor CSR handling mechanism
+>   Adding Andes AX25 and A25 CPU model
+>   Enable custom CSR logic for Andes AX25 and A25
+>   Add options to config/meson files for custom CSR
+>
+>  configure                      |   6 ++
+>  meson.build                    |   2 +
+>  meson_options.txt              |   2 +
+>  target/riscv/andes_cpu_bits.h  | 124 +++++++++++++++++++++++++
+>  target/riscv/cpu.c             |  51 +++++++++++
+>  target/riscv/cpu.h             |  33 ++++++-
+>  target/riscv/cpu_bits.h        |   4 +
+>  target/riscv/csr.c             |  83 ++++++++++++++---
+>  target/riscv/csr_andes.inc.c   | 160 +++++++++++++++++++++++++++++++++
+>  target/riscv/custom_cpu_bits.h |  12 +++
+>  10 files changed, 462 insertions(+), 15 deletions(-)
+>  create mode 100644 target/riscv/andes_cpu_bits.h
+>  create mode 100644 target/riscv/csr_andes.inc.c
+>  create mode 100644 target/riscv/custom_cpu_bits.h
+>
+> --
+> 2.32.0
+>
 >
 
