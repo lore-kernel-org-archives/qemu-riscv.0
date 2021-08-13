@@ -1,61 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mELW3-0004Qa-VC
-	for mharc-qemu-riscv@gnu.org; Thu, 12 Aug 2021 20:57:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34328)
+	id 1mEMED-00065b-RA
+	for mharc-qemu-riscv@gnu.org; Thu, 12 Aug 2021 21:43:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39966)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mELW1-0004Pv-QS; Thu, 12 Aug 2021 20:57:41 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:45023)
+ id 1mEMEB-00062h-7V; Thu, 12 Aug 2021 21:43:19 -0400
+Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:43526)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mELW0-0008DK-C3; Thu, 12 Aug 2021 20:57:41 -0400
-Received: by mail-il1-x136.google.com with SMTP id i13so9090005ilm.11;
- Thu, 12 Aug 2021 17:57:39 -0700 (PDT)
+ id 1mEME9-0005pk-Uj; Thu, 12 Aug 2021 21:43:19 -0400
+Received: by mail-io1-xd29.google.com with SMTP id y1so11140012iod.10;
+ Thu, 12 Aug 2021 18:43:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=BJELDdo/Vw8F6VWMt1U+3Qx7I97Tle9WvtxsfBgqfVE=;
- b=SlRsXN51XIUUIVs2WDOf6UOQN8GcPm/FHEGwOwdrR6HvnAO3uDTz1jmuqtVEeNL4iZ
- 4B6yeZeOBchEFIh0EBjmvPGtwWHKLtBWY91htJjGGE5KA3XJm/hFhXpCtfNoLFFypYPV
- BleYXS1aPBvwTDd3VkMmgtrp1+jIv7jEz+dW2I1W2/1jEz/hATh6JyJpDfY0JBsMSp1U
- 7WOAf2Qzk7BmkooJc5Mf2C794poV2yLwUyJjHUaeIJvPColiEQw0bDQhMz7oXJjhEmD2
- uv++dzXznX9z2TocHpH1RngLYf1f5RalRmfVdhjX0RxHv3xalx8uCQhGoVQe2kGVlU/s
- iRPw==
+ :cc; bh=CIiPSBRhrt7l92WVusC88oVA7+90joh5Nzx/VnLiPUg=;
+ b=rbhO6QZGqa01Bt31zUF6h2IgqFW9hkCEc3e6wyZ5w19pu/hO0vdfnqQS+vqSpLdPgC
+ Xf3zTxjl2IJVwmUc1UCDi2nfuF2/GAkI+1G5avsFDLh1sZ0uqPKmcWNb7MI/BY4C67Dh
+ MhvHEnPl9doymvEzbuMyKhwda1hK2BdwxmUqyUZJT1gcWvRsB8frWsPbphEzV6eIPDCJ
+ zlS1+n23NmPP2hF305dcYvCNOS7ZhPws/G3trx76or3ldeLlpanrzFFjJj5sE0p2XZGS
+ f1OyZyM2TewyMlEHgBvZfR7X49e+SJFjHm6NmPzRUNkZI5Ih7dNeTPlGG5kxBao8uOxW
+ sRoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=BJELDdo/Vw8F6VWMt1U+3Qx7I97Tle9WvtxsfBgqfVE=;
- b=OB0jLB20i0ciRyVaBafT3gTuUhfkBYca2KdOnhV87c36Ov5d9OSVQXKqWw7bWelFtS
- VAvFSYAIuRO0wPjfYXdWPOA2510J3IUpuSnhO/rOIhwa8S8iNbOhur8HcGDy2ke6kmRX
- 6GYe0Ncru5Qy8e+cStheTtYKPqQjP+uxZkf3IwCpVxpTrY2CpDxS4Zk73/xqnjOrpUjb
- 4wPBlCg6wZE6GZw1eqZaQicm0xQsxD7LpI7TZaCODMjDCDt5HWn2gqNk1xbnP7rrJgfr
- m6O2bGP0bjftgXcGUvyDGw9387OPQDw/rZW8qdsHz4yIpky6B+12N1kF2daIGSyu8hv5
- NPVQ==
-X-Gm-Message-State: AOAM532VXJwKjIPA8ZIwObdvS66i4AF3AYBfrHBU18lb7trlhkaZuzPo
- mzqt/bGulVzb/2ZUsyze9ctmY6AZW6Ugxjo15OI=
-X-Google-Smtp-Source: ABdhPJxqq2PRlLW5I3l3Mw5qxLe8w3BwpWAXZaMgjSWiSKbqq4W9CJPIIm0zGlEwGmin1m+ikjDn8MTvo9QtCfGOEmI=
-X-Received: by 2002:a92:c24d:: with SMTP id k13mr876016ilo.227.1628816258825; 
- Thu, 12 Aug 2021 17:57:38 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=CIiPSBRhrt7l92WVusC88oVA7+90joh5Nzx/VnLiPUg=;
+ b=gq2B6xvAs2f/Grk5uDgE+7S+zV4bXW9gXAME6nkL7ymkZat4AUcQZZamZq6qDn38JB
+ cZHmsaYMAiRfKbrUBbsJNafhhr5DN3kB7xR8TCk7KN8HdPEvK7Bn575RyKxpXlLwXREj
+ rb//XenFi96EhrNjyHzsc3owPEiqq0naTHYU3fCmg43Inkoki2Gxb2Lnb+pvzZCx1yIK
+ X9qSDn6Iq/qTNL2jZqbUH6xL0y0jxnheSH/xmoNhX8uLo7M060p7GRpd6j97Da46uYMJ
+ 8SQ0B/TJWr/0o3BPpykdwuORPTtFTPfROMvHUIfdXfdHBUZI8/y3eVk6h84o78MjzqYp
+ Sbiw==
+X-Gm-Message-State: AOAM533WI9V+LJvY/3GxVjqm1iSMzxzRAbn6rQUV+blJNm3vQ1cVVKN3
+ vY3yrQ65PZnxE/RfFDNweg9UM0xW3DmmB/pZdEM=
+X-Google-Smtp-Source: ABdhPJwNuNoQTVLa9fRorMQI+/5jAOL5MeGQz8dWmKUII4szGAc879GLRavywaAHkJVADv8awL6Amac1slyYmYXQKLI=
+X-Received: by 2002:a6b:e702:: with SMTP id b2mr50893ioh.118.1628818996550;
+ Thu, 12 Aug 2021 18:43:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210812144647.10516-1-peter.maydell@linaro.org>
- <2465bcc8-7e8b-8b5c-71ed-d696f69e0f78@amsat.org>
-In-Reply-To: <2465bcc8-7e8b-8b5c-71ed-d696f69e0f78@amsat.org>
+References: <20210810014552.4884-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20210810014552.4884-1-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 13 Aug 2021 10:57:12 +1000
-Message-ID: <CAKmqyKNFpPJqQ5DTTvSQGBWfB9UW2xrhFf6DJQgB6Zt4ZGp+mw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/virt.c: Assemble plic_hart_config string with
- g_strjoinv()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Fri, 13 Aug 2021 11:42:50 +1000
+Message-ID: <CAKmqyKNGqYyBHEnVQucao1e9f_CLyokFd9F-KA8Ck64BrQrGcw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] target/riscv: Add User CSRs read-only check
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,100 +71,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2021 00:57:42 -0000
+X-List-Received-Date: Fri, 13 Aug 2021 01:43:20 -0000
 
-On Fri, Aug 13, 2021 at 2:17 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
-g> wrote:
+On Tue, Aug 10, 2021 at 11:48 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> Hi Peter,
+> For U-mode CSRs, read-only check is also needed.
 >
-> On 8/12/21 4:46 PM, Peter Maydell wrote:
-> > In the riscv virt machine init function, We assemble a string
-> > plic_hart_config which is a comma-separated list of N copies of the
-> > VIRT_PLIC_HART_CONFIG string.  The code that does this has a
-> > misunderstanding of the strncat() length argument.  If the source
-> > string is too large strncat() will write a maximum of length+1 bytes
-> > (length bytes from the source string plus a trailing NUL), but the
-> > code here assumes that it will write only length bytes at most.
-> >
-> > This isn't an actual bug because the code has correctly precalculated
-> > the amount of memory it needs to allocate so that it will never be
-> > too small (i.e.  we could have used plain old strcat()), but it does
-> > mean that the code looks like it has a guard against accidental
-> > overrun when it doesn't.
-> >
-> > Rewrite the string handling here to use the glib g_strjoinv()
-> > function, which means we don't need to do careful accountancy of
-> > string lengths, and makes it clearer that what we're doing is
-> > "create a comma-separated string".
-> >
-> > Fixes: Coverity 1460752
-> > Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
-> > ---
-> >  hw/riscv/virt.c | 33 ++++++++++++++++++++-------------
-> >  1 file changed, 20 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index 4a3cd2599a5..26bc8d289ba 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -541,6 +541,24 @@ static FWCfgState *create_fw_cfg(const MachineStat=
-e *mc)
-> >      return fw_cfg;
-> >  }
-> >
-> > +/*
-> > + * Return the per-socket PLIC hart topology configuration string
-> > + * (caller must free with g_free())
-> > + */
-> > +static char *plic_hart_config_string(int hart_count)
-> > +{
-> > +    g_autofree const char **vals =3D g_new(const char *, hart_count + =
-1);
-> > +    int i;
-> > +
-> > +    for (i =3D 0; i < hart_count; i++) {
-> > +        vals[i] =3D VIRT_PLIC_HART_CONFIG;
->
-> Have you considered adding plic_hart_config_string() an extra
-> 'const char *plic_config' argument (declaring it in a new
-> include/hw/riscv/plic_hart.h)?
-> We could use it in the other boards:
->
-> hw/riscv/microchip_pfsoc.c:267:            strncat(plic_hart_config, ","
-> MICROCHIP_PFSOC_PLIC_HART_CONFIG,
-> hw/riscv/microchip_pfsoc.c:268:                    plic_hart_config_len);
-> hw/riscv/microchip_pfsoc.c:270:            strncat(plic_hart_config,
-> "M", plic_hart_config_len);
->
-> hw/riscv/sifive_u.c:826:            strncat(plic_hart_config, ","
-> SIFIVE_U_PLIC_HART_CONFIG,
-> hw/riscv/sifive_u.c:827:                    plic_hart_config_len);
-> hw/riscv/sifive_u.c:829:            strncat(plic_hart_config, "M",
-> plic_hart_config_len);
->
-> hw/riscv/virt.c:612:                strncat(plic_hart_config, ",",
-> plic_hart_config_len);
-> hw/riscv/virt.c:614:            strncat(plic_hart_config,
-> VIRT_PLIC_HART_CONFIG,
-> hw/riscv/virt.c:615:                plic_hart_config_len);
->
-> include/hw/riscv/microchip_pfsoc.h:141:#define
-> MICROCHIP_PFSOC_PLIC_HART_CONFIG        "MS"
-> include/hw/riscv/shakti_c.h:63:#define SHAKTI_C_PLIC_HART_CONFIG "MS"
-> include/hw/riscv/sifive_e.h:83:#define SIFIVE_E_PLIC_HART_CONFIG "M"
-> include/hw/riscv/sifive_u.h:147:#define SIFIVE_U_PLIC_HART_CONFIG "MS"
-> include/hw/riscv/virt.h:74:#define VIRT_PLIC_HART_CONFIG "MS"
->
-> Obviously someone else could do that as bytetask, so meanwhile
-> for Coverity 1460752:
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-
-Thanks for fixing this Peter. Would you like this in for 6.1?
-
-If you want I can fix the other boards?
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>  target/riscv/csr.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9a4ed18ac5..5499cae94a 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1422,11 +1422,11 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>      RISCVException ret;
+>      target_ulong old_value;
+>      RISCVCPU *cpu = env_archcpu(env);
+> +    int read_only = get_field(csrno, 0xC00) == 3;
+>
+>      /* check privileges and return -1 if check fails */
+>  #if !defined(CONFIG_USER_ONLY)
+>      int effective_priv = env->priv;
+> -    int read_only = get_field(csrno, 0xC00) == 3;
+>
+>      if (riscv_has_ext(env, RVH) &&
+>          env->priv == PRV_S &&
+> @@ -1439,11 +1439,13 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>          effective_priv++;
+>      }
+>
+> -    if ((write_mask && read_only) ||
+> -        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
+> +    if (!env->debugger && (effective_priv < get_field(csrno, 0x300))) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>  #endif
+> +    if (write_mask && read_only) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+>
+>      /* ensure the CSR extension is enabled. */
+>      if (!cpu->cfg.ext_icsr) {
+> --
+> 2.17.1
+>
+>
 
