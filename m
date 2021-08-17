@@ -1,52 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mFpjD-0000UK-Pz
-	for mharc-qemu-riscv@gnu.org; Mon, 16 Aug 2021 23:25:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48634)
+	id 1mFu0P-0003fY-Mo
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Aug 2021 03:59:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47748)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mFpj6-0008TG-9s; Mon, 16 Aug 2021 23:25:20 -0400
-Received: from szxga02-in.huawei.com ([45.249.212.188]:3111)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mFpj2-0005pF-Sw; Mon, 16 Aug 2021 23:25:20 -0400
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.54])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4GpbsM1BQSz86Xc;
- Tue, 17 Aug 2021 11:21:11 +0800 (CST)
-Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Tue, 17 Aug 2021 11:25:12 +0800
-Received: from huawei.com (10.174.186.236) by dggpemm000001.china.huawei.com
- (7.185.36.245) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Tue, 17 Aug
- 2021 11:25:12 +0800
-From: Yifei Jiang <jiangyifei@huawei.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
- <libvir-list@redhat.com>, <anup.patel@wdc.com>, <palmer@dabbelt.com>,
- <Alistair.Francis@wdc.com>, <bin.meng@windriver.com>, <wu.wubin@huawei.com>,
- <fanliang@huawei.com>, <wanghaibin.wang@huawei.com>, <limingwang@huawei.com>, 
- Yifei Jiang <jiangyifei@huawei.com>
-Subject: [PATCH RFC v6 10/12] target/riscv: Add kvm_riscv_get/put_regs_timer
-Date: Tue, 17 Aug 2021 11:24:45 +0800
-Message-ID: <20210817032447.2055-11-jiangyifei@huawei.com>
-X-Mailer: git-send-email 2.26.2.windows.1
-In-Reply-To: <20210817032447.2055-1-jiangyifei@huawei.com>
-References: <20210817032447.2055-1-jiangyifei@huawei.com>
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mFu0O-0003f1-FE; Tue, 17 Aug 2021 03:59:28 -0400
+Received: from mail-yb1-xb35.google.com ([2607:f8b0:4864:20::b35]:41497)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mFu0N-0006vu-11; Tue, 17 Aug 2021 03:59:28 -0400
+Received: by mail-yb1-xb35.google.com with SMTP id z18so37862482ybg.8;
+ Tue, 17 Aug 2021 00:59:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=bJ6W95dmT060zYltV4yuPKUtPgtgDeDIbDrK09w8OpE=;
+ b=uj+V+mdiXKA/LwXEuWDTsTmg37s4P8wUNx50f8hwpcFyd5LzqWrnFo9CEDJFb/Cro6
+ ecI1461t8VO7eid+fSIXcZVWwgC236L/JO1z7nvU+Z49uHF81mTpsAScByVftI0/0xpY
+ tbp6z/d0eomI10dd0QyVj5V+F/OerHkwYaadHnGElVUo61VGVGr/9g3tl3ubzlrSLBFK
+ sc5F4/BlE9NME6w+N3Kbavz5hv8+Nx+hS/6Z1O6URzE51t8CVp91xaGX+5lVJ6eN1A0f
+ aHioJHedGt+p93JKjU4u9qn3CGm+kaE8ZuTc7SajZgGAj2Dd58NCdwzXQGWdh+EEQDv1
+ A/XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=bJ6W95dmT060zYltV4yuPKUtPgtgDeDIbDrK09w8OpE=;
+ b=k7QccekjTHwoBef99nWM0wLUVNLB8Ld154vNWAHYDispdSnX8CM9J+Wt/Ra4mr7TCY
+ qjSRD1VDkkWxem7r+NyD6OUgM+4Tz+f0t89HYH/z7Y5w5jPKfPnoXn6++uT4IHFqszcw
+ IblJ7BdEo8ID3oRBFNQWJprR1udu+hc2E9tpoAekoAz2dHd3oCr1dXSVVkhEHaXmkDyx
+ Wcj65NSGncYCyBlM0qq3HPbaBLnWV0Zm0Jd+3PHRSP3AsmPPex7+D27uchUt9THTnSuh
+ 1aOTxqSErczY8UjqDSqlpuk6wXdMCFaxjG4gxDG5FOfHh/6F/4eVUkWBkyNgsk+BZok7
+ UaRQ==
+X-Gm-Message-State: AOAM531D3nJfzIKfgZDTutrqOGTTw3vbyN5d14oNsCeuz68C/xi06WWf
+ mdjx6K/NetsJmrm1TvwQV8CJ4auik4+6GXpvnUo=
+X-Google-Smtp-Source: ABdhPJwVjV4mmygLjLlO0UiLlhciQK2qf1ubeDMYlFvNTA26zXb+aUXy80DjVXljNnwtpZNzCj7wvsLcDf3poTU/8rc=
+X-Received: by 2002:a25:2646:: with SMTP id m67mr2847478ybm.122.1629187165804; 
+ Tue, 17 Aug 2021 00:59:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.186.236]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpemm000001.china.huawei.com (7.185.36.245)
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.188;
- envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+References: <20210816183655.18492-1-david@salt-inc.org>
+In-Reply-To: <20210816183655.18492-1-david@salt-inc.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 17 Aug 2021 15:59:13 +0800
+Message-ID: <CAEUhbmUKRD3quokpurMPBhfuONu=DRBcL29WLUPQu6fy0iiM1A@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/intc/sifive_clint: Fix overflow in
+ sifive_clint_write_timecmp()
+To: David Hoppenbrouwers <david@salt-inc.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b35;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb35.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -60,130 +71,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2021 03:25:21 -0000
+X-List-Received-Date: Tue, 17 Aug 2021 07:59:28 -0000
 
-Add kvm_riscv_get/put_regs_timer to synchronize virtual time context
-from KVM.
+On Tue, Aug 17, 2021 at 2:38 AM David Hoppenbrouwers <david@salt-inc.org> wrote:
+>
+> `next` is an `uint64_t` value, but `timer_mod` takes an `int64_t`. This
+> resulted in high values such as `UINT64_MAX` being converted to `-1`,
+> which caused an immediate timer interrupt.
+>
+> By limiting `next` to `INT64_MAX` no overflow will happen while the
+> timer will still be effectively set to "infinitely" far in the future.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/493
+> Signed-off-by: David Hoppenbrouwers <david@salt-inc.org>
+> ---
+> I wrongly used `MAX` instead of `MIN`. I've amended the patch.
+>
+>  hw/intc/sifive_clint.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
 
-To set register of RISCV_TIMER_REG(state) will occur a error from KVM
-on kvm_timer_state == 0. It's better to adapt in KVM, but it doesn't matter
-that adaping in QEMU.
-
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Signed-off-by: Mingwang Li <limingwang@huawei.com>
----
- target/riscv/cpu.h |  6 ++++
- target/riscv/kvm.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 78 insertions(+)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 720cb688bb..42ed9b1232 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -247,6 +247,12 @@ struct CPURISCVState {
- 
-     hwaddr kernel_addr;
-     hwaddr fdt_addr;
-+
-+    /* kvm timer */
-+    bool kvm_timer_dirty;
-+    uint64_t kvm_timer_time;
-+    uint64_t kvm_timer_compare;
-+    uint64_t kvm_timer_state;
- };
- 
- OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index a68f31c2f3..d1ab4b1247 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -59,6 +59,9 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
- #define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
-                  KVM_REG_RISCV_CSR_REG(name))
- 
-+#define RISCV_TIMER_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_TIMER, \
-+                 KVM_REG_RISCV_TIMER_REG(name))
-+
- #define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
- 
- #define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
-@@ -305,6 +308,75 @@ static int kvm_riscv_put_regs_fp(CPUState *cs)
-     return ret;
- }
- 
-+static void kvm_riscv_get_regs_timer(CPUState *cs)
-+{
-+    int ret;
-+    uint64_t reg;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-+    if (env->kvm_timer_dirty) {
-+        return;
-+    }
-+
-+    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
-+    if (ret) {
-+        abort();
-+    }
-+    env->kvm_timer_time = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
-+    if (ret) {
-+        abort();
-+    }
-+    env->kvm_timer_compare = reg;
-+
-+    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
-+    if (ret) {
-+        abort();
-+    }
-+    env->kvm_timer_state = reg;
-+
-+    env->kvm_timer_dirty = true;
-+}
-+
-+static void kvm_riscv_put_regs_timer(CPUState *cs)
-+{
-+    int ret;
-+    uint64_t reg;
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+
-+    if (!env->kvm_timer_dirty) {
-+        return;
-+    }
-+
-+    reg = env->kvm_timer_time;
-+    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
-+    if (ret) {
-+        abort();
-+    }
-+
-+    reg = env->kvm_timer_compare;
-+    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
-+    if (ret) {
-+        abort();
-+    }
-+
-+    /*
-+     * To set register of RISCV_TIMER_REG(state) will occur a error from KVM
-+     * on env->kvm_timer_state == 0, It's better to adapt in KVM, but it
-+     * doesn't matter that adaping in QEMU now.
-+     * TODO If KVM changes, adapt here.
-+     */
-+    if (env->kvm_timer_state) {
-+        reg = env->kvm_timer_state;
-+        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
-+        if (ret) {
-+            abort();
-+        }
-+    }
-+
-+    env->kvm_timer_dirty = false;
-+}
- 
- const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
-     KVM_CAP_LAST_INFO
--- 
-2.19.1
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
