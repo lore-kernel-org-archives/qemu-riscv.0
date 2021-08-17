@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mG6TW-0001KT-Mv
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Aug 2021 17:18:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43476)
+	id 1mG6TY-0001PT-KI
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Aug 2021 17:18:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mG6TU-0001Cy-Lg
- for qemu-riscv@nongnu.org; Tue, 17 Aug 2021 17:18:20 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:39704)
+ id 1mG6TV-0001Es-2K
+ for qemu-riscv@nongnu.org; Tue, 17 Aug 2021 17:18:21 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:41901)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mG6TS-00015q-2t
+ id 1mG6TT-00016Z-DR
  for qemu-riscv@nongnu.org; Tue, 17 Aug 2021 17:18:20 -0400
-Received: by mail-pf1-x434.google.com with SMTP id t13so5173pfl.6
- for <qemu-riscv@nongnu.org>; Tue, 17 Aug 2021 14:18:17 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ fa24-20020a17090af0d8b0290178bfa69d97so999274pjb.0
+ for <qemu-riscv@nongnu.org>; Tue, 17 Aug 2021 14:18:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=VfaTNl6cZJeuhpoWMW6b1lJ/gL2AkVre0lGbvDe+dvQ=;
- b=UND8A57WXN1a7YFdKXdeJNup1uzGMa7pf8H3ejNaffID9qtwq2PWTfC9p5hA4xuIUC
- QKTZATkr7/vL4oZSr6AKZfpdUGX7UZPsR6zvQY+5nF3JMz4bGgqPKAZwcAtRZgjhCuho
- neCo5CGlcSMpiMl1XclH6vsoo+EsyuwVOsCVLg2jdIklNJuWLtj7qNa2349nb2vuKkfR
- +2ehTl9FLquICbb3XCvnuzrxM/tj8lArNdMSDHlaoyxiO3BfumI/A5DzQMzS22OJhS9L
- iwtB8kTvFsmwapiGifa6bKJoTlG8kPyL9B2oLca2OoF6G1YQUMEYn6pegvsWEzZxnGPW
- b24Q==
+ bh=FKk3gKLqNs/bvrOCnSxgsN6keLZuijuTaadD/gSjvLU=;
+ b=gqPNmcPmI7gEr+l7EkTfYUEQAAmeJVHxdtfhRt1iSk63JYzFszNkICy9csYGfdJztN
+ AjV/Wv9I2w0jjzoQx8P8O1FJTHy1NYIjkK5LVD0YE2kJeNeW7Lddwzq2xW2YP/hUgJnN
+ ig3oS+KWk9LZc+Jj5GgCDNk+L9YbGNVFLRACf8qQMaKnKEGTLzgdxJgXd0llyLpJOAE/
+ hBkj0jtrBFSOxla3hEHs1WMt4BeCIxGLhT6xXVJMTWj6RS5GtjJZ9bQ4sZy88uqhOjD6
+ jeq5i4zp478ONztR6Iy4a/01Iq0ImqRuBNOl+gQPmm689rEGjb3o+VPR2wl1KzmjZik4
+ BtVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=VfaTNl6cZJeuhpoWMW6b1lJ/gL2AkVre0lGbvDe+dvQ=;
- b=jnV8NW1wTyTn5c7k1Zwr/4IFHGYzAnHUoIiFu41f7ET5OfkxZfqZkv/WsUmC8Sq1PH
- GSMUQ8HMlyeDe/VnQ82YZ4EfUmo3LsLVOKfvm6BVrX9e04ZoDetRg4WXkBUk8PCg4Hox
- NzXai5LhDR9tVIBTFlLqdepev6bCc7JO/GPUJ0uGa9dXMnaMT/uBqfvbY97X90O8wK0G
- 4doo1XmVRdLpFD+sSJzJeif9t/Srspnmim7msQUvkmUhC5G2Pzoo8UFEDOelJJIFria/
- pkV4aDjgzfEss6bbW/x2NWDja+XOwJZNUZCUYM84LO+aIEPRcz9ocLTnWvTc1ZRCPkaQ
- 2WIA==
-X-Gm-Message-State: AOAM531aw4esLPjIteoesUGna0Fa2XMFsz1I/0lAd3B0hL3QgGfHq4WN
- 4WmZCo9+I5riulBAir8/ttWI2Q==
-X-Google-Smtp-Source: ABdhPJwMtLQ0cPpXaX694Lbxc7N0YLZKuHXo2b2+i66zelrQV72dvmM0RjVkz3WQQsij+t+IfNpk3Q==
-X-Received: by 2002:a65:63d0:: with SMTP id n16mr5263861pgv.432.1629235096661; 
- Tue, 17 Aug 2021 14:18:16 -0700 (PDT)
+ bh=FKk3gKLqNs/bvrOCnSxgsN6keLZuijuTaadD/gSjvLU=;
+ b=ApsdPoQpVRvPNYCzeGOlPUWCPwjLNttZBAj6dz/GFcHLntPUUG/prHskqB0F71BYSV
+ 0XomFg4Q1NynJwo1DsAuQcxyj8DVW4rmU+sQT9lPjQClezS+vHE1yShJag0rHkp3lpNR
+ YWfH6tdDQN0Z457UN+mVMpsb+0kNWsfl8N+vQ9DN35kOxqmo4Wdy+ZjJoYLXpipMo6Vu
+ EtjqPNBzGTDJt8psSFrNcwLEZC/NyZKCm3kFVDylKupJDIVXBaMUOHlwN3GswaS0TgX5
+ ZE66kryzPE1fcU9AjIkJm5bkRLtObaAYzDxpdxM6K+NYyVjUdyPj0usOiHcMDrQCi0Mg
+ cAtw==
+X-Gm-Message-State: AOAM533Dh8xk93lNgBCr1dst6vVmFuSTwjedSpqFVMq6NfXREw4fKjuP
+ auWlaAe4z0oa4zL+VxtwZuUkxA==
+X-Google-Smtp-Source: ABdhPJztC1wppeNXHzEnUvt+acAah9Z/oqeMdD71tM4S8I8wsdynEzQ7EbKZUszRB/H5cz0YdT/+Nw==
+X-Received: by 2002:a17:90a:74ca:: with SMTP id
+ p10mr5492667pjl.0.1629235098020; 
+ Tue, 17 Aug 2021 14:18:18 -0700 (PDT)
 Received: from localhost.localdomain ([173.197.107.15])
- by smtp.gmail.com with ESMTPSA id q1sm2978637pjl.44.2021.08.17.14.18.15
+ by smtp.gmail.com with ESMTPSA id q1sm2978637pjl.44.2021.08.17.14.18.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Aug 2021 14:18:16 -0700 (PDT)
+ Tue, 17 Aug 2021 14:18:17 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, zhiwei_liu@c-sky.com, Alistair.Francis@wdc.com,
  bin.meng@windriver.com
-Subject: [PATCH v2 06/21] target/riscv: Remove gen_arith_div*
-Date: Tue, 17 Aug 2021 11:17:48 -1000
-Message-Id: <20210817211803.283639-7-richard.henderson@linaro.org>
+Subject: [PATCH v2 07/21] target/riscv: Use gen_arith for mulh and mulhu
+Date: Tue, 17 Aug 2021 11:17:49 -1000
+Message-Id: <20210817211803.283639-8-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210817211803.283639-1-richard.henderson@linaro.org>
 References: <20210817211803.283639-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,110 +80,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 17 Aug 2021 21:18:21 -0000
 
-Use ctx->w and the enhanced gen_arith function.
+Split out gen_mulh and gen_mulhu and use the common helper.
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c                | 42 -------------------------
- target/riscv/insn_trans/trans_rvm.c.inc | 16 +++++-----
- 2 files changed, 8 insertions(+), 50 deletions(-)
+ target/riscv/insn_trans/trans_rvm.c.inc | 40 +++++++++++--------------
+ 1 file changed, 18 insertions(+), 22 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 4819682bf1..e337dca01b 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -491,48 +491,6 @@ static bool gen_arith_imm_tl(DisasContext *ctx, arg_i *a, DisasExtend ext,
-     return true;
- }
- 
--static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
--                            void(*func)(TCGv, TCGv, TCGv))
--{
--    TCGv source1, source2;
--    source1 = tcg_temp_new();
--    source2 = tcg_temp_new();
--
--    gen_get_gpr(ctx, source1, a->rs1);
--    gen_get_gpr(ctx, source2, a->rs2);
--    tcg_gen_ext32s_tl(source1, source1);
--    tcg_gen_ext32s_tl(source2, source2);
--
--    (*func)(source1, source1, source2);
--
--    tcg_gen_ext32s_tl(source1, source1);
--    gen_set_gpr(ctx, a->rd, source1);
--    tcg_temp_free(source1);
--    tcg_temp_free(source2);
--    return true;
--}
--
--static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
--                            void(*func)(TCGv, TCGv, TCGv))
--{
--    TCGv source1, source2;
--    source1 = tcg_temp_new();
--    source2 = tcg_temp_new();
--
--    gen_get_gpr(ctx, source1, a->rs1);
--    gen_get_gpr(ctx, source2, a->rs2);
--    tcg_gen_ext32u_tl(source1, source1);
--    tcg_gen_ext32u_tl(source2, source2);
--
--    (*func)(source1, source1, source2);
--
--    tcg_gen_ext32s_tl(source1, source1);
--    gen_set_gpr(ctx, a->rd, source1);
--    tcg_temp_free(source1);
--    tcg_temp_free(source2);
--    return true;
--}
--
- static void gen_pack(TCGv ret, TCGv arg1, TCGv arg2)
- {
-     tcg_gen_deposit_tl(ret, arg1, arg2,
 diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
-index 013b3f7009..3d93b24c25 100644
+index 3d93b24c25..80552be7a3 100644
 --- a/target/riscv/insn_trans/trans_rvm.c.inc
 +++ b/target/riscv/insn_trans/trans_rvm.c.inc
-@@ -99,30 +99,30 @@ static bool trans_divw(DisasContext *ctx, arg_divw *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_w(ctx, a, &gen_div);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_SIGN, gen_div);
+@@ -25,20 +25,18 @@ static bool trans_mul(DisasContext *ctx, arg_mul *a)
+     return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl);
  }
  
- static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
++static void gen_mulh(TCGv ret, TCGv s1, TCGv s2)
++{
++    TCGv discard = tcg_temp_new();
++
++    tcg_gen_muls2_tl(discard, ret, s1, s2);
++    tcg_temp_free(discard);
++}
++
+ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
  {
-     REQUIRE_64BIT(ctx);
      REQUIRE_EXT(ctx, RVM);
+-    TCGv source1 = tcg_temp_new();
+-    TCGv source2 = tcg_temp_new();
+-    gen_get_gpr(ctx, source1, a->rs1);
+-    gen_get_gpr(ctx, source2, a->rs2);
 -
--    return gen_arith_div_uw(ctx, a, &gen_divu);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_ZERO, gen_divu);
+-    tcg_gen_muls2_tl(source2, source1, source1, source2);
+-
+-    gen_set_gpr(ctx, a->rd, source1);
+-    tcg_temp_free(source1);
+-    tcg_temp_free(source2);
+-    return true;
++    return gen_arith(ctx, a, EXT_NONE, gen_mulh);
  }
  
- static bool trans_remw(DisasContext *ctx, arg_remw *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_w(ctx, a, &gen_rem);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_SIGN, gen_rem);
+ static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+@@ -47,20 +45,18 @@ static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+     return gen_arith(ctx, a, EXT_NONE, gen_mulhsu);
  }
  
- static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
++static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
++{
++    TCGv discard = tcg_temp_new();
++
++    tcg_gen_mulu2_tl(discard, ret, s1, s2);
++    tcg_temp_free(discard);
++}
++
+ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
  {
-     REQUIRE_64BIT(ctx);
      REQUIRE_EXT(ctx, RVM);
+-    TCGv source1 = tcg_temp_new();
+-    TCGv source2 = tcg_temp_new();
+-    gen_get_gpr(ctx, source1, a->rs1);
+-    gen_get_gpr(ctx, source2, a->rs2);
 -
--    return gen_arith_div_uw(ctx, a, &gen_remu);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_ZERO, gen_remu);
+-    tcg_gen_mulu2_tl(source2, source1, source1, source2);
+-
+-    gen_set_gpr(ctx, a->rd, source1);
+-    tcg_temp_free(source1);
+-    tcg_temp_free(source2);
+-    return true;
++    return gen_arith(ctx, a, EXT_NONE, gen_mulhu);
  }
+ 
+ static bool trans_div(DisasContext *ctx, arg_div *a)
 -- 
 2.25.1
 
