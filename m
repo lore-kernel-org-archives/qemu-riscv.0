@@ -1,69 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mG7Re-000298-Mr
-	for mharc-qemu-riscv@gnu.org; Tue, 17 Aug 2021 18:20:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55070)
+	id 1mG7Vh-00044A-IM
+	for mharc-qemu-riscv@gnu.org; Tue, 17 Aug 2021 18:24:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55804)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mG7Rd-000281-SX; Tue, 17 Aug 2021 18:20:29 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:33345)
+ id 1mG7Vf-00043i-Pn; Tue, 17 Aug 2021 18:24:39 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:46996)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mG7Rc-0000ia-D3; Tue, 17 Aug 2021 18:20:29 -0400
-Received: by mail-wr1-x435.google.com with SMTP id r7so401747wrs.0;
- Tue, 17 Aug 2021 15:20:27 -0700 (PDT)
+ id 1mG7Ve-0003L5-EL; Tue, 17 Aug 2021 18:24:39 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ h24-20020a1ccc180000b029022e0571d1a0so471386wmb.5; 
+ Tue, 17 Aug 2021 15:24:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=B8syXq/wON7LTURwzevCz5EmrV6lvEq/4r5XnxCZrBY=;
- b=LFQakOQxutgU0qZ5doI8dVlALqQSZcxh97ItO4OeNlEc8bMz0CwfBnAyN0E8UaILAX
- SQn6TAXWfHbzX63FII3ITbmQSTAXewxlwGfp9+praA4tojplfwsr4vSKkCGQG9BLFIcX
- mG9ifNZ5XkbePRSRMmvX7afxhULjv5fLB9SEd850zIvdVa3U/jQ+o5OJ3Ox0EkC005J/
- u7cbDSFyFX/ETcWXs2UodiiADmMdnn6/KCWTC7upWZfStO9foiIyuZuLXb552O04cXhp
- iK1iiumzQv21V6fdWcsKiH3n3mZ7uqeWM15Fz6+58irQV/Dqy3XOfGXWB6WZk0LBi5ke
- 1Cig==
+ bh=La2XNtwsoqf6TVEt7iBNEed0xsqhfNl7IrDtDJqpbbk=;
+ b=gDh/H3UvWJHPXmNbmWlzWbaKOzYJ+Ytv8liQBuDzbU4EEyetq71lL+tSfPHwZXVlc5
+ 3FngOppqO4OLqDWoxglBWuAB/UV27czeZmsQoSqX7PNnuajbf4GlTK/ULxaFyVQHW3Pz
+ XXvsYhSNap/UVgAEfpwD6Vm40vGZJeIFM8XWgiZrp9L+1Qx83+CWkr5IAU5KFgcE6Bpg
+ nn2wOBbRKAqNDqwWRstzrxOLhWkE/V2h9fKv4wnANfSzLBaIHhA3eYae4h+JCRP3iia6
+ GsNvAuXRjOg2L9vhQfPQ7PulsgWf5P3BMgatbQnV+pK6ZauA5WM3IB7tQyFY3jSa19FB
+ FrtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=B8syXq/wON7LTURwzevCz5EmrV6lvEq/4r5XnxCZrBY=;
- b=sGbOKXiEPkyadoVVoPd21gV4YSmSGV/u8eII5HMjts1bt+6X+JsTEH8bpcqnjryMnT
- FwrX8wyVcC4RGceFaS7Jo1JHG+zq5v5cZ9TYMd4jIRwXJXweDo0X+qCkf72Vomr0ALKN
- DggA8yqF92e2dObJuLxkyuWLwrfXe2QYwvVkUl+wMdhEFgKKAWn9RFbmR+2Dh7sdgv1G
- LDZjP7/IUVYthb/gC9C2y/+rFLMxTf66QR7aHqe+IzUKp4og417huxUg8NHLSb/gKVt+
- KYCWCsMWUE9l9C1s5qYEUpVMoS/oybVbD6Buooxj/j7vf1LXNR25+jjLgO+3mYsMHb5v
- tg2w==
-X-Gm-Message-State: AOAM530xIeKZvQoHqdVZfvSTxgOLZVMbD+mYwqYCPu1Xx7H7MXy7R15i
- UkgLrQYOsBqPucieuSMrt+A=
-X-Google-Smtp-Source: ABdhPJyU+Ks7+jYfvaH3XYTIM7uWGiY7P1XBbggTRJ8H0HHoi/eoVUOC8LWaaw3MSzTc+nr3dDkdkQ==
-X-Received: by 2002:a05:6000:184a:: with SMTP id
- c10mr6910659wri.26.1629238826705; 
- Tue, 17 Aug 2021 15:20:26 -0700 (PDT)
+ bh=La2XNtwsoqf6TVEt7iBNEed0xsqhfNl7IrDtDJqpbbk=;
+ b=h9TkELQvxAR65aOMlBuzVemsAFfxaYDs8SC/uBA77iRT0Tjq/IgN3DBOGPhJ7byMtv
+ lu8tObk5PXpU2AwxuCWIm1JGtw/2+4O0BQv99u9eLW5GHQPzI+QgK9NHKXiAUAXtakxR
+ LQZwaXtBuZcXIMxpmJGg+0q3HN0ZtuNzqDBZHrICo2NSYRwner1NIRdtExyYSqT1cMBp
+ gEFcxfu0b4JxIREVMvKu+E5ccQwi1QEsdojZJURe7WP814SPP/qRoWBkNTpm87XIJeC/
+ F//cS3JirppCUZO2B0JPXby60qZOguPqEnwGW7/8w64oA9P0/ID0NgR18jEnLL3WhJlu
+ GLgQ==
+X-Gm-Message-State: AOAM530/BoGUYjlK2mY9Dz9PTLMKjYvn4G+q+KONlc716cHvbTEK/Err
+ vCXKTAjYaNgtvbZHT6eh7so=
+X-Google-Smtp-Source: ABdhPJxQAfFoGeNMR48DQKuhZsa/IMwb0DEmUfpQOK5eGkDtWVvhhozT9r/h4Evkyfmtoko1h68SXg==
+X-Received: by 2002:a05:600c:4f13:: with SMTP id
+ l19mr5223813wmq.171.1629239076668; 
+ Tue, 17 Aug 2021 15:24:36 -0700 (PDT)
 Received: from [192.168.1.36] (163.red-83-52-55.dynamicip.rima-tde.net.
  [83.52.55.163])
- by smtp.gmail.com with ESMTPSA id m10sm4959864wro.63.2021.08.17.15.20.25
+ by smtp.gmail.com with ESMTPSA id d4sm4238169wrc.34.2021.08.17.15.24.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Aug 2021 15:20:25 -0700 (PDT)
+ Tue, 17 Aug 2021 15:24:36 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 09/21] target/riscv: Move gen_* helpers for RVB
+Subject: Re: [PATCH v2 20/21] target/riscv: Tidy trans_rvh.c.inc
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: Alistair.Francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  zhiwei_liu@c-sky.com
 References: <20210817211803.283639-1-richard.henderson@linaro.org>
- <20210817211803.283639-10-richard.henderson@linaro.org>
+ <20210817211803.283639-21-richard.henderson@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <e9d2a2fc-5f4a-d316-3dcc-612d8f8a95b8@amsat.org>
-Date: Wed, 18 Aug 2021 00:20:24 +0200
+Message-ID: <ba8b22ea-fab9-7643-ff2d-e5f432bea768@amsat.org>
+Date: Wed, 18 Aug 2021 00:24:34 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210817211803.283639-10-richard.henderson@linaro.org>
+In-Reply-To: <20210817211803.283639-21-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -84,17 +85,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2021 22:20:30 -0000
+X-List-Received-Date: Tue, 17 Aug 2021 22:24:40 -0000
 
-On 8/17/21 11:17 PM, Richard Henderson wrote:
-> Move these helpers near their use by the trans_*
-> functions within insn_trans/trans_rvb.c.inc.
+On 8/17/21 11:18 PM, Richard Henderson wrote:
+> Exit early if check_access fails.
+> Split out do_hlv, do_hsv, do_hlvx subroutines.
+> Use dest_gpr, get_gpr in the new subroutines.
 > 
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/riscv/translate.c                | 233 -----------------------
->  target/riscv/insn_trans/trans_rvb.c.inc | 234 ++++++++++++++++++++++++
->  2 files changed, 234 insertions(+), 233 deletions(-)
+>  target/riscv/insn32.decode              |   1 +
+>  target/riscv/insn_trans/trans_rvh.c.inc | 266 +++++-------------------
+>  2 files changed, 57 insertions(+), 210 deletions(-)
+
+Nice diffstat ;)
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
