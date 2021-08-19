@@ -1,79 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mGXN3-0000Qv-5P
-	for mharc-qemu-riscv@gnu.org; Wed, 18 Aug 2021 22:01:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46302)
+	id 1mGY0d-0002LO-0e
+	for mharc-qemu-riscv@gnu.org; Wed, 18 Aug 2021 22:42:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51342)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mGXN1-0000Qd-Aq
- for qemu-riscv@nongnu.org; Wed, 18 Aug 2021 22:01:27 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:55058)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mGY0b-0002LC-O5; Wed, 18 Aug 2021 22:42:21 -0400
+Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:45851)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mGXMz-0000ou-Om
- for qemu-riscv@nongnu.org; Wed, 18 Aug 2021 22:01:27 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id n5so3899506pjt.4
- for <qemu-riscv@nongnu.org>; Wed, 18 Aug 2021 19:01:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=knKjiCC6/j+JobsnbbtyeLLSFxaiTN3u5jndQ+eQxXs=;
- b=JzbthldYF36kWrOUqCtLhUgdJ5HSSJqLAIagiFm8+ayHXcR1tlvJPD4oei08wCMHBn
- BYRMx1mthsgEwKsxmlCztia0RACsRZXpmjcHNFtLK6lBAzd6oszVbw2abTEI9GrLpk+0
- jiRhtjXw2JULtxhrJyCkAeaRMFK63B17X/qz0DxYgr+m5G+6Bf20hKVGhG3tnxwUFx8L
- QxKAY1agCrdAJF3BhLbWMJ7fG4gKHM9wY7DMxUcOab1VDpdHAFGJ16RRSE518vexuojK
- Ji7Q2hnaCsFaCU7HP5JbYH6SQGRIR/8PQlTbbjR/lSWRFqCeXvQFJqwGGuOS09bAHN6y
- xk1Q==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mGY0a-0004e7-6y; Wed, 18 Aug 2021 22:42:21 -0400
+Received: by mail-yb1-xb2c.google.com with SMTP id l144so9318466ybl.12;
+ Wed, 18 Aug 2021 19:42:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=OFTGxnjrBAKsZjjygBOr4v/5ZZ6y5gk1a86/IN51sdY=;
+ b=BTol7tH35KP7K+FOF5cfiXfmEL9yCy9LwGcCWHdGE+vrSJVR2uJXqzShFAWWAe6A0D
+ 3LL1WgBwlSgI5Bn/e1Llsx4srBdPh7fCsVzKVoz1Cbc+4hbzzxWqhWOP+SsCVNomm6mG
+ 2Cj3ifyddG/WLyeMxx6qqgV0cJDxoQaEMcdAAm49v4ix5apcgZI7W7cDMDkr0u5MvPD+
+ y1T3ttCcNTjf4aiq/iDnk6WpCkoJlcl3X+rkVrbSyOvZBJ6gIRYLW0fCsTqe8QLVLQgA
+ yP1Aq2l3NXnoC7b1UHsPeMFMsLowsHe8byliATwSEFKRZiAKMx49z2xfBcQfBN+aVi+O
+ md0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=knKjiCC6/j+JobsnbbtyeLLSFxaiTN3u5jndQ+eQxXs=;
- b=q3/R4ZAwrC1k10BEH3LbfX07oYAlfSe0oST8WL/MsN892/D1igryByhsDzqD0JYBps
- f2v8Ak3dF1Nslq6ZbIBqEDTMgMDLOHD9iPU9rc6NlroNNrb/FY0AqgMRDSIhvaOa+hDo
- xWaxTVhX9PGxdPYiBSykzIcrGc5yy8YHma5s//B4cPzBLhyPLgM5xUzPqxINrkVX/LWo
- 9TxLvRXWgAO6+c00FdFQLfkbn/aMHDtWPUlfTZzIIhoX4EpviO2wQLziWMv+EVw3UhgN
- 4Z2Cs459eaAu1frligQlMi/U8cZzXGmQzbs3rrO7cXosa9YeX/r4VMPcNRV+Gb6zCsLr
- RyHA==
-X-Gm-Message-State: AOAM533nmOBA9NS9W6zuuukwP6FPEBHxg8Up9gLru75YICQQQxMgODp6
- XLrI3eVUkvTEGcDwnpDloRg5hw==
-X-Google-Smtp-Source: ABdhPJzWLw08gywoORUWwuckV287cHYqyHYZnYHoF7HLNlHIhIInZxE91q4egEZMCLbtyr8VXp4c7Q==
-X-Received: by 2002:a17:90a:6f61:: with SMTP id
- d88mr12691831pjk.139.1629338483840; 
- Wed, 18 Aug 2021 19:01:23 -0700 (PDT)
-Received: from [192.168.3.43] ([173.197.107.15])
- by smtp.gmail.com with ESMTPSA id t22sm1241021pgv.35.2021.08.18.19.01.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Aug 2021 19:01:23 -0700 (PDT)
-Subject: Re: [PATCH v2 04/21] target/riscv: Introduce DisasExtend and new
- helpers
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, liuzhiwei <zhiwei_liu@c-sky.com>
-References: <20210817211803.283639-1-richard.henderson@linaro.org>
- <20210817211803.283639-5-richard.henderson@linaro.org>
- <CAEUhbmXT-Hbrm6YJMuyBtuQrB3D0wt3pkQHNpPCqB8m0Ek3PFg@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <7a7fb816-57de-3846-f025-a10bfee514e3@linaro.org>
-Date: Wed, 18 Aug 2021 16:01:19 -1000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=OFTGxnjrBAKsZjjygBOr4v/5ZZ6y5gk1a86/IN51sdY=;
+ b=TJGNCawwkPX5dv8a8NzJ4rsFolhg3OEPq6X0+sVS+BLn429QljXdbsoA2MCup54E9S
+ 9y7kBpJFdhSklmp2s6QUwsLz/pHjNQPAmjvD7I0uyKsbhglmejtg51AbtghS98t1QHdc
+ 3g1Jl7l4ZXUub+HyZCJ1t3CqPGINOjidfnG00+MT+y7BhJjh/GBiZqHgO8Eh+m1ZDeBq
+ 5JE0sA9Pe6FMyQywMGkY9lAKD6mX86nylHiIal10+COlEiDFG4lM+9SH/I7stJL2fkw1
+ NFEIEFqLzgqIruYtgjt1Z75dcvIWxqf6TdJXD0GKd05DSyEX7GmwI+GGrmoywG5JocTs
+ IBTQ==
+X-Gm-Message-State: AOAM532ndIqqCxkNX9tX+yokZN+azM4sLekZrRJ9cqZC8drRy7AABmXC
+ vjPelxAtsq6Jpd+iI5k52880Tzacr8qvEi8WauI=
+X-Google-Smtp-Source: ABdhPJxqyPrsgFhzga86ps03aEFteokThy+O1mB8//v1lvagtpE8gHumhyGPxLNVY+Eh7f/kZ90vXY8sk9ziZM3dLL0=
+X-Received: by 2002:a25:6d44:: with SMTP id i65mr14765368ybc.517.1629340939140; 
+ Wed, 18 Aug 2021 19:42:19 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAEUhbmXT-Hbrm6YJMuyBtuQrB3D0wt3pkQHNpPCqB8m0Ek3PFg@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
-X-Spam_score_int: -40
-X-Spam_score: -4.1
-X-Spam_bar: ----
-X-Spam_report: (-4.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.961,
+References: <20210817211803.283639-1-richard.henderson@linaro.org>
+ <20210817211803.283639-6-richard.henderson@linaro.org>
+In-Reply-To: <20210817211803.283639-6-richard.henderson@linaro.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 19 Aug 2021 10:42:08 +0800
+Message-ID: <CAEUhbmWoJcWwsVGMfjL9f6fdv1Zw80hD7c=NmjYzWousSk8JOw@mail.gmail.com>
+Subject: Re: [PATCH v2 05/21] target/riscv: Add DisasExtend to gen_arith*
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ liuzhiwei <zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,14 +71,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2021 02:01:27 -0000
+X-List-Received-Date: Thu, 19 Aug 2021 02:42:22 -0000
 
-On 8/18/21 12:58 AM, Bin Meng wrote:
->> +    TCGv temp[4];
-> 
-> Why is 4? Is it enough? Perhaps a comment here is needed here?
+On Wed, Aug 18, 2021 at 5:23 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Most arithmetic does not require extending the inputs.
+> Exceptions include division, comparison and minmax.
+>
+> Begin using ctx->w, which allows elimination of gen_addw,
+> gen_subw, gen_mulw.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/riscv/translate.c                | 69 +++++++------------------
+>  target/riscv/insn_trans/trans_rvb.c.inc | 30 +++++------
+>  target/riscv/insn_trans/trans_rvi.c.inc | 39 ++++++++------
+>  target/riscv/insn_trans/trans_rvm.c.inc | 16 +++---
+>  4 files changed, 64 insertions(+), 90 deletions(-)
+>
 
-It's a round number that will cover three operands plus an extra for address computation.
-
-r~
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
