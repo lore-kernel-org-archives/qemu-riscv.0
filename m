@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mH8Y6-0005PW-Fp
+	id 1mH8Y6-0005QL-MH
 	for mharc-qemu-riscv@gnu.org; Fri, 20 Aug 2021 13:43:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48854)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8Xw-0005HX-4S
- for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:12 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d]:44645)
+ id 1mH8Xz-0005IF-JE
+ for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:15 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:34446)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8Xo-0003mR-6f
- for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:10 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id q2so6338411plr.11
- for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:03 -0700 (PDT)
+ id 1mH8Xu-0003p5-4Z
+ for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:15 -0400
+Received: by mail-pl1-x636.google.com with SMTP id j2so1939364pll.1
+ for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=YPXGjkn0mYe80l5rl/+SCjeogJVWh1RK+Rt+eBlCPmY=;
- b=RFOpHfrOFnQ/3S6+uBTXJgQAmT5ySyAtYjUr/FLr20a3/jQWofkBlOrVQuOybibHQZ
- S6FAx78Uopl3LMdso2zjlsNsbJ3BOuIKF3lELPF/f8EM/iNwJTPEQaU4/UODuy0uHlFm
- Xy9PNYHJjDVux75aRxbyea8xVS/ZgLZOZV/zr3kgLoNxVBS+uscE3SJFNnZOhfQIdIeC
- agogoP94AGhY8TidXKG+z3cBlkgPrC576pSOVUaHKJBBUU5ypcMJYyKLPu5BpSc1uEHC
- mDZoDvUKA1ZswsKkUcnAryjR/PIEwxG9R6gCJxue88ifOPZnxHpqgf2+crVn8KQehR1F
- lrNQ==
+ bh=emLVyZgk8V+4EepyTW82j36YqwzNa65gUTI3He6kgJE=;
+ b=x18hvmumf+L4pOQKRQ6suNO+Kk9xJ6Mhcy6EwAvUTEu6+dq09huNRAVB4mt5sv7nXH
+ YjyZy0aQ0LfBTQDYCOnd5U3Naeow3I7lr99nclP/o21gvtZyjXR6PxY7PlKRn9Ill7O4
+ CX/ByjPzkrCZ+zpbp2ZS+zw4mwRyqb+oEYb/VJk8TMuML6xWwfMxVOHnKA7QQ+0PvL7C
+ eqdqn/QbNCg15Z+AtbtM/l9+t4OPXQyXS1SmdbY4ZJBGcMoVYd98F8yHTdN5HKH+kaL7
+ fkp18gntsHmyIDxC8d5etHWzp1hSVryRkOhwUl0P1E8AHrLlqI9pakiGBQTROXbg/aeG
+ 6Y9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=YPXGjkn0mYe80l5rl/+SCjeogJVWh1RK+Rt+eBlCPmY=;
- b=p2mvmbA8jiGcM2qoZrCyH3qRZnTWq8EHQmyGj6qcLvT6NTru+wCfxvmN4ymIwwFHM1
- wyk+4dr/ii6f8FGseVTwNllh91azzZHnbg0QNNR6TtyX9nPCvEW6XqQm1LOuzERWMZmd
- KPIVwYSTFUd0cZTGulFBF0i4ooIs9dfLJOFjiQPrZXeC6BrNvlDzwU45jdMpWNDQ5SaU
- dPly75FS3oKqHRG+nMk28u+hj0t9prhl2ddWkYPVjC8OpN/fCyoO3Pk4Wvh33xveShKn
- cxgZPeJ5srHct6HrEN0MsXHyuxKbuRIDPJRbNI2ZU3knsUgZZFREeWMpKsn1Y4dwLDox
- CNwg==
-X-Gm-Message-State: AOAM532JY5nDWte3iwahAOeGR4JKmzDmEZDblyQHxfliRjDXkHVa9OkT
- Lhv1mZIxqLtCcAlM7oEBE2hx9Q==
-X-Google-Smtp-Source: ABdhPJyQYclIz4LAhkibq2rIgpSfl/Qs3PCaDIjdUfQX2WaWInvSgf888Y0itgKv4YSnMSPE5Gk19w==
-X-Received: by 2002:a17:90a:ab87:: with SMTP id
- n7mr5903886pjq.32.1629481382865; 
- Fri, 20 Aug 2021 10:43:02 -0700 (PDT)
+ bh=emLVyZgk8V+4EepyTW82j36YqwzNa65gUTI3He6kgJE=;
+ b=l26UxtPZ+l4XQHRA5TB/z8HLVvqnDio1n1DH0/R3xNYHcjw1SIZFAPSKC/tqayIuo4
+ ts1kT8qQfcOxKxSGbd7bZ4T9Ez0bhv3UFRxphDRRTQ9Rn6MhczBFxwvvTwdTE51Zx+37
+ Ao12cF+hAQKYlesrUNvCM7VdMeUsHAR5Hs+FM/aaE3rauxZzzxR7n8X2rcW+eVFmVBi2
+ evsTlyChCv2KWe0DK2pg8w+8Nq9lwVRgaBEhNcDe3vQM6NEn2UuKbbW6HfnmDP/AmtCr
+ eoN9FRSxq9D97msDVi7PN1Vj1ibGI6AXj03wVduchcpjA0HANbatJUc19QZQblfoDdI6
+ ugFA==
+X-Gm-Message-State: AOAM5315v7GBB3OxOpFkldBi2DvoFp8Fyd9Ncfu6eI2GVvPzK9YbEPqt
+ j94QQxPb90AnL0lSUTSDuf2swQ==
+X-Google-Smtp-Source: ABdhPJy7G17dii1YcSQg1wPhGnTpxWJ2DMudAJqJWJJYDipuAHr2lXm97iX1ThLidwxAnldGJUIIfw==
+X-Received: by 2002:a17:90a:fb97:: with SMTP id
+ cp23mr5750676pjb.93.1629481387396; 
+ Fri, 20 Aug 2021 10:43:07 -0700 (PDT)
 Received: from localhost.localdomain ([173.197.107.15])
- by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.01
+ by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Aug 2021 10:43:02 -0700 (PDT)
+ Fri, 20 Aug 2021 10:43:07 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, bin.meng@windriver.com, alistair.francis@wdc.com,
  Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH v4 01/21] target/riscv: Use tcg_constant_*
-Date: Fri, 20 Aug 2021 07:42:37 -1000
-Message-Id: <20210820174257.548286-2-richard.henderson@linaro.org>
+Subject: [PATCH v4 04/21] target/riscv: Add DisasContext to gen_get_gpr,
+ gen_set_gpr
+Date: Fri, 20 Aug 2021 07:42:40 -1000
+Message-Id: <20210820174257.548286-5-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210820174257.548286-1-richard.henderson@linaro.org>
 References: <20210820174257.548286-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -79,472 +80,1110 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2021 17:43:12 -0000
+X-List-Received-Date: Fri, 20 Aug 2021 17:43:15 -0000
 
-Replace uses of tcg_const_* with the allocate and free close together.
+We will require the context to handle RV64 word operations.
 
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c                | 36 ++++----------
- target/riscv/insn_trans/trans_rvf.c.inc |  3 +-
- target/riscv/insn_trans/trans_rvv.c.inc | 65 +++++++++----------------
- 3 files changed, 34 insertions(+), 70 deletions(-)
+ target/riscv/translate.c                | 58 ++++++++++++-------------
+ target/riscv/insn_trans/trans_rva.c.inc | 18 ++++----
+ target/riscv/insn_trans/trans_rvb.c.inc |  4 +-
+ target/riscv/insn_trans/trans_rvd.c.inc | 32 +++++++-------
+ target/riscv/insn_trans/trans_rvf.c.inc | 32 +++++++-------
+ target/riscv/insn_trans/trans_rvh.c.inc | 52 +++++++++++-----------
+ target/riscv/insn_trans/trans_rvi.c.inc | 44 +++++++++----------
+ target/riscv/insn_trans/trans_rvm.c.inc | 12 ++---
+ target/riscv/insn_trans/trans_rvv.c.inc | 36 +++++++--------
+ 9 files changed, 144 insertions(+), 144 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 6983be5723..20a55c92fb 100644
+index 147b9c2f68..ce4c56c179 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -104,20 +104,16 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+@@ -175,7 +175,7 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
+ /* Wrapper for getting reg values - need to check of reg is zero since
+  * cpu_gpr[0] is not actually allocated
   */
- static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+-static inline void gen_get_gpr(TCGv t, int reg_num)
++static void gen_get_gpr(DisasContext *ctx, TCGv t, int reg_num)
  {
--    TCGv_i64 t_max = tcg_const_i64(0xffffffff00000000ull);
--    TCGv_i64 t_nan = tcg_const_i64(0xffffffff7fc00000ull);
-+    TCGv_i64 t_max = tcg_constant_i64(0xffffffff00000000ull);
-+    TCGv_i64 t_nan = tcg_constant_i64(0xffffffff7fc00000ull);
- 
-     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
--    tcg_temp_free_i64(t_max);
--    tcg_temp_free_i64(t_nan);
- }
- 
- static void generate_exception(DisasContext *ctx, int excp)
+     if (reg_num == 0) {
+         tcg_gen_movi_tl(t, 0);
+@@ -189,7 +189,7 @@ static inline void gen_get_gpr(TCGv t, int reg_num)
+  * since we usually avoid calling the OP_TYPE_gen function if we see a write to
+  * $zero
+  */
+-static inline void gen_set_gpr(int reg_num_dst, TCGv t)
++static void gen_set_gpr(DisasContext *ctx, int reg_num_dst, TCGv t)
  {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
--    TCGv_i32 helper_tmp = tcg_const_i32(excp);
--    gen_helper_raise_exception(cpu_env, helper_tmp);
--    tcg_temp_free_i32(helper_tmp);
-+    gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
+     if (reg_num_dst != 0) {
+         tcg_gen_mov_tl(cpu_gpr[reg_num_dst], t);
+@@ -435,11 +435,11 @@ static bool gen_arith_imm_fn(DisasContext *ctx, arg_i *a,
+     TCGv source1;
+     source1 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
+ 
+     (*func)(source1, source1, a->imm);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     return true;
  }
+@@ -451,12 +451,12 @@ static bool gen_arith_imm_tl(DisasContext *ctx, arg_i *a,
+     source1 = tcg_temp_new();
+     source2 = tcg_temp_new();
  
-@@ -125,17 +121,13 @@ static void generate_exception_mtval(DisasContext *ctx, int excp)
- {
-     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-     tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
--    TCGv_i32 helper_tmp = tcg_const_i32(excp);
--    gen_helper_raise_exception(cpu_env, helper_tmp);
--    tcg_temp_free_i32(helper_tmp);
-+    gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
+     tcg_gen_movi_tl(source2, a->imm);
  
- static void gen_exception_debug(void)
- {
--    TCGv_i32 helper_tmp = tcg_const_i32(EXCP_DEBUG);
--    gen_helper_raise_exception(cpu_env, helper_tmp);
--    tcg_temp_free_i32(helper_tmp);
-+    gen_helper_raise_exception(cpu_env, tcg_constant_i32(EXCP_DEBUG));
- }
+     (*func)(source1, source1, source2);
  
- /* Wrapper around tcg_gen_exit_tb that handles single stepping */
-@@ -229,7 +221,7 @@ static void gen_div(TCGv ret, TCGv source1, TCGv source2)
-      */
-     cond1 = tcg_temp_new();
-     cond2 = tcg_temp_new();
--    zeroreg = tcg_const_tl(0);
-+    zeroreg = tcg_constant_tl(0);
-     resultopt1 = tcg_temp_new();
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -487,15 +487,15 @@ static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
+     source1 = tcg_temp_new();
+     source2 = tcg_temp_new();
  
-     tcg_gen_movi_tl(resultopt1, (target_ulong)-1);
-@@ -250,7 +242,6 @@ static void gen_div(TCGv ret, TCGv source1, TCGv source2)
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+     tcg_gen_ext32s_tl(source1, source1);
+     tcg_gen_ext32s_tl(source2, source2);
  
-     tcg_temp_free(cond1);
-     tcg_temp_free(cond2);
--    tcg_temp_free(zeroreg);
-     tcg_temp_free(resultopt1);
- }
+     (*func)(source1, source1, source2);
  
-@@ -259,7 +250,7 @@ static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
-     TCGv cond1, zeroreg, resultopt1;
-     cond1 = tcg_temp_new();
+     tcg_gen_ext32s_tl(source1, source1);
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -508,15 +508,15 @@ static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
+     source1 = tcg_temp_new();
+     source2 = tcg_temp_new();
  
--    zeroreg = tcg_const_tl(0);
-+    zeroreg = tcg_constant_tl(0);
-     resultopt1 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+     tcg_gen_ext32u_tl(source1, source1);
+     tcg_gen_ext32u_tl(source2, source2);
  
-     tcg_gen_setcondi_tl(TCG_COND_EQ, cond1, source2, 0);
-@@ -272,7 +263,6 @@ static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
-     tcg_gen_divu_tl(ret, source1, source2);
+     (*func)(source1, source1, source2);
  
-     tcg_temp_free(cond1);
--    tcg_temp_free(zeroreg);
-     tcg_temp_free(resultopt1);
- }
+     tcg_gen_ext32s_tl(source1, source1);
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -606,7 +606,7 @@ static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
+     TCGv source1 = tcg_temp_new();
+     TCGv source2;
  
-@@ -282,7 +272,7 @@ static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
  
-     cond1 = tcg_temp_new();
-     cond2 = tcg_temp_new();
--    zeroreg = tcg_const_tl(0);
-+    zeroreg = tcg_constant_tl(0);
-     resultopt1 = tcg_temp_new();
- 
-     tcg_gen_movi_tl(resultopt1, 1L);
-@@ -302,7 +292,6 @@ static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
- 
-     tcg_temp_free(cond1);
-     tcg_temp_free(cond2);
--    tcg_temp_free(zeroreg);
-     tcg_temp_free(resultopt1);
- }
- 
-@@ -310,7 +299,7 @@ static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
- {
-     TCGv cond1, zeroreg, resultopt1;
-     cond1 = tcg_temp_new();
--    zeroreg = tcg_const_tl(0);
-+    zeroreg = tcg_constant_tl(0);
-     resultopt1 = tcg_temp_new();
- 
-     tcg_gen_movi_tl(resultopt1, (target_ulong)1);
-@@ -323,7 +312,6 @@ static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
-             source1);
- 
-     tcg_temp_free(cond1);
--    tcg_temp_free(zeroreg);
-     tcg_temp_free(resultopt1);
- }
- 
-@@ -384,15 +372,11 @@ static inline void mark_fs_dirty(DisasContext *ctx) { }
- 
- static void gen_set_rm(DisasContext *ctx, int rm)
- {
--    TCGv_i32 t0;
--
-     if (ctx->frm == rm) {
-         return;
+     if (a->shamt == (TARGET_LONG_BITS - 8)) {
+         /* rev8, byte swaps */
+@@ -618,7 +618,7 @@ static bool gen_grevi(DisasContext *ctx, arg_grevi *a)
+         tcg_temp_free(source2);
      }
-     ctx->frm = rm;
--    t0 = tcg_const_i32(rm);
--    gen_helper_set_rounding_mode(cpu_env, t0);
--    tcg_temp_free_i32(t0);
-+    gen_helper_set_rounding_mode(cpu_env, tcg_constant_i32(rm));
- }
  
- static int ex_plus_1(DisasContext *ctx, int nf)
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     return true;
+ }
+@@ -752,12 +752,12 @@ static bool gen_arith(DisasContext *ctx, arg_r *a,
+     source1 = tcg_temp_new();
+     source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     (*func)(source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -769,13 +769,13 @@ static bool gen_shift(DisasContext *ctx, arg_r *a,
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_andi_tl(source2, source2, TARGET_LONG_BITS - 1);
+     (*func)(source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -800,12 +800,12 @@ static bool gen_shifti(DisasContext *ctx, arg_shift *a,
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
+ 
+     tcg_gen_movi_tl(source2, a->shamt);
+     (*func)(source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -817,14 +817,14 @@ static bool gen_shiftw(DisasContext *ctx, arg_r *a,
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_andi_tl(source2, source2, 31);
+     (*func)(source1, source1, source2);
+     tcg_gen_ext32s_tl(source1, source1);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -836,13 +836,13 @@ static bool gen_shiftiw(DisasContext *ctx, arg_shift *a,
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
+     tcg_gen_movi_tl(source2, a->shamt);
+ 
+     (*func)(source1, source1, source2);
+     tcg_gen_ext32s_tl(source1, source1);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -863,11 +863,11 @@ static bool gen_unary(DisasContext *ctx, arg_r2 *a,
+ {
+     TCGv source = tcg_temp_new();
+ 
+-    gen_get_gpr(source, a->rs1);
++    gen_get_gpr(ctx, source, a->rs1);
+ 
+     (*func)(source, source);
+ 
+-    gen_set_gpr(a->rd, source);
++    gen_set_gpr(ctx, a->rd, source);
+     tcg_temp_free(source);
+     return true;
+ }
+diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
+index ab2ec4f0a5..3cc3c3b073 100644
+--- a/target/riscv/insn_trans/trans_rva.c.inc
++++ b/target/riscv/insn_trans/trans_rva.c.inc
+@@ -22,7 +22,7 @@ static inline bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
+ {
+     TCGv src1 = tcg_temp_new();
+     /* Put addr in load_res, data in load_val.  */
+-    gen_get_gpr(src1, a->rs1);
++    gen_get_gpr(ctx, src1, a->rs1);
+     if (a->rl) {
+         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+     }
+@@ -31,7 +31,7 @@ static inline bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
+         tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
+     }
+     tcg_gen_mov_tl(load_res, src1);
+-    gen_set_gpr(a->rd, load_val);
++    gen_set_gpr(ctx, a->rd, load_val);
+ 
+     tcg_temp_free(src1);
+     return true;
+@@ -45,10 +45,10 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     TCGLabel *l1 = gen_new_label();
+     TCGLabel *l2 = gen_new_label();
+ 
+-    gen_get_gpr(src1, a->rs1);
++    gen_get_gpr(ctx, src1, a->rs1);
+     tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
+ 
+-    gen_get_gpr(src2, a->rs2);
++    gen_get_gpr(ctx, src2, a->rs2);
+     /*
+      * Note that the TCG atomic primitives are SC,
+      * so we can ignore AQ/RL along this path.
+@@ -56,7 +56,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+     tcg_gen_atomic_cmpxchg_tl(src1, load_res, load_val, src2,
+                               ctx->mem_idx, mop);
+     tcg_gen_setcond_tl(TCG_COND_NE, dat, src1, load_val);
+-    gen_set_gpr(a->rd, dat);
++    gen_set_gpr(ctx, a->rd, dat);
+     tcg_gen_br(l2);
+ 
+     gen_set_label(l1);
+@@ -66,7 +66,7 @@ static inline bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
+      */
+     tcg_gen_mb(TCG_MO_ALL + a->aq * TCG_BAR_LDAQ + a->rl * TCG_BAR_STRL);
+     tcg_gen_movi_tl(dat, 1);
+-    gen_set_gpr(a->rd, dat);
++    gen_set_gpr(ctx, a->rd, dat);
+ 
+     gen_set_label(l2);
+     /*
+@@ -88,12 +88,12 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+     TCGv src1 = tcg_temp_new();
+     TCGv src2 = tcg_temp_new();
+ 
+-    gen_get_gpr(src1, a->rs1);
+-    gen_get_gpr(src2, a->rs2);
++    gen_get_gpr(ctx, src1, a->rs1);
++    gen_get_gpr(ctx, src2, a->rs2);
+ 
+     (*func)(src2, src1, src2, ctx->mem_idx, mop);
+ 
+-    gen_set_gpr(a->rd, src2);
++    gen_set_gpr(ctx, a->rd, src2);
+     tcg_temp_free(src1);
+     tcg_temp_free(src2);
+     return true;
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index 9e81f6e3de..260e15b47d 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -424,7 +424,7 @@ static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
+     REQUIRE_EXT(ctx, RVB);
+ 
+     TCGv source1 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
++    gen_get_gpr(ctx, source1, a->rs1);
+ 
+     if (a->shamt < 32) {
+         tcg_gen_deposit_z_tl(source1, source1, a->shamt, 32);
+@@ -432,7 +432,7 @@ static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
+         tcg_gen_shli_tl(source1, source1, a->shamt);
+     }
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     return true;
+ }
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index 7e45538ae0..11b9b3f90b 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -23,7 +23,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+ 
+     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEQ);
+@@ -38,7 +38,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+ 
+     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], t0, ctx->mem_idx, MO_TEQ);
+@@ -254,7 +254,7 @@ static bool trans_feq_d(DisasContext *ctx, arg_feq_d *a)
+ 
+     TCGv t0 = tcg_temp_new();
+     gen_helper_feq_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -267,7 +267,7 @@ static bool trans_flt_d(DisasContext *ctx, arg_flt_d *a)
+ 
+     TCGv t0 = tcg_temp_new();
+     gen_helper_flt_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -280,7 +280,7 @@ static bool trans_fle_d(DisasContext *ctx, arg_fle_d *a)
+ 
+     TCGv t0 = tcg_temp_new();
+     gen_helper_fle_d(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -293,7 +293,7 @@ static bool trans_fclass_d(DisasContext *ctx, arg_fclass_d *a)
+ 
+     TCGv t0 = tcg_temp_new();
+     gen_helper_fclass_d(t0, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -306,7 +306,7 @@ static bool trans_fcvt_w_d(DisasContext *ctx, arg_fcvt_w_d *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_w_d(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -320,7 +320,7 @@ static bool trans_fcvt_wu_d(DisasContext *ctx, arg_fcvt_wu_d *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_wu_d(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -332,7 +332,7 @@ static bool trans_fcvt_d_w(DisasContext *ctx, arg_fcvt_d_w *a)
+     REQUIRE_EXT(ctx, RVD);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_d_w(cpu_fpr[a->rd], cpu_env, t0);
+@@ -348,7 +348,7 @@ static bool trans_fcvt_d_wu(DisasContext *ctx, arg_fcvt_d_wu *a)
+     REQUIRE_EXT(ctx, RVD);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_d_wu(cpu_fpr[a->rd], cpu_env, t0);
+@@ -367,7 +367,7 @@ static bool trans_fcvt_l_d(DisasContext *ctx, arg_fcvt_l_d *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_l_d(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -381,7 +381,7 @@ static bool trans_fcvt_lu_d(DisasContext *ctx, arg_fcvt_lu_d *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_lu_d(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -393,7 +393,7 @@ static bool trans_fmv_x_d(DisasContext *ctx, arg_fmv_x_d *a)
+     REQUIRE_EXT(ctx, RVD);
+ 
+ #ifdef TARGET_RISCV64
+-    gen_set_gpr(a->rd, cpu_fpr[a->rs1]);
++    gen_set_gpr(ctx, a->rd, cpu_fpr[a->rs1]);
+     return true;
+ #else
+     qemu_build_not_reached();
+@@ -407,7 +407,7 @@ static bool trans_fcvt_d_l(DisasContext *ctx, arg_fcvt_d_l *a)
+     REQUIRE_EXT(ctx, RVD);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_d_l(cpu_fpr[a->rd], cpu_env, t0);
+@@ -423,7 +423,7 @@ static bool trans_fcvt_d_lu(DisasContext *ctx, arg_fcvt_d_lu *a)
+     REQUIRE_EXT(ctx, RVD);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_d_lu(cpu_fpr[a->rd], cpu_env, t0);
+@@ -440,7 +440,7 @@ static bool trans_fmv_d_x(DisasContext *ctx, arg_fmv_d_x *a)
+ 
+ #ifdef TARGET_RISCV64
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_mov_tl(cpu_fpr[a->rd], t0);
+     tcg_temp_free(t0);
 diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index db1c0c9974..89f78701e7 100644
+index 89f78701e7..fb9f7f9c00 100644
 --- a/target/riscv/insn_trans/trans_rvf.c.inc
 +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -200,12 +200,11 @@ static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
-          * Replace bit 31 in rs1 with inverse in rs2.
-          * This formulation retains the nanboxing of rs1.
-          */
--        mask = tcg_const_i64(~MAKE_64BIT_MASK(31, 1));
-+        mask = tcg_constant_i64(~MAKE_64BIT_MASK(31, 1));
-         tcg_gen_nor_i64(rs2, rs2, mask);
-         tcg_gen_and_i64(rs1, mask, rs1);
-         tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
+@@ -28,7 +28,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVF);
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
  
--        tcg_temp_free_i64(mask);
-         tcg_temp_free_i64(rs2);
-     }
-     tcg_temp_free_i64(rs1);
+     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], t0, ctx->mem_idx, MO_TEUL);
+@@ -44,7 +44,7 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVF);
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_addi_tl(t0, t0, a->imm);
+ 
+@@ -274,7 +274,7 @@ static bool trans_fcvt_w_s(DisasContext *ctx, arg_fcvt_w_s *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_w_s(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -288,7 +288,7 @@ static bool trans_fcvt_wu_s(DisasContext *ctx, arg_fcvt_wu_s *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_wu_s(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -308,7 +308,7 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
+     tcg_gen_extrl_i64_i32(t0, cpu_fpr[a->rs1]);
+ #endif
+ 
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -320,7 +320,7 @@ static bool trans_feq_s(DisasContext *ctx, arg_feq_s *a)
+     REQUIRE_EXT(ctx, RVF);
+     TCGv t0 = tcg_temp_new();
+     gen_helper_feq_s(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -331,7 +331,7 @@ static bool trans_flt_s(DisasContext *ctx, arg_flt_s *a)
+     REQUIRE_EXT(ctx, RVF);
+     TCGv t0 = tcg_temp_new();
+     gen_helper_flt_s(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -342,7 +342,7 @@ static bool trans_fle_s(DisasContext *ctx, arg_fle_s *a)
+     REQUIRE_EXT(ctx, RVF);
+     TCGv t0 = tcg_temp_new();
+     gen_helper_fle_s(t0, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -356,7 +356,7 @@ static bool trans_fclass_s(DisasContext *ctx, arg_fclass_s *a)
+ 
+     gen_helper_fclass_s(t0, cpu_fpr[a->rs1]);
+ 
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+ 
+     return true;
+@@ -368,7 +368,7 @@ static bool trans_fcvt_s_w(DisasContext *ctx, arg_fcvt_s_w *a)
+     REQUIRE_EXT(ctx, RVF);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_s_w(cpu_fpr[a->rd], cpu_env, t0);
+@@ -385,7 +385,7 @@ static bool trans_fcvt_s_wu(DisasContext *ctx, arg_fcvt_s_wu *a)
+     REQUIRE_EXT(ctx, RVF);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_s_wu(cpu_fpr[a->rd], cpu_env, t0);
+@@ -403,7 +403,7 @@ static bool trans_fmv_w_x(DisasContext *ctx, arg_fmv_w_x *a)
+     REQUIRE_EXT(ctx, RVF);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_extu_tl_i64(cpu_fpr[a->rd], t0);
+     gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
+@@ -423,7 +423,7 @@ static bool trans_fcvt_l_s(DisasContext *ctx, arg_fcvt_l_s *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_l_s(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -437,7 +437,7 @@ static bool trans_fcvt_lu_s(DisasContext *ctx, arg_fcvt_lu_s *a)
+     TCGv t0 = tcg_temp_new();
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_lu_s(t0, cpu_env, cpu_fpr[a->rs1]);
+-    gen_set_gpr(a->rd, t0);
++    gen_set_gpr(ctx, a->rd, t0);
+     tcg_temp_free(t0);
+     return true;
+ }
+@@ -449,7 +449,7 @@ static bool trans_fcvt_s_l(DisasContext *ctx, arg_fcvt_s_l *a)
+     REQUIRE_EXT(ctx, RVF);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_s_l(cpu_fpr[a->rd], cpu_env, t0);
+@@ -466,7 +466,7 @@ static bool trans_fcvt_s_lu(DisasContext *ctx, arg_fcvt_s_lu *a)
+     REQUIRE_EXT(ctx, RVF);
+ 
+     TCGv t0 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_set_rm(ctx, a->rm);
+     gen_helper_fcvt_s_lu(cpu_fpr[a->rd], cpu_env, t0);
+diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
+index 6b5edf82b7..585eb1d87e 100644
+--- a/target/riscv/insn_trans/trans_rvh.c.inc
++++ b/target/riscv/insn_trans/trans_rvh.c.inc
+@@ -37,10 +37,10 @@ static bool trans_hlv_b(DisasContext *ctx, arg_hlv_b *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_SB);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -59,10 +59,10 @@ static bool trans_hlv_h(DisasContext *ctx, arg_hlv_h *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESW);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -81,10 +81,10 @@ static bool trans_hlv_w(DisasContext *ctx, arg_hlv_w *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESL);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -103,10 +103,10 @@ static bool trans_hlv_bu(DisasContext *ctx, arg_hlv_bu *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_UB);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -125,9 +125,9 @@ static bool trans_hlv_hu(DisasContext *ctx, arg_hlv_hu *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEUW);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -146,8 +146,8 @@ static bool trans_hsv_b(DisasContext *ctx, arg_hsv_b *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
+-    gen_get_gpr(dat, a->rs2);
++    gen_get_gpr(ctx, t0, a->rs1);
++    gen_get_gpr(ctx, dat, a->rs2);
+ 
+     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_SB);
+ 
+@@ -168,8 +168,8 @@ static bool trans_hsv_h(DisasContext *ctx, arg_hsv_h *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
+-    gen_get_gpr(dat, a->rs2);
++    gen_get_gpr(ctx, t0, a->rs1);
++    gen_get_gpr(ctx, dat, a->rs2);
+ 
+     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESW);
+ 
+@@ -190,8 +190,8 @@ static bool trans_hsv_w(DisasContext *ctx, arg_hsv_w *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
+-    gen_get_gpr(dat, a->rs2);
++    gen_get_gpr(ctx, t0, a->rs1);
++    gen_get_gpr(ctx, dat, a->rs2);
+ 
+     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TESL);
+ 
+@@ -214,10 +214,10 @@ static bool trans_hlv_wu(DisasContext *ctx, arg_hlv_wu *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEUL);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -238,10 +238,10 @@ static bool trans_hlv_d(DisasContext *ctx, arg_hlv_d *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEQ);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -262,8 +262,8 @@ static bool trans_hsv_d(DisasContext *ctx, arg_hsv_d *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
+-    gen_get_gpr(dat, a->rs2);
++    gen_get_gpr(ctx, t0, a->rs1);
++    gen_get_gpr(ctx, dat, a->rs2);
+ 
+     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx | TB_FLAGS_PRIV_HYP_ACCESS_MASK, MO_TEQ);
+ 
+@@ -284,10 +284,10 @@ static bool trans_hlvx_hu(DisasContext *ctx, arg_hlvx_hu *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_helper_hyp_hlvx_hu(t1, cpu_env, t0);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+@@ -306,10 +306,10 @@ static bool trans_hlvx_wu(DisasContext *ctx, arg_hlvx_wu *a)
+ 
+     check_access(ctx);
+ 
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+ 
+     gen_helper_hyp_hlvx_wu(t1, cpu_env, t0);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+ 
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 6e736c9d0d..f1a5d8de56 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -59,7 +59,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     TCGv t0 = tcg_temp_new();
+ 
+ 
+-    gen_get_gpr(cpu_pc, a->rs1);
++    gen_get_gpr(ctx, cpu_pc, a->rs1);
+     tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
+     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+ 
+@@ -90,8 +90,8 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     TCGv source1, source2;
+     source1 = tcg_temp_new();
+     source2 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_brcond_tl(cond, source1, source2, l);
+     gen_goto_tb(ctx, 1, ctx->pc_succ_insn);
+@@ -145,11 +145,11 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+ {
+     TCGv t0 = tcg_temp_new();
+     TCGv t1 = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+ 
+     tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx, memop);
+-    gen_set_gpr(a->rd, t1);
++    gen_set_gpr(ctx, a->rd, t1);
+     tcg_temp_free(t0);
+     tcg_temp_free(t1);
+     return true;
+@@ -184,9 +184,9 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+ {
+     TCGv t0 = tcg_temp_new();
+     TCGv dat = tcg_temp_new();
+-    gen_get_gpr(t0, a->rs1);
++    gen_get_gpr(ctx, t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+-    gen_get_gpr(dat, a->rs2);
++    gen_get_gpr(ctx, dat, a->rs2);
+ 
+     tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx, memop);
+     tcg_temp_free(t0);
+@@ -347,11 +347,11 @@ static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
+ {
+     REQUIRE_64BIT(ctx);
+     TCGv t = tcg_temp_new();
+-    gen_get_gpr(t, a->rs1);
++    gen_get_gpr(ctx, t, a->rs1);
+     tcg_gen_extract_tl(t, t, a->shamt, 32 - a->shamt);
+     /* sign-extend for W instructions */
+     tcg_gen_ext32s_tl(t, t);
+-    gen_set_gpr(a->rd, t);
++    gen_set_gpr(ctx, a->rd, t);
+     tcg_temp_free(t);
+     return true;
+ }
+@@ -360,9 +360,9 @@ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
+ {
+     REQUIRE_64BIT(ctx);
+     TCGv t = tcg_temp_new();
+-    gen_get_gpr(t, a->rs1);
++    gen_get_gpr(ctx, t, a->rs1);
+     tcg_gen_sextract_tl(t, t, a->shamt, 32 - a->shamt);
+-    gen_set_gpr(a->rd, t);
++    gen_set_gpr(ctx, a->rd, t);
+     tcg_temp_free(t);
+     return true;
+ }
+@@ -385,14 +385,14 @@ static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_andi_tl(source2, source2, 0x1F);
+     tcg_gen_shl_tl(source1, source1, source2);
+ 
+     tcg_gen_ext32s_tl(source1, source1);
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -404,8 +404,8 @@ static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     /* clear upper 32 */
+     tcg_gen_ext32u_tl(source1, source1);
+@@ -413,7 +413,7 @@ static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+     tcg_gen_shr_tl(source1, source1, source2);
+ 
+     tcg_gen_ext32s_tl(source1, source1);
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -425,8 +425,8 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+ 
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     /*
+      * first, trick to get it to act like working on 32 bits (get rid of
+@@ -436,7 +436,7 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+     tcg_gen_andi_tl(source2, source2, 0x1F);
+     tcg_gen_sar_tl(source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+ 
+@@ -471,7 +471,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+     csr_store = tcg_temp_new(); \
+     dest = tcg_temp_new(); \
+     rs1_pass = tcg_temp_new(); \
+-    gen_get_gpr(source1, a->rs1); \
++    gen_get_gpr(ctx, source1, a->rs1); \
+     tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next); \
+     tcg_gen_movi_tl(rs1_pass, a->rs1); \
+     tcg_gen_movi_tl(csr_store, a->csr); \
+@@ -479,7 +479,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+ } while (0)
+ 
+ #define RISCV_OP_CSR_POST do {\
+-    gen_set_gpr(a->rd, dest); \
++    gen_set_gpr(ctx, a->rd, dest); \
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn); \
+     exit_tb(ctx); \
+     ctx->base.is_jmp = DISAS_NORETURN; \
+diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
+index 10ecc456fc..0a4318f18e 100644
+--- a/target/riscv/insn_trans/trans_rvm.c.inc
++++ b/target/riscv/insn_trans/trans_rvm.c.inc
+@@ -30,12 +30,12 @@ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+     REQUIRE_EXT(ctx, RVM);
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_muls2_tl(source2, source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
+@@ -52,12 +52,12 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+     REQUIRE_EXT(ctx, RVM);
+     TCGv source1 = tcg_temp_new();
+     TCGv source2 = tcg_temp_new();
+-    gen_get_gpr(source1, a->rs1);
+-    gen_get_gpr(source2, a->rs2);
++    gen_get_gpr(ctx, source1, a->rs1);
++    gen_get_gpr(ctx, source2, a->rs2);
+ 
+     tcg_gen_mulu2_tl(source2, source1, source1, source2);
+ 
+-    gen_set_gpr(a->rd, source1);
++    gen_set_gpr(ctx, a->rd, source1);
+     tcg_temp_free(source1);
+     tcg_temp_free(source2);
+     return true;
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 83d9a285ba..a8e7272487 100644
+index a8e7272487..de580c493c 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -33,7 +33,7 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
-     /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
-     if (a->rs1 == 0) {
-         /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
--        s1 = tcg_const_tl(RV_VLEN_MAX);
-+        s1 = tcg_constant_tl(RV_VLEN_MAX);
+@@ -36,11 +36,11 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
+         s1 = tcg_constant_tl(RV_VLEN_MAX);
      } else {
          s1 = tcg_temp_new();
-         gen_get_gpr(s1, a->rs1);
-@@ -59,13 +59,13 @@ static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
-         return false;
+-        gen_get_gpr(s1, a->rs1);
++        gen_get_gpr(ctx, s1, a->rs1);
      }
- 
--    s2 = tcg_const_tl(a->zimm);
-+    s2 = tcg_constant_tl(a->zimm);
-     dst = tcg_temp_new();
- 
-     /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
-     if (a->rs1 == 0) {
-         /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
--        s1 = tcg_const_tl(RV_VLEN_MAX);
-+        s1 = tcg_constant_tl(RV_VLEN_MAX);
+-    gen_get_gpr(s2, a->rs2);
++    gen_get_gpr(ctx, s2, a->rs2);
+     gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(a->rd, dst);
++    gen_set_gpr(ctx, a->rd, dst);
+     tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+     lookup_and_goto_ptr(ctx);
+     ctx->base.is_jmp = DISAS_NORETURN;
+@@ -68,10 +68,10 @@ static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
+         s1 = tcg_constant_tl(RV_VLEN_MAX);
      } else {
          s1 = tcg_temp_new();
-         gen_get_gpr(s1, a->rs1);
-@@ -76,7 +76,6 @@ static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
+-        gen_get_gpr(s1, a->rs1);
++        gen_get_gpr(ctx, s1, a->rs1);
+     }
+     gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(a->rd, dst);
++    gen_set_gpr(ctx, a->rd, dst);
+     gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
      ctx->base.is_jmp = DISAS_NORETURN;
  
-     tcg_temp_free(s1);
--    tcg_temp_free(s2);
-     tcg_temp_free(dst);
-     return true;
- }
-@@ -183,7 +182,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-      * The first part is vlen in bytes, encoded in maxsz of simd_desc.
-      * The second part is lmul, encoded in data of simd_desc.
+@@ -184,7 +184,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
       */
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
  
-     gen_get_gpr(base, rs1);
+-    gen_get_gpr(base, rs1);
++    gen_get_gpr(s, base, rs1);
      tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -194,7 +193,6 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     tcg_temp_free_ptr(dest);
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free(base);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -334,7 +332,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     mask = tcg_temp_new_ptr();
-     base = tcg_temp_new();
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+ 
+@@ -334,8 +334,8 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
      stride = tcg_temp_new();
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
  
-     gen_get_gpr(base, rs1);
-     gen_get_gpr(stride, rs2);
-@@ -347,7 +345,6 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free(base);
-     tcg_temp_free(stride);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -462,7 +459,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     mask = tcg_temp_new_ptr();
-     index = tcg_temp_new_ptr();
+-    gen_get_gpr(base, rs1);
+-    gen_get_gpr(stride, rs2);
++    gen_get_gpr(s, base, rs1);
++    gen_get_gpr(s, stride, rs2);
+     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+ 
+@@ -461,7 +461,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
      base = tcg_temp_new();
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
  
-     gen_get_gpr(base, rs1);
+-    gen_get_gpr(base, rs1);
++    gen_get_gpr(s, base, rs1);
      tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -475,7 +472,6 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(index);
-     tcg_temp_free(base);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -594,7 +590,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
+     tcg_gen_addi_ptr(index, cpu_env, vreg_ofs(s, vs2));
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+@@ -592,7 +592,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
      base = tcg_temp_new();
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
  
-     gen_get_gpr(base, rs1);
+-    gen_get_gpr(base, rs1);
++    gen_get_gpr(s, base, rs1);
      tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -605,7 +601,6 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
-     tcg_temp_free_ptr(dest);
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free(base);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -671,7 +666,7 @@ static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     mask = tcg_temp_new_ptr();
-     index = tcg_temp_new_ptr();
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+ 
+@@ -668,7 +668,7 @@ static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
      base = tcg_temp_new();
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
  
-     gen_get_gpr(base, rs1);
+-    gen_get_gpr(base, rs1);
++    gen_get_gpr(s, base, rs1);
      tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-@@ -684,7 +679,6 @@ static bool amo_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(index);
-     tcg_temp_free(base);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -874,7 +868,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
-     data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
-     data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
- 
-     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
-@@ -886,7 +880,6 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(src2);
-     tcg_temp_free(src1);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -1014,14 +1007,14 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
+     tcg_gen_addi_ptr(index, cpu_env, vreg_ofs(s, vs2));
+     tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
+@@ -863,7 +863,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
      mask = tcg_temp_new_ptr();
      src2 = tcg_temp_new_ptr();
-     if (zx) {
--        src1 = tcg_const_tl(imm);
-+        src1 = tcg_constant_tl(imm);
-     } else {
--        src1 = tcg_const_tl(sextract64(imm, 0, 5));
-+        src1 = tcg_constant_tl(sextract64(imm, 0, 5));
-     }
+     src1 = tcg_temp_new();
+-    gen_get_gpr(src1, rs1);
++    gen_get_gpr(s, src1, rs1);
+ 
      data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
      data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
+@@ -907,7 +907,7 @@ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn *gvec_fn,
+         TCGv_i64 src1 = tcg_temp_new_i64();
+         TCGv tmp = tcg_temp_new();
  
-     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
-@@ -1032,8 +1025,6 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
-     tcg_temp_free_ptr(dest);
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(src2);
--    tcg_temp_free(src1);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -1080,9 +1071,8 @@ GEN_OPIVI_GVEC_TRANS(vadd_vi, 0, vadd_vx, addi)
- static void tcg_gen_gvec_rsubi(unsigned vece, uint32_t dofs, uint32_t aofs,
-                                int64_t c, uint32_t oprsz, uint32_t maxsz)
- {
--    TCGv_i64 tmp = tcg_const_i64(c);
-+    TCGv_i64 tmp = tcg_constant_i64(c);
-     tcg_gen_gvec_rsubs(vece, dofs, aofs, tmp, oprsz, maxsz);
--    tcg_temp_free_i64(tmp);
- }
+-        gen_get_gpr(tmp, a->rs1);
++        gen_get_gpr(s, tmp, a->rs1);
+         tcg_gen_ext_tl_i64(src1, tmp);
+         gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+                 src1, MAXSZ(s), MAXSZ(s));
+@@ -1400,7 +1400,7 @@ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
+         TCGv_i32 src1 = tcg_temp_new_i32();
+         TCGv tmp = tcg_temp_new();
  
- GEN_OPIVI_GVEC_TRANS(vrsub_vi, 0, vrsub_vx, rsubi)
-@@ -1682,7 +1672,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+-        gen_get_gpr(tmp, a->rs1);
++        gen_get_gpr(s, tmp, a->rs1);
+         tcg_gen_trunc_tl_i32(src1, tmp);
+         tcg_gen_extract_i32(src1, src1, 0, s->sew + 3);
+         gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
+@@ -1666,7 +1666,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+ 
+         s1 = tcg_temp_new();
+-        gen_get_gpr(s1, a->rs1);
++        gen_get_gpr(s, s1, a->rs1);
+ 
+         if (s->vl_eq_vlmax) {
              tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
-                                 MAXSZ(s), MAXSZ(s), s1);
-         } else {
--            TCGv_i32 desc ;
-+            TCGv_i32 desc;
-             TCGv_i64 s1_i64 = tcg_temp_new_i64();
-             TCGv_ptr dest = tcg_temp_new_ptr();
-             uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
-@@ -1692,12 +1682,11 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
-             };
- 
-             tcg_gen_ext_tl_i64(s1_i64, s1);
--            desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+            desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-             tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-             fns[s->sew](dest, s1_i64, cpu_env, desc);
- 
-             tcg_temp_free_ptr(dest);
--            tcg_temp_free_i32(desc);
-             tcg_temp_free_i64(s1_i64);
-         }
- 
-@@ -1729,15 +1718,13 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
-             TCGLabel *over = gen_new_label();
-             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
- 
--            s1 = tcg_const_i64(simm);
-+            s1 = tcg_constant_i64(simm);
-             dest = tcg_temp_new_ptr();
--            desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+            desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-             tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-             fns[s->sew](dest, s1, cpu_env, desc);
- 
-             tcg_temp_free_ptr(dest);
--            tcg_temp_free_i32(desc);
--            tcg_temp_free_i64(s1);
-             gen_set_label(over);
-         }
-         return true;
-@@ -1866,7 +1853,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
-     src2 = tcg_temp_new_ptr();
--    desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+    desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
- 
-     tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, vs2));
-@@ -1877,7 +1864,6 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_temp_free_ptr(dest);
-     tcg_temp_free_ptr(mask);
-     tcg_temp_free_ptr(src2);
--    tcg_temp_free_i32(desc);
-     gen_set_label(over);
-     return true;
- }
-@@ -2231,12 +2217,11 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
- 
-             dest = tcg_temp_new_ptr();
--            desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+            desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-             tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
-             fns[s->sew - 1](dest, cpu_fpr[a->rs1], cpu_env, desc);
- 
-             tcg_temp_free_ptr(dest);
--            tcg_temp_free_i32(desc);
-             gen_set_label(over);
-         }
-         return true;
-@@ -2428,7 +2413,7 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
-         mask = tcg_temp_new_ptr();
-         src2 = tcg_temp_new_ptr();
-         dst = tcg_temp_new();
--        desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+        desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
- 
-         tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
+@@ -2419,7 +2419,7 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
          tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
-@@ -2439,7 +2424,6 @@ static bool trans_vmpopc_m(DisasContext *s, arg_rmr *a)
+ 
+         gen_helper_vmpopc_m(dst, mask, src2, cpu_env, desc);
+-        gen_set_gpr(a->rd, dst);
++        gen_set_gpr(s, a->rd, dst);
+ 
          tcg_temp_free_ptr(mask);
          tcg_temp_free_ptr(src2);
-         tcg_temp_free(dst);
--        tcg_temp_free_i32(desc);
-         return true;
-     }
-     return false;
-@@ -2460,7 +2444,7 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
-         mask = tcg_temp_new_ptr();
-         src2 = tcg_temp_new_ptr();
-         dst = tcg_temp_new();
--        desc = tcg_const_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-+        desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
- 
-         tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
+@@ -2450,7 +2450,7 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
          tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
-@@ -2471,7 +2455,6 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
+ 
+         gen_helper_vmfirst_m(dst, mask, src2, cpu_env, desc);
+-        gen_set_gpr(a->rd, dst);
++        gen_set_gpr(s, a->rd, dst);
+ 
          tcg_temp_free_ptr(mask);
          tcg_temp_free_ptr(src2);
-         tcg_temp_free(dst);
--        tcg_temp_free_i32(desc);
-         return true;
+@@ -2649,7 +2649,7 @@ static bool trans_vext_x_v(DisasContext *s, arg_r *a)
+         vec_element_loadx(s, tmp, a->rs2, cpu_gpr[a->rs1], vlmax);
      }
-     return false;
-@@ -2636,15 +2619,13 @@ static void vec_element_loadx(DisasContext *s, TCGv_i64 dest,
-     tcg_temp_free_i32(ofs);
+     tcg_gen_trunc_i64_tl(dest, tmp);
+-    gen_set_gpr(a->rd, dest);
++    gen_set_gpr(s, a->rd, dest);
  
-     /* Flush out-of-range indexing to zero.  */
--    t_vlmax = tcg_const_i64(vlmax);
--    t_zero = tcg_const_i64(0);
-+    t_vlmax = tcg_constant_i64(vlmax);
-+    t_zero = tcg_constant_i64(0);
-     tcg_gen_extu_tl_i64(t_idx, idx);
- 
-     tcg_gen_movcond_i64(TCG_COND_LTU, dest, t_idx,
-                         t_vlmax, dest, t_zero);
- 
--    tcg_temp_free_i64(t_vlmax);
--    tcg_temp_free_i64(t_zero);
-     tcg_temp_free_i64(t_idx);
- }
- 
+     tcg_temp_free(dest);
+     tcg_temp_free_i64(tmp);
 -- 
 2.25.1
 
