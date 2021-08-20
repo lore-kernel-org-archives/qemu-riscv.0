@@ -1,65 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mH8YR-0006GH-FI
+	id 1mH8YR-0006HL-Lp
 	for mharc-qemu-riscv@gnu.org; Fri, 20 Aug 2021 13:43:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49270)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49274)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8YE-0005kH-5t
+ id 1mH8YE-0005lA-Dr
  for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:30 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:40476)
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f]:44870)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8Y8-0003z0-Mm
- for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:29 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- n13-20020a17090a4e0d00b0017946980d8dso14278651pjh.5
- for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:24 -0700 (PDT)
+ id 1mH8Y7-0003wm-1t
+ for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:30 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id s11so9887725pgr.11
+ for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=L1Ca37LIpmgaqyZMi4/RcqkPLdV3DVwanjjFT5Igphs=;
- b=XNB3KlSFyA/YtpeIDFyqeaLVgSN2eQnrDi2wBm+zdGmqZq/8nowNZdiGoViaO/zZsC
- LJ8AhzrI5xw5pGyZNhAIVTjNjYNLTInVsC/guyvJ7GqqaRQYOoru/XUGRi2x9nwCIR6a
- uPgscYe7KKUZp07N3nfmbgYGH7G0PBKMi5mFV7NhHlbjHxNXowCXPWo++fkYOS1A53Xj
- DYUXMVMLabuE4UrRTm0rlWbDrPols9s4wcNHmRvFhQXCU/a0RCYU17wySQ+iSQHuQodk
- BFWfSJlU9W5WsDVkxwsJEQveOA2XRRqrGFPipv3R6NN3bo2sQuJCLjNL5rfPhMKOgFZl
- Xaxw==
+ bh=qYb4KcS76i1HvVLzrH2TA0j+WopMecWVOQWs5FlWmg0=;
+ b=Ln7xb5YIxIPuqdfQN8goufJ06Qe3vdea7pK5o6UEJL+Z/CP0nzvPDOzo/OI03If244
+ JGFgnZOpDg357Bx0GKs2wL/xKKG5b4cqdHWHZGGkNLCiOAAkTUWHTKvy8uJevbk3VrjE
+ 22EA62nUpMkQ10n6U9O/U7mLMa6EhOMKbFiSgNmpgBKOTu7rBDr5zhDtVRizGook/B/p
+ R495GCdi/Xx8JdyBzmAjIKJRi+5SsQ2g3Is+5zIIBzlFNtIk33szw/3TI2CJQJgYquXW
+ H1VReHvxIU6h6E1g+buBV1A1JmERJc6IDJj0AP1TpqcM90XGRkoHtWk2PGSnNI8Cx7wI
+ gkVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=L1Ca37LIpmgaqyZMi4/RcqkPLdV3DVwanjjFT5Igphs=;
- b=BKHlVM/VktTMnBdtWR0NSZ1ph3a4+7LEv2hZ5JVktKGg8LxsvkCv93A6Z/yDVFHP29
- /ptIdq54XxHIS8Uhpw3xjrs3HMvtOcLzAzmdDipIngl3WDQ5UL2rmK1rBCJ/OU6yiHQc
- gV+Lf3LJ6PkEFrnxsqWBjm2tYTxB0otTJ2YkMLU79TGoU/4Tb0bD5r1HDi810iA2ntLz
- 59yIR5Gn2XScx5CkNSln+rVsH5LOzslbwg9/54aED023mQ781jIcGL4rBb6DZ+WPobXV
- MfEEGzcMWvqhZ/rCzcc9GS1VyLFkGL6qaycDmmaMftXRYROEGe84Dne2FW7xyzcAUZ6i
- wyHw==
-X-Gm-Message-State: AOAM530PYQS437jB4vusvGOLTEZiYhUzCbMYEhygeb6Fowr0J5J7D5kE
- hKDmKw/g+OMIVMFkEUkA+KiRPw==
-X-Google-Smtp-Source: ABdhPJxluyWA2NkBfSUwiwteleFicTl7wnwDno2r99dwHJ0qGwoNPUHCGz3axed2XhFXzDOOYUIkmg==
-X-Received: by 2002:a17:902:7c01:b029:12c:323d:9ac with SMTP id
- x1-20020a1709027c01b029012c323d09acmr17391424pll.12.1629481403248; 
- Fri, 20 Aug 2021 10:43:23 -0700 (PDT)
+ bh=qYb4KcS76i1HvVLzrH2TA0j+WopMecWVOQWs5FlWmg0=;
+ b=EUqO9kUwfgyrDBZvRSiXZlvFXWRJ0dcTQ+A7YxxVLv6FcD7r5KtZS+OAbcOVftpTmK
+ tdTrakzUvChI8Lans2i1b2hY3tkAuN2fE3qzhQkBIpPd6fquB5cbMtjXutj84gE/WtXF
+ XQbMmWBJwY3aBvzxZQ1yG0WJ8wqAHnpvreyytARNnuCBpTSF6HHgvvkp+zhLaGphQGNB
+ NnB7GdraeN5Lfrme7i7HQvlwAKMxJGaIraooB+LC883AmZcGL5IYQJDayw5eV/Jaz7vp
+ OkydjikciX+Cmpsjtq73SQNhf82+37hfcSykB+hgTp5YEuIplrb2uT4ifPs+R/FH03Uv
+ 5kvA==
+X-Gm-Message-State: AOAM531YcyYZ6Cu0rf8qqFOSLCIhr4x33KrfcAxawy9q9up6afBRXM7q
+ QUv1YcRSmckMgeEDtXkdRGk1LywoCGM2Yg==
+X-Google-Smtp-Source: ABdhPJwWukdqn7mluYBuOl7f8d3dwKJipaHhDEuDRH61Gvk67srfSAiL/oKRYlGwHiciLZt77ImpSA==
+X-Received: by 2002:a63:4303:: with SMTP id q3mr19710002pga.375.1629481401708; 
+ Fri, 20 Aug 2021 10:43:21 -0700 (PDT)
 Received: from localhost.localdomain ([173.197.107.15])
- by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.22
+ by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Aug 2021 10:43:22 -0700 (PDT)
+ Fri, 20 Aug 2021 10:43:21 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, bin.meng@windriver.com, alistair.francis@wdc.com,
  Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v4 14/21] target/riscv: Use {get,
- dest}_gpr for integer load/store
-Date: Fri, 20 Aug 2021 07:42:50 -1000
-Message-Id: <20210820174257.548286-15-richard.henderson@linaro.org>
+Subject: [PATCH v4 13/21] target/riscv: Use get_gpr in branches
+Date: Fri, 20 Aug 2021 07:42:49 -1000
+Message-Id: <20210820174257.548286-14-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210820174257.548286-1-richard.henderson@linaro.org>
 References: <20210820174257.548286-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,71 +78,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 20 Aug 2021 17:43:30 -0000
 
+Narrow the scope of t0 in trans_jalr.
+
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 36 +++++++++++++------------
- 1 file changed, 19 insertions(+), 17 deletions(-)
+ target/riscv/insn_trans/trans_rvi.c.inc | 25 ++++++++++---------------
+ 1 file changed, 10 insertions(+), 15 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index af3e0bc0e6..f616a26c82 100644
+index e25f64c45a..af3e0bc0e6 100644
 --- a/target/riscv/insn_trans/trans_rvi.c.inc
 +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -138,15 +138,17 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
+@@ -54,24 +54,25 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
  
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
  {
+-    /* no chaining with JALR */
+     TCGLabel *misaligned = NULL;
 -    TCGv t0 = tcg_temp_new();
--    TCGv t1 = tcg_temp_new();
--    gen_get_gpr(ctx, t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
- 
--    tcg_gen_qemu_ld_tl(t1, t0, ctx->mem_idx, memop);
--    gen_set_gpr(ctx, a->rd, t1);
--    tcg_temp_free(t0);
--    tcg_temp_free(t1);
-+    if (a->imm) {
-+        TCGv temp = temp_new(ctx);
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+    gen_set_gpr(ctx, a->rd, dest);
-     return true;
- }
- 
-@@ -177,19 +179,19 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- 
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
--    TCGv t0 = tcg_temp_new();
--    TCGv dat = tcg_temp_new();
--    gen_get_gpr(ctx, t0, a->rs1);
--    tcg_gen_addi_tl(t0, t0, a->imm);
--    gen_get_gpr(ctx, dat, a->rs2);
-+    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
- 
--    tcg_gen_qemu_st_tl(dat, t0, ctx->mem_idx, memop);
--    tcg_temp_free(t0);
--    tcg_temp_free(dat);
-+    if (a->imm) {
-+        TCGv temp = temp_new(ctx);
-+        tcg_gen_addi_tl(temp, addr, a->imm);
-+        addr = temp;
-+    }
-+
-+    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-     return true;
- }
  
 -
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
+-    gen_get_gpr(ctx, cpu_pc, a->rs1);
+-    tcg_gen_addi_tl(cpu_pc, cpu_pc, a->imm);
++    tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
+     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+ 
+     if (!has_ext(ctx, RVC)) {
++        TCGv t0 = tcg_temp_new();
++
+         misaligned = gen_new_label();
+         tcg_gen_andi_tl(t0, cpu_pc, 0x2);
+         tcg_gen_brcondi_tl(TCG_COND_NE, t0, 0x0, misaligned);
++        tcg_temp_free(t0);
+     }
+ 
+     if (a->rd != 0) {
+         tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
+     }
++
++    /* No chaining with JALR. */
+     lookup_and_goto_ptr(ctx);
+ 
+     if (misaligned) {
+@@ -80,21 +81,18 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     }
+     ctx->base.is_jmp = DISAS_NORETURN;
+ 
+-    tcg_temp_free(t0);
+     return true;
+ }
+ 
+ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
  {
-     return gen_store(ctx, a, MO_SB);
+     TCGLabel *l = gen_new_label();
+-    TCGv source1, source2;
+-    source1 = tcg_temp_new();
+-    source2 = tcg_temp_new();
+-    gen_get_gpr(ctx, source1, a->rs1);
+-    gen_get_gpr(ctx, source2, a->rs2);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
+ 
+-    tcg_gen_brcond_tl(cond, source1, source2, l);
++    tcg_gen_brcond_tl(cond, src1, src2, l);
+     gen_goto_tb(ctx, 1, ctx->pc_succ_insn);
++
+     gen_set_label(l); /* branch taken */
+ 
+     if (!has_ext(ctx, RVC) && ((ctx->base.pc_next + a->imm) & 0x3)) {
+@@ -105,9 +103,6 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     }
+     ctx->base.is_jmp = DISAS_NORETURN;
+ 
+-    tcg_temp_free(source1);
+-    tcg_temp_free(source2);
+-
+     return true;
+ }
+ 
 -- 
 2.25.1
 
