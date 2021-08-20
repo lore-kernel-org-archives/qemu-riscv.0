@@ -1,64 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mH8YG-0005rn-9O
+	id 1mH8YG-0005sb-Fu
 	for mharc-qemu-riscv@gnu.org; Fri, 20 Aug 2021 13:43:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49100)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49138)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8Y8-0005X6-FC
- for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:24 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:44024)
+ id 1mH8Y9-0005cU-UZ
+ for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:26 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:55884)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mH8Xy-0003rr-RF
- for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:24 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- qe12-20020a17090b4f8c00b00179321cbae7so7787273pjb.2
- for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:13 -0700 (PDT)
+ id 1mH8Y0-0003tq-RA
+ for qemu-riscv@nongnu.org; Fri, 20 Aug 2021 13:43:25 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id mq3so7775480pjb.5
+ for <qemu-riscv@nongnu.org>; Fri, 20 Aug 2021 10:43:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=nXJ3guWqlzaqn0iKN8apboyIQBkxnjeF9Y5TujOH5pQ=;
- b=tH9db2lLsNnOQXymS3hLsyJVZMl1v+qkVFcBOGDy/uHorB3Q82lyvBpNdymZ5Phl/e
- qtpFYGvYIU7NUIw4UfSQy4wXY+TfylkwWuRhtCgqDJsCJV2imE94dmwC+NaJS9W1GGpj
- a0XQqth0i5WEyuMVkToIxb0yV+KjvZ5hV6iyoOkMB7VDixZHgpwZBHfubtZJdsR2++26
- CWGdw481LX4Oc5p177JDj46wMHcFgC6vFcthpyyzNB2reLlRCjzJzooghRTqXL2rdfx6
- GUWbUNb0mMM/Nboxr2zK59HkDefqoA7ZOAwcv7xe6wu6O/56ErT93A8JukDq6FH0joR+
- zmRA==
+ bh=pDXnUWS0BwMutSCt7YsEkS8Wc9bolLs5aemQ/b75V+c=;
+ b=qVY97KXYvqZP8d7NWp5PqEoobd9AzeicdqoLs+P0HI8Pm/Xd3ov+x+8baWjIFKQb7z
+ EvlPLdX7AufsZVrsp6mMr3PN3FhWrFkRDme3CsPXw+eBvBbKdqKCVZaiJx9oON3te12K
+ V87DHNKpcOVm/frLpRvdZ+7h9oFUz1oUW3bKFDGI57dhjl//Ub9kphiJajUsQbozLDv8
+ L3x4QBK6pX1aWYShlFi6yo0y6QhafNplLgsKOL4y6vV4u3z0cv9tKK1MLzGAJMwFjBBu
+ cXtLuT2inWUAgi4DDS6YZ7O+qR1BHlZsLCA01x+HuRfaI5DV6Sw+r7Xh0C9X9sNIhkV6
+ T58w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=nXJ3guWqlzaqn0iKN8apboyIQBkxnjeF9Y5TujOH5pQ=;
- b=gm3sm4Zaaq1mavcyf2TJuJyAGmQZJdcUCJotq3RDbZixxMpxuUbva1GrDkK8x0YEJf
- 4Oz/hDrVQ3jdLoU/Z3aqIIZ6Vb208FhmDRfqKxzODqeqRV0CndE3LVcNAMcHh9Tv7DuN
- q+LMvKUQis2uXTDpXUnAvxXaILHgMrQw1rE0LUCl9BGDIbMXaD8HxfgJoD51xLAq3dGi
- +CbG3QR2PrBQoxtVIuec9HacilnXAN4optVd0m27H3e9xIDX+dA/KvE+vkO8vBhQpqKa
- 3FkGuDp3O2NlPqx0DR4dD56gaMUaLfcX60EywxdlW10Aqj+MLbiDUyDnE+3Aw9KvFShQ
- 6iCw==
-X-Gm-Message-State: AOAM532BavePgf9QiD94Aw13tx5amcSFdu7XMbFauuNUdKvI3CLA2hlI
- Q2R3IilT2uPkTpTb7KPXq8BAruAJWq2MLw==
-X-Google-Smtp-Source: ABdhPJx0iYOYgiZd5zODSha9PdZWbqoU2+CeRCmHncLLvP7Se5dL1jOqz3FLVavchPRo7m0lq5fBxw==
-X-Received: by 2002:a17:902:8c90:b0:12f:699b:27 with SMTP id
- t16-20020a1709028c9000b0012f699b0027mr10849804plo.28.1629481392178; 
- Fri, 20 Aug 2021 10:43:12 -0700 (PDT)
+ bh=pDXnUWS0BwMutSCt7YsEkS8Wc9bolLs5aemQ/b75V+c=;
+ b=B7wlPHEuYDyipPXknvncmr96U/UmdVYoXVpnUsXisGmcng+sGEs/zrizBAFGHsO5Qi
+ qUDV7ut/3zqmkboFnHU6OClKzFB6qDauSHpiRfhoxCBDpckm9LvkO1qApQPhRwwEjTMC
+ P31BrNLlZPuEunXa93V7zMKwpXPTNOCgQB5IXyzeLCcVcA/fumanyNQ/6RFhJeGtyqig
+ xvuYmNNwMX0z2lQR49m8UOFGpNvTnys+6NRZD80/GLoekq6VDpprag1JtfcWMeiaL3UR
+ e4KxOpqf4S+2h5qaoyAX1PpIfEJRy5x8NGcDCrRirGTSwrQbTxXmn3r6SLa4hmmhqiae
+ k0FQ==
+X-Gm-Message-State: AOAM533MnBBAa7Sau6ZTbaKXmxX9HLjSPl8b/sCPVMRSr0ccV0pZEkrH
+ Z3Yn/mYKiuWT2gE/NoBlnvj4pw==
+X-Google-Smtp-Source: ABdhPJxlOhk/wsDsvD3lAMYek6Zdhvfj4KHsiDw7Rr6n+/th1X+zNYtO8kw4f7H+yWlvbuBS+a0/Ag==
+X-Received: by 2002:a17:90b:3694:: with SMTP id
+ mj20mr5611031pjb.5.1629481395415; 
+ Fri, 20 Aug 2021 10:43:15 -0700 (PDT)
 Received: from localhost.localdomain ([173.197.107.15])
- by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.10
+ by smtp.gmail.com with ESMTPSA id l2sm7304142pfc.157.2021.08.20.10.43.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Aug 2021 10:43:11 -0700 (PDT)
+ Fri, 20 Aug 2021 10:43:15 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, bin.meng@windriver.com, alistair.francis@wdc.com,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v4 07/21] target/riscv: Remove gen_arith_div*
-Date: Fri, 20 Aug 2021 07:42:43 -1000
-Message-Id: <20210820174257.548286-8-richard.henderson@linaro.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PATCH v4 09/21] target/riscv: Move gen_* helpers for RVM
+Date: Fri, 20 Aug 2021 07:42:45 -1000
+Message-Id: <20210820174257.548286-10-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210820174257.548286-1-richard.henderson@linaro.org>
 References: <20210820174257.548286-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,114 +79,321 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2021 17:43:24 -0000
+X-List-Received-Date: Fri, 20 Aug 2021 17:43:26 -0000
 
-Use ctx->w and the enhanced gen_arith function.
+Move these helpers near their use by the trans_*
+functions within insn_trans/trans_rvm.c.inc.
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c                | 42 -------------------------
- target/riscv/insn_trans/trans_rvm.c.inc | 16 +++++-----
- 2 files changed, 8 insertions(+), 50 deletions(-)
+ target/riscv/translate.c                | 127 ------------------------
+ target/riscv/insn_trans/trans_rvm.c.inc | 127 ++++++++++++++++++++++++
+ 2 files changed, 127 insertions(+), 127 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7dd2839288..1855eacbac 100644
+index 1855eacbac..7fbacfa6ee 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -507,48 +507,6 @@ static bool gen_arith_imm_tl(DisasContext *ctx, arg_i *a, DisasExtend ext,
-     return true;
+@@ -249,133 +249,6 @@ static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
+     }
  }
  
--static bool gen_arith_div_w(DisasContext *ctx, arg_r *a,
--                            void(*func)(TCGv, TCGv, TCGv))
+-static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
 -{
--    TCGv source1, source2;
--    source1 = tcg_temp_new();
--    source2 = tcg_temp_new();
+-    TCGv rl = tcg_temp_new();
+-    TCGv rh = tcg_temp_new();
 -
--    gen_get_gpr(ctx, source1, a->rs1);
--    gen_get_gpr(ctx, source2, a->rs2);
--    tcg_gen_ext32s_tl(source1, source1);
--    tcg_gen_ext32s_tl(source2, source2);
+-    tcg_gen_mulu2_tl(rl, rh, arg1, arg2);
+-    /* fix up for one negative */
+-    tcg_gen_sari_tl(rl, arg1, TARGET_LONG_BITS - 1);
+-    tcg_gen_and_tl(rl, rl, arg2);
+-    tcg_gen_sub_tl(ret, rh, rl);
 -
--    (*func)(source1, source1, source2);
--
--    tcg_gen_ext32s_tl(source1, source1);
--    gen_set_gpr(ctx, a->rd, source1);
--    tcg_temp_free(source1);
--    tcg_temp_free(source2);
--    return true;
+-    tcg_temp_free(rl);
+-    tcg_temp_free(rh);
 -}
 -
--static bool gen_arith_div_uw(DisasContext *ctx, arg_r *a,
--                            void(*func)(TCGv, TCGv, TCGv))
+-static void gen_div(TCGv ret, TCGv source1, TCGv source2)
 -{
--    TCGv source1, source2;
--    source1 = tcg_temp_new();
--    source2 = tcg_temp_new();
+-    TCGv temp1, temp2, zero, one, mone, min;
 -
--    gen_get_gpr(ctx, source1, a->rs1);
--    gen_get_gpr(ctx, source2, a->rs2);
--    tcg_gen_ext32u_tl(source1, source1);
--    tcg_gen_ext32u_tl(source2, source2);
+-    temp1 = tcg_temp_new();
+-    temp2 = tcg_temp_new();
+-    zero = tcg_constant_tl(0);
+-    one = tcg_constant_tl(1);
+-    mone = tcg_constant_tl(-1);
+-    min = tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
 -
--    (*func)(source1, source1, source2);
+-    /*
+-     * If overflow, set temp2 to 1, else source2.
+-     * This produces the required result of min.
+-     */
+-    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
+-    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
+-    tcg_gen_and_tl(temp1, temp1, temp2);
+-    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp1, zero, one, source2);
 -
--    tcg_gen_ext32s_tl(source1, source1);
--    gen_set_gpr(ctx, a->rd, source1);
--    tcg_temp_free(source1);
--    tcg_temp_free(source2);
--    return true;
+-    /*
+-     * If div by zero, set temp1 to -1 and temp2 to 1 to
+-     * produce the required result of -1.
+-     */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, mone, source1);
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, temp2);
+-
+-    tcg_gen_div_tl(ret, temp1, temp2);
+-
+-    tcg_temp_free(temp1);
+-    tcg_temp_free(temp2);
 -}
 -
- static void gen_pack(TCGv ret, TCGv arg1, TCGv arg2)
+-static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
+-{
+-    TCGv temp1, temp2, zero, one, max;
+-
+-    temp1 = tcg_temp_new();
+-    temp2 = tcg_temp_new();
+-    zero = tcg_constant_tl(0);
+-    one = tcg_constant_tl(1);
+-    max = tcg_constant_tl(~0);
+-
+-    /*
+-     * If div by zero, set temp1 to max and temp2 to 1 to
+-     * produce the required result of max.
+-     */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, max, source1);
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
+-    tcg_gen_divu_tl(ret, temp1, temp2);
+-
+-    tcg_temp_free(temp1);
+-    tcg_temp_free(temp2);
+-}
+-
+-static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
+-{
+-    TCGv temp1, temp2, zero, one, mone, min;
+-
+-    temp1 = tcg_temp_new();
+-    temp2 = tcg_temp_new();
+-    zero = tcg_constant_tl(0);
+-    one = tcg_constant_tl(1);
+-    mone = tcg_constant_tl(-1);
+-    min = tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
+-
+-    /*
+-     * If overflow, set temp1 to 0, else source1.
+-     * This avoids a possible host trap, and produces the required result of 0.
+-     */
+-    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
+-    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
+-    tcg_gen_and_tl(temp1, temp1, temp2);
+-    tcg_gen_movcond_tl(TCG_COND_NE, temp1, temp1, zero, zero, source1);
+-
+-    /*
+-     * If div by zero, set temp2 to 1, else source2.
+-     * This avoids a possible host trap, but produces an incorrect result.
+-     */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
+-
+-    tcg_gen_rem_tl(temp1, temp1, temp2);
+-
+-    /* If div by zero, the required result is the original dividend. */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, ret, source2, zero, source1, temp1);
+-
+-    tcg_temp_free(temp1);
+-    tcg_temp_free(temp2);
+-}
+-
+-static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
+-{
+-    TCGv temp, zero, one;
+-
+-    temp = tcg_temp_new();
+-    zero = tcg_constant_tl(0);
+-    one = tcg_constant_tl(1);
+-
+-    /*
+-     * If div by zero, set temp to 1, else source2.
+-     * This avoids a possible host trap, but produces an incorrect result.
+-     */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, temp, source2, zero, one, source2);
+-
+-    tcg_gen_remu_tl(temp, source1, temp);
+-
+-    /* If div by zero, the required result is the original dividend. */
+-    tcg_gen_movcond_tl(TCG_COND_EQ, ret, source2, zero, source1, temp);
+-
+-    tcg_temp_free(temp);
+-}
+-
+ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
  {
-     tcg_gen_deposit_tl(ret, arg1, arg2,
+     target_ulong next_pc;
 diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
-index 013b3f7009..3d93b24c25 100644
+index 80552be7a3..b89a85ad3a 100644
 --- a/target/riscv/insn_trans/trans_rvm.c.inc
 +++ b/target/riscv/insn_trans/trans_rvm.c.inc
-@@ -99,30 +99,30 @@ static bool trans_divw(DisasContext *ctx, arg_divw *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_w(ctx, a, &gen_div);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_SIGN, gen_div);
+@@ -39,6 +39,21 @@ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+     return gen_arith(ctx, a, EXT_NONE, gen_mulh);
  }
  
- static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
++static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
++{
++    TCGv rl = tcg_temp_new();
++    TCGv rh = tcg_temp_new();
++
++    tcg_gen_mulu2_tl(rl, rh, arg1, arg2);
++    /* fix up for one negative */
++    tcg_gen_sari_tl(rl, arg1, TARGET_LONG_BITS - 1);
++    tcg_gen_and_tl(rl, rl, arg2);
++    tcg_gen_sub_tl(ret, rh, rl);
++
++    tcg_temp_free(rl);
++    tcg_temp_free(rh);
++}
++
+ static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
  {
-     REQUIRE_64BIT(ctx);
      REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_uw(ctx, a, &gen_divu);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_ZERO, gen_divu);
+@@ -59,24 +74,136 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+     return gen_arith(ctx, a, EXT_NONE, gen_mulhu);
  }
  
- static bool trans_remw(DisasContext *ctx, arg_remw *a)
++static void gen_div(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv temp1, temp2, zero, one, mone, min;
++
++    temp1 = tcg_temp_new();
++    temp2 = tcg_temp_new();
++    zero = tcg_constant_tl(0);
++    one = tcg_constant_tl(1);
++    mone = tcg_constant_tl(-1);
++    min = tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
++
++    /*
++     * If overflow, set temp2 to 1, else source2.
++     * This produces the required result of min.
++     */
++    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
++    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
++    tcg_gen_and_tl(temp1, temp1, temp2);
++    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp1, zero, one, source2);
++
++    /*
++     * If div by zero, set temp1 to -1 and temp2 to 1 to
++     * produce the required result of -1.
++     */
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, mone, source1);
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, temp2);
++
++    tcg_gen_div_tl(ret, temp1, temp2);
++
++    tcg_temp_free(temp1);
++    tcg_temp_free(temp2);
++}
++
+ static bool trans_div(DisasContext *ctx, arg_div *a)
  {
-     REQUIRE_64BIT(ctx);
      REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_w(ctx, a, &gen_rem);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_SIGN, gen_rem);
+     return gen_arith(ctx, a, EXT_SIGN, gen_div);
  }
  
- static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
++static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv temp1, temp2, zero, one, max;
++
++    temp1 = tcg_temp_new();
++    temp2 = tcg_temp_new();
++    zero = tcg_constant_tl(0);
++    one = tcg_constant_tl(1);
++    max = tcg_constant_tl(~0);
++
++    /*
++     * If div by zero, set temp1 to max and temp2 to 1 to
++     * produce the required result of max.
++     */
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, max, source1);
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
++    tcg_gen_divu_tl(ret, temp1, temp2);
++
++    tcg_temp_free(temp1);
++    tcg_temp_free(temp2);
++}
++
+ static bool trans_divu(DisasContext *ctx, arg_divu *a)
  {
-     REQUIRE_64BIT(ctx);
      REQUIRE_EXT(ctx, RVM);
--
--    return gen_arith_div_uw(ctx, a, &gen_remu);
-+    ctx->w = true;
-+    return gen_arith(ctx, a, EXT_ZERO, gen_remu);
+     return gen_arith(ctx, a, EXT_ZERO, gen_divu);
  }
+ 
++static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv temp1, temp2, zero, one, mone, min;
++
++    temp1 = tcg_temp_new();
++    temp2 = tcg_temp_new();
++    zero = tcg_constant_tl(0);
++    one = tcg_constant_tl(1);
++    mone = tcg_constant_tl(-1);
++    min = tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
++
++    /*
++     * If overflow, set temp1 to 0, else source1.
++     * This avoids a possible host trap, and produces the required result of 0.
++     */
++    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
++    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
++    tcg_gen_and_tl(temp1, temp1, temp2);
++    tcg_gen_movcond_tl(TCG_COND_NE, temp1, temp1, zero, zero, source1);
++
++    /*
++     * If div by zero, set temp2 to 1, else source2.
++     * This avoids a possible host trap, but produces an incorrect result.
++     */
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
++
++    tcg_gen_rem_tl(temp1, temp1, temp2);
++
++    /* If div by zero, the required result is the original dividend. */
++    tcg_gen_movcond_tl(TCG_COND_EQ, ret, source2, zero, source1, temp1);
++
++    tcg_temp_free(temp1);
++    tcg_temp_free(temp2);
++}
++
+ static bool trans_rem(DisasContext *ctx, arg_rem *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+     return gen_arith(ctx, a, EXT_SIGN, gen_rem);
+ }
+ 
++static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
++{
++    TCGv temp, zero, one;
++
++    temp = tcg_temp_new();
++    zero = tcg_constant_tl(0);
++    one = tcg_constant_tl(1);
++
++    /*
++     * If div by zero, set temp to 1, else source2.
++     * This avoids a possible host trap, but produces an incorrect result.
++     */
++    tcg_gen_movcond_tl(TCG_COND_EQ, temp, source2, zero, one, source2);
++
++    tcg_gen_remu_tl(temp, source1, temp);
++
++    /* If div by zero, the required result is the original dividend. */
++    tcg_gen_movcond_tl(TCG_COND_EQ, ret, source2, zero, source1, temp);
++
++    tcg_temp_free(temp);
++}
++
+ static bool trans_remu(DisasContext *ctx, arg_remu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
 -- 
 2.25.1
 
