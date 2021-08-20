@@ -1,67 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mGtRh-0002GS-Qk
-	for mharc-qemu-riscv@gnu.org; Thu, 19 Aug 2021 21:35:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54136)
+	id 1mH0kM-0002TC-50
+	for mharc-qemu-riscv@gnu.org; Fri, 20 Aug 2021 05:23:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mGtRg-0002GA-N7; Thu, 19 Aug 2021 21:35:44 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:36713)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mGtRe-0003Sq-NU; Thu, 19 Aug 2021 21:35:44 -0400
-Received: by mail-il1-x12f.google.com with SMTP id x5so7933222ill.3;
- Thu, 19 Aug 2021 18:35:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=JAcApNmC+gp4+JQ8iPBzl66pmXmTl0+XqSNGGIRr6pc=;
- b=foXj2NXKOtFyBZbO7zsXLg+xf+HxGx32ghNI6nzZq06OE3F1STLVeDgSZyFLWVVX8O
- QJdO8KOiZMQbYRv1m+P34L/t4dg0GAmufKcB8IgEyN/5xl1khxmgMm8W24x/i83XtePN
- XvvpRmJ4hn7WhewQZNoE6dZGqiVXsCXZpJnCq5NCcauYTwk9ugXBfAgQxhGNwY6bRT+0
- QmtcgICBKeo2n8I1yaIHjjvRrX3EOJ82RG+44CG4rn7kOvZ7ruT6gJJ3q20ARnj1+5Z5
- LP3mXUbv21j/MmP9x7KT0ccAIIwfRXmp7ylT4PeDY1jqB6oU4L4iDAl92baF96v2VnU8
- oY2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=JAcApNmC+gp4+JQ8iPBzl66pmXmTl0+XqSNGGIRr6pc=;
- b=CHJR+YBAB9Uk1f5gnSZ+p4FZDViF0os5fVwY+uWzIIJ3N6WkKNl8M9VwFEvT+iOrvl
- JoKIDCM8V/vY33pedIW0LFG32D5iffKyoyXJ7ccdc3u7JVnfxgANUkjFK9nhmGcav7pM
- jj28X4IExqntgtyw9vKQ3XpbBevUXJ6lWxTIjC+b0M45Iq6rjAy1S9r4ZHZ9hNpm58Ks
- GILWVVqtaBbf6K+qmgmlh62R9WUKPMHMTK9gyksftuS0oUSz58Y5GScmND7Da+nUmTMf
- THjqXmSGBs9lu2XtruTV7zEWMCPvjZrp8HbKBDUJOGbjpjwZl0JdaTPCHJ2k5N9nEPKz
- IWBg==
-X-Gm-Message-State: AOAM532lkP/K5ndNzsWkMRPqQZc8SmEoyCOqRdpsAq1Z47ljxrIgrH+A
- XwVmeLcHJc9lZ+t8jPKUmlGpQlQcSqWGDJo17O0=
-X-Google-Smtp-Source: ABdhPJzmtdayPNE3ScE0e5YXBoQFmKdlc42QZONSQ5TpZmUZPH8I5OCSMKslLDSwdcL4KfN3yGWVrMY4i5KI6TbKO6w=
-X-Received: by 2002:a92:8707:: with SMTP id m7mr11910115ild.177.1629423340638; 
- Thu, 19 Aug 2021 18:35:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1mH0kI-0002Qt-AX; Fri, 20 Aug 2021 05:23:26 -0400
+Received: from szxga03-in.huawei.com ([45.249.212.189]:2213)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
+ id 1mH0kE-0006g3-0Q; Fri, 20 Aug 2021 05:23:25 -0400
+Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.53])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4GrblV2vMCz88JM;
+ Fri, 20 Aug 2021 17:23:02 +0800 (CST)
+Received: from dggpeml500021.china.huawei.com (7.185.36.21) by
+ dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Fri, 20 Aug 2021 17:23:10 +0800
+Received: from dggpemm000001.china.huawei.com (7.185.36.245) by
+ dggpeml500021.china.huawei.com (7.185.36.21) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Fri, 20 Aug 2021 17:23:10 +0800
+Received: from dggpemm000001.china.huawei.com ([7.185.36.245]) by
+ dggpemm000001.china.huawei.com ([7.185.36.245]) with mapi id 15.01.2176.012;
+ Fri, 20 Aug 2021 17:23:10 +0800
+From: Jiangyifei <jiangyifei@huawei.com>
+To: Alistair Francis <alistair23@gmail.com>
+CC: Anup Patel <anup.patel@wdc.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, "open list:Overall" <kvm@vger.kernel.org>,
+ "limingwang (A)" <limingwang@huawei.com>, "libvir-list@redhat.com"
+ <libvir-list@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, Alistair Francis
+ <Alistair.Francis@wdc.com>, "kvm-riscv@lists.infradead.org"
+ <kvm-riscv@lists.infradead.org>, "Wanghaibin (D)"
+ <wanghaibin.wang@huawei.com>, "Fanliang (EulerOS)" <fanliang@huawei.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)" <wu.wubin@huawei.com>
+Subject: RE: [PATCH RFC v6 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+Thread-Topic: [PATCH RFC v6 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+Thread-Index: AQHXkxd7rvTqNYlfVkymRP72l6WPZ6t51l+AgAJMmQA=
+Date: Fri, 20 Aug 2021 09:23:09 +0000
+Message-ID: <cae5cd805ce844d7b9401a03f90aae4a@huawei.com>
+References: <20210817032447.2055-1-jiangyifei@huawei.com>
+ <20210817032447.2055-9-jiangyifei@huawei.com>
+ <CAKmqyKOm6fxqzScq74hS1NS2=K786MX-oCEA8fG+xOrQi+LQOQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKOm6fxqzScq74hS1NS2=K786MX-oCEA8fG+xOrQi+LQOQ@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.186.236]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20210819090502.428068-1-richard.henderson@linaro.org>
- <20210819090502.428068-9-richard.henderson@linaro.org>
-In-Reply-To: <20210819090502.428068-9-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 20 Aug 2021 11:35:11 +1000
-Message-ID: <CAKmqyKOYiBB9NeiFgpX685ZtAHD22Q3j3+Qg7Yx-Gv0Jjn9OFg@mail.gmail.com>
-Subject: Re: [PATCH v3 08/21] target/riscv: Move gen_* helpers for RVM
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-CFilter-Loop: Reflected
+Received-SPF: pass client-ip=45.249.212.189;
+ envelope-from=jiangyifei@huawei.com; helo=szxga03-in.huawei.com
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,315 +72,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2021 01:35:45 -0000
+X-List-Received-Date: Fri, 20 Aug 2021 09:23:27 -0000
 
-On Thu, Aug 19, 2021 at 7:08 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> Move these helpers near their use by the trans_*
-> functions within insn_trans/trans_rvm.c.inc.
->
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
-> ---
->  target/riscv/translate.c                | 115 ------------------------
->  target/riscv/insn_trans/trans_rvm.c.inc | 115 ++++++++++++++++++++++++
->  2 files changed, 115 insertions(+), 115 deletions(-)
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index bc40b9c701..7fbacfa6ee 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -249,121 +249,6 @@ static void gen_set_gpr(DisasContext *ctx, int reg_=
-num, TCGv t)
->      }
->  }
->
-> -static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
-> -{
-> -    TCGv rl =3D tcg_temp_new();
-> -    TCGv rh =3D tcg_temp_new();
-> -
-> -    tcg_gen_mulu2_tl(rl, rh, arg1, arg2);
-> -    /* fix up for one negative */
-> -    tcg_gen_sari_tl(rl, arg1, TARGET_LONG_BITS - 1);
-> -    tcg_gen_and_tl(rl, rl, arg2);
-> -    tcg_gen_sub_tl(ret, rh, rl);
-> -
-> -    tcg_temp_free(rl);
-> -    tcg_temp_free(rh);
-> -}
-> -
-> -static void gen_div(TCGv ret, TCGv source1, TCGv source2)
-> -{
-> -    TCGv temp1, temp2, zero, one, mone, min;
-> -
-> -    /*
-> -     * Handle by altering args to tcg_gen_div to produce req'd results:
-> -     * For overflow: want source1 in temp1 and 1 in temp2
-> -     * For div by zero: want -1 in temp1 and 1 in temp2 -> -1 result
-> -     */
-> -    temp1 =3D tcg_temp_new();
-> -    temp2 =3D tcg_temp_new();
-> -    zero =3D tcg_constant_tl(0);
-> -    one =3D tcg_constant_tl(1);
-> -    mone =3D tcg_constant_tl(-1);
-> -    min =3D tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
-> -
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
-> -    tcg_gen_and_tl(temp1, temp1, temp2); /* temp1 =3D overflow */
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, zero); /* temp2 =3D =
-div0 */
-> -    tcg_gen_or_tl(temp2, temp2, temp1);  /* temp2 =3D overflow | div0 */
-> -
-> -    /* if div by zero, set temp1 to -1, else source1. */
-> -    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, mone, source1)=
-;
-> -
-> -    /* if overflow or div by zero, set temp2 to 1, else source2 */
-> -    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp2, zero, one, source2);
-> -
-> -    tcg_gen_div_tl(ret, temp1, temp2);
-> -
-> -    tcg_temp_free(temp1);
-> -    tcg_temp_free(temp2);
-> -}
-> -
-> -static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
-> -{
-> -    TCGv temp1, temp2, zero, one, max;
-> -
-> -    temp1 =3D tcg_temp_new();
-> -    temp2 =3D tcg_temp_new();
-> -    zero =3D tcg_constant_tl(0);
-> -    one =3D tcg_constant_tl(1);
-> -    max =3D tcg_constant_tl(~0);
-> -
-> -    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, max, source1);
-> -    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
-> -    tcg_gen_divu_tl(ret, temp1, temp2);
-> -
-> -    tcg_temp_free(temp1);
-> -    tcg_temp_free(temp2);
-> -}
-> -
-> -static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
-> -{
-> -    TCGv temp1, temp2, zero, one, mone, min;
-> -
-> -    temp1 =3D tcg_temp_new();
-> -    temp2 =3D tcg_temp_new();
-> -    zero =3D tcg_constant_tl(0);
-> -    one =3D tcg_constant_tl(1);
-> -    mone =3D tcg_constant_tl(-1);
-> -    min =3D tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
-> -
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
-> -    tcg_gen_and_tl(temp1, temp1, temp2); /* temp1 =3D overflow */
-> -    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, zero); /* temp2 =3D =
-div0 */
-> -    tcg_gen_or_tl(temp2, temp2, temp1);  /* temp2 =3D overflow | div0 */
-> -
-> -    /*
-> -     * if overflow or div by zero, set temp2 to 1, else source2
-> -     * this automatically takes care of returning the original
-> -     * dividend for div by zero.
-> -     */
-> -    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp2, zero, one, source2);
-> -
-> -    tcg_gen_rem_tl(ret, source1, temp2);
-> -
-> -    tcg_temp_free(temp1);
-> -    tcg_temp_free(temp2);
-> -}
-> -
-> -static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
-> -{
-> -    TCGv temp2, zero, one;
-> -
-> -    temp2 =3D tcg_temp_new();
-> -    zero =3D tcg_constant_tl(0);
-> -    one =3D tcg_constant_tl(1);
-> -
-> -    /*
-> -     * if div by zero, set temp2 to 1, else source2
-> -     * this automatically takes care of returning the original dividend.
-> -     */
-> -    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
-> -    tcg_gen_remu_tl(ret, source1, temp2);
-> -
-> -    tcg_temp_free(temp2);
-> -}
-> -
->  static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->  {
->      target_ulong next_pc;
-> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_=
-trans/trans_rvm.c.inc
-> index 80552be7a3..28bdfbca70 100644
-> --- a/target/riscv/insn_trans/trans_rvm.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
-> @@ -39,6 +39,21 @@ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
->      return gen_arith(ctx, a, EXT_NONE, gen_mulh);
->  }
->
-> +static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
-> +{
-> +    TCGv rl =3D tcg_temp_new();
-> +    TCGv rh =3D tcg_temp_new();
-> +
-> +    tcg_gen_mulu2_tl(rl, rh, arg1, arg2);
-> +    /* fix up for one negative */
-> +    tcg_gen_sari_tl(rl, arg1, TARGET_LONG_BITS - 1);
-> +    tcg_gen_and_tl(rl, rl, arg2);
-> +    tcg_gen_sub_tl(ret, rh, rl);
-> +
-> +    tcg_temp_free(rl);
-> +    tcg_temp_free(rh);
-> +}
-> +
->  static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
-> @@ -59,24 +74,124 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu=
- *a)
->      return gen_arith(ctx, a, EXT_NONE, gen_mulhu);
->  }
->
-> +static void gen_div(TCGv ret, TCGv source1, TCGv source2)
-> +{
-> +    TCGv temp1, temp2, zero, one, mone, min;
-> +
-> +    /*
-> +     * Handle by altering args to tcg_gen_div to produce req'd results:
-> +     * For overflow: want source1 in temp1 and 1 in temp2
-> +     * For div by zero: want -1 in temp1 and 1 in temp2 -> -1 result
-> +     */
-> +    temp1 =3D tcg_temp_new();
-> +    temp2 =3D tcg_temp_new();
-> +    zero =3D tcg_constant_tl(0);
-> +    one =3D tcg_constant_tl(1);
-> +    mone =3D tcg_constant_tl(-1);
-> +    min =3D tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
-> +
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
-> +    tcg_gen_and_tl(temp1, temp1, temp2); /* temp1 =3D overflow */
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, zero); /* temp2 =3D =
-div0 */
-> +    tcg_gen_or_tl(temp2, temp2, temp1);  /* temp2 =3D overflow | div0 */
-> +
-> +    /* if div by zero, set temp1 to -1, else source1. */
-> +    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, mone, source1)=
-;
-> +
-> +    /* if overflow or div by zero, set temp2 to 1, else source2 */
-> +    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp2, zero, one, source2);
-> +
-> +    tcg_gen_div_tl(ret, temp1, temp2);
-> +
-> +    tcg_temp_free(temp1);
-> +    tcg_temp_free(temp2);
-> +}
-> +
->  static bool trans_div(DisasContext *ctx, arg_div *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
->      return gen_arith(ctx, a, EXT_SIGN, gen_div);
->  }
->
-> +static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
-> +{
-> +    TCGv temp1, temp2, zero, one, max;
-> +
-> +    temp1 =3D tcg_temp_new();
-> +    temp2 =3D tcg_temp_new();
-> +    zero =3D tcg_constant_tl(0);
-> +    one =3D tcg_constant_tl(1);
-> +    max =3D tcg_constant_tl(~0);
-> +
-> +    tcg_gen_movcond_tl(TCG_COND_EQ, temp1, source2, zero, max, source1);
-> +    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
-> +    tcg_gen_divu_tl(ret, temp1, temp2);
-> +
-> +    tcg_temp_free(temp1);
-> +    tcg_temp_free(temp2);
-> +}
-> +
->  static bool trans_divu(DisasContext *ctx, arg_divu *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
->      return gen_arith(ctx, a, EXT_ZERO, gen_divu);
->  }
->
-> +static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
-> +{
-> +    TCGv temp1, temp2, zero, one, mone, min;
-> +
-> +    temp1 =3D tcg_temp_new();
-> +    temp2 =3D tcg_temp_new();
-> +    zero =3D tcg_constant_tl(0);
-> +    one =3D tcg_constant_tl(1);
-> +    mone =3D tcg_constant_tl(-1);
-> +    min =3D tcg_constant_tl(1ull << (TARGET_LONG_BITS - 1));
-> +
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp1, source1, min);
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, mone);
-> +    tcg_gen_and_tl(temp1, temp1, temp2); /* temp1 =3D overflow */
-> +    tcg_gen_setcond_tl(TCG_COND_EQ, temp2, source2, zero); /* temp2 =3D =
-div0 */
-> +    tcg_gen_or_tl(temp2, temp2, temp1);  /* temp2 =3D overflow | div0 */
-> +
-> +    /*
-> +     * if overflow or div by zero, set temp2 to 1, else source2
-> +     * this automatically takes care of returning the original
-> +     * dividend for div by zero.
-> +     */
-> +    tcg_gen_movcond_tl(TCG_COND_NE, temp2, temp2, zero, one, source2);
-> +
-> +    tcg_gen_rem_tl(ret, source1, temp2);
-> +
-> +    tcg_temp_free(temp1);
-> +    tcg_temp_free(temp2);
-> +}
-> +
->  static bool trans_rem(DisasContext *ctx, arg_rem *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
->      return gen_arith(ctx, a, EXT_SIGN, gen_rem);
->  }
->
-> +static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
-> +{
-> +    TCGv temp2, zero, one;
-> +
-> +    temp2 =3D tcg_temp_new();
-> +    zero =3D tcg_constant_tl(0);
-> +    one =3D tcg_constant_tl(1);
-> +
-> +    /*
-> +     * if div by zero, set temp2 to 1, else source2
-> +     * this automatically takes care of returning the original dividend.
-> +     */
-> +    tcg_gen_movcond_tl(TCG_COND_EQ, temp2, source2, zero, one, source2);
-> +    tcg_gen_remu_tl(ret, source1, temp2);
-> +
-> +    tcg_temp_free(temp2);
-> +}
-> +
->  static bool trans_remu(DisasContext *ctx, arg_remu *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
-> --
-> 2.25.1
->
->
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFFlbXUtcmlzY3YNCj4gW21h
+aWx0bzpxZW11LXJpc2N2LWJvdW5jZXMramlhbmd5aWZlaT1odWF3ZWkuY29tQG5vbmdudS5vcmdd
+IE9uIEJlaGFsZiBPZg0KPiBBbGlzdGFpciBGcmFuY2lzDQo+IFNlbnQ6IFRodXJzZGF5LCBBdWd1
+c3QgMTksIDIwMjEgMjoxNCBQTQ0KPiBUbzogSmlhbmd5aWZlaSA8amlhbmd5aWZlaUBodWF3ZWku
+Y29tPg0KPiBDYzogQW51cCBQYXRlbCA8YW51cC5wYXRlbEB3ZGMuY29tPjsgb3BlbiBsaXN0OlJJ
+U0MtVg0KPiA8cWVtdS1yaXNjdkBub25nbnUub3JnPjsgb3BlbiBsaXN0Ok92ZXJhbGwgPGt2bUB2
+Z2VyLmtlcm5lbC5vcmc+Ow0KPiBsaW1pbmd3YW5nIChBKSA8bGltaW5nd2FuZ0BodWF3ZWkuY29t
+PjsgbGlidmlyLWxpc3RAcmVkaGF0LmNvbTsgQmluIE1lbmcNCj4gPGJpbi5tZW5nQHdpbmRyaXZl
+ci5jb20+OyBxZW11LWRldmVsQG5vbmdudS5vcmcgRGV2ZWxvcGVycw0KPiA8cWVtdS1kZXZlbEBu
+b25nbnUub3JnPjsgQWxpc3RhaXIgRnJhbmNpcyA8QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tPjsN
+Cj4ga3ZtLXJpc2N2QGxpc3RzLmluZnJhZGVhZC5vcmc7IFdhbmdoYWliaW4gKEQpDQo+IDx3YW5n
+aGFpYmluLndhbmdAaHVhd2VpLmNvbT47IEZhbmxpYW5nIChFdWxlck9TKSA8ZmFubGlhbmdAaHVh
+d2VpLmNvbT47DQo+IFBhbG1lciBEYWJiZWx0IDxwYWxtZXJAZGFiYmVsdC5jb20+OyBXdWJpbiAo
+SCkgPHd1Lnd1YmluQGh1YXdlaS5jb20+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggUkZDIHY2IDA4
+LzEyXSB0YXJnZXQvcmlzY3Y6IEhhbmRsZSBLVk1fRVhJVF9SSVNDVl9TQkkNCj4gZXhpdA0KPiAN
+Cj4gT24gVHVlLCBBdWcgMTcsIDIwMjEgYXQgMToyNSBQTSBZaWZlaSBKaWFuZyA8amlhbmd5aWZl
+aUBodWF3ZWkuY29tPiB3cm90ZToNCj4gPg0KPiA+IFVzZSBjaGFyLWZlIHRvIGhhbmRsZSBjb25z
+b2xlIHNiaSBjYWxsLCB3aGljaCBpbXBsZW1lbnQgZWFybHkgY29uc29sZQ0KPiA+IGlvIHdoaWxl
+IGFwcGx5ICdlYXJseWNvbj1zYmknIGludG8ga2VybmVsIHBhcmFtZXRlcnMuDQo+ID4NCj4gPiBT
+aWduZWQtb2ZmLWJ5OiBZaWZlaSBKaWFuZyA8amlhbmd5aWZlaUBodWF3ZWkuY29tPg0KPiA+IFNp
+Z25lZC1vZmYtYnk6IE1pbmd3YW5nIExpIDxsaW1pbmd3YW5nQGh1YXdlaS5jb20+DQo+ID4gLS0t
+DQo+ID4gIHRhcmdldC9yaXNjdi9rdm0uYyAgICAgICAgICAgICAgICAgfCA0MiArKysrKysrKysr
+KysrKysrLQ0KPiA+ICB0YXJnZXQvcmlzY3Yvc2JpX2VjYWxsX2ludGVyZmFjZS5oIHwgNzINCj4g
+PiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgMiBmaWxlcyBjaGFuZ2VkLCAx
+MTMgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKSAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
+dGFyZ2V0L3Jpc2N2L3NiaV9lY2FsbF9pbnRlcmZhY2UuaA0KPiA+DQo+ID4gZGlmZiAtLWdpdCBh
+L3RhcmdldC9yaXNjdi9rdm0uYyBiL3RhcmdldC9yaXNjdi9rdm0uYyBpbmRleA0KPiA+IGJjOWNi
+NWQ4ZjkuLmE2OGYzMWMyZjMgMTAwNjQ0DQo+ID4gLS0tIGEvdGFyZ2V0L3Jpc2N2L2t2bS5jDQo+
+ID4gKysrIGIvdGFyZ2V0L3Jpc2N2L2t2bS5jDQo+ID4gQEAgLTM4LDYgKzM4LDggQEANCj4gPiAg
+I2luY2x1ZGUgInFlbXUvbG9nLmgiDQo+ID4gICNpbmNsdWRlICJody9sb2FkZXIuaCINCj4gPiAg
+I2luY2x1ZGUgImt2bV9yaXNjdi5oIg0KPiA+ICsjaW5jbHVkZSAic2JpX2VjYWxsX2ludGVyZmFj
+ZS5oIg0KPiA+ICsjaW5jbHVkZSAiY2hhcmRldi9jaGFyLWZlLmgiDQo+ID4NCj4gPiAgc3RhdGlj
+IHVpbnQ2NF90IGt2bV9yaXNjdl9yZWdfaWQoQ1BVUklTQ1ZTdGF0ZSAqZW52LCB1aW50NjRfdCB0
+eXBlLA0KPiA+IHVpbnQ2NF90IGlkeCkgIHsgQEAgLTQzNSw5ICs0MzcsNDcgQEAgYm9vbA0KPiA+
+IGt2bV9hcmNoX3N0b3Bfb25fZW11bGF0aW9uX2Vycm9yKENQVVN0YXRlICpjcykNCj4gPiAgICAg
+IHJldHVybiB0cnVlOw0KPiA+ICB9DQo+ID4NCj4gPiArc3RhdGljIGludCBrdm1fcmlzY3ZfaGFu
+ZGxlX3NiaShzdHJ1Y3Qga3ZtX3J1biAqcnVuKSB7DQo+ID4gKyAgICBpbnQgcmV0ID0gMDsNCj4g
+PiArICAgIHVuc2lnbmVkIGNoYXIgY2g7DQo+ID4gKyAgICBzd2l0Y2ggKHJ1bi0+cmlzY3Zfc2Jp
+LmV4dGVuc2lvbl9pZCkgew0KPiA+ICsgICAgY2FzZSBTQklfRVhUXzBfMV9DT05TT0xFX1BVVENI
+QVI6DQo+ID4gKyAgICAgICAgY2ggPSBydW4tPnJpc2N2X3NiaS5hcmdzWzBdOw0KPiA+ICsgICAg
+ICAgIHFlbXVfY2hyX2ZlX3dyaXRlKHNlcmlhbF9oZCgwKS0+YmUsICZjaCwgc2l6ZW9mKGNoKSk7
+DQo+ID4gKyAgICAgICAgYnJlYWs7DQo+ID4gKyAgICBjYXNlIFNCSV9FWFRfMF8xX0NPTlNPTEVf
+R0VUQ0hBUjoNCj4gPiArICAgICAgICByZXQgPSBxZW11X2Nocl9mZV9yZWFkX2FsbChzZXJpYWxf
+aGQoMCktPmJlLCAmY2gsIHNpemVvZihjaCkpOw0KPiA+ICsgICAgICAgIGlmIChyZXQgPT0gc2l6
+ZW9mKGNoKSkgew0KPiA+ICsgICAgICAgICAgICBydW4tPnJpc2N2X3NiaS5hcmdzWzBdID0gY2g7
+DQo+ID4gKyAgICAgICAgfSBlbHNlIHsNCj4gPiArICAgICAgICAgICAgcnVuLT5yaXNjdl9zYmku
+YXJnc1swXSA9IC0xOw0KPiA+ICsgICAgICAgIH0NCj4gPiArICAgICAgICBicmVhazsNCj4gDQo+
+IFRoZXNlIGhhdmUgYmVlbiBkZXByZWNhdGVkIChzZWUNCj4gaHR0cHM6Ly9naXRodWIuY29tL3Jp
+c2N2L3Jpc2N2LXNiaS1kb2MvYmxvYi9tYXN0ZXIvcmlzY3Ytc2JpLmFkb2MjNC1sZWdhY3ktZXh0
+DQo+IGVuc2lvbnMtZWlkcy0weDAwLS0tMHgwZiksDQo+IGlzIGl0IGV2ZW4gd29ydGggc3VwcG9y
+dGluZyB0aGVtPw0KPiANCg0KWWVzLiBUaGUgbGVnYWN5IGNvbnNvbGUgU0JJIGZ1bmN0aW9ucyAo
+c2JpX2NvbnNvbGVfZ2V0Y2hhcigpIGFuZCBzYmlfY29uc29sZV9wdXRjaGFyKCkpDQphcmUgZXhw
+ZWN0ZWQgdG8gYmUgZGVwcmVjYXRlZC4NCg0KSG93ZXZlciwgdGhlIGxpbnV4IGtlcm5lbCBzdGls
+bCB1c2VzIHRoZXNlIHNiaSBjYWxsIGludGVyZmFjZXMsIHNvIHRoZXkgYXJlIHJldGFpbmVkIGhl
+cmUuDQpJZiB0aGUgbGludXgga2VybmVsIGRvZXNuJ3QgdXNlIHRoZXNlIGludGVyZmFjZXMsIHdl
+IHdpbGwgcmVtb3ZlIHRoZW0uDQoNCllpZmVpDQoNCj4gPiArICAgIGRlZmF1bHQ6DQo+ID4gKyAg
+ICAgICAgcWVtdV9sb2dfbWFzayhMT0dfVU5JTVAsDQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAiJXM6IHVuLWhhbmRsZWQgU0JJIEVYSVQsIHNwZWNpZmljIHJlYXNvbnMNCj4gaXMgJWx1XG4i
+LA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgX19mdW5jX18sIHJ1bi0+cmlzY3Zfc2JpLmV4
+dGVuc2lvbl9pZCk7DQo+ID4gKyAgICAgICAgcmV0ID0gLTE7DQo+ID4gKyAgICAgICAgYnJlYWs7
+DQo+ID4gKyAgICB9DQo+ID4gKyAgICByZXR1cm4gcmV0Ow0KPiA+ICt9DQo+ID4gKw0KPiA+ICBp
+bnQga3ZtX2FyY2hfaGFuZGxlX2V4aXQoQ1BVU3RhdGUgKmNzLCBzdHJ1Y3Qga3ZtX3J1biAqcnVu
+KSAgew0KPiA+IC0gICAgcmV0dXJuIDA7DQo+ID4gKyAgICBpbnQgcmV0ID0gMDsNCj4gPiArICAg
+IHN3aXRjaCAocnVuLT5leGl0X3JlYXNvbikgew0KPiA+ICsgICAgY2FzZSBLVk1fRVhJVF9SSVND
+Vl9TQkk6DQo+ID4gKyAgICAgICAgcmV0ID0ga3ZtX3Jpc2N2X2hhbmRsZV9zYmkocnVuKTsNCj4g
+PiArICAgICAgICBicmVhazsNCj4gPiArICAgIGRlZmF1bHQ6DQo+ID4gKyAgICAgICAgcWVtdV9s
+b2dfbWFzayhMT0dfVU5JTVAsICIlczogdW4taGFuZGxlZCBleGl0IHJlYXNvbiAlZFxuIiwNCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgIF9fZnVuY19fLCBydW4tPmV4aXRfcmVhc29uKTsNCj4g
+PiArICAgICAgICByZXQgPSAtMTsNCj4gPiArICAgICAgICBicmVhazsNCj4gPiArICAgIH0NCj4g
+PiArICAgIHJldHVybiByZXQ7DQo+ID4gIH0NCj4gPg0KPiA+ICB2b2lkIGt2bV9yaXNjdl9yZXNl
+dF92Y3B1KFJJU0NWQ1BVICpjcHUpIGRpZmYgLS1naXQNCj4gPiBhL3RhcmdldC9yaXNjdi9zYmlf
+ZWNhbGxfaW50ZXJmYWNlLmgNCj4gPiBiL3RhcmdldC9yaXNjdi9zYmlfZWNhbGxfaW50ZXJmYWNl
+LmgNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAwMDAuLmZiMWEz
+ZmE4ZjINCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvdGFyZ2V0L3Jpc2N2L3NiaV9lY2Fs
+bF9pbnRlcmZhY2UuaA0KPiA+IEBAIC0wLDAgKzEsNzIgQEANCj4gPiArLyoNCj4gPiArICogU1BE
+WC1MaWNlbnNlLUlkZW50aWZpZXI6IEJTRC0yLUNsYXVzZQ0KPiA+ICsgKg0KPiA+ICsgKiBDb3B5
+cmlnaHQgKGMpIDIwMTkgV2VzdGVybiBEaWdpdGFsIENvcnBvcmF0aW9uIG9yIGl0cyBhZmZpbGlh
+dGVzLg0KPiA+ICsgKg0KPiA+ICsgKiBBdXRob3JzOg0KPiA+ICsgKiAgIEFudXAgUGF0ZWwgPGFu
+dXAucGF0ZWxAd2RjLmNvbT4NCj4gPiArICovDQo+ID4gKw0KPiA+ICsjaWZuZGVmIF9fU0JJX0VD
+QUxMX0lOVEVSRkFDRV9IX18NCj4gPiArI2RlZmluZSBfX1NCSV9FQ0FMTF9JTlRFUkZBQ0VfSF9f
+DQo+ID4gKw0KPiA+ICsvKiBjbGFuZy1mb3JtYXQgb2ZmICovDQo+ID4gKw0KPiA+ICsvKiBTQkkg
+RXh0ZW5zaW9uIElEcyAqLw0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfMF8xX1NFVF9USU1FUiAgICAg
+ICAgICAgMHgwDQo+ID4gKyNkZWZpbmUgU0JJX0VYVF8wXzFfQ09OU09MRV9QVVRDSEFSICAgICAw
+eDENCj4gPiArI2RlZmluZSBTQklfRVhUXzBfMV9DT05TT0xFX0dFVENIQVIgICAgIDB4Mg0KPiA+
+ICsjZGVmaW5lIFNCSV9FWFRfMF8xX0NMRUFSX0lQSSAgICAgICAgICAgMHgzDQo+ID4gKyNkZWZp
+bmUgU0JJX0VYVF8wXzFfU0VORF9JUEkgICAgICAgICAgICAweDQNCj4gPiArI2RlZmluZSBTQklf
+RVhUXzBfMV9SRU1PVEVfRkVOQ0VfSSAgICAgIDB4NQ0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfMF8x
+X1JFTU9URV9TRkVOQ0VfVk1BICAgMHg2DQo+ID4gKyNkZWZpbmUgU0JJX0VYVF8wXzFfUkVNT1RF
+X1NGRU5DRV9WTUFfQVNJRCAweDcNCj4gPiArI2RlZmluZSBTQklfRVhUXzBfMV9TSFVURE9XTiAg
+ICAgICAgICAgIDB4OA0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfQkFTRSAgICAgICAgICAgICAgICAg
+ICAgMHgxMA0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfVElNRSAgICAgICAgICAgICAgICAgICAgMHg1
+NDQ5NEQ0NQ0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfSVBJICAgICAgICAgICAgICAgICAgICAgMHg3
+MzUwNDkNCj4gPiArI2RlZmluZSBTQklfRVhUX1JGRU5DRSAgICAgICAgICAgICAgICAgIDB4NTI0
+NjRFNDMNCj4gPiArI2RlZmluZSBTQklfRVhUX0hTTSAgICAgICAgICAgICAgICAgICAgIDB4NDg1
+MzREDQo+ID4gKw0KPiA+ICsvKiBTQkkgZnVuY3Rpb24gSURzIGZvciBCQVNFIGV4dGVuc2lvbiov
+DQo+ID4gKyNkZWZpbmUgU0JJX0VYVF9CQVNFX0dFVF9TUEVDX1ZFUlNJT04gICAweDANCj4gPiAr
+I2RlZmluZSBTQklfRVhUX0JBU0VfR0VUX0lNUF9JRCAgICAgICAgIDB4MQ0KPiA+ICsjZGVmaW5l
+IFNCSV9FWFRfQkFTRV9HRVRfSU1QX1ZFUlNJT04gICAgMHgyDQo+ID4gKyNkZWZpbmUgU0JJX0VY
+VF9CQVNFX1BST0JFX0VYVCAgICAgICAgICAweDMNCj4gPiArI2RlZmluZSBTQklfRVhUX0JBU0Vf
+R0VUX01WRU5ET1JJRCAgICAgIDB4NA0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfQkFTRV9HRVRfTUFS
+Q0hJRCAgICAgICAgMHg1DQo+ID4gKyNkZWZpbmUgU0JJX0VYVF9CQVNFX0dFVF9NSU1QSUQgICAg
+ICAgICAweDYNCj4gPiArDQo+ID4gKy8qIFNCSSBmdW5jdGlvbiBJRHMgZm9yIFRJTUUgZXh0ZW5z
+aW9uKi8NCj4gPiArI2RlZmluZSBTQklfRVhUX1RJTUVfU0VUX1RJTUVSICAgICAgICAgIDB4MA0K
+PiA+ICsNCj4gPiArLyogU0JJIGZ1bmN0aW9uIElEcyBmb3IgSVBJIGV4dGVuc2lvbiovDQo+ID4g
+KyNkZWZpbmUgU0JJX0VYVF9JUElfU0VORF9JUEkgICAgICAgICAgICAweDANCj4gPiArDQo+ID4g
+Ky8qIFNCSSBmdW5jdGlvbiBJRHMgZm9yIFJGRU5DRSBleHRlbnNpb24qLw0KPiA+ICsjZGVmaW5l
+IFNCSV9FWFRfUkZFTkNFX1JFTU9URV9GRU5DRV9JICAgICAgIDB4MA0KPiA+ICsjZGVmaW5lIFNC
+SV9FWFRfUkZFTkNFX1JFTU9URV9TRkVOQ0VfVk1BICAgIDB4MQ0KPiA+ICsjZGVmaW5lIFNCSV9F
+WFRfUkZFTkNFX1JFTU9URV9TRkVOQ0VfVk1BX0FTSUQgIDB4Mg0KPiA+ICsjZGVmaW5lIFNCSV9F
+WFRfUkZFTkNFX1JFTU9URV9IRkVOQ0VfR1ZNQSAgIDB4Mw0KPiA+ICsjZGVmaW5lIFNCSV9FWFRf
+UkZFTkNFX1JFTU9URV9IRkVOQ0VfR1ZNQV9WTUlEIDB4NA0KPiA+ICsjZGVmaW5lIFNCSV9FWFRf
+UkZFTkNFX1JFTU9URV9IRkVOQ0VfVlZNQSAgIDB4NQ0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfUkZF
+TkNFX1JFTU9URV9IRkVOQ0VfVlZNQV9BU0lEIDB4Ng0KPiA+ICsNCj4gPiArLyogU0JJIGZ1bmN0
+aW9uIElEcyBmb3IgSFNNIGV4dGVuc2lvbiAqLw0KPiA+ICsjZGVmaW5lIFNCSV9FWFRfSFNNX0hB
+UlRfU1RBUlQgICAgICAgICAgMHgwDQo+ID4gKyNkZWZpbmUgU0JJX0VYVF9IU01fSEFSVF9TVE9Q
+ICAgICAgICAgICAweDENCj4gPiArI2RlZmluZSBTQklfRVhUX0hTTV9IQVJUX0dFVF9TVEFUVVMg
+ICAgIDB4Mg0KPiA+ICsNCj4gPiArI2RlZmluZSBTQklfSFNNX0hBUlRfU1RBVFVTX1NUQVJURUQg
+ICAgIDB4MA0KPiA+ICsjZGVmaW5lIFNCSV9IU01fSEFSVF9TVEFUVVNfU1RPUFBFRCAgICAgMHgx
+DQo+ID4gKyNkZWZpbmUgU0JJX0hTTV9IQVJUX1NUQVRVU19TVEFSVF9QRU5ESU5HICAgMHgyDQo+
+ID4gKyNkZWZpbmUgU0JJX0hTTV9IQVJUX1NUQVRVU19TVE9QX1BFTkRJTkcgICAgMHgzDQo+ID4g
+Kw0KPiA+ICsjZGVmaW5lIFNCSV9TUEVDX1ZFUlNJT05fTUFKT1JfT0ZGU0VUICAgMjQNCj4gPiAr
+I2RlZmluZSBTQklfU1BFQ19WRVJTSU9OX01BSk9SX01BU0sgICAgIDB4N2YNCj4gPiArI2RlZmlu
+ZSBTQklfU1BFQ19WRVJTSU9OX01JTk9SX01BU0sgICAgIDB4ZmZmZmZmDQo+ID4gKyNkZWZpbmUg
+U0JJX0VYVF9WRU5ET1JfU1RBUlQgICAgICAgICAgICAweDA5MDAwMDAwDQo+ID4gKyNkZWZpbmUg
+U0JJX0VYVF9WRU5ET1JfRU5EICAgICAgICAgICAgICAweDA5RkZGRkZGDQo+ID4gKy8qIGNsYW5n
+LWZvcm1hdCBvbiAqLw0KPiA+ICsNCj4gPiArI2VuZGlmDQo+ID4gLS0NCj4gPiAyLjE5LjENCj4g
+Pg0KPiA+DQoNCg==
 
