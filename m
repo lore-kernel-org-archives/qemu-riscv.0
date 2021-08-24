@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mIQ4S-00039Y-OK
-	for mharc-qemu-riscv@gnu.org; Tue, 24 Aug 2021 02:38:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50956)
+	id 1mIQ4w-0003wi-I5
+	for mharc-qemu-riscv@gnu.org; Tue, 24 Aug 2021 02:38:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51006)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mIQ4P-00036o-9E; Tue, 24 Aug 2021 02:38:02 -0400
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:39888)
+ id 1mIQ4s-0003vH-Hf; Tue, 24 Aug 2021 02:38:30 -0400
+Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:46948)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mIQ4N-0002Zm-8o; Tue, 24 Aug 2021 02:38:01 -0400
-Received: by mail-yb1-xb31.google.com with SMTP id n126so25618311ybf.6;
- Mon, 23 Aug 2021 23:37:58 -0700 (PDT)
+ id 1mIQ4q-0002xj-G0; Tue, 24 Aug 2021 02:38:30 -0400
+Received: by mail-yb1-xb2f.google.com with SMTP id k65so38869752yba.13;
+ Mon, 23 Aug 2021 23:38:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ObVFOuAZqO9ZGm+HgSONHYjDI8zzKYHk3yOk/QKWwzk=;
- b=Otf0sUS+tj1Ivd5QF6YKI+bzXom31nWXuwfKbVxzRCwvxiXOPl6a2yJwXYwRAsk0ZR
- 9Cu00BJj/EL71ktSZKKg9UX7uqd+VOl4NiueUqCCxDKGFpINui5KcHaG/jrJEFDV6xzX
- WWjEiz4hMykDtXZo6vOzroTikuiGjxotqf87cIezcj9HJYoWqxooRB82nLYXiCkhueBm
- Z2DJGDKhF75o6LxmCEGL1V4AGElokhG3LV83iu5AKLjqAfzh7f3K7qPlrSrV5VWs6Wg1
- CpSSC5urj0RByYMtr1vlXl/A7YEBU96ZW1e+CS88GGWbSR41PCSjDT3pk0FrK0EItkqW
- qbkw==
+ :cc; bh=rbCsTz7MMZjquuVFJNC9+dHMTBW1mBzYRLH2a8/KGfo=;
+ b=KlrVTPQWzIOHv3ZuNI56g/ddSFRpzURZ+56iPneCiCcOtLsyDC9iUKm9mX0rCN09h4
+ w7WvWup8hVtmmRuaduQzk9U6xc4WWR9mDaLhvtrzHBTeQKR/hqwoA91YUmL9Ko8usfNL
+ 0bmjkzmGbTlVG1TGynemueQ1+ICKYfZvInnYT5pZiRR7SqlCEYTzLUy/u8Yx4IIJOcvL
+ UV4vM4KRQY+adOK2GDF1BdVd9TJuLrsH9vp8H83haiIYO8znm1EDmD7g0F0uare+DGmb
+ 2wnnaSikkY9gu6hJXJ7fGiPDLD6iql9mozEhIDGovTd5t+b0B+zQmyLD/jG+LrASi9Je
+ IG7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ObVFOuAZqO9ZGm+HgSONHYjDI8zzKYHk3yOk/QKWwzk=;
- b=blEIOhqmvaIJNW19TvRhZT0FAoES//5D+iwjT+KyT1JQWqb2HaSGfT/DFmtxDRoToF
- FIyk17H7sxJ5kD+I0OmwNYG5VURXrDAxjL3lxWrxPKpvq7c+lQgosTBmRPbGZfMQW4uh
- Bh0k5mPTuQL/PeiMUgqgkK8t5nnV4gfvJ23HLlrGzEmn+hxIFJCx/AgkwI8a9av6cheX
- KUbSWc9SeXA/3mr3yW7xu9H06XHWmczcbsTeZwoOGNPJXLrLHZu1tNdz2QUX/eG5mt1F
- 2rCxyKTZcXdED+ZLJcGSDAP/N4LYIwwQ5PBOEEGvDEHolAe5vpcKxf0AG4fDevFfbodq
- GmfQ==
-X-Gm-Message-State: AOAM532voRLLKOJEgJz+exSJoN7DO1VhcqfxH7jPfn3T9Fcla9CYonGS
- DOAsDjwmLejfQiMs8oKhLTcccNC7mpsKsUxr7q4=
-X-Google-Smtp-Source: ABdhPJyD1wPDTLVW1hE6P/xHRck9sqNPso4x58c67HqD6rxeESag1LKPL2UladS5JDIsyk3ypdDxTwAUVuNQsAzcqyk=
-X-Received: by 2002:a25:ac87:: with SMTP id x7mr8504983ybi.332.1629787077370; 
- Mon, 23 Aug 2021 23:37:57 -0700 (PDT)
+ bh=rbCsTz7MMZjquuVFJNC9+dHMTBW1mBzYRLH2a8/KGfo=;
+ b=JF7HMkgmzQc4CfCGNp7y9c8RJiAmP4JGj+tDEDx0ouhQEvTZM3vIyAE6p7fNf22Nix
+ 6T4NkJ50qc3ML1A/6b7/GhUer69XRL4jl7U4NLraIf6fBz6ItTEJraYJmcQD/bN3oe9Q
+ 9favWHT5et9VFhBlg+M6vOn7zE6xtJtZqIe2yP0TAYZBwO3DVAWTDi9iK4vb2ysZqgaA
+ IfC97l1h1MWJ/cau5n/CLzIkPKJMnKJyZ2ZYkUiBIwWG4H8T5+m81ZXyKYm8mf4q0ql+
+ DN6+nAHjmNk2r743mtvueabf8ruPU6UdCHtdFqWpaX2w7IT3R3a+ALRvlM9KHzakj6N0
+ O+pw==
+X-Gm-Message-State: AOAM533oF9nGewD3QK9HpF8hMR6HAsq3rj1fJdiOwGI3DESl87Ad5qnu
+ xw18mfPKfakn47jKvCLf7jl1MVMS4FUdX4xPQjM=
+X-Google-Smtp-Source: ABdhPJxALP/O3Mye11qrgxjloPbMoy2oJw3AWY7u2jiWS0/ldGl3ELmeWKfvubkaxM+ltZIC3eMXGVxuzRdV8O4GfEk=
+X-Received: by 2002:a25:6d44:: with SMTP id i65mr46201920ybc.517.1629787107303; 
+ Mon, 23 Aug 2021 23:38:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210823195529.560295-1-richard.henderson@linaro.org>
- <20210823195529.560295-17-richard.henderson@linaro.org>
-In-Reply-To: <20210823195529.560295-17-richard.henderson@linaro.org>
+ <20210823195529.560295-18-richard.henderson@linaro.org>
+In-Reply-To: <20210823195529.560295-18-richard.henderson@linaro.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 24 Aug 2021 14:37:46 +0800
-Message-ID: <CAEUhbmVQZpZ_=rb+KO6NFqAz7SbAT-1LTRKSY9EKyF3seTi9_g@mail.gmail.com>
-Subject: Re: [PATCH v5 16/24] target/riscv: Fix rmw_sip, rmw_vsip, rmw_hsip vs
- write-only operation
+Date: Tue, 24 Aug 2021 14:38:16 +0800
+Message-ID: <CAEUhbmUE5EsV9092U5BAhbRpOSh0POHbKHkQMpD+MGYOeWRFPA@mail.gmail.com>
+Subject: Re: [PATCH v5 17/24] target/riscv: Fix hgeie, hgeip
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -71,17 +70,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2021 06:38:02 -0000
+X-List-Received-Date: Tue, 24 Aug 2021 06:38:32 -0000
 
-On Tue, Aug 24, 2021 at 4:02 AM Richard Henderson
+On Tue, Aug 24, 2021 at 4:08 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> We distinguish write-only by passing ret_value as NULL.
+> We failed to write into *val for these read functions;
+> replace them with read_zero.  Only warn about unsupported
+> non-zero value when writing a non-zero value.
 >
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/riscv/csr.c | 23 +++++++++++++++--------
->  1 file changed, 15 insertions(+), 8 deletions(-)
+>  target/riscv/csr.c | 26 ++++++++------------------
+>  1 file changed, 8 insertions(+), 18 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
