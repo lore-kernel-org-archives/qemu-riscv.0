@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mKmvK-0007n8-CE
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 15:26:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57588)
+	id 1mKmvM-0007vU-Tx
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 15:26:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mKktw-00058k-Ji; Mon, 30 Aug 2021 13:16:52 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:50080)
+ id 1mKkts-00057T-GV; Mon, 30 Aug 2021 13:16:48 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:50032)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mKkts-0007BN-Hf; Mon, 30 Aug 2021 13:16:52 -0400
+ id 1mKktp-00078k-Df; Mon, 30 Aug 2021 13:16:48 -0400
 Received: from zm-mta-out.u-ga.fr (zm-mta-out.u-ga.fr [152.77.200.53])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id DA27541900;
- Mon, 30 Aug 2021 19:16:46 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id D9481418FA;
+ Mon, 30 Aug 2021 19:16:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1630343806;
- bh=Wi1qXrtrB3teyYk9oNUtizMH0jrN5R2R3+CPSM/4Qz0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fcLO/V4NxT2p2W07YKq6Fpr+3tSN3UTwVtP2TgzeevF+MSNML6vV3VbKhuQwVJVK7
- iy+3+7/ZWj5iBkNGnqyXsjGqBycuIwRbkKykh0HIr32QnCAJF06CVSZwy1Ay8aXLVv
- owYVsPoNlY2H61ejNTwGouHipwRykJaUYtlog+QuxoC7K2Y7Tf6DBAmrKEP27Ks6xp
- 2kBhezXKQYU+recBUdLk+BFUHqW/SgWqlb05GOL/pbNrNSCmXq5jfoolPGhuie0zLR
- WlBMBL9DMCc5EiahUfZIGQyjbRmAt55rBCC4W2PeEc1pEZavtbq3z/eTBE9EGDlXwW
- bss4PUTcwVAWw==
+ d=univ-grenoble-alpes.fr; s=2020; t=1630343803;
+ bh=QAZjJ3T00edFgc9X+6Gt6qT9TAiFXsqcD9Orp0odjBE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=O0Kn7SFxrgoV/J/q9HXy4owwMFBQoj+bLU2NTCzqJV27Zeln+NE5GUjtO2171Y4v6
+ 2JUOf/hyvNHqGjtzd1yExakhq768qAbRUy17L2QzrAdCzqYp+gZlyEFRj3Xg23fD2d
+ 6sBs8DqM+9+BncrFMlFCjxDlQV52rjQgdFmytzh9mjfq9XKJ8hIXjMNP2YUkfmR5nY
+ BJ+C9Zxoc7p2WNZ4Zx3VEvILWKCeynHZMUyQLk7fDnKQU1QlK6ewm8iiqKGkv6Mhbi
+ N7JSGihMh3NQB/4teNOI6zf147MZN6NdP8cnDFh7iZCn2Fr3WQoNFRrGpzM3jWoZLb
+ 7zFeaO/UnP0IA==
 Received: from smtps.univ-grenoble-alpes.fr (smtps1.u-ga.fr [152.77.1.30])
- by zm-mta-out.u-ga.fr (Postfix) with ESMTP id D525280137;
- Mon, 30 Aug 2021 19:16:46 +0200 (CEST)
+ by zm-mta-out.u-ga.fr (Postfix) with ESMTP id D3D1C80137;
+ Mon, 30 Aug 2021 19:16:43 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128
  bits)) (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 87F69187E19;
- Mon, 30 Aug 2021 19:16:46 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 7F2BD187E12;
+ Mon, 30 Aug 2021 19:16:43 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -40,17 +40,14 @@ To: qemu-devel@nongnu.org,
 Cc: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>, 
  Fabien Portas <fabien.portas@grenoble-inp.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 3/8] target/riscv: Addition of 128-bit ldu,
- lq and sq instructions
-Date: Mon, 30 Aug 2021 19:16:33 +0200
-Message-Id: <20210830171638.126325-3-frederic.petrot@univ-grenoble-alpes.fr>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH 1/8] target/riscv: Settings for 128-bit extension support
+Date: Mon, 30 Aug 2021 19:16:31 +0200
+Message-Id: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
-References: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -67,7 +64,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 30 Aug 2021 15:26:24 -0400
+X-Mailman-Approved-At: Mon, 30 Aug 2021 15:26:27 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,408 +78,519 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 30 Aug 2021 17:16:54 -0000
 
-Addition of the load(s) and store instructions of the 128-bit extension.
-These instructions have addresses on 128-bit but explicitly assume that the
-upper 64-bit of the address registers is null, and therefore can use the
-existing address translation mechanism.
-128-bit memory access identification and 64-bit signedness is handled a bit
-off-the-record:
-MemOp reserves 2 bits for size and a contiguous 3rd bit for the sign, so we
-cannot simply take value 4 to indicate a size of 16 bytes.
-Additionally, MO_TEQ | MO_SIGN seems to be a sentinel value, leading to a
-QEMU assertion violation.
-Modifying the existing state in QEMU has a great impact that we are not
-capable of fully evaluating, so we choose to pass this information into
-another parameter and let memop as it is for now.
+Starting 128-bit extension support implies a few modifications in the
+existing sources because checking for 32-bit is done by checking that
+it is not 64-bit and vice-versa.
+We now consider the 3 possible xlen values so as to allow correct
+compilation for both existing targets while setting the compilation
+framework so that it can also handle the riscv128-softmmu target.
+This includes gdb configuration files, that are just the bare copy of the
+64-bit ones as gdb does not honor, yet, 128-bit CPUs.
+To consider the 3 xlen values, we had to add a misah field, representing the
+upper 64 bits of the misa register.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- include/tcg/tcg-op.h                    |   1 +
- target/riscv/insn16.decode              |  33 ++++-
- target/riscv/insn32.decode              |   5 +
- target/riscv/insn_trans/trans_rvi.c.inc | 188 +++++++++++++++++++++---
- tcg/tcg-op.c                            |   6 +
- 5 files changed, 207 insertions(+), 26 deletions(-)
+ configs/devices/riscv128-softmmu/default.mak | 16 ++++++
+ configs/targets/riscv128-softmmu.mak         |  5 ++
+ gdb-xml/riscv-128bit-cpu.xml                 | 48 ++++++++++++++++++
+ gdb-xml/riscv-128bit-virtual.xml             | 12 +++++
+ include/hw/riscv/sifive_cpu.h                |  4 ++
+ target/riscv/Kconfig                         |  3 ++
+ target/riscv/arch_dump.c                     |  3 +-
+ target/riscv/cpu-param.h                     |  3 +-
+ target/riscv/cpu.c                           | 51 +++++++++++++++++---
+ target/riscv/cpu.h                           | 19 ++++++++
+ target/riscv/gdbstub.c                       |  3 ++
+ target/riscv/insn_trans/trans_rvd.c.inc      | 10 ++--
+ target/riscv/insn_trans/trans_rvf.c.inc      |  2 +-
+ target/riscv/translate.c                     | 45 ++++++++++++++++-
+ 14 files changed, 209 insertions(+), 15 deletions(-)
+ create mode 100644 configs/devices/riscv128-softmmu/default.mak
+ create mode 100644 configs/targets/riscv128-softmmu.mak
+ create mode 100644 gdb-xml/riscv-128bit-cpu.xml
+ create mode 100644 gdb-xml/riscv-128bit-virtual.xml
 
-diff --git a/include/tcg/tcg-op.h b/include/tcg/tcg-op.h
-index 2a654f350c..e2560784cb 100644
---- a/include/tcg/tcg-op.h
-+++ b/include/tcg/tcg-op.h
-@@ -726,6 +726,7 @@ static inline void tcg_gen_neg_i64(TCGv_i64 ret, TCGv_i64 arg)
- 
- void tcg_gen_extu_i32_i64(TCGv_i64 ret, TCGv_i32 arg);
- void tcg_gen_ext_i32_i64(TCGv_i64 ret, TCGv_i32 arg);
-+void tcg_gen_ext_i64_i128(TCGv_i64 lo, TCGv_i64 hi, TCGv_i64 arg);
- void tcg_gen_concat_i32_i64(TCGv_i64 dest, TCGv_i32 low, TCGv_i32 high);
- void tcg_gen_extrl_i64_i32(TCGv_i32 ret, TCGv_i64 arg);
- void tcg_gen_extrh_i64_i32(TCGv_i32 ret, TCGv_i64 arg);
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 2e9212663c..165a6ed3bd 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -39,6 +39,11 @@
- %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
- %imm_lui       12:s1 2:5             !function=ex_shift_12
- 
-+# Added for 128 bit support
-+%uimm_cl_q    5:2 10:3               !function=ex_shift_3
-+%uimm_6bit_lq 2:3 12:1 5:2           !function=ex_shift_3
-+%uimm_6bit_sq 7:3 10:3               !function=ex_shift_3
+diff --git a/configs/devices/riscv128-softmmu/default.mak b/configs/devices/riscv128-softmmu/default.mak
+new file mode 100644
+index 0000000000..31439dbcfe
+--- /dev/null
++++ b/configs/devices/riscv128-softmmu/default.mak
+@@ -0,0 +1,16 @@
++# Default configuration for riscv128-softmmu
 +
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -54,16 +59,20 @@
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
- @ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
-+@cl_q      ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
- @cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
- @cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
-+@cs_q      ... ... ... .. ... .. &s      imm=%uimm_cl_q   rs1=%rs1_3  rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
- @cj        ...    ........... .. &j      imm=%imm_cj
- @cb_z      ... ... ... .. ... .. &b      imm=%imm_cb      rs1=%rs1_3  rs2=0
- 
-+@c_lqsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @c_ldsp    ... . .....  ..... .. &i      imm=%uimm_6bit_ld rs1=2 %rd
- @c_lwsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lw rs1=2 %rd
-+@c_sqsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sq rs1=2 rs2=%rs2_5
- @c_sdsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sd rs1=2 rs2=%rs2_5
- @c_swsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sw rs1=2 rs2=%rs2_5
- @c_li      ... . .....  ..... .. &i      imm=%imm_ci rs1=0 %rd
-@@ -87,9 +96,17 @@
-   illegal         000  000 000 00 --- 00
-   addi            000  ... ... .. ... 00 @c_addi4spn
- }
--fld               001  ... ... .. ... 00 @cl_d
-+{
-+  fld             001  ... ... .. ... 00 @cl_d
-+  # *** RV128C specific Standard Extension (Quadrant 0) ***
-+  lq              001  ... ... .. ... 00 @cl_q
-+}
- lw                010  ... ... .. ... 00 @cl_w
--fsd               101  ... ... .. ... 00 @cs_d
-+{
-+  fsd             101  ... ... .. ... 00 @cs_d
-+  # *** RV128C specific Standard Extension (Quadrant 0) ***
-+  sq              101  ... ... .. ... 00 @cs_q
-+}
- sw                110  ... ... .. ... 00 @cs_w
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
-@@ -132,7 +149,11 @@ addw              100 1 11 ... 01 ... 01 @cs_2
- 
- # *** RV32/64C Standard Extension (Quadrant 2) ***
- slli              000 .  .....  ..... 10 @c_shift2
--fld               001 .  .....  ..... 10 @c_ldsp
-+{
-+  fld             001 .  .....  ..... 10 @c_ldsp
-+  # *** RV128C specific Standard Extension (Quadrant 2) ***
-+  lq              001  ... ... .. ... 10 @c_lqsp
-+}
- {
-   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-   lw              010 .  .....  ..... 10 @c_lwsp
-@@ -147,7 +168,11 @@ fld               001 .  .....  ..... 10 @c_ldsp
-   jalr            100 1  .....  00000 10 @c_jalr rd=1  # C.JALR
-   add             100 1  .....  ..... 10 @cr
- }
--fsd               101   ......  ..... 10 @c_sdsp
-+{
-+  fsd             101   ......  ..... 10 @c_sdsp
-+  # *** RV128C specific Standard Extension (Quadrant 2) ***
-+  sq              101  ... ... .. ... 10 @c_sqsp
-+}
- sw                110 .  .....  ..... 10 @c_swsp
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 2) ***
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index f09f8d5faf..225669e277 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -162,6 +162,11 @@ sllw     0000000 .....  ..... 001 ..... 0111011 @r
- srlw     0000000 .....  ..... 101 ..... 0111011 @r
- sraw     0100000 .....  ..... 101 ..... 0111011 @r
- 
-+# *** RV128I Base Instruction Set (in addition to RV64I) ***
-+ldu      ............   ..... 111 ..... 0000011 @i
-+lq       ............   ..... 010 ..... 0001111 @i
-+sq       ............   ..... 100 ..... 0100011 @s
++# Uncomment the following lines to disable these optional devices:
++#
++#CONFIG_PCI_DEVICES=n
++CONFIG_SEMIHOSTING=y
++CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
 +
- # *** RV32M Standard Extension ***
- mul      0000001 .....  ..... 000 ..... 0110011 @r
- mulh     0000001 .....  ..... 001 ..... 0110011 @r
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 6e736c9d0d..772330a766 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -141,7 +141,7 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
- }
++# Boards:
++#
++CONFIG_SPIKE=n
++CONFIG_SIFIVE_E=n
++CONFIG_SIFIVE_U=n
++CONFIG_RISCV_VIRT=y
++CONFIG_MICROCHIP_PFSOC=n
++CONFIG_SHAKTI_C=n
+diff --git a/configs/targets/riscv128-softmmu.mak b/configs/targets/riscv128-softmmu.mak
+new file mode 100644
+index 0000000000..e300c43c8e
+--- /dev/null
++++ b/configs/targets/riscv128-softmmu.mak
+@@ -0,0 +1,5 @@
++TARGET_ARCH=riscv128
++TARGET_BASE_ARCH=riscv
++TARGET_SUPPORTS_MTTCG=y
++TARGET_XML_FILES= gdb-xml/riscv-128bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-128bit-virtual.xml
++TARGET_NEED_FDT=y
+diff --git a/gdb-xml/riscv-128bit-cpu.xml b/gdb-xml/riscv-128bit-cpu.xml
+new file mode 100644
+index 0000000000..c98168148f
+--- /dev/null
++++ b/gdb-xml/riscv-128bit-cpu.xml
+@@ -0,0 +1,48 @@
++<?xml version="1.0"?>
++<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
++
++     Copying and distribution of this file, with or without modification,
++     are permitted in any medium without royalty provided the copyright
++     notice and this notice are preserved.  -->
++
++<!-- Register numbers are hard-coded in order to maintain backward
++     compatibility with older versions of tools that didn't use xml
++     register descriptions.  -->
++
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<!-- FIXME : All GPRs are marked as 64-bits since gdb doesn't like 128-bit registers for now. -->
++<feature name="org.gnu.gdb.riscv.cpu">
++  <reg name="zero" bitsize="64" type="int" regnum="0"/>
++  <reg name="ra" bitsize="64" type="code_ptr"/>
++  <reg name="sp" bitsize="64" type="data_ptr"/>
++  <reg name="gp" bitsize="64" type="data_ptr"/>
++  <reg name="tp" bitsize="64" type="data_ptr"/>
++  <reg name="t0" bitsize="64" type="int"/>
++  <reg name="t1" bitsize="64" type="int"/>
++  <reg name="t2" bitsize="64" type="int"/>
++  <reg name="fp" bitsize="64" type="data_ptr"/>
++  <reg name="s1" bitsize="64" type="int"/>
++  <reg name="a0" bitsize="64" type="int"/>
++  <reg name="a1" bitsize="64" type="int"/>
++  <reg name="a2" bitsize="64" type="int"/>
++  <reg name="a3" bitsize="64" type="int"/>
++  <reg name="a4" bitsize="64" type="int"/>
++  <reg name="a5" bitsize="64" type="int"/>
++  <reg name="a6" bitsize="64" type="int"/>
++  <reg name="a7" bitsize="64" type="int"/>
++  <reg name="s2" bitsize="64" type="int"/>
++  <reg name="s3" bitsize="64" type="int"/>
++  <reg name="s4" bitsize="64" type="int"/>
++  <reg name="s5" bitsize="64" type="int"/>
++  <reg name="s6" bitsize="64" type="int"/>
++  <reg name="s7" bitsize="64" type="int"/>
++  <reg name="s8" bitsize="64" type="int"/>
++  <reg name="s9" bitsize="64" type="int"/>
++  <reg name="s10" bitsize="64" type="int"/>
++  <reg name="s11" bitsize="64" type="int"/>
++  <reg name="t3" bitsize="64" type="int"/>
++  <reg name="t4" bitsize="64" type="int"/>
++  <reg name="t5" bitsize="64" type="int"/>
++  <reg name="t6" bitsize="64" type="int"/>
++  <reg name="pc" bitsize="64" type="code_ptr"/>
++</feature>
+diff --git a/gdb-xml/riscv-128bit-virtual.xml b/gdb-xml/riscv-128bit-virtual.xml
+new file mode 100644
+index 0000000000..db9a0ff677
+--- /dev/null
++++ b/gdb-xml/riscv-128bit-virtual.xml
+@@ -0,0 +1,12 @@
++<?xml version="1.0"?>
++<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
++
++     Copying and distribution of this file, with or without modification,
++     are permitted in any medium without royalty provided the copyright
++     notice and this notice are preserved.  -->
++
++<!DOCTYPE feature SYSTEM "gdb-target.dtd">
++<!-- FIXME : priv marked as 64-bits since gdb doesn't like 128-bit registers for now. -->
++<feature name="org.gnu.gdb.riscv.virtual">
++  <reg name="priv" bitsize="64"/>
++</feature>
+diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
+index 136799633a..2fd441664f 100644
+--- a/include/hw/riscv/sifive_cpu.h
++++ b/include/hw/riscv/sifive_cpu.h
+@@ -26,6 +26,10 @@
+ #elif defined(TARGET_RISCV64)
+ #define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
+ #define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
++#elif defined(TARGET_RISCV128)
++/* 128-bit uses 64-bit CPU for now, since no cpu implements RV128 */
++#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
++#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
+ #endif
  
--static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
+ #endif /* HW_SIFIVE_CPU_H */
+diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+index b9e5932f13..f9ea52a59a 100644
+--- a/target/riscv/Kconfig
++++ b/target/riscv/Kconfig
+@@ -3,3 +3,6 @@ config RISCV32
+ 
+ config RISCV64
+     bool
++
++config RISCV128
++    bool
+diff --git a/target/riscv/arch_dump.c b/target/riscv/arch_dump.c
+index 709f621d82..f756ed2988 100644
+--- a/target/riscv/arch_dump.c
++++ b/target/riscv/arch_dump.c
+@@ -176,7 +176,8 @@ int cpu_get_dump_info(ArchDumpInfo *info,
+ 
+     info->d_machine = EM_RISCV;
+ 
+-#if defined(TARGET_RISCV64)
++#if defined(TARGET_RISCV64) || defined(TARGET_RISCV128)
++    /* FIXME : No 128-bit ELF class exists (for now), use 64-bit one. */
+     info->d_class = ELFCLASS64;
+ #else
+     info->d_class = ELFCLASS32;
+diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+index 80eb615f93..e6d0651f60 100644
+--- a/target/riscv/cpu-param.h
++++ b/target/riscv/cpu-param.h
+@@ -8,7 +8,8 @@
+ #ifndef RISCV_CPU_PARAM_H
+ #define RISCV_CPU_PARAM_H 1
+ 
+-#if defined(TARGET_RISCV64)
++/* 64-bit target, since QEMU isn't built to have TARGET_LONG_BITS over 64 */
++#if defined(TARGET_RISCV64) || defined(TARGET_RISCV128)
+ # define TARGET_LONG_BITS 64
+ # define TARGET_PHYS_ADDR_SPACE_BITS 56 /* 44-bit PPN */
+ # define TARGET_VIRT_ADDR_SPACE_BITS 48 /* sv48 */
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 991a6bb760..1f15026e9c 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -110,18 +110,38 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+ 
+ bool riscv_cpu_is_32bit(CPURISCVState *env)
  {
-     TCGv t0 = tcg_temp_new();
-     TCGv t1 = tcg_temp_new();
-@@ -155,32 +155,133 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
+-    if (env->misa & RV64) {
+-        return false;
+-    }
++    return (env->misa & MXLEN_MASK) == RV32;
++}
+ 
+-    return true;
++bool riscv_cpu_is_64bit(CPURISCVState *env)
++{
++    return (env->misa & MXLEN_MASK) == RV64;
  }
  
 +#if defined(TARGET_RISCV128)
-+/*
-+ * Accessing signed 64-bit or 128-bit values should be part of MemOp in
-+ * include/exec/memop.h
-+ * Unfortunately, this requires to change the defines there, as MO_SIGN is 4,
-+ * and values 0 to 3 are usual types sizes.
-+ * Note that an assert is triggered when MemOp is MO_SIGN|MO_TEQ, this value
-+ * being some kind of sentinel.
-+ * Changing MemOp values is too involved given our understanding, we
-+ * therefore use our own way to deal locally with zero or sign extended
-+ * 64-bit values, and 128-bit values.
-+ * Doing this implies adding a preprocessor conditional in all memory access
-+ * functions to avoid penalizing 32 and 64-bit accesses.
-+ */
-+typedef enum XMemOp {
-+    XMO_NOP   = 0, /* MemOp rules! */
-+    XMO_TEUQ  = 1, /* Zero-extended 64-bit access */
-+    XMO_TET   = 2, /* 128-bit (T integer format) access */
-+    XMO_SIGN  = 4, /* Sign-extended 64-bit access */
-+    XMO_TESQ  = XMO_TEUQ | XMO_SIGN,
-+} XMemOp;
-+
-+static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop, XMemOp xm)
++bool riscv_cpu_is_128bit(CPURISCVState *env)
 +{
-+    if (is_128bit(ctx)) {
-+        TCGv rs1l = tcg_temp_new();
-+        TCGv rs1h = tcg_temp_new();
-+        TCGv rdl = tcg_temp_new();
-+        TCGv rdh = tcg_temp_new();
-+        TCGv imml = tcg_temp_new();
-+        TCGv immh = tcg_const_tl((a->imm & 0b100000000000)
-+                                   ? 0xffffffffffffffff : 0);
-+
-+        gen_get_gpr(rs1l, a->rs1);
-+        gen_get_gprh(rs1h, a->rs1);
-+
-+        /* Build a 128-bit address */
-+        tcg_gen_movi_tl(imml, a->imm);
-+        tcg_gen_add2_tl(rs1l, rs1h, rs1l, rs1h, imml, immh);
-+        /* TODO: should assert that rs1h == 0 for now */
-+
-+        if (xm != XMO_TET) {
-+            tcg_gen_qemu_ld_tl(rdl, rs1l, ctx->mem_idx, memop);
-+            if ((memop & MO_SIGN) || (xm & XMO_SIGN)) {
-+                tcg_gen_ext_i64_i128(rdl, rdh, rdl);
-+            } else {
-+                tcg_gen_movi_tl(rdh, 0);
-+            }
-+        } else {
-+            tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? rdh : rdl, rs1l,
-+                               ctx->mem_idx, MO_TEQ);
-+            tcg_gen_movi_tl(imml, 8);
-+            tcg_gen_movi_tl(immh, 0);
-+            tcg_gen_add2_tl(rs1l, rs1h, rs1l, rs1h, imml, immh);
-+            /* TODO: should assert that rs1h == 0 for now */
-+            tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? rdl : rdh, rs1l,
-+                               ctx->mem_idx, MO_TEQ);
-+        }
-+
-+        gen_set_gpr(a->rd, rdl);
-+        gen_set_gprh(a->rd, rdh);
-+
-+        tcg_temp_free(rs1l);
-+        tcg_temp_free(rs1h);
-+        tcg_temp_free(rdl);
-+        tcg_temp_free(rdh);
-+        tcg_temp_free(imml);
-+        tcg_temp_free(immh);
-+        return true;
-+    }
-+    return gen_load_tl(ctx, a, memop);
++    return (env->misah & MXLEN_MASK) == RV128;
 +}
-+#define gen_load(ctx, a, memop, xmemop) gen_load_i128(ctx, a, memop, xmemop)
 +#else
-+#define gen_load(ctx, a, memop, xmemop) gen_load_tl(ctx, a, memop)
++bool __attribute__((const)) riscv_cpu_is_128bit(CPURISCVState *env)
++{
++    return false;
++}
 +#endif
 +
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
+ static void set_misa(CPURISCVState *env, target_ulong misa)
  {
--    return gen_load(ctx, a, MO_SB);
-+    return gen_load(ctx, a, MO_SB, XMO_NOP);
- }
- 
- static bool trans_lh(DisasContext *ctx, arg_lh *a)
- {
--    return gen_load(ctx, a, MO_TESW);
-+    return gen_load(ctx, a, MO_TESW, XMO_NOP);
- }
- 
- static bool trans_lw(DisasContext *ctx, arg_lw *a)
- {
--    return gen_load(ctx, a, MO_TESL);
-+    return gen_load(ctx, a, MO_TESL, XMO_NOP);
-+}
-+
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEQ, XMO_TESQ);
-+}
-+
-+static bool trans_lq(DisasContext *ctx, arg_lq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEQ, XMO_TET);
- }
- 
- static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
- {
--    return gen_load(ctx, a, MO_UB);
-+    return gen_load(ctx, a, MO_UB, XMO_NOP);
- }
- 
- static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- {
--    return gen_load(ctx, a, MO_TEUW);
-+    return gen_load(ctx, a, MO_TEUW, XMO_NOP);
-+}
-+
-+static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
-+{
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUL, XMO_NOP);
- }
- 
--static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+static bool trans_ldu(DisasContext *ctx, arg_ldu* a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEQ, XMO_TEUQ);
-+}
-+
-+static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv t0 = tcg_temp_new();
-     TCGv dat = tcg_temp_new();
-@@ -194,38 +295,81 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     return true;
+     env->misa_mask = env->misa = misa;
  }
  
 +#if defined(TARGET_RISCV128)
-+static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop, XMemOp xm)
++static void set_misah(CPURISCVState *env, target_ulong misah)
 +{
-+    if (is_128bit(ctx)) {
-+        TCGv rs1l = tcg_temp_new();
-+        TCGv rs1h = tcg_temp_new();
-+        TCGv rs2l = tcg_temp_new();
-+        TCGv rs2h = tcg_temp_new();
-+        TCGv imml = tcg_temp_new();
-+        TCGv immh = tcg_const_tl((a->imm & 0b100000000000)
-+                                  ? 0xffffffffffffffff
-+                                  : 0);
-+
-+        gen_get_gpr(rs1l, a->rs1);
-+        gen_get_gprh(rs1h, a->rs1);
-+        gen_get_gpr(rs2l, a->rs2);
-+        gen_get_gprh(rs2h, a->rs2);
-+        /* Build a 128-bit address */
-+        tcg_gen_movi_tl(imml, a->imm);
-+        tcg_gen_add2_tl(rs1l, rs1h, rs1l, rs1h, imml, immh);
-+        /* TODO: should assert that rs1h == 0 for now */
-+
-+        if (xm != XMO_TET) {
-+            tcg_gen_qemu_st_tl(rs2l, rs1l, ctx->mem_idx, memop);
-+        } else {
-+            tcg_gen_qemu_st_tl(memop & MO_BSWAP ? rs2h : rs2l, rs1l,
-+                               ctx->mem_idx, MO_TEQ);
-+            tcg_gen_movi_tl(imml, 8);
-+            tcg_gen_movi_tl(immh, 0);
-+            tcg_gen_add2_tl(rs1l, rs1h, rs1l, rs1h, imml, immh);
-+            /* TODO: should assert that rs1h == 0 for now */
-+            tcg_gen_qemu_st_tl(memop & MO_BSWAP ? rs2l : rs2h, rs1l,
-+                               ctx->mem_idx, MO_TEQ);
-+        }
-+
-+        tcg_temp_free(rs1l);
-+        tcg_temp_free(rs1h);
-+        tcg_temp_free(rs2l);
-+        tcg_temp_free(rs2h);
-+        tcg_temp_free(imml);
-+        tcg_temp_free(immh);
-+        return true;
-+    }
-+    return gen_store_tl(ctx, a, memop);
++    env->misah_mask = env->misah = misah;
 +}
-+#define gen_store(ctx, a, memop, xmemop) gen_store_i128(ctx, a, memop, xmemop)
++#endif
++
+ static void set_priv_version(CPURISCVState *env, int priv_ver)
+ {
+     env->priv_ver = priv_ver;
+@@ -156,11 +176,22 @@ static void riscv_any_cpu_init(Object *obj)
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+ #elif defined(TARGET_RISCV64)
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++#elif defined(TARGET_RISCV128)
++    set_misa(env, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++    set_misah(env, RV128);
+ #endif
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+ }
+ 
+-#if defined(TARGET_RISCV64)
++#if defined(TARGET_RISCV128)
++static void rv128_base_cpu_init(Object *obj)
++{
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    /* We set this in the realise function */
++    set_misa(env, 0);
++    set_misah(env, RV128);
++}
++#elif defined(TARGET_RISCV64)
+ static void rv64_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+@@ -440,7 +471,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     set_resetvec(env, cpu->cfg.resetvec);
+ 
+     /* If only XLEN is set for misa, then set misa from properties */
+-    if (env->misa == RV32 || env->misa == RV64) {
++    if (env->misa == RV32 || env->misa == RV64
++#if defined(TARGET_RISCV128)
++            || (env->misah == RV128 && env->misa == 0)
++#endif
++            ) {
+         /* Do some ISA extension error checking */
+         if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+             error_setg(errp,
+@@ -674,6 +709,8 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+ #elif defined(TARGET_RISCV64)
+     cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
++#elif defined(TARGET_RISCV128)
++    cc->gdb_core_xml_file = "riscv-128bit-cpu.xml";
+ #endif
+     cc->gdb_stop_before_watchpoint = true;
+     cc->disas_set_info = riscv_cpu_disas_set_info;
+@@ -761,6 +798,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
++#elif defined(TARGET_RISCV128)
++    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
+ #endif
+ };
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index bf1c899c00..d1a73276fb 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -37,6 +37,7 @@
+ #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
++#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+ #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+ #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
+@@ -49,10 +50,16 @@
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+ #elif defined(TARGET_RISCV64)
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
++#elif defined(TARGET_RISCV128)
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE128
+ #endif
+ 
++/* Mask for the MXLEN flag in the misa CSR */
++#define MXLEN_MASK ((target_ulong)3 << (TARGET_LONG_BITS - 2))
+ #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
+ #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
++/* To be used on misah, the upper part of misa */
++#define RV128 ((target_ulong)3 << (TARGET_LONG_BITS - 2))
+ 
+ #define RV(x) ((target_ulong)1 << (x - 'A'))
+ 
+@@ -187,6 +194,12 @@ struct CPURISCVState {
+     target_ulong hgatp;
+     uint64_t htimedelta;
+ 
++#if defined(TARGET_RISCV128)
++    /* Upper 64-bits of 128-bit CSRs */
++    uint64_t misah;
++    uint64_t misah_mask;
++#endif
++
+     /* Virtual CSRs */
+     /*
+      * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+@@ -396,6 +409,12 @@ FIELD(TB_FLAGS, VILL, 8, 1)
+ FIELD(TB_FLAGS, HLSX, 9, 1)
+ 
+ bool riscv_cpu_is_32bit(CPURISCVState *env);
++bool riscv_cpu_is_64bit(CPURISCVState *env);
++#if defined(TARGET_RISCV128)
++bool riscv_cpu_is_128bit(CPURISCVState *env);
 +#else
-+#define gen_store(ctx, a, memop, xmemop) gen_store_tl(ctx, a, memop)
++bool riscv_cpu_is_128bit(CPURISCVState *env) __attribute__ ((const));
 +#endif
  
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
- {
--    return gen_store(ctx, a, MO_SB);
-+    return gen_store(ctx, a, MO_SB, XMO_NOP);
- }
+ /*
+  * A simplification for VLMAX
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index a7a9c0b1fe..9f75d23b16 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -204,6 +204,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ #elif defined(TARGET_RISCV64)
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-64bit-virtual.xml", 0);
++#elif defined(TARGET_RISCV128)
++    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
++                             1, "riscv-128bit-virtual.xml", 0);
+ #endif
  
- static bool trans_sh(DisasContext *ctx, arg_sh *a)
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index 7e45538ae0..4d430960b9 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -22,6 +22,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
  {
--    return gen_store(ctx, a, MO_TESW);
-+    return gen_store(ctx, a, MO_TESW, XMO_NOP);
- }
- 
- static bool trans_sw(DisasContext *ctx, arg_sw *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
++    REQUIRE_32_OR_64BIT(ctx);
+     TCGv t0 = tcg_temp_new();
+     gen_get_gpr(t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+@@ -37,6 +38,7 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
  {
--    return gen_store(ctx, a, MO_TESL);
-+    return gen_store(ctx, a, MO_TESL, XMO_NOP);
- }
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
++    REQUIRE_32_OR_64BIT(ctx);
+     TCGv t0 = tcg_temp_new();
+     gen_get_gpr(t0, a->rs1);
+     tcg_gen_addi_tl(t0, t0, a->imm);
+@@ -388,11 +390,11 @@ static bool trans_fcvt_lu_d(DisasContext *ctx, arg_fcvt_lu_d *a)
  
--static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
--{
+ static bool trans_fmv_x_d(DisasContext *ctx, arg_fmv_x_d *a)
+ {
 -    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEUL);
--}
--
--static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
--    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEQ);
 +    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_store(ctx, a, MO_TEQ, XMO_NOP);
- }
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
  
--static bool trans_sd(DisasContext *ctx, arg_sd *a)
-+static bool trans_sq(DisasContext *ctx, arg_sq *a)
+-#ifdef TARGET_RISCV64
++#if defined(TARGET_RISCV64) || defined(TARGET_RISCV128)
+     gen_set_gpr(a->rd, cpu_fpr[a->rs1]);
+     return true;
+ #else
+@@ -434,11 +436,11 @@ static bool trans_fcvt_d_lu(DisasContext *ctx, arg_fcvt_d_lu *a)
+ 
+ static bool trans_fmv_d_x(DisasContext *ctx, arg_fmv_d_x *a)
  {
 -    REQUIRE_64BIT(ctx);
--    return gen_store(ctx, a, MO_TEQ);
-+    REQUIRE_128BIT(ctx);
-+    return gen_store(ctx, a, MO_TEQ, XMO_TET);
- }
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
  
- static bool trans_addi(DisasContext *ctx, arg_addi *a)
-diff --git a/tcg/tcg-op.c b/tcg/tcg-op.c
-index c754396575..c1e9ba8309 100644
---- a/tcg/tcg-op.c
-+++ b/tcg/tcg-op.c
-@@ -2655,6 +2655,12 @@ void tcg_gen_ext_i32_i64(TCGv_i64 ret, TCGv_i32 arg)
-     }
- }
+-#ifdef TARGET_RISCV64
++#if defined(TARGET_RISCV64) || defined(TARGET_RISCV128)
+     TCGv t0 = tcg_temp_new();
+     gen_get_gpr(t0, a->rs1);
  
-+void tcg_gen_ext_i64_i128(TCGv_i64 lo, TCGv_i64 hi, TCGv_i64 arg)
-+{
-+    tcg_gen_mov_i64(lo, arg);
-+    tcg_gen_sari_i64(hi, arg, 63);
-+}
-+
- void tcg_gen_concat_i32_i64(TCGv_i64 dest, TCGv_i32 low, TCGv_i32 high)
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index db1c0c9974..47efa7284d 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -303,7 +303,7 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
+ 
+     TCGv t0 = tcg_temp_new();
+ 
+-#if defined(TARGET_RISCV64)
++#if defined(TARGET_RISCV64) || defined(TARGET_RISCV128)
+     tcg_gen_ext32s_tl(t0, cpu_fpr[a->rs1]);
+ #else
+     tcg_gen_extrl_i64_i32(t0, cpu_fpr[a->rs1]);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 6983be5723..713b14da8b 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -47,7 +47,9 @@ typedef struct DisasContext {
+     bool virt_enabled;
+     uint32_t opcode;
+     uint32_t mstatus_fs;
++    /* Type of csrs should be MXLEN, that might be dynamically settable */
+     target_ulong misa;
++    uint64_t misah;
+     uint32_t mem_idx;
+     /* Remember the rounding mode encoded in the previous fp instruction,
+        which we have already installed into env->fp_status.  Or -1 for
+@@ -74,13 +76,30 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ 
+ #ifdef TARGET_RISCV32
+ # define is_32bit(ctx)  true
++# define is_64bit(ctx)  false
++# define is_128bit(ctx) false
+ #elif defined(CONFIG_USER_ONLY)
+ # define is_32bit(ctx)  false
++# define is_64_bit(ctx) true
++# define is_128_bit(ctx) false
+ #else
+ static inline bool is_32bit(DisasContext *ctx)
  {
-     TCGv_i64 tmp;
+-    return (ctx->misa & RV32) == RV32;
++    return (ctx->misa & MXLEN_MASK) == RV32;
+ }
++
++static inline bool is_64bit(DisasContext *ctx)
++{
++    return (ctx->misa & MXLEN_MASK) == RV64;
++}
++#if defined(TARGET_RISCV128)
++static inline bool is_128bit(DisasContext *ctx)
++{
++    return (ctx->misah & MXLEN_MASK) == RV128;
++}
++#else
++# define is_128bit(ctx) false
++#endif
+ #endif
+ 
+ /*
+@@ -418,11 +437,30 @@ EX_SH(12)
+ } while (0)
+ 
+ #define REQUIRE_64BIT(ctx) do { \
+-    if (is_32bit(ctx)) {        \
++    if (!is_64bit(ctx)) {       \
+         return false;           \
+     }                           \
+ } while (0)
+ 
++#define REQUIRE_128BIT(ctx) do { \
++    if (!is_128bit(ctx)) {         \
++        return false;            \
++    }                            \
++} while (0)
++
++#define REQUIRE_32_OR_64BIT(ctx) do {  \
++    if (is_128bit(ctx)) {               \
++        return false;                  \
++    }                                  \
++} while (0)
++
++#define REQUIRE_64_OR_128BIT(ctx) do { \
++    if (is_32bit(ctx)) {               \
++        return false;                  \
++    }                                  \
++} while (0)
++
++
+ static int ex_rvc_register(DisasContext *ctx, int reg)
+ {
+     return 8 + reg;
+@@ -938,6 +976,9 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->virt_enabled = false;
+ #endif
+     ctx->misa = env->misa;
++#if defined(TARGET_RISCV128)
++    ctx->misah = env->misah;
++#endif
+     ctx->frm = -1;  /* unknown rounding mode */
+     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+     ctx->vlen = cpu->cfg.vlen;
 -- 
 2.33.0
 
