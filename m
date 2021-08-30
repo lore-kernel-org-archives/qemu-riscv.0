@@ -1,59 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mKakL-0007A1-4O
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 02:26:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46760)
+	id 1mKeHT-0003Lt-MF
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 06:12:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55812)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mKakI-00070K-Py; Mon, 30 Aug 2021 02:26:14 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:37692)
+ id 1mKeHR-0003L2-Hx; Mon, 30 Aug 2021 06:12:41 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:46673)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mKakH-0008VH-10; Mon, 30 Aug 2021 02:26:14 -0400
-Received: by mail-il1-x136.google.com with SMTP id i13so14879962ilm.4;
- Sun, 29 Aug 2021 23:26:12 -0700 (PDT)
+ id 1mKeHP-0005Ce-Ey; Mon, 30 Aug 2021 06:12:41 -0400
+Received: by mail-il1-x12a.google.com with SMTP id r6so15363003ilt.13;
+ Mon, 30 Aug 2021 03:12:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Tb0zSWhg3UjMLub3KbfL43K/aQO47njriunHw2KJfLk=;
- b=fFtsm2BjTjzlwNLyIBw56+u9e+3MR+KugStyk+2oAuOTh+p+cPLaA7IXHMAYVoLVaZ
- vobQcC9HNdMdhKO6hLSvvCW2ErA9IkuBlmAOUMUZbWVWlsxotkb6t/6M187dL3pn9Bmd
- df8g3+AEl6JsCs1Y335RjMwSHaEMWAz2L1CXC2TEQyU8S44qZpxbRUgGfUTpIUEmcJnV
- g147O09Xhf7UEkl31C8FnukemXo0dPturjlUjyrn+WNH+vWCa3NVK4T0JOtis15Ngt2K
- 3cytS1yTl+EArIV47yyD95FS/RXnbNEpRRs5nMiN1SiqoGP9J6aVm+yVG/NQ0TpWZqxn
- SYdQ==
+ :cc; bh=HNIirtcW0rqC/C1IDeTCoVAvWL+UjMO4sZpjk7Cupk0=;
+ b=oDpgKjJsqc+Eth1DknduE5Mk457YEePtS8/Xb6jPBCA6XR5TDveIldRhSIM7yD5Tbn
+ imu0J+WXMe9jSgVvYNpiwN9reEu7CgqEXpvrtXWFQlViajdOuZ72Ml/+6NFwtlGbvvVl
+ mfbZ9OkjDJZmhZ9+l7OEzqBPi9iF/S0GrHLMDtvfumokFaRjHgzqf+WwW+bxXe5x51dz
+ 46th346hTslTyeO6ryGxMIGUyzaXNYwvMHyCPvvivyt0Fwlf6CzD7KkM5RVsoSvB5Wao
+ mh8EeuL1FmPhAvvkNtBWbp1P+xusCUYEKfQRaoV7XSYbK6WPej1ZAF4Ula8LlvcukzAW
+ 0vIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Tb0zSWhg3UjMLub3KbfL43K/aQO47njriunHw2KJfLk=;
- b=drA6yexCITcY+syWgI7PbOa5B8a3HXWc16f4ZpAZWibgd3T6TuMAmVZNR2n7lUuDmi
- CnZFLPvwmR64zqDi+HJKuLt+beDZTciKRuSXDZG0on22SRODnxJ1K0c9TfD0/SLvN8zT
- HgkVn1/ZCFDgfqRE63WCxkuEd+dt9Qx0/BJFYWWQWfRTbWn6RcI1dJbMgpoCyvVP60nb
- hBTlrLMB+q6VTOc3MwiJhcVUeHN1r9USTrbF17AILrScUtKu1vCnh/B1YqXXWBqXa5yD
- UDJabubMfHXP4aSzI4udyV9H34x6wyPcAeK6n/0bSdAjOyZotpChotsg8ocrWns0umMU
- coeA==
-X-Gm-Message-State: AOAM5301QelUxlvW9nW1bR69FLbOVbLwhDZct3kTSMNly7bEdM1D5+/t
- jcfUDR0X5M5uq3YNcw3c0fXPIHMuo4qS6Q7W/d8=
-X-Google-Smtp-Source: ABdhPJwcL+B3nz3NFdxiPOzmObWsXVqGGNaSPU7OslCtzQBVKbwYGKNPSA8wpEEnzQ4TD7Gmiv3tEjLlarBtnL6U4Zo=
-X-Received: by 2002:a05:6e02:1044:: with SMTP id
- p4mr14882469ilj.227.1630304771567; 
- Sun, 29 Aug 2021 23:26:11 -0700 (PDT)
+ bh=HNIirtcW0rqC/C1IDeTCoVAvWL+UjMO4sZpjk7Cupk0=;
+ b=ZYayYDdHUbVVFR4Z+7mew7qeQ1gND+YbHA/MAOcC4o6DPvh7hKDZfoQ+hAEhNR01AG
+ XFZYZN90sea2/B8NplRest+pULGZ1ThuPB4qT+qAjf0Sk7W3UqBEis/1lPY7w8bbCBz1
+ PiWJKCd0ABr+6oanZfd+BEX6KZHQN94w52sBoc9caECRzWM+bbxGl1XLBCuLuc+AGfh+
+ kCrK/apZOb56hiW4gGJyGkPOuxjMMwZvsGtHtveWJl6K8G9WOQdHGrk9mL+iXg8k+HAh
+ Xa3o30XGej8ndGHvk32c2X0s36+6vHgWi11kGOWVrFMCNlRFyxzGhaG2tR+JfRBUcYcu
+ 6BOQ==
+X-Gm-Message-State: AOAM5309EVyI/wu9uT83xtKbUeNv4dM37TzjeMzedMntkBTOj03uyJP+
+ J77FrwpuKzDgX4kbhCuEbG00V74nHdvhH/P3PS4=
+X-Google-Smtp-Source: ABdhPJy66pYGCeh068HSpAL80iKUe5pDDM98z3JNG9C1D5OK2/GN/bGyMhH6mbFkolHuFIrALLcIyVH4oN3nK5uskd0=
+X-Received: by 2002:a92:6802:: with SMTP id d2mr15454990ilc.40.1630318357962; 
+ Mon, 30 Aug 2021 03:12:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <aa466b05545e360b9a96249a659c5d1e@m101.nthu.edu.tw>
- <e7340f10bfbab7bead0a045aa9ae09f7@m101.nthu.edu.tw>
- <113c061817fc2caa934930182da7ab63@m101.nthu.edu.tw>
-In-Reply-To: <113c061817fc2caa934930182da7ab63@m101.nthu.edu.tw>
+References: <20210820174257.548286-1-richard.henderson@linaro.org>
+In-Reply-To: <20210820174257.548286-1-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 30 Aug 2021 16:25:45 +1000
-Message-ID: <CAKmqyKM+HTBsvgQ-A19WSGy8-hWZ-RgyFxMD0t0w32Rg_c9LOg@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/intc/sifive_clint: Fix expiration time logic
-To: s101062801 <s101062801@m101.nthu.edu.tw>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Mon, 30 Aug 2021 20:12:11 +1000
+Message-ID: <CAKmqyKM7aoT9a7rZnbNukZb7mO-2zJddnKr1XkA+WbkidHRoxQ@mail.gmail.com>
+Subject: Re: [PATCH v4 00/21] target/riscv: Use tcg_constant_*
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,79 +70,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2021 06:26:15 -0000
+X-List-Received-Date: Mon, 30 Aug 2021 10:12:41 -0000
 
-On Sun, Aug 29, 2021 at 12:27 PM s101062801 <s101062801@m101.nthu.edu.tw> wrote:
+On Sat, Aug 21, 2021 at 3:43 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> After timecmp is modified, the value is converted into nanosecond,
-> and pass to timer_mod.  However, timer_mod perceives the value as
-> a signed integer.  An example that goes wrong is as follows:
+> Replace use of tcg_const_*, which makes a copy into a temp which must
+> be freed, with direct use of the constant.  Reorg handling of $zero,
+> with different accessors for source and destination.  Reorg handling
+> of csrs, passing the actual write_mask instead of a regno.  Use more
+> helpers for RVH expansion.
 >
-> OpenSBI v0.9 initializes the cold boot hart's timecmp to
-> 0xffffffff_ffffffff.  timer_mod then interprets the product of the
-> following calculation as a negative value.  As a result, the clint
-> timer is pulled out of timerlist because it looks like it has
-> expired, which cause the MIP.MTIP is set before any real timer
-> interrupt.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/493
-> Signed-off-by: Quey-Liang Kao <s101062801@m101.nthu.edu.tw>
-> ---
-> v2:
->   - Fix the calculation for next.
->   - Link to issue 493.
->   - I saw David's after I made this patch.  Yet I want to correct the
-> error
->     in v1.
+> Patches lacking review:
+>   02-tests-tcg-riscv64-Add-test-for-division.patch
+>   03-target-riscv-Clean-up-division-helpers.patch
+>   11-target-riscv-Add-DisasExtend-to-gen_unary.patch
+>   17-target-riscv-Use-gen_shift_imm_fn-for-slli_uw.patch
+>   21-target-riscv-Use-get-dest-_gpr-for-RVV.patch
 
-Hello,
-
-Thanks for the patch!
-
-As David's was sent first I am going to apply that instead of this
-one. Sorry about that.
-
-Please feel free to send more QEMU patches in the future or to review
-other people's patches.
-
-Hopefully we will see you again :)
+This should be all reviewed now. Do you want me to take it or do you plan on it?
 
 Alistair
 
-> ---
->   hw/intc/sifive_clint.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
 >
-> diff --git a/hw/intc/sifive_clint.c b/hw/intc/sifive_clint.c
-> index 0f41e5ea1c..78f01d17d3 100644
-> --- a/hw/intc/sifive_clint.c
-> +++ b/hw/intc/sifive_clint.c
-> @@ -44,6 +44,7 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu,
-> uint64_t value,
->   {
->       uint64_t next;
->       uint64_t diff;
-> +    uint64_t now;
+> Changes for v4:
+>   * Add a test for division, primarily checking the edge cases.
+>   * Dropped the greviw patch, since grev has been dropped from Zbb 1.0.0.
 >
->       uint64_t rtc_r = cpu_riscv_read_rtc(timebase_freq);
+> Changes for v3:
+>   * Fix an introduced remainder bug (bin meng),
+>     and remove one extra movcond from rem/remu.
+>   * Do not zero DisasContext on allocation (bin meng).
 >
-> @@ -59,9 +60,11 @@ static void sifive_clint_write_timecmp(RISCVCPU *cpu,
-> uint64_t value,
->       riscv_cpu_update_mip(cpu, MIP_MTIP, BOOL_TO_MASK(0));
->       diff = cpu->env.timecmp - rtc_r;
->       /* back to ns (note args switched in muldiv64) */
-> -    next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> -        muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> -    timer_mod(cpu->env.timer, next);
-> +    now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-> +    next = now + muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> +    timer_mod(cpu->env.timer, (next <= now) ?
-> +                              (int64_t)((1ULL << 63) - 1) :
-> +                              next);
->   }
+> Changes for v2:
+>   * Retain the requirement to call gen_set_gpr.
+>   * Add DisasExtend as an argument to get_gpr, and ctx->w as a member
+>     of DisasContext.  This should help in implementing UXL, where we
+>     should be able to set ctx->w for all insns, but there is certainly
+>     more required for that.
 >
->   /*
+> r~
+>
+>
+> Richard Henderson (21):
+>   target/riscv: Use tcg_constant_*
+>   tests/tcg/riscv64: Add test for division
+>   target/riscv: Clean up division helpers
+>   target/riscv: Add DisasContext to gen_get_gpr, gen_set_gpr
+>   target/riscv: Introduce DisasExtend and new helpers
+>   target/riscv: Add DisasExtend to gen_arith*
+>   target/riscv: Remove gen_arith_div*
+>   target/riscv: Use gen_arith for mulh and mulhu
+>   target/riscv: Move gen_* helpers for RVM
+>   target/riscv: Move gen_* helpers for RVB
+>   target/riscv: Add DisasExtend to gen_unary
+>   target/riscv: Use DisasExtend in shift operations
+>   target/riscv: Use get_gpr in branches
+>   target/riscv: Use {get,dest}_gpr for integer load/store
+>   target/riscv: Reorg csr instructions
+>   target/riscv: Use {get,dest}_gpr for RVA
+>   target/riscv: Use gen_shift_imm_fn for slli_uw
+>   target/riscv: Use {get,dest}_gpr for RVF
+>   target/riscv: Use {get,dest}_gpr for RVD
+>   target/riscv: Tidy trans_rvh.c.inc
+>   target/riscv: Use {get,dest}_gpr for RVV
+>
+>  target/riscv/helper.h                   |   6 +-
+>  target/riscv/insn32.decode              |   1 +
+>  target/riscv/op_helper.c                |  18 +-
+>  target/riscv/translate.c                | 701 ++++++------------------
+>  tests/tcg/riscv64/test-div.c            |  58 ++
+>  target/riscv/insn_trans/trans_rva.c.inc |  51 +-
+>  target/riscv/insn_trans/trans_rvb.c.inc | 370 ++++++++++---
+>  target/riscv/insn_trans/trans_rvd.c.inc | 127 +++--
+>  target/riscv/insn_trans/trans_rvf.c.inc | 149 +++--
+>  target/riscv/insn_trans/trans_rvh.c.inc | 266 ++-------
+>  target/riscv/insn_trans/trans_rvi.c.inc | 360 ++++++------
+>  target/riscv/insn_trans/trans_rvm.c.inc | 191 +++++--
+>  target/riscv/insn_trans/trans_rvv.c.inc | 151 ++---
+>  tests/tcg/riscv64/Makefile.target       |   5 +
+>  14 files changed, 1125 insertions(+), 1329 deletions(-)
+>  create mode 100644 tests/tcg/riscv64/test-div.c
+>  create mode 100644 tests/tcg/riscv64/Makefile.target
+>
 > --
-> 2.32.0
+> 2.25.1
+>
 >
 
