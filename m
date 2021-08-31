@@ -1,53 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mKuc1-0007ge-RE
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 23:39:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34598)
+	id 1mKugY-0000y7-WB
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 23:43:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35980)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mKuc0-0007gO-Kh
- for qemu-riscv@nongnu.org; Mon, 30 Aug 2021 23:39:00 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:43792)
+ id 1mKugX-0000xz-9z
+ for qemu-riscv@nongnu.org; Mon, 30 Aug 2021 23:43:41 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:39703)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mKubz-0007LR-9T
- for qemu-riscv@nongnu.org; Mon, 30 Aug 2021 23:39:00 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- d3-20020a17090ae28300b0019629c96f25so1401460pjz.2
- for <qemu-riscv@nongnu.org>; Mon, 30 Aug 2021 20:38:58 -0700 (PDT)
+ id 1mKugM-0002KJ-FG
+ for qemu-riscv@nongnu.org; Mon, 30 Aug 2021 23:43:39 -0400
+Received: by mail-pg1-x533.google.com with SMTP id g184so15415834pgc.6
+ for <qemu-riscv@nongnu.org>; Mon, 30 Aug 2021 20:43:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=wCZg+2tAmazul8bREPYflmdiyuTenpiF98rvkBLIe3Y=;
- b=C8FYy2Fh2TEMCJjDJUXMHnmt4ceRSKhgitwEKMqHeaQTxA6DQOA8Id9t4fhEIjg9hx
- LRgbNLBmIm3Te7re9oHFV2exp048OKIfJzJcK19U8S2JKr+vTs9s/Tn9373xfNFiKGZ6
- BmJIdl6teyMfjGrZf79fqwCflF17gYioWoWWlpFi1E/yOgmFZ4IRIkYc9j5dmZSXsXTJ
- iC1wCwIweVVdwSulVyCCk43+NdSFB70XEBUfMEWWL70AAgxGW773gyYt4wKGrrjHE28K
- eCPdsNiwM9rhBpNGCyOsZyMEEmXvpYaZhoirxKG68WEWAuxlEHkS1gWmCRNqp8L5dY/z
- ZcQA==
+ bh=Ez0f/dDIOXxTXyu46vZROE6j8BjQVUVnQ9bnjdKnpkY=;
+ b=qCRz6BMo+Sw6EfB8JNulIBQWqCLLBQOXXVii5REv6sr/mTvpLaNddcYL2F1duAuW/g
+ tobfscEFE+Z61RSfJJnFl/mEan/4kyeKmvbDfg0aLO0iHAteRGEc2qd657SQZqcECQ9O
+ sbtragJw4m7bKFNr+k9KmYH5ptyRTqpt01p88kD7xosv4tFDCLk4q88uAX4C5Go+RxaN
+ Q4PUN4ffYiSKQ5FQSw+c4h+SVucfUO71ALIM64bj0cU6qi+njQV1W0mIii0D0V+PCvcs
+ XQoLJlnOo8ay1D79sYYQ/xbB+acpZaDuYdoTjNJ10jc3ZY4ce67n9eM1p+Wjhx8Giyn+
+ MBzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=wCZg+2tAmazul8bREPYflmdiyuTenpiF98rvkBLIe3Y=;
- b=ngpgwrcxkqleJGdEFhb/G8x1jbZ8AG0MHJctpHVnssm8VtFydSMKppV82Yh7nQ/XxZ
- JfTTAmul+UlCkBymje9L+K0rKryjDHwq/TWL12pnEYxtw2L5p+od3pgBvB7V7qX8NGcv
- objfXdPQxIBtK89j94ShL6DckMuSCMyb7crIMATiZe61uVqOfmJpSB39fPR9iXuRJGCM
- avAVpIEiRboJOBgmxxq1eDhuGxE4Tco0eucsKqKg3Ph5eDUAaqZ/ZNMlhlRh1is61Vas
- ko2DgnsjhT2glNmaIYaAwEKR+agBmYiJzBb2fz+rrYxRvjyupLeA7Su6JuLrhL6gKf40
- Y3cg==
-X-Gm-Message-State: AOAM531V3Rzukj0jaimkcqZkGxveSwF1n7Ph93T9ecM0+9un8nriBFVM
- +Fk80UkFmWCEKHQbQsRVnBO6zA==
-X-Google-Smtp-Source: ABdhPJyR419AFQAAawjfo6ynilrih0byN9aTsVMZhtXKNBa3irwTGBGuP0I5WTJ2MTlaLJW4S/5npg==
-X-Received: by 2002:a17:90a:1a12:: with SMTP id
- 18mr2632924pjk.113.1630381137412; 
- Mon, 30 Aug 2021 20:38:57 -0700 (PDT)
+ bh=Ez0f/dDIOXxTXyu46vZROE6j8BjQVUVnQ9bnjdKnpkY=;
+ b=pvh1gVCn26NgYe+hufch007HlF2sopZuyNzLNy8l7LbzpQoapcpu2g37WoNOAZHelF
+ xFlOHqismUTIwa56tBH0MD/lmE8Wje3Zu20Pgyk4Wh8MnXJJnp32kV8l1Ejp9uYWb9+1
+ RhCq42B3ev9NvgsdMURgkPSDPbWG/Z2wIsTrHjM+WgmKfoSvzfiS64gFi0xrtNCVa6yh
+ QHZruhObRZ5h/CTil8JtT+ONBgg+bECOKgE0hpreGhzcIUmjGUop8PRoe+pDZhNuf0BW
+ TRGesXOHcge8+/2O4S9s0B0o4mDZYyJO1WYHeKQ91svk3KsRaL/ebQEVir0+yU6BmkhV
+ IXEA==
+X-Gm-Message-State: AOAM532kewnKvlnn0dPUyIrGwat0s1UW+rzkc4h42YPRkr05bcdSnwvY
+ agGcGvKfBFYQtxCaA9+Dhf5Hvg==
+X-Google-Smtp-Source: ABdhPJyffjIggL7fHH3U8DzNzgSyPlZyLg4NOzZC81qcU0qsKNuFJ8T+1+5NVcAY8VGaaCfIFnnNbA==
+X-Received: by 2002:a63:eb41:: with SMTP id b1mr25047969pgk.236.1630381401443; 
+ Mon, 30 Aug 2021 20:43:21 -0700 (PDT)
 Received: from [192.168.1.11] (174-21-72-39.tukw.qwest.net. [174.21.72.39])
- by smtp.gmail.com with ESMTPSA id m13sm890753pjv.20.2021.08.30.20.38.56
+ by smtp.gmail.com with ESMTPSA id z7sm866908pjr.42.2021.08.30.20.43.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Aug 2021 20:38:57 -0700 (PDT)
-Subject: Re: [PATCH 6/8] target/riscv: Support of compiler's 128-bit integer
- types
+ Mon, 30 Aug 2021 20:43:21 -0700 (PDT)
+Subject: Re: [PATCH 7/8] target/riscv: 128-bit support for some csrs
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
@@ -56,26 +53,26 @@ Cc: Bin Meng <bin.meng@windriver.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Fabien Portas <fabien.portas@grenoble-inp.org>
 References: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20210830171638.126325-6-frederic.petrot@univ-grenoble-alpes.fr>
+ <20210830171638.126325-7-frederic.petrot@univ-grenoble-alpes.fr>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <53dd633e-eca6-582e-70f9-1e42d436c8bd@linaro.org>
-Date: Mon, 30 Aug 2021 20:38:55 -0700
+Message-ID: <ffcc1322-362b-3496-3c56-ca29f3015e52@linaro.org>
+Date: Mon, 30 Aug 2021 20:43:19 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210830171638.126325-6-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20210830171638.126325-7-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
 X-Spam_bar: ---
 X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.932,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -88,31 +85,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 03:39:00 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 03:43:41 -0000
 
 On 8/30/21 10:16 AM, Frédéric Pétrot wrote:
+>   target/riscv/utils_128.h                | 173 ++++++++++++++++
+
+You should extend include/qemu/int128.h as needed, rather than this.
+
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6528b4540e..4321b03b94 100644
+> index 4321b03b94..0d18055e08 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -60,6 +60,19 @@
+> @@ -26,6 +26,7 @@
+>   #include "fpu/softfloat-types.h"
+>   #include "qom/object.h"
+>   
+> +#include "utils_128.h"
+
+And anyway, it's certainly not needed in cpu.h.
+
+> @@ -60,19 +61,6 @@
 >   #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
 >   /* To be used on misah, the upper part of misa */
 >   #define RV128 ((target_ulong)3 << (TARGET_LONG_BITS - 2))
-> +/*
-> + * Defined to force the use of tcg 128-bit arithmetic
-> + * if the compiler does not have a 128-bit built-in type
-> + */
-> +#define SOFT_128BIT
-> +/*
-> + * If available and not explicitly disabled,
-> + * use compiler's 128-bit integers.
-> + */
-> +#if defined(__SIZEOF_INT128__) && !defined(SOFT_128BIT)
-> +#define HARD_128BIT
-> +#endif
+> -/*
+> - * Defined to force the use of tcg 128-bit arithmetic
+> - * if the compiler does not have a 128-bit built-in type
+> - */
+> -#define SOFT_128BIT
+> -/*
+> - * If available and not explicitly disabled,
+> - * use compiler's 128-bit integers.
+> - */
+> -#if defined(__SIZEOF_INT128__) && !defined(SOFT_128BIT)
+> -#define HARD_128BIT
+> -#endif
 
-This doesn't belong here.  CONFIG_INT128 is more correct.
+You shouldn't have added these earlier and remove them here.  Of course, I don't think 
+they're needed at all.
 
 
 r~
