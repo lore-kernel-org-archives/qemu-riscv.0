@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL1bQ-0004az-Fh
+	id 1mL1bQ-0004cI-SA
 	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 07:06:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43592)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43596)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=870f666b0=Anup.Patel@wdc.com>)
- id 1mL1bP-0004Xd-9V; Tue, 31 Aug 2021 07:06:51 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:13062)
+ id 1mL1bO-0004Xt-Sx; Tue, 31 Aug 2021 07:06:50 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:13068)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=870f666b0=Anup.Patel@wdc.com>)
- id 1mL1bL-0000tA-R8; Tue, 31 Aug 2021 07:06:50 -0400
+ id 1mL1bL-0000xo-UO; Tue, 31 Aug 2021 07:06:50 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1630408007; x=1661944007;
- h=from:to:cc:subject:date:message-id:
- content-transfer-encoding:mime-version;
- bh=E/HQFsViWaMkIBujlou/Z4C0Ob0/b14XmrMFIQSamaM=;
- b=ScvlrOLlf2aRehya6xcJ67MWiaBSfr9qUp2f6r879p4X/4hNZa+yAXLH
- sPAfXD9c2io/qV999SS2KhSnAdusEQMzaRyHJTJJ1mNwM79Tt8TPWXSb5
- HkcqViB3ngZDvy1eFWDqVIDUJnRU4Qtdx9ngjRETqzbCsPms2ERIPW5JD
- lWHUY20uJJJwu3WsOkkgPv5iEA+UMLkQG+QN9yP3L5kllpsjR/n2EOCxR
- HbeKgodt51gHHmzukUPH9ve3E8NgOHHV4CBd9phkksFb78yGaWruE5PrZ
- fMeZEdG1zlKZs+3EzWoStEoFB2MXdUbJu8GgxnhTQmaE4kPDZFDuUbX06 w==;
-X-IronPort-AV: E=Sophos;i="5.84,366,1620662400"; d="scan'208";a="177951716"
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:content-transfer-encoding:mime-version;
+ bh=9YWh0cd7WYdhHraCcovyltKu/6eG1FEBg2z6TjzRYtg=;
+ b=GkXUzPmaeNnL1zS5H8qJuzk1u2WLV0rJshPkbm/6OQvwvhrUS45aVYuC
+ CG3daFjKHDJYHXdOfgx0KnUQu9MGhwpIWmxeEp3aA6NqlO1sNlnjjcjNj
+ ScHuHp/euCQG+3dGtvnRp60Mt5sm+0gfzjRpve9b0FsXKhwEe6cafwNYI
+ qAGsDF4FRkT9ZBPEUOzwFgFPiGG6q+uwt0SnsfkmTH8CxBg/Q+1pv/rMM
+ JsIvLuAN+wq695ExnmD/sXuFKQRMDQQ5vIC4ShETFEbWSmlqqGPY/IqPT
+ rvQw41Sv3EEzvj9GLHwKbgZjASJPebjiEs50/8YTs18aa0kZ1DqTzfg1g w==;
+X-IronPort-AV: E=Sophos;i="5.84,366,1620662400"; d="scan'208";a="177951717"
 Received: from mail-dm6nam08lp2041.outbound.protection.outlook.com (HELO
  NAM04-DM6-obe.outbound.protection.outlook.com) ([104.47.73.41])
- by ob1.hgst.iphmx.com with ESMTP; 31 Aug 2021 19:06:43 +0800
+ by ob1.hgst.iphmx.com with ESMTP; 31 Aug 2021 19:06:44 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M1e1ON6TGptI2A1QZsnj2VaGRXFYGIN+yjz+UKfd6SzHNgX9AnVRbxVzprpLUb8l6yVu4/bjh647YZLfMl+5v3WL8cW4dgHFHtHxDuNN/g1JxPAyd8eo35ia61V3fsV6ma7B9C9Pg94gwPPIUk/dWP1Q2wMwJ34RzxukJudlLjz4WXH+dR/nm4UEz/5t9RhXS1h0wkEe0u8ggk93I0h24nx4sjgPaiu7yjhgEZTyoFqmMKr24zJdZvZvBBdF7M6p/+dqnZ0865SesCFv2c5h3mIsWZVQ8lT3Rffr4OO7jAChWqObySc8foUdOJfdmdqU+DsXrLc+30oFchg6QRIdWg==
+ b=iCoJ7/83KP+Vf/A1fygZRXrdfxIN2oFmGH9ORFPtSxcPmyHGJTW8N5Emf7dyAiX29zdSwoDqYNnBK8XfFhMMc8LgFE3ljY09IQQxA7HdttxL4DhuMMim/DjbHCPBp8RfWnxMqN3KP54rz+JixOUHjQyb1WRBAsh4E2EGbI3gcjYorsqJe9SynLzZj9AiyS6U22Ry7vQkwCbuY6B4FLPxShsNjxSUKFppaUTJb3vU3G4iIyJFi/+6oyf0apsLjLjDVXeltHfxLHIxUajDEbYHE+6JBZ4kNDc5v3BPpDPw71oaItr0SakHvh9MzOgXQWboEL69rFb505XpGh36HKEBmA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e+CYTret+TkN6e1rfo9PNWNwIQxB3yNsTloyEZrLCz0=;
- b=hmM+LLJoum/OGqhlIBILx4SPXI0/FFAIguYU3xEmcgcJqHsrIwFnOtGfjYh2iYLMeSwRDCGsUfp78+8qeL1zUleVZPV3mk6dexwR5XTr1t9x5DGnyEInP8gdYjYifclr0r8c7K9eUgAJPlHAwrD55WKRt982IN1xDi7tk1iVomhdgbGfuIt2cfzmRTA96vRRfQ5Er5+Dl3lU3qqFpRriY3gQklVsOvsdb1hfrkhKr5wHNy4GpEzprVyNEwOx4mui8UnGUFBFccj+r87sTtMC3gSjbip4WZDZquiAelWoErqv3oNNi62iEQemRMIu2W3O6SaieNGM7ok0sWfGzsqOxQ==
+ bh=STz91lNhvGBvf1hIXeAIKKX/tfYS3xzcf9uFPBjXujo=;
+ b=n86ftkN5xnoYfvGBjY2bWU1psT92sc4PH0xLk0ydeqtDOjS/JhACh26P8hC2YZOt/uQ7eIerpCvVnrmaP9TwQ23Mnw6h9lkO5NhbtqqKyybEImAsWOJXocldhTXUKjKJI3izRRd3wcyK+fGYmjfkeC460Yv1WLs7f4wS4diDfk5ZxAHr3/25l9D9v7cgPtggEX5358d0fSvHkpZ0CmU7tXFzly7zXqRYEXbSt55V+GNscdNsg7ZM+5KCpWj5ls+dm1/lonzcQDE34doxfiBpYR2ZhbOPWHhNBc6G4dMoXWSc9dFMrQbe7YUxZpfTYHEAGn0Lx2GC2JlF/wtI8FOnpw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e+CYTret+TkN6e1rfo9PNWNwIQxB3yNsTloyEZrLCz0=;
- b=k5OXGKkHCtcghgpHImmJd65SPXXfcN8EPkgvoiJUOTqWyh6fcZmDv8yjn4tsdhVeTU2v+oJl4dNdmbUD5xuU+8Lyaf13AfukVTXSRoX2jgtboKmp86PB/FjjUD8nnaqD/0Qk428YLYdSKgJfkX1VBtUxv3NI7vXp3UjdGQM14M4=
+ bh=STz91lNhvGBvf1hIXeAIKKX/tfYS3xzcf9uFPBjXujo=;
+ b=cq/x7YL7Urgcs/Mbbr2CCuNU+t9gPH7Z0Z5rynWOJHA+OS/dTEDXF5AewCTmVRBbaqqSaURr/N+aDWh/nLmjleifNtmUmcwuaVXufEWOwIIwFPTYB8IomUOEqhag4npKhUSAkZu5KApbRqHMvSjM923kJEQBMOD8Q0ErmaKzG00=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from SJ0PR04MB7821.namprd04.prod.outlook.com (2603:10b6:a03:3ac::8)
  by SJ0PR04MB7886.namprd04.prod.outlook.com (2603:10b6:a03:300::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.23; Tue, 31 Aug
- 2021 11:06:40 +0000
+ 2021 11:06:42 +0000
 Received: from SJ0PR04MB7821.namprd04.prod.outlook.com
  ([fe80::545a:34f7:53c5:6514]) by SJ0PR04MB7821.namprd04.prod.outlook.com
  ([fe80::545a:34f7:53c5:6514%8]) with mapi id 15.20.4457.024; Tue, 31 Aug 2021
- 11:06:39 +0000
+ 11:06:42 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -58,11 +58,15 @@ To: Peter Maydell <peter.maydell@linaro.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 0/4] QEMU RISC-V ACLINT Support
-Date: Tue, 31 Aug 2021 16:35:59 +0530
-Message-Id: <20210831110603.338681-1-anup.patel@wdc.com>
+ Anup Patel <anup.patel@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v4 1/4] hw/intc: Rename sifive_clint sources to riscv_aclint
+ sources
+Date: Tue, 31 Aug 2021 16:36:00 +0530
+Message-Id: <20210831110603.338681-2-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210831110603.338681-1-anup.patel@wdc.com>
+References: <20210831110603.338681-1-anup.patel@wdc.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: MAXPR01CA0111.INDPRD01.PROD.OUTLOOK.COM
@@ -73,55 +77,55 @@ X-MS-Exchange-MessageSentRepresentingType: 1
 Received: from wdc.com (122.171.35.197) by
  MAXPR01CA0111.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:5d::29) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4457.18 via Frontend Transport; Tue, 31 Aug 2021 11:06:36 +0000
+ 15.20.4457.18 via Frontend Transport; Tue, 31 Aug 2021 11:06:39 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3af27c4d-9944-40bf-fa05-08d96c6f67f1
+X-MS-Office365-Filtering-Correlation-Id: 723daa80-3b52-485f-d343-08d96c6f6a07
 X-MS-TrafficTypeDiagnostic: SJ0PR04MB7886:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SJ0PR04MB788637F83A4A5E9C337C32DD8DCC9@SJ0PR04MB7886.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <SJ0PR04MB78860F4B55C9253A6E75E5B88DCC9@SJ0PR04MB7886.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Oob-TLC-OOBClassifiers: OLM:23;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: G53xcsp2E7eHp9PZcnknlMh4Uy36TASKkb2rJYP2JP0a/fOfpeZYZ3ubCDk2/2utrB8L2MHC+9c5mCW9Jq/sqo84EOQSlqgrH8x9FGPL8bGgwggllArG0fyVhA2nYMdHOsvfp+10MFEeNb3suvCd/3pKhoJfmoBa7esZzGHGJUxXXWbA4bYjqp9NzyTKG/lDbjwyRHeYFhulG5j0vQzLAzP6RlcxfIaQ4ofbpsYDLaI3ZSErSHCn8ySLmgqZu0gGXugMtUwd5/fXguOcNRt1FzmFxlWVfE85tNyc27iE4R5b3Qh5xM+WvhMKfrbFXgxSkX3DM83yagvqNGsZZNMgnpqxYYU7wnka+4/x/EN+n2hb1I4wEr9I8NuGeJwbkUnXyqrhssCHNMNrpMQlX8QUFYzGrs6R9F0QfazgC//Lj6rLLTEWto4EQnaiOj2a1fOKfxhiNL9jq5OdhkQ8tvFeWd8tXZl5/Kn9wJU11ij/b7NBHjvmw7wXPFPMEkqO6ex1vA/knOUMRHJs6WordvZa5sA238JHEIdg/TMP56xwnwUjsybbU6DFUvS9Rgmvulqy0Gp5rWIhHMoSDSKirVVVmzyyRqpaaYWHzWwNQ0R0YbTz/MB/17nBg6qpMAqvYVOj3qYbOpy4vDVHSMCqIiWtL4a5jUjShwIP9CmqFmJRc21f7O6kh1jGadu/6vQ7BcFlIBVUAH8LwdRMq09UhT8H6NT17DvWe89UQciumG2DwVDr7c1DnZDfunByP5P2tTppS/ilQn7w7kgEqz988DSzXcIuiJOFhjTksHnJnAmsE8EDrKpBUKtf8TZP4W4TxoAI
+X-Microsoft-Antispam-Message-Info: qsK1PiQgnjtLHKAu4eJZR/NU9gZh4cJNjcVI7+Gvtb+6XK4+evikHtgec78hij4oH131ruZGDojG0VA0arkI1I59ZxnoizvxiqmotPZYqy32n+v+fxK4apyEUY+K1mKmDm8+91RHXV1hxucYzYgDWlTSaiOEOZ40Sg7Ln9xTMMMNz94fnYen1l2fqY3+eaS1nB5I+EaW0lb6vdAsgSD/nGByafn/CmKIH3udJO43TdXegbsWi3mIXgO+o6r7zls+2k1nZz60A16KoSnvW8KtwBdIzd9IJh3Y0vEqvQT/eIFkkLesNgIjzN6GiRcv0orWxmq5YGv5qaWVeCYdCOkEOhmqkjvb6ZamMePQ/WFFTUcQ6P2EmuHXZGZxq36u5p4wMpANVyGdHNn5gqWtnBtgmG4nC0hI+3jIc9CHMbCB7NuvABudrMegW5aTV8aDsIsWfa+MMHMzujPiqjhKsefacXZ5nLrWP+qa83qNT3Nep8dplFdPT/KaGJi1vrVibJrPEinKSxfzJbovXa7p1MfK8fGj280jKtfy35afT/2e5PCrIT0lOSnCu7oFgayMhuMJteblgVO7IeCl8BJqcO4pdBKJ0y06dCEcW9chP0ASiWoRBwmA79mjDnY0KypZru/M/JJLX/Ez+LuxudwBJfIbB5ZTMZpnwYIhPXWap27+P21FalvHxOIwAJqk9djbHojn8RYAgnTSUqM7eeUaJl7ofA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ0PR04MB7821.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(39860400002)(346002)(376002)(396003)(136003)(366004)(38350700002)(86362001)(2616005)(7696005)(38100700002)(44832011)(2906002)(26005)(8936002)(956004)(66556008)(8676002)(55016002)(54906003)(5660300002)(8886007)(66476007)(83380400001)(316002)(66946007)(186003)(36756003)(110136005)(478600001)(1076003)(52116002)(4326008)(6666004)(966005);
+ SFS:(4636009)(39860400002)(346002)(376002)(396003)(136003)(366004)(38350700002)(86362001)(2616005)(7696005)(38100700002)(44832011)(2906002)(26005)(8936002)(956004)(66556008)(8676002)(55016002)(54906003)(5660300002)(8886007)(66476007)(83380400001)(316002)(66946007)(186003)(36756003)(110136005)(478600001)(1076003)(52116002)(4326008)(6666004);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5JUzoxpM3x4iKxYockyWTXQo5SO6sBq6FB2qwA4RMWxu8E5svV/+0mwJgasx?=
- =?us-ascii?Q?SOnyRJbHjsQgisZP8N3uo/9gIEaQBawP8LpgeiL5vGxu/x0Q4Gwi1XhlmHv1?=
- =?us-ascii?Q?CO8Zhpst1vTLMTTvCZ3dXB9/+kKgksW0+zF/KOhCTfje17TFpcVPKB5mLQpS?=
- =?us-ascii?Q?doJ4MDB63iwueOfdkI1O7MKlpgCrj1ai7YlfoqYiUe/Wfzb5Z5HZGAlGixIw?=
- =?us-ascii?Q?O4B3VAQSE+AW+d+Iysmh8XnfGH5ZLVrBbWrSMvPrTpcToX9UApC6fvpf0/l9?=
- =?us-ascii?Q?xE9UjqVNX61brETI25ubAS1BY3EP12gsh6/raioIhKUv4/oOzj7ZmuD9CpWO?=
- =?us-ascii?Q?6nvzPGiByxXuDAEMJ1Vkryu/L9MacKiUhZnx//V1eSXv9qrsZmhyhVVo47Ou?=
- =?us-ascii?Q?9GyGZmq+Qu64AlVjhSYXv5rq65dMp2MkSh4S3x9hUgifYA2xhjfoo7qvlXED?=
- =?us-ascii?Q?7rnXNsHk0as9ddaUpOIiDIHAsjV9WlR3DDUs7hUer9focB1GmUF3K2xvebN3?=
- =?us-ascii?Q?3h55A06RaKDuJYH9klSST7FSUKDlMBCaXTS35VsYpeOkVeR84tk430GGVefy?=
- =?us-ascii?Q?CClFHQm1BSfIJbvyKQSwR37hb3UUF+rC3Tx9hOO8JcnAqnnWRdKPBeOB4kK4?=
- =?us-ascii?Q?Kb7Nse/PWNaZS0SGFaChiAQ8R5XQL6uUNuq3tqm9Qct0QUjo1/o5FmmlzxV9?=
- =?us-ascii?Q?42/BUTNISUQut3a+/nF64Co4RfsJhVdXNRXuMOP1trKtThJ29ax2Nt5lzu5a?=
- =?us-ascii?Q?uXJTDVvHQ91Cf5LGdIcyyd9hcUc4FRu24DOeoDWvi2Z+Qmgzr1ky0Mydo2Of?=
- =?us-ascii?Q?ZNzK7yyXpRJR2SZuGZE6iItU5mlSc5lX5vjDnvWL+zNRHDZvHy7iTQD1lxI9?=
- =?us-ascii?Q?zWFKdZtJCNJb73jB5egDkbShuTA96tGfxrLtNGcOxPOwr30mTG3bpBU/iBNm?=
- =?us-ascii?Q?VLt+IRj6sdyHc2AbcihnqE5bGqhsbMtIzvbt9fQxny9uKqVNntmmPrXx8Zj2?=
- =?us-ascii?Q?9eqo0aaNfxT6WJLR6AP8h6I+ZzPx43aqvqOLJJqB1J+3IPHG/G1dMvisgrW6?=
- =?us-ascii?Q?thSDHiLoQiviti8btxqEiIIj/vMdYTuo161+/EDlbGeVMKNXROenjSq9K4ds?=
- =?us-ascii?Q?9KMkKjHFB2tXfxIJi/okag+heNIrbsU84lBexajTEZ9c+9+ALhcc2At/D/vF?=
- =?us-ascii?Q?SNmCQyHhqlpIo8e/WZ9r/QHlr2j1+sfrzlHazy1Q3g3Emsn3wskaGR0vusKB?=
- =?us-ascii?Q?YK0BzxlRA129jZPCpE5PhwcLWkMmORaj/HWf5I0XOOjJtTxO/kyI0LrRvQwS?=
- =?us-ascii?Q?h5qynP55THA1g0NTRMidTePA?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?GQETrVNcbqgHsDx4d37s7/r6npyU7sdNRx9eVV1uXW9wm+CBzDnJC3D1q1x/?=
+ =?us-ascii?Q?dfCOmNj3+ISZha8HTr7ZYS/+dfYaejE1B/KbhQcZcZ7F3tOCu0fzPoPPAmNJ?=
+ =?us-ascii?Q?gJjaRY3wQaTYDJpkr/Mt4ilb+cOK/hvqkjm+CwYm3G8oVmi6VZUZO9R+Onww?=
+ =?us-ascii?Q?TDcXn7VcvmWBk6Y1AX0hf6lBKmcWSq51opUCsNH8BuIjZG9ewPhJKpxTa1hr?=
+ =?us-ascii?Q?B966JjyDVwR8MaGGvQSCNQBLxvGZetFxoi6+xvDMko8fd4YWYBGNrGaCkSI5?=
+ =?us-ascii?Q?FnY+jdY/jfSO1WpGdz3RJDo6FgR5BWZVCz7f0zdCh9aeh9jdqpDw45DQVtJ4?=
+ =?us-ascii?Q?oYJBmlsGvN7YHFgLH3HutwULVR8YHAdRrHvoIdU9nobaOj6Y1K02fakZjLE1?=
+ =?us-ascii?Q?cOJyx3HrGrk88UE03susFYidmDzU3VSay9YUIbnS4/JS/GLjzfcL7dLvu2h3?=
+ =?us-ascii?Q?qiisnVbOpPEz8C7h4K0XFaGtX9vyrHTzYabTEUDxK6K5Hvfn1z0Yvbx81V17?=
+ =?us-ascii?Q?wk2EwEblkvMQGG7YbpwMfTKXEmTZhp+rSnB1iXQOdFvXE55mvLg6eBaFUiAb?=
+ =?us-ascii?Q?oTIGms7ihNWNDjeGYNAQhEeXTeaWnKUtcYFifTsn+7le4qynx9TFkQtH8T0P?=
+ =?us-ascii?Q?zdu9gmahQD+ifm5yl4seZEuHj244boKi7rziBNAxnnDJLDlctVIJQbZ+WhXG?=
+ =?us-ascii?Q?yvQpgCOqtj9XSBD/9TYCIQC5k39AXXCx1DmNHufkR42dN0998dp/KSHWdm63?=
+ =?us-ascii?Q?hdpyZBSS95JX0SWjlquo0ux1jGWB6XkPSqKxDpZoKL3T3qGQ8/GVZBvx2LNz?=
+ =?us-ascii?Q?wHx28Glf71XNbZSWNfH95CWvgFL9G8LoGCiUmIZk+fJ7BfDJt7o1IvpQO1Yn?=
+ =?us-ascii?Q?TT+Jzathbi60EqlTaPx82+s0JRlXHntNyv7JMrXPpmd/5k6Uibm7V4BZzKu4?=
+ =?us-ascii?Q?W0zdDi64/JwGV7AifuJXdBFiKd95zRpRwM6i5EdWdsyu7+Y7hkeQOO5I6PnV?=
+ =?us-ascii?Q?F3vnUl9Y1oYNhiLIlAUmc3gWz187Oa7W6tXDAC9yHJG75xQydjFnUs/bcYE9?=
+ =?us-ascii?Q?BZYc4aXUFu9l05Qqq09UYJw5uhnGbJVCDYVGqJhu+hJAon0c8b+MgQ7FICMH?=
+ =?us-ascii?Q?nQqNqq5SkKp1dNopPoqMxNH/OY24UJpKY+zUobFa32ciRBhgBMENEalU6K2B?=
+ =?us-ascii?Q?/j2K4fQOa+kReutRxPiScfM5YskUivppHOiZ2KYZzthTp4STW4nkv58aKpFW?=
+ =?us-ascii?Q?Wb9EsY+Y4qrq622s/qdfJ04Cw4hY1y1CX4Wr/6heqJ8zJ82LFEmiBovdHoh6?=
+ =?us-ascii?Q?WExzv1dKDAg8Fd/JW+BpA0Iy?=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3af27c4d-9944-40bf-fa05-08d96c6f67f1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 723daa80-3b52-485f-d343-08d96c6f6a07
 X-MS-Exchange-CrossTenant-AuthSource: SJ0PR04MB7821.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2021 11:06:39.2409 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2021 11:06:42.7017 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zNNkkZDaz+wWQX8+elVOXCnYEDgCglerhnwgNovXMfy0I5HEDGmoMNO8rS2ra8Ptzj3vSvU11HB8QNw9cIiuZA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: hCzLjvKIB+9AWAl5pHbvd9nhCxDBdsyBPe4aBXCkgWohqdLqMA1wsLOR8dvFeyiRVpEkDJtCNEz0FWu5UC9iXQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR04MB7886
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=870f666b0=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
@@ -146,61 +150,208 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 31 Aug 2021 11:06:51 -0000
 
-The RISC-V Advanced Core Local Interruptor (ACLINT) is an improvement
-over the SiFive CLINT but also maintains backward compatibility with
-the SiFive CLINT.
+We will be upgrading SiFive CLINT implementation into RISC-V ACLINT
+implementation so let's first rename the sources.
 
-Latest RISC-V ACLINT specification (will be frozen soon) can be found at:
-https://github.com/riscv/riscv-aclint/blob/main/riscv-aclint.adoc
+Signed-off-by: Anup Patel <anup.patel@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ hw/intc/Kconfig                                    |  2 +-
+ hw/intc/meson.build                                |  2 +-
+ hw/intc/{sifive_clint.c => riscv_aclint.c}         |  2 +-
+ hw/riscv/Kconfig                                   | 12 ++++++------
+ hw/riscv/microchip_pfsoc.c                         |  2 +-
+ hw/riscv/shakti_c.c                                |  2 +-
+ hw/riscv/sifive_e.c                                |  2 +-
+ hw/riscv/sifive_u.c                                |  2 +-
+ hw/riscv/spike.c                                   |  2 +-
+ hw/riscv/virt.c                                    |  2 +-
+ include/hw/intc/{sifive_clint.h => riscv_aclint.h} |  0
+ 11 files changed, 15 insertions(+), 15 deletions(-)
+ rename hw/intc/{sifive_clint.c => riscv_aclint.c} (99%)
+ rename include/hw/intc/{sifive_clint.h => riscv_aclint.h} (100%)
 
-This series:
-1) Replaces SiFive CLINT implementation with RISC-V ACLINT
-2) Refactors RISC-V virt machine FDT generation
-3) Adds optional full ACLINT support in QEMU RISC-V virt machine
-
-This series can be found in the riscv_aclint_v4 branch at:
-https://github.com/avpatel/qemu.git
-
-Changes since v3:
- - Rebased on Alistair's CPU GPIO pins v3 series
- - Replaced error_report() in PATCH2 with qemu_log_mask()
-
-Changes since v2:
- - Addresed nit comments in PATCH2
- - Update SSWI device emulation to match final ACLINT draft specification
-
-Changes since v1:
- - Split PATCH1 into two patches where one patch renames CLINT sources
-   and another patch updates the implementation
- - Addressed comments from Alistar and Bin
-
-Anup Patel (4):
-  hw/intc: Rename sifive_clint sources to riscv_aclint sources
-  hw/intc: Upgrade the SiFive CLINT implementation to RISC-V ACLINT
-  hw/riscv: virt: Re-factor FDT generation
-  hw/riscv: virt: Add optional ACLINT support to virt machine
-
- docs/system/riscv/virt.rst     |  10 +
- hw/intc/Kconfig                |   2 +-
- hw/intc/meson.build            |   2 +-
- hw/intc/riscv_aclint.c         | 460 +++++++++++++++++++++++
- hw/intc/sifive_clint.c         | 315 ----------------
- hw/riscv/Kconfig               |  12 +-
- hw/riscv/microchip_pfsoc.c     |  11 +-
- hw/riscv/shakti_c.c            |  13 +-
- hw/riscv/sifive_e.c            |  13 +-
- hw/riscv/sifive_u.c            |  11 +-
- hw/riscv/spike.c               |  16 +-
- hw/riscv/virt.c                | 652 ++++++++++++++++++++++-----------
- include/hw/intc/riscv_aclint.h |  80 ++++
- include/hw/intc/sifive_clint.h |  62 ----
- include/hw/riscv/virt.h        |   2 +
- 15 files changed, 1047 insertions(+), 614 deletions(-)
- create mode 100644 hw/intc/riscv_aclint.c
- delete mode 100644 hw/intc/sifive_clint.c
- create mode 100644 include/hw/intc/riscv_aclint.h
- delete mode 100644 include/hw/intc/sifive_clint.h
-
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+index f4694088a4..78aed93c45 100644
+--- a/hw/intc/Kconfig
++++ b/hw/intc/Kconfig
+@@ -62,7 +62,7 @@ config RX_ICU
+ config LOONGSON_LIOINTC
+     bool
+ 
+-config SIFIVE_CLINT
++config RISCV_ACLINT
+     bool
+ 
+ config SIFIVE_PLIC
+diff --git a/hw/intc/meson.build b/hw/intc/meson.build
+index 6e52a166e3..9c9338a9e4 100644
+--- a/hw/intc/meson.build
++++ b/hw/intc/meson.build
+@@ -46,7 +46,7 @@ specific_ss.add(when: 'CONFIG_RX_ICU', if_true: files('rx_icu.c'))
+ specific_ss.add(when: 'CONFIG_S390_FLIC', if_true: files('s390_flic.c'))
+ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
+ specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
+-specific_ss.add(when: 'CONFIG_SIFIVE_CLINT', if_true: files('sifive_clint.c'))
++specific_ss.add(when: 'CONFIG_RISCV_ACLINT', if_true: files('riscv_aclint.c'))
+ specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
+ specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
+ specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
+diff --git a/hw/intc/sifive_clint.c b/hw/intc/riscv_aclint.c
+similarity index 99%
+rename from hw/intc/sifive_clint.c
+rename to hw/intc/riscv_aclint.c
+index ab172d8e40..31ce990d0e 100644
+--- a/hw/intc/sifive_clint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -26,7 +26,7 @@
+ #include "hw/sysbus.h"
+ #include "target/riscv/cpu.h"
+ #include "hw/qdev-properties.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "qemu/timer.h"
+ #include "hw/irq.h"
+ 
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index ff75add6f3..f065e32dea 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -12,7 +12,7 @@ config MICROCHIP_PFSOC
+     select MCHP_PFSOC_MMUART
+     select MCHP_PFSOC_SYSREG
+     select MSI_NONBROKEN
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_PDMA
+     select SIFIVE_PLIC
+     select UNIMP
+@@ -26,7 +26,7 @@ config SHAKTI_C
+     bool
+     select UNIMP
+     select SHAKTI_UART
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_PLIC
+ 
+ config RISCV_VIRT
+@@ -41,7 +41,7 @@ config RISCV_VIRT
+     select PCI_EXPRESS_GENERIC_BRIDGE
+     select PFLASH_CFI01
+     select SERIAL
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_PLIC
+     select SIFIVE_TEST
+     select VIRTIO_MMIO
+@@ -50,7 +50,7 @@ config RISCV_VIRT
+ config SIFIVE_E
+     bool
+     select MSI_NONBROKEN
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PLIC
+     select SIFIVE_UART
+@@ -61,7 +61,7 @@ config SIFIVE_U
+     bool
+     select CADENCE
+     select MSI_NONBROKEN
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_GPIO
+     select SIFIVE_PDMA
+     select SIFIVE_PLIC
+@@ -78,5 +78,5 @@ config SPIKE
+     select RISCV_NUMA
+     select HTIF
+     select MSI_NONBROKEN
+-    select SIFIVE_CLINT
++    select RISCV_ACLINT
+     select SIFIVE_PLIC
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index eef55f69fd..eed9e81355 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -49,7 +49,7 @@
+ #include "hw/riscv/boot.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/riscv/microchip_pfsoc.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/sysemu.h"
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 09d4e1433e..f9f0a45651 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -21,7 +21,7 @@
+ #include "hw/riscv/shakti_c.h"
+ #include "qapi/error.h"
+ #include "hw/intc/sifive_plic.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "sysemu/sysemu.h"
+ #include "hw/qdev-properties.h"
+ #include "exec/address-spaces.h"
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 04265c5640..a73848958e 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -41,7 +41,7 @@
+ #include "hw/riscv/sifive_e.h"
+ #include "hw/riscv/boot.h"
+ #include "hw/char/sifive_uart.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/misc/sifive_e_prci.h"
+ #include "chardev/char.h"
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 6766edc1d0..5a7c202dad 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -51,7 +51,7 @@
+ #include "hw/riscv/sifive_u.h"
+ #include "hw/riscv/boot.h"
+ #include "hw/char/sifive_uart.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "chardev/char.h"
+ #include "net/eth.h"
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index aae36f2cb4..690c19c12a 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -35,7 +35,7 @@
+ #include "hw/riscv/boot.h"
+ #include "hw/riscv/numa.h"
+ #include "hw/char/riscv_htif.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "chardev/char.h"
+ #include "sysemu/device_tree.h"
+ #include "sysemu/sysemu.h"
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 47f1beb473..df33fd74c2 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -32,7 +32,7 @@
+ #include "hw/riscv/virt.h"
+ #include "hw/riscv/boot.h"
+ #include "hw/riscv/numa.h"
+-#include "hw/intc/sifive_clint.h"
++#include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/sifive_plic.h"
+ #include "hw/misc/sifive_test.h"
+ #include "chardev/char.h"
+diff --git a/include/hw/intc/sifive_clint.h b/include/hw/intc/riscv_aclint.h
+similarity index 100%
+rename from include/hw/intc/sifive_clint.h
+rename to include/hw/intc/riscv_aclint.h
 -- 
 2.25.1
 
