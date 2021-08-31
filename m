@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL2iK-0006E8-38
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:18:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60776)
+	id 1mL2iP-0006Ny-VP
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:18:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60872)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2iE-0006AG-Rg
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:59 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:60213)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2iO-0006Iu-HC
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:18:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:29215)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2iC-0006Av-4Z
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:58 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2iL-0006H4-R9
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:18:08 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630412275;
+ s=mimecast20190719; t=1630412285;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XEVn3MubDcXSDC4bhzn6yl2MS+ELh+ql7Nha2IQz6ks=;
- b=ihkoXakAEh4CvWA6jyEwfopj5sxT5TXAPwZ0xplGUtMPXJouRdeHuz3eqdN4V3dzyAlt+4
- 6ZJTGQ9lY15xNiR39nQNQWRbcxVN9NzBbAoW/gWBM68F4QqGAsOd2opDLdd/gN+WOOdPme
- IlWOAB23uE/WEQbl/mpkkLSLVatPT6o=
+ bh=Df/cS+Kk2RDhFNkjyLEWK9DtQT8M40JsvdVaLc7r9J8=;
+ b=GChTyPXR8eRh340cc+ET0uFsKeLOaYfIAIoPpU8jlm93aILx5+Dxv9ImqJNasduhHIDYlW
+ wYdkXGkZJtkFGRJojcuAass+x9Hq75vZn9UeC3FhjG0vY1JgJ7YJ74OCOBbvyTKSZqElZq
+ gBnTP3PBnr3C8CuEFVccuZ3e4HhOPP0=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-170-eUvZnfpuNuWlnb5UWdblpQ-1; Tue, 31 Aug 2021 08:17:54 -0400
-X-MC-Unique: eUvZnfpuNuWlnb5UWdblpQ-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-469-cYZepCxIMVyGkTckoaK2fw-1; Tue, 31 Aug 2021 08:18:03 -0400
+X-MC-Unique: cYZepCxIMVyGkTckoaK2fw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 673F3106F6EC;
- Tue, 31 Aug 2021 12:17:51 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5F1A392509;
+ Tue, 31 Aug 2021 12:18:00 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6B33B5D6D5;
- Tue, 31 Aug 2021 12:17:39 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 08C61104B4C2;
+ Tue, 31 Aug 2021 12:17:53 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2AB2B18009D5; Tue, 31 Aug 2021 14:15:46 +0200 (CEST)
+ id 4AE3718009D9; Tue, 31 Aug 2021 14:15:46 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
@@ -59,20 +59,20 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH 15/29] tcg_funcs: Add tb_flush to TCGModuleOps
-Date: Tue, 31 Aug 2021 14:15:31 +0200
-Message-Id: <20210831121545.2874233-16-kraxel@redhat.com>
+Subject: [PATCH 17/29] tcg: drop tb_invalidate_phys_page_range()
+Date: Tue, 31 Aug 2021 14:15:33 +0200
+Message-Id: <20210831121545.2874233-18-kraxel@redhat.com>
 In-Reply-To: <20210831121545.2874233-1-kraxel@redhat.com>
 References: <20210831121545.2874233-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=kraxel@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -93,234 +93,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 12:17:59 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 12:18:08 -0000
+
+tb_invalidate_phys_range() can be used instead.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- include/exec/exec-all.h   | 1 -
- include/tcg/tcg-module.h  | 1 +
- accel/stubs/tcg-stub.c    | 4 ----
- accel/tcg/tcg-module.c    | 1 +
- accel/tcg/translate-all.c | 9 ++++++++-
- cpu.c                     | 2 +-
- gdbstub.c                 | 4 ++--
- hw/ppc/spapr_hcall.c      | 2 +-
- linux-user/mmap.c         | 2 +-
- linux-user/syscall.c      | 4 ++--
- plugins/core.c            | 2 +-
- plugins/loader.c          | 2 +-
- target/alpha/sys_helper.c | 2 +-
- target/riscv/csr.c        | 2 +-
- 14 files changed, 21 insertions(+), 17 deletions(-)
+ include/exec/translate-all.h |  1 -
+ accel/tcg/translate-all.c    | 25 -------------------------
+ cpu.c                        |  4 ++--
+ 3 files changed, 2 insertions(+), 28 deletions(-)
 
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index 27fc489c57b5..7dc6f498a7e4 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -572,7 +572,6 @@ void tb_invalidate_phys_range(target_ulong start, target_ulong end);
- #else
- void tb_invalidate_phys_addr(AddressSpace *as, hwaddr addr, MemTxAttrs attrs);
- #endif
--void tb_flush(CPUState *cpu);
- void tb_phys_invalidate(TranslationBlock *tb, tb_page_addr_t page_addr);
- TranslationBlock *tb_htable_lookup(CPUState *cpu, target_ulong pc,
-                                    target_ulong cs_base, uint32_t flags,
-diff --git a/include/tcg/tcg-module.h b/include/tcg/tcg-module.h
-index 5dd4deb9ed57..003581b0718c 100644
---- a/include/tcg/tcg-module.h
-+++ b/include/tcg/tcg-module.h
-@@ -13,6 +13,7 @@ struct TCGModuleOps {
- #endif
-     void (*tcg_exec_unrealizefn)(CPUState *cpu);
-     void (*tcg_exec_realizefn)(CPUState *cpu, Error **errp);
-+    void (*tb_flush)(CPUState *cpu);
- };
- extern struct TCGModuleOps tcg;
+diff --git a/include/exec/translate-all.h b/include/exec/translate-all.h
+index a557b4e2bb9e..f313542cdae1 100644
+--- a/include/exec/translate-all.h
++++ b/include/exec/translate-all.h
+@@ -29,7 +29,6 @@ void page_collection_unlock(struct page_collection *set);
+ void tb_invalidate_phys_page_fast(struct page_collection *pages,
+                                   tb_page_addr_t start, int len,
+                                   uintptr_t retaddr);
+-void tb_invalidate_phys_page_range(tb_page_addr_t start, tb_page_addr_t end);
+ void tb_check_watchpoint(CPUState *cpu, uintptr_t retaddr);
  
-diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
-index d8162673ae8d..e7651d035f28 100644
---- a/accel/stubs/tcg-stub.c
-+++ b/accel/stubs/tcg-stub.c
-@@ -13,10 +13,6 @@
- #include "qemu/osdep.h"
- #include "exec/exec-all.h"
- 
--void tb_flush(CPUState *cpu)
--{
--}
--
- void tlb_set_dirty(CPUState *cpu, target_ulong vaddr)
- {
- }
-diff --git a/accel/tcg/tcg-module.c b/accel/tcg/tcg-module.c
-index 36c1df564f31..7600951fd20b 100644
---- a/accel/tcg/tcg-module.c
-+++ b/accel/tcg/tcg-module.c
-@@ -34,4 +34,5 @@ struct TCGModuleOps tcg = {
- #endif
-     .tcg_exec_realizefn = tcg_exec_realizefn_stub,
-     .tcg_exec_unrealizefn = update_cpu_stub,
-+    .tb_flush = update_cpu_stub,
- };
+ #ifdef CONFIG_USER_ONLY
 diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
-index c7547cd923b4..1d258e89fc81 100644
+index 57bb921bd3ba..3a3a60575141 100644
 --- a/accel/tcg/translate-all.c
 +++ b/accel/tcg/translate-all.c
-@@ -1003,7 +1003,7 @@ done:
-     }
+@@ -1768,31 +1768,6 @@ tb_invalidate_phys_page_range__locked(struct page_collection *pages,
+ #endif
  }
  
--void tb_flush(CPUState *cpu)
-+static void tb_flush(CPUState *cpu)
- {
-     if (tcg_enabled()) {
-         unsigned tb_flush_count = qatomic_mb_read(&tb_ctx.tb_flush_count);
-@@ -2463,3 +2463,10 @@ int page_unprotect(target_ulong address, uintptr_t pc)
-     return 0;
- }
- #endif /* CONFIG_USER_ONLY */
-+
-+static void tcg_module_ops_tb(void)
-+{
-+    tcg.tb_flush = tb_flush;
-+}
-+
-+type_init(tcg_module_ops_tb);
+-/*
+- * Invalidate all TBs which intersect with the target physical address range
+- * [start;end[. NOTE: start and end must refer to the *same* physical page.
+- * 'is_cpu_write_access' should be true if called from a real cpu write
+- * access: the virtual CPU will exit the current TB if code is modified inside
+- * this TB.
+- *
+- * Called with mmap_lock held for user-mode emulation
+- */
+-void tb_invalidate_phys_page_range(tb_page_addr_t start, tb_page_addr_t end)
+-{
+-    struct page_collection *pages;
+-    PageDesc *p;
+-
+-    assert_memory_lock();
+-
+-    p = page_find(start >> TARGET_PAGE_BITS);
+-    if (p == NULL) {
+-        return;
+-    }
+-    pages = page_collection_lock(start, end);
+-    tb_invalidate_phys_page_range__locked(pages, p, start, end, 0);
+-    page_collection_unlock(pages);
+-}
+-
+ /*
+  * Invalidate all TBs which intersect with the target physical address range
+  * [start;end[. NOTE: start and end may refer to *different* physical pages.
 diff --git a/cpu.c b/cpu.c
-index d1c9f68a26e7..ce96b3591a9c 100644
+index e8baec294b06..b8ac817cb3fd 100644
 --- a/cpu.c
 +++ b/cpu.c
-@@ -58,7 +58,7 @@ static int cpu_common_post_load(void *opaque, int version_id)
-      * memory we've translated code from. So we must flush all TBs,
-      * which will now be stale.
-      */
--    tb_flush(cpu);
-+    tcg.tb_flush(cpu);
- 
-     return 0;
- }
-diff --git a/gdbstub.c b/gdbstub.c
-index 5d8e6ae3cd9b..c2c6901b77b6 100644
---- a/gdbstub.c
-+++ b/gdbstub.c
-@@ -2796,7 +2796,7 @@ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
-         } else {
-             trace_gdbstub_hit_break();
-         }
--        tb_flush(cpu);
-+        tcg.tb_flush(cpu);
-         ret = GDB_SIGNAL_TRAP;
-         break;
-     case RUN_STATE_PAUSED:
-@@ -3135,7 +3135,7 @@ gdb_handlesig(CPUState *cpu, int sig)
- 
-     /* disable single step if it was enabled */
-     cpu_single_step(cpu, 0);
--    tb_flush(cpu);
-+    tcg.tb_flush(cpu);
- 
-     if (sig != 0) {
-         snprintf(buf, sizeof(buf), "S%02x", target_signal_to_gdb(sig));
-diff --git a/hw/ppc/spapr_hcall.c b/hw/ppc/spapr_hcall.c
-index 0e9a5b2e4053..732e79cca0ad 100644
---- a/hw/ppc/spapr_hcall.c
-+++ b/hw/ppc/spapr_hcall.c
-@@ -292,7 +292,7 @@ static target_ulong h_page_init(PowerPCCPU *cpu, SpaprMachineState *spapr,
-         if (kvm_enabled()) {
-             kvmppc_icbi_range(cpu, pdst, len);
-         } else {
--            tb_flush(CPU(cpu));
-+            tcg.tb_flush(CPU(cpu));
-         }
-     }
- 
-diff --git a/linux-user/mmap.c b/linux-user/mmap.c
-index 0e103859fed8..85cb03e176c1 100644
---- a/linux-user/mmap.c
-+++ b/linux-user/mmap.c
-@@ -461,7 +461,7 @@ abi_long target_mmap(abi_ulong start, abi_ulong len, int target_prot,
-         CPUState *cpu = thread_cpu;
-         if (!(cpu->tcg_cflags & CF_PARALLEL)) {
-             cpu->tcg_cflags |= CF_PARALLEL;
--            tb_flush(cpu);
-+            tcg.tb_flush(cpu);
-         }
-     }
- 
-diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index ccd3892b2df7..6ab3009bc98b 100644
---- a/linux-user/syscall.c
-+++ b/linux-user/syscall.c
-@@ -4513,7 +4513,7 @@ static inline abi_ulong do_shmat(CPUArchState *cpu_env,
-      */
-     if (!(cpu->tcg_cflags & CF_PARALLEL)) {
-         cpu->tcg_cflags |= CF_PARALLEL;
--        tb_flush(cpu);
-+        tcg.tb_flush(cpu);
-     }
- 
-     if (shmaddr)
-@@ -6376,7 +6376,7 @@ static int do_fork(CPUArchState *env, unsigned int flags, abi_ulong newsp,
-          */
-         if (!(cpu->tcg_cflags & CF_PARALLEL)) {
-             cpu->tcg_cflags |= CF_PARALLEL;
--            tb_flush(cpu);
-+            tcg.tb_flush(cpu);
-         }
- 
-         /* we create a new CPU instance. */
-diff --git a/plugins/core.c b/plugins/core.c
-index 6b2490f97328..ee3ad26b354c 100644
---- a/plugins/core.c
-+++ b/plugins/core.c
-@@ -514,7 +514,7 @@ void qemu_plugin_user_exit(void)
-         }
-     }
- 
--    tb_flush(current_cpu);
-+    tcg.tb_flush(current_cpu);
- 
-     CPU_FOREACH(cpu) {
-         qemu_plugin_disable_mem_helpers(cpu);
-diff --git a/plugins/loader.c b/plugins/loader.c
-index 71b03721dffc..21e94a7509dc 100644
---- a/plugins/loader.c
-+++ b/plugins/loader.c
-@@ -364,7 +364,7 @@ static void plugin_flush_destroy(CPUState *cpu, run_on_cpu_data arg)
-     struct qemu_plugin_reset_data *data = arg.host_ptr;
- 
-     g_assert(cpu_in_exclusive_context(cpu));
--    tb_flush(cpu);
-+    tcg.tb_flush(cpu);
-     plugin_reset_destroy(data);
- }
- 
-diff --git a/target/alpha/sys_helper.c b/target/alpha/sys_helper.c
-index 25f6cb88940d..bad37d35e342 100644
---- a/target/alpha/sys_helper.c
-+++ b/target/alpha/sys_helper.c
-@@ -55,7 +55,7 @@ void helper_tbis(CPUAlphaState *env, uint64_t p)
- 
- void helper_tb_flush(CPUAlphaState *env)
+@@ -222,7 +222,7 @@ const char *parse_cpu_option(const char *cpu_option)
+ void tb_invalidate_phys_addr(tb_page_addr_t addr)
  {
--    tb_flush(env_cpu(env));
-+    tcg.tb_flush(env_cpu(env));
+     mmap_lock();
+-    tb_invalidate_phys_page_range(addr, addr + 1);
++    tb_invalidate_phys_range(addr, addr + 1);
+     mmap_unlock();
  }
- 
- void helper_halt(uint64_t restart)
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 9a4ed18ac597..46603475e57b 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -610,7 +610,7 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
- 
-     /* flush translation cache */
-     if (val != env->misa) {
--        tb_flush(env_cpu(env));
-+        tcg.tb_flush(env_cpu(env));
+ #else
+@@ -243,7 +243,7 @@ void tb_invalidate_phys_addr(AddressSpace *as, hwaddr addr, MemTxAttrs attrs)
+         return;
      }
+     ram_addr = memory_region_get_ram_addr(mr) + addr;
+-    tb_invalidate_phys_page_range(ram_addr, ram_addr + 1);
++    tb_invalidate_phys_range(ram_addr, ram_addr + 1);
+ }
+ #endif
  
-     env->misa = val;
 -- 
 2.31.1
 
