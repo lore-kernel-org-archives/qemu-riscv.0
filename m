@@ -1,140 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL1ba-000592-FJ
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 07:07:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43686)
+	id 1mL2gb-0003oo-QH
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:16:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59726)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=870f666b0=Anup.Patel@wdc.com>)
- id 1mL1bZ-000556-BR; Tue, 31 Aug 2021 07:07:01 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:63075)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2ga-0003k7-E2
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:16 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:40377)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <prvs=870f666b0=Anup.Patel@wdc.com>)
- id 1mL1bV-00017W-KX; Tue, 31 Aug 2021 07:07:00 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1630408017; x=1661944017;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:content-transfer-encoding:mime-version;
- bh=jHWxcqAgEtxHBuuhV/gPW/gVe8WsfF2IyJRHu2iLuiU=;
- b=FdUZ1RlUZfoYgkRcm0vf7jNLZ3IkUOb89RzSNHS0p72AeE0eUzbHegsv
- nlENdXhhgU8O/32mCu4VriH4Cdfs+fqDESspoy5WMjLFw6oaTttPhfjVt
- QIBOJjL7ZmCwLI866wWc89KbPfkzEYrGBbUVLrtVuWRwnJGl5vXRu5/eH
- s7cAXL/r9gnXK4qq2+3L9jx/TupMMQgE3ebILASFyGfeQTRETB6b3eeoE
- 9KI4yu/6LgcV77EoCwsPtizYpbUfO45nq0yZf3GHrRz12kWTMjWuu7+DE
- mvGGwgv1wZyd+ZbKi1dkqAVkqyNuaAZ8pKSknFGwAyh+Zv+dZ5X/WFZ29 g==;
-X-IronPort-AV: E=Sophos;i="5.84,366,1620662400"; d="scan'208";a="282633475"
-Received: from mail-bn8nam11lp2168.outbound.protection.outlook.com (HELO
- NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.168])
- by ob1.hgst.iphmx.com with ESMTP; 31 Aug 2021 19:06:54 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ofmPBbgFTA+5/BYEre9UYSHhR/ravpGSxhdcr5snfjU1fxrWNh0k6u0C3pxpDOLGSDOwD0mJb5vGTXvV+FxE+mSqd0xpfR5nmpuhpPCs+QibL8RT6UgJj/DHsyMts7Dv9fwi6qX8tME6S1pKksa0vbutxVSQsFFutG8lstdN0gwRIQfN9Ng/NdhFIPvu6zj/viXerkDeLiRaxUlPaioTkYNBrD2K9nYi3Qks5s0ImzYhmMMXUv81AJVBAB/FJkgnUv2JckmDaskIhbw92XMDizZdwnrN5nC5ACcc27rgdGwluftdBVrVP1KB9Ly4zxSuC/Tj56qqpfWAPmo+VtC1FA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FJy/U9uOL29ShUF+lUkVe/RfgZHMAtZp1D1ERQEFo98=;
- b=NBeG9cy2gZNTnhZvi0iKeKzAFauQQkR17psrr3GFjotGujqkoYP8x5OY5WfGKNX9N6WA84JeURLZpdwJCrpU4GLzBXkeiDLmZicSPuHaGyqMfu7CzHVNJaGIJl32SSRoMt1Os204q2kwZ9OEvoRSb6pdpY4vkjrDz+5Djtd7TnE7jcKXu5erHwMkHKd+6nn5FTXEz4esVcz59FFClN+uaNwwlVx+my91mRb1z1RZAGds57KKwqqr5LUbfe33GUas5hC+EvNg1L9XvHKjXhYhqfzK5nkPIr2VxB/leFZIu/el4yTBKl/QDcEPEDuu7A02lfeHyB6WvHpd7SQcVLIK2Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FJy/U9uOL29ShUF+lUkVe/RfgZHMAtZp1D1ERQEFo98=;
- b=rArGqHvEEVLYYDBf7AeOoc2d0o7wY8f9nI4kVfEngPwpJG1qstt5zsobaXdStX51pgAVGu5UKhrViY95oX7wUJdtv614l4iax/0Ph3jFS5rjPvJXSib2RQI6bKXv4kCZNjPG+M5DLuQ/ElQErXNx9CN7ZXjs9D6ZNPIE6nhd6OQ=
-Authentication-Results: linaro.org; dkim=none (message not signed)
- header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
-Received: from SJ0PR04MB7821.namprd04.prod.outlook.com (2603:10b6:a03:3ac::8)
- by SJ0PR04MB8357.namprd04.prod.outlook.com (2603:10b6:a03:3d1::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4436.21; Tue, 31 Aug
- 2021 11:06:52 +0000
-Received: from SJ0PR04MB7821.namprd04.prod.outlook.com
- ([fe80::545a:34f7:53c5:6514]) by SJ0PR04MB7821.namprd04.prod.outlook.com
- ([fe80::545a:34f7:53c5:6514%8]) with mapi id 15.20.4457.024; Tue, 31 Aug 2021
- 11:06:52 +0000
-From: Anup Patel <anup.patel@wdc.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <anup.patel@wdc.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v4 4/4] hw/riscv: virt: Add optional ACLINT support to virt
- machine
-Date: Tue, 31 Aug 2021 16:36:03 +0530
-Message-Id: <20210831110603.338681-5-anup.patel@wdc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210831110603.338681-1-anup.patel@wdc.com>
-References: <20210831110603.338681-1-anup.patel@wdc.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MAXPR01CA0111.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:5d::29) To SJ0PR04MB7821.namprd04.prod.outlook.com
- (2603:10b6:a03:3ac::8)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2gV-00057u-LB
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:16 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1630412170;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lZS4DXMXSOjtCM69VzWdjvjuCGX5Br/qVVvKVZTVxAA=;
+ b=AJFU+WfDYr3S0JGOl2c+kF4lN/gIhSKoL5MqMo8CT8x/Hxdq79giPYKAGD2RTt52f4fCT2
+ 3mjnWOUDcqstjTzF4q2XDzYNuzj5o2095DBMxyizVgljkSAmntFzJKw2VAhdLZEZ4RTKXu
+ ke3lK/eyVVoq518MMp0c4Fexb67Nx3o=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-13-NbqoTxYwMOSz1n-Y13nYiw-1; Tue, 31 Aug 2021 08:16:09 -0400
+X-MC-Unique: NbqoTxYwMOSz1n-Y13nYiw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 52118185302A;
+ Tue, 31 Aug 2021 12:16:04 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id AB1BC1001281;
+ Tue, 31 Aug 2021 12:15:46 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 13FFA1800936; Tue, 31 Aug 2021 14:15:45 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
+ Peter Xu <peterx@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Thomas Huth <thuth@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ qemu-riscv@nongnu.org, David Gibson <david@gibson.dropbear.id.au>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Stafford Horne <shorne@gmail.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Halil Pasic <pasic@linux.ibm.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Greg Kurz <groug@kaod.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-s390x@nongnu.org,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>
+Subject: [PATCH 00/29] [RFC] build more i386 tcg code modular.
+Date: Tue, 31 Aug 2021 14:15:16 +0200
+Message-Id: <20210831121545.2874233-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from wdc.com (122.171.35.197) by
- MAXPR01CA0111.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:5d::29) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4457.18 via Frontend Transport; Tue, 31 Aug 2021 11:06:49 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a7474262-8748-4f85-7828-08d96c6f6fda
-X-MS-TrafficTypeDiagnostic: SJ0PR04MB8357:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <SJ0PR04MB83573922CBDE3E426638D3068DCC9@SJ0PR04MB8357.namprd04.prod.outlook.com>
-WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:454;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2k/xfqu4DiWOxH8/KvLHEJXz9MLgdplOO0t8Glcus5ONo+W7VfwD3OJZhDn1BLk3hnkf1ekf2YcpgS+yN+zlc/5UL5aaQPJmSwVjEcn3SORWO/Vc00MPPoZ+nbmfiVx86PcV/OTNxf7YzCsIt6seGRu17l533qL0wD4nAfRHB7mN+dpjZz9Wu2FCFZKSpPWQwrnTW5bQCw6WiTjHtzVW4rAUPt+uXWvKPz4OBOkemvQ4FkGge+YhcJkg94rO39T6cNX367F2mvdExWfwfrxLKitYVVdJJGsn6XBHHC4l9pa4W0PFkxMQJ8ZlyQqkyXypikT7Xw7XwImZKgv6ClQoaWs36GCDqIIT/LnHFouKicuNhDZK9BIIfhrDcS9PD/FsbZarDeVOEUs/WszcTOeTwTqp78zFLXRRfJsSFMyetX64O4WHmKw/OS3D+VrDqEYLGNz+uk1/ey0z+d/cpSb8Td0dlG0X5uI8Z5uT5YxvfkD+0+f9wyjohU05oL/ib3h4HiHarXaEmuoEGnNus55nUjD43IUR1k3HvRMmCd+RWDH7G1N0YgL+Wlg4ew6lchdd+NfjgK84AnBhRoIuN9AbdlozW/UkCwMOnAsKTPpFEHq/U4fOhXgFg1a8idb0s21q1OEE2qRum7+sCslmYAMUPmXr8sTC/ISQdGWYn9fcfbG2Po/O9ob6sdkagLnYsN61ekZ4taxMkMnS0l7nyp2VZw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ0PR04MB7821.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(55016002)(5660300002)(38100700002)(6666004)(316002)(86362001)(8676002)(2616005)(26005)(8936002)(66476007)(7696005)(4326008)(66556008)(83380400001)(110136005)(2906002)(52116002)(8886007)(54906003)(1076003)(186003)(44832011)(508600001)(38350700002)(66946007)(36756003)(956004);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2n3mi3uIN4bTCgi+H4k6vNyGAomxuDl0T0dKMpH4eg8ibE/kzQlJxKgF/ayL?=
- =?us-ascii?Q?3RIeksmkot+AT0lWD+l9vOHw0HW//+nvG5criUIzEeoksQwVXChlCHCYJLIW?=
- =?us-ascii?Q?Gwn0jBaqhNJzxDZBIk4RhHuhtnPqawtB0zHLQLweRf5v4NRirY8oQEaUs6ct?=
- =?us-ascii?Q?sPTE6EqMlr6DOj0QmxpQxL+KWmF6OzI77id++YhZyej6d+sLqWZA2SxjmR+r?=
- =?us-ascii?Q?zmQGrmklRkeN4s0dH0Ckig3cVwJvW+IrxhXYo9lu+pzEf2xagrQ8w67E9kYp?=
- =?us-ascii?Q?QycJkq4ijz1xKGvsCvveJHOS3nCwDPxMkWh61MtX6qI0lqASsNiDMzhyZZiD?=
- =?us-ascii?Q?RzRcoioUHCIKhGnaJuWwEtXOX96mOm+9n/PmPe5DzxfAi6Y0krmx/AV8KIiD?=
- =?us-ascii?Q?teS+2LxOdQeYZmWhiTHq5GizhhY7TxD0S3PCd65omNeyzESmgg1fm5w5Cf1I?=
- =?us-ascii?Q?jk6HZgxpJJDFM9hJ2JgNHTjffcl9FH8uTZjXlj72ULX0/ZGXcTSAukQ/fsTm?=
- =?us-ascii?Q?z6tHgkcwg3QT58DhW9g5+stGDb/YgOdIvOpaU7z4kyGZSa6RIaGQ8IQIG++9?=
- =?us-ascii?Q?B2dJLxgbd+wjsGANVEe2u/V5DTjuWIT8ofbMswd7XpqIkFU3+nAifFm0etzg?=
- =?us-ascii?Q?DmLyvx2ot6bmb/Rndg9GfOTA7nDd4PQfs2wzydvaiTeXz5x2cZ5S3rS3BPd0?=
- =?us-ascii?Q?6TcpDtaTZGd7Zsp+IobGCAW071OQJcgNtG817DfEHBOUI1JpSCJct0e/QO05?=
- =?us-ascii?Q?zBQ9BGOolBHqTmKakQe6pffSmTrfiAeLwO17K099pU3V5M5rTdXc3YHjujyR?=
- =?us-ascii?Q?zB3lkvfltb31zlmoyhzZHuw1Sb53E8dY14PnzXLRJqLRmo12UjLsCfDspl9X?=
- =?us-ascii?Q?Ivyp+JFeeLYIBG7fUzoqvikQr1tQndflfGf+iQ8B9x+Ok5wgIxyQUY0/2nm5?=
- =?us-ascii?Q?BkeqmyAdyQivVcM8nXY16b3RYQ4JgGbjfIwYK8zwAmJuaAbbf35JwBLPcv/X?=
- =?us-ascii?Q?G3MK/99xMpxNrtuYTRvX2goS80MKHJ2lI+qq7pBnSQBQvV4I07eVXRi2lBZ2?=
- =?us-ascii?Q?OsLtF4otYZiuPoO1VV5ZjnF1f8tjFJ2/3q9HVTeQAFioXbqiF38U0DUkEnE2?=
- =?us-ascii?Q?QE7wH6YFdyf+joNjKSUCurfoeWePBYdfE2jUSSxYVgSDOkKsrvgLnyFcHgi/?=
- =?us-ascii?Q?gTlOOKz7IKosA4ix2dAdzAza+oBTKOV5d2guqd6xx0iPItkGcnyiiR2cDoMy?=
- =?us-ascii?Q?ImuUUfb0Nswgy3QdkOvc++QHe/70SNrQuexrHkW6cKBcWm74k0YO/GINX5I9?=
- =?us-ascii?Q?h+U85FKlNJbe2NpsJcpW/ZVV?=
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7474262-8748-4f85-7828-08d96c6f6fda
-X-MS-Exchange-CrossTenant-AuthSource: SJ0PR04MB7821.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2021 11:06:52.4339 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jHYU8kOD86bIdXjMuOlgLhBCY3QUHczH/ccOk4t/kpAcxRs0qymAhPwGvV7eKhckx3NPQIss3nWVgGesO+vveA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR04MB8357
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=870f666b0=Anup.Patel@wdc.com; helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
-X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, MSGID_FROM_MTA_HEADER=0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kraxel@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.391,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -148,221 +90,140 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 11:07:01 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 12:16:16 -0000
 
-We extend virt machine to emulate ACLINT devices only when "aclint=on"
-parameter is passed along with machine name in QEMU command-line.
-
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- docs/system/riscv/virt.rst |  10 ++++
- hw/riscv/virt.c            | 113 ++++++++++++++++++++++++++++++++++++-
- include/hw/riscv/virt.h    |   2 +
- 3 files changed, 124 insertions(+), 1 deletion(-)
-
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index 321d77e07d..fa016584bf 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -53,6 +53,16 @@ with the default OpenSBI firmware image as the -bios. It also supports
- the recommended RISC-V bootflow: U-Boot SPL (M-mode) loads OpenSBI fw_dynamic
- firmware and U-Boot proper (S-mode), using the standard -bios functionality.
- 
-+Machine-specific options
-+------------------------
-+
-+The following machine-specific options are supported:
-+
-+- aclint=[on|off]
-+
-+  When this option is "on", ACLINT devices will be emulated instead of
-+  SiFive CLINT. When not specified, this option is assumed to be "off".
-+
- Running Linux kernel
- --------------------
- 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7f716901ef..ec0cb69b8c 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -48,6 +48,7 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_TEST] =        {   0x100000,        0x1000 },
-     [VIRT_RTC] =         {   0x101000,        0x1000 },
-     [VIRT_CLINT] =       {  0x2000000,       0x10000 },
-+    [VIRT_ACLINT_SSWI] = {  0x2F00000,        0x4000 },
-     [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
-     [VIRT_PLIC] =        {  0xc000000, VIRT_PLIC_SIZE(VIRT_CPUS_MAX * 2) },
-     [VIRT_UART0] =       { 0x10000000,         0x100 },
-@@ -281,6 +282,82 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
-     g_free(clint_cells);
- }
- 
-+static void create_fdt_socket_aclint(RISCVVirtState *s,
-+                                     const MemMapEntry *memmap, int socket,
-+                                     uint32_t *intc_phandles)
-+{
-+    int cpu;
-+    char *name;
-+    unsigned long addr;
-+    uint32_t aclint_cells_size;
-+    uint32_t *aclint_mswi_cells;
-+    uint32_t *aclint_sswi_cells;
-+    uint32_t *aclint_mtimer_cells;
-+    MachineState *mc = MACHINE(s);
-+
-+    aclint_mswi_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+    aclint_mtimer_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+    aclint_sswi_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+
-+    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-+        aclint_mswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aclint_mswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_SOFT);
-+        aclint_mtimer_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aclint_mtimer_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_TIMER);
-+        aclint_sswi_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aclint_sswi_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_SOFT);
-+    }
-+    aclint_cells_size = s->soc[socket].num_harts * sizeof(uint32_t) * 2;
-+
-+    addr = memmap[VIRT_CLINT].base + (memmap[VIRT_CLINT].size * socket);
-+    name = g_strdup_printf("/soc/mswi@%lx", addr);
-+    qemu_fdt_add_subnode(mc->fdt, name);
-+    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "riscv,aclint-mswi");
-+    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
-+        0x0, addr, 0x0, RISCV_ACLINT_SWI_SIZE);
-+    qemu_fdt_setprop(mc->fdt, name, "interrupts-extended",
-+        aclint_mswi_cells, aclint_cells_size);
-+    qemu_fdt_setprop(mc->fdt, name, "interrupt-controller", NULL, 0);
-+    qemu_fdt_setprop_cell(mc->fdt, name, "#interrupt-cells", 0);
-+    riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-+    g_free(name);
-+
-+    addr = memmap[VIRT_CLINT].base + RISCV_ACLINT_SWI_SIZE +
-+        (memmap[VIRT_CLINT].size * socket);
-+    name = g_strdup_printf("/soc/mtimer@%lx", addr);
-+    qemu_fdt_add_subnode(mc->fdt, name);
-+    qemu_fdt_setprop_string(mc->fdt, name, "compatible",
-+        "riscv,aclint-mtimer");
-+    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
-+        0x0, addr + RISCV_ACLINT_DEFAULT_MTIME,
-+        0x0, memmap[VIRT_CLINT].size - RISCV_ACLINT_SWI_SIZE -
-+             RISCV_ACLINT_DEFAULT_MTIME,
-+        0x0, addr + RISCV_ACLINT_DEFAULT_MTIMECMP,
-+        0x0, RISCV_ACLINT_DEFAULT_MTIME);
-+    qemu_fdt_setprop(mc->fdt, name, "interrupts-extended",
-+        aclint_mtimer_cells, aclint_cells_size);
-+    riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-+    g_free(name);
-+
-+    addr = memmap[VIRT_ACLINT_SSWI].base +
-+        (memmap[VIRT_ACLINT_SSWI].size * socket);
-+    name = g_strdup_printf("/soc/sswi@%lx", addr);
-+    qemu_fdt_add_subnode(mc->fdt, name);
-+    qemu_fdt_setprop_string(mc->fdt, name, "compatible", "riscv,aclint-sswi");
-+    qemu_fdt_setprop_cells(mc->fdt, name, "reg",
-+        0x0, addr, 0x0, memmap[VIRT_ACLINT_SSWI].size);
-+    qemu_fdt_setprop(mc->fdt, name, "interrupts-extended",
-+        aclint_sswi_cells, aclint_cells_size);
-+    qemu_fdt_setprop(mc->fdt, name, "interrupt-controller", NULL, 0);
-+    qemu_fdt_setprop_cell(mc->fdt, name, "#interrupt-cells", 0);
-+    riscv_socket_fdt_write_id(mc, mc->fdt, name, socket);
-+    g_free(name);
-+
-+    g_free(aclint_mswi_cells);
-+    g_free(aclint_mtimer_cells);
-+    g_free(aclint_sswi_cells);
-+}
-+
- static void create_fdt_socket_plic(RISCVVirtState *s,
-                                    const MemMapEntry *memmap, int socket,
-                                    uint32_t *phandle, uint32_t *intc_phandles,
-@@ -359,7 +436,11 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
- 
-         create_fdt_socket_memory(s, memmap, socket);
- 
--        create_fdt_socket_clint(s, memmap, socket, intc_phandles);
-+        if (s->have_aclint) {
-+            create_fdt_socket_aclint(s, memmap, socket, intc_phandles);
-+        } else {
-+            create_fdt_socket_clint(s, memmap, socket, intc_phandles);
-+        }
- 
-         create_fdt_socket_plic(s, memmap, socket, phandle,
-             intc_phandles, xplic_phandles);
-@@ -750,6 +831,14 @@ static void virt_machine_init(MachineState *machine)
-             RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-             RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
- 
-+        /* Per-socket ACLINT SSWI */
-+        if (s->have_aclint) {
-+            riscv_aclint_swi_create(
-+                memmap[VIRT_ACLINT_SSWI].base +
-+                    i * memmap[VIRT_ACLINT_SSWI].size,
-+                base_hartid, hart_count, true);
-+        }
-+
-         /* Per-socket PLIC hart topology configuration string */
-         plic_hart_config = plic_hart_config_string(hart_count);
- 
-@@ -914,6 +1003,22 @@ static void virt_machine_instance_init(Object *obj)
- {
- }
- 
-+static bool virt_get_aclint(Object *obj, Error **errp)
-+{
-+    MachineState *ms = MACHINE(obj);
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
-+
-+    return s->have_aclint;
-+}
-+
-+static void virt_set_aclint(Object *obj, bool value, Error **errp)
-+{
-+    MachineState *ms = MACHINE(obj);
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(ms);
-+
-+    s->have_aclint = value;
-+}
-+
- static void virt_machine_class_init(ObjectClass *oc, void *data)
- {
-     MachineClass *mc = MACHINE_CLASS(oc);
-@@ -929,6 +1034,12 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->numa_mem_supported = true;
- 
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
-+
-+    object_class_property_add_bool(oc, "aclint", virt_get_aclint,
-+                                   virt_set_aclint);
-+    object_class_property_set_description(oc, "aclint",
-+                                          "Set on/off to enable/disable "
-+                                          "emulating ACLINT devices");
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 349fee1f89..d9105c1886 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -43,6 +43,7 @@ struct RISCVVirtState {
-     FWCfgState *fw_cfg;
- 
-     int fdt_size;
-+    bool have_aclint;
- };
- 
- enum {
-@@ -51,6 +52,7 @@ enum {
-     VIRT_TEST,
-     VIRT_RTC,
-     VIRT_CLINT,
-+    VIRT_ACLINT_SSWI,
-     VIRT_PLIC,
-     VIRT_UART0,
-     VIRT_VIRTIO,
--- 
-2.25.1
+This series moves a big pile of code from core qemu to the tcg module.=0D
+=0D
+To allow for more fine-grained patches the first patch disables modular=0D
+tcg and the last patch re-enables it.  Alternatively we could move all=0D
+the build system changes (patches 4-8) to the end of the series and=0D
+squash them into a single patch.  Not sure which is better ...=0D
+=0D
+The fundamental idea of this series is that any call from core qemu into=0D
+tcg gets routed through function pointers.  This is simliar to the way=0D
+we handle the spice module (see ui/spice-module.c).=0D
+=0D
+Initially the function pointers are filled with stubs, when the tcg=0D
+module loads all function pointers are updated to point to the real=0D
+functions instead.  One side effect of this is that compile-time stubs=0D
+will become runtime-stubs.=0D
+=0D
+Series overview:=0D
+   1         - disable modular tcg.=0D
+   2 =3D>  3   - misc small tweaks.=0D
+   4 =3D>  8   - build system changes.=0D
+   9 =3D> 21   - add generic tcg function pointers.=0D
+  22 =3D> 28   - add i386 tcg function pointers.=0D
+  29         - re-enable modular tcg.=0D
+=0D
+take care,=0D
+  Gerd=0D
+=0D
+Gerd Hoffmann (29):=0D
+  build: temporarily disable modular tcg=0D
+  plugins: register qemu_plugin_opts using opts_init()=0D
+  tcg/module: move hmp.c to module=0D
+  tcg/module: move cputlb.c to module=0D
+  tcg/module: move tcg_ss to module [accel/tcg]=0D
+  tcg/module: move tcg_ss to module [tcg]=0D
+  tcg/module: move files to module [target/i386/tcg]=0D
+  move cpu-exec-common.c from tcg module to core qemu [accel/tcg]=0D
+  tcg/module: add tcg-module.[ch] infrastructure=0D
+  tcg_funcs: Add tlb_flush to TCGModuleOps=0D
+  tcg_funcs: Add tlb_flush_page to TCGModuleOps=0D
+  tcg_funcs: Add tlb_reset_dirty to TCGModuleOps=0D
+  tcg_funcs: Add tlb_plugin_lookup to TCGModuleOps=0D
+  tcg_funcs:Add  tcg_exec_{realizefn,unrealizefn} to TCGModuleOps=0D
+  tcg_funcs: Add tb_flush to TCGModuleOps=0D
+  tcg: use tb_page_addr_t for tb_invalidate_phys_range()=0D
+  tcg: drop tb_invalidate_phys_page_range()=0D
+  tcg_funcs: Add tb_invalidate_phys_range to TCGModuleOps=0D
+  tcg_funcs: Add tb_check_watchpoint to TCGModuleOps=0D
+  tcg_funcs: Add cpu_restore_state to TCGModuleOps=0D
+  tcg_funcs: Add curr_cflags to TCGModuleOps=0D
+  tcg_i386_funcs: Add update_fp_status to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add update_mxcsr_status to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add update_mxcsr_from_sse_status to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add x86_register_ferr_irq to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add cpu_set_ignne to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add cpu_x86_update_dr7 to TCGI386ModuleOps=0D
+  tcg_i386_funcs: Add cpu_cc_compute_all to TCGI386ModuleOps=0D
+  Revert "build: temporarily disable modular tcg"=0D
+=0D
+ include/exec/cpu-all.h              |  2 -=0D
+ include/exec/exec-all.h             | 16 ++------=0D
+ include/exec/ram_addr.h             |  2 -=0D
+ include/exec/translate-all.h        |  2 -=0D
+ include/qemu/plugin.h               |  7 ----=0D
+ include/tcg/tcg-module-i386.h       | 15 ++++++++=0D
+ include/tcg/tcg-module.h            | 24 ++++++++++++=0D
+ target/i386/cpu.h                   | 17 ++------=0D
+ accel/stubs/tcg-stub.c              |  4 --=0D
+ accel/tcg/cpu-exec-common.c         | 10 ++++-=0D
+ accel/tcg/cpu-exec.c                | 15 ++++++--=0D
+ accel/tcg/cputlb.c                  | 14 ++++++-=0D
+ accel/tcg/tcg-module-i386.c         | 33 ++++++++++++++++=0D
+ accel/tcg/tcg-module.c              | 60 +++++++++++++++++++++++++++++=0D
+ accel/tcg/translate-all.c           | 55 +++++++-------------------=0D
+ cpu.c                               | 14 +++----=0D
+ gdbstub.c                           |  4 +-=0D
+ hw/i386/pc.c                        |  2 +-=0D
+ hw/i386/pc_piix.c                   |  2 +-=0D
+ hw/i386/pc_q35.c                    |  2 +-=0D
+ hw/ppc/spapr_hcall.c                |  2 +-=0D
+ linux-user/main.c                   |  2 +-=0D
+ linux-user/mmap.c                   |  8 ++--=0D
+ linux-user/syscall.c                |  4 +-=0D
+ plugins/api.c                       |  4 +-=0D
+ plugins/core.c                      |  2 +-=0D
+ plugins/loader.c                    | 11 +++++-=0D
+ softmmu/physmem.c                   | 22 +++++------=0D
+ softmmu/vl.c                        |  1 -=0D
+ target/alpha/helper.c               |  2 +-=0D
+ target/alpha/mem_helper.c           |  2 +-=0D
+ target/alpha/sys_helper.c           |  2 +-=0D
+ target/arm/helper.c                 | 26 ++++++-------=0D
+ target/arm/op_helper.c              |  2 +-=0D
+ target/arm/tlb_helper.c             |  8 ++--=0D
+ target/cris/helper.c                |  2 +-=0D
+ target/i386/cpu-dump.c              |  2 +-=0D
+ target/i386/gdbstub.c               |  2 +-=0D
+ target/i386/helper.c                | 10 ++---=0D
+ target/i386/machine.c               |  8 ++--=0D
+ target/i386/tcg/cc_helper.c         |  9 ++++-=0D
+ target/i386/tcg/fpu_helper.c        | 23 +++++++----=0D
+ target/i386/tcg/int_helper.c        |  8 ++--=0D
+ target/i386/tcg/mem_helper.c        |  8 ++--=0D
+ target/i386/tcg/misc_helper.c       |  4 +-=0D
+ target/i386/tcg/seg_helper.c        | 10 ++---=0D
+ target/i386/tcg/sysemu/bpt_helper.c |  9 ++++-=0D
+ target/i386/tcg/sysemu/fpu_helper.c | 12 +++++-=0D
+ target/i386/tcg/sysemu/svm_helper.c |  2 +-=0D
+ target/i386/tcg/tcg-stub.c          | 25 ------------=0D
+ target/m68k/op_helper.c             |  6 +--=0D
+ target/microblaze/helper.c          |  2 +-=0D
+ target/mips/sysemu/cp0.c            |  2 +-=0D
+ target/openrisc/sys_helper.c        |  8 ++--=0D
+ target/ppc/excp_helper.c            |  2 +-=0D
+ target/riscv/csr.c                  |  2 +-=0D
+ target/s390x/gdbstub.c              |  2 +-=0D
+ target/s390x/sigp.c                 |  2 +-=0D
+ target/s390x/tcg/excp_helper.c      |  2 +-=0D
+ target/tricore/op_helper.c          |  2 +-=0D
+ target/xtensa/helper.c              |  6 +--=0D
+ accel/tcg/meson.build               | 24 ++++++++----=0D
+ target/i386/tcg/meson.build         |  7 +++-=0D
+ target/i386/tcg/sysemu/meson.build  |  5 ++-=0D
+ tcg/meson.build                     |  2 +-=0D
+ 65 files changed, 367 insertions(+), 239 deletions(-)=0D
+ create mode 100644 include/tcg/tcg-module-i386.h=0D
+ create mode 100644 include/tcg/tcg-module.h=0D
+ create mode 100644 accel/tcg/tcg-module-i386.c=0D
+ create mode 100644 accel/tcg/tcg-module.c=0D
+ delete mode 100644 target/i386/tcg/tcg-stub.c=0D
+=0D
+--=20=0D
+2.31.1=0D
+=0D
 
 
