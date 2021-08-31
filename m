@@ -1,13 +1,13 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL2jb-00008M-C4
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:19:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33496)
+	id 1mL2jc-0000EC-JK
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:19:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2jW-0008RZ-Hq
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2jW-0008RY-J2
  for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:19:19 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:28172)
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33805)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2jQ-0006wY-Q4
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2jR-0006wq-4Z
  for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:19:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  s=mimecast20190719; t=1630412352;
@@ -15,25 +15,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=bAh7jA6EdUo63aN7uq8/4SBOFFdgzWJ9ei5/ZCA+u+k=;
- b=Ly5Q44HCjB8/MUI88Ee4Wi1c9tD6fET4IMWDwn4i5NQI1faituUSEG0p1NzzBmxB67y2lx
- 9wlSAU7qUmhLqucah/UH3mV+kpO4OEjnWNs2WgIG8Zn6yf9Gr5WOnE+xZDPzkeIrp/MyRb
- QX/PQGDKuRJPflEtchdlWHBVOYsAloA=
+ bh=uUA7IgeB5RYl+qZYzoL+znUhF73/ifVtnM5Z3ysYhdM=;
+ b=ADzQdwDY/wI/ZUn0Pybfp2poPw4T3ynBiD8zd8Z5GWC2ayyUlrkehhZusERKKbVmXEgXIo
+ 1Ak9JheyucjneGa2Npztf/3TIGj0jAQr/fhguuVDtK/f1CZhH/pCi6a1zoqT1nZ+CZHM2E
+ O0drsfOShUlY+fMPnzI8wxF5rj0IZns=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-86-mJxDlrd5P4CCeJlY2hFhXg-1; Tue, 31 Aug 2021 08:19:11 -0400
-X-MC-Unique: mJxDlrd5P4CCeJlY2hFhXg-1
+ us-mta-191-7eZEGYkOOtOWjAYionviwA-1; Tue, 31 Aug 2021 08:19:11 -0400
+X-MC-Unique: 7eZEGYkOOtOWjAYionviwA-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D5E35100960B;
- Tue, 31 Aug 2021 12:19:07 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 071D918C9F49;
+ Tue, 31 Aug 2021 12:19:08 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1D6511001281;
- Tue, 31 Aug 2021 12:18:53 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 1B25B104B51C;
+ Tue, 31 Aug 2021 12:18:52 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 2C2E518009EE; Tue, 31 Aug 2021 14:15:47 +0200 (CEST)
+ id 1937F18009EC; Tue, 31 Aug 2021 14:15:47 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
@@ -59,9 +59,10 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH 26/29] tcg_i386_funcs: Add cpu_set_ignne to TCGI386ModuleOps
-Date: Tue, 31 Aug 2021 14:15:42 +0200
-Message-Id: <20210831121545.2874233-27-kraxel@redhat.com>
+Subject: [PATCH 25/29] tcg_i386_funcs: Add x86_register_ferr_irq to
+ TCGI386ModuleOps
+Date: Tue, 31 Aug 2021 14:15:41 +0200
+Message-Id: <20210831121545.2874233-26-kraxel@redhat.com>
 In-Reply-To: <20210831121545.2874233-1-kraxel@redhat.com>
 References: <20210831121545.2874233-1-kraxel@redhat.com>
 MIME-Version: 1.0
@@ -72,7 +73,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=kraxel@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -93,96 +94,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 12:19:20 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 12:19:21 -0000
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- include/tcg/tcg-module-i386.h       | 1 +
+ include/tcg/tcg-module-i386.h       | 2 +-
  target/i386/cpu.h                   | 1 -
  accel/tcg/tcg-module-i386.c         | 5 +++++
- hw/i386/pc.c                        | 2 +-
- target/i386/tcg/sysemu/fpu_helper.c | 3 ++-
- 5 files changed, 9 insertions(+), 3 deletions(-)
+ hw/i386/pc_piix.c                   | 2 +-
+ hw/i386/pc_q35.c                    | 2 +-
+ target/i386/tcg/sysemu/fpu_helper.c | 9 ++++++++-
+ 6 files changed, 16 insertions(+), 5 deletions(-)
 
 diff --git a/include/tcg/tcg-module-i386.h b/include/tcg/tcg-module-i386.h
-index 7b99b9836a20..aa96aca82c4a 100644
+index 576e0a63f01f..7b99b9836a20 100644
 --- a/include/tcg/tcg-module-i386.h
 +++ b/include/tcg/tcg-module-i386.h
-@@ -6,6 +6,7 @@ struct TCGI386ModuleOps {
+@@ -5,7 +5,7 @@ struct TCGI386ModuleOps {
+     void (*update_fp_status)(CPUX86State *env);
      void (*update_mxcsr_status)(CPUX86State *env);
      void (*update_mxcsr_from_sse_status)(CPUX86State *env);
-     void (*x86_register_ferr_irq)(qemu_irq irq);
-+    void (*cpu_set_ignne)(void);
+-
++    void (*x86_register_ferr_irq)(qemu_irq irq);
  };
  extern struct TCGI386ModuleOps tcg_i386;
  
 diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index d1819166ae11..6b9b1fad016f 100644
+index deba8eb04d1f..d1819166ae11 100644
 --- a/target/i386/cpu.h
 +++ b/target/i386/cpu.h
-@@ -1836,7 +1836,6 @@ int cpu_x86_support_mca_broadcast(CPUX86State *env);
+@@ -1835,7 +1835,6 @@ int cpu_x86_support_mca_broadcast(CPUX86State *env);
+ 
  int cpu_get_pic_interrupt(CPUX86State *s);
  /* MSDOS compatibility mode FPU exception support */
+-void x86_register_ferr_irq(qemu_irq irq);
  void fpu_check_raise_ferr_irq(CPUX86State *s);
--void cpu_set_ignne(void);
+ void cpu_set_ignne(void);
  void cpu_clear_ignne(void);
- 
- /* mpx_helper.c */
 diff --git a/accel/tcg/tcg-module-i386.c b/accel/tcg/tcg-module-i386.c
-index f6d367912c17..307238e3bc78 100644
+index 6908fe34cef6..f6d367912c17 100644
 --- a/accel/tcg/tcg-module-i386.c
 +++ b/accel/tcg/tcg-module-i386.c
-@@ -5,6 +5,10 @@ static void i386_update_cpu_stub(CPUX86State *cpu)
+@@ -5,8 +5,13 @@ static void i386_update_cpu_stub(CPUX86State *cpu)
  {
  }
  
-+static void i386_update_stub(void)
++static void x86_register_ferr_irq_stub(qemu_irq irq)
 +{
 +}
 +
- static void x86_register_ferr_irq_stub(qemu_irq irq)
- {
- }
-@@ -14,4 +18,5 @@ struct TCGI386ModuleOps tcg_i386 = {
+ struct TCGI386ModuleOps tcg_i386 = {
+     .update_fp_status = i386_update_cpu_stub,
      .update_mxcsr_status = i386_update_cpu_stub,
      .update_mxcsr_from_sse_status = i386_update_cpu_stub,
-     .x86_register_ferr_irq = x86_register_ferr_irq_stub,
-+    .cpu_set_ignne = i386_update_stub,
++    .x86_register_ferr_irq = x86_register_ferr_irq_stub,
  };
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 102b22394689..4b74776f6d8a 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -389,7 +389,7 @@ static void ioportF0_write(void *opaque, hwaddr addr, uint64_t data,
-                            unsigned size)
- {
-     if (tcg_enabled()) {
--        cpu_set_ignne();
-+        tcg_i386.cpu_set_ignne();
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 1bc30167acc0..d02edaa7e611 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -224,7 +224,7 @@ static void pc_init1(MachineState *machine,
      }
- }
  
+     if (tcg_enabled()) {
+-        x86_register_ferr_irq(x86ms->gsi[13]);
++        tcg_i386.x86_register_ferr_irq(x86ms->gsi[13]);
+     }
+ 
+     pc_vga_init(isa_bus, pcmc->pci_enabled ? pci_bus : NULL);
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index eeb0b185b118..9c2623fe61e0 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -266,7 +266,7 @@ static void pc_q35_init(MachineState *machine)
+     }
+ 
+     if (tcg_enabled()) {
+-        x86_register_ferr_irq(x86ms->gsi[13]);
++        tcg_i386.x86_register_ferr_irq(x86ms->gsi[13]);
+     }
+ 
+     assert(pcms->vmport != ON_OFF_AUTO__MAX);
 diff --git a/target/i386/tcg/sysemu/fpu_helper.c b/target/i386/tcg/sysemu/fpu_helper.c
-index 9caf164a7269..6453760b33c7 100644
+index 1c3610da3b91..9caf164a7269 100644
 --- a/target/i386/tcg/sysemu/fpu_helper.c
 +++ b/target/i386/tcg/sysemu/fpu_helper.c
-@@ -42,7 +42,7 @@ void cpu_clear_ignne(void)
-     env->hflags2 &= ~HF2_IGNNE_MASK;
- }
+@@ -23,7 +23,7 @@
  
--void cpu_set_ignne(void)
-+static void cpu_set_ignne(void)
- {
-     CPUX86State *env = &X86_CPU(first_cpu)->env;
-     env->hflags2 |= HF2_IGNNE_MASK;
-@@ -59,6 +59,7 @@ void cpu_set_ignne(void)
- static void tcgi386_module_ops_fpu_sys(void)
- {
-     tcg_i386.x86_register_ferr_irq = x86_register_ferr_irq;
-+    tcg_i386.cpu_set_ignne = cpu_set_ignne;
- }
+ static qemu_irq ferr_irq;
  
- type_init(tcgi386_module_ops_fpu_sys);
+-void x86_register_ferr_irq(qemu_irq irq)
++static void x86_register_ferr_irq(qemu_irq irq)
+ {
+     ferr_irq = irq;
+ }
+@@ -55,3 +55,10 @@ void cpu_set_ignne(void)
+      */
+     qemu_irq_lower(ferr_irq);
+ }
++
++static void tcgi386_module_ops_fpu_sys(void)
++{
++    tcg_i386.x86_register_ferr_irq = x86_register_ferr_irq;
++}
++
++type_init(tcgi386_module_ops_fpu_sys);
 -- 
 2.31.1
 
