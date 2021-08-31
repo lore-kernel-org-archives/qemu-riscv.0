@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL68d-0001KK-Pc
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 11:57:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34676)
+	id 1mL6CC-0006QU-Qh
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 12:01:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35622)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mL68c-0001Gj-Eh; Tue, 31 Aug 2021 11:57:26 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:52896)
+ id 1mL6C5-0006LY-Ah; Tue, 31 Aug 2021 12:01:02 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54278)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mL68Z-0008Kw-SC; Tue, 31 Aug 2021 11:57:26 -0400
+ id 1mL6C3-0002On-4F; Tue, 31 Aug 2021 12:01:00 -0400
 Received: from zm-mta-out.u-ga.fr (zm-mta-out.u-ga.fr [152.77.200.53])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 534D141919;
- Tue, 31 Aug 2021 17:57:20 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4544741ACA;
+ Tue, 31 Aug 2021 18:00:56 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1630425440;
- bh=KbNRKDNUVZyVoxAFsnMJFve4Sf53yh9azq0eP5BG7/k=;
- h=To:Cc:References:From:Subject:Date:In-Reply-To:From;
- b=KmR2YWd1sBEPbG4dcvDKqfqkR1LB1NH5sSRTR8dl5FOi3cZTf3+C3yp4CutuFOkq3
- oFhwJLt3C7ZWPcNwJMsSo47cj5DM28K0pd6dlqjQyTgj4TvukFjy1FwmGZA0KqY5t9
- C3lNCFL9i5YI3yfvblF5Uaxko/0YsIuK9DJEonWGK41n/rIsMVR6WHYa7vAJ7TJ9Ib
- +XpXMYBmbEPH7R0B9ZSZjmIFQKQOZrD6tRmcpRqh4mORLp5CQKXqnEyjBwDaKg4LoT
- v+69EDzrRq0f5A3RzuVmfooZVfqSlmXZ/AkzhBAXoBBSOZyezjHBPue7dfu4bAEKHd
- iSGXm2s+Upk+w==
+ d=univ-grenoble-alpes.fr; s=2020; t=1630425656;
+ bh=ZRHKN+TIIJsyB5bfuTDGgMioascTjLl17SGZdS6BNtk=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=g+KnhLyXcj/c+ePCnzk7nuqQGce81nC6gDPPWo8Y47rgyyi0d/1BYPizUAJjzMiu4
+ TIAbAY38Nwlzi17+hjZi0TlZIzIITOMqa+cGaStqKTetkNKVWuWMCAgE9xpTGVzYcI
+ CqTY8B2WNG3xNywFLvV/cQR9zs5ehAYu+C1XB/WXGa9rhtuuILM/DS07ssGGbV4tZV
+ s7V+TrI7BPZZjxk7LZnCAP3IpaBMUfCE9NRxf927ry5YkZ+wvvWWS4DplugW4J19sR
+ AC9PLUFxrbap4FWi46YLWY1udgaBBRwZT0hmmvt7C1QoMXE8+DTGr6yoeliAMZZVoy
+ z0ldpNNj4oFbA==
 Received: from smtps.univ-grenoble-alpes.fr (smtps1.u-ga.fr [152.77.1.30])
- by zm-mta-out.u-ga.fr (Postfix) with ESMTP id 4D2FE80035;
- Tue, 31 Aug 2021 17:57:20 +0200 (CEST)
+ by zm-mta-out.u-ga.fr (Postfix) with ESMTP id 401DC80035;
+ Tue, 31 Aug 2021 18:00:56 +0200 (CEST)
 Received: from [147.171.132.208] (palmier.tima.u-ga.fr [147.171.132.208])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id DAB53187E13;
- Tue, 31 Aug 2021 17:57:19 +0200 (CEST)
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id C87C4187E1F;
+ Tue, 31 Aug 2021 18:00:55 +0200 (CEST)
+Subject: Re: [PATCH 3/8] target/riscv: Addition of 128-bit ldu, lq and sq
+ instructions
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Fabien Portas <fabien.portas@grenoble-inp.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Fabien Portas <fabien.portas@grenoble-inp.org>
+ Bin Meng <bin.meng@windriver.com>
 References: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20210830171638.126325-4-frederic.petrot@univ-grenoble-alpes.fr>
- <f9094de6-f36a-4da7-d5ef-9fa976ae4c18@amsat.org>
- <653d064f-7020-dce0-a43b-6697e68b79b0@amsat.org>
+ <20210830171638.126325-3-frederic.petrot@univ-grenoble-alpes.fr>
+ <d494ea6e-4eed-7d74-b9f7-130201a8294f@linaro.org>
 From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: Re: [PATCH 4/8] target/riscv: 128-bit arithmetic and logic
- instructions
-Message-ID: <592eba58-51ec-61db-2896-28cb2b7caa3b@univ-grenoble-alpes.fr>
-Date: Tue, 31 Aug 2021 17:57:18 +0200
+Message-ID: <2c8e43c4-6edb-947f-95f6-49d08fa23005@univ-grenoble-alpes.fr>
+Date: Tue, 31 Aug 2021 18:00:54 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <653d064f-7020-dce0-a43b-6697e68b79b0@amsat.org>
+In-Reply-To: <d494ea6e-4eed-7d74-b9f7-130201a8294f@linaro.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: fr
 Content-Transfer-Encoding: 8bit
@@ -79,74 +79,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 15:57:26 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 16:01:03 -0000
 
-Hello Philippe,
+Hello Richard,
 
-Le 30/08/2021 à 23:40, Philippe Mathieu-Daudé a écrit :
-> On 8/30/21 11:38 PM, Philippe Mathieu-Daudé wrote:
->> On 8/30/21 7:16 PM, Frédéric Pétrot wrote:
->>> Adding the support for the 128-bit arithmetic and logic instructions.
->>> Remember that all (i) instructions are now acting on 128-bit registers, that
->>> a few others are added to cope with values that are held on 64 bits within
->>> the 128-bit registers, and that the ones that cope with values on 32-bit
->>> must also be modified for proper sign extension.
->>> Most algorithms taken from Hackers' delight.
->>>
->>> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
->>> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
->>> ---
->>>  target/riscv/insn32.decode              |  13 +
->>>  target/riscv/insn_trans/trans_rvi.c.inc | 955 +++++++++++++++++++++++-
->>>  target/riscv/translate.c                |  25 +
->>>  3 files changed, 976 insertions(+), 17 deletions(-)
->>
->>> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
->>> index 772330a766..0401ba3d69 100644
->>> --- a/target/riscv/insn_trans/trans_rvi.c.inc
->>> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
->>> @@ -26,14 +26,20 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
->>>  
->>>  static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
->>>  {
->>> -     REQUIRE_64BIT(ctx);
->>> -     return trans_illegal(ctx, a);
->>> +    REQUIRE_64_OR_128BIT(ctx);
->>> +    return trans_illegal(ctx, a);
->>>  }
->>>  
->>>  static bool trans_lui(DisasContext *ctx, arg_lui *a)
->>>  {
->>>      if (a->rd != 0) {
->>>          tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
->>> +#if defined(TARGET_RISCV128)
->>> +        if (is_128bit(ctx)) {
->>
->> Maybe this could allow the compiler eventually elide the
->> code and avoid superfluous #ifdef'ry:
->>
->>            if (TARGET_LONG_BITS >= 128) {
+Le 31/08/2021 à 04:24, Richard Henderson a écrit :
+> On 8/30/21 10:16 AM, Frédéric Pétrot wrote:
+>> +#if defined(TARGET_RISCV128)
+>> +/*
+>> + * Accessing signed 64-bit or 128-bit values should be part of MemOp in
+>> + * include/exec/memop.h
+>> + * Unfortunately, this requires to change the defines there, as MO_SIGN is 4,
+>> + * and values 0 to 3 are usual types sizes.
+>> + * Note that an assert is triggered when MemOp is MO_SIGN|MO_TEQ, this value
+>> + * being some kind of sentinel.
 > 
-> Actually:
-> 
->              if (TARGET_LONG_BITS >= 128 && is_128bit(ctx)) {
+> https://lore.kernel.org/qemu-devel/20210818191920.390759-24-richard.henderson@linaro.org/
 
-  We may have taken a wrong path then, because we have kept
-  TARGET_LONG_BITS == 64 for the 128-bit case (as we use the tcg_xxx_tl of the
-  64 version to generate our micro-ops, which I admit might be a mistake).
-
+  Thanks for the pointer,
   Frédéric
-
 > 
->>
->>> +            tcg_gen_ext_i64_i128(cpu_gpr[a->rd], cpu_gprh[a->rd],
->>> +                                 cpu_gpr[a->rd]);
->>> +        }
->>> +#endif
->>>      }
->>>      return true;
->>>  }
->>
+> 
+> 
+> r~
 
 -- 
 +---------------------------------------------------------------------------+
