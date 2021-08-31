@@ -1,80 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mKp1L-0002zF-Lz
-	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 17:40:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57776)
+	id 1mKrWm-0005BL-LA
+	for mharc-qemu-riscv@gnu.org; Mon, 30 Aug 2021 20:21:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55034)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mKp1K-0002xO-I0; Mon, 30 Aug 2021 17:40:46 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f]:54049)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mKrWi-0005A4-D3; Mon, 30 Aug 2021 20:21:20 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:44781)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mKp1I-0003VS-6h; Mon, 30 Aug 2021 17:40:46 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id i3so9722761wmq.3;
- Mon, 30 Aug 2021 14:40:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mKrWg-00068i-Mp; Mon, 30 Aug 2021 20:21:20 -0400
+Received: by mail-io1-xd34.google.com with SMTP id g9so22518581ioq.11;
+ Mon, 30 Aug 2021 17:21:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:subject:from:to:cc:references:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=oX2OGbnzbccy5IFjTgp1jj2+IwrBnLFDn7gnE4X0tdQ=;
- b=oCluvLfPgVb+7mjEaJGMlvoEnDi686UVbvLW0N6e8viu8pAAV9dXmkxfGhOGXeUJUh
- y7M83oLMMTk2e//4hySqBHDUQyZMZxxWjR6dGkFCZhWRV23X/wD4qnp10WoHAZUcfbN6
- qfRKvqVluk6B0Vb7KQbp9g9mmozd9JxG0tnWomIRakD7MrrIxnC7qiJmH/Ui0/e90bGH
- F5WknEEImAsjnv+BLNjKeTcGlevtK03dSR/kbj+jS4w/1glt9898tvdG/U60HkRhfiwx
- 7Yx4J0irjJ3QaEr+HMNbP0tedkWa5w6afhepf9vQybKN5Q3ZXjXBBkhXYtBFgPC4Jpzj
- 8+TQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Jguf6lXASw0mGI28NY2MtOD2FBLW++xf+xDtvzCMPs4=;
+ b=nleswV2wfc8A/CYL6uHimYwUaiej16mvkDzOxV8kGI1XGL2ytBFO8XVF4rF1SKLkRQ
+ 2KL023E5B8o1oS2VuJDEhc8TZ1HIefwDSILkJ461SVL8T3c0Pvd5Bm51sGVmlB9ETyvn
+ azINYGFEIxroar+UfWQH3W41mJAGL1/P8uAW48Ih6yjog4yLojHUB0LDhW9q3XIn4sC5
+ TsCQVeaWaVYvwYoEl7W9Q7nLNSBxLSN5s+PRGq/AU3q84S5pzgP6yV53U+GnHtjodVEI
+ 05ZA2qZZU5/3Gw7XY1XyEV7ow0TVLOCNmNads+muzYkvPbk37jLrwhfSn8YZnLHC5Lci
+ dhSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:from:to:cc:references:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=oX2OGbnzbccy5IFjTgp1jj2+IwrBnLFDn7gnE4X0tdQ=;
- b=WnmSY40US2W8MJ4ONgHVIxbPRg+RXox9B4f8jOh3uI22BXKcxXhur+MbpRNA/8b/dV
- Sc3ueebYYeLy46kVDbr4Tz1MKv61MXdmyJc1epn+JF7U1UtItTky9uwgUdpZ4hBFPHKh
- 9M4tdxBs/UnrP8HQ4fJOH5gPwDKlirdnnLO81L5ZdcEzIrjzvet7VN6ezitTkJObA4x4
- /6xuNXlr9QnQOtT508h45Tzqq/MX79RmKbI870WHPZWw589asTLy3dmyXohWWxMyfHot
- dNGWyFgCXnUnnYaT3VhT5YgtuxMvNge1scnPvOfNt7oVJ+XReWa0XurlYY/zzZnutc2f
- g1iw==
-X-Gm-Message-State: AOAM530iOw43wdYiXfGO+FoGNe8ySwQFJYTY6wR0s2ACNauQz0BM6Avc
- fthRcFHPH23Sr03ne0tRwkQ=
-X-Google-Smtp-Source: ABdhPJwTPxDVPPYCJkcKmL4XYl6BFsmrGOER40ne6vgGj71VGTLZmUeGXet9D6pEQo2W/3qeVxhXkw==
-X-Received: by 2002:a05:600c:1d05:: with SMTP id
- l5mr976532wms.139.1630359641592; 
- Mon, 30 Aug 2021 14:40:41 -0700 (PDT)
-Received: from [192.168.1.36] (163.red-83-52-55.dynamicip.rima-tde.net.
- [83.52.55.163])
- by smtp.gmail.com with ESMTPSA id s12sm16729045wru.41.2021.08.30.14.40.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Aug 2021 14:40:41 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 4/8] target/riscv: 128-bit arithmetic and logic
- instructions
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Fabien Portas <fabien.portas@grenoble-inp.org>
-References: <20210830171638.126325-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20210830171638.126325-4-frederic.petrot@univ-grenoble-alpes.fr>
- <f9094de6-f36a-4da7-d5ef-9fa976ae4c18@amsat.org>
-Message-ID: <653d064f-7020-dce0-a43b-6697e68b79b0@amsat.org>
-Date: Mon, 30 Aug 2021 23:40:40 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Jguf6lXASw0mGI28NY2MtOD2FBLW++xf+xDtvzCMPs4=;
+ b=BrbiFcitPFrdtOJgaq8L65Km9RJErDLY5qfny9+XKppr8QE8r38UlPjnpivh0k5oNo
+ Xl3LPpiaoLFCCFCdL+Xkr43XCkS6HqfxMGQVb+wDeWgRwmMwtKBMhFmuhAAJGl6GCkVP
+ i8xLExmShfuYlsuD0Fumzl22I9FyKl0dTFH+NLDr6CqGbCI4TcfSI1tphBCusiqGuq/u
+ 17GDlr17/2EwdUbK8FYh6F1ugSd8VgU6bcqiWNENpTQc6OJSHENEqhwoHEOPUyCiOxmW
+ xddeDhJ/cnxxe01z9qAboFHPUbyF4QG/ofmiJmpU+IQlcqnvS/bQOmmeI1rla4jMNO1f
+ 1mGw==
+X-Gm-Message-State: AOAM532jG0dx4jfHLeRFoObaV6uBrP4DCxVSM0v/1Hk9rgxr9AVHMRzI
+ EsBWTeEULldYC6Zj6PCLuswGKcYcyYU5zbWF/Ug=
+X-Google-Smtp-Source: ABdhPJwlcfAgtDf3HmXA69flzT5e0vkNxSbyl27s6MFAMFTlEbx/I2wwN5/nxbN/f/b42T0KYG1Iys5s2NrscaWf2jA=
+X-Received: by 2002:a6b:8e87:: with SMTP id
+ q129mr20667646iod.176.1630369277078; 
+ Mon, 30 Aug 2021 17:21:17 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <f9094de6-f36a-4da7-d5ef-9fa976ae4c18@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32f.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.932,
+References: <20210820174257.548286-1-richard.henderson@linaro.org>
+ <CAKmqyKM7aoT9a7rZnbNukZb7mO-2zJddnKr1XkA+WbkidHRoxQ@mail.gmail.com>
+ <92c46154-0260-bdf8-b5f2-e37e8f009625@linaro.org>
+In-Reply-To: <92c46154-0260-bdf8-b5f2-e37e8f009625@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 31 Aug 2021 10:20:50 +1000
+Message-ID: <CAKmqyKOYssuWwhBaX=_pstW=5mwp_56vKp1EQsJhDD7V2_aiKg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/21] target/riscv: Use tcg_constant_*
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,62 +73,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2021 21:40:46 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 00:21:20 -0000
 
-On 8/30/21 11:38 PM, Philippe Mathieu-Daudé wrote:
-> On 8/30/21 7:16 PM, Frédéric Pétrot wrote:
->> Adding the support for the 128-bit arithmetic and logic instructions.
->> Remember that all (i) instructions are now acting on 128-bit registers, that
->> a few others are added to cope with values that are held on 64 bits within
->> the 128-bit registers, and that the ones that cope with values on 32-bit
->> must also be modified for proper sign extension.
->> Most algorithms taken from Hackers' delight.
->>
->> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
->> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
->> ---
->>  target/riscv/insn32.decode              |  13 +
->>  target/riscv/insn_trans/trans_rvi.c.inc | 955 +++++++++++++++++++++++-
->>  target/riscv/translate.c                |  25 +
->>  3 files changed, 976 insertions(+), 17 deletions(-)
-> 
->> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
->> index 772330a766..0401ba3d69 100644
->> --- a/target/riscv/insn_trans/trans_rvi.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
->> @@ -26,14 +26,20 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
->>  
->>  static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
->>  {
->> -     REQUIRE_64BIT(ctx);
->> -     return trans_illegal(ctx, a);
->> +    REQUIRE_64_OR_128BIT(ctx);
->> +    return trans_illegal(ctx, a);
->>  }
->>  
->>  static bool trans_lui(DisasContext *ctx, arg_lui *a)
->>  {
->>      if (a->rd != 0) {
->>          tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
->> +#if defined(TARGET_RISCV128)
->> +        if (is_128bit(ctx)) {
-> 
-> Maybe this could allow the compiler eventually elide the
-> code and avoid superfluous #ifdef'ry:
-> 
->            if (TARGET_LONG_BITS >= 128) {
+On Tue, Aug 31, 2021 at 1:27 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 8/30/21 3:12 AM, Alistair Francis wrote:
+> > On Sat, Aug 21, 2021 at 3:43 AM Richard Henderson
+> > <richard.henderson@linaro.org> wrote:
+> >>
+> >> Replace use of tcg_const_*, which makes a copy into a temp which must
+> >> be freed, with direct use of the constant.  Reorg handling of $zero,
+> >> with different accessors for source and destination.  Reorg handling
+> >> of csrs, passing the actual write_mask instead of a regno.  Use more
+> >> helpers for RVH expansion.
+> >>
+> >> Patches lacking review:
+> >>    02-tests-tcg-riscv64-Add-test-for-division.patch
+> >>    03-target-riscv-Clean-up-division-helpers.patch
+> >>    11-target-riscv-Add-DisasExtend-to-gen_unary.patch
+> >>    17-target-riscv-Use-gen_shift_imm_fn-for-slli_uw.patch
+> >>    21-target-riscv-Use-get-dest-_gpr-for-RVV.patch
+> >
+> > This should be all reviewed now. Do you want me to take it or do you plan on it?
+>
+> Please take it through the riscv tree.  Thanks for the review.
 
-Actually:
+Thanks!
 
-             if (TARGET_LONG_BITS >= 128 && is_128bit(ctx)) {
+Applied to riscv-to-apply.next
 
-> 
->> +            tcg_gen_ext_i64_i128(cpu_gpr[a->rd], cpu_gprh[a->rd],
->> +                                 cpu_gpr[a->rd]);
->> +        }
->> +#endif
->>      }
->>      return true;
->>  }
-> 
+Alistair
+
+>
+>
+> r~
 
