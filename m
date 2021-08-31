@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL2gs-0004XK-3G
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:16:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59880)
+	id 1mL2h7-0004iT-B5
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:16:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60038)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2go-0004R4-HE
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:30 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53613)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2h4-0004d0-B1
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:46 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:41480)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2gk-0005Gi-CL
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:30 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2h0-0005QX-M8
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:16:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630412185;
+ s=mimecast20190719; t=1630412202;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YD248Ndk1lvDxS9aNusHF44nRWrj2+qYvJ28h1pffcE=;
- b=HeWmkqVSj6qK29DrdavjCIQ1s3/ybSnuJpeRiCmKwt7nQDg4zofOuYHUPGU57bOSfPBzTK
- VcvqXwIYrll0xFE5kv/PJdKJvTz9hpYsk+pZRO1Gj2F0DSK1TLNuwQiToDO0fULus/Yfcx
- mqyLI21BtLLojgtPFCLFlEFFE3n1boo=
+ bh=yIyj7/u3W3N3RozuL2ZT76lwvBJPxZBhD9UN/m86jgk=;
+ b=VK7v0h0ypuOlMge3m1VTcK2chiFzI18KC8zPwMuQsKhY3TXkEKuztBYj3d31XiWC2AOwS6
+ R9kmfMDI60/RJDxcYFqcWW4jJR1wJLS2pLyGLyrjavl1581rlQzzmFfN07VRBWnODNhAV8
+ XKgbePWVq2biQqtDve+t0fY0AfNZWtE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-216-LcTDRZKuPgG3_DKTa2xJ1A-1; Tue, 31 Aug 2021 08:16:24 -0400
-X-MC-Unique: LcTDRZKuPgG3_DKTa2xJ1A-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-174-7RjnT5wVMEqx9TWNGWV4lA-1; Tue, 31 Aug 2021 08:16:40 -0400
+X-MC-Unique: 7RjnT5wVMEqx9TWNGWV4lA-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 52DEA760C1;
- Tue, 31 Aug 2021 12:16:21 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4F68A760C7;
+ Tue, 31 Aug 2021 12:16:37 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id E6C5D27089;
- Tue, 31 Aug 2021 12:16:05 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C6F3F1001281;
+ Tue, 31 Aug 2021 12:16:21 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 3A43A180093C; Tue, 31 Aug 2021 14:15:45 +0200 (CEST)
+ id 45A47180093D; Tue, 31 Aug 2021 14:15:45 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
@@ -59,13 +59,13 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH 03/29] tcg/module: move hmp.c to module
-Date: Tue, 31 Aug 2021 14:15:19 +0200
-Message-Id: <20210831121545.2874233-4-kraxel@redhat.com>
+Subject: [PATCH 04/29] tcg/module: move cputlb.c to module
+Date: Tue, 31 Aug 2021 14:15:20 +0200
+Message-Id: <20210831121545.2874233-5-kraxel@redhat.com>
 In-Reply-To: <20210831121545.2874233-1-kraxel@redhat.com>
 References: <20210831121545.2874233-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -93,32 +93,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 12:16:31 -0000
-
-Can be built modular without problems.
+X-List-Received-Date: Tue, 31 Aug 2021 12:16:47 -0000
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- accel/tcg/meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ accel/tcg/meson.build | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/accel/tcg/meson.build b/accel/tcg/meson.build
-index 137a1a44cc0a..d4df7681a811 100644
+index d4df7681a811..57e4ef12da23 100644
 --- a/accel/tcg/meson.build
 +++ b/accel/tcg/meson.build
-@@ -15,7 +15,6 @@ specific_ss.add_all(when: 'CONFIG_TCG', if_true: tcg_ss)
+@@ -13,14 +13,11 @@ tcg_ss.add(when: 'CONFIG_SOFTMMU', if_false: files('user-exec-stub.c'))
+ tcg_ss.add(when: 'CONFIG_PLUGIN', if_true: [files('plugin-gen.c'), libdl])
+ specific_ss.add_all(when: 'CONFIG_TCG', if_true: tcg_ss)
  
- specific_ss.add(when: ['CONFIG_SOFTMMU', 'CONFIG_TCG'], if_true: files(
-   'cputlb.c',
--  'hmp.c',
- ))
- 
+-specific_ss.add(when: ['CONFIG_SOFTMMU', 'CONFIG_TCG'], if_true: files(
+-  'cputlb.c',
+-))
+-
  tcg_module_ss.add(when: ['CONFIG_SOFTMMU', 'CONFIG_TCG'], if_true: files(
-@@ -23,4 +22,5 @@ tcg_module_ss.add(when: ['CONFIG_SOFTMMU', 'CONFIG_TCG'], if_true: files(
+   'tcg-accel-ops.c',
    'tcg-accel-ops-mttcg.c',
    'tcg-accel-ops-icount.c',
    'tcg-accel-ops-rr.c',
-+  'hmp.c',
+   'hmp.c',
++  'cputlb.c',
  ))
 -- 
 2.31.1
