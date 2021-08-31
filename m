@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mL2i2-0005lI-8m
-	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:17:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60608)
+	id 1mL2i3-0005qA-PR
+	for mharc-qemu-riscv@gnu.org; Tue, 31 Aug 2021 08:17:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60648)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2i0-0005gi-Bq
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:44 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:39771)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2i1-0005j7-IJ
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:45 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:27586)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2hw-00060w-HO
- for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:44 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mL2hz-000634-6B
+ for qemu-riscv@nongnu.org; Tue, 31 Aug 2021 08:17:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630412259;
+ s=mimecast20190719; t=1630412262;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=LErq3Y4Hjmoq8Xi3S1zeN4MywBbURDL36GQs5umBzmQ=;
- b=QqQjQ0dOeuwdWEcEmPLIb5itvSGRGU+P0Mli+6czEafDQsHnRM1w5rRJrZ8YmKLCXoW6K4
- 8Kw5RrI0QjIs217biwKemw/v5JVN9KXJdxhGdCBP955LPT8FYX9yHJoQBELusIBPNq0GZp
- yK9FzN4haX10Vj/1XllKUIS/Ui8mzSE=
+ bh=cCmd4O4HkpJQDqHqb3kEpsKWXrKqloX8kyxaEEA97UM=;
+ b=LJlmvVsGaPJy8rRVlpzFPRD0z+tTkwleM+41CH1lc5WsPQM6q6kEenlwlRDvuXyJz2n0C2
+ FtiGcqiTMewUPcAONvpDbVx2F5UpIGkmEZpGwEMkDNcmc+x/S0rZvEmaYI/c8xc69DcYyM
+ 2EIPRh2+iBTo797CVStPjXyqEZC5dog=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-500-_EFdG9kxMsWr87DesJQqTQ-1; Tue, 31 Aug 2021 08:17:38 -0400
-X-MC-Unique: _EFdG9kxMsWr87DesJQqTQ-1
+ us-mta-199-e_b-rrf6PoCAL8m62aXggA-1; Tue, 31 Aug 2021 08:17:41 -0400
+X-MC-Unique: e_b-rrf6PoCAL8m62aXggA-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B564192502;
- Tue, 31 Aug 2021 12:17:35 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EE2BF8799E0;
+ Tue, 31 Aug 2021 12:17:37 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9EEC8104B4C2;
- Tue, 31 Aug 2021 12:17:19 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6CDD91007611;
+ Tue, 31 Aug 2021 12:17:37 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id D296A1800998; Tue, 31 Aug 2021 14:15:45 +0200 (CEST)
+ id 0733718009CC; Tue, 31 Aug 2021 14:15:46 +0200 (CEST)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
@@ -59,9 +59,10 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>, Laurent Vivier <laurent@vivier.eu>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PATCH 12/29] tcg_funcs: Add tlb_reset_dirty to TCGModuleOps
-Date: Tue, 31 Aug 2021 14:15:28 +0200
-Message-Id: <20210831121545.2874233-13-kraxel@redhat.com>
+Subject: [PATCH 14/29] tcg_funcs:Add  tcg_exec_{realizefn,
+ unrealizefn} to TCGModuleOps
+Date: Tue, 31 Aug 2021 14:15:30 +0200
+Message-Id: <20210831121545.2874233-15-kraxel@redhat.com>
 In-Reply-To: <20210831121545.2874233-1-kraxel@redhat.com>
 References: <20210831121545.2874233-1-kraxel@redhat.com>
 MIME-Version: 1.0
@@ -72,7 +73,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=kraxel@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -80,7 +81,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.391,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -93,97 +94,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2021 12:17:44 -0000
+X-List-Received-Date: Tue, 31 Aug 2021 12:17:46 -0000
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- include/exec/exec-all.h  | 1 -
- include/tcg/tcg-module.h | 3 +++
- accel/tcg/cputlb.c       | 3 ++-
- accel/tcg/tcg-module.c   | 9 +++++++++
- softmmu/physmem.c        | 2 +-
- 5 files changed, 15 insertions(+), 3 deletions(-)
+ include/exec/cpu-all.h   |  2 --
+ include/tcg/tcg-module.h |  2 ++
+ accel/tcg/cpu-exec.c     | 12 ++++++++++--
+ accel/tcg/tcg-module.c   |  6 ++++++
+ cpu.c                    |  4 ++--
+ 5 files changed, 20 insertions(+), 6 deletions(-)
 
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index 43d89699e989..27fc489c57b5 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -691,7 +691,6 @@ tb_page_addr_t get_page_addr_code(CPUArchState *env, target_ulong addr);
- tb_page_addr_t get_page_addr_code_hostp(CPUArchState *env, target_ulong addr,
-                                         void **hostp);
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index 32cfb634c6a0..c2bfd0ea1de1 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -440,8 +440,6 @@ void dump_opcount_info(void);
+ #ifdef CONFIG_TCG
+ /* accel/tcg/cpu-exec.c */
+ int cpu_exec(CPUState *cpu);
+-void tcg_exec_realizefn(CPUState *cpu, Error **errp);
+-void tcg_exec_unrealizefn(CPUState *cpu);
+ #endif /* CONFIG_TCG */
  
--void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
- void tlb_set_dirty(CPUState *cpu, target_ulong vaddr);
- 
- MemoryRegionSection *
+ /* Returns: 0 on success, -1 on error */
 diff --git a/include/tcg/tcg-module.h b/include/tcg/tcg-module.h
-index a903e3ee62c0..a14dcdb002db 100644
+index 159cbd3e7ce6..5dd4deb9ed57 100644
 --- a/include/tcg/tcg-module.h
 +++ b/include/tcg/tcg-module.h
-@@ -6,6 +6,9 @@
- struct TCGModuleOps {
-     void (*tlb_flush)(CPUState *cpu);
-     void (*tlb_flush_page)(CPUState *cpu, target_ulong addr);
-+#if defined(CONFIG_SOFTMMU)
-+    void (*tlb_reset_dirty)(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
-+#endif
+@@ -11,6 +11,8 @@ struct TCGModuleOps {
+     bool (*tlb_plugin_lookup)(CPUState *cpu, target_ulong addr, int mmu_idx,
+                               bool is_store, struct qemu_plugin_hwaddr *data);
+ #endif
++    void (*tcg_exec_unrealizefn)(CPUState *cpu);
++    void (*tcg_exec_realizefn)(CPUState *cpu, Error **errp);
  };
  extern struct TCGModuleOps tcg;
  
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 1fcdb71a10a0..fa9c9064848c 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -1004,7 +1004,7 @@ static inline void copy_tlb_helper_locked(CPUTLBEntry *d, const CPUTLBEntry *s)
-  * We must take tlb_c.lock to avoid racing with another vCPU update. The only
-  * thing actually updated is the target TLB entry ->addr_write flags.
-  */
--void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length)
-+static void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length)
- {
-     CPUArchState *env;
- 
-@@ -2772,6 +2772,7 @@ static void tcg_module_ops_tlb(void)
- {
-     tcg.tlb_flush = tlb_flush;
-     tcg.tlb_flush_page = tlb_flush_page;
-+    tcg.tlb_reset_dirty = tlb_reset_dirty;
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+index e5c0ccd1a2ab..d41d1d2bd24f 100644
+--- a/accel/tcg/cpu-exec.c
++++ b/accel/tcg/cpu-exec.c
+@@ -981,7 +981,7 @@ int cpu_exec(CPUState *cpu)
+     return ret;
  }
  
- type_init(tcg_module_ops_tlb);
+-void tcg_exec_realizefn(CPUState *cpu, Error **errp)
++static void tcg_exec_realizefn(CPUState *cpu, Error **errp)
+ {
+     static bool tcg_target_initialized;
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+@@ -999,7 +999,7 @@ void tcg_exec_realizefn(CPUState *cpu, Error **errp)
+ }
+ 
+ /* undo the initializations in reverse order */
+-void tcg_exec_unrealizefn(CPUState *cpu)
++static void tcg_exec_unrealizefn(CPUState *cpu)
+ {
+ #ifndef CONFIG_USER_ONLY
+     tcg_iommu_free_notifier_list(cpu);
+@@ -1031,3 +1031,11 @@ void dump_drift_info(void)
+ }
+ 
+ #endif /* !CONFIG_USER_ONLY */
++
++static void tcg_module_ops_exec(void)
++{
++    tcg.tcg_exec_realizefn = tcg_exec_realizefn;
++    tcg.tcg_exec_unrealizefn = tcg_exec_unrealizefn;
++}
++
++type_init(tcg_module_ops_exec);
 diff --git a/accel/tcg/tcg-module.c b/accel/tcg/tcg-module.c
-index 4d62160628bd..febf4e49981c 100644
+index db3d3e9e9318..36c1df564f31 100644
 --- a/accel/tcg/tcg-module.c
 +++ b/accel/tcg/tcg-module.c
-@@ -9,7 +9,16 @@ static void tlb_flush_page_stub(CPUState *cpu, target_ulong addr)
- {
+@@ -21,6 +21,10 @@ static bool tlb_plugin_lookup_stub(CPUState *cpu, target_ulong addr, int mmu_idx
  }
+ #endif
  
-+#if defined(CONFIG_SOFTMMU)
-+static void tlb_reset_dirty_stub(CPUState *cpu, ram_addr_t start1, ram_addr_t length)
++static void tcg_exec_realizefn_stub(CPUState *cpu, Error **errp)
 +{
 +}
-+#endif
 +
  struct TCGModuleOps tcg = {
      .tlb_flush = update_cpu_stub,
      .tlb_flush_page = tlb_flush_page_stub,
-+#if defined(CONFIG_SOFTMMU)
-+    .tlb_reset_dirty = tlb_reset_dirty_stub,
-+#endif
+@@ -28,4 +32,6 @@ struct TCGModuleOps tcg = {
+     .tlb_reset_dirty = tlb_reset_dirty_stub,
+     .tlb_plugin_lookup = tlb_plugin_lookup_stub,
+ #endif
++    .tcg_exec_realizefn = tcg_exec_realizefn_stub,
++    .tcg_exec_unrealizefn = update_cpu_stub,
  };
-diff --git a/softmmu/physmem.c b/softmmu/physmem.c
-index 8fa5376de1c9..8b27827c533d 100644
---- a/softmmu/physmem.c
-+++ b/softmmu/physmem.c
-@@ -1015,7 +1015,7 @@ static void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length)
-     assert(block == qemu_get_ram_block(end - 1));
-     start1 = (uintptr_t)ramblock_ptr(block, start - block->offset);
-     CPU_FOREACH(cpu) {
--        tlb_reset_dirty(cpu, start1, length);
-+        tcg.tlb_reset_dirty(cpu, start1, length);
+diff --git a/cpu.c b/cpu.c
+index 26277f387baf..d1c9f68a26e7 100644
+--- a/cpu.c
++++ b/cpu.c
+@@ -140,7 +140,7 @@ void cpu_exec_realizefn(CPUState *cpu, Error **errp)
+ #ifdef CONFIG_TCG
+     /* NB: errp parameter is unused currently */
+     if (tcg_enabled()) {
+-        tcg_exec_realizefn(cpu, errp);
++        tcg.tcg_exec_realizefn(cpu, errp);
      }
- }
+ #endif /* CONFIG_TCG */
+ 
+@@ -172,7 +172,7 @@ void cpu_exec_unrealizefn(CPUState *cpu)
+ #ifdef CONFIG_TCG
+     /* NB: errp parameter is unused currently */
+     if (tcg_enabled()) {
+-        tcg_exec_unrealizefn(cpu);
++        tcg.tcg_exec_unrealizefn(cpu);
+     }
+ #endif /* CONFIG_TCG */
  
 -- 
 2.31.1
