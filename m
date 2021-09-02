@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoTQ-0003q3-EU
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47018)
+	id 1mLoTT-0003ry-32
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46982)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoTC-0003lL-5t; Thu, 02 Sep 2021 11:17:40 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:38794)
+ id 1mLoT7-0003j3-11; Thu, 02 Sep 2021 11:17:34 -0400
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:45718)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoTA-0001un-KW; Thu, 02 Sep 2021 11:17:37 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- k5-20020a05600c1c8500b002f76c42214bso1723300wms.3; 
- Thu, 02 Sep 2021 08:17:35 -0700 (PDT)
+ id 1mLoT5-0001pp-Cb; Thu, 02 Sep 2021 11:17:32 -0400
+Received: by mail-wr1-x432.google.com with SMTP id n5so3496594wro.12;
+ Thu, 02 Sep 2021 08:17:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=CsKFO6zpXeyiIJnaYsonUL0fU8Qtt9qHYNbRlJRsUy0=;
- b=msgoovyFZuYTFvHAVUWUcCjWeKOKX4/fQ6x5iV8uVuCuT5rENjJGT7Fi8gKdKImTio
- DTpGFYCfw4rll3/rw28+7h/IaCPuko7zVIUcFE0tQsdNOZfJ2wQjzKdS4Xfx4UTWbO+7
- DGFf/PpopUkXuymVg6YWsO6N3YLJF8uh4vvV+trJgaEzbQGXX/gyiLlggAPNmBngw2tl
- YLsB/DFcIgycuwYBpuMl9JRZ+k8EZ/6TW42fGwY+XJMvHn4lwe3XKDAaHmIJVqNMN/Bp
- gAtfXhq/PaIsaRo4z+o2UGnxJeRORTSUr5BKUhFZufBsIeEFGjPyToZ1JIVE+fuT37wj
- LDBA==
+ bh=XTFlYRzsNmSx1w84TAaQNKIszVXBPzQdffXX/N6ByQc=;
+ b=binZUo7/bHMGSoxpON5VJ8GEdo3Al7bMt62SwTTxKOxX5oq0oIhUfcLCaFB4Cyuzd1
+ LiZmr45oEQbFEm76NnaC0xaAd591rmcBV0A+9j1mRolMSW+PRlryz/xmFYySSfjLUlAD
+ hekSncN+3jw2QUQqC3EWxpyhwJHohVwmIG32WpTWLjYf3c9AqpDRnImfTX6c727mGHMC
+ u6mWY4WkK5T8Uceh/4z2YugTz7GH4gpqQpYeJnusOW6Xoa5e7h9+w/nbMYwlAER1ZjPQ
+ aGTdhNAyvfDz91ZJ+1PKRR8TBqj+toLBAmtmev1hIfWSDL9PmtDS8DilXzu+ShD1jnc4
+ SrzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=CsKFO6zpXeyiIJnaYsonUL0fU8Qtt9qHYNbRlJRsUy0=;
- b=AbumzIhjwNmSdAulMKZQB/HEwAfJnoFQZoNGb6J7j4TYxbmExGPeo7PSLGOcE14+Hz
- nopMgsi4eMMeUDCr+VGVabR1yyLfOQTJc0EeJD4yv8JVkeaFQJ2sUd8i4tbmazbkBMjZ
- AqUkQ43abcwAYUiek3KO/3TKDzBtPKYiYWV50Ed4fPt5EaU1tuvSRCRG1qO2WlLoIP9Z
- 8dEmb1HxC68ymI03H5HznmCTSEimarSXf+AcbjAJYy/hMSLdpAzOmZxv6jXDHfNocoEu
- AtieYpzKV6IPuhepqDOKWOmf00gS1XGcdkVcocZ9TkYc7H3hEcuN2MK20tWMzjgsb8TW
- PUPw==
-X-Gm-Message-State: AOAM531hnJesAJ+pguc5ZKNHlMTNXe/HSGXtw7/folrLpcYxGpRaj7Vr
- jBTBTbodcrNN7cx5RbWGSlrh5MJ2644=
-X-Google-Smtp-Source: ABdhPJzg8hVRFyP0FkM7hBwLY6gryRcnsYlqDYRSHpQuo4OZJkYpIQrU140K4ZRlnTTpvOqGl5YOrg==
-X-Received: by 2002:a1c:f709:: with SMTP id v9mr3768889wmh.124.1630595854067; 
- Thu, 02 Sep 2021 08:17:34 -0700 (PDT)
+ bh=XTFlYRzsNmSx1w84TAaQNKIszVXBPzQdffXX/N6ByQc=;
+ b=Wsziq57B0M7JGqxp9XQhgDvfX9LcVbnpwemnYMYAirQYWeke4VABdSRWFNXl3kzJMh
+ VrRE3VKcicju0yuScaRihSGSKtdvYma4yKkj0mOdXjcPJraBHrMz+M5HzlCqVIJnBy4W
+ fwscEI2XPKbEFh96bFdLIxOQG5sNBj7yFYm+OjuRN9b3KyMcrfHnIbXuoL8OVwhvb9Nx
+ ezh0dCychgEQ9xhhjgXH5MA/JTa87kg1E5fh4E7BJn1Cp0tePkGUYiJEuUgts+UrCuHk
+ GY+oXS8SrOazQ+UZtXLLSuqZl4ZMLvdvuLeftMU8iCL55ucpyBQw7NdHqEoRLq2q1qPW
+ v7ZQ==
+X-Gm-Message-State: AOAM533oSoft31QGe0LDeN8HoMd9wfxO0BdQIlJhkVCrfRSUiuO47hdp
+ gl83mm4GhCjb1iWrHchnb5vvuB7FqEg=
+X-Google-Smtp-Source: ABdhPJz+65J2x0mlNjQAOZfmvYaWNxrWT3wUSmYXSZ0hqXdvMzf5FGS79hkN07RU86xwoHWwWCUnXg==
+X-Received: by 2002:adf:9e49:: with SMTP id v9mr4319908wre.39.1630595848631;
+ Thu, 02 Sep 2021 08:17:28 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- y23sm2023304wmq.30.2021.09.02.08.17.32
+ f23sm1773453wmc.3.2021.09.02.08.17.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:17:33 -0700 (PDT)
+ Thu, 02 Sep 2021 08:17:28 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -66,17 +65,17 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 03/24] target/i386: Simplify TARGET_X86_64 #ifdef'ry
-Date: Thu,  2 Sep 2021 17:16:54 +0200
-Message-Id: <20210902151715.383678-4-f4bug@amsat.org>
+Subject: [PATCH 02/24] target/i386: Restrict sysemu-only fpu_helper helpers
+Date: Thu,  2 Sep 2021 17:16:53 +0200
+Message-Id: <20210902151715.383678-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
 References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x432.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -97,38 +96,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:17:51 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:17:36 -0000
 
-Merge two TARGET_X86_64 consecutive blocks.
+Restrict some sysemu-only fpu_helper helpers (see commit
+83a3d9c7402: "i386: separate fpu_helper sysemu-only parts").
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/i386/tcg/seg_helper.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ target/i386/cpu.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/i386/tcg/seg_helper.c b/target/i386/tcg/seg_helper.c
-index 3ed20ca31d7..dee7bef68c6 100644
---- a/target/i386/tcg/seg_helper.c
-+++ b/target/i386/tcg/seg_helper.c
-@@ -929,9 +929,7 @@ static void do_interrupt64(CPUX86State *env, int intno, int is_int,
-                    e2);
-     env->eip = offset;
- }
--#endif
+diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+index 6c50d3ab4f1..c241bc183d2 100644
+--- a/target/i386/cpu.h
++++ b/target/i386/cpu.h
+@@ -1833,11 +1833,14 @@ void x86_cpu_list(void);
+ int cpu_x86_support_mca_broadcast(CPUX86State *env);
  
--#ifdef TARGET_X86_64
- void helper_sysret(CPUX86State *env, int dflag)
- {
-     int cpl, selector;
-@@ -984,7 +982,7 @@ void helper_sysret(CPUX86State *env, int dflag)
-                                DESC_W_MASK | DESC_A_MASK);
-     }
- }
--#endif
-+#endif /* TARGET_X86_64 */
+ int cpu_get_pic_interrupt(CPUX86State *s);
++
++#ifndef CONFIG_USER_ONLY
+ /* MSDOS compatibility mode FPU exception support */
+ void x86_register_ferr_irq(qemu_irq irq);
+ void fpu_check_raise_ferr_irq(CPUX86State *s);
+ void cpu_set_ignne(void);
+ void cpu_clear_ignne(void);
++#endif
  
- /* real mode interrupt */
- static void do_interrupt_real(CPUX86State *env, int intno, int is_int,
+ /* mpx_helper.c */
+ void cpu_sync_bndcs_hflags(CPUX86State *env);
 -- 
 2.31.1
 
