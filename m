@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLpQ0-0002Dn-UW
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:18:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37144)
+	id 1mLpQ4-0002Iz-W8
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:18:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37224)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpPw-00028q-19; Thu, 02 Sep 2021 12:18:21 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:52821)
+ id 1mLpPz-0002Cm-TA; Thu, 02 Sep 2021 12:18:24 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:43805)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpPp-0002c9-NY; Thu, 02 Sep 2021 12:18:18 -0400
-Received: by mail-wm1-x332.google.com with SMTP id e26so1676153wmk.2;
- Thu, 02 Sep 2021 09:18:09 -0700 (PDT)
+ id 1mLpPw-0002gx-6C; Thu, 02 Sep 2021 12:18:23 -0400
+Received: by mail-wr1-x435.google.com with SMTP id b6so3837659wrh.10;
+ Thu, 02 Sep 2021 09:18:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=UWFl0S8+QJmSRfKpaWNU58d5jvI099dEW79c4Eds8Co=;
- b=qyX0fbK8beMEiA2sBSgl3PW3ky5dGcSVCBtTwKFMLbBLTDoVjxKFiSsk0jDC/pFJh8
- EQJ9wt19ZKu7z9D2NO2X1GBhffNKLdpe3QtarXXg5bKru7SgrpNFq7ykSau/rj7BWEMU
- 1lB3fKoh6dEiYxH/wEudtnGa9nyEo7DeltzASvLMnmAUaT41c/G+J+JRbl3ezoYTAza1
- Y+ETvUqkI+1eP+JhGzMn2Azr7F5hdjAx5ZUxT+4ueBQ0CSz4Bd282avi1jucNAchPVMA
- 9SsBqrFRz0Y5wm79SMIMZa6Daop/L/LafP8vvrGNOlI29+ElFdjMqyjQo9hpcEC0Ade/
- GupA==
+ bh=NcTQcOUeeehYkPycaMHvSzYk1/JpDe+W3tlOioHt6ec=;
+ b=Qo3n3nT5T2uCxZDbpwI/2fMsolvJt4Y1gOrYSxa05AyniYxnVrYAyAl58E/mePDB+Q
+ mp74y9slo+JHNdNbb124nVsmTrRmSYtRFeXvQ45hmAzQLS7SZdoREJlqjngb5ERIDHOz
+ 8fG18ynHtTwJKTgzScUP5EYAEGDfAkaAdwzs1bs8Mwbkci0fjxZIrzyNblhH2fEmvKn0
+ 14gWvYc8/SbUfS0Y8MjZjc8PX2H+MElpBG7G8YmI1yDXyIqgKhSWIpr7bVwK4JmVtxvW
+ D4kk4tzADto1QBEDwX3w/FLijcMe32GJWkC5PPc+o9liJR70fQ003gNi58OOJ6evLU1W
+ Khjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=UWFl0S8+QJmSRfKpaWNU58d5jvI099dEW79c4Eds8Co=;
- b=QibJUtSf5nqETljd6uRi8NNp5RuJgAL4x2QjRApc2Lv7n6vQt1BvqND8DzIlSKoLKd
- cQ8ADNC1S7GV0/tqjJhZT45/mXFLTbHYTL4HyAtkiIiH2ZowPbnwDjpSUIqXgFeaY5Tt
- xcV9eixg/dfsWpjNxQDJ27hVGtgFixOb5scdvytCvkdBbF56qhSoY10MGgf6JwL732tA
- ZrJswdTE5mjJ0QobnHRSiVRLAcHSpgcPAsKy1qa0V1nC0ulFqvy7L0vT07tckDq0nSJ6
- +2CvnEbrznqy1wu09lKx9bmAG2tH5GJMR9fCDRzYX8MJW1VA+xBhzXPUKce40KvFtl19
- C8AQ==
-X-Gm-Message-State: AOAM532cvXIs6wKSwc3WLJllaZI8eHZRs1mN/cZ9gmrgMakaduestv5G
- sSdSNY8avenjvbJCExscH+3ZOT5RYCc=
-X-Google-Smtp-Source: ABdhPJxiiVaTYWvAG9DN++m79S0TQSTDr2C/1kQW8ctmk5/+oYLKUYcjyiQjFsrDz4LSrxOSg3eaUA==
-X-Received: by 2002:a1c:202:: with SMTP id 2mr3928971wmc.122.1630599486805;
- Thu, 02 Sep 2021 09:18:06 -0700 (PDT)
+ bh=NcTQcOUeeehYkPycaMHvSzYk1/JpDe+W3tlOioHt6ec=;
+ b=asHlMBgp9xtbtkxENNPEl22GO7Uhtshyu6NgZMiwwl/kZiC2hSk9SXxEx4IXAXO2sH
+ RqBn/gRgm5o98nsLpM7LZyJhkKuQ86ShrJh29DHPDZWVWTKkYBMQssmD0m/+8rNflK4o
+ RsWsfMbW5Eba4uaFlR5op0T5hmA4OpijPiK7npCdHYxBouNLuxjlsb++UJTOH4ByUabQ
+ 3jUuiDVahUMJeJLWgF66sL/6gXegbQu3fnUBDpDiUzas6dXdGd/hxmv47ZQGZuH8yBKR
+ KyH842lwOVoGId/ZJRfUM1q7VG7pn925Sb37alXUuGctlLq8SnmOK4OYLNN+JTIKq+IH
+ mIVw==
+X-Gm-Message-State: AOAM533GzhN++o0iqxPrk2y/UZFEjJH89R4kJNK4SUt+psdFCZXh+3i/
+ mYNHDtfgjQNSzx4HiNyPuj/k7+Rn9x4=
+X-Google-Smtp-Source: ABdhPJzq4gEgBOzEB6hIFdgS7MM2mMxbBTgou1tfWKrQyw8z4fa5k0Y3IhkCYtobsiFPzwgsy9U7mQ==
+X-Received: by 2002:adf:c390:: with SMTP id p16mr4949292wrf.105.1630599492959; 
+ Thu, 02 Sep 2021 09:18:12 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- k14sm2234887wri.46.2021.09.02.09.18.04
+ g1sm2930192wrb.27.2021.09.02.09.18.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:18:06 -0700 (PDT)
+ Thu, 02 Sep 2021 09:18:12 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -78,17 +78,18 @@ Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Colin Xu <colin.xu@intel.com>, Claudio Fontana <cfontana@suse.de>,
  Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
  Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
-Subject: [PATCH v3 22/30] target/ppc: Simplify has_work() handlers
-Date: Thu,  2 Sep 2021 18:15:35 +0200
-Message-Id: <20210902161543.417092-23-f4bug@amsat.org>
+Subject: [PATCH v3 23/30] target/riscv: Restrict has_work() handler to sysemu
+ and TCG
+Date: Thu,  2 Sep 2021 18:15:36 +0200
+Message-Id: <20210902161543.417092-24-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -109,352 +110,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 16:18:23 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 16:18:25 -0000
 
-The common ppc_cpu_has_work() handler already checks for cs->halted,
-so we can simplify all callees.
+Restrict has_work() to TCG sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/ppc/cpu_init.c | 294 ++++++++++++++++++++----------------------
- 1 file changed, 138 insertions(+), 156 deletions(-)
+ target/riscv/cpu.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
-index bbad16cc1ec..c8ec47d58fa 100644
---- a/target/ppc/cpu_init.c
-+++ b/target/ppc/cpu_init.c
-@@ -7589,33 +7589,29 @@ static bool cpu_has_work_POWER7(CPUState *cs)
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
- 
--    if (cs->halted) {
--        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
--            return false;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
--            (env->spr[SPR_LPCR] & LPCR_P7_PECE0)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
--            (env->spr[SPR_LPCR] & LPCR_P7_PECE1)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
--            (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
--            (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
--            return true;
--        }
--        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
--            return true;
--        }
-+    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
-         return false;
--    } else {
--        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P7_PECE0)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P7_PECE1)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P7_PECE2)) {
-+        return true;
-+    }
-+    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
-+        return true;
-+    }
-+    return false;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 13575c14085..abb555a8bdb 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -335,9 +335,9 @@ static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+     env->pc = tb->pc;
  }
- #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
  
-@@ -7750,41 +7746,37 @@ static bool cpu_has_work_POWER8(CPUState *cs)
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
- 
--    if (cs->halted) {
--        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
--            return false;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE2)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE3)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE0)) {
--            return true;
--        }
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_P8_PECE1)) {
--            return true;
--        }
--        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
--            return true;
--        }
-+    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
-         return false;
--    } else {
--        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE2)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE3)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HMI)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE4)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE0)) {
-+        return true;
-+    }
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_P8_PECE1)) {
-+        return true;
-+    }
-+    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
-+        return true;
-+    }
-+    return false;
- }
- #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
- 
-@@ -7948,58 +7940,53 @@ static bool cpu_has_work_POWER9(CPUState *cs)
++#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+ static bool riscv_cpu_has_work(CPUState *cs)
  {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-+    uint64_t psscr = env->spr[SPR_PSSCR];
- 
--    if (cs->halted) {
--        uint64_t psscr = env->spr[SPR_PSSCR];
--
--        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
--            return false;
--        }
--
--        /* If EC is clear, just return true on any pending interrupt */
--        if (!(psscr & PSSCR_EC)) {
--            return true;
--        }
--        /* External Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
--            (env->spr[SPR_LPCR] & LPCR_EEE)) {
--            bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
--            if (heic == 0 || !msr_hv || msr_pr) {
--                return true;
--            }
--        }
--        /* Decrementer Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
--            (env->spr[SPR_LPCR] & LPCR_DEE)) {
--            return true;
--        }
--        /* Machine Check or Hypervisor Maintenance Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
--            1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
--            return true;
--        }
--        /* Privileged Doorbell Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_PDEE)) {
--            return true;
--        }
--        /* Hypervisor Doorbell Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_HDEE)) {
--            return true;
--        }
--        /* Hypervisor virtualization exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
--            (env->spr[SPR_LPCR] & LPCR_HVEE)) {
--            return true;
--        }
--        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
--            return true;
--        }
-+    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
-         return false;
--    } else {
--        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
-+
-+    /* If EC is clear, just return true on any pending interrupt */
-+    if (!(psscr & PSSCR_EC)) {
-+        return true;
-+    }
-+    /* External Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_EEE)) {
-+        bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
-+        if (heic == 0 || !msr_hv || msr_pr) {
-+            return true;
-+        }
-+    }
-+    /* Decrementer Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
-+        (env->spr[SPR_LPCR] & LPCR_DEE)) {
-+        return true;
-+    }
-+    /* Machine Check or Hypervisor Maintenance Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
-+        1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
-+        return true;
-+    }
-+    /* Privileged Doorbell Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_PDEE)) {
-+        return true;
-+    }
-+    /* Hypervisor Doorbell Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_HDEE)) {
-+        return true;
-+    }
-+    /* Hypervisor virtualization exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_HVEE)) {
-+        return true;
-+    }
-+    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
-+        return true;
-+    }
-+    return false;
+-#ifndef CONFIG_USER_ONLY
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     /*
+@@ -345,10 +345,8 @@ static bool riscv_cpu_has_work(CPUState *cs)
+      * mode and delegation registers, but respect individual enables
+      */
+     return (env->mip & env->mie) != 0;
+-#else
+-    return true;
+-#endif
  }
- #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
++#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
  
-@@ -8158,58 +8145,53 @@ static bool cpu_has_work_POWER10(CPUState *cs)
- {
-     PowerPCCPU *cpu = POWERPC_CPU(cs);
-     CPUPPCState *env = &cpu->env;
-+    uint64_t psscr = env->spr[SPR_PSSCR];
+ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
+                           target_ulong *data)
+@@ -647,6 +645,7 @@ static const struct TCGCPUOps riscv_tcg_ops = {
+     .tlb_fill = riscv_cpu_tlb_fill,
  
--    if (cs->halted) {
--        uint64_t psscr = env->spr[SPR_PSSCR];
--
--        if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
--            return false;
--        }
--
--        /* If EC is clear, just return true on any pending interrupt */
--        if (!(psscr & PSSCR_EC)) {
--            return true;
--        }
--        /* External Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
--            (env->spr[SPR_LPCR] & LPCR_EEE)) {
--            bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
--            if (heic == 0 || !msr_hv || msr_pr) {
--                return true;
--            }
--        }
--        /* Decrementer Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
--            (env->spr[SPR_LPCR] & LPCR_DEE)) {
--            return true;
--        }
--        /* Machine Check or Hypervisor Maintenance Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
--            1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
--            return true;
--        }
--        /* Privileged Doorbell Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_PDEE)) {
--            return true;
--        }
--        /* Hypervisor Doorbell Exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
--            (env->spr[SPR_LPCR] & LPCR_HDEE)) {
--            return true;
--        }
--        /* Hypervisor virtualization exception */
--        if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
--            (env->spr[SPR_LPCR] & LPCR_HVEE)) {
--            return true;
--        }
--        if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
--            return true;
--        }
-+    if (!(cs->interrupt_request & CPU_INTERRUPT_HARD)) {
-         return false;
--    } else {
--        return msr_ee && (cs->interrupt_request & CPU_INTERRUPT_HARD);
-     }
-+
-+    /* If EC is clear, just return true on any pending interrupt */
-+    if (!(psscr & PSSCR_EC)) {
-+        return true;
-+    }
-+    /* External Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_EXT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_EEE)) {
-+        bool heic = !!(env->spr[SPR_LPCR] & LPCR_HEIC);
-+        if (heic == 0 || !msr_hv || msr_pr) {
-+            return true;
-+        }
-+    }
-+    /* Decrementer Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DECR)) &&
-+        (env->spr[SPR_LPCR] & LPCR_DEE)) {
-+        return true;
-+    }
-+    /* Machine Check or Hypervisor Maintenance Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_MCK |
-+        1u << PPC_INTERRUPT_HMI)) && (env->spr[SPR_LPCR] & LPCR_OEE)) {
-+        return true;
-+    }
-+    /* Privileged Doorbell Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_DOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_PDEE)) {
-+        return true;
-+    }
-+    /* Hypervisor Doorbell Exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HDOORBELL)) &&
-+        (env->spr[SPR_LPCR] & LPCR_HDEE)) {
-+        return true;
-+    }
-+    /* Hypervisor virtualization exception */
-+    if ((env->pending_interrupts & (1u << PPC_INTERRUPT_HVIRT)) &&
-+        (env->spr[SPR_LPCR] & LPCR_HVEE)) {
-+        return true;
-+    }
-+    if (env->pending_interrupts & (1u << PPC_INTERRUPT_RESET)) {
-+        return true;
-+    }
-+    return false;
- }
- #endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+ #ifndef CONFIG_USER_ONLY
++    .has_work = riscv_cpu_has_work,
+     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+     .do_interrupt = riscv_cpu_do_interrupt,
+     .do_transaction_failed = riscv_cpu_do_transaction_failed,
+@@ -666,7 +665,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     device_class_set_parent_reset(dc, riscv_cpu_reset, &mcc->parent_reset);
  
+     cc->class_by_name = riscv_cpu_class_by_name;
+-    cc->has_work = riscv_cpu_has_work;
+     cc->dump_state = riscv_cpu_dump_state;
+     cc->set_pc = riscv_cpu_set_pc;
+     cc->gdb_read_register = riscv_cpu_gdb_read_register;
 -- 
 2.31.1
 
