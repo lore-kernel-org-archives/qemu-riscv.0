@@ -1,92 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLw3i-0003Ax-Vk
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 19:23:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53774)
+	id 1mLw3v-0003Us-AT
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 19:24:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53846)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=8724dbd3c=alistair.francis@opensource.wdc.com>)
- id 1mLw3i-0003A3-6W
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:23:50 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:16619)
+ id 1mLw3u-0003Tj-HZ
+ for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:24:02 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:10519)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=8724dbd3c=alistair.francis@opensource.wdc.com>)
- id 1mLw3g-0003xk-Cb
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:23:49 -0400
+ id 1mLw3s-00044h-Pt
+ for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:24:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1630625028; x=1662161028;
+ t=1630625040; x=1662161040;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=DWTb7faK5lXbqRqwl4F0MWI3aMOeLqgKbwb65Kqcza8=;
- b=NfNSEB2YBxZj3jNllsg8iS+f87yrUjb75HOvrVMfW4WsdWWqRz+MbiI/
- Hu/IPNzI0I7gQ5piQ5mvNtC6A2i66NURzGsRtXHJNwI6coDCqnLI1zjXu
- KYCyHVc4JatibPF2J8H/GTw0xUmXe3nTGzXSMMjX1oxIux1S8E3cfSJE8
- tihH0HnIEcuCMsCku+boZst8G9FBM2fv21FT5HkFRKowHahAGO/lsHknq
- XIwGtSlj5jFrsu5OAtF9kaCtSrbn88NLgnkzUcTrcXClFoQzu3agnRYHO
- MQUV1hCsHZcOmuxUy72mGDFtEGovPg0ath0Cq+ZOJ2GWvkP8sZ5JfxHi6 Q==;
-X-IronPort-AV: E=Sophos;i="5.85,263,1624291200"; d="scan'208";a="178192923"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 03 Sep 2021 07:23:46 +0800
-IronPort-SDR: WzoH7sAmNdTJuz2R6BqtqH3ujirbrokvNP9CmKMZp525trhrIVEAkKWGnKYZWbiHo0LFwiYBQ3
- O93OLJgnIPO1v2WGoGj3gWl3P+0AONQmPDjLVgxRodhH4k23AvvlWGmW+M9fQwBwaTR7nXo57Z
- i4ddxMIaB44yHdfdrgMLa/1v+75dgwfOOEWSkLnMgUq4iR6FB1na7pUFk8RjbsqT6s/JyL4jeX
- iXsYRV2Rs5ohp26tyEJX/719+iCBTzt0HFxAYZGSiy45dB+giQcKhGNKRyrygsSZQvumpgXcaa
- FvRn7VFU3/UPphaLT4JmVs3B
+ bh=fX+D9NkC99giVZdE2Z7T5c65nGBj+I1+KnYy8YTXeO0=;
+ b=Yi0QX7cSRrXSELVzdz+GWgZqzZxCi9s7D3wf4gy2Ml8Jt2e8OGPgMEYj
+ gJ9yBHVuruUWfeRWmydBaxnkCC4a72EPA7t/mimyqSf1aehtXxHDNZuDM
+ YgHrLEe2KZVg2KpneWjx9ohm+4ejX1jEBQKJG+ooXfsJXCc3KKa6/kDCa
+ flbC4pUBox4DUn8af8vIXWWI4UQwKr4mXp05jqImMN5zTLZ225jpZ6KBH
+ Cc+tfqiYrkSHTVOmodvEOufsWRLItnHIwE35Bn+7WE1helgelYtTm4N3C
+ SC5IjTUrp5TCccvRI8fllrJt23nwNIHPP1hOMJs5mAZinLdDlIVJElKqH w==;
+X-IronPort-AV: E=Sophos;i="5.85,263,1624291200"; d="scan'208";a="179087158"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 03 Sep 2021 07:23:58 +0800
+IronPort-SDR: twWv7GFFBOmsN/CKKNMt3y6nRnng2AUSziA7DPemzwNCr+k9dm5/5MdQGyn12+RNGKO9juGQz1
+ UHNTne8UfsnjHgfmTwTkvmCdxVK8N9mXJcQ7koUfXx1ZMCKzo1CtGJzSJNUL7mTP0nGO1zKB34
+ rnCa9wSC57JBbVpNPz7DS7KRO4Myrt6l4i2ajkAnLse1LIRqjrv61GTqF2XDLmyjWjLq6RuDVX
+ DABNOMneHyydnLwuN7UkbQtIhU0Df30nfPcRixB4SoMdaNNDNFqKBoBr6SKCUA1WAMOVA15kVr
+ ifMynn9GUrditE4Z7amTxg27
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Sep 2021 15:58:50 -0700
-IronPort-SDR: BtO18bueRLBrnXKDcZcex/8l/hsWAnisAsJoD36iPc1z83KQQQSWJtUmf89deJKw4XkG60sStN
- oCDYyW9FtqN0O9dgOzlzjzbVRoU1T7PBkUgnPrZjk1nbhwoxWPDpHzztAmyJx59GdKiwcsKZFu
- et68eDFeFktRpkOAeN1pSTyRPM5wLML92NmOGZ3yphBpyGMA/PPsCm/tLAW45hg3PymdQTojPJ
- E/mNy57DAXnpA597ctv0U9UfXkZq2gJJrb1ubKGWVzjUUJ0b7lw5v50U4uFoQg6A4xsoNY0ty1
- RiU=
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2021 16:00:44 -0700
+IronPort-SDR: wkXF0WGZeQRdPxcHGQ8kxsIy7VPOJYzPs2ElJgCetFFkw5sf1Z5KKiTIU+p/LBm/IBvn2dKjs7
+ 8Seo7atYdKbwi+kxKdseIv+yV+tqI2H64rFWPGVZXY4lSRiZlhT0w0FCOrROyeuKqa2D2uSqmQ
+ lvwIR+FPglQXFumnqLCxpvQHAxQeUxH9hzfCZ6abKYU2J8SyhSIJuukvHXuRJkQaFunq9WH+Ew
+ kHd6+OvegaP3pk5WqqO/M8LWoNm11xAleyc92IJ1/lnmWaNzQ5nL/dffummSc/49n/81x6ZvTX
+ rv8=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Sep 2021 16:23:47 -0700
+ 02 Sep 2021 16:23:59 -0700
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4H0xnZ4N4Mz1RvlX
- for <qemu-riscv@nongnu.org>; Thu,  2 Sep 2021 16:23:46 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4H0xnp6RF8z1RvlQ
+ for <qemu-riscv@nongnu.org>; Thu,  2 Sep 2021 16:23:58 -0700 (PDT)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  opensource.wdc.com; h=content-transfer-encoding:mime-version
  :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1630625026; x=1633217027; bh=DWTb7faK5lXbqRqwl4
- F0MWI3aMOeLqgKbwb65Kqcza8=; b=PLoroVOeGOKty1eKu6bOCyIwzsKD+GFxte
- PlTzuWIE56HeM3weUrLWpVUE7PQkW/iortalccZmMLFBQDhRa4xDKtl42H1UAuSc
- YHgvxuPFYlZaWtVTfyHCt7Yhjjg6wFpIJnRjdFxyYGiKiP6z5ILWElXBBzAoobtG
- /5er7i8SfEF5M0OqjKr3cFTwZUSMXfrmWgmIZ6i2NVXu3M01Ne0U94aYzELAh7fD
- NisTA7dw/8EZmiC+bMm7OBTm3BukapcnqBC8xxCJjZsHabEgFuw+2juubVTieV8L
- sQX1NUOy/h4HyfR8JR8dQRHblIRlwJphfHxmOFTY6X37D4M2P89Q==
+ :from; s=dkim; t=1630625038; x=1633217039; bh=fX+D9NkC99giVZdE2Z
+ 7T5c65nGBj+I1+KnYy8YTXeO0=; b=k+2/NpwBSHeEPRttmzSUXqID0HfWo6S+uR
+ qfuCc3OHUvKHtkWBtA8y3KB/Jen9k26a1lVrIHXOm20ZSfd64Bzm2WeUgmr5V6gQ
+ jaQmd6Wg0aQlBmizCYC9PoKRlMHGPni8NRqQPjmS3HGvYYruCM0w99OTWCuruasO
+ MdrvWEG/DPrOzEz6d6AxUajp/zEdqlNwUHPOXmsd/IyzIEvvS6gMhIlHbrkzv9HX
+ paC2s5OX+wiUQlbEZ9HC00Si5NvoVdJY2VFsZMU84LuBVIW41WVNGrmpdKDjaQvk
+ Nb640oFgomvhgaHo4R2nrDMnaOoUueAf4599ehpM/Kl0xDU69Klg==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id hx9svChPU3mz for <qemu-riscv@nongnu.org>;
- Thu,  2 Sep 2021 16:23:46 -0700 (PDT)
+ port 10026) with ESMTP id 90IoTJ5KCqit for <qemu-riscv@nongnu.org>;
+ Thu,  2 Sep 2021 16:23:58 -0700 (PDT)
 Received: from toolbox.alistair23.me (unknown [10.225.165.17])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4H0xnT3Y11z1RvlP;
- Thu,  2 Sep 2021 16:23:40 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4H0xnk4ZG7z1RvlP;
+ Thu,  2 Sep 2021 16:23:54 -0700 (PDT)
 From: Alistair Francis <alistair.francis@opensource.wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-Subject: [PATCH v1 1/2] target/riscv: Implement the stval/mtval illegal
- instruction
-Date: Fri,  3 Sep 2021 09:23:35 +1000
-Message-Id: <289f8d59cf883fec5764cb0cea8da4430b6fd6da.1630624983.git.alistair.francis@wdc.com>
+Subject: [PATCH v1 2/2] target/riscv: Set mtval and stval support
+Date: Fri,  3 Sep 2021 09:23:48 +1000
+Message-Id: <968ed1af9002f5f9f42f9efe8a5db5a1ed830a09.1630624983.git.alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <cover.1630624983.git.alistair.francis@wdc.com>
 References: <cover.1630624983.git.alistair.francis@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.42;
+Received-SPF: pass client-ip=216.71.153.144;
  envelope-from=prvs=8724dbd3c=alistair.francis@opensource.wdc.com;
- helo=esa4.hgst.iphmx.com
+ helo=esa5.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -106,121 +105,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 23:23:50 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 23:24:02 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-The stval and mtval registers can optionally contain the faulting
-instruction on an illegal instruction exception. This patch adds support
-for setting the stval and mtval registers based on the CPU feature.
-
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h        |  5 ++++-
- target/riscv/cpu_helper.c |  9 +++++++++
- target/riscv/translate.c  | 33 +++++++++++++++++++--------------
- 3 files changed, 32 insertions(+), 15 deletions(-)
+ target/riscv/cpu.h | 1 +
+ target/riscv/cpu.c | 6 +++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bf1c899c00..6d41a16ae3 100644
+index 6d41a16ae3..64ebb593fb 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -77,7 +77,8 @@ enum {
-     RISCV_FEATURE_MMU,
-     RISCV_FEATURE_PMP,
-     RISCV_FEATURE_EPMP,
--    RISCV_FEATURE_MISA
-+    RISCV_FEATURE_MISA,
-+    RISCV_FEATURE_MTVAL_INST,
+@@ -309,6 +309,7 @@ struct RISCVCPU {
+         bool mmu;
+         bool pmp;
+         bool epmp;
++        bool mtval_inst;
+         uint64_t resetvec;
+     } cfg;
  };
-=20
- #define PRIV_VERSION_1_10_0 0x00011000
-@@ -130,6 +131,8 @@ struct CPURISCVState {
-     target_ulong frm;
-=20
-     target_ulong badaddr;
-+    target_ulong bins;
-+
-     target_ulong guest_phys_fault_addr;
-=20
-     target_ulong priv_ver;
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 968cb8046f..42edd71c1e 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -967,6 +967,15 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-             write_tval  =3D true;
-             tval =3D env->badaddr;
-             break;
-+        case RISCV_EXCP_ILLEGAL_INST:
-+            if (riscv_feature(env, RISCV_FEATURE_MTVAL_INST)) {
-+                /* The stval/mtval register can optionally also be used =
-to
-+                 * return the faulting instruction bits on an illegal
-+                 * instruction exception.
-+                 */
-+                tval =3D env->bins;
-+            }
-+            break;
-         default:
-             break;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1a2b03d579..8b77526c79 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -437,6 +437,10 @@ static void riscv_cpu_realize(DeviceState *dev, Erro=
+r **errp)
          }
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index e356fc6c46..4221d8e2d5 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -173,8 +173,27 @@ static void lookup_and_goto_ptr(DisasContext *ctx)
      }
- }
 =20
-+/*
-+ * Wrappers for getting reg values.
-+ *
-+ * The $zero register does not have cpu_gpr[0] allocated -- we supply th=
-e
-+ * constant zero as a source, and an uninitialized sink as destination.
-+ *
-+ * Further, we may provide an extension for word operations.
-+ */
-+static TCGv temp_new(DisasContext *ctx)
-+{
-+    assert(ctx->ntemp < ARRAY_SIZE(ctx->temp));
-+    return ctx->temp[ctx->ntemp++] =3D tcg_temp_new();
-+}
++    if (cpu->cfg.mtval_inst) {
++        set_feature(env, RISCV_FEATURE_MTVAL_INST);
++    }
 +
- static void gen_exception_illegal(DisasContext *ctx)
- {
-+    TCGv tmp =3D temp_new(ctx);
-+
-+    tcg_gen_movi_tl(tmp, ctx->opcode);
-+    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, bins));
-+
-     generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
- }
+     set_resetvec(env, cpu->cfg.resetvec);
 =20
-@@ -195,20 +214,6 @@ static void gen_goto_tb(DisasContext *ctx, int n, ta=
-rget_ulong dest)
-     }
- }
-=20
--/*
-- * Wrappers for getting reg values.
-- *
-- * The $zero register does not have cpu_gpr[0] allocated -- we supply th=
-e
-- * constant zero as a source, and an uninitialized sink as destination.
-- *
-- * Further, we may provide an extension for word operations.
-- */
--static TCGv temp_new(DisasContext *ctx)
--{
--    assert(ctx->ntemp < ARRAY_SIZE(ctx->temp));
--    return ctx->temp[ctx->ntemp++] =3D tcg_temp_new();
--}
+     /* If only XLEN is set for misa, then set misa from properties */
+@@ -600,7 +604,7 @@ static Property riscv_cpu_properties[] =3D {
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
 -
- static TCGv get_gpr(DisasContext *ctx, int reg_num, DisasExtend ext)
- {
-     TCGv t;
++    DEFINE_PROP_BOOL("mtval_inst", RISCVCPU, cfg.mtval_inst, true),
+     DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVE=
+C),
+     DEFINE_PROP_END_OF_LIST(),
+ };
 --=20
 2.31.1
 
