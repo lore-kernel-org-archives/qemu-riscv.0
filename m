@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLpNh-00071q-Re
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:16:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36092)
+	id 1mLpNm-0007ET-Hg
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:16:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpNf-0006uD-FN; Thu, 02 Sep 2021 12:15:59 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:35681)
+ id 1mLpNk-0007A3-Vf; Thu, 02 Sep 2021 12:16:04 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:42881)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpNd-0000OF-9o; Thu, 02 Sep 2021 12:15:59 -0400
-Received: by mail-wr1-x429.google.com with SMTP id i6so3838518wrv.2;
- Thu, 02 Sep 2021 09:15:53 -0700 (PDT)
+ id 1mLpNj-0000Uu-CH; Thu, 02 Sep 2021 12:16:04 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id q11so3821773wrr.9;
+ Thu, 02 Sep 2021 09:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
- b=nvF/c2Wc4Z15cqg2fwhp1NDrfdcdFXpuAmJa1KWBtzQQ/EXWFrb73xtrx8OZfbtAYH
- +ID89t8hrTCsxgu2Z9TktIv56PS86hvs5RilCbo/0PLhtchmK7Btfa7sZb3B2zUVbiHv
- /HU6lzJWGffGyztr061l6mMVTzRO0XEqa1r0BVkwLvpIuHEZFGdUMQyYCTDsiXNgmkvC
- mzGCP4B8dDeCO3p+Tu6JIdorMuA2pmQP2RRlgrSmz9a3spLyNyj6mRRUHHOVQRLc9UFi
- tO8C8CpGWtVF4XqV+ujfpe9fj5HRkBRHkHwyv6P8VevMMXH157Vbk0qwXp550NWCjx06
- CBMQ==
+ bh=IALuJS79v15vDPvWp0gEXOFVB8QcuCBujL3iQm4WVXc=;
+ b=lyX2iDyZ4fZxIDfBFZ3tyjvTVxQHi5/DKPStvMf8XLdWBZf2Z4YEuBxLZ6HKfP2S0S
+ 9fzfqOWFn0kWTui3s6TURapTU3z+GQ8v8hJn1LfoSFOHPkdm35vCxTfT+cYkW1nrugty
+ mCqdxM8mrNR5MLebQDolGLEo/7Lkgdj2gwYMGjuH7g4aAADt1Bq23c52IZGz+2AB+NL8
+ GZ3E3+ftKA9QL43iXqO6Ak9f9Icd3LYBSFwdaV1YhiiVZy5M0xyjWQ/L7Ym3RUz2AJov
+ QL67c+ediBlqlyYZ/UNrRKxOjNTuB98lMijtK7yEZi/9rGhzXp+Rvgvey6qwTDyAgy4I
+ 6qHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=/9vCQQZfSaTpKBQMegFXjFo179Y+24zi0HZDvs7SgMU=;
- b=FQM8O5O++Sm9FWURdrO46n300WzcyWtALOj0h6xggQExFg6FqkdaTHEO9WbCGc/ZZQ
- kOD9CDKGeY8I4bcBwetyF2quFiNRqqkgZ/+8I2UeO4rcgsTJgv+djtCGptdh+qkEaYFg
- MWB9iXpGeA2IGyTvopOPhEZoaJ3+TgWrlyN/PZELoUYbxJVRDoJ6wNWCimzNtfCQRRkL
- 4ff2htQ2wbsPgp/P1QM34Uw9RILum/rLCNYdr05qTilLGhCQiRW4xqJEt1MeDbhV0KkD
- Rvq2G6f1I9VY7/LKvtKsbuCedUfjjOPLJYIuGbm/wpcXNihvebr6vo+2MNE1kFRA1fcp
- LuRQ==
-X-Gm-Message-State: AOAM5312ZBkacuSN7iH/jqLfBhc0DqXlUQlzwQJl/O2p58CGF94ZuPTx
- 8IF0Lj2K0n/6OmaEA0z3GmcG6B0YLTA=
-X-Google-Smtp-Source: ABdhPJxxdNDVWzqPqP9AvO+fc8KPo1qKTWTpE1Z3SovcisiYMadm8391Ql4b1VZQyA/+Rjg0YRdLPg==
-X-Received: by 2002:a05:6000:186:: with SMTP id
- p6mr4881125wrx.210.1630599352772; 
- Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
+ bh=IALuJS79v15vDPvWp0gEXOFVB8QcuCBujL3iQm4WVXc=;
+ b=gI4MEiYR1CWYJU/RezZUXVBOXAxuVmX83N2kv6L8DIZ9JBGI6spmRHGlI868/eCnEL
+ ovrRMVN7iBQylWEej6/h3BAlItl9bN136d9P/6/grbbubQQ2wqPjML4h8tfaUeYVY8xj
+ c5lRkdv4BknA5z4AFkbrNUU++3xdPBcewYtv5F3JkTTr1VHtorvfvNpeKeXjVzholxZw
+ 5zKptejnvWJfrwU30S9V5EGGY6o26AM22+5TUXhesL2icvTEByMhy1euVCoVHBkzFZfv
+ SGrom48WILB+kAd14eics6spN/hBLw/KmH1cQfrVTFbtjskTV9Gtl2hekmy/a07wsMq2
+ 3JbA==
+X-Gm-Message-State: AOAM530FHgn+cNiUPwGOqnxHo03bTuCAAhQ1KtYBa5DzFOypI7Rk+iMB
+ K9J1k4xerbTuIOQuWtBZ4AeBeMnMEwE=
+X-Google-Smtp-Source: ABdhPJy7JEkr/3dMu4L49Lw+gPGY8gHw7yAaZhdIf87oRC7v/4j/f/YWrayp4BQC2KvwiDQbjRMXEg==
+X-Received: by 2002:adf:dbd0:: with SMTP id e16mr4727843wrj.402.1630599358916; 
+ Thu, 02 Sep 2021 09:15:58 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- j17sm2187403wrh.67.2021.09.02.09.15.50
+ x9sm1939663wmi.30.2021.09.02.09.15.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:15:52 -0700 (PDT)
+ Thu, 02 Sep 2021 09:15:58 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -79,17 +78,17 @@ Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Colin Xu <colin.xu@intel.com>, Claudio Fontana <cfontana@suse.de>,
  Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
  Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
-Subject: [PATCH v3 01/30] accel/tcg: Restrict cpu_handle_halt() to sysemu
-Date: Thu,  2 Sep 2021 18:15:14 +0200
-Message-Id: <20210902161543.417092-2-f4bug@amsat.org>
+Subject: [PATCH v3 02/30] hw/core: Restrict cpu_has_work() to sysemu
+Date: Thu,  2 Sep 2021 18:15:15 +0200
+Message-Id: <20210902161543.417092-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -110,76 +109,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 16:16:00 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 16:16:05 -0000
 
-Commit 372579427a5 ("tcg: enable thread-per-vCPU") added the following
-comment describing EXCP_HALTED in qemu_tcg_cpu_thread_fn():
-
-    case EXCP_HALTED:
-         /* during start-up the vCPU is reset and the thread is
-          * kicked several times. If we don't ensure we go back
-          * to sleep in the halted state we won't cleanly
-          * start-up when the vCPU is enabled.
-          *
-          * cpu->halted should ensure we sleep in wait_io_event
-          */
-         g_assert(cpu->halted);
-         break;
-
-qemu_wait_io_event() is sysemu-specific, so we can restrict the
-cpu_handle_halt() call in cpu_exec() to system emulation.
+cpu_has_work() is only called from system emulation code.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- accel/tcg/cpu-exec.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ include/hw/core/cpu.h | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 7a6dd9049f0..6b61262b151 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -586,10 +586,11 @@ static inline void tb_add_jump(TranslationBlock *tb, int n,
-     return;
- }
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index bc864564cee..2bd563e221f 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -538,6 +538,22 @@ enum CPUDumpFlags {
+ void cpu_dump_state(CPUState *cpu, FILE *f, int flags);
  
-+#ifndef CONFIG_USER_ONLY
- static inline bool cpu_handle_halt(CPUState *cpu)
- {
-     if (cpu->halted) {
--#if defined(TARGET_I386) && !defined(CONFIG_USER_ONLY)
-+#if defined(TARGET_I386)
-         if (cpu->interrupt_request & CPU_INTERRUPT_POLL) {
-             X86CPU *x86_cpu = X86_CPU(cpu);
-             qemu_mutex_lock_iothread();
-@@ -597,7 +598,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
-             cpu_reset_interrupt(cpu, CPU_INTERRUPT_POLL);
-             qemu_mutex_unlock_iothread();
-         }
--#endif
-+#endif /* TARGET_I386 */
-         if (!cpu_has_work(cpu)) {
-             return true;
-         }
-@@ -607,6 +608,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+ #ifndef CONFIG_USER_ONLY
++/**
++ * cpu_has_work:
++ * @cpu: The vCPU to check.
++ *
++ * Checks whether the CPU has work to do.
++ *
++ * Returns: %true if the CPU has work, %false otherwise.
++ */
++static inline bool cpu_has_work(CPUState *cpu)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++
++    g_assert(cc->has_work);
++    return cc->has_work(cpu);
++}
++
+ /**
+  * cpu_get_phys_page_attrs_debug:
+  * @cpu: The CPU to obtain the physical page address for.
+@@ -636,22 +652,6 @@ CPUState *cpu_create(const char *typename);
+  */
+ const char *parse_cpu_option(const char *cpu_option);
  
-     return false;
- }
-+#endif /* !CONFIG_USER_ONLY */
- 
- static inline void cpu_handle_debug_exception(CPUState *cpu)
- {
-@@ -865,9 +867,11 @@ int cpu_exec(CPUState *cpu)
-     /* replay_interrupt may need current_cpu */
-     current_cpu = cpu;
- 
-+#ifndef CONFIG_USER_ONLY
-     if (cpu_handle_halt(cpu)) {
-         return EXCP_HALTED;
-     }
-+#endif
- 
-     rcu_read_lock();
- 
+-/**
+- * cpu_has_work:
+- * @cpu: The vCPU to check.
+- *
+- * Checks whether the CPU has work to do.
+- *
+- * Returns: %true if the CPU has work, %false otherwise.
+- */
+-static inline bool cpu_has_work(CPUState *cpu)
+-{
+-    CPUClass *cc = CPU_GET_CLASS(cpu);
+-
+-    g_assert(cc->has_work);
+-    return cc->has_work(cpu);
+-}
+-
+ /**
+  * qemu_cpu_is_self:
+  * @cpu: The vCPU to check against.
 -- 
 2.31.1
 
