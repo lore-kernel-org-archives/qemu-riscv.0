@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoV5-0005jV-3R
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:19:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47728)
+	id 1mLoV6-0005nv-DE
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:19:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47592)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoUx-0005bi-0Z; Thu, 02 Sep 2021 11:19:27 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:52978)
+ id 1mLoUa-0005MW-Fu; Thu, 02 Sep 2021 11:19:05 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:35528)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoUu-0003PZ-Jp; Thu, 02 Sep 2021 11:19:26 -0400
-Received: by mail-wm1-x333.google.com with SMTP id e26so1544345wmk.2;
- Thu, 02 Sep 2021 08:19:23 -0700 (PDT)
+ id 1mLoUT-0002z7-KI; Thu, 02 Sep 2021 11:19:01 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id i6so3540906wrv.2;
+ Thu, 02 Sep 2021 08:18:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=J1dcdIQ9CGWzlsg5Dn15xdm5h+WWHlgv9y5poU7SILU=;
- b=nmHWhKQc4cQ8poiZOsBSVna/+IcTO76/Xgy6htZ11++IGvST+0vsj0Yb7T3Y89mA+Z
- Ffse1o14BVN8xQOzx9UrVrpulHJEIbxJo+VhEDYcG4roPcXCNeWBCGzS0+ZqG2PKRoJp
- re1il8Yv50undaZa04WF33qAcSwcJDW1gW4zjfHLEwJlPNsBllGQR10uHMurMAme+Wu7
- dFOwtQ/73yXO+wgQoWR8acLVbUZadySXnfEB1iUNfHJu/NwOxSSvj+DpSi0d+fLM4F+T
- zGhDfAOOBkk+j/NeBeQhgE/JQ9yMtol8kcN+rCUNSZhAl6Xn0nDC1r6GKNff9D3WAikU
- NnHg==
+ bh=NjpYoE1+3YFnM0F4QDL6LEotiNFdmLxhe/DUiCLHaJM=;
+ b=OE2IJqZijkuAu/dtbUlP6NrY1EsKCVCfz038HJYOXGJ8EDulteUPVw6555LSquq8R6
+ UyBKsyS8TbxCG0tsSFJvYB9ADJXpRn70/xtWLjcmzdXfF7x/a5hVHd20QXgWS8llqbvf
+ RQfWoj9R/B+AWCxkrIr1BZvlzLejShTHQ+YSmEdC+u9eoEHoOc8rShzTgKV2UztPduyH
+ vKYYjTOxemAwBu9hCc1RW8h+NqDRzfy3q8VqTvyxqN1YiXtUBK/Y/vT5Cs4ZwKZBSpGD
+ jfyBQyX4dtNCXA6loITIiM3OL24aV4kpGFstbBz9jIIxjgf5jpPsl389IKvPiDBZC5i3
+ TFpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=J1dcdIQ9CGWzlsg5Dn15xdm5h+WWHlgv9y5poU7SILU=;
- b=j0Ng61R0R/xJH4II0McuiyKmdzXTXr3wCogmTfXGeYep2J1Cj74z3gQFnsrojJVvmJ
- BzxWRZ2ILD7h56tV0jGfwXh/lYxDL3Y+MA8u7YdAV8n4lyYVIjorKGMudubgoVeFiTvi
- 4Odq6+2NpkHNb2Y6W3rMRf112Wu7InYAOSy0mCYZC41QooMCJlUv92NMiP0L2pewrizG
- RLSLZAdzml52t8kgT3qeOHpLRWi91NirjUNC9id8gHqM9eFSxZpRd5LsA5xGhpy98X4x
- AliADis91Figga7xy/nWqmgOJ0v1W4fb4VN5JgUBJK8Zgnzw/G1IEomhaCHf+BAS9Bhu
- Qi4Q==
-X-Gm-Message-State: AOAM531yz+JNDJb+6Ttb11ynqFZQbCoWC/vgYMLNb1N+NPRIPzbrMEgv
- LkHVI65duh8pN2uQJoUetcAIXd/zvqI=
-X-Google-Smtp-Source: ABdhPJz7sxKzV5VkLGVMCrMgJ5rFnNDYqoRSnoIdz+9dydA+a9qoHCb3bjm9MTLJEtE5jEYVwPeO+g==
-X-Received: by 2002:a7b:c5d2:: with SMTP id n18mr3773265wmk.97.1630595962055; 
- Thu, 02 Sep 2021 08:19:22 -0700 (PDT)
+ bh=NjpYoE1+3YFnM0F4QDL6LEotiNFdmLxhe/DUiCLHaJM=;
+ b=fKQ1RrEmI2fwvHpw12pDjJurepR+yY2J0sNkDhi9Swpeld0A81cKofF/6odCK5OZrw
+ fZkbziKN0J5yx+BpNW82RFVXbNFmTyYr4wRwCaaE3SdvRv69zCDzuZWSqhYy1jMFBCvn
+ U+wbaIeKYz9bpDrSUY7sn3ESeKhdtHVA+iv+YsY4/OcHcLwY4U7u9jnoxA1CAFVbS0rj
+ Q1lpTkYJ+AkcvhDlX+XQNkt24ojJzLs/LFeNtrnRNGcaaoJ8HQLTNG6qjE+BS2ZEbdUk
+ X0k87NE1BosIio9Gz+XZT1iQyI0IHZfa9IQJUniAu3ip7lDY6GI/2eZnNP+cZQ90SHAN
+ rk6g==
+X-Gm-Message-State: AOAM531V9d0a+EZTsqAkFuAeQo4T7gxi2D3APtS4Z/8bbt9Poo5K+FJg
+ rGR/t3G1wDxlcIGkqDkMhXHfyk8pKNg=
+X-Google-Smtp-Source: ABdhPJxHGkPXjKBYhlTr35f7CR7AMmKVY8Al83O7nq6m8XUpAKzCtMrlY8MqhAltIqo0aoW6RI9a5A==
+X-Received: by 2002:a5d:638b:: with SMTP id p11mr4313614wru.257.1630595934445; 
+ Thu, 02 Sep 2021 08:18:54 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- d24sm1844328wmb.35.2021.09.02.08.19.20
+ t5sm2171265wra.95.2021.09.02.08.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:19:21 -0700 (PDT)
+ Thu, 02 Sep 2021 08:18:53 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,18 +65,18 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 23/24] accel/tcg: Restrict TCGCPUOps::cpu_exec_interrupt() to
+Subject: [PATCH 18/24] target/riscv: Restrict cpu_exec_interrupt() handler to
  sysemu
-Date: Thu,  2 Sep 2021 17:17:14 +0200
-Message-Id: <20210902151715.383678-24-f4bug@amsat.org>
+Date: Thu,  2 Sep 2021 17:17:09 +0200
+Message-Id: <20210902151715.383678-19-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
 References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -97,103 +97,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:19:28 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:19:07 -0000
 
-All targets call TCGCPUOps::cpu_exec_interrupt() from sysemu code.
-Move its declaration to restrict it to system emulation.
-Extend the code guarded and remove the user-mode assertion.
-Also restrict the static inlined need_replay_interrupt() method to
-avoid a "defined but not used" warning.
+Restrict cpu_exec_interrupt() and its callees to sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/core/tcg-cpu-ops.h |  4 ++--
- accel/tcg/cpu-exec.c          | 13 +++++++------
- 2 files changed, 9 insertions(+), 8 deletions(-)
+ target/riscv/cpu.h        | 2 +-
+ target/riscv/cpu.c        | 2 +-
+ target/riscv/cpu_helper.c | 5 -----
+ 3 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h
-index 600f0349659..bbec7760f48 100644
---- a/include/hw/core/tcg-cpu-ops.h
-+++ b/include/hw/core/tcg-cpu-ops.h
-@@ -35,8 +35,6 @@ struct TCGCPUOps {
-     void (*cpu_exec_enter)(CPUState *cpu);
-     /** @cpu_exec_exit: Callback for cpu_exec cleanup */
-     void (*cpu_exec_exit)(CPUState *cpu);
--    /** @cpu_exec_interrupt: Callback for processing interrupts in cpu_exec */
--    bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt_request);
-     /**
-      * @tlb_fill: Handle a softmmu tlb miss or user-only address fault
-      *
-@@ -68,6 +66,8 @@ struct TCGCPUOps {
-     void (*do_interrupt)(CPUState *cpu);
- #endif /* !CONFIG_USER_ONLY || !TARGET_I386 */
- #ifdef CONFIG_SOFTMMU
-+    /** @cpu_exec_interrupt: Callback for processing interrupts in cpu_exec */
-+    bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt_request);
-     /**
-      * @do_transaction_failed: Callback for handling failed memory transactions
-      * (ie bus faults or external aborts; not MMU faults)
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index 5f4836946c1..7a6dd9049f0 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -685,6 +685,7 @@ static inline bool cpu_handle_exception(CPUState *cpu, int *ret)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index bf1c899c00b..e735e53e26c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -334,7 +334,6 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+                                int cpuid, void *opaque);
+ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+-bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+ bool riscv_cpu_fp_enabled(CPURISCVState *env);
+ bool riscv_cpu_virt_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+@@ -362,6 +361,7 @@ void riscv_cpu_list(void);
+ #define cpu_mmu_index riscv_cpu_mmu_index
+ 
+ #ifndef CONFIG_USER_ONLY
++bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
+ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts);
+ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1a2b03d579c..13575c14085 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -644,10 +644,10 @@ static const struct SysemuCPUOps riscv_sysemu_ops = {
+ static const struct TCGCPUOps riscv_tcg_ops = {
+     .initialize = riscv_translate_init,
+     .synchronize_from_tb = riscv_cpu_synchronize_from_tb,
+-    .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+     .tlb_fill = riscv_cpu_tlb_fill,
+ 
+ #ifndef CONFIG_USER_ONLY
++    .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+     .do_interrupt = riscv_cpu_do_interrupt,
+     .do_transaction_failed = riscv_cpu_do_transaction_failed,
+     .do_unaligned_access = riscv_cpu_do_unaligned_access,
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 968cb8046f4..701858d670c 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -75,11 +75,9 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+         return RISCV_EXCP_NONE; /* indicates no pending interrupt */
+     }
+ }
+-#endif
+ 
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+-#if !defined(CONFIG_USER_ONLY)
+     if (interrupt_request & CPU_INTERRUPT_HARD) {
+         RISCVCPU *cpu = RISCV_CPU(cs);
+         CPURISCVState *env = &cpu->env;
+@@ -90,12 +88,9 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+             return true;
+         }
+     }
+-#endif
      return false;
  }
  
-+#ifndef CONFIG_USER_ONLY
- /*
-  * CPU_INTERRUPT_POLL is a virtual event which gets converted into a
-  * "real" interrupt event later. It does not need to be recorded for
-@@ -698,12 +699,11 @@ static inline bool need_replay_interrupt(int interrupt_request)
-     return true;
- #endif
- }
-+#endif /* !CONFIG_USER_ONLY */
- 
- static inline bool cpu_handle_interrupt(CPUState *cpu,
-                                         TranslationBlock **last_tb)
- {
--    CPUClass *cc = CPU_GET_CLASS(cpu);
+-#if !defined(CONFIG_USER_ONLY)
 -
-     /* Clear the interrupt flag now since we're processing
-      * cpu->interrupt_request and cpu->exit_request.
-      * Ensure zeroing happens before reading cpu->exit_request or
-@@ -725,9 +725,7 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
-             qemu_mutex_unlock_iothread();
-             return true;
-         }
--#if defined(CONFIG_USER_ONLY)
--        g_assert_not_reached();
--#endif
-+#if !defined(CONFIG_USER_ONLY)
-         if (replay_mode == REPLAY_MODE_PLAY && !replay_has_interrupt()) {
-             /* Do nothing */
-         } else if (interrupt_request & CPU_INTERRUPT_HALT) {
-@@ -756,12 +754,14 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
-             qemu_mutex_unlock_iothread();
-             return true;
-         }
--#endif
-+#endif /* !TARGET_I386 */
-         /* The target hook has 3 exit conditions:
-            False when the interrupt isn't processed,
-            True when it is, and we should restart on a new TB,
-            and via longjmp via cpu_loop_exit.  */
-         else {
-+            CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-             if (cc->tcg_ops->cpu_exec_interrupt &&
-                 cc->tcg_ops->cpu_exec_interrupt(cpu, interrupt_request)) {
-                 if (need_replay_interrupt(interrupt_request)) {
-@@ -780,6 +780,7 @@ static inline bool cpu_handle_interrupt(CPUState *cpu,
-              * reload the 'interrupt_request' value */
-             interrupt_request = cpu->interrupt_request;
-         }
-+#endif /* !CONFIG_USER_ONLY */
-         if (interrupt_request & CPU_INTERRUPT_EXITTB) {
-             cpu->interrupt_request &= ~CPU_INTERRUPT_EXITTB;
-             /* ensure that no TB jump will be modified as
+ /* Return true is floating point support is currently enabled */
+ bool riscv_cpu_fp_enabled(CPURISCVState *env)
+ {
 -- 
 2.31.1
 
