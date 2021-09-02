@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoUw-0005bA-3c
+	id 1mLoUx-0005c7-SO
 	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:19:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47640)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47538)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoUf-0005QU-1H; Thu, 02 Sep 2021 11:19:11 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:45740)
+ id 1mLoUS-0005M8-Qv; Thu, 02 Sep 2021 11:18:59 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a]:35519)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoUb-00034p-8i; Thu, 02 Sep 2021 11:19:07 -0400
-Received: by mail-wr1-x436.google.com with SMTP id n5so3505312wro.12;
- Thu, 02 Sep 2021 08:19:00 -0700 (PDT)
+ id 1mLoUC-0002lK-Qt; Thu, 02 Sep 2021 11:18:53 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id i6so3539249wrv.2;
+ Thu, 02 Sep 2021 08:18:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=yWzwMmzgtknOn/zDVw9ZMjlZX8g7FMUFvR1QvfAhY8E=;
- b=XL6aED2lZnZF+iSRz2h+W+d5lk31scEEQIu7ZFZr7a4DAwfbFp9vFKKYKaMRLBTYe0
- ozL+tRJbDl1PolsI21/eEKKM4L5Vm0QHXDY7fh742PqmfupsDm/e+6iYztFcpcuD3CUN
- eAxKQHzjkBw9jLLFM6woIBXxmr+spcq+bc2HhwugzWlkRK+aPrq0Kv2diuGeJUKFJ54y
- PnZi+XP7vbbb+yEeDc27xhClbS8UHJOFBNhR7IhAWiV44Fr57TarL486Z+xDsIx8HJTT
- CnPIuGsYkn3xr3j0fUpYG08ZOqxB75xU844oepVvpNhVtTkkokXtOFZB3T3hIBvwvXwC
- 2OQA==
+ bh=0GktKoVpj+qe0HiWbp4icgBh99dDEcJX34VsG2pZhco=;
+ b=Is/bp5Fh3XIA6hA/dzYmAetUcNvoZbT2PMTJXGQenLZN+cEr8VtGUCBay42eDTze3D
+ tozqjRYDGa+pvoWsszXjMC44TDjVW/DQ7RVegAPyGORPmSITzcbmFDQeIEXn0HPn8dTX
+ /U/pe7aZ5r0VIsEOt1aP52anoSIYLNoIvT0SumWrSTHg+LuNZtDynarj1+o4iLhrF3Fd
+ ghRIaQgQ4IEId94u70SN7rVMr7bpy5Cax5wQetz7Pg9VoPxDIMDbm9DAbnsMgSjMYcSl
+ aBOM62R7gqMKq5F1pzyNNWWrZTNAHf1veMpmOS1eqWdgfVBX6ygwimJigWGVENkwEPkz
+ /OZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=yWzwMmzgtknOn/zDVw9ZMjlZX8g7FMUFvR1QvfAhY8E=;
- b=bYWwcu1BxQ8Qu9a7Sli9npwsO1coRiYlxsshgqloWq+BmQV79wPCyN9vfJPtmRFod7
- 0SX+/fmPWFqc6/+db8MZsu+HNlxWTH67OdcKQ+qvwr7/3TpuLgDu3tcE3vNNLKFt95a6
- iDP+iYNwLO0V5gqZ+uizVF29lLf33h2D59Hb2p+gl8IAkeUsPaOeTe4Ooj6ArUVvxWK8
- TWLvuAG9Tuk1ZTTARvhOlqbiXEprONmUU1Sm6o2FT6bsjwOolCNsMrCozx328JTOWgNd
- Wzsoog9Jf19qtkntQSGmGiHTSHUH1XVAakvS7mZP99eiMTCQj//d8M1qtK2/ADV1Gohx
- c6LQ==
-X-Gm-Message-State: AOAM530480VnR5VU49MMwl6XfUbSmKcIh0U9hplvdnr7b+dlB+TxuEd8
- Tvyl26iKt1IFF5ejRSpQuXhAyGNT+EI=
-X-Google-Smtp-Source: ABdhPJzOKEjdbeMSJ9dEW35a0CRR6zbzkeoFfLzGKh6rzfiZeHRAhZKmrMV5Pi9tF4o2FxT4GTUCaA==
-X-Received: by 2002:a5d:4e51:: with SMTP id r17mr4596219wrt.308.1630595939779; 
- Thu, 02 Sep 2021 08:18:59 -0700 (PDT)
+ bh=0GktKoVpj+qe0HiWbp4icgBh99dDEcJX34VsG2pZhco=;
+ b=In509hwIg4ergtYncWm5RcON6CHdT2UX0emCt9E+3PEBJ3kr9OJ7BI0Qo5W6QowYTK
+ cNg0alb1M1sWon4hgJ1YzwstVb1oWXmyl+JJABtSJm4fgkGbPWPv6xh7JfvePtubgfnH
+ 7JLcZLkv5/xQ8CuOeHUwF0L2T0Y1EqmzLgoUxwiK1rZA3+LktgZFsYagdw/ZV/2NkUun
+ YeRSYs6Ns9n3iCAWwAY8YFZgKs8yUwyHnFxJ/wtCOIvlCIxG/T6cWzNk6q4OPFhkzUFz
+ PeBHDso3HLiSrVUoiWYWT2HyHQrDvBKzHGyUDjprhOMzR9tvZACq3P9Ih3uazRlrRftY
+ bECA==
+X-Gm-Message-State: AOAM531lQs+hEcr0CK18zKEpKRTvWVKhF2aZ65cc31n34eJe8V2KjCbl
+ Izy3gIqgpRQDXcCb3rpfmnZtWVgBBqM=
+X-Google-Smtp-Source: ABdhPJxF98exm7cfOJwkqDLOJqQCS6DDPr9eL3M6OveGJ6xGChb/WGy6cZX+lWoxEhy/T1+Z2Xnkhw==
+X-Received: by 2002:adf:fb8d:: with SMTP id a13mr4524803wrr.164.1630595918275; 
+ Thu, 02 Sep 2021 08:18:38 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- s7sm2137638wra.75.2021.09.02.08.18.58
+ c14sm2124839wrr.58.2021.09.02.08.18.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:18:59 -0700 (PDT)
+ Thu, 02 Sep 2021 08:18:37 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,18 +65,18 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 19/24] target/sh4: Restrict cpu_exec_interrupt() handler to
+Subject: [PATCH 15/24] target/nios2: Restrict cpu_exec_interrupt() handler to
  sysemu
-Date: Thu,  2 Sep 2021 17:17:10 +0200
-Message-Id: <20210902151715.383678-20-f4bug@amsat.org>
+Date: Thu,  2 Sep 2021 17:17:06 +0200
+Message-Id: <20210902151715.383678-16-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
 References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -97,89 +97,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:19:15 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:19:07 -0000
 
 Restrict cpu_exec_interrupt() and its callees to sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/sh4/cpu.h    | 4 ++--
- target/sh4/cpu.c    | 2 +-
- target/sh4/helper.c | 9 ++-------
- 3 files changed, 5 insertions(+), 10 deletions(-)
+ target/nios2/cpu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
-index 01c43440822..017a7702140 100644
---- a/target/sh4/cpu.h
-+++ b/target/sh4/cpu.h
-@@ -204,8 +204,6 @@ struct SuperHCPU {
- };
- 
- 
--void superh_cpu_do_interrupt(CPUState *cpu);
--bool superh_cpu_exec_interrupt(CPUState *cpu, int int_req);
- void superh_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
- hwaddr superh_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- int superh_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
-@@ -223,6 +221,8 @@ bool superh_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
- void sh4_cpu_list(void);
- #if !defined(CONFIG_USER_ONLY)
-+void superh_cpu_do_interrupt(CPUState *cpu);
-+bool superh_cpu_exec_interrupt(CPUState *cpu, int int_req);
- void cpu_sh4_invalidate_tlb(CPUSH4State *s);
- uint32_t cpu_sh4_read_mmaped_itlb_addr(CPUSH4State *s,
-                                        hwaddr addr);
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 83269229421..2047742d03c 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -236,10 +236,10 @@ static const struct SysemuCPUOps sh4_sysemu_ops = {
- static const struct TCGCPUOps superh_tcg_ops = {
-     .initialize = sh4_translate_init,
-     .synchronize_from_tb = superh_cpu_synchronize_from_tb,
--    .cpu_exec_interrupt = superh_cpu_exec_interrupt,
-     .tlb_fill = superh_cpu_tlb_fill,
- 
- #ifndef CONFIG_USER_ONLY
-+    .cpu_exec_interrupt = superh_cpu_exec_interrupt,
-     .do_interrupt = superh_cpu_do_interrupt,
-     .do_unaligned_access = superh_cpu_do_unaligned_access,
-     .io_recompile_replay_branch = superh_io_recompile_replay_branch,
-diff --git a/target/sh4/helper.c b/target/sh4/helper.c
-index 2d622081e85..53cb9c3b631 100644
---- a/target/sh4/helper.c
-+++ b/target/sh4/helper.c
-@@ -45,11 +45,6 @@
- 
- #if defined(CONFIG_USER_ONLY)
- 
--void superh_cpu_do_interrupt(CPUState *cs)
--{
--    cs->exception_index = -1;
--}
--
- int cpu_sh4_is_cached(CPUSH4State *env, target_ulong addr)
- {
-     /* For user mode, only U0 area is cacheable. */
-@@ -784,8 +779,6 @@ int cpu_sh4_is_cached(CPUSH4State * env, target_ulong addr)
-     return 0;
+diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
+index 5e37defef80..947bb09bc1e 100644
+--- a/target/nios2/cpu.c
++++ b/target/nios2/cpu.c
+@@ -127,6 +127,7 @@ static void nios2_cpu_realizefn(DeviceState *dev, Error **errp)
+     ncc->parent_realize(dev, errp);
  }
  
--#endif
--
- bool superh_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
++#ifndef CONFIG_USER_ONLY
+ static bool nios2_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
  {
-     if (interrupt_request & CPU_INTERRUPT_HARD) {
-@@ -803,6 +796,8 @@ bool superh_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     Nios2CPU *cpu = NIOS2_CPU(cs);
+@@ -140,7 +141,7 @@ static bool nios2_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     }
      return false;
  }
- 
+-
 +#endif /* !CONFIG_USER_ONLY */
-+
- bool superh_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                          MMUAccessType access_type, int mmu_idx,
-                          bool probe, uintptr_t retaddr)
+ 
+ static void nios2_cpu_disas_set_info(CPUState *cpu, disassemble_info *info)
+ {
+@@ -219,10 +220,10 @@ static const struct SysemuCPUOps nios2_sysemu_ops = {
+ 
+ static const struct TCGCPUOps nios2_tcg_ops = {
+     .initialize = nios2_tcg_init,
+-    .cpu_exec_interrupt = nios2_cpu_exec_interrupt,
+     .tlb_fill = nios2_cpu_tlb_fill,
+ 
+ #ifndef CONFIG_USER_ONLY
++    .cpu_exec_interrupt = nios2_cpu_exec_interrupt,
+     .do_interrupt = nios2_cpu_do_interrupt,
+     .do_unaligned_access = nios2_cpu_do_unaligned_access,
+ #endif /* !CONFIG_USER_ONLY */
 -- 
 2.31.1
 
