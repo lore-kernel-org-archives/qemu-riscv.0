@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoU1-0004j2-FG
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:18:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47372)
+	id 1mLoU6-0004wS-Vn
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:18:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47396)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoTz-0004bF-6R; Thu, 02 Sep 2021 11:18:27 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:34778)
+ id 1mLoU3-0004o2-UA; Thu, 02 Sep 2021 11:18:31 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330]:46898)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoTx-0002Yu-Jt; Thu, 02 Sep 2021 11:18:26 -0400
-Received: by mail-wr1-x432.google.com with SMTP id m9so3551893wrb.1;
- Thu, 02 Sep 2021 08:18:23 -0700 (PDT)
+ id 1mLoU2-0002dE-Bb; Thu, 02 Sep 2021 11:18:31 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ m25-20020a7bcb99000000b002e751bcb5dbso1605726wmi.5; 
+ Thu, 02 Sep 2021 08:18:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=4y+tkZcCyCTYKE/BQL6gLFY/AtMrXXFDFTBuQLK5lBI=;
- b=daEpV700sPQx6D7ryRZBP74aFbuEp5Js2zD0dQ6602tSFDOJ9VJmaX+77RTmHv6k/J
- HiEH/VnaeEvu8um+0NqP4S4h5G/LWlhmiI5Xu89MwFWSlEjGiDEfJg4RTVSUcl5YnO34
- cAL+34Kraos5RHmxZjhCfqRiEzoQrYOPikwiwRGOAhnTeuoxNXxd8LR/sq/ciWCs912S
- orFQiZakKfSAwpHWKxxAKmDY99BEV+wU3KARM00Nw91239kaUr1Gbx+5xfGT08R+P8qA
- sC0jDjQ/vgqnwJklRFtU9gVQFWaF3B+8XRWB3reIJPMznW+0iDiOdXyHXVRNT6zAUSxz
- bd3g==
+ bh=ztcTTnkmE3Sy1SDB/uPjtWzU/LrMfSjAGUpWvTwvo3w=;
+ b=BUqC7PaF7PzoMYvp5taCbjdhSwKs5a3L3G6rE6UCOzDEFmY+e7iZ/tPOdsuPZ7RPLK
+ XRGdfIMRn69UAeSJ//SsTfOz6FKq0wbS451YbfELFBQeVp5ajbEsjewt5EoLI1KnhGmK
+ ey6vfKSr1f5lCq1YVjRlenq+Ik+N9xh4qkVdNJnRNSbv6zv8InbxtOmRKZrcU5y1jdl1
+ /rvp7qbhqsKhL4azgAIssVrG3DOUN3gkN9CVztK8/p0Y6FbmodAp/0SZ7WLhu/edxKoy
+ jZ7Fc+NzXCUF31Nq0q4KkzhW0FfGahTZOqxVWuWXoBNIcfVhDH8ea54WrA8T2UcSxlyt
+ Hi3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=4y+tkZcCyCTYKE/BQL6gLFY/AtMrXXFDFTBuQLK5lBI=;
- b=noeAMhID4l+p5x+DMl9xRNAhFXMLLTicFY/70Atofhf3A6Trctpgh+I7dTcxfx7EGN
- jgMh4DC+tITtNRl8/08ldsRBwmsOwYk9uUQjf2Ys10MH5sTm5BK7vr8aJ8Ee6byVTc2y
- 7gPDBk8GtrkhWri1M8J9lBOXhfFUchiZj8bOVyKh1FSMKIsg8JZfvhLrpnUPQuV/L3tH
- PlfLXa8feTCJ5BZAJrCZZrY8QxzCfY4UjDHfoB69nJ1dXIfCjJi5rqzG+M/+lZ4JIpJP
- 5AgYZXzkUORTbadMnoN+RADGE4meAj9ACi6b+4ad5mqI4DMjmexcy+wBtYed+ZPZpOkr
- GP9A==
-X-Gm-Message-State: AOAM533W9V6A+S2JZxMajctdAHTurjsd+0vRqBrbxy1QvW31PYcJRaW5
- t56wpDtMsIyuUqo2bn/NN15FkdUaY30=
-X-Google-Smtp-Source: ABdhPJzuKSbbDi1oS+m6Wcn8WtiPfO0pSz9kRPIqlSgYw2A+GA7Idk0l89rGksaS3zRtHoQhwYvKXA==
-X-Received: by 2002:a5d:464c:: with SMTP id j12mr4291179wrs.27.1630595902416; 
- Thu, 02 Sep 2021 08:18:22 -0700 (PDT)
+ bh=ztcTTnkmE3Sy1SDB/uPjtWzU/LrMfSjAGUpWvTwvo3w=;
+ b=FNpAxQoyvq62mmGRI+0boytuZrMqrRNGtHA2X3n63Bvuv96tFefqpKz/net5oWUYP+
+ 3g94+11uyJYP7+SxExB84Bw1Ou+8fVM07ydN8J9lj/TJ69KE8fYBMAtQFoFyv33pgfC+
+ JSAT52LxBuddAufDh6FwOb3Vel7md14ne7Z2GpUg46VmPahshuV8TDmKBfIXIZTlZ224
+ YKmdwCA2C7KEJVBxdqxc44TWtSu3i9N01gYuQzlHcDhs3JuB6BY5uFNitxsi1DcLBAFy
+ 7qFbRkUsG6vBdNeaIdTUkOhSHCVYIJYr9M3CG46rM24ZjO0eR1qP6yb/KMYCkGcvl5Al
+ TXHQ==
+X-Gm-Message-State: AOAM530NwlEailflDJ9weCMztUt1mFiSllRyzuay6OqSVpqcixWeAerk
+ TdV1JMQEsMCj0OYNvilbg/5nJCDNnEw=
+X-Google-Smtp-Source: ABdhPJzAY+gEFr74wmw6KyBf2KbIWUrFnxTkLQzFaB4Bc1Ln2DAgVSsIVE0jXNvSrGRcCpuRlOL4Uw==
+X-Received: by 2002:a7b:c7c3:: with SMTP id z3mr3687535wmk.96.1630595907666;
+ Thu, 02 Sep 2021 08:18:27 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- c15sm1848337wmr.8.2021.09.02.08.18.20
+ x11sm2016661wro.83.2021.09.02.08.18.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:18:21 -0700 (PDT)
+ Thu, 02 Sep 2021 08:18:27 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,18 +66,18 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 12/24] target/m68k: Restrict cpu_exec_interrupt() handler to
- sysemu
-Date: Thu,  2 Sep 2021 17:17:03 +0200
-Message-Id: <20210902151715.383678-13-f4bug@amsat.org>
+Subject: [PATCH 13/24] target/microblaze: Restrict cpu_exec_interrupt()
+ handler to sysemu
+Date: Thu,  2 Sep 2021 17:17:04 +0200
+Message-Id: <20210902151715.383678-14-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
 References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -97,89 +98,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:18:28 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:18:32 -0000
 
 Restrict cpu_exec_interrupt() and its callees to sysemu.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/m68k/cpu.h       |  2 ++
- target/m68k/cpu.c       |  2 +-
- target/m68k/op_helper.c | 16 +++-------------
- 3 files changed, 6 insertions(+), 14 deletions(-)
+ target/microblaze/cpu.h    |  2 ++
+ target/microblaze/cpu.c    |  2 +-
+ target/microblaze/helper.c | 13 ++-----------
+ 3 files changed, 5 insertions(+), 12 deletions(-)
 
-diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-index 997d588911c..550eb028b6e 100644
---- a/target/m68k/cpu.h
-+++ b/target/m68k/cpu.h
-@@ -166,8 +166,10 @@ struct M68kCPU {
+diff --git a/target/microblaze/cpu.h b/target/microblaze/cpu.h
+index e4bba8a7551..40401c33b72 100644
+--- a/target/microblaze/cpu.h
++++ b/target/microblaze/cpu.h
+@@ -355,8 +355,10 @@ struct MicroBlazeCPU {
  };
  
  
 +#ifndef CONFIG_USER_ONLY
- void m68k_cpu_do_interrupt(CPUState *cpu);
- bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void mb_cpu_do_interrupt(CPUState *cs);
+ bool mb_cpu_exec_interrupt(CPUState *cs, int int_req);
 +#endif /* !CONFIG_USER_ONLY */
- void m68k_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
- hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
-diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-index 72de6e97262..66d22d11895 100644
---- a/target/m68k/cpu.c
-+++ b/target/m68k/cpu.c
-@@ -515,10 +515,10 @@ static const struct SysemuCPUOps m68k_sysemu_ops = {
- 
- static const struct TCGCPUOps m68k_tcg_ops = {
-     .initialize = m68k_tcg_init,
--    .cpu_exec_interrupt = m68k_cpu_exec_interrupt,
-     .tlb_fill = m68k_cpu_tlb_fill,
+ void mb_cpu_do_unaligned_access(CPUState *cs, vaddr vaddr,
+                                 MMUAccessType access_type,
+                                 int mmu_idx, uintptr_t retaddr);
+diff --git a/target/microblaze/cpu.c b/target/microblaze/cpu.c
+index 72d8f2a0daa..15db277925f 100644
+--- a/target/microblaze/cpu.c
++++ b/target/microblaze/cpu.c
+@@ -365,10 +365,10 @@ static const struct SysemuCPUOps mb_sysemu_ops = {
+ static const struct TCGCPUOps mb_tcg_ops = {
+     .initialize = mb_tcg_init,
+     .synchronize_from_tb = mb_cpu_synchronize_from_tb,
+-    .cpu_exec_interrupt = mb_cpu_exec_interrupt,
+     .tlb_fill = mb_cpu_tlb_fill,
  
  #ifndef CONFIG_USER_ONLY
-+    .cpu_exec_interrupt = m68k_cpu_exec_interrupt,
-     .do_interrupt = m68k_cpu_do_interrupt,
-     .do_transaction_failed = m68k_cpu_transaction_failed,
- #endif /* !CONFIG_USER_ONLY */
-diff --git a/target/m68k/op_helper.c b/target/m68k/op_helper.c
-index d006d1cb3ea..5d624838ae6 100644
---- a/target/m68k/op_helper.c
-+++ b/target/m68k/op_helper.c
-@@ -24,18 +24,7 @@
- #include "semihosting/semihost.h"
- #include "tcg/tcg.h"
++    .cpu_exec_interrupt = mb_cpu_exec_interrupt,
+     .do_interrupt = mb_cpu_do_interrupt,
+     .do_transaction_failed = mb_cpu_transaction_failed,
+     .do_unaligned_access = mb_cpu_do_unaligned_access,
+diff --git a/target/microblaze/helper.c b/target/microblaze/helper.c
+index 20dbd673136..dd2aecd1d58 100644
+--- a/target/microblaze/helper.c
++++ b/target/microblaze/helper.c
+@@ -26,16 +26,6 @@
  
--#if defined(CONFIG_USER_ONLY)
--
--void m68k_cpu_do_interrupt(CPUState *cs)
+ #if defined(CONFIG_USER_ONLY)
+ 
+-void mb_cpu_do_interrupt(CPUState *cs)
 -{
+-    MicroBlazeCPU *cpu = MICROBLAZE_CPU(cs);
+-    CPUMBState *env = &cpu->env;
+-
 -    cs->exception_index = -1;
+-    env->res_addr = RES_ADDR_NONE;
+-    env->regs[14] = env->pc;
 -}
 -
--static inline void do_interrupt_m68k_hardirq(CPUM68KState *env)
--{
--}
--
--#else
-+#if !defined(CONFIG_USER_ONLY)
+ bool mb_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                      MMUAccessType access_type, int mmu_idx,
+                      bool probe, uintptr_t retaddr)
+@@ -271,7 +261,6 @@ hwaddr mb_cpu_get_phys_page_attrs_debug(CPUState *cs, vaddr addr,
  
- static void cf_rte(CPUM68KState *env)
- {
-@@ -516,7 +505,6 @@ void m68k_cpu_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
-         cpu_loop_exit(cs);
-     }
+     return paddr;
  }
 -#endif
  
- bool m68k_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ bool mb_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
  {
-@@ -538,6 +526,8 @@ bool m68k_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+@@ -289,6 +278,8 @@ bool mb_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
      return false;
  }
  
 +#endif /* !CONFIG_USER_ONLY */
 +
- static void raise_exception_ra(CPUM68KState *env, int tt, uintptr_t raddr)
- {
-     CPUState *cs = env_cpu(env);
+ void mb_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                 MMUAccessType access_type,
+                                 int mmu_idx, uintptr_t retaddr)
 -- 
 2.31.1
 
