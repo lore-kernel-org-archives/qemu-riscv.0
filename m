@@ -1,48 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoT4-0003hg-QW
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46904)
+	id 1mLoTN-0003mC-Fk
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46946)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoSz-0003eW-PU; Thu, 02 Sep 2021 11:17:25 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:37691)
+ id 1mLoT3-0003hG-CZ; Thu, 02 Sep 2021 11:17:30 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:52965)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoSu-0001fc-RO; Thu, 02 Sep 2021 11:17:25 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- c8-20020a7bc008000000b002e6e462e95fso1738529wmb.2; 
- Thu, 02 Sep 2021 08:17:19 -0700 (PDT)
+ id 1mLoT0-0001kX-0W; Thu, 02 Sep 2021 11:17:27 -0400
+Received: by mail-wm1-x333.google.com with SMTP id e26so1539804wmk.2;
+ Thu, 02 Sep 2021 08:17:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=4eZcQfjo6daqlbAor/uYuTvA42Z9JFJfSgBOZq18QIs=;
- b=L63IPhXw4PzQkbxuYksp2EzJTg4WchwSU+JvZhA9AsC+IbRUc4NdDSFMJegTPkGLIf
- wvUMyB4cu9D5e+FEGJr4OiEUnQAy43lGsJ0MGCFodxgDfu600RoLwrMTJXgdS6WKKNIA
- leVDElIEAX03R//WZcoSlYsM4rFALjNnrWSucS616DmtBUqErg1xuJqTFa7oP4+UrqGz
- 3ZUxPBuovGosiW+VK8OyeteydIIxpnIoUifjqeKDgRf4kNCHPqK4jj+2lWgqxbu/F3W+
- GsnxEZfElJSUz9NWSitncAb3pupKIInFfgtDFNZOm6CmadmAR0wSZYA57QgOHPtpfEmb
- J9OQ==
+ h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=bzANSLmsGdJwadQ2kXgbZKI1Q8VNrscDKhhidFGsH+0=;
+ b=Z9k4vsPonRy5FhjiFYfve2//ax9zYfyyVD5a9Cugem8J8WsROLTUdxZhjQFB3fG7QL
+ sF8pK/9U253NoTliZREGwIL5xU/HTdrvfwZATynAdrFDf1Oe+v6ovXnPzIwYG9U1myxB
+ T+xcHCUrk19Oie+upTR4GwXVKPit/JG8EJu2v4/Vjp2yguR6XjnRYwoEyparRbJndYQ/
+ p43ara3grrooC7fr3CTKdaFEjlBBtgKk2Opczzode5eea7w5PrHD85pJa6PPKyOGYEF0
+ 1e/3eV34c+knvvn3gFyAglCLRJ4MKFqF3/QWNxmPX0LfhiJa0kv8uleIl7riSopsOR7F
+ f6ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=4eZcQfjo6daqlbAor/uYuTvA42Z9JFJfSgBOZq18QIs=;
- b=bZa1b2FwGExs57rR11WxA2RnAFA7OpZG25dmfLn4T496pIL6JkIHSuOUQPNP0YXwMe
- MBAvOCW2nEnKrKdLi6Eiv3NU19LUuPi4l5JYQ+0BN7PkBeAhLdZNVJAQk1Et8XBjFTDq
- kBUE/B2EWXqj6KJiQ3BNhCtpdpPCy+7QM9KO+QlxqJQivMaPI5BahJVsTGaNEfTj5LhY
- hHNNDsN6Lr77iSqqWjlha3IUkX8FPXm18vrzxvGzIK1w0rJxsWlqannlQmGysvJNj47e
- iMxOuBOpYQh24TmmWyCx7bcuLuGr78S/16wt89+/drDW7bZoBWiTAgY4GytOIGdw6Vvw
- TrmQ==
-X-Gm-Message-State: AOAM531UAIBaHO6m4XSc7IWvh4h5bMN1Pmt9fmG4YGfytgJ81DJd2ntU
- RUxYVOhvXEKMS/Fqdv7KSnMgGCFU820=
-X-Google-Smtp-Source: ABdhPJynzI94JS159esXSJ7wnYUeczPuH5hXbVdHuQTy7zVttUjZc/UCjYfJNy4L5YGlMw3HQGQSLQ==
-X-Received: by 2002:a1c:7417:: with SMTP id p23mr3747384wmc.144.1630595837484; 
- Thu, 02 Sep 2021 08:17:17 -0700 (PDT)
+ :in-reply-to:references:mime-version:content-transfer-encoding;
+ bh=bzANSLmsGdJwadQ2kXgbZKI1Q8VNrscDKhhidFGsH+0=;
+ b=n4rIgcHV69D5bY8Zo8Kue2aNN8n22EfC6b5YxQ5TkVRNE8T6qMB/ZxKnMZ5Dt3nylG
+ 7/jUVjy4Pjd4NsqDOAVNiFOKg5pVsc/My9MoLLnIUsaFPvMZWfZMFxJUaselgYiGdEYn
+ wuuPyGcb8qZm1g572759AMgpEr4cNxbOnU6iQ6AyJIV84fdKr47+8mDjR2GhxcWgzU1Q
+ BDAxssr/AEArCElUr8bZnoRq0ch1gTzGhbYCP4qkAs6+krxW2QsY+e3U2rBJoikHN2TT
+ 0i8a57vqh2WbRoKECwcZG6RrKH1HgYZbSJHicURZmRmuXH0+z/cv/pTZ0rVmnhV8VhUn
+ 55Mw==
+X-Gm-Message-State: AOAM533l3FAa7JN8lvuN5n+DtA9PJQPRRiic7TLrMkL8oeWhMS2nBJog
+ F4HBsDLO+PUyRz3Yvo1xbL9yFyH8e+A=
+X-Google-Smtp-Source: ABdhPJzMo21Pzl41j9dPeTF/HOgeSp6Vq/rN5gij0WhUptIJSXfvP67peFo+YjUwUaQEAxUKbLSroQ==
+X-Received: by 2002:a7b:c097:: with SMTP id r23mr3761544wmh.114.1630595843307; 
+ Thu, 02 Sep 2021 08:17:23 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- l17sm2213415wrz.35.2021.09.02.08.17.15
+ u9sm2193592wrm.70.2021.09.02.08.17.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:17:16 -0700 (PDT)
+ Thu, 02 Sep 2021 08:17:22 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -66,16 +65,18 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 00/24] accel/tcg: Restrict TCGCPUOps::cpu_exec_interrupt() to
+Subject: [PATCH 01/24] target/xtensa: Restrict do_transaction_failed() to
  sysemu
-Date: Thu,  2 Sep 2021 17:16:51 +0200
-Message-Id: <20210902151715.383678-1-f4bug@amsat.org>
+Date: Thu,  2 Sep 2021 17:16:52 +0200
+Message-Id: <20210902151715.383678-2-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
+References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x329.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -96,107 +97,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:17:28 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:17:34 -0000
 
-Hi,=0D
-=0D
-The TCGCPUOps::cpu_exec_interrupt() handler is specific to system=0D
-emulation. This series remove it from user-mode.=0D
-To do so we have to deal with a x86-hack first, then we restrict=0D
-each target handler (one target at a time) and finally we restrict=0D
-the prototype, simplifying cpu_handle_interrupt().=0D
-=0D
-As a bonus we can remove the cpu_get_pic_interrupt() stubs from=0D
-bsd/linux-user.=0D
-=0D
-Please review,=0D
-=0D
-Phil.=0D
-=0D
-Philippe Mathieu-Daud=C3=A9 (24):=0D
-  target/xtensa: Restrict do_transaction_failed() to sysemu=0D
-  target/i386: Restrict sysemu-only fpu_helper helpers=0D
-  target/i386: Simplify TARGET_X86_64 #ifdef'ry=0D
-  accel/tcg: Rename user-mode do_interrupt hack as fake_user_exception=0D
-  accel/tcg: Assert most of cpu_handle_interrupt() is sysemu-specific=0D
-  target/alpha: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/arm: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/avr: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/cris: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/hppa: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/i386: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/m68k: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/microblaze: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/mips: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/nios2: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/openrisc: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/ppc: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/riscv: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/sh4: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/sparc: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/rx: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  target/xtensa: Restrict cpu_exec_interrupt() handler to sysemu=0D
-  accel/tcg: Restrict TCGCPUOps::cpu_exec_interrupt() to sysemu=0D
-  user: Remove cpu_get_pic_interrupt() stubs=0D
-=0D
- include/hw/core/tcg-cpu-ops.h       | 26 ++++++++++++++++----------=0D
- target/alpha/cpu.h                  |  2 +-=0D
- target/arm/cpu.h                    |  3 +--=0D
- target/avr/cpu.h                    |  2 ++=0D
- target/cris/cpu.h                   |  2 +-=0D
- target/hppa/cpu.h                   |  4 ++--=0D
- target/i386/cpu.h                   |  3 +++=0D
- target/i386/tcg/helper-tcg.h        |  2 ++=0D
- target/m68k/cpu.h                   |  2 ++=0D
- target/microblaze/cpu.h             |  2 ++=0D
- target/mips/tcg/tcg-internal.h      |  5 +++--=0D
- target/openrisc/cpu.h               |  5 +++--=0D
- target/ppc/cpu.h                    |  4 ++--=0D
- target/riscv/cpu.h                  |  2 +-=0D
- target/rx/cpu.h                     |  2 ++=0D
- target/sh4/cpu.h                    |  4 ++--=0D
- target/xtensa/cpu.h                 |  2 ++=0D
- accel/tcg/cpu-exec.c                | 14 +++++++++-----=0D
- bsd-user/main.c                     |  7 -------=0D
- linux-user/main.c                   |  7 -------=0D
- target/alpha/cpu.c                  |  2 +-=0D
- target/alpha/helper.c               |  5 ++---=0D
- target/arm/cpu.c                    |  7 +++++--=0D
- target/arm/cpu_tcg.c                |  6 +++---=0D
- target/avr/cpu.c                    |  2 +-=0D
- target/avr/helper.c                 |  2 ++=0D
- target/cris/cpu.c                   |  4 ++--=0D
- target/cris/helper.c                | 17 ++---------------=0D
- target/hppa/cpu.c                   |  2 +-=0D
- target/hppa/int_helper.c            |  7 ++-----=0D
- target/i386/tcg/seg_helper.c        | 14 +++-----------=0D
- target/i386/tcg/tcg-cpu.c           |  8 +++++---=0D
- target/m68k/cpu.c                   |  2 +-=0D
- target/m68k/op_helper.c             | 16 +++-------------=0D
- target/microblaze/cpu.c             |  2 +-=0D
- target/microblaze/helper.c          | 13 ++-----------=0D
- target/mips/cpu.c                   |  2 +-=0D
- target/mips/tcg/exception.c         | 18 ------------------=0D
- target/mips/tcg/sysemu/tlb_helper.c | 18 ++++++++++++++++++=0D
- target/mips/tcg/user/tlb_helper.c   |  5 -----=0D
- target/nios2/cpu.c                  |  5 +++--=0D
- target/openrisc/cpu.c               |  2 +-=0D
- target/openrisc/interrupt.c         |  2 --=0D
- target/ppc/cpu_init.c               |  2 +-=0D
- target/ppc/excp_helper.c            | 21 +++------------------=0D
- target/riscv/cpu.c                  |  2 +-=0D
- target/riscv/cpu_helper.c           |  5 -----=0D
- target/rx/cpu.c                     |  2 +-=0D
- target/rx/helper.c                  |  4 ++++=0D
- target/sh4/cpu.c                    |  2 +-=0D
- target/sh4/helper.c                 |  9 ++-------=0D
- target/sparc/cpu.c                  |  4 +++-=0D
- target/xtensa/cpu.c                 |  2 +-=0D
- target/xtensa/exc_helper.c          |  7 ++-----=0D
- target/openrisc/meson.build         |  6 ++++--=0D
- 55 files changed, 138 insertions(+), 189 deletions(-)=0D
-=0D
--- =0D
-2.31.1=0D
-=0D
+The do_transaction_failed() is restricted to system emulation since
+commit cbc183d2d9f ("cpu: move cc->transaction_failed to tcg_ops").
+
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ target/xtensa/cpu.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+index 2345cb59c79..1e0cb1535ca 100644
+--- a/target/xtensa/cpu.h
++++ b/target/xtensa/cpu.h
+@@ -568,10 +568,12 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                          bool probe, uintptr_t retaddr);
+ void xtensa_cpu_do_interrupt(CPUState *cpu);
+ bool xtensa_cpu_exec_interrupt(CPUState *cpu, int interrupt_request);
++#ifndef CONFIG_USER_ONLY
+ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       unsigned size, MMUAccessType access_type,
+                                       int mmu_idx, MemTxAttrs attrs,
+                                       MemTxResult response, uintptr_t retaddr);
++#endif /* !CONFIG_USER_ONLY */
+ void xtensa_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+ hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void xtensa_count_regs(const XtensaConfig *config,
+-- 
+2.31.1
+
 
