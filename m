@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLoTN-0003mC-Fk
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46946)
+	id 1mLoTQ-0003q3-EU
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 11:17:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47018)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoT3-0003hG-CZ; Thu, 02 Sep 2021 11:17:30 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:52965)
+ id 1mLoTC-0003lL-5t; Thu, 02 Sep 2021 11:17:40 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:38794)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLoT0-0001kX-0W; Thu, 02 Sep 2021 11:17:27 -0400
-Received: by mail-wm1-x333.google.com with SMTP id e26so1539804wmk.2;
- Thu, 02 Sep 2021 08:17:24 -0700 (PDT)
+ id 1mLoTA-0001un-KW; Thu, 02 Sep 2021 11:17:37 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ k5-20020a05600c1c8500b002f76c42214bso1723300wms.3; 
+ Thu, 02 Sep 2021 08:17:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=bzANSLmsGdJwadQ2kXgbZKI1Q8VNrscDKhhidFGsH+0=;
- b=Z9k4vsPonRy5FhjiFYfve2//ax9zYfyyVD5a9Cugem8J8WsROLTUdxZhjQFB3fG7QL
- sF8pK/9U253NoTliZREGwIL5xU/HTdrvfwZATynAdrFDf1Oe+v6ovXnPzIwYG9U1myxB
- T+xcHCUrk19Oie+upTR4GwXVKPit/JG8EJu2v4/Vjp2yguR6XjnRYwoEyparRbJndYQ/
- p43ara3grrooC7fr3CTKdaFEjlBBtgKk2Opczzode5eea7w5PrHD85pJa6PPKyOGYEF0
- 1e/3eV34c+knvvn3gFyAglCLRJ4MKFqF3/QWNxmPX0LfhiJa0kv8uleIl7riSopsOR7F
- f6ow==
+ bh=CsKFO6zpXeyiIJnaYsonUL0fU8Qtt9qHYNbRlJRsUy0=;
+ b=msgoovyFZuYTFvHAVUWUcCjWeKOKX4/fQ6x5iV8uVuCuT5rENjJGT7Fi8gKdKImTio
+ DTpGFYCfw4rll3/rw28+7h/IaCPuko7zVIUcFE0tQsdNOZfJ2wQjzKdS4Xfx4UTWbO+7
+ DGFf/PpopUkXuymVg6YWsO6N3YLJF8uh4vvV+trJgaEzbQGXX/gyiLlggAPNmBngw2tl
+ YLsB/DFcIgycuwYBpuMl9JRZ+k8EZ/6TW42fGwY+XJMvHn4lwe3XKDAaHmIJVqNMN/Bp
+ gAtfXhq/PaIsaRo4z+o2UGnxJeRORTSUr5BKUhFZufBsIeEFGjPyToZ1JIVE+fuT37wj
+ LDBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=bzANSLmsGdJwadQ2kXgbZKI1Q8VNrscDKhhidFGsH+0=;
- b=n4rIgcHV69D5bY8Zo8Kue2aNN8n22EfC6b5YxQ5TkVRNE8T6qMB/ZxKnMZ5Dt3nylG
- 7/jUVjy4Pjd4NsqDOAVNiFOKg5pVsc/My9MoLLnIUsaFPvMZWfZMFxJUaselgYiGdEYn
- wuuPyGcb8qZm1g572759AMgpEr4cNxbOnU6iQ6AyJIV84fdKr47+8mDjR2GhxcWgzU1Q
- BDAxssr/AEArCElUr8bZnoRq0ch1gTzGhbYCP4qkAs6+krxW2QsY+e3U2rBJoikHN2TT
- 0i8a57vqh2WbRoKECwcZG6RrKH1HgYZbSJHicURZmRmuXH0+z/cv/pTZ0rVmnhV8VhUn
- 55Mw==
-X-Gm-Message-State: AOAM533l3FAa7JN8lvuN5n+DtA9PJQPRRiic7TLrMkL8oeWhMS2nBJog
- F4HBsDLO+PUyRz3Yvo1xbL9yFyH8e+A=
-X-Google-Smtp-Source: ABdhPJzMo21Pzl41j9dPeTF/HOgeSp6Vq/rN5gij0WhUptIJSXfvP67peFo+YjUwUaQEAxUKbLSroQ==
-X-Received: by 2002:a7b:c097:: with SMTP id r23mr3761544wmh.114.1630595843307; 
- Thu, 02 Sep 2021 08:17:23 -0700 (PDT)
+ bh=CsKFO6zpXeyiIJnaYsonUL0fU8Qtt9qHYNbRlJRsUy0=;
+ b=AbumzIhjwNmSdAulMKZQB/HEwAfJnoFQZoNGb6J7j4TYxbmExGPeo7PSLGOcE14+Hz
+ nopMgsi4eMMeUDCr+VGVabR1yyLfOQTJc0EeJD4yv8JVkeaFQJ2sUd8i4tbmazbkBMjZ
+ AqUkQ43abcwAYUiek3KO/3TKDzBtPKYiYWV50Ed4fPt5EaU1tuvSRCRG1qO2WlLoIP9Z
+ 8dEmb1HxC68ymI03H5HznmCTSEimarSXf+AcbjAJYy/hMSLdpAzOmZxv6jXDHfNocoEu
+ AtieYpzKV6IPuhepqDOKWOmf00gS1XGcdkVcocZ9TkYc7H3hEcuN2MK20tWMzjgsb8TW
+ PUPw==
+X-Gm-Message-State: AOAM531hnJesAJ+pguc5ZKNHlMTNXe/HSGXtw7/folrLpcYxGpRaj7Vr
+ jBTBTbodcrNN7cx5RbWGSlrh5MJ2644=
+X-Google-Smtp-Source: ABdhPJzg8hVRFyP0FkM7hBwLY6gryRcnsYlqDYRSHpQuo4OZJkYpIQrU140K4ZRlnTTpvOqGl5YOrg==
+X-Received: by 2002:a1c:f709:: with SMTP id v9mr3768889wmh.124.1630595854067; 
+ Thu, 02 Sep 2021 08:17:34 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- u9sm2193592wrm.70.2021.09.02.08.17.21
+ y23sm2023304wmq.30.2021.09.02.08.17.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:17:22 -0700 (PDT)
+ Thu, 02 Sep 2021 08:17:33 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -65,18 +66,17 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
  qemu-ppc@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 01/24] target/xtensa: Restrict do_transaction_failed() to
- sysemu
-Date: Thu,  2 Sep 2021 17:16:52 +0200
-Message-Id: <20210902151715.383678-2-f4bug@amsat.org>
+Subject: [PATCH 03/24] target/i386: Simplify TARGET_X86_64 #ifdef'ry
+Date: Thu,  2 Sep 2021 17:16:54 +0200
+Message-Id: <20210902151715.383678-4-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902151715.383678-1-f4bug@amsat.org>
 References: <20210902151715.383678-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -97,33 +97,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 15:17:34 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 15:17:51 -0000
 
-The do_transaction_failed() is restricted to system emulation since
-commit cbc183d2d9f ("cpu: move cc->transaction_failed to tcg_ops").
+Merge two TARGET_X86_64 consecutive blocks.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- target/xtensa/cpu.h | 2 ++
- 1 file changed, 2 insertions(+)
+ target/i386/tcg/seg_helper.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 2345cb59c79..1e0cb1535ca 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -568,10 +568,12 @@ bool xtensa_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-                          bool probe, uintptr_t retaddr);
- void xtensa_cpu_do_interrupt(CPUState *cpu);
- bool xtensa_cpu_exec_interrupt(CPUState *cpu, int interrupt_request);
-+#ifndef CONFIG_USER_ONLY
- void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
-                                       unsigned size, MMUAccessType access_type,
-                                       int mmu_idx, MemTxAttrs attrs,
-                                       MemTxResult response, uintptr_t retaddr);
-+#endif /* !CONFIG_USER_ONLY */
- void xtensa_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
- hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void xtensa_count_regs(const XtensaConfig *config,
+diff --git a/target/i386/tcg/seg_helper.c b/target/i386/tcg/seg_helper.c
+index 3ed20ca31d7..dee7bef68c6 100644
+--- a/target/i386/tcg/seg_helper.c
++++ b/target/i386/tcg/seg_helper.c
+@@ -929,9 +929,7 @@ static void do_interrupt64(CPUX86State *env, int intno, int is_int,
+                    e2);
+     env->eip = offset;
+ }
+-#endif
+ 
+-#ifdef TARGET_X86_64
+ void helper_sysret(CPUX86State *env, int dflag)
+ {
+     int cpl, selector;
+@@ -984,7 +982,7 @@ void helper_sysret(CPUX86State *env, int dflag)
+                                DESC_W_MASK | DESC_A_MASK);
+     }
+ }
+-#endif
++#endif /* TARGET_X86_64 */
+ 
+ /* real mode interrupt */
+ static void do_interrupt_real(CPUX86State *env, int intno, int is_int,
 -- 
 2.31.1
 
