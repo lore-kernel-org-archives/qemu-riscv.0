@@ -1,49 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLpNs-0007VT-3Z
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:16:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36150)
+	id 1mLpO2-0007rw-OB
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 12:16:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36192)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpNq-0007PN-Gy; Thu, 02 Sep 2021 12:16:10 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336]:41556)
+ id 1mLpNw-0007m9-Kh; Thu, 02 Sep 2021 12:16:16 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:47011)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mLpNo-0000au-Tq; Thu, 02 Sep 2021 12:16:10 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- u15-20020a05600c19cf00b002f6445b8f55so1767143wmq.0; 
- Thu, 02 Sep 2021 09:16:05 -0700 (PDT)
+ id 1mLpNu-0000fb-30; Thu, 02 Sep 2021 12:16:16 -0400
+Received: by mail-wr1-x435.google.com with SMTP id x6so3801007wrv.13;
+ Thu, 02 Sep 2021 09:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=wV14RcZMLIQqRNfbc2l4krY7RhS99j63lxSZtHhlqHE=;
- b=EKqirEKnM17VK0zDlsK2zMeCBYwgcIwGau/nM2ojAXQ1rvdOXkyoVbGuyEtcnzeBcf
- xImFuE98afvxno05q0YdC27nz6NANS7cu771VPDYoClXWYNKBPbXOfx9/ySz5LCrUECJ
- Q4xIJxN/kF3No93cpZwlCIAaJ6XH09BodtAvBDBdkeBdwCBDaphPwkcvpVDIxHiZ6ysU
- O+OUGJNK0KyuMps/0T4ys/RLGMV8UZ8emOYDNmBvg+JTSjUog7qhAQcBWa/t3lzLUf2T
- odXtoH2/j2F/4nd8pGQvQwtB64/pnwk36AxB7fddw33eEJVy5u1yikEgzNZHCoqMgJ3i
- wCuA==
+ bh=P0fp1qqpF59XMbIIHxComfWKKQIg8VIlTwHVvhBN59A=;
+ b=G8+gv7/l02p+3pIOfkKqyIa3SJNJqqucn0S8o/siAkKaxmFM5RO224iTEbB1+wTzyT
+ yH9VCpxFWBr0t0GXhQxQRUuO0CaUa3ZzEf3celJhLqjAbDckl1E6mqaq2dCEttikPZRW
+ NTgh0ED5VO3rDtoACT4pDd4RK9nfKb9VvyIT09l58j9YQUutJPWiW1YUvmfRQD6MaciO
+ hgQld4iTpFhaM+A7V2MEdU+/ZRnuTgXC5fBFAjpnxBcFkFzPQ9ZRGDj/1+tmyCyow8jw
+ rBfrG9A0yoltXZKggfPRhQMqdG2T5CPTN8x3VdAjvEoK7uauTkkWkCFDPZbLzkrywDXE
+ DO1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=wV14RcZMLIQqRNfbc2l4krY7RhS99j63lxSZtHhlqHE=;
- b=obfnCFlA/xBJxSJ93vlT+eyCoKKTthPrYewOZnWObjJmi1w3iBtkBZIYCPjj6h0vGE
- x8PQDi0aa15Jgm+P4NGOFTSH9C9IF4+G9RKwngmhwY8t9JfSCq3pRHGd1w0mwtsdnV58
- dhNRPT08EqhxmYwCbAI1z68v9ctdLL6zvkc5+Mk/oQ6czmFv/t4jO3+JN/2hUPkF5TJ9
- ihYt0abRxemfdri9OtBPdFb6xebcY0bOwR0aF7yfL4va6uIrGFuxZTFvgyERZrIUryHV
- j8SOCZI8RV7qxiGVLSdkcBu3Rg0LsOI9x+qMgx/Yj9GhzK0M/1ZouMCbNxbGd+2qaIhW
- AYzQ==
-X-Gm-Message-State: AOAM530BAsWoqWCdDJSersNw/sjh7TOLxAITXbd3rVz0DzGmIXj2x2wt
- ZhF4oo53jHtbqLiSqb5siU8QuaXdlqI=
-X-Google-Smtp-Source: ABdhPJw7/6UEiBwptJyfAbxmtA0JM7jALL+mTrdaJbBQ6pe56ORuZs2k15EQns1EFPDQ4opAGTbfXw==
-X-Received: by 2002:a05:600c:2101:: with SMTP id
- u1mr4147345wml.45.1630599364755; 
- Thu, 02 Sep 2021 09:16:04 -0700 (PDT)
+ bh=P0fp1qqpF59XMbIIHxComfWKKQIg8VIlTwHVvhBN59A=;
+ b=pmnUdRxMha45efwjXUO/dsKxsr6JCDkIRHNQj8i5k6DeBtqAwDe/KY9soa2ubf1C10
+ Rl+jUCVyGjTOF6f2v99eCpux7OQW32r03/cZmhyQbktwdw7fkfHvk/SJcG1BjMTzZuML
+ G6Y0MksreaRO94P1UCFs1hTmsKZL0gkNUjUhdx3USpHiI3KnnpaRLvQW0k5ciBJOG1Ga
+ gnEasJNNk/RN18hU75lHCYxNTBGs0LiW9ZWr/j3uu09SudHMBWO79N2rLN6sy6PhI7NA
+ lO8rPrpkRae6DIZ9mOIXbQRe1F4YwQBn/jaNq1lcGoZsKrZtEW8dbl1HEY3NwFwlJ8NN
+ nUuA==
+X-Gm-Message-State: AOAM530+5TpOWtjDFn7uCOnkiKxdtULFsxWcU68pii7rjLmpWBS+EoJt
+ W02B5SiPVdJSxxt0xAP1ns9aumg52rE=
+X-Google-Smtp-Source: ABdhPJxqYVZz8Vtdq+1rVuHAugWlbrJscT37rU3tWfkU/lcfKzRuzJ6gBh5u/Yi5SNrMElUTWFem6A==
+X-Received: by 2002:adf:d191:: with SMTP id v17mr4847443wrc.345.1630599370860; 
+ Thu, 02 Sep 2021 09:16:10 -0700 (PDT)
 Received: from x1w.. (163.red-83-52-55.dynamicip.rima-tde.net. [83.52.55.163])
  by smtp.gmail.com with ESMTPSA id
- p5sm2438468wrd.25.2021.09.02.09.16.02
+ l1sm2293844wrb.15.2021.09.02.09.16.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 09:16:04 -0700 (PDT)
+ Thu, 02 Sep 2021 09:16:10 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -80,17 +78,17 @@ Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Colin Xu <colin.xu@intel.com>, Claudio Fontana <cfontana@suse.de>,
  Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
  Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
-Subject: [PATCH v3 03/30] hw/core: Un-inline cpu_has_work()
-Date: Thu,  2 Sep 2021 18:15:16 +0200
-Message-Id: <20210902161543.417092-4-f4bug@amsat.org>
+Subject: [PATCH v3 04/30] sysemu: Introduce AccelOpsClass::has_work()
+Date: Thu,  2 Sep 2021 18:15:17 +0200
+Message-Id: <20210902161543.417092-5-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210902161543.417092-1-f4bug@amsat.org>
 References: <20210902161543.417092-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -111,55 +109,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 16:16:11 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 16:16:18 -0000
 
-We want to make cpu_has_work() per-accelerator. Only declare its
-prototype and move its definition to softmmu/cpus.c.
+Introduce an accelerator-specific has_work() handler.
+Eventually call it from cpu_has_work().
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/core/cpu.h | 8 +-------
- softmmu/cpus.c        | 8 ++++++++
- 2 files changed, 9 insertions(+), 7 deletions(-)
+ include/sysemu/accel-ops.h | 5 +++++
+ softmmu/cpus.c             | 3 +++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 2bd563e221f..e2dd171a13f 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -546,13 +546,7 @@ void cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-  *
-  * Returns: %true if the CPU has work, %false otherwise.
-  */
--static inline bool cpu_has_work(CPUState *cpu)
--{
--    CPUClass *cc = CPU_GET_CLASS(cpu);
--
--    g_assert(cc->has_work);
--    return cc->has_work(cpu);
--}
-+bool cpu_has_work(CPUState *cpu);
+diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
+index 032f6979d76..de83f095f20 100644
+--- a/include/sysemu/accel-ops.h
++++ b/include/sysemu/accel-ops.h
+@@ -31,6 +31,11 @@ struct AccelOpsClass {
+     void (*create_vcpu_thread)(CPUState *cpu); /* MANDATORY NON-NULL */
+     void (*kick_vcpu_thread)(CPUState *cpu);
  
- /**
-  * cpu_get_phys_page_attrs_debug:
++    /**
++     * @has_work: Callback for checking if there is work to do.
++     */
++    bool (*has_work)(CPUState *cpu);
++
+     void (*synchronize_post_reset)(CPUState *cpu);
+     void (*synchronize_post_init)(CPUState *cpu);
+     void (*synchronize_state)(CPUState *cpu);
 diff --git a/softmmu/cpus.c b/softmmu/cpus.c
-index 071085f840b..7e2cb2c571b 100644
+index 7e2cb2c571b..2a61dfd6287 100644
 --- a/softmmu/cpus.c
 +++ b/softmmu/cpus.c
-@@ -251,6 +251,14 @@ void cpu_interrupt(CPUState *cpu, int mask)
-     }
- }
- 
-+bool cpu_has_work(CPUState *cpu)
-+{
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-+    g_assert(cc->has_work);
-+    return cc->has_work(cpu);
-+}
-+
- static int do_vm_stop(RunState state, bool send_stop)
+@@ -255,6 +255,9 @@ bool cpu_has_work(CPUState *cpu)
  {
-     int ret = 0;
+     CPUClass *cc = CPU_GET_CLASS(cpu);
+ 
++    if (cpus_accel->has_work) {
++        return cpus_accel->has_work(cpu);
++    }
+     g_assert(cc->has_work);
+     return cc->has_work(cpu);
+ }
 -- 
 2.31.1
 
