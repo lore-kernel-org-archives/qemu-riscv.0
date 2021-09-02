@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLtB0-0001Bg-Eu
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 16:19:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40044)
+	id 1mLtB2-0001Do-He
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 16:19:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39418)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1mLt8r-00046X-Sh
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 16:16:58 -0400
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d]:36492)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1mLt6Q-0000VD-Ot
+ for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 16:14:26 -0400
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33]:35585)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1mLt8p-0007Ix-W4
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 16:16:57 -0400
-Received: by mail-ua1-x92d.google.com with SMTP id x23so1585623uav.3
- for <qemu-riscv@nongnu.org>; Thu, 02 Sep 2021 13:16:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1mLt6O-00056j-EC
+ for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 16:14:26 -0400
+Received: by mail-vs1-xe33.google.com with SMTP id p14so2620423vsm.2
+ for <qemu-riscv@nongnu.org>; Thu, 02 Sep 2021 13:14:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=bsdimp-com.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PPnlERc7u6MmKGlf0skuXfDJNggzkZn3z7puXsTnSGI=;
- b=gXFelTolWhXcGwOUQ8qd4G5wX34KjIcx/HGCdyzFHXafkuzeX148ceKMgpiDczKY9s
- a2ki2Z2b5yKfxZWrnBEFsNOk2tMNCIGTuxgJz2E2FouW/iYHTMiyuIlj1CcivGs8AjO5
- vz9b23EbkqCDfvEjOdaLATg2kumJADmlW2Xzqvtd5tkh5slougPyKrUneZfrJM1bW6Ge
- 1K8jLiu7C9HVGbV46SnMby8C7TI+KI5kbBkOx9RG3IZ1xDdiU3T/Txid4m4D18WhMQ00
- 2dTQ3ZIge8CS3eNu4ZeZQ3jrSSQ7sFdO/vmHLTaeTMxDSUShpkUeFZocZ3KuoqcNJVtY
- aGCg==
+ :cc; bh=BRrg+j6QaFlPIv+nFHKyzv4EuLGFfWoBrJtJQBerUOA=;
+ b=AQ62zMGIe0eE2x9iMkuvuKHFOefq6RmwWI8gw6Rit0WZdZH8vaR8nRpso9sONHN1I7
+ 0QfL7Pm66TsAEVldPgg7gKqPFLVJujYS8mMQUgI93n2/hhQKbaMfHO0Qv4DC58bMPR0L
+ vHMaa4HC1v3TBtpMIFGT3vwja3jjFlb6MQPn6toNqTxfJz5QT5z2hSaGC9Y981JCy0Ey
+ NX/R/9jW2mz9df4sYY/sntqKpkQK8nS/X8U1Ng2zue4s6hcs4VQ4hrGaoOoP1gVfnoJb
+ 4jnYteac2ABpAfR8VEEgzCCNoYtpjSYsAPjYc6olmuUOr7HX9v66wuIYp5BZvgaueOnc
+ d8qA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=PPnlERc7u6MmKGlf0skuXfDJNggzkZn3z7puXsTnSGI=;
- b=MnzcdbP9aP2AqNavS3RgquE1hUC3FpFxtQObsgDG7C8kwhrOao2KK24FRri0TKSjT/
- bntb6XyUwjAqgswqcry9MJJLPd68B9x5dNyWYVpmGMLClAOfntsSlJJj17fRQ4wg4Zzn
- WATtI1bArd4lBDhjHMbiWXhJsu973ccQZ13oyppgQmJ6VRaUORO1ZtTrk1VZ1+n6yRIi
- PaNFMwppA4lm1Txmz6WrWBW6phczw8op8dLLxApd0XSig5owaM1WAiz52QpUejIhKRBh
- luCa7Vy4wpoh8ZuKKRBJUzkjv2m+QbdeNcrnamQahd+rnt0DFpkfU4HquWm0LKzCeL0B
- zhYg==
-X-Gm-Message-State: AOAM530rgi4QwebDhjcMP/MbEutF7GZ50qE77lvIAFpIDXyXJhlM6DwE
- jWmoXVxEYrD4z2bhzmd6X2tYMxBRW5pH9rFDoU2lfQ==
-X-Google-Smtp-Source: ABdhPJynXdHCd8eJG54f42eLbPaOcq95rPiXaffj04QawshNpG98LF9S9cKxHtovEsQOEpoM4iSJy+rjGXJyjS4Cvh4=
-X-Received: by 2002:ab0:3413:: with SMTP id z19mr59626uap.39.1630613814846;
- Thu, 02 Sep 2021 13:16:54 -0700 (PDT)
+ bh=BRrg+j6QaFlPIv+nFHKyzv4EuLGFfWoBrJtJQBerUOA=;
+ b=uRw0IWe0rasawzsZX1QH7pkTiilsb4xNFzj9sDny1hhjaxRtqa8RFOnfgyj6qXj82d
+ cpZjWQxHR9DsCmxJl8ks+kKQeY8koFzXNRw+lI+A7XoE7/6PQtHWR0kOjwOroIUo/Gk2
+ 628JDzyFFWQv4oXejSfDquRp/kRuaU4r5ohW7t7GSnG6YhKKM7AK36R+M7FjfZZ0BBk7
+ P8hjEDZukIcXsBzDwjhPhohLZX6P/vU8t1Nb0eZwesBBEzEON9lhmFFZtydwkX7JAAs/
+ RINXlCYEnBYyBGPQK4a1x+O+C4ExQLTQMa2hB/xJmtdO3Rm14U3cRmRkJ01MvwazNFh5
+ ZpyQ==
+X-Gm-Message-State: AOAM530Y/SiqQepkfJAt+7fymTFI0uadSDQXSDhO1rz301j9dN/6r02s
+ j/oJ2hwpWkVxaPTXCC3fQFmPMyavn6kB4SVcPAHXbg==
+X-Google-Smtp-Source: ABdhPJzpyp+gpw72fkLM9kt0rIbF/Cz6NAcQKxVp7RqCOFmso+/X1D1IE/faNY4Iwh3WeF7zQifQbp/0I9r63BMyrkQ=
+X-Received: by 2002:a67:2dc6:: with SMTP id t189mr3875399vst.49.1630613663130; 
+ Thu, 02 Sep 2021 13:14:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210902151715.383678-1-f4bug@amsat.org>
- <20210902151715.383678-9-f4bug@amsat.org>
-In-Reply-To: <20210902151715.383678-9-f4bug@amsat.org>
+ <20210902151715.383678-5-f4bug@amsat.org>
+In-Reply-To: <20210902151715.383678-5-f4bug@amsat.org>
 From: Warner Losh <imp@bsdimp.com>
-Date: Thu, 2 Sep 2021 14:16:44 -0600
-Message-ID: <CANCZdfqc+Y6=SwM850qbTKfBxJMFm8ca5NvyVimSbceVTZ2nkw@mail.gmail.com>
-Subject: Re: [PATCH 08/24] target/avr: Restrict cpu_exec_interrupt() handler
- to sysemu
+Date: Thu, 2 Sep 2021 14:14:12 -0600
+Message-ID: <CANCZdfqatDMjqzy86AmvZSd9WEqDuXuiapcj1kJxWgfifKo-SQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 04/24] accel/tcg: Rename user-mode do_interrupt hack
+ as fake_user_exception
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Yoshinori Sato <ysato@users.sourceforge.jp>, 
@@ -65,17 +65,17 @@ Cc: QEMU Developers <qemu-devel@nongnu.org>,
  Laurent Vivier <laurent@vivier.eu>, qemu-ppc <qemu-ppc@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Alistair Francis <alistair.francis@wdc.com>
-Content-Type: multipart/alternative; boundary="00000000000033378f05cb08dd96"
-Received-SPF: none client-ip=2607:f8b0:4864:20::92d;
- envelope-from=wlosh@bsdimp.com; helo=mail-ua1-x92d.google.com
+Content-Type: multipart/alternative; boundary="0000000000002839f105cb08d4b4"
+Received-SPF: none client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=wlosh@bsdimp.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 02 Sep 2021 16:19:05 -0400
+X-Mailman-Approved-At: Thu, 02 Sep 2021 16:19:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,170 +87,254 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 20:16:59 -0000
+X-List-Received-Date: Thu, 02 Sep 2021 20:14:27 -0000
 
---00000000000033378f05cb08dd96
+--0000000000002839f105cb08d4b4
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 2, 2021 at 9:18 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
+On Thu, Sep 2, 2021 at 9:17 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org=
 >
 wrote:
 
-> Restrict cpu_exec_interrupt() and its callees to sysemu.
+> do_interrupt() is sysemu specific. However due to some X86
+> specific hack, it is also used in user-mode emulation, which
+> is why it couldn't be restricted to CONFIG_SOFTMMU (see the
+> comment around added in commit 78271684719: "cpu: tcg_ops:
+> move to tcg-cpu-ops.h, keep a pointer in CPUClass").
+> Keep the hack but rename the handler as fake_user_exception()
+> and restrict do_interrupt() to sysemu.
 >
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > ---
->  target/avr/cpu.h    | 2 ++
->  target/avr/cpu.c    | 2 +-
->  target/avr/helper.c | 2 ++
->  3 files changed, 5 insertions(+), 1 deletion(-)
+> RFC: Any better name / idea here?
 >
+
+Maybe user_mode_exception()? but I'm not sure that's better...
+
+
+> ---
+>  include/hw/core/tcg-cpu-ops.h | 22 ++++++++++++++--------
+>  accel/tcg/cpu-exec.c          |  4 ++--
+>  target/i386/tcg/tcg-cpu.c     |  6 ++++--
+>  3 files changed, 20 insertions(+), 12 deletions(-)
+>
+
 
 Reviewed-by: Warner Losh <imp@bsdimp.com>
 
 
-> diff --git a/target/avr/cpu.h b/target/avr/cpu.h
-> index 93e3faa0a98..6f8c0ffd770 100644
-> --- a/target/avr/cpu.h
-> +++ b/target/avr/cpu.h
-> @@ -156,8 +156,10 @@ typedef struct AVRCPU {
+
+> diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.=
+h
+> index eab27d0c030..600f0349659 100644
+> --- a/include/hw/core/tcg-cpu-ops.h
+> +++ b/include/hw/core/tcg-cpu-ops.h
+> @@ -37,14 +37,6 @@ struct TCGCPUOps {
+>      void (*cpu_exec_exit)(CPUState *cpu);
+>      /** @cpu_exec_interrupt: Callback for processing interrupts in
+> cpu_exec */
+>      bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt_request);
+> -    /**
+> -     * @do_interrupt: Callback for interrupt handling.
+> -     *
+> -     * note that this is in general SOFTMMU only, but it actually isn't
+> -     * because of an x86 hack (accel/tcg/cpu-exec.c), so we cannot put i=
+t
+> -     * in the SOFTMMU section in general.
+> -     */
+> -    void (*do_interrupt)(CPUState *cpu);
+>      /**
+>       * @tlb_fill: Handle a softmmu tlb miss or user-only address fault
+>       *
+> @@ -61,6 +53,20 @@ struct TCGCPUOps {
+>      void (*debug_excp_handler)(CPUState *cpu);
 >
->  extern const struct VMStateDescription vms_avr_cpu;
->
-> +#ifndef CONFIG_USER_ONLY
->  void avr_cpu_do_interrupt(CPUState *cpu);
->  bool avr_cpu_exec_interrupt(CPUState *cpu, int int_req);
-> +#endif /* !CONFIG_USER_ONLY */
->  hwaddr avr_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  int avr_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int avr_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-> index ea14175ca55..e9fa54c9777 100644
-> --- a/target/avr/cpu.c
-> +++ b/target/avr/cpu.c
-> @@ -195,10 +195,10 @@ static const struct SysemuCPUOps avr_sysemu_ops =3D=
- {
->  static const struct TCGCPUOps avr_tcg_ops =3D {
->      .initialize =3D avr_cpu_tcg_init,
->      .synchronize_from_tb =3D avr_cpu_synchronize_from_tb,
-> -    .cpu_exec_interrupt =3D avr_cpu_exec_interrupt,
->      .tlb_fill =3D avr_cpu_tlb_fill,
->
->  #ifndef CONFIG_USER_ONLY
-> +    .cpu_exec_interrupt =3D avr_cpu_exec_interrupt,
->      .do_interrupt =3D avr_cpu_do_interrupt,
+>  #ifdef NEED_CPU_H
+> +#if defined(CONFIG_USER_ONLY) && defined(TARGET_I386)
+> +    /**
+> +     * @fake_user_exception: Callback for 'fake exception' handling.
+> +     *
+> +     * Simulate 'fake exception' which will be handled outside the
+> +     * cpu execution loop (hack for x86 user mode).
+> +     */
+> +    void (*fake_user_exception)(CPUState *cpu);
+> +#else
+> +    /**
+> +     * @do_interrupt: Callback for interrupt handling.
+> +     */
+> +    void (*do_interrupt)(CPUState *cpu);
+> +#endif /* !CONFIG_USER_ONLY || !TARGET_I386 */
+>  #ifdef CONFIG_SOFTMMU
+>      /**
+>       * @do_transaction_failed: Callback for handling failed memory
+> transactions
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index e5c0ccd1a2a..3e387c944c5 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -651,8 +651,8 @@ static inline bool cpu_handle_exception(CPUState *cpu=
+,
+> int *ret)
+>             loop */
+>  #if defined(TARGET_I386)
+>          CPUClass *cc =3D CPU_GET_CLASS(cpu);
+> -        cc->tcg_ops->do_interrupt(cpu);
+> -#endif
+> +        cc->tcg_ops->fake_user_exception(cpu);
+> +#endif /* TARGET_I386 */
+>          *ret =3D cpu->exception_index;
+>          cpu->exception_index =3D -1;
+>          return true;
+> diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
+> index 93a79a57415..dce800a8953 100644
+> --- a/target/i386/tcg/tcg-cpu.c
+> +++ b/target/i386/tcg/tcg-cpu.c
+> @@ -73,9 +73,11 @@ static const struct TCGCPUOps x86_tcg_ops =3D {
+>      .cpu_exec_enter =3D x86_cpu_exec_enter,
+>      .cpu_exec_exit =3D x86_cpu_exec_exit,
+>      .cpu_exec_interrupt =3D x86_cpu_exec_interrupt,
+> -    .do_interrupt =3D x86_cpu_do_interrupt,
+>      .tlb_fill =3D x86_cpu_tlb_fill,
+> -#ifndef CONFIG_USER_ONLY
+> +#ifdef CONFIG_USER_ONLY
+> +    .fake_user_exception =3D x86_cpu_do_interrupt,
+> +#else
+> +    .do_interrupt =3D x86_cpu_do_interrupt,
+>      .debug_excp_handler =3D breakpoint_handler,
+>      .debug_check_breakpoint =3D x86_debug_check_breakpoint,
 >  #endif /* !CONFIG_USER_ONLY */
->  };
-> diff --git a/target/avr/helper.c b/target/avr/helper.c
-> index 981c29da453..84e366d94a3 100644
-> --- a/target/avr/helper.c
-> +++ b/target/avr/helper.c
-> @@ -25,6 +25,7 @@
->  #include "exec/address-spaces.h"
->  #include "exec/helper-proto.h"
->
-> +#ifndef CONFIG_USER_ONLY
->  bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->  {
->      bool ret =3D false;
-> @@ -91,6 +92,7 @@ void avr_cpu_do_interrupt(CPUState *cs)
->
->      cs->exception_index =3D -1;
->  }
-> +#endif /* !CONFIG_USER_ONLY */
->
->  int avr_cpu_memory_rw_debug(CPUState *cs, vaddr addr, uint8_t *buf,
->                              int len, bool is_write)
 > --
 > 2.31.1
 >
 >
 
---00000000000033378f05cb08dd96
+--0000000000002839f105cb08d4b4
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 2, 2021 at 9:18 AM Philip=
+<div dir=3D"ltr" class=3D"gmail_attr">On Thu, Sep 2, 2021 at 9:17 AM Philip=
 pe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug@amsat.org">f4bug@amsat.or=
 g</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
 :0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
->Restrict cpu_exec_interrupt() and its callees to sysemu.<br>
+>do_interrupt() is sysemu specific. However due to some X86<br>
+specific hack, it is also used in user-mode emulation, which<br>
+is why it couldn&#39;t be restricted to CONFIG_SOFTMMU (see the<br>
+comment around added in commit 78271684719: &quot;cpu: tcg_ops:<br>
+move to tcg-cpu-ops.h, keep a pointer in CPUClass&quot;).<br>
+Keep the hack but rename the handler as fake_user_exception()<br>
+and restrict do_interrupt() to sysemu.<br>
 <br>
 Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug@amsa=
 t.org" target=3D"_blank">f4bug@amsat.org</a>&gt;<br>
 ---<br>
-=C2=A0target/avr/cpu.h=C2=A0 =C2=A0 | 2 ++<br>
-=C2=A0target/avr/cpu.c=C2=A0 =C2=A0 | 2 +-<br>
-=C2=A0target/avr/helper.c | 2 ++<br>
-=C2=A03 files changed, 5 insertions(+), 1 deletion(-)<br></blockquote><div>=
-<br></div><div>Reviewed-by: Warner Losh &lt;<a href=3D"mailto:imp@bsdimp.co=
-m" target=3D"_blank">imp@bsdimp.com</a>&gt;</div><div class=3D"gmail-yj6qo =
-gmail-ajU" style=3D"outline:none;padding:10px 0px;width:22px;margin:2px 0px=
- 0px">=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-diff --git a/target/avr/cpu.h b/target/avr/cpu.h<br>
-index 93e3faa0a98..6f8c0ffd770 100644<br>
---- a/target/avr/cpu.h<br>
-+++ b/target/avr/cpu.h<br>
-@@ -156,8 +156,10 @@ typedef struct AVRCPU {<br>
+RFC: Any better name / idea here?<br></blockquote><div><br></div><div>Maybe=
+ user_mode_exception()? but I&#39;m not sure that&#39;s better...</div><div=
+>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+---<br>
+=C2=A0include/hw/core/tcg-cpu-ops.h | 22 ++++++++++++++--------<br>
+=C2=A0accel/tcg/cpu-exec.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 4 ++--=
 <br>
-=C2=A0extern const struct VMStateDescription vms_avr_cpu;<br>
+=C2=A0target/i386/tcg/tcg-cpu.c=C2=A0 =C2=A0 =C2=A0|=C2=A0 6 ++++--<br>
+=C2=A03 files changed, 20 insertions(+), 12 deletions(-)<br></blockquote><d=
+iv><br></div><div><br></div><div><div>Reviewed-by: Warner Losh &lt;<a href=
+=3D"mailto:imp@bsdimp.com" target=3D"_blank">imp@bsdimp.com</a>&gt;</div><d=
+iv class=3D"gmail-yj6qo gmail-ajU" style=3D"outline:none;padding:10px 0px;w=
+idth:22px;margin:2px 0px 0px"><br class=3D"gmail-Apple-interchange-newline"=
+></div></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
+1ex">
+diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h<=
+br>
+index eab27d0c030..600f0349659 100644<br>
+--- a/include/hw/core/tcg-cpu-ops.h<br>
++++ b/include/hw/core/tcg-cpu-ops.h<br>
+@@ -37,14 +37,6 @@ struct TCGCPUOps {<br>
+=C2=A0 =C2=A0 =C2=A0void (*cpu_exec_exit)(CPUState *cpu);<br>
+=C2=A0 =C2=A0 =C2=A0/** @cpu_exec_interrupt: Callback for processing interr=
+upts in cpu_exec */<br>
+=C2=A0 =C2=A0 =C2=A0bool (*cpu_exec_interrupt)(CPUState *cpu, int interrupt=
+_request);<br>
+-=C2=A0 =C2=A0 /**<br>
+-=C2=A0 =C2=A0 =C2=A0* @do_interrupt: Callback for interrupt handling.<br>
+-=C2=A0 =C2=A0 =C2=A0*<br>
+-=C2=A0 =C2=A0 =C2=A0* note that this is in general SOFTMMU only, but it ac=
+tually isn&#39;t<br>
+-=C2=A0 =C2=A0 =C2=A0* because of an x86 hack (accel/tcg/cpu-exec.c), so we=
+ cannot put it<br>
+-=C2=A0 =C2=A0 =C2=A0* in the SOFTMMU section in general.<br>
+-=C2=A0 =C2=A0 =C2=A0*/<br>
+-=C2=A0 =C2=A0 void (*do_interrupt)(CPUState *cpu);<br>
+=C2=A0 =C2=A0 =C2=A0/**<br>
+=C2=A0 =C2=A0 =C2=A0 * @tlb_fill: Handle a softmmu tlb miss or user-only ad=
+dress fault<br>
+=C2=A0 =C2=A0 =C2=A0 *<br>
+@@ -61,6 +53,20 @@ struct TCGCPUOps {<br>
+=C2=A0 =C2=A0 =C2=A0void (*debug_excp_handler)(CPUState *cpu);<br>
 <br>
-+#ifndef CONFIG_USER_ONLY<br>
-=C2=A0void avr_cpu_do_interrupt(CPUState *cpu);<br>
-=C2=A0bool avr_cpu_exec_interrupt(CPUState *cpu, int int_req);<br>
-+#endif /* !CONFIG_USER_ONLY */<br>
-=C2=A0hwaddr avr_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);<br>
-=C2=A0int avr_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg=
-);<br>
-=C2=A0int avr_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);=
-<br>
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c<br>
-index ea14175ca55..e9fa54c9777 100644<br>
---- a/target/avr/cpu.c<br>
-+++ b/target/avr/cpu.c<br>
-@@ -195,10 +195,10 @@ static const struct SysemuCPUOps avr_sysemu_ops =3D {=
-<br>
-=C2=A0static const struct TCGCPUOps avr_tcg_ops =3D {<br>
-=C2=A0 =C2=A0 =C2=A0.initialize =3D avr_cpu_tcg_init,<br>
-=C2=A0 =C2=A0 =C2=A0.synchronize_from_tb =3D avr_cpu_synchronize_from_tb,<b=
+=C2=A0#ifdef NEED_CPU_H<br>
++#if defined(CONFIG_USER_ONLY) &amp;&amp; defined(TARGET_I386)<br>
++=C2=A0 =C2=A0 /**<br>
++=C2=A0 =C2=A0 =C2=A0* @fake_user_exception: Callback for &#39;fake excepti=
+on&#39; handling.<br>
++=C2=A0 =C2=A0 =C2=A0*<br>
++=C2=A0 =C2=A0 =C2=A0* Simulate &#39;fake exception&#39; which will be hand=
+led outside the<br>
++=C2=A0 =C2=A0 =C2=A0* cpu execution loop (hack for x86 user mode).<br>
++=C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 void (*fake_user_exception)(CPUState *cpu);<br>
++#else<br>
++=C2=A0 =C2=A0 /**<br>
++=C2=A0 =C2=A0 =C2=A0* @do_interrupt: Callback for interrupt handling.<br>
++=C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 void (*do_interrupt)(CPUState *cpu);<br>
++#endif /* !CONFIG_USER_ONLY || !TARGET_I386 */<br>
+=C2=A0#ifdef CONFIG_SOFTMMU<br>
+=C2=A0 =C2=A0 =C2=A0/**<br>
+=C2=A0 =C2=A0 =C2=A0 * @do_transaction_failed: Callback for handling failed=
+ memory transactions<br>
+diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c<br>
+index e5c0ccd1a2a..3e387c944c5 100644<br>
+--- a/accel/tcg/cpu-exec.c<br>
++++ b/accel/tcg/cpu-exec.c<br>
+@@ -651,8 +651,8 @@ static inline bool cpu_handle_exception(CPUState *cpu, =
+int *ret)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 loop */<br>
+=C2=A0#if defined(TARGET_I386)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0CPUClass *cc =3D CPU_GET_CLASS(cpu);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 cc-&gt;tcg_ops-&gt;do_interrupt(cpu);<br>
+-#endif<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 cc-&gt;tcg_ops-&gt;fake_user_exception(cpu);<b=
 r>
--=C2=A0 =C2=A0 .cpu_exec_interrupt =3D avr_cpu_exec_interrupt,<br>
-=C2=A0 =C2=A0 =C2=A0.tlb_fill =3D avr_cpu_tlb_fill,<br>
++#endif /* TARGET_I386 */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*ret =3D cpu-&gt;exception_index;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu-&gt;exception_index =3D -1;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return true;<br>
+diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c<br>
+index 93a79a57415..dce800a8953 100644<br>
+--- a/target/i386/tcg/tcg-cpu.c<br>
++++ b/target/i386/tcg/tcg-cpu.c<br>
+@@ -73,9 +73,11 @@ static const struct TCGCPUOps x86_tcg_ops =3D {<br>
+=C2=A0 =C2=A0 =C2=A0.cpu_exec_enter =3D x86_cpu_exec_enter,<br>
+=C2=A0 =C2=A0 =C2=A0.cpu_exec_exit =3D x86_cpu_exec_exit,<br>
+=C2=A0 =C2=A0 =C2=A0.cpu_exec_interrupt =3D x86_cpu_exec_interrupt,<br>
+-=C2=A0 =C2=A0 .do_interrupt =3D x86_cpu_do_interrupt,<br>
+=C2=A0 =C2=A0 =C2=A0.tlb_fill =3D x86_cpu_tlb_fill,<br>
+-#ifndef CONFIG_USER_ONLY<br>
++#ifdef CONFIG_USER_ONLY<br>
++=C2=A0 =C2=A0 .fake_user_exception =3D x86_cpu_do_interrupt,<br>
++#else<br>
++=C2=A0 =C2=A0 .do_interrupt =3D x86_cpu_do_interrupt,<br>
+=C2=A0 =C2=A0 =C2=A0.debug_excp_handler =3D breakpoint_handler,<br>
+=C2=A0 =C2=A0 =C2=A0.debug_check_breakpoint =3D x86_debug_check_breakpoint,=
 <br>
-=C2=A0#ifndef CONFIG_USER_ONLY<br>
-+=C2=A0 =C2=A0 .cpu_exec_interrupt =3D avr_cpu_exec_interrupt,<br>
-=C2=A0 =C2=A0 =C2=A0.do_interrupt =3D avr_cpu_do_interrupt,<br>
 =C2=A0#endif /* !CONFIG_USER_ONLY */<br>
-=C2=A0};<br>
-diff --git a/target/avr/helper.c b/target/avr/helper.c<br>
-index 981c29da453..84e366d94a3 100644<br>
---- a/target/avr/helper.c<br>
-+++ b/target/avr/helper.c<br>
-@@ -25,6 +25,7 @@<br>
-=C2=A0#include &quot;exec/address-spaces.h&quot;<br>
-=C2=A0#include &quot;exec/helper-proto.h&quot;<br>
-<br>
-+#ifndef CONFIG_USER_ONLY<br>
-=C2=A0bool avr_cpu_exec_interrupt(CPUState *cs, int interrupt_request)<br>
-=C2=A0{<br>
-=C2=A0 =C2=A0 =C2=A0bool ret =3D false;<br>
-@@ -91,6 +92,7 @@ void avr_cpu_do_interrupt(CPUState *cs)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0cs-&gt;exception_index =3D -1;<br>
-=C2=A0}<br>
-+#endif /* !CONFIG_USER_ONLY */<br>
-<br>
-=C2=A0int avr_cpu_memory_rw_debug(CPUState *cs, vaddr addr, uint8_t *buf,<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int len, bool is_write)<br>
 -- <br>
 2.31.1<br>
 <br>
 </blockquote></div></div>
 
---00000000000033378f05cb08dd96--
+--0000000000002839f105cb08d4b4--
 
