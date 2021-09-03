@@ -1,64 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mM7Gy-0006Eh-Ql
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 07:22:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47964)
+	id 1mMCcZ-0005Rt-7Y
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 13:04:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44074)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mM7Gs-0006B6-5S; Fri, 03 Sep 2021 07:22:12 -0400
-Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:43591)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mMCcX-0005Kz-Ty
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 13:04:53 -0400
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:33542)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mM7Gq-0000m6-FC; Fri, 03 Sep 2021 07:22:09 -0400
-Received: by mail-yb1-xb2f.google.com with SMTP id c6so9442021ybm.10;
- Fri, 03 Sep 2021 04:22:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bdc/aer7CnHAZL6SZ9ZTPxe+DW7b/QwSSaUzlUawc48=;
- b=dZ6rl9EAnFukbeQOriYeCMShMdD2Zj9hUjjupbjj64wMBEZrTYqjRqyFU0g5F2IZsp
- ZQf3I8u5tEhQMyvkhhWDIH+W3qGuY+659+3qaViWF0dsqAgaKkpnvWmjhLmJsfCTtAU1
- 7VCefQcpfQ0cNjgjmdJ/TPbRBqirWFBXwZA0YgJk92djUE+eFHj90TJAJJaA0QWV6hmS
- i7ChR4MWogqYZHaLiIHry/AVNnzQLbY2IP0N+u7SEcUcyTXWar0uWRuAmIx8NimaLdu4
- yCvzvnLsGNoakqeFDcKn8i6lFJIlGwmwgCvF9wyZKPjz+okIxTquqrPHXxzBeIsKLwkP
- 1HXQ==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mMCcQ-0007qb-9F
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 13:04:48 -0400
+Received: by mail-wr1-x432.google.com with SMTP id b10so9172598wru.0
+ for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 10:04:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=aCvVztgefZqw2zoWblNqQjaMz2QZeaFdKupDkAe/l6U=;
+ b=sqXcm8R36EJGl4fhTxzVWZhD4rmPCoPVAh/bkgcgXNZKcRnYq3RQYfGZzIqOQLpw+O
+ gGJ+MiT4/z/iDrU5NnVAWjj/6V2egyF42O72gKjHE4aAmNohozTogltlVG7VknCFKgq/
+ CimcyLmyfOy7r+rxLOZJY1HwKtZCDUOlRfw5mK5j5T7XzW+ogJTiz8A/iDHuTU6CUTx9
+ 7XiWRuMXsCz+owAb6wocRfWqWl5kC98hwQ41wv96OwjTnrZk2K5z/XXWe6i7HgfkITJa
+ tWcCxn5zuPiJg+OU4fulG6seQC84niT8CA73dZ3/jp7ZAZjxvjbLcNxVVNLQynNYOwiH
+ Wh+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=bdc/aer7CnHAZL6SZ9ZTPxe+DW7b/QwSSaUzlUawc48=;
- b=lRYbPmkpj7nD6Tn01WkhN9nEW2A/QA+6OdKhGC3TdTdEb51uXaPM0TmI5sax/gEHUk
- jIBJtzl+zva9fP2mQ5tNr5/OzTeVtmWfZ9saGtVC1LNgFXrQNL/x1T6ADa5xRlGLcNfl
- IQPECOTAzj4xNF9S/zTPrPR/3C+6qVfAKf+Y6ZOqS1FoQ7JtgTmqLeZnRS7foS5lwmYm
- QnWer8zSx+UZRLAFVRCpXHLZ63OcE9CqcCAnbaibwI4JivSrRMnWZD5dWpeqsPH3bqHL
- RuR0s1yJUzXk1bYqD8O0m+CvHm90BpqVBt2U3w1eZlh8UQ94j8FiuYHZWuukL2i2gmCw
- XevQ==
-X-Gm-Message-State: AOAM532etFbUyX/gwMkzwefZ9qPcg/FNkvIyHW2WQ8U/yEmMwlyD/big
- Y8XXO69lHFJu4xZXBOJ30C1TMqkNKMtAeVDzR/8=
-X-Google-Smtp-Source: ABdhPJz5taiTiyTXUY0UjnKaFlDFFx+HGf7FbPg2OqV4J0Wo49SPZmj0VuZlBWaahqPKKGUfMsg2bCnl3aNlHY67hVc=
-X-Received: by 2002:a25:80d4:: with SMTP id c20mr3990284ybm.345.1630668126232; 
- Fri, 03 Sep 2021 04:22:06 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=aCvVztgefZqw2zoWblNqQjaMz2QZeaFdKupDkAe/l6U=;
+ b=Ha/MpKTXpuG6hUWqDh+UAmJh962B0tZEX8VaTNq+qNg7W8f0pRId60h5cBa5QKzlwM
+ o/3okDiIBiN/QsSnq7CXCpCNfxwZkl8mU0JJRu+nv3Wxlje9OyLFyHsCXJW3Aw4zNdur
+ fHNZ4SACOIDcAOJykbi9NebjRse0vmSVwcdUUG0E4RaqmRW6FecJcAGr5jurBAK+6XOe
+ YQGapY3dehxP086WBUiaiTg5c2QgUQL3sZ1/iswCuDlt0VDgANnHAyOoMcLXdIZwLN76
+ aFxTei3WhI++uV541N7RPMgBSpO8x5GZty0xu9LzrD4x/U2Tdjsxz3EP/Jonouem4UZf
+ knHg==
+X-Gm-Message-State: AOAM533+XanIEs3u2czasM68k1IEI4DW8rp8tXOY+00FZl2El9k5EE07
+ eEj9KGGTPwmdSdgPWjwkGERIHQ==
+X-Google-Smtp-Source: ABdhPJw0sBqyp1rARfaiUghxahAYyb4EobYjz9osAR1XerC1XImjOwt5A5++LDRa9MNB6dhDuDTY5w==
+X-Received: by 2002:adf:c402:: with SMTP id v2mr85774wrf.130.1630688684449;
+ Fri, 03 Sep 2021 10:04:44 -0700 (PDT)
+Received: from [192.168.8.107] (190.red-2-142-216.dynamicip.rima-tde.net.
+ [2.142.216.190])
+ by smtp.gmail.com with ESMTPSA id l10sm5728859wrg.50.2021.09.03.10.04.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 03 Sep 2021 10:04:44 -0700 (PDT)
+Subject: Re: [PATCH v1 1/2] target/riscv: Implement the stval/mtval illegal
+ instruction
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+References: <cover.1630624983.git.alistair.francis@wdc.com>
+ <289f8d59cf883fec5764cb0cea8da4430b6fd6da.1630624983.git.alistair.francis@wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <071cf027-72f9-756f-36af-758f35bb4123@linaro.org>
+Date: Fri, 3 Sep 2021 19:04:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <bc35567c2e79645579ee66f34f86cf5120710a76.1630651786.git.alistair.francis@wdc.com>
- <6aef8a640e38e52b8790fc34a9b9b3b0f3a88a43.1630651786.git.alistair.francis@wdc.com>
-In-Reply-To: <6aef8a640e38e52b8790fc34a9b9b3b0f3a88a43.1630651786.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 3 Sep 2021 19:21:55 +0800
-Message-ID: <CAEUhbmUsYTmkERFvxa-TdM87P_TMr0rCuGq_ae7GSzN95s=4VA@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] hw/riscv/sifive_u: Use the PLIC config helper
- function
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+In-Reply-To: <289f8d59cf883fec5764cb0cea8da4430b6fd6da.1630624983.git.alistair.francis@wdc.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -29
+X-Spam_score: -3.0
+X-Spam_bar: ---
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.888,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,102 +84,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 11:22:14 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 17:04:54 -0000
 
-On Fri, Sep 3, 2021 at 2:50 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  include/hw/riscv/virt.h |  1 -
->  hw/riscv/sifive_u.c     | 36 +++++++++++++++++++++++-------------
->  2 files changed, 23 insertions(+), 14 deletions(-)
->
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 349fee1f89..e95fd15298 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -71,7 +71,6 @@ enum {
->      VIRTIO_NDEV = 0x35 /* Arbitrary maximum number of interrupts */
->  };
->
-> -#define VIRT_PLIC_HART_CONFIG "MS"
+On 9/3/21 1:23 AM, Alistair Francis wrote:
+> +    target_ulong bins;
 
-This does not belong to this patch.
+Surely uint32_t, at least until 64-bit insn width is required.
 
->  #define VIRT_PLIC_NUM_SOURCES 127
->  #define VIRT_PLIC_NUM_PRIORITIES 7
->  #define VIRT_PLIC_PRIORITY_BASE 0x04
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 6cc1a62b0f..9c51b4d052 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -738,6 +738,28 @@ static void sifive_u_machine_init_register_types(void)
->
->  type_init(sifive_u_machine_init_register_types)
->
-> +/*
-> + * Return the per-socket PLIC hart topology configuration string
-> + * (caller must free with g_free())
-> + */
-> +static char *riscv_plic_hart_config_string(int hart_count)
 
-I think we can create a common helper for all RISC-V machines to use.
-The common helper generates the PLIC config string based on misa
-feature bit RVS. If RVS is set then the corresponding hart string is
-"MS", otherwise "M".
-
-> +{
-> +    g_autofree const char **vals = g_new(const char *, hart_count + 1);
-> +    int i;
+> +    TCGv tmp = temp_new(ctx);
 > +
-> +    for (i = 0; i < hart_count; i++) {
-> +        if (i == 0) {
-> +            vals[i] = "M";
-> +        } else {
-> +            vals[i] = "MS";
-> +        }
-> +    }
-> +    vals[i] = NULL;
-> +
-> +    /* g_strjoinv() obliges us to cast away const here */
-> +    return g_strjoinv(",", (char **)vals);
-> +}
-> +
->  static void sifive_u_soc_instance_init(Object *obj)
->  {
->      SiFiveUSoCState *s = RISCV_U_SOC(obj);
-> @@ -776,7 +798,6 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
->      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
->      char *plic_hart_config;
-> -    size_t plic_hart_config_len;
->      int i;
->      NICInfo *nd = &nd_table[0];
->
-> @@ -817,18 +838,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->                                  l2lim_mem);
->
->      /* create PLIC hart topology configuration string */
-> -    plic_hart_config_len = (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1) *
-> -                           ms->smp.cpus;
-> -    plic_hart_config = g_malloc0(plic_hart_config_len);
-> -    for (i = 0; i < ms->smp.cpus; i++) {
-> -        if (i != 0) {
-> -            strncat(plic_hart_config, "," SIFIVE_U_PLIC_HART_CONFIG,
-> -                    plic_hart_config_len);
-> -        } else {
-> -            strncat(plic_hart_config, "M", plic_hart_config_len);
-> -        }
-> -        plic_hart_config_len -= (strlen(SIFIVE_U_PLIC_HART_CONFIG) + 1);
-> -    }
-> +    plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
->
->      /* MMIO */
->      s->plic = sifive_plic_create(memmap[SIFIVE_U_DEV_PLIC].base,
+> +    tcg_gen_movi_tl(tmp, ctx->opcode);
+> +    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, bins));
 
-Regards,
-Bin
+   tcg_gen_st_i32(tcg_constant_i32(ctx->opcode),
+                  cpu_env, offsetof(CPURISCVState, bins));
+
+
+r~
 
