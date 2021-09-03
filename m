@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mMFjA-0002Qq-DP
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 16:23:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51246)
+	id 1mMFjq-0004HO-GF
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 16:24:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51410)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMFj8-0002Ki-Um
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:23:54 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:33741)
+ id 1mMFjn-0004Dx-IG
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:24:35 -0400
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d]:39578)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMFj7-0003bs-8J
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:23:54 -0400
-Received: by mail-wr1-x433.google.com with SMTP id b10so387889wru.0
- for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 13:23:52 -0700 (PDT)
+ id 1mMFjk-00046i-L9
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:24:35 -0400
+Received: by mail-wr1-x42d.google.com with SMTP id z4so334712wrr.6
+ for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 13:24:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=wXBwe+C96NVMAw/WVJPmEePxSXgR8UnAw4mAKidy+Uc=;
- b=QHLQ3rMDWNB/26AcEt/tmQB5kk5HXskxmUCeZxjWkZY+/+gmxKxtLYBbUrbEJ9IIVl
- TXxNm1cMDVlWjjJE1EL8SyZCs1686ubATja87bAh8hUlCMrmrU+p/h2HnsSi4f6M2VVv
- ZijvBz00fTjJ0Pey6nM7GppsZ7HFYqOWG62UIeKnTBmuInsYh9s3ltuexL+iuerhbSSN
- uMg0jOQeNSsrtwUY8ODf5A01NMcBOal5Wp3/QlINZyEPfodQvP1VTMgezqqMzuZLU7iB
- OiJNsnH57C+xyoKu+8wTdisD8sJn3vaHgIGWHGCi7wCCfdTlsvskKx4OEy1NR1/zo36u
- mnOQ==
+ bh=MUAOnWb7Jr2o1NB8tpwx1E/Lm7U1xeRRhxPNvAXjZbg=;
+ b=vzZJ3StsffaZE2XWFvvqf2xJqEy05bbfJRhtDaeaWq7QuAU52n/TB/ULQ8WeVNs54M
+ UGk4VZfAumjAQ6YHZqLXwehiRMweE/3kJmX4Exi6/vcM0AbVsP9DyQ+kTZSyXOjSTQXE
+ yltj+XKDtFQcrEjs98IbsnvIXwqtEH/TjR8pwEw8KEUkc8NYtmXPjP513FwOCCGUt9wr
+ aStX5sxRH5/5TVq63meFggk5pkY4HjNNTzztQF0zM0dnsU7O4t2Ixsf6lRKnmGoibQxd
+ a4FPgOEbY/12bxwaYsGxLbjms3hn+0Bpm8n2QXKQeM0XRr72OBCjWTcA7StsxwdGykZR
+ MZRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=wXBwe+C96NVMAw/WVJPmEePxSXgR8UnAw4mAKidy+Uc=;
- b=qq6LN/NIzP+9pZ1NsnEg96bTtlFSjTYpR5WZwnffXbJBojcmu3LjmynURoczE5EgzK
- SCN6LMAEUVxMy8cxLfjW8+EpdZDYsDs/fXCqeTevw4qK8n4AuM5IDiMzciGSRyS3piDK
- x+aoVlgalTu6NTk7kvVFPYTd1RQzocPLRJe5T50G+cA1uWwHl3hwNf5foXLdu/AU6Z1t
- f13UsN51XriWf2bGLL97SC18iqtIWGyE0y/ilnQtYtjx/0zOndTGRMnkjUlcCZkpoIx7
- feTMPZlHbRxzHei5NW6CZWI+diQ12os6EJ7h3aQ+RlpYlBWPdNdsJze2PvzR8Se0VRz2
- LXDw==
-X-Gm-Message-State: AOAM532UODBBYm9Dj2TJCnxEjumUE8kt5nzyEw9NQx2fUlp2H5D58P8B
- dbGvNC+leB9mjANBq2OkkXXwlg==
-X-Google-Smtp-Source: ABdhPJz826d62i3FadVITpOZWzNuXjQqqxILWUC/72776fLbfHJdkqtyjig/TilRLtZ8efOdunSk1g==
-X-Received: by 2002:a5d:5262:: with SMTP id l2mr839408wrc.190.1630700631792;
- Fri, 03 Sep 2021 13:23:51 -0700 (PDT)
+ bh=MUAOnWb7Jr2o1NB8tpwx1E/Lm7U1xeRRhxPNvAXjZbg=;
+ b=IyRfxlldO79JfnXzaaZmicP2NYP3yLDGW00MiHr9nqglb7XRfIMCuLGZU09vFjZ18i
+ lLVSeJSVyU+wgCAumUdHbSHsbSOKWEUVWPxtsEUU7F75QzUzyrH+pqi2qIAZfHMNgYLD
+ P5EPcPuU8JXUVmNVZ/oEIH8TPd6KE+Lq9X1tZ2Ao3sI/yom9jKLyDvVsDBXik0AJf9DH
+ aJkJfOzRK30NLxj6OOd2I1QZBPl2Gnt1nc92rTqmaz0pjJxJsCs0pnb/RcCJiUgCOUvQ
+ QS8oXi1h4s59Npt6dVJZ+vvMebky6YHmbywf+l5AxZDbU4KsOIlZiiXraB3LgczFfsRS
+ rk7w==
+X-Gm-Message-State: AOAM5328gZj56rU5ymQkQUo/8NjSvijuKvwA3ZQBt4/SUTbAPLrpnmq2
+ f4nOMLt4Bk4Ps8diVt7iSLM5ew==
+X-Google-Smtp-Source: ABdhPJzUsw/5kYywwKhFVX1rjFqmUKa3i/mI2bjH4AHQJ6YuS1HfmSJytNGtWbSvomY0u97BFeRM4Q==
+X-Received: by 2002:adf:d4c2:: with SMTP id w2mr799125wrk.235.1630700671118;
+ Fri, 03 Sep 2021 13:24:31 -0700 (PDT)
 Received: from [192.168.8.107] (190.red-2-142-216.dynamicip.rima-tde.net.
  [2.142.216.190])
- by smtp.gmail.com with ESMTPSA id j20sm258635wrb.5.2021.09.03.13.23.47
+ by smtp.gmail.com with ESMTPSA id l15sm315117wms.38.2021.09.03.13.24.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Sep 2021 13:23:51 -0700 (PDT)
-Subject: Re: [PATCH v3 14/30] target/i386: Restrict has_work() handler to
+ Fri, 03 Sep 2021 13:24:30 -0700 (PDT)
+Subject: Re: [PATCH v3 15/30] target/m68k: Restrict has_work() handler to
  sysemu and TCG
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
@@ -79,26 +79,26 @@ Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
  Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
 References: <20210902161543.417092-1-f4bug@amsat.org>
- <20210902161543.417092-15-f4bug@amsat.org>
+ <20210902161543.417092-16-f4bug@amsat.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <b2796bcf-8358-1faf-cf30-0ad87cd0ac08@linaro.org>
-Date: Fri, 3 Sep 2021 22:23:44 +0200
+Message-ID: <4ac98aaa-ca63-0db6-87ce-a77193044dd1@linaro.org>
+Date: Fri, 3 Sep 2021 22:24:23 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210902161543.417092-15-f4bug@amsat.org>
+In-Reply-To: <20210902161543.417092-16-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x433.google.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.888,
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.888,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -111,18 +111,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 20:23:55 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 20:24:36 -0000
 
 On 9/2/21 6:15 PM, Philippe Mathieu-Daudé wrote:
 > Restrict has_work() to TCG sysemu.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 > ---
->   target/i386/cpu.c         | 6 ------
->   target/i386/tcg/tcg-cpu.c | 8 +++++++-
->   2 files changed, 7 insertions(+), 7 deletions(-)
+>   target/m68k/cpu.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+> index 66d22d11895..94b35cb4a50 100644
+> --- a/target/m68k/cpu.c
+> +++ b/target/m68k/cpu.c
+> @@ -31,10 +31,12 @@ static void m68k_cpu_set_pc(CPUState *cs, vaddr value)
+>       cpu->env.pc = value;
+>   }
+>   
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>   static bool m68k_cpu_has_work(CPUState *cs)
 
+No CONFIG_TCG, otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
 
 r~
 
