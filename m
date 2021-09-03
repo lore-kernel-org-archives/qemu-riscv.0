@@ -1,98 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLw5k-0005iQ-PP
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 19:25:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54364)
+	id 1mLxVh-0005Hy-7f
+	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 20:56:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42202)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8724dbd3c=alistair.francis@opensource.wdc.com>)
- id 1mLw5g-0005eV-2e
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:25:53 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:52038)
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1mLxVf-0005H5-CS; Thu, 02 Sep 2021 20:56:47 -0400
+Received: from bilbo.ozlabs.org ([203.11.71.1]:53681 helo=ozlabs.org)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=8724dbd3c=alistair.francis@opensource.wdc.com>)
- id 1mLw5e-00059g-4C
- for qemu-riscv@nongnu.org; Thu, 02 Sep 2021 19:25:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1630625150; x=1662161150;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=rShATVOyZt9SnfwqKRn0y8UZ0rHTTM6iAVUUXimZzFU=;
- b=IlI+9FhGO47TZVc2ZBddJ059gG8xMzsOHzRdemuzqroidK1h0P5/sOrS
- l0uh+yA5GZQMoP8+PgNffzI4D7a/uEeDRWk996y6N/l+8TaSXCIwPXArQ
- rICRHGSxtmjkijzMsd1gvwzq69tRgK6k6hXrZp2rKcEaT/xSp55srS86h
- uro/1KiCBQ1D33oF+/Q2vngwjJYx1YEqoJGdSxjpB4dj43LlkCh1GrYpx
- JDKoynWhtcgPngLSOwHB7AnU6G27qfTilmgWJc8dQgi1KfOgybQtPZkUw
- 6pneoA0BKOU0hnHC0vxsljRLcVbxIA8JeB/3SUQ2J3YmZm8taoVOJpd2o Q==;
-X-IronPort-AV: E=Sophos;i="5.85,263,1624291200"; d="scan'208";a="179628326"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 03 Sep 2021 07:25:46 +0800
-IronPort-SDR: Y7/2hQTb9qHRVRVs7gkjKqmFNXh7PkUeq1qkvwGlimujXkmid1ts2u/JFkWrtBAzIO3tIFsXEm
- q5HmiK/yWkPyAN+bycxPefI/8BfuSYCjEr6d5srCA/GidId3Nus1Ze+r0iRK4SwCTofTAln35s
- UQ4zh4UN7a6qaXWgZnH884+W4wwpCNSF7gS6uMJvDPC+Grs0s3k0IN5KrIZyPDNb5sqoCYWd6h
- likSqbMvmhVoy316voUH0PBb9zIVlrgJcprbn2F4mdAmzIINkTstNFm+dW1GDuOC16rNaxbEFC
- 9I7y4Pa5GNdZlgVYfeh0oAMv
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Sep 2021 16:02:30 -0700
-IronPort-SDR: FRZOQ6dbhnxw7lGYQPeY1k6WPvFmbMJKnWY8y+VZ4yLKOcv45csAZKnGCNAr4H8Qtr/YLF6zxQ
- QmCRad3oKKwb26j2N+shoB1TAIbeLrkbZCV6YmUq0ZfH14RY8YpLxgfOKk9xUxgwL5g7ObrOVe
- IH9LNuYNR46CtoU62ZVxTJYvsRfesZCNq+Z08gqTRTuF1ENozTSQpWewKBX/0AchwC0n+i0t34
- nSISC9qDvdSRf8L2XokYjAyG9Apf3CObBg3K17CWFsgIxFRZO8KeNFyeiazcfYT/3/VmdY7j9O
- Y8E=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 02 Sep 2021 16:25:46 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4H0xqs46bPz1RvlV
- for <qemu-riscv@nongnu.org>; Thu,  2 Sep 2021 16:25:45 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1630625144; x=1633217145; bh=rShATVOyZt9SnfwqKR
- n0y8UZ0rHTTM6iAVUUXimZzFU=; b=fqKXGeALMC++GrKEV6SNH5k1PcBq8wzgSK
- qe52J4hLHa+lYYMpB032LuhnPaxOYakUAvQdtrrHJuYqcLLxcXmq0XA1iZaWlG/+
- eeVXowb/y547ohCQU7j3LHt6+YQRa5ImJEdyvhihva+iLMBtTGNJfPcv15sktJCb
- QzkWC52MJEEUnKkEjVYlkk9u184wat3TibR0fT16kAQ9Rl4UsxgeLD8NLS+ZPDKg
- bHmhjlXsUL6vjKqISuoVzB2rDZo9po2uqJ+f5tiO2pCiH22UeYkg/ikmB9mFrveR
- v3ot6n6Tq8e3dmibAPKkESStAXhe0BjY9kfJaaQnFBFQnO8JPaMQ==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id LKyG6M-2zpi3 for <qemu-riscv@nongnu.org>;
- Thu,  2 Sep 2021 16:25:44 -0700 (PDT)
-Received: from toolbox.alistair23.me (unknown [10.225.165.17])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4H0xqm6R1Gz1RvlP;
- Thu,  2 Sep 2021 16:25:40 -0700 (PDT)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v2 2/2] sifive_u: Connect the SiFive PWM device
-Date: Fri,  3 Sep 2021 09:25:34 +1000
-Message-Id: <da274fb1833ecf9ea3a0dc343439aa4d4b3c4d76.1630625094.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <cover.1630625094.git.alistair.francis@wdc.com>
-References: <cover.1630625094.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1mLxVc-0006Dl-M8; Thu, 02 Sep 2021 20:56:47 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gibson.dropbear.id.au; s=201602; t=1630630598;
+ bh=ktRvddubVxWE7Dtd+XIUP0p+p2jdsvgjW3fipkF03VY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DQHw0CXoCLeVjZftr0jVswNtwM8GbP1gxHV/MxkWL8djz+hj+3hQfAlEy8h3PYDdu
+ 2Mn3eqjxn1zuKdk9+LgYODNkLO3Jn/i28NWOgPNg2DR6VOD/F/UqxHWfOhcfJrJzrC
+ jy0T+Ur0ZWdBF11z+KawHepj0mHoqbtiyIOS1p8s=
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 4H0zrk1qlJz9sW4; Fri,  3 Sep 2021 10:56:38 +1000 (AEST)
+Date: Fri, 3 Sep 2021 10:48:30 +1000
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-arm@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Warner Losh <imp@bsdimp.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Bin Meng <bin.meng@windriver.com>, Chris Wulff <crwulff@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Kyle Evans <kevans@freebsd.org>, Peter Maydell <peter.maydell@linaro.org>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Eduardo Habkost <ehabkost@redhat.com>, Marek Vasut <marex@denx.de>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Greg Kurz <groug@kaod.org>, qemu-riscv@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH 17/24] target/ppc: Restrict cpu_exec_interrupt() handler
+ to sysemu
+Message-ID: <YTFw3nhlRdYKQAed@yekko>
+References: <20210902151715.383678-1-f4bug@amsat.org>
+ <20210902151715.383678-18-f4bug@amsat.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=8724dbd3c=alistair.francis@opensource.wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="kyvLM4mpgyEHrF3n"
+Content-Disposition: inline
+In-Reply-To: <20210902151715.383678-18-f4bug@amsat.org>
+Received-SPF: pass client-ip=203.11.71.1; envelope-from=dgibson@ozlabs.org;
+ helo=ozlabs.org
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -105,203 +70,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2021 23:25:53 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 00:56:48 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
 
-Connect the SiFive PWM device and expose it via the device tree.
+--kyvLM4mpgyEHrF3n
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- include/hw/riscv/sifive_u.h | 14 +++++++++-
- hw/riscv/sifive_u.c         | 55 ++++++++++++++++++++++++++++++++++++-
- hw/timer/sifive_pwm.c       |  1 +
- hw/riscv/Kconfig            |  1 +
- 4 files changed, 69 insertions(+), 2 deletions(-)
+On Thu, Sep 02, 2021 at 05:17:08PM +0200, Philippe Mathieu-Daud=E9 wrote:
+> Restrict cpu_exec_interrupt() and its callees to sysemu.
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=E9 <f4bug@amsat.org>
 
-diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-index 2656b39808..0d010c7309 100644
---- a/include/hw/riscv/sifive_u.h
-+++ b/include/hw/riscv/sifive_u.h
-@@ -27,6 +27,7 @@
- #include "hw/misc/sifive_u_otp.h"
- #include "hw/misc/sifive_u_prci.h"
- #include "hw/ssi/sifive_spi.h"
-+#include "hw/timer/sifive_pwm.h"
-=20
- #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
- #define RISCV_U_SOC(obj) \
-@@ -49,6 +50,7 @@ typedef struct SiFiveUSoCState {
-     SiFiveSPIState spi0;
-     SiFiveSPIState spi2;
-     CadenceGEMState gem;
-+    SiFiveUPwmState pwm[2];
-=20
-     uint32_t serial;
-     char *cpu_type;
-@@ -92,7 +94,9 @@ enum {
-     SIFIVE_U_DEV_FLASH0,
-     SIFIVE_U_DEV_DRAM,
-     SIFIVE_U_DEV_GEM,
--    SIFIVE_U_DEV_GEM_MGMT
-+    SIFIVE_U_DEV_GEM_MGMT,
-+    SIFIVE_U_DEV_PWM0,
-+    SIFIVE_U_DEV_PWM1
- };
-=20
- enum {
-@@ -126,6 +130,14 @@ enum {
-     SIFIVE_U_PDMA_IRQ5 =3D 28,
-     SIFIVE_U_PDMA_IRQ6 =3D 29,
-     SIFIVE_U_PDMA_IRQ7 =3D 30,
-+    SIFIVE_U_DEV_PWM0_0 =3D 42,
-+    SIFIVE_U_DEV_PWM0_1 =3D 43,
-+    SIFIVE_U_DEV_PWM0_2 =3D 44,
-+    SIFIVE_U_DEV_PWM0_3 =3D 45,
-+    SIFIVE_U_DEV_PWM1_0 =3D 46,
-+    SIFIVE_U_DEV_PWM1_1 =3D 47,
-+    SIFIVE_U_DEV_PWM1_2 =3D 48,
-+    SIFIVE_U_DEV_PWM1_3 =3D 49,
-     SIFIVE_U_QSPI0_IRQ =3D 51,
-     SIFIVE_U_GEM_IRQ =3D 53
- };
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 6cc1a62b0f..ed2e75df36 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -17,6 +17,7 @@
-  * 7) DMA (Direct Memory Access Controller)
-  * 8) SPI0 connected to an SPI flash
-  * 9) SPI2 connected to an SD card
-+ * 10) PWM0 and PWM1
-  *
-  * This board currently generates devicetree dynamically that indicates =
-at least
-  * two harts and up to five harts.
-@@ -75,6 +76,8 @@ static const MemMapEntry sifive_u_memmap[] =3D {
-     [SIFIVE_U_DEV_PRCI] =3D     { 0x10000000,     0x1000 },
-     [SIFIVE_U_DEV_UART0] =3D    { 0x10010000,     0x1000 },
-     [SIFIVE_U_DEV_UART1] =3D    { 0x10011000,     0x1000 },
-+    [SIFIVE_U_DEV_PWM0] =3D     { 0x10020000,     0x1000 },
-+    [SIFIVE_U_DEV_PWM1] =3D     { 0x10021000,     0x1000 },
-     [SIFIVE_U_DEV_QSPI0] =3D    { 0x10040000,     0x1000 },
-     [SIFIVE_U_DEV_QSPI2] =3D    { 0x10050000,     0x1000 },
-     [SIFIVE_U_DEV_GPIO] =3D     { 0x10060000,     0x1000 },
-@@ -441,6 +444,38 @@ static void create_fdt(SiFiveUState *s, const MemMap=
-Entry *memmap,
-     qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
-     g_free(nodename);
-=20
-+    nodename =3D g_strdup_printf("/soc/pwm@%lx",
-+        (long)memmap[SIFIVE_U_DEV_PWM0].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[SIFIVE_U_DEV_PWM0].base,
-+        0x0, memmap[SIFIVE_U_DEV_PWM0].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandl=
-e);
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-+                           SIFIVE_U_DEV_PWM0_0, SIFIVE_U_DEV_PWM0_1,
-+                           SIFIVE_U_DEV_PWM0_2, SIFIVE_U_DEV_PWM0_3);
-+    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-+                           prci_phandle, PRCI_CLK_TLCLK);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
-+    g_free(nodename);
-+
-+    nodename =3D g_strdup_printf("/soc/pwm@%lx",
-+        (long)memmap[SIFIVE_U_DEV_PWM1].base);
-+    qemu_fdt_add_subnode(fdt, nodename);
-+    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
-+    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-+        0x0, memmap[SIFIVE_U_DEV_PWM1].base,
-+        0x0, memmap[SIFIVE_U_DEV_PWM1].size);
-+    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandl=
-e);
-+    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-+                           SIFIVE_U_DEV_PWM1_0, SIFIVE_U_DEV_PWM1_1,
-+                           SIFIVE_U_DEV_PWM1_2, SIFIVE_U_DEV_PWM1_3);
-+    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-+                           prci_phandle, PRCI_CLK_TLCLK);
-+    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
-+    g_free(nodename);
-+
-     nodename =3D g_strdup_printf("/soc/serial@%lx",
-         (long)memmap[SIFIVE_U_DEV_UART1].base);
-     qemu_fdt_add_subnode(fdt, nodename);
-@@ -765,6 +800,8 @@ static void sifive_u_soc_instance_init(Object *obj)
-     object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
-     object_initialize_child(obj, "spi0", &s->spi0, TYPE_SIFIVE_SPI);
-     object_initialize_child(obj, "spi2", &s->spi2, TYPE_SIFIVE_SPI);
-+    object_initialize_child(obj, "pwm0", &s->pwm[0], TYPE_SIFIVE_PWM);
-+    object_initialize_child(obj, "pwm1", &s->pwm[1], TYPE_SIFIVE_PWM);
- }
-=20
- static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-@@ -777,7 +814,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Er=
-ror **errp)
-     MemoryRegion *l2lim_mem =3D g_new(MemoryRegion, 1);
-     char *plic_hart_config;
-     size_t plic_hart_config_len;
--    int i;
-+    int i, j;
-     NICInfo *nd =3D &nd_table[0];
-=20
-     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus -=
- 1);
-@@ -904,6 +941,22 @@ static void sifive_u_soc_realize(DeviceState *dev, E=
-rror **errp)
-     sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem), 0,
-                        qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_GEM_IR=
-Q));
-=20
-+    /* PWM */
-+    for (i =3D 0; i < 2; i++) {
-+        if (!sysbus_realize(SYS_BUS_DEVICE(&s->pwm[i]), errp)) {
-+            return;
-+        }
-+        sysbus_mmio_map(SYS_BUS_DEVICE(&s->pwm[i]), 0,
-+                                memmap[SIFIVE_U_DEV_PWM0].base + (0x1000=
- * i));
-+
-+        /* Connect PWM interrupts to the PLIC */
-+        for (j =3D 0; j < SIFIVE_PWM_IRQS; j++) {
-+            sysbus_connect_irq(SYS_BUS_DEVICE(&s->pwm[i]), j,
-+                               qdev_get_gpio_in(DEVICE(s->plic),
-+                                        SIFIVE_U_DEV_PWM0_0 + (i * 4) + =
-j));
-+        }
-+    }
-+
-     create_unimplemented_device("riscv.sifive.u.gem-mgmt",
-         memmap[SIFIVE_U_DEV_GEM_MGMT].base, memmap[SIFIVE_U_DEV_GEM_MGMT=
-].size);
-=20
-diff --git a/hw/timer/sifive_pwm.c b/hw/timer/sifive_pwm.c
-index 61a97f9b46..3b533d4484 100644
---- a/hw/timer/sifive_pwm.c
-+++ b/hw/timer/sifive_pwm.c
-@@ -25,6 +25,7 @@
-  */
-=20
- #include "qemu/osdep.h"
-+#include "trace.h"
- #include "hw/irq.h"
- #include "hw/timer/sifive_pwm.h"
- #include "hw/qdev-properties.h"
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index ff75add6f3..d56c339ef6 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -69,6 +69,7 @@ config SIFIVE_U
-     select SIFIVE_UART
-     select SIFIVE_U_OTP
-     select SIFIVE_U_PRCI
-+    select SIFIVE_PWM
-     select SSI_M25P80
-     select SSI_SD
-     select UNIMP
+Acked-by: David Gibson <david@gibson.dropbear.id.au>
+
+> ---
+>  target/ppc/cpu.h         |  4 ++--
+>  target/ppc/cpu_init.c    |  2 +-
+>  target/ppc/excp_helper.c | 21 +++------------------
+>  3 files changed, 6 insertions(+), 21 deletions(-)
+>=20
+> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+> index 500205229c0..362e7c4c5c7 100644
+> --- a/target/ppc/cpu.h
+> +++ b/target/ppc/cpu.h
+> @@ -1254,8 +1254,6 @@ DECLARE_OBJ_CHECKERS(PPCVirtualHypervisor, PPCVirtu=
+alHypervisorClass,
+>                       PPC_VIRTUAL_HYPERVISOR, TYPE_PPC_VIRTUAL_HYPERVISOR)
+>  #endif /* CONFIG_USER_ONLY */
+> =20
+> -void ppc_cpu_do_interrupt(CPUState *cpu);
+> -bool ppc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+>  void ppc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+>  hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>  int ppc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+> @@ -1271,6 +1269,8 @@ int ppc64_cpu_write_elf64_note(WriteCoreDumpFunctio=
+n f, CPUState *cs,
+>  int ppc32_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+>                                 int cpuid, void *opaque);
+>  #ifndef CONFIG_USER_ONLY
+> +void ppc_cpu_do_interrupt(CPUState *cpu);
+> +bool ppc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+>  void ppc_cpu_do_system_reset(CPUState *cs);
+>  void ppc_cpu_do_fwnmi_machine_check(CPUState *cs, target_ulong vector);
+>  extern const VMStateDescription vmstate_ppc_cpu;
+> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+> index ad7abc6041a..6aad01d1d3a 100644
+> --- a/target/ppc/cpu_init.c
+> +++ b/target/ppc/cpu_init.c
+> @@ -9014,10 +9014,10 @@ static const struct SysemuCPUOps ppc_sysemu_ops =
+=3D {
+> =20
+>  static const struct TCGCPUOps ppc_tcg_ops =3D {
+>    .initialize =3D ppc_translate_init,
+> -  .cpu_exec_interrupt =3D ppc_cpu_exec_interrupt,
+>    .tlb_fill =3D ppc_cpu_tlb_fill,
+> =20
+>  #ifndef CONFIG_USER_ONLY
+> +  .cpu_exec_interrupt =3D ppc_cpu_exec_interrupt,
+>    .do_interrupt =3D ppc_cpu_do_interrupt,
+>    .cpu_exec_enter =3D ppc_cpu_exec_enter,
+>    .cpu_exec_exit =3D ppc_cpu_exec_exit,
+> diff --git a/target/ppc/excp_helper.c b/target/ppc/excp_helper.c
+> index 7b6ac16eef7..d7e32ee107e 100644
+> --- a/target/ppc/excp_helper.c
+> +++ b/target/ppc/excp_helper.c
+> @@ -40,24 +40,8 @@
+> =20
+>  /***********************************************************************=
+******/
+>  /* Exception processing */
+> -#if defined(CONFIG_USER_ONLY)
+> -void ppc_cpu_do_interrupt(CPUState *cs)
+> -{
+> -    PowerPCCPU *cpu =3D POWERPC_CPU(cs);
+> -    CPUPPCState *env =3D &cpu->env;
+> +#if !defined(CONFIG_USER_ONLY)
+> =20
+> -    cs->exception_index =3D POWERPC_EXCP_NONE;
+> -    env->error_code =3D 0;
+> -}
+> -
+> -static void ppc_hw_interrupt(CPUPPCState *env)
+> -{
+> -    CPUState *cs =3D env_cpu(env);
+> -
+> -    cs->exception_index =3D POWERPC_EXCP_NONE;
+> -    env->error_code =3D 0;
+> -}
+> -#else /* defined(CONFIG_USER_ONLY) */
+>  static inline void dump_syscall(CPUPPCState *env)
+>  {
+>      qemu_log_mask(CPU_LOG_INT, "syscall r0=3D%016" PRIx64
+> @@ -1113,7 +1097,6 @@ void ppc_cpu_do_fwnmi_machine_check(CPUState *cs, t=
+arget_ulong vector)
+> =20
+>      powerpc_set_excp_state(cpu, vector, msr);
+>  }
+> -#endif /* !CONFIG_USER_ONLY */
+> =20
+>  bool ppc_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>  {
+> @@ -1130,6 +1113,8 @@ bool ppc_cpu_exec_interrupt(CPUState *cs, int inter=
+rupt_request)
+>      return false;
+>  }
+> =20
+> +#endif /* !CONFIG_USER_ONLY */
+> +
+>  #if defined(DEBUG_OP)
+>  static void cpu_dump_rfi(target_ulong RA, target_ulong msr)
+>  {
+
 --=20
-2.31.1
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
 
+--kyvLM4mpgyEHrF3n
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmExcNwACgkQbDjKyiDZ
+s5Ls7A/8DImqkiBUg/Y3dsB8HfU6M5B9BoXPaw1cxXmJSNEBHIrTUPEFCXKeW3SP
+6mzEpcKD5cjgsjKZaZLm9VGs83BLmAHXBydiNc9jOH4l3PZi4b3ih0SlYcpBiY2Q
+Q3BSvE7/kQqlobNIOWQxVjR2aWZ9AVjm5sAeTs9L363IgfiedABKAZQbsTs2zDwq
+KcMAdBdOKGHkbhpNbCh31put9VH8FqF6GGEBZzXtzOHNfra6lBidSZ6H/0V1Yog7
+BISkM0Sr8H615DV0gYzSCHGUtHOcHEQa36SAhrE251f5o6MmqPyyICg4taAM30xI
+kNXgBBYqwFMglD5VIpqrvSK+bZQqSCim5qlMGqkXuc0xgKP1oBNT3h/y5b+k8T7O
+MADDKZH09A+W+Z1THu9InmS9py7tBsZJRjzeek1GlXlkpLoKOqQmLydi7VEBbXed
+PFU0TH98novvaS8s+9OYc0o4un+YHC48jFTHAZhrVmqKC/E6bJ2av0fCfRxMdX87
+VjMes8xZ5Oyy7DY1yEoOL+4jzEougv0v6h2GlmH+WfsxL/zoEKt+/VvP5OAjstVT
+o81KHIN2jLoOmnrlIlcs7QgVfVcdgdDc+/vOf5Pp1pkYw5p9NT9z5OTDiZ8ihGJv
+nJ7IY+wgD7IP6gljbmE+RN+XiRtQ58THrob2L2Guw87acY64cec=
+=AgQv
+-----END PGP SIGNATURE-----
+
+--kyvLM4mpgyEHrF3n--
 
