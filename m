@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mMEXT-00020g-Jm
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 15:07:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37574)
+	id 1mMEYm-0003Qy-FK
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 15:09:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37894)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMEXR-0001xr-S3
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:07:45 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:45053)
+ id 1mMEYd-0003M3-8m
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:08:59 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b]:35330)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMEXQ-0000Oe-6n
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:07:45 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id g18so76842wrc.11
- for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 12:07:43 -0700 (PDT)
+ id 1mMEYa-0001Kk-Ee
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:08:58 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id i6so118359wrv.2
+ for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 12:08:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=0NdsLuVFQiOXh+Ug01/7WslzxoTyRGDqrkPMYYNKLu0=;
- b=bWrhcAwD+6e32H7526OPNojiGlKGcJsLcTVvThqO1xLUD1uPw62Z3Y1AbyViS4Wze2
- X65hjmzwUMCy6VRKnA87cj15qpRKSJFiozipKa3TQ9tITppTq4fZ0XG7ZtEAgsOTFzZA
- wGLemVO7gAr/R2IAMV4eGMGDAuR3ptVY4R9F/NYasgqY+c0wc0m5Mnv3uk9FvOkRybGG
- /ToWAZeZnCZSTRKs0gyPccVdnXpFYTulLbBv1EwFYXYysrOXs/zQ97vYdsV8TmgweA2t
- ztCzNgZN4mtZkSeq4h1CcjWPZcVDqQN8lnJAeqnjvOSyxI1tndJp2IBQo/13PeqiKgK2
- XLOg==
+ bh=bNawZA+iiFWKHVH1C9qcUdpIzLY56k93AuR3hOCtsAQ=;
+ b=blyy2Qcq3ys7NOCvDyC8LIH2WNtvRXNUBgIwD/R7GSOUVE9wYVoYzHJGPK69ZYwCjA
+ /S+Qc9/SdTZlxmOIBExVgufjoLdFU4+jgy3FXzLa4+tyhGho9wBXZlcoEIVwOUJFCD3F
+ mgy63j0TY1qxnocUld0trkmVqpIKL6cVxSttgmPwtQl51Hg/RP9gK747OSfHVrizYbwd
+ Micckh16om7iN2OIXLNXwMa3zoWgNLx3sBg5GepSQ4b151h1FUxRi90O3ywDB1/4Zeef
+ /aU+BgTBjwOp+y3dNUFgFNT0evBnmbIcdE1aMrJjbf676wCa7Jm/8Lc4P/eQjyPluN1U
+ eAGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=0NdsLuVFQiOXh+Ug01/7WslzxoTyRGDqrkPMYYNKLu0=;
- b=r/ROYtZqlaRhupBDdQHKYdsE0FnwPWQbwpMRKnKCykkZUeNIaI8dd/j4yUqJf9BYrW
- 2qI99P8Z7BSc3wI8X89DiwFy2Fqr2USB08q33ws5o9O0j4wEv+2rB4d4ZQ4Fb9kODXIH
- mD2PlV+U9h5hl1/1Ol7dz+5mlc3cXt7xe/6VGXHwU2MViiv5MP3DRVNskDkHeu/IQRah
- z+VANc5ftF3TCOsuDJ55tY84vySGMZ97m5+YatzNYHddmoq90+06d0aqUB88BuDpecmT
- xydiOJJV5XsxiQVLv++irjy9INstp6CzEHAL6AoFAFDiI/k/uoM8e1feEri3q2O6Y/3W
- W0kg==
-X-Gm-Message-State: AOAM532fG9QJKU4YRwmRNY+VggosZCiAOUZZMbEZbWUEB4s9npn59RG/
- 51Get2XzavvLgEmggluuQnAvOw==
-X-Google-Smtp-Source: ABdhPJxloNzzm4PJWtjHU784wtarEtmUSN9VE8291iltjikP5Q4TnZYBNuteiG7sBpUDLjv8/UVYAA==
-X-Received: by 2002:adf:f889:: with SMTP id u9mr599800wrp.67.1630696062529;
- Fri, 03 Sep 2021 12:07:42 -0700 (PDT)
+ bh=bNawZA+iiFWKHVH1C9qcUdpIzLY56k93AuR3hOCtsAQ=;
+ b=i4o6lsGx93wfzc1wf52alKhz5NIOaLGmIZ6HnqzlEOGPUGTGVW4+2x1TSpUZY4uJpT
+ 3YnKA8op85RPrRdP0/AonUU5W4RQbzeM9sfq2pz1NxyyEXEbpJhsA06drN3nUypxCVLs
+ FR38LWz2OBIDa3f18qG73Ede+GkgyOTthT4QNBqDXY//9tDavcpb+zF8QP+LwVCpkr2v
+ eIB4k7qldVjbEhAoGUQFmLnCJDCMh6rsQsxC0mZRjWdGgcI8NYv3fmdgW0asNeuiCOQ6
+ JQlINM6xMwKZ70gdC93HbSTVcqMS8mx3mQWgs3B/GMtQOnUphaPbUcHt7N9eI5Nt9KsQ
+ Eong==
+X-Gm-Message-State: AOAM5312x8/MCRt0Nv+ieFOWZ6cnnmOcPqw7Rxj09dGd+cjdt3z3GeLh
+ 51F0v4zX05j4msMbNoPNGvQmGw==
+X-Google-Smtp-Source: ABdhPJwGy4Hl0Kp/sF6gZVGlrWRB35x93Jy2sQjV6NpFST12HsjPqu1badXhKkBnspeVECad2SVmOQ==
+X-Received: by 2002:a05:6000:23a:: with SMTP id
+ l26mr543312wrz.369.1630696132260; 
+ Fri, 03 Sep 2021 12:08:52 -0700 (PDT)
 Received: from [192.168.8.107] (190.red-2-142-216.dynamicip.rima-tde.net.
  [2.142.216.190])
- by smtp.gmail.com with ESMTPSA id l21sm168030wmh.31.2021.09.03.12.07.39
+ by smtp.gmail.com with ESMTPSA id d24sm166620wmb.35.2021.09.03.12.08.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Sep 2021 12:07:42 -0700 (PDT)
-Subject: Re: [RFC PATCH 04/24] accel/tcg: Rename user-mode do_interrupt hack
- as fake_user_exception
+ Fri, 03 Sep 2021 12:08:51 -0700 (PDT)
+Subject: Re: [PATCH 05/24] accel/tcg: Assert most of cpu_handle_interrupt() is
+ sysemu-specific
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
 Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -66,19 +67,19 @@ Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
  <groug@kaod.org>, qemu-riscv@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
  qemu-ppc@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
 References: <20210902151715.383678-1-f4bug@amsat.org>
- <20210902151715.383678-5-f4bug@amsat.org>
+ <20210902151715.383678-6-f4bug@amsat.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d813a7f0-95d2-e859-a8ad-c097c7654252@linaro.org>
-Date: Fri, 3 Sep 2021 21:07:37 +0200
+Message-ID: <3ce44beb-77a0-30dc-d4fa-9c47865e86e9@linaro.org>
+Date: Fri, 3 Sep 2021 21:08:47 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210902151715.383678-5-f4bug@amsat.org>
+In-Reply-To: <20210902151715.383678-6-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
 X-Spam_bar: ---
@@ -98,23 +99,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 19:07:46 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 19:09:00 -0000
 
 On 9/2/21 5:16 PM, Philippe Mathieu-Daudé wrote:
-> do_interrupt() is sysemu specific. However due to some X86
-> specific hack, it is also used in user-mode emulation, which
-> is why it couldn't be restricted to CONFIG_SOFTMMU (see the
-> comment around added in commit 78271684719: "cpu: tcg_ops:
-> move to tcg-cpu-ops.h, keep a pointer in CPUClass").
-> Keep the hack but rename the handler as fake_user_exception()
-> and restrict do_interrupt() to sysemu.
+> To prove TCGCPUOps::cpu_exec_interrupt() is limited to system
+> emulation, start by asserting it is not called under user emulation.
 > 
+> Suggested-by: Richard Henderson<richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
 > ---
-> RFC: Any better name / idea here?
+>   accel/tcg/cpu-exec.c | 3 +++
+>   1 file changed, 3 insertions(+)
 
-I guess I'm ok with fake_user_interrupt.
-But I believe that this could all be moved into cpu_loop.c.
+Eh, sure, I guess.  I meant this merely as a diagnostic aid.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
