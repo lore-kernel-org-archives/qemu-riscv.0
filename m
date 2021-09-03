@@ -1,70 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mLzwx-0007AU-13
-	for mharc-qemu-riscv@gnu.org; Thu, 02 Sep 2021 23:33:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44044)
+	id 1mM31t-0006pL-JO
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 02:50:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43942)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mLzwv-0007AI-OI; Thu, 02 Sep 2021 23:33:05 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:34672)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mLzwu-00023T-8P; Thu, 02 Sep 2021 23:33:05 -0400
-Received: by mail-io1-xd35.google.com with SMTP id y18so5223812ioc.1;
- Thu, 02 Sep 2021 20:32:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pf0Q68togFfaME1zOoQmIqokI9mZ61b85mqndOKje2k=;
- b=KyL6GnSXMG23cZCZE0s688oAm3nsdxez5r0ExuZGdqDG4/9PsmMpSb26z/azFk5Ir3
- HgsI357IPCAJ3FbOrkF8Tex+4DNzDaptZ7Xn7IWAg6A4Rd0aBDtHq+p3Fean5llmnUPb
- zp+JEnkPS/Yojo7VuVcVexPNwjfx6dMS+SOr0JVwAkqUfHa7se9Df4Poip+z3S/iFFqn
- BX9fDp5fMFBo/CRzH4spTFlOGUMD55X5ZsMF1k7EEFoFU/uMYFEa5/fK/3cjdS+UcGyw
- Zr6HkCXz+XBkupfN1TovyDfMljtSpIQTLgmVxZ5YSVANHA+4J6tXnXGBNrK1iqRj5vdc
- ZANg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pf0Q68togFfaME1zOoQmIqokI9mZ61b85mqndOKje2k=;
- b=LLhndlfUeaFfhTHgOicsRZdn6kkF7Uqqf8cXNuRKpgNlSvnsqFIynSeSML8lKeu7Wq
- Y8qXuARUCnkcblC4weE4yVjyvmwYElR4Ar6lm/YUAroNdwN5pBgy+C3SBL5W90nX8uwc
- Tv7IaRq/ekCQCqCXcib2vz4EQTsPCJ8s4Mdmy9NbfOKCJBoqiH65r/LGtYr3dDw8noD8
- 169MFO6is0FlhHEnWIwmPAVVplbpBR3oGclHjccXUrFh8K3pV53A5RrGYmzBUIbf7Lu6
- VW3LKMdps75kqHiuDrqLK8axVej4C2prab07h6AhKIkIuTy4/0I43BUTwbRyISAxHahE
- 4tyA==
-X-Gm-Message-State: AOAM53072ikZoEFyE/IouwZLoOWrdKjFyoMUMjh2O2OHmr1jf0o7YD3g
- qYEJoJ7IayCR3MgeGMZvCQw/6WlzxjxGPl/pO6g=
-X-Google-Smtp-Source: ABdhPJy3DVxVN8If7pgwgLL9JbP5cI0rvm9DSwNyWpTL/mERZUtfPWlfpP2+Fe1Mh1H0fX2aRyJyemdBqg0KUslsEJE=
-X-Received: by 2002:a05:6602:3c5:: with SMTP id
- g5mr1354682iov.42.1630639979163; 
- Thu, 02 Sep 2021 20:32:59 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=873c9cf92=alistair.francis@opensource.wdc.com>)
+ id 1mM31p-0006mM-BG
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 02:50:22 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:19099)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=873c9cf92=alistair.francis@opensource.wdc.com>)
+ id 1mM31n-0000Xe-Jh
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 02:50:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1630651819; x=1662187819;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=CabCeNKMr2BSUP3/hzRnLm4PnGZoL4nLnozgep7bsco=;
+ b=FAevYvuC/POiPuY3Cw/vpHRmyU0KFagkNFA9ljPbZlYEbyI2+dvCo07r
+ R3+thxZxIUwF3zvgLSJ7zl+OMPbrt+32MqzeXT+nNWMpDl0BzvrFyLjca
+ PfT21F212pbPBBdJyNZkvsBSfD/MkNiFLSeZ2Oml4C5cSAh0VPDnpmNed
+ KJu04XHoc0fVtv4+t1NYth+PbBn4CyLOilrMaEWqu3zX4Asv+sHY+Rew7
+ 2k3U+fFZgBAXrD5nO0GymWZk+1J8xDyCOrqt+YnazlmQ9PcjP9l/N4cd1
+ t/+9nvWebwTf8RrjdShXe241FXqC8GdtbgdWm5VuvZF6BPupmI1HDdiif g==;
+X-IronPort-AV: E=Sophos;i="5.85,264,1624291200"; d="scan'208";a="179654009"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 03 Sep 2021 14:50:13 +0800
+IronPort-SDR: BCOBZii4PYkawfC/2qlEOwrPFgcjEmxZ82vQHu4XZ6NbV4Y709WnMHD321drCh7whDxDiMUiW1
+ M0JQVdlneD8scaeNtAHmhEaF5NKzl9Rrk5ExbyOiauBq89s1FKPh3r0wS8LdyWrlcyToQMhi43
+ XcCjbhcqIIYBIKqn64t8DYcd3hUd1LAYjPPq38Xq/Ml4SrKolKf83kcgqtHeoM59gLsPq89NQh
+ J0pBgNROmw+NpAW1oR9PGtHn0eip+zzAmhQGxT9LPM48xGBA/Ok9I3NpqZ4bQJU6tuHaGv3zPn
+ H8IUSiOnAAxQGaDXy14TBDrP
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2021 23:26:57 -0700
+IronPort-SDR: xKYsY0GGpRclZi3QEoCQ6wQSVS+jlcHYaC0O1QVaDinTWzhl/wUn4Tyhg2buusXxc3Udk1mWJ3
+ MX+fW82gk15lps2CKNVpLJnHGU6BNut3s35hUOE5ZGkI1l//+K9VaxKPatDD1JClUol4+hWidP
+ NzaWVkQm7Q/HJO5kP7gbxKJV8PcKouM9Sh0gbge7JNFzyfwuUHEDousxPF41TSMWjCMgfVOMBU
+ pCcPD+3KRW+QOjAHNklisxeNjuKXLhR3Av8LRXKlk4m8ohwuKgio/ZkqHYR20oZMmP3KZQIR+O
+ HXI=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Sep 2021 23:50:13 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4H17hh6Nhtz1RvlZ
+ for <qemu-riscv@nongnu.org>; Thu,  2 Sep 2021 23:50:12 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1630651812;
+ x=1633243813; bh=CabCeNKMr2BSUP3/hzRnLm4PnGZoL4nLnozgep7bsco=; b=
+ pT2oUiO1CRD7m6P+zHS8d1KCkKNeI12UNIJ5Gq7r9YX+8Q1fV7fAw47z9WFgiekN
+ 5W+iBCHxnYEQBBRYPCLBim8o04IGQ8XDLcdrQCm2MCCoNmW6Dw8zKKCC/hHonx0/
+ rMmZmvm9xMjBFXWCkeDdA/ZDqBTa8/tTeCQBE7Fo06JKlWQC2T4SqjLhWg22bybN
+ 5pS90+nt51CtBxFO6WYmH/THtiK/mlE+eW4BNbMAhLgT7eyvOOe0h4K5gpTVFKSS
+ 4ZVMX92hteCfzuoo7tUomTiqdB8i55wnMMzRZXHCIHHL6CjLvCSdj/HLfkonMbyK
+ dlZrslEDQEtPTBd8qxKeyw==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id pEmmydLtJRWh for <qemu-riscv@nongnu.org>;
+ Thu,  2 Sep 2021 23:50:12 -0700 (PDT)
+Received: from toolbox.alistair23.me (unknown [10.225.165.18])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4H17hb6spBz1RvlP;
+ Thu,  2 Sep 2021 23:50:07 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v1 1/3] hw/riscv: virt: Don't use a macro for the PLIC
+ configuration
+Date: Fri,  3 Sep 2021 16:50:00 +1000
+Message-Id: <bc35567c2e79645579ee66f34f86cf5120710a76.1630651786.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-References: <20210902112520.475901-1-anup.patel@wdc.com>
- <20210902112520.475901-2-anup.patel@wdc.com>
-In-Reply-To: <20210902112520.475901-2-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 3 Sep 2021 13:32:33 +1000
-Message-ID: <CAKmqyKNNCj_Q_s2TAPbP-G+eXnGGzZbe=OwnjvZvWMFOHzDpCA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/22] target/riscv: Fix trap cause for RV32 HS-mode
- CSR access from RV64 HS-mode
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=873c9cf92=alistair.francis@opensource.wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,39 +104,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 03:33:06 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 06:50:22 -0000
 
-On Thu, Sep 2, 2021 at 9:36 PM Anup Patel <anup.patel@wdc.com> wrote:
->
-> We should be returning illegal instruction trap when RV64 HS-mode tries
-> to access RV32 HS-mode CSR.
->
-> Fixes: d6f20dacea51 ("target/riscv: Fix 32-bit HS mode access permissions")
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Using a macro for the PLIC configuration doesn't make the code any
+easier to read. Instead it makes it harder to figure out what is going
+on, so let's remove it.
 
-Alistair
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/riscv/virt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 50a2c3a3b4..1f13d1042d 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -181,7 +181,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
->  static RISCVException hmode32(CPURISCVState *env, int csrno)
->  {
->      if (!riscv_cpu_is_32bit(env)) {
-> -        if (riscv_cpu_virt_enabled(env)) {
-> +        if (!riscv_cpu_virt_enabled(env)) {
->              return RISCV_EXCP_ILLEGAL_INST;
->          } else {
->              return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> --
-> 2.25.1
->
->
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 5624adda58..d562ec6722 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -550,7 +550,7 @@ static char *plic_hart_config_string(int hart_count)
+     int i;
+=20
+     for (i =3D 0; i < hart_count; i++) {
+-        vals[i] =3D VIRT_PLIC_HART_CONFIG;
++        vals[i] =3D "MS";
+     }
+     vals[i] =3D NULL;
+=20
+--=20
+2.31.1
+
 
