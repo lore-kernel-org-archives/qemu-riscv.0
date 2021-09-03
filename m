@@ -1,84 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mMEqQ-0005rl-Gk
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 15:27:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41734)
+	id 1mMEuE-0004bD-1B
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 15:31:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMEqO-0005ju-FH
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:27:20 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334]:41746)
+ id 1mMEuC-0004Xl-PL
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:31:17 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:40493)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMEqM-00083i-2G
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:27:20 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- u15-20020a05600c19cf00b002f6445b8f55so251721wmq.0
- for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 12:27:17 -0700 (PDT)
+ id 1mMEu6-0002hH-D2
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 15:31:13 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ x2-20020a1c7c02000000b002e6f1f69a1eso232851wmc.5
+ for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 12:31:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=AvOkOfxkdjDhX5Hr5pmdj5uo1fcSJm4IVvX1hwx97Ao=;
- b=bg+OFO0jqAgHpuoaC0WJbFBZIOk5qGYibVH29fChJgML2kxJWhKF5Jxc7LLSTQPRTg
- 26syI9O8VN3Fm59ICWq35/9jBjTtYzjL6cI62D3J0UREhARdJdIFlLS+P2CxzspRuf1h
- JLUrMaFBOh5TAsSu3T8T/zJZ070GAAQ0N6l+g4N681MpHCf+7Ci5Zyn7sENEEF9FCoCY
- biL7rLxIoYJJkISAQ7Fj0YlWWWULMzJMQ0HmocJN1ywsf771paJ6Pgk8nJyRea2+3LTl
- woAih8woFSfHcKgqmE+pI2wqoGmbWaASbrGCZS16i8YkXZR+AMxemau4GbNlT53rJ1AF
- hAUA==
+ bh=5AI83WewnZnYkPXwZnd2Q/eU9eygrBsbivngRE4BXiQ=;
+ b=P4ISVXfvobqG12Z6RoTOI5UGIr/4McKEzBRjkpnJVeCZevklJ/WV/0lQBT+voH2SUY
+ t0dVslctqlM5DOtyjeqjkUvPjGWjj1dhiEdyZQeWioK8rQRoWy5A5NcKlSGuzKW3aWqj
+ t2bT7b9xG9bD7XISjXwWDKsCHqd+100iir2zh/3XRm8EAkGO06KgFLng+vuhbRGyvSoR
+ AObhwaMSw7osyojtzotiYTY7cxvr3JYasdODvCk6KW0vBIVPJ0cpLiVEP0EFP/cmNIcL
+ vTd4VlnM3ebyqP3INvEw9GWo/Z410XL/Oo2itgtLLE/TkG/P7c4oBYv9h2IqwiQYnS7X
+ J5sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=AvOkOfxkdjDhX5Hr5pmdj5uo1fcSJm4IVvX1hwx97Ao=;
- b=H+w9n7g7G9c81cKYqBS9Qo9ynE44GPYqHirkP8XA6BWmyDQ0v5KYE+50MibgVA4jUX
- L2Zvd6GuoPg7qa/+DDICuOI+ocdy68rcCsJeJb36ej1YrpvUAuIMNyQgBdr757gXvHNj
- pX3/1bgdXTGUaq0NyTwQUJxlSWSJmjDmFCkXdK0u+rP5Tak49q8+Vz4YqZSby24V0ACB
- kX7WsxIEeXGiKZhqLYBIzLfj0llUb5uY62dgPyue2vL4+mjtI0pRQxOnU7s6R6JWltXw
- L4VofzClt6prWwRfrjIGM2NEcKih612CVVso5qK6ug75zn/9Pw24OaDdVBjXl7MPUqS1
- vTCA==
-X-Gm-Message-State: AOAM532vTDC8JaWtwq2DZ4k7K/D/GNONCikpL9Qdkkn917MTeMXon+kj
- p8OyHb4EBybhu/ef5dOlmlcgzw==
-X-Google-Smtp-Source: ABdhPJwDvInXskp2g95n6Qou57qQhZ4Z+Ha1JnhpK+wRIDNvLNkuA6PQ31KSuCxfJ2bn/4YnN2TTIA==
-X-Received: by 2002:a1c:7dd0:: with SMTP id y199mr333732wmc.23.1630697236443; 
- Fri, 03 Sep 2021 12:27:16 -0700 (PDT)
+ bh=5AI83WewnZnYkPXwZnd2Q/eU9eygrBsbivngRE4BXiQ=;
+ b=czCzTWYw+FjAjI0Iw1GPETT9lSp3qBGx15znAZjc97IgmwDdVbr8ZwumPy6cVon+gE
+ +Pkp+rmYitb+obovdS7vsi6HFo0tF4QwDmVqLc955FLsKcc36qso5TQOLFSAqWwAmdvI
+ Aj6GP047T8cNDUP1vC+IPOIlZZdB22JG3uWGfndr2dYglgiCW265Wp8tJ+4Hb98oYXCM
+ p08oP5GxbJfvNU7u2wIlwk3LesOxdfkXB/FaRg+RePNvwZlMkA4YN2fsE+miBJcGmNxd
+ 5JtdJHLikNaic5cu9vihz1ZN0HV5vzNjJx5gFbhkLYQ6Nl4ZQFe3eWPwqf6mTVVGK+w0
+ jkEw==
+X-Gm-Message-State: AOAM5330oII2B4G3OIAffXu3GEgtaEMwra9nTEylW6lE6SynNmi4HL5M
+ TXVQkowkRYB1c387r3PBEkgiag==
+X-Google-Smtp-Source: ABdhPJyNPnhhhAtbo2njo6bCAr3WAaEKFNGmuE7LF325krCnfwymK4ah4w6eYAokj7v99c7wD74wnA==
+X-Received: by 2002:a1c:1c2:: with SMTP id 185mr289419wmb.11.1630697468395;
+ Fri, 03 Sep 2021 12:31:08 -0700 (PDT)
 Received: from [192.168.8.107] (190.red-2-142-216.dynamicip.rima-tde.net.
  [2.142.216.190])
- by smtp.gmail.com with ESMTPSA id s13sm248122wmc.47.2021.09.03.12.27.13
+ by smtp.gmail.com with ESMTPSA id f17sm286460wmf.4.2021.09.03.12.31.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Sep 2021 12:27:16 -0700 (PDT)
-Subject: Re: [PATCH 24/24] user: Remove cpu_get_pic_interrupt() stubs
+ Fri, 03 Sep 2021 12:31:08 -0700 (PDT)
+Subject: Re: [PATCH v3 01/30] accel/tcg: Restrict cpu_handle_halt() to sysemu
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
-Cc: Yoshinori Sato <ysato@users.sourceforge.jp>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, qemu-arm@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Warner Losh <imp@bsdimp.com>, Michael Rolnik <mrolnik@gmail.com>,
- Stafford Horne <shorne@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bin Meng <bin.meng@windriver.com>, Chris Wulff <crwulff@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- David Gibson <david@gibson.dropbear.id.au>, Kyle Evans <kevans@freebsd.org>,
+Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>, 
+ Greg Kurz <groug@kaod.org>, haxm-team@intel.com,
+ Kamil Rytarowski <kamil@netbsd.org>, qemu-ppc@nongnu.org,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Michael Rolnik <mrolnik@gmail.com>, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Thomas Huth <thuth@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Chris Wulff <crwulff@gmail.com>, Laurent Vivier <lvivier@redhat.com>,
+ Cameron Esfahani <dirty@apple.com>, Sunil Muthuswamy
+ <sunilmut@microsoft.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Taylor Simpson <tsimpson@quicinc.com>, qemu-s390x@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, Paul Durrant <paul@xen.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- Aurelien Jarno <aurelien@aurel32.net>, Eduardo Habkost
- <ehabkost@redhat.com>, Marek Vasut <marex@denx.de>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Greg Kurz
- <groug@kaod.org>, qemu-riscv@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
- qemu-ppc@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-References: <20210902151715.383678-1-f4bug@amsat.org>
- <20210902151715.383678-25-f4bug@amsat.org>
+ David Gibson <david@gibson.dropbear.id.au>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Roman Bolshakov <r.bolshakov@yadro.com>, Laurent Vivier <laurent@vivier.eu>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-arm@nongnu.org,
+ Wenchao Wang <wenchao.wang@intel.com>, xen-devel@lists.xenproject.org,
+ Marek Vasut <marex@denx.de>, Stefano Stabellini <sstabellini@kernel.org>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Colin Xu <colin.xu@intel.com>, Claudio Fontana <cfontana@suse.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
+ Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
+References: <20210902161543.417092-1-f4bug@amsat.org>
+ <20210902161543.417092-2-f4bug@amsat.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <bc9cedf2-cc77-bb8a-3097-0c16b6912042@linaro.org>
-Date: Fri, 3 Sep 2021 21:27:11 +0200
+Message-ID: <cdbffa64-98a4-859d-d8f1-50d959197542@linaro.org>
+Date: Fri, 3 Sep 2021 21:31:02 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210902151715.383678-25-f4bug@amsat.org>
+In-Reply-To: <20210902161543.417092-2-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
 X-Spam_bar: ---
@@ -98,20 +111,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 19:27:20 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 19:31:17 -0000
 
-On 9/2/21 5:17 PM, Philippe Mathieu-Daudé wrote:
-> cpu_get_pic_interrupt() is now unreachable from user-mode,
-> delete the unnecessary stubs.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
-> ---
->   target/i386/cpu.h | 2 +-
->   bsd-user/main.c   | 7 -------
->   linux-user/main.c | 7 -------
->   3 files changed, 1 insertion(+), 15 deletions(-)
+On 9/2/21 6:15 PM, Philippe Mathieu-Daudé wrote:
+> +#ifndef CONFIG_USER_ONLY
+>   static inline bool cpu_handle_halt(CPUState *cpu)
+>   {
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Hmm, slightly better to move the ifdef just inside here,
+
+> @@ -607,6 +608,7 @@ static inline bool cpu_handle_halt(CPUState *cpu)
+>   
+
+and here,
+
+>       return false;
+>   }
+> +#endif /* !CONFIG_USER_ONLY */
+>   
+>   static inline void cpu_handle_debug_exception(CPUState *cpu)
+>   {
+> @@ -865,9 +867,11 @@ int cpu_exec(CPUState *cpu)
+>       /* replay_interrupt may need current_cpu */
+>       current_cpu = cpu;
+>   
+> +#ifndef CONFIG_USER_ONLY
+>       if (cpu_handle_halt(cpu)) {
+>           return EXCP_HALTED;
+>       }
+> +#endif
+
+which would eliminate this one.
+
 
 r~
 
