@@ -1,52 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mMFd2-00089E-My
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 16:17:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49884)
+	id 1mMFeL-0001Ag-Lj
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Sep 2021 16:18:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50128)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMFcs-00086Z-JD
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:17:26 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:45606)
+ id 1mMFeH-000197-Aq
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:18:53 -0400
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331]:34380)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mMFcr-0006LV-2B
- for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:17:26 -0400
-Received: by mail-wr1-x432.google.com with SMTP id n5so289348wro.12
- for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 13:17:24 -0700 (PDT)
+ id 1mMFeC-0007Su-PI
+ for qemu-riscv@nongnu.org; Fri, 03 Sep 2021 16:18:52 -0400
+Received: by mail-wm1-x331.google.com with SMTP id
+ v20-20020a1cf714000000b002e71f4d2026so248621wmh.1
+ for <qemu-riscv@nongnu.org>; Fri, 03 Sep 2021 13:18:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Q8RRtCMhTGBNat58ZoO2h/0Fc8GkNe0Oprx1Qcmt+DQ=;
- b=dwmv1KqM52aR7rH3nFosWXsm4FD08tdhGNndv5xGMzStvCDMhzyZVE8JBIwPUqwq2F
- bCLRGHMXtpcQxrFHLNsfcJ75PuxEZqI9fgeJ+R64/zxYVNYGjwzAkdzQcnV1G0aiGJeW
- LTJZC1LjtZnsolxgQDMU0UUFNoUHXBPLt2RyL3DgdCqDzCR5fV8RIduiPWvrI4huqI2x
- 14xoPIKRj+tYSoQLnz+qpU2iP9/qF7o+j2jiFMjWkvX25zBXsZzxhgUCz6Znrep8fiq8
- IBBZaGnjNh2PebWfRMYGVTv6N4GT+lZ2aNLKT+f0rlGZl04V61ntDZBBZCMp6HS8v9vZ
- WEdw==
+ bh=LqQ2qGQh8nV1ZvT9x+U3BKt+BXWg+vkVFqLIEGHhpMw=;
+ b=V8kfIBCEJT52V1fp3BG4eEUjASX4Rx05CBYVPUwSnXcrpvu9DyPd9YLrQ1EFixujIi
+ lUO2S1zkZF5PG/5VBU6Rk3aTdfu/NohdFpDaoPBTWr2+EAlAEqDrzmgPhi1sQ9/EZI5O
+ sp0T10IQyhYcG2l5hY7SahzlV5/YDV007peO7QbcQiw6uki0FNbyDs+4u092DrKL854h
+ BofPE+Yc042W1WfjRNZgBmoOLdNGI5J41nf004XrJoendGTO+R9LadQCXGvxwYAslhrk
+ awNCuxHsEq//V4tBYb37j34Ybdls/wwtEv1je9PRsUGuN+bp2kKIvMshhTUfobepCiRM
+ Cayg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Q8RRtCMhTGBNat58ZoO2h/0Fc8GkNe0Oprx1Qcmt+DQ=;
- b=Gr8DsdvsQXMRQ0VESAZTmZ+fo9Jofrg/O8S2eI10ulwo5nmJUJmsEatV+o9rLxh3UG
- frwRlhWtSv08B4+bTWbAueIe4mLB0qtpMCbUWQoKQ0sBJiEciMgYzQGjB4ynwZ5A9RYF
- 4GbD3dwmL5qHXN90O3f8t6gzx1ddY1+XK2DoGtkWvJ4PAK6h49F6MF9Cgl4XL0fWL/l5
- nL5dGafU7apm2XmBXtR5POgs1cDN6xtztPxO7n/ZE6gs9Ic6XcLlbHhptNM2j0+B/lqR
- 5CcfcIZIIkj98wNIxjKFJZZXFQrG3ixrQCdOPvSP8wvMIPTdP+kivo7yCyKLxLfUGq18
- bztQ==
-X-Gm-Message-State: AOAM5339WNgp3SD7YifuxrhdfUdl0koe+biNNyMaQIPU5mzoog2gOHZh
- xWxc9DCUxWrX68Ng3PbRKMTjPQ==
-X-Google-Smtp-Source: ABdhPJymtYq5kcbCfG6OUgkQoqRmbaJKl89J4TFcqlkWTH+OL3rMdlakO2CQQpDxn27LYKv0Y23GMQ==
-X-Received: by 2002:a5d:53c1:: with SMTP id a1mr784175wrw.209.1630700243751;
- Fri, 03 Sep 2021 13:17:23 -0700 (PDT)
+ bh=LqQ2qGQh8nV1ZvT9x+U3BKt+BXWg+vkVFqLIEGHhpMw=;
+ b=ukcwiprQ6Eba4h0CO7w4Ogf+oxE0/xgKhPCkmDtbmFgrG8mYhhAOslcPssCOHXzy0X
+ xYsIvSatF1UBdWxWdnxDD70PtcNbvtzJjYywkuTpv8L8FAXBX/lo/BKsszlTyDODxBdN
+ eyJd3zLMzQ+tkOwDy2Luswe2Eq7/OUqhhPK2WfoNwoIJouj49qfFKDMygOWZ1MLvQG/7
+ tWZW6C1fyRR1LO+biQKGUXPclHbmGqQOeMeOsURhomEoP2YOnl/NcsUHSxSh7MjgNFlg
+ qztWUnKkungB01GOn9CNqi2C59mykuT0EElw30vhkQgafkrKNEjSNdXx6In5kud7Yj3C
+ k4QQ==
+X-Gm-Message-State: AOAM532Fy3HoSHWAttvOOwTviwfJUprRBLFxhcAgikfKHLpJad5J3p8y
+ tmPCgFXVhLY1efzut8qZpYF8aA==
+X-Google-Smtp-Source: ABdhPJw3r9Ix8xv+Nu5+AHr+Q3zSVCPcKA2sZb2hwjS2kDrQMzRlRnU83nDo49PObR1jR+RXBXRDHg==
+X-Received: by 2002:a1c:7c12:: with SMTP id x18mr498453wmc.114.1630700327288; 
+ Fri, 03 Sep 2021 13:18:47 -0700 (PDT)
 Received: from [192.168.8.107] (190.red-2-142-216.dynamicip.rima-tde.net.
  [2.142.216.190])
- by smtp.gmail.com with ESMTPSA id n4sm212131wri.78.2021.09.03.13.17.19
+ by smtp.gmail.com with ESMTPSA id e3sm292523wrv.18.2021.09.03.13.18.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Sep 2021 13:17:23 -0700 (PDT)
-Subject: Re: [PATCH v3 07/30] accel/tcg: Implement AccelOpsClass::has_work()
- as stub
+ Fri, 03 Sep 2021 13:18:46 -0700 (PDT)
+Subject: Re: [PATCH v3 08/30] target/alpha: Restrict has_work() handler to
+ sysemu and TCG
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
  qemu-devel@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>, 
@@ -79,19 +80,19 @@ Cc: Bin Meng <bin.meng@windriver.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Stafford Horne <shorne@gmail.com>,
  Reinoud Zandijk <reinoud@netbsd.org>, kvm@vger.kernel.org
 References: <20210902161543.417092-1-f4bug@amsat.org>
- <20210902161543.417092-8-f4bug@amsat.org>
+ <20210902161543.417092-9-f4bug@amsat.org>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <618da04b-c9e4-bd22-d527-412c3fd31386@linaro.org>
-Date: Fri, 3 Sep 2021 22:17:16 +0200
+Message-ID: <3cd48aba-a1a1-cde3-3175-e9c462fcb220@linaro.org>
+Date: Fri, 3 Sep 2021 22:18:39 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210902161543.417092-8-f4bug@amsat.org>
+In-Reply-To: <20210902161543.417092-9-f4bug@amsat.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x432.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
 X-Spam_bar: ---
@@ -111,19 +112,30 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2021 20:17:26 -0000
+X-List-Received-Date: Fri, 03 Sep 2021 20:18:53 -0000
 
 On 9/2/21 6:15 PM, Philippe Mathieu-Daudé wrote:
-> Add TCG target-specific has_work() handler in TCGCPUOps,
-> and add tcg_cpu_has_work() as AccelOpsClass has_work()
-> implementation.
+> Restrict has_work() to TCG sysemu.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 > ---
->   include/hw/core/tcg-cpu-ops.h |  4 ++++
->   accel/tcg/tcg-accel-ops.c     | 12 ++++++++++++
->   2 files changed, 16 insertions(+)
+>   target/alpha/cpu.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+> index 93e16a2ffb4..32cf5a2ea9f 100644
+> --- a/target/alpha/cpu.c
+> +++ b/target/alpha/cpu.c
+> @@ -33,6 +33,7 @@ static void alpha_cpu_set_pc(CPUState *cs, vaddr value)
+>       cpu->env.pc = value;
+>   }
+>   
+> +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+>   static bool alpha_cpu_has_work(CPUState *cs)
 
+Drop CONFIG_TCG for alpha; it's always true.
+
+Otherwise,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
