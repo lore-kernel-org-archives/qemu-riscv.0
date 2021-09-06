@@ -1,95 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mMfHH-0007rQ-FV
-	for mharc-qemu-riscv@gnu.org; Sat, 04 Sep 2021 19:40:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45922)
+	id 1mN5EM-0005t5-6b
+	for mharc-qemu-riscv@gnu.org; Sun, 05 Sep 2021 23:23:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58420)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mMfHG-0007qq-Ef; Sat, 04 Sep 2021 19:40:50 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:42763)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mMfHE-0005ZC-Nr; Sat, 04 Sep 2021 19:40:50 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- k20-20020a05600c0b5400b002e87ad6956eso2120294wmr.1; 
- Sat, 04 Sep 2021 16:40:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=7B1Tb7+LoNWIC6SLhDrpAAfzztMayZmtlKwX9VY86h4=;
- b=SZt6L1IQa4I2vUjhoDepUCUfey1oy5Pp0yK6+6HpFVagJ3vGh8eo7jj9UQPPDlj9qR
- 4eFeYXCDp9Z7rCjdQviBJx0z6rJFUEfRowGmf+PjdZqF/mI952vGHNWEudUmX4v635Lz
- itC+wNbuNIPOXy+13uB9aB0BOu6TFQGyUV7Q+f6vPZMWfCIaGuCC5sZ6Lo+pyjNxgpM3
- 5o2Dszj3OUzNXcgqyFxDRML4vfrg2eBCrZFz/q7YVZNLDSQ/yGKZeK1I/CYjkPleNH0d
- IiSTuOlmcxNS1qvPd2ZbcqXLQqm2DB+J5oVDfX11CC9s8DV2p/gvZ4qiIgYSbxP5+J1V
- 7f4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=7B1Tb7+LoNWIC6SLhDrpAAfzztMayZmtlKwX9VY86h4=;
- b=hJMqPwZQ3m0gkpsJyrzJMfzWaceO3xr8GXDsv4hmK2bNS8BzTCP3mrrwJ2A5xOmQS4
- qtvdWTJVnpRnRqZhedzuYXO15YIB4Gxs1cbnqYNX5J7DdHXWs0ReB+tpJYscLPHJfJg3
- xo9sPb/+0HAMuDDinJ4ZIOYm3bRbl8CcqA427LU/QnJbP0OskY69VovZ/WcZZqQPT0iJ
- xrq5eS87sWfKAmE4TnOr9yOMvsXDchwmHaUbzy74CAGLgIUFlxPLBm2RHYtZH1ReFHM2
- gSEUQkEcY4bQdTGXZhz03+8NE2AdqqWx7lqPdOIe6T5mF33h0BT/2YNgSabF49gNvobr
- DgKQ==
-X-Gm-Message-State: AOAM533ODLoNn5womD0yZvan5oRwg1HJSKxwZE38oNfo15gavhSB8NQ8
- cTGMgHx13fPNoWSp76AxarI=
-X-Google-Smtp-Source: ABdhPJy7WfYr79Zhc0QukuXTfF0s7AerxaKaLzDnWvd3yjpJDgkkkFRdP9ijcHZZKde6nTPj3uIZ8A==
-X-Received: by 2002:a05:600c:4ed1:: with SMTP id
- g17mr678056wmq.193.1630798845652; 
- Sat, 04 Sep 2021 16:40:45 -0700 (PDT)
-Received: from [192.168.1.36] (21.red-83-52-55.dynamicip.rima-tde.net.
- [83.52.55.21])
- by smtp.gmail.com with ESMTPSA id g11sm3297600wrx.30.2021.09.04.16.40.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Sep 2021 16:40:44 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH 16/24] target/openrisc: Restrict cpu_exec_interrupt()
- handler to sysemu
-To: Warner Losh <imp@bsdimp.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mN5EK-0005sh-OE; Sun, 05 Sep 2021 23:23:32 -0400
+Received: from out28-196.mail.aliyun.com ([115.124.28.196]:53823)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mN5EH-0002zO-Rd; Sun, 05 Sep 2021 23:23:32 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07790039|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.00338137-0.00059117-0.996027;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047207; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LG4pgIz_1630898597; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.LG4pgIz_1630898597)
+ by smtp.aliyun-inc.com(10.147.42.241);
+ Mon, 06 Sep 2021 11:23:17 +0800
+Subject: Re: [PATCH] target/riscv: Fix satp write
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Bin Meng <bin.meng@windriver.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- QEMU Developers <qemu-devel@nongnu.org>, Max Filippov <jcmvbkbc@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, qemu-ppc <qemu-ppc@nongnu.org>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Kyle Evans <kevans@freebsd.org>,
- Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
- <groug@kaod.org>, qemu-arm <qemu-arm@nongnu.org>,
- Michael Rolnik <mrolnik@gmail.com>, Stafford Horne <shorne@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
- Chris Wulff <crwulff@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Aurelien Jarno <aurelien@aurel32.net>
-References: <20210902151715.383678-1-f4bug@amsat.org>
- <20210902151715.383678-17-f4bug@amsat.org>
- <CANCZdfrMm7dHn+g7V08xrk+JuWKBTVp8Q=8PaBGdSWx7z5ZrBw@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <f729f68d-3880-3aab-ee23-fdbcb126fc9e@amsat.org>
-Date: Sun, 5 Sep 2021 01:40:42 +0200
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20210901124539.222868-1-zhiwei_liu@c-sky.com>
+ <CAEUhbmUvb4_tmevGEcK_YgyA9_g5LumRVpMc7+rwuD4D7FSBBA@mail.gmail.com>
+ <a61c6fef-4bce-0c5b-7aff-b9e2fa75aa5b@c-sky.com>
+ <CAEUhbmXULr_mcdfh6x=BGLNcNM5Q7YrFhnHOuLatbrokqP0Taw@mail.gmail.com>
+ <e5f5e2b1-8fc5-31de-c927-1ae7545957f8@c-sky.com>
+ <CAEUhbmVCYZ2j6Vp0g4JjHf5XmTDFW+wm5PoT4MmMjUvrfGpkeA@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <fbbf6698-5145-eab9-e3c9-66c9fe1598a1@c-sky.com>
+Date: Mon, 6 Sep 2021 11:23:16 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <CANCZdfrMm7dHn+g7V08xrk+JuWKBTVp8Q=8PaBGdSWx7z5ZrBw@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <CAEUhbmVCYZ2j6Vp0g4JjHf5XmTDFW+wm5PoT4MmMjUvrfGpkeA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x329.google.com
-X-Spam_score_int: -52
-X-Spam_score: -5.3
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.196; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-196.mail.aliyun.com
+X-Spam_score_int: -56
+X-Spam_score: -5.7
 X-Spam_bar: -----
-X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-3.832,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-5.7 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-3.832,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -102,77 +63,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Sep 2021 23:40:50 -0000
+X-List-Received-Date: Mon, 06 Sep 2021 03:23:33 -0000
 
-On 9/2/21 10:24 PM, Warner Losh wrote:
-> 
-> 
-> On Thu, Sep 2, 2021 at 9:18 AM Philippe Mathieu-Daudé <f4bug@amsat.org
-> <mailto:f4bug@amsat.org>> wrote:
-> 
->     Restrict cpu_exec_interrupt() and its callees to sysemu.
-> 
->     Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org
->     <mailto:f4bug@amsat.org>>
->     ---
->      target/openrisc/cpu.h       | 5 +++--
->      target/openrisc/cpu.c       | 2 +-
->      target/openrisc/interrupt.c | 2 --
->      target/openrisc/meson.build | 6 ++++--
->      4 files changed, 8 insertions(+), 7 deletions(-)
-> 
-> 
-> I'm not 100% sure about the build changes because my meson fu is weak,
-> but they seem right given the rest. 
-> 
-> Reviewed-by: Warner Losh <imp@bsdimp.com <mailto:imp@bsdimp.com>>
 
->     diff --git a/target/openrisc/meson.build b/target/openrisc/meson.build
->     index 9774a583065..e445dec4a00 100644
->     --- a/target/openrisc/meson.build
->     +++ b/target/openrisc/meson.build
->     @@ -9,7 +9,6 @@
->        'exception_helper.c',
->        'fpu_helper.c',
->        'gdbstub.c',
->     -  'interrupt.c',
+On 2021/9/2 上午10:47, Bin Meng wrote:
+> On Thu, Sep 2, 2021 at 10:44 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>>
+>> On 2021/9/2 上午9:59, Bin Meng wrote:
+>>> On Thu, Sep 2, 2021 at 9:02 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>>>> On 2021/9/1 下午9:05, Bin Meng wrote:
+>>>>> On Wed, Sep 1, 2021 at 8:51 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>>>>>> These variables should be target_ulong. If truncated to int,
+>>>>>> the bool conditions they indicate will be wrong.
+>>>>>>
+>>>>>> As satp is very important for Linux, this bug almost fails every boot.
+>>>>> Could you please describe which Linux configuration is broken?
+>>>> I use the image from:
+>>>>
+>>>> https://gitlab.com/c-sky/buildroot/-/jobs/1251564514/artifacts/browse/output/images/
+>>>>
+>>>>>     I have
+>>>>> a 64-bit 5.10 kernel and it boots fine.
+>>>> The login is mostly OK for me. But the busybox can't run properly.
+>>> Which kernel version is this?
+>> 5.10.4
+>>> Could you please investigate and
+>>> indicate in the commit message?
+>>>
+>>> I just tested current qemu-system-riscv64 can boot to Ubuntu 20.04
+>>> distro user space.
+>> Very strange.  This will cause tlb_flush can't be called in this function.
+>>
+> Did your kernel enable asid?
 
-openrisc_ss is a 'Source Set', it is build each time the openrisc
-target is selected (regardless system/user).
+Yes. Is it matter?
 
->        'interrupt_helper.c',
->        'mmu.c',
->        'sys_helper.c',
->     @@ -17,7 +16,10 @@
->      ))
-> 
->      openrisc_softmmu_ss = ss.source_set()
+Thanks,
+Zhiwei
 
-The 'openrisc_softmmu_ss' source set is only build when sysemu
-is selected.
-
->     -openrisc_softmmu_ss.add(files('machine.c'))
->     +openrisc_softmmu_ss.add(files(
->     +  'interrupt.c',
-
-By moving it to the sysemu-specific set, the file won't be built
-for a user-only build.
-
->     +  'machine.c',
->     +))
-> 
->      target_arch += {'openrisc': openrisc_ss}
->      target_softmmu_arch += {'openrisc': openrisc_softmmu_ss}
-
-BTW the user-equivalent of ARCH_softmmu_ss is ARCH_user_ss, and
-is optional:
-
-$ git grep _user_ss.= target
-target/i386/meson.build:23:i386_user_ss = ss.source_set()
-target/mips/meson.build:1:mips_user_ss = ss.source_set()
-target/s390x/meson.build:34:s390x_user_ss = ss.source_set()
-
-Thanks for your reviews!
-
-Phil.
+>
+> Regards,
+> Bin
 
