@@ -1,58 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mNqYv-0000J6-0u
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 01:55:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47082)
+	id 1mNqrT-0001ga-7S
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 02:15:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50524)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mNqYs-0000Gc-V7; Wed, 08 Sep 2021 01:55:54 -0400
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:43631)
+ id 1mNqrR-0001gN-Ow; Wed, 08 Sep 2021 02:15:05 -0400
+Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:38911)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mNqYr-0004vm-9o; Wed, 08 Sep 2021 01:55:54 -0400
-Received: by mail-yb1-xb2c.google.com with SMTP id c6so1886447ybm.10;
- Tue, 07 Sep 2021 22:55:52 -0700 (PDT)
+ id 1mNqrQ-0004F9-7f; Wed, 08 Sep 2021 02:15:05 -0400
+Received: by mail-yb1-xb33.google.com with SMTP id v10so2022975ybm.5;
+ Tue, 07 Sep 2021 23:15:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v8q60mt5Ej3v7B7uxMr/itsLyYbnc/Att2uODKJF4gk=;
- b=LCQEYezIiyvnX7UYVlDiSC0ySctpUKPGZ4c6V9LYppGGpWZlrticoiMagwTm7lvNQE
- vYXLnuPllbL31j8gd8TnO1gCX2oKiBmL6efKoZ/RWeSCEOaGK+Qw8w/ou+/EQrIyAwW5
- YLuUoGMVfidaHKwa9YjqhZZISL4LEDvJbrU/RLbYJW2/3oLNd6wCqpQI+1SH9corxQbk
- LnJeZBr2dQ+pqC0brqf10mUUZaLi07zR0qL7RdyQd3QW0nIbynPo5mXXVY/VKZwzExgb
- flJnGaO/d0Q+l66gR4Quw41Ul3ZyxOUs1pFqe4Av9xnbQ5tiW2kkDB8BJU2TPJQrKoLX
- sSZw==
+ :cc; bh=wsQH+oVAoJfz081UhLOwBFkvr7MAfyLoR++rYFAzaSw=;
+ b=jz5LtAIQfR33uNhsL6KoLDpU4ZRYi+tHN5WUOqkubVYIDI/NtsuAjc5cEWSEZi566v
+ 5QnhbCevvdCR7F4aCRfjRg1G01wXspRSdmuA3UPIFKVFVsRnQFsZnzm3nU5Vm5iE9SKw
+ GT+C+lMrWfDyTMlRglEEgpdP1WY4wwOfzTBRFqEUtY4kDK0h2dN6s6X1sIAc/LzYgJbb
+ EWP54Tth0uU/3umAy6SZ0UicCtqVmQPfyE5wuVi4QkdMUarRqp2H3lzXKqMaEN/Wa/dC
+ Zzj526W9ifJEyirZF1DHbc4NiRfBCNWc6b6GNf90rMgyt9H5OatS5zduBD5kSvFS5NyS
+ 2IeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=v8q60mt5Ej3v7B7uxMr/itsLyYbnc/Att2uODKJF4gk=;
- b=TV/acBJV74UtyhzUK/Lr9Um4ZOuxKpwy8nLYKKK10Fys6C7TelcHiFam5aopm7MgwP
- 7j6ghVuxaFHAAxTcb+gNq2CK5c20U3kGzxBCJUQPUgvzZ8KzivxOcGgVx0T2GlfH4ebj
- NncQ+HM+prCgXWEEpl/3Qd2dYTrLdpMqhEnP3o1g9wDIn9KiGKl+glKXflPFTQSjMMqN
- UrzwoY0EszcMHIL62rAipk2YsnAEbC7Q1wtFVFmlwr5hzgBX4VKGsxHw0vSvXsp0ZCZr
- 5gm8hzX6CyW/Jy1pYN3zNbqkhXKOIhMPlK/IuaIG/rpqEXLTQr9P5a6Yz5vf78DFcrb+
- mJ+g==
-X-Gm-Message-State: AOAM530/YCtPPlE6Ve6TzdaOg4CYbPB4/X6sR1SJWjn85HOnHHwYakau
- vQqYlsMXGxtJRmK4wQAw/rVv9ppZN80czs47Z7Y=
-X-Google-Smtp-Source: ABdhPJzcLWhGIcmiPgnDOPVPPyjbTMGly7Fdxp1huqClHtQK8uojav0cEso8BFcVE+bemkRAjCgMQ4R8sLRavg5yM1c=
-X-Received: by 2002:a25:76c7:: with SMTP id r190mr2899095ybc.467.1631080551989; 
- Tue, 07 Sep 2021 22:55:51 -0700 (PDT)
+ bh=wsQH+oVAoJfz081UhLOwBFkvr7MAfyLoR++rYFAzaSw=;
+ b=N3ll/W8frBqFK3dyhblF/bf+e901mP/lGVGfgJpCDhtNqfk7ksIK2wbImKXm4+eDMR
+ erP6P+2KW2M/zDbZyzlscBoEnGc8le727bbjmlEM7ng0tUpg2I02pQtBecgp0szyYIr7
+ WiltyGpUbUj08o95Hy89yMR+J8ogEjxbmhT4sy3EDUWfTRzK75S+nzWuQFWc/8uWRW31
+ NwjgcmrToyMglLgReLC74I2vzp78fiC8ZMjXC6xe9FzJOuKOErRhBVM+jKzqjYsG6TyN
+ Bv5hSyh5lAYRQpMpfTdj2vLmPjg7xs/sfM3USKoYHU3N/Nq2pIg7e2ulZ1QfqRLqPpPe
+ riaw==
+X-Gm-Message-State: AOAM5338eo/bmDjqFJAgett93ngNDaw4Kf/TUviiPZXjYG3vBg8Z9KK3
+ P9+IvnxIZKX37tABnhnJ2c2KURHBjMBagRdOHAs=
+X-Google-Smtp-Source: ABdhPJxDZGrdjbOimsCiw7gwyzG//+JCM1WY5LNWSaqtGbIyZbISslktO/vv03/4mX4RdHrRLyafNxYdWE3wnmUf2s8=
+X-Received: by 2002:a25:76c7:: with SMTP id r190mr2986707ybc.467.1631081702835; 
+ Tue, 07 Sep 2021 23:15:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1631076834.git.alistair.francis@wdc.com>
- <be4c59ab0a3468f1962671e7cf5a947c151d31d9.1631076834.git.alistair.francis@wdc.com>
-In-Reply-To: <be4c59ab0a3468f1962671e7cf5a947c151d31d9.1631076834.git.alistair.francis@wdc.com>
+References: <20210831110603.338681-1-anup.patel@wdc.com>
+ <20210831110603.338681-3-anup.patel@wdc.com>
+In-Reply-To: <20210831110603.338681-3-anup.patel@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 8 Sep 2021 13:55:42 +0800
-Message-ID: <CAEUhbmUjg_LttOLwFMgZueA7L1aRSRTAdy78-EVybJ=a-ax-8w@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] target/riscv: Set mtval and stval support
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair23@gmail.com>
+Date: Wed, 8 Sep 2021 14:14:52 +0800
+Message-ID: <CAEUhbmWR-c-nwoDRYbvb__tHpVKDj2gQW5XVUAwEaDWbraYhJw@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] hw/intc: Upgrade the SiFive CLINT implementation
+ to RISC-V ACLINT
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup@brainfault.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atish.patra@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,61 +75,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2021 05:55:55 -0000
+X-List-Received-Date: Wed, 08 Sep 2021 06:15:06 -0000
 
-On Wed, Sep 8, 2021 at 12:55 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Tue, Aug 31, 2021 at 7:07 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> From: Alistair Francis <alistair.francis@wdc.com>
+> The RISC-V ACLINT is more modular and backward compatible with
+> original SiFive CLINT so instead of duplicating the original
+> SiFive CLINT implementation we upgrade the current SiFive CLINT
+> implementation to RISC-V ACLINT implementation.
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.h | 1 +
->  target/riscv/cpu.c | 6 +++++-
->  2 files changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index d11db1f031..5b0bbf2fca 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -309,6 +309,7 @@ struct RISCVCPU {
->          bool mmu;
->          bool pmp;
->          bool epmp;
-> +        bool mtval_inst;
->          uint64_t resetvec;
->      } cfg;
->  };
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1a2b03d579..537f2af341 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -437,6 +437,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          }
->      }
->
-> +    if (cpu->cfg.mtval_inst) {
-> +        set_feature(env, RISCV_FEATURE_MTVAL_INST);
-> +    }
-> +
->      set_resetvec(env, cpu->cfg.resetvec);
->
->      /* If only XLEN is set for misa, then set misa from properties */
-> @@ -600,7 +604,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> -
-> +    DEFINE_PROP_BOOL("tval-inst", RISCVCPU, cfg.mtval_inst, true),
-
-Should we tweak such on a per-CPU basis instead of globally enabling
-it, e.g.: update sifive_u54 per the real hardware implementation?
-
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
->      DEFINE_PROP_END_OF_LIST(),
->  };
+>  hw/intc/riscv_aclint.c         | 373 +++++++++++++++++++++++----------
+>  hw/riscv/microchip_pfsoc.c     |   9 +-
+>  hw/riscv/shakti_c.c            |  11 +-
+>  hw/riscv/sifive_e.c            |  11 +-
+>  hw/riscv/sifive_u.c            |   9 +-
+>  hw/riscv/spike.c               |  14 +-
+>  hw/riscv/virt.c                |  14 +-
+>  include/hw/intc/riscv_aclint.h |  54 +++--
+>  8 files changed, 339 insertions(+), 156 deletions(-)
 >
 
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
