@@ -1,51 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mNqWr-0006dG-76
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 01:53:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46808)
+	id 1mNqYv-0000J6-0u
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 01:55:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47082)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mNqWp-0006bW-M5; Wed, 08 Sep 2021 01:53:47 -0400
-Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:46069)
+ id 1mNqYs-0000Gc-V7; Wed, 08 Sep 2021 01:55:54 -0400
+Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:43631)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mNqWo-0003Ce-9y; Wed, 08 Sep 2021 01:53:47 -0400
-Received: by mail-yb1-xb33.google.com with SMTP id c206so1873337ybb.12;
- Tue, 07 Sep 2021 22:53:45 -0700 (PDT)
+ id 1mNqYr-0004vm-9o; Wed, 08 Sep 2021 01:55:54 -0400
+Received: by mail-yb1-xb2c.google.com with SMTP id c6so1886447ybm.10;
+ Tue, 07 Sep 2021 22:55:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yY3cIVJ4t+f/TjVBHCAvYuk1iDgnrl7gRmC6RRqq62o=;
- b=L7g9EpaJXdaOqtSbg7caIWaHZuFUbx3tFhuSeQmx0/cw00BeEutT7CZjnuaJTKpBZ9
- AH2IhDec0KHUScU82s0tSMHNnXaUxlRVEuDjAKkTwBdUGKPwrIg9OiGkGpgJQgWEUes0
- ernIsmg5oIRuK5PTJ3LbdV4XiH39PmbEfD1GVB/ngXvsFClkHsOXq165JeXWDZAdcS7J
- pyRfPL3uEm07sLi6QXT2cWBXEVtZMIBFGI8A75gQgGv3pUzqLXjhcicnZFv7A09xYuWP
- pHumP6ZNqu3E2C+8KtDpyYExySa2FdOXI/OZYE9o4loELv4xT8J1tfRBkGgbwgJTu5r8
- zZIQ==
+ :cc; bh=v8q60mt5Ej3v7B7uxMr/itsLyYbnc/Att2uODKJF4gk=;
+ b=LCQEYezIiyvnX7UYVlDiSC0ySctpUKPGZ4c6V9LYppGGpWZlrticoiMagwTm7lvNQE
+ vYXLnuPllbL31j8gd8TnO1gCX2oKiBmL6efKoZ/RWeSCEOaGK+Qw8w/ou+/EQrIyAwW5
+ YLuUoGMVfidaHKwa9YjqhZZISL4LEDvJbrU/RLbYJW2/3oLNd6wCqpQI+1SH9corxQbk
+ LnJeZBr2dQ+pqC0brqf10mUUZaLi07zR0qL7RdyQd3QW0nIbynPo5mXXVY/VKZwzExgb
+ flJnGaO/d0Q+l66gR4Quw41Ul3ZyxOUs1pFqe4Av9xnbQ5tiW2kkDB8BJU2TPJQrKoLX
+ sSZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=yY3cIVJ4t+f/TjVBHCAvYuk1iDgnrl7gRmC6RRqq62o=;
- b=T9OazkWTOJW3oPlIcZwYtUIxhnFq0ONdTnY3exT/TTlRtRSWN0YGl5uP0ziUyPG6fn
- NCmT7PMVgliwCx0wQm0lQtVb9US3543C3K/Ju7PzZsW4m8s0zkrVCY2MYhW0i9e8t+wi
- +gSauArFIWMNyoXBOrCLtlrfNImbnyXJz9oOt9nCiG8cU4+ZQrYa52loqgSBEo9UjuHn
- 7eZkrvyikgQPwXPbN1YkMVg3ozBM9iIfWi+khIUwujfv2n+wf7VcV0DWq752eSmoIhhs
- clzOfnKYiNbgLYbMpQEDQTCoRm15RInUp39wq6wMRQQDFhA3nPfsg1/xkm0tQAvLrTuH
- vn3A==
-X-Gm-Message-State: AOAM532bliGpxXIpDlt869/UpSvBDNInRaEcI8YbdBOhOAMh4Vt5nTu6
- zqFI5VAErDF+OD6/t9As//sDhlfjnRrnxvcQQYw=
-X-Google-Smtp-Source: ABdhPJyLPmGapK7Hi32kBLRdE9v5NwI65AsDdb8yGQgvpRXdHYVhR4SXgcys+2onG61dseIBzP7H2FMBWmJUqj5EFbg=
-X-Received: by 2002:a05:6902:120a:: with SMTP id
- s10mr2703172ybu.293.1631080424887; 
- Tue, 07 Sep 2021 22:53:44 -0700 (PDT)
+ bh=v8q60mt5Ej3v7B7uxMr/itsLyYbnc/Att2uODKJF4gk=;
+ b=TV/acBJV74UtyhzUK/Lr9Um4ZOuxKpwy8nLYKKK10Fys6C7TelcHiFam5aopm7MgwP
+ 7j6ghVuxaFHAAxTcb+gNq2CK5c20U3kGzxBCJUQPUgvzZ8KzivxOcGgVx0T2GlfH4ebj
+ NncQ+HM+prCgXWEEpl/3Qd2dYTrLdpMqhEnP3o1g9wDIn9KiGKl+glKXflPFTQSjMMqN
+ UrzwoY0EszcMHIL62rAipk2YsnAEbC7Q1wtFVFmlwr5hzgBX4VKGsxHw0vSvXsp0ZCZr
+ 5gm8hzX6CyW/Jy1pYN3zNbqkhXKOIhMPlK/IuaIG/rpqEXLTQr9P5a6Yz5vf78DFcrb+
+ mJ+g==
+X-Gm-Message-State: AOAM530/YCtPPlE6Ve6TzdaOg4CYbPB4/X6sR1SJWjn85HOnHHwYakau
+ vQqYlsMXGxtJRmK4wQAw/rVv9ppZN80czs47Z7Y=
+X-Google-Smtp-Source: ABdhPJzcLWhGIcmiPgnDOPVPPyjbTMGly7Fdxp1huqClHtQK8uojav0cEso8BFcVE+bemkRAjCgMQ4R8sLRavg5yM1c=
+X-Received: by 2002:a25:76c7:: with SMTP id r190mr2899095ybc.467.1631080551989; 
+ Tue, 07 Sep 2021 22:55:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1631076834.git.alistair.francis@wdc.com>
- <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
-In-Reply-To: <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
+ <be4c59ab0a3468f1962671e7cf5a947c151d31d9.1631076834.git.alistair.francis@wdc.com>
+In-Reply-To: <be4c59ab0a3468f1962671e7cf5a947c151d31d9.1631076834.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 8 Sep 2021 13:53:34 +0800
-Message-ID: <CAEUhbmXThA117GO+nUM9nNAW54ZxwKhn4-t7Eco7mMWS6kxthA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] target/riscv: Implement the stval/mtval illegal
- instruction
+Date: Wed, 8 Sep 2021 13:55:42 +0800
+Message-ID: <CAEUhbmUjg_LttOLwFMgZueA7L1aRSRTAdy78-EVybJ=a-ax-8w@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] target/riscv: Set mtval and stval support
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,8 +51,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,24 +72,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2021 05:53:48 -0000
+X-List-Received-Date: Wed, 08 Sep 2021 05:55:55 -0000
 
-On Wed, Sep 8, 2021 at 12:54 PM Alistair Francis
+On Wed, Sep 8, 2021 at 12:55 PM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
 >
 > From: Alistair Francis <alistair.francis@wdc.com>
 >
-> The stval and mtval registers can optionally contain the faulting
-> instruction on an illegal instruction exception. This patch adds support
-> for setting the stval and mtval registers based on the CPU feature.
->
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.h        |  5 ++++-
->  target/riscv/cpu_helper.c | 10 ++++++++++
->  target/riscv/translate.c  | 31 +++++++++++++++++--------------
->  3 files changed, 31 insertions(+), 15 deletions(-)
+>  target/riscv/cpu.h | 1 +
+>  target/riscv/cpu.c | 6 +++++-
+>  2 files changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index d11db1f031..5b0bbf2fca 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -309,6 +309,7 @@ struct RISCVCPU {
+>          bool mmu;
+>          bool pmp;
+>          bool epmp;
+> +        bool mtval_inst;
+>          uint64_t resetvec;
+>      } cfg;
+>  };
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1a2b03d579..537f2af341 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -437,6 +437,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          }
+>      }
+>
+> +    if (cpu->cfg.mtval_inst) {
+> +        set_feature(env, RISCV_FEATURE_MTVAL_INST);
+> +    }
+> +
+>      set_resetvec(env, cpu->cfg.resetvec);
+>
+>      /* If only XLEN is set for misa, then set misa from properties */
+> @@ -600,7 +604,7 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+>      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+> -
+> +    DEFINE_PROP_BOOL("tval-inst", RISCVCPU, cfg.mtval_inst, true),
+
+Should we tweak such on a per-CPU basis instead of globally enabling
+it, e.g.: update sifive_u54 per the real hardware implementation?
+
+>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
 >
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Regards,
+Bin
 
