@@ -1,77 +1,96 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mNrNZ-00043C-FZ
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 02:48:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55080)
+	id 1mOB9b-00073F-0t
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Sep 2021 23:55:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46886)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mNrNX-0003xf-1v
- for qemu-riscv@nongnu.org; Wed, 08 Sep 2021 02:48:15 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634]:47068)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mNrNU-0006oX-Qb
- for qemu-riscv@nongnu.org; Wed, 08 Sep 2021 02:48:14 -0400
-Received: by mail-ej1-x634.google.com with SMTP id u14so1982255ejf.13
- for <qemu-riscv@nongnu.org>; Tue, 07 Sep 2021 23:48:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=WdWeSCpL3Se3zzPnymrHC57lDrWi3e46smGEt9Njtow=;
- b=Jzbapr1+o9lsNeI0IQ+8iGLtbmVTbFWEfb06+lFr0ibQGb8E5lpkHKcOnSA5B7trqT
- hD1tPjnzvsu0I8IeDw6zU8O8kh9SZzAu87160WyvYBlmvVVyfT/SQ/SzpKklfBpBY337
- /MKrcbFr1/2/vKGR5GAMPBUxsKn1tpRZT+LiTQgEMCHaDT6PWbB+qFV9CZxxWjCGHNsX
- 1CP/dMMfW4mPcd3CyL8/BOeD3Tvhn0QeU1070YK6L87vWRUVyHphqv3yU+QxOdgMrC73
- w1Pf8B58tRPNDVT+krPr7WpEBy3uMJyyyF7sG4CrF61g1Ak8jn+SYFLD/51GCZhKjV0f
- vAow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=WdWeSCpL3Se3zzPnymrHC57lDrWi3e46smGEt9Njtow=;
- b=a1bN8DfyNLCoa98H+A6+Y6vaUvygHhVEOayTn3hcIoe4MgaVFsQ4uMw4sMN6j7+7yn
- nXXDIQgQzIqxSzulialG0AAhxaHxezFukxZuclsMNmnc+XSfzlT/9LPbvFlnWdvOAk1s
- +SP5k4vzrJpNffD9CHso+DEkGXFW1wnPvQ8vss21ltorymyViNY3mBLunfpApPHFR4oh
- F7u4fAdku9KWr2gnXcoqt+sEpj3USyYmynMDX+nBRrjuaATiBD+vR0JW0j+UqNSAva1Q
- HFy8+MsGrOW4KR9DSK2DMcHGPrJ+fLipAo+P1WvUwIwuwshzszcnGkP/tlZQzBVt2DKE
- 8kEA==
-X-Gm-Message-State: AOAM532iDOImDj+L5cjcbGNw3KCVbW5/uoz9oi7YeMU3gxz67kUEUnQw
- gDEoMMFSh6YOaCvtBHcBaRSL1g==
-X-Google-Smtp-Source: ABdhPJzCXXXhKIx1B/L0E1Q4yRlyTrGmQsImMhI6lpohqtFsfDVwrHff0KU/i9h9/pHntWl0Oq4IwA==
-X-Received: by 2002:a17:906:63ca:: with SMTP id
- u10mr2439928ejk.411.1631083690391; 
- Tue, 07 Sep 2021 23:48:10 -0700 (PDT)
-Received: from [192.168.127.34] ([185.81.138.20])
- by smtp.gmail.com with ESMTPSA id ly7sm464670ejb.109.2021.09.07.23.48.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Sep 2021 23:48:08 -0700 (PDT)
-Subject: Re: [PATCH v2 2/3] target/riscv: Implement the stval/mtval illegal
- instruction
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+ (Exim 4.90_1)
+ (envelope-from <prvs=879ac4819=alistair.francis@opensource.wdc.com>)
+ id 1mOB9Z-00071M-Iw
+ for qemu-riscv@nongnu.org; Wed, 08 Sep 2021 23:55:09 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:13241)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=879ac4819=alistair.francis@opensource.wdc.com>)
+ id 1mOB9Y-00067t-0y
+ for qemu-riscv@nongnu.org; Wed, 08 Sep 2021 23:55:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1631159706; x=1662695706;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=7F9IXXP60JX52d85pljg43t1k6mm8CfBsugYwM02zpI=;
+ b=m5x9snYhI5AuGi81dhWPjHnTEhmDyZverMDoWH1e0MjsC/uMABiMCTU0
+ muFniM9kH9X38CvzywZcmttROjNq/macyZ2xTTdPSiWOqbsY6UsVfVeSW
+ 8gAtLxrGzje30OGbqtJ1W7GMYhOgc58DYcLlcqDAHpylpydBfQOwuoJtx
+ VppLxqnmr5ALEisbYk38YC6MLtt6DWNYpRuZF7oAmHt+dWGiLPp4MlsfY
+ XLaFo4RsWBQ1F1o9yoXsQSRVElfPpYTzXa+r0JnfzkAsvVgSHEc5cmdmf
+ mOh7ywm4qcaU/09QbRe3ugLdHQYzFQeJAOr6qqrCNl+31wWHJZtzFxEZX w==;
+X-IronPort-AV: E=Sophos;i="5.85,279,1624291200"; d="scan'208";a="179540903"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Sep 2021 11:55:00 +0800
+IronPort-SDR: 95mUOVaTft93TVO1Im9ALTNg/cmPYKZIrXNHAGk+VVTY/3F6dRq1T8C6JxooKA7d0FO0Gz11PT
+ YdaWgDxvK/18b8ap2W3rOv1Klcf6/eT9x35Y26nCxkBNfygMYLfSy/D7j7nz2KucZisLmCuAb2
+ QlM/zQzFIZj+iOiEsGCfKRrEPQ5kmXE5RWOmNhOx6wou+sBmixlj1J/BOUJiq/HE1GCN/FmNRn
+ 6+yi54VYG39+J7BOiL4IUgqLS0eJz0z0mCZix5u3iMI9pPO7kKlA+WLuRjDTy8nqRknquKYSUf
+ uSJFZkpCZNkwdtW6/+0A1Gcb
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Sep 2021 20:29:58 -0700
+IronPort-SDR: +IdVmrwOkPGZjZEJvbPYlF81JypFVjWCLBJhoRkFAhSqkMXK5QKCz4mjmFataZ8UIXHoQb6TO9
+ WR/y3cGd29yu3d8oDAXMJIABJ3J37wPvyzHY7tqyovRUoWn2KiWiGZFCSdeZ8Ie44krCj1ocA5
+ YR13gI20J3DoA81oEcTxy4kAh865KBm5FQ6TgDnazCWKZVZU9v+Vo+7h7IJGe3jdmyMXU06U5J
+ SoGqc+LZFN61mjpM265dG4jrqsuCDy7VPwNdOtCSkLvlOgf6C8SEmtS/mxreJpD46v4nEAGwCx
+ dFI=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 Sep 2021 20:55:02 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4H4lWn1Ytjz1Rvld
+ for <qemu-riscv@nongnu.org>; Wed,  8 Sep 2021 20:55:01 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1631159700;
+ x=1633751701; bh=7F9IXXP60JX52d85pljg43t1k6mm8CfBsugYwM02zpI=; b=
+ Y88uXAA0m5hcZHG7CPepqJJL9m+4L6sx7fGhFFyYgW/nNUG5gJO+gh7ezQrjffa/
+ PFOKBGlWH4AXHTYA6vl93MrWsBdV7kPaqb7oQaQOud6qMwj4bb3RL8xdkADBRDDf
+ jywpSDhYWedexkYWRoO53SeQ7IciWhO1O03I2pTaFRNk4dJJpRtQDAR9xGs/pyFL
+ fPDbxlZ4V677wwHTxljOzjqVv9wRt62A3i10zxzNbBzXzWGJM5DGyu/MnCSSC6a+
+ CYal3frRXol3uHrH569oqg7SRgAo+sJxITAag6ZnaiZ4pFRxAaiKDiM+Ekyurczw
+ UYDTN1dtWOoZ2z1JuQKZHQ==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id tzXog3QW0ATp for <qemu-riscv@nongnu.org>;
+ Wed,  8 Sep 2021 20:55:00 -0700 (PDT)
+Received: from toolbox.alistair23.me (unknown [10.225.165.20])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4H4lWh1SjBz1RvlP;
+ Wed,  8 Sep 2021 20:54:55 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
 Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
  alistair23@gmail.com
-References: <cover.1631076834.git.alistair.francis@wdc.com>
- <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <538d9688-0f2f-c406-50a5-d962e3ce2963@linaro.org>
-Date: Wed, 8 Sep 2021 08:48:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Subject: [PATCH v3 0/2]  Add the SiFive PWM device
+Date: Thu,  9 Sep 2021 13:54:49 +1000
+Message-Id: <cover.1631159656.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x634.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=879ac4819=alistair.francis@opensource.wdc.com;
+ helo=esa5.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.332,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,36 +103,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2021 06:48:15 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 03:55:09 -0000
 
-On 9/8/21 6:54 AM, Alistair Francis wrote:
-> @@ -967,6 +967,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->               write_tval  = true;
->               tval = env->badaddr;
->               break;
-> +        case RISCV_EXCP_ILLEGAL_INST:
-> +            if (riscv_feature(env, RISCV_FEATURE_MTVAL_INST)) {
-> +                /*
-> +                 * The stval/mtval register can optionally also be used to
-> +                 * return the faulting instruction bits on an illegal
-> +                 * instruction exception.
-> +                 */
-> +                tval = env->bins;
-> +            }
-> +            break;
-
-I'll note that write_tval should probably be renamed, and/or eliminated, because it looks 
-like it's incorrectly unset here.  If you move the adjustment to cause above this switch, 
-then you can move the RVH code that needed write_tval into this switch (just the 
-HSTATUS_GVA update?).
-
-But... more specific to this case.  Prior to this, was the exception handler allowed to 
-assume anything about the contents of stval?  Should the value have been zero?  Would it 
-be wrong to write to stval unconditionally?  How does the guest OS know that it can rely 
-on stval being set?
-
-I simply wonder whether it's worthwhile to add the feature and feature test.
+From: Alistair Francis <alistair.francis@wdc.com>
 
 
-r~
+This series adds a the SiFive PWM device and connects it to the
+sifive_u machine. This has been tested as a timer with seL4.
+
+v3:
+ - Small fixups
+v2:
+ - Address Bin's comments
+ - Expose PWM via the device tree
+
+
+Alistair Francis (2):
+  hw/timer: Add SiFive PWM support
+  sifive_u: Connect the SiFive PWM device
+
+ docs/system/riscv/sifive_u.rst |   1 +
+ include/hw/riscv/sifive_u.h    |  14 +-
+ include/hw/timer/sifive_pwm.h  |  62 +++++
+ hw/riscv/sifive_u.c            |  55 +++-
+ hw/timer/sifive_pwm.c          | 468 +++++++++++++++++++++++++++++++++
+ hw/riscv/Kconfig               |   1 +
+ hw/timer/Kconfig               |   3 +
+ hw/timer/meson.build           |   1 +
+ hw/timer/trace-events          |   6 +
+ 9 files changed, 609 insertions(+), 2 deletions(-)
+ create mode 100644 include/hw/timer/sifive_pwm.h
+ create mode 100644 hw/timer/sifive_pwm.c
+
+--=20
+2.31.1
+
 
