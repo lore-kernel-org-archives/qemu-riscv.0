@@ -1,72 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mOPIH-0003pS-WB
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 15:01:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58734)
+	id 1mOQdQ-0007GH-1C
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 16:27:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46434)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mOPIF-0003jY-Ky; Thu, 09 Sep 2021 15:01:03 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:46741)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mOPIE-0007S9-2a; Thu, 09 Sep 2021 15:01:03 -0400
-Received: by mail-ej1-x632.google.com with SMTP id kt8so5598289ejb.13;
- Thu, 09 Sep 2021 12:01:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=3pj1DPmi8DTGKllsifyuDynP7WZnIrBYUU0x0EmreAE=;
- b=haM1TZMbRKADERz4nRRKfYm8TWd+69+k7FX6HDnO4yTifABmr/D7F1tjMBJn2cwu+/
- sDsxpDaUh81Nut39is2I/Wk/2c95A5vBoz/hfz+za1iU+pj4ajOeldKY0LxNYhvuikp8
- 1XSu3mNL3pEEoHZVypPpNLT32pMoFDvEPRSlCBgqSImK0MfT1dxagJaVg3eTCzhaM0n9
- Odt0tfQFzqTs08uiF2pz6EEGpmaU16gdaaQYmz11YcCEut8rjowERbIuKOVVItKq+FTF
- lZO+XmN7Cq72PAdUg3cwAlvis+as2tIatqDRP8PmGCWLLZ/paWsBycp9HryRNgjBYm9I
- O1Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=3pj1DPmi8DTGKllsifyuDynP7WZnIrBYUU0x0EmreAE=;
- b=gj6SsHrImSLtomrJUa5t/kikuyYqGuLK1MlMFatrg6uGGWepnNyHMher8qy8KPMVN6
- 8KdkEvVSXh4b1pSEZTuNa5pJDgXRiMR/V6KaSIGS/QK4iUOQeGd3SuE1A5ENUA/vYzZT
- hWepNw/qV4TyAQZMoFk8AiD4wHCBlIKtbce/GW1Cgi1TtNga32ma9lanGez2pfIag+Wb
- fMzm0WKIQuhZIDD9BIZPpq2O+hggrPOK5Nft4mccCNmKPMiGs64m1Je6ChO7/cwV1Fub
- f4Ht6Nu065QxnwLxSpJoL/Hmc5PyFLIDKqz+F5Jmle9T4CrSW8u+RKopej5R5O8WVwnm
- wSeA==
-X-Gm-Message-State: AOAM531ntgxz4RBSzYTQY9NarYWzBtPEQ68uyvc9hOpHVYG1DmErv/k1
- 6nzRuG+v/KsDdhznbDTHzGE=
-X-Google-Smtp-Source: ABdhPJxA3c+PhAJfTIj+EeRkAVxZ8IN/9T/f/q4xUoa52n7hS+ovbP6UaK8T1sdsos4TG9YMu6FfJQ==
-X-Received: by 2002:a17:906:5855:: with SMTP id
- h21mr5049761ejs.230.1631214060320; 
- Thu, 09 Sep 2021 12:01:00 -0700 (PDT)
-Received: from neptune.lab ([46.39.229.233])
- by smtp.googlemail.com with ESMTPSA id c17sm1514588edu.11.2021.09.09.12.00.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Sep 2021 12:00:59 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v11 7/7] [RISCV_PM] Allow experimental J-ext to be turned on
-Date: Thu,  9 Sep 2021 22:00:33 +0300
-Message-Id: <20210909190033.1339448-8-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
-References: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
+ (Exim 4.90_1) (envelope-from <prvs=87996f883=atish.patra@wdc.com>)
+ id 1mOQdP-0007Fy-0I; Thu, 09 Sep 2021 16:26:59 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:38860)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <prvs=87996f883=atish.patra@wdc.com>)
+ id 1mOQdM-0000Qk-QP; Thu, 09 Sep 2021 16:26:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1631219216; x=1662755216;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=OUpxuQwgM63cpijDUX+aSzm40706iupwmIz2OuxTpCc=;
+ b=lQatOevammF9/nB9c+oiEed7EZjda9exLdIk2LJPKWOUMl/7ei3DNMFy
+ KmUSahtOJ/BidCozgASBcbrk+NB2vqRyKEZhFx5jBqmISYCjHJFMvB0lc
+ D/+jv6jxUP7vJJOpxPTfoIMV1dFcM7JflorENFoK/w8Fe0bQUVmR6A8J1
+ +FA10qqwfUlqx87EDGMKwrgwDpjrb/cvgO82pZlfZsXhY1R3Q3xkwzWH5
+ UKxcfJpLD4VKQi6e+KKTKllbUjFA69wGPQ1tDYtgWGLWQj0MMAnAw/Sgs
+ R1vHe/ptnTUGjwmRTllUJLmyrS6yP3PAWC1h9zaGRniPcrS+qzsTS6+d7 Q==;
+X-IronPort-AV: E=Sophos;i="5.85,281,1624291200"; d="scan'208";a="178710290"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 10 Sep 2021 04:26:51 +0800
+IronPort-SDR: WgGzA9hl5CZxZw8ijrM73oMSgBEujkjUuRJ2WRswR2FN895xFsSO45v1SwkTFlA2WBFDOoET9B
+ Ou25D8EI0S5PRBrPpZp7p9YxF8ke/Mvv/xzyaC3JvBAptGc6UyVdPKYgJD1daN/UXbsES3ziHc
+ C4h3bPsWoEELd1x6wjknew5fVw2/Anlu42M987e7JpZNWLNa6yM5bTV+cFqHMAppBxAB23Vzdh
+ bFTOV6i2mCLfwpBiwgulOxd6iPOWBYuq4rfM/hJu06K/X6Dwr+bZIyQGuLUtCOVOo71G1LlVaF
+ yg5ygE9iSqxurwUdydFsfME8
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Sep 2021 13:03:25 -0700
+IronPort-SDR: ebjzbzG2gJL7pZdtHd9V3hbd0Y4dgRRpwLNdVY6mvql/uZXkabMr8zl6vioZJY6nDyc8FmE956
+ /vGi8Awbpv/XKe+PDV5bQ+iQ861ih3WDynjiaYMezcI7HOp0Q4eQJVX3xOpxra86AgmF3NOnj/
+ fFW+TEyQa9OFiSpuzq83ypZ2dg4h68W+9AFiZe0ORSmLytt5aFZ2fKW7RUQhenDNo3Qyo9vTk9
+ Lo4Em2Chk3xjSzJ1IaTb1ugqpBbT3buNjBpDgHMNPambZmtjyiu0UQp7H6ZR13aAnzRK7snvxc
+ JVk=
+WDCIronportException: Internal
+Received: from unknown (HELO hulk.wdc.com) ([10.225.167.73])
+ by uls-op-cesaip02.wdc.com with ESMTP; 09 Sep 2021 13:26:51 -0700
+From: Atish Patra <atish.patra@wdc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atish.patra@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [ RFC v2 1/9] target/riscv: Fix PMU CSR predicate function
+Date: Thu,  9 Sep 2021 13:26:31 -0700
+Message-Id: <20210909202639.1230170-2-atish.patra@wdc.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210909202639.1230170-1-atish.patra@wdc.com>
+References: <20210909202639.1230170-1-atish.patra@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=87996f883=atish.patra@wdc.com; helo=esa4.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,37 +76,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2021 19:01:04 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 20:26:59 -0000
 
-Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Currently, the predicate function for PMU related CSRs only works if
+virtualization is enabled. Ideally, they should check the mcountern
+bits before cycle/minstret/hpmcounterx access. The predicate function
+also calculates the counter index incorrectly for hpmcounterx.
+
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
 ---
- target/riscv/cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ target/riscv/csr.c | 62 +++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 58 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f5fdc31fb9..4a1dd41818 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -582,6 +582,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             }
-             set_vext_version(env, vext_version);
-         }
-+        if (cpu->cfg.ext_j) {
-+            target_misa |= RVJ;
-+        }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 9a4ed18ac597..0515d851b948 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -62,12 +62,64 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+ #if !defined(CONFIG_USER_ONLY)
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
++    int ctr_index;
  
-         set_misa(env, target_misa);
+     if (!cpu->cfg.ext_counters) {
+         /* The Counters extensions is not enabled */
+         return RISCV_EXCP_ILLEGAL_INST;
      }
-@@ -616,6 +619,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("x-b", RISCVCPU, cfg.ext_b, false),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
-+    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+ 
++    if (env->priv == PRV_S) {
++        switch (csrno) {
++        case CSR_CYCLE:
++            if (!get_field(env->mcounteren, HCOUNTEREN_CY)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_TIME:
++            if (!get_field(env->mcounteren, HCOUNTEREN_TM)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_INSTRET:
++            if (!get_field(env->mcounteren, HCOUNTEREN_IR)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
++            ctr_index = csrno - CSR_HPMCOUNTER3 + 3;
++            if (!get_field(env->mcounteren, 1 << ctr_index)) {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++            break;
++        }
++        if (riscv_cpu_is_32bit(env)) {
++            switch (csrno) {
++            case CSR_CYCLEH:
++                if (!get_field(env->mcounteren, HCOUNTEREN_CY)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_TIMEH:
++                if (!get_field(env->mcounteren, HCOUNTEREN_TM)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_INSTRETH:
++                if (!get_field(env->mcounteren, HCOUNTEREN_IR)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
++                ctr_index = csrno - CSR_HPMCOUNTER3H + 3;
++                if (!get_field(env->mcounteren, 1 << ctr_index)) {
++                    return RISCV_EXCP_ILLEGAL_INST;
++                }
++                break;
++            }
++        }
++    }
++
+     if (riscv_cpu_virt_enabled(env)) {
+         switch (csrno) {
+         case CSR_CYCLE:
+@@ -89,8 +141,9 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3)) &&
+-                get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3))) {
++            ctr_index = csrno - CSR_HPMCOUNTER3 + 3;
++            if (!get_field(env->hcounteren, 1 << ctr_index) &&
++                get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+@@ -116,8 +169,9 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3H)) &&
+-                    get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3H))) {
++                ctr_index = csrno - CSR_HPMCOUNTER3H + 3;
++                if (!get_field(env->hcounteren, 1 << ctr_index) &&
++                    get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
 -- 
-2.30.2
+2.31.1
 
 
