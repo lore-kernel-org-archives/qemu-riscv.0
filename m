@@ -1,67 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mOHpw-00025p-CB
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 07:03:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37206)
+	id 1mON1X-00040H-9u
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 12:35:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57206)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1mOHpr-0001zU-Md
- for qemu-riscv@nongnu.org; Thu, 09 Sep 2021 07:03:17 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:34364)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mON1T-0003wv-Cw; Thu, 09 Sep 2021 12:35:35 -0400
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:41822)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
- id 1mOHpW-0002BL-3t
- for qemu-riscv@nongnu.org; Thu, 09 Sep 2021 07:03:15 -0400
-Received: by mail-pl1-x629.google.com with SMTP id j2so832287pll.1
- for <qemu-riscv@nongnu.org>; Thu, 09 Sep 2021 04:02:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=5NHrdIm+qzEtlyJ5qmOFZJqQptyf2xAXatsCGWGnmVg=;
- b=jksOgri3WDNNdm1QMhRhSSkUpmUPQhzHZTMmU6OWBLbWoFYYuFZMAbDfBXOSq9e8VP
- itgpwKTxIfBdzqb71u6I5NVxn3yWOFqwn9bJurq23msOSqkCd32iuXy4qT15vVOnnKnn
- 51pDLU3mEpCwytLsMHVZd/xKO/Ll2jVmSTJPOZZFOvC4kofqUZ3HkyaAt15xdu6WArSh
- 4QWtN/2PoHcN16W1j2fZwqlYTtbISliMWCtl5ceVVEkMhf/uHwl7mvFo4QQnbNbZ4md2
- ITf1detssPJd+MexnkLbu4MwPBXZCRiQbi90cHFU2hopbkilIWHest5Q0I0ZxlJilJP1
- s0cg==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mON1R-0006o3-QE; Thu, 09 Sep 2021 12:35:35 -0400
+Received: by mail-yb1-xb2b.google.com with SMTP id z18so5074820ybg.8;
+ Thu, 09 Sep 2021 09:35:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+S+P4wV5uUVN5lXN34e6jbCrRMKIEvw1oSRjL7Of1IU=;
+ b=maMk5RtMjts8ornz7O7oG7PPaEDdGimzYzMmfKA6evsMh8si+KFQh9WrpR3RH5ZHe4
+ 63qqr7RazxUCpRqhAHCWY9e/WTenDrSMy1jhRjQZ/MXzenopbNAwFuC5kcTjzmVkopvU
+ hfXXAzGIwfRLppCG2oYqgNmEVOFe0BVZGU8LoTh95RTueDgfgYicurmZo5Xbyz4Hzgqq
+ 05AL3UmAVBDQdAw0wPa3763PcFqmgUzxnLSLDafjBRKrxuXKt8g3usi8Ca04fcaGVLvB
+ lDuMsHV9byPHb7qh4kTTuwc28e95GblM3bHQkbT/tVjyOzcMGdHgTMk6IusAuWLUJlui
+ 68GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=5NHrdIm+qzEtlyJ5qmOFZJqQptyf2xAXatsCGWGnmVg=;
- b=IFHHcoA3IJVj39+mVoGjJE3u/a5KRzFAjBj9A9HuKT1RZEEuJXgDyKftrOoxz4//fn
- P1VkxgP1wYwZo39p4MW+0ngThyPxCX0pH6wN4LoyPSGLPWVRiB6HJcq5wEXF5Lt6gSSB
- sTTzE0AFk4JP/xzldbQDxNFVAWue3O1CWqCAmZ6tt6yMTT+zB8GfUczW0s3G1Hb1L48M
- JFnsLK9GOmLACzyb2YYPa1kd1PXVs1HhOFw4XHRM9wiDMBS3wtKmJX6oEZhBBaHvmAG8
- 4I2sVzN7elys1a1AzJseeYhvgDoyk1mDoxhKhVzoE1A020jELC9+Yv5YulOVEod+d60h
- EF1w==
-X-Gm-Message-State: AOAM532sBZcJyBBsH8Zo5FWFOczlcPcl2ZPdXH7k3k3uQ9F3rVRojcWg
- 4zRAt6CUSnx3w1flcRpJxVDsGw==
-X-Google-Smtp-Source: ABdhPJyqud9WxjT1wj9eeo8X7eSwy7aorjd3b1bZuxyxeeQLZM6xSAzWcShmx26nkHb+UfhkXJNBaQ==
-X-Received: by 2002:a17:902:7d82:b0:13a:110a:842c with SMTP id
- a2-20020a1709027d8200b0013a110a842cmr2201606plm.36.1631185372616; 
- Thu, 09 Sep 2021 04:02:52 -0700 (PDT)
-Received: from ThinkPad-T490.dc1.ventanamicro.com ([171.50.198.246])
- by smtp.googlemail.com with ESMTPSA id g19sm1894103pjl.25.2021.09.09.04.02.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Sep 2021 04:02:52 -0700 (PDT)
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [RFC PATCH v1 2/3] hw/pci: Add PCIe RCEC support
-Date: Thu,  9 Sep 2021 16:32:20 +0530
-Message-Id: <20210909110221.703-3-mchitale@ventanamicro.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210909110221.703-1-mchitale@ventanamicro.com>
-References: <20210909110221.703-1-mchitale@ventanamicro.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=mchitale@ventanamicro.com; helo=mail-pl1-x629.google.com
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+S+P4wV5uUVN5lXN34e6jbCrRMKIEvw1oSRjL7Of1IU=;
+ b=kQ+GtGUkiOaF94stE6PTiIQG+puTD4gsiN0htx80J/VRMrdapqUso+pZDKnWAj7jqO
+ OGPh3QFTdy0V5X1XJ0lDRnxcS42pQBWPNRnIt5kglK0Gf7Pam6UaZ3TSW4geNYl9GHID
+ TghzUlKEEWFAUXa2u6zMAAJGHqaTDg2q0ZDzzJmMiUPHr/FZYA2u4lsB5u2y1n0z5G+r
+ jaTQgDqjRhG9x9PPGbIY1YKYI+guax/r2XflZwkKH/c36tC0mCwJZdcfVQIjkLfqgTvc
+ KbD+hgFCsCpt59ACISVIkWRWVcXODFM8xa1puhE5BeJfkQGgJuUv5rXJFfmk0gF+6iPB
+ 6yOg==
+X-Gm-Message-State: AOAM532Zjp9FV8BIyPek8cv3nboUXi0M9DAa8wBmDEtozMknT80tlHgL
+ Pizj37Kk8cWUbZ1gZOKP1GM6wqcM6wIlBpzBsII=
+X-Google-Smtp-Source: ABdhPJwAkC4f8qnmpuKIDz8X4HV5id8Rn5hB+QxuibKz0//wM2AbySMP+xAoFrn9oZDQiNLgj1IGaNvokfdhsqfyT6M=
+X-Received: by 2002:a25:5956:: with SMTP id n83mr4854859ybb.109.1631205332154; 
+ Thu, 09 Sep 2021 09:35:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20210902112520.475901-1-anup.patel@wdc.com>
+ <20210902112520.475901-5-anup.patel@wdc.com>
+ <CAKmqyKPK9zrtM=g6hruL+eRLVPdz76jLR+P0xZ8qPfWXvnSTzg@mail.gmail.com>
+In-Reply-To: <CAKmqyKPK9zrtM=g6hruL+eRLVPdz76jLR+P0xZ8qPfWXvnSTzg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 10 Sep 2021 00:35:20 +0800
+Message-ID: <CAEUhbmVCZrCrTOhHJGVqkCNHt3QUoij9uDigjYObUK9F_N=big@mail.gmail.com>
+Subject: Re: [PATCH v2 04/22] target/riscv: Improve fidelity of guest external
+ interrupts
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Anup Patel <anup@brainfault.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atish.patra@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,260 +77,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2021 11:03:17 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 16:35:35 -0000
 
-This patch adds support for PCIe Root Complex Event Collector
-(RCEC) emulation. Further, if a RCiEP supports AER capability
-then a mapping is created for that RCiEP in the RCEC's
-endpoint association capability.
+On Thu, Sep 9, 2021 at 2:45 PM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Thu, Sep 2, 2021 at 9:26 PM Anup Patel <anup.patel@wdc.com> wrote:
+> >
+> > The guest external interrupts for external interrupt controller are
+> > not delivered to the guest running under hypervisor on time. This
+> > results in a guest having sluggish response to serial console input
+> > and other I/O events. To improve timely delivery of guest external
+> > interrupts, we check and inject interrupt upon every sret instruction.
+> >
+> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > ---
+> >  target/riscv/op_helper.c | 9 +++++++++
+> >  1 file changed, 9 insertions(+)
+> >
+> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> > index ee7c24efe7..4c995c239e 100644
+> > --- a/target/riscv/op_helper.c
+> > +++ b/target/riscv/op_helper.c
+> > @@ -129,6 +129,15 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+> >
+> >      riscv_cpu_set_mode(env, prev_priv);
+> >
+> > +    /*
+> > +     * QEMU does not promptly deliver guest external interrupts
+> > +     * to a guest running on a hypervisor which in-turn is running
+> > +     * on QEMU. We make dummy call to riscv_cpu_update_mip() upon
+> > +     * every sret instruction so that QEMU pickup guest external
+> > +     * interrupts sooner.
+> > +     */
+> > +     riscv_cpu_update_mip(env_archcpu(env), 0, 0);
+>
+> This doesn't seem right. I don't understand why we need this?
+>
+> riscv_cpu_update_mip() is called when an interrupt is delivered to the
+> CPU, if we are missing interrupts then that is a bug somewhere else.
 
-Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
----
- hw/pci/meson.build         |   2 +-
- hw/pci/pcie.c              |  18 ++++++
- hw/pci/pcie_aer.c          |   9 +++
- hw/pci/pcie_rcec.c         | 119 +++++++++++++++++++++++++++++++++++++
- include/hw/pci/pci.h       |   1 +
- include/hw/pci/pci_ids.h   |   1 +
- include/hw/pci/pcie.h      |   1 +
- include/hw/pci/pcie_regs.h |   3 +
- 8 files changed, 153 insertions(+), 1 deletion(-)
- create mode 100644 hw/pci/pcie_rcec.c
+Agree. This change looks like a hack to me.
 
-diff --git a/hw/pci/meson.build b/hw/pci/meson.build
-index 5c4bbac817..34ae7d4a44 100644
---- a/hw/pci/meson.build
-+++ b/hw/pci/meson.build
-@@ -11,7 +11,7 @@ pci_ss.add(files(
- # The functions in these modules can be used by devices too.  Since we
- # allow plugging PCIe devices into PCI buses, include them even if
- # CONFIG_PCI_EXPRESS=n.
--pci_ss.add(files('pcie.c', 'pcie_aer.c'))
-+pci_ss.add(files('pcie.c', 'pcie_aer.c', 'pcie_rcec.c'))
- softmmu_ss.add(when: 'CONFIG_PCI_EXPRESS', if_true: files('pcie_port.c', 'pcie_host.c'))
- softmmu_ss.add_all(when: 'CONFIG_PCI', if_true: pci_ss)
- 
-diff --git a/hw/pci/pcie.c b/hw/pci/pcie.c
-index 017d5075ae..55938a1798 100644
---- a/hw/pci/pcie.c
-+++ b/hw/pci/pcie.c
-@@ -747,6 +747,24 @@ void pcie_cap_slot_push_attention_button(PCIDevice *dev)
-     pcie_cap_slot_event(dev, PCI_EXP_HP_EV_ABP);
- }
- 
-+void pcie_rcec_ep_map(PCIDevice *dev)
-+{
-+    int devnum = PCI_SLOT(dev->devfn);
-+    uint32_t ep_bitmap;
-+    PCIDevice *rcec;
-+    uint16_t cap;
-+
-+    /* RCEC is always expected to be at 00:01.0 */
-+    rcec = pci_find_device(pci_get_bus(dev), 0, PCI_DEVFN(1,0));
-+    if (!rcec)
-+        return;
-+
-+    pcie_cap_deverr_init(dev);
-+    cap = pcie_find_capability(rcec, PCI_EXT_CAP_ID_RCEC);
-+    ep_bitmap = pci_get_long(rcec->config + cap + 0x4);
-+    pci_set_long(rcec->config + cap + 0x4, ep_bitmap | 1 << devnum);
-+}
-+
- /* root control/capabilities/status. PME isn't emulated for now */
- void pcie_cap_root_init(PCIDevice *dev)
- {
-diff --git a/hw/pci/pcie_aer.c b/hw/pci/pcie_aer.c
-index 27f9cc56af..ba4a1e6d78 100644
---- a/hw/pci/pcie_aer.c
-+++ b/hw/pci/pcie_aer.c
-@@ -166,6 +166,15 @@ int pcie_aer_init(PCIDevice *dev, uint8_t cap_ver, uint16_t offset,
-         /* nothing */
-         break;
-     }
-+
-+    /*
-+     * If this is a RCiEP, map it into the RCEC's endpoint association bitmap
-+     * capability
-+     */
-+    if (pci_bus_is_express(pci_get_bus(dev))
-+        && pci_bus_is_root(pci_get_bus(dev)))
-+	    pcie_rcec_ep_map(dev);
-+
-     return 0;
- }
- 
-diff --git a/hw/pci/pcie_rcec.c b/hw/pci/pcie_rcec.c
-new file mode 100644
-index 0000000000..9a51d7b9b4
---- /dev/null
-+++ b/hw/pci/pcie_rcec.c
-@@ -0,0 +1,119 @@
-+/*
-+ * pcie_rcec.c
-+ * PCIe Root Complex Event Collector emulation
-+ *
-+ * Copyright (c) 2021 Mayuresh Chitale <mchitale@ventanamicro.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+
-+ * You should have received a copy of the GNU General Public License along
-+ * with this program; if not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/units.h"
-+#include "qemu/module.h"
-+#include "qemu/range.h"
-+#include "sysemu/sysemu.h"
-+#include "hw/hw.h"
-+#include "hw/pci/pci.h"
-+#include "hw/qdev-properties.h"
-+#include "migration/vmstate.h"
-+
-+#define TYPE_RCEC_DEVICE "pcie-rcec"
-+#define PCIE_RCEC_EXP_CAP_OFF 0x40
-+#define PCIE_RCEC_EP_ECAP_OFF 0x100
-+#define PCIE_RCEC_AER_ECAP_OFF 0x120
-+
-+struct RcecState {
-+    /*< private >*/
-+    PCIDevice parent_obj;
-+    /*< public >*/
-+};
-+
-+
-+static int pcie_rcec_cap_init(PCIDevice *dev, uint8_t offset)
-+{
-+    int rc;
-+
-+    dev->config[PCI_INTERRUPT_PIN] = 1;
-+    rc = pcie_endpoint_cap_common_init(dev, offset,
-+            PCI_EXP_VER2_SIZEOF, PCI_EXP_TYPE_RC_EC);
-+    pcie_cap_root_init(dev);
-+    pcie_cap_deverr_init(dev);
-+
-+    return rc;
-+}
-+
-+static void pcie_rcec_ep_cap_init(PCIDevice *dev, uint8_t cap_ver, uint16_t offset,
-+                  uint16_t size, Error **errp)
-+{
-+    pcie_add_capability(dev, PCI_EXT_CAP_ID_RCEC, cap_ver, offset, size);
-+    /* Map device (bit) 1 which is RCEC by default */
-+    pci_set_long(dev->config + offset + 0x4, 0x2);
-+}
-+
-+static void pcie_rcec_realize(PCIDevice *pci_dev, Error **errp)
-+{
-+    if (pcie_rcec_cap_init(pci_dev, PCIE_RCEC_EXP_CAP_OFF) < 0)
-+        hw_error("Failed to initialize RCEC express capability");
-+
-+    pcie_rcec_ep_cap_init(pci_dev, PCI_RCEC_EP_VER, PCIE_RCEC_EP_ECAP_OFF,
-+        PCI_RCEC_EP_SIZEOF, errp);
-+
-+    if (pcie_aer_init(pci_dev, PCI_ERR_VER, PCIE_RCEC_AER_ECAP_OFF,
-+        PCI_ERR_SIZEOF, errp) < 0)
-+        hw_error("Failed to initialize RCEC AER capability");
-+}
-+
-+static const VMStateDescription vmstate_rcec = {
-+    .name = "rcec",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_PCI_DEVICE(parent_obj, struct RcecState),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static void rcec_class_init(ObjectClass *klass, void *data)
-+{
-+    PCIDeviceClass *k = PCI_DEVICE_CLASS(klass);
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
-+    dc->desc = "QEMU generic RCEC";
-+    dc->vmsd = &vmstate_rcec;
-+    k->vendor_id = PCI_VENDOR_ID_REDHAT;
-+    k->device_id = PCI_DEVICE_ID_REDHAT_RCEC;
-+    k->revision = 0;
-+    k->class_id = PCI_CLASS_SYSTEM_RCEC;
-+    k->realize = pcie_rcec_realize;
-+}
-+
-+static const TypeInfo pcie_rcec_info = {
-+    .name = TYPE_RCEC_DEVICE,
-+    .parent = TYPE_PCI_DEVICE,
-+    .instance_size = sizeof(struct RcecState),
-+    .class_init = rcec_class_init,
-+    .interfaces = (InterfaceInfo[]) {
-+        { INTERFACE_PCIE_DEVICE },
-+        { },
-+    },
-+};
-+
-+
-+static void pcie_rcec_register_types(void)
-+{
-+    type_register_static(&pcie_rcec_info);
-+}
-+
-+type_init(pcie_rcec_register_types)
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index d0f4266e37..d580c9e6cf 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -109,6 +109,7 @@ extern bool pci_available;
- #define PCI_DEVICE_ID_REDHAT_NVME        0x0010
- #define PCI_DEVICE_ID_REDHAT_PVPANIC     0x0011
- #define PCI_DEVICE_ID_REDHAT_QXL         0x0100
-+#define PCI_DEVICE_ID_REDHAT_RCEC        0x0101
- 
- #define FMT_PCIBUS                      PRIx64
- 
-diff --git a/include/hw/pci/pci_ids.h b/include/hw/pci/pci_ids.h
-index 11abe22d46..d5214d2764 100644
---- a/include/hw/pci/pci_ids.h
-+++ b/include/hw/pci/pci_ids.h
-@@ -88,6 +88,7 @@
- #define PCI_CLASS_SYSTEM_RTC             0x0803
- #define PCI_CLASS_SYSTEM_PCI_HOTPLUG     0x0804
- #define PCI_CLASS_SYSTEM_SDHCI           0x0805
-+#define PCI_CLASS_SYSTEM_RCEC            0x0807
- #define PCI_CLASS_SYSTEM_OTHER           0x0880
- 
- #define PCI_BASE_CLASS_INPUT             0x09
-diff --git a/include/hw/pci/pcie.h b/include/hw/pci/pcie.h
-index b40b088604..482fefe704 100644
---- a/include/hw/pci/pcie.h
-+++ b/include/hw/pci/pcie.h
-@@ -149,4 +149,5 @@ void pcie_cap_slot_unplug_request_cb(HotplugHandler *hotplug_dev,
-                                      DeviceState *dev, Error **errp);
- int pcie_endpoint_cap_common_init(PCIDevice *dev, uint8_t offset,
-                                          uint8_t cap_size, uint8_t type);
-+void pcie_rcec_ep_map(PCIDevice *dev);
- #endif /* QEMU_PCIE_H */
-diff --git a/include/hw/pci/pcie_regs.h b/include/hw/pci/pcie_regs.h
-index 1db86b0ec4..7b8f2616e9 100644
---- a/include/hw/pci/pcie_regs.h
-+++ b/include/hw/pci/pcie_regs.h
-@@ -179,4 +179,7 @@ typedef enum PCIExpLinkWidth {
- #define PCI_ACS_VER                     0x1
- #define PCI_ACS_SIZEOF                  8
- 
-+#define PCI_RCEC_EP_VER        1
-+#define PCI_RCEC_EP_SIZEOF     0x8
-+
- #endif /* QEMU_PCIE_REGS_H */
--- 
-2.17.1
+Anup, with what configuration did you see the issue you were trying to resolve?
 
+Regards,
+Bin
 
