@@ -1,63 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mON1X-00040H-9u
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 12:35:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57206)
+	id 1mOPI5-0003RP-GR
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 15:00:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58628)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mON1T-0003wv-Cw; Thu, 09 Sep 2021 12:35:35 -0400
-Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:41822)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1mOPI4-0003Pf-8w; Thu, 09 Sep 2021 15:00:52 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629]:36811)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mON1R-0006o3-QE; Thu, 09 Sep 2021 12:35:35 -0400
-Received: by mail-yb1-xb2b.google.com with SMTP id z18so5074820ybg.8;
- Thu, 09 Sep 2021 09:35:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1mOPI2-0007Kg-Q7; Thu, 09 Sep 2021 15:00:52 -0400
+Received: by mail-ej1-x629.google.com with SMTP id bt14so5640380ejb.3;
+ Thu, 09 Sep 2021 12:00:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+S+P4wV5uUVN5lXN34e6jbCrRMKIEvw1oSRjL7Of1IU=;
- b=maMk5RtMjts8ornz7O7oG7PPaEDdGimzYzMmfKA6evsMh8si+KFQh9WrpR3RH5ZHe4
- 63qqr7RazxUCpRqhAHCWY9e/WTenDrSMy1jhRjQZ/MXzenopbNAwFuC5kcTjzmVkopvU
- hfXXAzGIwfRLppCG2oYqgNmEVOFe0BVZGU8LoTh95RTueDgfgYicurmZo5Xbyz4Hzgqq
- 05AL3UmAVBDQdAw0wPa3763PcFqmgUzxnLSLDafjBRKrxuXKt8g3usi8Ca04fcaGVLvB
- lDuMsHV9byPHb7qh4kTTuwc28e95GblM3bHQkbT/tVjyOzcMGdHgTMk6IusAuWLUJlui
- 68GA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=tu4nrprveGRcZ58eZVRoRC7ws/LiCkJYOGqT/9U5aoo=;
+ b=IY7Qb2Xui4SWIRfTQdxlub1NHEa3sv1p2HVxckyLX7rczQqGyBsf2fkA7K60c6821C
+ X8iZuUylFV2Fe1M8uEUViEPddstqqf59cFHM8wVc6G+CpDZWuO9JhoxwBPHX9hFUWGvj
+ FNyBPsDQCcXIR6ovHhoeyWwOHKdx0zOrCFrH3SQKDod8TWEsFN4sRMeuzYWvp3bgFThQ
+ +6FEcB1KIHBm//rKooYuvJY9lfQAvK3kYFx6zI78caLCbhzOOJ7OXQqtrsh4RcqHMaw4
+ QRTTseXHnjkPTvMhCbC8nvnAuV+XA0I0mp5ArkoK0qN0hL3orbcfn+ykb2D/BzM/6YTN
+ C5kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+S+P4wV5uUVN5lXN34e6jbCrRMKIEvw1oSRjL7Of1IU=;
- b=kQ+GtGUkiOaF94stE6PTiIQG+puTD4gsiN0htx80J/VRMrdapqUso+pZDKnWAj7jqO
- OGPh3QFTdy0V5X1XJ0lDRnxcS42pQBWPNRnIt5kglK0Gf7Pam6UaZ3TSW4geNYl9GHID
- TghzUlKEEWFAUXa2u6zMAAJGHqaTDg2q0ZDzzJmMiUPHr/FZYA2u4lsB5u2y1n0z5G+r
- jaTQgDqjRhG9x9PPGbIY1YKYI+guax/r2XflZwkKH/c36tC0mCwJZdcfVQIjkLfqgTvc
- KbD+hgFCsCpt59ACISVIkWRWVcXODFM8xa1puhE5BeJfkQGgJuUv5rXJFfmk0gF+6iPB
- 6yOg==
-X-Gm-Message-State: AOAM532Zjp9FV8BIyPek8cv3nboUXi0M9DAa8wBmDEtozMknT80tlHgL
- Pizj37Kk8cWUbZ1gZOKP1GM6wqcM6wIlBpzBsII=
-X-Google-Smtp-Source: ABdhPJwAkC4f8qnmpuKIDz8X4HV5id8Rn5hB+QxuibKz0//wM2AbySMP+xAoFrn9oZDQiNLgj1IGaNvokfdhsqfyT6M=
-X-Received: by 2002:a25:5956:: with SMTP id n83mr4854859ybb.109.1631205332154; 
- Thu, 09 Sep 2021 09:35:32 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=tu4nrprveGRcZ58eZVRoRC7ws/LiCkJYOGqT/9U5aoo=;
+ b=WjfsAP3bOKgTrPjAfREoakgzOA9fPuf2cTNz44GkWgMS8N0giw1T8mNZkZlTWQBh+h
+ UEUYhDVYo8tY7w5EwtjneYtCaFV9wpQHNFFIJTpFwOFEzRfph0XrCJmm4Kz4f08F+tNr
+ sauF1Xc8N1nGHLnu26lQRzgysmsc4IbVpdS0+yTRTyjntGzPcCebcVBd3wQZkn0nQOd4
+ LasvvYMzmXG2vWC1BmW1jYG91a3gI7fh9QlFRrZvLMaab+Y6ow8aDRj7LMFa3M6Vu/pK
+ 2wsmaAUHIFb34OxgPh7PxjFJV5hZaVwIuE4Cn3j35YXdS1y5RQ6UnnG3IeBUpeVVgD4N
+ Vl8w==
+X-Gm-Message-State: AOAM532u7tb4lKhmjbvB/+n4shaJkATiW6U3Tv2cpeCRCiSnHLEujzD8
+ daoG57IdZuoMpIbL7PyR3KI=
+X-Google-Smtp-Source: ABdhPJw5w85W30oQZgvD963HsTcUKJXGAsh3p5+RU6Fd8ylVSufaXRVlJCsJQHM45Seh3auG/Qt0Ew==
+X-Received: by 2002:a17:906:408c:: with SMTP id
+ u12mr5096187ejj.413.1631214049107; 
+ Thu, 09 Sep 2021 12:00:49 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.233])
+ by smtp.googlemail.com with ESMTPSA id c17sm1514588edu.11.2021.09.09.12.00.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Sep 2021 12:00:48 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v11 1/7] [RISCV_PM] Add J-extension into RISC-V
+Date: Thu,  9 Sep 2021 22:00:27 +0300
+Message-Id: <20210909190033.1339448-2-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
+References: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-References: <20210902112520.475901-1-anup.patel@wdc.com>
- <20210902112520.475901-5-anup.patel@wdc.com>
- <CAKmqyKPK9zrtM=g6hruL+eRLVPdz76jLR+P0xZ8qPfWXvnSTzg@mail.gmail.com>
-In-Reply-To: <CAKmqyKPK9zrtM=g6hruL+eRLVPdz76jLR+P0xZ8qPfWXvnSTzg@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 10 Sep 2021 00:35:20 +0800
-Message-ID: <CAEUhbmVCZrCrTOhHJGVqkCNHt3QUoij9uDigjYObUK9F_N=big@mail.gmail.com>
-Subject: Re: [PATCH v2 04/22] target/riscv: Improve fidelity of guest external
- interrupts
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup@brainfault.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atish.patra@wdc.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,49 +80,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2021 16:35:35 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 19:00:52 -0000
 
-On Thu, Sep 9, 2021 at 2:45 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Thu, Sep 2, 2021 at 9:26 PM Anup Patel <anup.patel@wdc.com> wrote:
-> >
-> > The guest external interrupts for external interrupt controller are
-> > not delivered to the guest running under hypervisor on time. This
-> > results in a guest having sluggish response to serial console input
-> > and other I/O events. To improve timely delivery of guest external
-> > interrupts, we check and inject interrupt upon every sret instruction.
-> >
-> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> > ---
-> >  target/riscv/op_helper.c | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >
-> > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> > index ee7c24efe7..4c995c239e 100644
-> > --- a/target/riscv/op_helper.c
-> > +++ b/target/riscv/op_helper.c
-> > @@ -129,6 +129,15 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
-> >
-> >      riscv_cpu_set_mode(env, prev_priv);
-> >
-> > +    /*
-> > +     * QEMU does not promptly deliver guest external interrupts
-> > +     * to a guest running on a hypervisor which in-turn is running
-> > +     * on QEMU. We make dummy call to riscv_cpu_update_mip() upon
-> > +     * every sret instruction so that QEMU pickup guest external
-> > +     * interrupts sooner.
-> > +     */
-> > +     riscv_cpu_update_mip(env_archcpu(env), 0, 0);
->
-> This doesn't seem right. I don't understand why we need this?
->
-> riscv_cpu_update_mip() is called when an interrupt is delivered to the
-> CPU, if we are missing interrupts then that is a bug somewhere else.
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Agree. This change looks like a hack to me.
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index bf1c899c00..451a1637a1 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -68,6 +68,7 @@
+ #define RVU RV('U')
+ #define RVH RV('H')
+ #define RVB RV('B')
++#define RVJ RV('J')
+ 
+ /* S extension denotes that Supervisor mode exists, however it is possible
+    to have a core that support S mode but does not have an MMU and there
+@@ -292,6 +293,7 @@ struct RISCVCPU {
+         bool ext_s;
+         bool ext_u;
+         bool ext_h;
++        bool ext_j;
+         bool ext_v;
+         bool ext_counters;
+         bool ext_ifencei;
+-- 
+2.30.2
 
-Anup, with what configuration did you see the issue you were trying to resolve?
-
-Regards,
-Bin
 
