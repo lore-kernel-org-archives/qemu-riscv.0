@@ -1,65 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mOBp9-0003uP-5o
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 00:38:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51666)
+	id 1mOD4D-0006mG-GH
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 01:57:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33518)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mOBp6-0003rM-WC; Thu, 09 Sep 2021 00:38:05 -0400
-Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:39483)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mOD4B-0006m0-Mw; Thu, 09 Sep 2021 01:57:43 -0400
+Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:45786)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mOBp1-00009o-JK; Thu, 09 Sep 2021 00:38:04 -0400
-Received: by mail-yb1-xb30.google.com with SMTP id y13so1326266ybi.6;
- Wed, 08 Sep 2021 21:37:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mOD48-00075G-SP; Thu, 09 Sep 2021 01:57:43 -0400
+Received: by mail-il1-x129.google.com with SMTP id x10so755989ilm.12;
+ Wed, 08 Sep 2021 22:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VYkHbQA8LpJU5tuK2/iGSxEdskHx2SGGra2vuECmVlQ=;
- b=KerCiI3I5KEHQPAQCY4OgLAPb3hwhoP/x+EFwcuQxN3w+S0uvSNDPiB/qGJq4naNbp
- lqytrWvOnxvX7iGif4cq9eefYjbn3koQ67DdTH5Jyj8NXG9cIM0MVE97NE504h+DXXct
- m+VLZD1gKLTjjDO/GKyxmplh8on7G5Zz8qoUYIwai6AucjgsMbq4/Wk82EehfPjRxvnw
- 6F8c+odisA5BZ22thAAiH5OYhUr91Nspn1cBR6zeuKle2kJL5THW3SwK9I/iYUTpl0/+
- iwiT6EU1MFBhMqxACbyDMVN7qQhACWrJBfBy4//53E2wzptxaQ4M9SadHmkCQU4JxiZx
- Pz1A==
+ :cc; bh=tklu5SixxvbDgE59M7DylkNZWdMD7D/f+GnO20MVcrg=;
+ b=AZUjJCUT1gc765JQGWOx0t2j9r9Yayyv4qoqZxsVL9UoYE6qy9PVFIrX4WZiJBMyHL
+ FwLjaI/1JgHU48Yc9JYizkkaoWjgDAOIUvx7p3b6hclp7Vh4Me08/8K5xosZCWwNv6sK
+ +Z/3T8dcZb8qT6Lpaa/li9nB2fPq39EygHXn9uCt7yXIvHxs647pyQVPn2RCnFYKmRsW
+ D/RcR/Hk6J0GOcqxQYk9UItg9KwhsusH7qwYeLTb3Bfl4TGuTYH9/UqTCFKdGPWNkJGQ
+ t9GuwP/GudKRbhovZu7BpH+P5WVYsPOfNLB4+lWUiM/C8aF+yzFFX7trQeYEtjAdjpWB
+ t7yA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=VYkHbQA8LpJU5tuK2/iGSxEdskHx2SGGra2vuECmVlQ=;
- b=ehgQzzR+e13+aKVattcuMv5YhiGV9WpKNiRj4m+P7dGxGcfOeBX52qkP/0MmBSQO7X
- +9FLilNHW55oNZSlVwihkXhNdsj+tG/lkzkyaCRXgztI+mhWOUg/dlPGmSuBQ4G7TF4w
- gqX4zqijD4gpkuyZkazEo6o6sazQNYnZtYv/hyRKpSlR79ojfyk5P9Te2vGg680dZQ21
- xq+WSP36BNeKgwLHt5CkEMbAxLFiHFn9nwMkmiUHgVidxrTP39dX9Jw6/TCg3Dcn93yO
- 1mGofnNdcpQqDSSYfbNIPxX1aCcObEa5lkVWW0NuD6OphHTYlu4HTDyUTnUYzarhnB06
- IpXg==
-X-Gm-Message-State: AOAM532U38pivMDa/ZkvuLncPb6mRRaxAjO4gFDHLpGGsG9yT0lHjh07
- f1F5GUM+UKI9BkHY90aesvKzx/FwU/es0120pgo=
-X-Google-Smtp-Source: ABdhPJzjslNNbmm8yQ+cjQVRgy2mvdhxsv46TLtKTW9CesShVHkeiFitz4HMtCo6bsEsmaewPLy/yoJyF8LAdzfnK3I=
-X-Received: by 2002:a25:80d4:: with SMTP id c20mr1214370ybm.345.1631162278071; 
- Wed, 08 Sep 2021 21:37:58 -0700 (PDT)
+ bh=tklu5SixxvbDgE59M7DylkNZWdMD7D/f+GnO20MVcrg=;
+ b=pC1tSbSdELM+dcjnZvUwrBXrkbdSCew+0zb2I/2CYDTU43++FLGdu7dy1yL4r9PKpR
+ 5vyiSo0cGbWt6Q1ik/y96L9jCJvk4kiwoXA3iMp9uvrTYIJSsWItsjIVZQQ1YTz507MU
+ 70StAmZn6MKL87VpOkIM5WzINtnaOf7ckT7ExQp+VtL5QOQwX+b+ix/ichdVGit4L34K
+ e60lXSJjktFhSTOoIn+8L6+rcTjkOZuDPLGkhSkEZTh5VHpcFjl16kDf4NUf+Cz3dGHH
+ dnclnhocK00g/AVSmnGGWKrUTWGGXjrrFvOgmOBPFmumz3hrn+NuN6AwYTmZ9+jQOz2+
+ EjZg==
+X-Gm-Message-State: AOAM531Zi2ykLKyOT2DrMj5MWzdccB8BdPHddoPH677QqnRYXKFVZUft
+ yGTSYSHz730zrCJSHks/hXdQAfLRTUef726tijg=
+X-Google-Smtp-Source: ABdhPJzJHUR0Kyrvmrb+QrF4eDtaMP0aqli8rsXgM/x/43lmmWvlD6tEcdGvDQM45M/XuCAIzjDicpubBMwkNAR91xU=
+X-Received: by 2002:a92:280f:: with SMTP id l15mr1017551ilf.74.1631167059262; 
+ Wed, 08 Sep 2021 22:57:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1631159656.git.alistair.francis@wdc.com>
- <22f98648b4e012f78529a56f5ca60b0b27852a4d.1631159656.git.alistair.francis@wdc.com>
-In-Reply-To: <22f98648b4e012f78529a56f5ca60b0b27852a4d.1631159656.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 9 Sep 2021 12:37:46 +0800
-Message-ID: <CAEUhbmUtGcJVrPECtqhV5sYg4n80T_vrO545qAoRF7i6b=C=sQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] sifive_u: Connect the SiFive PWM device
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair23@gmail.com>
+References: <20210829175120.19413-1-space.monkey.delivers@gmail.com>
+ <20210829175120.19413-4-space.monkey.delivers@gmail.com>
+In-Reply-To: <20210829175120.19413-4-space.monkey.delivers@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 9 Sep 2021 15:57:11 +1000
+Message-ID: <CAKmqyKOvPqSXiDYOch+8M_bAg9AZNhKE1v2aifENYhkHHv07SA@mail.gmail.com>
+Subject: Re: [PATCH v10 3/7] [RISCV_PM] Support CSRs required for RISC-V PM
+ extension except for the h-mode
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ space.monkey.delivers@gmail.com, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b30;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb30.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -72,212 +78,379 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2021 04:38:05 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 05:57:44 -0000
 
-On Thu, Sep 9, 2021 at 11:55 AM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Mon, Aug 30, 2021 at 3:54 AM Alexey Baturo <baturo.alexey@gmail.com> wrote:
 >
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> Connect the SiFive PWM device and expose it via the device tree.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 > ---
->  docs/system/riscv/sifive_u.rst |  1 +
->  include/hw/riscv/sifive_u.h    | 14 ++++++++-
->  hw/riscv/sifive_u.c            | 55 +++++++++++++++++++++++++++++++++-
->  hw/timer/sifive_pwm.c          |  1 +
->  hw/riscv/Kconfig               |  1 +
->  5 files changed, 70 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.c |   6 +
+>  target/riscv/cpu.h |  11 ++
+>  target/riscv/csr.c | 276 +++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 293 insertions(+)
 >
-> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
-> index 01108b5ecc..7c65e9c440 100644
-> --- a/docs/system/riscv/sifive_u.rst
-> +++ b/docs/system/riscv/sifive_u.rst
-> @@ -24,6 +24,7 @@ The ``sifive_u`` machine supports the following devices:
->  * 2 QSPI controllers
->  * 1 ISSI 25WP256 flash
->  * 1 SD card in SPI mode
-> +* PWM0 and PWM1
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 991a6bb760..4178eecbec 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -553,6 +553,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              }
+>              set_vext_version(env, vext_version);
+>          }
+> +        if (cpu->cfg.ext_j) {
+> +#ifndef CONFIG_USER_ONLY
+> +            /* mmte is supposed to have pm.current hardwired to 1 */
+> +            env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
+
+This should probably be in the reset function instead.
+
+> +#endif
+> +        }
 >
->  Please note the real world HiFive Unleashed board has a fixed configuration of
->  1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit mode.
-> diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
-> index 2656b39808..f71c90c94c 100644
-> --- a/include/hw/riscv/sifive_u.h
-> +++ b/include/hw/riscv/sifive_u.h
-> @@ -27,6 +27,7 @@
->  #include "hw/misc/sifive_u_otp.h"
->  #include "hw/misc/sifive_u_prci.h"
->  #include "hw/ssi/sifive_spi.h"
-> +#include "hw/timer/sifive_pwm.h"
+>          set_misa(env, target_misa);
+>      }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 451a1637a1..94e680cbd0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -238,6 +238,17 @@ struct CPURISCVState {
 >
->  #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
->  #define RISCV_U_SOC(obj) \
-> @@ -49,6 +50,7 @@ typedef struct SiFiveUSoCState {
->      SiFiveSPIState spi0;
->      SiFiveSPIState spi2;
->      CadenceGEMState gem;
-> +    SiFivePwmState pwm[2];
->
->      uint32_t serial;
->      char *cpu_type;
-> @@ -92,7 +94,9 @@ enum {
->      SIFIVE_U_DEV_FLASH0,
->      SIFIVE_U_DEV_DRAM,
->      SIFIVE_U_DEV_GEM,
-> -    SIFIVE_U_DEV_GEM_MGMT
-> +    SIFIVE_U_DEV_GEM_MGMT,
-> +    SIFIVE_U_DEV_PWM0,
-> +    SIFIVE_U_DEV_PWM1
->  };
->
->  enum {
-> @@ -126,6 +130,14 @@ enum {
->      SIFIVE_U_PDMA_IRQ5 = 28,
->      SIFIVE_U_PDMA_IRQ6 = 29,
->      SIFIVE_U_PDMA_IRQ7 = 30,
-> +    SIFIVE_U_PWM0_IRQ0 = 42,
-> +    SIFIVE_U_PWM0_IRQ1 = 43,
-> +    SIFIVE_U_PWM0_IRQ2 = 44,
-> +    SIFIVE_U_PWM0_IRQ3 = 45,
-> +    SIFIVE_U_PWM1_IRQ0 = 46,
-> +    SIFIVE_U_PWM1_IRQ1 = 47,
-> +    SIFIVE_U_PWM1_IRQ2 = 48,
-> +    SIFIVE_U_PWM1_IRQ3 = 49,
->      SIFIVE_U_QSPI0_IRQ = 51,
->      SIFIVE_U_GEM_IRQ = 53
->  };
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 6cc1a62b0f..2301f5dd4f 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -17,6 +17,7 @@
->   * 7) DMA (Direct Memory Access Controller)
->   * 8) SPI0 connected to an SPI flash
->   * 9) SPI2 connected to an SD card
-> + * 10) PWM0 and PWM1
->   *
->   * This board currently generates devicetree dynamically that indicates at least
->   * two harts and up to five harts.
-> @@ -75,6 +76,8 @@ static const MemMapEntry sifive_u_memmap[] = {
->      [SIFIVE_U_DEV_PRCI] =     { 0x10000000,     0x1000 },
->      [SIFIVE_U_DEV_UART0] =    { 0x10010000,     0x1000 },
->      [SIFIVE_U_DEV_UART1] =    { 0x10011000,     0x1000 },
-> +    [SIFIVE_U_DEV_PWM0] =     { 0x10020000,     0x1000 },
-> +    [SIFIVE_U_DEV_PWM1] =     { 0x10021000,     0x1000 },
->      [SIFIVE_U_DEV_QSPI0] =    { 0x10040000,     0x1000 },
->      [SIFIVE_U_DEV_QSPI2] =    { 0x10050000,     0x1000 },
->      [SIFIVE_U_DEV_GPIO] =     { 0x10060000,     0x1000 },
-> @@ -441,6 +444,38 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
->      qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
->      g_free(nodename);
->
-> +    nodename = g_strdup_printf("/soc/pwm@%lx",
-> +        (long)memmap[SIFIVE_U_DEV_PWM0].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> +        0x0, memmap[SIFIVE_U_DEV_PWM0].base,
-> +        0x0, memmap[SIFIVE_U_DEV_PWM0].size);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-> +                           SIFIVE_U_PWM0_IRQ0, SIFIVE_U_PWM0_IRQ1,
-> +                           SIFIVE_U_PWM0_IRQ2, SIFIVE_U_PWM0_IRQ3);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-> +                           prci_phandle, PRCI_CLK_TLCLK);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
-> +    g_free(nodename);
+>      /* True if in debugger mode.  */
+>      bool debugger;
 > +
-> +    nodename = g_strdup_printf("/soc/pwm@%lx",
-> +        (long)memmap[SIFIVE_U_DEV_PWM1].base);
-> +    qemu_fdt_add_subnode(fdt, nodename);
-> +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
-> +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
-> +        0x0, memmap[SIFIVE_U_DEV_PWM1].base,
-> +        0x0, memmap[SIFIVE_U_DEV_PWM1].size);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
-> +                           SIFIVE_U_PWM1_IRQ0, SIFIVE_U_PWM1_IRQ1,
-> +                           SIFIVE_U_PWM1_IRQ2, SIFIVE_U_PWM1_IRQ3);
-> +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
-> +                           prci_phandle, PRCI_CLK_TLCLK);
-> +    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
-> +    g_free(nodename);
-> +
->      nodename = g_strdup_printf("/soc/serial@%lx",
->          (long)memmap[SIFIVE_U_DEV_UART1].base);
->      qemu_fdt_add_subnode(fdt, nodename);
-> @@ -765,6 +800,8 @@ static void sifive_u_soc_instance_init(Object *obj)
->      object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
->      object_initialize_child(obj, "spi0", &s->spi0, TYPE_SIFIVE_SPI);
->      object_initialize_child(obj, "spi2", &s->spi2, TYPE_SIFIVE_SPI);
-> +    object_initialize_child(obj, "pwm0", &s->pwm[0], TYPE_SIFIVE_PWM);
-> +    object_initialize_child(obj, "pwm1", &s->pwm[1], TYPE_SIFIVE_PWM);
+> +    /*
+> +     * CSRs for PointerMasking extension
+> +     */
+> +    target_ulong mmte;
+> +    target_ulong mpmmask;
+> +    target_ulong mpmbase;
+> +    target_ulong spmmask;
+> +    target_ulong spmbase;
+> +    target_ulong upmmask;
+> +    target_ulong upmbase;
+>  #endif
+>
+>      float_status fp_status;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9a4ed18ac5..42a0867e5d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -192,6 +192,16 @@ static RISCVException hmode32(CPURISCVState *env, int csrno)
+>
 >  }
 >
->  static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-> @@ -777,7 +814,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
->      char *plic_hart_config;
->      size_t plic_hart_config_len;
-> -    int i;
-> +    int i, j;
->      NICInfo *nd = &nd_table[0];
->
->      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
-> @@ -904,6 +941,22 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
->      sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem), 0,
->                         qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_GEM_IRQ));
->
-> +    /* PWM */
-> +    for (i = 0; i < 2; i++) {
-> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->pwm[i]), errp)) {
-> +            return;
-> +        }
-> +        sysbus_mmio_map(SYS_BUS_DEVICE(&s->pwm[i]), 0,
-> +                                memmap[SIFIVE_U_DEV_PWM0].base + (0x1000 * i));
+> +/* Checks if PointerMasking registers could be accessed */
+> +static RISCVException pointer_masking(CPURISCVState *env, int csrno)
+> +{
+> +    /* Check if j-ext is present */
+> +    if (riscv_has_ext(env, RVJ)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    return RISCV_EXCP_ILLEGAL_INST;
+> +}
 > +
-> +        /* Connect PWM interrupts to the PLIC */
-> +        for (j = 0; j < SIFIVE_PWM_IRQS; j++) {
-> +            sysbus_connect_irq(SYS_BUS_DEVICE(&s->pwm[i]), j,
-> +                               qdev_get_gpio_in(DEVICE(s->plic),
-> +                                        SIFIVE_U_PWM0_IRQ0 + (i * 4) + j));
-> +        }
+>  static RISCVException pmp(CPURISCVState *env, int csrno)
+>  {
+>      if (riscv_feature(env, RISCV_FEATURE_PMP)) {
+> @@ -1404,6 +1414,259 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +/*
+> + * Functions to access Pointer Masking feature registers
+> + * We have to check if current priv lvl could modify
+> + * csr in given mode
+> + */
+> +static bool check_pm_current_disabled(CPURISCVState *env, int csrno)
+> +{
+> +    int csr_priv = get_field(csrno, 0x300);
+
+Can you add a newline between declarations and code?
+
+> +    /*
+> +     * If priv lvls differ that means we're accessing csr from higher priv lvl,
+> +     * so allow the access
+> +     */
+> +    if (env->priv != csr_priv) {
+> +        return false;
+> +    }
+> +    int cur_bit_pos;
+
+Can you keep all of the declarations at the start of blocks please.
+
+> +    switch (env->priv) {
+> +    case PRV_M:
+> +        cur_bit_pos = M_PM_CURRENT;
+> +        break;
+> +    case PRV_S:
+> +        cur_bit_pos = S_PM_CURRENT;
+> +        break;
+> +    case PRV_U:
+> +        cur_bit_pos = U_PM_CURRENT;
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +    int pm_current = get_field(env->mmte, cur_bit_pos);
+> +    /* It's same priv lvl, so we allow to modify csr only if pm.current==1 */
+> +    return !pm_current;
+> +}
+> +
+> +static RISCVException read_mmte(CPURISCVState *env, int csrno,
+> +                                target_ulong *val)
+> +{
+> +    *val = env->mmte & MMTE_MASK;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_mmte(CPURISCVState *env, int csrno,
+> +                                 target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    target_ulong wpri_val = val & MMTE_MASK;
+> +    if (val != wpri_val) {
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "MMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
+> +                      val, wpri_val);
+> +    }
+> +    /* for machine mode pm.current is hardwired to 1 */
+> +    wpri_val |= MMTE_M_PM_CURRENT;
+> +
+> +    /* hardwiring pm.instruction bit to 0, since it's not supported yet */
+> +    wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
+> +    env->mmte = wpri_val | PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_smte(CPURISCVState *env, int csrno,
+> +                                target_ulong *val)
+> +{
+> +    *val = env->mmte & SMTE_MASK;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_smte(CPURISCVState *env, int csrno,
+> +                                 target_ulong val)
+> +{
+> +    target_ulong wpri_val = val & SMTE_MASK;
+> +    if (val != wpri_val) {
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "SMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
+> +                      val, wpri_val);
 > +    }
 > +
->      create_unimplemented_device("riscv.sifive.u.gem-mgmt",
->          memmap[SIFIVE_U_DEV_GEM_MGMT].base, memmap[SIFIVE_U_DEV_GEM_MGMT].size);
->
-> diff --git a/hw/timer/sifive_pwm.c b/hw/timer/sifive_pwm.c
-> index 5565ff812a..c664480ccf 100644
-> --- a/hw/timer/sifive_pwm.c
-> +++ b/hw/timer/sifive_pwm.c
-> @@ -25,6 +25,7 @@
->   */
->
->  #include "qemu/osdep.h"
-> +#include "trace.h"
+> +    /* if pm.current==0 we can't modify current PM CSRs */
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    target_ulong new_val = wpri_val | (env->mmte & ~SMTE_MASK);
+> +    write_mmte(env, csrno, new_val);
 
-This should go in patch #1. Sorry I did not notice this before.
+You don't really need the new_val variable here.
 
->  #include "hw/irq.h"
->  #include "hw/timer/sifive_pwm.h"
->  #include "hw/qdev-properties.h"
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index ff75add6f3..d56c339ef6 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -69,6 +69,7 @@ config SIFIVE_U
->      select SIFIVE_UART
->      select SIFIVE_U_OTP
->      select SIFIVE_U_PRCI
-> +    select SIFIVE_PWM
->      select SSI_M25P80
->      select SSI_SD
->      select UNIMP
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_umte(CPURISCVState *env, int csrno,
+> +                                target_ulong *val)
+> +{
+> +    *val = env->mmte & UMTE_MASK;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_umte(CPURISCVState *env, int csrno,
+> +                                 target_ulong val)
+> +{
+> +    target_ulong wpri_val = val & UMTE_MASK;
+> +    if (val != wpri_val) {
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "UMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
+> +                      val, wpri_val);
+> +    }
+> +
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    target_ulong new_val = wpri_val | (env->mmte & ~UMTE_MASK);
+> +    write_mmte(env, csrno, new_val);
+
+Same here
+
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_mpmmask(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->mpmmask;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    env->mpmmask = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_spmmask(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->spmmask;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_spmmask(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    /* if pm.current==0 we can't modify current PM CSRs */
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    env->spmmask = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_upmmask(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->upmmask;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_upmmask(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    /* if pm.current==0 we can't modify current PM CSRs */
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    env->upmmask = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_mpmbase(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->mpmbase;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    env->mpmbase = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_spmbase(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->spmbase;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_spmbase(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    /* if pm.current==0 we can't modify current PM CSRs */
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    env->spmbase = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_upmbase(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = env->upmbase;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    uint64_t mstatus;
+> +    /* if pm.current==0 we can't modify current PM CSRs */
+> +    if (check_pm_current_disabled(env, csrno)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    env->upmbase = val;
+> +    env->mmte |= PM_EXT_DIRTY;
+> +
+> +    /* Set XS and SD bits, since PM CSRs are dirty */
+> +    mstatus = env->mstatus | MSTATUS_XS;
+> +    write_mstatus(env, csrno, mstatus);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  #endif
+>
+>  /*
+> @@ -1636,6 +1899,19 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
+>      [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+>
+> +    /* User Pointer Masking */
+> +    [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
+> +    [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
+> +    [CSR_UPMBASE] =    { "upmbase", pointer_masking, read_upmbase, write_upmbase },
+> +    /* Machine Pointer Masking */
+> +    [CSR_MMTE]    =    { "mmte",    pointer_masking, read_mmte,    write_mmte    },
+> +    [CSR_MPMMASK] =    { "mpmmask", pointer_masking, read_mpmmask, write_mpmmask },
+> +    [CSR_MPMBASE] =    { "mpmbase", pointer_masking, read_mpmbase, write_mpmbase },
+> +    /* Supervisor Pointer Masking */
+> +    [CSR_SMTE]    =    { "smte",    pointer_masking, read_smte,    write_smte    },
+> +    [CSR_SPMMASK] =    { "spmmask", pointer_masking, read_spmmask, write_spmmask },
+> +    [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase, write_spmbase },
+> +
+
+Looks good! Just a few style nits and then this should be good to go.
+
+Alistair
+
+>      /* Performance Counters */
+>      [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_zero },
+>      [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_zero },
 > --
-
-Other than above,
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> 2.20.1
+>
+>
 
