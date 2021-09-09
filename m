@@ -1,66 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mODaR-000433-HE
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 02:31:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39424)
+	id 1mODfS-0000MR-S0
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Sep 2021 02:36:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40226)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mODaJ-00041y-QU; Thu, 09 Sep 2021 02:30:56 -0400
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:36735)
+ id 1mODfR-0000Jn-HZ; Thu, 09 Sep 2021 02:36:13 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:39504)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mODaF-0001Kw-4m; Thu, 09 Sep 2021 02:30:54 -0400
-Received: by mail-io1-xd29.google.com with SMTP id q3so937548iot.3;
- Wed, 08 Sep 2021 23:30:50 -0700 (PDT)
+ id 1mODfO-0005eS-Eb; Thu, 09 Sep 2021 02:36:13 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id m11so937551ioo.6;
+ Wed, 08 Sep 2021 23:36:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=t4WE5iTHwKn7UwF1X8smB/f4EQdm8TjrqDSxVL5A7aQ=;
- b=V8d7qg3s/XEvT2SyJuNDZ39GlEdv7q+0IkqbBLzyHi1MOMUUNn4G2zJHnFVBM+Gw9F
- /3S3FKsHQeLJDD0X3hcsvZ1MJowMTubuubSrD++Ze3JTQRwa+XCRQ0tXbWCjLKi8qNSA
- qqJmYMiYucTAmsF1xKeZWOELvpKqLDd369TZeHchNjWEqD06l2UUCmWKluWBr762a6u5
- /pS7lisGTbaNR+I8U3RfgeITosMZRfx7uowf5gbGkjk9Iu60ufTbbPQyxb7/e2AGBGvo
- GVfC7rZLHUL+l/ejfZzOuX1vsgPbyuCHIBbdoIYaIn4t4dunfXogGBJdOLtgBBWJ5VrO
- bMLQ==
+ :cc; bh=XBawGdc6rNhVcYN3HlwRDDpvWYyYM7qbul4WbrEY0FQ=;
+ b=Kz6XqDzUIGPGmHwv/9LGcDOt5ViTEhdA66H+Ef7HnEDEqKvPA2xP/Y4dL9H5t6hEqW
+ K4VFfSOJmp8dyHFkbJPDogJtgZc2nC+NoepcfOySy6Uj5dWC5O+V7j8v3rvBjVIfUPlc
+ BWdS+5gSyK8zAU6wQ4NXbCRm7B1qX3aYORQgeWNk10vIVHiDCBqA6ky1KmT/DTeOArJK
+ 6UD2lfc3kTf27UPcI3MoKF1YoZlBYeRDO0T0PnA89F+aV9UnYyz2ufYjC7mYHEc4okbr
+ fSvwDfZvafUf5clFk3ea8KBXFGOJajFadY8oNfUQU0nxMnSZKo/Fzw4I/Jm86N0PL6Qo
+ 31uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=t4WE5iTHwKn7UwF1X8smB/f4EQdm8TjrqDSxVL5A7aQ=;
- b=QM1L6VumQvLSbb5IC6wAbDH4QNLmklhu78D+ETh1LiiEwRTgBwk0ohCJxvI2Y9tq5e
- 81medzeqwTQU9XLI21jIKIpZW7qPkCQWZCh4pXQJbX/2qa5U8Q0MtuAo2GiEAXvqRycf
- MK6XYI08MPQomziTFWxNoej4IeXTpXJiCdzs3dACauYV+Qb3qcfyOycEzFOVqo55lyq7
- zvHPBiUNgHUi55iVJ2AAGLWUr/j165tJTVHi87Bs7SdJXUAi0SnLPSTSPc7czmd2MfB0
- 1/p6f3KMR29oX1o/deMkVv72hrbnu+EM410dbHtwdRqzN+zDyDLHalEa8Mhys2gwc2yz
- kXOg==
-X-Gm-Message-State: AOAM530OkhVIHU45s5GmVKzNZ3j2P5S15HgSZAukM3VNsqwNeP5aq06b
- Ve0chIpHWTUnVpkQozoVpoO2j0xjzgwR5ysYkrs=
-X-Google-Smtp-Source: ABdhPJzQVmzn2oCAUIU3aLj9P/uZ64sQ84raKY9bnpd0qU3GvNsW/f/n16lOtVoYaWoDK+UAJDQF8UDGMMeU/vLrAIA=
-X-Received: by 2002:a6b:2b43:: with SMTP id r64mr1273485ior.187.1631169049379; 
- Wed, 08 Sep 2021 23:30:49 -0700 (PDT)
+ bh=XBawGdc6rNhVcYN3HlwRDDpvWYyYM7qbul4WbrEY0FQ=;
+ b=4+XZdJSEwqwfm1eH/vO4tu8Se2OGrbDiZAVh448BmYzJEb1fhrDbAEJyl1I+mJs2xd
+ Lrz+wBxiDjQQhSfUwr1WOFdSis36P2i9/l0HE40N3ocWbAAZsUQIPdym5GGthy96gjyg
+ ub+WD+Y1zNNvibBdhRYG7V8isdC1lCcNYwMWvX01vrpy1sq8d1lXJ2f6tA1iY/7u3ogw
+ OD+HspvkjNpU3gyxXDnRhQLEDnPzAIFYLGB12S+QS0U6fWOvkAI61ceS4OzM0LBQ+Yi3
+ 2/IsWxpOUc4cDdjqv+vChD78cMvBRXO3EDh0HwN+C3KvtRBYovux6XrnbdKAQ3HlNE9y
+ jgZQ==
+X-Gm-Message-State: AOAM530XXgSssHZh3qsHogL59vFdjO7zrI5XiPY0tOVjezc3C8ZCzfvx
+ 94j1Q7VSddbyw1Is7Lu72ezcdnH+BBDZMIkpumo=
+X-Google-Smtp-Source: ABdhPJyWX1ScYZgE7YA4NWPGqzXNfbf2cTXZcDY1l9m+1dQYffc/LI7u2/O+MCIUZYMJHF5nZg1MwR3DDPgEO3/uqcY=
+X-Received: by 2002:a02:70d4:: with SMTP id f203mr1467958jac.35.1631169368595; 
+ Wed, 08 Sep 2021 23:36:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210826151332.32753-1-ruinland@andestech.com>
- <CAKmqyKPY=Q61x7gf_0S1-B66VMpZCFx1r5ENJG0J5FNX6NLz0w@mail.gmail.com>
- <YTW6ADQMBcs5csXv@ruinland-x1c>
- <CAKmqyKPu9MK0KRycXzcnb=pH_OjB1mCKzw8uhb2vSZAwxraAfg@mail.gmail.com>
- <YTXFGWBhpJ3gdxxb@ruinland-x1c>
- <CAKmqyKM2erOYCOqbT7rKmbQig5HC2Q_3hk2xHBDMbFG9ipx06A@mail.gmail.com>
- <YTcdJBgP5PY+56wU@ruinland-x1c>
- <CAMSwOgoDU+jNL4hqmhW-C2foH7m5CTG21J+hdijJ_=G0018wJQ@mail.gmail.com>
-In-Reply-To: <CAMSwOgoDU+jNL4hqmhW-C2foH7m5CTG21J+hdijJ_=G0018wJQ@mail.gmail.com>
+References: <cover.1631159656.git.alistair.francis@wdc.com>
+ <22f98648b4e012f78529a56f5ca60b0b27852a4d.1631159656.git.alistair.francis@wdc.com>
+ <CAEUhbmUtGcJVrPECtqhV5sYg4n80T_vrO545qAoRF7i6b=C=sQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmUtGcJVrPECtqhV5sYg4n80T_vrO545qAoRF7i6b=C=sQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 9 Sep 2021 16:30:22 +1000
-Message-ID: <CAKmqyKNdd2CZc0HVUf91W8YZGop77gZGzc5+4kfUJSao9envUg@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/2] riscv: Adding custom CSR related Kconfig options
-To: Rahul Pathak <rpathakmailbox@gmail.com>
-Cc: Ruinland ChuanTzu Tsai <ruinland@andestech.com>, guoren@linux.alibaba.com, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- Dylan Jhong <dylan@andestech.com>, 
+Date: Thu, 9 Sep 2021 16:35:42 +1000
+Message-ID: <CAKmqyKNLgCPNgEPgY-YEZdBRYOdSbCJ8JaJw11_1UPHJO1n6sQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] sifive_u: Connect the SiFive PWM device
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- ycliang@andestech.com
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -81,363 +74,200 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2021 06:30:57 -0000
+X-List-Received-Date: Thu, 09 Sep 2021 06:36:13 -0000
 
-On Tue, Sep 7, 2021 at 8:15 PM Rahul Pathak <rpathakmailbox@gmail.com> wrote:
+On Thu, Sep 9, 2021 at 2:37 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Hi Alistair,
+> On Thu, Sep 9, 2021 at 11:55 AM Alistair Francis
+> <alistair.francis@opensource.wdc.com> wrote:
+> >
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > Connect the SiFive PWM device and expose it via the device tree.
+> >
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  docs/system/riscv/sifive_u.rst |  1 +
+> >  include/hw/riscv/sifive_u.h    | 14 ++++++++-
+> >  hw/riscv/sifive_u.c            | 55 +++++++++++++++++++++++++++++++++-
+> >  hw/timer/sifive_pwm.c          |  1 +
+> >  hw/riscv/Kconfig               |  1 +
+> >  5 files changed, 70 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+> > index 01108b5ecc..7c65e9c440 100644
+> > --- a/docs/system/riscv/sifive_u.rst
+> > +++ b/docs/system/riscv/sifive_u.rst
+> > @@ -24,6 +24,7 @@ The ``sifive_u`` machine supports the following devices:
+> >  * 2 QSPI controllers
+> >  * 1 ISSI 25WP256 flash
+> >  * 1 SD card in SPI mode
+> > +* PWM0 and PWM1
+> >
+> >  Please note the real world HiFive Unleashed board has a fixed configuration of
+> >  1 E51 core and 4 U54 core combination and the RISC-V core boots in 64-bit mode.
+> > diff --git a/include/hw/riscv/sifive_u.h b/include/hw/riscv/sifive_u.h
+> > index 2656b39808..f71c90c94c 100644
+> > --- a/include/hw/riscv/sifive_u.h
+> > +++ b/include/hw/riscv/sifive_u.h
+> > @@ -27,6 +27,7 @@
+> >  #include "hw/misc/sifive_u_otp.h"
+> >  #include "hw/misc/sifive_u_prci.h"
+> >  #include "hw/ssi/sifive_spi.h"
+> > +#include "hw/timer/sifive_pwm.h"
+> >
+> >  #define TYPE_RISCV_U_SOC "riscv.sifive.u.soc"
+> >  #define RISCV_U_SOC(obj) \
+> > @@ -49,6 +50,7 @@ typedef struct SiFiveUSoCState {
+> >      SiFiveSPIState spi0;
+> >      SiFiveSPIState spi2;
+> >      CadenceGEMState gem;
+> > +    SiFivePwmState pwm[2];
+> >
+> >      uint32_t serial;
+> >      char *cpu_type;
+> > @@ -92,7 +94,9 @@ enum {
+> >      SIFIVE_U_DEV_FLASH0,
+> >      SIFIVE_U_DEV_DRAM,
+> >      SIFIVE_U_DEV_GEM,
+> > -    SIFIVE_U_DEV_GEM_MGMT
+> > +    SIFIVE_U_DEV_GEM_MGMT,
+> > +    SIFIVE_U_DEV_PWM0,
+> > +    SIFIVE_U_DEV_PWM1
+> >  };
+> >
+> >  enum {
+> > @@ -126,6 +130,14 @@ enum {
+> >      SIFIVE_U_PDMA_IRQ5 = 28,
+> >      SIFIVE_U_PDMA_IRQ6 = 29,
+> >      SIFIVE_U_PDMA_IRQ7 = 30,
+> > +    SIFIVE_U_PWM0_IRQ0 = 42,
+> > +    SIFIVE_U_PWM0_IRQ1 = 43,
+> > +    SIFIVE_U_PWM0_IRQ2 = 44,
+> > +    SIFIVE_U_PWM0_IRQ3 = 45,
+> > +    SIFIVE_U_PWM1_IRQ0 = 46,
+> > +    SIFIVE_U_PWM1_IRQ1 = 47,
+> > +    SIFIVE_U_PWM1_IRQ2 = 48,
+> > +    SIFIVE_U_PWM1_IRQ3 = 49,
+> >      SIFIVE_U_QSPI0_IRQ = 51,
+> >      SIFIVE_U_GEM_IRQ = 53
+> >  };
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index 6cc1a62b0f..2301f5dd4f 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -17,6 +17,7 @@
+> >   * 7) DMA (Direct Memory Access Controller)
+> >   * 8) SPI0 connected to an SPI flash
+> >   * 9) SPI2 connected to an SD card
+> > + * 10) PWM0 and PWM1
+> >   *
+> >   * This board currently generates devicetree dynamically that indicates at least
+> >   * two harts and up to five harts.
+> > @@ -75,6 +76,8 @@ static const MemMapEntry sifive_u_memmap[] = {
+> >      [SIFIVE_U_DEV_PRCI] =     { 0x10000000,     0x1000 },
+> >      [SIFIVE_U_DEV_UART0] =    { 0x10010000,     0x1000 },
+> >      [SIFIVE_U_DEV_UART1] =    { 0x10011000,     0x1000 },
+> > +    [SIFIVE_U_DEV_PWM0] =     { 0x10020000,     0x1000 },
+> > +    [SIFIVE_U_DEV_PWM1] =     { 0x10021000,     0x1000 },
+> >      [SIFIVE_U_DEV_QSPI0] =    { 0x10040000,     0x1000 },
+> >      [SIFIVE_U_DEV_QSPI2] =    { 0x10050000,     0x1000 },
+> >      [SIFIVE_U_DEV_GPIO] =     { 0x10060000,     0x1000 },
+> > @@ -441,6 +444,38 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+> >      qemu_fdt_setprop_cell(fdt, nodename, "reg", 0x0);
+> >      g_free(nodename);
+> >
+> > +    nodename = g_strdup_printf("/soc/pwm@%lx",
+> > +        (long)memmap[SIFIVE_U_DEV_PWM0].base);
+> > +    qemu_fdt_add_subnode(fdt, nodename);
+> > +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> > +        0x0, memmap[SIFIVE_U_DEV_PWM0].base,
+> > +        0x0, memmap[SIFIVE_U_DEV_PWM0].size);
+> > +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
+> > +                           SIFIVE_U_PWM0_IRQ0, SIFIVE_U_PWM0_IRQ1,
+> > +                           SIFIVE_U_PWM0_IRQ2, SIFIVE_U_PWM0_IRQ3);
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+> > +                           prci_phandle, PRCI_CLK_TLCLK);
+> > +    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
+> > +    g_free(nodename);
+> > +
+> > +    nodename = g_strdup_printf("/soc/pwm@%lx",
+> > +        (long)memmap[SIFIVE_U_DEV_PWM1].base);
+> > +    qemu_fdt_add_subnode(fdt, nodename);
+> > +    qemu_fdt_setprop_string(fdt, nodename, "compatible", "sifive,pwm0");
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "reg",
+> > +        0x0, memmap[SIFIVE_U_DEV_PWM1].base,
+> > +        0x0, memmap[SIFIVE_U_DEV_PWM1].size);
+> > +    qemu_fdt_setprop_cell(fdt, nodename, "interrupt-parent", plic_phandle);
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "interrupts",
+> > +                           SIFIVE_U_PWM1_IRQ0, SIFIVE_U_PWM1_IRQ1,
+> > +                           SIFIVE_U_PWM1_IRQ2, SIFIVE_U_PWM1_IRQ3);
+> > +    qemu_fdt_setprop_cells(fdt, nodename, "clocks",
+> > +                           prci_phandle, PRCI_CLK_TLCLK);
+> > +    qemu_fdt_setprop_cell(fdt, nodename, "#pwm-cells", 0);
+> > +    g_free(nodename);
+> > +
+> >      nodename = g_strdup_printf("/soc/serial@%lx",
+> >          (long)memmap[SIFIVE_U_DEV_UART1].base);
+> >      qemu_fdt_add_subnode(fdt, nodename);
+> > @@ -765,6 +800,8 @@ static void sifive_u_soc_instance_init(Object *obj)
+> >      object_initialize_child(obj, "pdma", &s->dma, TYPE_SIFIVE_PDMA);
+> >      object_initialize_child(obj, "spi0", &s->spi0, TYPE_SIFIVE_SPI);
+> >      object_initialize_child(obj, "spi2", &s->spi2, TYPE_SIFIVE_SPI);
+> > +    object_initialize_child(obj, "pwm0", &s->pwm[0], TYPE_SIFIVE_PWM);
+> > +    object_initialize_child(obj, "pwm1", &s->pwm[1], TYPE_SIFIVE_PWM);
+> >  }
+> >
+> >  static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> > @@ -777,7 +814,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> >      MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+> >      char *plic_hart_config;
+> >      size_t plic_hart_config_len;
+> > -    int i;
+> > +    int i, j;
+> >      NICInfo *nd = &nd_table[0];
+> >
+> >      qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+> > @@ -904,6 +941,22 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+> >      sysbus_connect_irq(SYS_BUS_DEVICE(&s->gem), 0,
+> >                         qdev_get_gpio_in(DEVICE(s->plic), SIFIVE_U_GEM_IRQ));
+> >
+> > +    /* PWM */
+> > +    for (i = 0; i < 2; i++) {
+> > +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->pwm[i]), errp)) {
+> > +            return;
+> > +        }
+> > +        sysbus_mmio_map(SYS_BUS_DEVICE(&s->pwm[i]), 0,
+> > +                                memmap[SIFIVE_U_DEV_PWM0].base + (0x1000 * i));
+> > +
+> > +        /* Connect PWM interrupts to the PLIC */
+> > +        for (j = 0; j < SIFIVE_PWM_IRQS; j++) {
+> > +            sysbus_connect_irq(SYS_BUS_DEVICE(&s->pwm[i]), j,
+> > +                               qdev_get_gpio_in(DEVICE(s->plic),
+> > +                                        SIFIVE_U_PWM0_IRQ0 + (i * 4) + j));
+> > +        }
+> > +    }
+> > +
+> >      create_unimplemented_device("riscv.sifive.u.gem-mgmt",
+> >          memmap[SIFIVE_U_DEV_GEM_MGMT].base, memmap[SIFIVE_U_DEV_GEM_MGMT].size);
+> >
+> > diff --git a/hw/timer/sifive_pwm.c b/hw/timer/sifive_pwm.c
+> > index 5565ff812a..c664480ccf 100644
+> > --- a/hw/timer/sifive_pwm.c
+> > +++ b/hw/timer/sifive_pwm.c
+> > @@ -25,6 +25,7 @@
+> >   */
+> >
+> >  #include "qemu/osdep.h"
+> > +#include "trace.h"
 >
-> One clarification: The unification of architectures is also going to allow multi-arch CPUs (RV32/RV64) in a single machine instance? Or it's just limited to only one in the runtime.
+> This should go in patch #1. Sorry I did not notice this before.
 
-The first step (which doesn't work yet) is to allow running a 32-bit
-CPU on the qemu-system-riscv64 binary.
+Thanks
 
-Next step is mixed XLEN machines. Like the FU540 with 4 64-bit cores
-and a 32-bit control core.
-
-Eventually aiming for configurable XLEN changes, like what is possible
-with the Hypervisor extension.
-
-We don't have any of them yet, but it's worth keeping in mind.
+Applied to riscv-to-apply.next
 
 Alistair
-
->
-> Rahul
->
-> On Tue, Sep 7, 2021 at 1:37 PM Ruinland ChuanTzu Tsai <ruinland@andestech.com> wrote:
->>
->> Hi Alistair,
->>
->> Thanks for the comment.
->>
->> On Mon, Sep 06, 2021 at 05:55:25PM +1000, Alistair Francis wrote:
->> > On Mon, Sep 6, 2021 at 5:37 PM Ruinland ChuanTzu Tsai
->> > <ruinland@andestech.com> wrote:
->> > >
->> > > Hi Alistair,
->> > >
->> > > So glad to hear from you.
->> > >
->> > > On Mon, Sep 06, 2021 at 05:05:16PM +1000, Alistair Francis wrote:
->> > > > On Mon, Sep 6, 2021 at 4:49 PM Ruinland ChuanTzu Tsai
->> > > > <ruinland@andestech.com> wrote:
->> > > > >
->> > > > >
->> > > > > Hi Alistair,
->> > > > >
->> > > > > Thanks for the heads up about the upcoming unification of RISC-V 32/64 targets.
->> > > > > Yet I have several concerns and would like to have some brainstorming regarding
->> > > > > such topics - -
->> > > >
->> > > > No worries, I'm happy to discuss.
->> > > >
->> > > > >
->> > > > > That is, could you elaborate more about the "runtime check/switch" which you
->> > > > > mentioned in the previous e-mail :
->> > > > > https://lists.nongnu.org/archive/html/qemu-devel/2021-08/msg02154.html
->> > > > > I'm not quite following the context.
->> > > >
->> > > > Yep, so something along the lines of this in `riscv_csrrw()`
->> > > >
->> > > > if (cpu == "MyCustomCPU") {
->> > > >     my_custom_csr[csrno].read();
->> > > > }
->> > > >
->> > > > So we check if using the CPU then apply extra CSR accesses.
->> > > >
->> > > > > If we don't have a way to toggle which (vendor) cores, which will be used,
->> > > > > during compile time, it means that we have to build all the vendor code and
->> > > > > link them all together; and we might have the chance to encounter collision on
->> > > > > csrno between different vendors.
->> > > >
->> > > > I don't see how they will collide as we will only act on 1, based on
->> > > > the CPU we are using.
->> > >
->> > > AFAIK, we need to put CSR number into `target/riscv/cpu_bits.h`, and they are
->> > > exposed to the global and let others to use it. With my current design, which I
->> > > have sent out by RFC patch series v3, I introduced an abstraction layer,
->> > > `custom_cpu_bits.h`, which will toggle diffenet set of custom CSR number.
->> > >
->> > > If we teardown the Kconfig, all symbols will be exposed and then it could have
->> > > a high chance to collide with each other.
->> >
->> > I guess this depends on what you are trying to do.
->> >
->> > We could have non public CSRs. So each CPU could have it's own custom
->> > version of `riscv_csr_operations csr_ops[CSR_TABLE_SIZE]` which is in
->> > it's own C file. We then just add a switch case to CSR accesses and if
->> > using CPU "customcpu" then we check the `custom_cpu_csr_ops` table.
->> > NOTE: That we can do something smarter than a switch, but you get the
->> > point. We can implement a read/write function for every element in the
->> > array, with the default just triggering an illegal instruction.
->>
->> One thing I would like to discuss here.
->>
->> Firstly, I'm not quite sure how the picture of non-public CSR looks like.
->> Is it suggested that non-standard CSR number shall not be exposed ?
->>
->> I know that we should focus on custom CSR part, yet I need to make sure
->> that if following logic is permitted to appear in `target/riscv/trans_insn` :
->>
->> trans_vendor_A_insn_blah(...) {
->>     riscv_csrrw(env, CSR_VENDOR_A_CUSTOM, r, n, write_mask);
->>     }
->>
->> As far as I know, csr number is not presented as a C++ enum, which we
->> can access via csr::custom::vendora::foobar, so it's a globally exposed
->> macro with possiblilty of collision.
->>
->> IMHO, the key is that are we permitted to have a uniform interface to access
->> CSR, either standard or vendor designed ones, in other parts of QEMU.
->>
->>
->> > I guess that assumes that each CSR access is self contained. For
->> > example if changing a custom CSR changes a core part of the
->> > target/riscv code this won't really work.
->> >
->> > On the other hand I'm not convinced we want vendor changes to affect
->> > the core target/riscv code. Ideally all vendor code can be kept in
->> > it's own file and it's fully self contained. That won't work for
->> > everything, but it should work for enough use cases. We can even have
->> > a custom vendor state that the vendor code can use (it can also change
->> > the CPU state).
->> >
->> > Does that make sense?
->>
->> In general, I agree with the point that vendor code should be self-contained.
->> Yet I have doubts that with the current design of CPU model, are we able to
->> unify the targets and in the meanwhile to keep things tight and neat ?
->>
->> The execution flow will be bonded to have a shared instruction decoder/
->> translator and a shared handler for CSR (i.e. riscv_csrrw). It's not like we
->> get to choose what decoder we want to use or which CSR table we will be
->> using at xxx_cpu_init(). If we choose to use runtime check/diversion of all of
->> these parts, the overhead might be tremendous.
->>
->> Surely we should be focusing on CSR part for now, and just as you said, CSR
->> is not that perforamnce-centric.
->>
->> Yet if we take a look at `configs/targets`, still we're having 6 MIPS32/64
->> linux-user targets, 4 ARM32/64 linux-user targets and 4 PPC32/64 linux-user
->> targets.
->>
->> I guess it will be a very long journey to merge all the variants.
->>
->> >
->> > >
->> > > >
->> > > > >
->> > > > > Secondly, I'm not quite sure about how we're going to merge decode tree files
->> > > > > across RV32 and RV64. Vendor-designed custom instruction would have a different
->> > > > > encoding scheme on bitfields for RV32 and RV64. Currently, we (Andes) are using
->> > > > > different decodetree sources for gen32 and gen64 in `target/riscv/meson.build`.
->> > > >
->> > > > Ok, so custom instructions are a whole different problem. I think we
->> > > > should leave that for now and focus on CSRs.
->> > > >
->> > > > A quick look though and I suspect we could do a similar CPU check in
->> > > > decode_opc(). Dealing with the decodetree will be problematic though.
->> > > >
->> > > > > I'm preparing the patch to demonstrate such hiccups.
->> > > > >
->> > > > > As far as I know, there's no control flow logic for decodetree to parse
->> > > > > decodetree files differently. (e.g. ifdef XLEN == 32 then blah, blah).
->> > > > >
->> > > > > To meet in the halfway, maybe after the grand unification on RV32/64, we can
->> > > > > still confine vendor custom logic (i.e. instrucions and CSRs) to be toggled by
->> > > > > whether a certain vendor cpu model is selected ?
->> > > >wtih  the d
->> > > > I honestly don't see a scenario where that happens. The maintenance
->> > > > overhead and confusion of changing the CPUs at build time is too high.
->> > > >
->> > > > I also don't think we should need that for CSR accesses. Custom
->> > > > instructions are a whole different can of worms.
->> > >
->> > > IMHO, custom CSR and custom instructions are two sides of a same coin in some
->> > > way. Let me explain it with an example - -
->> > >
->> > > Andes has a custom instruction called `EXEC.IT`, which is a 16-bit long com-
->> > > pressed instruction. By executing such instrcution, an instruction table
->> > > reside in a particular address specified by a custom CSR called uitb will be
->> > > fetch, decode and execute. By doing so, the code size could be reduced.
->> >
->> > Hmmm... This is a much more complex use case than I was expecting. I
->> > have been thinking more about custom CSRs to set a timer or control
->> > the interrupt controller.
->> >
->> > Something like what you described is going to be a lot more work.
->> >
->> > In your case though I think we can still focus on the CSR aspect
->> > first. Once that is sorted we can then look at the instruction part.
->>
->> Just like the mentioned question above , I'm wondering if we can assume
->> riscv_csrrw() to be a general interface for accessing all the CSRs ?
->>
->> Cordially yours,
->> Ruinland ChuanTzu Tsai
->>
->> > The main aim should be that all (or almost all) vendor code lives in
->> > it's own file.
->> >
->> > Alistair
->> >
->> > >
->> > > The problem is that we have different address encoding on RV32 and RV64.
->> > >
->> > > And just like you mentioned, in our in-house core, we apply the same logic on
->> > > decode_opc() to decode custom instructions first. If such decoding/trans
->> > > procedure fails, the original decoder will be invoked.
->> > >
->> > > >
->> > > > >
->> > > > > By the way, I'm wondering how our friends from T-Head (Guo Ren ?) regard this
->> > > > > issue ? AFAIK, they forked QEMU from v3.2.0 and applied their vendor features
->> > > > > on top of it for quite a while.
->> > > >
->> > > > I'm not sure.
->> > >
->> > > Sorry for the confusion, I was trying to ping Guo Ren :-D
->> > > I CC'ed him in the previous e-mail.
->> > >
->> > > Cordially yours,
->> > > Ruinland ChuanTzu Tsai
->> > >
->> > > >
->> > > > Alistair
->> > > >
->> > > > >
->> > > > > Cordially yours,
->> > > > > Ruinland ChuanTzu Tsai
->> > > > >
->> > > > > On Thu, Sep 02, 2021 at 12:25:20PM +1000, Alistair Francis wrote:
->> > > > > > On Fri, Aug 27, 2021 at 1:16 AM Ruinland Chuan-Tzu Tsai
->> > > > > > <ruinland@andestech.com> wrote:
->> > > > > > >
->> > > > > > > From: Ruinland ChuanTzu Tsai <ruinland@andestech.com>
->> > > > > > >
->> > > > > > > During my modification on my previous patch series for custom CSR support, I
->> > > > > > > believe this issue deserves its own discussion (or debate) because it's _not_
->> > > > > > > as simple as "just put those options in Kconfig".
->> > > > > > >
->> > > > > > > The obstables I've encountered and the kluges I came up is listed as follow :
->> > > > > > >
->> > > > > > > (1) Due to the design of top-level meson.build, all Kconfig options will land
->> > > > > > > into `*-config-devices.h` since minikconf will be only used after config_target
->> > > > > > > being processed. This will let to the fact that linux-users won't be able to
->> > > > > > > use custom CSR code properly becuase they only includes `*-config-devices.h`.
->> > > > > > > And that is reasonble due to the fact that changes on cpu.c and csr.c is a
->> > > > > > > target-related matter and linux-user mode shouldn't include device related
->> > > > > > > headers in most of cases.
->> > > > > > >
->> > > > > > > So, modify meson.build to parse target/riscv/Kconfig during config_target phase
->> > > > > > > is without doubts necessary.
->> > > > > > >
->> > > > > > > (2) Kconfig option `RISCV_CUSTOM_CSR` is introduced for RISC-V cpu models to
->> > > > > > > toggle it at its will. Yet due to the fact that csr.o and cpu.o are linked
->> > > > > > > altogether for all CPU models, the suffer will be shared without option.
->> > > > > > > The only reasonable way to seperate build the fire lane which seperates vendor
->> > > > > > > flavored cpu and spec-conformed ones, is to build them seperately with options
->> > > > > > > toggled diffrently, just like RV32 and RV64 shares almost the same source base,
->> > > > > > > yet the sources are compiled with differnt flags/definitions.
->> > > > > > >
->> > > > > > > To achieve that, miraculously, we can just put *.mak files into `target`
->> > > > > > > directoy, because that's how `configure` enumerates what targets are supported.
->> > > > > > >
->> > > > > > > (3) The longest days are not over yet, if we take a good look at how the minikconf
->> > > > > > > is invoked during config_devices and in what way *.mak presented its options
->> > > > > > > inside `default-configs/devices`, we can see that *.mak files there is formated
->> > > > > > > in `CONFIG_*` style and the minikconf is reading directly during config_device
->> > > > > > > phase. That's totally different from *.mak files presented in
->> > > > > > > `default-configs/targets`. To make the parsing logic consistent, I
->> > > > > > > introduce a rv_custom directory inside which contains minikconf-parsable
->> > > > > > > mak files.
->> > > > > > >
->> > > > > > > With this patches, ones can build a A25/AX25 linux-user platform by :
->> > > > > > > $ ./configure --target-list=riscv64-andes-linux-user,riscv32-andes-linux-user
->> > > > > >
->> > > > > > Hey! Thanks for the patches
->> > > > > >
->> > > > > > I'm not convinced that we want this though.
->> > > > > >
->> > > > > > Right now we are trying to head towards a riscv64-softmmu binary being
->> > > > > > able to run all RISC-V code. That include 32-bit cpus
->> > > > > > (qemu-riscv64-softmmu -cpu r32...) and 64-bit CPUs. We shouldn't be
->> > > > > > splitting out more targets.
->> > > > > >
->> > > > > > It also goes against the general idea of RISC-V in that everyone has a
->> > > > > > standard compliant implementation, they can then add extra
->> > > > > > functionality.
->> > > > > >
->> > > > > > In terms of Kconfig options. It doesn't seem like a bad idea to have
->> > > > > > an option to fully disable custom CSRs. That way if someone really
->> > > > > > wants performance and doesn't want custom CSRs they can disable the
->> > > > > > switch. Otherwise we leave it on and all custom CSRs are available in
->> > > > > > the build and then controlled by the CPU selection at runtime. If that
->> > > > > > ends up being too difficult to implement though then we don't have to
->> > > > > > have it.
->> > > > > >
->> > > > > > Thanks again for working on this.
->> > > > > >
->> > > > > > Alistair
->> > > > > >
->> > > > > >
->> > > > > > > $ make
->> > > > > > >
->> > > > > > > P.S. The pacthes from :
->> > > > > > > https://lists.gnu.org/archive/html/qemu-devel/2021-08/msg00913.html
->> > > > > > > is needed. A clean-up and modified version will be sent out soon.
->> > > > > > >
->> > > > > > > P.P.S.
->> > > > > > > I know these parts won't be easy to digest, and the further iterations will be
->> > > > > > > needed, so I didn't ask my colleagues to sign-off for now.
->> > > > > > >
->> > > > > > > Cordially yours,
->> > > > > > > Ruinland ChuanTzu Tsai
->> > > > > > >
->> > > > > > > Ruinland ChuanTzu Tsai (2):
->> > > > > > >   Adding Kconfig options for custom CSR support and Andes CPU model
->> > > > > > >   Adding necessary files for Andes platforms, cores to enable custom CSR
->> > > > > > >     support
->> > > > > > >
->> > > > > > >  Kconfig                                       |  1 +
->> > > > > > >  .../devices/riscv32-andes-softmmu.mak         | 17 ++++++++++++
->> > > > > > >  .../devices/riscv64-andes-softmmu.mak         | 17 ++++++++++++
->> > > > > > >  .../targets/riscv32-andes-linux-user.mak      |  1 +
->> > > > > > >  .../targets/riscv32-andes-softmmu.mak         |  1 +
->> > > > > > >  .../targets/riscv64-andes-linux-user.mak      |  1 +
->> > > > > > >  .../targets/riscv64-andes-softmmu.mak         |  1 +
->> > > > > > >  .../targets/rv_custom/no_custom.mak           |  0
->> > > > > > >  .../rv_custom/riscv32-andes-linux-user.mak    |  1 +
->> > > > > > >  .../rv_custom/riscv32-andes-softmmu.mak       |  1 +
->> > > > > > >  .../targets/rv_custom/riscv32-linux-user.mak  |  1 +
->> > > > > > >  .../targets/rv_custom/riscv32-softmmu.mak     |  1 +
->> > > > > > >  .../rv_custom/riscv64-andes-linux-user.mak    |  1 +
->> > > > > > >  .../rv_custom/riscv64-andes-softmmu.mak       |  1 +
->> > > > > > >  .../targets/rv_custom/riscv64-linux-user.mak  |  1 +
->> > > > > > >  .../targets/rv_custom/riscv64-softmmu.mak     |  1 +
->> > > > > > >  meson.build                                   | 26 +++++++++++++++++++
->> > > > > > >  target/riscv/Kconfig                          |  6 +++++
->> > > > > > >  18 files changed, 79 insertions(+)
->> > > > > > >  create mode 100644 default-configs/devices/riscv32-andes-softmmu.mak
->> > > > > > >  create mode 100644 default-configs/devices/riscv64-andes-softmmu.mak
->> > > > > > >  create mode 120000 default-configs/targets/riscv32-andes-linux-user.mak
->> > > > > > >  create mode 120000 default-configs/targets/riscv32-andes-softmmu.mak
->> > > > > > >  create mode 120000 default-configs/targets/riscv64-andes-linux-user.mak
->> > > > > > >  create mode 120000 default-configs/targets/riscv64-andes-softmmu.mak
->> > > > > > >  create mode 100644 default-configs/targets/rv_custom/no_custom.mak
->> > > > > > >  create mode 100644 default-configs/targets/rv_custom/riscv32-andes-linux-user.mak
->> > > > > > >  create mode 100644 default-configs/targets/rv_custom/riscv32-andes-softmmu.mak
->> > > > > > >  create mode 120000 default-configs/targets/rv_custom/riscv32-linux-user.mak
->> > > > > > >  create mode 120000 default-configs/targets/rv_custom/riscv32-softmmu.mak
->> > > > > > >  create mode 100644 default-configs/targets/rv_custom/riscv64-andes-linux-user.mak
->> > > > > > >  create mode 100644 default-configs/targets/rv_custom/riscv64-andes-softmmu.mak
->> > > > > > >  create mode 120000 default-configs/targets/rv_custom/riscv64-linux-user.mak
->> > > > > > >  create mode 120000 default-configs/targets/rv_custom/riscv64-softmmu.mak
->> > > > > > >  create mode 100644 target/riscv/Kconfig
->> > > > > > >
->> > > > > > > --
->> > > > > > > 2.32.0
->> > > > > > >
->>
 
