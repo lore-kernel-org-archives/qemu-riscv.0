@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mOZWt-0007cm-5Z
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Sep 2021 01:56:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45360)
+	id 1mOajr-0002r7-9a
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Sep 2021 03:14:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58488)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mOZWn-0007Yy-VD
- for qemu-riscv@nongnu.org; Fri, 10 Sep 2021 01:56:45 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:40546)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mOajp-0002nX-Dy; Fri, 10 Sep 2021 03:14:17 -0400
+Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:38698)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mOZWm-0002VV-E8
- for qemu-riscv@nongnu.org; Fri, 10 Sep 2021 01:56:45 -0400
-Received: by mail-pf1-x435.google.com with SMTP id n34so936427pfv.7
- for <qemu-riscv@nongnu.org>; Thu, 09 Sep 2021 22:56:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=mgUzr2DG36yd+UgA/DpY4Gf1qGjCBL2FzKoD7fd8uA0=;
- b=iIc9sxUji/Pz0jHXLXLrJo0d5KWVyYJlEm2jDimLvNPmdMANVgztrsxfClWMDlKaNn
- 4QS7V+Ca+Z3rh8wYua6VY6o7Tj9als8Ol5qu2R2W/Ms8sfIj2M/HXjJdFcO81dqowxV+
- mQAFIWhm9ek8iymxWt+33jtcxczMk7hIhnZACfL6qgt3x3CbTk25YSiAH26YooJ2nbbv
- KybcPNAnLf7ujO09NFh/tNZbm0yce9pL473DuXv7T3eOYLMziKrElfWkQimJkz42GS8b
- Z3AUJPWQI+iJxYPZSFSdayf5KleQERl3XBkcqw2XjYFlY7fiAt76T8f0N+LG/VzZ8tyQ
- drCQ==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mOajo-0002eD-09; Fri, 10 Sep 2021 03:14:17 -0400
+Received: by mail-yb1-xb33.google.com with SMTP id m70so748851ybm.5;
+ Fri, 10 Sep 2021 00:14:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ewDObw0xECGvPql45OOKD/CRzfS5SJ3fo/mR8I/BC1A=;
+ b=EdkT4gizzr3BPWrZPwmuTTzpCbujpQUHSr4ea0m2X8jiOK04BhTmXxyAX6vGXVWUvR
+ /hqNygnApRuID7odnjk6eFDs2a6hdmX5bAq+vBnrlJLE2srcsKoro7wE2LOufCje78to
+ 3OY+5ZF32w7sKvmd6fnh0bN8ntmhRiNhk7GpYbF7JEROKvQ6L3MqiSJTzNkqnckRpduZ
+ z/52BUfeUE0QyC3iwwZlO/6PUMy1FtWFS7WvbMigQ12rE5qQHj7LDy1LlZpc6jKlLCYh
+ 57E0wrkaS9dMw9y+ddCIrKuUNZxSFi55CXCpEVhGy0HfrjvkSuSO/db01vUZGQl1quw8
+ WISw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=mgUzr2DG36yd+UgA/DpY4Gf1qGjCBL2FzKoD7fd8uA0=;
- b=iq1QjzZNZ1F6LDUGvzxj2VyMRNxu9R7s9qERxxQV0xj7OD6tYgNXCGzk8YCgHw/mP2
- Lo/UHQaJJubaxSqpYn0JJpVuBIzvLY3Y/diPdZd3qRQQIPzzLwV2ZavYab1uA5HIgkg2
- 4+kvKye1Tfwk9ZQrWtnsJp5gSwwdBncK0KT4mkFDcr51JAk/qKmS/4RLVCs7fQwagr2H
- PXxeSCEq/02U1srlMherUnn7v+61DQl5FNgOdwkeYQd+DNBpVJzHyaPYYd2c4/HDTimJ
- Vs1Ku63BzO46geSQGPCrcBv3xfyjDM0cdgWCBpQu58LjKS9PMUOlxeqvTPfmfJdFQkur
- 7d6g==
-X-Gm-Message-State: AOAM533cTXwqPjhpQ+hRRYYsvRPd4ud4lT+jbMVmSPKe9T8yG/ZvkLvE
- QPmWXGjjL8sUI6u967e67+GorA==
-X-Google-Smtp-Source: ABdhPJxhPm/TyWXkN9N9EhOfSaqEC26i0vEl/xj1t2GlKTG1VOW6cj/UqiNO11AFCiqxF75tYYJBsQ==
-X-Received: by 2002:a65:51c8:: with SMTP id i8mr5781305pgq.451.1631253403160; 
- Thu, 09 Sep 2021 22:56:43 -0700 (PDT)
-Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
- [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id v17sm3739101pff.6.2021.09.09.22.56.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Sep 2021 22:56:42 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Max Hsu <max.hsu@sifive.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 4/4] hw/dma: sifive_pdma: don't set Control.error if 0 bytes
- to transfer
-Date: Fri, 10 Sep 2021 13:56:16 +0800
-Message-Id: <20210910055620.946625-5-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210910055620.946625-1-frank.chang@sifive.com>
-References: <20210910055620.946625-1-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ewDObw0xECGvPql45OOKD/CRzfS5SJ3fo/mR8I/BC1A=;
+ b=gB2WBm1hfmYzwUtkuoHlYP5GlAwRc0b4J0rX8amG3F9J83mGef0KkMw0OuzRs2N+FN
+ mGQPKmbM7woYM3Zu2KyexWqTQ5aGtLpVIuT9LZe4lFvFABI5+BFc1HCJIf5CNFqGDlHR
+ 37YWSmuJRJJnH5/4ye31aMVQh52ENrCBwoSZ6aKhJrOVN77l/fzpXr3iyLn5xS6hcIJb
+ Pb+/M6e0g8wjnHRTrziwM2oqP9gyg6TamuB+HRfL5RYqbC6WIGMi9EJoZYYsZ5tf07W6
+ Ia/OUElQY59/I4Z9JV+nve71ELAFO0wzr9IBnMepRlhKMJ69i7SMrXm+AszbBlkt8NYt
+ hRSA==
+X-Gm-Message-State: AOAM533XaRZHS1HiL8Z8y+yezCJRuc2hiqWN8lerbAidoJaqXdybeuC9
+ 9XMUHWt+Z0kfYQpemG/uPd8E7iHiFKkwAeUia/Q=
+X-Google-Smtp-Source: ABdhPJwn0WkFqYaWlMLuwx7shWgmWepfxVHVPHMTwje1lae74qMqEsBZljxbNtW5NO2Mx2ADTkm3zuS4B+VPRI12mj4=
+X-Received: by 2002:a05:6902:120a:: with SMTP id
+ s10mr9042568ybu.293.1631258054084; 
+ Fri, 10 Sep 2021 00:14:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x435.google.com
+References: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
+ <20210909190033.1339448-8-space.monkey.delivers@gmail.com>
+In-Reply-To: <20210909190033.1339448-8-space.monkey.delivers@gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 10 Sep 2021 15:14:02 +0800
+Message-ID: <CAEUhbmU1mM54yUzXHY4yo0D4MnnHgNgKRhyd8XhrO17Jvt-oRw@mail.gmail.com>
+Subject: Re: [PATCH v11 7/7] [RISCV_PM] Allow experimental J-ext to be turned
+ on
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ space.monkey.delivers@gmail.com, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,81 +78,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2021 05:56:46 -0000
+X-List-Received-Date: Fri, 10 Sep 2021 07:14:17 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On Fri, Sep 10, 2021 at 3:13 AM Alexey Baturo <baturo.alexey@gmail.com> wrote:
+>
+> Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f5fdc31fb9..4a1dd41818 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -582,6 +582,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              }
+>              set_vext_version(env, vext_version);
+>          }
+> +        if (cpu->cfg.ext_j) {
+> +            target_misa |= RVJ;
+> +        }
+>
+>          set_misa(env, target_misa);
+>      }
+> @@ -616,6 +619,7 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("x-b", RISCVCPU, cfg.ext_b, false),
+>      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>      DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+> +    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
 
-Real PDMA doesn't set Control.error if there are 0 bytes to be
-transferred. The DMA transfer is still success.
+nits: please put "x-j" before "x-v", by following the alphabetical order
 
-The following result is PDMA tested in U-boot on Unmatched board:
+>      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+> --
 
-=> mw.l 0x3000000 0x0                      <= Disclaim channel 0
-=> mw.l 0x3000000 0x1                      <= Claim channel 0
-=> mw.l 0x3000004 0x55000000               <= wsize = rsize = 5 (2^5 = 32 bytes)
-=> mw.q 0x3000008 0x0                      <= NextBytes = 0
-=> mw.q 0x3000010 0x84000000               <= NextDestination = 0x84000000
-=> mw.q 0x3000018 0x84001000               <= NextSource = 0x84001000
-=> mw.l 0x84000000 0x87654321              <= Fill test data to dst
-=> mw.l 0x84001000 0x12345678              <= Fill test data to src
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 00000001 55000000 00000000 00000000    .......U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> mw.l 0x3000000 0x3                      <= Set channel 0 run and claim bits
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 40000001 55000000 00000000 00000000    ...@...U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Tested-by: Max Hsu <max.hsu@sifive.com>
----
- hw/dma/sifive_pdma.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
-index d6980fbbd62..133db817dc7 100644
---- a/hw/dma/sifive_pdma.c
-+++ b/hw/dma/sifive_pdma.c
-@@ -76,7 +76,7 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
- 
-     /* do nothing if bytes to transfer is zero */
-     if (!bytes) {
--        goto error;
-+        goto done;
-     }
- 
-     /*
-@@ -131,11 +131,6 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
-         s->chan[ch].exec_bytes -= remainder;
-     }
- 
--    /* indicate a DMA transfer is done */
--    s->chan[ch].state = DMA_CHAN_STATE_DONE;
--    s->chan[ch].control &= ~CONTROL_RUN;
--    s->chan[ch].control |= CONTROL_DONE;
--
-     /* reload exec_ registers if repeat is required */
-     if (s->chan[ch].next_config & CONFIG_REPEAT) {
-         s->chan[ch].exec_bytes = bytes;
-@@ -143,6 +138,11 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
-         s->chan[ch].exec_src = src;
-     }
- 
-+done:
-+    /* indicate a DMA transfer is done */
-+    s->chan[ch].state = DMA_CHAN_STATE_DONE;
-+    s->chan[ch].control &= ~CONTROL_RUN;
-+    s->chan[ch].control |= CONTROL_DONE;
-     return;
- 
- error:
--- 
-2.25.1
-
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
