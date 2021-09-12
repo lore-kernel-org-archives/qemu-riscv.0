@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mPOpy-0003Aj-1z
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Sep 2021 08:43:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43222)
+	id 1mPOqm-0004WK-82
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Sep 2021 08:44:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPOpu-00039H-Tn
- for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:43:56 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:35563)
+ id 1mPOqk-0004Qa-6j
+ for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:44:46 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:51109)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPOps-0004pN-NI
- for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:43:53 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id bb10so4082749plb.2
- for <qemu-riscv@nongnu.org>; Sun, 12 Sep 2021 05:43:52 -0700 (PDT)
+ id 1mPOqi-000592-FX
+ for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:44:45 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id k23so4431417pji.0
+ for <qemu-riscv@nongnu.org>; Sun, 12 Sep 2021 05:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=A35TlHj6NvQvQf11SU5kwz38uLXbFwsaunOnRixnHzE=;
- b=HFItM+JtLq4vc1boKfIjB2likrCmbSl4biAdSwFP8XM32Q7Gg3UJzJ5ujp+DPaPug5
- qkDEaS5BfBi9SkFZVI1m2w8+vpFJaCmRQRi1Go2pRU1xqPe0/Zd5bmiJBtW/Hopi+Jwt
- tpSRXTfEa0g6FzGG9DTAlVLa/tDaL1SQA9IA9ji4k3rPEWWMQcIXjWCUrtvHxx3TEELn
- pN0qyBxULCagNefQBqeW5aBr1qk7C7BrfkLEcfqtH7lIIEFICPG5LZ7gQTbK2mu2rVu3
- RctjdpTZ5PuFNKk1oTdscFbkBb2ECWor4rbYEANifkUEuToNHo5YV/rnDaIS28x1x85h
- dBGA==
+ bh=FTkGFyg/YtaZMgVSbfKunIm+4d8G4FPBLUSS439AHQY=;
+ b=J0he79nuxNx87NOdRyrjb420BSoYYJuJZCglz9z9g4hVaF4SMAe5yS1lBEJGeWVjCE
+ RBT1NPOsb/VPiSB+W9xif/fRN44y3poorVrCoH9XSo5Gyfld0AxRXP9zE30UxCrYqof2
+ 67L2J2nS7ZjAFWa765n74u2sOlSUqUQc3QOhi+JwI6oEf8vY/MGnEL9lARA64mJL7hU0
+ UILubMYinml/O0DCFBPk/tjtJJ69AIZGoNk7yQGZpSSLNYdrwJRCUHkVACzLvQAesGiS
+ wMYblikJEhH7cZ8Mick/CGNXqtDub5k+IsV2nRf0b84GH+MDKms1EumZw7uLveHbv6YC
+ oOBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=A35TlHj6NvQvQf11SU5kwz38uLXbFwsaunOnRixnHzE=;
- b=WDtRFKMoOe5DQRrcWloApeFSmauKQiYiz6jPjj44NDZWS0PUzFJ8iU228wC2yqlO68
- TKHSlREjPaqeivvKjJJ3XtWBXMPW8i9CE9l2LGRRnPNK1dg/j/F1IOE9bjFf/fSI8xOr
- rvhjBrhZ8xel/dGzkmjDWLfduGhGzXAf3Mv7Gi69gLYQfvqVfKJDRp4r4l4UOsRP3vVh
- KurhpJUfYWA9GAmgEBQxlb8oEm4pmWl353wYnlnOgiq0Ot1sNBW8/4FAIV2NKGR8flJ/
- Ta1OgwG6y2DKKQL11zShFldSV07eIrNMAMfGLSrssfAd1x2/nKjrCbcgVDn0onbKtFk0
- XbOA==
-X-Gm-Message-State: AOAM530s9aTK9YTnw8314XCCQxeLShhApdFir7lFdPoPgsO3QzlP9b12
- UNnoV8URpQHBcWjoNP/jqln6kwL8EBkfZg==
-X-Google-Smtp-Source: ABdhPJwUmiYZwz8f2Uy7Xdl82Gwr4trPHG1HQYrK/QnX6zfoJxspXl3x2JIVri9H6Lkr5vxlmIJdGw==
-X-Received: by 2002:a17:902:710d:b0:139:4c7d:8c7b with SMTP id
- a13-20020a170902710d00b001394c7d8c7bmr6022675pll.59.1631450631406; 
- Sun, 12 Sep 2021 05:43:51 -0700 (PDT)
+ bh=FTkGFyg/YtaZMgVSbfKunIm+4d8G4FPBLUSS439AHQY=;
+ b=uMVK2rmiIZ4jTNpGoHO5GBbkfHfvZ3nInqrZdvTy+tgTIFkJszrAugMi20IHGeCfxm
+ uJKNfnn+oeadG7gdLdIjfc6HFJi1iKJk9OqbY9wGRI5bnF9ugS8xna7IGUyrjZlHykFw
+ 04IF7pPIpot6WZTWMqGk+dyoVUQLiYxGlLXiJYOWSP+upRPVJER2RY4tTI4lV8AvWIDW
+ b7DhGCWwFMj+Cmj4PUILgGh2mjeoAW/MYsEENWOejqv77XTKc6LEuVDpUdNquBBX2l5x
+ qfyz6+JiILXpCXlWzbvQu6jUuUChrnmqOLq4lQLcZytlGZZEnZE3zOBvWwB2BYEwUSO0
+ zEHA==
+X-Gm-Message-State: AOAM532FbM1Nb9v4VfRxmjuAtoaTJyyW9k0TH+Vw6PoYl7Ml6Z1aBV5P
+ 1YThDUJWxSFdOEk6uIIWvrnUQVg91iJHhg==
+X-Google-Smtp-Source: ABdhPJwL3tVXDS1xC5g5r175SalhlAYtMj+J5MOiZ4I5dWQr0DeOIAjBZ/ok8REIwiK1JLExUCvHgA==
+X-Received: by 2002:a17:902:b7c5:b0:13b:9372:a192 with SMTP id
+ v5-20020a170902b7c500b0013b9372a192mr669981plz.79.1631450681531; 
+ Sun, 12 Sep 2021 05:44:41 -0700 (PDT)
 Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
  [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id i22sm3473443pjv.47.2021.09.12.05.43.50
+ by smtp.gmail.com with ESMTPSA id k3sm3807043pjs.11.2021.09.12.05.44.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Sep 2021 05:43:51 -0700 (PDT)
+ Sun, 12 Sep 2021 05:44:40 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v2 0/4] hw/dma: Align SiFive PDMA behavior with real hardware
-Date: Sun, 12 Sep 2021 20:43:38 +0800
-Message-Id: <20210912124346.165540-1-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>, Max Hsu <max.hsu@sifive.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v2 1/4] hw/dma: sifive_pdma: reset Next* registers when
+ Control.claim is set
+Date: Sun, 12 Sep 2021 20:44:17 +0800
+Message-Id: <20210912124425.166071-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,32 +79,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2021 12:43:56 -0000
+X-List-Received-Date: Sun, 12 Sep 2021 12:44:46 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Current QEMU PDMA doesn't align with real PDMA's behavior. This would
-result in Linux dmatest failed. This patchest aligns with real PDMA's
-behavior we tested on the real board. The golden results are performed
-in U-Boot on the Unmatched board with PDMA supported.
+Setting Control.claim clears all of the chanel's Next registers.
+This is effective only when Control.claim is set from 0 to 1.
 
-Changelog:
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Tested-by: Max Hsu <max.hsu@sifive.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
+---
+ hw/dma/sifive_pdma.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-v2:
-  * Add comment to describe document errors.
-
-Frank Chang (3):
-  hw/dma: sifive_pdma: reset Next* registers when Control.claim is set
-  hw/dma: sifive_pdma: claim bit must be set before DMA transactions
-  hw/dma: sifive_pdma: don't set Control.error if 0 bytes to transfer
-
-Green Wan (1):
-  hw/dma: sifive_pdma: allow non-multiple transaction size transactions
-
- hw/dma/sifive_pdma.c | 54 +++++++++++++++++++++++++++++++++++---------
- 1 file changed, 43 insertions(+), 11 deletions(-)
-
---
+diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
+index 9b2ac2017d9..d92e27dfdc4 100644
+--- a/hw/dma/sifive_pdma.c
++++ b/hw/dma/sifive_pdma.c
+@@ -54,6 +54,13 @@
+ #define DMA_EXEC_DST        0x110
+ #define DMA_EXEC_SRC        0x118
+ 
++/*
++ * FU540/FU740 docs are incorrect with NextConfig.wsize/rsize reset values.
++ * The reset values tested on Unleashed/Unmatched boards are 6 instead of 0.
++ */
++#define CONFIG_WRSZ_DEFAULT 6
++#define CONFIG_RDSZ_DEFAULT 6
++
+ enum dma_chan_state {
+     DMA_CHAN_STATE_IDLE,
+     DMA_CHAN_STATE_STARTED,
+@@ -221,6 +228,7 @@ static void sifive_pdma_write(void *opaque, hwaddr offset,
+ {
+     SiFivePDMAState *s = opaque;
+     int ch = SIFIVE_PDMA_CHAN_NO(offset);
++    bool claimed;
+ 
+     if (ch >= SIFIVE_PDMA_CHANS) {
+         qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
+@@ -231,6 +239,17 @@ static void sifive_pdma_write(void *opaque, hwaddr offset,
+     offset &= 0xfff;
+     switch (offset) {
+     case DMA_CONTROL:
++        claimed = !!s->chan[ch].control & CONTROL_CLAIM;
++
++        if (!claimed && (value & CONTROL_CLAIM)) {
++            /* reset Next* registers */
++            s->chan[ch].next_config = (CONFIG_RDSZ_DEFAULT << CONFIG_RDSZ_SHIFT) |
++                                      (CONFIG_WRSZ_DEFAULT << CONFIG_WRSZ_SHIFT);
++            s->chan[ch].next_bytes = 0;
++            s->chan[ch].next_dst = 0;
++            s->chan[ch].next_src = 0;
++        }
++
+         s->chan[ch].control = value;
+ 
+         if (value & CONTROL_RUN) {
+-- 
 2.25.1
 
 
