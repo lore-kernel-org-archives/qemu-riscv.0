@@ -1,74 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mPOr0-0004i4-Qy
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Sep 2021 08:45:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43432)
+	id 1mPOzk-0000Am-8k
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Sep 2021 08:54:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44884)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPOqu-0004f4-Pe
- for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:44:57 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a]:35561)
+ id 1mPOzj-00006Y-2v
+ for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:54:03 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:46732)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPOqt-0005Dq-71
- for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:44:56 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id bb10so4083597plb.2
- for <qemu-riscv@nongnu.org>; Sun, 12 Sep 2021 05:44:54 -0700 (PDT)
+ id 1mPOzh-0000EW-0w
+ for qemu-riscv@nongnu.org; Sun, 12 Sep 2021 08:54:02 -0400
+Received: by mail-pf1-x431.google.com with SMTP id y17so6258781pfl.13
+ for <qemu-riscv@nongnu.org>; Sun, 12 Sep 2021 05:54:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=5ng6bxLr/CEDfg4qWZ+9iIXZdvuZu2KqsMTpKiIZfBw=;
- b=STdMILTrWC0eLw8UgpcI5fJ6GRNHl+Amlj4S6fHrumKwpRUTlhJlStH1HEZhmcD8JY
- VC2ih5HNKqfQcha6gB7QSsywj8VHtTMNNuE49ewCkInlJtTtuBDNKsu5S05kTWMjISEJ
- VQjtwf6cltVZVdSyC62KbRv/l8eEJUzvfWM/15W7rd8b5WMjSZOogq0HYRliftzYrHEw
- ii2/zVp96Cun+4bfcsF6YnRkrh4pW8pVcJNhllSVJyTib0Q0lnGYc5LD+H68OrTZ2Lod
- 0gxKbEkURRw3trOq1HD/BkIaQXXWX5A8tHTsbBelcHXt31oOIDyTvC9FDWjc/GE/hr5u
- xzDA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tT6nZbm/VfYPa/W51T3Ca3jy9/S+gCk2HkF2JtJwn5Q=;
+ b=Pjg0CMdU5nzRhd6Whlkanb0DOabcgPF6L+ckrSCgLUcmkQk98u1VpXz8MYJz0e09eK
+ uGP2zCCzyk7a5nrG7kFUislCjdFXU8sK60cbWHsoVBy658l34Oeakx1VtNI4o6k2/y6F
+ 793w7Mfh8tJDW5fqttRQ8SF5ifSi+qD7jh5rVtU63LjHH6JHaVK+lacR6e8idbdtxYIQ
+ 4iNwpBA4UPTFPeYXF9ff4CpCUOFnuozYyk/OP3uHX83KNVXE7qNh7YEhaCpq7M2nOcb/
+ ZKZkvNP6Z6FPuVwev04EAZxHKqc0hE67sdgsGxZimweui04/FCIIgIzgdAjgo6vRUxsp
+ oOdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=5ng6bxLr/CEDfg4qWZ+9iIXZdvuZu2KqsMTpKiIZfBw=;
- b=qQ21Mbod6bS80u0uG8/4wiYRJ3irBrNDgYVVo4aSHZg5aquka9CYl9XaM1jOa/BIzm
- J1md8PZAcZdl7z8depzBU4JTd/Ory4/loJV7xks2QijUdhLtNfbSp+71707ak8ApeM8p
- u50VIQdITrCqPEs0580XTkU2SJtO5uZq8zPVlrnqt2bvvhGCnywsega4LbjLh5DH7thx
- rgtJEeN6R4OLmmW+g7Mag+pf2shzBj4lTyjJb8+Gx5AAI/AXkBNwCkWEo5o3qIXvn3Ya
- WhjJGcDtZxFc/OuO6gPE1S6EEKpXIBp6EBbalFKSOrP+HvY+uSbyyqh5rQw8PtuOpLNU
- hZlQ==
-X-Gm-Message-State: AOAM531CewMq+Ya7RrOkqIZR7GypIC2sLnAqGbEVQASm+mIJo3PnWK+v
- 9krVEq6eHPXJfSD8KmiafmhBpLPGd54//Q==
-X-Google-Smtp-Source: ABdhPJwA/02UY3XUiTCMjx5oADAmx2S9ziNZWyDATQJ6Y4T5x7GiDtFpToz4tMWChPt37XtHgjqssw==
-X-Received: by 2002:a17:90a:130f:: with SMTP id
- h15mr7465500pja.183.1631450694011; 
- Sun, 12 Sep 2021 05:44:54 -0700 (PDT)
-Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
- [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id k3sm3807043pjs.11.2021.09.12.05.44.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Sep 2021 05:44:53 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Max Hsu <max.hsu@sifive.com>,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v2 4/4] hw/dma: sifive_pdma: don't set Control.error if 0
- bytes to transfer
-Date: Sun, 12 Sep 2021 20:44:20 +0800
-Message-Id: <20210912124425.166071-5-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210912124425.166071-2-frank.chang@sifive.com>
-References: <20210912124425.166071-2-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tT6nZbm/VfYPa/W51T3Ca3jy9/S+gCk2HkF2JtJwn5Q=;
+ b=T22Z4s78nf179ko7/dz+o5pT0JB47lgIvx726DZOXRXvgQ0VaCeaol+Kf+v/T2kR87
+ Z89jbObL9tdf3uJbfQc9+RJQSvFU5UqAbqFM7BXsC5sRuzXlioRY6tILQAlXWoC8ZdfK
+ 9K+rsaNn+Xa4MzyL2TFCX/cC+6WmW9Ik+taWbaB2rtRfrzBO2MkTlefQOWjv2/VzUowg
+ FRzUsBFHL3Q8AR9zD8dOf91pZB0mdnUHZkkDLzfz6gx6GTNBKZR46PmsK9gxsq8mlZo+
+ 563Zq/mB2aRrTit5mLUdK0P6ouudoegQt1Elm8VDReYSXl9lf3mUVvSxC0iA1YxmIBol
+ wQhw==
+X-Gm-Message-State: AOAM530zIaYs/XkZlNTKLjtdLfiDVVezuzbptq7zv9BflyV79l9Fc+R6
+ X9/HwKTA1RJAtScX9ze694cVgp4ucWMVRQ==
+X-Google-Smtp-Source: ABdhPJzvrFQeAU9WhNk7asJpuNHf2DQHZX+MD5c0wPG5GUK5OTv9dEhbt0DegXoBmJd9BMEkcxSTCA==
+X-Received: by 2002:a63:1504:: with SMTP id v4mr6539703pgl.151.1631451238771; 
+ Sun, 12 Sep 2021 05:53:58 -0700 (PDT)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com.
+ [209.85.216.52])
+ by smtp.gmail.com with ESMTPSA id m12sm4143662pjc.18.2021.09.12.05.53.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 12 Sep 2021 05:53:58 -0700 (PDT)
+Received: by mail-pj1-f52.google.com with SMTP id k23so4439777pji.0;
+ Sun, 12 Sep 2021 05:53:58 -0700 (PDT)
+X-Received: by 2002:a17:90a:4a8a:: with SMTP id
+ f10mr7422690pjh.195.1631451238040; 
+ Sun, 12 Sep 2021 05:53:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62a.google.com
+References: <CAKP3tdRSYSfyTPeBk2+WYaUxt1jApK6XXYjXyZw4JwTxfTackQ@mail.gmail.com>
+In-Reply-To: <CAKP3tdRSYSfyTPeBk2+WYaUxt1jApK6XXYjXyZw4JwTxfTackQ@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Sun, 12 Sep 2021 20:53:47 +0800
+X-Gmail-Original-Message-ID: <CANzO1D3ET=2H_Y8i6bTJ3LNoo38+2Z3Sv3rcWjBJDXuqqXa5uw@mail.gmail.com>
+Message-ID: <CANzO1D3ET=2H_Y8i6bTJ3LNoo38+2Z3Sv3rcWjBJDXuqqXa5uw@mail.gmail.com>
+Subject: Re: Question about riscv-qemu trace
+To: Zahra Azad <zazad@bu.edu>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, qemu-discuss@nongnu.org
+Content-Type: multipart/alternative; boundary="0000000000008308d805cbcbd757"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,83 +80,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2021 12:44:57 -0000
+X-List-Received-Date: Sun, 12 Sep 2021 12:54:03 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+--0000000000008308d805cbcbd757
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Real PDMA doesn't set Control.error if there are 0 bytes to be
-transferred. The DMA transfer is still success.
+Zahra Azad <zazad@bu.edu> =E6=96=BC 2021=E5=B9=B49=E6=9C=8812=E6=97=A5 =E9=
+=80=B1=E6=97=A5 =E4=B8=8B=E5=8D=8812:33=E5=AF=AB=E9=81=93=EF=BC=9A
 
-The following result is PDMA tested in U-Boot on Unmatched board:
+> Hi all,
+>
+> I want to use riscv-qemu to get a trace of the guest executed instruction=
+s
+> of a vectorized program. I'm using the following command:
+> qemu-riscv64 -cpu rv64,x-v=3Dtrue,x-k=3Dtrue,vlen=3D256,elen=3D64,vext_sp=
+ec=3Dv1.0
+> -D logfile.log -d in_asm,cpu,fpu program
+>
+> Although the program is executed correctly without throwing any error, in
+> the trace log all the vector instructions are shown as illegal
+> instructions. Any ideas what is going wrong?
+>
+> I built riscv toolchain and llvm from the main branch (following sifive
+> instructions <https://github.com/sifive/riscv-llvm>), and riscv qemu is
+> built from https://github.com/sifive/qemu/tree/v5.2.0-rvv-rvb-zfh.
+>
+> Thank you!
+>
 
-=> mw.l 0x3000000 0x0                      <= Disclaim channel 0
-=> mw.l 0x3000000 0x1                      <= Claim channel 0
-=> mw.l 0x3000004 0x55000000               <= wsize = rsize = 5 (2^5 = 32 bytes)
-=> mw.q 0x3000008 0x0                      <= NextBytes = 0
-=> mw.q 0x3000010 0x84000000               <= NextDestination = 0x84000000
-=> mw.q 0x3000018 0x84001000               <= NextSource = 0x84001000
-=> mw.l 0x84000000 0x87654321              <= Fill test data to dst
-=> mw.l 0x84001000 0x12345678              <= Fill test data to src
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 00000001 55000000 00000000 00000000    .......U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> mw.l 0x3000000 0x3                      <= Set channel 0 run and claim bits
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 40000001 55000000 00000000 00000000    ...@...U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
+Hi Zahra,
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Tested-by: Max Hsu <max.hsu@sifive.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
----
- hw/dma/sifive_pdma.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+We are missing RVV related instructions disassembler in QEMU.
+The illegal instruction messages for vector instructions in the trace log
+are just false alarms for now.
+We need to update disas/riscv.c to decode RVV instructions properly.
 
-diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
-index d7d2c53e97e..b4fd40573a5 100644
---- a/hw/dma/sifive_pdma.c
-+++ b/hw/dma/sifive_pdma.c
-@@ -80,7 +80,7 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
- 
-     /* do nothing if bytes to transfer is zero */
-     if (!bytes) {
--        goto error;
-+        goto done;
-     }
- 
-     /*
-@@ -135,11 +135,6 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
-         s->chan[ch].exec_bytes -= remainder;
-     }
- 
--    /* indicate a DMA transfer is done */
--    s->chan[ch].state = DMA_CHAN_STATE_DONE;
--    s->chan[ch].control &= ~CONTROL_RUN;
--    s->chan[ch].control |= CONTROL_DONE;
--
-     /* reload exec_ registers if repeat is required */
-     if (s->chan[ch].next_config & CONFIG_REPEAT) {
-         s->chan[ch].exec_bytes = bytes;
-@@ -147,6 +142,11 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
-         s->chan[ch].exec_src = src;
-     }
- 
-+done:
-+    /* indicate a DMA transfer is done */
-+    s->chan[ch].state = DMA_CHAN_STATE_DONE;
-+    s->chan[ch].control &= ~CONTROL_RUN;
-+    s->chan[ch].control |= CONTROL_DONE;
-     return;
- 
- error:
--- 
-2.25.1
+Regards,
+Frank Chang
 
+--0000000000008308d805cbcbd757
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Zahra Azad &lt;<a href=3D"mailto:zazad@bu=
+.edu">zazad@bu.edu</a>&gt; =E6=96=BC 2021=E5=B9=B49=E6=9C=8812=E6=97=A5 =E9=
+=80=B1=E6=97=A5 =E4=B8=8B=E5=8D=8812:33=E5=AF=AB=E9=81=93=EF=BC=9A<br></div=
+><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x"><div dir=3D"ltr"><div>Hi all,<br></div><div><br></div><div>I want to use=
+ riscv-qemu to get a trace of the guest executed instructions of a vectoriz=
+ed program. I&#39;m using the following command:</div><div>qemu-riscv64 -cp=
+u rv64,x-v=3Dtrue,x-k=3Dtrue,vlen=3D256,elen=3D64,vext_spec=3Dv1.0 -D logfi=
+le.log -d in_asm,cpu,fpu program <br></div><div><br></div>Although the prog=
+ram is executed correctly without throwing any error, in the trace log all =
+the vector instructions are shown as illegal instructions. Any ideas what i=
+s going wrong?<br><br><div>I built riscv toolchain and llvm from the main b=
+ranch (<a href=3D"https://github.com/sifive/riscv-llvm" target=3D"_blank">f=
+ollowing sifive instructions</a>), and riscv qemu is built from <a href=3D"=
+https://github.com/sifive/qemu/tree/v5.2.0-rvv-rvb-zfh" target=3D"_blank">h=
+ttps://github.com/sifive/qemu/tree/v5.2.0-rvv-rvb-zfh</a>.</div><div><br></=
+div><div>Thank you!<br></div></div></blockquote><div><br></div><div>Hi Zahr=
+a,</div><div><br></div><div>We are missing RVV related instructions disasse=
+mbler in QEMU.</div><div>The illegal instruction messages for vector instru=
+ctions in the trace log are just false alarms for now.<br></div><div>We nee=
+d to update=C2=A0disas/riscv.c=C2=A0to decode RVV instructions properly.<br=
+></div><div><br></div><div>Regards,</div><div>Frank Chang=C2=A0</div></div>=
+</div>
+
+--0000000000008308d805cbcbd757--
 
