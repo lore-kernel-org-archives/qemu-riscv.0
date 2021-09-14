@@ -1,38 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9JI-0007U8-FK
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:21:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33844)
+	id 1mQ9K6-0000lD-Tu
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:22:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34104)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9JH-0007Rl-9w
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:21:19 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:40798)
+ id 1mQ9Jx-0000h3-MJ
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:01 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:32632)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9JC-00033A-SD
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:21:18 -0400
+ id 1mQ9Jw-0003hU-97
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629274;
+ s=mimecast20190719; t=1631629319;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=4ulHhpKDegj6iAYcvY7KZF8pg/KtdcW4oTK1Usa8Kg4=;
- b=gzz/4aQwLykxlvtTlNRBquVWTYflWxGk0P1ZbI6M/DJeKmayVAzOSFgchIVXicyaesD1xw
- eCKStJqo0zsbZMqV4DymjFHulaazQ/SZxNAk4fSJ3wc5jm9s0spSAhMFnRFOXqIF16CCl+
- ox8OASbJbW6Dew+1Z8524pbgJWHNoic=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=jqg+KbdjEyUa8qwGSIprn8VTfs1RlVUX+DOblupWdX8=;
+ b=T4bg23SYXZJwtsUI4DAjxCnqgu99Y9i4TeIHbdiP/F14hj0MysxOyAtDrWKyJf0bMg/2pp
+ oBuH8Bg4rsQpocO48MqjjnEM/dPla8Xj3yFQhuKc9vIdRjag6t9vz4rovYDxzRWgL1RQmP
+ Xx6qnJwmovP87XoSb1iiz5/jKQLQ6oo=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-37-811swv3jMJy1esG27-Wdkw-1; Tue, 14 Sep 2021 10:21:11 -0400
-X-MC-Unique: 811swv3jMJy1esG27-Wdkw-1
+ us-mta-465-0ANmDWgANhWaZU5mbBWQ9w-1; Tue, 14 Sep 2021 10:21:53 -0400
+X-MC-Unique: 0ANmDWgANhWaZU5mbBWQ9w-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 526AC1084684;
- Tue, 14 Sep 2021 14:21:07 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 17498835DE0;
+ Tue, 14 Sep 2021 14:21:49 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C23645D9DC;
- Tue, 14 Sep 2021 14:20:43 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A48F35D9CA;
+ Tue, 14 Sep 2021 14:21:07 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -67,26 +68,27 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 00/53] monitor: explicitly permit QMP commands to be added
- for all use cases
-Date: Tue, 14 Sep 2021 15:19:49 +0100
-Message-Id: <20210914142042.1655100-1-berrange@redhat.com>
+Subject: [PATCH v2 01/53] docs/devel: rename file for writing monitor commands
+Date: Tue, 14 Sep 2021 15:19:50 +0100
+Message-Id: <20210914142042.1655100-2-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
+References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,244 +102,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:21:19 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:22:02 -0000
 
-Previous postings:=0D
-=0D
-  v1: https://lists.gnu.org/archive/html/qemu-devel/2021-09/msg02295.html=
-=0D
-=0D
-We are still adding HMP commands without any QMP counterparts. This is=0D
-done because there are a reasonable number of scenarios where the cost=0D
-of designing a QAPI data type for the command is not justified.=0D
-=0D
-This has the downside, however, that we will never be able to fully=0D
-isolate the monitor code from the remainder of QEMU internals. It is=0D
-desirable to be able to get to a point where subsystems in QEMU are=0D
-exclusively implemented using QAPI types and never need to have any=0D
-knowledge of the monitor.=0D
-=0D
-The way to get there is to stop adding commands to HMP only. All=0D
-commands must be implemented using QMP and any HMP equivalent be=0D
-a shim around the QMP implemetation. We don't want to compromise=0D
-our supportability of QMP long term though.=0D
-=0D
-This series proposes that we relax our requirements around fine grained=0D
-QAPI data design, but with the caveat that any command taking this=0D
-design approach is mandated to use the 'x-' name prefix. This tradeoff=0D
-should be suitable for any commands we have been adding exclusively to=0D
-HMP in recent times, and thus mean we have mandate QMP support for all=0D
-new commands going forward.=0D
-=0D
-The series then converts the following HMP commands to be QMP shims.=0D
-=0D
-    info opcount=0D
-    info jit=0D
-    info tlb=0D
-    info irq=0D
-    info lapic=0D
-    info cmma=0D
-    info skeys=0D
-    info ramblock=0D
-    info rdma=0D
-    info usb=0D
-    info numa=0D
-    info profile=0D
-    info roms=0D
-    info registers=0D
-=0D
-After doing this conversion=0D
-=0D
- - All except 1 usage of qemu_fprintf is eliminated=0D
- - 50% of calls to qemu_printf are eliminated=0D
- - 75 calls to monitor_printf are eliminated=0D
-=0D
-Ultimately it should be possible to entirely eliminate qemu_fprintf=0D
-and qemu_printf, and confine monitor_printf calls exclusively to=0D
-the top level HMP command handlers.=0D
-=0D
-A full conversion would also enable HMP to be emulated entirely=0D
-outside QEMU. This could be interesting if we introduce a new QEMU=0D
-system emulator binary which is legacy free and 100% controlled=0D
-via QMP, as it would let us provide HMP backcompat around it=0D
-without the burden of HMP being integrated directly.=0D
-=0D
-There are still 48 HMP commands with no QMP counterpart after=0D
-this series.=0D
-=0D
- - A few are not relevant to port as they directly=0D
-   reflect HMP functionality (help, info history).=0D
- - A few are sort of available in QMP but look quite=0D
-   different (drive_add vs blockdev_add)=0D
- - A few are complicated. "info usbhost" is a dynamically=0D
-   loaded HMP command inside a loadable module and we=0D
-   don't have a way to dynamically register QMP handlers=0D
-   at runtime.=0D
- - Most are just tedious gruntwork.=0D
-=0D
-Changed in v2:=0D
-=0D
- - Improved documentation in response to feedback=0D
- - Finished "info registers" conversion on all targets=0D
- - Got a bit carried away and converted many many more=0D
-   commands=0D
-=0D
-Daniel P. Berrang=C3=A9 (53):=0D
-  docs/devel: rename file for writing monitor commands=0D
-  docs/devel: tweak headings in monitor command docs=0D
-  docs/devel: document expectations for QAPI data modelling for QMP=0D
-  docs/devel: add example of command returning unstructured text=0D
-  docs/devel: document expectations for HMP commands in the future=0D
-  hw/core: introduce 'format_state' callback to replace 'dump_state'=0D
-  target/alpha: convert to use format_state instead of dump_state=0D
-  target/arm: convert to use format_state instead of dump_state=0D
-  target/avr: convert to use format_state instead of dump_state=0D
-  target/cris: convert to use format_state instead of dump_state=0D
-  target/hexagon: delete unused hexagon_debug() method=0D
-  target/hexagon: convert to use format_state instead of dump_state=0D
-  target/hppa: convert to use format_state instead of dump_state=0D
-  target/i386: convert to use format_state instead of dump_state=0D
-  target/m68k: convert to use format_state instead of dump_state=0D
-  target/microblaze: convert to use format_state instead of dump_state=0D
-  target/mips: convert to use format_state instead of dump_state=0D
-  target/nios2: convert to use format_state instead of dump_state=0D
-  target/openrisc: convert to use format_state instead of dump_state=0D
-  target/ppc: convert to use format_state instead of dump_state=0D
-  target/riscv: convert to use format_state instead of dump_state=0D
-  target/rx: convert to use format_state instead of dump_state=0D
-  target/s390x: convert to use format_state instead of dump_state=0D
-  target/sh: convert to use format_state instead of dump_state=0D
-  target/sparc: convert to use format_state instead of dump_state=0D
-  target/tricore: convert to use format_state instead of dump_state=0D
-  target/xtensa: convert to use format_state instead of dump_state=0D
-  monitor: remove 'info ioapic' HMP command=0D
-  qapi: introduce x-query-registers QMP command=0D
-  qapi: introduce x-query-roms QMP command=0D
-  qapi: introduce x-query-profile QMP command=0D
-  qapi: introduce x-query-numa QMP command=0D
-  qapi: introduce x-query-usb QMP command=0D
-  qapi: introduce x-query-rdma QMP command=0D
-  qapi: introduce x-query-ramblock QMP command=0D
-  qapi: introduce x-query-skeys QMP command=0D
-  qapi: introduce x-query-cmma QMP command=0D
-  qapi: introduce x-query-lapic QMP command=0D
-  qapi: introduce x-query-irq QMP command=0D
-  hw/core: drop "dump_state" callback from CPU targets=0D
-  hw/core: drop support for NULL pointer for FILE * in cpu_dump_state=0D
-  hw/core: introduce a 'format_tlb' callback=0D
-  target/i386: convert to use format_tlb callback=0D
-  target/m68k: convert to use format_tlb callback=0D
-  target/nios2: convert to use format_tlb callback=0D
-  target/ppc: convert to use format_tlb callback=0D
-  target/sh4: convert to use format_tlb callback=0D
-  target/sparc: convert to use format_tlb callback=0D
-  target/xtensa: convert to use format_tlb callback=0D
-  monitor: merge duplicate "info tlb" handlers=0D
-  qapi: introduce x-query-tlb QMP command=0D
-  qapi: introduce x-query-jit QMP command=0D
-  qapi: introduce x-query-opcount QMP command=0D
-=0D
- accel/tcg/cpu-exec.c                          |  56 +-=0D
- accel/tcg/hmp.c                               |  24 +-=0D
- accel/tcg/translate-all.c                     |  84 +--=0D
- docs/devel/index.rst                          |   2 +-=0D
- ...mands.rst =3D> writing-monitor-commands.rst} | 136 ++++-=0D
- hmp-commands-info.hx                          |  18 -=0D
- hw/core/cpu-common.c                          |  27 +-=0D
- hw/core/loader.c                              |  55 +-=0D
- hw/core/machine-hmp-cmds.c                    |  33 +-=0D
- hw/core/machine-qmp-cmds.c                    |  94 ++++=0D
- hw/rdma/rdma_rm.c                             | 104 ++--=0D
- hw/rdma/rdma_rm.h                             |   2 +-=0D
- hw/rdma/vmw/pvrdma_main.c                     |  31 +-=0D
- hw/s390x/s390-skeys.c                         |  37 +-=0D
- hw/s390x/s390-stattrib.c                      |  58 ++-=0D
- hw/usb/bus.c                                  |  38 +-=0D
- include/exec/cpu-all.h                        |   6 +-=0D
- include/exec/ramlist.h                        |   2 +-=0D
- include/hw/core/cpu.h                         |  36 +-=0D
- include/hw/rdma/rdma.h                        |   2 +-=0D
- include/monitor/hmp-target.h                  |   2 -=0D
- include/tcg/tcg.h                             |   4 +-=0D
- monitor/hmp-cmds.c                            |  81 +--=0D
- monitor/misc.c                                |  68 ++-=0D
- monitor/qmp-cmds.c                            | 127 +++++=0D
- qapi/common.json                              |  11 +=0D
- qapi/machine-target.json                      |  58 +++=0D
- qapi/machine.json                             | 140 +++++=0D
- softmmu/physmem.c                             |  19 +-=0D
- stubs/usb-dev-stub.c                          |   8 +=0D
- target/alpha/cpu.c                            |   2 +-=0D
- target/alpha/cpu.h                            |   2 +-=0D
- target/alpha/helper.c                         |  28 +-=0D
- target/arm/cpu.c                              | 152 +++---=0D
- target/avr/cpu.c                              |  57 +-=0D
- target/cris/cpu.c                             |   2 +-=0D
- target/cris/cpu.h                             |   2 +-=0D
- target/cris/translate.c                       |  33 +-=0D
- target/hexagon/cpu.c                          |  70 ++-=0D
- target/hexagon/internal.h                     |   1 -=0D
- target/hppa/cpu.c                             |   2 +-=0D
- target/hppa/cpu.h                             |   2 +-=0D
- target/hppa/helper.c                          |  25 +-=0D
- target/i386/cpu-dump.c                        | 489 ++++++++++--------=0D
- target/i386/cpu.c                             |   5 +-=0D
- target/i386/cpu.h                             |   7 +-=0D
- target/i386/monitor.c                         | 142 ++---=0D
- target/m68k/cpu.c                             |   5 +-=0D
- target/m68k/cpu.h                             |   5 +-=0D
- target/m68k/helper.c                          | 132 ++---=0D
- target/m68k/monitor.c                         |  14 +-=0D
- target/m68k/translate.c                       |  92 ++--=0D
- target/microblaze/cpu.c                       |   2 +-=0D
- target/microblaze/cpu.h                       |   2 +-=0D
- target/microblaze/translate.c                 |  45 +-=0D
- target/mips/cpu.c                             |  85 +--=0D
- target/nios2/cpu.c                            |   5 +-=0D
- target/nios2/cpu.h                            |   4 +-=0D
- target/nios2/mmu.c                            |  37 +-=0D
- target/nios2/monitor.c                        |   7 -=0D
- target/nios2/translate.c                      |  20 +-=0D
- target/openrisc/cpu.c                         |   2 +-=0D
- target/openrisc/cpu.h                         |   2 +-=0D
- target/openrisc/translate.c                   |   8 +-=0D
- target/ppc/cpu.h                              |   5 +-=0D
- target/ppc/cpu_init.c                         | 215 ++++----=0D
- target/ppc/mmu-hash64.c                       |   8 +-=0D
- target/ppc/mmu-hash64.h                       |   2 +-=0D
- target/ppc/mmu_common.c                       | 167 +++---=0D
- target/ppc/monitor.c                          |  11 -=0D
- target/riscv/cpu.c                            | 105 ++--=0D
- target/rx/cpu.c                               |   2 +-=0D
- target/rx/cpu.h                               |   2 +-=0D
- target/rx/translate.c                         |  14 +-=0D
- target/s390x/cpu-dump.c                       |  43 +-=0D
- target/s390x/cpu.c                            |   2 +-=0D
- target/s390x/s390x-internal.h                 |   2 +-=0D
- target/sh4/cpu.c                              |   5 +-=0D
- target/sh4/cpu.h                              |   3 +-=0D
- target/sh4/monitor.c                          |  41 +-=0D
- target/sh4/translate.c                        |  36 +-=0D
- target/sparc/cpu.c                            |  86 +--=0D
- target/sparc/cpu.h                            |   3 +-=0D
- target/sparc/mmu_helper.c                     |  43 +-=0D
- target/sparc/monitor.c                        |  12 -=0D
- target/tricore/cpu.c                          |   2 +-=0D
- target/tricore/cpu.h                          |   2 +-=0D
- target/tricore/translate.c                    |  24 +-=0D
- target/xtensa/cpu.c                           |   2 +-=0D
- target/xtensa/cpu.h                           |   4 +-=0D
- target/xtensa/mmu_helper.c                    | 126 +++--=0D
- target/xtensa/monitor.c                       |  11 -=0D
- target/xtensa/translate.c                     |  45 +-=0D
- tcg/tcg.c                                     |  98 ++--=0D
- tests/qtest/qmp-cmd-test.c                    |   8 +=0D
- 95 files changed, 2429 insertions(+), 1551 deletions(-)=0D
- rename docs/devel/{writing-qmp-commands.rst =3D> writing-monitor-commands.=
-rst} (78%)=0D
-=0D
---=20=0D
-2.31.1=0D
-=0D
+The file already covers writing new style HMP commands, in addition to
+the QMP commands, so it deserves a more general name.
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+---
+ docs/devel/index.rst                                        | 2 +-
+ ...riting-qmp-commands.rst => writing-monitor-commands.rst} | 6 +++---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ rename docs/devel/{writing-qmp-commands.rst => writing-monitor-commands.rst} (99%)
+
+diff --git a/docs/devel/index.rst b/docs/devel/index.rst
+index f95df10b3e..7c25177c5d 100644
+--- a/docs/devel/index.rst
++++ b/docs/devel/index.rst
+@@ -44,4 +44,4 @@ modifying QEMU's source code.
+    ebpf_rss
+    vfio-migration
+    qapi-code-gen
+-   writing-qmp-commands
++   writing-monitor-commands
+diff --git a/docs/devel/writing-qmp-commands.rst b/docs/devel/writing-monitor-commands.rst
+similarity index 99%
+rename from docs/devel/writing-qmp-commands.rst
+rename to docs/devel/writing-monitor-commands.rst
+index 6a10a06c48..497c9ce0d5 100644
+--- a/docs/devel/writing-qmp-commands.rst
++++ b/docs/devel/writing-monitor-commands.rst
+@@ -1,8 +1,8 @@
+-How to write QMP commands using the QAPI framework
+-==================================================
++How to write monitor commands
++=============================
+ 
+ This document is a step-by-step guide on how to write new QMP commands using
+-the QAPI framework. It also shows how to implement new style HMP commands.
++the QAPI framework and new style HMP commands.
+ 
+ This document doesn't discuss QMP protocol level details, nor does it dive
+ into the QAPI framework implementation.
+-- 
+2.31.1
 
 
