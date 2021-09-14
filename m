@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9VL-00027w-NR
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:33:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41260)
+	id 1mQ9VS-0002LN-6I
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:33:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41390)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9V8-00022R-Lx
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:37 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:41077)
+ id 1mQ9VP-0002Fi-5O
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:51 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:31233)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9V5-0003YC-MA
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:33 -0400
+ id 1mQ9VL-0003jY-3U
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:50 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631630011;
+ s=mimecast20190719; t=1631630026;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=dbdQBxcj/2kjvXDfwwDA21f1GavKLlGLEK8BAYkabCY=;
- b=I/CFE4+D7hfZV3TBIzQf4qdLttpROoR/WKyz4lIrN76O/vuRnlOD+7BsqEO0pt0eVxwbA4
- 4zQITMW5nqhJJuNhMpbP0KSGKIUDzTI4yq9fvCdYic7ao5/j2Rr3GMwGzcQ+38xj+I16D+
- OxTIMFuXHbTuxAQgR++hoyczyAfUmv4=
+ bh=u/Q+2lydTjqVkGI5GLlhCmIjg5hJJ1z7UABw+pOKrT4=;
+ b=YHAlNcwJVDVZDgn4VnBffEMWIB3EidlC0T9ZrxpPk3syJgdDI8+E9oIckaHM4e5A4Cj5zA
+ V+Rot/YN6VdjiYHTHMMqV9/Zp+lvj0Gwrlx45wL/oNVkPd5UoMHxxgSD5pQ3YagzFaGhXB
+ nHy5/GVQ2lNBC9UooYBjgjH9yNqUv/o=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-244-3-DXuh2MNlq3uRrfn-ga0A-1; Tue, 14 Sep 2021 10:33:29 -0400
-X-MC-Unique: 3-DXuh2MNlq3uRrfn-ga0A-1
+ us-mta-398-0fHfBnnePW2Lz4Wnvbn9wg-1; Tue, 14 Sep 2021 10:33:44 -0400
+X-MC-Unique: 0fHfBnnePW2Lz4Wnvbn9wg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EEF251060DB2;
- Tue, 14 Sep 2021 14:33:25 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 375C51808304;
+ Tue, 14 Sep 2021 14:33:41 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EE7BC5D9CA;
- Tue, 14 Sep 2021 14:33:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 41C175D9CA;
+ Tue, 14 Sep 2021 14:33:26 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 42/53] hw/core: introduce a 'format_tlb' callback
-Date: Tue, 14 Sep 2021 15:20:31 +0100
-Message-Id: <20210914142042.1655100-43-berrange@redhat.com>
+Subject: [PATCH v2 43/53] target/i386: convert to use format_tlb callback
+Date: Tue, 14 Sep 2021 15:20:32 +0100
+Message-Id: <20210914142042.1655100-44-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -89,7 +89,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -102,73 +102,266 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:33:37 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:33:51 -0000
 
-This will allow us to reduce duplication between the different targets
-implementing the 'info tlb' command.
+Change the "info tlb" implementation to use the format_tlb callback.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/core/cpu-common.c  |  9 +++++++++
- include/hw/core/cpu.h | 11 +++++++++++
- 2 files changed, 20 insertions(+)
+ target/i386/cpu.c     |   3 ++
+ target/i386/cpu.h     |   1 +
+ target/i386/monitor.c | 107 +++++++++++++++++++++++-------------------
+ 3 files changed, 63 insertions(+), 48 deletions(-)
 
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index ffd9b9e07e..9b11ec3c8d 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -123,6 +123,15 @@ void cpu_format_state(CPUState *cpu, GString *buf, int flags)
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 0a5c6a6d19..ab86224ee2 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -6765,6 +6765,9 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+     cc->parse_features = x86_cpu_parse_featurestr;
+     cc->has_work = x86_cpu_has_work;
+     cc->format_state = x86_cpu_format_state;
++#ifndef CONFIG_USER_ONLY
++    cc->format_tlb = x86_cpu_format_tlb;
++#endif
+     cc->set_pc = x86_cpu_set_pc;
+     cc->gdb_read_register = x86_cpu_gdb_read_register;
+     cc->gdb_write_register = x86_cpu_gdb_write_register;
+diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+index 2bcb175da8..d61eeef617 100644
+--- a/target/i386/cpu.h
++++ b/target/i386/cpu.h
+@@ -1826,6 +1826,7 @@ void x86_cpu_get_memory_mapping(CPUState *cpu, MemoryMappingList *list,
+                                 Error **errp);
+ 
+ void x86_cpu_format_state(CPUState *cs, GString *buf, int flags);
++void x86_cpu_format_tlb(CPUState *cpu, GString *buf);
+ 
+ hwaddr x86_cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
+                                          MemTxAttrs *attrs);
+diff --git a/target/i386/monitor.c b/target/i386/monitor.c
+index fc09f90059..698fbbc80b 100644
+--- a/target/i386/monitor.c
++++ b/target/i386/monitor.c
+@@ -54,27 +54,27 @@ static hwaddr addr_canonical(CPUArchState *env, hwaddr addr)
+     return addr;
+ }
+ 
+-static void print_pte(Monitor *mon, CPUArchState *env, hwaddr addr,
+-                      hwaddr pte, hwaddr mask)
++static void format_pte(GString *buf, CPUArchState *env, hwaddr addr,
++                       hwaddr pte, hwaddr mask)
+ {
+     addr = addr_canonical(env, addr);
+ 
+-    monitor_printf(mon, TARGET_FMT_plx ": " TARGET_FMT_plx
+-                   " %c%c%c%c%c%c%c%c%c\n",
+-                   addr,
+-                   pte & mask,
+-                   pte & PG_NX_MASK ? 'X' : '-',
+-                   pte & PG_GLOBAL_MASK ? 'G' : '-',
+-                   pte & PG_PSE_MASK ? 'P' : '-',
+-                   pte & PG_DIRTY_MASK ? 'D' : '-',
+-                   pte & PG_ACCESSED_MASK ? 'A' : '-',
+-                   pte & PG_PCD_MASK ? 'C' : '-',
+-                   pte & PG_PWT_MASK ? 'T' : '-',
+-                   pte & PG_USER_MASK ? 'U' : '-',
+-                   pte & PG_RW_MASK ? 'W' : '-');
++    g_string_append_printf(buf, TARGET_FMT_plx ": " TARGET_FMT_plx
++                           " %c%c%c%c%c%c%c%c%c\n",
++                           addr,
++                           pte & mask,
++                           pte & PG_NX_MASK ? 'X' : '-',
++                           pte & PG_GLOBAL_MASK ? 'G' : '-',
++                           pte & PG_PSE_MASK ? 'P' : '-',
++                           pte & PG_DIRTY_MASK ? 'D' : '-',
++                           pte & PG_ACCESSED_MASK ? 'A' : '-',
++                           pte & PG_PCD_MASK ? 'C' : '-',
++                           pte & PG_PWT_MASK ? 'T' : '-',
++                           pte & PG_USER_MASK ? 'U' : '-',
++                           pte & PG_RW_MASK ? 'W' : '-');
+ }
+ 
+-static void tlb_info_32(Monitor *mon, CPUArchState *env)
++static void tlb_info_32(GString *buf, CPUArchState *env)
+ {
+     unsigned int l1, l2;
+     uint32_t pgd, pde, pte;
+@@ -86,15 +86,15 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env)
+         if (pde & PG_PRESENT_MASK) {
+             if ((pde & PG_PSE_MASK) && (env->cr[4] & CR4_PSE_MASK)) {
+                 /* 4M pages */
+-                print_pte(mon, env, (l1 << 22), pde, ~((1 << 21) - 1));
++                format_pte(buf, env, (l1 << 22), pde, ~((1 << 21) - 1));
+             } else {
+                 for(l2 = 0; l2 < 1024; l2++) {
+                     cpu_physical_memory_read((pde & ~0xfff) + l2 * 4, &pte, 4);
+                     pte = le32_to_cpu(pte);
+                     if (pte & PG_PRESENT_MASK) {
+-                        print_pte(mon, env, (l1 << 22) + (l2 << 12),
+-                                  pte & ~PG_PSE_MASK,
+-                                  ~0xfff);
++                        format_pte(buf, env, (l1 << 22) + (l2 << 12),
++                                   pte & ~PG_PSE_MASK,
++                                   ~0xfff);
+                     }
+                 }
+             }
+@@ -102,7 +102,7 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env)
      }
  }
  
-+void cpu_format_tlb(CPUState *cpu, GString *buf)
+-static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
++static void tlb_info_pae32(GString *buf, CPUArchState *env)
+ {
+     unsigned int l1, l2, l3;
+     uint64_t pdpe, pde, pte;
+@@ -120,18 +120,18 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
+                 if (pde & PG_PRESENT_MASK) {
+                     if (pde & PG_PSE_MASK) {
+                         /* 2M pages with PAE, CR4.PSE is ignored */
+-                        print_pte(mon, env, (l1 << 30) + (l2 << 21), pde,
+-                                  ~((hwaddr)(1 << 20) - 1));
++                        format_pte(buf, env, (l1 << 30) + (l2 << 21), pde,
++                                   ~((hwaddr)(1 << 20) - 1));
+                     } else {
+                         pt_addr = pde & 0x3fffffffff000ULL;
+                         for (l3 = 0; l3 < 512; l3++) {
+                             cpu_physical_memory_read(pt_addr + l3 * 8, &pte, 8);
+                             pte = le64_to_cpu(pte);
+                             if (pte & PG_PRESENT_MASK) {
+-                                print_pte(mon, env, (l1 << 30) + (l2 << 21)
+-                                          + (l3 << 12),
+-                                          pte & ~PG_PSE_MASK,
+-                                          ~(hwaddr)0xfff);
++                                format_pte(buf, env, (l1 << 30) + (l2 << 21)
++                                           + (l3 << 12),
++                                           pte & ~PG_PSE_MASK,
++                                           ~(hwaddr)0xfff);
+                             }
+                         }
+                     }
+@@ -142,7 +142,7 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
+ }
+ 
+ #ifdef TARGET_X86_64
+-static void tlb_info_la48(Monitor *mon, CPUArchState *env,
++static void tlb_info_la48(GString *buf, CPUArchState *env,
+         uint64_t l0, uint64_t pml4_addr)
+ {
+     uint64_t l1, l2, l3, l4;
+@@ -166,8 +166,8 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
+ 
+             if (pdpe & PG_PSE_MASK) {
+                 /* 1G pages, CR4.PSE is ignored */
+-                print_pte(mon, env, (l0 << 48) + (l1 << 39) + (l2 << 30),
+-                        pdpe, 0x3ffffc0000000ULL);
++                format_pte(buf, env, (l0 << 48) + (l1 << 39) + (l2 << 30),
++                           pdpe, 0x3ffffc0000000ULL);
+                 continue;
+             }
+ 
+@@ -181,8 +181,8 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
+ 
+                 if (pde & PG_PSE_MASK) {
+                     /* 2M pages, CR4.PSE is ignored */
+-                    print_pte(mon, env, (l0 << 48) + (l1 << 39) + (l2 << 30) +
+-                            (l3 << 21), pde, 0x3ffffffe00000ULL);
++                    format_pte(buf, env, (l0 << 48) + (l1 << 39) + (l2 << 30) +
++                               (l3 << 21), pde, 0x3ffffffe00000ULL);
+                     continue;
+                 }
+ 
+@@ -193,9 +193,9 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
+                             &pte, 8);
+                     pte = le64_to_cpu(pte);
+                     if (pte & PG_PRESENT_MASK) {
+-                        print_pte(mon, env, (l0 << 48) + (l1 << 39) +
+-                                (l2 << 30) + (l3 << 21) + (l4 << 12),
+-                                pte & ~PG_PSE_MASK, 0x3fffffffff000ULL);
++                        format_pte(buf, env, (l0 << 48) + (l1 << 39) +
++                                   (l2 << 30) + (l3 << 21) + (l4 << 12),
++                                   pte & ~PG_PSE_MASK, 0x3fffffffff000ULL);
+                     }
+                 }
+             }
+@@ -203,7 +203,7 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
+     }
+ }
+ 
+-static void tlb_info_la57(Monitor *mon, CPUArchState *env)
++static void tlb_info_la57(GString *buf, CPUArchState *env)
+ {
+     uint64_t l0;
+     uint64_t pml5e;
+@@ -214,44 +214,55 @@ static void tlb_info_la57(Monitor *mon, CPUArchState *env)
+         cpu_physical_memory_read(pml5_addr + l0 * 8, &pml5e, 8);
+         pml5e = le64_to_cpu(pml5e);
+         if (pml5e & PG_PRESENT_MASK) {
+-            tlb_info_la48(mon, env, l0, pml5e & 0x3fffffffff000ULL);
++            tlb_info_la48(buf, env, l0, pml5e & 0x3fffffffff000ULL);
+         }
+     }
+ }
+ #endif /* TARGET_X86_64 */
+ 
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
++void x86_cpu_format_tlb(CPUState *cpu, GString *buf)
+ {
+     CPUArchState *env;
+ 
+-    env = mon_get_cpu_env(mon);
+-    if (!env) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
++    env = cpu->env_ptr;
+ 
+     if (!(env->cr[0] & CR0_PG_MASK)) {
+-        monitor_printf(mon, "PG disabled\n");
++        g_string_append_printf(buf, "PG disabled\n");
+         return;
+     }
+     if (env->cr[4] & CR4_PAE_MASK) {
+ #ifdef TARGET_X86_64
+         if (env->hflags & HF_LMA_MASK) {
+             if (env->cr[4] & CR4_LA57_MASK) {
+-                tlb_info_la57(mon, env);
++                tlb_info_la57(buf, env);
+             } else {
+-                tlb_info_la48(mon, env, 0, env->cr[3] & 0x3fffffffff000ULL);
++                tlb_info_la48(buf, env, 0, env->cr[3] & 0x3fffffffff000ULL);
+             }
+         } else
+ #endif
+         {
+-            tlb_info_pae32(mon, env);
++            tlb_info_pae32(buf, env);
+         }
+     } else {
+-        tlb_info_32(mon, env);
++        tlb_info_32(buf, env);
+     }
+ }
+ 
++void hmp_info_tlb(Monitor *mon, const QDict *qdict)
 +{
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
++    g_autoptr(GString) buf = g_string_new("");
++    CPUState *cpu = mon_get_cpu(mon);
 +
-+    if (cc->format_tlb) {
-+        cc->format_tlb(cpu, buf);
++    if (!cpu) {
++        monitor_printf(mon, "No CPU available\n");
++        return;
 +    }
++
++    cpu_format_tlb(cpu, buf);
++
++    monitor_printf(mon, "%s", buf->str);
 +}
 +
- void cpu_reset(CPUState *cpu)
- {
-     device_cold_reset(DEVICE(cpu));
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 4c47e1df18..64fc57c8d9 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -92,6 +92,7 @@ struct SysemuCPUOps;
-  * @has_work: Callback for checking if there is work to do.
-  * @memory_rw_debug: Callback for GDB memory access.
-  * @format_state: Callback for formatting state.
-+ * @format_tlb: Callback for formatting memory mappings
-  * @get_arch_id: Callback for getting architecture-dependent CPU ID.
-  * @set_pc: Callback for setting the Program Counter register. This
-  *       should have the semantics used by the target architecture when
-@@ -136,6 +137,7 @@ struct CPUClass {
-     int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
-                            uint8_t *buf, int len, bool is_write);
-     void (*format_state)(CPUState *cpu, GString *buf, int flags);
-+    void (*format_tlb)(CPUState *cpu, GString *buf);
-     int64_t (*get_arch_id)(CPUState *cpu);
-     void (*set_pc)(CPUState *cpu, vaddr value);
-     int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
-@@ -546,6 +548,15 @@ void cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-  */
- void cpu_format_state(CPUState *cpu, GString *buf, int flags);
- 
-+/**
-+ * cpu_format_tlb:
-+ * @cpu: The CPU whose memory mappings are to be formatted.
-+ * @buf: buffer to format state into
-+ *
-+ * Formats the memory mappings
-+ */
-+void cpu_format_tlb(CPUState *cpu, GString *buf);
-+
- #ifndef CONFIG_USER_ONLY
- /**
-  * cpu_get_phys_page_attrs_debug:
+ static void mem_print(Monitor *mon, CPUArchState *env,
+                       hwaddr *pstart, int *plast_prot,
+                       hwaddr end, int prot)
 -- 
 2.31.1
 
