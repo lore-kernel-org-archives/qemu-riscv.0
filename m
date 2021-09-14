@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9RZ-0005SY-0X
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:29:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39104)
+	id 1mQ9S0-0006XA-IR
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:30:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39236)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9RW-0005KD-UP
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:29:50 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:60710)
+ id 1mQ9Rw-0006Q5-Cz
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:30:17 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:48153)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9RR-0000tA-Kg
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:29:50 -0400
+ id 1mQ9Rs-0001BR-Fy
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:30:15 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629785;
+ s=mimecast20190719; t=1631629811;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5ox0yxENRArnSajwWt6R0ATTJtvgUIn+1CN57BaiibE=;
- b=EbCupnzaSYKQq/1KG1fGUCCY73KfyINhdqvifPQ8uNz42srM4iA0OD4yOTw05c86J5aiz7
- jqIH81D57wSz3y0yFNxmTwblErKyVkKHPbU1WadjGBltaq7R/W/RvyFpIiFiPF/yp4KpHL
- a0hEDIWq5yDUZ04/UYtEgi9jmds1xdY=
+ bh=7KXlBSxjSPGX8vdep8ZUyktA0Aba3nVeAQEL1Cpyva4=;
+ b=SzVSKb+pRrRb7O5F4dihAupJwj8zfqIH84drrhwoswW57dD5FleF7Byusxk84gBOZMEdx5
+ Ng1/vPOtTrzcqywufN1maLVqWsPQEPA9nDLLI2RqxlkFT/mgEbjaqDNZ2yQ93l1t9prA8Q
+ pQnUdIqurX1cMsnChg1hSk4dBWfmnQY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-211-_ngq6vkNMNSEfIs-Yi7oXA-1; Tue, 14 Sep 2021 10:29:43 -0400
-X-MC-Unique: _ngq6vkNMNSEfIs-Yi7oXA-1
+ us-mta-571-S4FmMyaQPYemK64UexRJLA-1; Tue, 14 Sep 2021 10:30:05 -0400
+X-MC-Unique: S4FmMyaQPYemK64UexRJLA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E74AA10247AB;
- Tue, 14 Sep 2021 14:29:39 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 75238800FF4;
+ Tue, 14 Sep 2021 14:29:59 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 635F35D9CA;
- Tue, 14 Sep 2021 14:29:28 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4B4F85D9DC;
+ Tue, 14 Sep 2021 14:29:40 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 26/53] target/tricore: convert to use format_state instead
+Subject: [PATCH v2 27/53] target/xtensa: convert to use format_state instead
  of dump_state
-Date: Tue, 14 Sep 2021 15:20:15 +0100
-Message-Id: <20210914142042.1655100-27-berrange@redhat.com>
+Date: Tue, 14 Sep 2021 15:20:16 +0100
+Message-Id: <20210914142042.1655100-28-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -84,11 +84,11 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -103,92 +103,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:29:51 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:30:17 -0000
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/tricore/cpu.c       |  2 +-
- target/tricore/cpu.h       |  2 +-
- target/tricore/translate.c | 24 ++++++++++++------------
- 3 files changed, 14 insertions(+), 14 deletions(-)
+ target/xtensa/cpu.c       |  2 +-
+ target/xtensa/cpu.h       |  2 +-
+ target/xtensa/translate.c | 45 ++++++++++++++++++++-------------------
+ 3 files changed, 25 insertions(+), 24 deletions(-)
 
-diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
-index b95682b7f0..11f1a79247 100644
---- a/target/tricore/cpu.c
-+++ b/target/tricore/cpu.c
-@@ -174,7 +174,7 @@ static void tricore_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_num_core_regs = 44;
-     cc->gdb_arch_name = tricore_gdb_arch_name;
+diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
+index 58ec3a0862..a5a416e0b3 100644
+--- a/target/xtensa/cpu.c
++++ b/target/xtensa/cpu.c
+@@ -216,7 +216,7 @@ static void xtensa_cpu_class_init(ObjectClass *oc, void *data)
  
--    cc->dump_state = tricore_cpu_dump_state;
-+    cc->format_state = tricore_cpu_format_state;
-     cc->set_pc = tricore_cpu_set_pc;
-     cc->sysemu_ops = &tricore_sysemu_ops;
-     cc->tcg_ops = &tricore_tcg_ops;
-diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
-index 4b61a2c03f..572bda55e7 100644
---- a/target/tricore/cpu.h
-+++ b/target/tricore/cpu.h
-@@ -208,7 +208,7 @@ struct TriCoreCPU {
- 
- 
- hwaddr tricore_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
--void tricore_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-+void tricore_cpu_format_state(CPUState *cpu, GString *buf, int flags);
- 
- 
- #define MASK_PCXI_PCPN 0xff000000
-diff --git a/target/tricore/translate.c b/target/tricore/translate.c
-index a0cc0f1cb3..a1e56fba32 100644
---- a/target/tricore/translate.c
-+++ b/target/tricore/translate.c
-@@ -86,7 +86,7 @@ enum {
-     MODE_UU = 3,
- };
- 
--void tricore_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-+void tricore_cpu_format_state(CPUState *cs, GString *buf, int flags)
- {
-     TriCoreCPU *cpu = TRICORE_CPU(cs);
-     CPUTriCoreState *env = &cpu->env;
-@@ -95,26 +95,26 @@ void tricore_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- 
-     psw = psw_read(env);
- 
--    qemu_fprintf(f, "PC: " TARGET_FMT_lx, env->PC);
--    qemu_fprintf(f, " PSW: " TARGET_FMT_lx, psw);
--    qemu_fprintf(f, " ICR: " TARGET_FMT_lx, env->ICR);
--    qemu_fprintf(f, "\nPCXI: " TARGET_FMT_lx, env->PCXI);
--    qemu_fprintf(f, " FCX: " TARGET_FMT_lx, env->FCX);
--    qemu_fprintf(f, " LCX: " TARGET_FMT_lx, env->LCX);
-+    g_string_append_printf(buf, "PC: " TARGET_FMT_lx, env->PC);
-+    g_string_append_printf(buf, " PSW: " TARGET_FMT_lx, psw);
-+    g_string_append_printf(buf, " ICR: " TARGET_FMT_lx, env->ICR);
-+    g_string_append_printf(buf, "\nPCXI: " TARGET_FMT_lx, env->PCXI);
-+    g_string_append_printf(buf, " FCX: " TARGET_FMT_lx, env->FCX);
-+    g_string_append_printf(buf, " LCX: " TARGET_FMT_lx, env->LCX);
- 
-     for (i = 0; i < 16; ++i) {
-         if ((i & 3) == 0) {
--            qemu_fprintf(f, "\nGPR A%02d:", i);
-+            g_string_append_printf(buf, "\nGPR A%02d:", i);
-         }
--        qemu_fprintf(f, " " TARGET_FMT_lx, env->gpr_a[i]);
-+        g_string_append_printf(buf, " " TARGET_FMT_lx, env->gpr_a[i]);
-     }
-     for (i = 0; i < 16; ++i) {
-         if ((i & 3) == 0) {
--            qemu_fprintf(f, "\nGPR D%02d:", i);
-+            g_string_append_printf(buf, "\nGPR D%02d:", i);
-         }
--        qemu_fprintf(f, " " TARGET_FMT_lx, env->gpr_d[i]);
-+        g_string_append_printf(buf, " " TARGET_FMT_lx, env->gpr_d[i]);
-     }
--    qemu_fprintf(f, "\n");
-+    g_string_append_printf(buf, "\n");
+     cc->class_by_name = xtensa_cpu_class_by_name;
+     cc->has_work = xtensa_cpu_has_work;
+-    cc->dump_state = xtensa_cpu_dump_state;
++    cc->format_state = xtensa_cpu_format_state;
+     cc->set_pc = xtensa_cpu_set_pc;
+     cc->gdb_read_register = xtensa_cpu_gdb_read_register;
+     cc->gdb_write_register = xtensa_cpu_gdb_write_register;
+diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+index 2345cb59c7..97cd6892df 100644
+--- a/target/xtensa/cpu.h
++++ b/target/xtensa/cpu.h
+@@ -572,7 +572,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       unsigned size, MMUAccessType access_type,
+                                       int mmu_idx, MemTxAttrs attrs,
+                                       MemTxResult response, uintptr_t retaddr);
+-void xtensa_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
++void xtensa_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+ hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void xtensa_count_regs(const XtensaConfig *config,
+                        unsigned *n_regs, unsigned *n_core_regs);
+diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
+index 20399d6a04..0f57d2abaf 100644
+--- a/target/xtensa/translate.c
++++ b/target/xtensa/translate.c
+@@ -1325,14 +1325,14 @@ void gen_intermediate_code(CPUState *cpu, TranslationBlock *tb, int max_insns)
+     translator_loop(&xtensa_translator_ops, &dc.base, cpu, tb, max_insns);
  }
  
- /*
+-void xtensa_cpu_dump_state(CPUState *cs, FILE *f, int flags)
++void xtensa_cpu_format_state(CPUState *cs, GString *buf, int flags)
+ {
+     XtensaCPU *cpu = XTENSA_CPU(cs);
+     CPUXtensaState *env = &cpu->env;
+     xtensa_isa isa = env->config->isa;
+     int i, j;
+ 
+-    qemu_fprintf(f, "PC=%08x\n\n", env->pc);
++    g_string_append_printf(buf, "PC=%08x\n\n", env->pc);
+ 
+     for (i = j = 0; i < xtensa_isa_num_sysregs(isa); ++i) {
+         const uint32_t *reg =
+@@ -1340,55 +1340,56 @@ void xtensa_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+         int regno = xtensa_sysreg_number(isa, i);
+ 
+         if (regno >= 0) {
+-            qemu_fprintf(f, "%12s=%08x%c",
+-                         xtensa_sysreg_name(isa, i),
+-                         reg[regno],
+-                         (j++ % 4) == 3 ? '\n' : ' ');
++            g_string_append_printf(buf, "%12s=%08x%c",
++                                   xtensa_sysreg_name(isa, i),
++                                   reg[regno],
++                                   (j++ % 4) == 3 ? '\n' : ' ');
+         }
+     }
+ 
+-    qemu_fprintf(f, (j % 4) == 0 ? "\n" : "\n\n");
++    g_string_append_printf(buf, (j % 4) == 0 ? "\n" : "\n\n");
+ 
+     for (i = 0; i < 16; ++i) {
+-        qemu_fprintf(f, " A%02d=%08x%c",
+-                     i, env->regs[i], (i % 4) == 3 ? '\n' : ' ');
++        g_string_append_printf(buf, " A%02d=%08x%c",
++                               i, env->regs[i], (i % 4) == 3 ? '\n' : ' ');
+     }
+ 
+     xtensa_sync_phys_from_window(env);
+-    qemu_fprintf(f, "\n");
++    g_string_append_printf(buf, "\n");
+ 
+     for (i = 0; i < env->config->nareg; ++i) {
+-        qemu_fprintf(f, "AR%02d=%08x ", i, env->phys_regs[i]);
++        g_string_append_printf(buf, "AR%02d=%08x ", i, env->phys_regs[i]);
+         if (i % 4 == 3) {
+             bool ws = (env->sregs[WINDOW_START] & (1 << (i / 4))) != 0;
+             bool cw = env->sregs[WINDOW_BASE] == i / 4;
+ 
+-            qemu_fprintf(f, "%c%c\n", ws ? '<' : ' ', cw ? '=' : ' ');
++            g_string_append_printf(buf, "%c%c\n",
++                                   ws ? '<' : ' ', cw ? '=' : ' ');
+         }
+     }
+ 
+     if ((flags & CPU_DUMP_FPU) &&
+         xtensa_option_enabled(env->config, XTENSA_OPTION_FP_COPROCESSOR)) {
+-        qemu_fprintf(f, "\n");
++        g_string_append_printf(buf, "\n");
+ 
+         for (i = 0; i < 16; ++i) {
+-            qemu_fprintf(f, "F%02d=%08x (%-+15.8e)%c", i,
+-                         float32_val(env->fregs[i].f32[FP_F32_LOW]),
+-                         *(float *)(env->fregs[i].f32 + FP_F32_LOW),
+-                         (i % 2) == 1 ? '\n' : ' ');
++            g_string_append_printf(buf, "F%02d=%08x (%-+15.8e)%c", i,
++                                   float32_val(env->fregs[i].f32[FP_F32_LOW]),
++                                   *(float *)(env->fregs[i].f32 + FP_F32_LOW),
++                                   (i % 2) == 1 ? '\n' : ' ');
+         }
+     }
+ 
+     if ((flags & CPU_DUMP_FPU) &&
+         xtensa_option_enabled(env->config, XTENSA_OPTION_DFP_COPROCESSOR) &&
+         !xtensa_option_enabled(env->config, XTENSA_OPTION_DFPU_SINGLE_ONLY)) {
+-        qemu_fprintf(f, "\n");
++        g_string_append_printf(buf, "\n");
+ 
+         for (i = 0; i < 16; ++i) {
+-            qemu_fprintf(f, "F%02d=%016"PRIx64" (%-+24.16le)%c", i,
+-                         float64_val(env->fregs[i].f64),
+-                         *(double *)(&env->fregs[i].f64),
+-                         (i % 2) == 1 ? '\n' : ' ');
++            g_string_append_printf(buf, "F%02d=%016"PRIx64" (%-+24.16le)%c", i,
++                                   float64_val(env->fregs[i].f64),
++                                   *(double *)(&env->fregs[i].f64),
++                                   (i % 2) == 1 ? '\n' : ' ');
+         }
+     }
+ }
 -- 
 2.31.1
 
