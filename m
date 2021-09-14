@@ -1,19 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQEar-0001yD-QQ
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 15:59:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47488)
+	id 1mQEbv-00031k-Eq
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 16:00:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47714)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
- id 1mQEap-0001qu-DU; Tue, 14 Sep 2021 15:59:47 -0400
-Received: from mout.kundenserver.de ([217.72.192.75]:49109)
+ id 1mQEbi-0002uu-LR; Tue, 14 Sep 2021 16:00:43 -0400
+Received: from mout.kundenserver.de ([212.227.17.24]:54369)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
- id 1mQEan-000401-37; Tue, 14 Sep 2021 15:59:47 -0400
+ id 1mQEbg-0004gH-3n; Tue, 14 Sep 2021 16:00:42 -0400
 Received: from [192.168.100.1] ([82.142.27.6]) by mrelayeu.kundenserver.de
  (mreue108 [213.165.67.119]) with ESMTPSA (Nemesis) id
- 1M5QAt-1mRbcZ3J3N-001UvA; Tue, 14 Sep 2021 21:58:47 +0200
-Subject: Re: [PATCH v2 15/53] target/m68k: convert to use format_state instead
- of dump_state
+ 1MUGqT-1mI9ab1vIh-00RFIs; Tue, 14 Sep 2021 21:59:46 +0200
+Subject: Re: [PATCH v2 44/53] target/m68k: convert to use format_tlb callback
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
@@ -44,40 +43,40 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-16-berrange@redhat.com>
+ <20210914142042.1655100-45-berrange@redhat.com>
 From: Laurent Vivier <laurent@vivier.eu>
-Message-ID: <e1133cdd-849c-51ba-f231-355b1862f09d@vivier.eu>
-Date: Tue, 14 Sep 2021 21:58:41 +0200
+Message-ID: <dac8be11-2b57-9cf5-2718-c62274ce7328@vivier.eu>
+Date: Tue, 14 Sep 2021 21:59:43 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-16-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-45-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: fr
 Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:oQ8rFflSL7UKxEjcLoo7dNYVHGISlp72iBh0XMtcWNPsNJWm8u1
- vt/ADkNBNsaAMhqnmWMaJ8nFEQrwN0Z5lEAva3Ur7h22zLhKJMpv6klZLfXnjAiIk7+czuk
- phOHRsNvjttg8y8x1fdRGojqJrC0HzlPEWiL2IkWY83FEVW0ZyEG0M7OGTl0JOX2ax0l6Wa
- jyLbg/mpvsn71dNPi1P5w==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:re4Eq8JjYLY=:y2LO3H9Cpnpo/+wWxFobdW
- bVsyWW8WgQi8aJQFXpPRwTXfpi8Cp8ORn6G6upGi7vCGLbN9OSWr8zsENz3DXuWNl34TYeAdH
- xV6hDaW6ntUDQYbwgbDzQGdnbKavJ3D/q5a2iP5Gp5QBuqYUV7g/IpiltN2R9WavykqjLXQhI
- Y5fR7lNm7IJ5IdOjcb2YuooWgQgWRTgUVZdIE4bwZJ4lhlBhS5JBhbijwkXZ3a0WQh5dbvCqp
- hSQlShBX/CGdzwTJyhRqqerau2U5RoV3i+YMVxH7yphYrFw0IIjdXkIR+baNwzcWz3CePZkMU
- vKMTb2srKWr/eqwEeoVG5Td3BshZ2CFI3v5pbm5bfrdUF9f3A4hnUIFManJimnWqursurYXid
- GpIKY4IbWtcw5D53BbJVNXflxXh3Uqaufyntg+i1NImhYn6YRmHZvLYFFhMYpiicc+5aDHO3g
- 3B9Sr3GMws99eBWA8nYIC57q3or/YJ1CMBYqa3MrT8qRfWHd2MD7vk6OtbYa5gv4TvapE8eu0
- Krn/aieNg/5gLPr2UqTxdazr/kN45HWZsMuFH9lIs+LQlXz8Cgd5eVuOGZop3FgAvBM+jtMjd
- sw6X8hc6RErl8tKdsPCez4XptKNldbVZSIUibOMRO/c8+dVuI0c+TgwaPcjZG4FXA1u1jbvpS
- U2rKFORVVFxy5YqqehKzbu3Gn59S7sbA/9wveUUGzF09+siTLxc8M/Lc7PHrjpsu4Y9ylKsQU
- Mi87TzIYGwxlsHUUbNwtDD05vAhF+1DB+/fP6Q==
-Received-SPF: none client-ip=217.72.192.75; envelope-from=laurent@vivier.eu;
+X-Provags-ID: V03:K1:TutcCnTH9N1i7D06wD7NxBiUN+qabbWHyeNC5b/7POwcV4o1XIo
+ n5J1bt8VEVaEDASZW0oSSUtUlAVno7nf3nGY3gulWKMZYwHgWSufyB6O7O3RpdzwO9TZPGC
+ x5Pqm7W/16yczAH0kTIvb2zKXgIreafniYDqDOKQpMMb4AO/w4oq862j1GnLb5l7qrpNMyZ
+ f1eyvFIKmuPS+MREBrG7w==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:F1VSFmHyMw8=:gew1WpHN0+SwPO/HLYC8CV
+ zhruFF+o3T8yZjW7IuhEqck7/qeyaSuqTIIQrEC/N6O2BdmTT3ig/49xvp1YXZ3dSZ+VF+8Fu
+ aShvxF6xhlRQyngSphcO9BKUvH5KxbwNiWavLJ0Sqjp5xer7+/CpzhgsZVa6outTu1ldnri0u
+ rVkcMxU6+n8FD4GthfYJU3xnxfA7VTtVG05gl/DrIaWKfXPX8TIlyPNRaETO2cSVWg/kFvssZ
+ sYg10FWnKhRvau3cUYROl1jSCKa+TuTS6EfeBf34acc0utqWvX/Vy96zWdBXXL67gzcaWU5qf
+ m6mL2cQmNHyOGPWq48Kv9mZNiJ61rY1C1KYfrUF7E9+urH9YPtm+5j/l1axBoqCi6SRN7n+GC
+ HTe/RQoImLwOQdSU5jmI6VyD/tTCVgl8ObihcDQRmYYdhYx0COjxcye6lDtHYVe+mUTN8Y/qt
+ l3pL7Md78LtaBi1cApFhbyNVds8skWK5Pq8EqCJVSVn1vX+FO3c8aaQGEsco6cq4YYCYebWLh
+ CRxBNvFQ+wX4ViBWw/dz1fkpiNnnDhTj6sUBHljDbJKe5h8LiS7hSuo3xt0TzbD4VpsD3l2UC
+ fa7bfrZeBdetXr3zDJv4dXoslIuCVyJR+K+gsIn3vYxggUgBJOY4Oh5bm8Y0OddGMFGPPdGi6
+ ZVQx3y2obBS6WYwcZk5l10Y91AAthKu9XhKQNKI2OGwQBAn7DfgFBIU3BpKcHrDpDpXv5C1RB
+ RvxlVIhpVxKWxjEJcnZ4cnjmjI4dPPfAPg4TOw==
+Received-SPF: none client-ip=212.227.17.24; envelope-from=laurent@vivier.eu;
  helo=mout.kundenserver.de
 X-Spam_score_int: -38
 X-Spam_score: -3.9
 X-Spam_bar: ---
 X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.969,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -91,171 +90,325 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 19:59:48 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 20:00:54 -0000
 
 Le 14/09/2021 à 16:20, Daniel P. Berrangé a écrit :
+> Change the "info tlb" implementation to use the format_tlb callback.
+> 
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  target/m68k/cpu.c       |  2 +-
->  target/m68k/cpu.h       |  2 +-
->  target/m68k/translate.c | 92 ++++++++++++++++++++++-------------------
->  3 files changed, 51 insertions(+), 45 deletions(-)
+>  target/m68k/cpu.c     |   3 +
+>  target/m68k/cpu.h     |   3 +-
+>  target/m68k/helper.c  | 132 ++++++++++++++++++++++--------------------
+>  target/m68k/monitor.c |  11 +++-
+>  4 files changed, 82 insertions(+), 67 deletions(-)
 > 
 > diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-> index 72de6e9726..4ccf572a68 100644
+> index 4ccf572a68..8f143eb540 100644
 > --- a/target/m68k/cpu.c
 > +++ b/target/m68k/cpu.c
-> @@ -536,7 +536,7 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
->  
+> @@ -537,6 +537,9 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
 >      cc->class_by_name = m68k_cpu_class_by_name;
 >      cc->has_work = m68k_cpu_has_work;
-> -    cc->dump_state = m68k_cpu_dump_state;
-> +    cc->format_state = m68k_cpu_format_state;
+>      cc->format_state = m68k_cpu_format_state;
+> +#ifndef CONFIG_USER_ONLY
+> +    cc->format_tlb = m68k_cpu_format_tlb;
+> +#endif
 >      cc->set_pc = m68k_cpu_set_pc;
 >      cc->gdb_read_register = m68k_cpu_gdb_read_register;
 >      cc->gdb_write_register = m68k_cpu_gdb_write_register;
 > diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-> index 997d588911..b0641f6d0d 100644
+> index b0641f6d0d..f2d777a1ba 100644
 > --- a/target/m68k/cpu.h
 > +++ b/target/m68k/cpu.h
-> @@ -168,7 +168,7 @@ struct M68kCPU {
->  
+> @@ -169,6 +169,7 @@ struct M68kCPU {
 >  void m68k_cpu_do_interrupt(CPUState *cpu);
 >  bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
-> -void m68k_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-> +void m68k_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+>  void m68k_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+> +void m68k_cpu_format_tlb(CPUState *cpu, GString *buf);
 >  hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
 >  int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
 >  int m68k_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> diff --git a/target/m68k/translate.c b/target/m68k/translate.c
-> index c34d9aed61..951bbed6bf 100644
-> --- a/target/m68k/translate.c
-> +++ b/target/m68k/translate.c
-> @@ -6316,75 +6316,81 @@ static double floatx80_to_double(CPUM68KState *env, uint16_t high, uint64_t low)
->      return u.d;
+> @@ -612,6 +613,4 @@ static inline void cpu_get_tb_cpu_state(CPUM68KState *env, target_ulong *pc,
+>      }
 >  }
 >  
-> -void m68k_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +void m68k_cpu_format_state(CPUState *cs, GString *buf, int flags)
->  {
->      M68kCPU *cpu = M68K_CPU(cs);
->      CPUM68KState *env = &cpu->env;
->      int i;
->      uint16_t sr;
->      for (i = 0; i < 8; i++) {
-> -        qemu_fprintf(f, "D%d = %08x   A%d = %08x   "
-> -                     "F%d = %04x %016"PRIx64"  (%12g)\n",
-> -                     i, env->dregs[i], i, env->aregs[i],
-> -                     i, env->fregs[i].l.upper, env->fregs[i].l.lower,
-> -                     floatx80_to_double(env, env->fregs[i].l.upper,
-> -                                        env->fregs[i].l.lower));
-> -    }
-> -    qemu_fprintf(f, "PC = %08x   ", env->pc);
-> +        g_string_append_printf(buf, "D%d = %08x   A%d = %08x   "
-> +                               "F%d = %04x %016"PRIx64"  (%12g)\n",
-> +                               i, env->dregs[i], i, env->aregs[i],
-> +                               i, env->fregs[i].l.upper, env->fregs[i].l.lower,
-> +                               floatx80_to_double(env, env->fregs[i].l.upper,
-> +                                                  env->fregs[i].l.lower));
-> +    }
-> +    g_string_append_printf(buf, "PC = %08x   ", env->pc);
->      sr = env->sr | cpu_m68k_get_ccr(env);
-> -    qemu_fprintf(f, "SR = %04x T:%x I:%x %c%c %c%c%c%c%c\n",
-> -                 sr, (sr & SR_T) >> SR_T_SHIFT, (sr & SR_I) >> SR_I_SHIFT,
-> -                 (sr & SR_S) ? 'S' : 'U', (sr & SR_M) ? '%' : 'I',
-> -                 (sr & CCF_X) ? 'X' : '-', (sr & CCF_N) ? 'N' : '-',
-> -                 (sr & CCF_Z) ? 'Z' : '-', (sr & CCF_V) ? 'V' : '-',
-> -                 (sr & CCF_C) ? 'C' : '-');
-> -    qemu_fprintf(f, "FPSR = %08x %c%c%c%c ", env->fpsr,
-> -                 (env->fpsr & FPSR_CC_A) ? 'A' : '-',
-> -                 (env->fpsr & FPSR_CC_I) ? 'I' : '-',
-> -                 (env->fpsr & FPSR_CC_Z) ? 'Z' : '-',
-> -                 (env->fpsr & FPSR_CC_N) ? 'N' : '-');
-> -    qemu_fprintf(f, "\n                                "
-> -                 "FPCR =     %04x ", env->fpcr);
-> +    g_string_append_printf(buf, "SR = %04x T:%x I:%x %c%c %c%c%c%c%c\n",
-> +                           sr, (sr & SR_T) >> SR_T_SHIFT,
-> +                           (sr & SR_I) >> SR_I_SHIFT,
-> +                           (sr & SR_S) ? 'S' : 'U', (sr & SR_M) ? '%' : 'I',
-> +                           (sr & CCF_X) ? 'X' : '-', (sr & CCF_N) ? 'N' : '-',
-> +                           (sr & CCF_Z) ? 'Z' : '-', (sr & CCF_V) ? 'V' : '-',
-> +                           (sr & CCF_C) ? 'C' : '-');
-> +    g_string_append_printf(buf, "FPSR = %08x %c%c%c%c ", env->fpsr,
-> +                           (env->fpsr & FPSR_CC_A) ? 'A' : '-',
-> +                           (env->fpsr & FPSR_CC_I) ? 'I' : '-',
-> +                           (env->fpsr & FPSR_CC_Z) ? 'Z' : '-',
-> +                           (env->fpsr & FPSR_CC_N) ? 'N' : '-');
-> +    g_string_append_printf(buf, "\n                                "
-> +                           "FPCR =     %04x ", env->fpcr);
->      switch (env->fpcr & FPCR_PREC_MASK) {
->      case FPCR_PREC_X:
-> -        qemu_fprintf(f, "X ");
-> +        g_string_append_printf(buf, "X ");
->          break;
->      case FPCR_PREC_S:
-> -        qemu_fprintf(f, "S ");
-> +        g_string_append_printf(buf, "S ");
->          break;
->      case FPCR_PREC_D:
-> -        qemu_fprintf(f, "D ");
-> +        g_string_append_printf(buf, "D ");
->          break;
->      }
->      switch (env->fpcr & FPCR_RND_MASK) {
->      case FPCR_RND_N:
-> -        qemu_fprintf(f, "RN ");
-> +        g_string_append_printf(buf, "RN ");
->          break;
->      case FPCR_RND_Z:
-> -        qemu_fprintf(f, "RZ ");
-> +        g_string_append_printf(buf, "RZ ");
->          break;
->      case FPCR_RND_M:
-> -        qemu_fprintf(f, "RM ");
-> +        g_string_append_printf(buf, "RM ");
->          break;
->      case FPCR_RND_P:
-> -        qemu_fprintf(f, "RP ");
-> +        g_string_append_printf(buf, "RP ");
->          break;
->      }
-> -    qemu_fprintf(f, "\n");
-> +    g_string_append_printf(buf, "\n");
->  #ifdef CONFIG_SOFTMMU
-> -    qemu_fprintf(f, "%sA7(MSP) = %08x %sA7(USP) = %08x %sA7(ISP) = %08x\n",
-> -                 env->current_sp == M68K_SSP ? "->" : "  ", env->sp[M68K_SSP],
-> -                 env->current_sp == M68K_USP ? "->" : "  ", env->sp[M68K_USP],
-> -                 env->current_sp == M68K_ISP ? "->" : "  ", env->sp[M68K_ISP]);
-> -    qemu_fprintf(f, "VBR = 0x%08x\n", env->vbr);
-> -    qemu_fprintf(f, "SFC = %x DFC %x\n", env->sfc, env->dfc);
-> -    qemu_fprintf(f, "SSW %08x TCR %08x URP %08x SRP %08x\n",
-> -                 env->mmu.ssw, env->mmu.tcr, env->mmu.urp, env->mmu.srp);
-> -    qemu_fprintf(f, "DTTR0/1: %08x/%08x ITTR0/1: %08x/%08x\n",
-> -                 env->mmu.ttr[M68K_DTTR0], env->mmu.ttr[M68K_DTTR1],
-> -                 env->mmu.ttr[M68K_ITTR0], env->mmu.ttr[M68K_ITTR1]);
-> -    qemu_fprintf(f, "MMUSR %08x, fault at %08x\n",
-> -                 env->mmu.mmusr, env->mmu.ar);
-> +    g_string_append_printf(buf, "%sA7(MSP) = %08x %sA7(USP) = %08x "
-> +                           "%sA7(ISP) = %08x\n",
-> +                           env->current_sp == M68K_SSP ?
-> +                           "->" : "  ", env->sp[M68K_SSP],
-> +                           env->current_sp == M68K_USP ?
-> +                           "->" : "  ", env->sp[M68K_USP],
-> +                           env->current_sp == M68K_ISP ?
-> +                           "->" : "  ", env->sp[M68K_ISP]);
-> +    g_string_append_printf(buf, "VBR = 0x%08x\n", env->vbr);
-> +    g_string_append_printf(buf, "SFC = %x DFC %x\n", env->sfc, env->dfc);
-> +    g_string_append_printf(buf, "SSW %08x TCR %08x URP %08x SRP %08x\n",
-> +                           env->mmu.ssw, env->mmu.tcr,
-> +                           env->mmu.urp, env->mmu.srp);
-> +    g_string_append_printf(buf, "DTTR0/1: %08x/%08x ITTR0/1: %08x/%08x\n",
-> +                           env->mmu.ttr[M68K_DTTR0], env->mmu.ttr[M68K_DTTR1],
-> +                           env->mmu.ttr[M68K_ITTR0], env->mmu.ttr[M68K_ITTR1]);
-> +    g_string_append_printf(buf, "MMUSR %08x, fault at %08x\n",
-> +                           env->mmu.mmusr, env->mmu.ar);
+> -void dump_mmu(CPUM68KState *env);
+> -
 >  #endif
+> diff --git a/target/m68k/helper.c b/target/m68k/helper.c
+> index 137a3e1a3d..050a27d21c 100644
+> --- a/target/m68k/helper.c
+> +++ b/target/m68k/helper.c
+> @@ -25,6 +25,7 @@
+>  #include "exec/helper-proto.h"
+>  #include "fpu/softfloat.h"
+>  #include "qemu/qemu-print.h"
+> +#include "qapi/error.h"
+>  
+>  #define SIGNBIT (1u << 31)
+>  
+> @@ -483,27 +484,28 @@ void m68k_switch_sp(CPUM68KState *env)
+>  /* MMU: 68040 only */
+>  
+>  static void print_address_zone(uint32_t logical, uint32_t physical,
+> -                               uint32_t size, int attr)
+> +                               uint32_t size, int attr, GString *buf)
+>  {
+> -    qemu_printf("%08x - %08x -> %08x - %08x %c ",
+> -                logical, logical + size - 1,
+> -                physical, physical + size - 1,
+> -                attr & 4 ? 'W' : '-');
+> +    g_string_append_printf(buf, "%08x - %08x -> %08x - %08x %c ",
+> +                           logical, logical + size - 1,
+> +                           physical, physical + size - 1,
+> +                           attr & 4 ? 'W' : '-');
+>      size >>= 10;
+>      if (size < 1024) {
+> -        qemu_printf("(%d KiB)\n", size);
+> +        g_string_append_printf(buf, "(%d KiB)\n", size);
+>      } else {
+>          size >>= 10;
+>          if (size < 1024) {
+> -            qemu_printf("(%d MiB)\n", size);
+> +            g_string_append_printf(buf, "(%d MiB)\n", size);
+>          } else {
+>              size >>= 10;
+> -            qemu_printf("(%d GiB)\n", size);
+> +            g_string_append_printf(buf, "(%d GiB)\n", size);
+>          }
+>      }
 >  }
 >  
+> -static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
+> +static void dump_address_map(CPUM68KState *env, uint32_t root_pointer,
+> +                             GString *buf)
+>  {
+>      int i, j, k;
+>      int tic_size, tic_shift;
+> @@ -573,7 +575,8 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
+>                          size = last_logical + (1 << tic_shift) -
+>                                 first_logical;
+>                          print_address_zone(first_logical,
+> -                                           first_physical, size, last_attr);
+> +                                           first_physical, size, last_attr,
+> +                                           buf);
+>                      }
+>                      first_logical = logical;
+>                      first_physical = physical;
+> @@ -583,125 +586,130 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
+>      }
+>      if (first_logical != logical || (attr & 4) != (last_attr & 4)) {
+>          size = logical + (1 << tic_shift) - first_logical;
+> -        print_address_zone(first_logical, first_physical, size, last_attr);
+> +        print_address_zone(first_logical, first_physical, size, last_attr, buf);
+>      }
+>  }
+>  
+>  #define DUMP_CACHEFLAGS(a) \
+>      switch (a & M68K_DESC_CACHEMODE) { \
+>      case M68K_DESC_CM_WRTHRU: /* cachable, write-through */ \
+> -        qemu_printf("T"); \
+> +        g_string_append_printf(buf, "T"); \
+>          break; \
+>      case M68K_DESC_CM_COPYBK: /* cachable, copyback */ \
+> -        qemu_printf("C"); \
+> +        g_string_append_printf(buf, "C"); \
+>          break; \
+>      case M68K_DESC_CM_SERIAL: /* noncachable, serialized */ \
+> -        qemu_printf("S"); \
+> +        g_string_append_printf(buf, "S"); \
+>          break; \
+>      case M68K_DESC_CM_NCACHE: /* noncachable */ \
+> -        qemu_printf("N"); \
+> +        g_string_append_printf(buf, "N"); \
+>          break; \
+>      }
+>  
+> -static void dump_ttr(uint32_t ttr)
+> +static void dump_ttr(uint32_t ttr, GString *buf)
+>  {
+>      if ((ttr & M68K_TTR_ENABLED) == 0) {
+> -        qemu_printf("disabled\n");
+> +        g_string_append_printf(buf, "disabled\n");
+>          return;
+>      }
+> -    qemu_printf("Base: 0x%08x Mask: 0x%08x Control: ",
+> -                ttr & M68K_TTR_ADDR_BASE,
+> -                (ttr & M68K_TTR_ADDR_MASK) << M68K_TTR_ADDR_MASK_SHIFT);
+> +    g_string_append_printf(buf, "Base: 0x%08x Mask: 0x%08x Control: ",
+> +                           ttr & M68K_TTR_ADDR_BASE,
+> +                           (ttr & M68K_TTR_ADDR_MASK) <<
+> +                           M68K_TTR_ADDR_MASK_SHIFT);
+>      switch (ttr & M68K_TTR_SFIELD) {
+>      case M68K_TTR_SFIELD_USER:
+> -        qemu_printf("U");
+> +        g_string_append_printf(buf, "U");
+>          break;
+>      case M68K_TTR_SFIELD_SUPER:
+> -        qemu_printf("S");
+> +        g_string_append_printf(buf, "S");
+>          break;
+>      default:
+> -        qemu_printf("*");
+> +        g_string_append_printf(buf, "*");
+>          break;
+>      }
+>      DUMP_CACHEFLAGS(ttr);
+>      if (ttr & M68K_DESC_WRITEPROT) {
+> -        qemu_printf("R");
+> +        g_string_append_printf(buf, "R");
+>      } else {
+> -        qemu_printf("W");
+> +        g_string_append_printf(buf, "W");
+>      }
+> -    qemu_printf(" U: %d\n", (ttr & M68K_DESC_USERATTR) >>
+> -                               M68K_DESC_USERATTR_SHIFT);
+> +    g_string_append_printf(buf, " U: %d\n", (ttr & M68K_DESC_USERATTR) >>
+> +                           M68K_DESC_USERATTR_SHIFT);
+>  }
+>  
+> -void dump_mmu(CPUM68KState *env)
+> +
+> +void m68k_cpu_format_tlb(CPUState *cpu, GString *buf)
+>  {
+> +    CPUM68KState *env = cpu->env_ptr;
+> +
+>      if ((env->mmu.tcr & M68K_TCR_ENABLED) == 0) {
+> -        qemu_printf("Translation disabled\n");
+> +        g_string_append_printf(buf, "Translation disabled\n");
+>          return;
+>      }
+> -    qemu_printf("Page Size: ");
+> +    g_string_append_printf(buf, "Page Size: ");
+>      if (env->mmu.tcr & M68K_TCR_PAGE_8K) {
+> -        qemu_printf("8kB\n");
+> +        g_string_append_printf(buf, "8kB\n");
+>      } else {
+> -        qemu_printf("4kB\n");
+> +        g_string_append_printf(buf, "4kB\n");
+>      }
+>  
+> -    qemu_printf("MMUSR: ");
+> +    g_string_append_printf(buf, "MMUSR: ");
+>      if (env->mmu.mmusr & M68K_MMU_B_040) {
+> -        qemu_printf("BUS ERROR\n");
+> +        g_string_append_printf(buf, "BUS ERROR\n");
+>      } else {
+> -        qemu_printf("Phy=%08x Flags: ", env->mmu.mmusr & 0xfffff000);
+> +        g_string_append_printf(buf, "Phy=%08x Flags: ",
+> +                               env->mmu.mmusr & 0xfffff000);
+>          /* flags found on the page descriptor */
+>          if (env->mmu.mmusr & M68K_MMU_G_040) {
+> -            qemu_printf("G"); /* Global */
+> +            g_string_append_printf(buf, "G"); /* Global */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+>          if (env->mmu.mmusr & M68K_MMU_S_040) {
+> -            qemu_printf("S"); /* Supervisor */
+> +            g_string_append_printf(buf, "S"); /* Supervisor */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+>          if (env->mmu.mmusr & M68K_MMU_M_040) {
+> -            qemu_printf("M"); /* Modified */
+> +            g_string_append_printf(buf, "M"); /* Modified */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+>          if (env->mmu.mmusr & M68K_MMU_WP_040) {
+> -            qemu_printf("W"); /* Write protect */
+> +            g_string_append_printf(buf, "W"); /* Write protect */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+>          if (env->mmu.mmusr & M68K_MMU_T_040) {
+> -            qemu_printf("T"); /* Transparent */
+> +            g_string_append_printf(buf, "T"); /* Transparent */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+>          if (env->mmu.mmusr & M68K_MMU_R_040) {
+> -            qemu_printf("R"); /* Resident */
+> +            g_string_append_printf(buf, "R"); /* Resident */
+>          } else {
+> -            qemu_printf(".");
+> +            g_string_append_printf(buf, ".");
+>          }
+> -        qemu_printf(" Cache: ");
+> +        g_string_append_printf(buf, " Cache: ");
+>          DUMP_CACHEFLAGS(env->mmu.mmusr);
+> -        qemu_printf(" U: %d\n", (env->mmu.mmusr >> 8) & 3);
+> -        qemu_printf("\n");
+> +        g_string_append_printf(buf, " U: %d\n", (env->mmu.mmusr >> 8) & 3);
+> +        g_string_append_printf(buf, "\n");
+>      }
+>  
+> -    qemu_printf("ITTR0: ");
+> -    dump_ttr(env->mmu.ttr[M68K_ITTR0]);
+> -    qemu_printf("ITTR1: ");
+> -    dump_ttr(env->mmu.ttr[M68K_ITTR1]);
+> -    qemu_printf("DTTR0: ");
+> -    dump_ttr(env->mmu.ttr[M68K_DTTR0]);
+> -    qemu_printf("DTTR1: ");
+> -    dump_ttr(env->mmu.ttr[M68K_DTTR1]);
+> +    g_string_append_printf(buf, "ITTR0: ");
+> +    dump_ttr(env->mmu.ttr[M68K_ITTR0], buf);
+> +    g_string_append_printf(buf, "ITTR1: ");
+> +    dump_ttr(env->mmu.ttr[M68K_ITTR1], buf);
+> +    g_string_append_printf(buf, "DTTR0: ");
+> +    dump_ttr(env->mmu.ttr[M68K_DTTR0], buf);
+> +    g_string_append_printf(buf, "DTTR1: ");
+> +    dump_ttr(env->mmu.ttr[M68K_DTTR1], buf);
+>  
+> -    qemu_printf("SRP: 0x%08x\n", env->mmu.srp);
+> -    dump_address_map(env, env->mmu.srp);
+> +    g_string_append_printf(buf, "SRP: 0x%08x\n", env->mmu.srp);
+> +    dump_address_map(env, env->mmu.srp, buf);
+>  
+> -    qemu_printf("URP: 0x%08x\n", env->mmu.urp);
+> -    dump_address_map(env, env->mmu.urp);
+> +    g_string_append_printf(buf, "URP: 0x%08x\n", env->mmu.urp);
+> +    dump_address_map(env, env->mmu.urp, buf);
+>  }
+>  
+>  static int check_TTR(uint32_t ttr, int *prot, target_ulong addr,
+> diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
+> index 2bdf6acae0..003a665246 100644
+> --- a/target/m68k/monitor.c
+> +++ b/target/m68k/monitor.c
+> @@ -9,17 +9,22 @@
+>  #include "cpu.h"
+>  #include "monitor/hmp-target.h"
+>  #include "monitor/monitor.h"
+> +#include "qapi/error.h"
+> +#include "qapi/qapi-commands-machine-target.h"
+>  
+>  void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+>  {
+> -    CPUArchState *env1 = mon_get_cpu_env(mon);
+> +    g_autoptr(GString) buf = g_string_new("");
+> +    CPUState *cpu = mon_get_cpu(mon);
+>  
+> -    if (!env1) {
+> +    if (!cpu) {
+>          monitor_printf(mon, "No CPU available\n");
+>          return;
+>      }
+>  
+> -    dump_mmu(env1);
+> +    cpu_format_tlb(cpu, buf);
+> +
+> +    monitor_printf(mon, "%s", buf->str);
+>  }
+>  
+>  static const MonitorDef monitor_defs[] = {
 > 
 
 Acked-by: Laurent Vivier <laurent@vivier.eu>
