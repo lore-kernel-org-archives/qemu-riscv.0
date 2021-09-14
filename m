@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9VS-0002LN-6I
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:33:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41390)
+	id 1mQ9Vc-0002eT-6B
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:34:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41540)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9VP-0002Fi-5O
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:51 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:31233)
+ id 1mQ9Va-0002ZC-Ad
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:34:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:52647)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9VL-0003jY-3U
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:50 -0400
+ id 1mQ9VX-0003rW-TO
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:34:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631630026;
+ s=mimecast20190719; t=1631630037;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=u/Q+2lydTjqVkGI5GLlhCmIjg5hJJ1z7UABw+pOKrT4=;
- b=YHAlNcwJVDVZDgn4VnBffEMWIB3EidlC0T9ZrxpPk3syJgdDI8+E9oIckaHM4e5A4Cj5zA
- V+Rot/YN6VdjiYHTHMMqV9/Zp+lvj0Gwrlx45wL/oNVkPd5UoMHxxgSD5pQ3YagzFaGhXB
- nHy5/GVQ2lNBC9UooYBjgjH9yNqUv/o=
+ bh=bh9ijrtRHqw1dGWJj6Rxy56++d9ni6EtfBBE4iZ7xmU=;
+ b=fFrS4A98Ex3C5KqRvMJ+iTlXBuupmQaWFnWkXTo6q59knLixjuMelyQhho85Ut4HZ0ztf/
+ CsHB+Zhp3F58rNfCY3R3NgV5OX1HxoGjvI+hcMq9wmE01CC3Sxi/Ior7hfH1CrbEiOw2bS
+ poTxR20A1Et53JmNOQsU8IG/5zke2tM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-398-0fHfBnnePW2Lz4Wnvbn9wg-1; Tue, 14 Sep 2021 10:33:44 -0400
-X-MC-Unique: 0fHfBnnePW2Lz4Wnvbn9wg-1
+ us-mta-449-qAFyWR9zMeGO5aywzna6tA-1; Tue, 14 Sep 2021 10:33:56 -0400
+X-MC-Unique: qAFyWR9zMeGO5aywzna6tA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 375C51808304;
- Tue, 14 Sep 2021 14:33:41 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A7A56BAF80;
+ Tue, 14 Sep 2021 14:33:52 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 41C175D9CA;
- Tue, 14 Sep 2021 14:33:26 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 864FC5D9CA;
+ Tue, 14 Sep 2021 14:33:41 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 43/53] target/i386: convert to use format_tlb callback
-Date: Tue, 14 Sep 2021 15:20:32 +0100
-Message-Id: <20210914142042.1655100-44-berrange@redhat.com>
+Subject: [PATCH v2 44/53] target/m68k: convert to use format_tlb callback
+Date: Tue, 14 Sep 2021 15:20:33 +0100
+Message-Id: <20210914142042.1655100-45-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -81,7 +81,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -102,266 +102,324 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:33:51 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:34:02 -0000
 
 Change the "info tlb" implementation to use the format_tlb callback.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/i386/cpu.c     |   3 ++
- target/i386/cpu.h     |   1 +
- target/i386/monitor.c | 107 +++++++++++++++++++++++-------------------
- 3 files changed, 63 insertions(+), 48 deletions(-)
+ target/m68k/cpu.c     |   3 +
+ target/m68k/cpu.h     |   3 +-
+ target/m68k/helper.c  | 132 ++++++++++++++++++++++--------------------
+ target/m68k/monitor.c |  11 +++-
+ 4 files changed, 82 insertions(+), 67 deletions(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 0a5c6a6d19..ab86224ee2 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -6765,6 +6765,9 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
-     cc->parse_features = x86_cpu_parse_featurestr;
-     cc->has_work = x86_cpu_has_work;
-     cc->format_state = x86_cpu_format_state;
+diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
+index 4ccf572a68..8f143eb540 100644
+--- a/target/m68k/cpu.c
++++ b/target/m68k/cpu.c
+@@ -537,6 +537,9 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
+     cc->class_by_name = m68k_cpu_class_by_name;
+     cc->has_work = m68k_cpu_has_work;
+     cc->format_state = m68k_cpu_format_state;
 +#ifndef CONFIG_USER_ONLY
-+    cc->format_tlb = x86_cpu_format_tlb;
++    cc->format_tlb = m68k_cpu_format_tlb;
 +#endif
-     cc->set_pc = x86_cpu_set_pc;
-     cc->gdb_read_register = x86_cpu_gdb_read_register;
-     cc->gdb_write_register = x86_cpu_gdb_write_register;
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index 2bcb175da8..d61eeef617 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -1826,6 +1826,7 @@ void x86_cpu_get_memory_mapping(CPUState *cpu, MemoryMappingList *list,
-                                 Error **errp);
- 
- void x86_cpu_format_state(CPUState *cs, GString *buf, int flags);
-+void x86_cpu_format_tlb(CPUState *cpu, GString *buf);
- 
- hwaddr x86_cpu_get_phys_page_attrs_debug(CPUState *cpu, vaddr addr,
-                                          MemTxAttrs *attrs);
-diff --git a/target/i386/monitor.c b/target/i386/monitor.c
-index fc09f90059..698fbbc80b 100644
---- a/target/i386/monitor.c
-+++ b/target/i386/monitor.c
-@@ -54,27 +54,27 @@ static hwaddr addr_canonical(CPUArchState *env, hwaddr addr)
-     return addr;
- }
- 
--static void print_pte(Monitor *mon, CPUArchState *env, hwaddr addr,
--                      hwaddr pte, hwaddr mask)
-+static void format_pte(GString *buf, CPUArchState *env, hwaddr addr,
-+                       hwaddr pte, hwaddr mask)
- {
-     addr = addr_canonical(env, addr);
- 
--    monitor_printf(mon, TARGET_FMT_plx ": " TARGET_FMT_plx
--                   " %c%c%c%c%c%c%c%c%c\n",
--                   addr,
--                   pte & mask,
--                   pte & PG_NX_MASK ? 'X' : '-',
--                   pte & PG_GLOBAL_MASK ? 'G' : '-',
--                   pte & PG_PSE_MASK ? 'P' : '-',
--                   pte & PG_DIRTY_MASK ? 'D' : '-',
--                   pte & PG_ACCESSED_MASK ? 'A' : '-',
--                   pte & PG_PCD_MASK ? 'C' : '-',
--                   pte & PG_PWT_MASK ? 'T' : '-',
--                   pte & PG_USER_MASK ? 'U' : '-',
--                   pte & PG_RW_MASK ? 'W' : '-');
-+    g_string_append_printf(buf, TARGET_FMT_plx ": " TARGET_FMT_plx
-+                           " %c%c%c%c%c%c%c%c%c\n",
-+                           addr,
-+                           pte & mask,
-+                           pte & PG_NX_MASK ? 'X' : '-',
-+                           pte & PG_GLOBAL_MASK ? 'G' : '-',
-+                           pte & PG_PSE_MASK ? 'P' : '-',
-+                           pte & PG_DIRTY_MASK ? 'D' : '-',
-+                           pte & PG_ACCESSED_MASK ? 'A' : '-',
-+                           pte & PG_PCD_MASK ? 'C' : '-',
-+                           pte & PG_PWT_MASK ? 'T' : '-',
-+                           pte & PG_USER_MASK ? 'U' : '-',
-+                           pte & PG_RW_MASK ? 'W' : '-');
- }
- 
--static void tlb_info_32(Monitor *mon, CPUArchState *env)
-+static void tlb_info_32(GString *buf, CPUArchState *env)
- {
-     unsigned int l1, l2;
-     uint32_t pgd, pde, pte;
-@@ -86,15 +86,15 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env)
-         if (pde & PG_PRESENT_MASK) {
-             if ((pde & PG_PSE_MASK) && (env->cr[4] & CR4_PSE_MASK)) {
-                 /* 4M pages */
--                print_pte(mon, env, (l1 << 22), pde, ~((1 << 21) - 1));
-+                format_pte(buf, env, (l1 << 22), pde, ~((1 << 21) - 1));
-             } else {
-                 for(l2 = 0; l2 < 1024; l2++) {
-                     cpu_physical_memory_read((pde & ~0xfff) + l2 * 4, &pte, 4);
-                     pte = le32_to_cpu(pte);
-                     if (pte & PG_PRESENT_MASK) {
--                        print_pte(mon, env, (l1 << 22) + (l2 << 12),
--                                  pte & ~PG_PSE_MASK,
--                                  ~0xfff);
-+                        format_pte(buf, env, (l1 << 22) + (l2 << 12),
-+                                   pte & ~PG_PSE_MASK,
-+                                   ~0xfff);
-                     }
-                 }
-             }
-@@ -102,7 +102,7 @@ static void tlb_info_32(Monitor *mon, CPUArchState *env)
+     cc->set_pc = m68k_cpu_set_pc;
+     cc->gdb_read_register = m68k_cpu_gdb_read_register;
+     cc->gdb_write_register = m68k_cpu_gdb_write_register;
+diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
+index b0641f6d0d..f2d777a1ba 100644
+--- a/target/m68k/cpu.h
++++ b/target/m68k/cpu.h
+@@ -169,6 +169,7 @@ struct M68kCPU {
+ void m68k_cpu_do_interrupt(CPUState *cpu);
+ bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ void m68k_cpu_format_state(CPUState *cpu, GString *buf, int flags);
++void m68k_cpu_format_tlb(CPUState *cpu, GString *buf);
+ hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int m68k_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+@@ -612,6 +613,4 @@ static inline void cpu_get_tb_cpu_state(CPUM68KState *env, target_ulong *pc,
      }
  }
  
--static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
-+static void tlb_info_pae32(GString *buf, CPUArchState *env)
+-void dump_mmu(CPUM68KState *env);
+-
+ #endif
+diff --git a/target/m68k/helper.c b/target/m68k/helper.c
+index 137a3e1a3d..050a27d21c 100644
+--- a/target/m68k/helper.c
++++ b/target/m68k/helper.c
+@@ -25,6 +25,7 @@
+ #include "exec/helper-proto.h"
+ #include "fpu/softfloat.h"
+ #include "qemu/qemu-print.h"
++#include "qapi/error.h"
+ 
+ #define SIGNBIT (1u << 31)
+ 
+@@ -483,27 +484,28 @@ void m68k_switch_sp(CPUM68KState *env)
+ /* MMU: 68040 only */
+ 
+ static void print_address_zone(uint32_t logical, uint32_t physical,
+-                               uint32_t size, int attr)
++                               uint32_t size, int attr, GString *buf)
  {
-     unsigned int l1, l2, l3;
-     uint64_t pdpe, pde, pte;
-@@ -120,18 +120,18 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
-                 if (pde & PG_PRESENT_MASK) {
-                     if (pde & PG_PSE_MASK) {
-                         /* 2M pages with PAE, CR4.PSE is ignored */
--                        print_pte(mon, env, (l1 << 30) + (l2 << 21), pde,
--                                  ~((hwaddr)(1 << 20) - 1));
-+                        format_pte(buf, env, (l1 << 30) + (l2 << 21), pde,
-+                                   ~((hwaddr)(1 << 20) - 1));
-                     } else {
-                         pt_addr = pde & 0x3fffffffff000ULL;
-                         for (l3 = 0; l3 < 512; l3++) {
-                             cpu_physical_memory_read(pt_addr + l3 * 8, &pte, 8);
-                             pte = le64_to_cpu(pte);
-                             if (pte & PG_PRESENT_MASK) {
--                                print_pte(mon, env, (l1 << 30) + (l2 << 21)
--                                          + (l3 << 12),
--                                          pte & ~PG_PSE_MASK,
--                                          ~(hwaddr)0xfff);
-+                                format_pte(buf, env, (l1 << 30) + (l2 << 21)
-+                                           + (l3 << 12),
-+                                           pte & ~PG_PSE_MASK,
-+                                           ~(hwaddr)0xfff);
-                             }
-                         }
-                     }
-@@ -142,7 +142,7 @@ static void tlb_info_pae32(Monitor *mon, CPUArchState *env)
- }
- 
- #ifdef TARGET_X86_64
--static void tlb_info_la48(Monitor *mon, CPUArchState *env,
-+static void tlb_info_la48(GString *buf, CPUArchState *env,
-         uint64_t l0, uint64_t pml4_addr)
- {
-     uint64_t l1, l2, l3, l4;
-@@ -166,8 +166,8 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
- 
-             if (pdpe & PG_PSE_MASK) {
-                 /* 1G pages, CR4.PSE is ignored */
--                print_pte(mon, env, (l0 << 48) + (l1 << 39) + (l2 << 30),
--                        pdpe, 0x3ffffc0000000ULL);
-+                format_pte(buf, env, (l0 << 48) + (l1 << 39) + (l2 << 30),
-+                           pdpe, 0x3ffffc0000000ULL);
-                 continue;
-             }
- 
-@@ -181,8 +181,8 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
- 
-                 if (pde & PG_PSE_MASK) {
-                     /* 2M pages, CR4.PSE is ignored */
--                    print_pte(mon, env, (l0 << 48) + (l1 << 39) + (l2 << 30) +
--                            (l3 << 21), pde, 0x3ffffffe00000ULL);
-+                    format_pte(buf, env, (l0 << 48) + (l1 << 39) + (l2 << 30) +
-+                               (l3 << 21), pde, 0x3ffffffe00000ULL);
-                     continue;
-                 }
- 
-@@ -193,9 +193,9 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
-                             &pte, 8);
-                     pte = le64_to_cpu(pte);
-                     if (pte & PG_PRESENT_MASK) {
--                        print_pte(mon, env, (l0 << 48) + (l1 << 39) +
--                                (l2 << 30) + (l3 << 21) + (l4 << 12),
--                                pte & ~PG_PSE_MASK, 0x3fffffffff000ULL);
-+                        format_pte(buf, env, (l0 << 48) + (l1 << 39) +
-+                                   (l2 << 30) + (l3 << 21) + (l4 << 12),
-+                                   pte & ~PG_PSE_MASK, 0x3fffffffff000ULL);
-                     }
-                 }
-             }
-@@ -203,7 +203,7 @@ static void tlb_info_la48(Monitor *mon, CPUArchState *env,
-     }
- }
- 
--static void tlb_info_la57(Monitor *mon, CPUArchState *env)
-+static void tlb_info_la57(GString *buf, CPUArchState *env)
- {
-     uint64_t l0;
-     uint64_t pml5e;
-@@ -214,44 +214,55 @@ static void tlb_info_la57(Monitor *mon, CPUArchState *env)
-         cpu_physical_memory_read(pml5_addr + l0 * 8, &pml5e, 8);
-         pml5e = le64_to_cpu(pml5e);
-         if (pml5e & PG_PRESENT_MASK) {
--            tlb_info_la48(mon, env, l0, pml5e & 0x3fffffffff000ULL);
-+            tlb_info_la48(buf, env, l0, pml5e & 0x3fffffffff000ULL);
+-    qemu_printf("%08x - %08x -> %08x - %08x %c ",
+-                logical, logical + size - 1,
+-                physical, physical + size - 1,
+-                attr & 4 ? 'W' : '-');
++    g_string_append_printf(buf, "%08x - %08x -> %08x - %08x %c ",
++                           logical, logical + size - 1,
++                           physical, physical + size - 1,
++                           attr & 4 ? 'W' : '-');
+     size >>= 10;
+     if (size < 1024) {
+-        qemu_printf("(%d KiB)\n", size);
++        g_string_append_printf(buf, "(%d KiB)\n", size);
+     } else {
+         size >>= 10;
+         if (size < 1024) {
+-            qemu_printf("(%d MiB)\n", size);
++            g_string_append_printf(buf, "(%d MiB)\n", size);
+         } else {
+             size >>= 10;
+-            qemu_printf("(%d GiB)\n", size);
++            g_string_append_printf(buf, "(%d GiB)\n", size);
          }
      }
  }
- #endif /* TARGET_X86_64 */
  
--void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-+void x86_cpu_format_tlb(CPUState *cpu, GString *buf)
+-static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
++static void dump_address_map(CPUM68KState *env, uint32_t root_pointer,
++                             GString *buf)
  {
-     CPUArchState *env;
+     int i, j, k;
+     int tic_size, tic_shift;
+@@ -573,7 +575,8 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
+                         size = last_logical + (1 << tic_shift) -
+                                first_logical;
+                         print_address_zone(first_logical,
+-                                           first_physical, size, last_attr);
++                                           first_physical, size, last_attr,
++                                           buf);
+                     }
+                     first_logical = logical;
+                     first_physical = physical;
+@@ -583,125 +586,130 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
+     }
+     if (first_logical != logical || (attr & 4) != (last_attr & 4)) {
+         size = logical + (1 << tic_shift) - first_logical;
+-        print_address_zone(first_logical, first_physical, size, last_attr);
++        print_address_zone(first_logical, first_physical, size, last_attr, buf);
+     }
+ }
  
--    env = mon_get_cpu_env(mon);
--    if (!env) {
--        monitor_printf(mon, "No CPU available\n");
--        return;
--    }
-+    env = cpu->env_ptr;
+ #define DUMP_CACHEFLAGS(a) \
+     switch (a & M68K_DESC_CACHEMODE) { \
+     case M68K_DESC_CM_WRTHRU: /* cachable, write-through */ \
+-        qemu_printf("T"); \
++        g_string_append_printf(buf, "T"); \
+         break; \
+     case M68K_DESC_CM_COPYBK: /* cachable, copyback */ \
+-        qemu_printf("C"); \
++        g_string_append_printf(buf, "C"); \
+         break; \
+     case M68K_DESC_CM_SERIAL: /* noncachable, serialized */ \
+-        qemu_printf("S"); \
++        g_string_append_printf(buf, "S"); \
+         break; \
+     case M68K_DESC_CM_NCACHE: /* noncachable */ \
+-        qemu_printf("N"); \
++        g_string_append_printf(buf, "N"); \
+         break; \
+     }
  
-     if (!(env->cr[0] & CR0_PG_MASK)) {
--        monitor_printf(mon, "PG disabled\n");
-+        g_string_append_printf(buf, "PG disabled\n");
+-static void dump_ttr(uint32_t ttr)
++static void dump_ttr(uint32_t ttr, GString *buf)
+ {
+     if ((ttr & M68K_TTR_ENABLED) == 0) {
+-        qemu_printf("disabled\n");
++        g_string_append_printf(buf, "disabled\n");
          return;
      }
-     if (env->cr[4] & CR4_PAE_MASK) {
- #ifdef TARGET_X86_64
-         if (env->hflags & HF_LMA_MASK) {
-             if (env->cr[4] & CR4_LA57_MASK) {
--                tlb_info_la57(mon, env);
-+                tlb_info_la57(buf, env);
-             } else {
--                tlb_info_la48(mon, env, 0, env->cr[3] & 0x3fffffffff000ULL);
-+                tlb_info_la48(buf, env, 0, env->cr[3] & 0x3fffffffff000ULL);
-             }
-         } else
- #endif
-         {
--            tlb_info_pae32(mon, env);
-+            tlb_info_pae32(buf, env);
-         }
-     } else {
--        tlb_info_32(mon, env);
-+        tlb_info_32(buf, env);
+-    qemu_printf("Base: 0x%08x Mask: 0x%08x Control: ",
+-                ttr & M68K_TTR_ADDR_BASE,
+-                (ttr & M68K_TTR_ADDR_MASK) << M68K_TTR_ADDR_MASK_SHIFT);
++    g_string_append_printf(buf, "Base: 0x%08x Mask: 0x%08x Control: ",
++                           ttr & M68K_TTR_ADDR_BASE,
++                           (ttr & M68K_TTR_ADDR_MASK) <<
++                           M68K_TTR_ADDR_MASK_SHIFT);
+     switch (ttr & M68K_TTR_SFIELD) {
+     case M68K_TTR_SFIELD_USER:
+-        qemu_printf("U");
++        g_string_append_printf(buf, "U");
+         break;
+     case M68K_TTR_SFIELD_SUPER:
+-        qemu_printf("S");
++        g_string_append_printf(buf, "S");
+         break;
+     default:
+-        qemu_printf("*");
++        g_string_append_printf(buf, "*");
+         break;
      }
+     DUMP_CACHEFLAGS(ttr);
+     if (ttr & M68K_DESC_WRITEPROT) {
+-        qemu_printf("R");
++        g_string_append_printf(buf, "R");
+     } else {
+-        qemu_printf("W");
++        g_string_append_printf(buf, "W");
+     }
+-    qemu_printf(" U: %d\n", (ttr & M68K_DESC_USERATTR) >>
+-                               M68K_DESC_USERATTR_SHIFT);
++    g_string_append_printf(buf, " U: %d\n", (ttr & M68K_DESC_USERATTR) >>
++                           M68K_DESC_USERATTR_SHIFT);
  }
  
-+void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-+{
+-void dump_mmu(CPUM68KState *env)
++
++void m68k_cpu_format_tlb(CPUState *cpu, GString *buf)
+ {
++    CPUM68KState *env = cpu->env_ptr;
++
+     if ((env->mmu.tcr & M68K_TCR_ENABLED) == 0) {
+-        qemu_printf("Translation disabled\n");
++        g_string_append_printf(buf, "Translation disabled\n");
+         return;
+     }
+-    qemu_printf("Page Size: ");
++    g_string_append_printf(buf, "Page Size: ");
+     if (env->mmu.tcr & M68K_TCR_PAGE_8K) {
+-        qemu_printf("8kB\n");
++        g_string_append_printf(buf, "8kB\n");
+     } else {
+-        qemu_printf("4kB\n");
++        g_string_append_printf(buf, "4kB\n");
+     }
+ 
+-    qemu_printf("MMUSR: ");
++    g_string_append_printf(buf, "MMUSR: ");
+     if (env->mmu.mmusr & M68K_MMU_B_040) {
+-        qemu_printf("BUS ERROR\n");
++        g_string_append_printf(buf, "BUS ERROR\n");
+     } else {
+-        qemu_printf("Phy=%08x Flags: ", env->mmu.mmusr & 0xfffff000);
++        g_string_append_printf(buf, "Phy=%08x Flags: ",
++                               env->mmu.mmusr & 0xfffff000);
+         /* flags found on the page descriptor */
+         if (env->mmu.mmusr & M68K_MMU_G_040) {
+-            qemu_printf("G"); /* Global */
++            g_string_append_printf(buf, "G"); /* Global */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+         if (env->mmu.mmusr & M68K_MMU_S_040) {
+-            qemu_printf("S"); /* Supervisor */
++            g_string_append_printf(buf, "S"); /* Supervisor */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+         if (env->mmu.mmusr & M68K_MMU_M_040) {
+-            qemu_printf("M"); /* Modified */
++            g_string_append_printf(buf, "M"); /* Modified */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+         if (env->mmu.mmusr & M68K_MMU_WP_040) {
+-            qemu_printf("W"); /* Write protect */
++            g_string_append_printf(buf, "W"); /* Write protect */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+         if (env->mmu.mmusr & M68K_MMU_T_040) {
+-            qemu_printf("T"); /* Transparent */
++            g_string_append_printf(buf, "T"); /* Transparent */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+         if (env->mmu.mmusr & M68K_MMU_R_040) {
+-            qemu_printf("R"); /* Resident */
++            g_string_append_printf(buf, "R"); /* Resident */
+         } else {
+-            qemu_printf(".");
++            g_string_append_printf(buf, ".");
+         }
+-        qemu_printf(" Cache: ");
++        g_string_append_printf(buf, " Cache: ");
+         DUMP_CACHEFLAGS(env->mmu.mmusr);
+-        qemu_printf(" U: %d\n", (env->mmu.mmusr >> 8) & 3);
+-        qemu_printf("\n");
++        g_string_append_printf(buf, " U: %d\n", (env->mmu.mmusr >> 8) & 3);
++        g_string_append_printf(buf, "\n");
+     }
+ 
+-    qemu_printf("ITTR0: ");
+-    dump_ttr(env->mmu.ttr[M68K_ITTR0]);
+-    qemu_printf("ITTR1: ");
+-    dump_ttr(env->mmu.ttr[M68K_ITTR1]);
+-    qemu_printf("DTTR0: ");
+-    dump_ttr(env->mmu.ttr[M68K_DTTR0]);
+-    qemu_printf("DTTR1: ");
+-    dump_ttr(env->mmu.ttr[M68K_DTTR1]);
++    g_string_append_printf(buf, "ITTR0: ");
++    dump_ttr(env->mmu.ttr[M68K_ITTR0], buf);
++    g_string_append_printf(buf, "ITTR1: ");
++    dump_ttr(env->mmu.ttr[M68K_ITTR1], buf);
++    g_string_append_printf(buf, "DTTR0: ");
++    dump_ttr(env->mmu.ttr[M68K_DTTR0], buf);
++    g_string_append_printf(buf, "DTTR1: ");
++    dump_ttr(env->mmu.ttr[M68K_DTTR1], buf);
+ 
+-    qemu_printf("SRP: 0x%08x\n", env->mmu.srp);
+-    dump_address_map(env, env->mmu.srp);
++    g_string_append_printf(buf, "SRP: 0x%08x\n", env->mmu.srp);
++    dump_address_map(env, env->mmu.srp, buf);
+ 
+-    qemu_printf("URP: 0x%08x\n", env->mmu.urp);
+-    dump_address_map(env, env->mmu.urp);
++    g_string_append_printf(buf, "URP: 0x%08x\n", env->mmu.urp);
++    dump_address_map(env, env->mmu.urp, buf);
+ }
+ 
+ static int check_TTR(uint32_t ttr, int *prot, target_ulong addr,
+diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
+index 2bdf6acae0..003a665246 100644
+--- a/target/m68k/monitor.c
++++ b/target/m68k/monitor.c
+@@ -9,17 +9,22 @@
+ #include "cpu.h"
+ #include "monitor/hmp-target.h"
+ #include "monitor/monitor.h"
++#include "qapi/error.h"
++#include "qapi/qapi-commands-machine-target.h"
+ 
+ void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+ {
+-    CPUArchState *env1 = mon_get_cpu_env(mon);
 +    g_autoptr(GString) buf = g_string_new("");
 +    CPUState *cpu = mon_get_cpu(mon);
-+
+ 
+-    if (!env1) {
 +    if (!cpu) {
-+        monitor_printf(mon, "No CPU available\n");
-+        return;
-+    }
-+
+         monitor_printf(mon, "No CPU available\n");
+         return;
+     }
+ 
+-    dump_mmu(env1);
 +    cpu_format_tlb(cpu, buf);
 +
 +    monitor_printf(mon, "%s", buf->str);
-+}
-+
- static void mem_print(Monitor *mon, CPUArchState *env,
-                       hwaddr *pstart, int *plast_prot,
-                       hwaddr end, int prot)
+ }
+ 
+ static const MonitorDef monitor_defs[] = {
 -- 
 2.31.1
 
