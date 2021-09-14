@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Lw-0004ky-H3
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:24:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35306)
+	id 1mQ9MB-0005al-M9
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:24:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35460)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Lu-0004e4-JX
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:53525)
+ id 1mQ9M9-0005U3-Ld
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:17 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:32246)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Lr-00054O-1l
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:02 -0400
+ id 1mQ9M7-0005Fn-Ve
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:17 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629438;
+ s=mimecast20190719; t=1631629455;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/ocCcBzbBdzil9FXe57cZVezF7Lyvm73oMJaNhuDio4=;
- b=R92HV/U91UpDUlCNLY3QmzjreDN9362QM9TuGDz2ewkNwgSwfHje7ZUah6rkDUfYGTtsdI
- Y5XoJlPYts93i93pzp9kPHop2Gi5evmJFPZ2s+TKY0D1/RFRaC/Q+YoVRyIrZCE0y0gvVB
- trp2/Ve5BZHzHabkZM/k8jdpEfwGi6I=
+ bh=tog67gS4drGXdUxWrkIWCLaJgHomsSxvNugMDYrI6tI=;
+ b=ehV8l/levd2Xht8eQkMyKYC4L9NhjzFLARMQItsv16jb+NWYOWZ9gdbrp8g50XVVUMY4Uy
+ LpT0VWYgeY9vflRchWk5IEy85gei+2WFwqXDhIpiZACHnn3TlD6RS6yGJ3ZMJmcfK0c2TX
+ 09CKzJ1xzvhUYRx5ovYOsfXmOmvF2vE=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-339-nOwsKEuIPtGuGn2e9YWnZw-1; Tue, 14 Sep 2021 10:23:57 -0400
-X-MC-Unique: nOwsKEuIPtGuGn2e9YWnZw-1
+ us-mta-397-A9bwwun7PU-maqSTdeQ_xw-1; Tue, 14 Sep 2021 10:23:12 -0400
+X-MC-Unique: A9bwwun7PU-maqSTdeQ_xw-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5172C801E72;
- Tue, 14 Sep 2021 14:23:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4729784A5E0;
+ Tue, 14 Sep 2021 14:23:08 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F20AA5D9CA;
- Tue, 14 Sep 2021 14:23:34 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0F14E5D9CA;
+ Tue, 14 Sep 2021 14:23:00 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 10/53] target/cris: convert to use format_state instead of
+Subject: [PATCH v2 07/53] target/alpha: convert to use format_state instead of
  dump_state
-Date: Tue, 14 Sep 2021 15:19:59 +0100
-Message-Id: <20210914142042.1655100-11-berrange@redhat.com>
+Date: Tue, 14 Sep 2021 15:19:56 +0100
+Message-Id: <20210914142042.1655100-8-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -103,111 +103,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:24:03 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:24:18 -0000
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/cris/cpu.c       |  2 +-
- target/cris/cpu.h       |  2 +-
- target/cris/translate.c | 33 +++++++++++++++++----------------
- 3 files changed, 19 insertions(+), 18 deletions(-)
+ target/alpha/cpu.c    |  2 +-
+ target/alpha/cpu.h    |  2 +-
+ target/alpha/helper.c | 28 ++++++++++++++++------------
+ 3 files changed, 18 insertions(+), 14 deletions(-)
 
-diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-index 70932b1f8c..5159cf6528 100644
---- a/target/cris/cpu.c
-+++ b/target/cris/cpu.c
-@@ -295,7 +295,7 @@ static void cris_cpu_class_init(ObjectClass *oc, void *data)
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 4871ad0c0a..d0cdda9554 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -239,7 +239,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
  
-     cc->class_by_name = cris_cpu_class_by_name;
-     cc->has_work = cris_cpu_has_work;
--    cc->dump_state = cris_cpu_dump_state;
-+    cc->format_state = cris_cpu_format_state;
-     cc->set_pc = cris_cpu_set_pc;
-     cc->gdb_read_register = cris_cpu_gdb_read_register;
-     cc->gdb_write_register = cris_cpu_gdb_write_register;
-diff --git a/target/cris/cpu.h b/target/cris/cpu.h
-index d3b6492909..908cb051da 100644
---- a/target/cris/cpu.h
-+++ b/target/cris/cpu.h
-@@ -191,7 +191,7 @@ void cris_cpu_do_interrupt(CPUState *cpu);
- void crisv10_cpu_do_interrupt(CPUState *cpu);
- bool cris_cpu_exec_interrupt(CPUState *cpu, int int_req);
+     cc->class_by_name = alpha_cpu_class_by_name;
+     cc->has_work = alpha_cpu_has_work;
+-    cc->dump_state = alpha_cpu_dump_state;
++    cc->format_state = alpha_cpu_format_state;
+     cc->set_pc = alpha_cpu_set_pc;
+     cc->gdb_read_register = alpha_cpu_gdb_read_register;
+     cc->gdb_write_register = alpha_cpu_gdb_write_register;
+diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
+index 82df108967..9e3c80ebcc 100644
+--- a/target/alpha/cpu.h
++++ b/target/alpha/cpu.h
+@@ -278,7 +278,7 @@ extern const VMStateDescription vmstate_alpha_cpu;
  
--void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags);
-+void cris_cpu_format_state(CPUState *cs, GString *buf, int flags);
- 
- hwaddr cris_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- 
-diff --git a/target/cris/translate.c b/target/cris/translate.c
-index a84b753349..6098693186 100644
---- a/target/cris/translate.c
-+++ b/target/cris/translate.c
-@@ -3307,7 +3307,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
-     translator_loop(&cris_tr_ops, &dc.base, cs, tb, max_insns);
+ void alpha_cpu_do_interrupt(CPUState *cpu);
+ bool alpha_cpu_exec_interrupt(CPUState *cpu, int int_req);
+-void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
++void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags);
+ hwaddr alpha_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+diff --git a/target/alpha/helper.c b/target/alpha/helper.c
+index 4f56fe4d23..6ed80e8a27 100644
+--- a/target/alpha/helper.c
++++ b/target/alpha/helper.c
+@@ -451,7 +451,7 @@ bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+     return false;
  }
  
--void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-+void cris_cpu_format_state(CPUState *cs, GString *buf, int flags)
+-void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags)
++void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags)
  {
-     CRISCPU *cpu = CRIS_CPU(cs);
-     CPUCRISState *env = &cpu->env;
-@@ -3326,40 +3326,41 @@ void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         regnames = regnames_v32;
+     static const char linux_reg_names[31][4] = {
+         "v0",  "t0",  "t1", "t2",  "t3", "t4", "t5", "t6",
+@@ -463,25 +463,29 @@ void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+     CPUAlphaState *env = &cpu->env;
+     int i;
+ 
+-    qemu_fprintf(f, "PC      " TARGET_FMT_lx " PS      %02x\n",
+-                 env->pc, extract32(env->flags, ENV_FLAG_PS_SHIFT, 8));
++    g_string_append_printf(buf,
++                           "PC      " TARGET_FMT_lx " PS      %02x\n",
++                           env->pc,
++                           extract32(env->flags, ENV_FLAG_PS_SHIFT, 8));
+     for (i = 0; i < 31; i++) {
+-        qemu_fprintf(f, "%-8s" TARGET_FMT_lx "%c",
+-                     linux_reg_names[i], cpu_alpha_load_gr(env, i),
+-                     (i % 3) == 2 ? '\n' : ' ');
++        g_string_append_printf(buf, "%-8s" TARGET_FMT_lx "%c",
++                               linux_reg_names[i], cpu_alpha_load_gr(env, i),
++                               (i % 3) == 2 ? '\n' : ' ');
      }
  
--    qemu_fprintf(f, "PC=%x CCS=%x btaken=%d btarget=%x\n"
--                 "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x cc_mask=%x\n",
--                 env->pc, env->pregs[PR_CCS], env->btaken, env->btarget,
--                 env->cc_op,
--                 env->cc_src, env->cc_dest, env->cc_result, env->cc_mask);
-+    g_string_append_printf(buf, "PC=%x CCS=%x btaken=%d btarget=%x\n"
-+                           "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x "
-+                           "cc_mask=%x\n",
-+                           env->pc, env->pregs[PR_CCS], env->btaken,
-+                           env->btarget, env->cc_op, env->cc_src,
-+                           env->cc_dest, env->cc_result, env->cc_mask);
+-    qemu_fprintf(f, "lock_a  " TARGET_FMT_lx " lock_v  " TARGET_FMT_lx "\n",
+-                 env->lock_addr, env->lock_value);
++    g_string_append_printf(buf, "lock_a  " TARGET_FMT_lx
++                           " lock_v  " TARGET_FMT_lx "\n",
++                           env->lock_addr, env->lock_value);
  
- 
-     for (i = 0; i < 16; i++) {
--        qemu_fprintf(f, "%s=%8.8x ", regnames[i], env->regs[i]);
-+        g_string_append_printf(buf, "%s=%8.8x ", regnames[i], env->regs[i]);
-         if ((i + 1) % 4 == 0) {
--            qemu_fprintf(f, "\n");
-+            g_string_append_printf(buf, "\n");
+     if (flags & CPU_DUMP_FPU) {
+         for (i = 0; i < 31; i++) {
+-            qemu_fprintf(f, "f%-7d%016" PRIx64 "%c", i, env->fir[i],
+-                         (i % 3) == 2 ? '\n' : ' ');
++            g_string_append_printf(buf, "f%-7d%016" PRIx64 "%c", i, env->fir[i],
++                                   (i % 3) == 2 ? '\n' : ' ');
          }
+-        qemu_fprintf(f, "fpcr    %016" PRIx64 "\n", cpu_alpha_load_fpcr(env));
++        g_string_append_printf(buf, "fpcr    %016" PRIx64 "\n",
++                               cpu_alpha_load_fpcr(env));
      }
--    qemu_fprintf(f, "\nspecial regs:\n");
-+    g_string_append_printf(buf, "\nspecial regs:\n");
-     for (i = 0; i < 16; i++) {
--        qemu_fprintf(f, "%s=%8.8x ", pregnames[i], env->pregs[i]);
-+        g_string_append_printf(buf, "%s=%8.8x ", pregnames[i], env->pregs[i]);
-         if ((i + 1) % 4 == 0) {
--            qemu_fprintf(f, "\n");
-+            g_string_append_printf(buf, "\n");
-         }
-     }
-     if (env->pregs[PR_VR] >= 32) {
-         uint32_t srs = env->pregs[PR_SRS];
--        qemu_fprintf(f, "\nsupport function regs bank %x:\n", srs);
-+        g_string_append_printf(buf, "\nsupport function regs bank %x:\n", srs);
-         if (srs < ARRAY_SIZE(env->sregs)) {
-             for (i = 0; i < 16; i++) {
--                qemu_fprintf(f, "s%2.2d=%8.8x ",
--                             i, env->sregs[srs][i]);
-+                g_string_append_printf(buf, "s%2.2d=%8.8x ",
-+                                       i, env->sregs[srs][i]);
-                 if ((i + 1) % 4 == 0) {
--                    qemu_fprintf(f, "\n");
-+                    g_string_append_printf(buf, "\n");
-                 }
-             }
-         }
-     }
--    qemu_fprintf(f, "\n\n");
-+    g_string_append_printf(buf, "\n\n");
- 
+-    qemu_fprintf(f, "\n");
++    g_string_append_printf(buf, "\n");
  }
  
+ /* This should only be called from translate, via gen_excp.
 -- 
 2.31.1
 
