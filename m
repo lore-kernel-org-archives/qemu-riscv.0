@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Le-0003iF-JF
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:23:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35158)
+	id 1mQ9Lw-0004ky-H3
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:24:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35306)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Lc-0003ZY-72
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:23:44 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:29404)
+ id 1mQ9Lu-0004e4-JX
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:53525)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9LY-0004qp-Bu
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:23:43 -0400
+ id 1mQ9Lr-00054O-1l
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:24:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629419;
+ s=mimecast20190719; t=1631629438;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HvKtDY8hvhL+Mhb7T4tthhDY0w2UGu81fBbKj8Ukk/M=;
- b=hbAL62AgzNnhVRYWC7yZrmVtLMTSYmgXTuNIJXm9oNp74Mo0kDQgHQ0R5CPDMtbOxNqd3k
- 3rpxUHC5FOAAqU3bVt6I1z03bVrNaIzBZHieK8P0hEHDkeEDJ8k6peLYgNQqeWWwZHputQ
- 2vUAXQFtJHwjkoelOYjKCrO8molzss4=
+ bh=/ocCcBzbBdzil9FXe57cZVezF7Lyvm73oMJaNhuDio4=;
+ b=R92HV/U91UpDUlCNLY3QmzjreDN9362QM9TuGDz2ewkNwgSwfHje7ZUah6rkDUfYGTtsdI
+ Y5XoJlPYts93i93pzp9kPHop2Gi5evmJFPZ2s+TKY0D1/RFRaC/Q+YoVRyIrZCE0y0gvVB
+ trp2/Ve5BZHzHabkZM/k8jdpEfwGi6I=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-305-6RGKKmbnPumDTWSfTJDAMA-1; Tue, 14 Sep 2021 10:23:38 -0400
-X-MC-Unique: 6RGKKmbnPumDTWSfTJDAMA-1
+ us-mta-339-nOwsKEuIPtGuGn2e9YWnZw-1; Tue, 14 Sep 2021 10:23:57 -0400
+X-MC-Unique: nOwsKEuIPtGuGn2e9YWnZw-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9BEE81084685;
- Tue, 14 Sep 2021 14:23:34 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5172C801E72;
+ Tue, 14 Sep 2021 14:23:53 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 535C05D9CA;
- Tue, 14 Sep 2021 14:23:27 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F20AA5D9CA;
+ Tue, 14 Sep 2021 14:23:34 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 09/53] target/avr: convert to use format_state instead of
+Subject: [PATCH v2 10/53] target/cris: convert to use format_state instead of
  dump_state
-Date: Tue, 14 Sep 2021 15:19:58 +0100
-Message-Id: <20210914142042.1655100-10-berrange@redhat.com>
+Date: Tue, 14 Sep 2021 15:19:59 +0100
+Message-Id: <20210914142042.1655100-11-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -103,98 +103,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:23:44 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:24:03 -0000
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/avr/cpu.c | 57 ++++++++++++++++++++++++------------------------
- 1 file changed, 29 insertions(+), 28 deletions(-)
+ target/cris/cpu.c       |  2 +-
+ target/cris/cpu.h       |  2 +-
+ target/cris/translate.c | 33 +++++++++++++++++----------------
+ 3 files changed, 19 insertions(+), 18 deletions(-)
 
-diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-index ea14175ca5..17ff21f8be 100644
---- a/target/avr/cpu.c
-+++ b/target/avr/cpu.c
-@@ -145,43 +145,44 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
-     return oc;
+diff --git a/target/cris/cpu.c b/target/cris/cpu.c
+index 70932b1f8c..5159cf6528 100644
+--- a/target/cris/cpu.c
++++ b/target/cris/cpu.c
+@@ -295,7 +295,7 @@ static void cris_cpu_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = cris_cpu_class_by_name;
+     cc->has_work = cris_cpu_has_work;
+-    cc->dump_state = cris_cpu_dump_state;
++    cc->format_state = cris_cpu_format_state;
+     cc->set_pc = cris_cpu_set_pc;
+     cc->gdb_read_register = cris_cpu_gdb_read_register;
+     cc->gdb_write_register = cris_cpu_gdb_write_register;
+diff --git a/target/cris/cpu.h b/target/cris/cpu.h
+index d3b6492909..908cb051da 100644
+--- a/target/cris/cpu.h
++++ b/target/cris/cpu.h
+@@ -191,7 +191,7 @@ void cris_cpu_do_interrupt(CPUState *cpu);
+ void crisv10_cpu_do_interrupt(CPUState *cpu);
+ bool cris_cpu_exec_interrupt(CPUState *cpu, int int_req);
+ 
+-void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags);
++void cris_cpu_format_state(CPUState *cs, GString *buf, int flags);
+ 
+ hwaddr cris_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ 
+diff --git a/target/cris/translate.c b/target/cris/translate.c
+index a84b753349..6098693186 100644
+--- a/target/cris/translate.c
++++ b/target/cris/translate.c
+@@ -3307,7 +3307,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
+     translator_loop(&cris_tr_ops, &dc.base, cs, tb, max_insns);
  }
  
--static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-+static void avr_cpu_format_state(CPUState *cs, GString *buf, int flags)
+-void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
++void cris_cpu_format_state(CPUState *cs, GString *buf, int flags)
  {
-     AVRCPU *cpu = AVR_CPU(cs);
-     CPUAVRState *env = &cpu->env;
-     int i;
+     CRISCPU *cpu = CRIS_CPU(cs);
+     CPUCRISState *env = &cpu->env;
+@@ -3326,40 +3326,41 @@ void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+         regnames = regnames_v32;
+     }
  
--    qemu_fprintf(f, "\n");
--    qemu_fprintf(f, "PC:    %06x\n", env->pc_w * 2); /* PC points to words */
--    qemu_fprintf(f, "SP:      %04x\n", env->sp);
--    qemu_fprintf(f, "rampD:     %02x\n", env->rampD >> 16);
--    qemu_fprintf(f, "rampX:     %02x\n", env->rampX >> 16);
--    qemu_fprintf(f, "rampY:     %02x\n", env->rampY >> 16);
--    qemu_fprintf(f, "rampZ:     %02x\n", env->rampZ >> 16);
--    qemu_fprintf(f, "EIND:      %02x\n", env->eind >> 16);
--    qemu_fprintf(f, "X:       %02x%02x\n", env->r[27], env->r[26]);
--    qemu_fprintf(f, "Y:       %02x%02x\n", env->r[29], env->r[28]);
--    qemu_fprintf(f, "Z:       %02x%02x\n", env->r[31], env->r[30]);
--    qemu_fprintf(f, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
--                 env->sregI ? 'I' : '-',
--                 env->sregT ? 'T' : '-',
--                 env->sregH ? 'H' : '-',
--                 env->sregS ? 'S' : '-',
--                 env->sregV ? 'V' : '-',
--                 env->sregN ? '-' : 'N', /* Zf has negative logic */
--                 env->sregZ ? 'Z' : '-',
--                 env->sregC ? 'I' : '-');
--    qemu_fprintf(f, "SKIP:    %02x\n", env->skip);
--
--    qemu_fprintf(f, "\n");
-+    g_string_append_printf(buf, "\n");
-+    /* PC points to words */
-+    g_string_append_printf(buf, "PC:    %06x\n", env->pc_w * 2);
-+    g_string_append_printf(buf, "SP:      %04x\n", env->sp);
-+    g_string_append_printf(buf, "rampD:     %02x\n", env->rampD >> 16);
-+    g_string_append_printf(buf, "rampX:     %02x\n", env->rampX >> 16);
-+    g_string_append_printf(buf, "rampY:     %02x\n", env->rampY >> 16);
-+    g_string_append_printf(buf, "rampZ:     %02x\n", env->rampZ >> 16);
-+    g_string_append_printf(buf, "EIND:      %02x\n", env->eind >> 16);
-+    g_string_append_printf(buf, "X:       %02x%02x\n", env->r[27], env->r[26]);
-+    g_string_append_printf(buf, "Y:       %02x%02x\n", env->r[29], env->r[28]);
-+    g_string_append_printf(buf, "Z:       %02x%02x\n", env->r[31], env->r[30]);
-+    g_string_append_printf(buf, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
-+                           env->sregI ? 'I' : '-',
-+                           env->sregT ? 'T' : '-',
-+                           env->sregH ? 'H' : '-',
-+                           env->sregS ? 'S' : '-',
-+                           env->sregV ? 'V' : '-',
-+                           env->sregN ? '-' : 'N', /* Zf has negative logic */
-+                           env->sregZ ? 'Z' : '-',
-+                           env->sregC ? 'I' : '-');
-+    g_string_append_printf(buf, "SKIP:    %02x\n", env->skip);
-+
-+    g_string_append_printf(buf, "\n");
-     for (i = 0; i < ARRAY_SIZE(env->r); i++) {
--        qemu_fprintf(f, "R[%02d]:  %02x   ", i, env->r[i]);
-+        g_string_append_printf(buf, "R[%02d]:  %02x   ", i, env->r[i]);
+-    qemu_fprintf(f, "PC=%x CCS=%x btaken=%d btarget=%x\n"
+-                 "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x cc_mask=%x\n",
+-                 env->pc, env->pregs[PR_CCS], env->btaken, env->btarget,
+-                 env->cc_op,
+-                 env->cc_src, env->cc_dest, env->cc_result, env->cc_mask);
++    g_string_append_printf(buf, "PC=%x CCS=%x btaken=%d btarget=%x\n"
++                           "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x "
++                           "cc_mask=%x\n",
++                           env->pc, env->pregs[PR_CCS], env->btaken,
++                           env->btarget, env->cc_op, env->cc_src,
++                           env->cc_dest, env->cc_result, env->cc_mask);
  
-         if ((i % 8) == 7) {
+ 
+     for (i = 0; i < 16; i++) {
+-        qemu_fprintf(f, "%s=%8.8x ", regnames[i], env->regs[i]);
++        g_string_append_printf(buf, "%s=%8.8x ", regnames[i], env->regs[i]);
+         if ((i + 1) % 4 == 0) {
 -            qemu_fprintf(f, "\n");
 +            g_string_append_printf(buf, "\n");
          }
      }
--    qemu_fprintf(f, "\n");
-+    g_string_append_printf(buf, "\n");
+-    qemu_fprintf(f, "\nspecial regs:\n");
++    g_string_append_printf(buf, "\nspecial regs:\n");
+     for (i = 0; i < 16; i++) {
+-        qemu_fprintf(f, "%s=%8.8x ", pregnames[i], env->pregs[i]);
++        g_string_append_printf(buf, "%s=%8.8x ", pregnames[i], env->pregs[i]);
+         if ((i + 1) % 4 == 0) {
+-            qemu_fprintf(f, "\n");
++            g_string_append_printf(buf, "\n");
+         }
+     }
+     if (env->pregs[PR_VR] >= 32) {
+         uint32_t srs = env->pregs[PR_SRS];
+-        qemu_fprintf(f, "\nsupport function regs bank %x:\n", srs);
++        g_string_append_printf(buf, "\nsupport function regs bank %x:\n", srs);
+         if (srs < ARRAY_SIZE(env->sregs)) {
+             for (i = 0; i < 16; i++) {
+-                qemu_fprintf(f, "s%2.2d=%8.8x ",
+-                             i, env->sregs[srs][i]);
++                g_string_append_printf(buf, "s%2.2d=%8.8x ",
++                                       i, env->sregs[srs][i]);
+                 if ((i + 1) % 4 == 0) {
+-                    qemu_fprintf(f, "\n");
++                    g_string_append_printf(buf, "\n");
+                 }
+             }
+         }
+     }
+-    qemu_fprintf(f, "\n\n");
++    g_string_append_printf(buf, "\n\n");
+ 
  }
  
- #include "hw/core/sysemu-cpu-ops.h"
-@@ -215,7 +216,7 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
-     cc->class_by_name = avr_cpu_class_by_name;
- 
-     cc->has_work = avr_cpu_has_work;
--    cc->dump_state = avr_cpu_dump_state;
-+    cc->format_state = avr_cpu_format_state;
-     cc->set_pc = avr_cpu_set_pc;
-     cc->memory_rw_debug = avr_cpu_memory_rw_debug;
-     dc->vmsd = &vms_avr_cpu;
 -- 
 2.31.1
 
