@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Wu-0005kN-Sz
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:35:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42232)
+	id 1mQ9XP-0006R6-26
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:35:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42566)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Ws-0005dX-PQ
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:23 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44071)
+ id 1mQ9XH-0006Md-5y
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:48 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:30961)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Wq-0004ix-1Y
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:22 -0400
+ id 1mQ9XC-0004zE-JT
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631630119;
+ s=mimecast20190719; t=1631630141;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rB6piZ9LgrjrkZJSg8goTT4uIcuL7G9qxeyUG5U6r7c=;
- b=P0/FXrdWBtzqDfPF9mwULR+oeEbtcv8caATnFzPYzQ1xs8uQM3A1AWvT4sjuxdDguAddHk
- spYY2vR3tWOqS8mkKkqLqf6dXZIT1zNnuQA0esC602/7OdQ1rZ4oLgB0jfEs0TF901hB/H
- oGowWx77UsEJEwb4y2JqmGHCBv+O3z4=
+ bh=iNQqtlu9cXciZ4eC5qFV8TN1URWtj6rpxIYVyS3g23o=;
+ b=TqOqhtfbbcPYGDHo8IcAohf+ca1nxFsetxIGIKVK2tDos/CGSALwBCRR3+fjbQBQJFC8vm
+ Pgqk/udsGC26bcl2VQW4dQK3u5MhKWah3TE1liKS7qmWaAKxOdlVEZ05wGqlhTTboGarZZ
+ 8JEck+9PeSuelZQhgQoTX9CtHsDe/y4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-113-g2SglZttN3mZfmf5T0k0wg-1; Tue, 14 Sep 2021 10:35:18 -0400
-X-MC-Unique: g2SglZttN3mZfmf5T0k0wg-1
+ us-mta-177-fIpnYYj7NZ-ipA9555vE7g-1; Tue, 14 Sep 2021 10:35:40 -0400
+X-MC-Unique: fIpnYYj7NZ-ipA9555vE7g-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 695FA824FA7;
- Tue, 14 Sep 2021 14:35:14 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0EC2B800FF4;
+ Tue, 14 Sep 2021 14:35:36 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id CB3CA5D9CA;
- Tue, 14 Sep 2021 14:34:53 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B6E105D9CA;
+ Tue, 14 Sep 2021 14:35:14 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 48/53] target/sparc: convert to use format_tlb callback
-Date: Tue, 14 Sep 2021 15:20:37 +0100
-Message-Id: <20210914142042.1655100-49-berrange@redhat.com>
+Subject: [PATCH v2 49/53] target/xtensa: convert to use format_tlb callback
+Date: Tue, 14 Sep 2021 15:20:38 +0100
+Message-Id: <20210914142042.1655100-50-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -102,123 +102,224 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:35:23 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:35:49 -0000
 
 Change the "info tlb" implementation to use the format_tlb callback.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/sparc/cpu.c        |  1 +
- target/sparc/cpu.h        |  1 +
- target/sparc/mmu_helper.c | 43 ++++++++++++++++++++++++---------------
- target/sparc/monitor.c    | 10 ++++++---
- 4 files changed, 36 insertions(+), 19 deletions(-)
+ target/xtensa/cpu.h        |   2 +-
+ target/xtensa/mmu_helper.c | 126 +++++++++++++++++++++----------------
+ target/xtensa/monitor.c    |  10 ++-
+ 3 files changed, 79 insertions(+), 59 deletions(-)
 
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index 9346a79239..f78ddc72b5 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -898,6 +898,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
-     cc->has_work = sparc_cpu_has_work;
-     cc->format_state = sparc_cpu_format_state;
- #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
-+    cc->format_tlb = sparc_cpu_format_tlb;
-     cc->memory_rw_debug = sparc_cpu_memory_rw_debug;
- #endif
-     cc->set_pc = sparc_cpu_set_pc;
-diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-index 65a01a7884..233f0b3eb7 100644
---- a/target/sparc/cpu.h
-+++ b/target/sparc/cpu.h
-@@ -572,6 +572,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
+diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
+index 97cd6892df..8c82994826 100644
+--- a/target/xtensa/cpu.h
++++ b/target/xtensa/cpu.h
+@@ -573,6 +573,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
+                                       int mmu_idx, MemTxAttrs attrs,
+                                       MemTxResult response, uintptr_t retaddr);
+ void xtensa_cpu_format_state(CPUState *cpu, GString *buf, int flags);
++void xtensa_cpu_format_tlb(CPUState *cpu, GString *buf);
+ hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ void xtensa_count_regs(const XtensaConfig *config,
+                        unsigned *n_regs, unsigned *n_core_regs);
+@@ -678,7 +679,6 @@ int xtensa_get_physical_addr(CPUXtensaState *env, bool update_tlb,
+         uint32_t vaddr, int is_write, int mmu_idx,
+         uint32_t *paddr, uint32_t *page_size, unsigned *access);
+ void reset_mmu(CPUXtensaState *env);
+-void dump_mmu(CPUXtensaState *env);
  
- void sparc_cpu_do_interrupt(CPUState *cpu);
- void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
-+void sparc_cpu_format_tlb(CPUState *cpu, GString *buf);
- hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-index a44473a1c7..06b16aca6a 100644
---- a/target/sparc/mmu_helper.c
-+++ b/target/sparc/mmu_helper.c
-@@ -371,37 +371,39 @@ target_ulong mmu_probe(CPUSPARCState *env, target_ulong address, int mmulev)
-     return 0;
- }
- 
--void dump_mmu(CPUSPARCState *env)
-+void sparc_cpu_format_tlb(CPUState *cpu, GString *buf)
+ static inline MemoryRegion *xtensa_get_er_region(CPUXtensaState *env)
  {
--    CPUState *cs = env_cpu(env);
-+    CPUSPARCState *env = cpu->env_ptr;
-     target_ulong va, va1, va2;
-     unsigned int n, m, o;
-     hwaddr pa;
-     uint32_t pde;
- 
--    qemu_printf("Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
--                (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
-+    g_string_append_printf(buf, "Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
-+                           (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
-     for (n = 0, va = 0; n < 256; n++, va += 16 * 1024 * 1024) {
-         pde = mmu_probe(env, va, 2);
-         if (pde) {
--            pa = cpu_get_phys_page_debug(cs, va);
--            qemu_printf("VA: " TARGET_FMT_lx ", PA: " TARGET_FMT_plx
--                        " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
-+            pa = cpu_get_phys_page_debug(cpu, va);
-+            g_string_append_printf(buf, "VA: " TARGET_FMT_lx
-+                                   ", PA: " TARGET_FMT_plx
-+                                   " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
-             for (m = 0, va1 = va; m < 64; m++, va1 += 256 * 1024) {
-                 pde = mmu_probe(env, va1, 1);
-                 if (pde) {
--                    pa = cpu_get_phys_page_debug(cs, va1);
--                    qemu_printf(" VA: " TARGET_FMT_lx ", PA: "
--                                TARGET_FMT_plx " PDE: " TARGET_FMT_lx "\n",
--                                va1, pa, pde);
-+                    pa = cpu_get_phys_page_debug(cpu, va1);
-+                    g_string_append_printf(buf, " VA: " TARGET_FMT_lx
-+                                           ", PA: " TARGET_FMT_plx
-+                                           " PDE: " TARGET_FMT_lx "\n",
-+                                           va1, pa, pde);
-                     for (o = 0, va2 = va1; o < 64; o++, va2 += 4 * 1024) {
-                         pde = mmu_probe(env, va2, 0);
-                         if (pde) {
--                            pa = cpu_get_phys_page_debug(cs, va2);
--                            qemu_printf("  VA: " TARGET_FMT_lx ", PA: "
--                                        TARGET_FMT_plx " PTE: "
--                                        TARGET_FMT_lx "\n",
--                                        va2, pa, pde);
-+                            pa = cpu_get_phys_page_debug(cpu, va2);
-+                            g_string_append_printf(buf, "  VA: " TARGET_FMT_lx
-+                                                   ", PA: " TARGET_FMT_plx
-+                                                   " PTE: " TARGET_FMT_lx "\n",
-+                                                   va2, pa, pde);
-                         }
-                     }
-                 }
-@@ -410,6 +412,15 @@ void dump_mmu(CPUSPARCState *env)
+diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
+index b01ff9399a..d499255984 100644
+--- a/target/xtensa/mmu_helper.c
++++ b/target/xtensa/mmu_helper.c
+@@ -1055,7 +1055,7 @@ int xtensa_get_physical_addr(CPUXtensaState *env, bool update_tlb,
      }
  }
  
-+void dump_mmu(CPUSPARCState *env)
-+{
-+    CPUState *cs = env_cpu(env);
-+    g_autoptr(GString) buf = g_string_new("");
+-static void dump_tlb(CPUXtensaState *env, bool dtlb)
++static void dump_tlb(CPUXtensaState *env, bool dtlb, GString *buf)
+ {
+     unsigned wi, ei;
+     const xtensa_tlb *conf =
+@@ -1094,34 +1094,40 @@ static void dump_tlb(CPUXtensaState *env, bool dtlb)
+ 
+                 if (print_header) {
+                     print_header = false;
+-                    qemu_printf("Way %u (%d %s)\n", wi, sz, sz_text);
+-                    qemu_printf("\tVaddr       Paddr       ASID  Attr RWX Cache\n"
+-                                "\t----------  ----------  ----  ---- --- -------\n");
++                    g_string_append_printf(buf, "Way %u (%d %s)\n",
++                                           wi, sz, sz_text);
++                    g_string_append_printf(buf, "\tVaddr       Paddr       "
++                                           "ASID  Attr RWX Cache\n"
++                                           "\t----------  ----------  ----  "
++                                           "---- --- -------\n");
+                 }
+-                qemu_printf("\t0x%08x  0x%08x  0x%02x  0x%02x %c%c%c %-7s\n",
+-                            entry->vaddr,
+-                            entry->paddr,
+-                            entry->asid,
+-                            entry->attr,
+-                            (access & PAGE_READ) ? 'R' : '-',
+-                            (access & PAGE_WRITE) ? 'W' : '-',
+-                            (access & PAGE_EXEC) ? 'X' : '-',
+-                            cache_text[cache_idx] ?
+-                            cache_text[cache_idx] : "Invalid");
++                g_string_append_printf(buf, "\t0x%08x  0x%08x  0x%02x  "
++                                       "0x%02x %c%c%c %-7s\n",
++                                       entry->vaddr,
++                                       entry->paddr,
++                                       entry->asid,
++                                       entry->attr,
++                                       (access & PAGE_READ) ? 'R' : '-',
++                                       (access & PAGE_WRITE) ? 'W' : '-',
++                                       (access & PAGE_EXEC) ? 'X' : '-',
++                                       cache_text[cache_idx] ?
++                                       cache_text[cache_idx] : "Invalid");
+             }
+         }
+     }
+ }
+ 
+ static void dump_mpu(CPUXtensaState *env,
+-                     const xtensa_mpu_entry *entry, unsigned n)
++                     const xtensa_mpu_entry *entry, unsigned n, GString *buf)
+ {
+     unsigned i;
+ 
+-    qemu_printf("\t%s  Vaddr       Attr        Ring0  Ring1  System Type    CPU cache\n"
+-                "\t%s  ----------  ----------  -----  -----  -------------  ---------\n",
+-                env ? "En" : "  ",
+-                env ? "--" : "  ");
++    g_string_append_printf(buf, "\t%s  Vaddr       Attr        "
++                           "Ring0  Ring1  System Type    CPU cache\n"
++                           "\t%s  ----------  ----------  -----  -----  "
++                           "-------------  ---------\n",
++                           env ? "En" : "  ",
++                           env ? "--" : "  ");
+ 
+     for (i = 0; i < n; ++i) {
+         uint32_t attr = entry[i].attr;
+@@ -1130,63 +1136,73 @@ static void dump_mpu(CPUXtensaState *env,
+         unsigned type = mpu_attr_to_type(attr);
+         char cpu_cache = (type & XTENSA_MPU_TYPE_CPU_CACHE) ? '-' : ' ';
+ 
+-        qemu_printf("\t %c  0x%08x  0x%08x   %c%c%c    %c%c%c   ",
+-                    env ?
+-                    ((env->sregs[MPUENB] & (1u << i)) ? '+' : '-') : ' ',
+-                    entry[i].vaddr, attr,
+-                    (access0 & PAGE_READ) ? 'R' : '-',
+-                    (access0 & PAGE_WRITE) ? 'W' : '-',
+-                    (access0 & PAGE_EXEC) ? 'X' : '-',
+-                    (access1 & PAGE_READ) ? 'R' : '-',
+-                    (access1 & PAGE_WRITE) ? 'W' : '-',
+-                    (access1 & PAGE_EXEC) ? 'X' : '-');
++        g_string_append_printf(buf, "\t %c  0x%08x  0x%08x   "
++                               "%c%c%c    %c%c%c   ",
++                               env ? ((env->sregs[MPUENB] & (1u << i)) ?
++                                      '+' : '-') : ' ',
++                               entry[i].vaddr, attr,
++                               (access0 & PAGE_READ) ? 'R' : '-',
++                               (access0 & PAGE_WRITE) ? 'W' : '-',
++                               (access0 & PAGE_EXEC) ? 'X' : '-',
++                               (access1 & PAGE_READ) ? 'R' : '-',
++                               (access1 & PAGE_WRITE) ? 'W' : '-',
++                               (access1 & PAGE_EXEC) ? 'X' : '-');
+ 
+         switch (type & XTENSA_MPU_SYSTEM_TYPE_MASK) {
+         case XTENSA_MPU_SYSTEM_TYPE_DEVICE:
+-            qemu_printf("Device %cB %3s\n",
+-                        (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
+-                        (type & XTENSA_MPU_TYPE_INT) ? "int" : "");
++            g_string_append_printf(buf, "Device %cB %3s\n",
++                                   (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
++                                   (type & XTENSA_MPU_TYPE_INT) ? "int" : "");
+             break;
+         case XTENSA_MPU_SYSTEM_TYPE_NC:
+-            qemu_printf("Sys NC %cB      %c%c%c\n",
+-                        (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
+-                        (type & XTENSA_MPU_TYPE_CPU_R) ? 'r' : cpu_cache,
+-                        (type & XTENSA_MPU_TYPE_CPU_W) ? 'w' : cpu_cache,
+-                        (type & XTENSA_MPU_TYPE_CPU_C) ? 'c' : cpu_cache);
++            g_string_append_printf(buf, "Sys NC %cB      %c%c%c\n",
++                                   (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
++                                   (type & XTENSA_MPU_TYPE_CPU_R) ?
++                                   'r' : cpu_cache,
++                                   (type & XTENSA_MPU_TYPE_CPU_W) ?
++                                   'w' : cpu_cache,
++                                   (type & XTENSA_MPU_TYPE_CPU_C) ?
++                                   'c' : cpu_cache);
+             break;
+         case XTENSA_MPU_SYSTEM_TYPE_C:
+-            qemu_printf("Sys  C %c%c%c     %c%c%c\n",
+-                        (type & XTENSA_MPU_TYPE_SYS_R) ? 'R' : '-',
+-                        (type & XTENSA_MPU_TYPE_SYS_W) ? 'W' : '-',
+-                        (type & XTENSA_MPU_TYPE_SYS_C) ? 'C' : '-',
+-                        (type & XTENSA_MPU_TYPE_CPU_R) ? 'r' : cpu_cache,
+-                        (type & XTENSA_MPU_TYPE_CPU_W) ? 'w' : cpu_cache,
+-                        (type & XTENSA_MPU_TYPE_CPU_C) ? 'c' : cpu_cache);
++            g_string_append_printf(buf, "Sys  C %c%c%c     %c%c%c\n",
++                                   (type & XTENSA_MPU_TYPE_SYS_R) ? 'R' : '-',
++                                   (type & XTENSA_MPU_TYPE_SYS_W) ? 'W' : '-',
++                                   (type & XTENSA_MPU_TYPE_SYS_C) ? 'C' : '-',
++                                   (type & XTENSA_MPU_TYPE_CPU_R) ?
++                                   'r' : cpu_cache,
++                                   (type & XTENSA_MPU_TYPE_CPU_W) ?
++                                   'w' : cpu_cache,
++                                   (type & XTENSA_MPU_TYPE_CPU_C) ?
++                                   'c' : cpu_cache);
+             break;
+         default:
+-            qemu_printf("Unknown\n");
++            g_string_append_printf(buf, "Unknown\n");
+             break;
+         }
+     }
+ }
+ 
+-void dump_mmu(CPUXtensaState *env)
++void xtensa_cpu_format_tlb(CPUState *cpu, GString *buf)
+ {
++    CPUXtensaState *env = cpu->env_ptr;
 +
-+    sparc_cpu_format_tlb(cs, buf);
-+    qemu_printf("%s", buf->str);
-+}
-+
- /* Gdb expects all registers windows to be flushed in ram. This function handles
-  * reads (and only reads) in stack frames as if windows were flushed. We assume
-  * that the sparc ABI is followed.
-diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
-index 318413686a..cc7fe74e3e 100644
---- a/target/sparc/monitor.c
-+++ b/target/sparc/monitor.c
-@@ -30,13 +30,17 @@
+     if (xtensa_option_bits_enabled(env->config,
+                 XTENSA_OPTION_BIT(XTENSA_OPTION_REGION_PROTECTION) |
+                 XTENSA_OPTION_BIT(XTENSA_OPTION_REGION_TRANSLATION) |
+                 XTENSA_OPTION_BIT(XTENSA_OPTION_MMU))) {
+ 
+-        qemu_printf("ITLB:\n");
+-        dump_tlb(env, false);
+-        qemu_printf("\nDTLB:\n");
+-        dump_tlb(env, true);
++        g_string_append_printf(buf, "ITLB:\n");
++        dump_tlb(env, false, buf);
++        g_string_append_printf(buf, "\nDTLB:\n");
++        dump_tlb(env, true, buf);
+     } else if (xtensa_option_enabled(env->config, XTENSA_OPTION_MPU)) {
+-        qemu_printf("Foreground map:\n");
+-        dump_mpu(env, env->mpu_fg, env->config->n_mpu_fg_segments);
+-        qemu_printf("\nBackground map:\n");
+-        dump_mpu(NULL, env->config->mpu_bg, env->config->n_mpu_bg_segments);
++        g_string_append_printf(buf, "Foreground map:\n");
++        dump_mpu(env, env->mpu_fg, env->config->n_mpu_fg_segments, buf);
++        g_string_append_printf(buf, "\nBackground map:\n");
++        dump_mpu(NULL, env->config->mpu_bg,
++                 env->config->n_mpu_bg_segments, buf);
+     } else {
+-        qemu_printf("No TLB for this CPU core\n");
++        g_string_append_printf(buf, "No TLB for this CPU core\n");
+     }
+ }
+diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
+index fbf60d5553..99d35e8ef1 100644
+--- a/target/xtensa/monitor.c
++++ b/target/xtensa/monitor.c
+@@ -29,11 +29,15 @@
  
  void hmp_info_tlb(Monitor *mon, const QDict *qdict)
  {
@@ -237,8 +338,6 @@ index 318413686a..cc7fe74e3e 100644
 +
 +    monitor_printf(mon, "%s", buf->str);
  }
- 
- #ifndef TARGET_SPARC64
 -- 
 2.31.1
 
