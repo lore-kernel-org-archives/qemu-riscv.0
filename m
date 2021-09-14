@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9XP-0006R6-26
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:35:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42566)
+	id 1mQ9Xf-0006fO-62
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:36:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9XH-0006Md-5y
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:48 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:30961)
+ id 1mQ9Xa-0006X5-Iy
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:36:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:38169)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9XC-0004zE-JT
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:45 -0400
+ id 1mQ9XX-0005IS-IL
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:36:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631630141;
+ s=mimecast20190719; t=1631630162;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iNQqtlu9cXciZ4eC5qFV8TN1URWtj6rpxIYVyS3g23o=;
- b=TqOqhtfbbcPYGDHo8IcAohf+ca1nxFsetxIGIKVK2tDos/CGSALwBCRR3+fjbQBQJFC8vm
- Pgqk/udsGC26bcl2VQW4dQK3u5MhKWah3TE1liKS7qmWaAKxOdlVEZ05wGqlhTTboGarZZ
- 8JEck+9PeSuelZQhgQoTX9CtHsDe/y4=
+ bh=N1wcruW+g3FbhxuBTmshlgas1GP2gbIYSddshDcwvVw=;
+ b=exv4JG3huLeEF/ZNBsJQ//WTnAYxMX/kuh3tBe/sfWoNvD+7Ww87VSMJJtkoi53/o+99u5
+ 2bab/P8DsFWYXloDmkZn0Oz+UMuACJqW2UhFAs/rakomTPU1txQJeYsH4DpyRZF43GA92s
+ HCojHd1IT+YGdiNie/Ci5UDmPrMm6BU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-177-fIpnYYj7NZ-ipA9555vE7g-1; Tue, 14 Sep 2021 10:35:40 -0400
-X-MC-Unique: fIpnYYj7NZ-ipA9555vE7g-1
+ us-mta-573-0IulxTMMNcWSB60ECpszPA-1; Tue, 14 Sep 2021 10:36:01 -0400
+X-MC-Unique: 0IulxTMMNcWSB60ECpszPA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0EC2B800FF4;
- Tue, 14 Sep 2021 14:35:36 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1F3D1180830C;
+ Tue, 14 Sep 2021 14:35:57 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B6E105D9CA;
- Tue, 14 Sep 2021 14:35:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5970C5D9CA;
+ Tue, 14 Sep 2021 14:35:36 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 49/53] target/xtensa: convert to use format_tlb callback
-Date: Tue, 14 Sep 2021 15:20:38 +0100
-Message-Id: <20210914142042.1655100-50-berrange@redhat.com>
+Subject: [PATCH v2 50/53] monitor: merge duplicate "info tlb" handlers
+Date: Tue, 14 Sep 2021 15:20:39 +0100
+Message-Id: <20210914142042.1655100-51-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -89,7 +89,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -102,242 +102,259 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:35:49 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:36:07 -0000
 
-Change the "info tlb" implementation to use the format_tlb callback.
+Now that all target architectures are converted to use the "format_tlb"
+callback, we can merge all the duplicate "info tlb" handlers into one
+and remove the architecture condition on the command.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/xtensa/cpu.h        |   2 +-
- target/xtensa/mmu_helper.c | 126 +++++++++++++++++++++----------------
- target/xtensa/monitor.c    |  10 ++-
- 3 files changed, 79 insertions(+), 59 deletions(-)
+ hmp-commands-info.hx         |  3 ---
+ include/monitor/hmp-target.h |  1 -
+ monitor/misc.c               | 15 +++++++++++++++
+ target/i386/monitor.c        | 15 ---------------
+ target/m68k/monitor.c        | 15 ---------------
+ target/nios2/monitor.c       | 15 ---------------
+ target/ppc/monitor.c         | 15 ---------------
+ target/sh4/monitor.c         | 15 ---------------
+ target/sparc/monitor.c       | 16 ----------------
+ target/xtensa/monitor.c      | 15 ---------------
+ 10 files changed, 15 insertions(+), 110 deletions(-)
 
-diff --git a/target/xtensa/cpu.h b/target/xtensa/cpu.h
-index 97cd6892df..8c82994826 100644
---- a/target/xtensa/cpu.h
-+++ b/target/xtensa/cpu.h
-@@ -573,6 +573,7 @@ void xtensa_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr, vaddr addr,
-                                       int mmu_idx, MemTxAttrs attrs,
-                                       MemTxResult response, uintptr_t retaddr);
- void xtensa_cpu_format_state(CPUState *cpu, GString *buf, int flags);
-+void xtensa_cpu_format_tlb(CPUState *cpu, GString *buf);
- hwaddr xtensa_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void xtensa_count_regs(const XtensaConfig *config,
-                        unsigned *n_regs, unsigned *n_core_regs);
-@@ -678,7 +679,6 @@ int xtensa_get_physical_addr(CPUXtensaState *env, bool update_tlb,
-         uint32_t vaddr, int is_write, int mmu_idx,
-         uint32_t *paddr, uint32_t *page_size, unsigned *access);
- void reset_mmu(CPUXtensaState *env);
--void dump_mmu(CPUXtensaState *env);
+diff --git a/hmp-commands-info.hx b/hmp-commands-info.hx
+index f8312342cd..7bd1e04d46 100644
+--- a/hmp-commands-info.hx
++++ b/hmp-commands-info.hx
+@@ -206,8 +206,6 @@ SRST
+     Show PCI information.
+ ERST
  
- static inline MemoryRegion *xtensa_get_er_region(CPUXtensaState *env)
- {
-diff --git a/target/xtensa/mmu_helper.c b/target/xtensa/mmu_helper.c
-index b01ff9399a..d499255984 100644
---- a/target/xtensa/mmu_helper.c
-+++ b/target/xtensa/mmu_helper.c
-@@ -1055,7 +1055,7 @@ int xtensa_get_physical_addr(CPUXtensaState *env, bool update_tlb,
-     }
+-#if defined(TARGET_I386) || defined(TARGET_SH4) || defined(TARGET_SPARC) || \
+-    defined(TARGET_PPC) || defined(TARGET_XTENSA) || defined(TARGET_M68K)
+     {
+         .name       = "tlb",
+         .args_type  = "",
+@@ -215,7 +213,6 @@ ERST
+         .help       = "show virtual to physical memory mappings",
+         .cmd        = hmp_info_tlb,
+     },
+-#endif
+ 
+ SRST
+   ``info tlb``
+diff --git a/include/monitor/hmp-target.h b/include/monitor/hmp-target.h
+index df79ad3355..04e02e8895 100644
+--- a/include/monitor/hmp-target.h
++++ b/include/monitor/hmp-target.h
+@@ -45,7 +45,6 @@ CPUArchState *mon_get_cpu_env(Monitor *mon);
+ CPUState *mon_get_cpu(Monitor *mon);
+ 
+ void hmp_info_mem(Monitor *mon, const QDict *qdict);
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict);
+ void hmp_mce(Monitor *mon, const QDict *qdict);
+ void hmp_info_local_apic(Monitor *mon, const QDict *qdict);
+ 
+diff --git a/monitor/misc.c b/monitor/misc.c
+index 6b07efdddd..c7d138914d 100644
+--- a/monitor/misc.c
++++ b/monitor/misc.c
+@@ -936,6 +936,21 @@ static void hmp_info_mtree(Monitor *mon, const QDict *qdict)
+     mtree_info(flatview, dispatch_tree, owner, disabled);
  }
  
--static void dump_tlb(CPUXtensaState *env, bool dtlb)
-+static void dump_tlb(CPUXtensaState *env, bool dtlb, GString *buf)
- {
-     unsigned wi, ei;
-     const xtensa_tlb *conf =
-@@ -1094,34 +1094,40 @@ static void dump_tlb(CPUXtensaState *env, bool dtlb)
- 
-                 if (print_header) {
-                     print_header = false;
--                    qemu_printf("Way %u (%d %s)\n", wi, sz, sz_text);
--                    qemu_printf("\tVaddr       Paddr       ASID  Attr RWX Cache\n"
--                                "\t----------  ----------  ----  ---- --- -------\n");
-+                    g_string_append_printf(buf, "Way %u (%d %s)\n",
-+                                           wi, sz, sz_text);
-+                    g_string_append_printf(buf, "\tVaddr       Paddr       "
-+                                           "ASID  Attr RWX Cache\n"
-+                                           "\t----------  ----------  ----  "
-+                                           "---- --- -------\n");
-                 }
--                qemu_printf("\t0x%08x  0x%08x  0x%02x  0x%02x %c%c%c %-7s\n",
--                            entry->vaddr,
--                            entry->paddr,
--                            entry->asid,
--                            entry->attr,
--                            (access & PAGE_READ) ? 'R' : '-',
--                            (access & PAGE_WRITE) ? 'W' : '-',
--                            (access & PAGE_EXEC) ? 'X' : '-',
--                            cache_text[cache_idx] ?
--                            cache_text[cache_idx] : "Invalid");
-+                g_string_append_printf(buf, "\t0x%08x  0x%08x  0x%02x  "
-+                                       "0x%02x %c%c%c %-7s\n",
-+                                       entry->vaddr,
-+                                       entry->paddr,
-+                                       entry->asid,
-+                                       entry->attr,
-+                                       (access & PAGE_READ) ? 'R' : '-',
-+                                       (access & PAGE_WRITE) ? 'W' : '-',
-+                                       (access & PAGE_EXEC) ? 'X' : '-',
-+                                       cache_text[cache_idx] ?
-+                                       cache_text[cache_idx] : "Invalid");
-             }
-         }
-     }
- }
- 
- static void dump_mpu(CPUXtensaState *env,
--                     const xtensa_mpu_entry *entry, unsigned n)
-+                     const xtensa_mpu_entry *entry, unsigned n, GString *buf)
- {
-     unsigned i;
- 
--    qemu_printf("\t%s  Vaddr       Attr        Ring0  Ring1  System Type    CPU cache\n"
--                "\t%s  ----------  ----------  -----  -----  -------------  ---------\n",
--                env ? "En" : "  ",
--                env ? "--" : "  ");
-+    g_string_append_printf(buf, "\t%s  Vaddr       Attr        "
-+                           "Ring0  Ring1  System Type    CPU cache\n"
-+                           "\t%s  ----------  ----------  -----  -----  "
-+                           "-------------  ---------\n",
-+                           env ? "En" : "  ",
-+                           env ? "--" : "  ");
- 
-     for (i = 0; i < n; ++i) {
-         uint32_t attr = entry[i].attr;
-@@ -1130,63 +1136,73 @@ static void dump_mpu(CPUXtensaState *env,
-         unsigned type = mpu_attr_to_type(attr);
-         char cpu_cache = (type & XTENSA_MPU_TYPE_CPU_CACHE) ? '-' : ' ';
- 
--        qemu_printf("\t %c  0x%08x  0x%08x   %c%c%c    %c%c%c   ",
--                    env ?
--                    ((env->sregs[MPUENB] & (1u << i)) ? '+' : '-') : ' ',
--                    entry[i].vaddr, attr,
--                    (access0 & PAGE_READ) ? 'R' : '-',
--                    (access0 & PAGE_WRITE) ? 'W' : '-',
--                    (access0 & PAGE_EXEC) ? 'X' : '-',
--                    (access1 & PAGE_READ) ? 'R' : '-',
--                    (access1 & PAGE_WRITE) ? 'W' : '-',
--                    (access1 & PAGE_EXEC) ? 'X' : '-');
-+        g_string_append_printf(buf, "\t %c  0x%08x  0x%08x   "
-+                               "%c%c%c    %c%c%c   ",
-+                               env ? ((env->sregs[MPUENB] & (1u << i)) ?
-+                                      '+' : '-') : ' ',
-+                               entry[i].vaddr, attr,
-+                               (access0 & PAGE_READ) ? 'R' : '-',
-+                               (access0 & PAGE_WRITE) ? 'W' : '-',
-+                               (access0 & PAGE_EXEC) ? 'X' : '-',
-+                               (access1 & PAGE_READ) ? 'R' : '-',
-+                               (access1 & PAGE_WRITE) ? 'W' : '-',
-+                               (access1 & PAGE_EXEC) ? 'X' : '-');
- 
-         switch (type & XTENSA_MPU_SYSTEM_TYPE_MASK) {
-         case XTENSA_MPU_SYSTEM_TYPE_DEVICE:
--            qemu_printf("Device %cB %3s\n",
--                        (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
--                        (type & XTENSA_MPU_TYPE_INT) ? "int" : "");
-+            g_string_append_printf(buf, "Device %cB %3s\n",
-+                                   (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
-+                                   (type & XTENSA_MPU_TYPE_INT) ? "int" : "");
-             break;
-         case XTENSA_MPU_SYSTEM_TYPE_NC:
--            qemu_printf("Sys NC %cB      %c%c%c\n",
--                        (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
--                        (type & XTENSA_MPU_TYPE_CPU_R) ? 'r' : cpu_cache,
--                        (type & XTENSA_MPU_TYPE_CPU_W) ? 'w' : cpu_cache,
--                        (type & XTENSA_MPU_TYPE_CPU_C) ? 'c' : cpu_cache);
-+            g_string_append_printf(buf, "Sys NC %cB      %c%c%c\n",
-+                                   (type & XTENSA_MPU_TYPE_B) ? ' ' : 'n',
-+                                   (type & XTENSA_MPU_TYPE_CPU_R) ?
-+                                   'r' : cpu_cache,
-+                                   (type & XTENSA_MPU_TYPE_CPU_W) ?
-+                                   'w' : cpu_cache,
-+                                   (type & XTENSA_MPU_TYPE_CPU_C) ?
-+                                   'c' : cpu_cache);
-             break;
-         case XTENSA_MPU_SYSTEM_TYPE_C:
--            qemu_printf("Sys  C %c%c%c     %c%c%c\n",
--                        (type & XTENSA_MPU_TYPE_SYS_R) ? 'R' : '-',
--                        (type & XTENSA_MPU_TYPE_SYS_W) ? 'W' : '-',
--                        (type & XTENSA_MPU_TYPE_SYS_C) ? 'C' : '-',
--                        (type & XTENSA_MPU_TYPE_CPU_R) ? 'r' : cpu_cache,
--                        (type & XTENSA_MPU_TYPE_CPU_W) ? 'w' : cpu_cache,
--                        (type & XTENSA_MPU_TYPE_CPU_C) ? 'c' : cpu_cache);
-+            g_string_append_printf(buf, "Sys  C %c%c%c     %c%c%c\n",
-+                                   (type & XTENSA_MPU_TYPE_SYS_R) ? 'R' : '-',
-+                                   (type & XTENSA_MPU_TYPE_SYS_W) ? 'W' : '-',
-+                                   (type & XTENSA_MPU_TYPE_SYS_C) ? 'C' : '-',
-+                                   (type & XTENSA_MPU_TYPE_CPU_R) ?
-+                                   'r' : cpu_cache,
-+                                   (type & XTENSA_MPU_TYPE_CPU_W) ?
-+                                   'w' : cpu_cache,
-+                                   (type & XTENSA_MPU_TYPE_CPU_C) ?
-+                                   'c' : cpu_cache);
-             break;
-         default:
--            qemu_printf("Unknown\n");
-+            g_string_append_printf(buf, "Unknown\n");
-             break;
-         }
-     }
- }
- 
--void dump_mmu(CPUXtensaState *env)
-+void xtensa_cpu_format_tlb(CPUState *cpu, GString *buf)
- {
-+    CPUXtensaState *env = cpu->env_ptr;
-+
-     if (xtensa_option_bits_enabled(env->config,
-                 XTENSA_OPTION_BIT(XTENSA_OPTION_REGION_PROTECTION) |
-                 XTENSA_OPTION_BIT(XTENSA_OPTION_REGION_TRANSLATION) |
-                 XTENSA_OPTION_BIT(XTENSA_OPTION_MMU))) {
- 
--        qemu_printf("ITLB:\n");
--        dump_tlb(env, false);
--        qemu_printf("\nDTLB:\n");
--        dump_tlb(env, true);
-+        g_string_append_printf(buf, "ITLB:\n");
-+        dump_tlb(env, false, buf);
-+        g_string_append_printf(buf, "\nDTLB:\n");
-+        dump_tlb(env, true, buf);
-     } else if (xtensa_option_enabled(env->config, XTENSA_OPTION_MPU)) {
--        qemu_printf("Foreground map:\n");
--        dump_mpu(env, env->mpu_fg, env->config->n_mpu_fg_segments);
--        qemu_printf("\nBackground map:\n");
--        dump_mpu(NULL, env->config->mpu_bg, env->config->n_mpu_bg_segments);
-+        g_string_append_printf(buf, "Foreground map:\n");
-+        dump_mpu(env, env->mpu_fg, env->config->n_mpu_fg_segments, buf);
-+        g_string_append_printf(buf, "\nBackground map:\n");
-+        dump_mpu(NULL, env->config->mpu_bg,
-+                 env->config->n_mpu_bg_segments, buf);
-     } else {
--        qemu_printf("No TLB for this CPU core\n");
-+        g_string_append_printf(buf, "No TLB for this CPU core\n");
-     }
- }
-diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
-index fbf60d5553..99d35e8ef1 100644
---- a/target/xtensa/monitor.c
-+++ b/target/xtensa/monitor.c
-@@ -29,11 +29,15 @@
- 
- void hmp_info_tlb(Monitor *mon, const QDict *qdict)
- {
--    CPUArchState *env1 = mon_get_cpu_env(mon);
++static void hmp_info_tlb(Monitor *mon, const QDict *qdict)
++{
 +    g_autoptr(GString) buf = g_string_new("");
 +    CPUState *cpu = mon_get_cpu(mon);
- 
--    if (!env1) {
++
 +    if (!cpu) {
-         monitor_printf(mon, "No CPU available\n");
-         return;
-     }
--    dump_mmu(env1);
++        monitor_printf(mon, "No CPU available\n");
++        return;
++    }
 +
 +    cpu_format_tlb(cpu, buf);
 +
 +    monitor_printf(mon, "%s", buf->str);
++}
++
+ static void hmp_info_profile(Monitor *mon, const QDict *qdict)
+ {
+     Error *err = NULL;
+diff --git a/target/i386/monitor.c b/target/i386/monitor.c
+index 698fbbc80b..a7eb4205c7 100644
+--- a/target/i386/monitor.c
++++ b/target/i386/monitor.c
+@@ -248,21 +248,6 @@ void x86_cpu_format_tlb(CPUState *cpu, GString *buf)
+     }
  }
+ 
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+-
+ static void mem_print(Monitor *mon, CPUArchState *env,
+                       hwaddr *pstart, int *plast_prot,
+                       hwaddr end, int prot)
+diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
+index 003a665246..0dc729692b 100644
+--- a/target/m68k/monitor.c
++++ b/target/m68k/monitor.c
+@@ -12,21 +12,6 @@
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-machine-target.h"
+ 
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+-
+ static const MonitorDef monitor_defs[] = {
+     { "d0", offsetof(CPUM68KState, dregs[0]) },
+     { "d1", offsetof(CPUM68KState, dregs[1]) },
+diff --git a/target/nios2/monitor.c b/target/nios2/monitor.c
+index 99d35e8ef1..1180a32f80 100644
+--- a/target/nios2/monitor.c
++++ b/target/nios2/monitor.c
+@@ -26,18 +26,3 @@
+ #include "monitor/monitor.h"
+ #include "monitor/hmp-target.h"
+ #include "monitor/hmp.h"
+-
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+diff --git a/target/ppc/monitor.c b/target/ppc/monitor.c
+index 401a36c2eb..3564fd5f45 100644
+--- a/target/ppc/monitor.c
++++ b/target/ppc/monitor.c
+@@ -65,21 +65,6 @@ static target_long monitor_get_tbl(Monitor *mon, const struct MonitorDef *md,
+     return cpu_ppc_load_tbl(env);
+ }
+ 
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+-
+ const MonitorDef monitor_defs[] = {
+     { "fpscr", offsetof(CPUPPCState, fpscr) },
+     /* Next instruction pointer */
+diff --git a/target/sh4/monitor.c b/target/sh4/monitor.c
+index 5ccb95af93..d641d95316 100644
+--- a/target/sh4/monitor.c
++++ b/target/sh4/monitor.c
+@@ -53,18 +53,3 @@ void superh_cpu_format_tlb(CPUState *cpu, GString *buf)
+         print_tlb(buf, i, &env->utlb[i]);
+     }
+ }
+-
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
+index cc7fe74e3e..0c51669c08 100644
+--- a/target/sparc/monitor.c
++++ b/target/sparc/monitor.c
+@@ -27,22 +27,6 @@
+ #include "monitor/hmp-target.h"
+ #include "monitor/hmp.h"
+ 
+-
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
+-
+ #ifndef TARGET_SPARC64
+ static target_long monitor_get_psr(Monitor *mon, const struct MonitorDef *md,
+                                    int val)
+diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
+index 99d35e8ef1..1180a32f80 100644
+--- a/target/xtensa/monitor.c
++++ b/target/xtensa/monitor.c
+@@ -26,18 +26,3 @@
+ #include "monitor/monitor.h"
+ #include "monitor/hmp-target.h"
+ #include "monitor/hmp.h"
+-
+-void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+-{
+-    g_autoptr(GString) buf = g_string_new("");
+-    CPUState *cpu = mon_get_cpu(mon);
+-
+-    if (!cpu) {
+-        monitor_printf(mon, "No CPU available\n");
+-        return;
+-    }
+-
+-    cpu_format_tlb(cpu, buf);
+-
+-    monitor_printf(mon, "%s", buf->str);
+-}
 -- 
 2.31.1
 
