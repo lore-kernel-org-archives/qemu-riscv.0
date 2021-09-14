@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9WZ-0004hG-Lh
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:35:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41924)
+	id 1mQ9Wu-0005kN-Sz
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:35:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42232)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9WX-0004dI-CJ
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:01 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:28024)
+ id 1mQ9Ws-0005dX-PQ
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44071)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9WV-0004VQ-A6
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:01 -0400
+ id 1mQ9Wq-0004ix-1Y
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:35:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631630098;
+ s=mimecast20190719; t=1631630119;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eytxsOj3cJWedkTLYFQf30aw8CYCDUwdC6UE6kvmYNI=;
- b=Wn5iBHqOeCLNfcvWB0+hc9Nil4Z+TCBQYw1Hkav3y1BNelx0eSq6Tp+6oMGJMQNVFUXJL0
- nKjQvLaAXZpSvguRSN4ANLeL4fGO/otsyQJ3kaoa+dP2DL0jJm1q6U7PLQ9dsjzRpYzrXh
- N4PYF3SIDftfY/wGH/3WrUytDP1+lqI=
+ bh=rB6piZ9LgrjrkZJSg8goTT4uIcuL7G9qxeyUG5U6r7c=;
+ b=P0/FXrdWBtzqDfPF9mwULR+oeEbtcv8caATnFzPYzQ1xs8uQM3A1AWvT4sjuxdDguAddHk
+ spYY2vR3tWOqS8mkKkqLqf6dXZIT1zNnuQA0esC602/7OdQ1rZ4oLgB0jfEs0TF901hB/H
+ oGowWx77UsEJEwb4y2JqmGHCBv+O3z4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-282-WrwCVSFUMpKehRjjLzk-bQ-1; Tue, 14 Sep 2021 10:34:57 -0400
-X-MC-Unique: WrwCVSFUMpKehRjjLzk-bQ-1
+ us-mta-113-g2SglZttN3mZfmf5T0k0wg-1; Tue, 14 Sep 2021 10:35:18 -0400
+X-MC-Unique: g2SglZttN3mZfmf5T0k0wg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 862DE8145EF;
- Tue, 14 Sep 2021 14:34:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 695FA824FA7;
+ Tue, 14 Sep 2021 14:35:14 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 327825D9CA;
- Tue, 14 Sep 2021 14:34:33 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CB3CA5D9CA;
+ Tue, 14 Sep 2021 14:34:53 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 47/53] target/sh4: convert to use format_tlb callback
-Date: Tue, 14 Sep 2021 15:20:36 +0100
-Message-Id: <20210914142042.1655100-48-berrange@redhat.com>
+Subject: [PATCH v2 48/53] target/sparc: convert to use format_tlb callback
+Date: Tue, 14 Sep 2021 15:20:37 +0100
+Message-Id: <20210914142042.1655100-49-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -81,7 +81,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -102,110 +102,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:35:01 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:35:23 -0000
 
 Change the "info tlb" implementation to use the format_tlb callback.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/sh4/cpu.c     |  3 +++
- target/sh4/cpu.h     |  1 +
- target/sh4/monitor.c | 48 +++++++++++++++++++++++++++-----------------
- 3 files changed, 34 insertions(+), 18 deletions(-)
+ target/sparc/cpu.c        |  1 +
+ target/sparc/cpu.h        |  1 +
+ target/sparc/mmu_helper.c | 43 ++++++++++++++++++++++++---------------
+ target/sparc/monitor.c    | 10 ++++++---
+ 4 files changed, 36 insertions(+), 19 deletions(-)
 
-diff --git a/target/sh4/cpu.c b/target/sh4/cpu.c
-index 0ac881d6af..0e49755b2a 100644
---- a/target/sh4/cpu.c
-+++ b/target/sh4/cpu.c
-@@ -260,6 +260,9 @@ static void superh_cpu_class_init(ObjectClass *oc, void *data)
-     cc->class_by_name = superh_cpu_class_by_name;
-     cc->has_work = superh_cpu_has_work;
-     cc->format_state = superh_cpu_format_state;
-+#ifndef CONFIG_USER_ONLY
-+    cc->format_tlb = superh_cpu_format_tlb;
-+#endif
-     cc->set_pc = superh_cpu_set_pc;
-     cc->gdb_read_register = superh_cpu_gdb_read_register;
-     cc->gdb_write_register = superh_cpu_gdb_write_register;
-diff --git a/target/sh4/cpu.h b/target/sh4/cpu.h
-index 6940ca417a..7c139f561c 100644
---- a/target/sh4/cpu.h
-+++ b/target/sh4/cpu.h
-@@ -207,6 +207,7 @@ struct SuperHCPU {
- void superh_cpu_do_interrupt(CPUState *cpu);
- bool superh_cpu_exec_interrupt(CPUState *cpu, int int_req);
- void superh_cpu_format_state(CPUState *cpu, GString *buf, int flags);
-+void superh_cpu_format_tlb(CPUState *cpu, GString *buf);
- hwaddr superh_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- int superh_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int superh_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-diff --git a/target/sh4/monitor.c b/target/sh4/monitor.c
-index 2da6a5426e..5ccb95af93 100644
---- a/target/sh4/monitor.c
-+++ b/target/sh4/monitor.c
-@@ -27,32 +27,44 @@
- #include "monitor/hmp-target.h"
- #include "monitor/hmp.h"
+diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+index 9346a79239..f78ddc72b5 100644
+--- a/target/sparc/cpu.c
++++ b/target/sparc/cpu.c
+@@ -898,6 +898,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
+     cc->has_work = sparc_cpu_has_work;
+     cc->format_state = sparc_cpu_format_state;
+ #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
++    cc->format_tlb = sparc_cpu_format_tlb;
+     cc->memory_rw_debug = sparc_cpu_memory_rw_debug;
+ #endif
+     cc->set_pc = sparc_cpu_set_pc;
+diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+index 65a01a7884..233f0b3eb7 100644
+--- a/target/sparc/cpu.h
++++ b/target/sparc/cpu.h
+@@ -572,6 +572,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
  
--static void print_tlb(Monitor *mon, int idx, tlb_t *tlb)
-+static void print_tlb(GString *buf, int idx, tlb_t *tlb)
+ void sparc_cpu_do_interrupt(CPUState *cpu);
+ void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
++void sparc_cpu_format_tlb(CPUState *cpu, GString *buf);
+ hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+index a44473a1c7..06b16aca6a 100644
+--- a/target/sparc/mmu_helper.c
++++ b/target/sparc/mmu_helper.c
+@@ -371,37 +371,39 @@ target_ulong mmu_probe(CPUSPARCState *env, target_ulong address, int mmulev)
+     return 0;
+ }
+ 
+-void dump_mmu(CPUSPARCState *env)
++void sparc_cpu_format_tlb(CPUState *cpu, GString *buf)
  {
--    monitor_printf(mon, " tlb%i:\t"
--                   "asid=%hhu vpn=%x\tppn=%x\tsz=%hhu size=%u\t"
--                   "v=%hhu shared=%hhu cached=%hhu prot=%hhu "
--                   "dirty=%hhu writethrough=%hhu\n",
--                   idx,
--                   tlb->asid, tlb->vpn, tlb->ppn, tlb->sz, tlb->size,
--                   tlb->v, tlb->sh, tlb->c, tlb->pr,
--                   tlb->d, tlb->wt);
-+    g_string_append_printf(buf,  " tlb%i:\t"
-+                           "asid=%hhu vpn=%x\tppn=%x\tsz=%hhu size=%u\t"
-+                           "v=%hhu shared=%hhu cached=%hhu prot=%hhu "
-+                           "dirty=%hhu writethrough=%hhu\n",
-+                           idx,
-+                           tlb->asid, tlb->vpn, tlb->ppn, tlb->sz, tlb->size,
-+                           tlb->v, tlb->sh, tlb->c, tlb->pr,
-+                           tlb->d, tlb->wt);
+-    CPUState *cs = env_cpu(env);
++    CPUSPARCState *env = cpu->env_ptr;
+     target_ulong va, va1, va2;
+     unsigned int n, m, o;
+     hwaddr pa;
+     uint32_t pde;
+ 
+-    qemu_printf("Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
+-                (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
++    g_string_append_printf(buf, "Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
++                           (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
+     for (n = 0, va = 0; n < 256; n++, va += 16 * 1024 * 1024) {
+         pde = mmu_probe(env, va, 2);
+         if (pde) {
+-            pa = cpu_get_phys_page_debug(cs, va);
+-            qemu_printf("VA: " TARGET_FMT_lx ", PA: " TARGET_FMT_plx
+-                        " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
++            pa = cpu_get_phys_page_debug(cpu, va);
++            g_string_append_printf(buf, "VA: " TARGET_FMT_lx
++                                   ", PA: " TARGET_FMT_plx
++                                   " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
+             for (m = 0, va1 = va; m < 64; m++, va1 += 256 * 1024) {
+                 pde = mmu_probe(env, va1, 1);
+                 if (pde) {
+-                    pa = cpu_get_phys_page_debug(cs, va1);
+-                    qemu_printf(" VA: " TARGET_FMT_lx ", PA: "
+-                                TARGET_FMT_plx " PDE: " TARGET_FMT_lx "\n",
+-                                va1, pa, pde);
++                    pa = cpu_get_phys_page_debug(cpu, va1);
++                    g_string_append_printf(buf, " VA: " TARGET_FMT_lx
++                                           ", PA: " TARGET_FMT_plx
++                                           " PDE: " TARGET_FMT_lx "\n",
++                                           va1, pa, pde);
+                     for (o = 0, va2 = va1; o < 64; o++, va2 += 4 * 1024) {
+                         pde = mmu_probe(env, va2, 0);
+                         if (pde) {
+-                            pa = cpu_get_phys_page_debug(cs, va2);
+-                            qemu_printf("  VA: " TARGET_FMT_lx ", PA: "
+-                                        TARGET_FMT_plx " PTE: "
+-                                        TARGET_FMT_lx "\n",
+-                                        va2, pa, pde);
++                            pa = cpu_get_phys_page_debug(cpu, va2);
++                            g_string_append_printf(buf, "  VA: " TARGET_FMT_lx
++                                                   ", PA: " TARGET_FMT_plx
++                                                   " PTE: " TARGET_FMT_lx "\n",
++                                                   va2, pa, pde);
+                         }
+                     }
+                 }
+@@ -410,6 +412,15 @@ void dump_mmu(CPUSPARCState *env)
+     }
+ }
+ 
++void dump_mmu(CPUSPARCState *env)
++{
++    CPUState *cs = env_cpu(env);
++    g_autoptr(GString) buf = g_string_new("");
++
++    sparc_cpu_format_tlb(cs, buf);
++    qemu_printf("%s", buf->str);
 +}
 +
-+void superh_cpu_format_tlb(CPUState *cpu, GString *buf)
-+{
-+    CPUArchState *env = cpu->env_ptr;
-+    size_t i;
-+
-+    g_string_append_printf(buf,  "ITLB:\n");
-+    for (i = 0 ; i < ITLB_SIZE ; i++) {
-+        print_tlb(buf, i, &env->itlb[i]);
-+    }
-+    g_string_append_printf(buf,  "UTLB:\n");
-+    for (i = 0 ; i < UTLB_SIZE ; i++) {
-+        print_tlb(buf, i, &env->utlb[i]);
-+    }
- }
+ /* Gdb expects all registers windows to be flushed in ram. This function handles
+  * reads (and only reads) in stack frames as if windows were flushed. We assume
+  * that the sparc ABI is followed.
+diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
+index 318413686a..cc7fe74e3e 100644
+--- a/target/sparc/monitor.c
++++ b/target/sparc/monitor.c
+@@ -30,13 +30,17 @@
  
  void hmp_info_tlb(Monitor *mon, const QDict *qdict)
  {
--    CPUArchState *env = mon_get_cpu_env(mon);
--    int i;
+-    CPUArchState *env1 = mon_get_cpu_env(mon);
 +    g_autoptr(GString) buf = g_string_new("");
 +    CPUState *cpu = mon_get_cpu(mon);
  
--    if (!env) {
+-    if (!env1) {
 +    if (!cpu) {
          monitor_printf(mon, "No CPU available\n");
          return;
      }
- 
--    monitor_printf (mon, "ITLB:\n");
--    for (i = 0 ; i < ITLB_SIZE ; i++)
--        print_tlb (mon, i, &env->itlb[i]);
--    monitor_printf (mon, "UTLB:\n");
--    for (i = 0 ; i < UTLB_SIZE ; i++)
--        print_tlb (mon, i, &env->utlb[i]);
+-    dump_mmu(env1);
++
 +    cpu_format_tlb(cpu, buf);
 +
 +    monitor_printf(mon, "%s", buf->str);
  }
+ 
+ #ifndef TARGET_SPARC64
 -- 
 2.31.1
 
