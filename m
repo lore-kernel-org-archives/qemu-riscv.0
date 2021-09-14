@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Ue-0001DR-FD
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:33:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40928)
+	id 1mQ9Ui-0001Qu-8A
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:33:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41000)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Uc-00018B-Tj
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:32683)
+ id 1mQ9Ug-0001L9-Dv
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:06 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:21900)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9UX-00036b-K9
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:02 -0400
+ id 1mQ9Ue-0003Gi-Mh
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:33:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629972;
+ s=mimecast20190719; t=1631629984;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/jRtbUcY39Rqu7qghyi/HTcBufJo3NLVVwGNaTJ569Y=;
- b=Tdfg8feHbrF36ZV4DMdRsm1MLbV/I//vwDm80BHoSLWggUGRek1G/AB1Xneca0oJouNhdd
- ERCZ770fqntN5A0RWykYrMeseKwCu/KgnPSJlWezzJw95/QbGrPo5gifeIVSJ38IYsXIu5
- nhufeOWdQUKaCAWJvhNMOt4h2WJ/wH8=
+ bh=mWi2LfZwGzdEsZktG7Ab29gP8Q0XFlGCSfLs0XA4+QY=;
+ b=Bsm2f/Ff/9amqy4djzotbWABw171stLCEtpZTICWu/VDAOuE3ZiDxc0mxaVjp46rHaYjbE
+ fBEYb5t8KdOvFvXw4zSHZWeTFQzlX6tKvlGA5cd5Cb9lRKddOKSnb2MURcYYuUxEYgD2h0
+ EglGYxUa6oL+6H3KfRpm6wLa5bEH2no=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-481-ebDlKE6IOSW5obJSs9l0CQ-1; Tue, 14 Sep 2021 10:32:50 -0400
-X-MC-Unique: ebDlKE6IOSW5obJSs9l0CQ-1
+ us-mta-397-GMTEub__Oo-90fowxGl2Ew-1; Tue, 14 Sep 2021 10:33:02 -0400
+X-MC-Unique: GMTEub__Oo-90fowxGl2Ew-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0E9DF800FF4;
- Tue, 14 Sep 2021 14:32:47 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A7CF110144E0;
+ Tue, 14 Sep 2021 14:32:58 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E75B85D9DC;
- Tue, 14 Sep 2021 14:32:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 588B95D9DC;
+ Tue, 14 Sep 2021 14:32:47 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 39/53] qapi: introduce x-query-irq QMP command
-Date: Tue, 14 Sep 2021 15:20:28 +0100
-Message-Id: <20210914142042.1655100-40-berrange@redhat.com>
+Subject: [PATCH v2 40/53] hw/core: drop "dump_state" callback from CPU targets
+Date: Tue, 14 Sep 2021 15:20:29 +0100
+Message-Id: <20210914142042.1655100-41-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -83,11 +83,11 @@ Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -102,179 +102,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:33:03 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:33:06 -0000
 
-This is a counterpart to the HMP "info irq" command. It is being
-added with an "x-" prefix because this QMP command is intended as an
-adhoc debugging tool and will thus not be modelled in QAPI as fully
-structured data, nor will it have long term guaranteed stability.
-The existing HMP command is rewritten to call the QMP command.
-
-This command is unable to use the pre-existing HumanReadableText,
-because if 'common.json' is included into 'machine-target.json'
-the static marshalling method for HumanReadableText will be reported
-as unused by the compiler on all architectures except s390x.
-
-Possible options were
-
- 1 Support 'if' conditionals on 'include' statements in QAPI
- 2 Add further commands to 'machine-target.json' that use
-   HumanReadableText, such that it has at least one usage
-   on all architecture targets.
- 3 Duplicate HumanReadableText as TargetHumanReadableText
-   adding conditions
-
-This patch takes option (3) in the belief that we will eventually
-get to a point where option (2) happens, and TargetHumanReadableText
-can be removed again.
+All targets are now converted to the "format_state" callback.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- monitor/hmp-cmds.c | 40 ++++++++-------------------------------
- monitor/qmp-cmds.c | 47 ++++++++++++++++++++++++++++++++++++++++++++++
- qapi/machine.json  | 12 ++++++++++++
- 3 files changed, 67 insertions(+), 32 deletions(-)
+ hw/core/cpu-common.c  | 14 +++-----------
+ include/hw/core/cpu.h |  2 --
+ 2 files changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/monitor/hmp-cmds.c b/monitor/hmp-cmds.c
-index 77533b2d8a..eb2202329d 100644
---- a/monitor/hmp-cmds.c
-+++ b/monitor/hmp-cmds.c
-@@ -784,42 +784,18 @@ static void hmp_info_pci_device(Monitor *mon, const PciDeviceInfo *dev)
-     }
- }
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index d1ebc77d1b..494f4f41eb 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -108,17 +108,9 @@ static int cpu_common_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg)
  
--static int hmp_info_irq_foreach(Object *obj, void *opaque)
-+void hmp_info_irq(Monitor *mon, const QDict *qdict)
+ void cpu_dump_state(CPUState *cpu, FILE *f, int flags)
  {
--    InterruptStatsProvider *intc;
--    InterruptStatsProviderClass *k;
--    Monitor *mon = opaque;
-+    Error *err = NULL;
-+    g_autoptr(HumanReadableText) info = NULL;
- 
--    if (object_dynamic_cast(obj, TYPE_INTERRUPT_STATS_PROVIDER)) {
--        intc = INTERRUPT_STATS_PROVIDER(obj);
--        k = INTERRUPT_STATS_PROVIDER_GET_CLASS(obj);
--        uint64_t *irq_counts;
--        unsigned int nb_irqs, i;
--        if (k->get_statistics &&
--            k->get_statistics(intc, &irq_counts, &nb_irqs)) {
--            if (nb_irqs > 0) {
--                monitor_printf(mon, "IRQ statistics for %s:\n",
--                               object_get_typename(obj));
--                for (i = 0; i < nb_irqs; i++) {
--                    if (irq_counts[i] > 0) {
--                        monitor_printf(mon, "%2d: %" PRId64 "\n", i,
--                                       irq_counts[i]);
--                    }
--                }
--            }
--        } else {
--            monitor_printf(mon, "IRQ statistics not available for %s.\n",
--                           object_get_typename(obj));
--        }
-+    info = qmp_x_query_irq(&err);
-+    if (err) {
-+        error_report_err(err);
-+        return;
-     }
- 
--    return 0;
--}
+-    CPUClass *cc = CPU_GET_CLASS(cpu);
 -
--void hmp_info_irq(Monitor *mon, const QDict *qdict)
--{
--    object_child_foreach_recursive(object_get_root(),
--                                   hmp_info_irq_foreach, mon);
-+    monitor_printf(mon, "%s", info->human_readable_text);
- }
- 
- static int hmp_info_pic_foreach(Object *obj, void *opaque)
-diff --git a/monitor/qmp-cmds.c b/monitor/qmp-cmds.c
-index b86fff823e..cfb98658e4 100644
---- a/monitor/qmp-cmds.c
-+++ b/monitor/qmp-cmds.c
-@@ -40,6 +40,7 @@
- #include "exec/ramlist.h"
- #include "hw/mem/memory-device.h"
- #include "hw/acpi/acpi_dev_interface.h"
-+#include "hw/intc/intc.h"
- #include "hw/rdma/rdma.h"
- 
- NameInfo *qmp_query_name(Error **errp)
-@@ -430,3 +431,49 @@ HumanReadableText *qmp_x_query_ramblock(Error **errp)
-     ret->human_readable_text = g_steal_pointer(&buf->str);
-     return ret;
- }
-+
-+static int qmp_x_query_irq_foreach(Object *obj, void *opaque)
-+{
-+    InterruptStatsProvider *intc;
-+    InterruptStatsProviderClass *k;
-+    GString *buf = opaque;
-+
-+    if (object_dynamic_cast(obj, TYPE_INTERRUPT_STATS_PROVIDER)) {
-+        intc = INTERRUPT_STATS_PROVIDER(obj);
-+        k = INTERRUPT_STATS_PROVIDER_GET_CLASS(obj);
-+        uint64_t *irq_counts;
-+        unsigned int nb_irqs, i;
-+        if (k->get_statistics &&
-+            k->get_statistics(intc, &irq_counts, &nb_irqs)) {
-+            if (nb_irqs > 0) {
-+                g_string_append_printf(buf, "IRQ statistics for %s:\n",
-+                                       object_get_typename(obj));
-+                for (i = 0; i < nb_irqs; i++) {
-+                    if (irq_counts[i] > 0) {
-+                        g_string_append_printf(buf, "%2d: %" PRId64 "\n", i,
-+                                               irq_counts[i]);
-+                    }
-+                }
-+            }
-+        } else {
-+            g_string_append_printf(buf,
-+                                   "IRQ statistics not available for %s.\n",
-+                                   object_get_typename(obj));
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+HumanReadableText *qmp_x_query_irq(Error **errp)
-+{
-+    HumanReadableText *ret;
+-    if (cc->dump_state) {
+-        cpu_synchronize_state(cpu);
+-        cc->dump_state(cpu, f, flags);
+-    } else if (cc->format_state) {
+-        g_autoptr(GString) buf = g_string_new("");
+-        cpu_synchronize_state(cpu);
+-        cc->format_state(cpu, buf, flags);
+-        qemu_fprintf(f, "%s", buf->str);
+-    }
 +    g_autoptr(GString) buf = g_string_new("");
-+
-+    object_child_foreach_recursive(object_get_root(),
-+                                   qmp_x_query_irq_foreach, buf);
-+
-+    ret = g_new0(HumanReadableText, 1);
-+    ret->human_readable_text = g_steal_pointer(&buf->str);
-+    return ret;
-+}
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 3ae7beb7cf..e72b47ea7d 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1313,6 +1313,18 @@
-      '*threads': 'int',
-      '*maxcpus': 'int' } }
++    cpu_format_state(cpu, buf, flags);
++    qemu_fprintf(f, "%s", buf->str);
+ }
  
-+##
-+# @x-query-irq:
-+#
-+# Query interrupt statistics
-+#
-+# Returns: interrupt statistics
-+#
-+# Since: 6.2
-+##
-+{ 'command': 'x-query-irq',
-+  'returns': 'HumanReadableText' }
-+
- ##
- # @x-query-numa:
- #
+ void cpu_format_state(CPUState *cpu, GString *buf, int flags)
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index a0913eedaa..9cfc7d7479 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -91,7 +91,6 @@ struct SysemuCPUOps;
+  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
+  * @has_work: Callback for checking if there is work to do.
+  * @memory_rw_debug: Callback for GDB memory access.
+- * @dump_state: Callback for dumping state. Deprecated, use @format_state.
+  * @format_state: Callback for formatting state.
+  * @get_arch_id: Callback for getting architecture-dependent CPU ID.
+  * @set_pc: Callback for setting the Program Counter register. This
+@@ -136,7 +135,6 @@ struct CPUClass {
+     bool (*has_work)(CPUState *cpu);
+     int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+                            uint8_t *buf, int len, bool is_write);
+-    void (*dump_state)(CPUState *cpu, FILE *, int flags);
+     void (*format_state)(CPUState *cpu, GString *buf, int flags);
+     int64_t (*get_arch_id)(CPUState *cpu);
+     void (*set_pc)(CPUState *cpu, vaddr value);
 -- 
 2.31.1
 
