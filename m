@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mPxxY-0003Rj-QB
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Sep 2021 22:14:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43490)
+	id 1mPy8C-000746-QZ
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Sep 2021 22:25:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44528)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPxxX-0003RM-7X
- for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 22:14:07 -0400
-Received: from mail-il1-x135.google.com ([2607:f8b0:4864:20::135]:39468)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mPy8A-00073X-3J; Mon, 13 Sep 2021 22:25:06 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:45574)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPxxU-0002Eq-SK
- for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 22:14:06 -0400
-Received: by mail-il1-x135.google.com with SMTP id a1so12309299ilj.6
- for <qemu-riscv@nongnu.org>; Mon, 13 Sep 2021 19:14:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mPy87-0000j3-NO; Mon, 13 Sep 2021 22:25:05 -0400
+Received: by mail-il1-x12a.google.com with SMTP id b8so10604465ilh.12;
+ Mon, 13 Sep 2021 19:25:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iJpFzoZCp0zYSVuDxMx3wgCXjkLSyCRWqn4Iozd1TMA=;
- b=mTAmxmfkoDTF7S+HHdwv69w+wfz/Mnsi95E/8x+IRu0BuvDfXqFrofpdPgTCklh6TW
- jA9Tqshf+Gii8fi8giz6XdBXcEqwpW1zfMUl0KQsA+OrY1zbrEcU7I79n4Q3Y3hAekop
- K/awm9My0ga7EvtSdztGzBd/KtuJu9bNd/qzopOBAByKUJWVJ7AE5w2gTy2p5UwpOeWj
- WYuWWNVUrthY4E/XClruxAOq7yELaBqFGyq3l9LvpXk2LRVw651kL6NdqILWnE42vubP
- IaEKi6unLEAcvOmcx3QXdDlxuo0tHI3ivzTTkiUn3PUd2NlexuUlCBa1N7upDvopptkj
- DEuA==
+ :cc; bh=J0x0pj3qEr6K/ZjNHY4VBfiDJOPN3LcOdP2QAh9Lwrg=;
+ b=E+jg0V59OwpA+vpNoe2ke2vhVyYtwJn9wzzoeq6CL6dAbuaUxWDLSbl76ZUNpFQsnR
+ 7QJLnCdYZHdJsdYv/Q/h8xh5fY/tOwGpA6JxkkYGPhhmE8DlmQBK6+fOAS5mzeTL5bVZ
+ beE1tngI4senohbELJwqcv73lPDCn+6s2Lbbz/HufjiSB1mw+WpEgIQuffnQ0VanqbCP
+ m3QN+GbCwMGHbb8MNsV9+fsf6l15NXs+Df484uzb08K39ihW6E/qwhSQgSDZ0owBiyso
+ fCp+pOZRkv/XHZzIf9ZrDpvfhbQOrt4i+R8tY+LSHRo1nHFpCqD/XGOEHakHC/6ZGqVN
+ CaLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=iJpFzoZCp0zYSVuDxMx3wgCXjkLSyCRWqn4Iozd1TMA=;
- b=QfFM3dlR6rUrYTg5OGlHkVhggrYDD6C6zdCvlSK8W5KOp7mezUyhcajBc2VOC8I1fb
- MB7zFefx+VD2QD4JyzM7qVel2YhlFWJHLBdnzD+1kYnvqDF2AUCfLXjV2g65nDODdAsd
- zcWsw0WyexoXkk9z0cZ2FSSTlQJWj1YsOX4yoQHmuekjbrvoP6EKRIphp7g8Bw3ddv+w
- DlTHDmxbvByk/grVyVEyR9DThGUgEZTTwdpHviNY4ZwPUivuAVo4xZbe6Zkybv1BhExL
- /4j//H+tgnMpSqgNa1DGUA7Zp5R4oVBzkqZBeh9VQTa8V4nDGBskNhV5VMZ5aJZaFGPt
- MZDg==
-X-Gm-Message-State: AOAM530AkjAjoXUknmTPgahqB/ubZ3b156gzPYFgOIGe/gw9E84Ea8Dl
- lA2rK6oLlxDE5OYxDItIP14D3KJqco+l0LwMYZSX6A==
-X-Google-Smtp-Source: ABdhPJwlmgv1nxXUyiCdmuycEblJsdc+exAwUjlc+baaZP3QN4hfnKh+ayfcq9JT6ULnHrfUVsBZcEogv163+Knznao=
-X-Received: by 2002:a92:194b:: with SMTP id e11mr10060061ilm.200.1631585643425; 
- Mon, 13 Sep 2021 19:14:03 -0700 (PDT)
+ bh=J0x0pj3qEr6K/ZjNHY4VBfiDJOPN3LcOdP2QAh9Lwrg=;
+ b=ctH4CMFzUYMtGG4dE7o9TSIOrOOStbX+xthc667dA2fUf1EZQqqhAua1BcGqveDzC/
+ veborXfaHsu4rUWSmNXwbuiK57GimphIjQkaUL6bs558TkScgytc9Y5JBwixboe1wQ4K
+ hGo//mT0jRkM55ROG3+WCztmzJXgVCOQXGlsWA1qlKu2OtsA6xF4Y1OW7EpaZlyQoulI
+ 3Yir9NYQGmHV5Kwg3alN2TD65m91p+XiHlLwGHe3FRYlnesRkGgnEjIit2ofCwFf2fiv
+ kGc4zjeNcH7irHaTQtuBDrCHKZLU2+5RHav/PYCqgywr/xDGKzZEAEzYNdeRGLAkyT07
+ Wv5g==
+X-Gm-Message-State: AOAM530w5BEWrbWz/674A3Ly3GTNN37S7n4jrGPPK2k00t731rXBIqFk
+ WMsQp/XslX2dlaJBqAb4eb62zKlW4D4kLmo4qXU=
+X-Google-Smtp-Source: ABdhPJyHK9/A8NwOgNKOFKMhK2qTEZiCn3tvmsZm/Bd7km5zQ6eVGf3abCrHGjfT0pNUcO2FMxm2BOvTFFWjHKZ9ma4=
+X-Received: by 2002:a92:280f:: with SMTP id l15mr9737074ilf.74.1631586300313; 
+ Mon, 13 Sep 2021 19:25:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210914013732.881754-1-frank.chang@sifive.com>
- <f7b4ea83-ddef-d70c-99e3-3c9afff2afb2@linaro.org>
-In-Reply-To: <f7b4ea83-ddef-d70c-99e3-3c9afff2afb2@linaro.org>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 14 Sep 2021 10:13:52 +0800
-Message-ID: <CAE_xrPh44msuefacdYSYmXUthEV=5JS-8nSKTU+v9vkx7-tVzQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Force to set mstatus_hs.[SD|FS] bits in
- mark_fs_dirty()
-To: Richard Henderson <richard.henderson@linaro.org>
+References: <20210912130553.179501-1-frank.chang@sifive.com>
+ <20210912130553.179501-5-frank.chang@sifive.com>
+In-Reply-To: <20210912130553.179501-5-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 14 Sep 2021 12:24:34 +1000
+Message-ID: <CAKmqyKMY_7jJ2g9Te8JRPD0dwMP_y1WPnjZkKc5Fj+iJhWiRig@mail.gmail.com>
+Subject: Re: [PATCH RESEND v2 4/4] hw/dma: sifive_pdma: don't set
+ Control.error if 0 bytes to transfer
+To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Vincent Chen <vincent.chen@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="000000000000b28bd105cbeb22fb"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
- envelope-from=frank.chang@sifive.com; helo=mail-il1-x135.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ Bin Meng <bin.meng@windriver.com>, Max Hsu <max.hsu@sifive.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,154 +74,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 02:14:07 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 02:25:06 -0000
 
---000000000000b28bd105cbeb22fb
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Sep 14, 2021 at 10:10 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
-
-> On 9/13/21 6:37 PM, frank.chang@sifive.com wrote:
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
-> > Modifying the floating-point state when V=1 causes both fields to
-> > be set to 3 (Dirty).
-> >
-> > However, it's possible that HS-level sstatus.FS is Clean and VS-level
-> > vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
-> > We can't early return for this case because we still need to set
-> > sstatus.FS to Dirty according to spec.
-> >
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> > Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
-> > Tested-by: Vincent Chen <vincent.chen@sifive.com>
-> > ---
-> >   target/riscv/translate.c | 19 ++++++++++---------
-> >   1 file changed, 10 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> > index e356fc6c46c..0096b098738 100644
-> > --- a/target/riscv/translate.c
-> > +++ b/target/riscv/translate.c
-> > @@ -280,26 +280,27 @@ static void gen_jal(DisasContext *ctx, int rd,
-> target_ulong imm)
-> >   static void mark_fs_dirty(DisasContext *ctx)
-> >   {
-> >       TCGv tmp;
-> > -    target_ulong sd;
-> > +    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
-> > +
-> > +    if (ctx->virt_enabled) {
-> > +        tmp = tcg_temp_new();
-> > +        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState,
-> mstatus_hs));
-> > +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
-> > +        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState,
-> mstatus_hs));
-> > +        tcg_temp_free(tmp);
-> > +    }
-> >
-> >       if (ctx->mstatus_fs == MSTATUS_FS) {
-> >           return;
-> >       }
+On Sun, Sep 12, 2021 at 11:11 PM <frank.chang@sifive.com> wrote:
 >
-> You should introduce a ctx->mstatus_hs field to track the code that you
-> moved.  Otherwise
-> you'll be setting this dirty bit for every fp insn.
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Real PDMA doesn't set Control.error if there are 0 bytes to be
+> transferred. The DMA transfer is still success.
+>
+> The following result is PDMA tested in U-Boot on Unmatched board:
+>
+> => mw.l 0x3000000 0x0                      <= Disclaim channel 0
+> => mw.l 0x3000000 0x1                      <= Claim channel 0
+> => mw.l 0x3000004 0x55000000               <= wsize = rsize = 5 (2^5 = 32 bytes)
+> => mw.q 0x3000008 0x0                      <= NextBytes = 0
+> => mw.q 0x3000010 0x84000000               <= NextDestination = 0x84000000
+> => mw.q 0x3000018 0x84001000               <= NextSource = 0x84001000
+> => mw.l 0x84000000 0x87654321              <= Fill test data to dst
+> => mw.l 0x84001000 0x12345678              <= Fill test data to src
+> => md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
+> 84000000: 87654321                               !Ce.
+> 84001000: 12345678                               xV4.
+> => md.l 0x3000000 8                        <= Dump PDMA status
+> 03000000: 00000001 55000000 00000000 00000000    .......U........
+> 03000010: 84000000 00000000 84001000 00000000    ................
+> => mw.l 0x3000000 0x3                      <= Set channel 0 run and claim bits
+> => md.l 0x3000000 8                        <= Dump PDMA status
+> 03000000: 40000001 55000000 00000000 00000000    ...@...U........
+> 03000010: 84000000 00000000 84001000 00000000    ................
+> => md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
+> 84000000: 87654321                               !Ce.
+> 84001000: 12345678                               xV4.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Tested-by: Max Hsu <max.hsu@sifive.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Tested-by: Bin Meng <bmeng.cn@gmail.com>
+
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
+>  hw/dma/sifive_pdma.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
+> index d7d2c53e97e..b4fd40573a5 100644
+> --- a/hw/dma/sifive_pdma.c
+> +++ b/hw/dma/sifive_pdma.c
+> @@ -80,7 +80,7 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
+>
+>      /* do nothing if bytes to transfer is zero */
+>      if (!bytes) {
+> -        goto error;
+> +        goto done;
+>      }
+>
+>      /*
+> @@ -135,11 +135,6 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
+>          s->chan[ch].exec_bytes -= remainder;
+>      }
+>
+> -    /* indicate a DMA transfer is done */
+> -    s->chan[ch].state = DMA_CHAN_STATE_DONE;
+> -    s->chan[ch].control &= ~CONTROL_RUN;
+> -    s->chan[ch].control |= CONTROL_DONE;
+> -
+>      /* reload exec_ registers if repeat is required */
+>      if (s->chan[ch].next_config & CONFIG_REPEAT) {
+>          s->chan[ch].exec_bytes = bytes;
+> @@ -147,6 +142,11 @@ static void sifive_pdma_run(SiFivePDMAState *s, int ch)
+>          s->chan[ch].exec_src = src;
+>      }
+>
+> +done:
+> +    /* indicate a DMA transfer is done */
+> +    s->chan[ch].state = DMA_CHAN_STATE_DONE;
+> +    s->chan[ch].control &= ~CONTROL_RUN;
+> +    s->chan[ch].control |= CONTROL_DONE;
+>      return;
+>
+>  error:
+> --
+> 2.25.1
 >
 >
-Thanks, Richard, I was struggling with whether to introduce a new field
-in DisasContext.
-I will update my patch.
-
-Regards,
-Frank Chang
-
-
->
-> r~
->
-
---000000000000b28bd105cbeb22fb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Sep 14, 2021 at 10:10 AM Richard =
-Henderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hende=
-rson@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex">On 9/13/21 6:37 PM, <a href=3D"ma=
-ilto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> w=
-rote:<br>
-&gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=
-=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; <br>
-&gt; When V=3D1, both vsstauts.FS and HS-level sstatus.FS are in effect.<br=
->
-&gt; Modifying the floating-point state when V=3D1 causes both fields to<br=
->
-&gt; be set to 3 (Dirty).<br>
-&gt; <br>
-&gt; However, it&#39;s possible that HS-level sstatus.FS is Clean and VS-le=
-vel<br>
-&gt; vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=3D1.=
-<br>
-&gt; We can&#39;t early return for this case because we still need to set<b=
-r>
-&gt; sstatus.FS to Dirty according to spec.<br>
-&gt; <br>
-&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
-m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Vincent Chen &lt;<a href=3D"mailto:vincent.chen@sifive.co=
-m" target=3D"_blank">vincent.chen@sifive.com</a>&gt;<br>
-&gt; Tested-by: Vincent Chen &lt;<a href=3D"mailto:vincent.chen@sifive.com"=
- target=3D"_blank">vincent.chen@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0target/riscv/translate.c | 19 ++++++++++---------<br>
-&gt;=C2=A0 =C2=A01 file changed, 10 insertions(+), 9 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/target/riscv/translate.c b/target/riscv/translate.c<br>
-&gt; index e356fc6c46c..0096b098738 100644<br>
-&gt; --- a/target/riscv/translate.c<br>
-&gt; +++ b/target/riscv/translate.c<br>
-&gt; @@ -280,26 +280,27 @@ static void gen_jal(DisasContext *ctx, int rd, t=
-arget_ulong imm)<br>
-&gt;=C2=A0 =C2=A0static void mark_fs_dirty(DisasContext *ctx)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0TCGv tmp;<br>
-&gt; -=C2=A0 =C2=A0 target_ulong sd;<br>
-&gt; +=C2=A0 =C2=A0 target_ulong sd =3D is_32bit(ctx) ? MSTATUS32_SD : MSTA=
-TUS64_SD;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (ctx-&gt;virt_enabled) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 tmp =3D tcg_temp_new();<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPUR=
-ISCVState, mstatus_hs));<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd)=
-;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_gen_st_tl(tmp, cpu_env, offsetof(CPUR=
-ISCVState, mstatus_hs));<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 tcg_temp_free(tmp);<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ctx-&gt;mstatus_fs =3D=3D MSTATUS_FS) {<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-<br>
-You should introduce a ctx-&gt;mstatus_hs field to track the code that you =
-moved.=C2=A0 Otherwise <br>
-you&#39;ll be setting this dirty bit for every fp insn.<br>
-<br></blockquote><div><br></div><div>Thanks, Richard, I was struggling with=
- whether to introduce a new field in=C2=A0DisasContext.</div><div>I will up=
-date my patch.</div><div><br></div><div>Regards,</div><div>Frank Chang</div=
-><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-r~<br>
-</blockquote></div></div>
-
---000000000000b28bd105cbeb22fb--
 
