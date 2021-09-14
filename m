@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9PM-0000uH-Bt
+	id 1mQ9PM-0000v6-Nd
 	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:27:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37612)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37700)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9P2-0000oD-24
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:27:21 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:57046)
+ id 1mQ9P9-0000oY-Kz
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:27:25 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:25256)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Ov-0007RS-Ea
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:27:15 -0400
+ id 1mQ9P6-0007XA-MK
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:27:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629628;
+ s=mimecast20190719; t=1631629639;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GzpbfU4A9btQY9RS5Bo61BZfvRRoLXi0U6P5LuLSTCs=;
- b=dJe14Dnkzfp/wvMo7YNfg/Vpoz9ldXtr1VIs5amJ7XlYkvH8imBs0DtyuBRM9Gr+coi2JE
- dEdLEjmFSOqn8JGjVmz1iUgSDNCnh5QM6TgSJPD8QEiknYeUHqzPEioY8ca6+SlzvO5gZP
- 8Ue0IAELuKV0ELgaG5EcbN2+Cf8nNhA=
+ bh=+wDxv/ynJAT6bxB9NSeiHYS4UowdIUh6a7fG4sUwkpU=;
+ b=H/W2ihAB9RFkqY/xLjWQLYnCeRmPPURRaWGmJ6IYo6L+d4lV8meKjeCWvd4A2New+xCf7/
+ J8sK7/fVc7HtPXfqYa03Mp0JV2ZOWrwiMLqn1uI+1A3Jx9a6T0pSre2VMqHIK6PvkCNvHs
+ us4x60+y8TJkz+4Gee0lfmHd4bCx/zs=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-201-4cFRpq3QPRWx92hlR6xsbw-1; Tue, 14 Sep 2021 10:27:07 -0400
-X-MC-Unique: 4cFRpq3QPRWx92hlR6xsbw-1
+ us-mta-476-T2ixmEeIOZmDohW-2iSoeA-1; Tue, 14 Sep 2021 10:27:18 -0400
+X-MC-Unique: T2ixmEeIOZmDohW-2iSoeA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D5F2F36418;
- Tue, 14 Sep 2021 14:27:01 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 120531084681;
+ Tue, 14 Sep 2021 14:27:13 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 314435D9CA;
- Tue, 14 Sep 2021 14:26:47 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 28BDB5D9CA;
+ Tue, 14 Sep 2021 14:27:02 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 18/53] target/nios2: convert to use format_state instead of
- dump_state
-Date: Tue, 14 Sep 2021 15:20:07 +0100
-Message-Id: <20210914142042.1655100-19-berrange@redhat.com>
+Subject: [PATCH v2 19/53] target/openrisc: convert to use format_state instead
+ of dump_state
+Date: Tue, 14 Sep 2021 15:20:08 +0100
+Message-Id: <20210914142042.1655100-20-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -82,15 +82,15 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -107,82 +107,62 @@ X-List-Received-Date: Tue, 14 Sep 2021 14:27:25 -0000
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- target/nios2/cpu.c       |  2 +-
- target/nios2/cpu.h       |  2 +-
- target/nios2/translate.c | 20 ++++++++++----------
- 3 files changed, 12 insertions(+), 12 deletions(-)
+ target/openrisc/cpu.c       | 2 +-
+ target/openrisc/cpu.h       | 2 +-
+ target/openrisc/translate.c | 8 ++++----
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-index 5e37defef8..cbf15fb1c9 100644
---- a/target/nios2/cpu.c
-+++ b/target/nios2/cpu.c
-@@ -241,7 +241,7 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
+diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
+index bd34e429ec..d60d248958 100644
+--- a/target/openrisc/cpu.c
++++ b/target/openrisc/cpu.c
+@@ -206,7 +206,7 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
  
-     cc->class_by_name = nios2_cpu_class_by_name;
-     cc->has_work = nios2_cpu_has_work;
--    cc->dump_state = nios2_cpu_dump_state;
-+    cc->format_state = nios2_cpu_format_state;
-     cc->set_pc = nios2_cpu_set_pc;
-     cc->disas_set_info = nios2_cpu_disas_set_info;
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
-index 2ab82fdc71..3b16cd1f3c 100644
---- a/target/nios2/cpu.h
-+++ b/target/nios2/cpu.h
-@@ -195,7 +195,7 @@ void nios2_tcg_init(void);
- void nios2_cpu_do_interrupt(CPUState *cs);
- int cpu_nios2_signal_handler(int host_signum, void *pinfo, void *puc);
- void dump_mmu(CPUNios2State *env);
--void nios2_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-+void nios2_cpu_format_state(CPUState *cpu, GString *buf, int flags);
- hwaddr nios2_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
- void nios2_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
-                                    MMUAccessType access_type,
-diff --git a/target/nios2/translate.c b/target/nios2/translate.c
-index 08d7ac5398..a5f0f56e1a 100644
---- a/target/nios2/translate.c
-+++ b/target/nios2/translate.c
-@@ -855,7 +855,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
-     translator_loop(&nios2_tr_ops, &dc.base, cs, tb, max_insns);
+     cc->class_by_name = openrisc_cpu_class_by_name;
+     cc->has_work = openrisc_cpu_has_work;
+-    cc->dump_state = openrisc_cpu_dump_state;
++    cc->format_state = openrisc_cpu_format_state;
+     cc->set_pc = openrisc_cpu_set_pc;
+     cc->gdb_read_register = openrisc_cpu_gdb_read_register;
+     cc->gdb_write_register = openrisc_cpu_gdb_write_register;
+diff --git a/target/openrisc/cpu.h b/target/openrisc/cpu.h
+index 82cbaeb4f8..112b845b10 100644
+--- a/target/openrisc/cpu.h
++++ b/target/openrisc/cpu.h
+@@ -314,7 +314,7 @@ struct OpenRISCCPU {
+ void cpu_openrisc_list(void);
+ void openrisc_cpu_do_interrupt(CPUState *cpu);
+ bool openrisc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+-void openrisc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
++void openrisc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+ hwaddr openrisc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+ int openrisc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int openrisc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+diff --git a/target/openrisc/translate.c b/target/openrisc/translate.c
+index d6ea536744..0155f2b160 100644
+--- a/target/openrisc/translate.c
++++ b/target/openrisc/translate.c
+@@ -1723,16 +1723,16 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
+     translator_loop(&openrisc_tr_ops, &ctx.base, cs, tb, max_insns);
  }
  
--void nios2_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-+void nios2_cpu_format_state(CPUState *cs, GString *buf, int flags)
+-void openrisc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
++void openrisc_cpu_format_state(CPUState *cs, GString *buf, int flags)
  {
-     Nios2CPU *cpu = NIOS2_CPU(cs);
-     CPUNios2State *env = &cpu->env;
-@@ -865,22 +865,22 @@ void nios2_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         return;
-     }
+     OpenRISCCPU *cpu = OPENRISC_CPU(cs);
+     CPUOpenRISCState *env = &cpu->env;
+     int i;
  
--    qemu_fprintf(f, "IN: PC=%x %s\n",
--                 env->regs[R_PC], lookup_symbol(env->regs[R_PC]));
-+    g_string_append_printf(buf, "IN: PC=%x %s\n",
-+                           env->regs[R_PC], lookup_symbol(env->regs[R_PC]));
- 
-     for (i = 0; i < NUM_CORE_REGS; i++) {
--        qemu_fprintf(f, "%9s=%8.8x ", regnames[i], env->regs[i]);
-+        g_string_append_printf(buf, "%9s=%8.8x ", regnames[i], env->regs[i]);
-         if ((i + 1) % 4 == 0) {
--            qemu_fprintf(f, "\n");
-+            g_string_append_printf(buf, "\n");
-         }
+-    qemu_fprintf(f, "PC=%08x\n", env->pc);
++    g_string_append_printf(buf, "PC=%08x\n", env->pc);
+     for (i = 0; i < 32; ++i) {
+-        qemu_fprintf(f, "R%02d=%08x%c", i, cpu_get_gpr(env, i),
+-                     (i % 4) == 3 ? '\n' : ' ');
++        g_string_append_printf(buf, "R%02d=%08x%c", i, cpu_get_gpr(env, i),
++                               (i % 4) == 3 ? '\n' : ' ');
      }
- #if !defined(CONFIG_USER_ONLY)
--    qemu_fprintf(f, " mmu write: VPN=%05X PID %02X TLBACC %08X\n",
--                 env->mmu.pteaddr_wr & CR_PTEADDR_VPN_MASK,
--                 (env->mmu.tlbmisc_wr & CR_TLBMISC_PID_MASK) >> 4,
--                 env->mmu.tlbacc_wr);
-+    g_string_append_printf(buf, " mmu write: VPN=%05X PID %02X TLBACC %08X\n",
-+                           env->mmu.pteaddr_wr & CR_PTEADDR_VPN_MASK,
-+                           (env->mmu.tlbmisc_wr & CR_TLBMISC_PID_MASK) >> 4,
-+                           env->mmu.tlbacc_wr);
- #endif
--    qemu_fprintf(f, "\n\n");
-+    g_string_append_printf(buf, "\n\n");
  }
  
- void nios2_tcg_init(void)
 -- 
 2.31.1
 
