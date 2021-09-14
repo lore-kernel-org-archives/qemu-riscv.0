@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Th-0008RG-Rq
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:32:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40308)
+	id 1mQ9Tv-0000Ww-MR
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:32:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40448)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Tb-0008LW-VR
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:32:00 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44809)
+ id 1mQ9Tt-0000SB-LP
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:32:17 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:25377)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9TU-0002QR-KV
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:31:59 -0400
+ id 1mQ9Tl-0002bg-UK
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:32:14 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629912;
+ s=mimecast20190719; t=1631629929;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2AFd+YTtbWmCaBK/9f7YsAzzznYqPy7xWqsdE9totms=;
- b=Ql7yEmKkjCTry2BBJhUMGO9TxONasQJsENu6Rq9b8NO6ip46Mk1ZUWHaRfXNhx03AvbCiq
- Pd5308DWbnPP4/htoxRkmpABM75ptYpu5VrIpCJefP2yc7J0caSwW7KPAkDY0a6NXTdc41
- oGL143MuYjWmdAop5Zg+7nKV6gjWVUU=
+ bh=IbnSHNQ2kA4GdquvgqY/LA7KZ7zRfnEAlFQJqJTL2Zg=;
+ b=Wpvtr4zbCY6xHLkfk6K+JvKju3jxf85f++t8StPkxtfQI46pXuMPrHeORnGy0YjbeBV7L5
+ PZ8sAOcgDkUUrtdvE/Du+8Pcn/4Fqb6P3XZ4lFU1u9ihdzXQuRGIHYb6WNIjMm484Cud23
+ jGaFvC4vgEBWrAQ8SnQbhoIYjrLAjFU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-495-kMmXL9LeNXGtQ4n1sCumjQ-1; Tue, 14 Sep 2021 10:31:48 -0400
-X-MC-Unique: kMmXL9LeNXGtQ4n1sCumjQ-1
+ us-mta-239-ctGCrj0kMDOYr0bE3E5bpg-1; Tue, 14 Sep 2021 10:32:07 -0400
+X-MC-Unique: ctGCrj0kMDOYr0bE3E5bpg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CB7961922023;
- Tue, 14 Sep 2021 14:31:44 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 23DAB10144E0;
+ Tue, 14 Sep 2021 14:32:04 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 529D55D9CA;
- Tue, 14 Sep 2021 14:31:37 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 1F1B15D9CA;
+ Tue, 14 Sep 2021 14:31:44 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,9 +68,9 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 35/53] qapi: introduce x-query-ramblock QMP command
-Date: Tue, 14 Sep 2021 15:20:24 +0100
-Message-Id: <20210914142042.1655100-36-berrange@redhat.com>
+Subject: [PATCH v2 36/53] qapi: introduce x-query-skeys QMP command
+Date: Tue, 14 Sep 2021 15:20:25 +0100
+Message-Id: <20210914142042.1655100-37-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -102,153 +102,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:32:00 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:32:18 -0000
 
-This is a counterpart to the HMP "info ramblock" command. It is being
+This is a counterpart to the HMP "info skeys" command. It is being
 added with an "x-" prefix because this QMP command is intended as an
 adhoc debugging tool and will thus not be modelled in QAPI as fully
 structured data, nor will it have long term guaranteed stability.
 The existing HMP command is rewritten to call the QMP command.
 
+This command is unable to use the pre-existing HumanReadableText,
+because if 'common.json' is included into 'machine-target.json'
+the static marshalling method for HumanReadableText will be reported
+as unused by the compiler on all architectures except s390x.
+
+Possible options were
+
+ 1 Support 'if' conditionals on 'include' statements in QAPI
+ 2 Add further commands to 'machine-target.json' that use
+   HumanReadableText, such that it has at least one usage
+   on all architecture targets.
+ 3 Duplicate HumanReadableText as TargetHumanReadableText
+   adding conditions
+
+This patch takes option (3) in the belief that we will eventually
+get to a point where option (2) happens, and TargetHumanReadableText
+can be removed again.
+
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- include/exec/ramlist.h |  2 +-
- monitor/hmp-cmds.c     | 12 ++++++++++--
- monitor/qmp-cmds.c     | 11 +++++++++++
- qapi/machine.json      | 12 ++++++++++++
- softmmu/physmem.c      | 19 +++++++++++--------
- 5 files changed, 45 insertions(+), 11 deletions(-)
+ hw/s390x/s390-skeys.c    | 37 +++++++++++++++++++++++++++++--------
+ qapi/machine-target.json | 27 +++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 8 deletions(-)
 
-diff --git a/include/exec/ramlist.h b/include/exec/ramlist.h
-index ece6497ee2..2ad2a81acc 100644
---- a/include/exec/ramlist.h
-+++ b/include/exec/ramlist.h
-@@ -80,6 +80,6 @@ void ram_block_notify_add(void *host, size_t size, size_t max_size);
- void ram_block_notify_remove(void *host, size_t size, size_t max_size);
- void ram_block_notify_resize(void *host, size_t old_size, size_t new_size);
- 
--void ram_block_dump(Monitor *mon);
-+GString *ram_block_format(void);
- 
- #endif /* RAMLIST_H */
-diff --git a/monitor/hmp-cmds.c b/monitor/hmp-cmds.c
-index d24a1683de..77533b2d8a 100644
---- a/monitor/hmp-cmds.c
-+++ b/monitor/hmp-cmds.c
-@@ -52,7 +52,6 @@
- #include "ui/console.h"
- #include "qemu/cutils.h"
+diff --git a/hw/s390x/s390-skeys.c b/hw/s390x/s390-skeys.c
+index 5024faf411..3a404d0574 100644
+--- a/hw/s390x/s390-skeys.c
++++ b/hw/s390x/s390-skeys.c
+@@ -15,6 +15,7 @@
+ #include "hw/s390x/storage-keys.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-misc-target.h"
++#include "qapi/qapi-commands-machine-target.h"
+ #include "qapi/qmp/qdict.h"
  #include "qemu/error-report.h"
--#include "exec/ramlist.h"
- #include "hw/intc/intc.h"
- #include "migration/snapshot.h"
- #include "migration/misc.h"
-@@ -2188,7 +2187,16 @@ void hmp_rocker_of_dpa_groups(Monitor *mon, const QDict *qdict)
+ #include "sysemu/memory_mapping.h"
+@@ -73,34 +74,54 @@ static void write_keys(FILE *f, uint8_t *keys, uint64_t startgfn,
+     }
+ }
  
- void hmp_info_ramblock(Monitor *mon, const QDict *qdict)
+-void hmp_info_skeys(Monitor *mon, const QDict *qdict)
++TargetHumanReadableText *qmp_x_query_skeys(int64_t addr, Error **errp)
  {
--    ram_block_dump(mon);
-+    Error *err = NULL;
-+    g_autoptr(HumanReadableText) info = NULL;
-+
-+    info = qmp_x_query_ramblock(&err);
-+    if (err) {
-+        error_report_err(err);
-+        return;
++    TargetHumanReadableText *ret;
++    g_autoptr(GString) buf = g_string_new("");
+     S390SKeysState *ss = s390_get_skeys_device();
+     S390SKeysClass *skeyclass = S390_SKEYS_GET_CLASS(ss);
+-    uint64_t addr = qdict_get_int(qdict, "addr");
+     uint8_t key;
+     int r;
+ 
+     /* Quick check to see if guest is using storage keys*/
+     if (!skeyclass->skeys_are_enabled(ss)) {
+-        monitor_printf(mon, "Error: This guest is not using storage keys\n");
+-        return;
++        error_setg(errp, "this guest is not using storage keys");
++        return NULL;
+     }
+ 
+     if (!address_space_access_valid(&address_space_memory,
+                                     addr & TARGET_PAGE_MASK, TARGET_PAGE_SIZE,
+                                     false, MEMTXATTRS_UNSPECIFIED)) {
+-        monitor_printf(mon, "Error: The given address is not valid\n");
+-        return;
++        error_setg(errp, "the given address is not valid");
++        return NULL;
+     }
+ 
+     r = skeyclass->get_skeys(ss, addr / TARGET_PAGE_SIZE, 1, &key);
+     if (r < 0) {
+-        monitor_printf(mon, "Error: %s\n", strerror(-r));
++        error_setg_errno(errp, r, "unable to query storage keys");
++        return NULL;
 +    }
 +
-+    monitor_printf(mon, "%s", info->human_readable_text);
- }
- 
- void hmp_info_vm_generation_id(Monitor *mon, const QDict *qdict)
-diff --git a/monitor/qmp-cmds.c b/monitor/qmp-cmds.c
-index 9c2c1e4603..b86fff823e 100644
---- a/monitor/qmp-cmds.c
-+++ b/monitor/qmp-cmds.c
-@@ -37,6 +37,7 @@
- #include "qapi/qapi-commands-misc.h"
- #include "qapi/qapi-commands-ui.h"
- #include "qapi/qmp/qerror.h"
-+#include "exec/ramlist.h"
- #include "hw/mem/memory-device.h"
- #include "hw/acpi/acpi_dev_interface.h"
- #include "hw/rdma/rdma.h"
-@@ -419,3 +420,13 @@ HumanReadableText *qmp_x_query_rdma(Error **errp)
-     ret->human_readable_text = g_steal_pointer(&buf->str);
-     return ret;
- }
++    g_string_append_printf(buf, "  key: 0x%X\n", key);
 +
-+HumanReadableText *qmp_x_query_ramblock(Error **errp)
-+{
-+    HumanReadableText *ret;
-+    g_autoptr(GString) buf = ram_block_format();
-+
-+    ret = g_new0(HumanReadableText, 1);
++    ret = g_new0(TargetHumanReadableText, 1);
 +    ret->human_readable_text = g_steal_pointer(&buf->str);
 +    return ret;
 +}
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 0fe962d916..3ae7beb7cf 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1337,6 +1337,18 @@
- { 'command': 'x-query-profile',
-   'returns': 'HumanReadableText' }
++
++void hmp_info_skeys(Monitor *mon, const QDict *qdict)
++{
++    Error *err = NULL;
++    g_autoptr(TargetHumanReadableText) info = NULL;
++    uint64_t addr = qdict_get_int(qdict, "addr");
++
++    info = qmp_x_query_skeys(addr, &err);
++    if (err) {
++        error_report_err(err);
+         return;
+     }
  
+-    monitor_printf(mon, "  key: 0x%X\n", key);
++    monitor_printf(mon, "%s", info->human_readable_text);
+ }
+ 
+ void hmp_dump_skeys(Monitor *mon, const QDict *qdict)
+diff --git a/qapi/machine-target.json b/qapi/machine-target.json
+index f5ec4bc172..00476bcdd4 100644
+--- a/qapi/machine-target.json
++++ b/qapi/machine-target.json
+@@ -341,3 +341,30 @@
+                    'TARGET_I386',
+                    'TARGET_S390X',
+                    'TARGET_MIPS' ] } }
++
++
 +##
-+# @x-query-ramblock:
++# @TargetHumanReadableText:
 +#
-+# Query system ramblock information
++# @human-readable-text: Formatted output intended for humans.
 +#
-+# Returns: system ramblock information
++# Since: 6.2.0
++#
++##
++{ 'struct': 'TargetHumanReadableText',
++  'data': { 'human-readable-text': 'str' },
++  'if': 'TARGET_S390X' }
++
++##
++# @x-query-skeys:
++#
++# Query the value of a storage key
++#
++# Returns: storage key value
 +#
 +# Since: 6.2
 +##
-+{ 'command': 'x-query-ramblock',
-+  'returns': 'HumanReadableText' }
-+
- ##
- # @x-query-rdma:
- #
-diff --git a/softmmu/physmem.c b/softmmu/physmem.c
-index 23e77cb771..bc4a8354d3 100644
---- a/softmmu/physmem.c
-+++ b/softmmu/physmem.c
-@@ -1298,23 +1298,26 @@ void qemu_mutex_unlock_ramlist(void)
-     qemu_mutex_unlock(&ram_list.mutex);
- }
- 
--void ram_block_dump(Monitor *mon)
-+GString *ram_block_format(void)
- {
-     RAMBlock *block;
-     char *psize;
-+    GString *buf = g_string_new("");
- 
-     RCU_READ_LOCK_GUARD();
--    monitor_printf(mon, "%24s %8s  %18s %18s %18s\n",
--                   "Block Name", "PSize", "Offset", "Used", "Total");
-+    g_string_append_printf(buf, "%24s %8s  %18s %18s %18s\n",
-+                           "Block Name", "PSize", "Offset", "Used", "Total");
-     RAMBLOCK_FOREACH(block) {
-         psize = size_to_str(block->page_size);
--        monitor_printf(mon, "%24s %8s  0x%016" PRIx64 " 0x%016" PRIx64
--                       " 0x%016" PRIx64 "\n", block->idstr, psize,
--                       (uint64_t)block->offset,
--                       (uint64_t)block->used_length,
--                       (uint64_t)block->max_length);
-+        g_string_append_printf(buf, "%24s %8s  0x%016" PRIx64 " 0x%016" PRIx64
-+                               " 0x%016" PRIx64 "\n", block->idstr, psize,
-+                               (uint64_t)block->offset,
-+                               (uint64_t)block->used_length,
-+                               (uint64_t)block->max_length);
-         g_free(psize);
-     }
-+
-+    return buf;
- }
- 
- #ifdef __linux__
++{ 'command': 'x-query-skeys',
++  'data': { 'addr': 'int' },
++  'returns': 'TargetHumanReadableText',
++  'if': 'TARGET_S390X' }
 -- 
 2.31.1
 
