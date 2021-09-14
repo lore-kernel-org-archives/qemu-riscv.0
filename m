@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Kq-00021d-Ut
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:22:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34590)
+	id 1mQ9L8-0002H5-F6
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:23:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34754)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Km-0001wP-5P
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:52 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53665)
+ id 1mQ9L3-0002DY-Kw
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:23:11 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:30970)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Ki-0004Fw-Nk
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:51 -0400
+ id 1mQ9L1-0004Sx-0l
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:23:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629367;
+ s=mimecast20190719; t=1631629385;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hnAoCdun/m6178yZjeWVfAYiK2xccClT/ddcqgE1vOc=;
- b=FGOP64Fvs/nl8G9/dB995ESfDBN5MIczfs2NBRZ/CDniTE7JtO0oWD+rjJLJaTLcqm833S
- S/hS1P8akCpkb6SJDdJB/HjkL9XCflEV4VxKV2By4MIz4blsfgtXUnRk7c6ekqrWuAEy3c
- RlNs/sAHIa7+kg+eKwINkxR0DdpRoQc=
+ bh=rKnaBwFCCJX9ZX6cv7A4ifx+XIL+7QBX+qDEATc0WKY=;
+ b=FvwScpkw/c6lo782uppwpfvt1NIaou0TFbcQy/Pz0tLvq1nJDIYTXO7iVULMr2tcj/yD5X
+ RV4BnH1utCBW4+Ex8rIKZtI9NLsbTmYFNDKlX7SzGUwQt+iBdju4AR5dvLhQJbJSVrjO0A
+ nfyAsasS/WqQJAahFLzjV5Z6DohObmQ=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-16-CmXhOXUDPVO6dPAWyAYScw-1; Tue, 14 Sep 2021 10:22:45 -0400
-X-MC-Unique: CmXhOXUDPVO6dPAWyAYScw-1
+ us-mta-265-XoKLPxexNHmDkTmH1a4ktg-1; Tue, 14 Sep 2021 10:23:04 -0400
+X-MC-Unique: XoKLPxexNHmDkTmH1a4ktg-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0A83A1006AA5;
- Tue, 14 Sep 2021 14:22:42 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BB3DF1084683;
+ Tue, 14 Sep 2021 14:23:00 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6A7495D9CA;
- Tue, 14 Sep 2021 14:22:34 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 588BE5D9CA;
+ Tue, 14 Sep 2021 14:22:42 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 05/53] docs/devel: document expectations for HMP commands
- in the future
-Date: Tue, 14 Sep 2021 15:19:54 +0100
-Message-Id: <20210914142042.1655100-6-berrange@redhat.com>
+Subject: [PATCH v2 06/53] hw/core: introduce 'format_state' callback to
+ replace 'dump_state'
+Date: Tue, 14 Sep 2021 15:19:55 +0100
+Message-Id: <20210914142042.1655100-7-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -82,15 +82,15 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -31
-X-Spam_score: -3.2
-X-Spam_bar: ---
-X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -103,41 +103,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:22:52 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:23:11 -0000
 
-We no longer wish to have commands implemented in HMP only. All commands
-should start with a QMP implementation and the HMP merely be a shim
-around this. To reduce the burden of implementing QMP commands where
-there is low expectation of machine usage, requirements for QAPI
-modelling are relaxed provided the command is under the "x-" name
-prefix.
+The 'dump_state' callback assumes it will be outputting to a FILE
+object. This is fine for HMP, but not so useful for QMP. Introduce
+a new 'format_state' callback that returns a formatted GString
+instead.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- docs/devel/writing-monitor-commands.rst | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ hw/core/cpu-common.c  | 15 +++++++++++++++
+ include/hw/core/cpu.h | 13 ++++++++++++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
 
-diff --git a/docs/devel/writing-monitor-commands.rst b/docs/devel/writing-monitor-commands.rst
-index 4cf51ab557..983130a793 100644
---- a/docs/devel/writing-monitor-commands.rst
-+++ b/docs/devel/writing-monitor-commands.rst
-@@ -11,6 +11,16 @@ For an in-depth introduction to the QAPI framework, please refer to
- docs/devel/qapi-code-gen.txt. For documentation about the QMP protocol,
- start with docs/interop/qmp-intro.txt.
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index e2f5a64604..c2cd33a817 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -106,6 +106,21 @@ void cpu_dump_state(CPUState *cpu, FILE *f, int flags)
+     if (cc->dump_state) {
+         cpu_synchronize_state(cpu);
+         cc->dump_state(cpu, f, flags);
++    } else if (cc->format_state) {
++        g_autoptr(GString) buf = g_string_new("");
++        cpu_synchronize_state(cpu);
++        cc->format_state(cpu, buf, flags);
++        qemu_fprintf(f, "%s", buf->str);
++    }
++}
++
++void cpu_format_state(CPUState *cpu, GString *buf, int flags)
++{
++    CPUClass *cc = CPU_GET_CLASS(cpu);
++
++    if (cc->format_state) {
++        cpu_synchronize_state(cpu);
++        cc->format_state(cpu, buf, flags);
+     }
+ }
  
-+Historically QEMU has permitted new monitor commands to be implemented in HMP
-+only, QMP only, or both, depending on whether they needed to be accessible to
-+human operators, machines, or both. When both QMP and HMP are implemented it
-+is expected the HMP implementation is a shim around the QMP implementation.
-+Going forward, the expectation is that new commands are implemented in QMP
-+only, or both QMP and HMP. No further commands are to be added to HMP only.
-+The long term goal is that all HMP commands will be implemented in terms of
-+their QMP equivalent, enabling internals of QEMU to be fully isolated from
-+the HMP implementation. Refer to the later topic on modelling data in QAPI
-+for further guidance on commands that would have traditionally been HMP only.
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index bc864564ce..1599ef9df3 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -91,7 +91,8 @@ struct SysemuCPUOps;
+  * @reset_dump_flags: #CPUDumpFlags to use for reset logging.
+  * @has_work: Callback for checking if there is work to do.
+  * @memory_rw_debug: Callback for GDB memory access.
+- * @dump_state: Callback for dumping state.
++ * @dump_state: Callback for dumping state. Deprecated, use @format_state.
++ * @format_state: Callback for formatting state.
+  * @get_arch_id: Callback for getting architecture-dependent CPU ID.
+  * @set_pc: Callback for setting the Program Counter register. This
+  *       should have the semantics used by the target architecture when
+@@ -136,6 +137,7 @@ struct CPUClass {
+     int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+                            uint8_t *buf, int len, bool is_write);
+     void (*dump_state)(CPUState *cpu, FILE *, int flags);
++    void (*format_state)(CPUState *cpu, GString *buf, int flags);
+     int64_t (*get_arch_id)(CPUState *cpu);
+     void (*set_pc)(CPUState *cpu, vaddr value);
+     int (*gdb_read_register)(CPUState *cpu, GByteArray *buf, int reg);
+@@ -537,6 +539,15 @@ enum CPUDumpFlags {
+  */
+ void cpu_dump_state(CPUState *cpu, FILE *f, int flags);
  
- Overview
- --------
++/**
++ * cpu_format_state:
++ * @cpu: The CPU whose state is to be formatted.
++ * @buf: buffer to format state into
++ *
++ * Formats the CPU state.
++ */
++void cpu_format_state(CPUState *cpu, GString *buf, int flags);
++
+ #ifndef CONFIG_USER_ONLY
+ /**
+  * cpu_get_phys_page_attrs_debug:
 -- 
 2.31.1
 
