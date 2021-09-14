@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQ9Kf-0001mv-OB
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:22:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34518)
+	id 1mQ9Kq-00021d-Ut
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 10:22:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34590)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Kd-0001eA-MO
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:28180)
+ id 1mQ9Km-0001wP-5P
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:52 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53665)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1mQ9Ka-00049G-Gx
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:43 -0400
+ id 1mQ9Ki-0004Fw-Nk
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 10:22:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631629359;
+ s=mimecast20190719; t=1631629367;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=AKQ5Y6mKD8eeLMm/8Vj1U//cSS0HbEG9luA/4D8pINQ=;
- b=F1X8741Gv376tfj200L2vmhX2xs/UeoRrR6bX57kDAut85Jx4UA4ylku2dxcD3Dijki9FU
- BLBKwawbiX7bzfLDwIzaz2FWJOFgMOLtcpFWPjf32C942dzGjvanagR5uShZeOCBlQrouW
- RwGIv3AiNuHrytQqFejoFL+ezunkMac=
+ bh=hnAoCdun/m6178yZjeWVfAYiK2xccClT/ddcqgE1vOc=;
+ b=FGOP64Fvs/nl8G9/dB995ESfDBN5MIczfs2NBRZ/CDniTE7JtO0oWD+rjJLJaTLcqm833S
+ S/hS1P8akCpkb6SJDdJB/HjkL9XCflEV4VxKV2By4MIz4blsfgtXUnRk7c6ekqrWuAEy3c
+ RlNs/sAHIa7+kg+eKwINkxR0DdpRoQc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-451-3kvnxxzgOzWlZw_UBtYRjQ-1; Tue, 14 Sep 2021 10:22:38 -0400
-X-MC-Unique: 3kvnxxzgOzWlZw_UBtYRjQ-1
+ us-mta-16-CmXhOXUDPVO6dPAWyAYScw-1; Tue, 14 Sep 2021 10:22:45 -0400
+X-MC-Unique: CmXhOXUDPVO6dPAWyAYScw-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1E49B1084681;
- Tue, 14 Sep 2021 14:22:34 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0A83A1006AA5;
+ Tue, 14 Sep 2021 14:22:42 +0000 (UTC)
 Received: from localhost.localdomain.com (unknown [10.39.193.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0E5B55D9CA;
- Tue, 14 Sep 2021 14:22:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6A7495D9CA;
+ Tue, 14 Sep 2021 14:22:34 +0000 (UTC)
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -68,10 +68,10 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH v2 04/53] docs/devel: add example of command returning
- unstructured text
-Date: Tue, 14 Sep 2021 15:19:53 +0100
-Message-Id: <20210914142042.1655100-5-berrange@redhat.com>
+Subject: [PATCH v2 05/53] docs/devel: document expectations for HMP commands
+ in the future
+Date: Tue, 14 Sep 2021 15:19:54 +0100
+Message-Id: <20210914142042.1655100-6-berrange@redhat.com>
 In-Reply-To: <20210914142042.1655100-1-berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
 MIME-Version: 1.0
@@ -82,7 +82,7 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
@@ -90,7 +90,7 @@ X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -103,110 +103,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 14:22:44 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 14:22:52 -0000
 
-This illustrates how to add a QMP command returning unstructured text,
-following the guidelines added in the previous patch. The example uses
-a simplified version of 'info roms'.
+We no longer wish to have commands implemented in HMP only. All commands
+should start with a QMP implementation and the HMP merely be a shim
+around this. To reduce the burden of implementing QMP commands where
+there is low expectation of machine usage, requirements for QAPI
+modelling are relaxed provided the command is under the "x-" name
+prefix.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- docs/devel/writing-monitor-commands.rst | 85 +++++++++++++++++++++++++
- 1 file changed, 85 insertions(+)
+ docs/devel/writing-monitor-commands.rst | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/docs/devel/writing-monitor-commands.rst b/docs/devel/writing-monitor-commands.rst
-index d68c552fdd..4cf51ab557 100644
+index 4cf51ab557..983130a793 100644
 --- a/docs/devel/writing-monitor-commands.rst
 +++ b/docs/devel/writing-monitor-commands.rst
-@@ -647,3 +647,88 @@ has to traverse the list, it's shown below for reference::
+@@ -11,6 +11,16 @@ For an in-depth introduction to the QAPI framework, please refer to
+ docs/devel/qapi-code-gen.txt. For documentation about the QMP protocol,
+ start with docs/interop/qmp-intro.txt.
  
-      qapi_free_TimerAlarmMethodList(method_list);
-  }
-+
-+Writing a debugging aid returning unstructured text
-+---------------------------------------------------
-+
-+As discussed at the start of the previous example, it is required that
-+commands expecting machine usage be using fine-grained QAPI data types.
-+The exception to this rule applies when the command is solely intended
-+as a debugging aid and allows for returning unstructured text. This is
-+commonly needed for query commands that report aspects of QEMU's
-+internal state that are useful to human operators.
-+
-+In this example we will consider a simplified variant of the HMP
-+command ``info roms``. Following the earlier rules, this command will
-+need to live under the ``x-`` name prefix, so its QMP implementation
-+will be called ``x-query-roms``. It will have no parameters and will
-+return a single text string::
-+
-+ { 'struct': 'HumanReadableText',
-+   'data': { 'human-readable-text': 'str' } }
-+
-+ { 'command': 'x-query-roms',
-+   'returns': 'HumanReadableText' }
-+
-+The ``HumanReadableText`` struct is intended to be used for all
-+commands, under the ``x-`` name prefix that are returning unstructured
-+text targetted at humans. It should never be used for commands outside
-+the ``x-`` name prefix, as those should be using structured QAPI types.
-+
-+Implementing the QMP command
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The QMP implementation will typically involve creating a ``GString``
-+object and printing formatted data into it::
-+
-+ HumanReadableText *qmp_x_query_roms(Error **errp)
-+ {
-+     GString buf = g_string_new("");
-+     HumanReadableText ret = g_new0(HumanReadableText, 1);
-+     Rom *rom;
-+
-+     QTAILQ_FOREACH(rom, &roms, next) {
-+        g_string_append_printf("%s size=0x%06zx name=\"%s\"\n",
-+                               memory_region_name(rom->mr),
-+                               rom->romsize,
-+                               rom->name);
-+     }
-+
-+     ret->human_readable_text = g_string_free(buf, FALSE);
-+
-+     return ret;
-+ }
-+
-+
-+Implementing the HMP command
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Now that the QMP command is in place, we can also make it available in
-+the human monitor (HMP) as shown in previous examples. The HMP
-+implementations will all look fairly similar, as all they need do is
-+invoke the QMP command and then print the resulting text or error
-+message. Here's the implementation of the "info roms" HMP command::
-+
-+ void hmp_info_roms(Monitor *mon, const QDict *qdict)
-+ {
-+     Error err = NULL;
-+     g_autoptr(HumanReadableText) info = qmp_x_query_roms(&err);
-+     if (err) {
-+         error_report_err(err);
-+         return;
-+     }
-+     monitor_printf(mon, "%s\n", info->human_readable_text);
-+ }
-+
-+Also, you have to add the function's prototype to the hmp.h file.
-+
-+There's one last step to actually make the command available to
-+monitor users, we should add it to the hmp-commands-info.hx file::
-+
-+    {
-+        .name       = "roms",
-+        .args_type  = "",
-+        .params     = "",
-+        .help       = "show roms",
-+        .cmd        = hmp_info_roms,
-+    },
++Historically QEMU has permitted new monitor commands to be implemented in HMP
++only, QMP only, or both, depending on whether they needed to be accessible to
++human operators, machines, or both. When both QMP and HMP are implemented it
++is expected the HMP implementation is a shim around the QMP implementation.
++Going forward, the expectation is that new commands are implemented in QMP
++only, or both QMP and HMP. No further commands are to be added to HMP only.
++The long term goal is that all HMP commands will be implemented in terms of
++their QMP equivalent, enabling internals of QEMU to be fully isolated from
++the HMP implementation. Refer to the later topic on modelling data in QAPI
++for further guidance on commands that would have traditionally been HMP only.
+ 
+ Overview
+ --------
 -- 
 2.31.1
 
