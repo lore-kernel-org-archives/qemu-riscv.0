@@ -1,112 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQAvi-0003YZ-Pb
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 12:05:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48332)
+	id 1mQBPK-0008Q4-0J
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 12:35:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59390)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mQAvd-0003Tu-2j
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 12:05:02 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:36598)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1mQBPD-0008Lc-UK
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 12:35:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:52388)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mQAvX-00053O-VH
- for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 12:05:00 -0400
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1mQBPB-0007fR-7d
+ for qemu-riscv@nongnu.org; Tue, 14 Sep 2021 12:35:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631635494;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ s=mimecast20190719; t=1631637331;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fwSgd185T8jrnRcPRkYx6E8h8fWkH+f8/s0umRpbj/o=;
- b=KrSd0f6jE2tpywIRe4J1WsD6MFNnoU2q8OwVZto51Nf6CO8VGdfbPnj+hwEFzl4HQ3cw85
- yNVY7nSNtJZGQ1oWJvFe488lZ+ZgVvY0hDzLEmDTER7p5qHWeoDyJMZegaLqqFU66hud+u
- derxa8bZLBLIaUWtrIgdW2fLzVTq598=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-184-t6h3WNuxMzy7kxk44dPpvg-1; Tue, 14 Sep 2021 12:04:53 -0400
-X-MC-Unique: t6h3WNuxMzy7kxk44dPpvg-1
-Received: by mail-wr1-f72.google.com with SMTP id
- x7-20020a5d6507000000b0015dada209b1so3200341wru.15
- for <qemu-riscv@nongnu.org>; Tue, 14 Sep 2021 09:04:53 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=fwSgd185T8jrnRcPRkYx6E8h8fWkH+f8/s0umRpbj/o=;
- b=AephlrHxLkTrIa1kcX908XieKLKwe6AWeCIlf3C1GzL0dE5SUtnGgtMHQBOn/j8An9
- 6SDdgkMf1fN1m+xr1JkFyBRZF0yuWwFDwBxbzd6qizkd0Pqcg+6fF1D48wU8zmd5j1R7
- QpGzZ/vKMjhegFOymu0XjHf8wA0WO+x1yJENgUb6Wrb8XTtoqjjzFQnndZGOSNEGppwZ
- AsYvhDjRhpNQX14sNCcr0ZYDtoUzopxRDzCZiKchGQ/f+UBL+Xu9mwLji+4qINajjJnO
- YioOkaNEa41rzpzLiYLzTqRKQQRGA5/5eoA4fcjsaxyHzLvH1E/U1kWTqCP0zM4ntUTD
- wCyQ==
-X-Gm-Message-State: AOAM532zwUwAnf33t8FdvXL74r/X+efDlZdkwB2HaGPMz/DaebVV1rQY
- 8rwVBC9Y4OVM3o/l9LMydE+VHlRO3/3ke1iTHYJLo8hnpipLgD/ddVdIz7qleyD4Rep24IKV5f/
- XVyVVLfzhgKPOyDU=
-X-Received: by 2002:a5d:630a:: with SMTP id i10mr13306087wru.178.1631635492540; 
- Tue, 14 Sep 2021 09:04:52 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxY9W8uuOq3x1502lnP8J8q4zQpVGcDdUWnjNiVmHX/lPv+I8nnf5Ku5qeSObPZKEx55QkDUQ==
-X-Received: by 2002:a5d:630a:: with SMTP id i10mr13306025wru.178.1631635492254; 
- Tue, 14 Sep 2021 09:04:52 -0700 (PDT)
-Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
- [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id q7sm5175176wru.56.2021.09.14.09.04.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Sep 2021 09:04:51 -0700 (PDT)
-Subject: Re: [PATCH v2 30/53] qapi: introduce x-query-roms QMP command
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
- <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
+ bh=uB/IOM9wvm06euCcwdkC6N9/8Q6PIHGVDPykNlmmfIQ=;
+ b=aK8Fis10zkrq98hGPJeKiJRfAocQZ7ezWSJ/JIUUosv0YX+vFSwgilgf64DRcu/nOooKoD
+ JbfAQ7Sedo+fLKzzuxuI5cj2sz1nYDncmK0xh2olU284HAIjMwgON+VQqCNZNgCBxDVliu
+ XYXDNZpDYjYrTb4oMt7KYHQw4sZaj18=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-564-tGaUdgfPPR61IwJzSKKHAQ-1; Tue, 14 Sep 2021 12:35:30 -0400
+X-MC-Unique: tGaUdgfPPR61IwJzSKKHAQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5B5F9104FC26;
+ Tue, 14 Sep 2021 16:35:10 +0000 (UTC)
+Received: from redhat.com (unknown [10.39.193.47])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 8D2205DF2F;
+ Tue, 14 Sep 2021 16:34:27 +0000 (UTC)
+Date: Tue, 14 Sep 2021 17:34:24 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
  Bin Meng <bin.meng@windriver.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
  Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eric Blake <eblake@redhat.com>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
  Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Eduardo Habkost <ehabkost@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
- <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Greg Kurz <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
  Michael Rolnik <mrolnik@gmail.com>, Peter Xu <peterx@redhat.com>,
- Stafford Horne <shorne@gmail.com>, David Gibson
- <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Stafford Horne <shorne@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
+Subject: Re: [PATCH v2 42/53] hw/core: introduce a 'format_tlb' callback
+Message-ID: <YUDPECQJraD3thwi@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-31-berrange@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Message-ID: <342ccd00-7210-1169-fb9d-3fad8d3c3470@redhat.com>
-Date: Tue, 14 Sep 2021 18:04:48 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ <20210914142042.1655100-43-berrange@redhat.com>
+ <818d439f-337e-a73c-9e22-fbf8a119435f@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-31-berrange@redhat.com>
+In-Reply-To: <818d439f-337e-a73c-9e22-fbf8a119435f@redhat.com>
+User-Agent: Mutt/2.0.7 (2021-05-04)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -51
-X-Spam_score: -5.2
-X-Spam_bar: -----
-X-Spam_report: (-5.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
+X-Spam_score_int: -31
+X-Spam_score: -3.2
+X-Spam_bar: ---
+X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.398,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-1.969, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -119,83 +104,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 16:05:03 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 16:35:39 -0000
 
-On 9/14/21 4:20 PM, Daniel P. Berrangé wrote:
-> This is a counterpart to the HMP "info roms" command. It is being
-> added with an "x-" prefix because this QMP command is intended as an
-> adhoc debugging tool and will thus not be modelled in QAPI as fully
-> structured data, nor will it have long term guaranteed stability.
-> The existing HMP command is rewritten to call the QMP command.
+On Tue, Sep 14, 2021 at 05:56:09PM +0200, Philippe Mathieu-Daudé wrote:
+> On 9/14/21 4:20 PM, Daniel P. Berrangé wrote:
+> > This will allow us to reduce duplication between the different targets
+> > implementing the 'info tlb' command.
+> > 
+> > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+> > ---
+> >  hw/core/cpu-common.c  |  9 +++++++++
+> >  include/hw/core/cpu.h | 11 +++++++++++
+> >  2 files changed, 20 insertions(+)
 > 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->  hw/core/loader.c  | 55 ++++++++++++++++++++++++++++++++---------------
->  qapi/machine.json | 12 +++++++++++
->  2 files changed, 50 insertions(+), 17 deletions(-)
+> > diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> > index 4c47e1df18..64fc57c8d9 100644
+> > --- a/include/hw/core/cpu.h
+> > +++ b/include/hw/core/cpu.h
+> >   * @has_work: Callback for checking if there is work to do.
+> >   * @memory_rw_debug: Callback for GDB memory access.
+> >   * @format_state: Callback for formatting state.
+> > + * @format_tlb: Callback for formatting memory mappings
+> >   * @get_arch_id: Callback for getting architecture-dependent CPU ID.
+> >   * @set_pc: Callback for setting the Program Counter register. This
+> >   *       should have the semantics used by the target architecture when
+> > @@ -136,6 +137,7 @@ struct CPUClass {
+> >      int (*memory_rw_debug)(CPUState *cpu, vaddr addr,
+> >                             uint8_t *buf, int len, bool is_write);
+> >      void (*format_state)(CPUState *cpu, GString *buf, int flags);
+> > +    void (*format_tlb)(CPUState *cpu, GString *buf);
+> 
+> Doesn't this belong to SysemuCPUOps?
 
-> -void hmp_info_roms(Monitor *mon, const QDict *qdict)
-> +HumanReadableText *qmp_x_query_roms(Error **errp)
->  {
->      Rom *rom;
-> +    g_autoptr(GString) buf = g_string_new("");
-> +    HumanReadableText *ret;
->  
->      QTAILQ_FOREACH(rom, &roms, next) {
->          if (rom->mr) {
-> -            monitor_printf(mon, "%s"
-> -                           " size=0x%06zx name=\"%s\"\n",
-> -                           memory_region_name(rom->mr),
-> -                           rom->romsize,
-> -                           rom->name);
-> +            g_string_append_printf(buf, "%s"
-> +                                   " size=0x%06zx name=\"%s\"\n",
-> +                                   memory_region_name(rom->mr),
-> +                                   rom->romsize,
-> +                                   rom->name);
->          } else if (!rom->fw_file) {
-> -            monitor_printf(mon, "addr=" TARGET_FMT_plx
-> -                           " size=0x%06zx mem=%s name=\"%s\"\n",
-> -                           rom->addr, rom->romsize,
-> -                           rom->isrom ? "rom" : "ram",
-> -                           rom->name);
-> +            g_string_append_printf(buf, "addr=" TARGET_FMT_plx
-> +                                   " size=0x%06zx mem=%s name=\"%s\"\n",
-> +                                   rom->addr, rom->romsize,
-> +                                   rom->isrom ? "rom" : "ram",
-> +                                   rom->name);
->          } else {
-> -            monitor_printf(mon, "fw=%s/%s"
-> -                           " size=0x%06zx name=\"%s\"\n",
-> -                           rom->fw_dir,
-> -                           rom->fw_file,
-> -                           rom->romsize,
-> -                           rom->name);
-> +            g_string_append_printf(buf, "fw=%s/%s"
-> +                                   " size=0x%06zx name=\"%s\"\n",
-> +                                   rom->fw_dir,
-> +                                   rom->fw_file,
-> +                                   rom->romsize,
-> +                                   rom->name);
->          }
->      }
-> +
-> +    ret = g_new0(HumanReadableText, 1);
-> +    ret->human_readable_text = g_steal_pointer(&buf->str);
-> +    return ret;
-> +}
+I can't really answer, since my knowledge of this area of QEMU code is
+fairly mimimal. I put it here because it is basically serving the same
+purpose as the "format_state" callback immediately above it, which was
+a rename of the existing "dump_state" callback. I assumed whatever was
+there already was a good practice to follow[1]...
 
-Is it possible to have an helper in 'qapi/qmp/smth.h' such:
+Regards,
+Daniel
 
-HumanReadableText *qmp_human_readable_text_new(GString **pbuf)
-{
-    HumanReadableText *ret = g_new0(HumanReadableText, 1);
-
-    ret->human_readable_text = g_steal_pointer(pbuf);
-
-    return ret;
-}
-
-?
+[1] yes assuming these things is often foolish in QEMU :-)
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
