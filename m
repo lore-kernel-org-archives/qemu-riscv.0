@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mPxO7-0000Sh-75
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Sep 2021 21:37:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38468)
+	id 1mPxOJ-0000i1-Nd
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Sep 2021 21:37:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38498)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPxO4-0000SP-Nr
- for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 21:37:29 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:41958)
+ id 1mPxOH-0000eo-Ma
+ for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 21:37:41 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:34521)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mPxO3-00038V-0b
- for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 21:37:28 -0400
-Received: by mail-pg1-x533.google.com with SMTP id k24so11161496pgh.8
- for <qemu-riscv@nongnu.org>; Mon, 13 Sep 2021 18:37:25 -0700 (PDT)
+ id 1mPxOG-0003HT-5u
+ for qemu-riscv@nongnu.org; Mon, 13 Sep 2021 21:37:41 -0400
+Received: by mail-pg1-x533.google.com with SMTP id f129so11175726pgc.1
+ for <qemu-riscv@nongnu.org>; Mon, 13 Sep 2021 18:37:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=jO+23q7Z+Ba1xs513jaA8qRCr6b3K8wAWX9oqFv11Kc=;
- b=S+MfX9DQ0gWzSM0tJk7sSag2Qz1tEuSYkNyW6BHofnbHSg4X55GnlGsHpF5TMZtxqP
- mrGaolTJgIl9VvaA/DAuz1cx1yeAuB2EzlDTTFa3Ag92Ws8N1FAs4kc2s2nEHNeErrgd
- Qju5Ok9bdZYKoSguPVPtCq0DF+AedIrlnOXrwcfe4iXF3h0FvZ66bWHJZmkMyYDZ0RII
- MwEiYUeHwtmY5yYjdxlMyI49+ERAUI9ykkuDPPWxB5ZFQE2gegSbKDlrBtS97NCY1nS+
- b8R5gX4hyte0rro6Ky+sAf33+cUmSAAitRnmCYq/mwxiFsrqhCZ8cj/uHdgoKf2ByctH
- d5mg==
+ bh=roW543BBRKwyDSK74Fh0URInsf5V8zJVUSaALAYhsdE=;
+ b=me1kSbNNo+8UW6AZlcZncXlvCmJhVkNWKAS6/7/bTzgOHoGhJ5Fj2gkDxwTdzYxqir
+ El/9OsfTn4LKLs+m17a1MaQcSq3qzYDiTX5Zv16k4aew39qrcHmCAXZQNPpatMbHHa3U
+ DYzIeU6lwGBzaix6C4T4/OT9n08vIJ3gw6zGLXZgx4B3abH3YBFjYvdevdVZLi4DfB+w
+ ut4sYBcBNhVi+vSkr5rAJP162Vy8CowM6XOfiwhN+SRcka6T/5aeSGaJpPtu6mzKNyLS
+ fyl1d5HJBKHRRSku0czxKEsx53KxEQ9RAzdBi5iD6wwn5B4yJcJYyJISMKWyVULmk18D
+ 1vug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=jO+23q7Z+Ba1xs513jaA8qRCr6b3K8wAWX9oqFv11Kc=;
- b=yg24PtGVj9qi21yX4I1orbGQvY7z/w6XMmFwm9G3zdyj2Rhuxaa5A/AuL0W60j2EJ0
- APG5OqPvgA9hAMIebM9I5VYltDhqsGEh/xvpbZUIuY19DkTaoCQuRkaGwYuexF0at7Fg
- PBV/8O5Yk3h0hlmkWtWySxjmWRlRJOGJrmPezYKt4Xz4YGnGCcc4DB54t54KKG3MpN+n
- ups48s80xFSbJ2kbJ/tXKPBVNfX+Q/6xoKsbai99q8IIRvnwM18qpvFkUMprMeMXv22x
- Cz3UFbjihwUWGVh4Gq04doSXK+yup7sTCRdoy1SNYOgqkVAx/SlpU2G8Iozcqe6Zuycy
- xlwA==
-X-Gm-Message-State: AOAM530bd4dOvNx0ToDfXysoPQNGViPVku5tm7AS8IKGLFSg7aRLO7LX
- z3BCrg3XA2Up6M2kzXSOJ6TFYA==
-X-Google-Smtp-Source: ABdhPJz/vfjF8wgdQgFNj2py2/VJX1jVmRgyG7dbLVExDuwC99XPzGM46jVmOXiSRjPelakJxwBkvA==
-X-Received: by 2002:a63:1d25:: with SMTP id d37mr13372786pgd.52.1631583444607; 
- Mon, 13 Sep 2021 18:37:24 -0700 (PDT)
+ bh=roW543BBRKwyDSK74Fh0URInsf5V8zJVUSaALAYhsdE=;
+ b=mxBpcNcIzOAB6q7LWaeVSq+oAYJs+FD/ipB4dsqK324AfQU4h2vtkgRp+3Uran8Tdy
+ Ru0piAVNtVMWf6UEAYdvmPop/H9/u8pFYOyrRnLMIVCS8MHwZbie8CFSrY+drwHM8vzP
+ HpNGzXLuSfcC57/8TBhdQtfAl+8fsKoNdHDQiq68WeSccOmyM78GnwPiEQfnblUtHuaa
+ 4WQxBoytD077TQHIxjeeVxM7ZyNMWwo6SyloSBIpUuTrhgXQel+72lgnX6L45i8yfWDc
+ Tz76kRgXfKef3YtCwNwhaVtlmNz51d3HkDXOPSGw0uS3++Y6/ct0HDDp0NyQcT3gPWL+
+ 5rZw==
+X-Gm-Message-State: AOAM533LfR+y0alwe9Bar9/5KWz1Q0E6Tmmt71gIpu8gMJICsKd913tY
+ WVbUEyxDkmqzn0afiXEwpbFpZg==
+X-Google-Smtp-Source: ABdhPJw4MtNt8InmYr6ENgM+icXjvzNf7bqgyzhkU3shJDTDJ5ZjPuWX7dgfuuA5N/Am78js1x8OsA==
+X-Received: by 2002:a63:535f:: with SMTP id t31mr13629434pgl.270.1631583458905; 
+ Mon, 13 Sep 2021 18:37:38 -0700 (PDT)
 Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
  [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id k25sm8006750pfa.213.2021.09.13.18.37.22
+ by smtp.gmail.com with ESMTPSA id m1sm8390316pfc.30.2021.09.13.18.37.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Sep 2021 18:37:24 -0700 (PDT)
+ Mon, 13 Sep 2021 18:37:38 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,10 +52,10 @@ Cc: Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] target/riscv: Backup/restore mstatus.SD bit when virtual
- register swapped
-Date: Tue, 14 Sep 2021 09:37:15 +0800
-Message-Id: <20210914013717.881430-1-frank.chang@sifive.com>
+Subject: [PATCH] target/riscv: Force to set mstatus_hs.[SD|FS] bits in
+ mark_fs_dirty()
+Date: Tue, 14 Sep 2021 09:37:31 +0800
+Message-Id: <20210914013732.881754-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -80,36 +80,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 01:37:29 -0000
+X-List-Received-Date: Tue, 14 Sep 2021 01:37:41 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-When virtual registers are swapped, mstatus.SD bit should also be
-backed up/restored. Otherwise, mstatus.SD bit will be incorrectly kept
-across the world switches.
+When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
+Modifying the floating-point state when V=1 causes both fields to
+be set to 3 (Dirty).
+
+However, it's possible that HS-level sstatus.FS is Clean and VS-level
+vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
+We can't early return for this case because we still need to set
+sstatus.FS to Dirty according to spec.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
+Tested-by: Vincent Chen <vincent.chen@sifive.com>
 ---
- target/riscv/cpu_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ target/riscv/translate.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 968cb8046f4..488867b59eb 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -111,9 +111,10 @@ bool riscv_cpu_fp_enabled(CPURISCVState *env)
- 
- void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index e356fc6c46c..0096b098738 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -280,26 +280,27 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ static void mark_fs_dirty(DisasContext *ctx)
  {
-+    target_ulong sd = riscv_cpu_is_32bit(env) ? MSTATUS32_SD : MSTATUS64_SD;
-     uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-                             MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
--                            MSTATUS64_UXL;
-+                            MSTATUS64_UXL | sd;
-     bool current_virt = riscv_cpu_virt_enabled(env);
+     TCGv tmp;
+-    target_ulong sd;
++    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
++
++    if (ctx->virt_enabled) {
++        tmp = tcg_temp_new();
++        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
++        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
++        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
++        tcg_temp_free(tmp);
++    }
  
-     g_assert(riscv_has_ext(env, RVH));
+     if (ctx->mstatus_fs == MSTATUS_FS) {
+         return;
+     }
++
+     /* Remember the state change for the rest of the TB.  */
+     ctx->mstatus_fs = MSTATUS_FS;
+ 
+     tmp = tcg_temp_new();
+-    sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
+-
+     tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+     tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+     tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+-
+-    if (ctx->virt_enabled) {
+-        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+-        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+-        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+-    }
+     tcg_temp_free(tmp);
+ }
+ #else
 -- 
 2.25.1
 
