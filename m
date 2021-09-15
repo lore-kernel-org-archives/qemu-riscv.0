@@ -1,83 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQEbv-00031k-Eq
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 16:00:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47714)
+	id 1mQIPi-0004sC-1E
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 20:04:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55620)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
- id 1mQEbi-0002uu-LR; Tue, 14 Sep 2021 16:00:43 -0400
-Received: from mout.kundenserver.de ([212.227.17.24]:54369)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
- id 1mQEbg-0004gH-3n; Tue, 14 Sep 2021 16:00:42 -0400
-Received: from [192.168.100.1] ([82.142.27.6]) by mrelayeu.kundenserver.de
- (mreue108 [213.165.67.119]) with ESMTPSA (Nemesis) id
- 1MUGqT-1mI9ab1vIh-00RFIs; Tue, 14 Sep 2021 21:59:46 +0200
-Subject: Re: [PATCH v2 44/53] target/m68k: convert to use format_tlb callback
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
- <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
- Bin Meng <bin.meng@windriver.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Taylor Simpson <tsimpson@quicinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eric Blake <eblake@redhat.com>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
- <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, Peter Xu <peterx@redhat.com>,
- Stafford Horne <shorne@gmail.com>, David Gibson
- <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <f4bug@amsat.org>, qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Aurelien Jarno <aurelien@aurel32.net>
-References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-45-berrange@redhat.com>
-From: Laurent Vivier <laurent@vivier.eu>
-Message-ID: <dac8be11-2b57-9cf5-2718-c62274ce7328@vivier.eu>
-Date: Tue, 14 Sep 2021 21:59:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mQIPg-0004qf-W3; Tue, 14 Sep 2021 20:04:33 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:46031)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mQIPe-00060x-Bv; Tue, 14 Sep 2021 20:04:32 -0400
+Received: by mail-il1-x12a.google.com with SMTP id b8so943651ilh.12;
+ Tue, 14 Sep 2021 17:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Aihq2Puc6Afdkq+HnBIBlSLDZG4oCajEtsfUmQbjBbw=;
+ b=XLGo8Wt6o581kztGK+9oPIZ3Jul6L31kPpS3zCLFtxCTm9R8GBDpm+ftC0BAiaoWfJ
+ dNSB86ntvd2grATuF26S/o5NwzzrbcCqv/98E2gwG4ScPqD7rdlltYVQUI75yEq4+HPc
+ s3FA8eZ07++/jj3HdPsharBIwiE8t+UfxIub5SoJImCmK66s0hZRINTVTg49J8N32tDD
+ gaA3FPCtW5YfnDOwDjyMJxG0X8KjIOGONrNFkSXnVMpl1xrKAyS4zP564R3EO7E7yYW6
+ MWU8msO1xWd7MBlGuBhKk3SFHwKff5KlDY8yTUsKn95xbxOIZTLhDx2Q6eyz0tXJIiNk
+ p8Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Aihq2Puc6Afdkq+HnBIBlSLDZG4oCajEtsfUmQbjBbw=;
+ b=L10mTX8rsxZ+DsxtdcYYfIoVDqdtRjUicmSRV10J73f/fv3ZGWWs4wISl8FFrTrhKt
+ nuYS/20c99WTAm/eqDU04NP4sTIA/YNEDbWre+uJrw7XkS79Sh4SwUmRYeutRs77L7c8
+ emL+NT8F6Uy3cRsdfcofupqhhiW4XyTN/E5dAEu+SfTqNxwZDqjcGWw48NKI+9rgEZCU
+ kwKzlO6dDwNmYwZ5uvTHvkTYgDOO2fHGLH7l5i8fEkv71GzgVzayi3dGg86h7W0RJhzx
+ oZnzOUWRkITsmil4tuKH7G7pGXU1WxGKR2f61+/IzsLKkOSGbkl19XVxYgujFs02Aywr
+ s4lg==
+X-Gm-Message-State: AOAM530MpwPOq1NdZHm4Dt9mKcSiWd4NRdnCYtpoE28YLR12o1SgQSGK
+ JpGPSJyDOmYXy5m2APnHYze1lz//hGciqYrPbLo=
+X-Google-Smtp-Source: ABdhPJzYy1YPseboyFi19S5SdpJy3ZLYW5A8ejX8MfFIRw0P6clIkfoo7xcmB8vHB3YKsUeEoPRCo8I06fURZIbEdG4=
+X-Received: by 2002:a05:6e02:1088:: with SMTP id
+ r8mr11385213ilj.46.1631664268768; 
+ Tue, 14 Sep 2021 17:04:28 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-45-berrange@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:TutcCnTH9N1i7D06wD7NxBiUN+qabbWHyeNC5b/7POwcV4o1XIo
- n5J1bt8VEVaEDASZW0oSSUtUlAVno7nf3nGY3gulWKMZYwHgWSufyB6O7O3RpdzwO9TZPGC
- x5Pqm7W/16yczAH0kTIvb2zKXgIreafniYDqDOKQpMMb4AO/w4oq862j1GnLb5l7qrpNMyZ
- f1eyvFIKmuPS+MREBrG7w==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:F1VSFmHyMw8=:gew1WpHN0+SwPO/HLYC8CV
- zhruFF+o3T8yZjW7IuhEqck7/qeyaSuqTIIQrEC/N6O2BdmTT3ig/49xvp1YXZ3dSZ+VF+8Fu
- aShvxF6xhlRQyngSphcO9BKUvH5KxbwNiWavLJ0Sqjp5xer7+/CpzhgsZVa6outTu1ldnri0u
- rVkcMxU6+n8FD4GthfYJU3xnxfA7VTtVG05gl/DrIaWKfXPX8TIlyPNRaETO2cSVWg/kFvssZ
- sYg10FWnKhRvau3cUYROl1jSCKa+TuTS6EfeBf34acc0utqWvX/Vy96zWdBXXL67gzcaWU5qf
- m6mL2cQmNHyOGPWq48Kv9mZNiJ61rY1C1KYfrUF7E9+urH9YPtm+5j/l1axBoqCi6SRN7n+GC
- HTe/RQoImLwOQdSU5jmI6VyD/tTCVgl8ObihcDQRmYYdhYx0COjxcye6lDtHYVe+mUTN8Y/qt
- l3pL7Md78LtaBi1cApFhbyNVds8skWK5Pq8EqCJVSVn1vX+FO3c8aaQGEsco6cq4YYCYebWLh
- CRxBNvFQ+wX4ViBWw/dz1fkpiNnnDhTj6sUBHljDbJKe5h8LiS7hSuo3xt0TzbD4VpsD3l2UC
- fa7bfrZeBdetXr3zDJv4dXoslIuCVyJR+K+gsIn3vYxggUgBJOY4Oh5bm8Y0OddGMFGPPdGi6
- ZVQx3y2obBS6WYwcZk5l10Y91AAthKu9XhKQNKI2OGwQBAn7DfgFBIU3BpKcHrDpDpXv5C1RB
- RvxlVIhpVxKWxjEJcnZ4cnjmjI4dPPfAPg4TOw==
-Received-SPF: none client-ip=212.227.17.24; envelope-from=laurent@vivier.eu;
- helo=mout.kundenserver.de
-X-Spam_score_int: -38
-X-Spam_score: -3.9
-X-Spam_bar: ---
-X-Spam_report: (-3.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.969,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+References: <20210911153431.10362-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210911153431.10362-1-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 15 Sep 2021 10:04:01 +1000
+Message-ID: <CAKmqyKNUu_Mzwf4N9OxYOR0Bi9dVeBGFTNi3KrS6t+38UZnt_Q@mail.gmail.com>
+Subject: Re: [PATCH] docs/system/riscv: sifive_u: Update U-Boot instructions
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -90,326 +71,128 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2021 20:00:54 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 00:04:33 -0000
 
-Le 14/09/2021 à 16:20, Daniel P. Berrangé a écrit :
-> Change the "info tlb" implementation to use the format_tlb callback.
-> 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+On Sun, Sep 12, 2021 at 1:34 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> In U-Boot v2021.07 release, there were 2 major changes for the
+> SiFive Unleashed board support:
+>
+> - Board config name was changed from sifive_fu540_defconfig to
+>   sifive_unleashed_defconfig
+> - The generic binman tool was used to generate the FIT image
+>   (combination of U-Boot proper, DTB and OpenSBI firmware)
+>
+> which make the existing U-Boot instructions out of date.
+>
+> Update the doc with latest instructions.
+>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->  target/m68k/cpu.c     |   3 +
->  target/m68k/cpu.h     |   3 +-
->  target/m68k/helper.c  | 132 ++++++++++++++++++++++--------------------
->  target/m68k/monitor.c |  11 +++-
->  4 files changed, 82 insertions(+), 67 deletions(-)
-> 
-> diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-> index 4ccf572a68..8f143eb540 100644
-> --- a/target/m68k/cpu.c
-> +++ b/target/m68k/cpu.c
-> @@ -537,6 +537,9 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
->      cc->class_by_name = m68k_cpu_class_by_name;
->      cc->has_work = m68k_cpu_has_work;
->      cc->format_state = m68k_cpu_format_state;
-> +#ifndef CONFIG_USER_ONLY
-> +    cc->format_tlb = m68k_cpu_format_tlb;
-> +#endif
->      cc->set_pc = m68k_cpu_set_pc;
->      cc->gdb_read_register = m68k_cpu_gdb_read_register;
->      cc->gdb_write_register = m68k_cpu_gdb_write_register;
-> diff --git a/target/m68k/cpu.h b/target/m68k/cpu.h
-> index b0641f6d0d..f2d777a1ba 100644
-> --- a/target/m68k/cpu.h
-> +++ b/target/m68k/cpu.h
-> @@ -169,6 +169,7 @@ struct M68kCPU {
->  void m68k_cpu_do_interrupt(CPUState *cpu);
->  bool m68k_cpu_exec_interrupt(CPUState *cpu, int int_req);
->  void m68k_cpu_format_state(CPUState *cpu, GString *buf, int flags);
-> +void m68k_cpu_format_tlb(CPUState *cpu, GString *buf);
->  hwaddr m68k_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  int m68k_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int m68k_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> @@ -612,6 +613,4 @@ static inline void cpu_get_tb_cpu_state(CPUM68KState *env, target_ulong *pc,
->      }
->  }
->  
-> -void dump_mmu(CPUM68KState *env);
+>
+>  docs/system/riscv/sifive_u.rst | 49 ++++++++++++++++++----------------
+>  1 file changed, 26 insertions(+), 23 deletions(-)
+>
+> diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+> index 01108b5ecc..8ac93d0153 100644
+> --- a/docs/system/riscv/sifive_u.rst
+> +++ b/docs/system/riscv/sifive_u.rst
+> @@ -209,15 +209,16 @@ command line options with ``qemu-system-riscv32``.
+>  Running U-Boot
+>  --------------
+>
+> -U-Boot mainline v2021.01 release is tested at the time of writing. To build a
+> +U-Boot mainline v2021.07 release is tested at the time of writing. To build a
+>  U-Boot mainline bootloader that can be booted by the ``sifive_u`` machine, use
+> -the sifive_fu540_defconfig with similar commands as described above for Linux:
+> +the sifive_unleashed_defconfig with similar commands as described above for
+> +Linux:
+>
+>  .. code-block:: bash
+>
+>    $ export CROSS_COMPILE=riscv64-linux-
+>    $ export OPENSBI=/path/to/opensbi-riscv64-generic-fw_dynamic.bin
+> -  $ make sifive_fu540_defconfig
+> +  $ make sifive_unleashed_defconfig
+>
+>  You will get spl/u-boot-spl.bin and u-boot.itb file in the build tree.
+>
+> @@ -312,31 +313,29 @@ board on QEMU ``sifive_u`` machine out of the box. This allows users to
+>  develop and test the recommended RISC-V boot flow with a real world use
+>  case: ZSBL (in QEMU) loads U-Boot SPL from SD card or SPI flash to L2LIM,
+>  then U-Boot SPL loads the combined payload image of OpenSBI fw_dynamic
+> -firmware and U-Boot proper. However sometimes we want to have a quick test
+> -of booting U-Boot on QEMU without the needs of preparing the SPI flash or
+> -SD card images, an alternate way can be used, which is to create a U-Boot
+> -S-mode image by modifying the configuration of U-Boot:
+> +firmware and U-Boot proper.
+> +
+> +However sometimes we want to have a quick test of booting U-Boot on QEMU
+> +without the needs of preparing the SPI flash or SD card images, an alternate
+> +way can be used, which is to create a U-Boot S-mode image by modifying the
+> +configuration of U-Boot:
+>
+>  .. code-block:: bash
+>
+> +  $ export CROSS_COMPILE=riscv64-linux-
+> +  $ make sifive_unleashed_defconfig
+>    $ make menuconfig
+>
+> -then manually select the following configuration in U-Boot:
 > -
->  #endif
-> diff --git a/target/m68k/helper.c b/target/m68k/helper.c
-> index 137a3e1a3d..050a27d21c 100644
-> --- a/target/m68k/helper.c
-> +++ b/target/m68k/helper.c
-> @@ -25,6 +25,7 @@
->  #include "exec/helper-proto.h"
->  #include "fpu/softfloat.h"
->  #include "qemu/qemu-print.h"
-> +#include "qapi/error.h"
->  
->  #define SIGNBIT (1u << 31)
->  
-> @@ -483,27 +484,28 @@ void m68k_switch_sp(CPUM68KState *env)
->  /* MMU: 68040 only */
->  
->  static void print_address_zone(uint32_t logical, uint32_t physical,
-> -                               uint32_t size, int attr)
-> +                               uint32_t size, int attr, GString *buf)
->  {
-> -    qemu_printf("%08x - %08x -> %08x - %08x %c ",
-> -                logical, logical + size - 1,
-> -                physical, physical + size - 1,
-> -                attr & 4 ? 'W' : '-');
-> +    g_string_append_printf(buf, "%08x - %08x -> %08x - %08x %c ",
-> +                           logical, logical + size - 1,
-> +                           physical, physical + size - 1,
-> +                           attr & 4 ? 'W' : '-');
->      size >>= 10;
->      if (size < 1024) {
-> -        qemu_printf("(%d KiB)\n", size);
-> +        g_string_append_printf(buf, "(%d KiB)\n", size);
->      } else {
->          size >>= 10;
->          if (size < 1024) {
-> -            qemu_printf("(%d MiB)\n", size);
-> +            g_string_append_printf(buf, "(%d MiB)\n", size);
->          } else {
->              size >>= 10;
-> -            qemu_printf("(%d GiB)\n", size);
-> +            g_string_append_printf(buf, "(%d GiB)\n", size);
->          }
->      }
->  }
->  
-> -static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
-> +static void dump_address_map(CPUM68KState *env, uint32_t root_pointer,
-> +                             GString *buf)
->  {
->      int i, j, k;
->      int tic_size, tic_shift;
-> @@ -573,7 +575,8 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
->                          size = last_logical + (1 << tic_shift) -
->                                 first_logical;
->                          print_address_zone(first_logical,
-> -                                           first_physical, size, last_attr);
-> +                                           first_physical, size, last_attr,
-> +                                           buf);
->                      }
->                      first_logical = logical;
->                      first_physical = physical;
-> @@ -583,125 +586,130 @@ static void dump_address_map(CPUM68KState *env, uint32_t root_pointer)
->      }
->      if (first_logical != logical || (attr & 4) != (last_attr & 4)) {
->          size = logical + (1 << tic_shift) - first_logical;
-> -        print_address_zone(first_logical, first_physical, size, last_attr);
-> +        print_address_zone(first_logical, first_physical, size, last_attr, buf);
->      }
->  }
->  
->  #define DUMP_CACHEFLAGS(a) \
->      switch (a & M68K_DESC_CACHEMODE) { \
->      case M68K_DESC_CM_WRTHRU: /* cachable, write-through */ \
-> -        qemu_printf("T"); \
-> +        g_string_append_printf(buf, "T"); \
->          break; \
->      case M68K_DESC_CM_COPYBK: /* cachable, copyback */ \
-> -        qemu_printf("C"); \
-> +        g_string_append_printf(buf, "C"); \
->          break; \
->      case M68K_DESC_CM_SERIAL: /* noncachable, serialized */ \
-> -        qemu_printf("S"); \
-> +        g_string_append_printf(buf, "S"); \
->          break; \
->      case M68K_DESC_CM_NCACHE: /* noncachable */ \
-> -        qemu_printf("N"); \
-> +        g_string_append_printf(buf, "N"); \
->          break; \
->      }
->  
-> -static void dump_ttr(uint32_t ttr)
-> +static void dump_ttr(uint32_t ttr, GString *buf)
->  {
->      if ((ttr & M68K_TTR_ENABLED) == 0) {
-> -        qemu_printf("disabled\n");
-> +        g_string_append_printf(buf, "disabled\n");
->          return;
->      }
-> -    qemu_printf("Base: 0x%08x Mask: 0x%08x Control: ",
-> -                ttr & M68K_TTR_ADDR_BASE,
-> -                (ttr & M68K_TTR_ADDR_MASK) << M68K_TTR_ADDR_MASK_SHIFT);
-> +    g_string_append_printf(buf, "Base: 0x%08x Mask: 0x%08x Control: ",
-> +                           ttr & M68K_TTR_ADDR_BASE,
-> +                           (ttr & M68K_TTR_ADDR_MASK) <<
-> +                           M68K_TTR_ADDR_MASK_SHIFT);
->      switch (ttr & M68K_TTR_SFIELD) {
->      case M68K_TTR_SFIELD_USER:
-> -        qemu_printf("U");
-> +        g_string_append_printf(buf, "U");
->          break;
->      case M68K_TTR_SFIELD_SUPER:
-> -        qemu_printf("S");
-> +        g_string_append_printf(buf, "S");
->          break;
->      default:
-> -        qemu_printf("*");
-> +        g_string_append_printf(buf, "*");
->          break;
->      }
->      DUMP_CACHEFLAGS(ttr);
->      if (ttr & M68K_DESC_WRITEPROT) {
-> -        qemu_printf("R");
-> +        g_string_append_printf(buf, "R");
->      } else {
-> -        qemu_printf("W");
-> +        g_string_append_printf(buf, "W");
->      }
-> -    qemu_printf(" U: %d\n", (ttr & M68K_DESC_USERATTR) >>
-> -                               M68K_DESC_USERATTR_SHIFT);
-> +    g_string_append_printf(buf, " U: %d\n", (ttr & M68K_DESC_USERATTR) >>
-> +                           M68K_DESC_USERATTR_SHIFT);
->  }
->  
-> -void dump_mmu(CPUM68KState *env)
+> -  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
+> +then manually select the following configuration:
+>
+> -This lets U-Boot to use the QEMU generated device tree blob. During the build,
+> -a build error will be seen below:
+> +  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior Stage bootloader DTB
+>
+> -.. code-block:: none
+> +and unselect the following configuration:
+>
+> -  MKIMAGE u-boot.img
+> -  ./tools/mkimage: Can't open arch/riscv/dts/hifive-unleashed-a00.dtb: No such file or directory
+> -  ./tools/mkimage: failed to build FIT
+> -  make: *** [Makefile:1440: u-boot.img] Error 1
+> +  * Library routines ---> Allow access to binman information in the device tree
+>
+> -The above errors can be safely ignored as we don't run U-Boot SPL under QEMU
+> -in this alternate configuration.
+> +This changes U-Boot to use the QEMU generated device tree blob, and bypass
+> +running the U-Boot SPL stage.
+>
+>  Boot the 64-bit U-Boot S-mode image directly:
+>
+> @@ -351,14 +350,18 @@ It's possible to create a 32-bit U-Boot S-mode image as well.
+>  .. code-block:: bash
+>
+>    $ export CROSS_COMPILE=riscv64-linux-
+> -  $ make sifive_fu540_defconfig
+> +  $ make sifive_unleashed_defconfig
+>    $ make menuconfig
+>
+>  then manually update the following configuration in U-Boot:
+>
+> -  Device Tree Control > Provider of DTB for DT Control > Prior Stage bootloader DTB
+> -  RISC-V architecture > Base ISA > RV32I
+> -  Boot images > Text Base > 0x80400000
+> +  * Device Tree Control ---> Provider of DTB for DT Control ---> Prior Stage bootloader DTB
+> +  * RISC-V architecture ---> Base ISA ---> RV32I
+> +  * Boot options ---> Boot images ---> Text Base ---> 0x80400000
 > +
-> +void m68k_cpu_format_tlb(CPUState *cpu, GString *buf)
->  {
-> +    CPUM68KState *env = cpu->env_ptr;
+> +and unselect the following configuration:
 > +
->      if ((env->mmu.tcr & M68K_TCR_ENABLED) == 0) {
-> -        qemu_printf("Translation disabled\n");
-> +        g_string_append_printf(buf, "Translation disabled\n");
->          return;
->      }
-> -    qemu_printf("Page Size: ");
-> +    g_string_append_printf(buf, "Page Size: ");
->      if (env->mmu.tcr & M68K_TCR_PAGE_8K) {
-> -        qemu_printf("8kB\n");
-> +        g_string_append_printf(buf, "8kB\n");
->      } else {
-> -        qemu_printf("4kB\n");
-> +        g_string_append_printf(buf, "4kB\n");
->      }
->  
-> -    qemu_printf("MMUSR: ");
-> +    g_string_append_printf(buf, "MMUSR: ");
->      if (env->mmu.mmusr & M68K_MMU_B_040) {
-> -        qemu_printf("BUS ERROR\n");
-> +        g_string_append_printf(buf, "BUS ERROR\n");
->      } else {
-> -        qemu_printf("Phy=%08x Flags: ", env->mmu.mmusr & 0xfffff000);
-> +        g_string_append_printf(buf, "Phy=%08x Flags: ",
-> +                               env->mmu.mmusr & 0xfffff000);
->          /* flags found on the page descriptor */
->          if (env->mmu.mmusr & M68K_MMU_G_040) {
-> -            qemu_printf("G"); /* Global */
-> +            g_string_append_printf(buf, "G"); /* Global */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
->          if (env->mmu.mmusr & M68K_MMU_S_040) {
-> -            qemu_printf("S"); /* Supervisor */
-> +            g_string_append_printf(buf, "S"); /* Supervisor */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
->          if (env->mmu.mmusr & M68K_MMU_M_040) {
-> -            qemu_printf("M"); /* Modified */
-> +            g_string_append_printf(buf, "M"); /* Modified */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
->          if (env->mmu.mmusr & M68K_MMU_WP_040) {
-> -            qemu_printf("W"); /* Write protect */
-> +            g_string_append_printf(buf, "W"); /* Write protect */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
->          if (env->mmu.mmusr & M68K_MMU_T_040) {
-> -            qemu_printf("T"); /* Transparent */
-> +            g_string_append_printf(buf, "T"); /* Transparent */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
->          if (env->mmu.mmusr & M68K_MMU_R_040) {
-> -            qemu_printf("R"); /* Resident */
-> +            g_string_append_printf(buf, "R"); /* Resident */
->          } else {
-> -            qemu_printf(".");
-> +            g_string_append_printf(buf, ".");
->          }
-> -        qemu_printf(" Cache: ");
-> +        g_string_append_printf(buf, " Cache: ");
->          DUMP_CACHEFLAGS(env->mmu.mmusr);
-> -        qemu_printf(" U: %d\n", (env->mmu.mmusr >> 8) & 3);
-> -        qemu_printf("\n");
-> +        g_string_append_printf(buf, " U: %d\n", (env->mmu.mmusr >> 8) & 3);
-> +        g_string_append_printf(buf, "\n");
->      }
->  
-> -    qemu_printf("ITTR0: ");
-> -    dump_ttr(env->mmu.ttr[M68K_ITTR0]);
-> -    qemu_printf("ITTR1: ");
-> -    dump_ttr(env->mmu.ttr[M68K_ITTR1]);
-> -    qemu_printf("DTTR0: ");
-> -    dump_ttr(env->mmu.ttr[M68K_DTTR0]);
-> -    qemu_printf("DTTR1: ");
-> -    dump_ttr(env->mmu.ttr[M68K_DTTR1]);
-> +    g_string_append_printf(buf, "ITTR0: ");
-> +    dump_ttr(env->mmu.ttr[M68K_ITTR0], buf);
-> +    g_string_append_printf(buf, "ITTR1: ");
-> +    dump_ttr(env->mmu.ttr[M68K_ITTR1], buf);
-> +    g_string_append_printf(buf, "DTTR0: ");
-> +    dump_ttr(env->mmu.ttr[M68K_DTTR0], buf);
-> +    g_string_append_printf(buf, "DTTR1: ");
-> +    dump_ttr(env->mmu.ttr[M68K_DTTR1], buf);
->  
-> -    qemu_printf("SRP: 0x%08x\n", env->mmu.srp);
-> -    dump_address_map(env, env->mmu.srp);
-> +    g_string_append_printf(buf, "SRP: 0x%08x\n", env->mmu.srp);
-> +    dump_address_map(env, env->mmu.srp, buf);
->  
-> -    qemu_printf("URP: 0x%08x\n", env->mmu.urp);
-> -    dump_address_map(env, env->mmu.urp);
-> +    g_string_append_printf(buf, "URP: 0x%08x\n", env->mmu.urp);
-> +    dump_address_map(env, env->mmu.urp, buf);
->  }
->  
->  static int check_TTR(uint32_t ttr, int *prot, target_ulong addr,
-> diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
-> index 2bdf6acae0..003a665246 100644
-> --- a/target/m68k/monitor.c
-> +++ b/target/m68k/monitor.c
-> @@ -9,17 +9,22 @@
->  #include "cpu.h"
->  #include "monitor/hmp-target.h"
->  #include "monitor/monitor.h"
-> +#include "qapi/error.h"
-> +#include "qapi/qapi-commands-machine-target.h"
->  
->  void hmp_info_tlb(Monitor *mon, const QDict *qdict)
->  {
-> -    CPUArchState *env1 = mon_get_cpu_env(mon);
-> +    g_autoptr(GString) buf = g_string_new("");
-> +    CPUState *cpu = mon_get_cpu(mon);
->  
-> -    if (!env1) {
-> +    if (!cpu) {
->          monitor_printf(mon, "No CPU available\n");
->          return;
->      }
->  
-> -    dump_mmu(env1);
-> +    cpu_format_tlb(cpu, buf);
-> +
-> +    monitor_printf(mon, "%s", buf->str);
->  }
->  
->  static const MonitorDef monitor_defs[] = {
-> 
-
-Acked-by: Laurent Vivier <laurent@vivier.eu>
+> +  * Library routines ---> Allow access to binman information in the device tree
+>
+>  Use the same command line options to boot the 32-bit U-Boot S-mode image:
+>
+> --
+> 2.25.1
+>
+>
 
