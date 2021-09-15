@@ -1,93 +1,97 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQP42-00034i-SJ
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:10:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51998)
+	id 1mQP6j-0006Ys-4p
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:13:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52668)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP41-00032B-Tj; Wed, 15 Sep 2021 03:10:37 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:36669)
+ id 1mQP6g-0006W5-TK; Wed, 15 Sep 2021 03:13:22 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e]:36367)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP40-0000ht-5x; Wed, 15 Sep 2021 03:10:37 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id g16so2207752wrb.3;
- Wed, 15 Sep 2021 00:10:34 -0700 (PDT)
+ id 1mQP6f-00033g-Aq; Wed, 15 Sep 2021 03:13:22 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ l18-20020a05600c4f1200b002f8cf606262so3953010wmq.1; 
+ Wed, 15 Sep 2021 00:13:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=+muqlBR3FeFgS0MIKSJSDhjayA6Aa8PPlxefEHtqpwg=;
- b=ZaosdWBt9ijHjQz0pC1HU1KTDiZQEYzFr0tijA7AiqhovpaiDEcXnMj7CRM6iER9K5
- YBpIAY/p1kU9EZBegTUw1UhdWIa7d8X7aeO2LF1X1WwnOV7fWhzUi6O7POzDRqNuQ0tL
- JldbFi8Sh64Q3qioigVxCPck+S0PSiDZrDWPG5bLdTJ3gXdazy24JPpFgOed3UjkXrvk
- W5UEZ7BZhEHpw9M6ZtYOzz07/441OgvZjMNf1k8Iazh6byrj+tdhEggA0A7+Iqp6EpUG
- gvO2k4C8xrIOhMEqJ2kuwa4jvd8qUO/Kz256GEyp3qovsPI52g0IN8zQDihSoYZ6Pf7v
- zYEQ==
+ bh=mNwSu+kUspt5PCTCQfuHixpJsNS83pAKDHXHrua3Iu8=;
+ b=Cekt8+9dK7QWjccTG5TVr7I4FwKjp6TfU0B3KGebhcl6DvbJ2RO7O9xZm2sSqlH1HZ
+ xxC2B6Fl6KGbKZGXKWoP1EMzRYMN2KPQMVbOeYrF5KiCIuHpbQg2MBnZiWSJpc3+FPJe
+ cFtQN47EXKrgF+XLR2bcH5dBFgdMaRxvgyEe4spZ/I72GpP1wHhqwLrcYOdPHwwtL96N
+ MTHjS+/tq9XdDrC7UMohFdr52H+qEfaZtUA101q64NvZJYrnYybTZvAW7aaNPGNWTuaG
+ ZmdrX3t2QCJ7l+kWEbtSXqH4CbcrZuHWZrbuYEuHlz6ecEf1tpEGzK47kYkVVSESCgu7
+ oqIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=+muqlBR3FeFgS0MIKSJSDhjayA6Aa8PPlxefEHtqpwg=;
- b=uQcST50W+FGwssurtaQKp4qyqqOjhtjKrFCAtLvoLfU0kA2cF+IiSKuIsA7vB4LhvT
- O+34oN/+yiaS7Y8Z0aZQuS4j1XdRyAF6hZHKqypB6G6rtgFORmmN/LcI8Wv+u6vZa3d+
- keyPcNBDHMbUwPNFnZj6edTs2aQfb49CIAevqZrxTsZuWEAZ/hQBwNx8NTCl8IHcHN2B
- p2nEPWcp//eZ5EvzxuxjiM79z0/3lXvU1Pxhxlg2mVQ0bV4kJHlb6+alaFpujxcYTTzw
- yiZoVooY0BzUc1YZCPm3UY2Xuo3x2eT6CByr9QqAt91puMlWZGaqanVTWYmY7e3P/z53
- dz1A==
-X-Gm-Message-State: AOAM532pFA8o1X4NA8QpyTIcKKJfBoqlAQd9MLAkZ34IzTePGHXJ65gv
- wLlg45Ao2VHTcnVy4NYO2RvE1BPXThc=
-X-Google-Smtp-Source: ABdhPJxcNEW3fnxFdcq5MSM1BJve72CIx+MwogKI9xmnWi3jV5PC9v7QNE6059bHPiHSBqbKyZk2kg==
-X-Received: by 2002:a5d:530c:: with SMTP id e12mr3234135wrv.81.1631689833370; 
- Wed, 15 Sep 2021 00:10:33 -0700 (PDT)
+ bh=mNwSu+kUspt5PCTCQfuHixpJsNS83pAKDHXHrua3Iu8=;
+ b=hOoytWJRCBwBz7sJol8r0MicbMkGKTmjkB/jw2UUAB6I4lilmIateouBMCautAp0C2
+ O/yCgJxHZswVdOh3TXhnSy1amWEpy073mxaN93l4qh8/X31aT4+iQgB9EUqAdPzdvrFo
+ jhWcA83M+yaCSlNSVa0MP0VNeNUQDjPg75xq9UEptLyqG3oFnzBv1hS7uGRviVU+qOxV
+ PJmLiLEu7ZwMy7qzry4CHBYJuAmTbkMLp7zLX9o5XkxStbjxwNOog3P07h3tb/mZ9TQz
+ hDX9jIXYeD00geYVfsQoTSoGmJwozzKqTphKZlxi6ak/evjbV9j3jX2yWuHCdh5InN63
+ N/Wg==
+X-Gm-Message-State: AOAM531ALDflB7zHiwvqSnSk4m41jRtT1uE6Klt2O4/lIVNNXjqGQLex
+ GpbW7FTxuVjprYOeAz3VbDE=
+X-Google-Smtp-Source: ABdhPJxKo4qpfw04dTQ9LK2HjwcGoHcR0UcEvrQA++39HCEggpmaMgqwRQ9B2A1KTEeO+RXfknFyIw==
+X-Received: by 2002:a05:600c:a4b:: with SMTP id
+ c11mr2776681wmq.97.1631689997660; 
+ Wed, 15 Sep 2021 00:13:17 -0700 (PDT)
 Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
  [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id o10sm14166959wrc.16.2021.09.15.00.10.31
+ by smtp.gmail.com with ESMTPSA id k4sm3302188wmj.30.2021.09.15.00.13.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Sep 2021 00:10:32 -0700 (PDT)
+ Wed, 15 Sep 2021 00:13:16 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 07/53] target/alpha: convert to use format_state
- instead of dump_state
+Subject: Re: [PATCH v2 09/53] target/avr: convert to use format_state instead
+ of dump_state
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>
+ qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
  Bin Meng <bin.meng@windriver.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
  Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eric Blake <eblake@redhat.com>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Greg Kurz <groug@kaod.org>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Michael Rolnik <mrolnik@gmail.com>,
- Peter Xu <peterx@redhat.com>, Stafford Horne <shorne@gmail.com>,
- David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
+ <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ Michael Rolnik <mrolnik@gmail.com>, Peter Xu <peterx@redhat.com>,
+ Stafford Horne <shorne@gmail.com>, David Gibson
+ <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
  Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-8-berrange@redhat.com>
+ <20210914142042.1655100-10-berrange@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <df099ac9-84f0-0de3-e739-ed55f4848f27@amsat.org>
-Date: Wed, 15 Sep 2021 09:10:30 +0200
+Message-ID: <e0ca8f7b-0e88-4548-1b24-2a3b79e56ad5@amsat.org>
+Date: Wed, 15 Sep 2021 09:13:14 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-8-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-10-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -108,55 +112,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 07:10:38 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 07:13:23 -0000
 
 On 9/14/21 4:19 PM, Daniel P. Berrangé wrote:
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  target/alpha/cpu.c    |  2 +-
->  target/alpha/cpu.h    |  2 +-
->  target/alpha/helper.c | 28 ++++++++++++++++------------
->  3 files changed, 18 insertions(+), 14 deletions(-)
+>  target/avr/cpu.c | 57 ++++++++++++++++++++++++------------------------
+>  1 file changed, 29 insertions(+), 28 deletions(-)
 > 
-> diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
-> index 4871ad0c0a..d0cdda9554 100644
-> --- a/target/alpha/cpu.c
-> +++ b/target/alpha/cpu.c
-> @@ -239,7 +239,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
->  
->      cc->class_by_name = alpha_cpu_class_by_name;
->      cc->has_work = alpha_cpu_has_work;
-> -    cc->dump_state = alpha_cpu_dump_state;
-> +    cc->format_state = alpha_cpu_format_state;
->      cc->set_pc = alpha_cpu_set_pc;
->      cc->gdb_read_register = alpha_cpu_gdb_read_register;
->      cc->gdb_write_register = alpha_cpu_gdb_write_register;
-> diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
-> index 82df108967..9e3c80ebcc 100644
-> --- a/target/alpha/cpu.h
-> +++ b/target/alpha/cpu.h
-> @@ -278,7 +278,7 @@ extern const VMStateDescription vmstate_alpha_cpu;
->  
->  void alpha_cpu_do_interrupt(CPUState *cpu);
->  bool alpha_cpu_exec_interrupt(CPUState *cpu, int int_req);
-> -void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
-> +void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags);
->  hwaddr alpha_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->  int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> diff --git a/target/alpha/helper.c b/target/alpha/helper.c
-> index 4f56fe4d23..6ed80e8a27 100644
-> --- a/target/alpha/helper.c
-> +++ b/target/alpha/helper.c
-> @@ -451,7 +451,7 @@ bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
->      return false;
+> diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+> index ea14175ca5..17ff21f8be 100644
+> --- a/target/avr/cpu.c
+> +++ b/target/avr/cpu.c
+> @@ -145,43 +145,44 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
+>      return oc;
 >  }
 >  
-> -void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags)
+> -static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> +static void avr_cpu_format_state(CPUState *cs, GString *buf, int flags)
 >  {
+>      AVRCPU *cpu = AVR_CPU(cs);
+>      CPUAVRState *env = &cpu->env;
+>      int i;
+>  
+> -    qemu_fprintf(f, "\n");
+> -    qemu_fprintf(f, "PC:    %06x\n", env->pc_w * 2); /* PC points to words */
+> -    qemu_fprintf(f, "SP:      %04x\n", env->sp);
+> -    qemu_fprintf(f, "rampD:     %02x\n", env->rampD >> 16);
+> -    qemu_fprintf(f, "rampX:     %02x\n", env->rampX >> 16);
+> -    qemu_fprintf(f, "rampY:     %02x\n", env->rampY >> 16);
+> -    qemu_fprintf(f, "rampZ:     %02x\n", env->rampZ >> 16);
+> -    qemu_fprintf(f, "EIND:      %02x\n", env->eind >> 16);
+> -    qemu_fprintf(f, "X:       %02x%02x\n", env->r[27], env->r[26]);
+> -    qemu_fprintf(f, "Y:       %02x%02x\n", env->r[29], env->r[28]);
+> -    qemu_fprintf(f, "Z:       %02x%02x\n", env->r[31], env->r[30]);
+> -    qemu_fprintf(f, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
+> -                 env->sregI ? 'I' : '-',
+> -                 env->sregT ? 'T' : '-',
+> -                 env->sregH ? 'H' : '-',
+> -                 env->sregS ? 'S' : '-',
+> -                 env->sregV ? 'V' : '-',
+> -                 env->sregN ? '-' : 'N', /* Zf has negative logic */
+> -                 env->sregZ ? 'Z' : '-',
+> -                 env->sregC ? 'I' : '-');
+> -    qemu_fprintf(f, "SKIP:    %02x\n", env->skip);
+> -
+> -    qemu_fprintf(f, "\n");
+> +    g_string_append_printf(buf, "\n");
 
-Unrelated, but this code doesn't belong to helper.c IMO, but cpu.c.
+This would be g_string_append_c(buf, '\n') but in this particular case
+it doesn't seem helpful so I'd directly remove it.
 
+> +    /* PC points to words */
+> +    g_string_append_printf(buf, "PC:    %06x\n", env->pc_w * 2);
+> +    g_string_append_printf(buf, "SP:      %04x\n", env->sp);
+> +    g_string_append_printf(buf, "rampD:     %02x\n", env->rampD >> 16);
+> +    g_string_append_printf(buf, "rampX:     %02x\n", env->rampX >> 16);
+> +    g_string_append_printf(buf, "rampY:     %02x\n", env->rampY >> 16);
+> +    g_string_append_printf(buf, "rampZ:     %02x\n", env->rampZ >> 16);
+> +    g_string_append_printf(buf, "EIND:      %02x\n", env->eind >> 16);
+> +    g_string_append_printf(buf, "X:       %02x%02x\n", env->r[27], env->r[26]);
+> +    g_string_append_printf(buf, "Y:       %02x%02x\n", env->r[29], env->r[28]);
+> +    g_string_append_printf(buf, "Z:       %02x%02x\n", env->r[31], env->r[30]);
+> +    g_string_append_printf(buf, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
+> +                           env->sregI ? 'I' : '-',
+> +                           env->sregT ? 'T' : '-',
+> +                           env->sregH ? 'H' : '-',
+> +                           env->sregS ? 'S' : '-',
+> +                           env->sregV ? 'V' : '-',
+> +                           env->sregN ? '-' : 'N', /* Zf has negative logic */
+> +                           env->sregZ ? 'Z' : '-',
+> +                           env->sregC ? 'I' : '-');
+> +    g_string_append_printf(buf, "SKIP:    %02x\n", env->skip);
+> +
+> +    g_string_append_printf(buf, "\n");
+>      for (i = 0; i < ARRAY_SIZE(env->r); i++) {
+> -        qemu_fprintf(f, "R[%02d]:  %02x   ", i, env->r[i]);
+> +        g_string_append_printf(buf, "R[%02d]:  %02x   ", i, env->r[i]);
+>  
+>          if ((i % 8) == 7) {
+> -            qemu_fprintf(f, "\n");
+> +            g_string_append_printf(buf, "\n");
+>          }
+>      }
+> -    qemu_fprintf(f, "\n");
+> +    g_string_append_printf(buf, "\n");
+
+Ditto (remove).
+
+Otherwise:
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+
+>  }
 
