@@ -1,66 +1,98 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQQYg-0002ku-AD
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 04:46:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44922)
+	id 1mQQc8-00053c-CQ
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 04:49:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45836)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mQQYa-0002kB-I6; Wed, 15 Sep 2021 04:46:16 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:46719)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mQQYV-00069U-4m; Wed, 15 Sep 2021 04:46:14 -0400
-Received: by mail-pg1-x536.google.com with SMTP id w7so1962502pgk.13;
- Wed, 15 Sep 2021 01:46:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=d5ck1rtCN9MckXHSNpLUv9QcdDbnsE0E63EIXFwHXKo=;
- b=W94L9ve2NDe7j4TVJlLsj+n22/1p97d9a7ZWYdSAsj2rRHr0GDfCbl9t3NhGphEYWd
- RTUrqyMtRLeB3UbTXnerhX/Jn7ChWte4C6z5CPGgFLX1WxkRd6K+xlvKPDw6eh6e8DMc
- bjDoFKBP67hhITn1bXTK5hn2E5Xyr93qYRKHlXmLLmZFVbpseJ2frd9n8RYG7x+Ax8nH
- yAuyduwYzXgso04v+ef+lMVxKhSURoTvyC/GYM8Xx7VSbgvvDjqw5xHMkiVW9Hu12unc
- Bu516+Q9Dn3yd0Uo7jB5LkZGtIWahywGEtSgia1gwiPnPq+up+7+dN9lb9wsnaMVAIDD
- uRoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=d5ck1rtCN9MckXHSNpLUv9QcdDbnsE0E63EIXFwHXKo=;
- b=a4wfJR1jqYdcy0QhvQhqO6/qKJK+5R1p5WK1Xd/DT0waMpN1wkXrrnKkgH9KPoeJas
- HIjaiRrrHRBetg+RYccgwLZ3gye1H0XJcAr7OFIcbUpqabGYciba58BMfIqrG3s7zh4W
- nuJO4U3H3WY8/Y6VAEbgp4CeQPnBjBmXOQwkphVASQLChpJOE+muGevuNaUEJriXvKOi
- i0UsXDUW23lVaS8Yr9LHkeGoxyWpSI0bTzblDuQAAwzm3Bl1127VY2Bnuf2pnP3Bb6dS
- 2mLcxowEdImYBeO+c8IrvUfVLcFyb8cDSl8bDoV9pE1A1zqTBv2FFQLSkqXUE8C1m21V
- +g/A==
-X-Gm-Message-State: AOAM530zKNHDwKLejQZZ/+dWmSO/lu10ZfWPwJJQF5CMf1BjCPQMjx1+
- aNDcEt0rlJwBeQ8hCXKh/EQ=
-X-Google-Smtp-Source: ABdhPJyO2Zw4uicK4pP1V9vWTmnnJxfNYyDeA5lidj2SbO2OKB9IUleGnauCpQ160XSZNiIGYB3HqA==
-X-Received: by 2002:a05:6a00:1147:b029:3e0:8c37:938e with SMTP id
- b7-20020a056a001147b02903e08c37938emr9195106pfm.65.1631695568527; 
- Wed, 15 Sep 2021 01:46:08 -0700 (PDT)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id i1sm1430902pja.26.2021.09.15.01.46.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Sep 2021 01:46:08 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH] target/riscv: csr: Rename HCOUNTEREN_CY and friends
-Date: Wed, 15 Sep 2021 16:46:01 +0800
-Message-Id: <20210915084601.24304-1-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1mQQc6-00050c-DQ
+ for qemu-riscv@nongnu.org; Wed, 15 Sep 2021 04:49:54 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:48069)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1mQQc3-0000qM-ED
+ for qemu-riscv@nongnu.org; Wed, 15 Sep 2021 04:49:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631695789;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=UbsWX5ThNzbLSLppNv0zipcECBhQ1lONYygbF5FVZZg=;
+ b=X1uY1cyeQ/prqnx0R7/2SKtnT/hVj6H5JPSBf9Qk9Oo28NHwV01I1jtW+yKNKS45yGS5Jo
+ BiAF24QFoLvSYDUKKJ7JK+ffsNsUH7zyQZSGc+HMFX3MGO+6UgIX0jNLUP4oDN8S/2ob/D
+ UVXzH3ZdYZy8Kc+NXLCxTDj11/LVaHI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-235-fke9A7PLMHqixdvWp5O0SA-1; Wed, 15 Sep 2021 04:49:48 -0400
+X-MC-Unique: fke9A7PLMHqixdvWp5O0SA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5F03F802928;
+ Wed, 15 Sep 2021 08:49:44 +0000 (UTC)
+Received: from redhat.com (unknown [10.39.194.233])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 7AFF06B54B;
+ Wed, 15 Sep 2021 08:49:24 +0000 (UTC)
+Date: Wed, 15 Sep 2021 09:49:21 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Greg Kurz <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
+ Michael Rolnik <mrolnik@gmail.com>, Peter Xu <peterx@redhat.com>,
+ Stafford Horne <shorne@gmail.com>,
+ David Gibson <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>
+Subject: Re: [PATCH v2 09/53] target/avr: convert to use format_state instead
+ of dump_state
+Message-ID: <YUGzkcTjgsTjO5PQ@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20210914142042.1655100-1-berrange@redhat.com>
+ <20210914142042.1655100-10-berrange@redhat.com>
+ <e0ca8f7b-0e88-4548-1b24-2a3b79e56ad5@amsat.org>
 MIME-Version: 1.0
+In-Reply-To: <e0ca8f7b-0e88-4548-1b24-2a3b79e56ad5@amsat.org>
+User-Agent: Mutt/2.0.7 (2021-05-04)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x536.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) DKIMWL_WL_HIGH=-0.398, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,97 +105,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 08:46:20 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 08:49:54 -0000
 
-The macro name HCOUNTEREN_CY suggests it is for CSR HCOUNTEREN, but
-in fact it applies to M-mode and S-mode CSR too. Rename these macros
-to have the COUNTEREN_ prefix.
+On Wed, Sep 15, 2021 at 09:13:14AM +0200, Philippe Mathieu-Daudé wrote:
+> On 9/14/21 4:19 PM, Daniel P. Berrangé wrote:
+> > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+> > ---
+> >  target/avr/cpu.c | 57 ++++++++++++++++++++++++------------------------
+> >  1 file changed, 29 insertions(+), 28 deletions(-)
+> > 
+> > diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+> > index ea14175ca5..17ff21f8be 100644
+> > --- a/target/avr/cpu.c
+> > +++ b/target/avr/cpu.c
+> > @@ -145,43 +145,44 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
+> >      return oc;
+> >  }
+> >  
+> > -static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> > +static void avr_cpu_format_state(CPUState *cs, GString *buf, int flags)
+> >  {
+> >      AVRCPU *cpu = AVR_CPU(cs);
+> >      CPUAVRState *env = &cpu->env;
+> >      int i;
+> >  
+> > -    qemu_fprintf(f, "\n");
+> > -    qemu_fprintf(f, "PC:    %06x\n", env->pc_w * 2); /* PC points to words */
+> > -    qemu_fprintf(f, "SP:      %04x\n", env->sp);
+> > -    qemu_fprintf(f, "rampD:     %02x\n", env->rampD >> 16);
+> > -    qemu_fprintf(f, "rampX:     %02x\n", env->rampX >> 16);
+> > -    qemu_fprintf(f, "rampY:     %02x\n", env->rampY >> 16);
+> > -    qemu_fprintf(f, "rampZ:     %02x\n", env->rampZ >> 16);
+> > -    qemu_fprintf(f, "EIND:      %02x\n", env->eind >> 16);
+> > -    qemu_fprintf(f, "X:       %02x%02x\n", env->r[27], env->r[26]);
+> > -    qemu_fprintf(f, "Y:       %02x%02x\n", env->r[29], env->r[28]);
+> > -    qemu_fprintf(f, "Z:       %02x%02x\n", env->r[31], env->r[30]);
+> > -    qemu_fprintf(f, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
+> > -                 env->sregI ? 'I' : '-',
+> > -                 env->sregT ? 'T' : '-',
+> > -                 env->sregH ? 'H' : '-',
+> > -                 env->sregS ? 'S' : '-',
+> > -                 env->sregV ? 'V' : '-',
+> > -                 env->sregN ? '-' : 'N', /* Zf has negative logic */
+> > -                 env->sregZ ? 'Z' : '-',
+> > -                 env->sregC ? 'I' : '-');
+> > -    qemu_fprintf(f, "SKIP:    %02x\n", env->skip);
+> > -
+> > -    qemu_fprintf(f, "\n");
+> > +    g_string_append_printf(buf, "\n");
+> 
+> This would be g_string_append_c(buf, '\n') but in this particular case
+> it doesn't seem helpful so I'd directly remove it.
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
+I don't want to change output format of the commands, with exception of
+error reporting, as this is intended to be just refactoring patch, not
+a cleanup patch.
 
- target/riscv/cpu_bits.h |  8 ++++----
- target/riscv/csr.c      | 24 ++++++++++++------------
- 2 files changed, 16 insertions(+), 16 deletions(-)
+I'm not convinced it is worth special casing single byte strings to
+use g_string_append_c either really.
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7330ff5a19..34564d367c 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -397,10 +397,10 @@
- #define HSTATUS32_WPRI       0xFF8FF87E
- #define HSTATUS64_WPRI       0xFFFFFFFFFF8FF87EULL
- 
--#define HCOUNTEREN_CY        (1 << 0)
--#define HCOUNTEREN_TM        (1 << 1)
--#define HCOUNTEREN_IR        (1 << 2)
--#define HCOUNTEREN_HPM3      (1 << 3)
-+#define COUNTEREN_CY         (1 << 0)
-+#define COUNTEREN_TM         (1 << 1)
-+#define COUNTEREN_IR         (1 << 2)
-+#define COUNTEREN_HPM3       (1 << 3)
- 
- /* Privilege modes */
- #define PRV_U 0
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 50a2c3a3b4..1cd34a6453 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -71,20 +71,20 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-     if (riscv_cpu_virt_enabled(env)) {
-         switch (csrno) {
-         case CSR_CYCLE:
--            if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
--                get_field(env->mcounteren, HCOUNTEREN_CY)) {
-+            if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-+                get_field(env->mcounteren, COUNTEREN_CY)) {
-                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-             }
-             break;
-         case CSR_TIME:
--            if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
--                get_field(env->mcounteren, HCOUNTEREN_TM)) {
-+            if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-+                get_field(env->mcounteren, COUNTEREN_TM)) {
-                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-             }
-             break;
-         case CSR_INSTRET:
--            if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
--                get_field(env->mcounteren, HCOUNTEREN_IR)) {
-+            if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-+                get_field(env->mcounteren, COUNTEREN_IR)) {
-                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-             }
-             break;
-@@ -98,20 +98,20 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-         if (riscv_cpu_is_32bit(env)) {
-             switch (csrno) {
-             case CSR_CYCLEH:
--                if (!get_field(env->hcounteren, HCOUNTEREN_CY) &&
--                    get_field(env->mcounteren, HCOUNTEREN_CY)) {
-+                if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-+                    get_field(env->mcounteren, COUNTEREN_CY)) {
-                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-                 }
-                 break;
-             case CSR_TIMEH:
--                if (!get_field(env->hcounteren, HCOUNTEREN_TM) &&
--                    get_field(env->mcounteren, HCOUNTEREN_TM)) {
-+                if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-+                    get_field(env->mcounteren, COUNTEREN_TM)) {
-                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-                 }
-                 break;
-             case CSR_INSTRETH:
--                if (!get_field(env->hcounteren, HCOUNTEREN_IR) &&
--                    get_field(env->mcounteren, HCOUNTEREN_IR)) {
-+                if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-+                    get_field(env->mcounteren, COUNTEREN_IR)) {
-                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-                 }
-                 break;
+Regards,
+Daniel
 -- 
-2.25.1
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
