@@ -1,54 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQP6j-0006Ys-4p
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:13:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52668)
+	id 1mQP7z-0007hg-Cq
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:14:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52970)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP6g-0006W5-TK; Wed, 15 Sep 2021 03:13:22 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e]:36367)
+ id 1mQP7t-0007gq-CT; Wed, 15 Sep 2021 03:14:37 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:42881)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP6f-00033g-Aq; Wed, 15 Sep 2021 03:13:22 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- l18-20020a05600c4f1200b002f8cf606262so3953010wmq.1; 
- Wed, 15 Sep 2021 00:13:19 -0700 (PDT)
+ id 1mQP7q-00041a-EV; Wed, 15 Sep 2021 03:14:37 -0400
+Received: by mail-wr1-x436.google.com with SMTP id q11so2180804wrr.9;
+ Wed, 15 Sep 2021 00:14:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=mNwSu+kUspt5PCTCQfuHixpJsNS83pAKDHXHrua3Iu8=;
- b=Cekt8+9dK7QWjccTG5TVr7I4FwKjp6TfU0B3KGebhcl6DvbJ2RO7O9xZm2sSqlH1HZ
- xxC2B6Fl6KGbKZGXKWoP1EMzRYMN2KPQMVbOeYrF5KiCIuHpbQg2MBnZiWSJpc3+FPJe
- cFtQN47EXKrgF+XLR2bcH5dBFgdMaRxvgyEe4spZ/I72GpP1wHhqwLrcYOdPHwwtL96N
- MTHjS+/tq9XdDrC7UMohFdr52H+qEfaZtUA101q64NvZJYrnYybTZvAW7aaNPGNWTuaG
- ZmdrX3t2QCJ7l+kWEbtSXqH4CbcrZuHWZrbuYEuHlz6ecEf1tpEGzK47kYkVVSESCgu7
- oqIQ==
+ bh=ifroc4q2PMMO0MieFMbm9026p8tS+NvoLcpEN2fm1ek=;
+ b=EbR+6OJEolODdYV8fLnW88s4QmYIudGWHQzE/v/eAKNT1aPeHVnBpZ0QO8ScZK5vtk
+ fjjrsFg6GYCT/FFGvskxY//2B39W/kpB5rtjSZq9XsoZuHlnBMZ8yMd9snsGmTaZK7VQ
+ I/zPFhOx5pxFcLFZ1got+wZ4Lye4b706swOrHOadWXnDo8hopzRCQCj5ErDL8WiARvYz
+ 53kRqSsijlofnBEPjvK1pmGNYRBH7Vvfhp2I6jMxRFkm67MVja1oeRDNv0gozEFkN+6g
+ 5os5LGUmylKmJrOsM9s4xQ/cqqGEVlSv4TAx1oPl765qWCuEPsjHipXewj/hpCGN3fSS
+ piiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=mNwSu+kUspt5PCTCQfuHixpJsNS83pAKDHXHrua3Iu8=;
- b=hOoytWJRCBwBz7sJol8r0MicbMkGKTmjkB/jw2UUAB6I4lilmIateouBMCautAp0C2
- O/yCgJxHZswVdOh3TXhnSy1amWEpy073mxaN93l4qh8/X31aT4+iQgB9EUqAdPzdvrFo
- jhWcA83M+yaCSlNSVa0MP0VNeNUQDjPg75xq9UEptLyqG3oFnzBv1hS7uGRviVU+qOxV
- PJmLiLEu7ZwMy7qzry4CHBYJuAmTbkMLp7zLX9o5XkxStbjxwNOog3P07h3tb/mZ9TQz
- hDX9jIXYeD00geYVfsQoTSoGmJwozzKqTphKZlxi6ak/evjbV9j3jX2yWuHCdh5InN63
- N/Wg==
-X-Gm-Message-State: AOAM531ALDflB7zHiwvqSnSk4m41jRtT1uE6Klt2O4/lIVNNXjqGQLex
- GpbW7FTxuVjprYOeAz3VbDE=
-X-Google-Smtp-Source: ABdhPJxKo4qpfw04dTQ9LK2HjwcGoHcR0UcEvrQA++39HCEggpmaMgqwRQ9B2A1KTEeO+RXfknFyIw==
-X-Received: by 2002:a05:600c:a4b:: with SMTP id
- c11mr2776681wmq.97.1631689997660; 
- Wed, 15 Sep 2021 00:13:17 -0700 (PDT)
+ bh=ifroc4q2PMMO0MieFMbm9026p8tS+NvoLcpEN2fm1ek=;
+ b=b0fwfmizbftrNcQ2wB8oLOhZNjVbUGvVe86Wk+Wo4uOdXP1tPkgJKo6mH/MqMD7Bqt
+ Dch1XrrgWFXKVvlgPoh8p19krnuy/K6U9Q/qrTQBEEScx1ghWYUkyo9Bwfk03cmC/qL5
+ +g6TyEqM/pZIJCjbIsVTpDf8vfwY8JH30hxsgD0jElDUWv24AHT/rHJr7Qi+ydEYLCdK
+ /fnQDycRF7hE7YSQIravxcJpJF6EqdVFlirDfZXljuFmga0zfUjOMKib+t+YKZ7HI274
+ phI0jYJ4N4ukP+WuNtfUtXTvJpFd+vwO4AEC9Ub32LfcaJHhEhxW6bIPtvXhux6nDUu1
+ L8Hg==
+X-Gm-Message-State: AOAM53304W6KyB/IwPtVxCK1Jy+avdha15Lt1Vxh3OWfeTNSAIX+q0B3
+ Ry54Q7C+kiXpP9AulHnTVms=
+X-Google-Smtp-Source: ABdhPJzSjV745f7UuXHRZrQ/2N6egsC9EToUP3qEaiMv8qrIFenHU6h5qIFitALhahLa8P4JkpXxdA==
+X-Received: by 2002:adf:9f51:: with SMTP id f17mr3226768wrg.301.1631690069993; 
+ Wed, 15 Sep 2021 00:14:29 -0700 (PDT)
 Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
  [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id k4sm3302188wmj.30.2021.09.15.00.13.15
+ by smtp.gmail.com with ESMTPSA id k4sm3304904wmj.30.2021.09.15.00.14.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Sep 2021 00:13:16 -0700 (PDT)
+ Wed, 15 Sep 2021 00:14:29 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 09/53] target/avr: convert to use format_state instead
- of dump_state
+Subject: Re: [PATCH v2 12/53] target/hexagon: convert to use format_state
+ instead of dump_state
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
@@ -79,19 +77,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-10-berrange@redhat.com>
+ <20210914142042.1655100-13-berrange@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <e0ca8f7b-0e88-4548-1b24-2a3b79e56ad5@amsat.org>
-Date: Wed, 15 Sep 2021 09:13:14 +0200
+Message-ID: <62c53681-e552-4601-14e1-db541a08c214@amsat.org>
+Date: Wed, 15 Sep 2021 09:14:26 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-10-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-13-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -112,96 +110,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 07:13:23 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 07:14:41 -0000
 
-On 9/14/21 4:19 PM, Daniel P. Berrangé wrote:
+On 9/14/21 4:20 PM, Daniel P. Berrangé wrote:
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  target/avr/cpu.c | 57 ++++++++++++++++++++++++------------------------
->  1 file changed, 29 insertions(+), 28 deletions(-)
-> 
-> diff --git a/target/avr/cpu.c b/target/avr/cpu.c
-> index ea14175ca5..17ff21f8be 100644
-> --- a/target/avr/cpu.c
-> +++ b/target/avr/cpu.c
-> @@ -145,43 +145,44 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
->      return oc;
->  }
->  
-> -static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +static void avr_cpu_format_state(CPUState *cs, GString *buf, int flags)
->  {
->      AVRCPU *cpu = AVR_CPU(cs);
->      CPUAVRState *env = &cpu->env;
->      int i;
->  
-> -    qemu_fprintf(f, "\n");
-> -    qemu_fprintf(f, "PC:    %06x\n", env->pc_w * 2); /* PC points to words */
-> -    qemu_fprintf(f, "SP:      %04x\n", env->sp);
-> -    qemu_fprintf(f, "rampD:     %02x\n", env->rampD >> 16);
-> -    qemu_fprintf(f, "rampX:     %02x\n", env->rampX >> 16);
-> -    qemu_fprintf(f, "rampY:     %02x\n", env->rampY >> 16);
-> -    qemu_fprintf(f, "rampZ:     %02x\n", env->rampZ >> 16);
-> -    qemu_fprintf(f, "EIND:      %02x\n", env->eind >> 16);
-> -    qemu_fprintf(f, "X:       %02x%02x\n", env->r[27], env->r[26]);
-> -    qemu_fprintf(f, "Y:       %02x%02x\n", env->r[29], env->r[28]);
-> -    qemu_fprintf(f, "Z:       %02x%02x\n", env->r[31], env->r[30]);
-> -    qemu_fprintf(f, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
-> -                 env->sregI ? 'I' : '-',
-> -                 env->sregT ? 'T' : '-',
-> -                 env->sregH ? 'H' : '-',
-> -                 env->sregS ? 'S' : '-',
-> -                 env->sregV ? 'V' : '-',
-> -                 env->sregN ? '-' : 'N', /* Zf has negative logic */
-> -                 env->sregZ ? 'Z' : '-',
-> -                 env->sregC ? 'I' : '-');
-> -    qemu_fprintf(f, "SKIP:    %02x\n", env->skip);
-> -
-> -    qemu_fprintf(f, "\n");
-> +    g_string_append_printf(buf, "\n");
+>  target/hexagon/cpu.c | 65 ++++++++++++++++++++------------------------
+>  1 file changed, 29 insertions(+), 36 deletions(-)
 
-This would be g_string_append_c(buf, '\n') but in this particular case
-it doesn't seem helpful so I'd directly remove it.
-
-> +    /* PC points to words */
-> +    g_string_append_printf(buf, "PC:    %06x\n", env->pc_w * 2);
-> +    g_string_append_printf(buf, "SP:      %04x\n", env->sp);
-> +    g_string_append_printf(buf, "rampD:     %02x\n", env->rampD >> 16);
-> +    g_string_append_printf(buf, "rampX:     %02x\n", env->rampX >> 16);
-> +    g_string_append_printf(buf, "rampY:     %02x\n", env->rampY >> 16);
-> +    g_string_append_printf(buf, "rampZ:     %02x\n", env->rampZ >> 16);
-> +    g_string_append_printf(buf, "EIND:      %02x\n", env->eind >> 16);
-> +    g_string_append_printf(buf, "X:       %02x%02x\n", env->r[27], env->r[26]);
-> +    g_string_append_printf(buf, "Y:       %02x%02x\n", env->r[29], env->r[28]);
-> +    g_string_append_printf(buf, "Z:       %02x%02x\n", env->r[31], env->r[30]);
-> +    g_string_append_printf(buf, "SREG:    [ %c %c %c %c %c %c %c %c ]\n",
-> +                           env->sregI ? 'I' : '-',
-> +                           env->sregT ? 'T' : '-',
-> +                           env->sregH ? 'H' : '-',
-> +                           env->sregS ? 'S' : '-',
-> +                           env->sregV ? 'V' : '-',
-> +                           env->sregN ? '-' : 'N', /* Zf has negative logic */
-> +                           env->sregZ ? 'Z' : '-',
-> +                           env->sregC ? 'I' : '-');
-> +    g_string_append_printf(buf, "SKIP:    %02x\n", env->skip);
-> +
-> +    g_string_append_printf(buf, "\n");
->      for (i = 0; i < ARRAY_SIZE(env->r); i++) {
-> -        qemu_fprintf(f, "R[%02d]:  %02x   ", i, env->r[i]);
-> +        g_string_append_printf(buf, "R[%02d]:  %02x   ", i, env->r[i]);
->  
->          if ((i % 8) == 7) {
-> -            qemu_fprintf(f, "\n");
-> +            g_string_append_printf(buf, "\n");
->          }
->      }
-> -    qemu_fprintf(f, "\n");
-> +    g_string_append_printf(buf, "\n");
-
-Ditto (remove).
-
-Otherwise:
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
->  }
 
