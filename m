@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQPCA-00050W-Ap
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:19:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53804)
+	id 1mQPCv-0006M2-Nn
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:19:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53982)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQPC8-0004xJ-EF; Wed, 15 Sep 2021 03:19:00 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:40838)
+ id 1mQPCs-0006H5-Tn; Wed, 15 Sep 2021 03:19:46 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d]:34333)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQPC3-0007ad-0M; Wed, 15 Sep 2021 03:19:00 -0400
-Received: by mail-wr1-x429.google.com with SMTP id q26so2197226wrc.7;
- Wed, 15 Sep 2021 00:18:53 -0700 (PDT)
+ id 1mQPCr-0008FI-Ev; Wed, 15 Sep 2021 03:19:46 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ v20-20020a1cf714000000b002e71f4d2026so3284691wmh.1; 
+ Wed, 15 Sep 2021 00:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=lxqks9hN8p6vJMT6A0n9FtHBxpUq7EEMYkl2tekM3o0=;
- b=jvxWtztziTkC06llosazUdDK85mqxv70EuwXcZdlnUuP+hXKa0/JFnc80BK5Y+elgy
- 9y3qSTQN21SHdZvXbhSurNw8a6Z1sXop8GogJ3pFO4INVouCiiCVrquFRUbWXodsFiAc
- 2Z8r4DgthNHgvgAaDu6y3CBwgKZFnj0rWUfDLaKP4y8s/gbkUkX7/yoxg0Q6ODLiFKjG
- D03gB+l0PcpNiaWQ8Kgan4yyDfgAvSf6tiYoUGw22TxY9EUym1IXuaaT0cexJFXWntN1
- sB5urYa4O6Y2BAR2ujJZu268E9popFxeBN7LuHG56GqCMPc8RFQSr9Joc9Xe4gyCr6hx
- VuCQ==
+ bh=Zhl7XZLa3NLEzML11pu0eOLiT+/ZeE3zNkXX1raPI1I=;
+ b=UdyCT0Zf8zUessWPf88r5upiBAWYfku4d2VX3bgeiuFpQ/WFmY5K4aHHMrCX45ez6Y
+ ASVVSRziA21JcAqm8dXoclyo76yV47d3A9M32i63/auIWayQdPP4pFL5vQ7780splBrT
+ kq3+fGWUPboerCMqCs7thoCqg5jGQi/79LH/X9701fmn3HfHJ+dUiFrxSCOHB3KBpx6G
+ fFtZboBXAZj1mmGse4lfXoQVZ54ERYPAYZhny62IA7P3M2S7Pj/OI/jrx3rD6hv6+52n
+ begwFg248LUwT/1q4icij6tzDFuP/5sRBAfZb20wKmLI0P7LUrycGXK1TJfb5gfTbE0Z
+ VGXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=lxqks9hN8p6vJMT6A0n9FtHBxpUq7EEMYkl2tekM3o0=;
- b=TFeu/+xLhDQwQ99TDBd+AXILyHYlZ2PtIBN3nglVxWdfEVuSKi1QO+73j4je2Afv9T
- 1QOOkehKCb2KCBcMWYppKfRP6QHqGcFQAqypbalUfUM2qV4+CY7GUWNqbavZckyoNluL
- xSladH5rlW+gGM0ksaCwmA/mnMeBmwEMjgk4ZCZvsbWXe4JfR5L7jbE38oP33WZEo7wh
- wPOBvdqbxIi+wJdpJZNRGdNlyzpBTRYJdaSBebIxajd09L2DUaP09Xx///t8YuhVI+TD
- KXtgHsRZP5m9Q2VUwo6+fxu2plOHLKuZz9lkmCadGvFJLIioC6FtQcFb3GoQASHnXy3c
- Px0Q==
-X-Gm-Message-State: AOAM530/bPtkB66UqTqni9fGebU3L0vNb4wFjjYj4EciIfmTGMc5BJik
- gRe5w0sy0fKEU8K9OUSgh6I=
-X-Google-Smtp-Source: ABdhPJwCEX0rAOnC5GYV7iTT0QWnvgSmZuKzrKTCCn7PKz0bMFQnVLKY76U0VTdhxYK65LEyYtuMew==
-X-Received: by 2002:a5d:58c9:: with SMTP id o9mr3323687wrf.279.1631690332130; 
- Wed, 15 Sep 2021 00:18:52 -0700 (PDT)
+ bh=Zhl7XZLa3NLEzML11pu0eOLiT+/ZeE3zNkXX1raPI1I=;
+ b=sVRRRmbcCTmedjohJu8KIhH4903Smr1oXOUI7PKuAmMS53BzrHWWIpqw1bfyWSDq3E
+ 1dhDZlCN0nLpNb0CQCyp3kzRHrQ2HAddtXLcfQbGJ5b+DP3fSHdRoeOqU1LEIVZO17lN
+ 4kMGIeOq1NEAyMzt4pWOXEd9GM0CzIb+29FrC9ZE1qTY2whxJTNBb1iozMAfYhbHfFM1
+ umSvFvjXqe8ik9YnNDdmh2aLaTB23IYwRm0yidnfSgcFzi+trJEWq2iNWmxZ9lVjhEC7
+ 2OeMH/DjGQGRjHnMl/waKfC6R9V/THspPWNNiPpZoMJo+DsYIyJEEImg5+hnwahdWax3
+ AAuQ==
+X-Gm-Message-State: AOAM5314mO2OaNA0uCt32qxDE1lhuyWCBYW8B6Mg0+u1Gra9vnCWpUxo
+ fqXr7uM1ADYkOGfvWc5EvV4=
+X-Google-Smtp-Source: ABdhPJw8mOtSKVHTDBXK55kbC8KiMdqpl8YOlvlMi8KmlnVr/To9ME2+uofGDQWZoug/mFQqs1RBQQ==
+X-Received: by 2002:a7b:c142:: with SMTP id z2mr2993118wmi.10.1631690382162;
+ Wed, 15 Sep 2021 00:19:42 -0700 (PDT)
 Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
  [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id z6sm3434468wmp.1.2021.09.15.00.18.50
+ by smtp.gmail.com with ESMTPSA id k1sm12587171wrz.61.2021.09.15.00.19.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Sep 2021 00:18:51 -0700 (PDT)
+ Wed, 15 Sep 2021 00:19:41 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 16/53] target/microblaze: convert to use format_state
+Subject: Re: [PATCH v2 19/53] target/openrisc: convert to use format_state
  instead of dump_state
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
@@ -53,15 +54,15 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
  Bin Meng <bin.meng@windriver.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
  Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eric Blake <eblake@redhat.com>, Marek Vasut <marex@denx.de>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
  Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Eduardo Habkost <ehabkost@redhat.com>,
@@ -77,19 +78,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-17-berrange@redhat.com>
+ <20210914142042.1655100-20-berrange@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <21032bce-bdbb-1a0f-f5a5-71350ad79c85@amsat.org>
-Date: Wed, 15 Sep 2021 09:18:49 +0200
+Message-ID: <a140dd4b-a99f-1d3a-bcf3-38096e52c811@amsat.org>
+Date: Wed, 15 Sep 2021 09:19:39 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-17-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-20-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -110,31 +111,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 07:19:00 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 07:19:47 -0000
 
 On 9/14/21 4:20 PM, Daniel P. Berrangé wrote:
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  target/microblaze/cpu.c       |  2 +-
->  target/microblaze/cpu.h       |  2 +-
->  target/microblaze/translate.c | 45 ++++++++++++++++++-----------------
->  3 files changed, 25 insertions(+), 24 deletions(-)
-
->      for (i = 0; i < 32; i++) {
-> -        qemu_fprintf(f, "r%2.2d=%08x%c",
-> -                     i, env->regs[i], i % 4 == 3 ? '\n' : ' ');
-> +        g_string_append_printf(buf, "r%2.2d=%08x%c",
-> +                               i, env->regs[i], i % 4 == 3 ? '\n' : ' ');
->      }
-> -    qemu_fprintf(f, "\n");
-> +    g_string_append_printf(buf, "\n");
-
-g_string_append_c(), otherwise:
+>  target/openrisc/cpu.c       | 2 +-
+>  target/openrisc/cpu.h       | 2 +-
+>  target/openrisc/translate.c | 8 ++++----
+>  3 files changed, 6 insertions(+), 6 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
->  }
->  
->  void mb_tcg_init(void)
-> 
 
