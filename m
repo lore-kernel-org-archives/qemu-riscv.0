@@ -1,69 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQJYu-0003gx-8E
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 21:18:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36314)
+	id 1mQK1p-00028u-Oh
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 21:48:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40326)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mQJYr-0003fG-KG; Tue, 14 Sep 2021 21:18:06 -0400
-Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:42893)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mQJYp-0005Km-3b; Tue, 14 Sep 2021 21:18:05 -0400
-Received: by mail-io1-xd2a.google.com with SMTP id b10so1299042ioq.9;
- Tue, 14 Sep 2021 18:18:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oA/6H/fpfAMxUa/c02AtlY0ykCkbNp1a5+7pLBejK/E=;
- b=L+qNuyG1H9gGoX/DPwuDIWcJ2/SQQNT8BxgMScZW+z4wFiLFstaMUZID4HTt9T3v9J
- xb4WnBCRIgVL4aS13y1XGAHK74SEOid3PzCaQFvP2AGH/2eD/8CO1VT3eucTtBE5Cw83
- 8VRxvP/IQeOmC7h4YY2I/m1J4CyyrTV00RCVEArCFBSSWqNoZxaLbBrNb+5IX//PqML0
- RPaFNvvbZhBOX4GK3ysf5e3tp4PDVOPBVma8NlfAh76e9WHb93InFkSOSzLgRYvaagIr
- Q/y2hPDwvWy5msWUbQJzLXaskZxFmCecdm2GjKun6SkpBVXcG9z5nYjK6GawloUgsEsj
- dqkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oA/6H/fpfAMxUa/c02AtlY0ykCkbNp1a5+7pLBejK/E=;
- b=7uYDYuy+DRzHFJq8ribkX3pl+ENxWIoXK0P6nubGGQl6iC4ShgWFc7/sjikwKfuyZt
- ySLggtyHoO7IgVXtQ9BCrPXriX2ez3kcLxfk2u1yj4CbLICpB6OAB6zg0Y8Ce4VtwORA
- HdVz1UV/5qvn/pxnAzSWX4RvQl4WJ3yZeWasOtL97y1gGSaaFJHqQEdkqORNI1Hw273S
- VDr8HsF3KOAwiSG5k2P7HjZXkvUZC74iT5vhL9JpSL5IA2WVksTf+hzXj+9njCnDebnU
- CZtRzw1nobV9WXhHRkxDin0WZuw5umHyN5Q6/GSC2/2MtAzMqwxitt2DlXE0X6A0dwBy
- 6oUg==
-X-Gm-Message-State: AOAM532WLFem6hWMepdTki/fcLWZVz2NHBgMCeeXPJ1Mp30Oku63JSlW
- TqL6yISTD02v9heYqI6cx3EU1y6iv5HZD8jm7yE=
-X-Google-Smtp-Source: ABdhPJx9bnQVc1XcHbH4TeXtrK9XP/oAdCqhUG/OeWdECb9egDWHACSswQeEt2tH8n1qiNFi8m/524ZcbY37f46KcNQ=
-X-Received: by 2002:a6b:ce17:: with SMTP id p23mr16156269iob.90.1631668681626; 
- Tue, 14 Sep 2021 18:18:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1mQK1k-00022b-E0; Tue, 14 Sep 2021 21:47:56 -0400
+Received: from ozlabs.org ([203.11.71.1]:40587)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
+ id 1mQK1h-0000O2-4y; Tue, 14 Sep 2021 21:47:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gibson.dropbear.id.au; s=201602; t=1631670453;
+ bh=NwndZtTLOjUYyi7djQs5a8xGpidoGLI0MTf/YJl8xX8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=m7qhXllqRNNhq4fLcTX7eS5ebYpfq4aZMQ7AVceLwEcCjESISKQ2yHBx40meq9rDK
+ BuSE4PJJuRRNUbuavz2Uw/Ra199mIHehu84BSLY6CNJCYren38Z86jTHsP9Oa/3uPS
+ GWQnbuX+0mBzYOZrnIkEny08+AgDi/3gc9RLoKN4=
+Received: by ozlabs.org (Postfix, from userid 1007)
+ id 4H8NPx18JXz9sW4; Wed, 15 Sep 2021 11:47:33 +1000 (AEST)
+Date: Wed, 15 Sep 2021 11:41:28 +1000
+From: David Gibson <david@gibson.dropbear.id.au>
+To: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
+Cc: qemu-devel@nongnu.org, Greg Kurz <groug@kaod.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Peter Xu <peterx@redhat.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>, qemu-ppc@nongnu.org,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Michael Rolnik <mrolnik@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Taylor Simpson <tsimpson@quicinc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>, Yuval Shaia <yuval.shaia.ml@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <f4bug@amsat.org>,
+ Thomas Huth <thuth@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Marek Vasut <marex@denx.de>,
+ Markus Armbruster <armbru@redhat.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, qemu-s390x@nongnu.org,
+ Laurent Vivier <lvivier@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>
+Subject: Re: [PATCH v2 50/53] monitor: merge duplicate "info tlb" handlers
+Message-ID: <YUFPSJCIsUlp5L4Y@yekko>
+References: <20210914142042.1655100-1-berrange@redhat.com>
+ <20210914142042.1655100-51-berrange@redhat.com>
 MIME-Version: 1.0
-References: <20210902112520.475901-1-anup.patel@wdc.com>
- <20210902112520.475901-17-anup.patel@wdc.com>
-In-Reply-To: <20210902112520.475901-17-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Sep 2021 11:17:35 +1000
-Message-ID: <CAKmqyKNsihYsOtmKQKv51aAy7atWZoRziOzuLtAo-WmoCftdXw@mail.gmail.com>
-Subject: Re: [PATCH v2 16/22] hw/riscv: virt: Use AIA INTC compatible string
- when available
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Anup Patel <anup@brainfault.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="a/JNFcIeN8xVqrhe"
+Content-Disposition: inline
+In-Reply-To: <20210914142042.1655100-51-berrange@redhat.com>
+Received-SPF: pass client-ip=203.11.71.1; envelope-from=dgibson@ozlabs.org;
+ helo=ozlabs.org
+X-Spam_score_int: -5
+X-Spam_score: -0.6
+X-Spam_bar: /
+X-Spam_report: (-0.6 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_LOW=-0.7,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,50 +81,300 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 01:18:06 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 01:47:57 -0000
 
-On Thu, Sep 2, 2021 at 9:58 PM Anup Patel <anup.patel@wdc.com> wrote:
->
-> We should use the AIA INTC compatible string in the CPU INTC
-> DT nodes when the CPUs support AIA feature. This will allow
-> Linux INTC driver to use AIA local interrupt CSRs.
->
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+--a/JNFcIeN8xVqrhe
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Alistair
+On Tue, Sep 14, 2021 at 03:20:39PM +0100, Daniel P. Berrang=E9 wrote:
+> Now that all target architectures are converted to use the "format_tlb"
+> callback, we can merge all the duplicate "info tlb" handlers into one
+> and remove the architecture condition on the command.
+>=20
+> Signed-off-by: Daniel P. Berrang=E9 <berrange@redhat.com>
+
+ppc parts
+Acked-by: David Gibson <david@gibson.dropbear.id.au>
 
 > ---
->  hw/riscv/virt.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ec0cb69b8c..f43304beca 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -211,8 +211,17 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          qemu_fdt_add_subnode(mc->fdt, intc_name);
->          qemu_fdt_setprop_cell(mc->fdt, intc_name, "phandle",
->              intc_phandles[cpu]);
-> -        qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
-> -            "riscv,cpu-intc");
-> +        if (riscv_feature(&s->soc[socket].harts[cpu].env,
-> +                          RISCV_FEATURE_AIA)) {
-> +            static const char * const compat[2] = {
-> +                "riscv,cpu-intc-aia", "riscv,cpu-intc"
-> +            };
-> +            qemu_fdt_setprop_string_array(mc->fdt, name, "compatible",
-> +                                      (char **)&compat, ARRAY_SIZE(compat));
-> +        } else {
-> +            qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
-> +                "riscv,cpu-intc");
-> +        }
->          qemu_fdt_setprop(mc->fdt, intc_name, "interrupt-controller", NULL, 0);
->          qemu_fdt_setprop_cell(mc->fdt, intc_name, "#interrupt-cells", 1);
->
-> --
-> 2.25.1
->
->
+>  hmp-commands-info.hx         |  3 ---
+>  include/monitor/hmp-target.h |  1 -
+>  monitor/misc.c               | 15 +++++++++++++++
+>  target/i386/monitor.c        | 15 ---------------
+>  target/m68k/monitor.c        | 15 ---------------
+>  target/nios2/monitor.c       | 15 ---------------
+>  target/ppc/monitor.c         | 15 ---------------
+>  target/sh4/monitor.c         | 15 ---------------
+>  target/sparc/monitor.c       | 16 ----------------
+>  target/xtensa/monitor.c      | 15 ---------------
+>  10 files changed, 15 insertions(+), 110 deletions(-)
+>=20
+> diff --git a/hmp-commands-info.hx b/hmp-commands-info.hx
+> index f8312342cd..7bd1e04d46 100644
+> --- a/hmp-commands-info.hx
+> +++ b/hmp-commands-info.hx
+> @@ -206,8 +206,6 @@ SRST
+>      Show PCI information.
+>  ERST
+> =20
+> -#if defined(TARGET_I386) || defined(TARGET_SH4) || defined(TARGET_SPARC)=
+ || \
+> -    defined(TARGET_PPC) || defined(TARGET_XTENSA) || defined(TARGET_M68K)
+>      {
+>          .name       =3D "tlb",
+>          .args_type  =3D "",
+> @@ -215,7 +213,6 @@ ERST
+>          .help       =3D "show virtual to physical memory mappings",
+>          .cmd        =3D hmp_info_tlb,
+>      },
+> -#endif
+> =20
+>  SRST
+>    ``info tlb``
+> diff --git a/include/monitor/hmp-target.h b/include/monitor/hmp-target.h
+> index df79ad3355..04e02e8895 100644
+> --- a/include/monitor/hmp-target.h
+> +++ b/include/monitor/hmp-target.h
+> @@ -45,7 +45,6 @@ CPUArchState *mon_get_cpu_env(Monitor *mon);
+>  CPUState *mon_get_cpu(Monitor *mon);
+> =20
+>  void hmp_info_mem(Monitor *mon, const QDict *qdict);
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict);
+>  void hmp_mce(Monitor *mon, const QDict *qdict);
+>  void hmp_info_local_apic(Monitor *mon, const QDict *qdict);
+> =20
+> diff --git a/monitor/misc.c b/monitor/misc.c
+> index 6b07efdddd..c7d138914d 100644
+> --- a/monitor/misc.c
+> +++ b/monitor/misc.c
+> @@ -936,6 +936,21 @@ static void hmp_info_mtree(Monitor *mon, const QDict=
+ *qdict)
+>      mtree_info(flatview, dispatch_tree, owner, disabled);
+>  }
+> =20
+> +static void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> +{
+> +    g_autoptr(GString) buf =3D g_string_new("");
+> +    CPUState *cpu =3D mon_get_cpu(mon);
+> +
+> +    if (!cpu) {
+> +        monitor_printf(mon, "No CPU available\n");
+> +        return;
+> +    }
+> +
+> +    cpu_format_tlb(cpu, buf);
+> +
+> +    monitor_printf(mon, "%s", buf->str);
+> +}
+> +
+>  static void hmp_info_profile(Monitor *mon, const QDict *qdict)
+>  {
+>      Error *err =3D NULL;
+> diff --git a/target/i386/monitor.c b/target/i386/monitor.c
+> index 698fbbc80b..a7eb4205c7 100644
+> --- a/target/i386/monitor.c
+> +++ b/target/i386/monitor.c
+> @@ -248,21 +248,6 @@ void x86_cpu_format_tlb(CPUState *cpu, GString *buf)
+>      }
+>  }
+> =20
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> -
+>  static void mem_print(Monitor *mon, CPUArchState *env,
+>                        hwaddr *pstart, int *plast_prot,
+>                        hwaddr end, int prot)
+> diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
+> index 003a665246..0dc729692b 100644
+> --- a/target/m68k/monitor.c
+> +++ b/target/m68k/monitor.c
+> @@ -12,21 +12,6 @@
+>  #include "qapi/error.h"
+>  #include "qapi/qapi-commands-machine-target.h"
+> =20
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> -
+>  static const MonitorDef monitor_defs[] =3D {
+>      { "d0", offsetof(CPUM68KState, dregs[0]) },
+>      { "d1", offsetof(CPUM68KState, dregs[1]) },
+> diff --git a/target/nios2/monitor.c b/target/nios2/monitor.c
+> index 99d35e8ef1..1180a32f80 100644
+> --- a/target/nios2/monitor.c
+> +++ b/target/nios2/monitor.c
+> @@ -26,18 +26,3 @@
+>  #include "monitor/monitor.h"
+>  #include "monitor/hmp-target.h"
+>  #include "monitor/hmp.h"
+> -
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> diff --git a/target/ppc/monitor.c b/target/ppc/monitor.c
+> index 401a36c2eb..3564fd5f45 100644
+> --- a/target/ppc/monitor.c
+> +++ b/target/ppc/monitor.c
+> @@ -65,21 +65,6 @@ static target_long monitor_get_tbl(Monitor *mon, const=
+ struct MonitorDef *md,
+>      return cpu_ppc_load_tbl(env);
+>  }
+> =20
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> -
+>  const MonitorDef monitor_defs[] =3D {
+>      { "fpscr", offsetof(CPUPPCState, fpscr) },
+>      /* Next instruction pointer */
+> diff --git a/target/sh4/monitor.c b/target/sh4/monitor.c
+> index 5ccb95af93..d641d95316 100644
+> --- a/target/sh4/monitor.c
+> +++ b/target/sh4/monitor.c
+> @@ -53,18 +53,3 @@ void superh_cpu_format_tlb(CPUState *cpu, GString *buf)
+>          print_tlb(buf, i, &env->utlb[i]);
+>      }
+>  }
+> -
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
+> index cc7fe74e3e..0c51669c08 100644
+> --- a/target/sparc/monitor.c
+> +++ b/target/sparc/monitor.c
+> @@ -27,22 +27,6 @@
+>  #include "monitor/hmp-target.h"
+>  #include "monitor/hmp.h"
+> =20
+> -
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+> -
+>  #ifndef TARGET_SPARC64
+>  static target_long monitor_get_psr(Monitor *mon, const struct MonitorDef=
+ *md,
+>                                     int val)
+> diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
+> index 99d35e8ef1..1180a32f80 100644
+> --- a/target/xtensa/monitor.c
+> +++ b/target/xtensa/monitor.c
+> @@ -26,18 +26,3 @@
+>  #include "monitor/monitor.h"
+>  #include "monitor/hmp-target.h"
+>  #include "monitor/hmp.h"
+> -
+> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+> -{
+> -    g_autoptr(GString) buf =3D g_string_new("");
+> -    CPUState *cpu =3D mon_get_cpu(mon);
+> -
+> -    if (!cpu) {
+> -        monitor_printf(mon, "No CPU available\n");
+> -        return;
+> -    }
+> -
+> -    cpu_format_tlb(cpu, buf);
+> -
+> -    monitor_printf(mon, "%s", buf->str);
+> -}
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--a/JNFcIeN8xVqrhe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmFBT0gACgkQbDjKyiDZ
+s5JCkQ//fbqmB3EVRceZI0ugxSzJRNRF+PHrSkMJO2IHOs8NRO2guAHi8Lp1Ish9
+FfwMbkYt5XMlVnmuq17jDc4HFQrISgAQCwkhS6J3P+CZtyLRf8sc8UMQ0VF/jAoS
+muTD/Gm94WAxsEL++e1SlIuZ8t1o9CwL/b8aOTMghTaij7ZB4JHtfo2d6zkVksoc
+RMzJNN5VXfnUqRKeeeMf9qbnydsazyRHWr/jsMktUc3G7HilLJhNT3vvPEfPlgK/
+ODqHO+8DyPrT5oCVUM1i5h0rk7VQCrSEDkNh0DKQePl8NYfW1P+fTgbhUY19fBAR
++V6qZLQNoCOkBN2wN+1Hz3v0fhF605eYO1bPBplRcL5zYyEy41McWTOOJ4YKLIrM
+M0UPfkyljLiDkNn8IlfNUcVW+KfgT64OoUMc9u40LRbm20I4ub3FL5ubRQqMvMHD
+xPVAcMdY/N8P6uIXEXVqYEd5I37seFldw4bTqzfaeD65vXvnOv0CAOwVgOZrkRzQ
+dWnJVFrBEsQsaxlePt2NQY368SxREv9Yqkhw4hBK66eG471LkpEVqzIJvB76tQBn
+JDwr7F4yMFIFRV+uj0PcBjMeiJ8ua7t9xcSqNq6GtW9/DOZ/LufgrE36Od9rffN0
+zT1KKEgM/iedA20p20EdyWfKvaYCI5OaM7QtVb3JPgIr1plPoSs=
+=Ir56
+-----END PGP SIGNATURE-----
+
+--a/JNFcIeN8xVqrhe--
 
