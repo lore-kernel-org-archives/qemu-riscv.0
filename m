@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQP29-0008I3-Uh
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:08:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51598)
+	id 1mQP42-00034i-SJ
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:10:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP28-0008E3-Ik; Wed, 15 Sep 2021 03:08:40 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:35753)
+ id 1mQP41-00032B-Tj; Wed, 15 Sep 2021 03:10:37 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:36669)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQP26-0007XJ-SH; Wed, 15 Sep 2021 03:08:40 -0400
-Received: by mail-wr1-x429.google.com with SMTP id i23so2204487wrb.2;
- Wed, 15 Sep 2021 00:08:37 -0700 (PDT)
+ id 1mQP40-0000ht-5x; Wed, 15 Sep 2021 03:10:37 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id g16so2207752wrb.3;
+ Wed, 15 Sep 2021 00:10:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=TTa9uo2TCajZE3FSNA8UqaFzyWQGAg5xP5gbL7bXik8=;
- b=KbiIMy5huJJ2hiLsdFfK7lEdFPnjyUKgRmgjhcxLRmz6KeYD4H9zWOZbf6LTBzHG9O
- 2eeKSiiJirJax8toCGlfNaMYloQQ/qcGn2X/JfWerB1JqEuWjx50BQae1Bw9AzjVvl7l
- rIBVgCIIc4zzsUWpsSHTa7twlG9hRkS06sL7BHyQlADPGvLGNGDkzDhg6vsOVPmz0hS0
- WXnSpwuzZJwh17rM7RZoY2iw46cY2TiZXRg0gcyGomeL+ghOeh9bWR9s4j2wxYD7jbqF
- KbZueIZTB+5HJe1wZRAKv80iuZeKM15bendU51ZcZLO3fNhSKbsjMBMYOr3UEdwIFgmK
- kZdA==
+ bh=+muqlBR3FeFgS0MIKSJSDhjayA6Aa8PPlxefEHtqpwg=;
+ b=ZaosdWBt9ijHjQz0pC1HU1KTDiZQEYzFr0tijA7AiqhovpaiDEcXnMj7CRM6iER9K5
+ YBpIAY/p1kU9EZBegTUw1UhdWIa7d8X7aeO2LF1X1WwnOV7fWhzUi6O7POzDRqNuQ0tL
+ JldbFi8Sh64Q3qioigVxCPck+S0PSiDZrDWPG5bLdTJ3gXdazy24JPpFgOed3UjkXrvk
+ W5UEZ7BZhEHpw9M6ZtYOzz07/441OgvZjMNf1k8Iazh6byrj+tdhEggA0A7+Iqp6EpUG
+ gvO2k4C8xrIOhMEqJ2kuwa4jvd8qUO/Kz256GEyp3qovsPI52g0IN8zQDihSoYZ6Pf7v
+ zYEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
  :date:user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=TTa9uo2TCajZE3FSNA8UqaFzyWQGAg5xP5gbL7bXik8=;
- b=M0HDH7M0IVUzsZDUa+X5WW21i4AIE3rcnitm2mck9nxezP2vr+8Ew3G7PGXq4kit9F
- LfvmtsJDgnmubOl558cQgOQX0u897mP9n4zOxij1C49q3VVlMpmuR4TMiJ6gzs9qplE7
- S8yVblYmT6sNLYBVMnvZ5LvnVntzhIkgYKl6cLPO2PcYWbRX5SjOB4h9F+0C3QETi5K4
- 5o27euBaxuAqTLMVk3d4JWdIMYS2VeAUPCqWkSWMopys/mnZCAvkWBgTr7DQY1+Ex6f2
- Vzfowx8d8i0zo/XAF2d1gmtsDjJsc/npBiHCiUPJNYbxVV8ltQ83eSwjuQ06Kn/+sCOE
- Er/A==
-X-Gm-Message-State: AOAM533fiBR4v/xquBBQ1NyLEuKqB4CMUPAF6FBq6hK4ygubuiN/LbCO
- telZLlN+BF7M2tKUbXpNSHQ=
-X-Google-Smtp-Source: ABdhPJzomwuw4m77MS7fU+5UEPdy6VfPolqjbEqS6+la/iP9Zuw6/MKEgXXhKa5+Gkcw5V0+pFaaRg==
-X-Received: by 2002:adf:fb8f:: with SMTP id a15mr3278648wrr.92.1631689716042; 
- Wed, 15 Sep 2021 00:08:36 -0700 (PDT)
+ bh=+muqlBR3FeFgS0MIKSJSDhjayA6Aa8PPlxefEHtqpwg=;
+ b=uQcST50W+FGwssurtaQKp4qyqqOjhtjKrFCAtLvoLfU0kA2cF+IiSKuIsA7vB4LhvT
+ O+34oN/+yiaS7Y8Z0aZQuS4j1XdRyAF6hZHKqypB6G6rtgFORmmN/LcI8Wv+u6vZa3d+
+ keyPcNBDHMbUwPNFnZj6edTs2aQfb49CIAevqZrxTsZuWEAZ/hQBwNx8NTCl8IHcHN2B
+ p2nEPWcp//eZ5EvzxuxjiM79z0/3lXvU1Pxhxlg2mVQ0bV4kJHlb6+alaFpujxcYTTzw
+ yiZoVooY0BzUc1YZCPm3UY2Xuo3x2eT6CByr9QqAt91puMlWZGaqanVTWYmY7e3P/z53
+ dz1A==
+X-Gm-Message-State: AOAM532pFA8o1X4NA8QpyTIcKKJfBoqlAQd9MLAkZ34IzTePGHXJ65gv
+ wLlg45Ao2VHTcnVy4NYO2RvE1BPXThc=
+X-Google-Smtp-Source: ABdhPJxcNEW3fnxFdcq5MSM1BJve72CIx+MwogKI9xmnWi3jV5PC9v7QNE6059bHPiHSBqbKyZk2kg==
+X-Received: by 2002:a5d:530c:: with SMTP id e12mr3234135wrv.81.1631689833370; 
+ Wed, 15 Sep 2021 00:10:33 -0700 (PDT)
 Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
  [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id q11sm3342323wmc.41.2021.09.15.00.08.33
+ by smtp.gmail.com with ESMTPSA id o10sm14166959wrc.16.2021.09.15.00.10.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Sep 2021 00:08:35 -0700 (PDT)
+ Wed, 15 Sep 2021 00:10:32 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 18/53] target/nios2: convert to use format_state
+Subject: Re: [PATCH v2 07/53] target/alpha: convert to use format_state
  instead of dump_state
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>
@@ -75,19 +75,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-19-berrange@redhat.com>
+ <20210914142042.1655100-8-berrange@redhat.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <75599bfa-3a95-0dc9-dca9-de894e7c0e75@amsat.org>
-Date: Wed, 15 Sep 2021 09:08:33 +0200
+Message-ID: <df099ac9-84f0-0de3-e739-ed55f4848f27@amsat.org>
+Date: Wed, 15 Sep 2021 09:10:30 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-19-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-8-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
@@ -108,74 +108,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 07:08:41 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 07:10:38 -0000
 
-On 9/14/21 4:20 PM, Daniel P. Berrangé wrote:
+On 9/14/21 4:19 PM, Daniel P. Berrangé wrote:
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  target/nios2/cpu.c       |  2 +-
->  target/nios2/cpu.h       |  2 +-
->  target/nios2/translate.c | 20 ++++++++++----------
->  3 files changed, 12 insertions(+), 12 deletions(-)
+>  target/alpha/cpu.c    |  2 +-
+>  target/alpha/cpu.h    |  2 +-
+>  target/alpha/helper.c | 28 ++++++++++++++++------------
+>  3 files changed, 18 insertions(+), 14 deletions(-)
 > 
-> diff --git a/target/nios2/cpu.c b/target/nios2/cpu.c
-> index 5e37defef8..cbf15fb1c9 100644
-> --- a/target/nios2/cpu.c
-> +++ b/target/nios2/cpu.c
-> @@ -241,7 +241,7 @@ static void nios2_cpu_class_init(ObjectClass *oc, void *data)
+> diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+> index 4871ad0c0a..d0cdda9554 100644
+> --- a/target/alpha/cpu.c
+> +++ b/target/alpha/cpu.c
+> @@ -239,7 +239,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
 >  
->      cc->class_by_name = nios2_cpu_class_by_name;
->      cc->has_work = nios2_cpu_has_work;
-> -    cc->dump_state = nios2_cpu_dump_state;
-> +    cc->format_state = nios2_cpu_format_state;
->      cc->set_pc = nios2_cpu_set_pc;
->      cc->disas_set_info = nios2_cpu_disas_set_info;
->  #ifndef CONFIG_USER_ONLY
-> diff --git a/target/nios2/cpu.h b/target/nios2/cpu.h
-> index 2ab82fdc71..3b16cd1f3c 100644
-> --- a/target/nios2/cpu.h
-> +++ b/target/nios2/cpu.h
-> @@ -195,7 +195,7 @@ void nios2_tcg_init(void);
->  void nios2_cpu_do_interrupt(CPUState *cs);
->  int cpu_nios2_signal_handler(int host_signum, void *pinfo, void *puc);
->  void dump_mmu(CPUNios2State *env);
-> -void nios2_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-> +void nios2_cpu_format_state(CPUState *cpu, GString *buf, int flags);
->  hwaddr nios2_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  void nios2_cpu_do_unaligned_access(CPUState *cpu, vaddr addr,
->                                     MMUAccessType access_type,
-> diff --git a/target/nios2/translate.c b/target/nios2/translate.c
-> index 08d7ac5398..a5f0f56e1a 100644
-> --- a/target/nios2/translate.c
-> +++ b/target/nios2/translate.c
-> @@ -855,7 +855,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
->      translator_loop(&nios2_tr_ops, &dc.base, cs, tb, max_insns);
+>      cc->class_by_name = alpha_cpu_class_by_name;
+>      cc->has_work = alpha_cpu_has_work;
+> -    cc->dump_state = alpha_cpu_dump_state;
+> +    cc->format_state = alpha_cpu_format_state;
+>      cc->set_pc = alpha_cpu_set_pc;
+>      cc->gdb_read_register = alpha_cpu_gdb_read_register;
+>      cc->gdb_write_register = alpha_cpu_gdb_write_register;
+> diff --git a/target/alpha/cpu.h b/target/alpha/cpu.h
+> index 82df108967..9e3c80ebcc 100644
+> --- a/target/alpha/cpu.h
+> +++ b/target/alpha/cpu.h
+> @@ -278,7 +278,7 @@ extern const VMStateDescription vmstate_alpha_cpu;
+>  
+>  void alpha_cpu_do_interrupt(CPUState *cpu);
+>  bool alpha_cpu_exec_interrupt(CPUState *cpu, int int_req);
+> -void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags);
+> +void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags);
+>  hwaddr alpha_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>  int alpha_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+>  int alpha_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+> diff --git a/target/alpha/helper.c b/target/alpha/helper.c
+> index 4f56fe4d23..6ed80e8a27 100644
+> --- a/target/alpha/helper.c
+> +++ b/target/alpha/helper.c
+> @@ -451,7 +451,7 @@ bool alpha_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+>      return false;
 >  }
 >  
-> -void nios2_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +void nios2_cpu_format_state(CPUState *cs, GString *buf, int flags)
+> -void alpha_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> +void alpha_cpu_format_state(CPUState *cs, GString *buf, int flags)
 >  {
->      Nios2CPU *cpu = NIOS2_CPU(cs);
->      CPUNios2State *env = &cpu->env;
-> @@ -865,22 +865,22 @@ void nios2_cpu_dump_state(CPUState *cs, FILE *f, int flags)
->          return;
->      }
->  
-> -    qemu_fprintf(f, "IN: PC=%x %s\n",
-> -                 env->regs[R_PC], lookup_symbol(env->regs[R_PC]));
-> +    g_string_append_printf(buf, "IN: PC=%x %s\n",
-> +                           env->regs[R_PC], lookup_symbol(env->regs[R_PC]));
 
-Note 1:
+Unrelated, but this code doesn't belong to helper.c IMO, but cpu.c.
 
-Interesting to call lookup_symbol() in dump_state(). Other targets
-could do that too, but even better doing this in cpu_format_state().
-
-Note 2:
-
-format_state() doesn't belong to translate.c IMO and should be moved
-to cpu.c.
-
-Anyhow, unrelated to your patch, so:
 Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
