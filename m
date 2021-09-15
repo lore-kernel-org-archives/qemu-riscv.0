@@ -1,103 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQPQs-0001O6-2B
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:34:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57102)
+	id 1mQPke-0006xZ-1l
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Sep 2021 03:54:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33462)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQPQh-0001Lg-3L; Wed, 15 Sep 2021 03:34:06 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:51819)
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1mQPkb-0006ux-Sr; Wed, 15 Sep 2021 03:54:37 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:41668)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mQPQf-0003Zr-D8; Wed, 15 Sep 2021 03:34:02 -0400
-Received: by mail-wm1-x329.google.com with SMTP id y132so1381126wmc.1;
- Wed, 15 Sep 2021 00:33:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
+ id 1mQPka-0004SU-Hc; Wed, 15 Sep 2021 03:54:37 -0400
+Received: by mail-pl1-x629.google.com with SMTP id v2so1113709plp.8;
+ Wed, 15 Sep 2021 00:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=/fnaAOh9p4p4wc129sOXgPIxvFnAnZYJvtoB3c8uF9k=;
- b=Ee0E7i9/CLXT3s/wHkSIGvqoE3nPYVxCL0dd8m7srTteWQ6iqEH9DSH1Ayt4yH06hZ
- P/53yMCRl1lZ5nidPzNHips2d0CNKkZ/ir6tn7xRHdDR2hNwSsyIBQJ2ND1I/fRvdBW7
- NtnBvHswfFjQBQGS6iwjJnYhqNr+OJFnnIIkpFg/3Ut7CK9Ba3JJAWhfA13bioAZJHJS
- yccWbIRKYGR+UUasJZrNVznXEKM1K3Fp8Eu/2cW0w/SzKzcYGX+UwqwlG2bmY4OaRQ4a
- 6p42G31yu/MgJFy1nMprRNT62Me0McDXt//TlzJU2HkholRAdqwgAiUVK3oEBdcUTMxc
- BDBA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=E3gAr87EDemAc8yEwCl6/Y8xliZAWl1VYELf/UlFmJo=;
+ b=pTuB/N6YJm9LCrs8qN/14kPcAcSRNzMSqJDO7/oM5rP8imKClM5xjzOs1WabCSw4zd
+ hHfF6Ym29I4GSIub1ow1fotXJqYK7W1dLcMAu4l12vAry/0Re8bVqXK6Lhj2Nh90rAHO
+ JIXROfZIwYweBk7r7scwCBCRGQsG4yYlx9a97nEAJ0w+cxCnJu7Phet/JRNtMUJ0aAOc
+ kihyf6mSvsT/Y1IMbIXIDRhFiKwE8cibqB8/15QMA1+ieanh5h2H85nlFe8LdnIY6Bfd
+ pyq0I4MMOTQHkwqAQSpukDrRicA3Uyf5ywkUKMxJaSwB2V39u7+/L4sOY950kOviZDSg
+ jfdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
- :date:user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=/fnaAOh9p4p4wc129sOXgPIxvFnAnZYJvtoB3c8uF9k=;
- b=DFBITmtvSfTlRk6gNAgqcq7f7DiJYGqLJm9j2jxPlodoGzX95WJL9XobnAJeS5ljcF
- hawEe0/fJSwofh/fGvxEQFGc6wwpDIV39vwin3INabZjGpU49AUq66u1KA9G2ktAMv1I
- 4i8+5sAuyPcpE5C2IwWhfRNpKHyenO2kcjtigiFWgccuisxgnxQTK05I/5Mn1FklmRLr
- yVKXaP+vgXiFKOwJ/nAo671isa/5ctrcCubBuqWHj33aloySwtQDSNOD1X+XioMJtIVY
- lS3x9ryZ+hTvGl4fnD7mmSaqWfRaCip0/jvl7qUizBEoIawo2CKtLeqkY5bU4BAcjS6i
- FH0Q==
-X-Gm-Message-State: AOAM532//YBW+DNBKhmN/HI2irOBHIVwMcoNYOsn3e02i/9DA+/+Tn6E
- myYstDWouqa1zYXUjXjuBwk=
-X-Google-Smtp-Source: ABdhPJyCTlxmuD7rWTLJwH1adpYsfO3LLn8q9FCWuFm/4JqqqqXqg/qXd0Um+RZmTPhrubIbz8E7aQ==
-X-Received: by 2002:a1c:403:: with SMTP id 3mr2853133wme.161.1631691238156;
- Wed, 15 Sep 2021 00:33:58 -0700 (PDT)
-Received: from [192.168.1.36] (14.red-83-35-25.dynamicip.rima-tde.net.
- [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id v28sm12754903wrv.93.2021.09.15.00.33.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Sep 2021 00:33:57 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Subject: Re: [PATCH v2 10/53] target/cris: convert to use format_state instead
- of dump_state
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, Chris Wulff
- <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
- Bin Meng <bin.meng@windriver.com>,
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=E3gAr87EDemAc8yEwCl6/Y8xliZAWl1VYELf/UlFmJo=;
+ b=B+c9HLROwYHcrcImHWpoOxN703QqVeyp7T4qKNsVONSk661XDX4KvDd2VmvMLzUeM+
+ Rk0Ewj+VTMol0saYYdhwjGzdq9VQX46oSvg5kCO0vgXtTWFaauylvs3nv2Afh0YB/tyF
+ rXqchOesJWYueOwZph+CFF0nkMgmOIHdh3X5tGLnTU/P1UJ6CyFrcD+WmS+9RW3s+AYT
+ e420tOwU+nts2ozrbEk789Syk9ChY5T5Fc6l84sI7E1ChcPzjBq1fUsYBAJO0rNbqjzT
+ ZlJMhlSpL0RUE8SvGLhW2QZZ0bEuAzAaSu41q8AtrzSI7kY+wuucdHU0j93UfpHKNLYW
+ I70w==
+X-Gm-Message-State: AOAM532uskebz2f3LUT7ODquCajdEPpDzBa4LwMf5127YCg7kIq/2Zq4
+ +H63Wp1bhCxPPFZpFL/GWWdqjikgBZKYYTDD49w=
+X-Google-Smtp-Source: ABdhPJzEu2x0f0ggBgFjBVZqFs1UFWTkCQeoZ6/6tvr+NtX8TdMetf4FHU7hRGghu1+WrApGvYt/YNDr6iAcAtRDaRE=
+X-Received: by 2002:a17:90a:2ecb:: with SMTP id
+ h11mr7086196pjs.196.1631692472568; 
+ Wed, 15 Sep 2021 00:54:32 -0700 (PDT)
+MIME-Version: 1.0
+References: <20210914142042.1655100-1-berrange@redhat.com>
+ <20210914142042.1655100-28-berrange@redhat.com>
+ <1cb38e8f-cc05-461a-c722-efb18519f6fe@amsat.org>
+In-Reply-To: <1cb38e8f-cc05-461a-c722-efb18519f6fe@amsat.org>
+From: Max Filippov <jcmvbkbc@gmail.com>
+Date: Wed, 15 Sep 2021 00:54:21 -0700
+Message-ID: <CAMo8BfL6V6HsYg1RGE8yNWLcOiHjkBxDzk4XSE6_AGpqkcx7rg@mail.gmail.com>
+Subject: Re: [PATCH v2 27/53] target/xtensa: convert to use format_state
+ instead of dump_state
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ qemu-devel <qemu-devel@nongnu.org>, Peter Maydell <peter.maydell@linaro.org>, 
+ Chris Wulff <crwulff@gmail.com>, David Hildenbrand <david@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>, 
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yuval Shaia <yuval.shaia.ml@gmail.com>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Laurent Vivier <laurent@vivier.eu>,
- Max Filippov <jcmvbkbc@gmail.com>, Taylor Simpson <tsimpson@quicinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
- Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>,
- Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Yuval Shaia <yuval.shaia.ml@gmail.com>, 
+ Laurent Vivier <laurent@vivier.eu>, Taylor Simpson <tsimpson@quicinc.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Eric Blake <eblake@redhat.com>,
+ Marek Vasut <marex@denx.de>, Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, 
  Christian Borntraeger <borntraeger@de.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Artyom Tarasenko <atar4qemu@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, Greg Kurz
- <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, Peter Xu <peterx@redhat.com>,
- Stafford Horne <shorne@gmail.com>, David Gibson
- <david@gibson.dropbear.id.au>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, Laurent Vivier <lvivier@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Greg Kurz <groug@kaod.org>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ qemu-s390x <qemu-s390x@nongnu.org>, 
+ qemu-arm <qemu-arm@nongnu.org>, Michael Rolnik <mrolnik@gmail.com>,
+ Peter Xu <peterx@redhat.com>, 
+ Stafford Horne <shorne@gmail.com>, David Gibson <david@gibson.dropbear.id.au>,
+ qemu-riscv@nongnu.org, 
  Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>, 
+ qemu-ppc <qemu-ppc@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, 
  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
  Aurelien Jarno <aurelien@aurel32.net>
-References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-11-berrange@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Message-ID: <eecfb79d-6e49-4e6e-df11-f54dad16f4f1@amsat.org>
-Date: Wed, 15 Sep 2021 09:33:55 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-11-berrange@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x329.google.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-1.969,
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=jcmvbkbc@gmail.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: 1
+X-Spam_score: 0.1
+X-Spam_bar: /
+X-Spam_report: (0.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ FROM_LOCAL_NOVOWEL=0.5, HK_RANDOM_ENVFROM=0.689, HK_RANDOM_FROM=0.999,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -110,114 +100,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 07:34:11 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 07:54:38 -0000
 
-On 9/14/21 4:19 PM, Daniel P. Berrangé wrote:
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->  target/cris/cpu.c       |  2 +-
->  target/cris/cpu.h       |  2 +-
->  target/cris/translate.c | 33 +++++++++++++++++----------------
->  3 files changed, 19 insertions(+), 18 deletions(-)
-> 
-> diff --git a/target/cris/cpu.c b/target/cris/cpu.c
-> index 70932b1f8c..5159cf6528 100644
-> --- a/target/cris/cpu.c
-> +++ b/target/cris/cpu.c
-> @@ -295,7 +295,7 @@ static void cris_cpu_class_init(ObjectClass *oc, void *data)
->  
->      cc->class_by_name = cris_cpu_class_by_name;
->      cc->has_work = cris_cpu_has_work;
-> -    cc->dump_state = cris_cpu_dump_state;
-> +    cc->format_state = cris_cpu_format_state;
->      cc->set_pc = cris_cpu_set_pc;
->      cc->gdb_read_register = cris_cpu_gdb_read_register;
->      cc->gdb_write_register = cris_cpu_gdb_write_register;
-> diff --git a/target/cris/cpu.h b/target/cris/cpu.h
-> index d3b6492909..908cb051da 100644
-> --- a/target/cris/cpu.h
-> +++ b/target/cris/cpu.h
-> @@ -191,7 +191,7 @@ void cris_cpu_do_interrupt(CPUState *cpu);
->  void crisv10_cpu_do_interrupt(CPUState *cpu);
->  bool cris_cpu_exec_interrupt(CPUState *cpu, int int_req);
->  
-> -void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags);
-> +void cris_cpu_format_state(CPUState *cs, GString *buf, int flags);
->  
->  hwaddr cris_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->  
-> diff --git a/target/cris/translate.c b/target/cris/translate.c
-> index a84b753349..6098693186 100644
-> --- a/target/cris/translate.c
-> +++ b/target/cris/translate.c
-> @@ -3307,7 +3307,7 @@ void gen_intermediate_code(CPUState *cs, TranslationBlock *tb, int max_insns)
->      translator_loop(&cris_tr_ops, &dc.base, cs, tb, max_insns);
->  }
->  
-> -void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +void cris_cpu_format_state(CPUState *cs, GString *buf, int flags)
->  {
->      CRISCPU *cpu = CRIS_CPU(cs);
->      CPUCRISState *env = &cpu->env;
-> @@ -3326,40 +3326,41 @@ void cris_cpu_dump_state(CPUState *cs, FILE *f, int flags)
->          regnames = regnames_v32;
->      }
->  
-> -    qemu_fprintf(f, "PC=%x CCS=%x btaken=%d btarget=%x\n"
-> -                 "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x cc_mask=%x\n",
-> -                 env->pc, env->pregs[PR_CCS], env->btaken, env->btarget,
-> -                 env->cc_op,
-> -                 env->cc_src, env->cc_dest, env->cc_result, env->cc_mask);
-> +    g_string_append_printf(buf, "PC=%x CCS=%x btaken=%d btarget=%x\n"
-> +                           "cc_op=%d cc_src=%d cc_dest=%d cc_result=%x "
-> +                           "cc_mask=%x\n",
-> +                           env->pc, env->pregs[PR_CCS], env->btaken,
-> +                           env->btarget, env->cc_op, env->cc_src,
-> +                           env->cc_dest, env->cc_result, env->cc_mask);
->  
->  
->      for (i = 0; i < 16; i++) {
-> -        qemu_fprintf(f, "%s=%8.8x ", regnames[i], env->regs[i]);
-> +        g_string_append_printf(buf, "%s=%8.8x ", regnames[i], env->regs[i]);
->          if ((i + 1) % 4 == 0) {
-> -            qemu_fprintf(f, "\n");
-> +            g_string_append_printf(buf, "\n");
+On Wed, Sep 15, 2021 at 12:32 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.o=
+rg> wrote:
+> On 9/14/21 4:20 PM, Daniel P. Berrang=C3=A9 wrote:
+> >      if ((flags & CPU_DUMP_FPU) &&
+> >          xtensa_option_enabled(env->config, XTENSA_OPTION_FP_COPROCESSO=
+R)) {
+> > -        qemu_fprintf(f, "\n");
+> > +        g_string_append_printf(buf, "\n");
+>
+> g_string_append_c(); simpler to move it before this if() statement.
 
-g_string_append_c() (various).
+It adds spacing between optional blocks, why does it need to be moved out?
 
->          }
->      }
-> -    qemu_fprintf(f, "\nspecial regs:\n");
-> +    g_string_append_printf(buf, "\nspecial regs:\n");
->      for (i = 0; i < 16; i++) {
-> -        qemu_fprintf(f, "%s=%8.8x ", pregnames[i], env->pregs[i]);
-> +        g_string_append_printf(buf, "%s=%8.8x ", pregnames[i], env->pregs[i]);
->          if ((i + 1) % 4 == 0) {
-> -            qemu_fprintf(f, "\n");
-> +            g_string_append_printf(buf, "\n");
->          }
->      }
->      if (env->pregs[PR_VR] >= 32) {
->          uint32_t srs = env->pregs[PR_SRS];
-> -        qemu_fprintf(f, "\nsupport function regs bank %x:\n", srs);
-> +        g_string_append_printf(buf, "\nsupport function regs bank %x:\n", srs);
->          if (srs < ARRAY_SIZE(env->sregs)) {
->              for (i = 0; i < 16; i++) {
-> -                qemu_fprintf(f, "s%2.2d=%8.8x ",
-> -                             i, env->sregs[srs][i]);
-> +                g_string_append_printf(buf, "s%2.2d=%8.8x ",
-> +                                       i, env->sregs[srs][i]);
->                  if ((i + 1) % 4 == 0) {
-> -                    qemu_fprintf(f, "\n");
-> +                    g_string_append_printf(buf, "\n");
->                  }
->              }
->          }
->      }
-> -    qemu_fprintf(f, "\n\n");
-> +    g_string_append_printf(buf, "\n\n");
->  
->  }
->  
-> 
+> >      if ((flags & CPU_DUMP_FPU) &&
+> >          xtensa_option_enabled(env->config, XTENSA_OPTION_DFP_COPROCESS=
+OR) &&
+> >          !xtensa_option_enabled(env->config, XTENSA_OPTION_DFPU_SINGLE_=
+ONLY)) {
+> > -        qemu_fprintf(f, "\n");
+> > +        g_string_append_printf(buf, "\n");
+>
+> Ditto (move out).
+
+Here as well.
+
+--=20
+Thanks.
+-- Max
 
