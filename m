@@ -1,24 +1,24 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQK1p-00028u-Oh
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 21:48:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40326)
+	id 1mQK1q-00029k-Dm
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Sep 2021 21:48:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40346)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1mQK1k-00022b-E0; Tue, 14 Sep 2021 21:47:56 -0400
-Received: from ozlabs.org ([203.11.71.1]:40587)
+ id 1mQK1l-000239-O2; Tue, 14 Sep 2021 21:47:57 -0400
+Received: from bilbo.ozlabs.org ([2401:3900:2:1::2]:40305 helo=ozlabs.org)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dgibson@ozlabs.org>)
- id 1mQK1h-0000O2-4y; Tue, 14 Sep 2021 21:47:56 -0400
+ id 1mQK1g-0000O1-K6; Tue, 14 Sep 2021 21:47:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gibson.dropbear.id.au; s=201602; t=1631670453;
- bh=NwndZtTLOjUYyi7djQs5a8xGpidoGLI0MTf/YJl8xX8=;
+ bh=7Wv1DfgAyZ9lWydSV0ET07SCIrR7pdmsPJKoAD3x84o=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=m7qhXllqRNNhq4fLcTX7eS5ebYpfq4aZMQ7AVceLwEcCjESISKQ2yHBx40meq9rDK
- BuSE4PJJuRRNUbuavz2Uw/Ra199mIHehu84BSLY6CNJCYren38Z86jTHsP9Oa/3uPS
- GWQnbuX+0mBzYOZrnIkEny08+AgDi/3gc9RLoKN4=
+ b=pyqYggh0IIy54nBzKDMyCCQszU0bhG1YwKBIAXWSNpiF5mjr1lUxo4RHO9YVX02sI
+ xEplEM8UmSPReKn9d/0M1YTkg/qRx79sYAy4EWj3JYdhfStBROly8Fkwt0bMYOmKem
+ CsmEcif4ouzvMMAKjwl29xwF8a7dvD0fzKfR44eo=
 Received: by ozlabs.org (Postfix, from userid 1007)
- id 4H8NPx18JXz9sW4; Wed, 15 Sep 2021 11:47:33 +1000 (AEST)
-Date: Wed, 15 Sep 2021 11:41:28 +1000
+ id 4H8NPx0gspz9sRK; Wed, 15 Sep 2021 11:47:33 +1000 (AEST)
+Date: Wed, 15 Sep 2021 11:40:03 +1000
 From: David Gibson <david@gibson.dropbear.id.au>
 To: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
 Cc: qemu-devel@nongnu.org, Greg Kurz <groug@kaod.org>,
@@ -52,23 +52,23 @@ Cc: qemu-devel@nongnu.org, Greg Kurz <groug@kaod.org>,
  Laurent Vivier <lvivier@redhat.com>, Eric Blake <eblake@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>
-Subject: Re: [PATCH v2 50/53] monitor: merge duplicate "info tlb" handlers
-Message-ID: <YUFPSJCIsUlp5L4Y@yekko>
+Subject: Re: [PATCH v2 46/53] target/ppc: convert to use format_tlb callback
+Message-ID: <YUFO82Nbe50k2Mih@yekko>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-51-berrange@redhat.com>
+ <20210914142042.1655100-47-berrange@redhat.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="a/JNFcIeN8xVqrhe"
+ protocol="application/pgp-signature"; boundary="+gv/YgNjt/MgA38s"
 Content-Disposition: inline
-In-Reply-To: <20210914142042.1655100-51-berrange@redhat.com>
-Received-SPF: pass client-ip=203.11.71.1; envelope-from=dgibson@ozlabs.org;
+In-Reply-To: <20210914142042.1655100-47-berrange@redhat.com>
+Received-SPF: pass client-ip=2401:3900:2:1::2; envelope-from=dgibson@ozlabs.org;
  helo=ozlabs.org
-X-Spam_score_int: -5
-X-Spam_score: -0.6
-X-Spam_bar: /
-X-Spam_report: (-0.6 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -81,274 +81,458 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2021 01:47:57 -0000
+X-List-Received-Date: Wed, 15 Sep 2021 01:47:58 -0000
 
 
---a/JNFcIeN8xVqrhe
+--+gv/YgNjt/MgA38s
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 14, 2021 at 03:20:39PM +0100, Daniel P. Berrang=E9 wrote:
-> Now that all target architectures are converted to use the "format_tlb"
-> callback, we can merge all the duplicate "info tlb" handlers into one
-> and remove the architecture condition on the command.
+On Tue, Sep 14, 2021 at 03:20:35PM +0100, Daniel P. Berrang=E9 wrote:
+> Change the "info tlb" implementation to use the format_tlb callback.
 >=20
 > Signed-off-by: Daniel P. Berrang=E9 <berrange@redhat.com>
 
-ppc parts
 Acked-by: David Gibson <david@gibson.dropbear.id.au>
 
 > ---
->  hmp-commands-info.hx         |  3 ---
->  include/monitor/hmp-target.h |  1 -
->  monitor/misc.c               | 15 +++++++++++++++
->  target/i386/monitor.c        | 15 ---------------
->  target/m68k/monitor.c        | 15 ---------------
->  target/nios2/monitor.c       | 15 ---------------
->  target/ppc/monitor.c         | 15 ---------------
->  target/sh4/monitor.c         | 15 ---------------
->  target/sparc/monitor.c       | 16 ----------------
->  target/xtensa/monitor.c      | 15 ---------------
->  10 files changed, 15 insertions(+), 110 deletions(-)
+>  target/ppc/cpu.h        |   3 +-
+>  target/ppc/cpu_init.c   |   3 +
+>  target/ppc/mmu-hash64.c |   8 +-
+>  target/ppc/mmu-hash64.h |   2 +-
+>  target/ppc/mmu_common.c | 167 ++++++++++++++++++++++------------------
+>  target/ppc/monitor.c    |  10 ++-
+>  6 files changed, 107 insertions(+), 86 deletions(-)
 >=20
-> diff --git a/hmp-commands-info.hx b/hmp-commands-info.hx
-> index f8312342cd..7bd1e04d46 100644
-> --- a/hmp-commands-info.hx
-> +++ b/hmp-commands-info.hx
-> @@ -206,8 +206,6 @@ SRST
->      Show PCI information.
->  ERST
-> =20
-> -#if defined(TARGET_I386) || defined(TARGET_SH4) || defined(TARGET_SPARC)=
- || \
-> -    defined(TARGET_PPC) || defined(TARGET_XTENSA) || defined(TARGET_M68K)
->      {
->          .name       =3D "tlb",
->          .args_type  =3D "",
-> @@ -215,7 +213,6 @@ ERST
->          .help       =3D "show virtual to physical memory mappings",
->          .cmd        =3D hmp_info_tlb,
->      },
-> -#endif
-> =20
->  SRST
->    ``info tlb``
-> diff --git a/include/monitor/hmp-target.h b/include/monitor/hmp-target.h
-> index df79ad3355..04e02e8895 100644
-> --- a/include/monitor/hmp-target.h
-> +++ b/include/monitor/hmp-target.h
-> @@ -45,7 +45,6 @@ CPUArchState *mon_get_cpu_env(Monitor *mon);
->  CPUState *mon_get_cpu(Monitor *mon);
-> =20
->  void hmp_info_mem(Monitor *mon, const QDict *qdict);
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict);
->  void hmp_mce(Monitor *mon, const QDict *qdict);
->  void hmp_info_local_apic(Monitor *mon, const QDict *qdict);
-> =20
-> diff --git a/monitor/misc.c b/monitor/misc.c
-> index 6b07efdddd..c7d138914d 100644
-> --- a/monitor/misc.c
-> +++ b/monitor/misc.c
-> @@ -936,6 +936,21 @@ static void hmp_info_mtree(Monitor *mon, const QDict=
- *qdict)
->      mtree_info(flatview, dispatch_tree, owner, disabled);
+> diff --git a/target/ppc/cpu.h b/target/ppc/cpu.h
+> index c84ae29b98..37b44bfbc3 100644
+> --- a/target/ppc/cpu.h
+> +++ b/target/ppc/cpu.h
+> @@ -1257,6 +1257,7 @@ DECLARE_OBJ_CHECKERS(PPCVirtualHypervisor, PPCVirtu=
+alHypervisorClass,
+>  void ppc_cpu_do_interrupt(CPUState *cpu);
+>  bool ppc_cpu_exec_interrupt(CPUState *cpu, int int_req);
+>  void ppc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+> +void ppc_cpu_format_tlb(CPUState *cpu, GString *buf);
+>  hwaddr ppc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>  int ppc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+>  int ppc_cpu_gdb_read_register_apple(CPUState *cpu, GByteArray *buf, int =
+reg);
+> @@ -2667,8 +2668,6 @@ static inline bool ppc_interrupts_little_endian(Pow=
+erPCCPU *cpu)
+>      return false;
 >  }
 > =20
-> +static void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> +{
+> -void dump_mmu(CPUPPCState *env);
+> -
+>  void ppc_maybe_bswap_register(CPUPPCState *env, uint8_t *mem_buf, int le=
+n);
+>  void ppc_store_vscr(CPUPPCState *env, uint32_t vscr);
+>  uint32_t ppc_get_vscr(CPUPPCState *env);
+> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+> index 3456be465c..98d6f40a49 100644
+> --- a/target/ppc/cpu_init.c
+> +++ b/target/ppc/cpu_init.c
+> @@ -9044,6 +9044,9 @@ static void ppc_cpu_class_init(ObjectClass *oc, voi=
+d *data)
+>      cc->class_by_name =3D ppc_cpu_class_by_name;
+>      cc->has_work =3D ppc_cpu_has_work;
+>      cc->format_state =3D ppc_cpu_format_state;
+> +#ifndef CONFIG_USER_ONLY
+> +    cc->format_tlb =3D ppc_cpu_format_tlb;
+> +#endif
+>      cc->set_pc =3D ppc_cpu_set_pc;
+>      cc->gdb_read_register =3D ppc_cpu_gdb_read_register;
+>      cc->gdb_write_register =3D ppc_cpu_gdb_write_register;
+> diff --git a/target/ppc/mmu-hash64.c b/target/ppc/mmu-hash64.c
+> index 19832c4b46..73927a0819 100644
+> --- a/target/ppc/mmu-hash64.c
+> +++ b/target/ppc/mmu-hash64.c
+> @@ -80,7 +80,7 @@ static ppc_slb_t *slb_lookup(PowerPCCPU *cpu, target_ul=
+ong eaddr)
+>      return NULL;
+>  }
+> =20
+> -void dump_slb(PowerPCCPU *cpu)
+> +void dump_slb(PowerPCCPU *cpu, GString *buf)
+>  {
+>      CPUPPCState *env =3D &cpu->env;
+>      int i;
+> @@ -88,15 +88,15 @@ void dump_slb(PowerPCCPU *cpu)
+> =20
+>      cpu_synchronize_state(CPU(cpu));
+> =20
+> -    qemu_printf("SLB\tESID\t\t\tVSID\n");
+> +    g_string_append_printf(buf, "SLB\tESID\t\t\tVSID\n");
+>      for (i =3D 0; i < cpu->hash64_opts->slb_size; i++) {
+>          slbe =3D env->slb[i].esid;
+>          slbv =3D env->slb[i].vsid;
+>          if (slbe =3D=3D 0 && slbv =3D=3D 0) {
+>              continue;
+>          }
+> -        qemu_printf("%d\t0x%016" PRIx64 "\t0x%016" PRIx64 "\n",
+> -                    i, slbe, slbv);
+> +        g_string_append_printf(buf, "%d\t0x%016" PRIx64 "\t0x%016" PRIx6=
+4 "\n",
+> +                               i, slbe, slbv);
+>      }
+>  }
+> =20
+> diff --git a/target/ppc/mmu-hash64.h b/target/ppc/mmu-hash64.h
+> index c5b2f97ff7..99e03a5849 100644
+> --- a/target/ppc/mmu-hash64.h
+> +++ b/target/ppc/mmu-hash64.h
+> @@ -4,7 +4,7 @@
+>  #ifndef CONFIG_USER_ONLY
+> =20
+>  #ifdef TARGET_PPC64
+> -void dump_slb(PowerPCCPU *cpu);
+> +void dump_slb(PowerPCCPU *cpu, GString *buf);
+>  int ppc_store_slb(PowerPCCPU *cpu, target_ulong slot,
+>                    target_ulong esid, target_ulong vsid);
+>  bool ppc_hash64_xlate(PowerPCCPU *cpu, vaddr eaddr, MMUAccessType access=
+_type,
+> diff --git a/target/ppc/mmu_common.c b/target/ppc/mmu_common.c
+> index 754509e556..d7b716f30a 100644
+> --- a/target/ppc/mmu_common.c
+> +++ b/target/ppc/mmu_common.c
+> @@ -937,19 +937,19 @@ static const char *book3e_tsize_to_str[32] =3D {
+>      "1T", "2T"
+>  };
+> =20
+> -static void mmubooke_dump_mmu(CPUPPCState *env)
+> +static void mmubooke_dump_mmu(CPUPPCState *env, GString *buf)
+>  {
+>      ppcemb_tlb_t *entry;
+>      int i;
+> =20
+>      if (kvm_enabled() && !env->kvm_sw_tlb) {
+> -        qemu_printf("Cannot access KVM TLB\n");
+> +        g_string_append_printf(buf, "Cannot access KVM TLB\n");
+>          return;
+>      }
+> =20
+> -    qemu_printf("\nTLB:\n");
+> -    qemu_printf("Effective          Physical           Size PID   Prot  =
+   "
+> -                "Attr\n");
+> +    g_string_append_printf(buf, "\nTLB:\n");
+> +    g_string_append_printf(buf, "Effective          Physical           "
+> +                           "Size PID   Prot     Attr\n");
+> =20
+>      entry =3D &env->tlb.tlbe[0];
+>      for (i =3D 0; i < env->nb_tlb; i++, entry++) {
+> @@ -973,22 +973,24 @@ static void mmubooke_dump_mmu(CPUPPCState *env)
+>          } else {
+>              snprintf(size_buf, sizeof(size_buf), "%3" PRId64 "k", size /=
+ KiB);
+>          }
+> -        qemu_printf("0x%016" PRIx64 " 0x%016" PRIx64 " %s %-5u %08x %08x=
+\n",
+> -                    (uint64_t)ea, (uint64_t)pa, size_buf, (uint32_t)entr=
+y->PID,
+> -                    entry->prot, entry->attr);
+> +        g_string_append_printf(buf, "0x%016" PRIx64 " 0x%016" PRIx64
+> +                               " %s %-5u %08x %08x\n",
+> +                               (uint64_t)ea, (uint64_t)pa, size_buf,
+> +                               (uint32_t)entry->PID,
+> +                               entry->prot, entry->attr);
+>      }
+> =20
+>  }
+> =20
+>  static void mmubooke206_dump_one_tlb(CPUPPCState *env, int tlbn, int off=
+set,
+> -                                     int tlbsize)
+> +                                     int tlbsize, GString *buf)
+>  {
+>      ppcmas_tlb_t *entry;
+>      int i;
+> =20
+> -    qemu_printf("\nTLB%d:\n", tlbn);
+> -    qemu_printf("Effective          Physical           Size TID   TS SRW=
+X"
+> -                " URWX WIMGE U0123\n");
+> +    g_string_append_printf(buf, "\nTLB%d:\n", tlbn);
+> +    g_string_append_printf(buf, "Effective          Physical           "
+> +                           "Size TID   TS SRWX URWX WIMGE U0123\n");
+> =20
+>      entry =3D &env->tlb.tlbm[offset];
+>      for (i =3D 0; i < tlbsize; i++, entry++) {
+> @@ -1004,37 +1006,38 @@ static void mmubooke206_dump_one_tlb(CPUPPCState =
+*env, int tlbn, int offset,
+>          ea =3D entry->mas2 & ~(size - 1);
+>          pa =3D entry->mas7_3 & ~(size - 1);
+> =20
+> -        qemu_printf("0x%016" PRIx64 " 0x%016" PRIx64 " %4s %-5u %1u  S%c=
+%c%c"
+> -                    "U%c%c%c %c%c%c%c%c U%c%c%c%c\n",
+> -                    (uint64_t)ea, (uint64_t)pa,
+> -                    book3e_tsize_to_str[tsize],
+> -                    (entry->mas1 & MAS1_TID_MASK) >> MAS1_TID_SHIFT,
+> -                    (entry->mas1 & MAS1_TS) >> MAS1_TS_SHIFT,
+> -                    entry->mas7_3 & MAS3_SR ? 'R' : '-',
+> -                    entry->mas7_3 & MAS3_SW ? 'W' : '-',
+> -                    entry->mas7_3 & MAS3_SX ? 'X' : '-',
+> -                    entry->mas7_3 & MAS3_UR ? 'R' : '-',
+> -                    entry->mas7_3 & MAS3_UW ? 'W' : '-',
+> -                    entry->mas7_3 & MAS3_UX ? 'X' : '-',
+> -                    entry->mas2 & MAS2_W ? 'W' : '-',
+> -                    entry->mas2 & MAS2_I ? 'I' : '-',
+> -                    entry->mas2 & MAS2_M ? 'M' : '-',
+> -                    entry->mas2 & MAS2_G ? 'G' : '-',
+> -                    entry->mas2 & MAS2_E ? 'E' : '-',
+> -                    entry->mas7_3 & MAS3_U0 ? '0' : '-',
+> -                    entry->mas7_3 & MAS3_U1 ? '1' : '-',
+> -                    entry->mas7_3 & MAS3_U2 ? '2' : '-',
+> -                    entry->mas7_3 & MAS3_U3 ? '3' : '-');
+> +        g_string_append_printf(buf, "0x%016" PRIx64 " 0x%016" PRIx64
+> +                               " %4s %-5u %1u  S%c%c%c"
+> +                               "U%c%c%c %c%c%c%c%c U%c%c%c%c\n",
+> +                               (uint64_t)ea, (uint64_t)pa,
+> +                               book3e_tsize_to_str[tsize],
+> +                               (entry->mas1 & MAS1_TID_MASK) >> MAS1_TID=
+_SHIFT,
+> +                               (entry->mas1 & MAS1_TS) >> MAS1_TS_SHIFT,
+> +                               entry->mas7_3 & MAS3_SR ? 'R' : '-',
+> +                               entry->mas7_3 & MAS3_SW ? 'W' : '-',
+> +                               entry->mas7_3 & MAS3_SX ? 'X' : '-',
+> +                               entry->mas7_3 & MAS3_UR ? 'R' : '-',
+> +                               entry->mas7_3 & MAS3_UW ? 'W' : '-',
+> +                               entry->mas7_3 & MAS3_UX ? 'X' : '-',
+> +                               entry->mas2 & MAS2_W ? 'W' : '-',
+> +                               entry->mas2 & MAS2_I ? 'I' : '-',
+> +                               entry->mas2 & MAS2_M ? 'M' : '-',
+> +                               entry->mas2 & MAS2_G ? 'G' : '-',
+> +                               entry->mas2 & MAS2_E ? 'E' : '-',
+> +                               entry->mas7_3 & MAS3_U0 ? '0' : '-',
+> +                               entry->mas7_3 & MAS3_U1 ? '1' : '-',
+> +                               entry->mas7_3 & MAS3_U2 ? '2' : '-',
+> +                               entry->mas7_3 & MAS3_U3 ? '3' : '-');
+>      }
+>  }
+> =20
+> -static void mmubooke206_dump_mmu(CPUPPCState *env)
+> +static void mmubooke206_dump_mmu(CPUPPCState *env, GString *buf)
+>  {
+>      int offset =3D 0;
+>      int i;
+> =20
+>      if (kvm_enabled() && !env->kvm_sw_tlb) {
+> -        qemu_printf("Cannot access KVM TLB\n");
+> +        g_string_append_printf(buf, "Cannot access KVM TLB\n");
+>          return;
+>      }
+> =20
+> @@ -1045,12 +1048,12 @@ static void mmubooke206_dump_mmu(CPUPPCState *env)
+>              continue;
+>          }
+> =20
+> -        mmubooke206_dump_one_tlb(env, i, offset, size);
+> +        mmubooke206_dump_one_tlb(env, i, offset, size, buf);
+>          offset +=3D size;
+>      }
+>  }
+> =20
+> -static void mmu6xx_dump_BATs(CPUPPCState *env, int type)
+> +static void mmu6xx_dump_BATs(CPUPPCState *env, int type, GString *buf)
+>  {
+>      target_ulong *BATlt, *BATut, *BATu, *BATl;
+>      target_ulong BEPIl, BEPIu, bl;
+> @@ -1073,51 +1076,59 @@ static void mmu6xx_dump_BATs(CPUPPCState *env, in=
+t type)
+>          BEPIu =3D *BATu & 0xF0000000;
+>          BEPIl =3D *BATu & 0x0FFE0000;
+>          bl =3D (*BATu & 0x00001FFC) << 15;
+> -        qemu_printf("%s BAT%d BATu " TARGET_FMT_lx
+> -                    " BATl " TARGET_FMT_lx "\n\t" TARGET_FMT_lx " "
+> -                    TARGET_FMT_lx " " TARGET_FMT_lx "\n",
+> -                    type =3D=3D ACCESS_CODE ? "code" : "data", i,
+> -                    *BATu, *BATl, BEPIu, BEPIl, bl);
+> +        g_string_append_printf(buf, "%s BAT%d BATu " TARGET_FMT_lx
+> +                               " BATl " TARGET_FMT_lx "\n\t" TARGET_FMT_=
+lx " "
+> +                               TARGET_FMT_lx " " TARGET_FMT_lx "\n",
+> +                               type =3D=3D ACCESS_CODE ? "code" : "data"=
+, i,
+> +                               *BATu, *BATl, BEPIu, BEPIl, bl);
+>      }
+>  }
+> =20
+> -static void mmu6xx_dump_mmu(CPUPPCState *env)
+> +static void mmu6xx_dump_mmu(CPUPPCState *env, GString *buf)
+>  {
+>      PowerPCCPU *cpu =3D env_archcpu(env);
+>      ppc6xx_tlb_t *tlb;
+>      target_ulong sr;
+>      int type, way, entry, i;
+> =20
+> -    qemu_printf("HTAB base =3D 0x%"HWADDR_PRIx"\n", ppc_hash32_hpt_base(=
+cpu));
+> -    qemu_printf("HTAB mask =3D 0x%"HWADDR_PRIx"\n", ppc_hash32_hpt_mask(=
+cpu));
+> +    g_string_append_printf(buf, "HTAB base =3D 0x%"HWADDR_PRIx"\n",
+> +                           ppc_hash32_hpt_base(cpu));
+> +    g_string_append_printf(buf, "HTAB mask =3D 0x%"HWADDR_PRIx"\n",
+> +                           ppc_hash32_hpt_mask(cpu));
+> =20
+> -    qemu_printf("\nSegment registers:\n");
+> +    g_string_append_printf(buf, "\nSegment registers:\n");
+>      for (i =3D 0; i < 32; i++) {
+>          sr =3D env->sr[i];
+>          if (sr & 0x80000000) {
+> -            qemu_printf("%02d T=3D%d Ks=3D%d Kp=3D%d BUID=3D0x%03x "
+> -                        "CNTLR_SPEC=3D0x%05x\n", i,
+> -                        sr & 0x80000000 ? 1 : 0, sr & 0x40000000 ? 1 : 0,
+> -                        sr & 0x20000000 ? 1 : 0, (uint32_t)((sr >> 20) &=
+ 0x1FF),
+> -                        (uint32_t)(sr & 0xFFFFF));
+> +            g_string_append_printf(buf, "%02d T=3D%d Ks=3D%d Kp=3D%d BUI=
+D=3D0x%03x "
+> +                                   "CNTLR_SPEC=3D0x%05x\n", i,
+> +                                   sr & 0x80000000 ? 1 : 0,
+> +                                   sr & 0x40000000 ? 1 : 0,
+> +                                   sr & 0x20000000 ? 1 : 0,
+> +                                   (uint32_t)((sr >> 20) & 0x1FF),
+> +                                   (uint32_t)(sr & 0xFFFFF));
+>          } else {
+> -            qemu_printf("%02d T=3D%d Ks=3D%d Kp=3D%d N=3D%d VSID=3D0x%06=
+x\n", i,
+> -                        sr & 0x80000000 ? 1 : 0, sr & 0x40000000 ? 1 : 0,
+> -                        sr & 0x20000000 ? 1 : 0, sr & 0x10000000 ? 1 : 0,
+> -                        (uint32_t)(sr & 0x00FFFFFF));
+> +            g_string_append_printf(buf, "%02d T=3D%d Ks=3D%d Kp=3D%d N=
+=3D%d "
+> +                                   "VSID=3D0x%06x\n", i,
+> +                                   sr & 0x80000000 ? 1 : 0,
+> +                                   sr & 0x40000000 ? 1 : 0,
+> +                                   sr & 0x20000000 ? 1 : 0,
+> +                                   sr & 0x10000000 ? 1 : 0,
+> +                                   (uint32_t)(sr & 0x00FFFFFF));
+>          }
+>      }
+> =20
+> -    qemu_printf("\nBATs:\n");
+> -    mmu6xx_dump_BATs(env, ACCESS_INT);
+> -    mmu6xx_dump_BATs(env, ACCESS_CODE);
+> +    g_string_append_printf(buf, "\nBATs:\n");
+> +    mmu6xx_dump_BATs(env, ACCESS_INT, buf);
+> +    mmu6xx_dump_BATs(env, ACCESS_CODE, buf);
+> =20
+>      if (env->id_tlbs !=3D 1) {
+> -        qemu_printf("ERROR: 6xx MMU should have separated TLB"
+> -                    " for code and data\n");
+> +        g_string_append_printf(buf, "ERROR: 6xx MMU should have separate=
+d TLB"
+> +                               " for code and data\n");
+>      }
+> =20
+> -    qemu_printf("\nTLBs                       [EPN    EPN + SIZE]\n");
+> +    g_string_append_printf(buf,
+> +                           "\nTLBs                       [EPN    EPN + S=
+IZE]\n");
+> =20
+>      for (type =3D 0; type < 2; type++) {
+>          for (way =3D 0; way < env->nb_ways; way++) {
+> @@ -1126,48 +1137,52 @@ static void mmu6xx_dump_mmu(CPUPPCState *env)
+>                   entry++) {
+> =20
+>                  tlb =3D &env->tlb.tlb6[entry];
+> -                qemu_printf("%s TLB %02d/%02d way:%d %s ["
+> -                            TARGET_FMT_lx " " TARGET_FMT_lx "]\n",
+> -                            type ? "code" : "data", entry % env->nb_tlb,
+> -                            env->nb_tlb, way,
+> -                            pte_is_valid(tlb->pte0) ? "valid" : "inval",
+> -                            tlb->EPN, tlb->EPN + TARGET_PAGE_SIZE);
+> +                g_string_append_printf(buf, "%s TLB %02d/%02d way:%d %s =
+["
+> +                                       TARGET_FMT_lx " " TARGET_FMT_lx "=
+]\n",
+> +                                       type ? "code" : "data",
+> +                                       entry % env->nb_tlb,
+> +                                       env->nb_tlb, way,
+> +                                       pte_is_valid(tlb->pte0) ?
+> +                                       "valid" : "inval",
+> +                                       tlb->EPN, tlb->EPN + TARGET_PAGE_=
+SIZE);
+>              }
+>          }
+>      }
+>  }
+> =20
+> -void dump_mmu(CPUPPCState *env)
+> +void ppc_cpu_format_tlb(CPUState *cpu, GString *buf)
+>  {
+> +    CPUPPCState *env =3D cpu->env_ptr;
+> +
+>      switch (env->mmu_model) {
+>      case POWERPC_MMU_BOOKE:
+> -        mmubooke_dump_mmu(env);
+> +        mmubooke_dump_mmu(env, buf);
+>          break;
+>      case POWERPC_MMU_BOOKE206:
+> -        mmubooke206_dump_mmu(env);
+> +        mmubooke206_dump_mmu(env, buf);
+>          break;
+>      case POWERPC_MMU_SOFT_6xx:
+>      case POWERPC_MMU_SOFT_74xx:
+> -        mmu6xx_dump_mmu(env);
+> +        mmu6xx_dump_mmu(env, buf);
+>          break;
+>  #if defined(TARGET_PPC64)
+>      case POWERPC_MMU_64B:
+>      case POWERPC_MMU_2_03:
+>      case POWERPC_MMU_2_06:
+>      case POWERPC_MMU_2_07:
+> -        dump_slb(env_archcpu(env));
+> +        dump_slb(env_archcpu(env), buf);
+>          break;
+>      case POWERPC_MMU_3_00:
+>          if (ppc64_v3_radix(env_archcpu(env))) {
+> -            qemu_log_mask(LOG_UNIMP, "%s: the PPC64 MMU is unsupported\n=
+",
+> -                          __func__);
+> +            g_string_append_printf(buf, "PPC64 MMU not supported\n");
+>          } else {
+> -            dump_slb(env_archcpu(env));
+> +            dump_slb(env_archcpu(env), buf);
+>          }
+>          break;
+>  #endif
+>      default:
+> -        qemu_log_mask(LOG_UNIMP, "%s: unimplemented\n", __func__);
+> +        g_string_append_printf(buf, "MMU model %d not supported\n",
+> +                               env->mmu_model);
+>      }
+>  }
+> =20
+> diff --git a/target/ppc/monitor.c b/target/ppc/monitor.c
+> index a475108b2d..401a36c2eb 100644
+> --- a/target/ppc/monitor.c
+> +++ b/target/ppc/monitor.c
+> @@ -67,13 +67,17 @@ static target_long monitor_get_tbl(Monitor *mon, cons=
+t struct MonitorDef *md,
+> =20
+>  void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+>  {
+> -    CPUArchState *env1 =3D mon_get_cpu_env(mon);
 > +    g_autoptr(GString) buf =3D g_string_new("");
 > +    CPUState *cpu =3D mon_get_cpu(mon);
-> +
+> =20
+> -    if (!env1) {
 > +    if (!cpu) {
-> +        monitor_printf(mon, "No CPU available\n");
-> +        return;
-> +    }
+>          monitor_printf(mon, "No CPU available\n");
+>          return;
+>      }
+> -    dump_mmu(env1);
 > +
 > +    cpu_format_tlb(cpu, buf);
 > +
 > +    monitor_printf(mon, "%s", buf->str);
-> +}
-> +
->  static void hmp_info_profile(Monitor *mon, const QDict *qdict)
->  {
->      Error *err =3D NULL;
-> diff --git a/target/i386/monitor.c b/target/i386/monitor.c
-> index 698fbbc80b..a7eb4205c7 100644
-> --- a/target/i386/monitor.c
-> +++ b/target/i386/monitor.c
-> @@ -248,21 +248,6 @@ void x86_cpu_format_tlb(CPUState *cpu, GString *buf)
->      }
 >  }
 > =20
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> -
->  static void mem_print(Monitor *mon, CPUArchState *env,
->                        hwaddr *pstart, int *plast_prot,
->                        hwaddr end, int prot)
-> diff --git a/target/m68k/monitor.c b/target/m68k/monitor.c
-> index 003a665246..0dc729692b 100644
-> --- a/target/m68k/monitor.c
-> +++ b/target/m68k/monitor.c
-> @@ -12,21 +12,6 @@
->  #include "qapi/error.h"
->  #include "qapi/qapi-commands-machine-target.h"
-> =20
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> -
->  static const MonitorDef monitor_defs[] =3D {
->      { "d0", offsetof(CPUM68KState, dregs[0]) },
->      { "d1", offsetof(CPUM68KState, dregs[1]) },
-> diff --git a/target/nios2/monitor.c b/target/nios2/monitor.c
-> index 99d35e8ef1..1180a32f80 100644
-> --- a/target/nios2/monitor.c
-> +++ b/target/nios2/monitor.c
-> @@ -26,18 +26,3 @@
->  #include "monitor/monitor.h"
->  #include "monitor/hmp-target.h"
->  #include "monitor/hmp.h"
-> -
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> diff --git a/target/ppc/monitor.c b/target/ppc/monitor.c
-> index 401a36c2eb..3564fd5f45 100644
-> --- a/target/ppc/monitor.c
-> +++ b/target/ppc/monitor.c
-> @@ -65,21 +65,6 @@ static target_long monitor_get_tbl(Monitor *mon, const=
- struct MonitorDef *md,
->      return cpu_ppc_load_tbl(env);
->  }
-> =20
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> -
 >  const MonitorDef monitor_defs[] =3D {
->      { "fpscr", offsetof(CPUPPCState, fpscr) },
->      /* Next instruction pointer */
-> diff --git a/target/sh4/monitor.c b/target/sh4/monitor.c
-> index 5ccb95af93..d641d95316 100644
-> --- a/target/sh4/monitor.c
-> +++ b/target/sh4/monitor.c
-> @@ -53,18 +53,3 @@ void superh_cpu_format_tlb(CPUState *cpu, GString *buf)
->          print_tlb(buf, i, &env->utlb[i]);
->      }
->  }
-> -
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
-> index cc7fe74e3e..0c51669c08 100644
-> --- a/target/sparc/monitor.c
-> +++ b/target/sparc/monitor.c
-> @@ -27,22 +27,6 @@
->  #include "monitor/hmp-target.h"
->  #include "monitor/hmp.h"
-> =20
-> -
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
-> -
->  #ifndef TARGET_SPARC64
->  static target_long monitor_get_psr(Monitor *mon, const struct MonitorDef=
- *md,
->                                     int val)
-> diff --git a/target/xtensa/monitor.c b/target/xtensa/monitor.c
-> index 99d35e8ef1..1180a32f80 100644
-> --- a/target/xtensa/monitor.c
-> +++ b/target/xtensa/monitor.c
-> @@ -26,18 +26,3 @@
->  #include "monitor/monitor.h"
->  #include "monitor/hmp-target.h"
->  #include "monitor/hmp.h"
-> -
-> -void hmp_info_tlb(Monitor *mon, const QDict *qdict)
-> -{
-> -    g_autoptr(GString) buf =3D g_string_new("");
-> -    CPUState *cpu =3D mon_get_cpu(mon);
-> -
-> -    if (!cpu) {
-> -        monitor_printf(mon, "No CPU available\n");
-> -        return;
-> -    }
-> -
-> -    cpu_format_tlb(cpu, buf);
-> -
-> -    monitor_printf(mon, "%s", buf->str);
-> -}
 
 --=20
 David Gibson			| I'll have my music baroque, and my code
@@ -356,25 +540,25 @@ david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
 				| _way_ _around_!
 http://www.ozlabs.org/~dgibson
 
---a/JNFcIeN8xVqrhe
+--+gv/YgNjt/MgA38s
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmFBT0gACgkQbDjKyiDZ
-s5JCkQ//fbqmB3EVRceZI0ugxSzJRNRF+PHrSkMJO2IHOs8NRO2guAHi8Lp1Ish9
-FfwMbkYt5XMlVnmuq17jDc4HFQrISgAQCwkhS6J3P+CZtyLRf8sc8UMQ0VF/jAoS
-muTD/Gm94WAxsEL++e1SlIuZ8t1o9CwL/b8aOTMghTaij7ZB4JHtfo2d6zkVksoc
-RMzJNN5VXfnUqRKeeeMf9qbnydsazyRHWr/jsMktUc3G7HilLJhNT3vvPEfPlgK/
-ODqHO+8DyPrT5oCVUM1i5h0rk7VQCrSEDkNh0DKQePl8NYfW1P+fTgbhUY19fBAR
-+V6qZLQNoCOkBN2wN+1Hz3v0fhF605eYO1bPBplRcL5zYyEy41McWTOOJ4YKLIrM
-M0UPfkyljLiDkNn8IlfNUcVW+KfgT64OoUMc9u40LRbm20I4ub3FL5ubRQqMvMHD
-xPVAcMdY/N8P6uIXEXVqYEd5I37seFldw4bTqzfaeD65vXvnOv0CAOwVgOZrkRzQ
-dWnJVFrBEsQsaxlePt2NQY368SxREv9Yqkhw4hBK66eG471LkpEVqzIJvB76tQBn
-JDwr7F4yMFIFRV+uj0PcBjMeiJ8ua7t9xcSqNq6GtW9/DOZ/LufgrE36Od9rffN0
-zT1KKEgM/iedA20p20EdyWfKvaYCI5OaM7QtVb3JPgIr1plPoSs=
-=Ir56
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAmFBTvMACgkQbDjKyiDZ
+s5I+bRAAhfgbhHtwkx6HkiSXk23+D7ayNe9IdbRw8aXgvnS4HSapVzVPPOsyOt4E
+C/AkOdusbuNtHkWMPXbII872fOhrXBsTJGnfP7fb3YtWB0RlVxs+p8RoZnuCFGUm
+S8SqK+g9qm4fLxtMIyDXOUPuR/ZvWroRTycgm68EPv7se+i0Z8wAhRxIMbXZECi3
+K1T8GPzyXL4yCFiLVLCh/5c3V65a1gMcc6DK6gGC4ri1SVroCG7IX0S+NSFgYQpR
+5v4TRmDcBmfPbyPAbvh0+M7Nka9IaCTGkygWTmzbzPWn23nfyAvieP2h7mqWqcgi
+wjWSEu+gOZF6LL1B3UpZcsqBoHl5Y+nZ1ouQjFVNMrA+zuzeISo82Y3x2KntgnFa
+YVe74oU5QqvKRWtsDxComQ+WD+xH1rc02wEIdXOf8hzx1alvGICXvRhvTb2JgL46
+BsR3JMhWoEiGkarhmOvl6xcQ87GQsxO5kacgLNcclBuauH1AVntcHFaC5rTHVDJe
+RC2vrxMtkSiPFfNUjTtSZ8u9c09Gf4zcB7R37Bm2yQ1+9ANrmjp8lQL1/FGRYLb3
+Q4lenk5EbmHhuFZ7MSyJqt2C+61RrDmkgjd/4uGzygY+rw9yFQZtprijxzp5RCTe
+16tlVB/9+Lmh9Ak0D/ttD727es0DrEMOdQXTugnIY/Rj/0qBRGQ=
+=Fqz7
 -----END PGP SIGNATURE-----
 
---a/JNFcIeN8xVqrhe--
+--+gv/YgNjt/MgA38s--
 
