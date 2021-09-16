@@ -1,77 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQp2e-000057-5H
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 06:54:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52364)
+	id 1mQrfB-0005Ya-CY
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 09:42:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35482)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp2b-0008Sl-0u; Thu, 16 Sep 2021 06:54:53 -0400
-Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167]:40650
- helo=mail.default.ilande.bv.iomart.io)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp2Y-0001MQ-63; Thu, 16 Sep 2021 06:54:52 -0400
-Received: from host109-153-76-56.range109-153.btcentralplus.com
- ([109.153.76.56] helo=[192.168.50.176])
- by mail.default.ilande.bv.iomart.io with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp21-0000KB-N9; Thu, 16 Sep 2021 11:54:21 +0100
-To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- qemu-devel@nongnu.org
-Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Peter Xu <peterx@redhat.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Michael Rolnik <mrolnik@gmail.com>, Peter Maydell
- <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Halil Pasic <pasic@linux.ibm.com>, Taylor Simpson <tsimpson@quicinc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
- Max Filippov <jcmvbkbc@gmail.com>, Yuval Shaia <yuval.shaia.ml@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Artyom Tarasenko <atar4qemu@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- Thomas Huth <thuth@redhat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Laurent Vivier <laurent@vivier.eu>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Marek Vasut <marex@denx.de>,
- Markus Armbruster <armbru@redhat.com>, Aurelien Jarno
- <aurelien@aurel32.net>, qemu-s390x@nongnu.org,
- Laurent Vivier <lvivier@redhat.com>, Eric Blake <eblake@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Chris Wulff <crwulff@gmail.com>
-References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-49-berrange@redhat.com>
-From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Message-ID: <547a6d41-85f2-7e50-909e-382aa733e367@ilande.co.uk>
-Date: Thu, 16 Sep 2021 11:54:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mQrf9-0005W8-N8
+ for qemu-riscv@nongnu.org; Thu, 16 Sep 2021 09:42:51 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:40898)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mQrf6-0000Am-29
+ for qemu-riscv@nongnu.org; Thu, 16 Sep 2021 09:42:51 -0400
+Received: by mail-wr1-x431.google.com with SMTP id q26so9553189wrc.7
+ for <qemu-riscv@nongnu.org>; Thu, 16 Sep 2021 06:42:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=b5jV+2z/QDEzpF7P05W5teG4eKI+YZACdN/YNAIx45Y=;
+ b=VQuKWTNWnB+sPBS1+qneGSZBKS3OLqo1EK7kc9rfZ5HS7CDjn3q+ayapKY8tx7wEy9
+ vG8NTmJjzc8CfMSefeH/OggOnj/rj6iNcVx1gIXJ62aM+dRRBc4OCddVOf5rqBwbRBhz
+ ks/wOJ/mN0P/G2DytYTL44+OkJRz5BDlyWz2vxku+y980lUPTjwThMOj5r1jHrRVw+iS
+ nbxOgQkOq8vLwA5qUVnwsQHqRIITAtDh9nOb4GGJUeVED3YKbqVI92ehwa1W10FUsF23
+ dGUh5VCcwHCGGaCh9fshLivBWxK5c9Ok64uz3ouWtrMyUGY4H+7KbeWM9hTSrhrdrUbB
+ 09Nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=b5jV+2z/QDEzpF7P05W5teG4eKI+YZACdN/YNAIx45Y=;
+ b=gWrUbSc6QGwZ67wbvVBz4kfrGZ4DKWdR+ffop9W93+UIwjsTUNXL4WDSSePIxUW1rT
+ OmXUtGFtpf0oEKyogTKrxuPDWK/jj7uC+6ifVYIUdzwzqpnQXpeUf7HNIXtSJW59qigP
+ 5d4wDE94IILdWkEEHmxdmciH8PCOvUqxbT/tRwjjbDMgCkZBnG/dG7DX3CfxrLWkPokj
+ 1LUH0NEetGjNdW00qsdQdtdC85ueqet28MoLyNhUMwStaYwgsL0igFtd6EuIJ3TAZW+u
+ G34IbCk4jcZNV261zfyvk5X9UjM8RTD8da7fq5ffUJE08c9s9smz2t8Nr14/IHx5vcU4
+ uV+A==
+X-Gm-Message-State: AOAM531kGs/TdNzdS+uVw2IVy3FAo5wTN8NLGCcf39LxeQLtRnfEYxDH
+ ZuKT+fBrKqvrHwtyrkY7gcCRAst54/cIb2b4bfmRpA==
+X-Google-Smtp-Source: ABdhPJy8lBzEFfWo7OcqYLhthbZrKptkhQ3OYTjECDD2YLuoHoPkwJgFXmLexvrpOoL2kJ2Fsx5s0X7NnemS0lHVQoA=
+X-Received: by 2002:adf:8124:: with SMTP id 33mr6103816wrm.331.1631799765878; 
+ Thu, 16 Sep 2021 06:42:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-49-berrange@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 109.153.76.56
-X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [PATCH v2 48/53] target/sparc: convert to use format_tlb callback
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.default.ilande.bv.iomart.io)
-Received-SPF: pass client-ip=2001:41c9:1:41f::167;
- envelope-from=mark.cave-ayland@ilande.co.uk;
- helo=mail.default.ilande.bv.iomart.io
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.488,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20210902112520.475901-1-anup.patel@wdc.com>
+ <20210902112520.475901-5-anup.patel@wdc.com>
+ <CAKmqyKPK9zrtM=g6hruL+eRLVPdz76jLR+P0xZ8qPfWXvnSTzg@mail.gmail.com>
+ <CAAhSdy2jihzXxxMJkrb7vydjETbpiGDA6b9OmWnUaJv8-jF6OQ@mail.gmail.com>
+ <CAKmqyKN8MeKKS1h-eu+3QEuubbgW+kYAVR6-T750xvW-4HYq+g@mail.gmail.com>
+In-Reply-To: <CAKmqyKN8MeKKS1h-eu+3QEuubbgW+kYAVR6-T750xvW-4HYq+g@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 16 Sep 2021 19:12:34 +0530
+Message-ID: <CAAhSdy3yDLmGMofZxocoPBydfQbXy_qNJUsQ7MWsL=0eWpx6QQ@mail.gmail.com>
+Subject: Re: [PATCH v2 04/22] target/riscv: Improve fidelity of guest external
+ interrupts
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::431;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,150 +79,115 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2021 10:54:54 -0000
+X-List-Received-Date: Thu, 16 Sep 2021 13:42:51 -0000
 
-On 14/09/2021 15:20, Daniel P. Berrangé wrote:
+On Wed, Sep 15, 2021 at 6:19 AM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Tue, Sep 14, 2021 at 2:33 AM Anup Patel <anup@brainfault.org> wrote:
+> >
+> > On Thu, Sep 9, 2021 at 12:14 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > >
+> > > On Thu, Sep 2, 2021 at 9:26 PM Anup Patel <anup.patel@wdc.com> wrote:
+> > > >
+> > > > The guest external interrupts for external interrupt controller are
+> > > > not delivered to the guest running under hypervisor on time. This
+> > > > results in a guest having sluggish response to serial console input
+> > > > and other I/O events. To improve timely delivery of guest external
+> > > > interrupts, we check and inject interrupt upon every sret instruction.
+> > > >
+> > > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > > > ---
+> > > >  target/riscv/op_helper.c | 9 +++++++++
+> > > >  1 file changed, 9 insertions(+)
+> > > >
+> > > > diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> > > > index ee7c24efe7..4c995c239e 100644
+> > > > --- a/target/riscv/op_helper.c
+> > > > +++ b/target/riscv/op_helper.c
+> > > > @@ -129,6 +129,15 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+> > > >
+> > > >      riscv_cpu_set_mode(env, prev_priv);
+> > > >
+> > > > +    /*
+> > > > +     * QEMU does not promptly deliver guest external interrupts
+> > > > +     * to a guest running on a hypervisor which in-turn is running
+> > > > +     * on QEMU. We make dummy call to riscv_cpu_update_mip() upon
+> > > > +     * every sret instruction so that QEMU pickup guest external
+> > > > +     * interrupts sooner.
+> > > > +     */
+> > > > +     riscv_cpu_update_mip(env_archcpu(env), 0, 0);
+> > >
+> > > This doesn't seem right. I don't understand why we need this?
+> > >
+> > > riscv_cpu_update_mip() is called when an interrupt is delivered to the
+> > > CPU, if we are missing interrupts then that is a bug somewhere else.
+> >
+> > I have finally figured out the cause of guest external interrupts being
+> > missed by Guest/VM.
+> >
+> > The riscv_cpu_set_irq() which handles guest external interrupt lines
+> > of each CPU is called asynchronously. This function in-turn calls
+> > riscv_cpu_update_mip() but the CPU might be in host mode (V=0)
+> > or in Guest/VM mode (V=1). If the CPU is in host mode (V=0) when
+>
+> The IRQ being raised should just directly call riscv_cpu_update_mip()
+> so the IRQ should happen straight away.
 
-> Change the "info tlb" implementation to use the format_tlb callback.
-> 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->   target/sparc/cpu.c        |  1 +
->   target/sparc/cpu.h        |  1 +
->   target/sparc/mmu_helper.c | 43 ++++++++++++++++++++++++---------------
->   target/sparc/monitor.c    | 10 ++++++---
->   4 files changed, 36 insertions(+), 19 deletions(-)
-> 
-> diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-> index 9346a79239..f78ddc72b5 100644
-> --- a/target/sparc/cpu.c
-> +++ b/target/sparc/cpu.c
-> @@ -898,6 +898,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
->       cc->has_work = sparc_cpu_has_work;
->       cc->format_state = sparc_cpu_format_state;
->   #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
-> +    cc->format_tlb = sparc_cpu_format_tlb;
->       cc->memory_rw_debug = sparc_cpu_memory_rw_debug;
->   #endif
->       cc->set_pc = sparc_cpu_set_pc;
-> diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-> index 65a01a7884..233f0b3eb7 100644
-> --- a/target/sparc/cpu.h
-> +++ b/target/sparc/cpu.h
-> @@ -572,6 +572,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
->   
->   void sparc_cpu_do_interrupt(CPUState *cpu);
->   void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
-> +void sparc_cpu_format_tlb(CPUState *cpu, GString *buf);
->   hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
->   int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->   int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
-> diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
-> index a44473a1c7..06b16aca6a 100644
-> --- a/target/sparc/mmu_helper.c
-> +++ b/target/sparc/mmu_helper.c
-> @@ -371,37 +371,39 @@ target_ulong mmu_probe(CPUSPARCState *env, target_ulong address, int mmulev)
->       return 0;
->   }
->   
-> -void dump_mmu(CPUSPARCState *env)
-> +void sparc_cpu_format_tlb(CPUState *cpu, GString *buf)
->   {
-> -    CPUState *cs = env_cpu(env);
-> +    CPUSPARCState *env = cpu->env_ptr;
->       target_ulong va, va1, va2;
->       unsigned int n, m, o;
->       hwaddr pa;
->       uint32_t pde;
->   
-> -    qemu_printf("Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
-> -                (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
-> +    g_string_append_printf(buf, "Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
-> +                           (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
->       for (n = 0, va = 0; n < 256; n++, va += 16 * 1024 * 1024) {
->           pde = mmu_probe(env, va, 2);
->           if (pde) {
-> -            pa = cpu_get_phys_page_debug(cs, va);
-> -            qemu_printf("VA: " TARGET_FMT_lx ", PA: " TARGET_FMT_plx
-> -                        " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
-> +            pa = cpu_get_phys_page_debug(cpu, va);
-> +            g_string_append_printf(buf, "VA: " TARGET_FMT_lx
-> +                                   ", PA: " TARGET_FMT_plx
-> +                                   " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
->               for (m = 0, va1 = va; m < 64; m++, va1 += 256 * 1024) {
->                   pde = mmu_probe(env, va1, 1);
->                   if (pde) {
-> -                    pa = cpu_get_phys_page_debug(cs, va1);
-> -                    qemu_printf(" VA: " TARGET_FMT_lx ", PA: "
-> -                                TARGET_FMT_plx " PDE: " TARGET_FMT_lx "\n",
-> -                                va1, pa, pde);
-> +                    pa = cpu_get_phys_page_debug(cpu, va1);
-> +                    g_string_append_printf(buf, " VA: " TARGET_FMT_lx
-> +                                           ", PA: " TARGET_FMT_plx
-> +                                           " PDE: " TARGET_FMT_lx "\n",
-> +                                           va1, pa, pde);
->                       for (o = 0, va2 = va1; o < 64; o++, va2 += 4 * 1024) {
->                           pde = mmu_probe(env, va2, 0);
->                           if (pde) {
-> -                            pa = cpu_get_phys_page_debug(cs, va2);
-> -                            qemu_printf("  VA: " TARGET_FMT_lx ", PA: "
-> -                                        TARGET_FMT_plx " PTE: "
-> -                                        TARGET_FMT_lx "\n",
-> -                                        va2, pa, pde);
-> +                            pa = cpu_get_phys_page_debug(cpu, va2);
-> +                            g_string_append_printf(buf, "  VA: " TARGET_FMT_lx
-> +                                                   ", PA: " TARGET_FMT_plx
-> +                                                   " PTE: " TARGET_FMT_lx "\n",
-> +                                                   va2, pa, pde);
->                           }
->                       }
->                   }
-> @@ -410,6 +412,15 @@ void dump_mmu(CPUSPARCState *env)
->       }
->   }
->   
-> +void dump_mmu(CPUSPARCState *env)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    g_autoptr(GString) buf = g_string_new("");
-> +
-> +    sparc_cpu_format_tlb(cs, buf);
-> +    qemu_printf("%s", buf->str);
-> +}
-> +
->   /* Gdb expects all registers windows to be flushed in ram. This function handles
->    * reads (and only reads) in stack frames as if windows were flushed. We assume
->    * that the sparc ABI is followed.
-> diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
-> index 318413686a..cc7fe74e3e 100644
-> --- a/target/sparc/monitor.c
-> +++ b/target/sparc/monitor.c
-> @@ -30,13 +30,17 @@
->   
->   void hmp_info_tlb(Monitor *mon, const QDict *qdict)
->   {
-> -    CPUArchState *env1 = mon_get_cpu_env(mon);
-> +    g_autoptr(GString) buf = g_string_new("");
-> +    CPUState *cpu = mon_get_cpu(mon);
->   
-> -    if (!env1) {
-> +    if (!cpu) {
->           monitor_printf(mon, "No CPU available\n");
->           return;
->       }
-> -    dump_mmu(env1);
-> +
-> +    cpu_format_tlb(cpu, buf);
-> +
-> +    monitor_printf(mon, "%s", buf->str);
->   }
->   
->   #ifndef TARGET_SPARC64
+That's not true for guest external interrupts. The target Guest/VM might
+not be running on the receiving HART.
 
-Acked-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Let say IMSIC injected guest external IRQ1 to HARTx which is meant
+for a Guest/VM, so the riscv_cpu_set_irq() will call riscv_cpu_update_mip().
+If HARTx might be in HS-mode or HARTx might be running some
+other Guest/VM then cpu_interrupt() request queued by riscv_cpu_update_mip()
+will not result in any interrupt being injected. This further means that
+QEMU has to check and inject guest external interrupts to target
+Guest/VM when HARTx makes a switch from HS-mode to VS-mode. By
+calling riscv_cpu_update_mip() upon SRET instruction we are ensuring
+that if any guest external interrupt was missed then it is injected ot
+VS-mode.
 
+>
+> Even from MTTCG I see this:
+>
+> """
+> Currently thanks to KVM work any access to IO memory is automatically
+> protected by the global iothread mutex, also known as the BQL (Big
+> Qemu Lock). Any IO region that doesn't use global mutex is expected to
+> do its own locking.
+>
+> However IO memory isn't the only way emulated hardware state can be
+> modified. Some architectures have model specific registers that
+> trigger hardware emulation features. Generally any translation helper
+> that needs to update more than a single vCPUs of state should take the
+> BQL.
+> """
+>
+> So we should be fine here as well.
+>
+> Can you supply a test case to reproduce the bug?
 
-ATB,
+Just boot Linux Guest using my QEMU, OpenSBI, Linux, and KVMTOOL
+having AIA support patches. If this patch is not there then lot of Guest
+external interrupts are missed and Guest gets stuck at random places.
 
-Mark.
+Regards,
+Anup
+
+>
+> > the riscv_cpu_set_irq() is called, then the CPU interrupt requested by
+> > riscv_cpu_update_mip() has no effect because the CPU can't take
+> > the interrupt until it enters Guest/VM mode.
+> >
+> > This patch does the right thing by doing a dummy call to
+> > riscv_cpu_update_mip() upon SRET instruction so that if the CPU
+> > had missed a guest interrupt previously then the CPU can take it now.
+>
+> This still doesn't look like the right fix.
+>
+> Alistair
+>
+> >
+> > Regards,
+> > Anup
 
