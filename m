@@ -1,21 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQp1d-0006xz-Go
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 06:53:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52230)
+	id 1mQp2e-000057-5H
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 06:54:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52364)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp1b-0006uh-Ks; Thu, 16 Sep 2021 06:53:51 -0400
-Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167]:40598
+ id 1mQp2b-0008Sl-0u; Thu, 16 Sep 2021 06:54:53 -0400
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167]:40650
  helo=mail.default.ilande.bv.iomart.io)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp1Z-0000aA-F1; Thu, 16 Sep 2021 06:53:51 -0400
+ id 1mQp2Y-0001MQ-63; Thu, 16 Sep 2021 06:54:52 -0400
 Received: from host109-153-76-56.range109-153.btcentralplus.com
  ([109.153.76.56] helo=[192.168.50.176])
  by mail.default.ilande.bv.iomart.io with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <mark.cave-ayland@ilande.co.uk>)
- id 1mQp0q-0000IW-06; Thu, 16 Sep 2021 11:53:08 +0100
+ id 1mQp21-0000KB-N9; Thu, 16 Sep 2021 11:54:21 +0100
 To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
@@ -48,21 +48,20 @@ Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Chris Wulff <crwulff@gmail.com>
 References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-26-berrange@redhat.com>
+ <20210914142042.1655100-49-berrange@redhat.com>
 From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
-Message-ID: <37dc66e2-16df-dab0-875a-581204ead1d8@ilande.co.uk>
-Date: Thu, 16 Sep 2021 11:53:05 +0100
+Message-ID: <547a6d41-85f2-7e50-909e-382aa733e367@ilande.co.uk>
+Date: Thu, 16 Sep 2021 11:54:19 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20210914142042.1655100-26-berrange@redhat.com>
+In-Reply-To: <20210914142042.1655100-49-berrange@redhat.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-SA-Exim-Connect-IP: 109.153.76.56
 X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
-Subject: Re: [PATCH v2 25/53] target/sparc: convert to use format_state
- instead of dump_state
+Subject: Re: [PATCH v2 48/53] target/sparc: convert to use format_tlb callback
 X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
 X-SA-Exim-Scanned: Yes (on mail.default.ilande.bv.iomart.io)
 Received-SPF: pass client-ip=2001:41c9:1:41f::167;
@@ -85,177 +84,145 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2021 10:53:52 -0000
+X-List-Received-Date: Thu, 16 Sep 2021 10:54:54 -0000
 
 On 14/09/2021 15:20, Daniel P. Berrangé wrote:
 
+> Change the "info tlb" implementation to use the format_tlb callback.
+> 
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->   target/sparc/cpu.c | 85 +++++++++++++++++++++++++---------------------
->   target/sparc/cpu.h |  2 +-
->   2 files changed, 47 insertions(+), 40 deletions(-)
+>   target/sparc/cpu.c        |  1 +
+>   target/sparc/cpu.h        |  1 +
+>   target/sparc/mmu_helper.c | 43 ++++++++++++++++++++++++---------------
+>   target/sparc/monitor.c    | 10 ++++++---
+>   4 files changed, 36 insertions(+), 19 deletions(-)
 > 
 > diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-> index da6b30ec74..9346a79239 100644
+> index 9346a79239..f78ddc72b5 100644
 > --- a/target/sparc/cpu.c
 > +++ b/target/sparc/cpu.c
-> @@ -597,11 +597,11 @@ void sparc_cpu_list(void)
->                   "fpu_version mmu_version nwindows\n");
->   }
->   
-> -static void cpu_print_cc(FILE *f, uint32_t cc)
-> +static void cpu_print_cc(GString *buf, uint32_t cc)
->   {
-> -    qemu_fprintf(f, "%c%c%c%c", cc & PSR_NEG ? 'N' : '-',
-> -                 cc & PSR_ZERO ? 'Z' : '-', cc & PSR_OVF ? 'V' : '-',
-> -                 cc & PSR_CARRY ? 'C' : '-');
-> +    g_string_append_printf(buf, "%c%c%c%c", cc & PSR_NEG ? 'N' : '-',
-> +                           cc & PSR_ZERO ? 'Z' : '-', cc & PSR_OVF ? 'V' : '-',
-> +                           cc & PSR_CARRY ? 'C' : '-');
->   }
->   
->   #ifdef TARGET_SPARC64
-> @@ -610,34 +610,36 @@ static void cpu_print_cc(FILE *f, uint32_t cc)
->   #define REGS_PER_LINE 8
->   #endif
->   
-> -void sparc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-> +void sparc_cpu_format_state(CPUState *cs, GString *buf, int flags)
->   {
->       SPARCCPU *cpu = SPARC_CPU(cs);
->       CPUSPARCState *env = &cpu->env;
->       int i, x;
->   
-> -    qemu_fprintf(f, "pc: " TARGET_FMT_lx "  npc: " TARGET_FMT_lx "\n", env->pc,
-> -                 env->npc);
-> +    g_string_append_printf(buf,
-> +                           "pc: " TARGET_FMT_lx "  npc: " TARGET_FMT_lx "\n",
-> +                           env->pc, env->npc);
->   
->       for (i = 0; i < 8; i++) {
->           if (i % REGS_PER_LINE == 0) {
-> -            qemu_fprintf(f, "%%g%d-%d:", i, i + REGS_PER_LINE - 1);
-> +            g_string_append_printf(buf, "%%g%d-%d:", i, i + REGS_PER_LINE - 1);
->           }
-> -        qemu_fprintf(f, " " TARGET_FMT_lx, env->gregs[i]);
-> +        g_string_append_printf(buf, " " TARGET_FMT_lx, env->gregs[i]);
->           if (i % REGS_PER_LINE == REGS_PER_LINE - 1) {
-> -            qemu_fprintf(f, "\n");
-> +            g_string_append_printf(buf, "\n");
->           }
->       }
->       for (x = 0; x < 3; x++) {
->           for (i = 0; i < 8; i++) {
->               if (i % REGS_PER_LINE == 0) {
-> -                qemu_fprintf(f, "%%%c%d-%d: ",
-> +                g_string_append_printf(buf, "%%%c%d-%d: ",
->                                x == 0 ? 'o' : (x == 1 ? 'l' : 'i'),
->                                i, i + REGS_PER_LINE - 1);
->               }
-> -            qemu_fprintf(f, TARGET_FMT_lx " ", env->regwptr[i + x * 8]);
-> +            g_string_append_printf(buf, TARGET_FMT_lx " ",
-> +                                   env->regwptr[i + x * 8]);
->               if (i % REGS_PER_LINE == REGS_PER_LINE - 1) {
-> -                qemu_fprintf(f, "\n");
-> +                g_string_append_printf(buf, "\n");
->               }
->           }
->       }
-> @@ -645,42 +647,47 @@ void sparc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
->       if (flags & CPU_DUMP_FPU) {
->           for (i = 0; i < TARGET_DPREGS; i++) {
->               if ((i & 3) == 0) {
-> -                qemu_fprintf(f, "%%f%02d: ", i * 2);
-> +                g_string_append_printf(buf, "%%f%02d: ", i * 2);
->               }
-> -            qemu_fprintf(f, " %016" PRIx64, env->fpr[i].ll);
-> +            g_string_append_printf(buf, " %016" PRIx64, env->fpr[i].ll);
->               if ((i & 3) == 3) {
-> -                qemu_fprintf(f, "\n");
-> +                g_string_append_printf(buf, "\n");
->               }
->           }
->       }
->   
->   #ifdef TARGET_SPARC64
-> -    qemu_fprintf(f, "pstate: %08x ccr: %02x (icc: ", env->pstate,
-> +    g_string_append_printf(buf, "pstate: %08x ccr: %02x (icc: ", env->pstate,
->                    (unsigned)cpu_get_ccr(env));
-> -    cpu_print_cc(f, cpu_get_ccr(env) << PSR_CARRY_SHIFT);
-> -    qemu_fprintf(f, " xcc: ");
-> -    cpu_print_cc(f, cpu_get_ccr(env) << (PSR_CARRY_SHIFT - 4));
-> -    qemu_fprintf(f, ") asi: %02x tl: %d pil: %x gl: %d\n", env->asi, env->tl,
-> -                 env->psrpil, env->gl);
-> -    qemu_fprintf(f, "tbr: " TARGET_FMT_lx " hpstate: " TARGET_FMT_lx " htba: "
-> -                 TARGET_FMT_lx "\n", env->tbr, env->hpstate, env->htba);
-> -    qemu_fprintf(f, "cansave: %d canrestore: %d otherwin: %d wstate: %d "
-> -                 "cleanwin: %d cwp: %d\n",
-> -                 env->cansave, env->canrestore, env->otherwin, env->wstate,
-> -                 env->cleanwin, env->nwindows - 1 - env->cwp);
-> -    qemu_fprintf(f, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx " fprs: "
-> -                 TARGET_FMT_lx "\n", env->fsr, env->y, env->fprs);
-> +    cpu_print_cc(buf, cpu_get_ccr(env) << PSR_CARRY_SHIFT);
-> +    g_string_append_printf(buf, " xcc: ");
-> +    cpu_print_cc(buf, cpu_get_ccr(env) << (PSR_CARRY_SHIFT - 4));
-> +    g_string_append_printf(buf, ") asi: %02x tl: %d pil: %x gl: %d\n",
-> +                           env->asi, env->tl, env->psrpil, env->gl);
-> +    g_string_append_printf(buf, "tbr: " TARGET_FMT_lx " hpstate: "
-> +                           TARGET_FMT_lx " htba: " TARGET_FMT_lx "\n",
-> +                           env->tbr, env->hpstate, env->htba);
-> +    g_string_append_printf(buf, "cansave: %d canrestore: %d "
-> +                           "otherwin: %d wstate: %d "
-> +                           "cleanwin: %d cwp: %d\n",
-> +                           env->cansave, env->canrestore,
-> +                           env->otherwin, env->wstate,
-> +                           env->cleanwin, env->nwindows - 1 - env->cwp);
-> +    g_string_append_printf(buf, "fsr: " TARGET_FMT_lx " y: "
-> +                           TARGET_FMT_lx " fprs: " TARGET_FMT_lx "\n",
-> +                           env->fsr, env->y, env->fprs);
->   
->   #else
-> -    qemu_fprintf(f, "psr: %08x (icc: ", cpu_get_psr(env));
-> -    cpu_print_cc(f, cpu_get_psr(env));
-> -    qemu_fprintf(f, " SPE: %c%c%c) wim: %08x\n", env->psrs ? 'S' : '-',
-> -                 env->psrps ? 'P' : '-', env->psret ? 'E' : '-',
-> -                 env->wim);
-> -    qemu_fprintf(f, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx "\n",
-> -                 env->fsr, env->y);
-> +    g_string_append_printf(buf, "psr: %08x (icc: ", cpu_get_psr(env));
-> +    cpu_print_cc(buf, cpu_get_psr(env));
-> +    g_string_append_printf(buf, " SPE: %c%c%c) wim: %08x\n",
-> +                           env->psrs ? 'S' : '-',
-> +                           env->psrps ? 'P' : '-', env->psret ? 'E' : '-',
-> +                           env->wim);
-> +    g_string_append_printf(buf, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx "\n",
-> +                           env->fsr, env->y);
->   #endif
-> -    qemu_fprintf(f, "\n");
-> +    g_string_append_printf(buf, "\n");
->   }
->   
->   static void sparc_cpu_set_pc(CPUState *cs, vaddr value)
-> @@ -889,7 +896,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
->       cc->class_by_name = sparc_cpu_class_by_name;
->       cc->parse_features = sparc_cpu_parse_features;
+> @@ -898,6 +898,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
 >       cc->has_work = sparc_cpu_has_work;
-> -    cc->dump_state = sparc_cpu_dump_state;
-> +    cc->format_state = sparc_cpu_format_state;
+>       cc->format_state = sparc_cpu_format_state;
 >   #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
+> +    cc->format_tlb = sparc_cpu_format_tlb;
 >       cc->memory_rw_debug = sparc_cpu_memory_rw_debug;
 >   #endif
+>       cc->set_pc = sparc_cpu_set_pc;
 > diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
-> index ff8ae73002..65a01a7884 100644
+> index 65a01a7884..233f0b3eb7 100644
 > --- a/target/sparc/cpu.h
 > +++ b/target/sparc/cpu.h
-> @@ -571,7 +571,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
->   #endif
+> @@ -572,6 +572,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
 >   
 >   void sparc_cpu_do_interrupt(CPUState *cpu);
-> -void sparc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
-> +void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+>   void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+> +void sparc_cpu_format_tlb(CPUState *cpu, GString *buf);
 >   hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
 >   int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
 >   int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+> diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+> index a44473a1c7..06b16aca6a 100644
+> --- a/target/sparc/mmu_helper.c
+> +++ b/target/sparc/mmu_helper.c
+> @@ -371,37 +371,39 @@ target_ulong mmu_probe(CPUSPARCState *env, target_ulong address, int mmulev)
+>       return 0;
+>   }
+>   
+> -void dump_mmu(CPUSPARCState *env)
+> +void sparc_cpu_format_tlb(CPUState *cpu, GString *buf)
+>   {
+> -    CPUState *cs = env_cpu(env);
+> +    CPUSPARCState *env = cpu->env_ptr;
+>       target_ulong va, va1, va2;
+>       unsigned int n, m, o;
+>       hwaddr pa;
+>       uint32_t pde;
+>   
+> -    qemu_printf("Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
+> -                (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
+> +    g_string_append_printf(buf, "Root ptr: " TARGET_FMT_plx ", ctx: %d\n",
+> +                           (hwaddr)env->mmuregs[1] << 4, env->mmuregs[2]);
+>       for (n = 0, va = 0; n < 256; n++, va += 16 * 1024 * 1024) {
+>           pde = mmu_probe(env, va, 2);
+>           if (pde) {
+> -            pa = cpu_get_phys_page_debug(cs, va);
+> -            qemu_printf("VA: " TARGET_FMT_lx ", PA: " TARGET_FMT_plx
+> -                        " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
+> +            pa = cpu_get_phys_page_debug(cpu, va);
+> +            g_string_append_printf(buf, "VA: " TARGET_FMT_lx
+> +                                   ", PA: " TARGET_FMT_plx
+> +                                   " PDE: " TARGET_FMT_lx "\n", va, pa, pde);
+>               for (m = 0, va1 = va; m < 64; m++, va1 += 256 * 1024) {
+>                   pde = mmu_probe(env, va1, 1);
+>                   if (pde) {
+> -                    pa = cpu_get_phys_page_debug(cs, va1);
+> -                    qemu_printf(" VA: " TARGET_FMT_lx ", PA: "
+> -                                TARGET_FMT_plx " PDE: " TARGET_FMT_lx "\n",
+> -                                va1, pa, pde);
+> +                    pa = cpu_get_phys_page_debug(cpu, va1);
+> +                    g_string_append_printf(buf, " VA: " TARGET_FMT_lx
+> +                                           ", PA: " TARGET_FMT_plx
+> +                                           " PDE: " TARGET_FMT_lx "\n",
+> +                                           va1, pa, pde);
+>                       for (o = 0, va2 = va1; o < 64; o++, va2 += 4 * 1024) {
+>                           pde = mmu_probe(env, va2, 0);
+>                           if (pde) {
+> -                            pa = cpu_get_phys_page_debug(cs, va2);
+> -                            qemu_printf("  VA: " TARGET_FMT_lx ", PA: "
+> -                                        TARGET_FMT_plx " PTE: "
+> -                                        TARGET_FMT_lx "\n",
+> -                                        va2, pa, pde);
+> +                            pa = cpu_get_phys_page_debug(cpu, va2);
+> +                            g_string_append_printf(buf, "  VA: " TARGET_FMT_lx
+> +                                                   ", PA: " TARGET_FMT_plx
+> +                                                   " PTE: " TARGET_FMT_lx "\n",
+> +                                                   va2, pa, pde);
+>                           }
+>                       }
+>                   }
+> @@ -410,6 +412,15 @@ void dump_mmu(CPUSPARCState *env)
+>       }
+>   }
+>   
+> +void dump_mmu(CPUSPARCState *env)
+> +{
+> +    CPUState *cs = env_cpu(env);
+> +    g_autoptr(GString) buf = g_string_new("");
+> +
+> +    sparc_cpu_format_tlb(cs, buf);
+> +    qemu_printf("%s", buf->str);
+> +}
+> +
+>   /* Gdb expects all registers windows to be flushed in ram. This function handles
+>    * reads (and only reads) in stack frames as if windows were flushed. We assume
+>    * that the sparc ABI is followed.
+> diff --git a/target/sparc/monitor.c b/target/sparc/monitor.c
+> index 318413686a..cc7fe74e3e 100644
+> --- a/target/sparc/monitor.c
+> +++ b/target/sparc/monitor.c
+> @@ -30,13 +30,17 @@
+>   
+>   void hmp_info_tlb(Monitor *mon, const QDict *qdict)
+>   {
+> -    CPUArchState *env1 = mon_get_cpu_env(mon);
+> +    g_autoptr(GString) buf = g_string_new("");
+> +    CPUState *cpu = mon_get_cpu(mon);
+>   
+> -    if (!env1) {
+> +    if (!cpu) {
+>           monitor_printf(mon, "No CPU available\n");
+>           return;
+>       }
+> -    dump_mmu(env1);
+> +
+> +    cpu_format_tlb(cpu, buf);
+> +
+> +    monitor_printf(mon, "%s", buf->str);
+>   }
+>   
+>   #ifndef TARGET_SPARC64
 
 Acked-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
 
