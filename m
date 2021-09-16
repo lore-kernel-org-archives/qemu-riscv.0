@@ -1,64 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mQjd7-0001Ed-NI
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 01:08:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44258)
+	id 1mQp1d-0006xz-Go
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Sep 2021 06:53:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52230)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mQjd5-0001D5-JB; Thu, 16 Sep 2021 01:08:11 -0400
-Received: from mail-yb1-xb31.google.com ([2607:f8b0:4864:20::b31]:36367)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mQjd4-0007dT-3O; Thu, 16 Sep 2021 01:08:11 -0400
-Received: by mail-yb1-xb31.google.com with SMTP id y16so10544779ybm.3;
- Wed, 15 Sep 2021 22:08:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EreJha7/DA1K2RJP3ozydN8NbEzlwjkHROEDl4EXzY0=;
- b=SKElfs+M685MZOKU0HGa87eIU4VFINGSLRtQXdPMV8X4xcEMpCC0oRfAcvXSApKVRG
- oUz6xPmSzBZFNq4QhKw5mhW5RgDEXtPiolt7ZvM8Jg+t0GH5ygl8ygvseL47nuaDHx02
- Zfj5KxXQLyN3gEzgBVUOabH6vLGk8H40LoK9MbFs3gUGWrCNwzmUWYVgKbWHdyAbglZ3
- eFmoKTcqYGnJXOqAmTrZy5OL0fs0HD4yLBGN3Zsp9B8Fy/2PB6vQWRw37DGTBEvIz3BG
- 57mJMAE4MetjDarXco9fKGik3UKwXidhArSfJLFZPfv/W3/B1TESdWRh8Y2DsZB35jm5
- pviQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=EreJha7/DA1K2RJP3ozydN8NbEzlwjkHROEDl4EXzY0=;
- b=WhFNYZVuK/BSTnPXMW+YDytm7FyLMSsgJm7Fq9jtR15WSznEJbQ5QqnWvsjcnG3Z0v
- nRAYivRZJ8RWGcbymNLoEPoVK991DDRJM0wDLfzuk0FoLY6EGHRm4wK93WH0lCNcQQyX
- 3P2Xoh73fvU467hRfhgSFGkNZA8CCfiDYkGKWACVr409tkyq7Ka392m7V6fbsTmnimH9
- IWX/ULkStHB4eCtBaCkqhk2YeB8oo9ZjmwPzTSQQ0Tj7KvELiqOS2oYYmF1W7s7kgVKz
- xaQiqHVf/2+HN7+kzT6E9HXAfKYFucivlOPb3EK3mShxyXrMKKE/L96pC8zlgEPe7VHe
- yRTA==
-X-Gm-Message-State: AOAM533ZC2ia3/IguUzkD7gxkaggOssEcqJkqct2FKyxKBpQp59VODHA
- i5knROT3h2jajynLVvG6FffXkptbE7fKpSuv4XlFJ1ySW1s=
-X-Google-Smtp-Source: ABdhPJy1TsuRxPQefe4U9LmaPY4LjjI90eXGcAgIsBQ+SvsxkSXeF6VGVpuQcA7M7LYakCBUr3ByZ4iZrMT0ryw4icg=
-X-Received: by 2002:a25:83:: with SMTP id 125mr4814125yba.467.1631768888796;
- Wed, 15 Sep 2021 22:08:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1mQp1b-0006uh-Ks; Thu, 16 Sep 2021 06:53:51 -0400
+Received: from mail.ilande.co.uk ([2001:41c9:1:41f::167]:40598
+ helo=mail.default.ilande.bv.iomart.io)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1mQp1Z-0000aA-F1; Thu, 16 Sep 2021 06:53:51 -0400
+Received: from host109-153-76-56.range109-153.btcentralplus.com
+ ([109.153.76.56] helo=[192.168.50.176])
+ by mail.default.ilande.bv.iomart.io with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <mark.cave-ayland@ilande.co.uk>)
+ id 1mQp0q-0000IW-06; Thu, 16 Sep 2021 11:53:08 +0100
+To: =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ qemu-devel@nongnu.org
+Cc: Greg Kurz <groug@kaod.org>, Bin Meng <bin.meng@windriver.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Stafford Horne <shorne@gmail.com>, Cornelia Huck <cohuck@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Peter Xu <peterx@redhat.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Michael Rolnik <mrolnik@gmail.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Halil Pasic <pasic@linux.ibm.com>, Taylor Simpson <tsimpson@quicinc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, qemu-riscv@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>, Yuval Shaia <yuval.shaia.ml@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ Thomas Huth <thuth@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, Marek Vasut <marex@denx.de>,
+ Markus Armbruster <armbru@redhat.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, qemu-s390x@nongnu.org,
+ Laurent Vivier <lvivier@redhat.com>, Eric Blake <eblake@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Chris Wulff <crwulff@gmail.com>
+References: <20210914142042.1655100-1-berrange@redhat.com>
+ <20210914142042.1655100-26-berrange@redhat.com>
+From: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+Message-ID: <37dc66e2-16df-dab0-875a-581204ead1d8@ilande.co.uk>
+Date: Thu, 16 Sep 2021 11:53:05 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <d6cb4dfe75a2f536f217d7075b750ece3acb1535.1631767043.git.alistair.francis@wdc.com>
-In-Reply-To: <d6cb4dfe75a2f536f217d7075b750ece3acb1535.1631767043.git.alistair.francis@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 16 Sep 2021 13:07:57 +0800
-Message-ID: <CAEUhbmWYBzqmMMq6uP3ytDT-39O9B2bvDM8EfuV8Bz2DRfNCTA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] hw/riscv: opentitan: Correct the USB Dev address
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Alistair Francis <alistair23@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20210914142042.1655100-26-berrange@redhat.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 109.153.76.56
+X-SA-Exim-Mail-From: mark.cave-ayland@ilande.co.uk
+Subject: Re: [PATCH v2 25/53] target/sparc: convert to use format_state
+ instead of dump_state
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.default.ilande.bv.iomart.io)
+Received-SPF: pass client-ip=2001:41c9:1:41f::167;
+ envelope-from=mark.cave-ayland@ilande.co.uk;
+ helo=mail.default.ilande.bv.iomart.io
+X-Spam_score_int: -33
+X-Spam_score: -3.4
+X-Spam_bar: ---
+X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.488,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -71,18 +85,182 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2021 05:08:12 -0000
+X-List-Received-Date: Thu, 16 Sep 2021 10:53:52 -0000
 
-On Thu, Sep 16, 2021 at 12:37 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+On 14/09/2021 15:20, Daniel P. Berrangé wrote:
+
+> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->  hw/riscv/opentitan.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+>   target/sparc/cpu.c | 85 +++++++++++++++++++++++++---------------------
+>   target/sparc/cpu.h |  2 +-
+>   2 files changed, 47 insertions(+), 40 deletions(-)
+> 
+> diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
+> index da6b30ec74..9346a79239 100644
+> --- a/target/sparc/cpu.c
+> +++ b/target/sparc/cpu.c
+> @@ -597,11 +597,11 @@ void sparc_cpu_list(void)
+>                   "fpu_version mmu_version nwindows\n");
+>   }
+>   
+> -static void cpu_print_cc(FILE *f, uint32_t cc)
+> +static void cpu_print_cc(GString *buf, uint32_t cc)
+>   {
+> -    qemu_fprintf(f, "%c%c%c%c", cc & PSR_NEG ? 'N' : '-',
+> -                 cc & PSR_ZERO ? 'Z' : '-', cc & PSR_OVF ? 'V' : '-',
+> -                 cc & PSR_CARRY ? 'C' : '-');
+> +    g_string_append_printf(buf, "%c%c%c%c", cc & PSR_NEG ? 'N' : '-',
+> +                           cc & PSR_ZERO ? 'Z' : '-', cc & PSR_OVF ? 'V' : '-',
+> +                           cc & PSR_CARRY ? 'C' : '-');
+>   }
+>   
+>   #ifdef TARGET_SPARC64
+> @@ -610,34 +610,36 @@ static void cpu_print_cc(FILE *f, uint32_t cc)
+>   #define REGS_PER_LINE 8
+>   #endif
+>   
+> -void sparc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+> +void sparc_cpu_format_state(CPUState *cs, GString *buf, int flags)
+>   {
+>       SPARCCPU *cpu = SPARC_CPU(cs);
+>       CPUSPARCState *env = &cpu->env;
+>       int i, x;
+>   
+> -    qemu_fprintf(f, "pc: " TARGET_FMT_lx "  npc: " TARGET_FMT_lx "\n", env->pc,
+> -                 env->npc);
+> +    g_string_append_printf(buf,
+> +                           "pc: " TARGET_FMT_lx "  npc: " TARGET_FMT_lx "\n",
+> +                           env->pc, env->npc);
+>   
+>       for (i = 0; i < 8; i++) {
+>           if (i % REGS_PER_LINE == 0) {
+> -            qemu_fprintf(f, "%%g%d-%d:", i, i + REGS_PER_LINE - 1);
+> +            g_string_append_printf(buf, "%%g%d-%d:", i, i + REGS_PER_LINE - 1);
+>           }
+> -        qemu_fprintf(f, " " TARGET_FMT_lx, env->gregs[i]);
+> +        g_string_append_printf(buf, " " TARGET_FMT_lx, env->gregs[i]);
+>           if (i % REGS_PER_LINE == REGS_PER_LINE - 1) {
+> -            qemu_fprintf(f, "\n");
+> +            g_string_append_printf(buf, "\n");
+>           }
+>       }
+>       for (x = 0; x < 3; x++) {
+>           for (i = 0; i < 8; i++) {
+>               if (i % REGS_PER_LINE == 0) {
+> -                qemu_fprintf(f, "%%%c%d-%d: ",
+> +                g_string_append_printf(buf, "%%%c%d-%d: ",
+>                                x == 0 ? 'o' : (x == 1 ? 'l' : 'i'),
+>                                i, i + REGS_PER_LINE - 1);
+>               }
+> -            qemu_fprintf(f, TARGET_FMT_lx " ", env->regwptr[i + x * 8]);
+> +            g_string_append_printf(buf, TARGET_FMT_lx " ",
+> +                                   env->regwptr[i + x * 8]);
+>               if (i % REGS_PER_LINE == REGS_PER_LINE - 1) {
+> -                qemu_fprintf(f, "\n");
+> +                g_string_append_printf(buf, "\n");
+>               }
+>           }
+>       }
+> @@ -645,42 +647,47 @@ void sparc_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>       if (flags & CPU_DUMP_FPU) {
+>           for (i = 0; i < TARGET_DPREGS; i++) {
+>               if ((i & 3) == 0) {
+> -                qemu_fprintf(f, "%%f%02d: ", i * 2);
+> +                g_string_append_printf(buf, "%%f%02d: ", i * 2);
+>               }
+> -            qemu_fprintf(f, " %016" PRIx64, env->fpr[i].ll);
+> +            g_string_append_printf(buf, " %016" PRIx64, env->fpr[i].ll);
+>               if ((i & 3) == 3) {
+> -                qemu_fprintf(f, "\n");
+> +                g_string_append_printf(buf, "\n");
+>               }
+>           }
+>       }
+>   
+>   #ifdef TARGET_SPARC64
+> -    qemu_fprintf(f, "pstate: %08x ccr: %02x (icc: ", env->pstate,
+> +    g_string_append_printf(buf, "pstate: %08x ccr: %02x (icc: ", env->pstate,
+>                    (unsigned)cpu_get_ccr(env));
+> -    cpu_print_cc(f, cpu_get_ccr(env) << PSR_CARRY_SHIFT);
+> -    qemu_fprintf(f, " xcc: ");
+> -    cpu_print_cc(f, cpu_get_ccr(env) << (PSR_CARRY_SHIFT - 4));
+> -    qemu_fprintf(f, ") asi: %02x tl: %d pil: %x gl: %d\n", env->asi, env->tl,
+> -                 env->psrpil, env->gl);
+> -    qemu_fprintf(f, "tbr: " TARGET_FMT_lx " hpstate: " TARGET_FMT_lx " htba: "
+> -                 TARGET_FMT_lx "\n", env->tbr, env->hpstate, env->htba);
+> -    qemu_fprintf(f, "cansave: %d canrestore: %d otherwin: %d wstate: %d "
+> -                 "cleanwin: %d cwp: %d\n",
+> -                 env->cansave, env->canrestore, env->otherwin, env->wstate,
+> -                 env->cleanwin, env->nwindows - 1 - env->cwp);
+> -    qemu_fprintf(f, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx " fprs: "
+> -                 TARGET_FMT_lx "\n", env->fsr, env->y, env->fprs);
+> +    cpu_print_cc(buf, cpu_get_ccr(env) << PSR_CARRY_SHIFT);
+> +    g_string_append_printf(buf, " xcc: ");
+> +    cpu_print_cc(buf, cpu_get_ccr(env) << (PSR_CARRY_SHIFT - 4));
+> +    g_string_append_printf(buf, ") asi: %02x tl: %d pil: %x gl: %d\n",
+> +                           env->asi, env->tl, env->psrpil, env->gl);
+> +    g_string_append_printf(buf, "tbr: " TARGET_FMT_lx " hpstate: "
+> +                           TARGET_FMT_lx " htba: " TARGET_FMT_lx "\n",
+> +                           env->tbr, env->hpstate, env->htba);
+> +    g_string_append_printf(buf, "cansave: %d canrestore: %d "
+> +                           "otherwin: %d wstate: %d "
+> +                           "cleanwin: %d cwp: %d\n",
+> +                           env->cansave, env->canrestore,
+> +                           env->otherwin, env->wstate,
+> +                           env->cleanwin, env->nwindows - 1 - env->cwp);
+> +    g_string_append_printf(buf, "fsr: " TARGET_FMT_lx " y: "
+> +                           TARGET_FMT_lx " fprs: " TARGET_FMT_lx "\n",
+> +                           env->fsr, env->y, env->fprs);
+>   
+>   #else
+> -    qemu_fprintf(f, "psr: %08x (icc: ", cpu_get_psr(env));
+> -    cpu_print_cc(f, cpu_get_psr(env));
+> -    qemu_fprintf(f, " SPE: %c%c%c) wim: %08x\n", env->psrs ? 'S' : '-',
+> -                 env->psrps ? 'P' : '-', env->psret ? 'E' : '-',
+> -                 env->wim);
+> -    qemu_fprintf(f, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx "\n",
+> -                 env->fsr, env->y);
+> +    g_string_append_printf(buf, "psr: %08x (icc: ", cpu_get_psr(env));
+> +    cpu_print_cc(buf, cpu_get_psr(env));
+> +    g_string_append_printf(buf, " SPE: %c%c%c) wim: %08x\n",
+> +                           env->psrs ? 'S' : '-',
+> +                           env->psrps ? 'P' : '-', env->psret ? 'E' : '-',
+> +                           env->wim);
+> +    g_string_append_printf(buf, "fsr: " TARGET_FMT_lx " y: " TARGET_FMT_lx "\n",
+> +                           env->fsr, env->y);
+>   #endif
+> -    qemu_fprintf(f, "\n");
+> +    g_string_append_printf(buf, "\n");
+>   }
+>   
+>   static void sparc_cpu_set_pc(CPUState *cs, vaddr value)
+> @@ -889,7 +896,7 @@ static void sparc_cpu_class_init(ObjectClass *oc, void *data)
+>       cc->class_by_name = sparc_cpu_class_by_name;
+>       cc->parse_features = sparc_cpu_parse_features;
+>       cc->has_work = sparc_cpu_has_work;
+> -    cc->dump_state = sparc_cpu_dump_state;
+> +    cc->format_state = sparc_cpu_format_state;
+>   #if !defined(TARGET_SPARC64) && !defined(CONFIG_USER_ONLY)
+>       cc->memory_rw_debug = sparc_cpu_memory_rw_debug;
+>   #endif
+> diff --git a/target/sparc/cpu.h b/target/sparc/cpu.h
+> index ff8ae73002..65a01a7884 100644
+> --- a/target/sparc/cpu.h
+> +++ b/target/sparc/cpu.h
+> @@ -571,7 +571,7 @@ extern const VMStateDescription vmstate_sparc_cpu;
+>   #endif
+>   
+>   void sparc_cpu_do_interrupt(CPUState *cpu);
+> -void sparc_cpu_dump_state(CPUState *cpu, FILE *f, int flags);
+> +void sparc_cpu_format_state(CPUState *cpu, GString *buf, int flags);
+>   hwaddr sparc_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
+>   int sparc_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+>   int sparc_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Acked-by: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+
+
+ATB,
+
+Mark.
 
