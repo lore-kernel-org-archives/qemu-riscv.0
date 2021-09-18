@@ -1,68 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mRSaT-00071B-A2
-	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 01:08:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41944)
+	id 1mRVbS-0002WY-NV
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 04:21:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48768)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mRSaQ-00070v-Cv; Sat, 18 Sep 2021 01:08:27 -0400
-Received: from mail-lf1-x12c.google.com ([2a00:1450:4864:20::12c]:42684)
+ (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
+ id 1mRTqC-0002gl-Jm; Sat, 18 Sep 2021 02:28:48 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:35834)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mRSaL-0001uw-6i; Sat, 18 Sep 2021 01:08:25 -0400
-Received: by mail-lf1-x12c.google.com with SMTP id bq5so41751872lfb.9;
- Fri, 17 Sep 2021 22:08:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
+ id 1mRTqB-0003A3-89; Sat, 18 Sep 2021 02:28:48 -0400
+Received: by mail-pf1-x431.google.com with SMTP id w14so730138pfu.2;
+ Fri, 17 Sep 2021 23:28:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4TxNL+cbAlm69v5QIBh94W8NtjcdtACqoM/td41qnGM=;
- b=VNQD6nlYgDHB3Bajql+/yp3xROPrl4dtJ3VlZ1lThbM+rqQchbY+Yrx/oY5s+kKQbH
- /YknOh6gzauU7nMPzxmD6Dl4Q3opuhpdpGtDgKjmWZq8GPyF1AF+Ig9LgZHfBdLReABx
- bX0iAa3V2AdhdkzkOJXYQiiY0kqcFIWZ1yyQk3Nxz7DyVqDOQ82h2cASNMrCoQBcvjoP
- jTf5KtpAUgGGfxgGNnTHLBx9hOARQ7WxSdNo0TCI0dvHS6a0lNCLp8PtBN1sIe8jz0tt
- uxvZzRKKd7rohqysvCzIsVweEvHm2OIICHxg4ntM7hKG4iROJy7+5UuRt9gwGVJhPaqD
- qpqg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=Hoil6t6vGDo7tQoCRnUVu4aITmil+jgKZTVBnbTPVHw=;
+ b=BI9wz36wUuCeop2fEZj+LP8tQ2OiKkgT7t+3G+qL/CcfoY5i804UzlBalRbwOhuni2
+ TehaqWQ3KCMy2Xpce2fcM25K4vWp5DoEy9991CDLYSmlrT9LcwWn8HhmBPNhYUALU8uy
+ 56OLgIFzNPF6JWCm44T8S2Ybppi2QSU1k/6aziRkZgrPRkwu72miGdovuw8U2tRa/+nX
+ AH5M0xrfCau+Ew2oNKdTRdp0XMkG/B2DNcwSwyxtl6zklO55g5UI3X1jXtrs/mUhE3dB
+ mYEbGTK0haJi7xjanRpVg/o616KJtpacLIpCpmavte1a5mjKFAYfwsrtLfgOSDCdjNFh
+ wZEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4TxNL+cbAlm69v5QIBh94W8NtjcdtACqoM/td41qnGM=;
- b=TrQGfII2p6eKxbw2elcSZc+KnjOilMmCPPCJn7X8d2qI3e6T4iud6S00GWwbfKQI0b
- Bzl8TvFIKq1XdMkrwElQvQkX8ZYuOGRFOBRoiUzhTFuOquMXuHx49PnnPDLfQBLgB0TS
- Vw0HAqisUPC+51MTiKbPb5hwf+BWZLQcZUcFEvezWn8FkweRTrqIQhj4LKBvilyFS5tn
- GtmDRB8iwBVD/fzjt5nzu6ok1U3svd4GbcE9qpGdQCn3Mao1pMduK3ttDb94T+I1RhCk
- P59sLu4jyHN2tcuhSkYR0UK5ecljhSitmmdu8DmDj7BVwYlCbRtczgq/3VwKRIR4jHSN
- FbrQ==
-X-Gm-Message-State: AOAM530J2O9ojWegIFjjyyaYjDzWO348SQgTI2D015nRIojI8Fsgwaip
- NsSHGkoucwoFGkHqewtzER0cKWnVu6VkfCM+RBk=
-X-Google-Smtp-Source: ABdhPJw37mq5rXDVf/XJBk8971Or/RUlNLispXXuzYUDHbQEsF8mP5P1Hag1WniyfugDz/u5GwCBlW13eKVQH9N7SEk=
-X-Received: by 2002:a05:6512:15a4:: with SMTP id
- bp36mr10572227lfb.509.1631941698298; 
- Fri, 17 Sep 2021 22:08:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210909190033.1339448-1-space.monkey.delivers@gmail.com>
- <20210909190033.1339448-6-space.monkey.delivers@gmail.com>
- <4098b753-76fb-2dad-4922-837061184fc1@linaro.org>
-In-Reply-To: <4098b753-76fb-2dad-4922-837061184fc1@linaro.org>
-From: Alexey Baturo <baturo.alexey@gmail.com>
-Date: Sat, 18 Sep 2021 07:08:05 +0200
-Message-ID: <CAFukJ-BJ6HQmrz6gGtxazYRo-q20tBMhtkk81SamCoRuRuEhew@mail.gmail.com>
-Subject: Re: [PATCH v11 5/7] [RISCV_PM] Support pointer masking for RISC-V for
- i/c/f/d/a types of instructions
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: space.monkey.delivers@gmail.com, palmer@dabbelt.com, 
- Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: multipart/alternative; boundary="00000000000038ac2205cc3e094d"
-Received-SPF: pass client-ip=2a00:1450:4864:20::12c;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x12c.google.com
-X-Spam_score_int: 0
-X-Spam_score: -0.1
-X-Spam_bar: /
-X-Spam_report: (-0.1 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001, GAPPY_SUBJECT=0.1,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=Hoil6t6vGDo7tQoCRnUVu4aITmil+jgKZTVBnbTPVHw=;
+ b=wRS9QxVWyj1KypcLfSvrJPHgppgXGRFDge6/4IcUh0ZY/VO1NlY4+SYwd21nyBqCgM
+ XbvIac2V0svvUWjDr8w0HbnL2sde3lIzh3QO3Za1HAInmOhGfYPqhBAopDDOP4jAiBCg
+ UoDnJQCCQB1Lw4AyHsG93iTyqyUuSRz6FP0mTiX6KBsMjptq/aP4k00/HJXQUm9n0ySd
+ EH4PDfJAjs54+2aeAGM+gXwlN4v7DjJQatvKJukF8Kd5V1V2dXOzNjw93KPS8VdNsEVT
+ ASADw+ApKIZliTv3Z5e8HtI+vGSteswV0US2bp7Xt17AL/tzvblnBk2MCaMzFvtY98+2
+ 0Ybg==
+X-Gm-Message-State: AOAM532OJ1vKbV8IEWpIFwaeYt/yBCsrxlgHMS8oednnTZfv6r24C4J7
+ dIB1uYjVAiCa2UVwcw/YDk5aHB8vhNGoo4V4
+X-Google-Smtp-Source: ABdhPJy+8HcYgbSa+y+X8zb9tKME+tZxgcy3NkfOE4wc7ik0U1Ut2Ocju6eqEEUbi0XbFZzOxMtTng==
+X-Received: by 2002:a63:3c5d:: with SMTP id i29mr13225022pgn.415.1631946525418; 
+ Fri, 17 Sep 2021 23:28:45 -0700 (PDT)
+Received: from eric-OptiPlex-7080.starfivetech.com (ip164.ip-51-195-37.eu.
+ [51.195.37.164])
+ by smtp.gmail.com with ESMTPSA id f27sm8126432pfq.78.2021.09.17.23.28.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Sep 2021 23:28:45 -0700 (PDT)
+From: Eric Tang <tangxingxin1008@gmail.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com,
+	alistair.francis@wdc.com,
+	bin.meng@windriver.com
+Subject: [RFC 01/10] target/riscv: rvb: fixed an error about srow/sroiw
+ instructions
+Date: Sat, 18 Sep 2021 14:28:07 +0800
+Message-Id: <20210918062816.7546-2-tangxingxin1008@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210918062816.7546-1-tangxingxin1008@gmail.com>
+References: <20210918062816.7546-1-tangxingxin1008@gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=tangxingxin1008@gmail.com; helo=mail-pf1-x431.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Sat, 18 Sep 2021 04:21:40 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,77 +77,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2021 05:08:28 -0000
+X-List-Received-Date: Sat, 18 Sep 2021 06:28:48 -0000
 
---00000000000038ac2205cc3e094d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+    According to spec, these instructions ignore the upper 32 bit of
+    their input and sign-extend their 32 bit output values. Fixed the
+    output's error when their input values greater than 0xffffffff.
 
-Hi Richard,
+Signed-off-by: Eric Tang <tangxingxin1008@gmail.com>
 
-Thanks for noticing that.
-Do you think it would be an ok solution to pass dst as a pointer
-into gen_pm_adjust_address, so in case pm is enabled, it'd allocate the
-temp and update the dst afterwards?
-Thanks
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index b72e76255c..96b6fcb41d 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -484,12 +484,32 @@ static bool trans_sloiw(DisasContext *ctx, arg_sloiw *a)
+     return gen_shift_imm_tl(ctx, a, EXT_NONE, gen_slo);
+ }
+ 
++static void gen_srow(TCGv ret, TCGv arg1, TCGv arg2)
++{
++    TCGv_i32 t1 = tcg_temp_new_i32();
++    TCGv_i32 t2 = tcg_temp_new_i32();
++
++    /* truncate to 32-bits */
++    tcg_gen_trunc_tl_i32(t1, arg1);
++    tcg_gen_trunc_tl_i32(t2, arg2);
++
++    tcg_gen_not_i32(t1, t1);
++    tcg_gen_shr_i32(t1, t1, t2);
++    tcg_gen_not_i32(t1, t1);
++
++    /* sign-extend 64-bits */
++    tcg_gen_ext_i32_tl(ret, t1);
++
++    tcg_temp_free_i32(t1);
++    tcg_temp_free_i32(t2);
++}
++
+ static bool trans_srow(DisasContext *ctx, arg_srow *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_EXT(ctx, RVB);
+     ctx->w = true;
+-    return gen_shift(ctx, a, EXT_ZERO, gen_sro);
++    return gen_shift(ctx, a, EXT_ZERO, gen_srow);
+ }
+ 
+ static bool trans_sroiw(DisasContext *ctx, arg_sroiw *a)
+@@ -497,7 +517,7 @@ static bool trans_sroiw(DisasContext *ctx, arg_sroiw *a)
+     REQUIRE_64BIT(ctx);
+     REQUIRE_EXT(ctx, RVB);
+     ctx->w = true;
+-    return gen_shift_imm_tl(ctx, a, EXT_ZERO, gen_sro);
++    return gen_shift_imm_tl(ctx, a, EXT_ZERO, gen_srow);
+ }
+ 
+ static void gen_rorw(TCGv ret, TCGv arg1, TCGv arg2)
+-- 
+2.17.1
 
-=D0=BF=D1=82, 10 =D1=81=D0=B5=D0=BD=D1=82. 2021 =D0=B3. =D0=B2 00:00, Richa=
-rd Henderson <
-richard.henderson@linaro.org>:
-
-> On 9/9/21 9:00 PM, Alexey Baturo wrote:
-> > +++ b/target/riscv/insn_trans/trans_rva.c.inc
-> > @@ -25,6 +25,7 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a,
-> MemOp mop)
-> >       if (a->rl) {
-> >           tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
-> >       }
-> > +    gen_pm_adjust_address(ctx, src1, src1);
->
-> This will not work anymore, since src1 may not be a temporary.  See the
-> use of temp_new()
-> e.g. in gen_load().  We're currently only conditionally allocating a
-> temporary; with this
-> extension, we'll always need one.  So it is probably worth cleaning that
-> up at this time.
->
->
-> r~
->
-
---00000000000038ac2205cc3e094d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Richard,<div><br></div><div>Thanks for noticing that.</=
-div><div>Do you think it would be an ok solution to pass dst as a pointer i=
-nto=C2=A0gen_pm_adjust_address, so in case pm is enabled, it&#39;d allocate=
- the temp and update the dst afterwards?</div><div>Thanks</div></div><br><d=
-iv class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=D0=BF=D1=82=
-, 10 =D1=81=D0=B5=D0=BD=D1=82. 2021 =D0=B3. =D0=B2 00:00, Richard Henderson=
- &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.henderson@lina=
-ro.org</a>&gt;:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-On 9/9/21 9:00 PM, Alexey Baturo wrote:<br>
-&gt; +++ b/target/riscv/insn_trans/trans_rva.c.inc<br>
-&gt; @@ -25,6 +25,7 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a,=
- MemOp mop)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (a-&gt;rl) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0tcg_gen_mb(TCG_MO_ALL | TCG_BA=
-R_STRL);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt; +=C2=A0 =C2=A0 gen_pm_adjust_address(ctx, src1, src1);<br>
-<br>
-This will not work anymore, since src1 may not be a temporary.=C2=A0 See th=
-e use of temp_new() <br>
-e.g. in gen_load().=C2=A0 We&#39;re currently only conditionally allocating=
- a temporary; with this <br>
-extension, we&#39;ll always need one.=C2=A0 So it is probably worth cleanin=
-g that up at this time.<br>
-<br>
-<br>
-r~<br>
-</blockquote></div>
-
---00000000000038ac2205cc3e094d--
 
