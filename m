@@ -1,62 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mRVbu-0003N6-Uh
-	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 04:22:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48972)
+	id 1mRVbw-0003QM-2B
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 04:22:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49002)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
- id 1mRTr1-0002zn-Vr; Sat, 18 Sep 2021 02:29:39 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:36605)
+ id 1mRTr8-00031R-RE; Sat, 18 Sep 2021 02:29:46 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:37590)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
- id 1mRTr0-0003uC-Mf; Sat, 18 Sep 2021 02:29:39 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- u13-20020a17090abb0db0290177e1d9b3f7so11543536pjr.1; 
- Fri, 17 Sep 2021 23:29:37 -0700 (PDT)
+ id 1mRTr7-0003zq-9J; Sat, 18 Sep 2021 02:29:46 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id j14so484474plx.4;
+ Fri, 17 Sep 2021 23:29:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=qAxIjuayNeVCLSsxLHRPwSTdeZ6cUP55LCrxE6uZ700=;
- b=V46oFwIeJ8lpJRKOZTCFF//DlHC/qMNj4oyyoCKlabZcgSq28y0kcmnWoZNMqckpoP
- i3TDR9qd+60gg0rsQHOwe4QdbeSrXVR3Z4suoU6ASrGKRzeSi5Au0wngn/PB8wtPR08r
- GEDJU36MaeRAfsjSUie2M2tHH0ndTldZCqOD57xQleZmUm9RvD5+j9FdaMQuO2hF+852
- lDdVtO3MCSAe5fZ64eWJKDRIA7SmXRQzraJFbMoW/FkzgApDRKWwiD8MavhR5U28U9hx
- kVUnU181YcvO1hy87YUC6/FhMKSVJRj8lQSgoLt2jDNE56nHxNVRTN/inP65+IxPu/lh
- 485g==
+ bh=yJ5Hy1smq6A7DzNmyfSRxxVHKv5+jjXK2R1bnXb9l40=;
+ b=DnNrx8Fz1zwVIbW/40FnXPlvb5ej7fuZyS9Axuexptclb04yCeqBzRP1esN6o0Tr1G
+ vTdqExkYomDZvlXJKru/0luTICQHHhJzeyD+srTNcePDFmw0Ta1dI3ke745VWYf6ZslT
+ 1+Z5RK2YzpRsFwT6peDkCV5+2vZBR2OMbR+5WD1snstKGwT2renqXvW+WeW1u6wJN67x
+ tCmkcjf8GmioktNgY8l/CxGP19vdf/wXqvBlOz5caFaG1yXDmKVEewat3wpItQ5tMVUI
+ u/Y+BkOE4AWk21bKWLooFY2q7gybZ8hiH/bg5W5LkGhq0O1YBq/K7oC28y0Ls5TQrFml
+ Ga7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=qAxIjuayNeVCLSsxLHRPwSTdeZ6cUP55LCrxE6uZ700=;
- b=EOd5s34SkDu8j6l54hRB81lvNjS1tuVdlPSgrz7+FwqNSzCwOQLRBxk4np6zhRvMha
- +hB/yR1VJYHHYBLYojjtwI2jyZHpR+uqfLDwaG9QqX9UBo9Gs1FvxPDLm1FdZUvlaYnf
- o13sbYQ2vVism3plG+hdGp3TIBWb1DCx0BTJc97EqlwZfRpCXYTIPYMak2QarRLd6GGl
- MESmrNLXFDF7D7vDeFVZNiZ+KkC4lnonGaQnqkkfKthslTGfFDynGo14MMY0CdPs7PZm
- r9r+ghbJQWWSUOMxOomieOgNvAvo8YemQ//mguIUkkShR3c0H7e7sp6cDaB7sMZiPBAi
- JxXA==
-X-Gm-Message-State: AOAM533IwIfXq7w2hpUOKQGy52YjNUtDuNfLYP450sQ+CSqx3L//P9PJ
- gLOmXX+AKHemcRAm7TzDZtUo/lUzSW+oQRzA
-X-Google-Smtp-Source: ABdhPJx5QOte7oubAtZc+upbcT+hXjaJ5T6U9SNlvEQuFqMIwHG1RuLjRmS7wENiPVnw6zwQaEW1zA==
-X-Received: by 2002:a17:902:c948:b0:13a:345c:917c with SMTP id
- i8-20020a170902c94800b0013a345c917cmr13086291pla.61.1631946576957; 
- Fri, 17 Sep 2021 23:29:36 -0700 (PDT)
+ bh=yJ5Hy1smq6A7DzNmyfSRxxVHKv5+jjXK2R1bnXb9l40=;
+ b=b4sjJgH/Diq0yWZCQ5V+a7oU8MNmVzry2U6S2wZ5kBFVSbyo8VnaUE56Vw+fbvdqYw
+ sf+jRQUXb5VrFcAft8l6YG+L7VQ3Jg3eNyPHySQ5uFtqUHjo5tjpIC9+eUM5sWEmiX3s
+ FWXX8FQFT6J5w+l90ZDcWGRFvqIGRezfxy1uh+z2cP8b8/5XrUWRfTwaPeIFJQ4xnL9w
+ IPCo4vWcb3uwt3kn3O6pJdQp8C+q/XOzRLikI6ldbfJMS965tnsz7HKfn4NwrWbnQ+nM
+ noOSUgnjwuUzYbWfcuJ732EB/5nLELFf/YJ8KPqy4NuF08hXFmn3s+cq6Bhjzycr1MWe
+ EoPQ==
+X-Gm-Message-State: AOAM533elmU7/PdE5SINFFTcf4HY/1xcTnYaWcY5I6Qq0N18DDVWzPRR
+ XVYsiF5vx35ZjRGksLWlsu1Z7zjL5ysk8obM
+X-Google-Smtp-Source: ABdhPJxAMelvYv7Np4lFGFv+Zdaf85K4llIRfSRvBwtB76osvE5fmh8+lTq5VvyR2AKAfcUGuvZiog==
+X-Received: by 2002:a17:90a:9310:: with SMTP id
+ p16mr25466588pjo.193.1631946583403; 
+ Fri, 17 Sep 2021 23:29:43 -0700 (PDT)
 Received: from eric-OptiPlex-7080.starfivetech.com (ip164.ip-51-195-37.eu.
  [51.195.37.164])
- by smtp.gmail.com with ESMTPSA id f27sm8126432pfq.78.2021.09.17.23.29.31
+ by smtp.gmail.com with ESMTPSA id f27sm8126432pfq.78.2021.09.17.23.29.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Sep 2021 23:29:36 -0700 (PDT)
+ Fri, 17 Sep 2021 23:29:43 -0700 (PDT)
 From: Eric Tang <tangxingxin1008@gmail.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: palmer@dabbelt.com,
 	alistair.francis@wdc.com,
 	bin.meng@windriver.com
-Subject: [RFC 09/10] target/riscv: rvb: fixed an issue about clzw instruction
-Date: Sat, 18 Sep 2021 14:28:15 +0800
-Message-Id: <20210918062816.7546-10-tangxingxin1008@gmail.com>
+Subject: [RFC 10/10] target/riscv: rvb: add funnel shfit instructions
+Date: Sat, 18 Sep 2021 14:28:16 +0800
+Message-Id: <20210918062816.7546-11-tangxingxin1008@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210918062816.7546-1-tangxingxin1008@gmail.com>
 References: <20210918062816.7546-1-tangxingxin1008@gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=tangxingxin1008@gmail.com; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=tangxingxin1008@gmail.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -66,7 +65,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 18 Sep 2021 04:22:09 -0400
+X-Mailman-Approved-At: Sat, 18 Sep 2021 04:22:10 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,31 +77,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2021 06:29:40 -0000
+X-List-Received-Date: Sat, 18 Sep 2021 06:29:47 -0000
+
+    Add funnel shfit instructions except fsri/fsriw for opcode ecoding
+    reason.
 
 Signed-off-by: Eric Tang <tangxingxin1008@gmail.com>
 
+diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
+index e936444c12..08a2fbb376 100644
+--- a/target/riscv/bitmanip_helper.c
++++ b/target/riscv/bitmanip_helper.c
+@@ -124,6 +124,43 @@ target_ulong HELPER(clmulr)(target_ulong rs1, target_ulong rs2)
+     return do_clmulr(rs1, rs2, TARGET_LONG_BITS);
+ }
+ 
++static target_ulong do_fsl(target_ulong rs1,
++                           target_ulong rs2,
++                           target_ulong rs3,
++                           int bits)
++{
++    int shamt = rs2 & ((2 * bits) - 1);
++    target_ulong a = rs1, b = rs3;
++
++    if (shamt >= bits) {
++        shamt -= bits;
++        a = rs3;
++        b = rs1;
++    }
++
++    return shamt ? (a << shamt) | (b >> (bits - shamt)) : a;
++}
++
++target_ulong HELPER(fsl)(target_ulong rs1, target_ulong rs2, target_ulong rs3)
++{
++    return do_fsl(rs1, rs2, rs3, TARGET_LONG_BITS);
++}
++
++target_ulong HELPER(fsr)(target_ulong rs1, target_ulong rs2, target_ulong rs3)
++{
++    return do_fsl(rs1, -rs2, rs3, TARGET_LONG_BITS);
++}
++
++target_ulong HELPER(fslw)(target_ulong rs1, target_ulong rs2, target_ulong rs3)
++{
++    return do_fsl(rs1, rs2, rs3, 32);
++}
++
++target_ulong HELPER(fsrw)(target_ulong rs1, target_ulong rs2, target_ulong rs3)
++{
++    return do_fsl(rs1, -rs2, rs3, 32);
++}
++
+ static target_ulong shuffle_stage(target_ulong src,
+                                   uint64_t maskl,
+                                   uint64_t maskr,
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 8c8fb71bb4..619f635b6d 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -87,6 +87,10 @@ DEF_HELPER_FLAGS_1(crc32c_d, TCG_CALL_NO_RWG_SE, tl, tl)
+ DEF_HELPER_FLAGS_2(bmatxor, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_2(bmator, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_1(bmatflip, TCG_CALL_NO_RWG_SE, tl, tl)
++DEF_HELPER_FLAGS_3(fsl, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++DEF_HELPER_FLAGS_3(fsr, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++DEF_HELPER_FLAGS_3(fslw, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++DEF_HELPER_FLAGS_3(fsrw, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+ 
+ /* Special functions */
+ DEF_HELPER_2(csrr, tl, env, int)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 73f956486b..65e574709a 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -713,6 +713,8 @@ xperm_h    0010100 .......... 110 ..... 0110011 @r
+ bfp        0100100 .......... 111 ..... 0110011 @r
+ cmix       .....11 .......... 001 ..... 0110011 @r4
+ cmov       .....11 .......... 101 ..... 0110011 @r4
++fsl        .....10 .......... 001 ..... 0110011 @r4
++fsr        .....10 .......... 101 ..... 0110011 @r4
+ 
+ bseti      00101. ........... 001 ..... 0010011 @sh
+ bclri      01001. ........... 001 ..... 0010011 @sh
+@@ -754,6 +756,8 @@ xperm_w    0010100 .......... 000 ..... 0110011 @r
+ bfpw       0100100 .......... 111 ..... 0111011 @r
+ bmator     0000100 .......... 011 ..... 0110011 @r
+ bmatxor    0100100 .......... 011 ..... 0110011 @r
++fslw       .....10 .......... 001 ..... 0111011 @r4
++fsrw       .....10 .......... 101 ..... 0111011 @r4
+ 
+ bsetiw     0010100 .......... 001 ..... 0011011 @sh5
+ bclriw     0100100 .......... 001 ..... 0011011 @sh5
 diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index 39ca5a573f..4523a5cd4c 100644
+index 4523a5cd4c..5315baa185 100644
 --- a/target/riscv/insn_trans/trans_rvb.c.inc
 +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -456,7 +456,7 @@ GEN_TRANS_SHADD(3)
- 
- static void gen_clzw(TCGv ret, TCGv arg1)
- {
--    tcg_gen_clzi_tl(ret, ret, 64);
-+    tcg_gen_clzi_tl(ret, arg1, 64);
-     tcg_gen_subi_tl(ret, ret, 32);
+@@ -428,6 +428,18 @@ static bool trans_cmov(DisasContext *ctx, arg_cmov *a)
+     return gen_quat(ctx, a, EXT_NONE, gen_cmov);
  }
  
-@@ -464,6 +464,7 @@ static bool trans_clzw(DisasContext *ctx, arg_clzw *a)
- {
-     REQUIRE_64BIT(ctx);
++static bool trans_fsl(DisasContext *ctx, arg_fsl *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_quat(ctx, a, EXT_NONE, gen_helper_fsl);
++}
++
++static bool trans_fsr(DisasContext *ctx, arg_fsr *a)
++{
++    REQUIRE_EXT(ctx, RVB);
++    return gen_quat(ctx, a, EXT_NONE, gen_helper_fsr);
++}
++
+ #define GEN_SHADD(SHAMT)                                       \
+ static void gen_sh##SHAMT##add(TCGv ret, TCGv arg1, TCGv arg2) \
+ {                                                              \
+@@ -827,3 +839,19 @@ static bool trans_bmator(DisasContext *ctx, arg_bmator *a)
      REQUIRE_EXT(ctx, RVB);
-+    ctx->w = true;
-     return gen_unary(ctx, a, EXT_ZERO, gen_clzw);
+     return gen_arith(ctx, a, EXT_NONE, gen_helper_bmator);
  }
- 
++
++static bool trans_fslw(DisasContext *ctx, arg_fslw *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_EXT(ctx, RVB);
++    ctx->w = true;
++    return gen_quat(ctx, a, EXT_ZERO, gen_helper_fslw);
++}
++
++static bool trans_fsrw(DisasContext *ctx, arg_fsrw *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_EXT(ctx, RVB);
++    ctx->w = true;
++    return gen_quat(ctx, a, EXT_ZERO, gen_helper_fsrw);
++}
 -- 
 2.17.1
 
