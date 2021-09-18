@@ -1,73 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mRekb-0003Hi-PH
-	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 14:07:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50092)
+	id 1mRfMj-0006O2-Qn
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Sep 2021 14:47:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mReka-0003Gy-40; Sat, 18 Sep 2021 14:07:44 -0400
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336]:39906)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mRfMZ-0006IC-O3
+ for qemu-riscv@nongnu.org; Sat, 18 Sep 2021 14:47:01 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:44786)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mRekY-0000k7-Dt; Sat, 18 Sep 2021 14:07:43 -0400
-Received: by mail-wm1-x336.google.com with SMTP id
- 196-20020a1c04cd000000b002fa489ffe1fso12416143wme.4; 
- Sat, 18 Sep 2021 11:07:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=gJ+ibvD1s7i/IrJylRwwhVtXf/pCdtBLBeoQ9ccQB0M=;
- b=UTd3Qs2JvqU24q7zUk/8lyXRAhiTGAtNRomsZg/Cdr84vHWUyus/pt3vVBEqEL9iCp
- tVCRUat/BM+7eVfKrUjeDcGlHiqD9Xc+d9q0S1Vnx/LUUGWkxGQsKYLO0antHMWAkHhm
- J/uGgWEVLdrtsv6j9ibjIk9g90dJgTiJZbdA15kkW/y6lot9hgKtxChZrPCHVjqRMTBw
- w5pW7IDP5bdayWDRGWSRuOj+gt5K93Sl1/StKihBogbCPUsqzTFEOJEJJQ0L2AXN0so9
- tp9Pqt9V6KAJpkQZPzz7DuNZ0+5m8NY9KeVfTYYVrwrLtr/Mg2D3pNcvB1hmLpDScAwf
- 6Trw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mRfMY-0007hn-5w
+ for qemu-riscv@nongnu.org; Sat, 18 Sep 2021 14:46:59 -0400
+Received: by mail-pf1-x436.google.com with SMTP id b7so12301578pfo.11
+ for <qemu-riscv@nongnu.org>; Sat, 18 Sep 2021 11:46:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=PcKH8XWPzS0JZZC/TfKjpHlJ3lopA1X9EPv+H8eHY+c=;
+ b=KRVMX3mDyybLbnIp2j/iDqh5KGzk4xzra2WOzUR5niBiMWtrQGMWusGNjAYaTKtvdz
+ O3A+IGIKXRk5IeOSZQvEt/nljlrbmaxUrfRkEWtXmbfi7ERgbz1WdtXrgQvnRp9QfJ/J
+ gs1QucPviduYS4D88l1qzMQ/kARITJBjYMU1OOhs4EIdLwSzU8S3867Z/0okZgfTtYAw
+ YUtI6Kz4gM/wuDPrpKnXU+45AvzgpATW4mn95XViRlNtCjikQXieJ2CDSHtC0HAQZpX2
+ qMTkCFdmleLfx068zQMsBLj7cadbd7GfG0u4Xyl9W1KoAm/s+kDPtzFU4PK4ZW3lxuEs
+ D8qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=gJ+ibvD1s7i/IrJylRwwhVtXf/pCdtBLBeoQ9ccQB0M=;
- b=4w6JyGKUTUAooQDIxau4ZxXQfRqtlmqZb89TxcCnabZpDD47oY/u2tq77iSsZWOL43
- JenqlrRvtVt9d7/baDGTE0z14R+SV0G4ZmYdJg/6cepbQVkO0GuC51E0VLikPjVU4CHX
- DShDu7iIEhEtk3c/84dTnJNUCm4/JZ5f5e9IWzLTqtQL08tuHVCAWyJlaQOAZ12y6h/O
- cTDNNq/z7sDCpAjvMCo/ChATj2gFn8GrE/jpCVFnGrLNoltEfTe5+GWuoL7uQfUvC7K1
- jxGDys51Yl2hzen+BYvBs+0IItcaOQTnADTx1YUW7yBo7AugSrazTM5WI/SQu/MkZfPW
- UA1A==
-X-Gm-Message-State: AOAM533CD+tGISa4xoCZmEYeLTMeqRfQWz75wq3fwqT6/Fdkbtrkca6Q
- 9Yp5OczcjTXZbgAvMiGP7T/5055qxO8=
-X-Google-Smtp-Source: ABdhPJyDfPd6Hu0h4B1eqpm9GBJMwxJpK92CHnxMXXEZgqudHABaznQ+z1F/IMXAgL1owgDG+yyrqQ==
-X-Received: by 2002:a7b:c3d4:: with SMTP id t20mr16618274wmj.27.1631988460224; 
- Sat, 18 Sep 2021 11:07:40 -0700 (PDT)
-Received: from x1w.. (14.red-83-35-25.dynamicip.rima-tde.net. [83.35.25.14])
- by smtp.gmail.com with ESMTPSA id m29sm11148304wrb.89.2021.09.18.11.07.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Sep 2021 11:07:39 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Alistair Francis <alistair23@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH] hw/char/mchp_pfsoc_mmuart: QOM'ify PolarFire MMUART
-Date: Sat, 18 Sep 2021 20:07:38 +0200
-Message-Id: <20210918180738.2506799-1-f4bug@amsat.org>
-X-Mailer: git-send-email 2.31.1
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=PcKH8XWPzS0JZZC/TfKjpHlJ3lopA1X9EPv+H8eHY+c=;
+ b=8G2d4oeweX5FETA96W8RILLtH++Z/l4/qccUelp0p6ckHCVaargEgmK+3r5HZH0ziB
+ 40Cn9HzbCUG+Mlf06c4mk6q90S+TuDlFCLxtGDP1sUnUix2ru/DCOIfC02mkTZGnvZfW
+ mw6CGtdfhXO2y7ifFpRZw1IJ9R05xjWCOLw0fKsoMcirHcYW6gqzANVdFNUsSqYRBN3e
+ GFgfVRj2Yfneym2I7oSd4DTtp/DKksHkDbX9v0g2y/k4jhBUQFQrSPpAtdkOghQ60s1d
+ +ZuA9KyWsMmsPFQiRPOhdUkshy0+XOVMGBOX+CEWmzZfMagj2EfaLNjIQcPZpb26omli
+ kr5w==
+X-Gm-Message-State: AOAM530cXyQWQ0F2BlkhCuMrDd6TlhZtekG8WT4pYgl08Ed9npPiEacP
+ RF5EqCF8ISKm/FgPaP473UQE7Q==
+X-Google-Smtp-Source: ABdhPJxSGG6jSZyUkF1OFFSNHl2XIsJw9E5uWiNm3PdxKcZVUmqmpEGF0Fi6ssftUL5oQadYaswVdQ==
+X-Received: by 2002:a62:63c6:0:b0:43f:cbf9:4383 with SMTP id
+ x189-20020a6263c6000000b0043fcbf94383mr17211791pfb.14.1631990816764; 
+ Sat, 18 Sep 2021 11:46:56 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id e7sm388938pfc.114.2021.09.18.11.46.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 18 Sep 2021 11:46:56 -0700 (PDT)
+Subject: Re: [PATCH RESEND v2] target/riscv: Set mstatus_hs.[SD|FS] bits if
+ Clean and V=1 in mark_fs_dirty()
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Vincent Chen <vincent.chen@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20210917093153.4067812-1-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <93e9a615-94fb-3958-9560-111910668768@linaro.org>
+Date: Sat, 18 Sep 2021 11:46:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+In-Reply-To: <20210917093153.4067812-1-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -45
+X-Spam_score: -4.6
+X-Spam_bar: ----
+X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.538,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -80,151 +83,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2021 18:07:44 -0000
+X-List-Received-Date: Sat, 18 Sep 2021 18:47:01 -0000
 
-- Embed SerialMM in MchpPfSoCMMUartState and QOM-initialize it
-- Alias SERIAL_MM 'chardev' property on MCHP_PFSOC_UART
-- Forward SerialMM sysbus IRQ in mchp_pfsoc_mmuart_realize()
-- Keep mchp_pfsoc_mmuart_create() behavior
+On 9/17/21 2:31 AM, frank.chang@sifive.com wrote:
+> From: Frank Chang <frank.chang@sifive.com>
+> 
+> When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
+> Modifying the floating-point state when V=1 causes both fields to
+> be set to 3 (Dirty).
+> 
+> However, it's possible that HS-level sstatus.FS is Clean and VS-level
+> vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
+> We can't early return for this case because we still need to set
+> sstatus.FS to Dirty according to spec.
+> 
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
+> Tested-by: Vincent Chen <vincent.chen@sifive.com>
+> ---
+>   target/riscv/cpu.h       |  4 ++++
+>   target/riscv/translate.c | 24 +++++++++++++++---------
+>   2 files changed, 19 insertions(+), 9 deletions(-)
 
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
----
- include/hw/char/mchp_pfsoc_mmuart.h | 16 ++++--
- hw/char/mchp_pfsoc_mmuart.c         | 77 +++++++++++++++++++++++------
- 2 files changed, 73 insertions(+), 20 deletions(-)
 
-diff --git a/include/hw/char/mchp_pfsoc_mmuart.h b/include/hw/char/mchp_pfsoc_mmuart.h
-index f61990215f0..b484b7ea5e4 100644
---- a/include/hw/char/mchp_pfsoc_mmuart.h
-+++ b/include/hw/char/mchp_pfsoc_mmuart.h
-@@ -28,16 +28,22 @@
- #ifndef HW_MCHP_PFSOC_MMUART_H
- #define HW_MCHP_PFSOC_MMUART_H
- 
-+#include "hw/sysbus.h"
- #include "hw/char/serial.h"
- 
- #define MCHP_PFSOC_MMUART_REG_SIZE  52
- 
--typedef struct MchpPfSoCMMUartState {
--    MemoryRegion iomem;
--    hwaddr base;
--    qemu_irq irq;
-+#define TYPE_MCHP_PFSOC_UART "mchp.pfsoc.uart"
-+OBJECT_DECLARE_SIMPLE_TYPE(MchpPfSoCMMUartState, MCHP_PFSOC_UART)
- 
--    SerialMM *serial;
-+typedef struct MchpPfSoCMMUartState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    MemoryRegion iomem;
-+
-+    SerialMM serial_mm;
- 
-     uint32_t reg[MCHP_PFSOC_MMUART_REG_SIZE / sizeof(uint32_t)];
- } MchpPfSoCMMUartState;
-diff --git a/hw/char/mchp_pfsoc_mmuart.c b/hw/char/mchp_pfsoc_mmuart.c
-index 2facf85c2d8..74404e047d4 100644
---- a/hw/char/mchp_pfsoc_mmuart.c
-+++ b/hw/char/mchp_pfsoc_mmuart.c
-@@ -22,8 +22,9 @@
- 
- #include "qemu/osdep.h"
- #include "qemu/log.h"
--#include "chardev/char.h"
-+#include "qapi/error.h"
- #include "hw/char/mchp_pfsoc_mmuart.h"
-+#include "hw/qdev-properties.h"
- 
- static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsigned size)
- {
-@@ -63,23 +64,69 @@ static const MemoryRegionOps mchp_pfsoc_mmuart_ops = {
-     },
- };
- 
--MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
--    hwaddr base, qemu_irq irq, Chardev *chr)
-+static void mchp_pfsoc_mmuart_init(Object *obj)
- {
--    MchpPfSoCMMUartState *s;
--
--    s = g_new0(MchpPfSoCMMUartState, 1);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(obj);
-+    MchpPfSoCMMUartState *s = MCHP_PFSOC_UART(obj);
- 
-     memory_region_init_io(&s->iomem, NULL, &mchp_pfsoc_mmuart_ops, s,
-                           "mchp.pfsoc.mmuart", 0x1000);
-+    sysbus_init_mmio(sbd, &s->iomem);
- 
--    s->base = base;
--    s->irq = irq;
--
--    s->serial = serial_mm_init(sysmem, base, 2, irq, 399193, chr,
--                               DEVICE_LITTLE_ENDIAN);
--
--    memory_region_add_subregion(sysmem, base + 0x20, &s->iomem);
--
--    return s;
-+    object_initialize_child(obj, "serial-mm", &s->serial_mm, TYPE_SERIAL_MM);
-+    object_property_add_alias(obj, "chardev", OBJECT(&s->serial_mm), "chardev");
-+}
-+
-+static void mchp_pfsoc_mmuart_realize(DeviceState *dev, Error **errp)
-+{
-+    MchpPfSoCMMUartState *s = MCHP_PFSOC_UART(dev);
-+
-+    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "regshift", 2);
-+    qdev_prop_set_uint32(DEVICE(&s->serial_mm), "baudbase", 399193);
-+    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "endianness",
-+                        DEVICE_LITTLE_ENDIAN);
-+    if (!sysbus_realize(SYS_BUS_DEVICE(&s->serial_mm), errp)) {
-+        return;
-+    }
-+    sysbus_pass_irq(SYS_BUS_DEVICE(dev), SYS_BUS_DEVICE(&s->serial_mm));
-+    memory_region_add_subregion(&s->iomem, 0x20,
-+                sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->serial_mm), 0));
-+}
-+
-+static void mchp_pfsoc_mmuart_class_init(ObjectClass *oc, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(oc);
-+
-+    dc->realize = mchp_pfsoc_mmuart_realize;
-+}
-+
-+static const TypeInfo mchp_pfsoc_mmuart_info = {
-+    .name          = TYPE_MCHP_PFSOC_UART,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(MchpPfSoCMMUartState),
-+    .instance_init = mchp_pfsoc_mmuart_init,
-+    .class_init    = mchp_pfsoc_mmuart_class_init,
-+};
-+
-+static void mchp_pfsoc_mmuart_register_types(void)
-+{
-+    type_register_static(&mchp_pfsoc_mmuart_info);
-+}
-+
-+type_init(mchp_pfsoc_mmuart_register_types)
-+
-+MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
-+                                               hwaddr base,
-+                                               qemu_irq irq, Chardev *chr)
-+{
-+    DeviceState *dev = qdev_new(TYPE_MCHP_PFSOC_UART);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+
-+    qdev_prop_set_chr(dev, "chardev", chr);
-+    sysbus_realize(sbd, &error_fatal);
-+
-+    memory_region_add_subregion(sysmem, base, sysbus_mmio_get_region(sbd, 0));
-+    sysbus_connect_irq(sbd, 0, irq);
-+
-+    return MCHP_PFSOC_UART(dev);
- }
--- 
-2.31.1
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
+>   static void mark_fs_dirty(DisasContext *ctx)
+>   {
+>       TCGv tmp;
+> -    target_ulong sd;
+> +    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
+> +
+> +    if (ctx->virt_enabled && ctx->mstatus_hs_fs != MSTATUS_FS) {
+> +        /* Remember the stage change for the rest of the TB. */
+> +        ctx->mstatus_hs_fs = MSTATUS_FS;
+> +
+> +        tmp = tcg_temp_new();
+> +        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+> +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+> +        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+> +        tcg_temp_free(tmp);
+> +    }
+>   
+>       if (ctx->mstatus_fs == MSTATUS_FS) {
+>           return;
+>       }
+> +
+>       /* Remember the state change for the rest of the TB.  */
+>       ctx->mstatus_fs = MSTATUS_FS;
+>   
+>       tmp = tcg_temp_new();
+> -    sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
+> -
+>       tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+>       tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+>       tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> -
+> -    if (ctx->virt_enabled) {
+> -        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+> -        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+> -        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+> -    }
+>       tcg_temp_free(tmp);
+
+While it works, it would be nicer to keep these two cases as similar as possible.
+
+
+r~
 
