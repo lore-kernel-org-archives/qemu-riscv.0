@@ -1,93 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mSEKv-0001se-37
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Sep 2021 04:07:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48296)
+	id 1mSV7P-0002vR-OL
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Sep 2021 22:02:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39900)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mSEKs-0001oh-EB
- for qemu-riscv@nongnu.org; Mon, 20 Sep 2021 04:07:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:49676)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mSEKh-0001xu-QR
- for qemu-riscv@nongnu.org; Mon, 20 Sep 2021 04:07:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1632125242;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rtO5Cc7nMvVdMccZIAGhQ9tg+nuOaYMqqS8eg/50JGc=;
- b=X5A7vlyw1eb2Lx0wXg5wlmsX/U7+WV4NFUzZ+sYgWlkpnv1C5eFMAFs/bQTO7KjhfTOuoA
- mMTRkQXxdOpBhVdTvreV/Vk64Syhw8iUN5qO3yIr1QUuVMXzy0O6+QTyCc6Fgy1944vsvS
- VjIMwExBxcJDTuejxZlNO+qB0GpyDaE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-316-9frtBPIEM16PHfPmyugZ6g-1; Mon, 20 Sep 2021 04:07:21 -0400
-X-MC-Unique: 9frtBPIEM16PHfPmyugZ6g-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7C74E1084685;
- Mon, 20 Sep 2021 08:07:17 +0000 (UTC)
-Received: from blackfin.pond.sub.org (ovpn-112-14.ams2.redhat.com
- [10.36.112.14])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6C1165D9DC;
- Mon, 20 Sep 2021 08:06:37 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0300E113865F; Mon, 20 Sep 2021 10:06:36 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
-Cc: qemu-devel@nongnu.org,  Greg Kurz <groug@kaod.org>,  Bin Meng
- <bin.meng@windriver.com>,  Yoshinori Sato <ysato@users.sourceforge.jp>,
- Stafford Horne <shorne@gmail.com>,  Cornelia Huck <cohuck@redhat.com>,
- David Hildenbrand <david@redhat.com>,  "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>,  Jiaxun Yang <jiaxun.yang@flygoat.com>,  Peter
- Xu <peterx@redhat.com>,  Christian Borntraeger <borntraeger@de.ibm.com>,
- qemu-ppc@nongnu.org,  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Paolo Bonzini <pbonzini@redhat.com>,  qemu-arm@nongnu.org,  Michael
- Rolnik <mrolnik@gmail.com>,  Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,  Alistair Francis
- <alistair.francis@wdc.com>,  Halil Pasic <pasic@linux.ibm.com>,  Taylor
- Simpson <tsimpson@quicinc.com>,  Gerd Hoffmann <kraxel@redhat.com>,
- qemu-riscv@nongnu.org,  Max Filippov <jcmvbkbc@gmail.com>,  Yuval Shaia
- <yuval.shaia.ml@gmail.com>,  Bastian Koppelmann
- <kbastian@mail.uni-paderborn.de>,  Artyom Tarasenko <atar4qemu@gmail.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,  Thomas Huth
- <thuth@redhat.com>,  Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- David Gibson <david@gibson.dropbear.id.au>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>,  Laurent Vivier <laurent@vivier.eu>,  "Dr.
- David Alan Gilbert" <dgilbert@redhat.com>,  Eduardo Habkost
- <ehabkost@redhat.com>,  Marek Vasut <marex@denx.de>,  Aurelien Jarno
- <aurelien@aurel32.net>,  qemu-s390x@nongnu.org,  Laurent Vivier
- <lvivier@redhat.com>,  Eric Blake <eblake@redhat.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Chris Wulff <crwulff@gmail.com>
-Subject: Re: [PATCH v2 05/53] docs/devel: document expectations for HMP
- commands in the future
-References: <20210914142042.1655100-1-berrange@redhat.com>
- <20210914142042.1655100-6-berrange@redhat.com>
-Date: Mon, 20 Sep 2021 10:06:35 +0200
-In-Reply-To: <20210914142042.1655100-6-berrange@redhat.com> ("Daniel
- P. =?utf-8?Q?Berrang=C3=A9=22's?= message of "Tue, 14 Sep 2021 15:19:54
- +0100")
-Message-ID: <87pmt33c38.fsf@dusky.pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mSV7O-0002vC-D9
+ for qemu-riscv@nongnu.org; Mon, 20 Sep 2021 22:02:46 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e]:44910)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mSV7M-0007dO-GB
+ for qemu-riscv@nongnu.org; Mon, 20 Sep 2021 22:02:45 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ nn5-20020a17090b38c500b0019af1c4b31fso1374085pjb.3
+ for <qemu-riscv@nongnu.org>; Mon, 20 Sep 2021 19:02:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=dVMXzPwOyaeaAttXl7zgflq14txZYmFH/rS+ZOzgO9Y=;
+ b=FOlB+SXwv86iX4tBKivElntaDSLhTy9ozudZu5BfmrLPDgHkbBnDvFYSxjhCopVjFG
+ Y1Tiu8jF2U67qckXVmUPavzAVlbL0ssn1zzyEXRvVl98N8/lvp3LIacXzelnC+nSc6im
+ toc2wCNG93Vud87BWRnfWJDDdQZHy9DccdAoQPk2+AVPElKR308xJ9KHfP52XWiZ1e/D
+ bYMtAAaCyfUpWWPg8/PQL9nT4Hkfo0D79L2abCfU0/pIeCD6ecJ+IAKs77kFa+TqpIYs
+ bLFiIqVl9fD5bqCwGX9h5KPaboj2DtwV/v8GzJGmN7TSjLUHDtpb9VFU1Vhl7kipEtwN
+ 9jQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=dVMXzPwOyaeaAttXl7zgflq14txZYmFH/rS+ZOzgO9Y=;
+ b=TWl8x6Uf6cAmrgNKH2uvyTLzwDkIveZ4YRM+hPvgrwv85CFY0JsAUEDJAHBtSTru65
+ qULERFaXjbRWAo8prHMfxjKFHMKZx3WYL3VNG49AhCSrh0nu+eGKtd5vtEX86HL9tb7B
+ NGKkYSMyEhxAxQR8qgjQoOqBL4jvaG98eI48RfZ3n+PlaTXJ5XQ277Pcrwwy9YJGeaA4
+ E2hKqzFq6MB72Gv6oQ3ig9vwTTJY692QVYfUbYbU6ntqqhkGCVJcyjBJt6De2lMv9V/e
+ UDzg6H8Zq+M6C3R9n/wsN6ZDH8xvLcoqFusvnaR41GrAeCN2Wng1W5+HsCgDg2/lTt/d
+ B80Q==
+X-Gm-Message-State: AOAM532hg+BBCoazaSNNpzwwMLaZeHRkRQMlVN0muJG6I8RztuqQJlMi
+ XxCBgBtQI5sB7tpJRfnJHEsw7Q==
+X-Google-Smtp-Source: ABdhPJwB2sxFQCX/Ig63IozjYlLfkSc5rfPc9f+b1o1ExGh8rWKWZdk/htQIUI9Ni2pc/YhuJqHEdA==
+X-Received: by 2002:a17:90a:7e90:: with SMTP id
+ j16mr2327075pjl.139.1632189761279; 
+ Mon, 20 Sep 2021 19:02:41 -0700 (PDT)
+Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
+ [123.193.74.252])
+ by smtp.gmail.com with ESMTPSA id t14sm16264645pga.62.2021.09.20.19.02.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Sep 2021 19:02:40 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>,
+ Vincent Chen <vincent.chen@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v3] target/riscv: Set mstatus_hs.[SD|FS] bits if Clean and V=1
+ in mark_fs_dirty()
+Date: Tue, 21 Sep 2021 10:02:33 +0800
+Message-Id: <20210921020234.123448-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.476,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102e.google.com
+X-Spam_score_int: -1
+X-Spam_score: -0.2
+X-Spam_bar: /
+X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -100,75 +82,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2021 08:07:36 -0000
+X-List-Received-Date: Tue, 21 Sep 2021 02:02:46 -0000
 
-Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
+From: Frank Chang <frank.chang@sifive.com>
 
-> We no longer wish to have commands implemented in HMP only. All commands
-> should start with a QMP implementation and the HMP merely be a shim
-> around this. To reduce the burden of implementing QMP commands where
-> there is low expectation of machine usage, requirements for QAPI
-> modelling are relaxed provided the command is under the "x-" name
-> prefix.
->
-> Signed-off-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
-> ---
->  docs/devel/writing-monitor-commands.rst | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->
-> diff --git a/docs/devel/writing-monitor-commands.rst b/docs/devel/writing=
--monitor-commands.rst
-> index 4cf51ab557..983130a793 100644
-> --- a/docs/devel/writing-monitor-commands.rst
-> +++ b/docs/devel/writing-monitor-commands.rst
-> @@ -11,6 +11,16 @@ For an in-depth introduction to the QAPI framework, pl=
-ease refer to
->  docs/devel/qapi-code-gen.txt. For documentation about the QMP protocol,
->  start with docs/interop/qmp-intro.txt.
-> =20
-> +Historically QEMU has permitted new monitor commands to be implemented i=
-n HMP
-> +only, QMP only, or both, depending on whether they needed to be accessib=
-le to
-> +human operators, machines, or both. When both QMP and HMP are implemente=
-d it
-> +is expected the HMP implementation is a shim around the QMP implementati=
-on.
-> +Going forward, the expectation is that new commands are implemented in Q=
-MP
-> +only, or both QMP and HMP. No further commands are to be added to HMP on=
-ly.
-> +The long term goal is that all HMP commands will be implemented in terms=
- of
-> +their QMP equivalent, enabling internals of QEMU to be fully isolated fr=
-om
+When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
+Modifying the floating-point state when V=1 causes both fields to
+be set to 3 (Dirty).
 
-This feels a bit too tight.  Most HMP commands are going to wrap around
-their equivalent QMP command.  However, high-level HMP commands built
-from low-level QMP building blocks remain permissble.
+However, it's possible that HS-level sstatus.FS is Clean and VS-level
+vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
+We can't early return for this case because we still need to set
+sstatus.FS to Dirty according to spec.
 
-> +the HMP implementation. Refer to the later topic on modelling data in QA=
-PI
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
+Tested-by: Vincent Chen <vincent.chen@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu.h       |  4 ++++
+ target/riscv/translate.c | 30 +++++++++++++++++-------------
+ 2 files changed, 21 insertions(+), 13 deletions(-)
 
-Suggest to use the exact section name for easy searching, or even
-better, make it a link.
-
-> +for further guidance on commands that would have traditionally been HMP =
-only.
-> =20
->  Overview
->  --------
-
-Discussing history is quite valuable in commit messages, but less so in
-a "how to do stuff" document.  Consider cutting this down some.  What
-about:
-
-    New commands may be implemented in QMP only.  New HMP commands should b=
-e
-    implemented on top of QMP.  The typical HMP command wraps around an
-    equivalent QMP command, but HMP convenience commands built from QMP
-    building blocks are also fine.  The long term goal is to make all
-    existing HMP commands conform to this, to fully isolate HMP from the
-    internals of QEMU.
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index e735e53e26c..bef7c551646 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -394,6 +394,7 @@ FIELD(TB_FLAGS, SEW, 5, 3)
+ FIELD(TB_FLAGS, VILL, 8, 1)
+ /* Is a Hypervisor instruction load/store allowed? */
+ FIELD(TB_FLAGS, HLSX, 9, 1)
++FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
+ 
+ bool riscv_cpu_is_32bit(CPURISCVState *env);
+ 
+@@ -450,6 +451,9 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+                 get_field(env->hstatus, HSTATUS_HU))) {
+             flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
+         }
++
++        flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
++                           get_field(env->mstatus_hs, MSTATUS_FS));
+     }
+ #endif
+ 
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 74b33fa3c90..6be22347426 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -58,6 +58,7 @@ typedef struct DisasContext {
+     target_ulong misa;
+     uint32_t opcode;
+     uint32_t mstatus_fs;
++    uint32_t mstatus_hs_fs;
+     uint32_t mem_idx;
+     /* Remember the rounding mode encoded in the previous fp instruction,
+        which we have already installed into env->fp_status.  Or -1 for
+@@ -280,27 +281,29 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ static void mark_fs_dirty(DisasContext *ctx)
+ {
+     TCGv tmp;
+-    target_ulong sd;
++    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
+ 
+-    if (ctx->mstatus_fs == MSTATUS_FS) {
+-        return;
+-    }
+-    /* Remember the state change for the rest of the TB.  */
+-    ctx->mstatus_fs = MSTATUS_FS;
++    if (ctx->mstatus_fs != MSTATUS_FS) {
++        /* Remember the state change for the rest of the TB. */
++        ctx->mstatus_fs = MSTATUS_FS;
+ 
+-    tmp = tcg_temp_new();
+-    sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
++        tmp = tcg_temp_new();
++        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
++        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
++        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
++        tcg_temp_free(tmp);
++    }
+ 
+-    tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+-    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+-    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
++    if (ctx->virt_enabled && ctx->mstatus_hs_fs != MSTATUS_FS) {
++        /* Remember the stage change for the rest of the TB. */
++        ctx->mstatus_hs_fs = MSTATUS_FS;
+ 
+-    if (ctx->virt_enabled) {
++        tmp = tcg_temp_new();
+         tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+         tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+         tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
++        tcg_temp_free(tmp);
+     }
+-    tcg_temp_free(tmp);
+ }
+ #else
+ static inline void mark_fs_dirty(DisasContext *ctx) { }
+@@ -533,6 +536,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->frm = -1;  /* unknown rounding mode */
+     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+     ctx->vlen = cpu->cfg.vlen;
++    ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
+     ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
+     ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
+     ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+-- 
+2.25.1
 
 
