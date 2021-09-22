@@ -1,94 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT6N7-0004kw-Oh
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 13:49:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38468)
+	id 1mT6OB-0006Nh-E8
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 13:50:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38714)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1mT6N5-0004jU-K5
- for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:49:28 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:43349)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mT6O8-0006MP-0l
+ for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:50:32 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38505)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <david@redhat.com>) id 1mT6N2-0006Y6-9M
- for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:49:27 -0400
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mT6O5-0007QF-EV
+ for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:50:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1632332963;
+ s=mimecast20190719; t=1632333028;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=8R2eWgo3mCPiEWKHImVoU3s0Qt0O78iy+gHqpXKDMHg=;
- b=Ag07l4jLOAcBPXgy08f5PMjSH8BISpFcZxHWZ3NGnZCCw7EE04gLvZDd+bE4A/TshlKUM5
- Y6Z3qfmDFq7fmG6SXXJthZfZldme8mgOvhqpi/w/LyrcsIdAnS4XuiDMVtKiCYaiwv7yB5
- 0Yum6r0WiiSNefvjClMXaBHTJ4Ou5Ec=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-589-ZI_SyD33PVeoNjth_Q2MMA-1; Wed, 22 Sep 2021 13:49:22 -0400
-X-MC-Unique: ZI_SyD33PVeoNjth_Q2MMA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- u10-20020adfae4a000000b0016022cb0d2bso2839557wrd.19
- for <qemu-riscv@nongnu.org>; Wed, 22 Sep 2021 10:49:22 -0700 (PDT)
+ bh=324sILhdYxvnznF1+1US9ZnfMNECSzr9WbsW6XTulSY=;
+ b=E8n8ZbaW45XShjIhrUOs3CPPG5KGfBn/cqikXFx/c+QJOzSkZ5DeFKx98tfBhyGzil9Lbz
+ MBpIw5rRRYw7I5H3q/gW6yb/tA5F3xey/sFYq+ov5+/AhULIRPIIvnavV84fDYB4ghNWMa
+ yopUA6OjsQfqVBv2klDEIW6l7jH4xSE=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-166-z2ZU0qcMM-CbRS1_9_RUcQ-1; Wed, 22 Sep 2021 13:50:26 -0400
+X-MC-Unique: z2ZU0qcMM-CbRS1_9_RUcQ-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ h5-20020a5d6885000000b0015e21e37523so2861739wru.10
+ for <qemu-riscv@nongnu.org>; Wed, 22 Sep 2021 10:50:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:organization
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=8R2eWgo3mCPiEWKHImVoU3s0Qt0O78iy+gHqpXKDMHg=;
- b=hfP+bMst7nsU85MYvyFSXdxFspm3T78LnGv4H4tYK95REEjEw4AkiOuDahebQawrSr
- utkLTv4zIdq/ZkuSzsbs9NQbgL1N5pdFIe9fSCh7IPUF270B9ObVugEP9RHi+rgv2BKs
- 2O1CWiozS0nCWxx4FW76Nr0iXdY9YZKE1oqJutPPVR2eWBerRkpbQFB2CB2b4SVjxAoB
- 9vL7KLnNmuuL0FW23rjz8eMNP9rnniYAa1L1QJ/miPLqi6uf0iGaWYjaiJFxGUdUtugj
- RfZssUgLKBsncgIK566W+K3ImMxzVlhh9fDls9Ksyyvv+BHistdlkXQVH+yvhGqivBo2
- PJvA==
-X-Gm-Message-State: AOAM533a47RPwXGeIkaULig0PWa7zLiar3Gb2tRhNubH6PBQQj6hgy4i
- Va5l8SwLOpR1XQ9PNSvMP4aUUK3AhJLM4zklxlEaOYs2ooUVSAoJRsTuwo6woD5qbQQm7PJS3wn
- iJ2FpR4xXcrPiizU=
-X-Received: by 2002:a05:6000:1844:: with SMTP id
- c4mr187158wri.355.1632332961361; 
- Wed, 22 Sep 2021 10:49:21 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwDZycGgzlG5PLVo/6Isj0bTJcO/O5J4WdjAYiBchkHxW5ecBClNDAyi9t+1qZPrUoaXfO12g==
-X-Received: by 2002:a05:6000:1844:: with SMTP id
- c4mr187105wri.355.1632332961083; 
- Wed, 22 Sep 2021 10:49:21 -0700 (PDT)
-Received: from [192.168.3.132] (p5b0c64dd.dip0.t-ipconnect.de. [91.12.100.221])
- by smtp.gmail.com with ESMTPSA id m4sm3482985wrx.81.2021.09.22.10.49.19
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=324sILhdYxvnznF1+1US9ZnfMNECSzr9WbsW6XTulSY=;
+ b=wRFI+oSG20oZkAg419kNtqgr5k3yb3T/+89g9y4FzG4ZXPsHS4vxJp+3W1EjJHq6TB
+ OOw7f7SEeqYNFtValChRS47yI2PA8JWknD1EMy++1hbmSlPBMPlF2TTKjjk673iz/ww9
+ pJFCDG7BqhHY5AszbQucrulHv8lGKFUPHvBO14xv6AvqLRrTJryGOiBlpjGmShRShPTn
+ K5q7C/GFZ2ksV692X3OM35KR7/xOnWmqJ88rs42FCNcYX5QOOoL/+a0P9qIPXXpSmp8Z
+ aqljuXaTEv7P98jfBAjYIPpiuriiZKdpx2koUcwx+tVLLgfizc23tsOKIiKnvvIHPdnl
+ reaw==
+X-Gm-Message-State: AOAM5313nXn7AlhejZ9NEVnklfk4n6ogQXiAmV7ak05UCNqpwBXMi5PM
+ shbnHSzjkpTC0CELk+mFWZXgHt+6xItSxaxiGBF5qtuibRKU8Pp4Va8Dau5tgcnA2wnjXx94ec7
+ aQY50ifqXlYWg5wY=
+X-Received: by 2002:adf:d084:: with SMTP id y4mr217238wrh.249.1632333025507;
+ Wed, 22 Sep 2021 10:50:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxkTAxtj4TUqlJA16lEOK2zxOqi0Lnhv+gZIrdsyM50ICcEZWWLl648/QwzUYzfSBk/7cFBmA==
+X-Received: by 2002:adf:d084:: with SMTP id y4mr217213wrh.249.1632333025297;
+ Wed, 22 Sep 2021 10:50:25 -0700 (PDT)
+Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
+ [83.35.24.118])
+ by smtp.gmail.com with ESMTPSA id g205sm2940929wmg.18.2021.09.22.10.50.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Sep 2021 10:49:20 -0700 (PDT)
-Subject: Re: [RFC PATCH v2 11/16] softmmu/memory: add
- memory_region_try_add_subregion function
-To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <ani@anisinha.ca>, Gerd Hoffmann <kraxel@redhat.com>,
- Eric Auger <eric.auger@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
- Peter Xu <peterx@redhat.com>, "Dr. David Alan Gilbert"
- <dgilbert@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Eric Blake <eblake@redhat.com>, qemu-riscv@nongnu.org,
- xen-devel@lists.xenproject.org, mark.burton@greensocs.com,
- mirela.grujic@greensocs.com, edgari@xilinx.com,
- Peter Maydell <peter.maydell@linaro.org>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <20210922161405.140018-12-damien.hedde@greensocs.com>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-Message-ID: <8ff0d8c9-94f1-cc21-a9f9-bb5fcd1cc3e7@redhat.com>
-Date: Wed, 22 Sep 2021 19:49:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ Wed, 22 Sep 2021 10:50:24 -0700 (PDT)
+Message-ID: <a4debda9-f00b-dc99-7e7c-37ea9b4d7b5c@redhat.com>
+Date: Wed, 22 Sep 2021 19:50:22 +0200
 MIME-Version: 1.0
-In-Reply-To: <20210922161405.140018-12-damien.hedde@greensocs.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Subject: Re: [RFC PATCH v2 00/16] Initial support for machine creation via QMP
+To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Peter Xu <peterx@redhat.com>, mirela.grujic@greensocs.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
+ Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
+ Markus Armbruster <armbru@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
+ <berrange@redhat.com>, mark.burton@greensocs.com, edgari@xilinx.com,
+ Igor Mammedov <imammedo@redhat.com>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=david@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
@@ -109,120 +105,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 17:49:28 -0000
+X-List-Received-Date: Wed, 22 Sep 2021 17:50:32 -0000
 
-On 22.09.21 18:14, Damien Hedde wrote:
-> It allows to try to add a subregion to a memory region with error
-> handling. Like memory_region_add_subregion_overlap, it handles
-> priority as well.
-> Apart the error handling, the behavior is the same. It can be used
-> to do the simple memory_region_add_subregion() (with no overlap) by
-> setting the priority parameter to 0.
-> 
-> This commit is a preparation to further use this function in the
-> context of qmp command which needs error handling support.
-> 
-> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
-> ---
-> 
-> Adding a new function is obviously not ideal. But there is ~900
-> occurrences of memory_region_add_subregion[_overlap] calls in the code
-> base. We do not really see an alternative here.
-> ---
->   include/exec/memory.h | 22 ++++++++++++++++++++++
->   softmmu/memory.c      | 22 ++++++++++++++--------
->   2 files changed, 36 insertions(+), 8 deletions(-)
-> 
-> diff --git a/include/exec/memory.h b/include/exec/memory.h
-> index c3d417d317..422e1eda67 100644
-> --- a/include/exec/memory.h
-> +++ b/include/exec/memory.h
-> @@ -2162,6 +2162,28 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
->                                            MemoryRegion *subregion,
->                                            int priority);
->   
-> +/**
-> + * memory_region_try_add_subregion: Add a subregion to a container
-> + *                                  with error handling.
-> + *
-> + * Behaves like memory_region_add_subregion_overlap(), but errors are
-> + * reported if the subregion cannot be added.
-> + *
-> + * @mr: the region to contain the new subregion; must be a container
-> + *      initialized with memory_region_init().
-> + * @offset: the offset relative to @mr where @subregion is added.
-> + * @subregion: the subregion to be added.
-> + * @priority: used for resolving overlaps; highest priority wins.
-> + * @errp: pointer to Error*, to store an error if it happens.
-> + *
-> + * Returns: True in case of success, false otherwise.
-> + */
-> +bool memory_region_try_add_subregion(MemoryRegion *mr,
-> +                                     hwaddr offset,
-> +                                     MemoryRegion *subregion,
-> +                                     int priority,
-> +                                     Error **errp);
-> +
->   /**
->    * memory_region_get_ram_addr: Get the ram address associated with a memory
->    *                             region
-> diff --git a/softmmu/memory.c b/softmmu/memory.c
-> index bfedaf9c4d..eac61f8236 100644
-> --- a/softmmu/memory.c
-> +++ b/softmmu/memory.c
-> @@ -2513,22 +2513,28 @@ done:
->       memory_region_transaction_commit();
->   }
->   
-> -static void memory_region_add_subregion_common(MemoryRegion *mr,
-> -                                               hwaddr offset,
-> -                                               MemoryRegion *subregion)
-> +bool memory_region_try_add_subregion(MemoryRegion *mr,
-> +                                     hwaddr offset,
-> +                                     MemoryRegion *subregion,
-> +                                     int priority,
-> +                                     Error **errp)
->   {
-> -    assert(!subregion->container);
-> +    if (subregion->container) {
-> +        error_setg(errp, "The memory region is already in another region");
-> +        return false;
-> +    }
-> +    subregion->priority = priority;
->       subregion->container = mr;
->       subregion->addr = offset;
->       memory_region_update_container_subregions(subregion);
-> +    return true;
->   }
->   
->   void memory_region_add_subregion(MemoryRegion *mr,
->                                    hwaddr offset,
->                                    MemoryRegion *subregion)
->   {
-> -    subregion->priority = 0;
-> -    memory_region_add_subregion_common(mr, offset, subregion);
-> +    memory_region_try_add_subregion(mr, offset, subregion, 0, &error_abort);
->   }
->   
->   void memory_region_add_subregion_overlap(MemoryRegion *mr,
-> @@ -2536,8 +2542,8 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
->                                            MemoryRegion *subregion,
->                                            int priority)
->   {
-> -    subregion->priority = priority;
-> -    memory_region_add_subregion_common(mr, offset, subregion);
-> +    memory_region_try_add_subregion(mr, offset, subregion, priority,
-> +                                    &error_abort);
->   }
->   
->   void memory_region_del_subregion(MemoryRegion *mr,
-> 
+Hi Damien,
 
-Reviewed-by: David Hildenbrand <david@redhat.com>
+On 9/22/21 18:13, Damien Hedde wrote:
+> 
+> The goal of this work is to bring dynamic machine creation to QEMU:
+> we want to setup a machine without compiling a specific machine C
+> code. It would ease supporting highly configurable platforms (for
+> example resulting from an automated design flow). The requirements
+> for such configuration include begin able to specify the number of
+> cores, available peripherals, emmory mapping, IRQ mapping, etc.
+> 
+> This series focuses on the first step: populating a machine with
+> devices during its creation. We propose patches to support this
+> using QMP commands. This is a working set of patches and improves
+> over the earlier rfc (posted in May):
+> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html
 
--- 
-Thanks,
+Do you have a roadmap for the following steps? Or are you done with
+this series?
 
-David / dhildenb
+Yesterday I was thinking about this, and one thing I was wondering is
+if it would be possible to have DeviceClass and MachineClass implement
+a populate_fdt() handler, to automatically generate custom DTB for these
+custom machines.
+
+Maybe in your case you don't need that, as your framework generating the
+QEMU machine also generates the DTB, or even parse a DTB to generate the
+machine... :)
+
+Regards,
+
+Phil.
 
 
