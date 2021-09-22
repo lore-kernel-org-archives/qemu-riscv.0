@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT4ue-0002vA-Bb
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44568)
+	id 1mT4ug-000332-AE
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44676)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4uX-0002Zh-24; Wed, 22 Sep 2021 12:15:53 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:38906)
+ id 1mT4ue-0002xf-Tq; Wed, 22 Sep 2021 12:16:00 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:39108)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4uV-0005I8-2n; Wed, 22 Sep 2021 12:15:52 -0400
+ id 1mT4uc-0005O0-1i; Wed, 22 Sep 2021 12:16:00 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 52F9C21EBA;
- Wed, 22 Sep 2021 16:15:47 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 615DE21EC9;
+ Wed, 22 Sep 2021 16:15:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1632327348;
+ s=mail; t=1632327354;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DGnYGLYTZlt4UtXZbiZtPB9v0oVww6LTMwGhigIhC4w=;
- b=UPbC1fzbJrfdLTp7ZSQj2uQcWDXflOXpR/G4vVRGW9kdVFULzUF67xhe1kfuNYSz/JpOy1
- wbygKgvKMOyqx7pbbTbb6Y8z+9IiPW9zihN9nMV81AsEGbTgqsQrzORivur2m5ElixWh2H
- hKLkReYRjURA8IUJP7ZqkVTFDvxTEQs=
+ bh=PDCjVxFBi4vz75aeR9pd9AbmoW6STuPuMbNBE/FSM7I=;
+ b=ICuAAVCXm0R5uk9SjJ8PoZaJwYoy4CElxlYLonWdbRGOal6uenKQyWFhRGYtaMcpNGrB6U
+ a6eNGZVWTngTm/nJTjQ651qUUGJcEfSF62QKzWyQ8J+LWw+rY7XTtY9hl/Kg9JWezPiQT2
+ mj0ltS02PcDOghYVnG1qEo0ZJHBn8H4=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -41,9 +41,10 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
  qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org,
  mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com,
  Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 03/16] qapi: Implement x-machine-init QMP command
-Date: Wed, 22 Sep 2021 18:13:52 +0200
-Message-Id: <20210922161405.140018-4-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 09/16] hw/core/machine: Remove the dynamic sysbus
+ devices type check
+Date: Wed, 22 Sep 2021 18:13:58 +0200
+Message-Id: <20210922161405.140018-10-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -70,106 +71,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 16:15:54 -0000
+X-List-Received-Date: Wed, 22 Sep 2021 16:16:01 -0000
 
-From: Mirela Grujic <mirela.grujic@greensocs.com>
+Now that we check sysbus device types during device creation, we
+can remove the check done in the machine init done notifier.
+This was the only thing done by this notifier, so we remove the
+whole sysbus_notifier structure of the MachineState.
 
-The x-machine-init QMP command is available only if the -preconfig option
-is used and the current machine initialization phase is accel-created.
+Note: This notifier was checking all /peripheral and /peripheral-anon
+sysbus devices. Now we only check those added by -device cli option or
+device_add qmp command when handling the command/option. So if there
+are some devices added in one of these containers manually (eg in
+machine C code), these will not be checked anymore.
+This use case does not seem to appear apart from
+hw/xen/xen-legacy-backend.c (it uses qdev_set_id() and in this case,
+not for a sysbus device, so it's ok).
 
-The command triggers QEMU to enter machine initialized phase and wait
-for the QMP configuration. In future commits, we will add the possiblity
-to create devices at this point.
-
-To exit the initialized phase use the x-exit-preconfig QMP command.
-
-Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
+Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- qapi/machine.json | 23 +++++++++++++++++++++++
- softmmu/vl.c      | 19 +++++++++++++++----
- 2 files changed, 38 insertions(+), 4 deletions(-)
+ include/hw/boards.h |  1 -
+ hw/core/machine.c   | 27 ---------------------------
+ 2 files changed, 28 deletions(-)
 
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 969d37fb03..56330c0e8e 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1368,3 +1368,26 @@
- ##
- { 'command': 'query-machine-phase', 'returns': 'MachineInitPhaseStatus',
-              'allow-preconfig': true }
-+
-+##
-+# @x-machine-init:
-+#
-+# Enter machine initialized phase
-+#
-+# Since: 6.2
-+#
-+# Returns: If successful, nothing
-+#
-+# Notes: This command will trigger QEMU to execute initialization steps
-+#        that are required to enter the machine initialized phase. The command
-+#        is available only if the -preconfig command line option was passed and
-+#        if the machine is currently in the accel-created phase. To exit the
-+#        machine initialized phase use the x-exit-preconfig command.
-+#
-+# Example:
-+#
-+# -> { "execute": "x-machine-init" }
-+# <- { "return": {} }
-+#
-+##
-+{ 'command': 'x-machine-init', 'allow-preconfig': true }
-diff --git a/softmmu/vl.c b/softmmu/vl.c
-index d2552ba8ac..84c5132ad7 100644
---- a/softmmu/vl.c
-+++ b/softmmu/vl.c
-@@ -123,6 +123,7 @@
- #include "qapi/qapi-visit-qom.h"
- #include "qapi/qapi-commands-ui.h"
- #include "qapi/qmp/qdict.h"
-+#include "qapi/qapi-commands-machine.h"
- #include "qapi/qmp/qerror.h"
- #include "sysemu/iothread.h"
- #include "qemu/guest-random.h"
-@@ -2610,10 +2611,16 @@ static void qemu_init_displays(void)
-     }
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 934443c1cd..ccbc40355a 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -311,7 +311,6 @@ typedef struct CpuTopology {
+ struct MachineState {
+     /*< private >*/
+     Object parent_obj;
+-    Notifier sysbus_notifier;
+ 
+     /*< public >*/
+ 
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 1a18912dc8..521438e90a 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -571,18 +571,6 @@ bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
+     return allowed;
  }
  
--static void qemu_init_board(void)
-+void qmp_x_machine_init(Error **errp)
+-static void validate_sysbus_device(SysBusDevice *sbdev, void *opaque)
+-{
+-    MachineState *machine = opaque;
+-    MachineClass *mc = MACHINE_GET_CLASS(machine);
+-
+-    if (!device_is_dynamic_sysbus(mc, DEVICE(sbdev))) {
+-        error_report("Option '-device %s' cannot be handled by this machine",
+-                     object_class_get_name(object_get_class(OBJECT(sbdev))));
+-        exit(1);
+-    }
+-}
+-
+ static char *machine_get_memdev(Object *obj, Error **errp)
  {
-     MachineClass *machine_class = MACHINE_GET_CLASS(current_machine);
+     MachineState *ms = MACHINE(obj);
+@@ -598,17 +586,6 @@ static void machine_set_memdev(Object *obj, const char *value, Error **errp)
+     ms->ram_memdev_id = g_strdup(value);
+ }
  
-+    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-+        error_setg(errp, "The command is permitted only before "
-+                         "the machine is initialized");
-+        return;
-+    }
-+
-     if (machine_class->default_ram_id && current_machine->ram_size &&
-         numa_uses_legacy_mem() && !current_machine->ram_memdev_id) {
-         create_default_memdev(current_machine, mem_path);
-@@ -2692,12 +2699,16 @@ static void qemu_machine_creation_done(void)
- 
- void qmp_x_exit_preconfig(Error **errp)
+-static void machine_init_notify(Notifier *notifier, void *data)
+-{
+-    MachineState *machine = MACHINE(qdev_get_machine());
+-
+-    /*
+-     * Loop through all dynamically created sysbus devices and check if they are
+-     * all allowed.  If a device is not allowed, error out.
+-     */
+-    foreach_dynamic_sysbus_device(validate_sysbus_device, machine);
+-}
+-
+ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
  {
--    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
--        error_setg(errp, "The command is permitted only before machine initialization");
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-+        error_setg(errp, "The command is permitted only before "
-+                         "the machine is ready");
-         return;
+     int i;
+@@ -1030,10 +1007,6 @@ static void machine_initfn(Object *obj)
+                                         "Table (HMAT)");
      }
  
--    qemu_init_board();
-+    if (!phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-+        qmp_x_machine_init(errp);
-+    }
-+
-     qemu_create_cli_devices();
-     qemu_machine_creation_done();
- 
+-    /* Register notifier when init is done for sysbus sanity checks */
+-    ms->sysbus_notifier.notify = machine_init_notify;
+-    qemu_add_machine_init_done_notifier(&ms->sysbus_notifier);
+-
+     /* default to mc->default_cpus */
+     ms->smp.cpus = mc->default_cpus;
+     ms->smp.max_cpus = mc->default_cpus;
 -- 
 2.33.0
 
