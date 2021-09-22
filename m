@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT4vG-0003eG-Mp
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44816)
+	id 1mT4vA-0003Ut-1o
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44770)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4v5-0003Nt-Pn; Wed, 22 Sep 2021 12:16:27 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:39312)
+ id 1mT4v1-0003Id-H5; Wed, 22 Sep 2021 12:16:24 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:39206)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4v2-0005So-8d; Wed, 22 Sep 2021 12:16:27 -0400
+ id 1mT4uz-0005RD-LI; Wed, 22 Sep 2021 12:16:23 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 89D1B21ED5;
- Wed, 22 Sep 2021 16:16:01 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 29DC821ECF;
+ Wed, 22 Sep 2021 16:15:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1632327362;
+ s=mail; t=1632327359;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=V/wXO8Fw46s42gvXscl9fDzKCmjnZalAaCkoeLW9idc=;
- b=fzmPX4ObaVsIGjwR4GzoY/SbGumd3hE8zzTj5wQNt93NX3hZr8kYnEk/i6a/ahRb3BcyzH
- r4OPUKes6fAREsZ6M/d6oRgJNM/rLp/UW1rGVvosF72Xhv4ZT3ZMvT7X96ovqsT8bIwjFg
- MzDwJiVoSLVcg/Nq1RzI5wAN8p9MecQ=
+ bh=YFwTgaEumzc2XGbjK4hpWpdj4pZUzdb1skxz4Vmg8i8=;
+ b=J+Wmqk4a8kuzHCMVCeIGgJjNaAhGIf80oYCh+/fvuoSlwd8WukKbcCqGi6wVcYUIS4uQKG
+ /a8dur7Nk0YA6/FfoYgSVEqf/P0POAC01x1RLhg1ZUWOh0CgUNQ4C0nG1dSJsSu+dGdi1N
+ f1rziCvvT/vfiWxVDVTEbOMcSei2Y0c=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -41,9 +41,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
  qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org,
  mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com,
  Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 15/16] hw/char/ibex_uart: set user_creatable
-Date: Wed, 22 Sep 2021 18:14:04 +0200
-Message-Id: <20210922161405.140018-16-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 12/16] add x-sysbus-mmio-map qmp command
+Date: Wed, 22 Sep 2021 18:14:01 +0200
+Message-Id: <20210922161405.140018-13-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -70,33 +70,127 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 16:16:28 -0000
+X-List-Received-Date: Wed, 22 Sep 2021 16:16:25 -0000
 
-This patch allows to create the device using device_add
-using -preconfig mode. This sysbus device still needs to
-be allowed by a machine to be created after preconfig is done.
+This command allows to map an mmio region of sysbus device onto
+the system memory. Its behavior mimics the sysbus_mmio_map()
+function apart from the automatic unmap (the C function unmaps
+the region if it is already mapped).
+For the qmp function we consider it is an error to try to map
+an already mapped function. If unmapping is required, it is
+probably better to add a sysbus-mmip-unmap function.
+
+This command is still experimental (hence the x prefix), as it
+is related to the sysbus device creation through qmp commands.
+
+In future, we expect to have to handle the overlap/priority
+parameter but also multiple mapping of one mmio. For some
+devices, one mmio is mapped several times at different addresses on
+the bus (which is not supported by sysbus_mmio_map() function and
+requires the use of memory region aliases).
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
 
-Depending on chosen condition for a device to be added, this commit
-may change.
----
- hw/char/ibex_uart.c | 1 +
- 1 file changed, 1 insertion(+)
+Note: this qmp command is required to be able to build a machine from
+scratch as there is no qmp-way of doing a memory mapping today.
 
-diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-index 9b0a817713..b1646422c0 100644
---- a/hw/char/ibex_uart.c
-+++ b/hw/char/ibex_uart.c
-@@ -546,6 +546,7 @@ static void ibex_uart_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
+We've added the command into qapi/qdev.json section. It does not seem to
+have any really adequate section yet. Any idea ? should we create for
+example a new one: qapi/sysbus.json or qapi/memory.json ?
+---
+ qapi/qdev.json   | 21 +++++++++++++++++++++
+ hw/core/sysbus.c | 41 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
+
+diff --git a/qapi/qdev.json b/qapi/qdev.json
+index ad669ae175..dfc1104197 100644
+--- a/qapi/qdev.json
++++ b/qapi/qdev.json
+@@ -125,3 +125,24 @@
+ ##
+ { 'event': 'DEVICE_DELETED',
+   'data': { '*device': 'str', 'path': 'str' } }
++
++##
++# @x-sysbus-mmio-map:
++#
++# Map a sysbus device mmio onto the main system bus.
++#
++# @device: the device's QOM path
++#
++# @mmio: The mmio number to be mapped (defaults to 0).
++#
++# @addr: The base address for the mapping.
++#
++# Since: 6.2
++#
++# Returns: Nothing on success
++#
++##
++
++{ 'command': 'x-sysbus-mmio-map',
++  'data': {'device': 'str', '*mmio': 'uint8', 'addr': 'uint64'},
++  'allow-preconfig' : true }
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index aaae8e23cc..b0891f37b6 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -23,6 +23,7 @@
+ #include "hw/sysbus.h"
+ #include "monitor/monitor.h"
+ #include "exec/address-spaces.h"
++#include "qapi/qapi-commands-qdev.h"
  
-+    dc->user_creatable = true;
-     dc->reset = ibex_uart_reset;
-     dc->realize = ibex_uart_realize;
-     dc->vmsd = &vmstate_ibex_uart;
+ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
+ static char *sysbus_get_fw_dev_path(DeviceState *dev);
+@@ -154,6 +155,46 @@ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
+     }
+ }
+ 
++void qmp_x_sysbus_mmio_map(const char *device, bool has_mmio, uint8_t mmio,
++                           uint64_t addr, Error **errp)
++{
++    Object *obj = object_resolve_path_type(device, TYPE_SYS_BUS_DEVICE, NULL);
++    SysBusDevice *dev;
++
++    if (phase_get() != MACHINE_INIT_PHASE_INITIALIZED) {
++        error_setg(errp, "The command is permitted only when "
++                         "the machine is in initialized phase");
++        return;
++    }
++
++    if (obj == NULL) {
++        error_setg(errp, "Device '%s' not found", device);
++        return;
++    }
++
++    dev = SYS_BUS_DEVICE(obj);
++    if (!has_mmio) {
++        mmio = 0;
++    }
++    if (mmio >= dev->num_mmio) {
++        error_setg(errp, "MMIO index '%u' is out of range", mmio);
++        return;
++    }
++
++    if (dev->mmio[mmio].addr != (hwaddr)-1) {
++        error_setg(errp, "MMIO index '%u' is already mapped", mmio);
++        return;
++    }
++
++    if (!memory_region_try_add_subregion(get_system_memory(), addr,
++                                         dev->mmio[mmio].memory, 0,
++                                         errp)) {
++        return;
++    }
++
++    dev->mmio[mmio].addr = addr;
++}
++
+ void sysbus_mmio_unmap(SysBusDevice *dev, int n)
+ {
+     assert(n >= 0 && n < dev->num_mmio);
 -- 
 2.33.0
 
