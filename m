@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT4vD-0003Ye-EY
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44688)
+	id 1mT4vE-0003Zf-5E
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:16:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44820)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4ug-00032v-84; Wed, 22 Sep 2021 12:16:02 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:39132)
+ id 1mT4v6-0003Qr-VU; Wed, 22 Sep 2021 12:16:28 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:39364)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4uc-0005OV-8A; Wed, 22 Sep 2021 12:16:01 -0400
+ id 1mT4v3-0005U5-O2; Wed, 22 Sep 2021 12:16:28 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 4E73021ECB;
- Wed, 22 Sep 2021 16:15:55 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 98B7F21ED8;
+ Wed, 22 Sep 2021 16:16:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1632327355;
+ s=mail; t=1632327363;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ow5aMrqN/i5D/dv1vm+J5tz7Z/sAyFJH5Io1/i7HEmw=;
- b=cHbJePzpcvHXQEkqOdmaeWcRNrJ837qUy9Smnwsf4FkYlw79QNCGGyVPvnpY0eWxfDYkrY
- Gcyfi8h/ljklnuDrFdhj+SC0Q9suuCMFH6X6PkgUXB/DYK4rXoUWqJXJJmrOrjy7EPcEAj
- CWsJ/7O0ROaTwhJk7Qw6cuIAJX3Xrb8=
+ bh=20eMulj3Qy/DZxWmekzYSt42bv07Z1NJC97opChMppc=;
+ b=0GTRQNrK+8eC4nSIBI1SyRdVgk/yz3AcWIgo1jZc+3/ixKzyuHi/rbXlOmb7SF5gwUT4je
+ Kafcyz3ZizvLJ94FKvPqVu6mxe7wLyPq9T2y/XORwkJswxh9nvcCQaC5xGv/EED3DiFvN+
+ S0CxATzuTlW34AF4O/BZxkpylFrb5Mg=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -41,10 +41,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
  qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org,
  mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com,
  Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 10/16] qdev-monitor: allow adding any sysbus device
- before machine is ready
-Date: Wed, 22 Sep 2021 18:13:59 +0200
-Message-Id: <20210922161405.140018-11-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 16/16] hw/intc/ibex_plic: set user_creatable
+Date: Wed, 22 Sep 2021 18:14:05 +0200
+Message-Id: <20210922161405.140018-17-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -71,43 +70,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 16:16:02 -0000
+X-List-Received-Date: Wed, 22 Sep 2021 16:16:30 -0000
 
-Skip the sysbus device type per-machine allow-list check before the
-MACHINE_INIT_PHASE_READY phase.
-
-This patch permits adding any sysbus device (it still needs to be
-user_creatable) when using the -preconfig experimental option.
+This patch allows to create the device using device_add
+using -preconfig mode. This sysbus device still needs to
+be allowed by a machine to be created after preconfig is done.
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
 
-This commit is RFC. Depending on the condition to allow a device
-to be added, it may change.
+Depending on chosen condition for a device to be added, this commit
+may change.
 ---
- softmmu/qdev-monitor.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ hw/intc/ibex_plic.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
-index f1c9242855..73b991adda 100644
---- a/softmmu/qdev-monitor.c
-+++ b/softmmu/qdev-monitor.c
-@@ -269,8 +269,13 @@ static DeviceClass *qdev_get_device_class(const char **driver, Error **errp)
-         return NULL;
-     }
+diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
+index edf76e4f61..8abd5ee613 100644
+--- a/hw/intc/ibex_plic.c
++++ b/hw/intc/ibex_plic.c
+@@ -291,6 +291,7 @@ static void ibex_plic_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
  
--    if (object_class_dynamic_cast(oc, TYPE_SYS_BUS_DEVICE)) {
--        /* sysbus devices need to be allowed by the machine */
-+    if (object_class_dynamic_cast(oc, TYPE_SYS_BUS_DEVICE) &&
-+        phase_check(MACHINE_INIT_PHASE_READY)) {
-+        /*
-+         * Sysbus devices need to be allowed by the machine.
-+         * We only check that after the machine is ready in order to let
-+         * us add any user_creatable sysbus device during machine creation.
-+         */
-         MachineClass *mc = MACHINE_CLASS(object_get_class(qdev_get_machine()));
-         if (!machine_class_is_dynamic_sysbus_dev_allowed(mc, *driver)) {
-             error_setg(errp, "'%s' is not an allowed pluggable sysbus device "
++    dc->user_creatable = true;
+     dc->reset = ibex_plic_reset;
+     device_class_set_props(dc, ibex_plic_properties);
+     dc->realize = ibex_plic_realize;
 -- 
 2.33.0
 
