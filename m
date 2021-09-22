@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT4ud-0002qJ-AX
+	id 1mT4ud-0002rl-HU
 	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 12:15:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44564)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44582)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4uX-0002Ze-0i; Wed, 22 Sep 2021 12:15:53 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:38880)
+ id 1mT4uY-0002d5-MI; Wed, 22 Sep 2021 12:15:54 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:38826)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mT4uU-0005Gn-MX; Wed, 22 Sep 2021 12:15:52 -0400
+ id 1mT4uT-0005G8-HT; Wed, 22 Sep 2021 12:15:54 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 6B2F521EB7;
- Wed, 22 Sep 2021 16:15:46 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id F3DEA21CC1;
+ Wed, 22 Sep 2021 16:15:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1632327347;
+ s=mail; t=1632327345;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=uO+rxeU8HZHEUI7sNPCnX4N20yxgThgHilFwN01tQgY=;
- b=4nwd0mKYOh88Bq4/k8c2ah+UaLuLdmXU2GInH88kJxYAg7EbL+YtSjZJK2c1dGQBJKmftg
- 4vAVxgxK4VmkfrqkOGJ0zDbZ2nOewcMfN23UNSDTJ+uvKx1YBbYpqTbVYD/e/IUguDE62+
- uTYcsOtlMDJL+LNvRXe+uEKGS6FD+Ew=
+ bh=VdnVuRz8orSzm80d4V6oo8FtHFI6VLNiM7CokKV1kg0=;
+ b=FUm2HUwzttyCZe+8dhBbh50LnWpTBgfyRBKEmQweI52IibjcVgDn4DK1o5YtxElR7pK3VG
+ FzivmPgZdVq7CIwOWz8C/0JHcJLoWkMZTuJkoIZq/q7EtIWQYR432EE+RLBVUQvkum1SsI
+ 7ZnOmjO/M8NkPARS4NSxeS/ky6/tWQE=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -41,9 +41,10 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
  qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org,
  mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com,
  Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 02/16] qapi: Implement query-machine-phase QMP command
-Date: Wed, 22 Sep 2021 18:13:51 +0200
-Message-Id: <20210922161405.140018-3-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 01/16] rename MachineInitPhase enum constants for QAPI
+ compatibility
+Date: Wed, 22 Sep 2021 18:13:50 +0200
+Message-Id: <20210922161405.140018-2-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -70,168 +71,265 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 16:15:54 -0000
+X-List-Received-Date: Wed, 22 Sep 2021 16:15:55 -0000
 
 From: Mirela Grujic <mirela.grujic@greensocs.com>
 
-The command returns current machine initialization phase.
-From now on, the MachineInitPhase enum is generated from the
-QAPI schema.
+This commit is a preparation to switch to a QAPI definition
+of the MachineInitPhase enum.
+
+QAPI will generate enumeration constants prefixed with the
+MACHINE_INIT_PHASE_, so rename values accordingly.
 
 Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
 ---
- qapi/machine.json          | 56 ++++++++++++++++++++++++++++++++++++++
- include/hw/qdev-core.h     | 30 ++------------------
- hw/core/machine-qmp-cmds.c |  9 ++++++
- hw/core/qdev.c             |  5 ++++
- 4 files changed, 72 insertions(+), 28 deletions(-)
+ include/hw/qdev-core.h     | 10 +++++-----
+ hw/core/machine-qmp-cmds.c |  2 +-
+ hw/core/machine.c          |  6 +++---
+ hw/core/qdev.c             |  2 +-
+ hw/pci/pci.c               |  2 +-
+ hw/usb/core.c              |  2 +-
+ hw/virtio/virtio-iommu.c   |  2 +-
+ monitor/hmp.c              |  2 +-
+ softmmu/qdev-monitor.c     |  9 +++++----
+ softmmu/vl.c               |  6 +++---
+ ui/console.c               |  3 ++-
+ 11 files changed, 24 insertions(+), 22 deletions(-)
 
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 157712f006..969d37fb03 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1312,3 +1312,59 @@
-      '*cores': 'int',
-      '*threads': 'int',
-      '*maxcpus': 'int' } }
-+
-+##
-+# @MachineInitPhase:
-+#
-+# Enumeration of machine initialization phases.
-+#
-+# @no-machine: machine does not exist
-+#
-+# @machine-created: machine is created, but its accelerator is not
-+#
-+# @accel-created: accelerator is created, but the machine properties have not
-+#                 been validated and machine initialization is not done yet
-+#
-+# @initialized: machine is initialized, thus creating any embedded devices and
-+#               validating machine properties. Devices created at this time are
-+#               considered to be cold-plugged.
-+#
-+# @ready: QEMU is ready to start CPUs and devices created at this time are
-+#         considered to be hot-plugged. The monitor is not restricted to
-+#         "preconfig" commands.
-+#
-+# Since: 6.2
-+##
-+{ 'enum': 'MachineInitPhase',
-+  'data': [ 'no-machine', 'machine-created', 'accel-created', 'initialized',
-+            'ready' ] }
-+
-+##
-+# @MachineInitPhaseStatus:
-+#
-+# Information about machine initialization phase
-+#
-+# @phase: the machine initialization phase
-+#
-+# Since: 6.2
-+##
-+{ 'struct': 'MachineInitPhaseStatus',
-+  'data': { 'phase': 'MachineInitPhase' } }
-+
-+##
-+# @query-machine-phase:
-+#
-+# Return machine initialization phase
-+#
-+# Since: 6.2
-+#
-+# Returns: MachineInitPhaseStatus
-+#
-+# Example:
-+#
-+# -> { "execute": "query-machine-phase" }
-+# <- { "return": { "phase": "initialized" } }
-+#
-+##
-+{ 'command': 'query-machine-phase', 'returns': 'MachineInitPhaseStatus',
-+             'allow-preconfig': true }
 diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index 859fd913bb..800eda8f54 100644
+index 34c8a7506a..859fd913bb 100644
 --- a/include/hw/qdev-core.h
 +++ b/include/hw/qdev-core.h
-@@ -1,6 +1,7 @@
- #ifndef QDEV_CORE_H
- #define QDEV_CORE_H
+@@ -841,30 +841,30 @@ bool qdev_should_hide_device(QemuOpts *opts);
  
-+#include "qapi/qapi-types-machine.h"
- #include "qemu/queue.h"
- #include "qemu/bitmap.h"
- #include "qemu/rcu.h"
-@@ -839,35 +840,8 @@ void device_listener_unregister(DeviceListener *listener);
-  */
- bool qdev_should_hide_device(QemuOpts *opts);
+ typedef enum MachineInitPhase {
+     /* current_machine is NULL.  */
+-    PHASE_NO_MACHINE,
++    MACHINE_INIT_PHASE_NO_MACHINE,
  
--typedef enum MachineInitPhase {
--    /* current_machine is NULL.  */
--    MACHINE_INIT_PHASE_NO_MACHINE,
--
--    /* current_machine is not NULL, but current_machine->accel is NULL.  */
--    MACHINE_INIT_PHASE_MACHINE_CREATED,
--
--    /*
--     * current_machine->accel is not NULL, but the machine properties have
--     * not been validated and machine_class->init has not yet been called.
--     */
--    MACHINE_INIT_PHASE_ACCEL_CREATED,
--
--    /*
--     * machine_class->init has been called, thus creating any embedded
--     * devices and validating machine properties.  Devices created at
--     * this time are considered to be cold-plugged.
--     */
--    MACHINE_INIT_PHASE_INITIALIZED,
--
--    /*
--     * QEMU is ready to start CPUs and devices created at this time
--     * are considered to be hot-plugged.  The monitor is not restricted
--     * to "preconfig" commands.
--     */
--    MACHINE_INIT_PHASE_READY,
--} MachineInitPhase;
--
+     /* current_machine is not NULL, but current_machine->accel is NULL.  */
+-    PHASE_MACHINE_CREATED,
++    MACHINE_INIT_PHASE_MACHINE_CREATED,
+ 
+     /*
+      * current_machine->accel is not NULL, but the machine properties have
+      * not been validated and machine_class->init has not yet been called.
+      */
+-    PHASE_ACCEL_CREATED,
++    MACHINE_INIT_PHASE_ACCEL_CREATED,
+ 
+     /*
+      * machine_class->init has been called, thus creating any embedded
+      * devices and validating machine properties.  Devices created at
+      * this time are considered to be cold-plugged.
+      */
+-    PHASE_MACHINE_INITIALIZED,
++    MACHINE_INIT_PHASE_INITIALIZED,
+ 
+     /*
+      * QEMU is ready to start CPUs and devices created at this time
+      * are considered to be hot-plugged.  The monitor is not restricted
+      * to "preconfig" commands.
+      */
+-    PHASE_MACHINE_READY,
++    MACHINE_INIT_PHASE_READY,
+ } MachineInitPhase;
+ 
  extern bool phase_check(MachineInitPhase phase);
- extern void phase_advance(MachineInitPhase phase);
-+extern MachineInitPhase phase_get(void);
- 
- #endif
 diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
-index 52168a3771..d3b9a04855 100644
+index 216fdfaf3a..52168a3771 100644
 --- a/hw/core/machine-qmp-cmds.c
 +++ b/hw/core/machine-qmp-cmds.c
-@@ -204,3 +204,12 @@ MemdevList *qmp_query_memdev(Error **errp)
-     object_child_foreach(obj, query_memdev, &list);
-     return list;
- }
-+
-+MachineInitPhaseStatus *qmp_query_machine_phase(Error **errp)
-+{
-+    MachineInitPhaseStatus *status = g_malloc0(sizeof(*status));
-+
-+    status->phase = phase_get();
-+
-+    return status;
-+}
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index c5fc704f55..d83f1c029a 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -1150,6 +1150,11 @@ void phase_advance(MachineInitPhase phase)
-     machine_phase = phase;
+@@ -147,7 +147,7 @@ HotpluggableCPUList *qmp_query_hotpluggable_cpus(Error **errp)
+ 
+ void qmp_set_numa_node(NumaOptions *cmd, Error **errp)
+ {
+-    if (phase_check(PHASE_MACHINE_INITIALIZED)) {
++    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
+         error_setg(errp, "The command is permitted only before the machine has been created");
+         return;
+     }
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 067f42b528..9125c9aad0 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -1274,7 +1274,7 @@ void machine_run_board_init(MachineState *machine)
+ 
+     accel_init_interfaces(ACCEL_GET_CLASS(machine->accelerator));
+     machine_class->init(machine);
+-    phase_advance(PHASE_MACHINE_INITIALIZED);
++    phase_advance(MACHINE_INIT_PHASE_INITIALIZED);
  }
  
-+MachineInitPhase phase_get(void)
-+{
-+    return machine_phase;
-+}
-+
- static const TypeInfo device_type_info = {
-     .name = TYPE_DEVICE,
-     .parent = TYPE_OBJECT,
+ static NotifierList machine_init_done_notifiers =
+@@ -1283,7 +1283,7 @@ static NotifierList machine_init_done_notifiers =
+ void qemu_add_machine_init_done_notifier(Notifier *notify)
+ {
+     notifier_list_add(&machine_init_done_notifiers, notify);
+-    if (phase_check(PHASE_MACHINE_READY)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY)) {
+         notify->notify(notify, NULL);
+     }
+ }
+@@ -1306,7 +1306,7 @@ void qdev_machine_creation_done(void)
+      * ok, initial machine setup is done, starting from now we can
+      * only create hotpluggable devices
+      */
+-    phase_advance(PHASE_MACHINE_READY);
++    phase_advance(MACHINE_INIT_PHASE_READY);
+     qdev_assert_realized_properly();
+ 
+     /* TODO: once all bus devices are qdevified, this should be done
+diff --git a/hw/core/qdev.c b/hw/core/qdev.c
+index cefc5eaa0a..c5fc704f55 100644
+--- a/hw/core/qdev.c
++++ b/hw/core/qdev.c
+@@ -904,7 +904,7 @@ static void device_initfn(Object *obj)
+ {
+     DeviceState *dev = DEVICE(obj);
+ 
+-    if (phase_check(PHASE_MACHINE_READY)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY)) {
+         dev->hotplugged = 1;
+         qdev_hot_added = true;
+     }
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 23d2ae2ab2..5ed798b480 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -1102,7 +1102,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
+     address_space_init(&pci_dev->bus_master_as,
+                        &pci_dev->bus_master_container_region, pci_dev->name);
+ 
+-    if (phase_check(PHASE_MACHINE_READY)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY)) {
+         pci_init_bus_master(pci_dev);
+     }
+     pci_dev->irq_state = 0;
+diff --git a/hw/usb/core.c b/hw/usb/core.c
+index 975f76250a..7a9a81c4fe 100644
+--- a/hw/usb/core.c
++++ b/hw/usb/core.c
+@@ -97,7 +97,7 @@ void usb_wakeup(USBEndpoint *ep, unsigned int stream)
+     USBDevice *dev = ep->dev;
+     USBBus *bus = usb_bus_from_device(dev);
+ 
+-    if (!phase_check(PHASE_MACHINE_READY)) {
++    if (!phase_check(MACHINE_INIT_PHASE_READY)) {
+         /*
+          * This is machine init cold plug.  No need to wakeup anyone,
+          * all devices will be reset anyway.  And trying to wakeup can
+diff --git a/hw/virtio/virtio-iommu.c b/hw/virtio/virtio-iommu.c
+index 1b23e8e18c..b777a80be2 100644
+--- a/hw/virtio/virtio-iommu.c
++++ b/hw/virtio/virtio-iommu.c
+@@ -948,7 +948,7 @@ static int virtio_iommu_set_page_size_mask(IOMMUMemoryRegion *mr,
+      * accept it. Having a different masks is possible but the guest will use
+      * sub-optimal block sizes, so warn about it.
+      */
+-    if (phase_check(PHASE_MACHINE_READY)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY)) {
+         int new_granule = ctz64(new_mask);
+         int cur_granule = ctz64(cur_mask);
+ 
+diff --git a/monitor/hmp.c b/monitor/hmp.c
+index d50c3124e1..ad012b0b22 100644
+--- a/monitor/hmp.c
++++ b/monitor/hmp.c
+@@ -216,7 +216,7 @@ static bool cmd_can_preconfig(const HMPCommand *cmd)
+ 
+ static bool cmd_available(const HMPCommand *cmd)
+ {
+-    return phase_check(PHASE_MACHINE_READY) || cmd_can_preconfig(cmd);
++    return phase_check(MACHINE_INIT_PHASE_READY) || cmd_can_preconfig(cmd);
+ }
+ 
+ static void help_cmd_dump_one(Monitor *mon,
+diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
+index 0705f00846..25275984bd 100644
+--- a/softmmu/qdev-monitor.c
++++ b/softmmu/qdev-monitor.c
+@@ -262,7 +262,7 @@ static DeviceClass *qdev_get_device_class(const char **driver, Error **errp)
+ 
+     dc = DEVICE_CLASS(oc);
+     if (!dc->user_creatable ||
+-        (phase_check(PHASE_MACHINE_READY) && !dc->hotpluggable)) {
++        (phase_check(MACHINE_INIT_PHASE_READY) && !dc->hotpluggable)) {
+         error_setg(errp, QERR_INVALID_PARAMETER_VALUE, "driver",
+                    "a pluggable device type");
+         return NULL;
+@@ -649,7 +649,8 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
+         }
+     }
+ 
+-    if (phase_check(PHASE_MACHINE_READY) && bus && !qbus_is_hotpluggable(bus)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY) && bus &&
++        !qbus_is_hotpluggable(bus)) {
+         error_setg(errp, QERR_BUS_NO_HOTPLUG, bus->name);
+         return NULL;
+     }
+@@ -663,7 +664,7 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
+     dev = qdev_new(driver);
+ 
+     /* Check whether the hotplug is allowed by the machine */
+-    if (phase_check(PHASE_MACHINE_READY)) {
++    if (phase_check(MACHINE_INIT_PHASE_READY)) {
+         if (!qdev_hotplug_allowed(dev, errp)) {
+             goto err_del_dev;
+         }
+@@ -1011,7 +1012,7 @@ int qemu_global_option(const char *str)
+ 
+ bool qmp_command_available(const QmpCommand *cmd, Error **errp)
+ {
+-    if (!phase_check(PHASE_MACHINE_READY) &&
++    if (!phase_check(MACHINE_INIT_PHASE_READY) &&
+         !(cmd->options & QCO_ALLOW_PRECONFIG)) {
+         error_setg(errp, "The command '%s' is permitted only after machine initialization has completed",
+                    cmd->name);
+diff --git a/softmmu/vl.c b/softmmu/vl.c
+index 55ab70eb97..d2552ba8ac 100644
+--- a/softmmu/vl.c
++++ b/softmmu/vl.c
+@@ -2692,7 +2692,7 @@ static void qemu_machine_creation_done(void)
+ 
+ void qmp_x_exit_preconfig(Error **errp)
+ {
+-    if (phase_check(PHASE_MACHINE_INITIALIZED)) {
++    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
+         error_setg(errp, "The command is permitted only before machine initialization");
+         return;
+     }
+@@ -3665,14 +3665,14 @@ void qemu_init(int argc, char **argv, char **envp)
+     qemu_apply_legacy_machine_options(machine_opts_dict);
+     qemu_apply_machine_options(machine_opts_dict);
+     qobject_unref(machine_opts_dict);
+-    phase_advance(PHASE_MACHINE_CREATED);
++    phase_advance(MACHINE_INIT_PHASE_MACHINE_CREATED);
+ 
+     /*
+      * Note: uses machine properties such as kernel-irqchip, must run
+      * after qemu_apply_machine_options.
+      */
+     configure_accelerators(argv[0]);
+-    phase_advance(PHASE_ACCEL_CREATED);
++    phase_advance(MACHINE_INIT_PHASE_ACCEL_CREATED);
+ 
+     /*
+      * Beware, QOM objects created before this point miss global and
+diff --git a/ui/console.c b/ui/console.c
+index eabbbc951c..b09b0f9760 100644
+--- a/ui/console.c
++++ b/ui/console.c
+@@ -1353,7 +1353,8 @@ static QemuConsole *new_console(DisplayState *ds, console_type_t console_type,
+     if (QTAILQ_EMPTY(&consoles)) {
+         s->index = 0;
+         QTAILQ_INSERT_TAIL(&consoles, s, next);
+-    } else if (console_type != GRAPHIC_CONSOLE || phase_check(PHASE_MACHINE_READY)) {
++    } else if (console_type != GRAPHIC_CONSOLE ||
++               phase_check(MACHINE_INIT_PHASE_READY)) {
+         QemuConsole *last = QTAILQ_LAST(&consoles);
+         s->index = last->index + 1;
+         QTAILQ_INSERT_TAIL(&consoles, s, next);
 -- 
 2.33.0
 
