@@ -1,33 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mTMax-0006L1-KU
-	for mharc-qemu-riscv@gnu.org; Thu, 23 Sep 2021 07:08:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36944)
+	id 1mTO51-00060h-M5
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Sep 2021 08:43:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54142)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mTMav-0006Jx-IT; Thu, 23 Sep 2021 07:08:49 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:48314)
+ id 1mTO4v-0005yj-Ax; Thu, 23 Sep 2021 08:43:56 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:49066)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1mTMap-0003nO-Ni; Thu, 23 Sep 2021 07:08:49 -0400
+ id 1mTO4t-0006Xx-3h; Thu, 23 Sep 2021 08:43:52 -0400
 Received: from [192.168.15.189] (unknown [195.68.53.70])
- by beetle.greensocs.com (Postfix) with ESMTPSA id E523C20777;
- Thu, 23 Sep 2021 11:08:39 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPSA id 14EF120786;
+ Thu, 23 Sep 2021 12:43:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1632395320;
+ s=mail; t=1632401026;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pKGcNnmlj8pflXWMttiwz2KP8cVDOcviRK9BnXLJgmg=;
- b=Yzw8VOoeXtchb31M5o7ihWMzh115d5LEkUD/IjkknpVcRv+Wpiik2gMc7ix0A9ZGEFXtUd
- BNML4R9Kt/vkAR74LOFxs0dragUKbR0yYkvXfUnQ3YLvVm937WLOKlcaHHrQZDXvPolsfg
- qZfCuKoudgXjuISaTcUD5bKxvcPzjAk=
-Message-ID: <d080506d-04a0-0af1-5426-6162091ef55f@greensocs.com>
-Date: Thu, 23 Sep 2021 13:08:38 +0200
+ bh=74J5uL4+y3OkwakSUEbDd5pmG2azKhrylHgHqUMTlRo=;
+ b=NqrdEZvIHKxKmAWJ08TREruX+6E1zwtjlIzFRKUJ8z/RjI58v7xHMihe/01vIPrVrKra7T
+ niGWbOMLvL+/r6m0yCRL3pyfXGhri4PRKFkmCm8kOkiTf9h5mxH1Qh61DdQIQpDW1ISlel
+ hpLot1xPahP9abOARHX6kwVUlJhMYeU=
+Message-ID: <e3ab341b-3e7a-1485-90ed-dbd9d2e3588d@greensocs.com>
+Date: Thu, 23 Sep 2021 14:43:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.1.0
-Subject: Re: [RFC PATCH v2 00/16] Initial support for machine creation via QMP
+Subject: Re: [RFC PATCH v2 02/16] qapi: Implement query-machine-phase QMP
+ command
 Content-Language: en-US-large
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  qemu-devel@nongnu.org
@@ -48,9 +49,10 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  <berrange@redhat.com>, mark.burton@greensocs.com, edgari@xilinx.com,
  Igor Mammedov <imammedo@redhat.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <a4debda9-f00b-dc99-7e7c-37ea9b4d7b5c@redhat.com>
+ <20210922161405.140018-3-damien.hedde@greensocs.com>
+ <d27c5829-e28f-4d17-966e-6cb86ebe00e6@redhat.com>
 From: Damien Hedde <damien.hedde@greensocs.com>
-In-Reply-To: <a4debda9-f00b-dc99-7e7c-37ea9b4d7b5c@redhat.com>
+In-Reply-To: <d27c5829-e28f-4d17-966e-6cb86ebe00e6@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=5.135.226.135;
@@ -60,7 +62,7 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_PASS=-0.001, T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,89 +75,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Sep 2021 11:08:49 -0000
+X-List-Received-Date: Thu, 23 Sep 2021 12:43:56 -0000
 
 
 
-On 9/22/21 19:50, Philippe Mathieu-Daudé wrote:
-> Hi Damien,
-> 
+On 9/22/21 19:37, Philippe Mathieu-Daudé wrote:
 > On 9/22/21 18:13, Damien Hedde wrote:
+>> From: Mirela Grujic <mirela.grujic@greensocs.com>
 >>
->> The goal of this work is to bring dynamic machine creation to QEMU:
->> we want to setup a machine without compiling a specific machine C
->> code. It would ease supporting highly configurable platforms (for
->> example resulting from an automated design flow). The requirements
->> for such configuration include begin able to specify the number of
->> cores, available peripherals, emmory mapping, IRQ mapping, etc.
+>> The command returns current machine initialization phase.
+>>  From now on, the MachineInitPhase enum is generated from the
+>> QAPI schema.
 >>
->> This series focuses on the first step: populating a machine with
->> devices during its creation. We propose patches to support this
->> using QMP commands. This is a working set of patches and improves
->> over the earlier rfc (posted in May):
->> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html
+>> Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
 > 
-> Do you have a roadmap for the following steps? Or are you done with
-> this series?
+> Missing your S-o-b, otherwise:
 
-Hi Philippe,
+Sorry. I did not realize I had to add it since it was already done by 
+Mirela. I'll add it for this patch and patches 1, 6 and 8.
 
-We would like to stick to this scope ("creating devices in a machine") 
-for this particular series otherwise it will become very big and cover a 
-huge scope.
-
-We have some patches to "migrate" more devices to be early 
-user-creatable (like the last 2 patches of this series) so that we can 
-use more device when building a machine. But these are trivial and only 
-depends on what is the condition to allow this. We plan to submit these 
-when this series is done.
-
-We plan to address other issues we have in others series of patches. We 
-do not put a roadmap somewhere. But we can details this in a page in our 
-github or in the qemu wiki if you think this is a good idea.
-Here are the main remaining issues:
-+ the base machine (we are using "none" here because it is "almost" 
-empty and fit our needs but it has some limitations)
-+ adding cpus
-+ non-trivial memory mappings
-+ solving backend (eg: net) connection issues
-
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com >
+>> ---
+>>   qapi/machine.json          | 56 ++++++++++++++++++++++++++++++++++++++
+>>   include/hw/qdev-core.h     | 30 ++------------------
+>>   hw/core/machine-qmp-cmds.c |  9 ++++++
+>>   hw/core/qdev.c             |  5 ++++
+>>   4 files changed, 72 insertions(+), 28 deletions(-)
 > 
-> Yesterday I was thinking about this, and one thing I was wondering is
-> if it would be possible to have DeviceClass and MachineClass implement
-> a populate_fdt() handler, to automatically generate custom DTB for these
-> custom machines.
-> 
-> Maybe in your case you don't need that, as your framework generating the
-> QEMU machine also generates the DTB, or even parse a DTB to generate the
-> machine... :)
-
-You are right, we do not need this. We indeed use a device tree file to 
-describe the platform but this is an "extended" device tree (it has more 
-info than needed for linux). If it was not the case, I think it would 
-still be easier to generate it from the source platform description than 
-using qemu as an intermediate.
-
-It is probably possible but it is tricky to generate the dtb: mapping in 
-dtb are not standardized and really depends on the node types.
-
-For example, to generate the interrupt-map property of a device node. 
-You need to know the interrupt mapping (which interrupt line goes in 
-which interrupt controller) and also have info about the interrupt 
-controller's cells format (eg: how many bytes do we need to specify the 
-interrupt). For example for some controller, you have specify the 
-interrupt kind (rising or falling edge, high or low active level).
-
-So you'll probably need some special "get_dtb_interrupt_cell" method in 
-interrupt controllers to generate these entries for you so that a device 
-can ask dtb data to its controller.
-
-Bus mappings also depend on the bus type, but since qemu devices are 
-already organized on a bus-type basis, this is probably easier to solve.
-
-You'll have similar issues with every mapping. But bus and interrupt are 
-the most important ones.
-
-Thanks,
-Damien
 
