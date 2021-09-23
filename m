@@ -1,97 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mT6OB-0006Nh-E8
-	for mharc-qemu-riscv@gnu.org; Wed, 22 Sep 2021 13:50:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38714)
+	id 1mTH6A-0004it-Qb
+	for mharc-qemu-riscv@gnu.org; Thu, 23 Sep 2021 01:16:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57140)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mT6O8-0006MP-0l
- for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:50:32 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:38505)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mT6O5-0007QF-EV
- for qemu-riscv@nongnu.org; Wed, 22 Sep 2021 13:50:30 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1632333028;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=324sILhdYxvnznF1+1US9ZnfMNECSzr9WbsW6XTulSY=;
- b=E8n8ZbaW45XShjIhrUOs3CPPG5KGfBn/cqikXFx/c+QJOzSkZ5DeFKx98tfBhyGzil9Lbz
- MBpIw5rRRYw7I5H3q/gW6yb/tA5F3xey/sFYq+ov5+/AhULIRPIIvnavV84fDYB4ghNWMa
- yopUA6OjsQfqVBv2klDEIW6l7jH4xSE=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-166-z2ZU0qcMM-CbRS1_9_RUcQ-1; Wed, 22 Sep 2021 13:50:26 -0400
-X-MC-Unique: z2ZU0qcMM-CbRS1_9_RUcQ-1
-Received: by mail-wr1-f69.google.com with SMTP id
- h5-20020a5d6885000000b0015e21e37523so2861739wru.10
- for <qemu-riscv@nongnu.org>; Wed, 22 Sep 2021 10:50:26 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mTH69-0004ht-DH; Thu, 23 Sep 2021 01:16:41 -0400
+Received: from mail-qk1-x729.google.com ([2607:f8b0:4864:20::729]:39494)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mTH67-00050c-F8; Thu, 23 Sep 2021 01:16:41 -0400
+Received: by mail-qk1-x729.google.com with SMTP id f130so18049002qke.6;
+ Wed, 22 Sep 2021 22:16:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=8Z47RpvnvCB2lIhjsU3p62obC8d25CChuMd5gUXYXHM=;
+ b=ilI4oVLRFMIT/RpiZzamTKtZapnM0lR/wOcJBovEUyKJ+z5w5A0FNS7ySEeET/N9lI
+ gBR0M7WTpAeLaS8dgjeiaNqRnoU6UtnmMyiZRz+APhAkS4k+jjJAng6mF47u8Zsl7Rtq
+ z7oBtqp2BDnbhp7W9SmqmneBG1gsRWMYtEdeJo7d3cjlh6sI0l3Tbt7sZ8etlQIKk1B0
+ lePUTUHK4/5ZrV+vSndk+dPjTNoBdf53Fg8+OQmjoyFhzQy2O5mu/2pOtPXGqVx1DGsc
+ z/fbJ+4ihcuJ02gxsHyBi9/OuNv7Rr75nMWUayhMs54v8V1875sq7YIzVqw9MPtOFY0K
+ bVNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=324sILhdYxvnznF1+1US9ZnfMNECSzr9WbsW6XTulSY=;
- b=wRFI+oSG20oZkAg419kNtqgr5k3yb3T/+89g9y4FzG4ZXPsHS4vxJp+3W1EjJHq6TB
- OOw7f7SEeqYNFtValChRS47yI2PA8JWknD1EMy++1hbmSlPBMPlF2TTKjjk673iz/ww9
- pJFCDG7BqhHY5AszbQucrulHv8lGKFUPHvBO14xv6AvqLRrTJryGOiBlpjGmShRShPTn
- K5q7C/GFZ2ksV692X3OM35KR7/xOnWmqJ88rs42FCNcYX5QOOoL/+a0P9qIPXXpSmp8Z
- aqljuXaTEv7P98jfBAjYIPpiuriiZKdpx2koUcwx+tVLLgfizc23tsOKIiKnvvIHPdnl
- reaw==
-X-Gm-Message-State: AOAM5313nXn7AlhejZ9NEVnklfk4n6ogQXiAmV7ak05UCNqpwBXMi5PM
- shbnHSzjkpTC0CELk+mFWZXgHt+6xItSxaxiGBF5qtuibRKU8Pp4Va8Dau5tgcnA2wnjXx94ec7
- aQY50ifqXlYWg5wY=
-X-Received: by 2002:adf:d084:: with SMTP id y4mr217238wrh.249.1632333025507;
- Wed, 22 Sep 2021 10:50:25 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxkTAxtj4TUqlJA16lEOK2zxOqi0Lnhv+gZIrdsyM50ICcEZWWLl648/QwzUYzfSBk/7cFBmA==
-X-Received: by 2002:adf:d084:: with SMTP id y4mr217213wrh.249.1632333025297;
- Wed, 22 Sep 2021 10:50:25 -0700 (PDT)
-Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
- [83.35.24.118])
- by smtp.gmail.com with ESMTPSA id g205sm2940929wmg.18.2021.09.22.10.50.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Sep 2021 10:50:24 -0700 (PDT)
-Message-ID: <a4debda9-f00b-dc99-7e7c-37ea9b4d7b5c@redhat.com>
-Date: Wed, 22 Sep 2021 19:50:22 +0200
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=8Z47RpvnvCB2lIhjsU3p62obC8d25CChuMd5gUXYXHM=;
+ b=1KljikcQoT1gyONeKU/ENxMd5IAbItHXEpm4sg8XxWTrBbFF2V7muCxJi3zGvPJNws
+ sgjlzH2Gfv3bws6UL1xyNYJfiDGpwChCN84QnKKqB/IALfgjOME08RwjOJcecnn8WUrA
+ 2NrGzxThDY/ViN7oce7wzZwqO8C4TNFFEfJzJAATba83/KLkwmxLQ2R7NYkdyQXjmVfV
+ mHTks8J+yzaqBKrKrzFsNzRpEPRT7a29flIdemtzJ2Tnzw64tFJVhzcDhBWH7Cv07c7/
+ pFJDX++fjJalERNgNEFN5wJOcZVqr2STGa1UaawCDsbV2xmuIKt8mz+Yhb0eVGqdfgwd
+ Trtg==
+X-Gm-Message-State: AOAM533WfAELA8Zpeb1Smnj3JXAb0OUs3beiIaqfdsmwbzcCE4XU3RCB
+ QmCG9cWhIi4qm3wC7jaWhPW5OEOou4gf02s1Pfg=
+X-Google-Smtp-Source: ABdhPJwX9sjFIKFQ08udIsEhMVh1rIIUp3NW79b426r+EgVq6Suy6LCbesLmv+tr4ebr2SHke/a9CwLJnzVfvg+jSfo=
+X-Received: by 2002:a25:905:: with SMTP id 5mr3567737ybj.293.1632374197665;
+ Wed, 22 Sep 2021 22:16:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.1.0
-Subject: Re: [RFC PATCH v2 00/16] Initial support for machine creation via QMP
-To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
- Peter Xu <peterx@redhat.com>, mirela.grujic@greensocs.com,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
- Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
- Markus Armbruster <armbru@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
- <berrange@redhat.com>, mark.burton@greensocs.com, edgari@xilinx.com,
- Igor Mammedov <imammedo@redhat.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+References: <20210918180738.2506799-1-f4bug@amsat.org>
+In-Reply-To: <20210918180738.2506799-1-f4bug@amsat.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 23 Sep 2021 13:16:26 +0800
+Message-ID: <CAEUhbmX_PPdLPgGTtfJZg-Nd0pPxVC93ZYoeVpngnOvdLB0Tww@mail.gmail.com>
+Subject: Re: [PATCH] hw/char/mchp_pfsoc_mmuart: QOM'ify PolarFire MMUART
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alistair Francis <alistair23@gmail.com>,
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::729;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x729.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) DKIMWL_WL_HIGH=-1.472, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,39 +73,184 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2021 17:50:32 -0000
+X-List-Received-Date: Thu, 23 Sep 2021 05:16:41 -0000
 
-Hi Damien,
+Hi Philippe,
 
-On 9/22/21 18:13, Damien Hedde wrote:
-> 
-> The goal of this work is to bring dynamic machine creation to QEMU:
-> we want to setup a machine without compiling a specific machine C
-> code. It would ease supporting highly configurable platforms (for
-> example resulting from an automated design flow). The requirements
-> for such configuration include begin able to specify the number of
-> cores, available peripherals, emmory mapping, IRQ mapping, etc.
-> 
-> This series focuses on the first step: populating a machine with
-> devices during its creation. We propose patches to support this
-> using QMP commands. This is a working set of patches and improves
-> over the earlier rfc (posted in May):
-> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html
+On Sun, Sep 19, 2021 at 2:07 AM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
+>
+> - Embed SerialMM in MchpPfSoCMMUartState and QOM-initialize it
+> - Alias SERIAL_MM 'chardev' property on MCHP_PFSOC_UART
+> - Forward SerialMM sysbus IRQ in mchp_pfsoc_mmuart_realize()
+> - Keep mchp_pfsoc_mmuart_create() behavior
 
-Do you have a roadmap for the following steps? Or are you done with
-this series?
+Thanks for taking care of the updates!
 
-Yesterday I was thinking about this, and one thing I was wondering is
-if it would be possible to have DeviceClass and MachineClass implement
-a populate_fdt() handler, to automatically generate custom DTB for these
-custom machines.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> ---
+>  include/hw/char/mchp_pfsoc_mmuart.h | 16 ++++--
+>  hw/char/mchp_pfsoc_mmuart.c         | 77 +++++++++++++++++++++++------
+>  2 files changed, 73 insertions(+), 20 deletions(-)
+>
+> diff --git a/include/hw/char/mchp_pfsoc_mmuart.h b/include/hw/char/mchp_p=
+fsoc_mmuart.h
+> index f61990215f0..b484b7ea5e4 100644
+> --- a/include/hw/char/mchp_pfsoc_mmuart.h
+> +++ b/include/hw/char/mchp_pfsoc_mmuart.h
+> @@ -28,16 +28,22 @@
+>  #ifndef HW_MCHP_PFSOC_MMUART_H
+>  #define HW_MCHP_PFSOC_MMUART_H
+>
+> +#include "hw/sysbus.h"
+>  #include "hw/char/serial.h"
+>
+>  #define MCHP_PFSOC_MMUART_REG_SIZE  52
+>
+> -typedef struct MchpPfSoCMMUartState {
+> -    MemoryRegion iomem;
+> -    hwaddr base;
+> -    qemu_irq irq;
+> +#define TYPE_MCHP_PFSOC_UART "mchp.pfsoc.uart"
+> +OBJECT_DECLARE_SIMPLE_TYPE(MchpPfSoCMMUartState, MCHP_PFSOC_UART)
+>
+> -    SerialMM *serial;
+> +typedef struct MchpPfSoCMMUartState {
+> +    /*< private >*/
+> +    SysBusDevice parent_obj;
+> +
+> +    /*< public >*/
+> +    MemoryRegion iomem;
+> +
+> +    SerialMM serial_mm;
+>
+>      uint32_t reg[MCHP_PFSOC_MMUART_REG_SIZE / sizeof(uint32_t)];
+>  } MchpPfSoCMMUartState;
+> diff --git a/hw/char/mchp_pfsoc_mmuart.c b/hw/char/mchp_pfsoc_mmuart.c
+> index 2facf85c2d8..74404e047d4 100644
+> --- a/hw/char/mchp_pfsoc_mmuart.c
+> +++ b/hw/char/mchp_pfsoc_mmuart.c
+> @@ -22,8 +22,9 @@
+>
+>  #include "qemu/osdep.h"
+>  #include "qemu/log.h"
+> -#include "chardev/char.h"
+> +#include "qapi/error.h"
+>  #include "hw/char/mchp_pfsoc_mmuart.h"
+> +#include "hw/qdev-properties.h"
+>
+>  static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsign=
+ed size)
+>  {
+> @@ -63,23 +64,69 @@ static const MemoryRegionOps mchp_pfsoc_mmuart_ops =
+=3D {
+>      },
+>  };
+>
+> -MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
+> -    hwaddr base, qemu_irq irq, Chardev *chr)
+> +static void mchp_pfsoc_mmuart_init(Object *obj)
+>  {
+> -    MchpPfSoCMMUartState *s;
+> -
+> -    s =3D g_new0(MchpPfSoCMMUartState, 1);
+> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(obj);
+> +    MchpPfSoCMMUartState *s =3D MCHP_PFSOC_UART(obj);
+>
+>      memory_region_init_io(&s->iomem, NULL, &mchp_pfsoc_mmuart_ops, s,
+>                            "mchp.pfsoc.mmuart", 0x1000);
+> +    sysbus_init_mmio(sbd, &s->iomem);
+>
+> -    s->base =3D base;
+> -    s->irq =3D irq;
+> -
+> -    s->serial =3D serial_mm_init(sysmem, base, 2, irq, 399193, chr,
+> -                               DEVICE_LITTLE_ENDIAN);
+> -
+> -    memory_region_add_subregion(sysmem, base + 0x20, &s->iomem);
+> -
+> -    return s;
+> +    object_initialize_child(obj, "serial-mm", &s->serial_mm, TYPE_SERIAL=
+_MM);
+> +    object_property_add_alias(obj, "chardev", OBJECT(&s->serial_mm), "ch=
+ardev");
 
-Maybe in your case you don't need that, as your framework generating the
-QEMU machine also generates the DTB, or even parse a DTB to generate the
-machine... :)
+Do we have a common convention for what needs to be done in the
+instance_init() call and what in the realize() call?
+
+For example, I see some devices put memory_region_init_io() and
+sysbus_init_mmio() in their realize().
+
+> +}
+> +
+> +static void mchp_pfsoc_mmuart_realize(DeviceState *dev, Error **errp)
+> +{
+> +    MchpPfSoCMMUartState *s =3D MCHP_PFSOC_UART(dev);
+> +
+> +    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "regshift", 2);
+> +    qdev_prop_set_uint32(DEVICE(&s->serial_mm), "baudbase", 399193);
+> +    qdev_prop_set_uint8(DEVICE(&s->serial_mm), "endianness",
+> +                        DEVICE_LITTLE_ENDIAN);
+
+It looks like serial_mm_init() does one more thing:
+
+    qdev_set_legacy_instance_id(DEVICE(smm), base, 2);
+
+I am not sure what that is.
+
+> +    if (!sysbus_realize(SYS_BUS_DEVICE(&s->serial_mm), errp)) {
+> +        return;
+> +    }
+> +    sysbus_pass_irq(SYS_BUS_DEVICE(dev), SYS_BUS_DEVICE(&s->serial_mm));
+> +    memory_region_add_subregion(&s->iomem, 0x20,
+> +                sysbus_mmio_get_region(SYS_BUS_DEVICE(&s->serial_mm), 0)=
+);
+> +}
+> +
+> +static void mchp_pfsoc_mmuart_class_init(ObjectClass *oc, void *data)
+> +{
+> +    DeviceClass *dc =3D DEVICE_CLASS(oc);
+> +
+> +    dc->realize =3D mchp_pfsoc_mmuart_realize;
+> +}
+> +
+> +static const TypeInfo mchp_pfsoc_mmuart_info =3D {
+> +    .name          =3D TYPE_MCHP_PFSOC_UART,
+> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
+> +    .instance_size =3D sizeof(MchpPfSoCMMUartState),
+> +    .instance_init =3D mchp_pfsoc_mmuart_init,
+> +    .class_init    =3D mchp_pfsoc_mmuart_class_init,
+> +};
+> +
+> +static void mchp_pfsoc_mmuart_register_types(void)
+> +{
+> +    type_register_static(&mchp_pfsoc_mmuart_info);
+> +}
+> +
+> +type_init(mchp_pfsoc_mmuart_register_types)
+> +
+> +MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
+> +                                               hwaddr base,
+> +                                               qemu_irq irq, Chardev *ch=
+r)
+> +{
+> +    DeviceState *dev =3D qdev_new(TYPE_MCHP_PFSOC_UART);
+> +    SysBusDevice *sbd =3D SYS_BUS_DEVICE(dev);
+> +
+> +    qdev_prop_set_chr(dev, "chardev", chr);
+> +    sysbus_realize(sbd, &error_fatal);
+> +
+> +    memory_region_add_subregion(sysmem, base, sysbus_mmio_get_region(sbd=
+, 0));
+> +    sysbus_connect_irq(sbd, 0, irq);
+> +
+> +    return MCHP_PFSOC_UART(dev);
+>  }
+
+This patch unfortunately breaks the polarfire machine that no serial
+output is seen. I did not take a further look yet.
 
 Regards,
-
-Phil.
-
+Bin
 
