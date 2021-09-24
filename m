@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mTetg-0002F8-C3
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 02:41:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60202)
+	id 1mTf1S-0008ES-Gi
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 02:49:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33272)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mTete-0002CB-MC; Fri, 24 Sep 2021 02:41:22 -0400
-Received: from mail-il1-x130.google.com ([2607:f8b0:4864:20::130]:41748)
+ id 1mTf1P-0008A2-1s; Fri, 24 Sep 2021 02:49:23 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:47067)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mTetc-0004GB-VU; Fri, 24 Sep 2021 02:41:22 -0400
-Received: by mail-il1-x130.google.com with SMTP id d11so9226030ilc.8;
- Thu, 23 Sep 2021 23:41:20 -0700 (PDT)
+ id 1mTf1N-00030T-IK; Fri, 24 Sep 2021 02:49:22 -0400
+Received: by mail-il1-x12e.google.com with SMTP id h20so9194228ilj.13;
+ Thu, 23 Sep 2021 23:49:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MM/sHgjYQ5ViPtnEgwieUbDNTXAT6og8BQfOlZI7des=;
- b=e9YvE6sDrEFVPU3lC9DCHbogSPBn+ShHajZupHHMvIf3SMcGNr+YIyizz7uvoUQQ50
- VLF9mxfrAN/lH5c3IHrxf7PS3TyA4B8jDVi7LjWofnP4EccnUFfVNLH3tW1fPs6nG3zi
- EcuKj06tT7dYNBMAAqru2snc2Y21SHR8Sb9i3LRuUysCIjIMsAUsKGHYa5fA0XlWQ74C
- hf86WYNXssizNtTFeUSxPNAaUJRwOQ1+A5kkCnAz0MlmQxJ5ZNJkfSnixajWekl977Un
- SqeZg8NJdEyNFW0MZwlbILRgmsMFDpEpC668jD+gp1f9cop+piN5+6CB9ISdMhiLu7J5
- VF5g==
+ :cc; bh=6Tb6TsJAffyI5zWSBNB75gLf7ncT5JNiQPb4PD/mAhY=;
+ b=iClnpCVvzVbpdOFzSzO26YfjyuMcWjhbzX8Mt5Rir3dEtJe9+P4hBlh7oegZ3PjCaw
+ RWtLhWWVjkakBOY9GnsVSquRk6d9T8DeZCYJ2fuJ3JxyuXRd7Wq4s+/E5XzAhxYn88FT
+ 3Y4q4zdj3aj1ws79b2RuSun2yl64Pn1YEIu8fj4xBrRM3VWZx0c04CRFM9rPdxErjX8U
+ l2NQPQ76ygCAA/TX+8pxQcRtRkN6zHfzSBqNsDi1ye3cUTcwMeQ8raxH7u+H5YHRa8Bv
+ M3uh9tkVldTnA/ocotAeyTpXSXgVtqkl45r1QeUThZpXxH3DB6V4bwPSQFpjfk7xwOrV
+ Hi0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=MM/sHgjYQ5ViPtnEgwieUbDNTXAT6og8BQfOlZI7des=;
- b=VKhqATW/9geSuXk9MvOG72m27fCJUUg1ySJ2ob4wg6iJ5Nb4Gp5d93rVbDOFz/kIJD
- Cn1GbxKd73RVMX8pFGPHbdXIUVgZRHk0j4SwMrjFn/oVzV0o8k52RWJv/Wr501nfvfOx
- JbF79kxoFgjERxtVCPJY2OJNzVUaIl4dONSazaKWFJHaAvfEnIc58l544bDa7PK3yFai
- /m4SVj3EKRxG9Nk704b6uu1OgP05JAz3L4y0IrrmyHlebfk55GBXdMgOQzECtK8TMmlP
- XZBV/DGrYQHty2tGEGEskovG+avsUOGs30vCFicVQSpc6ZWBuNHiv6gX2kN3kiWF9r2D
- stDA==
-X-Gm-Message-State: AOAM532j5W8gkhpB3uzngTewSAanEx/xONlgjjj+yIUORcwtWBvTz9fZ
- RxUYRb9eQoNRqL7ORZ8pFkY2FKZQ3SbOUjYXhAE=
-X-Google-Smtp-Source: ABdhPJzZegB1vXnetEnYtCOHYJXl7qjJzHi9zB7ip6Am9Xyc6h0kBj17fBrIwrY/czX4wFcALIY0JcqbPL5PUJ2iFg4=
-X-Received: by 2002:a92:280f:: with SMTP id l15mr6548500ilf.74.1632465679476; 
- Thu, 23 Sep 2021 23:41:19 -0700 (PDT)
+ bh=6Tb6TsJAffyI5zWSBNB75gLf7ncT5JNiQPb4PD/mAhY=;
+ b=2FPTxONiS7xgmzjqKgfi/hEW2Llq4A4clLHn4kzfnRdxXcRIRh9cxGoYmnitZBD5Ka
+ faUq/EDtrriBGfWcdImPmDOQVIB1q720t3N+qOg1FU0BV8Pljrpu+/7GGt68qbwEagHc
+ YiX++KJZu8uSmLTWPos8qzDVEDXz1Jr60YMxLm795cqE+GWjL6P+t4/4KH421ULPHOTS
+ O8WnX7NC0jmK2TN1fzCktSrHkUXsKWeMwACSTP2WyYhyr4sDmuGknKhZemPSWe4GGGjW
+ s+wLgO43R5cWO9w7e1bTvB6fssj75vtLmkEAI5udsMh2UOtpLhMqUfYHlGAMc5DrIJAO
+ qc+Q==
+X-Gm-Message-State: AOAM531jqpE+JTa7sLeDGTmtuzLaMZhb2sQ/XNBwzmd6soJxxLQ1PjvW
+ y1OuIjgf/4/HVUCWcH7aHRFLob8cB6rVbvRLdc8=
+X-Google-Smtp-Source: ABdhPJy7p4ZIh8GMqLU761pFXc5/HpsOHxffz8LPQoBquqAEyFI3TlGpf7RzoCKFrVr9sx8q9ou5Cmfyf89n6ZBjL30=
+X-Received: by 2002:a05:6e02:1b04:: with SMTP id
+ i4mr6834987ilv.221.1632466159980; 
+ Thu, 23 Sep 2021 23:49:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210921020234.123448-1-frank.chang@sifive.com>
-In-Reply-To: <20210921020234.123448-1-frank.chang@sifive.com>
+References: <cover.1631076834.git.alistair.francis@wdc.com>
+ <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
+ <538d9688-0f2f-c406-50a5-d962e3ce2963@linaro.org>
+In-Reply-To: <538d9688-0f2f-c406-50a5-d962e3ce2963@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 24 Sep 2021 16:40:52 +1000
-Message-ID: <CAKmqyKOwLSSOGZqijc6RUEnVupHkeHeRHtLYa4g1CV9-Z01Ehg@mail.gmail.com>
-Subject: Re: [PATCH v3] target/riscv: Set mstatus_hs.[SD|FS] bits if Clean and
- V=1 in mark_fs_dirty()
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 24 Sep 2021 16:48:53 +1000
+Message-ID: <CAKmqyKNDLcp22Jqe=UhE6sG3XEMd2pcW5bfFDYwpwrOL3kb0iA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] target/riscv: Implement the stval/mtval illegal
+ instruction
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Vincent Chen <vincent.chen@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,122 +76,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2021 06:41:23 -0000
+X-List-Received-Date: Fri, 24 Sep 2021 06:49:24 -0000
 
-On Tue, Sep 21, 2021 at 12:03 PM <frank.chang@sifive.com> wrote:
+On Wed, Sep 8, 2021 at 4:48 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> On 9/8/21 6:54 AM, Alistair Francis wrote:
+> > @@ -967,6 +967,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >               write_tval  = true;
+> >               tval = env->badaddr;
+> >               break;
+> > +        case RISCV_EXCP_ILLEGAL_INST:
+> > +            if (riscv_feature(env, RISCV_FEATURE_MTVAL_INST)) {
+> > +                /*
+> > +                 * The stval/mtval register can optionally also be used to
+> > +                 * return the faulting instruction bits on an illegal
+> > +                 * instruction exception.
+> > +                 */
+> > +                tval = env->bins;
+> > +            }
+> > +            break;
 >
-> When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
-> Modifying the floating-point state when V=1 causes both fields to
-> be set to 3 (Dirty).
+> I'll note that write_tval should probably be renamed, and/or eliminated, because it looks
+> like it's incorrectly unset here.  If you move the adjustment to cause above this switch,
+> then you can move the RVH code that needed write_tval into this switch (just the
+> HSTATUS_GVA update?).
 >
-> However, it's possible that HS-level sstatus.FS is Clean and VS-level
-> vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
-> We can't early return for this case because we still need to set
-> sstatus.FS to Dirty according to spec.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
-> Tested-by: Vincent Chen <vincent.chen@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> But... more specific to this case.  Prior to this, was the exception handler allowed to
+> assume anything about the contents of stval?  Should the value have been zero?  Would it
+> be wrong to write to stval unconditionally?  How does the guest OS know that it can rely
+> on stval being set?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+As we didn't support writing the illegal instruction stval should be
+zero before this patch.
+
+>
+> I simply wonder whether it's worthwhile to add the feature and feature test.
+
+Do you just mean have it enabled all the time?
 
 Alistair
 
-> ---
->  target/riscv/cpu.h       |  4 ++++
->  target/riscv/translate.c | 30 +++++++++++++++++-------------
->  2 files changed, 21 insertions(+), 13 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index e735e53e26c..bef7c551646 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -394,6 +394,7 @@ FIELD(TB_FLAGS, SEW, 5, 3)
->  FIELD(TB_FLAGS, VILL, 8, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
->  FIELD(TB_FLAGS, HLSX, 9, 1)
-> +FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
->
->  bool riscv_cpu_is_32bit(CPURISCVState *env);
->
-> @@ -450,6 +451,9 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->                  get_field(env->hstatus, HSTATUS_HU))) {
->              flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
->          }
-> +
-> +        flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
-> +                           get_field(env->mstatus_hs, MSTATUS_FS));
->      }
->  #endif
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 74b33fa3c90..6be22347426 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -58,6 +58,7 @@ typedef struct DisasContext {
->      target_ulong misa;
->      uint32_t opcode;
->      uint32_t mstatus_fs;
-> +    uint32_t mstatus_hs_fs;
->      uint32_t mem_idx;
->      /* Remember the rounding mode encoded in the previous fp instruction,
->         which we have already installed into env->fp_status.  Or -1 for
-> @@ -280,27 +281,29 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->  static void mark_fs_dirty(DisasContext *ctx)
->  {
->      TCGv tmp;
-> -    target_ulong sd;
-> +    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
->
-> -    if (ctx->mstatus_fs == MSTATUS_FS) {
-> -        return;
-> -    }
-> -    /* Remember the state change for the rest of the TB.  */
-> -    ctx->mstatus_fs = MSTATUS_FS;
-> +    if (ctx->mstatus_fs != MSTATUS_FS) {
-> +        /* Remember the state change for the rest of the TB. */
-> +        ctx->mstatus_fs = MSTATUS_FS;
->
-> -    tmp = tcg_temp_new();
-> -    sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
-> +        tmp = tcg_temp_new();
-> +        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
-> +        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> +        tcg_temp_free(tmp);
-> +    }
->
-> -    tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> -    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
-> -    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
-> +    if (ctx->virt_enabled && ctx->mstatus_hs_fs != MSTATUS_FS) {
-> +        /* Remember the stage change for the rest of the TB. */
-> +        ctx->mstatus_hs_fs = MSTATUS_FS;
->
-> -    if (ctx->virt_enabled) {
-> +        tmp = tcg_temp_new();
->          tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
->          tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
->          tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
-> +        tcg_temp_free(tmp);
->      }
-> -    tcg_temp_free(tmp);
->  }
->  #else
->  static inline void mark_fs_dirty(DisasContext *ctx) { }
-> @@ -533,6 +536,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->frm = -1;  /* unknown rounding mode */
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
->      ctx->vlen = cpu->cfg.vlen;
-> +    ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
->      ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
->      ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
->      ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
-> --
-> 2.25.1
 >
 >
+> r~
 
