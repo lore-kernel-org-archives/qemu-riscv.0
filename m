@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mTf1S-0008ES-Gi
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 02:49:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33272)
+	id 1mTf7i-0006NB-Ci
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 02:55:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34490)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mTf1P-0008A2-1s; Fri, 24 Sep 2021 02:49:23 -0400
-Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:47067)
+ id 1mTf7f-0006KK-RC; Fri, 24 Sep 2021 02:55:51 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:38874)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mTf1N-00030T-IK; Fri, 24 Sep 2021 02:49:22 -0400
-Received: by mail-il1-x12e.google.com with SMTP id h20so9194228ilj.13;
- Thu, 23 Sep 2021 23:49:20 -0700 (PDT)
+ id 1mTf7e-0008Mv-4D; Fri, 24 Sep 2021 02:55:51 -0400
+Received: by mail-io1-xd36.google.com with SMTP id e82so11187239iof.5;
+ Thu, 23 Sep 2021 23:55:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6Tb6TsJAffyI5zWSBNB75gLf7ncT5JNiQPb4PD/mAhY=;
- b=iClnpCVvzVbpdOFzSzO26YfjyuMcWjhbzX8Mt5Rir3dEtJe9+P4hBlh7oegZ3PjCaw
- RWtLhWWVjkakBOY9GnsVSquRk6d9T8DeZCYJ2fuJ3JxyuXRd7Wq4s+/E5XzAhxYn88FT
- 3Y4q4zdj3aj1ws79b2RuSun2yl64Pn1YEIu8fj4xBrRM3VWZx0c04CRFM9rPdxErjX8U
- l2NQPQ76ygCAA/TX+8pxQcRtRkN6zHfzSBqNsDi1ye3cUTcwMeQ8raxH7u+H5YHRa8Bv
- M3uh9tkVldTnA/ocotAeyTpXSXgVtqkl45r1QeUThZpXxH3DB6V4bwPSQFpjfk7xwOrV
- Hi0Q==
+ :cc; bh=n0z7tWmX2cAmyIR9DUCFPvcREoGqLRXzgAi++etgJXo=;
+ b=kxLWf4sbNtYejGDdkvfNNO91+pd4kmQOxf+i/k3gl+2tP7QKNwCPYBgyOJdDqa+ll7
+ GnrNDE4GHRLxQXT+U/EoZC4KKvEjSbNSn0+aGh2g2tMi6VJcmqsPdLS8CxeA7d/tYgB7
+ fGBUZ2wWcDroq/g3UcuKlU0j28OEgyIU78uDJgmWlnNjyXuDBWlZjz+OsjpyafbYJPC1
+ 4wdmS5fwr8iGzu0a79GIP9bztw/hq/KazuarHibSjQOTBnRqjdD4tBWLSmKXjgyDlD5s
+ MxWmZwpxdD6unfp5MGxBJ7TSxdkNMR1DrWj1owIAtaVwFUo31Al56bNBvnHoavd+A3Q9
+ SJbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=6Tb6TsJAffyI5zWSBNB75gLf7ncT5JNiQPb4PD/mAhY=;
- b=2FPTxONiS7xgmzjqKgfi/hEW2Llq4A4clLHn4kzfnRdxXcRIRh9cxGoYmnitZBD5Ka
- faUq/EDtrriBGfWcdImPmDOQVIB1q720t3N+qOg1FU0BV8Pljrpu+/7GGt68qbwEagHc
- YiX++KJZu8uSmLTWPos8qzDVEDXz1Jr60YMxLm795cqE+GWjL6P+t4/4KH421ULPHOTS
- O8WnX7NC0jmK2TN1fzCktSrHkUXsKWeMwACSTP2WyYhyr4sDmuGknKhZemPSWe4GGGjW
- s+wLgO43R5cWO9w7e1bTvB6fssj75vtLmkEAI5udsMh2UOtpLhMqUfYHlGAMc5DrIJAO
- qc+Q==
-X-Gm-Message-State: AOAM531jqpE+JTa7sLeDGTmtuzLaMZhb2sQ/XNBwzmd6soJxxLQ1PjvW
- y1OuIjgf/4/HVUCWcH7aHRFLob8cB6rVbvRLdc8=
-X-Google-Smtp-Source: ABdhPJy7p4ZIh8GMqLU761pFXc5/HpsOHxffz8LPQoBquqAEyFI3TlGpf7RzoCKFrVr9sx8q9ou5Cmfyf89n6ZBjL30=
-X-Received: by 2002:a05:6e02:1b04:: with SMTP id
- i4mr6834987ilv.221.1632466159980; 
- Thu, 23 Sep 2021 23:49:19 -0700 (PDT)
+ bh=n0z7tWmX2cAmyIR9DUCFPvcREoGqLRXzgAi++etgJXo=;
+ b=7/m57T75CzSb/Ef5n9tAE+B1cuK1Dkzk35J1uYy+PC0QNqaDCNbaBCpulb0kYLBjm1
+ podvN8NBPh2qnetQFDJYs+dmuFQJtN7jt5I596B/8OHxV5i2MNTbhp4am/Kc1WnBVCD6
+ 3y0dvHrxyZiHo3pcUSJhlsklSs9WkXIzN8+WNTgJguBJco4tdELAPMlXAriD9IYZ2amA
+ 7pTdeV/zsdUrECvJ7pj9I9FToeNDgaOZD7xo0Kuem2IZbunJ9fTt4WI6Wzuk06KcWFVU
+ jNMiPeM+Hy9MMrG+OyMI1XGLHufGFZ6qgwnTvB3bDtn9fhIWpRR6xniWaQLvbXgrU7BU
+ EzjA==
+X-Gm-Message-State: AOAM533RHDfBCf+Mq1YjNr87hVJgzc0X4sShrcjBQ0hU4sUM2mrGm9WT
+ hEvB/ky5BYHfiTqLW2c2y0p7jUOUaiZRYRHyErM=
+X-Google-Smtp-Source: ABdhPJzAEZzBmxYWcW5z6UXuATA6HjuRQSXoYzlvmA/ixlnt7agl8RQ5G7l1JQflEw7QS5mVM4QJn6MTJ7pdV5Z32Ac=
+X-Received: by 2002:a05:6638:61c:: with SMTP id
+ g28mr7688217jar.117.1632466548685; 
+ Thu, 23 Sep 2021 23:55:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1631076834.git.alistair.francis@wdc.com>
- <6809670a315a07e7e6b435cf7942f82bdd8b99d6.1631076834.git.alistair.francis@wdc.com>
- <538d9688-0f2f-c406-50a5-d962e3ce2963@linaro.org>
-In-Reply-To: <538d9688-0f2f-c406-50a5-d962e3ce2963@linaro.org>
+References: <20210921020234.123448-1-frank.chang@sifive.com>
+In-Reply-To: <20210921020234.123448-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 24 Sep 2021 16:48:53 +1000
-Message-ID: <CAKmqyKNDLcp22Jqe=UhE6sG3XEMd2pcW5bfFDYwpwrOL3kb0iA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] target/riscv: Implement the stval/mtval illegal
- instruction
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Fri, 24 Sep 2021 16:55:22 +1000
+Message-ID: <CAKmqyKO0nt_KYD-qq-+90JBGk0Z=ffv1-7Fe2YFq2fW7XG0SFg@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Set mstatus_hs.[SD|FS] bits if Clean and
+ V=1 in mark_fs_dirty()
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Vincent Chen <vincent.chen@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,48 +76,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2021 06:49:24 -0000
+X-List-Received-Date: Fri, 24 Sep 2021 06:55:52 -0000
 
-On Wed, Sep 8, 2021 at 4:48 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Tue, Sep 21, 2021 at 12:03 PM <frank.chang@sifive.com> wrote:
 >
-> On 9/8/21 6:54 AM, Alistair Francis wrote:
-> > @@ -967,6 +967,16 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-> >               write_tval  = true;
-> >               tval = env->badaddr;
-> >               break;
-> > +        case RISCV_EXCP_ILLEGAL_INST:
-> > +            if (riscv_feature(env, RISCV_FEATURE_MTVAL_INST)) {
-> > +                /*
-> > +                 * The stval/mtval register can optionally also be used to
-> > +                 * return the faulting instruction bits on an illegal
-> > +                 * instruction exception.
-> > +                 */
-> > +                tval = env->bins;
-> > +            }
-> > +            break;
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> I'll note that write_tval should probably be renamed, and/or eliminated, because it looks
-> like it's incorrectly unset here.  If you move the adjustment to cause above this switch,
-> then you can move the RVH code that needed write_tval into this switch (just the
-> HSTATUS_GVA update?).
+> When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
+> Modifying the floating-point state when V=1 causes both fields to
+> be set to 3 (Dirty).
 >
-> But... more specific to this case.  Prior to this, was the exception handler allowed to
-> assume anything about the contents of stval?  Should the value have been zero?  Would it
-> be wrong to write to stval unconditionally?  How does the guest OS know that it can rely
-> on stval being set?
+> However, it's possible that HS-level sstatus.FS is Clean and VS-level
+> vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
+> We can't early return for this case because we still need to set
+> sstatus.FS to Dirty according to spec.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
+> Tested-by: Vincent Chen <vincent.chen@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-As we didn't support writing the illegal instruction stval should be
-zero before this patch.
+Thanks!
 
->
-> I simply wonder whether it's worthwhile to add the feature and feature test.
-
-Do you just mean have it enabled all the time?
+Applied to riscv-to-apply.next
 
 Alistair
-
->
->
-> r~
 
