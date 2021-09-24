@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mTe4M-0008Ge-KF
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 01:48:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53670)
+	id 1mTetg-0002F8-C3
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Sep 2021 02:41:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60202)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
- id 1mTe4G-0008GJ-Bt; Fri, 24 Sep 2021 01:48:19 -0400
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:38827)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mTete-0002CB-MC; Fri, 24 Sep 2021 02:41:22 -0400
+Received: from mail-il1-x130.google.com ([2607:f8b0:4864:20::130]:41748)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tangxingxin1008@gmail.com>)
- id 1mTe4E-0000zw-AK; Fri, 24 Sep 2021 01:48:15 -0400
-Received: by mail-il1-x134.google.com with SMTP id q14so9140253ils.5;
- Thu, 23 Sep 2021 22:48:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mTetc-0004GB-VU; Fri, 24 Sep 2021 02:41:22 -0400
+Received: by mail-il1-x130.google.com with SMTP id d11so9226030ilc.8;
+ Thu, 23 Sep 2021 23:41:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=D/ppLEq00UAH7ryAoBMY6Ta2gFtRm83gvNv8hfHhvds=;
- b=DGcefvHQQXSUILAQseuOArSaq6EEQmA0BDcYjMYICRopuF3Wrz9DQbJTqDDu6wMdAC
- 5GS+J5jcDaBQJ4NQIEr6WUcEqUk2gAiBf0MyOgXjoJbZeU3jeSMZcD4HZ1I7mbdPw2+m
- zGw6EXlowXaH4w2mPDMep86hgbUn+dcMM0o3JlnW8Yl32hjeCEO2pMUwSmvU/X+ynnVL
- Q4+0FZZdxq0M9WVpjOn/Cetgz0adObRdE1/xfTaQTL05n1LeVP/2qrgZ8zhyOiF6l10A
- 8IrjTVlNqPACBcvhvkk0X50wgRbHes89hd0Cxq2NIviCu0kWE8KUlnteEtYHmjQ9ZmZb
- bepw==
+ :cc; bh=MM/sHgjYQ5ViPtnEgwieUbDNTXAT6og8BQfOlZI7des=;
+ b=e9YvE6sDrEFVPU3lC9DCHbogSPBn+ShHajZupHHMvIf3SMcGNr+YIyizz7uvoUQQ50
+ VLF9mxfrAN/lH5c3IHrxf7PS3TyA4B8jDVi7LjWofnP4EccnUFfVNLH3tW1fPs6nG3zi
+ EcuKj06tT7dYNBMAAqru2snc2Y21SHR8Sb9i3LRuUysCIjIMsAUsKGHYa5fA0XlWQ74C
+ hf86WYNXssizNtTFeUSxPNAaUJRwOQ1+A5kkCnAz0MlmQxJ5ZNJkfSnixajWekl977Un
+ SqeZg8NJdEyNFW0MZwlbILRgmsMFDpEpC668jD+gp1f9cop+piN5+6CB9ISdMhiLu7J5
+ VF5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=D/ppLEq00UAH7ryAoBMY6Ta2gFtRm83gvNv8hfHhvds=;
- b=qndQ4S+MoK/DqH4XariHIGiXIRmNd0IxuixYXamX6JG7aPyHvYLHDB4ccYVqp/HoNT
- l2X2twoWHZKutfZg/JCS9DbL7QCPfhl3Vfjd4CyZ6jwx+6iNQu6SYWKKAdFcYO0u+S2G
- 6sBWMl+Y0ZcaHDlpjjbxHqExWKIVYRAV3wIKshn32P+YPrlatWKunmBNJAnsuJHxClVL
- 50Ij//UkHi1dWn3u4bs/Y1G/FVLhYGj1QyLGOILqWCmY6RHqvUQDSliOB/p4/PuZBT/g
- jmiMrpGx/RHGAYLdS7ugRIUwQNdjwUO58LdSvFyfWL//yHOFLa6WFO0QWbxTkS59JkWn
- lwVA==
-X-Gm-Message-State: AOAM530O9aOZ9s/PptXhqxSirjdazeXVB24QLAJvfR6c1SC7j2MgYCjc
- b+l95Oh19KrSuc9Jd5b2UDfAiObVEeQ0HmwjG54=
-X-Google-Smtp-Source: ABdhPJw0pKC+Ac+Bzl6MVF4eocaeXWIymLrk2JCRLjtfjd04vJDZYn8s7blK83CJhBzO43rUOJIx1xCSUosh8WbR+WE=
-X-Received: by 2002:a05:6e02:1588:: with SMTP id
- m8mr6841067ilu.188.1632462492104; 
- Thu, 23 Sep 2021 22:48:12 -0700 (PDT)
+ bh=MM/sHgjYQ5ViPtnEgwieUbDNTXAT6og8BQfOlZI7des=;
+ b=VKhqATW/9geSuXk9MvOG72m27fCJUUg1ySJ2ob4wg6iJ5Nb4Gp5d93rVbDOFz/kIJD
+ Cn1GbxKd73RVMX8pFGPHbdXIUVgZRHk0j4SwMrjFn/oVzV0o8k52RWJv/Wr501nfvfOx
+ JbF79kxoFgjERxtVCPJY2OJNzVUaIl4dONSazaKWFJHaAvfEnIc58l544bDa7PK3yFai
+ /m4SVj3EKRxG9Nk704b6uu1OgP05JAz3L4y0IrrmyHlebfk55GBXdMgOQzECtK8TMmlP
+ XZBV/DGrYQHty2tGEGEskovG+avsUOGs30vCFicVQSpc6ZWBuNHiv6gX2kN3kiWF9r2D
+ stDA==
+X-Gm-Message-State: AOAM532j5W8gkhpB3uzngTewSAanEx/xONlgjjj+yIUORcwtWBvTz9fZ
+ RxUYRb9eQoNRqL7ORZ8pFkY2FKZQ3SbOUjYXhAE=
+X-Google-Smtp-Source: ABdhPJzZegB1vXnetEnYtCOHYJXl7qjJzHi9zB7ip6Am9Xyc6h0kBj17fBrIwrY/czX4wFcALIY0JcqbPL5PUJ2iFg4=
+X-Received: by 2002:a92:280f:: with SMTP id l15mr6548500ilf.74.1632465679476; 
+ Thu, 23 Sep 2021 23:41:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210918062816.7546-1-tangxingxin1008@gmail.com>
- <CAKmqyKM2qM3pQaTN06S+TwWBCd2cB4pusex9z7NvdypZC7Nbiw@mail.gmail.com>
-In-Reply-To: <CAKmqyKM2qM3pQaTN06S+TwWBCd2cB4pusex9z7NvdypZC7Nbiw@mail.gmail.com>
-From: eric tang <tangxingxin1008@gmail.com>
-Date: Fri, 24 Sep 2021 13:48:00 +0800
-Message-ID: <CAE_nArV5ahZZ9gCFxyGn+PBhPf-aADGsCQgBWLDQjzuV_KNYeg@mail.gmail.com>
-Subject: Re: [RFC 00/10] add the rest of riscv bitmapip-0.93 instructions
-To: Alistair Francis <alistair23@gmail.com>
+References: <20210921020234.123448-1-frank.chang@sifive.com>
+In-Reply-To: <20210921020234.123448-1-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 24 Sep 2021 16:40:52 +1000
+Message-ID: <CAKmqyKOwLSSOGZqijc6RUEnVupHkeHeRHtLYa4g1CV9-Z01Ehg@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Set mstatus_hs.[SD|FS] bits if Clean and
+ V=1 in mark_fs_dirty()
+To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Vincent Chen <vincent.chen@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="000000000000f37d3f05ccb74a15"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=tangxingxin1008@gmail.com; helo=mail-il1-x134.google.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
 X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -73,154 +75,122 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Sep 2021 05:48:21 -0000
+X-List-Received-Date: Fri, 24 Sep 2021 06:41:23 -0000
 
---000000000000f37d3f05ccb74a15
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Sep 21, 2021 at 12:03 PM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> When V=1, both vsstauts.FS and HS-level sstatus.FS are in effect.
+> Modifying the floating-point state when V=1 causes both fields to
+> be set to 3 (Dirty).
+>
+> However, it's possible that HS-level sstatus.FS is Clean and VS-level
+> vsstatus.FS is Dirty at the time mark_fs_dirty() is called when V=1.
+> We can't early return for this case because we still need to set
+> sstatus.FS to Dirty according to spec.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Vincent Chen <vincent.chen@sifive.com>
+> Tested-by: Vincent Chen <vincent.chen@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Ok, thanks. ^ ^!
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair Francis <alistair23@gmail.com> =E4=BA=8E2021=E5=B9=B49=E6=9C=8824=
-=E6=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=8812:39=E5=86=99=E9=81=93=EF=BC=
-=9A
+Alistair
 
-> On Sat, Sep 18, 2021 at 6:20 PM Eric Tang <tangxingxin1008@gmail.com>
-> wrote:
-> >
-> > These patches fixed some issues about srow/sroiw/clzw instructions and
-> > add the rest of riscv bitmapip-0.93 instructions except fsri/fsriw &
-> > bext/bdep & bextw/bdepw for opcode coding or name conflict problems. Th=
-e
-> > problems had been fixed in riscv bitmapip-1.0 version.
-> >
-> > I have tested these bitmapip instructions, passed by compare the result=
-s
-> > that produced by qemu and spike.
-> >
-> > Please review and give your opinion kindly :)
+> ---
+>  target/riscv/cpu.h       |  4 ++++
+>  target/riscv/translate.c | 30 +++++++++++++++++-------------
+>  2 files changed, 21 insertions(+), 13 deletions(-)
 >
-> Hey Eric,
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e735e53e26c..bef7c551646 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -394,6 +394,7 @@ FIELD(TB_FLAGS, SEW, 5, 3)
+>  FIELD(TB_FLAGS, VILL, 8, 1)
+>  /* Is a Hypervisor instruction load/store allowed? */
+>  FIELD(TB_FLAGS, HLSX, 9, 1)
+> +FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
 >
-> Thanks for the patches!
+>  bool riscv_cpu_is_32bit(CPURISCVState *env);
 >
-> Unfortunately there is already a series "target/riscv: Update QEmu for
-> Zb[abcs] 1.0.0"
-> (https://www.mail-archive.com/qemu-devel@nongnu.org/msg839086.html)
-> that adds support for the v1.0.0 bit manip extension. That has been
-> reviewed and queued to be merged.
+> @@ -450,6 +451,9 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>                  get_field(env->hstatus, HSTATUS_HU))) {
+>              flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
+>          }
+> +
+> +        flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
+> +                           get_field(env->mstatus_hs, MSTATUS_FS));
+>      }
+>  #endif
 >
-> If you have fixes or features that apply on top of that please send
-> them though :)
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 74b33fa3c90..6be22347426 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -58,6 +58,7 @@ typedef struct DisasContext {
+>      target_ulong misa;
+>      uint32_t opcode;
+>      uint32_t mstatus_fs;
+> +    uint32_t mstatus_hs_fs;
+>      uint32_t mem_idx;
+>      /* Remember the rounding mode encoded in the previous fp instruction,
+>         which we have already installed into env->fp_status.  Or -1 for
+> @@ -280,27 +281,29 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>  static void mark_fs_dirty(DisasContext *ctx)
+>  {
+>      TCGv tmp;
+> -    target_ulong sd;
+> +    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
 >
-> Alistair
+> -    if (ctx->mstatus_fs == MSTATUS_FS) {
+> -        return;
+> -    }
+> -    /* Remember the state change for the rest of the TB.  */
+> -    ctx->mstatus_fs = MSTATUS_FS;
+> +    if (ctx->mstatus_fs != MSTATUS_FS) {
+> +        /* Remember the state change for the rest of the TB. */
+> +        ctx->mstatus_fs = MSTATUS_FS;
 >
-> >
-> > Eric Tang (10):
-> >   target/riscv: rvb: fixed an error about srow/sroiw instructions
-> >   target/riscv: rvb: add carry-less multiply instructions
-> >   target/riscv: rvb: add cmix/cmov instructions
-> >   target/riscv: rvb: add generalized shuffle instructions
-> >   target/riscv: rvb: add crossbar permutation instructions
-> >   target/riscv: rvb: add bfp/bfpw instructions
-> >   target/riscv: rvb: add CRC instructions
-> >   target/riscv: rvb: add bit-matrix instructions
-> >   target/riscv: rvb: fixed an issue about clzw instruction
-> >   target/riscv: rvb: add funnel shfit instructions
-> >
-> >  target/riscv/bitmanip_helper.c          | 351 ++++++++++++++++++++++++
-> >  target/riscv/helper.h                   |  28 ++
-> >  target/riscv/insn32.decode              |  36 +++
-> >  target/riscv/insn_trans/trans_rvb.c.inc | 215 ++++++++++++++-
-> >  target/riscv/translate.c                |  14 +
-> >  5 files changed, 641 insertions(+), 3 deletions(-)
-> >
-> > --
-> > 2.17.1
-> >
-> >
+> -    tmp = tcg_temp_new();
+> -    sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
+> +        tmp = tcg_temp_new();
+> +        tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> +        tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+> +        tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> +        tcg_temp_free(tmp);
+> +    }
 >
-
---000000000000f37d3f05ccb74a15
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Ok, thanks. ^ ^!</div><br><div class=3D"gmail_quote"><div =
-dir=3D"ltr" class=3D"gmail_attr">Alistair Francis &lt;<a href=3D"mailto:ali=
-stair23@gmail.com">alistair23@gmail.com</a>&gt; =E4=BA=8E2021=E5=B9=B49=E6=
-=9C=8824=E6=97=A5=E5=91=A8=E4=BA=94 =E4=B8=8B=E5=8D=8812:39=E5=86=99=E9=81=
-=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On =
-Sat, Sep 18, 2021 at 6:20 PM Eric Tang &lt;<a href=3D"mailto:tangxingxin100=
-8@gmail.com" target=3D"_blank">tangxingxin1008@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; These patches fixed some issues about srow/sroiw/clzw instructions and=
-<br>
-&gt; add the rest of riscv bitmapip-0.93 instructions except fsri/fsriw &am=
-p;<br>
-&gt; bext/bdep &amp; bextw/bdepw for opcode coding or name conflict problem=
-s. The<br>
-&gt; problems had been fixed in riscv bitmapip-1.0 version.<br>
-&gt;<br>
-&gt; I have tested these bitmapip instructions, passed by compare the resul=
-ts<br>
-&gt; that produced by qemu and spike.<br>
-&gt;<br>
-&gt; Please review and give your opinion kindly :)<br>
-<br>
-Hey Eric,<br>
-<br>
-Thanks for the patches!<br>
-<br>
-Unfortunately there is already a series &quot;target/riscv: Update QEmu for=
-<br>
-Zb[abcs] 1.0.0&quot;<br>
-(<a href=3D"https://www.mail-archive.com/qemu-devel@nongnu.org/msg839086.ht=
-ml" rel=3D"noreferrer" target=3D"_blank">https://www.mail-archive.com/qemu-=
-devel@nongnu.org/msg839086.html</a>)<br>
-that adds support for the v1.0.0 bit manip extension. That has been<br>
-reviewed and queued to be merged.<br>
-<br>
-If you have fixes or features that apply on top of that please send<br>
-them though :)<br>
-<br>
-Alistair<br>
-<br>
-&gt;<br>
-&gt; Eric Tang (10):<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: fixed an error about srow/sroiw instruc=
-tions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add carry-less multiply instructions<br=
+> -    tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> -    tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+> -    tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus));
+> +    if (ctx->virt_enabled && ctx->mstatus_hs_fs != MSTATUS_FS) {
+> +        /* Remember the stage change for the rest of the TB. */
+> +        ctx->mstatus_hs_fs = MSTATUS_FS;
 >
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add cmix/cmov instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add generalized shuffle instructions<br=
+> -    if (ctx->virt_enabled) {
+> +        tmp = tcg_temp_new();
+>          tcg_gen_ld_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+>          tcg_gen_ori_tl(tmp, tmp, MSTATUS_FS | sd);
+>          tcg_gen_st_tl(tmp, cpu_env, offsetof(CPURISCVState, mstatus_hs));
+> +        tcg_temp_free(tmp);
+>      }
+> -    tcg_temp_free(tmp);
+>  }
+>  #else
+>  static inline void mark_fs_dirty(DisasContext *ctx) { }
+> @@ -533,6 +536,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      ctx->frm = -1;  /* unknown rounding mode */
+>      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+>      ctx->vlen = cpu->cfg.vlen;
+> +    ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
+>      ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
+>      ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
+>      ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+> --
+> 2.25.1
 >
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add crossbar permutation instructions<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add bfp/bfpw instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add CRC instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add bit-matrix instructions<br>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: fixed an issue about clzw instruction<b=
-r>
-&gt;=C2=A0 =C2=A0target/riscv: rvb: add funnel shfit instructions<br>
-&gt;<br>
-&gt;=C2=A0 target/riscv/bitmanip_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- | 351 ++++++++++++++++++++++++<br>
-&gt;=C2=A0 target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 28 ++<br>
-&gt;=C2=A0 target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 |=C2=A0 36 +++<br>
-&gt;=C2=A0 target/riscv/insn_trans/trans_rvb.c.inc | 215 ++++++++++++++-<br=
 >
-&gt;=C2=A0 target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 14 +<br>
-&gt;=C2=A0 5 files changed, 641 insertions(+), 3 deletions(-)<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.17.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div>
-
---000000000000f37d3f05ccb74a15--
 
