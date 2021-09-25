@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mU7ot-0005ec-4K
-	for mharc-qemu-riscv@gnu.org; Sat, 25 Sep 2021 09:34:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60710)
+	id 1mU7p2-0005jO-31
+	for mharc-qemu-riscv@gnu.org; Sat, 25 Sep 2021 09:34:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mU7op-0005cM-NB; Sat, 25 Sep 2021 09:34:19 -0400
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d]:33629)
+ id 1mU7ot-0005ey-Lx; Sat, 25 Sep 2021 09:34:27 -0400
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433]:37799)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mU7om-0000DJ-U0; Sat, 25 Sep 2021 09:34:19 -0400
-Received: by mail-wr1-x42d.google.com with SMTP id t18so36117528wrb.0;
- Sat, 25 Sep 2021 06:34:16 -0700 (PDT)
+ id 1mU7os-0000HP-30; Sat, 25 Sep 2021 09:34:23 -0400
+Received: by mail-wr1-x433.google.com with SMTP id t8so36107829wrq.4;
+ Sat, 25 Sep 2021 06:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=7I1aMI8lm45lQRDER9IXlE6p2aeABd+5vqCVhp5uc+w=;
- b=n4R5U8P3qzimBg7X1FOQsAjZtIFJ7JpOZP3uSB1w/AGD6X+i5pBAHsC5t4blQvU8DD
- yjsQQDk3+jyK5gyehnfsKRwtbFGXNavcVQAhT9koYeHOYjNm9Nu08o7SB8ezHbdAgXKq
- bl4eUnuCnbNmyvo6wOKsA3it+gup8AfKjgD2A8dgDVnwU3UijHMIwJm4JakMmp95mpdf
- FIJy5tljjHplKiNDf91o8nK4SmnHTP/Lt+25akCjoxpOq7Qyxb4gCfsn9zieN3AD7nR7
- YaEdmK5JRJAc/Xdxee8rUg+DvuCD344zCQRLB3KarTXQ6xnL1xrtiwSj3S7TPTtNAQd6
- AbLQ==
+ bh=614XFzlTEarTRy3LGVUK4v93mZwN/uZLaywbdLBpLD4=;
+ b=Tq5xiyopZSoBQTEKkjZaHU+1BqPjUQrcHksLvyWg5E0XfgqoP8tT64SHTWuIVEWOuF
+ hQqvwTtByOXTZjeOOScHyQhD2qtDlA872IvjSfxM8Fqfjx3nN6ID3AIK8A2qWzhtJ2LA
+ Ap8qjF2sMzL6nrWJYqv9bMFfN6nBvYtTcJGrTC0/5KGm59w9ufWvHGsHP3wA+hFgMp97
+ jlevRe2jDLtTLlLwC2pAdK1rApuSwClh5Y7gMZJWD1uZXacllD/kKcH+2VhAOJAR45NQ
+ 7RAk3TkofTXBJ52B/CSA8lpZ+E/d5DqLx76zvApRxi+vwYn3/ZifIl5vAGB07S7UkViQ
+ U2WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
  :in-reply-to:references:mime-version:content-transfer-encoding;
- bh=7I1aMI8lm45lQRDER9IXlE6p2aeABd+5vqCVhp5uc+w=;
- b=PqOKmp1jNiEZP/8TkrPrJ0xFKzvIRvx4gmfiLsZx89hxJ/sXhnhwIsCJNAiiC1U5x5
- LNnkznp0SnZDXZV1J9c2N1Xj+SMpcqDdLFKcQFPNWlVCV+kfz/tBU44xd1goLIBUHjf7
- 2J3gzBzIQY11iiSSUw8/gJbgz1LlbUX/YgcbeBPolqP0+3xmKYc5T/XvjfM/9YdfyJUK
- yegX/d1jiV+qLbYZtAlDDtYhEsQSExyJrYhTkesxzHxMgVhnN3rt1cAAA1bT+Bm1Xhvg
- 7I16gJj8s1HoqTefBcIj12p3x6b9vYIUgcZsjXVFZ9094MWkWR6s+VRcpp5JVd9M9GUN
- CgzQ==
-X-Gm-Message-State: AOAM533CG21f+te8IqRkPkSBhyU91AtapqJZmS2TTopL1gIJIyzE2C/q
- WrQGzN4fWMHVw8UIw3hn0HPFr5YYp64=
-X-Google-Smtp-Source: ABdhPJzAshCviCH1lX89S+tc2UXSWqxuQy/qblI9F1SVPsyPnwO3BcAlNy4YZrb6T8WYI3/nYO0XXA==
-X-Received: by 2002:a7b:ce94:: with SMTP id q20mr7333890wmj.83.1632576854849; 
- Sat, 25 Sep 2021 06:34:14 -0700 (PDT)
+ bh=614XFzlTEarTRy3LGVUK4v93mZwN/uZLaywbdLBpLD4=;
+ b=Yno1PhHtWb58MN8wH02y7wJG/+Y5NGfOz/TYfRMFdnpXL6MKXQlJTnsjbIkkVAy9Hn
+ giGVRcxnknVZIov4qpU0Z8h7xMC9C/SxWHseZ1nKYrHeBhOcTCFHr/kV3Nh2o13sEBeC
+ EMjLIeOSixrktqme/qouLUM9q/0RLrxk7n83Fjbip7sqc2M9+rLcY7rGCtDug5xQyMby
+ qTEqv1Msp/xWfkblskUVBFGpC91kwCkMYkSWhV5v0ZxdIDJ8sNb0S/MQ3/ehdfhoddiA
+ J7GndCrbZoYSn9VSYWGIvaNQqZ8oOjiMZPDiK9A6b/C8f06CzpHpJx0ylopKWfAhUvcR
+ z6gg==
+X-Gm-Message-State: AOAM531jWRZ/ETBiIYjPIcLBivPHPQnANg7fY7duFgAI9IyOq4kVUyjg
+ KeIJDhD5zA1i2mGBRFyXH/ZzpL2iRgI=
+X-Google-Smtp-Source: ABdhPJz4ZgC1WiLqx+H12UHTcskiozWwfHMksJZwZMReybNsr+yQIpuYAtl/cwVHe4gBcC7je+nmXQ==
+X-Received: by 2002:a7b:c4d5:: with SMTP id g21mr6818808wmk.47.1632576859677; 
+ Sat, 25 Sep 2021 06:34:19 -0700 (PDT)
 Received: from x1w.. (118.red-83-35-24.dynamicip.rima-tde.net. [83.35.24.118])
  by smtp.gmail.com with ESMTPSA id
- x4sm3306588wmi.22.2021.09.25.06.34.13
+ u6sm13140224wrp.0.2021.09.25.06.34.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Sep 2021 06:34:14 -0700 (PDT)
+ Sat, 25 Sep 2021 06:34:19 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
@@ -51,18 +51,17 @@ Cc: qemu-riscv@nongnu.org,
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair23@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH v2 1/3] hw/char/mchp_pfsoc_mmuart: Simplify
- MCHP_PFSOC_MMUART_REG definition
-Date: Sat, 25 Sep 2021 15:34:05 +0200
-Message-Id: <20210925133407.1259392-2-f4bug@amsat.org>
+Subject: [PATCH v2 2/3] hw/char/mchp_pfsoc_mmuart: Use a MemoryRegion container
+Date: Sat, 25 Sep 2021 15:34:06 +0200
+Message-Id: <20210925133407.1259392-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210925133407.1259392-1-f4bug@amsat.org>
 References: <20210925133407.1259392-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -14
 X-Spam_score: -1.5
 X-Spam_bar: -
@@ -83,92 +82,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Sep 2021 13:34:21 -0000
+X-List-Received-Date: Sat, 25 Sep 2021 13:34:29 -0000
 
-The current MCHP_PFSOC_MMUART_REG_SIZE definition represent the
-size occupied by all the registers. However all registers are
-32-bit wide, and the MemoryRegionOps handlers are restricted to
-32-bit:
+Our device have 2 different I/O regions:
+- a 16550 UART mapped for 32-bit accesses
+- 13 extra registers
 
-  static const MemoryRegionOps mchp_pfsoc_mmuart_ops = {
-      .read = mchp_pfsoc_mmuart_read,
-      .write = mchp_pfsoc_mmuart_write,
-      .impl = {
-          .min_access_size = 4,
-          .max_access_size = 4,
-      },
+Instead of mapping each region on the main bus, introduce
+a container, map the 2 devices regions on the container,
+and map the container on the main bus.
 
-Avoid being triskaidekaphobic, simplify by using the number of
-registers.
+Before:
+
+  (qemu) info mtree
+    ...
+    0000000020100000-000000002010001f (prio 0, i/o): serial
+    0000000020100020-000000002010101f (prio 0, i/o): mchp.pfsoc.mmuart
+    0000000020102000-000000002010201f (prio 0, i/o): serial
+    0000000020102020-000000002010301f (prio 0, i/o): mchp.pfsoc.mmuart
+    0000000020104000-000000002010401f (prio 0, i/o): serial
+    0000000020104020-000000002010501f (prio 0, i/o): mchp.pfsoc.mmuart
+    0000000020106000-000000002010601f (prio 0, i/o): serial
+    0000000020106020-000000002010701f (prio 0, i/o): mchp.pfsoc.mmuart
+
+After:
+
+  (qemu) info mtree
+    ...
+    0000000020100000-0000000020100fff (prio 0, i/o): mchp.pfsoc.mmuart
+      0000000020100000-000000002010001f (prio 0, i/o): serial
+      0000000020100020-0000000020100fff (prio 0, i/o): mchp.pfsoc.mmuart.regs
+    0000000020102000-0000000020102fff (prio 0, i/o): mchp.pfsoc.mmuart
+      0000000020102000-000000002010201f (prio 0, i/o): serial
+      0000000020102020-0000000020102fff (prio 0, i/o): mchp.pfsoc.mmuart.regs
+    0000000020104000-0000000020104fff (prio 0, i/o): mchp.pfsoc.mmuart
+      0000000020104000-000000002010401f (prio 0, i/o): serial
+      0000000020104020-0000000020104fff (prio 0, i/o): mchp.pfsoc.mmuart.regs
+    0000000020106000-0000000020106fff (prio 0, i/o): mchp.pfsoc.mmuart
+      0000000020106000-000000002010601f (prio 0, i/o): serial
+      0000000020106020-0000000020106fff (prio 0, i/o): mchp.pfsoc.mmuart.regs
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/hw/char/mchp_pfsoc_mmuart.h |  4 ++--
- hw/char/mchp_pfsoc_mmuart.c         | 14 ++++++++------
- 2 files changed, 10 insertions(+), 8 deletions(-)
+ include/hw/char/mchp_pfsoc_mmuart.h |  1 +
+ hw/char/mchp_pfsoc_mmuart.c         | 11 ++++++++---
+ 2 files changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/include/hw/char/mchp_pfsoc_mmuart.h b/include/hw/char/mchp_pfsoc_mmuart.h
-index f61990215f0..9c012e6c977 100644
+index 9c012e6c977..864ac1a36b5 100644
 --- a/include/hw/char/mchp_pfsoc_mmuart.h
 +++ b/include/hw/char/mchp_pfsoc_mmuart.h
-@@ -30,7 +30,7 @@
- 
- #include "hw/char/serial.h"
- 
--#define MCHP_PFSOC_MMUART_REG_SIZE  52
-+#define MCHP_PFSOC_MMUART_REG_COUNT 13
+@@ -33,6 +33,7 @@
+ #define MCHP_PFSOC_MMUART_REG_COUNT 13
  
  typedef struct MchpPfSoCMMUartState {
++    MemoryRegion container;
      MemoryRegion iomem;
-@@ -39,7 +39,7 @@ typedef struct MchpPfSoCMMUartState {
- 
-     SerialMM *serial;
- 
--    uint32_t reg[MCHP_PFSOC_MMUART_REG_SIZE / sizeof(uint32_t)];
-+    uint32_t reg[MCHP_PFSOC_MMUART_REG_COUNT];
- } MchpPfSoCMMUartState;
- 
- /**
+     hwaddr base;
+     qemu_irq irq;
 diff --git a/hw/char/mchp_pfsoc_mmuart.c b/hw/char/mchp_pfsoc_mmuart.c
-index 2facf85c2d8..584e7fec17c 100644
+index 584e7fec17c..ea586559761 100644
 --- a/hw/char/mchp_pfsoc_mmuart.c
 +++ b/hw/char/mchp_pfsoc_mmuart.c
-@@ -29,13 +29,14 @@ static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsigned size)
+@@ -25,6 +25,8 @@
+ #include "chardev/char.h"
+ #include "hw/char/mchp_pfsoc_mmuart.h"
+ 
++#define REGS_OFFSET 0x20
++
+ static uint64_t mchp_pfsoc_mmuart_read(void *opaque, hwaddr addr, unsigned size)
  {
      MchpPfSoCMMUartState *s = opaque;
+@@ -72,16 +74,19 @@ MchpPfSoCMMUartState *mchp_pfsoc_mmuart_create(MemoryRegion *sysmem,
  
--    if (addr >= MCHP_PFSOC_MMUART_REG_SIZE) {
-+    addr >>= 2;
-+    if (addr >= MCHP_PFSOC_MMUART_REG_COUNT) {
-         qemu_log_mask(LOG_GUEST_ERROR, "%s: read: addr=0x%" HWADDR_PRIx "\n",
--                      __func__, addr);
-+                      __func__, addr << 2);
-         return 0;
-     }
+     s = g_new0(MchpPfSoCMMUartState, 1);
  
--    return s->reg[addr / sizeof(uint32_t)];
-+    return s->reg[addr];
++    memory_region_init(&s->container, NULL, "mchp.pfsoc.mmuart", 0x1000);
++
+     memory_region_init_io(&s->iomem, NULL, &mchp_pfsoc_mmuart_ops, s,
+-                          "mchp.pfsoc.mmuart", 0x1000);
++                          "mchp.pfsoc.mmuart.regs", 0x1000 - REGS_OFFSET);
++    memory_region_add_subregion(&s->container, REGS_OFFSET, &s->iomem);
+ 
+     s->base = base;
+     s->irq = irq;
+ 
+-    s->serial = serial_mm_init(sysmem, base, 2, irq, 399193, chr,
++    s->serial = serial_mm_init(&s->container, 0, 2, irq, 399193, chr,
+                                DEVICE_LITTLE_ENDIAN);
+ 
+-    memory_region_add_subregion(sysmem, base + 0x20, &s->iomem);
++    memory_region_add_subregion(sysmem, base, &s->container);
+ 
+     return s;
  }
- 
- static void mchp_pfsoc_mmuart_write(void *opaque, hwaddr addr,
-@@ -44,13 +45,14 @@ static void mchp_pfsoc_mmuart_write(void *opaque, hwaddr addr,
-     MchpPfSoCMMUartState *s = opaque;
-     uint32_t val32 = (uint32_t)value;
- 
--    if (addr >= MCHP_PFSOC_MMUART_REG_SIZE) {
-+    addr >>= 2;
-+    if (addr >= MCHP_PFSOC_MMUART_REG_COUNT) {
-         qemu_log_mask(LOG_GUEST_ERROR, "%s: bad write: addr=0x%" HWADDR_PRIx
--                      " v=0x%x\n", __func__, addr, val32);
-+                      " v=0x%x\n", __func__, addr << 2, val32);
-         return;
-     }
- 
--    s->reg[addr / sizeof(uint32_t)] = val32;
-+    s->reg[addr] = val32;
- }
- 
- static const MemoryRegionOps mchp_pfsoc_mmuart_ops = {
 -- 
 2.31.1
 
