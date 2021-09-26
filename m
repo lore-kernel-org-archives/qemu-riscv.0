@@ -1,72 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mUbre-0008Bc-Gz
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 17:39:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54628)
+	id 1mUdED-00056n-Bv
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 19:06:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35424)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mUbrc-0008AN-DD; Sun, 26 Sep 2021 17:39:12 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:41730)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mUdEB-00053g-EG
+ for qemu-riscv@nongnu.org; Sun, 26 Sep 2021 19:06:35 -0400
+Received: from mail-qt1-x834.google.com ([2607:f8b0:4864:20::834]:45879)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mUbrX-00076x-5x; Sun, 26 Sep 2021 17:39:12 -0400
-Received: by mail-wr1-x432.google.com with SMTP id w29so46110441wra.8;
- Sun, 26 Sep 2021 14:39:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Zn/EeFiHzDUyaGhXtsd/E2eXxlWN4jO4U2XJ3ypuRU8=;
- b=TusnAc1oGYHvPlvcSQLjOn/YShIM3N+QvWAZlUMwNDBu1uvHUYutfOjrPDO4kfj8sX
- b+9+ls89Fi0fRVdtyFsqDEK0fgaD3gOMV5P0CEpsQ1K//tjLEdXsUYStw9o3B+zyrDi1
- 0K0sOZlegd0Ge98hiFS3UxXweYTR14ZI+7lKO83GETPK579ITIPV2Hx+dNQPk3WvlOaX
- 7So0iMatCiCDWBrFq3ATQ3YPTSRbRqgBIFWWO0eB3hNDcMktRGezL05YpoJ8auklCPQp
- KigcmDpFCnwRbFMXrhGSMjsnVeUsGu3QFjO99BNJIU9g3TqZ5vcfpZ3dkx9VG3rQrR1H
- XlMg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mUdE9-0002Se-N3
+ for qemu-riscv@nongnu.org; Sun, 26 Sep 2021 19:06:34 -0400
+Received: by mail-qt1-x834.google.com with SMTP id r1so15056647qta.12
+ for <qemu-riscv@nongnu.org>; Sun, 26 Sep 2021 16:06:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=kk3uSxqOC1NdtihgCqiEpcHeZd/wblUq0BD/Lot9F4Q=;
+ b=e/5ybHcj9V0DUBOUVYeTGCa0wnH3ElqCaGbN2nxbR1G5GG7zKgczScXLi7ZAd37XmW
+ /TWtNiRz6qY2RTAFdjCjsnjd/ufCDH0dWjwVaJlZafoQ9tiqDyHpjJdG2RKAxY7EZrlK
+ DyAtXY+DYHV4Qd7Ww+koYQwMTub7JG8EslcNsdUcliKmciGpaSdbByf37VhVu2Usv+zl
+ VyfUgJ5JN4iIvlnTr05MNL+fAvOxl/k9sRVsW3Uxok5xvjKiJJgqmyAnPQcCRQ3/NUON
+ 9yIIZont4NrTBfQjB/Ds0ndb4d1N0d1YHBafN1JtnQFwtKa4IVm0Vw3OONbA+cZ7Tz6V
+ SqfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=Zn/EeFiHzDUyaGhXtsd/E2eXxlWN4jO4U2XJ3ypuRU8=;
- b=4eXgtdgwWvlTnn68LJ4zMtnmFxDo8yc6KEtmx+1BJ2jHY7mRkjjEZ97KF4qJrdDpiS
- OuzYKLVKXIbfoKMEfa2cdf8aFO4G/AN9AKD7zfTyoapPG+8u6Xu+4bBddfXAdSDfW+rE
- T1gYF7kGycyzUHsqQLwuyWAh2dRaRamxJ2Dq5O513UcuCLc8XA3aYJyjRE0JikR9tdV1
- kn5aUyOiwAHXLvv8+bLPRkyBKXIM8v5wWne9SVheyS/mxNjnTwj0/12AWtJGP/r/f0Ml
- FHpqZZLcRfv7o9isTNE5tUlRYfpcyM/qCONsdvu51rGeKCsS5GQeB0pcBNBSbEprtscn
- p/ug==
-X-Gm-Message-State: AOAM533zhO47khku1OiiGC9xE8Af4w5iwW/X2gOy1j/+nWJiaGvJXwOQ
- bk0D4r2Hq8sT/RjI63y2O44Qdyg7PfA=
-X-Google-Smtp-Source: ABdhPJxiVb52ouDAu7b9pG6QN8xK6OND6x6i7sqCdqaARk4Tph92KlBMWliKcuKPocFbggL8vNiDqg==
-X-Received: by 2002:adf:a31a:: with SMTP id c26mr25367673wrb.307.1632692344935; 
- Sun, 26 Sep 2021 14:39:04 -0700 (PDT)
-Received: from x1w.. (118.red-83-35-24.dynamicip.rima-tde.net. [83.35.24.118])
- by smtp.gmail.com with ESMTPSA id
- 4sm13854324wmv.42.2021.09.26.14.39.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Sep 2021 14:39:04 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-To: qemu-devel@nongnu.org
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=kk3uSxqOC1NdtihgCqiEpcHeZd/wblUq0BD/Lot9F4Q=;
+ b=A3mPz/QAjnh9zlqkAxvOYxRZ1eXUl38WgBULykowgBm6xW/5jzD9xj6wR4cxzfW+je
+ J7Rk6D4BvBD0EbaTJZIoKDCkUSEIp8yj15ieMNWZdMwT9N3KGd86qEq86rlghcv9P6TG
+ k++uZMeYeHYzUL4RzoEsdxl+v6/MEHOdbTN+BKPA24hD+VvOvD+piIqOov6s9nrBI8pV
+ wFsl6tYz2i+Y7tkOKlLNtzKqY2QkjP7ts3yZTETA4uvDaXj8zYmeTTieRb8mV7Qq8U9+
+ G67ESNLA6YZHPNLiAupsncpsS0rtHjV5K1uzl/yLkYDHt4PvcQOnbC5dV4qGXnS+TCFs
+ A+Ng==
+X-Gm-Message-State: AOAM531C9RTy/fzydQjwKIybgzd3rYaFY0UMlIfLAHwLpi48g+Rq0PIH
+ e3dY/WUg6szm4/22vQvOlSZCBiQxYk8qtg==
+X-Google-Smtp-Source: ABdhPJwvB1TfG/WEB9lnMDKIYbqRRhA3vkkZxMa67xxabTEqHH+yqnquIhZinnYkaspepC77XolOHw==
+X-Received: by 2002:ac8:5c87:: with SMTP id r7mr15853128qta.114.1632697592139; 
+ Sun, 26 Sep 2021 16:06:32 -0700 (PDT)
+Received: from [192.168.3.43] (cpe-24-31-215-130.sc.res.rr.com.
+ [24.31.215.130])
+ by smtp.gmail.com with ESMTPSA id i67sm11161030qkd.90.2021.09.26.16.06.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 26 Sep 2021 16:06:31 -0700 (PDT)
+Subject: Re: [PATCH] tcg/riscv: Fix potential bug in clobbered call register
+ set
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
 Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Joelle van Dyne <j@getutm.app>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH] tcg/riscv: Fix potential bug in clobbered call register set
-Date: Sun, 26 Sep 2021 23:39:02 +0200
-Message-Id: <20210926213902.1713506-1-f4bug@amsat.org>
-X-Mailer: git-send-email 2.31.1
+ qemu-riscv@nongnu.org
+References: <20210926213902.1713506-1-f4bug@amsat.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <fa4c2f52-d924-4b58-16c6-273ce7dba392@linaro.org>
+Date: Sun, 26 Sep 2021 19:06:29 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20210926213902.1713506-1-f4bug@amsat.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::834;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x834.google.com
+X-Spam_score_int: -25
+X-Spam_score: -2.6
+X-Spam_bar: --
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.478,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,36 +84,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2021 21:39:12 -0000
+X-List-Received-Date: Sun, 26 Sep 2021 23:06:35 -0000
 
-The tcg_target_call_clobber_regs variable is of type TCGRegSet,
-which is unsigned and might be 64-bit wide. By initializing it
-as unsigned type, only 32-bit are set. Currently the RISCV TCG
-backend only uses 32 registers, so this is not a problem.
-However if more register were to be implemented (such vectors)
-then it would become problematic. Since we are better safe than
-sorry, properly initialize the value as 64-bit.
+On 9/26/21 5:39 PM, Philippe Mathieu-Daudé wrote:
+> The tcg_target_call_clobber_regs variable is of type TCGRegSet,
+> which is unsigned and might be 64-bit wide. By initializing it
+> as unsigned type, only 32-bit are set. Currently the RISCV TCG
+> backend only uses 32 registers, so this is not a problem.
+> However if more register were to be implemented (such vectors)
+> then it would become problematic. Since we are better safe than
+> sorry, properly initialize the value as 64-bit.
+> 
+> Fixes: 7a5549f2aea ("tcg/riscv: Add the target init code")
+> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+> ---
+>   tcg/riscv/tcg-target.c.inc | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index dc8d8f1de23..5bd95633b0d 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -1734,7 +1734,7 @@ static void tcg_target_init(TCGContext *s)
+>           tcg_target_available_regs[TCG_TYPE_I64] = 0xffffffff;
+>       }
+>   
+> -    tcg_target_call_clobber_regs = -1u;
+> +    tcg_target_call_clobber_regs = -1ull;
 
-Fixes: 7a5549f2aea ("tcg/riscv: Add the target init code")
-Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
----
- tcg/riscv/tcg-target.c.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+There are not 64 registers, so this is incorrect.
+I don't think your logic is correct.
 
-diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index dc8d8f1de23..5bd95633b0d 100644
---- a/tcg/riscv/tcg-target.c.inc
-+++ b/tcg/riscv/tcg-target.c.inc
-@@ -1734,7 +1734,7 @@ static void tcg_target_init(TCGContext *s)
-         tcg_target_available_regs[TCG_TYPE_I64] = 0xffffffff;
-     }
- 
--    tcg_target_call_clobber_regs = -1u;
-+    tcg_target_call_clobber_regs = -1ull;
-     tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S0);
-     tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S1);
-     tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S2);
--- 
-2.31.1
 
+r~
 
