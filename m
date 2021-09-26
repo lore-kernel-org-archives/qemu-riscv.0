@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mURkk-0007sy-AJ
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 06:51:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35002)
+	id 1mURkx-0007tL-42
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 06:51:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35000)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mURjg-000744-8V; Sun, 26 Sep 2021 06:50:23 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:45754)
+ id 1mURjg-000743-67; Sun, 26 Sep 2021 06:50:23 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:35663)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mURje-0004ne-BR; Sun, 26 Sep 2021 06:50:20 -0400
-Received: by mail-pf1-x436.google.com with SMTP id w19so13007159pfn.12;
- Sun, 26 Sep 2021 03:50:17 -0700 (PDT)
+ id 1mURjc-0004lg-1Q; Sun, 26 Sep 2021 06:50:18 -0400
+Received: by mail-pg1-x531.google.com with SMTP id e7so14918949pgk.2;
+ Sun, 26 Sep 2021 03:50:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=iDAkP17wWv58zsiXwhPI2T2NohJECM8EcqThkHpd2sQ=;
- b=Y75eWhzgTNzWrSm/rJMQK0gejS0qfWkdT9IuHOd9roKLo+s10eqGZI1qfh1XWECFbO
- IE3zNAyBuaf9Kds0dPXxgWGGLVvtCVFjJuR1XaJqUE6bPUwbGAduNAxMgFGrRuGM0k9V
- 1a025kFKDY87gGTgaH6MnMbHloujid0S4Da4gM7aMWfWv0KzMsmmgcJL/TCcr0V1xFfH
- 2syaoSNRQLX4/KnN1oWhQRIEcurR6s9T/dTiiYmaC5gUsdBLjiQlhR3lM6/0U8MObIHU
- vmMU7dDD7aEbPL7AGrp8sQxCp4gfvT9Bw06YfKhMKXWtnEDoQHDP3os5UWsVprxbHs3M
- V3Yw==
+ bh=whagkWhHtXafiUj9cJXVys9f0WWXSEBm/lY0x3a3tBo=;
+ b=U1sTe+1T+VFzejbt19zP68laHDQf5VGDNk2hf7X9IiqtwQC30OPJ05gvGvvTiu3b16
+ 0WgQCngoAMg36cNq2TZ9AB8pDYPETMBZHafG+cbPkhS3MlsHSoWLmgEiqvipJziSPC+x
+ tCg8DnXH5ivPq9gHoAHv6fXQRn9RuyP9zWYC4zEeTo0qPMJBlIk3xWAVVviUBOtz5DMn
+ fFB3WT0vPEvo5f2+03dUyQSb/lcqo0Gj5JWCCFBvW0Sp2rSgyOts2wW1OaAjVifUPVH5
+ sZ7PpgX1gOhaKB0Y7+CzCcdtBkLZ2wNYmnhRz+rizfNU/SdwDRda4KnckCiaB2pYvVef
+ t1qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=iDAkP17wWv58zsiXwhPI2T2NohJECM8EcqThkHpd2sQ=;
- b=zn9hJHOPsVOWQ053EDZH/ZdcrpqHisTEDaZxGoll+YMPwBopKiBPdzL1lGEC9T/EUX
- M1lw8XhfRuHaRdUCw039oDzfFQn+jymPwaDNbDR5FxFxuVIlZop9iexLZLi7hHZ7Ze9p
- 2LB9VNS5qDMU1ITy1Bwxj+1FgInFluCV32ShiLBIyPIx2N+v6Dl/tZwpw9nwfpZ8CoUL
- CXoaXEfW2qtGR2I3WAtPRI+/xvQjAzaecoY6tMePRSm++RhA7IXLlYo8B0USgw3LVcX1
- HyxsVABqP+eY7nO2MXqIcM19mFnLMk3dEw/9X+ssXfA6RUfcAbqUIHvDon3mwo33BYaR
- 3JPw==
-X-Gm-Message-State: AOAM533uLCYAcqWNorxAk6X1hZlrM05HDqNLLn+dRWYwZF0eMpkp98g9
- Qro6yppKz4hOdPQAeXJ1bSs=
-X-Google-Smtp-Source: ABdhPJxLqNgOSYTMTib2RNUmA2NbT4GnxwVOl/q0WrfVN7sRMpVetMvjNdWBPrCVkdbkxBvrPK7iJA==
-X-Received: by 2002:a62:1956:0:b0:442:35b2:f87a with SMTP id
- 83-20020a621956000000b0044235b2f87amr17993215pfz.27.1632653416707; 
- Sun, 26 Sep 2021 03:50:16 -0700 (PDT)
+ bh=whagkWhHtXafiUj9cJXVys9f0WWXSEBm/lY0x3a3tBo=;
+ b=lpBJwk5kvYahtxGf9l3vUmlXuaAfNHkBq/zkgR3K2RVJI+CskWz2Yqux98yyhawbNb
+ YjPBEm5JJva/aUjKprLxaKuX/zNrzlK1nMESILo8IdoWPFnbiOqCdIYKB893dDnR/vLk
+ gGWcgsKVb5vf9dyXUoNvAJyAHlO0pP3vWuzJioxFrrirkOVTic4G2nFWVu51onc5gMsF
+ 5rwxrGrToat3VpQoCuUYBkhU5KMXkdnWxfmG5Ieohiem+NxzemQduJs6UEpBOoqZMGoI
+ 2x9h1pjPH9M7gVVe02cMGJcnno4HiAyrnLKwGPgWFCYLJ0gCO62nim0nwMhOKi4rTpHn
+ tBGA==
+X-Gm-Message-State: AOAM530EcSC4WLlGMJILLUD6Bmq95wYPi3CRErsKWtyRRntyDfrqnbjE
+ b9o/PZ1mzTvxtVXYs7UCER0=
+X-Google-Smtp-Source: ABdhPJzSifyise4NTcuHqlh24PKUf7gOMrjU3eSwntBzW/E3VuMHlWECl4jJbWCJ8wo+Ux/ZOJsnoA==
+X-Received: by 2002:a05:6a00:4:b0:43d:32f3:e861 with SMTP id
+ h4-20020a056a00000400b0043d32f3e861mr18322843pfk.60.1632653414430; 
+ Sun, 26 Sep 2021 03:50:14 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id y13sm16190562pjr.1.2021.09.26.03.50.14
+ by smtp.gmail.com with ESMTPSA id y13sm16190562pjr.1.2021.09.26.03.50.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Sep 2021 03:50:16 -0700 (PDT)
+ Sun, 26 Sep 2021 03:50:14 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 3/3] hw/char: sifive_uart: Register device in 'input' category
-Date: Sun, 26 Sep 2021 18:50:03 +0800
-Message-Id: <20210926105003.2716-3-bmeng.cn@gmail.com>
+Subject: [PATCH 2/3] hw/char: shakti_uart: Register device in 'input' category
+Date: Sun, 26 Sep 2021 18:50:02 +0800
+Message-Id: <20210926105003.2716-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210926105003.2716-1-bmeng.cn@gmail.com>
 References: <20210926105003.2716-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,27 +78,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 26 Sep 2021 10:50:27 -0000
 
-The category of sifive_uart device is not set. Put it into the
+The category of shakti_uart device is not set. Put it into the
 'input' category.
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- hw/char/sifive_uart.c | 1 +
+ hw/char/shakti_uart.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-index 278e21c434..1c75f792b3 100644
---- a/hw/char/sifive_uart.c
-+++ b/hw/char/sifive_uart.c
-@@ -248,6 +248,7 @@ static void sifive_uart_class_init(ObjectClass *oc, void *data)
-     rc->phases.enter = sifive_uart_reset_enter;
-     rc->phases.hold  = sifive_uart_reset_hold;
-     device_class_set_props(dc, sifive_uart_properties);
+diff --git a/hw/char/shakti_uart.c b/hw/char/shakti_uart.c
+index 6870821325..98b142c7df 100644
+--- a/hw/char/shakti_uart.c
++++ b/hw/char/shakti_uart.c
+@@ -168,6 +168,7 @@ static void shakti_uart_class_init(ObjectClass *klass, void *data)
+     dc->reset = shakti_uart_reset;
+     dc->realize = shakti_uart_realize;
+     device_class_set_props(dc, shakti_uart_properties);
 +    set_bit(DEVICE_CATEGORY_INPUT, dc->categories);
  }
  
- static const TypeInfo sifive_uart_info = {
+ static const TypeInfo shakti_uart_info = {
 -- 
 2.25.1
 
