@@ -1,67 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mURkx-0007tL-42
-	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 06:51:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35000)
+	id 1mUVKH-0002dZ-Es
+	for mharc-qemu-riscv@gnu.org; Sun, 26 Sep 2021 10:40:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33388)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mURjg-000743-67; Sun, 26 Sep 2021 06:50:23 -0400
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:35663)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1mUVKG-0002dN-Bs; Sun, 26 Sep 2021 10:40:20 -0400
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:33528)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mURjc-0004lg-1Q; Sun, 26 Sep 2021 06:50:18 -0400
-Received: by mail-pg1-x531.google.com with SMTP id e7so14918949pgk.2;
- Sun, 26 Sep 2021 03:50:15 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1mUVKE-00055l-Sa; Sun, 26 Sep 2021 10:40:20 -0400
+Received: by mail-wr1-x435.google.com with SMTP id t18so43978760wrb.0;
+ Sun, 26 Sep 2021 07:40:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=whagkWhHtXafiUj9cJXVys9f0WWXSEBm/lY0x3a3tBo=;
- b=U1sTe+1T+VFzejbt19zP68laHDQf5VGDNk2hf7X9IiqtwQC30OPJ05gvGvvTiu3b16
- 0WgQCngoAMg36cNq2TZ9AB8pDYPETMBZHafG+cbPkhS3MlsHSoWLmgEiqvipJziSPC+x
- tCg8DnXH5ivPq9gHoAHv6fXQRn9RuyP9zWYC4zEeTo0qPMJBlIk3xWAVVviUBOtz5DMn
- fFB3WT0vPEvo5f2+03dUyQSb/lcqo0Gj5JWCCFBvW0Sp2rSgyOts2wW1OaAjVifUPVH5
- sZ7PpgX1gOhaKB0Y7+CzCcdtBkLZ2wNYmnhRz+rizfNU/SdwDRda4KnckCiaB2pYvVef
- t1qg==
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:references:cc:from:in-reply-to
+ :content-transfer-encoding;
+ bh=dj5PeCFUPeThAN+XNacCvV5PXoyU1XIaLoSWqlHCpb0=;
+ b=KZxOPoL+4pxhrTRW0Ka/sSOM37Sl4mN4tTfny7pbOnWE1ZGjAzf6A1MwjLJAguSjB9
+ gAFMHFNb2JITMyG3G/ftAloX4qyn7cpkaHPn+79GWq9T6321Ft4kNzOntWEo++zm5qAX
+ 1JoD2lYp+JYP3f1NODGJi+8YyQZs4mNJ9a5REpcTJkzKI0z/eIB2ZY1n1R9B4Q2KVvbi
+ p3mwinCOtDbyzwfrMdruXUu8ihOdwvjjVWkDDNfFxRD5p53oSSyls21R38pr+ZI7Ppzv
+ JqIfzCgV+xgWzuMSLhQ0VionNpXQZGQiX8WI1tnVxwVY0JawYr27e5DJTthijLib89h/
+ MRBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=whagkWhHtXafiUj9cJXVys9f0WWXSEBm/lY0x3a3tBo=;
- b=lpBJwk5kvYahtxGf9l3vUmlXuaAfNHkBq/zkgR3K2RVJI+CskWz2Yqux98yyhawbNb
- YjPBEm5JJva/aUjKprLxaKuX/zNrzlK1nMESILo8IdoWPFnbiOqCdIYKB893dDnR/vLk
- gGWcgsKVb5vf9dyXUoNvAJyAHlO0pP3vWuzJioxFrrirkOVTic4G2nFWVu51onc5gMsF
- 5rwxrGrToat3VpQoCuUYBkhU5KMXkdnWxfmG5Ieohiem+NxzemQduJs6UEpBOoqZMGoI
- 2x9h1pjPH9M7gVVe02cMGJcnno4HiAyrnLKwGPgWFCYLJ0gCO62nim0nwMhOKi4rTpHn
- tBGA==
-X-Gm-Message-State: AOAM530EcSC4WLlGMJILLUD6Bmq95wYPi3CRErsKWtyRRntyDfrqnbjE
- b9o/PZ1mzTvxtVXYs7UCER0=
-X-Google-Smtp-Source: ABdhPJzSifyise4NTcuHqlh24PKUf7gOMrjU3eSwntBzW/E3VuMHlWECl4jJbWCJ8wo+Ux/ZOJsnoA==
-X-Received: by 2002:a05:6a00:4:b0:43d:32f3:e861 with SMTP id
- h4-20020a056a00000400b0043d32f3e861mr18322843pfk.60.1632653414430; 
- Sun, 26 Sep 2021 03:50:14 -0700 (PDT)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id y13sm16190562pjr.1.2021.09.26.03.50.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Sep 2021 03:50:14 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH 2/3] hw/char: shakti_uart: Register device in 'input' category
-Date: Sun, 26 Sep 2021 18:50:02 +0800
-Message-Id: <20210926105003.2716-2-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210926105003.2716-1-bmeng.cn@gmail.com>
-References: <20210926105003.2716-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:references:cc:from:in-reply-to
+ :content-transfer-encoding;
+ bh=dj5PeCFUPeThAN+XNacCvV5PXoyU1XIaLoSWqlHCpb0=;
+ b=GPHuJLN5/hoV1FGB+MH1RTAfPWqtRVRWxOnUBcTIvEcsTLftwk7bO8h0K1a2geTF4+
+ EN1C4FuqQPYvO5lXvntOxcunJ9gKSVQ0ZCfDtW3LQEiVMOxhO2F9Z/cQMbD83PxwmIHX
+ BKhjhc9ORKAQcBpVT9WPRLS7ilaz2xz3v3kSVtHGhIdnUmhK7Y96Oq5zYpycb3Il8ukg
+ Y52j4SifP10IpnDa9RaImj8e1rS6VqhnguPNUOvEjbLOt6xdJ1REzAcuXa+TlQsmRNIZ
+ wmGTcgEb8rKex4YQC+2vNW/8VJRvnS3FgMlwIWF73xrDvPS8bDN6+x/qpG8IXE1XCJUf
+ A2yA==
+X-Gm-Message-State: AOAM533ZC1+2YyynGwpcGfNK+M8RLMaKDo1bjzGkdYbVPI6335GrbPR8
+ lzy8HNbDFP9R1iIJpa2NXqc=
+X-Google-Smtp-Source: ABdhPJyUr94XJtC8fOAixRWE9nNyfP/wiwUcO5X3eI+BhvbeL57wqgqnAr7X0kz17WbdYDJwZcx4Jg==
+X-Received: by 2002:adf:a10f:: with SMTP id o15mr23144330wro.286.1632667216030; 
+ Sun, 26 Sep 2021 07:40:16 -0700 (PDT)
+Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
+ [83.35.24.118])
+ by smtp.gmail.com with ESMTPSA id k17sm20065923wmj.0.2021.09.26.07.40.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 26 Sep 2021 07:40:15 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <929bffcf-e0cd-8ade-ad9f-e2d58b6ba3d1@amsat.org>
+Date: Sun, 26 Sep 2021 16:40:14 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Subject: Re: [PATCH 1/3] hw/char: ibex_uart: Register device in 'input'
+ category
+Content-Language: en-US
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20210926105003.2716-1-bmeng.cn@gmail.com>
+Cc: Thomas Huth <thuth@redhat.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20210926105003.2716-1-bmeng.cn@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x435.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-0.478,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,30 +84,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Sep 2021 10:50:27 -0000
+X-List-Received-Date: Sun, 26 Sep 2021 14:40:20 -0000
 
-The category of shakti_uart device is not set. Put it into the
-'input' category.
+On 9/26/21 12:50, Bin Meng wrote:
+> The category of ibex_uart device is not set. Put it into the
+> 'input' category.
+> 
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+> 
+>  hw/char/ibex_uart.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+> index 9b0a817713..e58181fcf4 100644
+> --- a/hw/char/ibex_uart.c
+> +++ b/hw/char/ibex_uart.c
+> @@ -550,6 +550,7 @@ static void ibex_uart_class_init(ObjectClass *klass, void *data)
+>      dc->realize = ibex_uart_realize;
+>      dc->vmsd = &vmstate_ibex_uart;
+>      device_class_set_props(dc, ibex_uart_properties);
+> +    set_bit(DEVICE_CATEGORY_INPUT, dc->categories);
+>  }
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
+A bit orthogonal but I wonder if ADC (to the extent sensors)
+and touch devices should be categorized as "input" ones.
 
- hw/char/shakti_uart.c | 1 +
- 1 file changed, 1 insertion(+)
+Maybe we deserve a DEVICE_CATEGORY_SENSOR category?
 
-diff --git a/hw/char/shakti_uart.c b/hw/char/shakti_uart.c
-index 6870821325..98b142c7df 100644
---- a/hw/char/shakti_uart.c
-+++ b/hw/char/shakti_uart.c
-@@ -168,6 +168,7 @@ static void shakti_uart_class_init(ObjectClass *klass, void *data)
-     dc->reset = shakti_uart_reset;
-     dc->realize = shakti_uart_realize;
-     device_class_set_props(dc, shakti_uart_properties);
-+    set_bit(DEVICE_CATEGORY_INPUT, dc->categories);
- }
- 
- static const TypeInfo shakti_uart_info = {
--- 
-2.25.1
+Back to this patch:
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
+But it would be nice to have a generic way to avoid adding
+uncategorized user-creatable devices.
 
