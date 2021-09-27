@@ -1,64 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mUkxK-0000xr-Jj
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Sep 2021 03:21:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54898)
+	id 1mUl3T-0004F3-94
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Sep 2021 03:28:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55634)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mUkxI-0000sg-Cz; Mon, 27 Sep 2021 03:21:40 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:43002)
+ id 1mUl3R-0004ET-Rf; Mon, 27 Sep 2021 03:28:01 -0400
+Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:42575)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mUkxG-0002zF-JU; Mon, 27 Sep 2021 03:21:40 -0400
-Received: by mail-io1-xd33.google.com with SMTP id b10so21474192ioq.9;
- Mon, 27 Sep 2021 00:21:37 -0700 (PDT)
+ id 1mUl3P-0008OQ-M2; Mon, 27 Sep 2021 03:28:01 -0400
+Received: by mail-yb1-xb32.google.com with SMTP id u32so1136008ybd.9;
+ Mon, 27 Sep 2021 00:27:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=t5em0PdfaZhXRRKFyS8Am/scqyCdDbDmX3nEV2HzyKc=;
- b=UmwJDCAJXiVbm21p1fDqF9PqYgFZfvoGdiAtolejqZFF8bNqO7d85QbPr+KMZ6x7Sn
- IGM8VqMcW/X5MdUdsK/kstI6WhbVpehoT3/oNveZ/Fr2odi3lTBHfQHVlODVkK4VOg+8
- MtBiDFX4fgaherhBb/qXUO28iOt0R/6b+qpief5/ZJZz7pE4geZ8oPLJkPph34rgHbYV
- +8pbqk2IZGFBurm59ic4DirswXTvCZRGM2XAC7kFxUwiFxdQWdYEa2DBri5EkhztXfQy
- phH22zaVMG3FQdkG1m7uZ+wkjjhwDh01QcCCoNxn+jDdyQcHybLCcnVcQzmMqRznGrNi
- 2agA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+6NWL0PIE78YTECkSs9hvPfO0IgJGuXRCUlSiVP9pcI=;
+ b=EEulhOMnb23dk5YDVXjyHisxXkDLcaR77aZ4Sdbw23lsoLsqIlJdbbk9u0SbAt0Mwx
+ I/pimJEP6N1+IECLRsemkeTk/wf+k9BH0lUhxpwAFspydHVG2duneOxBl0Oc6YshEOn6
+ ulj6AfPvUFs1egzVrqBnggchjDhKNO58d633jkyiklIfUR3/hWShCoGcyz7fnpQd2sGs
+ aib59H15NrpGi6ggraxkJ/2YOKQeBQVb2K3u4VEDdIDeVpg8iaEUJfby5l82Bq5YOdE7
+ HUNl+zWvjl51QtBoA80QnNDR2L8DTAjRYcEhbTZPvC1LkaUVFoegvRR0t48DB6iIm67R
+ gTFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=t5em0PdfaZhXRRKFyS8Am/scqyCdDbDmX3nEV2HzyKc=;
- b=ULO3gu0hCVEQc+tJDIowzC2MGg0YDwy9R9qPwMd3kZicJnHr6kik8jAO5g8jJ6qYj1
- kaHjRJtAZF/CZXFCb6x3QLjqgygJw26dEznumFP1pywu7BrpiRNuora1IkIAtC97xsat
- nchMgCrbUgFiZwS07g8iJ/EAcbj/duF2ZNDJeDlDnBfJtQnHilXJU3G9yHQ0hV57H7Ik
- wed0eR8PQHy/m+0Rm/mbr6QTPCcQCb94rQi2c5Ds+enau69V6UNT0mO7avQqWBneCCSA
- y0BITHL8z0Ks0pA9zGwFUPpmC/h1tUgBISAKqxgWUDAshNwcA0bZAxrEy1vcy92WNegF
- tDcQ==
-X-Gm-Message-State: AOAM532W8goNLz00myBl/Tix9Kb+u64N1wJiYat8wBaIyZfUwsTksFe1
- zy9SXsLyEWcchD/6h33xoQo=
-X-Google-Smtp-Source: ABdhPJxvlmY0btImkPmk3uU7LImDEUj1BsAkRjPFmBs8Dns/CYui9ywhlBPEf/NGdOa1Rd/6dE3WHw==
-X-Received: by 2002:a02:6988:: with SMTP id e130mr20687004jac.97.1632727297041; 
- Mon, 27 Sep 2021 00:21:37 -0700 (PDT)
-Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
- [147.11.176.192])
- by smtp.gmail.com with ESMTPSA id b12sm8690641ilv.46.2021.09.27.00.21.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Sep 2021 00:21:36 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Markus Armbruster <armbru@redhat.com>
-Subject: [PATCH v2 2/2] hw/dma: sifive_pdma: Don't run DMA when channel is
- disclaimed
-Date: Mon, 27 Sep 2021 15:21:24 +0800
-Message-Id: <20210927072124.1564129-2-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210927072124.1564129-1-bmeng.cn@gmail.com>
-References: <20210927072124.1564129-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+6NWL0PIE78YTECkSs9hvPfO0IgJGuXRCUlSiVP9pcI=;
+ b=NrRWql5nyvK+Hfvn6uT/YBpOX/wStgCBMB675pwq+vDD2JK3IqwyAf4Fjtulen7kSo
+ t5NREGiZO4Uv7qKDcj/sEB8YzItq6tGaewWJHr7jaH0k7ZDKQduCW5RvTq2O+iNyWiXR
+ yPR/ZisU1omrxJ5QlCL0RWDV+dPTQHjbhCe2frOxPclMMY5eHRvYvYmYm3k4cmM0fbhP
+ jy9XO75pbnt9zDbcDf2ROYwH1GDywBsnnvvHybNoEf+qVh5gdp77rCR125X6s+oGuMcA
+ mxSANVarhr0/D9a5YCQSbxDoWGMy4xjouycs4ikEyeCHb4BC6+maWzzescYQNccmOTd5
+ uLCw==
+X-Gm-Message-State: AOAM532UA+wZwR2GItNJK9w5CMlHxL/Qq7qTGcsfGCnE+cCXf4DxTEnZ
+ 8arC7IhOkN6/rFiABQOvsoebMA4z0IvPVihWuXo=
+X-Google-Smtp-Source: ABdhPJwCPeelV9Ag10nIXWUrSpXU8BxHCqIq7z88gXmdOHHqUm8p8xL+Uvfm74uXQb7NOw+fyQn6GYq/KSSFeTVY5oQ=
+X-Received: by 2002:a05:6902:70b:: with SMTP id
+ k11mr29467964ybt.313.1632727678450; 
+ Mon, 27 Sep 2021 00:27:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=bmeng.cn@gmail.com; helo=mail-io1-xd33.google.com
+References: <bc032f02f44192bfa057cc4f09311fd18d07ef1f.1632726758.git.alistair.francis@wdc.com>
+In-Reply-To: <bc032f02f44192bfa057cc4f09311fd18d07ef1f.1632726758.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 27 Sep 2021 15:27:47 +0800
+Message-ID: <CAEUhbmV8XkWRxZxKPxQbr8J27PP1EZxR2yZYHkWgV16fxK-ZOg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] hw/riscv: shakti_c: Mark as not user creatable
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair23@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,87 +73,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2021 07:21:40 -0000
+X-List-Received-Date: Mon, 27 Sep 2021 07:28:02 -0000
 
-If Control.run bit is set while not preserving the Control.claim
-bit, the DMA transfer shall not be started.
+On Mon, Sep 27, 2021 at 3:13 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> Mark the shakti_c machine as not user creatable as it uses serial_hd.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/639
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/shakti_c.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
 
-The following result is PDMA tested in U-Boot on Unleashed board:
-
-=> mw.l 0x3000000 0x0                      <= Disclaim channel 0
-=> mw.l 0x3000000 0x1                      <= Claim channel 0
-=> mw.l 0x3000004 0x55000000               <= wsize = rsize = 5 (2^5 = 32 bytes)
-=> mw.q 0x3000008 0x2                      <= NextBytes = 2
-=> mw.q 0x3000010 0x84000000               <= NextDestination = 0x84000000
-=> mw.q 0x3000018 0x84001000               <= NextSource = 0x84001000
-=> mw.l 0x84000000 0x87654321              <= Fill test data to dst
-=> mw.l 0x84001000 0x12345678              <= Fill test data to src
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 00000001 55000000 00000002 00000000    .......U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> mw.l 0x3000000 0x2                      <= Set channel 0 run bit only
-=> md.l 0x3000000 8                        <= Dump PDMA status
-03000000: 00000000 55000000 00000002 00000000    .......U........
-03000010: 84000000 00000000 84001000 00000000    ................
-=> md.l 0x84000000 1; md.l 0x84001000 1    <= Dump src/dst memory contents
-84000000: 87654321                               !Ce.
-84001000: 12345678                               xV4.
-
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-
----
-
-(no changes since v1)
-
- hw/dma/sifive_pdma.c | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
-
-diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
-index b8ec7621f3..85fe34f5f3 100644
---- a/hw/dma/sifive_pdma.c
-+++ b/hw/dma/sifive_pdma.c
-@@ -232,7 +232,7 @@ static void sifive_pdma_write(void *opaque, hwaddr offset,
- {
-     SiFivePDMAState *s = opaque;
-     int ch = SIFIVE_PDMA_CHAN_NO(offset);
--    bool claimed;
-+    bool claimed, run;
- 
-     if (ch >= SIFIVE_PDMA_CHANS) {
-         qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid channel no %d\n",
-@@ -244,6 +244,7 @@ static void sifive_pdma_write(void *opaque, hwaddr offset,
-     switch (offset) {
-     case DMA_CONTROL:
-         claimed = !!(s->chan[ch].control & CONTROL_CLAIM);
-+        run = !!(s->chan[ch].control & CONTROL_RUN);
- 
-         if (!claimed && (value & CONTROL_CLAIM)) {
-             /* reset Next* registers */
-@@ -254,13 +255,19 @@ static void sifive_pdma_write(void *opaque, hwaddr offset,
-             s->chan[ch].next_src = 0;
-         }
- 
-+        /* claim bit can only be cleared when run is low */
-+        if (run && !(value & CONTROL_CLAIM)) {
-+            value |= CONTROL_CLAIM;
-+        }
-+
-         s->chan[ch].control = value;
- 
-         /*
-          * If channel was not claimed before run bit is set,
-+         * or if the channel is disclaimed when run was low,
-          * DMA won't run.
-          */
--        if (!claimed) {
-+        if (!claimed || (!run && !(value & CONTROL_CLAIM))) {
-             s->chan[ch].control &= ~CONTROL_RUN;
-             return;
-         }
--- 
-2.25.1
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
