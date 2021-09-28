@@ -1,75 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mUser-0004kj-PT
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Sep 2021 11:35:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59196)
+	id 1mV6z2-00013C-AS
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Sep 2021 02:52:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41632)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mUsep-0004kD-HM; Mon, 27 Sep 2021 11:35:07 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:34323)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mV6z0-0000zy-Qb; Tue, 28 Sep 2021 02:52:54 -0400
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:41487)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mUsen-00060x-Ps; Mon, 27 Sep 2021 11:35:07 -0400
-Received: by mail-wr1-x432.google.com with SMTP id t8so52813642wri.1;
- Mon, 27 Sep 2021 08:35:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mV6yz-0004pd-1P; Tue, 28 Sep 2021 02:52:54 -0400
+Received: by mail-io1-xd2a.google.com with SMTP id q205so25950869iod.8;
+ Mon, 27 Sep 2021 23:52:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=XSvz1APDPaA4vE2/ttrlWYJ4sT71ydTv6e3uUBDFbQU=;
- b=LuUStK0hTPZRwFt5yJhhpnFdwQUkbM+0iKs+4ASzCWYoI4b9h2pdHbKhO+bwItLfiN
- zXMc1zmCCfzWfAdqEF+7FHhADt6J2RjajifatdOldYKAGTmMbfc+wg5cKik5yL4VdgKf
- DZTqhyXqzWeSGFl3dRKG9W17BCmZy/qt0o1sZW9SnXmKJNkLG8WqPdDu8t4Me82gz5yL
- lPrKeezzbEy6m0UXZfAbsVTLWstw2fjfIlQ4C+KUuDm8QRdkXu0L1U6pQXpSfeanu2q2
- 1m6jt2jg6MsSe25oqrQYeLrZ1BRiseQRDmVzxd27vY4F3KRravycw75kJUbhJa8Vx4My
- +lNg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=1PE0SENtU9S6Q2rRu+eY7t351eJJlB5+ljVrS6qDq5M=;
+ b=D6xFkpO8cDYzmJBlTbXAsJ1C2Eg0xHz4Ba5aVpkTXEwzCyBJRZuIf1fYwo2B9w7Ujb
+ kpe85k+ZCq3U1qKRYjd5fdte7d7Etrxp7GxoqCYxcWY7Do5nBXH0devjbRDilpNURQ0Y
+ 7qZtVmhGM9UPbj6rkDyT4NK5dqg290s7vWbpOphx3I8LY2vHGV6SE/tJ0r9GUjCAoq9j
+ 1VJUNXYsgHDufdx2+VJ75/cOgD5XekLeE9U/41anyGzLQ8qnO9lVXo8rzgEqgEeUtV2w
+ rdzLLynw2MlHcIb5JbCeVL3qhxox9TgPuvsA4G77eI0+ADStCC3xu7ARfPrvN3xiPmOY
+ eXhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=XSvz1APDPaA4vE2/ttrlWYJ4sT71ydTv6e3uUBDFbQU=;
- b=NxDVesvSYpZvOBfIRGgXB8GaDbs6pCjquxzGtc9I05EogyohIt8zu+Stjpvh80XPob
- 20/yN+KX9X5UpHD9NP7IEFAXl9nBCWw4FmfmThH2v6799ngbi7mtO0HEkotSIDLE2sFK
- UaDdtyrnFDtpRxEFCbcz7yKwYwFwtSc8UY6GoXxecWCLC5F9lAJkAz6gBwUZMzfDfEq9
- APqAwgnxDegKev7THiKKcb4IPnrSHz2ag1DCDBXyp1yIWYKDxIU4Gx2x/ILt+Et58k0x
- 1jFDx6tSybrlLSYW3z90N1+rbrG7AArWz8afsjyBDfHAFtl3zBeDWJyUrld08QXuvZSV
- tYJg==
-X-Gm-Message-State: AOAM5326Et4jYV3xcKClrGcmEuYDgLx74gRk3F+BlZWldlsUFwYw9kQX
- jBdhlIZmkanLlbDJ4jCc++I=
-X-Google-Smtp-Source: ABdhPJzpRtMelcAJ5/4tjPCqxbOiWkfQKntnmGR1U7kwPw5Nz5svMi1Sn5M7PZvLBTIYHSxlibRB1Q==
-X-Received: by 2002:a5d:4d0d:: with SMTP id z13mr520132wrt.267.1632756902872; 
- Mon, 27 Sep 2021 08:35:02 -0700 (PDT)
-Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
- [83.35.24.118])
- by smtp.gmail.com with ESMTPSA id v18sm16611640wml.44.2021.09.27.08.35.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Sep 2021 08:35:02 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <8e03f4a4-a47e-5e89-795a-d6d331c88cbf@amsat.org>
-Date: Mon, 27 Sep 2021 17:35:01 +0200
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1PE0SENtU9S6Q2rRu+eY7t351eJJlB5+ljVrS6qDq5M=;
+ b=z54BIh0LkXUAKAErolzLP+M3Sg83PC2qN1e8baTD+I8nONDbuej6u6pXzdQF7Ujfl/
+ k2HTpoyl2sqrsDgtHlGVi3SGk3tGmS8E6rFKBEMKaV1H10piExtgnaU1DBlu1qv9XmKg
+ q9DbQsw2MtkW3Aud3RCoR8KDexkFFNpf0993nwNcm3uj6fgeXoe82dGnxhUTMsiOAHnL
+ ZCEOxsGjX5F/efxhIs3B3fskYWuJAzFoxiuHWjJ5pyvkC+AMbPuctzZdlGCscjD+pwsd
+ heiKFRFa5eQ7gTRyIIs8dT2lQSuMi3tbSWcVfvl6Jtt8toUYa8awTBbv/PCKSX2BgdE4
+ tU8g==
+X-Gm-Message-State: AOAM5315GKdX3Ou3DWbNaGiPN3SeE93NhxwlKM0CyVOcvO7KmdJhO9Bb
+ YfMTZ30ugoKNujU8oVUJ5HcyM4fvzb0qSW+aybQ=
+X-Google-Smtp-Source: ABdhPJzKSw/eQN9FH6GH/lGGh2eLQM17BCJkpz3/y+U5DMIwd29Ij68lAY4YSG9+hW346Xyc35rH+fYx21xcpa/qtYo=
+X-Received: by 2002:a5e:c101:: with SMTP id v1mr2855630iol.90.1632811970962;
+ Mon, 27 Sep 2021 23:52:50 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.1.0
-Subject: Re: [PATCH v1 1/1] hw/riscv: shakti_c: Mark as not user creatable
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-References: <bc032f02f44192bfa057cc4f09311fd18d07ef1f.1632726758.git.alistair.francis@wdc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <bc032f02f44192bfa057cc4f09311fd18d07ef1f.1632726758.git.alistair.francis@wdc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -45
-X-Spam_score: -4.6
-X-Spam_bar: ----
-X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-3.136,
+References: <20210926105003.2716-1-bmeng.cn@gmail.com>
+In-Reply-To: <20210926105003.2716-1-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 28 Sep 2021 16:52:24 +1000
+Message-ID: <CAKmqyKNuDYrGOzZid+A4V638t8juo-Du+u+cbEhwY3Y81TJa+g@mail.gmail.com>
+Subject: Re: [PATCH 1/3] hw/char: ibex_uart: Register device in 'input'
+ category
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -84,63 +72,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Sep 2021 15:35:07 -0000
+X-List-Received-Date: Tue, 28 Sep 2021 06:52:55 -0000
 
-Hi Alistair,
+On Sun, Sep 26, 2021 at 8:51 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> The category of ibex_uart device is not set. Put it into the
+> 'input' category.
+>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-On 9/27/21 09:13, Alistair Francis wrote:
-> From: Alistair Francis <alistair.francis@wdc.com>
-> 
-> Mark the shakti_c machine as not user creatable as it uses serial_hd.
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/639
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->  hw/riscv/shakti_c.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-> index 2f084d3c8d..603992d442 100644
-> --- a/hw/riscv/shakti_c.c
-> +++ b/hw/riscv/shakti_c.c
-> @@ -150,6 +150,8 @@ static void shakti_c_soc_class_init(ObjectClass *klass, void *data)
->  {
->      DeviceClass *dc = DEVICE_CLASS(klass);
->      dc->realize = shakti_c_soc_state_realize;
-> +    /* Reason: Uses serial_hds in realize function, thus can't be used twice */
-> +    dc->user_creatable = false;
-
-I agree with the logical change, but not totally with the comment.
-Well, the comment itself is not incorrect. But the error happens before:
-
-ERROR:tcg/tcg.c:479:tcg_register_thread: assertion failed: (n <
-tcg_max_ctxs)
-
-The reason is TYPE_RISCV_HART_ARRAY creates CPUs in
-riscv_hart_realize(), and this machine use the default CPU limit
-of one CPU:
-
-static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
-{
-    MachineClass *mc = MACHINE_CLASS(klass);
-    mc->desc = "RISC-V Board compatible with Shakti SDK";
-    mc->init = shakti_c_machine_state_init;
-    mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-}
-
-The default values come from:
-
-static void machine_class_base_init(ObjectClass *oc, void *data)
-{
-    MachineClass *mc = MACHINE_CLASS(oc);
-    mc->max_cpus = mc->max_cpus ?: 1;
-    mc->min_cpus = mc->min_cpus ?: 1;
-    mc->default_cpus = mc->default_cpus ?: 1;
-
-So the crash happens when we try to create the 2nd CPU.
-
+>
+>  hw/char/ibex_uart.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+> index 9b0a817713..e58181fcf4 100644
+> --- a/hw/char/ibex_uart.c
+> +++ b/hw/char/ibex_uart.c
+> @@ -550,6 +550,7 @@ static void ibex_uart_class_init(ObjectClass *klass, void *data)
+>      dc->realize = ibex_uart_realize;
+>      dc->vmsd = &vmstate_ibex_uart;
+>      device_class_set_props(dc, ibex_uart_properties);
+> +    set_bit(DEVICE_CATEGORY_INPUT, dc->categories);
 >  }
->  
->  static void shakti_c_soc_instance_init(Object *obj)
-> 
+>
+>  static const TypeInfo ibex_uart_info = {
+> --
+> 2.25.1
+>
+>
 
