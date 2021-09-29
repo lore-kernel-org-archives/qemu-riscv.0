@@ -1,69 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mVRAT-0006JL-WC
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 00:26:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43232)
+	id 1mVTjA-0005iP-Vb
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 03:10:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43384)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mVRAS-0006GW-3R
- for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 00:26:04 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:53198)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mVRAQ-00021y-75
- for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 00:26:03 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id b192so779777wmb.2
- for <qemu-riscv@nongnu.org>; Tue, 28 Sep 2021 21:26:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OwpMPM8E4nCsumnueWN5AOA2wjelAJqKY9zEtfMhRVQ=;
- b=RoduxWgxE0QMtCvrkrJ2hSAuPfftGrB9ROIw3zh0pWgEWEXtfW5klPZMD27Jkc8x6y
- NAxZc1SvuLkeyHKfvHQoCGAl4LbP2kSfWYOlAcysD2vFS72KcMIgA1hI+HtsIU8DzlCN
- V0zTCWH9RLK8Y6PfUTyDnUmNDgs44gopNJbBOtEHMZetlJPWpTnrBWuyKHKeNr0uCbdv
- HD9jb470FY0BsrRdDMrvUEXtehQmMquYWRvvFAD4PoIBKgXJorp0z2haJOnp/480YILB
- HQKkQz0hvubp952f0b7dh5pqVFjjRa0sX8VgkwiMALhSql4X1aB4PKwG6/+mHsKJb1Cp
- xOhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OwpMPM8E4nCsumnueWN5AOA2wjelAJqKY9zEtfMhRVQ=;
- b=SNKJtmRY0cQK1RF7YOWN2CoYH0es6fc71+/Mwo04A7a7xBnQ0ehucswQrrmBgJn8mB
- nSkdgFlQZMh5ThUNkBRKB2KwH0PsHsWRQ/I9EHPJudDU9jLoWD+YsPDjDw0ZHyB4ML9X
- Ch/IZJzierhFsAi6WoPriuM6NvnylBKz1vCMdqGEZCVfiju7oSxP3MSG/PHRNjNVlpFV
- 7NYUbLz/k2WExFdXN6ayQ9i94LuSf/u0S6AGxx2VJrXRbm3jZHPa8lzMxxLQAK/mU8cz
- JFHCSid3g+yNBoFTbvW60ITsg+a0coEHN+HJW4sZ38nEknTgvLEANnOj2HVcNQOUlLDh
- 4GOQ==
-X-Gm-Message-State: AOAM532UdoeOLXelHi6t3dWntOjDqhsYGySzwKtO5v2M9jogCWpQaDKl
- 9pHDyWnQc0Z5gvgg4pMHavUDX+X9d6AuQOB4MPVOKw==
-X-Google-Smtp-Source: ABdhPJxepUCUSM3tnFLkF7RWXaEkE8iWDmH0XwYV6S22sVa31fnKynDMBA1g9Hix4uoRU1KQJmO3EVm+dDOI6rYX3Ps=
-X-Received: by 2002:a7b:c753:: with SMTP id w19mr3991361wmk.61.1632889560682; 
- Tue, 28 Sep 2021 21:26:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mVTj3-0005cl-8J
+ for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 03:09:57 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:31993)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1mVTiz-0006Ki-8N
+ for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 03:09:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1632899392;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=e4LTv5c9o02J0AF9acSdDwFlmBoJ1VBhmXikRUTwhPQ=;
+ b=Cy9CxMrshXKh6hPuSy0T/s3sSVbPE3gguFfO7SSCkXUwb4+b+TLGCt2BUHAF2TkWu+LZcW
+ LxwZSiXOyJadBbAL3qZWaxfd4ZIqQ/cvLPUcE06N5UQf+UJAujxp22V1YSWUrhegu+Ge6E
+ KXcffCVzZjujJguhbAsVuUEfl5IJNnQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-408-MGC1GKpJO56snEeZpILdXw-1; Wed, 29 Sep 2021 03:09:50 -0400
+X-MC-Unique: MGC1GKpJO56snEeZpILdXw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B329B824FAB;
+ Wed, 29 Sep 2021 07:09:47 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.193.134])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 7838219C79;
+ Wed, 29 Sep 2021 07:09:46 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id B4CC61800386; Wed, 29 Sep 2021 09:09:44 +0200 (CEST)
+Date: Wed, 29 Sep 2021 09:09:44 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, Aurelien Jarno <aurelien@aurel32.net>,
+ Laurent Vivier <laurent@vivier.eu>, Peter Xu <peterx@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Cornelia Huck <cohuck@redhat.com>, qemu-ppc@nongnu.org,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Thomas Huth <thuth@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-riscv@nongnu.org,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Stafford Horne <shorne@gmail.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Halil Pasic <pasic@linux.ibm.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, Greg Kurz <groug@kaod.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-s390x@nongnu.org,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ David Hildenbrand <david@redhat.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+Subject: Re: [PATCH 10/29] tcg_funcs: Add tlb_flush to TCGModuleOps
+Message-ID: <20210929070944.in75jgdfwv2rd4tz@sirius.home.kraxel.org>
+References: <20210831121545.2874233-1-kraxel@redhat.com>
+ <20210831121545.2874233-11-kraxel@redhat.com>
+ <fdfd7f35-fbec-84f7-ebbd-7790df20b1bd@linaro.org>
+ <20210928113204.ic2syx4w2cjsqr7h@sirius.home.kraxel.org>
+ <9d3cceef-f385-5d0b-6b0d-2b7be17ce187@linaro.org>
 MIME-Version: 1.0
-References: <20210831110603.338681-1-anup.patel@wdc.com>
- <CAAhSdy1FdqtY6ubuK3SMqJk8Wb2Bbu26QhR6TMoDZqo=uZzVyg@mail.gmail.com>
- <CAKmqyKO9P_rOhfd8g+r3yBJ-s76QckLQhRsub6DwTrxQB2gQ7Q@mail.gmail.com>
-In-Reply-To: <CAKmqyKO9P_rOhfd8g+r3yBJ-s76QckLQhRsub6DwTrxQB2gQ7Q@mail.gmail.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Wed, 29 Sep 2021 09:55:48 +0530
-Message-ID: <CAAhSdy3cht8MWGyEuHR2M=pZYjOwfaJwb=j7BU66RHybrfgwTA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] QEMU RISC-V ACLINT Support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup.patel@wdc.com>, QEMU Developers <qemu-devel@nongnu.org>, 
- Atish Patra <atish.patra@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::32b;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <9d3cceef-f385-5d0b-6b0d-2b7be17ce187@linaro.org>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,88 +97,194 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2021 04:26:04 -0000
+X-List-Received-Date: Wed, 29 Sep 2021 07:09:59 -0000
 
-On Wed, Sep 29, 2021 at 9:52 AM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Wed, Sep 29, 2021 at 2:09 PM Anup Patel <anup@brainfault.org> wrote:
-> >
-> > On Tue, Aug 31, 2021 at 4:36 PM Anup Patel <anup.patel@wdc.com> wrote:
-> > >
-> > > The RISC-V Advanced Core Local Interruptor (ACLINT) is an improvement
-> > > over the SiFive CLINT but also maintains backward compatibility with
-> > > the SiFive CLINT.
-> > >
-> > > Latest RISC-V ACLINT specification (will be frozen soon) can be found at:
-> > > https://github.com/riscv/riscv-aclint/blob/main/riscv-aclint.adoc
-> > >
-> > > This series:
-> > > 1) Replaces SiFive CLINT implementation with RISC-V ACLINT
-> > > 2) Refactors RISC-V virt machine FDT generation
-> > > 3) Adds optional full ACLINT support in QEMU RISC-V virt machine
-> > >
-> > > This series can be found in the riscv_aclint_v4 branch at:
-> > > https://github.com/avpatel/qemu.git
-> > >
-> > > Changes since v3:
-> > >  - Rebased on Alistair's CPU GPIO pins v3 series
-> > >  - Replaced error_report() in PATCH2 with qemu_log_mask()
-> > >
-> > > Changes since v2:
-> > >  - Addresed nit comments in PATCH2
-> > >  - Update SSWI device emulation to match final ACLINT draft specification
-> > >
-> > > Changes since v1:
-> > >  - Split PATCH1 into two patches where one patch renames CLINT sources
-> > >    and another patch updates the implementation
-> > >  - Addressed comments from Alistar and Bin
-> > >
-> > > Anup Patel (4):
-> > >   hw/intc: Rename sifive_clint sources to riscv_aclint sources
-> > >   hw/intc: Upgrade the SiFive CLINT implementation to RISC-V ACLINT
-> > >   hw/riscv: virt: Re-factor FDT generation
-> > >   hw/riscv: virt: Add optional ACLINT support to virt machine
-> > >
-> > >  docs/system/riscv/virt.rst     |  10 +
-> > >  hw/intc/Kconfig                |   2 +-
-> > >  hw/intc/meson.build            |   2 +-
-> > >  hw/intc/riscv_aclint.c         | 460 +++++++++++++++++++++++
-> > >  hw/intc/sifive_clint.c         | 315 ----------------
-> > >  hw/riscv/Kconfig               |  12 +-
-> > >  hw/riscv/microchip_pfsoc.c     |  11 +-
-> > >  hw/riscv/shakti_c.c            |  13 +-
-> > >  hw/riscv/sifive_e.c            |  13 +-
-> > >  hw/riscv/sifive_u.c            |  11 +-
-> > >  hw/riscv/spike.c               |  16 +-
-> > >  hw/riscv/virt.c                | 652 ++++++++++++++++++++++-----------
-> > >  include/hw/intc/riscv_aclint.h |  80 ++++
-> > >  include/hw/intc/sifive_clint.h |  62 ----
-> > >  include/hw/riscv/virt.h        |   2 +
-> > >  15 files changed, 1047 insertions(+), 614 deletions(-)
-> > >  create mode 100644 hw/intc/riscv_aclint.c
-> > >  delete mode 100644 hw/intc/sifive_clint.c
-> > >  create mode 100644 include/hw/intc/riscv_aclint.h
-> > >  delete mode 100644 include/hw/intc/sifive_clint.h
-> > >
-> > > --
-> > > 2.25.1
-> > >
-> >
-> > Ping ??
->
-> Sorry, it looks like I forgot to reply indicating the status. This has
-> been merged into master
+> > +#ifdef TCG_DIRECT_CALL
+> >   void tlb_flush(CPUState *cpu);
+> > +#endif
+> 
+> I'm pretty sure you can drop these ifdefs.  Just because there's a regular
+> declaration for a function doesn't mean a subsequent inline definition does
+> not apply.
 
-Cool, thanks.
+Couldn't get this work.  With "static inline" I get declaration
+mismatch, with only "inline" I get duplicate symbols.
 
-Regards,
-Anup
+> And even if that didn't work, I'd be willing to trade inline expansion for
+> not adding lots of ifdefs...
 
->
-> Alistair
->
-> >
-> > Regards,
-> > Anup
-> >
+That works.  Patch below (replacement for this patch).
+
+TODO: Not sure whenever "check function pointer before call" or
+"function pointers to stubs" is better.  Right now the patch has both
+which clearly doesn't make sense.  Comments on that are welcome.
+
+take care,
+  Gerd
+
+From fb1d9521fba11cf51f2719b587deeab79b7110ac Mon Sep 17 00:00:00 2001
+From: Gerd Hoffmann <kraxel@redhat.com>
+Date: Tue, 27 Jul 2021 12:01:24 +0200
+Subject: [PATCH] tcg_funcs: Add tlb_flush to TCGModuleOps
+
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ include/exec/exec-all.h     | 25 ++++++++++++-------------
+ include/tcg/tcg-module.h    |  1 +
+ accel/tcg/cpu-exec-common.c |  8 ++++++++
+ accel/tcg/cputlb.c          |  7 +++++++
+ accel/tcg/tcg-module.c      | 21 +++++++++++++++++++++
+ accel/tcg/translate-all.c   |  8 --------
+ 6 files changed, 49 insertions(+), 21 deletions(-)
+
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index 9d5987ba047d..f846ab0c929d 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -25,6 +25,7 @@
+ #include "exec/cpu_ldst.h"
+ #endif
+ #include "sysemu/cpu-timers.h"
++#include "tcg/tcg-module.h"
+ 
+ /* allow to see translation results - the slowdown should be negligible, so we leave it */
+ #define DEBUG_DISAS
+@@ -108,6 +109,17 @@ void cpu_address_space_init(CPUState *cpu, int asidx,
+                             const char *prefix, MemoryRegion *mr);
+ #endif
+ 
++/**
++ * tlb_flush:
++ * @cpu: CPU whose TLB should be flushed
++ *
++ * Flush the entire TLB for the specified CPU. Most CPU architectures
++ * allow the implementation to drop entries from the TLB at any time
++ * so this is generally safe. If more selective flushing is required
++ * use one of the other functions for efficiency.
++ */
++void tlb_flush(CPUState *cpu);
++
+ #if !defined(CONFIG_USER_ONLY) && defined(CONFIG_TCG)
+ /* cputlb.c */
+ /**
+@@ -150,16 +162,6 @@ void tlb_flush_page_all_cpus(CPUState *src, target_ulong addr);
+  * the guests translation ends the TB.
+  */
+ void tlb_flush_page_all_cpus_synced(CPUState *src, target_ulong addr);
+-/**
+- * tlb_flush:
+- * @cpu: CPU whose TLB should be flushed
+- *
+- * Flush the entire TLB for the specified CPU. Most CPU architectures
+- * allow the implementation to drop entries from the TLB at any time
+- * so this is generally safe. If more selective flushing is required
+- * use one of the other functions for efficiency.
+- */
+-void tlb_flush(CPUState *cpu);
+ /**
+  * tlb_flush_all_cpus:
+  * @cpu: src CPU of the flush
+@@ -337,9 +339,6 @@ static inline void tlb_flush_page_all_cpus_synced(CPUState *src,
+                                                   target_ulong addr)
+ {
+ }
+-static inline void tlb_flush(CPUState *cpu)
+-{
+-}
+ static inline void tlb_flush_all_cpus(CPUState *src_cpu)
+ {
+ }
+diff --git a/include/tcg/tcg-module.h b/include/tcg/tcg-module.h
+index 7e87aecb2357..b94bfdd362ed 100644
+--- a/include/tcg/tcg-module.h
++++ b/include/tcg/tcg-module.h
+@@ -2,6 +2,7 @@
+ #define TCG_MODULE_H
+ 
+ struct TCGModuleOps {
++    void (*tlb_flush)(CPUState *cpu);
+ };
+ extern struct TCGModuleOps tcg;
+ 
+diff --git a/accel/tcg/cpu-exec-common.c b/accel/tcg/cpu-exec-common.c
+index be6fe45aa5a8..43aae0b102c1 100644
+--- a/accel/tcg/cpu-exec-common.c
++++ b/accel/tcg/cpu-exec-common.c
+@@ -81,3 +81,11 @@ void cpu_loop_exit_atomic(CPUState *cpu, uintptr_t pc)
+     cpu->exception_index = EXCP_ATOMIC;
+     cpu_loop_exit_restore(cpu, pc);
+ }
++
++/* This is a wrapper for common code that can not use CONFIG_SOFTMMU */
++void tcg_flush_softmmu_tlb(CPUState *cs)
++{
++#ifdef CONFIG_SOFTMMU
++    tlb_flush(cs);
++#endif
++}
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index b1e5471f949f..40c3d1b65ac5 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -2767,3 +2767,10 @@ uint64_t cpu_ldq_code(CPUArchState *env, abi_ptr addr)
+     TCGMemOpIdx oi = make_memop_idx(MO_TEQ, cpu_mmu_index(env, true));
+     return full_ldq_code(env, addr, oi, 0);
+ }
++
++static void tcg_module_ops_tlb(void)
++{
++    tcg.tlb_flush = tlb_flush;
++}
++
++type_init(tcg_module_ops_tlb);
+diff --git a/accel/tcg/tcg-module.c b/accel/tcg/tcg-module.c
+index e864fb20c141..4d045b91647c 100644
+--- a/accel/tcg/tcg-module.c
++++ b/accel/tcg/tcg-module.c
+@@ -1,5 +1,26 @@
+ #include "qemu/osdep.h"
+ #include "tcg/tcg-module.h"
+ 
++static void update_cpu_stub(CPUState *cpu)
++{
++}
++
+ struct TCGModuleOps tcg = {
++    .tlb_flush = update_cpu_stub,
+ };
++
++/*
++ * CONFIG_TCG_MODULAR: jump through TCGModuleOps to tcg module
++ * !CONFIG_TCG or CONFIG_USER_ONLY: using the wrappers as stubs
++ * otherwise: using direct calls into tcg -> no wrappers
++ */
++#if defined(CONFIG_TCG_MODULAR) || !defined(CONFIG_TCG) || defined(CONFIG_USER_ONLY)
++
++void tlb_flush(CPUState *cpu)
++{
++    if (tcg.tlb_flush) {
++        tcg.tlb_flush(cpu);
++    }
++}
++
++#endif
+diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
+index fb9ebfad9e4a..9dba585ad413 100644
+--- a/accel/tcg/translate-all.c
++++ b/accel/tcg/translate-all.c
+@@ -2472,11 +2472,3 @@ int page_unprotect(target_ulong address, uintptr_t pc)
+     return 0;
+ }
+ #endif /* CONFIG_USER_ONLY */
+-
+-/* This is a wrapper for common code that can not use CONFIG_SOFTMMU */
+-void tcg_flush_softmmu_tlb(CPUState *cs)
+-{
+-#ifdef CONFIG_SOFTMMU
+-    tlb_flush(cs);
+-#endif
+-}
+-- 
+2.31.1
+
 
