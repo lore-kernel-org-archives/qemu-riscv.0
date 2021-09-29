@@ -1,77 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mVXFv-0002su-Pm
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 06:56:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35086)
+	id 1mVj7X-0000Bi-QP
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 19:36:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55866)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mVXFu-0002qh-Bx
- for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 06:56:06 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c]:42499)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mVj7W-0000BQ-OA; Wed, 29 Sep 2021 19:36:14 -0400
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:38610)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mVXFp-0003Kb-Mn
- for qemu-riscv@nongnu.org; Wed, 29 Sep 2021 06:56:06 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- c26-20020a056830349a00b0054d96d25c1eso2302560otu.9
- for <qemu-riscv@nongnu.org>; Wed, 29 Sep 2021 03:56:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=dPQO6ibacWp/r8r6sqYb9wSJOhUvdZMWyTtk37qqhxs=;
- b=N4JNIus2yZ31AJ3P+eK7RnDdc3U1MPrfmbq5M+rWGp9Kwle4D1Kd6COk/G7w3b/01u
- tXnZXU3ywpwXpJujkcW6W296zJCE8uB+V8okxEVPLqhnxZeyyFmmmEY8h8wILmNRHLFJ
- sd9W3tTgpswmdKen8JPlKNZsNOH+k5csacXQHSDLrjO66mcwZE+oF2nP1I1UKG3FZwoR
- TZLGFpHV8pDybdG75NBX0LVTqtERk6Cg6rbXQv/s8ptRKj8wGtX6hsFWx8RFk8iwk5li
- CEY32uh4A0ftOBzFaOa+ICUvOZsklvzouBOn4A5CQJPpQLWmweeG157mYSzJxrykKgmU
- 78zQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mVj7V-00036s-3b; Wed, 29 Sep 2021 19:36:14 -0400
+Received: by mail-io1-xd2a.google.com with SMTP id z184so5296713iof.5;
+ Wed, 29 Sep 2021 16:36:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fy85Wze5xBlgPnSXClQw/7iNZhoVYQObjdkVFNBiAyo=;
+ b=pV+1kR1vKKjqZ6x91/O6M/101btdIgtAZT9MgI1wJD2jlfPHtkpCVwnesedLG5F2uR
+ TBoPyQqHUNyhAu2ykJe3JbLM/wXgen0bZ0Y2smdKNxUwzEWNn8MG2Ij22ncmrRn6kwvX
+ apN1elBOwd5iQ/b5mNjImSIZhElIeY7BhvGVgKi6NY1+Kf9Hle0fjElnLzT7au49gJlf
+ emuV9A53/a3TKLaOZvahRApRU6KBskWWZjUSLaC71qr8Sp9gO+Z+CgmTpf5iCeOL6H6a
+ hBGs+TsIgOl/5/ZqKIECSDlY643IzKwCyuvWwvnDzgIcupPtrcZ+PiFxqPQpas5KbT1l
+ Cydg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=dPQO6ibacWp/r8r6sqYb9wSJOhUvdZMWyTtk37qqhxs=;
- b=nHkADJlLf3gHKn8/jxDPBmaLBQgEtMzxo8y5WYUZk3rq5wbvCx8fBKOx/Gvk2lylty
- o3rVQqv5GELSZ1kyMFWZkY8lNL/Y+d5ECKRVCMXSSAzFumzYG7+wHP+/UizHKkQogkF+
- FOEW2wpB/dx/7xQaONx8wIMqBnHib2vPYi0KyL4tVG/9IOeQc3sfi02aAvgSxvGX8JHO
- KQtGEjv7dpKQRPmy2rsWww4tTvACyfkhjFgQ8lFynhA1xs1Xg97YnhfqoTEQlEMikJMM
- YXIb6RsW4b2f915spescLXbtGnmQv4U+Av0UqPWp23dOa/CRP5ae1+zhZglcFsZtJyXP
- pSqg==
-X-Gm-Message-State: AOAM532L6A4crUGQjn3kSHYy7TZeaEntJ4/jgwYmLQel2lAWBjlru6qx
- gtazPSbjxZIpKH10yz9lh588pg==
-X-Google-Smtp-Source: ABdhPJyYSVG1SP1vu8IkWUBAOSGDRR7lja5UqjFuaWa+Xn4E6sq7RigqPkRYhoGAANeQW6aL8PF5FA==
-X-Received: by 2002:a05:6830:2706:: with SMTP id
- j6mr9724373otu.380.1632912960252; 
- Wed, 29 Sep 2021 03:56:00 -0700 (PDT)
-Received: from [192.168.60.34] ([172.58.171.180])
- by smtp.gmail.com with ESMTPSA id l25sm382299oic.54.2021.09.29.03.55.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Sep 2021 03:55:59 -0700 (PDT)
-Subject: Re: [PATCH v12 3/7] [RISCV_PM] Support CSRs required for RISC-V PM
- extension except for the h-mode
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: space.monkey.delivers@gmail.com, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>
-References: <20210928190036.4114438-1-space.monkey.delivers@gmail.com>
- <20210928190036.4114438-4-space.monkey.delivers@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <cfb0d0d1-981b-4762-d563-4ed0f5279f4d@linaro.org>
-Date: Wed, 29 Sep 2021 06:55:55 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fy85Wze5xBlgPnSXClQw/7iNZhoVYQObjdkVFNBiAyo=;
+ b=PC0Pu6fxTplADJxpx/fg9w12LMsYHO5pZx1Tn8VSiKkg6dSFkiBFGsTlmzSntHPpkL
+ quF5GRZY7kAXdA5aX3JUntHAN29b150A2/tqvEsgxNDJ8j+FF1onihk3vWsM6xT57nMB
+ 1HBpyts1ykA/jaUzJM7oOjQ/HwxYp0zpTuqZ6MI4oKrwlSvWjHFT0Sw2k62+3AmVjeai
+ 3e6jCsFSFhyL5ODapjWKjs1PuJv+E8mDtF8ys41Z8lrE2uJteijjFKurSPtePPufMjrC
+ yAAxjyOWrHW20HqaRlmt4eY7uKrvFjnofdJ8RTZUkx0AAYaZxEqLC/LWlfD0ia1nj0k5
+ 6f+g==
+X-Gm-Message-State: AOAM530raSh/EFpS7liobo/07WpjXp1fA6cpYtbVr1KMWLJHH8xNU3ux
+ 9ZKJ7BkO9uwmQ6qnVVKFpV665xUJtHnynSs4XEI=
+X-Google-Smtp-Source: ABdhPJz6aQebl3GhazcsqfoB2ZtHbAkltxwBFeE2B0gvqPjSTVnoesz6c4gq7S0zaC3wzRO2mcvbcDsm2FnzsTO9a64=
+X-Received: by 2002:a5e:c101:: with SMTP id v1mr1747020iol.90.1632958571009;
+ Wed, 29 Sep 2021 16:36:11 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210928190036.4114438-4-space.monkey.delivers@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32c.google.com
-X-Spam_score_int: -50
-X-Spam_score: -5.1
-X-Spam_bar: -----
-X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.03,
+References: <c617a04d4e3dd041a3427b47a1b1d5ab475a2edd.1632871759.git.alistair.francis@wdc.com>
+ <CAEUhbmVq9Jy9AvkzPvTb-FSLnu5h7wK+RaKdJ7gfU0pjqt6tPQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmVq9Jy9AvkzPvTb-FSLnu5h7wK+RaKdJ7gfU0pjqt6tPQ@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 30 Sep 2021 09:35:44 +1000
+Message-ID: <CAKmqyKP=B4Cp2ZASVy0KmbR-JMGdoF4zDsN1OdV6Pz_EPhSJew@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] hw/riscv: shakti_c: Mark as not user creatable
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -86,30 +74,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2021 10:56:06 -0000
+X-List-Received-Date: Wed, 29 Sep 2021 23:36:15 -0000
 
-On 9/28/21 3:00 PM, Alexey Baturo wrote:
-> +    switch (env->priv) {
-> +    case PRV_M:
-> +        cur_bit_pos = M_PM_CURRENT;
-> +        break;
-> +    case PRV_S:
-> +        cur_bit_pos = S_PM_CURRENT;
-> +        break;
-> +    case PRV_U:
-> +        cur_bit_pos = U_PM_CURRENT;
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +    pm_current = get_field(env->mmte, cur_bit_pos);
+On Wed, Sep 29, 2021 at 7:47 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Wed, Sep 29, 2021 at 7:30 AM Alistair Francis
+> <alistair.francis@opensource.wdc.com> wrote:
+> >
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > Mark the shakti_c machine as not user creatable.
+> >
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/639
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/shakti_c.c | 6 ++++++
+> >  1 file changed, 6 insertions(+)
+> >
+> > diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+> > index 2f084d3c8d..e7cd3bdfb4 100644
+> > --- a/hw/riscv/shakti_c.c
+> > +++ b/hw/riscv/shakti_c.c
+> > @@ -150,6 +150,12 @@ static void shakti_c_soc_class_init(ObjectClass *klass, void *data)
+> >  {
+> >      DeviceClass *dc = DEVICE_CLASS(klass);
+> >      dc->realize = shakti_c_soc_state_realize;
+> > +    /* Reasons:
+>
+> nits: the multi-line comment format should use:
+>
+> /*
+>  *
+>  */
 
-Nit: If you have a look at what the get_field macro does, you'll see that you always want 
-to give it a constant, so the compiler can fold all of the arithmetic into a constant 
-bitfield extract.  It is not a win to pull the field argument out into a variable like this.
+Fixed when applying the patch
 
-For this reason I prefer the hw/registerfields.h interface -- it is more difficult to misuse.
+Applied to riscv-to-apply.next
 
+Alistair
 
-r~
+>
+> > +     *     - Creates CPUS in riscv_hart_realize(), and can create unintended
+> > +     *       CPUs
+> > +     *     - Uses serial_hds in realize function, thus can't be used twice
+> > +     */
+> > +    dc->user_creatable = false;
+> >  }
+> >
+> >  static void shakti_c_soc_instance_init(Object *obj)
+>
+>
+> Otherwise,
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
