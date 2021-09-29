@@ -1,45 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mVVeE-0002q8-CX
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 05:13:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41114)
+	id 1mVWBW-0003Xa-RM
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Sep 2021 05:47:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48390)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1mVVeB-0002m9-Vk; Wed, 29 Sep 2021 05:13:03 -0400
-Received: from szxga01-in.huawei.com ([45.249.212.187]:3478)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1mVVe8-0000bY-55; Wed, 29 Sep 2021 05:13:03 -0400
-Received: from dggeme703-chm.china.huawei.com (unknown [172.30.72.57])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4HK9bl4JbfzWVB4;
- Wed, 29 Sep 2021 17:11:31 +0800 (CST)
-Received: from huawei.com (10.174.187.17) by dggeme703-chm.china.huawei.com
- (10.1.199.99) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.8; Wed, 29
- Sep 2021 17:12:50 +0800
-From: MingWang Li <limingwang@huawei.com>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>
-CC: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>,
- <wanghaibin.wang@huawei.com>, <jiangyifei@huawei.com>, <fanliang@huawei.com>, 
- <wu.wubin@huawei.com>, Mingwang Li <limingwang@huawei.com>
-Subject: [PATCH] hw/riscv: virt: bugfix the memory-backend-file command is
- invalid
-Date: Wed, 29 Sep 2021 17:12:44 +0800
-Message-ID: <20210929091244.75988-1-limingwang@huawei.com>
-X-Mailer: git-send-email 2.19.1.windows.1
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mVWBU-0003QP-4h; Wed, 29 Sep 2021 05:47:28 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:38760)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mVWBS-0004Yp-Fy; Wed, 29 Sep 2021 05:47:27 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ 205-20020a1c01d6000000b0030cd17ffcf8so4708501wmb.3; 
+ Wed, 29 Sep 2021 02:47:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=lZI2Hu+ZftE7Whv6CnKpagIlJ+8EMYBZVdV52vtfoTQ=;
+ b=Km5BuIfQm1rR+omMofQ1dNw8Pn4ui1AG0FqQs/q59ZKvWPdKaEOsvGbbr3zK6/mE0+
+ dERNphRSuPFOtmh1YJp33iDbRYfXIgD7/fn9f5YXHOKpH65MOCtfh4g5CGi6MqwJbpUB
+ 6i0SBPglLxSZ2dpNY/rQmFgbbI0WDWFztYQrwVj2EJ2Fvp3TdmDnqH1GFjsD8b1riPN/
+ tKzaRSFNLIxGHqxIhUwvuz/02uoB8UB10jKUIcjjNojyV+X/iqWFN4T/diP0tIRwuS2q
+ BqOr3gQyDV1Oqsig4+X1rq/GkeYbRdKDq4afoAs0kaPrOhBIEyPXj7G6SUi0CKLyIkVs
+ hZ3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=lZI2Hu+ZftE7Whv6CnKpagIlJ+8EMYBZVdV52vtfoTQ=;
+ b=MWf4UHviAdhOFpsdmc+GZoDKHu/3Yr+SIQnxzEnk5pBwX9hAHprRqirYLnxjl0DZHB
+ xt4LKjlG7+7wDrIVyjEBUHpXxUMRSbm/Ya8/llzoIIMDnUthonqFD2ItpvrW1jug76Zs
+ yrX7vFqKi29pt3YZYGajdRJwl4K3RlzEAtunFUmywxArIPgOiIwf+gr2jBAfLxzvMUif
+ LXznLnV5mgPYz6urssNXz5gn4JwHHd1DsaUeoQovHKfYM+3ST/uFj9EHIeJI0MFarJJw
+ KbOaTz/Eoh7VEfIto60M8hCrZHx65odHn+9L+qqxaPRGyjA+T4hOKYyXndN3idiEAQl4
+ nZZw==
+X-Gm-Message-State: AOAM531qOGB0frNZPObiX11AVt/U3P87daFmN6mj/2PFnhguud2eq4Zm
+ gGl4fVjw6XjVmYmhZg/AjljPM6T3cVAv1LYs+b1K/nz1rOM=
+X-Google-Smtp-Source: ABdhPJx39kN+wbwkdjdtIA+n5e9FyxqTtBps/C1zY8EXAxetoPlFcLhcdsZqq6B75NsZbtLtr33Ab2mU0Y56zbkcu/0=
+X-Received: by 2002:a1c:ed1a:: with SMTP id l26mr968098wmh.119.1632908844007; 
+ Wed, 29 Sep 2021 02:47:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.187.17]
-X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
- dggeme703-chm.china.huawei.com (10.1.199.99)
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=limingwang@huawei.com; helo=szxga01-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+References: <c617a04d4e3dd041a3427b47a1b1d5ab475a2edd.1632871759.git.alistair.francis@wdc.com>
+In-Reply-To: <c617a04d4e3dd041a3427b47a1b1d5ab475a2edd.1632871759.git.alistair.francis@wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 29 Sep 2021 17:47:12 +0800
+Message-ID: <CAEUhbmVq9Jy9AvkzPvTb-FSLnu5h7wK+RaKdJ7gfU0pjqt6tPQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] hw/riscv: shakti_c: Mark as not user creatable
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair23@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-wm1-x333.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -53,57 +73,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Sep 2021 09:13:04 -0000
+X-List-Received-Date: Wed, 29 Sep 2021 09:47:28 -0000
 
-From: Mingwang Li <limingwang@huawei.com>
+On Wed, Sep 29, 2021 at 7:30 AM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> Mark the shakti_c machine as not user creatable.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/639
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/shakti_c.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+> index 2f084d3c8d..e7cd3bdfb4 100644
+> --- a/hw/riscv/shakti_c.c
+> +++ b/hw/riscv/shakti_c.c
+> @@ -150,6 +150,12 @@ static void shakti_c_soc_class_init(ObjectClass *klass, void *data)
+>  {
+>      DeviceClass *dc = DEVICE_CLASS(klass);
+>      dc->realize = shakti_c_soc_state_realize;
+> +    /* Reasons:
 
-If default main_mem is used to be registered as the system memory,
-other memory cannot be initialized. Therefore, the system memory
-should be initialized to the machine->ram, which consists of the
-default main_mem and other possible memory required by applications,
-such as shared hugepage memory in DPDK.
-Also, the mc->defaul_ram_id should be set to the default main_mem,
-which is named as "riscv_virt_board.ram".
+nits: the multi-line comment format should use:
 
-Signed-off-by: Mingwang Li <limingwang@huawei.com>
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
----
- hw/riscv/virt.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+/*
+ *
+ */
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index ec0cb69b8c..b3b431c847 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -771,7 +771,6 @@ static void virt_machine_init(MachineState *machine)
-     const MemMapEntry *memmap = virt_memmap;
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     char *plic_hart_config, *soc_name;
-     target_ulong start_addr = memmap[VIRT_DRAM].base;
-@@ -890,10 +889,8 @@ static void virt_machine_init(MachineState *machine)
-     }
- 
-     /* register system main memory (actual RAM) */
--    memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
--                           machine->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
--        main_mem);
-+        machine->ram);
- 
-     /* create device tree */
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-@@ -1032,6 +1029,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    mc->default_ram_id = "riscv_virt_board.ram";
- 
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
- 
--- 
-2.19.1
+> +     *     - Creates CPUS in riscv_hart_realize(), and can create unintended
+> +     *       CPUs
+> +     *     - Uses serial_hds in realize function, thus can't be used twice
+> +     */
+> +    dc->user_creatable = false;
+>  }
+>
+>  static void shakti_c_soc_instance_init(Object *obj)
 
+
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
