@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYETk-00081k-I1
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:29:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49484)
+	id 1mYETm-00082h-Do
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:29:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49502)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYETc-0007xA-F1; Wed, 06 Oct 2021 17:29:26 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43572)
+ id 1mYETd-0007xD-Di; Wed, 06 Oct 2021 17:29:26 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43610)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYETZ-0007uU-3T; Wed, 06 Oct 2021 17:29:24 -0400
-Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9B5CA40FE2;
- Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
+ id 1mYETb-0007w2-NZ; Wed, 06 Oct 2021 17:29:25 -0400
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 39B484100B;
+ Wed,  6 Oct 2021 23:29:22 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 84A9E60067;
- Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 228D060066;
+ Wed,  6 Oct 2021 23:29:22 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 4E55714005C;
- Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id DB8B614005C;
+ Wed,  6 Oct 2021 23:29:21 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,9 +33,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 01/27] memory: add a few defines for octo (128-bit) values
-Date: Wed,  6 Oct 2021 23:28:07 +0200
-Message-Id: <20211006212833.108706-2-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 03/27] target/riscv: adding upper 64 bits for misa
+Date: Wed,  6 Oct 2021 23:28:09 +0200
+Message-Id: <20211006212833.108706-4-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -67,49 +67,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 06 Oct 2021 21:29:27 -0000
 
-Introducing unsigned quad, signed quad, and octo accesses types
-to handle load and store by 128-bit processors.
-This is just a small addition to Richard's patch not yet upstreamed
-https://lore.kernel.org/qemu-devel/20210818191920.390759-24-richard.henderson@linaro.org/
-Note that the patch must be applied first for the rest to compile
+Addition of misah, upper part of misa in the 128-bit extension.
+This is required for the is_64bit and is_128bit macros that we
+introduce in addition to the existing is_32bit one to know which
+register size the processor uses.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- include/exec/memop.h | 6 ++++++
- 1 file changed, 6 insertions(+)
+ target/riscv/cpu.h       | 11 +++++++++++
+ target/riscv/cpu.c       |  2 ++
+ target/riscv/translate.c | 21 ++++++++++++++++++++-
+ 3 files changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/include/exec/memop.h b/include/exec/memop.h
-index 04264ffd6b..9297f58a39 100644
---- a/include/exec/memop.h
-+++ b/include/exec/memop.h
-@@ -85,10 +85,13 @@ typedef enum MemOp {
-     MO_UB    = MO_8,
-     MO_UW    = MO_16,
-     MO_UL    = MO_32,
-+    MO_UQ    = MO_64,
-     MO_SB    = MO_SIGN | MO_8,
-     MO_SW    = MO_SIGN | MO_16,
-     MO_SL    = MO_SIGN | MO_32,
-+    MO_SQ    = MO_SIGN | MO_64,
-     MO_Q     = MO_64,
-+    MO_O     = MO_128,
- 
-     MO_LEUW  = MO_LE | MO_UW,
-     MO_LEUL  = MO_LE | MO_UL,
-@@ -105,9 +108,12 @@ typedef enum MemOp {
- #ifdef NEED_CPU_H
-     MO_TEUW  = MO_TE | MO_UW,
-     MO_TEUL  = MO_TE | MO_UL,
-+    MO_TEUQ  = MO_TE | MO_UQ,
-     MO_TESW  = MO_TE | MO_SW,
-     MO_TESL  = MO_TE | MO_SL,
-+    MO_TESQ  = MO_TE | MO_SQ,
-     MO_TEQ   = MO_TE | MO_Q,
-+    MO_TEO   = MO_TE | MO_O,
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5896aca346..0c41b60b25 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -37,6 +37,7 @@
+ #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
++#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+ #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+ #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
+@@ -49,10 +50,16 @@
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+ #elif defined(TARGET_RISCV64)
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
++#else
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE128
  #endif
  
-     MO_SSIZE = MO_SIZE | MO_SIGN,
++/* Mask for the MXLEN flag in the misa CSR */
++#define MXLEN_MASK ((target_ulong)3 << (TARGET_LONG_BITS - 2))
+ #define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
+ #define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
++/* To be used on misah, the upper part of misa */
++#define RV128 ((target_ulong)3 << (TARGET_LONG_BITS - 2))
+ 
+ #define RV(x) ((target_ulong)1 << (x - 'A'))
+ 
+@@ -187,6 +194,10 @@ struct CPURISCVState {
+     target_ulong hgatp;
+     uint64_t htimedelta;
+ 
++    /* Upper 64-bits of 128-bit misa CSR */
++    uint64_t misah;
++    uint64_t misah_mask;
++
+     /* Virtual CSRs */
+     /*
+      * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 7c626d89cd..02417be926 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -154,8 +154,10 @@ static void riscv_any_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+ #if defined(TARGET_RISCV32)
+     set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++    set_misah(env, 0);
+ #elif defined(TARGET_RISCV64)
+     set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++    set_misah(env, 0);
+ #endif
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+ }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 74b33fa3c9..c04430805e 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -56,6 +56,7 @@ typedef struct DisasContext {
+     target_ulong pc_succ_insn;
+     target_ulong priv_ver;
+     target_ulong misa;
++    uint64_t misah;
+     uint32_t opcode;
+     uint32_t mstatus_fs;
+     uint32_t mem_idx;
+@@ -90,13 +91,30 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ 
+ #ifdef TARGET_RISCV32
+ # define is_32bit(ctx)  true
++# define is_64bit(ctx)  false
++# define is_128bit(ctx) false
+ #elif defined(CONFIG_USER_ONLY)
+ # define is_32bit(ctx)  false
++# define is_64_bit(ctx) true
++# define is_128_bit(ctx) false
+ #else
+ static inline bool is_32bit(DisasContext *ctx)
+ {
+-    return (ctx->misa & RV32) == RV32;
++    return (ctx->misa & MXLEN_MASK) == RV32;
+ }
++
++static inline bool is_64bit(DisasContext *ctx)
++{
++    return (ctx->misa & MXLEN_MASK) == RV64;
++}
++#if !defined(TARGET_RISCV64)
++static inline bool is_128bit(DisasContext *ctx)
++{
++    return (ctx->misah & MXLEN_MASK) == RV128;
++}
++#else
++# define is_128bit(ctx) false
++#endif
+ #endif
+ 
+ /* The word size for this operation. */
+@@ -530,6 +548,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->virt_enabled = false;
+ #endif
+     ctx->misa = env->misa;
++    ctx->misah = env->misah;
+     ctx->frm = -1;  /* unknown rounding mode */
+     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+     ctx->vlen = cpu->cfg.vlen;
 -- 
 2.33.0
 
