@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYEUv-0000VK-2u
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:30:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49852)
+	id 1mYEUw-0000Xj-0N
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:30:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49856)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEUa-0000J6-TN; Wed, 06 Oct 2021 17:30:25 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:44124)
+ id 1mYEUb-0000J9-0f; Wed, 06 Oct 2021 17:30:25 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:44128)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEUV-0008Ox-HM; Wed, 06 Oct 2021 17:30:24 -0400
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id D99AF41EB0;
- Wed,  6 Oct 2021 23:29:43 +0200 (CEST)
+ id 1mYEUX-0008RY-SI; Wed, 06 Oct 2021 17:30:24 -0400
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id A93AF41F09;
+ Wed,  6 Oct 2021 23:29:45 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id C3CC060066;
- Wed,  6 Oct 2021 23:29:43 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 9336060067;
+ Wed,  6 Oct 2021 23:29:45 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 9045F14005C;
- Wed,  6 Oct 2021 23:29:43 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 5DC7014005C;
+ Wed,  6 Oct 2021 23:29:45 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,10 +33,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 23/27] target/riscv: helper functions to wrap calls to
- 128-bit csr insns
-Date: Wed,  6 Oct 2021 23:28:29 +0200
-Message-Id: <20211006212833.108706-24-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 25/27] target/riscv: actual functions to realize crs
+ 128-bit insns
+Date: Wed,  6 Oct 2021 23:28:31 +0200
+Message-Id: <20211006212833.108706-26-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -68,124 +68,251 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 06 Oct 2021 21:30:31 -0000
 
-Given the side effects they have, the csr instructions are realized as
-helpers. We extend this existing infrastructure for 128-bit sized csr.
-We have a slight issue with returning 128-bit values: we use the globals
-we added to support div/rem insns to that end.
-Theses helpers all call a unique function that is currently a stub.
-The trans_csrxx functions supporting 128-bit are yet to be implemented.
+The csrs are accessed through function pointers: we set-up the table
+for the 128-bit accesses, make the stub a function that does what it
+should, and implement basic accesses on read-only csrs.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/cpu.h       |  4 ++++
- target/riscv/helper.h    |  3 +++
- target/riscv/csr.c       |  7 +++++++
- target/riscv/op_helper.c | 44 ++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 58 insertions(+)
+ target/riscv/cpu.h |  16 +++++
+ target/riscv/csr.c | 152 ++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 165 insertions(+), 3 deletions(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index a2d7d65efb..911fdc4ecf 100644
+index 911fdc4ecf..8a28b69a1b 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -506,6 +506,10 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
-                                           target_ulong new_value,
-                                           target_ulong write_mask);
+@@ -510,6 +510,15 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+                                 Int128 *ret_value,
+                                 Int128 new_value, Int128 write_mask);
  
-+RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-+                                Int128 *ret_value,
-+                                Int128 new_value, Int128 write_mask);
++typedef RISCVException (*riscv_csr_read128_fn)(CPURISCVState *env, int csrno,
++                                               Int128 *ret_value);
++typedef RISCVException (*riscv_csr_write128_fn)(CPURISCVState *env, int csrno,
++                                             Int128 new_value);
++typedef RISCVException (*riscv_csr_op128_fn)(CPURISCVState *env, int csrno,
++                                             Int128 *ret_value,
++                                             Int128 new_value,
++                                             Int128 write_mask);
 +
  typedef struct {
      const char *name;
      riscv_csr_predicate_fn predicate;
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 01d885d566..d1176649f1 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -68,6 +68,9 @@ DEF_HELPER_FLAGS_2(gorcw, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_2(csrr, tl, env, int)
- DEF_HELPER_3(csrw, void, env, int, tl)
- DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
-+DEF_HELPER_2(csrr_i128, void, env, int)
-+DEF_HELPER_4(csrw_i128, void, env, int, tl, tl)
-+DEF_HELPER_6(csrrw_i128, void, env, int, tl, tl, tl, tl)
- #ifndef CONFIG_USER_ONLY
- DEF_HELPER_2(sret, tl, env, tl)
- DEF_HELPER_2(mret, tl, env, tl)
+@@ -518,6 +527,12 @@ typedef struct {
+     riscv_csr_op_fn op;
+ } riscv_csr_operations;
+ 
++typedef struct {
++    riscv_csr_read128_fn read128;
++    riscv_csr_write128_fn write128;
++    riscv_csr_op128_fn op128;
++} riscv_csr_operations128;
++
+ /* CSR function table constants */
+ enum {
+     CSR_TABLE_SIZE = 0x1000
+@@ -525,6 +540,7 @@ enum {
+ 
+ /* CSR function table */
+ extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
++extern riscv_csr_operations128 csr_ops_128[CSR_TABLE_SIZE];
+ 
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 23fbbd3216..9529119238 100644
+index 9529119238..6ebc03f89b 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -1492,6 +1492,13 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+@@ -462,6 +462,13 @@ static const char valid_vm_1_10_64[16] = {
+ };
+ 
+ /* Machine Information Registers */
++static RISCVException read_zero_i128(CPURISCVState *env, int csrno,
++                                    Int128 *val)
++{
++    *val = int128_zero();
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_zero(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+@@ -469,6 +476,13 @@ static RISCVException read_zero(CPURISCVState *env, int csrno,
      return RISCV_EXCP_NONE;
  }
  
-+RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-+                               Int128 *ret_value,
-+                               Int128 new_value, Int128 write_mask)
++static RISCVException read_mhartid_i128(CPURISCVState *env, int csrno,
++                                       Int128 *val)
 +{
-+    return RISCV_EXCP_ILLEGAL_INST;
++    *val = int128_make64(env->mhartid);
++    return RISCV_EXCP_NONE;
 +}
 +
- /*
-  * Debugger support.  If not in user mode, set env->debugger before the
-  * riscv_csrrw call and clear it after the call.
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index ee7c24efe7..753eb35000 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -69,6 +69,50 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
-     return val;
+ static RISCVException read_mhartid(CPURISCVState *env, int csrno,
+                                    target_ulong *val)
+ {
+@@ -554,6 +568,13 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
  }
  
-+void helper_csrr_i128(CPURISCVState *env, int csr)
++static RISCVException read_misa_i128(CPURISCVState *env, int csrno,
++                                    Int128 *val)
 +{
-+    Int128 rv = int128_zero();
-+    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
-+                                          int128_zero(),
-+                                          int128_zero());
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-+    }
-+
-+    env->hlpr[0] = int128_getlo(rv);
-+    env->hlpr[1] = int128_gethi(rv);
++    *val = int128_make128(env->misa, env->misah);
++    return RISCV_EXCP_NONE;
 +}
 +
-+void helper_csrw_i128(CPURISCVState *env, int csr,
-+                      target_ulong srcl, target_ulong srch)
-+{
-+    RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
-+                                          int128_make128(srcl, srch),
-+                                          UINT128_MAX);
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-+    }
-+}
-+
-+void helper_csrrw_i128(CPURISCVState *env, int csr,
-+                       target_ulong srcl, target_ulong srch,
-+                       target_ulong maskl, target_ulong maskh)
-+{
-+    Int128 rv = int128_zero();
-+    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
-+                                          int128_make128(srcl, srch),
-+                                          int128_make128(maskl, maskh));
-+
-+    if (ret != RISCV_EXCP_NONE) {
-+        riscv_raise_exception(env, ret, GETPC());
-+    }
-+
-+    env->hlpr[0] = int128_getlo(rv);
-+    env->hlpr[1] = int128_gethi(rv);
-+}
-+
- #ifndef CONFIG_USER_ONLY
+ static RISCVException read_misa(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+@@ -1492,11 +1513,118 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
  
- target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
++static inline RISCVException riscv_csrrw_check_i128(CPURISCVState *env,
++                                                    int csrno,
++                                                    Int128 write_mask,
++                                                    RISCVCPU *cpu)
++{
++    /* check privileges and return -1 if check fails */
++#if !defined(CONFIG_USER_ONLY)
++    int effective_priv = env->priv;
++    int read_only = get_field(csrno, 0xc00) == 3;
++
++    if (riscv_has_ext(env, RVH) &&
++        env->priv == PRV_S &&
++        !riscv_cpu_virt_enabled(env)) {
++        /*
++         * We are in S mode without virtualisation, therefore we are in HS Mode.
++         * Add 1 to the effective privledge level to allow us to access the
++         * Hypervisor CSRs.
++         */
++        effective_priv++;
++    }
++
++    if ((int128_nz(write_mask) && read_only) ||
++        (!env->debugger && (effective_priv < get_field(csrno, 0x300)))) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++#endif
++
++    /* ensure the CSR extension is enabled. */
++    if (!cpu->cfg.ext_icsr) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    /* check predicate */
++    if (!csr_ops[csrno].predicate) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++    RISCVException ret = csr_ops[csrno].predicate(env, csrno);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+-                               Int128 *ret_value,
+-                               Int128 new_value, Int128 write_mask)
++                                Int128 *ret_value,
++                                Int128 new_value, Int128 write_mask)
+ {
+-    return RISCV_EXCP_ILLEGAL_INST;
++    RISCVException ret;
++    Int128 old_value;
++
++    RISCVCPU *cpu = env_archcpu(env);
++
++    if (!csr_ops_128[csrno].read128 && !csr_ops_128[csrno].op128) {
++        /*
++         * FIXME: Fall back to 64-bit version for now, if the 128-bit
++         * alternative isn't defined.
++         * Note, some CSRs don't extend to MXLEN, for those,
++         * this fallback is correctly handling the read/write.
++         */
++        target_ulong ret_64;
++        ret = riscv_csrrw(env, csrno, &ret_64,
++                          int128_getlo(new_value),
++                          int128_getlo(write_mask));
++
++        if (ret_value) {
++            *ret_value = int128_make64(ret_64);
++        }
++
++        return ret;
++    }
++
++    RISCVException check_status =
++        riscv_csrrw_check_i128(env, csrno, write_mask, cpu);
++    if (check_status != RISCV_EXCP_NONE) {
++        return check_status;
++    }
++
++    /* execute combined read/write operation if it exists */
++    if (csr_ops_128[csrno].op128) {
++        return csr_ops_128[csrno].op128(env, csrno, ret_value,
++                                        new_value, write_mask);
++    }
++
++    /* if no accessor exists then return failure */
++    if (!csr_ops_128[csrno].read128) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++    /* read old value */
++    ret = csr_ops_128[csrno].read128(env, csrno, &old_value);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    /* write value if writable and write mask set, otherwise drop writes */
++    if (int128_nz(write_mask)) {
++        new_value = int128_or(int128_and(old_value, int128_not(write_mask)),
++                              int128_and(new_value, write_mask));
++        if (csr_ops_128[csrno].write128) {
++            ret = csr_ops_128[csrno].write128(env, csrno, new_value);
++            if (ret != RISCV_EXCP_NONE) {
++                return ret;
++            }
++        }
++    }
++
++    /* return old value */
++    if (ret_value) {
++        *ret_value = old_value;
++    }
++
++    return RISCV_EXCP_NONE;
+ }
+ 
+ /*
+@@ -1520,6 +1648,24 @@ RISCVException riscv_csrrw_debug(CPURISCVState *env, int csrno,
+ }
+ 
+ /* Control and Status Register function table */
++riscv_csr_operations128 csr_ops_128[CSR_TABLE_SIZE] = {
++#if !defined(CONFIG_USER_ONLY)
++    [CSR_MVENDORID]  = { read_zero_i128    },
++    [CSR_MARCHID]    = { read_zero_i128    },
++    [CSR_MIMPID]     = { read_zero_i128    },
++    [CSR_MHARTID]    = { read_mhartid_i128 },
++
++    [CSR_MSTATUS]    = { read_zero_i128    },
++    [CSR_MISA]       = { read_misa_i128    },
++    [CSR_MTVEC]      = { read_zero_i128    },
++
++    [CSR_MSCRATCH]   = { read_zero_i128    },
++    [CSR_MEPC]       = { read_zero_i128    },
++
++    [CSR_SATP]       = { read_zero_i128    },
++#endif
++};
++
+ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* User Floating-Point CSRs */
+     [CSR_FFLAGS]   = { "fflags",   fs,     read_fflags,  write_fflags },
 -- 
 2.33.0
 
