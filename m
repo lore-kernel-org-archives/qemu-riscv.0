@@ -1,70 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYAe3-0008CW-Kk
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 13:23:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48466)
+	id 1mYETe-0007xd-KN
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:29:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49456)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mYAdb-0007Dg-Qf
- for qemu-riscv@nongnu.org; Wed, 06 Oct 2021 13:23:28 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:37519)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mYAdX-000858-OK
- for qemu-riscv@nongnu.org; Wed, 06 Oct 2021 13:23:27 -0400
-Received: by mail-pf1-x435.google.com with SMTP id q19so2482422pfl.4
- for <qemu-riscv@nongnu.org>; Wed, 06 Oct 2021 10:23:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=3/8TAKIkdBI5Fmcc2hxFYFpwlGKE6ZLuHF22xUwszzo=;
- b=Kcr5hPwYUnrvHNdzXhMMwuDtBXf86y1qMe/BaxHaw2/PQsgpzrBkp34mnYV99pYSfI
- WlGIWhOXriUKWMBCQrtmBkXFXVz8+sEEKmOqr7efI+0O2RcOTQ3wZbb+U2ZIEHEjMLIu
- a+jMJlevtJJRxh3fDodsonarSWvL20cJPEFxg6riiDn80fxe8yK6rx3+1nP3+AIMaljJ
- tByCCYzW6JHimCvcdHgrLZZz91eKTlrfspGKund6xdkFPtjM/UDP2thGjWtbOYkeXKIu
- 306+wxtx5632hZCJMHlAnpPpyu2OW63Q9Vpmc+yoYA/Nw367y+X8le1LuAk9B9PqQfWg
- Zhlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=3/8TAKIkdBI5Fmcc2hxFYFpwlGKE6ZLuHF22xUwszzo=;
- b=VXj+BliDEMqzwN//+ulz4BdZuPrvYPGNLlr4rL6nKa81Z/ZniEOdRASvtHi0fsGQ3Q
- QGZiUaOhaCGnxMYLxaBGi9rCNaB9ltTM1w/c01u90jpfUIyig6c4S3k9VqPmvlD/6v4E
- 4fhbW0cFSN+t2t0mNOMkElKQ/BIUXkUGjhk7apL9SkwzUh2sY1375FEO9UcQOqQMlVhS
- fWg1N47XVuafqLjK9AnwpW/h7VXXrLXDOxwm1TDIXtnzz/IhzjoEuyNUCr+mJqApgfb8
- 1B7r32BhbSLxtaAvVMoOOZZ7WZVxyKbt5HfaWus9p0c02r3CwcWxLD5iBVVsHXA6qh/4
- vwyA==
-X-Gm-Message-State: AOAM532wtzxjreWtjsHV9XpyTchm0vvrPwaUQpGd/YsRLUsYkaDtnOnZ
- 6xl/vCPJZ5CadUwQD8+eS9xDJA==
-X-Google-Smtp-Source: ABdhPJxg9AlfFuUEpBeU0HgcJg6Qf8N66EN+HnaMKPLxxItyhLrphrdGlVVGQuK+y2GeGkR7nfpcEw==
-X-Received: by 2002:a63:205a:: with SMTP id r26mr21806850pgm.62.1633541002439; 
- Wed, 06 Oct 2021 10:23:22 -0700 (PDT)
-Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id w7sm21606929pfj.189.2021.10.06.10.23.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Oct 2021 10:23:21 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: laurent@vivier.eu,
-	alex.bennee@linaro.org,
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mYETW-0007wD-KF; Wed, 06 Oct 2021 17:29:19 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43556)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mYETU-0007l5-82; Wed, 06 Oct 2021 17:29:18 -0400
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 57C2C40FCE;
+ Wed,  6 Oct 2021 23:29:08 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 3F97F60066;
+ Wed,  6 Oct 2021 23:29:08 +0200 (CEST)
+Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 6AB5914005C;
+ Wed,  6 Oct 2021 23:29:07 +0200 (CEST)
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v4 17/41] linux-user/host/riscv: Improve host_signal_write
-Date: Wed,  6 Oct 2021 10:22:43 -0700
-Message-Id: <20211006172307.780893-18-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211006172307.780893-1-richard.henderson@linaro.org>
-References: <20211006172307.780893-1-richard.henderson@linaro.org>
+Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
+ bin.meng@windriver.com, philmd@redhat.com, palmer@dabbelt.com,
+ fabien.portas@grenoble-inp.org,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 00/27] Adding partial support for 128-bit riscv target
+Date: Wed,  6 Oct 2021 23:28:06 +0200
+Message-Id: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (41)
+X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,117 +63,102 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2021 17:23:28 -0000
+X-List-Received-Date: Wed, 06 Oct 2021 21:29:20 -0000
 
-Do not read 4 bytes before we determine the size of the insn.
-Simplify triple switches in favor of checking major opcodes.
-Include the missing cases of compact fsd and fsdsp.
+This series of patches provides partial 128-bit support for the riscv
+target architecture.
+Feedback on v1 was most useful and led to many improvements.
++ the load and store make use of a not yet upstreamed patch from Richard,
++ use of the existing Int128 computations in helpers, and addition of
+  a few more operations there, in particular division and remainder
++ refactoring of the calls to the code generation helpers, as suggested
+  by Richard, lead to a much cleaner solution. I did that for gen_arith
+  and gen_shift, not for gen_unary as it used only for the bitmanip
+  extension that I did not take into consideration yet
++ split of the patch in smaller pieces, as advised by Alistair
 
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- linux-user/host/riscv/host-signal.h | 83 ++++++++++-------------------
- 1 file changed, 28 insertions(+), 55 deletions(-)
+Two things suggested I could not achieve:
+- the total eviction of the #ifdefs taking the target size into account:
+  I cheated by using #else when I needed, IMHO a shame
+- the qemu_build_not_reached() use when accessing the upper part of the
+  registers: the misa/misah field is used for this check, and in 128-bit
+  the compiler cannot infer that the field is read only.
 
-diff --git a/linux-user/host/riscv/host-signal.h b/linux-user/host/riscv/host-signal.h
-index 5860dce7d7..ab06d70964 100644
---- a/linux-user/host/riscv/host-signal.h
-+++ b/linux-user/host/riscv/host-signal.h
-@@ -17,65 +17,38 @@ static inline uintptr_t host_signal_pc(ucontext_t *uc)
- 
- static inline bool host_signal_write(siginfo_t *info, ucontext_t *uc)
- {
--    uint32_t insn = *(uint32_t *)host_signal_pc(uc);
--
-     /*
--     * Detect store by reading the instruction at the program
--     * counter. Note: we currently only generate 32-bit
--     * instructions so we thus only detect 32-bit stores
-+     * Detect store by reading the instruction at the program counter.
-+     * Do not read more than 16 bits, because we have not yet determined
-+     * the size of the instruction.
-      */
--    switch (((insn >> 0) & 0b11)) {
--    case 3:
--        switch (((insn >> 2) & 0b11111)) {
--        case 8:
--            switch (((insn >> 12) & 0b111)) {
--            case 0: /* sb */
--            case 1: /* sh */
--            case 2: /* sw */
--            case 3: /* sd */
--            case 4: /* sq */
--                return true;
--            default:
--                break;
--            }
--            break;
--        case 9:
--            switch (((insn >> 12) & 0b111)) {
--            case 2: /* fsw */
--            case 3: /* fsd */
--            case 4: /* fsq */
--                return true;
--            default:
--                break;
--            }
--            break;
--        default:
--            break;
--        }
-+    const uint16_t *pinsn = (const uint16_t *)host_signal_pc(uc);
-+    uint16_t insn = pinsn[0];
-+
-+    /* 16-bit instructions */
-+    switch (insn & 0xe003) {
-+    case 0xa000: /* c.fsd */
-+    case 0xc000: /* c.sw */
-+    case 0xe000: /* c.sd (rv64) / c.fsw (rv32) */
-+    case 0xa002: /* c.fsdsp */
-+    case 0xc002: /* c.swsp */
-+    case 0xe002: /* c.sdsp (rv64) / c.fswsp (rv32) */
-+        return true;
-     }
- 
--    /* Check for compressed instructions */
--    switch (((insn >> 13) & 0b111)) {
--    case 7:
--        switch (insn & 0b11) {
--        case 0: /*c.sd */
--        case 2: /* c.sdsp */
--            return true;
--        default:
--            break;
--        }
--        break;
--    case 6:
--        switch (insn & 0b11) {
--        case 0: /* c.sw */
--        case 3: /* c.swsp */
--            return true;
--        default:
--            break;
--        }
--        break;
--    default:
--        break;
-+    /* 32-bit instructions, major opcodes */
-+    switch (insn & 0x7f) {
-+    case 0x23: /* store */
-+    case 0x27: /* store-fp */
-+        return true;
-+    case 0x2f: /* amo */
-+        /*
-+         * The AMO function code is in bits 25-31, unread as yet.
-+         * The AMO functions are LR (read), SC (write), and the
-+         * rest are all read-modify-write.
-+         */
-+        insn = pinsn[1];
-+        return (insn >> 11) != 2; /* LR */
-     }
- 
-     return false;
+The checks I made in between each patch:
+* smooth boot of busybear linux on rv64
+* correct execution of all riscv-probe programs on rv32
+
+For the 128-bit, the tests are there: https://github.com/fpetrot/128-test
+* from hash 925e1af2c7, run the tests in unit_test_i
+* from hash 6d4a39f2c4, run in addition the tests in unit_test_m
+* from hash 864e563916, run in addition the tests unit_test_csr
+
+
+Frédéric Pétrot (27):
+  memory: add a few defines for octo (128-bit) values
+  Int128.h: addition of a few 128-bit operations
+  target/riscv: adding upper 64 bits for misa
+  target/riscv: array for the 64 upper bits of 128-bit registers
+  target/riscv: additional macros to check instruction support
+  target/riscv: separation of bitwise logic and aritmetic helpers
+  target/riscv: refactoring calls to gen_arith
+  target/riscv: refactoring calls to gen_shift
+  target/riscv: setup everything so that riscv128-softmmu compiles
+  target/riscv: adding accessors to the registers upper part
+  target/riscv: handling 128-bit part in logic/arith/shift gen helpers
+  target/riscv: moving some insns close to similar insns
+  target/riscv: rename a few gen function helpers
+  target/riscv: 128-bit support for instructions using
+    gen_arith/gen_logic
+  target/riscv: 128-bit support for instructions using gen_shift
+  target/riscv: support for 128-bit loads and store
+  target/riscv: 128-bit double word integer arithmetic instructions
+  target/riscv: 128-bit double word integer shift instructions
+  target/riscv: support for 128-bit base multiplications insns
+  target/riscv: addition of the 'd' insns for 128-bit mult/div/rem
+  target/riscv: div and rem insns on 128-bit
+  target/riscv: adding high part of some csrs
+  target/riscv: helper functions to wrap calls to 128-bit csr insns
+  target/riscv: modification of the trans_csrxx for 128-bit support
+  target/riscv: actual functions to realize crs 128-bit insns
+  target/riscv: adding 128-bit access functions for some csrs
+  target/riscv: support for 128-bit satp
+
+ configs/devices/riscv128-softmmu/default.mak |  17 +
+ configs/targets/riscv128-softmmu.mak         |   6 +
+ include/exec/memop.h                         |   6 +
+ include/hw/riscv/sifive_cpu.h                |   3 +
+ include/qemu/int128.h                        | 264 ++++++
+ target/riscv/cpu-param.h                     |  10 +
+ target/riscv/cpu.h                           |  40 +
+ target/riscv/cpu_bits.h                      |  11 +
+ target/riscv/helper.h                        |   9 +
+ target/riscv/insn16.decode                   |  32 +-
+ target/riscv/insn32.decode                   |  25 +
+ target/riscv/cpu.c                           |  49 +-
+ target/riscv/cpu_helper.c                    |  54 +-
+ target/riscv/csr.c                           | 329 ++++++-
+ target/riscv/gdbstub.c                       |   3 +
+ target/riscv/m128_helper.c                   | 109 +++
+ target/riscv/op_helper.c                     |  44 +
+ target/riscv/translate.c                     | 351 ++++++-
+ target/riscv/insn_trans/trans_rvb.c.inc      |  80 +-
+ target/riscv/insn_trans/trans_rvd.c.inc      |  12 +-
+ target/riscv/insn_trans/trans_rvf.c.inc      |   6 +-
+ target/riscv/insn_trans/trans_rvi.c.inc      | 936 ++++++++++++++++---
+ target/riscv/insn_trans/trans_rvm.c.inc      | 352 ++++++-
+ gdb-xml/riscv-128bit-cpu.xml                 |  48 +
+ gdb-xml/riscv-128bit-virtual.xml             |  12 +
+ target/riscv/Kconfig                         |   3 +
+ target/riscv/meson.build                     |   1 +
+ 27 files changed, 2579 insertions(+), 233 deletions(-)
+ create mode 100644 configs/devices/riscv128-softmmu/default.mak
+ create mode 100644 configs/targets/riscv128-softmmu.mak
+ create mode 100644 target/riscv/m128_helper.c
+ create mode 100644 gdb-xml/riscv-128bit-cpu.xml
+ create mode 100644 gdb-xml/riscv-128bit-virtual.xml
+
 -- 
-2.25.1
+2.33.0
 
 
