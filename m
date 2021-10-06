@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYEUY-0000EL-Kz
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:30:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49710)
+	id 1mYEUY-0000F8-VF
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:30:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEUD-0008SG-Q1; Wed, 06 Oct 2021 17:30:04 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43826)
+ id 1mYEUF-0008SI-Kn; Wed, 06 Oct 2021 17:30:03 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43926)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEU7-00085h-KZ; Wed, 06 Oct 2021 17:30:00 -0400
+ id 1mYEUC-00089c-3P; Wed, 06 Oct 2021 17:30:03 -0400
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id E53F041E28;
- Wed,  6 Oct 2021 23:29:32 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7561A41E8D;
+ Wed,  6 Oct 2021 23:29:38 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id CF62460066;
- Wed,  6 Oct 2021 23:29:32 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 5EE2C60066;
+ Wed,  6 Oct 2021 23:29:38 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 9561B14005C;
- Wed,  6 Oct 2021 23:29:32 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 28EB814005C;
+ Wed,  6 Oct 2021 23:29:38 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,9 +33,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 13/27] target/riscv: rename a few gen function helpers
-Date: Wed,  6 Oct 2021 23:28:19 +0200
-Message-Id: <20211006212833.108706-14-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 18/27] target/riscv: 128-bit double word integer shift
+ instructions
+Date: Wed,  6 Oct 2021 23:28:24 +0200
+Message-Id: <20211006212833.108706-19-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -67,139 +68,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 06 Oct 2021 21:30:07 -0000
 
-Add the tl suffix to the existing integer gen_xxx functions that apply to
-target_long types for which a 128-bit version will also exist, so
-that it is immediately visible which function is for which type(s).
+All variations of shifts on 64-bit values are available in the
+128-bit ISA, so we add them now.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 34 ++++++++++++++++---------
- 1 file changed, 22 insertions(+), 12 deletions(-)
+ target/riscv/insn32.decode              | 10 +++++
+ target/riscv/translate.c                |  4 +-
+ target/riscv/insn_trans/trans_rvi.c.inc | 58 +++++++++++++++++++++++++
+ 3 files changed, 70 insertions(+), 2 deletions(-)
 
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index eea540cea9..be8d6aa85f 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -22,6 +22,7 @@
+ %rs1       15:5
+ %rd        7:5
+ %sh5       20:5
++%sh6       20:6
+ 
+ %sh7    20:7
+ %csr    20:12
+@@ -92,6 +93,9 @@
+ # Formats 64:
+ @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+ 
++# Formats 128:
++@sh6       ...... ...... ..... ... ..... ....... &shift shamt=%sh6 %rs1 %rd
++
+ # *** Privileged Instructions ***
+ ecall       000000000000     00000 000 00000 1110011
+ ebreak      000000000001     00000 000 00000 1110011
+@@ -168,8 +172,14 @@ ldu      ............   ..... 111 ..... 0000011 @i
+ lq       ............   ..... 010 ..... 0001111 @i
+ sq       ............   ..... 100 ..... 0100011 @s
+ addid    ............  .....  000 ..... 1011011 @i
++sllid    000000 ......  ..... 001 ..... 1011011 @sh6
++srlid    000000 ......  ..... 101 ..... 1011011 @sh6
++sraid    010000 ......  ..... 101 ..... 1011011 @sh6
+ addd     0000000 ..... .....  000 ..... 1111011 @r
+ subd     0100000 ..... .....  000 ..... 1111011 @r
++slld     0000000 ..... .....  001 ..... 1111011 @r
++srld     0000000 ..... .....  101 ..... 1111011 @r
++srad     0100000 ..... .....  101 ..... 1111011 @r
+ 
+ # *** RV32M Standard Extension ***
+ mul      0000001 .....  ..... 000 ..... 0110011 @r
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 120841de48..195dc3f461 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -624,8 +624,8 @@ static bool gen_shift_imm_fn(DisasContext *ctx, arg_shift *a, DisasExtend ext,
+ 
+         gen_set_gpr(ctx, a->rd, dest);
+     } else if (is_128bit(ctx)) {
+-        if ((ctx->w && a->shamt >= 32)
+-            || (!ctx->w && a->shamt >= 128)) {
++        if ((ctx->w && a->shamt >= 32) || (ctx->d && a->shamt >= 64)
++            || (!ctx->w && !ctx->d && a->shamt >= 128)) {
+             return false;
+         }
+ 
 diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 9e5782d1f5..ab85693364 100644
+index 05e13bbc1d..1a1defb102 100644
 --- a/target/riscv/insn_trans/trans_rvi.c.inc
 +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -136,7 +136,7 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
+@@ -888,6 +888,39 @@ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
+                             NULL, gen_sraiw_tl, gen_sraiw_i128);
  }
  
--static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-     TCGv dest = dest_gpr(ctx, a->rd);
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -152,6 +152,11 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
- }
- 
-+static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
++static bool trans_sllid(DisasContext *ctx, arg_sllid *a)
 +{
-+    return gen_load_tl(ctx, a, memop);
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, NULL, gen_slliwd_i128);
 +}
 +
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
- {
-     return gen_load(ctx, a, MO_SB);
-@@ -189,7 +194,7 @@ static bool trans_ld(DisasContext *ctx, arg_ld *a)
-     return gen_load(ctx, a, MO_TEQ);
- }
- 
--static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -204,6 +209,11 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     return true;
- }
- 
-+static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
++static void gen_srlid_i128(TCGv retl, TCGv reth,
++                           TCGv srcl, TCGv srch, target_long shamt)
 +{
-+    return gen_store_tl(ctx, a, memop);
++    tcg_gen_shri_tl(retl, srcl, shamt);
 +}
 +
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
- {
-     return gen_store(ctx, a, MO_SB);
-@@ -231,12 +241,12 @@ static bool trans_addi(DisasContext *ctx, arg_addi *a)
-                             tcg_gen_addi_tl, tcg_gen_addi_tl, NULL);
++static bool trans_srlid(DisasContext *ctx, arg_srlid *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, NULL, gen_srlid_i128);
++}
++
++static void gen_sraid_i128(TCGv retl, TCGv reth,
++                           TCGv srcl, TCGv srch, target_long shamt)
++{
++    tcg_gen_sari_tl(retl, srcl, shamt);
++}
++
++static bool trans_sraid(DisasContext *ctx, arg_sraid *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, NULL, gen_sraid_i128);
++}
++
+ static void gen_addw_i128(TCGv retl, TCGv reth,
+                           TCGv src1l, TCGv src1h,
+                           TCGv src2l, TCGv src2h)
+@@ -960,6 +993,31 @@ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+                      NULL, tcg_gen_sar_tl, gen_srawd_i128);
  }
  
--static void gen_slt(TCGv ret, TCGv s1, TCGv s2)
-+static void gen_slt_tl(TCGv ret, TCGv s1, TCGv s2)
++/* Translation functions for 64-bit operations specific to RV128 */
++static bool trans_slld(DisasContext *ctx, arg_slld *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift(ctx, a, EXT_NONE,
++                     tcg_gen_shl_tl, tcg_gen_shl_tl, gen_sllwd_i128);
++}
++
++static bool trans_srld(DisasContext *ctx, arg_srld *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift(ctx, a, EXT_ZERO,
++                     tcg_gen_shr_tl, tcg_gen_shr_tl, gen_srlwd_i128);
++}
++
++static bool trans_srad(DisasContext *ctx, arg_srad *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->d = true;
++    return gen_shift(ctx, a, EXT_SIGN,
++                     tcg_gen_sar_tl, tcg_gen_sar_tl, gen_srawd_i128);
++}
++
+ static bool trans_fence(DisasContext *ctx, arg_fence *a)
  {
-     tcg_gen_setcond_tl(TCG_COND_LT, ret, s1, s2);
- }
- 
--static void gen_sltu(TCGv ret, TCGv s1, TCGv s2)
-+static void gen_sltu_tl(TCGv ret, TCGv s1, TCGv s2)
- {
-     tcg_gen_setcond_tl(TCG_COND_LTU, ret, s1, s2);
- }
-@@ -244,13 +254,13 @@ static void gen_sltu(TCGv ret, TCGv s1, TCGv s2)
- static bool trans_slti(DisasContext *ctx, arg_slti *a)
- {
-     return gen_arith_imm_tl(ctx, a, EXT_SIGN,
--                            gen_slt, gen_slt, NULL);
-+                            gen_slt_lt, gen_slt_lt, NULL);
- }
- 
- static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
- {
-     return gen_arith_imm_tl(ctx, a, EXT_SIGN,
--                            gen_sltu, gen_sltu, NULL);
-+                            gen_sltu_lt, gen_sltu_lt, NULL);
- }
- 
- static bool trans_xori(DisasContext *ctx, arg_xori *a)
-@@ -306,12 +316,12 @@ static bool trans_sll(DisasContext *ctx, arg_sll *a)
- 
- static bool trans_slt(DisasContext *ctx, arg_slt *a)
- {
--    return gen_arith(ctx, a, EXT_SIGN, gen_slt, gen_slt, NULL);
-+    return gen_arith(ctx, a, EXT_SIGN, gen_slt_lt, gen_slt_lt, NULL);
- }
- 
- static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
- {
--    return gen_arith(ctx, a, EXT_SIGN, gen_sltu, gen_sltu, NULL);
-+    return gen_arith(ctx, a, EXT_SIGN, gen_sltu_lt, gen_sltu_lt, NULL);
- }
- 
- static bool trans_srl(DisasContext *ctx, arg_srl *a)
-@@ -353,7 +363,7 @@ static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
-     return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, tcg_gen_shli_tl, NULL);
- }
- 
--static void gen_srliw(TCGv dst, TCGv src, target_long shamt)
-+static void gen_srliw_tl(TCGv dst, TCGv src, target_long shamt)
- {
-     tcg_gen_extract_tl(dst, src, shamt, 32 - shamt);
- }
-@@ -362,10 +372,10 @@ static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
- {
-     REQUIRE_64BIT(ctx);
-     ctx->w = true;
--    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, gen_srliw, NULL);
-+    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, gen_srliw_tl, NULL);
- }
- 
--static void gen_sraiw(TCGv dst, TCGv src, target_long shamt)
-+static void gen_sraiw_tl(TCGv dst, TCGv src, target_long shamt)
- {
-     tcg_gen_sextract_tl(dst, src, shamt, 32 - shamt);
- }
-@@ -374,7 +384,7 @@ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
- {
-     REQUIRE_64BIT(ctx);
-     ctx->w = true;
--    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, gen_sraiw, NULL);
-+    return gen_shift_imm_fn(ctx, a, EXT_NONE, NULL, gen_sraiw_tl, NULL);
- }
- 
- static bool trans_addw(DisasContext *ctx, arg_addw *a)
+     /* FENCE is a full memory barrier. */
 -- 
 2.33.0
 
