@@ -1,57 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYEa5-0006Ft-Od
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:36:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50622)
+	id 1mYEbV-0008Kk-Ds
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:37:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mYEa3-00069R-9m; Wed, 06 Oct 2021 17:36:03 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:35482)
+ id 1mYEbS-0008GV-8a; Wed, 06 Oct 2021 17:37:30 -0400
+Received: from mail-il1-x130.google.com ([2607:f8b0:4864:20::130]:45577)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mYEa1-00025b-FN; Wed, 06 Oct 2021 17:36:03 -0400
-Received: by mail-io1-xd33.google.com with SMTP id b78so4469131iof.2;
- Wed, 06 Oct 2021 14:36:00 -0700 (PDT)
+ id 1mYEbN-0006v2-2j; Wed, 06 Oct 2021 17:37:30 -0400
+Received: by mail-il1-x130.google.com with SMTP id i11so3272918ila.12;
+ Wed, 06 Oct 2021 14:37:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=c7zwKsivambI366QT9b/qdzD1leoB0jH/pqXys4M4EI=;
- b=M+UUwRDhgNo2u/oyFePh/0K05M5XR3eGBQhPmA2AtydsPqW0DiKpMxSZIkGzpUyxQC
- XHaqQsO2aknzKmZ544o4VYEKhD+W3B0WaoNm8gULmISN+RP2qPEikQXiTgN9mT//GyA6
- aUdo9fn2Tfi7BK+LtqF9ajDDTuokQBjvhMMMYV8I/9PYXshowg6IVzzR6vtoofzA9Cmv
- CHAQG1ywbdPqN5ps+j7RKVUhcis8C2hiCNOmSV0NoWy9kTRDdoJ4vRNH7N6woK3LIQLJ
- nw+0uOYgljvvE/y5Lp3rwWxU4QUQZ7PmBo1/p9Pt9k0+ZXMXp4jg/obLHlsQZ34GNDS/
- 8/6g==
+ :cc:content-transfer-encoding;
+ bh=iKJXez/Q0CMTHQ+bygFWb0XN6B02VccNJAecW5dBrhI=;
+ b=foLN+ctHJ/FS5+Do7x8BRiKSsB1/Zn4g0NyUo7bus8EQuVtkRSgE5lYERTb+HuS8yi
+ 1JUNoa6NKF9Sc2TRSDrETQiIAMD/0R3szpAUR8jHDvH0ZvKC4+jCp3Kzyt9IDx31F7Ww
+ AxYPdB6orp2VqP37TC3kO0iqvCooDSQ82ZzPpbv3aBcnZRwdK6ddVv64aEb73RNvMgA0
+ izF4knjlizZJAMHL99lmZSWpDeDzkXixaA4jG4xa8CyFRGxY1qOsRom12AMD97+w74Pg
+ ng2YSByBeO2NETL7gAABM+LyXz32jIp+UEbbi8chuuBu9ETFufMAoXEpicqfEE08E4lt
+ 8R8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=c7zwKsivambI366QT9b/qdzD1leoB0jH/pqXys4M4EI=;
- b=vYNyo3FV88yv925qrUCQ03WzV8rYwA9PZaImwBOo4/u5IDNvpbHtfJBH5wYwhPJvVX
- BbAEKui61nCz/98Dw/BR24cq4zE6iPKwth8xFiseehHVcXGqIgbneTttY8+GE6nS7NiE
- vszGHy2DfT9zZz+AvfnH6BCNQVaHYz4rJBGHwnNsRy1/j7c+OOnnmTVT1sa0GOtXCC/w
- PZb950qelyqpDoazSlcSoRxx2guWTQc88Le4JMg0MxSvd16nZ4x0BmCTjeUKxqrJ2XJq
- +/bsE/R3VvgaLRk8xvCssgFn2UdrHvv+VIkwY51UDDwP6iGkt5QW/7LT3ZmPiWxV3rfI
- MYrA==
-X-Gm-Message-State: AOAM533CoNCD9CptXr+TF3tgBWxzM7FbQbbNFixIjT1+g05s39E9hWTJ
- GpEVXT4cBR3667/iaBWmqnVHKW6fQOXC4gRbTaE4HvKOTjzvUQ==
-X-Google-Smtp-Source: ABdhPJxiXUdb3jpKrL7yUtcQrBrM2JLP1ykyuybwgJn6Gw3CRu1McsY165+GcOCd0jJY6ZTDxarFdScWUGf/ubT9APo=
-X-Received: by 2002:a02:ab94:: with SMTP id t20mr45074jan.117.1633556159886;
- Wed, 06 Oct 2021 14:35:59 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=iKJXez/Q0CMTHQ+bygFWb0XN6B02VccNJAecW5dBrhI=;
+ b=7WGEyL7V18Nn5cMG1WoYgtbg+0TJFBh/VKT9hLhTDamUgE21zbs3QIk/LI0ebgzftQ
+ RI1NjQc+IqZiAKvzFkTe3Ap8aIHwEMPBYJlReRRl+NykfbGJcgM8Fwhx21520MWdiPeL
+ 9bsEF9EvPef/DdZOsTqEJq7KvGW31PUB2z8fzuZLtf2EhH5INeG9vnqPXpNonpGU52Ie
+ hH7F3Zo8Y2gwD5n0cbPTXriToa5BgW9F93izsRprdQbgZusXbFrci+lo+U2E8aaCcFy2
+ dwy9SR9999VVXBIJyRgVgBpPr6vtqvetVMJBVvvPR+cqcA8dKm/RjpPiru/nZqP1fUs/
+ wPaw==
+X-Gm-Message-State: AOAM532XRchDRW3WI+H9WsE1TjHjPLOepFqQbAhlSsYnHlrRQYLMejqA
+ pMYV6cmrWbTYj22PYZDFE8guY1ZXJgLWCHDIJEoi2bUO1RLauQ==
+X-Google-Smtp-Source: ABdhPJwM9s3QhSwgLh73EvqfSYFrc1I4KENFHWw0rFy0hzVc7ouAhUC+UrLzMWV1pKVxmgaHp+rl9HC+J1Tsw7qR++o=
+X-Received: by 2002:a92:1a43:: with SMTP id z3mr395164ill.46.1633556242648;
+ Wed, 06 Oct 2021 14:37:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211006172307.780893-1-richard.henderson@linaro.org>
- <20211006172307.780893-18-richard.henderson@linaro.org>
-In-Reply-To: <20211006172307.780893-18-richard.henderson@linaro.org>
+ <20211006172307.780893-36-richard.henderson@linaro.org>
+In-Reply-To: <20211006172307.780893-36-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Oct 2021 07:35:34 +1000
-Message-ID: <CAKmqyKMfYgP4c=yLwy4zbEWT9t1ekgE8HoiTugaKTacKDgbrPw@mail.gmail.com>
-Subject: Re: [PATCH v4 17/41] linux-user/host/riscv: Improve host_signal_write
+Date: Thu, 7 Oct 2021 07:36:56 +1000
+Message-ID: <CAKmqyKNr4T-KhNnzD4FJFT61rV7vACMah+MzWSH4M-FrLhLh6w@mail.gmail.com>
+Subject: Re: [PATCH v4 35/41] target/riscv: Make riscv_cpu_tlb_fill sysemu only
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>
+ Laurent Vivier <laurent@vivier.eu>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,16 +75,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2021 21:36:04 -0000
+X-List-Received-Date: Wed, 06 Oct 2021 21:37:30 -0000
 
-On Thu, Oct 7, 2021 at 3:37 AM Richard Henderson
+On Thu, Oct 7, 2021 at 4:12 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> Do not read 4 bytes before we determine the size of the insn.
-> Simplify triple switches in favor of checking major opcodes.
-> Include the missing cases of compact fsd and fsdsp.
+> The fallback code in cpu_loop_exit_sigsegv is sufficient
+> for riscv linux-user.
+>
+> Remove the code from cpu_loop that raised SIGSEGV.
 >
 > Cc: qemu-riscv@nongnu.org
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -89,107 +94,95 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  linux-user/host/riscv/host-signal.h | 83 ++++++++++-------------------
->  1 file changed, 28 insertions(+), 55 deletions(-)
+>  linux-user/riscv/cpu_loop.c |  7 -------
+>  target/riscv/cpu.c          |  2 +-
+>  target/riscv/cpu_helper.c   | 21 +--------------------
+>  3 files changed, 2 insertions(+), 28 deletions(-)
 >
-> diff --git a/linux-user/host/riscv/host-signal.h b/linux-user/host/riscv/host-signal.h
-> index 5860dce7d7..ab06d70964 100644
-> --- a/linux-user/host/riscv/host-signal.h
-> +++ b/linux-user/host/riscv/host-signal.h
-> @@ -17,65 +17,38 @@ static inline uintptr_t host_signal_pc(ucontext_t *uc)
+> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+> index 9859a366e4..aef019b1c8 100644
+> --- a/linux-user/riscv/cpu_loop.c
+> +++ b/linux-user/riscv/cpu_loop.c
+> @@ -87,13 +87,6 @@ void cpu_loop(CPURISCVState *env)
+>              sigcode =3D TARGET_TRAP_BRKPT;
+>              sigaddr =3D env->pc;
+>              break;
+> -        case RISCV_EXCP_INST_PAGE_FAULT:
+> -        case RISCV_EXCP_LOAD_PAGE_FAULT:
+> -        case RISCV_EXCP_STORE_PAGE_FAULT:
+> -            signum =3D TARGET_SIGSEGV;
+> -            sigcode =3D TARGET_SEGV_MAPERR;
+> -            sigaddr =3D env->badaddr;
+> -            break;
+>          case RISCV_EXCP_SEMIHOST:
+>              env->gpr[xA0] =3D do_common_semihosting(cs);
+>              env->pc +=3D 4;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7c626d89cd..0292a72feb 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -675,9 +675,9 @@ static const struct SysemuCPUOps riscv_sysemu_ops =3D=
+ {
+>  static const struct TCGCPUOps riscv_tcg_ops =3D {
+>      .initialize =3D riscv_translate_init,
+>      .synchronize_from_tb =3D riscv_cpu_synchronize_from_tb,
+> -    .tlb_fill =3D riscv_cpu_tlb_fill,
 >
->  static inline bool host_signal_write(siginfo_t *info, ucontext_t *uc)
+>  #ifndef CONFIG_USER_ONLY
+> +    .tlb_fill =3D riscv_cpu_tlb_fill,
+>      .cpu_exec_interrupt =3D riscv_cpu_exec_interrupt,
+>      .do_interrupt =3D riscv_cpu_do_interrupt,
+>      .do_transaction_failed =3D riscv_cpu_do_transaction_failed,
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d41d5cd27c..b520d6fc78 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -748,7 +748,6 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vadd=
+r addr,
+>                              riscv_cpu_two_stage_lookup(mmu_idx);
+>      riscv_raise_exception(env, cs->exception_index, retaddr);
+>  }
+> -#endif /* !CONFIG_USER_ONLY */
+>
+>  bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>                          MMUAccessType access_type, int mmu_idx,
+> @@ -756,7 +755,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, =
+int size,
 >  {
-> -    uint32_t insn = *(uint32_t *)host_signal_pc(uc);
-> -
->      /*
-> -     * Detect store by reading the instruction at the program
-> -     * counter. Note: we currently only generate 32-bit
-> -     * instructions so we thus only detect 32-bit stores
-> +     * Detect store by reading the instruction at the program counter.
-> +     * Do not read more than 16 bits, because we have not yet determined
-> +     * the size of the instruction.
->       */
-> -    switch (((insn >> 0) & 0b11)) {
-> -    case 3:
-> -        switch (((insn >> 2) & 0b11111)) {
-> -        case 8:
-> -            switch (((insn >> 12) & 0b111)) {
-> -            case 0: /* sb */
-> -            case 1: /* sh */
-> -            case 2: /* sw */
-> -            case 3: /* sd */
-> -            case 4: /* sq */
-> -                return true;
-> -            default:
-> -                break;
-> -            }
-> -            break;
-> -        case 9:
-> -            switch (((insn >> 12) & 0b111)) {
-> -            case 2: /* fsw */
-> -            case 3: /* fsd */
-> -            case 4: /* fsq */
-> -                return true;
-> -            default:
-> -                break;
-> -            }
-> -            break;
-> -        default:
-> -            break;
-> -        }
-> +    const uint16_t *pinsn = (const uint16_t *)host_signal_pc(uc);
-> +    uint16_t insn = pinsn[0];
-> +
-> +    /* 16-bit instructions */
-> +    switch (insn & 0xe003) {
-> +    case 0xa000: /* c.fsd */
-> +    case 0xc000: /* c.sw */
-> +    case 0xe000: /* c.sd (rv64) / c.fsw (rv32) */
-> +    case 0xa002: /* c.fsdsp */
-> +    case 0xc002: /* c.swsp */
-> +    case 0xe002: /* c.sdsp (rv64) / c.fswsp (rv32) */
-> +        return true;
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      CPURISCVState *env =3D &cpu->env;
+> -#ifndef CONFIG_USER_ONLY
+>      vaddr im_address;
+>      hwaddr pa =3D 0;
+>      int prot, prot2, prot_pmp;
+> @@ -888,25 +886,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,=
+ int size,
 >      }
 >
-> -    /* Check for compressed instructions */
-> -    switch (((insn >> 13) & 0b111)) {
-> -    case 7:
-> -        switch (insn & 0b11) {
-> -        case 0: /*c.sd */
-> -        case 2: /* c.sdsp */
-> -            return true;
-> -        default:
-> -            break;
-> -        }
+>      return true;
+> -
+> -#else
+> -    switch (access_type) {
+> -    case MMU_INST_FETCH:
+> -        cs->exception_index =3D RISCV_EXCP_INST_PAGE_FAULT;
 > -        break;
-> -    case 6:
-> -        switch (insn & 0b11) {
-> -        case 0: /* c.sw */
-> -        case 3: /* c.swsp */
-> -            return true;
-> -        default:
-> -            break;
-> -        }
+> -    case MMU_DATA_LOAD:
+> -        cs->exception_index =3D RISCV_EXCP_LOAD_PAGE_FAULT;
+> -        break;
+> -    case MMU_DATA_STORE:
+> -        cs->exception_index =3D RISCV_EXCP_STORE_PAGE_FAULT;
 > -        break;
 > -    default:
-> -        break;
-> +    /* 32-bit instructions, major opcodes */
-> +    switch (insn & 0x7f) {
-> +    case 0x23: /* store */
-> +    case 0x27: /* store-fp */
-> +        return true;
-> +    case 0x2f: /* amo */
-> +        /*
-> +         * The AMO function code is in bits 25-31, unread as yet.
-> +         * The AMO functions are LR (read), SC (write), and the
-> +         * rest are all read-modify-write.
-> +         */
-> +        insn = pinsn[1];
-> +        return (insn >> 11) != 2; /* LR */
->      }
+> -        g_assert_not_reached();
+> -    }
+> -    env->badaddr =3D address;
+> -    cpu_loop_exit_restore(cs, retaddr);
+> -#endif
+>  }
+> +#endif /* !CONFIG_USER_ONLY */
 >
->      return false;
+>  /*
+>   * Handle Traps
 > --
 > 2.25.1
 >
