@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYETe-0007xd-KN
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:29:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49456)
+	id 1mYETk-00081k-I1
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:29:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYETW-0007wD-KF; Wed, 06 Oct 2021 17:29:19 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43556)
+ id 1mYETc-0007xA-F1; Wed, 06 Oct 2021 17:29:26 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43572)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYETU-0007l5-82; Wed, 06 Oct 2021 17:29:18 -0400
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 57C2C40FCE;
- Wed,  6 Oct 2021 23:29:08 +0200 (CEST)
+ id 1mYETZ-0007uU-3T; Wed, 06 Oct 2021 17:29:24 -0400
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9B5CA40FE2;
+ Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 3F97F60066;
- Wed,  6 Oct 2021 23:29:08 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 84A9E60067;
+ Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 6AB5914005C;
- Wed,  6 Oct 2021 23:29:07 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 4E55714005C;
+ Wed,  6 Oct 2021 23:29:19 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,10 +33,12 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 00/27] Adding partial support for 128-bit riscv target
-Date: Wed,  6 Oct 2021 23:28:06 +0200
-Message-Id: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 01/27] memory: add a few defines for octo (128-bit) values
+Date: Wed,  6 Oct 2021 23:28:07 +0200
+Message-Id: <20211006212833.108706-2-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -63,101 +65,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2021 21:29:20 -0000
+X-List-Received-Date: Wed, 06 Oct 2021 21:29:27 -0000
 
-This series of patches provides partial 128-bit support for the riscv
-target architecture.
-Feedback on v1 was most useful and led to many improvements.
-+ the load and store make use of a not yet upstreamed patch from Richard,
-+ use of the existing Int128 computations in helpers, and addition of
-  a few more operations there, in particular division and remainder
-+ refactoring of the calls to the code generation helpers, as suggested
-  by Richard, lead to a much cleaner solution. I did that for gen_arith
-  and gen_shift, not for gen_unary as it used only for the bitmanip
-  extension that I did not take into consideration yet
-+ split of the patch in smaller pieces, as advised by Alistair
+Introducing unsigned quad, signed quad, and octo accesses types
+to handle load and store by 128-bit processors.
+This is just a small addition to Richard's patch not yet upstreamed
+https://lore.kernel.org/qemu-devel/20210818191920.390759-24-richard.henderson@linaro.org/
+Note that the patch must be applied first for the rest to compile
 
-Two things suggested I could not achieve:
-- the total eviction of the #ifdefs taking the target size into account:
-  I cheated by using #else when I needed, IMHO a shame
-- the qemu_build_not_reached() use when accessing the upper part of the
-  registers: the misa/misah field is used for this check, and in 128-bit
-  the compiler cannot infer that the field is read only.
+Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+---
+ include/exec/memop.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-The checks I made in between each patch:
-* smooth boot of busybear linux on rv64
-* correct execution of all riscv-probe programs on rv32
-
-For the 128-bit, the tests are there: https://github.com/fpetrot/128-test
-* from hash 925e1af2c7, run the tests in unit_test_i
-* from hash 6d4a39f2c4, run in addition the tests in unit_test_m
-* from hash 864e563916, run in addition the tests unit_test_csr
-
-
-Frédéric Pétrot (27):
-  memory: add a few defines for octo (128-bit) values
-  Int128.h: addition of a few 128-bit operations
-  target/riscv: adding upper 64 bits for misa
-  target/riscv: array for the 64 upper bits of 128-bit registers
-  target/riscv: additional macros to check instruction support
-  target/riscv: separation of bitwise logic and aritmetic helpers
-  target/riscv: refactoring calls to gen_arith
-  target/riscv: refactoring calls to gen_shift
-  target/riscv: setup everything so that riscv128-softmmu compiles
-  target/riscv: adding accessors to the registers upper part
-  target/riscv: handling 128-bit part in logic/arith/shift gen helpers
-  target/riscv: moving some insns close to similar insns
-  target/riscv: rename a few gen function helpers
-  target/riscv: 128-bit support for instructions using
-    gen_arith/gen_logic
-  target/riscv: 128-bit support for instructions using gen_shift
-  target/riscv: support for 128-bit loads and store
-  target/riscv: 128-bit double word integer arithmetic instructions
-  target/riscv: 128-bit double word integer shift instructions
-  target/riscv: support for 128-bit base multiplications insns
-  target/riscv: addition of the 'd' insns for 128-bit mult/div/rem
-  target/riscv: div and rem insns on 128-bit
-  target/riscv: adding high part of some csrs
-  target/riscv: helper functions to wrap calls to 128-bit csr insns
-  target/riscv: modification of the trans_csrxx for 128-bit support
-  target/riscv: actual functions to realize crs 128-bit insns
-  target/riscv: adding 128-bit access functions for some csrs
-  target/riscv: support for 128-bit satp
-
- configs/devices/riscv128-softmmu/default.mak |  17 +
- configs/targets/riscv128-softmmu.mak         |   6 +
- include/exec/memop.h                         |   6 +
- include/hw/riscv/sifive_cpu.h                |   3 +
- include/qemu/int128.h                        | 264 ++++++
- target/riscv/cpu-param.h                     |  10 +
- target/riscv/cpu.h                           |  40 +
- target/riscv/cpu_bits.h                      |  11 +
- target/riscv/helper.h                        |   9 +
- target/riscv/insn16.decode                   |  32 +-
- target/riscv/insn32.decode                   |  25 +
- target/riscv/cpu.c                           |  49 +-
- target/riscv/cpu_helper.c                    |  54 +-
- target/riscv/csr.c                           | 329 ++++++-
- target/riscv/gdbstub.c                       |   3 +
- target/riscv/m128_helper.c                   | 109 +++
- target/riscv/op_helper.c                     |  44 +
- target/riscv/translate.c                     | 351 ++++++-
- target/riscv/insn_trans/trans_rvb.c.inc      |  80 +-
- target/riscv/insn_trans/trans_rvd.c.inc      |  12 +-
- target/riscv/insn_trans/trans_rvf.c.inc      |   6 +-
- target/riscv/insn_trans/trans_rvi.c.inc      | 936 ++++++++++++++++---
- target/riscv/insn_trans/trans_rvm.c.inc      | 352 ++++++-
- gdb-xml/riscv-128bit-cpu.xml                 |  48 +
- gdb-xml/riscv-128bit-virtual.xml             |  12 +
- target/riscv/Kconfig                         |   3 +
- target/riscv/meson.build                     |   1 +
- 27 files changed, 2579 insertions(+), 233 deletions(-)
- create mode 100644 configs/devices/riscv128-softmmu/default.mak
- create mode 100644 configs/targets/riscv128-softmmu.mak
- create mode 100644 target/riscv/m128_helper.c
- create mode 100644 gdb-xml/riscv-128bit-cpu.xml
- create mode 100644 gdb-xml/riscv-128bit-virtual.xml
-
+diff --git a/include/exec/memop.h b/include/exec/memop.h
+index 04264ffd6b..9297f58a39 100644
+--- a/include/exec/memop.h
++++ b/include/exec/memop.h
+@@ -85,10 +85,13 @@ typedef enum MemOp {
+     MO_UB    = MO_8,
+     MO_UW    = MO_16,
+     MO_UL    = MO_32,
++    MO_UQ    = MO_64,
+     MO_SB    = MO_SIGN | MO_8,
+     MO_SW    = MO_SIGN | MO_16,
+     MO_SL    = MO_SIGN | MO_32,
++    MO_SQ    = MO_SIGN | MO_64,
+     MO_Q     = MO_64,
++    MO_O     = MO_128,
+ 
+     MO_LEUW  = MO_LE | MO_UW,
+     MO_LEUL  = MO_LE | MO_UL,
+@@ -105,9 +108,12 @@ typedef enum MemOp {
+ #ifdef NEED_CPU_H
+     MO_TEUW  = MO_TE | MO_UW,
+     MO_TEUL  = MO_TE | MO_UL,
++    MO_TEUQ  = MO_TE | MO_UQ,
+     MO_TESW  = MO_TE | MO_SW,
+     MO_TESL  = MO_TE | MO_SL,
++    MO_TESQ  = MO_TE | MO_SQ,
+     MO_TEQ   = MO_TE | MO_Q,
++    MO_TEO   = MO_TE | MO_O,
+ #endif
+ 
+     MO_SSIZE = MO_SIZE | MO_SIGN,
 -- 
 2.33.0
 
