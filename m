@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYEV5-0000cs-Jc
+	id 1mYEV8-0000eA-LY
 	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:30:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49872)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEUb-0000K5-T1; Wed, 06 Oct 2021 17:30:31 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:44138)
+ id 1mYEUd-0000Kx-JR; Wed, 06 Oct 2021 17:30:31 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:44136)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mYEUZ-0008SE-9r; Wed, 06 Oct 2021 17:30:25 -0400
+ id 1mYEUZ-0008SF-9z; Wed, 06 Oct 2021 17:30:26 -0400
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9585541F1B;
- Wed,  6 Oct 2021 23:29:46 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7398841F28;
+ Wed,  6 Oct 2021 23:29:47 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 7FFD660066;
- Wed,  6 Oct 2021 23:29:46 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 5DA0560066;
+ Wed,  6 Oct 2021 23:29:47 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 4AB5A14005C;
- Wed,  6 Oct 2021 23:29:46 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 26D3314005C;
+ Wed,  6 Oct 2021 23:29:47 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,10 +33,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v2 26/27] target/riscv: adding 128-bit access functions for
- some csrs
-Date: Wed,  6 Oct 2021 23:28:32 +0200
-Message-Id: <20211006212833.108706-27-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v2 27/27] target/riscv: support for 128-bit satp
+Date: Wed,  6 Oct 2021 23:28:33 +0200
+Message-Id: <20211006212833.108706-28-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211006212833.108706-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -68,179 +67,347 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 06 Oct 2021 21:30:32 -0000
 
-Access to mstatus, mtvec, mscratch and mepc is implemented.
+Support for a 128-bit satp. This is a bit more involved than necessary
+because we took the opportunity to increase the page size to 16kB, and
+change the page table geometry, which makes the page walk a bit more
+parametrizable (variables instead of defines).
+Note that is anyway a necessary step for the merging of the 32-bit and
+64-bit riscv versions in a single executable.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/cpu_bits.h |   1 +
- target/riscv/csr.c      | 111 ++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 108 insertions(+), 4 deletions(-)
+ target/riscv/cpu-param.h  |  9 ++++-
+ target/riscv/cpu_bits.h   | 10 +++++
+ target/riscv/cpu_helper.c | 54 +++++++++++++++++++--------
+ target/riscv/csr.c        | 77 +++++++++++++++++++++++++++++++++++++--
+ 4 files changed, 130 insertions(+), 20 deletions(-)
 
+diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+index c10459b56f..78f0916403 100644
+--- a/target/riscv/cpu-param.h
++++ b/target/riscv/cpu-param.h
+@@ -19,10 +19,15 @@
+ #else
+ /* 64-bit target, since QEMU isn't built to have TARGET_LONG_BITS over 64 */
+ # define TARGET_LONG_BITS 64
+-# define TARGET_PHYS_ADDR_SPACE_BITS 56 /* 44-bit PPN */
+-# define TARGET_VIRT_ADDR_SPACE_BITS 48 /* sv48 */
++# define TARGET_PHYS_ADDR_SPACE_BITS 64 /* 54-bit PPN */
++# define TARGET_VIRT_ADDR_SPACE_BITS 44 /* sv44 */
+ #endif
++
++#if defined(TARGET_RISCV32) || defined(TARGET_RISCV64)
+ #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
++#else
++#define TARGET_PAGE_BITS 14 /* 16 KiB pages for RV128 */
++#endif
+ /*
+  * The current MMU Modes are:
+  *  - U mode 0b000
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 999187a9ee..553b0a3d71 100644
+index 553b0a3d71..a4f6ba927f 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -360,6 +360,7 @@
+@@ -428,6 +428,11 @@
+ #define SATP64_ASID         0x0FFFF00000000000ULL
+ #define SATP64_PPN          0x00000FFFFFFFFFFFULL
  
- #define MSTATUS32_SD        0x80000000
- #define MSTATUS64_SD        0x8000000000000000ULL
-+#define MSTATUSH128_SD      0x8000000000000000ULL
++/* RV128 satp CSR field masks (H/L for high/low dword) */
++#define SATP128_HMODE       0xFF00000000000000ULL
++#define SATP128_HASID       0x00FFFFFFFF000000ULL
++#define SATP128_LPPN        0x0003FFFFFFFFFFFFULL
++
+ /* VM modes (mstatus.vm) privileged ISA 1.9.1 */
+ #define VM_1_09_MBARE       0
+ #define VM_1_09_MBB         1
+@@ -443,6 +448,9 @@
+ #define VM_1_10_SV48        9
+ #define VM_1_10_SV57        10
+ #define VM_1_10_SV64        11
++#define VM_1_10_SV44        12
++#define VM_1_10_SV54        13
++
  
- #define MISA32_MXL          0xC0000000
- #define MISA64_MXL          0xC000000000000000ULL
+ /* Page table entry (PTE) fields */
+ #define PTE_V               0x001 /* Valid */
+@@ -460,6 +468,8 @@
+ 
+ /* Leaf page shift amount */
+ #define PGSHIFT             12
++/* For now, pages in RV128 are 16 KiB. */
++#define PGSHIFT128          14
+ 
+ /* Default Reset Vector adress */
+ #define DEFAULT_RSTVEC      0x1000
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index d41d5cd27c..55dea1f58b 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -391,7 +391,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     *prot = 0;
+ 
+     hwaddr base;
+-    int levels, ptidxbits, ptesize, vm, sum, mxr, widened;
++    int levels, ptidxbits, ptesize, vm, sum, mxr, widened, pgshift;
+ 
+     if (first_stage == true) {
+         mxr = get_field(env->mstatus, MSTATUS_MXR);
+@@ -404,17 +404,25 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+             if (riscv_cpu_is_32bit(env)) {
+                 base = (hwaddr)get_field(env->vsatp, SATP32_PPN) << PGSHIFT;
+                 vm = get_field(env->vsatp, SATP32_MODE);
+-            } else {
++            } else if (riscv_cpu_is_64bit(env)) {
+                 base = (hwaddr)get_field(env->vsatp, SATP64_PPN) << PGSHIFT;
+                 vm = get_field(env->vsatp, SATP64_MODE);
++            } else {
++                /* TODO : Hypervisor extension not supported yet in RV128. */
++                g_assert_not_reached();
+             }
+         } else {
+             if (riscv_cpu_is_32bit(env)) {
+                 base = (hwaddr)get_field(env->satp, SATP32_PPN) << PGSHIFT;
+                 vm = get_field(env->satp, SATP32_MODE);
+-            } else {
++            } else if (riscv_cpu_is_64bit(env)) {
+                 base = (hwaddr)get_field(env->satp, SATP64_PPN) << PGSHIFT;
+                 vm = get_field(env->satp, SATP64_MODE);
++            } else if (riscv_cpu_is_128bit(env)) {
++                base = (hwaddr)get_field(env->satp, SATP128_LPPN) << PGSHIFT128;
++                vm = get_field(env->satph, SATP128_HMODE);
++            } else {
++                g_assert_not_reached();
+             }
+         }
+         widened = 0;
+@@ -422,9 +430,15 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+         if (riscv_cpu_is_32bit(env)) {
+             base = (hwaddr)get_field(env->hgatp, SATP32_PPN) << PGSHIFT;
+             vm = get_field(env->hgatp, SATP32_MODE);
+-        } else {
++        } else if (riscv_cpu_is_64bit(env)) {
+             base = (hwaddr)get_field(env->hgatp, SATP64_PPN) << PGSHIFT;
+             vm = get_field(env->hgatp, SATP64_MODE);
++        } else {
++            /*
++             * TODO : Hypervisor extension not supported yet in RV128,
++             * so there shouldn't be any two-stage address lookups.
++             */
++            g_assert_not_reached();
+         }
+         widened = 2;
+     }
+@@ -432,13 +446,17 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     sum = get_field(env->mstatus, MSTATUS_SUM) || use_background || is_debug;
+     switch (vm) {
+     case VM_1_10_SV32:
+-      levels = 2; ptidxbits = 10; ptesize = 4; break;
++      levels = 2; ptidxbits = 10; ptesize = 4; pgshift = 12; break;
+     case VM_1_10_SV39:
+-      levels = 3; ptidxbits = 9; ptesize = 8; break;
++      levels = 3; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
+     case VM_1_10_SV48:
+-      levels = 4; ptidxbits = 9; ptesize = 8; break;
++      levels = 4; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
+     case VM_1_10_SV57:
+-      levels = 5; ptidxbits = 9; ptesize = 8; break;
++      levels = 5; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
++    case VM_1_10_SV44:
++      levels = 3; ptidxbits = 10; ptesize = 16; pgshift = 14; break;
++    case VM_1_10_SV54:
++      levels = 4; ptidxbits = 10; ptesize = 16;  pgshift = 14; break;
+     case VM_1_10_MBARE:
+         *physical = addr;
+         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+@@ -448,7 +466,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     }
+ 
+     CPUState *cs = env_cpu(env);
+-    int va_bits = PGSHIFT + levels * ptidxbits + widened;
++    int va_bits = pgshift + levels * ptidxbits + widened;
+     target_ulong mask, masked_msbs;
+ 
+     if (TARGET_LONG_BITS > (va_bits - 1)) {
+@@ -463,6 +481,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     }
+ 
+     int ptshift = (levels - 1) * ptidxbits;
++    uint64_t pgoff_mask = (1ULL << pgshift) - 1;
+     int i;
+ 
+ #if !TCG_OVERSIZED_GUEST
+@@ -471,10 +490,10 @@ restart:
+     for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
+         target_ulong idx;
+         if (i == 0) {
+-            idx = (addr >> (PGSHIFT + ptshift)) &
++            idx = (addr >> (pgshift + ptshift)) &
+                            ((1 << (ptidxbits + widened)) - 1);
+         } else {
+-            idx = (addr >> (PGSHIFT + ptshift)) &
++            idx = (addr >> (pgshift + ptshift)) &
+                            ((1 << ptidxbits) - 1);
+         }
+ 
+@@ -482,6 +501,7 @@ restart:
+         hwaddr pte_addr;
+ 
+         if (two_stage && first_stage) {
++            /* TODO : Two-stage translation for RV128 */
+             int vbase_prot;
+             hwaddr vbase;
+ 
+@@ -515,6 +535,10 @@ restart:
+         if (riscv_cpu_is_32bit(env)) {
+             pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
+         } else {
++            /*
++             * For RV128, load only lower 64 bits as only those
++             * are used for now
++             */
+             pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
+         }
+ 
+@@ -529,7 +553,7 @@ restart:
+             return TRANSLATE_FAIL;
+         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+             /* Inner PTE, continue walking */
+-            base = ppn << PGSHIFT;
++            base = ppn << pgshift;
+         } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+             /* Reserved leaf PTE flags: PTE_W */
+             return TRANSLATE_FAIL;
+@@ -601,9 +625,9 @@ restart:
+ 
+             /* for superpage mappings, make a fake leaf PTE for the TLB's
+                benefit. */
+-            target_ulong vpn = addr >> PGSHIFT;
+-            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+-                        (addr & ~TARGET_PAGE_MASK);
++            target_ulong vpn = addr >> pgshift;
++            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << pgshift) |
++                        (addr & pgoff_mask);
+ 
+             /* set permissions on the TLB entry */
+             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6ebc03f89b..a9146a4496 100644
+index a9146a4496..3a6bc02571 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -491,6 +491,61 @@ static RISCVException read_mhartid(CPURISCVState *env, int csrno,
- }
+@@ -461,6 +461,12 @@ static const char valid_vm_1_10_64[16] = {
+     [VM_1_10_SV57] = 1
+ };
  
- /* Machine Trap Setup */
-+static RISCVException read_mstatus_i128(CPURISCVState *env, int csrno,
-+                                   Int128 *val)
-+{
-+    *val = int128_make128(env->mstatus, env->mstatush);
-+    return RISCV_EXCP_NONE;
-+}
++static const bool valid_vm_1_10_128[16] = {
++    [VM_1_10_MBARE] = 1,
++    [VM_1_10_SV44] = 1,
++    [VM_1_10_SV54] = 1
++};
 +
-+static RISCVException write_mstatus_i128(CPURISCVState *env, int csrno,
-+                                        Int128 val)
-+{
-+    Int128 mstatus = int128_make128(env->mstatus, env->mstatush);
-+    Int128 mask = int128_zero();
-+    int dirty;
-+
-+    /* flush tlb on mstatus fields that affect VM */
-+    if (int128_getlo(int128_xor(mstatus, val))
-+            & (MSTATUS_MXR | MSTATUS_MPP | MSTATUS_MPV |
-+                           MSTATUS_MPRV | MSTATUS_SUM)) {
-+        tlb_flush(env_cpu(env));
-+    }
-+    mask = int128_make64(MSTATUS_SIE | MSTATUS_SPIE |
-+                         MSTATUS_MIE | MSTATUS_MPIE |
-+                         MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-+                         MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-+                         MSTATUS_TW);
-+
-+    if (!riscv_cpu_is_32bit(env)) {
-+        /*
-+         * RV32: MPV and GVA are not in mstatus. The current plan is to
-+         * add them to mstatush. For now, we just don't support it.
-+         */
-+        mask = int128_or(mask, int128_make64(MSTATUS_MPV | MSTATUS_GVA));
-+    }
-+
-+    mstatus = int128_or(int128_and(mstatus, int128_not(mask)),
-+                        int128_and(val, mask));
-+
-+    dirty = ((int128_getlo(mstatus) & MSTATUS_FS) == MSTATUS_FS) |
-+            ((int128_getlo(mstatus) & MSTATUS_XS) == MSTATUS_XS);
-+    if (dirty) {
-+        if (riscv_cpu_is_32bit(env)) {
-+            mstatus = int128_make64(int128_getlo(mstatus) | MSTATUS32_SD);
-+        } else if (riscv_cpu_is_64bit(env)) {
-+            mstatus = int128_make64(int128_getlo(mstatus) | MSTATUS64_SD);
-+        } else {
-+            mstatus = int128_or(mstatus, int128_make128(0, MSTATUSH128_SD));
-+        }
-+    }
-+
-+    env->mstatus = int128_getlo(mstatus);
-+    env->mstatush = int128_gethi(mstatus);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_mstatus(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
+ /* Machine Information Registers */
+ static RISCVException read_zero_i128(CPURISCVState *env, int csrno,
+                                     Int128 *val)
+@@ -557,8 +563,12 @@ static int validate_vm(CPURISCVState *env, target_ulong vm)
  {
-@@ -684,6 +739,26 @@ static RISCVException write_mie(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException read_mtvec_i128(CPURISCVState *env, int csrno,
-+                                     Int128 *val)
-+{
-+    *val = int128_make128(env->mtvec, env->mtvech);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_mtvec_i128(CPURISCVState *env, int csrno,
-+                                      Int128 val)
-+{
-+    /* bits [1:0] encode mode; 0 = direct, 1 = vectored, 2 >= reserved */
-+    if ((int128_getlo(val) & 3) < 2) {
-+        env->mtvec = int128_getlo(val);
-+        env->mtvech = int128_gethi(val);
+     if (riscv_cpu_is_32bit(env)) {
+         return valid_vm_1_10_32[vm & 0xf];
+-    } else {
++    } else if (riscv_cpu_is_64bit(env)) {
+         return valid_vm_1_10_64[vm & 0xf];
++    } else if (riscv_cpu_is_128bit(env)) {
++        return valid_vm_1_10_128[vm & 0xf];
 +    } else {
-+        qemu_log_mask(LOG_UNIMP, "CSR_MTVEC: reserved mode not supported\n");
-+    }
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_mtvec(CPURISCVState *env, int csrno,
-                                  target_ulong *val)
- {
-@@ -718,6 +793,19 @@ static RISCVException write_mcounteren(CPURISCVState *env, int csrno,
++        return 0;
+     }
  }
  
- /* Machine Trap Handling */
-+static RISCVException read_mscratch_i128(CPURISCVState *env, int csrno,
-+                                        Int128 *val)  {
-+    *val = int128_make128(env->mscratch, env->mscratchh);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_mscratch_i128(CPURISCVState *env, int csrno,
-+                                         Int128 val) {
-+    env->mscratch = int128_getlo(val);
-+    env->mscratchh = int128_gethi(val);
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_mscratch(CPURISCVState *env, int csrno,
-                                     target_ulong *val)
- {
-@@ -732,6 +820,21 @@ static RISCVException write_mscratch(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
+@@ -1090,6 +1100,67 @@ static RISCVException rmw_sip(CPURISCVState *env, int csrno,
  }
  
-+static RISCVException read_mepc_i128(CPURISCVState *env, int csrno,
+ /* Supervisor Protection and Translation */
++static RISCVException read_satp_i128(CPURISCVState *env, int csrno,
 +                                    Int128 *val)
 +{
-+    *val = int128_make128(env->mepc, env->mepch);
++    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
++        *val = int128_zero();
++        return RISCV_EXCP_NONE;
++    }
++
++    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    } else {
++        *val = int128_make128(env->satp, env->satph);
++    }
++
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static RISCVException write_mepc_i128(CPURISCVState *env, int csrno,
++static RISCVException write_satp_i128(CPURISCVState *env, int csrno,
 +                                     Int128 val)
 +{
-+    env->mepc = int128_getlo(val);
-+    env->mepch = int128_gethi(val);
++    uint32_t asid;
++    bool vm_ok;
++    Int128 mask;
++
++    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
++        return RISCV_EXCP_NONE;
++    }
++
++    if (riscv_cpu_is_32bit(env)) {
++        vm_ok = validate_vm(env, get_field(int128_getlo(val), SATP32_MODE));
++        mask = int128_make64((int128_getlo(val) ^ env->satp)
++                           & (SATP32_MODE | SATP32_ASID | SATP32_PPN));
++        asid = (int128_getlo(val) ^ env->satp) & SATP32_ASID;
++    } else if (riscv_cpu_is_64bit(env)) {
++        vm_ok = validate_vm(env, get_field(int128_getlo(val), SATP64_MODE));
++        mask = int128_make64((int128_getlo(val) ^ env->satp)
++                           & (SATP64_MODE | SATP64_ASID | SATP64_PPN));
++        asid = (int128_getlo(val) ^ env->satp) & SATP64_ASID;
++    } else {
++        vm_ok = validate_vm(env, get_field(int128_gethi(val), SATP128_HMODE));
++        mask = int128_and(
++                   int128_xor(val, int128_make128(env->satp, env->satph)),
++                   int128_make128(SATP128_LPPN, SATP128_HMODE | SATP128_HASID));
++        asid = (int128_gethi(val) ^ env->satph) & SATP128_HASID;
++    }
++
++
++    if (vm_ok && int128_nz(mask)) {
++        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
++            return RISCV_EXCP_ILLEGAL_INST;
++        } else {
++            if (asid) {
++                tlb_flush(env_cpu(env));
++            }
++            env->satp = int128_getlo(val);
++            env->satph = int128_gethi(val);
++        }
++    }
 +    return RISCV_EXCP_NONE;
 +}
 +
- static RISCVException read_mepc(CPURISCVState *env, int csrno,
-                                      target_ulong *val)
+ static RISCVException read_satp(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
  {
-@@ -1655,12 +1758,12 @@ riscv_csr_operations128 csr_ops_128[CSR_TABLE_SIZE] = {
-     [CSR_MIMPID]     = { read_zero_i128    },
-     [CSR_MHARTID]    = { read_mhartid_i128 },
+@@ -1624,7 +1695,7 @@ static inline RISCVException riscv_csrrw_check_i128(CPURISCVState *env,
+     /* check privileges and return -1 if check fails */
+ #if !defined(CONFIG_USER_ONLY)
+     int effective_priv = env->priv;
+-    int read_only = get_field(csrno, 0xc00) == 3;
++    int read_only = get_field(csrno, 0xC00) == 3;
  
--    [CSR_MSTATUS]    = { read_zero_i128    },
-+    [CSR_MSTATUS]    = { read_mstatus_i128,  write_mstatus_i128  },
-     [CSR_MISA]       = { read_misa_i128    },
--    [CSR_MTVEC]      = { read_zero_i128    },
-+    [CSR_MTVEC]      = { read_mtvec_i128,    write_mtvec_i128    },
+     if (riscv_has_ext(env, RVH) &&
+         env->priv == PRV_S &&
+@@ -1765,7 +1836,7 @@ riscv_csr_operations128 csr_ops_128[CSR_TABLE_SIZE] = {
+     [CSR_MSCRATCH]   = { read_mscratch_i128, write_mscratch_i128 },
+     [CSR_MEPC]       = { read_mepc_i128,     write_mepc_i128     },
  
--    [CSR_MSCRATCH]   = { read_zero_i128    },
--    [CSR_MEPC]       = { read_zero_i128    },
-+    [CSR_MSCRATCH]   = { read_mscratch_i128, write_mscratch_i128 },
-+    [CSR_MEPC]       = { read_mepc_i128,     write_mepc_i128     },
- 
-     [CSR_SATP]       = { read_zero_i128    },
+-    [CSR_SATP]       = { read_zero_i128    },
++    [CSR_SATP]       = { read_satp_i128,     write_satp_i128     },
  #endif
+ };
+ 
 -- 
 2.33.0
 
