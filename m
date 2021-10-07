@@ -1,66 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYEbV-0008Kk-Ds
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Oct 2021 17:37:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50868)
+	id 1mYM6W-0005BY-It
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Oct 2021 01:38:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52378)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mYEbS-0008GV-8a; Wed, 06 Oct 2021 17:37:30 -0400
-Received: from mail-il1-x130.google.com ([2607:f8b0:4864:20::130]:45577)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mYM6J-00059A-KS; Thu, 07 Oct 2021 01:37:53 -0400
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:34437)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mYEbN-0006v2-2j; Wed, 06 Oct 2021 17:37:30 -0400
-Received: by mail-il1-x130.google.com with SMTP id i11so3272918ila.12;
- Wed, 06 Oct 2021 14:37:24 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mYM6I-0004Dp-73; Thu, 07 Oct 2021 01:37:51 -0400
+Received: by mail-yb1-xb2a.google.com with SMTP id q189so10757588ybq.1;
+ Wed, 06 Oct 2021 22:37:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=iKJXez/Q0CMTHQ+bygFWb0XN6B02VccNJAecW5dBrhI=;
- b=foLN+ctHJ/FS5+Do7x8BRiKSsB1/Zn4g0NyUo7bus8EQuVtkRSgE5lYERTb+HuS8yi
- 1JUNoa6NKF9Sc2TRSDrETQiIAMD/0R3szpAUR8jHDvH0ZvKC4+jCp3Kzyt9IDx31F7Ww
- AxYPdB6orp2VqP37TC3kO0iqvCooDSQ82ZzPpbv3aBcnZRwdK6ddVv64aEb73RNvMgA0
- izF4knjlizZJAMHL99lmZSWpDeDzkXixaA4jG4xa8CyFRGxY1qOsRom12AMD97+w74Pg
- ng2YSByBeO2NETL7gAABM+LyXz32jIp+UEbbi8chuuBu9ETFufMAoXEpicqfEE08E4lt
- 8R8Q==
+ :cc; bh=C9SpfKMtTpjSyjxFcx9d+0id7+Uwpp38poZPKInaPL8=;
+ b=GLzxEdOIXTBWJ1QwzbWSYhmAsknzuGSz3xJL46KNLxzG88YbF7QMdKOFC1FlDWs5V8
+ EfEDOpsZhHFI6gERHdDUBZEOflo+NE/TNZRX/GDIj96E+AdTWYa1JDhm4gJQpElkhDbY
+ JlA4q5Iu4NER3sg6EtgAqvLDuQHOZMSjyfthnSUMiBuER0zsWb+KnK0qmq4B5LXPtz19
+ eUlrsumQ3Yn4Nlra4xIVQFPWm9vIlKdgSemMqDsE1hwOGl1PY/desGaoHMS9s2wBwChb
+ szY9J8Ywat7Frx317/xv1ESB4luFpeRh/X1sYsNAh4x0h4UbcocedWFFz5a+z7jOUhAs
+ SRog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=iKJXez/Q0CMTHQ+bygFWb0XN6B02VccNJAecW5dBrhI=;
- b=7WGEyL7V18Nn5cMG1WoYgtbg+0TJFBh/VKT9hLhTDamUgE21zbs3QIk/LI0ebgzftQ
- RI1NjQc+IqZiAKvzFkTe3Ap8aIHwEMPBYJlReRRl+NykfbGJcgM8Fwhx21520MWdiPeL
- 9bsEF9EvPef/DdZOsTqEJq7KvGW31PUB2z8fzuZLtf2EhH5INeG9vnqPXpNonpGU52Ie
- hH7F3Zo8Y2gwD5n0cbPTXriToa5BgW9F93izsRprdQbgZusXbFrci+lo+U2E8aaCcFy2
- dwy9SR9999VVXBIJyRgVgBpPr6vtqvetVMJBVvvPR+cqcA8dKm/RjpPiru/nZqP1fUs/
- wPaw==
-X-Gm-Message-State: AOAM532XRchDRW3WI+H9WsE1TjHjPLOepFqQbAhlSsYnHlrRQYLMejqA
- pMYV6cmrWbTYj22PYZDFE8guY1ZXJgLWCHDIJEoi2bUO1RLauQ==
-X-Google-Smtp-Source: ABdhPJwM9s3QhSwgLh73EvqfSYFrc1I4KENFHWw0rFy0hzVc7ouAhUC+UrLzMWV1pKVxmgaHp+rl9HC+J1Tsw7qR++o=
-X-Received: by 2002:a92:1a43:: with SMTP id z3mr395164ill.46.1633556242648;
- Wed, 06 Oct 2021 14:37:22 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=C9SpfKMtTpjSyjxFcx9d+0id7+Uwpp38poZPKInaPL8=;
+ b=x4m5LVGCYsPFHlevJ5eSILYTxidrdYjHqngejzQlzkpbVu8lEDz8aa1nLsy2f6YKKH
+ JaCArNG1Y8Ailhix3PNONhe+MJd5Z/F54k1l3CcCfE9RJbVYG46C3yoZDn/RoYtzcGkH
+ Bgl1hhDX/I7kHQKC/r9XG0uLitYbplHquUdrcKifEpBx42KZatbbbTmL17uc+S6mJje0
+ wG1PnyejJ3AZCXp7vkff0iQOMRpbyEPdQhLWDJRRVvwqCctVU09vmlJQZ44uV6Qk0evC
+ DZJFD+Srz9SocL5X/gYH/TMybFWKDmCNjNYFSKPME0DYM7wQKgVKmpmpTOsNN4JQsqsU
+ 0QYg==
+X-Gm-Message-State: AOAM531tjULkmf37uuECYxml0rfvkihAo1+fo5luOFYXIv3LNZaHl9GD
+ 2wOi9GIlWvFwAPWpSOuTXafm9Rkfasy4qPo6zjg=
+X-Google-Smtp-Source: ABdhPJwaT9GD9hyAzoJJtrxJIWGp6hMT2pt7NHOIBnDe9H7dmlDEuWTqwYaptwM0KLwsB8uURIn4eyIGwCodMdX/KVs=
+X-Received: by 2002:a25:e048:: with SMTP id x69mr2366651ybg.293.1633585068260; 
+ Wed, 06 Oct 2021 22:37:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211006172307.780893-1-richard.henderson@linaro.org>
- <20211006172307.780893-36-richard.henderson@linaro.org>
-In-Reply-To: <20211006172307.780893-36-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 7 Oct 2021 07:36:56 +1000
-Message-ID: <CAKmqyKNr4T-KhNnzD4FJFT61rV7vACMah+MzWSH4M-FrLhLh6w@mail.gmail.com>
-Subject: Re: [PATCH v4 35/41] target/riscv: Make riscv_cpu_tlb_fill sysemu only
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+References: <20211003112855.960081-1-rpathak@ventanamicro.com>
+In-Reply-To: <20211003112855.960081-1-rpathak@ventanamicro.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 7 Oct 2021 13:37:37 +0800
+Message-ID: <CAEUhbmUsMrSvQHWWoFRzdUuOyxcaaw=L7h7tk0f5_wsd692=ow@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: csr: Implement mconfigptr CSR
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, pathakraul@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,116 +69,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Oct 2021 21:37:30 -0000
+X-List-Received-Date: Thu, 07 Oct 2021 05:37:59 -0000
 
-On Thu, Oct 7, 2021 at 4:12 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Sun, Oct 3, 2021 at 7:29 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> The fallback code in cpu_loop_exit_sigsegv is sufficient
-> for riscv linux-user.
+> mconfigptr is an mandatory CSR as per the priv spec.
+
+%s/an/a
+
+as per the priv spec v1.12
+
+> This csr holds the physical address of the configuration
+> data structure if this data structure is implemented
+> Its an readonly csr set to zero making configuration
+> data structure not supported.
 >
-> Remove the code from cpu_loop that raised SIGSEGV.
->
-> Cc: qemu-riscv@nongnu.org
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
 > ---
->  linux-user/riscv/cpu_loop.c |  7 -------
->  target/riscv/cpu.c          |  2 +-
->  target/riscv/cpu_helper.c   | 21 +--------------------
->  3 files changed, 2 insertions(+), 28 deletions(-)
+>  target/riscv/cpu_bits.h | 1 +
+>  target/riscv/csr.c      | 1 +
+>  2 files changed, 2 insertions(+)
 >
-> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
-> index 9859a366e4..aef019b1c8 100644
-> --- a/linux-user/riscv/cpu_loop.c
-> +++ b/linux-user/riscv/cpu_loop.c
-> @@ -87,13 +87,6 @@ void cpu_loop(CPURISCVState *env)
->              sigcode =3D TARGET_TRAP_BRKPT;
->              sigaddr =3D env->pc;
->              break;
-> -        case RISCV_EXCP_INST_PAGE_FAULT:
-> -        case RISCV_EXCP_LOAD_PAGE_FAULT:
-> -        case RISCV_EXCP_STORE_PAGE_FAULT:
-> -            signum =3D TARGET_SIGSEGV;
-> -            sigcode =3D TARGET_SEGV_MAPERR;
-> -            sigaddr =3D env->badaddr;
-> -            break;
->          case RISCV_EXCP_SEMIHOST:
->              env->gpr[xA0] =3D do_common_semihosting(cs);
->              env->pc +=3D 4;
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7c626d89cd..0292a72feb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -675,9 +675,9 @@ static const struct SysemuCPUOps riscv_sysemu_ops =3D=
- {
->  static const struct TCGCPUOps riscv_tcg_ops =3D {
->      .initialize =3D riscv_translate_init,
->      .synchronize_from_tb =3D riscv_cpu_synchronize_from_tb,
-> -    .tlb_fill =3D riscv_cpu_tlb_fill,
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 999187a9ee..5dc4729ed5 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -140,6 +140,7 @@
+>  #define CSR_MARCHID         0xf12
+>  #define CSR_MIMPID          0xf13
+>  #define CSR_MHARTID         0xf14
+> +#define CSR_MCONFIGPTR      0xf15
 >
->  #ifndef CONFIG_USER_ONLY
-> +    .tlb_fill =3D riscv_cpu_tlb_fill,
->      .cpu_exec_interrupt =3D riscv_cpu_exec_interrupt,
->      .do_interrupt =3D riscv_cpu_do_interrupt,
->      .do_transaction_failed =3D riscv_cpu_do_transaction_failed,
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index d41d5cd27c..b520d6fc78 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -748,7 +748,6 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vadd=
-r addr,
->                              riscv_cpu_two_stage_lookup(mmu_idx);
->      riscv_raise_exception(env, cs->exception_index, retaddr);
->  }
-> -#endif /* !CONFIG_USER_ONLY */
+>  /* Machine Trap Setup */
+>  #define CSR_MSTATUS         0x300
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 23fbbd3216..2182943f54 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1549,6 +1549,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
+>      [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
+>      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
+> +    [CSR_MCONFIGPTR] = {"mconfigptr", any,  read_zero    },
+
+Not any, as we need to check the priv version >= 1.12
+
 >
->  bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                          MMUAccessType access_type, int mmu_idx,
-> @@ -756,7 +755,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, =
-int size,
->  {
->      RISCVCPU *cpu =3D RISCV_CPU(cs);
->      CPURISCVState *env =3D &cpu->env;
-> -#ifndef CONFIG_USER_ONLY
->      vaddr im_address;
->      hwaddr pa =3D 0;
->      int prot, prot2, prot_pmp;
-> @@ -888,25 +886,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,=
- int size,
->      }
->
->      return true;
-> -
-> -#else
-> -    switch (access_type) {
-> -    case MMU_INST_FETCH:
-> -        cs->exception_index =3D RISCV_EXCP_INST_PAGE_FAULT;
-> -        break;
-> -    case MMU_DATA_LOAD:
-> -        cs->exception_index =3D RISCV_EXCP_LOAD_PAGE_FAULT;
-> -        break;
-> -    case MMU_DATA_STORE:
-> -        cs->exception_index =3D RISCV_EXCP_STORE_PAGE_FAULT;
-> -        break;
-> -    default:
-> -        g_assert_not_reached();
-> -    }
-> -    env->badaddr =3D address;
-> -    cpu_loop_exit_restore(cs, retaddr);
-> -#endif
->  }
-> +#endif /* !CONFIG_USER_ONLY */
->
->  /*
->   * Handle Traps
+>      /* Machine Trap Setup */
+>      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus     },
 > --
-> 2.25.1
->
->
+
+Regards,
+Bin
 
