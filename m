@@ -1,58 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYjcx-0006xK-13
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Oct 2021 02:45:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40218)
+	id 1mYmTi-0004ia-Og
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Oct 2021 05:47:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51544)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1mYjcu-0006vz-JF; Fri, 08 Oct 2021 02:45:04 -0400
-Received: from szxga01-in.huawei.com ([45.249.212.187]:2937)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1mYjcr-0007Yx-GP; Fri, 08 Oct 2021 02:45:04 -0400
-Received: from dggeme708-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4HQdqG1bBhzbn62;
- Fri,  8 Oct 2021 14:40:26 +0800 (CST)
-Received: from dggeme703-chm.china.huawei.com (10.1.199.99) by
- dggeme708-chm.china.huawei.com (10.1.199.104) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2308.8; Fri, 8 Oct 2021 14:44:49 +0800
-Received: from dggeme703-chm.china.huawei.com ([10.9.48.230]) by
- dggeme703-chm.china.huawei.com ([10.9.48.230]) with mapi id 15.01.2308.008;
- Fri, 8 Oct 2021 14:44:49 +0800
-From: "limingwang (A)" <limingwang@huawei.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-CC: "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng
- <bin.meng@windriver.com>, "qemu-devel@nongnu.org Developers"
- <qemu-devel@nongnu.org>, Alistair Francis <alistair.francis@wdc.com>, "Wubin
- (H)" <wu.wubin@huawei.com>, "Wanghaibin (D)" <wanghaibin.wang@huawei.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, "Fanliang (EulerOS)"
- <fanliang@huawei.com>, Jiangyifei <jiangyifei@huawei.com>
-Subject: RE: [PATCH] hw/riscv: virt: bugfix the memory-backend-file command is
- invalid
-Thread-Topic: [PATCH] hw/riscv: virt: bugfix the memory-backend-file command
- is invalid
-Thread-Index: AQHXtRItniF9CN0Cd0WVMjzJGMnz8avH+XEAgAC2igA=
-Date: Fri, 8 Oct 2021 06:44:49 +0000
-Message-ID: <b30102c96b11490280b0fcc4bddbcdd1@huawei.com>
-References: <20210929091244.75988-1-limingwang@huawei.com>
- <CAEUhbmV+UiASGY+qgTW7LjBf0sPRqB1g321qQML0w1RcSES6MQ@mail.gmail.com>
-In-Reply-To: <CAEUhbmV+UiASGY+qgTW7LjBf0sPRqB1g321qQML0w1RcSES6MQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.187.17]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <rpathak@ventanamicro.com>)
+ id 1mYmTg-0004gx-Hn
+ for qemu-riscv@nongnu.org; Fri, 08 Oct 2021 05:47:44 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:46668)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rpathak@ventanamicro.com>)
+ id 1mYmTe-0003Gi-SX
+ for qemu-riscv@nongnu.org; Fri, 08 Oct 2021 05:47:44 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id z20so33799035edc.13
+ for <qemu-riscv@nongnu.org>; Fri, 08 Oct 2021 02:47:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+JUrYc6P16NZzBkzvzqyOHjP5/4wv/mYZ80N/CFD/Zk=;
+ b=HmzoD5SP5E+KvQzTtXkwCLq9ZVX4ZElK6DAzBzLdqibmiQA1w9FDc1yIk4M7Rly3N1
+ Sn7bC2GDVOr4E/jgwAdungxrubFJdG9fQiYBhikQtOhYGq80xss5tqe8G37rWr0W2W82
+ JVe6TCnZZw/bgZ6uK0Mxkz4IcMyqcjWEHeS/BYQradD3kBr8J1IqpokK2aIlqk1e9gx9
+ Si30gLN/LDWYzUhn7vHFuaTveZA3F52zdWqITBevM0GGqPwpQKONS48lU1bMjutGlmxW
+ Jx+zJsxEnbkXo194zSUAKERJAql9mcOj3qboKD278fczxDvxYBabWhjSXTM1lGnOB7s/
+ vb9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+JUrYc6P16NZzBkzvzqyOHjP5/4wv/mYZ80N/CFD/Zk=;
+ b=Utz/YnSjAJISg3POTdtJpSYSWWKhSubKBFTvKFk/nh2WbuDgTqn0lZQdDJvgriDYdn
+ 9WuuGLnOVsrx/tsNWX5RipBjQsvEVZHB97Du6ArE4qY6Kklo233H9T0KKr3s/4MlodOn
+ HIooDw6sJyl2j9eG/UpwBt1YidBZ9wGiQNKSReQf65XWu5xJ5XVgSB7uBjgIJ8SIAYIb
+ A8WfNMDPgwJVKaOx9IBc/yJr/DIehwPrumLQkXQFS/SifIQVNyPjTZSFR57JsObzg8/a
+ Qzg9+hJ+1wXw1ySsXvY4Qint4g0LemCW2NYO6Cc61q/P+kJrwJ0d9MP/B4mcu419/c3e
+ LlSQ==
+X-Gm-Message-State: AOAM53069myrt2tgIgclTo3YrkqIshMBIx77ALdbSZIy2k6nV3YydHNB
+ fKUyjVYJW2W+WBHmaoyCh+u1qKPalm99E3HnA/DXIg==
+X-Google-Smtp-Source: ABdhPJzg3tZyDkvQapcTlEexBTjASM9watTXvK151i8Ra1IQ94KGsv/D9re64H5fhNqyEyKJhQ9CYtnvqrbZWdMlAco=
+X-Received: by 2002:a05:6402:1a3a:: with SMTP id
+ be26mr13688358edb.356.1633686459978; 
+ Fri, 08 Oct 2021 02:47:39 -0700 (PDT)
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=limingwang@huawei.com; helo=szxga01-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+References: <20211003112855.960081-1-rpathak@ventanamicro.com>
+ <CAEUhbmUsMrSvQHWWoFRzdUuOyxcaaw=L7h7tk0f5_wsd692=ow@mail.gmail.com>
+In-Reply-To: <CAEUhbmUsMrSvQHWWoFRzdUuOyxcaaw=L7h7tk0f5_wsd692=ow@mail.gmail.com>
+From: Rahul Pathak <rpathak@ventanamicro.com>
+Date: Fri, 8 Oct 2021 15:17:04 +0530
+Message-ID: <CA+Oz1=YrvVA2q=Pg6_vwRmQgLgMEwxirTM-pgAkNcCk+Lj2TVw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: csr: Implement mconfigptr CSR
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, pathakraul@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=rpathak@ventanamicro.com; helo=mail-ed1-x52f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -66,76 +74,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2021 06:45:05 -0000
+X-List-Received-Date: Fri, 08 Oct 2021 09:47:44 -0000
 
-PiA+DQo+ID4gRnJvbTogTWluZ3dhbmcgTGkgPGxpbWluZ3dhbmdAaHVhd2VpLmNvbT4NCj4gPg0K
-PiA+IElmIGRlZmF1bHQgbWFpbl9tZW0gaXMgdXNlZCB0byBiZSByZWdpc3RlcmVkIGFzIHRoZSBz
-eXN0ZW0gbWVtb3J5LA0KPiA+IG90aGVyIG1lbW9yeSBjYW5ub3QgYmUgaW5pdGlhbGl6ZWQuIFRo
-ZXJlZm9yZSwgdGhlIHN5c3RlbSBtZW1vcnkNCj4gPiBzaG91bGQgYmUgaW5pdGlhbGl6ZWQgdG8g
-dGhlIG1hY2hpbmUtPnJhbSwgd2hpY2ggY29uc2lzdHMgb2YgdGhlDQo+ID4gZGVmYXVsdCBtYWlu
-X21lbSBhbmQgb3RoZXIgcG9zc2libGUgbWVtb3J5IHJlcXVpcmVkIGJ5IGFwcGxpY2F0aW9ucywN
-Cj4gPiBzdWNoIGFzIHNoYXJlZCBodWdlcGFnZSBtZW1vcnkgaW4gRFBESy4NCj4gDQo+IFdoaWNo
-IGNvbW1hbmQgZGlkIHlvdSB1c2UgdG8gZXhwb3NlIHRoZSBlcnJvcj8gSXQgbG9va3MgbGlrZSBu
-b3QgZXZlcnkNCj4gbWFjaGluZSBpcyBkb25lIGxpa2UgdGhpcyBwYXRjaCBkb2VzLg0KPiANCg0K
-VGhlIGNvbW1hbmQgd2UgdXNlZCB0byBleHBvc2UgdGhlIGVycm9yIGlzIGFzIGZvbGxvd3M6DQou
-L3FlbXUtc3lzdGVtLXJpc2N2NjQgLU0gdmlydCxhY2NlbD1rdm0gLW0gNDA5Nk0gLWNwdSBob3N0
-IC1ub2dyYXBoaWMgXA0KICAgIC1uYW1lIGd1ZXN0PXJpc2N2LWd1c2V0IFwNCgktc21wIDIgXA0K
-CS1iaW9zIG5vbmUgXA0KCS1rZXJuZWwgLi9JbWFnZSBcDQoJLWRyaXZlIGZpbGU9Li9ndWVzdC5p
-bWcsZm9ybWF0PXJhdyxpZD1oZDAgXA0KCS1kZXZpY2UgdmlydGlvLWJsay1kZXZpY2UsZHJpdmU9
-aGQwIFwNCgktYXBwZW5kICJyb290PS9kZXYvdmRhIHJ3IGNvbnNvbGU9dHR5UzAgZWFybHljb249
-c2JpIg0KICAgIC1vYmplY3QgbWVtb3J5LWJhY2tlbmQtZmlsZSxpZD1tZW0sc2l6ZT00MDk2TSxt
-ZW0tcGF0aD0vZGV2L2h1Z2VwYWdlcyxzaGFyZT1vbiBcDQogICAgLW51bWEgbm9kZSxtZW1kZXY9
-bWVtIC1tZW0tcHJlYWxsb2MgXA0KICAgIC1jaGFyZGV2IHNvY2tldCxpZD1jaGFyMCxwYXRoPS9t
-bnQvdmhvc3QtbmV0MCBcDQogICAgLW5ldGRldiB0eXBlPXZob3N0LXVzZXIsaWQ9bXluZXQxLGNo
-YXJkZXY9Y2hhcjAsdmhvc3Rmb3JjZSBcDQogICAgLWRldmljZSB2aXJ0aW8tbmV0LXBjaSxtYWM9
-NTI6NTQ6MDA6MDA6MDA6MDEsbmV0ZGV2PW15bmV0MSxtcmdfcnhidWY9b24sY3N1bT1vbixndWVz
-dF9jc3VtPW9uLGd1ZXN0X2Vjbj1vbg0KDQpOb3RlIHRoYXQsIGJlZm9yZSBzdGFydGluZyB0aGUg
-a3ZtLWFjY2VsZWQgUUVNVSBWTSwgZm9sbG93aW5nIHRlbXBvcmFyaWx5IHVuYWNjZXB0ZWQgUUVN
-VSBwYXRjaGVzIHNob3VsZCBiZSB1c2VkOg0KaHR0cHM6Ly9saXN0cy5nbnUub3JnL2FyY2hpdmUv
-aHRtbC9xZW11LWRldmVsLzIwMjEtMDgvbXNnMDI1MTYuaHRtbA0KDQpUaGVuLCBRRU1VIGRpc3Bs
-YXlzIHRoZSBmb2xsb3dpbmcgZXJyb3IgaW5mb3JtYXRpb246DQpxZW11LXN5c3RlbS1yaXNjdjY0
-OiBGYWlsZWQgaW5pdGlhbGl6aW5nIHZob3N0LXVzZXIgbWVtb3J5IG1hcCwgY29uc2lkZXIgdXNp
-bmcgLW9iamVjdCBtZW1vcnktYmFja2VuZC1maWxlIHNoYXJlPW9uDQpxZW11LXN5c3RlbS1yaXNj
-djY0OiB2aG9zdF9zZXRfbWVtX3RhYmxlIGZhaWxlZDogSW50ZXJydXB0ZWQgc3lzdGVtIGNhbGwg
-KDQpDQpxZW11LXN5c3RlbS1yaXNjdjY0OiB1bmFibGUgdG8gc3RhcnQgdmhvc3QgbmV0OiA0OiBm
-YWxsaW5nIGJhY2sgb24gdXNlcnNwYWNlIHZpcnRpbw0KDQpJZiBvdGhlciB0eXBlIG9mIG1hY2hp
-bmUgaXMgY29uZmlndXJlZCB3aGVuIHN0YXJ0aW5nIGEgUUVNVSBWTSwgY29ycmVzcG9uZGluZyBj
-b2RlcyBpbiB0aGUgbWFjaGluZSBtb2RlbCBzaG91bGQgYmUgbW9kaWZpZWQgYXMgd2VsbC4NCg0K
-DQo+IFBsZWFzZSByZXdvcmQgdGhlIGNvbW1pdCBzdW1tYXJ5IGEgbGl0dGxlIGJpdCB0byBoZWxw
-IHRoZSB1bmRlcnN0YW5kaW5nLg0KPiANCj4gPiBBbHNvLCB0aGUgbWMtPmRlZmF1bF9yYW1faWQg
-c2hvdWxkIGJlIHNldCB0byB0aGUgZGVmYXVsdCBtYWluX21lbSwNCj4gPiB3aGljaCBpcyBuYW1l
-ZCBhcyAicmlzY3ZfdmlydF9ib2FyZC5yYW0iLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogTWlu
-Z3dhbmcgTGkgPGxpbWluZ3dhbmdAaHVhd2VpLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBZaWZl
-aSBKaWFuZyA8amlhbmd5aWZlaUBodWF3ZWkuY29tPg0KPiA+IC0tLQ0KPiA+ICBody9yaXNjdi92
-aXJ0LmMgfCA2ICsrLS0tLQ0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCA0
-IGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2h3L3Jpc2N2L3ZpcnQuYyBiL2h3
-L3Jpc2N2L3ZpcnQuYyBpbmRleA0KPiA+IGVjMGNiNjliOGMuLmIzYjQzMWM4NDcgMTAwNjQ0DQo+
-ID4gLS0tIGEvaHcvcmlzY3YvdmlydC5jDQo+ID4gKysrIGIvaHcvcmlzY3YvdmlydC5jDQo+ID4g
-QEAgLTc3MSw3ICs3NzEsNiBAQCBzdGF0aWMgdm9pZCB2aXJ0X21hY2hpbmVfaW5pdChNYWNoaW5l
-U3RhdGUNCj4gKm1hY2hpbmUpDQo+ID4gICAgICBjb25zdCBNZW1NYXBFbnRyeSAqbWVtbWFwID0g
-dmlydF9tZW1tYXA7DQo+ID4gICAgICBSSVNDVlZpcnRTdGF0ZSAqcyA9IFJJU0NWX1ZJUlRfTUFD
-SElORShtYWNoaW5lKTsNCj4gPiAgICAgIE1lbW9yeVJlZ2lvbiAqc3lzdGVtX21lbW9yeSA9IGdl
-dF9zeXN0ZW1fbWVtb3J5KCk7DQo+ID4gLSAgICBNZW1vcnlSZWdpb24gKm1haW5fbWVtID0gZ19u
-ZXcoTWVtb3J5UmVnaW9uLCAxKTsNCj4gPiAgICAgIE1lbW9yeVJlZ2lvbiAqbWFza19yb20gPSBn
-X25ldyhNZW1vcnlSZWdpb24sIDEpOw0KPiA+ICAgICAgY2hhciAqcGxpY19oYXJ0X2NvbmZpZywg
-KnNvY19uYW1lOw0KPiA+ICAgICAgdGFyZ2V0X3Vsb25nIHN0YXJ0X2FkZHIgPSBtZW1tYXBbVklS
-VF9EUkFNXS5iYXNlOyBAQCAtODkwLDEwDQo+ID4gKzg4OSw4IEBAIHN0YXRpYyB2b2lkIHZpcnRf
-bWFjaGluZV9pbml0KE1hY2hpbmVTdGF0ZSAqbWFjaGluZSkNCj4gPiAgICAgIH0NCj4gPg0KPiA+
-ICAgICAgLyogcmVnaXN0ZXIgc3lzdGVtIG1haW4gbWVtb3J5IChhY3R1YWwgUkFNKSAqLw0KPiA+
-IC0gICAgbWVtb3J5X3JlZ2lvbl9pbml0X3JhbShtYWluX21lbSwgTlVMTCwgInJpc2N2X3ZpcnRf
-Ym9hcmQucmFtIiwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgbWFjaGluZS0+cmFt
-X3NpemUsICZlcnJvcl9mYXRhbCk7DQo+ID4gICAgICBtZW1vcnlfcmVnaW9uX2FkZF9zdWJyZWdp
-b24oc3lzdGVtX21lbW9yeSwNCj4gbWVtbWFwW1ZJUlRfRFJBTV0uYmFzZSwNCj4gPiAtICAgICAg
-ICBtYWluX21lbSk7DQo+ID4gKyAgICAgICAgbWFjaGluZS0+cmFtKTsNCj4gPg0KPiA+ICAgICAg
-LyogY3JlYXRlIGRldmljZSB0cmVlICovDQo+ID4gICAgICBjcmVhdGVfZmR0KHMsIG1lbW1hcCwg
-bWFjaGluZS0+cmFtX3NpemUsDQo+IG1hY2hpbmUtPmtlcm5lbF9jbWRsaW5lLA0KPiA+IEBAIC0x
-MDMyLDYgKzEwMjksNyBAQCBzdGF0aWMgdm9pZCB2aXJ0X21hY2hpbmVfY2xhc3NfaW5pdChPYmpl
-Y3RDbGFzcw0KPiAqb2MsIHZvaWQgKmRhdGEpDQo+ID4gICAgICBtYy0+Y3B1X2luZGV4X3RvX2lu
-c3RhbmNlX3Byb3BzID0NCj4gcmlzY3ZfbnVtYV9jcHVfaW5kZXhfdG9fcHJvcHM7DQo+ID4gICAg
-ICBtYy0+Z2V0X2RlZmF1bHRfY3B1X25vZGVfaWQgPQ0KPiByaXNjdl9udW1hX2dldF9kZWZhdWx0
-X2NwdV9ub2RlX2lkOw0KPiA+ICAgICAgbWMtPm51bWFfbWVtX3N1cHBvcnRlZCA9IHRydWU7DQo+
-ID4gKyAgICBtYy0+ZGVmYXVsdF9yYW1faWQgPSAicmlzY3ZfdmlydF9ib2FyZC5yYW0iOw0KPiA+
-DQo+ID4gICAgICBtYWNoaW5lX2NsYXNzX2FsbG93X2R5bmFtaWNfc3lzYnVzX2RldihtYywNCj4g
-VFlQRV9SQU1GQl9ERVZJQ0UpOw0KPiA+DQo+ID4gLS0NCj4gDQo+IFJlZ2FyZHMsDQo+IEJpbg0K
-DQo=
+Hi Bin
+
+
+On Thu, Oct 7, 2021 at 11:07 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Sun, Oct 3, 2021 at 7:29 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
+> >
+> > mconfigptr is an mandatory CSR as per the priv spec.
+>
+> %s/an/a
+>
+
+Done
+
+>
+> as per the priv spec v1.12
+>
+> > This csr holds the physical address of the configuration
+> > data structure if this data structure is implemented
+> > Its an readonly csr set to zero making configuration
+> > data structure not supported.
+> >
+> > Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
+> > ---
+> >  target/riscv/cpu_bits.h | 1 +
+> >  target/riscv/csr.c      | 1 +
+> >  2 files changed, 2 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index 999187a9ee..5dc4729ed5 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -140,6 +140,7 @@
+> >  #define CSR_MARCHID         0xf12
+> >  #define CSR_MIMPID          0xf13
+> >  #define CSR_MHARTID         0xf14
+> > +#define CSR_MCONFIGPTR      0xf15
+> >
+> >  /* Machine Trap Setup */
+> >  #define CSR_MSTATUS         0x300
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 23fbbd3216..2182943f54 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -1549,6 +1549,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+> >      [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
+> >      [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
+> >      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
+> > +    [CSR_MCONFIGPTR] = {"mconfigptr", any,  read_zero    },
+>
+> Not any, as we need to check the priv version >= 1.12
+
+
+To check the priv version, I am thinking of creating a generic
+predicate function
+which checks the env->priv_ver.?
+Generic predicate function for the priv version can be reused in other such
+scenarios also.
+
+
+>
+> >
+> >      /* Machine Trap Setup */
+> >      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus     },
+> > --
+>
+> Regards,
+> Bin
 
