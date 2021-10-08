@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mYgav-0007Jj-8d
-	for mharc-qemu-riscv@gnu.org; Thu, 07 Oct 2021 23:30:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45346)
+	id 1mYgkZ-0005AP-3z
+	for mharc-qemu-riscv@gnu.org; Thu, 07 Oct 2021 23:40:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46670)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mYgau-0007JS-1B; Thu, 07 Oct 2021 23:30:48 -0400
-Received: from mail-yb1-xb30.google.com ([2607:f8b0:4864:20::b30]:33644)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mYgkS-00057u-0O; Thu, 07 Oct 2021 23:40:41 -0400
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:38877)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mYgaq-0006a2-TT; Thu, 07 Oct 2021 23:30:47 -0400
-Received: by mail-yb1-xb30.google.com with SMTP id v195so18160336ybb.0;
- Thu, 07 Oct 2021 20:30:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mYgkQ-00008h-D2; Thu, 07 Oct 2021 23:40:39 -0400
+Received: by mail-il1-x131.google.com with SMTP id r9so8570790ile.5;
+ Thu, 07 Oct 2021 20:40:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oWJF/zsYamnmlxg7UqK2w6ezeWVc/vFEzdeeiR+FQgg=;
- b=W+og4XFfPtWtEaS/oshVPxTPU/0WK7xBzRyLu/qAVRHZfoHFTQtZR2mbpOdISlcGdm
- 0Hq7oPdc/sbMCnh6fqOqc0HKH9HmAu1GhdcxQExcW3I93rza/cQXzA5zDHvZrT+mSMlT
- f3HQaJ8IjRKHUh8Jctcw6qyT3AO9Aa5dqAWeRriXjDDZQ8u6f1Gq5MNjBqJHqKO743on
- Ul1AHPB13cFpEIk3O7pr7IqZKkYW713s113btFbzoieRvr7wT9+IlNXNUfusmCatj8DB
- DQLSdqeBvdDN4X1IYA92cfxjhFXXxykzpnaP5+uTjR+td2GiTUsqIQem/EnAS7f/ox7Z
- x0zQ==
+ :cc; bh=SYqCTgYUj5Jocl7tBlzk43HAc7x3CqTQ0czuC3Szp0Y=;
+ b=gMcKOEIe3HqVP2XRpjDjuoh27KPxx9o+UAJkL91ydK6rZaNhnoSEM5gXnUc3cdG1rJ
+ 478cYrGXzq0WL5r72W2BN9p2azPsWJYIMONsc+Kijy63EAYHUhzU/eCoy/fzVRY4jxlM
+ Km/hQMuPYdpVWFdM/DsfnMTHGxCNg193QV77hQ6+K0evx12YgMcSOdBh2TzfCXOCZ5uV
+ KkWv2aHq5TbtSps5sf9lXaVcdMWFK+CTYRQmNWwyHXraSGb/Q55zPhNuHwPLZfIObbtu
+ KLrgb7tOiS3nAgwREZlgeCz0LIountPVlP2RQxHlkY8vb6WCabAPwlpTnFIVePK0Fqlo
+ fTTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=oWJF/zsYamnmlxg7UqK2w6ezeWVc/vFEzdeeiR+FQgg=;
- b=SvVACHIIO754KJyXp4dWcwWJbxYTMnl5XFizYQ4NniM3ksYmGVTbG5e1HMwhie6+pG
- JoDktaKjcBX6yF4+S/i0H0+gBxKnDb5SIh0hgW5CBaQFR2nMFDWkRVhGYWXgiZm3DBDp
- 8YfRYUAncfni8G7CIx08+8WoDICWQJZQappyZUKaKtyr+C1ao/8W+S2yvG5N+hg5DDHE
- Soz8aaQW4fG/eGS+isiUGAxHHa/eJvhEwir4BrbpT+T84nOUl0Ldve3jwSQmBQuvKZoR
- M95j3vz6RhHnDJgoNHrt4fgVU9NcLwv+EquKNk0OUkI3I84MVo9knZbKHRks7H66bqYt
- BiWQ==
-X-Gm-Message-State: AOAM533cEa0yp4RIm8pGfFY0BTBL4fPfOoY+alQTMIIzFEb02wYMlbZ4
- JgJlob7NpKuS+1ateh8XHEtH2n7gOWzr5uqr/ck=
-X-Google-Smtp-Source: ABdhPJzDFblC1hEpQBG7btzao2J8OmaJZv1raVl6cA+PEnyU01V/T+kmwhc6VFmdmjjnx2TG/DImVXpwsiAmHGzR8to=
-X-Received: by 2002:a05:6902:1242:: with SMTP id
- t2mr915066ybu.467.1633663843458; 
- Thu, 07 Oct 2021 20:30:43 -0700 (PDT)
+ bh=SYqCTgYUj5Jocl7tBlzk43HAc7x3CqTQ0czuC3Szp0Y=;
+ b=BaM+YhRXyUTefw1gH0jfW0kguBkzf8le0vgzFLVm4jD0+oauBlwI+9JrIXKSJqYRqR
+ +RNwrPSjF9F0FbzBxEKEk7Cudsfkxgpc5G+2aCy4OorpxH1Ekq7bLas4JwWbsYGyygmY
+ glD3J+xvRYiDH5zvmqNos9LdsDiBuK5JftY7dw3WGHh2ps+v0dI8Rgmp8zjHsCHUtqqa
+ PylmmDUwXOhk0mpJoyUWI2pXnUuwpkZ8zZBLeCEV6PBzjzfkRaBrkBOlZBSEQwJMJ+cV
+ JkL8U59KPI+1I8InahGXdfD4tkGer1pSMqyWPzStviLsMK33AxsuRWKgvWCap6OvWLSo
+ ff+Q==
+X-Gm-Message-State: AOAM533XHbeWAC0YTmeYwXdW6evJXvgLGzziXjXa9xh9lIRYrbbkMMoK
+ pf+tVP5If+UbBRnBtrQuR7Y21YF50jvXTlqg1CM=
+X-Google-Smtp-Source: ABdhPJzUG16Kk/u9pCqYd/ieYQSjlMLKsYuHHp4k0VcFgRmXepcM47jn+sajgf5/PjE5g0tglkcmG1LtpKbc8OvAyc0=
+X-Received: by 2002:a05:6e02:1402:: with SMTP id
+ n2mr5975229ilo.208.1633664436550; 
+ Thu, 07 Oct 2021 20:40:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210929091244.75988-1-limingwang@huawei.com>
-In-Reply-To: <20210929091244.75988-1-limingwang@huawei.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 8 Oct 2021 11:30:32 +0800
-Message-ID: <CAEUhbmV+UiASGY+qgTW7LjBf0sPRqB1g321qQML0w1RcSES6MQ@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: bugfix the memory-backend-file command is
- invalid
-To: MingWang Li <limingwang@huawei.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- jiangyifei@huawei.com, wanghaibin.wang@huawei.com, 
- fanliang@huawei.com, wu.wubin@huawei.com
+References: <20211007081803.1705656-1-frank.chang@sifive.com>
+In-Reply-To: <20211007081803.1705656-1-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 8 Oct 2021 13:40:10 +1000
+Message-ID: <CAKmqyKPYJMg=e46xrF81EgeD=38M50gzAPdux8q=gnRU6Qt8dw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Pass the same value to oprsz and maxsz for
+ vmv.v.v
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b30;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb30.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,66 +76,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Oct 2021 03:30:48 -0000
+X-List-Received-Date: Fri, 08 Oct 2021 03:40:41 -0000
 
-On Wed, Sep 29, 2021 at 10:03 PM MingWang Li <limingwang@huawei.com> wrote:
+On Thu, Oct 7, 2021 at 6:18 PM <frank.chang@sifive.com> wrote:
 >
-> From: Mingwang Li <limingwang@huawei.com>
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> If default main_mem is used to be registered as the system memory,
-> other memory cannot be initialized. Therefore, the system memory
-> should be initialized to the machine->ram, which consists of the
-> default main_mem and other possible memory required by applications,
-> such as shared hugepage memory in DPDK.
-
-Which command did you use to expose the error? It looks like not every
-machine is done like this patch does.
-
-Please reword the commit summary a little bit to help the understanding.
-
-> Also, the mc->defaul_ram_id should be set to the default main_mem,
-> which is named as "riscv_virt_board.ram".
+> oprsz and maxsz are passed with the same value in commit: eee2d61e202.
+> However, vmv.v.v was missed in that commit and should pass the same
+> value as well in its tcg_gen_gvec_2_ptr() call.
 >
-> Signed-off-by: Mingwang Li <limingwang@huawei.com>
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
 > ---
->  hw/riscv/virt.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index ec0cb69b8c..b3b431c847 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -771,7 +771,6 @@ static void virt_machine_init(MachineState *machine)
->      const MemMapEntry *memmap = virt_memmap;
->      RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
->      MemoryRegion *system_memory = get_system_memory();
-> -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
->      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
->      char *plic_hart_config, *soc_name;
->      target_ulong start_addr = memmap[VIRT_DRAM].base;
-> @@ -890,10 +889,8 @@ static void virt_machine_init(MachineState *machine)
->      }
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index fa451938f1e..f730bd68d18 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -1619,7 +1619,8 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
 >
->      /* register system main memory (actual RAM) */
-> -    memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
-> -                           machine->ram_size, &error_fatal);
->      memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
-> -        main_mem);
-> +        machine->ram);
->
->      /* create device tree */
->      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-> @@ -1032,6 +1029,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->      mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
->      mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
->      mc->numa_mem_supported = true;
-> +    mc->default_ram_id = "riscv_virt_board.ram";
->
->      machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
->
+>              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+> -                               cpu_env, 0, s->vlen / 8, data, fns[s->sew]);
+> +                               cpu_env, s->vlen / 8, s->vlen / 8, data,
+> +                               fns[s->sew]);
+>              gen_set_label(over);
+>          }
+>          return true;
 > --
-
-Regards,
-Bin
+> 2.25.1
+>
+>
 
