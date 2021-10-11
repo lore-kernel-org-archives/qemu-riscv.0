@@ -1,60 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ma4iR-0005zs-K7
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Oct 2021 19:28:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37642)
+	id 1ma4jB-0006SA-JX
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Oct 2021 19:29:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ma4iP-0005zM-GO; Mon, 11 Oct 2021 19:28:17 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:44755)
+ id 1ma4j6-0006PT-1i; Mon, 11 Oct 2021 19:29:03 -0400
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:37670)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ma4iN-0001UY-AJ; Mon, 11 Oct 2021 19:28:16 -0400
-Received: by mail-io1-xd32.google.com with SMTP id r134so10492569iod.11;
- Mon, 11 Oct 2021 16:28:14 -0700 (PDT)
+ id 1ma4j4-0001nu-K3; Mon, 11 Oct 2021 19:28:59 -0400
+Received: by mail-io1-xd2c.google.com with SMTP id m20so20829407iol.4;
+ Mon, 11 Oct 2021 16:28:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Y0u2TicUjQnsubUke+AZihaZP6nL4ialkq6ZjFvgxTM=;
- b=TdkiBiIDHkw949BblXUxpF5LlKtOYciTw4bgWitr1ly2x12Ufm508cIY2CRXDPxrF1
- vTf6lcfj0N23uePxlBE8jlvqom4wppCqojTDfkvi1x2VjocWQogAirdWtZal1EVJqj7X
- mO/0lGImpqKm1VtOXijnJo1Vg/jMLCJMriYZjn9L8QbwhuQw/CQye2AQmWUl8e2TARGX
- WJzgvt/1H62eA33HC8tylQT2qcET0X3X/YHp7o2xhIsmUbPGOdXfgIaqZ08VnS5oecFs
- rqrP7hh73H2/9n4epSjD8JuND3Etpf6bASTg60DyFezT0KKILbIvml12c6jDG+Ei367X
- ivDg==
+ :cc; bh=1RYcOh4vJUJJAbfFhy7OmWtrAK3xo+ZkiQ1/yMeYbmA=;
+ b=KqotBDuUM/irgOpPPPeuRo+Qd2Dp624OYSY0x1p5kSI+yLpDt1inkmrjBsqTm1sdsR
+ 1yUAcUju98KxOFenHC6NXKqDyFSqqOSiXb3iAz4ew1/DFgE0RIfuixyxWmv6GtxQjAYf
+ vIRJAVuB5X3zaRlveg4n/7caqcqVYsCy14S+Qd+JTOpIX7vllXBFU+C6Xn0BM6nvy6MD
+ YC8gPSnuZJ8355iGo/YJwlcnjP9R8xSZzRNnjFr95LepL0l598bdfsj+mm9LxO4o+Gyj
+ JVjbHocAFRUgCaVs2ZRon7+NdvAW4a/rXbQy0u1IQkibWFnVVEajkajhXoGkrgdjW9Ob
+ bANA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Y0u2TicUjQnsubUke+AZihaZP6nL4ialkq6ZjFvgxTM=;
- b=jELw8/imGo62izgfvY+d3ewi+IK1ew6iRN55iRH2mCq3qCKfcGpr6WLTC5OMKJ8dIc
- XqO0QovMjDdeoL1bENrTpLT8AiFhUAxEvn/hSNi242KUyJhDBd4NoH/DYD+kwBGl9KIV
- t8IDXr1TXroNweG+A4/ZdI6qRSe85VQNK+kuMvEiS8QRrRjkkVbcVOGhmVaqa6Cl513M
- B8XzF+9lsCa8K7OeIR/hzABO/mCzbVJjBraCh5nTFC3ZJBDVDictiCxQWrDHuzAx8ORn
- jr4UdAuWvqpjh4H+7hlmGvJ77k8dYx5yHuwbuhIVJ9MAGjl5tHna61urKMJi06evV361
- CgJg==
-X-Gm-Message-State: AOAM533c9f9QjjNvOmlTfXEywt1l+sronNPPvb7GzAVIJhhlYqrp/PtB
- 3NCK+tz+dp9pqF7A1nfUZjfBt+M9kzPim4Ywq+Q=
-X-Google-Smtp-Source: ABdhPJy+vC5r4sh02gjcRRLP6sdd20x0ce8vjIs1CUXax1Ja38heW3wJ2gqkZz4wG+afbREHecULX3tySMpgQa09FUU=
-X-Received: by 2002:a02:2124:: with SMTP id e36mr20748265jaa.35.1633994894038; 
- Mon, 11 Oct 2021 16:28:14 -0700 (PDT)
+ bh=1RYcOh4vJUJJAbfFhy7OmWtrAK3xo+ZkiQ1/yMeYbmA=;
+ b=zXNdNx3M2B29UJAdDZO4FzIu+9Gcam8yHq4lGkGvH6XfCxvI/PHIO3zZm6uC4WTReM
+ PLkaYXiZadISLVdtX5h+Hh9SZoZyZyQGh+WIbO9KIG9atZPH+2I21ebuGgEtjceayE0s
+ aM8okIO6jS7QqtXKbN8IN3F2jtQMeI/tYyO7RsVDQ4gmf+wjz4IA7g4vhcD5LeXrQFaI
+ +sIcMSw1jpTaAuq7zZgZIxus3MdZ/xW8uD5peKRMoke2rdve6pM5df2zlTYcatpYOiB2
+ dZCRPZfGwca5tw9Ka43M/Ci3v+lykGl4zYErTk0K1MRuOROTb0DczmNcctTP9gQs7diJ
+ 0BPg==
+X-Gm-Message-State: AOAM532doY+hLgkqhRFba9cdLpubNQBnA5hmcwfDL2DVllGvThraFkW2
+ GlaBCm2t3HpYwJEbT//qIshn/1iAgP9WIixov/g=
+X-Google-Smtp-Source: ABdhPJz8FS4tuuu0FcpsTfci4cT6tcHfg+iQP0kkSpuQFLU+2WmICun3TQTDxUZiz3twoCd/3oTuNOLY6OkKT4bzpyI=
+X-Received: by 2002:a5e:9612:: with SMTP id a18mr20897516ioq.57.1633994937245; 
+ Mon, 11 Oct 2021 16:28:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210929091244.75988-1-limingwang@huawei.com>
-In-Reply-To: <20210929091244.75988-1-limingwang@huawei.com>
+References: <20211007174722.929993-1-richard.henderson@linaro.org>
+ <20211007174722.929993-3-richard.henderson@linaro.org>
+In-Reply-To: <20211007174722.929993-3-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 Oct 2021 09:27:48 +1000
-Message-ID: <CAKmqyKMZyX5Z=UKC2seUD_3q6UciszVu0_EuqOO8ad_22DCa1w@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: bugfix the memory-backend-file command is
- invalid
-To: MingWang Li <limingwang@huawei.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+Date: Tue, 12 Oct 2021 09:28:31 +1000
+Message-ID: <CAKmqyKPw0J63USaG0E=95+v8GkoBGVq3r0Oh3A1Zw4hELe6c9w@mail.gmail.com>
+Subject: Re: [PATCH 02/13] target/riscv: Create RISCVMXL enumeration
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Jiangyifei <jiangyifei@huawei.com>, 
- wanghaibin.wang@huawei.com, fanliang@huawei.com, 
- "Wubin (H)" <wu.wubin@huawei.com>
+ =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Fabien Portas <fabien.portas@grenoble-inp.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,24 +73,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Oct 2021 23:28:17 -0000
+X-List-Received-Date: Mon, 11 Oct 2021 23:29:03 -0000
 
-On Thu, Sep 30, 2021 at 12:03 AM MingWang Li <limingwang@huawei.com> wrote:
+On Fri, Oct 8, 2021 at 3:47 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
 >
-> From: Mingwang Li <limingwang@huawei.com>
+> Move the MXL_RV* defines to enumerators.
 >
-> If default main_mem is used to be registered as the system memory,
-> other memory cannot be initialized. Therefore, the system memory
-> should be initialized to the machine->ram, which consists of the
-> default main_mem and other possible memory required by applications,
-> such as shared hugepage memory in DPDK.
-> Also, the mc->defaul_ram_id should be set to the default main_mem,
-> which is named as "riscv_virt_board.ram".
->
-> Signed-off-by: Mingwang Li <limingwang@huawei.com>
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>  target/riscv/cpu_bits.h | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 999187a9ee..e248c6bf6d 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -364,9 +364,11 @@
+>  #define MISA32_MXL          0xC0000000
+>  #define MISA64_MXL          0xC000000000000000ULL
+>
+> -#define MXL_RV32            1
+> -#define MXL_RV64            2
+> -#define MXL_RV128           3
+> +typedef enum {
+> +    MXL_RV32  = 1,
+> +    MXL_RV64  = 2,
+> +    MXL_RV128 = 3,
+> +} RISCVMXL;
+>
+>  /* sstatus CSR bits */
+>  #define SSTATUS_UIE         0x00000001
+> --
+> 2.25.1
+>
+>
 
