@@ -1,57 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mZaZm-0005XA-Ui
-	for mharc-qemu-riscv@gnu.org; Sun, 10 Oct 2021 11:17:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34282)
+	id 1ma4eH-0004Ew-3L
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Oct 2021 19:24:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37218)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mZaZj-0005Wj-6F; Sun, 10 Oct 2021 11:17:19 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:58336)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mZaZg-0001eB-SA; Sun, 10 Oct 2021 11:17:18 -0400
-Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4DE384194D;
- Sun, 10 Oct 2021 17:17:09 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 43D0660067;
- Sun, 10 Oct 2021 17:17:09 +0200 (CEST)
-Received: from [192.168.1.36] (35.201.90.79.rev.sfr.net [79.90.201.35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id CA5A514005C;
- Sun, 10 Oct 2021 17:17:08 +0200 (CEST)
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- fabien.portas@grenoble-inp.org
-References: <20211007174722.929993-1-richard.henderson@linaro.org>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: Re: [RFC PATCH 00/13] target/riscv: Rationalize XLEN and operand
- length
-Message-ID: <20311b4d-b2a8-82e9-f6cf-4e3595e9a847@univ-grenoble-alpes.fr>
-Date: Sun, 10 Oct 2021 17:17:08 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ma4eB-0004EI-J4; Mon, 11 Oct 2021 19:23:55 -0400
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:34635)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ma4e9-0006v1-5N; Mon, 11 Oct 2021 19:23:55 -0400
+Received: by mail-io1-xd32.google.com with SMTP id i189so13931573ioa.1;
+ Mon, 11 Oct 2021 16:23:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Dt8na1SBz2hW55Dmw3HjoF4MOcC7R10fP7OAGxOig3Y=;
+ b=OhRG4Ea/QkhYlruUUnxFWuynxZQE4Tnt+7QmZObdJeN6MFmC+UX/sXAr8X0wncghZF
+ Wav5BYRItlp2/nG97egX6o+EeMxAQO/kucvjSbx6+SWYB1fGkG92CVYYI0PnZsak456x
+ Pm40tXJhHBjkbkYG5BoLD4UV9Q80lexdIlkO5ai3fZVcGYaKcbmareRXZWa84OUVoDE8
+ PgtnTCGrDuk1eKH0oFXps2jPgd2q1FAsLNLqRxjMKalcW/RGx/+r/zFQ4WUfgVKOOIrQ
+ NpKYIOhgX/2L/48CLUZq1tmm/RVyt7q4/AU0E8g3os/GDb3OiQC+RO+kpezdZeeoHTMO
+ RuRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Dt8na1SBz2hW55Dmw3HjoF4MOcC7R10fP7OAGxOig3Y=;
+ b=7KT5cR/dFMyYa6ZBXQ2v5nEq4pbjrJlDFPWiNFj+oo7EZOv1j50aJl9T+6p+1he1eA
+ s3kbBEJULGAz1IA8DbE/hRDeNwFlSv/8z99+twHgAwC91HlW6T13+53/VYxElrQzlK2P
+ nart+phRYOKMGiurH3VwDSUKLQ+e9Y/D6yEL82fTY37x12pMosEFD+/8ruzmSSS85Iv3
+ HDFJt69oTZH0w60RxWIahR5xp+MxRo4frJPduo8bEd4NmygQAlk75locIYdGXhHuGQbc
+ 8T4de4lzL9OtxhTEkm0CTWDgztUsFPgFZb6tQBTHDKnz32uk9mejA9GALUwXhnsbim6J
+ tCcA==
+X-Gm-Message-State: AOAM532OD8R2Z6tpr4j9VG/5lHLsFQwlHRNWIQYReWY1ys1IdGyDTxFL
+ qlnSYaRk+1wKskPT3nECYT1aCalBlKMyOpu/GQ6A4P6yp18=
+X-Google-Smtp-Source: ABdhPJwqJB2lpbC1byKaTrK+ffnMYuYp+RXc/NrpMywWjmdSkc1DleAoulprScaHJBHfmVTAh9IsbZtfXX7oNmJtNVg=
+X-Received: by 2002:a6b:8d4a:: with SMTP id p71mr21416663iod.16.1633994631537; 
+ Mon, 11 Oct 2021 16:23:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20211007174722.929993-1-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: fr
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20211009055019.545153-1-travisg@gmail.com>
+In-Reply-To: <20211009055019.545153-1-travisg@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 12 Oct 2021 09:23:25 +1000
+Message-ID: <CAKmqyKNNxxML9Z4aqBaiZwafBrvZvnSQR=pCSnaTukjFZ0f12Q@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: line up all of the registers in the info
+ register dump
+To: Travis Geiselbrecht <travisg@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -65,86 +70,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Oct 2021 15:17:21 -0000
+X-List-Received-Date: Mon, 11 Oct 2021 23:23:57 -0000
 
-Le 07/10/2021 à 19:47, Richard Henderson a écrit :
-> This is a partial patch set attempting to set things in the
-> right direction for both the UXL and RV128 patch sets.
-> 
-> One of the things that struck me while reading the RV128 patches
-> is the proliferation of riscv_cpu_is_<size>bits functions.  These
-> should be all combined into a single function returning an enum.
-> 
-> Further, that the current set of tests for misa.mxl is frought
-> with peril, because the location of the field within misa varies,
-> and that the RV128 patch set gets some of it wrong.  It is much
-> easier to split out that field for use within QEMU, and only
-> reassemble the full MISA csr upon read.
+On Sat, Oct 9, 2021 at 3:51 PM Travis Geiselbrecht <travisg@gmail.com> wrote:
+>
+> Ensure the columns for all of the register names and values line up.
+> No functional change, just a minor tweak to the output.
+>
+> Signed-off-by: Travis Geiselbrecht <travisg@gmail.com>
 
-  Couldn't more agree.
-  The convoluted process of determining misa length seems to be here to ensure
-  that there is no way for a 32-bit arch to "announce" that it is a 64-bit one.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-> There are a few changes at the end for pointing the correct
-> direction for how it might be best to extend expanders for
-> different operand lengths.  I believe the form used in RV128,
-> 
-> static bool gen_arith_imm_fn(DisasContext *ctx, arg_i *a, DisasExtend ext,
->                              void (*fn32)(TCGv, TCGv, target_long),
->                              void (*fn64)(TCGv, TCGv, target_long),
->                              void (*fn128)(TCGv, TCGv, TCGv, TCGv, target_long))
-> 
-> is incorrect, because it assumes that is easy to select the
-> fn32 and fn64 functions.  But so long as TARGET_RISCV32 is
-> still around, and target_long may be 32, that is not the case.
-> Instead, pass f_tl and f_32, where f_32 will only ever be used
-> when sizeof(target_ulong) > 4.
+Alistair
 
-  I got the point.
-  Frédéric
-> 
-> r~
-> 
-> 
-> Richard Henderson (13):
->   target/riscv: Move cpu_get_tb_cpu_state out of line
->   target/riscv: Create RISCVMXL enumeration
->   target/riscv: Split misa.mxl and misa.ext
->   target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl
->   target/riscv: Add MXL/SXL/UXL to TB_FLAGS
->   target/riscv: Use REQUIRE_64BIT in amo_check64
->   target/riscv: Properly check SEW in amo_op
->   target/riscv: Replace is_32bit with get_xl/get_xlen
->   target/riscv: Replace DisasContext.w with DisasContext.ol
->   target/riscv: Use gen_arith_per_ol for RVM
->   target/riscv: Adjust trans_rev8_32 for riscv64
->   target/riscv: Use gen_unary_per_ol for RVB
->   target/riscv: Use gen_shift*_per_ol for RVB, RVI
-> 
->  target/riscv/cpu.h                      |  73 +++-------
->  target/riscv/cpu_bits.h                 |   8 +-
->  hw/riscv/boot.c                         |   2 +-
->  linux-user/elfload.c                    |   2 +-
->  linux-user/riscv/cpu_loop.c             |   2 +-
->  semihosting/arm-compat-semi.c           |   2 +-
->  target/riscv/cpu.c                      |  99 ++++++++------
->  target/riscv/cpu_helper.c               |  91 ++++++++++++-
->  target/riscv/csr.c                      |  68 ++++++----
->  target/riscv/gdbstub.c                  |  10 +-
->  target/riscv/machine.c                  |  10 +-
->  target/riscv/monitor.c                  |   4 +-
->  target/riscv/translate.c                | 170 ++++++++++++++++++------
->  target/riscv/insn_trans/trans_rvb.c.inc | 140 ++++++++++---------
->  target/riscv/insn_trans/trans_rvi.c.inc |  44 +++---
->  target/riscv/insn_trans/trans_rvm.c.inc |  36 +++--
->  target/riscv/insn_trans/trans_rvv.c.inc |  29 ++--
->  17 files changed, 498 insertions(+), 292 deletions(-)
-> 
-
--- 
-+---------------------------------------------------------------------------+
-| Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
-| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
-| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
-+---------------------------------------------------------------------------+
+> ---
+>  target/riscv/cpu.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1d69d1887e..660f9ce131 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -258,7 +258,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>      }
+>      if (riscv_has_ext(env, RVH)) {
+>          qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
+> -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus",
+>                       (target_ulong)env->vsstatus);
+>      }
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+> @@ -289,8 +289,8 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval   ", env->mtval);
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval   ", env->stval);
+>      if (riscv_has_ext(env, RVH)) {
+> -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+> -        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval   ", env->htval);
+> +        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2  ", env->mtval2);
+>      }
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
+>      qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
+> @@ -298,7 +298,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>  #endif
+>
+>      for (i = 0; i < 32; i++) {
+> -        qemu_fprintf(f, " %s " TARGET_FMT_lx,
+> +        qemu_fprintf(f, " %-8s " TARGET_FMT_lx,
+>                       riscv_int_regnames[i], env->gpr[i]);
+>          if ((i & 3) == 3) {
+>              qemu_fprintf(f, "\n");
+> @@ -306,7 +306,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+>      }
+>      if (flags & CPU_DUMP_FPU) {
+>          for (i = 0; i < 32; i++) {
+> -            qemu_fprintf(f, " %s %016" PRIx64,
+> +            qemu_fprintf(f, " %-8s %016" PRIx64,
+>                           riscv_fpr_regnames[i], env->fpr[i]);
+>              if ((i & 3) == 3) {
+>                  qemu_fprintf(f, "\n");
+> --
+> 2.25.1
+>
+>
 
