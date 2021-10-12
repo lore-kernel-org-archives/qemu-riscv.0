@@ -1,45 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ma6ri-0004pi-Cw
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Oct 2021 21:46:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54242)
+	id 1maCO4-0004DY-EO
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Oct 2021 03:39:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44688)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1ma6rg-0004pT-Hi; Mon, 11 Oct 2021 21:46:00 -0400
-Received: from szxga02-in.huawei.com ([45.249.212.188]:3152)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <limingwang@huawei.com>)
- id 1ma6rd-0006wn-2v; Mon, 11 Oct 2021 21:46:00 -0400
-Received: from dggeme703-chm.china.huawei.com (unknown [172.30.72.53])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4HSyzm47RDz8yfT;
- Tue, 12 Oct 2021 09:40:52 +0800 (CST)
-Received: from huawei.com (10.174.187.17) by dggeme703-chm.china.huawei.com
- (10.1.199.99) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.8; Tue, 12
- Oct 2021 09:45:41 +0800
-From: MingWang Li <limingwang@huawei.com>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bin.meng@windriver.com>
-CC: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>,
- <wanghaibin.wang@huawei.com>, <jiangyifei@huawei.com>, <fanliang@huawei.com>, 
- <wu.wubin@huawei.com>, Mingwang Li <limingwang@huawei.com>
-Subject: [PATCH v2] hw/riscv: virt: bugfix the memory-backend-file command is
- invalid
-Date: Tue, 12 Oct 2021 09:45:01 +0800
-Message-ID: <20211012014501.24996-1-limingwang@huawei.com>
-X-Mailer: git-send-email 2.19.1.windows.1
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1maCO1-00046o-3m; Tue, 12 Oct 2021 03:39:45 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:39904)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1maCNz-0008IA-D5; Tue, 12 Oct 2021 03:39:44 -0400
+Received: by mail-io1-xd35.google.com with SMTP id p68so22671492iof.6;
+ Tue, 12 Oct 2021 00:39:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=r9aN09R7wnYzkgKHL5g51xe6uJ5JxImHbLCLuebNMtA=;
+ b=b8QsujY1GWK5Uc85f9u6f/CBbeTg/Wv6PPAnr7lkMFlItyPcwAMlsF0aY3562+vk0S
+ imoelxhla5fZSnWFw399Aw0GSIhwBWSaJ/5b//zgINDkJhw2vAou9DYABY++c0ZbV38l
+ VeqpOVrDy9PjXRB8eaB1L+NL4TfFG8aWjijKQYCTzhVWW0cJl6E37OUJZjYw/jIhUCwb
+ Y1JZmpH9LCxUef/q1yOOkqri/NclMFv80KebzH2TFu3Ugkt4DX43OK9RhaWwKGCVeJ3i
+ piMBZOUnQ+C5whTKHwUoBTS2Z20wECSnJhIEFO44JbBgUGky0SgL5pAerFyaaCNTma5i
+ woqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=r9aN09R7wnYzkgKHL5g51xe6uJ5JxImHbLCLuebNMtA=;
+ b=QNaAE0i2apXQT0pvW/StCjU4EhbgbROfv85yWKjhpA7VI6OMdS+RIOZY3Uurg38kaq
+ Pa1rNwaGOIod6CVJdK7oYqiQM57hcPrzaBJtF3aD1Jkb4ZtmylW9bSDqLesJ+p7eE52b
+ p9lJg7uY5d4yqTScUiiMcw1irkkGYizHGLCKEQZU9UYPsYt7PGcTMTI89CHSTtJVhwAv
+ V9jAYNT97vx3akBMuEyMK7IDB6XwWRkCGRpbi8xHIj9IJdgwsV4fN8tZxOQZXc4M/9oZ
+ 3pZXr5EhCaLxsOIc3o5VUKBEgPsB0YyXs11bFSNgO/7QMReS7SySOvnoOTmpuqUCL3Rn
+ PMNA==
+X-Gm-Message-State: AOAM532aTVyCaKkWkL5CudodaODtNkZFoC9dbvWDq8v4C6dVre//5khJ
+ fufTw1CCtgNTPNvNuCBfT/LB6Yxr+rqziHa+LV0=
+X-Google-Smtp-Source: ABdhPJwVvBaqv1Txgkmyu0OKZFEy74ArDUvbxid0b3buYBv6i2RLcTQZcEjrGClrSLBl+dWCLp54oxAt00aktlmzxIo=
+X-Received: by 2002:a6b:8d4a:: with SMTP id p71mr22711768iod.16.1634024381724; 
+ Tue, 12 Oct 2021 00:39:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.174.187.17]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- dggeme703-chm.china.huawei.com (10.1.199.99)
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.188;
- envelope-from=limingwang@huawei.com; helo=szxga02-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+References: <20211009055019.545153-1-travisg@gmail.com>
+In-Reply-To: <20211009055019.545153-1-travisg@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 12 Oct 2021 17:39:15 +1000
+Message-ID: <CAKmqyKN7Ssi8+bD7TMnUfU4-N=d=-X-2zG0cx7BBGUjTCchuxQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: line up all of the registers in the info
+ register dump
+To: Travis Geiselbrecht <travisg@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -53,82 +70,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2021 01:46:01 -0000
+X-List-Received-Date: Tue, 12 Oct 2021 07:39:45 -0000
 
-From: Mingwang Li <limingwang@huawei.com>
+On Sat, Oct 9, 2021 at 3:51 PM Travis Geiselbrecht <travisg@gmail.com> wrote:
+>
+> Ensure the columns for all of the register names and values line up.
+> No functional change, just a minor tweak to the output.
+>
+> Signed-off-by: Travis Geiselbrecht <travisg@gmail.com>
 
-When I start the VM with the following command:
-$ ./qemu-system-riscv64 -M virt,accel=kvm -m 4096M -cpu host -nographic \
-    -name guest=riscv-guset \
-    -smp 2 \
-    -bios none \
-    -kernel ./Image \
-    -drive file=./guest.img,format=raw,id=hd0 \
-    -device virtio-blk-device,drive=hd0 \
-    -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
-    -object memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on \
-    -numa node,memdev=mem -mem-prealloc \
-    -chardev socket,id=char0,path=/mnt/vhost-net0 \
-    -netdev type=vhost-user,id=mynet1,chardev=char0,vhostforce \
-    -device virtio-net-pci,mac=52:54:00:00:00:01,netdev=mynet1,mrg_rxbuf=on,csum=on,guest_csum=on,guest_ecn=on \
+Thanks!
 
-Then, QEMU displays the following error information:
-qemu-system-riscv64: Failed initializing vhost-user memory map, consider using -object memory-backend-file share=on
-qemu-system-riscv64: vhost_set_mem_table failed: Interrupted system call (4)
-qemu-system-riscv64: unable to start vhost net: 4: falling back on userspace virtio
+Applied to riscv-to-apply.next
 
-Note that, before starting the kvm-acceled QEMU VM, following
-temporarily unaccepted QEMU patches should be used:
-https://lists.gnu.org/archive/html/qemu-devel/2021-08/msg02516.html
-
-This error was made bacause default main_mem is used to be registered
-as the system memory, other memory cannot be initialized. Therefore,
-the system memory should be initialized to the machine->ram, which
-consists of the default main_mem and other possible memory required
-by applications, such as shared hugepage memory in DPDK.
-Also, the mc->defaul_ram_id should be set to the default main_mem,
-such as "riscv_virt_board.ram" for the virt machine.
-
-Signed-off-by: Mingwang Li <limingwang@huawei.com>
-Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index ec0cb69b8c..b3b431c847 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -771,7 +771,6 @@ static void virt_machine_init(MachineState *machine)
-     const MemMapEntry *memmap = virt_memmap;
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     char *plic_hart_config, *soc_name;
-     target_ulong start_addr = memmap[VIRT_DRAM].base;
-@@ -890,10 +889,8 @@ static void virt_machine_init(MachineState *machine)
-     }
- 
-     /* register system main memory (actual RAM) */
--    memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
--                           machine->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
--        main_mem);
-+        machine->ram);
- 
-     /* create device tree */
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-@@ -1032,6 +1029,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    mc->default_ram_id = "riscv_virt_board.ram";
- 
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
- 
--- 
-2.19.1
-
+Alistair
 
