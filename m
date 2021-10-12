@@ -1,49 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1maQ7i-0007bB-Fk
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Oct 2021 18:19:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32814)
+	id 1maQDO-00046g-Qx
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Oct 2021 18:25:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34106)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maQ7g-0007a5-P4; Tue, 12 Oct 2021 18:19:48 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:37432)
+ id 1maQDI-00045Y-UH; Tue, 12 Oct 2021 18:25:37 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:35707)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maQ7d-00087Z-VR; Tue, 12 Oct 2021 18:19:48 -0400
-Received: by mail-io1-xd36.google.com with SMTP id m20so601541iol.4;
- Tue, 12 Oct 2021 15:19:45 -0700 (PDT)
+ id 1maQDD-0004lb-Sv; Tue, 12 Oct 2021 18:25:34 -0400
+Received: by mail-io1-xd34.google.com with SMTP id h196so620997iof.2;
+ Tue, 12 Oct 2021 15:25:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NB4zMWjVCozDyRqrRazsv7gECHlthWA9j/5E69e+2pE=;
- b=O3E8Na1Lu/kg9q1317gF82pOCZSAMuuoHn9gufZyGxGSmsbzzQuMOVwF55Mu1iLW6V
- PCF0bB5+i5baqpeBi4h/xhHYwcXBogMplyx2nUX6DUEsErcrra5z1EPRUgOElfsH0lg1
- I/BwklgzMNPayXfCFl9iwhqVifSnxzvdpvzXqwQ4HCx7BjgzeqJxBhXOEohGI1rwykZn
- lXUiMVocjsfQYqnLJkmu3QYInXK597Co5vY7nIGVpvZYghsGhXTZ1jdQ+cXWePtVTJ0Q
- NYIARl/MQFTZ5C41TQ8TdOW5Yx6HYV1q29+D6fM3fBxt5E8SYSDrI2cfXDSrUcWLSG0P
- rjPQ==
+ :cc; bh=XmXWcURKTPZbu8+vMykz0wo7aGuZpEedRj7aUcQW/64=;
+ b=jXP0Q6BYUaRM1g/D3kGRJaogyDNoXsMFf191OtG8ORGfqlH0QuWlkt3HNBo9PJfjF4
+ q2ALCcfrBgKjp5dmcOASInobV+9gI7eBewus6GQw3nWBj5c5zdAczLbIF9ag2oRnY3k3
+ RlycwIS2PzEhnccX5VbLXkAHUOYdM3dNG2A8HiuqAZvd5DF+0cKddahq4bvJmfro3a/W
+ ppTNvUpJ4NQ9CFScQXQZYKdytzv9whHQwpayRU2mny766/62FwzY+XmJ1E49HBjU64m2
+ AiEhm+27VgvQ2twDTfkqlPacg+dTyANr6ImfQGjoEIINDrbsXKJPJs9Qjj3pB+KyBmf/
+ V3Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NB4zMWjVCozDyRqrRazsv7gECHlthWA9j/5E69e+2pE=;
- b=Pz5gfSeIdFWeO/j0XEBuMLKVXx5vQDSCewVdcuQW5U97OHxRjf5ZTUjdZTCXKHZ4kC
- 9V+R21XGVaMjSB6k/Qhuv8PMZO5Ls5Ryrf5YYZ3n9CidBWNj7h8Dx9LfRIOdkBE8dYsB
- JW4pzdXSUPyT2+A86I0AYlrzdC6SBn9n8n+iZm1K6uJkyfndj8v/+N8IHObNO53hMbOD
- BDnfHX7ea7zVDO0apfVQccdsso0/kWIx/8L5bBw7XT9e7IE4uXlAaa0TTVxoEaLC4aIk
- 8jIxxoluZUAOieI/HluO/5s5xTHZZ4tp/GeAXgzoQScouU36Ft+4XoXUHnFhCeCK5YpF
- oGzA==
-X-Gm-Message-State: AOAM533E4fTV9pU7LkTri6b/8gvd/FrBQQzE5wzMM6QOmdEDdlPRYgzY
- I4rUhRtraZE8MmFsacXFHuGnhCrJd+p9MIWYAHs=
-X-Google-Smtp-Source: ABdhPJyUAmYSRqyUMQkR2DPCTv/LEqWVUb7bWjDgrZMQ35aO1plLf4xcvTA3zyySB7lWt4luca1J9q2NsICNzsModDE=
-X-Received: by 2002:a6b:8d4a:: with SMTP id p71mr25921383iod.16.1634077184387; 
- Tue, 12 Oct 2021 15:19:44 -0700 (PDT)
+ bh=XmXWcURKTPZbu8+vMykz0wo7aGuZpEedRj7aUcQW/64=;
+ b=oYFJFe5QpMhu2wt6RXHS3xku4jdTx1qDZ6M6TvhJKlfXJCbC3iX8OMTbVOKyyg7zQL
+ 0u/VirK6keO2THRRpR4cNwqBiQIrMtLaajJfn1RBCyup8OVQFC9/12P57yjYic85uUG5
+ hB+HGU5Udsd8jL6GSBgLvt68M1SVrIi2o0ki1NzwoseDLYgXMY7QwfQTOQ3vBKf0mOJx
+ okkhLS76f0IkZutOS0p2eXhwFbfdLoZ8w4hiYGtspvglgwR0eQIQv6jwTi1YwLFLaKVp
+ RnCTfD72buoIxdiZLhnxPq2w5ypdwtVrAmNu3fNzq8aJLbzck7Pz7VqIrWQUb5Z2TAeB
+ yLYw==
+X-Gm-Message-State: AOAM530HIGaSzdyDmvEdmWaBQ5BW+haeuBqSjR1PCbe3tVFDjdEGO92C
+ rXjtWgR6WSorHEfbekYlLR4T1taU3YpxXgBIAG8=
+X-Google-Smtp-Source: ABdhPJwY/7LCnJc4zrqz9k9AXZF5iV8jUexLQGaXC27y6KYjx+BhCMwCI+QO/p2VwL5gS3+DRS/txPkgBlsx8+654+g=
+X-Received: by 2002:a05:6638:1483:: with SMTP id
+ j3mr24996253jak.63.1634077528483; 
+ Tue, 12 Oct 2021 15:25:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <20210922161405.140018-4-damien.hedde@greensocs.com>
-In-Reply-To: <20210922161405.140018-4-damien.hedde@greensocs.com>
+ <20210922161405.140018-7-damien.hedde@greensocs.com>
+In-Reply-To: <20210922161405.140018-7-damien.hedde@greensocs.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Oct 2021 08:19:18 +1000
-Message-ID: <CAKmqyKP-Na8=6cyL8kLNwkr8Hcb2cDgVYYqDrqO_g=tcqkO96A@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 03/16] qapi: Implement x-machine-init QMP command
+Date: Wed, 13 Oct 2021 08:25:02 +1000
+Message-ID: <CAKmqyKNuOppuy2i=dF7SD0pZ0u_Us5J0CRGe8CJ-Zay-KMFBRA@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 06/16] qapi: Allow device_add to execute in machine
+ initialized phase
 To: Damien Hedde <damien.hedde@greensocs.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Peter Maydell <peter.maydell@linaro.org>, 
@@ -65,8 +67,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Mark Burton <mark.burton@greensocs.com>, Edgar Iglesias <edgari@xilinx.com>, 
  Igor Mammedov <imammedo@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -87,20 +89,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2021 22:19:49 -0000
+X-List-Received-Date: Tue, 12 Oct 2021 22:25:39 -0000
 
-On Thu, Sep 23, 2021 at 2:17 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
+On Thu, Sep 23, 2021 at 2:26 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
 >
 > From: Mirela Grujic <mirela.grujic@greensocs.com>
 >
-> The x-machine-init QMP command is available only if the -preconfig option
-> is used and the current machine initialization phase is accel-created.
+> To configure a machine using QMP we need the device_add command to
+> execute at machine initialized phase.
 >
-> The command triggers QEMU to enter machine initialized phase and wait
-> for the QMP configuration. In future commits, we will add the possiblity
-> to create devices at this point.
->
-> To exit the initialized phase use the x-exit-preconfig QMP command.
+> Note: for device_add command in qdev.json adding the 'allow-init-config'
+> option has no effect because the command appears to bypass QAPI (see
+> TODO at qapi/qdev.json:61). The option is added there solely to document
+> the intent.
+> For the same reason, the flags have to be explicitly set in
+> monitor_init_qmp_commands() when the device_add command is registered.
 >
 > Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
 
@@ -109,91 +112,60 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  qapi/machine.json | 23 +++++++++++++++++++++++
->  softmmu/vl.c      | 19 +++++++++++++++----
->  2 files changed, 38 insertions(+), 4 deletions(-)
 >
-> diff --git a/qapi/machine.json b/qapi/machine.json
-> index 969d37fb03..56330c0e8e 100644
-> --- a/qapi/machine.json
-> +++ b/qapi/machine.json
-> @@ -1368,3 +1368,26 @@
+> The commit is fine, but we may add intermediate commits before this one
+> in order to add or change the condition for a device type to be accepted
+> in the 'initialized' state (see the cover-letter of the series).
+> ---
+>  qapi/qdev.json         | 3 ++-
+>  monitor/misc.c         | 2 +-
+>  softmmu/qdev-monitor.c | 6 ++++++
+>  3 files changed, 9 insertions(+), 2 deletions(-)
+>
+> diff --git a/qapi/qdev.json b/qapi/qdev.json
+> index b83178220b..ad669ae175 100644
+> --- a/qapi/qdev.json
+> +++ b/qapi/qdev.json
+> @@ -67,7 +67,8 @@
 >  ##
->  { 'command': 'query-machine-phase', 'returns': 'MachineInitPhaseStatus',
->               'allow-preconfig': true }
-> +
-> +##
-> +# @x-machine-init:
-> +#
-> +# Enter machine initialized phase
-> +#
-> +# Since: 6.2
-> +#
-> +# Returns: If successful, nothing
-> +#
-> +# Notes: This command will trigger QEMU to execute initialization steps
-> +#        that are required to enter the machine initialized phase. The command
-> +#        is available only if the -preconfig command line option was passed and
-> +#        if the machine is currently in the accel-created phase. To exit the
-> +#        machine initialized phase use the x-exit-preconfig command.
-> +#
-> +# Example:
-> +#
-> +# -> { "execute": "x-machine-init" }
-> +# <- { "return": {} }
-> +#
-> +##
-> +{ 'command': 'x-machine-init', 'allow-preconfig': true }
-> diff --git a/softmmu/vl.c b/softmmu/vl.c
-> index d2552ba8ac..84c5132ad7 100644
-> --- a/softmmu/vl.c
-> +++ b/softmmu/vl.c
-> @@ -123,6 +123,7 @@
->  #include "qapi/qapi-visit-qom.h"
->  #include "qapi/qapi-commands-ui.h"
->  #include "qapi/qmp/qdict.h"
-> +#include "qapi/qapi-commands-machine.h"
->  #include "qapi/qmp/qerror.h"
->  #include "sysemu/iothread.h"
->  #include "qemu/guest-random.h"
-> @@ -2610,10 +2611,16 @@ static void qemu_init_displays(void)
->      }
->  }
+>  { 'command': 'device_add',
+>    'data': {'driver': 'str', '*bus': 'str', '*id': 'str'},
+> -  'gen': false } # so we can get the additional arguments
+> +  'gen': false, # so we can get the additional arguments
+> +  'allow-preconfig': true }
 >
-> -static void qemu_init_board(void)
-> +void qmp_x_machine_init(Error **errp)
->  {
->      MachineClass *machine_class = MACHINE_GET_CLASS(current_machine);
+>  ##
+>  # @device_del:
+> diff --git a/monitor/misc.c b/monitor/misc.c
+> index ffe7966870..2c476de316 100644
+> --- a/monitor/misc.c
+> +++ b/monitor/misc.c
+> @@ -231,7 +231,7 @@ static void monitor_init_qmp_commands(void)
+>      qmp_init_marshal(&qmp_commands);
 >
-> +    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-> +        error_setg(errp, "The command is permitted only before "
+>      qmp_register_command(&qmp_commands, "device_add", qmp_device_add,
+> -                         QCO_NO_OPTIONS);
+> +                         QCO_ALLOW_PRECONFIG);
+>
+>      QTAILQ_INIT(&qmp_cap_negotiation_commands);
+>      qmp_register_command(&qmp_cap_negotiation_commands, "qmp_capabilities",
+> diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
+> index 834f2b56b5..47ccd90be8 100644
+> --- a/softmmu/qdev-monitor.c
+> +++ b/softmmu/qdev-monitor.c
+> @@ -824,6 +824,12 @@ void qmp_device_add(QDict *qdict, QObject **ret_data, Error **errp)
+>      QemuOpts *opts;
+>      DeviceState *dev;
+>
+> +    if (!phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
+> +        error_setg(errp, "The command is permitted only after "
 > +                         "the machine is initialized");
 > +        return;
 > +    }
 > +
->      if (machine_class->default_ram_id && current_machine->ram_size &&
->          numa_uses_legacy_mem() && !current_machine->ram_memdev_id) {
->          create_default_memdev(current_machine, mem_path);
-> @@ -2692,12 +2699,16 @@ static void qemu_machine_creation_done(void)
->
->  void qmp_x_exit_preconfig(Error **errp)
->  {
-> -    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-> -        error_setg(errp, "The command is permitted only before machine initialization");
-> +    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-> +        error_setg(errp, "The command is permitted only before "
-> +                         "the machine is ready");
+>      opts = qemu_opts_from_qdict(qemu_find_opts("device"), qdict, errp);
+>      if (!opts) {
 >          return;
->      }
->
-> -    qemu_init_board();
-> +    if (!phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-> +        qmp_x_machine_init(errp);
-> +    }
-> +
->      qemu_create_cli_devices();
->      qemu_machine_creation_done();
->
 > --
 > 2.33.0
 >
