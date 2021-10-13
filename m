@@ -1,51 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1maYRy-0006hD-QL
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 03:13:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45372)
+	id 1maYVB-0000XJ-JR
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 03:16:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45904)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maYRt-0006fj-IL; Wed, 13 Oct 2021 03:13:16 -0400
-Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:47102)
+ id 1maYV7-0000W9-Pa; Wed, 13 Oct 2021 03:16:34 -0400
+Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:44938)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maYRr-00076i-Tj; Wed, 13 Oct 2021 03:13:13 -0400
-Received: by mail-io1-xd2e.google.com with SMTP id s17so1647029ioa.13;
- Wed, 13 Oct 2021 00:13:11 -0700 (PDT)
+ id 1maYV4-0003Mn-O8; Wed, 13 Oct 2021 03:16:33 -0400
+Received: by mail-il1-x12d.google.com with SMTP id j8so1580018ila.11;
+ Wed, 13 Oct 2021 00:16:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KHB4g6o0LeMzf6QhsqguIIRvH+olg3UnDhoJaR0aLNA=;
- b=avPTWRvD87X49NZcwlii0xdmVFI41b1HDJTeSUpV6LTstZj5FMBkZDEpcCnnV6wh09
- tkLv9db1x07e+t/oQyZn8p2e1N6gQiet1Pbm4ckl21olRRwSML+IJtPQ5J3XScYpq+mI
- JgiVbyQ7DFL7gdytixxEnQzk/i9FfuXjXfHvxwZBmRQWVR1ZzV+6Vgo4XssTxxUy0s6A
- MhZTjzoA5tZ8zJIWwjFjdo/7wfq4BkqVbsSWPrnHVJxA1rQCHHwxVPBYM9oKV14JGha3
- iZkQZGbR9s1yGyXVp/0KymzoP6LIaXMT1lzaITBayQAvzJwYyt4vLlVJlm4V3pmjWU+3
- dLog==
+ :cc; bh=i3FI/4yg1UnUkR3eFfub07xRQFw994Re88ZbTuriDcs=;
+ b=fnt6SAzQGyiPybQHEXVCM0uU97YZxcWzVopCBhCvr6XBbj2XR1Oi+WhDZSG1se8yr+
+ 04SpaO2W584eqSOk/6gpNgP0V+QKjmK7x0xh/jHlpvCJxi3QtM+CxH+eHM9+roXm6Yrf
+ aR5fwEtuzHgwqaaywBAOafqgEg1HJbx316sbDaYt/cjwl4rqOzmZbJgkZ6eY8dFExCBt
+ aCsEBowYbx5bbrtC4d1WmWmvmG9RJM/LY1F4xEUoWNsW0cWVxxpzB/7ki93VpFn8c1Qa
+ j4Erspl8b7ZCU4qnGaoQvUqL9RecGA7d9SPvnJc4iEqUmqscFGsuk8CStKc5M6pxxHKa
+ TRIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=KHB4g6o0LeMzf6QhsqguIIRvH+olg3UnDhoJaR0aLNA=;
- b=PyR+SHOY/TKk65xQt++xRy+GVRg347AefTHG23YA3euv2da73TSAARm3+4I09FioV0
- 65K6D+29B5YuWfOc+Dwvz+izAL7hKIrTvYlG3gMCDkFUnW50sApETRGvncO4vmY16590
- VPbIO5zIPgS5ckQi2Ek+xVccFU4fjOouk47o0ezOoDEQzh9xohf4Ab4bn2crPkQazBCy
- Iw00vKldn9G0thK6efdexpyuXSece2Y/mbRXtIOt8qLMctJGg8I1q3ttcECq7YDWB5rt
- wV82Po9+HN6ONmrvxiQ/frl+a1vLPFZiiSzA/MqZ7N+UJmSWJjHbyNzt1E3y2dtLs+zb
- /GdQ==
-X-Gm-Message-State: AOAM530kKvX7nM893pauJnrDT4+1EaWSr05nA32NOeWUAlz4UrmLrfmV
- tXUwQBihkx5LR+zE+ll09e0DYpRr2KYpjT51KLQ=
-X-Google-Smtp-Source: ABdhPJwAerQBrE6h1mAcc8a9ejLtUsRNqYkv/iKjXq1q0SyzeWPOBrz+6jeH+TXpXPz1j01S6PDyDckoOD1oFZSZOyY=
-X-Received: by 2002:a05:6602:2e8c:: with SMTP id
- m12mr8986722iow.91.1634109190435; 
- Wed, 13 Oct 2021 00:13:10 -0700 (PDT)
+ bh=i3FI/4yg1UnUkR3eFfub07xRQFw994Re88ZbTuriDcs=;
+ b=NQEn8a6lTdRbEXQQSMrHdNLruo/5s+cyfhzDzb/6OWPp0ubEXQuXwlFtk8Wt1tg4dE
+ WHxLLRkR+RU3aSAR6w63vPHbu3ewZWEHkgc3INoYNw6H3ngICGQeSuspdKiO//r8mihU
+ qNNp0B1i9TULqSfN4qDXjRFe/Y//MEUibswbtd806N2lL0cqB6I9/XOc+Y+iUHhWD/NO
+ xg3x6N7onlqXWpQUub47tikrjmLCVbAnKzx/N+FMkhkira3K9BJe8R7aVkO5Cl5vF2zC
+ zjnlgrr6//yH9zV2ExYlEvlOI7IhMkGkyk2miYGrat8bEhR/tIodoq+ZGssEexUMgR9S
+ DY5w==
+X-Gm-Message-State: AOAM5302KDI8WdvPR9pNdSd9izVq/JfMLYvZMTN8V9gpkc65Z2Iv7dek
+ eFmcAOypvcO/7Y5xnzJgldekTkBg92oKtdIpCR0=
+X-Google-Smtp-Source: ABdhPJyzWNsJ7ScpHzJDMDmxpcmfJLbKNdWIIAodbqImc6KC0VK+oNgkRydrV8wTWOXm1+nOaURd7afR1ivOvcLqGT8=
+X-Received: by 2002:a92:1a43:: with SMTP id z3mr27913757ill.46.1634109389213; 
+ Wed, 13 Oct 2021 00:16:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <20210922161405.140018-12-damien.hedde@greensocs.com>
-In-Reply-To: <20210922161405.140018-12-damien.hedde@greensocs.com>
+ <20210922161405.140018-13-damien.hedde@greensocs.com>
+In-Reply-To: <20210922161405.140018-13-damien.hedde@greensocs.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Oct 2021 17:12:44 +1000
-Message-ID: <CAKmqyKMP5-8wGY6vFEXeiCgrJQhZRQWcYvyqbEihjCkv1bYEhQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 11/16] softmmu/memory: add
- memory_region_try_add_subregion function
+Date: Wed, 13 Oct 2021 17:16:03 +1000
+Message-ID: <CAKmqyKPWDL52kC23TgtpdEST_kvVjNWn3-j2YFORN457_cEwnw@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 12/16] add x-sysbus-mmio-map qmp command
 To: Damien Hedde <damien.hedde@greensocs.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Peter Maydell <peter.maydell@linaro.org>, 
@@ -67,8 +65,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Mark Burton <mark.burton@greensocs.com>, Edgar Iglesias <edgari@xilinx.com>, 
  Igor Mammedov <imammedo@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,119 +87,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2021 07:13:17 -0000
+X-List-Received-Date: Wed, 13 Oct 2021 07:16:37 -0000
 
-On Thu, Sep 23, 2021 at 2:29 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
+On Thu, Sep 23, 2021 at 2:26 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
 >
-> It allows to try to add a subregion to a memory region with error
-> handling. Like memory_region_add_subregion_overlap, it handles
-> priority as well.
-> Apart the error handling, the behavior is the same. It can be used
-> to do the simple memory_region_add_subregion() (with no overlap) by
-> setting the priority parameter to 0.
+> This command allows to map an mmio region of sysbus device onto
+> the system memory. Its behavior mimics the sysbus_mmio_map()
+> function apart from the automatic unmap (the C function unmaps
+> the region if it is already mapped).
+> For the qmp function we consider it is an error to try to map
+> an already mapped function. If unmapping is required, it is
+> probably better to add a sysbus-mmip-unmap function.
 >
-> This commit is a preparation to further use this function in the
-> context of qmp command which needs error handling support.
+> This command is still experimental (hence the x prefix), as it
+> is related to the sysbus device creation through qmp commands.
+>
+> In future, we expect to have to handle the overlap/priority
+> parameter but also multiple mapping of one mmio. For some
+> devices, one mmio is mapped several times at different addresses on
+> the bus (which is not supported by sysbus_mmio_map() function and
+> requires the use of memory region aliases).
+
+I think as is this is a good start. This is a useful feature!
+
 >
 > Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+
+> ---
+>
+> Note: this qmp command is required to be able to build a machine from
+> scratch as there is no qmp-way of doing a memory mapping today.
+>
+> We've added the command into qapi/qdev.json section. It does not seem to
+> have any really adequate section yet. Any idea ? should we create for
+> example a new one: qapi/sysbus.json or qapi/memory.json ?
+
+I would say leave it in qdev. We don't really want many more sysbus
+commands, so qapi/sysbus.json doesn't need it's own file.
 
 Alistair
 
 > ---
+>  qapi/qdev.json   | 21 +++++++++++++++++++++
+>  hw/core/sysbus.c | 41 +++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 62 insertions(+)
 >
-> Adding a new function is obviously not ideal. But there is ~900
-> occurrences of memory_region_add_subregion[_overlap] calls in the code
-> base. We do not really see an alternative here.
-> ---
->  include/exec/memory.h | 22 ++++++++++++++++++++++
->  softmmu/memory.c      | 22 ++++++++++++++--------
->  2 files changed, 36 insertions(+), 8 deletions(-)
->
-> diff --git a/include/exec/memory.h b/include/exec/memory.h
-> index c3d417d317..422e1eda67 100644
-> --- a/include/exec/memory.h
-> +++ b/include/exec/memory.h
-> @@ -2162,6 +2162,28 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
->                                           MemoryRegion *subregion,
->                                           int priority);
->
-> +/**
-> + * memory_region_try_add_subregion: Add a subregion to a container
-> + *                                  with error handling.
-> + *
-> + * Behaves like memory_region_add_subregion_overlap(), but errors are
-> + * reported if the subregion cannot be added.
-> + *
-> + * @mr: the region to contain the new subregion; must be a container
-> + *      initialized with memory_region_init().
-> + * @offset: the offset relative to @mr where @subregion is added.
-> + * @subregion: the subregion to be added.
-> + * @priority: used for resolving overlaps; highest priority wins.
-> + * @errp: pointer to Error*, to store an error if it happens.
-> + *
-> + * Returns: True in case of success, false otherwise.
-> + */
-> +bool memory_region_try_add_subregion(MemoryRegion *mr,
-> +                                     hwaddr offset,
-> +                                     MemoryRegion *subregion,
-> +                                     int priority,
-> +                                     Error **errp);
+> diff --git a/qapi/qdev.json b/qapi/qdev.json
+> index ad669ae175..dfc1104197 100644
+> --- a/qapi/qdev.json
+> +++ b/qapi/qdev.json
+> @@ -125,3 +125,24 @@
+>  ##
+>  { 'event': 'DEVICE_DELETED',
+>    'data': { '*device': 'str', 'path': 'str' } }
 > +
->  /**
->   * memory_region_get_ram_addr: Get the ram address associated with a memory
->   *                             region
-> diff --git a/softmmu/memory.c b/softmmu/memory.c
-> index bfedaf9c4d..eac61f8236 100644
-> --- a/softmmu/memory.c
-> +++ b/softmmu/memory.c
-> @@ -2513,22 +2513,28 @@ done:
->      memory_region_transaction_commit();
+> +##
+> +# @x-sysbus-mmio-map:
+> +#
+> +# Map a sysbus device mmio onto the main system bus.
+> +#
+> +# @device: the device's QOM path
+> +#
+> +# @mmio: The mmio number to be mapped (defaults to 0).
+> +#
+> +# @addr: The base address for the mapping.
+> +#
+> +# Since: 6.2
+> +#
+> +# Returns: Nothing on success
+> +#
+> +##
+> +
+> +{ 'command': 'x-sysbus-mmio-map',
+> +  'data': {'device': 'str', '*mmio': 'uint8', 'addr': 'uint64'},
+> +  'allow-preconfig' : true }
+> diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+> index aaae8e23cc..b0891f37b6 100644
+> --- a/hw/core/sysbus.c
+> +++ b/hw/core/sysbus.c
+> @@ -23,6 +23,7 @@
+>  #include "hw/sysbus.h"
+>  #include "monitor/monitor.h"
+>  #include "exec/address-spaces.h"
+> +#include "qapi/qapi-commands-qdev.h"
+>
+>  static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
+>  static char *sysbus_get_fw_dev_path(DeviceState *dev);
+> @@ -154,6 +155,46 @@ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
+>      }
 >  }
 >
-> -static void memory_region_add_subregion_common(MemoryRegion *mr,
-> -                                               hwaddr offset,
-> -                                               MemoryRegion *subregion)
-> +bool memory_region_try_add_subregion(MemoryRegion *mr,
-> +                                     hwaddr offset,
-> +                                     MemoryRegion *subregion,
-> +                                     int priority,
-> +                                     Error **errp)
->  {
-> -    assert(!subregion->container);
-> +    if (subregion->container) {
-> +        error_setg(errp, "The memory region is already in another region");
-> +        return false;
+> +void qmp_x_sysbus_mmio_map(const char *device, bool has_mmio, uint8_t mmio,
+> +                           uint64_t addr, Error **errp)
+> +{
+> +    Object *obj = object_resolve_path_type(device, TYPE_SYS_BUS_DEVICE, NULL);
+> +    SysBusDevice *dev;
+> +
+> +    if (phase_get() != MACHINE_INIT_PHASE_INITIALIZED) {
+> +        error_setg(errp, "The command is permitted only when "
+> +                         "the machine is in initialized phase");
+> +        return;
 > +    }
-> +    subregion->priority = priority;
->      subregion->container = mr;
->      subregion->addr = offset;
->      memory_region_update_container_subregions(subregion);
-> +    return true;
->  }
->
->  void memory_region_add_subregion(MemoryRegion *mr,
->                                   hwaddr offset,
->                                   MemoryRegion *subregion)
+> +
+> +    if (obj == NULL) {
+> +        error_setg(errp, "Device '%s' not found", device);
+> +        return;
+> +    }
+> +
+> +    dev = SYS_BUS_DEVICE(obj);
+> +    if (!has_mmio) {
+> +        mmio = 0;
+> +    }
+> +    if (mmio >= dev->num_mmio) {
+> +        error_setg(errp, "MMIO index '%u' is out of range", mmio);
+> +        return;
+> +    }
+> +
+> +    if (dev->mmio[mmio].addr != (hwaddr)-1) {
+> +        error_setg(errp, "MMIO index '%u' is already mapped", mmio);
+> +        return;
+> +    }
+> +
+> +    if (!memory_region_try_add_subregion(get_system_memory(), addr,
+> +                                         dev->mmio[mmio].memory, 0,
+> +                                         errp)) {
+> +        return;
+> +    }
+> +
+> +    dev->mmio[mmio].addr = addr;
+> +}
+> +
+>  void sysbus_mmio_unmap(SysBusDevice *dev, int n)
 >  {
-> -    subregion->priority = 0;
-> -    memory_region_add_subregion_common(mr, offset, subregion);
-> +    memory_region_try_add_subregion(mr, offset, subregion, 0, &error_abort);
->  }
->
->  void memory_region_add_subregion_overlap(MemoryRegion *mr,
-> @@ -2536,8 +2542,8 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
->                                           MemoryRegion *subregion,
->                                           int priority)
->  {
-> -    subregion->priority = priority;
-> -    memory_region_add_subregion_common(mr, offset, subregion);
-> +    memory_region_try_add_subregion(mr, offset, subregion, priority,
-> +                                    &error_abort);
->  }
->
->  void memory_region_del_subregion(MemoryRegion *mr,
+>      assert(n >= 0 && n < dev->num_mmio);
 > --
 > 2.33.0
 >
