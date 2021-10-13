@@ -1,83 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1maQsV-0006Yc-CK
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Oct 2021 19:08:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44008)
+	id 1maXQT-0003UH-Hu
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 02:07:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58322)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maQsT-0006Xo-Qc; Tue, 12 Oct 2021 19:08:09 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:45884)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maQsO-0004pL-Tb; Tue, 12 Oct 2021 19:08:09 -0400
-Received: by mail-io1-xd35.google.com with SMTP id b10so658205iof.12;
- Tue, 12 Oct 2021 16:08:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=D23sb8bFeCXI94xUkUzdKmg69G7zDAbwqduFczWfvKA=;
- b=Es3UE5dss4rZylCN7k44ApvHlCaGU4yXyfFXVgiwjK++fiVIj2AKyYlhX4iAoXUJOm
- CtSsoA4ibc2vMn9zCCRDTEOys3irqDNERLbvfsl8FtIskFvMfYPIxDmhYNrSBO6XV0hi
- FOvfleplF/JVnW1XO/X1GH23yuGwJN5Td7ReeJ5nhPGgxCrQwYOAJfV9mWo/s7aGoAHx
- hgwBiim7ZtjYHhe8Upjehw7vm9f6ONaDVoNk8y1ytrp2plFJEBsprIw21sUuNsYSYnwc
- B/NTXWA9gpi42gCU9Q//B3uCy6IkbzHo6gsWN7PflOKs4cmdY6C+GuFuof6yViEAJVIw
- 0jpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=D23sb8bFeCXI94xUkUzdKmg69G7zDAbwqduFczWfvKA=;
- b=AteYja1sNkjo/JE0k2GQOzUWsa5EOShuu5dy4zDaeujrt6mGXpdjH7RQ40pBt/3hL9
- xzhWdgTZDLMybsewUxsGzeoGF49IpIeyPCXTYtwBlkP25TRo7HTRAWtEDr6evk9o/GP8
- unw2dzduyn9CfH+POgYoIAFC2eW+X2ENt2nmbUq70zGs4x2cmAarWF6ONxw00oyKNACt
- xDF0cij4q2LZjBNKZvK5hqQcMqg8TKdu5NNV3EYsmp5qpzCgaJnOB6+Ckj6hwhQfzmfS
- 518NH4Jls0GXd5zExRodM7Sd0MvgSWVupfF6Vs7jgVQmMY9DzoOQOirp30o6Feq96Rgk
- YUvA==
-X-Gm-Message-State: AOAM533Yi7blOq1GeWCNC5OMvbdHiDZtrWfCPL/HJTLNP7zcZKI1+gis
- 48hO4rSWXl7nVIDQ4q5P1e50xVQ1n4iXbIOTMIM=
-X-Google-Smtp-Source: ABdhPJxDPo9qtToO6ewaPjuNrBsi+QXGD1yiMTi37OJGplkSUxNlRnlVrO+pWqYJmSF5JUPbJAj3fBICmq3UUqxD/5U=
-X-Received: by 2002:a05:6638:1483:: with SMTP id
- j3mr25110746jak.63.1634080083372; 
- Tue, 12 Oct 2021 16:08:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <20210922161405.140018-10-damien.hedde@greensocs.com>
-In-Reply-To: <20210922161405.140018-10-damien.hedde@greensocs.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Oct 2021 09:07:37 +1000
-Message-ID: <CAKmqyKNeUz7BTxhJTKnhTnEnONRJLJ8V-CaCZ3E5OA2G8eeP4A@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 09/16] hw/core/machine: Remove the dynamic sysbus
- devices type check
-To: Damien Hedde <damien.hedde@greensocs.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
- Peter Xu <peterx@redhat.com>, 
- mirela.grujic@greensocs.com, Alistair Francis <Alistair.Francis@wdc.com>, 
+ (Exim 4.90_1) (envelope-from <mark.burton@greensocs.com>)
+ id 1maXGB-0005QM-6E; Wed, 13 Oct 2021 01:57:03 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:55386)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mark.burton@greensocs.com>)
+ id 1maXG8-0002uK-4u; Wed, 13 Oct 2021 01:57:02 -0400
+Received: from smtpclient.apple (unknown [54.37.16.242])
+ by beetle.greensocs.com (Postfix) with ESMTPSA id 0BDBE21A8F;
+ Wed, 13 Oct 2021 05:56:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+ s=mail; t=1634104613;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NmENBHpmx11BFYuaIRMqtVJxSEZwgv5Rg+5FKo1F1EU=;
+ b=n8qFCNPvW+tem6mfNDqDAmYlqDScNkjpLwuFa5/eMVeB897n3G/Iy6YDCjRDfpwRN+d8+N
+ geHeGCltVaRzoIWe7y4h9fUXaxq7y7ZABps9lIectcz9ioLN7YvuhvnRpypSJHcMSU0Ycr
+ c/GRrbwgYzaWkXZ+CyTPcRX2Q2M1tDI=
+Content-Type: text/plain;
+	charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.13\))
+Subject: Re: [RFC PATCH v2 00/16] Initial support for machine creation via QMP
+From: Mark Burton <mark.burton@greensocs.com>
+In-Reply-To: <CAKmqyKMUvtRPCp=FJMHcMdsECfJ_fRHBi4dA2N3gtqmPHspNJA@mail.gmail.com>
+Date: Wed, 13 Oct 2021 07:56:46 +0200
+Cc: Damien Hedde <damien.hedde@greensocs.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ David Hildenbrand <david@redhat.com>, Peter Xu <peterx@redhat.com>,
+ mirela.grujic@greensocs.com, Alistair Francis <Alistair.Francis@wdc.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
- Eric Blake <eblake@redhat.com>, 
+ Eric Blake <eblake@redhat.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- "open list:X86" <xen-devel@lists.xenproject.org>, 
- Paul Durrant <paul@xen.org>, Markus Armbruster <armbru@redhat.com>, 
- Anthony Perard <anthony.perard@citrix.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ "open list:X86" <xen-devel@lists.xenproject.org>,
+ Paul Durrant <paul@xen.org>, Markus Armbruster <armbru@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?utf-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  Eduardo Habkost <ehabkost@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
- Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Mark Burton <mark.burton@greensocs.com>, Edgar Iglesias <edgari@xilinx.com>, 
- Igor Mammedov <imammedo@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ =?utf-8?B?IkRhbmllbCBQLiBCZXJyYW5nw6ki?= <berrange@redhat.com>,
+ Edgar Iglesias <edgari@xilinx.com>, Igor Mammedov <imammedo@redhat.com>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <D12EA69C-A1CC-4132-89F8-499D7F99F34C@greensocs.com>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+ <CAKmqyKMUvtRPCp=FJMHcMdsECfJ_fRHBi4dA2N3gtqmPHspNJA@mail.gmail.com>
+To: Alistair Francis <alistair23@gmail.com>
+X-Mailer: Apple Mail (2.3654.120.0.1.13)
+Received-SPF: pass client-ip=5.135.226.135;
+ envelope-from=mark.burton@greensocs.com; helo=beetle.greensocs.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 13 Oct 2021 02:07:37 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,101 +75,180 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Oct 2021 23:08:10 -0000
+X-List-Received-Date: Wed, 13 Oct 2021 05:57:03 -0000
 
-On Thu, Sep 23, 2021 at 2:23 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
->
-> Now that we check sysbus device types during device creation, we
-> can remove the check done in the machine init done notifier.
-> This was the only thing done by this notifier, so we remove the
-> whole sysbus_notifier structure of the MachineState.
->
-> Note: This notifier was checking all /peripheral and /peripheral-anon
-> sysbus devices. Now we only check those added by -device cli option or
-> device_add qmp command when handling the command/option. So if there
-> are some devices added in one of these containers manually (eg in
-> machine C code), these will not be checked anymore.
-> This use case does not seem to appear apart from
-> hw/xen/xen-legacy-backend.c (it uses qdev_set_id() and in this case,
-> not for a sysbus device, so it's ok).
->
-> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+Fixed
+Cheers
+Mark.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
+> On 13 Oct 2021, at 00:16, Alistair Francis <alistair23@gmail.com> =
+wrote:
+>=20
+> On Thu, Sep 23, 2021 at 2:22 AM Damien Hedde =
+<damien.hedde@greensocs.com> wrote:
+>>=20
+>> Hi,
+>>=20
+>> The goal of this work is to bring dynamic machine creation to QEMU:
+>> we want to setup a machine without compiling a specific machine C
+>> code. It would ease supporting highly configurable platforms (for
+>> example resulting from an automated design flow). The requirements
+>> for such configuration include begin able to specify the number of
+>> cores, available peripherals, emmory mapping, IRQ mapping, etc.
+>>=20
+>> This series focuses on the first step: populating a machine with
+>> devices during its creation. We propose patches to support this
+>> using QMP commands. This is a working set of patches and improves
+>> over the earlier rfc (posted in May):
+>> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html
+>>=20
+>> Although it is working and could be merged, it is tag as an RFC:
+>> we probably need to discuss the conditions for allowing a device to
+>> be created at an early stage. Patches 6, 10 and 13, 15 and 16 depend
+>> on such conditions and are subject to change. Other patches are
+>> unrelated to this point.
+>>=20
+>> We address several issues in this series. They are detailed below.
+>>=20
+>> ## 1. Stoping QEMU to populate the machine with devices
+>>=20
+>> QEMU goes through several steps (called _machine phases_) when
+>> creating the machine: 'no-machine', 'machine-created',
+>> 'accel-created', 'initialized', and finally 'ready'. At 'ready'
+>> phase, QEMU is ready to start (see Paolo's page
+>> https://wiki.qemu.org/User:Paolo_Bonzini/Machine_init_sequence for
+>> more details).
+>>=20
+>> Using the -preconfig CLI option, QEMU can be stopped today during
+>> the 'accel-created' phase. Then the 'x-exit-preconfig' QMP command
+>> triggers QEMU moving forwards to the completion of the machine
+>> creation ('ready' phase).
+>>=20
+>> The devices are created during the 'initialized' phase.
+>> In this phase the machine init() method has been executed and thus
+>> machine properties have been handled. Although the sysbus exists and
+>> the machine may have been populated by the init(),
+>> _machine_init_done_ notifiers have not been called yet. At this point
+>> we can add more devices to a machine.
+>>=20
+>> We propose to add 2 QMP commands:
+>> + The 'query-machine-phase' command would return the current machine
+>>  phase.
+>> + The 'x-machine-init' command would advance the machine phase to
+>>  'initialized'. 'x-exit-preconfig' could then still be used to
+>>  advance to the last phase.
+>>=20
+>> ## 2. Adding devices
+>>=20
+>> Right now, the user can create devices in 2 ways: using '-device' CLI
+>> option or 'device_add' QMP command. Both are executed after the
+>> machine is ready: such devices are hot-plugged. We propose to allow
+>> 'device_add' QMP command to be used during the 'initialized' phase.
+>>=20
+>> In this series, we keep the constraint that the device must be
+>> 'user-creatable' (this is a device class flag). We do not see any
+>> reason why a device the user can hot-plug could not be created at an
+>> earlier stage.
+>>=20
+>> This part is still RFC because, as Peter mentioned it (in this thread
+>> https://lists.gnu.org/archive/html/qemu-devel/2021-08/msg01933.html),
+>> we may want additional or distinct conditions for:
+>> + device we can hot-plug
+>> + device we can add in '-preconfig' (cold-plug)
+>> We are open to suggestions. We could for example add a
+>> 'preconfig-creatable' or 'init-creatable' flag to device class, which
+>> can identify a set of devices we can create this way.
+>>=20
+>> The main addition is how we handle the case of sysbus devices. Sysbus
+>> devices are particular because unlike, for example, pci devices, you
+>> have to manually handle the memory mapping and interrupts wiring. So
+>> right now, a sysbus device is dynamically creatable (using -device
+>> CLI option or device_add QMP command) only if:
+>> + it is 'user_creatable' (like any other device),
+>> + and it is in the current machine sysbus device allow list.
+>>=20
+>> In this series, we propose to relax the second constraint during the
+>> earlier phases of machine creation so that when using -preconfig we
+>> can create any 'user-creatable' sysbus device. When the machine
+>> progresses to the 'ready' phase, sysbus devices creation will come
+>> back to the legacy behavior: it will be possible only based on the
+>> per-machine authorization basis.
+>>=20
+>> For sysbus devices, wiring interrupts is not a problem as we can use
+>> the 'qom-set' QMP command, but memory mapping is.
+>>=20
+>> ## 3. Memory mapping
+>>=20
+>> There is no point allowing the creation sysbus devices if we cannot
+>> map them onto the memory bus (the 'sysbus').
+>>=20
+>> As far as we know, right now, there is no way to add memory mapping
+>> for sysbus device using QMP commands. We propose a =
+'x-sysbus-mmio-map'
+>> command to do this. This command would only be allowed during the
+>> 'initialized' phase when using -preconfig.
+>>=20
+>> ## 4. Working example
+>>=20
+>> The last patches of the series add and modify devices in order to
+>> build a working machine starting from the 'none' machine.
+>>=20
+>> We add a new sysbus device modeling a simple memory (ram or rom). We
+>> also set 'user-creatable' flag of some sysbus devices. These are
+>> trivial patches, but they depends on the conditions we choose to =
+allow
+>> creating devices with -preconfig. Therefore, there is really no need
+>> to review them until we settled on the device conditions first.
+>>=20
+>> With these devices (memory, ibex_uart, ibex_plic) we can dynamically
+>> configure a part (we did not add the timer, but we could) the
+>> opentitan machine very easily and run firmwares which demonstrates
+>> interrupts and memory-mapping are working.
+>>=20
+>> We use the existing qmp-shell script to issue machine devices
+>> from a qmp commands script file which contains qmp commands listed in
+>> a file.
+>>=20
+>> The following qmp commands add some memories, an interrupt controller
+>> and an uart with an interrupt.
+>>=20
+>> cat > opentitan.qmp <<EOF
+>> x-machine-init
+>>=20
+>> # ROM 0x00008000
+>> device_add        driver=3Dsysbus-memory id=3Drom size=3D0x4000 =
+readonly=3Dtrue
+>> x-sysbus-mmio-map device=3Drom addr=3D32768
+>>=20
+>> # FLASH 0x20000000
+>> device_add        driver=3Dsysbus-memory id=3Dflash size=3D0x80000 =
+readonly=3Dtrue
+>> x-sysbus-mmio-map device=3Dflash addr=3D536870912
+>>=20
+>> # RAM 0x10000000
+>> device_add        driver=3Dsysbus-memory id=3Dram size=3D0x10000
+>> x-sysbus-mmio-map device=3Dram addr=3D268435456
+>>=20
+>> # PLIC 0x41010000
+>> device_add        driver=3Dibex-plic id=3Dplic
+>> x-sysbus-mmio-map device=3Dplic addr=3D1090584576
+>>=20
+>> # UART 0x40000000
+>> device_add        driver=3Dibex-uart id=3Duart chardev=3Dserial0
+>> x-sysbus-mmio-map device=3Duart addr=3D1073741824
+>> qom-set path=3Duart property=3Dsysbus-irq[1] =
+value=3Dplic/unnamed-gpio-in[2]
+>>=20
+>> x-exit-preconfig
+>> EOF
+>>=20
+>> We've put the opentitan.qmp and a firmware opentitan-echo.elf here
+>> (among some other qmp machine files we are working on):
+>> https://github.com/GreenSocs/qemu-qmp-machines
+>=20
+> I am unable to access this repo, maybe it's not public?
+>=20
+> Alistair
 
-> ---
->  include/hw/boards.h |  1 -
->  hw/core/machine.c   | 27 ---------------------------
->  2 files changed, 28 deletions(-)
->
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 934443c1cd..ccbc40355a 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -311,7 +311,6 @@ typedef struct CpuTopology {
->  struct MachineState {
->      /*< private >*/
->      Object parent_obj;
-> -    Notifier sysbus_notifier;
->
->      /*< public >*/
->
-> diff --git a/hw/core/machine.c b/hw/core/machine.c
-> index 1a18912dc8..521438e90a 100644
-> --- a/hw/core/machine.c
-> +++ b/hw/core/machine.c
-> @@ -571,18 +571,6 @@ bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
->      return allowed;
->  }
->
-> -static void validate_sysbus_device(SysBusDevice *sbdev, void *opaque)
-> -{
-> -    MachineState *machine = opaque;
-> -    MachineClass *mc = MACHINE_GET_CLASS(machine);
-> -
-> -    if (!device_is_dynamic_sysbus(mc, DEVICE(sbdev))) {
-> -        error_report("Option '-device %s' cannot be handled by this machine",
-> -                     object_class_get_name(object_get_class(OBJECT(sbdev))));
-> -        exit(1);
-> -    }
-> -}
-> -
->  static char *machine_get_memdev(Object *obj, Error **errp)
->  {
->      MachineState *ms = MACHINE(obj);
-> @@ -598,17 +586,6 @@ static void machine_set_memdev(Object *obj, const char *value, Error **errp)
->      ms->ram_memdev_id = g_strdup(value);
->  }
->
-> -static void machine_init_notify(Notifier *notifier, void *data)
-> -{
-> -    MachineState *machine = MACHINE(qdev_get_machine());
-> -
-> -    /*
-> -     * Loop through all dynamically created sysbus devices and check if they are
-> -     * all allowed.  If a device is not allowed, error out.
-> -     */
-> -    foreach_dynamic_sysbus_device(validate_sysbus_device, machine);
-> -}
-> -
->  HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
->  {
->      int i;
-> @@ -1030,10 +1007,6 @@ static void machine_initfn(Object *obj)
->                                          "Table (HMAT)");
->      }
->
-> -    /* Register notifier when init is done for sysbus sanity checks */
-> -    ms->sysbus_notifier.notify = machine_init_notify;
-> -    qemu_add_machine_init_done_notifier(&ms->sysbus_notifier);
-> -
->      /* default to mc->default_cpus */
->      ms->smp.cpus = mc->default_cpus;
->      ms->smp.max_cpus = mc->default_cpus;
-> --
-> 2.33.0
->
->
 
