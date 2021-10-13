@@ -1,46 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1madDO-0000bD-8N
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 08:18:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42338)
+	id 1mafGn-0000fh-Uk
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 10:30:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46368)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1madDM-0000an-IK; Wed, 13 Oct 2021 08:18:32 -0400
-Received: from out28-98.mail.aliyun.com ([115.124.28.98]:39919)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1mafGm-0000fD-8j; Wed, 13 Oct 2021 10:30:12 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:59842)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1madDK-0002lQ-Jr; Wed, 13 Oct 2021 08:18:32 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.194974|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.00827808-0.000510496-0.991211;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047193; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.LYWVTso_1634127503; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LYWVTso_1634127503)
- by smtp.aliyun-inc.com(10.147.42.22); Wed, 13 Oct 2021 20:18:23 +0800
-Subject: Re: [PATCH 02/13] target/riscv: Create RISCVMXL enumeration
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, frederic.petrot@univ-grenoble-alpes.fr,
- qemu-riscv@nongnu.org, fabien.portas@grenoble-inp.org
-References: <20211007174722.929993-1-richard.henderson@linaro.org>
- <20211007174722.929993-3-richard.henderson@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <98ada787-f52c-07bd-4ab4-e92e1a6a9254@c-sky.com>
-Date: Wed, 13 Oct 2021 20:18:23 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1mafGj-0004dQ-SR; Wed, 13 Oct 2021 10:30:11 -0400
+Received: from [192.168.15.165] (unknown [195.68.53.70])
+ by beetle.greensocs.com (Postfix) with ESMTPSA id D0C2721C32;
+ Wed, 13 Oct 2021 14:30:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+ s=mail; t=1634135406;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=z6HgMh5IMSwLEmZN5256moVuZUZTLWR6X/E7D989GAM=;
+ b=1v5ahRx7kFy03JQEDgOMnsn6lCXMTvv/S4+cDS/eYY03VM2Fab7wi/9CaK/uJ+1vtCgm0H
+ djgb9bc2m613XpLeGkEmpMC45AEY450QTrKfNQkbp7R8rGkXeXJIUrvGXVoFt5dFaeY82p
+ KtyNyCsawGqJgUOc6OJpIm0RPipPZhg=
+Message-ID: <11aa7a10-62ec-ebde-030c-5919e36ec34d@greensocs.com>
+Date: Wed, 13 Oct 2021 16:30:05 +0200
 MIME-Version: 1.0
-In-Reply-To: <20211007174722.929993-3-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.98; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-98.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.2
+Subject: Re: [RFC PATCH v2 04/16] softmmu/qdev-monitor: add error handling in
+ qdev_set_id
+Content-Language: en-US-large
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Peter Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin"
+ <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Peter Xu <peterx@redhat.com>, mirela.grujic@greensocs.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
+ Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ "open list:X86" <xen-devel@lists.xenproject.org>, Paul Durrant
+ <paul@xen.org>, Markus Armbruster <armbru@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Mark Burton <mark.burton@greensocs.com>, Edgar Iglesias <edgari@xilinx.com>,
+ Igor Mammedov <imammedo@redhat.com>, Kevin Wolf <kwolf@redhat.com>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+ <20210922161405.140018-5-damien.hedde@greensocs.com>
+ <CAKmqyKNWBYpq8CbhtGyw9=1Gt_LujZZrtD7J_Ye2FyyVA6eqcw@mail.gmail.com>
+From: Damien Hedde <damien.hedde@greensocs.com>
+In-Reply-To: <CAKmqyKNWBYpq8CbhtGyw9=1Gt_LujZZrtD7J_Ye2FyyVA6eqcw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=5.135.226.135;
+ envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -53,37 +76,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2021 12:18:32 -0000
+X-List-Received-Date: Wed, 13 Oct 2021 14:30:12 -0000
 
 
-On 2021/10/8 上午1:47, Richard Henderson wrote:
-> Move the MXL_RV* defines to enumerators.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: LIU Zhiwei<zhiwei_liu@c-sky.com>
 
-Zhiwei
-> ---
->   target/riscv/cpu_bits.h | 8 +++++---
->   1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 999187a9ee..e248c6bf6d 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -364,9 +364,11 @@
->   #define MISA32_MXL          0xC0000000
->   #define MISA64_MXL          0xC000000000000000ULL
->   
-> -#define MXL_RV32            1
-> -#define MXL_RV64            2
-> -#define MXL_RV128           3
-> +typedef enum {
-> +    MXL_RV32  = 1,
-> +    MXL_RV64  = 2,
-> +    MXL_RV128 = 3,
-> +} RISCVMXL;
->   
->   /* sstatus CSR bits */
->   #define SSTATUS_UIE         0x00000001
+On 10/13/21 09:10, Alistair Francis wrote:
+> On Thu, Sep 23, 2021 at 2:29 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
+>>
+>> qdev_set_id() is mostly used when the user adds a device (using
+>> -device cli option or device_add qmp command). This commit adds
+>> an error parameter to handle the case where the given id is
+>> already taken.
+>>
+>> Also document the function and add a return value in order to
+>> be able to capture success/failure: the function now returns the
+>> id in case of success, or NULL in case of failure.
+>>
+>> The commit modifies the 2 calling places (qdev-monitor and
+>> xen-legacy-backend) to add the error object parameter.
+>>
+>> Note that the id is, right now, guaranteed to be unique because
+>> all ids came from the "device" QemuOptsList where the id is used
+>> as key. This addition is a preparation for a future commit which
+>> will relax the uniqueness.
+>>
+>> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+> 
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> 
+> Alistair
+> 
+
+CC'ing Kevin who integrated this patch into his series about
+"qdev: Add JSON -device"
+https://lists.gnu.org/archive/html/qemu-devel/2021-10/msg01826.html
+
+Thanks,
+--
+Damien
 
