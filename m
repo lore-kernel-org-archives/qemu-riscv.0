@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1maYPr-0004so-Hf
-	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 03:11:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45094)
+	id 1maYRy-0006hD-QL
+	for mharc-qemu-riscv@gnu.org; Wed, 13 Oct 2021 03:13:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maYPp-0004pv-Bo; Wed, 13 Oct 2021 03:11:05 -0400
-Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:33669)
+ id 1maYRt-0006fj-IL; Wed, 13 Oct 2021 03:13:16 -0400
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:47102)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1maYPm-0004e0-Va; Wed, 13 Oct 2021 03:11:04 -0400
-Received: by mail-io1-xd2c.google.com with SMTP id n7so1752383iod.0;
- Wed, 13 Oct 2021 00:11:02 -0700 (PDT)
+ id 1maYRr-00076i-Tj; Wed, 13 Oct 2021 03:13:13 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id s17so1647029ioa.13;
+ Wed, 13 Oct 2021 00:13:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PuD4x/quwdKwmCZMAPno27Mt5WkSyZcD2cupRATIQmA=;
- b=hUpeBm07ZhmU+R92qTIFSrBL14OeFHZ6uD4IZbV6GtgXTzhgOqStOEWSiPJEWuGj4t
- 4zuWiSkqFTm3AGGU2NR38KTYSKWPxOtEcdS4Ai/3r1akHkT61Jp+XPc9Zl1qrzwNyPwA
- TnX/xusNsfu2j+x4p6dymMk+gwlKDmH0z9qb8RZ1yOpGX8JaH+u2u3i10cFfQzzpQZKA
- gzhXJSBzjJDyKX/O/RiXSwFRjlfOrTHayIFv4RaRpmQwTkqpQYJmnggmAwOE8fiqTWjc
- lItwI007UCAJqN+GP5GKmGAqMrKlXFHSwRjzOn5t6E5+kri8uC+0X+pm6KhlPDRrs3ON
- wktA==
+ :cc; bh=KHB4g6o0LeMzf6QhsqguIIRvH+olg3UnDhoJaR0aLNA=;
+ b=avPTWRvD87X49NZcwlii0xdmVFI41b1HDJTeSUpV6LTstZj5FMBkZDEpcCnnV6wh09
+ tkLv9db1x07e+t/oQyZn8p2e1N6gQiet1Pbm4ckl21olRRwSML+IJtPQ5J3XScYpq+mI
+ JgiVbyQ7DFL7gdytixxEnQzk/i9FfuXjXfHvxwZBmRQWVR1ZzV+6Vgo4XssTxxUy0s6A
+ MhZTjzoA5tZ8zJIWwjFjdo/7wfq4BkqVbsSWPrnHVJxA1rQCHHwxVPBYM9oKV14JGha3
+ iZkQZGbR9s1yGyXVp/0KymzoP6LIaXMT1lzaITBayQAvzJwYyt4vLlVJlm4V3pmjWU+3
+ dLog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=PuD4x/quwdKwmCZMAPno27Mt5WkSyZcD2cupRATIQmA=;
- b=upF2L0ojohxLrIj6Q/6kz8pOFOxt1Tebkvl25cSG8+nnaVzu5e8aPSRORhDLJe+1cV
- Mgk6sg+sGjoe+hg2bzDeWmrylYMQOakKowOgwsq0QmqKfLWcGNopGixDJBJxrUkd4hP8
- xbgzN6nPGja6xhMpuvbQovw5cH529DU7Mmvf5aqMDhmYF4KfB26DH/8WXieJ3N5hzIfZ
- 34mzQI9gS6/y5wGwtSBrS89A0QukXPpwxHHC+4WWZxZabnW7lSxYm/f7isi7HdY5FCFj
- j3LXNBlJAjWyFIZNHhY7IGWsaDWrGgRJpQecIrAvyPLWopX5hmXp2JNt4bjzDX95ho+X
- iJMQ==
-X-Gm-Message-State: AOAM532lK/8/fRKx48u92ISj6j3NmqvkSnXTj4nXdpKY/gxtSFlALX0j
- /8pzhju5f2DrmRZUBBIVrIi1uFsNFV6a4D6A9WE=
-X-Google-Smtp-Source: ABdhPJzyNaV6p60H1ka7FNoMSrAfpLbPjQqSVej3WyYM+u5LpMnq8d8d2K/hoKgv951cKI2obB3JFtyY4qhuLjUoOBw=
-X-Received: by 2002:a05:6638:9a:: with SMTP id
- v26mr11895732jao.18.1634109061530; 
- Wed, 13 Oct 2021 00:11:01 -0700 (PDT)
+ bh=KHB4g6o0LeMzf6QhsqguIIRvH+olg3UnDhoJaR0aLNA=;
+ b=PyR+SHOY/TKk65xQt++xRy+GVRg347AefTHG23YA3euv2da73TSAARm3+4I09FioV0
+ 65K6D+29B5YuWfOc+Dwvz+izAL7hKIrTvYlG3gMCDkFUnW50sApETRGvncO4vmY16590
+ VPbIO5zIPgS5ckQi2Ek+xVccFU4fjOouk47o0ezOoDEQzh9xohf4Ab4bn2crPkQazBCy
+ Iw00vKldn9G0thK6efdexpyuXSece2Y/mbRXtIOt8qLMctJGg8I1q3ttcECq7YDWB5rt
+ wV82Po9+HN6ONmrvxiQ/frl+a1vLPFZiiSzA/MqZ7N+UJmSWJjHbyNzt1E3y2dtLs+zb
+ /GdQ==
+X-Gm-Message-State: AOAM530kKvX7nM893pauJnrDT4+1EaWSr05nA32NOeWUAlz4UrmLrfmV
+ tXUwQBihkx5LR+zE+ll09e0DYpRr2KYpjT51KLQ=
+X-Google-Smtp-Source: ABdhPJwAerQBrE6h1mAcc8a9ejLtUsRNqYkv/iKjXq1q0SyzeWPOBrz+6jeH+TXpXPz1j01S6PDyDckoOD1oFZSZOyY=
+X-Received: by 2002:a05:6602:2e8c:: with SMTP id
+ m12mr8986722iow.91.1634109190435; 
+ Wed, 13 Oct 2021 00:13:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <20210922161405.140018-5-damien.hedde@greensocs.com>
-In-Reply-To: <20210922161405.140018-5-damien.hedde@greensocs.com>
+ <20210922161405.140018-12-damien.hedde@greensocs.com>
+In-Reply-To: <20210922161405.140018-12-damien.hedde@greensocs.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 13 Oct 2021 17:10:35 +1000
-Message-ID: <CAKmqyKNWBYpq8CbhtGyw9=1Gt_LujZZrtD7J_Ye2FyyVA6eqcw@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 04/16] softmmu/qdev-monitor: add error handling in
- qdev_set_id
+Date: Wed, 13 Oct 2021 17:12:44 +1000
+Message-ID: <CAKmqyKMP5-8wGY6vFEXeiCgrJQhZRQWcYvyqbEihjCkv1bYEhQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 11/16] softmmu/memory: add
+ memory_region_try_add_subregion function
 To: Damien Hedde <damien.hedde@greensocs.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Peter Maydell <peter.maydell@linaro.org>, 
@@ -67,8 +67,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Mark Burton <mark.burton@greensocs.com>, Edgar Iglesias <edgari@xilinx.com>, 
  Igor Mammedov <imammedo@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -89,26 +89,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Oct 2021 07:11:06 -0000
+X-List-Received-Date: Wed, 13 Oct 2021 07:13:17 -0000
 
 On Thu, Sep 23, 2021 at 2:29 AM Damien Hedde <damien.hedde@greensocs.com> wrote:
 >
-> qdev_set_id() is mostly used when the user adds a device (using
-> -device cli option or device_add qmp command). This commit adds
-> an error parameter to handle the case where the given id is
-> already taken.
+> It allows to try to add a subregion to a memory region with error
+> handling. Like memory_region_add_subregion_overlap, it handles
+> priority as well.
+> Apart the error handling, the behavior is the same. It can be used
+> to do the simple memory_region_add_subregion() (with no overlap) by
+> setting the priority parameter to 0.
 >
-> Also document the function and add a return value in order to
-> be able to capture success/failure: the function now returns the
-> id in case of success, or NULL in case of failure.
->
-> The commit modifies the 2 calling places (qdev-monitor and
-> xen-legacy-backend) to add the error object parameter.
->
-> Note that the id is, right now, guaranteed to be unique because
-> all ids came from the "device" QemuOptsList where the id is used
-> as key. This addition is a preparation for a future commit which
-> will relax the uniqueness.
+> This commit is a preparation to further use this function in the
+> context of qmp command which needs error handling support.
 >
 > Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 
@@ -117,123 +110,98 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  include/monitor/qdev.h      | 25 +++++++++++++++++++++++-
->  hw/xen/xen-legacy-backend.c |  3 ++-
->  softmmu/qdev-monitor.c      | 38 +++++++++++++++++++++++++++----------
->  3 files changed, 54 insertions(+), 12 deletions(-)
 >
-> diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
-> index eaa947d73a..23c31f5296 100644
-> --- a/include/monitor/qdev.h
-> +++ b/include/monitor/qdev.h
-> @@ -9,6 +9,29 @@ void qmp_device_add(QDict *qdict, QObject **ret_data, Error **errp);
+> Adding a new function is obviously not ideal. But there is ~900
+> occurrences of memory_region_add_subregion[_overlap] calls in the code
+> base. We do not really see an alternative here.
+> ---
+>  include/exec/memory.h | 22 ++++++++++++++++++++++
+>  softmmu/memory.c      | 22 ++++++++++++++--------
+>  2 files changed, 36 insertions(+), 8 deletions(-)
 >
->  int qdev_device_help(QemuOpts *opts);
->  DeviceState *qdev_device_add(QemuOpts *opts, Error **errp);
-> -void qdev_set_id(DeviceState *dev, const char *id);
-> +
+> diff --git a/include/exec/memory.h b/include/exec/memory.h
+> index c3d417d317..422e1eda67 100644
+> --- a/include/exec/memory.h
+> +++ b/include/exec/memory.h
+> @@ -2162,6 +2162,28 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+>                                           MemoryRegion *subregion,
+>                                           int priority);
+>
 > +/**
-> + * qdev_set_id: parent the device and set its id if provided.
-> + * @dev: device to handle
-> + * @id: id to be given to the device, or NULL.
+> + * memory_region_try_add_subregion: Add a subregion to a container
+> + *                                  with error handling.
 > + *
-> + * Returns: the id of the device in case of success; otherwise NULL.
+> + * Behaves like memory_region_add_subregion_overlap(), but errors are
+> + * reported if the subregion cannot be added.
 > + *
-> + * @dev must be unrealized, unparented and must not have an id.
+> + * @mr: the region to contain the new subregion; must be a container
+> + *      initialized with memory_region_init().
+> + * @offset: the offset relative to @mr where @subregion is added.
+> + * @subregion: the subregion to be added.
+> + * @priority: used for resolving overlaps; highest priority wins.
+> + * @errp: pointer to Error*, to store an error if it happens.
 > + *
-> + * If @id is non-NULL, this function tries to setup @dev qom path as
-> + * "/peripheral/id". If @id is already taken, it fails. If it succeeds,
-> + * the id field of @dev is set to @id (@dev now owns the given @id
-> + * parameter).
-> + *
-> + * If @id is NULL, this function generates a unique name and setups @dev
-> + * qom path as "/peripheral-anon/name". This name is not set as the id
-> + * of @dev.
-> + *
-> + * Upon success, it returns the id/name (generated or provided). The
-> + * returned string is owned by the corresponding child property and must
-> + * not be freed by the caller.
+> + * Returns: True in case of success, false otherwise.
 > + */
-> +const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp);
->
->  #endif
-> diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-> index dd8ae1452d..f541cfa0e9 100644
-> --- a/hw/xen/xen-legacy-backend.c
-> +++ b/hw/xen/xen-legacy-backend.c
-> @@ -276,7 +276,8 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
->      xendev = g_malloc0(ops->size);
->      object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
->      OBJECT(xendev)->free = g_free;
-> -    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev));
-> +    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
-> +                &error_fatal);
->      qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
->      object_unref(OBJECT(xendev));
->
-> diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
-> index 25275984bd..0007698ff3 100644
-> --- a/softmmu/qdev-monitor.c
-> +++ b/softmmu/qdev-monitor.c
-> @@ -578,22 +578,34 @@ static BusState *qbus_find(const char *path, Error **errp)
->      return bus;
+> +bool memory_region_try_add_subregion(MemoryRegion *mr,
+> +                                     hwaddr offset,
+> +                                     MemoryRegion *subregion,
+> +                                     int priority,
+> +                                     Error **errp);
+> +
+>  /**
+>   * memory_region_get_ram_addr: Get the ram address associated with a memory
+>   *                             region
+> diff --git a/softmmu/memory.c b/softmmu/memory.c
+> index bfedaf9c4d..eac61f8236 100644
+> --- a/softmmu/memory.c
+> +++ b/softmmu/memory.c
+> @@ -2513,22 +2513,28 @@ done:
+>      memory_region_transaction_commit();
 >  }
 >
-> -void qdev_set_id(DeviceState *dev, const char *id)
-> +const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp)
+> -static void memory_region_add_subregion_common(MemoryRegion *mr,
+> -                                               hwaddr offset,
+> -                                               MemoryRegion *subregion)
+> +bool memory_region_try_add_subregion(MemoryRegion *mr,
+> +                                     hwaddr offset,
+> +                                     MemoryRegion *subregion,
+> +                                     int priority,
+> +                                     Error **errp)
 >  {
-> +    ObjectProperty *prop;
-> +
-> +    assert(!dev->id && !dev->realized);
-> +
-> +    /*
-> +     * object_property_[try_]add_child() below will assert the device
-> +     * has no parent
-> +     */
->      if (id) {
-> -        dev->id = id;
-> -    }
-> -
-> -    if (dev->id) {
-> -        object_property_add_child(qdev_get_peripheral(), dev->id,
-> -                                  OBJECT(dev));
-> +        prop = object_property_try_add_child(qdev_get_peripheral(), id,
-> +                                             OBJECT(dev), NULL);
-> +        if (prop) {
-> +            dev->id = id;
-> +        } else {
-> +            error_setg(errp, "Duplicate device ID '%s'", id);
-> +            return NULL;
-> +        }
->      } else {
->          static int anon_count;
->          gchar *name = g_strdup_printf("device[%d]", anon_count++);
-> -        object_property_add_child(qdev_get_peripheral_anon(), name,
-> -                                  OBJECT(dev));
-> +        prop = object_property_add_child(qdev_get_peripheral_anon(), name,
-> +                                         OBJECT(dev));
->          g_free(name);
->      }
-> +
-> +    return prop->name;
+> -    assert(!subregion->container);
+> +    if (subregion->container) {
+> +        error_setg(errp, "The memory region is already in another region");
+> +        return false;
+> +    }
+> +    subregion->priority = priority;
+>      subregion->container = mr;
+>      subregion->addr = offset;
+>      memory_region_update_container_subregions(subregion);
+> +    return true;
 >  }
 >
->  DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
-> @@ -677,7 +689,13 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
->          }
->      }
+>  void memory_region_add_subregion(MemoryRegion *mr,
+>                                   hwaddr offset,
+>                                   MemoryRegion *subregion)
+>  {
+> -    subregion->priority = 0;
+> -    memory_region_add_subregion_common(mr, offset, subregion);
+> +    memory_region_try_add_subregion(mr, offset, subregion, 0, &error_abort);
+>  }
 >
-> -    qdev_set_id(dev, qemu_opts_id(opts));
-> +    /*
-> +     * set dev's parent and register its id.
-> +     * If it fails it means the id is already taken.
-> +     */
-> +    if (!qdev_set_id(dev, qemu_opts_id(opts), errp)) {
-> +        goto err_del_dev;
-> +    }
+>  void memory_region_add_subregion_overlap(MemoryRegion *mr,
+> @@ -2536,8 +2542,8 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+>                                           MemoryRegion *subregion,
+>                                           int priority)
+>  {
+> -    subregion->priority = priority;
+> -    memory_region_add_subregion_common(mr, offset, subregion);
+> +    memory_region_try_add_subregion(mr, offset, subregion, priority,
+> +                                    &error_abort);
+>  }
 >
->      /* set properties */
->      if (qemu_opt_foreach(opts, set_property, dev, errp)) {
+>  void memory_region_del_subregion(MemoryRegion *mr,
 > --
 > 2.33.0
 >
