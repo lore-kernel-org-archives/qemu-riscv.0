@@ -1,77 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mb3AW-0001tv-6x
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Oct 2021 12:01:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55266)
+	id 1mb3Ld-0001YQ-0a
+	for mharc-qemu-riscv@gnu.org; Thu, 14 Oct 2021 12:12:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58214)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mb3AS-0001q7-E2
- for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:01:16 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:36567)
+ id 1mb3La-0001R8-Rm
+ for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:12:46 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:36624)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mb3AN-0007Zl-L8
- for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:01:16 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id m26so5864533pff.3
- for <qemu-riscv@nongnu.org>; Thu, 14 Oct 2021 09:01:11 -0700 (PDT)
+ id 1mb3LX-00026f-Kc
+ for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:12:45 -0400
+Received: by mail-pl1-x636.google.com with SMTP id f21so4513100plb.3
+ for <qemu-riscv@nongnu.org>; Thu, 14 Oct 2021 09:12:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=PWTffnLimTOQMbGYWfQUNstE176YL1dnvKO/TatQ8A8=;
- b=bEh3SB8idaEh6tWQ0SZxLXCDL/ZT439bj4HqUZnCeebhUA5y4HOOazsVa+tVAE1Nnm
- BNic/gE2ZtUKgouXQohwAG+Q9bAAKxJmAeXKHCmWJUX7/+Y6G851UAwu44NB7vif+KTW
- Q9uYAc7N0dKO7X0ZOT/J8uWul3m5Ph7NJGuKp/xmRMw4jAyaZQTTzP0GMF6tR1d7tb4v
- tJ5XH/qymhf177xp4JfkX77kFVjlU39+NIaRJQIl3fonsyeFMKlLO8zmc19FZ7bJ8Yva
- RAdqZ57aaM5E28JXmHYOK/L6ZI7hGY3KwcjTpy4FlMasO4P4XplcMkmfjNLKN+nhQJbq
- 8q4w==
+ bh=p3Dj4DjSOZU1SnjcfNpMQSf0C1HjyE25l+QOHio3gdA=;
+ b=Dq639fgR82rp7lN1Eq0d/GghXOf5s6zmDiSBCemQi5L5zmsgPlmTTco0HD5PSREjPx
+ mNQdVtDb8h9EfNaAhImYarzeq1BLVu7hE3uLhA+e7Q+32sb3mBlQaTuhQLqOPIqGstr5
+ w/rKaKalwb24I4DYxyVy3KUBZNexmVrmeWks/zkc2WveVHar6ulM9N2p4k9av+uINdn8
+ 8chSGTSTsyr+28yXjJ6jE3UtnjoxnRlsw2RQ/4985D3PjUznt6x3VVwpEEe9TUrJrhqH
+ KPI5tWYNKZSTLXWGDoGcKlH0SspHLJaKhAEwRt+h7ByM+CN1hntB5fGfi+tDsORQHLxC
+ jYkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=PWTffnLimTOQMbGYWfQUNstE176YL1dnvKO/TatQ8A8=;
- b=HRtO+TOvP6sggt6T/pIE9ezxaqE6kwc/9Xo67mXrtROcTUOwT3/fmAf9wA84S74XF4
- 9Jz8F7/03wcQxiMpkTOSVeAwfNQEAUAXCesPnpBgLI8qQmOI9TH5Rrcx49k5oeS79vwz
- vz0rQiiBCkad911mgDLP6iho1fJ8W35lJPNl8StzoHABpEc2dupdwSoIR+D9TIxjm5ZC
- 5/xuGIigu4FHlWk5gDl/Z27nyhIMw67QgLJR6EcYqnUc1/eZeZqAiSB4ksFTLsdycWJb
- NJ777mGwemGcLUsPOv1ETVRwOM8c/XyloD1VsVcmD7GpDBT5kV+v/b2RpR+PhVJPoKsm
- 8WYQ==
-X-Gm-Message-State: AOAM5306BAVRyKx56QTMjKbDgC+x+xQ/yodhs/fr2A1STv/7DYZOI8ph
- MZrO69lCWK1qpbiEVovtPqqEUQ==
-X-Google-Smtp-Source: ABdhPJxB6M5DH6fbBEOWQMq6l+tA8TqLyVrtXwzgOd3M5yAPxFXQnF8lBqeDzLgxcrVXw+02AGXp7w==
-X-Received: by 2002:a05:6a00:168c:b0:44c:dc5a:7ee0 with SMTP id
- k12-20020a056a00168c00b0044cdc5a7ee0mr5944091pfc.40.1634227269786; 
- Thu, 14 Oct 2021 09:01:09 -0700 (PDT)
+ bh=p3Dj4DjSOZU1SnjcfNpMQSf0C1HjyE25l+QOHio3gdA=;
+ b=ORazNWFRGBQLcTPbN3JFutiH1Atm3okFPyewenykqOnY2JVPjIAcRc1exun0rC8rwq
+ 4L2wJKUptNlaHNeeXOtGfNZc+B/jJf7+sRK3MmgGdZlAcrRnTpzOh7MBDtg2a84U/2xx
+ 9ZYP+YenTlrUthMI64WnQIc3PiWZLoIvn8uTOcOjOl0Y01BHLTnzlM5u5+dMNXP+8Ohn
+ x3H2cX0sgMt0T9Q6nn0Up1SlBu3kHFjpRVQYiDwvIFG3kLKAnSaj48iQzqGb6bMTnpTS
+ Smww7ZvlDwt7Ov8/PwNUD42uhNaP+IXK5WuHzzFn9VrozTTRsWp7eRRsznaJZdUf91r6
+ Klng==
+X-Gm-Message-State: AOAM530VYwLXspUpd+TkuBhM0G8lFlGCAgjsQMpOcFE1PsQ6LXvzAWA9
+ +TlqdRfk6+PMEolngkg0YijevQ==
+X-Google-Smtp-Source: ABdhPJxb9y+q4ZbzkxF0IsaKaP9nG/T7S3pwlbntMDIdg7BeVmRgRigV+eMIdOeVlsJ/esSLf4qU7g==
+X-Received: by 2002:a17:902:9887:b0:13f:7704:425f with SMTP id
+ s7-20020a170902988700b0013f7704425fmr5895466plp.20.1634227961925; 
+ Thu, 14 Oct 2021 09:12:41 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id s17sm2812862pge.50.2021.10.14.09.01.09
+ by smtp.gmail.com with ESMTPSA id u66sm3080474pfc.114.2021.10.14.09.12.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Oct 2021 09:01:09 -0700 (PDT)
-Subject: Re: [PATCH v2 04/13] target/riscv: Replace riscv_cpu_is_32bit with
- riscv_cpu_mxl
+ Thu, 14 Oct 2021 09:12:41 -0700 (PDT)
+Subject: Re: [PATCH v2 05/13] target/riscv: Add MXL/SXL/UXL to TB_FLAGS
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  frederic.petrot@univ-grenoble-alpes.fr, fabien.portas@grenoble-inp.org
 References: <20211013205104.1031679-1-richard.henderson@linaro.org>
- <20211013205104.1031679-5-richard.henderson@linaro.org>
- <fe624f35-b12a-ad57-fabd-9eb47a0e3c6f@c-sky.com>
+ <20211013205104.1031679-6-richard.henderson@linaro.org>
+ <33bfbaa0-45d4-2f58-36dc-9ff7a117489b@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <a64a991f-8692-8dd5-c69e-6541a2e60e06@linaro.org>
-Date: Thu, 14 Oct 2021 09:01:07 -0700
+Message-ID: <b21879ab-8541-a703-e6f5-b5550adb2e4a@linaro.org>
+Date: Thu, 14 Oct 2021 09:12:39 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <fe624f35-b12a-ad57-fabd-9eb47a0e3c6f@c-sky.com>
+In-Reply-To: <33bfbaa0-45d4-2f58-36dc-9ff7a117489b@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,70 +83,63 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2021 16:01:17 -0000
+X-List-Received-Date: Thu, 14 Oct 2021 16:12:47 -0000
 
-On 10/14/21 12:08 AM, LIU Zhiwei wrote:
+On 10/14/21 1:20 AM, LIU Zhiwei wrote:
 > 
 > On 2021/10/14 上午4:50, Richard Henderson wrote:
->> Shortly, the set of supported XL will not be just 32 and 64,
->> and representing that properly using the enumeration will be
->> imperative.
->>
->> Two places, booting and gdb, intentionally use misa_mxl_max
->> to emphasize the use of the reset value of misa.mxl, and not
->> the current cpu state.
+>> Begin adding support for switching XLEN at runtime.  Extract the
+>> effective XLEN from MISA and MSTATUS and store for use during translation.
 >>
 >> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 >> ---
->>   target/riscv/cpu.h            |  9 ++++++++-
->>   hw/riscv/boot.c               |  2 +-
->>   semihosting/arm-compat-semi.c |  2 +-
->>   target/riscv/cpu.c            | 24 ++++++++++++++----------
->>   target/riscv/cpu_helper.c     | 12 ++++++------
->>   target/riscv/csr.c            | 24 ++++++++++++------------
->>   target/riscv/gdbstub.c        |  2 +-
->>   target/riscv/monitor.c        |  4 ++--
->>   8 files changed, 45 insertions(+), 34 deletions(-)
+>> v2: Force SXL and UXL to valid values.
+>> ---
+>>   target/riscv/cpu.h        |  2 ++
+>>   target/riscv/cpu.c        |  8 ++++++++
+>>   target/riscv/cpu_helper.c | 33 +++++++++++++++++++++++++++++++++
+>>   target/riscv/csr.c        |  3 +++
+>>   target/riscv/translate.c  |  2 +-
+>>   5 files changed, 47 insertions(+), 1 deletion(-)
 >>
 >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index e708fcc168..87248b562a 100644
+>> index 87248b562a..445ba5b395 100644
 >> --- a/target/riscv/cpu.h
 >> +++ b/target/riscv/cpu.h
->> @@ -396,7 +396,14 @@ FIELD(TB_FLAGS, VILL, 8, 1)
+>> @@ -395,6 +395,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
+>>   /* Is a Hypervisor instruction load/store allowed? */
 >>   FIELD(TB_FLAGS, HLSX, 9, 1)
 >>   FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
->> -bool riscv_cpu_is_32bit(CPURISCVState *env);
->> +#ifdef CONFIG_RISCV32
->> +#define riscv_cpu_mxl(env)      MXL_RV32
->> +#else
->> +static inline RISCVMXL riscv_cpu_mxl(CPURISCVState *env)
->> +{
->> +    return env->misa_mxl;
->> +}
->> +#endif
+>> +/* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
+>> +FIELD(TB_FLAGS, XL, 12, 2)
+>>   #ifdef CONFIG_RISCV32
+>>   #define riscv_cpu_mxl(env)      MXL_RV32
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 1857670a69..840edd66f8 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -355,6 +355,14 @@ static void riscv_cpu_reset(DeviceState *dev)
+>>       env->misa_mxl = env->misa_mxl_max;
+>>       env->priv = PRV_M;
+>>       env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>> +    if (env->misa_mxl > MXL_RV32) {
+>> +        /*
+>> +         * The reset status of SXL/UXL is officially undefined,
+>> +         * but invalid settings would result in a tcg assert.
+>> +         */
+>> +        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
+>> +        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
+>> +    }
 > 
-> Hi Richard,
-> 
-> I don't know why we use CONFIG_RISCV32 here. I looked through the target source code. It 
-> doesn't use this macro before.
+> Can you give more explanation about the assert? As the cpu will always reset to M mode, I 
+> think we can omit the the setting of UXL or SXL.
 
-Typo, should be TARGET_RISCV32.
+The mstatus csr is WARL, which means that we should always be able to read a valid value. 
+  On init, these fields will still be 0, which isn't right.
 
-But the reason to have the ifdef is so that riscv_cpu_mxl becomes a constant and the 
-compiler can fold away more code.
-
->>   bool riscv_is_32bit(RISCVHartArrayState *harts)
->>   {
->> -    return riscv_cpu_is_32bit(&harts->harts[0].env);
->> +    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
-> 
-> Why not use  misa_mxl  here?  As this is just a replacement of riscv_cpu_is_32bit like 
-> many other places.
-
-It isn't clear to me that all uses of this are at boot time.  Once MXL may be changed at 
-runtime, that (potentially) changes this test, and it seems unlikely that the board would 
-really change based on the current status of the cpu.
-
+I guess the assert that I was considering can't really happen, because we'd need to write 
+to mstatus to exit M-mode, and write_mstatus will force these fields to the correct value 
+(as found by Frederic).
 
 r~
 
