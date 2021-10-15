@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbStt-0008SC-Nx
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 15:29:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53168)
+	id 1mbStw-0008T8-2F
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 15:29:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53166)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mbStm-0008KN-Tj; Fri, 15 Oct 2021 15:29:46 -0400
-Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a]:43930)
+ id 1mbStm-0008Jk-Ou; Fri, 15 Oct 2021 15:29:46 -0400
+Received: from mail-lf1-x129.google.com ([2a00:1450:4864:20::129]:44981)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mbStk-0008Qt-Ch; Fri, 15 Oct 2021 15:29:46 -0400
-Received: by mail-lf1-x12a.google.com with SMTP id r19so44767809lfe.10;
- Fri, 15 Oct 2021 12:29:43 -0700 (PDT)
+ id 1mbSti-0008PV-J1; Fri, 15 Oct 2021 15:29:45 -0400
+Received: by mail-lf1-x129.google.com with SMTP id y26so46057747lfa.11;
+ Fri, 15 Oct 2021 12:29:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=K05JcbwHzwcb6rZL7rDmh7yc1UsvDdWX5/9rOusuP/8=;
- b=HoSRjFMdNmaw/BW65xbn1+1yJD4y9356MMNRNCTECtEMZnwD4dqKlHzG+Gnb1TLMSP
- ifBaWrhBC5lBBwSHwEELDyMJF2FDD+NTfn6uH2psS33eSl8QB+M2dc08qjfMQNqYHk6v
- 5SO+afrSFSLx4Ckkbrsb1e+ntKagXNXbnmlvPuIj27c5qbiNPHgo2gyJrVNBpypcKyMi
- 0Kk1XbN/2gWBAuNw9WYl2XiL0L/AjfLJv8QcG4ppeeSwzQzIVOvnIu6Pmjt/BrR5Znjg
- 8z57r9uw3H7HlBxr9d07gcOtQgswVYbVINbDT9ubUqKp45k2QbqbdlfhQuTHGVuOMWmR
- YCsA==
+ bh=nh0iqXUy8y/Ubp2h94AICbKWAgloggmfwv7+BDo9syA=;
+ b=e3ZNE99mXzLpKjDX705QMrCGfImQMVUErFJ6qG6VeqnB5tuneDG4McElGswUhxNSKq
+ LOknxLptGZ/8i1h2gk/2f4Q2sQxmyXH08tuh0bXU7W8Zjo7etAXV8QH+9b9w2PSvXbgs
+ k1nCEB/xSITmjKFtvrmMzW5BmmhuB2aeJRvDjqjeDTTUE3XA/M86TDNWDaPP7hZopLyZ
+ pqEJ9L8A8wBiKYKX3A+x7iBfpAXbthOwl9+2NciFT+0shm/vTInQrgxlvvKZaOTLga+l
+ a5KZ1Obtk5xd1DMC6wQdsap/Q/0TnWrOFPKlH59XbjQmkw2xsCIsrzikKSAZa8lAsQmu
+ Cy9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=K05JcbwHzwcb6rZL7rDmh7yc1UsvDdWX5/9rOusuP/8=;
- b=3APFR9ss9W+YpLxfiZI0yxjPO3SoRCa74lQcFmw8N6Ykr4fRAhB7K/LKBjbzyAYkK3
- wI7X294KCgsWmkiuJkqZE1dAzgB+EnuIO69XMPtBTLrUqUI4TjNcmwvRaTzA6rYlhir6
- wPcUrjnGCvWthhg2mXe4ka8pmp/CHUjsC4gruIVMwmMw7O9hWko0pnMK5pZ98L9LsLry
- EhVJUZ+WUs4srcZzTjCmZE678Y0J1o2dzIKSKCjpnYcYE39Bhp0zzKer/cPA5MtgUaXH
- aLz0JT7N0ioDnFuCVot4svQ+B91iC5XvbD8qf1iIeJ/yRW90NfT59lb+Z7PNqGRelMTI
- 9s/A==
-X-Gm-Message-State: AOAM532j+e2P/5ma1YHzQmh9u7LwRYJT5DBfCKhLbBIhrUgUQaA48sax
- MpyZTgcne7FEGmW2P1L4Fsc=
-X-Google-Smtp-Source: ABdhPJwtgELK2Zl1EB/9AqqbLEkTHDdQj+W1ZNwg5vwBA2bmew8/+kcuIUXcMoOyg4S9R9n33Pnwrw==
-X-Received: by 2002:a2e:bd11:: with SMTP id n17mr6876385ljq.273.1634326182332; 
- Fri, 15 Oct 2021 12:29:42 -0700 (PDT)
+ bh=nh0iqXUy8y/Ubp2h94AICbKWAgloggmfwv7+BDo9syA=;
+ b=MaUdHm9YF1MhbX76QLPyD1NZDocwHtr2eJOAEtROm5pJzFQoayrdWqnBcZlsFp3h+C
+ peCXxc2ycuKKebE2yFUDv3ZrqMSuooF8x4+UV/bMzBHsJtQMPYu4TN4CHi0e5/wk5sEd
+ 6fMIkqK905YWZQCedhwGgglFkeaS1DdTGM7j/IJj0LztfbTbMlHpsY3ewa7pG8roNBhM
+ iJyEtRJ+LBCauky0q+f/FcPVdE+jXdqTZgREYUftF1b+7VrCF/KzukhqGo6jI2BJDcqy
+ Bw991ZWnYWBPq3U6Q658K8+9w0U98Y60wnR6WPoq1oW6rh6k5ySCF8W01imDNp8sebwf
+ a9QA==
+X-Gm-Message-State: AOAM533tRdguuOEpVkJG7/m57l3skHEQw9o1P0sBZZnmODAtZy9wS37D
+ 7gnuThUOGkd4bBiri8HHeo4=
+X-Google-Smtp-Source: ABdhPJw7HWmoFv80kDLyIwAFrnKD92OsC+DssW9VaJzvtowqPOZi9/yp/1gNhI4QgmIjvb2CcV10pg==
+X-Received: by 2002:a2e:82c7:: with SMTP id n7mr14357215ljh.352.1634326180720; 
+ Fri, 15 Oct 2021 12:29:40 -0700 (PDT)
 Received: from neptune.lab ([46.39.228.224])
- by smtp.googlemail.com with ESMTPSA id n19sm527261lfu.207.2021.10.15.12.29.41
+ by smtp.googlemail.com with ESMTPSA id n19sm527261lfu.207.2021.10.15.12.29.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Oct 2021 12:29:41 -0700 (PDT)
+ Fri, 15 Oct 2021 12:29:40 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -50,23 +50,23 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v13 4/7] [RISCV_PM] Print new PM CSRs in QEMU logs
-Date: Fri, 15 Oct 2021 22:29:28 +0300
-Message-Id: <20211015192931.227387-5-space.monkey.delivers@gmail.com>
+Subject: [PATCH v13 2/7] [RISCV_PM] Add CSR defines for RISC-V PM extension
+Date: Fri, 15 Oct 2021 22:29:26 +0300
+Message-Id: <20211015192931.227387-3-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211015192931.227387-1-space.monkey.delivers@gmail.com>
 References: <20211015192931.227387-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x12a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::129;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x129.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,48 +82,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 X-List-Received-Date: Fri, 15 Oct 2021 19:29:47 -0000
 
 Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ target/riscv/cpu_bits.h | 96 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 75e8b8ca83..7f9dde70b7 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -295,6 +295,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "satp    ", env->satp);
-+    if (riscv_has_ext(env, RVJ)) {
-+        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
-+        switch (env->priv) {
-+        case PRV_U:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
-+                         env->upmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
-+                         env->upmmask);
-+            break;
-+        case PRV_S:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
-+                         env->spmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
-+                         env->spmmask);
-+            break;
-+        case PRV_M:
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
-+                         env->mpmbase);
-+            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
-+                         env->mpmmask);
-+            break;
-+        default:
-+            g_assert_not_reached();
-+        }
-+    }
- #endif
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 999187a9ee..1a3767804a 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -334,6 +334,38 @@
+ #define CSR_MHPMCOUNTER30H  0xb9e
+ #define CSR_MHPMCOUNTER31H  0xb9f
  
-     for (i = 0; i < 32; i++) {
++/*
++ * User PointerMasking registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_UMTE            0x4c0
++#define CSR_UPMMASK         0x4c1
++#define CSR_UPMBASE         0x4c2
++
++/*
++ * Machine PointerMasking registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_MMTE            0x3c0
++#define CSR_MPMMASK         0x3c1
++#define CSR_MPMBASE         0x3c2
++
++/*
++ * Supervisor PointerMaster registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_SMTE            0x1c0
++#define CSR_SPMMASK         0x1c1
++#define CSR_SPMBASE         0x1c2
++
++/*
++ * Hypervisor PointerMaster registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_VSMTE           0x2c0
++#define CSR_VSPMMASK        0x2c1
++#define CSR_VSPMBASE        0x2c2
++
+ /* mstatus CSR bits */
+ #define MSTATUS_UIE         0x00000001
+ #define MSTATUS_SIE         0x00000002
+@@ -531,4 +563,68 @@ typedef enum RISCVException {
+ #define MIE_UTIE                           (1 << IRQ_U_TIMER)
+ #define MIE_SSIE                           (1 << IRQ_S_SOFT)
+ #define MIE_USIE                           (1 << IRQ_U_SOFT)
++
++/* General PointerMasking CSR bits*/
++#define PM_ENABLE       0x00000001ULL
++#define PM_CURRENT      0x00000002ULL
++#define PM_INSN         0x00000004ULL
++#define PM_XS_MASK      0x00000003ULL
++
++/* PointerMasking XS bits values */
++#define PM_EXT_DISABLE  0x00000000ULL
++#define PM_EXT_INITIAL  0x00000001ULL
++#define PM_EXT_CLEAN    0x00000002ULL
++#define PM_EXT_DIRTY    0x00000003ULL
++
++/* Offsets for every pair of control bits per each priv level */
++#define XS_OFFSET    0ULL
++#define U_OFFSET     2ULL
++#define S_OFFSET     5ULL
++#define M_OFFSET     8ULL
++
++#define PM_XS_BITS   (PM_XS_MASK << XS_OFFSET)
++#define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
++#define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
++#define U_PM_INSN    (PM_INSN    << U_OFFSET)
++#define S_PM_ENABLE  (PM_ENABLE  << S_OFFSET)
++#define S_PM_CURRENT (PM_CURRENT << S_OFFSET)
++#define S_PM_INSN    (PM_INSN    << S_OFFSET)
++#define M_PM_ENABLE  (PM_ENABLE  << M_OFFSET)
++#define M_PM_CURRENT (PM_CURRENT << M_OFFSET)
++#define M_PM_INSN    (PM_INSN    << M_OFFSET)
++
++/* mmte CSR bits */
++#define MMTE_PM_XS_BITS     PM_XS_BITS
++#define MMTE_U_PM_ENABLE    U_PM_ENABLE
++#define MMTE_U_PM_CURRENT   U_PM_CURRENT
++#define MMTE_U_PM_INSN      U_PM_INSN
++#define MMTE_S_PM_ENABLE    S_PM_ENABLE
++#define MMTE_S_PM_CURRENT   S_PM_CURRENT
++#define MMTE_S_PM_INSN      S_PM_INSN
++#define MMTE_M_PM_ENABLE    M_PM_ENABLE
++#define MMTE_M_PM_CURRENT   M_PM_CURRENT
++#define MMTE_M_PM_INSN      M_PM_INSN
++#define MMTE_MASK    (MMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | MMTE_U_PM_INSN | \
++                      MMTE_S_PM_ENABLE | MMTE_S_PM_CURRENT | MMTE_S_PM_INSN | \
++                      MMTE_M_PM_ENABLE | MMTE_M_PM_CURRENT | MMTE_M_PM_INSN | \
++                      MMTE_PM_XS_BITS)
++
++/* (v)smte CSR bits */
++#define SMTE_PM_XS_BITS     PM_XS_BITS
++#define SMTE_U_PM_ENABLE    U_PM_ENABLE
++#define SMTE_U_PM_CURRENT   U_PM_CURRENT
++#define SMTE_U_PM_INSN      U_PM_INSN
++#define SMTE_S_PM_ENABLE    S_PM_ENABLE
++#define SMTE_S_PM_CURRENT   S_PM_CURRENT
++#define SMTE_S_PM_INSN      S_PM_INSN
++#define SMTE_MASK    (SMTE_U_PM_ENABLE | SMTE_U_PM_CURRENT | SMTE_U_PM_INSN | \
++                      SMTE_S_PM_ENABLE | SMTE_S_PM_CURRENT | SMTE_S_PM_INSN | \
++                      SMTE_PM_XS_BITS)
++
++/* umte CSR bits */
++#define UMTE_U_PM_ENABLE    U_PM_ENABLE
++#define UMTE_U_PM_CURRENT   U_PM_CURRENT
++#define UMTE_U_PM_INSN      U_PM_INSN
++#define UMTE_MASK     (UMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | UMTE_U_PM_INSN)
++
+ #endif
 -- 
 2.30.2
 
