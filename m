@@ -1,67 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbHFv-0001QQ-Em
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 03:03:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36254)
+	id 1mbHvP-00051T-UN
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 03:46:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44956)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbHFt-0001HS-EF
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:03:49 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:34691)
+ id 1mbHvM-00050M-U8
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:46:40 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:43834)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbHFr-00046j-Hh
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:03:49 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id g14so7637021pfm.1
- for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 00:03:47 -0700 (PDT)
+ id 1mbHvJ-0001gp-ET
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:46:40 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id 187so7666375pfc.10
+ for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 00:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=zgXf8MU37B6LQ4wf2E5V0IBnlpowQzYgj8b+5qKG438=;
- b=msfBYghfpA+rO0RO3ArAXPkUji8jOZs8oGsNDDgtbedg9cTsL0wIUo5OT7BVb5wQVd
- fTn5xpEGdnaIWkjmsxRNJGbptx9L9OOupDsKm0PU81k39LsDotPDmzvzyV4vs+s+eVw9
- PVau+GilW3Xs+4vlkA51HcNiRkmfLs3DhYo0+0WGsoNoVweV0SGjIPJTvuMxkkHuDGhf
- Ive1GanVHx8SSV0onFgWnqlHs/IKa6aOuXnQBTqx6Fj2xax4BDpE87MhcKJpZ6l7Ed8S
- fBM0TXBukeTf+y1ON2DACwf17mWHpe4FfVqnBuoIlGelpn/5vEcTs3G6CW+apVMCJmzL
- lanA==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=UnajrcLsGVqhN+SJFdFWj8vkYMlelshM+jHBiJLI8YQ=;
+ b=G3Ty819zQWhtxZ2e41olRxy+mJFymWhVW/jQsjzdFqTt3z2FmvFDxN4hXkvLAeVqq0
+ rXi3tYUQ/8+TLljMEXT/nnwiQva0Amjw/ZIZtPkq/O1VVc8LoPTmbyStltfojNNLAz0W
+ bjc4THd1c1/YYqOm5cD6DLo4ZK6RKOylRgX/iVgxXISSDghoDllJsNKvvnxHT0478XLF
+ msPGfJa4ldr/TiYX7Cj9iDAiQ+8QJwMOoujrWtEyqUs2UDhnNT7YfeeofRtpNr91wzTP
+ 0WGvorV2xvaz9lyP67mKKFvAq69uL9UXhDCg+NZ7ZgCOkS750VkV1VsJWEawQxtM/eyh
+ jQ2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=zgXf8MU37B6LQ4wf2E5V0IBnlpowQzYgj8b+5qKG438=;
- b=rgFYaeLFTADt986f2VZlLcOE+0LAYT/u3ZJAICHrv060BL+wxxN5FxsiwypWqiXa1O
- MIyZn/C6sQCBnICIMOtQz61Nf2rCYinBGoUuKBoF1HgLWMWE1a4aNBhLBhwcJY5ordFn
- 1ic3vEFGjkKLV40hD66ZO9mWs9SwpQIuyD86LcNWfuWz4fyBLj+Z9ilU8/R8ZL62Balb
- PPg2lH3qD7sydxY3XRc3v1AcGZGIZDv+HJ9vzereCv0vv5kni33ibXr8fT/GDS1d6ZVX
- 3NBU0ld6OTFTzpVhk+HbwslviyVkzYsYPEOCNpiJ8mex5AK9/mRGPfV/M3mpqSXQ5hyU
- mrXQ==
-X-Gm-Message-State: AOAM530nfQJOBLLdVcvKjbbCuOO4PEENAzBGGpnotT8QITVYcSOiB5qD
- u2X9JdZ/PQ+9054ojkPmVWxrvw==
-X-Google-Smtp-Source: ABdhPJzEx2SlpPA+C2D2+h3z8cZLjE3ZjAd7AtWNYBmdZpqmpcFb9d+nrcC3L5gm66ZfezALs2RUcQ==
-X-Received: by 2002:a05:6a00:90:b0:44c:6029:7fcb with SMTP id
- c16-20020a056a00009000b0044c60297fcbmr9960999pfj.69.1634281426227; 
- Fri, 15 Oct 2021 00:03:46 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=UnajrcLsGVqhN+SJFdFWj8vkYMlelshM+jHBiJLI8YQ=;
+ b=hYA/6HHN0bOeyNYkMJJWbmFqYqxC0qFutLRLNUgdXBMMkz0GpyrpyXyWmuAiqm1kGm
+ +/VU0CXy3Qq40FFjRU+XG7K82k2NSs9bmlNw2Jhx9tDSa2MFub9Km3sLEdi3FH4xlh0+
+ L4/RLLCPFBVGzYdb0w3hNgsyAdA3rjb8SC4W1ocuJ85XkBZVZusbM8/0CB2Io9UJTfV/
+ M9AOq8e1rPVhOZrLGtlWEh1bPiNR4orgnLQvcLc11tWBxdOgVOoEcIA/utI439CxDWMt
+ uMa/4bZqPkBZGg4SPh1vthoL7PXEWGDSIkRvntXF54Kax5/Ksk2eu36FY+r7gAiooZFc
+ DB2g==
+X-Gm-Message-State: AOAM533ulBbtmalmpwGZw7ilUKjECazp7QPEzkoDWYr9MoKxNympgP7B
+ zJlLHUMGDVPFRbam6dXtqrd6bA==
+X-Google-Smtp-Source: ABdhPJz/6XtQ6RHu07t6eEMm1VjsLbWSamJep3s8QKdtfj/Un97hLbPmAcuyzmHmc/ClUSM1Y0tEEg==
+X-Received: by 2002:a63:3606:: with SMTP id d6mr4739829pga.271.1634283995346; 
+ Fri, 15 Oct 2021 00:46:35 -0700 (PDT)
 Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
  [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id w15sm4209553pfc.220.2021.10.15.00.03.44
+ by smtp.gmail.com with ESMTPSA id z13sm4271680pfq.130.2021.10.15.00.46.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Oct 2021 00:03:45 -0700 (PDT)
+ Fri, 15 Oct 2021 00:46:35 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Chih-Min Chao <chihmin.chao@sifive.com>,
- Kito Cheng <kito.cheng@sifive.com>
-Subject: [PATCH v2 6/6] target/riscv: zfh: implement zfhmin extension
-Date: Fri, 15 Oct 2021 15:03:06 +0800
-Message-Id: <20211015070307.3860984-7-frank.chang@sifive.com>
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v8 00/78] support vector extension v1.0
+Date: Fri, 15 Oct 2021 15:45:01 +0800
+Message-Id: <20211015074627.3957162-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211015070307.3860984-1-frank.chang@sifive.com>
-References: <20211015070307.3860984-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,158 +75,204 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2021 07:03:49 -0000
+X-List-Received-Date: Fri, 15 Oct 2021 07:46:41 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Zfhmin extension is a subset of Zfh extension, consisting only of data
-transfer and conversion instructions.
+This patchset implements the vector extension v1.0 for RISC-V on QEMU.
 
-If enabled, only the following instructions from Zfh extension are
-included:
-  * flh, fsh, fmv.x.h, fmv.h.x, fcvt.s.h, fcvt.h.s
-  * If D extension is present: fcvt.d.h, fcvt.h.d
+RVV v1.0 spec is now fronzen for public review:
+https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/cpu.c                        |  1 +
- target/riscv/cpu.h                        |  1 +
- target/riscv/insn_trans/trans_rvzfh.c.inc | 21 +++++++++++++--------
- target/riscv/translate.c                  |  2 ++
- 4 files changed, 17 insertions(+), 8 deletions(-)
+The port is available here:
+https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v8
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 992cfc3ab0b..89a612f7606 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -592,6 +592,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
-+    DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-     /* This is experimental so mark with 'x-' */
-     DEFINE_PROP_BOOL("x-zba", RISCVCPU, cfg.ext_zba, false),
-     DEFINE_PROP_BOOL("x-zbb", RISCVCPU, cfg.ext_zbb, false),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 88684e72be1..d70f63ddfe6 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -298,6 +298,7 @@ struct RISCVCPU {
-         bool ext_ifencei;
-         bool ext_icsr;
-         bool ext_zfh;
-+        bool ext_zfhmin;
- 
-         char *priv_spec;
-         char *user_spec;
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 837a8002b7f..69aebe52107 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -21,13 +21,18 @@
-         return false;         \
- } while (0)
- 
-+#define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {     \
-+    if (!(ctx->ext_zfh || ctx->ext_zfhmin)) \
-+        return false;                       \
-+} while (0)
-+
- static bool trans_flh(DisasContext *ctx, arg_flh *a)
- {
-     TCGv_i64 dest;
-     TCGv t0;
- 
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-@@ -49,7 +54,7 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
-     TCGv t0;
- 
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     t0 = get_gpr(ctx, a->rs1, EXT_NONE);
-     if (a->imm) {
-@@ -282,7 +287,7 @@ static bool trans_fmax_h(DisasContext *ctx, arg_fmax_h *a)
- static bool trans_fcvt_s_h(DisasContext *ctx, arg_fcvt_s_h *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     gen_set_rm(ctx, a->rm);
-     gen_helper_fcvt_s_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-@@ -295,7 +300,7 @@ static bool trans_fcvt_s_h(DisasContext *ctx, arg_fcvt_s_h *a)
- static bool trans_fcvt_d_h(DisasContext *ctx, arg_fcvt_d_h *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-     REQUIRE_EXT(ctx, RVD);
- 
-     gen_set_rm(ctx, a->rm);
-@@ -310,7 +315,7 @@ static bool trans_fcvt_d_h(DisasContext *ctx, arg_fcvt_d_h *a)
- static bool trans_fcvt_h_s(DisasContext *ctx, arg_fcvt_h_s *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     gen_set_rm(ctx, a->rm);
-     gen_helper_fcvt_h_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-@@ -323,7 +328,7 @@ static bool trans_fcvt_h_s(DisasContext *ctx, arg_fcvt_h_s *a)
- static bool trans_fcvt_h_d(DisasContext *ctx, arg_fcvt_h_d *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-     REQUIRE_EXT(ctx, RVD);
- 
-     gen_set_rm(ctx, a->rm);
-@@ -440,7 +445,7 @@ static bool trans_fcvt_h_wu(DisasContext *ctx, arg_fcvt_h_wu *a)
- static bool trans_fmv_x_h(DisasContext *ctx, arg_fmv_x_h *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     TCGv dest = dest_gpr(ctx, a->rd);
- 
-@@ -460,7 +465,7 @@ static bool trans_fmv_x_h(DisasContext *ctx, arg_fmv_x_h *a)
- static bool trans_fmv_h_x(DisasContext *ctx, arg_fmv_h_x *a)
- {
-     REQUIRE_FPU;
--    REQUIRE_ZFH(ctx);
-+    REQUIRE_ZFH_OR_ZFHMIN(ctx);
- 
-     TCGv t0 = get_gpr(ctx, a->rs1, EXT_ZERO);
- 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 442ef42f441..f23bc919c08 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -70,6 +70,7 @@ typedef struct DisasContext {
-     bool virt_enabled;
-     bool ext_ifencei;
-     bool ext_zfh;
-+    bool ext_zfhmin;
-     bool hlsx;
-     /* vector extension */
-     bool vill;
-@@ -559,6 +560,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->frm = -1;  /* unknown rounding mode */
-     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
-     ctx->ext_zfh = cpu->cfg.ext_zfh;
-+    ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
-     ctx->vlen = cpu->cfg.vlen;
-     ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
-     ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
--- 
+RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
+option to v1.0 (i.e. vext_spec=v1.0)
+
+Note: This patchset depends on other patchsets listed in Based-on
+      section below so it is not able to be built unless those patchsets
+      are applied.
+
+Changelog:
+
+v8
+  * Use {get,dest}_gpr APIs.
+  * remove vector AMO instructions.
+  * rename vpopc.m to vcpop.m.
+  * rename vle1.v and vse1.v to vlm.v and vsm.v.
+  * rename vmandnot.mm and vmornot.mm to vmandn.mm and vmorn.mm.
+
+v7
+  * remove hardcoded GDB vector registers list.
+  * add vsetivli instruction.
+  * add vle1.v and vse1.v instructions.
+
+v6
+  * add vector floating-point reciprocal estimate instruction.
+  * add vector floating-point reciprocal square-root estimate instruction.
+  * update check rules for segment register groups, each segment register
+    group has to follow overlap rules.
+  * update viota.m instruction check rules.
+
+v5
+  * refactor RVV v1.0 check functions.
+    (Thanks to Richard Henderson's bitwise tricks.)
+  * relax RV_VLEN_MAX to 1024-bits.
+  * implement vstart CSR's behaviors.
+  * trigger illegal instruction exception if frm is not valid for
+    vector floating-point instructions.
+  * rebase on riscv-to-apply.next.
+
+v4
+  * remove explicit float flmul variable in DisasContext.
+  * replace floating-point calculations with shift operations to
+    improve performance.
+  * relax RV_VLEN_MAX to 512-bits.
+
+v3
+  * apply nan-box helpers from Richard Henderson.
+  * remove fp16 api changes as they are sent independently in another
+    pathcset by Chih-Min Chao.
+  * remove all tail elements clear functions as tail elements can
+    retain unchanged for either VTA set to undisturbed or agnostic.
+  * add fp16 nan-box check generator function.
+  * add floating-point rounding mode enum.
+  * replace flmul arithmetic with shifts to avoid floating-point
+    conversions.
+  * add Zvqmac extension.
+  * replace gdbstub vector register xml files with dynamic generator.
+  * bumped to RVV v1.0.
+  * RVV v1.0 related changes:
+    * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+      load/store instructions
+    * add vrgatherei16 instruction.
+    * rearranged bits in vtype to make vlmul bits into a contiguous
+      field.
+
+v2
+  * drop v0.7.1 support.
+  * replace invisible return check macros with functions.
+  * move mark_vs_dirty() to translators.
+  * add SSTATUS_VS flag for s-mode.
+  * nan-box scalar fp register for floating-point operations.
+  * add gdbstub files for vector registers to allow system-mode
+    debugging with GDB.
+
+Based-on: <20211015065500.3850513-1-frank.chang@sifive.com>
+Based-on: <20211015070307.3860984-1-frank.chang@sifive.com>
+
+Frank Chang (73):
+  target/riscv: fix TB_FLAGS bits overlapping bug for rvv/rvh
+  target/riscv: drop vector 0.7.1 and add 1.0 support
+  target/riscv: Use FIELD_EX32() to extract wd field
+  target/riscv: rvv-1.0: introduce writable misa.v field
+  target/riscv: rvv-1.0: add translation-time vector context status
+  target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+  target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+    registers
+  target/riscv: rvv-1.0: remove MLEN calculations
+  target/riscv: rvv-1.0: add fractional LMUL
+  target/riscv: rvv-1.0: add VMA and VTA
+  target/riscv: rvv-1.0: update check functions
+  target/riscv: introduce more imm value modes in translator functions
+  target/riscv: rvv:1.0: add translation-time nan-box helper function
+  target/riscv: rvv-1.0: remove amo operations instructions
+  target/riscv: rvv-1.0: configure instructions
+  target/riscv: rvv-1.0: stride load and store instructions
+  target/riscv: rvv-1.0: index load and store instructions
+  target/riscv: rvv-1.0: fix address index overflow bug of indexed
+    load/store insns
+  target/riscv: rvv-1.0: fault-only-first unit stride load
+  target/riscv: rvv-1.0: load/store whole register instructions
+  target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+  target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+    calculation
+  target/riscv: rvv-1.0: floating-point square-root instruction
+  target/riscv: rvv-1.0: floating-point classify instructions
+  target/riscv: rvv-1.0: count population in mask instruction
+  target/riscv: rvv-1.0: find-first-set mask bit instruction
+  target/riscv: rvv-1.0: set-X-first mask bit instructions
+  target/riscv: rvv-1.0: iota instruction
+  target/riscv: rvv-1.0: element index instruction
+  target/riscv: rvv-1.0: allow load element with sign-extended
+  target/riscv: rvv-1.0: register gather instructions
+  target/riscv: rvv-1.0: integer scalar move instructions
+  target/riscv: rvv-1.0: floating-point move instruction
+  target/riscv: rvv-1.0: floating-point scalar move instructions
+  target/riscv: rvv-1.0: whole register move instructions
+  target/riscv: rvv-1.0: integer extension instructions
+  target/riscv: rvv-1.0: single-width averaging add and subtract
+    instructions
+  target/riscv: rvv-1.0: single-width bit shift instructions
+  target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+  target/riscv: rvv-1.0: narrowing integer right shift instructions
+  target/riscv: rvv-1.0: widening integer multiply-add instructions
+  target/riscv: rvv-1.0: single-width saturating add and subtract
+    instructions
+  target/riscv: rvv-1.0: integer comparison instructions
+  target/riscv: rvv-1.0: floating-point compare instructions
+  target/riscv: rvv-1.0: mask-register logical instructions
+  target/riscv: rvv-1.0: slide instructions
+  target/riscv: rvv-1.0: floating-point slide instructions
+  target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+  target/riscv: rvv-1.0: single-width floating-point reduction
+  target/riscv: rvv-1.0: widening floating-point reduction instructions
+  target/riscv: rvv-1.0: single-width scaling shift instructions
+  target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+  target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+  target/riscv: rvv-1.0: remove integer extract instruction
+  target/riscv: rvv-1.0: floating-point min/max instructions
+  target/riscv: introduce floating-point rounding mode enum
+  target/riscv: rvv-1.0: floating-point/integer type-convert
+    instructions
+  target/riscv: rvv-1.0: widening floating-point/integer type-convert
+  target/riscv: add "set round to odd" rounding mode helper function
+  target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+  target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
+  target/riscv: rvv-1.0: implement vstart CSR
+  target/riscv: rvv-1.0: trigger illegal instruction exception if frm is
+    not valid
+  target/riscv: rvv-1.0: set mstatus.SD bit when writing vector CSRs
+  target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
+    instruction
+  target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
+  target/riscv: set mstatus.SD bit when writing fp CSRs
+  target/riscv: rvv-1.0: rename r2_zimm to r2_zimm11
+  target/riscv: rvv-1.0: add vsetivli instruction
+  target/riscv: rvv-1.0: add evl parameter to vext_ldst_us()
+  target/riscv: rvv-1.0: add vector unit-stride mask load/store insns
+  target/riscv: rvv-1.0: rename vmandnot.mm and vmornot.mm to vmandn.mm
+    and vmorn.mm
+  target/riscv: rvv-1.0: update opivv_vadc_check() comment
+
+Greentime Hu (1):
+  target/riscv: rvv-1.0: add vlenb register
+
+Hsiangkai Wang (1):
+  target/riscv: gdb: support vector registers for rv64 & rv32
+
+LIU Zhiwei (3):
+  target/riscv: rvv-1.0: add mstatus VS field
+  target/riscv: rvv-1.0: add sstatus VS field
+  target/riscv: rvv-1.0: add vcsr register
+
+ target/riscv/cpu.c                      |   12 +-
+ target/riscv/cpu.h                      |   85 +-
+ target/riscv/cpu_bits.h                 |   10 +
+ target/riscv/cpu_helper.c               |   15 +-
+ target/riscv/csr.c                      |   92 +-
+ target/riscv/fpu_helper.c               |   17 +-
+ target/riscv/gdbstub.c                  |  184 ++
+ target/riscv/helper.h                   |  435 ++-
+ target/riscv/insn32.decode              |  294 +-
+ target/riscv/insn_trans/trans_rvv.c.inc | 2423 +++++++++------
+ target/riscv/internals.h                |   24 +-
+ target/riscv/translate.c                |   74 +-
+ target/riscv/vector_helper.c            | 3601 ++++++++++++-----------
+ 13 files changed, 4176 insertions(+), 3090 deletions(-)
+
+--
 2.25.1
 
 
