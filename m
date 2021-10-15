@@ -1,74 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mb3Ld-0001YQ-0a
-	for mharc-qemu-riscv@gnu.org; Thu, 14 Oct 2021 12:12:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58214)
+	id 1mbFMG-000131-Vs
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 01:02:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45210)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mb3La-0001R8-Rm
- for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:12:46 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636]:36624)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mbFMF-00010Z-Ey; Fri, 15 Oct 2021 01:02:15 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:35671)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mb3LX-00026f-Kc
- for qemu-riscv@nongnu.org; Thu, 14 Oct 2021 12:12:45 -0400
-Received: by mail-pl1-x636.google.com with SMTP id f21so4513100plb.3
- for <qemu-riscv@nongnu.org>; Thu, 14 Oct 2021 09:12:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=p3Dj4DjSOZU1SnjcfNpMQSf0C1HjyE25l+QOHio3gdA=;
- b=Dq639fgR82rp7lN1Eq0d/GghXOf5s6zmDiSBCemQi5L5zmsgPlmTTco0HD5PSREjPx
- mNQdVtDb8h9EfNaAhImYarzeq1BLVu7hE3uLhA+e7Q+32sb3mBlQaTuhQLqOPIqGstr5
- w/rKaKalwb24I4DYxyVy3KUBZNexmVrmeWks/zkc2WveVHar6ulM9N2p4k9av+uINdn8
- 8chSGTSTsyr+28yXjJ6jE3UtnjoxnRlsw2RQ/4985D3PjUznt6x3VVwpEEe9TUrJrhqH
- KPI5tWYNKZSTLXWGDoGcKlH0SspHLJaKhAEwRt+h7ByM+CN1hntB5fGfi+tDsORQHLxC
- jYkQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mbFMC-00069T-NV; Fri, 15 Oct 2021 01:02:15 -0400
+Received: by mail-io1-xd33.google.com with SMTP id h196so6426713iof.2;
+ Thu, 14 Oct 2021 22:02:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wkcLJG8a9iMKCIRG+4D/Vk8VTUw4nt/BkifDk80VwTQ=;
+ b=NlpJ+ahXvYtSl4IQngjkcSgtEYqviMwkmwBywxhucTIOMldNk2A6c9KmmMID91wL5c
+ Pjwvf1ZsIlbVt1JAu0QmPmrdkVRz3eWjbIvCb4ulQ1AytsXSEiUUF43Id8xJtixlBDX7
+ /9QOuTZbNrOGRop5BAbFflslzdwbdKabDDImaJvDAzEWOBREvH7Lhvg4D6Mdh2PsY9i2
+ 4a47ES/TpHSA907o6DiiFAzpnv/Zxaza5p4eMJibaZFopc+AecJL9vDgaSzwqN5cOxAh
+ JwY8fGHk89J5Zaeaq+S7+eaF/+NBlwSZsRnezKDkm/qAvQL1UxuIA5bLgjMyeYpZKYq/
+ 7w8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=p3Dj4DjSOZU1SnjcfNpMQSf0C1HjyE25l+QOHio3gdA=;
- b=ORazNWFRGBQLcTPbN3JFutiH1Atm3okFPyewenykqOnY2JVPjIAcRc1exun0rC8rwq
- 4L2wJKUptNlaHNeeXOtGfNZc+B/jJf7+sRK3MmgGdZlAcrRnTpzOh7MBDtg2a84U/2xx
- 9ZYP+YenTlrUthMI64WnQIc3PiWZLoIvn8uTOcOjOl0Y01BHLTnzlM5u5+dMNXP+8Ohn
- x3H2cX0sgMt0T9Q6nn0Up1SlBu3kHFjpRVQYiDwvIFG3kLKAnSaj48iQzqGb6bMTnpTS
- Smww7ZvlDwt7Ov8/PwNUD42uhNaP+IXK5WuHzzFn9VrozTTRsWp7eRRsznaJZdUf91r6
- Klng==
-X-Gm-Message-State: AOAM530VYwLXspUpd+TkuBhM0G8lFlGCAgjsQMpOcFE1PsQ6LXvzAWA9
- +TlqdRfk6+PMEolngkg0YijevQ==
-X-Google-Smtp-Source: ABdhPJxb9y+q4ZbzkxF0IsaKaP9nG/T7S3pwlbntMDIdg7BeVmRgRigV+eMIdOeVlsJ/esSLf4qU7g==
-X-Received: by 2002:a17:902:9887:b0:13f:7704:425f with SMTP id
- s7-20020a170902988700b0013f7704425fmr5895466plp.20.1634227961925; 
- Thu, 14 Oct 2021 09:12:41 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id u66sm3080474pfc.114.2021.10.14.09.12.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Oct 2021 09:12:41 -0700 (PDT)
-Subject: Re: [PATCH v2 05/13] target/riscv: Add MXL/SXL/UXL to TB_FLAGS
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- frederic.petrot@univ-grenoble-alpes.fr, fabien.portas@grenoble-inp.org
-References: <20211013205104.1031679-1-richard.henderson@linaro.org>
- <20211013205104.1031679-6-richard.henderson@linaro.org>
- <33bfbaa0-45d4-2f58-36dc-9ff7a117489b@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <b21879ab-8541-a703-e6f5-b5550adb2e4a@linaro.org>
-Date: Thu, 14 Oct 2021 09:12:39 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wkcLJG8a9iMKCIRG+4D/Vk8VTUw4nt/BkifDk80VwTQ=;
+ b=GuloaySTwUsjEm+f+Q1VREm/9kyeg0+MFKD7chcrXn/4UOkBKqjSfLck3vjqhjd3Os
+ 6oTWJXpExzr8Zs2gLOY2mb/vbMTkC0jrE3zssTdx3hPTr/gSAfNHtQn0AdGPYS+C2GLA
+ d6aMSvPQkahsY9701N7TimJ3wFAYLmeXnIvtblsAJvq8O/7kQbT2BFQDc02UicQ6L8lt
+ L152TRa/3IwevEJJrOMfC1PoT623YauWrvyKDf4n6k5O5PFTx/zRznUvLI7SXrtuXOJr
+ eCFyFKt87ekEiZhoylLIFOCQbc7THcGf29KwAZ5t3SbLl5uQBVb+diNksFKqY0SeBMjQ
+ I27Q==
+X-Gm-Message-State: AOAM533WxIfk3nnFXbjC13qdIoTQ6kfiYB5ZPvleaJFVSUVIZfiYLXH1
+ Zwma8R9lqnaCkXW1jcOsICA2+9d4iSDpA6XeR64=
+X-Google-Smtp-Source: ABdhPJzu9DAfe7XMLGC3wZUa2+d2VfgmeBLILWTjzonvcSJzVbXLVdf7kLIzL8topD16esimXwZ5xCJnl3fDn8Ba0w4=
+X-Received: by 2002:a05:6602:2bf7:: with SMTP id
+ d23mr367168ioy.187.1634274129948; 
+ Thu, 14 Oct 2021 22:02:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <33bfbaa0-45d4-2f58-36dc-9ff7a117489b@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+References: <20211013205104.1031679-1-richard.henderson@linaro.org>
+ <20211013205104.1031679-4-richard.henderson@linaro.org>
+In-Reply-To: <20211013205104.1031679-4-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 15 Oct 2021 15:01:43 +1000
+Message-ID: <CAKmqyKM4j8LD4Oh-HPdPQNAxxGeaooKDffY5MLY8MYLrK4GVeg@mail.gmail.com>
+Subject: Re: [PATCH v2 03/13] target/riscv: Split misa.mxl and misa.ext
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, liuzhiwei <zhiwei_liu@c-sky.com>, 
+ Fabien Portas <fabien.portas@grenoble-inp.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -83,63 +74,516 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Oct 2021 16:12:47 -0000
+X-List-Received-Date: Fri, 15 Oct 2021 05:02:15 -0000
 
-On 10/14/21 1:20 AM, LIU Zhiwei wrote:
-> 
-> On 2021/10/14 上午4:50, Richard Henderson wrote:
->> Begin adding support for switching XLEN at runtime.  Extract the
->> effective XLEN from MISA and MSTATUS and store for use during translation.
->>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->> v2: Force SXL and UXL to valid values.
->> ---
->>   target/riscv/cpu.h        |  2 ++
->>   target/riscv/cpu.c        |  8 ++++++++
->>   target/riscv/cpu_helper.c | 33 +++++++++++++++++++++++++++++++++
->>   target/riscv/csr.c        |  3 +++
->>   target/riscv/translate.c  |  2 +-
->>   5 files changed, 47 insertions(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 87248b562a..445ba5b395 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -395,6 +395,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
->>   /* Is a Hypervisor instruction load/store allowed? */
->>   FIELD(TB_FLAGS, HLSX, 9, 1)
->>   FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
->> +/* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
->> +FIELD(TB_FLAGS, XL, 12, 2)
->>   #ifdef CONFIG_RISCV32
->>   #define riscv_cpu_mxl(env)      MXL_RV32
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 1857670a69..840edd66f8 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -355,6 +355,14 @@ static void riscv_cpu_reset(DeviceState *dev)
->>       env->misa_mxl = env->misa_mxl_max;
->>       env->priv = PRV_M;
->>       env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
->> +    if (env->misa_mxl > MXL_RV32) {
->> +        /*
->> +         * The reset status of SXL/UXL is officially undefined,
->> +         * but invalid settings would result in a tcg assert.
->> +         */
->> +        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
->> +        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
->> +    }
-> 
-> Can you give more explanation about the assert? As the cpu will always reset to M mode, I 
-> think we can omit the the setting of UXL or SXL.
+On Thu, Oct 14, 2021 at 6:51 AM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> The hw representation of misa.mxl is at the high bits of the
+> misa csr.  Representing this in the same way inside QEMU
+> results in overly complex code trying to check that field.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-The mstatus csr is WARL, which means that we should always be able to read a valid value. 
-  On init, these fields will still be 0, which isn't right.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-I guess the assert that I was considering can't really happen, because we'd need to write 
-to mstatus to exit M-mode, and write_mstatus will force these fields to the correct value 
-(as found by Frederic).
+Alistair
 
-r~
+> ---
+> v2: Reset misa.mxl.
+> ---
+>  target/riscv/cpu.h          | 15 +++----
+>  linux-user/elfload.c        |  2 +-
+>  linux-user/riscv/cpu_loop.c |  2 +-
+>  target/riscv/cpu.c          | 78 +++++++++++++++++++++----------------
+>  target/riscv/csr.c          | 44 ++++++++++++++-------
+>  target/riscv/gdbstub.c      |  8 ++--
+>  target/riscv/machine.c      | 10 +++--
+>  target/riscv/translate.c    | 10 +++--
+>  8 files changed, 100 insertions(+), 69 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7084efc452..e708fcc168 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -25,6 +25,7 @@
+>  #include "exec/cpu-defs.h"
+>  #include "fpu/softfloat-types.h"
+>  #include "qom/object.h"
+> +#include "cpu_bits.h"
+>
+>  #define TCG_GUEST_DEFAULT_MO 0
+>
+> @@ -51,9 +52,6 @@
+>  # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
+>  #endif
+>
+> -#define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
+> -#define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
+> -
+>  #define RV(x) ((target_ulong)1 << (x - 'A'))
+>
+>  #define RVI RV('I')
+> @@ -133,8 +131,12 @@ struct CPURISCVState {
+>      target_ulong priv_ver;
+>      target_ulong bext_ver;
+>      target_ulong vext_ver;
+> -    target_ulong misa;
+> -    target_ulong misa_mask;
+> +
+> +    /* RISCVMXL, but uint32_t for vmstate migration */
+> +    uint32_t misa_mxl;      /* current mxl */
+> +    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+> +    uint32_t misa_ext;      /* current extensions */
+> +    uint32_t misa_ext_mask; /* max ext for this cpu */
+>
+>      uint32_t features;
+>
+> @@ -313,7 +315,7 @@ struct RISCVCPU {
+>
+>  static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+>  {
+> -    return (env->misa & ext) != 0;
+> +    return (env->misa_ext & ext) != 0;
+>  }
+>
+>  static inline bool riscv_feature(CPURISCVState *env, int feature)
+> @@ -322,7 +324,6 @@ static inline bool riscv_feature(CPURISCVState *env, int feature)
+>  }
+>
+>  #include "cpu_user.h"
+> -#include "cpu_bits.h"
+>
+>  extern const char * const riscv_int_regnames[];
+>  extern const char * const riscv_fpr_regnames[];
+> diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+> index 2404d482ba..214c1aa40d 100644
+> --- a/linux-user/elfload.c
+> +++ b/linux-user/elfload.c
+> @@ -1448,7 +1448,7 @@ static uint32_t get_elf_hwcap(void)
+>      uint32_t mask = MISA_BIT('I') | MISA_BIT('M') | MISA_BIT('A')
+>                      | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C');
+>
+> -    return cpu->env.misa & mask;
+> +    return cpu->env.misa_ext & mask;
+>  #undef MISA_BIT
+>  }
+>
+> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+> index 9859a366e4..e5bb6d908a 100644
+> --- a/linux-user/riscv/cpu_loop.c
+> +++ b/linux-user/riscv/cpu_loop.c
+> @@ -133,7 +133,7 @@ void target_cpu_copy_regs(CPUArchState *env, struct target_pt_regs *regs)
+>      env->gpr[xSP] = regs->sp;
+>      env->elf_flags = info->elf_flags;
+>
+> -    if ((env->misa & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
+> +    if ((env->misa_ext & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
+>          error_report("Incompatible ELF: RVE cpu requires RVE ABI binary");
+>          exit(EXIT_FAILURE);
+>      }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1d69d1887e..fdf031a394 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -110,16 +110,13 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+>
+>  bool riscv_cpu_is_32bit(CPURISCVState *env)
+>  {
+> -    if (env->misa & RV64) {
+> -        return false;
+> -    }
+> -
+> -    return true;
+> +    return env->misa_mxl == MXL_RV32;
+>  }
+>
+> -static void set_misa(CPURISCVState *env, target_ulong misa)
+> +static void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+>  {
+> -    env->misa_mask = env->misa = misa;
+> +    env->misa_mxl_max = env->misa_mxl = mxl;
+> +    env->misa_ext_mask = env->misa_ext = ext;
+>  }
+>
+>  static void set_priv_version(CPURISCVState *env, int priv_ver)
+> @@ -148,9 +145,9 @@ static void riscv_any_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>  #if defined(TARGET_RISCV32)
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+>  #elif defined(TARGET_RISCV64)
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+>  #endif
+>      set_priv_version(env, PRIV_VERSION_1_11_0);
+>  }
+> @@ -160,20 +157,20 @@ static void rv64_base_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+> -    set_misa(env, RV64);
+> +    set_misa(env, MXL_RV64, 0);
+>  }
+>
+>  static void rv64_sifive_u_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>  }
+>
+>  static void rv64_sifive_e_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
+> @@ -182,20 +179,20 @@ static void rv32_base_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+> -    set_misa(env, RV32);
+> +    set_misa(env, MXL_RV32, 0);
+>  }
+>
+>  static void rv32_sifive_u_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>  }
+>
+>  static void rv32_sifive_e_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>  }
+> @@ -203,7 +200,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+>  static void rv32_ibex_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>      qdev_prop_set_bit(DEVICE(obj), "x-epmp", true);
+> @@ -212,7 +209,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+>  static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+>      set_resetvec(env, DEFAULT_RSTVEC);
+>      qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+> @@ -360,6 +357,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+>
+>      mcc->parent_reset(dev);
+>  #ifndef CONFIG_USER_ONLY
+> +    env->misa_mxl = env->misa_mxl_max;
+>      env->priv = PRV_M;
+>      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>      env->mcause = 0;
+> @@ -388,7 +386,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      CPURISCVState *env = &cpu->env;
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>      int priv_version = 0;
+> -    target_ulong target_misa = env->misa;
+>      Error *local_err = NULL;
+>
+>      cpu_exec_realizefn(cs, &local_err);
+> @@ -434,8 +431,23 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>
+>      set_resetvec(env, cpu->cfg.resetvec);
+>
+> -    /* If only XLEN is set for misa, then set misa from properties */
+> -    if (env->misa == RV32 || env->misa == RV64) {
+> +    /* Validate that MISA_MXL is set properly. */
+> +    switch (env->misa_mxl_max) {
+> +#ifdef TARGET_RISCV64
+> +    case MXL_RV64:
+> +        break;
+> +#endif
+> +    case MXL_RV32:
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +    assert(env->misa_mxl_max == env->misa_mxl);
+> +
+> +    /* If only MISA_EXT is unset for misa, then set it from properties */
+> +    if (env->misa_ext == 0) {
+> +        uint32_t ext = 0;
+> +
+>          /* Do some ISA extension error checking */
+>          if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+>              error_setg(errp,
+> @@ -462,38 +474,38 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>
+>          /* Set the ISA extensions, checks should have happened above */
+>          if (cpu->cfg.ext_i) {
+> -            target_misa |= RVI;
+> +            ext |= RVI;
+>          }
+>          if (cpu->cfg.ext_e) {
+> -            target_misa |= RVE;
+> +            ext |= RVE;
+>          }
+>          if (cpu->cfg.ext_m) {
+> -            target_misa |= RVM;
+> +            ext |= RVM;
+>          }
+>          if (cpu->cfg.ext_a) {
+> -            target_misa |= RVA;
+> +            ext |= RVA;
+>          }
+>          if (cpu->cfg.ext_f) {
+> -            target_misa |= RVF;
+> +            ext |= RVF;
+>          }
+>          if (cpu->cfg.ext_d) {
+> -            target_misa |= RVD;
+> +            ext |= RVD;
+>          }
+>          if (cpu->cfg.ext_c) {
+> -            target_misa |= RVC;
+> +            ext |= RVC;
+>          }
+>          if (cpu->cfg.ext_s) {
+> -            target_misa |= RVS;
+> +            ext |= RVS;
+>          }
+>          if (cpu->cfg.ext_u) {
+> -            target_misa |= RVU;
+> +            ext |= RVU;
+>          }
+>          if (cpu->cfg.ext_h) {
+> -            target_misa |= RVH;
+> +            ext |= RVH;
+>          }
+>          if (cpu->cfg.ext_v) {
+>              int vext_version = VEXT_VERSION_0_07_1;
+> -            target_misa |= RVV;
+> +            ext |= RVV;
+>              if (!is_power_of_2(cpu->cfg.vlen)) {
+>                  error_setg(errp,
+>                          "Vector extension VLEN must be power of 2");
+> @@ -532,7 +544,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              set_vext_version(env, vext_version);
+>          }
+>
+> -        set_misa(env, target_misa);
+> +        set_misa(env, env->misa_mxl, ext);
+>      }
+>
+>      riscv_cpu_register_gdb_regs_for_features(cs);
+> @@ -705,7 +717,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>      char *isa_str = g_new(char, maxlen);
+>      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+>      for (i = 0; i < sizeof(riscv_exts); i++) {
+> -        if (cpu->env.misa & RV(riscv_exts[i])) {
+> +        if (cpu->env.misa_ext & RV(riscv_exts[i])) {
+>              *p++ = qemu_tolower(riscv_exts[i]);
+>          }
+>      }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 23fbbd3216..d0c86a300d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -39,7 +39,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>  {
+>  #if !defined(CONFIG_USER_ONLY)
+>      /* loose check condition for fcsr in vector extension */
+> -    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
+> +    if ((csrno == CSR_FCSR) && (env->misa_ext & RVV)) {
+>          return RISCV_EXCP_NONE;
+>      }
+>      if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> @@ -51,7 +51,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>
+>  static RISCVException vs(CPURISCVState *env, int csrno)
+>  {
+> -    if (env->misa & RVV) {
+> +    if (env->misa_ext & RVV) {
+>          return RISCV_EXCP_NONE;
+>      }
+>      return RISCV_EXCP_ILLEGAL_INST;
+> @@ -557,7 +557,22 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+>  static RISCVException read_misa(CPURISCVState *env, int csrno,
+>                                  target_ulong *val)
+>  {
+> -    *val = env->misa;
+> +    target_ulong misa;
+> +
+> +    switch (env->misa_mxl) {
+> +    case MXL_RV32:
+> +        misa = (target_ulong)MXL_RV32 << 30;
+> +        break;
+> +#ifdef TARGET_RISCV64
+> +    case MXL_RV64:
+> +        misa = (target_ulong)MXL_RV64 << 62;
+> +        break;
+> +#endif
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +
+> +    *val = misa | env->misa_ext;
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -583,8 +598,13 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>          return RISCV_EXCP_NONE;
+>      }
+>
+> +    /*
+> +     * misa.MXL writes are not supported by QEMU.
+> +     * Drop writes to those bits.
+> +     */
+> +
+>      /* Mask extensions that are not supported by this hart */
+> -    val &= env->misa_mask;
+> +    val &= env->misa_ext_mask;
+>
+>      /* Mask extensions that are not supported by QEMU */
+>      val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> @@ -601,20 +621,14 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>          val &= ~RVC;
+>      }
+>
+> -    /* misa.MXL writes are not supported by QEMU */
+> -    if (riscv_cpu_is_32bit(env)) {
+> -        val = (env->misa & MISA32_MXL) | (val & ~MISA32_MXL);
+> -    } else {
+> -        val = (env->misa & MISA64_MXL) | (val & ~MISA64_MXL);
+> +    /* If nothing changed, do nothing. */
+> +    if (val == env->misa_ext) {
+> +        return RISCV_EXCP_NONE;
+>      }
+>
+>      /* flush translation cache */
+> -    if (val != env->misa) {
+> -        tb_flush(env_cpu(env));
+> -    }
+> -
+> -    env->misa = val;
+> -
+> +    tb_flush(env_cpu(env));
+> +    env->misa_ext = val;
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index a7a9c0b1fe..5257df0217 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -54,10 +54,10 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>  static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
+>  {
+>      if (n < 32) {
+> -        if (env->misa & RVD) {
+> +        if (env->misa_ext & RVD) {
+>              return gdb_get_reg64(buf, env->fpr[n]);
+>          }
+> -        if (env->misa & RVF) {
+> +        if (env->misa_ext & RVF) {
+>              return gdb_get_reg32(buf, env->fpr[n]);
+>          }
+>      /* there is hole between ft11 and fflags in fpu.xml */
+> @@ -191,10 +191,10 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>      CPURISCVState *env = &cpu->env;
+> -    if (env->misa & RVD) {
+> +    if (env->misa_ext & RVD) {
+>          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+>                                   36, "riscv-64bit-fpu.xml", 0);
+> -    } else if (env->misa & RVF) {
+> +    } else if (env->misa_ext & RVF) {
+>          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+>                                   36, "riscv-32bit-fpu.xml", 0);
+>      }
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 16a08302da..f64b2a96c1 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -140,8 +140,8 @@ static const VMStateDescription vmstate_hyper = {
+>
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+> -    .version_id = 2,
+> -    .minimum_version_id = 2,
+> +    .version_id = 3,
+> +    .minimum_version_id = 3,
+>      .fields = (VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+>          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+> @@ -153,8 +153,10 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UINTTL(env.guest_phys_fault_addr, RISCVCPU),
+>          VMSTATE_UINTTL(env.priv_ver, RISCVCPU),
+>          VMSTATE_UINTTL(env.vext_ver, RISCVCPU),
+> -        VMSTATE_UINTTL(env.misa, RISCVCPU),
+> -        VMSTATE_UINTTL(env.misa_mask, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_mxl, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_ext, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+>          VMSTATE_UINT32(env.features, RISCVCPU),
+>          VMSTATE_UINTTL(env.priv, RISCVCPU),
+>          VMSTATE_UINTTL(env.virt, RISCVCPU),
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index d2442f0cf5..422f8ab8d0 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -55,7 +55,8 @@ typedef struct DisasContext {
+>      /* pc_succ_insn points to the instruction following base.pc_next */
+>      target_ulong pc_succ_insn;
+>      target_ulong priv_ver;
+> -    target_ulong misa;
+> +    RISCVMXL xl;
+> +    uint32_t misa_ext;
+>      uint32_t opcode;
+>      uint32_t mstatus_fs;
+>      uint32_t mstatus_hs_fs;
+> @@ -86,7 +87,7 @@ typedef struct DisasContext {
+>
+>  static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>  {
+> -    return ctx->misa & ext;
+> +    return ctx->misa_ext & ext;
+>  }
+>
+>  #ifdef TARGET_RISCV32
+> @@ -96,7 +97,7 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>  #else
+>  static inline bool is_32bit(DisasContext *ctx)
+>  {
+> -    return (ctx->misa & RV32) == RV32;
+> +    return ctx->xl == MXL_RV32;
+>  }
+>  #endif
+>
+> @@ -538,7 +539,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>  #else
+>      ctx->virt_enabled = false;
+>  #endif
+> -    ctx->misa = env->misa;
+> +    ctx->xl = env->misa_mxl;
+> +    ctx->misa_ext = env->misa_ext;
+>      ctx->frm = -1;  /* unknown rounding mode */
+>      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+>      ctx->vlen = cpu->cfg.vlen;
+> --
+> 2.25.1
+>
+>
 
