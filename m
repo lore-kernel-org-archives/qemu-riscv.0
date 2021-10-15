@@ -1,64 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbNaO-0001h8-U7
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 09:49:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59918)
+	id 1mbQZa-0007Tj-My
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 13:00:47 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56392)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1mbKmH-0007eB-5C
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 06:49:29 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:24981)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gshan@redhat.com>) id 1mbKmC-0000ig-MK
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 06:49:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634294961;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=maTTtXdlSTQj8q1wAof5H5YOOBc3riqhlbyW4EBa6xM=;
- b=LG0BKFiItT58GUuZyv/K+BEnmpDclCT19QDU8JhJFBGCL9mcVPb6fqqvLit/CVoiMYIJF5
- CIOzvgyL216gOVVALNGUo3yNgWcH7KXMjGFBV9aSsTnPNPWXXR+0oMNmCqVJ/y/TQhGmR+
- PTllILHam7qETD5sVjIqbrITnZD5KwQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-352-aTJgCOKfPe6_JFON83Nllg-1; Fri, 15 Oct 2021 06:49:18 -0400
-X-MC-Unique: aTJgCOKfPe6_JFON83Nllg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4547218D6A32;
- Fri, 15 Oct 2021 10:49:17 +0000 (UTC)
-Received: from gshan.redhat.com (vpn2-54-38.bne.redhat.com [10.64.54.38])
- by smtp.corp.redhat.com (Postfix) with ESMTP id BD00410013D7;
- Fri, 15 Oct 2021 10:49:13 +0000 (UTC)
-From: Gavin Shan <gshan@redhat.com>
-To: qemu-arm@nongnu.org
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, imammedo@redhat.com,
- drjones@redhat.com, ehabkost@redhat.com, robh@kernel.org,
- peter.maydell@linaro.org, shan.gavin@gmail.com
-Subject: [PATCH v4] hw/arm/virt: Don't create device-tree node for empty NUMA
- node
-Date: Fri, 15 Oct 2021 18:49:09 +0800
-Message-Id: <20211015104909.16722-1-gshan@redhat.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mbQZU-0007PP-8o
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 13:00:41 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:56304)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mbQZO-00039L-TW
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 13:00:37 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id om14so7596350pjb.5
+ for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 10:00:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=Mju07UW6nzATDFM+rqPSRkqtjEJbyQ87kQxDSDGnT1c=;
+ b=eHeI30X8+bmucj5b+cqeX4SuJ/zD8ncGn580nKV/KotoSV+zpd12xkwiLdwjpWp3o2
+ emwcz8exBoxIGn5ONqdLcctB47n9KxXG9hF8LL2XkRah0LI8whgKxHc6Uhs+KLfcXAr9
+ UGUC9uoluLRvFqPgyXJuWt96T9e5+T0o63E458nX6djH59Z1GQ7zHZKEehCRflPXpr3p
+ pHZlEMydKxctdqMGQRwaMuQpwSGML4m9dgMv1D240RhbV5GUODoAQfDp6mgdW9baxQMR
+ 35uAne7tJHePM8/hqWBZi3XxodFCnUUEcLUNFigfm7gWNjAagMVdXs+q754IhRDm5uFF
+ 4RAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Mju07UW6nzATDFM+rqPSRkqtjEJbyQ87kQxDSDGnT1c=;
+ b=P0RZUssc9qV4HSgUFI7ZEmyRVSogV3wDUJqPALKZu6FNIfjR78pCCxHGtz9SErqX3L
+ xim62M/a4VIEi+FSSrtYUOoMsAGPelMkmvcsFndQDukXy550etltPWQ9+rqFsIHh/Kn5
+ ar8Pwdc4bTAzGygC3bxv3v39UyN5EPbFf/vrRyOvqOEoTKZuBw3AHWy9xvog7C+vQq2P
+ X6S2q3VBpP6hVeqfR45xOXGfJPxfwVus3KMhW4QX/gEEXKmtsoJiz11cU2eL61uDhXeM
+ nZggdiREtmI9tVqbS4MSzoIh2m9auVETt2QZHZE+5BBdH04vWlJhQUPy/6mwP0mqzb3R
+ Hf0A==
+X-Gm-Message-State: AOAM532BriduKCt8+ach//4Pz09TFJMvg5U+dlMusgGYvXluvKFd73om
+ masX5V/964a7KWiMFv9xVasmZw==
+X-Google-Smtp-Source: ABdhPJwEm1bN8lKBILMTrkJTZuEeAwZJHT4dOjyG/PJTxvBZjIMRgEXtUgFp5DSPTk5EbsfTZFBHDA==
+X-Received: by 2002:a17:90b:4b03:: with SMTP id
+ lx3mr14575794pjb.162.1634317233319; 
+ Fri, 15 Oct 2021 10:00:33 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id e6sm5443922pfm.212.2021.10.15.10.00.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 15 Oct 2021 10:00:32 -0700 (PDT)
+Subject: Re: [PATCH v3 1/2] softfloat: add APIs to handle alternative sNaN
+ propagation for fmax/fmin
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+ =?UTF-8?Q?Alex_Benn=c3=a9e?= <alex.bennee@linaro.org>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Peter Maydell <peter.maydell@linaro.org>
+References: <20211015065500.3850513-1-frank.chang@sifive.com>
+ <20211015065500.3850513-2-frank.chang@sifive.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <5fdfaf38-da5b-ff32-9c9c-700ccaf3dadb@linaro.org>
+Date: Fri, 15 Oct 2021 10:00:30 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=gshan@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=gshan@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
+In-Reply-To: <20211015065500.3850513-2-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 15 Oct 2021 09:49:10 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,75 +85,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2021 10:49:29 -0000
+X-List-Received-Date: Fri, 15 Oct 2021 17:00:42 -0000
 
-The empty NUMA node, where no memory resides, are allowed. For
-example, the following command line specifies two empty NUMA nodes.
-With this, QEMU fails to boot because of the conflicting device-tree
-node names, as the following error message indicates.
+On 10/14/21 11:54 PM, frank.chang@sifive.com wrote:
+> +        /*
+> +         * In IEEE 754-2019, minNum, maxNum, minNumMag and maxNumMag
+> +         * are removed and replaced with minimum, minimumNumber, maximum
+> +         * and maximumNumber.
+> +         * minimumNumber/maximumNumber behavior for SNaN is changed to:
+> +         *   If both operands are NaNs, a QNaN is returned.
+> +         *   If either operand is a SNaN,
+> +         *   an invalid operation exception is signaled,
+> +         *   but unless both operands are NaNs,
+> +         *   the SNaN is otherwise ignored and not converted to a QNaN.
+> +         */
+> +        if (!(~flags & (minmax_isnum | minmax_snan_noprop))
+> +            && (ab_mask & float_cmask_snan)
+> +            && (ab_mask & ~float_cmask_anynan)) {
+> +            float_raise(float_flag_invalid, s);
+> +            return is_nan(a->cls) ? b : a;
+> +        }
 
-  /home/gavin/sandbox/qemu.main/build/qemu-system-aarch64 \
-  -accel kvm -machine virt,gic-version=host               \
-  -cpu host -smp 4,sockets=2,cores=2,threads=1            \
-  -m 1024M,slots=16,maxmem=64G                            \
-  -object memory-backend-ram,id=mem0,size=512M            \
-  -object memory-backend-ram,id=mem1,size=512M            \
-  -numa node,nodeid=0,cpus=0-1,memdev=mem0                \
-  -numa node,nodeid=1,cpus=2-3,memdev=mem1                \
-  -numa node,nodeid=2                                     \
-  -numa node,nodeid=3
-    :
-  qemu-system-aarch64: FDT: Failed to create subnode /memory@80000000: FDT_ERR_EXISTS
+This part looks ok.
 
-As specified by linux device-tree binding document, the device-tree
-nodes for these empty NUMA nodes shouldn't be generated. However,
-the corresponding NUMA node IDs should be included in the distance
-map. As the memory hotplug through device-tree on ARM64 isn't existing
-so far, it's pointless to expose the empty NUMA nodes through device-tree.
-So this simply skips populating the device-tree nodes for these empty
-NUMA nodes to avoid the error, so that QEMU can be started successfully.
+> +    MINMAX_1(type, maxnum_noprop, minmax_isnum | minmax_snan_noprop) \
+> +    MINMAX_1(type, minnum_noprop, minmax_ismin | minmax_isnum |      \
+> +                                  minmax_snan_noprop)                \
 
-Signed-off-by: Gavin Shan <gshan@redhat.com>
----
-v4: Drop patch to enforce distance-map as memory hotplug through
-    device-tree is never supported on ARM64. It's pointless to
-    expose these empty NUMA nodes. Besides, comments added to
-    explain the code changes included in this patch as Drew
-    suggested.
----
- hw/arm/boot.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+But here, you have been given names by 754-2019: minimumNumber, maximumNumber, so I think 
+you should use them.
 
-diff --git a/hw/arm/boot.c b/hw/arm/boot.c
-index 57efb61ee4..e05c1c149c 100644
---- a/hw/arm/boot.c
-+++ b/hw/arm/boot.c
-@@ -599,10 +599,24 @@ int arm_load_dtb(hwaddr addr, const struct arm_boot_info *binfo,
-     }
-     g_strfreev(node_path);
- 
-+    /*
-+     * According to Linux NUMA binding document, the device tree nodes
-+     * for the empty NUMA nodes shouldn't be generated, but their NUMA
-+     * node IDs should be included in the distance map instead. However,
-+     * it's pointless to expose the empty NUMA nodes as memory hotplug
-+     * through device tree is never supported. We simply skip generating
-+     * their device tree nodes to avoid the unexpected device tree
-+     * generating failure due to the duplicated names of these empty
-+     * NUMA nodes.
-+     */
-     if (ms->numa_state != NULL && ms->numa_state->num_nodes > 0) {
-         mem_base = binfo->loader_start;
-         for (i = 0; i < ms->numa_state->num_nodes; i++) {
-             mem_len = ms->numa_state->nodes[i].node_mem;
-+            if (!mem_len) {
-+                continue;
-+            }
-+
-             rc = fdt_add_memory_node(fdt, acells, mem_base,
-                                      scells, mem_len, i);
-             if (rc < 0) {
--- 
-2.23.0
 
+r~
 
