@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbSu5-00006X-8h
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 15:30:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53192)
+	id 1mbSuC-00007C-Af
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 15:30:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53194)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mbSto-0008ND-Tg; Fri, 15 Oct 2021 15:29:49 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:39500)
+ id 1mbStp-0008NO-6H; Fri, 15 Oct 2021 15:29:49 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:42566)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mbStn-0008Rw-7W; Fri, 15 Oct 2021 15:29:48 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id n8so45672049lfk.6;
+ id 1mbStn-0008Sd-LF; Fri, 15 Oct 2021 15:29:48 -0400
+Received: by mail-lf1-x134.google.com with SMTP id x27so45565166lfa.9;
  Fri, 15 Oct 2021 12:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Y0BZVfNR35vNcaA+olp4zm4S8Q+cJnVxl4jGZkzd+8s=;
- b=MiODM05kbNRmLxY8O4UxZ5DwbBNT2FqdaH1vPdqFM+jUuzCKEu8fEyjc/LtwZ4TmZg
- lfHa/QxqIl2qu5q6GMPwUZ0zJVPFGDdSfNSNf/mn2JIq+EuEHzXVsfnlpa4H+yzCOoEo
- mHQxEO7A0VswR9jV2ZU1joc9knzt2N393af8j1WmDldrHapYjFG7NY10R3LqsrJcRp2p
- b+R+stXTiuCvUkoyz84xw0q/DPBiReia+G3Ae1Q4CFovL8kCyejaHzIWW8LmWokxi21h
- 27mhEH77RM7ygloAxm0X4tg1AIdIc9I2d2hZHe4FytK8pYnokktAdasFejM6IouhTHK4
- 67ew==
+ bh=DjznzoCbvQUGcmziNtfKcywsooW2JglJCdT49kGN5+E=;
+ b=b+t8tFBI1D4HnagiubACS3Ail9ahxnBEgqWsvoCrQHzVpPuR32TV1ctfvD+VtLK53O
+ 92Vhce6axj2ywuZBInod/4ES7UeyNezAoQ/P9mH+aiCwDMOgpJ+0863eRVmyFmM4SGVU
+ DQXLC8JX54ZiQ35xnbBi+qETLB06HSh3ePow+lhZU8r95600wYk5qxjDet2oJMR5w77M
+ uSyHFWpHI267qr+RmPTmIVhLSR14KtlDAIhzut1fctOkyzXjTWcHXlixa1atDnST9Nr3
+ tg9b2UqVueQbeT+t7GQyUvp1bZMGvBFYV4ymtILD/Vt3pEyDDBQCIHJaiCBUQp2lOzfT
+ jnVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Y0BZVfNR35vNcaA+olp4zm4S8Q+cJnVxl4jGZkzd+8s=;
- b=KX3XuazoRJk7DZhcKANIq/4Nn3OkuBbg+Qfn3+I73qRi3BBnNFri9sdpMObS68UA5I
- YVisWyBcaVwcVUaVafoppd3hjECEY4KQLbDxfa5X0tPnMNrpeFOA/C2Q/GMkHDGICnhs
- x1Uyy3qJjeqr1/nZpxaN39GYq2B+5Bk5PYDAp1C0ImKT8DDU5FuykmIkus/oIhtZhM6+
- xBRRuLS93LSaxqhEdpPFqpEkNM3LS6zZHZTnWAmOedm/g95SuiO9/Zii5KoBVnZSHg6B
- 3hPV5QFgAPpLyiKKP13z8MAGoi/+hUvuHF04SSagfJmCiiGMSaMnIvw0VpZg8bccSzCS
- 1wmw==
-X-Gm-Message-State: AOAM530nPprFhb82IlR0FDGpnrWFqQ9RGHl3xw1mj4MSdNukyEWXUI1E
- WmwKL131KHjWz16JE8zD/6H8zJvSBKGnpE+gNbw=
-X-Google-Smtp-Source: ABdhPJyxkKVaU6cqCv2wRRYBSHHb3SQ66r6K6TsUdPP/5SDi7JLjjIBm3js7LP8ZY9pCX9ZOUMGUag==
-X-Received: by 2002:a05:651c:4c9:: with SMTP id
- e9mr14831571lji.212.1634326184056; 
+ bh=DjznzoCbvQUGcmziNtfKcywsooW2JglJCdT49kGN5+E=;
+ b=5ujU982sScjoKdzZjOhZ+DoUPunH4OjNQ6AKCvnFu/4KHqm7UngdnrI7FTaZrxRwFk
+ RpmWRK92Mv+wcfWsRbt3Y6hnBH7BHSFwj04cL7XdDzkw6MBRbs6eSznEqT506XLY3Gmy
+ Ags7Iw8dEhPQQeqz80GT3SPvT6djKcovHk7noQSASg+TLPOAZPcFcLHnaeM8jvimIF0f
+ XaL+66+1fmdK7+/CvKFu9ItGnY/dNSkKtUt5hVtSNCDwPY/6wF6w+/EODEq6aFLigkcP
+ spu5DhsjsVSgBqJka1ZgdOWNLYQZSNGO29WLjAgqnls2OpIQRTgpunw5uUx7eqkD/r9q
+ vSSw==
+X-Gm-Message-State: AOAM533B/y6uq8pOidLfjAc7kncJT9X0oMhsuplJAUErC0pO+BPDhqDk
+ 7cg60XwWInH3+0bVrymFkrU=
+X-Google-Smtp-Source: ABdhPJxJNAjhqYjgzaH3x/ubwAhlCofFcgO5XvSe7gam4eY1xUWsEo3BRiCtgBuJxAGksrymrOJrQg==
+X-Received: by 2002:a2e:155a:: with SMTP id 26mr15255657ljv.156.1634326184814; 
  Fri, 15 Oct 2021 12:29:44 -0700 (PDT)
 Received: from neptune.lab ([46.39.228.224])
- by smtp.googlemail.com with ESMTPSA id n19sm527261lfu.207.2021.10.15.12.29.43
+ by smtp.googlemail.com with ESMTPSA id n19sm527261lfu.207.2021.10.15.12.29.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Oct 2021 12:29:43 -0700 (PDT)
+ Fri, 15 Oct 2021 12:29:44 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -51,17 +50,16 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v13 6/7] [RISCV_PM] Implement address masking functions
- required for RISC-V Pointer Masking extension
-Date: Fri, 15 Oct 2021 22:29:30 +0300
-Message-Id: <20211015192931.227387-7-space.monkey.delivers@gmail.com>
+Subject: [PATCH v13 7/7] [RISCV_PM] Allow experimental J-ext to be turned on
+Date: Fri, 15 Oct 2021 22:29:31 +0300
+Message-Id: <20211015192931.227387-8-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211015192931.227387-1-space.monkey.delivers@gmail.com>
 References: <20211015192931.227387-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -83,154 +81,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 15 Oct 2021 19:29:49 -0000
 
-From: Anatoly Parshintsev <kupokupokupopo@gmail.com>
-
-Signed-off-by: Anatoly Parshintsev <kupokupokupopo@gmail.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 ---
- target/riscv/cpu.h       | 20 ++++++++++++++
- target/riscv/translate.c | 56 +++++++++++++++++++++++++++++++++-------
- 2 files changed, 66 insertions(+), 10 deletions(-)
+ target/riscv/cpu.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index acb4ce9d23..fd2335d08e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -407,6 +407,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
- /* Is a Hypervisor instruction load/store allowed? */
- FIELD(TB_FLAGS, HLSX, 9, 1)
- FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
-+/* If PointerMasking should be applied */
-+FIELD(TB_FLAGS, PM_ENABLED, 10, 1)
- 
- bool riscv_cpu_is_32bit(CPURISCVState *env);
- 
-@@ -467,6 +469,24 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
-                            get_field(env->mstatus_hs, MSTATUS_FS));
-     }
-+    if (riscv_has_ext(env, RVJ)) {
-+        int priv = cpu_mmu_index(env, false) & TB_FLAGS_PRIV_MMU_MASK;
-+        bool pm_enabled = false;
-+        switch (priv) {
-+        case PRV_U:
-+            pm_enabled = env->mmte & U_PM_ENABLE;
-+            break;
-+        case PRV_S:
-+            pm_enabled = env->mmte & S_PM_ENABLE;
-+            break;
-+        case PRV_M:
-+            pm_enabled = env->mmte & M_PM_ENABLE;
-+            break;
-+        default:
-+            g_assert_not_reached();
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 7f9dde70b7..fb08c0ffb8 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -558,6 +558,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             }
+             set_vext_version(env, vext_version);
+         }
++        if (cpu->cfg.ext_j) {
++            target_misa |= RVJ;
 +        }
-+        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
-+    }
- #endif
  
-     *pflags = flags;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 95739b1e41..4991b4b662 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -36,6 +36,9 @@ static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
- static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
- static TCGv load_res;
- static TCGv load_val;
-+/* globals for PM CSRs */
-+static TCGv pm_mask[4];
-+static TCGv pm_base[4];
- 
- #include "exec/gen-icount.h"
- 
-@@ -82,6 +85,10 @@ typedef struct DisasContext {
-     TCGv zero;
-     /* Space for 3 operands plus 1 extra for address computation. */
-     TCGv temp[4];
-+    /* PointerMasking extension */
-+    bool pm_enabled;
-+    TCGv pm_mask;
-+    TCGv pm_base;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -118,16 +125,6 @@ static void gen_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-     tcg_gen_ori_i64(out, in, MAKE_64BIT_MASK(32, 32));
- }
- 
--/*
-- * Temp stub: generates address adjustment for PointerMasking
-- */
--static void gen_pm_adjust_address(DisasContext *s,
--                                  TCGv         *dst,
--                                  TCGv          src)
--{
--    tcg_gen_mov_tl(*dst, src);
--}
--
- /*
-  * A narrow n-bit operation, where n < FLEN, checks that input operands
-  * are correctly Nan-boxed, i.e., all upper FLEN - n bits are 1.
-@@ -282,6 +279,26 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
- 
-+/*
-+ * Generates address adjustment for PointerMasking
-+ */
-+static void gen_pm_adjust_address(DisasContext *s,
-+                                  TCGv         *dst,
-+                                  TCGv          src)
-+{
-+    TCGv temp;
-+    if (!s->pm_enabled) {
-+        /* Load unmodified address */
-+        tcg_gen_mov_tl(*dst, src);
-+    } else {
-+        temp = temp_new(s);
-+        tcg_gen_andc_tl(temp, src, s->pm_mask);
-+        tcg_gen_or_tl(temp, temp, s->pm_base);
-+        *dst = temp;
-+    }
-+}
-+
-+
- #ifndef CONFIG_USER_ONLY
- /* The states of mstatus_fs are:
-  * 0 = disabled, 1 = initial, 2 = clean, 3 = dirty
-@@ -563,6 +580,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->w = false;
-     ctx->ntemp = 0;
-     memset(ctx->temp, 0, sizeof(ctx->temp));
-+    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
-+    int priv = cpu_mmu_index(env, false) & TB_FLAGS_PRIV_MMU_MASK;
-+    ctx->pm_mask = pm_mask[priv];
-+    ctx->pm_base = pm_base[priv];
- 
-     ctx->zero = tcg_constant_tl(0);
- }
-@@ -676,4 +697,19 @@ void riscv_translate_init(void)
-                              "load_res");
-     load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
-                              "load_val");
-+#ifndef CONFIG_USER_ONLY
-+    /* Assign PM CSRs to tcg globals */
-+    pm_mask[PRV_U] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
-+    pm_base[PRV_U] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
-+    pm_mask[PRV_S] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
-+    pm_base[PRV_S] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
-+    pm_mask[PRV_M] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
-+    pm_base[PRV_M] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
-+#endif
- }
+         set_misa(env, target_misa);
+     }
+@@ -624,6 +627,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("x-zbc", RISCVCPU, cfg.ext_zbc, false),
+     DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
++    DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
 -- 
 2.30.2
 
