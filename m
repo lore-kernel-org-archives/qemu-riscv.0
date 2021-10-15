@@ -1,65 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbMTG-0007hF-J7
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 08:37:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54972)
+	id 1mbMoB-0006Sn-BN
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 08:59:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59350)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mbMTF-0007gt-90; Fri, 15 Oct 2021 08:37:57 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532]:35461)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mbMT2-00061A-Ee; Fri, 15 Oct 2021 08:37:57 -0400
-Received: by mail-pg1-x532.google.com with SMTP id e7so8500927pgk.2;
- Fri, 15 Oct 2021 05:37:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=227zV1gxtkNhPbXEYIP8/xADQqjWERCvoSTBxHpIQqA=;
- b=VzmJRgDskQdz6OaiURf3wyCgUcoQt5q9JQ1Z+c5E29hby3P9cdANzjDZS5VajzlajX
- lJil2J2OZbnX6YI9dGM/Couz6dBcfAQsrdwc5HuQEUzkRZ482aOYwyxNQuOmWXURnn42
- TcpwtnuJRwiKI3HtYRuCA8YTDgNk25go5fuqiaKTatIj10XLjl0U4srCHgSBrVxSipgG
- ug7HU3YgVfOGcQkddybz0BaOEQkht5CJ2S7NVVx01ByBfdQv+SUsL369clLCt2gMdVix
- QVeIHmH/JbVZQ3FVSpDH+PlZjicHQDe5QLGbyfpI2W/y3A67SMQxNNNiWZlH5OxtdTCa
- JKCg==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mbMo9-0006Ls-0L
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 08:59:33 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:25769)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mbMo7-0007pe-1w
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 08:59:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634302769;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mWKUxNUGl2oeLuBY/ljbYe4O8kdZCwjFjo4MJYYDqZQ=;
+ b=fnwXRiVIpJ8u4ZD+hG2YZoWAVcmSFFW3Xx9of/hyNjYGM1ySIfMYtmronghSYprEL5QYcN
+ 4PKxFSyjjr7nAJvGmCPFutGkHi1sJa9g/wFePbVfq+JUw7dXkFxgaX1Tp45Z3Jr00YijOX
+ FJ1JFY+kM8gfmGB60FLFpneY2+2KXQY=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-201-zx4UmJsmNSKOe_m42u4tUg-1; Fri, 15 Oct 2021 08:59:26 -0400
+X-MC-Unique: zx4UmJsmNSKOe_m42u4tUg-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ r11-20020aa7cfcb000000b003d4fbd652b9so8139402edy.14
+ for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 05:59:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=227zV1gxtkNhPbXEYIP8/xADQqjWERCvoSTBxHpIQqA=;
- b=b+Iy+NtggiFZZBvdFbbCBTDacUJ06zIzeyUvP+TzULQt32PgRlHo4g5vrsp8w95BoR
- mgqFso8uUwn/ezmypo7X0VjB3/d8apr8uSoNnyLKOwNd2iMF+G9IzsCdXg7ZyeXCvWyo
- K0yObWmk9p/ss8MNLf6plxnRIHAS+V9mw0/oE7td85pkTIukgQ2BEJRAH72936VWoiG2
- t8yTFL8YW9FhR+A46/RsNQlYFGoaaDFxBr0c4nLx0xQ5kfHs2EvrNdypgjEEwXgMMaU6
- 2wL7JnS46lUO4RYMWPOx4ER9ipHtdKgmsfKrRHPefpUiGrdbcSLTgw9bPZrSL3dlouuI
- arNg==
-X-Gm-Message-State: AOAM5333NvZtnyfkLxLSxaLhXrOIsZTsjg/JaIbPGQT5Clnfd1SBWx+3
- tcMiD7196iy2KVyqwgDrzwSCVB+seunOnWHv+WU=
-X-Google-Smtp-Source: ABdhPJzI4SE7cbNxPBhql4/1/1PNGxRtwf6WZA1fipdj4aplcjhrRDSk1muPPKiuPdu28DonucFMH3GZglSkXCvqq9g=
-X-Received: by 2002:a63:6b42:: with SMTP id g63mr1467169pgc.461.1634301462623; 
- Fri, 15 Oct 2021 05:37:42 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=mWKUxNUGl2oeLuBY/ljbYe4O8kdZCwjFjo4MJYYDqZQ=;
+ b=239RSInOiF0kb+HEhk102FDgQvsHnVjGCULfix3AbgJJbJXV0QfkEy93xI8En/QHXT
+ ByVQLERearWpT8F+I8f2WVHbhhz7IzdJk0y2N/vizjbx1K4JQ5oUU6PbN0mKcZhJu7Xu
+ AXMMFBkdXNIzX/KT0+DOVFIm2MPPnL1ZnOhcRN5J2RqryEffMa4LQVt7HHOz64k84s/o
+ JH3bCqptGrvkMjbulqrDKp2oDLb7gDWwKNQ0yEGrusITNLwY4D2at6iIBxEA8fFQbK68
+ rcCsfoNyBotccdYGw0VQu6qsCAa0PoQNRpRI/jC0udebyicWHk4IN8vzC805+FROvX9e
+ /+iA==
+X-Gm-Message-State: AOAM533Vre1335fCc2JqWq+laQNED6jlbJ/s+c1BqunOAEAw8dlZ7E3q
+ c6ftqR+d930hZf8mnpf8Dbwxmt6fTrFfroQ6iKCIdjr9wNXmkRzKYiFnemc6P/+xSxHmWWgv7jG
+ ho6qDCqiB8BDNOiM=
+X-Received: by 2002:a17:906:2346:: with SMTP id
+ m6mr6668315eja.512.1634302764784; 
+ Fri, 15 Oct 2021 05:59:24 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy75CcpOd/V/8F/KFhRAFFlXIZY0vHMRLUXTr3qovj3jx0FQND+UZbK+Sgxj5/F4/Ybja9Z9Q==
+X-Received: by 2002:a17:906:2346:: with SMTP id
+ m6mr6668280eja.512.1634302764480; 
+ Fri, 15 Oct 2021 05:59:24 -0700 (PDT)
+Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id p8sm4090658ejo.2.2021.10.15.05.59.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Oct 2021 05:59:23 -0700 (PDT)
+Date: Fri, 15 Oct 2021 14:59:22 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "limingwang (A)" <limingwang@huawei.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, Jiangyifei
+ <jiangyifei@huawei.com>, Alistair Francis <alistair.francis@wdc.com>,
+ "Wanghaibin \(D\)" <wanghaibin.wang@huawei.com>, "Fanliang \(EulerOS\)"
+ <fanliang@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>, "Wubin \(H\)"
+ <wu.wubin@huawei.com>
+Subject: Re: [PATCH v2] hw/riscv: virt: bugfix the memory-backend-file
+ command is invalid
+Message-ID: <20211015145922.5a82e31a@redhat.com>
+In-Reply-To: <CAEUhbmVD1jyvGJrQLSZLJYfaz6E-m0b9SZA+DQA2YYK70oL7Lg@mail.gmail.com>
+References: <20211012014501.24996-1-limingwang@huawei.com>
+ <CAEUhbmX=A4LPgzNgNPcxzzg=veU0=3vXyZQrwikxMFvb_Rcxzw@mail.gmail.com>
+ <c4c6cc03d1c6459ea036c08ae30806a5@huawei.com>
+ <CAEUhbmVD1jyvGJrQLSZLJYfaz6E-m0b9SZA+DQA2YYK70oL7Lg@mail.gmail.com>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20211013205104.1031679-1-richard.henderson@linaro.org>
- <20211013205104.1031679-6-richard.henderson@linaro.org>
-In-Reply-To: <20211013205104.1031679-6-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 15 Oct 2021 22:37:16 +1000
-Message-ID: <CAKmqyKOiAppxPij-Ts=m6y3t2moUguFrtATNgHJSn-QCrGdwkw@mail.gmail.com>
-Subject: Re: [PATCH v2 05/13] target/riscv: Add MXL/SXL/UXL to TB_FLAGS
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, liuzhiwei <zhiwei_liu@c-sky.com>, 
- Fabien Portas <fabien.portas@grenoble-inp.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x532.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -72,149 +100,129 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2021 12:37:57 -0000
+X-List-Received-Date: Fri, 15 Oct 2021 12:59:33 -0000
 
-On Thu, Oct 14, 2021 at 6:56 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> Begin adding support for switching XLEN at runtime.  Extract the
-> effective XLEN from MISA and MSTATUS and store for use during translation.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+On Fri, 15 Oct 2021 17:25:01 +0800
+Bin Meng <bmeng.cn@gmail.com> wrote:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> On Fri, Oct 15, 2021 at 4:52 PM limingwang (A) <limingwang@huawei.com> wrote:
+> >
+> >
+> > On Wed, Oct 13, 2021 at 22:41 PM Bin Meng <bin.meng@windriver.com> wrote:  
+> > >
+> > > On Tue, Oct 12, 2021 at 9:46 AM MingWang Li <limingwang@huawei.com> wrote:  
+> > > >
+> > > > From: Mingwang Li <limingwang@huawei.com>
+> > > >
+> > > > When I start the VM with the following command:
+> > > > $ ./qemu-system-riscv64 -M virt,accel=kvm -m 4096M -cpu host -nographic \
+> > > >     -name guest=riscv-guset \
+> > > >     -smp 2 \
+> > > >     -bios none \
+> > > >     -kernel ./Image \
+> > > >     -drive file=./guest.img,format=raw,id=hd0 \
+> > > >     -device virtio-blk-device,drive=hd0 \
+> > > >     -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
+> > > >     -object  
+> > > memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on \  
+> > > >     -numa node,memdev=mem -mem-prealloc \
+> > > >     -chardev socket,id=char0,path=/mnt/vhost-net0 \
+> > > >     -netdev type=vhost-user,id=mynet1,chardev=char0,vhostforce \
+> > > >     -device
+> > > > virtio-net-pci,mac=52:54:00:00:00:01,netdev=mynet1,mrg_rxbuf=on,csum=o
+> > > > n,guest_csum=on,guest_ecn=on \
+> > > >
+> > > > Then, QEMU displays the following error information:
+> > > > qemu-system-riscv64: Failed initializing vhost-user memory map,
+> > > > consider using -object memory-backend-file share=on  
+> > >
+> > > I see your command line parameters already contain "-object memory-backend-file
+> > > share=on", so this error message is not accurate.  
+> >
+> > QEMU uses this command to alloc fd in the "memory_region_init_ram_from_file" function
+> > and assigns the value of fd to mr->ram_block-fd. If the QEMU uses the default memory to
+> > initialize the system, the QEMU cannot obtain the fd in the "vhost_user_mem_section_filter"
+> > function when initializing the vhost-user. As a result, an error is reported in the "vhost_user_fill_set_mem_table_msg"
+> > function.
+> >
+> > Because of the above bug, even if "-object memory-backend-file share=on" is added to the command line,
+> > the QEMU still reports an error.  
+> 
+> Yes, what I meant is that QEMU should not report such inaccurate
+> messages because of some random codes elsewhere.
+> 
+> With current message, it suggested user use "-object
+> memory-backend-file share=on" in the command line, but it is already
+> used. So this is a false alarm. The "bug" is somewhere else.
 
-Alistair
+bug is in using memory_region_init_ram(),
+which can't possibly handle vhost-user, and can't work as expected with
+'-numa node,memdev' options.
+Before main ram infrastructure was converted to memdev,
+one should have used memory_region_allocate_system_memory() for
+allocating main RAM, so numa usecase was broken from the start.
+Later it old API was dropped in favor of more flexible/generic
+MachineState::ram approach (see commits 68a86dc15ccd..f0530f14c7c35d).
 
-> ---
-> v2: Force SXL and UXL to valid values.
-> ---
->  target/riscv/cpu.h        |  2 ++
->  target/riscv/cpu.c        |  8 ++++++++
->  target/riscv/cpu_helper.c | 33 +++++++++++++++++++++++++++++++++
->  target/riscv/csr.c        |  3 +++
->  target/riscv/translate.c  |  2 +-
->  5 files changed, 47 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 87248b562a..445ba5b395 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -395,6 +395,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
->  FIELD(TB_FLAGS, HLSX, 9, 1)
->  FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
-> +/* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
-> +FIELD(TB_FLAGS, XL, 12, 2)
->
->  #ifdef CONFIG_RISCV32
->  #define riscv_cpu_mxl(env)      MXL_RV32
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1857670a69..840edd66f8 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -355,6 +355,14 @@ static void riscv_cpu_reset(DeviceState *dev)
->      env->misa_mxl = env->misa_mxl_max;
->      env->priv = PRV_M;
->      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-> +    if (env->misa_mxl > MXL_RV32) {
-> +        /*
-> +         * The reset status of SXL/UXL is officially undefined,
-> +         * but invalid settings would result in a tcg assert.
-> +         */
-> +        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
-> +        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
-> +    }
->      env->mcause = 0;
->      env->pc = env->resetvec;
->      env->two_stage_lookup = false;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 403f54171d..429afd1f48 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -35,6 +35,37 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->  #endif
->  }
->
-> +static RISCVMXL cpu_get_xl(CPURISCVState *env)
-> +{
-> +#if defined(TARGET_RISCV32)
-> +    return MXL_RV32;
-> +#elif defined(CONFIG_USER_ONLY)
-> +    return MXL_RV64;
-> +#else
-> +    RISCVMXL xl = riscv_cpu_mxl(env);
-> +
-> +    /*
-> +     * When emulating a 32-bit-only cpu, use RV32.
-> +     * When emulating a 64-bit cpu, and MXL has been reduced to RV32,
-> +     * MSTATUSH doesn't have UXL/SXL, therefore XLEN cannot be widened
-> +     * back to RV64 for lower privs.
-> +     */
-> +    if (xl != MXL_RV32) {
-> +        switch (env->priv) {
-> +        case PRV_M:
-> +            break;
-> +        case PRV_U:
-> +            xl = get_field(env->mstatus, MSTATUS64_UXL);
-> +            break;
-> +        default: /* PRV_S | PRV_H */
-> +            xl = get_field(env->mstatus, MSTATUS64_SXL);
-> +            break;
-> +        }
-> +    }
-> +    return xl;
-> +#endif
-> +}
-> +
->  void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->                            target_ulong *cs_base, uint32_t *pflags)
->  {
-> @@ -78,6 +109,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->      }
->  #endif
->
-> +    flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
-> +
->      *pflags = flags;
->  }
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9c0753bc8b..c4a479ddd2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -526,6 +526,9 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->          mstatus = set_field(mstatus, MSTATUS32_SD, dirty);
->      } else {
->          mstatus = set_field(mstatus, MSTATUS64_SD, dirty);
-> +        /* SXL and UXL fields are for now read only */
-> +        mstatus = set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
-> +        mstatus = set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
->      }
->      env->mstatus = mstatus;
->
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 422f8ab8d0..7e7bb67d15 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -539,7 +539,6 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->  #else
->      ctx->virt_enabled = false;
->  #endif
-> -    ctx->xl = env->misa_mxl;
->      ctx->misa_ext = env->misa_ext;
->      ctx->frm = -1;  /* unknown rounding mode */
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
-> @@ -551,6 +550,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
->      ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
->      ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-> +    ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
->      ctx->cs = cs;
->      ctx->w = false;
->      ctx->ntemp = 0;
-> --
-> 2.25.1
->
->
+
+Modulo commit message, patch looks good to me and does what
+every machine should do. (I though that I've converted every
+existing to generalized MachineState::ram but it looks like
+riscv was missed).
+
+So we can model commit message after bd457782b3b0a,
+and also add that the patch fixes broken -numa node,memdev case,
+which never properly worked. It also opens possibility to
+use vhost-user/virtiosf with main RAM if main RAM is
+provided explicitly via machine.memory-backend option
+with shared memory backend.
+
+Btw: is there other riscv machines that allocate RAM directly?
+(if yes, those should be fixed as well, a patch per machine)
+
+
+> > This patch can solve this bug.
+> >  
+> > > Should this message be altered to mention things like what this patch does?  
+> >
+> > Thanks, I will rewrite the message in next version.  
+> > >  
+> > > > qemu-system-riscv64: vhost_set_mem_table failed: Interrupted system
+> > > > call (4)
+> > > > qemu-system-riscv64: unable to start vhost net: 4: falling back on
+> > > > userspace virtio
+> > > >
+> > > > Note that, before starting the kvm-acceled QEMU VM, following
+> > > > temporarily unaccepted QEMU patches should be used:
+> > > > https://lists.gnu.org/archive/html/qemu-devel/2021-08/msg02516.html
+> > > >
+> > > > This error was made bacause default main_mem is used to be registered  
+> > >
+> > > typo: because
+> > >  
+> > Thanks.
+> >  
+> > > > as the system memory, other memory cannot be initialized. Therefore,
+> > > > the system memory should be initialized to the machine->ram, which
+> > > > consists of the default main_mem and other possible memory required by
+> > > > applications, such as shared hugepage memory in DPDK.
+> > > > Also, the mc->defaul_ram_id should be set to the default main_mem,
+> > > > such as "riscv_virt_board.ram" for the virt machine.
+> > > >  
+> > >
+> > > How about changing the commit title to: "Use machine->ram as the system
+> > > memory" ??
+> > >  
+> >
+> > I think it is just a bugfix.
+> >  
+> 
+> But the current codes run perfectly okay so far. This patch adds an
+> additional use case for the KVM scenario where current codes cannot
+> handle.
+> 
+> Regards,
+> Bin
+> 
+
 
