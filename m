@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbHwY-0006mI-UP
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 03:47:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45546)
+	id 1mbHwb-0006tu-6v
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Oct 2021 03:47:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbHwK-0006Tq-UB
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:47:42 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:42935)
+ id 1mbHwX-0006fl-7v
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:47:53 -0400
+Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:33554)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbHwG-0002XA-Ga
- for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:47:39 -0400
-Received: by mail-pg1-x536.google.com with SMTP id 66so7847484pgc.9
- for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 00:47:36 -0700 (PDT)
+ id 1mbHwV-0002iT-BO
+ for qemu-riscv@nongnu.org; Fri, 15 Oct 2021 03:47:52 -0400
+Received: by mail-pf1-x42d.google.com with SMTP id t184so6834044pfd.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 Oct 2021 00:47:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=JFbJBbDn2LifqUYokZOSvCC06M2wsEWWxuLNo9J4GgE=;
- b=f2/wE9LN1TD5l2cqR1KaJKW1iHOwpeDCXuKGtFojGlUEbJWXmWMAqNmDEfRjTNqryl
- ZP7/gkeSgnkgQAgSR4Lzh1LO2oaJTPaJLX9pF/c3LMtmOmns17HNUArNLlklPRetGFpU
- c5zuC9H+qgZhcR6kmSPINfst/0vrenEsC7xys8NUPHwdbPDIgaRI+TL6xRXETOvv0NTN
- zi5H49PhfBiukurY8EP+QLY6CVRTzCu8m2AxLVmuzdpQfB2WFSAQcExR5JZ9P3Um79Ix
- 5euOQzQWB8J/DrCUNCb570EYuPsVcrIF7mnBc4r79qWB2BC0KAVQ8KBA/WBNiD0LM/na
- GDjQ==
+ bh=iSesJMTViR+gfcHGhiiIQkXXH1EzNz+zD7L/UEO6ZtU=;
+ b=ImfSQ2j8lduMulacfIieX+USFjvk5aKRVaeLQxuqxh2y9MPFZeY3WAm0N/dc6J6r5r
+ IoHKLbvc3ji46Yi4wkOf5/BWfzyIrgJT4FAjWnl0ury4sm8KtKLe3NwGGbfazvuhzjM6
+ BoM1SiE2pq+ZrJc5V2h7UXbGUHFFEixepiWyjdfXcplbLaQpWvNNV7dE4uyGc1nOaBCL
+ LbeZOtE6hZ21iOPJXe4NdAPtETJR9s4sOR0VgxEZ22SqokYghWwMkP61WTwzsmSAGazT
+ 47DR6UnILYUHItMtH16UK4x4axOwb/D8jbSQAXDB4wheF3dxjAD5PiOx6BWZHuWJCGlc
+ ZATw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=JFbJBbDn2LifqUYokZOSvCC06M2wsEWWxuLNo9J4GgE=;
- b=sbVBFBcHJry6ZgKsGbQ55gnwR/Q+0DpzFV3+Zl0uQA/tTcdkXi0ZQFJi4aUcQ+h/BE
- B2yF/mxEcBSRjeqnKvLv3OHe4hhUQlm9I2gvkpOK9ynsiJZl8YNZ5jK8Jszm+aVrbIbE
- ax/np/IRr4AUcuWSezAAEGs0i+2eCVYq/n44ToYYJ9rrLLK2a1p2kYcCqQtbS4mxTw8U
- BcTfksh2Ouu80ugGndKYzMyT7qWFflTcy/qhLFKfWHxSOHZrhb0QWB0LA4CvAV/3x8Xc
- lC7Yghukg/OhoqiaIdlQeAwRmsXQsTMc+sT+0LruyjUdyBrDIecELcMOX4K7YGQr5QU6
- avaA==
-X-Gm-Message-State: AOAM530b1Y3kMLEqb9oPECio14y+/jrIR7DnzzoMn1gxAnrjp4HhqPEY
- Ru9I5eh1BlQ8bYix2ZZ7VOjroQ==
-X-Google-Smtp-Source: ABdhPJzwysOZ1XCqKJR7lbaYPIyCOpo/Sgk+vE243MPmHkHf/PIFNDAsymfGQofhmkCcOfQnP4zqBA==
-X-Received: by 2002:a62:ce07:0:b0:44c:fef2:e410 with SMTP id
- y7-20020a62ce07000000b0044cfef2e410mr10156323pfg.71.1634284055297; 
- Fri, 15 Oct 2021 00:47:35 -0700 (PDT)
+ bh=iSesJMTViR+gfcHGhiiIQkXXH1EzNz+zD7L/UEO6ZtU=;
+ b=4+2LHY5A2xXrdEOdCjY4qO57LWvmjsEnjZWsj8kL3xBeze6ypiDoZo+7bgJg/3+qsJ
+ kWQZapzM1B8B3G+jmSawooUjjxCh+ydKsv5KXPZSVlVrqV7mx9cA1AuH2ijxWpr7VsaK
+ IMsfF2rKs7IttbcfG/dZluuLuRFjjHGAnQRHrabVHt7VbHdWwpe+ZGTihh65XrQFGdmf
+ X5hpMtoU4dTtnf+TssDmBM9axoYWwEpgBjMYMNcBZaPf69F26PnfR87rjH2hWfF4uwjB
+ mNHY+4yT+jb+CngK8eW7MZ+nvFROMi5FjCLVNRcwIn7BSMId0Zfl14rHoj8yLvNlO2Av
+ DA3g==
+X-Gm-Message-State: AOAM533jpBDKdQ7a/Xu6x8p2DE0PHOyfYYO/sL7eVxIAH3LaCAnqAbCr
+ hDA+jOx28GpsTyYax8ageu4i679SuESd4hUC
+X-Google-Smtp-Source: ABdhPJz7QV9Z8lqsaFkdm1nH6+cNg2rTNdDg+EDl7ef5Jhh+YThg5Qksw3C9sun0HG1THUSZuKuF/A==
+X-Received: by 2002:aa7:8d09:0:b0:44b:fd25:dd8a with SMTP id
+ j9-20020aa78d09000000b0044bfd25dd8amr10366377pfe.41.1634284068284; 
+ Fri, 15 Oct 2021 00:47:48 -0700 (PDT)
 Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
  [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id z13sm4271680pfq.130.2021.10.15.00.47.33
+ by smtp.gmail.com with ESMTPSA id z13sm4271680pfq.130.2021.10.15.00.47.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Oct 2021 00:47:35 -0700 (PDT)
+ Fri, 15 Oct 2021 00:47:48 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -52,24 +52,23 @@ Cc: Frank Chang <frank.chang@sifive.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v8 16/78] target/riscv: introduce more imm value modes in
- translator functions
-Date: Fri, 15 Oct 2021 15:45:17 +0800
-Message-Id: <20211015074627.3957162-17-frank.chang@sifive.com>
+Subject: [PATCH v8 19/78] target/riscv: rvv-1.0: configure instructions
+Date: Fri, 15 Oct 2021 15:45:21 +0800
+Message-Id: <20211015074627.3957162-21-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211015074627.3957162-1-frank.chang@sifive.com>
 References: <20211015074627.3957162-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,300 +81,140 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Oct 2021 07:47:42 -0000
+X-List-Received-Date: Fri, 15 Oct 2021 07:47:53 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
-
-Immediate value in translator function is extended not only
-zero-extended and sign-extended but with more modes to be applicable
-with multiple formats of vector instructions.
-
-* IMM_ZX:         Zero-extended
-* IMM_SX:         Sign-extended
-* IMM_TRUNC_SEW:  Truncate to log(SEW) bit
-* IMM_TRUNC_2SEW: Truncate to log(2*SEW) bit
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 115 ++++++++++++++----------
- 1 file changed, 66 insertions(+), 49 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 64 +++++++++++--------------
+ target/riscv/vector_helper.c            | 14 +++++-
+ 2 files changed, 41 insertions(+), 37 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index a03cc8e0781..c33ded385d7 100644
+index ddea578d0ba..ddc5f602768 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1310,8 +1310,32 @@ static void tcg_gen_gvec_rsubs(unsigned vece, uint32_t dofs, uint32_t aofs,
+@@ -120,59 +120,51 @@ static bool require_noover(const int8_t dst, const int8_t dst_lmul,
+     return !is_overlapped(dst, dst_size, src, src_size);
+ }
  
- GEN_OPIVX_GVEC_TRANS(vrsub_vx, rsubs)
- 
-+typedef enum {
-+    IMM_ZX,         /* Zero-extended */
-+    IMM_SX,         /* Sign-extended */
-+    IMM_TRUNC_SEW,  /* Truncate to log(SEW) bits */
-+    IMM_TRUNC_2SEW, /* Truncate to log(2*SEW) bits */
-+} imm_mode_t;
-+
-+static int64_t extract_imm(DisasContext *s, uint32_t imm, imm_mode_t imm_mode)
-+{
-+    switch (imm_mode) {
-+    case IMM_ZX:
-+        return extract64(imm, 0, 5);
-+    case IMM_SX:
-+        return sextract64(imm, 0, 5);
-+    case IMM_TRUNC_SEW:
-+        return extract64(imm, 0, s->sew + 3);
-+    case IMM_TRUNC_2SEW:
-+        return extract64(imm, 0, s->sew + 4);
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
- static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
--                        gen_helper_opivx *fn, DisasContext *s, int zx)
-+                        gen_helper_opivx *fn, DisasContext *s,
-+                        imm_mode_t imm_mode)
+-static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
++static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
  {
-     TCGv_ptr dest, src2, mask;
-     TCGv src1;
-@@ -1324,11 +1348,8 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
-     src2 = tcg_temp_new_ptr();
--    if (zx) {
--        src1 = tcg_constant_tl(imm);
--    } else {
--        src1 = tcg_constant_tl(sextract64(imm, 0, 5));
--    }
-+    src1 = tcg_constant_tl(extract_imm(s, imm, imm_mode));
-+
-     data = FIELD_DP32(data, VDATA, VM, vm);
-     data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
-     desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-@@ -1352,28 +1373,23 @@ typedef void GVecGen2iFn(unsigned, uint32_t, uint32_t, int64_t,
+-    TCGv s1, s2, dst;
++    TCGv s1, dst;
  
- static inline bool
- do_opivi_gvec(DisasContext *s, arg_rmrr *a, GVecGen2iFn *gvec_fn,
--              gen_helper_opivx *fn, int zx)
-+              gen_helper_opivx *fn, imm_mode_t imm_mode)
- {
-     if (!opivx_check(s, a)) {
+-    if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
++    if (!require_rvv(s) || !has_ext(s, RVV)) {
          return false;
      }
  
-     if (a->vm && s->vl_eq_vlmax) {
--        if (zx) {
--            gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
--                    extract64(a->rs1, 0, 5), MAXSZ(s), MAXSZ(s));
--        } else {
--            gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
--                    sextract64(a->rs1, 0, 5), MAXSZ(s), MAXSZ(s));
--        }
-+        gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
-+                extract_imm(s, a->rs1, imm_mode), MAXSZ(s), MAXSZ(s));
-         mark_vs_dirty(s);
-         return true;
+-    s2 = get_gpr(ctx, a->rs2, EXT_ZERO);
+-    dst = dest_gpr(ctx, a->rd);
++    dst = dest_gpr(s, rd);
+ 
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
++    if (rd == 0 && rs1 == 0) {
++        s1 = tcg_temp_new();
++        tcg_gen_mov_tl(s1, cpu_vl);
++    } else if (rs1 == 0) {
+         /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+         s1 = tcg_constant_tl(RV_VLEN_MAX);
+     } else {
+-        s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
++        s1 = get_gpr(s, rs1, EXT_ZERO);
      }
--    return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, zx);
-+    return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, imm_mode);
+-    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(ctx, a->rd, dst);
+-    mark_vs_dirty(ctx);
+ 
+-    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
+-    lookup_and_goto_ptr(ctx);
+-    ctx->base.is_jmp = DISAS_NORETURN;
+-    return true;
+-}
++    gen_helper_vsetvl(dst, cpu_env, s1, s2);
++    gen_set_gpr(s, rd, dst);
++    mark_vs_dirty(s);
+ 
+-static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
+-{
+-    TCGv s1, s2, dst;
++    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
++    lookup_and_goto_ptr(s);
++    s->base.is_jmp = DISAS_NORETURN;
+ 
+-    if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
+-        return false;
++    if (rd == 0 && rs1 == 0) {
++        tcg_temp_free(s1);
+     }
+ 
+-    s2 = tcg_constant_tl(a->zimm);
+-    dst = dest_gpr(ctx, a->rd);
++    return true;
++}
+ 
+-    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
+-    if (a->rs1 == 0) {
+-        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
+-        s1 = tcg_constant_tl(RV_VLEN_MAX);
+-    } else {
+-        s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
+-    }
+-    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+-    gen_set_gpr(ctx, a->rd, dst);
+-    mark_vs_dirty(ctx);
++static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
++{
++    TCGv s2 = get_gpr(s, a->rs2, EXT_ZERO);
++    return do_vsetvl(s, a->rd, a->rs1, s2);
++}
+ 
+-    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
+-    ctx->base.is_jmp = DISAS_NORETURN;
+-    return true;
++static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
++{
++    TCGv s2 = tcg_constant_tl(a->zimm);
++    return do_vsetvl(s, a->rd, a->rs1, s2);
  }
  
- /* OPIVI with GVEC IR */
--#define GEN_OPIVI_GVEC_TRANS(NAME, ZX, OPIVX, SUF) \
-+#define GEN_OPIVI_GVEC_TRANS(NAME, IMM_MODE, OPIVX, SUF) \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
- {                                                                  \
-     static gen_helper_opivx * const fns[4] = {                     \
-@@ -1381,10 +1397,10 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
-         gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,            \
-     };                                                             \
-     return do_opivi_gvec(s, a, tcg_gen_gvec_##SUF,                 \
--                         fns[s->sew], ZX);                         \
-+                         fns[s->sew], IMM_MODE);                   \
- }
- 
--GEN_OPIVI_GVEC_TRANS(vadd_vi, 0, vadd_vx, addi)
-+GEN_OPIVI_GVEC_TRANS(vadd_vi, IMM_SX, vadd_vx, addi)
- 
- static void tcg_gen_gvec_rsubi(unsigned vece, uint32_t dofs, uint32_t aofs,
-                                int64_t c, uint32_t oprsz, uint32_t maxsz)
-@@ -1393,7 +1409,7 @@ static void tcg_gen_gvec_rsubi(unsigned vece, uint32_t dofs, uint32_t aofs,
-     tcg_gen_gvec_rsubs(vece, dofs, aofs, tmp, oprsz, maxsz);
- }
- 
--GEN_OPIVI_GVEC_TRANS(vrsub_vi, 0, vrsub_vx, rsubi)
-+GEN_OPIVI_GVEC_TRANS(vrsub_vi, IMM_SX, vrsub_vx, rsubi)
- 
- /* Vector Widening Integer Add/Subtract */
- 
-@@ -1649,7 +1665,7 @@ GEN_OPIVX_TRANS(vmadc_vxm, opivx_vmadc_check)
- GEN_OPIVX_TRANS(vmsbc_vxm, opivx_vmadc_check)
- 
- /* OPIVI without GVEC IR */
--#define GEN_OPIVI_TRANS(NAME, ZX, OPIVX, CHECK)                          \
-+#define GEN_OPIVI_TRANS(NAME, IMM_MODE, OPIVX, CHECK)                    \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
- {                                                                        \
-     if (CHECK(s, a)) {                                                   \
-@@ -1658,13 +1674,13 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##OPIVX##_w, gen_helper_##OPIVX##_d,              \
-         };                                                               \
-         return opivi_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
--                           fns[s->sew], s, ZX);                          \
-+                           fns[s->sew], s, IMM_MODE);                    \
-     }                                                                    \
-     return false;                                                        \
- }
- 
--GEN_OPIVI_TRANS(vadc_vim, 0, vadc_vxm, opivx_vadc_check)
--GEN_OPIVI_TRANS(vmadc_vim, 0, vmadc_vxm, opivx_vmadc_check)
-+GEN_OPIVI_TRANS(vadc_vim, IMM_SX, vadc_vxm, opivx_vadc_check)
-+GEN_OPIVI_TRANS(vmadc_vim, IMM_SX, vmadc_vxm, opivx_vmadc_check)
- 
- /* Vector Bitwise Logical Instructions */
- GEN_OPIVV_GVEC_TRANS(vand_vv, and)
-@@ -1673,9 +1689,9 @@ GEN_OPIVV_GVEC_TRANS(vxor_vv, xor)
- GEN_OPIVX_GVEC_TRANS(vand_vx, ands)
- GEN_OPIVX_GVEC_TRANS(vor_vx,  ors)
- GEN_OPIVX_GVEC_TRANS(vxor_vx, xors)
--GEN_OPIVI_GVEC_TRANS(vand_vi, 0, vand_vx, andi)
--GEN_OPIVI_GVEC_TRANS(vor_vi, 0, vor_vx,  ori)
--GEN_OPIVI_GVEC_TRANS(vxor_vi, 0, vxor_vx, xori)
-+GEN_OPIVI_GVEC_TRANS(vand_vi, IMM_SX, vand_vx, andi)
-+GEN_OPIVI_GVEC_TRANS(vor_vi, IMM_SX, vor_vx,  ori)
-+GEN_OPIVI_GVEC_TRANS(vxor_vi, IMM_SX, vxor_vx, xori)
- 
- /* Vector Single-Width Bit Shift Instructions */
- GEN_OPIVV_GVEC_TRANS(vsll_vv,  shlv)
-@@ -1723,9 +1739,9 @@ GEN_OPIVX_GVEC_SHIFT_TRANS(vsll_vx,  shls)
- GEN_OPIVX_GVEC_SHIFT_TRANS(vsrl_vx,  shrs)
- GEN_OPIVX_GVEC_SHIFT_TRANS(vsra_vx,  sars)
- 
--GEN_OPIVI_GVEC_TRANS(vsll_vi, 1, vsll_vx,  shli)
--GEN_OPIVI_GVEC_TRANS(vsrl_vi, 1, vsrl_vx,  shri)
--GEN_OPIVI_GVEC_TRANS(vsra_vi, 1, vsra_vx,  sari)
-+GEN_OPIVI_GVEC_TRANS(vsll_vi, IMM_ZX, vsll_vx, shli)
-+GEN_OPIVI_GVEC_TRANS(vsrl_vi, IMM_ZX, vsrl_vx, shri)
-+GEN_OPIVI_GVEC_TRANS(vsra_vi, IMM_ZX, vsra_vx, sari)
- 
- /* Vector Narrowing Integer Right Shift Instructions */
- static bool opivv_narrow_check(DisasContext *s, arg_rmrr *a)
-@@ -1791,7 +1807,7 @@ GEN_OPIVX_NARROW_TRANS(vnsra_vx)
- GEN_OPIVX_NARROW_TRANS(vnsrl_vx)
- 
- /* OPIVI with NARROW */
--#define GEN_OPIVI_NARROW_TRANS(NAME, ZX, OPIVX)                          \
-+#define GEN_OPIVI_NARROW_TRANS(NAME, IMM_MODE, OPIVX)                    \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
- {                                                                        \
-     if (opivx_narrow_check(s, a)) {                                      \
-@@ -1801,13 +1817,13 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##OPIVX##_w,                                      \
-         };                                                               \
-         return opivi_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
--                           fns[s->sew], s, ZX);                          \
-+                           fns[s->sew], s, IMM_MODE);                    \
-     }                                                                    \
-     return false;                                                        \
- }
- 
--GEN_OPIVI_NARROW_TRANS(vnsra_vi, 1, vnsra_vx)
--GEN_OPIVI_NARROW_TRANS(vnsrl_vi, 1, vnsrl_vx)
-+GEN_OPIVI_NARROW_TRANS(vnsra_vi, IMM_ZX, vnsra_vx)
-+GEN_OPIVI_NARROW_TRANS(vnsrl_vi, IMM_ZX, vnsrl_vx)
- 
- /* Vector Integer Comparison Instructions */
- /*
-@@ -1845,12 +1861,12 @@ GEN_OPIVX_TRANS(vmsle_vx, opivx_cmp_check)
- GEN_OPIVX_TRANS(vmsgtu_vx, opivx_cmp_check)
- GEN_OPIVX_TRANS(vmsgt_vx, opivx_cmp_check)
- 
--GEN_OPIVI_TRANS(vmseq_vi, 0, vmseq_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsne_vi, 0, vmsne_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsleu_vi, 1, vmsleu_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsle_vi, 0, vmsle_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsgtu_vi, 1, vmsgtu_vx, opivx_cmp_check)
--GEN_OPIVI_TRANS(vmsgt_vi, 0, vmsgt_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmseq_vi, IMM_SX, vmseq_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsne_vi, IMM_SX, vmsne_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsleu_vi, IMM_ZX, vmsleu_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsle_vi, IMM_SX, vmsle_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsgtu_vi, IMM_ZX, vmsgtu_vx, opivx_cmp_check)
-+GEN_OPIVI_TRANS(vmsgt_vi, IMM_SX, vmsgt_vx, opivx_cmp_check)
- 
- /* Vector Integer Min/Max Instructions */
- GEN_OPIVV_GVEC_TRANS(vminu_vv, umin)
-@@ -2021,7 +2037,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
- 
- GEN_OPIVV_TRANS(vmerge_vvm, opivv_vadc_check)
- GEN_OPIVX_TRANS(vmerge_vxm, opivx_vadc_check)
--GEN_OPIVI_TRANS(vmerge_vim, 0, vmerge_vxm, opivx_vadc_check)
-+GEN_OPIVI_TRANS(vmerge_vim, IMM_SX, vmerge_vxm, opivx_vadc_check)
- 
- /*
-  *** Vector Fixed-Point Arithmetic Instructions
-@@ -2036,8 +2052,8 @@ GEN_OPIVX_TRANS(vsaddu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vsadd_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssubu_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssub_vx,  opivx_check)
--GEN_OPIVI_TRANS(vsaddu_vi, 1, vsaddu_vx, opivx_check)
--GEN_OPIVI_TRANS(vsadd_vi, 0, vsadd_vx, opivx_check)
-+GEN_OPIVI_TRANS(vsaddu_vi, IMM_ZX, vsaddu_vx, opivx_check)
-+GEN_OPIVI_TRANS(vsadd_vi, IMM_SX, vsadd_vx, opivx_check)
- 
- /* Vector Single-Width Averaging Add and Subtract */
- GEN_OPIVV_TRANS(vaadd_vv, opivv_check)
-@@ -2064,16 +2080,16 @@ GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
- GEN_OPIVV_TRANS(vssra_vv, opivv_check)
- GEN_OPIVX_TRANS(vssrl_vx,  opivx_check)
- GEN_OPIVX_TRANS(vssra_vx,  opivx_check)
--GEN_OPIVI_TRANS(vssrl_vi, 1, vssrl_vx, opivx_check)
--GEN_OPIVI_TRANS(vssra_vi, 0, vssra_vx, opivx_check)
-+GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
-+GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
- 
- /* Vector Narrowing Fixed-Point Clip Instructions */
- GEN_OPIVV_NARROW_TRANS(vnclipu_vv)
- GEN_OPIVV_NARROW_TRANS(vnclip_vv)
- GEN_OPIVX_NARROW_TRANS(vnclipu_vx)
- GEN_OPIVX_NARROW_TRANS(vnclip_vx)
--GEN_OPIVI_NARROW_TRANS(vnclipu_vi, 1, vnclipu_vx)
--GEN_OPIVI_NARROW_TRANS(vnclip_vi, 1, vnclip_vx)
-+GEN_OPIVI_NARROW_TRANS(vnclipu_vi, IMM_ZX, vnclipu_vx)
-+GEN_OPIVI_NARROW_TRANS(vnclip_vi, IMM_ZX, vnclip_vx)
- 
- /*
-  *** Vector Float Point Arithmetic Instructions
-@@ -3047,7 +3063,7 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
- 
- GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
- GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
--GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
-+GEN_OPIVI_TRANS(vslideup_vi, IMM_ZX, vslideup_vx, slideup_check)
- 
- static bool slidedown_check(DisasContext *s, arg_rmrr *a)
+ /* vector register offset from env */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index bf976d364f1..78fae782840 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -31,12 +31,24 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
  {
-@@ -3058,7 +3074,7 @@ static bool slidedown_check(DisasContext *s, arg_rmrr *a)
+     int vlmax, vl;
+     RISCVCPU *cpu = env_archcpu(env);
++    uint64_t lmul = FIELD_EX64(s2, VTYPE, VLMUL);
+     uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
+     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
+     bool vill = FIELD_EX64(s2, VTYPE, VILL);
+     target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
  
- GEN_OPIVX_TRANS(vslidedown_vx, slidedown_check)
- GEN_OPIVX_TRANS(vslide1down_vx, slidedown_check)
--GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, slidedown_check)
-+GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
- 
- /* Vector Register Gather Instruction */
- static bool vrgather_vv_check(DisasContext *s, arg_rmrr *a)
-@@ -3137,7 +3153,8 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
-             gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
-             gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
-         };
--        return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s, 1);
-+        return opivi_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew],
-+                           s, IMM_ZX);
-     }
-     return true;
- }
+-    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
++    if (lmul & 4) {
++        /* Fractional LMUL. */
++        if (lmul == 4 ||
++            cpu->cfg.elen >> (8 - lmul) < sew) {
++            vill = true;
++        }
++    }
++
++    if ((sew > cpu->cfg.elen)
++        || vill
++        || (ediv != 0)
++        || (reserved != 0)) {
+         /* only set vill bit. */
+         env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+         env->vl = 0;
 -- 
 2.25.1
 
