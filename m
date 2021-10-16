@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbnGS-0001BY-J6
-	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 13:14:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60582)
+	id 1mbnGT-0001FR-S0
+	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 13:14:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mbnGM-00012X-WE
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:27 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b]:55053)
+ id 1mbnGJ-0000zp-NU
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:24 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:39896)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mbnGK-0006Dd-7s
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:26 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id np13so9406909pjb.4
- for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 10:14:23 -0700 (PDT)
+ id 1mbnGG-0006AT-By
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:23 -0400
+Received: by mail-pg1-x530.google.com with SMTP id g184so11678987pgc.6
+ for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 10:14:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=eqYHtG7U6Thazj4+tYJjUHiaULEjGKehA71xuneoPd8=;
- b=lUftEJfOO9og9QvDBw6eIdRfZxb/xiM04IiPT402HFoPju69kJcnsqanyLDqgDL1Tf
- y2n0617pXghIbQSUT2BzNLZrx2z9bRDQrmcBc8iyZHRRoemxYs4Q3yV1DAtahQMfR3/k
- kDepu+KB1ZtESfa40gwmvRKUx6OFHm1iQgrB4zOe6pejD3Mamh1CF0WerCrniFDWmRri
- Gk/p4RtrSsITl2A5EZ3WO41cda9I52QdDyMIBSItCKLokmVxa5tarAGeve/8WH7rFZZL
- MC7JQ7l/d0czjccFEJ9Jzmn2OgZbTixlzNDKpTC3cZyoDbjCfIn2b2MPqOeLTTFHFlUE
- zHIA==
+ bh=HfhIYs6BYtJZrJhyDqdjqFsTT/I7BM3RSYSu00CViw4=;
+ b=kZ73zNZFvXuOLh9u9aSdPoK7MVceaAKYSlzm0vrGdXwQh/eYBaYqi6f+8B0ibuda1m
+ 84iy2tv4EYaj/yYi/MKGbKSaJn8PK4DEeAafddraJrQX/n2bIOuBGgUmuieFdKxJFxXV
+ w5KcXY6sIOycGLZw0QitfenNRA10BcBfJ+21mBt9E9NtaZz6eQUlvP27kQZBMS7dL8au
+ LbQVazNFNtmjuHctPLdFr56oDcxOLoXhIVj1pZ+vQzSi+dm0pI6X+6gcTmLwXzZHBBRV
+ OCpAvkJ0glQmaVaqh/8/0TjAj2Ckkq/u7EP39ylFdqUYRv8jLv6PUs127H7a2T8diZw3
+ X2pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=eqYHtG7U6Thazj4+tYJjUHiaULEjGKehA71xuneoPd8=;
- b=CjKaxasEfl4iYAr27lkaJarfZzk3ZbkaXP1pw1ARsUnEzl1bhIT0qxXziDpMcO4P1D
- OokOpoKbkMxnyMKvh+Xqwc80GLltpjKxXlJ54P0Lt6mlt05t7i7fU7mCFkOpqby/e0bD
- 5QDWYTe+A51nwEDOuuvnPAP7XrW21uZ9WWxW+lKf9CyuwZtttSNoljt29v+gW5/P5Ich
- VYqlJQSW1FHwdDC6ykwnthZEQiFKX2+SBNYwsfToFoLN8W4PoQHap8xto8vwwCCu+MZ9
- mJJAP9/1//eidZQfyTazIaDA+1ev+9KUShdcvuYL4Gbhy8PHGjbD2h5YByIjqBlSSiH2
- YsWA==
-X-Gm-Message-State: AOAM533acX5l0NbwpOzzLpfMe5g45QajA78afnUWrmAYPyn2P6NQtgFr
- SKA1xa6+7ozlplocznoxaC2eiQ==
-X-Google-Smtp-Source: ABdhPJw6jLHMum4U97cIcswfFr+Ui9rEP0s+5JcHAM8x68mjK7dvaxNyRfnTMJXw3qr9qe9LcQbsow==
-X-Received: by 2002:a17:90b:350f:: with SMTP id
- ls15mr21592887pjb.220.1634404462190; 
- Sat, 16 Oct 2021 10:14:22 -0700 (PDT)
+ bh=HfhIYs6BYtJZrJhyDqdjqFsTT/I7BM3RSYSu00CViw4=;
+ b=gco2rq0yE9bRdBzfFNd317JO4Dxdl0vGskSa3M9WU7aVlVV/BieVLzZG+PEbSeBBeA
+ OyadhAbUUupo+5Sq5vOElZwqQWfZeTTW89QCkQJYR1hUWe7F1WKMjR6dfsUPsuePZZWt
+ +Mxb6gefkRRuTFspuW98sNZp5SMTqjzWwURvvIjPppzRBFKTisE9tyeT9PLxsUH2ATLb
+ 5wFeEiWmmHBkLI96WCuIFfVSBYHckQQ43vPMM/sM8PZoo+W0niV+9ptRQ1L45iC+JiPP
+ ctqUB+vLxzdvXlmIqq5sVG3RtvxU182eA0+wyETzp8CzcNOjOofFQYpFwxc8dHkH//lh
+ d+Zw==
+X-Gm-Message-State: AOAM531xRaPRw7r4quEchiMlzLd0IcNVgtSfnF8+yIITKegz6oldASI8
+ cV2N301A4n0lXxVdVMemTFgsCw==
+X-Google-Smtp-Source: ABdhPJwledNFtzOQwIGrVn1qwc/UQdBdJLmGBmzUqXp9pn2zEkIdvfktk+rxUWoasCIos5s4LFYdvw==
+X-Received: by 2002:a63:a80c:: with SMTP id o12mr14553211pgf.422.1634404459051; 
+ Sat, 16 Oct 2021 10:14:19 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id l4sm2330281pfc.121.2021.10.16.10.14.21
+ by smtp.gmail.com with ESMTPSA id l4sm2330281pfc.121.2021.10.16.10.14.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Oct 2021 10:14:21 -0700 (PDT)
+ Sat, 16 Oct 2021 10:14:18 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  frederic.petrot@univ-grenoble-alpes.fr, fabien.portas@grenoble-inp.org,
  zhiwei_liu@c-sky.com, frank.chang@sifive.com
-Subject: [PATCH v3 08/14] target/riscv: Replace is_32bit with get_xl/get_xlen
-Date: Sat, 16 Oct 2021 10:14:06 -0700
-Message-Id: <20211016171412.3163784-9-richard.henderson@linaro.org>
+Subject: [PATCH v3 05/14] target/riscv: Add MXL/SXL/UXL to TB_FLAGS
+Date: Sat, 16 Oct 2021 10:14:03 -0700
+Message-Id: <20211016171412.3163784-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211016171412.3163784-1-richard.henderson@linaro.org>
 References: <20211016171412.3163784-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,82 +77,138 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2021 17:14:27 -0000
+X-List-Received-Date: Sat, 16 Oct 2021 17:14:24 -0000
 
-In preparation for RV128, replace a simple predicate
-with a more versatile test.
+Begin adding support for switching XLEN at runtime.  Extract the
+effective XLEN from MISA and MSTATUS and store for use during translation.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c | 33 ++++++++++++++++++---------------
- 1 file changed, 18 insertions(+), 15 deletions(-)
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu.c        |  8 ++++++++
+ target/riscv/cpu_helper.c | 33 +++++++++++++++++++++++++++++++++
+ target/riscv/csr.c        |  3 +++
+ target/riscv/translate.c  |  2 +-
+ 5 files changed, 47 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7e7bb67d15..2624d65fc2 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -91,16 +91,19 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
- }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index d0e82135a9..c24bc9a039 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -395,6 +395,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
+ /* Is a Hypervisor instruction load/store allowed? */
+ FIELD(TB_FLAGS, HLSX, 9, 1)
+ FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
++/* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
++FIELD(TB_FLAGS, XL, 12, 2)
  
  #ifdef TARGET_RISCV32
--# define is_32bit(ctx)  true
-+#define get_xl(ctx)    MXL_RV32
- #elif defined(CONFIG_USER_ONLY)
--# define is_32bit(ctx)  false
-+#define get_xl(ctx)    MXL_RV64
- #else
--static inline bool is_32bit(DisasContext *ctx)
--{
--    return ctx->xl == MXL_RV32;
--}
-+#define get_xl(ctx)    ((ctx)->xl)
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1857670a69..4e1920d5f0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -355,6 +355,14 @@ static void riscv_cpu_reset(DeviceState *dev)
+     env->misa_mxl = env->misa_mxl_max;
+     env->priv = PRV_M;
+     env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
++    if (env->misa_mxl > MXL_RV32) {
++        /*
++         * The reset status of SXL/UXL is undefined, but mstatus is WARL
++         * and we must ensure that the value after init is valid for read.
++         */
++        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
++        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
++    }
+     env->mcause = 0;
+     env->pc = env->resetvec;
+     env->two_stage_lookup = false;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 403f54171d..429afd1f48 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -35,6 +35,37 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
  #endif
+ }
  
-+/* The word size for this machine mode. */
-+static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
++static RISCVMXL cpu_get_xl(CPURISCVState *env)
 +{
-+    return 16 << get_xl(ctx);
++#if defined(TARGET_RISCV32)
++    return MXL_RV32;
++#elif defined(CONFIG_USER_ONLY)
++    return MXL_RV64;
++#else
++    RISCVMXL xl = riscv_cpu_mxl(env);
++
++    /*
++     * When emulating a 32-bit-only cpu, use RV32.
++     * When emulating a 64-bit cpu, and MXL has been reduced to RV32,
++     * MSTATUSH doesn't have UXL/SXL, therefore XLEN cannot be widened
++     * back to RV64 for lower privs.
++     */
++    if (xl != MXL_RV32) {
++        switch (env->priv) {
++        case PRV_M:
++            break;
++        case PRV_U:
++            xl = get_field(env->mstatus, MSTATUS64_UXL);
++            break;
++        default: /* PRV_S | PRV_H */
++            xl = get_field(env->mstatus, MSTATUS64_SXL);
++            break;
++        }
++    }
++    return xl;
++#endif
 +}
 +
- /* The word size for this operation. */
- static inline int oper_len(DisasContext *ctx)
+ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+                           target_ulong *cs_base, uint32_t *pflags)
  {
-@@ -282,7 +285,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
- static void mark_fs_dirty(DisasContext *ctx)
- {
-     TCGv tmp;
--    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
-+    target_ulong sd = get_xl(ctx) == MXL_RV32 ? MSTATUS32_SD : MSTATUS64_SD;
+@@ -78,6 +109,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+     }
+ #endif
  
-     if (ctx->mstatus_fs != MSTATUS_FS) {
-         /* Remember the state change for the rest of the TB. */
-@@ -341,16 +344,16 @@ EX_SH(12)
-     }                              \
- } while (0)
++    flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
++
+     *pflags = flags;
+ }
  
--#define REQUIRE_32BIT(ctx) do { \
--    if (!is_32bit(ctx)) {       \
--        return false;           \
--    }                           \
-+#define REQUIRE_32BIT(ctx) do {    \
-+    if (get_xl(ctx) != MXL_RV32) { \
-+        return false;              \
-+    }                              \
- } while (0)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 9c0753bc8b..c4a479ddd2 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -526,6 +526,9 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+         mstatus = set_field(mstatus, MSTATUS32_SD, dirty);
+     } else {
+         mstatus = set_field(mstatus, MSTATUS64_SD, dirty);
++        /* SXL and UXL fields are for now read only */
++        mstatus = set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
++        mstatus = set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
+     }
+     env->mstatus = mstatus;
  
--#define REQUIRE_64BIT(ctx) do { \
--    if (is_32bit(ctx)) {        \
--        return false;           \
--    }                           \
-+#define REQUIRE_64BIT(ctx) do {    \
-+    if (get_xl(ctx) < MXL_RV64) {  \
-+        return false;              \
-+    }                              \
- } while (0)
- 
- static int ex_rvc_register(DisasContext *ctx, int reg)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 422f8ab8d0..7e7bb67d15 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -539,7 +539,6 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+ #else
+     ctx->virt_enabled = false;
+ #endif
+-    ctx->xl = env->misa_mxl;
+     ctx->misa_ext = env->misa_ext;
+     ctx->frm = -1;  /* unknown rounding mode */
+     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+@@ -551,6 +550,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
+     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
+     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
++    ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
+     ctx->cs = cs;
+     ctx->w = false;
+     ctx->ntemp = 0;
 -- 
 2.25.1
 
