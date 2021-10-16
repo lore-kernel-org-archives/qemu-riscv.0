@@ -1,68 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbfPV-0000nU-TG
-	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 04:51:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45710)
+	id 1mbfR2-0002UD-58
+	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 04:52:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45984)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbfPU-0000n7-GY
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 04:51:20 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:40884)
+ id 1mbfR0-0002SL-DX
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 04:52:54 -0400
+Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133]:41927)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbfPR-0002aX-Rm
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 04:51:20 -0400
-Received: by mail-il1-x12f.google.com with SMTP id f15so9631537ilu.7
- for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 01:51:15 -0700 (PDT)
+ id 1mbfQy-0003sS-MC
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 04:52:54 -0400
+Received: by mail-il1-x133.google.com with SMTP id d11so9588559ilc.8
+ for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 01:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FDUdCAzU5Pi8JHCFt9eUslg759NqzhrDK3Uot5MrEl0=;
- b=cRzVWsYPgIYC7PpinuiTM4H4Ai9TGu/9k8UJw+/j8Ce+h7KVgEuVinqGRn78HK+npb
- kIf71JGEARZZfHHpMsp7iiwRhF4Gr9z9nH0cI+iZeaZV2R90yofqpzfIcDhSd9UQUEwS
- HLIZUsJ442Tfv4VLQ11WJhicTbev/XUaLGreurO4EZdHC17z7kIdnxDjyEpNdGAEzrjW
- x0Wfbru2CTVAMNGBuKox2nkygqOxMLsyoKPoDsTePc39eoPgcgPzlzn5PQebyYrdfAn2
- YrNJKhq8kjjBwWisAlaKRf9JrAnJFrH3Fk3GUomlK9H/HuByvukErdGCH1fLV/WT9q7B
- SbVA==
+ :cc; bh=T9u1nm+CwLhB5jIRVog43fyVg5RFc3gabjxZL45eFMo=;
+ b=drMuEa7aOb+ltn+PkGuEStIsSFzDfrZIxiIo7wAoen7zptr8Wnm0x3nh6fevsvdP7G
+ QgpkByB4uO8T13zheiiTblDxAFBV7h3DOE41jpzg7Cwp2DaiGyykf9zjrzIQtOkUTHOq
+ UbO2J3f6RI47+rtblKrCoyTOyyrdYJH3znFEczmZp6B5lWwnoCYZB1N6obNKc0Ba4+XP
+ WsBQOzwuE0yvWzvnGvDo6DFzJLQ73JPJtC9JyuKdFXnvzSExOHSAEBry1H6VyJFzbgFD
+ aKo5u2wTGT3vHJmoSG79Fzd86wdUz0vnqmVlvKEFQlIalklOzCUXa40q57nobI+Fn0AQ
+ NDzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=FDUdCAzU5Pi8JHCFt9eUslg759NqzhrDK3Uot5MrEl0=;
- b=S5I0MoMLI6cuxOk86R48c3LvNaNWDd9W8K72nCztpz6dj/o/7HLLoy0Gyn2a/JND7I
- mZ7wNXntYw3PRn3QyyV+hfA6u4cvvDGgIVH/guDF4LM7cb4BC2ALsqjbZ3/uSlkw6yim
- 8rH351Pj0MTYpCAvPXcO53LJ8YDM1rp9UOtx7FiBGy+F09WnluSfOE0SyqGrrLUDToz+
- hKkaa2fXgRmKv69prtwIkDjmnsE+OPhvHNx/PgCw2XL1B8NNIjsZQWFqXx+i1OaaDMRC
- IRp+mv1PFAT+stp/00mSJCuPHM5EalqHEUE0NG4nFuuVHON/IA8bSOV/SxJKDUU/9qGu
- 9r6g==
-X-Gm-Message-State: AOAM531t4JdP0j5tBVmX3Zylfg9+lFCN02fWR7AMdSE6fm8ouqwU0FVK
- jZRWn3D/qlzCAhDjNbSG7EI+/DTkgQAfY/+sTxe8dA==
-X-Google-Smtp-Source: ABdhPJy2qxTar62GLRV0oZsm7PrdDMwxO+R2oFRvQrZKv8dU2OGhyHreeqQq3ANpPPdQn48/blbLIDk+Vnue3LerDt8=
-X-Received: by 2002:a05:6e02:893:: with SMTP id
- z19mr6981703ils.224.1634374274979; 
- Sat, 16 Oct 2021 01:51:14 -0700 (PDT)
+ bh=T9u1nm+CwLhB5jIRVog43fyVg5RFc3gabjxZL45eFMo=;
+ b=GZ+QrPyEYKmyDw16PYFjKmBpDkLdHgVBlYsGaWIimzYjpjVTIlP87rhXNxghO3poJA
+ N3Oj5ulbndCn6jSaTCecB9LS2ovYwPmi8wmaNo86cAI8/Q3VMvRuot5ClGgv/BdYsI1v
+ m8u3Aoin9KejY4J7MbcmduCdtR8J9En7qi/ZyFU1WfQoRhGJh6jz5xsV+KGGXo+/44Y7
+ LuKfdenYnwgjyL53JomafdsUau2BKQ8bPJQK2ur2hqDiWMl69wT9D8zUeKi5RFoPgcm9
+ nqfloicJ2q/nZeaxVwVjlJVvpnN53WG1M7rxjh6IRshWVtjUbbJfGZytuLH6B95BM1DV
+ mtsQ==
+X-Gm-Message-State: AOAM533cKcz6PyvGzyyD1/sXoaXCNTIzmrJ5TtSpgrYuVlZnkJOaTh77
+ ukHMHVqvqqO2qQdKg3eW657FdkFWdfr8zrN7gb7Tsm7bh3Xfdw==
+X-Google-Smtp-Source: ABdhPJyOMYavmsBV/9CNup2HmuAHG4mt4zLcl4ZJXEI7wRxydERQnw+TpJB3bXw8372+e2Msw82cFODJK4MXgaD3jHg=
+X-Received: by 2002:a05:6e02:b2a:: with SMTP id
+ e10mr6873416ilu.53.1634374371656; 
+ Sat, 16 Oct 2021 01:52:51 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211015065500.3850513-1-frank.chang@sifive.com>
- <20211015065500.3850513-2-frank.chang@sifive.com>
- <5fdfaf38-da5b-ff32-9c9c-700ccaf3dadb@linaro.org>
-In-Reply-To: <5fdfaf38-da5b-ff32-9c9c-700ccaf3dadb@linaro.org>
+ <20211015065500.3850513-3-frank.chang@sifive.com>
+ <4b718269-b222-c08f-ca72-656bacc31331@linaro.org>
+In-Reply-To: <4b718269-b222-c08f-ca72-656bacc31331@linaro.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Sat, 16 Oct 2021 16:51:04 +0800
-Message-ID: <CAE_xrPhxmat=7bFBdgenTCdjb1HAp34jAfjx2c11zOHJ_B=9Ew@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] softfloat: add APIs to handle alternative sNaN
- propagation for fmax/fmin
+Date: Sat, 16 Oct 2021 16:52:40 +0800
+Message-ID: <CAE_xrPibc4W9FqoXUvLQ=pnW7h85ZYnYYwjLR-Rs+0NbifXc-A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] target/riscv: change the api for single/double
+ fmin/fmax
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Chih-Min Chao <chihmin.chao@sifive.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Aurelien Jarno <aurelien@aurel32.net>, Peter Maydell <peter.maydell@linaro.org>
-Content-Type: multipart/alternative; boundary="0000000000001732f805ce746a30"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=frank.chang@sifive.com; helo=mail-il1-x12f.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: multipart/alternative; boundary="000000000000da59e705ce746ffb"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=frank.chang@sifive.com; helo=mail-il1-x133.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,46 +77,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2021 08:51:20 -0000
+X-List-Received-Date: Sat, 16 Oct 2021 08:52:54 -0000
 
---0000000000001732f805ce746a30
+--000000000000da59e705ce746ffb
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Oct 16, 2021 at 1:00 AM Richard Henderson <
+On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson <
 richard.henderson@linaro.org> wrote:
 
 > On 10/14/21 11:54 PM, frank.chang@sifive.com wrote:
-> > +        /*
-> > +         * In IEEE 754-2019, minNum, maxNum, minNumMag and maxNumMag
-> > +         * are removed and replaced with minimum, minimumNumber, maximum
-> > +         * and maximumNumber.
-> > +         * minimumNumber/maximumNumber behavior for SNaN is changed to:
-> > +         *   If both operands are NaNs, a QNaN is returned.
-> > +         *   If either operand is a SNaN,
-> > +         *   an invalid operation exception is signaled,
-> > +         *   but unless both operands are NaNs,
-> > +         *   the SNaN is otherwise ignored and not converted to a QNaN.
-> > +         */
-> > +        if (!(~flags & (minmax_isnum | minmax_snan_noprop))
-> > +            && (ab_mask & float_cmask_snan)
-> > +            && (ab_mask & ~float_cmask_anynan)) {
-> > +            float_raise(float_flag_invalid, s);
-> > +            return is_nan(a->cls) ? b : a;
-> > +        }
+> > From: Chih-Min Chao<chihmin.chao@sifive.com>
+> >
+> > The sNaN propagation behavior has been changed since
+> > cd20cee7 inhttps://github.com/riscv/riscv-isa-manual
+> >
+> > Signed-off-by: Chih-Min Chao<chihmin.chao@sifive.com>
+> > ---
+> >   target/riscv/fpu_helper.c | 8 ++++----
+> >   1 file changed, 4 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> > index 8700516a14c..1472ead2528 100644
+> > --- a/target/riscv/fpu_helper.c
+> > +++ b/target/riscv/fpu_helper.c
+> > @@ -174,14 +174,14 @@ uint64_t helper_fmin_s(CPURISCVState *env,
+> uint64_t rs1, uint64_t rs2)
+> >   {
+> >       float32 frs1 = check_nanbox_s(rs1);
+> >       float32 frs2 = check_nanbox_s(rs2);
+> > -    return nanbox_s(float32_minnum(frs1, frs2, &env->fp_status));
+> > +    return nanbox_s(float32_minnum_noprop(frs1, frs2, &env->fp_status));
+> >   }
 >
-> This part looks ok.
->
-> > +    MINMAX_1(type, maxnum_noprop, minmax_isnum | minmax_snan_noprop) \
-> > +    MINMAX_1(type, minnum_noprop, minmax_ismin | minmax_isnum |      \
-> > +                                  minmax_snan_noprop)                \
->
-> But here, you have been given names by 754-2019: minimumNumber,
-> maximumNumber, so I think
-> you should use them.
+> Don't you need to conditionalize behaviour on the isa revision?
 >
 >
-Agree, that's better than *_noprop().
-Will update in my next patchset.
+I will pick the right API based on CPU privilege spec version.
 
 Thanks,
 Frank Chang
@@ -126,69 +122,55 @@ Frank Chang
 > r~
 >
 
---0000000000001732f805ce746a30
+--000000000000da59e705ce746ffb
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Oct 16, 2021 at 1:00 AM Richard H=
+<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Oct 16, 2021 at 1:05 AM Richard H=
 enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
 son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
 te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
 solid rgb(204,204,204);padding-left:1ex">On 10/14/21 11:54 PM, <a href=3D"m=
 ailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> =
 wrote:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* In IEEE 754-2019, minNum, maxNum,=
- minNumMag and maxNumMag<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* are removed and replaced with min=
-imum, minimumNumber, maximum<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* and maximumNumber.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* minimumNumber/maximumNumber behav=
-ior for SNaN is changed to:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0If both operands are =
-NaNs, a QNaN is returned.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0If either operand is =
-a SNaN,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0an invalid operation =
-exception is signaled,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0but unless both opera=
-nds are NaNs,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0the SNaN is otherwise=
- ignored and not converted to a QNaN.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(~flags &amp; (minmax_isnum | minmax=
-_snan_noprop))<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;&amp; (ab_mask &amp; f=
-loat_cmask_snan)<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;&amp; (ab_mask &amp; ~=
-float_cmask_anynan)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 float_raise(float_flag_inva=
-lid, s);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return is_nan(a-&gt;cls) ? =
-b : a;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; From: Chih-Min Chao&lt;<a href=3D"mailto:chihmin.chao@sifive.com" targ=
+et=3D"_blank">chihmin.chao@sifive.com</a>&gt;<br>
+&gt; <br>
+&gt; The sNaN propagation behavior has been changed since<br>
+&gt; cd20cee7 inhttps://<a href=3D"http://github.com/riscv/riscv-isa-manual=
+" rel=3D"noreferrer" target=3D"_blank">github.com/riscv/riscv-isa-manual</a=
+><br>
+&gt; <br>
+&gt; Signed-off-by: Chih-Min Chao&lt;<a href=3D"mailto:chihmin.chao@sifive.=
+com" target=3D"_blank">chihmin.chao@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/fpu_helper.c | 8 ++++----<br>
+&gt;=C2=A0 =C2=A01 file changed, 4 insertions(+), 4 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c<br>
+&gt; index 8700516a14c..1472ead2528 100644<br>
+&gt; --- a/target/riscv/fpu_helper.c<br>
+&gt; +++ b/target/riscv/fpu_helper.c<br>
+&gt; @@ -174,14 +174,14 @@ uint64_t helper_fmin_s(CPURISCVState *env, uint6=
+4_t rs1, uint64_t rs2)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0float32 frs1 =3D check_nanbox_s(rs1);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0float32 frs2 =3D check_nanbox_s(rs2);<br>
+&gt; -=C2=A0 =C2=A0 return nanbox_s(float32_minnum(frs1, frs2, &amp;env-&gt=
+;fp_status));<br>
+&gt; +=C2=A0 =C2=A0 return nanbox_s(float32_minnum_noprop(frs1, frs2, &amp;=
+env-&gt;fp_status));<br>
+&gt;=C2=A0 =C2=A0}<br>
 <br>
-This part looks ok.<br>
-<br>
-&gt; +=C2=A0 =C2=A0 MINMAX_1(type, maxnum_noprop, minmax_isnum | minmax_sna=
-n_noprop) \<br>
-&gt; +=C2=A0 =C2=A0 MINMAX_1(type, minnum_noprop, minmax_ismin | minmax_isn=
-um |=C2=A0 =C2=A0 =C2=A0 \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 minmax_snan_noprop)=C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \<br>
-<br>
-But here, you have been given names by 754-2019: minimumNumber, maximumNumb=
-er, so I think <br>
-you should use them.<br>
-<br></blockquote><div><br></div><div>Agree, that&#39;s better than *_noprop=
-().</div><div>Will update in my next patchset.</div><div><br></div><div>Tha=
-nks,</div><div>Frank Chang<br></div><div>=C2=A0</div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex">
+Don&#39;t you need to conditionalize behaviour on the isa revision?<br>
+<br></blockquote><div><br></div><div>I will pick the right API based on CPU=
+ privilege spec version.</div><div><br></div><div>Thanks,</div><div>Frank C=
+hang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">
 <br>
 r~<br>
 </blockquote></div></div>
 
---0000000000001732f805ce746a30--
+--000000000000da59e705ce746ffb--
 
