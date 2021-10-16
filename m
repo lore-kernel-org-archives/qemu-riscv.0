@@ -1,67 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbnGL-00011q-Cv
-	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 13:14:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60388)
+	id 1mbnGS-0001BY-J6
+	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 13:14:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60582)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mbnGG-0000yt-HM
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:21 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:33745)
+ id 1mbnGM-00012X-WE
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:27 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b]:55053)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mbnGB-00066G-Sb
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:20 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id j190so4947214pgd.0
- for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 10:14:14 -0700 (PDT)
+ id 1mbnGK-0006Dd-7s
+ for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 13:14:26 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id np13so9406909pjb.4
+ for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 10:14:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=4gLwwRS+S3qLR7K1/Zsn+88po1Ea6GHguAJyPwg+2Xs=;
- b=R/aEOtvSSqzsT7XAOQlQL2K8c73h3OdYAXGyYSQXNFNL75fEAKy/snUm1pwvkQAdQ/
- fVMR/+5c1lQRWwYA+D1JFSeeVDWeoY1GlNf6aFeJWSuTU0M6lqS+go8E04jEX/TV49RP
- q59n3ub86kmib0GdRoAFPZPOo86uDgsQ1BjNX1PFoyn885dZKSs/9oLSt5vdNx3xLNcb
- xW+bkjPFsB03yWaosWTFSRFcfh26XXVSpyv4ciQOBN9rSrnMI5mcIQLpOFQke6l1DXbN
- 8EraGKh+xwMkqV23OfqYDgKIhN+rKjqVJxrHsRtSC/Vk0A6LcQIjlWoMjwPxa08LEV4V
- GwbA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=eqYHtG7U6Thazj4+tYJjUHiaULEjGKehA71xuneoPd8=;
+ b=lUftEJfOO9og9QvDBw6eIdRfZxb/xiM04IiPT402HFoPju69kJcnsqanyLDqgDL1Tf
+ y2n0617pXghIbQSUT2BzNLZrx2z9bRDQrmcBc8iyZHRRoemxYs4Q3yV1DAtahQMfR3/k
+ kDepu+KB1ZtESfa40gwmvRKUx6OFHm1iQgrB4zOe6pejD3Mamh1CF0WerCrniFDWmRri
+ Gk/p4RtrSsITl2A5EZ3WO41cda9I52QdDyMIBSItCKLokmVxa5tarAGeve/8WH7rFZZL
+ MC7JQ7l/d0czjccFEJ9Jzmn2OgZbTixlzNDKpTC3cZyoDbjCfIn2b2MPqOeLTTFHFlUE
+ zHIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=4gLwwRS+S3qLR7K1/Zsn+88po1Ea6GHguAJyPwg+2Xs=;
- b=FxQT22Eq8U8B8CyjcU9Pjg39olmMX64MP0+LnuEsIeI18jaqlJDdvyJja9PZaLSKG4
- AVw3T70SFsTnhAc0WUoTR4gKVv+TDj/Octc3S2GmnvMfzgj/3ntoFoUcvHk0UxT8uIf6
- Adp/sT2x9ZxjtnIiMotft28m6+5HKkpdTYm3BGegn8GaqVSC5JokvRR5tzUj/AQr6Czp
- 3EvExUZ1/e3IGG/8UtSB7KsK2oi9aaZfqhEOKpR6HRY0z/kqDVgeDLZujXfL7edIOEfx
- +VY06ltXMygo+RZ2HW0rJ9e0aIxNB3vgUKd4wySmAc6M3ZVGaii1ZGeHsttcMiHpMVDO
- 7FOg==
-X-Gm-Message-State: AOAM5330Knf1F5j53yvnnrhwB7pRce6z5Au+VoP4hWuGWKONRoS/S+x+
- slLBLQdBqwMVm1OBiRO65wm2+w==
-X-Google-Smtp-Source: ABdhPJxHAekRArzs62rmoBw8N1ikFYH6II1Y2A3n/J6kaGDLn6zumdMOvgw5o90Z0Cn9oMwmZm7W8g==
-X-Received: by 2002:a65:5385:: with SMTP id x5mr14758415pgq.140.1634404453693; 
- Sat, 16 Oct 2021 10:14:13 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=eqYHtG7U6Thazj4+tYJjUHiaULEjGKehA71xuneoPd8=;
+ b=CjKaxasEfl4iYAr27lkaJarfZzk3ZbkaXP1pw1ARsUnEzl1bhIT0qxXziDpMcO4P1D
+ OokOpoKbkMxnyMKvh+Xqwc80GLltpjKxXlJ54P0Lt6mlt05t7i7fU7mCFkOpqby/e0bD
+ 5QDWYTe+A51nwEDOuuvnPAP7XrW21uZ9WWxW+lKf9CyuwZtttSNoljt29v+gW5/P5Ich
+ VYqlJQSW1FHwdDC6ykwnthZEQiFKX2+SBNYwsfToFoLN8W4PoQHap8xto8vwwCCu+MZ9
+ mJJAP9/1//eidZQfyTazIaDA+1ev+9KUShdcvuYL4Gbhy8PHGjbD2h5YByIjqBlSSiH2
+ YsWA==
+X-Gm-Message-State: AOAM533acX5l0NbwpOzzLpfMe5g45QajA78afnUWrmAYPyn2P6NQtgFr
+ SKA1xa6+7ozlplocznoxaC2eiQ==
+X-Google-Smtp-Source: ABdhPJw6jLHMum4U97cIcswfFr+Ui9rEP0s+5JcHAM8x68mjK7dvaxNyRfnTMJXw3qr9qe9LcQbsow==
+X-Received: by 2002:a17:90b:350f:: with SMTP id
+ ls15mr21592887pjb.220.1634404462190; 
+ Sat, 16 Oct 2021 10:14:22 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id l4sm2330281pfc.121.2021.10.16.10.14.12
+ by smtp.gmail.com with ESMTPSA id l4sm2330281pfc.121.2021.10.16.10.14.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Oct 2021 10:14:12 -0700 (PDT)
+ Sat, 16 Oct 2021 10:14:21 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  frederic.petrot@univ-grenoble-alpes.fr, fabien.portas@grenoble-inp.org,
  zhiwei_liu@c-sky.com, frank.chang@sifive.com
-Subject: [PATCH v3 00/14] target/riscv: Rationalize XLEN and operand length
-Date: Sat, 16 Oct 2021 10:13:58 -0700
-Message-Id: <20211016171412.3163784-1-richard.henderson@linaro.org>
+Subject: [PATCH v3 08/14] target/riscv: Replace is_32bit with get_xl/get_xlen
+Date: Sat, 16 Oct 2021 10:14:06 -0700
+Message-Id: <20211016171412.3163784-9-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211016171412.3163784-1-richard.henderson@linaro.org>
+References: <20211016171412.3163784-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52c.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -74,69 +78,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Oct 2021 17:14:22 -0000
+X-List-Received-Date: Sat, 16 Oct 2021 17:14:27 -0000
 
-This is a partial patch set attempting to set things in the
-right direction for both the UXL and RV128 patch sets.
+In preparation for RV128, replace a simple predicate
+with a more versatile test.
 
-Notable addition for v3 is the treatment of [MS]STATUS.SD.  Because this
-bit changes position depending on XLEN, it's better to split it out.
-But since it's read-only and computable from [MS]STATUS.{FS,XS}, it
-is even better to not store it at all.  I noticed this while reading
-Frank's RVV patches which add VS to be included in SD.
+Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/translate.c | 33 ++++++++++++++++++---------------
+ 1 file changed, 18 insertions(+), 15 deletions(-)
 
-
-r~
-
-
-Changes for v3:
-  * Fix CONFIG_ typo.
-  * Fix ctzw typo.
-  * Mark get_xlen unused (clang werror)
-  * Compute MSTATUS_SD on demand.
-
-Changes for v2:
-  * Set mxl/sxl/uxl at reset.
-  * Set sxl/uxl in write_mstatus.
-
-
-
-
-Richard Henderson (14):
-  target/riscv: Move cpu_get_tb_cpu_state out of line
-  target/riscv: Create RISCVMXL enumeration
-  target/riscv: Split misa.mxl and misa.ext
-  target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl
-  target/riscv: Add MXL/SXL/UXL to TB_FLAGS
-  target/riscv: Use REQUIRE_64BIT in amo_check64
-  target/riscv: Properly check SEW in amo_op
-  target/riscv: Replace is_32bit with get_xl/get_xlen
-  target/riscv: Replace DisasContext.w with DisasContext.ol
-  target/riscv: Use gen_arith_per_ol for RVM
-  target/riscv: Adjust trans_rev8_32 for riscv64
-  target/riscv: Use gen_unary_per_ol for RVB
-  target/riscv: Use gen_shift*_per_ol for RVB, RVI
-  target/riscv: Compute mstatus.sd on demand
-
- target/riscv/cpu.h                      |  73 +++-------
- target/riscv/cpu_bits.h                 |   8 +-
- hw/riscv/boot.c                         |   2 +-
- linux-user/elfload.c                    |   2 +-
- linux-user/riscv/cpu_loop.c             |   2 +-
- semihosting/arm-compat-semi.c           |   2 +-
- target/riscv/cpu.c                      | 108 +++++++++------
- target/riscv/cpu_helper.c               |  92 ++++++++++++-
- target/riscv/csr.c                      | 104 ++++++++------
- target/riscv/gdbstub.c                  |  10 +-
- target/riscv/machine.c                  |  10 +-
- target/riscv/monitor.c                  |   4 +-
- target/riscv/translate.c                | 174 ++++++++++++++++++------
- target/riscv/insn_trans/trans_rvb.c.inc | 140 ++++++++++---------
- target/riscv/insn_trans/trans_rvi.c.inc |  44 +++---
- target/riscv/insn_trans/trans_rvm.c.inc |  36 +++--
- target/riscv/insn_trans/trans_rvv.c.inc |  29 ++--
- 17 files changed, 532 insertions(+), 308 deletions(-)
-
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 7e7bb67d15..2624d65fc2 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -91,16 +91,19 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+ }
+ 
+ #ifdef TARGET_RISCV32
+-# define is_32bit(ctx)  true
++#define get_xl(ctx)    MXL_RV32
+ #elif defined(CONFIG_USER_ONLY)
+-# define is_32bit(ctx)  false
++#define get_xl(ctx)    MXL_RV64
+ #else
+-static inline bool is_32bit(DisasContext *ctx)
+-{
+-    return ctx->xl == MXL_RV32;
+-}
++#define get_xl(ctx)    ((ctx)->xl)
+ #endif
+ 
++/* The word size for this machine mode. */
++static inline int __attribute__((unused)) get_xlen(DisasContext *ctx)
++{
++    return 16 << get_xl(ctx);
++}
++
+ /* The word size for this operation. */
+ static inline int oper_len(DisasContext *ctx)
+ {
+@@ -282,7 +285,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ static void mark_fs_dirty(DisasContext *ctx)
+ {
+     TCGv tmp;
+-    target_ulong sd = is_32bit(ctx) ? MSTATUS32_SD : MSTATUS64_SD;
++    target_ulong sd = get_xl(ctx) == MXL_RV32 ? MSTATUS32_SD : MSTATUS64_SD;
+ 
+     if (ctx->mstatus_fs != MSTATUS_FS) {
+         /* Remember the state change for the rest of the TB. */
+@@ -341,16 +344,16 @@ EX_SH(12)
+     }                              \
+ } while (0)
+ 
+-#define REQUIRE_32BIT(ctx) do { \
+-    if (!is_32bit(ctx)) {       \
+-        return false;           \
+-    }                           \
++#define REQUIRE_32BIT(ctx) do {    \
++    if (get_xl(ctx) != MXL_RV32) { \
++        return false;              \
++    }                              \
+ } while (0)
+ 
+-#define REQUIRE_64BIT(ctx) do { \
+-    if (is_32bit(ctx)) {        \
+-        return false;           \
+-    }                           \
++#define REQUIRE_64BIT(ctx) do {    \
++    if (get_xl(ctx) < MXL_RV64) {  \
++        return false;              \
++    }                              \
+ } while (0)
+ 
+ static int ex_rvc_register(DisasContext *ctx, int reg)
 -- 
 2.25.1
 
