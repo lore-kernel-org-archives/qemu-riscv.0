@@ -1,54 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mbuSz-0001wM-Hf
-	for mharc-qemu-riscv@gnu.org; Sat, 16 Oct 2021 20:55:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59338)
+	id 1mc06p-0005Tl-VQ
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 02:57:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56406)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbuSw-0001uw-PM
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 20:55:54 -0400
-Received: from mail-il1-x12b.google.com ([2607:f8b0:4864:20::12b]:36489)
+ id 1mc06o-0005MA-1B
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 02:57:26 -0400
+Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:41918)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mbuSt-0004DT-Ge
- for qemu-riscv@nongnu.org; Sat, 16 Oct 2021 20:55:53 -0400
-Received: by mail-il1-x12b.google.com with SMTP id h10so11193778ilq.3
- for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 17:55:50 -0700 (PDT)
+ id 1mc06k-0006ed-5G
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 02:57:25 -0400
+Received: by mail-io1-xd31.google.com with SMTP id b188so7726734iof.8
+ for <qemu-riscv@nongnu.org>; Sat, 16 Oct 2021 23:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3iHm5eGI489TLcY19FXeaLUzzLoZD0XjaLWusUPucmM=;
- b=X7m8wJyCxNxOHw0s/u6c/cLoCxGT/MjtxDFdRwfzXNsMIvLP2CwV4UR8A31Wc4ObD5
- HixT0Kx08REaDKLVgOr3xAX2uGJBYwOnMzbIxFhz7Y5Y06Dv0dRwm3oNyr6WEuwY+NpZ
- SEfwFIOl8E9nCR9ZfhwBSY1OR+CCmF1FL9hLRF4A7JGOTd1UfmNnd8nCrmokCxoAoSJW
- DKNgGJDML554Z+TdTS8b5bGeCWV01NyGXPOU9XQLD3dw6ob+8ghKK7xGE1xOAbPqL5nu
- k/UGDZRY9R9rTm2JjxXky6WE2O3vkOIyLYuCPNqIHyleJh2UJLaDcbCjvR9YSkJd6xEA
- 1wyg==
+ :cc; bh=tA6JXnX1qvmGOHN0Ei6Kt61q6K0lbOTRSQpKYmuNw+Y=;
+ b=SSlsWmE8krnHYpA/HzLCURiK0mthVWd9sYZsETuTffY0HHU9kIJQ89+l4IEVw+6n7Q
+ ujR98teUEtWTTvygB21FP4kZe78IUgmxXyl0wdaY1iCcKa7bSXfcsEIt9+LHr2R7MKYV
+ 4L2B4nLjaVMKzxktpYqlvldXV1a8j3QAodL2crkRZ0+ZZIs2tXJusFWMCRsubASxwQP3
+ oWLWIqC4yh2JQD5WmWYe7Rxd4aRb77l9WMKuy+D59KrkeQMrFH8QJOVhkwi29bcAjxxp
+ Xy2kkKpEq2Sdvar0L1i/QGZknIIz1YhD9ozM/Aed8bSOZXUUFCy13PKTxPUHviXZbWHa
+ R7wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=3iHm5eGI489TLcY19FXeaLUzzLoZD0XjaLWusUPucmM=;
- b=yCA97qmA4aWX44eM5kCrtKyWvjyWnU1cfCz2RRllXs5BwdWvZE31XL9LNFSgmgVe9/
- UVf1MgQOHGGqOPBzg/Y078HHsADzG/NiGUpp6F5mXnYPJY+QJn+2Tm7bq2nqSgD0Ah/s
- UFa+gvjV9frlLsp1SFDs/qtKI/8fpCWQ78u4udJ+Cov2I+sEoGxH0F4hA86M5LPd4Ykl
- rLZWi3IIit8hgCGD85a5/pJMCLKK+8WeMWxpokcY7IY4gJSREGvwEY7MCD/2m3EGSXCm
- KW/kIW7dNpuexgKBFAjtTp2iNUiQMBXkVaI3XrtMtZb4QztITguvjrn1VkfNsSAOuo3G
- Mc8w==
-X-Gm-Message-State: AOAM533i/oeARMkIXouAKuh+ex7zHBVYzTd/7WaqZafMa0h/t1l4Wlgt
- 1nBa6E4OkrLnaNNhjItj5PeVnj7Leb0xSjduB6LudA==
-X-Google-Smtp-Source: ABdhPJxNMT3SFzrQpihIviBGgTYik9WpcbinJ2fYjPKCyYnvxmlP/hFBHM9vx9zRl8APnOmlIZgJTTulZQwDjCWNMNw=
-X-Received: by 2002:a05:6e02:893:: with SMTP id
- z19mr9022336ils.224.1634432149663; 
- Sat, 16 Oct 2021 17:55:49 -0700 (PDT)
+ bh=tA6JXnX1qvmGOHN0Ei6Kt61q6K0lbOTRSQpKYmuNw+Y=;
+ b=TqJTTohkCywMWZbOTo3I62+pWiXG+6fDlTT23xFubkl4BvCeEgoXRzuVwAOGQe8AbQ
+ iooJtB9fIXIOpqHJfNuF003naGwoeX6/n72aHMj6MRlRuAkCd8MUvVqHpC35y4uc2zei
+ s80CUvJ7J/AsVHfrSTKHwGBZnzhl8YwGgqGkZMsg208xYn6+fQ37S3U5AWzYBWcVnWB1
+ VDKsdU5TjFwDnML5xSxHmhfMXObSFhWNj85hUP60CbyrE2KRwSMd+rK9opGdYj9SvzXY
+ jq2Ed+vzJrSwG9raXS1mSW/9U+W5NDyiTPqCW7ERhmy+VT6s1fTt2cfnKB7yykkvbyEn
+ oaAQ==
+X-Gm-Message-State: AOAM531LUd+7fzgZjyjkIreDJiB4nU0DKcVWvJp4bgPvpepRh9mf03op
+ sj1LoYYPzRDopS0xpqR0cVEvcgqsfA7ChDyfTNWoOg==
+X-Google-Smtp-Source: ABdhPJzj91QQfA99k7YDuyFt4wKnHyyAYGDQsDEUKZrTZ6iRW5U2wYvSc9fQyiXy+MxKusIw1o5D0AayEugrqVjISvw=
+X-Received: by 2002:a05:6602:2ac3:: with SMTP id
+ m3mr9782767iov.138.1634453840740; 
+ Sat, 16 Oct 2021 23:57:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211015065500.3850513-1-frank.chang@sifive.com>
  <20211015065500.3850513-3-frank.chang@sifive.com>
  <4b718269-b222-c08f-ca72-656bacc31331@linaro.org>
  <CAE_xrPibc4W9FqoXUvLQ=pnW7h85ZYnYYwjLR-Rs+0NbifXc-A@mail.gmail.com>
  <2ac1b2bd-efa9-2005-5c0a-cace9346cbd7@linaro.org>
-In-Reply-To: <2ac1b2bd-efa9-2005-5c0a-cace9346cbd7@linaro.org>
+ <CAE_xrPhF+86T9m1taX3RvcMXptnmhUvP-n64S7znL4=vXUa4eg@mail.gmail.com>
+In-Reply-To: <CAE_xrPhF+86T9m1taX3RvcMXptnmhUvP-n64S7znL4=vXUa4eg@mail.gmail.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Sun, 17 Oct 2021 08:55:38 +0800
-Message-ID: <CAE_xrPhF+86T9m1taX3RvcMXptnmhUvP-n64S7znL4=vXUa4eg@mail.gmail.com>
+Date: Sun, 17 Oct 2021 14:57:09 +0800
+Message-ID: <CAE_xrPg6MF0CmQE+RzdoAavY1gJ-GDbgmh0Lqay3ogG6-zvK5g@mail.gmail.com>
 Subject: Re: [PATCH v3 2/2] target/riscv: change the api for single/double
  fmin/fmax
 To: Richard Henderson <richard.henderson@linaro.org>
@@ -57,16 +58,16 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Chih-Min Chao <chihmin.chao@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="000000000000b0d0a205ce81e3cd"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
- envelope-from=frank.chang@sifive.com; helo=mail-il1-x12b.google.com
+Content-Type: multipart/alternative; boundary="0000000000009453d205ce86f021"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=frank.chang@sifive.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,117 +80,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2021 00:55:55 -0000
+X-List-Received-Date: Sun, 17 Oct 2021 06:57:26 -0000
 
---000000000000b0d0a205ce81e3cd
+--0000000000009453d205ce86f021
 Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Oct 17, 2021 at 1:56 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
+On Sun, Oct 17, 2021 at 8:55 AM Frank Chang <frank.chang@sifive.com> wrote:
 
-> On 10/16/21 1:52 AM, Frank Chang wrote:
-> > On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson <
-> richard.henderson@linaro.org
-> > <mailto:richard.henderson@linaro.org>> wrote:
-> >
-> >     On 10/14/21 11:54 PM, frank.chang@sifive.com <mailto:
-> frank.chang@sifive.com> wrote:
-> >      > From: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
-> chihmin.chao@sifive.com>>
-> >      >
-> >      > The sNaN propagation behavior has been changed since
-> >      > cd20cee7 inhttps://github.com/riscv/riscv-isa-manual
-> >     <http://github.com/riscv/riscv-isa-manual>
-> >      >
-> >      > Signed-off-by: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
-> chihmin.chao@sifive.com>>
-> >      > ---
-> >      >   target/riscv/fpu_helper.c | 8 ++++----
-> >      >   1 file changed, 4 insertions(+), 4 deletions(-)
-> >      >
-> >      > diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> >      > index 8700516a14c..1472ead2528 100644
-> >      > --- a/target/riscv/fpu_helper.c
-> >      > +++ b/target/riscv/fpu_helper.c
-> >      > @@ -174,14 +174,14 @@ uint64_t helper_fmin_s(CPURISCVState *env,
-> uint64_t rs1,
-> >     uint64_t rs2)
-> >      >   {
-> >      >       float32 frs1 = check_nanbox_s(rs1);
-> >      >       float32 frs2 = check_nanbox_s(rs2);
-> >      > -    return nanbox_s(float32_minnum(frs1, frs2, &env->fp_status));
-> >      > +    return nanbox_s(float32_minnum_noprop(frs1, frs2,
-> &env->fp_status));
-> >      >   }
-> >
-> >     Don't you need to conditionalize behaviour on the isa revision?
-> >
-> >
-> > I will pick the right API based on CPU privilege spec version.
+> On Sun, Oct 17, 2021 at 1:56 AM Richard Henderson <
+> richard.henderson@linaro.org> wrote:
 >
-> There's a separate F-extension revision number: 2.2.
+>> On 10/16/21 1:52 AM, Frank Chang wrote:
+>> > On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson <
+>> richard.henderson@linaro.org
+>> > <mailto:richard.henderson@linaro.org>> wrote:
+>> >
+>> >     On 10/14/21 11:54 PM, frank.chang@sifive.com <mailto:
+>> frank.chang@sifive.com> wrote:
+>> >      > From: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
+>> chihmin.chao@sifive.com>>
+>> >      >
+>> >      > The sNaN propagation behavior has been changed since
+>> >      > cd20cee7 inhttps://github.com/riscv/riscv-isa-manual
+>> >     <http://github.com/riscv/riscv-isa-manual>
+>> >      >
+>> >      > Signed-off-by: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
+>> chihmin.chao@sifive.com>>
+>> >      > ---
+>> >      >   target/riscv/fpu_helper.c | 8 ++++----
+>> >      >   1 file changed, 4 insertions(+), 4 deletions(-)
+>> >      >
+>> >      > diff --git a/target/riscv/fpu_helper.c
+>> b/target/riscv/fpu_helper.c
+>> >      > index 8700516a14c..1472ead2528 100644
+>> >      > --- a/target/riscv/fpu_helper.c
+>> >      > +++ b/target/riscv/fpu_helper.c
+>> >      > @@ -174,14 +174,14 @@ uint64_t helper_fmin_s(CPURISCVState *env,
+>> uint64_t rs1,
+>> >     uint64_t rs2)
+>> >      >   {
+>> >      >       float32 frs1 = check_nanbox_s(rs1);
+>> >      >       float32 frs2 = check_nanbox_s(rs2);
+>> >      > -    return nanbox_s(float32_minnum(frs1, frs2,
+>> &env->fp_status));
+>> >      > +    return nanbox_s(float32_minnum_noprop(frs1, frs2,
+>> &env->fp_status));
+>> >      >   }
+>> >
+>> >     Don't you need to conditionalize behaviour on the isa revision?
+>> >
+>> >
+>> > I will pick the right API based on CPU privilege spec version.
+>>
+>> There's a separate F-extension revision number: 2.2.
+>>
+>> But I'll leave it up to those more knowledgeable about the revision
+>> combinations actually
+>> present in the field to decide.
+>>
+>>
+> I did some history searches on RISC-V ISA spec Github repo.
 >
-> But I'll leave it up to those more knowledgeable about the revision
-> combinations actually
-> present in the field to decide.
+> F-extension was bumped to v2.2 at (2018/08/28):
 >
+> https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-eb78171
+> The privilege spec is v1.10-draft at the time.
 >
-I did some history searches on RISC-V ISA spec Github repo.
+> and later ratified at (2019/03/26):
+>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ratification-20190305
+>
+> The spec was updated to use IEEE 754-2019 min/max functions in commit:
+> #cd20cee7
+> <https://github.com/riscv/riscv-isa-manual/commit/cd20cee7efd9bac7c5aa127ec3b451749d2b3cce>
+>  (2019/06/05).
+>
 
-F-extension was bumped to v2.2 at (2018/08/28):
-https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-eb78171
-The privilege spec is v1.10-draft at the time.
+Sorry, the commit date is 2017/06/05, not 2019/06/05.
 
-and later ratified at (2019/03/26):
-https://github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ratification-20190305
+But I think it's probably easier and clearer to just introduce an extra
+*fext_ver* variable.
+We can set CPUs which are Privilege spec v1.10 to RVF v2.0
+(FEXT_VERSION_2_00_0),
+and others with Privilege spec v1.11 to RVF v2.2 (FEXT_VERSION_2_02_0).
 
-The spec was updated to use IEEE 754-2019 min/max functions in commit:
-#cd20cee7
-<https://github.com/riscv/riscv-isa-manual/commit/cd20cee7efd9bac7c5aa127ec3b451749d2b3cce>
- (2019/06/05).
+Any comments are welcome.
 
-Privilege spec v1.11 is ratified at (2019/06/10):
-https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.11
-
-In fact, Unprivileged spec v2.2 was released at (2017/05/10):
-https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-user-2.2
-
-and Privilege spec v1.10 was released at (2017/05/10):
-https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10
-
-Privilege spec was then bumped to v1.11-draft in the next draft release
-right after v1.10 (2018/05/24):
-https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180524001518-9981ad7
-(RVF was still v2.0 at the time.)
-
-It seems that when Privilege spec v1.11 was ratified, RVF had been bumped
-to v2.2,
-and when Privilege spec v1.10 was ratified, RVF was still v2.0.
-
-As in QEMU, there's only *priv_ver* variable existing for now.
-So unless we introduce other variables like: *unpriv_ver* or *fext_ver*.
-Otherwise, I think using *priv_ver* is still valid here.
-Though it is not accurate, somehow confused,
-and may not be true anymore in future standards.
-
-Let me know which way is better for our maintenance.
-
-Thanks,
+Regards,
 Frank Chang
 
-r~
+
+>
+> Privilege spec v1.11 is ratified at (2019/06/10):
+>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.11
+>
+> In fact, Unprivileged spec v2.2 was released at (2017/05/10):
+> https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-user-2.2
+>
+> and Privilege spec v1.10 was released at (2017/05/10):
+> https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10
+>
+> Privilege spec was then bumped to v1.11-draft in the next draft release
+> right after v1.10 (2018/05/24):
+>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180524001518-9981ad7
+> (RVF was still v2.0 at the time.)
+>
+> It seems that when Privilege spec v1.11 was ratified, RVF had been bumped
+> to v2.2,
+> and when Privilege spec v1.10 was ratified, RVF was still v2.0.
+>
+> As in QEMU, there's only *priv_ver* variable existing for now.
+> So unless we introduce other variables like: *unpriv_ver* or *fext_ver*.
+> Otherwise, I think using *priv_ver* is still valid here.
+> Though it is not accurate, somehow confused,
+> and may not be true anymore in future standards.
+>
+> Let me know which way is better for our maintenance.
+>
+> Thanks,
+> Frank Chang
+>
+> r~
+>>
 >
 
---000000000000b0d0a205ce81e3cd
+--0000000000009453d205ce86f021
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Sun, Oct 17, 2021 at 1:56 AM Richard H=
-enderson &lt;<a href=3D"mailto:richard.henderson@linaro.org">richard.hender=
-son@linaro.org</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On 10/16/21 1:52 AM, Frank Chang w=
-rote:<br>
+<div dir=3D"ltr"><div dir=3D"ltr">On Sun, Oct 17, 2021 at 8:55 AM Frank Cha=
+ng &lt;<a href=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com</a>=
+&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_=
+quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
+204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">On Sun, Oct 17, 20=
+21 at 1:56 AM Richard Henderson &lt;<a href=3D"mailto:richard.henderson@lin=
+aro.org" target=3D"_blank">richard.henderson@linaro.org</a>&gt; wrote:<br><=
+/div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
+t:1ex">On 10/16/21 1:52 AM, Frank Chang wrote:<br>
 &gt; On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson &lt;<a href=3D"mailt=
 o:richard.henderson@linaro.org" target=3D"_blank">richard.henderson@linaro.=
 org</a> <br>
@@ -257,44 +287,56 @@ present in the field to decide.<br><br></blockquote><div><br></div><div>I d=
 id some history searches on RISC-V ISA spec Github repo.</div><div><br></di=
 v><div>F-extension was bumped to v2.2 at (2018/08/28):</div><div><a href=3D=
 "https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-eb78=
-171">https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-=
-eb78171</a></div><div>The privilege spec is v1.10-draft at the time.</div><=
-div><br></div><div>and later ratified at (2019/03/26):</div><div><a href=3D=
-"https://github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ratification=
--20190305">https://github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ra=
-tification-20190305</a><br></div><div><br></div><div>The spec was updated t=
-o use IEEE 754-2019 min/max functions in commit: <a href=3D"https://github.=
-com/riscv/riscv-isa-manual/commit/cd20cee7efd9bac7c5aa127ec3b451749d2b3cce"=
->#cd20cee7</a>=C2=A0(2019/06/05).</div><div><br></div><div>Privilege spec v=
-1.11 is ratified at (2019/06/10):</div><div><a href=3D"https://github.com/r=
-iscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.11">https://=
-github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.=
-11</a><br></div><div>=C2=A0</div><div>In fact, Unprivileged=C2=A0spec v2.2 =
-was released at (2017/05/10):</div><div><a href=3D"https://github.com/riscv=
-/riscv-isa-manual/releases/tag/riscv-user-2.2">https://github.com/riscv/ris=
-cv-isa-manual/releases/tag/riscv-user-2.2</a><br></div><div><br></div><div>=
-and Privilege spec v1.10 was released at (2017/05/10):</div><div><a href=3D=
-"https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10">ht=
-tps://github.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10</a><br=
-></div><div><br></div><div>Privilege=C2=A0spec was then bumped to v1.11-dra=
-ft in the next draft release right after v1.10 (2018/05/24):</div><div><a h=
-ref=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/draft-2018052=
-4001518-9981ad7">https://github.com/riscv/riscv-isa-manual/releases/tag/dra=
-ft-20180524001518-9981ad7</a><br></div><div>(RVF was still v2.0 at the time=
-.)</div><div><br></div><div>It seems that when Privilege spec v1.11 was rat=
-ified, RVF had been bumped to v2.2,<br></div><div>and when Privilege=C2=A0s=
-pec v1.10 was ratified, RVF was still v2.0.</div><div><div><br></div><div>A=
-s in QEMU, there&#39;s only=C2=A0<i>priv_ver</i>=C2=A0variable existing for=
- now.</div><div>So unless we introduce=C2=A0other=C2=A0variables like:=C2=
-=A0<i>unpriv_ver</i> or <i>fext_ver</i>.</div><div>Otherwise, I think using=
- <i>priv_ver</i> is still valid here.</div></div><div>Though it is not accu=
-rate, somehow confused,</div><div>and may not be true anymore in=C2=A0futur=
-e standards.</div><div><br></div><div>Let me know which way is better for o=
-ur maintenance.</div><div><br></div><div>Thanks,</div><div>Frank Chang</div=
-><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
-px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+171" target=3D"_blank">https://github.com/riscv/riscv-isa-manual/releases/t=
+ag/draft-20180828-eb78171</a></div><div>The privilege spec is v1.10-draft a=
+t the time.</div><div><br></div><div>and later ratified at (2019/03/26):</d=
+iv><div><a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/I=
+MFDQC-Ratification-20190305" target=3D"_blank">https://github.com/riscv/ris=
+cv-isa-manual/releases/tag/IMFDQC-Ratification-20190305</a><br></div><div><=
+br></div><div>The spec was updated to use IEEE 754-2019 min/max functions i=
+n commit: <a href=3D"https://github.com/riscv/riscv-isa-manual/commit/cd20c=
+ee7efd9bac7c5aa127ec3b451749d2b3cce" target=3D"_blank">#cd20cee7</a>=C2=A0(=
+2019/06/05).</div></div></div></blockquote><div><br></div><div>Sorry, the c=
+ommit date is 2017/06/05, not 2019/06/05.<br></div><div><br></div><div>But =
+I think it&#39;s probably easier and clearer to just introduce an extra <i>=
+fext_ver</i> variable.</div><div>We can set CPUs which are Privilege spec v=
+1.10 to RVF v2.0 (FEXT_VERSION_2_00_0),</div><div>and others with Privilege=
+ spec v1.11 to RVF v2.2=C2=A0(FEXT_VERSION_2_02_0).</div><div><br></div><di=
+v>Any comments are welcome.</div><div><br></div><div>Regards,</div><div>Fra=
+nk Chang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><div><br></div><div>Privi=
+lege spec v1.11 is ratified at (2019/06/10):</div><div><a href=3D"https://g=
+ithub.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.1=
+1" target=3D"_blank">https://github.com/riscv/riscv-isa-manual/releases/tag=
+/Ratified-IMFDQC-and-Priv-v1.11</a><br></div><div>=C2=A0</div><div>In fact,=
+ Unprivileged=C2=A0spec v2.2 was released at (2017/05/10):</div><div><a hre=
+f=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-user-2.2"=
+ target=3D"_blank">https://github.com/riscv/riscv-isa-manual/releases/tag/r=
+iscv-user-2.2</a><br></div><div><br></div><div>and Privilege spec v1.10 was=
+ released at (2017/05/10):</div><div><a href=3D"https://github.com/riscv/ri=
+scv-isa-manual/releases/tag/riscv-priv-1.10" target=3D"_blank">https://gith=
+ub.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10</a><br></div><di=
+v><br></div><div>Privilege=C2=A0spec was then bumped to v1.11-draft in the =
+next draft release right after v1.10 (2018/05/24):</div><div><a href=3D"htt=
+ps://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180524001518-99=
+81ad7" target=3D"_blank">https://github.com/riscv/riscv-isa-manual/releases=
+/tag/draft-20180524001518-9981ad7</a><br></div><div>(RVF was still v2.0 at =
+the time.)</div><div><br></div><div>It seems that when Privilege spec v1.11=
+ was ratified, RVF had been bumped to v2.2,<br></div><div>and when Privileg=
+e=C2=A0spec v1.10 was ratified, RVF was still v2.0.</div><div><div><br></di=
+v><div>As in QEMU, there&#39;s only=C2=A0<i>priv_ver</i>=C2=A0variable exis=
+ting for now.</div><div>So unless we introduce=C2=A0other=C2=A0variables li=
+ke:=C2=A0<i>unpriv_ver</i> or <i>fext_ver</i>.</div><div>Otherwise, I think=
+ using <i>priv_ver</i> is still valid here.</div></div><div>Though it is no=
+t accurate, somehow confused,</div><div>and may not be true anymore in=C2=
+=A0future standards.</div><div><br></div><div>Let me know which way is bett=
+er for our maintenance.</div><div><br></div><div>Thanks,</div><div>Frank Ch=
+ang</div><div><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
 r~<br>
 </blockquote></div></div>
+</blockquote></div></div>
 
---000000000000b0d0a205ce81e3cd--
+--0000000000009453d205ce86f021--
 
