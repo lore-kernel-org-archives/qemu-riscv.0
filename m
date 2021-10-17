@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcF52-0000hv-Rh
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 18:56:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58602)
+	id 1mcFX4-0002a9-V1
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 19:25:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33834)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcF4x-0000cx-5V; Sun, 17 Oct 2021 18:56:31 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:44688)
+ id 1mcFX2-0002Zv-Ew; Sun, 17 Oct 2021 19:25:32 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:39793)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcF4u-0002fK-2g; Sun, 17 Oct 2021 18:56:30 -0400
-Received: by mail-pf1-x436.google.com with SMTP id v8so9126851pfu.11;
- Sun, 17 Oct 2021 15:56:25 -0700 (PDT)
+ id 1mcFX0-0005mW-RA; Sun, 17 Oct 2021 19:25:32 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id d9so6092734pfl.6;
+ Sun, 17 Oct 2021 16:25:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=u5ge0/URul25AsObX6IEQcD8kVdVvwDcv7rdRNaDAI0=;
- b=is0fFJMKF4Z3Ybs5NbZD8Yt20v+2P2a+gjZQ4AQjyzPfj7JKzWlrsrhhkvuRbw6NGX
- M+AqObPgF8KybA8i1fI/IkPCfLlkjsZd+Ua88buWzf1m0IdYqiplUTKbJPO686N4SRCM
- 6ucY+F83IjVYProE3rEql2jgZjBFpkl6xb0/x2eYa/Tk1BTBmdGVw2wbEe1KKxrMpwnz
- W+tyTyykhWecRdn/xowINDIAXddNUJOrvNdLYDRyIzfYfoXO5hbkP9bckFy6vX40NeSR
- OuWNiD2XjzZpcXbyiGdxnp/Bd+P9HKSx4PND6enDHtv3l4p/e2VYRd4znM9PJhn6JhDe
- AvWQ==
+ :cc; bh=swPSbS9Ll6thHBuAAIIk/olqL6ik3JwRXaZAwKVUQxc=;
+ b=Is13soCpa6U2wAYAeqMBEu3q7ICsxdlXT+2R0Wt0n8L7XDT7V/ADovMS9KwBeMXnSr
+ UmNChurT6Rx7J6lIbpNaBv9zj+qDjpF8LGNzLAW45QIdfQrOKmkv5zdseUQLoQ6C4oc7
+ 6GxLbQuGaYUBU6dVws5oaJEAnJ6ONhq9pMoVpJo5GQh64gotUKiM5cZwYJNjHESE559N
+ hDlcO6JpVuFIPZ3NgiTEq18dpKwmNO+YGeJNdlhjikho90P6wIaDjIx/fHEC0Szo1OsQ
+ jb+VpXUAiO4u+ZLbg0ILojeOjVOMmexOchrhy9YbKqqXG5MnJKvZ/asF1YQVWJSiwLLP
+ HfgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=u5ge0/URul25AsObX6IEQcD8kVdVvwDcv7rdRNaDAI0=;
- b=MO2xMrgRsejT5GOvfdEcBiPrNYYKRjxi3qrZF0b20OUvLW4Po0VuYqzacSbvOzJhkn
- xyVllNR0SfufPRSfIlPC+piyl9RhtVkalH2H/T1SW73SHHSYO/VNtrBdlZgF89GUgIb3
- 9ywMDJxsheDJM08cj9vhjcobLd1myLpG1pDMVU4jZAWii3od6Dt3XfPoq0o36oTDaE9q
- equfSWFRSmKZ+pSmirTuEJyqiLYDjndni43Ak5lkqN+mWSMgBA1h9lLIHH4t/Qy0as1P
- XVxZmvpPt/B7pH9qukuUJAI9jps7B401F0wRJl7CeDQirvNtHOtnt9EYzdmFHezpgebi
- D3nw==
-X-Gm-Message-State: AOAM5335OuaK2zG1D1sWorHSXRZIthtiwLepJ9BDlTpGcM3eKUUxyxGf
- yLwoBXUteqTQveKaFh+Lpf339CBxsiBhgfz+zwQ=
-X-Google-Smtp-Source: ABdhPJw5if+SwKseup52l6alaF+NFZaxcOqLWGgzwtA4hhwUJDKDXhN8tVSGXoUvc4qDgLo5+cYo5bC79uNWjhq4vjc=
-X-Received: by 2002:aa7:8bd4:0:b0:44c:f89d:7e72 with SMTP id
- s20-20020aa78bd4000000b0044cf89d7e72mr25160157pfd.71.1634511384350; Sun, 17
- Oct 2021 15:56:24 -0700 (PDT)
+ bh=swPSbS9Ll6thHBuAAIIk/olqL6ik3JwRXaZAwKVUQxc=;
+ b=oAhGngSJdyl8NSMigVXc8hLApQ+nL7P9M+sV9MhoW/rKpWHtXrLhWN4l1hizMjclmP
+ uc5Msrq5I3mPrSslyCsMkHf1BnCpFPANyThmMWmMuQd7axKrlLpFfmWZCP7FhtYzN887
+ zro6yV3ypxjnThKKj4rmFN0Lrpn0edae39rBqEl+NcCE0TPeiOQ0GGHtrHwPlE2Q3iiz
+ JDC0q9l5lsy3Kpqb4GxsCZVXW3FfcSkAmu/EbzYOxLq3NeopxRj5Tj/E0PG+kVIB0H+O
+ kS9XSGQPkJtv1+/S1RmQ6LXmUq8mOJqVod7dPTZTMyq0IW0B073OYdageQwHsUPmMav/
+ CqcA==
+X-Gm-Message-State: AOAM531DE8X585o/Uw9gTyWIoeOeY9xAfLIM4hJVXoLMlJhNhjyHYRGf
+ uBCKWSrm7QW8K2em7Fpy2niiHQdR/rybvjRREEk=
+X-Google-Smtp-Source: ABdhPJwAAuIvZHrzmYZh0qAi9omO3op+1jmbw7iIvDfPDRoQOJijP4vxEhI4eU8kDCvrAjeQUkIDKeeAxLB3Jhkl8q0=
+X-Received: by 2002:a63:7355:: with SMTP id d21mr8572625pgn.179.1634513128713; 
+ Sun, 17 Oct 2021 16:25:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <20211015074627.3957162-2-frank.chang@sifive.com>
-In-Reply-To: <20211015074627.3957162-2-frank.chang@sifive.com>
+References: <20211016030908.40480-1-limingwang@huawei.com>
+In-Reply-To: <20211016030908.40480-1-limingwang@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Oct 2021 08:55:58 +1000
-Message-ID: <CAKmqyKP8rx_vmO2MpVzxacUhx-H6W0+zDEfd0r5qrFtg+kiTEA@mail.gmail.com>
-Subject: Re: [PATCH v8 01/78] target/riscv: fix TB_FLAGS bits overlapping bug
- for rvv/rvh
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Mon, 18 Oct 2021 09:25:02 +1000
+Message-ID: <CAKmqyKOJ8xb7gYtRL6MWitR9EtewPosnQbwELPoxjy4S5nJe5Q@mail.gmail.com>
+Subject: Re: [PATCH v3] hw/riscv: virt: Use machine->ram as the system memory
+To: MingWang Li <limingwang@huawei.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Jiangyifei <jiangyifei@huawei.com>, 
+ wanghaibin.wang@huawei.com, fanliang@huawei.com, 
+ "Wubin (H)" <wu.wubin@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,76 +74,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2021 22:56:33 -0000
+X-List-Received-Date: Sun, 17 Oct 2021 23:25:32 -0000
 
-On Fri, Oct 15, 2021 at 5:50 PM <frank.chang@sifive.com> wrote:
+On Sat, Oct 16, 2021 at 1:09 PM MingWang Li <limingwang@huawei.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> From: Mingwang Li <limingwang@huawei.com>
 >
-> TB_FLAGS mem_idx bits was extended from 2 bits to 3 bits in
-> commit: c445593, but other TB_FLAGS bits for rvv and rvh were
-> not shift as well so these bits may overlap with each other when
-> rvv is enabled.
+> If default main_mem is used to be registered as the system memory,
+> other memory cannot be initialized. Therefore, the system memory
+> should be initialized to the machine->ram, which consists of the
+> default main_mem and other possible memory required by applications,
+> such as shared hugepage memory in DPDK.
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Also, the mc->defaul_ram_id should be set to the default main_mem,
+> such as "riscv_virt_board.ram" for the virt machine.
+>
+> Signed-off-by: Mingwang Li <limingwang@huawei.com>
+> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/cpu.h       | 14 +++++++-------
->  target/riscv/translate.c |  2 +-
->  2 files changed, 8 insertions(+), 8 deletions(-)
+>  hw/riscv/virt.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index d70f63ddfe6..d63a08b6e4c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -380,7 +380,6 @@ void QEMU_NORETURN riscv_raise_exception(CPURISCVState *env,
->  target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
->  void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ec0cb69b8c..b3b431c847 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -771,7 +771,6 @@ static void virt_machine_init(MachineState *machine)
+>      const MemMapEntry *memmap = virt_memmap;
+>      RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
+>      MemoryRegion *system_memory = get_system_memory();
+> -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+>      MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+>      char *plic_hart_config, *soc_name;
+>      target_ulong start_addr = memmap[VIRT_DRAM].base;
+> @@ -890,10 +889,8 @@ static void virt_machine_init(MachineState *machine)
+>      }
 >
-> -#define TB_FLAGS_MMU_MASK   7
->  #define TB_FLAGS_PRIV_MMU_MASK                3
->  #define TB_FLAGS_PRIV_HYP_ACCESS_MASK   (1 << 2)
->  #define TB_FLAGS_MSTATUS_FS MSTATUS_FS
-> @@ -389,13 +388,14 @@ typedef CPURISCVState CPUArchState;
->  typedef RISCVCPU ArchCPU;
->  #include "exec/cpu-all.h"
+>      /* register system main memory (actual RAM) */
+> -    memory_region_init_ram(main_mem, NULL, "riscv_virt_board.ram",
+> -                           machine->ram_size, &error_fatal);
+>      memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
+> -        main_mem);
+> +        machine->ram);
 >
-> -FIELD(TB_FLAGS, VL_EQ_VLMAX, 2, 1)
-> -FIELD(TB_FLAGS, LMUL, 3, 2)
-> -FIELD(TB_FLAGS, SEW, 5, 3)
-> -FIELD(TB_FLAGS, VILL, 8, 1)
-> +FIELD(TB_FLAGS, MEM_IDX, 0, 3)
-> +FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
-> +FIELD(TB_FLAGS, LMUL, 4, 2)
-> +FIELD(TB_FLAGS, SEW, 6, 3)
-> +FIELD(TB_FLAGS, VILL, 9, 1)
->  /* Is a Hypervisor instruction load/store allowed? */
-> -FIELD(TB_FLAGS, HLSX, 9, 1)
-> -FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
-> +FIELD(TB_FLAGS, HLSX, 10, 1)
-> +FIELD(TB_FLAGS, MSTATUS_HS_FS, 11, 2)
+>      /* create device tree */
+>      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
+> @@ -1032,6 +1029,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+>      mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+>      mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported = true;
+> +    mc->default_ram_id = "riscv_virt_board.ram";
 >
->  bool riscv_cpu_is_32bit(CPURISCVState *env);
+>      machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index f23bc919c08..a7a66cf9db1 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -544,7 +544,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      uint32_t tb_flags = ctx->base.tb->flags;
->
->      ctx->pc_succ_insn = ctx->base.pc_first;
-> -    ctx->mem_idx = tb_flags & TB_FLAGS_MMU_MASK;
-> +    ctx->mem_idx = FIELD_EX32(tb_flags, TB_FLAGS, MEM_IDX);
->      ctx->mstatus_fs = tb_flags & TB_FLAGS_MSTATUS_FS;
->      ctx->priv_ver = env->priv_ver;
->  #if !defined(CONFIG_USER_ONLY)
 > --
-> 2.25.1
+> 2.19.1
 >
 >
 
