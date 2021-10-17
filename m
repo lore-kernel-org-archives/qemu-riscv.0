@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mc9wm-0001i3-NE
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 13:27:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38858)
+	id 1mc9wn-0001jc-Al
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 13:27:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38870)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mc9wk-0001bU-GE; Sun, 17 Oct 2021 13:27:42 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e]:35357)
+ id 1mc9wl-0001eW-KM; Sun, 17 Oct 2021 13:27:43 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:46676)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mc9we-0003A3-Gd; Sun, 17 Oct 2021 13:27:42 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id w19so60910625edd.2;
- Sun, 17 Oct 2021 10:27:35 -0700 (PDT)
+ id 1mc9wj-0003Et-RK; Sun, 17 Oct 2021 13:27:43 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id z20so61233360edc.13;
+ Sun, 17 Oct 2021 10:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=1q81MPHl8VEG9rwjhC5Xp4RSQo0CV4Uw80gPW19sdnw=;
- b=dT14tx7lEySI5skwuBwif0NiTYTEc27YoC2g+Xku8hQyixMBNc8ec1MaihHuxc4NCS
- +oJVGG2a4FuKZGHqUlD7KHt1OTUx5/wBqiPGOfty+TPBTpeLr/7W+hCv1j/GTAdK5BvC
- fS9UkX8fe1nn5d6m/VbIjEhiptvNDTecFnNuFtBCwY3duf+nzrqb9Cwcp6qAbixTkkHf
- ptrEwcEOzUgEzd716S8rFdWZ1+VRnkJTD3G1rP4VWnqWynE7K1ZISeO12rbB3K1xl5Wo
- BOne8CwDt3VuzVyFoEOl2zQjr4LTmIeDZS6T6g6SPBZqOSeBjrybEIAgUku/pGCjKsME
- wjmA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=K05JcbwHzwcb6rZL7rDmh7yc1UsvDdWX5/9rOusuP/8=;
+ b=ZdakGVSEFZAMCKfWbWOyw3ALus3Lg6vBTumrBpaGpZEC3ruTXHaMj5+NYLvyKaTPJm
+ kQzuONfffgBd+NWVJm71Y8jCZQIw9tl19Osge/9uHrN/3UHjoLwX7dm0iSNZTazerfOK
+ q2SO9hul2ivN3sEDlZdlUCjPTEjDpIFov789KV8aRlCX7o45BO8NDrkz1skeQZEpR9FG
+ 7mbFeAnyji3/fBFdSSNvVfRItVrFKSWdFC+Kv9qLiHNSqyPSafnwLIdHGSGUAjvJ92YW
+ ohJLlv6s0+Ya47zwn4iCosR2v+CMkWO8WonRURFleHrWbJY9xjlmyJCqAofslca152c0
+ vMcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=1q81MPHl8VEG9rwjhC5Xp4RSQo0CV4Uw80gPW19sdnw=;
- b=XylHsL+YwUJFhcY00g79bHJsM2D3iy0dOqUG2mjwS5p+HZba7vAmFBUqKQvBjuN2zx
- ApPDzeMVAqmrs4lns8Kkyu+3cqJFS6iHG2tMGdCcoi8QvV6I0y24JKXGwiMwckK89N0t
- mi2qVJELFlt4UWZGtYcszgYQkDzP4m4R9jpc6i78a5NBHqtK+VsvIQN+THwM5hjEIIDa
- rxdTpCsKNpGje+P3qlDiYJUMF2pj1K71cMMpxnKCgL1RczlmmnvmjRJnBSFss5CckeXH
- KoL7dIa59vvPMqaCkRGDGktK4Kfk6oBVn+/OgKwMM2u2IY0FBRGRfeh/ZrIfqmVm4n/N
- Wp/Q==
-X-Gm-Message-State: AOAM530ppton3dHzFUplS8MYmf6fwT/0LMljdTr3XYU4vCtbf7bSTEiD
- 9SAoFBzYZHfKxQLIGhq4O7M=
-X-Google-Smtp-Source: ABdhPJzzGgTm4sRsdmQ7vtSy6hHU32d4vu1sdlJoZX3BiFVLv5cXzDEVVAfT0vJffRGomFMdmxYqtQ==
-X-Received: by 2002:a17:907:7f8e:: with SMTP id
- qk14mr23827735ejc.91.1634491654516; 
- Sun, 17 Oct 2021 10:27:34 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=K05JcbwHzwcb6rZL7rDmh7yc1UsvDdWX5/9rOusuP/8=;
+ b=mLJaVojdFbsg3lMrZ+h+W2MCdbJCMhO8RpS1JjTG0JNqUha3v7q2obiOwcPpgXAR5f
+ P1yvJyuoS0LouMvVeHXPVbpzR0fE3SIJBtWWj3vSWTvNwiT6fl0QvEG9m2+ouLhyJum9
+ ottEdn/GOO3halWNc1SiWceiBPN9lEyvrXwjkOqQKKp6TVfBj3tzvxHCItS8oc+gL+OL
+ n3Ff0lLIRrqOdrOU/irZQyutQ5kerr0j6yv0B5dp36T5eq7gYaRu6ilTUuQgSbYeKfm0
+ vk2hW5XrBsDaVaHFwEAEKpBvsOjuZZw9MDR+EM3DX7iCvtwOPo29GIaZ5lf+oe5NPdar
+ tZ3Q==
+X-Gm-Message-State: AOAM531xNP1ELyqo7uR1s8vZmZ4FQO5npB3cqbASOxvozLS2hzqSUgUm
+ sTxop/P1FxxrmHNFtpC0RfVXORhlNOUMcWAI4es=
+X-Google-Smtp-Source: ABdhPJz0AQO+RzURrDueDGXfcRM4Imp+xaSwu9aCZJcMHcUjNAPfvINSR9WKh3VHdDEjSfJuz2WTTA==
+X-Received: by 2002:a05:6402:370:: with SMTP id
+ s16mr33219010edw.1.1634491660131; 
+ Sun, 17 Oct 2021 10:27:40 -0700 (PDT)
 Received: from neptune.lab ([46.39.228.224])
- by smtp.googlemail.com with ESMTPSA id v19sm7989814ejx.26.2021.10.17.10.27.33
+ by smtp.googlemail.com with ESMTPSA id v19sm7989814ejx.26.2021.10.17.10.27.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Oct 2021 10:27:34 -0700 (PDT)
+ Sun, 17 Oct 2021 10:27:39 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -49,15 +49,17 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v14 0/8] RISC-V Pointer Masking implementation
-Date: Sun, 17 Oct 2021 20:27:20 +0300
-Message-Id: <20211017172728.759687-1-space.monkey.delivers@gmail.com>
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v14 5/8] [RISCV_PM] Print new PM CSRs in QEMU logs
+Date: Sun, 17 Oct 2021 20:27:25 +0300
+Message-Id: <20211017172728.759687-6-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20211017172728.759687-1-space.monkey.delivers@gmail.com>
+References: <20211017172728.759687-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,51 +79,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Oct 2021 17:27:43 -0000
+X-List-Received-Date: Sun, 17 Oct 2021 17:27:44 -0000
 
-v13:
-Rebased QEMU and addressed Richard's comment.
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-v12:
-Updated function for adjusting address with pointer masking to allocate and use temp register.
-
-v11:
-Addressed a few style issues Alistair mentioned in the previous review.
-
-If this patch series would be accepted, I think my further attention would be to:
-- Support pm for memory operations for RVV
-- Add proper csr and support pm for memory operations for Hypervisor mode
-- Support address wrapping on unaligned accesses as @Richard mentioned previously
-
-Thanks!
-
-Alexey Baturo (7):
-  [RISCV_PM] Add J-extension into RISC-V
-  [RISCV_PM] Add CSR defines for RISC-V PM extension
-  [RISCV_PM] Support CSRs required for RISC-V PM extension except for
-    the h-mode
-  [RISCV_PM] Add J extension state description
-  [RISCV_PM] Print new PM CSRs in QEMU logs
-  [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
-    instructions
-  [RISCV_PM] Allow experimental J-ext to be turned on
-
-Anatoly Parshintsev (1):
-  [RISCV_PM] Implement address masking functions required for RISC-V
-    Pointer Masking extension
-
- target/riscv/cpu.c                      |  31 +++
- target/riscv/cpu.h                      |  33 +++
- target/riscv/cpu_bits.h                 |  96 ++++++++
- target/riscv/csr.c                      | 285 ++++++++++++++++++++++++
- target/riscv/insn_trans/trans_rva.c.inc |   3 +
- target/riscv/insn_trans/trans_rvd.c.inc |   2 +
- target/riscv/insn_trans/trans_rvf.c.inc |   2 +
- target/riscv/insn_trans/trans_rvi.c.inc |   2 +
- target/riscv/machine.c                  |  27 +++
- target/riscv/translate.c                |  43 ++++
- 10 files changed, 524 insertions(+)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 75e8b8ca83..7f9dde70b7 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -295,6 +295,31 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
+     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "satp    ", env->satp);
++    if (riscv_has_ext(env, RVJ)) {
++        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mmte    ", env->mmte);
++        switch (env->priv) {
++        case PRV_U:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmbase ",
++                         env->upmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "upmmask ",
++                         env->upmmask);
++            break;
++        case PRV_S:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmbase ",
++                         env->spmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "spmmask ",
++                         env->spmmask);
++            break;
++        case PRV_M:
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmbase ",
++                         env->mpmbase);
++            qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mpmmask ",
++                         env->mpmmask);
++            break;
++        default:
++            g_assert_not_reached();
++        }
++    }
+ #endif
+ 
+     for (i = 0; i < 32; i++) {
 -- 
 2.30.2
 
