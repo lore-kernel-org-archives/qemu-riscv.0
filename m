@@ -1,62 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcUip-0001Uv-8t
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 11:38:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51254)
+	id 1mcUiq-0001a4-SI
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 11:38:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51276)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcUim-0001Oj-Fn; Mon, 18 Oct 2021 11:38:40 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:36479)
+ id 1mcUio-0001TX-Jz; Mon, 18 Oct 2021 11:38:42 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:36695)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcUik-0006ik-Qw; Mon, 18 Oct 2021 11:38:40 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- qe4-20020a17090b4f8400b0019f663cfcd1so14770714pjb.1; 
- Mon, 18 Oct 2021 08:38:38 -0700 (PDT)
+ id 1mcUin-0006r7-2H; Mon, 18 Oct 2021 11:38:42 -0400
+Received: by mail-pg1-x534.google.com with SMTP id 75so16650161pga.3;
+ Mon, 18 Oct 2021 08:38:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:subject:date:message-id:mime-version
+ h=from:to:subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding;
- bh=bdgU6R5z57CuzHRXOdezfTsYjzZveMmJhy0dWnL8+fU=;
- b=pd/fHVUCNRy5mnBz7nai8gWdHInmi6v8d6OgVt+DppLr2r/zHlYH35GUjwmDYD83XM
- GWkPyAWIW5aZ2+38/Xdn9/PBr1qWUSujqwEAzRvzJXNS04DcV4wYaPGepuzapgMf8J7/
- xmDIMknWBjZ/tUIRoyhNq3hxQcR7CMamli17jGbUbGgcP6j0z+QM/RAjcq0PohF0uCYh
- Uz/OI2Irubole/WejcjKGdkxU54fL0BIVnjan+0qgp5S9MLoi+++zKA4NaAjnzLS3VCL
- 0JTqZyVZHLndZr8R+/zhwWfrPRDPedQedVN3a0C4gG6f1wFKu0IOwKAP+8pTKY74DwWz
- AIJA==
+ bh=71nxyaPHNGZHuralusOsP6ey6dz0RCECflgf9KIk7mU=;
+ b=GYXONXgpNcLY4vONm3X662C2LUYGmbWDzv2Zbqz9hUy7ksknOZtAOvoCJYp+7izuUw
+ hVzNoUPT788Vz022HknWLknph8uQMeYmeI+ZQHLPgRoGXXyFq+H1oCXGjWWVD0mtAPjN
+ G2XmzLe3FsfN6WKcbje/XrHuPuf+O3/4Qu5HergwItIZFGOqjLGteCOt9qm42eYT8kOJ
+ 58bRBIr4QpuU6lGnZ6UGQZvYUY7KrRtNjcgHBNAkrKCqUa/k9/beJ3720uS2SuDGQrs1
+ dOlyM+ftaBOiYHGsLkU89Z7JbyzemVFvuVcJT791ub+tBoBhi4dLodawikERnkZzeWrG
+ YikQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=bdgU6R5z57CuzHRXOdezfTsYjzZveMmJhy0dWnL8+fU=;
- b=shgBcXAmnWGd2a2jxnL2EYJv2HvDUXVe8Pr2Na3dWMoIs0SBZcLbUCVOgu7NwGWIxq
- Ah0axSFkQBbw3ixfo7iN5f8ZV3uNEHkCq/ruYTfNLaHqtkJl1oLx+Adjc4HjMk0fovnI
- 71NmZ/NS+vVBTlyMxxP+qYhiN2uRc9wamGn3TXUuyi5hRP+wQgULaLbuiCVNhiKkPG+q
- lyFwa2p8xIJgZRRtrPGclGwPKCuP0cI2fVpNXZT+CexjpKPgo5tZrGUvxRG4KFYkkoBj
- KAyfDV+qyz+TYR1U8zo0Owj4SJULppYl+/9pyzTeu0GTNEGlxLb0SV1cTXSma+/XLcM9
- jsuw==
-X-Gm-Message-State: AOAM530qx16x+SroUvJJAduC18ujOq19/62jthm2fJuuz6yOkdiA/u1W
- QIEUV/rpw0l3lJv0WlEYUm0=
-X-Google-Smtp-Source: ABdhPJyHDp152DIA0R/I1Mvzy1njp0joHt0kYbPsb96Hnk93/qupR+7ynuIzhD4AK7y4jvtL6nNZZA==
-X-Received: by 2002:a17:90a:4509:: with SMTP id
- u9mr49273381pjg.79.1634571517054; 
- Mon, 18 Oct 2021 08:38:37 -0700 (PDT)
+ h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=71nxyaPHNGZHuralusOsP6ey6dz0RCECflgf9KIk7mU=;
+ b=GivBsYLs4UmZ3fIy55KKhKih288rT1vz5RMO5GRODrntClZTo8vERuDc/RAAbmc1kt
+ Lq7njqSIhPLCmKyYQZuf3Uj5VZqYsIGxRaHMZLu4H6E4AmsR+mIj7oIpLDjdZMm7aSpF
+ byvGlHdBJXC6YBkggwmV6N6X0nd5nTawWjnGk2jj7jZcjmk9IiwWlaxOBtkdUmsTYc5R
+ Xzz6oPdUVnfc2/IL+cR2uXL76GzRIXDlQnbCsbiRpzrQuGprz34FHJDQdeIQMQ3cDf2M
+ lWCFujpFrJEd22nRxATG31z6lBtB3DY7IBbryS5NvKp9Nbe3iVYYNYlqrUiEY3HUMA/Y
+ y4qA==
+X-Gm-Message-State: AOAM530D1Jk0xp6yQrFyS7Y9Ts3P7dNmmE9qRT9+n7tKuVVKiTDPbbs9
+ jGwS4ehiy4zmzoqymrYl/Y0=
+X-Google-Smtp-Source: ABdhPJwwnWcesdA5hOIjwcV15MIEaixDmY4k35BZ69TDyMytF4Jj8uzANsCL2IkkcYazQwKQitH7NA==
+X-Received: by 2002:a05:6a00:214d:b0:44d:35e9:4ce2 with SMTP id
+ o13-20020a056a00214d00b0044d35e94ce2mr29655621pfk.13.1634571519003; 
+ Mon, 18 Oct 2021 08:38:39 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a30sm13899649pfr.64.2021.10.18.08.38.35
+ by smtp.gmail.com with ESMTPSA id a30sm13899649pfr.64.2021.10.18.08.38.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Oct 2021 08:38:36 -0700 (PDT)
+ Mon, 18 Oct 2021 08:38:38 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Igor Mammedov <imammedo@redhat.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram and
+Subject: [PATCH 2/6] hw/riscv: opentitan: Use MachineState::ram and
  MachineClass::default_ram_id
-Date: Mon, 18 Oct 2021 23:38:24 +0800
-Message-Id: <20211018153829.24382-1-bmeng.cn@gmail.com>
+Date: Mon, 18 Oct 2021 23:38:25 +0800
+Message-Id: <20211018153829.24382-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211018153829.24382-1-bmeng.cn@gmail.com>
+References: <20211018153829.24382-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,7 +77,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 15:38:41 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 15:38:43 -0000
 
 Using memory_region_init_ram(), which can't possibly handle vhost-user,
 and can't work as expected with '-numa node,memdev' options.
@@ -88,48 +89,40 @@ opt in to memdev scheme.
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- hw/riscv/microchip_pfsoc.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ hw/riscv/opentitan.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index e475b6d511..f10f55b488 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -459,7 +459,6 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-     const MemMapEntry *memmap = microchip_pfsoc_memmap;
-     MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
-     MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
-     MemoryRegion *mem_high = g_new(MemoryRegion, 1);
-     MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
-@@ -486,16 +485,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 9803ae6d70..c356293d29 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -67,17 +67,14 @@ static void opentitan_board_init(MachineState *machine)
+     const MemMapEntry *memmap = ibex_memmap;
+     OpenTitanState *s = g_new0(OpenTitanState, 1);
+     MemoryRegion *sys_mem = get_system_memory();
+-    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+ 
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc,
+                             TYPE_RISCV_IBEX_SOC);
      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
  
-     /* Register RAM */
--    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
--                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
--                           &error_fatal);
-     memory_region_init_alias(mem_low_alias, NULL,
-                              "microchip.icicle.kit.ram_low.alias",
--                             mem_low, 0,
-+                             machine->ram, 0,
-                              memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_DRAM_LO].base,
--                                mem_low);
-+                                machine->ram);
-     memory_region_add_subregion(system_memory,
-                                 memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
-                                 mem_low_alias);
-@@ -606,6 +602,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
-                    MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
-     mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
-     mc->default_cpus = mc->min_cpus;
-+    mc->default_ram_id = "microchip.icicle.kit.ram_low";
+-    memory_region_init_ram(main_mem, NULL, "riscv.lowrisc.ibex.ram",
+-        memmap[IBEX_DEV_RAM].size, &error_fatal);
+     memory_region_add_subregion(sys_mem,
+-        memmap[IBEX_DEV_RAM].base, main_mem);
++        memmap[IBEX_DEV_RAM].base, machine->ram);
  
-     /*
-      * Map 513 MiB high memory, the mimimum required high memory size, because
+     if (machine->firmware) {
+         riscv_load_firmware(machine->firmware, memmap[IBEX_DEV_RAM].base, NULL);
+@@ -95,6 +92,7 @@ static void opentitan_machine_init(MachineClass *mc)
+     mc->init = opentitan_board_init;
+     mc->max_cpus = 1;
+     mc->default_cpu_type = TYPE_RISCV_CPU_IBEX;
++    mc->default_ram_id = "riscv.lowrisc.ibex.ram";
+ }
+ 
+ DEFINE_MACHINE("opentitan", opentitan_machine_init)
 -- 
 2.25.1
 
