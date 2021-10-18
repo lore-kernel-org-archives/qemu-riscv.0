@@ -1,44 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcOWk-0005Y9-W8
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 05:01:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41384)
+	id 1mcOge-0005Vz-Ol
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 05:12:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44322)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mcOWi-0005Sl-HD; Mon, 18 Oct 2021 05:01:48 -0400
-Received: from out28-2.mail.aliyun.com ([115.124.28.2]:44387)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mcOWZ-0000Es-Ky; Mon, 18 Oct 2021 05:01:48 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436591|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0345401-6.19188e-05-0.965398;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=3; RT=3; SR=0; TI=SMTPD_---.LdFdVM5_1634547688; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LdFdVM5_1634547688)
- by smtp.aliyun-inc.com(10.147.41.231);
- Mon, 18 Oct 2021 17:01:28 +0800
-Subject: Re: [PATCH v8 00/78] support vector extension v1.0
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20211015074627.3957162-1-frank.chang@sifive.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <c6d6ca26-aa14-8950-2aef-2f92803036c6@c-sky.com>
-Date: Mon, 18 Oct 2021 17:01:28 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mcOga-0005Ul-Qc
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 05:12:01 -0400
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:43563)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mcOgV-0003gA-EO
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 05:11:59 -0400
+Received: by mail-pj1-x1034.google.com with SMTP id
+ e5-20020a17090a804500b001a116ad95caso6497400pjw.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Oct 2021 02:11:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=zQfgb0MeOJMzaPUMOhWBB6SfGww5gTMNQt5y2p/cG0Q=;
+ b=FcGAnKSIu2GNL+Kp+I40UPRwt+9kU8MGYkf14ec3GUtfYxwXue6uTat1I/ERyVIZXc
+ cn4dBIcn0R3akVe8l6/yYg5YWLftqMuwCfSIESGjRS1vM/qdSvyXiCtrnKjHUHQLyePO
+ vfGIEXF0aiWWs7vIX4+YuZvqPlPnpxGfANo+aW9y7sAp/TLg7YUumeDYTJsIyUfYsFM5
+ WqLD2cRd1LZQIuVIriTzQYaSM5oOBrn1ragv/IIc9cJPHguhcqOw0Of7CUyrY+Gne948
+ UQi4x8a+bl2JvWk4sbFwf4AGTEF8xhpd7ZLsMN0GvaQF/4Afd2hDFOGvNZAC5auPPfP6
+ tdig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=zQfgb0MeOJMzaPUMOhWBB6SfGww5gTMNQt5y2p/cG0Q=;
+ b=3Ff4dMzwaTXJFmmDwwmjzHFN40GmhhZaxlg24VXKzKzjv1kwEfdmfeGZ+hL6ZAAh7d
+ xn/9vqdhelCoGBu+68n+804q/7A/N2ji2rQ9Yrk+zADyVwO3nhUo8PnySuNdfSCU/Hsi
+ FRtLyuqu+32pBNMcfhzxcCxvgBmSJ0A1xaKeMzsTSRQxYasS6RwyNntEv+luEa7M5En7
+ 58Oou0KZNu3wBTuCeftvLJ6mKqim2je1znnsNUpKAcqNygdQDWDgsJhiQLA20+xX40kX
+ y9iSBV+O0GtIv9QJbosuqIF4tmDNTrXKn/UARDuWokY/OeCaL6GpaVbIurtsCQmviG9D
+ U7OA==
+X-Gm-Message-State: AOAM533gnOIJ+5peU//sTNV5noqsdxmmJqExayETDAg7r14/Fbzk7Xhr
+ ImLp7OkDSPE3P/9tRUf+UKOzzi2HOB3tcQ==
+X-Google-Smtp-Source: ABdhPJydIs9sJpy3/h9d2KFNSbRCQYOQUp1WNIcFLA5wpqsm7SALpgztGeG8e6zkTf4NvzwkEJfWvw==
+X-Received: by 2002:a17:90b:3a85:: with SMTP id
+ om5mr32842803pjb.115.1634548313850; 
+ Mon, 18 Oct 2021 02:11:53 -0700 (PDT)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com.
+ [209.85.215.172])
+ by smtp.gmail.com with ESMTPSA id x20sm12194431pjp.48.2021.10.18.02.11.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Oct 2021 02:11:53 -0700 (PDT)
+Received: by mail-pg1-f172.google.com with SMTP id e65so13069535pgc.5;
+ Mon, 18 Oct 2021 02:11:53 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1592:b0:44d:db91:ff84 with SMTP id
+ u18-20020a056a00159200b0044ddb91ff84mr2621100pfk.45.1634548313131; Mon, 18
+ Oct 2021 02:11:53 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20211015074627.3957162-1-frank.chang@sifive.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.2; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-2.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <f4d8a7a035f39c0a35d44c1e371c5c99cc2fa15a.1634531504.git.alistair.francis@wdc.com>
+In-Reply-To: <f4d8a7a035f39c0a35d44c1e371c5c99cc2fa15a.1634531504.git.alistair.francis@wdc.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 18 Oct 2021 17:11:41 +0800
+X-Gmail-Original-Message-ID: <CANzO1D3rf3em2RJAb7Q4vO3N5q+eyzxtFM6YmrSo0Pw3w12GBg@mail.gmail.com>
+Message-ID: <CANzO1D3rf3em2RJAb7Q4vO3N5q+eyzxtFM6YmrSo0Pw3w12GBg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] target/riscv: Remove some unused macros
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, bmeng.cn@gmail.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <alistair23@gmail.com>
+Content-Type: multipart/alternative; boundary="00000000000092909105ce9ceffb"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1034.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -51,217 +86,95 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 09:01:49 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 09:12:01 -0000
 
-Hi Alistair,
+--00000000000092909105ce9ceffb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There is some products based on the vector v0.7.1, such as D1 SOC from 
-Allwinner and  Xuantie CPU  And we have spent a lot of work to support  
-vector  on QEMU.
+Alistair Francis <alistair.francis@opensource.wdc.com> =E6=96=BC 2021=E5=B9=
+=B410=E6=9C=8818=E6=97=A5 =E9=80=B1=E4=B8=80
+=E4=B8=8B=E5=8D=8812:38=E5=AF=AB=E9=81=93=EF=BC=9A
 
-
-
-Allwinner
-
-
-On 2021/10/15 下午3:45, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
-> This patchset implements the vector extension v1.0 for RISC-V on QEMU.
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu_bits.h | 8 --------
+>  1 file changed, 8 deletions(-)
 >
-> RVV v1.0 spec is now fronzen for public review:
-> https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 999187a9ee..3aa2512d13 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -427,14 +427,6 @@
+>  #define SATP64_ASID         0x0FFFF00000000000ULL
+>  #define SATP64_PPN          0x00000FFFFFFFFFFFULL
 >
-> The port is available here:
-> https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v8
->
-> RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
-> option to v1.0 (i.e. vext_spec=v1.0)
->
-> Note: This patchset depends on other patchsets listed in Based-on
->        section below so it is not able to be built unless those patchsets
->        are applied.
->
-> Changelog:
->
-> v8
->    * Use {get,dest}_gpr APIs.
->    * remove vector AMO instructions.
->    * rename vpopc.m to vcpop.m.
->    * rename vle1.v and vse1.v to vlm.v and vsm.v.
->    * rename vmandnot.mm and vmornot.mm to vmandn.mm and vmorn.mm.
->
-> v7
->    * remove hardcoded GDB vector registers list.
->    * add vsetivli instruction.
->    * add vle1.v and vse1.v instructions.
->
-> v6
->    * add vector floating-point reciprocal estimate instruction.
->    * add vector floating-point reciprocal square-root estimate instruction.
->    * update check rules for segment register groups, each segment register
->      group has to follow overlap rules.
->    * update viota.m instruction check rules.
->
-> v5
->    * refactor RVV v1.0 check functions.
->      (Thanks to Richard Henderson's bitwise tricks.)
->    * relax RV_VLEN_MAX to 1024-bits.
->    * implement vstart CSR's behaviors.
->    * trigger illegal instruction exception if frm is not valid for
->      vector floating-point instructions.
->    * rebase on riscv-to-apply.next.
->
-> v4
->    * remove explicit float flmul variable in DisasContext.
->    * replace floating-point calculations with shift operations to
->      improve performance.
->    * relax RV_VLEN_MAX to 512-bits.
->
-> v3
->    * apply nan-box helpers from Richard Henderson.
->    * remove fp16 api changes as they are sent independently in another
->      pathcset by Chih-Min Chao.
->    * remove all tail elements clear functions as tail elements can
->      retain unchanged for either VTA set to undisturbed or agnostic.
->    * add fp16 nan-box check generator function.
->    * add floating-point rounding mode enum.
->    * replace flmul arithmetic with shifts to avoid floating-point
->      conversions.
->    * add Zvqmac extension.
->    * replace gdbstub vector register xml files with dynamic generator.
->    * bumped to RVV v1.0.
->    * RVV v1.0 related changes:
->      * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
->        load/store instructions
->      * add vrgatherei16 instruction.
->      * rearranged bits in vtype to make vlmul bits into a contiguous
->        field.
->
-> v2
->    * drop v0.7.1 support.
->    * replace invisible return check macros with functions.
->    * move mark_vs_dirty() to translators.
->    * add SSTATUS_VS flag for s-mode.
->    * nan-box scalar fp register for floating-point operations.
->    * add gdbstub files for vector registers to allow system-mode
->      debugging with GDB.
->
-> Based-on: <20211015065500.3850513-1-frank.chang@sifive.com>
-> Based-on: <20211015070307.3860984-1-frank.chang@sifive.com>
->
-> Frank Chang (73):
->    target/riscv: fix TB_FLAGS bits overlapping bug for rvv/rvh
->    target/riscv: drop vector 0.7.1 and add 1.0 support
->    target/riscv: Use FIELD_EX32() to extract wd field
->    target/riscv: rvv-1.0: introduce writable misa.v field
->    target/riscv: rvv-1.0: add translation-time vector context status
->    target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
->    target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
->      registers
->    target/riscv: rvv-1.0: remove MLEN calculations
->    target/riscv: rvv-1.0: add fractional LMUL
->    target/riscv: rvv-1.0: add VMA and VTA
->    target/riscv: rvv-1.0: update check functions
->    target/riscv: introduce more imm value modes in translator functions
->    target/riscv: rvv:1.0: add translation-time nan-box helper function
->    target/riscv: rvv-1.0: remove amo operations instructions
->    target/riscv: rvv-1.0: configure instructions
->    target/riscv: rvv-1.0: stride load and store instructions
->    target/riscv: rvv-1.0: index load and store instructions
->    target/riscv: rvv-1.0: fix address index overflow bug of indexed
->      load/store insns
->    target/riscv: rvv-1.0: fault-only-first unit stride load
->    target/riscv: rvv-1.0: load/store whole register instructions
->    target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
->    target/riscv: rvv-1.0: take fractional LMUL into vector max elements
->      calculation
->    target/riscv: rvv-1.0: floating-point square-root instruction
->    target/riscv: rvv-1.0: floating-point classify instructions
->    target/riscv: rvv-1.0: count population in mask instruction
->    target/riscv: rvv-1.0: find-first-set mask bit instruction
->    target/riscv: rvv-1.0: set-X-first mask bit instructions
->    target/riscv: rvv-1.0: iota instruction
->    target/riscv: rvv-1.0: element index instruction
->    target/riscv: rvv-1.0: allow load element with sign-extended
->    target/riscv: rvv-1.0: register gather instructions
->    target/riscv: rvv-1.0: integer scalar move instructions
->    target/riscv: rvv-1.0: floating-point move instruction
->    target/riscv: rvv-1.0: floating-point scalar move instructions
->    target/riscv: rvv-1.0: whole register move instructions
->    target/riscv: rvv-1.0: integer extension instructions
->    target/riscv: rvv-1.0: single-width averaging add and subtract
->      instructions
->    target/riscv: rvv-1.0: single-width bit shift instructions
->    target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
->    target/riscv: rvv-1.0: narrowing integer right shift instructions
->    target/riscv: rvv-1.0: widening integer multiply-add instructions
->    target/riscv: rvv-1.0: single-width saturating add and subtract
->      instructions
->    target/riscv: rvv-1.0: integer comparison instructions
->    target/riscv: rvv-1.0: floating-point compare instructions
->    target/riscv: rvv-1.0: mask-register logical instructions
->    target/riscv: rvv-1.0: slide instructions
->    target/riscv: rvv-1.0: floating-point slide instructions
->    target/riscv: rvv-1.0: narrowing fixed-point clip instructions
->    target/riscv: rvv-1.0: single-width floating-point reduction
->    target/riscv: rvv-1.0: widening floating-point reduction instructions
->    target/riscv: rvv-1.0: single-width scaling shift instructions
->    target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
->    target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
->    target/riscv: rvv-1.0: remove integer extract instruction
->    target/riscv: rvv-1.0: floating-point min/max instructions
->    target/riscv: introduce floating-point rounding mode enum
->    target/riscv: rvv-1.0: floating-point/integer type-convert
->      instructions
->    target/riscv: rvv-1.0: widening floating-point/integer type-convert
->    target/riscv: add "set round to odd" rounding mode helper function
->    target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
->    target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
->    target/riscv: rvv-1.0: implement vstart CSR
->    target/riscv: rvv-1.0: trigger illegal instruction exception if frm is
->      not valid
->    target/riscv: rvv-1.0: set mstatus.SD bit when writing vector CSRs
->    target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
->      instruction
->    target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
->    target/riscv: set mstatus.SD bit when writing fp CSRs
->    target/riscv: rvv-1.0: rename r2_zimm to r2_zimm11
->    target/riscv: rvv-1.0: add vsetivli instruction
->    target/riscv: rvv-1.0: add evl parameter to vext_ldst_us()
->    target/riscv: rvv-1.0: add vector unit-stride mask load/store insns
->    target/riscv: rvv-1.0: rename vmandnot.mm and vmornot.mm to vmandn.mm
->      and vmorn.mm
->    target/riscv: rvv-1.0: update opivv_vadc_check() comment
->
-> Greentime Hu (1):
->    target/riscv: rvv-1.0: add vlenb register
->
-> Hsiangkai Wang (1):
->    target/riscv: gdb: support vector registers for rv64 & rv32
->
-> LIU Zhiwei (3):
->    target/riscv: rvv-1.0: add mstatus VS field
->    target/riscv: rvv-1.0: add sstatus VS field
->    target/riscv: rvv-1.0: add vcsr register
->
->   target/riscv/cpu.c                      |   12 +-
->   target/riscv/cpu.h                      |   85 +-
->   target/riscv/cpu_bits.h                 |   10 +
->   target/riscv/cpu_helper.c               |   15 +-
->   target/riscv/csr.c                      |   92 +-
->   target/riscv/fpu_helper.c               |   17 +-
->   target/riscv/gdbstub.c                  |  184 ++
->   target/riscv/helper.h                   |  435 ++-
->   target/riscv/insn32.decode              |  294 +-
->   target/riscv/insn_trans/trans_rvv.c.inc | 2423 +++++++++------
->   target/riscv/internals.h                |   24 +-
->   target/riscv/translate.c                |   74 +-
->   target/riscv/vector_helper.c            | 3601 ++++++++++++-----------
->   13 files changed, 4176 insertions(+), 3090 deletions(-)
->
+> -/* VM modes (mstatus.vm) privileged ISA 1.9.1 */
+> -#define VM_1_09_MBARE       0
+> -#define VM_1_09_MBB         1
+> -#define VM_1_09_MBBID       2
+> -#define VM_1_09_SV32        8
+> -#define VM_1_09_SV39        9
+> -#define VM_1_09_SV48        10
+> -
+>  /* VM modes (satp.mode) privileged ISA 1.10 */
+>  #define VM_1_10_MBARE       0
+>  #define VM_1_10_SV32        1
 > --
-> 2.25.1
+> 2.31.1
 >
 >
+>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+
+--00000000000092909105ce9ceffb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Alistair Francis &lt;<a href=3D"mailto:al=
+istair.francis@opensource.wdc.com">alistair.francis@opensource.wdc.com</a>&=
+gt; =E6=96=BC 2021=E5=B9=B410=E6=9C=8818=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=
+=8B=E5=8D=8812:38=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><div class=3D"gmail_q=
+uote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;b=
+order-left:1px solid rgb(204,204,204);padding-left:1ex">From: Alistair Fran=
+cis &lt;<a href=3D"mailto:alistair.francis@wdc.com" target=3D"_blank">alist=
+air.francis@wdc.com</a>&gt;<br>
+<br>
+Signed-off-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
+com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu_bits.h | 8 --------<br>
+=C2=A01 file changed, 8 deletions(-)<br>
+<br>
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h<br>
+index 999187a9ee..3aa2512d13 100644<br>
+--- a/target/riscv/cpu_bits.h<br>
++++ b/target/riscv/cpu_bits.h<br>
+@@ -427,14 +427,6 @@<br>
+=C2=A0#define SATP64_ASID=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x0FFFF000000000=
+00ULL<br>
+=C2=A0#define SATP64_PPN=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00000FFFFFFFFF=
+FFULL<br>
+<br>
+-/* VM modes (mstatus.vm) privileged ISA 1.9.1 */<br>
+-#define VM_1_09_MBARE=C2=A0 =C2=A0 =C2=A0 =C2=A00<br>
+-#define VM_1_09_MBB=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01<br>
+-#define VM_1_09_MBBID=C2=A0 =C2=A0 =C2=A0 =C2=A02<br>
+-#define VM_1_09_SV32=C2=A0 =C2=A0 =C2=A0 =C2=A0 8<br>
+-#define VM_1_09_SV39=C2=A0 =C2=A0 =C2=A0 =C2=A0 9<br>
+-#define VM_1_09_SV48=C2=A0 =C2=A0 =C2=A0 =C2=A0 10<br>
+-<br>
+=C2=A0/* VM modes (satp.mode) privileged ISA 1.10 */<br>
+=C2=A0#define VM_1_10_MBARE=C2=A0 =C2=A0 =C2=A0 =C2=A00<br>
+=C2=A0#define VM_1_10_SV32=C2=A0 =C2=A0 =C2=A0 =C2=A0 1<br>
+-- <br>
+2.31.1<br>
+<br>
+<br></blockquote><div><br></div><div>Reviewed-by: Frank Chang &lt;<a href=
+=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com</a>&gt;</div></di=
+v></div>
+
+--00000000000092909105ce9ceffb--
 
