@@ -1,67 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcKeF-0000Vn-9D
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 00:53:20 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51508)
+	id 1mcLFi-0006by-Q5
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 01:32:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57124)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcKe8-0000UB-2d; Mon, 18 Oct 2021 00:53:12 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:40571)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mcLFg-0006bG-LN
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 01:32:00 -0400
+Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:55056)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcKe6-0005Ea-Jj; Mon, 18 Oct 2021 00:53:11 -0400
-Received: by mail-il1-x136.google.com with SMTP id k3so3191433ilo.7;
- Sun, 17 Oct 2021 21:53:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7oDd07h1tSNvOpmOlFMqjvORWq9jYg5hGpHUrRQd60k=;
- b=VYpbkEV9GXAMsTZj0EUU8DCrd/QCRPLFBSUmhj0UaU/7xMFg0KtpJnryXB2GsJSWwh
- MAuyBhUbT6TJ4+98NMrp31vP3YXaAFVaHpIQSbGcwstUiq1pFKooqxbcoRGgO4t+4WAH
- EzyERDtkj5Tyl9xqFHcfxXiWgNvmNVt3xolaSzRsapakQihdtD4i5BoqEq73jPf030xz
- 1rN56fxWxkxxK4fz0/IQIx9v4j2r/V2IsyGcFJuivj5c5IJb8/wFdfe9SYeC+gVUBDPE
- aZn4g9vF+WKICpx2/D+kMfiHVMjZZgs7gHijHCSi6/A66Tul6IE9vtJ9rc2FwUTojCIU
- rVPw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mcLFe-0001BF-NA
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 01:32:00 -0400
+Received: by mail-pj1-x102f.google.com with SMTP id np13so11394316pjb.4
+ for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 22:31:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=JGZwShwgKrwz5GKrAYdmMeKE08mmQzUw0gujh+N8JpA=;
+ b=Weid6OIPPQbz0NjqLZtIHdkxZkQ79dvxReK6VRAJEFtA1fF3T9+s9Tw3+DMwbzfxZB
+ 3zv0uUGVIQ/N6tHO7NmOaRK3QvOoHfFnfP/dvgtBbM64Dd2pcbwuorPdMW+tc9YcjvIX
+ OP0ijq+/UzC7VEARzhQuXnHfU+NFGFkuJ/iWUCHRjcQkGgxaq5P0OHyivkPJgjWSIVL0
+ hk8AQXy5zZL0a9aau1wWKOVhfSDZ8nv+OBo+sVYeuxmyYLEsi4d+wgKU+Wq76YWSO7bb
+ s9fzbzUrfA9Udsi8WB878P/Pxyeq6rpCgL9HK9FvZkHrdvrpAh1+s7q1/YJzb3NqP7Ge
+ 7vlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7oDd07h1tSNvOpmOlFMqjvORWq9jYg5hGpHUrRQd60k=;
- b=iI0udno+wZLdD+JvUqOkn+ol/MuzNBx3gmbgUmcPZ+R/JQrPV21X3yeVm4gw78u5vg
- 7k2zsYR0aDbHDAxDUbmarQlpXLYwZDpEO/lHoS3gqc+EJspCLJMgKsO4YZ+k5vTf7JS2
- O7wTsrXKoUb3GfLgFzkzS1w2n0TC/51VCcfMzZo6kU/jVy4If/XZYtp67zpQMkne0LGP
- 4nb2IVbbQeb965hxxJzYQwxAJrePzdTJToQV/dz7Is+d06p2bNghTjRgCUG9Peid/yGj
- nDt8h3wPXxr+KbzBfONBkwbdyER8oDV25lHB/VDn/8v6KzXmf1ke3f6Gin7LmOv9nqTb
- /jjQ==
-X-Gm-Message-State: AOAM532V2RA3/Pk9krzsR39MdzLKQocILUKl+bLo3MMjGpXkUi2KBSZM
- HUNC0sRoS43pvz85b8jtg7ZcSSN+9m5DMSPnq8U=
-X-Google-Smtp-Source: ABdhPJyDLvmLoYtPJO4dmzYh6KUlmxglS4dsTbOL5Q2CAdhWeYb8AgRuuhOLOGlin0z2w/D/tkB/X8HovfFLCBUC3uw=
-X-Received: by 2002:a05:6e02:1885:: with SMTP id
- o5mr12654487ilu.221.1634532788590; 
- Sun, 17 Oct 2021 21:53:08 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=JGZwShwgKrwz5GKrAYdmMeKE08mmQzUw0gujh+N8JpA=;
+ b=RbqfhBqe+GKyo1XfURrwbr2WBQVE6oMhhNdmHXiECW60N+pumEwScg+kpv88078FrA
+ ecuNafEC4GkdWGGBf5wEEU0uiaHYUptK9tV3AidPQgQOAZ8EySOqObwyaosONkjRaaZD
+ EIEphpjRrPOF9h+cT/Bk1brwBZkba3B26PHy59txe7mDOtn64JmFXkGpkLtQz0sTEPEW
+ lGojhqHqUJz4/CabXUXl1nNQj7pgeEQlo1K43ex6cuFzwWic/xzwMwqFJpuHmw+qbD98
+ lNzAjI4AUuPBJ9yPa0CWiV0VmodhxIxIf+FinZABX1sAiCfWIjIDKfBmZD7ZY36cBciW
+ h5Wg==
+X-Gm-Message-State: AOAM530DKUPTjasiGkUI3ae37srq0qgRYIi8n9moCZZw6jOa+MKIcKPf
+ mnM9tfebH5vpvWk8KXNYv049PQ==
+X-Google-Smtp-Source: ABdhPJwAVEElnScyna0RgrJ+wENwN6aP2K7y+KQEXZTxl8EJkrNHZMUAJVal7MP1JIAoIjOxCYNezg==
+X-Received: by 2002:a17:90b:3786:: with SMTP id
+ mz6mr44340924pjb.245.1634535115805; 
+ Sun, 17 Oct 2021 22:31:55 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id i2sm12356090pjt.21.2021.10.17.22.31.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 17 Oct 2021 22:31:55 -0700 (PDT)
+Subject: Re: [PATCH v3 14/14] target/riscv: Compute mstatus.sd on demand
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Fabien Portas <fabien.portas@grenoble-inp.org>,
+ =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, liuzhiwei <zhiwei_liu@c-sky.com>
 References: <20211016171412.3163784-1-richard.henderson@linaro.org>
  <20211016171412.3163784-15-richard.henderson@linaro.org>
-In-Reply-To: <20211016171412.3163784-15-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Oct 2021 14:52:42 +1000
-Message-ID: <CAKmqyKOZd-gtes+_sQ=ndjqu9nfujE_Kc==Jueno+ds6Pg7neQ@mail.gmail.com>
-Subject: Re: [PATCH v3 14/14] target/riscv: Compute mstatus.sd on demand
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Frank Chang <frank.chang@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Fabien Portas <fabien.portas@grenoble-inp.org>, 
- =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
- liuzhiwei <zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ <CAKmqyKOZd-gtes+_sQ=ndjqu9nfujE_Kc==Jueno+ds6Pg7neQ@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <a9a1b623-0420-6285-0ad8-cf152a4e0397@linaro.org>
+Date: Sun, 17 Oct 2021 22:31:53 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKOZd-gtes+_sQ=ndjqu9nfujE_Kc==Jueno+ds6Pg7neQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,19 +88,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 04:53:13 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 05:32:00 -0000
 
-On Sun, Oct 17, 2021 at 3:32 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> The position of this read-only field is dependent on the
-> current cpu width.  Rather than having to compute that
-> difference in many places, compute it only on read.
->
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+On 10/17/21 9:52 PM, Alistair Francis wrote:
+> On Sun, Oct 17, 2021 at 3:32 AM Richard Henderson
+> <richard.henderson@linaro.org> wrote:
+>>
+>> The position of this read-only field is dependent on the
+>> current cpu width.  Rather than having to compute that
+>> difference in many places, compute it only on read.
+>>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> 
+> This means that the value reported by riscv_cpu_dump_state() and GDB
+> will both be incorrect though?
 
-This means that the value reported by riscv_cpu_dump_state() and GDB
-will both be incorrect though?
+Yep.  Missed those; should have added another accessor.
 
-Alistair
+Also, for the record, it changes the vmstate, but since a previous patch in the series 
+bumped the version number for the split on misa, we can call all of a piece and ok.
+
+
+r~
 
