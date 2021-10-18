@@ -1,72 +1,95 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcIDx-00074B-Pv
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 22:18:01 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56662)
+	id 1mcIYS-0003Ib-I2
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 22:39:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcIDw-00073X-1O; Sun, 17 Oct 2021 22:18:00 -0400
-Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:37512)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcIDu-0000Cy-EZ; Sun, 17 Oct 2021 22:17:59 -0400
-Received: by mail-yb1-xb29.google.com with SMTP id l80so1781470ybf.4;
- Sun, 17 Oct 2021 19:17:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jyCGJUEQaLVIefhqFNExPOSmol5P8lXHJ3BUr+mKsFI=;
- b=C+1iYCirSQfPNbW9cD3NAn09MhZzuLxEoXNU9Q9A5LocAWhQAmiB3kTiLnbTBDctY5
- 2kHKE1afBpN/gi/g70C7BKwhSsgf688vjmR0liVFZvFwvMr11We4LUCLZzfKmjnaTPtF
- xeCQgnssvdZCSqyvNT3SULzM1J0LpPC4Ezr/R6W6r3Q6EmOFIS76UCZLec+HqHQ3CbYM
- hfpAW0Wx7z+hBRehlOcO6Khut5+TMRKfBDK2cUo8vEO1rFlLkDE3xwFFZP16MXM8yZhz
- 3LHNIEMRVsP2RU0bd1WHNdbK/Ic1Wd3lB25NFNiwsQpDQkyVZHli2E4/l8UvlkedYUzi
- FMcA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jyCGJUEQaLVIefhqFNExPOSmol5P8lXHJ3BUr+mKsFI=;
- b=XTwr/gWVf3n/ncpqvWbA/xOl0nIAO87hy/p/9WDzu+05lSJgNGE4uOqgbemglefuqz
- A1iHyghnRHVCNdUcwVhdTY2UK1CGh6LFLlPgbhY7j49ZX4TRZLtbcaoF0zvYTShoxtN6
- MPgC5gB97193KoknBDJnC7D4w/smqdfS1Y3bTQakGapRN9QrM/1/tDCNHbLKPj8UWKOA
- sWctpkh/GweETterhjli4nGlyRPoRG99uhK/oK3X4hTedk6p1HM+mO/cdL4uf+R3EmmL
- lasPelib+T6CqoOOQzZLKInOzcX/wZWh6Qs/jPzhGyeK0SCMQ68XKytisTJ1uneT1Yux
- 2sjw==
-X-Gm-Message-State: AOAM532cJHP3djH3SZx1/nNO6QCWVgF0PHMzBWtDfrW/zAgytWg9tV91
- qJoQF3PnID2AeHSiZEwCT25HGZkSR3UZ2Ql6s4k=
-X-Google-Smtp-Source: ABdhPJyo5M0BYIU46y1DETLGD/DpJQb5aULIvMdzxj9TDY165+oy0BVE/NU9si40qtvhEnnp/3uLNziSKImMb6kHHco=
-X-Received: by 2002:a25:c0d2:: with SMTP id c201mr8993984ybf.467.1634523476534; 
- Sun, 17 Oct 2021 19:17:56 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=918244500=alistair.francis@opensource.wdc.com>)
+ id 1mcIYO-0003I7-Ho
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 22:39:10 -0400
+Received: from esa1.hgst.iphmx.com ([68.232.141.245]:57553)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=918244500=alistair.francis@opensource.wdc.com>)
+ id 1mcIYJ-0005l2-8Z
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 22:39:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1634524743; x=1666060743;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=UBLyHjHEECUC9xcH6KM9gTj0RdK+i3NW4tI9uSKgHk0=;
+ b=Vvd0m8B2hj3KNKWvbf7y6M7iFQDcZ0gv0LYjW2j20TixYsR8gYoGl2XO
+ FM/kiB3kqW/oLcF/B52D448LXtEgBC9GgThspeVE5gBeGT7nFU1pTamEP
+ cR4PR6sNiNTyMwo/17SiLWDz74h6EeqPtXWny/kra5TOK8oijIeTMIkOC
+ YZqP/t15YHba9+gOPnAKSfi0QL/wRP2NEtUA9hPZr7Y/DJNVvD7yVweGN
+ XL2P6W/PxSWiwwLbscDngUwDUXnqFt0w10+I8r1mg7UURnVyPVplPZLof
+ vDXKxqB5Pl8d7DhCOCSCyGcoNEs4c8yLJQlpRBaTJNDriTCJEjEA5u1lJ w==;
+X-IronPort-AV: E=Sophos;i="5.85,381,1624291200"; d="scan'208";a="294869879"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 18 Oct 2021 10:38:53 +0800
+IronPort-SDR: AMHtFEGZeloX+pcL089E8DQbT+JbWsAHcBQIcaWMWVeHotUuaQRP+O4aTxecWLlOrHV4d+oEyY
+ jjMG8m7Eo6zRj6yZ5YJtJfvbJc1fRw5eeNeW69lGAQ4E0EVFy+uTeMcAiV+Jclm/SPLyrlKNRZ
+ MEWeNPdURhcFJ/HBTX5MvBDWc4eH+thPMVtzzb0HSrj5gC2rQrLbP7v5p20ir31l44eYTuFoHe
+ kqwm6jbhyew7kF/KqErmL4jqxbSQMefygiP/WDEoJeL1bMUQk5zkuDt8wjHeyZg9yxgUlLKwuS
+ XAao66v2omOZDLgo6wkcHQal
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Oct 2021 19:13:01 -0700
+IronPort-SDR: kPGIntkisqH6REsjxr8eW73j+/dCCowk8IBGpXax7aO9WSyaiNwEO0nN/4U5zzxQdXizIVcC+h
+ oCCNeaJ6UApYcBBxlF5P3Cv+LaTpigo24policm8q+eTPGKD5a/27fnR2FSGH54UtQ/LjntU9P
+ HGU96xlySQgglnx8bYn+uFccWcOjRV77qn8u9OqlgalGySrogHn58RAp5/ancerW2Vw2QlcaUD
+ 08CPhQRI/c29svg4DUfr2XmcSsT5XadcFvYfn6lEs2vRmYgKyKp58XfpcZdPK1L8leF2rSwIzh
+ m7o=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 17 Oct 2021 19:38:54 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4HXgzw6LM8z1RvmF
+ for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 19:38:52 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1634524732;
+ x=1637116733; bh=UBLyHjHEECUC9xcH6KM9gTj0RdK+i3NW4tI9uSKgHk0=; b=
+ DCMrUv6P/kD1bwEFsuzgPnyO1VMtpEBaPg7QuxLHNbLEgg6mmSMCcrnA39r4Dglo
+ 0v1ZR0VFDGvwRzL5xhEQs/EOaVSK+bLM06LRrvPWJFsh14JjNZqKCPOPSGfYjQuC
+ Y8uUlx+oNeYRxX2m43UYtd1jZ0Ekq+ZgFnxSweYPxbklYJF2ZjcAcI9km4mM82eZ
+ bijSFWgEx7MvHFPWOuaxUosPkuPx41WcdTIHWbV42nLXOJsWrn1Fib0svO9yU/7d
+ WZbZl1JRdBU+DWCB8dPiYfmdd81xlG1AbhYLGOvMMlhoob3Q+KzE/BMgp2MxCwwG
+ nQIdvDybK2Xt9os0YoOhnQ==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id jRlHAwjQIXHy for <qemu-riscv@nongnu.org>;
+ Sun, 17 Oct 2021 19:38:52 -0700 (PDT)
+Received: from toolbox.wdc.com (unknown [10.225.165.38])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4HXgzq2BD7z1RvlJ;
+ Sun, 17 Oct 2021 19:38:46 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com
+Subject: [PATCH v1 1/9] hw/riscv: opentitan: Update to the latest build
+Date: Mon, 18 Oct 2021 12:38:39 +1000
+Message-Id: <18b1b681b0f8dd2461e819d1217bf0b530812680.1634524691.git.alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-References: <20211012014501.24996-1-limingwang@huawei.com>
- <CAEUhbmX=A4LPgzNgNPcxzzg=veU0=3vXyZQrwikxMFvb_Rcxzw@mail.gmail.com>
- <c4c6cc03d1c6459ea036c08ae30806a5@huawei.com>
- <CAEUhbmVD1jyvGJrQLSZLJYfaz6E-m0b9SZA+DQA2YYK70oL7Lg@mail.gmail.com>
- <20211015145922.5a82e31a@redhat.com>
-In-Reply-To: <20211015145922.5a82e31a@redhat.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 18 Oct 2021 10:17:45 +0800
-Message-ID: <CAEUhbmVTs109MLog+wjnayJY++SvEPhuCKcG3xXotqySkpGAaA@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: bugfix the memory-backend-file command
- is invalid
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: "limingwang (A)" <limingwang@huawei.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Jiangyifei <jiangyifei@huawei.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, 
- "Fanliang (EulerOS)" <fanliang@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- "Wubin (H)" <wu.wubin@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb29.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=68.232.141.245;
+ envelope-from=prvs=918244500=alistair.francis@opensource.wdc.com;
+ helo=esa1.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -80,113 +103,119 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 02:18:00 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 02:39:10 -0000
 
-Hi Igor,
+From: Alistair Francis <alistair.francis@wdc.com>
 
-On Fri, Oct 15, 2021 at 8:59 PM Igor Mammedov <imammedo@redhat.com> wrote:
->
-> On Fri, 15 Oct 2021 17:25:01 +0800
-> Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> > On Fri, Oct 15, 2021 at 4:52 PM limingwang (A) <limingwang@huawei.com> wrote:
-> > >
-> > >
-> > > On Wed, Oct 13, 2021 at 22:41 PM Bin Meng <bin.meng@windriver.com> wrote:
-> > > >
-> > > > On Tue, Oct 12, 2021 at 9:46 AM MingWang Li <limingwang@huawei.com> wrote:
-> > > > >
-> > > > > From: Mingwang Li <limingwang@huawei.com>
-> > > > >
-> > > > > When I start the VM with the following command:
-> > > > > $ ./qemu-system-riscv64 -M virt,accel=kvm -m 4096M -cpu host -nographic \
-> > > > >     -name guest=riscv-guset \
-> > > > >     -smp 2 \
-> > > > >     -bios none \
-> > > > >     -kernel ./Image \
-> > > > >     -drive file=./guest.img,format=raw,id=hd0 \
-> > > > >     -device virtio-blk-device,drive=hd0 \
-> > > > >     -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
-> > > > >     -object
-> > > > memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on \
-> > > > >     -numa node,memdev=mem -mem-prealloc \
-> > > > >     -chardev socket,id=char0,path=/mnt/vhost-net0 \
-> > > > >     -netdev type=vhost-user,id=mynet1,chardev=char0,vhostforce \
-> > > > >     -device
-> > > > > virtio-net-pci,mac=52:54:00:00:00:01,netdev=mynet1,mrg_rxbuf=on,csum=o
-> > > > > n,guest_csum=on,guest_ecn=on \
-> > > > >
-> > > > > Then, QEMU displays the following error information:
-> > > > > qemu-system-riscv64: Failed initializing vhost-user memory map,
-> > > > > consider using -object memory-backend-file share=on
-> > > >
-> > > > I see your command line parameters already contain "-object memory-backend-file
-> > > > share=on", so this error message is not accurate.
-> > >
-> > > QEMU uses this command to alloc fd in the "memory_region_init_ram_from_file" function
-> > > and assigns the value of fd to mr->ram_block-fd. If the QEMU uses the default memory to
-> > > initialize the system, the QEMU cannot obtain the fd in the "vhost_user_mem_section_filter"
-> > > function when initializing the vhost-user. As a result, an error is reported in the "vhost_user_fill_set_mem_table_msg"
-> > > function.
-> > >
-> > > Because of the above bug, even if "-object memory-backend-file share=on" is added to the command line,
-> > > the QEMU still reports an error.
-> >
-> > Yes, what I meant is that QEMU should not report such inaccurate
-> > messages because of some random codes elsewhere.
-> >
-> > With current message, it suggested user use "-object
-> > memory-backend-file share=on" in the command line, but it is already
-> > used. So this is a false alarm. The "bug" is somewhere else.
->
-> bug is in using memory_region_init_ram(),
-> which can't possibly handle vhost-user, and can't work as expected with
-> '-numa node,memdev' options.
-> Before main ram infrastructure was converted to memdev,
-> one should have used memory_region_allocate_system_memory() for
-> allocating main RAM, so numa usecase was broken from the start.
-> Later it old API was dropped in favor of more flexible/generic
-> MachineState::ram approach (see commits 68a86dc15ccd..f0530f14c7c35d).
+Update the OpenTitan machine model to match the latest OpenTitan FPGA
+design.
 
-Thanks for the detailed pointers.
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ include/hw/riscv/opentitan.h |  6 +++---
+ hw/riscv/opentitan.c         | 22 +++++++++++++++++-----
+ 2 files changed, 20 insertions(+), 8 deletions(-)
 
-I wonder if it is possible to make the error message to be clearer, so
-instead of having
+diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+index 9f93bebdac..eac35ef590 100644
+--- a/include/hw/riscv/opentitan.h
++++ b/include/hw/riscv/opentitan.h
+@@ -20,7 +20,7 @@
+ #define HW_OPENTITAN_H
+=20
+ #include "hw/riscv/riscv_hart.h"
+-#include "hw/intc/ibex_plic.h"
++#include "hw/intc/sifive_plic.h"
+ #include "hw/char/ibex_uart.h"
+ #include "hw/timer/ibex_timer.h"
+ #include "qom/object.h"
+@@ -34,7 +34,7 @@ struct LowRISCIbexSoCState {
+=20
+     /*< public >*/
+     RISCVHartArrayState cpus;
+-    IbexPlicState plic;
++    SiFivePLICState plic;
+     IbexUartState uart;
+     IbexTimerState timer;
+=20
+@@ -87,7 +87,7 @@ enum {
+ };
+=20
+ enum {
+-    IBEX_TIMER_TIMEREXPIRED0_0 =3D 125,
++    IBEX_TIMER_TIMEREXPIRED0_0 =3D 126,
+     IBEX_UART0_RX_PARITY_ERR_IRQ =3D 8,
+     IBEX_UART0_RX_TIMEOUT_IRQ =3D 7,
+     IBEX_UART0_RX_BREAK_ERR_IRQ =3D 6,
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 9803ae6d70..601f8deebe 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -46,19 +46,19 @@ static const MemMapEntry ibex_memmap[] =3D {
+     [IBEX_DEV_PINMUX] =3D         {  0x40460000,  0x1000  },
+     [IBEX_DEV_PADCTRL] =3D        {  0x40470000,  0x1000  },
+     [IBEX_DEV_FLASH_CTRL] =3D     {  0x41000000,  0x1000  },
+-    [IBEX_DEV_PLIC] =3D           {  0x41010000,  0x1000  },
+     [IBEX_DEV_AES] =3D            {  0x41100000,  0x1000  },
+     [IBEX_DEV_HMAC] =3D           {  0x41110000,  0x1000  },
+     [IBEX_DEV_KMAC] =3D           {  0x41120000,  0x1000  },
+-    [IBEX_DEV_KEYMGR] =3D         {  0x41130000,  0x1000  },
++    [IBEX_DEV_OTBN] =3D           {  0x41130000,  0x10000 },
++    [IBEX_DEV_KEYMGR] =3D         {  0x41140000,  0x1000  },
+     [IBEX_DEV_CSRNG] =3D          {  0x41150000,  0x1000  },
+     [IBEX_DEV_ENTROPY] =3D        {  0x41160000,  0x1000  },
+     [IBEX_DEV_EDNO] =3D           {  0x41170000,  0x1000  },
+     [IBEX_DEV_EDN1] =3D           {  0x41180000,  0x1000  },
+     [IBEX_DEV_ALERT_HANDLER] =3D  {  0x411b0000,  0x1000  },
+     [IBEX_DEV_NMI_GEN] =3D        {  0x411c0000,  0x1000  },
+-    [IBEX_DEV_OTBN] =3D           {  0x411d0000,  0x10000 },
+     [IBEX_DEV_PERI] =3D           {  0x411f0000,  0x10000 },
++    [IBEX_DEV_PLIC] =3D           {  0x48000000,  0x4005000  },
+     [IBEX_DEV_FLASH_VIRTUAL] =3D  {  0x80000000,  0x80000 },
+ };
+=20
+@@ -105,7 +105,7 @@ static void lowrisc_ibex_soc_init(Object *obj)
+=20
+     object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY=
+);
+=20
+-    object_initialize_child(obj, "plic", &s->plic, TYPE_IBEX_PLIC);
++    object_initialize_child(obj, "plic", &s->plic, TYPE_SIFIVE_PLIC);
+=20
+     object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
+=20
+@@ -145,6 +145,18 @@ static void lowrisc_ibex_soc_realize(DeviceState *de=
+v_soc, Error **errp)
+                                 &s->flash_alias);
+=20
+     /* PLIC */
++    qdev_prop_set_string(DEVICE(&s->plic), "hart-config", "M");
++    qdev_prop_set_uint32(DEVICE(&s->plic), "hartid-base", 0);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "num-sources", 180);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "num-priorities", 3);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "priority-base", 0x00);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "pending-base", 0x1000);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "enable-base", 0x2000);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "enable-stride", 0x18);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "context-base", 0x200004);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "context-stride", 4);
++    qdev_prop_set_uint32(DEVICE(&s->plic), "aperture-size", memmap[IBEX_=
+DEV_PLIC].size);
++
+     if (!sysbus_realize(SYS_BUS_DEVICE(&s->plic), errp)) {
+         return;
+     }
+@@ -153,7 +165,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev=
+_soc, Error **errp)
+     for (i =3D 0; i < ms->smp.cpus; i++) {
+         CPUState *cpu =3D qemu_get_cpu(i);
+=20
+-        qdev_connect_gpio_out(DEVICE(&s->plic), i,
++        qdev_connect_gpio_out(DEVICE(&s->plic), ms->smp.cpus + i,
+                               qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
+     }
+=20
+--=20
+2.31.1
 
-    "qemu-system-riscv64: Failed initializing vhost-user memory map,
-consider using -object memory-backend-file share=on"
-
-can we do:
-
-    "qemu-system-riscv64: Failed initializing vhost-user memory map,
-considering using MachineState::ram instead of manually initializing
-RAM memory region."
-
-which is more straightforward?
-
->
->
-> Modulo commit message, patch looks good to me and does what
-> every machine should do. (I though that I've converted every
-> existing to generalized MachineState::ram but it looks like
-> riscv was missed).
-
-Indeed all riscv boards are doing the same thing.
-
->
-> So we can model commit message after bd457782b3b0a,
-> and also add that the patch fixes broken -numa node,memdev case,
-> which never properly worked. It also opens possibility to
-> use vhost-user/virtiosf with main RAM if main RAM is
-> provided explicitly via machine.memory-backend option
-> with shared memory backend.
->
-> Btw: is there other riscv machines that allocate RAM directly?
-> (if yes, those should be fixed as well, a patch per machine)
->
-
-I will see if I can get some patches to fix other riscv machines.
-
-Regards,
-Bin
 
