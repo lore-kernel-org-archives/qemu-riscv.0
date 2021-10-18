@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcLUp-0000Vu-Cp
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 01:47:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58656)
+	id 1mcLX9-0003Qh-St
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 01:50:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59396)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcLUl-0000Sp-Ut; Mon, 18 Oct 2021 01:47:36 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:35496)
+ id 1mcLX4-0003PP-BI; Mon, 18 Oct 2021 01:49:59 -0400
+Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:34660)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcLUk-0000ax-CU; Mon, 18 Oct 2021 01:47:35 -0400
-Received: by mail-io1-xd33.google.com with SMTP id h196so14886222iof.2;
- Sun, 17 Oct 2021 22:47:33 -0700 (PDT)
+ id 1mcLX2-0002Xj-9K; Mon, 18 Oct 2021 01:49:58 -0400
+Received: by mail-il1-x12f.google.com with SMTP id g2so13701185ild.1;
+ Sun, 17 Oct 2021 22:49:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=N/o4hOtBnp4OcDbI4A9vINEOTuctWyV7yUv2yKjVbPo=;
- b=OQ18r/cR6/urcSNfCwYYxBjddakZlH7+H7rCigksUdEF7kJN7yX/+qTYW5P+xVRYi4
- iWHYspn52mn297/Fph2qYR6khdrDI+QZD671u91oVdzsOrC90lib+QM8gIixT5OFZ8eJ
- 9xov/4UJQQRvgZM94mnfFxjhh/AF8nGhsfBcBncDUjNSShurWgkh48L6HE2WYDEolsMn
- YdMv6GAPEbiFFVJaei/C0iiJiRw/zPIgwkl0bEbJq+q+0FsAyX4aoKb/7Z33gGQ0CTdF
- 6QvvdaEpkx+54hcsUJB5n18d5xP5jHE6FDgeyCL0N72ns/LD41qk6NjI20IZb3TskJ0S
- 8/Ew==
+ :cc; bh=rL0n/DJubepnTlku2Sad2UZHnkizjwKyDWv6jXgjtjw=;
+ b=ZV2ZOORU4b4WhjxMktbmSHK3ExsDqlqCW1vxRxDBSYsEjJ05bDfdYRLVgWbUe+Y5J5
+ 7TuGR9PK4wjFJ/ie7HemzHGzYSprKg5OxhJpPnCyH7nkvbHtBABC/VAt0dHBiZGbxLfx
+ 5qaiZropP4/Ivl/03a3w2utaDUbl8YHh2KPdacdm/Ca8lc02KLUp4gF+SrAXZF+sXDiS
+ e+O7c7ux2+6WJYpGlUKn21K3oZ/OAvpno+DsOq6nzTWfPHK0NN+D1RL+d0lGCdo8Su5O
+ s6zQaXz4pKGHTMUEHHsOLlj/1kBu1MfzyHhutnA5DDIaRH2bbC9LYf20nCYLMRfTfQhY
+ TaZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=N/o4hOtBnp4OcDbI4A9vINEOTuctWyV7yUv2yKjVbPo=;
- b=Fz+nGzkHmneMHxeANnrxB9zr0Nyqny24TRM1Uy2AWEFInUQ6s+/EkJbx290x4xoCyy
- R1qItC8eOrWXgNGvdgpwtdbK3xarPk3j6Z/eSm0jHI8c6mhIMGB54DkSod/JzF8Q7hTS
- Uq2pbos9EXBwYO4Dk2dpjupG0zEi1vzECpb2XDyyTd8aJ2WBBOhOzZKzCIBaS/kFV0B8
- eMApd358WRGipuCORcW5IuPvaEuenOUphy7sQUBa1DwB29D5Zxyv/YBGIcAHcXk9R+CU
- e/iEvVzgR5Zw4GVxOzV5/uigcjYY/3MDgoTSGfXGOhjX7qTZK+hKqfs9ZTcZsULP9/7D
- yAGg==
-X-Gm-Message-State: AOAM53019PtQ9RL562/vZi+sD8989kQl1N/Wh1G4iqUbwe5EcfafS4ra
- +/wYbvacWAL5Q1M7duhP+xw1ag4LKbgQTw7yL1c=
-X-Google-Smtp-Source: ABdhPJxEi7aSKcRb9VpFJGRJ9/4uCXr8gIqEiNHtfduoYnMG/6+963kdSwTLFMQvsaP+bzXzKqoo+Vd8Ng/FzZvg31Q=
-X-Received: by 2002:a6b:8d4a:: with SMTP id p71mr12955070iod.16.1634536052712; 
- Sun, 17 Oct 2021 22:47:32 -0700 (PDT)
+ bh=rL0n/DJubepnTlku2Sad2UZHnkizjwKyDWv6jXgjtjw=;
+ b=zUIcoJ+iCzTWKJ69VgRTHdIDX60a5w/y8XhSTmlr1zGzrEndSWyDlGfvfsj4Sir/Jc
+ cMJvLcJtjuhFxxqbhGDp39KcqqhCTOQE4kKsum0h2DFrvcMo/5jzIfsazzekQ0OqXnub
+ OkgXAZXJfAOOulLaxryBz9ilHmGGgLa+j3R8KR1JNPAbWTe6+gHIZPWYsf+N3vWVkoQ3
+ uCIWu9+4FwN9EU9pAm2H4aBsIbT6rUgXSIf56O/iNBR3dCRXuX2EKLKEbzOXcKoecRED
+ +rv43VUNbzyTBlbD4aJMC3oXSEBMVfVFuA7+QqPEDqRqQK6ER+qgQ9kftrk9JHZcB3bd
+ FBKA==
+X-Gm-Message-State: AOAM533lyCpMIlQ4nLHaTuIQvbNoZSyrmXg0WhzSnK+353n+fABVsgvr
+ N3sJgZhbghD+bHMtmGoLqBp1SPsZ/2CsPzWUBLU=
+X-Google-Smtp-Source: ABdhPJzHWRFlz6jxLIBAQ16uwkkebQS2ygma5aquHhifVs6riQMIv68hiEzhQVUL21meq6WAayCgVxTCGZUGPXiIdQo=
+X-Received: by 2002:a05:6e02:1402:: with SMTP id
+ n2mr13110034ilo.208.1634536194893; 
+ Sun, 17 Oct 2021 22:49:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <20211015074627.3957162-38-frank.chang@sifive.com>
-In-Reply-To: <20211015074627.3957162-38-frank.chang@sifive.com>
+ <20211015074627.3957162-40-frank.chang@sifive.com>
+In-Reply-To: <20211015074627.3957162-40-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Oct 2021 15:47:06 +1000
-Message-ID: <CAKmqyKOuD50pBpSwwRhCvYHAZErpx22Kmpp7+5SW8yORBTYeyA@mail.gmail.com>
-Subject: Re: [PATCH v8 30/78] target/riscv: rvv-1.0: find-first-set mask bit
- instruction
+Date: Mon, 18 Oct 2021 15:49:28 +1000
+Message-ID: <CAKmqyKM4LPqToVgdwz95OX0z4WZj63A0nLjg2yqpLNFGzZgZ1Q@mail.gmail.com>
+Subject: Re: [PATCH v8 32/78] target/riscv: rvv-1.0: iota instruction
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,9 +75,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 05:47:37 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 05:50:02 -0000
 
-On Fri, Oct 15, 2021 at 6:03 PM <frank.chang@sifive.com> wrote:
+On Fri, Oct 15, 2021 at 6:25 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
@@ -89,77 +89,48 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/helper.h                   | 2 +-
->  target/riscv/insn32.decode              | 2 +-
->  target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
->  target/riscv/vector_helper.c            | 6 +++---
->  4 files changed, 7 insertions(+), 7 deletions(-)
+>  target/riscv/insn32.decode              |  2 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
+>  2 files changed, 9 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 3f30882aec4..7646567eb27 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -1022,7 +1022,7 @@ DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
->
->  DEF_HELPER_4(vcpop_m, tl, ptr, ptr, env, i32)
->
-> -DEF_HELPER_4(vmfirst_m, tl, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vfirst_m, tl, ptr, ptr, env, i32)
->
->  DEF_HELPER_5(vmsbf_m, void, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_5(vmsif_m, void, ptr, ptr, ptr, env, i32)
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index e748f7ca714..4df2aa9cddc 100644
+> index d139c0aade7..3ac5162aeb7 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -628,7 +628,7 @@ vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
->  vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
->  vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
->  vcpop_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
-> -vmfirst_m       010101 . ..... ----- 010 ..... 1010111 @r2_vm
-> +vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
->  vmsbf_m         010110 . ..... 00001 010 ..... 1010111 @r2_vm
->  vmsif_m         010110 . ..... 00011 010 ..... 1010111 @r2_vm
->  vmsof_m         010110 . ..... 00010 010 ..... 1010111 @r2_vm
+> @@ -632,7 +632,7 @@ vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
+>  vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
+>  vmsif_m         010100 . ..... 00011 010 ..... 1010111 @r2_vm
+>  vmsof_m         010100 . ..... 00010 010 ..... 1010111 @r2_vm
+> -viota_m         010110 . ..... 10000 010 ..... 1010111 @r2_vm
+> +viota_m         010100 . ..... 10000 010 ..... 1010111 @r2_vm
+>  vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
+>  vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
+>  vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index fc17e57d0f7..5376adca60c 100644
+> index 538a32a605a..3751496676f 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2695,7 +2695,7 @@ static bool trans_vcpop_m(DisasContext *s, arg_rmr *a)
->  }
+> @@ -2756,12 +2756,18 @@ GEN_M_TRANS(vmsbf_m)
+>  GEN_M_TRANS(vmsif_m)
+>  GEN_M_TRANS(vmsof_m)
 >
->  /* vmfirst find-first-set mask bit */
-> -static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
-> +static bool trans_vfirst_m(DisasContext *s, arg_rmr *a)
+> -/* Vector Iota Instruction */
+> +/*
+> + * Vector Iota Instruction
+> + *
+> + * 1. The destination register cannot overlap the source register.
+> + * 2. If masked, cannot overlap the mask register ('v0').
+> + * 3. An illegal instruction exception is raised if vstart is non-zero.
+> + */
+>  static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
 >  {
 >      if (require_rvv(s) &&
->          vext_check_isa_ill(s)) {
-> @@ -2714,7 +2714,7 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
->          tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
->          tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
->
-> -        gen_helper_vmfirst_m(dst, mask, src2, cpu_env, desc);
-> +        gen_helper_vfirst_m(dst, mask, src2, cpu_env, desc);
->          gen_set_gpr(s, a->rd, dst);
->
->          tcg_temp_free_ptr(mask);
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 9451112b3da..f97783acf05 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -4233,9 +4233,9 @@ target_ulong HELPER(vcpop_m)(void *v0, void *vs2, CPURISCVState *env,
->      return cnt;
->  }
->
-> -/* vmfirst find-first-set mask bit*/
-> -target_ulong HELPER(vmfirst_m)(void *v0, void *vs2, CPURISCVState *env,
-> -                               uint32_t desc)
-> +/* vfirst find-first-set mask bit*/
-> +target_ulong HELPER(vfirst_m)(void *v0, void *vs2, CPURISCVState *env,
-> +                              uint32_t desc)
->  {
->      uint32_t vm = vext_vm(desc);
->      uint32_t vl = env->vl;
+>          vext_check_isa_ill(s) &&
+> -        require_noover(a->rd, s->lmul, a->rs2, 0) &&
+> +        !is_overlapped(a->rd, 1 << MAX(s->lmul, 0), a->rs2, 1) &&
+>          require_vm(a->vm, a->rd) &&
+>          require_align(a->rd, s->lmul)) {
+>          uint32_t data = 0;
 > --
 > 2.25.1
 >
