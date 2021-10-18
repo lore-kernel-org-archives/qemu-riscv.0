@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcKO3-0005gS-9W
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 00:36:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48632)
+	id 1mcKPm-0006kQ-Sv
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 00:38:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48762)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcKNz-0005du-AL; Mon, 18 Oct 2021 00:36:31 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:39550)
+ id 1mcKPl-0006id-EP; Mon, 18 Oct 2021 00:38:21 -0400
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:45705)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcKNx-0001fs-JU; Mon, 18 Oct 2021 00:36:31 -0400
-Received: by mail-il1-x136.google.com with SMTP id w11so13528811ilv.6;
- Sun, 17 Oct 2021 21:36:28 -0700 (PDT)
+ id 1mcKPh-0003Ts-NH; Mon, 18 Oct 2021 00:38:21 -0400
+Received: by mail-il1-x12c.google.com with SMTP id i11so13500227ila.12;
+ Sun, 17 Oct 2021 21:38:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=u0lG/ITfSWHGHwYdYUAp+IRzRQaltoeJY3tjT9FRyiQ=;
- b=okB0bErTrr6xlRmb+BhewTvbvATgnaGSkK5RnpFVigEQeOrvDbZSVqp0WqCsG0DpC6
- Cr1734qaL4C0ltdZp+3SfsimGibZPt3okZ4IzI//Vx0m1VYZEzXadROVVCN5ylKGoU5E
- JgDR+Vw6uc8/WHLVuXEXXThAQzXlwSfJTGXu4VA4moWPbANlCbBgDKdkJEZK4H6c4IE/
- qgX6TbHLlELB3Pwwqv1/lVO2IqoKeCt4GD0bYtvdspoDfgc9tmKHmNgVxgcIiVbeh1YQ
- WXebpTJOJA0Mqq3h/u6KVzWwZwiaoZWjJHmJaLF+BBNcxxRSK9DZ/EMZ++g9gY4bV5kV
- 5oww==
+ :cc; bh=U+CjwRVSCtc+kXWSbm1pP0/myfu7EfvDF8aD73c//oo=;
+ b=pLqugSFKzh3EXp/49jZ7EHYAhLdm8qp1b6apbwCbRY5ZDEcNXwZs/IJH8FW907fW1S
+ fivjhJm+C4W64XLLvTDnHuuMYMl+5vz7EF8tKw48h7DG3EgJhVoI2mjpg8rFIyYKev5+
+ L7BMvMF95JlnXt3GeuACnUw2LHM5oxd43C/70arsSjZUU6Xzu8RLWR1uELcNIhfjqZDu
+ YFIR6al3+g6Eulzq1sB0NhXRHQGGBwgCNRa5eeVbEyHNaKdIk6pdY4gHKDnY280b+TG4
+ BgnBbahlbpbfEuqQZQyuzgso3hzdCeRwv1hMq/ai1O39kQikn1Me2f89A+nN5Kxp+KhM
+ jaSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=u0lG/ITfSWHGHwYdYUAp+IRzRQaltoeJY3tjT9FRyiQ=;
- b=Gd787DFnXtS9eocoCK+osRjcVNGWSfY9Esb6YE+4cI93zhfkxz4ykjCYsZoqQGniNg
- tZ6MVEATqU03xkTqNvkEl5UNApxnNzs0FJvlz9Hhll35mEXk5MbNXl+uefA66ofk4Bq3
- t2FFViU3pqOiD1IWUGTI0H4IVfMjdrLm9lecl5VoVLFhCTlWcM8KHWKXpPBJ1neLbRC0
- Y6FC5ov7fx+YzRpYhcbMz/P2Bqa/yx6GSRsyDrKPlPyiTgeCnaPqqtrz5hXJl+OKjHbX
- CNGkCxmGX9Sde+qldeWu6cAhuzQFt5nTaeds4eCNBsjwHlUj8+WdTCElPN4D8inZVtjW
- dImw==
-X-Gm-Message-State: AOAM533Uu04iTmG7jYEWmUC9JloLmNbfNbxJC0iDXLqHa8EP/Vadb+QR
- dLIOYovFt97raf1yuFOaUQ3R6HrzvmUktiXl4XI=
-X-Google-Smtp-Source: ABdhPJzgwX3ZUaofZXbWxMy4lQibcMoD6nUYHiNeKb4iY5H208RK87uxQ5m4udsMHn4HNfiT2RiDqe6FgWSVRcCJA4g=
-X-Received: by 2002:a92:1a43:: with SMTP id z3mr12680167ill.46.1634531787090; 
- Sun, 17 Oct 2021 21:36:27 -0700 (PDT)
+ bh=U+CjwRVSCtc+kXWSbm1pP0/myfu7EfvDF8aD73c//oo=;
+ b=fDm1Qgvm5r557aWiaLMmjWXVF+90DHm9Wu0WNlb1nkuZhJlmC6Y+1U/rp9c3BYkHJ/
+ FHIMLWtNPqhKa5vzwTeDqT6El5WXczdWW4vtm86Qrzv4H3Mhl4dX61ZNxvAXorL674tr
+ 4MyWEXgF51nWwcB20U5ktHspaaorYOq+w5pxVabZnzyNOKrrLRB1yTB1Tq48786MH6q5
+ /sjNtq9trwU8oPFQPFCWXxLsWsABANddHmSinep/GCP0ZLOuCOM1Ps8MjKhAii51FSQl
+ 5mk4GFTW/Q5MccrCSrK0n8ZHIKiI6qZlisBlBD1pBjLydpT+D1FSydQ7axhjMfLSGIy3
+ +kNQ==
+X-Gm-Message-State: AOAM53334JwNipg/ZRmQoklEmBO3j4kQo/FKLT8h+Q6+xRzY05I/Piqg
+ uO4A+lfGn0+3TmXaPuT6vIL3XINYsqonglKgOQ8=
+X-Google-Smtp-Source: ABdhPJyAA7/275IklbCq908Oa6nU4UafON6pT9UEs9g4428Oyk08wxZIVYUdDEWMkf3UHFTtoaMiAWTGe1wmgd9aBow=
+X-Received: by 2002:a05:6e02:1402:: with SMTP id
+ n2mr12946141ilo.208.1634531896080; 
+ Sun, 17 Oct 2021 21:38:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211016171412.3163784-1-richard.henderson@linaro.org>
- <20211016171412.3163784-11-richard.henderson@linaro.org>
-In-Reply-To: <20211016171412.3163784-11-richard.henderson@linaro.org>
+ <20211016171412.3163784-13-richard.henderson@linaro.org>
+In-Reply-To: <20211016171412.3163784-13-richard.henderson@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Oct 2021 14:36:01 +1000
-Message-ID: <CAKmqyKMoxd=m3+2dJoeH6VBLrFdcpyaLDifXqgY5Yvu_LNJQhw@mail.gmail.com>
-Subject: Re: [PATCH v3 10/14] target/riscv: Use gen_arith_per_ol for RVM
+Date: Mon, 18 Oct 2021 14:37:49 +1000
+Message-ID: <CAKmqyKP6U7KajkZvG8WaqpwZy+HOPxKq5Ve0b-E9HLpb_-xr7w@mail.gmail.com>
+Subject: Re: [PATCH v3 12/14] target/riscv: Use gen_unary_per_ol for RVB
 To: Richard Henderson <richard.henderson@linaro.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,8 +54,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
  liuzhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,13 +76,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 04:36:31 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 04:38:21 -0000
 
-On Sun, Oct 17, 2021 at 3:27 AM Richard Henderson
+On Sun, Oct 17, 2021 at 3:29 AM Richard Henderson
 <richard.henderson@linaro.org> wrote:
 >
-> The multiply high-part instructions require a separate
-> implementation for RV32 when TARGET_LONG_BITS == 64.
+> The count zeros instructions require a separate implementation
+> for RV32 when TARGET_LONG_BITS == 64.
 >
 > Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
@@ -91,21 +92,21 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/translate.c                | 16 +++++++++++++++
->  target/riscv/insn_trans/trans_rvm.c.inc | 26 ++++++++++++++++++++++---
->  2 files changed, 39 insertions(+), 3 deletions(-)
+>  target/riscv/translate.c                | 16 ++++++++++++
+>  target/riscv/insn_trans/trans_rvb.c.inc | 33 ++++++++++++-------------
+>  2 files changed, 32 insertions(+), 17 deletions(-)
 >
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 172eea3935..8f5f39d143 100644
+> index 8f5f39d143..7286791c0f 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -428,6 +428,22 @@ static bool gen_arith(DisasContext *ctx, arg_r *a, DisasExtend ext,
+> @@ -511,6 +511,22 @@ static bool gen_unary(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
 >      return true;
 >  }
 >
-> +static bool gen_arith_per_ol(DisasContext *ctx, arg_r *a, DisasExtend ext,
-> +                             void (*f_tl)(TCGv, TCGv, TCGv),
-> +                             void (*f_32)(TCGv, TCGv, TCGv))
+> +static bool gen_unary_per_ol(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
+> +                             void (*f_tl)(TCGv, TCGv),
+> +                             void (*f_32)(TCGv, TCGv))
 > +{
 > +    int olen = get_olen(ctx);
 > +
@@ -116,69 +117,87 @@ Alistair
 > +            g_assert_not_reached();
 > +        }
 > +    }
-> +    return gen_arith(ctx, a, ext, f_tl);
+> +    return gen_unary(ctx, a, ext, f_tl);
 > +}
 > +
->  static bool gen_shift_imm_fn(DisasContext *ctx, arg_shift *a, DisasExtend ext,
->                               void (*func)(TCGv, TCGv, target_long))
+>  static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
 >  {
-> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
-> index 9a1fe3c799..2af0e5c139 100644
-> --- a/target/riscv/insn_trans/trans_rvm.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
-> @@ -33,10 +33,16 @@ static void gen_mulh(TCGv ret, TCGv s1, TCGv s2)
->      tcg_temp_free(discard);
+>      DisasContext *ctx = container_of(dcbase, DisasContext, base);
+> diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+> index c62eea433a..0c2120428d 100644
+> --- a/target/riscv/insn_trans/trans_rvb.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvb.c.inc
+> @@ -47,10 +47,18 @@ static void gen_clz(TCGv ret, TCGv arg1)
+>      tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
 >  }
 >
-> +static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
+> +static void gen_clzw(TCGv ret, TCGv arg1)
 > +{
-> +    tcg_gen_mul_tl(ret, s1, s2);
-> +    tcg_gen_sari_tl(ret, ret, 32);
+> +    TCGv t = tcg_temp_new();
+> +    tcg_gen_shli_tl(t, arg1, 32);
+> +    tcg_gen_clzi_tl(ret, t, 32);
+> +    tcg_temp_free(t);
 > +}
 > +
->  static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+>  static bool trans_clz(DisasContext *ctx, arg_clz *a)
 >  {
->      REQUIRE_EXT(ctx, RVM);
-> -    return gen_arith(ctx, a, EXT_NONE, gen_mulh);
-> +    return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w);
+>      REQUIRE_ZBB(ctx);
+> -    return gen_unary(ctx, a, EXT_ZERO, gen_clz);
+> +    return gen_unary_per_ol(ctx, a, EXT_NONE, gen_clz, gen_clzw);
 >  }
 >
->  static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
-> @@ -54,10 +60,23 @@ static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
->      tcg_temp_free(rh);
+>  static void gen_ctz(TCGv ret, TCGv arg1)
+> @@ -58,10 +66,15 @@ static void gen_ctz(TCGv ret, TCGv arg1)
+>      tcg_gen_ctzi_tl(ret, arg1, TARGET_LONG_BITS);
 >  }
 >
-> +static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv arg2)
+> +static void gen_ctzw(TCGv ret, TCGv arg1)
 > +{
-> +    TCGv t1 = tcg_temp_new();
-> +    TCGv t2 = tcg_temp_new();
-> +
-> +    tcg_gen_ext32s_tl(t1, arg1);
-> +    tcg_gen_ext32u_tl(t2, arg2);
-> +    tcg_gen_mul_tl(ret, t1, t2);
-> +    tcg_temp_free(t1);
-> +    tcg_temp_free(t2);
-> +    tcg_gen_sari_tl(ret, ret, 32);
+> +    tcg_gen_ctzi_tl(ret, arg1, 32);
 > +}
 > +
->  static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+>  static bool trans_ctz(DisasContext *ctx, arg_ctz *a)
 >  {
->      REQUIRE_EXT(ctx, RVM);
-> -    return gen_arith(ctx, a, EXT_NONE, gen_mulhsu);
-> +    return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w);
+>      REQUIRE_ZBB(ctx);
+> -    return gen_unary(ctx, a, EXT_ZERO, gen_ctz);
+> +    return gen_unary_per_ol(ctx, a, EXT_ZERO, gen_ctz, gen_ctzw);
 >  }
 >
->  static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
-> @@ -71,7 +90,8 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
->  static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
->  {
->      REQUIRE_EXT(ctx, RVM);
-> -    return gen_arith(ctx, a, EXT_NONE, gen_mulhu);
-> +    /* gen_mulh_w works for either sign as input. */
-> +    return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w);
+>  static bool trans_cpop(DisasContext *ctx, arg_cpop *a)
+> @@ -314,14 +327,6 @@ static bool trans_zext_h_64(DisasContext *ctx, arg_zext_h_64 *a)
+>      return gen_unary(ctx, a, EXT_NONE, tcg_gen_ext16u_tl);
 >  }
 >
->  static void gen_div(TCGv ret, TCGv source1, TCGv source2)
+> -static void gen_clzw(TCGv ret, TCGv arg1)
+> -{
+> -    TCGv t = tcg_temp_new();
+> -    tcg_gen_shli_tl(t, arg1, 32);
+> -    tcg_gen_clzi_tl(ret, t, 32);
+> -    tcg_temp_free(t);
+> -}
+> -
+>  static bool trans_clzw(DisasContext *ctx, arg_clzw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+> @@ -329,17 +334,11 @@ static bool trans_clzw(DisasContext *ctx, arg_clzw *a)
+>      return gen_unary(ctx, a, EXT_NONE, gen_clzw);
+>  }
+>
+> -static void gen_ctzw(TCGv ret, TCGv arg1)
+> -{
+> -    tcg_gen_ori_tl(ret, arg1, (target_ulong)MAKE_64BIT_MASK(32, 32));
+> -    tcg_gen_ctzi_tl(ret, ret, 64);
+> -}
+> -
+>  static bool trans_ctzw(DisasContext *ctx, arg_ctzw *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+>      REQUIRE_ZBB(ctx);
+> -    return gen_unary(ctx, a, EXT_NONE, gen_ctzw);
+> +    return gen_unary(ctx, a, EXT_ZERO, gen_ctzw);
+>  }
+>
+>  static bool trans_cpopw(DisasContext *ctx, arg_cpopw *a)
 > --
 > 2.25.1
 >
