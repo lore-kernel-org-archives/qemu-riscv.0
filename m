@@ -1,68 +1,82 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcLX9-0003Qh-St
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 01:50:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59396)
+	id 1mcLaC-00067v-8W
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 01:53:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60060)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcLX4-0003PP-BI; Mon, 18 Oct 2021 01:49:59 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:34660)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mcLaA-00064q-CB
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 01:53:10 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:38800)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mcLX2-0002Xj-9K; Mon, 18 Oct 2021 01:49:58 -0400
-Received: by mail-il1-x12f.google.com with SMTP id g2so13701185ild.1;
- Sun, 17 Oct 2021 22:49:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rL0n/DJubepnTlku2Sad2UZHnkizjwKyDWv6jXgjtjw=;
- b=ZV2ZOORU4b4WhjxMktbmSHK3ExsDqlqCW1vxRxDBSYsEjJ05bDfdYRLVgWbUe+Y5J5
- 7TuGR9PK4wjFJ/ie7HemzHGzYSprKg5OxhJpPnCyH7nkvbHtBABC/VAt0dHBiZGbxLfx
- 5qaiZropP4/Ivl/03a3w2utaDUbl8YHh2KPdacdm/Ca8lc02KLUp4gF+SrAXZF+sXDiS
- e+O7c7ux2+6WJYpGlUKn21K3oZ/OAvpno+DsOq6nzTWfPHK0NN+D1RL+d0lGCdo8Su5O
- s6zQaXz4pKGHTMUEHHsOLlj/1kBu1MfzyHhutnA5DDIaRH2bbC9LYf20nCYLMRfTfQhY
- TaZg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mcLa5-0005Cj-Fd
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 01:53:10 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ g13-20020a17090a3c8d00b00196286963b9so13684057pjc.3
+ for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 22:53:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=OfJLUonHYjuHCbt16pHVOINf521HxYLr/hT9zMQc5zQ=;
+ b=qjt5yd/7yEv+BWBstDlcKYawl8sN+xBlMC9p4Xe5u0s4hTEYXWhMBJvNbBjSq1I5Ve
+ gXs9ZJP5YcLKj0EPipHx2P3iD2BD0vVjnwmWhXVtwZQWZ151lBEFL6vzSA+usq8VS96r
+ lSnOp23VuS2MqN1bTpNtuAS6+tzbEmFJAJgnda5hqDyzjxjt4PJxGBEzq2xngRNmH3hc
+ OgpxeH5/gbeZ52Xy/4RP9L26M/cj3aqwnYS78jQ+/t8JxBcpB8DkQ9hWVU2G7UCOLOUP
+ b8hBrjuqgVDojAZNbcv8UZ4bgplfLriM9H5SjjXN/MGUavn4AU0txeVYHX524+MKPYfm
+ kcvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rL0n/DJubepnTlku2Sad2UZHnkizjwKyDWv6jXgjtjw=;
- b=zUIcoJ+iCzTWKJ69VgRTHdIDX60a5w/y8XhSTmlr1zGzrEndSWyDlGfvfsj4Sir/Jc
- cMJvLcJtjuhFxxqbhGDp39KcqqhCTOQE4kKsum0h2DFrvcMo/5jzIfsazzekQ0OqXnub
- OkgXAZXJfAOOulLaxryBz9ilHmGGgLa+j3R8KR1JNPAbWTe6+gHIZPWYsf+N3vWVkoQ3
- uCIWu9+4FwN9EU9pAm2H4aBsIbT6rUgXSIf56O/iNBR3dCRXuX2EKLKEbzOXcKoecRED
- +rv43VUNbzyTBlbD4aJMC3oXSEBMVfVFuA7+QqPEDqRqQK6ER+qgQ9kftrk9JHZcB3bd
- FBKA==
-X-Gm-Message-State: AOAM533lyCpMIlQ4nLHaTuIQvbNoZSyrmXg0WhzSnK+353n+fABVsgvr
- N3sJgZhbghD+bHMtmGoLqBp1SPsZ/2CsPzWUBLU=
-X-Google-Smtp-Source: ABdhPJzHWRFlz6jxLIBAQ16uwkkebQS2ygma5aquHhifVs6riQMIv68hiEzhQVUL21meq6WAayCgVxTCGZUGPXiIdQo=
-X-Received: by 2002:a05:6e02:1402:: with SMTP id
- n2mr13110034ilo.208.1634536194893; 
- Sun, 17 Oct 2021 22:49:54 -0700 (PDT)
-MIME-Version: 1.0
-References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <20211015074627.3957162-40-frank.chang@sifive.com>
-In-Reply-To: <20211015074627.3957162-40-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Oct 2021 15:49:28 +1000
-Message-ID: <CAKmqyKM4LPqToVgdwz95OX0z4WZj63A0nLjg2yqpLNFGzZgZ1Q@mail.gmail.com>
-Subject: Re: [PATCH v8 32/78] target/riscv: rvv-1.0: iota instruction
-To: Frank Chang <frank.chang@sifive.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=OfJLUonHYjuHCbt16pHVOINf521HxYLr/hT9zMQc5zQ=;
+ b=AldIf7i6UzTXDn/nvWYLeSoam6ptoxSUGH44KahnFKjoVSuz7th9SGujPDEN4Z53W1
+ ttUeuKqYAJJT1UecN5N7OS9vQw0ibBAtIiWybeu4GKEUiyhVLNAsZNOxoEeghY2TqScN
+ 9wY9qoJSQ1t2TnGymHqaxBM7Clh4Ho6gACV/JSi9GDkGWyDvUREstJes3E0daY324zpK
+ pnbm61MKT5Nevxygjoy+JWMaJ1q/lWBmbhvfW8MtZwdgtrmOdylcBnwUkQJYedAb0c4w
+ aACPUOQ7z9f3r8egBxEY096L8QgLlTw+mlzwbNxgLlSSPvdf851Fcg2nBMQp5CvYsMjh
+ yFsQ==
+X-Gm-Message-State: AOAM5303YKI9EgBpldbaDwxozgl5u0RqQ3zV7G/Qsk9Qad5kClPBzCDA
+ OBVsA+zOe6xdx+YiYsBQudJUzg==
+X-Google-Smtp-Source: ABdhPJwNXRftGXodrcVsEMV9oqeGU3SvdZH3htyOrdq6CIFrw4LbLRl4GfYZt4ep+xeNEqZx17nezw==
+X-Received: by 2002:a17:90b:3749:: with SMTP id
+ ne9mr45873217pjb.192.1634536383619; 
+ Sun, 17 Oct 2021 22:53:03 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id a11sm11240697pgj.75.2021.10.17.22.53.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 17 Oct 2021 22:53:03 -0700 (PDT)
+Subject: Re: [PATCH v3 3/6] target/riscv: zfh: half-precision convert and move
+To: Alistair Francis <alistair23@gmail.com>,
+ Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng
+ <bin.meng@windriver.com>, Chih-Min Chao <chihmin.chao@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Kito Cheng <kito.cheng@sifive.com>
+References: <20211016090742.3034669-1-frank.chang@sifive.com>
+ <20211016090742.3034669-4-frank.chang@sifive.com>
+ <CAKmqyKNb6_b+fS3Ofi1U7wiUwhnwa_0P5G3Go0UFA-ZqSO+yeQ@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <6e208ab3-013e-6109-a93a-8653c03e06de@linaro.org>
+Date: Sun, 17 Oct 2021 22:53:02 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKNb6_b+fS3Ofi1U7wiUwhnwa_0P5G3Go0UFA-ZqSO+yeQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -75,64 +89,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 05:50:02 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 05:53:10 -0000
 
-On Fri, Oct 15, 2021 at 6:25 PM <frank.chang@sifive.com> wrote:
->
-> From: Frank Chang <frank.chang@sifive.com>
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+On 10/17/21 4:59 PM, Alistair Francis wrote:
+>> +#if defined(TARGET_RISCV64)
+>> +    /* 16 bits -> 64 bits */
+>> +    tcg_gen_ext16s_tl(dest, cpu_fpr[a->rs1]);
+>> +#else
+>> +    /* 16 bits -> 32 bits */
+>> +    tcg_gen_extrl_i64_i32(dest, cpu_fpr[a->rs1]);
+>> +    tcg_gen_ext16s_tl(dest, dest);
+>> +#endif
+> Can we use is_32bit(ctx) instead?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+No.  This is about sizeof(target_long), not the current cpu state.
 
-Alistair
+It would be possible to use
 
-> ---
->  target/riscv/insn32.decode              |  2 +-
->  target/riscv/insn_trans/trans_rvv.c.inc | 10 ++++++++--
->  2 files changed, 9 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index d139c0aade7..3ac5162aeb7 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -632,7 +632,7 @@ vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
->  vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
->  vmsif_m         010100 . ..... 00011 010 ..... 1010111 @r2_vm
->  vmsof_m         010100 . ..... 00010 010 ..... 1010111 @r2_vm
-> -viota_m         010110 . ..... 10000 010 ..... 1010111 @r2_vm
-> +viota_m         010100 . ..... 10000 010 ..... 1010111 @r2_vm
->  vid_v           010110 . 00000 10001 010 ..... 1010111 @r1_vm
->  vext_x_v        001100 1 ..... ..... 010 ..... 1010111 @r
->  vmv_s_x         001101 1 00000 ..... 110 ..... 1010111 @r2
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 538a32a605a..3751496676f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2756,12 +2756,18 @@ GEN_M_TRANS(vmsbf_m)
->  GEN_M_TRANS(vmsif_m)
->  GEN_M_TRANS(vmsof_m)
->
-> -/* Vector Iota Instruction */
-> +/*
-> + * Vector Iota Instruction
-> + *
-> + * 1. The destination register cannot overlap the source register.
-> + * 2. If masked, cannot overlap the mask register ('v0').
-> + * 3. An illegal instruction exception is raised if vstart is non-zero.
-> + */
->  static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
->  {
->      if (require_rvv(s) &&
->          vext_check_isa_ill(s) &&
-> -        require_noover(a->rd, s->lmul, a->rs2, 0) &&
-> +        !is_overlapped(a->rd, 1 << MAX(s->lmul, 0), a->rs2, 1) &&
->          require_vm(a->vm, a->rd) &&
->          require_align(a->rd, s->lmul)) {
->          uint32_t data = 0;
-> --
-> 2.25.1
->
->
+     tcg_gen_trunc_i64_tl
+     tcg_gen_ext16s_tl
+
+but we have a couple of other instances of the same thing.
+
+r~
 
