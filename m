@@ -1,98 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcIaL-00068J-Oq
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 22:41:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59544)
+	id 1mcJga-0005J2-NT
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Oct 2021 23:51:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43094)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=918244500=alistair.francis@opensource.wdc.com>)
- id 1mcIaD-0005zj-R5
- for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 22:41:02 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:27490)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=918244500=alistair.francis@opensource.wdc.com>)
- id 1mcIaC-0007lo-1w
- for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 22:41:01 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1634524859; x=1666060859;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=IF95yCjcmo5ithRIKZNKlYhdANKqLsOj4GLv3lakdIg=;
- b=EF+psmD/+m57tCc3PPx09zKsENaHsokuovz9y+IbFohp64RBTqg8s3JU
- e43aYXWPDqNB8g7mQOLUwuA2ciPmHLLZq6AXzJ0nLlQ+WmNyvrVb44mr4
- RVqnpzndzNICqOTHC/YZq4uN7gyca7GsUaH0KwRkLS8oxwEJzOv7+lCnG
- sF2cd+ztlAr3faZpr8qSHNfKhFs/s1JSgniIwmZpg2n2mnnBEr5pM3Vu8
- efTNleGPB+ywgQd2lTBnGaYqi6rV9HauBc0c+hBn0P2EemkmNfiElelzR
- ldFlueDrGGZnVF6qtTKMGeO52gmePWt/4Ay8T9u3UBImU5vL+mnyajv9L w==;
-X-IronPort-AV: E=Sophos;i="5.85,381,1624291200"; d="scan'208";a="187913868"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 18 Oct 2021 10:40:55 +0800
-IronPort-SDR: y3CSR1TuVE2CQK6fsUo31YGrIciiY+EfMv4jooQVL1X+yZ6+pGpt8GmzAGCwi5SfQ/XExmVyCR
- QUd0SQmvy2CQreeXLBrQOzSSBh9anik9S2/ruwHvbgJ4C+jxWzex0frxfxuEmzfIY2ueRtHPUl
- MxeRWxJMcNbf1N0xVFg9qt+n3dkC2rmpKChBzJxhg0XEWsQ8Pay+sKJ36P5uTnBy+mOvfBSFLH
- 82f5xaiY3jDI1I1ajH44L464RDk/nWpqW1ubL3O0tTBlOM1HvcQOVzUgtJ6XFVL6dU6KJLrYp/
- abXDJGgo3973849g4KUONabc
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Oct 2021 19:15:03 -0700
-IronPort-SDR: xKVnf/AGd/IXzNQJzY9yVvr66xe/mCt4KvcyoQWSPNp8JwJBUStaSKPeLmhmranhQyhAU+igzK
- RwzUB3xFOF0rb6m3kS70wD1R91Uh9UnUFGVo3jZICQeqc3ryhpr9z781Xg8ycA4XXEwbH3Hi5j
- W5Ac55PNniUFRWLN9E+tYs8NErqCCK6tk25XOyoibYGh/8OLaZ8Itr1T02KbgX+kvY82CeAeN3
- 9wuIPaz7F2jAMygSDS+Ikb5RiHBKQ+vV2Hole6ftH4aay0f+MsZxPhmJVG2F5dKK9VdntDdPfO
- yVA=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 17 Oct 2021 19:40:56 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4HXh2H3sklz1Rvm1
- for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 19:40:55 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1634524854; x=1637116855; bh=IF95yCjcmo5ithRIKZ
- NKlYhdANKqLsOj4GLv3lakdIg=; b=Jd/fsWIgIl/b8jmMWJPKed9c7djYfK7xin
- AATg2rIwG/LogByoGgBMaJIpDIKZkpyWN7TlAOxC3MzONfvBHlJaf6PohKYQ+ipg
- 5BoBZnEFlIXMuyCli+neBOX9wEvDGSJG7zYd2m2Vn9I9Ag//fHLeCwmsiSoJqxYT
- wBCKJspWUUefooSn+u9NnlCyYvS+oNuPD3WSQA2C6/glqoMkpkW8RPIVFwh9rAnx
- 9XnrR6xr9IDjxb1kHsS4sGeYaUE1R7M3tgP+VXulkDy0NUCvk1cAWiJtbH1dAzHa
- Ja6wc8XZ8218/OFmfoaD29Gcd+KutqqQ2gNnfoXjklxVgbVTq/Qw==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id 8PlruTXzoFGj for <qemu-riscv@nongnu.org>;
- Sun, 17 Oct 2021 19:40:54 -0700 (PDT)
-Received: from toolbox.wdc.com (unknown [10.225.165.38])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4HXh296gmCz1RvTm;
- Sun, 17 Oct 2021 19:40:49 -0700 (PDT)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com
-Subject: [PATCH v1 9/9] hw/intc: sifive_plic: Cleanup remaining functions
-Date: Mon, 18 Oct 2021 12:40:42 +1000
-Message-Id: <e66367ce1b4ab64aab545916ad6818dac7b1f8ec.1634524691.git.alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <18b1b681b0f8dd2461e819d1217bf0b530812680.1634524691.git.alistair.francis@wdc.com>
-References: <18b1b681b0f8dd2461e819d1217bf0b530812680.1634524691.git.alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mcJgY-0005HZ-C5
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 23:51:38 -0400
+Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:40542)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mcJgT-0003z4-Ve
+ for qemu-riscv@nongnu.org; Sun, 17 Oct 2021 23:51:37 -0400
+Received: by mail-io1-xd2b.google.com with SMTP id x1so14610546iof.7
+ for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 20:51:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fL1+dtG3QA+7ouU/u8eZLvzSKEbAzc51F8KF1GoSFYI=;
+ b=DnPPxFnUyxgSrixZYT1y+b+MzyTEjaj+41SiSaq5ijAEaMbi/MKk4qK3LaCgHXwEE4
+ mJwKzIFtoninHUTMZUQ6BRvf8TRFkZXgwL9/w2zftl5QXWPC/CeKJvMqA38B6GwSt9zn
+ OIogkP1OJ9CCEEr7RXnw2P8H35iGZM2GDruftue78QWsQPw4PdE4ahSaMtSBkX7HjM6N
+ 2Q4GMRnccTai0qFLJyHKZMvVDdUH/slsihuomPeKwtXGnognMutob7LKfAxq133erUZp
+ 6V5/i9XSlYDHuxLPC5ddQ6eGvxxfS8wNuPQhMH+FG3uVwD/Rug4zp/M+x0ubsOipwXxO
+ 7g+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fL1+dtG3QA+7ouU/u8eZLvzSKEbAzc51F8KF1GoSFYI=;
+ b=dAVGtRpmRUj2hxIYlVlQL+dZ2hi5ib0AjQkQY2wnGKGikQB4NKDbph+goz9j+f5pcP
+ lh1PsaLITZUzR5jKFympfktyRNUhsrztriFbyjpd4DAQhSJ0CepTx52x/MqabfV084+2
+ axUP0T7N++UGcpCqV5clJJbHREYBQxMP1thRgDg+JLT1N8lREb8yA4+ewM45RNqhD5Ne
+ p1Apy+6W07Vm3NkB1nYkufwzqdusxR9QuU05LbT9RuzRxlJmp5OgmSlF2YqshSgpM2tr
+ ZiqM1WHebxhgSGVziFyin5V9z9u7EyQewkjPG9dpQBdJAaweI7FsGWaCsi1WO5QPlflQ
+ WXbw==
+X-Gm-Message-State: AOAM533G5HwgZodhLuOILL+jG7s8dMjgatrpkY74yXbS1QhV46XeFqyj
+ Vdr94+vvYSaHshzu4g9oqBG84ZH0oZcmE+GtUg3Sxw==
+X-Google-Smtp-Source: ABdhPJxmQE10zsCINLmhbRroAoq7Y4F62YcJbku3AioIMDnKI4qNndePPTLHtRFp+tmxnzSMz8fF508Qbsrfwvn7Z08=
+X-Received: by 2002:a5d:9256:: with SMTP id e22mr12702683iol.152.1634529092904; 
+ Sun, 17 Oct 2021 20:51:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.153.141;
- envelope-from=prvs=918244500=alistair.francis@opensource.wdc.com;
- helo=esa3.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20211015065500.3850513-1-frank.chang@sifive.com>
+ <20211015065500.3850513-3-frank.chang@sifive.com>
+ <4b718269-b222-c08f-ca72-656bacc31331@linaro.org>
+ <CAE_xrPibc4W9FqoXUvLQ=pnW7h85ZYnYYwjLR-Rs+0NbifXc-A@mail.gmail.com>
+ <2ac1b2bd-efa9-2005-5c0a-cace9346cbd7@linaro.org>
+ <CAE_xrPhF+86T9m1taX3RvcMXptnmhUvP-n64S7znL4=vXUa4eg@mail.gmail.com>
+ <CAE_xrPg6MF0CmQE+RzdoAavY1gJ-GDbgmh0Lqay3ogG6-zvK5g@mail.gmail.com>
+ <CAKmqyKMBn5HS+5_Q5YLw_-Ep_GTscemx-oRphecs-YK-nzS9dA@mail.gmail.com>
+In-Reply-To: <CAKmqyKMBn5HS+5_Q5YLw_-Ep_GTscemx-oRphecs-YK-nzS9dA@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 18 Oct 2021 11:51:22 +0800
+Message-ID: <CAE_xrPi=0Fu_7kfnXhXH=93hFv=CqioUS1Vu-HoAfPRgNDf5hQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] target/riscv: change the api for single/double
+ fmin/fmax
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Chih-Min Chao <chihmin.chao@sifive.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: multipart/alternative; boundary="000000000000f53c3e05ce98759f"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
+ envelope-from=frank.chang@sifive.com; helo=mail-io1-xd2b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -105,198 +82,360 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 02:41:02 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 03:51:38 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+--000000000000f53c3e05ce98759f
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/intc/sifive_plic.c | 109 +++++++++---------------------------------
- 1 file changed, 22 insertions(+), 87 deletions(-)
+On Mon, Oct 18, 2021 at 8:18 AM Alistair Francis <alistair23@gmail.com>
+wrote:
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index d73503cea4..3f56223554 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -31,8 +31,6 @@
- #include "migration/vmstate.h"
- #include "hw/irq.h"
-=20
--#define RISCV_DEBUG_PLIC 0
--
- static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
- {
-     uint32_t end =3D base + num;
-@@ -57,47 +55,6 @@ static PLICMode char_to_mode(char c)
-     }
- }
-=20
--static char mode_to_char(PLICMode m)
--{
--    switch (m) {
--    case PLICMode_U: return 'U';
--    case PLICMode_S: return 'S';
--    case PLICMode_H: return 'H';
--    case PLICMode_M: return 'M';
--    default: return '?';
--    }
--}
--
--static void sifive_plic_print_state(SiFivePLICState *plic)
--{
--    int i;
--    int addrid;
--
--    /* pending */
--    qemu_log("pending       : ");
--    for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--        qemu_log("%08x", plic->pending[i]);
--    }
--    qemu_log("\n");
--
--    /* pending */
--    qemu_log("claimed       : ");
--    for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--        qemu_log("%08x", plic->claimed[i]);
--    }
--    qemu_log("\n");
--
--    for (addrid =3D 0; addrid < plic->num_addrs; addrid++) {
--        qemu_log("hart%d-%c enable: ",
--            plic->addr_config[addrid].hartid,
--            mode_to_char(plic->addr_config[addrid].mode));
--        for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--            qemu_log("%08x", plic->enable[addrid * plic->bitfield_words =
-+ i]);
--        }
--        qemu_log("\n");
--    }
--}
--
- static uint32_t atomic_set_masked(uint32_t *a, uint32_t mask, uint32_t v=
-alue)
- {
-     uint32_t old, new, cmp =3D qatomic_read(a);
-@@ -121,26 +78,34 @@ static void sifive_plic_set_claimed(SiFivePLICState =
-*plic, int irq, bool level)
-     atomic_set_masked(&plic->claimed[irq >> 5], 1 << (irq & 31), -!!leve=
-l);
- }
-=20
--static int sifive_plic_irqs_pending(SiFivePLICState *plic, uint32_t addr=
-id)
-+static uint32_t sifive_plic_claimed(SiFivePLICState *plic, uint32_t addr=
-id)
- {
-+    uint32_t max_irq =3D 0;
-+    uint32_t max_prio =3D plic->target_priority[addrid];
-     int i, j;
-+
-     for (i =3D 0; i < plic->bitfield_words; i++) {
-         uint32_t pending_enabled_not_claimed =3D
--            (plic->pending[i] & ~plic->claimed[i]) &
--            plic->enable[addrid * plic->bitfield_words + i];
-+                        (plic->pending[i] & ~plic->claimed[i]) &
-+                            plic->enable[addrid * plic->bitfield_words +=
- i];
-+
-         if (!pending_enabled_not_claimed) {
-             continue;
-         }
-+
-         for (j =3D 0; j < 32; j++) {
-             int irq =3D (i << 5) + j;
-             uint32_t prio =3D plic->source_priority[irq];
-             int enabled =3D pending_enabled_not_claimed & (1 << j);
--            if (enabled && prio > plic->target_priority[addrid]) {
--                return 1;
-+
-+            if (enabled && prio > max_prio) {
-+                max_irq =3D irq;
-+                max_prio =3D prio;
-             }
-         }
-     }
--    return 0;
-+
-+    return max_irq;
- }
-=20
- static void sifive_plic_update(SiFivePLICState *plic)
-@@ -151,7 +116,7 @@ static void sifive_plic_update(SiFivePLICState *plic)
-     for (addrid =3D 0; addrid < plic->num_addrs; addrid++) {
-         uint32_t hartid =3D plic->addr_config[addrid].hartid;
-         PLICMode mode =3D plic->addr_config[addrid].mode;
--        int level =3D sifive_plic_irqs_pending(plic, addrid);
-+        bool level =3D !!sifive_plic_claimed(plic, addrid);
-=20
-         switch (mode) {
-         case PLICMode_M:
-@@ -164,41 +129,6 @@ static void sifive_plic_update(SiFivePLICState *plic=
-)
-             break;
-         }
-     }
--
--    if (RISCV_DEBUG_PLIC) {
--        sifive_plic_print_state(plic);
--    }
--}
--
--static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid=
-)
--{
--    int i, j;
--    uint32_t max_irq =3D 0;
--    uint32_t max_prio =3D plic->target_priority[addrid];
--
--    for (i =3D 0; i < plic->bitfield_words; i++) {
--        uint32_t pending_enabled_not_claimed =3D
--            (plic->pending[i] & ~plic->claimed[i]) &
--            plic->enable[addrid * plic->bitfield_words + i];
--        if (!pending_enabled_not_claimed) {
--            continue;
--        }
--        for (j =3D 0; j < 32; j++) {
--            int irq =3D (i << 5) + j;
--            uint32_t prio =3D plic->source_priority[irq];
--            int enabled =3D pending_enabled_not_claimed & (1 << j);
--            if (enabled && prio > max_prio) {
--                max_irq =3D irq;
--                max_prio =3D prio;
--            }
--        }
--    }
--
--    if (max_irq) {
--        sifive_plic_set_pending(plic, max_irq, false);
--        sifive_plic_set_claimed(plic, max_irq, true);
--    }
--    return max_irq;
- }
-=20
- static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned siz=
-e)
-@@ -229,10 +159,15 @@ static uint64_t sifive_plic_read(void *opaque, hwad=
-dr addr, unsigned size)
-         if (contextid =3D=3D 0) {
-             return plic->target_priority[addrid];
-         } else if (contextid =3D=3D 4) {
--            uint32_t value =3D sifive_plic_claim(plic, addrid);
-+            uint32_t max_irq =3D sifive_plic_claimed(plic, addrid);
-+
-+            if (max_irq) {
-+                sifive_plic_set_pending(plic, max_irq, false);
-+                sifive_plic_set_claimed(plic, max_irq, true);
-+            }
-=20
-             sifive_plic_update(plic);
--            return value;
-+            return max_irq;
-         }
-     }
-=20
---=20
-2.31.1
+> On Sun, Oct 17, 2021 at 4:59 PM Frank Chang <frank.chang@sifive.com>
+> wrote:
+> >
+> > On Sun, Oct 17, 2021 at 8:55 AM Frank Chang <frank.chang@sifive.com>
+> wrote:
+> >>
+> >> On Sun, Oct 17, 2021 at 1:56 AM Richard Henderson <
+> richard.henderson@linaro.org> wrote:
+> >>>
+> >>> On 10/16/21 1:52 AM, Frank Chang wrote:
+> >>> > On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson <
+> richard.henderson@linaro.org
+> >>> > <mailto:richard.henderson@linaro.org>> wrote:
+> >>> >
+> >>> >     On 10/14/21 11:54 PM, frank.chang@sifive.com <mailto:
+> frank.chang@sifive.com> wrote:
+> >>> >      > From: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
+> chihmin.chao@sifive.com>>
+> >>> >      >
+> >>> >      > The sNaN propagation behavior has been changed since
+> >>> >      > cd20cee7 inhttps://github.com/riscv/riscv-isa-manual
+> >>> >     <http://github.com/riscv/riscv-isa-manual>
+> >>> >      >
+> >>> >      > Signed-off-by: Chih-Min Chao<chihmin.chao@sifive.com <mailto:
+> chihmin.chao@sifive.com>>
+> >>> >      > ---
+> >>> >      >   target/riscv/fpu_helper.c | 8 ++++----
+> >>> >      >   1 file changed, 4 insertions(+), 4 deletions(-)
+> >>> >      >
+> >>> >      > diff --git a/target/riscv/fpu_helper.c
+> b/target/riscv/fpu_helper.c
+> >>> >      > index 8700516a14c..1472ead2528 100644
+> >>> >      > --- a/target/riscv/fpu_helper.c
+> >>> >      > +++ b/target/riscv/fpu_helper.c
+> >>> >      > @@ -174,14 +174,14 @@ uint64_t helper_fmin_s(CPURISCVState
+> *env, uint64_t rs1,
+> >>> >     uint64_t rs2)
+> >>> >      >   {
+> >>> >      >       float32 frs1 = check_nanbox_s(rs1);
+> >>> >      >       float32 frs2 = check_nanbox_s(rs2);
+> >>> >      > -    return nanbox_s(float32_minnum(frs1, frs2,
+> &env->fp_status));
+> >>> >      > +    return nanbox_s(float32_minnum_noprop(frs1, frs2,
+> &env->fp_status));
+> >>> >      >   }
+> >>> >
+> >>> >     Don't you need to conditionalize behaviour on the isa revision?
+> >>> >
+> >>> >
+> >>> > I will pick the right API based on CPU privilege spec version.
+> >>>
+> >>> There's a separate F-extension revision number: 2.2.
+> >>>
+> >>> But I'll leave it up to those more knowledgeable about the revision
+> combinations actually
+> >>> present in the field to decide.
+> >>>
+> >>
+> >> I did some history searches on RISC-V ISA spec Github repo.
+> >>
+> >> F-extension was bumped to v2.2 at (2018/08/28):
+> >>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-eb78171
+> >> The privilege spec is v1.10-draft at the time.
+> >>
+> >> and later ratified at (2019/03/26):
+> >>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ratification-20190305
+> >>
+> >> The spec was updated to use IEEE 754-2019 min/max functions in commit:
+> #cd20cee7 (2019/06/05).
+> >
+> >
+> > Sorry, the commit date is 2017/06/05, not 2019/06/05.
+> >
+> > But I think it's probably easier and clearer to just introduce an extra
+> fext_ver variable.
+> > We can set CPUs which are Privilege spec v1.10 to RVF v2.0
+> (FEXT_VERSION_2_00_0),
+> > and others with Privilege spec v1.11 to RVF v2.2 (FEXT_VERSION_2_02_0).
+>
+> I think it's probably simpler to just tie this to the priv_spec. It's
+> not completely accurate, but it should be close enough. Otherwise we
+> have the risk of having too many version variables and it becomes a
+> pain for users to deal with.
+>
+> If the unpriv spec is better, we could also introduce that. We will
+> probably need that one day for something else anyway.
+>
+> If you feel that we really need a fext_ver (to avoid large software
+> breakage for example) then it's also ok, we just need to justify why.
+>
+> Alistair
+>
 
+A little problem with Unpriv spec is that it uses v2.2 and later with the
+date as of version tag.
+It shouldn't be a real problem because we can still use the date v2.2. was
+released.
+
+But if it's okay to tie RVF version with Priv spec version,
+then let's just use Priv spec version for now.
+We can introduce other version variables when we really need them in the
+future.
+
+Thanks,
+Frank Chang
+
+
+>
+> >
+> > Any comments are welcome.
+> >
+> > Regards,
+> > Frank Chang
+> >
+> >>
+> >>
+> >> Privilege spec v1.11 is ratified at (2019/06/10):
+> >>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v1.11
+> >>
+> >> In fact, Unprivileged spec v2.2 was released at (2017/05/10):
+> >> https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-user-2.2
+> >>
+> >> and Privilege spec v1.10 was released at (2017/05/10):
+> >> https://github.com/riscv/riscv-isa-manual/releases/tag/riscv-priv-1.10
+> >>
+> >> Privilege spec was then bumped to v1.11-draft in the next draft release
+> right after v1.10 (2018/05/24):
+> >>
+> https://github.com/riscv/riscv-isa-manual/releases/tag/draft-20180524001518-9981ad7
+> >> (RVF was still v2.0 at the time.)
+> >>
+> >> It seems that when Privilege spec v1.11 was ratified, RVF had been
+> bumped to v2.2,
+> >> and when Privilege spec v1.10 was ratified, RVF was still v2.0.
+> >>
+> >> As in QEMU, there's only priv_ver variable existing for now.
+> >> So unless we introduce other variables like: unpriv_ver or fext_ver.
+> >> Otherwise, I think using priv_ver is still valid here.
+> >> Though it is not accurate, somehow confused,
+> >> and may not be true anymore in future standards.
+> >>
+> >> Let me know which way is better for our maintenance.
+> >>
+> >> Thanks,
+> >> Frank Chang
+> >>
+> >>> r~
+>
+
+--000000000000f53c3e05ce98759f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 18, 2021 at 8:18 AM Alistair =
+Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
+>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
+,204);padding-left:1ex">On Sun, Oct 17, 2021 at 4:59 PM Frank Chang &lt;<a =
+href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive=
+.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Sun, Oct 17, 2021 at 8:55 AM Frank Chang &lt;<a href=3D"mailto:fran=
+k.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt; wrote:=
+<br>
+&gt;&gt;<br>
+&gt;&gt; On Sun, Oct 17, 2021 at 1:56 AM Richard Henderson &lt;<a href=3D"m=
+ailto:richard.henderson@linaro.org" target=3D"_blank">richard.henderson@lin=
+aro.org</a>&gt; wrote:<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; On 10/16/21 1:52 AM, Frank Chang wrote:<br>
+&gt;&gt;&gt; &gt; On Sat, Oct 16, 2021 at 1:05 AM Richard Henderson &lt;<a =
+href=3D"mailto:richard.henderson@linaro.org" target=3D"_blank">richard.hend=
+erson@linaro.org</a><br>
+&gt;&gt;&gt; &gt; &lt;mailto:<a href=3D"mailto:richard.henderson@linaro.org=
+" target=3D"_blank">richard.henderson@linaro.org</a>&gt;&gt; wrote:<br>
+&gt;&gt;&gt; &gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0On 10/14/21 11:54 PM, <a href=3D"mailt=
+o:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a> &lt;=
+mailto:<a href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.ch=
+ang@sifive.com</a>&gt; wrote:<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; From: Chih-Min Chao&lt;<a href=
+=3D"mailto:chihmin.chao@sifive.com" target=3D"_blank">chihmin.chao@sifive.c=
+om</a> &lt;mailto:<a href=3D"mailto:chihmin.chao@sifive.com" target=3D"_bla=
+nk">chihmin.chao@sifive.com</a>&gt;&gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; The sNaN propagation behavior ha=
+s been changed since<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; cd20cee7 inhttps://<a href=3D"ht=
+tp://github.com/riscv/riscv-isa-manual" rel=3D"noreferrer" target=3D"_blank=
+">github.com/riscv/riscv-isa-manual</a><br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"http://github.com/riscv=
+/riscv-isa-manual" rel=3D"noreferrer" target=3D"_blank">http://github.com/r=
+iscv/riscv-isa-manual</a>&gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; Signed-off-by: Chih-Min Chao&lt;=
+<a href=3D"mailto:chihmin.chao@sifive.com" target=3D"_blank">chihmin.chao@s=
+ifive.com</a> &lt;mailto:<a href=3D"mailto:chihmin.chao@sifive.com" target=
+=3D"_blank">chihmin.chao@sifive.com</a>&gt;&gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; ---<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0target/riscv/fpu_hel=
+per.c | 8 ++++----<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A01 file changed, 4 in=
+sertions(+), 4 deletions(-)<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; diff --git a/target/riscv/fpu_he=
+lper.c b/target/riscv/fpu_helper.c<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; index 8700516a14c..1472ead2528 1=
+00644<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; --- a/target/riscv/fpu_helper.c<=
+br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; +++ b/target/riscv/fpu_helper.c<=
+br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; @@ -174,14 +174,14 @@ uint64_t h=
+elper_fmin_s(CPURISCVState *env, uint64_t rs1,<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0uint64_t rs2)<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0{<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0float3=
+2 frs1 =3D check_nanbox_s(rs1);<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0float3=
+2 frs2 =3D check_nanbox_s(rs2);<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; -=C2=A0 =C2=A0 return nanbox_s(f=
+loat32_minnum(frs1, frs2, &amp;env-&gt;fp_status));<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 return nanbox_s(f=
+loat32_minnum_noprop(frs1, frs2, &amp;env-&gt;fp_status));<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0}<br>
+&gt;&gt;&gt; &gt;<br>
+&gt;&gt;&gt; &gt;=C2=A0 =C2=A0 =C2=A0Don&#39;t you need to conditionalize b=
+ehaviour on the isa revision?<br>
+&gt;&gt;&gt; &gt;<br>
+&gt;&gt;&gt; &gt;<br>
+&gt;&gt;&gt; &gt; I will pick the right API based on CPU privilege spec ver=
+sion.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; There&#39;s a separate F-extension revision number: 2.2.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; But I&#39;ll leave it up to those more knowledgeable about the=
+ revision combinations actually<br>
+&gt;&gt;&gt; present in the field to decide.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt; I did some history searches on RISC-V ISA spec Github repo.<br>
+&gt;&gt;<br>
+&gt;&gt; F-extension was bumped to v2.2 at (2018/08/28):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+draft-20180828-eb78171" rel=3D"noreferrer" target=3D"_blank">https://github=
+.com/riscv/riscv-isa-manual/releases/tag/draft-20180828-eb78171</a><br>
+&gt;&gt; The privilege spec is v1.10-draft at the time.<br>
+&gt;&gt;<br>
+&gt;&gt; and later ratified at (2019/03/26):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+IMFDQC-Ratification-20190305" rel=3D"noreferrer" target=3D"_blank">https://=
+github.com/riscv/riscv-isa-manual/releases/tag/IMFDQC-Ratification-20190305=
+</a><br>
+&gt;&gt;<br>
+&gt;&gt; The spec was updated to use IEEE 754-2019 min/max functions in com=
+mit: #cd20cee7 (2019/06/05).<br>
+&gt;<br>
+&gt;<br>
+&gt; Sorry, the commit date is 2017/06/05, not 2019/06/05.<br>
+&gt;<br>
+&gt; But I think it&#39;s probably easier and clearer to just introduce an =
+extra fext_ver variable.<br>
+&gt; We can set CPUs which are Privilege spec v1.10 to RVF v2.0 (FEXT_VERSI=
+ON_2_00_0),<br>
+&gt; and others with Privilege spec v1.11 to RVF v2.2 (FEXT_VERSION_2_02_0)=
+.<br>
+<br>
+I think it&#39;s probably simpler to just tie this to the priv_spec. It&#39=
+;s<br>
+not completely accurate, but it should be close enough. Otherwise we<br>
+have the risk of having too many version variables and it becomes a<br>
+pain for users to deal with.<br>
+<br>
+If the unpriv spec is better, we could also introduce that. We will<br>
+probably need that one day for something else anyway.<br>
+<br>
+If you feel that we really need a fext_ver (to avoid large software<br>
+breakage for example) then it&#39;s also ok, we just need to justify why.<b=
+r>
+<br>
+Alistair<br></blockquote><div><br></div><div>A little problem with Unpriv s=
+pec is that it uses v2.2 and later with the date as of version tag.</div><d=
+iv>It shouldn&#39;t be a real problem because we can still use the date v2.=
+2. was released.</div><div><br></div><div>But if it&#39;s okay to tie RVF v=
+ersion with Priv spec version,</div><div>then let&#39;s just use Priv spec =
+version for now.</div><div>We can introduce other version variables when we=
+ really need them in the future.</div><div><br></div><div>Thanks,</div><div=
+>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+<br>
+&gt;<br>
+&gt; Any comments are welcome.<br>
+&gt;<br>
+&gt; Regards,<br>
+&gt; Frank Chang<br>
+&gt;<br>
+&gt;&gt;<br>
+&gt;&gt;<br>
+&gt;&gt; Privilege spec v1.11 is ratified at (2019/06/10):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+Ratified-IMFDQC-and-Priv-v1.11" rel=3D"noreferrer" target=3D"_blank">https:=
+//github.com/riscv/riscv-isa-manual/releases/tag/Ratified-IMFDQC-and-Priv-v=
+1.11</a><br>
+&gt;&gt;<br>
+&gt;&gt; In fact, Unprivileged spec v2.2 was released at (2017/05/10):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+riscv-user-2.2" rel=3D"noreferrer" target=3D"_blank">https://github.com/ris=
+cv/riscv-isa-manual/releases/tag/riscv-user-2.2</a><br>
+&gt;&gt;<br>
+&gt;&gt; and Privilege spec v1.10 was released at (2017/05/10):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+riscv-priv-1.10" rel=3D"noreferrer" target=3D"_blank">https://github.com/ri=
+scv/riscv-isa-manual/releases/tag/riscv-priv-1.10</a><br>
+&gt;&gt;<br>
+&gt;&gt; Privilege spec was then bumped to v1.11-draft in the next draft re=
+lease right after v1.10 (2018/05/24):<br>
+&gt;&gt; <a href=3D"https://github.com/riscv/riscv-isa-manual/releases/tag/=
+draft-20180524001518-9981ad7" rel=3D"noreferrer" target=3D"_blank">https://=
+github.com/riscv/riscv-isa-manual/releases/tag/draft-20180524001518-9981ad7=
+</a><br>
+&gt;&gt; (RVF was still v2.0 at the time.)<br>
+&gt;&gt;<br>
+&gt;&gt; It seems that when Privilege spec v1.11 was ratified, RVF had been=
+ bumped to v2.2,<br>
+&gt;&gt; and when Privilege spec v1.10 was ratified, RVF was still v2.0.<br=
+>
+&gt;&gt;<br>
+&gt;&gt; As in QEMU, there&#39;s only priv_ver variable existing for now.<b=
+r>
+&gt;&gt; So unless we introduce other variables like: unpriv_ver or fext_ve=
+r.<br>
+&gt;&gt; Otherwise, I think using priv_ver is still valid here.<br>
+&gt;&gt; Though it is not accurate, somehow confused,<br>
+&gt;&gt; and may not be true anymore in future standards.<br>
+&gt;&gt;<br>
+&gt;&gt; Let me know which way is better for our maintenance.<br>
+&gt;&gt;<br>
+&gt;&gt; Thanks,<br>
+&gt;&gt; Frank Chang<br>
+&gt;&gt;<br>
+&gt;&gt;&gt; r~<br>
+</blockquote></div></div>
+
+--000000000000f53c3e05ce98759f--
 
