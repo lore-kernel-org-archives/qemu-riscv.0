@@ -1,70 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcUj2-00027G-EC
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 11:38:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51346)
+	id 1mcUvL-0007JA-CP
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 11:51:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54364)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcUj0-0001ze-Eb; Mon, 18 Oct 2021 11:38:54 -0400
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f]:42787)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mcUiv-0007BE-MM; Mon, 18 Oct 2021 11:38:54 -0400
-Received: by mail-pj1-x102f.google.com with SMTP id
- nn3-20020a17090b38c300b001a03bb6c4ebso268621pjb.1; 
- Mon, 18 Oct 2021 08:38:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=qDWxU5X18UexLcxgTJj2qUaxj382cCI3tPFP3fZWboY=;
- b=bo76mUsxKmQzM6FKmdAlB0+/dJD17R666si2mqhTqWxcddzaD3eC9NyRAbk59yZajE
- 2Sn25lWpBcOXMR0Ej15tpxZRYpWhLH40jBBqkD05jmQBZcIstkgOqA3wnSQUdW6o3Ick
- 41JoiPUPrwwLWXODGKkfO0Jxd86zlqFlr5MrEmqusQn6a9LBPlgCTMRCflLl0wFVT3Tk
- 94yQD3BkNKt7TWFXNlaHX3Q7exK697FpBAPtes5MpASwyQWC0T4sN8rpEnnJ+6rxWC4O
- 2oKbgjfRtFp4DOS7hZjMy/Lwy5lmIkzRZYcYGZZ1CxNN+dm5QqUrtETRxuyl6I5hQP6m
- QcHg==
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mcUvK-0007Ha-2u
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 11:51:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:51716)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mcUvI-0005I6-0r
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 11:51:37 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634572294;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=n3lGxh86SIo5Sxoni9msUYyZM2QdjHhWJuKMLXf2ILA=;
+ b=ifvlm39VKsYjM2RQhdmXzbpeQMb9Rb0mdeVMjXvWkNjI0GwYJcU8Hd2Nht9ES1I37QL+6A
+ pDx6rygbtyOgJyKHVqEGWCBRoDEAlt0GNUPW77UZTlQEX36CxWkCuvRc/rmsblRx4zv1xZ
+ 0ZJ4CPAdD2Y5MnypL3raJGwArcWAK+E=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-154-awseAR69PbWZqy27wcV_PQ-1; Mon, 18 Oct 2021 11:51:33 -0400
+X-MC-Unique: awseAR69PbWZqy27wcV_PQ-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ f20-20020a05600c155400b0030db7b29174so152461wmg.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Oct 2021 08:51:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=qDWxU5X18UexLcxgTJj2qUaxj382cCI3tPFP3fZWboY=;
- b=z9cb9JYiyr0HEqGkWUjg/LHoqwHrSjz4sI4/dOKBooUEbiBNWrhjlbxkn9gM634fSd
- pNcq8K10130Kug0HpJPQqt+oi47T2ZFlMfEl4mkfFgOD1OlXlHMtZNRHJ2ryj3oyUfkQ
- /htzfrTJjVHkIfX6dzBWx4ljh+wUvmnBrSyZndrVpbbV0cc2dqDTGFDVYXkCjhQK5Gt5
- rVylG80aLGWd9aMbQGDKnC5hZVhzsBKn5MM+KisyyXoUYL7WH7banrEOZw9n2zunwPFm
- a7mqTwGuiwWM1vCIiOsXuOEUgIlAqrGeuoPS7ZXyaVn9DKeTa0hXjn3vCf8WYHEztOKE
- fyFg==
-X-Gm-Message-State: AOAM531Q8RzI56M5GGNNtOn3313XGhEQ/Vpxi0hL2MdXn1+yAn8twewt
- IyJKGADShZ/iiQJ7lG4cA2Q=
-X-Google-Smtp-Source: ABdhPJwbe/S81w8FF7cfV6XE3iBOkT6FWGMXmaT/qrhzXYxZ6ALy6Oxk2FiSvPZywyLafYY/OGsuYw==
-X-Received: by 2002:a17:90a:2:: with SMTP id 2mr49039345pja.77.1634571526823; 
- Mon, 18 Oct 2021 08:38:46 -0700 (PDT)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id a30sm13899649pfr.64.2021.10.18.08.38.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Oct 2021 08:38:46 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>,
- Igor Mammedov <imammedo@redhat.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH 6/6] hw/riscv: spike: Use MachineState::ram and
- MachineClass::default_ram_id
-Date: Mon, 18 Oct 2021 23:38:29 +0800
-Message-Id: <20211018153829.24382-6-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211018153829.24382-1-bmeng.cn@gmail.com>
-References: <20211018153829.24382-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=n3lGxh86SIo5Sxoni9msUYyZM2QdjHhWJuKMLXf2ILA=;
+ b=xuwRRhnGchWcubmaB+qrDOLO5pfCsjx5F7XoFA0lq3ZqiVU+Lcem+QsparVjC52TUF
+ AxJvCLLJ9CKJkprbtH/8iOv8skdAogA5+afWdd9UBcrKGx1GbFID9qkmDAuY4sn1ywiO
+ LwmL7s1tFhwGt/u9AUsBk9yZ7J6e4BfrNdwoF41Fgjt1IJNIkiQB7nqUSmdKbsICh35q
+ RwF0diNeHCyhFUQuRuqIdCSCeK9nQyDFwFqK06dJRd+mBqP/HEpNmKZAflFPTyK5+VrA
+ 7sphOIe5JGawbY1mUHjiCTty45SbxnWKLBuHzFt2F7Dh/9bMCgGLRcJLETCyUMdJu/71
+ /tnw==
+X-Gm-Message-State: AOAM531jkejACBi/IuYTqKya2Ta9eOkDZubtrLF78cJ8Q/xkrASWKC29
+ 4Z3K2WAFH2h13yMye6Q5hP58KQaK4Frz1G6A4F8bXovBJZtHMEiyt5LlHg8NlbxjuLiswIHyWho
+ QIOlqfMzpk8GNbQQ=
+X-Received: by 2002:adf:f10c:: with SMTP id r12mr25158355wro.298.1634572292274; 
+ Mon, 18 Oct 2021 08:51:32 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxCwqdMneGEZvE9BZB8XIQOqua0Zf5TsWN7Z/OgY6ay8qip2wgvL2Wtq7+QlTjqXEqTuBb5eQ==
+X-Received: by 2002:adf:f10c:: with SMTP id r12mr25158335wro.298.1634572292107; 
+ Mon, 18 Oct 2021 08:51:32 -0700 (PDT)
+Received: from [192.168.1.36] (213.red-81-36-146.dynamicip.rima-tde.net.
+ [81.36.146.213])
+ by smtp.gmail.com with ESMTPSA id v18sm14176501wrm.63.2021.10.18.08.51.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Oct 2021 08:51:31 -0700 (PDT)
+Message-ID: <b51c604b-8f5c-c5e3-7deb-6d6830b30299@redhat.com>
+Date: Mon, 18 Oct 2021 17:51:31 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Subject: Re: [PATCH 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram and
+ MachineClass::default_ram_id
+To: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Igor Mammedov <imammedo@redhat.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20211018153829.24382-1-bmeng.cn@gmail.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+In-Reply-To: <20211018153829.24382-1-bmeng.cn@gmail.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x102f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -77,54 +92,25 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 15:38:55 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 15:51:38 -0000
 
-Using memory_region_init_ram(), which can't possibly handle vhost-user,
-and can't work as expected with '-numa node,memdev' options.
+Hi Bin, is there a cover letter?
 
-Use MachineState::ram instead of manually initializing RAM memory
-region, as well as by providing MachineClass::default_ram_id to
-opt in to memdev scheme.
+Series:
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
-
- hw/riscv/spike.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 79ae355ae2..288d69cd9f 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -180,7 +180,6 @@ static void spike_board_init(MachineState *machine)
-     const MemMapEntry *memmap = spike_memmap;
-     SpikeState *s = SPIKE_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     target_ulong firmware_end_addr, kernel_start_addr;
-     uint32_t fdt_load_addr;
-@@ -239,10 +238,8 @@ static void spike_board_init(MachineState *machine)
-     }
- 
-     /* register system main memory (actual RAM) */
--    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
--                           machine->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
--        main_mem);
-+        machine->ram);
- 
-     /* create device tree */
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-@@ -326,6 +323,7 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    mc->default_ram_id = "riscv.spike.ram";
- }
- 
- static const TypeInfo spike_machine_typeinfo = {
--- 
-2.25.1
+On 10/18/21 17:38, Bin Meng wrote:
+> Using memory_region_init_ram(), which can't possibly handle vhost-user,
+> and can't work as expected with '-numa node,memdev' options.
+> 
+> Use MachineState::ram instead of manually initializing RAM memory
+> region, as well as by providing MachineClass::default_ram_id to
+> opt in to memdev scheme.
+> 
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+> 
+>  hw/riscv/microchip_pfsoc.c | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
 
 
