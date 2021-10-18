@@ -1,46 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcP36-0006Bx-0P
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 05:35:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48588)
+	id 1mcR67-0000uC-4a
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 07:46:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50204)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mcP2u-0006BK-Ss; Mon, 18 Oct 2021 05:35:05 -0400
-Received: from out28-217.mail.aliyun.com ([115.124.28.217]:60750)
+ id 1mcR64-0000ti-Kn; Mon, 18 Oct 2021 07:46:28 -0400
+Received: from out28-218.mail.aliyun.com ([115.124.28.218]:38657)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mcP2p-0005Xd-Qa; Mon, 18 Oct 2021 05:35:04 -0400
+ id 1mcR60-0002T1-LU; Mon, 18 Oct 2021 07:46:28 -0400
 X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0244758-6.59035e-05-0.975458;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=4; RT=4; SR=0; TI=SMTPD_---.LdIDKnk_1634549687; 
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.072032-0.000216716-0.927751;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047212; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LdP9-NR_1634557575; 
 Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LdIDKnk_1634549687)
- by smtp.aliyun-inc.com(10.147.41.178);
- Mon, 18 Oct 2021 17:34:48 +0800
-Subject: Re: [PATCH v8 00/78] support vector extension v1.0
+ fp:SMTPD_---.LdP9-NR_1634557575)
+ by smtp.aliyun-inc.com(10.147.41.143);
+ Mon, 18 Oct 2021 19:46:15 +0800
+Subject: Re: [PATCH v3 03/14] target/riscv: Split misa.mxl and misa.ext
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ frederic.petrot@univ-grenoble-alpes.fr, fabien.portas@grenoble-inp.org,
+ frank.chang@sifive.com
+References: <20211016171412.3163784-1-richard.henderson@linaro.org>
+ <20211016171412.3163784-4-richard.henderson@linaro.org>
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <c6d6ca26-aa14-8950-2aef-2f92803036c6@c-sky.com>
-Message-ID: <3938e703-3000-a11a-a3e6-4a1ffd0e5601@c-sky.com>
-Date: Mon, 18 Oct 2021 17:34:47 +0800
+Message-ID: <c7e9b650-004e-5b19-f8c8-c028eaf19236@c-sky.com>
+Date: Mon, 18 Oct 2021 19:46:15 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <c6d6ca26-aa14-8950-2aef-2f92803036c6@c-sky.com>
+In-Reply-To: <20211016171412.3163784-4-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.217; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-217.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.218; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-218.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -53,248 +54,508 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 09:35:12 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 11:46:29 -0000
 
-Hi Alistair,
 
-Sorry for the  send error.  And I have a question about this patch set.
+On 2021/10/17 上午1:14, Richard Henderson wrote:
+> The hw representation of misa.mxl is at the high bits of the
+> misa csr.  Representing this in the same way inside QEMU
+> results in overly complex code trying to check that field.
+>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: LIU Zhiwei<zhiwei_liu@c-sky.com>
 
-Firstly, I totally support the vector v1.0 upstream.
-
-The concern is how to deal with the v0.7.1 code on QEMU. There are some 
-products based on the vector v0.7.1,
-such as D1 SOC from Allwinner and  Xuantie CPU  from Alibaba. The Linux 
-and GCC upstream for D1 is working in progress,
-and eventually these projects will support v0.7.1 in some way, probably 
-as "x-thead-v" (the "thead" stands for Alibaba T-Head).
-
-Maybe we can
-
-1. Drop the v0.7.1 support permanently.
-
-2. Drop the v0.7.1  temporarily and add  it  back later.
-
-3. Do some compatible work for v0.7.1 in the v1.0 patch set.
-
-Look forward to your idea. Thanks very much.
-
-Best Regards,
 Zhiwei
-
-On 2021/10/18 下午5:01, LIU Zhiwei wrote:
-> Hi Alistair,
+> ---
+>   target/riscv/cpu.h          | 15 +++----
+>   linux-user/elfload.c        |  2 +-
+>   linux-user/riscv/cpu_loop.c |  2 +-
+>   target/riscv/cpu.c          | 78 +++++++++++++++++++++----------------
+>   target/riscv/csr.c          | 44 ++++++++++++++-------
+>   target/riscv/gdbstub.c      |  8 ++--
+>   target/riscv/machine.c      | 10 +++--
+>   target/riscv/translate.c    | 10 +++--
+>   8 files changed, 100 insertions(+), 69 deletions(-)
 >
-> There is some products based on the vector v0.7.1, such as D1 SOC from 
-> Allwinner and  Xuantie CPU  And we have spent a lot of work to 
-> support  vector  on QEMU.
->
->
->
-> Allwinner
->
->
-> On 2021/10/15 下午3:45, frank.chang@sifive.com wrote:
->> From: Frank Chang <frank.chang@sifive.com>
->>
->> This patchset implements the vector extension v1.0 for RISC-V on QEMU.
->>
->> RVV v1.0 spec is now fronzen for public review:
->> https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
->>
->> The port is available here:
->> https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v8
->>
->> RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
->> option to v1.0 (i.e. vext_spec=v1.0)
->>
->> Note: This patchset depends on other patchsets listed in Based-on
->>        section below so it is not able to be built unless those 
->> patchsets
->>        are applied.
->>
->> Changelog:
->>
->> v8
->>    * Use {get,dest}_gpr APIs.
->>    * remove vector AMO instructions.
->>    * rename vpopc.m to vcpop.m.
->>    * rename vle1.v and vse1.v to vlm.v and vsm.v.
->>    * rename vmandnot.mm and vmornot.mm to vmandn.mm and vmorn.mm.
->>
->> v7
->>    * remove hardcoded GDB vector registers list.
->>    * add vsetivli instruction.
->>    * add vle1.v and vse1.v instructions.
->>
->> v6
->>    * add vector floating-point reciprocal estimate instruction.
->>    * add vector floating-point reciprocal square-root estimate 
->> instruction.
->>    * update check rules for segment register groups, each segment 
->> register
->>      group has to follow overlap rules.
->>    * update viota.m instruction check rules.
->>
->> v5
->>    * refactor RVV v1.0 check functions.
->>      (Thanks to Richard Henderson's bitwise tricks.)
->>    * relax RV_VLEN_MAX to 1024-bits.
->>    * implement vstart CSR's behaviors.
->>    * trigger illegal instruction exception if frm is not valid for
->>      vector floating-point instructions.
->>    * rebase on riscv-to-apply.next.
->>
->> v4
->>    * remove explicit float flmul variable in DisasContext.
->>    * replace floating-point calculations with shift operations to
->>      improve performance.
->>    * relax RV_VLEN_MAX to 512-bits.
->>
->> v3
->>    * apply nan-box helpers from Richard Henderson.
->>    * remove fp16 api changes as they are sent independently in another
->>      pathcset by Chih-Min Chao.
->>    * remove all tail elements clear functions as tail elements can
->>      retain unchanged for either VTA set to undisturbed or agnostic.
->>    * add fp16 nan-box check generator function.
->>    * add floating-point rounding mode enum.
->>    * replace flmul arithmetic with shifts to avoid floating-point
->>      conversions.
->>    * add Zvqmac extension.
->>    * replace gdbstub vector register xml files with dynamic generator.
->>    * bumped to RVV v1.0.
->>    * RVV v1.0 related changes:
->>      * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
->>        load/store instructions
->>      * add vrgatherei16 instruction.
->>      * rearranged bits in vtype to make vlmul bits into a contiguous
->>        field.
->>
->> v2
->>    * drop v0.7.1 support.
->>    * replace invisible return check macros with functions.
->>    * move mark_vs_dirty() to translators.
->>    * add SSTATUS_VS flag for s-mode.
->>    * nan-box scalar fp register for floating-point operations.
->>    * add gdbstub files for vector registers to allow system-mode
->>      debugging with GDB.
->>
->> Based-on: <20211015065500.3850513-1-frank.chang@sifive.com>
->> Based-on: <20211015070307.3860984-1-frank.chang@sifive.com>
->>
->> Frank Chang (73):
->>    target/riscv: fix TB_FLAGS bits overlapping bug for rvv/rvh
->>    target/riscv: drop vector 0.7.1 and add 1.0 support
->>    target/riscv: Use FIELD_EX32() to extract wd field
->>    target/riscv: rvv-1.0: introduce writable misa.v field
->>    target/riscv: rvv-1.0: add translation-time vector context status
->>    target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
->>    target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
->>      registers
->>    target/riscv: rvv-1.0: remove MLEN calculations
->>    target/riscv: rvv-1.0: add fractional LMUL
->>    target/riscv: rvv-1.0: add VMA and VTA
->>    target/riscv: rvv-1.0: update check functions
->>    target/riscv: introduce more imm value modes in translator functions
->>    target/riscv: rvv:1.0: add translation-time nan-box helper function
->>    target/riscv: rvv-1.0: remove amo operations instructions
->>    target/riscv: rvv-1.0: configure instructions
->>    target/riscv: rvv-1.0: stride load and store instructions
->>    target/riscv: rvv-1.0: index load and store instructions
->>    target/riscv: rvv-1.0: fix address index overflow bug of indexed
->>      load/store insns
->>    target/riscv: rvv-1.0: fault-only-first unit stride load
->>    target/riscv: rvv-1.0: load/store whole register instructions
->>    target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
->>    target/riscv: rvv-1.0: take fractional LMUL into vector max elements
->>      calculation
->>    target/riscv: rvv-1.0: floating-point square-root instruction
->>    target/riscv: rvv-1.0: floating-point classify instructions
->>    target/riscv: rvv-1.0: count population in mask instruction
->>    target/riscv: rvv-1.0: find-first-set mask bit instruction
->>    target/riscv: rvv-1.0: set-X-first mask bit instructions
->>    target/riscv: rvv-1.0: iota instruction
->>    target/riscv: rvv-1.0: element index instruction
->>    target/riscv: rvv-1.0: allow load element with sign-extended
->>    target/riscv: rvv-1.0: register gather instructions
->>    target/riscv: rvv-1.0: integer scalar move instructions
->>    target/riscv: rvv-1.0: floating-point move instruction
->>    target/riscv: rvv-1.0: floating-point scalar move instructions
->>    target/riscv: rvv-1.0: whole register move instructions
->>    target/riscv: rvv-1.0: integer extension instructions
->>    target/riscv: rvv-1.0: single-width averaging add and subtract
->>      instructions
->>    target/riscv: rvv-1.0: single-width bit shift instructions
->>    target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
->>    target/riscv: rvv-1.0: narrowing integer right shift instructions
->>    target/riscv: rvv-1.0: widening integer multiply-add instructions
->>    target/riscv: rvv-1.0: single-width saturating add and subtract
->>      instructions
->>    target/riscv: rvv-1.0: integer comparison instructions
->>    target/riscv: rvv-1.0: floating-point compare instructions
->>    target/riscv: rvv-1.0: mask-register logical instructions
->>    target/riscv: rvv-1.0: slide instructions
->>    target/riscv: rvv-1.0: floating-point slide instructions
->>    target/riscv: rvv-1.0: narrowing fixed-point clip instructions
->>    target/riscv: rvv-1.0: single-width floating-point reduction
->>    target/riscv: rvv-1.0: widening floating-point reduction instructions
->>    target/riscv: rvv-1.0: single-width scaling shift instructions
->>    target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
->>    target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
->>    target/riscv: rvv-1.0: remove integer extract instruction
->>    target/riscv: rvv-1.0: floating-point min/max instructions
->>    target/riscv: introduce floating-point rounding mode enum
->>    target/riscv: rvv-1.0: floating-point/integer type-convert
->>      instructions
->>    target/riscv: rvv-1.0: widening floating-point/integer type-convert
->>    target/riscv: add "set round to odd" rounding mode helper function
->>    target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
->>    target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
->>    target/riscv: rvv-1.0: implement vstart CSR
->>    target/riscv: rvv-1.0: trigger illegal instruction exception if 
->> frm is
->>      not valid
->>    target/riscv: rvv-1.0: set mstatus.SD bit when writing vector CSRs
->>    target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
->>      instruction
->>    target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
->>    target/riscv: set mstatus.SD bit when writing fp CSRs
->>    target/riscv: rvv-1.0: rename r2_zimm to r2_zimm11
->>    target/riscv: rvv-1.0: add vsetivli instruction
->>    target/riscv: rvv-1.0: add evl parameter to vext_ldst_us()
->>    target/riscv: rvv-1.0: add vector unit-stride mask load/store insns
->>    target/riscv: rvv-1.0: rename vmandnot.mm and vmornot.mm to vmandn.mm
->>      and vmorn.mm
->>    target/riscv: rvv-1.0: update opivv_vadc_check() comment
->>
->> Greentime Hu (1):
->>    target/riscv: rvv-1.0: add vlenb register
->>
->> Hsiangkai Wang (1):
->>    target/riscv: gdb: support vector registers for rv64 & rv32
->>
->> LIU Zhiwei (3):
->>    target/riscv: rvv-1.0: add mstatus VS field
->>    target/riscv: rvv-1.0: add sstatus VS field
->>    target/riscv: rvv-1.0: add vcsr register
->>
->>   target/riscv/cpu.c                      |   12 +-
->>   target/riscv/cpu.h                      |   85 +-
->>   target/riscv/cpu_bits.h                 |   10 +
->>   target/riscv/cpu_helper.c               |   15 +-
->>   target/riscv/csr.c                      |   92 +-
->>   target/riscv/fpu_helper.c               |   17 +-
->>   target/riscv/gdbstub.c                  |  184 ++
->>   target/riscv/helper.h                   |  435 ++-
->>   target/riscv/insn32.decode              |  294 +-
->>   target/riscv/insn_trans/trans_rvv.c.inc | 2423 +++++++++------
->>   target/riscv/internals.h                |   24 +-
->>   target/riscv/translate.c                |   74 +-
->>   target/riscv/vector_helper.c            | 3601 ++++++++++++-----------
->>   13 files changed, 4176 insertions(+), 3090 deletions(-)
->>
->> -- 
->> 2.25.1
->>
->>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7084efc452..e708fcc168 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -25,6 +25,7 @@
+>   #include "exec/cpu-defs.h"
+>   #include "fpu/softfloat-types.h"
+>   #include "qom/object.h"
+> +#include "cpu_bits.h"
+>   
+>   #define TCG_GUEST_DEFAULT_MO 0
+>   
+> @@ -51,9 +52,6 @@
+>   # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
+>   #endif
+>   
+> -#define RV32 ((target_ulong)1 << (TARGET_LONG_BITS - 2))
+> -#define RV64 ((target_ulong)2 << (TARGET_LONG_BITS - 2))
+> -
+>   #define RV(x) ((target_ulong)1 << (x - 'A'))
+>   
+>   #define RVI RV('I')
+> @@ -133,8 +131,12 @@ struct CPURISCVState {
+>       target_ulong priv_ver;
+>       target_ulong bext_ver;
+>       target_ulong vext_ver;
+> -    target_ulong misa;
+> -    target_ulong misa_mask;
+> +
+> +    /* RISCVMXL, but uint32_t for vmstate migration */
+> +    uint32_t misa_mxl;      /* current mxl */
+> +    uint32_t misa_mxl_max;  /* max mxl for this cpu */
+> +    uint32_t misa_ext;      /* current extensions */
+> +    uint32_t misa_ext_mask; /* max ext for this cpu */
+>   
+>       uint32_t features;
+>   
+> @@ -313,7 +315,7 @@ struct RISCVCPU {
+>   
+>   static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+>   {
+> -    return (env->misa & ext) != 0;
+> +    return (env->misa_ext & ext) != 0;
+>   }
+>   
+>   static inline bool riscv_feature(CPURISCVState *env, int feature)
+> @@ -322,7 +324,6 @@ static inline bool riscv_feature(CPURISCVState *env, int feature)
+>   }
+>   
+>   #include "cpu_user.h"
+> -#include "cpu_bits.h"
+>   
+>   extern const char * const riscv_int_regnames[];
+>   extern const char * const riscv_fpr_regnames[];
+> diff --git a/linux-user/elfload.c b/linux-user/elfload.c
+> index 2404d482ba..214c1aa40d 100644
+> --- a/linux-user/elfload.c
+> +++ b/linux-user/elfload.c
+> @@ -1448,7 +1448,7 @@ static uint32_t get_elf_hwcap(void)
+>       uint32_t mask = MISA_BIT('I') | MISA_BIT('M') | MISA_BIT('A')
+>                       | MISA_BIT('F') | MISA_BIT('D') | MISA_BIT('C');
+>   
+> -    return cpu->env.misa & mask;
+> +    return cpu->env.misa_ext & mask;
+>   #undef MISA_BIT
+>   }
+>   
+> diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+> index 9859a366e4..e5bb6d908a 100644
+> --- a/linux-user/riscv/cpu_loop.c
+> +++ b/linux-user/riscv/cpu_loop.c
+> @@ -133,7 +133,7 @@ void target_cpu_copy_regs(CPUArchState *env, struct target_pt_regs *regs)
+>       env->gpr[xSP] = regs->sp;
+>       env->elf_flags = info->elf_flags;
+>   
+> -    if ((env->misa & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
+> +    if ((env->misa_ext & RVE) && !(env->elf_flags & EF_RISCV_RVE)) {
+>           error_report("Incompatible ELF: RVE cpu requires RVE ABI binary");
+>           exit(EXIT_FAILURE);
+>       }
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1d69d1887e..fdf031a394 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -110,16 +110,13 @@ const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
+>   
+>   bool riscv_cpu_is_32bit(CPURISCVState *env)
+>   {
+> -    if (env->misa & RV64) {
+> -        return false;
+> -    }
+> -
+> -    return true;
+> +    return env->misa_mxl == MXL_RV32;
+>   }
+>   
+> -static void set_misa(CPURISCVState *env, target_ulong misa)
+> +static void set_misa(CPURISCVState *env, RISCVMXL mxl, uint32_t ext)
+>   {
+> -    env->misa_mask = env->misa = misa;
+> +    env->misa_mxl_max = env->misa_mxl = mxl;
+> +    env->misa_ext_mask = env->misa_ext = ext;
+>   }
+>   
+>   static void set_priv_version(CPURISCVState *env, int priv_ver)
+> @@ -148,9 +145,9 @@ static void riscv_any_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>   #if defined(TARGET_RISCV32)
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+>   #elif defined(TARGET_RISCV64)
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+>   #endif
+>       set_priv_version(env, PRIV_VERSION_1_11_0);
+>   }
+> @@ -160,20 +157,20 @@ static void rv64_base_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>       /* We set this in the realise function */
+> -    set_misa(env, RV64);
+> +    set_misa(env, MXL_RV64, 0);
+>   }
+>   
+>   static void rv64_sifive_u_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>   }
+>   
+>   static void rv64_sifive_e_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV64 | RVI | RVM | RVA | RVC | RVU);
+> +    set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>       qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>   }
+> @@ -182,20 +179,20 @@ static void rv32_base_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+>       /* We set this in the realise function */
+> -    set_misa(env, RV32);
+> +    set_misa(env, MXL_RV32, 0);
+>   }
+>   
+>   static void rv32_sifive_u_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>   }
+>   
+>   static void rv32_sifive_e_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>       qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>   }
+> @@ -203,7 +200,7 @@ static void rv32_sifive_e_cpu_init(Object *obj)
+>   static void rv32_ibex_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>       qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+>       qdev_prop_set_bit(DEVICE(obj), "x-epmp", true);
+> @@ -212,7 +209,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+>   static void rv32_imafcu_nommu_cpu_init(Object *obj)
+>   {
+>       CPURISCVState *env = &RISCV_CPU(obj)->env;
+> -    set_misa(env, RV32 | RVI | RVM | RVA | RVF | RVC | RVU);
+> +    set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
+>       set_priv_version(env, PRIV_VERSION_1_10_0);
+>       set_resetvec(env, DEFAULT_RSTVEC);
+>       qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+> @@ -360,6 +357,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+>   
+>       mcc->parent_reset(dev);
+>   #ifndef CONFIG_USER_ONLY
+> +    env->misa_mxl = env->misa_mxl_max;
+>       env->priv = PRV_M;
+>       env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+>       env->mcause = 0;
+> @@ -388,7 +386,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>       CPURISCVState *env = &cpu->env;
+>       RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>       int priv_version = 0;
+> -    target_ulong target_misa = env->misa;
+>       Error *local_err = NULL;
+>   
+>       cpu_exec_realizefn(cs, &local_err);
+> @@ -434,8 +431,23 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>   
+>       set_resetvec(env, cpu->cfg.resetvec);
+>   
+> -    /* If only XLEN is set for misa, then set misa from properties */
+> -    if (env->misa == RV32 || env->misa == RV64) {
+> +    /* Validate that MISA_MXL is set properly. */
+> +    switch (env->misa_mxl_max) {
+> +#ifdef TARGET_RISCV64
+> +    case MXL_RV64:
+> +        break;
+> +#endif
+> +    case MXL_RV32:
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +    assert(env->misa_mxl_max == env->misa_mxl);
+> +
+> +    /* If only MISA_EXT is unset for misa, then set it from properties */
+> +    if (env->misa_ext == 0) {
+> +        uint32_t ext = 0;
+> +
+>           /* Do some ISA extension error checking */
+>           if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+>               error_setg(errp,
+> @@ -462,38 +474,38 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>   
+>           /* Set the ISA extensions, checks should have happened above */
+>           if (cpu->cfg.ext_i) {
+> -            target_misa |= RVI;
+> +            ext |= RVI;
+>           }
+>           if (cpu->cfg.ext_e) {
+> -            target_misa |= RVE;
+> +            ext |= RVE;
+>           }
+>           if (cpu->cfg.ext_m) {
+> -            target_misa |= RVM;
+> +            ext |= RVM;
+>           }
+>           if (cpu->cfg.ext_a) {
+> -            target_misa |= RVA;
+> +            ext |= RVA;
+>           }
+>           if (cpu->cfg.ext_f) {
+> -            target_misa |= RVF;
+> +            ext |= RVF;
+>           }
+>           if (cpu->cfg.ext_d) {
+> -            target_misa |= RVD;
+> +            ext |= RVD;
+>           }
+>           if (cpu->cfg.ext_c) {
+> -            target_misa |= RVC;
+> +            ext |= RVC;
+>           }
+>           if (cpu->cfg.ext_s) {
+> -            target_misa |= RVS;
+> +            ext |= RVS;
+>           }
+>           if (cpu->cfg.ext_u) {
+> -            target_misa |= RVU;
+> +            ext |= RVU;
+>           }
+>           if (cpu->cfg.ext_h) {
+> -            target_misa |= RVH;
+> +            ext |= RVH;
+>           }
+>           if (cpu->cfg.ext_v) {
+>               int vext_version = VEXT_VERSION_0_07_1;
+> -            target_misa |= RVV;
+> +            ext |= RVV;
+>               if (!is_power_of_2(cpu->cfg.vlen)) {
+>                   error_setg(errp,
+>                           "Vector extension VLEN must be power of 2");
+> @@ -532,7 +544,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>               set_vext_version(env, vext_version);
+>           }
+>   
+> -        set_misa(env, target_misa);
+> +        set_misa(env, env->misa_mxl, ext);
+>       }
+>   
+>       riscv_cpu_register_gdb_regs_for_features(cs);
+> @@ -705,7 +717,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>       char *isa_str = g_new(char, maxlen);
+>       char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+>       for (i = 0; i < sizeof(riscv_exts); i++) {
+> -        if (cpu->env.misa & RV(riscv_exts[i])) {
+> +        if (cpu->env.misa_ext & RV(riscv_exts[i])) {
+>               *p++ = qemu_tolower(riscv_exts[i]);
+>           }
+>       }
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 23fbbd3216..d0c86a300d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -39,7 +39,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>   {
+>   #if !defined(CONFIG_USER_ONLY)
+>       /* loose check condition for fcsr in vector extension */
+> -    if ((csrno == CSR_FCSR) && (env->misa & RVV)) {
+> +    if ((csrno == CSR_FCSR) && (env->misa_ext & RVV)) {
+>           return RISCV_EXCP_NONE;
+>       }
+>       if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> @@ -51,7 +51,7 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>   
+>   static RISCVException vs(CPURISCVState *env, int csrno)
+>   {
+> -    if (env->misa & RVV) {
+> +    if (env->misa_ext & RVV) {
+>           return RISCV_EXCP_NONE;
+>       }
+>       return RISCV_EXCP_ILLEGAL_INST;
+> @@ -557,7 +557,22 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+>   static RISCVException read_misa(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>   {
+> -    *val = env->misa;
+> +    target_ulong misa;
+> +
+> +    switch (env->misa_mxl) {
+> +    case MXL_RV32:
+> +        misa = (target_ulong)MXL_RV32 << 30;
+> +        break;
+> +#ifdef TARGET_RISCV64
+> +    case MXL_RV64:
+> +        misa = (target_ulong)MXL_RV64 << 62;
+> +        break;
+> +#endif
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +
+> +    *val = misa | env->misa_ext;
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -583,8 +598,13 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>           return RISCV_EXCP_NONE;
+>       }
+>   
+> +    /*
+> +     * misa.MXL writes are not supported by QEMU.
+> +     * Drop writes to those bits.
+> +     */
+> +
+>       /* Mask extensions that are not supported by this hart */
+> -    val &= env->misa_mask;
+> +    val &= env->misa_ext_mask;
+>   
+>       /* Mask extensions that are not supported by QEMU */
+>       val &= (RVI | RVE | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+> @@ -601,20 +621,14 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+>           val &= ~RVC;
+>       }
+>   
+> -    /* misa.MXL writes are not supported by QEMU */
+> -    if (riscv_cpu_is_32bit(env)) {
+> -        val = (env->misa & MISA32_MXL) | (val & ~MISA32_MXL);
+> -    } else {
+> -        val = (env->misa & MISA64_MXL) | (val & ~MISA64_MXL);
+> +    /* If nothing changed, do nothing. */
+> +    if (val == env->misa_ext) {
+> +        return RISCV_EXCP_NONE;
+>       }
+>   
+>       /* flush translation cache */
+> -    if (val != env->misa) {
+> -        tb_flush(env_cpu(env));
+> -    }
+> -
+> -    env->misa = val;
+> -
+> +    tb_flush(env_cpu(env));
+> +    env->misa_ext = val;
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index a7a9c0b1fe..5257df0217 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -54,10 +54,10 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>   static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
+>   {
+>       if (n < 32) {
+> -        if (env->misa & RVD) {
+> +        if (env->misa_ext & RVD) {
+>               return gdb_get_reg64(buf, env->fpr[n]);
+>           }
+> -        if (env->misa & RVF) {
+> +        if (env->misa_ext & RVF) {
+>               return gdb_get_reg32(buf, env->fpr[n]);
+>           }
+>       /* there is hole between ft11 and fflags in fpu.xml */
+> @@ -191,10 +191,10 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>   {
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       CPURISCVState *env = &cpu->env;
+> -    if (env->misa & RVD) {
+> +    if (env->misa_ext & RVD) {
+>           gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+>                                    36, "riscv-64bit-fpu.xml", 0);
+> -    } else if (env->misa & RVF) {
+> +    } else if (env->misa_ext & RVF) {
+>           gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
+>                                    36, "riscv-32bit-fpu.xml", 0);
+>       }
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 16a08302da..f64b2a96c1 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -140,8 +140,8 @@ static const VMStateDescription vmstate_hyper = {
+>   
+>   const VMStateDescription vmstate_riscv_cpu = {
+>       .name = "cpu",
+> -    .version_id = 2,
+> -    .minimum_version_id = 2,
+> +    .version_id = 3,
+> +    .minimum_version_id = 3,
+>       .fields = (VMStateField[]) {
+>           VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+>           VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+> @@ -153,8 +153,10 @@ const VMStateDescription vmstate_riscv_cpu = {
+>           VMSTATE_UINTTL(env.guest_phys_fault_addr, RISCVCPU),
+>           VMSTATE_UINTTL(env.priv_ver, RISCVCPU),
+>           VMSTATE_UINTTL(env.vext_ver, RISCVCPU),
+> -        VMSTATE_UINTTL(env.misa, RISCVCPU),
+> -        VMSTATE_UINTTL(env.misa_mask, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_mxl, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_ext, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_mxl_max, RISCVCPU),
+> +        VMSTATE_UINT32(env.misa_ext_mask, RISCVCPU),
+>           VMSTATE_UINT32(env.features, RISCVCPU),
+>           VMSTATE_UINTTL(env.priv, RISCVCPU),
+>           VMSTATE_UINTTL(env.virt, RISCVCPU),
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index d2442f0cf5..422f8ab8d0 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -55,7 +55,8 @@ typedef struct DisasContext {
+>       /* pc_succ_insn points to the instruction following base.pc_next */
+>       target_ulong pc_succ_insn;
+>       target_ulong priv_ver;
+> -    target_ulong misa;
+> +    RISCVMXL xl;
+> +    uint32_t misa_ext;
+>       uint32_t opcode;
+>       uint32_t mstatus_fs;
+>       uint32_t mstatus_hs_fs;
+> @@ -86,7 +87,7 @@ typedef struct DisasContext {
+>   
+>   static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>   {
+> -    return ctx->misa & ext;
+> +    return ctx->misa_ext & ext;
+>   }
+>   
+>   #ifdef TARGET_RISCV32
+> @@ -96,7 +97,7 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+>   #else
+>   static inline bool is_32bit(DisasContext *ctx)
+>   {
+> -    return (ctx->misa & RV32) == RV32;
+> +    return ctx->xl == MXL_RV32;
+>   }
+>   #endif
+>   
+> @@ -538,7 +539,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>   #else
+>       ctx->virt_enabled = false;
+>   #endif
+> -    ctx->misa = env->misa;
+> +    ctx->xl = env->misa_mxl;
+> +    ctx->misa_ext = env->misa_ext;
+>       ctx->frm = -1;  /* unknown rounding mode */
+>       ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+>       ctx->vlen = cpu->cfg.vlen;
 
