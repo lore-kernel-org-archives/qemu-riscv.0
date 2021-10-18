@@ -1,93 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcMLu-0007CQ-W1
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 02:42:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37644)
+	id 1mcOWk-0005Y9-W8
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 05:01:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41384)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mcMLt-0007C8-VL
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:42:30 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:24966)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mcOWi-0005Sl-HD; Mon, 18 Oct 2021 05:01:48 -0400
+Received: from out28-2.mail.aliyun.com ([115.124.28.2]:44387)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mcMLq-0000jK-U6
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:42:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634539345;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/H5SnUwRwJ4dfnkbcKCW+LRynS7b30H02ffi2vo9T2c=;
- b=CRniB51epdVER4sFLRahCBdpKU21Iq3TF5W4BO+X6JVADH0l+rAgQWKPFIs899ssybHmHb
- jp0RZjbL5uXQyirasyLVA0IH/14fBlJAHO9rqv/Pq/ZmPE5fpKZmFcZadb+HGWYYOEAtYQ
- +lN7MZko1Dxy6zHyVu0leCMBAODMlPs=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-461-9hBkYcxANTu9imi5-zZNPg-1; Mon, 18 Oct 2021 02:42:24 -0400
-X-MC-Unique: 9hBkYcxANTu9imi5-zZNPg-1
-Received: by mail-wm1-f72.google.com with SMTP id
- c1-20020a05600c0ac100b00322fcaa2bc7so937347wmr.4
- for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 23:42:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=/H5SnUwRwJ4dfnkbcKCW+LRynS7b30H02ffi2vo9T2c=;
- b=i+SKYBp2las8CxBa8F2kYz/tIU1gfw+D+bcYpG10p8EuzvEa1Hvj0RAgGv14/l4AdE
- vOjmtqWkeaO+7NSV/AVvuVNllwwbRb46fNpVnGkEfCY7RbpJg/UoBrQdbzipmUZGaNUD
- AN/pTv6yhYA9mazoh3UMnndE0f69sP7giUqYZp4oH1TtAoKgvmC7xvncbZUqex0FXAxK
- jtEZfAUPl9UhQL8NAEnVjo7BEfCCHeoWMHbdPeLNC5XPGwesQlYAo+gVASDF0CQYwPru
- rvyogZAXkXlPflzg6AvoPk+7xo07qcOohfMPgAlB/r/7ekK6A6PokD5huVYzxx8jaC7n
- WWSg==
-X-Gm-Message-State: AOAM533mozrnEZ36kDOga5O6eOoMvYXOgMpiUuaRmpNtg9k/OI4105gX
- 5vfu58Nc4vn6Zol95CSfCTFYvNTbNZdmbsY+FD28mwr6EZowywXrrULCvK8axsTgyt9rGhvChQI
- v+AhbR/3j+5Zn8Oc=
-X-Received: by 2002:adf:ff86:: with SMTP id j6mr32533359wrr.59.1634539342988; 
- Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwh088wzWtIzQczXwOP4LMDI+oKiquxEvkG1Iq73aFurMcLVyqp6vS7TsQtcsStA4FTJG92uQ==
-X-Received: by 2002:adf:ff86:: with SMTP id j6mr32533324wrr.59.1634539342689; 
- Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
-Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id v191sm11663829wme.36.2021.10.17.23.42.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
-Date: Mon, 18 Oct 2021 08:42:21 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: "limingwang (A)" <limingwang@huawei.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, Jiangyifei
- <jiangyifei@huawei.com>, Alistair Francis <alistair.francis@wdc.com>,
- "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, "Fanliang (EulerOS)"
- <fanliang@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)"
- <wu.wubin@huawei.com>
-Subject: Re: [PATCH v2] hw/riscv: virt: bugfix the memory-backend-file
- command is invalid
-Message-ID: <20211018084221.622ae711@redhat.com>
-In-Reply-To: <CAEUhbmVTs109MLog+wjnayJY++SvEPhuCKcG3xXotqySkpGAaA@mail.gmail.com>
-References: <20211012014501.24996-1-limingwang@huawei.com>
- <CAEUhbmX=A4LPgzNgNPcxzzg=veU0=3vXyZQrwikxMFvb_Rcxzw@mail.gmail.com>
- <c4c6cc03d1c6459ea036c08ae30806a5@huawei.com>
- <CAEUhbmVD1jyvGJrQLSZLJYfaz6E-m0b9SZA+DQA2YYK70oL7Lg@mail.gmail.com>
- <20211015145922.5a82e31a@redhat.com>
- <CAEUhbmVTs109MLog+wjnayJY++SvEPhuCKcG3xXotqySkpGAaA@mail.gmail.com>
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mcOWZ-0000Es-Ky; Mon, 18 Oct 2021 05:01:48 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436591|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0345401-6.19188e-05-0.965398;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=3; RT=3; SR=0; TI=SMTPD_---.LdFdVM5_1634547688; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.LdFdVM5_1634547688)
+ by smtp.aliyun-inc.com(10.147.41.231);
+ Mon, 18 Oct 2021 17:01:28 +0800
+Subject: Re: [PATCH v8 00/78] support vector extension v1.0
+To: frank.chang@sifive.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20211015074627.3957162-1-frank.chang@sifive.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <c6d6ca26-aa14-8950-2aef-2f92803036c6@c-sky.com>
+Date: Mon, 18 Oct 2021 17:01:28 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
-X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20211015074627.3957162-1-frank.chang@sifive.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.2; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-2.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -100,132 +51,217 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 06:42:30 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 09:01:49 -0000
 
-On Mon, 18 Oct 2021 10:17:45 +0800
-Bin Meng <bmeng.cn@gmail.com> wrote:
+Hi Alistair,
 
-> Hi Igor,
-> 
-> On Fri, Oct 15, 2021 at 8:59 PM Igor Mammedov <imammedo@redhat.com> wrote:
-> >
-> > On Fri, 15 Oct 2021 17:25:01 +0800
-> > Bin Meng <bmeng.cn@gmail.com> wrote:
-> >  
-> > > On Fri, Oct 15, 2021 at 4:52 PM limingwang (A) <limingwang@huawei.com> wrote:  
-> > > >
-> > > >
-> > > > On Wed, Oct 13, 2021 at 22:41 PM Bin Meng <bin.meng@windriver.com> wrote:  
-> > > > >
-> > > > > On Tue, Oct 12, 2021 at 9:46 AM MingWang Li <limingwang@huawei.com> wrote:  
-> > > > > >
-> > > > > > From: Mingwang Li <limingwang@huawei.com>
-> > > > > >
-> > > > > > When I start the VM with the following command:
-> > > > > > $ ./qemu-system-riscv64 -M virt,accel=kvm -m 4096M -cpu host -nographic \
-> > > > > >     -name guest=riscv-guset \
-> > > > > >     -smp 2 \
-> > > > > >     -bios none \
-> > > > > >     -kernel ./Image \
-> > > > > >     -drive file=./guest.img,format=raw,id=hd0 \
-> > > > > >     -device virtio-blk-device,drive=hd0 \
-> > > > > >     -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
-> > > > > >     -object  
-> > > > > memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on \  
-> > > > > >     -numa node,memdev=mem -mem-prealloc \
-> > > > > >     -chardev socket,id=char0,path=/mnt/vhost-net0 \
-> > > > > >     -netdev type=vhost-user,id=mynet1,chardev=char0,vhostforce \
-> > > > > >     -device
-> > > > > > virtio-net-pci,mac=52:54:00:00:00:01,netdev=mynet1,mrg_rxbuf=on,csum=o
-> > > > > > n,guest_csum=on,guest_ecn=on \
-> > > > > >
-> > > > > > Then, QEMU displays the following error information:
-> > > > > > qemu-system-riscv64: Failed initializing vhost-user memory map,
-> > > > > > consider using -object memory-backend-file share=on  
-> > > > >
-> > > > > I see your command line parameters already contain "-object memory-backend-file
-> > > > > share=on", so this error message is not accurate.  
-> > > >
-> > > > QEMU uses this command to alloc fd in the "memory_region_init_ram_from_file" function
-> > > > and assigns the value of fd to mr->ram_block-fd. If the QEMU uses the default memory to
-> > > > initialize the system, the QEMU cannot obtain the fd in the "vhost_user_mem_section_filter"
-> > > > function when initializing the vhost-user. As a result, an error is reported in the "vhost_user_fill_set_mem_table_msg"
-> > > > function.
-> > > >
-> > > > Because of the above bug, even if "-object memory-backend-file share=on" is added to the command line,
-> > > > the QEMU still reports an error.  
-> > >
-> > > Yes, what I meant is that QEMU should not report such inaccurate
-> > > messages because of some random codes elsewhere.
-> > >
-> > > With current message, it suggested user use "-object
-> > > memory-backend-file share=on" in the command line, but it is already
-> > > used. So this is a false alarm. The "bug" is somewhere else.  
-> >
-> > bug is in using memory_region_init_ram(),
-> > which can't possibly handle vhost-user, and can't work as expected with
-> > '-numa node,memdev' options.
-> > Before main ram infrastructure was converted to memdev,
-> > one should have used memory_region_allocate_system_memory() for
-> > allocating main RAM, so numa usecase was broken from the start.
-> > Later it old API was dropped in favor of more flexible/generic
-> > MachineState::ram approach (see commits 68a86dc15ccd..f0530f14c7c35d).  
-> 
-> Thanks for the detailed pointers.
-> 
-> I wonder if it is possible to make the error message to be clearer, so
-> instead of having
-> 
->     "qemu-system-riscv64: Failed initializing vhost-user memory map,
-> consider using -object memory-backend-file share=on"
-> 
-> can we do:
-> 
->     "qemu-system-riscv64: Failed initializing vhost-user memory map,
-> considering using MachineState::ram instead of manually initializing
-> RAM memory region."
-> 
-> which is more straightforward?
+There is some products based on the vector v0.7.1, such as D1 SOC from 
+Allwinner and  Xuantie CPU  And we have spent a lot of work to support  
+vector  on QEMU.
 
-It would only make sense in context of this thread and
-give a hint to a developer how to fix bug in machine code
-but won't give a clue to the end user what's wrong with
-configuration.
 
-Maybe following would be better:
- "Failed initializing vhost-user memory map, vhost requires shared system memory."
- "See 'System Emulation::Device Emulation::Emulated Devices::vhost-user back ends'
-  chapter in QEMU manual."
 
-the chapter gives an example how to correctly configure vhost-user
-(albeit using old style)
+Allwinner
 
- 
-> >
-> >
-> > Modulo commit message, patch looks good to me and does what
-> > every machine should do. (I though that I've converted every
-> > existing to generalized MachineState::ram but it looks like
-> > riscv was missed).  
-> 
-> Indeed all riscv boards are doing the same thing.
-> 
-> >
-> > So we can model commit message after bd457782b3b0a,
-> > and also add that the patch fixes broken -numa node,memdev case,
-> > which never properly worked. It also opens possibility to
-> > use vhost-user/virtiosf with main RAM if main RAM is
-> > provided explicitly via machine.memory-backend option
-> > with shared memory backend.
-> >
-> > Btw: is there other riscv machines that allocate RAM directly?
-> > (if yes, those should be fixed as well, a patch per machine)
-> >  
-> 
-> I will see if I can get some patches to fix other riscv machines.
-> 
-> Regards,
-> Bin
-> 
 
+On 2021/10/15 下午3:45, frank.chang@sifive.com wrote:
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> This patchset implements the vector extension v1.0 for RISC-V on QEMU.
+>
+> RVV v1.0 spec is now fronzen for public review:
+> https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
+>
+> The port is available here:
+> https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v8
+>
+> RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
+> option to v1.0 (i.e. vext_spec=v1.0)
+>
+> Note: This patchset depends on other patchsets listed in Based-on
+>        section below so it is not able to be built unless those patchsets
+>        are applied.
+>
+> Changelog:
+>
+> v8
+>    * Use {get,dest}_gpr APIs.
+>    * remove vector AMO instructions.
+>    * rename vpopc.m to vcpop.m.
+>    * rename vle1.v and vse1.v to vlm.v and vsm.v.
+>    * rename vmandnot.mm and vmornot.mm to vmandn.mm and vmorn.mm.
+>
+> v7
+>    * remove hardcoded GDB vector registers list.
+>    * add vsetivli instruction.
+>    * add vle1.v and vse1.v instructions.
+>
+> v6
+>    * add vector floating-point reciprocal estimate instruction.
+>    * add vector floating-point reciprocal square-root estimate instruction.
+>    * update check rules for segment register groups, each segment register
+>      group has to follow overlap rules.
+>    * update viota.m instruction check rules.
+>
+> v5
+>    * refactor RVV v1.0 check functions.
+>      (Thanks to Richard Henderson's bitwise tricks.)
+>    * relax RV_VLEN_MAX to 1024-bits.
+>    * implement vstart CSR's behaviors.
+>    * trigger illegal instruction exception if frm is not valid for
+>      vector floating-point instructions.
+>    * rebase on riscv-to-apply.next.
+>
+> v4
+>    * remove explicit float flmul variable in DisasContext.
+>    * replace floating-point calculations with shift operations to
+>      improve performance.
+>    * relax RV_VLEN_MAX to 512-bits.
+>
+> v3
+>    * apply nan-box helpers from Richard Henderson.
+>    * remove fp16 api changes as they are sent independently in another
+>      pathcset by Chih-Min Chao.
+>    * remove all tail elements clear functions as tail elements can
+>      retain unchanged for either VTA set to undisturbed or agnostic.
+>    * add fp16 nan-box check generator function.
+>    * add floating-point rounding mode enum.
+>    * replace flmul arithmetic with shifts to avoid floating-point
+>      conversions.
+>    * add Zvqmac extension.
+>    * replace gdbstub vector register xml files with dynamic generator.
+>    * bumped to RVV v1.0.
+>    * RVV v1.0 related changes:
+>      * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+>        load/store instructions
+>      * add vrgatherei16 instruction.
+>      * rearranged bits in vtype to make vlmul bits into a contiguous
+>        field.
+>
+> v2
+>    * drop v0.7.1 support.
+>    * replace invisible return check macros with functions.
+>    * move mark_vs_dirty() to translators.
+>    * add SSTATUS_VS flag for s-mode.
+>    * nan-box scalar fp register for floating-point operations.
+>    * add gdbstub files for vector registers to allow system-mode
+>      debugging with GDB.
+>
+> Based-on: <20211015065500.3850513-1-frank.chang@sifive.com>
+> Based-on: <20211015070307.3860984-1-frank.chang@sifive.com>
+>
+> Frank Chang (73):
+>    target/riscv: fix TB_FLAGS bits overlapping bug for rvv/rvh
+>    target/riscv: drop vector 0.7.1 and add 1.0 support
+>    target/riscv: Use FIELD_EX32() to extract wd field
+>    target/riscv: rvv-1.0: introduce writable misa.v field
+>    target/riscv: rvv-1.0: add translation-time vector context status
+>    target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+>    target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+>      registers
+>    target/riscv: rvv-1.0: remove MLEN calculations
+>    target/riscv: rvv-1.0: add fractional LMUL
+>    target/riscv: rvv-1.0: add VMA and VTA
+>    target/riscv: rvv-1.0: update check functions
+>    target/riscv: introduce more imm value modes in translator functions
+>    target/riscv: rvv:1.0: add translation-time nan-box helper function
+>    target/riscv: rvv-1.0: remove amo operations instructions
+>    target/riscv: rvv-1.0: configure instructions
+>    target/riscv: rvv-1.0: stride load and store instructions
+>    target/riscv: rvv-1.0: index load and store instructions
+>    target/riscv: rvv-1.0: fix address index overflow bug of indexed
+>      load/store insns
+>    target/riscv: rvv-1.0: fault-only-first unit stride load
+>    target/riscv: rvv-1.0: load/store whole register instructions
+>    target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+>    target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+>      calculation
+>    target/riscv: rvv-1.0: floating-point square-root instruction
+>    target/riscv: rvv-1.0: floating-point classify instructions
+>    target/riscv: rvv-1.0: count population in mask instruction
+>    target/riscv: rvv-1.0: find-first-set mask bit instruction
+>    target/riscv: rvv-1.0: set-X-first mask bit instructions
+>    target/riscv: rvv-1.0: iota instruction
+>    target/riscv: rvv-1.0: element index instruction
+>    target/riscv: rvv-1.0: allow load element with sign-extended
+>    target/riscv: rvv-1.0: register gather instructions
+>    target/riscv: rvv-1.0: integer scalar move instructions
+>    target/riscv: rvv-1.0: floating-point move instruction
+>    target/riscv: rvv-1.0: floating-point scalar move instructions
+>    target/riscv: rvv-1.0: whole register move instructions
+>    target/riscv: rvv-1.0: integer extension instructions
+>    target/riscv: rvv-1.0: single-width averaging add and subtract
+>      instructions
+>    target/riscv: rvv-1.0: single-width bit shift instructions
+>    target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+>    target/riscv: rvv-1.0: narrowing integer right shift instructions
+>    target/riscv: rvv-1.0: widening integer multiply-add instructions
+>    target/riscv: rvv-1.0: single-width saturating add and subtract
+>      instructions
+>    target/riscv: rvv-1.0: integer comparison instructions
+>    target/riscv: rvv-1.0: floating-point compare instructions
+>    target/riscv: rvv-1.0: mask-register logical instructions
+>    target/riscv: rvv-1.0: slide instructions
+>    target/riscv: rvv-1.0: floating-point slide instructions
+>    target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+>    target/riscv: rvv-1.0: single-width floating-point reduction
+>    target/riscv: rvv-1.0: widening floating-point reduction instructions
+>    target/riscv: rvv-1.0: single-width scaling shift instructions
+>    target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+>    target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+>    target/riscv: rvv-1.0: remove integer extract instruction
+>    target/riscv: rvv-1.0: floating-point min/max instructions
+>    target/riscv: introduce floating-point rounding mode enum
+>    target/riscv: rvv-1.0: floating-point/integer type-convert
+>      instructions
+>    target/riscv: rvv-1.0: widening floating-point/integer type-convert
+>    target/riscv: add "set round to odd" rounding mode helper function
+>    target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+>    target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
+>    target/riscv: rvv-1.0: implement vstart CSR
+>    target/riscv: rvv-1.0: trigger illegal instruction exception if frm is
+>      not valid
+>    target/riscv: rvv-1.0: set mstatus.SD bit when writing vector CSRs
+>    target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
+>      instruction
+>    target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
+>    target/riscv: set mstatus.SD bit when writing fp CSRs
+>    target/riscv: rvv-1.0: rename r2_zimm to r2_zimm11
+>    target/riscv: rvv-1.0: add vsetivli instruction
+>    target/riscv: rvv-1.0: add evl parameter to vext_ldst_us()
+>    target/riscv: rvv-1.0: add vector unit-stride mask load/store insns
+>    target/riscv: rvv-1.0: rename vmandnot.mm and vmornot.mm to vmandn.mm
+>      and vmorn.mm
+>    target/riscv: rvv-1.0: update opivv_vadc_check() comment
+>
+> Greentime Hu (1):
+>    target/riscv: rvv-1.0: add vlenb register
+>
+> Hsiangkai Wang (1):
+>    target/riscv: gdb: support vector registers for rv64 & rv32
+>
+> LIU Zhiwei (3):
+>    target/riscv: rvv-1.0: add mstatus VS field
+>    target/riscv: rvv-1.0: add sstatus VS field
+>    target/riscv: rvv-1.0: add vcsr register
+>
+>   target/riscv/cpu.c                      |   12 +-
+>   target/riscv/cpu.h                      |   85 +-
+>   target/riscv/cpu_bits.h                 |   10 +
+>   target/riscv/cpu_helper.c               |   15 +-
+>   target/riscv/csr.c                      |   92 +-
+>   target/riscv/fpu_helper.c               |   17 +-
+>   target/riscv/gdbstub.c                  |  184 ++
+>   target/riscv/helper.h                   |  435 ++-
+>   target/riscv/insn32.decode              |  294 +-
+>   target/riscv/insn_trans/trans_rvv.c.inc | 2423 +++++++++------
+>   target/riscv/internals.h                |   24 +-
+>   target/riscv/translate.c                |   74 +-
+>   target/riscv/vector_helper.c            | 3601 ++++++++++++-----------
+>   13 files changed, 4176 insertions(+), 3090 deletions(-)
+>
+> --
+> 2.25.1
+>
+>
 
