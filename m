@@ -1,66 +1,93 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcLyS-0007Rr-5Y
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 02:18:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34946)
+	id 1mcMLu-0007CQ-W1
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 02:42:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37644)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mcLyQ-0007Og-7h
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:18:14 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:43848)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mcLyK-0004vp-TM
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:18:13 -0400
-Received: by mail-io1-xd35.google.com with SMTP id y67so14875567iof.10
- for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 23:18:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nQwb1s6X3ABnl3yyNbI9DcdHj/Sva1A75rK/M92FxT0=;
- b=KkpdvLENhFoSPdP3dY1ngTCBlvX6LeV1CIRYU/7qehim4yapbjloeqMbgYW4HLJ3Z9
- Iv7qN47M2DRjUpK0BOg5qZA57nuYGSpYDwGA4dB7H8RZAQoSxR7RLN/afJz224n3tiu/
- N6TlqYubdNv+eaKluhq4pUE3PW79txUcUsbzYy0WGqzdQxqRX4zOScaOLvwj5QTQ/2Kg
- ernerElAavufWTZAox4ia/WBZ8hJgiRXgvZBPgOi6eEGJLqjpX6M4r8Qcuefn4yz8C1l
- 73eZGrFlkqO5ioXCxDqvUEPmh6aiPOlB16Z9qi6moiF1rp1sdIAZz2gPKGb2XHlRhll3
- 9S8g==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mcMLt-0007C8-VL
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:42:30 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:24966)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mcMLq-0000jK-U6
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 02:42:29 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634539345;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=/H5SnUwRwJ4dfnkbcKCW+LRynS7b30H02ffi2vo9T2c=;
+ b=CRniB51epdVER4sFLRahCBdpKU21Iq3TF5W4BO+X6JVADH0l+rAgQWKPFIs899ssybHmHb
+ jp0RZjbL5uXQyirasyLVA0IH/14fBlJAHO9rqv/Pq/ZmPE5fpKZmFcZadb+HGWYYOEAtYQ
+ +lN7MZko1Dxy6zHyVu0leCMBAODMlPs=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-461-9hBkYcxANTu9imi5-zZNPg-1; Mon, 18 Oct 2021 02:42:24 -0400
+X-MC-Unique: 9hBkYcxANTu9imi5-zZNPg-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ c1-20020a05600c0ac100b00322fcaa2bc7so937347wmr.4
+ for <qemu-riscv@nongnu.org>; Sun, 17 Oct 2021 23:42:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=nQwb1s6X3ABnl3yyNbI9DcdHj/Sva1A75rK/M92FxT0=;
- b=j8DXNCVD9OWtw8K4zL8QxQzdjkKV0V+VtP+P6HMy3BhkS7oM3aZOHE2L2yguqwaSqJ
- kmJJ0U1bfdfgKwl7b/e31V/n8QmynKF8Dp8LZod4jhn/Dl4L7xknk160oSrrIE1bgc/y
- rQD+E2dKNYwwPuMk9ccwO0Jg758xSbRB6BArLbmHW9ZE1IZE13FCZPn1x58gkfIDY2+5
- ZZbUkxc5wQsXJ1m8NP2cM50bMT2nN7Z6IQUaSmFdDXyMjtO2YvoHoK2b/Q2lW0hGUNE2
- wFOdqGMO4Kl21dgJ1qvXKkZkbenFr9JSngSLmKUIu+3XcIytU0TowidkVbebod0KpWMf
- 3bKA==
-X-Gm-Message-State: AOAM531Uwq2Zou+N6JVHdZ5nVEnGV7FFHBXHmkv2dJdHPQqUCU7BFQ7B
- LgWBdl3wcvgtZZ+ti/Y62+H5WTp/Qa2x0rxCOZsLWA==
-X-Google-Smtp-Source: ABdhPJxItrbpTMNNMXCM8CaKYsWiF2bK5+Q+AXpwsno3ZiYseXnCqt2gKJ2f42sQVXtk2VOeV5K2anpSNY0jHBBbl5s=
-X-Received: by 2002:a05:6602:2ac8:: with SMTP id
- m8mr13508176iov.112.1634537887687; 
- Sun, 17 Oct 2021 23:18:07 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=/H5SnUwRwJ4dfnkbcKCW+LRynS7b30H02ffi2vo9T2c=;
+ b=i+SKYBp2las8CxBa8F2kYz/tIU1gfw+D+bcYpG10p8EuzvEa1Hvj0RAgGv14/l4AdE
+ vOjmtqWkeaO+7NSV/AVvuVNllwwbRb46fNpVnGkEfCY7RbpJg/UoBrQdbzipmUZGaNUD
+ AN/pTv6yhYA9mazoh3UMnndE0f69sP7giUqYZp4oH1TtAoKgvmC7xvncbZUqex0FXAxK
+ jtEZfAUPl9UhQL8NAEnVjo7BEfCCHeoWMHbdPeLNC5XPGwesQlYAo+gVASDF0CQYwPru
+ rvyogZAXkXlPflzg6AvoPk+7xo07qcOohfMPgAlB/r/7ekK6A6PokD5huVYzxx8jaC7n
+ WWSg==
+X-Gm-Message-State: AOAM533mozrnEZ36kDOga5O6eOoMvYXOgMpiUuaRmpNtg9k/OI4105gX
+ 5vfu58Nc4vn6Zol95CSfCTFYvNTbNZdmbsY+FD28mwr6EZowywXrrULCvK8axsTgyt9rGhvChQI
+ v+AhbR/3j+5Zn8Oc=
+X-Received: by 2002:adf:ff86:: with SMTP id j6mr32533359wrr.59.1634539342988; 
+ Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwh088wzWtIzQczXwOP4LMDI+oKiquxEvkG1Iq73aFurMcLVyqp6vS7TsQtcsStA4FTJG92uQ==
+X-Received: by 2002:adf:ff86:: with SMTP id j6mr32533324wrr.59.1634539342689; 
+ Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
+Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id v191sm11663829wme.36.2021.10.17.23.42.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 Oct 2021 23:42:22 -0700 (PDT)
+Date: Mon, 18 Oct 2021 08:42:21 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "limingwang (A)" <limingwang@huawei.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, Bin Meng <bin.meng@windriver.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, Jiangyifei
+ <jiangyifei@huawei.com>, Alistair Francis <alistair.francis@wdc.com>,
+ "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, "Fanliang (EulerOS)"
+ <fanliang@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>, "Wubin (H)"
+ <wu.wubin@huawei.com>
+Subject: Re: [PATCH v2] hw/riscv: virt: bugfix the memory-backend-file
+ command is invalid
+Message-ID: <20211018084221.622ae711@redhat.com>
+In-Reply-To: <CAEUhbmVTs109MLog+wjnayJY++SvEPhuCKcG3xXotqySkpGAaA@mail.gmail.com>
+References: <20211012014501.24996-1-limingwang@huawei.com>
+ <CAEUhbmX=A4LPgzNgNPcxzzg=veU0=3vXyZQrwikxMFvb_Rcxzw@mail.gmail.com>
+ <c4c6cc03d1c6459ea036c08ae30806a5@huawei.com>
+ <CAEUhbmVD1jyvGJrQLSZLJYfaz6E-m0b9SZA+DQA2YYK70oL7Lg@mail.gmail.com>
+ <20211015145922.5a82e31a@redhat.com>
+ <CAEUhbmVTs109MLog+wjnayJY++SvEPhuCKcG3xXotqySkpGAaA@mail.gmail.com>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <CAKmqyKMf3QUi9HGK4rx6fJBh6_YvpPYDpf-u5pgrx6VE58ORWw@mail.gmail.com>
- <CAE_xrPgpgNT2nAsiOsV+z+VT4tRRGK6qs0mqRA13agU=TnJkHg@mail.gmail.com>
- <CAKmqyKNbqA_svmQHTpMaK8yHk6bpm1f+Bs9t2ktO4TvN4e6rUw@mail.gmail.com>
-In-Reply-To: <CAKmqyKNbqA_svmQHTpMaK8yHk6bpm1f+Bs9t2ktO4TvN4e6rUw@mail.gmail.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 18 Oct 2021 14:17:56 +0800
-Message-ID: <CAE_xrPioJ0i_xzhv8jixMsPdv4q_r6T+dgonorVUaH2_68s_8w@mail.gmail.com>
-Subject: Re: [PATCH v8 00/78] support vector extension v1.0
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="0000000000002af74f05ce9a8226"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=frank.chang@sifive.com; helo=mail-io1-xd35.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -73,114 +100,132 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Oct 2021 06:18:14 -0000
+X-List-Received-Date: Mon, 18 Oct 2021 06:42:30 -0000
 
---0000000000002af74f05ce9a8226
-Content-Type: text/plain; charset="UTF-8"
+On Mon, 18 Oct 2021 10:17:45 +0800
+Bin Meng <bmeng.cn@gmail.com> wrote:
 
-On Mon, Oct 18, 2021 at 2:12 PM Alistair Francis <alistair23@gmail.com>
-wrote:
-
-> On Mon, Oct 18, 2021 at 4:09 PM Frank Chang <frank.chang@sifive.com>
-> wrote:
+> Hi Igor,
+> 
+> On Fri, Oct 15, 2021 at 8:59 PM Igor Mammedov <imammedo@redhat.com> wrote:
 > >
-> > On Mon, Oct 18, 2021 at 2:00 PM Alistair Francis <alistair23@gmail.com>
-> wrote:
-> >>
-> >> On Fri, Oct 15, 2021 at 5:48 PM <frank.chang@sifive.com> wrote:
-> >> >
-> >> > From: Frank Chang <frank.chang@sifive.com>
-> >> >
-> >> > This patchset implements the vector extension v1.0 for RISC-V on QEMU.
-> >> >
-> >> > RVV v1.0 spec is now fronzen for public review:
-> >> > https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
-> >> >
-> >> > The port is available here:
-> >> > https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v8
-> >> >
-> >> > RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
-> >> > option to v1.0 (i.e. vext_spec=v1.0)
-> >>
-> >> It doesn't seem like this series made it to the general QEMU list. You
-> >> might want to check to see what happened there.
-> >>
+> > On Fri, 15 Oct 2021 17:25:01 +0800
+> > Bin Meng <bmeng.cn@gmail.com> wrote:
+> >  
+> > > On Fri, Oct 15, 2021 at 4:52 PM limingwang (A) <limingwang@huawei.com> wrote:  
+> > > >
+> > > >
+> > > > On Wed, Oct 13, 2021 at 22:41 PM Bin Meng <bin.meng@windriver.com> wrote:  
+> > > > >
+> > > > > On Tue, Oct 12, 2021 at 9:46 AM MingWang Li <limingwang@huawei.com> wrote:  
+> > > > > >
+> > > > > > From: Mingwang Li <limingwang@huawei.com>
+> > > > > >
+> > > > > > When I start the VM with the following command:
+> > > > > > $ ./qemu-system-riscv64 -M virt,accel=kvm -m 4096M -cpu host -nographic \
+> > > > > >     -name guest=riscv-guset \
+> > > > > >     -smp 2 \
+> > > > > >     -bios none \
+> > > > > >     -kernel ./Image \
+> > > > > >     -drive file=./guest.img,format=raw,id=hd0 \
+> > > > > >     -device virtio-blk-device,drive=hd0 \
+> > > > > >     -append "root=/dev/vda rw console=ttyS0 earlycon=sbi" \
+> > > > > >     -object  
+> > > > > memory-backend-file,id=mem,size=4096M,mem-path=/dev/hugepages,share=on \  
+> > > > > >     -numa node,memdev=mem -mem-prealloc \
+> > > > > >     -chardev socket,id=char0,path=/mnt/vhost-net0 \
+> > > > > >     -netdev type=vhost-user,id=mynet1,chardev=char0,vhostforce \
+> > > > > >     -device
+> > > > > > virtio-net-pci,mac=52:54:00:00:00:01,netdev=mynet1,mrg_rxbuf=on,csum=o
+> > > > > > n,guest_csum=on,guest_ecn=on \
+> > > > > >
+> > > > > > Then, QEMU displays the following error information:
+> > > > > > qemu-system-riscv64: Failed initializing vhost-user memory map,
+> > > > > > consider using -object memory-backend-file share=on  
+> > > > >
+> > > > > I see your command line parameters already contain "-object memory-backend-file
+> > > > > share=on", so this error message is not accurate.  
+> > > >
+> > > > QEMU uses this command to alloc fd in the "memory_region_init_ram_from_file" function
+> > > > and assigns the value of fd to mr->ram_block-fd. If the QEMU uses the default memory to
+> > > > initialize the system, the QEMU cannot obtain the fd in the "vhost_user_mem_section_filter"
+> > > > function when initializing the vhost-user. As a result, an error is reported in the "vhost_user_fill_set_mem_table_msg"
+> > > > function.
+> > > >
+> > > > Because of the above bug, even if "-object memory-backend-file share=on" is added to the command line,
+> > > > the QEMU still reports an error.  
+> > >
+> > > Yes, what I meant is that QEMU should not report such inaccurate
+> > > messages because of some random codes elsewhere.
+> > >
+> > > With current message, it suggested user use "-object
+> > > memory-backend-file share=on" in the command line, but it is already
+> > > used. So this is a false alarm. The "bug" is somewhere else.  
 > >
-> > Hi Alistair, what does "general QEMU list" mean here?
->
-> To the qemu-devel mailing list.
->
-> A good way to check is to have a look at something like patchew
-> (https://patchew.org/QEMU/) and see if the patches are there.
->
-> Alistair
->
+> > bug is in using memory_region_init_ram(),
+> > which can't possibly handle vhost-user, and can't work as expected with
+> > '-numa node,memdev' options.
+> > Before main ram infrastructure was converted to memdev,
+> > one should have used memory_region_allocate_system_memory() for
+> > allocating main RAM, so numa usecase was broken from the start.
+> > Later it old API was dropped in favor of more flexible/generic
+> > MachineState::ram approach (see commits 68a86dc15ccd..f0530f14c7c35d).  
+> 
+> Thanks for the detailed pointers.
+> 
+> I wonder if it is possible to make the error message to be clearer, so
+> instead of having
+> 
+>     "qemu-system-riscv64: Failed initializing vhost-user memory map,
+> consider using -object memory-backend-file share=on"
+> 
+> can we do:
+> 
+>     "qemu-system-riscv64: Failed initializing vhost-user memory map,
+> considering using MachineState::ram instead of manually initializing
+> RAM memory region."
+> 
+> which is more straightforward?
 
-I see...
-That's probably because I used git send-email with '--to' option:
-  'qemu-devel@nongnu.org,qemu-riscv@nongnu.org'?
+It would only make sense in context of this thread and
+give a hint to a developer how to fix bug in machine code
+but won't give a clue to the end user what's wrong with
+configuration.
 
-Regards,
-Frank Chang
+Maybe following would be better:
+ "Failed initializing vhost-user memory map, vhost requires shared system memory."
+ "See 'System Emulation::Device Emulation::Emulated Devices::vhost-user back ends'
+  chapter in QEMU manual."
 
---0000000000002af74f05ce9a8226
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+the chapter gives an example how to correctly configure vhost-user
+(albeit using old style)
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Oct 18, 2021 at 2:12 PM Alistair =
-Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmail.com</a=
->&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex">On Mon, Oct 18, 2021 at 4:09 PM Frank Chang &lt;<a =
-href=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive=
-.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; On Mon, Oct 18, 2021 at 2:00 PM Alistair Francis &lt;<a href=3D"mailto=
-:alistair23@gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrote=
-:<br>
-&gt;&gt;<br>
-&gt;&gt; On Fri, Oct 15, 2021 at 5:48 PM &lt;<a href=3D"mailto:frank.chang@=
-sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt; wrote:<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
-m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; This patchset implements the vector extension v1.0 for RISC-V=
- on QEMU.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; RVV v1.0 spec is now fronzen for public review:<br>
-&gt;&gt; &gt; <a href=3D"https://github.com/riscv/riscv-v-spec/releases/tag=
-/v1.0" rel=3D"noreferrer" target=3D"_blank">https://github.com/riscv/riscv-=
-v-spec/releases/tag/v1.0</a><br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; The port is available here:<br>
-&gt;&gt; &gt; <a href=3D"https://github.com/sifive/qemu/tree/rvv-1.0-upstre=
-am-v8" rel=3D"noreferrer" target=3D"_blank">https://github.com/sifive/qemu/=
-tree/rvv-1.0-upstream-v8</a><br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; RVV v1.0 can be enabled with -cpu option: v=3Dtrue and specif=
-y vext_spec<br>
-&gt;&gt; &gt; option to v1.0 (i.e. vext_spec=3Dv1.0)<br>
-&gt;&gt;<br>
-&gt;&gt; It doesn&#39;t seem like this series made it to the general QEMU l=
-ist. You<br>
-&gt;&gt; might want to check to see what happened there.<br>
-&gt;&gt;<br>
-&gt;<br>
-&gt; Hi Alistair, what does &quot;general QEMU list&quot; mean here?<br>
-<br>
-To the qemu-devel mailing list.<br>
-<br>
-A good way to check is to have a look at something like patchew<br>
-(<a href=3D"https://patchew.org/QEMU/" rel=3D"noreferrer" target=3D"_blank"=
->https://patchew.org/QEMU/</a>) and see if the patches are there.<br>
-<br>
-Alistair<br></blockquote><div><br></div><div>I see...</div><div>That&#39;s =
-probably because I used git send-email with &#39;--to&#39; option:</div><di=
-v>=C2=A0 &#39;<a href=3D"mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.or=
-g</a>,<a href=3D"mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a>&#3=
-9;?</div><div><br></div><div>Regards,</div><div>Frank Chang=C2=A0</div></di=
-v></div>
+ 
+> >
+> >
+> > Modulo commit message, patch looks good to me and does what
+> > every machine should do. (I though that I've converted every
+> > existing to generalized MachineState::ram but it looks like
+> > riscv was missed).  
+> 
+> Indeed all riscv boards are doing the same thing.
+> 
+> >
+> > So we can model commit message after bd457782b3b0a,
+> > and also add that the patch fixes broken -numa node,memdev case,
+> > which never properly worked. It also opens possibility to
+> > use vhost-user/virtiosf with main RAM if main RAM is
+> > provided explicitly via machine.memory-backend option
+> > with shared memory backend.
+> >
+> > Btw: is there other riscv machines that allocate RAM directly?
+> > (if yes, those should be fixed as well, a patch per machine)
+> >  
+> 
+> I will see if I can get some patches to fix other riscv machines.
+> 
+> Regards,
+> Bin
+> 
 
---0000000000002af74f05ce9a8226--
 
