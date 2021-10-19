@@ -1,47 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcqz8-0005Wf-TR
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 11:25:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54558)
+	id 1mcqzA-0005ZG-6S
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 11:25:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54514)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mcqz6-0005SM-U4
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 11:25:00 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433]:45684)
+ id 1mcqz5-0005N5-JP
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 11:24:59 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:43004)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mcqyx-0007cR-Sd
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 11:25:00 -0400
-Received: by mail-pf1-x433.google.com with SMTP id f11so199484pfc.12
- for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 08:24:51 -0700 (PDT)
+ id 1mcqyx-0007cf-AD
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 11:24:59 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ nn3-20020a17090b38c300b001a03bb6c4ebso157527pjb.1
+ for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 08:24:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=F1UFzoD53x5hfw3vlmPi31+uulj2FBxfz/+6B4SU6B8=;
- b=NIj+Wse00Hd23DEia3PGKBzDpEJqAMuf3pzKXEOQWejr9wpi+0qJEepNsx9d48/Zbl
- qaLkTjtAW/D+lO1PiT/Z4ASYhcxPx1y3eS9TeqNOpCwvP1vXrpgs1lAbpx8Z65AIOjoo
- WH3nui/3fcR6HLAjYzeGxdWDIlcdnt7sebC6rXMPQGn6WavM+qYGT15H6VkvKDtdPml8
- D5CiwhiSh6jxFtc5BVQkIbO7vElDpljN17iWC+mI2u3YxPuXSydlgW9ZCmhJZukY3dPy
- EfX4UcxoclH5BfgdwcRMsGxGLKmatZvde6CTsPz2TzrymuSn0sSY7MpRYxbWdpadXcsQ
- 8eBg==
+ bh=C1T5Mwdpts89xr8x6xmc/boxWuJ+jcHTkvFs44ULios=;
+ b=J3KFDQO1KWZxlGH+bunHXaCllB6INBYMD4w5rvMHeBxIFMOG+xBAf7CIVCvEKY6E2O
+ 14nBm0C0t9uYhnn/d2HeXxe33YE4ZYxyRX/qTnkHb2VcjyNtqAIizDkXiFZHS+uPO4DV
+ XTsftCzlcs//1CXBxnx9PcaHqqXnvcLtUFtRC6BJg6D4APK/EGkOblsyVB/YUmyXv9Ii
+ wepIZGFKNlbpR2pqlmGwxO3W/tksbkpLAsIz82mFPMDwJoF6nIMPOErLVJLMy3uLwFSp
+ Yje99U8ngsuDGXgA3HwKNq6q/UXTChNsqmyyEiGTFrsuZXKr6Ciaq3qdxPBabZwsK2P8
+ TRFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=F1UFzoD53x5hfw3vlmPi31+uulj2FBxfz/+6B4SU6B8=;
- b=HAwl212wRruC5t7L6vZwexL1dvKDGwE89TDEndTr3YtJ11sRzTq20E9zTjsIYBtTI+
- jY2Qmaj339SDbXejq23PDKjP32f1mvcF1JGLMwK0S9JXyEI2vThNSEb+ov+MKoDRvdtK
- ZgIMJJS2FLLHgLISSrOlO5RjTvYnri+tUd7HA30JtIElIMwATN5wiM+MiPyI/gHqzS6q
- lEsLbFts0Mzj/kocrw8vTbEMfB5l+cIj5ZUxpd1SYJlhdnFmUEGVh2AQ4ITI0SUzZiQJ
- J71SXljIbOtK2zWThs5ohs0XvLpY9hFwoDukYwYNpI9qkxWv3l1u3TA2w5xK702WhOgX
- Xsuw==
-X-Gm-Message-State: AOAM531SRvPGWj1GGkZEy3Ptby/pbHWkHCmLfZgZnNW3RhEjc0w9/oD3
- WRcAAJLqKntK8bYZm5WRqq4KcA==
-X-Google-Smtp-Source: ABdhPJwCldF/J4VanfevOksShgHh4HC9CFpe3Slw5EQe7nTmRw6WAHXQHQ6PJ12td1LXZ4VQC8JwYQ==
-X-Received: by 2002:a62:e90d:0:b0:44d:35a1:e5a0 with SMTP id
- j13-20020a62e90d000000b0044d35a1e5a0mr518558pfh.54.1634657089311; 
+ bh=C1T5Mwdpts89xr8x6xmc/boxWuJ+jcHTkvFs44ULios=;
+ b=U4TqKCDOyruCg99srDGmu6dYGZwAN2jEjVyLTcRzG4ID+DYCwRpfFKKD18YVg3EwfY
+ +gVJvqIowAFvXKbAq+88065sWWxZmMMBowRrSpBJ2wTWjlMr4Eq5RpYZd4kYPoQZ/7MY
+ bFuB0yEjHCEhc1EbkHj7wNPM1PgbjmG6cT8hrhiFUfCRuFb9MNKMhvzfV1xG1xzJJboR
+ cJBt/bVZBTPPgo7RLrh0H/f4otTQHHTrHQvLxPEx+Yog9VjDuDzyAfe8ri1ixW0Gg1ku
+ qzCZ+rtwBaT0hPE+XLxeURzFoKxeHHoUEdPS2VfZy+kCXCX9E1L9fpW/6UMqcrr4QqoK
+ FdGA==
+X-Gm-Message-State: AOAM531EYppru4fKgrQs693j9bnW/HdGf95eVTRv9dIQlGidpziSt7sg
+ XNswWWKlsltfDLEq+PmLcTnBbQ==
+X-Google-Smtp-Source: ABdhPJy3dwfc0/pB1cMx/xXpD+YGgW1wHJt1J+HGgaKSrY7+LVUgXmZF1LTtmAXeftG6/6UdPVb0sA==
+X-Received: by 2002:a17:90b:33cb:: with SMTP id
+ lk11mr649144pjb.0.1634657089914; 
  Tue, 19 Oct 2021 08:24:49 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id i2sm3293814pjt.19.2021.10.19.08.24.48
+ by smtp.gmail.com with ESMTPSA id i2sm3293814pjt.19.2021.10.19.08.24.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 19 Oct 2021 08:24:49 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
@@ -49,16 +50,16 @@ To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	alistair.francis@wdc.com,
 	zhiwei_liu@c-sky.com
-Subject: [PATCH v5 14/16] target/riscv: Align gprs and fprs in cpu_dump
-Date: Tue, 19 Oct 2021 08:24:36 -0700
-Message-Id: <20211019152438.269077-15-richard.henderson@linaro.org>
+Subject: [PATCH v5 15/16] target/riscv: Use riscv_csrrw_debug for cpu_dump
+Date: Tue, 19 Oct 2021 08:24:37 -0700
+Message-Id: <20211019152438.269077-16-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211019152438.269077-1-richard.henderson@linaro.org>
 References: <20211019152438.269077-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,48 +79,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 15:25:01 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 15:25:00 -0000
 
-Allocate 8 columns per register name.
+Use the official debug read interface to the csrs,
+rather than referencing the env slots directly.
+Put the list of csrs to dump into a table.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c | 90 +++++++++++++++++++++++-----------------------
+ 1 file changed, 46 insertions(+), 44 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4e1920d5f0..f352c2b74c 100644
+index f352c2b74c..3454b19c17 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -240,7 +240,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         qemu_fprintf(f, " %s %d\n", "V      =  ", riscv_cpu_virt_enabled(env));
+@@ -241,52 +241,54 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
      }
  #endif
--    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
-+    qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n", "pc", env->pc);
+     qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n", "pc", env->pc);
++
  #ifndef CONFIG_USER_ONLY
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", (target_ulong)env->mstatus);
-@@ -290,15 +290,16 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", (target_ulong)env->mstatus);
+-    if (riscv_cpu_mxl(env) == MXL_RV32) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ",
+-                     (target_ulong)(env->mstatus >> 32));
++    {
++        static const int dump_csrs[] = {
++            CSR_MHARTID,
++            CSR_MSTATUS,
++            CSR_MSTATUSH,
++            CSR_HSTATUS,
++            CSR_VSSTATUS,
++            CSR_MIP,
++            CSR_MIE,
++            CSR_MIDELEG,
++            CSR_HIDELEG,
++            CSR_MEDELEG,
++            CSR_HEDELEG,
++            CSR_MTVEC,
++            CSR_STVEC,
++            CSR_VSTVEC,
++            CSR_MEPC,
++            CSR_SEPC,
++            CSR_VSEPC,
++            CSR_MCAUSE,
++            CSR_SCAUSE,
++            CSR_VSCAUSE,
++            CSR_MTVAL,
++            CSR_STVAL,
++            CSR_HTVAL,
++            CSR_MTVAL2,
++            CSR_MSCRATCH,
++            CSR_SSCRATCH,
++            CSR_SATP,
++        };
++
++        for (int i = 0; i < ARRAY_SIZE(dump_csrs); ++i) {
++            int csrno = dump_csrs[i];
++            target_ulong val = 0;
++            RISCVException res = riscv_csrrw_debug(env, csrno, &val, 0, 0);
++
++            /*
++             * Rely on the smode, hmode, etc, predicates within csr.c
++             * to do the filtering of the registers that are present.
++             */
++            if (res == RISCV_EXCP_NONE) {
++                qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
++                             csr_ops[csrno].name, val);
++            }
++        }
+     }
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+-                     (target_ulong)env->vsstatus);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hedeleg ", env->hedeleg);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtvec   ", env->mtvec);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stvec   ", env->stvec);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vstvec  ", env->vstvec);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mepc    ", env->mepc);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sepc    ", env->sepc);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsepc   ", env->vsepc);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mcause  ", env->mcause);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "scause  ", env->scause);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vscause ", env->vscause);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval   ", env->mtval);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval   ", env->stval);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "satp    ", env->satp);
  #endif
  
      for (i = 0; i < 32; i++) {
--        qemu_fprintf(f, " %s " TARGET_FMT_lx,
-+        qemu_fprintf(f, " %-8s " TARGET_FMT_lx,
-                      riscv_int_regnames[i], env->gpr[i]);
-         if ((i & 3) == 3) {
-             qemu_fprintf(f, "\n");
-         }
-     }
-+
-     if (flags & CPU_DUMP_FPU) {
-         for (i = 0; i < 32; i++) {
--            qemu_fprintf(f, " %s %016" PRIx64,
-+            qemu_fprintf(f, " %-8s %016" PRIx64,
-                          riscv_fpr_regnames[i], env->fpr[i]);
-             if ((i & 3) == 3) {
-                 qemu_fprintf(f, "\n");
 -- 
 2.25.1
 
