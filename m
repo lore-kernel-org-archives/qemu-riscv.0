@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mctQ1-0003yf-Rl
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 14:00:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35322)
+	id 1mcte9-0007ww-Fh
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 14:15:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mctPe-0003uD-FK
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 14:00:40 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:42542)
+ id 1mcte2-0007uZ-PB
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 14:15:28 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:38657)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mctPa-0005UX-Qx
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 14:00:33 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id t7so5646193pgl.9
- for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 11:00:29 -0700 (PDT)
+ id 1mcte1-0007QW-32
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 14:15:26 -0400
+Received: by mail-pl1-x629.google.com with SMTP id i5so8019824pla.5
+ for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 11:15:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Joj/MMQCJaT/OBBlinwxbo5ywrUF7wxfIn46ek4vt2Q=;
- b=BKqb5gINffgDiX6Rddo0aNbkZlKRxcf5FK4IOsym7t1BtMHvdeb9jsD2p319FX4hHs
- 2satEDpOSzQ8CvGBHOMUhiBYExKUL6se6EmDhAmHqO+As689E8dqFNj6gsjDVdrhvoF9
- fmg4fiPubTivUoN104ohS6MMw+Sn5KJpyWHNe2emF5kLHI7gUxn8GtqqC8C8j45aCFTK
- D+BJlQtIyOpjY1i+8gvaLUAxfxPPhy8r+++oQ3q8j4YmQBV5Bt9yyf+yS6JQcjGgwp0I
- pldP6hz75D+7EE/JOYGAEGBbWuGeF4Phe5YPCSEiO8D4dFOEi0iSNSMFpe6fF0PRbn4L
- CI0w==
+ bh=tKtw1luCR8dSI1/pd7ZoPa/fHQaXWEMaBGh/9sEqzZg=;
+ b=VB9q/b6LO8w6YrW9CGCMY0wc3U0HHmA00b5K+z1ees7LLQzUcrGsndZC1SbloxjS6q
+ 0k+8cGRRWa4fNnF9S5TPsvIbpEU8RNNRjW/zYowWedKISMC6V0FPF3YJ13R8fvITM1BU
+ 4hxhz4dwWWSYs9xKn6PGTjDo5tKxFICOVryAKe0KZfNunSrg7l7APxpDgcJH6e9WfWM1
+ jk5IDubxkjXzD/JOj8yDu2V35Vn9dMX8pveFABYO0qw7Lrh+YAskESQbbnrzu3U7BqmB
+ oRTHoLPmdtHBN/p9H4P0dhRkM57BwesheFBJ3dJmCXi9263VLCk+ODislXE3yjnoUTAt
+ 7xkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Joj/MMQCJaT/OBBlinwxbo5ywrUF7wxfIn46ek4vt2Q=;
- b=pdS8RaKckFfJpoes85Whtu/O8PJ2iBgFYZqbIdoCR60bFQz5Us95p5fybvrE4xYpYD
- CovI2F6IDaHNDajjrRCtSHrf0A+dhAQRWBAWpaySzFzIl79migoW+pJ5PAlELqOTK291
- 3fvbn5E/o9RGTIuyjo6RbB66LoSZqxs2ct1XXVhQiYEpNKlEVZEd+TmMl+evkZ1xEVXt
- PNMicwupNdpPPHc6IAVSugIvDhbXtcMpIJEm3BTWPdUmJcTCpyEm6tOe+NeHAtCAoHAi
- KkQ57zw68pd8CywbvR5iQmYVgs87BsY1xYnYm7/toG2dmeL630pdLzdDzREKtI+h8yew
- j1Yg==
-X-Gm-Message-State: AOAM531kkxCvCmOlpo77JnnRy5eRX0drp0MoHMtq8inHloB9z8ZQWmak
- G7Dko4ec2+NYJZfN93UWEdGe+A==
-X-Google-Smtp-Source: ABdhPJwsp6+fRdmg35p9d4Vz4wff+ldkQwCdxL92j128pk3L2rx5r0EfiUuBn3vM/716Sb5A0gwh5A==
-X-Received: by 2002:a63:7402:: with SMTP id p2mr29860041pgc.472.1634666428389; 
- Tue, 19 Oct 2021 11:00:28 -0700 (PDT)
+ bh=tKtw1luCR8dSI1/pd7ZoPa/fHQaXWEMaBGh/9sEqzZg=;
+ b=AqvkZMfUplAccuvyK7bf8g2si0jRvU1hWTt3wVcA/aUnpT50/eRlUKKMXrIoDUc43+
+ QvEBt8qdlCvroDkeG+/9b6NxQZS31D89yXngla4r3++26CM96NTGxZHHU8tAxHEGUDOU
+ Jt/EkqfS5D1KE856Sndsf0TxumIrXhmxRkTJOZwHcI4IKowVoWmexhB6vL//2PJQeqYC
+ yiUFbrVK2UAG/WA1Nc4VqEOwRUHYIiclEO7Yi1gNZNA9VEoi+igmYMet6LMkhRgF7l9k
+ sjyDR1CUz0Nloa/9WDdWxqQReVmstipC7RXT0GQFHOXbckwchQAEEA45FrKvGanl1E42
+ 6KxQ==
+X-Gm-Message-State: AOAM530WzbyKl7OfoCUnUPEQof/BZqx72B/RZGJlRFi4DrtyiOR6UO6o
+ L7A4bqURusq/nzua8qV+S+f8RQ==
+X-Google-Smtp-Source: ABdhPJwTPq4RGfzg6U/f5C4xyR3EU1ryOwYQQ78OtowOyqKK8kFu1eF4WNgolpwwPmM3g7LLMlqWGg==
+X-Received: by 2002:a17:903:32cf:b0:13f:d59:7a4c with SMTP id
+ i15-20020a17090332cf00b0013f0d597a4cmr34885202plr.78.1634667322333; 
+ Tue, 19 Oct 2021 11:15:22 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id l4sm5749860pfu.101.2021.10.19.11.00.27
+ by smtp.gmail.com with ESMTPSA id f15sm16881675pfq.193.2021.10.19.11.15.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Oct 2021 11:00:28 -0700 (PDT)
-Subject: Re: [PATCH v3 02/21] memory: add a few defines for octo (128-bit)
- values
+ Tue, 19 Oct 2021 11:15:21 -0700 (PDT)
+Subject: Re: [PATCH v3 03/21] Int128.h: addition of a few 128-bit operations
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
  palmer@dabbelt.com, fabien.portas@grenoble-inp.org
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211019094812.614056-3-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211019094812.614056-4-frederic.petrot@univ-grenoble-alpes.fr>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <4b735c47-c845-d831-12f3-a8a3a17c0eaa@linaro.org>
-Date: Tue, 19 Oct 2021 11:00:26 -0700
+Message-ID: <a3f382c4-5799-4dad-43d9-d07b5a46efcc@linaro.org>
+Date: Tue, 19 Oct 2021 11:15:20 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211019094812.614056-3-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211019094812.614056-4-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -84,49 +84,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 18:00:46 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 18:15:29 -0000
 
 On 10/19/21 2:47 AM, Frédéric Pétrot wrote:
-> Introducing unsigned quad, signed quad, and octo accesses types
-> to handle load and store by 128-bit processors.
-> 
-> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> ---
->   include/exec/memop.h | 8 +++++++-
->   1 file changed, 7 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/exec/memop.h b/include/exec/memop.h
-> index c554bb0ee8..476ea6cdae 100644
-> --- a/include/exec/memop.h
-> +++ b/include/exec/memop.h
-> @@ -85,10 +85,13 @@ typedef enum MemOp {
->       MO_UB    = MO_8,
->       MO_UW    = MO_16,
->       MO_UL    = MO_32,
-> +    MO_UQ    = MO_64,
->       MO_SB    = MO_SIGN | MO_8,
->       MO_SW    = MO_SIGN | MO_16,
->       MO_SL    = MO_SIGN | MO_32,
-> -    MO_UQ     = MO_64,
-> +    MO_SQ    = MO_SIGN | MO_64,
-> +    MO_Q     = MO_64,
-> +    MO_O     = MO_128,
+> +static inline void divrem128(uint64_t ul, uint64_t uh,
+> +                             uint64_t vl, uint64_t vh,
+> +                             uint64_t *ql, uint64_t *qh,
+> +                             uint64_t *rl, uint64_t *rh)
 
-There's no point in removing MO_Q in one patch and adding it back in the next.  And I 
-guess we might as well name MO_O to MO_UO now.
+I think we should move all of the division implementation out of the header; this is 
+really much too large to inline.
 
-> @@ -105,9 +108,12 @@ typedef enum MemOp {
->   #ifdef NEED_CPU_H
->       MO_TEUW  = MO_TE | MO_UW,
->       MO_TEUL  = MO_TE | MO_UL,
-> +    MO_TEUQ  = MO_TE | MO_UQ,
->       MO_TESW  = MO_TE | MO_SW,
->       MO_TESL  = MO_TE | MO_SL,
->       MO_TEQ   = MO_TE | MO_UQ,
-> +    MO_TESQ  = MO_TE | MO_SQ,
+I think util/int128.c would be a reasonable place.
 
-These should have been renamed at the same time as MO_Q.  Though it seems you are missing 
-a rename of these throughout target/?  Surely this patch does not build as-is.
+That said, why are you splitting the Int128 apart to pass as pieces here?  Seems like 
+passing the Int128 and doing the split inside would make more sense.
+
+> +        /* never happens, but makes gcc shy */
+> +        n = 0;
+
+Then g_assert_not_reached(), or change the previous if to an assert.
+
+Hmm, it's not "never happens" so much as "divide by zero".
+Please update the comment accordingly.
+
+> +        if (r != NULL) {
+> +            r[0] = k;
+> +        }
+
+r is a local array; useless check for null.
+
+> +        s = clz32(v[n - 1]); /* 0 <= s <= 32 */
+> +        if (s != 0) {
+> +            for (i = n - 1; i > 0; i--) {
+> +                vn[i] = ((v[i] << s) | (v[i - 1] >> (32 - s)));
+> +            }
+> +            vn[0] = v[0] << s;
+> +
+> +            un[m] = u[m - 1] >> (32 - s);
+> +            for (i = m - 1; i > 0; i--) {
+> +                un[i] = (u[i] << s) | (u[i - 1] >> (32 - s));
+> +            }
+> +            un[0] = u[0] << s;
+
+Why are you shifting the 128-bit value in 4 parts, rather than letting int128_lshift do 
+the job?
 
 
 r~
