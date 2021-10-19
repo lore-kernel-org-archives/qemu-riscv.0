@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcljR-0000HU-Mh
+	id 1mcljR-0000IL-UQ
 	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:48:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58496)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58498)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljP-0000Fr-L5; Tue, 19 Oct 2021 05:48:27 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54608)
+ id 1mcljP-0000Fz-T6; Tue, 19 Oct 2021 05:48:27 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54652)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljN-0006Q3-Lp; Tue, 19 Oct 2021 05:48:27 -0400
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5289D41BB2;
+ id 1mcljO-0006Qp-4D; Tue, 19 Oct 2021 05:48:27 -0400
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9C5DB41F6E;
  Tue, 19 Oct 2021 11:48:22 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 39E5D601E3;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 8233E601D5;
  Tue, 19 Oct 2021 11:48:22 +0200 (CEST)
 Received: from palmier.u-ga.fr (palmier.tima.u-ga.fr [147.171.132.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 1BD8514005A;
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 64FAF14005A;
  Tue, 19 Oct 2021 11:48:22 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
@@ -33,9 +33,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 02/21] memory: add a few defines for octo (128-bit) values
-Date: Tue, 19 Oct 2021 11:47:53 +0200
-Message-Id: <20211019094812.614056-3-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v3 04/21] target/riscv: additional macros to check instruction
+ support
+Date: Tue, 19 Oct 2021 11:47:55 +0200
+Message-Id: <20211019094812.614056-5-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -67,46 +68,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 19 Oct 2021 09:48:28 -0000
 
-Introducing unsigned quad, signed quad, and octo accesses types
-to handle load and store by 128-bit processors.
+Given that the 128-bit version of the riscv spec adds new instructions, and
+that some instructions that were previously only available in 64-bit mode
+are now available for both 64-bit and 128-bit, we added new macros to check
+for the processor mode during translation.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- include/exec/memop.h | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ target/riscv/translate.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/include/exec/memop.h b/include/exec/memop.h
-index c554bb0ee8..476ea6cdae 100644
---- a/include/exec/memop.h
-+++ b/include/exec/memop.h
-@@ -85,10 +85,13 @@ typedef enum MemOp {
-     MO_UB    = MO_8,
-     MO_UW    = MO_16,
-     MO_UL    = MO_32,
-+    MO_UQ    = MO_64,
-     MO_SB    = MO_SIGN | MO_8,
-     MO_SW    = MO_SIGN | MO_16,
-     MO_SL    = MO_SIGN | MO_32,
--    MO_UQ     = MO_64,
-+    MO_SQ    = MO_SIGN | MO_64,
-+    MO_Q     = MO_64,
-+    MO_O     = MO_128,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 35245aafa7..121fcd71fe 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -350,6 +350,24 @@ EX_SH(12)
+     }                              \
+ } while (0)
  
-     MO_LEUW  = MO_LE | MO_UW,
-     MO_LEUL  = MO_LE | MO_UL,
-@@ -105,9 +108,12 @@ typedef enum MemOp {
- #ifdef NEED_CPU_H
-     MO_TEUW  = MO_TE | MO_UW,
-     MO_TEUL  = MO_TE | MO_UL,
-+    MO_TEUQ  = MO_TE | MO_UQ,
-     MO_TESW  = MO_TE | MO_SW,
-     MO_TESL  = MO_TE | MO_SL,
-     MO_TEQ   = MO_TE | MO_UQ,
-+    MO_TESQ  = MO_TE | MO_SQ,
-+    MO_TEO   = MO_TE | MO_O,
- #endif
- 
-     MO_SSIZE = MO_SIZE | MO_SIGN,
++#define REQUIRE_128BIT(ctx) do {   \
++    if (get_xl(ctx) < MXL_RV128) { \
++        return false;              \
++    }                              \
++} while (0)
++
++#define REQUIRE_32_OR_64BIT(ctx) do { \
++    if (get_xl(ctx) == MXL_RV128) {   \
++        return false;                 \
++    }                                 \
++} while (0)
++
++#define REQUIRE_64_OR_128BIT(ctx) do { \
++    if (get_xl(ctx) == MXL_RV32) {     \
++        return false;                  \
++    }                                  \
++} while (0)
++
+ static int ex_rvc_register(DisasContext *ctx, int reg)
+ {
+     return 8 + reg;
 -- 
 2.33.0
 
