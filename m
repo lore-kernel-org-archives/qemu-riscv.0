@@ -1,68 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mccZm-0005ME-J0
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 20:01:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43450)
+	id 1mcd88-0008BI-PT
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 20:37:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47962)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mccZS-00051y-My
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:35 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:42837)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mcd86-0008AU-Lf; Mon, 18 Oct 2021 20:37:22 -0400
+Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:41524)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mccZF-0001ll-IP
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:34 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id t7so3263686pgl.9
- for <qemu-riscv@nongnu.org>; Mon, 18 Oct 2021 17:01:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=E6ifnB9fQVtM5sdP3JDCZC+MLNkcLrpq6cl5OiAtX44=;
- b=R/RMLEBfZY7ivGnrhUt5U55HvG/Zvrqwz0Qr/B9wTuKeWczvvllYcSdOhBg6qd06KE
- Qkg1kuECc0MH3lAvpFYhVAu2tYRIa+NrZTj+KslKqmwwQrrXrnihqMib3ADFqKJm1Vnu
- 0nK2dq70TkwObe8jnSYd8rV/2zF6i5CnqS8Vev4gbzeDkjBaUgsaeQ9l+1Avxs6yf4qL
- yc8Cg95t438ylIBLRoPPr/bN+aoVw5icWqkuLTO3h9YAVGbbOtbySz7tYN3idasrsGjk
- fVS7Q73eW2KkCIbN7AAwoBAheecp0Wd8xTHQ7UzMlblvqpwk2eGd+jEODpxDYCnKetTy
- lLTA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mcd85-00014n-0s; Mon, 18 Oct 2021 20:37:22 -0400
+Received: by mail-io1-xd31.google.com with SMTP id b188so13498735iof.8;
+ Mon, 18 Oct 2021 17:37:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=Zv+uYias9p3F1MI0WRzZJpOFHCV3Aroe2y85IEB5qS8=;
+ b=RZyRPqEdXMyTORYh83mkW5D5Uhjrxe7/RPYr6gPqhEKJIS73Qa5rvWdnsoe0m3eXUR
+ nFoIHlyCqbl74ySZ0wlGy/kYu/TbWxJM8liAchC30W0GX71XC2XCgebBuP1i+1k0X0gF
+ /UiBhE/8SVZ8Zo9kcEcL/Lt2ZeLr69cFJxKYeGrZLOsB0rMPSDxQu3uSUhp1a2dz4Vam
+ cp6e8m2Xjghlv/IamXcG6hmqgZcBMO6heg2vNZFOPRTDEgZa2ui0cw+fh1gWUKRxuKor
+ WoA/eeR80JXOCGtwTnKXgmeSBLYP7Xi47X95gsMcC437GRiiwFwyfwzkteqteYDq1hsE
+ sloQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=E6ifnB9fQVtM5sdP3JDCZC+MLNkcLrpq6cl5OiAtX44=;
- b=pjrHXWWw2kK0I5D8RUb3uvmrDf5IDKzln++Pw4U3AIv+wSMHZXC9X37dgyUzd4NUUd
- XXDKmIDjsbOAZ3h1YvoTSSUaPUzzb116ybPiFomJKoKJNbnKMdGyZfuPvL2bYiFrOxk+
- k25zidaKdqTBxaDTo41CzYc66SjkGAt5tDSppU/EAsg13dShAigx6Ypr7Jqnu8ge4GPy
- vu8vrThknnUfOvT12ihdRz5wCh6B7r9D8P+oC2yCfn/GTU0rlCSlZ4kwuXTinY8etENO
- 6p8BHgZfFFdF1vtm6I99AY+m+7rjj+sxxOxspt+wi42CxOS8eh2dy+KcfKVoNL14WzAi
- syGA==
-X-Gm-Message-State: AOAM533GgwFIAYBkKRTPAFdORGkKXok77DBZ0n93ZfZZSid7giCdb1C1
- 0D2Goswa1knhnuudpopOyLcK6g==
-X-Google-Smtp-Source: ABdhPJz3S8Y0Tvl3k2JMQGn+XA3NhkUagk92LKImr6yY77KnloJcXA4RTWnF/mnwz/kFxx3TJ0d12A==
-X-Received: by 2002:a63:e115:: with SMTP id z21mr26245263pgh.306.1634601680030; 
- Mon, 18 Oct 2021 17:01:20 -0700 (PDT)
-Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id q14sm3068220pfk.3.2021.10.18.17.01.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Oct 2021 17:01:19 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
-	alistair.francis@wdc.com,
-	zhiwei_liu@c-sky.com
-Subject: [PATCH v4 14/16] target/riscv: Align gprs and fprs in cpu_dump
-Date: Mon, 18 Oct 2021 17:01:06 -0700
-Message-Id: <20211019000108.3678724-15-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211019000108.3678724-1-richard.henderson@linaro.org>
-References: <20211019000108.3678724-1-richard.henderson@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=Zv+uYias9p3F1MI0WRzZJpOFHCV3Aroe2y85IEB5qS8=;
+ b=7mM0d7glcLG9zSXCZQgB0qoiW8GUoGpiSuAFb4rlXd4zSp07MHB/AOXcrmutwZqCUW
+ ufSVNymH3bKd9ZUhA+n3lUFUZDpqQr8ujT3oFflyJX/U6LbPiVUdoKGuVPKn3so8b77O
+ E8dXHKMUe35mOrq8dkzgh7HG/mUskbs3YJv4edp+5OnZuQitDT0vvALJllI24hGzC6x9
+ DNzzZnDrAJt/h4eZR9ooXNPaKoJBPQmp8MJ4GhrTjcBnRQ50u+oieEJ4W4aQ827coRV8
+ 0As6+99UoR/4pbxSlC0WZ/Emg7c2nX4UaJh9h8032QQApTsYEH5tYeAEzKqPDcjkfOhE
+ Y0CQ==
+X-Gm-Message-State: AOAM530rNUD6k2HeLlf/2pUHKPnND2NCT6+Rdt58drDAx7M/V07Wiyu4
+ iu7wxtXHmKlAR0Jm/O/ohYY7BccClvJ40d61rVg=
+X-Google-Smtp-Source: ABdhPJxjTZwFpNdg380DyjNjInDbRowiEfwCEW0d0B7Py5R8cIqWVUe407LFzUfBDy8vuPFYnZlZAhVe0oepC/8moY0=
+X-Received: by 2002:a02:a786:: with SMTP id e6mr1921950jaj.117.1634603839119; 
+ Mon, 18 Oct 2021 17:37:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <f4d8a7a035f39c0a35d44c1e371c5c99cc2fa15a.1634531504.git.alistair.francis@wdc.com>
+ <f6ab317d-86f4-9ad0-c108-0705593be3d9@amsat.org>
+In-Reply-To: <f6ab317d-86f4-9ad0-c108-0705593be3d9@amsat.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 Oct 2021 10:36:53 +1000
+Message-ID: <CAKmqyKNOTZeXhoyi+w+GEPUPGAKTiy9+rQ0aEPye=YZU4FVfTw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/2] target/riscv: Remove some unused macros
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -77,48 +75,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 00:01:41 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 00:37:23 -0000
 
-Allocate 8 columns per register name.
+On Mon, Oct 18, 2021 at 7:30 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
+>
+> On 10/18/21 06:32, Alistair Francis wrote:
+> > From: Alistair Francis <alistair.francis@wdc.com>
+>
+> Possible commit description:
+>
+>  Since commit 1a9540d1f1a ("target/riscv: Drop support for ISA
+>  spec version 1.09.1") these definitions are unused, remove them.
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Thanks, added.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4e1920d5f0..f352c2b74c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -240,7 +240,7 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
-         qemu_fprintf(f, " %s %d\n", "V      =  ", riscv_cpu_virt_enabled(env));
-     }
- #endif
--    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "pc      ", env->pc);
-+    qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n", "pc", env->pc);
- #ifndef CONFIG_USER_ONLY
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
-     qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", (target_ulong)env->mstatus);
-@@ -290,15 +290,16 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
- #endif
- 
-     for (i = 0; i < 32; i++) {
--        qemu_fprintf(f, " %s " TARGET_FMT_lx,
-+        qemu_fprintf(f, " %-8s " TARGET_FMT_lx,
-                      riscv_int_regnames[i], env->gpr[i]);
-         if ((i & 3) == 3) {
-             qemu_fprintf(f, "\n");
-         }
-     }
-+
-     if (flags & CPU_DUMP_FPU) {
-         for (i = 0; i < 32; i++) {
--            qemu_fprintf(f, " %s %016" PRIx64,
-+            qemu_fprintf(f, " %-8s %016" PRIx64,
-                          riscv_fpr_regnames[i], env->fpr[i]);
-             if ((i & 3) == 3) {
-                 qemu_fprintf(f, "\n");
--- 
-2.25.1
+>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu_bits.h | 8 --------
+> >  1 file changed, 8 deletions(-)
+>
+> BTW I strongly suggest you to use git-publish for your
+> series / pull requests:
+>
+>   https://github.com/stefanha/git-publish
 
+Cool! I'll check it out.
+
+Alistair
+
+>
+> Regards,
+>
+> Phil.
 
