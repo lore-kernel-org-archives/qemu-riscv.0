@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mclju-000154-0Z
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:48:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58802)
+	id 1mcljv-0001C7-J8
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:48:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58800)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljq-0000rA-RI; Tue, 19 Oct 2021 05:48:54 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54848)
+ id 1mcljq-0000pi-Gc; Tue, 19 Oct 2021 05:48:54 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54846)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljo-0006YD-9J; Tue, 19 Oct 2021 05:48:54 -0400
+ id 1mcljn-0006YC-CX; Tue, 19 Oct 2021 05:48:54 -0400
 Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id CEF0E4202A;
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id A0F3A42023;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id B48A0601D5;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 8B6BC601D5;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 Received: from palmier.u-ga.fr (palmier.tima.u-ga.fr [147.171.132.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 8F03D14005D;
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 66E6314005A;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
@@ -33,9 +33,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 12/21] target/riscv: support for 128-bit U-type instructions
-Date: Tue, 19 Oct 2021 11:48:03 +0200
-Message-Id: <20211019094812.614056-13-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v3 11/21] target/riscv: support for 128-bit bitwise
+ instructions
+Date: Tue, 19 Oct 2021 11:48:02 +0200
+Message-Id: <20211019094812.614056-12-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -67,58 +68,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 19 Oct 2021 09:48:55 -0000
 
-Adding the 128-bit version of lui and auipc.
+The 128-bit bitwise instructions do not need any function prototype change
+as the functions can be applied independently on the lower and upper part of
+the registers.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ target/riscv/translate.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 92f41f3a86..b5e292a2aa 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -26,14 +26,17 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index e8f08f921e..71982f6284 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -429,6 +429,17 @@ static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a, DisasExtend ext,
  
- static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
- {
--     REQUIRE_64BIT(ctx);
--     return trans_illegal(ctx, a);
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return trans_illegal(ctx, a);
- }
+     gen_set_gpr(ctx, a->rd, dest);
  
- static bool trans_lui(DisasContext *ctx, arg_lui *a)
- {
-     if (a->rd != 0) {
-         tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
-+        if (get_xl_max(ctx) == MXL_RV128) {
-+            tcg_gen_movi_tl(cpu_gprh[a->rd], -(a->imm < 0));
++    if (get_xl_max(ctx) == MXL_RV128) {
++        if (get_ol(ctx) ==  MXL_RV128) {
++            uint64_t immh = -(a->imm < 0);
++            src1 = get_gprh(ctx, a->rs1);
++            dest = dest_gprh(ctx, a->rd);
++
++            func(dest, src1, immh);
 +        }
-     }
++        gen_set_gprh(ctx, a->rd, dest);
++    }
++
      return true;
  }
-@@ -41,7 +44,19 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
- static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
- {
-     if (a->rd != 0) {
-+        if (get_xl_max(ctx) == MXL_RV128) {
-+            /* TODO : when pc is 128 bits, use all its bits */
-+            TCGv pc = tcg_constant_tl(ctx->base.pc_next),
-+                 imml = tcg_constant_tl(a->imm),
-+                 immh = tcg_constant_tl(-(a->imm < 0)),
-+                 zero = tcg_constant_tl(0);
-+            tcg_gen_add2_tl(cpu_gpr[a->rd], cpu_gprh[a->rd],
-+                            pc, zero,
-+                            imml, immh);
-+            return true;
+ 
+@@ -443,6 +454,17 @@ static bool gen_logic(DisasContext *ctx, arg_r *a, DisasExtend ext,
+ 
+     gen_set_gpr(ctx, a->rd, dest);
+ 
++    if (get_xl_max(ctx) == MXL_RV128) {
++        if (get_ol(ctx) ==  MXL_RV128) {
++            dest = dest_gprh(ctx, a->rd);
++            src1 = get_gprh(ctx, a->rs1);
++            src2 = get_gprh(ctx, a->rs2);
++
++            func(dest, src1, src2);
 +        }
-         tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
-+        return true;
-     }
++        gen_set_gprh(ctx, a->rd, dest);
++    }
++
      return true;
  }
+ 
 -- 
 2.33.0
 
