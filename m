@@ -1,29 +1,29 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mclk3-0001ib-Cq
+	id 1mclk3-0001kl-QU
 	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:49:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58960)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58888)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mclk0-0001Wz-Um; Tue, 19 Oct 2021 05:49:04 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:55098)
+ id 1mcljx-0001KU-QD; Tue, 19 Oct 2021 05:49:01 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54936)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljx-0006jI-Sp; Tue, 19 Oct 2021 05:49:04 -0400
+ id 1mcljs-0006cw-0B; Tue, 19 Oct 2021 05:49:01 -0400
 Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5DBCA420B5;
- Tue, 19 Oct 2021 11:48:40 +0200 (CEST)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 61FB041F73;
+ Tue, 19 Oct 2021 11:48:34 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 4455D601D6;
- Tue, 19 Oct 2021 11:48:40 +0200 (CEST)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 48B2C601D5;
+ Tue, 19 Oct 2021 11:48:34 +0200 (CEST)
 Received: from palmier.u-ga.fr (palmier.tima.u-ga.fr [147.171.132.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 1DF9A14005D;
- Tue, 19 Oct 2021 11:48:40 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 160D814005A;
+ Tue, 19 Oct 2021 11:48:34 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -33,9 +33,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 21/21] target/riscv: support for 128-bit satp
-Date: Tue, 19 Oct 2021 11:48:12 +0200
-Message-Id: <20211019094812.614056-22-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v3 15/21] target/riscv: support for 128-bit M extension
+Date: Tue, 19 Oct 2021 11:48:06 +0200
+Message-Id: <20211019094812.614056-16-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -65,393 +65,584 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 09:49:05 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 09:49:02 -0000
 
-Support for a 128-bit satp. This is a bit more involved than necessary
-because we took the opportunity to increase the page size to 16kB, and
-change the page table geometry, which makes the page walk a bit more
-parametrizable (variables instead of defines).
-Note that is anyway a necessary step for the merging of the 32-bit and
-64-bit riscv versions in a single executable.
+Given the complexity of the implementation of these instructions, we call
+helpers to produce their behavior. From an implementation standpoint, we
+ended up by adding two more tcg globals to return the 128-bit result in a
+wrapper that itself is called by gen_arith.
+The sub 128-bit insns are now handled through the existing generation
+functions.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/cpu-param.h  |   9 +++-
- target/riscv/cpu_bits.h   |  10 ++++
- target/riscv/cpu_helper.c |  54 ++++++++++++++------
- target/riscv/csr.c        | 105 ++++++++++++++++++++++++++++++++------
- 4 files changed, 144 insertions(+), 34 deletions(-)
+ target/riscv/cpu.h                      |   1 +
+ target/riscv/helper.h                   |   6 +
+ target/riscv/insn32.decode              |   7 +
+ target/riscv/m128_helper.c              | 109 ++++++++++
+ target/riscv/translate.c                |   7 +-
+ target/riscv/insn_trans/trans_rvm.c.inc | 263 ++++++++++++++++++++++--
+ target/riscv/meson.build                |   1 +
+ 7 files changed, 380 insertions(+), 14 deletions(-)
+ create mode 100644 target/riscv/m128_helper.c
 
-diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
-index c10459b56f..78f0916403 100644
---- a/target/riscv/cpu-param.h
-+++ b/target/riscv/cpu-param.h
-@@ -19,10 +19,15 @@
- #else
- /* 64-bit target, since QEMU isn't built to have TARGET_LONG_BITS over 64 */
- # define TARGET_LONG_BITS 64
--# define TARGET_PHYS_ADDR_SPACE_BITS 56 /* 44-bit PPN */
--# define TARGET_VIRT_ADDR_SPACE_BITS 48 /* sv48 */
-+# define TARGET_PHYS_ADDR_SPACE_BITS 64 /* 54-bit PPN */
-+# define TARGET_VIRT_ADDR_SPACE_BITS 44 /* sv44 */
- #endif
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5d21128865..8b96ccb37a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -113,6 +113,7 @@ FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
+ struct CPURISCVState {
+     target_ulong gpr[32];
+     target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
++    target_ulong hlpr[2];  /* scratch registers for 128-bit div/rem helpers */
+     uint64_t fpr[32]; /* assume both F and D extensions */
+ 
+     /* vector coprocessor state. */
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index c7a5376227..67f5d23692 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1147,3 +1147,9 @@ DEF_HELPER_6(vcompress_vm_b, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vcompress_vm_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vcompress_vm_w, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vcompress_vm_d, void, ptr, ptr, ptr, ptr, env, i32)
 +
-+#if defined(TARGET_RISCV32) || defined(TARGET_RISCV64)
- #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
-+#else
-+#define TARGET_PAGE_BITS 14 /* 16 KiB pages for RV128 */
-+#endif
- /*
-  * The current MMU Modes are:
-  *  - U mode 0b000
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index e4750afc78..b04b103e31 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -430,6 +430,11 @@ typedef enum {
- #define SATP64_ASID         0x0FFFF00000000000ULL
- #define SATP64_PPN          0x00000FFFFFFFFFFFULL
++/* 128-bit integer multiplication and division */
++DEF_HELPER_5(divu_i128, void, env, i64, i64, i64, i64)
++DEF_HELPER_5(divs_i128, void, env, i64, i64, i64, i64)
++DEF_HELPER_5(remu_i128, void, env, i64, i64, i64, i64)
++DEF_HELPER_5(rems_i128, void, env, i64, i64, i64, i64)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 3556bf49cc..876e5f7f5b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -197,6 +197,13 @@ divuw    0000001 .....  ..... 101 ..... 0111011 @r
+ remw     0000001 .....  ..... 110 ..... 0111011 @r
+ remuw    0000001 .....  ..... 111 ..... 0111011 @r
  
-+/* RV128 satp CSR field masks (H/L for high/low dword) */
-+#define SATP128_HMODE       0xFF00000000000000ULL
-+#define SATP128_HASID       0x00FFFFFFFF000000ULL
-+#define SATP128_LPPN        0x0003FFFFFFFFFFFFULL
++# *** RV128M Standard Extension (in addition to RV64M) ***
++muld     0000001 .....  ..... 000 ..... 1111011 @r
++divd     0000001 .....  ..... 100 ..... 1111011 @r
++divud    0000001 .....  ..... 101 ..... 1111011 @r
++remd     0000001 .....  ..... 110 ..... 1111011 @r
++remud    0000001 .....  ..... 111 ..... 1111011 @r
 +
- /* VM modes (mstatus.vm) privileged ISA 1.9.1 */
- #define VM_1_09_MBARE       0
- #define VM_1_09_MBB         1
-@@ -445,6 +450,9 @@ typedef enum {
- #define VM_1_10_SV48        9
- #define VM_1_10_SV57        10
- #define VM_1_10_SV64        11
-+#define VM_1_10_SV44        12
-+#define VM_1_10_SV54        13
+ # *** RV32A Standard Extension ***
+ lr_w       00010 . . 00000 ..... 010 ..... 0101111 @atom_ld
+ sc_w       00011 . . ..... ..... 010 ..... 0101111 @atom_st
+diff --git a/target/riscv/m128_helper.c b/target/riscv/m128_helper.c
+new file mode 100644
+index 0000000000..694ca5da9b
+--- /dev/null
++++ b/target/riscv/m128_helper.c
+@@ -0,0 +1,109 @@
++/*
++ * RISC-V Emulation Helpers for QEMU.
++ *
++ * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
++ * Copyright (c) 2017-2018 SiFive, Inc.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
 +
- 
- /* Page table entry (PTE) fields */
- #define PTE_V               0x001 /* Valid */
-@@ -462,6 +470,8 @@ typedef enum {
- 
- /* Leaf page shift amount */
- #define PGSHIFT             12
-+/* For now, pages in RV128 are 16 KiB. */
-+#define PGSHIFT128          14
- 
- /* Default Reset Vector adress */
- #define DEFAULT_RSTVEC      0x1000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 0d1132f39d..d4b1e328ae 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -469,7 +469,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     *prot = 0;
- 
-     hwaddr base;
--    int levels, ptidxbits, ptesize, vm, sum, mxr, widened;
-+    int levels, ptidxbits, ptesize, vm, sum, mxr, widened, pgshift;
- 
-     if (first_stage == true) {
-         mxr = get_field(env->mstatus, MSTATUS_MXR);
-@@ -482,17 +482,25 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             if (riscv_cpu_mxl(env) == MXL_RV32) {
-                 base = (hwaddr)get_field(env->vsatp, SATP32_PPN) << PGSHIFT;
-                 vm = get_field(env->vsatp, SATP32_MODE);
--            } else {
-+            } else if (riscv_cpu_mxl(env) == MXL_RV64) {
-                 base = (hwaddr)get_field(env->vsatp, SATP64_PPN) << PGSHIFT;
-                 vm = get_field(env->vsatp, SATP64_MODE);
-+            } else {
-+                /* TODO : Hypervisor extension not supported yet in RV128. */
-+                g_assert_not_reached();
-             }
-         } else {
-             if (riscv_cpu_mxl(env) == MXL_RV32) {
-                 base = (hwaddr)get_field(env->satp, SATP32_PPN) << PGSHIFT;
-                 vm = get_field(env->satp, SATP32_MODE);
--            } else {
-+            } else if (riscv_cpu_mxl(env) == MXL_RV64) {
-                 base = (hwaddr)get_field(env->satp, SATP64_PPN) << PGSHIFT;
-                 vm = get_field(env->satp, SATP64_MODE);
-+            } else if (riscv_cpu_mxl(env) == MXL_RV128) {
-+                base = (hwaddr)get_field(env->satp, SATP128_LPPN) << PGSHIFT128;
-+                vm = get_field(env->satph, SATP128_HMODE);
-+            } else {
-+                g_assert_not_reached();
-             }
-         }
-         widened = 0;
-@@ -500,9 +508,15 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-         if (riscv_cpu_mxl(env) == MXL_RV32) {
-             base = (hwaddr)get_field(env->hgatp, SATP32_PPN) << PGSHIFT;
-             vm = get_field(env->hgatp, SATP32_MODE);
--        } else {
-+        } else if (riscv_cpu_mxl(env) == MXL_RV64) {
-             base = (hwaddr)get_field(env->hgatp, SATP64_PPN) << PGSHIFT;
-             vm = get_field(env->hgatp, SATP64_MODE);
-+        } else {
-+            /*
-+             * TODO : Hypervisor extension not supported yet in RV128,
-+             * so there shouldn't be any two-stage address lookups.
-+             */
-+            g_assert_not_reached();
-         }
-         widened = 2;
-     }
-@@ -510,13 +524,17 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     sum = get_field(env->mstatus, MSTATUS_SUM) || use_background || is_debug;
-     switch (vm) {
-     case VM_1_10_SV32:
--      levels = 2; ptidxbits = 10; ptesize = 4; break;
-+      levels = 2; ptidxbits = 10; ptesize = 4; pgshift = 12; break;
-     case VM_1_10_SV39:
--      levels = 3; ptidxbits = 9; ptesize = 8; break;
-+      levels = 3; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
-     case VM_1_10_SV48:
--      levels = 4; ptidxbits = 9; ptesize = 8; break;
-+      levels = 4; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
-     case VM_1_10_SV57:
--      levels = 5; ptidxbits = 9; ptesize = 8; break;
-+      levels = 5; ptidxbits = 9; ptesize = 8; pgshift = 12; break;
-+    case VM_1_10_SV44:
-+      levels = 3; ptidxbits = 10; ptesize = 16; pgshift = 14; break;
-+    case VM_1_10_SV54:
-+      levels = 4; ptidxbits = 10; ptesize = 16;  pgshift = 14; break;
-     case VM_1_10_MBARE:
-         *physical = addr;
-         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
-@@ -526,7 +544,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     }
- 
-     CPUState *cs = env_cpu(env);
--    int va_bits = PGSHIFT + levels * ptidxbits + widened;
-+    int va_bits = pgshift + levels * ptidxbits + widened;
-     target_ulong mask, masked_msbs;
- 
-     if (TARGET_LONG_BITS > (va_bits - 1)) {
-@@ -541,6 +559,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-     }
- 
-     int ptshift = (levels - 1) * ptidxbits;
-+    uint64_t pgoff_mask = (1ULL << pgshift) - 1;
-     int i;
- 
- #if !TCG_OVERSIZED_GUEST
-@@ -549,10 +568,10 @@ restart:
-     for (i = 0; i < levels; i++, ptshift -= ptidxbits) {
-         target_ulong idx;
-         if (i == 0) {
--            idx = (addr >> (PGSHIFT + ptshift)) &
-+            idx = (addr >> (pgshift + ptshift)) &
-                            ((1 << (ptidxbits + widened)) - 1);
-         } else {
--            idx = (addr >> (PGSHIFT + ptshift)) &
-+            idx = (addr >> (pgshift + ptshift)) &
-                            ((1 << ptidxbits) - 1);
-         }
- 
-@@ -560,6 +579,7 @@ restart:
-         hwaddr pte_addr;
- 
-         if (two_stage && first_stage) {
-+            /* TODO : Two-stage translation for RV128 */
-             int vbase_prot;
-             hwaddr vbase;
- 
-@@ -593,6 +613,10 @@ restart:
-         if (riscv_cpu_mxl(env) == MXL_RV32) {
-             pte = address_space_ldl(cs->as, pte_addr, attrs, &res);
-         } else {
-+            /*
-+             * For RV128, load only lower 64 bits as only those
-+             * are used for now
-+             */
-             pte = address_space_ldq(cs->as, pte_addr, attrs, &res);
-         }
- 
-@@ -607,7 +631,7 @@ restart:
-             return TRANSLATE_FAIL;
-         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-             /* Inner PTE, continue walking */
--            base = ppn << PGSHIFT;
-+            base = ppn << pgshift;
-         } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
-             /* Reserved leaf PTE flags: PTE_W */
-             return TRANSLATE_FAIL;
-@@ -679,9 +703,9 @@ restart:
- 
-             /* for superpage mappings, make a fake leaf PTE for the TLB's
-                benefit. */
--            target_ulong vpn = addr >> PGSHIFT;
--            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
--                        (addr & ~TARGET_PAGE_MASK);
-+            target_ulong vpn = addr >> pgshift;
-+            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << pgshift) |
-+                        (addr & pgoff_mask);
- 
-             /* set permissions on the TLB entry */
-             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 877cd2d63a..028adab6a8 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -461,6 +461,12 @@ static const char valid_vm_1_10_64[16] = {
-     [VM_1_10_SV57] = 1
- };
- 
-+static const bool valid_vm_1_10_128[16] = {
-+    [VM_1_10_MBARE] = 1,
-+    [VM_1_10_SV44] = 1,
-+    [VM_1_10_SV54] = 1
-+};
++#include "qemu/osdep.h"
++#include "cpu.h"
++#include "qemu/main-loop.h"
++#include "exec/exec-all.h"
++#include "exec/helper-proto.h"
 +
- /* Machine Information Registers */
- static RISCVException read_zero_i128(CPURISCVState *env, int csrno,
-                                     Int128 *val)
-@@ -535,29 +541,27 @@ static RISCVException write_mstatus_i128(CPURISCVState *env, int csrno,
-                          MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-                          MSTATUS_TW);
- 
--    if (!riscv_cpu_is_32bit(env)) {
--        /*
--         * RV32: MPV and GVA are not in mstatus. The current plan is to
--         * add them to mstatush. For now, we just don't support it.
--         */
--        mask = int128_or(mask, int128_make64(MSTATUS_MPV | MSTATUS_GVA));
--    }
-+    mask = int128_or(mask, int128_make64(MSTATUS_MPV | MSTATUS_GVA));
- 
-     mstatus = int128_or(int128_and(mstatus, int128_not(mask)),
-                         int128_and(val, mask));
- 
-     dirty = ((int128_getlo(mstatus) & MSTATUS_FS) == MSTATUS_FS) |
-             ((int128_getlo(mstatus) & MSTATUS_XS) == MSTATUS_XS);
-+
-+    /* Cannot use add_status_sd here, let's do it the old way */
-     if (dirty) {
--        if (riscv_cpu_is_32bit(env)) {
--            mstatus = int128_make64(int128_getlo(mstatus) | MSTATUS32_SD);
--        } else if (riscv_cpu_is_64bit(env)) {
--            mstatus = int128_make64(int128_getlo(mstatus) | MSTATUS64_SD);
--        } else {
--            mstatus = int128_or(mstatus, int128_make128(0, MSTATUSH128_SD));
--        }
-+        mstatus = int128_or(mstatus, int128_make128(0, MSTATUSH128_SD));
-     }
- 
-+    /* SXL and UXL fields are for now read only, at xl_max */
-+    mstatus = int128_make128(
-+                     set_field(int128_getlo(mstatus), MSTATUS64_SXL, MXL_RV128),
-+                     int128_gethi(mstatus));
-+    mstatus = int128_make128(
-+                     set_field(int128_getlo(mstatus), MSTATUS64_UXL, MXL_RV128),
-+                     int128_gethi(mstatus));
-+
-     env->mstatus = int128_getlo(mstatus);
-     env->mstatush = int128_gethi(mstatus);
- 
-@@ -575,8 +579,12 @@ static int validate_vm(CPURISCVState *env, target_ulong vm)
- {
-     if (riscv_cpu_mxl(env) == MXL_RV32) {
-         return valid_vm_1_10_32[vm & 0xf];
--    } else {
-+    } else if (riscv_cpu_mxl(env) == MXL_RV64) {
-         return valid_vm_1_10_64[vm & 0xf];
-+    } else if (riscv_cpu_mxl(env) == MXL_RV128) {
-+        return valid_vm_1_10_128[vm & 0xf];
-+    } else {
-+        return 0;
-     }
- }
- 
-@@ -1114,6 +1122,69 @@ static RISCVException rmw_sip(CPURISCVState *env, int csrno,
- }
- 
- /* Supervisor Protection and Translation */
-+static RISCVException read_satp_i128(CPURISCVState *env, int csrno,
-+                                    Int128 *val)
++void HELPER(divu_i128)(CPURISCVState *env,
++                       uint64_t ul, uint64_t uh,
++                       uint64_t vl, uint64_t vh)
 +{
-+    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-+        *val = int128_zero();
-+        return RISCV_EXCP_NONE;
-+    }
++    uint64_t ql, qh;
++    Int128 q;
 +
-+    if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
++    if (vl == 0 && vh == 0) { /* Handle special behavior on div by zero */
++        ql = ~0x0;
++        qh = ~0x0;
 +    } else {
-+        *val = int128_make128(env->satp, env->satph);
++        q = int128_divu(int128_make128(ul, uh), int128_make128(vl, vh));
++        ql = int128_getlo(q);
++        qh = int128_gethi(q);
 +    }
 +
-+    return RISCV_EXCP_NONE;
++    env->hlpr[0] = ql;
++    env->hlpr[1] = qh;
 +}
 +
-+static RISCVException write_satp_i128(CPURISCVState *env, int csrno,
-+                                     Int128 val)
++void HELPER(remu_i128)(CPURISCVState *env,
++                       uint64_t ul, uint64_t uh,
++                       uint64_t vl, uint64_t vh)
 +{
-+    uint32_t asid;
-+    bool vm_ok;
-+    Int128 mask;
++    uint64_t rl, rh;
++    Int128 r;
 +
-+    if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        vm_ok = validate_vm(env, get_field(int128_getlo(val), SATP32_MODE));
-+        mask = int128_make64((int128_getlo(val) ^ env->satp)
-+                           & (SATP32_MODE | SATP32_ASID | SATP32_PPN));
-+        asid = (int128_getlo(val) ^ env->satp) & SATP32_ASID;
-+    } else if (riscv_cpu_mxl(env) == MXL_RV64) {
-+        vm_ok = validate_vm(env, get_field(int128_getlo(val), SATP64_MODE));
-+        mask = int128_make64((int128_getlo(val) ^ env->satp)
-+                           & (SATP64_MODE | SATP64_ASID | SATP64_PPN));
-+        asid = (int128_getlo(val) ^ env->satp) & SATP64_ASID;
-+    } else if (riscv_cpu_mxl(env) == MXL_RV128) {
-+        vm_ok = validate_vm(env, get_field(int128_gethi(val), SATP128_HMODE));
-+        mask = int128_and(
-+                   int128_xor(val, int128_make128(env->satp, env->satph)),
-+                   int128_make128(SATP128_LPPN, SATP128_HMODE | SATP128_HASID));
-+        asid = (int128_gethi(val) ^ env->satph) & SATP128_HASID;
++    if (vl == 0 && vh == 0) {
++        rl = ul;
++        rh = uh;
 +    } else {
-+        g_assert_not_reached();
++        r = int128_remu(int128_make128(ul, uh), int128_make128(vl, vh));
++        rl = int128_getlo(r);
++        rh = int128_gethi(r);
 +    }
 +
-+
-+    if (vm_ok && int128_nz(mask)) {
-+        if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
-+            return RISCV_EXCP_ILLEGAL_INST;
-+        } else {
-+            if (asid) {
-+                tlb_flush(env_cpu(env));
-+            }
-+            env->satp = int128_getlo(val);
-+            env->satph = int128_gethi(val);
-+        }
-+    }
-+    return RISCV_EXCP_NONE;
++    env->hlpr[0] = rl;
++    env->hlpr[1] = rh;
 +}
 +
- static RISCVException read_satp(CPURISCVState *env, int csrno,
-                                 target_ulong *val)
++void HELPER(divs_i128)(CPURISCVState *env,
++                       uint64_t ul, uint64_t uh,
++                       uint64_t vl, uint64_t vh)
++{
++    uint64_t qh, ql;
++    Int128 q;
++
++    if (vl == 0 && vh == 0) { /* Div by zero check */
++        ql = ~0x0;
++        qh = ~0x0;
++    } else if (uh == 0x8000000000000000 && ul == 0 &&
++               vh == ~0x0 && vl == ~0x0) {
++        /* Signed div overflow check (-2**127 / -1) */
++        ql = ul;
++        qh = uh;
++    } else {
++        q = int128_divs(int128_make128(ul, uh), int128_make128(vl, vh));
++        ql = int128_getlo(q);
++        qh = int128_gethi(q);
++    }
++
++    env->hlpr[0] = ql;
++    env->hlpr[1] = qh;
++}
++
++void HELPER(rems_i128)(CPURISCVState *env,
++                       uint64_t ul, uint64_t uh,
++                       uint64_t vl, uint64_t vh)
++{
++    uint64_t rh, rl;
++    Int128 r;
++
++    if (vl == 0 && vh == 0) {
++        rl = ul;
++        rh = uh;
++    } else {
++        r = int128_rems(int128_make128(ul, uh), int128_make128(vl, vh));
++        rl = int128_getlo(r);
++        rh = int128_gethi(r);
++    }
++
++    env->hlpr[0] = rl;
++    env->hlpr[1] = rh;
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 332a5d0384..2d76832d56 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -32,7 +32,7 @@
+ #include "instmap.h"
+ 
+ /* global register indices */
+-static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl;
++static TCGv cpu_gpr[32], cpu_gprh[32], cpu_hlpr[2], cpu_pc, cpu_vl;
+ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+ static TCGv load_res;
+ static TCGv load_val;
+@@ -953,6 +953,11 @@ void riscv_translate_init(void)
+             offsetof(CPURISCVState, gprh[i]), riscv_int_regnames[i]);
+     }
+ 
++    cpu_hlpr[0] = tcg_global_mem_new(cpu_env,
++        offsetof(CPURISCVState, hlpr[0]), "helper_reg0");
++    cpu_hlpr[1] = tcg_global_mem_new(cpu_env,
++        offsetof(CPURISCVState, hlpr[1]), "helper_reg1");
++
+     for (i = 0; i < 32; i++) {
+         cpu_fpr[i] = tcg_global_mem_new_i64(cpu_env,
+             offsetof(CPURISCVState, fpr[i]), riscv_fpr_regnames[i]);
+diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
+index efe25dfc11..ea355ce333 100644
+--- a/target/riscv/insn_trans/trans_rvm.c.inc
++++ b/target/riscv/insn_trans/trans_rvm.c.inc
+@@ -18,11 +18,106 @@
+  * this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
++static void gen_mulu2_i128(TCGv rll, TCGv rlh, TCGv rhl, TCGv rhh,
++                           TCGv al, TCGv ah, TCGv bl, TCGv bh)
++{
++    TCGv tmpl = tcg_temp_new(),
++         tmph = tcg_temp_new(),
++         cnst_zero = tcg_constant_tl(0);
++
++    tcg_gen_mulu2_tl(rll, rlh, al, bl);
++
++    tcg_gen_mulu2_tl(tmpl, tmph, al, bh);
++    tcg_gen_add2_tl(rlh, rhl, rlh, cnst_zero, tmpl, tmph);
++    tcg_gen_mulu2_tl(tmpl, tmph, ah, bl);
++    tcg_gen_add2_tl(rlh, tmph, rlh, rhl, tmpl, tmph);
++    /* Overflow detection into rhh */
++    tcg_gen_setcond_tl(TCG_COND_LTU, rhh, tmph, rhl);
++
++    tcg_gen_mov_tl(rhl, tmph);
++
++    tcg_gen_mulu2_tl(tmpl, tmph, ah, bh);
++    tcg_gen_add2_tl(rhl, rhh, rhl, rhh, tmpl, tmph);
++
++    tcg_temp_free(tmpl);
++    tcg_temp_free(tmph);
++}
++
++static void gen_mul_i128(TCGv rll, TCGv rlh,
++                         TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    TCGv rhl = tcg_temp_new(),
++         rhh = tcg_temp_new();
++
++    gen_mulu2_i128(rll, rlh, rhl, rhh, rs1l, rs1h, rs2l, rs2h);
++
++    tcg_temp_free(rhl);
++    tcg_temp_free(rhh);
++}
++
+ 
+ static bool trans_mul(DisasContext *ctx, arg_mul *a)
  {
-@@ -1648,7 +1719,7 @@ static inline RISCVException riscv_csrrw_check_i128(CPURISCVState *env,
-     /* check privileges and return -1 if check fails */
- #if !defined(CONFIG_USER_ONLY)
-     int effective_priv = env->priv;
--    int read_only = get_field(csrno, 0xc00) == 3;
-+    int read_only = get_field(csrno, 0xC00) == 3;
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
++    return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128);
++}
++
++static void gen_mulh_i128(TCGv rhl, TCGv rhh,
++                          TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    TCGv rll = tcg_temp_new(),
++         rlh = tcg_temp_new(),
++         rlln = tcg_temp_new(),
++         rlhn = tcg_temp_new(),
++         rhln = tcg_temp_new(),
++         rhhn = tcg_temp_new(),
++         sgnres = tcg_temp_new(),
++         tmp = tcg_temp_new(),
++         cnst_one = tcg_constant_tl(1),
++         cnst_zero = tcg_constant_tl(0);
++
++    /* Extract sign of result (=> sgn(a) xor sgn(b)) */
++    tcg_gen_setcondi_tl(TCG_COND_LT, sgnres, rs1h, 0);
++    tcg_gen_setcondi_tl(TCG_COND_LT, tmp, rs2h, 0);
++    tcg_gen_xor_tl(sgnres, sgnres, tmp);
++
++    /* Take absolute value of operands */
++    tcg_gen_sari_tl(rhl, rs1h, 63);
++    tcg_gen_add2_tl(rlln, rlhn, rs1l, rs1h, rhl, rhl);
++    tcg_gen_xor_tl(rlln, rlln, rhl);
++    tcg_gen_xor_tl(rlhn, rlhn, rhl);
++
++    tcg_gen_sari_tl(rhl, rs2h, 63);
++    tcg_gen_add2_tl(rhln, rhhn, rs2l, rs2h, rhl, rhl);
++    tcg_gen_xor_tl(rhln, rhln, rhl);
++    tcg_gen_xor_tl(rhhn, rhhn, rhl);
++
++    /* Unsigned multiplication */
++    gen_mulu2_i128(rll, rlh, rhl, rhh, rlln, rlhn, rhln, rhhn);
++
++    /* Negation of result (two's complement : ~res + 1) */
++    tcg_gen_not_tl(rlln, rll);
++    tcg_gen_not_tl(rlhn, rlh);
++    tcg_gen_not_tl(rhln, rhl);
++    tcg_gen_not_tl(rhhn, rhh);
++
++    tcg_gen_add2_tl(rlln, tmp, rlln, cnst_zero, cnst_one, cnst_zero);
++    tcg_gen_add2_tl(rlhn, tmp, rlhn, cnst_zero, tmp, cnst_zero);
++    tcg_gen_add2_tl(rhln, tmp, rhln, cnst_zero, tmp, cnst_zero);
++    tcg_gen_add2_tl(rhhn, tmp, rhhn, cnst_zero, tmp, cnst_zero);
++
++    /* Move conditionally result or -result depending on result sign */
++    tcg_gen_movcond_tl(TCG_COND_NE, rhl, sgnres, cnst_zero, rhln, rhl);
++    tcg_gen_movcond_tl(TCG_COND_NE, rhh, sgnres, cnst_zero, rhhn, rhh);
++
++    tcg_temp_free(rll);
++    tcg_temp_free(rlh);
++    tcg_temp_free(rlln);
++    tcg_temp_free(rlhn);
++    tcg_temp_free(rhln);
++    tcg_temp_free(rhhn);
++    tcg_temp_free(sgnres);
++    tcg_temp_free(tmp);
+ }
  
-     if (riscv_has_ext(env, RVH) &&
-         env->priv == PRV_S &&
-@@ -1789,7 +1860,7 @@ riscv_csr_operations128 csr_ops_128[CSR_TABLE_SIZE] = {
-     [CSR_MSCRATCH]   = { read_mscratch_i128, write_mscratch_i128 },
-     [CSR_MEPC]       = { read_mepc_i128,     write_mepc_i128     },
+ static void gen_mulh(TCGv ret, TCGv s1, TCGv s2)
+@@ -42,7 +137,59 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
+ static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w, NULL);
++    return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
++                            gen_mulh_i128);
++}
++
++static void gen_mulhsu_i128(TCGv rhl, TCGv rhh,
++                            TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    TCGv rll = tcg_temp_new(),
++         rlh = tcg_temp_new(),
++         rlln = tcg_temp_new(),
++         rlhn = tcg_temp_new(),
++         rhln = tcg_temp_new(),
++         rhhn = tcg_temp_new(),
++         sgnres = tcg_temp_new(),
++         tmp = tcg_temp_new(),
++         cnst_one = tcg_constant_tl(1),
++         cnst_zero = tcg_constant_tl(0);
++
++    /* Extract sign of result (=> sgn(a)) */
++    tcg_gen_setcondi_tl(TCG_COND_LT, sgnres, rs1h, 0);
++
++    /* Take absolute value of rs1 */
++    tcg_gen_sari_tl(rhl, rs1h, 63);
++    tcg_gen_add2_tl(rlln, rlhn, rs1l, rs1h, rhl, rhl);
++    tcg_gen_xor_tl(rlln, rlln, rhl);
++    tcg_gen_xor_tl(rlhn, rlhn, rhl);
++
++    /* Unsigned multiplication */
++    gen_mulu2_i128(rll, rlh, rhl, rhh, rlln, rlhn, rs2l, rs2h);
++
++    /* Negation of result (two's complement : ~res + 1) */
++    tcg_gen_not_tl(rlln, rll);
++    tcg_gen_not_tl(rlhn, rlh);
++    tcg_gen_not_tl(rhln, rhl);
++    tcg_gen_not_tl(rhhn, rhh);
++
++    tcg_gen_add2_tl(rlln, tmp, rlln, cnst_zero, cnst_one, cnst_zero);
++    tcg_gen_add2_tl(rlhn, tmp, rlhn, cnst_zero, tmp, cnst_zero);
++    tcg_gen_add2_tl(rhln, tmp, rhln, cnst_zero, tmp, cnst_zero);
++    tcg_gen_add2_tl(rhhn, tmp, rhhn, cnst_zero, tmp, cnst_zero);
++
++    /* Move conditionally result or -result depending on result sign */
++    tcg_gen_movcond_tl(TCG_COND_NE, rhl, sgnres, cnst_zero, rhln, rhl);
++    tcg_gen_movcond_tl(TCG_COND_NE, rhh, sgnres, cnst_zero, rhhn, rhh);
++
++    tcg_temp_free(rll);
++    tcg_temp_free(rlh);
++    tcg_temp_free(rlln);
++    tcg_temp_free(rlhn);
++    tcg_temp_free(rhln);
++    tcg_temp_free(rhhn);
++    tcg_temp_free(sgnres);
++    tcg_temp_free(tmp);
+ }
  
--    [CSR_SATP]       = { read_zero_i128    },
-+    [CSR_SATP]       = { read_satp_i128,     write_satp_i128     },
- #endif
- };
+ static void gen_mulhsu(TCGv ret, TCGv arg1, TCGv arg2)
+@@ -76,7 +223,20 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv arg2)
+ static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w, NULL);
++    return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w,
++                            gen_mulhsu_i128);
++}
++
++static void gen_mulhu_i128(TCGv rhl, TCGv rhh,
++                           TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    TCGv rll = tcg_temp_new(),
++         rlh = tcg_temp_new();
++
++    gen_mulu2_i128(rll, rlh, rhl, rhh, rs1l, rs1h, rs2l, rs2h);
++
++    tcg_temp_free(rll);
++    tcg_temp_free(rlh);
+ }
  
+ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
+@@ -91,7 +251,17 @@ static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+     /* gen_mulh_w works for either sign as input. */
+-    return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w, NULL);
++    return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
++                            gen_mulhu_i128);
++}
++
++static void gen_div_i128(TCGv rdl, TCGv rdh,
++                         TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    gen_helper_divs_i128(cpu_env, (TCGv_i64)rs1l, (TCGv_i64)rs1h,
++                                  (TCGv_i64)rs2l, (TCGv_i64)rs2h);
++    tcg_gen_mov_tl(rdl, cpu_hlpr[0]);
++    tcg_gen_mov_tl(rdh, cpu_hlpr[1]);
+ }
+ 
+ static void gen_div(TCGv ret, TCGv source1, TCGv source2)
+@@ -130,7 +300,16 @@ static void gen_div(TCGv ret, TCGv source1, TCGv source2)
+ static bool trans_div(DisasContext *ctx, arg_div *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith(ctx, a, EXT_SIGN, gen_div, NULL);
++    return gen_arith(ctx, a, EXT_SIGN, gen_div, gen_div_i128);
++}
++
++static void gen_divu_i128(TCGv rdl, TCGv rdh,
++                          TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    gen_helper_divu_i128(cpu_env, (TCGv_i64)rs1l, (TCGv_i64)rs1h,
++                                  (TCGv_i64)rs2l, (TCGv_i64)rs2h);
++    tcg_gen_mov_tl(rdl, cpu_hlpr[0]);
++    tcg_gen_mov_tl(rdh, cpu_hlpr[1]);
+ }
+ 
+ static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
+@@ -158,7 +337,16 @@ static void gen_divu(TCGv ret, TCGv source1, TCGv source2)
+ static bool trans_divu(DisasContext *ctx, arg_divu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith(ctx, a, EXT_ZERO, gen_divu, NULL);
++    return gen_arith(ctx, a, EXT_ZERO, gen_divu, gen_divu_i128);
++}
++
++static void gen_rem_i128(TCGv rdl, TCGv rdh,
++                         TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    gen_helper_rems_i128(cpu_env, (TCGv_i64)rs1l, (TCGv_i64)rs1h,
++                                  (TCGv_i64)rs2l, (TCGv_i64)rs2h);
++    tcg_gen_mov_tl(rdl, cpu_hlpr[0]);
++    tcg_gen_mov_tl(rdh, cpu_hlpr[1]);
+ }
+ 
+ static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
+@@ -199,7 +387,16 @@ static void gen_rem(TCGv ret, TCGv source1, TCGv source2)
+ static bool trans_rem(DisasContext *ctx, arg_rem *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith(ctx, a, EXT_SIGN, gen_rem, NULL);
++    return gen_arith(ctx, a, EXT_SIGN, gen_rem, gen_rem_i128);
++}
++
++static void gen_remu_i128(TCGv rdl, TCGv rdh,
++                          TCGv rs1l, TCGv rs1h, TCGv rs2l, TCGv rs2h)
++{
++    gen_helper_remu_i128(cpu_env, (TCGv_i64)rs1l, (TCGv_i64)rs1h,
++                                  (TCGv_i64)rs2l, (TCGv_i64)rs2h);
++    tcg_gen_mov_tl(rdl, cpu_hlpr[0]);
++    tcg_gen_mov_tl(rdh, cpu_hlpr[1]);
+ }
+ 
+ static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
+@@ -227,12 +424,12 @@ static void gen_remu(TCGv ret, TCGv source1, TCGv source2)
+ static bool trans_remu(DisasContext *ctx, arg_remu *a)
+ {
+     REQUIRE_EXT(ctx, RVM);
+-    return gen_arith(ctx, a, EXT_ZERO, gen_remu, NULL);
++    return gen_arith(ctx, a, EXT_ZERO, gen_remu, gen_remu_i128);
+ }
+ 
+ static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_EXT(ctx, RVM);
+     ctx->ol = MXL_RV32;
+     return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
+@@ -240,7 +437,7 @@ static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
+ 
+ static bool trans_divw(DisasContext *ctx, arg_divw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_EXT(ctx, RVM);
+     ctx->ol = MXL_RV32;
+     return gen_arith(ctx, a, EXT_SIGN, gen_div, NULL);
+@@ -248,7 +445,7 @@ static bool trans_divw(DisasContext *ctx, arg_divw *a)
+ 
+ static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_EXT(ctx, RVM);
+     ctx->ol = MXL_RV32;
+     return gen_arith(ctx, a, EXT_ZERO, gen_divu, NULL);
+@@ -256,7 +453,7 @@ static bool trans_divuw(DisasContext *ctx, arg_divuw *a)
+ 
+ static bool trans_remw(DisasContext *ctx, arg_remw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_EXT(ctx, RVM);
+     ctx->ol = MXL_RV32;
+     return gen_arith(ctx, a, EXT_SIGN, gen_rem, NULL);
+@@ -264,8 +461,48 @@ static bool trans_remw(DisasContext *ctx, arg_remw *a)
+ 
+ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     REQUIRE_EXT(ctx, RVM);
+     ctx->ol = MXL_RV32;
+     return gen_arith(ctx, a, EXT_ZERO, gen_remu, NULL);
+ }
++
++static bool trans_muld(DisasContext *ctx, arg_muld *a)
++{
++    REQUIRE_128BIT(ctx);
++    REQUIRE_EXT(ctx, RVM);
++    ctx->ol = MXL_RV64;
++    return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
++}
++
++static bool trans_divd(DisasContext *ctx, arg_divd *a)
++{
++    REQUIRE_128BIT(ctx);
++    REQUIRE_EXT(ctx, RVM);
++    ctx->ol = MXL_RV64;
++    return gen_arith(ctx, a, EXT_SIGN, gen_div, NULL);
++}
++
++static bool trans_divud(DisasContext *ctx, arg_divud *a)
++{
++    REQUIRE_128BIT(ctx);
++    REQUIRE_EXT(ctx, RVM);
++    ctx->ol = MXL_RV64;
++    return gen_arith(ctx, a, EXT_ZERO, gen_divu, NULL);
++}
++
++static bool trans_remd(DisasContext *ctx, arg_remd *a)
++{
++    REQUIRE_128BIT(ctx);
++    REQUIRE_EXT(ctx, RVM);
++    ctx->ol = MXL_RV64;
++    return gen_arith(ctx, a, EXT_SIGN, gen_rem, NULL);
++}
++
++static bool trans_remud(DisasContext *ctx, arg_remud *a)
++{
++    REQUIRE_128BIT(ctx);
++    REQUIRE_EXT(ctx, RVM);
++    ctx->ol = MXL_RV64;
++    return gen_arith(ctx, a, EXT_ZERO, gen_remu, NULL);
++}
+diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+index d5e0bc93ea..a32158da93 100644
+--- a/target/riscv/meson.build
++++ b/target/riscv/meson.build
+@@ -18,6 +18,7 @@ riscv_ss.add(files(
+   'vector_helper.c',
+   'bitmanip_helper.c',
+   'translate.c',
++  'm128_helper.c'
+ ))
+ 
+ riscv_softmmu_ss = ss.source_set()
 -- 
 2.33.0
 
