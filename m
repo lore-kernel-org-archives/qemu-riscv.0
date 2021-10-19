@@ -1,28 +1,28 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcljt-00013W-Ku
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:48:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58780)
+	id 1mclju-000154-0Z
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 05:48:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58802)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljp-0000ke-Bi; Tue, 19 Oct 2021 05:48:53 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54802)
+ id 1mcljq-0000rA-RI; Tue, 19 Oct 2021 05:48:54 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:54848)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mcljm-0006WS-Lu; Tue, 19 Oct 2021 05:48:53 -0400
+ id 1mcljo-0006YD-9J; Tue, 19 Oct 2021 05:48:54 -0400
 Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7E25942015;
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id CEF0E4202A;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 668B4601D5;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id B48A0601D5;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 Received: from palmier.u-ga.fr (palmier.tima.u-ga.fr [147.171.132.208])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 43A6114005D;
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 8F03D14005D;
  Tue, 19 Oct 2021 11:48:28 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
@@ -33,9 +33,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 10/21] target/riscv: support for 128-bit loads and store
-Date: Tue, 19 Oct 2021 11:48:01 +0200
-Message-Id: <20211019094812.614056-11-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v3 12/21] target/riscv: support for 128-bit U-type instructions
+Date: Tue, 19 Oct 2021 11:48:03 +0200
+Message-Id: <20211019094812.614056-13-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -65,338 +65,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 09:48:53 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 09:48:55 -0000
 
-The 128-bit ISA adds ldu, lq and sq. We provide here support for these
-instructions. Note that although we compute a 128-bit address, we only use
-the lower 64-bit to actually address memory, cowardly utilizing the
-existing address translation mechanism of QEMU.
+Adding the 128-bit version of lui and auipc.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- target/riscv/insn16.decode              |  32 +++++-
- target/riscv/insn32.decode              |   4 +
- target/riscv/translate.c                |   7 --
- target/riscv/insn_trans/trans_rvi.c.inc | 146 ++++++++++++++++++++++--
- 4 files changed, 171 insertions(+), 18 deletions(-)
+ target/riscv/insn_trans/trans_rvi.c.inc | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 2e9212663c..151fc6e567 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -39,6 +39,10 @@
- %imm_addi16sp  12:s1 3:2 5:1 2:1 6:1 !function=ex_shift_4
- %imm_lui       12:s1 2:5             !function=ex_shift_12
- 
-+# Added for 128 bit support
-+%uimm_cl_q    5:2 10:3               !function=ex_shift_3
-+%uimm_6bit_lq 2:3 12:1 5:2           !function=ex_shift_3
-+%uimm_6bit_sq 7:3 10:3               !function=ex_shift_3
- 
- # Argument sets imported from insn32.decode:
- &empty                  !extern
-@@ -54,16 +58,20 @@
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
- @ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
-+@cl_q      ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
- @cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
- @cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
-+@cs_q      ... ... ... .. ... .. &s      imm=%uimm_cl_q   rs1=%rs1_3  rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
- @cj        ...    ........... .. &j      imm=%imm_cj
- @cb_z      ... ... ... .. ... .. &b      imm=%imm_cb      rs1=%rs1_3  rs2=0
- 
-+@c_lqsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @c_ldsp    ... . .....  ..... .. &i      imm=%uimm_6bit_ld rs1=2 %rd
- @c_lwsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lw rs1=2 %rd
-+@c_sqsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sq rs1=2 rs2=%rs2_5
- @c_sdsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sd rs1=2 rs2=%rs2_5
- @c_swsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sw rs1=2 rs2=%rs2_5
- @c_li      ... . .....  ..... .. &i      imm=%imm_ci rs1=0 %rd
-@@ -87,9 +95,17 @@
-   illegal         000  000 000 00 --- 00
-   addi            000  ... ... .. ... 00 @c_addi4spn
- }
--fld               001  ... ... .. ... 00 @cl_d
-+{
-+  fld             001  ... ... .. ... 00 @cl_d
-+  # *** RV128C specific Standard Extension (Quadrant 0) ***
-+  lq              001  ... ... .. ... 00 @cl_q
-+}
- lw                010  ... ... .. ... 00 @cl_w
--fsd               101  ... ... .. ... 00 @cs_d
-+{
-+  fsd             101  ... ... .. ... 00 @cs_d
-+  # *** RV128C specific Standard Extension (Quadrant 0) ***
-+  sq              101  ... ... .. ... 00 @cs_q
-+}
- sw                110  ... ... .. ... 00 @cs_w
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
-@@ -132,7 +148,11 @@ addw              100 1 11 ... 01 ... 01 @cs_2
- 
- # *** RV32/64C Standard Extension (Quadrant 2) ***
- slli              000 .  .....  ..... 10 @c_shift2
--fld               001 .  .....  ..... 10 @c_ldsp
-+{
-+  fld             001 .  .....  ..... 10 @c_ldsp
-+  # *** RV128C specific Standard Extension (Quadrant 2) ***
-+  lq              001  ... ... .. ... 10 @c_lqsp
-+}
- {
-   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-   lw              010 .  .....  ..... 10 @c_lwsp
-@@ -147,7 +167,11 @@ fld               001 .  .....  ..... 10 @c_ldsp
-   jalr            100 1  .....  00000 10 @c_jalr rd=1  # C.JALR
-   add             100 1  .....  ..... 10 @cr
- }
--fsd               101   ......  ..... 10 @c_sdsp
-+{
-+  fsd             101   ......  ..... 10 @c_sdsp
-+  # *** RV128C specific Standard Extension (Quadrant 2) ***
-+  sq              101  ... ... .. ... 10 @c_sqsp
-+}
- sw                110 .  .....  ..... 10 @c_swsp
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 2) ***
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 2f251dac1b..1e7ddecc22 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -163,6 +163,10 @@ sllw     0000000 .....  ..... 001 ..... 0111011 @r
- srlw     0000000 .....  ..... 101 ..... 0111011 @r
- sraw     0100000 .....  ..... 101 ..... 0111011 @r
- 
-+# *** RV128I Base Instruction Set (in addition to RV64I) ***
-+ldu      ............   ..... 111 ..... 0000011 @i
-+lq       ............   ..... 010 ..... 0001111 @i
-+sq       ............   ..... 100 ..... 0100011 @s
- # *** RV32M Standard Extension ***
- mul      0000001 .....  ..... 000 ..... 0110011 @r
- mulh     0000001 .....  ..... 001 ..... 0110011 @r
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b6ddcf7a10..e8f08f921e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -429,13 +429,6 @@ static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a, DisasExtend ext,
- 
-     gen_set_gpr(ctx, a->rd, dest);
- 
--    /* devilish temporary code so that the patch compiles */
--    if (get_xl_max(ctx) == MXL_RV128) {
--        (void)get_gprh(ctx, 6);
--        (void)dest_gprh(ctx, 6);
--        gen_set_gprh(ctx, 6, NULL);
--    }
--
-     return true;
- }
- 
 diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 5c2a117a70..92f41f3a86 100644
+index 92f41f3a86..b5e292a2aa 100644
 --- a/target/riscv/insn_trans/trans_rvi.c.inc
 +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -134,7 +134,15 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
- }
+@@ -26,14 +26,17 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
  
--static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+static void gen_addi2_i128(TCGv retl, TCGv reth,
-+                           TCGv srcl, TCGv srch, target_long imm)
-+{
-+    TCGv imml  = tcg_constant_tl(imm),
-+         immh  = tcg_constant_tl(-(imm < 0));
-+    tcg_gen_add2_tl(retl, reth, srcl, srch, imml, immh);
-+}
-+
-+static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
+ static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
  {
-     TCGv dest = dest_gpr(ctx, a->rd);
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -150,6 +158,63 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
+-     REQUIRE_64BIT(ctx);
+-     return trans_illegal(ctx, a);
++    REQUIRE_64_OR_128BIT(ctx);
++    return trans_illegal(ctx, a);
  }
  
-+/*
-+ * TODO: we should assert that src1h == 0, as we do not change the
-+ *       address translation mechanism
-+ */
-+static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src1h = get_gprh(ctx, a->rs1);
-+    TCGv destl = dest_gpr(ctx, a->rd);
-+    TCGv desth = dest_gprh(ctx, a->rd);
-+    TCGv addrl = tcg_temp_new();
-+    TCGv addrh = tcg_temp_new();
-+    TCGv imml = tcg_temp_new();
-+    TCGv immh = tcg_constant_tl(-(a->imm < 0));
-+
-+    /* Build a 128-bit address */
-+    if (a->imm != 0) {
-+        tcg_gen_movi_tl(imml, a->imm);
-+        tcg_gen_add2_tl(addrl, addrh, src1l, src1h, imml, immh);
-+    } else {
-+        tcg_gen_mov_tl(addrl, src1l);
-+        tcg_gen_mov_tl(addrh, src1h);
-+    }
-+
-+    if (memop != (MemOp)MO_TEO) {
-+        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, memop);
-+        if (memop & MO_SIGN) {
-+            tcg_gen_sari_tl(desth, destl, 63);
-+        } else {
-+            tcg_gen_movi_tl(desth, 0);
+ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+ {
+     if (a->rd != 0) {
+         tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
++        if (get_xl_max(ctx) == MXL_RV128) {
++            tcg_gen_movi_tl(cpu_gprh[a->rd], -(a->imm < 0));
 +        }
-+    } else {
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? desth : destl, addrl,
-+                           ctx->mem_idx, MO_TEQ);
-+        gen_addi2_i128(addrl, addrh, addrl, addrh, 8);
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? destl : desth, addrl,
-+                           ctx->mem_idx, MO_TEQ);
-+    }
-+
-+    gen_set_gpr(ctx, a->rd, destl);
-+    gen_set_gprh(ctx, a->rd, desth);
-+
-+    tcg_temp_free(addrl);
-+    tcg_temp_free(addrh);
-+    tcg_temp_free(imml);
-+    return true;
-+}
-+
-+static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_load_i128(ctx, a, memop);
-+    } else {
-+        return gen_load_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
- {
-     return gen_load(ctx, a, MO_SB);
-@@ -165,6 +230,18 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
-     return gen_load(ctx, a, MO_TESL);
- }
- 
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TESQ);
-+}
-+
-+static bool trans_lq(DisasContext *ctx, arg_lq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEO);
-+}
-+
- static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
- {
-     return gen_load(ctx, a, MO_UB);
-@@ -177,17 +254,17 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- 
- static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_load(ctx, a, MO_TEUL);
- }
- 
--static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+static bool trans_ldu(DisasContext *ctx, arg_ldu *a)
- {
--    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEQ);
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUQ);
- }
- 
--static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -202,6 +279,55 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+     }
      return true;
  }
- 
-+/*
-+ * TODO: we should assert that src1h == 0, as we do not change the
-+ *       address translation mechanism
-+ */
-+static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src1h = get_gprh(ctx, a->rs1);
-+    TCGv src2l = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv src2h = get_gprh(ctx, a->rs2);
-+    TCGv addrl = tcg_temp_new();
-+    TCGv addrh = tcg_temp_new();
-+    TCGv imml = tcg_temp_new();
-+    TCGv immh = tcg_constant_tl(-(a->imm < 0));
-+
-+    /* Build a 128-bit address */
-+    if (a->imm != 0) {
-+        tcg_gen_movi_tl(imml, a->imm);
-+        tcg_gen_add2_tl(addrl, addrh, src1l, src1h, imml, immh);
-+    } else {
-+        tcg_gen_mov_tl(addrl, src1l);
-+        tcg_gen_mov_tl(addrh, src1h);
-+    }
-+
-+    if (memop != (MemOp)MO_TEO) {
-+        tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, memop);
-+    } else {
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2h : src2l, addrl,
-+            ctx->mem_idx, MO_TEQ);
-+        gen_addi2_i128(addrl, addrh, addrl, addrh, 8);
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2l : src2h, addrl,
-+            ctx->mem_idx, MO_TEQ);
-+    }
-+
-+    tcg_temp_free(addrl);
-+    tcg_temp_free(addrh);
-+    tcg_temp_free(imml);
-+    return true;
-+}
-+
-+static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_store_i128(ctx, a, memop);
-+    } else {
-+        return gen_store_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
+@@ -41,7 +44,19 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
  {
-     return gen_store(ctx, a, MO_SB);
-@@ -219,10 +345,16 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
- 
- static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_store(ctx, a, MO_TEQ);
+     if (a->rd != 0) {
++        if (get_xl_max(ctx) == MXL_RV128) {
++            /* TODO : when pc is 128 bits, use all its bits */
++            TCGv pc = tcg_constant_tl(ctx->base.pc_next),
++                 imml = tcg_constant_tl(a->imm),
++                 immh = tcg_constant_tl(-(a->imm < 0)),
++                 zero = tcg_constant_tl(0);
++            tcg_gen_add2_tl(cpu_gpr[a->rd], cpu_gprh[a->rd],
++                            pc, zero,
++                            imml, immh);
++            return true;
++        }
+         tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
++        return true;
+     }
+     return true;
  }
- 
-+static bool trans_sq(DisasContext *ctx, arg_sq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_store(ctx, a, MO_TEO);
-+}
-+
- static bool trans_addi(DisasContext *ctx, arg_addi *a)
- {
-     return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_addi_tl);
 -- 
 2.33.0
 
