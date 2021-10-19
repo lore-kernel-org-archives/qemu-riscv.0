@@ -1,69 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcjHI-0006h0-UE
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 03:11:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51492)
+	id 1mcjIp-00087E-Pe
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 03:12:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mcjHF-0006fY-On
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:11:13 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34539)
+ id 1mcjIk-00082m-GH
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:12:49 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:30551)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mcjHC-000137-Hu
- for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:11:13 -0400
+ id 1mcjIi-0002Hz-Uz
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:12:46 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634627469;
+ s=mimecast20190719; t=1634627564;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=qZHRcOOuuPdLCczcFEgxMJ1l3XbzH0pusz2B/P0ZKNE=;
- b=KOotkHVUMgncDdIH+dCYAjDOD7AyR8Uimn1LgVCVia2ARjhyFam4+bUgrB2vtZgpqrYA3s
- aJwPWDeYOZQDAvmyS+7Wfa3sKFqFt4rLgbrKTTteGCP66GKhAEQKx+dNrdOhzNpUs+hiVa
- ifZxaSvxBiWv2YYMYGvap5lcm1WRzXk=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-293-gPa0fvwPPL2dfhrpgxRr9A-1; Tue, 19 Oct 2021 03:11:06 -0400
-X-MC-Unique: gPa0fvwPPL2dfhrpgxRr9A-1
-Received: by mail-wr1-f70.google.com with SMTP id
- v15-20020adfa1cf000000b00160940b17a2so9741407wrv.19
- for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 00:11:06 -0700 (PDT)
+ bh=Jls7fUIUE3b4VwemQ8ZxXhWsUTPAqX11INIiPo6qyyI=;
+ b=erblvzzQ1IvXpwud+Re4eFJbmiZq6AU7xr41XLUybWQTjLQafTtHiEOPLerbc4RM9QmHuG
+ KWMyFVgsm9uPs1KynEVtxssWW+ylJMrY5P4XcclLfW1P0N6Hxh7c/auZ9pa2V8mTrH4BlN
+ cji+CgakfJk6cM+pQAbO3OWojbe0Ra4=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-34-wxx17IQRP8SMUe9E9NizoQ-1; Tue, 19 Oct 2021 03:12:43 -0400
+X-MC-Unique: wxx17IQRP8SMUe9E9NizoQ-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ y142-20020a1c7d94000000b00322f2e380f2so417645wmc.6
+ for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 00:12:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=qZHRcOOuuPdLCczcFEgxMJ1l3XbzH0pusz2B/P0ZKNE=;
- b=gnxmreefU7Ft2FoDHIp1UnINz1eUfBDj5dZQBJSos7iv61MtP/Tn/w6Mvb/JjcAM8l
- RIUiBb49BSsVmdPn2GGPsrBh0zfggCDqFJMRljN1Y+/uK+Ehk/ESwbuLoRkjPYfRylF/
- M/l0qKKDphrupJDzWHhcnTjhErfv+Yy6Sey0Om8BuDr2kd5LvG4rW01O3ONpfeknOpw6
- sTGQqWWdpRyOtfEH5vlcRVtbHoaB+TYmX9gjlCISPK4CGKSkDeotoHpobTYqVBKrC2ai
- hZ9DjJ6FU62661AYwBrC0RUBVHiu7aCco6HzfH8UahaOFAVukiQRy0GKxxNzJsdz5Rhe
- pGxA==
-X-Gm-Message-State: AOAM532r2zTPXBa0rbvwDHH1hfV7tnz9gTN7vXYzLSX0IID9uaC11BLR
- 78IDAqLlXG83ZlpLxlf9UBv5l4VHqAjlqc5VHnJoE3IVfd894ZpiPWIBcxjQEp1FYRPNiMoTiCb
- tKbQ5qWUOpi5a4Y0=
-X-Received: by 2002:a05:600c:1d1a:: with SMTP id
- l26mr4126754wms.98.1634627465354; 
- Tue, 19 Oct 2021 00:11:05 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzWKzPWLLO5ieq27Ntzk50ahIHbiJRtPR3rRLWRu/2YfR5sjFvwCYfe7HVYoFj8XME86wK0oQ==
-X-Received: by 2002:a05:600c:1d1a:: with SMTP id
- l26mr4126721wms.98.1634627465040; 
- Tue, 19 Oct 2021 00:11:05 -0700 (PDT)
+ bh=Jls7fUIUE3b4VwemQ8ZxXhWsUTPAqX11INIiPo6qyyI=;
+ b=EMzgk2/FmNFkeiIgFgX505LHeTSuIM7b3DhySIf/hjUp56GQiMvThI5tz+fFzMVX/4
+ xa10a8cVcUEKbPGw/TIecT1PRVP/WsJG703sHIU1pQwQO8bFF4i5SvfCBgPJ+FwWoHZe
+ h+T2yfpswBRX1YjEabI6TgsE7XeWFQr9vOrOuwYORfrhSQgphOJ/DzqSwICtqzk7dYpS
+ +hvej4xzozWjhrpgPba6xP9VkxSAFd6xIeuQk9ih8kxIYBiIAx6TsvRXsn2fIyEDbXEC
+ ZF4kprfknm5mg7w/sM5AKxbvtUfkzBSWidh246Dqt760tKrNWVRWOvgV38HsfiRDfoIc
+ 1fVg==
+X-Gm-Message-State: AOAM532x/04f/Igpb+uZZHSOVem78glp5XFFlGjrXaMNgLVDiM1AVxW2
+ vxB0fLmi/qVQursM8Qruk11SoowFugk61zUXfSGNAS5yeh5mdjK5ETbuzMPBcljq2hVaLo17TTG
+ /HVlpSJopkanZzBk=
+X-Received: by 2002:a1c:1b90:: with SMTP id b138mr4132963wmb.160.1634627561897; 
+ Tue, 19 Oct 2021 00:12:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyCs83txbyX8xd0vm3LyQi5vQVTJ5kymzXvcDnXDzF4P8h2080bKNyiXSsb0+/+JH+eEPvJig==
+X-Received: by 2002:a1c:1b90:: with SMTP id b138mr4132951wmb.160.1634627561719; 
+ Tue, 19 Oct 2021 00:12:41 -0700 (PDT)
 Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id c185sm1462385wma.8.2021.10.19.00.11.04
+ by smtp.gmail.com with ESMTPSA id g8sm1132599wrx.26.2021.10.19.00.12.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 00:11:04 -0700 (PDT)
-Date: Tue, 19 Oct 2021 09:11:03 +0200
+ Tue, 19 Oct 2021 00:12:41 -0700 (PDT)
+Date: Tue, 19 Oct 2021 09:12:40 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: Re: [PATCH 2/6] hw/riscv: opentitan: Use MachineState::ram and
+Subject: Re: [PATCH 3/6] hw/riscv: shakti_c: Use MachineState::ram and
  MachineClass::default_ram_id
-Message-ID: <20211019091103.68908df5@redhat.com>
-In-Reply-To: <20211018153829.24382-2-bmeng.cn@gmail.com>
+Message-ID: <20211019091240.4cb89b87@redhat.com>
+In-Reply-To: <20211018153829.24382-3-bmeng.cn@gmail.com>
 References: <20211018153829.24382-1-bmeng.cn@gmail.com>
- <20211018153829.24382-2-bmeng.cn@gmail.com>
+ <20211018153829.24382-3-bmeng.cn@gmail.com>
 X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
@@ -72,13 +70,13 @@ X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) DKIMWL_WL_HIGH=-0.049, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.049,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -93,9 +91,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 07:11:14 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 07:12:49 -0000
 
-On Mon, 18 Oct 2021 23:38:25 +0800
+On Mon, 18 Oct 2021 23:38:26 +0800
 Bin Meng <bmeng.cn@gmail.com> wrote:
 
 > Using memory_region_init_ram(), which can't possibly handle vhost-user,
@@ -106,51 +104,46 @@ Bin Meng <bmeng.cn@gmail.com> wrote:
 > opt in to memdev scheme.
 > 
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+
+Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+
 > ---
 > 
->  hw/riscv/opentitan.c | 6 ++----
+>  hw/riscv/shakti_c.c | 6 ++----
 >  1 file changed, 2 insertions(+), 4 deletions(-)
 > 
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 9803ae6d70..c356293d29 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -67,17 +67,14 @@ static void opentitan_board_init(MachineState *machine)
->      const MemMapEntry *memmap = ibex_memmap;
->      OpenTitanState *s = g_new0(OpenTitanState, 1);
->      MemoryRegion *sys_mem = get_system_memory();
+> diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+> index d7d1f91fa5..90e2cf609f 100644
+> --- a/hw/riscv/shakti_c.c
+> +++ b/hw/riscv/shakti_c.c
+> @@ -45,7 +45,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
+>  {
+>      ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
+>      MemoryRegion *system_memory = get_system_memory();
 > -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-
-It is likely that you are missing fixed size check here
-(looking at code it seems to me that board doesn't support variable RAM size)
-See commit 00b9829f83c for example.
-
->      /* Initialize SoC */
->      object_initialize_child(OBJECT(machine), "soc", &s->soc,
->                              TYPE_RISCV_IBEX_SOC);
->      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
 >  
-> -    memory_region_init_ram(main_mem, NULL, "riscv.lowrisc.ibex.ram",
-> -        memmap[IBEX_DEV_RAM].size, &error_fatal);
->      memory_region_add_subregion(sys_mem,
-> -        memmap[IBEX_DEV_RAM].base, main_mem);
-> +        memmap[IBEX_DEV_RAM].base, machine->ram);
+>      /* Allow only Shakti C CPU for this platform */
+>      if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
+> @@ -59,11 +58,9 @@ static void shakti_c_machine_state_init(MachineState *mstate)
+>      qdev_realize(DEVICE(&sms->soc), NULL, &error_abort);
 >  
->      if (machine->firmware) {
->          riscv_load_firmware(machine->firmware, memmap[IBEX_DEV_RAM].base, NULL);
-> @@ -95,6 +92,7 @@ static void opentitan_machine_init(MachineClass *mc)
->      mc->init = opentitan_board_init;
->      mc->max_cpus = 1;
->      mc->default_cpu_type = TYPE_RISCV_CPU_IBEX;
-> +    mc->default_ram_id = "riscv.lowrisc.ibex.ram";
-
-Are you missing "mc->default_ram_size = memmap[IBEX_DEV_RAM].size" here?
-
-otherwise it will default to generic:
-  hw/core/machine.c:    mc->default_ram_size = 128 * MiB;
-
+>      /* register RAM */
+> -    memory_region_init_ram(main_mem, NULL, "riscv.shakti.c.ram",
+> -                           mstate->ram_size, &error_fatal);
+>      memory_region_add_subregion(system_memory,
+>                                  shakti_c_memmap[SHAKTI_C_RAM].base,
+> -                                main_mem);
+> +                                mstate->ram);
+>  
+>      /* ROM reset vector */
+>      riscv_setup_rom_reset_vec(mstate, &sms->soc.cpus,
+> @@ -88,6 +85,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
+>      mc->desc = "RISC-V Board compatible with Shakti SDK";
+>      mc->init = shakti_c_machine_state_init;
+>      mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
+> +    mc->default_ram_id = "riscv.shakti.c.ram";
 >  }
 >  
->  DEFINE_MACHINE("opentitan", opentitan_machine_init)
+>  static const TypeInfo shakti_c_machine_type_info = {
 
 
