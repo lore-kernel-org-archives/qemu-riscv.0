@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mccZb-00059N-Ja
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 20:01:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43426)
+	id 1mccZe-0005EY-0L
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Oct 2021 20:01:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43452)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mccZS-000507-3O
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:34 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:42655)
+ id 1mccZS-000521-S0
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:35 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:33784)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mccZF-0001lW-6r
- for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:33 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id m14so16023716pfc.9
- for <qemu-riscv@nongnu.org>; Mon, 18 Oct 2021 17:01:20 -0700 (PDT)
+ id 1mccZG-0001mg-5A
+ for qemu-riscv@nongnu.org; Mon, 18 Oct 2021 20:01:34 -0400
+Received: by mail-pf1-x430.google.com with SMTP id t184so15195361pfd.0
+ for <qemu-riscv@nongnu.org>; Mon, 18 Oct 2021 17:01:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=v38EgObVIQZxnJyRBCc7mAXK+cvyWQc+ZvLKbhcUEpc=;
- b=l+IKxgPe6q3NntPeN7/pgNueU3oalEnsj71rx1BMQFY88ZEwkFl6BiHcHRYw22rhQR
- gRWvb27pl6RaUu/mgW8cIJkj93Ie+AJ5ZlmubQuQZ+QWdvPzaoTxtpKj98GXENAXdfir
- Q9YZVOKxjgasLqGSI8voT38djA5bcqvx6hNubASgmrpnR37zwDMMt8KdWlBwYcDTIdQG
- URS586XRC8aLJU8/cWqL9wiHUBclAXUDS3EMQOC9PDjvhEcpQeEDZh1Zzb/jOT+3Cz38
- gY6TndAqGZGfrQMS7nku+WEZnC/+X3/ey9rX7sLch5xRwdILuP3NGn7+Wssje8j1+/hw
- r7Lg==
+ bh=0Uy+EMg3VuLMVRYQKBMZoT0zq//rHXap3pUqZ5CBHGc=;
+ b=T9mvGZ1HotAqhPr7Qz4XIks4xqUpqgDzXrLpEZOEPa23ccHbxvTxSl4izWudwdx8OW
+ fO8B668eULvZGL50+uQVwP3Ess4u76l9OlN83bqqYDE+vY6aDg8UFp/Av5+cATSDxhqx
+ osU0bYTbJY8dcMrvOny+Vlz6HaPxRfULk4RJ3zAmDLbu8PMHRilUzYPA8OaUQeML/TN3
+ YCxlslP4cbfyDcb/lYwGXk+53YC6nbkz/srUottFmm/8b2b4zfDvkZk1nfglCNrdFmyT
+ UHHseDToPgwPkIOGlHyRmr/Rr/6fDkxtQHmC+YPxVO8Drspa2DfOyLVeUeDefHpIaFOY
+ GrRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=v38EgObVIQZxnJyRBCc7mAXK+cvyWQc+ZvLKbhcUEpc=;
- b=feC0oTxROLPR15069U97vQItWf0agcpurQ3QeXhxnMiFhTEuQposbG3C3TktYxn3eS
- 0fCOTZ131CrkQ9AXPO844a9mgpFfuGLv1iExJXYXfUctRdGoxDbUG5HuNvTuSEYCPQnb
- 2a9+deFAqDz5yo4ggE9gVnUGmHkbr0ymsuKSODkAT9+5E382upf8WZuV94qoPAqHEW2r
- gN9uecsPw6MU9LFG09F2MRHc9PqyNYrNtNbRyVSisnWkCI1xVmGmJ0lhj8J8K2rgdaY3
- SYprVvx5vmRUzWFdLsQK8ks+shssNA828VKhV3qtzXoNRnf+o4q7j7MqN/KZ+JN1Hqvb
- yY3g==
-X-Gm-Message-State: AOAM5314H4gEI5isQieSpVaaoD77KzD6YhGwg0iOOfHannHFr4XQdVtL
- JVUcHoUt5HzgSvnrKTkHVO9crQ==
-X-Google-Smtp-Source: ABdhPJyrO7r48QwA4biYvByGgZqhaFylvMajxqBlgMFJF6CzwyEmsoocUl8L+2zoi30iwJ675QboBQ==
-X-Received: by 2002:a63:7d01:: with SMTP id y1mr26415290pgc.343.1634601679405; 
- Mon, 18 Oct 2021 17:01:19 -0700 (PDT)
+ bh=0Uy+EMg3VuLMVRYQKBMZoT0zq//rHXap3pUqZ5CBHGc=;
+ b=tWdFeMwM1l0WlR5XiEZBmgqfOJwHD77YirMn9zpN7t4SgfapdkYfd3oQLSskgpxF/W
+ MrOnvQ1B4IYwglR2Fo3xelnqMo4VDItXTGbFYWYQsOBHmJ4HWbY7Qb2dUJnE55TZwdBS
+ FHqrLWeThDUFt4+NcVGltcGLDORZVBBApDAQLNtwZnSunMJ3/JGyqJuUHAC729O+JvUl
+ in6r/e9W1TBolVvI1LYI2m2udDbIyL3nypBtemUzk/pIJ0cq3aBR0QbY9XJ4nPQaKxX6
+ edddbYyA5UV8tslE/xoUhjLs39zem4zFNnhlXqCIREI0PjV4ALnMtuyp6JKhGyoFXsn+
+ ALNQ==
+X-Gm-Message-State: AOAM5337SGfjY5kHf0nSri81nx9QtzxgO844lDXU64kkyOiF7HfdOqmw
+ p7W8GilzlgDejloXW5W/m0sn4Q==
+X-Google-Smtp-Source: ABdhPJx4e97axyzkE2xgZ43LwxrRqq+8Du68zpAI+MGpSrojmPpkkFtLebDR+FMq0ydXKf75CwJl9Q==
+X-Received: by 2002:a65:6a0f:: with SMTP id m15mr26313241pgu.298.1634601680630; 
+ Mon, 18 Oct 2021 17:01:20 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id q14sm3068220pfk.3.2021.10.18.17.01.18
+ by smtp.gmail.com with ESMTPSA id q14sm3068220pfk.3.2021.10.18.17.01.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Oct 2021 17:01:19 -0700 (PDT)
+ Mon, 18 Oct 2021 17:01:20 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	alistair.francis@wdc.com,
 	zhiwei_liu@c-sky.com
-Subject: [PATCH v4 13/16] target/riscv: Use gen_shift*_per_ol for RVB, RVI
-Date: Mon, 18 Oct 2021 17:01:05 -0700
-Message-Id: <20211019000108.3678724-14-richard.henderson@linaro.org>
+Subject: [PATCH v4 15/16] target/riscv: Use riscv_csrrw_debug for cpu_dump
+Date: Mon, 18 Oct 2021 17:01:07 -0700
+Message-Id: <20211019000108.3678724-16-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211019000108.3678724-1-richard.henderson@linaro.org>
 References: <20211019000108.3678724-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,256 +77,129 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 00:01:34 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 00:01:40 -0000
 
-Most shift instructions require a separate implementation
-for RV32 when TARGET_LONG_BITS == 64.
+Use the official debug read interface to the csrs,
+rather than referencing the env slots directly.
+Put the list of csrs to dump into a table.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c                | 31 +++++++++
- target/riscv/insn_trans/trans_rvb.c.inc | 92 ++++++++++++++-----------
- target/riscv/insn_trans/trans_rvi.c.inc | 26 +++----
- 3 files changed, 97 insertions(+), 52 deletions(-)
+ target/riscv/cpu.c | 99 +++++++++++++++++++++++++---------------------
+ 1 file changed, 55 insertions(+), 44 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index ebcd1c8431..de013fbf9b 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -438,6 +438,22 @@ static bool gen_shift_imm_fn(DisasContext *ctx, arg_shift *a, DisasExtend ext,
-     return true;
- }
- 
-+static bool gen_shift_imm_fn_per_ol(DisasContext *ctx, arg_shift *a,
-+                                    DisasExtend ext,
-+                                    void (*f_tl)(TCGv, TCGv, target_long),
-+                                    void (*f_32)(TCGv, TCGv, target_long))
-+{
-+    int olen = get_olen(ctx);
-+    if (olen != TARGET_LONG_BITS) {
-+        if (olen == 32) {
-+            f_tl = f_32;
-+        } else {
-+            g_assert_not_reached();
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f352c2b74c..b81b880900 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -241,52 +241,63 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+     }
+ #endif
+     qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n", "pc", env->pc);
++
+ #ifndef CONFIG_USER_ONLY
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mhartid ", env->mhartid);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatus ", (target_ulong)env->mstatus);
+-    if (riscv_cpu_mxl(env) == MXL_RV32) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mstatush ",
+-                     (target_ulong)(env->mstatus >> 32));
++    {
++        static const struct {
++            const char *name;
++            int csrno;
++            int misa;
++            bool rv32;
++        } dump_csrs[] = {
++            { "mhartid",    CSR_MHARTID },
++            { "mstatus",    CSR_MSTATUS },
++            { "mstatush",   CSR_MSTATUSH, 0, true },
++            { "hstatus",    CSR_HSTATUS,  RVH },
++            { "vsstatus",   CSR_VSSTATUS, RVH },
++            { "mip",        CSR_MIP },
++            { "mie",        CSR_MIE },
++            { "mideleg",    CSR_MIDELEG },
++            { "hideleg",    CSR_HIDELEG,  RVH },
++            { "medeleg",    CSR_MEDELEG },
++            { "hedeleg",    CSR_HEDELEG,  RVH },
++            { "mtvec",      CSR_MTVEC },
++            { "stvec",      CSR_STVEC },
++            { "vstvec",     CSR_VSTVEC,   RVH },
++            { "mepc",       CSR_MEPC },
++            { "sepc",       CSR_SEPC },
++            { "vsepc",      CSR_VSEPC,    RVH },
++            { "mcause",     CSR_MCAUSE },
++            { "scause",     CSR_SCAUSE },
++            { "vscause",    CSR_VSCAUSE,  RVH },
++            { "mtval",      CSR_MTVAL },
++            { "stval",      CSR_STVAL },
++            { "htval",      CSR_HTVAL,    RVH },
++            { "mtval2",     CSR_MTVAL2,   RVH },
++            { "mscratch",   CSR_MSCRATCH },
++            { "sscratch",   CSR_SSCRATCH },
++            { "satp",       CSR_SATP},
++        };
++
++        bool rv32 = riscv_cpu_mxl(env) == MXL_RV32;
++
++        for (int i = 0; i < ARRAY_SIZE(dump_csrs); ++i) {
++            target_ulong val = 0;
++            RISCVException result;
++
++            if (dump_csrs[i].misa && !riscv_has_ext(env, dump_csrs[i].misa)) {
++                continue;
++            }
++            if (dump_csrs[i].rv32 && !rv32) {
++                continue;
++            }
++
++            result = riscv_csrrw_debug(env, dump_csrs[i].csrno, &val, 0, 0);
++            assert(result == RISCV_EXCP_NONE);
++            qemu_fprintf(f, " %-8s " TARGET_FMT_lx "\n",
++                         dump_csrs[i].name, val);
 +        }
-+    }
-+    return gen_shift_imm_fn(ctx, a, ext, f_tl);
-+}
-+
- static bool gen_shift_imm_tl(DisasContext *ctx, arg_shift *a, DisasExtend ext,
-                              void (*func)(TCGv, TCGv, TCGv))
- {
-@@ -474,6 +490,21 @@ static bool gen_shift(DisasContext *ctx, arg_r *a, DisasExtend ext,
-     return true;
- }
+     }
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hstatus ", env->hstatus);
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsstatus ",
+-                     (target_ulong)env->vsstatus);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mip     ", env->mip);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mie     ", env->mie);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mideleg ", env->mideleg);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hideleg ", env->hideleg);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "medeleg ", env->medeleg);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "hedeleg ", env->hedeleg);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtvec   ", env->mtvec);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stvec   ", env->stvec);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vstvec  ", env->vstvec);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mepc    ", env->mepc);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sepc    ", env->sepc);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vsepc   ", env->vsepc);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mcause  ", env->mcause);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "scause  ", env->scause);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "vscause ", env->vscause);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval   ", env->mtval);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "stval   ", env->stval);
+-    if (riscv_has_ext(env, RVH)) {
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "htval ", env->htval);
+-        qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mtval2 ", env->mtval2);
+-    }
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "mscratch", env->mscratch);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "sscratch", env->sscratch);
+-    qemu_fprintf(f, " %s " TARGET_FMT_lx "\n", "satp    ", env->satp);
+ #endif
  
-+static bool gen_shift_per_ol(DisasContext *ctx, arg_r *a, DisasExtend ext,
-+                             void (*f_tl)(TCGv, TCGv, TCGv),
-+                             void (*f_32)(TCGv, TCGv, TCGv))
-+{
-+    int olen = get_olen(ctx);
-+    if (olen != TARGET_LONG_BITS) {
-+        if (olen == 32) {
-+            f_tl = f_32;
-+        } else {
-+            g_assert_not_reached();
-+        }
-+    }
-+    return gen_shift(ctx, a, ext, f_tl);
-+}
-+
- static bool gen_unary(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
-                       void (*func)(TCGv, TCGv))
- {
-diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index 0c2120428d..cc39e6033b 100644
---- a/target/riscv/insn_trans/trans_rvb.c.inc
-+++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -227,22 +227,70 @@ static bool trans_bexti(DisasContext *ctx, arg_bexti *a)
-     return gen_shift_imm_tl(ctx, a, EXT_NONE, gen_bext);
- }
- 
-+static void gen_rorw(TCGv ret, TCGv arg1, TCGv arg2)
-+{
-+    TCGv_i32 t1 = tcg_temp_new_i32();
-+    TCGv_i32 t2 = tcg_temp_new_i32();
-+
-+    /* truncate to 32-bits */
-+    tcg_gen_trunc_tl_i32(t1, arg1);
-+    tcg_gen_trunc_tl_i32(t2, arg2);
-+
-+    tcg_gen_rotr_i32(t1, t1, t2);
-+
-+    /* sign-extend 64-bits */
-+    tcg_gen_ext_i32_tl(ret, t1);
-+
-+    tcg_temp_free_i32(t1);
-+    tcg_temp_free_i32(t2);
-+}
-+
- static bool trans_ror(DisasContext *ctx, arg_ror *a)
- {
-     REQUIRE_ZBB(ctx);
--    return gen_shift(ctx, a, EXT_NONE, tcg_gen_rotr_tl);
-+    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotr_tl, gen_rorw);
-+}
-+
-+static void gen_roriw(TCGv ret, TCGv arg1, target_long shamt)
-+{
-+    TCGv_i32 t1 = tcg_temp_new_i32();
-+
-+    tcg_gen_trunc_tl_i32(t1, arg1);
-+    tcg_gen_rotri_i32(t1, t1, shamt);
-+    tcg_gen_ext_i32_tl(ret, t1);
-+
-+    tcg_temp_free_i32(t1);
- }
- 
- static bool trans_rori(DisasContext *ctx, arg_rori *a)
- {
-     REQUIRE_ZBB(ctx);
--    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_rotri_tl);
-+    return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
-+                                   tcg_gen_rotri_tl, gen_roriw);
-+}
-+
-+static void gen_rolw(TCGv ret, TCGv arg1, TCGv arg2)
-+{
-+    TCGv_i32 t1 = tcg_temp_new_i32();
-+    TCGv_i32 t2 = tcg_temp_new_i32();
-+
-+    /* truncate to 32-bits */
-+    tcg_gen_trunc_tl_i32(t1, arg1);
-+    tcg_gen_trunc_tl_i32(t2, arg2);
-+
-+    tcg_gen_rotl_i32(t1, t1, t2);
-+
-+    /* sign-extend 64-bits */
-+    tcg_gen_ext_i32_tl(ret, t1);
-+
-+    tcg_temp_free_i32(t1);
-+    tcg_temp_free_i32(t2);
- }
- 
- static bool trans_rol(DisasContext *ctx, arg_rol *a)
- {
-     REQUIRE_ZBB(ctx);
--    return gen_shift(ctx, a, EXT_NONE, tcg_gen_rotl_tl);
-+    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotl_tl, gen_rolw);
- }
- 
- static void gen_rev8_32(TCGv ret, TCGv src1)
-@@ -349,24 +397,6 @@ static bool trans_cpopw(DisasContext *ctx, arg_cpopw *a)
-     return gen_unary(ctx, a, EXT_ZERO, tcg_gen_ctpop_tl);
- }
- 
--static void gen_rorw(TCGv ret, TCGv arg1, TCGv arg2)
--{
--    TCGv_i32 t1 = tcg_temp_new_i32();
--    TCGv_i32 t2 = tcg_temp_new_i32();
--
--    /* truncate to 32-bits */
--    tcg_gen_trunc_tl_i32(t1, arg1);
--    tcg_gen_trunc_tl_i32(t2, arg2);
--
--    tcg_gen_rotr_i32(t1, t1, t2);
--
--    /* sign-extend 64-bits */
--    tcg_gen_ext_i32_tl(ret, t1);
--
--    tcg_temp_free_i32(t1);
--    tcg_temp_free_i32(t2);
--}
--
- static bool trans_rorw(DisasContext *ctx, arg_rorw *a)
- {
-     REQUIRE_64BIT(ctx);
-@@ -380,25 +410,7 @@ static bool trans_roriw(DisasContext *ctx, arg_roriw *a)
-     REQUIRE_64BIT(ctx);
-     REQUIRE_ZBB(ctx);
-     ctx->ol = MXL_RV32;
--    return gen_shift_imm_tl(ctx, a, EXT_NONE, gen_rorw);
--}
--
--static void gen_rolw(TCGv ret, TCGv arg1, TCGv arg2)
--{
--    TCGv_i32 t1 = tcg_temp_new_i32();
--    TCGv_i32 t2 = tcg_temp_new_i32();
--
--    /* truncate to 32-bits */
--    tcg_gen_trunc_tl_i32(t1, arg1);
--    tcg_gen_trunc_tl_i32(t2, arg2);
--
--    tcg_gen_rotl_i32(t1, t1, t2);
--
--    /* sign-extend 64-bits */
--    tcg_gen_ext_i32_tl(ret, t1);
--
--    tcg_temp_free_i32(t1);
--    tcg_temp_free_i32(t2);
-+    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw);
- }
- 
- static bool trans_rolw(DisasContext *ctx, arg_rolw *a)
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 9cf0383cfb..91dc438a3a 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -268,14 +268,26 @@ static bool trans_slli(DisasContext *ctx, arg_slli *a)
-     return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl);
- }
- 
-+static void gen_srliw(TCGv dst, TCGv src, target_long shamt)
-+{
-+    tcg_gen_extract_tl(dst, src, shamt, 32 - shamt);
-+}
-+
- static bool trans_srli(DisasContext *ctx, arg_srli *a)
- {
--    return gen_shift_imm_fn(ctx, a, EXT_ZERO, tcg_gen_shri_tl);
-+    return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
-+                                   tcg_gen_shri_tl, gen_srliw);
-+}
-+
-+static void gen_sraiw(TCGv dst, TCGv src, target_long shamt)
-+{
-+    tcg_gen_sextract_tl(dst, src, shamt, 32 - shamt);
- }
- 
- static bool trans_srai(DisasContext *ctx, arg_srai *a)
- {
--    return gen_shift_imm_fn(ctx, a, EXT_SIGN, tcg_gen_sari_tl);
-+    return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
-+                                   tcg_gen_sari_tl, gen_sraiw);
- }
- 
- static bool trans_add(DisasContext *ctx, arg_add *a)
-@@ -342,11 +354,6 @@ static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
-     return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl);
- }
- 
--static void gen_srliw(TCGv dst, TCGv src, target_long shamt)
--{
--    tcg_gen_extract_tl(dst, src, shamt, 32 - shamt);
--}
--
- static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
- {
-     REQUIRE_64BIT(ctx);
-@@ -354,11 +361,6 @@ static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
-     return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_srliw);
- }
- 
--static void gen_sraiw(TCGv dst, TCGv src, target_long shamt)
--{
--    tcg_gen_sextract_tl(dst, src, shamt, 32 - shamt);
--}
--
- static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
- {
-     REQUIRE_64BIT(ctx);
+     for (i = 0; i < 32; i++) {
 -- 
 2.25.1
 
