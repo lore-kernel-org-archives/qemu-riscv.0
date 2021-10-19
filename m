@@ -1,69 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mcj9K-00083T-Mf
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 03:03:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50088)
+	id 1mcjHI-0006h0-UE
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 03:11:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51492)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mcj9J-00082I-Ux; Tue, 19 Oct 2021 03:03:01 -0400
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134]:41542)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mcj9I-000169-B0; Tue, 19 Oct 2021 03:03:01 -0400
-Received: by mail-lf1-x134.google.com with SMTP id u21so5238416lff.8;
- Tue, 19 Oct 2021 00:02:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GSKLXvZvL2/MxJBWWyOuBI4DqH3VyR3gjpsr+SL5eB0=;
- b=PIPiFH4r7PuuEZRv6Mw+qRP+G5WOYAOleFlPGxFu6xt0b3HrsBOT+6CjbH2R8u8Mrs
- HCN8ywaTme/mkkOh20KQcIPMnlL8tu2lQom99IgIfiVoDbA1I0MciGC+rhDroe7TfNQy
- b8kAQuNnOrvXH59IXIMoMFppeemmTDkbQTEhh9sMwJI94VhDfpq+31at1iTXNLjC2+PX
- TJ9MWJPxGow+9s8R3fvoqPtupMgK5ieyp29PRBx5pvfJlmvmC8ZzNmU/m9cOp/gP7+hX
- tkWNP10xpGOnwkvnRIhnCZ8obiVGGBLNwR8VEwL2WLFKGFhgYgAbVzqdm9fgJ9EbmpPm
- dY4Q==
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mcjHF-0006fY-On
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:11:13 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:34539)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1mcjHC-000137-Hu
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 03:11:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634627469;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qZHRcOOuuPdLCczcFEgxMJ1l3XbzH0pusz2B/P0ZKNE=;
+ b=KOotkHVUMgncDdIH+dCYAjDOD7AyR8Uimn1LgVCVia2ARjhyFam4+bUgrB2vtZgpqrYA3s
+ aJwPWDeYOZQDAvmyS+7Wfa3sKFqFt4rLgbrKTTteGCP66GKhAEQKx+dNrdOhzNpUs+hiVa
+ ifZxaSvxBiWv2YYMYGvap5lcm1WRzXk=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-293-gPa0fvwPPL2dfhrpgxRr9A-1; Tue, 19 Oct 2021 03:11:06 -0400
+X-MC-Unique: gPa0fvwPPL2dfhrpgxRr9A-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ v15-20020adfa1cf000000b00160940b17a2so9741407wrv.19
+ for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 00:11:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GSKLXvZvL2/MxJBWWyOuBI4DqH3VyR3gjpsr+SL5eB0=;
- b=CBkMKYSiPQResue1mOe2jey1ibU0qLsEfwFkTjzrwNeVi6OdCbE0G2oTsMuSmRs+1D
- 9XstZ8lohh4G3EgYFn4GiIqH58EdEj75erhBACHIHDSqCpX7gVAsPgQasD2MTkLvWP1l
- c58CnJbJlupIm592F1ffl0F0XJoFfHU5SaVbuixGSBewGHL/H5/VwNzlfagZvSfwe5uq
- JmIGJ+KdHrvUcUgLAec15Xx3Lcd65bvfp2Q3BYUQKHhVid90T2BYCYTvvYmkvrbDTL4b
- Wz1ajmZ5vqcDK5ng9THce8T+ch+lteNMJ27DolGj4EJ4mG2x2AdWD/B5yimWR79Rdy6i
- iPzA==
-X-Gm-Message-State: AOAM532PwyALp1HYYi+KhCTUfXx/sI3KMgvc1zI2PNxxwyHPpVvvzuaY
- vEkXpQONxcCTjXvKUJu88/46Szzam0armum94Ew=
-X-Google-Smtp-Source: ABdhPJwP09R9jNT2M3OtRNZs4fr6LNf6PTzAjqDkJzyINj48kM2RCc85NG5ZVYMw+Ed9e383sA57E3owX1acOIkiCpw=
-X-Received: by 2002:a05:6512:c3:: with SMTP id
- c3mr4578900lfp.409.1634626977411; 
- Tue, 19 Oct 2021 00:02:57 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=qZHRcOOuuPdLCczcFEgxMJ1l3XbzH0pusz2B/P0ZKNE=;
+ b=gnxmreefU7Ft2FoDHIp1UnINz1eUfBDj5dZQBJSos7iv61MtP/Tn/w6Mvb/JjcAM8l
+ RIUiBb49BSsVmdPn2GGPsrBh0zfggCDqFJMRljN1Y+/uK+Ehk/ESwbuLoRkjPYfRylF/
+ M/l0qKKDphrupJDzWHhcnTjhErfv+Yy6Sey0Om8BuDr2kd5LvG4rW01O3ONpfeknOpw6
+ sTGQqWWdpRyOtfEH5vlcRVtbHoaB+TYmX9gjlCISPK4CGKSkDeotoHpobTYqVBKrC2ai
+ hZ9DjJ6FU62661AYwBrC0RUBVHiu7aCco6HzfH8UahaOFAVukiQRy0GKxxNzJsdz5Rhe
+ pGxA==
+X-Gm-Message-State: AOAM532r2zTPXBa0rbvwDHH1hfV7tnz9gTN7vXYzLSX0IID9uaC11BLR
+ 78IDAqLlXG83ZlpLxlf9UBv5l4VHqAjlqc5VHnJoE3IVfd894ZpiPWIBcxjQEp1FYRPNiMoTiCb
+ tKbQ5qWUOpi5a4Y0=
+X-Received: by 2002:a05:600c:1d1a:: with SMTP id
+ l26mr4126754wms.98.1634627465354; 
+ Tue, 19 Oct 2021 00:11:05 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzWKzPWLLO5ieq27Ntzk50ahIHbiJRtPR3rRLWRu/2YfR5sjFvwCYfe7HVYoFj8XME86wK0oQ==
+X-Received: by 2002:a05:600c:1d1a:: with SMTP id
+ l26mr4126721wms.98.1634627465040; 
+ Tue, 19 Oct 2021 00:11:05 -0700 (PDT)
+Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
+ by smtp.gmail.com with ESMTPSA id c185sm1462385wma.8.2021.10.19.00.11.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Oct 2021 00:11:04 -0700 (PDT)
+Date: Tue, 19 Oct 2021 09:11:03 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH 2/6] hw/riscv: opentitan: Use MachineState::ram and
+ MachineClass::default_ram_id
+Message-ID: <20211019091103.68908df5@redhat.com>
+In-Reply-To: <20211018153829.24382-2-bmeng.cn@gmail.com>
+References: <20211018153829.24382-1-bmeng.cn@gmail.com>
+ <20211018153829.24382-2-bmeng.cn@gmail.com>
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-References: <20211017172728.759687-1-space.monkey.delivers@gmail.com>
- <20211017172728.759687-5-space.monkey.delivers@gmail.com>
- <CAKmqyKPDfYan+czM+1AnJ7+gyjZAKDobxDvJ40R8Sor0FH4HNw@mail.gmail.com>
-In-Reply-To: <CAKmqyKPDfYan+czM+1AnJ7+gyjZAKDobxDvJ40R8Sor0FH4HNw@mail.gmail.com>
-From: Alexey Baturo <baturo.alexey@gmail.com>
-Date: Tue, 19 Oct 2021 10:02:46 +0300
-Message-ID: <CAFukJ-AogZ-cN9XUowC1VcgAfsbN_ZqZ98UPvJ7=0Tq1DPCEKQ@mail.gmail.com>
-Subject: Re: [PATCH v14 4/8] [RISCV_PM] Add J extension state description
-To: Alistair Francis <alistair23@gmail.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, 
- "space.monkey.delivers@gmail.com" <space.monkey.delivers@gmail.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="00000000000054353905ceaf4085"
-Received-SPF: pass client-ip=2a00:1450:4864:20::134;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x134.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) DKIMWL_WL_HIGH=-0.049, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,109 +93,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Oct 2021 07:03:02 -0000
+X-List-Received-Date: Tue, 19 Oct 2021 07:11:14 -0000
 
---00000000000054353905ceaf4085
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Mon, 18 Oct 2021 23:38:25 +0800
+Bin Meng <bmeng.cn@gmail.com> wrote:
 
-Sure, will fix that.
-Thanks
+> Using memory_region_init_ram(), which can't possibly handle vhost-user,
+> and can't work as expected with '-numa node,memdev' options.
+> 
+> Use MachineState::ram instead of manually initializing RAM memory
+> region, as well as by providing MachineClass::default_ram_id to
+> opt in to memdev scheme.
+> 
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+> 
+>  hw/riscv/opentitan.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 9803ae6d70..c356293d29 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -67,17 +67,14 @@ static void opentitan_board_init(MachineState *machine)
+>      const MemMapEntry *memmap = ibex_memmap;
+>      OpenTitanState *s = g_new0(OpenTitanState, 1);
+>      MemoryRegion *sys_mem = get_system_memory();
+> -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
 
-=D0=B2=D1=82, 19 =D0=BE=D0=BA=D1=82. 2021 =D0=B3. =D0=B2 09:53, Alistair Fr=
-ancis <alistair23@gmail.com>:
+It is likely that you are missing fixed size check here
+(looking at code it seems to me that board doesn't support variable RAM size)
+See commit 00b9829f83c for example.
 
-> On Mon, Oct 18, 2021 at 3:36 AM Alexey Baturo <baturo.alexey@gmail.com>
-> wrote:
-> >
-> > Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
-> > ---
-> >  target/riscv/machine.c | 27 +++++++++++++++++++++++++++
-> >  1 file changed, 27 insertions(+)
-> >
-> > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> > index 16a08302da..4d99880797 100644
-> > --- a/target/riscv/machine.c
-> > +++ b/target/riscv/machine.c
-> > @@ -84,6 +84,14 @@ static bool vector_needed(void *opaque)
-> >      return riscv_has_ext(env, RVV);
-> >  }
-> >
-> > +static bool pointermasking_needed(void *opaque)
-> > +{
-> > +    RISCVCPU *cpu =3D opaque;
-> > +    CPURISCVState *env =3D &cpu->env;
-> > +
-> > +    return riscv_has_ext(env, RVJ);
-> > +}
-> > +
-> >  static const VMStateDescription vmstate_vector =3D {
-> >      .name =3D "cpu/vector",
-> >      .version_id =3D 1,
-> > @@ -138,6 +146,24 @@ static const VMStateDescription vmstate_hyper =3D =
-{
-> >      }
-> >  };
-> >
-> > +static const VMStateDescription vmstate_pointermasking =3D {
-> > +    .name =3D "cpu/pm",
->
-> Can we write "cpu/pointer_masking"? pm sounds like power management
->
-> Alistair
->
+>      /* Initialize SoC */
+>      object_initialize_child(OBJECT(machine), "soc", &s->soc,
+>                              TYPE_RISCV_IBEX_SOC);
+>      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+>  
+> -    memory_region_init_ram(main_mem, NULL, "riscv.lowrisc.ibex.ram",
+> -        memmap[IBEX_DEV_RAM].size, &error_fatal);
+>      memory_region_add_subregion(sys_mem,
+> -        memmap[IBEX_DEV_RAM].base, main_mem);
+> +        memmap[IBEX_DEV_RAM].base, machine->ram);
+>  
+>      if (machine->firmware) {
+>          riscv_load_firmware(machine->firmware, memmap[IBEX_DEV_RAM].base, NULL);
+> @@ -95,6 +92,7 @@ static void opentitan_machine_init(MachineClass *mc)
+>      mc->init = opentitan_board_init;
+>      mc->max_cpus = 1;
+>      mc->default_cpu_type = TYPE_RISCV_CPU_IBEX;
+> +    mc->default_ram_id = "riscv.lowrisc.ibex.ram";
 
---00000000000054353905ceaf4085
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Are you missing "mc->default_ram_size = memmap[IBEX_DEV_RAM].size" here?
 
-<div dir=3D"ltr">Sure, will fix that.<div>Thanks</div></div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=D0=B2=D1=82, 19 =D0=
-=BE=D0=BA=D1=82. 2021 =D0=B3. =D0=B2 09:53, Alistair Francis &lt;<a href=3D=
-"mailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt;:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">On Mon, Oct 18, 2021 at 3:36 AM=
- Alexey Baturo &lt;<a href=3D"mailto:baturo.alexey@gmail.com" target=3D"_bl=
-ank">baturo.alexey@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Signed-off-by: Alexey Baturo &lt;<a href=3D"mailto:space.monkey.delive=
-rs@gmail.com" target=3D"_blank">space.monkey.delivers@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/machine.c | 27 +++++++++++++++++++++++++++<br>
-&gt;=C2=A0 1 file changed, 27 insertions(+)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
-&gt; index 16a08302da..4d99880797 100644<br>
-&gt; --- a/target/riscv/machine.c<br>
-&gt; +++ b/target/riscv/machine.c<br>
-&gt; @@ -84,6 +84,14 @@ static bool vector_needed(void *opaque)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 return riscv_has_ext(env, RVV);<br>
-&gt;=C2=A0 }<br>
-&gt;<br>
-&gt; +static bool pointermasking_needed(void *opaque)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D opaque;<br>
-&gt; +=C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 return riscv_has_ext(env, RVJ);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt;=C2=A0 static const VMStateDescription vmstate_vector =3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 .name =3D &quot;cpu/vector&quot;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 .version_id =3D 1,<br>
-&gt; @@ -138,6 +146,24 @@ static const VMStateDescription vmstate_hyper =3D=
- {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 };<br>
-&gt;<br>
-&gt; +static const VMStateDescription vmstate_pointermasking =3D {<br>
-&gt; +=C2=A0 =C2=A0 .name =3D &quot;cpu/pm&quot;,<br>
-<br>
-Can we write &quot;cpu/pointer_masking&quot;? pm sounds like power manageme=
-nt<br>
-<br>
-Alistair<br>
-</blockquote></div>
+otherwise it will default to generic:
+  hw/core/machine.c:    mc->default_ram_size = 128 * MiB;
 
---00000000000054353905ceaf4085--
+>  }
+>  
+>  DEFINE_MACHINE("opentitan", opentitan_machine_init)
+
 
