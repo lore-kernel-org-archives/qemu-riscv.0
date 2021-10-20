@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md26P-0006gw-Qs
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 23:17:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46922)
+	id 1md26Q-0006hj-Ax
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 23:17:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46912)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1md26O-0006e3-LV
+ id 1md26O-0006da-Pd
  for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 23:17:16 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:38521)
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b]:45613)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1md26L-0000xE-7I
+ id 1md26K-0000wk-Rk
  for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 23:17:15 -0400
-Received: by mail-pf1-x436.google.com with SMTP id k26so1717826pfi.5
+Received: by mail-pf1-x42b.google.com with SMTP id f11so1696093pfc.12
  for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 20:17:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Ur4NYkKvb4IwfCVRQ66xGSUcq2q0ktl5nOkYZP/fju8=;
- b=EQ45ZpCss11u9/H9zCTM1UlxDR2TGB5KJirQvX8fhq663PGxaAASGAUs9PTiCUFdxL
- 68enrZz6TMy7yIAxgbPZ0BRWwkSL3OWobI8pHl2oy4AJOd59JvAiKs06I512REplpcdj
- zhxp75iVha4rpBND+caFTsPd+0eKSH0fdRbep0eXfsl1ibw1VK0M6On+9HJqeZldyn5o
- fAzEqvNs28zq6Y3dbzt1dMnQDJfyReN43myv3cKqsqyzazbJxwQ+LrRnUcuVILzmmNgp
- N5G6OZQAfrVY5Uci1youjFF/j2hxpSLU/zIOBtPdTDlpM0xfLwl6L5NalGsD5ohDMj2b
- BL0A==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=NFxpn2R0k5C60j5k65WXwQSMBvI9nKjCadLREfX3z84=;
+ b=qeaVne62wE4WzWwlVTv8weO0PKpjJQb7jYn34OfoyGQZ5ohArNhljFa8gWa1E/El2A
+ 8IWGqrwtCVSHrhFFdvplQJwBEslYWvZ6yaozBcJZCAvmWwfC8xKKjtI+Tf/RBTKg2TPN
+ sSIFWFeCMqpACUZc2c8HiprM7k/iPXSWeA2mwzmEXAxemPZdj+i64D3XspmlRIGIgkG9
+ mJ3CJyW2/jVOG/eSbwG2WX5es3wIwx/mcyrtWKPGrJ5w5miMwYderi0raaRsLGWe3+tZ
+ 5aPlEljWRBgT/Rs7JVNx8YxkZdd3lvzAvKepiKrlU60YCw5QauYuSaY+k5MjPkpB8oBD
+ KXzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Ur4NYkKvb4IwfCVRQ66xGSUcq2q0ktl5nOkYZP/fju8=;
- b=xRiv4wSyqNqXQgxjPt0AmDY4XjdioOuOjjgwrNt41Seds+Yw63prOfVgnVp3+ev6Jp
- QbEYDx6DFISdWJvi+suDLqQU+kwkkliujGJpzCLAx4wW+m3Ghv8zVsPG1IBLErQ5lt+u
- FadUZDwdOdltvCyMs5T5gwJAtImMbkgFnqXfi9A5KEgbjC00sIhw+LNO0bKLwOFyRkP2
- O7QS6MD6lwoaGfuuFWGUGHB1wLixwT1u8yUlg1ItP6XYGTzaLqo9wyg6n5rH+CwDv6So
- osW1g0jXRYXuyS8eNnapg3iy774hcy1uUexhUvyqVwVyd+Hh9ChrfUbwC5/vk894FawZ
- 5WVw==
-X-Gm-Message-State: AOAM5333F2mLuqX/nS/Yr19lGWl33Umcob+Q406vyJBFYmH490W+Pybj
- c8yh4dSwMEvQ1HXiKB/uDGRSLg==
-X-Google-Smtp-Source: ABdhPJyzn1jAnW39wHGxe3rPZHY7mJ6tRpKQxDYN4VkqfG4L/mA1ThznQCYk4oyeBbIxBsBbayTiqQ==
-X-Received: by 2002:a62:77d8:0:b0:44c:8618:1bed with SMTP id
- s207-20020a6277d8000000b0044c86181bedmr3734409pfc.27.1634699831758; 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=NFxpn2R0k5C60j5k65WXwQSMBvI9nKjCadLREfX3z84=;
+ b=ee3/1pbtkOQUu6C/oi3abb+FX7ComIJCk8FUNMPCaJbtZVcz8sYBiV6Eir3wdfGXtr
+ ob87XZl+O8APSxPVWcFAKEtXhqYSmJV+nHDACYWKWtDFwAE78fyOl4RKqQWuTtDW3W57
+ fQjRn4SEeshyiaCoJkLv3ralAoJNqaJYOcNPW5px9WM7ad7z6iKcaL7xeyJ7HEWQsdoV
+ TzbGe8fwW9uxRzDqHb8BAmcOUgD0JGdKibKSPf3ZBEhnyLAyXhCOaL8DtQfZxrif6weW
+ ma0pT63uU1l4GR//GMIQDNJrvSegvNH++rxMdKR8lVwg9mQRADOy4nCaWEtX9SWQsx0H
+ Mv5Q==
+X-Gm-Message-State: AOAM530pN07CDJptpmD0c/DqilKFgY78EQoQFWfybm+TVGvYMErG9dYT
+ z1bkFGRt76T1ZFt1QcInzhbeGg==
+X-Google-Smtp-Source: ABdhPJzPz7+abLUWx3VdJYQCy/zUL7ZvhneQ/gnig6HRUmGDKfemeWIT7BFlYxBCWg623fVXmca5Fw==
+X-Received: by 2002:a63:2a92:: with SMTP id
+ q140mr31818693pgq.412.1634699831067; 
  Tue, 19 Oct 2021 20:17:11 -0700 (PDT)
 Received: from localhost.localdomain ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id c8sm505364pjr.38.2021.10.19.20.17.11
+ by smtp.gmail.com with ESMTPSA id c8sm505364pjr.38.2021.10.19.20.17.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 20:17:11 -0700 (PDT)
+ Tue, 19 Oct 2021 20:17:10 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	alistair.francis@wdc.com,
 	zhiwei_liu@c-sky.com
-Subject: [PATCH v6 01/15] target/riscv: Move cpu_get_tb_cpu_state out of line
-Date: Tue, 19 Oct 2021 20:16:55 -0700
-Message-Id: <20211020031709.359469-2-richard.henderson@linaro.org>
+Subject: [PATCH v6 00/15] target/riscv: Rationalize XLEN and operand length
+Date: Tue, 19 Oct 2021 20:16:54 -0700
+Message-Id: <20211020031709.359469-1-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211020031709.359469-1-richard.henderson@linaro.org>
-References: <20211020031709.359469-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x436.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -79,131 +78,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 20 Oct 2021 03:17:17 -0000
 
-Move the function to cpu_helper.c, as it is large and growing.
+This is a partial patch set attempting to set things in the
+right direction for both the UXL and RV128 patch sets.
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.h        | 47 ++-------------------------------------
- target/riscv/cpu_helper.c | 46 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 48 insertions(+), 45 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 9e55b2f5b1..7084efc452 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -413,51 +413,8 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
-     return cpu->cfg.vlen >> (sew + 3 - lmul);
- }
- 
--static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
--                                        target_ulong *cs_base, uint32_t *pflags)
--{
--    uint32_t flags = 0;
--
--    *pc = env->pc;
--    *cs_base = 0;
--
--    if (riscv_has_ext(env, RVV)) {
--        uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
--        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
--        flags = FIELD_DP32(flags, TB_FLAGS, VILL,
--                    FIELD_EX64(env->vtype, VTYPE, VILL));
--        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
--                    FIELD_EX64(env->vtype, VTYPE, VSEW));
--        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
--                    FIELD_EX64(env->vtype, VTYPE, VLMUL));
--        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
--    } else {
--        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
--    }
--
--#ifdef CONFIG_USER_ONLY
--    flags |= TB_FLAGS_MSTATUS_FS;
--#else
--    flags |= cpu_mmu_index(env, 0);
--    if (riscv_cpu_fp_enabled(env)) {
--        flags |= env->mstatus & MSTATUS_FS;
--    }
--
--    if (riscv_has_ext(env, RVH)) {
--        if (env->priv == PRV_M ||
--            (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
--            (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
--                get_field(env->hstatus, HSTATUS_HU))) {
--            flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
--        }
--
--        flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
--                           get_field(env->mstatus_hs, MSTATUS_FS));
--    }
--#endif
--
--    *pflags = flags;
--}
-+void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-+                          target_ulong *cs_base, uint32_t *pflags);
- 
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d41d5cd27c..14d1d3cb72 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -35,6 +35,52 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
- #endif
- }
- 
-+void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-+                          target_ulong *cs_base, uint32_t *pflags)
-+{
-+    uint32_t flags = 0;
-+
-+    *pc = env->pc;
-+    *cs_base = 0;
-+
-+    if (riscv_has_ext(env, RVV)) {
-+        uint32_t vlmax = vext_get_vlmax(env_archcpu(env), env->vtype);
-+        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl);
-+        flags = FIELD_DP32(flags, TB_FLAGS, VILL,
-+                    FIELD_EX64(env->vtype, VTYPE, VILL));
-+        flags = FIELD_DP32(flags, TB_FLAGS, SEW,
-+                    FIELD_EX64(env->vtype, VTYPE, VSEW));
-+        flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
-+                    FIELD_EX64(env->vtype, VTYPE, VLMUL));
-+        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-+    } else {
-+        flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-+    }
-+
-+#ifdef CONFIG_USER_ONLY
-+    flags |= TB_FLAGS_MSTATUS_FS;
-+#else
-+    flags |= cpu_mmu_index(env, 0);
-+    if (riscv_cpu_fp_enabled(env)) {
-+        flags |= env->mstatus & MSTATUS_FS;
-+    }
-+
-+    if (riscv_has_ext(env, RVH)) {
-+        if (env->priv == PRV_M ||
-+            (env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
-+            (env->priv == PRV_U && !riscv_cpu_virt_enabled(env) &&
-+                get_field(env->hstatus, HSTATUS_HU))) {
-+            flags = FIELD_DP32(flags, TB_FLAGS, HLSX, 1);
-+        }
-+
-+        flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
-+                           get_field(env->mstatus_hs, MSTATUS_FS));
-+    }
-+#endif
-+
-+    *pflags = flags;
-+}
-+
- #ifndef CONFIG_USER_ONLY
- static int riscv_cpu_local_irq_pending(CPURISCVState *env)
- {
+r~
+
+
+Changes for v6:
+  * Rebase on riscv-to-apply.next.
+
+Changes for v5:
+  * Fix cpu_dump, which asserted for -accel qtest.
+    Instead of filtering CSRs explicitly in cpu_dump,
+    let the riscv_csr_operations predicate do the job.
+    This means we won't dump S-mode registers when RVS
+    is not enabled, much like we currently filter on RVH.
+
+Changes for v4:
+  * Use riscv_csrrw_debug for cpu_dump.
+    This fixes the issue that Alistair pointed out wrt the
+    MSTATUS.SD bit not being correct in the dump; note that
+    gdbstub already uses riscv_csrrw_debug, and so did not
+    have a problem.
+  * Align the registers in cpu_dump.
+
+Changes for v3:
+  * Fix CONFIG_ typo.
+  * Fix ctzw typo.
+  * Mark get_xlen unused (clang werror)
+  * Compute MSTATUS_SD on demand.
+
+Changes for v2:
+  * Set mxl/sxl/uxl at reset.
+  * Set sxl/uxl in write_mstatus.
+
+
+Richard Henderson (15):
+  target/riscv: Move cpu_get_tb_cpu_state out of line
+  target/riscv: Create RISCVMXL enumeration
+  target/riscv: Split misa.mxl and misa.ext
+  target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl
+  target/riscv: Add MXL/SXL/UXL to TB_FLAGS
+  target/riscv: Use REQUIRE_64BIT in amo_check64
+  target/riscv: Properly check SEW in amo_op
+  target/riscv: Replace is_32bit with get_xl/get_xlen
+  target/riscv: Replace DisasContext.w with DisasContext.ol
+  target/riscv: Use gen_arith_per_ol for RVM
+  target/riscv: Adjust trans_rev8_32 for riscv64
+  target/riscv: Use gen_unary_per_ol for RVB
+  target/riscv: Use gen_shift*_per_ol for RVB, RVI
+  target/riscv: Use riscv_csrrw_debug for cpu_dump
+  target/riscv: Compute mstatus.sd on demand
+
+ target/riscv/cpu.h                      |  73 +++------
+ target/riscv/cpu_bits.h                 |   8 +-
+ hw/riscv/boot.c                         |   2 +-
+ linux-user/elfload.c                    |   2 +-
+ linux-user/riscv/cpu_loop.c             |   2 +-
+ semihosting/arm-compat-semi.c           |   2 +-
+ target/riscv/cpu.c                      | 195 +++++++++++++-----------
+ target/riscv/cpu_helper.c               |  92 ++++++++++-
+ target/riscv/csr.c                      | 104 ++++++++-----
+ target/riscv/gdbstub.c                  |  10 +-
+ target/riscv/machine.c                  |  10 +-
+ target/riscv/monitor.c                  |   4 +-
+ target/riscv/translate.c                | 174 +++++++++++++++------
+ target/riscv/insn_trans/trans_rvb.c.inc | 140 +++++++++--------
+ target/riscv/insn_trans/trans_rvi.c.inc |  44 +++---
+ target/riscv/insn_trans/trans_rvm.c.inc |  36 ++++-
+ target/riscv/insn_trans/trans_rvv.c.inc |  29 ++--
+ 17 files changed, 576 insertions(+), 351 deletions(-)
+
 -- 
 2.25.1
 
