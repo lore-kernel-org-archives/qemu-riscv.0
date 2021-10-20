@@ -1,66 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdKfa-0003NQ-VX
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 19:06:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48584)
+	id 1mdKip-0005em-Rd
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 19:10:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49098)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKfW-0003ML-B4; Wed, 20 Oct 2021 19:06:46 -0400
-Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:45681)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mdKin-0005cW-GO
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 19:10:10 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e]:41501)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKfU-0001Ff-Fy; Wed, 20 Oct 2021 19:06:45 -0400
-Received: by mail-il1-x132.google.com with SMTP id i6so6651776ila.12;
- Wed, 20 Oct 2021 16:06:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=886RvTmtbPHVNW9HOaetnKBFKW1WgdxBDqqtpCMxS2w=;
- b=J+lZFlbPeGFVp+9Lvwi5jgLymchcAbGKQN1fCCKC4ZB42kjtP10HIq+a0fCAr94WNA
- Jm+C0cpcLcxtzZNS+T0eufCTXnV3WjzcwglW46bfwQcJE4QUXnDMnL9/2qUxkJYTuuow
- Fgx++6hurTYmKwaDvY2L/Q5YKvHorcY/zYQ+PqihJL+4b7rr7/yl0sPgQPWH4ywAGM3k
- ZrzEI+n5CrqiTrcRoPNj26vV+emQWCecdHYh/UGtUhPe/hfVnQ+vLGqKc8SIZweGMo5s
- mkGAhDmugxnL/ruiktynIoCULnsXBrrlV3obQXawv3lNxrSZKOzB2t9mPg3lllSfK1UO
- iVdQ==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mdKih-0003yq-0U
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 19:10:05 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id
+ na16-20020a17090b4c1000b0019f5bb661f9so3566582pjb.0
+ for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 16:10:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=soQvrgqh4ZNwE5RbI5gTgjb1JJ8xynfnRurxUIY0LXg=;
+ b=ygVIBjSmXBgfKFhciPdPRRHgVSgq/bpYQqxopFlpgkriUzHPZHyS9JtZqtBwftYjrv
+ zXCz05Ai6WQi2Ns3wswoywxALLEYXfSybp5Mv8Z0PxCKVLJaAhiPt4AfN0PXWDTEnEmx
+ XWpiBJeWkrgnVBXN6bfqXdFmhgprfQCvuAJ/CFF2AFn6P7jwuG/pEO/x96fsKXcIQiNQ
+ OpLZ43smfUZii91MDyWHhZXHdJTg+1kZ17DKOTWyeXNhMF+U8DgfcczfxJSefjlAxDBG
+ SZHAP5gqm43pi9U55bzadA54r98tY3wC7TXCeIgjiIpq4bc/JuYG4Z5vR9qR71PXmr/d
+ uUtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=886RvTmtbPHVNW9HOaetnKBFKW1WgdxBDqqtpCMxS2w=;
- b=p0h7B9ER5oOfTncDJ1P/K0Icq0jkgZonXHWMQO5C9xD1GmzRVKFewNWbSeeJ+AZc8F
- 6dIkQJ4y1MyEZW5LKAcjfqwk8jfwgRkLc+GAttPnpzJZyOfsahZOCUeFN+ksjFa/bjjC
- pzFT7FzR4mQuuUoxjVYI0+6FavUuiwbBbJHRElGxO9Z6h9KiPaKnYRAQ0b3w0+s94vNF
- flgKZmAZJmC+XXmofD+7h4pOjekaDhvc++wLxMA0YiKJ8kIqvW09eV+G0llayPTTD4hE
- 1di9lnx2xhifa7N47g+aKI8IZHwWAz3HPJZqzWMICj558X1Dr7w/bw2Z4+h93WOB3OJp
- lmOQ==
-X-Gm-Message-State: AOAM530Kua27JgP6aD2CeczYlXV8ZwQA1w4tUMOkFIQNLP/5jT3god4r
- /bWBvcwIz2l6Ndp1nqjSB4huQYCQCDfbvV3sSnk=
-X-Google-Smtp-Source: ABdhPJz9r+9Mfrkf/Mu2wuLy/EKZ9nFYeZown61ve2Im1naKe5Nl3e7wRLWgjpB5y3LfFDiC8fvmiWCdY4CIM8m7Ev8=
-X-Received: by 2002:a05:6e02:1402:: with SMTP id
- n2mr1298758ilo.208.1634771202920; 
- Wed, 20 Oct 2021 16:06:42 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=soQvrgqh4ZNwE5RbI5gTgjb1JJ8xynfnRurxUIY0LXg=;
+ b=aGzUjrVkNFvxEU6Ui84z3Olv3jlxh8H6HeCDaJu0j1XZaNDcTZz0jjl54J/5hH3BZo
+ 6go7yIPqcfiIKwz3Um2Z/0xwH5FmL76yQEjQ90pjvnuOyC274+yyy/eOtpjntNBRvTaQ
+ pHIhnUSikV+RZP0LLp3nmIF1Bjgy09fvM27vUGcpD7WKQoaGVj1lA4lOGxbsXAaewjlu
+ XUcnhomnOGxqPejNF9d/vnVDJ5+70f8gk1hEEMI1hsGd4nYIvhDrd7mcjjG0KtrLKOn9
+ BXNW8Jc0SMJcml6DCdkix4l2T9YgTpnbFKWvriMuGaZ0Gkw3j9bDNBSlMe2xPSCXBPzy
+ 3v8w==
+X-Gm-Message-State: AOAM531gJcBXlh3B8qWhsF04DH5NOLI98ITl5vepYHLW3z/jtdHdlDcJ
+ O2towzZNQ5mxQKShdPadZlE/3g==
+X-Google-Smtp-Source: ABdhPJypIYsQrkNeVoS+/PCzIlG4m5mwIRexfILFjU+eGzntSMFa2V+OQjwYV4cyZrVhzDjOoml6nw==
+X-Received: by 2002:a17:90b:1c09:: with SMTP id
+ oc9mr2203464pjb.33.1634771401556; 
+ Wed, 20 Oct 2021 16:10:01 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id v9sm3701916pfc.23.2021.10.20.16.10.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Oct 2021 16:10:01 -0700 (PDT)
+Subject: Re: [PATCH v3 21/21] target/riscv: support for 128-bit satp
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
+ palmer@dabbelt.com, fabien.portas@grenoble-inp.org
+References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211019094812.614056-22-frederic.petrot@univ-grenoble-alpes.fr>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <c3434f40-830b-f762-b1c5-55e10726271d@linaro.org>
+Date: Wed, 20 Oct 2021 16:09:59 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20211020014112.7336-1-bmeng.cn@gmail.com>
- <20211020014112.7336-2-bmeng.cn@gmail.com>
-In-Reply-To: <20211020014112.7336-2-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Oct 2021 09:06:16 +1000
-Message-ID: <CAKmqyKPb34YJ9zO1abNY4W=+Uv-6JQfrBh3u9xSoRY82o2JY3A@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram
- and MachineClass::default_ram_id
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Igor Mammedov <imammedo@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+In-Reply-To: <20211019094812.614056-22-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.267,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -75,106 +85,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 23:06:48 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 23:10:10 -0000
 
-On Wed, Oct 20, 2021 at 11:41 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> Using memory_region_init_ram(), which can't possibly handle vhost-user,
-> and can't work as expected with '-numa node,memdev' options.
->
-> Use MachineState::ram instead of manually initializing RAM memory
-> region, as well as by providing MachineClass::default_ram_id to
-> opt in to memdev scheme.
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
->
+On 10/19/21 2:48 AM, Frédéric Pétrot wrote:
+> Support for a 128-bit satp. This is a bit more involved than necessary
+> because we took the opportunity to increase the page size to 16kB, and
+> change the page table geometry, which makes the page walk a bit more
+> parametrizable (variables instead of defines).
+> Note that is anyway a necessary step for the merging of the 32-bit and
+> 64-bit riscv versions in a single executable.
+> 
+> Signed-off-by: Frédéric Pétrot<frederic.petrot@univ-grenoble-alpes.fr>
+> Co-authored-by: Fabien Portas<fabien.portas@grenoble-inp.org>
 > ---
->
-> Changes in v2:
-> - split RAM into low and high regions using aliases to machine->ram
-> - rename mc->default_ram_id to "microchip.icicle.kit.ram"
->
->  hw/riscv/microchip_pfsoc.c | 36 ++++++++++++++++++++----------------
->  1 file changed, 20 insertions(+), 16 deletions(-)
->
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index e475b6d511..3fc8545562 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -463,7 +463,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->      MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
->      MemoryRegion *mem_high = g_new(MemoryRegion, 1);
->      MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
-> -    uint64_t mem_high_size;
-> +    uint64_t mem_low_size, mem_high_size;
->      hwaddr firmware_load_addr;
->      const char *firmware_name;
->      bool kernel_as_payload = false;
-> @@ -485,31 +485,34 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->                              TYPE_MICROCHIP_PFSOC);
->      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
->
-> +    /* Split RAM into low and high regions using aliases to machine->ram */
-> +    mem_low_size = memmap[MICROCHIP_PFSOC_DRAM_LO].size;
-> +    mem_high_size = machine->ram_size - mem_low_size;
-> +    memory_region_init_alias(mem_low, NULL,
-> +                             "microchip.icicle.kit.ram_low", machine->ram,
-> +                             0, mem_low_size);
-> +    memory_region_init_alias(mem_high, NULL,
-> +                             "microchip.icicle.kit.ram_high", machine->ram,
-> +                             mem_low_size, mem_high_size);
-> +
->      /* Register RAM */
-> -    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
-> -                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-> -                           &error_fatal);
-> -    memory_region_init_alias(mem_low_alias, NULL,
-> -                             "microchip.icicle.kit.ram_low.alias",
-> -                             mem_low, 0,
-> -                             memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
->      memory_region_add_subregion(system_memory,
->                                  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
->                                  mem_low);
-> +    memory_region_add_subregion(system_memory,
-> +                                memmap[MICROCHIP_PFSOC_DRAM_HI].base,
-> +                                mem_high);
-> +
-> +    /* Create aliases for the low and high RAM regions */
-> +    memory_region_init_alias(mem_low_alias, NULL,
-> +                             "microchip.icicle.kit.ram_low.alias",
-> +                             mem_low, 0, mem_low_size);
->      memory_region_add_subregion(system_memory,
->                                  memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
->                                  mem_low_alias);
-> -
-> -    mem_high_size = machine->ram_size - 1 * GiB;
-> -
-> -    memory_region_init_ram(mem_high, NULL, "microchip.icicle.kit.ram_high",
-> -                           mem_high_size, &error_fatal);
->      memory_region_init_alias(mem_high_alias, NULL,
->                               "microchip.icicle.kit.ram_high.alias",
->                               mem_high, 0, mem_high_size);
-> -    memory_region_add_subregion(system_memory,
-> -                                memmap[MICROCHIP_PFSOC_DRAM_HI].base,
-> -                                mem_high);
->      memory_region_add_subregion(system_memory,
->                                  memmap[MICROCHIP_PFSOC_DRAM_HI_ALIAS].base,
->                                  mem_high_alias);
-> @@ -606,6 +609,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
->                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
->      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
->      mc->default_cpus = mc->min_cpus;
-> +    mc->default_ram_id = "microchip.icicle.kit.ram";
->
->      /*
->       * Map 513 MiB high memory, the mimimum required high memory size, because
-> --
-> 2.25.1
->
->
+>   target/riscv/cpu-param.h  |   9 +++-
+>   target/riscv/cpu_bits.h   |  10 ++++
+>   target/riscv/cpu_helper.c |  54 ++++++++++++++------
+>   target/riscv/csr.c        | 105 ++++++++++++++++++++++++++++++++------
+>   4 files changed, 144 insertions(+), 34 deletions(-)
+
+Is there a spec for this?  I don't see anything in the 2021-10-06 draft...
+
+
+r~
 
