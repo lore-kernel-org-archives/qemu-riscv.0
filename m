@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md0pu-0000mS-20
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 21:56:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33660)
+	id 1md1mB-0006HV-38
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 22:56:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43440)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0ps-0000jX-Ux; Tue, 19 Oct 2021 21:56:08 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:37689)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1md1m9-0006Gp-B5
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 22:56:21 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:37584)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0pp-0001DI-0c; Tue, 19 Oct 2021 21:56:08 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id l80so12015135ybf.4;
- Tue, 19 Oct 2021 18:56:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1md1m7-0002ND-17
+ for qemu-riscv@nongnu.org; Tue, 19 Oct 2021 22:56:20 -0400
+Received: by mail-io1-xd36.google.com with SMTP id m20so22732576iol.4
+ for <qemu-riscv@nongnu.org>; Tue, 19 Oct 2021 19:56:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Nnc4ApTSf5zhc9tQzLnqBjcLhDOBY9NADLG68UDuKQ0=;
- b=VNwzTMBUn7WRONYqLPfGwqAEOb3VsSalKm43gtSpDO4rJDmE8olPmEPjszDUnkUf0x
- eXCf74yCM1K6gZaaqC2nY0fEOMu34K4IWOtUipd4KqhIGvX4BjU8fO4uzfA8C4IBFeDc
- MuQFd4r02O0K4zwdw0EecW4kDPJg2ZCH6ikc4IQ/fHVSqVXKqTURSORTfx54xlqRJoC+
- zLc3yB0m9vqXqaeePczpYw5Wjm6x3qClWzSIxoJnKkyam98QEj6276YrS69iALsFuWaU
- Ek9WyY+fmSP5h1QWMo5FPonNo5Bx/946ZvKBH3E2QbD/6IuZtT9XYaUMLxrsYUgZrZCp
- Afnw==
+ :cc; bh=9kAQSOVoVrd0txXtaNAFZgLXmrjimgvUH2FrYtXT//g=;
+ b=VH7yTj6wanZyqmjiMvYQi4aUpuXor2MYzcj9yevXmoSe2RErlWH+ZkH0koCOrKgbNk
+ 4ZTbn+mESQyrwf4BYGlCFaSSy7xcSagx8lwSP21ihxG/h2rWPzFivvsE7fMP4BB7KawJ
+ +ES1ujj21WJJc8fxJs8AqAgRcZ19A+7ge5icXMzA0BXHPvOZdePupc5RWNaACJGSfNNM
+ +W/PsIevJprhatq7U1wSo8akSxLuZMx9v6xrisg5Ok1V740DCtcEGrA2MsQ942g0HP/t
+ hbcn4f2mYWPVvA+d66aPUttJHr5fS2faTg4CUAkSyioxDU3o01AsTZF6QE2NLUMwRBdz
+ dFyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Nnc4ApTSf5zhc9tQzLnqBjcLhDOBY9NADLG68UDuKQ0=;
- b=sG8pj5UqnGvBWkgZ29pwCqhl/iGMxVA7eBQVn/MbMtqdoKAO1xHQhzMQDdccR4uHtp
- QvrOqGg8EYfXDBJUTyX7AS77+r5IW8Cmwc0vxOvmz7BWULF/Q1ayOgWzQfYwTXpapJZ1
- 0ZEcTMJAwDtkYMhn+kuvD0cS7mnws63KNNlh5/2umc4AK8Hd0J5TdeKq412YzVt1iLgT
- gTK1g+glsLaWXGvTiFY2r2qGkF2opmMmLnQCncpEi4n7Dmqox94vLXSc+zwLQYh6RUwf
- KJz94shjz+94Qg7n9PzGadXm2Pd3IvjHq5wIlYQIg5vvO/Z7qCGWCYYYDqvkZyggPe3D
- KScQ==
-X-Gm-Message-State: AOAM530D2CqfokXbNy1LftnSyJL7O4Dl7eoYowSP8FVwKScLr41mKI9y
- KpcSzXj7LRixoCG+TQHQ50BBH0w7PVd8ZtdWapM=
-X-Google-Smtp-Source: ABdhPJzbvAyxOc9HlYnauB0KyQnOTTbccMWpghnmH1/wu8eu3HSOKQ82yRdK1I+KTxOEl8UYGopnOIyJF5xzfB4PkTo=
-X-Received: by 2002:a25:346:: with SMTP id 67mr37700285ybd.345.1634694963309; 
- Tue, 19 Oct 2021 18:56:03 -0700 (PDT)
+ bh=9kAQSOVoVrd0txXtaNAFZgLXmrjimgvUH2FrYtXT//g=;
+ b=mnFCs5XEZn1mKGATps58KbWOrEAj6/K++q0vj5XlqDPFvFO9PU1jw6u3JuyV9j8uTD
+ j9BvxYwZoT20iq/9qFEM8BiEafa1rK/hbNSQg8veHwBNPdYCj776en3xojktbkRDa8/a
+ bhX0nF85IgCz2cOIRTl4FKaq/mXo9WHHUgddZREWwv5dbLBNj4+qiCmrOMZr7P6EZntd
+ mdUo5+cIC3YzqUYckllUuSjq5oroe02l8asKb+eg3DHbrFWLOGeDS+GIGzxr26j6mZRO
+ 2WDX6EKZNS3NNsI5dnJs/FLXzF+aH9++LQ9RGQrMdhYlez6GFW5cRPSbafKwuG5fLF1u
+ GOdQ==
+X-Gm-Message-State: AOAM531+E+9C1mMpOkxn3/VDN6Wt5A7Gxd2AyGWaQ27n1mbPEOsgls8i
+ GUjElWrEfg0h4d3xWyTOd1yZWwCUy8997/+0nxuesA==
+X-Google-Smtp-Source: ABdhPJwa9x8lhHPPODeKqpoGjllpDxyp1HMDMN0h5g4Qqj6M941LprNQacda0EEX6WuEgXUclvqgDNLXolBaSDl7zjY=
+X-Received: by 2002:a05:6602:2ac8:: with SMTP id
+ m8mr22379592iov.112.1634698577059; 
+ Tue, 19 Oct 2021 19:56:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211018153829.24382-1-bmeng.cn@gmail.com>
- <20211019093943.54c36b3f@redhat.com>
-In-Reply-To: <20211019093943.54c36b3f@redhat.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 20 Oct 2021 09:55:52 +0800
-Message-ID: <CAEUhbmUa1CU_7+HMEuBmAc-DqFAH8iByfDAjV_uXnof6TZQz_Q@mail.gmail.com>
-Subject: Re: [PATCH 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram and
- MachineClass::default_ram_id
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <20211016085428.3001501-1-frank.chang@sifive.com>
+ <20211016085428.3001501-3-frank.chang@sifive.com>
+In-Reply-To: <20211016085428.3001501-3-frank.chang@sifive.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Wed, 20 Oct 2021 10:56:06 +0800
+Message-ID: <CAE_xrPg0Lhn3=83mBJmCMymiO9GgbMZv+LDLX13_azdPdfgXxg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] target/riscv: change the api for RVF/RVD fmin/fmax
+To: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Cc: Chih-Min Chao <chihmin.chao@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>
+Content-Type: multipart/alternative; boundary="000000000000003b6d05cebfecef"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=frank.chang@sifive.com; helo=mail-io1-xd36.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -71,92 +74,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 01:56:09 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 02:56:21 -0000
 
-Hi Igor,
+--000000000000003b6d05cebfecef
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 19, 2021 at 3:39 PM Igor Mammedov <imammedo@redhat.com> wrote:
+On Sat, Oct 16, 2021 at 4:54 PM <frank.chang@sifive.com> wrote:
+
+> From: Chih-Min Chao <chihmin.chao@sifive.com>
 >
-> On Mon, 18 Oct 2021 23:38:24 +0800
-> Bin Meng <bmeng.cn@gmail.com> wrote:
+> The sNaN propagation behavior has been changed since
+> cd20cee7 in https://github.com/riscv/riscv-isa-manual.
 >
-> > Using memory_region_init_ram(), which can't possibly handle vhost-user,
-> > and can't work as expected with '-numa node,memdev' options.
-> >
-> > Use MachineState::ram instead of manually initializing RAM memory
-> > region, as well as by providing MachineClass::default_ram_id to
-> > opt in to memdev scheme.
-> >
-> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > ---
-> >
-> >  hw/riscv/microchip_pfsoc.c | 9 +++------
-> >  1 file changed, 3 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > index e475b6d511..f10f55b488 100644
-> > --- a/hw/riscv/microchip_pfsoc.c
-> > +++ b/hw/riscv/microchip_pfsoc.c
-> > @@ -459,7 +459,6 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-> >      const MemMapEntry *memmap = microchip_pfsoc_memmap;
-> >      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
-> >      MemoryRegion *system_memory = get_system_memory();
-> > -    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
-> >      MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
-> >      MemoryRegion *mem_high = g_new(MemoryRegion, 1);
-> >      MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
-> > @@ -486,16 +485,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-> >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
-> >
-> >      /* Register RAM */
-> > -    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
-> > -                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-> > -                           &error_fatal);
-> >      memory_region_init_alias(mem_low_alias, NULL,
-> >                               "microchip.icicle.kit.ram_low.alias",
-> > -                             mem_low, 0,
-> > +                             machine->ram, 0,
-> >                               memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
-> >      memory_region_add_subregion(system_memory,
-> >                                  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> > -                                mem_low);
-> > +                                machine->ram);
-> >      memory_region_add_subregion(system_memory,
-> >                                  memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
-> >                                  mem_low_alias);
+> Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/fpu_helper.c | 16 ++++++++++++----
+>  1 file changed, 12 insertions(+), 4 deletions(-)
 >
-> looking at code it seems RAM is split between low and high regions,
-> so converting only low region is wrong.
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index 8700516a14c..d62f4709002 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -174,14 +174,18 @@ uint64_t helper_fmin_s(CPURISCVState *env, uint64_t
+> rs1, uint64_t rs2)
+>  {
+>      float32 frs1 = check_nanbox_s(rs1);
+>      float32 frs2 = check_nanbox_s(rs2);
+> -    return nanbox_s(float32_minnum(frs1, frs2, &env->fp_status));
+> +    return nanbox_s(env->priv_ver < PRIV_VERSION_1_11_0 ?
+> +                    float32_minnum(frs1, frs2, &env->fp_status) :
+> +                    float32_minimum_number(frs1, frs2, &env->fp_status));
+>  }
 >
-> I'd suggest something similar to 2dc9ce13d210 : taihu_405ep_init().
-> i.e. ms->ram should hold whole RAM that is split between low and high
-> using aliases.
-
-Thank you for your pointers. I have just sent v2.
-
-One note when looking at the taihu_405ep_init() implementation, the
-following looks incorrect to me:
-
-    memory_region_init_alias(&ram_memories[1], NULL,
-                             "taihu_405ep.ram-1", machine->ram, ram_bases[1],
-                             ram_sizes[1]);
-
-I think the 'offset' should be ram_sizes[0] instead of ram_bases[1],
-although their values are the same which means they are two contiguous
-regions, so it happens to work. But I might be nitpicking ...
-
+>  uint64_t helper_fmax_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
+>  {
+>      float32 frs1 = check_nanbox_s(rs1);
+>      float32 frs2 = check_nanbox_s(rs2);
+> -    return nanbox_s(float32_maxnum(frs1, frs2, &env->fp_status));
+> +    return nanbox_s(env->priv_ver < PRIV_VERSION_1_11_0 ?
+> +                    float32_maxnum(frs1, frs2, &env->fp_status) :
+> +                    float32_maximum_number(frs1, frs2, &env->fp_status));
+>  }
 >
-> > @@ -606,6 +602,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
-> >                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
-> >      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
-> >      mc->default_cpus = mc->min_cpus;
-> > +    mc->default_ram_id = "microchip.icicle.kit.ram_low";
+>  uint64_t helper_fsqrt_s(CPURISCVState *env, uint64_t rs1)
+> @@ -283,12 +287,16 @@ uint64_t helper_fdiv_d(CPURISCVState *env, uint64_t
+> frs1, uint64_t frs2)
 >
-> given it is not versioned machine, so we don't have to worry about
-> cross version migration here,
-> so I'd use "microchip.icicle.kit.ram" for the name here
-> and currently used "microchip.icicle.kit.ram_low" for corresponding alias
+>  uint64_t helper_fmin_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2)
+>  {
+> -    return float64_minnum(frs1, frs2, &env->fp_status);
+> +    return env->priv_ver < PRIV_VERSION_1_11_0 ?
+> +            float64_minnum(frs1, frs2, &env->fp_status) :
+> +            float64_minimum_number(frs1, frs2, &env->fp_status);
+>  }
+>
+>  uint64_t helper_fmax_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2)
+>  {
+> -    return float64_maxnum(frs1, frs2, &env->fp_status);
+> +    return env->priv_ver < PRIV_VERSION_1_11_0 ?
+> +            float64_maxnum(frs1, frs2, &env->fp_status) :
+> +            float64_maximum_number(frs1, frs2, &env->fp_status);
+>  }
+>
+>  uint64_t helper_fcvt_s_d(CPURISCVState *env, uint64_t rs1)
+> --
+> 2.25.1
+>
+>
+If we have decided to tie RVF with Privilege spec version for now as
+discussed in:
+https://patchew.org/QEMU/20211015065500.3850513-1-frank.chang@sifive.com/20211015065500.3850513-3-frank.chang@sifive.com/
+then I think this patch doesn't require any further changes, right?
 
 Regards,
-Bin
+Frank Chang
+
+--000000000000003b6d05cebfecef
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Sat, Oct 16, 2021 at 4:54 PM &lt;<a hr=
+ef=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com</a>&gt; wrote:<=
+br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">From: Chih-Min Chao &lt;<a href=3D"mailto:chihmin.chao@sifive.co=
+m" target=3D"_blank">chihmin.chao@sifive.com</a>&gt;<br>
+<br>
+The sNaN propagation behavior has been changed since<br>
+cd20cee7 in <a href=3D"https://github.com/riscv/riscv-isa-manual" rel=3D"no=
+referrer" target=3D"_blank">https://github.com/riscv/riscv-isa-manual</a>.<=
+br>
+<br>
+Signed-off-by: Chih-Min Chao &lt;<a href=3D"mailto:chihmin.chao@sifive.com"=
+ target=3D"_blank">chihmin.chao@sifive.com</a>&gt;<br>
+Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" ta=
+rget=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/fpu_helper.c | 16 ++++++++++++----<br>
+=C2=A01 file changed, 12 insertions(+), 4 deletions(-)<br>
+<br>
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c<br>
+index 8700516a14c..d62f4709002 100644<br>
+--- a/target/riscv/fpu_helper.c<br>
++++ b/target/riscv/fpu_helper.c<br>
+@@ -174,14 +174,18 @@ uint64_t helper_fmin_s(CPURISCVState *env, uint64_t r=
+s1, uint64_t rs2)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0float32 frs1 =3D check_nanbox_s(rs1);<br>
+=C2=A0 =C2=A0 =C2=A0float32 frs2 =3D check_nanbox_s(rs2);<br>
+-=C2=A0 =C2=A0 return nanbox_s(float32_minnum(frs1, frs2, &amp;env-&gt;fp_s=
+tatus));<br>
++=C2=A0 =C2=A0 return nanbox_s(env-&gt;priv_ver &lt; PRIV_VERSION_1_11_0 ?<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 floa=
+t32_minnum(frs1, frs2, &amp;env-&gt;fp_status) :<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 floa=
+t32_minimum_number(frs1, frs2, &amp;env-&gt;fp_status));<br>
+=C2=A0}<br>
+<br>
+=C2=A0uint64_t helper_fmax_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2=
+)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0float32 frs1 =3D check_nanbox_s(rs1);<br>
+=C2=A0 =C2=A0 =C2=A0float32 frs2 =3D check_nanbox_s(rs2);<br>
+-=C2=A0 =C2=A0 return nanbox_s(float32_maxnum(frs1, frs2, &amp;env-&gt;fp_s=
+tatus));<br>
++=C2=A0 =C2=A0 return nanbox_s(env-&gt;priv_ver &lt; PRIV_VERSION_1_11_0 ?<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 floa=
+t32_maxnum(frs1, frs2, &amp;env-&gt;fp_status) :<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 floa=
+t32_maximum_number(frs1, frs2, &amp;env-&gt;fp_status));<br>
+=C2=A0}<br>
+<br>
+=C2=A0uint64_t helper_fsqrt_s(CPURISCVState *env, uint64_t rs1)<br>
+@@ -283,12 +287,16 @@ uint64_t helper_fdiv_d(CPURISCVState *env, uint64_t f=
+rs1, uint64_t frs2)<br>
+<br>
+=C2=A0uint64_t helper_fmin_d(CPURISCVState *env, uint64_t frs1, uint64_t fr=
+s2)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 return float64_minnum(frs1, frs2, &amp;env-&gt;fp_status);<b=
+r>
++=C2=A0 =C2=A0 return env-&gt;priv_ver &lt; PRIV_VERSION_1_11_0 ?<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 float64_minnum(frs1, frs2, &amp;=
+env-&gt;fp_status) :<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 float64_minimum_number(frs1, frs=
+2, &amp;env-&gt;fp_status);<br>
+=C2=A0}<br>
+<br>
+=C2=A0uint64_t helper_fmax_d(CPURISCVState *env, uint64_t frs1, uint64_t fr=
+s2)<br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 return float64_maxnum(frs1, frs2, &amp;env-&gt;fp_status);<b=
+r>
++=C2=A0 =C2=A0 return env-&gt;priv_ver &lt; PRIV_VERSION_1_11_0 ?<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 float64_maxnum(frs1, frs2, &amp;=
+env-&gt;fp_status) :<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 float64_maximum_number(frs1, frs=
+2, &amp;env-&gt;fp_status);<br>
+=C2=A0}<br>
+<br>
+=C2=A0uint64_t helper_fcvt_s_d(CPURISCVState *env, uint64_t rs1)<br>
+-- <br>
+2.25.1<br>
+<br></blockquote><div><br></div><div>If we have decided to tie RVF with Pri=
+vilege spec version for now as discussed in:</div><div><a href=3D"https://p=
+atchew.org/QEMU/20211015065500.3850513-1-frank.chang@sifive.com/20211015065=
+500.3850513-3-frank.chang@sifive.com/">https://patchew.org/QEMU/20211015065=
+500.3850513-1-frank.chang@sifive.com/20211015065500.3850513-3-frank.chang@s=
+ifive.com/</a><br></div><div>then I think this patch doesn&#39;t require=C2=
+=A0any further changes, right?</div><div><br></div><div>Regards,</div><div>=
+Frank Chang</div></div></div>
+
+--000000000000003b6d05cebfecef--
 
