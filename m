@@ -1,71 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md8hZ-0004JW-7w
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 06:20:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48136)
+	id 1md9Na-00051r-K1
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 07:03:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56254)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1md8hP-0003nT-RO; Wed, 20 Oct 2021 06:19:55 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531]:40883)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1md9NX-0004tM-W4; Wed, 20 Oct 2021 07:03:28 -0400
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:41503)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1md8hM-00032b-V4; Wed, 20 Oct 2021 06:19:55 -0400
-Received: by mail-ed1-x531.google.com with SMTP id 5so23541577edw.7;
- Wed, 20 Oct 2021 03:19:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1md9NW-000120-4z; Wed, 20 Oct 2021 07:03:27 -0400
+Received: by mail-io1-xd2a.google.com with SMTP id b188so19142082iof.8;
+ Wed, 20 Oct 2021 04:03:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=MMqnqsUUcK1PWEgJODm9TEqM0MGx97DCR5kYwOP0Arg=;
- b=g9vYyeYC1/GQU1AoEua5A+B+2ZMEG9WfZooSy92CDogKxcWVIZ+HOVpgaASE8v/+a2
- cmf+sdFjIA6clOQtphJSx4rwwPR/si0icRJeSDlV326nj/A9pAgmijRFJjEZ5AmhWdla
- QszVBC5Gx+riIoja7yP5rTy6g16Rg8kPb+7Xe4SvcRWgmp4LF0T9FcffiqiP5PYS9R9w
- WshLzVqTMSfxOYucAhrj7l2f2Z813H33gN8hCmcbRyoAXDoqc1oJpcU8AAwN5fkZlfDy
- bTHRRWFaq0ukT2MUG5ozgEnWU6Jw+FTPqIBpwgOpvMy0TPEsAd1EvB3Ia244f4GE8XAA
- cxwA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=n4NsRNcTNd9QBFN0dr19wdrKyZyK3JwHGajMjGiM41Y=;
+ b=Q9pgz1I4H6dnCq/Naiz7k2jMP+ux5BPq6yBgM0K2IClrXcm12peGhFSRYFG2KFPJGj
+ CaBq1QLkR3GRCu9lgdtOI2owvDQd3C1U9E7cjrr0ymZadQ1JO0YKZ37fgMKkL2RR8VmU
+ admAM4B0REaSzqsXmPRmCXEoybYEwkf5KiPFB8LC4gcDTmwthBOEDjBn9WWjjCTAjQc0
+ 27Gt4dgB8IYer8lLsl+otGYUj+zGjFc2uwozMrEzgXVQ9FGiBXUoP0lsXJFrk5H1bRwE
+ RizLcv2QLWN91Oh35jjIHXhy4tqyWg+LYkLNf1FfrVVJ+XrtwkCT+dBDu4py280vJFpO
+ MqYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=MMqnqsUUcK1PWEgJODm9TEqM0MGx97DCR5kYwOP0Arg=;
- b=oTbuUeZpAdJZpGI9z42EGFrXNq6mW5sLF+ozL6JhcWOEGwsVaze3eWJMgGFPZef+1g
- 9qoXfpZ2zVmCkNo4gGBZ7vBGOGEuAtGMdxGF8V51vwWMBfmf/voyhUmgnIvx3mHRXkCX
- u5VHGqc+q6xQi2vTl2zSjuSmVY41wMC6n2NkQTRsRMOnvA6HZNqmDicpwgJgnTvHcso+
- P3RfPl1bYDHKMmDugoZsn+n+8oe8swv8rs7MTPXfnrGQsDV/AXvCNKqnFfUwNyqQOSRp
- 6FxSoehMVqQY0g0NHOAerJIo0LftkCC722VFfdde0skUkWBEIVC41glnE4IvmJT8Kx/P
- RXQA==
-X-Gm-Message-State: AOAM532WHZuAqNqhE+YoANbaYDVWtyHErWhmTjPfUWF5C1WJpHFO1yqA
- HIszVg6hcm26gjsU0NODdko=
-X-Google-Smtp-Source: ABdhPJyXVpIWR8wpmYrGyw3XcRBHC+FW2MZBhMua+XlG4LZNwbDaRzjZrYzW35ZE6rkXOdBtAfJZjg==
-X-Received: by 2002:a05:6402:141:: with SMTP id
- s1mr61545782edu.317.1634725190571; 
- Wed, 20 Oct 2021 03:19:50 -0700 (PDT)
-Received: from neptune.lab ([46.39.228.224])
- by smtp.googlemail.com with ESMTPSA id k19sm821284ejg.13.2021.10.20.03.19.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Oct 2021 03:19:50 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v15 7/8] [RISCV_PM] Implement address masking functions
- required for RISC-V Pointer Masking extension
-Date: Wed, 20 Oct 2021 13:19:34 +0300
-Message-Id: <20211020101935.1369682-8-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
-References: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=n4NsRNcTNd9QBFN0dr19wdrKyZyK3JwHGajMjGiM41Y=;
+ b=d4HwCaT8tFvgqHVONhALmzTjA0SJrlkUsQoiK8e/Cf14BE0CGzkSe+KLc3+yqSDXkk
+ RlfZ6pGp65YtJ3ivTdO+vWoGIXye11sPDwbfffzZuQUjqCl8X0e5fbAW/d0lb1knrt5R
+ oxBqhivNyJ9EwXNYPxboQ7WZrw3fglbAYBWhog7CEx02DVsRwp4CGHgq6ljCq4PyV53k
+ +GZLNlXB7hr4Ws71KGhFkOAgEWdhBZJxd18buiBKb72+Dt7hRXnHzV5btSGNVD34ct2u
+ e0M5NP4omB4w1icxSfp8brtrgg5egKZh5wj3aLxXlf2eOCm8Q8E0KmnsSkyGBvavqE/P
+ dNLQ==
+X-Gm-Message-State: AOAM532m8xyiWV9Dtj+cvS1b3TfWaBPpuAiHGz2K1eqQmgcXXxk+aqIw
+ uJ1FVCbqfDlmf+gA30++vc8NyZVdUdCM+0wjUqY=
+X-Google-Smtp-Source: ABdhPJztV50xaOh2eg6eKeChjMZ3c3wA8Tn4t9j71RqnBkhA3tsSLaGxBrbiPV0e3E7P3lAEZKEB674giCCjQJEWyQ4=
+X-Received: by 2002:a05:6638:32a6:: with SMTP id
+ f38mr7999679jav.63.1634727804702; 
+ Wed, 20 Oct 2021 04:03:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x531.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20211020031709.359469-1-richard.henderson@linaro.org>
+In-Reply-To: <20211020031709.359469-1-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 20 Oct 2021 21:02:58 +1000
+Message-ID: <CAKmqyKN8TxxtaCg06q7jLvmO_22jNfaOZuWKFxMbpO4tnXfE0Q@mail.gmail.com>
+Subject: Re: [PATCH v6 00/15] target/riscv: Rationalize XLEN and operand length
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, liuzhiwei <zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,136 +71,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 10:19:56 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 11:03:28 -0000
 
-From: Anatoly Parshintsev <kupokupokupopo@gmail.com>
+On Wed, Oct 20, 2021 at 1:26 PM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> This is a partial patch set attempting to set things in the
+> right direction for both the UXL and RV128 patch sets.
+>
+>
+> r~
+>
+>
+> Changes for v6:
+>   * Rebase on riscv-to-apply.next.
+>
+> Changes for v5:
+>   * Fix cpu_dump, which asserted for -accel qtest.
+>     Instead of filtering CSRs explicitly in cpu_dump,
+>     let the riscv_csr_operations predicate do the job.
+>     This means we won't dump S-mode registers when RVS
+>     is not enabled, much like we currently filter on RVH.
+>
+> Changes for v4:
+>   * Use riscv_csrrw_debug for cpu_dump.
+>     This fixes the issue that Alistair pointed out wrt the
+>     MSTATUS.SD bit not being correct in the dump; note that
+>     gdbstub already uses riscv_csrrw_debug, and so did not
+>     have a problem.
+>   * Align the registers in cpu_dump.
+>
+> Changes for v3:
+>   * Fix CONFIG_ typo.
+>   * Fix ctzw typo.
+>   * Mark get_xlen unused (clang werror)
+>   * Compute MSTATUS_SD on demand.
+>
+> Changes for v2:
+>   * Set mxl/sxl/uxl at reset.
+>   * Set sxl/uxl in write_mstatus.
+>
+>
+> Richard Henderson (15):
+>   target/riscv: Move cpu_get_tb_cpu_state out of line
+>   target/riscv: Create RISCVMXL enumeration
+>   target/riscv: Split misa.mxl and misa.ext
+>   target/riscv: Replace riscv_cpu_is_32bit with riscv_cpu_mxl
+>   target/riscv: Add MXL/SXL/UXL to TB_FLAGS
+>   target/riscv: Use REQUIRE_64BIT in amo_check64
+>   target/riscv: Properly check SEW in amo_op
+>   target/riscv: Replace is_32bit with get_xl/get_xlen
+>   target/riscv: Replace DisasContext.w with DisasContext.ol
+>   target/riscv: Use gen_arith_per_ol for RVM
+>   target/riscv: Adjust trans_rev8_32 for riscv64
+>   target/riscv: Use gen_unary_per_ol for RVB
+>   target/riscv: Use gen_shift*_per_ol for RVB, RVI
+>   target/riscv: Use riscv_csrrw_debug for cpu_dump
+>   target/riscv: Compute mstatus.sd on demand
 
-Signed-off-by: Anatoly Parshintsev <kupokupokupopo@gmail.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.h       | 20 ++++++++++++++++++++
- target/riscv/translate.c | 39 +++++++++++++++++++++++++++++++++++++--
- 2 files changed, 57 insertions(+), 2 deletions(-)
+Thanks!
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index acb4ce9d23..0ae12b9e61 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -407,6 +407,8 @@ FIELD(TB_FLAGS, VILL, 8, 1)
- /* Is a Hypervisor instruction load/store allowed? */
- FIELD(TB_FLAGS, HLSX, 9, 1)
- FIELD(TB_FLAGS, MSTATUS_HS_FS, 10, 2)
-+/* If PointerMasking should be applied */
-+FIELD(TB_FLAGS, PM_ENABLED, 10, 1)
- 
- bool riscv_cpu_is_32bit(CPURISCVState *env);
- 
-@@ -467,6 +469,24 @@ static inline void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-         flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
-                            get_field(env->mstatus_hs, MSTATUS_FS));
-     }
-+    if (riscv_has_ext(env, RVJ)) {
-+        int priv = flags & TB_FLAGS_PRIV_MMU_MASK;
-+        bool pm_enabled = false;
-+        switch (priv) {
-+        case PRV_U:
-+            pm_enabled = env->mmte & U_PM_ENABLE;
-+            break;
-+        case PRV_S:
-+            pm_enabled = env->mmte & S_PM_ENABLE;
-+            break;
-+        case PRV_M:
-+            pm_enabled = env->mmte & M_PM_ENABLE;
-+            break;
-+        default:
-+            g_assert_not_reached();
-+        }
-+        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
-+    }
- #endif
- 
-     *pflags = flags;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 9e176b8137..e1a5725395 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -36,6 +36,9 @@ static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
- static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
- static TCGv load_res;
- static TCGv load_val;
-+/* globals for PM CSRs */
-+static TCGv pm_mask[4];
-+static TCGv pm_base[4];
- 
- #include "exec/gen-icount.h"
- 
-@@ -82,6 +85,10 @@ typedef struct DisasContext {
-     TCGv zero;
-     /* Space for 3 operands plus 1 extra for address computation. */
-     TCGv temp[4];
-+    /* PointerMasking extension */
-+    bool pm_enabled;
-+    TCGv pm_mask;
-+    TCGv pm_base;
- } DisasContext;
- 
- static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-@@ -248,11 +255,20 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
- }
- 
- /*
-- * Temp stub: generates address adjustment for PointerMasking
-+ * Generates address adjustment for PointerMasking
-  */
- static TCGv gen_pm_adjust_address(DisasContext *s, TCGv src)
- {
--    return src;
-+    TCGv temp;
-+    if (!s->pm_enabled) {
-+        /* Load unmodified address */
-+        return src;
-+    } else {
-+        temp = temp_new(s);
-+        tcg_gen_andc_tl(temp, src, s->pm_mask);
-+        tcg_gen_or_tl(temp, temp, s->pm_base);
-+        return temp;
-+    }
- }
- 
- #ifndef CONFIG_USER_ONLY
-@@ -536,6 +552,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->w = false;
-     ctx->ntemp = 0;
-     memset(ctx->temp, 0, sizeof(ctx->temp));
-+    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
-+    int priv = tb_flags & TB_FLAGS_PRIV_MMU_MASK;
-+    ctx->pm_mask = pm_mask[priv];
-+    ctx->pm_base = pm_base[priv];
- 
-     ctx->zero = tcg_constant_tl(0);
- }
-@@ -649,4 +669,19 @@ void riscv_translate_init(void)
-                              "load_res");
-     load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
-                              "load_val");
-+#ifndef CONFIG_USER_ONLY
-+    /* Assign PM CSRs to tcg globals */
-+    pm_mask[PRV_U] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
-+    pm_base[PRV_U] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
-+    pm_mask[PRV_S] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
-+    pm_base[PRV_S] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
-+    pm_mask[PRV_M] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
-+    pm_base[PRV_M] =
-+      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
-+#endif
- }
--- 
-2.30.2
+Applied to riscv-to-apply.next
 
+Alistair
+
+>
+>  target/riscv/cpu.h                      |  73 +++------
+>  target/riscv/cpu_bits.h                 |   8 +-
+>  hw/riscv/boot.c                         |   2 +-
+>  linux-user/elfload.c                    |   2 +-
+>  linux-user/riscv/cpu_loop.c             |   2 +-
+>  semihosting/arm-compat-semi.c           |   2 +-
+>  target/riscv/cpu.c                      | 195 +++++++++++++-----------
+>  target/riscv/cpu_helper.c               |  92 ++++++++++-
+>  target/riscv/csr.c                      | 104 ++++++++-----
+>  target/riscv/gdbstub.c                  |  10 +-
+>  target/riscv/machine.c                  |  10 +-
+>  target/riscv/monitor.c                  |   4 +-
+>  target/riscv/translate.c                | 174 +++++++++++++++------
+>  target/riscv/insn_trans/trans_rvb.c.inc | 140 +++++++++--------
+>  target/riscv/insn_trans/trans_rvi.c.inc |  44 +++---
+>  target/riscv/insn_trans/trans_rvm.c.inc |  36 ++++-
+>  target/riscv/insn_trans/trans_rvv.c.inc |  29 ++--
+>  17 files changed, 576 insertions(+), 351 deletions(-)
+>
+> --
+> 2.25.1
+>
+>
 
