@@ -1,86 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md71R-0005gs-Gt
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 04:32:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46294)
+	id 1md8hP-0003m3-DZ
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 06:19:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48052)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1md71N-0005gR-2a
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 04:32:28 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:33785)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1md71J-0001v9-O9
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 04:32:24 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634718739;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QkyiOIh245EX1Ey2mEyLYnA2g+75dHhMOpbkSpwutJU=;
- b=YRJIeqKdCnStK54uhMM5UfIQ1C20O8m1u1MA1UeM34QRCJpbHqzm25Z+E0u5lIXN9CnIPt
- av2z0hsv85j5oCMBqh6Fog/rIt//ghL5YEcpGgk2ufYOnNCmnCyyDx56+Lk0HiWRfIr6OF
- rX0G7E6MAQOcQ2wzA/f4YxxO+w2epIM=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-257-kfemuTpaM9mM3onjDgdQRA-1; Wed, 20 Oct 2021 04:32:18 -0400
-X-MC-Unique: kfemuTpaM9mM3onjDgdQRA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 6-20020a1c1906000000b0030dd4dd6659so2241070wmz.3
- for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 01:32:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1md8hL-0003cj-C2; Wed, 20 Oct 2021 06:19:51 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e]:36697)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1md8hI-0002yS-MR; Wed, 20 Oct 2021 06:19:51 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id d3so24641006edp.3;
+ Wed, 20 Oct 2021 03:19:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=pH+DaSIah9qmbxEcK7TH9yynojC2BbREOW8Ra1hHPGs=;
+ b=eLVL5O19Y3FyDrGg41g6GojPYgYMuQ+vnchUdxqqnPYL8BY/30jr70oJCTaem7OpXp
+ HVuGndHTVjA1QGCuvXNDOUlvK9VeZ/BaY4PuCUJOvqu9W85MX5n+Q2VKHCHotb3u6pNO
+ EC6kr1Ysb8Aa30+ChzUvjVbIpWaDpeBKsX37rEPJzp/01NjGGeb7aklYV+v1Nx0kfPvP
+ TXa0uRIwMflP/2q1yLMPw9CvijNjgMFKiIhozuyN8N9Dck0jtSiuss37/WpnuPoVw+Oj
+ /jpAGgQQgdA4pwc2bGo3lmzVh5Q2TjQSpaSQYA9Tz3mNS/cByd+ojaFqY/hDSFSoyZ2b
+ SXIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=QkyiOIh245EX1Ey2mEyLYnA2g+75dHhMOpbkSpwutJU=;
- b=Vte+AoeGY7imWTrJg+hoTkCyxajDAmRVPyYo1zes08YaBAY6TP08jJR1sJ77jBqO9I
- V9POfE5qos9ykdAMlTQXguRAJQ+GoYrJC366042yROqehw8Wgmk68zTRy+xkiRh5J5Qx
- A6N7tJf7x7lmo6Qga37sxWXBJAejJVf3mNsIos21z2eFdqiY6+uUQ8fZYrrW6lBMI2go
- gie2HouyVg+apuxwsx6nkZU6Do0DbCmhhIkohEDBvczWIAGiKITz+Zzyzm4OVMwkKbgQ
- MGHEL0fpjykP64s9hiG4aWk6PdJ30frBpJhgSW552Fw4IHFi9dNTDD9oeJqYg07Z6/Y/
- gKZw==
-X-Gm-Message-State: AOAM530YiACNuNjp6nTSZwuEFylA95ft6L0Mm/2ekRb/tUH5LGrRu7Qj
- XSRak86h9KxMBNqowc0Oy1YB7sxBWJ/BxlJZsoiHlztrh9mXtmDXeSvggZ/Sd4d+N7728HTKVuT
- q1b0bkTVnqgwHKxw=
-X-Received: by 2002:adf:a1da:: with SMTP id v26mr50765432wrv.186.1634718737046; 
- Wed, 20 Oct 2021 01:32:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwRr0II8pl5sKDcJdlPKyjeKZ4wSkCFN5IoIGQm04dfg/7DtoaCZqoIqCqlqPrMzEoUvC5iRg==
-X-Received: by 2002:adf:a1da:: with SMTP id v26mr50765402wrv.186.1634718736750; 
- Wed, 20 Oct 2021 01:32:16 -0700 (PDT)
-Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id f24sm1277868wmb.33.2021.10.20.01.32.15
+ bh=pH+DaSIah9qmbxEcK7TH9yynojC2BbREOW8Ra1hHPGs=;
+ b=0uRzPQQU5VRAbZo1v3HSco8yfuEppq5IcZFvWcWScZR6qYe4HKzmAVAM2KrR5aWqlA
+ OlPsdQfOduCjh5ud6ah3owvdUB9kpEyYI38GEfd40d5AWb91GnJ27XxR/BlGPx/IEnJJ
+ Lp4Vmdsz1EtTKsYj16Gdq0TqknZbq+2ajYZQN4T9PRagEo31bRoqw5ubNrEdhf+gy3I9
+ WjTcQbca5Jqmzp3ffrHriAcETRISJ6G2658PdYXtcTXAFHEhSDvgSEaD9FwmiiXFiMwu
+ vtFJEcIW2jcyqg+lX/Dsl5OQVWKh3XeIO53TlFHVZaCdJ88ou0cx8wfJ49mf3fA7zE1S
+ NlyQ==
+X-Gm-Message-State: AOAM530L+TLCPqBxZHaDdyRyE4qEj0k7bRm3zw9InRRZDhCUCgW06OaM
+ mC3W3eL/yfrLpAZd8l/ijXo=
+X-Google-Smtp-Source: ABdhPJw+/hcGjKkNvGGlECiWHFZZGTnewexEecKyqod+alPIa4jkKomprsLY/pQqAwDbXq7ZnWxEQg==
+X-Received: by 2002:a17:906:bc43:: with SMTP id
+ s3mr44692219ejv.46.1634725186135; 
+ Wed, 20 Oct 2021 03:19:46 -0700 (PDT)
+Received: from neptune.lab ([46.39.228.224])
+ by smtp.googlemail.com with ESMTPSA id k19sm821284ejg.13.2021.10.20.03.19.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Oct 2021 01:32:16 -0700 (PDT)
-Date: Wed, 20 Oct 2021 10:32:15 +0200
-From: Igor Mammedov <imammedo@redhat.com>
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, "qemu-devel@nongnu.org
- Developers" <qemu-devel@nongnu.org>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, qemu-ppc@nongnu.org, laurent@vivier.eu,
- thuth@redhat.com, david@gibson.dropbear.id.au, alistair.francis@wdc.com
-Subject: Re: [PATCH 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram
- and MachineClass::default_ram_id
-Message-ID: <20211020103215.17288634@redhat.com>
-In-Reply-To: <CAEUhbmUa1CU_7+HMEuBmAc-DqFAH8iByfDAjV_uXnof6TZQz_Q@mail.gmail.com>
-References: <20211018153829.24382-1-bmeng.cn@gmail.com>
- <20211019093943.54c36b3f@redhat.com>
- <CAEUhbmUa1CU_7+HMEuBmAc-DqFAH8iByfDAjV_uXnof6TZQz_Q@mail.gmail.com>
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+ Wed, 20 Oct 2021 03:19:45 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v15 3/8] [RISCV_PM] Support CSRs required for RISC-V PM
+ extension except for the h-mode
+Date: Wed, 20 Oct 2021 13:19:30 +0300
+Message-Id: <20211020101935.1369682-4-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
+References: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=imammedo@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=imammedo@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,109 +80,362 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 08:32:28 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 10:19:51 -0000
 
-On Wed, 20 Oct 2021 09:55:52 +0800
-Bin Meng <bmeng.cn@gmail.com> wrote:
+Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c |   2 +
+ target/riscv/cpu.h |  11 ++
+ target/riscv/csr.c | 285 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 298 insertions(+)
 
-> Hi Igor,
-> 
-> On Tue, Oct 19, 2021 at 3:39 PM Igor Mammedov <imammedo@redhat.com> wrote:
-> >
-> > On Mon, 18 Oct 2021 23:38:24 +0800
-> > Bin Meng <bmeng.cn@gmail.com> wrote:
-> >  
-> > > Using memory_region_init_ram(), which can't possibly handle vhost-user,
-> > > and can't work as expected with '-numa node,memdev' options.
-> > >
-> > > Use MachineState::ram instead of manually initializing RAM memory
-> > > region, as well as by providing MachineClass::default_ram_id to
-> > > opt in to memdev scheme.
-> > >
-> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-> > > ---
-> > >
-> > >  hw/riscv/microchip_pfsoc.c | 9 +++------
-> > >  1 file changed, 3 insertions(+), 6 deletions(-)
-> > >
-> > > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > > index e475b6d511..f10f55b488 100644
-> > > --- a/hw/riscv/microchip_pfsoc.c
-> > > +++ b/hw/riscv/microchip_pfsoc.c
-> > > @@ -459,7 +459,6 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-> > >      const MemMapEntry *memmap = microchip_pfsoc_memmap;
-> > >      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
-> > >      MemoryRegion *system_memory = get_system_memory();
-> > > -    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
-> > >      MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
-> > >      MemoryRegion *mem_high = g_new(MemoryRegion, 1);
-> > >      MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
-> > > @@ -486,16 +485,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
-> > >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
-> > >
-> > >      /* Register RAM */
-> > > -    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
-> > > -                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
-> > > -                           &error_fatal);
-> > >      memory_region_init_alias(mem_low_alias, NULL,
-> > >                               "microchip.icicle.kit.ram_low.alias",
-> > > -                             mem_low, 0,
-> > > +                             machine->ram, 0,
-> > >                               memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
-> > >      memory_region_add_subregion(system_memory,
-> > >                                  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
-> > > -                                mem_low);
-> > > +                                machine->ram);
-> > >      memory_region_add_subregion(system_memory,
-> > >                                  memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
-> > >                                  mem_low_alias);  
-> >
-> > looking at code it seems RAM is split between low and high regions,
-> > so converting only low region is wrong.
-> >
-> > I'd suggest something similar to 2dc9ce13d210 : taihu_405ep_init().
-> > i.e. ms->ram should hold whole RAM that is split between low and high
-> > using aliases.  
-> 
-> Thank you for your pointers. I have just sent v2.
-
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1d69d1887e..75e8b8ca83 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -365,6 +365,8 @@ static void riscv_cpu_reset(DeviceState *dev)
+     env->mcause = 0;
+     env->pc = env->resetvec;
+     env->two_stage_lookup = false;
++    /* mmte is supposed to have pm.current hardwired to 1 */
++    env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
+ #endif
+     cs->exception_index = RISCV_EXCP_NONE;
+     env->load_res = -1;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 3f28dc5f3a..acb4ce9d23 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -236,6 +236,17 @@ struct CPURISCVState {
  
-> One note when looking at the taihu_405ep_init() implementation, the
-> following looks incorrect to me:
-> 
->     memory_region_init_alias(&ram_memories[1], NULL,
->                              "taihu_405ep.ram-1", machine->ram, ram_bases[1],
->                              ram_sizes[1]);
-> 
-> I think the 'offset' should be ram_sizes[0] instead of ram_bases[1],
-> although their values are the same which means they are two contiguous
-> regions, so it happens to work. But I might be nitpicking ...
-
-I fail to see what's wrong there, from the way code is written
-it looks like hardware has 2 memory banks with different base
-address. It just happens that ram_bases[1] starts right after
-ram_bases[0] but if it weren't then using ram_sizes[0]
-for offset would be wrong. So current code looks fine to me.
-
-Anyways,
-CCing PPC folks to have a second look at it.
-
-> 
-> >  
-> > > @@ -606,6 +602,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
-> > >                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
-> > >      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
-> > >      mc->default_cpus = mc->min_cpus;
-> > > +    mc->default_ram_id = "microchip.icicle.kit.ram_low";  
-> >
-> > given it is not versioned machine, so we don't have to worry about
-> > cross version migration here,
-> > so I'd use "microchip.icicle.kit.ram" for the name here
-> > and currently used "microchip.icicle.kit.ram_low" for corresponding alias  
-> 
-> Regards,
-> Bin
-> 
+     /* True if in debugger mode.  */
+     bool debugger;
++
++    /*
++     * CSRs for PointerMasking extension
++     */
++    target_ulong mmte;
++    target_ulong mpmmask;
++    target_ulong mpmbase;
++    target_ulong spmmask;
++    target_ulong spmbase;
++    target_ulong upmmask;
++    target_ulong upmbase;
+ #endif
+ 
+     float_status fp_status;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 23fbbd3216..d563289d37 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -192,6 +192,16 @@ static RISCVException hmode32(CPURISCVState *env, int csrno)
+ 
+ }
+ 
++/* Checks if PointerMasking registers could be accessed */
++static RISCVException pointer_masking(CPURISCVState *env, int csrno)
++{
++    /* Check if j-ext is present */
++    if (riscv_has_ext(env, RVJ)) {
++        return RISCV_EXCP_NONE;
++    }
++    return RISCV_EXCP_ILLEGAL_INST;
++}
++
+ static RISCVException pmp(CPURISCVState *env, int csrno)
+ {
+     if (riscv_feature(env, RISCV_FEATURE_PMP)) {
+@@ -1401,6 +1411,268 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++/*
++ * Functions to access Pointer Masking feature registers
++ * We have to check if current priv lvl could modify
++ * csr in given mode
++ */
++static bool check_pm_current_disabled(CPURISCVState *env, int csrno)
++{
++    int csr_priv = get_field(csrno, 0x300);
++    int pm_current;
++
++    /*
++     * If priv lvls differ that means we're accessing csr from higher priv lvl,
++     * so allow the access
++     */
++    if (env->priv != csr_priv) {
++        return false;
++    }
++    switch (env->priv) {
++    case PRV_M:
++        pm_current = get_field(env->mmte, M_PM_CURRENT);
++        break;
++    case PRV_S:
++        pm_current = get_field(env->mmte, S_PM_CURRENT);
++        break;
++    case PRV_U:
++        pm_current = get_field(env->mmte, U_PM_CURRENT);
++        break;
++    default:
++        g_assert_not_reached();
++    }
++    /* It's same priv lvl, so we allow to modify csr only if pm.current==1 */
++    return !pm_current;
++}
++
++static RISCVException read_mmte(CPURISCVState *env, int csrno,
++                                target_ulong *val)
++{
++    *val = env->mmte & MMTE_MASK;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mmte(CPURISCVState *env, int csrno,
++                                 target_ulong val)
++{
++    uint64_t mstatus;
++    target_ulong wpri_val = val & MMTE_MASK;
++
++    if (val != wpri_val) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "MMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
++                      val, wpri_val);
++    }
++    /* for machine mode pm.current is hardwired to 1 */
++    wpri_val |= MMTE_M_PM_CURRENT;
++
++    /* hardwiring pm.instruction bit to 0, since it's not supported yet */
++    wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
++    env->mmte = wpri_val | PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_smte(CPURISCVState *env, int csrno,
++                                target_ulong *val)
++{
++    *val = env->mmte & SMTE_MASK;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_smte(CPURISCVState *env, int csrno,
++                                 target_ulong val)
++{
++    target_ulong wpri_val = val & SMTE_MASK;
++
++    if (val != wpri_val) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "SMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
++                      val, wpri_val);
++    }
++
++    /* if pm.current==0 we can't modify current PM CSRs */
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++
++    wpri_val |= (env->mmte & ~SMTE_MASK);
++    write_mmte(env, csrno, wpri_val);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_umte(CPURISCVState *env, int csrno,
++                                target_ulong *val)
++{
++    *val = env->mmte & UMTE_MASK;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_umte(CPURISCVState *env, int csrno,
++                                 target_ulong val)
++{
++    target_ulong wpri_val = val & UMTE_MASK;
++
++    if (val != wpri_val) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "UMTE: WPRI violation written 0x%lx vs expected 0x%lx\n",
++                      val, wpri_val);
++    }
++
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++
++    wpri_val |= (env->mmte & ~UMTE_MASK);
++    write_mmte(env, csrno, wpri_val);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_mpmmask(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->mpmmask;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    env->mpmmask = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_spmmask(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->spmmask;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_spmmask(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    /* if pm.current==0 we can't modify current PM CSRs */
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++    env->spmmask = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_upmmask(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->upmmask;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_upmmask(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    /* if pm.current==0 we can't modify current PM CSRs */
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++    env->upmmask = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_mpmbase(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->mpmbase;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    env->mpmbase = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_spmbase(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->spmbase;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_spmbase(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    /* if pm.current==0 we can't modify current PM CSRs */
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++    env->spmbase = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_upmbase(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    *val = env->upmbase;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_upmbase(CPURISCVState *env, int csrno,
++                                    target_ulong val)
++{
++    uint64_t mstatus;
++
++    /* if pm.current==0 we can't modify current PM CSRs */
++    if (check_pm_current_disabled(env, csrno)) {
++        return RISCV_EXCP_NONE;
++    }
++    env->upmbase = val;
++    env->mmte |= PM_EXT_DIRTY;
++
++    /* Set XS and SD bits, since PM CSRs are dirty */
++    mstatus = env->mstatus | MSTATUS_XS;
++    write_mstatus(env, csrno, mstatus);
++    return RISCV_EXCP_NONE;
++}
++
+ #endif
+ 
+ /*
+@@ -1635,6 +1907,19 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
+     [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+ 
++    /* User Pointer Masking */
++    [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
++    [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
++    [CSR_UPMBASE] =    { "upmbase", pointer_masking, read_upmbase, write_upmbase },
++    /* Machine Pointer Masking */
++    [CSR_MMTE]    =    { "mmte",    pointer_masking, read_mmte,    write_mmte    },
++    [CSR_MPMMASK] =    { "mpmmask", pointer_masking, read_mpmmask, write_mpmmask },
++    [CSR_MPMBASE] =    { "mpmbase", pointer_masking, read_mpmbase, write_mpmbase },
++    /* Supervisor Pointer Masking */
++    [CSR_SMTE]    =    { "smte",    pointer_masking, read_smte,    write_smte    },
++    [CSR_SPMMASK] =    { "spmmask", pointer_masking, read_spmmask, write_spmmask },
++    [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase, write_spmbase },
++
+     /* Performance Counters */
+     [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_zero },
+     [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_zero },
+-- 
+2.30.2
 
 
