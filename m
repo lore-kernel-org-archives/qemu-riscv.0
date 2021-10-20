@@ -1,64 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md0bk-0007ww-5K
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 21:41:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59500)
+	id 1md0bp-00082w-Da
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 21:41:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59516)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0bi-0007rc-70; Tue, 19 Oct 2021 21:41:30 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:39761)
+ id 1md0bk-0007yH-Ky; Tue, 19 Oct 2021 21:41:34 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e]:45640)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0bg-0005Xf-IJ; Tue, 19 Oct 2021 21:41:29 -0400
-Received: by mail-pg1-x534.google.com with SMTP id g184so21059613pgc.6;
- Tue, 19 Oct 2021 18:41:27 -0700 (PDT)
+ id 1md0bi-0005gQ-Tj; Tue, 19 Oct 2021 21:41:32 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id f11so1529297pfc.12;
+ Tue, 19 Oct 2021 18:41:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=iqfmG4qbpsjSVtZKYW2vZosJ7rbYunRdOsfFpSsoAv4=;
- b=au+H1Bd3/HtzifxGyAuu7fVCG1V4Q3C358WxtFDeRJhQADyOByhg6EDc7WaSgkuBpZ
- 7lGnKc7PBOtQpHEqoby8Gs3hkjPUVYrqeYaA6g0/BK3j5dNJT42rUWZQ+jY/sR1TMNBk
- lNaOpF7I4cm+K9eUTnrWItthRr+p1F0ZIaIU0TIvknEIC1bc8lU8vHrSXO1ExfHyE+Qx
- SsuTdIdBZkW3EN/q9wPihsHjmX/j8wqSnM5+LylJU4D0UK4ZR9kQw8BEc+hPRTelSmLB
- JIjVQdZuUzQnKl0BBtx4QZ3TCiK8f/mIXsOHbgA5Gq7NTJ8XO/ila0m0dreTJngrPx4Q
- 0ZWQ==
+ bh=mD7/PuCvDIg/ueaYUzJA1zLICNITcLj/HedHvpWU5eU=;
+ b=H/km4TfiXTHVfOhAmbzbyve5E9dHv23t/HAzlfUNWPALS5lf8U2juLTHLyXY5r6l9n
+ BnFDLBZaCl74QISf3eadrjQIGR2kuDpyw3LCuXiP9yfNxZB4C5tzGCr0F9yv38OKOh0O
+ aU0tgc9SKAvlNh6jhrDmskeTDiAstmVvd4bNW5IzV5JEJ7wMs4YY+xlE5ARK71h+IFFW
+ 1TEFM0irhHNgvYnjhTKiR5CI+3RC4wMiodOrJYb66v0e7PvyER3g8bXLYW0sh+eXIlk7
+ exleOw3ImHDRDsjv3Rok+Ib/o6HEEpn81iz4MIzztPLg9iNIukBw2w7jZW+EUmJMFz+N
+ A56Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=iqfmG4qbpsjSVtZKYW2vZosJ7rbYunRdOsfFpSsoAv4=;
- b=cOB9ezoZWGpS+pJvMrBvA3LfcxKHUYdDuoGi02CBRCk1iicqStTJuNy3HQRJckBIAS
- jR4zMflH/N1yx3/HGBtNtoA55BqYXEkuPZxW2zXUasplfWSePoiFwFdktalLZqWvD7Y6
- ioblVC/ziOdToakoZvcTB9eqx0lTAi6LqSxKin1cPvDI3j7mrRwm/T87RvKdvTjDz23p
- 0mMFKjf8gMULf1DOw6yLaCqebmYDLYkTPOBGf9fUF7pLxKvJVZ//MjJNalM48KyrNjCP
- Ba+FHU4v6krpLNBnMr1FgXLJYo9jNvkz6PCS6GkRlVP1IoBQS54dOwLatZAItOAKUppV
- Z6uw==
-X-Gm-Message-State: AOAM533L/l2w0huXHjt9VHgpm0xebdhYGUQTERK6acCXgvwdW+w9PtmR
- xT4QdaeJfhqN9RtQrJGR3gMUbU1iKfc=
-X-Google-Smtp-Source: ABdhPJy14qt0anEqAnobXhEajjcsXqz6zhWkWcruITcGZBryBqvGxzTrHMpg/DT0ILQ/bikteztnKw==
-X-Received: by 2002:a63:b906:: with SMTP id z6mr25370387pge.406.1634694086968; 
- Tue, 19 Oct 2021 18:41:26 -0700 (PDT)
+ bh=mD7/PuCvDIg/ueaYUzJA1zLICNITcLj/HedHvpWU5eU=;
+ b=uTmTBwZVZyPA25Xx8Bl2otAw0lwRgDUybY1YjD7IJNK3LXbQTKjt4QQwG4AN8w5Qph
+ MqdWiBLRSutihuhbX1txF3/2R6UlyLXRqfxgdifiAi0OzfRVs/ofcJpYA/Ht8Dx+l9Xy
+ 5lye3cPAVgHAJJRltaukftPNLjqURQGtJkD2DLdOFNNydu7HWfBorW8PVAGP+EM0AqTb
+ G7vg4f4s7gXtNvByw6LQqU5netmPp4JAuKtuxbUAhuicoIiHMtfRFK6g5NnUP+0zc264
+ HrDgrHOFraWV3tKvGNNJ/0LBSAiaTxO3x8549AubEBmXJVdFdrYvZPSA4t1RS4n1sMLo
+ VFkQ==
+X-Gm-Message-State: AOAM531qrPB6FuTajIZCH1rWwQHQPBvLCzN2trE78S1fkJzBBOYic/EM
+ /bMmreuzV8e2TPQGKhThLtigvn3tqCE=
+X-Google-Smtp-Source: ABdhPJx2iKMn+ROcTlPd3EtZgt1qKYSG83U5ixHG8/VRx7Hr29dLAY40sxc9auo3Szw/Pdej4YrN3w==
+X-Received: by 2002:a05:6a00:15c9:b0:44c:a998:b50d with SMTP id
+ o9-20020a056a0015c900b0044ca998b50dmr3262475pfu.49.1634694089150; 
+ Tue, 19 Oct 2021 18:41:29 -0700 (PDT)
 Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
  [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id f4sm407147pgn.93.2021.10.19.18.41.25
+ by smtp.gmail.com with ESMTPSA id f4sm407147pgn.93.2021.10.19.18.41.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 18:41:26 -0700 (PDT)
+ Tue, 19 Oct 2021 18:41:28 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>
-Subject: [PATCH v2 3/6] hw/riscv: shakti_c: Use MachineState::ram and
+Subject: [PATCH v2 4/6] hw/riscv: sifive_e: Use MachineState::ram and
  MachineClass::default_ram_id
-Date: Wed, 20 Oct 2021 09:41:09 +0800
-Message-Id: <20211020014112.7336-4-bmeng.cn@gmail.com>
+Date: Wed, 20 Oct 2021 09:41:10 +0800
+Message-Id: <20211020014112.7336-5-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211020014112.7336-1-bmeng.cn@gmail.com>
 References: <20211020014112.7336-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,7 +78,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 01:41:30 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 01:41:36 -0000
 
 Using memory_region_init_ram(), which can't possibly handle vhost-user,
 and can't work as expected with '-numa node,memdev' options.
@@ -87,49 +87,73 @@ Use MachineState::ram instead of manually initializing RAM memory
 region, as well as by providing MachineClass::default_ram_id to
 opt in to memdev scheme.
 
+While at it add check for user supplied RAM size and error out if it
+mismatches board expected value.
+
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+
 ---
 
-(no changes since v1)
+Changes in v2:
+- add RAM size check
+- assign mc->default_ram_size
 
- hw/riscv/shakti_c.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ hw/riscv/sifive_e.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index d7d1f91fa5..90e2cf609f 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -45,7 +45,6 @@ static void shakti_c_machine_state_init(MachineState *mstate)
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 6e95ea5896..9b206407a6 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -29,6 +29,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/cutils.h"
+ #include "qemu/error-report.h"
+ #include "qapi/error.h"
+ #include "hw/boards.h"
+@@ -71,22 +72,27 @@ static const MemMapEntry sifive_e_memmap[] = {
+ 
+ static void sifive_e_machine_init(MachineState *machine)
  {
-     ShaktiCMachineState *sms = RISCV_SHAKTI_MACHINE(mstate);
-     MemoryRegion *system_memory = get_system_memory();
++    MachineClass *mc = MACHINE_GET_CLASS(machine);
+     const MemMapEntry *memmap = sifive_e_memmap;
+ 
+     SiFiveEState *s = RISCV_E_MACHINE(machine);
+     MemoryRegion *sys_mem = get_system_memory();
 -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
+     int i;
  
-     /* Allow only Shakti C CPU for this platform */
-     if (strcmp(mstate->cpu_type, TYPE_RISCV_CPU_SHAKTI_C) != 0) {
-@@ -59,11 +58,9 @@ static void shakti_c_machine_state_init(MachineState *mstate)
-     qdev_realize(DEVICE(&sms->soc), NULL, &error_abort);
++    if (machine->ram_size != mc->default_ram_size) {
++        char *sz = size_to_str(mc->default_ram_size);
++        error_report("Invalid RAM size, should be %s", sz);
++        g_free(sz);
++        exit(EXIT_FAILURE);
++    }
++
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_E_SOC);
+     qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
  
-     /* register RAM */
--    memory_region_init_ram(main_mem, NULL, "riscv.shakti.c.ram",
--                           mstate->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory,
-                                 shakti_c_memmap[SHAKTI_C_RAM].base,
--                                main_mem);
-+                                mstate->ram);
+     /* Data Tightly Integrated Memory */
+-    memory_region_init_ram(main_mem, NULL, "riscv.sifive.e.ram",
+-        memmap[SIFIVE_E_DEV_DTIM].size, &error_fatal);
+     memory_region_add_subregion(sys_mem,
+-        memmap[SIFIVE_E_DEV_DTIM].base, main_mem);
++        memmap[SIFIVE_E_DEV_DTIM].base, machine->ram);
  
-     /* ROM reset vector */
-     riscv_setup_rom_reset_vec(mstate, &sms->soc.cpus,
-@@ -88,6 +85,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, void *data)
-     mc->desc = "RISC-V Board compatible with Shakti SDK";
-     mc->init = shakti_c_machine_state_init;
-     mc->default_cpu_type = TYPE_RISCV_CPU_SHAKTI_C;
-+    mc->default_ram_id = "riscv.shakti.c.ram";
- }
+     /* Mask ROM reset vector */
+     uint32_t reset_vec[4];
+@@ -142,6 +148,8 @@ static void sifive_e_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = sifive_e_machine_init;
+     mc->max_cpus = 1;
+     mc->default_cpu_type = SIFIVE_E_CPU;
++    mc->default_ram_id = "riscv.sifive.e.ram";
++    mc->default_ram_size = sifive_e_memmap[SIFIVE_E_DEV_DTIM].size;
  
- static const TypeInfo shakti_c_machine_type_info = {
+     object_class_property_add_bool(oc, "revb", sifive_e_machine_get_revb,
+                                    sifive_e_machine_set_revb);
 -- 
 2.25.1
 
