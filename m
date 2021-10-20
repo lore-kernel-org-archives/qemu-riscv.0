@@ -1,71 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1md0by-0008Ap-99
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 21:41:47 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59574)
+	id 1md0pu-0000mS-20
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Oct 2021 21:56:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33660)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0bq-00083o-Af; Tue, 19 Oct 2021 21:41:39 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:40584)
+ id 1md0ps-0000jX-Ux; Tue, 19 Oct 2021 21:56:08 -0400
+Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:37689)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1md0bn-0005kl-6Y; Tue, 19 Oct 2021 21:41:38 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- pf6-20020a17090b1d8600b0019fa884ab85so1267595pjb.5; 
- Tue, 19 Oct 2021 18:41:34 -0700 (PDT)
+ id 1md0pp-0001DI-0c; Tue, 19 Oct 2021 21:56:08 -0400
+Received: by mail-yb1-xb2e.google.com with SMTP id l80so12015135ybf.4;
+ Tue, 19 Oct 2021 18:56:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=5tiY91vAhH7clfd/MPIVkOxQx+ZhrtcyHO9Rlx9BJkQ=;
- b=YxsurfVP3+nIk8LUZle/uypkXZTI20wmqlVrCCqpOPKBu8tVMGpY012+Oh2Dlch0c8
- Md3Y4EqBUQIcZfUEz6WEAV6BgZ944TeW2TrqOxeGMtAQvyXXHsqPWLWAKVteADl1fX71
- kUQmCYtWDHL7kL5Abm64Fn06LOgiBTqpNAuTCXFW7fgqE0bXGsk2FaCqeHxUVbl1Oom/
- XFenPBeN4wE7DycpZhv+NiVddn0hmnmzrLovrd3AeWmAx0J+PAzoGN+iaEvY+ffYhO2k
- X0hUXhKCDcNmfj5F1DFC3w/vRSO8hiNG9jkLFwrM8WqXa3qVMGFznQn35CN6+iQ9rZES
- 8BWQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Nnc4ApTSf5zhc9tQzLnqBjcLhDOBY9NADLG68UDuKQ0=;
+ b=VNwzTMBUn7WRONYqLPfGwqAEOb3VsSalKm43gtSpDO4rJDmE8olPmEPjszDUnkUf0x
+ eXCf74yCM1K6gZaaqC2nY0fEOMu34K4IWOtUipd4KqhIGvX4BjU8fO4uzfA8C4IBFeDc
+ MuQFd4r02O0K4zwdw0EecW4kDPJg2ZCH6ikc4IQ/fHVSqVXKqTURSORTfx54xlqRJoC+
+ zLc3yB0m9vqXqaeePczpYw5Wjm6x3qClWzSIxoJnKkyam98QEj6276YrS69iALsFuWaU
+ Ek9WyY+fmSP5h1QWMo5FPonNo5Bx/946ZvKBH3E2QbD/6IuZtT9XYaUMLxrsYUgZrZCp
+ Afnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=5tiY91vAhH7clfd/MPIVkOxQx+ZhrtcyHO9Rlx9BJkQ=;
- b=b3ltXwfUcK3EB3905TgiEtNGArXs6HO5nAN05l1pUlsipWPUK3drTjMiuskO/c6EW8
- hIcW2DGma0DP9YjYXYiAuMNisAdqUJfnLf+3B0fL1Jocj+9zg0NVk4JJeM/sjN97YR9H
- +kXJ2JKPNsShnybZjiUVmNlNZ8bZoi97R6oGbW1a/WW8JiifDgVe5UF/h6xTF1YzrbwY
- gKj00QjHcO4uRb2+NSWXa88dmddBVrRjIJ8Hqj7EFk77WAL9Tifw8bzHKay+T1SUqNjb
- EhLVTwwkZg+Qfagy3JUTMBbSEp91axgrWPTYiFyrQpcGBhd+13b0A7InE1/I1T/FGrVC
- 05Qg==
-X-Gm-Message-State: AOAM533aZLDmnTswgBjoz94FnbR+fydnxXmg4fByOhavazI11nB0XBwY
- WrMTsF6JF3XSa9zHwIplZUM=
-X-Google-Smtp-Source: ABdhPJwBfE0sW4Wj0LYDUlqf5+tHqla5CNyuaTlMS+S5OHv0kwwDOGQDu0Dr+tHKk9w3bJyy4An6Nw==
-X-Received: by 2002:a17:902:c94f:b0:13f:4b5:cddd with SMTP id
- i15-20020a170902c94f00b0013f04b5cdddmr35943323pla.58.1634694093602; 
- Tue, 19 Oct 2021 18:41:33 -0700 (PDT)
-Received: from i9-aorus-gtx1080.localdomain (144.168.56.201.16clouds.com.
- [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id f4sm407147pgn.93.2021.10.19.18.41.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 18:41:33 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>
-Subject: [PATCH v2 6/6] hw/riscv: spike: Use MachineState::ram and
- MachineClass::default_ram_id
-Date: Wed, 20 Oct 2021 09:41:12 +0800
-Message-Id: <20211020014112.7336-7-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211020014112.7336-1-bmeng.cn@gmail.com>
-References: <20211020014112.7336-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Nnc4ApTSf5zhc9tQzLnqBjcLhDOBY9NADLG68UDuKQ0=;
+ b=sG8pj5UqnGvBWkgZ29pwCqhl/iGMxVA7eBQVn/MbMtqdoKAO1xHQhzMQDdccR4uHtp
+ QvrOqGg8EYfXDBJUTyX7AS77+r5IW8Cmwc0vxOvmz7BWULF/Q1ayOgWzQfYwTXpapJZ1
+ 0ZEcTMJAwDtkYMhn+kuvD0cS7mnws63KNNlh5/2umc4AK8Hd0J5TdeKq412YzVt1iLgT
+ gTK1g+glsLaWXGvTiFY2r2qGkF2opmMmLnQCncpEi4n7Dmqox94vLXSc+zwLQYh6RUwf
+ KJz94shjz+94Qg7n9PzGadXm2Pd3IvjHq5wIlYQIg5vvO/Z7qCGWCYYYDqvkZyggPe3D
+ KScQ==
+X-Gm-Message-State: AOAM530D2CqfokXbNy1LftnSyJL7O4Dl7eoYowSP8FVwKScLr41mKI9y
+ KpcSzXj7LRixoCG+TQHQ50BBH0w7PVd8ZtdWapM=
+X-Google-Smtp-Source: ABdhPJzbvAyxOc9HlYnauB0KyQnOTTbccMWpghnmH1/wu8eu3HSOKQ82yRdK1I+KTxOEl8UYGopnOIyJF5xzfB4PkTo=
+X-Received: by 2002:a25:346:: with SMTP id 67mr37700285ybd.345.1634694963309; 
+ Tue, 19 Oct 2021 18:56:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20211018153829.24382-1-bmeng.cn@gmail.com>
+ <20211019093943.54c36b3f@redhat.com>
+In-Reply-To: <20211019093943.54c36b3f@redhat.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 20 Oct 2021 09:55:52 +0800
+Message-ID: <CAEUhbmUa1CU_7+HMEuBmAc-DqFAH8iByfDAjV_uXnof6TZQz_Q@mail.gmail.com>
+Subject: Re: [PATCH 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram and
+ MachineClass::default_ram_id
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
+X-Spam_score_int: -1
+X-Spam_score: -0.2
+X-Spam_bar: /
+X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -80,59 +71,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 01:41:41 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 01:56:09 -0000
 
-Using memory_region_init_ram(), which can't possibly handle vhost-user,
-and can't work as expected with '-numa node,memdev' options.
+Hi Igor,
 
-Use MachineState::ram instead of manually initializing RAM memory
-region, as well as by providing MachineClass::default_ram_id to
-opt in to memdev scheme.
+On Tue, Oct 19, 2021 at 3:39 PM Igor Mammedov <imammedo@redhat.com> wrote:
+>
+> On Mon, 18 Oct 2021 23:38:24 +0800
+> Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> > Using memory_region_init_ram(), which can't possibly handle vhost-user,
+> > and can't work as expected with '-numa node,memdev' options.
+> >
+> > Use MachineState::ram instead of manually initializing RAM memory
+> > region, as well as by providing MachineClass::default_ram_id to
+> > opt in to memdev scheme.
+> >
+> > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> > ---
+> >
+> >  hw/riscv/microchip_pfsoc.c | 9 +++------
+> >  1 file changed, 3 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> > index e475b6d511..f10f55b488 100644
+> > --- a/hw/riscv/microchip_pfsoc.c
+> > +++ b/hw/riscv/microchip_pfsoc.c
+> > @@ -459,7 +459,6 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+> >      const MemMapEntry *memmap = microchip_pfsoc_memmap;
+> >      MicrochipIcicleKitState *s = MICROCHIP_ICICLE_KIT_MACHINE(machine);
+> >      MemoryRegion *system_memory = get_system_memory();
+> > -    MemoryRegion *mem_low = g_new(MemoryRegion, 1);
+> >      MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
+> >      MemoryRegion *mem_high = g_new(MemoryRegion, 1);
+> >      MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
+> > @@ -486,16 +485,13 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+> >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+> >
+> >      /* Register RAM */
+> > -    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
+> > -                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> > -                           &error_fatal);
+> >      memory_region_init_alias(mem_low_alias, NULL,
+> >                               "microchip.icicle.kit.ram_low.alias",
+> > -                             mem_low, 0,
+> > +                             machine->ram, 0,
+> >                               memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
+> >      memory_region_add_subregion(system_memory,
+> >                                  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+> > -                                mem_low);
+> > +                                machine->ram);
+> >      memory_region_add_subregion(system_memory,
+> >                                  memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
+> >                                  mem_low_alias);
+>
+> looking at code it seems RAM is split between low and high regions,
+> so converting only low region is wrong.
+>
+> I'd suggest something similar to 2dc9ce13d210 : taihu_405ep_init().
+> i.e. ms->ram should hold whole RAM that is split between low and high
+> using aliases.
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+Thank you for your pointers. I have just sent v2.
 
----
+One note when looking at the taihu_405ep_init() implementation, the
+following looks incorrect to me:
 
-(no changes since v1)
+    memory_region_init_alias(&ram_memories[1], NULL,
+                             "taihu_405ep.ram-1", machine->ram, ram_bases[1],
+                             ram_sizes[1]);
 
- hw/riscv/spike.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+I think the 'offset' should be ram_sizes[0] instead of ram_bases[1],
+although their values are the same which means they are two contiguous
+regions, so it happens to work. But I might be nitpicking ...
 
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index 79ae355ae2..288d69cd9f 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -180,7 +180,6 @@ static void spike_board_init(MachineState *machine)
-     const MemMapEntry *memmap = spike_memmap;
-     SpikeState *s = SPIKE_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
--    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-     target_ulong firmware_end_addr, kernel_start_addr;
-     uint32_t fdt_load_addr;
-@@ -239,10 +238,8 @@ static void spike_board_init(MachineState *machine)
-     }
- 
-     /* register system main memory (actual RAM) */
--    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
--                           machine->ram_size, &error_fatal);
-     memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
--        main_mem);
-+        machine->ram);
- 
-     /* create device tree */
-     create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
-@@ -326,6 +323,7 @@ static void spike_machine_class_init(ObjectClass *oc, void *data)
-     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
-     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
-     mc->numa_mem_supported = true;
-+    mc->default_ram_id = "riscv.spike.ram";
- }
- 
- static const TypeInfo spike_machine_typeinfo = {
--- 
-2.25.1
+>
+> > @@ -606,6 +602,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
+> >                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
+> >      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
+> >      mc->default_cpus = mc->min_cpus;
+> > +    mc->default_ram_id = "microchip.icicle.kit.ram_low";
+>
+> given it is not versioned machine, so we don't have to worry about
+> cross version migration here,
+> so I'd use "microchip.icicle.kit.ram" for the name here
+> and currently used "microchip.icicle.kit.ram_low" for corresponding alias
 
+Regards,
+Bin
 
