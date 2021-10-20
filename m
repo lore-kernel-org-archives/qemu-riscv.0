@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdKlz-0000Ix-J1
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 19:13:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49444)
+	id 1mdKma-0000x5-19
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 19:14:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49496)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKlx-0000EF-Kr; Wed, 20 Oct 2021 19:13:25 -0400
-Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:43526)
+ id 1mdKmN-0000qO-4l; Wed, 20 Oct 2021 19:13:52 -0400
+Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:35360)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKlr-0007jh-94; Wed, 20 Oct 2021 19:13:25 -0400
-Received: by mail-il1-x12d.google.com with SMTP id a8so23835861ilj.10;
- Wed, 20 Oct 2021 16:13:18 -0700 (PDT)
+ id 1mdKmG-0008NL-Uz; Wed, 20 Oct 2021 19:13:48 -0400
+Received: by mail-io1-xd29.google.com with SMTP id h196so26740783iof.2;
+ Wed, 20 Oct 2021 16:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=+N6ILkKEpapPlQtU0qsNkf4yzLbVT98AaPkfrkM3V14=;
- b=LQobo42CvDIz5Z/sBtRTgwCKWKDVj9eonp93earZ4q79GOEFn5xlWGxucHK4Bpnj4k
- Q0/aEXVVPcN1TVU0DPkt44xz7juGVOViWXv2DaiPjRDjEp1PqrShv0AqDlrP3tqa7RYK
- 2CTgkk/8BnHvy2GuzGFxywqRkRqPAgygaW31iMI0Xo2KXUIkKPbqXN3rWsO8TLliywVE
- QAR5XICIYdBu+cUIatrJ61zhYcv/gOUnzs3R/+4wL/wRvvysbNdIDQ68E0hTrdA3x6Sa
- wIrzUbBOTEheK68OCLHreNhX0qnRUnG9VRCkkEo6TIVhfESz5F1KV/GSRryde52c8Ka9
- zewA==
+ bh=H9VEtIMolVLSWN8PBX0Wu9nzRQcejBjTBTdiudWqkRw=;
+ b=LSQeI/2Oc+Tr1yR+P6Y+MDMz4oCBoW9/0qG7/KYE20djkdWRH4HmqiMkoUEb+C56fm
+ hFE1LtaBWzjqpN4J9t39Qx/IzYm7RVLYRmR2DMgiEgpaC7FK/voK942+KT0Vu9pMvbv3
+ AZ+7AbqIOD/+lhl0FyadfeNqYa9TGXsTe9w2RSrxT//uTA4qipPYwZP2GRzTws3jvs0U
+ xo9Pniop+tS5QtrQnxw4ZF7IsOn0PkRywjIBqV+UDgi96s/CJR7VUQyUhCYpuVXouAJo
+ hVRpJwijbZlmVAq8mrTkR5ABvQfUzE+d2hVd/9O/T5XN2xNjMZIwUY0p9YdNcvCx6gjG
+ sCug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=+N6ILkKEpapPlQtU0qsNkf4yzLbVT98AaPkfrkM3V14=;
- b=Bh6fP7EB25SkiKR53qnNDUgYQEY3a1ubDSgXcS+oS8Q/jJ8K8KjTJvfzJzB2Jkz2fS
- 4CBrWGLnS8kllFi6rOASBDWWeyS0DlUWw08TJxPyBGx/GcfROzhcLBZI+8s3ot99cKJU
- p/tXK7kjjbzq8yCiwM30Mq7OECrxZclMdia47q8EZbdQGqjlj4JaQ9fGmqG8JbcpYoHt
- KhsO2CXhd1Bwc4ymvqt1SmJlH7vDwq14i3NQvYkJoClSV9nR5md6F4i8DrlQq2LAEamp
- kKQaAPUGsUXNqMnnUKvJrj9zvwZUE37Ns6Y/yq6bRW783z6lvkUhluDQIfW4MpiN2Xt6
- zO7A==
-X-Gm-Message-State: AOAM5326eyEXeeMpYUMkMD+lcExfNHbSwuyGJrBwgQMYmslApagIkQvo
- xnXxhEOMYQNVK3fbSfbhRLwgCoRxPTHRxYjsm4s=
-X-Google-Smtp-Source: ABdhPJwse+nUml95yyAaWi2PaJnjvguPYjnE37erjgMROzHGzKlmJWGl/SDM/l3G2Fwm8+4qzGe8BrEQUgOsbjNpsjE=
-X-Received: by 2002:a92:c88c:: with SMTP id w12mr154730ilo.46.1634771598046;
- Wed, 20 Oct 2021 16:13:18 -0700 (PDT)
+ bh=H9VEtIMolVLSWN8PBX0Wu9nzRQcejBjTBTdiudWqkRw=;
+ b=Q70tUuvHh/DmngJSOAfhrQEf9OpBxjgZks5TI7QfML77kb/oMGPSzlxh9l9tGbrHSj
+ nNXxoZriDk+6booxXj2qx4EDAjFI/wrrMlQyBKVV6cgBjTixoOE355vbPsXveHdvfx4S
+ xpBzcKO/GkyHdzd/1+gKf20tGpffLapqSZPhaMjGTFRl973v3ye+9tGPIrfiHPWGqiUO
+ rJWshSpemhWy7HMOPHvF47MWmhu+XBVEgRj32qhlaQlSuHprk2Sk2Tm6dXhF4nlCKxwy
+ 3yCbSBFL70X36nlPlPeRR55RkIBGKItVcpb9MSpZzQmep60MJOuWeabjDGy0+ulBi69N
+ JZtQ==
+X-Gm-Message-State: AOAM530QpZdrSxU0UA8/PHYYNAzdnAN199XcIqknvHuOd8DR1kWUfcnJ
+ 2dOH9FWbGbUVHgs7kMtdUQVZ43ovNbiDYPaOlhs=
+X-Google-Smtp-Source: ABdhPJwM5kkEM/SI1A1wmyYPHxO7nVBLKLuPKr9kiu3XOBMhkAmKNk2lGnHCdENe4FO1WqO7O38GiCkMSjdRbyqVix8=
+X-Received: by 2002:a05:6638:2581:: with SMTP id
+ s1mr1462154jat.35.1634771622461; 
+ Wed, 20 Oct 2021 16:13:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211020014112.7336-1-bmeng.cn@gmail.com>
- <20211020014112.7336-6-bmeng.cn@gmail.com>
-In-Reply-To: <20211020014112.7336-6-bmeng.cn@gmail.com>
+ <20211020014112.7336-7-bmeng.cn@gmail.com>
+In-Reply-To: <20211020014112.7336-7-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Oct 2021 09:12:52 +1000
-Message-ID: <CAKmqyKOTf9YgG0SyGYcsNWa8AJ2Fc9ztg4hMKwVNerSnKvdNxg@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] hw/riscv: sifive_u: Use MachineState::ram and
+Date: Thu, 21 Oct 2021 09:13:16 +1000
+Message-ID: <CAKmqyKMoDCJfGffKFKj8ACunOObKD50nn2CiKD-1=S4vuq8B+w@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] hw/riscv: spike: Use MachineState::ram and
  MachineClass::default_ram_id
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,8 +55,8 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -76,9 +77,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 23:13:26 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 23:13:54 -0000
 
-On Wed, Oct 20, 2021 at 11:48 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Oct 20, 2021 at 11:43 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Using memory_region_init_ram(), which can't possibly handle vhost-user,
 > and can't work as expected with '-numa node,memdev' options.
@@ -95,49 +96,47 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>
 > ---
 >
 > (no changes since v1)
 >
->  hw/riscv/sifive_u.c | 6 ++----
+>  hw/riscv/spike.c | 6 ++----
 >  1 file changed, 2 insertions(+), 4 deletions(-)
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index fc5790b8ce..0217006c27 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -528,7 +528,6 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->      const MemMapEntry *memmap =3D sifive_u_memmap;
->      SiFiveUState *s =3D RISCV_U_MACHINE(machine);
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 79ae355ae2..288d69cd9f 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -180,7 +180,6 @@ static void spike_board_init(MachineState *machine)
+>      const MemMapEntry *memmap =3D spike_memmap;
+>      SpikeState *s =3D SPIKE_MACHINE(machine);
 >      MemoryRegion *system_memory =3D get_system_memory();
 > -    MemoryRegion *main_mem =3D g_new(MemoryRegion, 1);
->      MemoryRegion *flash0 =3D g_new(MemoryRegion, 1);
->      target_ulong start_addr =3D memmap[SIFIVE_U_DEV_DRAM].base;
+>      MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
 >      target_ulong firmware_end_addr, kernel_start_addr;
-> @@ -549,10 +548,8 @@ static void sifive_u_machine_init(MachineState *mach=
-ine)
->      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
+>      uint32_t fdt_load_addr;
+> @@ -239,10 +238,8 @@ static void spike_board_init(MachineState *machine)
+>      }
 >
->      /* register RAM */
-> -    memory_region_init_ram(main_mem, NULL, "riscv.sifive.u.ram",
+>      /* register system main memory (actual RAM) */
+> -    memory_region_init_ram(main_mem, NULL, "riscv.spike.ram",
 > -                           machine->ram_size, &error_fatal);
->      memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_DRAM]=
-.base,
-> -                                main_mem);
-> +                                machine->ram);
+>      memory_region_add_subregion(system_memory, memmap[SPIKE_DRAM].base,
+> -        main_mem);
+> +        machine->ram);
 >
->      /* register QSPI0 Flash */
->      memory_region_init_ram(flash0, NULL, "riscv.sifive.u.flash0",
-> @@ -748,6 +745,7 @@ static void sifive_u_machine_class_init(ObjectClass *=
-oc, void *data)
->      mc->min_cpus =3D SIFIVE_U_MANAGEMENT_CPU_COUNT + 1;
->      mc->default_cpu_type =3D SIFIVE_U_CPU;
->      mc->default_cpus =3D mc->min_cpus;
-> +    mc->default_ram_id =3D "riscv.sifive.u.ram";
+>      /* create device tree */
+>      create_fdt(s, memmap, machine->ram_size, machine->kernel_cmdline,
+> @@ -326,6 +323,7 @@ static void spike_machine_class_init(ObjectClass *oc,=
+ void *data)
+>      mc->cpu_index_to_instance_props =3D riscv_numa_cpu_index_to_props;
+>      mc->get_default_cpu_node_id =3D riscv_numa_get_default_cpu_node_id;
+>      mc->numa_mem_supported =3D true;
+> +    mc->default_ram_id =3D "riscv.spike.ram";
+>  }
 >
->      object_class_property_add_bool(oc, "start-in-flash",
->                                     sifive_u_machine_get_start_in_flash,
+>  static const TypeInfo spike_machine_typeinfo =3D {
 > --
 > 2.25.1
 >
