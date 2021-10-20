@@ -1,79 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdCMA-0003do-NS
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 10:14:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43932)
+	id 1mdCpe-0000tX-7q
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 10:44:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52084)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdCM8-0003W0-Of
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:14:12 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:45863)
+ id 1mdCpa-0000rI-Qm
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:44:39 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:38407)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdCM7-0005l3-22
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:14:12 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- ls14-20020a17090b350e00b001a00e2251c8so2526179pjb.4
- for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 07:14:10 -0700 (PDT)
+ id 1mdCpZ-0005S2-8S
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:44:38 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ n8-20020a17090a2bc800b00196286963b9so670290pje.3
+ for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 07:44:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=lgFI911CtAA9atZ/7vcjBz4OY+cJmyTOdX+QsOEk6x0=;
- b=naMeXS0gPh/NnTz5VAHiIMbLsE9/H2hWP4RRbDQL526uEZLni2Tx3kByzgLBjrS6Zd
- icfCfwVWbJzsGcd1bmSwH7XWDHI8W4sYhP+Wz7W6IfdFFRMtQck0evG+fdU65JmbM+/N
- 2GQYzjDS9zoEIbaCe+7FR8cCtBOhXrFlwsND1X6R7QaTkvXV6JlI/6Zw1I73CyMR8ejN
- S3w17WR1EdQ837aVdjDmDCUxV3p4ZtWq15uWX4AZK8VRBJku8NzKdLfkuF+VrMOuTlei
- 7qOAOFTwjE+GqjIAsltn3v15O8wF8nJ8r75yukpYbx20ToOuXGmWD7FPY1B3IPOJ9hTQ
- 4yhQ==
+ bh=vjlZA7uAXEtmANBdgMsH9fFzOKvO7u8iPP4kXJ12K8A=;
+ b=Tso9QMEiEwGij2vZzwYChHamBgITabvBBGxjjJvAAiEpY3PiNSzQ8qeou79z76V1i4
+ +tCBkGpIle1mDeL6hPDZ2RtOFoxQ7vQm0QmeFhRU3XQW41BhB5GVaOx4cmbWZmWG4bCN
+ 1qU2h8J/8hVJ9YjDav0TKoMFLWDXUqYGU9pon0ddMzy8jpxtHekG8rFvU7NsFgL9FLuc
+ XXllUL7ty4UU2H9bz9QzC0NOvMovp0vNAwzfI/dRiD6X0g+TktvXPmK5rqHcjRfQOocg
+ 3MSpzfMDwRVyXdDS9dD5COsIjKHyhsjprVTyljJ4976MJVMwib8uMlTK+bSX1FAe7TM0
+ xVWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=lgFI911CtAA9atZ/7vcjBz4OY+cJmyTOdX+QsOEk6x0=;
- b=1B6jLqpX7RBcQvfSO6QSSga+CbQsXd3AQyCBrt8K1BT/6XwhqM3XivDiBnKI2geZOu
- rqwud6XUhNmtrN/KDv5NgxE5ijyZ5k9cQXRrf/kNAnobeofIb7MMAsRNs80GGBT8+kHb
- KjLCDpomSqyG06n4SQ+IY91OHRgGvP9f0jumMXV7NyahfstGLunXSPMFjYc/xAGMbfDe
- 8LquiPqSMWIz/G/KjeMiryVuUKiLmXGrtsPqbT+ItS0pClBtkjg+9Q+D/FYHGMJNdCxM
- KxgRldOVY3Dq4iWN0zZQmu9fiAhFHopkfaajWISDT/DGjIHx/Oz1M/vil+DKUHC4b4FI
- 2Oag==
-X-Gm-Message-State: AOAM531GnEkZ0bJoUT8Dpx+anq9KaSmAzAUbnYaQefG1NtSbbt2FGgGr
- RtDhqSqi9p2znf4oJnJq0Wx9zg==
-X-Google-Smtp-Source: ABdhPJwVdCV5AD4Z+u7gBpaWqE7IWOXSWL9g6blL+q7gbv361u06EloVya4kBLtsdU2l2MWf1Ms9nw==
-X-Received: by 2002:a17:90a:718c:: with SMTP id
- i12mr7754814pjk.182.1634739249296; 
- Wed, 20 Oct 2021 07:14:09 -0700 (PDT)
+ bh=vjlZA7uAXEtmANBdgMsH9fFzOKvO7u8iPP4kXJ12K8A=;
+ b=3EX7rzD4pwXX0dZsEYwCuk7d+NjaYN+OUvQQyPunpBEMZgKtYMVgv5s88bFipco80l
+ 5CExkqOoyXVJQY42Y3dnIDVcCdMBBTKSb7k31egH0Htfq3fjgXEYTsBCcPdQy/Cc5vd1
+ kGBcTL3CU8lTAhsYagpcrbehR6pTpFNlWqTi+xNJxYBm1A9eL9MUywVhR1Jf2tC/9BYf
+ e8gX32dd018GrEBbE5OoX6wlb3osQijBVHJ0hTQYKuRnMPc5f2rknhA7XYbqyQBKCvbC
+ GwbnAqaPTBp3h3k+N1eJnbdWLntEYX2ztPQgpjXND/MSrh6CiVywQXRFfuD6e/fGKoKY
+ QqUg==
+X-Gm-Message-State: AOAM530rY8ym6o1K5dMu9JXkOYB/xxv0+HJbRJi/hwtT6HvtCDM3J1jx
+ 4Y7mHfLIkIKLHVI8DwJiCSrqag==
+X-Google-Smtp-Source: ABdhPJyu1yF50u7KQ65S66EbKPUWgjt3n+LxiZIFkBGali7wT8czLSgWKQXfO/1R0CREBWguw8XGEQ==
+X-Received: by 2002:a17:90a:8a8c:: with SMTP id
+ x12mr411292pjn.44.1634741075265; 
+ Wed, 20 Oct 2021 07:44:35 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id m22sm2658645pfo.71.2021.10.20.07.14.08
+ by smtp.gmail.com with ESMTPSA id t32sm3224316pfg.29.2021.10.20.07.44.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Oct 2021 07:14:08 -0700 (PDT)
-Subject: Re: [PATCH v3 05/21] target/riscv: separation of bitwise logic and
- aritmetic helpers
+ Wed, 20 Oct 2021 07:44:34 -0700 (PDT)
+Subject: Re: [PATCH v3 06/21] target/riscv: array for the 64 upper bits of
+ 128-bit registers
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
  palmer@dabbelt.com, fabien.portas@grenoble-inp.org
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211019094812.614056-6-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211019094812.614056-7-frederic.petrot@univ-grenoble-alpes.fr>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <436bec93-eea7-8ce7-e7d2-8a225a49a8c3@linaro.org>
-Date: Wed, 20 Oct 2021 07:14:07 -0700
+Message-ID: <820e8060-694d-9566-9d7a-da7ef9e06d21@linaro.org>
+Date: Wed, 20 Oct 2021 07:44:33 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211019094812.614056-6-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211019094812.614056-7-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
 X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.267,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,50 +86,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 14:14:13 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 14:44:39 -0000
 
 On 10/19/21 2:47 AM, Frédéric Pétrot wrote:
-> Introduction of a gen_logic function for bitwise logic to implement
-> instructions in which not propagation of information occurs between bits and
-> use of this function on the bitwise instructions.
+> The upper 64-bit of the 128-bit registers have now a place inside
+> the cpu state structure, and are created as globals for future use.
 > 
 > Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 > Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 > ---
->   target/riscv/translate.c                | 27 +++++++++++++++++++++++++
->   target/riscv/insn_trans/trans_rvb.c.inc |  6 +++---
->   target/riscv/insn_trans/trans_rvi.c.inc | 12 +++++------
->   3 files changed, 36 insertions(+), 9 deletions(-)
+>   target/riscv/cpu.h       | 1 +
+>   target/riscv/translate.c | 5 ++++-
+>   2 files changed, 5 insertions(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 121fcd71fe..3c2e9fb790 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -382,6 +382,33 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
->   /* Include the auto-generated decoder for 32 bit insn */
->   #include "decode-insn32.c.inc"
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index c24bc9a039..c8b98f1b70 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -109,6 +109,7 @@ FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
 >   
-> +static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a, DisasExtend ext,
-> +                             void (*func)(TCGv, TCGv, target_long))
-> +{
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, ext);
-> +
-> +    func(dest, src1, a->imm);
-> +
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    return true;
-> +}
-> +
-> +static bool gen_logic(DisasContext *ctx, arg_r *a, DisasExtend ext,
-> +                      void (*func)(TCGv, TCGv, TCGv))
-> +{
+>   struct CPURISCVState {
+>       target_ulong gpr[32];
+> +    target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
 
-I think you should drop the ext argument, which is (by nature of the operations) 
-universally EXT_NONE for all callers.  Otherwise,
+At first I was going to suggest that the 128-bit value be represented in host byte order, 
+but then I thought that would just get in the way until such any such host operations are 
+apparent.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+You are missing an update to machine.c for migration (and probably more importantly, 
+loadvm/savevm for debugging).  I think you'll want to put these into a separate 
+subsection, controlled by misa_mxl_max == RV128.
+
+>       for (i = 1; i < 32; i++) {
+>           cpu_gpr[i] = tcg_global_mem_new(cpu_env,
+>               offsetof(CPURISCVState, gpr[i]), riscv_int_regnames[i]);
+> +        cpu_gprh[i] = tcg_global_mem_new(cpu_env,
+> +            offsetof(CPURISCVState, gprh[i]), riscv_int_regnames[i]);
+
+This will just be confusing in the tcg dumps -- let's not name the two temps the identically.
+
+Honestly, I'm not 100% thrilled about the / that appears in the current name; I think it 
+would be easiest to do
+
+   g_string_printf("x%d", i)
+and
+   g_string_printf("x%dh", i)
+
 
 r~
 
