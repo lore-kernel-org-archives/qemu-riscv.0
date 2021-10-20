@@ -1,72 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdCpe-0000tX-7q
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 10:44:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52084)
+	id 1mdD2K-0002W6-Rj
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 10:57:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55192)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdCpa-0000rI-Qm
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:44:39 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:38407)
+ id 1mdD2H-0002Sc-NK
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:57:46 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:45775)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdCpZ-0005S2-8S
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:44:38 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- n8-20020a17090a2bc800b00196286963b9so670290pje.3
- for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 07:44:36 -0700 (PDT)
+ id 1mdD2E-0003rG-4k
+ for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 10:57:44 -0400
+Received: by mail-pg1-x530.google.com with SMTP id f5so22735882pgc.12
+ for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 07:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=vjlZA7uAXEtmANBdgMsH9fFzOKvO7u8iPP4kXJ12K8A=;
- b=Tso9QMEiEwGij2vZzwYChHamBgITabvBBGxjjJvAAiEpY3PiNSzQ8qeou79z76V1i4
- +tCBkGpIle1mDeL6hPDZ2RtOFoxQ7vQm0QmeFhRU3XQW41BhB5GVaOx4cmbWZmWG4bCN
- 1qU2h8J/8hVJ9YjDav0TKoMFLWDXUqYGU9pon0ddMzy8jpxtHekG8rFvU7NsFgL9FLuc
- XXllUL7ty4UU2H9bz9QzC0NOvMovp0vNAwzfI/dRiD6X0g+TktvXPmK5rqHcjRfQOocg
- 3MSpzfMDwRVyXdDS9dD5COsIjKHyhsjprVTyljJ4976MJVMwib8uMlTK+bSX1FAe7TM0
- xVWA==
+ bh=j/BSM1NtGtUJuZBkikYYglLhadup4cDc5ZB/aZuPQv8=;
+ b=UwKDXj6bAE2o4sGUvothVhuf0hAbJSLfZyouoY1MT6hg8N26G1V58X5a4/ThcgpeCw
+ Nf6ZumajJj5d7wUFDVNzcUUZvxBJ+ATcnZ3VT++nPf5Oc0Aw1NgoFlpK3iaRm7mYbJ9m
+ k2lyTBQHseXOH0IhD9PL4DZtXwvi0+6E3iVdEDiLfS8xcy36++t0Io8DsVGwgaq3Gamw
+ p+rXM1pXW0yhLzk7uXOCraNwxn+YElnQYXLDdwR9CPRNEy7FVPTRIRo6lEc7i8hScRDM
+ 0M69JPltJ3Lwlm9d98IyaHbaRH8sNUwhwI5CCOKVCovO3jwyRHu207u9TljC6ElHkaWC
+ 7CVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=vjlZA7uAXEtmANBdgMsH9fFzOKvO7u8iPP4kXJ12K8A=;
- b=3EX7rzD4pwXX0dZsEYwCuk7d+NjaYN+OUvQQyPunpBEMZgKtYMVgv5s88bFipco80l
- 5CExkqOoyXVJQY42Y3dnIDVcCdMBBTKSb7k31egH0Htfq3fjgXEYTsBCcPdQy/Cc5vd1
- kGBcTL3CU8lTAhsYagpcrbehR6pTpFNlWqTi+xNJxYBm1A9eL9MUywVhR1Jf2tC/9BYf
- e8gX32dd018GrEBbE5OoX6wlb3osQijBVHJ0hTQYKuRnMPc5f2rknhA7XYbqyQBKCvbC
- GwbnAqaPTBp3h3k+N1eJnbdWLntEYX2ztPQgpjXND/MSrh6CiVywQXRFfuD6e/fGKoKY
- QqUg==
-X-Gm-Message-State: AOAM530rY8ym6o1K5dMu9JXkOYB/xxv0+HJbRJi/hwtT6HvtCDM3J1jx
- 4Y7mHfLIkIKLHVI8DwJiCSrqag==
-X-Google-Smtp-Source: ABdhPJyu1yF50u7KQ65S66EbKPUWgjt3n+LxiZIFkBGali7wT8czLSgWKQXfO/1R0CREBWguw8XGEQ==
-X-Received: by 2002:a17:90a:8a8c:: with SMTP id
- x12mr411292pjn.44.1634741075265; 
- Wed, 20 Oct 2021 07:44:35 -0700 (PDT)
+ bh=j/BSM1NtGtUJuZBkikYYglLhadup4cDc5ZB/aZuPQv8=;
+ b=jKdb4C7Kd0LkSlR65a4rgwAyXtmU2+4GaLaXDe1En/0xvjt7RUCVg4zKkCd+iMslOD
+ K9jFcxNhWBHItFFBxX+qrPbUokvOUh+obx/KPBJWkckpwHjPQxLr+hCC+T94cRrW4Ckg
+ 5RcjfGpOe9b+9ZiRk4nxeiPieI44TUbhLXScRShHNkKJPs4Ax7zr+FEXu0bNfH2t9xW4
+ OCODKTpsSp+ivR9+MK366IS5J4fCQFXQsTkA6xusqja4CassqDGBIbLo7W2WteSrcGM8
+ gr63g7NSWt9Q+bDIC0urLZsMJxAn4Tg9AiqKAok01k1HH9NpkKmeZ607g8NsyOS3G82X
+ Brvg==
+X-Gm-Message-State: AOAM531ZiQkfJH9AAkms32tiXP7+jvhRutRtsn+9Gq2yqx8noExr2Ltn
+ pCTwByNE9DskMM8r8LNhovDXwA==
+X-Google-Smtp-Source: ABdhPJw/4NB8n32lPUMSBh5NPoTu3i9zRzHf+pf3zCiI76La3GcLQhDtJ2ux+xB02woUhtHBUttEDw==
+X-Received: by 2002:a63:15:: with SMTP id 21mr336870pga.479.1634741860360;
+ Wed, 20 Oct 2021 07:57:40 -0700 (PDT)
 Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id t32sm3224316pfg.29.2021.10.20.07.44.34
+ by smtp.gmail.com with ESMTPSA id l4sm3421100pfc.121.2021.10.20.07.57.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Oct 2021 07:44:34 -0700 (PDT)
-Subject: Re: [PATCH v3 06/21] target/riscv: array for the 64 upper bits of
- 128-bit registers
+ Wed, 20 Oct 2021 07:57:39 -0700 (PDT)
+Subject: Re: [PATCH v3 07/21] target/riscv: setup everything so that
+ riscv128-softmmu compiles
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
  palmer@dabbelt.com, fabien.portas@grenoble-inp.org
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211019094812.614056-7-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211019094812.614056-8-frederic.petrot@univ-grenoble-alpes.fr>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <820e8060-694d-9566-9d7a-da7ef9e06d21@linaro.org>
-Date: Wed, 20 Oct 2021 07:44:33 -0700
+Message-ID: <7a5d64f7-0587-4ade-85c3-6b0cea5228bd@linaro.org>
+Date: Wed, 20 Oct 2021 07:57:38 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211019094812.614056-7-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211019094812.614056-8-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -86,51 +84,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 14:44:39 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 14:57:47 -0000
 
 On 10/19/21 2:47 AM, Frédéric Pétrot wrote:
-> The upper 64-bit of the 128-bit registers have now a place inside
-> the cpu state structure, and are created as globals for future use.
+> This patch is kind of a mess because several files have to be slightly
+> modified to allow for a new target. Most of these modifications have to deal
+> with changing what was a binary choice into a ternary one.  Although we did
+> our best to avoid testing for TARGET_RISCV128 (which we did), it is
+> implicitly there in '#else' statements.
+> Most added infrastructure files are no far from being copies of the 64-bit
+> version.
+> Once this patch applied, adding risc128-sofmmu to --target-list produces
+> a (no so useful yet) executable.
 > 
-> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+> Signed-off-by: Frédéric Pétrot<frederic.petrot@univ-grenoble-alpes.fr>
+> Co-authored-by: Fabien Portas<fabien.portas@grenoble-inp.org>
 > ---
->   target/riscv/cpu.h       | 1 +
->   target/riscv/translate.c | 5 ++++-
->   2 files changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c24bc9a039..c8b98f1b70 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -109,6 +109,7 @@ FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
->   
->   struct CPURISCVState {
->       target_ulong gpr[32];
-> +    target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
+>   configs/devices/riscv128-softmmu/default.mak | 17 +++++++
+>   configs/targets/riscv128-softmmu.mak         |  6 +++
+>   include/disas/dis-asm.h                      |  1 +
+>   include/hw/riscv/sifive_cpu.h                |  3 ++
+>   target/riscv/cpu-param.h                     |  5 ++
+>   target/riscv/cpu.h                           |  3 ++
+>   disas/riscv.c                                |  5 ++
+>   target/riscv/cpu.c                           | 23 +++++++++-
+>   target/riscv/gdbstub.c                       |  3 ++
+>   target/riscv/insn_trans/trans_rvd.c.inc      | 12 ++---
+>   target/riscv/insn_trans/trans_rvf.c.inc      |  6 +--
+>   gdb-xml/riscv-128bit-cpu.xml                 | 48 ++++++++++++++++++++
+>   gdb-xml/riscv-128bit-virtual.xml             | 12 +++++
+>   target/riscv/Kconfig                         |  3 ++
+>   14 files changed, 137 insertions(+), 10 deletions(-)
+>   create mode 100644 configs/devices/riscv128-softmmu/default.mak
+>   create mode 100644 configs/targets/riscv128-softmmu.mak
+>   create mode 100644 gdb-xml/riscv-128bit-cpu.xml
+>   create mode 100644 gdb-xml/riscv-128bit-virtual.xml
 
-At first I was going to suggest that the 128-bit value be represented in host byte order, 
-but then I thought that would just get in the way until such any such host operations are 
-apparent.
+So... do we really want to go down this route, with a separate binary?  It seems like we 
+could reasonably support rv128 in the qemu-system-riscv64 binary with -cpu rv128.
 
-You are missing an update to machine.c for migration (and probably more importantly, 
-loadvm/savevm for debugging).  I think you'll want to put these into a separate 
-subsection, controlled by misa_mxl_max == RV128.
+> +++ b/gdb-xml/riscv-128bit-cpu.xml
+> @@ -0,0 +1,48 @@
+> +<?xml version="1.0"?>
+> +<!-- Copyright (C) 2018-2019 Free Software Foundation, Inc.
+> +
+> +     Copying and distribution of this file, with or without modification,
+> +     are permitted in any medium without royalty provided the copyright
+> +     notice and this notice are preserved.  -->
+> +
+> +<!-- Register numbers are hard-coded in order to maintain backward
+> +     compatibility with older versions of tools that didn't use xml
+> +     register descriptions.  -->
+> +
+> +<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+> +<!-- FIXME : All GPRs are marked as 64-bits since gdb doesn't like 128-bit registers for now. -->
 
->       for (i = 1; i < 32; i++) {
->           cpu_gpr[i] = tcg_global_mem_new(cpu_env,
->               offsetof(CPURISCVState, gpr[i]), riscv_int_regnames[i]);
-> +        cpu_gprh[i] = tcg_global_mem_new(cpu_env,
-> +            offsetof(CPURISCVState, gprh[i]), riscv_int_regnames[i]);
-
-This will just be confusing in the tcg dumps -- let's not name the two temps the identically.
-
-Honestly, I'm not 100% thrilled about the / that appears in the current name; I think it 
-would be easiest to do
-
-   g_string_printf("x%d", i)
-and
-   g_string_printf("x%dh", i)
+If the widths are not correct, we can just as easily skip it for now.
 
 
 r~
