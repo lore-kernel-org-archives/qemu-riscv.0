@@ -1,79 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdGvc-0003WG-Ql
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 15:07:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60468)
+	id 1mdH6q-00019q-DH
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 15:18:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35178)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdGvb-0003RE-3G
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 15:07:07 -0400
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:37707)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mdGvW-0001Dq-CW
- for qemu-riscv@nongnu.org; Wed, 20 Oct 2021 15:07:06 -0400
-Received: by mail-pj1-x102d.google.com with SMTP id
- t5-20020a17090a4e4500b001a0a284fcc2so1253898pjl.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Oct 2021 12:07:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=8T0ASnC2AEKxtoVK4GdyqxCeZjT67QbxnKzeH37StBs=;
- b=tmpwsPwB61XZ+WEPNKxStCcAlB0/s9U6N95tAqKjtOmV7bxYGoLdlbGqJUYni0MIal
- +DYIO498sAJsSVDpfOOWFI+qPpzDLtfFwlm7XLFw6LsZhskpaL1B1MPbaZO0rD9u4HEg
- fm/Rw2Eau5peTO21E3dxNYnaUQqGdqtl0ptm+occ0Z3hYzKMRCRRdYViF3k/LQJLjCBJ
- L1pdVlh1cxtC3d0AGj7LHwMNJ3ls1Hq8FiUw1v8HV+hg6tld8V/jginK2zKLrOzzpeJ4
- +VGUIeq9CxrbPEQ/J2Egxh9/eFojraeVon2dZAZ5SCGZRoNy36rKstyKw+xm6sc1NGDo
- SsSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=8T0ASnC2AEKxtoVK4GdyqxCeZjT67QbxnKzeH37StBs=;
- b=NB10XLxcSxlIq/UUS1vQWyvPkJF3Yx8FoT/A7CSfeFz++8oGBxM31BLWhhGH4ZVjhe
- hbat1x818wVeyc/VCCuKy4j2mnCY3oJAjkv/vIHqLYswzrD/RrC/dgyFW/KcZjmNC83B
- dDbhAEvPPeGBlza3POaMbmOEOQJpyzyqvam8U3UR0dsijttRJZT/khf1kxzPO58xJe/c
- uUMeWjJfsET/nNZVtOBxY3aH7aOW2Zef51aN8ZXFJb50ThavZ99hA1c9fuKQSfrwVY6V
- h/Irb3DvRhDgghRt2L79Ut+xUJprux0RVp1jwb9939By1bYonipbjLK98r3Qmiv5j6vo
- ghlw==
-X-Gm-Message-State: AOAM530M81EsDd8zQhhnNRnedW5kVeFHkJeINsm7aHKHlxt6fRXD1HhW
- IXz88sxFHjQKMo81THvrOiuhrA==
-X-Google-Smtp-Source: ABdhPJxKPNmDwP9EEFtqx5lF/iFyMuHFvhLJJcaMzk5nL6P8j69dUYSCAKZdD2WAqPRVadD76qiq6A==
-X-Received: by 2002:a17:90a:a08d:: with SMTP id
- r13mr863635pjp.191.1634756820254; 
- Wed, 20 Oct 2021 12:07:00 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id o6sm3431327pfp.79.2021.10.20.12.06.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Oct 2021 12:06:59 -0700 (PDT)
-Subject: Re: [PATCH v3 13/21] target/riscv: support for 128-bit shift
- instructions
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mdH6R-00015N-7Q; Wed, 20 Oct 2021 15:18:22 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:37288)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mdH6K-0004U2-61; Wed, 20 Oct 2021 15:18:15 -0400
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5AE554212B;
+ Wed, 20 Oct 2021 21:18:05 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 4824360067;
+ Wed, 20 Oct 2021 21:18:05 +0200 (CEST)
+Received: from [192.168.1.36] (35.201.90.79.rev.sfr.net [79.90.201.35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 6F9AF14005D;
+ Wed, 20 Oct 2021 21:18:04 +0200 (CEST)
+To: Richard Henderson <rth7680@gmail.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
  palmer@dabbelt.com, fabien.portas@grenoble-inp.org
 References: <20211019094812.614056-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211019094812.614056-14-frederic.petrot@univ-grenoble-alpes.fr>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <63197bd9-52d1-66a1-e056-17d84ba7ec02@linaro.org>
-Date: Wed, 20 Oct 2021 12:06:58 -0700
+ <20211019094812.614056-12-frederic.petrot@univ-grenoble-alpes.fr>
+ <1eb7ef2b-b636-3c93-a2d3-4d498da9865d@gmail.com>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: Re: [PATCH v3 11/21] target/riscv: support for 128-bit bitwise
+ instructions
+Message-ID: <2f7facfa-41c2-fc3b-718f-c921af5ce2c2@univ-grenoble-alpes.fr>
+Date: Wed, 20 Oct 2021 21:18:01 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211019094812.614056-14-frederic.petrot@univ-grenoble-alpes.fr>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <1eb7ef2b-b636-3c93-a2d3-4d498da9865d@gmail.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (41)
+X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -41
+X-Spam_score: -4.2
 X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.267,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.267,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -86,131 +68,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 19:07:07 -0000
+X-List-Received-Date: Wed, 20 Oct 2021 19:18:31 -0000
 
-On 10/19/21 2:48 AM, Frédéric Pétrot wrote:
-> +    } else {
-> +        TCGv src1l = get_gpr(ctx, a->rs1, ext),
-> +             src1h = get_gprh(ctx, a->rs1),
-> +             destl = tcg_temp_new(),
-> +             desth = tcg_temp_new();
+Le 20/10/2021 à 19:47, Richard Henderson a écrit :
+> On 10/19/21 2:48 AM, Frédéric Pétrot wrote:
+>> The 128-bit bitwise instructions do not need any function prototype change
+>> as the functions can be applied independently on the lower and upper part of
+>> the registers.
+>>
+>> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+>> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+>> ---
+>>   target/riscv/translate.c | 22 ++++++++++++++++++++++
+>>   1 file changed, 22 insertions(+)
+>>
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index e8f08f921e..71982f6284 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -429,6 +429,17 @@ static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
+>> DisasExtend ext,
+>>         gen_set_gpr(ctx, a->rd, dest);
+>>   +    if (get_xl_max(ctx) == MXL_RV128) {
+>> +        if (get_ol(ctx) ==  MXL_RV128) {
+>> +            uint64_t immh = -(a->imm < 0);
+>> +            src1 = get_gprh(ctx, a->rs1);
+>> +            dest = dest_gprh(ctx, a->rd);
+>> +
+>> +            func(dest, src1, immh);
+>> +        }
+>> +        gen_set_gprh(ctx, a->rd, dest);
+>> +    }
+> 
+> If ol < RV128, you're storing the low dest into the gprh, which is wrong.  It
+> should be the sign-extension of the low part.  But that should happen for all
+> writes.
 
-Don't do this comma, reuse of type and indent thing.
-I know there are several instances.
+  Thanks for your feedback (on the other parts too) that I'll apply.
 
-> +        if (max_len < 128) {
-> +            func(destl, src1l, a->shamt);
-> +            gen_set_gpr(ctx, a->rd, destl);
-> +            gen_set_gprh(ctx, a->rd, desth);
+  On this specific case, in gen_set_gprh I check that the operation is not on
+  128 bit in which case I propagate the sign of the low part instead of using
+  dest (the spec says that the sign should propagate to misa_xl_max, irrelevant
+  of xl).
+  This implicitly forces the order in which the functions must be called as you
+  noticed, and introducing a higher level function as you suggest would indeed
+  make things more readable, and this can probably be applied in most places.
 
-You hadn't initialized desth.  Again, where gen_set_gpr and gen_set_gpr128 are clearer 
-than this.
-
->       int olen = get_olen(ctx);
->       if (olen != TARGET_LONG_BITS) {
->           if (olen == 32) {
->               f_tl = f_32;
-> -        } else {
-> +        } else if (olen != 128) {
->               g_assert_not_reached();
->           }
->       }
-> -    return gen_shift_imm_fn(ctx, a, ext, f_tl);
-> +    return gen_shift_imm_fn(ctx, a, ext, f_tl, f_128);
-
-Surely it would be cleaner to split out f_128 at this point, and not pass along f_128 to 
-gen_shift_imm_fn?
-
->   static bool gen_shift(DisasContext *ctx, arg_r *a, DisasExtend ext,
-> -                      void (*func)(TCGv, TCGv, TCGv))
-> +                      void (*func)(TCGv, TCGv, TCGv),
-> +                      void (*f128)(TCGv, TCGv, TCGv, TCGv, TCGv))
->   {
-> -    TCGv dest = dest_gpr(ctx, a->rd);
-> -    TCGv src1 = get_gpr(ctx, a->rs1, ext);
->       TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->       TCGv ext2 = tcg_temp_new();
->   
->       tcg_gen_andi_tl(ext2, src2, get_olen(ctx) - 1);
-> -    func(dest, src1, ext2);
->   
-> -    gen_set_gpr(ctx, a->rd, dest);
-> +    if (get_xl_max(ctx) < MXL_RV128) {
-> +        TCGv dest = dest_gpr(ctx, a->rd);
-> +        TCGv src1 = get_gpr(ctx, a->rs1, ext);
-> +        func(dest, src1, ext2);
-> +
-> +        gen_set_gpr(ctx, a->rd, dest);
-> +    } else {
-> +        TCGv src1l = get_gpr(ctx, a->rs1, ext),
-> +             src1h = get_gprh(ctx, a->rs1),
-> +             destl = tcg_temp_new(),
-> +             desth = tcg_temp_new();
-
-Should be dest_gpr*.
-
-> +
-> +        if (get_olen(ctx) < 128) {
-> +            func(destl, src1l, ext2);
-> +            gen_set_gpr(ctx, a->rd, destl);
-> +            gen_set_gprh(ctx, a->rd, desth);
-> +        } else {
-> +            assert(f128 != NULL);
-
-I think you don't want to assert, but just return false.  This will make all of the Zb 
-instructions come out undefined for rv128, which is probably what you want.  You'd want to 
-do that earlier, before all the get_gpr* above.
-
-> @@ -447,9 +486,75 @@ static bool trans_sub(DisasContext *ctx, arg_sub *a)
->       return gen_arith(ctx, a, EXT_NONE, tcg_gen_sub_tl);
->   }
->   
-> +enum M128_DIR {
-> +    M128_LEFT,
-> +    M128_RIGHT,
-> +    M128_RIGHT_ARITH
-> +};
-
-Why "M"?
-
-> +         cnst_zero = tcg_constant_tl(0);
-
-This is ctx->zero.
-
-Lots of instances throughout your patch set
-though this is the first time I noticed.
-
-> +    tcg_gen_setcondi_tl(TCG_COND_GEU, tmp1, arg2, 64);
-
-You should fold this test into the movcond.
-
-> +        tcg_gen_movi_tl(tmp, 64);
-> +        tcg_gen_sub_tl(tmp, tmp, shamt);
-
-tcg_gen_subfi_tl.
-
-The indentation is off in gen_sll_i128.
-
-Hmm.  3 * (and + shift + cmp + cmov) + 2 * (sub + or) = 16 ops.
-Not horrible...
-
-Let's see.
-
-     ls = sh & 63;        1
-     rs = -sh & 63;       3
-     hs = sh & 64;        4
-
-     ll = s1l << ls;      5
-     h0 = s1h << ls;      6
-     lr = s1l >> rs;      7
-     h1 = h0 | lr;        8
-
-     dl = hs ? 0 : ll;    10
-     dh = hs ? ll : h1;   12
-
-That seems right, and would be 4 ops smaller.
-Would need testing of course.
-
-
-r~
+Frédéric
+-- 
++---------------------------------------------------------------------------+
+| Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
+| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
++---------------------------------------------------------------------------+
 
