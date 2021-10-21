@@ -1,77 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdaxp-0001br-2u
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 12:30:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42466)
+	id 1mdbWX-00044Z-0y
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 13:06:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56786)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mdaxf-0001Sj-5D
- for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 12:30:36 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:42503)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mdbWP-000434-1X
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 13:06:30 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335]:36511)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mdaxZ-0007Zz-Fd
- for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 12:30:34 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id w17so780848plg.9
- for <qemu-riscv@nongnu.org>; Thu, 21 Oct 2021 09:30:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=fgFROQocXZ7y4KffuZM26+g2jcGFqpk2OVZuAODchdg=;
- b=GpCNz27ZxOxdOjcrWKgM9HZ/oNYIVE7uoLAi6yRCr0LEbegm6qKW6Ka6luc/Db1rI7
- jP5c6mh1Iaz6jJ5rtHBWmQs/9h18VSJ3AeTfFdV0ZvgpkwTTzJsNHG8ItCRPcotFUKV3
- 38jNhmYHqh/7qJ6N+n2IMW6EhHE7yFEKA06O++ceStzKFNUSnDy+Afhl10fsbUsehiDS
- AXBVp38Q4XuJhzxL8SLcv4cwyF0FtCV+fI82rXXEyEHrsqxpt9MkCZPjuZ0pNzft0rt4
- UStx4D7YhdMUoUZxt3LqP0oFAf+tcOCM2ixKmEJJ+Q0V3Bq3TqwTFJq4dbTf3Q/4lELj
- JlSg==
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mdbWJ-0005Br-5f
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 13:06:28 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ z11-20020a1c7e0b000000b0030db7b70b6bso436827wmc.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Oct 2021 10:06:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tEGhx5P3FcpsCBX6IaldfqX9RQtIXBdFtyUSKwEgIPQ=;
+ b=wi84dFsfa2KJZdXM1ZIgbSVV9JFNKXLRun5LkWmI3p3eLFZ1LI3G4qdVz0ejAK2Mf4
+ x1beFqehB8OIjG5vd1nPIJVaXfTUiKH/yvcoMKy4b/qu1XRudBzUv69/SCUERo8Ykrqz
+ gVXpNbLQqUMs68Z1ZT1jpqr1OHCogkutGyncbgVPR1TJcxqvGQFIldspIDd4NyUdidVp
+ krql+V8voXNe1ka/nyZUxYcayZNkP7cTf1vGnkSuBdZGaO5kW0wPVQc08+ZeH05VsfUT
+ ICOqrIVKo5mIicLiNum+dIGMVwytU4ks3D8QcJgTNKGm7dCSnduQ8oVMmaWagLns2woQ
+ s73A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=fgFROQocXZ7y4KffuZM26+g2jcGFqpk2OVZuAODchdg=;
- b=WxrZDkG/eajW/NN8dZlEpcZamgyQ8luzyVoygfY9fNJBAlMd2DnppDqojxWKUw7aZT
- vOi1rY4QfXPmPn2PWoDzODBChlyyNLufkjcNrwsN+SIjYfRXNyTepdPxoeU1swA2VFM+
- XeWKMejdM9GvK5Wy0FzXsaMvKy+h9HUB0c3R6INFRcbkrQvaL/g4qj3ZRqNHhlJ3wMIy
- S8UVe5Pc2jaYLNyHXmv5o0zEprGhF6L8wfqV926Xh1BRsr7iA0YvzNLdX7AuhhiFBs+Q
- HuyGQOS+tV05CyWwm9piKc41EVsJbAYCIx5YUthPMy/kc7TiKNjPYdkyrR1whN32iXcL
- AfbA==
-X-Gm-Message-State: AOAM533gYYRZxmSkJ3nhRicTpHvQJr4cPIq5ps721W0OvG7zITD1Vl31
- Vh0tfTWlzPVRadPPo853Oe9yX3+OKiSv4A==
-X-Google-Smtp-Source: ABdhPJwdaOuJKvwvFwvB8nRn+9taZZXrAA/8+/ya+bknG04nCzEHE3c4RTLjP1aOfXIG896ROm5Jsw==
-X-Received: by 2002:a17:902:9b95:b0:13f:c60c:683b with SMTP id
- y21-20020a1709029b9500b0013fc60c683bmr5970448plp.33.1634833820897; 
- Thu, 21 Oct 2021 09:30:20 -0700 (PDT)
-Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
- [123.193.74.252])
- by smtp.gmail.com with ESMTPSA id j9sm5963155pgn.24.2021.10.21.09.30.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Oct 2021 09:30:20 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-riscv@nongnu.org
-Cc: Kito Cheng <kito.cheng@sifive.com>,
- Chih-Min Chao <chihmin.chao@sifive.com>,
- Frank Chang <frank.chang@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- qemu-devel@nongnu.org
-Subject: [PATCH v5 5/8] target/riscv: zfh: half-precision floating-point
- classify
-Date: Fri, 22 Oct 2021 00:29:51 +0800
-Message-Id: <20211021162956.2772656-6-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211021162956.2772656-1-frank.chang@sifive.com>
-References: <20211021162956.2772656-1-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tEGhx5P3FcpsCBX6IaldfqX9RQtIXBdFtyUSKwEgIPQ=;
+ b=F0cOZ2wBiXBtd3tSryrtVlME4fSXy+C2yBAgVoDdGhkbyekv3IAbHJaUZ2IQs4I2M5
+ Gp98G2U78Jwmf+TAw7k2htqERW9k/4G+R1amCMaJ2jvcbIr1kPJTim2/O1MaJcvNZqPS
+ X+l8GByvxfvFmIQoOl27R9eXvHSs0HHSVg6oEkgVhQDP/mdykMsDpYRbHBoqDJNW4zlc
+ 7wBG02lFa4yyWysCDNktkGt+LY61mTWOpUroqmSxLKo7v2CFBo5NVQ1zqHJSHRv1Yn6m
+ Q+3oX1W8n32aIYoNDaICC86fqZdlItO2+oTBF4+/7uF1GgHFSfcfE+6C510/VT1ds4F3
+ Saqg==
+X-Gm-Message-State: AOAM531IqzShMowpshmMd7bCjkhiqnh7hy4aW9IfSPf8K4fJEJ6StLNr
+ IpRlpVb4eQBmuD3fIYNkPNTRt6DAaOJ6hb6ht7sWWw==
+X-Google-Smtp-Source: ABdhPJw1tvqSTLGhSFTfRea8Wuwo+wjgf9id9lEqBd77jlyX+Fq7eczxDL8GHlyNYamcUD+q3Zw3D3pO7z87FFquRnI=
+X-Received: by 2002:a7b:c742:: with SMTP id w2mr8178932wmk.61.1634835980038;
+ Thu, 21 Oct 2021 10:06:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20210902112520.475901-1-anup.patel@wdc.com>
+ <20210902112520.475901-6-anup.patel@wdc.com>
+ <CAEUhbmUiq4hPgEP9xiEsb0kbDwYJyBqet+gnn+ydrJekxwnNyg@mail.gmail.com>
+In-Reply-To: <CAEUhbmUiq4hPgEP9xiEsb0kbDwYJyBqet+gnn+ydrJekxwnNyg@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 21 Oct 2021 22:36:08 +0530
+Message-ID: <CAAhSdy0Eq2kDojgZMof93AqbL6P6DBJXC85rNxzE7cXPGZ4GcA@mail.gmail.com>
+Subject: Re: [PATCH v2 05/22] target/riscv: Allow setting CPU feature from
+ machine/device emulation
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::335;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,87 +78,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2021 16:30:37 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 17:06:32 -0000
 
-From: Kito Cheng <kito.cheng@sifive.com>
+On Sat, Sep 4, 2021 at 8:42 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Thu, Sep 2, 2021 at 7:42 PM Anup Patel <anup.patel@wdc.com> wrote:
+> >
+> > The machine or device emulation should be able to force set certain
+> > CPU features because:
+> > 1) We can have certain CPU features which are in-general optional
+> >    but implemented by RISC-V CPUs on machine.
+>
+> on the machine
+>
+> > 2) We can have devices which require certain CPU feature. For example,
+>
+> a certain
+>
+> >    AIA IMSIC devices expects AIA CSRs implemented by RISC-V CPUs.
+>
+> expect
 
-Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
-Signed-off-by: Chih-Min Chao <chihmin.chao@sifive.com>
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/fpu_helper.c                 |  6 ++++++
- target/riscv/helper.h                     |  1 +
- target/riscv/insn32.decode                |  1 +
- target/riscv/insn_trans/trans_rvzfh.c.inc | 12 ++++++++++++
- 4 files changed, 20 insertions(+)
+Okay, I will update the commit description based on the above comments.
 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index ec2009ee65b..388e23ca670 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -482,6 +482,12 @@ target_ulong helper_feq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
-     return float16_eq_quiet(frs1, frs2, &env->fp_status);
- }
- 
-+target_ulong helper_fclass_h(uint64_t rs1)
-+{
-+    float16 frs1 = check_nanbox_h(rs1);
-+    return fclass_h(frs1);
-+}
-+
- target_ulong helper_fcvt_w_h(CPURISCVState *env, uint64_t rs1)
- {
-     float16 frs1 = check_nanbox_h(rs1);
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9c89521d4ad..d25cf725c57 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -89,6 +89,7 @@ DEF_HELPER_FLAGS_2(fcvt_h_w, TCG_CALL_NO_RWG, i64, env, tl)
- DEF_HELPER_FLAGS_2(fcvt_h_wu, TCG_CALL_NO_RWG, i64, env, tl)
- DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
- DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
-+DEF_HELPER_FLAGS_1(fclass_h, TCG_CALL_NO_RWG_SE, tl, i64)
- 
- /* Special functions */
- DEF_HELPER_2(csrr, tl, env, int)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 3906c9fb201..6c4cde216bc 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -754,6 +754,7 @@ fmv_x_h    1110010  00000 ..... 000 ..... 1010011 @r2
- feq_h      1010010  ..... ..... 010 ..... 1010011 @r
- flt_h      1010010  ..... ..... 001 ..... 1010011 @r
- fle_h      1010010  ..... ..... 000 ..... 1010011 @r
-+fclass_h   1110010  00000 ..... 001 ..... 1010011 @r2
- fcvt_h_w   1101010  00000 ..... ... ..... 1010011 @r2_rm
- fcvt_h_wu  1101010  00001 ..... ... ..... 1010011 @r2_rm
- fmv_h_x    1111010  00000 ..... 000 ..... 1010011 @r2
-diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-index 8d0959a6671..0549e25fb45 100644
---- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-@@ -372,6 +372,18 @@ static bool trans_fle_h(DisasContext *ctx, arg_fle_h *a)
-     return true;
- }
- 
-+static bool trans_fclass_h(DisasContext *ctx, arg_fclass_h *a)
-+{
-+    REQUIRE_FPU;
-+    REQUIRE_ZFH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+
-+    gen_helper_fclass_h(dest, cpu_fpr[a->rs1]);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
- static bool trans_fcvt_w_h(DisasContext *ctx, arg_fcvt_w_h *a)
- {
-     REQUIRE_FPU;
--- 
-2.25.1
+Regards,
+Anup
 
+>
+> >
+> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > ---
+> >  target/riscv/cpu.c | 11 +++--------
+> >  target/riscv/cpu.h |  5 +++++
+> >  2 files changed, 8 insertions(+), 8 deletions(-)
+> >
+>
+> Otherwise,
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
