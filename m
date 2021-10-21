@@ -1,42 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdZpP-0004NJ-3G
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 11:18:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54812)
+	id 1mdacm-000334-Ku
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 12:09:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37678)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1mdZpM-0004Lu-Oa; Thu, 21 Oct 2021 11:17:57 -0400
-Received: from atcsqr.andestech.com ([60.248.187.195]:14453)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ruinland@andestech.com>)
- id 1mdZpK-0002cH-2L; Thu, 21 Oct 2021 11:17:56 -0400
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by ATCSQR.andestech.com with ESMTP id 19LFHQYn090085;
- Thu, 21 Oct 2021 23:17:26 +0800 (GMT-8)
- (envelope-from ruinland@andestech.com)
-Received: from APC301.andestech.com (10.0.12.120) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 21 Oct 2021
- 23:17:26 +0800
-From: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
-To: <alistair23@gmail.com>, <wangjunqiang@iscas.ac.cn>, <bmeng.cn@gmail.com>
-CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <ycliang@andestech.com>, 
- <alankao@andestech.com>, <dylan@andestech.com>, Ruinland Chuan-Tzu Tsai
- <ruinland@andestech.com>
-Subject: [RFC PATCH v1 0/2] riscv: Add preliminary custom instruction support
-Date: Thu, 21 Oct 2021 23:13:41 +0800
-Message-ID: <20211021151341.721815-1-ruinland@andestech.com>
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mdacj-000316-NF
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 12:08:57 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:42812)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1mdach-0003Ey-L6
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 12:08:57 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ nn3-20020a17090b38c300b001a03bb6c4ebso905927pjb.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Oct 2021 09:08:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=m7OUVTx25oQSsDRJEnA7yaoPsyv8LfufAE/tWYxlbYI=;
+ b=Evt5cXCMmQHBe5Jioq7IKWsbXuUFfxPj3hggQcXBeqdcqcK/dcc/rVLqt0QS1O9zJ2
+ R+XoFI3lxpUYp2A0RMdpXLtYPmfG0W9wz+GqAb5ZcsEktZv2lfk07FkuY46e16bmfXuN
+ ul4EsmLMag/E6R+KSKbvWybJjR4ivTHVpCDHGmqIBbEJWrV83Xv+rEG7udK2nbcpsOeI
+ VDYtGpek2BbQqgGZajOAkK2JNhx4Edm9/xiG2SeLCN9yTJdM1cUejHOkK2g4VFOL1VoN
+ POYF3DC1X8Vg6M2p2aDUexHKQLtURgC5nKIh2Gv+hoxXwq+Xvb7pvq0rB46Ny6k29Mdl
+ 1wNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=m7OUVTx25oQSsDRJEnA7yaoPsyv8LfufAE/tWYxlbYI=;
+ b=b6ZZqfpjEo4HuxQH/tWnwjoud2XT+gU9eS0TxEX86L1i0rUfBai3Glc9JkAFRyqd/r
+ fAatBcUyMZ8TFN8CnWJeczAGSFhQAqzaif9kN8tT25RfjSKN+pyPcDWqbLTQDmbrHslV
+ xCdsZOSRo8zJr0c1BYwnB8qipGkA0kAYanb+gmLu3TjJvCoC5JnO3brTPxdcxqo03uP8
+ PnvGUK6LoMeq4tsyP3EBioqQwzHHDWCj+NG5b2lflraipUQ6wJ7oJrqsKWCzuc5TxZY4
+ Wn8UZB/W2n2Hw+aVzQPgSWykyuzJSt5VOQMb168gWvh50LCL97pIPaph20hXKvDE/yf6
+ 51NA==
+X-Gm-Message-State: AOAM532Q+Bssuj0i7dolFn6UPCTO0ccenreC7+I9VrrSKMiuUk2h9DYR
+ gDsFY/cADBLMehma7oOFJkL7KPrpY1Z+RQ==
+X-Google-Smtp-Source: ABdhPJxJjxeZSqOUIg0LsFdLpsbemQtxbwYIbknCgNdRVxYW+Mni6LDo2eOLX7QONEcxKhZ76FyqFw==
+X-Received: by 2002:a17:90b:4b4d:: with SMTP id
+ mi13mr7503768pjb.187.1634832533084; 
+ Thu, 21 Oct 2021 09:08:53 -0700 (PDT)
+Received: from localhost.localdomain (123-193-74-252.dynamic.kbronet.com.tw.
+ [123.193.74.252])
+ by smtp.gmail.com with ESMTPSA id r13sm5752505pgv.21.2021.10.21.09.08.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Oct 2021 09:08:52 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-riscv@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v5 0/2] add APIs to handle alternative sNaN propagation for
+ fmax/fmin
+Date: Fri, 22 Oct 2021 00:08:44 +0800
+Message-Id: <20211021160847.2748577-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.12.120]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com 19LFHQYn090085
-Received-SPF: pass client-ip=60.248.187.195;
- envelope-from=ruinland@andestech.com; helo=ATCSQR.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -50,97 +77,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2021 15:17:58 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 16:08:58 -0000
 
-Hi Alistair, Bin and all,
+From: Frank Chang <frank.chang@sifive.com>
 
-This patchset is based on the V5 patch of custom CSR support.
-It demonstrates how Andes intends to use custom CSR by revealing how
-Andes CoDense Extension(c), exec.it, uses a custom CSR, uitb, to
-execute an instruction mapped by either user code or firmware.
+In IEEE 754-2019, minNum, maxNum, minNumMag and maxNumMag are removed
+and replaced with minimum, minimumNumber, maximum and maximumNumber.
 
-To accomplish such features, we bumped into obstacles which lead us
-to expose DisasContext and we feel the urge to reuse riscv_csrrw() as
-a "general" API to access either custom or standard CSR.
+minimumNumber/maximumNumber behavior for SNaN is changed to:
+  * If both operands are NaNs, a QNaN is returned.
+  * If either operand is a SNaN, an invalid operation exception is signaled,
+    but unless both operands are NaNs, the SNaN is otherwise ignored and
+    not converted to a QNaN.
 
-Furthermore, since Andes Performance Extension(c) instructions, e.g.
-bfoz/bfos has the same opcode with different encoding of bitfields on
-RV32 and RV64, also, it's highly likely that some custom instruction
-might only appear in either RV32 or RV64 (e.g. PULP is RV32 only),
-we'd suggest to give some leeway to use `when: TARGET_RISCV32/64`
-directive to toggle custom decoder in `target/riscv/meson.build`.
+This patchset add support of the above alternative sNaN propagation for
+fmax/fmin, which is required by RISC-V floating-point v2.2.
 
-= = = =
+Changelog:
 
-How to test - -
+v4:
+  * Add comments to describe why we tie RVF version with Priv version.
 
-/* payload.S */
-addi t1,zero,1
-.word 0x0013235b # bfoz t1,t1,0,1
-addi t1,zero,-1
-.word 0x0413335b # bfos t1,t1,1,1
+v3:
+  * Change API names from *_noprop() to *_maximum_number()
+    and *_minimum_number().
+  * Pick softfloat min/max APIs based on CPU privilege spec version.
 
-/* test.c */
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/mman.h>
+Chih-Min Chao (2):
+  softfloat: add APIs to handle alternative sNaN propagation for
+    fmax/fmin
+  target/riscv: change the api for RVF/RVD fmin/fmax
 
-int main(int ac, char *av[]) {
+ fpu/softfloat-parts.c.inc | 25 +++++++++++++++++++++++--
+ fpu/softfloat.c           | 19 +++++++++++++------
+ include/fpu/softfloat.h   | 10 ++++++++++
+ target/riscv/fpu_helper.c | 16 ++++++++++++----
+ 4 files changed, 58 insertions(+), 12 deletions(-)
 
-    int efd = open("./payload.bin", O_RDONLY);
-    void* exec_heap = mmap(0, 1024, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE, efd, 0);
-
-    __asm__("csrrw x0, 0x800, %0"::"r" (exec_heap));
-    __asm__(".hword 0x8000"); // exec.it exec_heap
-    __asm__(".hword 0x8010"); // exec.it exec_heap+4
-    __asm__("csrrw x0, 0x800, %0"::"r" ((char *)exec_heap+0x8));
-    __asm__(".hword 0x8000"); // exec.it exec_heap+0x8
-    __asm__(".hword 0x8010"); // exec.it exec_heap+0x12
-
-    close(efd);
-
-    return 0;
-    }
-
-= = = =
-
-$ riscv64-linux-gcc -g3 -O0 -fno-builtin -static ./test.c -o ./test
-$ riscv64-linux-as ./payload.S -o ./payload.o
-$ riscv64-linux-objcopy -O binary ./payload.o ./payload.bin
-$ qemu-riscv64 -g 1234 ./test &
-$ gdb-multiarch ./test -ex 'target remote localhost:1234' -ex 'b main' -ex 'c'
-# You can single step through the custom instructions and witness the
-change on $t1.
-
-Cordially yours,
-Ruinland Chuan-Tzu Tsai
-
-Ruinland Chuan-Tzu Tsai (2):
-  riscv: Add preliminary infra for custom instrcution handling
-  Enable custom instruction suport for Andes A25 and AX25 CPU model
-
- target/riscv/andes_codense.decode         |  23 +++++
- target/riscv/andes_custom_rv32.decode     |  27 +++++
- target/riscv/andes_custom_rv64.decode     |  27 +++++
- target/riscv/andes_helper.c               |  49 +++++++++
- target/riscv/andes_helper.h               |   1 +
- target/riscv/cpu.c                        |  33 ++++++-
- target/riscv/helper.h                     |   2 +
- target/riscv/insn_trans/trans_andes.c.inc | 115 ++++++++++++++++++++++
- target/riscv/meson.build                  |  13 +++
- target/riscv/translate.c                  |  90 ++++++++++++++---
- 10 files changed, 362 insertions(+), 18 deletions(-)
- create mode 100644 target/riscv/andes_codense.decode
- create mode 100644 target/riscv/andes_custom_rv32.decode
- create mode 100644 target/riscv/andes_custom_rv64.decode
- create mode 100644 target/riscv/andes_helper.c
- create mode 100644 target/riscv/andes_helper.h
- create mode 100644 target/riscv/insn_trans/trans_andes.c.inc
-
--- 
+--
 2.25.1
 
 
