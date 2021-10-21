@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdTpF-00005L-PK
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 04:53:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43726)
+	id 1mdTpJ-00006g-7U
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 04:53:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43756)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdTpC-0008WJ-0g; Thu, 21 Oct 2021 04:53:23 -0400
-Received: from mail-qk1-x733.google.com ([2607:f8b0:4864:20::733]:40848)
+ id 1mdTpE-00004t-EW; Thu, 21 Oct 2021 04:53:24 -0400
+Received: from mail-qk1-x72d.google.com ([2607:f8b0:4864:20::72d]:45728)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdTpA-00018y-7z; Thu, 21 Oct 2021 04:53:21 -0400
-Received: by mail-qk1-x733.google.com with SMTP id x123so6846837qke.7;
- Thu, 21 Oct 2021 01:53:18 -0700 (PDT)
+ id 1mdTpD-0001Bj-58; Thu, 21 Oct 2021 04:53:24 -0400
+Received: by mail-qk1-x72d.google.com with SMTP id bp7so6811550qkb.12;
+ Thu, 21 Oct 2021 01:53:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fXLA/63xWvgAjSUU0F8HHo3Kh2+SdvNCIvJsLObc6ro=;
- b=IzjiPhxOhHDcl819Hh4hLS/F4vgkvC9td47oLRn/GtpTgmFJ3OVWKTqvRyU7S9F0Yi
- 0mvKyRa3w5ba+/v06iWPya0Mwmm/RsLrV12XDDXnppUpDClEKNFALUw9mkmCkmBbNOna
- 8IjGx+fUG9hSKTJJgm2NyrVjeQ9zhp6+zj84qJblztEjJV+drOe+Z+NmC0bl37mQcLq6
- MiKsa/+ySIKdLd6SClf3Zmc/3QpE7rDTP/xMlwLCFV4dgRkLbWp0sq/+xTi3LjC5O309
- 9mguQzunSUE5AaWPh/F6vJfwenzKL7N0AORoJkuGc9RGf46prknbe0wljlOpM+Jv7lQu
- uC9w==
+ :cc; bh=0iZbm64b7QMtLrvBfZoEFXdxZHapSbuYXRUV1tSEZJ8=;
+ b=ZvAa2lu9PTS7zmWfL4MuT5iynuR/5V4WcnB0bqe0V2EDV6P3SynYMAl1mO5fmwtL4E
+ xKP13ZCmWT9PZ15by+kE+Hq7aWu2XGA7rHF2C8fCf1NmuPgoSJhfgEpngpckyqLMEJcW
+ Qmvlbfnze5NU1f7hx4rZ6X1AiS2Ig7eaaYdPD0rcsdwwNRJcwPftA+PTtaToysjQu8+z
+ Akb2XrRGHm8OwENz778s3cyVZqynUmjgEbWKi4iwSytu1CK2TBZGVRdcSXvzdolaTA4g
+ 2KhmL1O+WLDuK0Q8esCS350s9VOnBHkAQQXZ81EV7l9yFANLlsNpaNkoyTCWIVW32UNg
+ ltyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=fXLA/63xWvgAjSUU0F8HHo3Kh2+SdvNCIvJsLObc6ro=;
- b=1vBJrpB1v+V2dizqcKhhaoqTVZ0+/aJ0TT4YY4/kWDVwnzkx7GCDaHRKPF+xjt8mya
- 6pVj3p8KiugGo2F2BR7lnb0qidWPDFUVkSc0pBahtlhSBX5eBsivJZpcUhiRDjaM7Tt5
- wTUUe+fvxs8r0+uRn/3HNMPD8+5znhWi/XAEp+DdaXArnyiUH7ppkH/9hsADPvtrlubH
- EOXo1BVKksiacif6Zhq2ckzApjKMzNsCQafT584i9BQKz63NWTLpsX9b14j9y/9WIgvc
- B7hH3R134DCpn10mYZ7gxbCbxRV2EHG9nIRkmCZ6RV3KIEan20DBlvJlkGnyrqjbDfiw
- 3eWQ==
-X-Gm-Message-State: AOAM530ossLnYotGGPrBc+vH+ozf/0s/niCG/VkiNc8NTr68cntL6LUH
- Waj+PN4RGJwpygmg4S8Yj2VTbJtdGYD15ADcCQs=
-X-Google-Smtp-Source: ABdhPJyyRwADKjaUP6lGQJ8A46mZ7SN9F4fElWvJwd75T5P+uvMyTCtgBXVM8T47bh4JnH7FAfazrfMwZth/oRcTQ3w=
-X-Received: by 2002:a25:c0d2:: with SMTP id c201mr4856285ybf.467.1634806397901; 
- Thu, 21 Oct 2021 01:53:17 -0700 (PDT)
+ bh=0iZbm64b7QMtLrvBfZoEFXdxZHapSbuYXRUV1tSEZJ8=;
+ b=mD+vfj7wXKDdG3qk0A+vNWaZiz38RugrogwLjIGe9a8RexbHPY5eGAjchyI/OlTG6c
+ z2FREU9LhBfg0w0b6cnDjMte1TWsQlqbaPCnEEm/RH3AgiVstXJSDerkC1yomwO7fjex
+ QwV9RMaqACQYeKhIexzhbE9o1mG7fdIyqtQGbTghuAw6SCGgr2S148JshK4vmOZnJDrx
+ 8edhEqGoPybL1o2NXN/09JufFN106laIkCUk87NeSf0mtedq0ura7eX39ltr4e3V+e+z
+ rqLiFbPtqyihgI5oDXqnbQa7sZpvogzOQkmqmHhFS1PmEFLFAGkfy36+/FMoEWINOW3z
+ TSFg==
+X-Gm-Message-State: AOAM530BoQbvqB1s13O+ex01uHeJQLAhayrtVEzMaCwW41CF8ATuFhdp
+ Sp5akYfFdI6dg3z8K1ZiFpUUjOleiWbKYPw4Tt0=
+X-Google-Smtp-Source: ABdhPJz+nOzem+ZfkIZB3vuSEadcZ/m17VeuMCBnWOC4p5f/JgPRGXpkThtMyMDXEldMLdkUgTt4ZkWTwIy9ohKj1/c=
+X-Received: by 2002:a25:9741:: with SMTP id h1mr4217113ybo.293.1634806400996; 
+ Thu, 21 Oct 2021 01:53:20 -0700 (PDT)
 MIME-Version: 1.0
 References: <18b1b681b0f8dd2461e819d1217bf0b530812680.1634524691.git.alistair.francis@wdc.com>
- <3daa501cf8ea5c10a887474ab9f899124ad779e1.1634524691.git.alistair.francis@wdc.com>
-In-Reply-To: <3daa501cf8ea5c10a887474ab9f899124ad779e1.1634524691.git.alistair.francis@wdc.com>
+ <e4d22f1fd96cf821f6c400736a5dc20334e932b5.1634524691.git.alistair.francis@wdc.com>
+In-Reply-To: <e4d22f1fd96cf821f6c400736a5dc20334e932b5.1634524691.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 21 Oct 2021 16:53:06 +0800
-Message-ID: <CAEUhbmXOsan-EQFTwOTHcy5c230gHsQPh=+vQihPA0MKzpYfZg@mail.gmail.com>
-Subject: Re: [PATCH v1 7/9] hw/intc: sifive_plic: Cleanup the write function
+Date: Thu, 21 Oct 2021 16:53:09 +0800
+Message-ID: <CAEUhbmVOgfLwa4EP+faTwSWypPRqjxiWa5aCVKj22wixhCqzhQ@mail.gmail.com>
+Subject: Re: [PATCH v1 8/9] hw/intc: sifive_plic: Cleanup the read function
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -51,8 +51,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::733;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x733.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,8 +81,8 @@ On Mon, Oct 18, 2021 at 10:40 AM Alistair Francis
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/intc/sifive_plic.c | 82 +++++++++++++++++--------------------------
->  1 file changed, 33 insertions(+), 49 deletions(-)
+>  hw/intc/sifive_plic.c | 55 +++++++++----------------------------------
+>  1 file changed, 11 insertions(+), 44 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
