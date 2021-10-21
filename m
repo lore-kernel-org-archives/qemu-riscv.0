@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdSZH-0000im-RE
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 03:32:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55336)
+	id 1mdSaQ-0002uE-KN
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 03:34:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55556)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdSZG-0000fC-Dd; Thu, 21 Oct 2021 03:32:50 -0400
-Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b]:44783)
+ id 1mdSaL-0002rt-I6; Thu, 21 Oct 2021 03:33:57 -0400
+Received: from mail-qk1-x735.google.com ([2607:f8b0:4864:20::735]:40780)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdSZE-0002VR-TQ; Thu, 21 Oct 2021 03:32:50 -0400
-Received: by mail-qk1-x72b.google.com with SMTP id a13so6270232qkg.11;
- Thu, 21 Oct 2021 00:32:48 -0700 (PDT)
+ id 1mdSaK-0003Q2-5K; Thu, 21 Oct 2021 03:33:57 -0400
+Received: by mail-qk1-x735.google.com with SMTP id x123so6307568qke.7;
+ Thu, 21 Oct 2021 00:33:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4ebt9aX5WS14mBwTiikqyjzGpnq3NbbXX28kKxTwdrA=;
- b=OG+CwTJVO6odG7oZ5WCxPvVipKmTWeg+hhz+DoBldS2MG3LDwr0KznGfinspEZyKSL
- /F3rKkb5XMYC7hmGpcMMy+0gO9nhWThBDtAphuDqBIXVG0WokLNzAQy6SmZODv0Xnkdy
- NJCwcns2KbaS1iXlWkKSU+IC4lbxXx2nijIAUFGEOJGgVH9BVB08NvSxwql757rwNJs+
- xqqdDMO/QMDYVVlJat+6+SRsILd7N19al4p988iox0e75n6VgTuuv39ZJ3egYNUQOkEJ
- Nksv1ED9pzh4K7tuU6haqXN5zjoF/8pbTfjiWHTgVPtuANYdRYJtpqFjLl8Pk7+nr13l
- OLaA==
+ :cc; bh=y3C63pHISOqd/oJurThrVK9ofOtOPHn01WRd7tblJxY=;
+ b=lhDRa0DxPLUj/s7Pfcvhk69cKHOmnApfu6S0FYhREukmnJe4jQ0j/LZ30l1h2KjuEq
+ SJuZ/q1pJbC1kSnozUGwE1bgk8X0AZDg+P6Js3XN7YgR/hXSoAlfrluNoQMysvQs7g4y
+ 0l/A4aWB+6vFLFLDrKQPVsHTh/L9S7ZNZB7cpnGc2kuf727JjxIXdXinPApiPNJQ+czf
+ XQROrgU1+e/IopCj2DDcjv0iKq0NzYMADRt9Pnwq1Dx8DyTOVjSLNJ0ZRY8M9JQqWv4J
+ BoP5gK29a5TByfoung/qDptP4geTqmy936svzT3svcHJNOfESu3JCKGvuC3sjVAmMTUy
+ 46zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=4ebt9aX5WS14mBwTiikqyjzGpnq3NbbXX28kKxTwdrA=;
- b=QzEsF2rla6tSC7rqGugoeR39AhEqJY0ABIWSjeAL5BHW7bB/n7jMZxKRW6UStH2ZHp
- iX4+EaJRKXeylGsf1K2TDOSrCcm5VCOLEAepzCd4lA4dOF1BFBPT0Y8hl8QDr16LFfJm
- 6rIZHflMF1aEpcQ5LEGvXO/GiPqrcEMC1DZU+3nzPBttzVuQDnDWY+vYwuLIXOZlDgt8
- duc70SOBF4JWAo9XcWCw7tYwGmR9x3Mi+pdBZVBFhCPu4nCOpzQECuxLaOzOVdKyWCg2
- WFglvL+UqTfAGfSa0jl9PyUf35hC17Y1QsckKUTLtAVIpOC+bY9YHppE8jzfe8BbYPFt
- yicw==
-X-Gm-Message-State: AOAM5313AvJN6ygmAIVJv0xrlrmfNKgHibJatjhVR2JF0/sL+NrsTGWH
- I4faRFVxZ4QgGsiGRpB1jlgra0Hpql55AwFegd8=
-X-Google-Smtp-Source: ABdhPJy964FZ/MNZTLTmKSfczjRx9S2qWWPuVEBc8omxLFGH2opdRhXmRE7sOgcp++M91LbFKakHlye4SrH00NkLTK4=
-X-Received: by 2002:a25:346:: with SMTP id 67mr3968142ybd.345.1634801566429;
- Thu, 21 Oct 2021 00:32:46 -0700 (PDT)
+ bh=y3C63pHISOqd/oJurThrVK9ofOtOPHn01WRd7tblJxY=;
+ b=8EeFpkX2SB9wZHi86b6aXoRnZDMbz28ueUif+pvdgsBCIs/XKTjMLRwQJwiWweqfDp
+ Vj0rGBEkBYItI61A3dA28b7AHCyToFEHdoR1lenqraZDUFgET7ocb5N/NDqV1aw+Apwg
+ kNMvJswQXc1PFQ47TnxmAYoQFwrA9IvKyYSv7lOhxNohQw43vi8hppg4BlWJnaDEgN9O
+ 44VHRE6ZE0tk2wH1X8UnLxXwnzu9GaXC9DtQsEoyBcF6SSSIpTpR332IqXlbtmQQAiYJ
+ tSLj6dsihAoVanb91HcIsBTw5xDQOOeiN+Y2qrpJXYF3TPNZ02QLxLQooUfDPIb68oTU
+ 64bA==
+X-Gm-Message-State: AOAM531RwUNBrHfRuKwv2r9nFtxZw8t5dSQH67nYsGwdvq3O3cdZHeR0
+ zEDDyVYRTgqGHVtLS/+YJBhkY+An8eNXcwHWdA8=
+X-Google-Smtp-Source: ABdhPJwclbwF8xvCVIJSW3ExJYReQo1JZcQWJZdbC1dycltghRLgyA6IWZ5RfQBvmh+/hrSMMKkRpiGiPhQ5MtfPNHU=
+X-Received: by 2002:a25:c0d2:: with SMTP id c201mr4470201ybf.467.1634801634848; 
+ Thu, 21 Oct 2021 00:33:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <18b1b681b0f8dd2461e819d1217bf0b530812680.1634524691.git.alistair.francis@wdc.com>
- <b94c098cb221e744683349b1ac794c23102ef471.1634524691.git.alistair.francis@wdc.com>
-In-Reply-To: <b94c098cb221e744683349b1ac794c23102ef471.1634524691.git.alistair.francis@wdc.com>
+ <4200da222a65c89ed1ba35f754dcca7fdd9f08d6.1634524691.git.alistair.francis@wdc.com>
+In-Reply-To: <4200da222a65c89ed1ba35f754dcca7fdd9f08d6.1634524691.git.alistair.francis@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 21 Oct 2021 15:32:35 +0800
-Message-ID: <CAEUhbmUdVUABcTcqojR0iB1ErroooUuyYzH4Z_O2fG1z_NWKtg@mail.gmail.com>
-Subject: Re: [PATCH v1 4/9] hw/intc: sifive_plic: Cleanup the realize function
+Date: Thu, 21 Oct 2021 15:33:43 +0800
+Message-ID: <CAEUhbmUuTNYFDy=84xxQbtp7hy=TwGmLXK6YATa076tGW7Ddug@mail.gmail.com>
+Subject: Re: [PATCH v1 5/9] hw/intc: sifive_plic: Cleanup the irq_request
+ function
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -51,8 +52,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72b;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x72b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::735;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x735.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,7 +73,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2021 07:32:50 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 07:33:59 -0000
 
 On Mon, Oct 18, 2021 at 10:39 AM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
@@ -81,8 +82,8 @@ On Mon, Oct 18, 2021 at 10:39 AM Alistair Francis
 >
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  hw/intc/sifive_plic.c | 45 +++++++++++++++++++++++--------------------
->  1 file changed, 24 insertions(+), 21 deletions(-)
+>  hw/intc/sifive_plic.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
