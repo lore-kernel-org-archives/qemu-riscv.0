@@ -1,57 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdgrK-0004Mk-86
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 18:48:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46666)
+	id 1mdh05-0008FN-0v
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 18:57:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48354)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdgrI-0004FT-7g; Thu, 21 Oct 2021 18:48:24 -0400
-Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:33528)
+ id 1mdh03-0008E5-94; Thu, 21 Oct 2021 18:57:27 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:44967)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdgrF-0001or-T9; Thu, 21 Oct 2021 18:48:23 -0400
-Received: by mail-il1-x129.google.com with SMTP id s3so2424990ild.0;
- Thu, 21 Oct 2021 15:48:21 -0700 (PDT)
+ id 1mdh01-0005mL-4K; Thu, 21 Oct 2021 18:57:26 -0400
+Received: by mail-io1-xd36.google.com with SMTP id r134so2978053iod.11;
+ Thu, 21 Oct 2021 15:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7rOn5+2KqB28LX6y7GO6P5ftXOIHD5aFv81muxBJxX0=;
- b=i9aHCvR+SR8QJVEBM8B8GZK7Z/zhuc0SGL52khxSS45W7yr+JAfCiyF9yj8FyXL2A7
- lHkaLmr5GWfbhF8PCtRS8PohN8MBiuA8OtDkU23OLmO5RTo0j9fotDA42wWFl1nMOlNE
- 8gB73J41dfxYlWUufFkjVeKJE68dJacTI3hgCdr87Ua9zKuZTCcg5J6i4zhdKBtd4nFR
- OL1KArPvJVyKcCgcI41Gmov8/JMDNJTBkRyOLvuNM0TSB+g4RLcu30O0IjjRQ1nFTdHD
- LItkqV7B0Zan0bTeY8jBUiUl7WruPCS5+mBi2hnkqzGHAMjZldNYydrWfdY/Tm8H89PZ
- WGeA==
+ :cc; bh=l425e8rpkEKLAVmEKE+Fwdd+L0iFgwoON3UDd1ZjUxQ=;
+ b=VGTMYayR5oXRsxetkEg8n3QxSlzl89FAi3GVX98qwhJTGNRkEWsVIyAUblYtgyu+Gm
+ a5kuAN0DonXHboE1mo2WvCaNWuD7ZkHzUw0uDmd6RCKnLZLjdvyBybktP1cmIWr3Rv+R
+ MxnWBZI31UtjHa/1PfVewGymDpU12wqCpxgccH2m5g/CLWEkSjMthUXkxnhbUjIntj1+
+ t5rqxWjI6QGCjFK4GnEX5sRopPbPrOWbLcWldLAKLMfdzgf22rq7Yeq0+80qKt5z1zlB
+ Tz3qz+VviypTqF9uxNeQtsqyYYd2dmtaUEaq+YXSXGULwE8WhgVsb34bWYrHuTU5HprF
+ 8Tww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7rOn5+2KqB28LX6y7GO6P5ftXOIHD5aFv81muxBJxX0=;
- b=V/Obx2WTCfovsubhJG/fzvNYUDjel627gYIJPxNxcTlr6ySOJDemhTHpKGO/bL2/LL
- a/aIECF63pbrb9Qi+Q/Ltcc/yEwSHKXjZGT0duKyJlGYo+PekIjWrTyEA8Rsov1rNcpG
- ZOH8EjWRJjUVXGSkNT/JbB/9X8v3Lnoh1FbCjYwttfOxlA1H6uO0vAknd/PE6FULZf/F
- 6oqPnHFaWiSpHFjZ/SWc+dF3JdxNl5Mc9XiEj5pPoVnUpDciWot7BrTnZgjqr8wC6omJ
- 4BUQ/iR2CJSFclHoXs7LmJgSoi4l1NwvyWwl2LRh594t7i1SCk/T9cm0D7DZPEJKpWVJ
- q8lw==
-X-Gm-Message-State: AOAM5327fw8ySPsG6iAhtUcQNvRilP6ayzzrm5wA3c2G2vH5HnKjzZr1
- DbXHOPonW4iaSED+cZ0XlRvBJAAg+hNdVLq2lZM=
-X-Google-Smtp-Source: ABdhPJy92hCLP1KyiRpMsqRRGnxenVEIolrc5WWNPpTE+7EGnPOFQaw/3vQVLfGOx3uRFoyOIExLkRQkapoyb/Pc9Js=
-X-Received: by 2002:a92:c88c:: with SMTP id w12mr4377719ilo.46.1634856500282; 
- Thu, 21 Oct 2021 15:48:20 -0700 (PDT)
+ bh=l425e8rpkEKLAVmEKE+Fwdd+L0iFgwoON3UDd1ZjUxQ=;
+ b=Poz8zJ9Wy0Mx0GBy5e7YEqpzNaOiG8RHMC3sKwgozcTL9kDYrHaWcw30gKmTq3JozT
+ w3KKjiaGCGN13FVI+egqwXG+8NshxfzNTcCltKPYVYhytEcnqajX2fxiUoSLBfiTXsPt
+ gQWRus0nosoYWR/vIqcdxpHvKOhWl3E2EVm4o9eNjLN1AeDRDWOEEkV1xz0WEgukL6Sa
+ hVI+Z61vfNJGxndR9oUt7PYiQTTOUpRmr9hQMbRUscG4jISvSTaaMirMxbS/5ovhVCtg
+ /m28KEn1olszE77buj61BFi7AYjStAn8pAHq71Rk8/hrQbmWs9F6lT+Iu8EQ9uujTjah
+ Cn1w==
+X-Gm-Message-State: AOAM5313Xz4UqKuED2AehPuPSb90ScMZOPj4yaILTBzkhgy6I9c7zwUM
+ /sFPZdFIeRhsRUQ7x62YQu5CePVq4K3JPpm9tcs=
+X-Google-Smtp-Source: ABdhPJxWjCWB44RcytNYMb4BQWrwRNZ0ZuytjMlkptVQiQ/LDqcseOF5gMwf0Cy2wobAfmPwDPBuYuWKAULArRapT/M=
+X-Received: by 2002:a05:6638:2581:: with SMTP id
+ s1mr5754221jat.35.1634857043320; 
+ Thu, 21 Oct 2021 15:57:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211021150921.721630-1-ruinland@andestech.com>
-In-Reply-To: <20211021150921.721630-1-ruinland@andestech.com>
+References: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
+In-Reply-To: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 22 Oct 2021 08:47:54 +1000
-Message-ID: <CAKmqyKO3MawZxqSf+gsdtCd5kHAaJuXh0r6VRieCJOzBVgQ8rw@mail.gmail.com>
-Subject: Re: [RFC PATCH v5 0/3] riscv: Add preliminary custom CSR support
-To: Ruinland Chuan-Tzu Tsai <ruinland@andestech.com>
-Cc: wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bmeng.cn@gmail.com>, 
+Date: Fri, 22 Oct 2021 08:56:57 +1000
+Message-ID: <CAKmqyKPxRUaBLCp=ZrMVoxGTR+gr6ALAbp2kWPjN-b1CAHg5zg@mail.gmail.com>
+Subject: Re: [PATCH v15 0/8] RISC-V Pointer Masking implementation
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, ycliang@andestech.com, 
- "Alan Quey-Liang Kao(((((((((()" <alankao@andestech.com>,
- Dylan Jhong <dylan@andestech.com>
+ space.monkey.delivers@gmail.com, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,97 +76,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2021 22:48:24 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 22:57:27 -0000
 
-On Fri, Oct 22, 2021 at 1:13 AM Ruinland Chuan-Tzu Tsai
-<ruinland@andestech.com> wrote:
+On Wed, Oct 20, 2021 at 8:43 PM Alexey Baturo <baturo.alexey@gmail.com> wrote:
 >
-> Hi Alistair, Bin and all :
+> v14:
+> Addressed Richard's comments from previous series.
 >
-> Sorry for bumping this stale topic.
-> As our last discussion, I have removed Kconfigs and meson options.
-> The custom CSR logic is in-built by default and whether a custom CSR
-> is presented on the accessing hart will be checked at runtime.
+> v13:
+> Rebased QEMU and addressed Richard's comment.
+>
+> v12:
+> Updated function for adjusting address with pointer masking to allocate and use temp register.
+>
+> v11:
+> Addressed a few style issues Alistair mentioned in the previous review.
+>
+> If this patch series would be accepted, I think my further attention would be to:
+> - Support pm for memory operations for RVV
+> - Add proper csr and support pm for memory operations for Hypervisor mode
+> - Support address wrapping on unaligned accesses as @Richard mentioned previously
+>
+> Thanks!
 
-No worries!
+Hey!
 
-This looks great! I had a look through this and I think we are almost
-there. I left a few comments, but otherwise I think we are close.
-
-Let's see if anyone else has any comments. Otherwise can you run
-checkpatch on each patch and then send a PATCH series (not an RFC) in
-a week or so and we can go from there.
-
->
-> Changes from V4 :
-> Remove Kconfigs and meson options.
-> Make custom CSR handling logic self-contained.
-> Use g_hash_table_new instead of g_hash_table_new_full.
->
-> The performance slowdown could be easily tested with a simple program
-> running on linux-user mode :
->
-> /* test_csr.c */
-> #include <stdio.h>
-> #include <unistd.h>
-> #include <sys/time.h>
->
-> int main (int ac, char *av[]) {
->    struct  timeval start;
->    struct  timeval end;
->    gettimeofday(&start,NULL);
->    unsigned int loop_n = 999999 ;
->    unsigned char i;
->    unsigned char o;
->    do {
->        for(i=0; i<32; i++) {
->        #if defined(FCSR)
->        __asm__("csrw fcsr, %0;"::"r"(i));
->        __asm__("csrr %0, fcsr;":"=r"(o));
->        #elif defined(UITB)
->        __asm__("csrw 0x800, %0;"::"r"(i));
->        __asm__("csrr %0, 0x800;":"=r"(o));
->        #endif
->        }
->        --loop_n;
->    } while (loop_n > 0);
->    gettimeofday(&end,NULL);
->    unsigned long diff = 1000000 *
-> (end.tv_sec-start.tv_sec)+end.tv_usec-start.tv_usec;
->    printf("%f\n", (double)(diff)/1000000);
->    return 0;
-> }
->
-> $ riscv64-linux-gnu-gcc -static -DUITB ./test_csr.c -o ./u
-> $ riscv64-linux-gnu-gcc -static -DFCSR ./test_csr.c -o ./f
-> $ qemu-riscv64 ./{u,f}
-
-Do you have the results?
+Sorry about this, but there has been some churn and this no longer
+applies. Do you mind rebasing on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
 >
-> Cordially yours,
-> Ruinland Chuan-Tzu Tsai
+> Alexey Baturo (7):
+>   [RISCV_PM] Add J-extension into RISC-V
+>   [RISCV_PM] Add CSR defines for RISC-V PM extension
+>   [RISCV_PM] Support CSRs required for RISC-V PM extension except for
+>     the h-mode
+>   [RISCV_PM] Add J extension state description
+>   [RISCV_PM] Print new PM CSRs in QEMU logs
+>   [RISCV_PM] Support pointer masking for RISC-V for i/c/f/d/a types of
+>     instructions
+>   [RISCV_PM] Allow experimental J-ext to be turned on
 >
-> Ruinland Chuan-Tzu Tsai (3):
->   riscv: Adding Andes A25 and AX25 cpu models
->   riscv: Introduce custom CSR hooks to riscv_csrrw()
->   riscv: Enable custom CSR support for Andes AX25 and A25 CPUs
+> Anatoly Parshintsev (1):
+>   [RISCV_PM] Implement address masking functions required for RISC-V
+>     Pointer Masking extension
 >
->  target/riscv/andes_cpu_bits.h  | 129 +++++++++++++++++++++++
->  target/riscv/cpu.c             |  39 +++++++
->  target/riscv/cpu.h             |  15 ++-
->  target/riscv/csr.c             |  38 +++++--
->  target/riscv/csr_andes.c       | 183 +++++++++++++++++++++++++++++++++
->  target/riscv/custom_csr_defs.h |   8 ++
->  target/riscv/meson.build       |   1 +
->  7 files changed, 404 insertions(+), 9 deletions(-)
->  create mode 100644 target/riscv/andes_cpu_bits.h
->  create mode 100644 target/riscv/csr_andes.c
->  create mode 100644 target/riscv/custom_csr_defs.h
+>  target/riscv/cpu.c                      |  31 +++
+>  target/riscv/cpu.h                      |  33 +++
+>  target/riscv/cpu_bits.h                 |  96 ++++++++
+>  target/riscv/csr.c                      | 285 ++++++++++++++++++++++++
+>  target/riscv/insn_trans/trans_rva.c.inc |   3 +
+>  target/riscv/insn_trans/trans_rvd.c.inc |   2 +
+>  target/riscv/insn_trans/trans_rvf.c.inc |   2 +
+>  target/riscv/insn_trans/trans_rvi.c.inc |   2 +
+>  target/riscv/machine.c                  |  27 +++
+>  target/riscv/translate.c                |  43 ++++
+>  10 files changed, 524 insertions(+)
 >
 > --
-> 2.25.1
+> 2.30.2
+>
 >
 
