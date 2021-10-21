@@ -1,59 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdKzA-0003bW-2s
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 19:27:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51346)
+	id 1mdPBx-0008UM-4d
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Oct 2021 23:56:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38616)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKz7-0003Zo-11; Wed, 20 Oct 2021 19:27:01 -0400
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:34651)
+ id 1mdPBu-0008Rx-EN; Wed, 20 Oct 2021 23:56:30 -0400
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:35685)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mdKz4-0007OD-Bs; Wed, 20 Oct 2021 19:27:00 -0400
-Received: by mail-io1-xd2d.google.com with SMTP id i189so26776002ioa.1;
- Wed, 20 Oct 2021 16:26:57 -0700 (PDT)
+ id 1mdPBs-0006bb-Sm; Wed, 20 Oct 2021 23:56:30 -0400
+Received: by mail-il1-x132.google.com with SMTP id k3so24407324ilu.2;
+ Wed, 20 Oct 2021 20:56:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cG3bcLQyGDeBGMCVs6EtuMtBLgQGNDzJqzaq/Egxg74=;
- b=R30/zxDTgN5wPp/+KY1Yo7daGbc2aTL/6HfFSNMnbOJ38LJ4dhX2AF0JPwMiVpfLNy
- ag5Q2rFCL7FgyhswZrox6MiRmrk82gG58731h+wg2AunPwXZxkTurdndevjQSKIjPEZC
- 9NQQkmeOZhdC25kwr4/5zb3DteXzFvwhXfclJ8MNACaPZHTAhJCx6pJ9h40qiy3wUfPp
- w5VzArZXydHYgJKRydu11NlF6lYR9ZQq8yt74kS72XYNfhoZnwHrc7L+N+3U8LJ6ADK2
- lpa9nEYw2aWZjZLnliKuILJdydwxRRoxvqqTP8W6SegmgdFeucs4wsuLuuoSpgfrP5+s
- Y68A==
+ :cc; bh=afR8Dz+dAOb0WF9kUPyQz/FYT6XDG9HG3Dp3S4kuoYM=;
+ b=CkFBvsBzeA2mRiIECxE6jYkf0FZ5SGfzA6h0vcC8qzlhyadASvtQawSAgbayMEVvC0
+ nT9JHjw8QEj0LYAkKoL85TvIkzlxVlS7Z26JrgzCzdSFJFZxeoB280HHoDKS8eBc4xbd
+ iA3q9+ZIbWj1TQbol7hR7ejsEImxYBA98MS/aQPaAaSfIn3SPCo+153oJ1psoPt59GHg
+ zKPZobSP0RPa3nLh2QXDnDfH6rkfOZhIyJ4xVvZIFEUj8X1LNRAM0zEbEWA0MeE/Qj6a
+ Cp4j1U+h2J6q/EEf0ldJROJ7ZP1bWKEiZuWsPdlk72HFOwRuOfpwMKM25TpDdqwLFPDh
+ hZ9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cG3bcLQyGDeBGMCVs6EtuMtBLgQGNDzJqzaq/Egxg74=;
- b=f8BfYcIUYF9RVfvYVYlTftLyxCLfe+2ZS2sEQM0wU/zMdsScVZA1R/bfKWXBxaQSOh
- NvTlRong7APJOsKAQZBD3Q32QJPdhrywI32YrGaGtw/d8ywSFs8Nh5LAzdAT3+9vIQ9C
- xSLW+hNZKr32LmbJRA28bcaz+HglTmGY0gZaYwFoO/d1jUSYBTBAJnah68eH+b9bcgge
- IA6s0ptf2VcKRBr/26rh4DX1lAZSwanp675ZjoJ530D+Xst/IdhA6/FDB01R7LqJFngz
- JLsNfAUb+qKTP9BbAJ2mqZNZbyYhXE0uZCuVPhYN2L9qSOjo/o25MgUsZCOUDTqkHXoy
- mJmw==
-X-Gm-Message-State: AOAM530r2a4/T09k9F0v3WG10CBbdhjO1QJ0wlwrhkkO2y4bY/5w9O6j
- CwcLQgrHTieWmX8Z3Fh+jR/lKQD7sBzbMVBhlQZ+2q9iMA+b88LR
-X-Google-Smtp-Source: ABdhPJxni7bobjMbj4DcH1MM+9swBS10c/yAlOqYZgNhTS99fPui8omWjUrDzU6+nrDzEUny1sGbIlI3L3F+hHpdWd8=
-X-Received: by 2002:a05:6602:2599:: with SMTP id
- p25mr1548490ioo.90.1634772417097; 
- Wed, 20 Oct 2021 16:26:57 -0700 (PDT)
+ bh=afR8Dz+dAOb0WF9kUPyQz/FYT6XDG9HG3Dp3S4kuoYM=;
+ b=k+TTnUIbtxMpHaWMPwA6d7u2OdDgwCWF/q4MqDn4mLMsU0vDx3ItZixVAt9sOdAZRs
+ AAHiDci+nPgrZ/cKIG9mmDk/kZBSgYsU1tSI/jIwHvrkn2IcsZwMYQzTJS0CSoot2aEl
+ 1eTbP+hmQDoJnvDgsBGpOeknnEv2mMjVJ1gsiZp44boug/ICon9ZsJiaVOQUTEnrELPN
+ c3VMzr1rU9WdaViy2Jopap+bj4QJr94y7pOID+cP5Tt7QY72ib6MoDFT7iZiTFbcO9/F
+ +2TfEsls/AVlHC6AuRrRg/M0hvRNRsVQbKawYjil5OEOk5LhycIb2V1NduzOwIOGqmzG
+ 4cHQ==
+X-Gm-Message-State: AOAM532wbkWuftHkeGRojinpnSIV/zBvRA4e8qEMpxY3VlTif0vDW9DR
+ H/v6kh5yrlS/p5w9d4m+O/kTN4Pa6zh07GZFsr4=
+X-Google-Smtp-Source: ABdhPJwSa/yRdUBWiqS9uO73eCr4yUCkumQUlln0FiB4fBoVMs9qAnWr81Yte1nO24ZE6k/Qh0jiBNXQ9Ugwz8CjMOo=
+X-Received: by 2002:a05:6e02:214a:: with SMTP id
+ d10mr2111916ilv.290.1634788587413; 
+ Wed, 20 Oct 2021 20:56:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211020030653.213565-1-frank.chang@sifive.com>
- <20211020030653.213565-9-frank.chang@sifive.com>
- <CAKmqyKPrKaRt=m9BBjYJyF4844kkuTKXod8FWjNkHMDCe7ukXQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKPrKaRt=m9BBjYJyF4844kkuTKXod8FWjNkHMDCe7ukXQ@mail.gmail.com>
+References: <20211020101935.1369682-1-space.monkey.delivers@gmail.com>
+ <20211020101935.1369682-5-space.monkey.delivers@gmail.com>
+In-Reply-To: <20211020101935.1369682-5-space.monkey.delivers@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Oct 2021 09:26:31 +1000
-Message-ID: <CAKmqyKN_DZhDcexuFme8B8baX4pFnWUpP=WwSVM29O5qG83cqw@mail.gmail.com>
-Subject: Re: [PATCH v4 8/8] target/riscv: zfh: add Zfhmin cpu property
-To: Frank Chang <frank.chang@sifive.com>
+Date: Thu, 21 Oct 2021 13:56:01 +1000
+Message-ID: <CAKmqyKOiE-m1SWKpDgKcoQAD-Lb7ze3YcoOHHRjh9FzgdmeTRA@mail.gmail.com>
+Subject: Re: [PATCH v15 4/8] [RISCV_PM] Add J extension state description
+To: Alexey Baturo <baturo.alexey@gmail.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ space.monkey.delivers@gmail.com, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Dave Smith <kupokupokupopo@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,44 +77,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Oct 2021 23:27:02 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 03:56:30 -0000
 
-On Thu, Oct 21, 2021 at 9:25 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Wed, Oct 20, 2021 at 8:24 PM Alexey Baturo <baturo.alexey@gmail.com> wrote:
 >
-> On Wed, Oct 20, 2021 at 1:13 PM <frank.chang@sifive.com> wrote:
-> >
-> > From: Frank Chang <frank.chang@sifive.com>
-> >
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
->
-> Alistair
->
-> > ---
-> >  target/riscv/cpu.c | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 8c579dc297b..4c0e6532164 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -602,6 +602,7 @@ static Property riscv_cpu_properties[] = {
-> >      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> >      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> >      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
-> > +    DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+> Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 
-Do you mind rebasing this on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> >      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> >      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> >      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> > --
-> > 2.25.1
-> >
-> >
+> ---
+>  target/riscv/machine.c | 27 +++++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
+>
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 16a08302da..ae82f82525 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -84,6 +84,14 @@ static bool vector_needed(void *opaque)
+>      return riscv_has_ext(env, RVV);
+>  }
+>
+> +static bool pointermasking_needed(void *opaque)
+> +{
+> +    RISCVCPU *cpu = opaque;
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    return riscv_has_ext(env, RVJ);
+> +}
+> +
+>  static const VMStateDescription vmstate_vector = {
+>      .name = "cpu/vector",
+>      .version_id = 1,
+> @@ -138,6 +146,24 @@ static const VMStateDescription vmstate_hyper = {
+>      }
+>  };
+>
+> +static const VMStateDescription vmstate_pointermasking = {
+> +    .name = "cpu/pointer_masking",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .needed = pointermasking_needed,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINTTL(env.mmte, RISCVCPU),
+> +        VMSTATE_UINTTL(env.mpmmask, RISCVCPU),
+> +        VMSTATE_UINTTL(env.mpmbase, RISCVCPU),
+> +        VMSTATE_UINTTL(env.spmmask, RISCVCPU),
+> +        VMSTATE_UINTTL(env.spmbase, RISCVCPU),
+> +        VMSTATE_UINTTL(env.upmmask, RISCVCPU),
+> +        VMSTATE_UINTTL(env.upmbase, RISCVCPU),
+> +
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+>      .version_id = 2,
+> @@ -189,6 +215,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          &vmstate_pmp,
+>          &vmstate_hyper,
+>          &vmstate_vector,
+> +        &vmstate_pointermasking,
+>          NULL
+>      }
+>  };
+> --
+> 2.30.2
+>
+>
 
