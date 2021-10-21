@@ -1,70 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdTgg-0006Kz-SC
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 04:44:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42302)
+	id 1mdTkT-0003iw-3h
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Oct 2021 04:48:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42936)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mdTgd-0006JQ-AQ
- for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 04:44:32 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:56984)
+ id 1mdTkQ-0003hN-8w
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 04:48:26 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:36270)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1mdTgb-0008S3-DI
- for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 04:44:31 -0400
+ id 1mdTkM-0003G4-9M
+ for qemu-riscv@nongnu.org; Thu, 21 Oct 2021 04:48:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634805867;
+ s=mimecast20190719; t=1634806101;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/VYcyTiqdNF0X5alpwNIr56ZKYLtlXKC78TR/mAjCIU=;
- b=NWFDieEayhZwFzZEKgcclwS5PQjn+pVtd7YNTZRyX6LdzOAE+o1pLkXcqcT15+ct4YVwtZ
- HdNJUadjK1IXSI+/gCVZEEXYoZFC+7Gux3v/0YNvJ3tYkAFwJF3o8jbFBJ+Rqx8FqkT+Zy
- AUCq2sAZ4nDQR4/yQIxj9VGAfNXf5Ro=
+ bh=i4uo4X8/KeEcW+kiLaeK3kYzS+ZjsIEI0o6acD5tpE8=;
+ b=JIYxSC8IidgRkebTCo8aLmCi3z5RH9b/nTbWQkwhztWciInDy7RTVAKt0m9ZMuSxU6xo7c
+ hJymYGUa2KFX/43lW7pW/Uu9jL26uC5hCFKQasJ99VBL5Vb7cOqcAFzgBsCOgCtrRjrrDI
+ kIeuNTul+NDB+vFrpl3kwwx8zmt4U2U=
 Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
  [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-229-KXMQNTyJMQykOZ7IzwjGyQ-1; Thu, 21 Oct 2021 04:44:24 -0400
-X-MC-Unique: KXMQNTyJMQykOZ7IzwjGyQ-1
+ us-mta-369-DhClodLnP-mhRe1iwpYdMQ-1; Thu, 21 Oct 2021 04:48:20 -0400
+X-MC-Unique: DhClodLnP-mhRe1iwpYdMQ-1
 Received: by mail-ed1-f71.google.com with SMTP id
- e14-20020a056402088e00b003db6ebb9526so23537737edy.22
- for <qemu-riscv@nongnu.org>; Thu, 21 Oct 2021 01:44:24 -0700 (PDT)
+ v2-20020a50f082000000b003db24e28d59so23598334edl.5
+ for <qemu-riscv@nongnu.org>; Thu, 21 Oct 2021 01:48:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=/VYcyTiqdNF0X5alpwNIr56ZKYLtlXKC78TR/mAjCIU=;
- b=tUCoxinpCDnymMyd6/8ivdIetJztLQ4L0PWdcxZGiVxPolWUEzfVycHQ3ZfYi22WcD
- 8IAssd7v39rT+aguliH/gbUdxhpAsm3KSDVIw/83ZA1v0U4mQKlMhlsjsQ67rUcYcbK1
- u2v+aUphMXa3otXF4poiPSDuhVsLRKdgTu+h5G1wV4IMWL+ganEviZ7K/ax16ZuRqpDH
- 93RoWSkpyqwRzGOv5gJjxlTHQddplz045+Le8aC0qh3iE9zRh3YdYSHCNqPTvADBPDZb
- Cjbiehyyf+FEpgz/lMIx0oaFjMUdrwcxsF62kQQUP8hjg1qgH4KOFHuf2Xk1PGmE5Su6
- 6HKw==
-X-Gm-Message-State: AOAM533FTCEmrrpZmMOTaAAnhxy/cZONL7mQ6ozRIUg3u/S69NvZfaEG
- ve+eC7AEYzVffHIQuCmoG0xj+Wo89H+yGD59U5AE9KC9uzhmOega7w+eGbLDbSB92YN6cxmXXun
- ZBv8tEdf5FxVgKJg=
-X-Received: by 2002:a17:906:e85:: with SMTP id
- p5mr5657235ejf.159.1634805863457; 
- Thu, 21 Oct 2021 01:44:23 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzc0d8pWxp44ZQSazS0mijFzCbuLRL/Ynyv2D+FHrkuPeFVadPbmSyR7VGr53SzTGhM9X8NBA==
-X-Received: by 2002:a17:906:e85:: with SMTP id
- p5mr5657220ejf.159.1634805863253; 
- Thu, 21 Oct 2021 01:44:23 -0700 (PDT)
+ bh=i4uo4X8/KeEcW+kiLaeK3kYzS+ZjsIEI0o6acD5tpE8=;
+ b=UowWBUflf3XkcUK0hsPjFz1qtBMJm5Nx5y/+DvUDWy51DgnlsY7LV5vzQk0L3A/3Cv
+ 8EofnsS+tK8/em2Dub72guab3bDv1dX4CB5vuTOVb5Ol8deOEaLy1kXc4zGuyt/1SuSz
+ ds4P/voA3iUuYx4BAqUru9bkyjK5cYf7JfIFHfwn8I5GfSpvZBanuZe57TADemSbPUdJ
+ g1vvQzaDqLNC1xkgnbfWj+MxNxntV1hO/grCoMvhxkuWw2olhRRSYxQg9/jDfb4Thz13
+ HeXbTibn7TGdss+zIZmTGMK5Nly9rI+urGCMZyGyVUxU9JsuiMjIxvaAjiqKjKKFsbuU
+ q1vg==
+X-Gm-Message-State: AOAM533FmPx2gYi4KKqPjUnExspKsp+zCIZ9zHDGohMA6qIcrGf4ZzAM
+ EwJuNfjQfQ2rMIyVm8hNjP810Xx60d0xij1MZDb2ZpHq/nXd/VZE9Q43MWnnAYkMxTEER+rRBzq
+ zgBzNiyQzF5rV1xI=
+X-Received: by 2002:a50:fd9a:: with SMTP id o26mr5992475edt.352.1634806099284; 
+ Thu, 21 Oct 2021 01:48:19 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwqRI/7lxHLR6Lf8i50qjkvr9KGuHpVktLXQ7F5g2ZH9wskdzC2rzTDN0ALmFpW5xfbPJ7cbQ==
+X-Received: by 2002:a50:fd9a:: with SMTP id o26mr5992453edt.352.1634806099143; 
+ Thu, 21 Oct 2021 01:48:19 -0700 (PDT)
 Received: from localhost (nat-pool-brq-t.redhat.com. [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id kw10sm2181305ejc.71.2021.10.21.01.44.22
+ by smtp.gmail.com with ESMTPSA id u23sm2211010ejx.99.2021.10.21.01.48.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Oct 2021 01:44:22 -0700 (PDT)
-Date: Thu, 21 Oct 2021 10:44:21 +0200
+ Thu, 21 Oct 2021 01:48:18 -0700 (PDT)
+Date: Thu, 21 Oct 2021 10:48:17 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
  <philmd@redhat.com>
-Subject: Re: [PATCH v2 2/6] hw/riscv: opentitan: Use MachineState::ram and
- MachineClass::default_ram_id
-Message-ID: <20211021104421.203a387b@redhat.com>
-In-Reply-To: <20211020014112.7336-3-bmeng.cn@gmail.com>
+Subject: Re: [PATCH v2 1/6] hw/riscv: microchip_pfsoc: Use MachineState::ram
+ and MachineClass::default_ram_id
+Message-ID: <20211021104817.7db6a276@redhat.com>
+In-Reply-To: <20211020014112.7336-2-bmeng.cn@gmail.com>
 References: <20211020014112.7336-1-bmeng.cn@gmail.com>
- <20211020014112.7336-3-bmeng.cn@gmail.com>
+ <20211020014112.7336-2-bmeng.cn@gmail.com>
 X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
@@ -81,7 +79,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -94,9 +92,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Oct 2021 08:44:32 -0000
+X-List-Received-Date: Thu, 21 Oct 2021 08:48:26 -0000
 
-On Wed, 20 Oct 2021 09:41:08 +0800
+On Wed, 20 Oct 2021 09:41:07 +0800
 Bin Meng <bmeng.cn@gmail.com> wrote:
 
 > Using memory_region_init_ram(), which can't possibly handle vhost-user,
@@ -106,9 +104,6 @@ Bin Meng <bmeng.cn@gmail.com> wrote:
 > region, as well as by providing MachineClass::default_ram_id to
 > opt in to memdev scheme.
 > 
-> While at it add check for user supplied RAM size and error out if it
-> mismatches board expected value.
-> 
 > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
 Reviewed-by: Igor Mammedov <imammedo@redhat.com>
@@ -117,62 +112,82 @@ Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 > ---
 > 
 > Changes in v2:
-> - add RAM size check
-> - assign mc->default_ram_size
+> - split RAM into low and high regions using aliases to machine->ram
+> - rename mc->default_ram_id to "microchip.icicle.kit.ram"
 > 
->  hw/riscv/opentitan.c | 16 ++++++++++++----
->  1 file changed, 12 insertions(+), 4 deletions(-)
+>  hw/riscv/microchip_pfsoc.c | 36 ++++++++++++++++++++----------------
+>  1 file changed, 20 insertions(+), 16 deletions(-)
 > 
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 9803ae6d70..5d568ea58a 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -19,6 +19,7 @@
->   */
->  
->  #include "qemu/osdep.h"
-> +#include "qemu/cutils.h"
->  #include "hw/riscv/opentitan.h"
->  #include "qapi/error.h"
->  #include "hw/boards.h"
-> @@ -64,20 +65,25 @@ static const MemMapEntry ibex_memmap[] = {
->  
->  static void opentitan_board_init(MachineState *machine)
->  {
-> +    MachineClass *mc = MACHINE_GET_CLASS(machine);
->      const MemMapEntry *memmap = ibex_memmap;
->      OpenTitanState *s = g_new0(OpenTitanState, 1);
->      MemoryRegion *sys_mem = get_system_memory();
-> -    MemoryRegion *main_mem = g_new(MemoryRegion, 1);
-> +
-> +    if (machine->ram_size != mc->default_ram_size) {
-> +        char *sz = size_to_str(mc->default_ram_size);
-> +        error_report("Invalid RAM size, should be %s", sz);
-> +        g_free(sz);
-> +        exit(EXIT_FAILURE);
-> +    }
->  
->      /* Initialize SoC */
->      object_initialize_child(OBJECT(machine), "soc", &s->soc,
->                              TYPE_RISCV_IBEX_SOC);
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index e475b6d511..3fc8545562 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -463,7 +463,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>      MemoryRegion *mem_low_alias = g_new(MemoryRegion, 1);
+>      MemoryRegion *mem_high = g_new(MemoryRegion, 1);
+>      MemoryRegion *mem_high_alias = g_new(MemoryRegion, 1);
+> -    uint64_t mem_high_size;
+> +    uint64_t mem_low_size, mem_high_size;
+>      hwaddr firmware_load_addr;
+>      const char *firmware_name;
+>      bool kernel_as_payload = false;
+> @@ -485,31 +485,34 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>                              TYPE_MICROCHIP_PFSOC);
 >      qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
 >  
-> -    memory_region_init_ram(main_mem, NULL, "riscv.lowrisc.ibex.ram",
-> -        memmap[IBEX_DEV_RAM].size, &error_fatal);
->      memory_region_add_subregion(sys_mem,
-> -        memmap[IBEX_DEV_RAM].base, main_mem);
-> +        memmap[IBEX_DEV_RAM].base, machine->ram);
+> +    /* Split RAM into low and high regions using aliases to machine->ram */
+> +    mem_low_size = memmap[MICROCHIP_PFSOC_DRAM_LO].size;
+> +    mem_high_size = machine->ram_size - mem_low_size;
+> +    memory_region_init_alias(mem_low, NULL,
+> +                             "microchip.icicle.kit.ram_low", machine->ram,
+> +                             0, mem_low_size);
+> +    memory_region_init_alias(mem_high, NULL,
+> +                             "microchip.icicle.kit.ram_high", machine->ram,
+> +                             mem_low_size, mem_high_size);
+> +
+>      /* Register RAM */
+> -    memory_region_init_ram(mem_low, NULL, "microchip.icicle.kit.ram_low",
+> -                           memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> -                           &error_fatal);
+> -    memory_region_init_alias(mem_low_alias, NULL,
+> -                             "microchip.icicle.kit.ram_low.alias",
+> -                             mem_low, 0,
+> -                             memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].size);
+>      memory_region_add_subregion(system_memory,
+>                                  memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+>                                  mem_low);
+> +    memory_region_add_subregion(system_memory,
+> +                                memmap[MICROCHIP_PFSOC_DRAM_HI].base,
+> +                                mem_high);
+> +
+> +    /* Create aliases for the low and high RAM regions */
+> +    memory_region_init_alias(mem_low_alias, NULL,
+> +                             "microchip.icicle.kit.ram_low.alias",
+> +                             mem_low, 0, mem_low_size);
+>      memory_region_add_subregion(system_memory,
+>                                  memmap[MICROCHIP_PFSOC_DRAM_LO_ALIAS].base,
+>                                  mem_low_alias);
+> -
+> -    mem_high_size = machine->ram_size - 1 * GiB;
+> -
+> -    memory_region_init_ram(mem_high, NULL, "microchip.icicle.kit.ram_high",
+> -                           mem_high_size, &error_fatal);
+>      memory_region_init_alias(mem_high_alias, NULL,
+>                               "microchip.icicle.kit.ram_high.alias",
+>                               mem_high, 0, mem_high_size);
+> -    memory_region_add_subregion(system_memory,
+> -                                memmap[MICROCHIP_PFSOC_DRAM_HI].base,
+> -                                mem_high);
+>      memory_region_add_subregion(system_memory,
+>                                  memmap[MICROCHIP_PFSOC_DRAM_HI_ALIAS].base,
+>                                  mem_high_alias);
+> @@ -606,6 +609,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc, void *data)
+>                     MICROCHIP_PFSOC_COMPUTE_CPU_COUNT;
+>      mc->min_cpus = MICROCHIP_PFSOC_MANAGEMENT_CPU_COUNT + 1;
+>      mc->default_cpus = mc->min_cpus;
+> +    mc->default_ram_id = "microchip.icicle.kit.ram";
 >  
->      if (machine->firmware) {
->          riscv_load_firmware(machine->firmware, memmap[IBEX_DEV_RAM].base, NULL);
-> @@ -95,6 +101,8 @@ static void opentitan_machine_init(MachineClass *mc)
->      mc->init = opentitan_board_init;
->      mc->max_cpus = 1;
->      mc->default_cpu_type = TYPE_RISCV_CPU_IBEX;
-> +    mc->default_ram_id = "riscv.lowrisc.ibex.ram";
-> +    mc->default_ram_size = ibex_memmap[IBEX_DEV_RAM].size;
->  }
->  
->  DEFINE_MACHINE("opentitan", opentitan_machine_init)
+>      /*
+>       * Map 513 MiB high memory, the mimimum required high memory size, because
 
 
