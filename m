@@ -1,63 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mdw0O-0006Wu-GU
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Oct 2021 10:58:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51534)
+	id 1mdwoR-0005sY-EA
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Oct 2021 11:50:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35322)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdw0L-0006Qf-55; Fri, 22 Oct 2021 10:58:46 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:41746)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mdwoP-0005sO-VD
+ for qemu-riscv@nongnu.org; Fri, 22 Oct 2021 11:50:30 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:39487)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mdw0H-0002QW-GP; Fri, 22 Oct 2021 10:58:44 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id i9so7553756ybi.8;
- Fri, 22 Oct 2021 07:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Z0c1JyvVtjuZpSKhS0t0Y5KwURHtkqj3x3VO5PMsQFI=;
- b=Jl7Y8uklN5q9/Rc5PLtCPdoj/RQYf3mMydl1Yufde2PnnwdIdcGOObuwopDM0iPVNp
- 72UmW7NYTKzNfHNwgnWQ7M8JZ045j6DGoEC62gRD0Ai/yk3E18gGlaZDcdArhOLlLXB+
- b4chFTX5qCqx8m9UVlU/btOZLfhNT/CcOI9Iq356gd9+2aYVjybRRNtPaI6ctf4NFDwW
- 37XZ7GptqqsJjDnOybkp3Z7YQCe0jfF/RYHPbKL+4qcCCoxwxEkFRTIdxlRsirM5mxQw
- t/BDiLW+H2lGl1XWvBLF9ruuJBDfOkQnhRYBhwJYdLm+NKojVLGta9V81UC4nDVuV7cr
- oadA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mdwoO-0005L1-1x
+ for qemu-riscv@nongnu.org; Fri, 22 Oct 2021 11:50:29 -0400
+Received: by mail-pl1-x634.google.com with SMTP id t21so2985513plr.6
+ for <qemu-riscv@nongnu.org>; Fri, 22 Oct 2021 08:50:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=/k78r9TOpzMGeCSgwphBAV2290c1xHlDk+JIv6/QwiU=;
+ b=ESuRvEIXvYAPhgm71Zf+r1TjHdLS3HT7M/patiaOhbXXRslG3RIXuX/HHNSIeSgjex
+ Eqb55uYlVc/6q2M9r8RjKp7zh8ye81O5OnvjDy6N8174yBhaoe7wykFT42abEG9kpfAI
+ IOpisH/0v8DUj/0MMTtYLfPvcejL8zahTGZM2ArJlN5wuI+GTZcbYPAuRO5ERL64wSG7
+ uDs4ETKsfylpAL3893BQtw/8gqXjH0GbGLtN8hYi0liIqAJMwSRueKT23VKHa1HEHUU/
+ MA6qU3bm++h3NQTJbd/G4GoLagxGXbyvraTAt4nwCJJl+EEiYmXs63q7EQdKl6sr4IhW
+ jvow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Z0c1JyvVtjuZpSKhS0t0Y5KwURHtkqj3x3VO5PMsQFI=;
- b=1iVyq1RPptxEQtdffjuriCnVSGlaBp5g9J6I6idxwm+BlJa/lxEaVIl3e1NDnLTAJt
- GqUpzQc+WEOWIwEfuHEHQ8LsKsgij0wNuRXeUblErb3vlmkeo+NXknZyTPYLQ9LiiUha
- Sf1jhk0akmxzNSrN35sQaTEPNqTzvC6BV6G80wRSLou0JQ0wpcqe/mhuyN95ayNd/dO+
- trXG1VrzUGuQfsF4E0bQm/QDP5egwwaYhBBT65+BB6423kxzhkSLd0MI8aZE7c8D3pDr
- FZQiKvinACXILSJARXCfI1kgmP8O3alFyg8w4H65RkzUlyzrqdKrb8hxEOc2ICnIUt21
- FQYQ==
-X-Gm-Message-State: AOAM533KdFwSaVQPghjI/3C48aA4ekGA2fU3ZFPgXVc1laeeJt07nvk4
- fmKmr9kloIvS0pZ/VpGLVXKv31iZ1+37VL4OBWE=
-X-Google-Smtp-Source: ABdhPJxvfFO4asrwdOKoCN/eszWMZ0JysK7ToMViLELV0zSJn3NqehgW1qvCoIH5AkZPu9zQsAGd1y0Vf5H/B8hz2Jw=
-X-Received: by 2002:a25:c750:: with SMTP id w77mr189687ybe.109.1634914717998; 
- Fri, 22 Oct 2021 07:58:37 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=/k78r9TOpzMGeCSgwphBAV2290c1xHlDk+JIv6/QwiU=;
+ b=uf3SZE3hfePEKs89SggLmrUXMLg+BHXTr2unZVBiP0e3sCNrQZZUHJxrwpVXTufqfa
+ MVFygSVxD7YPS17G5QePF18I/g2MzCh4+/qmEtKZunIFMRCXtYaJXcU9vNplVjoJOreO
+ cmFfQHeEhFnfUVYfGx2PTrHG0uu/CULH5hUqwpSZtcExGXJV3YquTFxHOlioaZLFETMN
+ ofdlQTNaY7JsGN1ZSGG16WGUvdE67zhMvyoTKJtTI3QigkZMg+thCANYVluFyVrZZut2
+ aKZYpiK+gUx/TtUHt3seeCM3of/b9r/lKeKI4uNplsO7R7aOZiE0A0Y6k09a0qc7wDae
+ H5Uw==
+X-Gm-Message-State: AOAM533/maeYMDo5SSnNEJa7yg0r9YLCmigoFKBhO0WHBfD24RnC14kV
+ l2JIgr8k3wdOnGaE+6GTDJbIlQ==
+X-Google-Smtp-Source: ABdhPJzSDZm2LSjqC8CYiosyajBOKDx8LS9j+0gezERsNd+UvbpTTcL0ZCabo0h+OQPdjtpwY+ZbWQ==
+X-Received: by 2002:a17:902:930c:b0:13e:42b4:9149 with SMTP id
+ bc12-20020a170902930c00b0013e42b49149mr537588plb.86.1634917826396; 
+ Fri, 22 Oct 2021 08:50:26 -0700 (PDT)
+Received: from [192.168.1.11] ([71.212.134.125])
+ by smtp.gmail.com with ESMTPSA id q13sm11981024pfj.26.2021.10.22.08.50.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 Oct 2021 08:50:25 -0700 (PDT)
+Subject: Re: [PATCH v6 00/15] target/riscv: Rationalize XLEN and operand length
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
+References: <20211020031709.359469-1-richard.henderson@linaro.org>
+ <17397bbe-7dfe-ac2e-6033-4ab4840a11bd@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <663d5df5-c107-c4ce-99e0-2a5d336a69ca@linaro.org>
+Date: Fri, 22 Oct 2021 08:50:24 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20211022060133.3045020-1-alistair.francis@opensource.wdc.com>
- <20211022060133.3045020-5-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20211022060133.3045020-5-alistair.francis@opensource.wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 22 Oct 2021 22:58:27 +0800
-Message-ID: <CAEUhbmXmt46HkoKDTy-hDjM-PdWpqgg976fhUvJZW1nJPTRqmQ@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] hw/riscv: virt: Use the PLIC config helper function
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair23@gmail.com>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+In-Reply-To: <17397bbe-7dfe-ac2e-6033-4ab4840a11bd@c-sky.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -37
+X-Spam_score: -3.8
+X-Spam_bar: ---
+X-Spam_report: (-3.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.742,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -72,19 +81,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Oct 2021 14:58:46 -0000
+X-List-Received-Date: Fri, 22 Oct 2021 15:50:30 -0000
 
-On Fri, Oct 22, 2021 at 2:02 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/riscv/virt.c | 20 +-------------------
->  1 file changed, 1 insertion(+), 19 deletions(-)
->
+On 10/22/21 1:26 AM, LIU Zhiwei wrote:
+> As the specification said, "PC bits above XLEN are ignored, and when
+> the PC is written, it is sign-extended to fill the widest supported XLEN."
+> We still need special process of PC for exceptions or jump instructions.
+> 
+> I have two methods to implement  PC register access,
+> but not sure which is the right way.
+> 
+> First, normally process the PC register as the specification points.
+> That means expanding  the PC when setting the global TCGv variable
+> cpu_pc, and truncating the pc_first and  pc_next fields in
+> DisasContextBase before decoding instructions.    I am not sure
+> whether the sign-extended pc is compatible with QEMU common code.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
+I think extending on write is the correct thing.  Jumps, exception entry and return, gdb 
+write.
+
+Note that the read from PC for translation is in cpu_get_tb_cpu_state, before translation. 
+  You should not need to change anything wrt pc_first/pc_next/etc, because it will already 
+have been done.
+
+> Second,  ignore ignore the PC special process for jump instructions.
+> Just expand or truncate the PC register when exception processing,
+> gdb read, or cpu dump registers. It is not a stright way,  but I think it is still right.
+
+I think you could make it work that way, but I don't know that it's less difficult, or 
+that you'd have fewer changes.
+
+
+r~
 
