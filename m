@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1meChg-0003cy-7R
+	id 1meChg-0003dk-Eh
 	for mharc-qemu-riscv@gnu.org; Sat, 23 Oct 2021 04:48:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51876)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51890)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=92346df24=Anup.Patel@wdc.com>)
- id 1meChX-0003OH-Pr; Sat, 23 Oct 2021 04:48:28 -0400
-Received: from esa3.hgst.iphmx.com ([216.71.153.141]:22454)
+ id 1meChb-0003RT-4h; Sat, 23 Oct 2021 04:48:32 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:22465)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=92346df24=Anup.Patel@wdc.com>)
- id 1meChU-0007H2-6t; Sat, 23 Oct 2021 04:48:27 -0400
+ id 1meChX-0007M3-SP; Sat, 23 Oct 2021 04:48:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1634978903; x=1666514903;
+ t=1634978906; x=1666514906;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=T8uzaFLPBg6czKLGT0WUHEYuqiI70L7zm/107lFdDjw=;
- b=iudIOZannu30nmq3YQBGHHvF7K55IyRgnjSXngOnCZghPaZoR6mBhL9y
- wZG7Lgeki9doupE3fn/H07OP1Y2vZk7/L3+Tav+i1rTYVDCQZZg/ZRP8X
- DcromMA0FuwTT5RIyRQ00M3U5/Wh0+5xGAjv59z6NhkU6WJn3BtGtTUQN
- HeN0l7McIFRAdJjCKPZb0U4cViy8gtLFk6AhO05+RitXE1DadoJS/fKyU
- iqFQhTKJhyD16EHv18SiuPhJg47wt+IjylZfpE5QMpxRrhvTeoZzIxu//
- lDW1DoXeBE9NUt5O44FWWaOcFveBpTRb7C/UaTKRtrTdyRytZC6q7Zc8y Q==;
-X-IronPort-AV: E=Sophos;i="5.87,175,1631548800"; d="scan'208";a="188437389"
-Received: from mail-dm6nam10lp2106.outbound.protection.outlook.com (HELO
- NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.106])
- by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2021 16:48:21 +0800
+ bh=Ak0uup0d96hc2wxT3jDMK4AIjD0uXa2oJIOfn+7lg6M=;
+ b=YpIJgZ4HLH0Zf3gTU8SAf+x7RZbdACLKOUocuXWBAn6s/OaTi47nhZtB
+ rAuOLxSSZ1Fxo1LrM0oOiUv3tFI4IRukZPs8ave5hasXbz3OS1WR70jbP
+ jysT1MXOxBT5VYZsn5nFljjpfOaT61tNoHWBli03dBoiDj51u4qc9Nn5+
+ t/UO7YUOadKdd+57uii8XwpNgbrJS8pa6puqLhYQ0RpuvY9bMqkx6vUpY
+ AXgXnuyGALQG7RPi8Qw1uiQ0W/nEOIYoqbJfMPa3Oy0DyhZULtXF6R0xE
+ 5weCZXq8hUE1E4/+td9Qe6nuTCboh9+DRu1Nw7cUS6dgHDmi6a9mxtp9X Q==;
+X-IronPort-AV: E=Sophos;i="5.87,175,1631548800"; d="scan'208";a="188437390"
+Received: from mail-dm6nam10lp2107.outbound.protection.outlook.com (HELO
+ NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.107])
+ by ob1.hgst.iphmx.com with ESMTP; 23 Oct 2021 16:48:23 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=futGCBtenVWrOTxMp0sbqMTpmIxNtJdMeeyvQItD6Yxzr5wVrfy5H4teFRETloLgSnEJNd5Xh1Kfx+0xYNfJC6q+CSgnOxc+ZicVdWSekaGHFmt+feT07hNRR+76H6mYmqY5ai+mTncYCrckvMQx/CdrZRWLBa14/sxJ0splPTxOViC8z8gMYNcdYoB7sjH1izJhUzMPub55YJpwIjVE2GWqxV5XYraVBnEMA5rUENI1YeUYhFc5T+DTXcvXVPsKA90FBdseq+PXe3uJZQQpKjVFwjAl4jXYjhlPmmZHhojh7hKc8FP+kY4lgNwSA/e1tOtfd28HpC5CbIYTRgWXTQ==
+ b=KPpKcQFWoUtpXhWEt7FHpbXMDqUopAprNocpZqAAIBdgIIi5YmgI0T76pNt0RHh5w9RudOoV1lM6HByNJJ6fF2FonzeZKN3FfXOjmEvqXiT8dKc32OxmXC4Ih0qem7Vu5LnmlNChwE6/159Y9timqTvq24Hvsu3JfeuVwHFZfePFp409QYfSJxnjCSZ1AD3T3dXafYHv6TJm9n5JNXwoalwKv0kZtMybOV1FN8p/ZEoXdg0X2EYKaqVqqQoP36G2XH4E7im4aeB1W/hNGMAwCW72EObDtU07xOcWdNO3CSd44lHjGgCi2/lrtmSnn9tGf2ujPna45j0Osge2eHyl3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1CXhq8zkmAtHMaUTZtIm/NrhBctS4MZ7WNweQodPMKk=;
- b=ZtReoWHrryWh5XPEHDvsl82wuyiDodzADSIJnEEHTCDMMWPpz39kRyz5b0bF/k3FsjrHhqFZHUnO4IyARfZZHtQnnSTS50rwwxGfkPeSNk/8mJefRNkf87E2dR34blFy/zV3xf18yxXudlnHMzqXrhNL3xq6Z1BU5ZhWAsSmQjCAAcgmaUJ/n7fXsfyJIXO3daVLgtzfuHukQ2jtwIZJ1zNiG5kRisNx1+vmWoWc7tXXSJcX+JqXY5YKvCgYWD6CNP1+HQ7xKjEyS0pLgJc6CnwzByuKSQfGd5q1Ab81HXYHOvOx5hECGYRT2ktWZy9sjEs14WqPXEVmRGltRZrXfQ==
+ bh=wPJSo40mxOP2XRJtZP9ssE6sYMVg/ZRrTALtjXTtDP8=;
+ b=bdJ60KKnZcz+aJn3a6UeZiTnb5gUuygcq1J+yoLtbrVbIv0m4JcijNhIyYLmCFqLiy4/l5K5vgIu/5jPS2ToFh8SguB5CFJtBBBbEgtJR2MzU2OS9f36EqgoG7+gfr13dIluUo6Twf5lsBtYgSzqLA0A1jwq1F9yZ9c4qyhfbd3b7nEphn+gICNCW8i2Z3ZfwCGI2xdzjPBo463v8FpHsUGLxDI8yY9NN657r8ZCa9IAmbTX5ZJxI76CppKMMgmQIuReEArZ30lgt/De/XgKZ9d5IB+S+iR2hIDkohGNmd6k+cSDynR+40yssTEJi9fMnIyJNk2Y69P9YMSwgpWsAA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1CXhq8zkmAtHMaUTZtIm/NrhBctS4MZ7WNweQodPMKk=;
- b=OFnT3lRaymcdYwT9pP+3p1e8/o7cVVDUr1yab6niDzUqZn4dv5NTSfYEItatvrnyycbmKIQvK5mQ3xMEeBbfxWGay4x9Grftndjv42ra5RY4qoorLbH9/4oSMXAojVTU4Qruc+1+K9yJnIUE5Y1ATHdEjopTlm5IoQ3kB3/zL98=
+ bh=wPJSo40mxOP2XRJtZP9ssE6sYMVg/ZRrTALtjXTtDP8=;
+ b=DaBDRO2/FntPB0Ek0SUQSUTrXwfBGUvQg12Jsu+KSA2qGwZfb5G3w2pvgMYe4CNFsUG5fHAkjYE07PWiBIObhfyS/7POx6j1WqpYFk08/77B3XfoYWLKgjET1/WG/RH+ZEtI8yEJRlqpbEbQ/gSG/7jV2/0kzUeP4cfgzdvuHbk=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com (2603:10b6:303:138::6)
  by CO6PR04MB8409.namprd04.prod.outlook.com (2603:10b6:303:140::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.15; Sat, 23 Oct
- 2021 08:48:21 +0000
+ 2021 08:48:24 +0000
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97]) by CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97%9]) with mapi id 15.20.4628.020; Sat, 23 Oct 2021
- 08:48:21 +0000
+ 08:48:24 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -59,10 +59,9 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v3 19/22] hw/riscv: virt: Add optional AIA APLIC support to
- virt machine
-Date: Sat, 23 Oct 2021 14:16:35 +0530
-Message-Id: <20211023084638.1697057-20-anup.patel@wdc.com>
+Subject: [PATCH v3 20/22] hw/intc: Add RISC-V AIA IMSIC device emulation
+Date: Sat, 23 Oct 2021 14:16:36 +0530
+Message-Id: <20211023084638.1697057-21-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211023084638.1697057-1-anup.patel@wdc.com>
 References: <20211023084638.1697057-1-anup.patel@wdc.com>
@@ -75,59 +74,59 @@ MIME-Version: 1.0
 Received: from wdc.com (122.179.82.21) by
  MA1PR01CA0111.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:1::27) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4628.18 via Frontend Transport; Sat, 23 Oct 2021 08:48:18 +0000
+ 15.20.4628.18 via Frontend Transport; Sat, 23 Oct 2021 08:48:21 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8d747de4-31be-45a8-6852-08d99601dda3
+X-MS-Office365-Filtering-Correlation-Id: 58bcea6c-d0b0-4b7b-41d1-08d99601df76
 X-MS-TrafficTypeDiagnostic: CO6PR04MB8409:
-X-Microsoft-Antispam-PRVS: <CO6PR04MB84090BE7BE484CCF0AA2018A8D819@CO6PR04MB8409.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <CO6PR04MB840964499078D8D95C9EE9558D819@CO6PR04MB8409.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:163;
+X-MS-Oob-TLC-OOBClassifiers: OLM:224;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Y8uG24XSr3lZgwaHRbdLFVr5BHefdbGx0qyngIvBbfAa5fQRmGm45Z/kduLtwdRoi8FFaOAxtcR0zbi+9lBNxleuu1M1IaAsZ6kf+IttgzUbD4fxWYL9hnSdQ0Bmfxs7cOv1+UcuT1V6Ltiw/0VeNAq9c8/ArOyb0Dt8yG+PLkxr5qV1RRigdByNAsCSEv6XzFrdyDiwwv9Ha6PyHKyu2H66zwdM80yXWkfA3BDfLq1lrDYzAC55b3Nl5KAJ1iiKQrm4mhSnAUq4h3b2iHvJUtFKAXE2linEq8/gY/WZ1YQ4i2aQ6q2sRQjoP9M7aYFi/9UbQ+K4cBjhfXdMXqpowm9gCD7vitH8XdqkV/1mlYuuml1WMrrHZbq6XumVU896QztSF9f3iAVZGkgB5TiuBVitoBZh6LtZ7R3oUdRZderQA/j+0ZFLDgJK6lGIzXwcr1qWkEElT8dfIpNwM3dKCiGT8ZDk+DV6goQxazbngYIXD0P5LbU4XWsFG0Roj70qq9XXqSzXvdplnJ60XxHTcn+nbTZtRQzpahPb1D5ZPDfygP7C3/RUZZzLM1CnxIHm6eQ8dXPy0/WDACECwd1hSXrqhS14k0iXqegmRCyzhxLHG9pBlwNaNSKoG0JJ4veuJH8JJi0KHLXakOIzjTo7fAHmasCRcK+8hVF5WtxEooy37Z50UHvcv4MgptgPxFWZ
+X-Microsoft-Antispam-Message-Info: wDZgcTR8EUAfa5eEdhjKqNdWjnCsELKYMP1JvzU6knWus7WWguh0/0XfPyV0ab/O6fw6DI3X23RubNClYWt9cRvwZtnFBPOKgk0k6FVycW7vBl+Q6KLDFeF0mt21PhAjUpeiOHYd625snJrOqzlyq/28MusiGv0XuRn65P9dKbc07wu+rXZZQ111WjLSOQ61VWnFOjOqLdBnaZP6k6yIBXMoyVkRvz5tkJFmh5CDbPnyxElKes8JgRp3f9BaRDoTIqgkXshJZmTlJ52SMjg7IhpoyzMO+mN9Zqm5JreQ4gncJ7rijSOEz1ZX36tGz+U6EyYAeVv05D9GBOwgWU6UzwPkkRde9Gro/ur/x2HPJ+Hguw3R+qKVlkiNYo9kNOLThnf9XSf9oNxHymljzImfrtBtx/Ntfn4EEWgMsrINfI8uRqg1h0hpdhZ61uLC/mKNIFBaJvJXFnicpzX8UfC8w1PheTTBNyej94iL5LgPnWYGDbwOqVzg6GfPRKDdI5UDHuDybRrACxnr8+b1Hqygtz51iEufcg9NYzQ/hFB7YO3R05gjlfWFckzfMChHIKl3gG8az1Sbix2l6r/8S3ILi7WyLzkpeB9hhTmSPej0RpAMEzU1pvR6vzoIvKsnuT9C0xDcofsdncKvnjHPfUDrqFUF0O6CmnUJMCt4rNhzk6AykaZ3XZydDu1aYgFuYP6CQyVdBQZVx9nEMDuW3tzNMlJNyaeOPkU/4qAvnYNWUJikdyTBvHMW2U570iD3VWyv6VBwQJHCO9D4VciVFpF7CltkWUjDv9CuDoNiJ5w4Dys=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CO6PR04MB7812.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(86362001)(8936002)(1076003)(66556008)(83380400001)(44832011)(186003)(6666004)(30864003)(66476007)(2616005)(8886007)(316002)(66946007)(36756003)(4326008)(26005)(110136005)(54906003)(38100700002)(55016002)(8676002)(956004)(7696005)(52116002)(38350700002)(508600001)(2906002)(5660300002)(82960400001);
+ SFS:(4636009)(366004)(86362001)(8936002)(1076003)(66556008)(83380400001)(44832011)(186003)(6666004)(30864003)(66476007)(2616005)(8886007)(316002)(66946007)(36756003)(4326008)(26005)(110136005)(54906003)(38100700002)(55016002)(8676002)(956004)(7696005)(52116002)(38350700002)(508600001)(2906002)(5660300002)(82960400001)(2004002);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ZAhheEYykZSo6+wUF00/RneK4Y9mRpYyTtKhkk7Z2rFqLm8eKox/lhI+mISe?=
- =?us-ascii?Q?pC65yNkSnia5OtNBIV0xu4SJMhww4+C6RiqmU0y/D2O8dwJv4LpFCSCOrQe9?=
- =?us-ascii?Q?dRNHta9NlLSgVYJiP9skLXyZ4IGXMvf7oYDXxEhHirLtQydUinFG9G6WdHN3?=
- =?us-ascii?Q?GKL6ynI3iTF8rrNzlMnus9qT9DkgAzQ0YGGuk6Ionth7PQtLlkTE68O+bBrc?=
- =?us-ascii?Q?TqN8SJP9yn7glIX24AB7blLJT+nerXOxcQndLmDR1yZHfG20liTrO8We/2VO?=
- =?us-ascii?Q?ZA1NX2meOoJxEksDnmz+BfrzR1DgOlKXAO9JtKhrWMkwo4lKs4bY3dH9cOvW?=
- =?us-ascii?Q?lXtLD/2OoClMN2ixmW0xWrkrvejQplMbMznb0opor1rrXYcUrgchKBOORMOb?=
- =?us-ascii?Q?HvSEP7e7ufmp8KlCR1niV+5RKUYqFkFStm6i0IfTJtmpJcGiwSi3rOc9Mkkq?=
- =?us-ascii?Q?boV8dmLoDsVEHDxeKWY7E7lNdZ+cpdyoM4l5eywYzSvJTzsnLUWYTJLz5hHD?=
- =?us-ascii?Q?3XLTsnrC7gWmkHJMkCjQoVKYkEfYclbIVvSYQ6HL5ZJVtMDi67+nxBrqjGxJ?=
- =?us-ascii?Q?NSscc2/BNv4kGAJA7JgSKKgE+HCvsmofcb4uYZe9xHbOav3TQGmW5ZakhUqC?=
- =?us-ascii?Q?ZMOCABq2WrdfRu7H0tET5yp0hxhm3d7XFii2yuKQc3NN+p4uOIXKosa/U8Yy?=
- =?us-ascii?Q?rY8jmxLj4NLU6l//2bvxWHqXXjwzGTOoVCAZXQfNoJB8c84m20lTa46TpOga?=
- =?us-ascii?Q?xh+vpIxmhoDWsrVJCBWg65v4U85iYmQqG2X7p4azOh3HOecySetdud1qpIEu?=
- =?us-ascii?Q?+aBBQw9ZjWxD8Tngh/CWlIXF1Z5mz2VIlcmjYZFhY3yf+APwW9aeQgGBsci9?=
- =?us-ascii?Q?b+squYVVj5ubf71fKqoTsAv02bhzmTiDBOubyXwDlCTl+GG40SuyJAUqm22t?=
- =?us-ascii?Q?xPLAfGwP6mOkEX8nTGp+K1XuuoJXAu7zfFvDLLKgRaIftvC8CcoJExzwsihn?=
- =?us-ascii?Q?gq7h18ENb4f42RVQHppZPIE1n7kFEvkF8px0a2NuAFMmYDMnPoohpjrfU4LK?=
- =?us-ascii?Q?/ysh+JaVZQwCwyQOtT8jqXeOu1qdMqf6xksVY/KiE2hgLJMNbF9xbvX2pTHJ?=
- =?us-ascii?Q?4iUoP+pRP0UOyp99rdg1wtFG/yHq6s153WbSg/J6z9ysLYGO2sm9ZzZr2TvN?=
- =?us-ascii?Q?puic2MmK2134CNJNdi3rrsn7hTn9L0PBPo9PlvY0GWvBwMVrnRNLVAGkvjLq?=
- =?us-ascii?Q?urVc54KRxZxZE6tOCrYK5WALiRcz6DQgHo0Kd5Heb7dmnBg6y9Bt77X8GAOZ?=
- =?us-ascii?Q?ksMuto2Y8axVAuXsAZA88shtCbhLUORkNHqSkFy/Tj0BVR5gsLdKuIxxsZLn?=
- =?us-ascii?Q?6q24wXmrVvsaZraf4Uun7nD01O3Zru8Y2LGHUsj4PiOYoPROGVCBaNZrK44s?=
- =?us-ascii?Q?rpIIqyMzCU3W2wyHxa8A8S+vW+tPlBJiGyFr8fVLtyhW2cKfvH1kxHYZ2EUa?=
- =?us-ascii?Q?+KI3GJZcZtU/qwERUjFKHdbdIhwvBJEv1JYBUoOiCfPfMlCRAUK20JaRGwYe?=
- =?us-ascii?Q?pou78qjbK9Ar9hO6GQeRPIqG6Rk3aWPTkFsvrFEqh5lZa/XCwumfnYtl2f95?=
- =?us-ascii?Q?Y2bxZ88og+VeCc8fuQZUyU0=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tNRobAdGpZCVIatp2OxPWV6GSRoPY0Hl5Lr4TcbWUZzVfaXxR+bFuNUWGFjk?=
+ =?us-ascii?Q?pKSM5Bdr8j4pf1/QfHua8LcEUQPHSAJKAQhdUS5ayuUdyw3dR0xUdxAC4hPe?=
+ =?us-ascii?Q?2ZDU0RsCwy6QFJNIF6wv7w7k9tR/FPVkZGjT/o9TVx0xZ9nM8r2QoI/eYUeG?=
+ =?us-ascii?Q?X8dWkOXn25yMPkBlOPpefRpcJESsAdOxsEzT8Y1Z9T9xwDK2Yf72It/hXwt0?=
+ =?us-ascii?Q?48WttQDZgoUEEuHneX55P0Z6Ygb2WAQidza4pG5AeHlpg6xHw+33LUQ4Ks/Q?=
+ =?us-ascii?Q?OIFQBin4pLGp/JIIAwgoiaHlHx7kFx3Y6jN/odlJzGgULTpT46D3BBub4L/5?=
+ =?us-ascii?Q?e979ZKZuhwBKBqsmGAVmRSw3Yhtism+9f6dZhaSG/QufhQshxkiYPDCJTQNI?=
+ =?us-ascii?Q?sJrC4dl/jffO0LZnS/aaz0er11hakT+2zvBuOk+pPYOe4Ci+d5yOceX3t6+D?=
+ =?us-ascii?Q?trjj2B1a40QggPgfMPb3EWPv/27MZjIxyy5RfhuB7wLo+iRPNzp8I4q8RxMO?=
+ =?us-ascii?Q?2iaJwHU1VSjrF200yW1763TtdZNsgKKtOMv6zSZlUazR83lAOZ5e7CZ4Ql3p?=
+ =?us-ascii?Q?0g5UPCjvPTGqqu7+CMyb5QgOJgoNI35SIkZA5Ar3RJ/qeVYJyYyDKEBJMNN9?=
+ =?us-ascii?Q?+K/enew7GhjxZh0EgPRMjkDGbKfp7q8sFH0m3Ruozuc7sn6XA6MO3UtIKO9Y?=
+ =?us-ascii?Q?gpBH0I/moIoGKXO/FkxtjimGlkyNlDIzRMafHLNmfK6BJ3SbBOVcAWDcxBcm?=
+ =?us-ascii?Q?TG24aE4XlKxJxsfRCdApLykpksNwOQ1sK7kzD4yRlNy2/jkZYYoCc+3jUw5B?=
+ =?us-ascii?Q?ZPdQMmJlDDw7uDEtluFfGnkPSqZWHRZlKydc2Mg5ujQJBkt4wo0lfb1Bl9xa?=
+ =?us-ascii?Q?SWCXPwyupFW6crodx194EMUj4q4ki6SZvBCO/ZqzdA3UDmwYWO6rwU09KHSx?=
+ =?us-ascii?Q?zQp+D96uid7DVRWQ3BRWOniTPMTTy5plP7G9Gzhj747WIiWfz/ewcMcxquXb?=
+ =?us-ascii?Q?MNAnzuI0AZ+ZJDA21jppMDW3y8sp+p6LFZqkMqMPQmroTQvK4Ybyu8bl2+z/?=
+ =?us-ascii?Q?/YIi+m3AGlc0qnmMyICNsRJJChQl/X1BfAB9WY/mNL5J3sOpPIWwXB+QvsTt?=
+ =?us-ascii?Q?cAQFXK+S8dsdO/fcqdVr7GioANB0OKxh862a2GHhwHqjCRPq8Y7C+enpzO/a?=
+ =?us-ascii?Q?/dMRv5TL+z14nBDQyObiK4Haf5dK97wYcEAlP1pzI9YabwYAvuSCSvXjx9m2?=
+ =?us-ascii?Q?iBTHvZX+tUHB5jdBW66P5MMeecHhJ4PuoMI/f7lhOjiSfdYc2pnjrBAwPPR+?=
+ =?us-ascii?Q?cFqh7m68va3LgfZlU5ChO8o6a13rY81cLXeg+uPF+/ckvN5mJbiLW/qee763?=
+ =?us-ascii?Q?csfng2gp7VmQA+BQJnCpgZ4X8mgfsJz30hTjfpaBl5PvVJ75xX400FC9tFkL?=
+ =?us-ascii?Q?RPJopkpW6W+nY1V3cJcXyoTOnb6tUqRdb3k9uug32fdRNC6/lVwrLwcCZbd2?=
+ =?us-ascii?Q?SocqgZ9eRdjXwkyiEI+0f9gOtcCH79tICLMkZXFDgjVZj8X0OtFscmMgaNeG?=
+ =?us-ascii?Q?yjX8CVL15oHqPu8JSNEA3tYv8jgsKb7ZJXa+iMYwMRKEgpJSPB69igaW9z6m?=
+ =?us-ascii?Q?HFhn174uS1AM56p4FDKGEx8=3D?=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d747de4-31be-45a8-6852-08d99601dda3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 58bcea6c-d0b0-4b7b-41d1-08d99601df76
 X-MS-Exchange-CrossTenant-AuthSource: CO6PR04MB7812.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2021 08:48:20.8876 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2021 08:48:24.1034 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pJ9+bZOpiB1aZOh/XTE5otxZ9fudt76mcORvCgMMpEdT2+sML/9hWrWd5uNwFabsQRxvJJQoAOyNRO/IgmZ/Zw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: U5E8+vva+/xIO0/F0WOUI3EfKWS1EIzg7Day7peQ6INxNxXk351LkSnvlOvJCA9hQei9hvC2lNHjGF3SCMWyaQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR04MB8409
 Received-SPF: pass client-ip=216.71.153.141;
  envelope-from=prvs=92346df24=Anup.Patel@wdc.com; helo=esa3.hgst.iphmx.com
@@ -150,570 +149,576 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Oct 2021 08:48:28 -0000
+X-List-Received-Date: Sat, 23 Oct 2021 08:48:32 -0000
 
-We extend virt machine to emulate AIA APLIC devices only when
-"aia=aplic" parameter is passed along with machine name in QEMU
-command-line. When "aia=none" or not specified then we fallback
-to original PLIC device emulation.
+The RISC-V AIA (Advanced Interrupt Architecture) defines a new
+interrupt controller for MSIs (message signal interrupts) called
+IMSIC (Incoming Message Signal Interrupt Controller). The IMSIC
+is per-HART device and also suppport virtualizaiton of MSIs using
+dedicated VS-level guest interrupt files.
+
+This patch adds device emulation for RISC-V AIA IMSIC which
+supports M-level, S-level, and VS-level MSIs.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
- hw/riscv/Kconfig        |   1 +
- hw/riscv/virt.c         | 293 ++++++++++++++++++++++++++++++++--------
- include/hw/riscv/virt.h |  26 +++-
- 3 files changed, 260 insertions(+), 60 deletions(-)
+ hw/intc/Kconfig               |   3 +
+ hw/intc/meson.build           |   1 +
+ hw/intc/riscv_imsic.c         | 443 ++++++++++++++++++++++++++++++++++
+ include/hw/intc/riscv_imsic.h |  68 ++++++
+ 4 files changed, 515 insertions(+)
+ create mode 100644 hw/intc/riscv_imsic.c
+ create mode 100644 include/hw/intc/riscv_imsic.h
 
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index d2d869aaad..c30bb7cb6c 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -42,6 +42,7 @@ config RISCV_VIRT
-     select PFLASH_CFI01
-     select SERIAL
-     select RISCV_ACLINT
-+    select RISCV_APLIC
-     select SIFIVE_PLIC
-     select SIFIVE_TEST
-     select VIRTIO_MMIO
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 83f784bdee..48ce616432 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -33,6 +33,7 @@
- #include "hw/riscv/boot.h"
- #include "hw/riscv/numa.h"
- #include "hw/intc/riscv_aclint.h"
-+#include "hw/intc/riscv_aplic.h"
- #include "hw/intc/sifive_plic.h"
- #include "hw/misc/sifive_test.h"
- #include "chardev/char.h"
-@@ -51,6 +52,8 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_ACLINT_SSWI] = {  0x2F00000,        0x4000 },
-     [VIRT_PCIE_PIO] =    {  0x3000000,       0x10000 },
-     [VIRT_PLIC] =        {  0xc000000, VIRT_PLIC_SIZE(VIRT_CPUS_MAX * 2) },
-+    [VIRT_APLIC_M] =     {  0xc000000,        0x8000 },
-+    [VIRT_APLIC_S] =     {  0xd000000,        0x8000 },
-     [VIRT_UART0] =       { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =      { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =      { 0x10100000,          0x18 },
-@@ -132,12 +135,13 @@ static void virt_flash_map(RISCVVirtState *s,
-                     sysmem);
- }
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+index 1592623233..0bb3166110 100644
+--- a/hw/intc/Kconfig
++++ b/hw/intc/Kconfig
+@@ -68,6 +68,9 @@ config RISCV_ACLINT
+ config RISCV_APLIC
+     bool
  
--static void create_pcie_irq_map(void *fdt, char *nodename,
--                                uint32_t plic_phandle)
-+static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
-+                                uint32_t irqchip_phandle)
- {
-     int pin, dev;
--    uint32_t
--        full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * FDT_INT_MAP_WIDTH] = {};
-+    uint32_t irq_map_stride = 0;
-+    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                          FDT_MAX_INT_MAP_WIDTH] = {};
-     uint32_t *irq_map = full_irq_map;
- 
-     /* This code creates a standard swizzle of interrupts such that
-@@ -155,23 +159,31 @@ static void create_pcie_irq_map(void *fdt, char *nodename,
-             int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-             int i = 0;
- 
-+            /* Fill PCI address cells */
-             irq_map[i] = cpu_to_be32(devfn << 8);
--
-             i += FDT_PCI_ADDR_CELLS;
--            irq_map[i] = cpu_to_be32(pin + 1);
- 
-+            /* Fill PCI Interrupt cells */
-+            irq_map[i] = cpu_to_be32(pin + 1);
-             i += FDT_PCI_INT_CELLS;
--            irq_map[i++] = cpu_to_be32(plic_phandle);
- 
--            i += FDT_PLIC_ADDR_CELLS;
--            irq_map[i] = cpu_to_be32(irq_nr);
--
--            irq_map += FDT_INT_MAP_WIDTH;
-+            /* Fill interrupt controller phandle and cells */
-+            irq_map[i++] = cpu_to_be32(irqchip_phandle);
-+            irq_map[i++] = cpu_to_be32(irq_nr);
-+            if (s->aia_type != VIRT_AIA_TYPE_NONE) {
-+                irq_map[i++] = cpu_to_be32(0x4);
-+            }
++config RISCV_IMSIC
++    bool
 +
-+            if (!irq_map_stride) {
-+                irq_map_stride = i;
-+            }
-+            irq_map += irq_map_stride;
-         }
-     }
+ config SIFIVE_PLIC
+     bool
  
--    qemu_fdt_setprop(fdt, nodename, "interrupt-map",
--                     full_irq_map, sizeof(full_irq_map));
-+    qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
-+                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                     irq_map_stride * sizeof(uint32_t));
- 
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-                            0x1800, 0, 0, 0x7);
-@@ -394,8 +406,6 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
-     plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
-     plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
-     qemu_fdt_add_subnode(mc->fdt, plic_name);
--    qemu_fdt_setprop_cell(mc->fdt, plic_name,
--        "#address-cells", FDT_PLIC_ADDR_CELLS);
-     qemu_fdt_setprop_cell(mc->fdt, plic_name,
-         "#interrupt-cells", FDT_PLIC_INT_CELLS);
-     qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
-@@ -415,6 +425,76 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
-     g_free(plic_cells);
- }
- 
-+static void create_fdt_socket_aia(RISCVVirtState *s,
-+                                  const MemMapEntry *memmap, int socket,
-+                                  uint32_t *phandle, uint32_t *intc_phandles,
-+                                  uint32_t *aplic_phandles)
+diff --git a/hw/intc/meson.build b/hw/intc/meson.build
+index 76d7ba08d0..3721a6bc39 100644
+--- a/hw/intc/meson.build
++++ b/hw/intc/meson.build
+@@ -49,6 +49,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
+ specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
+ specific_ss.add(when: 'CONFIG_RISCV_ACLINT', if_true: files('riscv_aclint.c'))
+ specific_ss.add(when: 'CONFIG_RISCV_APLIC', if_true: files('riscv_aplic.c'))
++specific_ss.add(when: 'CONFIG_RISCV_IMSIC', if_true: files('riscv_imsic.c'))
+ specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
+ specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
+ specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+new file mode 100644
+index 0000000000..f33e35986b
+--- /dev/null
++++ b/hw/intc/riscv_imsic.c
+@@ -0,0 +1,443 @@
++/*
++ * RISC-V IMSIC (Incoming Message Signaled Interrupt Controller)
++ *
++ * Copyright (c) 2021 Western Digital Corporation or its affiliates.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#include "qemu/osdep.h"
++#include "qapi/error.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qemu/error-report.h"
++#include "qemu/bswap.h"
++#include "exec/address-spaces.h"
++#include "hw/sysbus.h"
++#include "hw/pci/msi.h"
++#include "hw/boards.h"
++#include "hw/qdev-properties.h"
++#include "hw/intc/riscv_imsic.h"
++#include "hw/irq.h"
++#include "target/riscv/cpu.h"
++#include "target/riscv/cpu_bits.h"
++#include "sysemu/sysemu.h"
++#include "migration/vmstate.h"
++
++#define IMSIC_MMIO_PAGE_LE             0x00
++#define IMSIC_MMIO_PAGE_BE             0x04
++
++#define IMSIC_MIN_ID                   ((IMSIC_EIPx_BITS * 2) - 1)
++#define IMSIC_MAX_ID                   (IMSIC_TOPEI_IID_MASK)
++
++#define IMSIC_EISTATE_PENDING          (1U << 0)
++#define IMSIC_EISTATE_ENABLED          (1U << 1)
++#define IMSIC_EISTATE_ENPEND           (IMSIC_EISTATE_ENABLED | \
++                                        IMSIC_EISTATE_PENDING)
++
++static uint32_t riscv_imsic_topei(RISCVIMSICState *imsic, uint32_t page)
 +{
-+    int cpu;
-+    char *aplic_name;
-+    uint32_t *aplic_cells;
-+    unsigned long aplic_addr;
-+    MachineState *mc = MACHINE(s);
-+    uint32_t aplic_m_phandle, aplic_s_phandle;
++    uint32_t i, max_irq, base;
 +
-+    aplic_m_phandle = (*phandle)++;
-+    aplic_s_phandle = (*phandle)++;
-+    aplic_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+
-+    /* M-level APLIC node */
-+    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-+        aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aplic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_M_EXT);
++    base = page * imsic->num_irqs;
++    max_irq = (imsic->num_irqs < imsic->eithreshold[page]) ?
++              imsic->num_irqs : imsic->eithreshold[page];
++    for (i = 1; i < max_irq; i++) {
++        if ((imsic->eistate[base + i] & IMSIC_EISTATE_ENPEND) ==
++                IMSIC_EISTATE_ENPEND) {
++            return (i << IMSIC_TOPEI_IID_SHIFT) | i;
++        }
 +    }
-+    aplic_addr = memmap[VIRT_APLIC_M].base +
-+                 (memmap[VIRT_APLIC_M].size * socket);
-+    aplic_name = g_strdup_printf("/soc/aplic@%lx", aplic_addr);
-+    qemu_fdt_add_subnode(mc->fdt, aplic_name);
-+    qemu_fdt_setprop_string(mc->fdt, aplic_name, "compatible", "riscv,aplic");
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name,
-+        "#interrupt-cells", FDT_APLIC_INT_CELLS);
-+    qemu_fdt_setprop(mc->fdt, aplic_name, "interrupt-controller", NULL, 0);
-+    qemu_fdt_setprop(mc->fdt, aplic_name, "interrupts-extended",
-+        aplic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 2);
-+    qemu_fdt_setprop_cells(mc->fdt, aplic_name, "reg",
-+        0x0, aplic_addr, 0x0, memmap[VIRT_APLIC_M].size);
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name, "aplic,num-sources",
-+        VIRT_IRQCHIP_NUM_SOURCES);
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name, "aplic,children",
-+        aplic_s_phandle);
-+    qemu_fdt_setprop_cells(mc->fdt, aplic_name, "aplic,delegate",
-+        0x1, VIRT_IRQCHIP_NUM_SOURCES, aplic_s_phandle);
-+    riscv_socket_fdt_write_id(mc, mc->fdt, aplic_name, socket);
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name, "phandle", aplic_m_phandle);
-+    g_free(aplic_name);
 +
-+    /* S-level APLIC node */
-+    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-+        aplic_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        aplic_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_S_EXT);
-+    }
-+    aplic_addr = memmap[VIRT_APLIC_S].base +
-+                 (memmap[VIRT_APLIC_S].size * socket);
-+    aplic_name = g_strdup_printf("/soc/aplic@%lx", aplic_addr);
-+    qemu_fdt_add_subnode(mc->fdt, aplic_name);
-+    qemu_fdt_setprop_string(mc->fdt, aplic_name, "compatible", "riscv,aplic");
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name,
-+        "#interrupt-cells", FDT_APLIC_INT_CELLS);
-+    qemu_fdt_setprop(mc->fdt, aplic_name, "interrupt-controller", NULL, 0);
-+    qemu_fdt_setprop(mc->fdt, aplic_name, "interrupts-extended",
-+        aplic_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 2);
-+    qemu_fdt_setprop_cells(mc->fdt, aplic_name, "reg",
-+        0x0, aplic_addr, 0x0, memmap[VIRT_APLIC_S].size);
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name, "aplic,num-sources",
-+        VIRT_IRQCHIP_NUM_SOURCES);
-+    riscv_socket_fdt_write_id(mc, mc->fdt, aplic_name, socket);
-+    qemu_fdt_setprop_cell(mc->fdt, aplic_name, "phandle", aplic_s_phandle);
-+    g_free(aplic_name);
-+
-+    g_free(aplic_cells);
-+    aplic_phandles[socket] = aplic_s_phandle;
++    return 0;
 +}
 +
- static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                                bool is_32_bit, uint32_t *phandle,
-                                uint32_t *irq_mmio_phandle,
-@@ -451,8 +531,13 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-             create_fdt_socket_clint(s, memmap, socket, intc_phandles);
-         }
- 
--        create_fdt_socket_plic(s, memmap, socket, phandle,
--            intc_phandles, xplic_phandles);
-+        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+            create_fdt_socket_plic(s, memmap, socket, phandle,
-+                intc_phandles, xplic_phandles);
-+        } else {
-+            create_fdt_socket_aia(s, memmap, socket, phandle,
-+                intc_phandles, xplic_phandles);
-+        }
- 
-         g_free(intc_phandles);
-         g_free(clust_name);
-@@ -493,7 +578,13 @@ static void create_fdt_virtio(RISCVVirtState *s, const MemMapEntry *memmap,
-             0x0, memmap[VIRT_VIRTIO].size);
-         qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent",
-             irq_virtio_phandle);
--        qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", VIRTIO_IRQ + i);
-+        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+            qemu_fdt_setprop_cell(mc->fdt, name, "interrupts",
-+                                  VIRTIO_IRQ + i);
-+        } else {
-+            qemu_fdt_setprop_cells(mc->fdt, name, "interrupts",
-+                                   VIRTIO_IRQ + i, 0x4);
-+        }
-         g_free(name);
-     }
- }
-@@ -531,7 +622,7 @@ static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
-         2, virt_high_pcie_memmap.base,
-         2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
- 
--    create_pcie_irq_map(mc->fdt, name, irq_pcie_phandle);
-+    create_pcie_irq_map(s, mc->fdt, name, irq_pcie_phandle);
-     g_free(name);
- }
- 
-@@ -590,7 +681,11 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
-         0x0, memmap[VIRT_UART0].size);
-     qemu_fdt_setprop_cell(mc->fdt, name, "clock-frequency", 3686400);
-     qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent", irq_mmio_phandle);
--    qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", UART0_IRQ);
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", UART0_IRQ);
++static void riscv_imsic_update(RISCVIMSICState *imsic, uint32_t page)
++{
++    if (imsic->eidelivery[page] && riscv_imsic_topei(imsic, page)) {
++        qemu_irq_raise(imsic->external_irqs[page]);
 +    } else {
-+        qemu_fdt_setprop_cells(mc->fdt, name, "interrupts", UART0_IRQ, 0x4);
++        qemu_irq_lower(imsic->external_irqs[page]);
 +    }
- 
-     qemu_fdt_add_subnode(mc->fdt, "/chosen");
-     qemu_fdt_setprop_string(mc->fdt, "/chosen", "stdout-path", name);
-@@ -611,7 +706,11 @@ static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
-         0x0, memmap[VIRT_RTC].base, 0x0, memmap[VIRT_RTC].size);
-     qemu_fdt_setprop_cell(mc->fdt, name, "interrupt-parent",
-         irq_mmio_phandle);
--    qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", RTC_IRQ);
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        qemu_fdt_setprop_cell(mc->fdt, name, "interrupts", RTC_IRQ);
-+    } else {
-+        qemu_fdt_setprop_cells(mc->fdt, name, "interrupts", RTC_IRQ, 0x4);
-+    }
-     g_free(name);
- }
- 
-@@ -692,7 +791,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-                                           hwaddr high_mmio_base,
-                                           hwaddr high_mmio_size,
-                                           hwaddr pio_base,
--                                          DeviceState *plic)
-+                                          DeviceState *irqchip)
- {
-     DeviceState *dev;
-     MemoryRegion *ecam_alias, *ecam_reg;
-@@ -726,7 +825,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
- 
-     for (i = 0; i < GPEX_NUM_IRQS; i++) {
--        irq = qdev_get_gpio_in(plic, PCIE_IRQ + i);
-+        irq = qdev_get_gpio_in(irqchip, PCIE_IRQ + i);
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
-@@ -775,18 +874,75 @@ static char *plic_hart_config_string(int hart_count)
-     return g_strjoinv(",", (char **)vals);
- }
- 
-+static DeviceState *virt_create_plic(const MemMapEntry *memmap, int socket,
-+                                     int base_hartid, int hart_count)
-+{
-+    DeviceState *ret;
-+    char *plic_hart_config;
-+
-+    /* Per-socket PLIC hart topology configuration string */
-+    plic_hart_config = plic_hart_config_string(hart_count);
-+
-+    /* Per-socket PLIC */
-+    ret = sifive_plic_create(
-+            memmap[VIRT_PLIC].base + socket * memmap[VIRT_PLIC].size,
-+            plic_hart_config, hart_count, base_hartid,
-+            VIRT_IRQCHIP_NUM_SOURCES,
-+            ((1U << VIRT_IRQCHIP_NUM_PRIO_BITS) - 1),
-+            VIRT_PLIC_PRIORITY_BASE,
-+            VIRT_PLIC_PENDING_BASE,
-+            VIRT_PLIC_ENABLE_BASE,
-+            VIRT_PLIC_ENABLE_STRIDE,
-+            VIRT_PLIC_CONTEXT_BASE,
-+            VIRT_PLIC_CONTEXT_STRIDE,
-+            memmap[VIRT_PLIC].size);
-+
-+    g_free(plic_hart_config);
-+
-+    return ret;
 +}
 +
-+static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type,
-+                                    const MemMapEntry *memmap, int socket,
-+                                    int base_hartid, int hart_count)
++static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                      target_ulong *val,
++                                      target_ulong new_val,
++                                      target_ulong wr_mask)
 +{
-+    DeviceState *aplic_m;
++    target_ulong old_val = imsic->eidelivery[page];
 +
-+    /* Per-socket M-level APLIC */
-+    aplic_m = riscv_aplic_create(
-+        memmap[VIRT_APLIC_M].base + socket * memmap[VIRT_APLIC_M].size,
-+        memmap[VIRT_APLIC_M].size,
-+        base_hartid, hart_count,
-+        VIRT_IRQCHIP_NUM_SOURCES,
-+        VIRT_IRQCHIP_NUM_PRIO_BITS,
-+        false, true, NULL);
-+
-+    if (aplic_m) {
-+        /* Per-socket S-level APLIC */
-+        riscv_aplic_create(
-+            memmap[VIRT_APLIC_S].base + socket * memmap[VIRT_APLIC_S].size,
-+            memmap[VIRT_APLIC_S].size,
-+            base_hartid, hart_count,
-+            VIRT_IRQCHIP_NUM_SOURCES,
-+            VIRT_IRQCHIP_NUM_PRIO_BITS,
-+            false, false, aplic_m);
++    if (val) {
++        *val = old_val;
 +    }
 +
-+    return aplic_m;
++    wr_mask &= 0x1;
++    imsic->eidelivery[page] = (old_val & ~wr_mask) | (new_val & wr_mask);
++
++    riscv_imsic_update(imsic, page);
++    return 0;
 +}
 +
- static void virt_machine_init(MachineState *machine)
- {
-     const MemMapEntry *memmap = virt_memmap;
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
--    char *plic_hart_config, *soc_name;
-+    char *soc_name;
-     target_ulong start_addr = memmap[VIRT_DRAM].base;
-     target_ulong firmware_end_addr, kernel_start_addr;
-     uint32_t fdt_load_addr;
-     uint64_t kernel_entry;
--    DeviceState *mmio_plic, *virtio_plic, *pcie_plic;
-+    DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
-     int i, base_hartid, hart_count;
- 
-     /* Check socket count limit */
-@@ -797,7 +953,7 @@ static void virt_machine_init(MachineState *machine)
-     }
- 
-     /* Initialize sockets */
--    mmio_plic = virtio_plic = pcie_plic = NULL;
-+    mmio_irqchip = virtio_irqchip = pcie_irqchip = NULL;
-     for (i = 0; i < riscv_socket_count(machine); i++) {
-         if (!riscv_socket_check_hartids(machine, i)) {
-             error_report("discontinuous hartids in socket%d", i);
-@@ -847,36 +1003,27 @@ static void virt_machine_init(MachineState *machine)
-                 base_hartid, hart_count, true);
-         }
- 
--        /* Per-socket PLIC hart topology configuration string */
--        plic_hart_config = plic_hart_config_string(hart_count);
--
--        /* Per-socket PLIC */
--        s->plic[i] = sifive_plic_create(
--            memmap[VIRT_PLIC].base + i * memmap[VIRT_PLIC].size,
--            plic_hart_config, hart_count, base_hartid,
--            VIRT_PLIC_NUM_SOURCES,
--            VIRT_PLIC_NUM_PRIORITIES,
--            VIRT_PLIC_PRIORITY_BASE,
--            VIRT_PLIC_PENDING_BASE,
--            VIRT_PLIC_ENABLE_BASE,
--            VIRT_PLIC_ENABLE_STRIDE,
--            VIRT_PLIC_CONTEXT_BASE,
--            VIRT_PLIC_CONTEXT_STRIDE,
--            memmap[VIRT_PLIC].size);
--        g_free(plic_hart_config);
-+        /* Per-socket interrupt controller */
-+        if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+            s->irqchip[i] = virt_create_plic(memmap, i,
-+                                             base_hartid, hart_count);
-+        } else {
-+            s->irqchip[i] = virt_create_aia(s->aia_type, memmap, i,
-+                                            base_hartid, hart_count);
++static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                      target_ulong *val,
++                                      target_ulong new_val,
++                                      target_ulong wr_mask)
++{
++    target_ulong old_val = imsic->eithreshold[page];
++
++    if (val) {
++        *val = old_val;
++    }
++
++    wr_mask &= IMSIC_MAX_ID;
++    imsic->eithreshold[page] = (old_val & ~wr_mask) | (new_val & wr_mask);
++
++    riscv_imsic_update(imsic, page);
++    return 0;
++}
++
++static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                 target_ulong *val, target_ulong new_val,
++                                 target_ulong wr_mask)
++{
++    uint32_t base, topei = riscv_imsic_topei(imsic, page);
++
++    /* Read pending and enabled interrupt with highest priority */
++    if (val) {
++        *val = topei;
++    }
++
++    /* Writes ignore value and clear top pending interrupt */
++    if (topei && wr_mask) {
++        topei >>= IMSIC_TOPEI_IID_SHIFT;
++        base = page * imsic->num_irqs;
++        if (topei) {
++            imsic->eistate[base + topei] &= ~IMSIC_EISTATE_PENDING;
 +        }
- 
--        /* Try to use different PLIC instance based device type */
-+        /* Try to use different IRQCHIP instance based device type */
-         if (i == 0) {
--            mmio_plic = s->plic[i];
--            virtio_plic = s->plic[i];
--            pcie_plic = s->plic[i];
-+            mmio_irqchip = s->irqchip[i];
-+            virtio_irqchip = s->irqchip[i];
-+            pcie_irqchip = s->irqchip[i];
-         }
-         if (i == 1) {
--            virtio_plic = s->plic[i];
--            pcie_plic = s->plic[i];
-+            virtio_irqchip = s->irqchip[i];
-+            pcie_irqchip = s->irqchip[i];
-         }
-         if (i == 2) {
--            pcie_plic = s->plic[i];
-+            pcie_irqchip = s->irqchip[i];
-         }
-     }
- 
-@@ -975,7 +1122,7 @@ static void virt_machine_init(MachineState *machine)
-     for (i = 0; i < VIRTIO_COUNT; i++) {
-         sysbus_create_simple("virtio-mmio",
-             memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size,
--            qdev_get_gpio_in(DEVICE(virtio_plic), VIRTIO_IRQ + i));
-+            qdev_get_gpio_in(DEVICE(virtio_irqchip), VIRTIO_IRQ + i));
-     }
- 
-     gpex_pcie_init(system_memory,
-@@ -986,14 +1133,14 @@ static void virt_machine_init(MachineState *machine)
-                    virt_high_pcie_memmap.base,
-                    virt_high_pcie_memmap.size,
-                    memmap[VIRT_PCIE_PIO].base,
--                   DEVICE(pcie_plic));
-+                   DEVICE(pcie_irqchip));
- 
-     serial_mm_init(system_memory, memmap[VIRT_UART0].base,
--        0, qdev_get_gpio_in(DEVICE(mmio_plic), UART0_IRQ), 399193,
-+        0, qdev_get_gpio_in(DEVICE(mmio_irqchip), UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
- 
-     sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
--        qdev_get_gpio_in(DEVICE(mmio_plic), RTC_IRQ));
-+        qdev_get_gpio_in(DEVICE(mmio_irqchip), RTC_IRQ));
- 
-     virt_flash_create(s);
- 
-@@ -1009,6 +1156,37 @@ static void virt_machine_instance_init(Object *obj)
- {
- }
- 
-+static char *virt_get_aia(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+    const char *val;
 +
-+    switch (s->aia_type) {
-+    case VIRT_AIA_TYPE_APLIC:
-+        val = "aplic";
-+        break;
++        riscv_imsic_update(imsic, page);
++    }
++
++    return 0;
++}
++
++static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic, uint32_t page,
++                               uint32_t num, bool pend, target_ulong *val,
++                               target_ulong new_val, target_ulong wr_mask)
++{
++    uint32_t i, base;
++    target_ulong mask;
++    uint32_t state = (pend) ? IMSIC_EISTATE_PENDING : IMSIC_EISTATE_ENABLED;
++
++#if TARGET_LONG_BITS == 64
++    if (num & 0x1) {
++        return -EINVAL;
++    }
++    num >>= 1;
++#endif
++
++    if (num >= (imsic->num_irqs / TARGET_LONG_BITS)) {
++        return -EINVAL;
++    }
++    base = (page * imsic->num_irqs) + (num * TARGET_LONG_BITS);
++
++    if (val) {
++        *val = 0;
++        for (i = 0; i < TARGET_LONG_BITS; i++) {
++            mask = (target_ulong)1 << i;
++            *val |= (imsic->eistate[base + i] & state) ? mask : 0;
++        }
++    }
++
++    for (i = 0; i < TARGET_LONG_BITS; i++) {
++        /* Bit0 of eip0 and eie0 are read-only zero */
++        if (!num && !i) {
++            continue;
++        }
++
++        mask = (target_ulong)1 << i;
++        if (wr_mask & mask) {
++            if (new_val & mask) {
++                imsic->eistate[base + i] |= state;
++            } else {
++                imsic->eistate[base + i] &= ~state;
++            }
++        }
++    }
++
++    riscv_imsic_update(imsic, page);
++    return 0;
++}
++
++static int riscv_imsic_rmw(void *arg, target_ulong reg, target_ulong *val,
++                           target_ulong new_val, target_ulong wr_mask)
++{
++    RISCVIMSICState *imsic = arg;
++    uint32_t isel, priv, virt, vgein, page;
++
++    priv = AIA_IREG_PRIV(reg);
++    virt = AIA_IREG_VIRT(reg);
++    isel = AIA_IREG_ISEL(reg);
++    vgein = AIA_IREG_VGEIN(reg);
++
++    if (imsic->mmode) {
++        if (priv == PRV_M && !virt) {
++            page = 0;
++        } else {
++            goto err;
++        }
++    } else {
++        if (priv == PRV_S) {
++            if (virt) {
++                if (vgein && vgein < imsic->num_pages) {
++                    page = vgein;
++                } else {
++                    goto err;
++                }
++            } else {
++                page = 0;
++            }
++        } else {
++            goto err;
++        }
++    }
++
++    switch (isel) {
++    case ISELECT_IMSIC_EIDELIVERY:
++        return riscv_imsic_eidelivery_rmw(imsic, page, val,
++                                          new_val, wr_mask);
++    case ISELECT_IMSIC_EITHRESHOLD:
++        return riscv_imsic_eithreshold_rmw(imsic, page, val,
++                                           new_val, wr_mask);
++    case ISELECT_IMSIC_TOPEI:
++        return riscv_imsic_topei_rmw(imsic, page, val, new_val, wr_mask);
++    case ISELECT_IMSIC_EIP0 ... ISELECT_IMSIC_EIP63:
++        return riscv_imsic_eix_rmw(imsic, page, isel - ISELECT_IMSIC_EIP0,
++                                   true, val, new_val, wr_mask);
++    case ISELECT_IMSIC_EIE0 ... ISELECT_IMSIC_EIE63:
++        return riscv_imsic_eix_rmw(imsic, page, isel - ISELECT_IMSIC_EIE0,
++                                   false, val, new_val, wr_mask);
 +    default:
-+        val = "none";
 +        break;
 +    };
 +
-+    return g_strdup(val);
++err:
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "%s: Invalid register priv=%d virt=%d isel=%d vgein=%d\n",
++                  __func__, priv, virt, isel, vgein);
++    return -EINVAL;
 +}
 +
-+static void virt_set_aia(Object *obj, const char *val, Error **errp)
++static uint64_t riscv_imsic_read(void *opaque, hwaddr addr, unsigned size)
 +{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
++    RISCVIMSICState *imsic = opaque;
 +
-+    if (!strcmp(val, "none")) {
-+        s->aia_type = VIRT_AIA_TYPE_NONE;
-+    } else if (!strcmp(val, "aplic")) {
-+        s->aia_type = VIRT_AIA_TYPE_APLIC;
-+    } else {
-+        error_setg(errp, "Invalid AIA interrupt controller type");
-+        error_append_hint(errp, "Valid values are none, and aplic.\n");
++    /* Reads must be 4 byte words */
++    if ((addr & 0x3) != 0) {
++        goto err;
 +    }
++
++    /* Reads cannot be out of range */
++    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
++        goto err;
++    }
++
++    return 0;
++
++err:
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "%s: Invalid register read 0x%" HWADDR_PRIx "\n",
++                  __func__, addr);
++    return 0;
 +}
 +
- static bool virt_get_aclint(Object *obj, Error **errp)
- {
-     MachineState *ms = MACHINE(obj);
-@@ -1047,6 +1225,13 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-     object_class_property_set_description(oc, "aclint",
-                                           "Set on/off to enable/disable "
-                                           "emulating ACLINT devices");
++static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
++        unsigned size)
++{
++    RISCVIMSICState *imsic = opaque;
++    uint32_t page;
 +
-+    object_class_property_add_str(oc, "aia", virt_get_aia,
-+                                  virt_set_aia);
-+    object_class_property_set_description(oc, "aia",
-+                                          "Set type of AIA interrupt "
-+                                          "conttoller. Valid values are "
-+                                          "none, and aplic.");
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index d9105c1886..a26ef4a295 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -32,18 +32,24 @@ typedef struct RISCVVirtState RISCVVirtState;
- DECLARE_INSTANCE_CHECKER(RISCVVirtState, RISCV_VIRT_MACHINE,
-                          TYPE_RISCV_VIRT_MACHINE)
- 
-+typedef enum RISCVVirtAIAType {
-+    VIRT_AIA_TYPE_NONE=0,
-+    VIRT_AIA_TYPE_APLIC,
-+} RISCVVirtAIAType;
++    /* Writes must be 4 byte words */
++    if ((addr & 0x3) != 0) {
++        goto err;
++    }
 +
- struct RISCVVirtState {
-     /*< private >*/
-     MachineState parent;
- 
-     /*< public >*/
-     RISCVHartArrayState soc[VIRT_SOCKETS_MAX];
--    DeviceState *plic[VIRT_SOCKETS_MAX];
-+    DeviceState *irqchip[VIRT_SOCKETS_MAX];
-     PFlashCFI01 *flash[2];
-     FWCfgState *fw_cfg;
- 
-     int fdt_size;
-     bool have_aclint;
-+    RISCVVirtAIAType aia_type;
- };
- 
- enum {
-@@ -54,6 +60,8 @@ enum {
-     VIRT_CLINT,
-     VIRT_ACLINT_SSWI,
-     VIRT_PLIC,
-+    VIRT_APLIC_M,
-+    VIRT_APLIC_S,
-     VIRT_UART0,
-     VIRT_VIRTIO,
-     VIRT_FW_CFG,
-@@ -73,9 +81,10 @@ enum {
-     VIRTIO_NDEV = 0x35 /* Arbitrary maximum number of interrupts */
- };
- 
-+#define VIRT_IRQCHIP_NUM_SOURCES 127
-+#define VIRT_IRQCHIP_NUM_PRIO_BITS 3
++    /* Writes cannot be out of range */
++    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
++        goto err;
++    }
 +
- #define VIRT_PLIC_HART_CONFIG "MS"
--#define VIRT_PLIC_NUM_SOURCES 127
--#define VIRT_PLIC_NUM_PRIORITIES 7
- #define VIRT_PLIC_PRIORITY_BASE 0x04
- #define VIRT_PLIC_PENDING_BASE 0x1000
- #define VIRT_PLIC_ENABLE_BASE 0x2000
-@@ -87,9 +96,14 @@ enum {
- 
- #define FDT_PCI_ADDR_CELLS    3
- #define FDT_PCI_INT_CELLS     1
--#define FDT_PLIC_ADDR_CELLS   0
- #define FDT_PLIC_INT_CELLS    1
--#define FDT_INT_MAP_WIDTH     (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + 1 + \
--                               FDT_PLIC_ADDR_CELLS + FDT_PLIC_INT_CELLS)
-+#define FDT_APLIC_INT_CELLS   2
-+#define FDT_MAX_INT_CELLS     2
-+#define FDT_MAX_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_MAX_INT_CELLS)
-+#define FDT_PLIC_INT_MAP_WIDTH  (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_PLIC_INT_CELLS)
-+#define FDT_APLIC_INT_MAP_WIDTH (FDT_PCI_ADDR_CELLS + FDT_PCI_INT_CELLS + \
-+                                 1 + FDT_APLIC_INT_CELLS)
- 
- #endif
++    /* Writes only supported for MSI little-endian registers */
++    page = addr >> IMSIC_MMIO_PAGE_SHIFT;
++    if ((addr & (IMSIC_MMIO_PAGE_SZ - 1)) == IMSIC_MMIO_PAGE_LE) {
++        if (value && (value < imsic->num_irqs)) {
++            imsic->eistate[(page * imsic->num_irqs) + value] |=
++                                                    IMSIC_EISTATE_PENDING;
++        }
++    }
++
++    /* Update CPU external interrupt status */
++    riscv_imsic_update(imsic, page);
++
++    return;
++
++err:
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
++                  __func__, addr);
++}
++
++static const MemoryRegionOps riscv_imsic_ops = {
++    .read = riscv_imsic_read,
++    .write = riscv_imsic_write,
++    .endianness = DEVICE_LITTLE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 4
++    }
++};
++
++static void riscv_imsic_realize(DeviceState *dev, Error **errp)
++{
++    RISCVIMSICState *imsic = RISCV_IMSIC(dev);
++    RISCVCPU *rcpu = RISCV_CPU(qemu_get_cpu(imsic->hartid));
++    CPUState *cpu = qemu_get_cpu(imsic->hartid);
++    CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
++
++    imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
++    imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
++    imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
++    imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
++
++    memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
++                          imsic, TYPE_RISCV_IMSIC,
++                          IMSIC_MMIO_SIZE(imsic->num_pages));
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &imsic->mmio);
++
++    /* Claim the CPU interrupt to be triggered by this IMSIC */
++    if (riscv_cpu_claim_interrupts(rcpu,
++            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
++        error_report("%s already claimed",
++                     (imsic->mmode) ? "MEIP" : "SEIP");
++        exit(1);
++    }
++
++    /* Create output IRQ lines */
++    imsic->external_irqs = g_malloc(sizeof(qemu_irq) * imsic->num_pages);
++    qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
++
++    /* Force select AIA feature and setup CSR read-modify-write callback */
++    if (env) {
++        riscv_set_feature(env, RISCV_FEATURE_AIA);
++        if (!imsic->mmode) {
++            riscv_cpu_set_geilen(env, imsic->num_pages - 1);
++        }
++        riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
++                                      riscv_imsic_rmw, imsic);
++    }
++
++    msi_nonbroken = true;
++}
++
++static Property riscv_imsic_properties[] = {
++    DEFINE_PROP_BOOL("mmode", RISCVIMSICState, mmode, 0),
++    DEFINE_PROP_UINT32("hartid", RISCVIMSICState, hartid, 0),
++    DEFINE_PROP_UINT32("num-pages", RISCVIMSICState, num_pages, 0),
++    DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static const VMStateDescription vmstate_riscv_imsic = {
++    .name = "riscv_imsic",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++            VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
++                                  num_pages, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
++                                  num_pages, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_VARRAY_UINT32(eistate, RISCVIMSICState,
++                                  num_eistate, 0,
++                                  vmstate_info_uint32, uint32_t),
++            VMSTATE_END_OF_LIST()
++        }
++};
++
++static void riscv_imsic_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    device_class_set_props(dc, riscv_imsic_properties);
++    dc->realize = riscv_imsic_realize;
++    dc->vmsd = &vmstate_riscv_imsic;
++}
++
++static const TypeInfo riscv_imsic_info = {
++    .name          = TYPE_RISCV_IMSIC,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(RISCVIMSICState),
++    .class_init    = riscv_imsic_class_init,
++};
++
++static void riscv_imsic_register_types(void)
++{
++    type_register_static(&riscv_imsic_info);
++}
++
++type_init(riscv_imsic_register_types)
++
++/*
++ * Create IMSIC device.
++ */
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
++                                uint32_t num_pages, uint32_t num_ids)
++{
++    DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
++    CPUState *cpu = qemu_get_cpu(hartid);
++    uint32_t i;
++
++    assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
++    if (mmode) {
++        assert(num_pages == 1);
++    } else {
++        assert(num_pages >= 1 && num_pages <= (IRQ_LOCAL_GUEST_MAX + 1));
++    }
++    assert(IMSIC_MIN_ID <= num_ids);
++    assert(num_ids <= IMSIC_MAX_ID);
++    assert((num_ids & IMSIC_MIN_ID) == IMSIC_MIN_ID);
++
++    qdev_prop_set_bit(dev, "mmode", mmode);
++    qdev_prop_set_uint32(dev, "hartid", hartid);
++    qdev_prop_set_uint32(dev, "num-pages", num_pages);
++    qdev_prop_set_uint32(dev, "num-irqs", num_ids + 1);
++
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
++
++    for (i = 0; i < num_pages; i++) {
++        if (!i) {
++            qdev_connect_gpio_out_named(dev, NULL, i,
++                                        qdev_get_gpio_in(DEVICE(cpu),
++                                            (mmode) ? IRQ_M_EXT : IRQ_S_EXT));
++        } else {
++            qdev_connect_gpio_out_named(dev, NULL, i,
++                                        qdev_get_gpio_in(DEVICE(cpu),
++                                            IRQ_LOCAL_MAX + i - 1));
++        }
++    }
++
++    return dev;
++}
+diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
+new file mode 100644
+index 0000000000..58c2aaa8dc
+--- /dev/null
++++ b/include/hw/intc/riscv_imsic.h
+@@ -0,0 +1,68 @@
++/*
++ * RISC-V IMSIC (Incoming Message Signal Interrupt Controller) interface
++ *
++ * Copyright (c) 2021 Western Digital Corporation or its affiliates.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef HW_RISCV_IMSIC_H
++#define HW_RISCV_IMSIC_H
++
++#include "hw/sysbus.h"
++#include "qom/object.h"
++
++#define TYPE_RISCV_IMSIC "riscv.imsic"
++
++typedef struct RISCVIMSICState RISCVIMSICState;
++DECLARE_INSTANCE_CHECKER(RISCVIMSICState, RISCV_IMSIC, TYPE_RISCV_IMSIC)
++
++#define IMSIC_MMIO_PAGE_SHIFT          12
++#define IMSIC_MMIO_PAGE_SZ             (1UL << IMSIC_MMIO_PAGE_SHIFT)
++#define IMSIC_MMIO_SIZE(__num_pages)   ((__num_pages) * IMSIC_MMIO_PAGE_SZ)
++
++#define IMSIC_MMIO_HART_GUEST_MAX_BTIS 6
++#define IMSIC_MMIO_GROUP_MIN_SHIFT     24
++
++#define IMSIC_HART_NUM_GUESTS(__guest_bits)           \
++    (1U << (__guest_bits))
++#define IMSIC_HART_SIZE(__guest_bits)                 \
++    (IMSIC_HART_NUM_GUESTS(__guest_bits) * IMSIC_MMIO_PAGE_SZ)
++#define IMSIC_GROUP_NUM_HARTS(__hart_bits)            \
++    (1U << (__hart_bits))
++#define IMSIC_GROUP_SIZE(__hart_bits, __guest_bits)   \
++    (IMSIC_GROUP_NUM_HARTS(__hart_bits) * IMSIC_HART_SIZE(__guest_bits))
++
++struct RISCVIMSICState {
++    /*< private >*/
++    SysBusDevice parent_obj;
++    qemu_irq *external_irqs;
++
++    /*< public >*/
++    MemoryRegion mmio;
++    uint32_t num_eistate;
++    uint32_t *eidelivery;
++    uint32_t *eithreshold;
++    uint32_t *eistate;
++
++    /* config */
++    bool mmode;
++    uint32_t hartid;
++    uint32_t num_pages;
++    uint32_t num_irqs;
++};
++
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
++                                uint32_t num_pages, uint32_t num_ids);
++
++#endif
 -- 
 2.25.1
 
