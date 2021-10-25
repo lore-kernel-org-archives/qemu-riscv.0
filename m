@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf3ts-0000Ke-Q8
+	id 1mf3ts-0000Kx-VX
 	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 13:36:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47554)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47556)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mf3ta-0008Vo-72; Mon, 25 Oct 2021 13:36:30 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:40756)
+ id 1mf3ta-0008Vq-9Y; Mon, 25 Oct 2021 13:36:30 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:44020)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1mf3tX-0001vm-SC; Mon, 25 Oct 2021 13:36:25 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id 5so2450754edw.7;
- Mon, 25 Oct 2021 10:36:23 -0700 (PDT)
+ id 1mf3tX-0001tj-8f; Mon, 25 Oct 2021 13:36:25 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id u13so2474139edy.10;
+ Mon, 25 Oct 2021 10:36:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=1Czbi/vUawZUe0SX4m8TkJPzL7ZQqeZvUuHtWi7xGVQ=;
- b=Z/Kf01AbNCHpKtw5mVH9iMwFNkk1ODVxWhLmLua3tUjAv6Z87m2Oy9S1KgQF/ZX+Wy
- zpRxWFD4778p3iJFFaT7t8ALS3QvWPzeHQO07Ea09oA0TwM730nIQZ3mBRvTcTD5Xv7w
- 0H0MXQrOsnmnVbWEGEx/NTiEeKo63Vfl1EhKnxOokXPNKHehG069e4+LsmAXuCisAbRC
- 6KhBYrVmKZDEjzVIBKhoaF4JRU+OhQvgq2XcpSsmoJoImyLW5fdrGtFth2Xd7oOR4ySq
- 2aLQBKp448jb7Rf6LbMhgqzJ5K5j2iw9MX3mY+QNDAnKEzbaK5qvxVK7QM6PP4t0iAik
- B2kA==
+ bh=30Rr5zBDGX3Q/F7X+8Z5noR3VKMiFQSDNud4fcCCzTs=;
+ b=nxJc7God/uTTwy3/7ALbrAF7r77BgJnblIBj2z4NKrbzt7Pth+hfkk4/zz7M7n7ugV
+ FNWbB1Ou57/o6dbzHOHYN7bq+NXxGPLc5HRkAOi1ghlYePLnRBxHpbyDlK9MOqrUQfOw
+ PbrE1EA1B9Kf8z7vFU+ukb3510yj35WzYZX4DeT8XXFLgTosuIbiiN82ZAVjJuhAHyAA
+ tvqLctLzGt7pxALzY2KSwS34aMnpLO0sKhlI62+pI4t/xG9Qzqg/QIz5zmbXMasnLrBn
+ tO5WL4JaPC4pX4WzR6tB6yX7bSmWWDrdmnAvSsUlsyQMUiLEqk1GIGrX7EoN8Mk/anoR
+ UJzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=1Czbi/vUawZUe0SX4m8TkJPzL7ZQqeZvUuHtWi7xGVQ=;
- b=OyUaIOVtdL8MvDk6o/RlXCyTSEVH6Z7v6l61RUR++Z7wxf3TqyWxtDFl4Xx6x7xmgn
- 5CIOBl2/TyWRkl6nvOnJHZK9fHk3cmpHcxZW8ZKWzujeNm4ku/Qtwj/MyoYudhic6m42
- luriaT1gJIb5lZlIOR3dFnku8wBsRZUEwnbRtkw//BVUWI2qNpjvSIn2jBnDly5yK3Tu
- xprO0sfLdhETUmu2yqv+kaChOdvG336Wdjod08imTp5rnjSUoShmRhW2Ppwoern6KvZg
- IwD3hChvSXF/bifMGN5H/CF4DIGJP5YGIQXv96DxsXGmlCmqso6bZH/vFwLcBiOjQAfI
- KTNQ==
-X-Gm-Message-State: AOAM53234VJ5/O0fZnWJCw5WhMHOvt+Owj4s4VUSI8OmAnHwmuOtFPG1
- l5aBJdRsCgPZbWD8EMchAQY=
-X-Google-Smtp-Source: ABdhPJwO4ikuvf8xRaxfh2LElqELrxJXfDC4VJSvD7LE77zNhZu9J5fnwzOosAKryfWTpU+nu7H2Dg==
-X-Received: by 2002:a17:907:7b9e:: with SMTP id
- ne30mr7824132ejc.531.1635183382199; 
- Mon, 25 Oct 2021 10:36:22 -0700 (PDT)
+ bh=30Rr5zBDGX3Q/F7X+8Z5noR3VKMiFQSDNud4fcCCzTs=;
+ b=6KeGxZKJVGRamGNum85lbD5HVDbdaRjmAmu96ZiHrOsDjmu0zNoE/OTshIe13xOtW3
+ jOYy6wua3EVFgKdfxLNBslYPB7gnVuZnETSniQuA4C6iPsDoQ7aw7RBEY1nCHwsRzybP
+ KknO/PrhOgzKzB8sxyINMrEi72q1yeV1qV6HjRLNeCWAP9r1BRd9DM8isVGWJy7lnnXa
+ Ncyhbf5P69cs26bZ/2y1U+Mx4eSt7mV2D102DbbFgbOlvZpFGWpeKmqw0G03ibhKhPgO
+ 6L51xXVJtTU1CIOWzLxJQbG5Hzy8OwqI+Qm0cTO9BAvFZPLLKqwtD4SGXcaOApvg27ft
+ 9WrQ==
+X-Gm-Message-State: AOAM531waWGdsQG0+Uc/s5J/ObLyLdwa7LW0z0Do/o1UIY7/8SNEr2sp
+ 7Px8QvjBWRx7D9vF47y+gnI=
+X-Google-Smtp-Source: ABdhPJz7bsSVB8zgvzPao1bZLquDSM8cYZEVpsCQXvpwhbDUEfpwTDFrTVdpmFYYsvCVF/IqbyFEJA==
+X-Received: by 2002:a17:907:7601:: with SMTP id
+ jx1mr24301020ejc.69.1635183379922; 
+ Mon, 25 Oct 2021 10:36:19 -0700 (PDT)
 Received: from neptune.lab ([46.39.229.76])
- by smtp.googlemail.com with ESMTPSA id q14sm9718871edj.42.2021.10.25.10.36.21
+ by smtp.googlemail.com with ESMTPSA id q14sm9718871edj.42.2021.10.25.10.36.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Oct 2021 10:36:21 -0700 (PDT)
+ Mon, 25 Oct 2021 10:36:19 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -50,9 +50,9 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v17 4/8] target/riscv: Add J extension state description
-Date: Mon, 25 Oct 2021 20:36:05 +0300
-Message-Id: <20211025173609.2724490-5-space.monkey.delivers@gmail.com>
+Subject: [PATCH v17 2/8] target/riscv: Add CSR defines for RISC-V PM extension
+Date: Mon, 25 Oct 2021 20:36:03 +0300
+Message-Id: <20211025173609.2724490-3-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211025173609.2724490-1-space.monkey.delivers@gmail.com>
 References: <20211025173609.2724490-1-space.monkey.delivers@gmail.com>
@@ -65,8 +65,8 @@ X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -84,61 +84,121 @@ X-List-Received-Date: Mon, 25 Oct 2021 17:36:31 -0000
 Signed-off-by: Alexey Baturo <space.monkey.delivers@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/machine.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
+ target/riscv/cpu_bits.h | 96 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index f64b2a96c1..7b4c739564 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -84,6 +84,14 @@ static bool vector_needed(void *opaque)
-     return riscv_has_ext(env, RVV);
- }
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index cffcd3a5df..aa0bce4e06 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -334,6 +334,38 @@
+ #define CSR_MHPMCOUNTER30H  0xb9e
+ #define CSR_MHPMCOUNTER31H  0xb9f
  
-+static bool pointermasking_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
++/*
++ * User PointerMasking registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_UMTE            0x4c0
++#define CSR_UPMMASK         0x4c1
++#define CSR_UPMBASE         0x4c2
 +
-+    return riscv_has_ext(env, RVJ);
-+}
++/*
++ * Machine PointerMasking registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_MMTE            0x3c0
++#define CSR_MPMMASK         0x3c1
++#define CSR_MPMBASE         0x3c2
 +
- static const VMStateDescription vmstate_vector = {
-     .name = "cpu/vector",
-     .version_id = 1,
-@@ -100,6 +108,24 @@ static const VMStateDescription vmstate_vector = {
-         }
- };
- 
-+static const VMStateDescription vmstate_pointermasking = {
-+    .name = "cpu/pointer_masking",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = pointermasking_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(env.mmte, RISCVCPU),
-+        VMSTATE_UINTTL(env.mpmmask, RISCVCPU),
-+        VMSTATE_UINTTL(env.mpmbase, RISCVCPU),
-+        VMSTATE_UINTTL(env.spmmask, RISCVCPU),
-+        VMSTATE_UINTTL(env.spmbase, RISCVCPU),
-+        VMSTATE_UINTTL(env.upmmask, RISCVCPU),
-+        VMSTATE_UINTTL(env.upmbase, RISCVCPU),
++/*
++ * Supervisor PointerMaster registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_SMTE            0x1c0
++#define CSR_SPMMASK         0x1c1
++#define CSR_SPMBASE         0x1c2
 +
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
++/*
++ * Hypervisor PointerMaster registers
++ * NB: actual CSR numbers might be changed in future
++ */
++#define CSR_VSMTE           0x2c0
++#define CSR_VSPMMASK        0x2c1
++#define CSR_VSPMBASE        0x2c2
 +
- static const VMStateDescription vmstate_hyper = {
-     .name = "cpu/hyper",
-     .version_id = 1,
-@@ -191,6 +217,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_pmp,
-         &vmstate_hyper,
-         &vmstate_vector,
-+        &vmstate_pointermasking,
-         NULL
-     }
- };
+ /* mstatus CSR bits */
+ #define MSTATUS_UIE         0x00000001
+ #define MSTATUS_SIE         0x00000002
+@@ -525,4 +557,68 @@ typedef enum RISCVException {
+ #define MIE_UTIE                           (1 << IRQ_U_TIMER)
+ #define MIE_SSIE                           (1 << IRQ_S_SOFT)
+ #define MIE_USIE                           (1 << IRQ_U_SOFT)
++
++/* General PointerMasking CSR bits*/
++#define PM_ENABLE       0x00000001ULL
++#define PM_CURRENT      0x00000002ULL
++#define PM_INSN         0x00000004ULL
++#define PM_XS_MASK      0x00000003ULL
++
++/* PointerMasking XS bits values */
++#define PM_EXT_DISABLE  0x00000000ULL
++#define PM_EXT_INITIAL  0x00000001ULL
++#define PM_EXT_CLEAN    0x00000002ULL
++#define PM_EXT_DIRTY    0x00000003ULL
++
++/* Offsets for every pair of control bits per each priv level */
++#define XS_OFFSET    0ULL
++#define U_OFFSET     2ULL
++#define S_OFFSET     5ULL
++#define M_OFFSET     8ULL
++
++#define PM_XS_BITS   (PM_XS_MASK << XS_OFFSET)
++#define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
++#define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
++#define U_PM_INSN    (PM_INSN    << U_OFFSET)
++#define S_PM_ENABLE  (PM_ENABLE  << S_OFFSET)
++#define S_PM_CURRENT (PM_CURRENT << S_OFFSET)
++#define S_PM_INSN    (PM_INSN    << S_OFFSET)
++#define M_PM_ENABLE  (PM_ENABLE  << M_OFFSET)
++#define M_PM_CURRENT (PM_CURRENT << M_OFFSET)
++#define M_PM_INSN    (PM_INSN    << M_OFFSET)
++
++/* mmte CSR bits */
++#define MMTE_PM_XS_BITS     PM_XS_BITS
++#define MMTE_U_PM_ENABLE    U_PM_ENABLE
++#define MMTE_U_PM_CURRENT   U_PM_CURRENT
++#define MMTE_U_PM_INSN      U_PM_INSN
++#define MMTE_S_PM_ENABLE    S_PM_ENABLE
++#define MMTE_S_PM_CURRENT   S_PM_CURRENT
++#define MMTE_S_PM_INSN      S_PM_INSN
++#define MMTE_M_PM_ENABLE    M_PM_ENABLE
++#define MMTE_M_PM_CURRENT   M_PM_CURRENT
++#define MMTE_M_PM_INSN      M_PM_INSN
++#define MMTE_MASK    (MMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | MMTE_U_PM_INSN | \
++                      MMTE_S_PM_ENABLE | MMTE_S_PM_CURRENT | MMTE_S_PM_INSN | \
++                      MMTE_M_PM_ENABLE | MMTE_M_PM_CURRENT | MMTE_M_PM_INSN | \
++                      MMTE_PM_XS_BITS)
++
++/* (v)smte CSR bits */
++#define SMTE_PM_XS_BITS     PM_XS_BITS
++#define SMTE_U_PM_ENABLE    U_PM_ENABLE
++#define SMTE_U_PM_CURRENT   U_PM_CURRENT
++#define SMTE_U_PM_INSN      U_PM_INSN
++#define SMTE_S_PM_ENABLE    S_PM_ENABLE
++#define SMTE_S_PM_CURRENT   S_PM_CURRENT
++#define SMTE_S_PM_INSN      S_PM_INSN
++#define SMTE_MASK    (SMTE_U_PM_ENABLE | SMTE_U_PM_CURRENT | SMTE_U_PM_INSN | \
++                      SMTE_S_PM_ENABLE | SMTE_S_PM_CURRENT | SMTE_S_PM_INSN | \
++                      SMTE_PM_XS_BITS)
++
++/* umte CSR bits */
++#define UMTE_U_PM_ENABLE    U_PM_ENABLE
++#define UMTE_U_PM_CURRENT   U_PM_CURRENT
++#define UMTE_U_PM_INSN      U_PM_INSN
++#define UMTE_MASK     (UMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | UMTE_U_PM_INSN)
++
+ #endif
 -- 
 2.30.2
 
