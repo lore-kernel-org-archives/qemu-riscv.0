@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf2K4-0003IB-LP
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 11:55:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51798)
+	id 1mf2L6-0003wj-Vx
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 11:56:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51952)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mf2K3-0003Hk-4N; Mon, 25 Oct 2021 11:55:39 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436]:46071)
+ id 1mf2L4-0003t6-Nz; Mon, 25 Oct 2021 11:56:42 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:45692)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mf2K1-0002tX-LZ; Mon, 25 Oct 2021 11:55:38 -0400
-Received: by mail-wr1-x436.google.com with SMTP id a16so12462280wrh.12;
- Mon, 25 Oct 2021 08:55:36 -0700 (PDT)
+ id 1mf2L2-0005mL-EA; Mon, 25 Oct 2021 11:56:42 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ 71-20020a1c014a000000b0032cafd23b1dso428517wmb.4; 
+ Mon, 25 Oct 2021 08:56:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=sender:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=grQpYbY8FpA8WtajKuIYBhdSAcwV06N9HikJE1gLSYQ=;
- b=CGoHJvYx/hTUwthL4wP8d7lY+gJtGEyzpi0+VNj9nNithgKYztb5FWCM4kb39YT8Dh
- QOdYsRXvdhbUiUKbaLrFmUgk/L3OXKppaM6VYJ+dNVaIUm/KC0uPUweQUIiu6QZmpgQp
- kh16jgZ6MHt44Hqg6b855NibXJabF+eu0KIZlGwFgYNzbG7+a689ShCISjmvrswMx0lk
- ENmWjULBhq0rs2eZFOjFCWl1ZEx1qlaIX90SiweIPqC3JKLwTPDIF4S3zsBNj2bYmy7g
- YkZcMVgqGIA+Ilfo/VBRRcogPxudIcrY6KouAlT1ojvLteaBtPrgUfFxrdji5IkOdZRH
- Z0rg==
+ bh=Q7jsTJhnPdSU4NLw5szcgqWjL15U5QhL98qLEhGKFAI=;
+ b=m4mrKmLC78Is7J0S9rpzYr71t/mTyvBca1cLwpIVmJpxkAQVvQVQKf1M/Wr1+UEJgN
+ cfLQUFi4M/7R8xbwPUdFX5NkToQyj7AU6vwwPq0MNw/ooQZnHlXg62132uU+3Y8/PVX8
+ o1yRLxSFolyelulUBOaYrPImLhRM0hEsogjVsj41N3ryZTb89eSBddppW7+OAC6chu/V
+ FqReE5fadKFfgTpPuhalNXFmiAJSApVH2pNbXjjrBSkagZPDEPv5bAot0bJSfD/9urPY
+ azuiTQPwXSowICYhpmZo8vMY46Gs4leOBeEKzH/O/87E4l3KZEMbRsLMpHpSCBGA0MCU
+ gOiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
  :subject:content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=grQpYbY8FpA8WtajKuIYBhdSAcwV06N9HikJE1gLSYQ=;
- b=bC1dZlyjPGj8i6dDVaXLjzc3vVSx2s96RHTvehSgzg9DjHKJYICYKtAAiaaQ6aPeH/
- R58CqOWO9bYkSkymc8BDBlun6jqll2/Zx3Tkmwpk+Ym2WJ5VDiErISLTyZ5HXiT+YddJ
- 4I9YrqxHYFGL4SoIaiPSNB0KMKKCXNZAhogBbgxrH8VAhp+363WoX/kc5S70X54b8H9L
- hqqqIFu3T691q/Qg5ktCA6SSsuuVpYyiT7P3jbwP78UDZvBXpLqu3TemH8ktelBPtA0v
- Y5V2d0GEdueARLvd3fcTxDcvgxDYjSVDiW+LcxO3Xo7PE28Rwjj0XTwMYwAq/NBz3aLn
- X2gw==
-X-Gm-Message-State: AOAM531lyT5kJHo5gYX12B/UEba3EJ88j6PbtZFOtxHZo/bqB2RHuTv3
- UNwwyY2DfK3IZY+FEzYSuFE=
-X-Google-Smtp-Source: ABdhPJwQ2SR9SZu9bvI/ufyijB5JrSOwRUKMsYlzKwZ1DQQWjmloe/DgbFPcD7/WawL2mC91k5dDqw==
-X-Received: by 2002:adf:eece:: with SMTP id a14mr21293292wrp.79.1635177334560; 
- Mon, 25 Oct 2021 08:55:34 -0700 (PDT)
+ bh=Q7jsTJhnPdSU4NLw5szcgqWjL15U5QhL98qLEhGKFAI=;
+ b=SfAC1kHo9N2L5O++eyzE7dxtpSn2FS6n2rz+oV/3y8tpYh9LE4nRH5yGtghDH28TnU
+ 3YFp9DnE1RmLaeRCltMLh26w4+SgF2digqS63j7bSbFPGTE6UvhhPv4Q2qec5W5WKCrG
+ VI0yHXtjBEpe39hOmD5s1UgPmfpfXYy9WMDhGJh1jpyMoP54sJ4UZiKsnUcs/9HXB6ss
+ YbLGg+/U6CfMY1IQm9SGCAx75n7CnnjKhPBbfVpPLVxCiHwqV8eplc5ENvX9Abfqpn/4
+ qRtq2guTSEk2JzY6XIvcO5xXVk0WfQnLJG+gv/RVbqzJduEDU4qtbXvpGcrsaCxMYd4n
+ rnRw==
+X-Gm-Message-State: AOAM532bbrPiGeNfr7A31OameAmBTxhD5S8hiD50I0I81LP3AKjbYR1L
+ P9yLXyJJcuLWHBv466hc8lk=
+X-Google-Smtp-Source: ABdhPJw04qroD+59/EmNniodbNKT7zkG9QIIKKaaKkI/2Rk5WEjsGLWGa/8sl3/oUt+xW6OGIUVYHw==
+X-Received: by 2002:a1c:9d8b:: with SMTP id
+ g133mr24098299wme.132.1635177395082; 
+ Mon, 25 Oct 2021 08:56:35 -0700 (PDT)
 Received: from [192.168.1.36] (62.red-83-57-168.dynamicip.rima-tde.net.
  [83.57.168.62])
- by smtp.gmail.com with ESMTPSA id z135sm21872276wmc.45.2021.10.25.08.55.33
+ by smtp.gmail.com with ESMTPSA id u2sm16096241wrr.35.2021.10.25.08.56.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Oct 2021 08:55:34 -0700 (PDT)
+ Mon, 25 Oct 2021 08:56:34 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Message-ID: <736b66fc-6109-0c26-7faf-3bec9d065c3a@amsat.org>
-Date: Mon, 25 Oct 2021 17:55:32 +0200
+Message-ID: <04382cc1-750c-ee71-2cec-74a28b4375ad@amsat.org>
+Date: Mon, 25 Oct 2021 17:56:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v4 05/17] target/riscv: array for the 64 upper bits of
- 128-bit registers
+Subject: Re: [PATCH v4 07/17] target/riscv: moving some insns close to similar
+ insns
 Content-Language: en-US
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
@@ -60,19 +62,19 @@ To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
 Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  bin.meng@windriver.com, palmer@dabbelt.com, fabien.portas@grenoble-inp.org
 References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211025122818.168890-6-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211025122818.168890-8-frederic.petrot@univ-grenoble-alpes.fr>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20211025122818.168890-6-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211025122818.168890-8-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -42
-X-Spam_score: -4.3
-X-Spam_bar: ----
-X-Spam_report: (-4.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-2.846,
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-2.846,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -87,61 +89,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 15:55:39 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 15:56:43 -0000
 
 On 10/25/21 14:28, Frédéric Pétrot wrote:
-> The upper 64-bit of the 128-bit registers have now a place inside
-> the cpu state structure, and are created as globals for future use.
+> lwu and ld are functionally close to the other loads, but were after the
+> stores in the source file.
+> Similarly, xor was away from or and and by two arithmetic functions, while
+> the immediate versions were nicely put together.
+> This patch moves the aforementioned loads after lhu, and xor above or,
+> where they more logically belong.
 > 
 > Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 > Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->  target/riscv/cpu.h       |  2 ++
->  target/riscv/cpu.c       |  9 +++++++++
->  target/riscv/machine.c   | 20 ++++++++++++++++++++
->  target/riscv/translate.c |  5 ++++-
->  4 files changed, 35 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a33dc30be8..f6d7a1793d 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -109,6 +109,7 @@ FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
->  
->  struct CPURISCVState {
->      target_ulong gpr[32];
+>  target/riscv/insn_trans/trans_rvi.c.inc | 34 ++++++++++++-------------
+>  1 file changed, 17 insertions(+), 17 deletions(-)
 
-#if TARGET_LONG_BITS > 32 ?
-
-> +    target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
-
-Shouldn't this be uint64_t?
-
-#endif
-
->  /* global register indices */
-> -static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
-> +static TCGv cpu_gpr[32], cpu_gprh[32], cpu_pc, cpu_vl;
-
-and TCGv_i64, with ifdef'ry?
-
->  static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
->  static TCGv load_res;
->  static TCGv load_val;
-> @@ -749,10 +749,13 @@ void riscv_translate_init(void)
->       * unless you specifically block reads/writes to reg 0.
->       */
->      cpu_gpr[0] = NULL;
-> +    cpu_gprh[0] = NULL;
->  
->      for (i = 1; i < 32; i++) {
->          cpu_gpr[i] = tcg_global_mem_new(cpu_env,
->              offsetof(CPURISCVState, gpr[i]), riscv_int_regnames[i]);
-> +        cpu_gprh[i] = tcg_global_mem_new(cpu_env,
-> +            offsetof(CPURISCVState, gprh[i]), riscv_int_regnamesh[i]);
->      }
->  
->      for (i = 0; i < 32; i++) {
-> 
-
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
