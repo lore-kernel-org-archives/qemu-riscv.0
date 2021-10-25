@@ -1,56 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf65D-0002fz-Fo
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 15:56:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51782)
+	id 1mf65E-0002h4-4h
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 15:56:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51744)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=925953cd0=atish.patra@wdc.com>)
- id 1mf65C-0002a3-6h; Mon, 25 Oct 2021 15:56:34 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:65114)
+ id 1mf65A-0002Sz-BR; Mon, 25 Oct 2021 15:56:32 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:65116)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=925953cd0=atish.patra@wdc.com>)
- id 1mf65A-0005S8-28; Mon, 25 Oct 2021 15:56:33 -0400
+ id 1mf656-0005UD-Mu; Mon, 25 Oct 2021 15:56:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1635191791; x=1666727791;
+ t=1635191788; x=1666727788;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=e1wnU3i015LEcGifHvdvLyfAf3cHkdggweJcARNPBXw=;
- b=rp/ouy9XmJStPLjcsbUG2qHi+itJPajsu2NrjF75k7fk/b96S/JsALgb
- 8NJ/Bl7scXm1B00uXlVayIPeLkbmfnhkv808HaQL7SYGMYDOohM2Zb0+A
- 8ka0ZmsbrjKPb+Yid+Zg6nmxFzrYWgUGia1sGIV1XPLwp9/oRu7Y93P5a
- PKFQ6cUFFVitQ/V6574FhpCW0xtAbe+IsGyV90hlJEUDXAt+dpYCYZRY7
- yyRi2kWzw0BxsaW4M/w/xtv10SO8jb9bKYTCZO+bVqr6xI1ILqGCe3iQE
- D+FPaNVLfHTMa3g28KB9V/qLvyCmW6Ezkp362HN6fCl0aZoTYMsgjPZdg A==;
-X-IronPort-AV: E=Sophos;i="5.87,181,1631548800"; d="scan'208";a="287683002"
+ bh=tOzvjqZBgBbh6hhjshLMcUkRPj1rYsYkPrMwh9QKvrA=;
+ b=oUbB5Bvce3Hu6FkjJVxMSZ1PQKjM6O39ekRZve3UAxHNRDBjEYbV8q7w
+ VScDs9aGZVNMsn4tgfkau6gY9b9SpDLYy2grpFjPe36/E0dThsdOs7pSD
+ czcdvOzqrIz+3KYmUGve0oiJKLI5+CAz4aaFBDQ1H1V0Q8nsz7gP1JMPz
+ m7EQGo/EIMe+0eRHOlEWAJDy3WWQHZZODqhaFjcDUeUZC15YDwtNCgG1O
+ y3q4cCZOybVBKPyaUCYXz9YtqsqjZAPnPECtDq/nesyVpYA3TEeoKf/Ko
+ k7593aS+H98K+u9flkbo+AnSjuucKW0du3/qXMIV+z1bu9eWKabKog3g4 A==;
+X-IronPort-AV: E=Sophos;i="5.87,181,1631548800"; d="scan'208";a="287683000"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 03:56:24 +0800
-IronPort-SDR: V1T2QKbZ9QR+Dcg74haQu4HAjFATlD9TlFkWEHM0AIQHpHSD+A5O7xL36byRHRB7qnfSoVuFjp
- u7RTx38U/WFSx6rt3lTCphHyJgU0vF2JmW79ulHgwwrtJkfT+7rL77tnXDOSjebqGShWTBklL6
- 1dmR5S0iT2MACQtoN/6upR+Ub0wo6gdtnnzrulZBPV5B9+3iTxaQoYG12ynKO/nKeIpq7l8uDf
- n4BH0PSz7ofwMcmEZaOdOwSGCVYL11xqVdy7+koLWR6PJoA7cDVDwaG+HUamm7r+MN1van3/HC
- WjhQQz94QZrMYu/j5UCMsl1K
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 03:56:23 +0800
+IronPort-SDR: J4tY9o+II63RLhqfRsN+hYPnoPCR0DVb8e5MJA8HgQRVuZfYq8OL1hudv/sejZXY5WGOS7JaGK
+ lgYwkr2hHW/T11oOoWB9FrErocFDG1AzyExbh89E9ODTq6pFBSRtaV9b2kv45O3likyWVecyA/
+ N82/gBqnB9oJY+wfH6oxWT//2EUFJC8YduE0fRbCHWzfONN5mt4Je6WBpKki/+rJIyEXn0vFxC
+ Vp83eYd27uNjuzT0Sa7ZAYqNDg9KzgtyJumxTTAr/LYJ1r+ACuoHMJP7Dtax4m9nPNfc/bChNp
+ YrPd0Ip8eCFUiLJpcTkx3HhP
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2021 12:31:55 -0700
-IronPort-SDR: zjUFrZUHdteqhh+xFaFBomuLILWsQ/pQxMJMZ5ksARXIOt9S6pzC504J0ftMauL/A5YNjSXOa4
- gx2Nu4DXoi94skraAK9WoJkXu9MwSewQVrrDrkn5Frh6PVwJqcQqXpGOBw01zE0xrMSvZEEK7L
- CaQoRUL32bGpw0Tn7RLjxmZtBysgqItBNiAwzP/Au1R1c7Lt+YQwBMjVaq04mhLX/GpwmIVHqU
- XZgHx9RWJDg7ITfySDgAWLDVgfK5O99UHj6i48Dq6BlDEIt2wznLaBF9CcqoBvr9vhPd4hUoT0
- zM8=
+ 25 Oct 2021 12:31:54 -0700
+IronPort-SDR: Juf51POCFLOqoxo/8QZwv016FiUY7J6149AorYjiaylM2QRii/LKFJ/CxPyLBVSpU9wUnyh5aJ
+ QFrbiOdPuXd4i1Ueht6tYWBLg9+kL2EJcFg2YCACAN5vk/nvVAT1a01kpf+VnFoa+LBrd4CBet
+ FGwpD9bp9u5F2D+iVS5w/0dF5JvRXT9H4rOvlL9iIdqPnb8WJblYTbBRFiHbF+d89ieQic7dRT
+ 4ZluL2lcP4tgkk+OoE8j51U3jPVPu3hSQsLRLjngWAmMWDSvKkumNX//hs89EwKnjfWPSo+NnZ
+ oUc=
 WDCIronportException: Internal
 Received: from unknown (HELO hulk.wdc.com) ([10.225.167.27])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2021 12:56:25 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2021 12:56:24 -0700
 From: Atish Patra <atish.patra@wdc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atish.patra@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [ PATCH v3 03/10] target/riscv: pmu: Rename the counters extension to
- pmu
-Date: Mon, 25 Oct 2021 12:55:54 -0700
-Message-Id: <20211025195601.245631-4-atish.patra@wdc.com>
+Subject: [ PATCH v3 01/10] target/riscv: Fix PMU CSR predicate function
+Date: Mon, 25 Oct 2021 12:55:52 -0700
+Message-Id: <20211025195601.245631-2-atish.patra@wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211025195601.245631-1-atish.patra@wdc.com>
 References: <20211025195601.245631-1-atish.patra@wdc.com>
@@ -77,61 +76,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 19:56:34 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 19:56:32 -0000
 
-The PMU counters are supported via cpu config "Counters" which doesn't
-indicate the correct purpose of those counters.
-
-Rename the config property to pmu to indicate that these counters
-are performance monitoring counters. This aligns with cpu options for
-ARM architecture as well.
+The predicate function calculates the counter index incorrectly for
+hpmcounterx. Fix the counter index to reflect correct CSR number.
 
 Signed-off-by: Atish Patra <atish.patra@wdc.com>
 ---
- target/riscv/cpu.c | 2 +-
- target/riscv/cpu.h | 2 +-
- target/riscv/csr.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ target/riscv/csr.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1d69d1887e63..3b55f5ed0036 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -598,7 +598,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
--    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-+    DEFINE_PROP_BOOL("pmu", RISCVCPU, cfg.ext_pmu, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 9e55b2f5b170..ebc1a8754032 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -294,7 +294,7 @@ struct RISCVCPU {
-         bool ext_zbb;
-         bool ext_zbc;
-         bool ext_zbs;
--        bool ext_counters;
-+        bool ext_pmu;
-         bool ext_ifencei;
-         bool ext_icsr;
- 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index de484c74d3b4..c486eeaffeb8 100644
+index 23fbbd32162a..1ec776013435 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -64,7 +64,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     int ctr_index;
- 
--    if (!cpu->cfg.ext_counters) {
-+    if (!cpu->cfg.ext_pmu) {
-         /* The Counters extensions is not enabled */
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
+@@ -89,8 +89,9 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3)) &&
+-                get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3))) {
++            ctr_index = csrno - CSR_CYCLE;
++            if (!get_field(env->hcounteren, 1 << ctr_index) &&
++                 get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+             }
+             break;
+@@ -116,8 +117,9 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3H)) &&
+-                    get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3H))) {
++                ctr_index = csrno - CSR_CYCLEH;
++                if (!get_field(env->hcounteren, 1 << ctr_index) &&
++                     get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+                 }
+                 break;
 -- 
 2.31.1
 
