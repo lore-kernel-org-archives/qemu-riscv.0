@@ -1,56 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf65C-0002bb-LZ
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 15:56:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51728)
+	id 1mf65D-0002fz-Fo
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 15:56:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=925953cd0=atish.patra@wdc.com>)
- id 1mf659-0002Ou-UR; Mon, 25 Oct 2021 15:56:31 -0400
+ id 1mf65C-0002a3-6h; Mon, 25 Oct 2021 15:56:34 -0400
 Received: from esa2.hgst.iphmx.com ([68.232.143.124]:65114)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=925953cd0=atish.patra@wdc.com>)
- id 1mf656-0005S8-GL; Mon, 25 Oct 2021 15:56:30 -0400
+ id 1mf65A-0005S8-28; Mon, 25 Oct 2021 15:56:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1635191788; x=1666727788;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=B1jnmU90YFUZ4lkwBbs3WQbYpNQ8AvKpzI7aLY6zbxg=;
- b=e0aAqjb1pKR+39saTlXWNjncuYVoZUgIe6F7rcwOORWyryRMi+jLIASV
- W+TMwxozzJVvT1J300T6lQkSocmiDH5fg6rWHZqm7d85ylHSYL3HN0oX8
- 3uzvjje2vgY/3g0zh2nprwVSvGVPWsv9KNzYA4lz5Gm2oYKOr5mXRV9y1
- wCxUe2/ltxy3s27ZyIgzxZd8la4Akl2UK0EB+wL8D4CrwgFvLBdFs0pCn
- v4oj6F6TL4Y0+ML7bMNOFV4O04Q0DCjB4tgm56hI8bNERn8au01FgQQIl
- hg/UDRHEkJ2/8DTKS4mdkcsJ+3fiNg01uaOMsJRB6DAMedqwwwWE6KbOJ w==;
-X-IronPort-AV: E=Sophos;i="5.87,181,1631548800"; d="scan'208";a="287682999"
+ t=1635191791; x=1666727791;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=e1wnU3i015LEcGifHvdvLyfAf3cHkdggweJcARNPBXw=;
+ b=rp/ouy9XmJStPLjcsbUG2qHi+itJPajsu2NrjF75k7fk/b96S/JsALgb
+ 8NJ/Bl7scXm1B00uXlVayIPeLkbmfnhkv808HaQL7SYGMYDOohM2Zb0+A
+ 8ka0ZmsbrjKPb+Yid+Zg6nmxFzrYWgUGia1sGIV1XPLwp9/oRu7Y93P5a
+ PKFQ6cUFFVitQ/V6574FhpCW0xtAbe+IsGyV90hlJEUDXAt+dpYCYZRY7
+ yyRi2kWzw0BxsaW4M/w/xtv10SO8jb9bKYTCZO+bVqr6xI1ILqGCe3iQE
+ D+FPaNVLfHTMa3g28KB9V/qLvyCmW6Ezkp362HN6fCl0aZoTYMsgjPZdg A==;
+X-IronPort-AV: E=Sophos;i="5.87,181,1631548800"; d="scan'208";a="287683002"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 03:56:23 +0800
-IronPort-SDR: 6kJSP4IjC9ilGyfUQnVOFKX8JUINZLgMhyOFLBQibDrXI0f8LqeZ3YlLpbYC3Ev4MN6nlg3Do3
- 84XtE7DJ0PfpCJjEmDkaTOugfJ8uuNFo9NsswTCFzQ9sqUQ+ZcWOUtcAV3uoTb4zsIpY/ntVcf
- pn/g7U071WnHScfx08MJ8vesrNECvLC3gkcXWMdw4eFar7p4Fci1lUSaFjDSAf/6mQlagFHO6D
- uGl8Im2FGY35UA1C/g/xUrycIlraO9dQXNen69jzim6oZLqvCHxUca8yu2KnVoqKJIcCuly4FA
- FCQxGRfQOotaUBVEs65TICIl
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 03:56:24 +0800
+IronPort-SDR: V1T2QKbZ9QR+Dcg74haQu4HAjFATlD9TlFkWEHM0AIQHpHSD+A5O7xL36byRHRB7qnfSoVuFjp
+ u7RTx38U/WFSx6rt3lTCphHyJgU0vF2JmW79ulHgwwrtJkfT+7rL77tnXDOSjebqGShWTBklL6
+ 1dmR5S0iT2MACQtoN/6upR+Ub0wo6gdtnnzrulZBPV5B9+3iTxaQoYG12ynKO/nKeIpq7l8uDf
+ n4BH0PSz7ofwMcmEZaOdOwSGCVYL11xqVdy7+koLWR6PJoA7cDVDwaG+HUamm7r+MN1van3/HC
+ WjhQQz94QZrMYu/j5UCMsl1K
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Oct 2021 12:31:54 -0700
-IronPort-SDR: WhBz/9Jd7grjdwsXirPq6M4YMyCWNXOdCGq68INhajPzC6rCnpIxNhTgW9ngBFkObUqezKMZHS
- E6xY9pruIyb7y3ANHJsVjpWxTPuSuImODrx+Tvob6eG7ut7TArdFAUYdUSX25b7V1Yhy41MMZN
- oJUsDeOKFYLwU7ysSAEvSclw7DQRPjqIsONs9kd3Fn/rrvUJ5K/Xwoddd0dCm/aO3yBOaJE9GL
- OtqOBIZgXViTbcXQgfV5SMufoODrVjBDfuHpZLtTtNeK3BXpME9xotX+llw+RImK5CkX1VMEOx
- iWs=
+ 25 Oct 2021 12:31:55 -0700
+IronPort-SDR: zjUFrZUHdteqhh+xFaFBomuLILWsQ/pQxMJMZ5ksARXIOt9S6pzC504J0ftMauL/A5YNjSXOa4
+ gx2Nu4DXoi94skraAK9WoJkXu9MwSewQVrrDrkn5Frh6PVwJqcQqXpGOBw01zE0xrMSvZEEK7L
+ CaQoRUL32bGpw0Tn7RLjxmZtBysgqItBNiAwzP/Au1R1c7Lt+YQwBMjVaq04mhLX/GpwmIVHqU
+ XZgHx9RWJDg7ITfySDgAWLDVgfK5O99UHj6i48Dq6BlDEIt2wznLaBF9CcqoBvr9vhPd4hUoT0
+ zM8=
 WDCIronportException: Internal
 Received: from unknown (HELO hulk.wdc.com) ([10.225.167.27])
- by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2021 12:56:24 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 25 Oct 2021 12:56:25 -0700
 From: Atish Patra <atish.patra@wdc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atish.patra@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [ PATCH v3 00/10] Improve PMU support
-Date: Mon, 25 Oct 2021 12:55:51 -0700
-Message-Id: <20211025195601.245631-1-atish.patra@wdc.com>
+Subject: [ PATCH v3 03/10] target/riscv: pmu: Rename the counters extension to
+ pmu
+Date: Mon, 25 Oct 2021 12:55:54 -0700
+Message-Id: <20211025195601.245631-4-atish.patra@wdc.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20211025195601.245631-1-atish.patra@wdc.com>
+References: <20211025195601.245631-1-atish.patra@wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=68.232.143.124;
@@ -74,129 +77,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 19:56:32 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 19:56:34 -0000
 
-The latest version of the SBI specification includes a Performance Monitoring
-Unit(PMU) extension[1] which allows the supervisor to start/stop/configure
-various PMU events. The Sscofpmf ('Ss' for Privileged arch and Supervisor-level
-extensions, and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
-extension[2] allows the perf like tool to handle overflow interrupts and
-filtering support.
+The PMU counters are supported via cpu config "Counters" which doesn't
+indicate the correct purpose of those counters.
 
-This series implements full PMU infrastructure to support
-PMU in virt machine. This will allow us to add any PMU events in future.
+Rename the config property to pmu to indicate that these counters
+are performance monitoring counters. This aligns with cpu options for
+ARM architecture as well.
 
-Currently, this series enables the following omu events.
-1. cycle count
-2. instruction count
-3. DTLB load/store miss
-4. ITLB prefetch miss
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+---
+ target/riscv/cpu.c | 2 +-
+ target/riscv/cpu.h | 2 +-
+ target/riscv/csr.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-The first two are computed using host ticks while last three are counted during
-cpu_tlb_fill. We can do both sampling and count from guest userspace.
-This series has been tested on both RV64 and RV32. Both Linux[3] and Opensbi[4]
-patches are required to get the perf working.
-
-Here is an output of perf stat/report while running hackbench with OpenSBI & Linux
-kernel patches applied [3].
-
-Perf stat:
-==========
-[root@fedora-riscv riscv]# perf stat -e r8000000000000005 -e r8000000000000007 \
--e r8000000000000006 -e r0000000000020002 -e r0000000000020004 -e branch-misses \
--e cache-misses -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses \
--e cycles -e instructions perf bench sched messaging -g 15 -l 10 \
-Running with 15*40 (== 600) tasks.
-Time: 6.578
-
- Performance counter stats for './hackbench -pipe 15 process':
-
-             1,794      r8000000000000005      (52.59%) --> SBI_PMU_FW_SET_TIMER
-             2,859      r8000000000000007      (60.74%) --> SBI_PMU_FW_IPI_RECVD
-             4,205      r8000000000000006      (68.71%) --> SBI_PMU_FW_IPI_SENT
-                 0      r0000000000020002      (81.69%)
-     <not counted>      r0000000000020004      (0.00%)
-     <not counted>      branch-misses          (0.00%)
-     <not counted>      cache-misses           (0.00%)
-         7,878,328      dTLB-load-misses       (15.60%)
-           680,270      dTLB-store-misses      (28.45%)
-         8,287,931      iTLB-load-misses       (39.24%)
-    20,008,506,675      cycles                 (48.60%)
-    21,484,427,932      instructions   # 1.07  insn per cycle (56.60%)
-
-       1.681344735 seconds time elapsed
-
-       0.614460000 seconds user
-       8.313254000 seconds sys
-
-
-Perf record:
-============
-[root@fedora-riscv riscv]# perf record -e cycles -e instructions \
--e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 10000 \
-perf bench sched messaging -g 15 -l 10
-# Running 'sched/messaging' benchmark:
-# 20 sender and receiver processes per group
-# 15 groups == 600 processes run
-
-     Total time: 1.261 [sec]
-[ perf record: Woken up 1 times to write data ]
-[ perf record: Captured and wrote 0.101 MB perf.data (845 samples) ]
-
-[root@fedora-riscv riscv]# perf report
-Available samples                                                               
-407 cycles                                                                     _
-407 instructions                                                               _
-18 dTLB-load-misses                                                            _
-2 dTLB-store-misses                                                            _
-11 iTLB-load-misses                                                            _
-..
-
-Changes from v2->v3:
-1. Addressed all the comments on PATCH1-4.
-2. Split patch1 into two separate patches.
-3. Added explicit comments to explain the event types in DT node.
-4. Rebased on latest Qemu.
-
-Changes from v1->v2:
-1. Dropped the ACks from v1 as signficant changes happened after v1.
-2. sscofpmf support.
-3. A generic counter management framework.
-
-[1] https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.adoc
-[2] https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edit
-[3] https://github.com/atishp04/opensbi/tree/pmu_sscofpmf_v2 
-[3] https://github.com/atishp04/linux/tree/riscv_pmu_v4
-[4] https://github.com/atishp04/qemu/tree/riscv_pmu_v3
-
-Atish Patra (10):
-target/riscv: Fix PMU CSR predicate function
-target/riscv: Implement PMU CSR predicate function for
-target/riscv: pmu: Rename the counters extension to pmu
-target/riscv: pmu: Make number of counters configurable
-target/riscv: Implement mcountinhibit CSR
-target/riscv: Add support for hpmcounters/hpmevents
-target/riscv: Support mcycle/minstret write operation
-target/riscv: Add sscofpmf extension support
-target/riscv: Add few cache related PMU events
-hw/riscv: virt: Add PMU DT node to the device tree
-
-hw/riscv/virt.c           |  36 ++
-target/riscv/cpu.c        |  14 +-
-target/riscv/cpu.h        |  51 ++-
-target/riscv/cpu_bits.h   |  59 +++
-target/riscv/cpu_helper.c |  26 ++
-target/riscv/csr.c        | 827 +++++++++++++++++++++++++++++---------
-target/riscv/machine.c    |  30 +-
-target/riscv/meson.build  |   1 +
-target/riscv/pmp.c        |   1 +
-target/riscv/pmu.c        | 434 ++++++++++++++++++++
-target/riscv/pmu.h        |  37 ++
-11 files changed, 1332 insertions(+), 184 deletions(-)
-create mode 100644 target/riscv/pmu.c
-create mode 100644 target/riscv/pmu.h
-
---
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1d69d1887e63..3b55f5ed0036 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -598,7 +598,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+-    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
++    DEFINE_PROP_BOOL("pmu", RISCVCPU, cfg.ext_pmu, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 9e55b2f5b170..ebc1a8754032 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -294,7 +294,7 @@ struct RISCVCPU {
+         bool ext_zbb;
+         bool ext_zbc;
+         bool ext_zbs;
+-        bool ext_counters;
++        bool ext_pmu;
+         bool ext_ifencei;
+         bool ext_icsr;
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index de484c74d3b4..c486eeaffeb8 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -64,7 +64,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     int ctr_index;
+ 
+-    if (!cpu->cfg.ext_counters) {
++    if (!cpu->cfg.ext_pmu) {
+         /* The Counters extensions is not enabled */
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+-- 
 2.31.1
 
 
