@@ -1,80 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf2L6-0003wj-Vx
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 11:56:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51952)
+	id 1mf3th-00008o-VN
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 13:36:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mf2L4-0003t6-Nz; Mon, 25 Oct 2021 11:56:42 -0400
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333]:45692)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1mf3te-00005W-Uc; Mon, 25 Oct 2021 13:36:30 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:39832)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mf2L2-0005mL-EA; Mon, 25 Oct 2021 11:56:42 -0400
-Received: by mail-wm1-x333.google.com with SMTP id
- 71-20020a1c014a000000b0032cafd23b1dso428517wmb.4; 
- Mon, 25 Oct 2021 08:56:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1mf3tc-0001ym-3Z; Mon, 25 Oct 2021 13:36:29 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id r12so2756673edt.6;
+ Mon, 25 Oct 2021 10:36:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=Q7jsTJhnPdSU4NLw5szcgqWjL15U5QhL98qLEhGKFAI=;
- b=m4mrKmLC78Is7J0S9rpzYr71t/mTyvBca1cLwpIVmJpxkAQVvQVQKf1M/Wr1+UEJgN
- cfLQUFi4M/7R8xbwPUdFX5NkToQyj7AU6vwwPq0MNw/ooQZnHlXg62132uU+3Y8/PVX8
- o1yRLxSFolyelulUBOaYrPImLhRM0hEsogjVsj41N3ryZTb89eSBddppW7+OAC6chu/V
- FqReE5fadKFfgTpPuhalNXFmiAJSApVH2pNbXjjrBSkagZPDEPv5bAot0bJSfD/9urPY
- azuiTQPwXSowICYhpmZo8vMY46Gs4leOBeEKzH/O/87E4l3KZEMbRsLMpHpSCBGA0MCU
- gOiA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=kM6eQU+1qED7HPMBmKwR2WyTEjyUMT7fM9vV1UiSOZA=;
+ b=qMrFTf4r4aLI4G31rg10gXzsjwodgBQz9oTwLNC3JiGyTG7jGdWi1GNyQHHBfsNKSX
+ Yk4CnitFOgq3eR6mbrgnI2mg5vRrH1yQEECrlPbai2ukNG2a7qE0A+XmfsViPK9qdsWo
+ lfHdfmOOg5dhNeG8AXyhTnZbnnBLPcH+jdISlAWGdMB4m62Zu/73Vz7emp7nDlOSKeS2
+ VQPGERNEG1U3PC4yvc3Sr0siLzdD+v077UkHqptf0J58zV9G9mWWth1iVAGMjmsFv4mT
+ hOG4e9WmO0VhxTLOyuNFF9L1t3NkhIbnaXual/C+bWPWBTQSByTJUaAOjuD2qeIfpICP
+ YoSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=Q7jsTJhnPdSU4NLw5szcgqWjL15U5QhL98qLEhGKFAI=;
- b=SfAC1kHo9N2L5O++eyzE7dxtpSn2FS6n2rz+oV/3y8tpYh9LE4nRH5yGtghDH28TnU
- 3YFp9DnE1RmLaeRCltMLh26w4+SgF2digqS63j7bSbFPGTE6UvhhPv4Q2qec5W5WKCrG
- VI0yHXtjBEpe39hOmD5s1UgPmfpfXYy9WMDhGJh1jpyMoP54sJ4UZiKsnUcs/9HXB6ss
- YbLGg+/U6CfMY1IQm9SGCAx75n7CnnjKhPBbfVpPLVxCiHwqV8eplc5ENvX9Abfqpn/4
- qRtq2guTSEk2JzY6XIvcO5xXVk0WfQnLJG+gv/RVbqzJduEDU4qtbXvpGcrsaCxMYd4n
- rnRw==
-X-Gm-Message-State: AOAM532bbrPiGeNfr7A31OameAmBTxhD5S8hiD50I0I81LP3AKjbYR1L
- P9yLXyJJcuLWHBv466hc8lk=
-X-Google-Smtp-Source: ABdhPJw04qroD+59/EmNniodbNKT7zkG9QIIKKaaKkI/2Rk5WEjsGLWGa/8sl3/oUt+xW6OGIUVYHw==
-X-Received: by 2002:a1c:9d8b:: with SMTP id
- g133mr24098299wme.132.1635177395082; 
- Mon, 25 Oct 2021 08:56:35 -0700 (PDT)
-Received: from [192.168.1.36] (62.red-83-57-168.dynamicip.rima-tde.net.
- [83.57.168.62])
- by smtp.gmail.com with ESMTPSA id u2sm16096241wrr.35.2021.10.25.08.56.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Oct 2021 08:56:34 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <04382cc1-750c-ee71-2cec-74a28b4375ad@amsat.org>
-Date: Mon, 25 Oct 2021 17:56:32 +0200
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=kM6eQU+1qED7HPMBmKwR2WyTEjyUMT7fM9vV1UiSOZA=;
+ b=MK+W7aMzEFCimoZ/Fc3jzBF3m03QS/QjNXrFDaAIpIQZ45u/gTKwVucHhyNAeKYtKK
+ Ddu7cgM1q6NEAXQRlCikYHpnbWyXmmIYZCPlULpLxXVonm91RK5d1QvN+7wsarju9+EO
+ O6IWHy5GHZQ20vfJosqJ2nQrhN0zCoRCr6hOkGHtu/IZxIPrhxVL8t4iXOfonD2wSOU0
+ 7vNr6W9s66GCXl5KQkTYAm6tz2iWgAdO6O4CNmwmdw8pwc/EH8VwYBWkBualWJ2Aq/QX
+ 9IlWr3ttFAnqr7yR/bDJPmwV9IlYiZrQTyy5ZwrXxWong7iAV7pm7fFmmsB0HYTwS3yJ
+ 3rsw==
+X-Gm-Message-State: AOAM5311ZxMwPwHHwmNGTieJ7VsxURR1d8rgPUH+X5nWKlWMNbRmyg5w
+ 7ShwK5D0gToMqCygATw/FGU=
+X-Google-Smtp-Source: ABdhPJxVT1VFYpBUoBMI8AsuZLfMCKTWiI6Au/skWpCIPju2PeXDxfU2ms+BYUZctWa4ww0DTEsxyg==
+X-Received: by 2002:a17:906:9742:: with SMTP id
+ o2mr23699738ejy.532.1635183385589; 
+ Mon, 25 Oct 2021 10:36:25 -0700 (PDT)
+Received: from neptune.lab ([46.39.229.76])
+ by smtp.googlemail.com with ESMTPSA id q14sm9718871edj.42.2021.10.25.10.36.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Oct 2021 10:36:25 -0700 (PDT)
+From: Alexey Baturo <baturo.alexey@gmail.com>
+X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v17 7/8] target/riscv: Implement address masking functions
+ required for RISC-V Pointer Masking extension
+Date: Mon, 25 Oct 2021 20:36:08 +0300
+Message-Id: <20211025173609.2724490-8-space.monkey.delivers@gmail.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20211025173609.2724490-1-space.monkey.delivers@gmail.com>
+References: <20211025173609.2724490-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v4 07/17] target/riscv: moving some insns close to similar
- insns
-Content-Language: en-US
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
- bin.meng@windriver.com, palmer@dabbelt.com, fabien.portas@grenoble-inp.org
-References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211025122818.168890-8-frederic.petrot@univ-grenoble-alpes.fr>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20211025122818.168890-8-frederic.petrot@univ-grenoble-alpes.fr>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x333.google.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-2.846,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -89,22 +80,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 15:56:43 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 17:36:31 -0000
 
-On 10/25/21 14:28, Frédéric Pétrot wrote:
-> lwu and ld are functionally close to the other loads, but were after the
-> stores in the source file.
-> Similarly, xor was away from or and and by two arithmetic functions, while
-> the immediate versions were nicely put together.
-> This patch moves the aforementioned loads after lhu, and xor above or,
-> where they more logically belong.
-> 
-> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/insn_trans/trans_rvi.c.inc | 34 ++++++++++++-------------
->  1 file changed, 17 insertions(+), 17 deletions(-)
+From: Anatoly Parshintsev <kupokupokupopo@gmail.com>
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Signed-off-by: Anatoly Parshintsev <kupokupokupopo@gmail.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_helper.c | 18 ++++++++++++++++++
+ target/riscv/translate.c  | 39 +++++++++++++++++++++++++++++++++++++--
+ 3 files changed, 57 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index b2422e3f99..325908287d 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -410,6 +410,8 @@ FIELD(TB_FLAGS, HLSX, 10, 1)
+ FIELD(TB_FLAGS, MSTATUS_HS_FS, 11, 2)
+ /* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
+ FIELD(TB_FLAGS, XL, 13, 2)
++/* If PointerMasking should be applied */
++FIELD(TB_FLAGS, PM_ENABLED, 15, 1)
+ 
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 0d1132f39d..662228c238 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -107,6 +107,24 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+         flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
+                            get_field(env->mstatus_hs, MSTATUS_FS));
+     }
++    if (riscv_has_ext(env, RVJ)) {
++        int priv = flags & TB_FLAGS_PRIV_MMU_MASK;
++        bool pm_enabled = false;
++        switch (priv) {
++        case PRV_U:
++            pm_enabled = env->mmte & U_PM_ENABLE;
++            break;
++        case PRV_S:
++            pm_enabled = env->mmte & S_PM_ENABLE;
++            break;
++        case PRV_M:
++            pm_enabled = env->mmte & M_PM_ENABLE;
++            break;
++        default:
++            g_assert_not_reached();
++        }
++        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
++    }
+ #endif
+ 
+     flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index a5e6fa145d..1d57bc97b5 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -36,6 +36,9 @@ static TCGv cpu_gpr[32], cpu_pc, cpu_vl;
+ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+ static TCGv load_res;
+ static TCGv load_val;
++/* globals for PM CSRs */
++static TCGv pm_mask[4];
++static TCGv pm_base[4];
+ 
+ #include "exec/gen-icount.h"
+ 
+@@ -83,6 +86,10 @@ typedef struct DisasContext {
+     TCGv zero;
+     /* Space for 3 operands plus 1 extra for address computation. */
+     TCGv temp[4];
++    /* PointerMasking extension */
++    bool pm_enabled;
++    TCGv pm_mask;
++    TCGv pm_base;
+ } DisasContext;
+ 
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -272,11 +279,20 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ }
+ 
+ /*
+- * Temp stub: generates address adjustment for PointerMasking
++ * Generates address adjustment for PointerMasking
+  */
+ static TCGv gen_pm_adjust_address(DisasContext *s, TCGv src)
+ {
+-    return src;
++    TCGv temp;
++    if (!s->pm_enabled) {
++        /* Load unmodified address */
++        return src;
++    } else {
++        temp = temp_new(s);
++        tcg_gen_andc_tl(temp, src, s->pm_mask);
++        tcg_gen_or_tl(temp, temp, s->pm_base);
++        return temp;
++    }
+ }
+ 
+ #ifndef CONFIG_USER_ONLY
+@@ -622,6 +638,10 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->cs = cs;
+     ctx->ntemp = 0;
+     memset(ctx->temp, 0, sizeof(ctx->temp));
++    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
++    int priv = tb_flags & TB_FLAGS_PRIV_MMU_MASK;
++    ctx->pm_mask = pm_mask[priv];
++    ctx->pm_base = pm_base[priv];
+ 
+     ctx->zero = tcg_constant_tl(0);
+ }
+@@ -735,4 +755,19 @@ void riscv_translate_init(void)
+                              "load_res");
+     load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
+                              "load_val");
++#ifndef CONFIG_USER_ONLY
++    /* Assign PM CSRs to tcg globals */
++    pm_mask[PRV_U] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
++    pm_base[PRV_U] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
++    pm_mask[PRV_S] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
++    pm_base[PRV_S] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
++    pm_mask[PRV_M] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
++    pm_base[PRV_M] =
++      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
++#endif
+ }
+-- 
+2.30.2
+
 
