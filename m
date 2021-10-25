@@ -1,47 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mewDZ-0008Gq-QD
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 05:24:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37858)
+	id 1mewac-00007r-FY
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 05:48:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42574)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mewDX-0008EZ-8X; Mon, 25 Oct 2021 05:24:31 -0400
-Received: from out28-146.mail.aliyun.com ([115.124.28.146]:59510)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mewDR-00027p-EK; Mon, 25 Oct 2021 05:24:28 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08395304|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.137537-0.00225881-0.860204;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047199; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=4; RT=4; SR=0; TI=SMTPD_---.LhUsXA8_1635153851; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LhUsXA8_1635153851)
- by smtp.aliyun-inc.com(10.147.40.44); Mon, 25 Oct 2021 17:24:11 +0800
-Subject: Re: [PATCH v6 00/15] target/riscv: Rationalize XLEN and operand length
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20211020031709.359469-1-richard.henderson@linaro.org>
- <17397bbe-7dfe-ac2e-6033-4ab4840a11bd@c-sky.com>
- <663d5df5-c107-c4ce-99e0-2a5d336a69ca@linaro.org>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <606880b5-83fc-6ab6-6d34-fb2b71536f99@c-sky.com>
-Date: Mon, 25 Oct 2021 17:24:11 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
+ id 1mewab-00005f-0N; Mon, 25 Oct 2021 05:48:21 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:40942)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
+ id 1mewaS-0007zK-28; Mon, 25 Oct 2021 05:48:20 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id 5so24212711edw.7;
+ Mon, 25 Oct 2021 02:48:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=l9Mb7xrUw5tmK9FC0zY4WPRtuX0enKpxN6T2u3KNfg0=;
+ b=iHqVaQSMZSC5+L+R+v1FOx8kwQ5o/Rdcfr6jiLyntpyiVlG4DldR4p9WuecQoVeRYi
+ yD/10YAvBlSrN/dy8bsphCcnWMKOBVpoN0OPuN8ezsp/VVu5BNOamymzwpkkbgof+sRn
+ ieReHaEEgSZLrsv5X7NGY30tsZO/JzdCyl8zL1lTIRjX93xI3RoewQLdEAubw8oyw1+Y
+ gqC4IMY2G/A+c/GSx9+6PAnIVtf14UhvyCBG84nqgKHtP7BDYsjzaQxWKWnykluBRtGu
+ oXdKw6qoWGo/RUQsPwQM1j5fjewU1DyPYk2YfmcBXe7OmLgVINeNQRmjeP+bqd9H0W/b
+ 8zrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=l9Mb7xrUw5tmK9FC0zY4WPRtuX0enKpxN6T2u3KNfg0=;
+ b=gYZ0D3BB1vVjBiAxp2ky436FTAZHl2HwsdvVvry3O8cw5fbkVtVVnq+mUcPnlO8EPW
+ DF8HAf/59deU3rZmSjZNLAyCGNlPg+kZRR3UKNEgvxr0bvWTfZL3E3rtAijWINvj6dsh
+ rCLc4+v+SXgeI2rcNb9eLC0Qw8z9gASeIEDm3PARKvNqrtm7XWL7Ojw+QsDV20vO0KC/
+ cJd5lWk4V9klSQPAm6QZXVy4bhD9OW74oSjHrgviN+RTFrkhvgq26gK4hAxAYimZObgi
+ 9w+rgAdfU7SabTC5us+4dLh6RdoY2c/NWJKZi85o8uJj2A916QZkZgwwHyQ5uctiKgZU
+ MVUg==
+X-Gm-Message-State: AOAM532BHIzlAJmOVjv6nYGVDqhPsFVAnIbrxGBFL0C++6dmnWMtie/e
+ GDYKF7hXV1T3KYCQCzgVnQJ1YqDIZBCZiY3qh1g=
+X-Google-Smtp-Source: ABdhPJw6huN9Vbsa/hwULyMl9UaIUfRi/usf65jTiNf0RwngjcXWKLHQIkdZaGbEG4AB8dQSuyoXwk2UdMSeyGJ9q6Y=
+X-Received: by 2002:aa7:ce83:: with SMTP id y3mr24237482edv.43.1635155289448; 
+ Mon, 25 Oct 2021 02:48:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <663d5df5-c107-c4ce-99e0-2a5d336a69ca@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.146; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-146.mail.aliyun.com
-X-Spam_score_int: -51
-X-Spam_score: -5.2
-X-Spam_bar: -----
-X-Spam_report: (-5.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-3.33,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <20210522154429.361235-1-josemartins90@gmail.com>
+ <CAKmqyKNSG4ACk-QQ9_0XzAXWr_NPE3sijxbs+6Kz3J=N_k+LMw@mail.gmail.com>
+ <2e3c4d2f-475f-4d02-6be5-a89628cd6815@c-sky.com>
+ <CAC41xo1ftM_WcjNOio2ii-BtqtDh6RTEvsmwO69GU6taOCzYRA@mail.gmail.com>
+ <CAC41xo12s+uHEyLkc6vO07iBAC84o6aHBFFdqxDm3NQjBYjuAw@mail.gmail.com>
+ <CAKmqyKMb-VNiQZv-ZFeCMwPQ3hkm1ODn_w55pGdBgpxtwg8tnw@mail.gmail.com>
+In-Reply-To: <CAKmqyKMb-VNiQZv-ZFeCMwPQ3hkm1ODn_w55pGdBgpxtwg8tnw@mail.gmail.com>
+From: Jose Martins <josemartins90@gmail.com>
+Date: Mon, 25 Oct 2021 10:47:58 +0100
+Message-ID: <CAC41xo2yWzJgttwEn6rG_wmkarN58OLmV0nh1ksbbjRG1gpuYw@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: fix VS interrupts forwarding to HS
+To: Alistair Francis <alistair23@gmail.com>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=josemartins90@gmail.com; helo=mail-ed1-x52b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -54,53 +79,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 09:24:31 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 09:48:21 -0000
 
+> From your last response I thought you sent a different series that
+> replaces this patch. If that's not the case do you mind sending this
+> patch again?
 
-On 2021/10/22 下午11:50, Richard Henderson wrote:
-> On 10/22/21 1:26 AM, LIU Zhiwei wrote:
->> As the specification said, "PC bits above XLEN are ignored, and when
->> the PC is written, it is sign-extended to fill the widest supported 
->> XLEN."
->> We still need special process of PC for exceptions or jump instructions.
->>
->> I have two methods to implement  PC register access,
->> but not sure which is the right way.
->>
->> First, normally process the PC register as the specification points.
->> That means expanding  the PC when setting the global TCGv variable
->> cpu_pc, and truncating the pc_first and  pc_next fields in
->> DisasContextBase before decoding instructions.    I am not sure
->> whether the sign-extended pc is compatible with QEMU common code.
->
-> I think extending on write is the correct thing. 
+I already sent the patch series here:
+https://lists.gnu.org/archive/html/qemu-devel/2021-06/msg00553.html. I
+got confused, I should have raised this issue in that thread. Let me
+know if you still want me to resend it.
 
-Thanks. I will pick this way.
-
-> Jumps, exception entry and return, gdb write.
-
-If we carefully process jumps and gdb write, I think we can omit 
-exception entry and return. Is it right?
-
->
-> Note that the read from PC for translation is in cpu_get_tb_cpu_state, 
-> before translation.  You should not need to change anything wrt 
-> pc_first/pc_next/etc, because it will already have been done.
-
-Good! Thanks.
-
-Best Regards,
-Zhiwei
-
->
->> Second,  ignore ignore the PC special process for jump instructions.
->> Just expand or truncate the PC register when exception processing,
->> gdb read, or cpu dump registers. It is not a stright way,  but I 
->> think it is still right.
->
-> I think you could make it work that way, but I don't know that it's 
-> less difficult, or that you'd have fewer changes.
->
->
-> r~
+Jose
 
