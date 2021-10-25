@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mez61-0006Hl-S2
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 08:28:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53024)
+	id 1mez62-0006Ia-2a
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 08:28:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53052)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mez5o-0005sc-3m; Mon, 25 Oct 2021 08:28:45 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43064)
+ id 1mez5p-0005sd-IO; Mon, 25 Oct 2021 08:28:45 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43074)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mez5l-00083V-F4; Mon, 25 Oct 2021 08:28:43 -0400
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5778D4194E;
+ id 1mez5m-00083e-55; Mon, 25 Oct 2021 08:28:45 -0400
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 911274196A;
  Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=univ-grenoble-alpes.fr; s=2020; t=1635164913;
- bh=uT6vnRpemLtf724ZUcTdhjnsd29ROhVIsC3XLY4F2pw=;
+ bh=rnzny5SBNcDev6OxmQUYKCH0VIP3Mz0joQDG3oeRr0o=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=lzcFO6tclepRwm0bP3ryVOcqkxx5TX6rwJwUzV3Wgc6G4BnHMl7VP50wWgAqacFut
- pAedVkCnPqpWMb4XR4nkXjVuRh56+44DvNAft1wwCs0zHqond73cR88ErJrrN2rrLq
- 9ZH1+wi4MshtJQepKV7etlzRQXwNL+qxYxiaDV7SiFzx9sf6pWmRgFOcMimOz+mUmD
- UgfaR+/yj24MekeMtbLWcHpiH3+xuI03LUkmXt/u+Hp5u5Uko1GWeIA0TII5vaTDz4
- iO/z8Gi+ofi6EWrde5JEgtjGp+3jLQzOOL3igobaIGtP0PAEuPzYZIVkh5ghIn2T/8
- EWo5pK9rQJR2g==
+ b=R6dL7A6Iw4Oczoo0kA0uObZBNiafRqcj41v0u0whMI5Rl2dDWSYMwFOZscHWxiRL1
+ f7yWRZ5X6VgFNpp59x0QGVLXFB8s7IIOeK4r4y24SHsssti0N0o65OfJjHKMCzoLNb
+ gaNeMqIt3whoxq0ohI8lW47T2VR2AmZhQ3qRUeAdcrBshqTfttZebeMsNfNduCG9Jq
+ 1e8WNhWtYgjuUX+x5/eYlf+5o9M7FmaYyBqzNP16JLb0UUiR2GYaD/dtkADMC/BM8+
+ X6/Eyf+IM6GEa/U/kfbVXvVUWf8A1W45Yhom2n3KYx2Pu87fskZvhDk3hYqDDbm65W
+ IDDfle7659ghA==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 3B94160066;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 748AD60067;
  Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 02DE614005A;
- Mon, 25 Oct 2021 14:28:32 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 41A4714005D;
+ Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,10 +43,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v4 06/17] target/riscv: setup everything so that
- riscv128-softmmu compiles
-Date: Mon, 25 Oct 2021 14:28:07 +0200
-Message-Id: <20211025122818.168890-7-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v4 07/17] target/riscv: moving some insns close to similar
+ insns
+Date: Mon, 25 Oct 2021 14:28:08 +0200
+Message-Id: <20211025122818.168890-8-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -80,314 +80,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 25 Oct 2021 12:28:47 -0000
 
-This patch is kind of a mess because several files have to be slightly
-modified to allow for a new target. In the current status, we have done
-our best to have RV64 and RV128 under the same RV64 umbrella, but there
-is still work to do to have a single executable for both.
-
-Once this patch applied, adding risc128-sofmmu to --target-list produces
-a (no so useful yet) executable.
+lwu and ld are functionally close to the other loads, but were after the
+stores in the source file.
+Similarly, xor was away from or and and by two arithmetic functions, while
+the immediate versions were nicely put together.
+This patch moves the aforementioned loads after lhu, and xor above or,
+where they more logically belong.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- configs/devices/riscv128-softmmu/default.mak | 17 +++++++++++++++
- configs/targets/riscv128-softmmu.mak         |  5 +++++
- include/disas/dis-asm.h                      |  1 +
- include/hw/riscv/sifive_cpu.h                |  3 +++
- target/riscv/cpu-param.h                     |  5 +++++
- target/riscv/cpu.h                           |  3 +++
- disas/riscv.c                                |  5 +++++
- target/riscv/cpu.c                           | 22 ++++++++++++++++++--
- target/riscv/gdbstub.c                       |  8 +++++++
- target/riscv/insn_trans/trans_rvd.c.inc      | 12 +++++------
- target/riscv/insn_trans/trans_rvf.c.inc      |  6 +++---
- target/riscv/Kconfig                         |  3 +++
- 12 files changed, 79 insertions(+), 11 deletions(-)
- create mode 100644 configs/devices/riscv128-softmmu/default.mak
- create mode 100644 configs/targets/riscv128-softmmu.mak
+ target/riscv/insn_trans/trans_rvi.c.inc | 34 ++++++++++++-------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/configs/devices/riscv128-softmmu/default.mak b/configs/devices/riscv128-softmmu/default.mak
-new file mode 100644
-index 0000000000..e838f35785
---- /dev/null
-+++ b/configs/devices/riscv128-softmmu/default.mak
-@@ -0,0 +1,17 @@
-+# Default configuration for riscv128-softmmu
-+
-+# Uncomment the following lines to disable these optional devices:
-+#
-+#CONFIG_PCI_DEVICES=n
-+# No does not seem to be an option for these two parameters
-+CONFIG_SEMIHOSTING=y
-+CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
-+
-+# Boards:
-+#
-+CONFIG_SPIKE=n
-+CONFIG_SIFIVE_E=n
-+CONFIG_SIFIVE_U=n
-+CONFIG_RISCV_VIRT=y
-+CONFIG_MICROCHIP_PFSOC=n
-+CONFIG_SHAKTI_C=n
-diff --git a/configs/targets/riscv128-softmmu.mak b/configs/targets/riscv128-softmmu.mak
-new file mode 100644
-index 0000000000..a9343d57d3
---- /dev/null
-+++ b/configs/targets/riscv128-softmmu.mak
-@@ -0,0 +1,5 @@
-+TARGET_ARCH=riscv128
-+TARGET_BASE_ARCH=riscv
-+TARGET_SUPPORTS_MTTCG=y
-+TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
-+TARGET_NEED_FDT=y
-diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
-index 08e1beec85..102a1e7f50 100644
---- a/include/disas/dis-asm.h
-+++ b/include/disas/dis-asm.h
-@@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
- int print_insn_xtensa           (bfd_vma, disassemble_info*);
- int print_insn_riscv32          (bfd_vma, disassemble_info*);
- int print_insn_riscv64          (bfd_vma, disassemble_info*);
-+int print_insn_riscv128         (bfd_vma, disassemble_info*);
- int print_insn_rx(bfd_vma, disassemble_info *);
- int print_insn_hexagon(bfd_vma, disassemble_info *);
- 
-diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
-index 136799633a..64078feba8 100644
---- a/include/hw/riscv/sifive_cpu.h
-+++ b/include/hw/riscv/sifive_cpu.h
-@@ -26,6 +26,9 @@
- #elif defined(TARGET_RISCV64)
- #define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
- #define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
-+#else
-+#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
-+#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
- #endif
- 
- #endif /* HW_SIFIVE_CPU_H */
-diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
-index 80eb615f93..c10459b56f 100644
---- a/target/riscv/cpu-param.h
-+++ b/target/riscv/cpu-param.h
-@@ -16,6 +16,11 @@
- # define TARGET_LONG_BITS 32
- # define TARGET_PHYS_ADDR_SPACE_BITS 34 /* 22-bit PPN */
- # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
-+#else
-+/* 64-bit target, since QEMU isn't built to have TARGET_LONG_BITS over 64 */
-+# define TARGET_LONG_BITS 64
-+# define TARGET_PHYS_ADDR_SPACE_BITS 56 /* 44-bit PPN */
-+# define TARGET_VIRT_ADDR_SPACE_BITS 48 /* sv48 */
- #endif
- #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
- /*
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f6d7a1793d..6c15dcacfc 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -38,6 +38,7 @@
- #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
-+#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
- #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
- #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-@@ -50,6 +51,8 @@
- # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
- #elif defined(TARGET_RISCV64)
- # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
-+#else
-+# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE128
- #endif
- 
- #define RV(x) ((target_ulong)1 << (x - 'A'))
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 793ad14c27..03c8dc9961 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -3090,3 +3090,8 @@ int print_insn_riscv64(bfd_vma memaddr, struct disassemble_info *info)
- {
-     return print_insn_riscv(memaddr, info, rv64);
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index fae82bd946..34164494b9 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -175,6 +175,18 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
+     return gen_load(ctx, a, MO_TEUW);
  }
-+
-+int print_insn_riscv128(bfd_vma memaddr, struct disassemble_info *info)
+ 
++static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
 +{
-+    return print_insn_riscv(memaddr, info, rv128);
++    REQUIRE_64BIT(ctx);
++    return gen_load(ctx, a, MO_TEUL);
 +}
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8c1cda35b4..141b5a329f 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -152,6 +152,8 @@ static void riscv_any_cpu_init(Object *obj)
-     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
- #elif defined(TARGET_RISCV64)
-     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
-+#else
-+    set_misa(env, MXL_RV128, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
- #endif
-     set_priv_version(env, PRIV_VERSION_1_11_0);
- }
-@@ -178,7 +180,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
--#else
-+#elif defined(TARGET_RISCV32)
- static void rv32_base_cpu_init(Object *obj)
- {
-     CPURISCVState *env = &RISCV_CPU(obj)->env;
-@@ -218,6 +220,13 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
-     set_resetvec(env, DEFAULT_RSTVEC);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
-+#else
-+static void rv128_base_cpu_init(Object *obj)
++
++static bool trans_ld(DisasContext *ctx, arg_ld *a)
 +{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    /* We set this in the realise function */
-+    set_misa(env, MXL_RV128, 0);
++    REQUIRE_64BIT(ctx);
++    return gen_load(ctx, a, MO_TEQ);
 +}
- #endif
- 
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
-@@ -393,6 +402,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
-     case MXL_RV64:
-         info->print_insn = print_insn_riscv64;
-         break;
-+    case MXL_RV128:
-+        info->print_insn = print_insn_riscv128;
-+        break;
-     default:
-         g_assert_not_reached();
-     }
-@@ -455,6 +467,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- #ifdef TARGET_RISCV64
-     case MXL_RV64:
-         break;
-+#elif !defined(TARGET_RISCV32)
-+    case MXL_RV128:
-+        break;
- #endif
-     case MXL_RV32:
-         break;
-@@ -657,6 +672,7 @@ static gchar *riscv_gdb_arch_name(CPUState *cs)
-     case MXL_RV32:
-         return g_strdup("riscv:rv32");
-     case MXL_RV64:
-+    case MXL_RV128:
-         return g_strdup("riscv:rv64");
-     default:
-         g_assert_not_reached();
-@@ -720,7 +736,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     cc->gdb_num_core_regs = 33;
- #if defined(TARGET_RISCV32)
-     cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
--#elif defined(TARGET_RISCV64)
-+#else
-     cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
- #endif
-     cc->gdb_stop_before_watchpoint = true;
-@@ -809,6 +825,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
-+#else
-+    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
- #endif
- };
- 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 23429179e2..7672ae123f 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -164,6 +164,11 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-     int bitsize = 16 << env->misa_mxl_max;
-     int i;
- 
-+    /* Until gdb knows about 128-bit registers */
-+    if (bitsize > 64) {
-+        bitsize = 64;
-+    }
 +
-     g_string_printf(s, "<?xml version=\"1.0\"?>");
-     g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
-     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
-@@ -204,6 +209,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
- #elif defined(TARGET_RISCV64)
-     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-                              1, "riscv-64bit-virtual.xml", 0);
-+#else
-+    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-+                             1, "riscv-64bit-virtual.xml", 0);
- #endif
- 
-     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index db9ae15755..41da696ec4 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -393,11 +393,11 @@ static bool trans_fmv_x_d(DisasContext *ctx, arg_fmv_x_d *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--#ifdef TARGET_RISCV64
-+#ifdef TARGET_RISCV32
-+    qemu_build_not_reached();
-+#else
-     gen_set_gpr(ctx, a->rd, cpu_fpr[a->rs1]);
-     return true;
--#else
--    qemu_build_not_reached();
- #endif
+ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+ {
+     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+@@ -205,18 +217,6 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
+     return gen_store(ctx, a, MO_TESL);
  }
  
-@@ -437,11 +437,11 @@ static bool trans_fmv_d_x(DisasContext *ctx, arg_fmv_d_x *a)
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--#ifdef TARGET_RISCV64
-+#ifdef TARGET_RISCV32
-+    qemu_build_not_reached();
-+#else
-     tcg_gen_mov_tl(cpu_fpr[a->rd], get_gpr(ctx, a->rs1, EXT_NONE));
-     mark_fs_dirty(ctx);
-     return true;
--#else
--    qemu_build_not_reached();
- #endif
+-static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
+-{
+-    REQUIRE_64BIT(ctx);
+-    return gen_load(ctx, a, MO_TEUL);
+-}
+-
+-static bool trans_ld(DisasContext *ctx, arg_ld *a)
+-{
+-    REQUIRE_64BIT(ctx);
+-    return gen_load(ctx, a, MO_TEQ);
+-}
+-
+ static bool trans_sd(DisasContext *ctx, arg_sd *a)
+ {
+     REQUIRE_64BIT(ctx);
+@@ -315,11 +315,6 @@ static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
+     return gen_arith(ctx, a, EXT_SIGN, gen_sltu);
  }
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index bddbd418d9..90cc51e5d6 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -311,10 +311,10 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
  
-     TCGv dest = dest_gpr(ctx, a->rd);
+-static bool trans_xor(DisasContext *ctx, arg_xor *a)
+-{
+-    return gen_logic(ctx, a, EXT_NONE, tcg_gen_xor_tl);
+-}
+-
+ static bool trans_srl(DisasContext *ctx, arg_srl *a)
+ {
+     return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl);
+@@ -330,6 +325,11 @@ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+     return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl);
+ }
  
--#if defined(TARGET_RISCV64)
--    tcg_gen_ext32s_tl(dest, cpu_fpr[a->rs1]);
--#else
-+#if defined(TARGET_RISCV32)
-     tcg_gen_extrl_i64_i32(dest, cpu_fpr[a->rs1]);
-+#else
-+    tcg_gen_ext32s_tl(dest, cpu_fpr[a->rs1]);
- #endif
- 
-     gen_set_gpr(ctx, a->rd, dest);
-diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
-index b9e5932f13..f9ea52a59a 100644
---- a/target/riscv/Kconfig
-+++ b/target/riscv/Kconfig
-@@ -3,3 +3,6 @@ config RISCV32
- 
- config RISCV64
-     bool
++static bool trans_xor(DisasContext *ctx, arg_xor *a)
++{
++    return gen_logic(ctx, a, EXT_NONE, tcg_gen_xor_tl);
++}
 +
-+config RISCV128
-+    bool
+ static bool trans_or(DisasContext *ctx, arg_or *a)
+ {
+     return gen_logic(ctx, a, EXT_NONE, tcg_gen_or_tl);
 -- 
 2.33.0
 
