@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1methR-0003gj-Sq
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 02:43:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35302)
+	id 1meti6-0003wJ-Ro
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 02:43:54 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35368)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1methQ-0003eo-4E; Mon, 25 Oct 2021 02:43:12 -0400
-Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:45942)
+ id 1meti3-0003uO-VC; Mon, 25 Oct 2021 02:43:52 -0400
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:46642)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1methK-0005tH-Hc; Mon, 25 Oct 2021 02:43:11 -0400
-Received: by mail-il1-x12e.google.com with SMTP id i6so11649906ila.12;
- Sun, 24 Oct 2021 23:43:05 -0700 (PDT)
+ id 1meti2-0006QI-44; Mon, 25 Oct 2021 02:43:51 -0400
+Received: by mail-il1-x132.google.com with SMTP id w10so11647601ilc.13;
+ Sun, 24 Oct 2021 23:43:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QVEpYRKLXZQahOc2YgQH83gu0IvJN6M0iKf6LgMjYXY=;
- b=lwhtrUPWjOjLlK315QMbmtHkob8HLFC8/ew9GNzwI921UwpjiRWUikwmaAA+kAdzjg
- 9LJXSqVJIjXbN/PzlSPJPqwO5rAmSK6igroZewrOX7WB8TliPZhfGAIHH+hpTbzrL4p9
- 58TS9QrUJyyxY8b+QzYD0c4XgtxGDxhiKK2xu+OEIZlliaOIJ8by6VqPT9/Edj7ldgLm
- +sNNiwBRHJWdnSQxP7pasjbESbQ3jv8f0rhccz+O+fxY9CtM6SHeg70tsraM99ol5oVI
- IIhQMbZ1Aot53DE0P2vy5DO+0F9qBtfRtvfkgPGC7ednFI+EFZYkkVPYbiN7REKua2I3
- ZWCg==
+ :cc; bh=TpD+zJc50W++bJ3r1NSUTwVGsFdzPnl55A8WaEY9yqQ=;
+ b=Ox2JDEWgO5a9po0kjwUaligBwA01MkBPm1038ZOPLldr7XjrFFNKGc0Riyz2C0nK48
+ icwVK1IvS+8KzCBfQSrChCUwBUl+1/OtTdK4hokE2jBaX+wq6QVdTfX7I/xRpXcuBaER
+ VhUgebJySKnA/yXzJjURnbryL2UdblBQ64sqiOpXNmWYKqb+LbBHGBw0Dchq7COkG1sV
+ xpKBMKqTCcb/VSWeQoZYtBfHHPF6HfCH9hNtuzLM5ptMFlFSMfjcg+m8gxxRKWeguBT6
+ a8L5tT/xOc4b9OGJKM1Hg1YWW8HtRxzHm9H6jSnN+Nqfcs3I1iqO4K498tQZfrsp1UU+
+ YXSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=QVEpYRKLXZQahOc2YgQH83gu0IvJN6M0iKf6LgMjYXY=;
- b=euK+OS87kC47RzZX9L6VfYoZnKpnBMPAXVLQo+w0oumS31opO1tSqPd6Fv3nTT6HlU
- GpaZpaE0mpB1qKh6jgFlBP7X3LB5f1XCJIo+vpXxTAbJvCgV4JZtU4Xjtj3dGadlrPVo
- kO1RE+mP4dPpsnF90kWOaTO34z61jG1L+KeHrIGlZRVUZnhxyOu7l3U7G4FU1PmabFbk
- LtTIesy7vntvFKx9jgCrsvhzGMvBNVfMvyvuDlCzLiZDP/S8562bgJPbdKE5mcUYXrLQ
- xlUTWNi7gHf3sq2m1LjcV3+nGEJTAnVzmYQRjxT4BbG+bF0mekionHbdvQ5vcfZcrzb9
- LqDw==
-X-Gm-Message-State: AOAM533/VzUN8hNfTQebq+hr2rniaVb0uCdV0zLOwv9HFP9VBq9Z8OJ/
- R4KLLdm7EWibQCD40CRtv1U7q2SZogiR4VxL82Q=
-X-Google-Smtp-Source: ABdhPJzHoIVKt3z8VsC/PaiQBrT1kFMfMzdyxmgllYdM5lHNnIWLyOP6bp43dgYmXjROSXzr2hQi2ZecharxPViQERo=
-X-Received: by 2002:a05:6e02:1b81:: with SMTP id
- h1mr5093447ili.290.1635144185265; 
- Sun, 24 Oct 2021 23:43:05 -0700 (PDT)
+ bh=TpD+zJc50W++bJ3r1NSUTwVGsFdzPnl55A8WaEY9yqQ=;
+ b=0eZFd6hRLZAaR1oe3oT3TVbP17dhWsp66pWhVcbsuoB+0szkf2ajeLgD+O9EnalzbX
+ i7lfvk7mv+/k5VjowyIO1oIwTWa4NUVY/bn18310NqaJTlSr2tC+DXhZ5uk+KG49L8Po
+ ntgqqoq5584Hb34aemaUhsY0DqB1bS0FiQqEG+WGCLxS48JZd0nQQzYWHlorEaQE7Pss
+ 5q6SYM1zrwKliXVDmbFyHWNAfkkApMyg4thhkkoFoOIuhXBoyvC5AEO1//A9cupaFcrq
+ iNXYDEkL5RFrJdMiUYgnAEAsYXu9Fz8L++8+uQQIdltCl3le/Z95Jd5stlmB5fSug76r
+ 8iEw==
+X-Gm-Message-State: AOAM5336I5StDohMWI8t3ZHTt6RUZW6F+exRJe+ShfNoSB2JXnFiVUwb
+ TSSZaNm6Nb65xPQFYMLOoFbGP4sJ/XinhGRa+is=
+X-Google-Smtp-Source: ABdhPJwwbbQlFa71DNo6n9++JjlEyrIWXB/AkMxSlNhc05cquBz3awSx6OikjjOFUru8fdZwVBDOi+WHxUgHQ5OGj3Q=
+X-Received: by 2002:a05:6e02:1402:: with SMTP id
+ n2mr8842101ilo.208.1635144228606; 
+ Sun, 24 Oct 2021 23:43:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <20211015074627.3957162-80-frank.chang@sifive.com>
-In-Reply-To: <20211015074627.3957162-80-frank.chang@sifive.com>
+ <20211015074627.3957162-73-frank.chang@sifive.com>
+In-Reply-To: <20211015074627.3957162-73-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Oct 2021 16:42:39 +1000
-Message-ID: <CAKmqyKOPmGc-j9x9Zf2Dm1KJ5v5RCU+GGNfH+e3-YFyNHGR0jw@mail.gmail.com>
-Subject: Re: [PATCH v8 72/78] target/riscv: set mstatus.SD bit when writing fp
- CSRs
+Date: Mon, 25 Oct 2021 16:43:22 +1000
+Message-ID: <CAKmqyKOcAFS49vqtuMoAuQi9rpnb+E9kGeLjFF=qirZvyQ7Y3A@mail.gmail.com>
+Subject: Re: [PATCH v8 65/78] target/riscv: rvv-1.0: relax RV_VLEN_MAX to
+ 1024-bits
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -74,58 +75,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 06:43:12 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 06:43:52 -0000
 
-On Fri, Oct 15, 2021 at 6:44 PM <frank.chang@sifive.com> wrote:
+On Fri, Oct 15, 2021 at 6:43 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
-Hey Frank,
-
-You will need to rebase this on the latest master branch.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> ---
->  target/riscv/csr.c | 9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9f51626a3d8..3929abb112a 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -224,7 +224,8 @@ static RISCVException write_fflags(CPURISCVState *env, int csrno,
->                                     target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    env->mstatus |= MSTATUS_FS;
-> +    target_ulong sd = riscv_cpu_is_32bit(env) ? MSTATUS32_SD : MSTATUS64_SD;
-> +    env->mstatus |= MSTATUS_FS | sd;
+> --
+> ---
+>  target/riscv/cpu.h                      | 2 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
+>  target/riscv/vector_helper.c            | 2 +-
+>  3 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 9b2af4e4d0e..49eece111e2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -101,7 +101,7 @@ typedef struct CPURISCVState CPURISCVState;
+>  #include "pmp.h"
 >  #endif
->      riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
->      return RISCV_EXCP_NONE;
-> @@ -241,7 +242,8 @@ static RISCVException write_frm(CPURISCVState *env, int csrno,
->                                  target_ulong val)
+>
+> -#define RV_VLEN_MAX 256
+> +#define RV_VLEN_MAX 1024
+>
+>  FIELD(VTYPE, VLMUL, 0, 3)
+>  FIELD(VTYPE, VSEW, 3, 3)
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 92a23b52e49..dcb96c954ec 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -567,8 +567,8 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint32_t data,
+>      base = get_gpr(s, rs1, EXT_NONE);
+>
+>      /*
+> -     * As simd_desc supports at most 256 bytes, and in this implementation,
+> -     * the max vector group length is 2048 bytes. So split it into two parts.
+> +     * As simd_desc supports at most 2048 bytes, and in this implementation,
+> +     * the max vector group length is 4096 bytes. So split it into two parts.
+>       *
+>       * The first part is vlen in bytes, encoded in maxsz of simd_desc.
+>       * The second part is lmul, encoded in data of simd_desc.
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 37b2451bd05..70ddc55e16b 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -124,7 +124,7 @@ static inline int32_t vext_lmul(uint32_t desc)
+>  static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
 >  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    env->mstatus |= MSTATUS_FS;
-> +    target_ulong sd = riscv_cpu_is_32bit(env) ? MSTATUS32_SD : MSTATUS64_SD;
-> +    env->mstatus |= MSTATUS_FS | sd;
->  #endif
->      env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
->      return RISCV_EXCP_NONE;
-> @@ -259,7 +261,8 @@ static RISCVException write_fcsr(CPURISCVState *env, int csrno,
->                                   target_ulong val)
->  {
->  #if !defined(CONFIG_USER_ONLY)
-> -    env->mstatus |= MSTATUS_FS;
-> +    target_ulong sd = riscv_cpu_is_32bit(env) ? MSTATUS32_SD : MSTATUS64_SD;
-> +    env->mstatus |= MSTATUS_FS | sd;
->  #endif
->      env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
->      riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
+>      /*
+> -     * As simd_desc support at most 256 bytes, the max vlen is 256 bits.
+> +     * As simd_desc support at most 2048 bytes, the max vlen is 1024 bits.
+>       * so vlen in bytes (vlenb) is encoded as maxsz.
+>       */
+>      uint32_t vlenb = simd_maxsz(desc);
 > --
 > 2.25.1
 >
