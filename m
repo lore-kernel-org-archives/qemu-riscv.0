@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mez61-0006Fi-Ce
+	id 1mez61-0006Hl-S2
 	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 08:28:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53060)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53024)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mez5r-0005tc-4p; Mon, 25 Oct 2021 08:28:47 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43076)
+ id 1mez5o-0005sc-3m; Mon, 25 Oct 2021 08:28:45 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:43064)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mez5m-00083f-5K; Mon, 25 Oct 2021 08:28:46 -0400
+ id 1mez5l-00083V-F4; Mon, 25 Oct 2021 08:28:43 -0400
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id D535A4196E;
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5778D4194E;
  Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=univ-grenoble-alpes.fr; s=2020; t=1635164913;
- bh=t7CZ/ykazyQByTEQK67mp0FWUl11/p/ftC8xmY3hk8I=;
+ bh=uT6vnRpemLtf724ZUcTdhjnsd29ROhVIsC3XLY4F2pw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=R00xFpDZ9q90P0Oz/gAsnUyQtXB6nq+8n2FSi5EOgteBp8Lcucs6B8sUTWnv5HqB7
- 0j/sXy5QxdT+hPGYfCpKANrGGmZGhdUMED8sZzVDmxZ0Jm8VGiMW2h6QiTVB5C+cGZ
- yo9dVWCVauiHpQIwu6QYbGTGBHvQJ5BVMCqaVIYdGpvpj8w6TnRADiSBayEfFnv7lB
- GuyMd6AIWOXTzivOVXFM/rigkq1XPOefMJyl2Y0N/6VhEWSvbU2qBlD9euSrPyeroK
- qMGhqR533g83blJKluaLY13OiYTE93DXan6FNCeiN2ZdN52VOKDwbqsf8fYQQekOjS
- CYeK4DpaDYdjg==
+ b=lzcFO6tclepRwm0bP3ryVOcqkxx5TX6rwJwUzV3Wgc6G4BnHMl7VP50wWgAqacFut
+ pAedVkCnPqpWMb4XR4nkXjVuRh56+44DvNAft1wwCs0zHqond73cR88ErJrrN2rrLq
+ 9ZH1+wi4MshtJQepKV7etlzRQXwNL+qxYxiaDV7SiFzx9sf6pWmRgFOcMimOz+mUmD
+ UgfaR+/yj24MekeMtbLWcHpiH3+xuI03LUkmXt/u+Hp5u5Uko1GWeIA0TII5vaTDz4
+ iO/z8Gi+ofi6EWrde5JEgtjGp+3jLQzOOL3igobaIGtP0PAEuPzYZIVkh5ghIn2T/8
+ EWo5pK9rQJR2g==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id B954960066;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 3B94160066;
  Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 7931B14005A;
- Mon, 25 Oct 2021 14:28:33 +0200 (CEST)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 02DE614005A;
+ Mon, 25 Oct 2021 14:28:32 +0200 (CEST)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,10 +43,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v4 08/17] target/riscv: accessors to registers upper part and
- 128-bit load/store
-Date: Mon, 25 Oct 2021 14:28:09 +0200
-Message-Id: <20211025122818.168890-9-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v4 06/17] target/riscv: setup everything so that
+ riscv128-softmmu compiles
+Date: Mon, 25 Oct 2021 14:28:07 +0200
+Message-Id: <20211025122818.168890-7-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -78,410 +78,316 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 12:28:48 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 12:28:47 -0000
 
-Get function to retrieve the 64 top bits of a register, stored in the gprh
-field of the cpu state. Set function that writes the 128-bit value at once.
-The access to the gprh field can not be protected at compile time to make
-sure it is accessed only in the 128-bit version of the processor because we
-have no way to indicate that the misa_mxl_max field is const.
+This patch is kind of a mess because several files have to be slightly
+modified to allow for a new target. In the current status, we have done
+our best to have RV64 and RV128 under the same RV64 umbrella, but there
+is still work to do to have a single executable for both.
 
-The 128-bit ISA adds ldu, lq and sq. We provide support for these
-instructions. Note that we compte only 64-bit addresses to actually access
-memory, cowardly utilizing the existing address translation mechanism of
-QEMU.
+Once this patch applied, adding risc128-sofmmu to --target-list produces
+a (no so useful yet) executable.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- configs/targets/riscv128-softmmu.mak    |   3 +-
- target/riscv/insn16.decode              |  27 +++++-
- target/riscv/insn32.decode              |   5 ++
- target/riscv/translate.c                |  43 +++++++++
- target/riscv/insn_trans/trans_rvi.c.inc | 112 ++++++++++++++++++++++--
- 5 files changed, 178 insertions(+), 12 deletions(-)
+ configs/devices/riscv128-softmmu/default.mak | 17 +++++++++++++++
+ configs/targets/riscv128-softmmu.mak         |  5 +++++
+ include/disas/dis-asm.h                      |  1 +
+ include/hw/riscv/sifive_cpu.h                |  3 +++
+ target/riscv/cpu-param.h                     |  5 +++++
+ target/riscv/cpu.h                           |  3 +++
+ disas/riscv.c                                |  5 +++++
+ target/riscv/cpu.c                           | 22 ++++++++++++++++++--
+ target/riscv/gdbstub.c                       |  8 +++++++
+ target/riscv/insn_trans/trans_rvd.c.inc      | 12 +++++------
+ target/riscv/insn_trans/trans_rvf.c.inc      |  6 +++---
+ target/riscv/Kconfig                         |  3 +++
+ 12 files changed, 79 insertions(+), 11 deletions(-)
+ create mode 100644 configs/devices/riscv128-softmmu/default.mak
+ create mode 100644 configs/targets/riscv128-softmmu.mak
 
+diff --git a/configs/devices/riscv128-softmmu/default.mak b/configs/devices/riscv128-softmmu/default.mak
+new file mode 100644
+index 0000000000..e838f35785
+--- /dev/null
++++ b/configs/devices/riscv128-softmmu/default.mak
+@@ -0,0 +1,17 @@
++# Default configuration for riscv128-softmmu
++
++# Uncomment the following lines to disable these optional devices:
++#
++#CONFIG_PCI_DEVICES=n
++# No does not seem to be an option for these two parameters
++CONFIG_SEMIHOSTING=y
++CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
++
++# Boards:
++#
++CONFIG_SPIKE=n
++CONFIG_SIFIVE_E=n
++CONFIG_SIFIVE_U=n
++CONFIG_RISCV_VIRT=y
++CONFIG_MICROCHIP_PFSOC=n
++CONFIG_SHAKTI_C=n
 diff --git a/configs/targets/riscv128-softmmu.mak b/configs/targets/riscv128-softmmu.mak
-index a9343d57d3..41daab1cd3 100644
---- a/configs/targets/riscv128-softmmu.mak
+new file mode 100644
+index 0000000000..a9343d57d3
+--- /dev/null
 +++ b/configs/targets/riscv128-softmmu.mak
-@@ -1,5 +1,6 @@
- TARGET_ARCH=riscv128
- TARGET_BASE_ARCH=riscv
--TARGET_SUPPORTS_MTTCG=y
-+# As long as we have no atomic accesses for aligned 128-bit addresses
-+TARGET_SUPPORTS_MTTCG=n
- TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
- TARGET_NEED_FDT=y
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 2e9212663c..02c8f61b48 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -25,14 +25,17 @@
- # Immediates:
- %imm_ci        12:s1 2:5
- %nzuimm_ciw    7:4 11:2 5:1 6:1   !function=ex_shift_2
-+%uimm_cl_q     10:1 5:2 11:2      !function=ex_shift_4
- %uimm_cl_d     5:2 10:3           !function=ex_shift_3
- %uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
- %imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
- %imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
+@@ -0,0 +1,5 @@
++TARGET_ARCH=riscv128
++TARGET_BASE_ARCH=riscv
++TARGET_SUPPORTS_MTTCG=y
++TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
++TARGET_NEED_FDT=y
+diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
+index 08e1beec85..102a1e7f50 100644
+--- a/include/disas/dis-asm.h
++++ b/include/disas/dis-asm.h
+@@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
+ int print_insn_xtensa           (bfd_vma, disassemble_info*);
+ int print_insn_riscv32          (bfd_vma, disassemble_info*);
+ int print_insn_riscv64          (bfd_vma, disassemble_info*);
++int print_insn_riscv128         (bfd_vma, disassemble_info*);
+ int print_insn_rx(bfd_vma, disassemble_info *);
+ int print_insn_hexagon(bfd_vma, disassemble_info *);
  
- %shimm_6bit   12:1 2:5               !function=ex_rvc_shifti
-+%uimm_6bit_lq 2:4 12:1 6:1           !function=ex_shift_4
- %uimm_6bit_ld 2:3 12:1 5:2           !function=ex_shift_3
- %uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
-+%uimm_6bit_sq 7:4 11:2               !function=ex_shift_4
- %uimm_6bit_sd 7:3 10:3               !function=ex_shift_3
- %uimm_6bit_sw 7:2 9:4                !function=ex_shift_2
- 
-@@ -54,16 +57,20 @@
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
- @ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
-+@cl_q      ... . .....  ..... .. &i      imm=%uimm_cl_q   rs1=%rs1_3  rd=%rs2_3
- @cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
- @cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
- @cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
-+@cs_q      ... ... ... .. ... .. &s      imm=%uimm_cl_q   rs1=%rs1_3  rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
- @cj        ...    ........... .. &j      imm=%imm_cj
- @cb_z      ... ... ... .. ... .. &b      imm=%imm_cb      rs1=%rs1_3  rs2=0
- 
-+@c_lqsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @c_ldsp    ... . .....  ..... .. &i      imm=%uimm_6bit_ld rs1=2 %rd
- @c_lwsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lw rs1=2 %rd
-+@c_sqsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sq rs1=2 rs2=%rs2_5
- @c_sdsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sd rs1=2 rs2=%rs2_5
- @c_swsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sw rs1=2 rs2=%rs2_5
- @c_li      ... . .....  ..... .. &i      imm=%imm_ci rs1=0 %rd
-@@ -87,9 +94,15 @@
-   illegal         000  000 000 00 --- 00
-   addi            000  ... ... .. ... 00 @c_addi4spn
- }
--fld               001  ... ... .. ... 00 @cl_d
-+{
-+  lq              001  ... ... .. ... 00 @cl_q
-+  fld             001  ... ... .. ... 00 @cl_d
-+}
- lw                010  ... ... .. ... 00 @cl_w
--fsd               101  ... ... .. ... 00 @cs_d
-+{
-+  sq              101  ... ... .. ... 00 @cs_q
-+  fsd             101  ... ... .. ... 00 @cs_d
-+}
- sw                110  ... ... .. ... 00 @cs_w
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
-@@ -132,7 +145,10 @@ addw              100 1 11 ... 01 ... 01 @cs_2
- 
- # *** RV32/64C Standard Extension (Quadrant 2) ***
- slli              000 .  .....  ..... 10 @c_shift2
--fld               001 .  .....  ..... 10 @c_ldsp
-+{
-+  lq              001  ... ... .. ... 10 @c_lqsp
-+  fld             001 .  .....  ..... 10 @c_ldsp
-+}
- {
-   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-   lw              010 .  .....  ..... 10 @c_lwsp
-@@ -147,7 +163,10 @@ fld               001 .  .....  ..... 10 @c_ldsp
-   jalr            100 1  .....  00000 10 @c_jalr rd=1  # C.JALR
-   add             100 1  .....  ..... 10 @cr
- }
--fsd               101   ......  ..... 10 @c_sdsp
-+{
-+  sq              101  ... ... .. ... 10 @c_sqsp
-+  fsd             101   ......  ..... 10 @c_sdsp
-+}
- sw                110 .  .....  ..... 10 @c_swsp
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 2) ***
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 2f251dac1b..02889c6082 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -163,6 +163,11 @@ sllw     0000000 .....  ..... 001 ..... 0111011 @r
- srlw     0000000 .....  ..... 101 ..... 0111011 @r
- sraw     0100000 .....  ..... 101 ..... 0111011 @r
- 
-+# *** RV128I Base Instruction Set (in addition to RV64I) ***
-+ldu      ............   ..... 111 ..... 0000011 @i
-+lq       ............   ..... 010 ..... 0001111 @i
-+sq       ............   ..... 100 ..... 0100011 @s
-+
- # *** RV32M Standard Extension ***
- mul      0000001 .....  ..... 000 ..... 0110011 @r
- mulh     0000001 .....  ..... 001 ..... 0110011 @r
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 63a52bb707..070db77ca5 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -55,6 +55,7 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     target_ulong priv_ver;
-+    RISCVMXL misa_mxl_max;
-     RISCVMXL xl;
-     uint32_t misa_ext;
-     uint32_t opcode;
-@@ -116,6 +117,13 @@ static inline int get_olen(DisasContext *ctx)
-     return 16 << get_ol(ctx);
- }
- 
-+/* The maximum register length */
-+#ifdef TARGET_RISCV32
-+#define get_xl_max(ctx)    MXL_RV32
+diff --git a/include/hw/riscv/sifive_cpu.h b/include/hw/riscv/sifive_cpu.h
+index 136799633a..64078feba8 100644
+--- a/include/hw/riscv/sifive_cpu.h
++++ b/include/hw/riscv/sifive_cpu.h
+@@ -26,6 +26,9 @@
+ #elif defined(TARGET_RISCV64)
+ #define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
+ #define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
 +#else
-+#define get_xl_max(ctx)    ((ctx)->misa_mxl_max)
-+#endif
-+
++#define SIFIVE_E_CPU TYPE_RISCV_CPU_SIFIVE_E51
++#define SIFIVE_U_CPU TYPE_RISCV_CPU_SIFIVE_U54
+ #endif
+ 
+ #endif /* HW_SIFIVE_CPU_H */
+diff --git a/target/riscv/cpu-param.h b/target/riscv/cpu-param.h
+index 80eb615f93..c10459b56f 100644
+--- a/target/riscv/cpu-param.h
++++ b/target/riscv/cpu-param.h
+@@ -16,6 +16,11 @@
+ # define TARGET_LONG_BITS 32
+ # define TARGET_PHYS_ADDR_SPACE_BITS 34 /* 22-bit PPN */
+ # define TARGET_VIRT_ADDR_SPACE_BITS 32 /* sv32 */
++#else
++/* 64-bit target, since QEMU isn't built to have TARGET_LONG_BITS over 64 */
++# define TARGET_LONG_BITS 64
++# define TARGET_PHYS_ADDR_SPACE_BITS 56 /* 44-bit PPN */
++# define TARGET_VIRT_ADDR_SPACE_BITS 48 /* sv48 */
+ #endif
+ #define TARGET_PAGE_BITS 12 /* 4 KiB Pages */
  /*
-  * RISC-V requires NaN-boxing of narrower width floating point values.
-  * This applies when a 32-bit value is assigned to a 64-bit FP register.
-@@ -220,6 +228,7 @@ static TCGv get_gpr(DisasContext *ctx, int reg_num, DisasExtend ext)
-         }
-         break;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index f6d7a1793d..6c15dcacfc 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -38,6 +38,7 @@
+ #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
++#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+ #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+ #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
+@@ -50,6 +51,8 @@
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+ #elif defined(TARGET_RISCV64)
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE64
++#else
++# define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE128
+ #endif
+ 
+ #define RV(x) ((target_ulong)1 << (x - 'A'))
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 793ad14c27..03c8dc9961 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -3090,3 +3090,8 @@ int print_insn_riscv64(bfd_vma memaddr, struct disassemble_info *info)
+ {
+     return print_insn_riscv(memaddr, info, rv64);
+ }
++
++int print_insn_riscv128(bfd_vma memaddr, struct disassemble_info *info)
++{
++    return print_insn_riscv(memaddr, info, rv128);
++}
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8c1cda35b4..141b5a329f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -152,6 +152,8 @@ static void riscv_any_cpu_init(Object *obj)
+     set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+ #elif defined(TARGET_RISCV64)
+     set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
++#else
++    set_misa(env, MXL_RV128, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
+ #endif
+     set_priv_version(env, PRIV_VERSION_1_11_0);
+ }
+@@ -178,7 +180,7 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
+-#else
++#elif defined(TARGET_RISCV32)
+ static void rv32_base_cpu_init(Object *obj)
+ {
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+@@ -218,6 +220,13 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
+     set_resetvec(env, DEFAULT_RSTVEC);
+     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
++#else
++static void rv128_base_cpu_init(Object *obj)
++{
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    /* We set this in the realise function */
++    set_misa(env, MXL_RV128, 0);
++}
+ #endif
+ 
+ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
+@@ -393,6 +402,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
      case MXL_RV64:
-+    case MXL_RV128:
+         info->print_insn = print_insn_riscv64;
          break;
++    case MXL_RV128:
++        info->print_insn = print_insn_riscv128;
++        break;
      default:
          g_assert_not_reached();
-@@ -227,6 +236,15 @@ static TCGv get_gpr(DisasContext *ctx, int reg_num, DisasExtend ext)
-     return cpu_gpr[reg_num];
- }
- 
-+static TCGv get_gprh(DisasContext *ctx, int reg_num)
-+{
-+    assert(get_xl(ctx) == MXL_RV128);
-+    if (reg_num == 0) {
-+        return ctx->zero;
-+    }
-+    return cpu_gprh[reg_num];
-+}
-+
- static TCGv dest_gpr(DisasContext *ctx, int reg_num)
- {
-     if (reg_num == 0 || get_olen(ctx) < TARGET_LONG_BITS) {
-@@ -235,6 +253,14 @@ static TCGv dest_gpr(DisasContext *ctx, int reg_num)
-     return cpu_gpr[reg_num];
- }
- 
-+static TCGv dest_gprh(DisasContext *ctx, int reg_num)
-+{
-+    if (reg_num == 0 || get_ol(ctx) < MXL_RV128) {
-+        return temp_new(ctx);
-+    }
-+    return cpu_gprh[reg_num];
-+}
-+
- static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
- {
-     if (reg_num != 0) {
-@@ -243,11 +269,27 @@ static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
-             tcg_gen_ext32s_tl(cpu_gpr[reg_num], t);
-             break;
-         case MXL_RV64:
-+        case MXL_RV128:
-             tcg_gen_mov_tl(cpu_gpr[reg_num], t);
-             break;
-         default:
-             g_assert_not_reached();
-         }
-+
-+        if (get_xl_max(ctx) == MXL_RV128) {
-+            tcg_gen_sari_tl(cpu_gprh[reg_num], cpu_gpr[reg_num], 63);
-+        }
-+    }
-+}
-+
-+static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
-+{
-+    if (get_ol(ctx) != MXL_RV128) {
-+        g_assert_not_reached();
-+    }
-+    if (reg_num != 0) {
-+        tcg_gen_mov_tl(cpu_gpr[reg_num], rl);
-+        tcg_gen_mov_tl(cpu_gprh[reg_num], rh);
      }
+@@ -455,6 +467,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ #ifdef TARGET_RISCV64
+     case MXL_RV64:
+         break;
++#elif !defined(TARGET_RISCV32)
++    case MXL_RV128:
++        break;
+ #endif
+     case MXL_RV32:
+         break;
+@@ -657,6 +672,7 @@ static gchar *riscv_gdb_arch_name(CPUState *cs)
+     case MXL_RV32:
+         return g_strdup("riscv:rv32");
+     case MXL_RV64:
++    case MXL_RV128:
+         return g_strdup("riscv:rv64");
+     default:
+         g_assert_not_reached();
+@@ -720,7 +736,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     cc->gdb_num_core_regs = 33;
+ #if defined(TARGET_RISCV32)
+     cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+-#elif defined(TARGET_RISCV64)
++#else
+     cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+ #endif
+     cc->gdb_stop_before_watchpoint = true;
+@@ -809,6 +825,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
++#else
++    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
+ #endif
+ };
+ 
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 23429179e2..7672ae123f 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -164,6 +164,11 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+     int bitsize = 16 << env->misa_mxl_max;
+     int i;
+ 
++    /* Until gdb knows about 128-bit registers */
++    if (bitsize > 64) {
++        bitsize = 64;
++    }
++
+     g_string_printf(s, "<?xml version=\"1.0\"?>");
+     g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
+     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
+@@ -204,6 +209,9 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+ #elif defined(TARGET_RISCV64)
+     gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+                              1, "riscv-64bit-virtual.xml", 0);
++#else
++    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
++                             1, "riscv-64bit-virtual.xml", 0);
+ #endif
+ 
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+index db9ae15755..41da696ec4 100644
+--- a/target/riscv/insn_trans/trans_rvd.c.inc
++++ b/target/riscv/insn_trans/trans_rvd.c.inc
+@@ -393,11 +393,11 @@ static bool trans_fmv_x_d(DisasContext *ctx, arg_fmv_x_d *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
+ 
+-#ifdef TARGET_RISCV64
++#ifdef TARGET_RISCV32
++    qemu_build_not_reached();
++#else
+     gen_set_gpr(ctx, a->rd, cpu_fpr[a->rs1]);
+     return true;
+-#else
+-    qemu_build_not_reached();
+ #endif
  }
  
-@@ -649,6 +691,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
-     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-+    ctx->misa_mxl_max = env->misa_mxl_max;
-     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
-     ctx->cs = cs;
-     ctx->ntemp = 0;
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 34164494b9..d17bde6a3a 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -134,7 +134,7 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
- }
+@@ -437,11 +437,11 @@ static bool trans_fmv_d_x(DisasContext *ctx, arg_fmv_d_x *a)
+     REQUIRE_FPU;
+     REQUIRE_EXT(ctx, RVD);
  
--static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
+-#ifdef TARGET_RISCV64
++#ifdef TARGET_RISCV32
++    qemu_build_not_reached();
++#else
+     tcg_gen_mov_tl(cpu_fpr[a->rd], get_gpr(ctx, a->rs1, EXT_NONE));
+     mark_fs_dirty(ctx);
+     return true;
+-#else
+-    qemu_build_not_reached();
+ #endif
+ }
+diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+index bddbd418d9..90cc51e5d6 100644
+--- a/target/riscv/insn_trans/trans_rvf.c.inc
++++ b/target/riscv/insn_trans/trans_rvf.c.inc
+@@ -311,10 +311,10 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
+ 
      TCGv dest = dest_gpr(ctx, a->rd);
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -150,6 +150,50 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
- }
  
-+/* Compute only 64-bit addresses to use the address translation mechanism */
-+static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv destl = dest_gpr(ctx, a->rd);
-+    TCGv desth = dest_gprh(ctx, a->rd);
-+    TCGv addrl = tcg_temp_new();
-+
-+    if (a->imm != 0) {
-+        tcg_gen_addi_tl(addrl, src1l, a->imm);
-+    } else {
-+        tcg_gen_mov_tl(addrl, src1l);
-+    }
-+
-+    if (memop != MO_TEO) {
-+        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, memop);
-+        if (memop & MO_SIGN) {
-+            tcg_gen_sari_tl(desth, destl, 63);
-+        } else {
-+            tcg_gen_movi_tl(desth, 0);
-+        }
-+    } else {
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? desth : destl, addrl,
-+                           ctx->mem_idx, MO_TEQ);
-+        tcg_gen_addi_tl(addrl, addrl, 8);
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? destl : desth, addrl,
-+                           ctx->mem_idx, MO_TEQ);
-+    }
-+
-+    gen_set_gpr128(ctx, a->rd, destl, desth);
-+
-+    tcg_temp_free(addrl);
-+    return true;
-+}
-+
-+static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_load_i128(ctx, a, memop);
-+    } else {
-+        return gen_load_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
- {
-     return gen_load(ctx, a, MO_SB);
-@@ -165,6 +209,18 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
-     return gen_load(ctx, a, MO_TESL);
- }
+-#if defined(TARGET_RISCV64)
+-    tcg_gen_ext32s_tl(dest, cpu_fpr[a->rs1]);
+-#else
++#if defined(TARGET_RISCV32)
+     tcg_gen_extrl_i64_i32(dest, cpu_fpr[a->rs1]);
++#else
++    tcg_gen_ext32s_tl(dest, cpu_fpr[a->rs1]);
+ #endif
  
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TESQ);
-+}
-+
-+static bool trans_lq(DisasContext *ctx, arg_lq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEO);
-+}
-+
- static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
- {
-     return gen_load(ctx, a, MO_UB);
-@@ -177,17 +233,17 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
+     gen_set_gpr(ctx, a->rd, dest);
+diff --git a/target/riscv/Kconfig b/target/riscv/Kconfig
+index b9e5932f13..f9ea52a59a 100644
+--- a/target/riscv/Kconfig
++++ b/target/riscv/Kconfig
+@@ -3,3 +3,6 @@ config RISCV32
  
- static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_load(ctx, a, MO_TEUL);
- }
- 
--static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+static bool trans_ldu(DisasContext *ctx, arg_ldu *a)
- {
--    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEQ);
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUQ);
- }
- 
--static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -202,6 +258,42 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     return true;
- }
- 
-+static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2l = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv src2h = get_gprh(ctx, a->rs2);
-+    TCGv addrl = tcg_temp_new();
+ config RISCV64
+     bool
 +
-+    if (a->imm != 0) {
-+        tcg_gen_addi_tl(addrl, src1l, a->imm);
-+    } else {
-+        tcg_gen_mov_tl(addrl, src1l);
-+    }
-+
-+    if (memop != MO_TEO) {
-+        tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, memop);
-+    } else {
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2h : src2l, addrl,
-+            ctx->mem_idx, MO_TEQ);
-+        tcg_gen_addi_tl(addrl, addrl, 8);
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2l : src2h, addrl,
-+            ctx->mem_idx, MO_TEQ);
-+    }
-+
-+    tcg_temp_free(addrl);
-+    return true;
-+}
-+
-+static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_store_i128(ctx, a, memop);
-+    } else {
-+        return gen_store_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
- {
-     return gen_store(ctx, a, MO_SB);
-@@ -219,10 +311,16 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
- 
- static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_store(ctx, a, MO_TEQ);
- }
- 
-+static bool trans_sq(DisasContext *ctx, arg_sq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_store(ctx, a, MO_TEO);
-+}
-+
- static bool trans_addi(DisasContext *ctx, arg_addi *a)
- {
-     return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_addi_tl);
++config RISCV128
++    bool
 -- 
 2.33.0
 
