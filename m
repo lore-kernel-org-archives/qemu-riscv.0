@@ -1,75 +1,87 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mf1Qt-0003Aq-Eh
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 10:58:39 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39052)
+	id 1mf2CP-0005rR-LV
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Oct 2021 11:47:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50502)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mf1Qr-00037q-Rw
- for qemu-riscv@nongnu.org; Mon, 25 Oct 2021 10:58:37 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:39901)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mf1Qo-0003FJ-CE
- for qemu-riscv@nongnu.org; Mon, 25 Oct 2021 10:58:37 -0400
-Received: by mail-pf1-x429.google.com with SMTP id d9so11017450pfl.6
- for <qemu-riscv@nongnu.org>; Mon, 25 Oct 2021 07:58:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=KT0HFOPEZfxT/Hx5zbOsHK6qtEo2Ov503tpbnuW8Ujc=;
- b=Wij2kiK3wkPyzZo6kp7858QhWEdExr/DTsb9bk1kxRI5gUdSJ3iP+9OXhvs1zqfUJB
- elWNP3KT/k4FLD9Fn9k209Qli1mTUd5tM9Eg96aVUBu+2UuPn95VNnVIdp3QelW42cs8
- Y3C21rUEmMMxdopNl6xsMXJueMb4wDZNmJdRyBmCk+puMWp9+qQhyhEtivQ4qdhApViG
- vGzCuCKg+VfAmiDyweXbivbbjbpoVWOSPkM6/idN3O1pv/PiT4dQShwms7ScPZ5CfSZs
- PgR0UYcRsTstqxc0tSFyKR/Mb19OL9I2sKvOgmpTHgc51vxxlwp50Jrj677H58s178kX
- 4xlQ==
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mf2CO-0005oa-1k
+ for qemu-riscv@nongnu.org; Mon, 25 Oct 2021 11:47:44 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:32255)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1mf2CJ-0004Ny-LC
+ for qemu-riscv@nongnu.org; Mon, 25 Oct 2021 11:47:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635176859;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=OllWm8tBhSCHCLDATZBw+EdX2LqIkuJejncPaP6xydA=;
+ b=VYo/r90Vj+J+0EJ4ezohAbMbpYVoPmRK+pEuJou6WJ0PrcwxJJylOLB5RzBTFH+lONbFH6
+ Nj4ySiQPgHuv1Jt5kk6SDLANAM8URQrx4QcV42lDQJt6udZIhuuvuO5NRA7PZab+xu6oSC
+ snoAgp0kArB8Y9uYmomW8jW09DnJZvo=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-299-EH_KWoAXNiWTFQYvBDCBPw-1; Mon, 25 Oct 2021 11:47:35 -0400
+X-MC-Unique: EH_KWoAXNiWTFQYvBDCBPw-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ o22-20020a1c7516000000b0030d6f9c7f5fso3842137wmc.1
+ for <qemu-riscv@nongnu.org>; Mon, 25 Oct 2021 08:47:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=KT0HFOPEZfxT/Hx5zbOsHK6qtEo2Ov503tpbnuW8Ujc=;
- b=W4gnOcBSFvxPIvNqSMckxB9+DFSWYOOiiTpkZWDx5iKDVY4cVFgv2gt/8K3u7oGe33
- NSUdLcCDIb2QWAhAPOxF5rUdE67itKxP3TUgMK4Y7Wq5twm21RZ3RWU43XI/s0j1JnPr
- cnU8KtmOtxkSgOlY0VVZGaAQDaTTprI3ABuBnkylxJ32EqZTyVLUG49TYwmXjJWH5nVR
- dL5YldBFGulKKiAeTMP54jI+IVZhhNXBvp++zZAGAf5dqz3ICctOCcjmP6JBgKQWkS4u
- UqV90pBdSvY80mKsQlicBGVYqWVXnKfYjLvdopyf2yk/noOSx8VpyXzv68qRmDsIledR
- Q0IA==
-X-Gm-Message-State: AOAM532fcx277VJ0eHVmRkCEJ11jfjfj682LMfkQ+WEz/ZhQZS74ecC+
- lfFkxf8ta4PdF8VGMM8rgObatA==
-X-Google-Smtp-Source: ABdhPJx6Ulqii2mAcXJZIZqhzEo5tVyxw0RS/6zDBeHlKrQfvCUhpMMD7PPOlaWoY2CksRg50l/e6Q==
-X-Received: by 2002:a63:894a:: with SMTP id v71mr11191795pgd.451.1635173912724; 
- Mon, 25 Oct 2021 07:58:32 -0700 (PDT)
-Received: from [192.168.1.11] ([71.212.134.125])
- by smtp.gmail.com with ESMTPSA id v19sm16848640pfu.179.2021.10.25.07.58.32
+ bh=OllWm8tBhSCHCLDATZBw+EdX2LqIkuJejncPaP6xydA=;
+ b=i/nqFosoXmWeUEZvZvw/omvCwX5zTjMgL38P9OSymhNUuDoLv185pdTAFKCr3CN/Rj
+ jWripOvFTmMlfRiRH0dsEAxUG/TRBmdPwWS/GkdceS8uC7Pqa4kx0DzvdbqkazeUzaUk
+ ffiFbHrpAJK+T4WFxAOuSmQ93JnqOw3FHTsIqSECeg1tepPTGKa+OwaXDnQzDGEPdezA
+ Wu/7BBEy7dFroIkwIwwhD4XSdr7Sbm9BAet4K+AcyNi+gFqrhEzGsNJqKlE/Rk1Ur8Ng
+ 8d1I94XFSRo6hBc9eGB/mspDdIlycNEvGdLlHUboYFHv8cUXzdpiNjwk+VdhSEHKEFcC
+ arPQ==
+X-Gm-Message-State: AOAM533lLBMZwHOcuBjNv/4KXxCN+OdWo0Jnxbe6H5VgoRd6Kb2RtknP
+ E3g8YmMi9FANp7o40Zco/qoO4XWuZuDQuDhIf4oqZp9dkEjlXalewadxqMWovSjABjR9959CsIV
+ /g2HnLD8gMVDnDHs=
+X-Received: by 2002:a7b:c359:: with SMTP id l25mr49991183wmj.84.1635176854388; 
+ Mon, 25 Oct 2021 08:47:34 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwLB/niOatd+Vxlku98xG6EfRzTYqPuEkwn0XuG51PJkV6IH3roZQg5o6T0Y/QXDE0lMxEbSQ==
+X-Received: by 2002:a7b:c359:: with SMTP id l25mr49991157wmj.84.1635176854118; 
+ Mon, 25 Oct 2021 08:47:34 -0700 (PDT)
+Received: from [192.168.1.36] (62.red-83-57-168.dynamicip.rima-tde.net.
+ [83.57.168.62])
+ by smtp.gmail.com with ESMTPSA id m31sm1790394wms.25.2021.10.25.08.47.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Oct 2021 07:58:32 -0700 (PDT)
-Subject: Re: [PATCH v6 00/15] target/riscv: Rationalize XLEN and operand length
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20211020031709.359469-1-richard.henderson@linaro.org>
- <17397bbe-7dfe-ac2e-6033-4ab4840a11bd@c-sky.com>
- <663d5df5-c107-c4ce-99e0-2a5d336a69ca@linaro.org>
- <606880b5-83fc-6ab6-6d34-fb2b71536f99@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <4de33722-7cb9-7566-6830-a45709eda452@linaro.org>
-Date: Mon, 25 Oct 2021 07:58:30 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ Mon, 25 Oct 2021 08:47:33 -0700 (PDT)
+Message-ID: <3b78f982-74e6-fc04-edab-aa77bdb8f4c9@redhat.com>
+Date: Mon, 25 Oct 2021 17:47:32 +0200
 MIME-Version: 1.0
-In-Reply-To: <606880b5-83fc-6ab6-6d34-fb2b71536f99@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v4 02/17] qemu/int128: addition of a few 128-bit operations
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
+ bin.meng@windriver.com, palmer@dabbelt.com, fabien.portas@grenoble-inp.org
+References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211025122818.168890-3-frederic.petrot@univ-grenoble-alpes.fr>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+In-Reply-To: <20211025122818.168890-3-frederic.petrot@univ-grenoble-alpes.fr>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
-X-Spam_score_int: -48
-X-Spam_score: -4.9
-X-Spam_bar: ----
-X-Spam_report: (-4.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.846,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=216.205.24.124; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -55
+X-Spam_score: -5.6
+X-Spam_bar: -----
+X-Spam_report: (-5.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ NICE_REPLY_A=-2.846, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -82,28 +94,23 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Oct 2021 14:58:38 -0000
+X-List-Received-Date: Mon, 25 Oct 2021 15:47:44 -0000
 
-On 10/25/21 2:24 AM, LIU Zhiwei wrote:
->> I think extending on write is the correct thing. 
+On 10/25/21 14:28, Frédéric Pétrot wrote:
+> Addition of not, xor, div and rem on 128-bit integers, used in particular
+> within div/rem and csr helpers for computations on 128-bit registers in
+> the 128-bit riscv target.
 > 
-> Thanks. I will pick this way.
-> 
->> Jumps, exception entry and return, gdb write.
-> 
-> If we carefully process jumps and gdb write, I think we can omit exception entry and 
-> return. Is it right?
+> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+> ---
+>  include/qemu/int128.h |  26 +++++
+>  util/int128.c         | 218 ++++++++++++++++++++++++++++++++++++++++++
+>  util/meson.build      |   1 +
+>  3 files changed, 245 insertions(+)
+>  create mode 100644 util/int128.c
 
-No, though you'd probably have to create a special test case to see it.
+If you ever have to respin, please split the logical operations in
+one patch and the div/rem in another.
 
-On exception return, a 64-bit OS can write a 64-bit value into SEPC.  But when SEPC is 
-copied to PC during SRET, UXL should be examined and the assignment should extend for a 
-32-bit user program.
-
-Exception entry would seem to be limited on its face by SXLEN; STVEC will always contain 
-the same number of bits as PC, so no (additional) extension would be required.  But we do 
-have to be careful to interpret the target_ulong value properly for the current SXLEN.
-
-
-r~
 
