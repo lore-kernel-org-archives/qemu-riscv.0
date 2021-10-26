@@ -1,69 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfEcF-0001qW-2L
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 01:03:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38096)
+	id 1mfFyD-0005UH-PD
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:30:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50914)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mfEcD-0001nD-DJ
- for qemu-riscv@nongnu.org; Tue, 26 Oct 2021 01:03:13 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:43679)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mfFyB-0005T0-5t; Tue, 26 Oct 2021 02:29:59 -0400
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:39861)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mfEc9-0008DH-JU
- for qemu-riscv@nongnu.org; Tue, 26 Oct 2021 01:03:13 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 67-20020a1c1946000000b0030d4c90fa87so877015wmz.2
- for <qemu-riscv@nongnu.org>; Mon, 25 Oct 2021 22:03:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mfFy8-00074G-QX; Tue, 26 Oct 2021 02:29:58 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id o184so18772110iof.6;
+ Mon, 25 Oct 2021 23:29:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=K4dwIin+kAjocSuB7DTVHkvAbJrTs6HidXT+/BVEKm4=;
- b=4VXDmc3qL/za9Old9/c3plUGrlbiNQOcd1XN2Wl9h+Knn4xBIel9fVqfozdSS78Hx3
- 8m88gPYUWhMrApPGyrXrp3+pUInyq8b04w6/jLcMPqxTvYs/5csWCMqLpPVh+hyFg1dH
- qg85ZN5cQxPHVaVWd57/X/FHt6JZFtQu80jD7MQRtYmeqIqqwE9bgJsvhCxVsxLJkTqK
- mLTE051lecdPip8uhRdAr1RGVfuFfgVdSXUOnaA4uY2m/Zy5jyr8OLELECLhxYMpGT6/
- pYlukxJh0CKtolDrpfbZwWZRhlDqEqy5Mk8O1KCw7078oBefs88ZlYGk7GSVXPJ1rN6g
- S+RQ==
+ :cc; bh=5J80M5YLkdFOL4w90gPoeTYbWajYajq9yF7AHQ96fRM=;
+ b=WXIwNsOaKFz3S5znN/yow3dCKhYkJEdehJPZUCswXbmJM5fRhS1Xfn0EVtx/A8Hjbz
+ LlppygFHhGiYz62U/QW5bfUQl32cuROad49XMxmgpCyKXX05VSIvyLuaAd7WbAEcPaGP
+ y2iwJdSK6NuWVbfZGXkthn8ku4KAR7S0UHtNa0BHpMTfPVdnMMiaFu6YFGMxl+M9LQ14
+ kZWtfrUWL5HNSPzR1iBFgC6JrS427c3ul+SCP/AgFSYZi+LGsai5G1scmKHbf1xP5u6n
+ 6Wd/MqD9BpLShW+UIDwfka5KWTpxbp2XL/uHKrgn42Gr3z4YDCHZzmo35CuSW45aIu92
+ 2j8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=K4dwIin+kAjocSuB7DTVHkvAbJrTs6HidXT+/BVEKm4=;
- b=Ilm1QffwSDN9DYFDoEFk1axV+HkM5E80K632/kDZegFnEI1FH/oEjsWuW/AzjBCJaT
- xGsJyqPCcNgy4hc959EjLZ5eA5aQV4Ki1paf3v9pm9jhtuEODXy2Y3nB9a3upQ4bZLbd
- 6zyuhYTyA+lLlzOcpn8sm/OMBn0TEBVcbTwWCJdTedFMU+Wr/F5cVPeJ/XknlG+q9aeg
- ChBl2GZwcU1/79pD+R0hXiHsZ1onIATBYSanpKAH15yDw5n+TjWFoTBqay6eQ4n9xsFY
- bBQlFfO9xelmwjk3XAu9Z+/+KBVIq11sN5cAS9oOQiJVE6iGNlm8hETej0GBXxppmMzg
- vY0g==
-X-Gm-Message-State: AOAM530Xmwn0h/QMNjUrFz6D/M8dRCc7AVpZsgq0AiNX0re/AnJyt8hu
- xXIiWaFMRhCzTF9keHxZcPeiHm+LmzRRSPsTjDEAYg==
-X-Google-Smtp-Source: ABdhPJwYi4Wirz9+8ZkCBGV1VBv5Z/eflW1ObRkZhOYOkeYF5AbdPp1TVXrAJ3HPawULMhpgloLitUPIXe/ocDilGbY=
-X-Received: by 2002:a1c:7201:: with SMTP id n1mr52955332wmc.176.1635224586453; 
- Mon, 25 Oct 2021 22:03:06 -0700 (PDT)
+ bh=5J80M5YLkdFOL4w90gPoeTYbWajYajq9yF7AHQ96fRM=;
+ b=LLIRxKf2YamRFxFehCi0TWA/J4G26iHGCV1UmmSs/9Uc+XQ5wmJyTOZae9CAPIi/B0
+ f2OBm39qvmN8Cax2c6iQU2QWumVe6H1BCkuhwprdthexWQ7XGz1EPBZSWPhrDjmv8C9e
+ WmhuX3gff4xdvLcpPkBw1KVmWHECjAIYOpxFBytqaeIUjN0krfM0iOz5B83Shd/ddNr7
+ oArDjTjWCCJ+0zaXhd7VZMkKsMpGQBqW+086arGO81p79aHEy/DE9M+1A2/7ns9cbxLF
+ NEnzWUz71RtlwgQ8kYL9PM+s3uHn/njs/7lkcafNW/1g74NiCFIUp7D3wjQJDG7xVbIs
+ KGUA==
+X-Gm-Message-State: AOAM531BmpjVsBMwc9V7vx2/Q6qS4PR6XDOIqKzM/dKILDddhyJwfHYO
+ aWtw2VY7FV0OLqUF8TZR89KAekDroFcmomTbhns=
+X-Google-Smtp-Source: ABdhPJzWf+0VdJXD2NMp0ZCh15Sxdb7GSq4BBd0FModBsyMBwtPynaetVGmyGmvCo9T7ySMT3umXcK00vN4Gvs5oNL0=
+X-Received: by 2002:a6b:6e0e:: with SMTP id d14mr11212600ioh.57.1635229791537; 
+ Mon, 25 Oct 2021 23:29:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211023084638.1697057-1-anup.patel@wdc.com>
-In-Reply-To: <20211023084638.1697057-1-anup.patel@wdc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Tue, 26 Oct 2021 10:32:54 +0530
-Message-ID: <CAAhSdy1FYmv-D3O42tBeeiK-AYJ1sMC53ApOKhaMiSo1SUfekA@mail.gmail.com>
-Subject: Re: [PATCH v3 00/22] QEMU RISC-V AIA support
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
+References: <20211015074627.3957162-1-frank.chang@sifive.com>
+ <20211015074627.3957162-70-frank.chang@sifive.com>
+In-Reply-To: <20211015074627.3957162-70-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 26 Oct 2021 16:29:25 +1000
+Message-ID: <CAKmqyKOL=3L38zmJMvP5g5OF2W3dRm3dKoR+_wTdC2FXwyc3kw@mail.gmail.com>
+Subject: Re: [PATCH v8 62/78] target/riscv: rvv-1.0: widening
+ floating-point/integer type-convert
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::332;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x332.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+X-Spam_score_int: 1
+X-Spam_score: 0.1
+X-Spam_bar: /
+X-Spam_report: (0.1 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.23
@@ -76,112 +73,199 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2021 05:03:13 -0000
+X-List-Received-Date: Tue, 26 Oct 2021 06:30:00 -0000
 
-Hi Alistair,
+On Fri, Oct 15, 2021 at 6:47 PM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Add the following instructions:
+>
+> * vfwcvt.rtz.xu.f.v
+> * vfwcvt.rtz.x.f.v
+>
+> Also adjust GEN_OPFV_WIDEN_TRANS() to accept multiple floating-point
+> rounding modes.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
-On Sat, Oct 23, 2021 at 2:17 PM Anup Patel <anup.patel@wdc.com> wrote:
->
-> The advanced interrupt architecture (AIA) extends the per-HART local
-> interrupt support. Along with this, it also adds IMSIC (MSI contrllor)
-> and Advanced PLIC (wired interrupt controller).
->
-> The latest AIA draft specification can be found here:
-> https://github.com/riscv/riscv-aia/releases/download/0.2-draft.27/riscv-interrupts-027.pdf
->
-> This series adds RISC-V AIA support in QEMU which includes emulating all
-> AIA local CSRs, APLIC, and IMSIC. Only AIA local interrupt filtering is
-> not implemented because we don't have any local interrupt greater than 12.
->
-> To enable AIA in QEMU, use one of the following:
-> 1) Only AIA local interrupt CSRs: Pass "x-aia=true" as CPU paramenter
->    in the QEMU command-line
-> 2) Only APLIC for virt machine: Pass "aia=aplic" as machine parameter
->    in the QEMU command-line
-> 3) Both APLIC and IMSIC for virt machine: Pass "aia=aplic-imsic" as
->    machine parameter in the QEMU command-line
-> 4) Both APLIC and IMSIC with 2 guest files for virt machine: Pass
->    "aia=aplic-imsic,aia-guests=2" as machine parameter in the QEMU
->    command-line
->
-> To test series, we require OpenSBI and Linux with AIA support which can
-> be found in riscv_aia_v1 branch at:
-> https://github.com/avpatel/opensbi.git
-> https://github.com/avpatel/linux.git
->
-> This series can be found riscv_aia_v3 branch at:
-> https://github.com/avpatel/qemu.git
->
-> Changes since v2:
->  - Update PATCH4 to check and inject interrupt after V=1 when
->    transitioning from V=0 to V=1
->
-> Changes since v1:
->  - Revamped whole series and created more granular patches
->  - Added HGEIE and HGEIP CSR emulation for H-extension
->  - Added APLIC emulation
->  - Added IMSIC emulation
->
-> Anup Patel (22):
->   target/riscv: Fix trap cause for RV32 HS-mode CSR access from RV64
->     HS-mode
->   target/riscv: Implement SGEIP bit in hip and hie CSRs
->   target/riscv: Implement hgeie and hgeip CSRs
->   target/riscv: Improve delivery of guest external interrupts
->   target/riscv: Allow setting CPU feature from machine/device emulation
->   target/riscv: Add AIA cpu feature
->   target/riscv: Add defines for AIA CSRs
->   target/riscv: Allow AIA device emulation to set ireg rmw callback
->   target/riscv: Implement AIA local interrupt priorities
->   target/riscv: Implement AIA CSRs for 64 local interrupts on RV32
->   target/riscv: Implement AIA hvictl and hviprioX CSRs
->   target/riscv: Implement AIA interrupt filtering CSRs
->   target/riscv: Implement AIA mtopi, stopi, and vstopi CSRs
->   target/riscv: Implement AIA xiselect and xireg CSRs
->   target/riscv: Implement AIA IMSIC interface CSRs
->   hw/riscv: virt: Use AIA INTC compatible string when available
->   target/riscv: Allow users to force enable AIA CSRs in HART
->   hw/intc: Add RISC-V AIA APLIC device emulation
->   hw/riscv: virt: Add optional AIA APLIC support to virt machine
->   hw/intc: Add RISC-V AIA IMSIC device emulation
->   hw/riscv: virt: Add optional AIA IMSIC support to virt machine
->   docs/system: riscv: Document AIA options for virt machine
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-The PATCH19 and PATCH21 uses "aplic,xxx" and "imsic,xxx" DT
-properties which is not allowed as-per Linux DT schema checker
-because "aplic" and "imsic" prefixes are not vendor names. Instead
-of this we should use "riscv" prefix which is registered vendor in
-Linux DT bindings.
+Alistair
 
-I will send v4 to fix the above.
-
-Regards,
-Anup
-
+> ---
+>  target/riscv/helper.h                   |  2 +
+>  target/riscv/insn32.decode              | 13 +++---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 55 +++++++++++++++++++++----
+>  target/riscv/vector_helper.c            |  7 +++-
+>  4 files changed, 63 insertions(+), 14 deletions(-)
 >
->  docs/system/riscv/virt.rst    |   16 +
->  hw/intc/Kconfig               |    6 +
->  hw/intc/meson.build           |    2 +
->  hw/intc/riscv_aplic.c         |  970 +++++++++++++++++++++++++
->  hw/intc/riscv_imsic.c         |  443 ++++++++++++
->  hw/riscv/Kconfig              |    2 +
->  hw/riscv/virt.c               |  694 +++++++++++++++---
->  include/hw/intc/riscv_aplic.h |   73 ++
->  include/hw/intc/riscv_imsic.h |   68 ++
->  include/hw/riscv/virt.h       |   40 +-
->  target/riscv/cpu.c            |   97 ++-
->  target/riscv/cpu.h            |   67 +-
->  target/riscv/cpu_bits.h       |  132 ++++
->  target/riscv/cpu_helper.c     |  300 +++++++-
->  target/riscv/csr.c            | 1273 ++++++++++++++++++++++++++++++---
->  target/riscv/machine.c        |   24 +-
->  16 files changed, 3901 insertions(+), 306 deletions(-)
->  create mode 100644 hw/intc/riscv_aplic.c
->  create mode 100644 hw/intc/riscv_imsic.c
->  create mode 100644 include/hw/intc/riscv_aplic.h
->  create mode 100644 include/hw/intc/riscv_imsic.h
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 1727075dce4..53cf88cd402 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -928,8 +928,10 @@ DEF_HELPER_5(vfwcvt_xu_f_v_h, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_xu_f_v_w, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_x_f_v_h, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_x_f_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfwcvt_f_xu_v_b, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_f_xu_v_h, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_f_xu_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfwcvt_f_x_v_b, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_f_x_v_h, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_f_x_v_w, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfwcvt_f_f_v_h, void, ptr, ptr, ptr, env, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 02064f8ec98..664d0fb3716 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -592,11 +592,14 @@ vfcvt_f_xu_v       010010 . ..... 00010 001 ..... 1010111 @r2_vm
+>  vfcvt_f_x_v        010010 . ..... 00011 001 ..... 1010111 @r2_vm
+>  vfcvt_rtz_xu_f_v   010010 . ..... 00110 001 ..... 1010111 @r2_vm
+>  vfcvt_rtz_x_f_v    010010 . ..... 00111 001 ..... 1010111 @r2_vm
+> -vfwcvt_xu_f_v   100010 . ..... 01000 001 ..... 1010111 @r2_vm
+> -vfwcvt_x_f_v    100010 . ..... 01001 001 ..... 1010111 @r2_vm
+> -vfwcvt_f_xu_v   100010 . ..... 01010 001 ..... 1010111 @r2_vm
+> -vfwcvt_f_x_v    100010 . ..... 01011 001 ..... 1010111 @r2_vm
+> -vfwcvt_f_f_v    100010 . ..... 01100 001 ..... 1010111 @r2_vm
+> +
+> +vfwcvt_xu_f_v      010010 . ..... 01000 001 ..... 1010111 @r2_vm
+> +vfwcvt_x_f_v       010010 . ..... 01001 001 ..... 1010111 @r2_vm
+> +vfwcvt_f_xu_v      010010 . ..... 01010 001 ..... 1010111 @r2_vm
+> +vfwcvt_f_x_v       010010 . ..... 01011 001 ..... 1010111 @r2_vm
+> +vfwcvt_f_f_v       010010 . ..... 01100 001 ..... 1010111 @r2_vm
+> +vfwcvt_rtz_xu_f_v  010010 . ..... 01110 001 ..... 1010111 @r2_vm
+> +vfwcvt_rtz_x_f_v   010010 . ..... 01111 001 ..... 1010111 @r2_vm
+>  vfncvt_xu_f_v   100010 . ..... 10000 001 ..... 1010111 @r2_vm
+>  vfncvt_x_f_v    100010 . ..... 10001 001 ..... 1010111 @r2_vm
+>  vfncvt_f_xu_v   100010 . ..... 10010 001 ..... 1010111 @r2_vm
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index b1ea15517c0..63d33b22068 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2535,12 +2535,55 @@ static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
+>             vext_check_ds(s, a->rd, a->rs2, a->vm);
+>  }
 >
+> -#define GEN_OPFV_WIDEN_TRANS(NAME)                                 \
+> +#define GEN_OPFV_WIDEN_TRANS(NAME, HELPER, FRM)                    \
+>  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>  {                                                                  \
+>      if (opfv_widen_check(s, a)) {                                  \
+>          uint32_t data = 0;                                         \
+>          static gen_helper_gvec_3_ptr * const fns[2] = {            \
+> +            gen_helper_##HELPER##_h,                               \
+> +            gen_helper_##HELPER##_w,                               \
+> +        };                                                         \
+> +        TCGLabel *over = gen_new_label();                          \
+> +        gen_set_rm(s, FRM);                                        \
+> +        tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +                                                                   \
+> +        data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+> +        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> +        tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> +                           vreg_ofs(s, a->rs2), cpu_env,           \
+> +                           s->vlen / 8, s->vlen / 8, data,         \
+> +                           fns[s->sew - 1]);                       \
+> +        mark_vs_dirty(s);                                          \
+> +        gen_set_label(over);                                       \
+> +        return true;                                               \
+> +    }                                                              \
+> +    return false;                                                  \
+> +}
+> +
+> +GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_DYN)
+> +GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v, vfwcvt_x_f_v, RISCV_FRM_DYN)
+> +GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v, vfwcvt_f_f_v, RISCV_FRM_DYN)
+> +/* Reuse the helper functions from vfwcvt.xu.f.v and vfwcvt.x.f.v */
+> +GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_RTZ)
+> +GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_x_f_v, vfwcvt_x_f_v, RISCV_FRM_RTZ)
+> +
+> +static bool opfxv_widen_check(DisasContext *s, arg_rmr *a)
+> +{
+> +    return require_rvv(s) &&
+> +           require_scale_rvf(s) &&
+> +           vext_check_isa_ill(s) &&
+> +           /* OPFV widening instructions ignore vs1 check */
+> +           vext_check_ds(s, a->rd, a->rs2, a->vm);
+> +}
+> +
+> +#define GEN_OPFXV_WIDEN_TRANS(NAME)                                \
+> +static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+> +{                                                                  \
+> +    if (opfxv_widen_check(s, a)) {                                 \
+> +        uint32_t data = 0;                                         \
+> +        static gen_helper_gvec_3_ptr * const fns[3] = {            \
+> +            gen_helper_##NAME##_b,                                 \
+>              gen_helper_##NAME##_h,                                 \
+>              gen_helper_##NAME##_w,                                 \
+>          };                                                         \
+> @@ -2549,11 +2592,10 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+>                                                                     \
+>          data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+> -        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs2), cpu_env,           \
+>                             s->vlen / 8, s->vlen / 8, data,         \
+> -                           fns[s->sew - 1]);                       \
+> +                           fns[s->sew]);                           \
+>          mark_vs_dirty(s);                                          \
+>          gen_set_label(over);                                       \
+>          return true;                                               \
+> @@ -2561,11 +2603,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>      return false;                                                  \
+>  }
+>
+> -GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v)
+> -GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v)
+> -GEN_OPFV_WIDEN_TRANS(vfwcvt_f_xu_v)
+> -GEN_OPFV_WIDEN_TRANS(vfwcvt_f_x_v)
+> -GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v)
+> +GEN_OPFXV_WIDEN_TRANS(vfwcvt_f_xu_v)
+> +GEN_OPFXV_WIDEN_TRANS(vfwcvt_f_x_v)
+>
+>  /* Narrowing Floating-Point/Integer Type-Convert Instructions */
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index c19cd937e1a..dda8e2ab5a2 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -3773,6 +3773,7 @@ GEN_VEXT_V_ENV(vfcvt_f_x_v_d, 8, 8)
+>
+>  /* Widening Floating-Point/Integer Type-Convert Instructions */
+>  /* (TD, T2, TX2) */
+> +#define WOP_UU_B uint16_t, uint8_t,  uint8_t
+>  #define WOP_UU_H uint32_t, uint16_t, uint16_t
+>  #define WOP_UU_W uint64_t, uint32_t, uint32_t
+>  /* vfwcvt.xu.f.v vd, vs2, vm # Convert float to double-width unsigned integer.*/
+> @@ -3788,19 +3789,23 @@ GEN_VEXT_V_ENV(vfwcvt_x_f_v_h, 2, 4)
+>  GEN_VEXT_V_ENV(vfwcvt_x_f_v_w, 4, 8)
+>
+>  /* vfwcvt.f.xu.v vd, vs2, vm # Convert unsigned integer to double-width float */
+> +RVVCALL(OPFVV1, vfwcvt_f_xu_v_b, WOP_UU_B, H2, H1, uint8_to_float16)
+>  RVVCALL(OPFVV1, vfwcvt_f_xu_v_h, WOP_UU_H, H4, H2, uint16_to_float32)
+>  RVVCALL(OPFVV1, vfwcvt_f_xu_v_w, WOP_UU_W, H8, H4, uint32_to_float64)
+> +GEN_VEXT_V_ENV(vfwcvt_f_xu_v_b, 1, 2)
+>  GEN_VEXT_V_ENV(vfwcvt_f_xu_v_h, 2, 4)
+>  GEN_VEXT_V_ENV(vfwcvt_f_xu_v_w, 4, 8)
+>
+>  /* vfwcvt.f.x.v vd, vs2, vm # Convert integer to double-width float. */
+> +RVVCALL(OPFVV1, vfwcvt_f_x_v_b, WOP_UU_B, H2, H1, int8_to_float16)
+>  RVVCALL(OPFVV1, vfwcvt_f_x_v_h, WOP_UU_H, H4, H2, int16_to_float32)
+>  RVVCALL(OPFVV1, vfwcvt_f_x_v_w, WOP_UU_W, H8, H4, int32_to_float64)
+> +GEN_VEXT_V_ENV(vfwcvt_f_x_v_b, 1, 2)
+>  GEN_VEXT_V_ENV(vfwcvt_f_x_v_h, 2, 4)
+>  GEN_VEXT_V_ENV(vfwcvt_f_x_v_w, 4, 8)
+>
+>  /*
+> - * vfwcvt.f.f.v vd, vs2, vm #
+> + * vfwcvt.f.f.v vd, vs2, vm
+>   * Convert single-width float to double-width float.
+>   */
+>  static uint32_t vfwcvtffv16(uint16_t a, float_status *s)
 > --
 > 2.25.1
+>
 >
 
