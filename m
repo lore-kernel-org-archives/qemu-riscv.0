@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfGBs-0003h5-91
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:44:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53278)
+	id 1mfGBt-0003ie-Ez
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:44:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53306)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGBn-0003cx-Ub; Tue, 26 Oct 2021 02:44:05 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:53201)
+ id 1mfGBr-0003gX-UO; Tue, 26 Oct 2021 02:44:08 -0400
+Received: from esa2.hgst.iphmx.com ([68.232.143.124]:53782)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGBf-0002tM-TS; Tue, 26 Oct 2021 02:44:03 -0400
+ id 1mfGBo-0002t7-0V; Tue, 26 Oct 2021 02:44:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1635230635; x=1666766635;
+ t=1635230643; x=1666766643;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=gOuqDFIv+r+JoUY8NfNizEmuiaC23InLTOFTKwu1Z5I=;
- b=l1kndouQlskWu3ARTyBvuIFDrbTcPTJ5Ho3/xR/QqXPCbTClfnsVe8VG
- ViZWc4Xs5blZ9xUV4CmsN9M4pvHpZ+jOiO+LONsGOGllYiF4UfdxwTy4q
- YYoAZS2zYWhatZvgJLYFjBlgQnzhBypwNgANKl7p+xS7CXCaySVKIxZMM
- 3Hs6gJLSA9+2C7VYp/+8yvg7AOTbF/RdZwPuLmR3auma7iahM1udsKCow
- cflP3C2dK3LwewoHywuJuOAXxN/DcVQFN25adiB8pcA9SB6ZQm1nNfaBh
- vgvtNiKNqRqOo0RfBkYgLmr5T7PuNf95A/iVx0XbKn6FvxhL7Uu91SJET A==;
-X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="182854790"
-Received: from mail-mw2nam12lp2042.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.42])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:43:53 +0800
+ bh=INNmg/hDvf169nc2ZiqfiMFwT909p8OF0AB4mrgOtxo=;
+ b=VbXygnMqHFMOifgUf1OJU3pEMsRo/tagheU1z3E0Jdysqml5DWBEiQJc
+ DtBGoieoGtn9rM6NC/PKOvnzAHTRnyhLN5HCPyDr2s6Oeyjdgz7zGap0a
+ on7biWfDC0T/wJuAH1HaUrjsXC/rANeNHUOdeueXLL/M3VFi1oV5uBS9e
+ df9lCa/Q1k9GxsKHWRIaMMuO9xzQg4rWwN+TBU5B0L0PSWXXp4AjpES6f
+ lGKxOjfdHiNf+3pp5WdeQX6PXPYHOuovzDoVNC5Bftqj7dT0UiBKcEZdB
+ /DopvcnugLUCMLdfT1FFQJ6xJjJ1MTmCWVQMfpo88wrajQxxSJiADaARd w==;
+X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="287722113"
+Received: from mail-dm6nam11lp2175.outbound.protection.outlook.com (HELO
+ NAM11-DM6-obe.outbound.protection.outlook.com) ([104.47.57.175])
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:44:00 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BjJ14i2ZTrP8v7HIv4AGdYqQWX4D1nRq5T/aZyC2z91dr+mrlQoiU6XwnnH6uautwn/P6O2uLkV5qFTIDCasZrM4HfM0hbmwACci37ZDFj6vTQ30UOwiEHwqTjRgoJrmC6DA0LbJh1Td3RTHbMDIxk2d4zEmKGiJGtnLc5vzV64Bz/Cmn92oSubbcl8FjWpVRfUQud4NtsaNKOtVJCTz0vT2VNnqNGLrQC6efyrKuEkKj7xeO27j8ZUUh5FUa+sS4edYkDZuR39HYc8bjujhoPYD4VufCyoeGmDsesl4obCddP00MaXxYcve1R2MSaM0Tuls2vQIuPQn6CZuwJ51Cg==
+ b=VzFE+7Va80nilM+faZFrOWfjXRmEj+n3PeBFaYO6IQTEQwZ+KeVFL8aIxv8pD+zdsImS0uuYUqzdOurX9oRpQJ9EmAhwzPB5VhSHin9m7I8RTEXuJNp0nsFHuL7/wiVYf0bWNfNBuLQQ/25aubIkaS3fgySdAVXO+s/VML1kzbG2VfVd6POEsTpHiq6N+yC8XUv961fiwdZEZ4tJOcFJO4fk/RYaiJSpjSpXswEQhbouJCLFOzcKjFsfpGmrQYaSiwFb4f84J+Bm+eFF5a1uq6YQcD76jfp0YysYMrALaFLpaejlvuQb0uSibhGMYX7vyNQtZ2u8LfVLX0r8gkvY1A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2C28XhQx7YeXAC7V5RJ7Z3nV30V4CzoGYD4VcOwMwfg=;
- b=EDLNFPaVDkJu+r04mEa2NgIW4TsqWS/bJ3x3yre3XW3IsmDCjiUM+D5a3gcliWtM3lyR7m784V4DGElUo11/1An24KMGAyBAq2SRH5PPqMxtj4PDDXOcTg7ljQlQW/SCv7fBWZ3fiZxZGC4hXZwWAHzwZJH0/bbMfQZwOf+yIKJe1eu1MnG1Xa174CM6y/2a9RBkFwGCx++Z8g2ZbAtvZG1PhZ4I2VNio/0Sp+3N6VfErauVZS15l9mKi2vC/52XV+KHfyE8a6NQoQVHNjfj41+Jxn+6lq/iRkaR9A/bxa+nRl5+VuSHh0oEtWh3afEnm3ADmnR4sVbt37omo+YuIQ==
+ bh=ZExT2KE+FXyyR+Z/ptYaBm2OEHhmHudUcOL4ornmbEQ=;
+ b=co+4EIGf6VZVZuQDF+DoLJl0Dc+byEgcZ32y8oFsFQ50bo4pTKK/xvtHRSGVQV3TBejqpqwGkac5DFInAppQj1fxj0eHdJco4HyeuZZ17v5vfIw2OUWW7Ynoip1rtfncJcRfOpy08kVg6/v4hgfPxCaWRdr2lQiNsGTTmsSd3lHXVxJu/QbXxXgF9VqXnDrWiqotbRGD/3BJaBpyfi9dnZiUbsZHw1ceOqQZrCkhqCURPMmAIBgKfK4tqIhOL+kDMgecdfd8+tQCxX42ENmpRbXvbfaN7kVI9FXvz7q+G1u3o5b4rIytjwioDp0RinPEguYyAyRJ3XjipabQPcSezg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2C28XhQx7YeXAC7V5RJ7Z3nV30V4CzoGYD4VcOwMwfg=;
- b=pJlWCQl90HAkrtjKuB210kZyoXIZFbkaj7YS9kLZsBL3FaanirDI/fIiaKAyGrwSCqZr2e+4vWCfa8e68AVfgS1YwY9BWCOghUV6tiMRbNu5i+Ts01f58kcDfcLspsJRVCmI/tww7Ofd6yY8Q3KJav4YiO5yJbPY/W5RUHtwgrI=
+ bh=ZExT2KE+FXyyR+Z/ptYaBm2OEHhmHudUcOL4ornmbEQ=;
+ b=Rz/wYKhR7JX89DFNEHbQ2/3HnOW8fVK/fn+xwSuwse/PHySIVdW3c7FAXCtmD/VSwj6OCMfdsZk/faqzVZciWQ82gXu3I/ONdkiRi/Xb0p79pWQ2poqILd3QaESFRYvVF2PM97d/RfsD4h93H+cdZt6FL2UMm9W/JcVtIsaQTSs=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com (2603:10b6:303:138::6)
- by CO6PR04MB8379.namprd04.prod.outlook.com (2603:10b6:303:142::9)
+ by CO6PR04MB7825.namprd04.prod.outlook.com (2603:10b6:303:13b::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.20; Tue, 26 Oct
- 2021 06:43:52 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.18; Tue, 26 Oct
+ 2021 06:43:58 +0000
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97]) by CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97%9]) with mapi id 15.20.4628.022; Tue, 26 Oct 2021
- 06:43:52 +0000
+ 06:43:58 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -59,14 +59,14 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 18/22] hw/intc: Add RISC-V AIA APLIC device emulation
-Date: Tue, 26 Oct 2021 12:12:23 +0530
-Message-Id: <20211026064227.2014502-19-anup.patel@wdc.com>
+Subject: [PATCH v4 20/22] hw/intc: Add RISC-V AIA IMSIC device emulation
+Date: Tue, 26 Oct 2021 12:12:25 +0530
+Message-Id: <20211026064227.2014502-21-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211026064227.2014502-1-anup.patel@wdc.com>
 References: <20211026064227.2014502-1-anup.patel@wdc.com>
-Content-Type: text/plain; charset=ascii
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-ClientProxiedBy: MA1PR01CA0161.INDPRD01.PROD.OUTLOOK.COM
  (2603:1096:a00:71::31) To CO6PR04MB7812.namprd04.prod.outlook.com
  (2603:10b6:303:138::6)
@@ -74,62 +74,62 @@ MIME-Version: 1.0
 Received: from wdc.com (122.162.126.221) by
  MA1PR01CA0161.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:71::31) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:49 +0000
+ 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:56 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 06213b55-75a9-43ba-0c78-08d9984bf92d
-X-MS-TrafficTypeDiagnostic: CO6PR04MB8379:
-X-Microsoft-Antispam-PRVS: <CO6PR04MB8379C77672E82070D8EA78E28D849@CO6PR04MB8379.namprd04.prod.outlook.com>
+X-MS-Office365-Filtering-Correlation-Id: 70447197-1ace-4389-2338-08d9984bfd15
+X-MS-TrafficTypeDiagnostic: CO6PR04MB7825:
+X-Microsoft-Antispam-PRVS: <CO6PR04MB78252E74BEC5AF5A4EC3FCD18D849@CO6PR04MB7825.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:313;
+X-MS-Oob-TLC-OOBClassifiers: OLM:224;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NwVpiq5VFoJeVcmR+JBJPDTXqfxAkRSJ996WT9JqEey9/Ks5ak7NZrDSCDNn2gQ+6hcOuePPmlUGXNhUQkgPx1oky/0XOlB4xqHzXMk38XoxXQirKuwbfUN8EIn97rmM65CcRbzZg1/k+Pzk07II/VDAwsnMdp1utRcjl/UD8baxQzagEzfkXtG26NEIDMP/ksyI91wU7zlaFAe5d7Wkj6biyVDKy7qRffb9oJqFM2bD65hv5ZCGYvdY76WXIdtY4kuynUQKze+ZtOJc3nifF9D7kIKIgsHoMJZJtJzr4aivq3f74pggzdk290Vif/OBaqXjuZV05JP5nbGGbzdUmFJ91XT4CDDm4y4LCywfu4OtMDDwr4+/0UOfjyXIScgnglNpCbUeqONhJ8MRdT0d+IwAIj79lKWjYnUdY5hMQSsbwayciQAraPsygON9U0vJdb0d3bRu4ElTILmUYYxIkrqEXOg4r/uRtg+UFsm06V9wOf16a7sxCPrD76RfdMhQ2/z2mVvgDe8IM9aulNLtWsJZsfQvJXEvA0aaSfChCRjzhY2pXExpwm61toheMfAU+wNX6S/v5jQBOo5YWYzvXHJN8sCQZNNRMbnyjkM4SOhI/vhPgmBS1sERXPNJH7/t/ml5pbfzkI0SHg9r6lreQj6zUVJmyvXv1wcwLZmEtKH4Yael8Z+kvpPicm9l1Qk9axjv9Ygwp6AFcPsUQP1xxI2lQztrmncTynuM9nxXHqyUwSLgLFeWD9aAEvAgTpbGNdXQNYY7uzL+jv7Q7TZtRmVRAOn/9SRvjRmfn/kDJgo=
+X-Microsoft-Antispam-Message-Info: ETrJRWNsyekkTHAa/H1VRB/aL/s/jZpSLh6sjsYLjci2GUJs/fOjou4p9mvwR/y6iHNAmOvC/HKZyokMhx8zojIyf19UsqsSs5FoXgH/XA0vQaDRU/qGyXK0GY1F4Uvi1pzyowM7ddBF+a+f7fzW/RMpyjmcb2YL4VqILBBoKixQwv9qP02rrizqmcio+MPktHkn60GECcOeImAuqVU5xmRqAvZu4sgViaskGu5kF8B5ITwDaYb9TW+zShZQJsAJLIW7aCpK7jFx5FfMWPJVf6pCnrmWXKh+qbBH+MgoPpEP/buuDC+R/Up8tqVrIiiLSwYEwetNYSve/ljm5QTjNS8GBTXHhV/QSnk7uqRM7VzpHe5fyGmukFQLYllcp1/Rs29TYuhOQTn5lUi1A9D8gvJyWhmA5kMk4/5QLWDunlngBQmP25lM696TLYZNucg4IcqXW+3X0l3h299ZRlAUqfXtKXCeTGS5aw87xPtKJjVNFEF1A1aU3cNlKvqv5kuA6ktD4SjIrc3MtvVKMaDj5Pi/vflQIwftcRASNlAHZBhgQj5bEWHc5H+mECLRv/XzMUAmKK84FfSkdxr1xY3O6PnI9+O0YptT1hADJGfy6Nvxva/bcPv5swaxWZJAJwLG8e+ziKkA1PEjwgBBDDqVSx6X0LwSDZBX5Q4Hb433G8NVInch2y2GTfiKGgTLO3Jm6XFsYXVYJQq7aMH3o5K2b1g+q0iBjcqzGZa65nadCKqzJOIpD1I7o4ihlSZvorZdCvkUsFMqbPZPQXSYRxSLU2pGRXkqHHw3kfFHe+biFhw=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CO6PR04MB7812.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(5660300002)(186003)(66476007)(4326008)(110136005)(8886007)(55016002)(2616005)(1076003)(508600001)(7696005)(2906002)(38350700002)(26005)(44832011)(66556008)(86362001)(54906003)(8936002)(83380400001)(30864003)(66946007)(6666004)(36756003)(52116002)(316002)(8676002)(38100700002)(82960400001)(956004)(2004002);
+ SFS:(4636009)(366004)(316002)(2906002)(66476007)(8936002)(66556008)(55016002)(82960400001)(52116002)(5660300002)(508600001)(186003)(66946007)(8676002)(36756003)(54906003)(38350700002)(38100700002)(6666004)(4326008)(30864003)(110136005)(1076003)(86362001)(26005)(2616005)(44832011)(956004)(8886007)(7696005)(83380400001)(2004002);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?F18eC0bQ29C4SfP4ACJL4LdDJXRTKOy70wNIq/TXLG2xi725ZGFJlHpIPchH?=
- =?us-ascii?Q?81q5P6Ds6U1+OB5drUpFKvjahvXOQ4/4XV7WUQDP6il/zL01IYmHeCGYoJf9?=
- =?us-ascii?Q?ssLtv3SCzPquwIdxrTJnmgOafztI7wN1FE6yTIU4Rts9UGUV8j6V22tA4eWh?=
- =?us-ascii?Q?ZCW3RgUuGja1IO9Ll+/BazkmZt73qsWVRGZ6j8G0udcJ83PpM08hKN2JbPws?=
- =?us-ascii?Q?A/q8UCcZsV+5VE8zEcegWm2nl4CVJPl/b5VKLJbUDR08KjZgDZzrserruoH+?=
- =?us-ascii?Q?exnI1AO1I3AEkpOylruZ8XKhWrlDJRluj9ZZUMW5E9r9M91aJoqtSkivOcRV?=
- =?us-ascii?Q?VwbJKtLcXyXmNd9FURo5t2xzsm5UY9SB+r2i/59Ib/H9Ri+urAar7EmkE5Ju?=
- =?us-ascii?Q?LRlF48gWvX+NFboncEYzZhb+rORCkrKXcnsnvpvDZbYf0dKXiCwy9YpULqXw?=
- =?us-ascii?Q?HdkmtuS9VJDCVleDwkSTlLetFK/rPXE+ZmiPtCm3NFqRHT5isLcnyIq9y9Eb?=
- =?us-ascii?Q?cKnst2EbPLTHF1kNeXFjbogxzR+CUundetI6tO06xPMzdUjxmXmDPuWplCKW?=
- =?us-ascii?Q?d1Ltn4ZAwrSaBaWqo7L/PjRlch2KpfiouEPhPFTYy258svYOYpZ5HMOM4FmZ?=
- =?us-ascii?Q?8mR5B6mp2wkzE+4/TTCHs9vththY36uglv0vmFEFiYIsNxgTtFZCmlzFL4C2?=
- =?us-ascii?Q?No2209jiVLINUr7RXwV0hJEr+84FFWeRaPkEtyQtBChHcVha0/VbtPguFU8X?=
- =?us-ascii?Q?ew0TKRBNJp21gL1fiB+VCRHyWeZGDhx1TyX3RMMtznjfqLDtKjRlOUql/SBW?=
- =?us-ascii?Q?D0VgZxgUClIr3mRH2lxfQ7+Y7T2PEFAm/Xu3Ub+ayJzMmwDa1DchM41IQ1XA?=
- =?us-ascii?Q?T/8vK0EzguDBAeW3xSLWObCt01n1cAur3HKbADJc8Wan4rWXS2aFEGdNR4I4?=
- =?us-ascii?Q?druxHMZ7Bn8Yy7C+45FK1PIBLmoBKThciACNwM5BWD5x16LMEK2KcNNz4GwD?=
- =?us-ascii?Q?lRm3UG8cZCfnyFN4LvqOkawBsnid+ordkcsOcvSmAAka6BoPJBFFHJlEXN1x?=
- =?us-ascii?Q?Byx5FnvZCdOeVW8LwEI6bdGE4paJI2lm+HVwxtgt1gRnM0k3AMX0V2Oyl73T?=
- =?us-ascii?Q?ORPtMzYaA7fynZLTN1Nl7Tzf0JLQ6jHur+kMU6VkEQAGRyplEcZSGdqgRnJP?=
- =?us-ascii?Q?SWRgW5mmNR7PynqjRfwrT177pGhBSc/t1grBHBgeboWB8Npw7hOozsuJj0zb?=
- =?us-ascii?Q?Lx0Ga8hOPvgHRn7oR3zNiGtOTA8kcLjr+2d/9oKpFkPhd1SdvMT+h2sXUJr5?=
- =?us-ascii?Q?IvL1JovqstEDtW3BZjExjm8FwW51l6wrvWXmMY2pQXaUIyoxeZlOubt7rReD?=
- =?us-ascii?Q?G3SkJtNuI2f4R2NOqSsBpt6kUfCA7SWiUl3hrCE0G/LBwOedDn3WUFNEc67j?=
- =?us-ascii?Q?F+EbPlhXhOg0TCeyD+P4fMofphOqMZrz8K4PCZDBO4wOBmE6hT8X1ei0QrBG?=
- =?us-ascii?Q?+gnCslvEejTR7P/K/v4Dy7wyFl4d0gM1Br3nsv+8sXPzJP5ax3eofdaBB9Am?=
- =?us-ascii?Q?wBHUHbtismJIrxlpgYq9wgMo6Zy0TIQsWDgT8qng2LgSsdT/hfCE+WWrqXzw?=
- =?us-ascii?Q?k6Ii0wU6g/NgOI+K2QTSpqU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3oVD1z0X8BFWiJJIdoqVI1wibsfbh13XrxqhHBRsBjY1t8CedaXCrUoGmDjG?=
+ =?us-ascii?Q?Rkua59ZuYgw4SP76F412z4qMW6AagZuzx4Zr9i1n0j7O9XUe0XDaMOT/uFHM?=
+ =?us-ascii?Q?ZePD0D5Ek/MCL5XF9ORh7I4frFzChmMEMDxUsm9Q3i+vpBoTPBfHDPy3lRg0?=
+ =?us-ascii?Q?Uq660E07oRaeZBA2MqnaVGU50QKTvduh4EafF+LTyWhZN6Mj/uvFeMYEob70?=
+ =?us-ascii?Q?hZhY6gbqJrELAUF+rY4TSH0wQJGTS+F5kXRtRLyyZW06Ff+AJzscb2EGlkXB?=
+ =?us-ascii?Q?pvyi/T6a1/VJgGKUgguvt+OY0XP6W/VFgf5biW/zZYnJZCNsMZG+RHRM/X2L?=
+ =?us-ascii?Q?OyTMigsYNoTmvTE4rQicIs1iVBHdQhZqwAsE51dBMizBg0nPougesFvwj88R?=
+ =?us-ascii?Q?sgoE2om2W2nwN3A8iNc1R9SCycVANcHGZ2ZQFzmoqUJfY0atq80p/BBjtrjY?=
+ =?us-ascii?Q?GgloUzFW0fG+xqoBVa5kCbqm7C7fQxcODpiXjzqUM7q/ncdpW2xhpxpV+ROS?=
+ =?us-ascii?Q?oj7ieuxg73EkQsoP+G5sgkDgC9L9CVOkL7sKhtdyw/nPsYhgh+WP40TONzbu?=
+ =?us-ascii?Q?I6te3nx9IgHeMGH3HlC2qPmazkGN3EhONOmzp3FvLY1JXmKGg3Qri+Nhl1pQ?=
+ =?us-ascii?Q?qOX7up4WO0/RgHcjRceVCpJXZiAmyRNQSU8wnXUZ0s31S617GcUaq9T4wlcA?=
+ =?us-ascii?Q?UuPYLstekai3Fou9FPotBa2KCBe+i1Xd8DxTPEbj5+TOvqwnk1r18q/ZqUV8?=
+ =?us-ascii?Q?Ds9vrXz+wlsyjw2E3bafJ0kspBKJ8FMtTjyN1AucRrjic20/yDJDbwkQyjQg?=
+ =?us-ascii?Q?t8aI5KxcW3IQKC7g0g2JvYA8q+nn23BupjSt25reSx8QsJYIuSn3Ya36BKCU?=
+ =?us-ascii?Q?Wc6/zwl81+R/j0gwrJGMwNVE3lPTDFWHrAjJ3Yce0ZvR8VOcVs2kPqamX0LL?=
+ =?us-ascii?Q?OwaRqUD+nT/9miCCe50GT+dKXKn6PwLJAEmkHeMr6hq4510GxHcCE166yZnS?=
+ =?us-ascii?Q?VxHbwKl77FOnrqisUR0kN3vb4oSX7XfaXeRPhZRYJ22sq1giWa4iVnr3b5nG?=
+ =?us-ascii?Q?07nK7KD19ch6J6D4lAukEAaOF3CTs13zBylUqAhwKSkkjxVGDoBcq+CujH6A?=
+ =?us-ascii?Q?ow/xO6jFxk+CTzYsLaooAhBXAerB1otXgyI20QLdtc7STb8pTuaaxJY4FfG6?=
+ =?us-ascii?Q?w4Vju0rSoCdI6CO84TmRCEassoAi/lEci5ikQgifqqAyYUv0tlWGcbHg2TMh?=
+ =?us-ascii?Q?eSyMTQ/QOqRyhDizvpZWiQYAPC4YqqYDO64IEUuoE+QGL/wVcjUCEgG04Vgn?=
+ =?us-ascii?Q?kyYopKN+CiESb+tRzieGMhkOgl7voLE40cmKqMa5zFAcoe6fJ2iYXS3WI8N2?=
+ =?us-ascii?Q?p4TvNx3lvWvbJ4zudF5xlPfUO5SZnLDP63CACxzre+JK2nsfpUOHlDFMA5EF?=
+ =?us-ascii?Q?adHhG52tGRptOyiWfdyWNizyeKWDeRO0UqP3mQx6661SWQl6dr2ZtymSEKt4?=
+ =?us-ascii?Q?BjAbAqs0yJKBKR/XR071878+Y510t4h19uuKSkdpLQadcQVQBKoV8WjRpnVK?=
+ =?us-ascii?Q?Z0ZABOKn1rjd81TQ5UaZe2ZY8KypW6i6tnOJ1F8Dfar2tSuabL+EwcPTWXAh?=
+ =?us-ascii?Q?eWuxuU9BzroNDtMpxtCyUsQ=3D?=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06213b55-75a9-43ba-0c78-08d9984bf92d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70447197-1ace-4389-2338-08d9984bfd15
 X-MS-Exchange-CrossTenant-AuthSource: CO6PR04MB7812.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:52.3280 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:58.7577 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ijyY1/PGswOMbmNodCVSf6FlZqD9yiqV2AoGN2D2D/VWT+xXbfEwYepSCXTpJsUbvCJKM92ftGwSfbYr+L2EJg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR04MB8379
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=9269cd5e3=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
+X-MS-Exchange-CrossTenant-UserPrincipalName: GBnqcoA6pCBcp3uHP3V3VssDqS8GVvC3HnhOYS93UvuxFZH7juU+dz2Og47+VfeehHXGppw/DIja2Q8hL4mmow==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR04MB7825
+Received-SPF: pass client-ip=68.232.143.124;
+ envelope-from=prvs=9269cd5e3=Anup.Patel@wdc.com; helo=esa2.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -149,60 +149,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2021 06:44:05 -0000
+X-List-Received-Date: Tue, 26 Oct 2021 06:44:08 -0000
 
 The RISC-V AIA (Advanced Interrupt Architecture) defines a new
-interrupt controller for wired interrupts called APLIC (Advanced
-Platform Level Interrupt Controller). The APLIC is capabable of
-forwarding wired interupts to RISC-V HARTs directly or as MSIs
-(Message Signaled Interupts).
+interrupt controller for MSIs (message signal interrupts) called
+IMSIC (Incoming Message Signal Interrupt Controller). The IMSIC
+is per-HART device and also suppport virtualizaiton of MSIs using
+dedicated VS-level guest interrupt files.
 
-This patch adds device emulation for RISC-V AIA APLIC.
+This patch adds device emulation for RISC-V AIA IMSIC which
+supports M-level, S-level, and VS-level MSIs.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
  hw/intc/Kconfig               |   3 +
  hw/intc/meson.build           |   1 +
- hw/intc/riscv_aplic.c         | 970 ++++++++++++++++++++++++++++++++++
- include/hw/intc/riscv_aplic.h |  73 +++
- 4 files changed, 1047 insertions(+)
- create mode 100644 hw/intc/riscv_aplic.c
- create mode 100644 include/hw/intc/riscv_aplic.h
+ hw/intc/riscv_imsic.c         | 443 ++++++++++++++++++++++++++++++++++
+ include/hw/intc/riscv_imsic.h |  68 ++++++
+ 4 files changed, 515 insertions(+)
+ create mode 100644 hw/intc/riscv_imsic.c
+ create mode 100644 include/hw/intc/riscv_imsic.h
 
 diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-index 78aed93c45..1592623233 100644
+index 1592623233..0bb3166110 100644
 --- a/hw/intc/Kconfig
 +++ b/hw/intc/Kconfig
-@@ -65,6 +65,9 @@ config LOONGSON_LIOINTC
- config RISCV_ACLINT
+@@ -68,6 +68,9 @@ config RISCV_ACLINT
+ config RISCV_APLIC
      bool
  
-+config RISCV_APLIC
++config RISCV_IMSIC
 +    bool
 +
  config SIFIVE_PLIC
      bool
  
 diff --git a/hw/intc/meson.build b/hw/intc/meson.build
-index c89d2ca180..77b068f673 100644
+index 77b068f673..bcfd7758a9 100644
 --- a/hw/intc/meson.build
 +++ b/hw/intc/meson.build
-@@ -47,6 +47,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC', if_true: files('s390_flic.c'))
- specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
+@@ -48,6 +48,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true: files('s390_flic_kvm.c'))
  specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
  specific_ss.add(when: 'CONFIG_RISCV_ACLINT', if_true: files('riscv_aclint.c'))
-+specific_ss.add(when: 'CONFIG_RISCV_APLIC', if_true: files('riscv_aplic.c'))
+ specific_ss.add(when: 'CONFIG_RISCV_APLIC', if_true: files('riscv_aplic.c'))
++specific_ss.add(when: 'CONFIG_RISCV_IMSIC', if_true: files('riscv_imsic.c'))
  specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true: files('sifive_plic.c'))
  specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
  specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
 new file mode 100644
-index 0000000000..f4b8828dac
+index 0000000000..f33e35986b
 --- /dev/null
-+++ b/hw/intc/riscv_aplic.c
-@@ -0,0 +1,970 @@
++++ b/hw/intc/riscv_imsic.c
+@@ -0,0 +1,443 @@
 +/*
-+ * RISC-V APLIC (Advanced Platform Level Interrupt Controller)
++ * RISC-V IMSIC (Incoming Message Signaled Interrupt Controller)
 + *
 + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
 + *
@@ -230,605 +231,233 @@ index 0000000000..f4b8828dac
 +#include "hw/pci/msi.h"
 +#include "hw/boards.h"
 +#include "hw/qdev-properties.h"
-+#include "hw/intc/riscv_aplic.h"
++#include "hw/intc/riscv_imsic.h"
 +#include "hw/irq.h"
 +#include "target/riscv/cpu.h"
++#include "target/riscv/cpu_bits.h"
 +#include "sysemu/sysemu.h"
 +#include "migration/vmstate.h"
 +
-+#define APLIC_MAX_IDC                  (1UL << 14)
-+#define APLIC_MAX_SOURCE               1024
-+#define APLIC_MIN_IPRIO_BITS           1
-+#define APLIC_MAX_IPRIO_BITS           8
-+#define APLIC_MAX_CHILDREN             1024
++#define IMSIC_MMIO_PAGE_LE             0x00
++#define IMSIC_MMIO_PAGE_BE             0x04
 +
-+#define APLIC_DOMAINCFG                0x0000
-+#define APLIC_DOMAINCFG_IE             (1 << 8)
-+#define APLIC_DOMAINCFG_DM             (1 << 2)
-+#define APLIC_DOMAINCFG_BE             (1 << 0)
++#define IMSIC_MIN_ID                   ((IMSIC_EIPx_BITS * 2) - 1)
++#define IMSIC_MAX_ID                   (IMSIC_TOPEI_IID_MASK)
 +
-+#define APLIC_SOURCECFG_BASE           0x0004
-+#define APLIC_SOURCECFG_D              (1 << 10)
-+#define APLIC_SOURCECFG_CHILDIDX_MASK  0x000003ff
-+#define APLIC_SOURCECFG_SM_MASK        0x00000007
-+#define APLIC_SOURCECFG_SM_INACTIVE    0x0
-+#define APLIC_SOURCECFG_SM_DETACH      0x1
-+#define APLIC_SOURCECFG_SM_EDGE_RISE   0x4
-+#define APLIC_SOURCECFG_SM_EDGE_FALL   0x5
-+#define APLIC_SOURCECFG_SM_LEVEL_HIGH  0x6
-+#define APLIC_SOURCECFG_SM_LEVEL_LOW   0x7
++#define IMSIC_EISTATE_PENDING          (1U << 0)
++#define IMSIC_EISTATE_ENABLED          (1U << 1)
++#define IMSIC_EISTATE_ENPEND           (IMSIC_EISTATE_ENABLED | \
++                                        IMSIC_EISTATE_PENDING)
 +
-+#define APLIC_MMSICFGADDR              0x1bc0
-+#define APLIC_MMSICFGADDRH             0x1bc4
-+#define APLIC_SMSICFGADDR              0x1bc8
-+#define APLIC_SMSICFGADDRH             0x1bcc
-+
-+#define APLIC_xMSICFGADDRH_L           (1UL << 31)
-+#define APLIC_xMSICFGADDRH_HHXS_MASK   0x1f
-+#define APLIC_xMSICFGADDRH_HHXS_SHIFT  24
-+#define APLIC_xMSICFGADDRH_LHXS_MASK   0x7
-+#define APLIC_xMSICFGADDRH_LHXS_SHIFT  20
-+#define APLIC_xMSICFGADDRH_HHXW_MASK   0x7
-+#define APLIC_xMSICFGADDRH_HHXW_SHIFT  16
-+#define APLIC_xMSICFGADDRH_LHXW_MASK   0xf
-+#define APLIC_xMSICFGADDRH_LHXW_SHIFT  12
-+#define APLIC_xMSICFGADDRH_BAPPN_MASK  0xfff
-+
-+#define APLIC_xMSICFGADDR_PPN_SHIFT    12
-+
-+#define APLIC_xMSICFGADDR_PPN_HART(__lhxs) \
-+    ((1UL << (__lhxs)) - 1)
-+
-+#define APLIC_xMSICFGADDR_PPN_LHX_MASK(__lhxw) \
-+    ((1UL << (__lhxw)) - 1)
-+#define APLIC_xMSICFGADDR_PPN_LHX_SHIFT(__lhxs) \
-+    ((__lhxs))
-+#define APLIC_xMSICFGADDR_PPN_LHX(__lhxw, __lhxs) \
-+    (APLIC_xMSICFGADDR_PPN_LHX_MASK(__lhxw) << \
-+     APLIC_xMSICFGADDR_PPN_LHX_SHIFT(__lhxs))
-+
-+#define APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) \
-+    ((1UL << (__hhxw)) - 1)
-+#define APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs) \
-+    ((__hhxs) + APLIC_xMSICFGADDR_PPN_SHIFT)
-+#define APLIC_xMSICFGADDR_PPN_HHX(__hhxw, __hhxs) \
-+    (APLIC_xMSICFGADDR_PPN_HHX_MASK(__hhxw) << \
-+     APLIC_xMSICFGADDR_PPN_HHX_SHIFT(__hhxs))
-+
-+#define APLIC_xMSICFGADDRH_VALID_MASK   \
-+    (APLIC_xMSICFGADDRH_L | \
-+     (APLIC_xMSICFGADDRH_HHXS_MASK << APLIC_xMSICFGADDRH_HHXS_SHIFT) | \
-+     (APLIC_xMSICFGADDRH_LHXS_MASK << APLIC_xMSICFGADDRH_LHXS_SHIFT) | \
-+     (APLIC_xMSICFGADDRH_HHXW_MASK << APLIC_xMSICFGADDRH_HHXW_SHIFT) | \
-+     (APLIC_xMSICFGADDRH_LHXW_MASK << APLIC_xMSICFGADDRH_LHXW_SHIFT) | \
-+     APLIC_xMSICFGADDRH_BAPPN_MASK)
-+
-+#define APLIC_SETIP_BASE               0x1c00
-+#define APLIC_SETIPNUM                 0x1cdc
-+
-+#define APLIC_CLRIP_BASE               0x1d00
-+#define APLIC_CLRIPNUM                 0x1ddc
-+
-+#define APLIC_SETIE_BASE               0x1e00
-+#define APLIC_SETIENUM                 0x1edc
-+
-+#define APLIC_CLRIE_BASE               0x1f00
-+#define APLIC_CLRIENUM                 0x1fdc
-+
-+#define APLIC_SETIPNUM_LE              0x2000
-+#define APLIC_SETIPNUM_BE              0x2004
-+
-+#define APLIC_ISTATE_PENDING           (1U << 0)
-+#define APLIC_ISTATE_ENABLED           (1U << 1)
-+#define APLIC_ISTATE_ENPEND            (APLIC_ISTATE_ENABLED | \
-+                                        APLIC_ISTATE_PENDING)
-+#define APLIC_ISTATE_INPUT             (1U << 8)
-+
-+#define APLIC_GENMSI                   0x3000
-+
-+#define APLIC_TARGET_BASE              0x3004
-+#define APLIC_TARGET_HART_IDX_SHIFT    18
-+#define APLIC_TARGET_HART_IDX_MASK     0x3fff
-+#define APLIC_TARGET_GUEST_IDX_SHIFT   12
-+#define APLIC_TARGET_GUEST_IDX_MASK    0x3f
-+#define APLIC_TARGET_IPRIO_MASK        0xff
-+#define APLIC_TARGET_EIID_MASK         0x7ff
-+
-+#define APLIC_IDC_BASE                 0x4000
-+#define APLIC_IDC_SIZE                 32
-+
-+#define APLIC_IDC_IDELIVERY            0x00
-+
-+#define APLIC_IDC_IFORCE               0x04
-+
-+#define APLIC_IDC_ITHRESHOLD           0x08
-+
-+#define APLIC_IDC_TOPI                 0x18
-+#define APLIC_IDC_TOPI_ID_SHIFT        16
-+#define APLIC_IDC_TOPI_ID_MASK         0x3ff
-+#define APLIC_IDC_TOPI_PRIO_MASK       0xff
-+
-+#define APLIC_IDC_CLAIMI               0x1c
-+
-+static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
-+                                            uint32_t word)
++static uint32_t riscv_imsic_topei(RISCVIMSICState *imsic, uint32_t page)
 +{
-+    uint32_t i, irq, ret = 0;
++    uint32_t i, max_irq, base;
 +
-+    for (i = 0; i < 32; i++) {
-+        irq = word * 32 + i;
-+        if (!irq || aplic->num_irqs <= irq) {
-+            continue;
++    base = page * imsic->num_irqs;
++    max_irq = (imsic->num_irqs < imsic->eithreshold[page]) ?
++              imsic->num_irqs : imsic->eithreshold[page];
++    for (i = 1; i < max_irq; i++) {
++        if ((imsic->eistate[base + i] & IMSIC_EISTATE_ENPEND) ==
++                IMSIC_EISTATE_ENPEND) {
++            return (i << IMSIC_TOPEI_IID_SHIFT) | i;
 +        }
-+
-+        ret |= ((aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0) << i;
-+    }
-+
-+    return ret;
-+}
-+
-+static uint32_t riscv_aplic_read_pending_word(RISCVAPLICState *aplic,
-+                                              uint32_t word)
-+{
-+    uint32_t i, irq, ret = 0;
-+
-+    for (i = 0; i < 32; i++) {
-+        irq = word * 32 + i;
-+        if (!irq || aplic->num_irqs <= irq) {
-+            continue;
-+        }
-+
-+        ret |= ((aplic->state[irq] & APLIC_ISTATE_PENDING) ? 1 : 0) << i;
-+    }
-+
-+    return ret;
-+}
-+
-+static void riscv_aplic_set_pending_raw(RISCVAPLICState *aplic,
-+                                        uint32_t irq, bool pending)
-+{
-+    if (pending) {
-+        aplic->state[irq] |= APLIC_ISTATE_PENDING;
-+    } else {
-+        aplic->state[irq] &= ~APLIC_ISTATE_PENDING;
-+    }
-+}
-+
-+static void riscv_aplic_set_pending(RISCVAPLICState *aplic,
-+                                    uint32_t irq, bool pending)
-+{
-+    uint32_t sourcecfg, sm;
-+
-+    if ((irq <= 0) || (aplic->num_irqs <= irq)) {
-+        return;
-+    }
-+
-+    sourcecfg = aplic->sourcecfg[irq];
-+    if (sourcecfg & APLIC_SOURCECFG_D) {
-+        return;
-+    }
-+
-+    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
-+    if ((sm == APLIC_SOURCECFG_SM_INACTIVE) ||
-+        (!aplic->msimode && ((sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) ||
-+                             (sm == APLIC_SOURCECFG_SM_LEVEL_LOW)))) {
-+        return;
-+    }
-+
-+    riscv_aplic_set_pending_raw(aplic, irq, pending);
-+}
-+
-+static void riscv_aplic_set_pending_word(RISCVAPLICState *aplic,
-+                                         uint32_t word, uint32_t value,
-+                                         bool pending)
-+{
-+    uint32_t i, irq;
-+
-+    for (i = 0; i < 32; i++) {
-+        irq = word * 32 + i;
-+        if (!irq || aplic->num_irqs <= irq) {
-+            continue;
-+        }
-+
-+        if (value & (1U << i)) {
-+            riscv_aplic_set_pending(aplic, irq, pending);
-+        }
-+    }
-+}
-+
-+static uint32_t riscv_aplic_read_enabled_word(RISCVAPLICState *aplic,
-+                                              int word)
-+{
-+    uint32_t i, irq, ret = 0;
-+
-+    for (i = 0; i < 32; i++) {
-+        irq = word * 32 + i;
-+        if (!irq || aplic->num_irqs <= irq) {
-+            continue;
-+        }
-+
-+        ret |= ((aplic->state[irq] & APLIC_ISTATE_ENABLED) ? 1 : 0) << i;
-+    }
-+
-+    return ret;
-+}
-+
-+static void riscv_aplic_set_enabled_raw(RISCVAPLICState *aplic,
-+                                        uint32_t irq, bool enabled)
-+{
-+    if (enabled) {
-+        aplic->state[irq] |= APLIC_ISTATE_ENABLED;
-+    } else {
-+        aplic->state[irq] &= ~APLIC_ISTATE_ENABLED;
-+    }
-+}
-+
-+static void riscv_aplic_set_enabled(RISCVAPLICState *aplic,
-+                                    uint32_t irq, bool enabled)
-+{
-+    uint32_t sourcecfg, sm;
-+
-+    if ((irq <= 0) || (aplic->num_irqs <= irq)) {
-+        return;
-+    }
-+
-+    sourcecfg = aplic->sourcecfg[irq];
-+    if (sourcecfg & APLIC_SOURCECFG_D) {
-+        return;
-+    }
-+
-+    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
-+    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
-+        return;
-+    }
-+
-+    riscv_aplic_set_enabled_raw(aplic, irq, enabled);
-+}
-+
-+static void riscv_aplic_set_enabled_word(RISCVAPLICState *aplic,
-+                                         uint32_t word, uint32_t value,
-+                                         bool enabled)
-+{
-+    uint32_t i, irq;
-+
-+    for (i = 0; i < 32; i++) {
-+        irq = word * 32 + i;
-+        if (!irq || aplic->num_irqs <= irq) {
-+            continue;
-+        }
-+
-+        if (value & (1U << i)) {
-+            riscv_aplic_set_enabled(aplic, irq, enabled);
-+        }
-+    }
-+}
-+
-+static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
-+                                 uint32_t hart_idx, uint32_t guest_idx,
-+                                 uint32_t eiid)
-+{
-+    uint64_t addr;
-+    MemTxResult result;
-+    RISCVAPLICState *aplic_m;
-+    uint32_t lhxs, lhxw, hhxs, hhxw, group_idx, msicfgaddr, msicfgaddrH;
-+
-+    aplic_m = aplic;
-+    while (aplic_m && !aplic_m->mmode) {
-+        aplic_m = aplic_m->parent;
-+    }
-+    if (!aplic_m) {
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: m-level APLIC not found\n",
-+                      __func__);
-+        return;
-+    }
-+
-+    if (aplic->mmode) {
-+        msicfgaddr = aplic_m->mmsicfgaddr;
-+        msicfgaddrH = aplic_m->mmsicfgaddrH;
-+    } else {
-+        msicfgaddr = aplic_m->smsicfgaddr;
-+        msicfgaddrH = aplic_m->smsicfgaddrH;
-+    }
-+
-+    lhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
-+            APLIC_xMSICFGADDRH_LHXS_MASK;
-+    lhxw = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXW_SHIFT) &
-+            APLIC_xMSICFGADDRH_LHXW_MASK;
-+    hhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXS_SHIFT) &
-+            APLIC_xMSICFGADDRH_HHXS_MASK;
-+    hhxw = (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
-+            APLIC_xMSICFGADDRH_HHXW_MASK;
-+
-+    group_idx = hart_idx >> lhxw;
-+    hart_idx &= APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);
-+
-+    addr = msicfgaddr;
-+    addr |= ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK)) << 32;
-+    addr |= ((uint64_t)(group_idx & APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw))) <<
-+             APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs);
-+    addr |= ((uint64_t)(hart_idx & APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw))) <<
-+             APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs);
-+    addr |= (uint64_t)(guest_idx & APLIC_xMSICFGADDR_PPN_HART(lhxs));
-+    addr <<= APLIC_xMSICFGADDR_PPN_SHIFT;
-+
-+    address_space_stl_le(&address_space_memory, addr,
-+                         eiid, MEMTXATTRS_UNSPECIFIED, &result);
-+    if (result != MEMTX_OK) {
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: MSI write failed for "
-+                      "hart_index=%d guest_index=%d eiid=%d\n",
-+                      __func__, hart_idx, guest_idx, eiid);
-+    }
-+}
-+
-+static void riscv_aplic_msi_irq_update(RISCVAPLICState *aplic, uint32_t irq)
-+{
-+    uint32_t hart_idx, guest_idx, eiid;
-+
-+    if (!aplic->msimode || (aplic->num_irqs <= irq) ||
-+        !(aplic->domaincfg & APLIC_DOMAINCFG_IE)) {
-+        return;
-+    }
-+
-+    if ((aplic->state[irq] & APLIC_ISTATE_ENPEND) != APLIC_ISTATE_ENPEND) {
-+        return;
-+    }
-+
-+    riscv_aplic_set_pending_raw(aplic, irq, false);
-+
-+    hart_idx = aplic->target[irq] >> APLIC_TARGET_HART_IDX_SHIFT;
-+    hart_idx &= APLIC_TARGET_HART_IDX_MASK;
-+    if (aplic->mmode) {
-+        /* M-level APLIC ignores guest_index */
-+        guest_idx = 0;
-+    } else {
-+        guest_idx = aplic->target[irq] >> APLIC_TARGET_GUEST_IDX_SHIFT;
-+        guest_idx &= APLIC_TARGET_GUEST_IDX_MASK;
-+    }
-+    eiid = aplic->target[irq] & APLIC_TARGET_EIID_MASK;
-+    riscv_aplic_msi_send(aplic, hart_idx, guest_idx, eiid);
-+}
-+
-+static uint32_t riscv_aplic_idc_topi(RISCVAPLICState *aplic, uint32_t idc)
-+{
-+    uint32_t best_irq, best_iprio;
-+    uint32_t irq, iprio, ihartidx, ithres;
-+
-+    if (aplic->num_harts <= idc) {
-+        return 0;
-+    }
-+
-+    ithres = aplic->ithreshold[idc];
-+    if (!ithres) {
-+        return 0;
-+    }
-+
-+    best_irq = best_iprio = UINT32_MAX;
-+    for (irq = 1; irq < aplic->num_irqs; irq++) {
-+        if ((aplic->state[irq] & APLIC_ISTATE_ENPEND) !=
-+            APLIC_ISTATE_ENPEND) {
-+            continue;
-+        }
-+
-+        ihartidx = aplic->target[irq] >> APLIC_TARGET_HART_IDX_SHIFT;
-+        ihartidx &= APLIC_TARGET_HART_IDX_MASK;
-+        if (ihartidx != idc) {
-+            continue;
-+        }
-+
-+        iprio = aplic->target[irq] & aplic->iprio_mask;
-+        if (iprio >= ithres) {
-+            continue;
-+        }
-+
-+        if (iprio < best_iprio) {
-+            best_irq = irq;
-+            best_iprio = iprio;
-+        }
-+    }
-+
-+    if (best_irq < aplic->num_irqs && best_iprio <= aplic->iprio_mask) {
-+        return (best_irq << APLIC_IDC_TOPI_ID_SHIFT) | best_iprio;
 +    }
 +
 +    return 0;
 +}
 +
-+static void riscv_aplic_idc_update(RISCVAPLICState *aplic, uint32_t idc)
++static void riscv_imsic_update(RISCVIMSICState *imsic, uint32_t page)
 +{
-+    uint32_t topi;
-+
-+    if (aplic->msimode || aplic->num_harts <= idc) {
-+        return;
-+    }
-+
-+    topi = riscv_aplic_idc_topi(aplic, idc);
-+    if ((aplic->domaincfg & APLIC_DOMAINCFG_IE) &&
-+        aplic->idelivery[idc] &&
-+        (aplic->iforce[idc] || topi)) {
-+        qemu_irq_raise(aplic->external_irqs[idc]);
++    if (imsic->eidelivery[page] && riscv_imsic_topei(imsic, page)) {
++        qemu_irq_raise(imsic->external_irqs[page]);
 +    } else {
-+        qemu_irq_lower(aplic->external_irqs[idc]);
++        qemu_irq_lower(imsic->external_irqs[page]);
 +    }
 +}
 +
-+static uint32_t riscv_aplic_idc_claimi(RISCVAPLICState *aplic, uint32_t idc)
++static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                      target_ulong *val,
++                                      target_ulong new_val,
++                                      target_ulong wr_mask)
 +{
-+    uint32_t irq, state, sm, topi = riscv_aplic_idc_topi(aplic, idc);
++    target_ulong old_val = imsic->eidelivery[page];
 +
-+    if (!topi) {
-+        aplic->iforce[idc] = 0;
-+        return 0;
++    if (val) {
++        *val = old_val;
 +    }
 +
-+    irq = (topi >> APLIC_IDC_TOPI_ID_SHIFT) & APLIC_IDC_TOPI_ID_MASK;
-+    sm = aplic->sourcecfg[irq] & APLIC_SOURCECFG_SM_MASK;
-+    state = aplic->state[irq];
-+    riscv_aplic_set_pending_raw(aplic, irq, false);
-+    if ((sm == APLIC_SOURCECFG_SM_LEVEL_HIGH) &&
-+        (state & APLIC_ISTATE_INPUT)) {
-+        riscv_aplic_set_pending_raw(aplic, irq, true);
-+    } else if ((sm == APLIC_SOURCECFG_SM_LEVEL_LOW) &&
-+               !(state & APLIC_ISTATE_INPUT)) {
-+        riscv_aplic_set_pending_raw(aplic, irq, true);
-+    }
-+    riscv_aplic_idc_update(aplic, idc);
++    wr_mask &= 0x1;
++    imsic->eidelivery[page] = (old_val & ~wr_mask) | (new_val & wr_mask);
 +
-+    return topi;
++    riscv_imsic_update(imsic, page);
++    return 0;
 +}
 +
-+static void riscv_aplic_request(void *opaque, int irq, int level)
++static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                      target_ulong *val,
++                                      target_ulong new_val,
++                                      target_ulong wr_mask)
 +{
-+    bool update = false;
-+    RISCVAPLICState *aplic = opaque;
-+    uint32_t sourcecfg, childidx, state, idc;
++    target_ulong old_val = imsic->eithreshold[page];
 +
-+    assert((0 < irq) && (irq < aplic->num_irqs));
-+
-+    sourcecfg = aplic->sourcecfg[irq];
-+    if (sourcecfg & APLIC_SOURCECFG_D) {
-+        childidx = sourcecfg & APLIC_SOURCECFG_CHILDIDX_MASK;
-+        if (childidx < aplic->num_children) {
-+            riscv_aplic_request(aplic->children[childidx], irq, level);
-+        }
-+        return;
++    if (val) {
++        *val = old_val;
 +    }
 +
-+    state = aplic->state[irq];
-+    switch (sourcecfg & APLIC_SOURCECFG_SM_MASK) {
-+    case APLIC_SOURCECFG_SM_EDGE_RISE:
-+        if ((level > 0) && !(state & APLIC_ISTATE_INPUT) &&
-+            !(state & APLIC_ISTATE_PENDING)) {
-+            riscv_aplic_set_pending_raw(aplic, irq, true);
-+            update = true;
++    wr_mask &= IMSIC_MAX_ID;
++    imsic->eithreshold[page] = (old_val & ~wr_mask) | (new_val & wr_mask);
++
++    riscv_imsic_update(imsic, page);
++    return 0;
++}
++
++static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,
++                                 target_ulong *val, target_ulong new_val,
++                                 target_ulong wr_mask)
++{
++    uint32_t base, topei = riscv_imsic_topei(imsic, page);
++
++    /* Read pending and enabled interrupt with highest priority */
++    if (val) {
++        *val = topei;
++    }
++
++    /* Writes ignore value and clear top pending interrupt */
++    if (topei && wr_mask) {
++        topei >>= IMSIC_TOPEI_IID_SHIFT;
++        base = page * imsic->num_irqs;
++        if (topei) {
++            imsic->eistate[base + topei] &= ~IMSIC_EISTATE_PENDING;
 +        }
-+        break;
-+    case APLIC_SOURCECFG_SM_EDGE_FALL:
-+        if ((level <= 0) && (state & APLIC_ISTATE_INPUT) &&
-+            !(state & APLIC_ISTATE_PENDING)) {
-+            riscv_aplic_set_pending_raw(aplic, irq, true);
-+            update = true;
++
++        riscv_imsic_update(imsic, page);
++    }
++
++    return 0;
++}
++
++static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic, uint32_t page,
++                               uint32_t num, bool pend, target_ulong *val,
++                               target_ulong new_val, target_ulong wr_mask)
++{
++    uint32_t i, base;
++    target_ulong mask;
++    uint32_t state = (pend) ? IMSIC_EISTATE_PENDING : IMSIC_EISTATE_ENABLED;
++
++#if TARGET_LONG_BITS == 64
++    if (num & 0x1) {
++        return -EINVAL;
++    }
++    num >>= 1;
++#endif
++
++    if (num >= (imsic->num_irqs / TARGET_LONG_BITS)) {
++        return -EINVAL;
++    }
++    base = (page * imsic->num_irqs) + (num * TARGET_LONG_BITS);
++
++    if (val) {
++        *val = 0;
++        for (i = 0; i < TARGET_LONG_BITS; i++) {
++            mask = (target_ulong)1 << i;
++            *val |= (imsic->eistate[base + i] & state) ? mask : 0;
 +        }
-+        break;
-+    case APLIC_SOURCECFG_SM_LEVEL_HIGH:
-+        if ((level > 0) && !(state & APLIC_ISTATE_PENDING)) {
-+            riscv_aplic_set_pending_raw(aplic, irq, true);
-+            update = true;
++    }
++
++    for (i = 0; i < TARGET_LONG_BITS; i++) {
++        /* Bit0 of eip0 and eie0 are read-only zero */
++        if (!num && !i) {
++            continue;
 +        }
-+        break;
-+    case APLIC_SOURCECFG_SM_LEVEL_LOW:
-+        if ((level <= 0) && !(state & APLIC_ISTATE_PENDING)) {
-+            riscv_aplic_set_pending_raw(aplic, irq, true);
-+            update = true;
++
++        mask = (target_ulong)1 << i;
++        if (wr_mask & mask) {
++            if (new_val & mask) {
++                imsic->eistate[base + i] |= state;
++            } else {
++                imsic->eistate[base + i] &= ~state;
++            }
 +        }
-+        break;
++    }
++
++    riscv_imsic_update(imsic, page);
++    return 0;
++}
++
++static int riscv_imsic_rmw(void *arg, target_ulong reg, target_ulong *val,
++                           target_ulong new_val, target_ulong wr_mask)
++{
++    RISCVIMSICState *imsic = arg;
++    uint32_t isel, priv, virt, vgein, page;
++
++    priv = AIA_IREG_PRIV(reg);
++    virt = AIA_IREG_VIRT(reg);
++    isel = AIA_IREG_ISEL(reg);
++    vgein = AIA_IREG_VGEIN(reg);
++
++    if (imsic->mmode) {
++        if (priv == PRV_M && !virt) {
++            page = 0;
++        } else {
++            goto err;
++        }
++    } else {
++        if (priv == PRV_S) {
++            if (virt) {
++                if (vgein && vgein < imsic->num_pages) {
++                    page = vgein;
++                } else {
++                    goto err;
++                }
++            } else {
++                page = 0;
++            }
++        } else {
++            goto err;
++        }
++    }
++
++    switch (isel) {
++    case ISELECT_IMSIC_EIDELIVERY:
++        return riscv_imsic_eidelivery_rmw(imsic, page, val,
++                                          new_val, wr_mask);
++    case ISELECT_IMSIC_EITHRESHOLD:
++        return riscv_imsic_eithreshold_rmw(imsic, page, val,
++                                           new_val, wr_mask);
++    case ISELECT_IMSIC_TOPEI:
++        return riscv_imsic_topei_rmw(imsic, page, val, new_val, wr_mask);
++    case ISELECT_IMSIC_EIP0 ... ISELECT_IMSIC_EIP63:
++        return riscv_imsic_eix_rmw(imsic, page, isel - ISELECT_IMSIC_EIP0,
++                                   true, val, new_val, wr_mask);
++    case ISELECT_IMSIC_EIE0 ... ISELECT_IMSIC_EIE63:
++        return riscv_imsic_eix_rmw(imsic, page, isel - ISELECT_IMSIC_EIE0,
++                                   false, val, new_val, wr_mask);
 +    default:
 +        break;
-+    }
++    };
 +
-+    if (level <= 0) {
-+        aplic->state[irq] &= ~APLIC_ISTATE_INPUT;
-+    } else {
-+        aplic->state[irq] |= APLIC_ISTATE_INPUT;
-+    }
-+
-+    if (update) {
-+        if (aplic->msimode) {
-+            riscv_aplic_msi_irq_update(aplic, irq);
-+        } else {
-+            idc = aplic->target[irq] >> APLIC_TARGET_HART_IDX_SHIFT;
-+            idc &= APLIC_TARGET_HART_IDX_MASK;
-+            riscv_aplic_idc_update(aplic, idc);
-+        }
-+    }
++err:
++    qemu_log_mask(LOG_GUEST_ERROR,
++                  "%s: Invalid register priv=%d virt=%d isel=%d vgein=%d\n",
++                  __func__, priv, virt, isel, vgein);
++    return -EINVAL;
 +}
 +
-+static uint64_t riscv_aplic_read(void *opaque, hwaddr addr, unsigned size)
++static uint64_t riscv_imsic_read(void *opaque, hwaddr addr, unsigned size)
 +{
-+    uint32_t irq, word, idc;
-+    RISCVAPLICState *aplic = opaque;
++    RISCVIMSICState *imsic = opaque;
 +
 +    /* Reads must be 4 byte words */
 +    if ((addr & 0x3) != 0) {
 +        goto err;
 +    }
 +
-+    if (addr == APLIC_DOMAINCFG) {
-+        return aplic->domaincfg | (aplic->msimode ? APLIC_DOMAINCFG_DM : 0);
-+    } else if ((APLIC_SOURCECFG_BASE <= addr) &&
-+            (addr < (APLIC_SOURCECFG_BASE + (aplic->num_irqs - 1) * 4))) {
-+        irq  = ((addr - APLIC_SOURCECFG_BASE) >> 2) + 1;
-+        return aplic->sourcecfg[irq];
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_MMSICFGADDR)) {
-+        return aplic->mmsicfgaddr;
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_MMSICFGADDRH)) {
-+        return aplic->mmsicfgaddrH;
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_SMSICFGADDR)) {
-+        /* Registers SMSICFGADDR and SMSICFGADDRH are implemented only if:
-+         * (a) the interrupt domain is at machine level
-+         * (b) the domain???s harts implement supervisor mode
-+         * (c) the domain has one or more child supervisor-level domains
-+         *     that support MSI delivery mode (domaincfg.DM is not read-
-+         *     only zero in at least one of the supervisor-level child
-+         * domains).
-+         */
-+        return (aplic->num_children) ? aplic->smsicfgaddr : 0;
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_SMSICFGADDRH)) {
-+        return (aplic->num_children) ? aplic->smsicfgaddrH : 0;
-+    } else if ((APLIC_SETIP_BASE <= addr) &&
-+            (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_SETIP_BASE) >> 2;
-+        return riscv_aplic_read_pending_word(aplic, word);
-+    } else if (addr == APLIC_SETIPNUM) {
-+        return 0;
-+    } else if ((APLIC_CLRIP_BASE <= addr) &&
-+            (addr < (APLIC_CLRIP_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_CLRIP_BASE) >> 2;
-+        return riscv_aplic_read_input_word(aplic, word);
-+    } else if (addr == APLIC_CLRIPNUM) {
-+        return 0;
-+    } else if ((APLIC_SETIE_BASE <= addr) &&
-+            (addr < (APLIC_SETIE_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_SETIE_BASE) >> 2;
-+        return riscv_aplic_read_enabled_word(aplic, word);
-+    } else if (addr == APLIC_SETIENUM) {
-+        return 0;
-+    } else if ((APLIC_CLRIE_BASE <= addr) &&
-+            (addr < (APLIC_CLRIE_BASE + aplic->bitfield_words * 4))) {
-+        return 0;
-+    } else if (addr == APLIC_CLRIENUM) {
-+        return 0;
-+    } else if (addr == APLIC_SETIPNUM_LE) {
-+        return 0;
-+    } else if (addr == APLIC_SETIPNUM_BE) {
-+        return 0;
-+    } else if (addr == APLIC_GENMSI) {
-+        return (aplic->msimode) ? aplic->genmsi : 0;
-+    } else if ((APLIC_TARGET_BASE <= addr) &&
-+            (addr < (APLIC_TARGET_BASE + (aplic->num_irqs - 1) * 4))) {
-+        irq = ((addr - APLIC_TARGET_BASE) >> 2) + 1;
-+        return aplic->target[irq];
-+    } else if (!aplic->msimode && (APLIC_IDC_BASE <= addr) &&
-+            (addr < (APLIC_IDC_BASE + aplic->num_harts * APLIC_IDC_SIZE))) {
-+        idc = (addr - APLIC_IDC_BASE) / APLIC_IDC_SIZE;
-+        switch (addr - (APLIC_IDC_BASE + idc * APLIC_IDC_SIZE)) {
-+        case APLIC_IDC_IDELIVERY:
-+            return aplic->idelivery[idc];
-+        case APLIC_IDC_IFORCE:
-+            return aplic->iforce[idc];
-+        case APLIC_IDC_ITHRESHOLD:
-+            return aplic->ithreshold[idc];
-+        case APLIC_IDC_TOPI:
-+            return riscv_aplic_idc_topi(aplic, idc);
-+        case APLIC_IDC_CLAIMI:
-+            return riscv_aplic_idc_claimi(aplic, idc);
-+        default:
-+            goto err;
-+        };
++    /* Reads cannot be out of range */
++    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
++        goto err;
 +    }
++
++    return 0;
 +
 +err:
 +    qemu_log_mask(LOG_GUEST_ERROR,
@@ -837,147 +466,33 @@ index 0000000000..f4b8828dac
 +    return 0;
 +}
 +
-+static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
++static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
 +        unsigned size)
 +{
-+    RISCVAPLICState *aplic = opaque;
-+    uint32_t irq, word, idc = UINT32_MAX;
++    RISCVIMSICState *imsic = opaque;
++    uint32_t page;
 +
 +    /* Writes must be 4 byte words */
 +    if ((addr & 0x3) != 0) {
 +        goto err;
 +    }
 +
-+    if (addr == APLIC_DOMAINCFG) {
-+        /* Only IE bit writeable at the moment */
-+        value &= APLIC_DOMAINCFG_IE;
-+        aplic->domaincfg = value;
-+    } else if ((APLIC_SOURCECFG_BASE <= addr) &&
-+            (addr < (APLIC_SOURCECFG_BASE + (aplic->num_irqs - 1) * 4))) {
-+        irq  = ((addr - APLIC_SOURCECFG_BASE) >> 2) + 1;
-+        if (!aplic->num_children && (value & APLIC_SOURCECFG_D)) {
-+            value = 0;
-+        }
-+        if (value & APLIC_SOURCECFG_D) {
-+            value &= (APLIC_SOURCECFG_D | APLIC_SOURCECFG_CHILDIDX_MASK);
-+        } else {
-+            value &= (APLIC_SOURCECFG_D | APLIC_SOURCECFG_SM_MASK);
-+        }
-+        aplic->sourcecfg[irq] = value;
-+        if ((aplic->sourcecfg[irq] & APLIC_SOURCECFG_D) ||
-+            (aplic->sourcecfg[irq] == 0)) {
-+            riscv_aplic_set_pending_raw(aplic, irq, false);
-+            riscv_aplic_set_enabled_raw(aplic, irq, false);
-+        }
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_MMSICFGADDR)) {
-+        if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-+            aplic->mmsicfgaddr = value;
-+        }
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_MMSICFGADDRH)) {
-+        if (!(aplic->mmsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-+            aplic->mmsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
-+        }
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_SMSICFGADDR)) {
-+        /* Registers SMSICFGADDR and SMSICFGADDRH are implemented only if:
-+         * (a) the interrupt domain is at machine level
-+         * (b) the domain???s harts implement supervisor mode
-+         * (c) the domain has one or more child supervisor-level domains
-+         *     that support MSI delivery mode (domaincfg.DM is not read-
-+         *     only zero in at least one of the supervisor-level child
-+         * domains).
-+         */
-+        if (aplic->num_children &&
-+            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-+            aplic->smsicfgaddr = value;
-+        }
-+    } else if (aplic->mmode && aplic->msimode &&
-+               (addr == APLIC_SMSICFGADDRH)) {
-+        if (aplic->num_children &&
-+            !(aplic->smsicfgaddrH & APLIC_xMSICFGADDRH_L)) {
-+            aplic->smsicfgaddrH = value & APLIC_xMSICFGADDRH_VALID_MASK;
-+        }
-+    } else if ((APLIC_SETIP_BASE <= addr) &&
-+            (addr < (APLIC_SETIP_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_SETIP_BASE) >> 2;
-+        riscv_aplic_set_pending_word(aplic, word, value, true);
-+    } else if (addr == APLIC_SETIPNUM) {
-+        riscv_aplic_set_pending(aplic, value, true);
-+    } else if ((APLIC_CLRIP_BASE <= addr) &&
-+            (addr < (APLIC_CLRIP_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_CLRIP_BASE) >> 2;
-+        riscv_aplic_set_pending_word(aplic, word, value, false);
-+    } else if (addr == APLIC_CLRIPNUM) {
-+        riscv_aplic_set_pending(aplic, value, false);
-+    } else if ((APLIC_SETIE_BASE <= addr) &&
-+            (addr < (APLIC_SETIE_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_SETIE_BASE) >> 2;
-+        riscv_aplic_set_enabled_word(aplic, word, value, true);
-+    } else if (addr == APLIC_SETIENUM) {
-+        riscv_aplic_set_enabled(aplic, value, true);
-+    } else if ((APLIC_CLRIE_BASE <= addr) &&
-+            (addr < (APLIC_CLRIE_BASE + aplic->bitfield_words * 4))) {
-+        word = (addr - APLIC_CLRIE_BASE) >> 2;
-+        riscv_aplic_set_enabled_word(aplic, word, value, false);
-+    } else if (addr == APLIC_CLRIENUM) {
-+        riscv_aplic_set_enabled(aplic, value, false);
-+    } else if (addr == APLIC_SETIPNUM_LE) {
-+        riscv_aplic_set_pending(aplic, value, true);
-+    } else if (addr == APLIC_SETIPNUM_BE) {
-+        riscv_aplic_set_pending(aplic, bswap32(value), true);
-+    } else if (addr == APLIC_GENMSI) {
-+        if (aplic->msimode) {
-+            aplic->genmsi = value & ~(APLIC_TARGET_GUEST_IDX_MASK <<
-+                                      APLIC_TARGET_GUEST_IDX_SHIFT);
-+            riscv_aplic_msi_send(aplic,
-+                                 value >> APLIC_TARGET_HART_IDX_SHIFT,
-+                                 0,
-+                                 value & APLIC_TARGET_EIID_MASK);
-+        }
-+    } else if ((APLIC_TARGET_BASE <= addr) &&
-+            (addr < (APLIC_TARGET_BASE + (aplic->num_irqs - 1) * 4))) {
-+        irq = ((addr - APLIC_TARGET_BASE) >> 2) + 1;
-+        if (aplic->msimode) {
-+            aplic->target[irq] = value;
-+        } else {
-+            aplic->target[irq] = (value & ~APLIC_TARGET_IPRIO_MASK) |
-+                                 (value & aplic->iprio_mask);
-+        }
-+    } else if (!aplic->msimode && (APLIC_IDC_BASE <= addr) &&
-+            (addr < (APLIC_IDC_BASE + aplic->num_harts * APLIC_IDC_SIZE))) {
-+        idc = (addr - APLIC_IDC_BASE) / APLIC_IDC_SIZE;
-+        switch (addr - (APLIC_IDC_BASE + idc * APLIC_IDC_SIZE)) {
-+        case APLIC_IDC_IDELIVERY:
-+            aplic->idelivery[idc] = value & 0x1;
-+            break;
-+        case APLIC_IDC_IFORCE:
-+            aplic->iforce[idc] = value & 0x1;
-+            break;
-+        case APLIC_IDC_ITHRESHOLD:
-+            aplic->ithreshold[idc] = value & aplic->iprio_mask;
-+            break;
-+        default:
-+            goto err;
-+        };
-+    } else {
++    /* Writes cannot be out of range */
++    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
 +        goto err;
 +    }
 +
-+    if (aplic->msimode) {
-+        for (irq = 1; irq < aplic->num_irqs; irq++) {
-+            riscv_aplic_msi_irq_update(aplic, irq);
-+        }
-+    } else {
-+        if (idc == UINT32_MAX) {
-+            for (idc = 0; idc < aplic->num_harts; idc++) {
-+                riscv_aplic_idc_update(aplic, idc);
-+            }
-+        } else {
-+            riscv_aplic_idc_update(aplic, idc);
++    /* Writes only supported for MSI little-endian registers */
++    page = addr >> IMSIC_MMIO_PAGE_SHIFT;
++    if ((addr & (IMSIC_MMIO_PAGE_SZ - 1)) == IMSIC_MMIO_PAGE_LE) {
++        if (value && (value < imsic->num_irqs)) {
++            imsic->eistate[(page * imsic->num_irqs) + value] |=
++                                                    IMSIC_EISTATE_PENDING;
 +        }
 +    }
++
++    /* Update CPU external interrupt status */
++    riscv_imsic_update(imsic, page);
 +
 +    return;
 +
@@ -987,9 +502,9 @@ index 0000000000..f4b8828dac
 +                  __func__, addr);
 +}
 +
-+static const MemoryRegionOps riscv_aplic_ops = {
-+    .read = riscv_aplic_read,
-+    .write = riscv_aplic_write,
++static const MemoryRegionOps riscv_imsic_ops = {
++    .read = riscv_imsic_read,
++    .write = riscv_imsic_write,
 +    .endianness = DEVICE_LITTLE_ENDIAN,
 +    .valid = {
 +        .min_access_size = 4,
@@ -997,188 +512,147 @@ index 0000000000..f4b8828dac
 +    }
 +};
 +
-+static void riscv_aplic_realize(DeviceState *dev, Error **errp)
++static void riscv_imsic_realize(DeviceState *dev, Error **errp)
 +{
-+    uint32_t i;
-+    RISCVAPLICState *aplic = RISCV_APLIC(dev);
++    RISCVIMSICState *imsic = RISCV_IMSIC(dev);
++    RISCVCPU *rcpu = RISCV_CPU(qemu_get_cpu(imsic->hartid));
++    CPUState *cpu = qemu_get_cpu(imsic->hartid);
++    CPURISCVState *env = cpu ? cpu->env_ptr : NULL;
 +
-+    aplic->bitfield_words = (aplic->num_irqs + 31) >> 5;
-+    aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
-+    aplic->state = g_new(uint32_t, aplic->num_irqs);
-+    aplic->target = g_new0(uint32_t, aplic->num_irqs);
-+    aplic->idelivery = g_new0(uint32_t, aplic->num_harts);
-+    aplic->iforce = g_new0(uint32_t, aplic->num_harts);
-+    aplic->ithreshold = g_new0(uint32_t, aplic->num_harts);
++    imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
++    imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
++    imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
++    imsic->eistate = g_new0(uint32_t, imsic->num_eistate);
 +
-+    memory_region_init_io(&aplic->mmio, OBJECT(dev), &riscv_aplic_ops, aplic,
-+                          TYPE_RISCV_APLIC, aplic->aperture_size);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &aplic->mmio);
++    memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
++                          imsic, TYPE_RISCV_IMSIC,
++                          IMSIC_MMIO_SIZE(imsic->num_pages));
++    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &imsic->mmio);
 +
-+    /* Only root APLICs have hardware IRQ lines. All non-root APLICs
-+     * have IRQ lines delegated by their parent APLIC.
-+     */
-+    if (!aplic->parent) {
-+        qdev_init_gpio_in(dev, riscv_aplic_request, aplic->num_irqs);
++    /* Claim the CPU interrupt to be triggered by this IMSIC */
++    if (riscv_cpu_claim_interrupts(rcpu,
++            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
++        error_report("%s already claimed",
++                     (imsic->mmode) ? "MEIP" : "SEIP");
++        exit(1);
 +    }
 +
-+    /* Create output IRQ lines for non-MSI mode */
-+    if (!aplic->msimode) {
-+        aplic->external_irqs = g_malloc(sizeof(qemu_irq) * aplic->num_harts);
-+        qdev_init_gpio_out(dev, aplic->external_irqs, aplic->num_harts);
++    /* Create output IRQ lines */
++    imsic->external_irqs = g_malloc(sizeof(qemu_irq) * imsic->num_pages);
++    qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
 +
-+        /* Claim the CPU interrupt to be triggered by this APLIC */
-+        for (i = 0; i < aplic->num_harts; i++) {
-+            RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(aplic->hartid_base + i));
-+            if (riscv_cpu_claim_interrupts(cpu,
-+                (aplic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
-+                error_report("%s already claimed",
-+                             (aplic->mmode) ? "MEIP" : "SEIP");
-+                exit(1);
-+            }
++    /* Force select AIA feature and setup CSR read-modify-write callback */
++    if (env) {
++        riscv_set_feature(env, RISCV_FEATURE_AIA);
++        if (!imsic->mmode) {
++            riscv_cpu_set_geilen(env, imsic->num_pages - 1);
 +        }
++        riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
++                                      riscv_imsic_rmw, imsic);
 +    }
 +
 +    msi_nonbroken = true;
 +}
 +
-+static Property riscv_aplic_properties[] = {
-+    DEFINE_PROP_UINT32("aperture-size", RISCVAPLICState, aperture_size, 0),
-+    DEFINE_PROP_UINT32("hartid-base", RISCVAPLICState, hartid_base, 0),
-+    DEFINE_PROP_UINT32("num-harts", RISCVAPLICState, num_harts, 0),
-+    DEFINE_PROP_UINT32("iprio-mask", RISCVAPLICState, iprio_mask, 0),
-+    DEFINE_PROP_UINT32("num-irqs", RISCVAPLICState, num_irqs, 0),
-+    DEFINE_PROP_BOOL("msimode", RISCVAPLICState, msimode, 0),
-+    DEFINE_PROP_BOOL("mmode", RISCVAPLICState, mmode, 0),
++static Property riscv_imsic_properties[] = {
++    DEFINE_PROP_BOOL("mmode", RISCVIMSICState, mmode, 0),
++    DEFINE_PROP_UINT32("hartid", RISCVIMSICState, hartid, 0),
++    DEFINE_PROP_UINT32("num-pages", RISCVIMSICState, num_pages, 0),
++    DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
 +    DEFINE_PROP_END_OF_LIST(),
 +};
 +
-+static const VMStateDescription vmstate_riscv_aplic = {
-+    .name = "riscv_aplic",
++static const VMStateDescription vmstate_riscv_imsic = {
++    .name = "riscv_imsic",
 +    .version_id = 1,
 +    .minimum_version_id = 1,
 +    .fields = (VMStateField[]) {
-+            VMSTATE_UINT32(domaincfg, RISCVAPLICState),
-+            VMSTATE_UINT32(mmsicfgaddr, RISCVAPLICState),
-+            VMSTATE_UINT32(mmsicfgaddrH, RISCVAPLICState),
-+            VMSTATE_UINT32(smsicfgaddr, RISCVAPLICState),
-+            VMSTATE_UINT32(smsicfgaddrH, RISCVAPLICState),
-+            VMSTATE_UINT32(genmsi, RISCVAPLICState),
-+            VMSTATE_VARRAY_UINT32(sourcecfg, RISCVAPLICState,
-+                                  num_irqs, 0,
++            VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
++                                  num_pages, 0,
 +                                  vmstate_info_uint32, uint32_t),
-+            VMSTATE_VARRAY_UINT32(state, RISCVAPLICState,
-+                                  num_irqs, 0,
++            VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
++                                  num_pages, 0,
 +                                  vmstate_info_uint32, uint32_t),
-+            VMSTATE_VARRAY_UINT32(target, RISCVAPLICState,
-+                                  num_irqs, 0,
-+                                  vmstate_info_uint32, uint32_t),
-+            VMSTATE_VARRAY_UINT32(idelivery, RISCVAPLICState,
-+                                  num_harts, 0,
-+                                  vmstate_info_uint32, uint32_t),
-+            VMSTATE_VARRAY_UINT32(iforce, RISCVAPLICState,
-+                                  num_harts, 0,
-+                                  vmstate_info_uint32, uint32_t),
-+            VMSTATE_VARRAY_UINT32(ithreshold, RISCVAPLICState,
-+                                  num_harts, 0,
++            VMSTATE_VARRAY_UINT32(eistate, RISCVIMSICState,
++                                  num_eistate, 0,
 +                                  vmstate_info_uint32, uint32_t),
 +            VMSTATE_END_OF_LIST()
 +        }
 +};
 +
-+static void riscv_aplic_class_init(ObjectClass *klass, void *data)
++static void riscv_imsic_class_init(ObjectClass *klass, void *data)
 +{
 +    DeviceClass *dc = DEVICE_CLASS(klass);
 +
-+    device_class_set_props(dc, riscv_aplic_properties);
-+    dc->realize = riscv_aplic_realize;
-+    dc->vmsd = &vmstate_riscv_aplic;
++    device_class_set_props(dc, riscv_imsic_properties);
++    dc->realize = riscv_imsic_realize;
++    dc->vmsd = &vmstate_riscv_imsic;
 +}
 +
-+static const TypeInfo riscv_aplic_info = {
-+    .name          = TYPE_RISCV_APLIC,
++static const TypeInfo riscv_imsic_info = {
++    .name          = TYPE_RISCV_IMSIC,
 +    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(RISCVAPLICState),
-+    .class_init    = riscv_aplic_class_init,
++    .instance_size = sizeof(RISCVIMSICState),
++    .class_init    = riscv_imsic_class_init,
 +};
 +
-+static void riscv_aplic_register_types(void)
++static void riscv_imsic_register_types(void)
 +{
-+    type_register_static(&riscv_aplic_info);
++    type_register_static(&riscv_imsic_info);
 +}
 +
-+type_init(riscv_aplic_register_types)
++type_init(riscv_imsic_register_types)
 +
 +/*
-+ * Add a APLIC device to another APLIC device as child for
-+ * interrupt delegation.
++ * Create IMSIC device.
 + */
-+void riscv_aplic_add_child(DeviceState *parent, DeviceState *child)
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
++                                uint32_t num_pages, uint32_t num_ids)
 +{
-+    RISCVAPLICState *caplic, *paplic;
-+
-+    assert(parent && child);
-+    caplic = RISCV_APLIC(child);
-+    paplic = RISCV_APLIC(parent);
-+
-+    assert(paplic->num_irqs == caplic->num_irqs);
-+    assert(paplic->num_children <= QEMU_APLIC_MAX_CHILDREN);
-+
-+    caplic->parent = paplic;
-+    paplic->children[paplic->num_children] = caplic;
-+    paplic->num_children++;
-+}
-+
-+/*
-+ * Create APLIC device.
-+ */
-+DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
-+    uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
-+    uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent)
-+{
-+    DeviceState *dev = qdev_new(TYPE_RISCV_APLIC);
++    DeviceState *dev = qdev_new(TYPE_RISCV_IMSIC);
++    CPUState *cpu = qemu_get_cpu(hartid);
 +    uint32_t i;
 +
-+    assert(num_harts < APLIC_MAX_IDC);
-+    assert((APLIC_IDC_BASE + (num_harts * APLIC_IDC_SIZE)) <= size);
-+    assert(num_sources < APLIC_MAX_SOURCE);
-+    assert(APLIC_MIN_IPRIO_BITS <= iprio_bits);
-+    assert(iprio_bits <= APLIC_MAX_IPRIO_BITS);
++    assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
++    if (mmode) {
++        assert(num_pages == 1);
++    } else {
++        assert(num_pages >= 1 && num_pages <= (IRQ_LOCAL_GUEST_MAX + 1));
++    }
++    assert(IMSIC_MIN_ID <= num_ids);
++    assert(num_ids <= IMSIC_MAX_ID);
++    assert((num_ids & IMSIC_MIN_ID) == IMSIC_MIN_ID);
 +
-+    qdev_prop_set_uint32(dev, "aperture-size", size);
-+    qdev_prop_set_uint32(dev, "hartid-base", hartid_base);
-+    qdev_prop_set_uint32(dev, "num-harts", num_harts);
-+    qdev_prop_set_uint32(dev, "iprio-mask", ((1U << iprio_bits) - 1));
-+    qdev_prop_set_uint32(dev, "num-irqs", num_sources + 1);
-+    qdev_prop_set_bit(dev, "msimode", msimode);
 +    qdev_prop_set_bit(dev, "mmode", mmode);
++    qdev_prop_set_uint32(dev, "hartid", hartid);
++    qdev_prop_set_uint32(dev, "num-pages", num_pages);
++    qdev_prop_set_uint32(dev, "num-irqs", num_ids + 1);
 +
 +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
 +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
 +
-+    if (parent) {
-+        riscv_aplic_add_child(parent, dev);
-+    }
-+
-+    if (!msimode) {
-+        for (i = 0; i < num_harts; i++) {
-+            CPUState *cpu = qemu_get_cpu(hartid_base + i);
-+
++    for (i = 0; i < num_pages; i++) {
++        if (!i) {
 +            qdev_connect_gpio_out_named(dev, NULL, i,
 +                                        qdev_get_gpio_in(DEVICE(cpu),
 +                                            (mmode) ? IRQ_M_EXT : IRQ_S_EXT));
++        } else {
++            qdev_connect_gpio_out_named(dev, NULL, i,
++                                        qdev_get_gpio_in(DEVICE(cpu),
++                                            IRQ_LOCAL_MAX + i - 1));
 +        }
 +    }
 +
 +    return dev;
 +}
-diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
+diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h
 new file mode 100644
-index 0000000000..d96d7b38c1
+index 0000000000..58c2aaa8dc
 --- /dev/null
-+++ b/include/hw/intc/riscv_aplic.h
-@@ -0,0 +1,73 @@
++++ b/include/hw/intc/riscv_imsic.h
+@@ -0,0 +1,68 @@
 +/*
-+ * RISC-V APLIC (Advanced Platform Level Interrupt Controller) interface
++ * RISC-V IMSIC (Incoming Message Signal Interrupt Controller) interface
 + *
 + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
 + *
@@ -1195,59 +669,54 @@ index 0000000000..d96d7b38c1
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef HW_RISCV_APLIC_H
-+#define HW_RISCV_APLIC_H
++#ifndef HW_RISCV_IMSIC_H
++#define HW_RISCV_IMSIC_H
 +
 +#include "hw/sysbus.h"
 +#include "qom/object.h"
 +
-+#define TYPE_RISCV_APLIC "riscv.aplic"
++#define TYPE_RISCV_IMSIC "riscv.imsic"
 +
-+typedef struct RISCVAPLICState RISCVAPLICState;
-+DECLARE_INSTANCE_CHECKER(RISCVAPLICState, RISCV_APLIC, TYPE_RISCV_APLIC)
++typedef struct RISCVIMSICState RISCVIMSICState;
++DECLARE_INSTANCE_CHECKER(RISCVIMSICState, RISCV_IMSIC, TYPE_RISCV_IMSIC)
 +
-+struct RISCVAPLICState {
++#define IMSIC_MMIO_PAGE_SHIFT          12
++#define IMSIC_MMIO_PAGE_SZ             (1UL << IMSIC_MMIO_PAGE_SHIFT)
++#define IMSIC_MMIO_SIZE(__num_pages)   ((__num_pages) * IMSIC_MMIO_PAGE_SZ)
++
++#define IMSIC_MMIO_HART_GUEST_MAX_BTIS 6
++#define IMSIC_MMIO_GROUP_MIN_SHIFT     24
++
++#define IMSIC_HART_NUM_GUESTS(__guest_bits)           \
++    (1U << (__guest_bits))
++#define IMSIC_HART_SIZE(__guest_bits)                 \
++    (IMSIC_HART_NUM_GUESTS(__guest_bits) * IMSIC_MMIO_PAGE_SZ)
++#define IMSIC_GROUP_NUM_HARTS(__hart_bits)            \
++    (1U << (__hart_bits))
++#define IMSIC_GROUP_SIZE(__hart_bits, __guest_bits)   \
++    (IMSIC_GROUP_NUM_HARTS(__hart_bits) * IMSIC_HART_SIZE(__guest_bits))
++
++struct RISCVIMSICState {
 +    /*< private >*/
 +    SysBusDevice parent_obj;
 +    qemu_irq *external_irqs;
 +
 +    /*< public >*/
 +    MemoryRegion mmio;
-+    uint32_t bitfield_words;
-+    uint32_t domaincfg;
-+    uint32_t mmsicfgaddr;
-+    uint32_t mmsicfgaddrH;
-+    uint32_t smsicfgaddr;
-+    uint32_t smsicfgaddrH;
-+    uint32_t genmsi;
-+    uint32_t *sourcecfg;
-+    uint32_t *state;
-+    uint32_t *target;
-+    uint32_t *idelivery;
-+    uint32_t *iforce;
-+    uint32_t *ithreshold;
-+
-+    /* topology */
-+#define QEMU_APLIC_MAX_CHILDREN        16
-+    struct RISCVAPLICState *parent;
-+    struct RISCVAPLICState *children[QEMU_APLIC_MAX_CHILDREN];
-+    uint16_t num_children;
++    uint32_t num_eistate;
++    uint32_t *eidelivery;
++    uint32_t *eithreshold;
++    uint32_t *eistate;
 +
 +    /* config */
-+    uint32_t aperture_size;
-+    uint32_t hartid_base;
-+    uint32_t num_harts;
-+    uint32_t iprio_mask;
-+    uint32_t num_irqs;
-+    bool msimode;
 +    bool mmode;
++    uint32_t hartid;
++    uint32_t num_pages;
++    uint32_t num_irqs;
 +};
 +
-+void riscv_aplic_add_child(DeviceState *parent, DeviceState *child);
-+
-+DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
-+    uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
-+    uint32_t iprio_bits, bool msimode, bool mmode, DeviceState *parent);
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
++                                uint32_t num_pages, uint32_t num_ids);
 +
 +#endif
 -- 
