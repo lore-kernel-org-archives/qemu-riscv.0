@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfGBI-0003K7-Cu
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:43:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53076)
+	id 1mfGBM-0003NO-DM
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:43:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53102)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGBC-0003Ew-GO; Tue, 26 Oct 2021 02:43:28 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:53150)
+ id 1mfGBK-0003Lh-OR; Tue, 26 Oct 2021 02:43:34 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:53156)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGB9-0000sH-2x; Tue, 26 Oct 2021 02:43:26 -0400
+ id 1mfGBC-00014K-0e; Tue, 26 Oct 2021 02:43:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1635230602; x=1666766602;
+ t=1635230605; x=1666766605;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=NGwNLy3VtsuvzQvknfNkvFHGtfZZZZlsEz+En4k0Ids=;
- b=gBz5BaFx7tLi4cyl6z+Jew/2ytpa3kSPD4/0ikYplaPvN7hv52TUYx30
- Vh59A4mGXCp68S8oA8x1uZjlYGTeqxGOHJiUb7HC3ghfPyug4FZjOM/Fz
- Z5HLbHyyct8dJuyO81Ny1sauaEtOSqZ86vtEc0NmEF7Wv0FQWr/RCyNqP
- +rL9pc2INSQq7sv3oqNakFtAxJbfy1TWlcC+pv4xl5I1OCC1TADBE0iLP
- PHmqLX3T7ACriyNayA6bNj7RzOOXBnEgbihR7F7EFMAYmXQsxp3cudmYC
- et7uLy7x914W9A4EO+xytWTpcMQAxzS15R8hbWsekAB4gq0+D/Z28Rg3B A==;
-X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="182854757"
+ bh=hOBcfWOZyMxNSEnsrYeNAdCfPEAYfe/PEWI99yI9jf4=;
+ b=HuUxkCWGx3y40TrTI8fdzqNmVfBLXJTUPt8O2DXro3FOW8ZEcDRNZRiC
+ SU5RZzE91nH/Vw+g30/vVt0zBQpwtVAr9H/jGk+6wSlnWfFCgy7W6DNBd
+ BfXTCzkOmibjh1ayl7OpAJR7E8JKeOIVV5996XJ2jXd9F0SH72EnEPUIw
+ 61cR7p7+9vCRJgrrIp7nzvbW4G3viI0eqScQrBUgjM0WGDnMoTQ+O0onF
+ YzqTFlX8AMJK18yJ6BleeU/dJtij1FB9cMetka9n7ulm5VbGz+/6iuSJu
+ k7kygu2rLe+h7w167iCedCk/9OJybh69+uKfnB6ujyNxGe78tVXa0DGG5 Q==;
+X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="182854759"
 Received: from mail-mw2nam12lp2045.outbound.protection.outlook.com (HELO
  NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.45])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:43:20 +0800
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:43:24 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=la9cOHenet+UNKRlo6ViCFnCcFcrTNnmrjqTt/2oPC92aA+Qca3VBjwgy53rWhOaseeaXfoKZh74GR8e62sdl9RmKoZeWmeFRQ5Z+ugBMnj47jDhNUspvgiHPqSvIx9Eg+wlz9ckkUxCbqr7KlikUKakNsMROiuFVria7wa/Bh64gZrD0CFRBFt7tKTs58+aiDIai0NKmm1bRXVMpF9VpdVnqlUZIvmKz/9gyPCnrkm+dl/VTgUeCRAdUE7iJ4GTJghS3KYHK/KJ9w06cl7puxdD2x8fDrEuAyRFqO3J6p0A7At1CTRLoFlWqLU1hAYtIJr4ooaaFbvJvSKbgbm3gg==
+ b=aII0Ze3G0XJWcAeD9kBWwhSmBDpAImyGTKsJewhjxZCIQuCmJRG8zwAPmMtdcWyJYGjsPueCYcCu/+Gqf+v8k/9wkxVbjQ4+HlIf8H6jh2B6mW9UDuYM4uDdkfVDfBNxuDnradxxPoBUFEZB1cZ1eVmB4bEJDNJAw4c8EHQLQVEKbZyy128f5TM93QDNZWEeRJpFK62x9RjyvqfY5Wjyr9JPGX5vShEXNAvED2jLSLT0VQ4XsQ7/WxI7qCtd5rz9I2J2CLl+k8JTaAKMXjlF+p3l9Ub2AC6jXckg29y5xf5TTGx8oGo9JL7VUbdUpmG2/RjaKvqwZweor96nqk3WkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5IoA+eQN/FbuJHLOtN90iE/uH/FjhhGxlNydRO6Cqc4=;
- b=df8sBRgutHK2rUb4Hzg5mpRXtElRrmr9O94OuGx3LMXD6M+hcohiM8vjFc4eIqu8P4tWDJ2Lu1Id/u6WIS3lgDVgVTlYLZ09X1ADwQrFKY9gsw/iyI7QS5bLxoNu4zIRMCG4c71aCEfmiZHXEUVVSFcYdkSLvC7nn6I7yQp3Xt4gekuShMHWg2P1vax/yxUI4O8HHvf6LfWXGyxFBSa09u20x//vZ+USCGm+PJ6O+WCVKNLFQ06aK8IL7PNqyekNfW6Vz/onYoprabHqK4/HN2oPPYN4Q8mgU35bu+T/uNVJv9KIXCZF29SE0n+2dGtT77vi8o+Zq0rkvIMnHSMx8Q==
+ bh=J7mpUD20rxUSkfLTal+eQ9Ny345KnghaauwRlhj2gsg=;
+ b=DnJIPReuwYZ6LbKaKmC6PlRoDcHobUmzYSHP5KwK4ZKgc41kGLmiugSvDhpV5ScOUvPwTFmVh/DD+PPDpqun3gnhTEyV75YKXYHcuiNT86zdHVrnWUi6aa06+AwD2U+atN5PU22PT8J0F1r9Ql4QBKQciBlNhAvUgvPA5U6WK9GkQNSE+KyOTlX6rKN5tZCF6gY8T3O+wb9Orh7m6mM3ThPc0XsSvM/FgPLlxt8jj33LQLniMvqeaQC/icvXCSCnTSAiBfC+ofZ+0nIN4xox+R6PJQ6ZLFh15x+nTksuDHafseKlUB1W4u5z3uJvciKN59MrVxRZgiEEkzZ0vmKnrw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5IoA+eQN/FbuJHLOtN90iE/uH/FjhhGxlNydRO6Cqc4=;
- b=YDYjXzxq5oK8Y3n1HgfpwSSiFVPIF5s9hklAcQtgH853E/PmU2xvNcbl/NRoIO2CMmQthHOgaEq+ek5zabSVgFXrzuzWPPaahlHH9basxSEqpdYfrpm3eabuQvIXyowMmW7+RhJB+/HbH459PDMIPVWICfGRqo3nO+jdUPuxZik=
+ bh=J7mpUD20rxUSkfLTal+eQ9Ny345KnghaauwRlhj2gsg=;
+ b=hEg1YkL5nTRHcywvucmJ6NgMrqp3yw0T2+WHq4R2+uLKozj0uhz/2K5AqQR4QrJnwwT4Mt05bbo9mShFX/Iq0SSOOxu4ImGs7+Zzbm/lIw1C+wCuj3ezPRhiZHLY+t6bN1MQc7ZzcS4/OfQ4c9fITMSDR21mu9FAPjMGpryX51A=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com (2603:10b6:303:138::6)
  by CO6PR04MB8379.namprd04.prod.outlook.com (2603:10b6:303:142::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.20; Tue, 26 Oct
- 2021 06:43:20 +0000
+ 2021 06:43:23 +0000
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97]) by CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97%9]) with mapi id 15.20.4628.022; Tue, 26 Oct 2021
- 06:43:20 +0000
+ 06:43:23 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -59,10 +59,10 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 08/22] target/riscv: Allow AIA device emulation to set ireg
- rmw callback
-Date: Tue, 26 Oct 2021 12:12:13 +0530
-Message-Id: <20211026064227.2014502-9-anup.patel@wdc.com>
+Subject: [PATCH v4 09/22] target/riscv: Implement AIA local interrupt
+ priorities
+Date: Tue, 26 Oct 2021 12:12:14 +0530
+Message-Id: <20211026064227.2014502-10-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211026064227.2014502-1-anup.patel@wdc.com>
 References: <20211026064227.2014502-1-anup.patel@wdc.com>
@@ -75,59 +75,59 @@ MIME-Version: 1.0
 Received: from wdc.com (122.162.126.221) by
  MA1PR01CA0161.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:71::31) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:17 +0000
+ 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:20 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5ef5c09b-1d1c-49b4-f3f7-08d9984be632
+X-MS-Office365-Filtering-Correlation-Id: 5574036c-39d4-4bb1-7c5c-08d9984be800
 X-MS-TrafficTypeDiagnostic: CO6PR04MB8379:
-X-Microsoft-Antispam-PRVS: <CO6PR04MB837915EFBD68C79036AFF7A48D849@CO6PR04MB8379.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <CO6PR04MB83792DBCBE136378301FD7CE8D849@CO6PR04MB8379.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:3826;
+X-MS-Oob-TLC-OOBClassifiers: OLM:1227;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: QdPjszVMWLAyvY1W4VRD5X0I2ILlUcAJBf0cL50JC5527zGBkc4Eez5JXdj6mE5kCKz3bUVGnLSbAxnWRynQyUzF6m/ctwVD31SoEAlQypKmFdqhVsXNKwIYTONzmWYuDpImGP0VGfXG8EHg/Y5kYYHB+0nN7PVWM7fhbOObYNaZ33gIVuk5R/eA9f2iUeq1yUQOI3AR3Tzv4llOOBRLCRY5JKkRXxHS2FgKohtHovATrg1uQ/+4hw2CJuwam1BrA1JLOCITsTa8uBqvjzwrhwWWjM4nIc5JS/9lk2GcmXORK+ijLYvesTtZeITDmAlOJh/7rcjS0e9l7KZgxXzsdzgkOlLl63c0GY3iWOdflbHHrHD8k+Gt6e3IFLrGInfF34fSA7a0GDqa8RzDyGZSF1xW5p2Bp7B6J5O5lSSbgjHzn4nPeN82ayPgtCS6ZDXolEeZKfXb21Gl7SWmlLrlty1JeURoQUX2xYBZWQcWlxGdMe5pAYiVMtnIL3Mfmt+F1ow1W6QzNxg4fur4a+5uMKJURLXAqCTlRSe60CC1v/VEBnK1WjVxh17nWBNOjWdx2j/xLIjmQHyFftMl2jys/oktvakLQv91uCvFSk8JWzVXwCFtzp/LQMK2tCRJc0igrZ7C4gBfw55Zcub5v+sChJt+mwqrF+m6bjT8qAh/F9IdrUXBTFkLCizQQs3DsrV7FLerPYEQrdH6wbIkV4/BYw==
+X-Microsoft-Antispam-Message-Info: hiTVPPOR9clXv7dGIzoF7wxC52QTe/oWage0cQXIEVLN4fU3nVxkmPXFaZtSEDJCqlQFOFevPxR6q4t+AaZsfWkbKgxpDj1CDvTXcmSU9pK5OcAaQOz8SUPfX7AdzpyOeP7AaGvrHRolsMsa8ySSPymvj+7v4slNUp8n5KPx1njdJtiRnXtTmXrqckcmCzyCcN/JQt2mKgEkufREnRVI2CVVy9NT3e2xZnezUGWdl+34UNUGgpeF71ieWzEL4ikhGo20EP8Rc41r/0MPQAG1IADszvoGEPJevPsuZ04wGkSOjmtGq2uRpDqoouJzifrUtLQY3UhGcDc3/k+g9BtiJMly9coWzBxigvvbyqBxK3Bj67o4i4d2RLsaQD2gtEiqZ8FP/zJ5VOs2mU8fnIujZXkYXZEepfX6MafrSOVbxja8UDgy43p9+beNAWuSq5tsnsIewXZH1S+/OZxu/zHohwqmxp84p9S7bT5rcderVZY9oHAYFB+iSOHzrf87FFejwvEu4yjuia/k8/pMORasBbu4qCkhgF9tGgPWoe/+cfcA0iZw2Ah3bzhKacpCR/aXAujSIR6V+mDdEpXklks8q5qkd3d9bGM/bPWEYcl26ueW1hHzBWyKhmHZGVs8Ud2Q1KmPXcXZOuVZDS5WFnvbNZsxAwvEIRRmjj4bLfcoPgkWgCX93tVejtWplVzTf/2oihevii8YIlWuCdktSN78aA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CO6PR04MB7812.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(5660300002)(186003)(66476007)(4326008)(110136005)(8886007)(55016002)(2616005)(1076003)(508600001)(7696005)(2906002)(38350700002)(26005)(44832011)(66556008)(86362001)(54906003)(8936002)(83380400001)(66946007)(6666004)(36756003)(52116002)(316002)(8676002)(38100700002)(82960400001)(956004);
+ SFS:(4636009)(366004)(5660300002)(186003)(66476007)(4326008)(110136005)(8886007)(55016002)(2616005)(1076003)(508600001)(7696005)(2906002)(38350700002)(26005)(44832011)(66556008)(86362001)(54906003)(8936002)(83380400001)(30864003)(66946007)(6666004)(36756003)(52116002)(316002)(8676002)(38100700002)(82960400001)(956004);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?t7OJuXTxSOC5ItA2iuOi6eB8W/DRnr4cH7D2TWO87FZeawau89d3ObuhNRTW?=
- =?us-ascii?Q?Z5OTL6OYZZXGT95I42PmfUSqD+HNpI9enQVM3Jl0Ed5T2ufxQXOdG1kFZgLZ?=
- =?us-ascii?Q?RCMxYdrl6BPm+THVccKcVl4w5kZ0SBTn1aoynGbYf7Z8c+Lx46h6mI1G0g5Z?=
- =?us-ascii?Q?o0AlKr+XB2DDP4G/xr9lF1SGjIhbROVEVvvlmGhnLYISo97E+His5Rl8/uEa?=
- =?us-ascii?Q?vapRRPpS5JgdGwooJcmLlUFexUEJ6sIJg6zATun9yTZAdDTNx4FVOVw0Z95y?=
- =?us-ascii?Q?RIDDbSOgusgdsLGQjjheHRt9eabcr8zq/zuwdj52aSTFZ0y8q3RiA28E3cMM?=
- =?us-ascii?Q?1RFxttIl7mERGzVHIM8aEKWMo1UPk8HDYCFR/X0eOILnE4rIjkCsPNahcUn0?=
- =?us-ascii?Q?wISJUDnHDJ0tEC4koARlz5P6Hh68UErgqnu4NcPaL2JxM+Zj0KE5eioxxlGz?=
- =?us-ascii?Q?W+BBgr0iVupTkBxfE1qFgBj0VgOBhfgC1VgQH2i3Zg4i4p0L4tKShmxxIoB4?=
- =?us-ascii?Q?xNxq3JsT9ZR3z+HiJ2+og1bcYxWLe+m/3rfRNyikcJuPsUgycl9v9aLc3sxN?=
- =?us-ascii?Q?XBSJ+sikKlu5eoSv1fZ395ve9G38P0b5YMX3YhOtov43yQHsQLtgF0zmtBja?=
- =?us-ascii?Q?17oI1IE+Mn3wBGom4fOUI+Wq85p8DjzobERIqMznYaF1pFwwbYSBqJWqzjBS?=
- =?us-ascii?Q?HdW3L6ViiLNYB+TtyxMlty3pyEoBqXw8crfcjUig0spfrDDuzslRtvQitBGY?=
- =?us-ascii?Q?tlsgM+q7hBSxEE0XkceDeHUnm8oR3s1eQxdEFJx4f9yRM6TVDvZe8hxZObat?=
- =?us-ascii?Q?u6ZYlnqNnCeDQZc4O+jfMKr10QBPTqqZeVRnbndEY/lL4jXno4/uoWVLQTDK?=
- =?us-ascii?Q?ohcT9PB+AEUCJEjVs3fq08lq3FeZZR5/RmfGvRPjwDT4TrJowMl7+PbkiGL6?=
- =?us-ascii?Q?Ie5qWjn4We+5O92KZPO+E87ewTZu8ophj3Z2oXdLEGb/dQjg2VadlzAjrRcY?=
- =?us-ascii?Q?Iz1vZqaW39uF4Fud2PPV1TjHxeMJeQJiaDhh+iepBUkrzlMJVYFckPCgQTYW?=
- =?us-ascii?Q?vk12pT2Tvv5hzV+ZVwO+wkaR6BDf/IzgU1RIpfmBRq6NbTNov8L58E0JsLau?=
- =?us-ascii?Q?usK0HwFFyXsvlLrwADviGRztmM2z4Birq44cEtBH2P+2w/l2BkC7258ciciC?=
- =?us-ascii?Q?Bw21UpJAZBCWEtXL7NqdAuADDeag8isfm1l387+vftoFk7JQVTgYWIND/Yxf?=
- =?us-ascii?Q?f6IBAsGujDmnVfKO0+tWR4RwZdbjpAsSpcuUxnpm1AWgo3dErk4ex1z0Wc2y?=
- =?us-ascii?Q?zVU96qtPa3MUjl4LNAIW1yx+jUcfbNGzRguP4LQeq1HjhQ8XiAudlryM4EP8?=
- =?us-ascii?Q?+Jgd9v2/0Lvzdf6NrYVoMEImSCcuDi+uskP2YTfLTnF5msRsnhpMdJOKpnr/?=
- =?us-ascii?Q?uq7cPQspxZirx4Qk2F6BPDyrh/dkeUSzSupi+sU27zsCEqVR9KbvjsgdSOQ8?=
- =?us-ascii?Q?ZVx7hw2F0kSljYhAy8YQPJvDHut0RaYLGIcCoLL21J6n1nJ/YDqYjEcFtaZc?=
- =?us-ascii?Q?ZrePC2hXk0gP3rzHCZLBLc7T4v1DS1/tDFTy8NaqLrD/jgAnmWQpdifEgrJ6?=
- =?us-ascii?Q?WiqsEAfopwujxAh8H9S2b1Y=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?r+ymPlYu9sNBF1I7ba6WR5sM/DEnlLwKfXZbFU0g0HUkI5T2YC2TOYlCJhui?=
+ =?us-ascii?Q?vfhqYybiMN7ajfsa0i5VfHc3napxT7/YxMrpm8Jc35aOMNY7ZGcl0xuLLs0Z?=
+ =?us-ascii?Q?bWCAy+uqO6o3YxZP0ilO/ZfgCCULhmWqyvVVYXa6sY9RDLx6vrLcaEU15ENF?=
+ =?us-ascii?Q?53o1emSQaUk9YAscrrpt/xBrcClfWwNCt/0KROIKDo5NmIQ8M0LwukyioWtD?=
+ =?us-ascii?Q?dduv9Ar6tsrsIK0JllPDzl3/D/QVRz1mp/pLeypj22v5kXUVX8lSIxyXbR7f?=
+ =?us-ascii?Q?ZrmMBtMb0unJsHjRgHuBBEUHmi3vv6SMC1oECe/L/l2VGeckrhyjZ4+waZzn?=
+ =?us-ascii?Q?vS03hyqTJGVsbHS6Z4NF0kUrSaEMR8FNOC29WwY3vrDAjTmIdtaW7Jg24RvA?=
+ =?us-ascii?Q?BmM6jvDoaon9Pt9W8+7DLqKcQybUQ84cPaqJ1CMNlts0RnVCcAnnEGa/AiOH?=
+ =?us-ascii?Q?LzybJeF1dJtlcR+8KpUtZUphQ+AAEDlNAN7VbT/L8VwtslQo5guNHUtElSFp?=
+ =?us-ascii?Q?gqU/bMxAy6UlKCFWbAhe8O3Ob9rib+qk9LV11cBJzkU5qiWwMLMEjY/fVA8h?=
+ =?us-ascii?Q?YZSuB789LY83X7mrlY6OBNRp2O/4UNUWy6HJZZFoPEA8USTv7LMgO/YpRfyg?=
+ =?us-ascii?Q?C3B3T7fU9m4qPRFasqDQSAfz1j5yu7r40GYC2resjDYAXCo9Dryo57S4BA4y?=
+ =?us-ascii?Q?McUKjlEdsSyaKXam7lzswdxck/Id6FYGONQW54dLLpaUqaOUvtXbLczqqVhY?=
+ =?us-ascii?Q?CZik7Wo1XpJ//OY1U9dG+e1yx5g+oitj39RBH3iYg9WVa2YagW3x89zPyOq7?=
+ =?us-ascii?Q?V+PMZ/TQT7JM+VrubR1CIIRruC4Aum58DQaVEHxEH7Vg0sQcikjxgVBAsAWl?=
+ =?us-ascii?Q?/N8+zWgEK899M+POCJWd6gC8a6bwXkovMmJKA+0CWejRaps56z7sx/l7Lnr4?=
+ =?us-ascii?Q?saVrvOjnj700t2DDgXSCAqI9pqs7CufOoVUVrSnrfy8nckl9mekisCEvRBmV?=
+ =?us-ascii?Q?EOUS4ri6n0Os1pNTcDb9gbuxrLDL/ehpRLR6SNoMy87yabVW/LD1PYQY5Kcy?=
+ =?us-ascii?Q?xuyd1iRfxyDrmRAWLbim2fYekj25cblznkKSNImByNMhhTOdTUiaYzBf6/fo?=
+ =?us-ascii?Q?PaqYM33Zu7iufDc6pjRjhPqM7dbFis9OWmI9PIc1YfQ1PN8co/RiOUzpe8Mb?=
+ =?us-ascii?Q?zQV0+84szdi3n5TVJxlNazr7U6QWN7j9lGGdjcV8F2q+lpITCXPpQvPng/0J?=
+ =?us-ascii?Q?2F7nOOYYm81mmNbxm/Ce/Lre04JiKcjLsIhss9l2/wBBkNKJqyTx53YnE4oc?=
+ =?us-ascii?Q?xGfhpZtG+X0A1tLjJEwql1uSnqQgzPg9U4bAEXB5nyinZBpaiGG9ZymvjvX5?=
+ =?us-ascii?Q?yXmrUkRyAdCMXiRlxg4rH58MIkEj2CAldo6Tqun/RXrqqZpO3JjIw4IYtMXx?=
+ =?us-ascii?Q?r5Suca/3kj86G+Ac1XtKUv1K6CAMpragC8G1rjCRZUzKL35KqPeI4BgAoRRP?=
+ =?us-ascii?Q?THZIQALOtjr4Hlm6a4Cjx+gWVHAFeQ6+HJiwGHy2FKdB6sFFMNrKtAm3PFhc?=
+ =?us-ascii?Q?BwdxZSSdzDGdD1x55v2YlaEV8Fg/BsfkHSydSDGlgUFiHaG2H+rdFAdKQ++q?=
+ =?us-ascii?Q?060F85BUNfylqm4yQ4LPSqg=3D?=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ef5c09b-1d1c-49b4-f3f7-08d9984be632
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5574036c-39d4-4bb1-7c5c-08d9984be800
 X-MS-Exchange-CrossTenant-AuthSource: CO6PR04MB7812.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:20.2600 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:23.5604 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: O2YiHFCD3LU797vFaNsjqvyFJ78gJzkY5AxaIsADi8AUUEIWmk+By26Pcuvm4QRBSK+r1mPMmunhU/G9KyNQsw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: xhsD6tPFS53n9YmUfdIF05yr2ZTxx6CVjgcCujW+gZOkiX9YThLQ4k9qm/4h2xJHTCo+HaOr/Uk8edRvK0cC7A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR04MB8379
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=9269cd5e3=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
@@ -150,80 +150,379 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2021 06:43:29 -0000
+X-List-Received-Date: Tue, 26 Oct 2021 06:43:35 -0000
 
-The AIA device emulation (such as AIA IMSIC) should be able to set
-(or provide) AIA ireg read-modify-write callback for each privilege
-level of a RISC-V HART.
+The AIA spec defines programmable 8-bit priority for each local interrupt
+at M-level, S-level and VS-level so we extend local interrupt processing
+to consider AIA interrupt priorities. The AIA CSRs which help software
+configure local interrupt priorities will be added by subsequent patches.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
- target/riscv/cpu.h        | 19 +++++++++++++++++++
- target/riscv/cpu_helper.c | 14 ++++++++++++++
- 2 files changed, 33 insertions(+)
+ target/riscv/cpu.c        |  19 +++
+ target/riscv/cpu.h        |  12 ++
+ target/riscv/cpu_helper.c | 241 +++++++++++++++++++++++++++++++++-----
+ target/riscv/machine.c    |   3 +
+ 4 files changed, 245 insertions(+), 30 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 69d6b5eb36..0006989c39 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -341,6 +341,10 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
+ 
+ static void riscv_cpu_reset(DeviceState *dev)
+ {
++#ifndef CONFIG_USER_ONLY
++    uint8_t iprio;
++    int i, irq, rdzero;
++#endif
+     CPUState *cs = CPU(dev);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+@@ -363,6 +367,21 @@ static void riscv_cpu_reset(DeviceState *dev)
+     env->miclaim = MIP_SGEIP;
+     env->pc = env->resetvec;
+     env->two_stage_lookup = false;
++
++    /* Initialized default priorities of local interrupts. */
++    for (i = 0; i < ARRAY_SIZE(env->miprio); i++) {
++        iprio = riscv_cpu_default_priority(i);
++        env->miprio[i] = (i == IRQ_M_EXT) ? 0 : iprio;
++        env->siprio[i] = (i == IRQ_S_EXT) ? 0 : iprio;
++        env->hviprio[i] = 0;
++    }
++    i = 0;
++    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
++        if (!rdzero) {
++            env->hviprio[irq] = env->miprio[irq];
++        }
++        i++;
++    }
+ #endif
+     cs->exception_index = RISCV_EXCP_NONE;
+     env->load_res = -1;
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7182fadd21..ef4298dc69 100644
+index ef4298dc69..c47e57efc8 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -239,6 +239,18 @@ struct CPURISCVState {
-     uint64_t (*rdtime_fn)(uint32_t);
-     uint32_t rdtime_fn_arg;
+@@ -179,6 +179,10 @@ struct CPURISCVState {
+     target_ulong mcause;
+     target_ulong mtval;  /* since: priv-1.10.0 */
  
-+    /* machine specific AIA ireg read-modify-write callback */
-+#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein) \
-+    ((((__vgein) & 0x3f) << 24) | (((__virt) & 0x1) << 20) | \
-+     (((__priv) & 0x3) << 16) | (__isel & 0xffff))
-+#define AIA_IREG_ISEL(__ireg)                  ((__ireg) & 0xffff)
-+#define AIA_IREG_PRIV(__ireg)                  (((__ireg) >> 16) & 0x3)
-+#define AIA_IREG_VIRT(__ireg)                  (((__ireg) >> 20) & 0x1)
-+#define AIA_IREG_VGEIN(__ireg)                 (((__ireg) >> 24) & 0x3f)
-+    int (*aia_ireg_rmw_fn[4])(void *arg, target_ulong reg,
-+        target_ulong *val, target_ulong new_val, target_ulong write_mask);
-+    void *aia_ireg_rmw_fn_arg[4];
++    /* Machine and Supervisor interrupt priorities */
++    uint8_t miprio[64];
++    uint8_t siprio[64];
 +
-     /* True if in debugger mode.  */
-     bool debugger;
- #endif
-@@ -380,6 +392,13 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
- #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
- void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
-                              uint32_t arg);
-+void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-+                                   int (*rmw_fn)(void *arg,
-+                                                 target_ulong reg,
-+                                                 target_ulong *val,
-+                                                 target_ulong new_val,
-+                                                 target_ulong write_mask),
-+                                   void *rmw_fn_arg);
- #endif
- void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
+     /* Hypervisor CSRs */
+     target_ulong hstatus;
+     target_ulong hedeleg;
+@@ -191,6 +195,9 @@ struct CPURISCVState {
+     target_ulong hgeip;
+     uint64_t htimedelta;
  
++    /* Hypervisor controlled virtual interrupt priorities */
++    uint8_t hviprio[64];
++
+     /* Virtual CSRs */
+     /*
+      * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+@@ -357,6 +364,11 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
+                                int cpuid, void *opaque);
+ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
+ int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
++int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);
++uint8_t riscv_cpu_default_priority(int irq);
++int riscv_cpu_mirq_pending(CPURISCVState *env);
++int riscv_cpu_sirq_pending(CPURISCVState *env);
++int riscv_cpu_vsirq_pending(CPURISCVState *env);
+ bool riscv_cpu_fp_enabled(CPURISCVState *env);
+ target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
+ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 04df3792a8..d70def1da8 100644
+index d70def1da8..73ebce1efd 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -375,6 +375,20 @@ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
-     env->rdtime_fn_arg = arg;
+@@ -115,47 +115,228 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
  }
  
-+void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-+                                   int (*rmw_fn)(void *arg,
-+                                                 target_ulong reg,
-+                                                 target_ulong *val,
-+                                                 target_ulong new_val,
-+                                                 target_ulong write_mask),
-+                                   void *rmw_fn_arg)
+ #ifndef CONFIG_USER_ONLY
++
++/*
++ * The HS-mode is allowed to configure priority only for the
++ * following VS-mode local interrupts:
++ *
++ * 0  (Reserved interrupt, reads as zero)
++ * 1  Supervisor software interrupt
++ * 4  (Reserved interrupt, reads as zero)
++ * 5  Supervisor timer interrupt
++ * 8  (Reserved interrupt, reads as zero)
++ * 13 (Reserved interrupt)
++ * 14 "
++ * 15 "
++ * 16 "
++ * 18 Debug/trace interrupt
++ * 20 (Reserved interrupt)
++ * 22 "
++ * 24 "
++ * 26 "
++ * 28 "
++ * 30 (Reserved for standard reporting of bus or system errors)
++ */
++
++static int hviprio_index2irq[] =
++    { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 };
++static int hviprio_index2rdzero[] =
++    { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
++
++int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)
 +{
-+    if (priv <= PRV_M) {
-+        env->aia_ireg_rmw_fn[priv] = rmw_fn;
-+        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
++    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <= index) {
++        return -EINVAL;
 +    }
++
++    if (out_irq) {
++        *out_irq = hviprio_index2irq[index];
++    }
++
++    if (out_rdzero) {
++        *out_rdzero = hviprio_index2rdzero[index];
++    }
++
++    return 0;
 +}
 +
- void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
++uint8_t riscv_cpu_default_priority(int irq)
++{
++    int u, l;
++    uint8_t iprio = IPRIO_MMAXIPRIO;
++
++    if (irq < 0 || irq > 63) {
++        return iprio;
++    }
++
++    /*
++     * Default priorities of local interrupts are defined in the
++     * RISC-V Advanced Interrupt Architecture specification.
++     *
++     * ----------------------------------------------------------------
++     *  Default  |
++     *  Priority | Major Interrupt Numbers
++     * ----------------------------------------------------------------
++     *  Highest  | 63 (3f), 62 (3e), 31 (1f), 30 (1e), 61 (3d), 60 (3c),
++     *           | 59 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56 (38),
++     *           | 55 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52 (34),
++     *           | 51 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (30)
++     *           |
++     *           | 11 (0b),  3 (03),  7 (07)
++     *           |  9 (09),  1 (01),  5 (05)
++     *           | 12 (0c)
++     *           | 10 (0a),  2 (02),  6 (06)
++     *           |
++     *           | 47 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44 (2c),
++     *           | 43 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40 (28),
++     *           | 39 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36 (24),
++     *  Lowest   | 35 (23), 34 (22), 17 (11), 16 (10), 33 (21), 32 (20)
++     * ----------------------------------------------------------------
++     */
++
++    u = IPRIO_DEFAULT_U(irq);
++    l = IPRIO_DEFAULT_L(irq);
++    if (u == 0) {
++        if (irq == IRQ_VS_EXT || irq == IRQ_VS_TIMER ||
++            irq == IRQ_VS_SOFT) {
++            iprio = IPRIO_DEFAULT_VS;
++        } else if (irq == IRQ_S_GEXT) {
++            iprio = IPRIO_DEFAULT_SGEXT;
++        } else if (irq == IRQ_S_EXT || irq == IRQ_S_TIMER ||
++                   irq == IRQ_S_SOFT) {
++            iprio = IPRIO_DEFAULT_S;
++        } else if (irq == IRQ_M_EXT || irq == IRQ_M_TIMER ||
++                   irq == IRQ_M_SOFT) {
++            iprio = IPRIO_DEFAULT_M;
++        } else {
++            iprio = IPRIO_DEFAULT_VS;
++        }
++    } else if (u == 1) {
++        if (l < 8) {
++            iprio = IPRIO_DEFAULT_16_23(irq);
++        } else {
++            iprio = IPRIO_DEFAULT_24_31(irq);
++        }
++    } else if (u == 2) {
++        iprio = IPRIO_DEFAULT_32_47(irq);
++    } else if (u == 3) {
++        iprio = IPRIO_DEFAULT_48_63(irq);
++    }
++
++    return iprio;
++}
++
++static int riscv_cpu_pending_to_irq(CPURISCVState *env,
++                                    uint64_t pending, uint8_t *iprio)
++{
++    int irq, best_irq = RISCV_EXCP_NONE;
++    unsigned int prio, best_prio = UINT_MAX;
++
++    if (!pending) {
++        return RISCV_EXCP_NONE;
++    }
++
++    irq = ctz64(pending);
++    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
++        return irq;
++    }
++
++    pending = pending >> irq;
++    while (pending) {
++        prio = iprio[irq];
++        if (!prio) {
++            prio = (riscv_cpu_default_priority(irq) < IPRIO_DEFAULT_M) ?
++                   1 : IPRIO_MMAXIPRIO;
++        }
++        if ((pending & 0x1) && (prio < best_prio)) {
++            best_irq = irq;
++            best_prio = prio;
++        }
++        irq++;
++        pending = pending >> 1;
++    }
++
++    return best_irq;
++}
++
++static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
++{
++    uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
++    uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
++
++    return (env->mip | vsgein) & env->mie;
++}
++
++int riscv_cpu_mirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & ~env->mideleg &
++                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++
++    return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
++}
++
++int riscv_cpu_sirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
++                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++
++    return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
++}
++
++int riscv_cpu_vsirq_pending(CPURISCVState *env)
++{
++    uint64_t irqs = riscv_cpu_all_pending(env) & env->mideleg &
++                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++
++    return riscv_cpu_pending_to_irq(env, irqs >> 1, env->hviprio);
++}
++
+ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
  {
-     if (newpriv > PRV_M) {
+-    target_ulong irqs;
+-
+-    target_ulong mstatus_mie = get_field(env->mstatus, MSTATUS_MIE);
+-    target_ulong mstatus_sie = get_field(env->mstatus, MSTATUS_SIE);
+-    target_ulong hs_mstatus_sie = get_field(env->mstatus_hs, MSTATUS_SIE);
+-
+-    target_ulong pending = env->mip & env->mie &
+-                               ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+-    target_ulong vsgemask =
+-                (target_ulong)1 << get_field(env->hstatus, HSTATUS_VGEIN);
+-    target_ulong vsgein = (env->hgeip & vsgemask) ? MIP_VSEIP : 0;
+-    target_ulong vspending = ((env->mip | vsgein) & env->mie &
+-                              (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP));
+-
+-    target_ulong mie    = env->priv < PRV_M ||
+-                          (env->priv == PRV_M && mstatus_mie);
+-    target_ulong sie    = env->priv < PRV_S ||
+-                          (env->priv == PRV_S && mstatus_sie);
+-    target_ulong hs_sie = env->priv < PRV_S ||
+-                          (env->priv == PRV_S && hs_mstatus_sie);
++    int virq;
++    uint64_t irqs, pending, mie, sie, vsie;
+ 
++    /* Determine interrupt enable state of all privilege modes */
+     if (riscv_cpu_virt_enabled(env)) {
+-        target_ulong pending_hs_irq = pending & -hs_sie;
++        mie = 1;
++        sie = 1;
++        vsie = (env->priv < PRV_S) ||
++               (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_SIE));
++    } else {
++        mie = (env->priv < PRV_M) ||
++              (env->priv == PRV_M && get_field(env->mstatus, MSTATUS_MIE));
++        sie = (env->priv < PRV_S) ||
++              (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_SIE));
++        vsie = 0;
++    }
+ 
+-        if (pending_hs_irq) {
+-            riscv_cpu_set_force_hs_excep(env, FORCE_HS_EXCEP);
+-            return ctz64(pending_hs_irq);
+-        }
++    /* Determine all pending interrupts */
++    pending = riscv_cpu_all_pending(env);
+ 
+-        pending = vspending;
++    /* Check M-mode interrupts */
++    irqs = pending & ~env->mideleg & -mie &
++                ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++    if (irqs) {
++        return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
+     }
+ 
+-    irqs = (pending & ~env->mideleg & -mie) | (pending &  env->mideleg & -sie);
++    /* Check HS-mode interrupts */
++    irqs = pending & env->mideleg & -sie &
++                ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
++    if (irqs) {
++        return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
++    }
+ 
++    /* Check VS-mode interrupts */
++    irqs = pending & env->hideleg & -vsie &
++                (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+     if (irqs) {
+-        return ctz64(irqs); /* since non-zero */
+-    } else {
+-        return RISCV_EXCP_NONE; /* indicates no pending interrupt */
++        virq = riscv_cpu_pending_to_irq(env, irqs >> 1, env->hviprio);
++        return (virq <= 0) ? virq : virq + 1;
+     }
++
++    /* Indicate no pending interrupt */
++    return RISCV_EXCP_NONE;
+ }
+ 
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index fe99ec7304..a7102220b6 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -116,6 +116,7 @@ static const VMStateDescription vmstate_hyper = {
+         VMSTATE_UINTTL(env.hgeie, RISCVCPU),
+         VMSTATE_UINTTL(env.hgeip, RISCVCPU),
+         VMSTATE_UINT64(env.htimedelta, RISCVCPU),
++        VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
+ 
+         VMSTATE_UINT64(env.vsstatus, RISCVCPU),
+         VMSTATE_UINTTL(env.vstvec, RISCVCPU),
+@@ -147,6 +148,8 @@ const VMStateDescription vmstate_riscv_cpu = {
+     .fields = (VMStateField[]) {
+         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+         VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
++        VMSTATE_UINT8_ARRAY(env.miprio, RISCVCPU, 64),
++        VMSTATE_UINT8_ARRAY(env.siprio, RISCVCPU, 64),
+         VMSTATE_UINTTL(env.pc, RISCVCPU),
+         VMSTATE_UINTTL(env.load_res, RISCVCPU),
+         VMSTATE_UINTTL(env.load_val, RISCVCPU),
 -- 
 2.25.1
 
