@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfGHb-0006HX-IV
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:50:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54128)
+	id 1mfGIH-0006ao-Bl
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:50:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54272)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mfGHW-0006EM-SG; Tue, 26 Oct 2021 02:49:58 -0400
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:44575)
+ id 1mfGI9-0006Vw-Qg; Tue, 26 Oct 2021 02:50:38 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:44954)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mfGHQ-0003WI-E7; Tue, 26 Oct 2021 02:49:57 -0400
-Received: by mail-il1-x134.google.com with SMTP id h2so15820534ili.11;
- Mon, 25 Oct 2021 23:49:51 -0700 (PDT)
+ id 1mfGI6-0003fn-Mr; Tue, 26 Oct 2021 02:50:37 -0400
+Received: by mail-io1-xd34.google.com with SMTP id f9so230384ioo.11;
+ Mon, 25 Oct 2021 23:50:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=G0yfAlfyL3g00v4QKc3SYcp6ZyZfRoMaximLEfIe0ys=;
- b=UXyWLwFDKDPfteJP/FEk+NKDZJN8pbgnlXJKqvT6ioD9rwjl5IUukyADgdDOfBkh6i
- 3QhmQW3TOvPp6QE7iYM7XgLlf7Kwj8F2OVPJ2wByKR/dZ8+q5d6OzY71j5gIrfKtehle
- AfS2IRgVNplVkfWeN8kJHaxalYIUmhQzpYGXZ20Zn4UGNjv3i+PqCkHnXIMZtstdN61H
- M8UVPBJ6YpkVKao+lhzoASnw6E6DGCbUTZSSzuM0HWQ0hWCR0Gw4njgbT9AIj8mnwkbn
- 4sUbaztHqps9FoRzH8uLoA7auZEMT7bYrzSXCOZ38GT1CuI3BDUUYz6X299pCHfG+HDi
- KyGw==
+ :cc; bh=ntQwdx3JTwDDBAjGbHa4+IDJv+LyHGJDpXhU15URMt8=;
+ b=Vccv54EF45KMqZAjibvN3PNpEMWM+rFvL17SpJMi3ekJeOBSgbTuEqNCqr75mEt9pT
+ NRBFcIE748BjDO9XoiEw3V2KeFEZYVGUOFFX0wGg3guw9bXSE29kp+hMveEjRI67Ggj0
+ 7wvnSEjpfizd06RnUttSUaVDTR0ViaMDCuFE82V0IwfgCmhwPzUBwdjczQF79QqidyFJ
+ YzFVdWifEYA8I0lG6M8orMRAyxDvnYTt0rLRewJx2sJl8sM64mZrBPTsOxAFTgIZGabB
+ 4dygaXHQmAS/ycdQ99zuYXJ9kplU6jFYGqrTNlqWP+f2MTUdn1JfA9R00ryWI//j9dAK
+ 6YKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=G0yfAlfyL3g00v4QKc3SYcp6ZyZfRoMaximLEfIe0ys=;
- b=zhMSdZ3As8MjI/PwVR9cdfrC2k/RgcHPSKkVSNgWq8GIH4ac+tAqiYrm9gawinxO80
- 4v3X5fVeEvWnqqhXQXB0pi6agEK0DcZEZFJgOI8m/Nuw+XtYjM30+CIl13HQlc26vrFf
- RzSikeCV9CjjQg5RN8n3NWLIqLMt+mSWm/WjTBE6PhM0kfR2uyrI7dv/t7gcUSQGorUz
- i44Gc9wUJaWNzBUnpqi7MoAisKZ2KJGlcJx7pHqZNDJYj5etHXRlu7ip/g8my5JQlIRQ
- NFxNE6bXAsvqeirpcqIowCxKKQ4xBru49+2uZtiOywOSay4NuJueLHsGrPv2M/eVVow+
- mOuQ==
-X-Gm-Message-State: AOAM532yFu2vdtRRe4tQOD2fsJvPh0GifO3y7SqwpKdWehCsXn7uz3mo
- sBgIrcgGWzFE8cDO9WBdKf5eQI5wjA1GQB7/7YY=
-X-Google-Smtp-Source: ABdhPJzStRGtKzROb4x2KLBnD/fJUAfBgyZ1tEye9TSuIXmIa2lJE3KwFNFo47uyPb6j9kBodsuOSWxft+hOa6nPQeg=
-X-Received: by 2002:a05:6e02:1be4:: with SMTP id
- y4mr3488961ilv.74.1635230990939; 
- Mon, 25 Oct 2021 23:49:50 -0700 (PDT)
+ bh=ntQwdx3JTwDDBAjGbHa4+IDJv+LyHGJDpXhU15URMt8=;
+ b=zOBXkssIVXVYaSrliUZKQpJwdnp/aICarDYtMzkxlV1J7IRssp36JAAV9yN6Y2VDzU
+ Gom55QyWH3vtvmt9RSTVdDqPasx9tgLcerQJF7qrWRExcxF+r45d+VZuCkUFSbg8vITv
+ gt5Bb5DOANXY/at6Pf4nmruVJf2mKbQPSy5faAXw1uGbPWgHFe5LYYBlJYKd/1yzc3TH
+ BKHOoJQzA/21VAhPyJdsZKbXSrK0fW9oMgARLq3SU0xTFQO9x+SoV88Cdc+mlTvBrRLB
+ 6VIgu2qTuQRsIbTiPx5wS3DB/8CAIOmiUC/b+vnVMSdW6+sTMrsmXBjYUSNgu3IlyLTW
+ 6+bw==
+X-Gm-Message-State: AOAM533FDlifaGyI0EAxvVESl05Nq0Uo6vltzQxArKEqcGj9jW+orqVF
+ 5uyJCCWWaftQiyqk55GuIsAx70TmZ3ZX+DKqqCg=
+X-Google-Smtp-Source: ABdhPJyzGWaiSzR1opDXdL1J87+Pi/W5mK/V8r24IQmyIz/JyvX+deRySa6PkOSBX3cteru1mWaDd+MYSTh8RkDqqmQ=
+X-Received: by 2002:a05:6602:2bf7:: with SMTP id
+ d23mr13703217ioy.187.1635231031378; 
+ Mon, 25 Oct 2021 23:50:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211015074627.3957162-1-frank.chang@sifive.com>
- <20211015074627.3957162-86-frank.chang@sifive.com>
-In-Reply-To: <20211015074627.3957162-86-frank.chang@sifive.com>
+ <20211015074627.3957162-81-frank.chang@sifive.com>
+In-Reply-To: <20211015074627.3957162-81-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Oct 2021 16:49:24 +1000
-Message-ID: <CAKmqyKOq9x7S89nYcxvBYtvSSWKfaZPwRmf61gT-=s1nE+EBVw@mail.gmail.com>
-Subject: Re: [PATCH v8 78/78] target/riscv: rvv-1.0: update opivv_vadc_check()
- comment
+Date: Tue, 26 Oct 2021 16:50:05 +1000
+Message-ID: <CAKmqyKMNoiF8Adxewp3dNDkXiddoPs+dK3k_xB5sBjwc=CVxQw@mail.gmail.com>
+Subject: Re: [PATCH v8 73/78] target/riscv: rvv-1.0: rename r2_zimm to
+ r2_zimm11
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -75,15 +74,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2021 06:50:00 -0000
+X-List-Received-Date: Tue, 26 Oct 2021 06:50:40 -0000
 
-On Fri, Oct 15, 2021 at 6:48 PM <frank.chang@sifive.com> wrote:
+On Fri, Oct 15, 2021 at 6:50 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions is
-> moved to Section 11.4 in RVV v1.0 spec. Update the comment, no
-> functional changes.
+> Rename r2_zimm to r2_zimm11 for the upcoming vsetivli instruction.
+> vsetivli has 10-bits of zimm but vsetvli has 11-bits of zimm.
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
@@ -92,22 +90,31 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/insn32.decode | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index b78c13f0be7..de2e2e506fe 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1613,7 +1613,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 952768f8ded..d7c6bc9af26 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -78,7 +78,7 @@
+>  @r_vm    ...... vm:1 ..... ..... ... ..... ....... &rmrr %rs2 %rs1 %rd
+>  @r_vm_1  ...... . ..... ..... ... ..... .......    &rmrr vm=1 %rs2 %rs1 %rd
+>  @r_vm_0  ...... . ..... ..... ... ..... .......    &rmrr vm=0 %rs2 %rs1 %rd
+> -@r2_zimm . zimm:11  ..... ... ..... ....... %rs1 %rd
+> +@r2_zimm11 . zimm:11  ..... ... ..... ....... %rs1 %rd
+>  @r2_s    .......   ..... ..... ... ..... ....... %rs2 %rs1
 >
->  /*
->   * For vadc and vsbc, an illegal instruction exception is raised if the
-> - * destination vector register is v0 and LMUL > 1. (Section 12.4)
-> + * destination vector register is v0 and LMUL > 1. (Section 11.4)
->   */
->  static bool opivv_vadc_check(DisasContext *s, arg_rmrr *a)
->  {
+>  @hfence_gvma ....... ..... .....   ... ..... ....... %rs2 %rs1
+> @@ -671,7 +671,7 @@ vsext_vf2       010010 . ..... 00111 010 ..... 1010111 @r2_vm
+>  vsext_vf4       010010 . ..... 00101 010 ..... 1010111 @r2_vm
+>  vsext_vf8       010010 . ..... 00011 010 ..... 1010111 @r2_vm
+>
+> -vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+> +vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm11
+>  vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
+>
+>  # *** RV32 Zba Standard Extension ***
 > --
 > 2.25.1
 >
