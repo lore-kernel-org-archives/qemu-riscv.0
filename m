@@ -1,56 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfGBd-0003YO-UG
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:43:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53180)
+	id 1mfGBf-0003Ym-Po
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 02:43:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53178)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGBU-0003VS-B0; Tue, 26 Oct 2021 02:43:44 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:53176)
+ id 1mfGBU-0003V2-4I; Tue, 26 Oct 2021 02:43:44 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:53156)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <prvs=9269cd5e3=Anup.Patel@wdc.com>)
- id 1mfGBS-0002ER-09; Tue, 26 Oct 2021 02:43:44 -0400
+ id 1mfGBS-00014K-0g; Tue, 26 Oct 2021 02:43:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
  t=1635230621; x=1666766621;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:content-transfer-encoding:mime-version;
- bh=8hCfvF6U3YpAM0d9MZNIIUkZmdVvqrgow2wJTWop+lo=;
- b=fG4rAppx5vA2BVE1/KnLT9QHP+oqyPuPhzdIMBSovZrzfqqhsn2Remxn
- eg6Btd7E3OHqZSwpqC6rkgZDZktf06DsMgrOjIPZpvjcG7Exg44f0EZsp
- M3xytAyOhNLThukXgNiDjWXnqdQUmlPes5/UY9oavqpTFNiaJuSdydxZc
- X1AUXSywEcozgaeqE0IS/Zm49swjwr4Difp399Jm7wkVqW9TfXupMn7LN
- 2+05hKA6HRw3Z7fIuGwaMx6epk8NkHfDkYNszfm0RAojbTP9Cl7T+9zsB
- ISgWHP+0hBOZ7Eu1rcGiffopm4+4ZjyX5hrv6NNog08ZtBThiHyfdFRvl Q==;
-X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="182854770"
-Received: from mail-mw2nam12lp2047.outbound.protection.outlook.com (HELO
- NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.47])
- by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:43:36 +0800
+ bh=/m+pb6B4KK3IKZzdxau0a214vI4jr9MbdzhsMRb843U=;
+ b=XK6mOlOH+9f5Qv0BLkT9Tdemg+XHQwz2/TFs49PWLsVP5uZfEtlO7Oj+
+ P8xMrbUzRV8jxeKQzj/tBPeHYMDPecB/vCv0TLP9zWeteA0rjRxpgCNFk
+ SicGceRyEE4aHys5DoNvqk+wx2EAQ4moAi3zZZapRBqetH1/A2g6Hl7bO
+ N+Cxi0JkicefW/CALHza/DpRtojJdVB/uQzmOjZ3ggkc0ufhY5ddFhZBh
+ 8e+r5KFcb5+mxCAZA3ZOD2CCQ6fEMylg8IMoS13SuCxmSv2LTmD4bodLy
+ KS2VMGsu4QRGVwiQlBs3X8VX7Ie1LuANZxfjHTgSyIAtdMbiK05YXaDXu w==;
+X-IronPort-AV: E=Sophos;i="5.87,182,1631548800"; d="scan'208";a="182854774"
+Received: from mail-mw2nam12lp2046.outbound.protection.outlook.com (HELO
+ NAM12-MW2-obe.outbound.protection.outlook.com) ([104.47.66.46])
+ by ob1.hgst.iphmx.com with ESMTP; 26 Oct 2021 14:43:40 +0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TM9uhPUvcOtwuIxzSC0+GhfXhIOdvCpl/+Ur1hWIhtnUwXSmgfB0M3CQDmktJPYlKdu9TxpC2XwV/oOCYABfPZcS2CWUf1y7g4WYOyZcN7brDHCJxKFQpOhTNVsCI23eEak95GWGqbAGX0lnuuuDyr3ZQhAP2fJaQ+hFITzvDyJ1dLMcGPdQNFd3KrrOKKFchvbmVvfDgoMf/m/67+96OIyVMzGgaJd+f2lasxB2dE2Zrg9vKZTBXz+/+Z7nTphl10J/r98vx7GfrK3jkpJucVi8SqRpybGVPrngrWx47jSUcxv2b+o/KvhTSYsY+GhPOBMy7PxHeM17gjGBXentag==
+ b=aTdwq/qm7VmTyL45IgXp2GuXeeoHHcQbgczDvdLNXPMPvt1qFJYTTGzOE1KJB2rPbV2HPsNIX1xGxdJbGiS3AaFP7TGBsU8ffT1/Qm83IOsqWOKqnmZBixUbKrsKLEhMF6TIOt4HooYPh7+hu2sS84u+MiEEi/o93vfnSxmW9iqM3BHOnxWkxXGfRmSHXI6ezn4y33b3hrHDcHJE5OdCPRdpGM4mi96PRFkzENzpPDngDvUG9oqpApa3PhtgsfCgMi+5rFjHFCuWxWppDDICAXylJoUjonbf/S7puB3+sjGr5ldq/MfviMQlhQRUkuudO9AXy00NluxR0icW+zUC3A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JdW/996re6102wzlutMgaIwMLUHwY2GHwdAMZDfEEK4=;
- b=bS8//iJozkbJJ7o/+Ow0HzanxobN9vEo+Z/GEDESp8Y7UPgHypeOU83Q4FyykNwwuNPzqhXIRZuP1zOc9xdHiP6usHk4duU02KP5PPHg5UEUmTv7nRby/XeZu26VgW75wgTQ5ibZnxtHzcGD4YBCDao0lea2QMfwUWscqvP6TicMlS0arCxnc0/lLhfU67+bxj2i5e/SU6AzPd5hj0Lfvrp1RXo+J8HC8Jk3m6RYjsehaTjPWQk3/riu9ZaZFOmJzB3b8zfR8oXtOMyA2nrnFGbSDaP7rzLNN1MPW3F3I2e6AjPWJGBIQCmbNL3WeckaGezMaWlXFOkVDs2XbwNY8A==
+ bh=20CN8QSGjuuUSn794mTU1Wold6bVUdDJ1zZ/1OXqtCU=;
+ b=mMOuHGMOn++SiA1cP7ziF8l4FD1HFtPDvlQckB7tVkTLumzanAVmUX0evF0pOQgzc/8SQg9BHSjGsLRYfDEuQd9nEWOv3YOWe+yeMRJcv/0lQ1g0pdlb/sTvmT0Ut8DBCyAqaEejDleY67QRaemO5Rk7rkb1TvIPc/eV0HeDt1zeUpdxV2clJUfBl++Vw50KoWF33C1Z3tashqyUTNOve18yWyYVsOp8jr8JYZ3eD8asLxiPeOxykWtuqBHb91SI3A04Db49RH5MAvKIYnVYY6o31Gz7KxHD/kD6x5vco3WHR2A/GH1tg04EVMFiCG01U3c+LfpTDK90lE7uKxihRw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
  header.d=wdc.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JdW/996re6102wzlutMgaIwMLUHwY2GHwdAMZDfEEK4=;
- b=PVKXO8AkU3J8cxYQopbmcSbIHsvTPccTVtpK6c99KYkXQlddrVPw9AMV+rDonjdL1ZAhThmTovU2jCT910aTX/2hA8TNqATMnKxBKHEymZhMRMufUfiw8W3f7ZfV0C3xjt/ksgCwfBWKbdua4LHSriCfDiL0hVXMnNBcg06WRPU=
+ bh=20CN8QSGjuuUSn794mTU1Wold6bVUdDJ1zZ/1OXqtCU=;
+ b=fVLDd68VOrO1AUrsm4uRUSX2qAkDhwmD3+UFyBasFqSVHMQLt8uiPhy1nON6vOv4or4xDMgIXAHG+H4JWYmshV977xWuPMhWpmlFqYE71Lm8SLJ3p7181Z73l3gw/NgeubWEZQYIELGHdfUTxYuRNIqi+n7nPPO6sOBY31sBVf0=
 Authentication-Results: linaro.org; dkim=none (message not signed)
  header.d=none;linaro.org; dmarc=none action=none header.from=wdc.com;
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com (2603:10b6:303:138::6)
  by CO6PR04MB8379.namprd04.prod.outlook.com (2603:10b6:303:142::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.20; Tue, 26 Oct
- 2021 06:43:36 +0000
+ 2021 06:43:39 +0000
 Received: from CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97]) by CO6PR04MB7812.namprd04.prod.outlook.com
  ([fe80::8100:4308:5b21:8d97%9]) with mapi id 15.20.4628.022; Tue, 26 Oct 2021
- 06:43:36 +0000
+ 06:43:39 +0000
 From: Anup Patel <anup.patel@wdc.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -59,10 +59,9 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 13/22] target/riscv: Implement AIA mtopi, stopi,
- and vstopi CSRs
-Date: Tue, 26 Oct 2021 12:12:18 +0530
-Message-Id: <20211026064227.2014502-14-anup.patel@wdc.com>
+Subject: [PATCH v4 14/22] target/riscv: Implement AIA xiselect and xireg CSRs
+Date: Tue, 26 Oct 2021 12:12:19 +0530
+Message-Id: <20211026064227.2014502-15-anup.patel@wdc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211026064227.2014502-1-anup.patel@wdc.com>
 References: <20211026064227.2014502-1-anup.patel@wdc.com>
@@ -75,59 +74,59 @@ MIME-Version: 1.0
 Received: from wdc.com (122.162.126.221) by
  MA1PR01CA0161.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:71::31) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:33 +0000
+ 15.20.4628.22 via Frontend Transport; Tue, 26 Oct 2021 06:43:36 +0000
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 41803108-f3ae-4267-19de-08d9984befa8
+X-MS-Office365-Filtering-Correlation-Id: e6fc313a-d1d7-4e3d-e2cb-08d9984bf16d
 X-MS-TrafficTypeDiagnostic: CO6PR04MB8379:
-X-Microsoft-Antispam-PRVS: <CO6PR04MB83795756CD32493C2C9F17F68D849@CO6PR04MB8379.namprd04.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <CO6PR04MB8379622092F4BB916C5A48548D849@CO6PR04MB8379.namprd04.prod.outlook.com>
 WDCIPOUTBOUND: EOP-TRUE
-X-MS-Oob-TLC-OOBClassifiers: OLM:250;
+X-MS-Oob-TLC-OOBClassifiers: OLM:1122;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NW6JwKUObiuoiLyckxnNXiye7haRxXIPuzGmrvlma4Ce6Wtk4E/ZDXe1KFtnIVsaEbWygJh4I3ffuXTD+BsomxioerRBcOn6lzUkCz4SEbISykdJq7wZBd6231DMneOIga+JBc52M7Z4jotd8Nnied7BADNO+RQu231PDXe/cl+jbcgGx+YJrmdsXo0mHUo3YKeu4D8UCpC3Irp/dubXCwPVHoWkTWdyHMWo+ym5ax1Ajh/LXvyZaEiGRb8/DArDsTERMAan50QN3KEpnnxGrzH+jRzEB5O3zPmb7sSeq6J4hD1LICHZOWlmFomgXY7eVP/AO0KBsfEXqs3acsgCcfEanS3yu8ayQ1kZYDWssFrd3bFDMuXVZXqx0rqhtVvXW5t2Qg5v+1lvnfa/rTGVmKNgDI0lmlP0sZkfq7AMJZZy/VuW+/lLl1sF3M3GaMdT8KTNgEg6wgFTrXitGqI0xTlMeXlhbvT9N67bZzzgW00spHTwmlOnaYggYQafIkvFGL7S2u538A6jCw/tPj+GtKfutWUg2YYc0pS8cX/JxT99OLG+y0PKFt1GRUQUa2jk8epUTOxoVuwHYF7cqzbECHqfpb0CUN4CnkJ8evjc1xnaelKaRPmoDpvyU9dY8NQW2NRFOZ3IbRWbMvzUs5BtOLYxiz103tDxjOkoDcNROvu1CUOmmwEfyVCVX3lfqjRHr7Pvvk+4fzr67pWiYhj/zw==
+X-Microsoft-Antispam-Message-Info: sU4vaIo63ms/CUxwpB1cYt6xumwS+Pdiqs4roIx5mwMHfAOLvinpSNLjMATc+sMlLhpQS0duznuf/0+VAlmRnIVWHqimwFQFFUpWXZ4jY6Nm5hIPTPzhmg32N+t00fvLU5Usm64WBQ62sQjRb5nxEWQ2fESQE1//5sMnPFNWfDmn39LrehG2f9biUGEFaD7vYYv0Vk5WsjrleSyzCCxNxGWeqlfeS3X/lfqSv1+XEKAHu9WWvj3IXHrU0ZzGREj3MuGBg4KUYWe0OV9hcojDUqizBh/Vb5Jl5yFI677HLVkD8W1A82Ywc8+SqgxPa5o5r+Pu22BtKNShaPZV/npNnyFEjud/wFTrw5SDF6ozKPOrFPKerPCGkZw8EyKJ2uqAD8zma8aMlGipfmUmlPB487db+l8O7nGdEbsaWnGN2Mkx0HbSvteLzr//iqemJ/0af/FBenltZ1fe+/w6f2ZCidY+F1CrzY+SKA9MhbwYSG2leTfASYy7hbYLMdZyydueBicgMA18KsD8Ku/ZYxpFTkovufOMsOQ5kDjsPh9DhodVp73BtEFjHFDT1M3onbmstchVUKncKcKdJypSnkKqbNCqM9LRSCu8QGKUKHiTZZhhxIfU4lWAhLvSWQErZoPbHSxaNomEEFUR5Se7q5wYH78BrYcdJJt9ma4xeHQqtI2AFE7C3gXUtb3bVlyI49lF
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:CO6PR04MB7812.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(5660300002)(186003)(66476007)(4326008)(110136005)(8886007)(55016002)(2616005)(1076003)(508600001)(7696005)(2906002)(38350700002)(26005)(44832011)(66556008)(86362001)(54906003)(8936002)(66946007)(6666004)(36756003)(52116002)(316002)(8676002)(38100700002)(82960400001)(956004);
+ SFS:(4636009)(366004)(5660300002)(186003)(66476007)(4326008)(110136005)(8886007)(55016002)(2616005)(1076003)(508600001)(7696005)(2906002)(38350700002)(26005)(44832011)(66556008)(86362001)(54906003)(8936002)(83380400001)(66946007)(6666004)(36756003)(52116002)(316002)(8676002)(38100700002)(82960400001)(956004);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EihTosm53RyQvhTmrf37a5VfL/gRWp3VO7guew9tna01wj9CXlw9DBRmBoS0?=
- =?us-ascii?Q?b0PDHJnNV8mNYdUFchZOD9GKTY6cruKisC85P9J8UhWsawx/O3ZWjTiX3Y/p?=
- =?us-ascii?Q?Zt95nGCBCEu/Ny7IoMNVHmw9yLikNXsYVpRjB7MniCIUSR/LFJX/Hz0JgPxV?=
- =?us-ascii?Q?4g5InFzfNo42E92cANsOX27lDzqXshvzkJdPqTJ9PnjmPnyA7ISG/FfTqX3X?=
- =?us-ascii?Q?hgyfm9/Vjt0pdKFe8IyYM3fzmRuha1WJDHY096sqP5QE/9dkx4jCVv5XQxis?=
- =?us-ascii?Q?gj90sHHc97YXVJ0w9mA/UB53vep4VDsJqe0hmaoeifVc7s+xEspZMZauGYkV?=
- =?us-ascii?Q?iuM5rIzQEdkLch0DOE/yptSLBNKS1rAEsan/yBu0hXWc3TJhedbgd1qz/bvi?=
- =?us-ascii?Q?IYECOACHKW9pRS1bcuavBN8haZe44AqVUi31d8ZNMyMMFzUrpE8tV30oau/j?=
- =?us-ascii?Q?u62PfT5xQ5MkNisZDA6z2x6U9F1/ZAPLUXkHWCQ8AXOYDly5M8pJJociJjNe?=
- =?us-ascii?Q?xRR/a8Bd97HkkRLGPId19UTebFDLdFY/uQGQXg6QUJjvl2cRTqDgRdemhwm4?=
- =?us-ascii?Q?+QqOeke9z18D4UffJ88j+OstXF4NxhMkeJH29y7FdKgZkPnLcqo7a1wA3L0j?=
- =?us-ascii?Q?4rIOUtGoVDm8bNkNE3hkDwBvmzNRo6djtSzywAu2GNliu8X/ZRt+G3cV245h?=
- =?us-ascii?Q?1xHokj6nKpPC6WrYFZb4pStRWx9ofdCpNgYQ/4ihkGMJCNYODO0sjnSLwIgU?=
- =?us-ascii?Q?lsFdDxGgflQOznuFIkMpk2VVA+zDTy4q3mXHXraLRTSCQsF3igqmBU5hN4Fp?=
- =?us-ascii?Q?9x9u8h0ZwG/cGM4DHJUlrRbBA8j/lxY4dby9qxblWcS/fcsi7lcHRz+n/cK3?=
- =?us-ascii?Q?BBaxOGFXnEh8k/nZqQ5TJsakZK1uXsK9o9XRImnVqQxIXQpERdXDQ304KXj+?=
- =?us-ascii?Q?G+NlcJGWzw1oNfEax8OdHbAwkExH1e/gOhpjXh+gY1KlE+n2nkV/ee/FNigO?=
- =?us-ascii?Q?wtI/teB57oxPJiCPUIzkswMT4gHmS81tKcOgw1YojfFKXu4zaXNbEHsqv6qy?=
- =?us-ascii?Q?4/XYoQQUwj9uGt8MRIkX+bMrr6iQN15CnQaJvXhV881hT6gHzAVOARVlDiA8?=
- =?us-ascii?Q?V1wuGfYsJz40aLYJcC2YYwsWdouyRv6Hnjhqu6lY6SWOiWof4DTS0Ct/8Bwx?=
- =?us-ascii?Q?WdW55f77M2YDCHxU/WSzNWUQfJ1hatZnYqM5pVSm8qwI3n97Jhh7DteUFC/L?=
- =?us-ascii?Q?0o8zzRrbfEPsoFrCSXqJH7hTLAnEvSVGJyo7XBijabx78AP73nyDXlrlgai1?=
- =?us-ascii?Q?XdoK4+YPphilS6xXIwhR9KDGUCHyS7DX0F34bwJlhbGkp2pOvRkIFRRkgfnA?=
- =?us-ascii?Q?laRO10r/WL/mq6k4SGR6Pq8zi94O7gZZsmfnxj0Dr2fkCjjfXd7NE2nHUTMq?=
- =?us-ascii?Q?6DQUesfUQE/QET3ZIe58VdvmmF70o5CCtqTtR+I/19RzVbuseuVXsHfTncA8?=
- =?us-ascii?Q?tDe7KqcnWjs/e6JpPzzrZnAtpd1IyMzjihEhsn2sB7WUGcdhr8sfl5oDeuns?=
- =?us-ascii?Q?50VyH+K9l9ZllLYLxYDTPUzOMM1+m6oJKc+NAVHDc2HDVbzj5GP7xmGQLdxy?=
- =?us-ascii?Q?DAg4vz4LREF91Xi11bt9PyU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?m5aMcan7qjCA1zS2nhYFxS2d65YV9ERAmsdjDfHZmL6o1OlNU0bHPun4RBwP?=
+ =?us-ascii?Q?0NxmDaJetZiIQ4VfYc9/5a3+OceprFb1I1VPxLvleCIjfkQ1cH1+ZwB8mySU?=
+ =?us-ascii?Q?XRhQ+j/UMkMVbrVn5lqNN07IiH1TObHINJCrsOw4AhJI496YjUn1osMN88CT?=
+ =?us-ascii?Q?bI+uGqcYgQsbbuIIQyq62hI3MyHU5N859Q4oxK+etXUe+SyDYTkkHYLgBVdd?=
+ =?us-ascii?Q?vIOBxeKrYu0PgIPyB025Lc6uKvFU3iXMiJkN3B/q7hlJ2szvxihXrQjZFbuc?=
+ =?us-ascii?Q?N1WNjrHV9O9HUrdBKFquD8i+ltWvx1e17ZEbsGGT9JAn9LRpCdamkbruxwoE?=
+ =?us-ascii?Q?LzoGqDtrQE23jh5yEArC0rZ3lrlrklELKSYyYzCxj8gSjaEmfmhd4Lz50hnX?=
+ =?us-ascii?Q?Mq57/pLual3lrexHISrhH5Qh0UI4i9QrNknrg/dJcdD1IcOXW3qKw/4pHART?=
+ =?us-ascii?Q?2vJbS/q3ZCO0ra2Jf9EzHB+tmt28E1Ae7TL3ZmRaMiVx36s04UQEukWH5v8x?=
+ =?us-ascii?Q?JIJTWe8Wf4ygkTzl+dbuVXZ5wad32RRseZByxnfSwWE9QYUFrbBepVdgRP4d?=
+ =?us-ascii?Q?DoqoCYPzA08ETp9++V/5n5qzXDBpmTD4mhNanAh84WgukOEkCfzRQb5/Q1dg?=
+ =?us-ascii?Q?DWFw42+f+r6U/v/eqx3+rWqLnU2OB1HJ8Xf5dhLNHDOdnQuAXZPmH28Xn3+1?=
+ =?us-ascii?Q?WB1zmElr24ouHFB2z8aWFrol5JjShWRh0zRsNvSrQQRZ1018/rCKKfuXJNr8?=
+ =?us-ascii?Q?fHm1sRZSFebtOCIfuMEGHxSsRuYYWu3x5iGo5tO0OAfU49z7Di56FM97gz3r?=
+ =?us-ascii?Q?V7AOAbDevQEgz1ctoXB6CsGKRgP4enKBCNa97FrkVfx2yzeTB8RgmsCVrw8B?=
+ =?us-ascii?Q?PCbEnx9YSFd/haoIAHNh8E29uEpr8OgeU+EZO17MZ/5LWYjWm33srUsLzwb3?=
+ =?us-ascii?Q?udqCNCHpYVJ89/XiFs3TUwA3UwLLDfiWRhbSig9rBfkkbM3JMh4iM+juLISZ?=
+ =?us-ascii?Q?ka4DzbY3FdmHrL9X/8aCk9AUdAgC02BtRuOGBU+ikSE1OaAVU9kddwqyygkg?=
+ =?us-ascii?Q?A51YbN3T+W4TBA6KUjmjGmvmCmDGznhMmmWmFQt5NFsuDBjUflvp6WD0JB1+?=
+ =?us-ascii?Q?iVh7CkdzJUPfjp+kYlAUh0q5NDbP9iuSEY761oY1DiJH3czfw1fE8Qe8U6ZU?=
+ =?us-ascii?Q?0QFeXmWsnpXfqdAeZ5Ae+rA7F4dWfY0QkZkduoykAjVOej1KOLLijjgMFcjw?=
+ =?us-ascii?Q?on0kYHwC7tm5JlxYnjxkppkmwM7nMQmRMp2PzgHyLqSCYCJ8LVz6Z/QwZh3Z?=
+ =?us-ascii?Q?CUC9v3QwU0W/Mwdq9brGvebpiAmp/AraYrOPV6gzLuyINTciLggvBsyQJzn5?=
+ =?us-ascii?Q?RtHOCBl9zBfg2BF0LPEnbqJ1dj1TItTNLKW5UHG0hF+NXbeUR3oxCsv20tAv?=
+ =?us-ascii?Q?ujI0JJh1ZJUi4UEKaOdlPQXJjn7derGbeXgFuFfRf5fYgq3/hucGzX5BId1k?=
+ =?us-ascii?Q?kXA9E0S9/m2mvWHO67Ur/b1cIXNNd4tQ/08pU5DXks2vEv/Zaw8d9ndZtqxm?=
+ =?us-ascii?Q?nqJGztyPIRVKAQ4guHGiSbodr4M7Pm1U98uqvxURfIVVambUFCO630+tzgMO?=
+ =?us-ascii?Q?A5tTW1KFx/nfmWtKiKQllXQ=3D?=
 X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 41803108-f3ae-4267-19de-08d9984befa8
+X-MS-Exchange-CrossTenant-Network-Message-Id: e6fc313a-d1d7-4e3d-e2cb-08d9984bf16d
 X-MS-Exchange-CrossTenant-AuthSource: CO6PR04MB7812.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:36.1182 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 06:43:39.3430 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b61c8803-16f3-4c35-9b17-6f65f441df86
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Fb5SSq6fbGwzYNbLWmQAScSxemnFRflTvD44YbmOGGHi8RYYq1u9OW0mR5bAyIQhShSBdjGFfU9HF3mY1TKJoA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: wuWVgA3Zn3fLAePwa++bEmYQvJ6cVHT42VPs+C7/ENWbatCLgGKLVqi5lZjRpPJ6oDOaerp6tKOTp0AX5eABQQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR04MB8379
 Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=9269cd5e3=Anup.Patel@wdc.com; helo=esa4.hgst.iphmx.com
@@ -152,214 +151,269 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 26 Oct 2021 06:43:44 -0000
 
-The AIA specification introduces new [m|s|vs]topi CSRs for
-reporting pending local IRQ number and associated IRQ priority.
+The AIA specification defines [m|s|vs]iselect and [m|s|vs]ireg CSRs
+which allow indirect access to interrupt priority arrays and per-HART
+IMSIC registers. This patch implements AIA xiselect and xireg CSRs.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 ---
- target/riscv/csr.c | 154 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 154 insertions(+)
+ target/riscv/cpu.h     |   7 ++
+ target/riscv/csr.c     | 174 +++++++++++++++++++++++++++++++++++++++++
+ target/riscv/machine.c |   3 +
+ 3 files changed, 184 insertions(+)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 21d9c536ef..bf688eb1ea 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -183,6 +183,10 @@ struct CPURISCVState {
+     uint8_t miprio[64];
+     uint8_t siprio[64];
+ 
++    /* AIA CSRs */
++    target_ulong miselect;
++    target_ulong siselect;
++
+     /* Hypervisor CSRs */
+     target_ulong hstatus;
+     target_ulong hedeleg;
+@@ -212,6 +216,9 @@ struct CPURISCVState {
+     target_ulong vstval;
+     target_ulong vsatp;
+ 
++    /* AIA VS-mode CSRs */
++    target_ulong vsiselect;
++
+     target_ulong mtval2;
+     target_ulong mtinst;
+ 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 43ae444774..69e857d1e5 100644
+index 69e857d1e5..e72220fd0f 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -189,6 +189,15 @@ static int smode32(CPURISCVState *env, int csrno)
-     return smode(env, csrno);
+@@ -854,6 +854,168 @@ static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
+     return RISCV_EXCP_NONE;
  }
  
-+static int aia_smode(CPURISCVState *env, int csrno)
++static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
 +{
-+    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
++    if (!riscv_cpu_virt_enabled(env)) {
++        return csrno;
 +    }
 +
-+    return smode(env, csrno);
++    switch (csrno) {
++    case CSR_SISELECT:
++        return CSR_VSISELECT;
++    case CSR_SIREG:
++        return CSR_VSIREG;
++    default:
++        return csrno;
++    };
 +}
 +
- static int aia_smode32(CPURISCVState *env, int csrno)
- {
-     if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-@@ -823,6 +832,28 @@ static RISCVException rmw_mieh(CPURISCVState *env, int csrno,
-     return ret;
- }
- 
-+static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
++static int rmw_xiselect(CPURISCVState *env, int csrno, target_ulong *val,
++                        target_ulong new_val, target_ulong wr_mask)
 +{
-+    int irq;
-+    uint8_t iprio;
++    target_ulong *iselect;
 +
-+    irq = riscv_cpu_mirq_pending(env);
-+    if (irq <= 0 || irq > 63) {
-+       *val = 0;
-+    } else {
-+       iprio = env->miprio[irq];
-+       if (!iprio) {
-+           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_M) {
-+               iprio = IPRIO_MMAXIPRIO;
-+           }
-+       }
-+       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
-+       *val |= iprio;
++    /* Translate CSR number for VS-mode */
++    csrno = aia_xlate_vs_csrno(env, csrno);
++
++    /* Find the iselect CSR based on CSR number */
++    switch (csrno) {
++    case CSR_MISELECT:
++        iselect = &env->miselect;
++        break;
++    case CSR_SISELECT:
++        iselect = &env->siselect;
++        break;
++    case CSR_VSISELECT:
++        iselect = &env->vsiselect;
++        break;
++    default:
++         return RISCV_EXCP_ILLEGAL_INST;
++    };
++
++    if (val) {
++        *val = *iselect;
 +    }
 +
++    wr_mask &= ISELECT_MASK;
++    if (wr_mask) {
++        *iselect = (*iselect & ~wr_mask) | (new_val & wr_mask);
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
++static int rmw_iprio(target_ulong iselect, uint8_t *iprio,
++                     target_ulong *val, target_ulong new_val,
++                     target_ulong wr_mask, int ext_irq_no)
++{
++    int i, firq, nirqs;
++    target_ulong old_val;
++
++    if (iselect < ISELECT_IPRIO0 || ISELECT_IPRIO15 < iselect) {
++        return -EINVAL;
++    }
++#if TARGET_LONG_BITS == 64
++    if (iselect & 0x1) {
++        return -EINVAL;
++    }
++#endif
++
++    nirqs = 4 * (TARGET_LONG_BITS / 32);
++    firq = ((iselect - ISELECT_IPRIO0) / (TARGET_LONG_BITS / 32)) * (nirqs);
++
++    old_val = 0;
++    for (i = 0; i < nirqs; i++) {
++        old_val |= ((target_ulong)iprio[firq + i]) << (IPRIO_IRQ_BITS * i);
++    }
++
++    if (val) {
++        *val = old_val;
++    }
++
++    if (wr_mask) {
++        new_val = (old_val & ~wr_mask) | (new_val & wr_mask);
++        for (i = 0; i < nirqs; i++) {
++            /*
++             * M-level and S-level external IRQ priority always read-only
++             * zero. This means default priority order is always preferred
++             * for M-level and S-level external IRQs.
++             */
++            if ((firq + i) == ext_irq_no) {
++                continue;
++            }
++            iprio[firq + i] = (new_val >> (IPRIO_IRQ_BITS * i)) & 0xff;
++        }
++    }
++
++    return 0;
++}
++
++static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
++                     target_ulong new_val, target_ulong wr_mask)
++{
++    bool virt;
++    uint8_t *iprio;
++    int ret = -EINVAL;
++    target_ulong priv, isel, vgein;
++
++    /* Translate CSR number for VS-mode */
++    csrno = aia_xlate_vs_csrno(env, csrno);
++
++    /* Decode register details from CSR number */
++    virt = false;
++    switch (csrno) {
++    case CSR_MIREG:
++        iprio = env->miprio;
++        isel = env->miselect;
++        priv = PRV_M;
++        break;
++    case CSR_SIREG:
++        iprio = env->siprio;
++        isel = env->siselect;
++        priv = PRV_S;
++        break;
++    case CSR_VSIREG:
++        iprio = env->hviprio;
++        isel = env->vsiselect;
++        priv = PRV_S;
++        virt = true;
++        break;
++    default:
++         goto done;
++    };
++
++    /* Find the selected guest interrupt file */
++    vgein = (virt) ? get_field(env->hstatus, HSTATUS_VGEIN) : 0;
++
++    if (ISELECT_IPRIO0 <= isel && isel <= ISELECT_IPRIO15) {
++        /* Local interrupt priority registers not available for VS-mode */
++        if (!virt) {
++            ret = rmw_iprio(isel, iprio, val, new_val, wr_mask,
++                            (priv == PRV_M) ? IRQ_M_EXT : IRQ_S_EXT);
++        }
++    } else if (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST) {
++        /* IMSIC registers only available when machine implements it. */
++        if (env->aia_ireg_rmw_fn[priv]) {
++            /* Selected guest interrupt file should not be zero */
++            if (virt && (!vgein || env->geilen < vgein)) {
++                goto done;
++            }
++            /* Call machine specific IMSIC register emulation */
++            ret = env->aia_ireg_rmw_fn[priv](env->aia_ireg_rmw_fn_arg[priv],
++                                    AIA_MAKE_IREG(isel, priv, virt, vgein),
++                                    val, new_val, wr_mask);
++        }
++    }
++
++done:
++    if (ret) {
++        return (riscv_cpu_virt_enabled(env) && virt) ?
++               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
++    }
 +    return RISCV_EXCP_NONE;
 +}
 +
  static RISCVException read_mtvec(CPURISCVState *env, int csrno,
                                   target_ulong *val)
  {
-@@ -1352,6 +1383,120 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    int irq, ret;
-+    target_ulong topei;
-+    uint64_t vseip, vsgein;
-+    uint32_t iid, iprio, hviid, hviprio, gein;
-+#define VSTOPI_NUM_SRCS 5
-+    uint32_t s, scount = 0, siid[VSTOPI_NUM_SRCS], siprio[VSTOPI_NUM_SRCS];
-+
-+    gein = get_field(env->hstatus, HSTATUS_VGEIN);
-+    hviid = get_field(env->hvictl, HVICTL_IID);
-+    hviprio = get_field(env->hvictl, HVICTL_IPRIO);
-+
-+    if (gein) {
-+        vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-+        vseip = env->mie & (env->mip | vsgein) & MIP_VSEIP;
-+        if (gein <= env->geilen && vseip) {
-+            siid[scount] = IRQ_S_EXT;
-+            siprio[scount] = IPRIO_MMAXIPRIO + 1;
-+            if (env->aia_ireg_rmw_fn[PRV_S]) {
-+                /*
-+                 * Call machine specific IMSIC register emulation for
-+                 * reading TOPEI.
-+                 */
-+                ret = env->aia_ireg_rmw_fn[PRV_S](
-+                        env->aia_ireg_rmw_fn_arg[PRV_S],
-+                        AIA_MAKE_IREG(ISELECT_IMSIC_TOPEI, PRV_S, true, gein),
-+                        &topei, 0, 0);
-+                if (!ret && topei) {
-+                    siprio[scount] = topei & IMSIC_TOPEI_IPRIO_MASK;
-+                }
-+            }
-+            scount++;
-+        }
-+    } else {
-+        if (hviid == IRQ_S_EXT && hviprio) {
-+            siid[scount] = IRQ_S_EXT;
-+            siprio[scount] = hviprio;
-+            scount++;
-+        }
-+    }
-+
-+    if (env->hvictl & HVICTL_VTI) {
-+        if (hviid != IRQ_S_EXT) {
-+            siid[scount] = hviid;
-+            siprio[scount] = hviprio;
-+            scount++;
-+        }
-+    } else {
-+        irq = riscv_cpu_vsirq_pending(env);
-+        if (irq != IRQ_S_EXT && 0 < irq && irq <= 63) {
-+           siid[scount] = irq;
-+           siprio[scount] = env->hviprio[irq];
-+           scount++;
-+        }
-+    }
-+
-+    iid = 0;
-+    iprio = UINT_MAX;
-+    for (s = 0; s < scount; s++) {
-+        if (siprio[s] < iprio) {
-+            iid = siid[s];
-+            iprio = siprio[s];
-+        }
-+    }
-+
-+    if (iid) {
-+        if (env->hvictl & HVICTL_IPRIOM) {
-+            if (iprio > IPRIO_MMAXIPRIO) {
-+                iprio = IPRIO_MMAXIPRIO;
-+            }
-+            if (!iprio) {
-+                if (riscv_cpu_default_priority(iid) > IPRIO_DEFAULT_S) {
-+                    iprio = IPRIO_MMAXIPRIO;
-+                }
-+            }
-+        } else {
-+            iprio = 1;
-+        }
-+    } else {
-+        iprio = 0;
-+    }
-+
-+    *val = (iid & TOPI_IID_MASK) << TOPI_IID_SHIFT;
-+    *val |= iprio;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int read_stopi(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    int irq;
-+    uint8_t iprio;
-+
-+    if (riscv_cpu_virt_enabled(env)) {
-+        return read_vstopi(env, CSR_VSTOPI, val);
-+    }
-+
-+    irq = riscv_cpu_sirq_pending(env);
-+    if (irq <= 0 || irq > 63) {
-+       *val = 0;
-+    } else {
-+       iprio = env->siprio[irq];
-+       if (!iprio) {
-+           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_S) {
-+               iprio = IPRIO_MMAXIPRIO;
-+           }
-+       }
-+       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
-+       *val |= iprio;
-+    }
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- /* Hypervisor Extensions */
- static RISCVException read_hstatus(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
-@@ -2086,6 +2231,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+@@ -2231,6 +2393,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
      [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
      [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
  
-+    /* Machine-Level Interrupts (AIA) */
-+    [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
++    /* Machine-Level Window to Indirectly Accessed Registers (AIA) */
++    [CSR_MISELECT] = { "miselect", aia_any,   NULL, NULL,    rmw_xiselect },
++    [CSR_MIREG]    = { "mireg",    aia_any,   NULL, NULL,    rmw_xireg },
 +
-     /* Virtual Interrupts for Supervisor Level (AIA) */
-     [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
-     [CSR_MVIP]       = { "mvip",  aia_any, read_zero, write_ignore },
-@@ -2113,6 +2261,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Machine-Level Interrupts (AIA) */
+     [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
+ 
+@@ -2261,6 +2427,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
      /* Supervisor Protection and Translation */
      [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
  
-+    /* Supervisor-Level Interrupts (AIA) */
-+    [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
++    /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
++    [CSR_SISELECT]   = { "siselect",   aia_smode, NULL, NULL, rmw_xiselect },
++    [CSR_SIREG]      = { "sireg",      aia_smode, NULL, NULL, rmw_xireg },
 +
-     /* Supervisor-Level High-Half CSRs (AIA) */
-     [CSR_SIEH]       = { "sieh",   aia_smode32, NULL, NULL, rmw_sieh },
-     [CSR_SIPH]       = { "siph",   aia_smode32, NULL, NULL, rmw_siph },
-@@ -2151,6 +2302,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Supervisor-Level Interrupts (AIA) */
+     [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
+ 
+@@ -2302,6 +2472,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
      [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,   write_hviprio1 },
      [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,   write_hviprio2 },
  
-+    /* VS-Level Interrupts (H-extension with AIA) */
-+    [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
++    /* VS-Level Window to Indirectly Accessed Registers (H-extension with AIA) */
++    [CSR_VSISELECT]   = { "vsiselect",   aia_hmode, NULL, NULL,      rmw_xiselect },
++    [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL,      rmw_xireg },
 +
-     /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
-     [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL, rmw_hidelegh },
-     [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero, write_ignore },
+     /* VS-Level Interrupts (H-extension with AIA) */
+     [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
+ 
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index bc20960260..821e05d934 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -127,6 +127,7 @@ static const VMStateDescription vmstate_hyper = {
+         VMSTATE_UINTTL(env.vscause, RISCVCPU),
+         VMSTATE_UINTTL(env.vstval, RISCVCPU),
+         VMSTATE_UINTTL(env.vsatp, RISCVCPU),
++        VMSTATE_UINTTL(env.vsiselect, RISCVCPU),
+ 
+         VMSTATE_UINTTL(env.mtval2, RISCVCPU),
+         VMSTATE_UINTTL(env.mtinst, RISCVCPU),
+@@ -184,6 +185,8 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.mepc, RISCVCPU),
+         VMSTATE_UINTTL(env.mcause, RISCVCPU),
+         VMSTATE_UINTTL(env.mtval, RISCVCPU),
++        VMSTATE_UINTTL(env.miselect, RISCVCPU),
++        VMSTATE_UINTTL(env.siselect, RISCVCPU),
+         VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+         VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+         VMSTATE_UINTTL(env.sscratch, RISCVCPU),
 -- 
 2.25.1
 
