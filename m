@@ -1,64 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mfNpn-000084-H9
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 10:53:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38750)
+	id 1mfYpq-0004pV-Sb
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Oct 2021 22:38:38 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56958)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1mfNpl-0008Uz-Fp; Tue, 26 Oct 2021 10:53:49 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f]:43701)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mfYpp-0004oU-7D; Tue, 26 Oct 2021 22:38:37 -0400
+Received: from mail-io1-xd2c.google.com ([2607:f8b0:4864:20::d2c]:42712)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <josemartins90@gmail.com>)
- id 1mfNpj-0000sb-BY; Tue, 26 Oct 2021 10:53:49 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id u13so15515276edy.10;
- Tue, 26 Oct 2021 07:53:46 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mfYpn-0000lI-Bg; Tue, 26 Oct 2021 22:38:36 -0400
+Received: by mail-io1-xd2c.google.com with SMTP id n67so1815817iod.9;
+ Tue, 26 Oct 2021 19:38:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Q6rRe5G++7fuW7fMR8vdNhXh4r3k4FwIMrqZFd9P21Y=;
- b=MephXJ7JZuu9VjEEAMjAUR75J45gJQLAQJ2IIHatQEze8l16B4bQwkr0IsRHiHqo/F
- MjN1KWhkB/Wd4ZgS7GHy4l4y1H16gp4C4d2inEBu3uGb6sXpY99ISG1MTjGaxy64wnDk
- K1SjGtpYDiycVJbtn2zCXOE4ObQjGbgQtW0LmAjb9pYwL6/e6BRsBdhOW4LN9eN070cI
- mwhezpIY+rR1xE4m1lzwWjgYaFwgi28guin9cWAapxTcH1GhitJupq5NP4LbTR4YJSZd
- Qy/vk5dXFXL/Blfl1nbLsOj/tFVFU+lu24If6MnyYseZ/hN/Tf3IF5Dnks64XKajUemR
- HB5w==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=3hqbw/mdcOgUDSVxVL8UzC6dJ91tb0zhr1++4d4NMpw=;
+ b=dwSdqrMxZ4le+DdQNyhWKL9YirE5QFHpuSDXqT77jXujppLH6aTygy5dLXYjlkdekM
+ HUxGdYsuVjsEigS8P3eyWjkOZnJCpgDASQQahKvlLKXC6bVG8x7g0IPgfsyovRbCiu+H
+ ThAbxCXS39aCf8uN1pYZhzIvq2RwjpO2DqAWDoH3zbwY39hfHYvUQxJpPVNPBVFrh2ra
+ bvgcIqnQevvk5qkcuuh6pOU6bhBDsdpi1nS5KpK1HNyEMImeOH5wNGmpWIWRxrSnbILb
+ YLpcUm+5Scpb8OdSBf+ywnPqsigJMs1zENMcWTAtEiHfQgj4WylgFG4GqsUSuEw71VM9
+ +s7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Q6rRe5G++7fuW7fMR8vdNhXh4r3k4FwIMrqZFd9P21Y=;
- b=Ms08J+emXyfJJN5k7KqMMYDWrg2WTXxfy+8NLH8BAAtEGrj6Bh+BXpVz2lAEQFS2iM
- v89mZQ0wJx/94iZq1a4sC0Zpu/+M7fMem6VNrIUxJGBylMty94WNwnlCK1RT4/XXX5AV
- O+tSq1InLJRJCSsNo1Pura4PZLhzze2VMVz+VTW2/RBli035nSjmW2YiiceT9nD04JiG
- nBQSXLomTgSPJFmYtTPE8hWu9pHZWlMmedFOgqqG8PRwr4FzhTxEDu3mFU5Tk9JyBxXu
- 6XHtWYV6BlCHGvP12MHs31lVLKbbZzUaeyTVkK/esAHlDtd7vu5azPvObUQLchfZj31e
- 4mcg==
-X-Gm-Message-State: AOAM5328IB3n+eWkgaKrUJNU6MzC8Nu4r/mc9oaDYzdjBtui2DuzJfBD
- 7hs8zMLfHAIMjzrXiTlByzOhsOE7kA+qaORg
-X-Google-Smtp-Source: ABdhPJynbMWdWKOZjUdHMSuQ8wt7pKVc0FEwpX70lKwj4zbDyhqcYEaGNohMyOd+DVy08autt+2S+Q==
-X-Received: by 2002:a17:906:1601:: with SMTP id
- m1mr31069882ejd.117.1635259904216; 
- Tue, 26 Oct 2021 07:51:44 -0700 (PDT)
-Received: from msi.. (bba177573.alshamil.net.ae. [217.165.4.27])
- by smtp.gmail.com with ESMTPSA id b19sm9182333ejc.107.2021.10.26.07.51.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Oct 2021 07:51:43 -0700 (PDT)
-From: Jose Martins <josemartins90@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: Jose Martins <josemartins90@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v2 2/2] target/riscv: remove force HS exception
-Date: Tue, 26 Oct 2021 15:51:26 +0100
-Message-Id: <20211026145126.11025-3-josemartins90@gmail.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211026145126.11025-1-josemartins90@gmail.com>
-References: <20211026145126.11025-1-josemartins90@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=3hqbw/mdcOgUDSVxVL8UzC6dJ91tb0zhr1++4d4NMpw=;
+ b=hOKcXC92YP3zbVgxrlFvbaCQ8qMPHt9Wx/atb74yEoDJA5VufGrKUvoHYSfTQk+zlA
+ k12XPMSoCbGMv/dsiWtJWsG9p+W3euQsm1XFFqDA/m2XMb5C/zIE1zjva1/h9j82R4B7
+ oagIPT4qZ+HBS8ZTPo2jklOZJQHOKvlPiAkb3AFm5nInxCUqicgp+hGkUNscA8V2/S5I
+ CgOsNY9YZkQJO8/eiAtoZ9omslkiJ+YAUPCpf1skBAFW1lp6KrYOsbaG5dUveN/gj896
+ IInddq9Jrl8ZDLZ3aPQqvHookqP65/NzDVfyFJJeKVvYexv76NszJYdM2xqFu658aNmP
+ bEHA==
+X-Gm-Message-State: AOAM532rCY7d3Ho0fav+/Gl3PwQi0ilyNFFhBoG6x75wO64UtfNf078z
+ PFiKIG4LXl6N63Q/DAET19nHRxMEmFgjXHzRUFA=
+X-Google-Smtp-Source: ABdhPJy4L2T60SOcIB4X879Nzj37EwA+jWMRb6/wb9xciiKqEzUDffq2WtDp6O6vbf9Wt8/JEisU6b4OjRTIxPIahz0=
+X-Received: by 2002:a05:6602:2bf7:: with SMTP id
+ d23mr17717779ioy.187.1635302313558; 
+ Tue, 26 Oct 2021 19:38:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=josemartins90@gmail.com; helo=mail-ed1-x52f.google.com
+References: <20211025124319.195290-1-rpathak@ventanamicro.com>
+ <20211025124319.195290-2-rpathak@ventanamicro.com>
+In-Reply-To: <20211025124319.195290-2-rpathak@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 27 Oct 2021 12:38:07 +1000
+Message-ID: <CAKmqyKORccGLiwCtFu=-M88bDXbKJiYPFh38tccB5=hBDdrCPg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: Add priv spec 1.12.0 version check
+To: Rahul Pathak <rpathak@ventanamicro.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -79,126 +72,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Oct 2021 14:53:49 -0000
+X-List-Received-Date: Wed, 27 Oct 2021 02:38:37 -0000
 
-There is no need to "force an hs exception" as the current privilege
-level, the state of the global ie and of the delegation registers should
-be enough to route the interrupt to the appropriate privilege level in
-riscv_cpu_do_interrupt. The is true for both asynchronous and
-synchronous exceptions, specifically, guest page faults which must be
-hardwired to zero hedeleg. As such the hs_force_except mechanism can be
-removed.
+On Mon, Oct 25, 2021 at 10:55 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
+>
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c | 4 +++-
+>  target/riscv/cpu.h | 1 +
+>  2 files changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 788fa0b11c..83c3814a5a 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -405,7 +405,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      }
+>
+>      if (cpu->cfg.priv_spec) {
+> -        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
+> +        if (!g_strcmp0(cpu->cfg.priv_spec, "v1.12.0")) {
+> +            priv_version = PRIV_VERSION_1_12_0;
+> +        } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.11.0")) {
 
-Signed-off-by: Jose Martins <josemartins90@gmail.com>
----
- target/riscv/cpu.h        |  2 --
- target/riscv/cpu_bits.h   |  6 ------
- target/riscv/cpu_helper.c | 26 +-------------------------
- 3 files changed, 1 insertion(+), 33 deletions(-)
+This change, actually allowing the user to enable the spec, should be
+in a separate patch at the end of the series.
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index bf1c899c00..b3205bfee3 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -338,8 +338,6 @@ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request);
- bool riscv_cpu_fp_enabled(CPURISCVState *env);
- bool riscv_cpu_virt_enabled(CPURISCVState *env);
- void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
--bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env);
--void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable);
- bool riscv_cpu_two_stage_lookup(int mmu_idx);
- int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch);
- hwaddr riscv_cpu_get_phys_page_debug(CPUState *cpu, vaddr addr);
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7330ff5a19..5c447e1cc5 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -410,12 +410,6 @@
- 
- /* Virtulisation Register Fields */
- #define VIRT_ONOFF          1
--/* This is used to save state for when we take an exception. If this is set
-- * that means that we want to force a HS level exception (no matter what the
-- * delegation is set to). This will occur for things such as a second level
-- * page table fault.
-- */
--#define FORCE_HS_EXCEP      2
- 
- /* RV32 satp CSR field masks */
- #define SATP32_MODE         0x80000000
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 55db004fea..59b72262be 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -178,24 +178,6 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
- }
- 
--bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return false;
--    }
--
--    return get_field(env->virt, FORCE_HS_EXCEP);
--}
--
--void riscv_cpu_set_force_hs_excep(CPURISCVState *env, bool enable)
--{
--    if (!riscv_has_ext(env, RVH)) {
--        return;
--    }
--
--    env->virt = set_field(env->virt, FORCE_HS_EXCEP, enable);
--}
--
- bool riscv_cpu_two_stage_lookup(int mmu_idx)
- {
-     return mmu_idx & TB_FLAGS_PRIV_HYP_ACCESS_MASK;
-@@ -912,7 +894,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
--    bool force_hs_execp = riscv_cpu_force_hs_excep_enabled(env);
-     uint64_t s;
- 
-     /* cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
-@@ -941,8 +922,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-         case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
-         case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-         case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
--            force_hs_execp = true;
--            /* fallthrough */
-         case RISCV_EXCP_INST_ADDR_MIS:
-         case RISCV_EXCP_INST_ACCESS_FAULT:
-         case RISCV_EXCP_LOAD_ADDR_MIS:
-@@ -1001,8 +980,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                 env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
-             }
- 
--            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1) &&
--                !force_hs_execp) {
-+            if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1)) {
-                 /* Trap to VS mode */
-                 /*
-                  * See if we need to adjust cause. Yes if its VS mode interrupt
-@@ -1024,7 +1002,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-                 htval = env->guest_phys_fault_addr;
- 
-                 riscv_cpu_set_virt_enabled(env, 0);
--                riscv_cpu_set_force_hs_excep(env, 0);
-             } else {
-                 /* Trap into HS mode */
-                 env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
-@@ -1060,7 +1037,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
- 
-             /* Trapping to M mode, virt is disabled */
-             riscv_cpu_set_virt_enabled(env, 0);
--            riscv_cpu_set_force_hs_excep(env, 0);
-         }
- 
-         s = env->mstatus;
--- 
-2.33.1
+The idea is to add the feature, then expose it.
 
+Alistair
+
+
+>              priv_version = PRIV_VERSION_1_11_0;
+>          } else if (!g_strcmp0(cpu->cfg.priv_spec, "v1.10.0")) {
+>              priv_version = PRIV_VERSION_1_10_0;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index a33dc30be8..67c52e6f9e 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -79,6 +79,7 @@ enum {
+>
+>  #define PRIV_VERSION_1_10_0 0x00011000
+>  #define PRIV_VERSION_1_11_0 0x00011100
+> +#define PRIV_VERSION_1_12_0 0x00011200
+>
+>  #define VEXT_VERSION_0_07_1 0x00000701
+>
+> --
+> 2.25.1
+>
+>
 
