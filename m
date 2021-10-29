@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mgNoD-0002CA-O1
-	for mharc-qemu-riscv@gnu.org; Fri, 29 Oct 2021 05:04:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36560)
+	id 1mgNoL-0002Jg-Pe
+	for mharc-qemu-riscv@gnu.org; Fri, 29 Oct 2021 05:04:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36620)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mgNoB-00026j-TC
- for qemu-riscv@nongnu.org; Fri, 29 Oct 2021 05:04:19 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:40899)
+ id 1mgNoK-0002EL-8U
+ for qemu-riscv@nongnu.org; Fri, 29 Oct 2021 05:04:28 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:46619)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mgNo8-0006op-Fr
- for qemu-riscv@nongnu.org; Fri, 29 Oct 2021 05:04:19 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- n36-20020a17090a5aa700b0019fa884ab85so10058454pji.5
- for <qemu-riscv@nongnu.org>; Fri, 29 Oct 2021 02:04:16 -0700 (PDT)
+ id 1mgNoC-0006pR-LK
+ for qemu-riscv@nongnu.org; Fri, 29 Oct 2021 05:04:23 -0400
+Received: by mail-pg1-x529.google.com with SMTP id m21so9261990pgu.13
+ for <qemu-riscv@nongnu.org>; Fri, 29 Oct 2021 02:04:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=mLsqBrg1aHnThOM6huC9hLxzNnQ+6aSZHTSCP0mko4M=;
- b=ImSjJrvGGfWT8/ApWBqV6s5Yttec06RHsP5eBNXZgeiOnP9rMc+fiE6ibixlZW7ckz
- eZvS/IbTxakBbLyiYSTDcP7ZZZAjKbM3G6/EiRKoS0KKPbdr43sWr7gaYG59IF+k8nnk
- OJp/KxldfmFDAChO3lQsL09WkmXp8Bti1RcTm2uY77EVrYCnISg9BIWFbZE1bq2ZHIwe
- eEh9vN+2WfpFFCcpT86kOm3Oi1Ka34l7OV/1DCcUZOPPhQHUuOoIlbWwfUzRgAcvQV/B
- FqtXMORFj+m+1Hd2ggTvxH5+KU9nII6mQLcHx2LPpPNAObUAxchUiTdVWQCR3UPxQiz2
- qTSA==
+ bh=UiUw4H+PfC2YnJnNQovokpyR7FCMhZHegO3136z9g7k=;
+ b=k0gNDBWXoE0lW/pdyBs70D+2mepM9MkbxYC+n4Qmbhu352TOEywQy0o86VxCWH/u6Y
+ uV2nvwAegsRfcDkVXvVQlIfqF8v1B3XAf2ZLjTDj1E7MndzkFHKdlgPy4qBULVF5jQso
+ /xgAOH3PLRqPIRX5hz6IspXHHytvLz4ZyGT5BXhEoWLq0Ugdxk4Z2IMrQIb2Yq64UsuS
+ E+CWR7I8KCf3s8Ip46IQNbqxMChRUHsxRMA08w0hmrUwhRgoC8S/+zBnZz2zKhhdPNXD
+ dT4lZ+FyW8SX2zbhD95sJA7cQtBjmhP5tA7tMANdT5UpUnu+U8tVS81ih4qOutHJInSl
+ HYIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=mLsqBrg1aHnThOM6huC9hLxzNnQ+6aSZHTSCP0mko4M=;
- b=gdRdNQP4m8urqxKNE1R5OGvp2HgOtXidpzO8kVuWbTTbuWKMG1nScDpeok4NuW2Mk1
- r02LldkvAqs4Dtz3WTq2EX+mQ8GFXyTR54wgQBwcvSwRXAgjYdRYW9TxVWQRV/KumClM
- 7af+C7ME1XMsICV7CRoKhbQRXju7WL039EbRHbrX7vmgQYaAO2hq9nfEPCwKdsrssOqS
- tOgPhkQ/L1GSE9cpYfJNaF9/JdgQzTdjxLFZRbus0MaD8FtIlHw2XXJcqBC3QWaaHvGD
- MHR3KcyYGfUHn/g81ZKjNHrEClhky0zSqwu6/AQVJkoPEKEUlqwtSVq1f5m8aFXnYHKU
- NZTg==
-X-Gm-Message-State: AOAM531mkO2ESKqE1LXUMynNpLBjHIZPRUbvrwcYrCZVEj+8V3FDrQgV
- U3+fLQ60BFv7+tni5AKk22nJEA==
-X-Google-Smtp-Source: ABdhPJzvLqyzbIBV9YRu67LpgLC6vbTIhYNkzG6FySK0C/Bsu9ppl20WDeH6cRZ86Mg6vtGd07zZzw==
-X-Received: by 2002:a17:90a:5992:: with SMTP id
- l18mr18151148pji.127.1635498255300; 
- Fri, 29 Oct 2021 02:04:15 -0700 (PDT)
+ bh=UiUw4H+PfC2YnJnNQovokpyR7FCMhZHegO3136z9g7k=;
+ b=m39mo9+zGUV3cTva9fS3EfbitnzxhkHxFIs8jMCQGuFmSWT9luerklll749SCOQO9n
+ 4lROqjsDNNb/vAoqyZcFLE5qt2yo3ylXw8PMHG8dBmoL0WhPWQDhiroSOl0Zbd6PQH++
+ 3ayN7Xxs+LqAHyKTu03X6wFOndsTZUTUYDKpEa2I1MxHao55tXytn0vJkAYsfw49WxBC
+ vO9NjENLYW4sIZsR64hzD+xfdbJ3boPNEYghDUVs/oNtlQIdUv4Z8hLrZdRp8rlFGfJN
+ KAd5MmnSq3CA5ZleoGF3Z8MQot5Bogq3nCO8BQpnU43O67x6YlERVex3M8Qc6lE0RMsa
+ K2lg==
+X-Gm-Message-State: AOAM533brbyr5xrNPQWaZ601vK1aLgpAeREdXdT2AAFYWsP5CdKsqUJL
+ s3Mx+YUf9ceY1aEnyu9Xw4Ko/w==
+X-Google-Smtp-Source: ABdhPJyG0KidELpxpiyhZQji+8PWRKGIb0ou4UZf1J5TH5ViUglGlWqPgmvCFUN3azUwZjrYS0YVcw==
+X-Received: by 2002:a63:7010:: with SMTP id l16mr7314503pgc.32.1635498259468; 
+ Fri, 29 Oct 2021 02:04:19 -0700 (PDT)
 Received: from localhost.localdomain ([2402:7500:46b:ce55:983b:6962:38ac:e1b9])
- by smtp.gmail.com with ESMTPSA id t13sm5081477pgn.94.2021.10.29.02.04.13
+ by smtp.gmail.com with ESMTPSA id t13sm5081477pgn.94.2021.10.29.02.04.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Oct 2021 02:04:15 -0700 (PDT)
+ Fri, 29 Oct 2021 02:04:19 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v9 73/76] target/riscv: rvv-1.0: add evl parameter to
- vext_ldst_us()
-Date: Fri, 29 Oct 2021 16:59:18 +0800
-Message-Id: <20211029085922.255197-74-frank.chang@sifive.com>
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v9 74/76] target/riscv: rvv-1.0: add vector unit-stride mask
+ load/store insns
+Date: Fri, 29 Oct 2021 16:59:19 +0800
+Message-Id: <20211029085922.255197-75-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211029085922.255197-1-frank.chang@sifive.com>
 References: <20211029085922.255197-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,89 +81,129 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2021 09:04:20 -0000
+X-List-Received-Date: Fri, 29 Oct 2021 09:04:28 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Add supports of Vector unit-stride mask load/store instructions
-(vlm.v, vsm.v), which has:
-    evl (effective vector length) = ceil(env->vl / 8).
-
-The new instructions operate the same as unmasked byte loads and stores.
-Add evl parameter to reuse vext_ldst_us().
-
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/vector_helper.c | 36 ++++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+ target/riscv/helper.h                   |  2 ++
+ target/riscv/insn32.decode              |  4 +++
+ target/riscv/insn_trans/trans_rvv.c.inc | 40 +++++++++++++++++++++++++
+ target/riscv/vector_helper.c            | 21 +++++++++++++
+ 4 files changed, 67 insertions(+)
 
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index ab283d12b79..6e58343af35 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -129,6 +129,8 @@ DEF_HELPER_5(vse8_v_mask, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_5(vse16_v_mask, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_5(vse32_v_mask, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_5(vse64_v_mask, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vlm_v, void, ptr, ptr, tl, env, i32)
++DEF_HELPER_5(vsm_v, void, ptr, ptr, tl, env, i32)
+ DEF_HELPER_6(vlse8_v, void, ptr, ptr, tl, tl, env, i32)
+ DEF_HELPER_6(vlse16_v, void, ptr, ptr, tl, tl, env, i32)
+ DEF_HELPER_6(vlse32_v, void, ptr, ptr, tl, tl, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 3b6524bad91..1a4a2871464 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -305,6 +305,10 @@ vse16_v    ... 000 . 00000 ..... 101 ..... 0100111 @r2_nfvm
+ vse32_v    ... 000 . 00000 ..... 110 ..... 0100111 @r2_nfvm
+ vse64_v    ... 000 . 00000 ..... 111 ..... 0100111 @r2_nfvm
+ 
++# Vector unit-stride mask load/store insns.
++vlm_v      000 000 1 01011 ..... 000 ..... 0000111 @r2
++vsm_v      000 000 1 01011 ..... 000 ..... 0100111 @r2
++
+ # Vector strided insns.
+ vlse8_v     ... 010 . ..... ..... 000 ..... 0000111 @r_nfvm
+ vlse16_v    ... 010 . ..... ..... 101 ..... 0000111 @r_nfvm
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index e540b5d33c2..97b1dc10265 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -697,6 +697,46 @@ GEN_VEXT_TRANS(vse16_v, MO_16, r2nfvm, st_us_op, st_us_check)
+ GEN_VEXT_TRANS(vse32_v, MO_32, r2nfvm, st_us_op, st_us_check)
+ GEN_VEXT_TRANS(vse64_v, MO_64, r2nfvm, st_us_op, st_us_check)
+ 
++/*
++ *** unit stride mask load and store
++ */
++static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
++{
++    uint32_t data = 0;
++    gen_helper_ldst_us *fn = gen_helper_vlm_v;
++
++    /* EMUL = 1, NFIELDS = 1 */
++    data = FIELD_DP32(data, VDATA, LMUL, 0);
++    data = FIELD_DP32(data, VDATA, NF, 1);
++    return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
++}
++
++static bool ld_us_mask_check(DisasContext *s, arg_vlm_v *a, uint8_t eew)
++{
++    /* EMUL = 1, NFIELDS = 1 */
++    return require_rvv(s) && vext_check_isa_ill(s);
++}
++
++static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
++{
++    uint32_t data = 0;
++    gen_helper_ldst_us *fn = gen_helper_vsm_v;
++
++    /* EMUL = 1, NFIELDS = 1 */
++    data = FIELD_DP32(data, VDATA, LMUL, 0);
++    data = FIELD_DP32(data, VDATA, NF, 1);
++    return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
++}
++
++static bool st_us_mask_check(DisasContext *s, arg_vsm_v *a, uint8_t eew)
++{
++    /* EMUL = 1, NFIELDS = 1 */
++    return require_rvv(s) && vext_check_isa_ill(s);
++}
++
++GEN_VEXT_TRANS(vlm_v, MO_8, vlm_v, ld_us_mask_op, ld_us_mask_check)
++GEN_VEXT_TRANS(vsm_v, MO_8, vsm_v, st_us_mask_op, st_us_mask_check)
++
+ /*
+  *** stride load and store
+  */
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 946dca53ffd..83373ca6fc6 100644
+index 83373ca6fc6..4c1a1310e63 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -279,15 +279,15 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
- /* unmasked unit-stride load and store operation*/
- static void
- vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
--             vext_ldst_elem_fn *ldst_elem,
--             uint32_t esz, uintptr_t ra, MMUAccessType access_type)
-+             vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
-+             uintptr_t ra, MMUAccessType access_type)
- {
-     uint32_t i, k;
-     uint32_t nf = vext_nf(desc);
-     uint32_t max_elems = vext_max_elems(desc, esz);
+@@ -345,6 +345,27 @@ GEN_VEXT_ST_US(vse16_v, int16_t, ste_h)
+ GEN_VEXT_ST_US(vse32_v, int32_t, ste_w)
+ GEN_VEXT_ST_US(vse64_v, int64_t, ste_d)
  
-     /* load bytes from guest memory */
--    for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-+    for (i = env->vstart; i < evl; i++, env->vstart++) {
-         k = 0;
-         while (k < nf) {
-             target_ulong addr = base + ((i * nf + k) << esz);
-@@ -316,7 +316,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
-                   CPURISCVState *env, uint32_t desc)                    \
- {                                                                       \
-     vext_ldst_us(vd, base, env, desc, LOAD_FN,                          \
--                 ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);          \
-+                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_LOAD); \
- }
- 
- GEN_VEXT_LD_US(vle8_v,  int8_t,  lde_b)
-@@ -324,20 +324,20 @@ GEN_VEXT_LD_US(vle16_v, int16_t, lde_h)
- GEN_VEXT_LD_US(vle32_v, int32_t, lde_w)
- GEN_VEXT_LD_US(vle64_v, int64_t, lde_d)
- 
--#define GEN_VEXT_ST_US(NAME, ETYPE, STORE_FN)                           \
--void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         \
--                         CPURISCVState *env, uint32_t desc)             \
--{                                                                       \
--    uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));             \
--    vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,  \
--                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
--}                                                                       \
--                                                                        \
--void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
--                  CPURISCVState *env, uint32_t desc)                    \
--{                                                                       \
--    vext_ldst_us(vd, base, env, desc, STORE_FN,                         \
--                 ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);         \
-+#define GEN_VEXT_ST_US(NAME, ETYPE, STORE_FN)                            \
-+void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,          \
-+                         CPURISCVState *env, uint32_t desc)              \
-+{                                                                        \
-+    uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));              \
-+    vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,   \
-+                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);      \
-+}                                                                        \
-+                                                                         \
-+void HELPER(NAME)(void *vd, void *v0, target_ulong base,                 \
-+                  CPURISCVState *env, uint32_t desc)                     \
-+{                                                                        \
-+    vext_ldst_us(vd, base, env, desc, STORE_FN,                          \
-+                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_STORE); \
- }
- 
- GEN_VEXT_ST_US(vse8_v,  int8_t,  ste_b)
++/*
++ *** unit stride mask load and store, EEW = 1
++ */
++void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
++                    CPURISCVState *env, uint32_t desc)
++{
++    /* evl = ceil(vl/8) */
++    uint8_t evl = (env->vl + 7) >> 3;
++    vext_ldst_us(vd, base, env, desc, lde_b,
++                 0, evl, GETPC(), MMU_DATA_LOAD);
++}
++
++void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
++                    CPURISCVState *env, uint32_t desc)
++{
++    /* evl = ceil(vl/8) */
++    uint8_t evl = (env->vl + 7) >> 3;
++    vext_ldst_us(vd, base, env, desc, ste_b,
++                 0, evl, GETPC(), MMU_DATA_STORE);
++}
++
+ /*
+  *** index: access vector element from indexed memory
+  */
 -- 
 2.25.1
 
