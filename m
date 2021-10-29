@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mgTlS-0001tp-4x
-	for mharc-qemu-riscv@gnu.org; Fri, 29 Oct 2021 11:25:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58172)
+	id 1mgTlT-0001yW-Of
+	for mharc-qemu-riscv@gnu.org; Fri, 29 Oct 2021 11:25:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58190)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mgTlQ-0001rA-I9; Fri, 29 Oct 2021 11:25:52 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:42593)
+ id 1mgTlS-0001u7-H2; Fri, 29 Oct 2021 11:25:54 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:46733)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mgTlO-00076Y-D5; Fri, 29 Oct 2021 11:25:52 -0400
-Received: by mail-pl1-x635.google.com with SMTP id v16so7044352ple.9;
- Fri, 29 Oct 2021 08:25:49 -0700 (PDT)
+ id 1mgTlR-0007MI-51; Fri, 29 Oct 2021 11:25:54 -0400
+Received: by mail-pl1-x631.google.com with SMTP id p18so3757451plf.13;
+ Fri, 29 Oct 2021 08:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding;
- bh=Gfn97GZHLvDblNfl91JEwYWh/I9EfUhpNVYLyXEU1Gc=;
- b=G7oMa2RFr83nRdrZ9YA9ehh1Du2Wn3vOpufQLQvPQq9YDXYk2SDW4V3GpGnFrQZLVA
- D93J0eges9iwOFjvIr1aKXPf/w0GgjbKkg6OxScsq+chYemmD3mIkfCbRn2ijm+rHrtx
- Se0t4U5QGqS4DVDGv84Exy2yNnYfk0CO6WL7W1FmdT5O8q4Nez05+S6u0ux+ZtMSTCWs
- jOZKPc5yUrMMANyRgmS95f96V5GfFEnTGf9n9iyPXal1Omne5PempXt+EVf0yIqbSBib
- 24sZmyNwnyK4nNlYTOiJtM0GuyBJsITisHnSfXeH7KZQ36vhJmxedo/1GGeMvGQS0GH7
- 3fpQ==
+ bh=3mrX6SeJJuh0QwI+Ut5jGI+r+F+q9vasPZ82cT0utmo=;
+ b=W4ZTYEgrW32iRQ6jgmvyQbEoKgX7kBl8Q+afzMHhbFbaGnQlAPTXFS0kaXzalTWOEq
+ /Mxnd+BsRDWib0xz9Yt3BPrcKQpUxJBE5sPaNMQ+TgTyWqUDEbi6yrYHYBjm+Wb3hFzL
+ DVmfKvXfzzxE23J3HHJQH2GMKTGWX0H0WzqUKvvc55WnyUEYKrWZLoqLrQV3U/L5P91W
+ pSfIXAFWVnSOXzu8zbH58jJLVZYX/iKLfsxos558M6NP1c0hte2mo5YK7Mut25DF/G8q
+ fp8+b1Ug1o6y81G3KYucDoyi/grWglKMQ6DX7ZDkyAbAla6vh8l4AMoMnV1gEqQprMpu
+ 4XsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Gfn97GZHLvDblNfl91JEwYWh/I9EfUhpNVYLyXEU1Gc=;
- b=uDl6mz6RTIiuwOz8qijqmNRctkLmGuFLHoIrp8c72QCaC64cCdkhUiTPXlLa2mYg4k
- u3CZwOHYtoZ5b6THoTb2POpm0fEzrIfQYWH3MfoXiJfL6sQbZbrqg9hkmf0mfe9ig5Lx
- +70Dhwk8NY+Wl7iwqS76yWITRBXsiKEHeoe3ter05wwZaZa48n6+oHBfeZhB8zrUNtXH
- X20/PE1YwuPDFdYd3WK6zkVdnCwvoAwSJjp+mWHO0JBKVH/BXbNTUtQyPunKJ9finvOu
- i3B8xZAf+9nP9DHM7tEhW9Uu/JAgHhRIcQzm41+D6oDxfDw46RDXxFrLwiLAxgZKKnMa
- X56Q==
-X-Gm-Message-State: AOAM531g2phCiGvQgjzrCh3zXCqubDsSPX/zwncOq8ipOBg3zlHMLUEf
- V1zC8weZN4FW/Gd+tAsJcew3ygIPSRU=
-X-Google-Smtp-Source: ABdhPJx35L0vYRjry+5OdehnwX7PeOqEFntYY1nTSK1I4GNEosbic4diDcxmKi6udkuTKLAAfxDzXQ==
-X-Received: by 2002:a17:90b:390b:: with SMTP id
- ob11mr12123610pjb.217.1635521148863; 
- Fri, 29 Oct 2021 08:25:48 -0700 (PDT)
+ bh=3mrX6SeJJuh0QwI+Ut5jGI+r+F+q9vasPZ82cT0utmo=;
+ b=ekMgGvVToElXjb1nadG+Y5Nw/O8RgFlXPPBC/BhN+dk42p8L8YOZ7nmQ/p+xwHG3qh
+ BCcxOAGs/Q8v8UaOaPvyI6ZvzuVwJ9P4TL0OLGrusvUiiYOT1iYGA0fd4eWEW9Ed22H+
+ yhiHswwe8ZlSS6IdXpHMHz6WkXwoqpqJqmH+dmi5ke9x5CBtmVg2m13eFDeP0g5ayGZJ
+ S0pZp8+ATI1jweSktwzQHoXL5U/YRiH6bOUzRZXWmcRnSwQJDA8RYIqOmhFSnCl8IHW+
+ q2Emxgb8L8VQgipUvAZ4JSJF7esVe7nZQxRYNhZLs90Kzxjv8oG+pwnHgnCsx4+iney5
+ f6KA==
+X-Gm-Message-State: AOAM530EgjHcIq9tUaJwWQhUlQx4tCUP21zRKTv7k7YTfY4ZVb5j6vCF
+ 6yJMf3Mu7KxTh0wH2BSOfdw=
+X-Google-Smtp-Source: ABdhPJzhU36joh5hH6SlbngnaNM0YBkEEpVSOxXIVvU4+2szdv+7KXQyztm22oOwHI64OXxelakAXg==
+X-Received: by 2002:a17:90a:2c02:: with SMTP id
+ m2mr12195850pjd.109.1635521151573; 
+ Fri, 29 Oct 2021 08:25:51 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
  [147.11.176.192])
- by smtp.gmail.com with ESMTPSA id q12sm6645790pfk.65.2021.10.29.08.25.46
+ by smtp.gmail.com with ESMTPSA id q12sm6645790pfk.65.2021.10.29.08.25.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Oct 2021 08:25:48 -0700 (PDT)
+ Fri, 29 Oct 2021 08:25:51 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
 To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 2/5] target/riscv: debug: Implement debug related TCGCPUOps
-Date: Fri, 29 Oct 2021 23:25:32 +0800
-Message-Id: <20211029152535.2055096-3-bin.meng@windriver.com>
+Subject: [PATCH 3/5] target/riscv: Add a config option for native debug
+Date: Fri, 29 Oct 2021 23:25:33 +0800
+Message-Id: <20211029152535.2055096-4-bin.meng@windriver.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211029152535.2055096-1-bin.meng@windriver.com>
 References: <20211029152535.2055096-1-bin.meng@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,129 +76,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Oct 2021 15:25:52 -0000
+X-List-Received-Date: Fri, 29 Oct 2021 15:25:55 -0000
 
-Implement .debug_excp_handler, .debug_check_{breakpoint, watchpoint}
-TCGCPUOps and hook them into riscv_tcg_ops.
+Add a config option to enable support for native M-mode debug.
+This is enabled by default and can be disabled with 'debug=false'.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
- target/riscv/debug.h |  4 +++
- target/riscv/cpu.c   |  3 ++
- target/riscv/debug.c | 75 ++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 82 insertions(+)
+ target/riscv/cpu.h | 2 ++
+ target/riscv/cpu.c | 5 +++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-index cb8a6e0024..fddc103650 100644
---- a/target/riscv/debug.h
-+++ b/target/riscv/debug.h
-@@ -107,4 +107,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val);
- 
- void riscv_trigger_init(CPURISCVState *env);
- 
-+void riscv_cpu_debug_excp_handler(CPUState *cs);
-+bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
-+bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
-+
- #endif /* RISCV_DEBUG_H */
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 788fa0b11c..eface73e7d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -688,6 +688,9 @@ static const struct TCGCPUOps riscv_tcg_ops = {
-     .do_interrupt = riscv_cpu_do_interrupt,
-     .do_transaction_failed = riscv_cpu_do_transaction_failed,
-     .do_unaligned_access = riscv_cpu_do_unaligned_access,
-+    .debug_excp_handler = riscv_cpu_debug_excp_handler,
-+    .debug_check_breakpoint = riscv_cpu_debug_check_breakpoint,
-+    .debug_check_watchpoint = riscv_cpu_debug_check_watchpoint,
- #endif /* !CONFIG_USER_ONLY */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 457adde952..5787d1598c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -74,6 +74,7 @@ enum {
+     RISCV_FEATURE_MMU,
+     RISCV_FEATURE_PMP,
+     RISCV_FEATURE_EPMP,
++    RISCV_FEATURE_DEBUG,
+     RISCV_FEATURE_MISA
  };
  
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index ffb87fd3e8..ed09a255d3 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -362,3 +362,78 @@ void riscv_trigger_init(CPURISCVState *env)
-         env->trigger_type2[i].wp = NULL;
+@@ -314,6 +315,7 @@ struct RISCVCPU {
+         bool mmu;
+         bool pmp;
+         bool epmp;
++        bool debug;
+         uint64_t resetvec;
+     } cfg;
+ };
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index eface73e7d..3a2fa97098 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -439,6 +439,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
      }
- }
-+
-+void riscv_cpu_debug_excp_handler(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+
-+    if (cs->watchpoint_hit) {
-+        if (cs->watchpoint_hit->flags & BP_CPU) {
-+            cs->watchpoint_hit = NULL;
-+            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, GETPC());
-+        }
-+    } else {
-+        if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
-+            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, GETPC());
-+        }
-+    }
-+}
-+
-+bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    CPUBreakpoint *bp;
-+    target_ulong ctrl;
-+    target_ulong pc;
-+    int i;
-+
-+    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
-+        for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-+            ctrl = env->trigger_type2[i].mcontrol;
-+            pc = env->trigger_type2[i].maddress;
-+
-+            if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
-+                /* check U/S/M bit against current privilege level */
-+                if ((ctrl >> 3) & BIT(env->priv)) {
-+                    return true;
-+                }
-+            }
-+        }
+ 
++    if (cpu->cfg.debug) {
++        set_feature(env, RISCV_FEATURE_DEBUG);
 +    }
 +
-+    return false;
-+}
-+
-+bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    target_ulong ctrl;
-+    target_ulong addr;
-+    int flags;
-+    int i;
-+
-+    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-+        ctrl = env->trigger_type2[i].mcontrol;
-+        addr = env->trigger_type2[i].maddress;
-+        flags = 0;
-+
-+        if (ctrl & TYPE2_LOAD) {
-+            flags |= BP_MEM_READ;
-+        }
-+        if (ctrl & TYPE2_STORE) {
-+            flags |= BP_MEM_WRITE;
-+        }
-+
-+        if ((wp->flags & flags) && (wp->vaddr == addr)) {
-+            /* check U/S/M bit against current privilege level */
-+            if ((ctrl >> 3) & BIT(env->priv)) {
-+                return true;
-+            }
-+        }
-+    }
-+
-+    return false;
-+}
+     set_resetvec(env, cpu->cfg.resetvec);
+ 
+     /* Validate that MISA_MXL is set properly. */
+@@ -619,6 +623,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
++    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+ 
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+ 
 -- 
 2.25.1
 
