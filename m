@@ -1,81 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mh24L-0006ol-A9
-	for mharc-qemu-riscv@gnu.org; Sun, 31 Oct 2021 00:03:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32884)
+	id 1mhKMj-0003Bp-6Z
+	for mharc-qemu-riscv@gnu.org; Sun, 31 Oct 2021 19:35:56 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55810)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mh24K-0006oW-3G
- for qemu-riscv@nongnu.org; Sun, 31 Oct 2021 00:03:40 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:44721)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mhKMh-0003Bd-JL; Sun, 31 Oct 2021 19:35:51 -0400
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:46819)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mh24I-0006R7-N6
- for qemu-riscv@nongnu.org; Sun, 31 Oct 2021 00:03:39 -0400
-Received: by mail-pl1-x630.google.com with SMTP id t11so9429820plq.11
- for <qemu-riscv@nongnu.org>; Sat, 30 Oct 2021 21:03:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=teHXYUAqCvzPzfjbpPG9KoCo+p9x1lmKawwuj4y/KXo=;
- b=ipBOchWLfkqgfkF1lKG0xXUXIFEUEWW1YQyEvpuSwsb6E31Z+g9nU4mp56FsdyhKqz
- s+PR+p/DaZx815kmc8X8U17IqtZ8Pla1AWX5KJxqJ/dHVF8QkMCJSgJ/GDjpTojZY1mU
- SnkFUWRAek2Uxi1BszRw5VtUD7FZVusvvG0cuaFqqLitpo9IsWm0YQpzpqiA3GQn0ECl
- /9UmIy0dAWAjinHXADVueOC3MCnd37PiVMv2SAGmEADRS3zwilCrXcISSqa0vQTEnbp5
- kDJ6/jAMU4NB9pp/VHXCOLIj9qiW1pNK/DhKF/9kM2nM3kxo9mrWtV17NKzCR6vfBppg
- ppIQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mhKMf-0004Oh-Vm; Sun, 31 Oct 2021 19:35:51 -0400
+Received: by mail-io1-xd32.google.com with SMTP id i14so19485059ioa.13;
+ Sun, 31 Oct 2021 16:35:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=TUeeh/2B96sxOuEpU+hPnPFZ7zI/j5Btpy5swcS0LAg=;
+ b=XU+jWVX3Ifyw5yUYlktevurHl9cNo8gaQcz16XbCU0NhKxUl8GjZw/y6Ud2/GsyjdR
+ NSQFgl4GTLBeX1LugwQNbQ1n+8VzxY0Tb1muGyp7MHi/xyzJNqRo7+/8yWL7oqotP9h2
+ Tvx9TTiLrKykX5E/ZUIh7LtgnArBIM+B/ykNiKcNF+2AQ5VLiiNL1LTLg7HK4tBwcW9H
+ KCwnVc97VafRqeUVq/Ycsbqhvuzkzvb0inEQD27kWx0+WEBWxmIrPCmvfxwNdiZroXUR
+ jqD3t3XH7HYmZEnLlRx9TItkgEGXjwBFY58trKm48UxpxqLaQimi8Wl+iWpq7hlF0IaA
+ uhGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=teHXYUAqCvzPzfjbpPG9KoCo+p9x1lmKawwuj4y/KXo=;
- b=3BaEC/ZH0e1SvflSNw3w/TAx9ude3gdgzty8Z9/gZ8sG2SE7rIMsotw5ehEiDo2psh
- ybRoAaV90ooRHntnuR0RdkcELkRl0LCJaDIv+4o4vRzdQoUhMWCpL45oxQe0eghyOP7o
- 7xcFGzgEs0+RPpga+gXTjoMpctTw58idHdbI1bzqeCRL784XwEpTb4sQJ1xuKe3e8tCZ
- 2YImd5xW4TG+GMQorA1DYuROXx2nMFfO4MCx/PsiZ/AUA2HzZQsRbQBrD6h4nMhIR8oo
- YU5poZDzVJWO8b1M6xK9jkBf3k/dpBmjPReqn6sN3v+XaezC0+7OR+QsS7YivyUV0M9c
- WK5w==
-X-Gm-Message-State: AOAM533JZbkInH6asNdaXIwWnuq7e/heL0xKaY8XMvPZkRRMmkFHC5gn
- qryJuq45GV3SXOuM9O+jwWyYFg==
-X-Google-Smtp-Source: ABdhPJxSmlzIbNd3jSer2SmwNCqHut8qyPbHEn6Ssd332hgOIK7m+XilD01ax3vqABmKWuuBoUSmTQ==
-X-Received: by 2002:a17:90a:c7d7:: with SMTP id
- gf23mr4333844pjb.204.1635653016530; 
- Sat, 30 Oct 2021 21:03:36 -0700 (PDT)
-Received: from [192.168.1.11] (174-21-75-75.tukw.qwest.net. [174.21.75.75])
- by smtp.gmail.com with ESMTPSA id p16sm11848368pfh.97.2021.10.30.21.03.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 30 Oct 2021 21:03:36 -0700 (PDT)
-Subject: Re: [PATCH v4 11/17] target/riscv: support for 128-bit shift
- instructions
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
- palmer@dabbelt.com, fabien.portas@grenoble-inp.org
-References: <20211025122818.168890-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211025122818.168890-12-frederic.petrot@univ-grenoble-alpes.fr>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <1cbc85e2-8c83-c8f9-651c-9b49bfd923f0@linaro.org>
-Date: Sat, 30 Oct 2021 21:03:34 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=TUeeh/2B96sxOuEpU+hPnPFZ7zI/j5Btpy5swcS0LAg=;
+ b=gHNCe6YIC/gfPD0awlK76m3QYk3iKOo4PahvZiNDetYJ+uSXXSR0zbvWr5XQ41bfJ7
+ irkUNR6d2vQH01ZfCRsNC/a4kmw4Rd+FolKS/jRFiV6wsmMfL//KzFi+RbH0ZFlf33Hz
+ u/S39CYxZ6Rngj4/mgYI5JvK74IafnO4IXWU0aQWrvBZkLXTsESgAxX26I0jVK06xB1x
+ NFAi7qX2T0BmY5FN4DvnR7tvFFl0J0AQC2MUugpxP4PrSRS/+ezbHhPDKccL9tkfhaJI
+ GkfAWJGYnOKclRXBcspmunqf2VvKZvwVdOQFat1Ej7+r2Rx4zqXYVSYwgxPsLocIEG3x
+ klYQ==
+X-Gm-Message-State: AOAM5338MaHGmw0QOA9/4NoGAtw7zdRlDzKSANuq9GNNRiu05CeV4QGR
+ KqljXLsh10dHzj+0S61dbRkFNuJgplKFx62UJH0=
+X-Google-Smtp-Source: ABdhPJyTquI9XMHhNDbDaXJYjv8uEqgZUgd6nA5NV9jN7KzcJ9aHPzhRW9d7EDeecK5d+evnNT1zj3bssFTiaPnMtHE=
+X-Received: by 2002:a6b:a19:: with SMTP id z25mr16217162ioi.57.1635723347235; 
+ Sun, 31 Oct 2021 16:35:47 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20211025122818.168890-12-frederic.petrot@univ-grenoble-alpes.fr>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.426,
+References: <20211026064227.2014502-1-anup.patel@wdc.com>
+ <20211026064227.2014502-5-anup.patel@wdc.com>
+In-Reply-To: <20211026064227.2014502-5-anup.patel@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 1 Nov 2021 09:35:21 +1000
+Message-ID: <CAKmqyKP45N2+FEG5eMqocv7XbO2ZmAWJAiKy3-mf2AnCYdW_UA@mail.gmail.com>
+Subject: Re: [PATCH v4 04/22] target/riscv: Improve delivery of guest external
+ interrupts
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup@brainfault.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
-X-Mailman-Version: 2.1.23
+X-Mailman-Version: 2.1.29
 Precedence: list
 List-Id: <qemu-riscv.nongnu.org>
 List-Unsubscribe: <https://lists.nongnu.org/mailman/options/qemu-riscv>,
@@ -85,41 +76,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Oct 2021 04:03:40 -0000
+X-List-Received-Date: Sun, 31 Oct 2021 23:35:51 -0000
 
-On 10/25/21 5:28 AM, Frédéric Pétrot wrote:
-> +    if (get_xl(ctx) < MXL_RV128 || max_len < 128) {
+On Tue, Oct 26, 2021 at 5:41 PM Anup Patel <anup.patel@wdc.com> wrote:
+>
+> The guest external interrupts from an interrupt controller are
+> delivered only when the Guest/VM is running (i.e. V=1). This means
+> any guest external interrupt which is triggered while the Guest/VM
+> is not running (i.e. V=0) will be missed on QEMU resulting in Guest
+> with sluggish response to serial console input and other I/O events.
+>
+> To solve this, we check and inject interrupt after setting V=1.
+>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
 
-Only the second test is required; the first is redundant.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
->   static bool gen_shift(DisasContext *ctx, arg_r *a, DisasExtend ext,
-> -                      void (*func)(TCGv, TCGv, TCGv))
-> +                      void (*func)(TCGv, TCGv, TCGv),
-> +                      void (*f128)(TCGv, TCGv, TCGv, TCGv, TCGv))
->   {
-> -    TCGv dest = dest_gpr(ctx, a->rd);
-> -    TCGv src1 = get_gpr(ctx, a->rs1, ext);
->       TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->       TCGv ext2 = tcg_temp_new();
->   
->       tcg_gen_andi_tl(ext2, src2, get_olen(ctx) - 1);
-> -    func(dest, src1, ext2);
->   
-> -    gen_set_gpr(ctx, a->rd, dest);
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, ext);
+Alistair
+
+> ---
+>  target/riscv/cpu_helper.c | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index bb7ac9890b..04df3792a8 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -287,6 +287,19 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
+>      }
+>
+>      env->virt = set_field(env->virt, VIRT_ONOFF, enable);
 > +
-> +    if (get_xl(ctx) < MXL_RV128 || get_ol(ctx) < MXL_RV128) {
-
-Again, only one test; probably better pulling out max_len, like we did above, since now we 
-query OL twice.
-
-> +}
-> +
-> +
-
-Careful with the extra lines.
-
-
-r~
+> +    if (enable) {
+> +       /*
+> +        * The guest external interrupts from an interrupt controller are
+> +        * delivered only when the Guest/VM is running (i.e. V=1). This means
+> +        * any guest external interrupt which is triggered while the Guest/VM
+> +        * is not running (i.e. V=0) will be missed on QEMU resulting in guest
+> +        * with sluggish response to serial console input and other I/O events.
+> +        *
+> +        * To solve this, we check and inject interrupt after setting V=1.
+> +        */
+> +        riscv_cpu_update_mip(env_archcpu(env), 0, 0);
+> +    }
+>  }
+>
+>  bool riscv_cpu_force_hs_excep_enabled(CPURISCVState *env)
+> --
+> 2.25.1
+>
+>
 
