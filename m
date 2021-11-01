@@ -1,69 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhUpv-0008CC-GN
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 06:46:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40022)
+	id 1mhUwE-0004kr-Rg
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 06:53:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41448)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mhUpi-000888-7b
- for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 06:46:33 -0400
-Received: from mail-qv1-xf35.google.com ([2607:f8b0:4864:20::f35]:39915)
+ id 1mhUwE-0004ka-1M
+ for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 06:53:14 -0400
+Received: from mail-qt1-x835.google.com ([2607:f8b0:4864:20::835]:44615)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mhUpg-0005w1-FK
- for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 06:46:29 -0400
-Received: by mail-qv1-xf35.google.com with SMTP id k29so10901819qve.6
- for <qemu-riscv@nongnu.org>; Mon, 01 Nov 2021 03:46:27 -0700 (PDT)
+ id 1mhUwC-0006yB-HI
+ for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 06:53:13 -0400
+Received: by mail-qt1-x835.google.com with SMTP id j1so8157141qtq.11
+ for <qemu-riscv@nongnu.org>; Mon, 01 Nov 2021 03:53:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=uLm6eU17Tsse/uNTiLZC1F9/W+U4Z7RCU8VIDvM49NI=;
- b=DsIlxiUf3IpuohFeryMexpUZaZpJfq9cRUr0VgzN+U82+0+gjbroQJTg5NIAkAtRXw
- mULIqs6NGe9M0bOXFZC5ujOsJwq7kWnaXnMpL0ex7lRDD1s75oLl/Wkzky06RGd6rVMT
- 3yXju0nGIzCxyTIKpZQnJKF/dWRNFiAN/NOyEMGyNFafDazz2zU9PEtK8Sd7Bx5af6NJ
- 40pWUclcj3A3RRGJCDt2nCKidmf7W9If6saLPoRvcBiVcFEx+RKYB3sj6HobK3++AzAD
- yLuVzXCbWqhFzVn73Aj4myogw55dCiL7ZY0hXMaFVr9qZH43HQeUlrn8hXtzMNgBemqo
- lrOA==
+ bh=rXvxx5QqIsO5g6wQYkPmDEnA7Kg3/aj5PNhv2LTthu8=;
+ b=cX1dkjSzaBgmFZtg6vvsT+PRUHdr63swtZzMLLZm1jeONOZxqHkspLRdsMlWCQFvKN
+ T+G3oTyHvYtHSB1vnpS231JAkxxqRZDLM8XsQTigYeQvSLBsDGRuEqc85Y7sq/z3qFTK
+ vEA9dwRor6lQJ+sNovxvritJ8bSeiug+gv1m0mqF4UqzBDoT63kmT1w/8ttyD82UlFsV
+ x8bgtCdf2VxdacTLGjTKor77Z4V34/vkoX0Z1gQnyI3nqa5t81ptbxSeHXLCTjcFXwBl
+ 1y+A/3jqxkSdDZheYFlASIOajgqYxZwJDYVzh+0coNgWFpyeZDfSunnaLoTob4Liu8a/
+ OOiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=uLm6eU17Tsse/uNTiLZC1F9/W+U4Z7RCU8VIDvM49NI=;
- b=oD6f8Iz9rwIXsQ2Et2PMD1AdGrQAOSwUo5aJBo4cOgo5VL+EkJ9fRixVdCiZHUUcng
- 4aceG2HPKDPzdbmtIhGwMNJvAl2vsb1LQNOMhmVAq5frXWbjbCqqojPt6lle3F///IF8
- S3zPzHmmNyVvnhfGQj5IqQpzofkSbwyP7dfLu8RyCNf6rNnA0OcMhs4bSJt1jwj6hcmu
- /MXP9aJIJMZbu8vI8tjXhTPjLGNukxKGgP5SZi0tePZk4TZ6mU9GBUA5uH0daKY4j1xG
- sZG+AzBsqUf7vR+OvOfV5drozJQWFC+jM5ZczKuXd0JC7ZcMPniDtJ0lgli56tLc3k+C
- pebg==
-X-Gm-Message-State: AOAM533ckCcSt9eQUY2dxALUtYDZusgtGl/Ze759hJHDJUgB8Xj9WTK1
- yYviCfnKAgr+pNxLMqrN4vXdIQ==
-X-Google-Smtp-Source: ABdhPJy/TuWu7QWag3nXE/BbtD5Xg0vnJpPM0rkRxwdQYvcaHUqmS42QVPLMWozU/fJIBlvW5nxwXQ==
-X-Received: by 2002:a05:6214:234d:: with SMTP id
- hu13mr17382390qvb.7.1635763587274; 
- Mon, 01 Nov 2021 03:46:27 -0700 (PDT)
+ bh=rXvxx5QqIsO5g6wQYkPmDEnA7Kg3/aj5PNhv2LTthu8=;
+ b=K3KVBPlMUXMJFJ4rx2NEDutqr/Z+7+KAh7NOIRZ6uiducc68m2OkEKcfgAFsYMybQD
+ SxHpJePc4EfAlXSBG6lD+9x0lv+0Pg3B4njsDFTMloFHULiQZ3ZEHWbUd5ajyfBgQcRY
+ evh+cu6ZNC/oC4mFR7rSps+NDdNAU+9Zh+51ZxzhT9ikvhBg1RVWB8ODSFAFdgLXi/dJ
+ GJJSpQ2+1bKoQ4MEtpiDDKYsXUtfBmr/Qffp2YSAChd5s7KEX+nEMNNg95ZY4/ws61z0
+ 6JRdL8XEbZmUGLhc75tbClxBitB9MzRvNBKgZoC14DbyZW3aElJb1lPIio5JBrJWLXDT
+ S+wg==
+X-Gm-Message-State: AOAM533JB1oIdfFwXZ3CadjHr14MVqqfCbszGWHnoMKJZSh6hcinhqo7
+ Hbwbe7FTF/2gzwDfKo0qLmMrjA==
+X-Google-Smtp-Source: ABdhPJwHMLfB9Zj2BCpU1ubJl/Wz2TVC2Y+m8nQ3BXn7dc7X3E0gowxNXE23VMlHz3fGexJvMC4Zvw==
+X-Received: by 2002:a05:622a:290:: with SMTP id
+ z16mr28980898qtw.358.1635763991345; 
+ Mon, 01 Nov 2021 03:53:11 -0700 (PDT)
 Received: from [172.20.81.179] (rrcs-172-254-253-57.nyc.biz.rr.com.
  [172.254.253.57])
- by smtp.gmail.com with ESMTPSA id y6sm1289011qkp.116.2021.11.01.03.46.26
+ by smtp.gmail.com with ESMTPSA id r5sm1964380qkp.131.2021.11.01.03.53.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Nov 2021 03:46:26 -0700 (PDT)
-Subject: Re: [PATCH 05/13] target/riscv: Calculate address according to ol
+ Mon, 01 Nov 2021 03:53:11 -0700 (PDT)
+Subject: Re: [PATCH 06/13] target/riscv: Adjust vsetvl according to ol
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
- <20211101100143.44356-6-zhiwei_liu@c-sky.com>
+ <20211101100143.44356-7-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <a6ceb4fb-6a29-066b-23dd-114494d19e59@linaro.org>
-Date: Mon, 1 Nov 2021 06:46:25 -0400
+Message-ID: <28818784-9f70-20d4-5670-ed5677deef76@linaro.org>
+Date: Mon, 1 Nov 2021 06:53:09 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211101100143.44356-6-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211101100143.44356-7-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f35;
- envelope-from=richard.henderson@linaro.org; helo=mail-qv1-xf35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::835;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x835.google.com
 X-Spam_score_int: -26
 X-Spam_score: -2.7
 X-Spam_bar: --
@@ -83,76 +83,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2021 10:46:34 -0000
+X-List-Received-Date: Mon, 01 Nov 2021 10:53:14 -0000
 
 On 11/1/21 6:01 AM, LIU Zhiwei wrote:
->   static bool trans_fld(DisasContext *ctx, arg_fld *a)
->   {
-> -    TCGv addr;
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv addr = temp_new(ctx);
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVD);
->   
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> +    tcg_gen_addi_tl(addr, src1, a->imm);
->       addr = gen_pm_adjust_address(ctx, addr);
-
-No change here,
-
->   static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->   {
-> -    TCGv addr;
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv addr = temp_new(ctx);
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVD);
->   
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> +    tcg_gen_addi_tl(addr, src1, a->imm);
->       addr = gen_pm_adjust_address(ctx, addr);
-
-Or here.
-
->   static bool trans_flw(DisasContext *ctx, arg_flw *a)
->   {
->       TCGv_i64 dest;
-> -    TCGv addr;
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv addr = temp_new(ctx);
->   
->       REQUIRE_FPU;
->       REQUIRE_EXT(ctx, RVF);
->   
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> +    tcg_gen_addi_tl(addr, src1, a->imm);
-> +    if (ctx->ol == MXL_RV32) {
-> +        tcg_gen_ext32u_tl(addr, addr);
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -37,7 +37,7 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
+>       } else {
+>           s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
 >       }
->       addr = gen_pm_adjust_address(ctx, addr);
+> -    gen_helper_vsetvl(dst, cpu_env, s1, s2);
+> +    gen_helper_vsetvl(dst, cpu_env, s1, s2, tcg_constant_tl(get_olen(ctx)));
 
-But you did here.
+XLEN not OLEN.
 
-(1) OL is wrong, use XL.
-(2) The address adjustment should be done in some common routine.
-     Probably rename gen_pm_adjust_address to make it more generic,
-     then add the XL truncation there.
+> +        if (olen < TARGET_LONG_BITS) {
+> +            env->vtype = FIELD_DP64(0, VTYPE, VILL_OLEN32, 1);
+> +        } else {
+> +            env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+> +        }
+
+This looks like an excellent reason to split VILL out of VTYPE and create a separate 
+env->vill field.  Re-assemble it when reading the CSR, much like we do for misa.mxl.  That 
+would want to be a separate patch, of course.
 
 
 r~
