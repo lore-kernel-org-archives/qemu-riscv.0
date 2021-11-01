@@ -1,75 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhaFE-0003da-Ec
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 12:33:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44544)
+	id 1mhaP8-0001HS-BP
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 12:43:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46940)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mhaFD-0003aK-H6
- for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 12:33:11 -0400
-Received: from mail-qt1-x82d.google.com ([2607:f8b0:4864:20::82d]:34430)
+ id 1mhaP7-0001HH-55
+ for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 12:43:25 -0400
+Received: from mail-qt1-x829.google.com ([2607:f8b0:4864:20::829]:40806)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mhaFB-0006Ci-JL
- for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 12:33:11 -0400
-Received: by mail-qt1-x82d.google.com with SMTP id v17so16380794qtp.1
- for <qemu-riscv@nongnu.org>; Mon, 01 Nov 2021 09:33:09 -0700 (PDT)
+ id 1mhaP5-0001ab-GS
+ for qemu-riscv@nongnu.org; Mon, 01 Nov 2021 12:43:24 -0400
+Received: by mail-qt1-x829.google.com with SMTP id 19so14818140qtt.7
+ for <qemu-riscv@nongnu.org>; Mon, 01 Nov 2021 09:43:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=LFfgTWERa3rRZmED0KhO63xel6F2EXq2LKaDG3/fM8Q=;
- b=N9AMhn5E6URVkvgI73BVPs8oRel2PqqhpjxHkKciSGYAzWs7ZIag06d8VBTSIjjquq
- EbOzL8s71f4Bp6tIghekauYesXR826j5ST9s6gLo25TCWy08Rgmt+E56qPxemq5ycXjB
- Uvb5n98GGEXpB+a0TG9l+yPWo2fxrUYeyd+3ldahQ0wTVYLnefi6UIqB0v2egvWnGCUI
- Alfcwg24aIQZdqiVHNTOegfcwYYPX69210w1jwKYoPjQDFj2I1FdmtiylAmGNjeO9wf/
- X8+3ovWnl0CzMlZ0B/m07HsDk9g2jAVJWvheHQa0Pn2XJBZDNPfBkweDVPwc0WPgHBIQ
- xhUw==
+ bh=wT7B7bIkO0WUNtdReUKgShwQF/lGSvXRnFTTzLrv7Io=;
+ b=UYpV6ckA95mMpA/gCDpq1MjzfdgVw7lCRDVqbzTVapnM1JTumRGP746ZiVumqlD5Jp
+ FAFWTWOA8HIO/TFXUZzpeD+E13pOpjG2wSvyh0aINOr984JeQqz622rg6jPlJ8jHxraK
+ Zfb5RykQQPSVIqKKtu6IKyOaKefThdQB5vT69l+3qR7gDReX2UYbuxMoMrzPe8h1mDhG
+ FEwOQz5YrDYms2IaAGhW0oxeIcnyziexXdy9sgAZ9Fe9FfyDGX+oGy/xF1u54zOeGKl/
+ Yq9zZRqs1e3Ygt+Sgzz3h0RN+6amYYOeEN0P5Ttih4fBB6n4cfsRvORc5su5N2O5bFb7
+ 5OXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=LFfgTWERa3rRZmED0KhO63xel6F2EXq2LKaDG3/fM8Q=;
- b=4sEPHF3G8MxrwOZrLvg+AjhZfA4mSYP+0NCEO0vKG9Hi65+Kb1dtyknQmQhpVXicsD
- 7gzYSXf7nCmhcwWLgo9gT73kl+5r50tMRFouJOLOiYOjJ9KNHEb3gQgDWubN6jOLLnzS
- xmGhdGX4gYo2uCS6vFF7OKFPWKkyTM9doTVNKt1Dxn/y1lYeNmnRtDLFMbGbN3srjzTV
- xuNK8AC7kqPYfTd9+YMgmxFAGqYPbqzaKsEHBYiiq8/GzNUDZH9gBPRJHrES9eRIjL3S
- bF8aa9WXAK0wTuiOZnx7wP0P0AGA71st1t8T+n75KNVprKhRNCyZqJNiENspKbLPGo/a
- bdBA==
-X-Gm-Message-State: AOAM531/z3llpBPAhBYDx8iqhOex8jUJhTsts2s6GgFirpnhWgk1O+ss
- T6+6k/OeyYw5uxonBdhhYChDoElAENzTnw==
-X-Google-Smtp-Source: ABdhPJy3ZgPlA7Ww0lDfAPk/CziKCeU4XYgS9XC+x01jAliWcC//gAVgGapCYnZ6UAa4csnoftldMA==
-X-Received: by 2002:ac8:4159:: with SMTP id e25mr30955498qtm.69.1635784388041; 
- Mon, 01 Nov 2021 09:33:08 -0700 (PDT)
+ bh=wT7B7bIkO0WUNtdReUKgShwQF/lGSvXRnFTTzLrv7Io=;
+ b=jUILLRsTbe4KvtpKLFScZaFXE09GsYPTo8NimqPg+aDdzut9uswdy2AtU55S3hP6mo
+ 5wOIW5SDC58bp/O5kR6F1w2cPYo1NCJCEUK54XHzBh8PsgHEI/FGTGUsXJF6zo9bUyHb
+ YClqJE5L4tGWfi0zuGhWH3c8CZjfDNawfAYM8AYSeaSmyRIcr69iQc1iQMEZtjI2Wz4Q
+ OgBb4oWyDhbgrw9kXLngIPvY/gvwPAe70OnBw701r1cazzInqMPdSehn+wqlQ2AFKP6I
+ xkA8P48nFfJFgelPvJSj1s9CjMqmrG303ghIernB8NouXOMh1YTgh7rpCj4fvDMDcASE
+ kIdQ==
+X-Gm-Message-State: AOAM531FFlbfcZgxyCqCgtLU6w0r2WyvpkN/+5FOiKlhmRDC7/YPpI7K
+ 8S2ICpRi+2dlWIwUT8AJMqi2RQ==
+X-Google-Smtp-Source: ABdhPJyGyif5ok/hKg7w6PWCKGFLEhOm/ftwmuV35ar3CRpT+NQDkSh7/v1aQ8vnglGsLQ6IyE/D3A==
+X-Received: by 2002:ac8:7f13:: with SMTP id f19mr31570299qtk.294.1635785002267; 
+ Mon, 01 Nov 2021 09:43:22 -0700 (PDT)
 Received: from [172.20.81.179] (rrcs-172-254-253-57.nyc.biz.rr.com.
  [172.254.253.57])
- by smtp.gmail.com with ESMTPSA id y25sm3189875qkj.11.2021.11.01.09.33.07
+ by smtp.gmail.com with ESMTPSA id h2sm10405572qkf.106.2021.11.01.09.43.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Nov 2021 09:33:07 -0700 (PDT)
-Subject: Re: [PATCH 10/13] target/riscv: Adjust scalar reg in vector with ol
+ Mon, 01 Nov 2021 09:43:21 -0700 (PDT)
+Subject: Re: [PATCH 11/13] target/riscv: Switch context in exception return
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
- <20211101100143.44356-11-zhiwei_liu@c-sky.com>
+ <20211101100143.44356-12-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <3c57a3d2-f47d-a0d8-c209-48f002b3c91e@linaro.org>
-Date: Mon, 1 Nov 2021 12:33:05 -0400
+Message-ID: <0105910e-fd68-21ea-8ff0-36752dd0b2e7@linaro.org>
+Date: Mon, 1 Nov 2021 12:43:20 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211101100143.44356-11-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211101100143.44356-12-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82d;
- envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x82d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::829;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x829.google.com
 X-Spam_score_int: -31
 X-Spam_score: -3.2
 X-Spam_bar: ---
 X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.14,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,73 +82,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2021 16:33:11 -0000
+X-List-Received-Date: Mon, 01 Nov 2021 16:43:25 -0000
 
 On 11/1/21 6:01 AM, LIU Zhiwei wrote:
-> @@ -2677,6 +2677,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
->           /* This instruction ignores LMUL and vector register groups */
->           int maxsz = s->vlen >> 3;
->           TCGv_i64 t1;
-> +        TCGv src1 = get_gpr(s, a->rs1, EXT_ZERO);
->           TCGLabel *over = gen_new_label();
+> After excpetion return, we should give a xlen view of context in new
+> priveledge, including the general registers, pc, and CSRs.
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>   target/riscv/helper.h                         |  1 +
+>   .../riscv/insn_trans/trans_privileged.c.inc   |  2 ++
+>   target/riscv/op_helper.c                      | 26 +++++++++++++++++++
+>   3 files changed, 29 insertions(+)
+> 
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index e198d43981..9b379d7232 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -71,6 +71,7 @@ DEF_HELPER_2(sret, tl, env, tl)
+>   DEF_HELPER_2(mret, tl, env, tl)
+>   DEF_HELPER_1(wfi, void, env)
+>   DEF_HELPER_1(tlb_flush, void, env)
+> +DEF_HELPER_1(switch_context_xl, void, env)
+>   #endif
 >   
->           tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> @@ -2686,7 +2687,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
->           }
+>   /* Hypervisor functions */
+> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+> index 75c6ef80a6..6e39632f83 100644
+> --- a/target/riscv/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
+> @@ -78,6 +78,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
 >   
->           t1 = tcg_temp_new_i64();
-> -        tcg_gen_extu_tl_i64(t1, cpu_gpr[a->rs1]);
-> +        tcg_gen_extu_tl_i64(t1, src1);
->           vec_element_storei(s, a->rd, 0, t1);
->           tcg_temp_free_i64(t1);
->       done:
+>       if (has_ext(ctx, RVS)) {
+>           gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
+> +        gen_helper_switch_context_xl(cpu_env);
+>           tcg_gen_exit_tb(NULL, 0); /* no chaining */
+>           ctx->base.is_jmp = DISAS_NORETURN;
+>       } else {
+> @@ -94,6 +95,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+>   #ifndef CONFIG_USER_ONLY
+>       tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+>       gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
+> +    gen_helper_switch_context_xl(cpu_env);
+>       tcg_gen_exit_tb(NULL, 0); /* no chaining */
+>       ctx->base.is_jmp = DISAS_NORETURN;
+>       return true;
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index ee7c24efe7..20cf8ad883 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -70,6 +70,32 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
+>   }
+>   
+>   #ifndef CONFIG_USER_ONLY
+> +void helper_switch_context_xl(CPURISCVState *env)
+> +{
+> +    RISCVMXL xl = cpu_get_xl(env);
+> +    if (xl == env->misa_mxl_max) {
+> +        return;
+> +    }
+> +    assert(xl < env->misa_mxl_max);
+> +    switch (xl) {
+> +    case MXL_RV32:
+> +        for (int i = 1; i < 32; i++) {
+> +            env->gpr[i] = (int32_t)env->gpr[i];
+> +        }
 
-This isn't actually correct.  Or, may have been correct for the 0.7.1 revision, but the 
-rvv 1.0 revision has a sign-extend here.
+I think this is wrong.  As I read the spec, the new context ignores high bits and writes 
+sign-extended values, but registers that are not written should not be changed.
 
-This probably shouldn't be touched until the rvv 1.0 patch set comes in.
+I think that a unit test with SXLEN == 64 and UXLEN == 32, where the U-mode program 
+executes only the ECALL instruction, should leave the high 32 bits of all gprs unchanged 
+on re-entry to S-mode.
 
+> +        env->pc = (int32_t)env->pc;
 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 451688c328..5bdbbf7c71 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -4763,6 +4763,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->       uint32_t mlen = vext_mlen(desc);                                      \
->       uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
->       uint32_t vm = vext_vm(desc);                                          \
-> +    uint32_t olen = 16 << vext_ol(desc);                                  \
->       uint32_t vl = env->vl;                                                \
->       uint32_t i;                                                           \
->                                                                             \
-> @@ -4771,7 +4772,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->               continue;                                                     \
->           }                                                                 \
->           if (i == 0) {                                                     \
-> -            *((ETYPE *)vd + H(i)) = s1;                                   \
-> +            *((ETYPE *)vd + H(i)) = adjust_addr(s1, olen);                \
->           } else {                                                          \
->               *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
->           }                                                                 \
-> @@ -4792,6 +4793,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->       uint32_t mlen = vext_mlen(desc);                                      \
->       uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
->       uint32_t vm = vext_vm(desc);                                          \
-> +    uint32_t olen = 16 << vext_ol(desc);                                  \
->       uint32_t vl = env->vl;                                                \
->       uint32_t i;                                                           \
->                                                                             \
-> @@ -4800,7 +4802,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->               continue;                                                     \
->           }                                                                 \
->           if (i == vl - 1) {                                                \
-> -            *((ETYPE *)vd + H(i)) = s1;                                   \
-> +            *((ETYPE *)vd + H(i)) = adjust_addr(s1, olen);                \
->           } else {                                                          \
->               *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + 1));           \
->           }                                                                 \
+I think this will happen naturally via patch 3.
 
-What in the world is this?  S1 is not an address, it's just a value from X[RS1].
+> +        /*
+> +         * For the read-only bits of the previous-width CSR, the bits at the
+> +         * same positions in the temporary register are set to zeros.
+> +         */
+> +        if ((env->priv == PRV_U) && (env->misa_ext & RVV)) {
+> +            env->vl = 0;
+> +            env->vtype = 0;
+> +        }
+
+I don't understand this.  The return from the S-mode interrupt handler to the U-mode 
+program should preserve the U-mode VTYPE.
 
 
 r~
