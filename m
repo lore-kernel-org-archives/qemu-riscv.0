@@ -1,57 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhRBl-0002ye-36
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 02:53:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50088)
+	id 1mhRF1-0004sy-Gu
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 02:56:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50508)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mhRBi-0002yP-QG; Mon, 01 Nov 2021 02:52:58 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:34553)
+ id 1mhREz-0004se-Nj; Mon, 01 Nov 2021 02:56:21 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:35537)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mhRBf-0006Rm-MD; Mon, 01 Nov 2021 02:52:58 -0400
-Received: by mail-il1-x12c.google.com with SMTP id j28so11045571ila.1;
- Sun, 31 Oct 2021 23:52:54 -0700 (PDT)
+ id 1mhREx-0008UP-HF; Mon, 01 Nov 2021 02:56:21 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id 62so12903154iou.2;
+ Sun, 31 Oct 2021 23:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VQH/THpJDcMUNqxUgMLhlp1mvyPHmHwIXU71tf1IL9I=;
- b=D1uPGjOnAGt1xlkoZ0CjBX05lPrBeGlEPdT3X3CnTeZVWl35YR1qWNla7QGFRTGJHl
- v/++1IcReDx0GEUH1gUYpTkqwiPFczHC8F58dGViWTiOG/NrWVOVxLrHKFH+LtGF5YGk
- dxTt75ZPdyAmPOtwOzxJhCUtTjO9FsGHaXpn91rF1MK7AuuhROtN+N+Sx4oK7nfEfP9e
- upT5ClwPPPeGSqpKmWErX7TFI6I1GwNjUFhVZpRLyZTL0jbMW+5RNi6/lI8pPdYt5k+4
- bIABznMiqWF2NI7/s08TFIdWlKCOEhxgnMJF450sWiPmTYkH8jbiJ/NygSIlJxid8vBH
- KMXA==
+ :cc; bh=v27AjKMx8U/YHCCYvXdEzsizdoYKrCm6YNtjSwb595E=;
+ b=pvylne3xjdh23MiPrVWi8nGvaT7Noo0bEtQ4UVoGcHDIUbGlREU6ba4dV4iCmJ6hTw
+ cIMzg9CwqmV6lz2W8K/QecQg4/H0/YF3hIKLGA+bIGF+EDmNCIGIffFHO9VlzHaza2I6
+ 43AVhqhHrll8WrywNbLKqoGycpyJBqpOTVP97JMD1hWBEOL1ZcCNDuRGNL707KzZ6e37
+ uNqIuWMbiM28+jKhPKmX1jody+UaxIL2ZyijFmKYtzP7mRBbCqvf25l5Mj8oiWTqKMjy
+ 1srVnj72Qc4qATDw4MU3s+rUlwsEw54kYQf83ojdGVDfHv/1OV0YCZDXOSCHQtMqPpcC
+ PElA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=VQH/THpJDcMUNqxUgMLhlp1mvyPHmHwIXU71tf1IL9I=;
- b=cLT0rZr4WyAgF3MWTB1CUuZvLrxwt0ZwSFrYtpcf0eHD7zZuEuDgZ+Aoo0aTxQy5+W
- f5cCFYRBU0SdKbBIvoErlVUg/3MD5prYs571yVSlx2nTSTI6/1bO1Aq0LdXySwIzwfBq
- qvK0ASMMfD7jqElq4j9JXTFvJbmL8Lnr2FQ94gf8XOGjZSigKVZAZjx5YhPCPFsZoIJe
- kx5+enuCAKy7JnVvMWfblOZm5IlU9GdLs7fEdMKGlJaXo+kaVD+Ii62j4rsDD268jgYR
- D8wkC0VyZGSAATtwHCY0Wz2KCQW5Gc3rw6ddNFnkmfe4b5lsEiXfJ/4Fi3J1gi2Ke+0a
- UNKQ==
-X-Gm-Message-State: AOAM531JDUdkQB/uEczYeYPxQ+P8dDolxcdJi4Rir29VHhv7pFVu8DUv
- uA5r/Ax2d4+1jiy2tIAUvsfeDKXEg5WFFJkF8uE=
-X-Google-Smtp-Source: ABdhPJzEa03Qs85lvqaBNXWjPFs09OTlW3TMQuLztr+B1ly8znt272TEmGRFR/mr2oq0FZMjV5Cg6Oj0PQR8r4/Hrno=
-X-Received: by 2002:a05:6e02:1402:: with SMTP id
- n2mr18923825ilo.208.1635749573604; 
- Sun, 31 Oct 2021 23:52:53 -0700 (PDT)
+ bh=v27AjKMx8U/YHCCYvXdEzsizdoYKrCm6YNtjSwb595E=;
+ b=kXyhmPhWzQY+9x2m/rdq22A4Me+HigFv/+3fo29Hy6ThLGFN3WJo9LH9SyX4N2K3y1
+ eij8WByY0ZuGWn+33w1a0A4JGs08kX3Ddcth5DdYCJJIEy4vByIIRdVNkp1zkgvX1CXu
+ azuFMSxsvotpgOAJRyMBtWQbppGQZasA3jpv1tloDH2LKShEiWmj/2MQvpjbkAX0Fw8N
+ krlN9+Tr7Gj9lrVQnjZIIWiCQjgjIAnsVeRDLQeq2egcF7IhR3Q/NeascU7HufMkea0p
+ ZONNKVFbMRYow+hG+TtXWGdAbuKG7OKMRdeIRzbDh5jZX3h5L/2hTpvtiTAMUoAyAsYi
+ xRlg==
+X-Gm-Message-State: AOAM532xCIzTXgpapeZoGKVpOZzQclXUIO4HG7T+H1WUfZJfwf0NRWOa
+ Qic6QlOqH3lo3zCJPy5NZZOWfZIAfTQ7E9srOOw=
+X-Google-Smtp-Source: ABdhPJyGcYRDocJCYEjvBwj0nKoNbABzDPzWPAyITiMJBxlKxLtXueuFe4qwicH7Nbt89CloCGv/iTMvf9/kKcIn6Mk=
+X-Received: by 2002:a05:6638:329e:: with SMTP id
+ f30mr18546818jav.63.1635749778042; 
+ Sun, 31 Oct 2021 23:56:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211030030606.32297-1-bmeng.cn@gmail.com>
-In-Reply-To: <20211030030606.32297-1-bmeng.cn@gmail.com>
+References: <20211026064227.2014502-1-anup.patel@wdc.com>
+ <20211026064227.2014502-8-anup.patel@wdc.com>
+In-Reply-To: <20211026064227.2014502-8-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 1 Nov 2021 16:52:27 +1000
-Message-ID: <CAKmqyKMHzqfyTN4AzACe_-j+1+FrcrvaPmcYTrAOubFuQJoaUQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: machine: Sort the .subsections
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
+Date: Mon, 1 Nov 2021 16:55:52 +1000
+Message-ID: <CAKmqyKOyTR1RX4k3Eq-YmcuWRsxVu5J=o-_eQeU6Ht1TUEUEBA@mail.gmail.com>
+Subject: Re: [PATCH v4 07/22] target/riscv: Add defines for AIA CSRs
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup@brainfault.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
+ Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -72,151 +76,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2021 06:52:59 -0000
+X-List-Received-Date: Mon, 01 Nov 2021 06:56:22 -0000
 
-On Sat, Oct 30, 2021 at 1:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, Oct 26, 2021 at 5:01 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> The RISC-V AIA specification extends RISC-V local interrupts and
+> introduces new CSRs. This patch adds defines for the new AIA CSRs.
 >
-> Move the codes around so that the order of .subsections matches
-> the one they are referenced in vmstate_riscv_cpu.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+What's the status of these CSR addresses being finalised?
 
 Alistair
-
-> ---
->
->  target/riscv/machine.c | 92 +++++++++++++++++++++---------------------
->  1 file changed, 46 insertions(+), 46 deletions(-)
->
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 7b4c739564..ad8248ebfd 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -76,20 +76,50 @@ static bool hyper_needed(void *opaque)
->      return riscv_has_ext(env, RVH);
->  }
->
-> -static bool vector_needed(void *opaque)
-> -{
-> -    RISCVCPU *cpu = opaque;
-> -    CPURISCVState *env = &cpu->env;
-> +static const VMStateDescription vmstate_hyper = {
-> +    .name = "cpu/hyper",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = hyper_needed,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINTTL(env.hstatus, RISCVCPU),
-> +        VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
-> +        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
-> +        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
-> +        VMSTATE_UINTTL(env.htval, RISCVCPU),
-> +        VMSTATE_UINTTL(env.htinst, RISCVCPU),
-> +        VMSTATE_UINTTL(env.hgatp, RISCVCPU),
-> +        VMSTATE_UINT64(env.htimedelta, RISCVCPU),
->
-> -    return riscv_has_ext(env, RVV);
-> -}
-> +        VMSTATE_UINT64(env.vsstatus, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vstvec, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vsepc, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vscause, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vstval, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vsatp, RISCVCPU),
->
-> -static bool pointermasking_needed(void *opaque)
-> +        VMSTATE_UINTTL(env.mtval2, RISCVCPU),
-> +        VMSTATE_UINTTL(env.mtinst, RISCVCPU),
-> +
-> +        VMSTATE_UINTTL(env.stvec_hs, RISCVCPU),
-> +        VMSTATE_UINTTL(env.sscratch_hs, RISCVCPU),
-> +        VMSTATE_UINTTL(env.sepc_hs, RISCVCPU),
-> +        VMSTATE_UINTTL(env.scause_hs, RISCVCPU),
-> +        VMSTATE_UINTTL(env.stval_hs, RISCVCPU),
-> +        VMSTATE_UINTTL(env.satp_hs, RISCVCPU),
-> +        VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
-> +
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static bool vector_needed(void *opaque)
->  {
->      RISCVCPU *cpu = opaque;
->      CPURISCVState *env = &cpu->env;
->
-> -    return riscv_has_ext(env, RVJ);
-> +    return riscv_has_ext(env, RVV);
->  }
->
->  static const VMStateDescription vmstate_vector = {
-> @@ -108,6 +138,14 @@ static const VMStateDescription vmstate_vector = {
->          }
->  };
->
-> +static bool pointermasking_needed(void *opaque)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    return riscv_has_ext(env, RVJ);
-> +}
-> +
->  static const VMStateDescription vmstate_pointermasking = {
->      .name = "cpu/pointer_masking",
->      .version_id = 1,
-> @@ -126,44 +164,6 @@ static const VMStateDescription vmstate_pointermasking = {
->      }
->  };
->
-> -static const VMStateDescription vmstate_hyper = {
-> -    .name = "cpu/hyper",
-> -    .version_id = 1,
-> -    .minimum_version_id = 1,
-> -    .needed = hyper_needed,
-> -    .fields = (VMStateField[]) {
-> -        VMSTATE_UINTTL(env.hstatus, RISCVCPU),
-> -        VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
-> -        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
-> -        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
-> -        VMSTATE_UINTTL(env.htval, RISCVCPU),
-> -        VMSTATE_UINTTL(env.htinst, RISCVCPU),
-> -        VMSTATE_UINTTL(env.hgatp, RISCVCPU),
-> -        VMSTATE_UINT64(env.htimedelta, RISCVCPU),
-> -
-> -        VMSTATE_UINT64(env.vsstatus, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vstvec, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vsepc, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vscause, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vstval, RISCVCPU),
-> -        VMSTATE_UINTTL(env.vsatp, RISCVCPU),
-> -
-> -        VMSTATE_UINTTL(env.mtval2, RISCVCPU),
-> -        VMSTATE_UINTTL(env.mtinst, RISCVCPU),
-> -
-> -        VMSTATE_UINTTL(env.stvec_hs, RISCVCPU),
-> -        VMSTATE_UINTTL(env.sscratch_hs, RISCVCPU),
-> -        VMSTATE_UINTTL(env.sepc_hs, RISCVCPU),
-> -        VMSTATE_UINTTL(env.scause_hs, RISCVCPU),
-> -        VMSTATE_UINTTL(env.stval_hs, RISCVCPU),
-> -        VMSTATE_UINTTL(env.satp_hs, RISCVCPU),
-> -        VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
-> -
-> -        VMSTATE_END_OF_LIST()
-> -    }
-> -};
-> -
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
->      .version_id = 3,
-> --
-> 2.25.1
->
->
 
