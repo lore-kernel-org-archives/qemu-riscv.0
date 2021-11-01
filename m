@@ -1,68 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhTA2-0004e7-Km
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 04:59:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42434)
+	id 1mhU8e-0001T9-Sf
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 06:02:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mhTA1-0004du-UW; Mon, 01 Nov 2021 04:59:21 -0400
-Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:37562)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mhT9z-0005FW-1k; Mon, 01 Nov 2021 04:59:21 -0400
-Received: by mail-yb1-xb2b.google.com with SMTP id d204so42897167ybb.4;
- Mon, 01 Nov 2021 01:59:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Te13DGIcy1aGp3eHDRMCeD23kvRA1qid/+2R26IZqvU=;
- b=T4cCbegjaou9UKtkccAB5II6AUOjCkvkQ35wPJQMsVHrcfJ7ygQlL2Xr/TtfHIqnMA
- 50NuNCqmGVhBueILi6wjBL0X9cbibWjrzefuK+5617SF5k6uTdZRBjjPgzaswl4rjF/X
- C/6fhABWqfWH7mFuaTBsfeZEoTENWR8Ef/6ph4z5quLG0+KC4M3tTqUJjYVse9zkIEjy
- fI3IbJxm5kj4Se77WNxU7569S+Kh3MPXhbpuplqIIdCyYgBAOLM9+FaQwO02Yo4yEvzm
- FQXRv0xp05P0anTmrLSBx0NYgthXpi5I8teqk0RBuQckjOXXZorbEbhgCbya2iouX9iX
- EYYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Te13DGIcy1aGp3eHDRMCeD23kvRA1qid/+2R26IZqvU=;
- b=0IaSj/NcdjjtEBlE8b1NAuOmmK7FLJh34XWVq3v0Ku+lQSFCy6g6XUaaD5evrp7lEL
- 6JZ82oVz0ECrvl250cxsy0S2IMnCjjAlDSI0cDpPta75g0d3NVBzlWgt0MByuP+5vM7l
- 800bkxxyZ67ClmqdHqseM9NUoa6Xfv4t1/ElUEiqR8Ezzz9gAVFjfiT9zUb+dyvOnF0y
- Q9CW6YFfu08pGdXnqw5eQBu8t7MXzol7d3f8nGPDeYyxsFC3Wsink0kF16KU+rBOvhzD
- PIobW/qJ/tpK29hXtDXKSgcN8HwHCNcTEfno5LLxrfSXlkH48GQHXEyBlJVUx05hkqF7
- ewoA==
-X-Gm-Message-State: AOAM533y9UcHHU/25R5mlwdH/dICNFuQ58fmXYfwSXCUbbPUAeYPWMt5
- 6xJvHQgLPabMH1jHi0S4xvmi98u5xt1YL9lOuGQ=
-X-Google-Smtp-Source: ABdhPJzCd+xa1QsOLv0mK6rbMY5PNDxbnq/mtbKf2sqX3ePDtgmQm1KsnHl+EdZyTyY1t2XEKzbRGXZ2VmihvodTTpk=
-X-Received: by 2002:a25:258c:: with SMTP id l134mr4812984ybl.40.1635757157866; 
- Mon, 01 Nov 2021 01:59:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mhU8c-0001JJ-O0; Mon, 01 Nov 2021 06:01:58 -0400
+Received: from out28-125.mail.aliyun.com ([115.124.28.125]:33464)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mhU8Z-0001Tc-KW; Mon, 01 Nov 2021 06:01:58 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1974241|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0477632-0.0024249-0.949812;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LlcGtUT_1635760905; 
+Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.LlcGtUT_1635760905)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Mon, 01 Nov 2021 18:01:47 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH 03/13] target/riscv: Ignore the pc bits above XLEN
+Date: Mon,  1 Nov 2021 18:01:33 +0800
+Message-Id: <20211101100143.44356-4-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
+References: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
-References: <20211026064227.2014502-1-anup.patel@wdc.com>
- <20211026064227.2014502-2-anup.patel@wdc.com>
-In-Reply-To: <20211026064227.2014502-2-anup.patel@wdc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 1 Nov 2021 16:59:06 +0800
-Message-ID: <CAEUhbmWOwJw8RoNaKXQQWWSnNLGMqhz8DXSCO+bMBR3qD9-fAQ@mail.gmail.com>
-Subject: Re: [PATCH v4 01/22] target/riscv: Fix trap cause for RV32 HS-mode
- CSR access from RV64 HS-mode
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atish.patra@wdc.com>, Anup Patel <anup@brainfault.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
-X-Spam_score_int: -1
-X-Spam_score: -0.2
-X-Spam_bar: /
-X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=115.124.28.125; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-125.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,20 +50,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2021 08:59:22 -0000
+X-List-Received-Date: Mon, 01 Nov 2021 10:01:59 -0000
 
-On Tue, Oct 26, 2021 at 2:43 PM Anup Patel <anup.patel@wdc.com> wrote:
->
-> We should be returning illegal instruction trap when RV64 HS-mode tries
-> to access RV32 HS-mode CSR.
->
-> Fixes: d6f20dacea51 ("target/riscv: Fix 32-bit HS mode access permissions")
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+The read from PC for translation is in cpu_get_tb_cpu_state, before translation.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/cpu_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 7d0aee6769..eb425d74d2 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -71,7 +71,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+ {
+     uint32_t flags = 0;
+ 
+-    *pc = env->pc;
++    *pc = cpu_get_xl(env) == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+     *cs_base = 0;
+ 
+     if (riscv_has_ext(env, RVV)) {
+-- 
+2.25.1
+
 
