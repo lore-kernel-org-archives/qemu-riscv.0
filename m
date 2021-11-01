@@ -1,38 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhU8j-0001gJ-GE
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 06:02:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57066)
+	id 1mhU8k-0001iN-03
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Nov 2021 06:02:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57118)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mhU8f-0001XP-Sf; Mon, 01 Nov 2021 06:02:01 -0400
-Received: from out28-148.mail.aliyun.com ([115.124.28.148]:45944)
+ id 1mhU8i-0001em-Ry; Mon, 01 Nov 2021 06:02:04 -0400
+Received: from out28-221.mail.aliyun.com ([115.124.28.221]:51224)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mhU8Z-0001Tj-QQ; Mon, 01 Nov 2021 06:02:01 -0400
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436282|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.00882658-4.93081e-06-0.991168;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047209; MF=zhiwei_liu@c-sky.com; NM=1;
+ id 1mhU8b-0001VG-Eb; Mon, 01 Nov 2021 06:02:04 -0400
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07459467|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0131972-0.000673861-0.986129;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047213; MF=zhiwei_liu@c-sky.com; NM=1;
  PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LlcGtUT_1635760905; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
  fp:SMTPD_---.LlcGtUT_1635760905)
  by smtp.aliyun-inc.com(10.147.43.230);
- Mon, 01 Nov 2021 18:01:47 +0800
+ Mon, 01 Nov 2021 18:01:50 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 05/13] target/riscv: Calculate address according to ol
-Date: Mon,  1 Nov 2021 18:01:35 +0800
-Message-Id: <20211101100143.44356-6-zhiwei_liu@c-sky.com>
+Subject: [PATCH 12/13] target/riscv: Don't save pc when exception return
+Date: Mon,  1 Nov 2021 18:01:42 +0800
+Message-Id: <20211101100143.44356-13-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
 References: <20211101100143.44356-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.148; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-148.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.221; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-221.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -51,152 +50,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Nov 2021 10:02:02 -0000
+X-List-Received-Date: Mon, 01 Nov 2021 10:02:05 -0000
+
+As pc will be written by the xepc in exception return, just ignore
+pc in translation.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/insn_trans/trans_rvd.c.inc | 20 ++++++--------------
- target/riscv/insn_trans/trans_rvf.c.inc | 21 ++++++++-------------
- target/riscv/insn_trans/trans_rvi.c.inc | 21 ++++++++++-----------
- 3 files changed, 24 insertions(+), 38 deletions(-)
+ target/riscv/helper.h                          | 4 ++--
+ target/riscv/insn_trans/trans_privileged.c.inc | 7 ++-----
+ target/riscv/op_helper.c                       | 4 ++--
+ 3 files changed, 6 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-index 64fb0046f7..70317691c9 100644
---- a/target/riscv/insn_trans/trans_rvd.c.inc
-+++ b/target/riscv/insn_trans/trans_rvd.c.inc
-@@ -20,17 +20,13 @@
- 
- static bool trans_fld(DisasContext *ctx, arg_fld *a)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 9b379d7232..34c57a6083 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -67,8 +67,8 @@ DEF_HELPER_2(csrr, tl, env, int)
+ DEF_HELPER_3(csrw, void, env, int, tl)
+ DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
+ #ifndef CONFIG_USER_ONLY
+-DEF_HELPER_2(sret, tl, env, tl)
+-DEF_HELPER_2(mret, tl, env, tl)
++DEF_HELPER_1(sret, tl, env)
++DEF_HELPER_1(mret, tl, env)
+ DEF_HELPER_1(wfi, void, env)
+ DEF_HELPER_1(tlb_flush, void, env)
+ DEF_HELPER_1(switch_context_xl, void, env)
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 6e39632f83..cf6dc98888 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -74,10 +74,8 @@ static bool trans_uret(DisasContext *ctx, arg_uret *a)
+ static bool trans_sret(DisasContext *ctx, arg_sret *a)
  {
--    TCGv addr;
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
- 
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    addr = get_gpr(ctx, a->rs1, EXT_NONE);
--    if (a->imm) {
--        TCGv temp = temp_new(ctx);
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
--    }
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-     addr = gen_pm_adjust_address(ctx, addr);
- 
-     tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEQ);
-@@ -41,17 +37,13 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
- 
- static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
- {
--    TCGv addr;
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
- 
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVD);
- 
--    addr = get_gpr(ctx, a->rs1, EXT_NONE);
--    if (a->imm) {
--        TCGv temp = temp_new(ctx);
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
--    }
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-     addr = gen_pm_adjust_address(ctx, addr);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEQ);
-diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-index b5459249c4..08fa83df7e 100644
---- a/target/riscv/insn_trans/trans_rvf.c.inc
-+++ b/target/riscv/insn_trans/trans_rvf.c.inc
-@@ -26,16 +26,15 @@
- static bool trans_flw(DisasContext *ctx, arg_flw *a)
- {
-     TCGv_i64 dest;
--    TCGv addr;
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
- 
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
--    addr = get_gpr(ctx, a->rs1, EXT_NONE);
--    if (a->imm) {
--        TCGv temp = temp_new(ctx);
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-+    if (ctx->ol == MXL_RV32) {
-+        tcg_gen_ext32u_tl(addr, addr);
-     }
-     addr = gen_pm_adjust_address(ctx, addr);
- 
-@@ -49,17 +48,13 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
- 
- static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
- {
--    TCGv addr;
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
- 
-     REQUIRE_FPU;
-     REQUIRE_EXT(ctx, RVF);
- 
--    addr = get_gpr(ctx, a->rs1, EXT_NONE);
--    if (a->imm) {
--        TCGv temp = tcg_temp_new();
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
--    }
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-     addr = gen_pm_adjust_address(ctx, addr);
- 
-     tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index e51dbc41c5..bd9d50bb94 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -137,12 +137,12 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
- static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-     TCGv dest = dest_gpr(ctx, a->rd);
--    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
- 
--    if (a->imm) {
--        TCGv temp = temp_new(ctx);
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-+    if (ctx->ol == MXL_RV32) {
-+        tcg_gen_ext32u_tl(addr, addr);
-     }
-     addr = gen_pm_adjust_address(ctx, addr);
- 
-@@ -178,16 +178,15 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- 
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
--    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv addr = temp_new(ctx);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
- 
--    if (a->imm) {
--        TCGv temp = temp_new(ctx);
--        tcg_gen_addi_tl(temp, addr, a->imm);
--        addr = temp;
-+    tcg_gen_addi_tl(addr, src1, a->imm);
-+    if (ctx->ol == MXL_RV32) {
-+        tcg_gen_ext32u_tl(addr, addr);
-     }
-     addr = gen_pm_adjust_address(ctx, addr);
+ #ifndef CONFIG_USER_ONLY
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
 -
-     tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-     return true;
+     if (has_ext(ctx, RVS)) {
+-        gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
++        gen_helper_sret(cpu_pc, cpu_env);
+         gen_helper_switch_context_xl(cpu_env);
+         tcg_gen_exit_tb(NULL, 0); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+@@ -93,8 +91,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+-    gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
++    gen_helper_mret(cpu_pc, cpu_env);
+     gen_helper_switch_context_xl(cpu_env);
+     tcg_gen_exit_tb(NULL, 0); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 20cf8ad883..3ce2767ccf 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -97,7 +97,7 @@ void helper_switch_context_xl(CPURISCVState *env)
+     }
  }
+ 
+-target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
++target_ulong helper_sret(CPURISCVState *env)
+ {
+     uint64_t mstatus;
+     target_ulong prev_priv, prev_virt;
+@@ -158,7 +158,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     return retpc;
+ }
+ 
+-target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
++target_ulong helper_mret(CPURISCVState *env)
+ {
+     if (!(env->priv >= PRV_M)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
 -- 
 2.25.1
 
