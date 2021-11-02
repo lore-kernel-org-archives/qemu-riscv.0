@@ -1,62 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mhuS4-0000VF-2M
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Nov 2021 10:07:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40876)
+	id 1mhucj-000768-Vf
+	for mharc-qemu-riscv@gnu.org; Tue, 02 Nov 2021 10:18:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44648)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mhuS0-0000Qq-Im
- for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 10:07:45 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:45049)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mhucf-00073B-D0
+ for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 10:18:45 -0400
+Received: from mail-qt1-x830.google.com ([2607:f8b0:4864:20::830]:42832)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mhuRv-0003Mm-P2
- for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 10:07:43 -0400
-Received: by mail-io1-xd33.google.com with SMTP id f9so25510951ioo.11
- for <qemu-riscv@nongnu.org>; Tue, 02 Nov 2021 07:07:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=l6V0W2c76xs63O23tX3vhfV4kcHeEX1s9fXQ89bj7Q8=;
- b=AsPqOT17cPWwSTWFC/Qg8tYYEQ+6Ia5LxpVpmi2YKYqoGDc1+LHV92e6jIu4sgYkHJ
- Zp1gKg/VcJJ3MgESA3z38nYgUNEfESy07HV9QcJ30M5izdgRqqVFBV0RPZa/ZwbnwSIg
- 80wuVxp84tVexhDL/9YhoD5i27hCGCYTsKV+9xZjgWemy0vzIsyes7WMy7aLFBbu+poX
- a0i9YIk5Noya0r/IrDxhWsiyrrDirFrb1PR8GhlGMsRPwoqcirBl0Q7uSiT8E9kJvnHk
- haEINo8L9k7f9MskkmTR66v02/LIxBt2/yOuGc9W17kT7/S2zykA9EWs3JZTpxLAjJiH
- 2mJw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mhucb-0000F0-Of
+ for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 10:18:44 -0400
+Received: by mail-qt1-x830.google.com with SMTP id v22so1331307qtk.9
+ for <qemu-riscv@nongnu.org>; Tue, 02 Nov 2021 07:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=Kd2SPiXASBwKXl86rw6IF5tG3+g34jyaFFEDoAq8G6k=;
+ b=s3n76GHLGAMxMka4QLwNPASd13Jlt1IDI3rr5aoG8CdvitiyfXgd+wWVNo8MBNxq0Z
+ uAcKpKpMfgVYsZYx3IgixMh/Up9tRVJjNIAJJVb48lr5ZRT2BtfxNUMYP2RS4fx8rqbP
+ qwOEGTjVivWx9Bes8vRpEZpYkfEopmEHjqqMRFOnYRfeqRPCOkyUtiETftjieNivci56
+ /7xtJzZeIhLEbD3Wb+44PJRdikfkXSLBBU81sIURu0PMnkQTYm9PhHFwqmp/XfLbJUeh
+ 3HzyyhYXgKk1TBF2hDxCYnac6AxDvHfR/H/yVA+VpB161wZ0klP0GKAJA1soYF5mCfCp
+ 9eVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=l6V0W2c76xs63O23tX3vhfV4kcHeEX1s9fXQ89bj7Q8=;
- b=6vVRp/9WzP1DxFYBSkf+nVQKfamgiqujqI/QoCHJfh+LCmgD59u5HrNxS3NKt59TFy
- m0974f3zfrxs2auNA9v6SyoPFVBMAVpw3CsoKjGbKC0yoYZQb7UZ10700Jui+iFeqzjv
- sFqHxz6b7/G9+dNfqEX/LWxE8ygOlT+xj//xzGn+xfB2661HRIa0e7K1gr3hWmgPlQvX
- E6Np13D+nF2MFAhnSS//ifyRp2+yzxuSnYOGwTwUmzXqDbh7CFfY/yqrlahGHubLDUTc
- hGyTeda7oTwtGhscX7BK9LBYzd1XV14zkfVPpZ09jDCxt413kfaOpzJOWGcoSY5wN5Ob
- VfQA==
-X-Gm-Message-State: AOAM533Z66w3bSq7Ijg7gRMwQSUySaEKUCPht2Q05+YDwmW6uS3WHUv2
- A51hOVNfu+54cZOeiz1wr6T7dx3+PLkJBFg1PfaRgZrVOzVh5Q==
-X-Google-Smtp-Source: ABdhPJyUSeBazosqGq6lPYydjcyhKPjTGnw691zdhysUWCzR5lk5L8gxC0u5z0fLoRz08pQxwyF4f8XX46ZzmgcjZz8=
-X-Received: by 2002:a05:6602:1583:: with SMTP id
- e3mr2997433iow.112.1635862056538; 
- Tue, 02 Nov 2021 07:07:36 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Kd2SPiXASBwKXl86rw6IF5tG3+g34jyaFFEDoAq8G6k=;
+ b=pYUmrvnKLkTaDJuKxLzetF5Mjxg/BwbNjAXclttoM92ybIBUCNd/iedJC7yxW/O/Be
+ 6vgnanK8WFsSxwEOE2Je29NmQ2x3qM582uRfm6PYiTA077xiBiG5u1zEzQGa/hvD0WFh
+ OlHceKzHV27QED3o2Sd+rXq4aPCyUAQ6iJjobYSFkKh/9nZcAWbWuPy0uBp453KjyfeB
+ BqAWvq1ZU8zqTbM9EIuoJUwjNuwBkJPoKvC8tB49vfb1ttA5PJ1aO+Z9j51AI6H5L0Z0
+ AmhDV0S3CPXZnHeIGXgAsHb6LPFHcMLiGg/xez84jhS/0CTI1637FrrHudSqeSn53wD7
+ xAlg==
+X-Gm-Message-State: AOAM533vekvl3KTW/zuXVX8xnj0CJTA4glStlD8D0fsI3K0X+my+nuTW
+ 6hOxjLG93AChs5UwENegZyU69w==
+X-Google-Smtp-Source: ABdhPJwTeEdoYD+8Tq7Abhq4so8MVDrc8G+V0HqLRONUjuhqNCiYJ3f9VsLAdTlGWgdLUGYfSfzTBA==
+X-Received: by 2002:ac8:7d4f:: with SMTP id h15mr17139440qtb.336.1635862720685; 
+ Tue, 02 Nov 2021 07:18:40 -0700 (PDT)
+Received: from [172.20.81.179] (rrcs-172-254-253-57.nyc.biz.rr.com.
+ [172.254.253.57])
+ by smtp.gmail.com with ESMTPSA id h14sm8293710qth.23.2021.11.02.07.18.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Nov 2021 07:18:40 -0700 (PDT)
+Subject: Re: [RFC 1/6] target/riscv: rvk: add flag support for Zbk[bcx]
+To: liweiwei <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com
+References: <20211102031128.17296-1-liweiwei@iscas.ac.cn>
+ <20211102031128.17296-2-liweiwei@iscas.ac.cn>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <97624133-30f2-fdc4-4f3c-0cc843f0768c@linaro.org>
+Date: Tue, 2 Nov 2021 10:18:38 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20211021162956.2772656-1-frank.chang@sifive.com>
-In-Reply-To: <20211021162956.2772656-1-frank.chang@sifive.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 2 Nov 2021 22:07:25 +0800
-Message-ID: <CAE_xrPi_20tt1w-ZaPU5cGRtQ6PQOeeqwaY7uL=ii86e9Z25SA@mail.gmail.com>
-Subject: Re: [PATCH v5 0/8] target/riscv: support Zfh, Zfhmin extension v0.1
-To: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair23@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000c82e2805cfced03a"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=frank.chang@sifive.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+In-Reply-To: <20211102031128.17296-2-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::830;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qt1-x830.google.com
+X-Spam_score_int: -45
+X-Spam_score: -4.6
+X-Spam_bar: ----
+X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.549,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -71,191 +84,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Nov 2021 14:07:45 -0000
+X-List-Received-Date: Tue, 02 Nov 2021 14:18:46 -0000
 
---000000000000c82e2805cfced03a
-Content-Type: text/plain; charset="UTF-8"
+On 11/1/21 11:11 PM, liweiwei wrote:
+> +++ b/target/riscv/cpu.c
+> @@ -472,15 +472,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>               error_setg(errp,
+>                          "I and E extensions are incompatible");
+>                          return;
+> -       }
+> +        }
+>   
+>           if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+>               error_setg(errp,
+>                          "Either I or E extension must be set");
+>                          return;
+> -       }
+> +        }
+>   
+> -       if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+> +        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+>                                  cpu->cfg.ext_a & cpu->cfg.ext_f &
+>                                  cpu->cfg.ext_d)) {
+>               warn_report("Setting G will also set IMAFD");
 
-On Fri, Oct 22, 2021 at 12:30 AM <frank.chang@sifive.com> wrote:
+This re-indentation should not be happening.
 
-> From: Frank Chang <frank.chang@sifive.com>
->
-> Zfh - Half width floating point
-> Zfhmin - Subset of half width floating point
->
-> Zfh, Zfhmin v0.1 is now in public review period and is required by
-> RVV extension:
->
-> https://groups.google.com/a/groups.riscv.org/g/isa-dev/c/63gDCinXTwE/m/871Wm9XIBQAJ
->
-> Zfh, Zfhmin can be enabled with -cpu option: Zfh=true and Zfhmin=true
-> respectively.
->
-> The port is available at:
-> https://github.com/sifive/qemu/tree/zfh-upstream-v5
->
-> Note: This patchset depends on another patchset listed in Based-on
->       section below so it is not able to be built unless the patchset
->       is applied.
->
-> Changelog:
->
-> v5:
->   * Rebase on riscv-to-apply.next.
->
-> v4:
->   * Spilt Zfh, Zfhmin cpu properties related changes into individual
->     patches.
->
-> v3:
->   * Use the renamed softfloat min/max APIs: *_minimum_number()
->     and *_maximum_number().
->   * Pick softfloat min/max APIs based on CPU privilege spec version.
->   * Add braces for if statements in REQUIRE_ZFH() and
->     REQUIRE_ZFH_OR_ZFHMIN().
->   * Rearrange the positions of Zfh and Zfhmin cpu properties.
->
-> v2:
->   * Use {get,dest}_gpr APIs.
->   * Add Zfhmin extension.
->
-> Based-on: <20211021160847.2748577-1-frank.chang@sifive.com>
->
-> Frank Chang (3):
->   target/riscv: zfh: add Zfh cpu property
->   target/riscv: zfh: implement zfhmin extension
->   target/riscv: zfh: add Zfhmin cpu property
->
-> Kito Cheng (5):
->   target/riscv: zfh: half-precision load and store
->   target/riscv: zfh: half-precision computational
->   target/riscv: zfh: half-precision convert and move
->   target/riscv: zfh: half-precision floating-point compare
->   target/riscv: zfh: half-precision floating-point classify
->
->  target/riscv/cpu.c                        |   2 +
->  target/riscv/cpu.h                        |   2 +
->  target/riscv/fpu_helper.c                 | 180 ++++++++
->  target/riscv/helper.h                     |  29 ++
->  target/riscv/insn32.decode                |  38 ++
->  target/riscv/insn_trans/trans_rvzfh.c.inc | 537 ++++++++++++++++++++++
->  target/riscv/internals.h                  |  16 +
->  target/riscv/translate.c                  |  20 +
->  8 files changed, 824 insertions(+)
->  create mode 100644 target/riscv/insn_trans/trans_rvzfh.c.inc
->
-> --
-> 2.25.1
->
->
-Hi Alistair,
 
-Is this one able to be merged to v6.2.0 as the soft feature freeze is due
-today (2021-11-02).
-I think this series has gotten all Reviewed-by.
+> +    DEFINE_PROP_BOOL("x-zbkb", RISCVCPU, cfg.ext_zbkb, false),
+> +    DEFINE_PROP_BOOL("x-zbkc", RISCVCPU, cfg.ext_zbkc, false),
+> +    DEFINE_PROP_BOOL("x-zbkx", RISCVCPU, cfg.ext_zbkx, false),
 
-Thanks,
-Frank Chang
+The properties cannot be exposed until the end.
 
---000000000000c82e2805cfced03a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+>          bool ext_zbb;
+>          bool ext_zbc;
+>          bool ext_zbs;
+> +        bool ext_zbkb;
+> +        bool ext_zbkc;
+> +        bool ext_zbkx;
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Oct 22, 2021 at 12:30 AM &lt;<a h=
-ref=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.=
-com</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
-04,204,204);padding-left:1ex">From: Frank Chang &lt;<a href=3D"mailto:frank=
-.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-<br>
-Zfh - Half width floating point<br>
-Zfhmin - Subset of half width floating point<br>
-<br>
-Zfh, Zfhmin v0.1 is now in public review period and is required by<br>
-RVV extension:<br>
-<a href=3D"https://groups.google.com/a/groups.riscv.org/g/isa-dev/c/63gDCin=
-XTwE/m/871Wm9XIBQAJ" rel=3D"noreferrer" target=3D"_blank">https://groups.go=
-ogle.com/a/groups.riscv.org/g/isa-dev/c/63gDCinXTwE/m/871Wm9XIBQAJ</a><br>
-<br>
-Zfh, Zfhmin can be enabled with -cpu option: Zfh=3Dtrue and Zfhmin=3Dtrue<b=
-r>
-respectively.<br>
-<br>
-The port is available at:<br>
-<a href=3D"https://github.com/sifive/qemu/tree/zfh-upstream-v5" rel=3D"nore=
-ferrer" target=3D"_blank">https://github.com/sifive/qemu/tree/zfh-upstream-=
-v5</a><br>
-<br>
-Note: This patchset depends on another patchset listed in Based-on<br>
-=C2=A0 =C2=A0 =C2=A0 section below so it is not able to be built unless the=
- patchset<br>
-=C2=A0 =C2=A0 =C2=A0 is applied.<br>
-<br>
-Changelog:<br>
-<br>
-v5:<br>
-=C2=A0 * Rebase on riscv-to-apply.next.<br>
-<br>
-v4:<br>
-=C2=A0 * Spilt Zfh, Zfhmin cpu properties related changes into individual<b=
-r>
-=C2=A0 =C2=A0 patches.<br>
-<br>
-v3:<br>
-=C2=A0 * Use the renamed softfloat min/max APIs: *_minimum_number()<br>
-=C2=A0 =C2=A0 and *_maximum_number().<br>
-=C2=A0 * Pick softfloat min/max APIs based on CPU privilege spec version.<b=
-r>
-=C2=A0 * Add braces for if statements in REQUIRE_ZFH() and<br>
-=C2=A0 =C2=A0 REQUIRE_ZFH_OR_ZFHMIN().<br>
-=C2=A0 * Rearrange the positions of Zfh and Zfhmin cpu properties.<br>
-<br>
-v2:<br>
-=C2=A0 * Use {get,dest}_gpr APIs.<br>
-=C2=A0 * Add Zfhmin extension.<br>
-<br>
-Based-on: &lt;<a href=3D"mailto:20211021160847.2748577-1-frank.chang@sifive=
-.com" target=3D"_blank">20211021160847.2748577-1-frank.chang@sifive.com</a>=
-&gt;<br>
-<br>
-Frank Chang (3):<br>
-=C2=A0 target/riscv: zfh: add Zfh cpu property<br>
-=C2=A0 target/riscv: zfh: implement zfhmin extension<br>
-=C2=A0 target/riscv: zfh: add Zfhmin cpu property<br>
-<br>
-Kito Cheng (5):<br>
-=C2=A0 target/riscv: zfh: half-precision load and store<br>
-=C2=A0 target/riscv: zfh: half-precision computational<br>
-=C2=A0 target/riscv: zfh: half-precision convert and move<br>
-=C2=A0 target/riscv: zfh: half-precision floating-point compare<br>
-=C2=A0 target/riscv: zfh: half-precision floating-point classify<br>
-<br>
-=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
-=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=A02 +<br>
-=C2=A0target/riscv/fpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0| 180 ++++++++<br>
-=C2=A0target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 29 ++<br>
-=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 38 ++<br>
-=C2=A0target/riscv/insn_trans/trans_rvzfh.c.inc | 537 +++++++++++++++++++++=
-+<br>
-=C2=A0target/riscv/internals.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 16 +<br>
-=C2=A0target/riscv/translate.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 |=C2=A0 20 +<br>
-=C2=A08 files changed, 824 insertions(+)<br>
-=C2=A0create mode 100644 target/riscv/insn_trans/trans_rvzfh.c.inc<br>
-<br>
---<br>
-2.25.1<br>
-<br></blockquote><div><br></div><div>Hi Alistair,</div><div><br></div><div>=
-Is this one able to be merged to v6.2.0 as the soft feature freeze is due t=
-oday (2021-11-02).</div><div>I think this series has gotten all Reviewed-by=
-.</div><div><br></div><div>Thanks,</div><div>Frank Chang=C2=A0<br></div></d=
-iv></div>
+Better to keep them alphabetical: zbk* < zbs.
 
---000000000000c82e2805cfced03a--
+
+r~
 
