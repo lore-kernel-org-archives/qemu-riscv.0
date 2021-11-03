@@ -1,66 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mi9KQ-0000yT-29
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 02:00:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38796)
+	id 1miAc1-0007E9-O5
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 03:23:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35122)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mi9KL-0000xS-HV; Wed, 03 Nov 2021 02:00:49 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:39696)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mi9KJ-0003pK-MD; Wed, 03 Nov 2021 02:00:49 -0400
-Received: by mail-io1-xd36.google.com with SMTP id r3so14678iod.6;
- Tue, 02 Nov 2021 23:00:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pTFah1HpzlM8+BaaQOB17u3tK9W0TCQRw8tVgAakA3s=;
- b=oMfjwCX+LqcZR8yU/DWdf2p55jHBXKX3TBnkJudVd/e3XB7AmbAef1plmngwA+J94c
- mZ+p+5svkIgTBAfmvpRUlUalG7eYtzadozB5hXWgng9aJI3b4AWQncwgox40szXRSyuN
- liRnNyoc40sTbk7UjjN719vbbgUlBe+VJ8l0jzejSRUhSpFiORD5XT88BfX57ZUO8Wb8
- c3nzF+CQIeiPZ8mTZzKJDAT44sWsr8dPoodpCC45R5OZRTL0khfxG8ycP15EZ4YYWfR/
- +Ck1TUwwNjPEj1O1aFFKopGuskA7Ff63W0/bLpRe95ZpNSGZS5Y8HgZI00qA136uXjH+
- gwkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=pTFah1HpzlM8+BaaQOB17u3tK9W0TCQRw8tVgAakA3s=;
- b=bC44A2HZkrG6rhpuJNyq2IAnFrnMpmUojlpeyYO8qRRRJlWKTYO3a0PjZb9+Y/woAF
- N1gFwO+4398vRbKXqTdDJovrSiIRPhdjiE6ofNZpYaCtOqlEn4e2JCh04rbxvaH3RYQi
- HBMBJWMRMs9t1/ip7pjqH2yej8VGUnwHgnH0s1OoUKdin/4dJTq3X26GL/eZpO5VErgO
- PghnV2RG42zdQANm5OVXyIc/+j5oTy2VZMTIz0r1tg+9CjAVrRc+nfB0qnoTQXvm2paE
- SZFQHAl9qynjyVq2jMZoDgJHxNMkoLPIIDM7NYSk5F0qVs27EE8e9ZoxWBHOkb2kHTCx
- CN9w==
-X-Gm-Message-State: AOAM5335eoJIfHuNqI3Dg2Xk4hCcEMSNd1n6jPrpm+OaWXwhNO22N/yh
- +tqDtKauZq+wFUoWnepUJQbDqZ6NoWOXytU/jCI=
-X-Google-Smtp-Source: ABdhPJz0CpHCGlUY5ov+IFoKtD4kcD2lIletZZDP+HxWs2MKyeTzNhVclP/lPG/mUMCbciY7m8gos1LYL/b8HqsAo+U=
-X-Received: by 2002:a05:6638:329e:: with SMTP id
- f30mr29283255jav.63.1635919245187; 
- Tue, 02 Nov 2021 23:00:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1miAbz-0007Dp-UD; Wed, 03 Nov 2021 03:23:07 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:49706 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1miAbw-0006NK-W4; Wed, 03 Nov 2021 03:23:07 -0400
+Received: from [192.168.0.103] (unknown [180.156.147.178])
+ by APP-01 (Coremail) with SMTP id qwCowAA3PQHLOIJhXqNkBg--.23044S2;
+ Wed, 03 Nov 2021 15:22:52 +0800 (CST)
+Subject: Re: [RFC 3/6] target/riscv: rvk: add flag support for
+ Zk/Zkn/Zknd/Zknd/Zkne/Zknh/Zks/Zksed/Zksh/Zkr
+To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com
+References: <20211102031128.17296-1-liweiwei@iscas.ac.cn>
+ <20211102031128.17296-4-liweiwei@iscas.ac.cn>
+ <85f8f249-a54c-0ad6-a3bf-7bc4f072251b@linaro.org>
+ <83e80e8f-485a-84b9-10e6-bac7d54850e1@iscas.ac.cn>
+ <70a3f6e6-26cd-103b-df44-ed86c2e8f10a@linaro.org>
+From: liweiwei <liweiwei@iscas.ac.cn>
+Message-ID: <5b06d731-8de7-058f-7938-e1eff9ad3aff@iscas.ac.cn>
+Date: Wed, 3 Nov 2021 15:22:51 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20211030135513.18517-1-bin.meng@windriver.com>
- <20211030135513.18517-8-bin.meng@windriver.com>
-In-Reply-To: <20211030135513.18517-8-bin.meng@windriver.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Nov 2021 16:00:19 +1000
-Message-ID: <CAKmqyKNnQ9G8K7b4t32JhBdyEisn2=++g1R2kxssYMTSu08iSg@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] hw/core: tcg-cpu-ops.h: Update comments of
- debug_check_watchpoint()
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Richard Henderson <richard.henderson@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+In-Reply-To: <70a3f6e6-26cd-103b-df44-ed86c2e8f10a@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: qwCowAA3PQHLOIJhXqNkBg--.23044S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Zry5XrWfJFy8tr4rZry7Wrg_yoW8Gr1Dpr
+ ykJa1jyrWDJr18Gw4UXa4UGF9Iq3W8Aw1xX34Fq3ZrJrZrGF1aqr1UWw1q9F4Fgrs7JF1U
+ Xr1UWr1DZrsxJrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBI14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
+ c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x
+ 0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E
+ 7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcV
+ C0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
+ 04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aV
+ CY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUj0JPtUUUUU==
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -67
+X-Spam_score: -6.8
+X-Spam_bar: ------
+X-Spam_report: (-6.8 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.549,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -74,41 +73,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2021 06:00:50 -0000
+X-List-Received-Date: Wed, 03 Nov 2021 07:23:08 -0000
 
-On Sun, Oct 31, 2021 at 12:02 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> This is now used by RISC-V as well. Update the comments.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+在 2021/11/3 上午9:21, Richard Henderson 写道:
+> On 11/2/21 9:06 PM, liweiwei wrote:
+>>
+>> 在 2021/11/3 上午1:56, Richard Henderson 写道:
+>>> On 11/1/21 11:11 PM, liweiwei wrote:
+>>>> +        if (cpu->cfg.ext_zk) {
+>>>> +            cpu->cfg.ext_zbkb = true;
+>>>> +            cpu->cfg.ext_zbkc = true;
+>>>> +            cpu->cfg.ext_zbkx = true;
+>>>> +            cpu->cfg.ext_zknd = true;
+>>>> +            cpu->cfg.ext_zkne = true;
+>>>> +            cpu->cfg.ext_zknh = true;
+>>>> +            cpu->cfg.ext_zkr = true;
+>>>> +        }
+>>>
+>>> Section 2.12 lists instead the larger Zkn, Zks, Zkt extensions.
+>>> I think it's better to follow that.
+>>>
+>> OK. I'll replace this with setting ext_zkn, ext_zks, ext_zkt true. By 
+>> the way, Zkt only includes partial RVI/M/C instructions. Is it 
+>> neccessary to distinguish them?
+>
+> I don't know if Zkt needs to be called out; it probably depends on 
+> whether it is exposed to the guest via some MISA csr extension.
+It seems not  exposed to the guest via some MISA csr extension. And it 
+also doesn't define a set of instructions available in the core. It just 
+restricts the set of instructions to have 'data-independent execution time'.
+>
+>
+> r~
 
-Alistair
-
->
-> ---
->
-> (no changes since v1)
->
->  include/hw/core/tcg-cpu-ops.h | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/include/hw/core/tcg-cpu-ops.h b/include/hw/core/tcg-cpu-ops.h
-> index 6cbe17f2e6..532c148a80 100644
-> --- a/include/hw/core/tcg-cpu-ops.h
-> +++ b/include/hw/core/tcg-cpu-ops.h
-> @@ -92,6 +92,7 @@ struct TCGCPUOps {
->      /**
->       * @debug_check_watchpoint: return true if the architectural
->       * watchpoint whose address has matched should really fire, used by ARM
-> +     * and RISC-V
->       */
->      bool (*debug_check_watchpoint)(CPUState *cpu, CPUWatchpoint *wp);
->
-> --
-> 2.25.1
->
->
 
