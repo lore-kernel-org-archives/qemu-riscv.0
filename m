@@ -1,62 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mi9HU-0006pA-Ne
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 01:57:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38066)
+	id 1mi9JN-0008Ph-7h
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 01:59:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mi9HU-0006oy-4p; Wed, 03 Nov 2021 01:57:52 -0400
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:37621)
+ id 1mi9JL-0008PP-GD; Wed, 03 Nov 2021 01:59:47 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:41522)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mi9HS-00031A-7g; Wed, 03 Nov 2021 01:57:51 -0400
-Received: by mail-io1-xd2d.google.com with SMTP id y73so1478454iof.4;
- Tue, 02 Nov 2021 22:57:49 -0700 (PDT)
+ id 1mi9JK-0003KE-0L; Wed, 03 Nov 2021 01:59:47 -0400
+Received: by mail-io1-xd33.google.com with SMTP id p193so1454647iod.8;
+ Tue, 02 Nov 2021 22:59:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7WT1dpnR0LtwxlhmKf42mmd6qGRJl+KkD3DIFC1BluM=;
- b=oivBAuSnTPmnmZNSr5GGwGvJtia/wMT7Dv8P5tKAU0TZelk5h7YEh+QS+gPEJ+4Qgk
- Otu+84xEUTF1C6XjA5VQuyIVP7AMx7vR36abYTvY8NWwchOwI3Wr7H3ETqpR2tZziGoA
- hotXA3XSqBX7wrT/wPJr3K97iwlNfywoaWwsa6PRtnTW9Hfm/H2WSRTw/wKPmDo2F2F6
- NUgsZJRLU4Cyj8WtmQXMsfbheHuuvoEwyzyvSt7SQN6oUqsMLrZ4ZTBBVFPACg/RmaF+
- nLB/LbnJgd78mUfxc2HN7QbgiPiysF/Ynwrk1Jxqllve7oLYgDMiztUyA/KloZidmWDm
- BVvQ==
+ :cc; bh=z6qKtCw7KkdgXoUYDZMGal0231xBhV3C1bWK38SqF1Y=;
+ b=Nr2h39XW8TPCx6blCrKFC1dQ7ruAWSmTCSol0DAUV2N7uwwK5s5nluIRPZ5OYOV+wm
+ qmU2xnqBDpNPX04xOL+WBIENVkNVRsVUabLNwuXfK2mHv5YimzH0DPvmKLFnzqssBOU5
+ zT67zHKvH4YqjrYFDs2grX3EnXZGCgt9j7Svuj55z4v+NOsfO8oc0Vm0cdVx8O91xdfv
+ AT/VpwjuzIdQlF9qhmNTokO3+qKco21Ls1f4VE0NwNMER7W126tVSqzKcd4dYAyAdDiS
+ NGNeOv6I2wE0jkRGa/Z265n1nQvFUlwutm3TBETdCuM1lutxB1jN4jwfN2AE/ZPNYgOY
+ Z5lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7WT1dpnR0LtwxlhmKf42mmd6qGRJl+KkD3DIFC1BluM=;
- b=VoobGdT2OCQVSq3WqTah2ArhO2Fx+1iVxYvse6zxKBpjPp5uKzCynHx/HJLSfyzkOL
- 3okMaMSRk+bdba+k9r+uJtxY4THI8RgojHNxXOY8UJVrcpBEqKdoklAYVv1Ck92eco9X
- biJ3ccrpDGiELmf1jujCSon6AZtUHG9M2/MxoyK0NUsFeO454u4iJ4ne4+/76aPlGsue
- nir0PfIf0WK69SDEeYX9rg1fAzLC7NwLNF0zlRd6GTsOZYi5BSJgWQ6p8WJ07CQ+5PWN
- zAftucYdQuOPSNefpgQ7uUoKvtDKp8J2WjG7fX7gFFZ0HwH0fQjNvVVYh/78qDqPgoxi
- Kc1Q==
-X-Gm-Message-State: AOAM530Cx9W/jTf3s4gGaq0apNmejrodMmfFH3ZibB5DPGTAFczezKv2
- wLYSMuoGG9N2X9FCnDG8eixiyLqwLjuuTH/E3Ck=
-X-Google-Smtp-Source: ABdhPJxitD127EVXYOLXGVpOyyg/x6CMYCHfhpPjQf2mbBXYiAuXtWuxbyAfmxWsnnbZ6d/fojQUqZ7/7qiGLY/i+44=
-X-Received: by 2002:a5e:890e:: with SMTP id k14mr28061842ioj.187.1635919068753; 
- Tue, 02 Nov 2021 22:57:48 -0700 (PDT)
+ bh=z6qKtCw7KkdgXoUYDZMGal0231xBhV3C1bWK38SqF1Y=;
+ b=4W4kQdg/b7eOlESllxKdDY8fhonNim5ATDExyvq3DHJepVQIGPAnBjlA1LtMYFWTF5
+ BWr+qb5JdSg5bIVGYRxP8UTnLsThFkzH5GIO/pwJHlls+Qq+hKSXP7OFkbRUE9k8mGQf
+ qEsR3xG9+Pn0MW0f+yJ6ty3A4m1fxxqQCGhGmdhUXqyKB7t9f40m7/Y7EgAgn36702bu
+ Zes2ihOG4HrUn/3UBMVuUfWbFtk5VAssM4ytuUEqFMSOhuHoNQg0ldn3NYscUphNnJj4
+ 48nhjmlhyNVuLoUVRG9sMtBsDSXoBkw/nmFBkss9BFzvI10I47sLgSxIcyKSZet3NXdm
+ ZdbA==
+X-Gm-Message-State: AOAM530hWZ23JiPIjnasXBz3V0cPJCH3mzB4Yq0zVWuTl54qupBIEEHM
+ gjz/RHVS/tcAL4qTIzCNqHhU50pmuciZ8Ffg8aE=
+X-Google-Smtp-Source: ABdhPJwGmFtgV4QDqq50J2yiHKWLMSpDfknV0Uto2vPeKM24aUPcExbxF8+ggpnOQKh5/Ct2xZR7I13gbih84OgeZIY=
+X-Received: by 2002:a05:6602:2434:: with SMTP id
+ g20mr2319923iob.57.1635919184681; 
+ Tue, 02 Nov 2021 22:59:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211026064227.2014502-1-anup.patel@wdc.com>
- <20211026064227.2014502-8-anup.patel@wdc.com>
- <CAKmqyKOyTR1RX4k3Eq-YmcuWRsxVu5J=o-_eQeU6Ht1TUEUEBA@mail.gmail.com>
- <CAAhSdy2F+63j3S1zP=eQMaeM4dpRvNLO55avAaZgZXO5ZpTbPw@mail.gmail.com>
-In-Reply-To: <CAAhSdy2F+63j3S1zP=eQMaeM4dpRvNLO55avAaZgZXO5ZpTbPw@mail.gmail.com>
+References: <20211030135513.18517-1-bin.meng@windriver.com>
+ <20211030135513.18517-5-bin.meng@windriver.com>
+In-Reply-To: <20211030135513.18517-5-bin.meng@windriver.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 3 Nov 2021 15:57:22 +1000
-Message-ID: <CAKmqyKPuidjDRi79DEWDHzN9Rh4q5-HkVzEpTi=C+aQLpmH8aQ@mail.gmail.com>
-Subject: Re: [PATCH v4 07/22] target/riscv: Add defines for AIA CSRs
-To: Anup Patel <anup@brainfault.org>
-Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Wed, 3 Nov 2021 15:59:18 +1000
+Message-ID: <CAKmqyKPp1qecL9icfRq+_waK7tJUt-UqRmmsbB9EesaptYxjgw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/7] target/riscv: cpu: Add a config option for native
+ debug
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,35 +74,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2021 05:57:52 -0000
+X-List-Received-Date: Wed, 03 Nov 2021 05:59:47 -0000
 
-On Mon, Nov 1, 2021 at 5:57 PM Anup Patel <anup@brainfault.org> wrote:
+On Sat, Oct 30, 2021 at 11:57 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Mon, Nov 1, 2021 at 12:26 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Tue, Oct 26, 2021 at 5:01 PM Anup Patel <anup.patel@wdc.com> wrote:
-> > >
-> > > The RISC-V AIA specification extends RISC-V local interrupts and
-> > > introduces new CSRs. This patch adds defines for the new AIA CSRs.
-> > >
-> > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> >
-> > What's the status of these CSR addresses being finalised?
+> Add a config option to enable support for native M-mode debug.
+> This is disabled by default and can be enabled with 'debug=true'.
 >
-> These CSR addresses have not changed since the past 2 months.
->
-> Overall, the AIA spec has been in stable state for quite some time
-> without much changes or objections.
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Let's at least get a CSR address request submitted so we can start to
-finalise on the addresses.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
-> Regards,
-> Anup
+> ---
 >
-> >
-> > Alistair
+> Changes in v2:
+> - change the config option to 'disabled' by default
+>
+>  target/riscv/cpu.h | 2 ++
+>  target/riscv/cpu.c | 5 +++++
+>  2 files changed, 7 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 1fb13e8b94..b2301425c2 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -75,6 +75,7 @@ enum {
+>      RISCV_FEATURE_MMU,
+>      RISCV_FEATURE_PMP,
+>      RISCV_FEATURE_EPMP,
+> +    RISCV_FEATURE_DEBUG,
+>      RISCV_FEATURE_MISA
+>  };
+>
+> @@ -327,6 +328,7 @@ struct RISCVCPU {
+>          bool mmu;
+>          bool pmp;
+>          bool epmp;
+> +        bool debug;
+>          uint64_t resetvec;
+>      } cfg;
+>  };
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7061ae05fb..84116768ce 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -448,6 +448,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          }
+>      }
+>
+> +    if (cpu->cfg.debug) {
+> +        set_feature(env, RISCV_FEATURE_DEBUG);
+> +    }
+> +
+>      set_resetvec(env, cpu->cfg.resetvec);
+>
+>      /* Validate that MISA_MXL is set properly. */
+> @@ -631,6 +635,7 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+> +    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, false),
+>
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>
+> --
+> 2.25.1
+>
+>
 
