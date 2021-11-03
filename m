@@ -1,80 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mi4ya-0006RH-Ky
-	for mharc-qemu-riscv@gnu.org; Tue, 02 Nov 2021 21:22:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46850)
+	id 1mi8r3-0000m2-2j
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 01:30:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mi4yU-0006Mw-DB
- for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 21:21:59 -0400
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c]:34609)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mi8qu-0000iw-Pn
+ for qemu-riscv@nongnu.org; Wed, 03 Nov 2021 01:30:26 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a]:46872)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mi4yS-0006F4-87
- for qemu-riscv@nongnu.org; Tue, 02 Nov 2021 21:21:58 -0400
-Received: by mail-qv1-xf2c.google.com with SMTP id i13so1045395qvm.1
- for <qemu-riscv@nongnu.org>; Tue, 02 Nov 2021 18:21:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=JAWppTkoQAS3TnK+pkLi4EMhKMujxI1J7TFlTqo1MLo=;
- b=ycpxWTsRwV0RBh7vBOEOrc3TTjnLO+25RIVr4rG+7X7M6eGt32su5z3dC91ikBZpEl
- /3Xdv4fHsH+ql4nRXCwduyVyHOWpCRuB+8LseahzzslhRD4Lrd3SdfWjN0Wh0OHNWtQZ
- wM9xTxlRsTOkOE7vcV6JJ7hJ/8IZbblDxw/P9Nj4NW1+O9IGHHPJsDXCWHNKvFw3XfcZ
- CQPXE11G+L/c05C9wJEIGuo5w9xPx0+pyrI+3aSTj8opnLi6zWIt1LSMmy8j8NOw+8oV
- LxKbM2Sl47aFSvEaE38MVxhjX7ufkAy2+ikGFFVQVNHYYXN+WAqdkKGlvndaq0j35ABE
- l9hg==
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mi8qr-0005iR-Cj
+ for qemu-riscv@nongnu.org; Wed, 03 Nov 2021 01:30:24 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id u1so1683343wru.13
+ for <qemu-riscv@nongnu.org>; Tue, 02 Nov 2021 22:30:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=HUKQadWI9uDi8hrsr67S3K4TMWBrJA2Zc73I92CloHM=;
+ b=fkbG8/ANTH2Czffq5YYFu4nJ7ryhluF028ER+JFFxs4qu6/Xhk5mnWodaC4HxWcKWR
+ zpE6mC/vl9cabEpSu+Rmucfyj9N3Z20S/+ZtYEUxCTvBX+LkFTPhsSOh75CxV3cp7FsL
+ YSADQ/PchQXuy2dKvqygLUFE/mcP1/H3R3l/Yt9HR0hP3wWksjiNc2RHIvc6bm/LaIXN
+ L6sZ2DnxzDS9wMObHI3fN8bdbOP9N23kjJzjQewq2zveCUlrPXKIRohFm5hR5bca0dCW
+ LL759d0JBTP0ixdkp/zTBUKB6s78vBOhYLr2OXQQwlAAWWr1qXIEF9Cnn4yySH50qN49
+ yl1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=JAWppTkoQAS3TnK+pkLi4EMhKMujxI1J7TFlTqo1MLo=;
- b=PmB4TtkTtRiv/sy75cZisfCmKqF3dsHYg3y6VyVX2HZDQ3c6EOB7gsJuzaSr+ou3B1
- tUEjG9ZRNo0H49mFX3cELk+tpwVa/y1TfUNmYan1+NV9SrUxYYRBGjvv8jV3hTcXcnyn
- i77e1CT1AeiRxrMgQ+stAkFaMx2UXgpwqp2fZWnGrp36jlpAUQCZPnQMGHE3AbC7Zzpy
- 3H8BwQSkhn/SwhBxRgZ8yX27w80MaC7bJAs5bT7HtJLGiC33zdZ/A13ZS1sve6ru25sI
- 4mRzC2eBivKJETmO6pPVFUFnhgQVfa1FwANS2chK7RrSyjI7DE38JtkYdG4egdDhzjEt
- xFfg==
-X-Gm-Message-State: AOAM533f9tooAPqexWFXdSvuEcK9wCrA9V0Qm8OVUOsXkF4PXZICvruQ
- pcf5kCYgbGVKsOwb48w+UT8YUg==
-X-Google-Smtp-Source: ABdhPJyJYBK5LJi7FoUPByXLBe4nm79/VfqLuOg7gTVzpPjFwL5NFVoT0P2kdt6vDzsMNksOJDVc0A==
-X-Received: by 2002:ad4:5ce8:: with SMTP id iv8mr33478755qvb.21.1635902515089; 
- Tue, 02 Nov 2021 18:21:55 -0700 (PDT)
-Received: from ?IPv6:2607:fb90:f800:bf42:4407:203:e794:8e1f?
- ([2607:fb90:f800:bf42:4407:203:e794:8e1f])
- by smtp.gmail.com with ESMTPSA id k16sm457536qkj.70.2021.11.02.18.21.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Nov 2021 18:21:54 -0700 (PDT)
-Subject: Re: [RFC 3/6] target/riscv: rvk: add flag support for
- Zk/Zkn/Zknd/Zknd/Zkne/Zknh/Zks/Zksed/Zksh/Zkr
-To: liweiwei <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
- luruibo2000@163.com
-References: <20211102031128.17296-1-liweiwei@iscas.ac.cn>
- <20211102031128.17296-4-liweiwei@iscas.ac.cn>
- <85f8f249-a54c-0ad6-a3bf-7bc4f072251b@linaro.org>
- <83e80e8f-485a-84b9-10e6-bac7d54850e1@iscas.ac.cn>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <70a3f6e6-26cd-103b-df44-ed86c2e8f10a@linaro.org>
-Date: Tue, 2 Nov 2021 21:21:51 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=HUKQadWI9uDi8hrsr67S3K4TMWBrJA2Zc73I92CloHM=;
+ b=69461LnvkTNgW2Q8P9CubsvvJVjuVrxtFvh7ykZFIL+7wICcK9sFmeQ23DgjKroUVC
+ fcjuNcpYWLvhilMpOyIAu0rrR/tptJxvJkRPYi08SHylkIIaVOfwQ65IZsGlGADO8NHc
+ Njby2rQLABpXNNmCQTdBkFc6UQFjNwGTjmU8LKCO9UAxsY7LQVWbofxeq5kJ6x0UyB7o
+ m45udzrHImZjdNjuGyb05Kux1M2npjO5BnCr//1RavGID5ufzyEk2CED+2S3+DbW+FAs
+ J2GCVvgFFC5Cchw+NmsJcO11qJz+L7jvShV09zYoan2xA4eJpEacLCIVKfwrjC6k2SxX
+ BQtQ==
+X-Gm-Message-State: AOAM5332UvBQLlEETnnike/HbhEll4bcoeUQQY95VmruVmPJ76qXf5HY
+ JILNMrrQIZ4CGLFnlvhwhN0GJewoD2AKrKYaDyPhGlft+ZSFWA==
+X-Google-Smtp-Source: ABdhPJxsg1kTVliIQagbN/V8OhxhEC6hV3B5d7qDjG9EQx92vCheNSUZvLBq/816P4v7fnFwBW75+osV0Enp4dXmAe0=
+X-Received: by 2002:a05:6000:1a45:: with SMTP id
+ t5mr41165081wry.306.1635917417428; 
+ Tue, 02 Nov 2021 22:30:17 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <83e80e8f-485a-84b9-10e6-bac7d54850e1@iscas.ac.cn>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2c;
- envelope-from=richard.henderson@linaro.org; helo=mail-qv1-xf2c.google.com
-X-Spam_score_int: -45
-X-Spam_score: -4.6
-X-Spam_bar: ----
-X-Spam_report: (-4.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.549,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20211026064227.2014502-1-anup.patel@wdc.com>
+ <20211026064227.2014502-3-anup.patel@wdc.com>
+ <CAEUhbmX_XFTTGZBnRACrdOh27Hddj2Ho-RUL8xmf=2YG=Fw0OA@mail.gmail.com>
+ <CAAhSdy0_Zg0ALHyOvP32fA=kbVjwhwxip1vRU-OsT1F2U4Fr0g@mail.gmail.com>
+ <CAEUhbmVVusTTipsTGp75XpsdmCWvw-En+D0F+-oNfWrf4wn+KQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmVVusTTipsTGp75XpsdmCWvw-En+D0F+-oNfWrf4wn+KQ@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Wed, 3 Nov 2021 11:00:05 +0530
+Message-ID: <CAAhSdy3ATdBtZgUsNyQrVL_okCm4COtQpT+jRU_XHY4E9FLqjg@mail.gmail.com>
+Subject: Re: [PATCH v4 02/22] target/riscv: Implement SGEIP bit in hip and hie
+ CSRs
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, Atish Patra <atish.patra@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::42a;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,32 +80,98 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2021 01:22:00 -0000
+X-List-Received-Date: Wed, 03 Nov 2021 05:30:26 -0000
 
-On 11/2/21 9:06 PM, liweiwei wrote:
-> 
-> 在 2021/11/3 上午1:56, Richard Henderson 写道:
->> On 11/1/21 11:11 PM, liweiwei wrote:
->>> +        if (cpu->cfg.ext_zk) {
->>> +            cpu->cfg.ext_zbkb = true;
->>> +            cpu->cfg.ext_zbkc = true;
->>> +            cpu->cfg.ext_zbkx = true;
->>> +            cpu->cfg.ext_zknd = true;
->>> +            cpu->cfg.ext_zkne = true;
->>> +            cpu->cfg.ext_zknh = true;
->>> +            cpu->cfg.ext_zkr = true;
->>> +        }
->>
->> Section 2.12 lists instead the larger Zkn, Zks, Zkt extensions.
->> I think it's better to follow that.
->>
-> OK. I'll replace this with setting ext_zkn, ext_zks, ext_zkt true. By the way, Zkt only 
-> includes partial RVI/M/C instructions. Is it neccessary to distinguish them?
+On Tue, Nov 2, 2021 at 4:22 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Tue, Nov 2, 2021 at 6:24 PM Anup Patel <anup@brainfault.org> wrote:
+> >
+> > On Tue, Nov 2, 2021 at 12:22 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > On Tue, Oct 26, 2021 at 2:43 PM Anup Patel <anup.patel@wdc.com> wrote:
+> > > >
+> > > > A hypervsior can optionally take guest external interrupts using
+> > >
+> > > typo: hypervisor
+> >
+> > Okay, I will update.
+> >
+> > >
+> > > > SGEIP bit of hip and hie CSRs.
+> > > >
+> > > > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > ---
+> > > >  target/riscv/cpu.c      |  3 ++-
+> > > >  target/riscv/cpu_bits.h |  3 +++
+> > > >  target/riscv/csr.c      | 18 +++++++++++-------
+> > > >  3 files changed, 16 insertions(+), 8 deletions(-)
+> > > >
+> > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > > index 788fa0b11c..0460a3972b 100644
+> > > > --- a/target/riscv/cpu.c
+> > > > +++ b/target/riscv/cpu.c
+> > > > @@ -365,6 +365,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+> > > >          env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
+> > > >      }
+> > > >      env->mcause = 0;
+> > > > +    env->miclaim = MIP_SGEIP;
+> > > >      env->pc = env->resetvec;
+> > > >      env->two_stage_lookup = false;
+> > > >  #endif
+> > > > @@ -598,7 +599,7 @@ static void riscv_cpu_init(Object *obj)
+> > > >      cpu_set_cpustate_pointers(cpu);
+> > > >
+> > > >  #ifndef CONFIG_USER_ONLY
+> > > > -    qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq, 12);
+> > > > +    qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq, IRQ_LOCAL_MAX);
+> > > >  #endif /* CONFIG_USER_ONLY */
+> > > >  }
+> > > >
+> > > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > > > index cffcd3a5df..8a5a4cde95 100644
+> > > > --- a/target/riscv/cpu_bits.h
+> > > > +++ b/target/riscv/cpu_bits.h
+> > > > @@ -498,6 +498,8 @@ typedef enum RISCVException {
+> > > >  #define IRQ_S_EXT                          9
+> > > >  #define IRQ_VS_EXT                         10
+> > > >  #define IRQ_M_EXT                          11
+> > > > +#define IRQ_S_GEXT                         12
+> > > > +#define IRQ_LOCAL_MAX                      13
+> > >
+> > > The IRQ_LOCAL_MAX should be XLEN long, not 13.
+> >
+> > The IRQ_LOCAL_MAX here represents local interrupts
+> > standardized by the RISC-V privilege spec. This value
+>
+> The standardardized IRQ number is 16.
 
-I don't know if Zkt needs to be called out; it probably depends on whether it is exposed 
-to the guest via some MISA csr extension.
+Max local IRQ as 13 is more conservative and better (IMO)
+because we are not including any undefined local IRQ.
 
+I also totally fine changing max local IRQ to 16 as well.
 
-r~
+>
+> > will change only when more local interrupts are
+> > standardized by the RISC-V privilege spec.
+>
+> We should leave room for platform / custom IRQ as it is already
+> defined by the priv spec.
 
+custom local IRQs are not going to be accepted in the first 16 local
+IRQs.
+
+The AIA spec defines a sparse numbering scheme for both
+standard/custom local IRQs beyond 16. The AIA spec will also
+maintain a table of defined local IRQs.
+
+IMO, we should deal with custom local IRQs as when they show
+up and standard local IRQs should always get first class treatment.
+
+Regards,
+Anup
+
+>
+> Regards,
+> Bin
 
