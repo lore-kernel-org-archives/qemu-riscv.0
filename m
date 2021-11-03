@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1miAc1-0007E9-O5
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 03:23:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35122)
+	id 1miOBf-0002XC-Fk
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Nov 2021 17:52:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51216)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1miAbz-0007Dp-UD; Wed, 03 Nov 2021 03:23:07 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:49706 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1miAbw-0006NK-W4; Wed, 03 Nov 2021 03:23:07 -0400
-Received: from [192.168.0.103] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAA3PQHLOIJhXqNkBg--.23044S2;
- Wed, 03 Nov 2021 15:22:52 +0800 (CST)
-Subject: Re: [RFC 3/6] target/riscv: rvk: add flag support for
- Zk/Zkn/Zknd/Zknd/Zkne/Zknh/Zks/Zksed/Zksh/Zkr
-To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
- luruibo2000@163.com
-References: <20211102031128.17296-1-liweiwei@iscas.ac.cn>
- <20211102031128.17296-4-liweiwei@iscas.ac.cn>
- <85f8f249-a54c-0ad6-a3bf-7bc4f072251b@linaro.org>
- <83e80e8f-485a-84b9-10e6-bac7d54850e1@iscas.ac.cn>
- <70a3f6e6-26cd-103b-df44-ed86c2e8f10a@linaro.org>
-From: liweiwei <liweiwei@iscas.ac.cn>
-Message-ID: <5b06d731-8de7-058f-7938-e1eff9ad3aff@iscas.ac.cn>
-Date: Wed, 3 Nov 2021 15:22:51 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1miOBd-0002Vl-0U; Wed, 03 Nov 2021 17:52:49 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:45995)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1miOBa-0008Gc-Ug; Wed, 03 Nov 2021 17:52:48 -0400
+Received: by mail-io1-xd35.google.com with SMTP id q203so4477018iod.12;
+ Wed, 03 Nov 2021 14:52:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=XprijC3k3v+ALIh6PCF32SLkWMtOU9Afj6q7F8tZZ0c=;
+ b=LiXgO4tQ/28iEZzooPhtVsJlN/dSA8IaxZRlEcP2VuOdn5Z4gQsWgzjNnBwi86y40a
+ aEfDBU3T3+hjDGice1Ny+uTSQVycuu2RJbiRxfdnlhgHf08FVNX2KpbQ3U0/eK7yEld7
+ llIK25B6pMkvrOJJuqKatJjZjRBKJ3oJIpOY37mvUFPbN03C92mT6hgLXMwOvys6g2pA
+ BQ/B32iNR4x48kc82E8XBNdl/vdKWo77IBORBwzE5lEIOpb6wmKKd+VWqjKOQWZ2tNnL
+ lVudN65O1X0zXQgXcT6PMh7b247MAUDjpBY7MCw8rgXnSQNCqcBPbDYessZUEZetAZRE
+ YDag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=XprijC3k3v+ALIh6PCF32SLkWMtOU9Afj6q7F8tZZ0c=;
+ b=7JDQsYiC5SrDa0gKGWlyMpBag8rERWi2Dtcpdy2QsDoRRfx1LL84rNEBRDmYOsOnrm
+ E21dSSyF5S5Km9WuuLnISEoYylF80eaQRLnCJ620pgJs/qtn+jD144lXElOKcRFZVeHH
+ df0pPxib4bdHSqcuKTDFF3BdUXLBaLvLb99bV1011gycg4jS5qr/5CvbhQEMXqWnJgS6
+ WSRQBOsHFscyBvosvWtadxvyo58n1C33Z/JaCtDEHe9uDpEeunPlFX1Jd/bACSHjcXc1
+ OQ4XJVDvXnKS/Z7VfpfFOut8zBFLsrxJmLUCO4dmxpp2K8YSyo0is+wpQB0j1hccX7Hd
+ G3mQ==
+X-Gm-Message-State: AOAM5315bQD6mNDQSa0PUMjb7VjO911/3VAi1opoXXaFV77PVQDpOkzK
+ iWwvohaVHdEfl6ZHt9LmM3J5pfwEcRpYgrpeyds=
+X-Google-Smtp-Source: ABdhPJxm3/BCrYOBMgHoW7Fcyl80jzlnKBs/GY87/d4RJV8SNweT+WvA2WtefABBNuOcMbSCLerN6yt0udqsNLUdUYw=
+X-Received: by 2002:a5e:890e:: with SMTP id k14mr31680942ioj.187.1635976364464; 
+ Wed, 03 Nov 2021 14:52:44 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <70a3f6e6-26cd-103b-df44-ed86c2e8f10a@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: qwCowAA3PQHLOIJhXqNkBg--.23044S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zry5XrWfJFy8tr4rZry7Wrg_yoW8Gr1Dpr
- ykJa1jyrWDJr18Gw4UXa4UGF9Iq3W8Aw1xX34Fq3ZrJrZrGF1aqr1UWw1q9F4Fgrs7JF1U
- Xr1UWr1DZrsxJrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBI14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
- c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x
- 0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E
- 7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcV
- C0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
- 04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aV
- CY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUj0JPtUUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -67
-X-Spam_score: -6.8
-X-Spam_bar: ------
-X-Spam_report: (-6.8 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-2.549,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+References: <20211030030606.32297-1-bmeng.cn@gmail.com>
+In-Reply-To: <20211030030606.32297-1-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 4 Nov 2021 07:52:18 +1000
+Message-ID: <CAKmqyKOYGrLTxR9XqP1KNuznud=aQS5FLWse4RQgEzfV+J8vvg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: machine: Sort the .subsections
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -73,38 +71,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Nov 2021 07:23:08 -0000
+X-List-Received-Date: Wed, 03 Nov 2021 21:52:50 -0000
 
+On Sat, Oct 30, 2021 at 1:07 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Move the codes around so that the order of .subsections matches
+> the one they are referenced in vmstate_riscv_cpu.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-在 2021/11/3 上午9:21, Richard Henderson 写道:
-> On 11/2/21 9:06 PM, liweiwei wrote:
->>
->> 在 2021/11/3 上午1:56, Richard Henderson 写道:
->>> On 11/1/21 11:11 PM, liweiwei wrote:
->>>> +        if (cpu->cfg.ext_zk) {
->>>> +            cpu->cfg.ext_zbkb = true;
->>>> +            cpu->cfg.ext_zbkc = true;
->>>> +            cpu->cfg.ext_zbkx = true;
->>>> +            cpu->cfg.ext_zknd = true;
->>>> +            cpu->cfg.ext_zkne = true;
->>>> +            cpu->cfg.ext_zknh = true;
->>>> +            cpu->cfg.ext_zkr = true;
->>>> +        }
->>>
->>> Section 2.12 lists instead the larger Zkn, Zks, Zkt extensions.
->>> I think it's better to follow that.
->>>
->> OK. I'll replace this with setting ext_zkn, ext_zks, ext_zkt true. By 
->> the way, Zkt only includes partial RVI/M/C instructions. Is it 
->> neccessary to distinguish them?
->
-> I don't know if Zkt needs to be called out; it probably depends on 
-> whether it is exposed to the guest via some MISA csr extension.
-It seems not  exposed to the guest via some MISA csr extension. And it 
-also doesn't define a set of instructions available in the core. It just 
-restricts the set of instructions to have 'data-independent execution time'.
->
->
-> r~
+Thanks!
 
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
+>
+>  target/riscv/machine.c | 92 +++++++++++++++++++++---------------------
+>  1 file changed, 46 insertions(+), 46 deletions(-)
+>
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 7b4c739564..ad8248ebfd 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -76,20 +76,50 @@ static bool hyper_needed(void *opaque)
+>      return riscv_has_ext(env, RVH);
+>  }
+>
+> -static bool vector_needed(void *opaque)
+> -{
+> -    RISCVCPU *cpu = opaque;
+> -    CPURISCVState *env = &cpu->env;
+> +static const VMStateDescription vmstate_hyper = {
+> +    .name = "cpu/hyper",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .needed = hyper_needed,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINTTL(env.hstatus, RISCVCPU),
+> +        VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
+> +        VMSTATE_UINTTL(env.htval, RISCVCPU),
+> +        VMSTATE_UINTTL(env.htinst, RISCVCPU),
+> +        VMSTATE_UINTTL(env.hgatp, RISCVCPU),
+> +        VMSTATE_UINT64(env.htimedelta, RISCVCPU),
+>
+> -    return riscv_has_ext(env, RVV);
+> -}
+> +        VMSTATE_UINT64(env.vsstatus, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vstvec, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vsepc, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vscause, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vstval, RISCVCPU),
+> +        VMSTATE_UINTTL(env.vsatp, RISCVCPU),
+>
+> -static bool pointermasking_needed(void *opaque)
+> +        VMSTATE_UINTTL(env.mtval2, RISCVCPU),
+> +        VMSTATE_UINTTL(env.mtinst, RISCVCPU),
+> +
+> +        VMSTATE_UINTTL(env.stvec_hs, RISCVCPU),
+> +        VMSTATE_UINTTL(env.sscratch_hs, RISCVCPU),
+> +        VMSTATE_UINTTL(env.sepc_hs, RISCVCPU),
+> +        VMSTATE_UINTTL(env.scause_hs, RISCVCPU),
+> +        VMSTATE_UINTTL(env.stval_hs, RISCVCPU),
+> +        VMSTATE_UINTTL(env.satp_hs, RISCVCPU),
+> +        VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
+> +
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static bool vector_needed(void *opaque)
+>  {
+>      RISCVCPU *cpu = opaque;
+>      CPURISCVState *env = &cpu->env;
+>
+> -    return riscv_has_ext(env, RVJ);
+> +    return riscv_has_ext(env, RVV);
+>  }
+>
+>  static const VMStateDescription vmstate_vector = {
+> @@ -108,6 +138,14 @@ static const VMStateDescription vmstate_vector = {
+>          }
+>  };
+>
+> +static bool pointermasking_needed(void *opaque)
+> +{
+> +    RISCVCPU *cpu = opaque;
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    return riscv_has_ext(env, RVJ);
+> +}
+> +
+>  static const VMStateDescription vmstate_pointermasking = {
+>      .name = "cpu/pointer_masking",
+>      .version_id = 1,
+> @@ -126,44 +164,6 @@ static const VMStateDescription vmstate_pointermasking = {
+>      }
+>  };
+>
+> -static const VMStateDescription vmstate_hyper = {
+> -    .name = "cpu/hyper",
+> -    .version_id = 1,
+> -    .minimum_version_id = 1,
+> -    .needed = hyper_needed,
+> -    .fields = (VMStateField[]) {
+> -        VMSTATE_UINTTL(env.hstatus, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hedeleg, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hideleg, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hcounteren, RISCVCPU),
+> -        VMSTATE_UINTTL(env.htval, RISCVCPU),
+> -        VMSTATE_UINTTL(env.htinst, RISCVCPU),
+> -        VMSTATE_UINTTL(env.hgatp, RISCVCPU),
+> -        VMSTATE_UINT64(env.htimedelta, RISCVCPU),
+> -
+> -        VMSTATE_UINT64(env.vsstatus, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vstvec, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vsscratch, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vsepc, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vscause, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vstval, RISCVCPU),
+> -        VMSTATE_UINTTL(env.vsatp, RISCVCPU),
+> -
+> -        VMSTATE_UINTTL(env.mtval2, RISCVCPU),
+> -        VMSTATE_UINTTL(env.mtinst, RISCVCPU),
+> -
+> -        VMSTATE_UINTTL(env.stvec_hs, RISCVCPU),
+> -        VMSTATE_UINTTL(env.sscratch_hs, RISCVCPU),
+> -        VMSTATE_UINTTL(env.sepc_hs, RISCVCPU),
+> -        VMSTATE_UINTTL(env.scause_hs, RISCVCPU),
+> -        VMSTATE_UINTTL(env.stval_hs, RISCVCPU),
+> -        VMSTATE_UINTTL(env.satp_hs, RISCVCPU),
+> -        VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
+> -
+> -        VMSTATE_END_OF_LIST()
+> -    }
+> -};
+> -
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+>      .version_id = 3,
+> --
+> 2.25.1
+>
+>
 
