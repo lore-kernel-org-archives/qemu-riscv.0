@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1miUkX-0003IF-2n
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 00:53:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51044)
+	id 1miUoA-0005O1-1k
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 00:57:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52100)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1miUkV-0003Et-HU; Thu, 04 Nov 2021 00:53:15 -0400
-Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:33783)
+ id 1miUo8-0005MI-Gl; Thu, 04 Nov 2021 00:57:00 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:43906)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1miUkT-0000Zb-Se; Thu, 04 Nov 2021 00:53:15 -0400
-Received: by mail-io1-xd2d.google.com with SMTP id z206so5629333iof.0;
- Wed, 03 Nov 2021 21:53:13 -0700 (PDT)
+ id 1miUo6-0003BZ-LZ; Thu, 04 Nov 2021 00:57:00 -0400
+Received: by mail-il1-x12e.google.com with SMTP id s14so4972312ilv.10;
+ Wed, 03 Nov 2021 21:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=k0yU8KNgspa+wZFzYooCw4axOC8BAYss7iJrlzjQjdI=;
- b=PTAb84+Ukvy7L/IodJyaZ22j6RHLjJyg0ZHIM+E+2rp2xVvUHKsmlPbLcCIkT04cR6
- 2cFj+FQgZCViZ9gQg/zRkfbYCiEWVi9nS5ubEBade6pQrOciYLFdSmVVsuPGLJYS7RHl
- MtjhWJkwfwK1lXtfBJHKXjL3c8h5VEoyLbLLjRuNmKeW70GKXtSte//AeXzeC0BNi6cj
- NPl1z772ySDtQNjfBL8FOHFL9H0MvqOiSVP3hxD9gQNL+rffSR8taobv4i6uqlCCDcyU
- AvtC1CskWUghWQdGw22T6iIJfdAc8oe2sEXz8yr7+mf6WwSP9ctkqxvmUXF8u0tpdhX0
- eQ5A==
+ :cc; bh=aWSreHhHkHSP/YZ66P97FLl/QHb8JLJWRCgVr4lf1wg=;
+ b=i4+bSfnLV2R0/TuJJw8HxighQ6x0hTDbJ32tSAWxo/zOH4fWNAhpii02nEfiC5hn5D
+ H+Yhmcek5tTFHjvJl3mMSUfOgoHYxdTYTIpWR3A7nGJK+JNDv2YpnjJ0xMiPlXLY3jqM
+ FPdfMDHnPrDdl9p6pyzCb64orbGtVBdoXEdFPE/n1WMJus9SOLSQQ11LOp5211A2NGOB
+ IFfM6M5Z6pkyUK4jaDVlx7JWqbsWN2ZTvXRdzUhePO5j4DZ+/QWyD8aTw+KmB/wOQxSG
+ U4q5W0d6/NGlck+uOMwv1kX2kUAjtX6khIJkwjDnJRg+pxrS9hBjXqAhDEo0IBVTwawG
+ WUbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=k0yU8KNgspa+wZFzYooCw4axOC8BAYss7iJrlzjQjdI=;
- b=EYI7pmMH9ifPQEE7T6kWJDzS320NDb/lvL33ecITM1+rQkSiLVCMCbpDRYwlzc/k+U
- Gii8OfKT56FQDN/eOwxrw3/1Y1VU/8+k0u7xvXvTjnHzpe/Ge9SyEBFqeGwADDoKC1FS
- TFjjWarRafHZ/6yl4nkeV6POgcYoh5uSwkxXTerrnxyPQ+FDdsnip5qIP/Ne9B9wqTPs
- dmPSKLisKICWiDdW5qHmQnAUAoAb1SG0eYi/UziL5H3YyRpOlZcgf0nMn+y0KQojAT0B
- SiBSXk4nOKUURcpKNFv1zA2/gxlRJfpEpKy+MJj4uPc5lehmtiO0CR70aeUQ/MfEGD9f
- dIaw==
-X-Gm-Message-State: AOAM532q6AExYcUhuN3+6C2p+aoyOBKZdDqPXM9k3l/PArobvoUTGHiI
- JJAqqHi+Vi6X6T1Eer1XxnCWKPOO8cUSt1S/uwcR8AUvDRoq0jyL
-X-Google-Smtp-Source: ABdhPJzge1NMAkYn/dH2xVc9rh05b+EqYeKxfi+lKsXUN4vmXlrt6XhQjLfApoKHX/5ly60XzbJeqfGVFYi0V6wdPqM=
-X-Received: by 2002:a05:6602:2e8c:: with SMTP id
- m12mr34334336iow.91.1636001592490; 
- Wed, 03 Nov 2021 21:53:12 -0700 (PDT)
+ bh=aWSreHhHkHSP/YZ66P97FLl/QHb8JLJWRCgVr4lf1wg=;
+ b=SqauBas5pb4B1a89tVT2LHZTEfnR+aRNAklzzfRFSQkn/p/0kfxk70MzeERQjnSTq0
+ Mt/ymFWFvBqB1ry6Bv1eI62E5fr9bIoz3Ko5YlHBM0puzrhh7JYJG7ft6HmSvrANIFVZ
+ d7R8tAWWfQeJ1Jczxqjl/kbe9QJY89Ty9q7e2SsJgvt6z616KZjHnd5EJj7qD4Ff1Wxb
+ Cah4L4P6sB0G+hefVXAr9HUcKYNSU94gPPFeMq56ViXYz15K7CooDWiwDdi30z3zwr6s
+ miQwWK1OmOMCe1MFIgjzz+INBt9IkvLroMJTMcMrZBebG83NAtAKN9LDFemxFl/n0i2y
+ yM0Q==
+X-Gm-Message-State: AOAM530Iw7q1BQ0zpLMqd5n2psBAWMKFkPMv82slux2BZi99Z2Yr3/PW
+ B0uzQensrtqwJAxx0XXLS3p5Z6c5pcA3/1q9nWA=
+X-Google-Smtp-Source: ABdhPJwv4VbiCYIUeXnfz1eLRnluLlXbyRD/oVMnf6XWcH+HWxtYWLnSAp5n+Ynwm3+h7L6cRX/mF+/nWU4KkQy4QL0=
+X-Received: by 2002:a05:6e02:1a07:: with SMTP id
+ s7mr4332250ild.290.1636001817083; 
+ Wed, 03 Nov 2021 21:56:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211026064227.2014502-1-anup.patel@wdc.com>
- <20211026064227.2014502-9-anup.patel@wdc.com>
-In-Reply-To: <20211026064227.2014502-9-anup.patel@wdc.com>
+ <20211026064227.2014502-15-anup.patel@wdc.com>
+In-Reply-To: <20211026064227.2014502-15-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 4 Nov 2021 14:52:46 +1000
-Message-ID: <CAKmqyKOQm1Cz39vmaz0McP6OD=GoOptL0BxC+z6bzFwUCnx0pQ@mail.gmail.com>
-Subject: Re: [PATCH v4 08/22] target/riscv: Allow AIA device emulation to set
- ireg rmw callback
+Date: Thu, 4 Nov 2021 14:56:29 +1000
+Message-ID: <CAKmqyKOkNwpufjn-DuLRUnY1+Epn=krWOEyvjAH69LbhD+9DNg@mail.gmail.com>
+Subject: Re: [PATCH v4 14/22] target/riscv: Implement AIA xiselect and xireg
+ CSRs
 To: Anup Patel <anup.patel@wdc.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,8 +55,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,89 +77,125 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2021 04:53:15 -0000
+X-List-Received-Date: Thu, 04 Nov 2021 04:57:00 -0000
 
-On Tue, Oct 26, 2021 at 6:00 PM Anup Patel <anup.patel@wdc.com> wrote:
+On Tue, Oct 26, 2021 at 6:08 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> The AIA device emulation (such as AIA IMSIC) should be able to set
-> (or provide) AIA ireg read-modify-write callback for each privilege
-> level of a RISC-V HART.
+> The AIA specification defines [m|s|vs]iselect and [m|s|vs]ireg CSRs
+> which allow indirect access to interrupt priority arrays and per-HART
+> IMSIC registers. This patch implements AIA xiselect and xireg CSRs.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
 > ---
->  target/riscv/cpu.h        | 19 +++++++++++++++++++
->  target/riscv/cpu_helper.c | 14 ++++++++++++++
->  2 files changed, 33 insertions(+)
+>  target/riscv/cpu.h     |   7 ++
+>  target/riscv/csr.c     | 174 +++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/machine.c |   3 +
+>  3 files changed, 184 insertions(+)
 >
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 7182fadd21..ef4298dc69 100644
+> index 21d9c536ef..bf688eb1ea 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -239,6 +239,18 @@ struct CPURISCVState {
->      uint64_t (*rdtime_fn)(uint32_t);
->      uint32_t rdtime_fn_arg;
+> @@ -183,6 +183,10 @@ struct CPURISCVState {
+>      uint8_t miprio[64];
+>      uint8_t siprio[64];
 >
-> +    /* machine specific AIA ireg read-modify-write callback */
-> +#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein) \
-> +    ((((__vgein) & 0x3f) << 24) | (((__virt) & 0x1) << 20) | \
-> +     (((__priv) & 0x3) << 16) | (__isel & 0xffff))
-> +#define AIA_IREG_ISEL(__ireg)                  ((__ireg) & 0xffff)
-> +#define AIA_IREG_PRIV(__ireg)                  (((__ireg) >> 16) & 0x3)
-> +#define AIA_IREG_VIRT(__ireg)                  (((__ireg) >> 20) & 0x1)
-> +#define AIA_IREG_VGEIN(__ireg)                 (((__ireg) >> 24) & 0x3f)
-
-These should be added when they are used
-
-Alistair
-
-> +    int (*aia_ireg_rmw_fn[4])(void *arg, target_ulong reg,
-> +        target_ulong *val, target_ulong new_val, target_ulong write_mask);
-> +    void *aia_ireg_rmw_fn_arg[4];
+> +    /* AIA CSRs */
+> +    target_ulong miselect;
+> +    target_ulong siselect;
 > +
->      /* True if in debugger mode.  */
->      bool debugger;
->  #endif
-> @@ -380,6 +392,13 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
->  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
->                               uint32_t arg);
-> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-> +                                   int (*rmw_fn)(void *arg,
-> +                                                 target_ulong reg,
-> +                                                 target_ulong *val,
-> +                                                 target_ulong new_val,
-> +                                                 target_ulong write_mask),
-> +                                   void *rmw_fn_arg);
->  #endif
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
+>      /* Hypervisor CSRs */
+>      target_ulong hstatus;
+>      target_ulong hedeleg;
+> @@ -212,6 +216,9 @@ struct CPURISCVState {
+>      target_ulong vstval;
+>      target_ulong vsatp;
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 04df3792a8..d70def1da8 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -375,6 +375,20 @@ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
->      env->rdtime_fn_arg = arg;
+> +    /* AIA VS-mode CSRs */
+> +    target_ulong vsiselect;
+> +
+>      target_ulong mtval2;
+>      target_ulong mtinst;
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 69e857d1e5..e72220fd0f 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -854,6 +854,168 @@ static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
+>      return RISCV_EXCP_NONE;
 >  }
 >
-> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-> +                                   int (*rmw_fn)(void *arg,
-> +                                                 target_ulong reg,
-> +                                                 target_ulong *val,
-> +                                                 target_ulong new_val,
-> +                                                 target_ulong write_mask),
-> +                                   void *rmw_fn_arg)
+> +static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
 > +{
-> +    if (priv <= PRV_M) {
-> +        env->aia_ireg_rmw_fn[priv] = rmw_fn;
-> +        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
+> +    if (!riscv_cpu_virt_enabled(env)) {
+> +        return csrno;
 > +    }
+> +
+> +    switch (csrno) {
+> +    case CSR_SISELECT:
+> +        return CSR_VSISELECT;
+> +    case CSR_SIREG:
+> +        return CSR_VSIREG;
+> +    default:
+> +        return csrno;
+> +    };
 > +}
 > +
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->  {
->      if (newpriv > PRV_M) {
-> --
-> 2.25.1
->
->
+> +static int rmw_xiselect(CPURISCVState *env, int csrno, target_ulong *val,
+> +                        target_ulong new_val, target_ulong wr_mask)
+> +{
+> +    target_ulong *iselect;
+> +
+> +    /* Translate CSR number for VS-mode */
+> +    csrno = aia_xlate_vs_csrno(env, csrno);
+> +
+> +    /* Find the iselect CSR based on CSR number */
+> +    switch (csrno) {
+> +    case CSR_MISELECT:
+> +        iselect = &env->miselect;
+> +        break;
+> +    case CSR_SISELECT:
+> +        iselect = &env->siselect;
+> +        break;
+> +    case CSR_VSISELECT:
+> +        iselect = &env->vsiselect;
+> +        break;
+> +    default:
+> +         return RISCV_EXCP_ILLEGAL_INST;
+> +    };
+> +
+> +    if (val) {
+> +        *val = *iselect;
+> +    }
+> +
+> +    wr_mask &= ISELECT_MASK;
+> +    if (wr_mask) {
+> +        *iselect = (*iselect & ~wr_mask) | (new_val & wr_mask);
+> +    }
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int rmw_iprio(target_ulong iselect, uint8_t *iprio,
+> +                     target_ulong *val, target_ulong new_val,
+> +                     target_ulong wr_mask, int ext_irq_no)
+> +{
+> +    int i, firq, nirqs;
+> +    target_ulong old_val;
+> +
+> +    if (iselect < ISELECT_IPRIO0 || ISELECT_IPRIO15 < iselect) {
+> +        return -EINVAL;
+> +    }
+> +#if TARGET_LONG_BITS == 64
+> +    if (iselect & 0x1) {
+> +        return -EINVAL;
+> +    }
+> +#endif
+> +
+> +    nirqs = 4 * (TARGET_LONG_BITS / 32);
+> +    firq = ((iselect - ISELECT_IPRIO0) / (TARGET_LONG_BITS / 32)) * (nirqs);
+
+Don't use TARGET_LONG_BITS, this should be checked at runtime instead
+
+Alistair
 
