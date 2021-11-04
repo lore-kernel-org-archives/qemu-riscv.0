@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1miabN-0007ky-KA
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 07:08:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41978)
+	id 1miaeK-0002TO-Fk
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 07:11:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43004)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1miabM-0007kR-Qn; Thu, 04 Nov 2021 07:08:12 -0400
-Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:44940)
+ id 1miaeJ-0002Qw-2E; Thu, 04 Nov 2021 07:11:15 -0400
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a]:36457)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1miabK-0002VE-QQ; Thu, 04 Nov 2021 07:08:12 -0400
-Received: by mail-yb1-xb2a.google.com with SMTP id q74so13505132ybq.11;
- Thu, 04 Nov 2021 04:08:10 -0700 (PDT)
+ id 1miaeH-0004dU-53; Thu, 04 Nov 2021 07:11:14 -0400
+Received: by mail-yb1-xb2a.google.com with SMTP id d10so13585446ybe.3;
+ Thu, 04 Nov 2021 04:11:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tpjDTKz5u80vb9X3iDVrIdNpXlTw7p9VVUHETfEX5jU=;
- b=RB4UsDg0n5VTeRyEQpPI4+UIErbJwmL/cbd9kU1vUS6yINjINhZWvfl4YU9jAYUeA6
- rYTlT4pyExnW2bIA5s1USVI2NE85YjZTA3kNosN5xrdGQnN5kj+ZWzOsXDxI//AUEM80
- BHva11G8L1u8rT1zaWvheN2bLxRkUAsBk0QPupVydjTFZ6ywEyoyUI6dMPeSbAFKn7yq
- d0Ga+1B32vy3zH42tpT7XJ1X3HeStkJ6fnPzyDbXmPrz+M8mjQ2FgJuy0caH6htlZ7A+
- MsSTglb/sGByn4SZtHkAEtX8W6B3MOI/1MAs2mTAiUZEkGLmLERWtJuhnvrjpiCUz6Ej
- rwoA==
+ :cc; bh=nRmH3xLz6Ta446MJ0F1cvpbp8RaPNMR4UMUFwZsRnP8=;
+ b=o4d/TUTdYB+APD6oE+eHi+SOS4SKZB8XIAAt4kl5+01bHR7Fs/0VZGex42hnUURlJZ
+ rE1Or5GV8+2BQe7LrQE6uUKVVBa/5/qCd1Ar1scwwH1GM9x5iFUCwfKblvgE9A5W7tOs
+ vgcw39+4RpKtpqiSOEVjsS2WYtQ06kd1gdrADoJntYcQJtvYLEmsTVYPRBNXVNke2521
+ dhrXzryixcvWAcaii4hM9aYGfzdGreE9j0B7JIEndbhPlbuqAZuJKfD3h2wFNnnwH5zE
+ vLKC5VHQVjkCHxQMLGo/5+BhQMm8v2WU1aHmaa3it4RfpmR342txeTb1rH09XNZqp+Ra
+ b6Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=tpjDTKz5u80vb9X3iDVrIdNpXlTw7p9VVUHETfEX5jU=;
- b=FnyeLwt5Q3Rf4+OhLkLEZ7p52Vl8J51Wek/GJOobqhyRvTDYVXvsIn92DikdJSH/Ss
- bIKCDztL3vd7ro7h4pxkyQ30EBl6TL3BGCg6O7c6MerM2wNCSeUAtSrGXhe+HDnofqv4
- Hj6Rhw3cAkN8frrWz80kJ1dxyj+uPaHgQQstw2GcxcDmwzwgOezSCQW02+Xyuv8z1GGv
- gxe3n5NQVYMl57OMJBdJi27fXxMRKPcx9QZ1D5k/xY/42XZpZI8ICvCfAfmhk9S4c330
- 3qX0BzERpPCIB6wMGtzJYz2hTzGhcvNo+saiB4CMsKqmNaRlZOSM7zS2T9nPXv+eTywg
- hiqg==
-X-Gm-Message-State: AOAM533g+LPYi98VWLBWdDltQRD7+CSq6WupLRZdBsI4mUGoVG/AlcDN
- LD7Ha61nhgUPeZDusG7nhxHV4yTtzyuuxoLii0A=
-X-Google-Smtp-Source: ABdhPJyFN71QZsJzyvrk0rIcGEvpdHvNFCbCnilzONCeZh0q5q4+jR8icSP6TmCBBHYjXECW1QDCbqb/oONo5YYzoXI=
-X-Received: by 2002:a25:cc07:: with SMTP id l7mr43020707ybf.313.1636024089541; 
- Thu, 04 Nov 2021 04:08:09 -0700 (PDT)
+ bh=nRmH3xLz6Ta446MJ0F1cvpbp8RaPNMR4UMUFwZsRnP8=;
+ b=y4VWC1eek3pXy1W3rKvdlurWq6Csjs9Dmd8OlixyfYoWg4dIaYz99YC3j2D0CzClMv
+ eszidA6/3vMyMLdja78tFaUkJs3AZOM2Czq9kN7OkW5fySZ2YxTnALyobi9NiHEkeJQ6
+ KMP1wR17lqBapBWf6PJToIg3ENCs6Uo8n9+gB+DKl//mHZtIGlqYlqscfs56tn6W7jCR
+ +3CZVvaAub8xMKFEgWtHoZEoKXWyOP6ENuanSfalgia1rgPJMosb15BB3D93AasomD2f
+ iHu0S4CNOpSjCXwSpIeZwVtqQSlYtArwvo1rZyqJ0PRJsmmilDmZ02qQ7cFgruHTDfzF
+ FKTA==
+X-Gm-Message-State: AOAM532opg1oWeJSf9u3E6vBf/orYuIzQiBJ4tFHyzwARH9Xv4nupuQr
+ u3T52rhpq6MweCvRxIDy/VpVEh50ssKieuMFu8J4sroUuuw=
+X-Google-Smtp-Source: ABdhPJwU7T7B9jMDl89TQnYthk0muwdmF1CRk1Bb7UvKFVppPsBGR21UP1fbWXyX2UOXasKr7bTlKroHhgcX7bwcDOE=
+X-Received: by 2002:a25:258c:: with SMTP id l134mr29827271ybl.40.1636024268760; 
+ Thu, 04 Nov 2021 04:11:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211025195601.245631-1-atish.patra@wdc.com>
- <20211025195601.245631-3-atish.patra@wdc.com>
-In-Reply-To: <20211025195601.245631-3-atish.patra@wdc.com>
+ <20211025195601.245631-4-atish.patra@wdc.com>
+In-Reply-To: <20211025195601.245631-4-atish.patra@wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 4 Nov 2021 19:07:58 +0800
-Message-ID: <CAEUhbmUOBq4-tguGbGixXADGdstJ2azKr-WK=6y2J83Ye9AbBQ@mail.gmail.com>
-Subject: Re: [ PATCH v3 02/10] target/riscv: Implement PMU CSR predicate
- function for
+Date: Thu, 4 Nov 2021 19:10:57 +0800
+Message-ID: <CAEUhbmVVM7YOOaoax1JWuO-wHWCZN+FO42CyiaDKNLwbBaR7Eg@mail.gmail.com>
+Subject: Re: [ PATCH v3 03/10] target/riscv: pmu: Rename the counters
+ extension to pmu
 To: Atish Patra <atish.patra@wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, 
@@ -73,103 +73,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2021 11:08:13 -0000
+X-List-Received-Date: Thu, 04 Nov 2021 11:11:15 -0000
 
-On Tue, Oct 26, 2021 at 3:56 AM Atish Patra <atish.patra@wdc.com> wrote:
+On Tue, Oct 26, 2021 at 4:02 AM Atish Patra <atish.patra@wdc.com> wrote:
 >
-
-The commit title is incomplete
-
-
-> Currently, the predicate function for PMU related CSRs only works if
-> virtualization is enabled. It also does not check mcounteren bits before
-> before cycle/minstret/hpmcounterx access.
+> The PMU counters are supported via cpu config "Counters" which doesn't
+> indicate the correct purpose of those counters.
 >
-> Support supervisor mode access in the predicate function as well.
+> Rename the config property to pmu to indicate that these counters
+> are performance monitoring counters. This aligns with cpu options for
+> ARM architecture as well.
 >
 > Signed-off-by: Atish Patra <atish.patra@wdc.com>
 > ---
->  target/riscv/csr.c | 52 ++++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 52 insertions(+)
+>  target/riscv/cpu.c | 2 +-
+>  target/riscv/cpu.h | 2 +-
+>  target/riscv/csr.c | 2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1d69d1887e63..3b55f5ed0036 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -598,7 +598,7 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
+>      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>      DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+> -    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+> +    DEFINE_PROP_BOOL("pmu", RISCVCPU, cfg.ext_pmu, true),
+>      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 9e55b2f5b170..ebc1a8754032 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -294,7 +294,7 @@ struct RISCVCPU {
+>          bool ext_zbb;
+>          bool ext_zbc;
+>          bool ext_zbs;
+> -        bool ext_counters;
+> +        bool ext_pmu;
+>          bool ext_ifencei;
+>          bool ext_icsr;
 >
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 1ec776013435..de484c74d3b4 100644
+> index de484c74d3b4..c486eeaffeb8 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -62,12 +62,64 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->  #if !defined(CONFIG_USER_ONLY)
->      CPUState *cs = env_cpu(env);
+> @@ -64,7 +64,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
 >      RISCVCPU *cpu = RISCV_CPU(cs);
-> +    int ctr_index;
+>      int ctr_index;
 >
->      if (!cpu->cfg.ext_counters) {
+> -    if (!cpu->cfg.ext_counters) {
+> +    if (!cpu->cfg.ext_pmu) {
 >          /* The Counters extensions is not enabled */
+
+%s/Counters extensions/PMU extension
+
 >          return RISCV_EXCP_ILLEGAL_INST;
 >      }
->
-> +    if (env->priv == PRV_S) {
-> +        switch (csrno) {
-> +        case CSR_CYCLE:
-> +            if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> +                return RISCV_EXCP_ILLEGAL_INST;
-> +            }
-> +            break;
-> +        case CSR_TIME:
-> +            if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> +                return RISCV_EXCP_ILLEGAL_INST;
-> +            }
-> +            break;
-> +        case CSR_INSTRET:
-> +            if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> +                return RISCV_EXCP_ILLEGAL_INST;
-> +            }
-> +            break;
-> +        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> +            ctr_index = csrno - CSR_CYCLE;
-> +            if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> +                return RISCV_EXCP_ILLEGAL_INST;
-> +            }
-> +            break;
+> --
 
-The above switch..case can be simplified with the logic of last case
-as the same one applies to all cases.
-
-> +        }
-> +        if (riscv_cpu_is_32bit(env)) {
-> +            switch (csrno) {
-> +            case CSR_CYCLEH:
-> +                if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> +                    return RISCV_EXCP_ILLEGAL_INST;
-> +                }
-> +                break;
-> +            case CSR_TIMEH:
-> +                if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> +                    return RISCV_EXCP_ILLEGAL_INST;
-> +                }
-> +                break;
-> +            case CSR_INSTRETH:
-> +                if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> +                    return RISCV_EXCP_ILLEGAL_INST;
-> +                }
-> +                break;
-> +            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> +                ctr_index = csrno - CSR_CYCLEH;
-> +                if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> +                    return RISCV_EXCP_ILLEGAL_INST;
-> +                }
-
-ditto
-
-> +                break;
-> +            }
-> +        }
-> +    }
-> +
->      if (riscv_cpu_virt_enabled(env)) {
->          switch (csrno) {
->          case CSR_CYCLE:
->
-
-Regards,
-Bin
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
