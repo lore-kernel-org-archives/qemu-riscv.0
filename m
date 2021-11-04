@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1miUj9-0001zJ-HT
-	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 00:51:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50782)
+	id 1miUkX-0003IF-2n
+	for mharc-qemu-riscv@gnu.org; Thu, 04 Nov 2021 00:53:17 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51044)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1miUj7-0001xE-RD; Thu, 04 Nov 2021 00:51:49 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:36803)
+ id 1miUkV-0003Et-HU; Thu, 04 Nov 2021 00:53:15 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:33783)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1miUj6-000816-9A; Thu, 04 Nov 2021 00:51:49 -0400
-Received: by mail-io1-xd35.google.com with SMTP id e144so5585446iof.3;
- Wed, 03 Nov 2021 21:51:47 -0700 (PDT)
+ id 1miUkT-0000Zb-Se; Thu, 04 Nov 2021 00:53:15 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id z206so5629333iof.0;
+ Wed, 03 Nov 2021 21:53:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mULopZP3r8CZoMaKH7eLEtct6ZMONe69Xa0niqT8ueY=;
- b=PdPv3cw1AZZbFo25KqUnEqQujR3aE2U9rugicaVswu6pVMT235B6/+m9XzL25QHcl/
- zQVc0tukuxuq/76kF2jTGWRLkM2SaSG+k11u7dzkyQ1U+Zf8XOq6TpbgtzGHw4ZysVJK
- limcs90hwrI6jY8A9nJB+/i60SRvWCKJIML13wT7PAVa0Xr+prdm03vvvbMK9e6A9ham
- tjvdiHtMV+sAq1DHFFBEKyxzNZGDtH/FUwQDtdt+J0OTP+xzsb6oqZWikUut26FiPhyx
- 3GgjU06AR66lVKg9YHEUmh7IfHi/KYyMCK1K2/umkXbZ5BjMiTn5Pb8EbtkPW5N/dGPU
- Fj9A==
+ :cc; bh=k0yU8KNgspa+wZFzYooCw4axOC8BAYss7iJrlzjQjdI=;
+ b=PTAb84+Ukvy7L/IodJyaZ22j6RHLjJyg0ZHIM+E+2rp2xVvUHKsmlPbLcCIkT04cR6
+ 2cFj+FQgZCViZ9gQg/zRkfbYCiEWVi9nS5ubEBade6pQrOciYLFdSmVVsuPGLJYS7RHl
+ MtjhWJkwfwK1lXtfBJHKXjL3c8h5VEoyLbLLjRuNmKeW70GKXtSte//AeXzeC0BNi6cj
+ NPl1z772ySDtQNjfBL8FOHFL9H0MvqOiSVP3hxD9gQNL+rffSR8taobv4i6uqlCCDcyU
+ AvtC1CskWUghWQdGw22T6iIJfdAc8oe2sEXz8yr7+mf6WwSP9ctkqxvmUXF8u0tpdhX0
+ eQ5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mULopZP3r8CZoMaKH7eLEtct6ZMONe69Xa0niqT8ueY=;
- b=PED6KyBb2tOrKs0bzx3+DGCjQzByXvNWvsw2lzLh7zsjCrdKscn9zaZ5YI1rLxcPwx
- 034JVkW9XgbRMvFXPCp1Y0SBnyPeI/EY0HdtJlCPaLWjcC+rIuDoxNPR93qguO0ALG9A
- qnN01aOFXw/ivtJyu9Cll4AJMdb9po9pj2Bsu00cyOai7pK8abETFr0qzsVJeHfK1cd3
- QArKnk0bVyRSHvbawhP3TvWl06Ew19lSaWuZ0SPg0W6sFk18SnK3sDV4SPaEfoR++a9F
- E5SANP1x99suLnMGyRlfk7Dhy+Cj6j+p21ZHlj3YrARI7zr5VIne4wxt/hnJtYZxayYG
- G9wQ==
-X-Gm-Message-State: AOAM532seLo8niTz1PX5upxQ+FOox7k+SGFVDQKXqJB7SZ01O0EOpx6C
- 3T1fJZ68ND/yZ82vVAh/MDqun2speZMULkVgbhM=
-X-Google-Smtp-Source: ABdhPJytpwe3kjW+zFva3wW38RFHOfVFiDmeenc6mhiq4hdt9deQohv7bP/HZTKGyh2gFyFsiE6QipgCGZ4fzH5ZGKQ=
-X-Received: by 2002:a05:6602:2434:: with SMTP id
- g20mr7178974iob.57.1636001506824; 
- Wed, 03 Nov 2021 21:51:46 -0700 (PDT)
+ bh=k0yU8KNgspa+wZFzYooCw4axOC8BAYss7iJrlzjQjdI=;
+ b=EYI7pmMH9ifPQEE7T6kWJDzS320NDb/lvL33ecITM1+rQkSiLVCMCbpDRYwlzc/k+U
+ Gii8OfKT56FQDN/eOwxrw3/1Y1VU/8+k0u7xvXvTjnHzpe/Ge9SyEBFqeGwADDoKC1FS
+ TFjjWarRafHZ/6yl4nkeV6POgcYoh5uSwkxXTerrnxyPQ+FDdsnip5qIP/Ne9B9wqTPs
+ dmPSKLisKICWiDdW5qHmQnAUAoAb1SG0eYi/UziL5H3YyRpOlZcgf0nMn+y0KQojAT0B
+ SiBSXk4nOKUURcpKNFv1zA2/gxlRJfpEpKy+MJj4uPc5lehmtiO0CR70aeUQ/MfEGD9f
+ dIaw==
+X-Gm-Message-State: AOAM532q6AExYcUhuN3+6C2p+aoyOBKZdDqPXM9k3l/PArobvoUTGHiI
+ JJAqqHi+Vi6X6T1Eer1XxnCWKPOO8cUSt1S/uwcR8AUvDRoq0jyL
+X-Google-Smtp-Source: ABdhPJzge1NMAkYn/dH2xVc9rh05b+EqYeKxfi+lKsXUN4vmXlrt6XhQjLfApoKHX/5ly60XzbJeqfGVFYi0V6wdPqM=
+X-Received: by 2002:a05:6602:2e8c:: with SMTP id
+ m12mr34334336iow.91.1636001592490; 
+ Wed, 03 Nov 2021 21:53:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211026064227.2014502-1-anup.patel@wdc.com>
- <20211026064227.2014502-13-anup.patel@wdc.com>
-In-Reply-To: <20211026064227.2014502-13-anup.patel@wdc.com>
+ <20211026064227.2014502-9-anup.patel@wdc.com>
+In-Reply-To: <20211026064227.2014502-9-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 4 Nov 2021 14:51:20 +1000
-Message-ID: <CAKmqyKOnfvwqWAEdUq+h6OyXTSnNJ0ZZ3+CJbkyeJEKk6htSjQ@mail.gmail.com>
-Subject: Re: [PATCH v4 12/22] target/riscv: Implement AIA interrupt filtering
- CSRs
+Date: Thu, 4 Nov 2021 14:52:46 +1000
+Message-ID: <CAKmqyKOQm1Cz39vmaz0McP6OD=GoOptL0BxC+z6bzFwUCnx0pQ@mail.gmail.com>
+Subject: Re: [PATCH v4 08/22] target/riscv: Allow AIA device emulation to set
+ ireg rmw callback
 To: Anup Patel <anup.patel@wdc.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,8 +55,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Atish Patra <atish.patra@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,93 +77,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Nov 2021 04:51:50 -0000
+X-List-Received-Date: Thu, 04 Nov 2021 04:53:15 -0000
 
-On Tue, Oct 26, 2021 at 5:44 PM Anup Patel <anup.patel@wdc.com> wrote:
+On Tue, Oct 26, 2021 at 6:00 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> The AIA specificaiton adds interrupt filtering support for M-mode
-> and HS-mode. Using AIA interrupt filtering M-mode and H-mode can
-> take local interrupt 13 or above and selectively inject same local
-> interrupt to lower privilege modes.
->
-> At the moment, we don't have any local interrupts above 12 so we
-> add dummy implementation (i.e. read zero and ignore write) of AIA
-> interrupt filtering CSRs.
+> The AIA device emulation (such as AIA IMSIC) should be able to set
+> (or provide) AIA ireg read-modify-write callback for each privilege
+> level of a RISC-V HART.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> ---
+>  target/riscv/cpu.h        | 19 +++++++++++++++++++
+>  target/riscv/cpu_helper.c | 14 ++++++++++++++
+>  2 files changed, 33 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 7182fadd21..ef4298dc69 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -239,6 +239,18 @@ struct CPURISCVState {
+>      uint64_t (*rdtime_fn)(uint32_t);
+>      uint32_t rdtime_fn_arg;
+>
+> +    /* machine specific AIA ireg read-modify-write callback */
+> +#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein) \
+> +    ((((__vgein) & 0x3f) << 24) | (((__virt) & 0x1) << 20) | \
+> +     (((__priv) & 0x3) << 16) | (__isel & 0xffff))
+> +#define AIA_IREG_ISEL(__ireg)                  ((__ireg) & 0xffff)
+> +#define AIA_IREG_PRIV(__ireg)                  (((__ireg) >> 16) & 0x3)
+> +#define AIA_IREG_VIRT(__ireg)                  (((__ireg) >> 20) & 0x1)
+> +#define AIA_IREG_VGEIN(__ireg)                 (((__ireg) >> 24) & 0x3f)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+These should be added when they are used
 
 Alistair
 
-> ---
->  target/riscv/csr.c | 23 +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
+> +    int (*aia_ireg_rmw_fn[4])(void *arg, target_ulong reg,
+> +        target_ulong *val, target_ulong new_val, target_ulong write_mask);
+> +    void *aia_ireg_rmw_fn_arg[4];
+> +
+>      /* True if in debugger mode.  */
+>      bool debugger;
+>  #endif
+> @@ -380,6 +392,13 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
+>  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
+>  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
+>                               uint32_t arg);
+> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+> +                                   int (*rmw_fn)(void *arg,
+> +                                                 target_ulong reg,
+> +                                                 target_ulong *val,
+> +                                                 target_ulong new_val,
+> +                                                 target_ulong write_mask),
+> +                                   void *rmw_fn_arg);
+>  #endif
+>  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 46d0cabbde..43ae444774 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -153,6 +153,15 @@ static RISCVException any32(CPURISCVState *env, int csrno)
->
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 04df3792a8..d70def1da8 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -375,6 +375,20 @@ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
+>      env->rdtime_fn_arg = arg;
 >  }
 >
-> +static int aia_any(CPURISCVState *env, int csrno)
+> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+> +                                   int (*rmw_fn)(void *arg,
+> +                                                 target_ulong reg,
+> +                                                 target_ulong *val,
+> +                                                 target_ulong new_val,
+> +                                                 target_ulong write_mask),
+> +                                   void *rmw_fn_arg)
 > +{
-> +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    if (priv <= PRV_M) {
+> +        env->aia_ireg_rmw_fn[priv] = rmw_fn;
+> +        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
 > +    }
-> +
-> +    return any(env, csrno);
 > +}
 > +
->  static int aia_any32(CPURISCVState *env, int csrno)
+>  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
 >  {
->      if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-> @@ -515,6 +524,12 @@ static RISCVException read_zero(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException write_ignore(CPURISCVState *env, int csrno,
-> +                                   target_ulong val)
-> +{
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_mhartid(CPURISCVState *env, int csrno,
->                                     target_ulong *val)
->  {
-> @@ -2071,9 +2086,15 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
->      [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
->
-> +    /* Virtual Interrupts for Supervisor Level (AIA) */
-> +    [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
-> +    [CSR_MVIP]       = { "mvip",  aia_any, read_zero, write_ignore },
-> +
->      /* Machine-Level High-Half CSRs (AIA) */
->      [CSR_MIDELEGH] = { "midelegh", aia_any32, NULL, NULL, rmw_midelegh },
->      [CSR_MIEH]     = { "mieh",     aia_any32, NULL, NULL, rmw_mieh     },
-> +    [CSR_MVIENH]   = { "mvienh",   aia_any32, read_zero,  write_ignore },
-> +    [CSR_MVIPH]    = { "mviph",    aia_any32, read_zero,  write_ignore },
->      [CSR_MIPH]     = { "miph",     aia_any32, NULL, NULL, rmw_miph     },
->
->      /* Supervisor Trap Setup */
-> @@ -2125,12 +2146,14 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,      write_mtinst      },
->
->      /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
-> +    [CSR_HVIEN]       = { "hvien",       aia_hmode, read_zero, write_ignore },
->      [CSR_HVICTL]      = { "hvictl",      aia_hmode, read_hvictl, write_hvictl },
->      [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,   write_hviprio1 },
->      [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,   write_hviprio2 },
->
->      /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
->      [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL, rmw_hidelegh },
-> +    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero, write_ignore },
->      [CSR_HVIPH]       = { "hviph",       aia_hmode32, NULL, NULL, rmw_hviph },
->      [CSR_HVIPRIO1H]   = { "hviprio1h",   aia_hmode32, read_hviprio1h, write_hviprio1h },
->      [CSR_HVIPRIO2H]   = { "hviprio2h",   aia_hmode32, read_hviprio2h, write_hviprio2h },
+>      if (newpriv > PRV_M) {
 > --
 > 2.25.1
 >
