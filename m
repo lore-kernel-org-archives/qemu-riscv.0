@@ -1,37 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mkhjN-0006KE-Tg
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 02:09:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38630)
+	id 1mkhju-0007zD-BH
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 02:09:46 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38836)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkhjL-0006Fs-JR; Wed, 10 Nov 2021 02:09:11 -0500
-Received: from out28-172.mail.aliyun.com ([115.124.28.172]:45817)
+ id 1mkhjs-0007rZ-Mk; Wed, 10 Nov 2021 02:09:44 -0500
+Received: from out28-197.mail.aliyun.com ([115.124.28.197]:41867)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkhjI-0004bz-Rr; Wed, 10 Nov 2021 02:09:10 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1841715|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0508009-0.000453744-0.948745;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LqVF5oK_1636528141; 
+ id 1mkhjq-0004gu-EJ; Wed, 10 Nov 2021 02:09:44 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.3011507|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0189165-0.00166077-0.979423;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047207; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LqU9ybw_1636528172; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LqVF5oK_1636528141)
- by smtp.aliyun-inc.com(10.147.41.199);
- Wed, 10 Nov 2021 15:09:01 +0800
+ fp:SMTPD_---.LqU9ybw_1636528172) by smtp.aliyun-inc.com(10.147.40.7);
+ Wed, 10 Nov 2021 15:09:32 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 08/14] target/riscv: Fix check range for first fault only
-Date: Wed, 10 Nov 2021 15:04:46 +0800
-Message-Id: <20211110070452.48539-9-zhiwei_liu@c-sky.com>
+Subject: [PATCH v2 09/14] target/riscv: Relax debug check for pm write
+Date: Wed, 10 Nov 2021 15:04:47 +0800
+Message-Id: <20211110070452.48539-10-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
 References: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.172; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-172.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.197; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-197.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -50,35 +49,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2021 07:09:12 -0000
-
-Only check the range that has passed the address translation.
+X-List-Received-Date: Wed, 10 Nov 2021 07:09:45 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/vector_helper.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ target/riscv/csr.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index cb6fa8718d..60006b1b1b 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -638,12 +638,12 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-                                          cpu_mmu_index(env, false));
-                 if (host) {
- #ifdef CONFIG_USER_ONLY
--                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
-+                    if (page_check_range(addr, offset, PAGE_READ) < 0) {
-                         vl = i;
-                         goto ProbeSuccess;
-                     }
- #else
--                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
-+                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
- #endif
-                 } else {
-                     vl = i;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 9f41954894..74c0b788fd 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1445,6 +1445,9 @@ static bool check_pm_current_disabled(CPURISCVState *env, int csrno)
+     int csr_priv = get_field(csrno, 0x300);
+     int pm_current;
+ 
++    if (env->debugger) {
++        return false;
++    }
+     /*
+      * If priv lvls differ that means we're accessing csr from higher priv lvl,
+      * so allow the access
 -- 
 2.25.1
 
