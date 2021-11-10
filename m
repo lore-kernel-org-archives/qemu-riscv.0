@@ -1,72 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mklni-0001y8-BN
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 06:29:58 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54382)
+	id 1mklpg-0003ut-16
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 06:32:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54896)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mklng-0001uf-PP
- for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 06:29:56 -0500
-Received: from [2a00:1450:4864:20::42f] (port=43720
- helo=mail-wr1-x42f.google.com)
+ id 1mklpc-0003r0-PC
+ for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 06:31:56 -0500
+Received: from [2a00:1450:4864:20::336] (port=40647
+ helo=mail-wm1-x336.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mklne-0006zj-VE
- for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 06:29:56 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id t30so3381175wra.10
- for <qemu-riscv@nongnu.org>; Wed, 10 Nov 2021 03:29:54 -0800 (PST)
+ id 1mklpb-0007V6-8V
+ for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 06:31:56 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ az33-20020a05600c602100b00333472fef04so3594496wmb.5
+ for <qemu-riscv@nongnu.org>; Wed, 10 Nov 2021 03:31:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=gUTkVha6SSPO/CY4p0t9c6x6bwRs/u1y1Klmhtasuas=;
- b=UVhTO9L6gPwSuDF+nxaEUya8/Qq3WBnBRAEwySM8zsqsr9nXgLhlWgfPjScgFovrbf
- x+cL5refsVohf/Daub/b+GecMOPsnfA7PjRq9HD9sHzAcSbsLUXdmoJhDRYZ5sxoYM7L
- 3iOC1h7Q0w1kqWaUBrl+iTdmmbhgQwwzefM4J2hjmmeyI+sRpZIFh3sGL9AdgxwW1DGb
- i+cdNx10T4rJXXj1cUqGJo/2i7kTT2V8pAf8+bFcYYo8e3psZvGnmEKu4OKEJwgrQbLh
- KY/0LhHgDIJ2PJnYDCp8fUxJo7cjbkugywlWX5vr8e28wwHqvyyiSSjeZZbbmVor1EzU
- ZATA==
+ bh=GpT5Vgn46qco/QbqL3TPeFY6gev9zMkidHKtnQBQiqE=;
+ b=eTVF20Xxl0s+XKKee9OxOOf9I/3V/JPlbrAClRXuzp4ApZivT/IauRDcyU33dksP+h
+ +8e7udyXUEgGL7K6jxkUEwUtCb3lsMTJ3Sz4AUtI7ZMZGq25aznkEOfOlfFtpMJ0LPTe
+ iqf469qZ59EJckZLUVzsgG+DwUwkGXY1dio0BLpn/O5OnHLyZXJU28ZRSSpSLB1n3KVW
+ k4HQlcdQStY3wlfPs4x/7ggboBpkjCwZceUI9jCcxEL6GLTOhUCKVgWkMkJGJ+vkA1gH
+ RHeI9Y0BawMik29TKOqOuea9YoOjzbKGI6zGPsKzPqfz6S7Noxm7CG3AkXjbn92Pv19a
+ SeoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=gUTkVha6SSPO/CY4p0t9c6x6bwRs/u1y1Klmhtasuas=;
- b=Bae+c8x//1ghU90G699Ca7bwwMnVx/MMB8dd+vmT6Zvsle65FxMKkif/8rCRABUZ+F
- WjqxR80pQoVPmhbrlsWFmAKXHuXRKnmDPz7+wjEDaa/cPA22WOcWJJceyjhhvC7Y3Uj1
- 0eEnbMpjFUyu1NzQC6xzNn/1vqQzF7J2XCUHuorwh/30j1Mdij6+ClgKmVFEThcvUNoK
- ClfxTVn2TImrTIx4oe25v+zgtFl/f0YQgLOq84A/QEnd/IyynGW+sG076zrQHpETjquo
- TdsywG2VdKV98RLMozH5kv/8EN6AYRLON1/xirDLsWG29LtmgwGJxIyIF/UQq3RdcD9e
- R8sg==
-X-Gm-Message-State: AOAM5333xfeLhoJ19kI0uiOq4uNV1ym/6qvPDIc5Fxp3oqiA1hFYtiEq
- 5IFA2M8+fCydy1ToWIgPQ0VVkQ==
-X-Google-Smtp-Source: ABdhPJyFQ2lyiAEA098g+4TM9OceWB160jaHS4f/jZHKcVf2yBu72OD8XlJ8vn7gW4W1mPUgpGxxsA==
-X-Received: by 2002:adf:e882:: with SMTP id d2mr18864004wrm.389.1636543793640; 
- Wed, 10 Nov 2021 03:29:53 -0800 (PST)
+ bh=GpT5Vgn46qco/QbqL3TPeFY6gev9zMkidHKtnQBQiqE=;
+ b=rEDgGHTlMCwYUf1y1OEL1XmD5+GqhXYsDxAcxs1x6t6aQXAC1H4mo3m5lem2hOmVLj
+ MeTPYFZaPrYZNkMFHE8bgcrv7Ehh4lgRXhc/gyngI/Fd6wvHKzwWAD7kKTFYnok8wSEj
+ 21/UGWLbn8YOiNU3PhRIqL0ksUMc2GB67truvvO5RvXuldBWSLNvVt1FvRQdqrYukgIx
+ 5N202Gmg4C+WIksnaTCRbPe0AuOYDVhj5CPijlPfxly5jaTIifT7QcycQ3btyE03m3ey
+ eT55CuTLmA8UpKkhEIzMQg0NhyNz2Qt3h/BKHmihab5t0lSxfXINhy4+dQ4UPwNHAxkH
+ qSbg==
+X-Gm-Message-State: AOAM5339J34rnNnTJAxn1O9EDSKmaQ40XDHymR1UpmI1Wshvg62rV8N9
+ Rg1vlZoicjBWOCA4mbWuTDWA0g==
+X-Google-Smtp-Source: ABdhPJxKSUSDA2nkwGFAGOT/qyDLeF+CuS1Tujewfi7SPkkb/mqtckau4QzakRXstuET+zAECNfRJw==
+X-Received: by 2002:a05:600c:4108:: with SMTP id
+ j8mr15437677wmi.139.1636543913761; 
+ Wed, 10 Nov 2021 03:31:53 -0800 (PST)
 Received: from [192.168.8.106] (104.red-2-142-241.dynamicip.rima-tde.net.
  [2.142.241.104])
- by smtp.gmail.com with ESMTPSA id q84sm6506994wme.3.2021.11.10.03.29.52
+ by smtp.gmail.com with ESMTPSA id u23sm16402438wru.21.2021.11.10.03.31.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Nov 2021 03:29:53 -0800 (PST)
-Subject: Re: [PATCH v2 11/14] target/riscv: Adjust scalar reg in vector with
- XLEN
+ Wed, 10 Nov 2021 03:31:53 -0800 (PST)
+Subject: Re: [PATCH v2 09/14] target/riscv: Relax debug check for pm write
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
+ qemu-riscv@nongnu.org, Alexey Baturo <baturo.alexey@gmail.com>
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
- <20211110070452.48539-12-zhiwei_liu@c-sky.com>
+ <20211110070452.48539-10-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <3f4cbf03-5492-3f5c-9e6f-6ff55bd1ba6e@linaro.org>
-Date: Wed, 10 Nov 2021 12:29:50 +0100
+Message-ID: <3dcee028-4020-b8ca-e98c-92af22a5ed9a@linaro.org>
+Date: Wed, 10 Nov 2021 12:31:50 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211110070452.48539-12-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211110070452.48539-10-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::336
  (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -29
 X-Spam_score: -3.0
 X-Spam_bar: ---
@@ -86,39 +87,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2021 11:29:57 -0000
+X-List-Received-Date: Wed, 10 Nov 2021 11:31:57 -0000
 
 On 11/10/21 8:04 AM, LIU Zhiwei wrote:
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index b15ad394bb..07e882160d 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -27,6 +27,7 @@ FIELD(VDATA, VM, 8, 1)
->   FIELD(VDATA, LMUL, 9, 2)
->   FIELD(VDATA, NF, 11, 4)
->   FIELD(VDATA, WD, 11, 1)
-> +FIELD(VDATA, TRUNC, 15, 1)
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>   target/riscv/csr.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9f41954894..74c0b788fd 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1445,6 +1445,9 @@ static bool check_pm_current_disabled(CPURISCVState *env, int csrno)
+>       int csr_priv = get_field(csrno, 0x300);
+>       int pm_current;
+>   
+> +    if (env->debugger) {
+> +        return false;
+> +    }
+>       /*
+>        * If priv lvls differ that means we're accessing csr from higher priv lvl,
+>        * so allow the access
 
-No need for this.
+Seems reasonable.
 
-> @@ -4756,7 +4762,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->               continue;                                                     \
->           }                                                                 \
->           if (i == 0) {                                                     \
-> -            *((ETYPE *)vd + H(i)) = s1;                                   \
-> +            *((ETYPE *)vd + H(i)) = trunc ? (s1 & UINT32_MAX) : s1;       \
->           } else {                                                          \
->               *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
->           }                                                                 \
-...
-> @@ -4785,7 +4792,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
->               continue;                                                     \
->           }                                                                 \
->           if (i == vl - 1) {                                                \
-> -            *((ETYPE *)vd + H(i)) = s1;                                   \
-> +            *((ETYPE *)vd + H(i)) = trunc ? (s1 & UINT32_MAX) : s1;       \
-
-In both of these cases you can simply zero-extend s1 in the translator before passing it in.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
