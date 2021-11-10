@@ -1,47 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mkk88-0006Ip-GW
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 04:42:56 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52412)
+	id 1mkkh5-0007S2-01
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 05:19:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35454)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkk85-0006HW-Pm; Wed, 10 Nov 2021 04:42:53 -0500
-Received: from out28-101.mail.aliyun.com ([115.124.28.101]:48623)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkk82-0006EF-Kg; Wed, 10 Nov 2021 04:42:53 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07445669|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0467411-0.000166629-0.953092;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047212; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.Lqah5xN_1636537363; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Lqah5xN_1636537363)
- by smtp.aliyun-inc.com(10.147.40.44); Wed, 10 Nov 2021 17:42:44 +0800
-Subject: Re: [PATCH v2 04/14] target/riscv: Use gdb xml according to max mxlen
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
- richard.henderson@linaro.org
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mkkh3-0007OW-4g
+ for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 05:19:01 -0500
+Received: from [2a00:1450:4864:20::332] (port=33617
+ helo=mail-wm1-x332.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mkkh0-0004An-V7
+ for qemu-riscv@nongnu.org; Wed, 10 Nov 2021 05:19:00 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ r9-20020a7bc089000000b00332f4abf43fso3292771wmh.0
+ for <qemu-riscv@nongnu.org>; Wed, 10 Nov 2021 02:18:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=s9L95GC+sQ97RM6iP3+cTQRWNeOxAm2i2hF+cRSAy1I=;
+ b=PL6pCHSEDiax81DuDkktkxHSq6kvgihm9ti8XVshdIoFTncE4KHm4VpndfhOBMDyYe
+ iUjaVVVhJizVxNgl8yLzqSBIlHUTy0qY0YK5zVrDkNXdp3T/jGgXMfuPQnV18WY5ktiT
+ dJPwbTqXdB5BW/VdKjOrll77Xv17a8wTx00wEK6JNLDMkfelM6S3znWDrewrK1gi+qET
+ lv+LxDmb1Pj9ItCFazwNdwC1y8SLQxN0kf6kkgeBpTLBsQWGot2rlP/vy7plNg/goX5F
+ zFanrNcebEIc2GTqasNqsFIwq6HtZqqkNK8TvzVg711tuzvNpoL7JvRCq6F997Pr8ph7
+ oltw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=s9L95GC+sQ97RM6iP3+cTQRWNeOxAm2i2hF+cRSAy1I=;
+ b=O1b/xiybUacIIneKD/+yp97nfsmefBsNl29seUGmySDF9F9ufDzPAZNySgfgPpMM5h
+ ndNzuy2bsSZ/f7qRKmWqejL2ZaWmqsDLh/V3IzJ8FhY04lMedd8LNkg0yvLut3RL+O9Z
+ dqf5Vxgtw7lJId7FGVY+MwSkhrX6zTaQPN1NRUvnZL+IQQbEfBO6HGGkqZKtYHAW1sqb
+ VvxG5T05OCCbmY8kuVMUxCLQ/xj87HKn9IMYbO99rdnRPAdkcpLr/E2JX6VriXuxNXGJ
+ gAAf6P+F9gNlvPZexAsULpbVJHRfKTTf2ux/9PSRXLYmyjV0whL9+RRG10jozwRnTbkx
+ DnxQ==
+X-Gm-Message-State: AOAM530HgVWP8hzNpykrUiLTxPyrw5X/45LxLmezNMILqNKLc1QgsmoE
+ NXNV6U1TPosIxkb0TvTC47kRKg==
+X-Google-Smtp-Source: ABdhPJzcbkhyOAi54nwZOyJ7K0V+DQRdhu+o8VXwdofcRY00EN7ZTIHAuOTNsbKDl7zIszzvYD9ZGA==
+X-Received: by 2002:a05:600c:4982:: with SMTP id
+ h2mr15258617wmp.4.1636539536972; 
+ Wed, 10 Nov 2021 02:18:56 -0800 (PST)
+Received: from [192.168.8.106] (104.red-2-142-241.dynamicip.rima-tde.net.
+ [2.142.241.104])
+ by smtp.gmail.com with ESMTPSA id a1sm26370437wri.89.2021.11.10.02.18.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 10 Nov 2021 02:18:56 -0800 (PST)
+Subject: Re: [PATCH v2 01/14] target/riscv: Sign extend pc for different XLEN
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
- <20211110070452.48539-5-zhiwei_liu@c-sky.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <c4494f62-0063-4ff4-bf2f-c8ff6526924c@c-sky.com>
-Date: Wed, 10 Nov 2021 17:42:43 +0800
+ <20211110070452.48539-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <62d2206d-664b-156b-b23a-74d9d13664f8@linaro.org>
+Date: Wed, 10 Nov 2021 11:18:53 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20211110070452.48539-5-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211110070452.48539-2-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.101; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-101.mail.aliyun.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::332
+ (failed)
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x332.google.com
+X-Spam_score_int: -29
+X-Spam_score: -3.0
 X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.678,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.678,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -54,133 +87,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2021 09:42:54 -0000
+X-List-Received-Date: Wed, 10 Nov 2021 10:19:01 -0000
 
-
-On 2021/11/10 下午3:04, LIU Zhiwei wrote:
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+On 11/10/21 8:04 AM, LIU Zhiwei wrote:
+> When pc is written, it is sign-extended to fill the widest supported XLEN.
+> 
+> Signed-off-by: LIU Zhiwei<zhiwei_liu@c-sky.com>
 > ---
->   target/riscv/gdbstub.c | 73 +++++++++++++++++++++++++++++++-----------
->   1 file changed, 54 insertions(+), 19 deletions(-)
->
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 23429179e2..7563414ef7 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -24,11 +24,25 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
->   {
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
-> +    target_ulong tmp;
->   
->       if (n < 32) {
-> -        return gdb_get_regl(mem_buf, env->gpr[n]);
-> +        tmp = env->gpr[n];
->       } else if (n == 32) {
-> -        return gdb_get_regl(mem_buf, env->pc);
-> +        tmp = env->pc;
-> +    } else {
-> +        return 0;
-> +    }
-> +
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        gdb_get_reg32(mem_buf, tmp);
+>   target/riscv/translate.c | 16 ++++++++++++----
+>   1 file changed, 12 insertions(+), 4 deletions(-)
 
-Oops. This is a typo. It should be
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-return gdb_get_reg32(mem_buf, tmp)
-
-> +        break;
-> +    case MXL_RV64:
-> +        gdb_get_reg64(mem_buf, tmp);
-
-and
-
-gdb_get_reg64(mem_buf, tmp);
-
-
-Will fix it in next patch set.
-
-Thanks,
-Zhiwei
-
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
->       }
->       return 0;
->   }
-> @@ -37,18 +51,32 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
->   {
->       RISCVCPU *cpu = RISCV_CPU(cs);
->       CPURISCVState *env = &cpu->env;
-> -
-> -    if (n == 0) {
-> -        /* discard writes to x0 */
-> -        return sizeof(target_ulong);
-> -    } else if (n < 32) {
-> -        env->gpr[n] = ldtul_p(mem_buf);
-> -        return sizeof(target_ulong);
-> +    int length = 0;
-> +    target_ulong tmp;
-> +
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        tmp = (int32_t)ldl_p(mem_buf);
-> +        length = 4;
-> +        break;
-> +    case MXL_RV64:
-> +        if (cpu_get_xl(env) < MXL_RV64) {
-> +            tmp = (int32_t)ldq_p(mem_buf);
-> +        } else {
-> +            tmp = ldq_p(mem_buf);
-> +        }
-> +        length = 8;
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +    if (n > 0 && n < 32) {
-> +        env->gpr[n] = tmp;
->       } else if (n == 32) {
-> -        env->pc = ldtul_p(mem_buf);
-> -        return sizeof(target_ulong);
-> +        env->pc = tmp;
->       }
-> -    return 0;
-> +
-> +    return length;
->   }
->   
->   static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
-> @@ -198,13 +226,20 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->           gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
->                                    36, "riscv-32bit-fpu.xml", 0);
->       }
-> -#if defined(TARGET_RISCV32)
-> -    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> -                             1, "riscv-32bit-virtual.xml", 0);
-> -#elif defined(TARGET_RISCV64)
-> -    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> -                             1, "riscv-64bit-virtual.xml", 0);
-> -#endif
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> +                                 riscv_gdb_set_virtual,
-> +                                 1, "riscv-32bit-virtual.xml", 0);
-> +        break;
-> +    case MXL_RV64:
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> +                                 riscv_gdb_set_virtual,
-> +                                 1, "riscv-64bit-virtual.xml", 0);
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
->   
->       gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
->                                riscv_gen_dynamic_csr_xml(cs, cs->gdb_num_regs),
+r~
 
