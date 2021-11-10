@@ -1,37 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mkhkr-0000za-MH
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 02:10:45 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:39120)
+	id 1mkhlM-0002Hn-Rz
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Nov 2021 02:11:18 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39214)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkhkn-0000we-Rp; Wed, 10 Nov 2021 02:10:41 -0500
-Received: from out28-217.mail.aliyun.com ([115.124.28.217]:41311)
+ id 1mkhlI-0002Dx-1d; Wed, 10 Nov 2021 02:11:12 -0500
+Received: from out28-99.mail.aliyun.com ([115.124.28.99]:34714)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mkhkk-0004ot-K4; Wed, 10 Nov 2021 02:10:41 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07905654|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.45529-0.00118736-0.543523;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LqVKR1A_1636528233; 
+ id 1mkhlF-0004t4-Up; Wed, 10 Nov 2021 02:11:11 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07457498|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0446471-0.000322164-0.955031;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LqV1pok_1636528264; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LqVKR1A_1636528233)
- by smtp.aliyun-inc.com(10.147.44.118);
- Wed, 10 Nov 2021 15:10:33 +0800
+ fp:SMTPD_---.LqV1pok_1636528264)
+ by smtp.aliyun-inc.com(10.147.40.233);
+ Wed, 10 Nov 2021 15:11:04 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 11/14] target/riscv: Adjust scalar reg in vector with XLEN
-Date: Wed, 10 Nov 2021 15:04:49 +0800
-Message-Id: <20211110070452.48539-12-zhiwei_liu@c-sky.com>
+Subject: [PATCH v2 12/14] target/riscv: Split out the vill from vtype
+Date: Wed, 10 Nov 2021 15:04:50 +0800
+Message-Id: <20211110070452.48539-13-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
 References: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.217; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-217.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.99; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-99.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -50,111 +50,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Nov 2021 07:10:42 -0000
+X-List-Received-Date: Wed, 10 Nov 2021 07:11:14 -0000
 
-When sew <= 32bits, not need to extend scalar reg.
-When sew > 32bits, if xlen is less that sew, we should sign extend
-the scalar register, except explicitly specified by the spec.
-
+We need not specially process vtype when XLEN changes.
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc |  5 +++--
- target/riscv/internals.h                |  1 +
- target/riscv/vector_helper.c            | 11 +++++++++--
- 3 files changed, 13 insertions(+), 4 deletions(-)
+ target/riscv/cpu.h           |  1 +
+ target/riscv/csr.c           | 15 ++++++++++++++-
+ target/riscv/machine.c       |  1 +
+ target/riscv/vector_helper.c |  7 ++-----
+ 4 files changed, 18 insertions(+), 6 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 41c7c88904..0a956cac5b 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -846,7 +846,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
-     src2 = tcg_temp_new_ptr();
--    src1 = get_gpr(s, rs1, EXT_NONE);
-+    src1 = get_gpr(s, rs1, EXT_SIGN);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 73d7aa9ad7..e67531deab 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -121,6 +121,7 @@ struct CPURISCVState {
+     target_ulong vl;
+     target_ulong vstart;
+     target_ulong vtype;
++    target_ulong vill;
  
-     data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
-     data = FIELD_DP32(data, VDATA, VM, vm);
-@@ -2670,6 +2670,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
-         /* This instruction ignores LMUL and vector register groups */
-         int maxsz = s->vlen >> 3;
-         TCGv_i64 t1;
-+        TCGv src1 = get_gpr(s, a->rs1, EXT_ZERO);
-         TCGLabel *over = gen_new_label();
- 
-         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-@@ -2679,7 +2680,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
-         }
- 
-         t1 = tcg_temp_new_i64();
--        tcg_gen_extu_tl_i64(t1, cpu_gpr[a->rs1]);
-+        tcg_gen_extu_tl_i64(t1, src1);
-         vec_element_storei(s, a->rd, 0, t1);
-         tcg_temp_free_i64(t1);
-     done:
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index b15ad394bb..07e882160d 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -27,6 +27,7 @@ FIELD(VDATA, VM, 8, 1)
- FIELD(VDATA, LMUL, 9, 2)
- FIELD(VDATA, NF, 11, 4)
- FIELD(VDATA, WD, 11, 1)
-+FIELD(VDATA, TRUNC, 15, 1)
- 
- /* float point classify helpers */
- target_ulong fclass_h(uint64_t frs1);
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 0b297f6bc8..51bcf63d65 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -112,6 +112,11 @@ static uint32_t vext_wd(uint32_t desc)
-     return (simd_data(desc) >> 11) & 0x1;
+     target_ulong pc;
+     target_ulong load_res;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 59e368f004..33e342f529 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -286,7 +286,20 @@ static RISCVException write_fcsr(CPURISCVState *env, int csrno,
+ static RISCVException read_vtype(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env->vtype;
++    target_ulong vill;
++    switch (cpu_get_xl(env)) {
++    case MXL_RV32:
++        vill = env->vill << 31;
++        break;
++#ifdef TARGET_RISCV64
++    case MXL_RV64:
++        vill = env->vill << 63;
++        break;
++#endif
++    default:
++        g_assert_not_reached();
++    }
++    *val = vill | env->vtype;
+     return RISCV_EXCP_NONE;
  }
  
-+static inline bool vext_trunc(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, TRUNC);
-+}
-+
- /*
-  * Get vector group length in bytes. Its range is [64, 2048].
-  *
-@@ -4748,6 +4753,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-     uint32_t mlen = vext_mlen(desc);                                      \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
-     uint32_t vm = vext_vm(desc);                                          \
-+    bool trunc = vext_trunc(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -4756,7 +4762,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-             continue;                                                     \
-         }                                                                 \
-         if (i == 0) {                                                     \
--            *((ETYPE *)vd + H(i)) = s1;                                   \
-+            *((ETYPE *)vd + H(i)) = trunc ? (s1 & UINT32_MAX) : s1;       \
-         } else {                                                          \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i - 1));           \
-         }                                                                 \
-@@ -4777,6 +4783,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-     uint32_t mlen = vext_mlen(desc);                                      \
-     uint32_t vlmax = env_archcpu(env)->cfg.vlen / mlen;                   \
-     uint32_t vm = vext_vm(desc);                                          \
-+    bool trunc = vext_trunc(desc);                                        \
-     uint32_t vl = env->vl;                                                \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -4785,7 +4792,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-             continue;                                                     \
-         }                                                                 \
-         if (i == vl - 1) {                                                \
--            *((ETYPE *)vd + H(i)) = s1;                                   \
-+            *((ETYPE *)vd + H(i)) = trunc ? (s1 & UINT32_MAX) : s1;       \
-         } else {                                                          \
-             *((ETYPE *)vd + H(i)) = *((ETYPE *)vs2 + H(i + 1));           \
-         }                                                                 \
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 19e982d3f0..cc4dda4b93 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -104,6 +104,7 @@ static const VMStateDescription vmstate_vector = {
+             VMSTATE_UINTTL(env.vl, RISCVCPU),
+             VMSTATE_UINTTL(env.vstart, RISCVCPU),
+             VMSTATE_UINTTL(env.vtype, RISCVCPU),
++            VMSTATE_UINTTL(env.vill, RISCVCPU),
+             VMSTATE_END_OF_LIST()
+         }
+ };
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 51bcf63d65..7d7b554789 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -45,11 +45,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+     }
+     if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
+         /* only set vill bit. */
+-        if (xlen < TARGET_LONG_BITS) {
+-            env->vtype = FIELD_DP64(0, VTYPE, VILL_XLEN32, 1);
+-        } else {
+-            env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
+-        }
++        env->vill = 1;
++        env->vtype = 0;
+         env->vl = 0;
+         env->vstart = 0;
+         return 0;
 -- 
 2.25.1
 
