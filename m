@@ -1,43 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mlCVy-00059L-4l
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 11:01:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49204)
+	id 1mlCWR-00069L-VL
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 11:01:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49464)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mlCVu-00055f-3Q; Thu, 11 Nov 2021 11:01:22 -0500
-Received: from out29-195.mail.aliyun.com ([115.124.29.195]:56713)
+ id 1mlCWP-00060c-GZ; Thu, 11 Nov 2021 11:01:53 -0500
+Received: from out29-52.mail.aliyun.com ([115.124.29.52]:37223)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mlCVo-0000m5-Aw; Thu, 11 Nov 2021 11:01:20 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07446308|-1; CH=blue; DM=|OVERLOAD|false|;
- DS=CONTINUE|ham_regular_dialog|0.0042601-0.000557924-0.995182;
- FP=7410506236959248743|2|2|6|0|-1|-1|-1; HT=ay29a033018047199;
+ id 1mlCWL-0000vB-Sv; Thu, 11 Nov 2021 11:01:53 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07609383|-1; CH=blue; DM=|OVERLOAD|false|;
+ DS=CONTINUE|ham_regular_dialog|0.411451-0.000991827-0.587557;
+ FP=449214936364103999|2|2|6|0|-1|-1|-1; HT=ay29a033018047209;
  MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
- TI=SMTPD_---.LrJaRpZ_1636646470; 
+ TI=SMTPD_---.LrJ34Tr_1636646501; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LrJaRpZ_1636646470)
- by smtp.aliyun-inc.com(10.147.42.197);
- Fri, 12 Nov 2021 00:01:10 +0800
+ fp:SMTPD_---.LrJ34Tr_1636646501)
+ by smtp.aliyun-inc.com(10.147.41.158);
+ Fri, 12 Nov 2021 00:01:41 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v4 18/20] target/riscv: Adjust vector address with mask
-Date: Thu, 11 Nov 2021 23:51:47 +0800
-Message-Id: <20211111155149.58172-19-zhiwei_liu@c-sky.com>
+Subject: [PATCH v4 19/20] target/riscv: Adjust scalar reg in vector with XLEN
+Date: Thu, 11 Nov 2021 23:51:48 +0800
+Message-Id: <20211111155149.58172-20-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.29.195; envelope-from=zhiwei_liu@c-sky.com;
- helo=out29-195.mail.aliyun.com
+Received-SPF: none client-ip=115.124.29.52; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out29-52.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -51,109 +51,152 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2021 16:01:23 -0000
+X-List-Received-Date: Thu, 11 Nov 2021 16:01:54 -0000
 
-The mask comes from the pointer masking extension, or the max value
-corresponding to XLEN bits.
+When sew <= 32bits, not need to extend scalar reg.
+When sew > 32bits, if xlen is less that sew, we should sign extend
+the scalar register, except explicitly specified by the spec.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 ---
- target/riscv/vector_helper.c | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 44 ++++++++++++++++++-------
+ 1 file changed, 32 insertions(+), 12 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 4cd6476b82..d8083dd3a4 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -115,6 +115,11 @@ static inline uint32_t vext_maxsz(uint32_t desc)
-     return simd_maxsz(desc) << vext_lmul(desc);
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 6cc83356d9..ce566cf73b 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -833,7 +833,7 @@ typedef void gen_helper_opivx(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
+                               TCGv_env, TCGv_i32);
+ 
+ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+-                        gen_helper_opivx *fn, DisasContext *s)
++                        gen_helper_opivx *fn, DisasContext *s, DisasExtend ext)
+ {
+     TCGv_ptr dest, src2, mask;
+     TCGv src1;
+@@ -846,7 +846,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+     dest = tcg_temp_new_ptr();
+     mask = tcg_temp_new_ptr();
+     src2 = tcg_temp_new_ptr();
+-    src1 = get_gpr(s, rs1, EXT_NONE);
++    src1 = get_gpr(s, rs1, ext);
+ 
+     data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
+     data = FIELD_DP32(data, VDATA, VM, vm);
+@@ -895,7 +895,7 @@ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn *gvec_fn,
+         tcg_temp_free_i64(src1);
+         return true;
+     }
+-    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
++    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
  }
  
-+static inline target_ulong adjust_addr(CPURISCVState *env, target_ulong addr)
-+{
-+    return (addr & env->cur_pmmask) | env->cur_pmbase;
+ /* OPIVX with GVEC IR */
+@@ -1128,7 +1128,7 @@ static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
+                            gen_helper_opivx *fn)
+ {
+     if (opivx_widen_check(s, a)) {
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
+     }
+     return false;
+ }
+@@ -1213,7 +1213,7 @@ static bool do_opiwx_widen(DisasContext *s, arg_rmrr *a,
+                            gen_helper_opivx *fn)
+ {
+     if (opiwx_widen_check(s, a)) {
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
+     }
+     return false;
+ }
+@@ -1312,7 +1312,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
+             gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
+         };                                                               \
+                                                                          \
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
++                           fns[s->sew], s, EXT_SIGN);                    \
+     }                                                                    \
+     return false;                                                        \
+ }
+@@ -1386,7 +1387,7 @@ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
+         tcg_temp_free_i32(src1);
+         return true;
+     }
+-    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
++    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
+ }
+ 
+ #define GEN_OPIVX_GVEC_SHIFT_TRANS(NAME, SUF) \
+@@ -1472,7 +1473,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
+             gen_helper_##NAME##_h,                                       \
+             gen_helper_##NAME##_w,                                       \
+         };                                                               \
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
++                           fns[s->sew], s, EXT_SIGN);                    \
+     }                                                                    \
+     return false;                                                        \
+ }
+@@ -2670,6 +2672,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+         /* This instruction ignores LMUL and vector register groups */
+         int maxsz = s->vlen >> 3;
+         TCGv_i64 t1;
++        TCGv src1 = get_gpr(s, a->rs1, EXT_ZERO);
+         TCGLabel *over = gen_new_label();
+ 
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+@@ -2679,7 +2682,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
+         }
+ 
+         t1 = tcg_temp_new_i64();
+-        tcg_gen_extu_tl_i64(t1, cpu_gpr[a->rs1]);
++        tcg_gen_extu_tl_i64(t1, src1);
+         vec_element_storei(s, a->rd, 0, t1);
+         tcg_temp_free_i64(t1);
+     done:
+@@ -2748,12 +2751,28 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
+             (a->rd != a->rs2));
+ }
+ 
++/* OPIVXU without GVEC IR */
++#define GEN_OPIVXU_TRANS(NAME, CHECK)                                    \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
++{                                                                        \
++    if (CHECK(s, a)) {                                                   \
++        static gen_helper_opivx * const fns[4] = {                       \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
++        };                                                               \
++                                                                         \
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
++                           fns[s->sew], s, EXT_ZERO);                    \
++    }                                                                    \
++    return false;                                                        \
 +}
 +
- /*
-  * This function checks watchpoint before real load operation.
-  *
-@@ -132,12 +137,12 @@ static void probe_pages(CPURISCVState *env, target_ulong addr,
-     target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
-     target_ulong curlen = MIN(pagelen, len);
+ GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
+-GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
++GEN_OPIVXU_TRANS(vslide1up_vx, slideup_check)
+ GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
  
--    probe_access(env, addr, curlen, access_type,
-+    probe_access(env, adjust_addr(env, addr), curlen, access_type,
-                  cpu_mmu_index(env, false), ra);
-     if (len > curlen) {
-         addr += curlen;
-         curlen = len - curlen;
--        probe_access(env, addr, curlen, access_type,
-+        probe_access(env, adjust_addr(env, addr), curlen, access_type,
-                      cpu_mmu_index(env, false), ra);
+ GEN_OPIVX_TRANS(vslidedown_vx, opivx_check)
+-GEN_OPIVX_TRANS(vslide1down_vx, opivx_check)
++GEN_OPIVXU_TRANS(vslide1down_vx, opivx_check)
+ GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
+ 
+ /* Vector Register Gather Instruction */
+@@ -2803,7 +2822,8 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
+             gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
+             gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
+         };
+-        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);
++        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,
++                           fns[s->sew], s, EXT_SIGN);
      }
- }
-@@ -298,7 +303,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-         }
-         while (k < nf) {
-             target_ulong addr = base + stride * i + k * msz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, adjust_addr(env, addr), i + k * vlmax, vd, ra);
-             k++;
-         }
-     }
-@@ -391,7 +396,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-         k = 0;
-         while (k < nf) {
-             target_ulong addr = base + (i * nf + k) * msz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, adjust_addr(env, addr), i + k * vlmax, vd, ra);
-             k++;
-         }
-     }
-@@ -528,7 +533,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-         }
-         while (k < nf) {
-             abi_ptr addr = get_index_addr(base, i, vs2) + k * msz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, adjust_addr(env, addr), i + k * vlmax, vd, ra);
-             k++;
-         }
-     }
-@@ -618,7 +623,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-         if (!vm && !vext_elem_mask(v0, mlen, i)) {
-             continue;
-         }
--        addr = base + nf * i * msz;
-+        addr = adjust_addr(env, base + nf * i * msz);
-         if (i == 0) {
-             probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
-         } else {
-@@ -645,7 +650,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-                     break;
-                 }
-                 remain -= offset;
--                addr += offset;
-+                addr = adjust_addr(env, addr + offset);
-             }
-         }
-     }
-@@ -661,7 +666,7 @@ ProbeSuccess:
-         }
-         while (k < nf) {
-             target_ulong addr = base + (i * nf + k) * msz;
--            ldst_elem(env, addr, i + k * vlmax, vd, ra);
-+            ldst_elem(env, adjust_addr(env, addr), i + k * vlmax, vd, ra);
-             k++;
-         }
-     }
-@@ -800,7 +805,7 @@ vext_amo_noatomic(void *vs3, void *v0, target_ulong base,
-             continue;
-         }
-         addr = get_index_addr(base, i, vs2);
--        noatomic_op(vs3, addr, wd, i, env, ra);
-+        noatomic_op(vs3, adjust_addr(env, addr), wd, i, env, ra);
-     }
-     clear_elem(vs3, env->vl, env->vl * esz, vlmax * esz);
+     return true;
  }
 -- 
 2.25.1
