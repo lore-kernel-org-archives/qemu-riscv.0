@@ -1,50 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ml2GD-0006g0-Cj
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 00:04:29 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40166)
+	id 1ml36F-00005O-17
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 00:58:15 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47804)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1ml2G7-0006fZ-Dw; Thu, 11 Nov 2021 00:04:23 -0500
-Received: from out28-173.mail.aliyun.com ([115.124.28.173]:56849)
+ id 1ml36C-0008T4-LI; Thu, 11 Nov 2021 00:58:12 -0500
+Received: from out28-218.mail.aliyun.com ([115.124.28.218]:49498)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1ml2G4-0005Ht-PY; Thu, 11 Nov 2021 00:04:23 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07488026|-1; CH=green;
+ id 1ml369-00038P-BB; Thu, 11 Nov 2021 00:58:12 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07673907|-1; CH=green;
  DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.0747163-0.000108977-0.925175;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.Lr.NZVx_1636607049; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Lr.NZVx_1636607049)
- by smtp.aliyun-inc.com(10.147.41.199);
- Thu, 11 Nov 2021 13:04:09 +0800
-Subject: Re: [PATCH v2 05/14] target/riscv: Calculate address according to XLEN
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Alexey Baturo <baturo.alexey@gmail.com>
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
-References: <20211110070452.48539-1-zhiwei_liu@c-sky.com>
- <20211110070452.48539-6-zhiwei_liu@c-sky.com>
- <7dace3b5-1320-20b3-703c-bbdf7e745fb9@linaro.org>
- <df0a3a5a-7ca5-b2dc-36c0-d802df99b5b0@c-sky.com>
- <bbafca7f-1984-f030-cabc-b5f62ef5afd5@linaro.org>
+ DS=CONTINUE|ham_system_inform|0.0376296-0.000440727-0.96193;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047213; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.Lr1M.qq_1636610282; 
+Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.Lr1M.qq_1636610282)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Thu, 11 Nov 2021 13:58:02 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <d1a38044-4ec2-0b5d-fb24-d7b88928ac7a@c-sky.com>
-Date: Thu, 11 Nov 2021 13:04:09 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 00/20] Support UXL filed in xstatus
+Date: Thu, 11 Nov 2021 13:57:40 +0800
+Message-Id: <20211111055800.42672-1-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <bbafca7f-1984-f030-cabc-b5f62ef5afd5@linaro.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=115.124.28.173; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-173.mail.aliyun.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.678,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Received-SPF: none client-ip=115.124.28.218; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-218.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -57,73 +49,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2021 05:04:23 -0000
+X-List-Received-Date: Thu, 11 Nov 2021 05:58:13 -0000
 
-On 2021/11/10 下午10:40, Richard Henderson wrote:
-> On 11/10/21 2:44 PM, LIU Zhiwei wrote:
->>> I suspect the extend should come before the pointer mask and not 
->>> after, but this is is a weakness in the current RVJ spec that it 
->>> does not specify how the extension interacts with UXL.  (The reverse 
->>> ordering would allow a 64-bit os to place a 32-bit application at a 
->>> base address above 4gb, which could allow address separation without 
->>> paging enabled.)
->>
->> Agree. Should we adjust currently, or just add a TODO comment here?
->
-> Let's add a todo comment for sure.
->
->>> I do think we should merge gen_pm_adjust_address into this function 
->>> so that we only create one new temporary.
->>
->> I think custom instructions will be added in the future. And possibly 
->> there will be  some custom load/store instructions.
->> If we merge gen_pm_adjust_address,  we may have to split it once 
->> again at that time.
->
-> I don't think so.  We're simply having one function to compute a 
-> canonical address from a register plus offset plus mods.
->
-> Also, patch 10 combines pm-mask with zero-extension, so we shouldn't 
-> need to do both here.  The checks should be combined like
->
->     tcg_gen_addi_tl(addr, src1, imm);
->     if (ctx->pm_enabled) {
->         tcg_gen_and_tl(addr, addr, pm_mask);
->         tcg_gen_or_tl(addr, addr, pm_base);
->     } else if (get_xl(ctx) == MXL_RV32) {
->         tcg_gen_ext32u_tl(addr, addr);
->     }
->
-> and could possibly be extended to
->
->     if (ctx->pm_mask_enabled) {
->         tcg_gen_and_tl(addr, addr, pm_mask);
->     } else if (get_xl(ctx) == MXL_RV32) {
->         tcg_gen_ext32u_tl(addr, addr);
->     }
->     if (ctx->pm_base_enabled) {
->         tcg_gen_or_tl(addr, addr, pm_base);
->     }
->
-Can we just use
+In this patch set, we process the pc reigsters writes,
+gdb reads and writes, and address calculation under
+different UXLEN settings.
 
-  tcg_gen_and_tl(addr, addr, pm_mask);
-  tcg_gen_or_tl(addr, addr, pm_base);
+The patch set v3 mainly address Richard comments on v2.
+Patch 1,2,3,5,6,16,17 have been reviewed.
 
-Therefore we can remove all PM flags in TB_FLAGS.
+v3:
+  Merge gen_pm_adjust_address into a canonical address function
+  Adjust address for RVA with XLEN
+  Split pm_enabled into pm_mask_enabled and pm_base_enabled
+  Replace array of pm tcg globals with one scalar tcg global
+  Split and change patch sequence
 
-Thanks,
-Zhiwei
+v2:
+  Split out vill from vtype
+  Remove context switch when xlen changes at exception
+  Use XL instead of OL in many places
+  Use pointer masking and XLEN for vector address
+  Define an common fuction to calculate address for ldst
 
-> with one more bit in TB_FLAGS, e.g.
->
->     if (env->cur_pm_mask < (xl == MVL_RV32 ? UINT32_MAX : UINT64_MAX)) {
->         flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
->     }
->     if (env->cur_pm_base != 0) {
->         flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
->     }
->
->
-> r~
+LIU Zhiwei (20):
+  target/riscv: Don't save pc when exception return
+  target/riscv: Sign extend pc for different XLEN
+  target/riscv: Ignore the pc bits above XLEN
+  target/riscv: Extend pc for runtime pc write
+  target/riscv: Use gdb xml according to max mxlen
+  target/riscv: Relax debug check for pm write
+  target/riscv: Adjust csr write mask with XLEN
+  target/riscv: Create current pm fields in env
+  target/riscv: Alloc tcg global for cur_pm[mask|base]
+  target/riscv: Calculate address according to XLEN
+  target/riscv: Split pm_enabled into mask and base
+  target/riscv: Split out the vill from vtype
+  target/riscv: Fix RESERVED field length in VTYPE
+  target/riscv: Adjust vsetvl according to XLEN
+  target/riscv: Remove VILL field in VTYPE
+  target/riscv: Ajdust vector atomic check with XLEN
+  target/riscv: Fix check range for first fault only
+  target/riscv: Adjust vector address with mask
+  target/riscv: Adjust scalar reg in vector with XLEN
+  target/riscv: Enable uxl field write
+
+ target/riscv/cpu.c                            | 23 +++++-
+ target/riscv/cpu.h                            | 13 +++-
+ target/riscv/cpu_helper.c                     | 66 ++++++++++++----
+ target/riscv/csr.c                            | 40 +++++++++-
+ target/riscv/gdbstub.c                        | 71 ++++++++++++-----
+ target/riscv/helper.h                         |  6 +-
+ .../riscv/insn_trans/trans_privileged.c.inc   |  7 +-
+ target/riscv/insn_trans/trans_rva.c.inc       |  9 +--
+ target/riscv/insn_trans/trans_rvd.c.inc       | 19 +----
+ target/riscv/insn_trans/trans_rvf.c.inc       | 19 +----
+ target/riscv/insn_trans/trans_rvi.c.inc       | 22 +-----
+ target/riscv/insn_trans/trans_rvv.c.inc       | 51 ++++++++----
+ target/riscv/machine.c                        | 11 +++
+ target/riscv/op_helper.c                      |  7 +-
+ target/riscv/translate.c                      | 77 +++++++++----------
+ target/riscv/vector_helper.c                  | 38 +++++----
+ 16 files changed, 293 insertions(+), 186 deletions(-)
+
+-- 
+2.25.1
+
 
