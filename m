@@ -1,36 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ml36F-00005O-17
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 00:58:15 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47804)
+	id 1ml36i-0000XE-JN
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 00:58:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47838)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1ml36C-0008T4-LI; Thu, 11 Nov 2021 00:58:12 -0500
-Received: from out28-218.mail.aliyun.com ([115.124.28.218]:49498)
+ id 1ml36g-0000UH-Pp; Thu, 11 Nov 2021 00:58:42 -0500
+Received: from out28-197.mail.aliyun.com ([115.124.28.197]:54253)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1ml369-00038P-BB; Thu, 11 Nov 2021 00:58:12 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07673907|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0376296-0.000440727-0.96193;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047213; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.Lr1M.qq_1636610282; 
+ id 1ml36e-0003AF-Be; Thu, 11 Nov 2021 00:58:42 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0745289|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0106131-0.000399075-0.988988;
+ FP=3095924200578694771|2|2|6|0|-1|-1|-1; HT=ay29a033018047207;
+ MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
+ TI=SMTPD_---.Lr1f.Tc_1636610313; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Lr1M.qq_1636610282)
- by smtp.aliyun-inc.com(10.147.43.230);
- Thu, 11 Nov 2021 13:58:02 +0800
+ fp:SMTPD_---.Lr1f.Tc_1636610313) by smtp.aliyun-inc.com(10.147.40.2);
+ Thu, 11 Nov 2021 13:58:33 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v3 00/20] Support UXL filed in xstatus
-Date: Thu, 11 Nov 2021 13:57:40 +0800
-Message-Id: <20211111055800.42672-1-zhiwei_liu@c-sky.com>
+Subject: [PATCH v3 01/20] target/riscv: Don't save pc when exception return
+Date: Thu, 11 Nov 2021 13:57:41 +0800
+Message-Id: <20211111055800.42672-2-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211111055800.42672-1-zhiwei_liu@c-sky.com>
+References: <20211111055800.42672-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.218; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-218.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.197; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-197.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -49,69 +50,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2021 05:58:13 -0000
+X-List-Received-Date: Thu, 11 Nov 2021 05:58:43 -0000
 
-In this patch set, we process the pc reigsters writes,
-gdb reads and writes, and address calculation under
-different UXLEN settings.
+As pc will be written by the xepc in exception return, just ignore
+pc in translation.
 
-The patch set v3 mainly address Richard comments on v2.
-Patch 1,2,3,5,6,16,17 have been reviewed.
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/helper.h                          | 4 ++--
+ target/riscv/insn_trans/trans_privileged.c.inc | 7 ++-----
+ target/riscv/op_helper.c                       | 4 ++--
+ 3 files changed, 6 insertions(+), 9 deletions(-)
 
-v3:
-  Merge gen_pm_adjust_address into a canonical address function
-  Adjust address for RVA with XLEN
-  Split pm_enabled into pm_mask_enabled and pm_base_enabled
-  Replace array of pm tcg globals with one scalar tcg global
-  Split and change patch sequence
-
-v2:
-  Split out vill from vtype
-  Remove context switch when xlen changes at exception
-  Use XL instead of OL in many places
-  Use pointer masking and XLEN for vector address
-  Define an common fuction to calculate address for ldst
-
-LIU Zhiwei (20):
-  target/riscv: Don't save pc when exception return
-  target/riscv: Sign extend pc for different XLEN
-  target/riscv: Ignore the pc bits above XLEN
-  target/riscv: Extend pc for runtime pc write
-  target/riscv: Use gdb xml according to max mxlen
-  target/riscv: Relax debug check for pm write
-  target/riscv: Adjust csr write mask with XLEN
-  target/riscv: Create current pm fields in env
-  target/riscv: Alloc tcg global for cur_pm[mask|base]
-  target/riscv: Calculate address according to XLEN
-  target/riscv: Split pm_enabled into mask and base
-  target/riscv: Split out the vill from vtype
-  target/riscv: Fix RESERVED field length in VTYPE
-  target/riscv: Adjust vsetvl according to XLEN
-  target/riscv: Remove VILL field in VTYPE
-  target/riscv: Ajdust vector atomic check with XLEN
-  target/riscv: Fix check range for first fault only
-  target/riscv: Adjust vector address with mask
-  target/riscv: Adjust scalar reg in vector with XLEN
-  target/riscv: Enable uxl field write
-
- target/riscv/cpu.c                            | 23 +++++-
- target/riscv/cpu.h                            | 13 +++-
- target/riscv/cpu_helper.c                     | 66 ++++++++++++----
- target/riscv/csr.c                            | 40 +++++++++-
- target/riscv/gdbstub.c                        | 71 ++++++++++++-----
- target/riscv/helper.h                         |  6 +-
- .../riscv/insn_trans/trans_privileged.c.inc   |  7 +-
- target/riscv/insn_trans/trans_rva.c.inc       |  9 +--
- target/riscv/insn_trans/trans_rvd.c.inc       | 19 +----
- target/riscv/insn_trans/trans_rvf.c.inc       | 19 +----
- target/riscv/insn_trans/trans_rvi.c.inc       | 22 +-----
- target/riscv/insn_trans/trans_rvv.c.inc       | 51 ++++++++----
- target/riscv/machine.c                        | 11 +++
- target/riscv/op_helper.c                      |  7 +-
- target/riscv/translate.c                      | 77 +++++++++----------
- target/riscv/vector_helper.c                  | 38 +++++----
- 16 files changed, 293 insertions(+), 186 deletions(-)
-
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index c7a5376227..c5098380dd 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -67,8 +67,8 @@ DEF_HELPER_2(csrr, tl, env, int)
+ DEF_HELPER_3(csrw, void, env, int, tl)
+ DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
+ #ifndef CONFIG_USER_ONLY
+-DEF_HELPER_2(sret, tl, env, tl)
+-DEF_HELPER_2(mret, tl, env, tl)
++DEF_HELPER_1(sret, tl, env)
++DEF_HELPER_1(mret, tl, env)
+ DEF_HELPER_1(wfi, void, env)
+ DEF_HELPER_1(tlb_flush, void, env)
+ #endif
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 75c6ef80a6..6077bbbf11 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -74,10 +74,8 @@ static bool trans_uret(DisasContext *ctx, arg_uret *a)
+ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+-
+     if (has_ext(ctx, RVS)) {
+-        gen_helper_sret(cpu_pc, cpu_env, cpu_pc);
++        gen_helper_sret(cpu_pc, cpu_env);
+         tcg_gen_exit_tb(NULL, 0); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+     } else {
+@@ -92,8 +90,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
+-    gen_helper_mret(cpu_pc, cpu_env, cpu_pc);
++    gen_helper_mret(cpu_pc, cpu_env);
+     tcg_gen_exit_tb(NULL, 0); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index ee7c24efe7..095d39671b 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -71,7 +71,7 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
+ 
+ #ifndef CONFIG_USER_ONLY
+ 
+-target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
++target_ulong helper_sret(CPURISCVState *env)
+ {
+     uint64_t mstatus;
+     target_ulong prev_priv, prev_virt;
+@@ -132,7 +132,7 @@ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+     return retpc;
+ }
+ 
+-target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
++target_ulong helper_mret(CPURISCVState *env)
+ {
+     if (!(env->priv >= PRV_M)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
 -- 
 2.25.1
 
