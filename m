@@ -1,37 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mlCNx-00044A-Ml
-	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 10:53:10 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46616)
+	id 1mlCOO-0004j6-AK
+	for mharc-qemu-riscv@gnu.org; Thu, 11 Nov 2021 10:53:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46710)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mlCNr-00041l-SS; Thu, 11 Nov 2021 10:53:05 -0500
-Received: from out28-122.mail.aliyun.com ([115.124.28.122]:57253)
+ id 1mlCOM-0004fH-Mn; Thu, 11 Nov 2021 10:53:34 -0500
+Received: from out28-218.mail.aliyun.com ([115.124.28.218]:53599)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mlCNo-0007m2-RF; Thu, 11 Nov 2021 10:53:03 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1112829|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_alarm|0.0320985-0.000647087-0.967254; FP=0|0|0|0|0|-1|-1|-1;
- HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
- TI=SMTPD_---.LrJIZP-_1636645974; 
+ id 1mlCOK-0007os-BR; Thu, 11 Nov 2021 10:53:34 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1129399|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.013589-0.000341692-0.986069;
+ FP=2990099953733514607|2|2|6|0|-1|-1|-1; HT=ay29a033018047192;
+ MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=7; RT=7; SR=0;
+ TI=SMTPD_---.LrJBMyV_1636646005; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LrJIZP-_1636645974)
- by smtp.aliyun-inc.com(10.147.41.187);
- Thu, 11 Nov 2021 23:52:55 +0800
+ fp:SMTPD_---.LrJBMyV_1636646005)
+ by smtp.aliyun-inc.com(10.147.41.199);
+ Thu, 11 Nov 2021 23:53:26 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v4 02/20] target/riscv: Sign extend pc for different XLEN
-Date: Thu, 11 Nov 2021 23:51:31 +0800
-Message-Id: <20211111155149.58172-3-zhiwei_liu@c-sky.com>
+Subject: [PATCH v4 03/20] target/riscv: Ignore the pc bits above XLEN
+Date: Thu, 11 Nov 2021 23:51:32 +0800
+Message-Id: <20211111155149.58172-4-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.122; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-122.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.218; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-218.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -50,59 +51,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Nov 2021 15:53:07 -0000
+X-List-Received-Date: Thu, 11 Nov 2021 15:53:35 -0000
 
-When pc is written, it is sign-extended to fill the widest supported XLEN.
+The read from PC for translation is in cpu_get_tb_cpu_state, before translation.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ target/riscv/cpu_helper.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 1d57bc97b5..a6a73ced9e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -150,16 +150,24 @@ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
- }
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9eeed38c7e..4c048cc266 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -70,8 +70,9 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+                           target_ulong *cs_base, uint32_t *pflags)
+ {
+     uint32_t flags = 0;
++    RISCVMXL xl = cpu_get_xl(env);
  
-+static void gen_set_pc(DisasContext *ctx, target_ulong dest)
-+{
-+    if (get_xl(ctx) == MXL_RV32) {
-+        dest = (int32_t)dest;
-+    }
-+    tcg_gen_movi_tl(cpu_pc, dest);
-+}
-+
- static void generate_exception(DisasContext *ctx, int excp)
- {
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_set_pc(ctx, ctx->base.pc_next);
-     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
+-    *pc = env->pc;
++    *pc = xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
+     *cs_base = 0;
  
- static void generate_exception_mtval(DisasContext *ctx, int excp)
- {
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_set_pc(ctx, ctx->base.pc_next);
-     tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
-     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
-@@ -179,10 +187,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
- {
-     if (translator_use_goto_tb(&ctx->base, dest)) {
-         tcg_gen_goto_tb(n);
--        tcg_gen_movi_tl(cpu_pc, dest);
-+        gen_set_pc(ctx, dest);
-         tcg_gen_exit_tb(ctx->base.tb, n);
-     } else {
--        tcg_gen_movi_tl(cpu_pc, dest);
-+        gen_set_pc(ctx, dest);
-         tcg_gen_lookup_and_goto_ptr();
+     if (riscv_has_ext(env, RVV)) {
+@@ -127,7 +128,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
      }
+ #endif
+ 
+-    flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
++    flags = FIELD_DP32(flags, TB_FLAGS, XL, xl);
+ 
+     *pflags = flags;
  }
 -- 
 2.25.1
