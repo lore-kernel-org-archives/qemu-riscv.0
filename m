@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mlY2t-0004X4-Ls
+	id 1mlY2t-0004XY-RJ
 	for mharc-qemu-riscv@gnu.org; Fri, 12 Nov 2021 10:00:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55344)
+Received: from eggs.gnu.org ([209.51.188.92]:55124)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2k-000480-Ob; Fri, 12 Nov 2021 10:00:42 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:41354)
+ id 1mlY2M-0003sI-HP; Fri, 12 Nov 2021 10:00:21 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:41352)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2e-0005xO-PA; Fri, 12 Nov 2021 10:00:40 -0500
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id A778141F4B;
+ id 1mlY2I-0005xM-Vf; Fri, 12 Nov 2021 10:00:17 -0500
+Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id EBA0241F4F;
  Fri, 12 Nov 2021 16:00:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=univ-grenoble-alpes.fr; s=2020; t=1636729202;
- bh=OQYpdTI/TXeJNZqJxWgOtOpWNx5Pe2PJGi5/7VlsCSY=;
+ bh=OKUYAR4j2HDlC6qGyQv+Ckrx2HO1H+M4BmYd0u7rK3E=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=xwBz6Y0eaatvBKIRZ8/d8YBW6q4ihIqOvHVYeeIn6TJwHPHmPbNDVsnPY4/gn+LPj
- NeAvl3g1kvNgzA7pQQwrwCZ9t8hAOPP1zTQu46mRdJ8XWxLaqNm/1Bazz7hM/3Vzm5
- NAV3D3p5QaFU5dHgucrgHYr3o0YpptypZEXJ8tP11MXpeBQUXoz2Eh5Z/UBJXBoS0b
- 9AHMLOV8/GjyMrJ1a5jRx83O96+T9r+Oiw87EV9gOp8gq8roI0+mXScYw3s2FvFMXa
- devczadauZxM7xtdpPePrOnLOoEMopQPIvTulWc7IEmMzQvcx/6c3UQBKWEZEUsqmy
- xpXv4Z4aZhzVA==
+ b=fNeXmnvTOxBo/ImZjXWqPTZP+T+0Frto+TBfqjdjQJOlqtich/DAbK++oyescQbX+
+ InLeX2d4QHsgZwl2MMor9MN5lbJbOJ57JCH3YlPn2El2oLcYir3XljSJetjkwQHPOx
+ oGjAVFcWjogo4vRccRWL3c5pW2FchCxReoMmagJwUIuZWBfBTfGcSabm9BtKlZEoDo
+ zsJ0fOKBjRFvbQzWqECe17X5kQaxjYKBLGqNqFLrcPW7mllWO79ducZNn5ks0yS0YB
+ opxnJ9YcAnwriCyife/Lo8TjSy73O7/gQ1LzrzaiMUwczwyGvDz9IjTWA9w0Y0qcaX
+ 4rbSciUWKjyAw==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 8DB0860066;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id D535F60067;
  Fri, 12 Nov 2021 16:00:02 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (unknown [217.114.201.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 42D2614005C;
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 95AD6140079;
  Fri, 12 Nov 2021 16:00:02 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
@@ -43,10 +43,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v5 10/18] target/riscv: support for 128-bit bitwise
- instructions
-Date: Fri, 12 Nov 2021 15:58:54 +0100
-Message-Id: <20211112145902.205131-11-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v5 11/18] target/riscv: support for 128-bit U-type instructions
+Date: Fri, 12 Nov 2021 15:58:55 +0100
+Message-Id: <20211112145902.205131-12-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -78,55 +77,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2021 15:00:43 -0000
+X-List-Received-Date: Fri, 12 Nov 2021 15:00:24 -0000
 
-The 128-bit bitwise instructions do not need any function prototype change
-as the functions can be applied independently on the lower and upper part of
-the registers.
+Adding the 128-bit version of lui and auipc, and introducing to that end
+a "set register with immediate" function to handle extension on 128 bits.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c | 21 +++++++++++++++++++--
- 1 file changed, 19 insertions(+), 2 deletions(-)
+ target/riscv/translate.c                | 21 +++++++++++++++++++++
+ target/riscv/insn_trans/trans_rvi.c.inc |  8 ++++----
+ 2 files changed, 25 insertions(+), 4 deletions(-)
 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 554cf05084..508ae87985 100644
+index 508ae87985..d2a2f1021d 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -448,7 +448,15 @@ static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
+@@ -289,6 +289,27 @@ static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
+     }
+ }
  
-     func(dest, src1, a->imm);
- 
--    gen_set_gpr(ctx, a->rd, dest);
-+    if (get_xl(ctx) == MXL_RV128) {
-+        TCGv src1h = get_gprh(ctx, a->rs1);
-+        TCGv desth = dest_gprh(ctx, a->rd);
++static void gen_set_gpri(DisasContext *ctx, int reg_num, target_long imm)
++{
++    if (reg_num != 0) {
++        switch (get_ol(ctx)) {
++        case MXL_RV32:
++            tcg_gen_movi_tl(cpu_gpr[reg_num], (int32_t)imm);
++            break;
++        case MXL_RV64:
++        case MXL_RV128:
++            tcg_gen_movi_tl(cpu_gpr[reg_num], imm);
++            break;
++        default:
++            g_assert_not_reached();
++        }
 +
-+        func(desth, src1h, -(a->imm < 0));
-+        gen_set_gpr128(ctx, a->rd, dest, desth);
-+    } else {
-+        gen_set_gpr(ctx, a->rd, dest);
++        if (get_xl_max(ctx) == MXL_RV128) {
++            tcg_gen_movi_tl(cpu_gprh[reg_num], -(imm < 0));
++        }
 +    }
++}
++
+ static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
+ {
+     assert(get_ol(ctx) == MXL_RV128);
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index fc73735b9e..0070fe606a 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -26,14 +26,14 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
  
+ static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
+ {
+-     REQUIRE_64BIT(ctx);
+-     return trans_illegal(ctx, a);
++    REQUIRE_64_OR_128BIT(ctx);
++    return trans_illegal(ctx, a);
+ }
+ 
+ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+ {
+     if (a->rd != 0) {
+-        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
++        gen_set_gpri(ctx, a->rd, a->imm);
+     }
      return true;
  }
-@@ -462,7 +470,16 @@ static bool gen_logic(DisasContext *ctx, arg_r *a,
- 
-     func(dest, src1, src2);
- 
--    gen_set_gpr(ctx, a->rd, dest);
-+    if (get_xl(ctx) == MXL_RV128) {
-+        TCGv src1h = get_gprh(ctx, a->rs1);
-+        TCGv src2h = get_gprh(ctx, a->rs2);
-+        TCGv desth = dest_gprh(ctx, a->rd);
-+
-+        func(desth, src1h, src2h);
-+        gen_set_gpr128(ctx, a->rd, dest, desth);
-+    } else {
-+        gen_set_gpr(ctx, a->rd, dest);
-+    }
- 
+@@ -41,7 +41,7 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
+ static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
+ {
+     if (a->rd != 0) {
+-        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
++        gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
+     }
      return true;
  }
 -- 
