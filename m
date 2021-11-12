@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mlY2t-0004XY-RJ
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Nov 2021 10:00:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55124)
+	id 1mlY2u-0004bM-M3
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Nov 2021 10:00:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55258)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2M-0003sI-HP; Fri, 12 Nov 2021 10:00:21 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:41352)
+ id 1mlY2f-00044a-T4; Fri, 12 Nov 2021 10:00:39 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:41362)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2I-0005xM-Vf; Fri, 12 Nov 2021 10:00:17 -0500
+ id 1mlY2d-0005xk-2F; Fri, 12 Nov 2021 10:00:37 -0500
 Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id EBA0241F4F;
- Fri, 12 Nov 2021 16:00:02 +0100 (CET)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 92EB741F6A;
+ Fri, 12 Nov 2021 16:00:04 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1636729202;
- bh=OKUYAR4j2HDlC6qGyQv+Ckrx2HO1H+M4BmYd0u7rK3E=;
+ d=univ-grenoble-alpes.fr; s=2020; t=1636729204;
+ bh=ZbuE41I4ToKCEVROqpL73QWYIegUfvelcyR0I+2cios=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fNeXmnvTOxBo/ImZjXWqPTZP+T+0Frto+TBfqjdjQJOlqtich/DAbK++oyescQbX+
- InLeX2d4QHsgZwl2MMor9MN5lbJbOJ57JCH3YlPn2El2oLcYir3XljSJetjkwQHPOx
- oGjAVFcWjogo4vRccRWL3c5pW2FchCxReoMmagJwUIuZWBfBTfGcSabm9BtKlZEoDo
- zsJ0fOKBjRFvbQzWqECe17X5kQaxjYKBLGqNqFLrcPW7mllWO79ducZNn5ks0yS0YB
- opxnJ9YcAnwriCyife/Lo8TjSy73O7/gQ1LzrzaiMUwczwyGvDz9IjTWA9w0Y0qcaX
- 4rbSciUWKjyAw==
+ b=QrxDOqhIBS5cXXm8Q/Q8Qio7mvi5mQl0Uj3Dn0zGMrkf33OXS+Wu245q6K508JnRS
+ mcsFtxONUwoYVLD+L4n88HBp6oEMReGU9q9oKmBXu42LpzOBwvrAYXKj41j9VMLE2d
+ bBFogWOGqVbc8UayhY4K8FaFpyIaaEv88VG2lu//hTgyr8SxUOiqD0GqvgQtHcvaO0
+ KwOnrfq9+LTYEm57EHqxvTRunxGiXib+9okO5nbAFiVFHRP6bSgRhdF+nGjQW+3vVp
+ CFBNtoPrk3znVY8fFqmW6Bkujem/o5+6E3qY4kt8hJTDD1xNn6VwiciG7Yv63M5N5Z
+ 9ULxmks5SZk2A==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id D535F60067;
- Fri, 12 Nov 2021 16:00:02 +0100 (CET)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 7D1DE60067;
+ Fri, 12 Nov 2021 16:00:04 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (unknown [217.114.201.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 95AD6140079;
- Fri, 12 Nov 2021 16:00:02 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 3D1FD14005C;
+ Fri, 12 Nov 2021 16:00:04 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,9 +43,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v5 11/18] target/riscv: support for 128-bit U-type instructions
-Date: Fri, 12 Nov 2021 15:58:55 +0100
-Message-Id: <20211112145902.205131-12-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v5 16/18] target/riscv: helper functions to wrap calls to
+ 128-bit csr insns
+Date: Fri, 12 Nov 2021 15:59:00 +0100
+Message-Id: <20211112145902.205131-17-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -77,82 +78,137 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2021 15:00:24 -0000
+X-List-Received-Date: Fri, 12 Nov 2021 15:00:41 -0000
 
-Adding the 128-bit version of lui and auipc, and introducing to that end
-a "set register with immediate" function to handle extension on 128 bits.
+Given the side effects they have, the csr instructions are realized as
+helpers. We extend this existing infrastructure for 128-bit sized csr.
+We return 128-bit values using the same approach as for div/rem.
+Theses helpers all call a unique function that is currently a fallback
+on the 64-bit version.
+The trans_csrxx functions supporting 128-bit are yet to be implemented.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/translate.c                | 21 +++++++++++++++++++++
- target/riscv/insn_trans/trans_rvi.c.inc |  8 ++++----
- 2 files changed, 25 insertions(+), 4 deletions(-)
+ target/riscv/cpu.h       |  4 ++++
+ target/riscv/helper.h    |  3 +++
+ target/riscv/csr.c       | 17 ++++++++++++++++
+ target/riscv/op_helper.c | 44 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 68 insertions(+)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 508ae87985..d2a2f1021d 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -289,6 +289,27 @@ static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 15609a5533..6828c136ad 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -483,6 +483,10 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
+                                           target_ulong new_value,
+                                           target_ulong write_mask);
+ 
++RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
++                                Int128 *ret_value,
++                                Int128 new_value, Int128 write_mask);
++
+ typedef struct {
+     const char *name;
+     riscv_csr_predicate_fn predicate;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index c036825723..bf2b338bfd 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -66,6 +66,9 @@ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_2(csrr, tl, env, int)
+ DEF_HELPER_3(csrw, void, env, int, tl)
+ DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
++DEF_HELPER_2(csrr_i128, tl, env, int)
++DEF_HELPER_4(csrw_i128, void, env, int, tl, tl)
++DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
+ #ifndef CONFIG_USER_ONLY
+ DEF_HELPER_2(sret, tl, env, tl)
+ DEF_HELPER_2(mret, tl, env, tl)
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 9f41954894..dca9e19a64 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1788,6 +1788,23 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
  }
  
-+static void gen_set_gpri(DisasContext *ctx, int reg_num, target_long imm)
++RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
++                               Int128 *ret_value,
++                               Int128 new_value, Int128 write_mask)
 +{
-+    if (reg_num != 0) {
-+        switch (get_ol(ctx)) {
-+        case MXL_RV32:
-+            tcg_gen_movi_tl(cpu_gpr[reg_num], (int32_t)imm);
-+            break;
-+        case MXL_RV64:
-+        case MXL_RV128:
-+            tcg_gen_movi_tl(cpu_gpr[reg_num], imm);
-+            break;
-+        default:
-+            g_assert_not_reached();
-+        }
++    /* fall back to 64-bit version for now */
++    target_ulong ret_64;
++    RISCVException ret = riscv_csrrw(env, csrno, &ret_64,
++                                     int128_getlo(new_value),
++                                     int128_getlo(write_mask));
 +
-+        if (get_xl_max(ctx) == MXL_RV128) {
-+            tcg_gen_movi_tl(cpu_gprh[reg_num], -(imm < 0));
-+        }
++    if (ret_value) {
++        *ret_value = int128_make64(ret_64);
++    }
++
++    return ret;
++}
++
+ /*
+  * Debugger support.  If not in user mode, set env->debugger before the
+  * riscv_csrrw call and clear it after the call.
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index ee7c24efe7..f4cf9c4698 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -69,6 +69,50 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
+     return val;
+ }
+ 
++target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
++{
++    Int128 rv = int128_zero();
++    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
++                                          int128_zero(),
++                                          int128_zero());
++
++    if (ret != RISCV_EXCP_NONE) {
++        riscv_raise_exception(env, ret, GETPC());
++    }
++
++    env->retxh = int128_gethi(rv);
++    return int128_getlo(rv);
++}
++
++void helper_csrw_i128(CPURISCVState *env, int csr,
++                      target_ulong srcl, target_ulong srch)
++{
++    RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
++                                          int128_make128(srcl, srch),
++                                          UINT128_MAX);
++
++    if (ret != RISCV_EXCP_NONE) {
++        riscv_raise_exception(env, ret, GETPC());
 +    }
 +}
 +
- static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
- {
-     assert(get_ol(ctx) == MXL_RV128);
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index fc73735b9e..0070fe606a 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -26,14 +26,14 @@ static bool trans_illegal(DisasContext *ctx, arg_empty *a)
++target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
++                       target_ulong srcl, target_ulong srch,
++                       target_ulong maskl, target_ulong maskh)
++{
++    Int128 rv = int128_zero();
++    RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
++                                          int128_make128(srcl, srch),
++                                          int128_make128(maskl, maskh));
++
++    if (ret != RISCV_EXCP_NONE) {
++        riscv_raise_exception(env, ret, GETPC());
++    }
++
++    env->retxh = int128_gethi(rv);
++    return int128_getlo(rv);
++}
++
+ #ifndef CONFIG_USER_ONLY
  
- static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
- {
--     REQUIRE_64BIT(ctx);
--     return trans_illegal(ctx, a);
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return trans_illegal(ctx, a);
- }
- 
- static bool trans_lui(DisasContext *ctx, arg_lui *a)
- {
-     if (a->rd != 0) {
--        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
-+        gen_set_gpri(ctx, a->rd, a->imm);
-     }
-     return true;
- }
-@@ -41,7 +41,7 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
- static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
- {
-     if (a->rd != 0) {
--        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
-+        gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
-     }
-     return true;
- }
+ target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
 -- 
 2.33.1
 
