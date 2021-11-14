@@ -1,71 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mlY2w-0004hT-Bq
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Nov 2021 10:00:54 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55350)
+	id 1mmEwx-0005RF-Lr
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Nov 2021 07:49:35 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2k-000488-Rx; Fri, 12 Nov 2021 10:00:43 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:41348)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mlY2d-0005xN-2t; Fri, 12 Nov 2021 10:00:40 -0500
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 5A15B41F4E;
- Fri, 12 Nov 2021 16:00:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1636729202;
- bh=tHjSmQPtOGdraEVPnf00bU1Z0E5IpT3l+dYbxzWOh/A=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ewqOb/Fry5swO9iOmfBkVotoGzr8fvo/8RC3szYq88SqMa/7bpYegTj34kTdzccJL
- QvY3USgAXH4z3NhWIctHvTTdZhPUAuv328wWU4PvJATQhTeofQLJ9ojAtyt39Eno7d
- gKv+K32t6q1PEbawkztyD8zOjeN42wIJaRTcpZqQ8kTL1cgCDvqvgUnvc96BJ3juDk
- Re1GYR+ccEz3TIo8t8asJW4A5x2COPI6psTv31nhdaTyw3Y3BGTQiHeBdmmu+0+vis
- AtAMrryazwjtipy6OdrP0+hxDPoxDIIwuvlIqs0Ebpb38c7IONwMns3QR5pJnQ18yV
- o1e+T3ON2GmSA==
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 3E77260067;
- Fri, 12 Nov 2021 16:00:02 +0100 (CET)
-Received: from palmier.tima.u-ga.fr (unknown [217.114.201.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id E8B7F140079;
- Fri, 12 Nov 2021 16:00:01 +0100 (CET)
-From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
- bin.meng@windriver.com, philmd@redhat.com, palmer@dabbelt.com,
- fabien.portas@grenoble-inp.org,
- =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v5 09/18] target/riscv: accessors to registers upper part and
- 128-bit load/store
-Date: Fri, 12 Nov 2021 15:58:53 +0100
-Message-Id: <20211112145902.205131-10-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mmEwv-0005Qk-SW
+ for qemu-riscv@nongnu.org; Sun, 14 Nov 2021 07:49:33 -0500
+Received: from [2a00:1450:4864:20::32e] (port=36469
+ helo=mail-wm1-x32e.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mmEwt-0008To-5t
+ for qemu-riscv@nongnu.org; Sun, 14 Nov 2021 07:49:33 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ i8-20020a7bc948000000b0030db7b70b6bso13528702wml.1
+ for <qemu-riscv@nongnu.org>; Sun, 14 Nov 2021 04:49:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=64gnf7OEU6vtYppEekQ9uumBMuERG1RHir8D4b/tj1k=;
+ b=WQsoiNqRBLDVDIiy5ccYlFGxa6sq76AHNi7QOKpk31zjt8/w6ASKu3S5inqvVG5yLZ
+ ta0f+YNmExpy4DKP5AUhphOOH3bHWFElEYt1OaVrWnWmTvg+aBX/N5EVnsOyPYptFDTy
+ YWu7knk9EWOpzoRss7XYCCw2P0RjHp+Me4t3DbH7rp+6zbFwthDVJZtV8OkoiXd3DI2j
+ mhol/+kqnvxYPzIieCdWnDid+burovVZB+BwawME7/iT6/Bqv/y7/9husTqdYe84BqN/
+ Ar9WHQh5VGfNAoUMSjVldfox5SFb6Yr+GyZuyTBQV/6sm6uWwTKQbuiaNnciLHlvJw/y
+ rBvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=64gnf7OEU6vtYppEekQ9uumBMuERG1RHir8D4b/tj1k=;
+ b=xHZV+8N3PoGp4A0v3L9MLkcwk7rO5f+zcfuGxDFCBtB3SiSwWkWFWTBnkmGqPiQjkd
+ GO1ll8kLTyvh/BGKeGre1hF1LWtjCpxdq2Ioz11Z4QbGjnBvY/uf1S6SbjYLmJ97ESDq
+ pgsV9rn4RoNkmaX1Dp93MFWUXrdaB8nqBqYewRnyoXHgRlQhSn0IrrWWMaB5NZ42cKH+
+ koPpGLdcssfU+CJQOdugBzTeGez/74fVe5WkeW0q3L+Dv8CpU64/F2M4ykEilvD73BGG
+ Dlwsr1s7zmB6tDjs/403Hwwi6JP66yZCaFimUuqh495ASRmSDW04oTyFHWMz5c+r2QG1
+ IijA==
+X-Gm-Message-State: AOAM533l8227yemTE/VwYe5hWeM3jT9uN316e4cQZ8+HB7WPaKxPumdW
+ LdJYfDjfjeqxPt6ZERJwFa50cA==
+X-Google-Smtp-Source: ABdhPJxQTZspoMDsbA4TaVNgx99ZUSk9SbySADR4NOnmJ230TQq+aAEWvN3lNMRwvlZwnjNJ9FyIqg==
+X-Received: by 2002:a05:600c:1c8d:: with SMTP id
+ k13mr50641719wms.177.1636894169192; 
+ Sun, 14 Nov 2021 04:49:29 -0800 (PST)
+Received: from [192.168.8.105] (60.red-95-126-179.staticip.rima-tde.net.
+ [95.126.179.60])
+ by smtp.gmail.com with ESMTPSA id g5sm16690867wri.45.2021.11.14.04.49.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 14 Nov 2021 04:49:28 -0800 (PST)
+Subject: Re: [PATCH v5 01/18] exec/memop: Adding signedness to quad definitions
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
+ palmer@dabbelt.com, fabien.portas@grenoble-inp.org,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
 References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211112145902.205131-2-frederic.petrot@univ-grenoble-alpes.fr>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <dd4da247-4849-48f8-f9b4-aa312a370cd6@linaro.org>
+Date: Sun, 14 Nov 2021 13:49:25 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20211112145902.205131-2-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32e
+ (failed)
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -46
+X-Spam_score: -4.7
+X-Spam_bar: ----
+X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.402,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,387 +90,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Nov 2021 15:00:44 -0000
+X-List-Received-Date: Sun, 14 Nov 2021 12:49:34 -0000
 
-Get function to retrieve the 64 top bits of a register, stored in the gprh
-field of the cpu state. Set function that writes the 128-bit value at once.
-The access to the gprh field can not be protected at compile time to make
-sure it is accessed only in the 128-bit version of the processor because we
-have no way to indicate that the misa_mxl_max field is const.
+On 11/12/21 3:58 PM, Frédéric Pétrot wrote:
+> Renaming defines for quad in their various forms so that their signedness is
+> now explicit.
+> Done using git grep as suggested by Philippe, with a bit of hand edition to
+> keep assignments aligned.
+> 
+> Signed-off-by: Frédéric Pétrot<frederic.petrot@univ-grenoble-alpes.fr>
+> Reviewed-by: Philippe Mathieu-Daudé<f4bug@amsat.org>
+> ---
 
-The 128-bit ISA adds ldu, lq and sq. We provide support for these
-instructions. Note that we compute only 64-bit addresses to actually access
-memory, cowardly utilizing the existing address translation mechanism of
-QEMU.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
----
- target/riscv/insn16.decode              |  27 ++++++-
- target/riscv/insn32.decode              |   5 ++
- target/riscv/translate.c                |  41 ++++++++++
- target/riscv/insn_trans/trans_rvi.c.inc | 102 ++++++++++++++++++++++--
- 4 files changed, 165 insertions(+), 10 deletions(-)
-
-diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
-index 2e9212663c..02c8f61b48 100644
---- a/target/riscv/insn16.decode
-+++ b/target/riscv/insn16.decode
-@@ -25,14 +25,17 @@
- # Immediates:
- %imm_ci        12:s1 2:5
- %nzuimm_ciw    7:4 11:2 5:1 6:1   !function=ex_shift_2
-+%uimm_cl_q     10:1 5:2 11:2      !function=ex_shift_4
- %uimm_cl_d     5:2 10:3           !function=ex_shift_3
- %uimm_cl_w     5:1 10:3 6:1       !function=ex_shift_2
- %imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
- %imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
- 
- %shimm_6bit   12:1 2:5               !function=ex_rvc_shifti
-+%uimm_6bit_lq 2:4 12:1 6:1           !function=ex_shift_4
- %uimm_6bit_ld 2:3 12:1 5:2           !function=ex_shift_3
- %uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
-+%uimm_6bit_sq 7:4 11:2               !function=ex_shift_4
- %uimm_6bit_sd 7:3 10:3               !function=ex_shift_3
- %uimm_6bit_sw 7:2 9:4                !function=ex_shift_2
- 
-@@ -54,16 +57,20 @@
- # Formats 16:
- @cr        ....  ..... .....  .. &r      rs2=%rs2_5       rs1=%rd     %rd
- @ci        ... . ..... .....  .. &i      imm=%imm_ci      rs1=%rd     %rd
-+@cl_q      ... . .....  ..... .. &i      imm=%uimm_cl_q   rs1=%rs1_3  rd=%rs2_3
- @cl_d      ... ... ... .. ... .. &i      imm=%uimm_cl_d   rs1=%rs1_3  rd=%rs2_3
- @cl_w      ... ... ... .. ... .. &i      imm=%uimm_cl_w   rs1=%rs1_3  rd=%rs2_3
- @cs_2      ... ... ... .. ... .. &r      rs2=%rs2_3       rs1=%rs1_3  rd=%rs1_3
-+@cs_q      ... ... ... .. ... .. &s      imm=%uimm_cl_q   rs1=%rs1_3  rs2=%rs2_3
- @cs_d      ... ... ... .. ... .. &s      imm=%uimm_cl_d   rs1=%rs1_3  rs2=%rs2_3
- @cs_w      ... ... ... .. ... .. &s      imm=%uimm_cl_w   rs1=%rs1_3  rs2=%rs2_3
- @cj        ...    ........... .. &j      imm=%imm_cj
- @cb_z      ... ... ... .. ... .. &b      imm=%imm_cb      rs1=%rs1_3  rs2=0
- 
-+@c_lqsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lq rs1=2 %rd
- @c_ldsp    ... . .....  ..... .. &i      imm=%uimm_6bit_ld rs1=2 %rd
- @c_lwsp    ... . .....  ..... .. &i      imm=%uimm_6bit_lw rs1=2 %rd
-+@c_sqsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sq rs1=2 rs2=%rs2_5
- @c_sdsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sd rs1=2 rs2=%rs2_5
- @c_swsp    ... . .....  ..... .. &s      imm=%uimm_6bit_sw rs1=2 rs2=%rs2_5
- @c_li      ... . .....  ..... .. &i      imm=%imm_ci rs1=0 %rd
-@@ -87,9 +94,15 @@
-   illegal         000  000 000 00 --- 00
-   addi            000  ... ... .. ... 00 @c_addi4spn
- }
--fld               001  ... ... .. ... 00 @cl_d
-+{
-+  lq              001  ... ... .. ... 00 @cl_q
-+  fld             001  ... ... .. ... 00 @cl_d
-+}
- lw                010  ... ... .. ... 00 @cl_w
--fsd               101  ... ... .. ... 00 @cs_d
-+{
-+  sq              101  ... ... .. ... 00 @cs_q
-+  fsd             101  ... ... .. ... 00 @cs_d
-+}
- sw                110  ... ... .. ... 00 @cs_w
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 0) ***
-@@ -132,7 +145,10 @@ addw              100 1 11 ... 01 ... 01 @cs_2
- 
- # *** RV32/64C Standard Extension (Quadrant 2) ***
- slli              000 .  .....  ..... 10 @c_shift2
--fld               001 .  .....  ..... 10 @c_ldsp
-+{
-+  lq              001  ... ... .. ... 10 @c_lqsp
-+  fld             001 .  .....  ..... 10 @c_ldsp
-+}
- {
-   illegal         010 -  00000  ----- 10 # c.lwsp, RES rd=0
-   lw              010 .  .....  ..... 10 @c_lwsp
-@@ -147,7 +163,10 @@ fld               001 .  .....  ..... 10 @c_ldsp
-   jalr            100 1  .....  00000 10 @c_jalr rd=1  # C.JALR
-   add             100 1  .....  ..... 10 @cr
- }
--fsd               101   ......  ..... 10 @c_sdsp
-+{
-+  sq              101  ... ... .. ... 10 @c_sqsp
-+  fsd             101   ......  ..... 10 @c_sdsp
-+}
- sw                110 .  .....  ..... 10 @c_swsp
- 
- # *** RV32C and RV64C specific Standard Extension (Quadrant 2) ***
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 2f251dac1b..02889c6082 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -163,6 +163,11 @@ sllw     0000000 .....  ..... 001 ..... 0111011 @r
- srlw     0000000 .....  ..... 101 ..... 0111011 @r
- sraw     0100000 .....  ..... 101 ..... 0111011 @r
- 
-+# *** RV128I Base Instruction Set (in addition to RV64I) ***
-+ldu      ............   ..... 111 ..... 0000011 @i
-+lq       ............   ..... 010 ..... 0001111 @i
-+sq       ............   ..... 100 ..... 0100011 @s
-+
- # *** RV32M Standard Extension ***
- mul      0000001 .....  ..... 000 ..... 0110011 @r
- mulh     0000001 .....  ..... 001 ..... 0110011 @r
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 00a2cfa917..554cf05084 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -58,6 +58,7 @@ typedef struct DisasContext {
-     /* pc_succ_insn points to the instruction following base.pc_next */
-     target_ulong pc_succ_insn;
-     target_ulong priv_ver;
-+    RISCVMXL misa_mxl_max;
-     RISCVMXL xl;
-     uint32_t misa_ext;
-     uint32_t opcode;
-@@ -123,6 +124,13 @@ static inline int get_olen(DisasContext *ctx)
-     return 16 << get_ol(ctx);
- }
- 
-+/* The maximum register length */
-+#ifdef TARGET_RISCV32
-+#define get_xl_max(ctx)    MXL_RV32
-+#else
-+#define get_xl_max(ctx)    ((ctx)->misa_mxl_max)
-+#endif
-+
- /*
-  * RISC-V requires NaN-boxing of narrower width floating point values.
-  * This applies when a 32-bit value is assigned to a 64-bit FP register.
-@@ -227,6 +235,7 @@ static TCGv get_gpr(DisasContext *ctx, int reg_num, DisasExtend ext)
-         }
-         break;
-     case MXL_RV64:
-+    case MXL_RV128:
-         break;
-     default:
-         g_assert_not_reached();
-@@ -234,6 +243,15 @@ static TCGv get_gpr(DisasContext *ctx, int reg_num, DisasExtend ext)
-     return cpu_gpr[reg_num];
- }
- 
-+static TCGv get_gprh(DisasContext *ctx, int reg_num)
-+{
-+    assert(get_xl(ctx) == MXL_RV128);
-+    if (reg_num == 0) {
-+        return ctx->zero;
-+    }
-+    return cpu_gprh[reg_num];
-+}
-+
- static TCGv dest_gpr(DisasContext *ctx, int reg_num)
- {
-     if (reg_num == 0 || get_olen(ctx) < TARGET_LONG_BITS) {
-@@ -242,6 +260,14 @@ static TCGv dest_gpr(DisasContext *ctx, int reg_num)
-     return cpu_gpr[reg_num];
- }
- 
-+static TCGv dest_gprh(DisasContext *ctx, int reg_num)
-+{
-+    if (reg_num == 0) {
-+        return temp_new(ctx);
-+    }
-+    return cpu_gprh[reg_num];
-+}
-+
- static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
- {
-     if (reg_num != 0) {
-@@ -250,11 +276,25 @@ static void gen_set_gpr(DisasContext *ctx, int reg_num, TCGv t)
-             tcg_gen_ext32s_tl(cpu_gpr[reg_num], t);
-             break;
-         case MXL_RV64:
-+        case MXL_RV128:
-             tcg_gen_mov_tl(cpu_gpr[reg_num], t);
-             break;
-         default:
-             g_assert_not_reached();
-         }
-+
-+        if (get_xl_max(ctx) == MXL_RV128) {
-+            tcg_gen_sari_tl(cpu_gprh[reg_num], cpu_gpr[reg_num], 63);
-+        }
-+    }
-+}
-+
-+static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
-+{
-+    assert(get_ol(ctx) == MXL_RV128);
-+    if (reg_num != 0) {
-+        tcg_gen_mov_tl(cpu_gpr[reg_num], rl);
-+        tcg_gen_mov_tl(cpu_gprh[reg_num], rh);
-     }
- }
- 
-@@ -673,6 +713,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-     ctx->mlen = 1 << (ctx->sew  + 3 - ctx->lmul);
-     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-+    ctx->misa_mxl_max = env->misa_mxl_max;
-     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
-     ctx->cs = cs;
-     ctx->ntemp = 0;
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 710f5e6a85..fc73735b9e 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -134,7 +134,7 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
-     return gen_branch(ctx, a, TCG_COND_GEU);
- }
- 
--static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+static bool gen_load_tl(DisasContext *ctx, arg_lb *a, MemOp memop)
- {
-     TCGv dest = dest_gpr(ctx, a->rd);
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -151,6 +151,46 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-     return true;
- }
- 
-+/* Compute only 64-bit addresses to use the address translation mechanism */
-+static bool gen_load_i128(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv destl = dest_gpr(ctx, a->rd);
-+    TCGv desth = dest_gprh(ctx, a->rd);
-+    TCGv addrl = tcg_temp_new();
-+
-+    tcg_gen_addi_tl(addrl, src1l, a->imm);
-+
-+    if (memop != MO_TEUO) {
-+        tcg_gen_qemu_ld_tl(destl, addrl, ctx->mem_idx, memop);
-+        if (memop & MO_SIGN) {
-+            tcg_gen_sari_tl(desth, destl, 63);
-+        } else {
-+            tcg_gen_movi_tl(desth, 0);
-+        }
-+    } else {
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? desth : destl, addrl,
-+                           ctx->mem_idx, MO_TEUQ);
-+        tcg_gen_addi_tl(addrl, addrl, 8);
-+        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? destl : desth, addrl,
-+                           ctx->mem_idx, MO_TEUQ);
-+    }
-+
-+    gen_set_gpr128(ctx, a->rd, destl, desth);
-+
-+    tcg_temp_free(addrl);
-+    return true;
-+}
-+
-+static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_load_i128(ctx, a, memop);
-+    } else {
-+        return gen_load_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_lb(DisasContext *ctx, arg_lb *a)
- {
-     return gen_load(ctx, a, MO_SB);
-@@ -166,6 +206,18 @@ static bool trans_lw(DisasContext *ctx, arg_lw *a)
-     return gen_load(ctx, a, MO_TESL);
- }
- 
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    REQUIRE_64_OR_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TESQ);
-+}
-+
-+static bool trans_lq(DisasContext *ctx, arg_lq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUO);
-+}
-+
- static bool trans_lbu(DisasContext *ctx, arg_lbu *a)
- {
-     return gen_load(ctx, a, MO_UB);
-@@ -178,17 +230,17 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
- 
- static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_load(ctx, a, MO_TEUL);
- }
- 
--static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+static bool trans_ldu(DisasContext *ctx, arg_ldu *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_128BIT(ctx);
-     return gen_load(ctx, a, MO_TEUQ);
- }
- 
--static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+static bool gen_store_tl(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-@@ -204,6 +256,38 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-     return true;
- }
- 
-+static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    TCGv src1l = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2l = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGv src2h = get_gprh(ctx, a->rs2);
-+    TCGv addrl = tcg_temp_new();
-+
-+    tcg_gen_addi_tl(addrl, src1l, a->imm);
-+
-+    if (memop != MO_TEUO) {
-+        tcg_gen_qemu_st_tl(src2l, addrl, ctx->mem_idx, memop);
-+    } else {
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2h : src2l, addrl,
-+            ctx->mem_idx, MO_TEUQ);
-+        tcg_gen_addi_tl(addrl, addrl, 8);
-+        tcg_gen_qemu_st_tl(memop & MO_BSWAP ? src2l : src2h, addrl,
-+            ctx->mem_idx, MO_TEUQ);
-+    }
-+
-+    tcg_temp_free(addrl);
-+    return true;
-+}
-+
-+static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
-+{
-+    if (get_xl(ctx) == MXL_RV128) {
-+        return gen_store_i128(ctx, a, memop);
-+    } else {
-+        return gen_store_tl(ctx, a, memop);
-+    }
-+}
-+
- static bool trans_sb(DisasContext *ctx, arg_sb *a)
- {
-     return gen_store(ctx, a, MO_SB);
-@@ -221,10 +305,16 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
- 
- static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
--    REQUIRE_64BIT(ctx);
-+    REQUIRE_64_OR_128BIT(ctx);
-     return gen_store(ctx, a, MO_TEUQ);
- }
- 
-+static bool trans_sq(DisasContext *ctx, arg_sq *a)
-+{
-+    REQUIRE_128BIT(ctx);
-+    return gen_store(ctx, a, MO_TEUO);
-+}
-+
- static bool trans_addi(DisasContext *ctx, arg_addi *a)
- {
-     return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_addi_tl);
--- 
-2.33.1
-
+r~
 
