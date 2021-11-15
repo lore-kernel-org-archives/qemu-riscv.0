@@ -1,68 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mmeMo-0003vW-27
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 10:57:58 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43448)
+	id 1mmeQG-00068R-3K
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 11:01:32 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44454)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmeMm-0003u3-HD
- for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 10:57:56 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:58677)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmeQD-00066U-WC
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 11:01:30 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:53061)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmeMj-00086a-UT
- for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 10:57:55 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmeQ8-0000BU-Ir
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 11:01:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636991873;
+ s=mimecast20190719; t=1636992084;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=3gi4j7Q0fmlkvxwVBhmxnE3e8X2pmiSjeAHke/jDw6s=;
- b=dqtXOL5BEWhCm678wfjvQEzMtCwYk91ie2uJ/sS0gzKXQ+n9wdusASsfHbG99vR+QXXs5F
- gKA8JvWzZCd7cEiRoHm5SbSzQq7+OIYISBPWO8NQkTbh4xjJrWk8yQEx3adn5ATm9bhBPd
- vvXeJLHZFjB3PASH06Ax9e5UBSUmoiQ=
+ bh=84H5Q4BoQIAfTyarkILBkOQn7xhp7BjF6T+UxyIUUHw=;
+ b=LI7pmm4SKCry4hJQxn9TREtM6DietLgKvPODTP1BAL6rDBaZHgp77OoU8u6DN4yOggopyO
+ X/9OS9UnIoDm1KqKT+4o6TsJ6geuCSPVpBYzANaEdcPkDzi0RVQXwUldxGBSTuCou1ewWt
+ WXpoKDn4oFFqTwA48zNIjjOdYEjG+s0=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-229-sgyDoI81O0SMi5sFZTYf_w-1; Mon, 15 Nov 2021 10:57:48 -0500
-X-MC-Unique: sgyDoI81O0SMi5sFZTYf_w-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-249-d3HtzfBJPISmC4xQiXS2RQ-1; Mon, 15 Nov 2021 11:01:20 -0500
+X-MC-Unique: d3HtzfBJPISmC4xQiXS2RQ-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 837EE19253C7;
- Mon, 15 Nov 2021 15:57:44 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 76737804141;
+ Mon, 15 Nov 2021 16:01:17 +0000 (UTC)
 Received: from blackfin.pond.sub.org (ovpn-112-7.ams2.redhat.com [10.36.112.7])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 1FAE519D9F;
- Mon, 15 Nov 2021 15:57:42 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 0CB7F5C1BB;
+ Mon, 15 Nov 2021 16:01:17 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 7BF1811380A7; Mon, 15 Nov 2021 16:57:40 +0100 (CET)
+ id 9AA4211380A7; Mon, 15 Nov 2021 17:01:15 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Cc: qemu-devel@nongnu.org,  peter.maydell@linaro.org,
- bin.meng@windriver.com,  mark.cave-ayland@ilande.co.uk,
- sundeep.lkml@gmail.com,  qemu-block@nongnu.org,
- andrew.smirnov@gmail.com,  hskinnemoen@google.com,  joel@jms.id.au,
- atar4qemu@gmail.com,  alistair@alistair23.me,  b.galvani@gmail.com,
- nieklinnenbank@gmail.com,  qemu-arm@nongnu.org,  clg@kaod.org,
- kwolf@redhat.com,  qemu-riscv@nongnu.org,  andrew@aj.id.au,
- Andrew.Baumann@microsoft.com,  jcd@tribudubois.net,  kfting@nuvoton.com,
- hreitz@redhat.com,  palmer@dabbelt.com
-Subject: Re: [PATCH RFC 2/2] hw: Replace drive_get_next() by drive_get()
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org,  kwolf@redhat.com,  hreitz@redhat.com,
+ clg@kaod.org,  andrew@aj.id.au,  joel@jms.id.au,  b.galvani@gmail.com,
+ jcd@tribudubois.net,  andrew.smirnov@gmail.com,  sundeep.lkml@gmail.com,
+ hskinnemoen@google.com,  kfting@nuvoton.com,  nieklinnenbank@gmail.com,
+ Andrew.Baumann@microsoft.com,  f4bug@amsat.org,
+ edgar.iglesias@gmail.com,  alistair@alistair23.me,
+ bin.meng@windriver.com,  palmer@dabbelt.com,  atar4qemu@gmail.com,
+ mark.cave-ayland@ilande.co.uk,  qemu-block@nongnu.org,
+ qemu-arm@nongnu.org,  qemu-riscv@nongnu.org
+Subject: Re: [PATCH RFC 0/2] Eliminate drive_get_next()
 References: <20211115125536.3341681-1-armbru@redhat.com>
- <20211115125536.3341681-3-armbru@redhat.com>
- <5b799ad5-a552-454f-dcc7-1ea6de22b397@amsat.org>
-Date: Mon, 15 Nov 2021 16:57:40 +0100
-In-Reply-To: <5b799ad5-a552-454f-dcc7-1ea6de22b397@amsat.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 15 Nov 2021 14:59:51
- +0100")
-Message-ID: <87lf1pfm2z.fsf@dusky.pond.sub.org>
+ <CAFEAcA9gQCQv7XENgT-ap+2qhiggZTt-yEHQ1WJ6__5hHRRU1A@mail.gmail.com>
+Date: Mon, 15 Nov 2021 17:01:15 +0100
+In-Reply-To: <CAFEAcA9gQCQv7XENgT-ap+2qhiggZTt-yEHQ1WJ6__5hHRRU1A@mail.gmail.com>
+ (Peter Maydell's message of "Mon, 15 Nov 2021 14:05:50 +0000")
+Message-ID: <87fsrxflx0.fsf@dusky.pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
@@ -84,156 +80,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2021 15:57:56 -0000
+X-List-Received-Date: Mon, 15 Nov 2021 16:01:30 -0000
 
-Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-> On 11/15/21 13:55, Markus Armbruster wrote:
->> drive_get_next() is basically a bad idea.  It returns the "next" block
->> backend of a certain interface type.  "Next" means bus=3D0,unit=3DN, whe=
-re
->> subsequent calls count N up from zero, per interface type.
->>=20
->> This lets you define unit numbers implicitly by execution order.  If the
->> order changes, or new calls appear "in the middle", unit numbers change.
->> ABI break.  Hard to spot in review.
->>=20
->> Explicit is better than implicit: use drive_get() directly.
->>=20
->> Signed-off-by: Markus Armbruster <armbru@redhat.com>
->> ---
->>  include/sysemu/blockdev.h           |  1 -
->>  blockdev.c                          | 10 ----------
->>  hw/arm/aspeed.c                     | 21 +++++++++++++--------
->>  hw/arm/cubieboard.c                 |  2 +-
->>  hw/arm/imx25_pdk.c                  |  2 +-
->>  hw/arm/integratorcp.c               |  2 +-
->>  hw/arm/mcimx6ul-evk.c               |  2 +-
->>  hw/arm/mcimx7d-sabre.c              |  2 +-
->>  hw/arm/msf2-som.c                   |  2 +-
->>  hw/arm/npcm7xx_boards.c             |  6 +++---
->>  hw/arm/orangepi.c                   |  2 +-
->>  hw/arm/raspi.c                      |  2 +-
->>  hw/arm/realview.c                   |  2 +-
->>  hw/arm/sabrelite.c                  |  2 +-
->>  hw/arm/versatilepb.c                |  4 ++--
->>  hw/arm/vexpress.c                   |  6 +++---
->>  hw/arm/xilinx_zynq.c                | 16 +++++++++-------
->>  hw/arm/xlnx-versal-virt.c           |  3 ++-
->>  hw/arm/xlnx-zcu102.c                |  6 +++---
->>  hw/microblaze/petalogix_ml605_mmu.c |  2 +-
->>  hw/misc/sifive_u_otp.c              |  2 +-
->>  hw/riscv/microchip_pfsoc.c          |  2 +-
->>  hw/sparc64/niagara.c                |  2 +-
->>  23 files changed, 49 insertions(+), 52 deletions(-)
+> On Mon, 15 Nov 2021 at 12:55, Markus Armbruster <armbru@redhat.com> wrote:
+>>
+>> This is RFC because I'm unsure about the removal of
+>>
+>>     /* Reason: init() method uses drive_get_next() */
+>>     dc->user_creatable = false;
+>>
+>> in PATCH 1.  Both users appear to wire up some GPIO.  If that's
+>> necessary for the thing to work, we should just replace the comment.
 >
->> @@ -435,11 +438,13 @@ static void aspeed_machine_init(MachineState *mach=
-ine)
->>      }
->> =20
->>      for (i =3D 0; i < bmc->soc.sdhci.num_slots; i++) {
->> -        sdhci_attach_drive(&bmc->soc.sdhci.slots[i], drive_get_next(IF_=
-SD));
->> +        sdhci_attach_drive(&bmc->soc.sdhci.slots[i],
->> +                           drive_get(IF_SD, 0, i));
+> Looking at the code, it sort of is and sort of isn't. The GPIO line
+> is the chip-select line. If you don't connect it then (because the
+> ssi-sd device configures cs_polarity to SSI_CS_LOW, requesting an
+> active-low chip-select) the device will always be selected. If
+> the machine created an SSI bus with no SSI device attached to it
+> then in theory the user could create an ssi-sd device and connect
+> it there and have it work. But in practice it's really unlikely:
+> machines create SSI buses with specific wired-in devices on them,
+> and the guest OS knows what it has to do to enable the chip select
+> for the device it wants to talk to (often some known GPIO pin on
+> a GPIO controller).
 >
-> If we put SD on bus #0, ...
->
->>      }
->> =20
->>      if (bmc->soc.emmc.num_slots) {
->> -        sdhci_attach_drive(&bmc->soc.emmc.slots[0], drive_get_next(IF_S=
-D));
->> +        sdhci_attach_drive(&bmc->soc.emmc.slots[0],
->> +                           drive_get(IF_SD, 0, bmc->soc.sdhci.num_slots=
-));
->
-> ... we'd want to put eMMC on bus #1
+> So I would keep the user_creatable = false, with a reason of
+> "user should wire up GPIO chip-select line". But see below for
 
-Using separate buses for different kinds of devices would be neater, but
-it also would be an incompatible change.  This patch keeps existing
-bus/unit numbers working.  drive_get_next() can only use bus 0.
+I'll do it this way.
 
->                                      but I see having eMMC cards on a
-> IF_SD bus as a bug, since these cards are soldered on the board.
-
-IF_SD is not a bus, it's an "block interface type", which is really just
-a user interface thing.
-
->> --- a/hw/arm/vexpress.c
->> +++ b/hw/arm/vexpress.c
->> @@ -625,7 +625,7 @@ static void vexpress_common_init(MachineState *machi=
-ne)
->>                            qdev_get_gpio_in(sysctl, ARM_SYSCTL_GPIO_MMC_=
-WPROT));
->>      qdev_connect_gpio_out_named(dev, "card-inserted", 0,
->>                            qdev_get_gpio_in(sysctl, ARM_SYSCTL_GPIO_MMC_=
-CARDIN));
->> -    dinfo =3D drive_get_next(IF_SD);
->> +    dinfo =3D drive_get(IF_SD, 0, 0);
+> a pile of contrary precedent.
 >
-> Can we have one interface refactor per patch (IF_SD, IF_PFLASH, IF_MTD...=
-)?
+> (The chip-select GPIO is created in the parent class, incidentally.)
+>
+>> Aside: there may be devices that need manual wiring to work, yet don't
+>> have user_creatable unset.  Bugs if you ask me.  I don't have smart
+>> ideas on how to track them down.
+>
+> Me neither. I notice that the TYPE_M25P80 is also an SSI peripheral
+> with an active-low chipselect but that one doesn't set user_creatable
+> to false. TYPE_SSD0323 also is user-creatable and that one has an
+> active-high chipselect, which means the user can create a device but
+> it will then never be usable because it will ignore all transactions.
+> (More generally, looks like most subclasses of TYPE_SSI_PERIPHERAL
+> don't set user_creatable = false.)
 
-Peter asked for one patch per "board/SoC model".  I'll do whatever helps
-reviewers.
+For sysbus devices, we clear user_creatable by default, because sysbus
+devices pretty much always[*] need wiring.  Is this the case for SSI bus
+devices, too?
 
->> @@ -657,7 +657,7 @@ static void vexpress_common_init(MachineState *machi=
-ne)
->> =20
->>      sysbus_create_simple("pl111", map[VE_CLCD], pic[14]);
->> =20
->> -    dinfo =3D drive_get_next(IF_PFLASH);
->> +    dinfo =3D drive_get(IF_PFLASH, 0, 0);
->
->> -static inline void zynq_init_spi_flashes(uint32_t base_addr, qemu_irq i=
-rq,
->> -                                         bool is_qspi)
->> +static inline int zynq_init_spi_flashes(uint32_t base_addr, qemu_irq ir=
-q,
->> +                                        bool is_qspi, int unit0)
->>  {
->> +    int unit =3D unit0;
->>      DeviceState *dev;
->>      SysBusDevice *busdev;
->>      SSIBus *spi;
->> @@ -156,7 +157,7 @@ static inline void zynq_init_spi_flashes(uint32_t ba=
-se_addr, qemu_irq irq,
->>          spi =3D (SSIBus *)qdev_get_child_bus(dev, bus_name);
->> =20
->>          for (j =3D 0; j < num_ss; ++j) {
->> -            DriveInfo *dinfo =3D drive_get_next(IF_MTD);
->> +            DriveInfo *dinfo =3D drive_get(IF_MTD, 0, unit++);
->
->> diff --git a/hw/arm/xlnx-zcu102.c b/hw/arm/xlnx-zcu102.c
->> index 3dc2b5e8ca..45eb19ab3b 100644
->> --- a/hw/arm/xlnx-zcu102.c
->> +++ b/hw/arm/xlnx-zcu102.c
->> @@ -190,7 +190,7 @@ static void xlnx_zcu102_init(MachineState *machine)
->>          BusState *spi_bus;
->>          DeviceState *flash_dev;
->>          qemu_irq cs_line;
->> -        DriveInfo *dinfo =3D drive_get_next(IF_MTD);
->> +        DriveInfo *dinfo =3D drive_get(IF_MTD, 0, i);
->
-> If this is bus #0, ...
->
->>          gchar *bus_name =3D g_strdup_printf("spi%d", i);
->> =20
->>          spi_bus =3D qdev_get_child_bus(DEVICE(&s->soc), bus_name);
->> @@ -212,7 +212,7 @@ static void xlnx_zcu102_init(MachineState *machine)
->>          BusState *spi_bus;
->>          DeviceState *flash_dev;
->>          qemu_irq cs_line;
->> -        DriveInfo *dinfo =3D drive_get_next(IF_MTD);
->> +        DriveInfo *dinfo =3D drive_get(IF_MTD, 0, XLNX_ZYNQMP_NUM_SPIS =
-+ i);
->
-> ... I'd expect we use bus #1 here (different connector on the board).
 
-See above.
-
->>          int bus =3D i / XLNX_ZYNQMP_NUM_QSPI_BUS_CS;
->>          gchar *bus_name =3D g_strdup_printf("qspi%d", bus);
+[*] The most prominent exception is "dynamic sysbus", which I believe
+was a mistake.
 
 
