@@ -1,69 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mmTbL-0002yy-1U
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Nov 2021 23:28:15 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36800)
+	id 1mmWwI-0001x2-7D
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 03:02:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:45378)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmTbI-0002x3-6x; Sun, 14 Nov 2021 23:28:12 -0500
-Received: from [2607:f8b0:4864:20::d2a] (port=36763
- helo=mail-io1-xd2a.google.com)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mmWwH-0001vT-Dd
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 03:02:05 -0500
+Received: from [2a00:1450:4864:20::42a] (port=33530
+ helo=mail-wr1-x42a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmTbG-0004y2-CJ; Sun, 14 Nov 2021 23:28:11 -0500
-Received: by mail-io1-xd2a.google.com with SMTP id e144so19523945iof.3;
- Sun, 14 Nov 2021 20:28:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=R89Ni0G7INrK1R6F/KXxYYXIUazS58/T8c4vB0XqYOk=;
- b=VA2BxBKndHO/MuMs/8fjctBSvbylxuUH/b3e0+FKJ7M4WkH/+dvj7DGs7nhZmq5I4p
- fN0NkItxwaW+qhpNlobBEsuXRTHsWNivhpNd+sInyMeq5rDz3e65HMD4EB3TL7q7Z1qI
- 9+DClY9fzHkl8YtJw+iJgnBCBK0opGa5/MJ4wSEqndCTV2Rp7P+o5rj5zJtuBlo0QT/5
- Xu9+mApoOBtbDHh7p2rTf18Y3HOXB1WFyhT4RRn8GWVZ1J7hto+SLaGY7/863/bBs7Ww
- tTaCIMXLU31HYJcsq1A9XTKGCsWv4V2oyd8J68appPphoKYxuHUcHeZ5tOp21cjeR/Z4
- r1Vg==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mmWwD-0007U3-TZ
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 03:02:05 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id d24so28899981wra.0
+ for <qemu-riscv@nongnu.org>; Mon, 15 Nov 2021 00:02:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=GbpP/8KAioO/YRtL4rx7xGjmagDxShnhsARaSYnQBmA=;
+ b=EjWHLAPUYpTI39hZCwI/0jzic4v890SQb9c40U0ss3urDTnIEM1J5/NOUAueyPHAZZ
+ jZyMDAS97O3nDnlFlXk26wt9qYbEzwrF6K98/ZADv7a0/oGiwo9q7d8Q6VsUwWXW66p7
+ D+OEIOyRaNdxOHJX+re9iMTSWrOke14UbhgxNUgENwVIs98sr9GAcXOua8S5wnKuO2Z9
+ 8uZzCP/GGc9b9pRzV63g/wSYuULFZEW0M1lZuaYuLoUyn87IaHHBDb9dTbbJKj2zIHVz
+ /058FXBRK61Z7PZV2SXNwYhJQS2rra9ssqOHueyTZaKc2bOPCGWhLxgkvpZ386T0XpcJ
+ xk/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=R89Ni0G7INrK1R6F/KXxYYXIUazS58/T8c4vB0XqYOk=;
- b=EtnqhAM73KX3m5T+XWeinF4nlvZSvjVVuI/xAKQdql7gi/PWhmz+LHBuGqxc+awL/g
- +0yJbVF2Sg0jFZmy6/tkuPOxjWxmFefQbwN0EOwSMU1g/7XlBr4sWEm3eTKlSEBiVA7X
- 5up7rJ/auxiM2RZ1o++3E17j/YAnEnQZRhvCKcsEF0JjF25nMtOcnyOIkLnPWzedgxj7
- LyOAHn0KN/LQ5RYbUAw307nJljafrNh05MLVE4MCZwh4UdOPnKpXnl++86L9x5KNoRaZ
- RzyZp62JLasFsZqoJ8IY5kHDqOAVxjFhQv0WUCDO399fviW5saOft243xpKdyNFhK62L
- aIWw==
-X-Gm-Message-State: AOAM5328gBm6kZuC250fUZjOrgpkpjF8UT9oVyORPrcA1Q6Gn3LL+tMW
- ZTjjf91n3S3G0AGeIMvOkQSCr6GwYaW7ffAFFxk=
-X-Google-Smtp-Source: ABdhPJynpuFhOGv3+YqHGL5clyXEQMMEv5fvfYwA3zu8oT/IsVuZKcbXA+wLMN9Dyy10CnBYqUyp6OExLrEI/wEfPtA=
-X-Received: by 2002:a02:a601:: with SMTP id c1mr26960016jam.114.1636950489080; 
- Sun, 14 Nov 2021 20:28:09 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=GbpP/8KAioO/YRtL4rx7xGjmagDxShnhsARaSYnQBmA=;
+ b=Ly/VoONYjhr5FhxUYm5SzmV9V9UhMTQKbhH1c4hsL+/p0N0pEwbkPzZsXe4boi5VAT
+ YzpSKzvzT7IHFvPAQtlnO0w7mg+4lwVwItZVffSWpTdufB5ox3bPC7ot5d3/6rYxrdtg
+ sSkCh376Mbr7aXwIwFYjdi1N3eKVyg284oVI07XP/yrOcIFr59VmQJJ8++vjGptSqP23
+ jRE1/qp5RUzUJQs9JlKtc8JQo0EZ7gLEO+FKLlFMpGuc/JDQXYM4ejR7FUJMcersw6Nb
+ xuAFkKT4yCQyzgZI/ZznbGln0aZYcrWjeuRHCiNwxiMOQwFfcL7P4v9gIoA2Vwj6sTht
+ AJrA==
+X-Gm-Message-State: AOAM530dXavA/1AJb7/XbFas1JypR7AibcN+0whlWArrVuMz6QfZOvFn
+ MZ6tqwP5ypaUbPwHkhR/MA8pCw==
+X-Google-Smtp-Source: ABdhPJxGP1sBWgz1fUXwlGhKFIGGRR0BSwOavlVjs4ws9Biskq2Wl3nNXK3zN9c6fcDzMESuNj4npg==
+X-Received: by 2002:adf:d852:: with SMTP id k18mr42029970wrl.391.1636963319292; 
+ Mon, 15 Nov 2021 00:01:59 -0800 (PST)
+Received: from [192.168.8.105] (137.red-176-80-46.dynamicip.rima-tde.net.
+ [176.80.46.137])
+ by smtp.gmail.com with ESMTPSA id n32sm22316799wms.1.2021.11.15.00.01.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Nov 2021 00:01:58 -0800 (PST)
+Subject: Re: [PATCH v5 02/18] exec/memop: Adding signed quad and octo defines
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
+ palmer@dabbelt.com, fabien.portas@grenoble-inp.org
+References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211112145902.205131-3-frederic.petrot@univ-grenoble-alpes.fr>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <334343ea-77e6-431b-4dfc-433fd1986ede@linaro.org>
+Date: Mon, 15 Nov 2021 09:01:54 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-4-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-4-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Nov 2021 14:27:43 +1000
-Message-ID: <CAKmqyKOyV6R1YFTDsQGDTbU9ggBijGDgyD_2z-CC2jR44Cao-g@mail.gmail.com>
-Subject: Re: [PATCH v4 03/20] target/riscv: Ignore the pc bits above XLEN
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2a
+In-Reply-To: <20211112145902.205131-3-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.278,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,49 +87,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2021 04:28:12 -0000
+X-List-Received-Date: Mon, 15 Nov 2021 08:02:05 -0000
 
-On Fri, Nov 12, 2021 at 1:54 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> The read from PC for translation is in cpu_get_tb_cpu_state, before translation.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+On 11/12/21 3:58 PM, Frédéric Pétrot wrote:
+> Adding defines to handle signed 64-bit and unsigned 128-bit quantities in
+> memory accesses.
+> 
+> Signed-off-by: Frédéric Pétrot<frederic.petrot@univ-grenoble-alpes.fr>
 > ---
->  target/riscv/cpu_helper.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9eeed38c7e..4c048cc266 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -70,8 +70,9 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->                            target_ulong *cs_base, uint32_t *pflags)
->  {
->      uint32_t flags = 0;
-> +    RISCVMXL xl = cpu_get_xl(env);
->
-> -    *pc = env->pc;
-> +    *pc = xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
->      *cs_base = 0;
->
->      if (riscv_has_ext(env, RVV)) {
-> @@ -127,7 +128,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->      }
->  #endif
->
-> -    flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
-> +    flags = FIELD_DP32(flags, TB_FLAGS, XL, xl);
->
->      *pflags = flags;
->  }
-> --
-> 2.25.1
->
->
+>   include/exec/memop.h | 7 +++++++
+>   1 file changed, 7 insertions(+)
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+r~
 
