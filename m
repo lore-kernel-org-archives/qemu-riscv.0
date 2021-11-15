@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mmcLJ-00005T-9L
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 08:48:17 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36306)
+	id 1mmcM0-00010F-4Z
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 08:49:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36634)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmcLH-000055-ON
- for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 08:48:15 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:59566)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmcLx-0000ys-D1
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 08:48:57 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:23453)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmcLF-0005tT-KK
- for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 08:48:15 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmcLv-0005yv-Lg
+ for qemu-riscv@nongnu.org; Mon, 15 Nov 2021 08:48:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1636984091;
+ s=mimecast20190719; t=1636984135;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=39X9PHyLgG5tKgwq8KHgl7E9/h1ZlQME+TsbaEXLlrw=;
- b=Z51v133kjJYihUJ6S1o9quCBm7IqkELHTcW9m+8iTI8fQzl3HZdooimPGAi448HMEXMlk7
- o+lsFoZWQ1hepvyA0muGXofkZv71mq/jFC4np8XUo2TIAW+isI3YLKhzVYZ45K/KrUvdSS
- ZlZLQcw30F/563mUhoQ5Xy/WIMEcd5A=
+ bh=DnsB/WUUV5P4fY2Uku0xQfmUw6yQ5MSo3oTCQNXYz5E=;
+ b=dZOJiZJlGBf8JqnFEHIm+S5PEC+HQx3VyRJzsZF/tNvxNXSTpqsEC3yWOO93VdNFAdCH55
+ nIG2PrHtsWwlq2wt+djpCxBG2Uorwt8uZSXsFxcZHHVJ3b4hdaQlLHhFf6CyCzAPOQ+WWh
+ WTtLA8OmfwUe9UuzAkDen7OSNYv1US4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-505-Xv4NxenOOdGGoggfrfxtoA-1; Mon, 15 Nov 2021 08:48:08 -0500
-X-MC-Unique: Xv4NxenOOdGGoggfrfxtoA-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
+ us-mta-388-IHqQvcv1PaGlnIhEVX2cXA-1; Mon, 15 Nov 2021 08:48:51 -0500
+X-MC-Unique: IHqQvcv1PaGlnIhEVX2cXA-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EC53719251A2;
- Mon, 15 Nov 2021 13:48:04 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 202B31018F71;
+ Mon, 15 Nov 2021 13:48:48 +0000 (UTC)
 Received: from blackfin.pond.sub.org (ovpn-112-7.ams2.redhat.com [10.36.112.7])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id CC61F5F4EF;
- Mon, 15 Nov 2021 13:48:03 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id CEDBA17CEE;
+ Mon, 15 Nov 2021 13:48:47 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 4854011380A7; Mon, 15 Nov 2021 14:48:02 +0100 (CET)
+ id 6A5AE11380A7; Mon, 15 Nov 2021 14:48:46 +0100 (CET)
 From: Markus Armbruster <armbru@redhat.com>
 To: Peter Maydell <peter.maydell@linaro.org>
 Cc: qemu-devel@nongnu.org,  kwolf@redhat.com,  hreitz@redhat.com,
@@ -44,23 +44,24 @@ Cc: qemu-devel@nongnu.org,  kwolf@redhat.com,  hreitz@redhat.com,
  bin.meng@windriver.com,  palmer@dabbelt.com,  atar4qemu@gmail.com,
  mark.cave-ayland@ilande.co.uk,  qemu-block@nongnu.org,
  qemu-arm@nongnu.org,  qemu-riscv@nongnu.org
-Subject: Re: [PATCH RFC 2/2] hw: Replace drive_get_next() by drive_get()
+Subject: Re: [PATCH RFC 1/2] hw/sd/ssi-sd: Do not create SD card within
+ controller's realize
 References: <20211115125536.3341681-1-armbru@redhat.com>
- <20211115125536.3341681-3-armbru@redhat.com>
- <CAFEAcA-dxXdsaKP5G7nhSROqwsRS9=r44G7rvNpEKbjgX8BbGQ@mail.gmail.com>
-Date: Mon, 15 Nov 2021 14:48:02 +0100
-In-Reply-To: <CAFEAcA-dxXdsaKP5G7nhSROqwsRS9=r44G7rvNpEKbjgX8BbGQ@mail.gmail.com>
- (Peter Maydell's message of "Mon, 15 Nov 2021 13:38:43 +0000")
-Message-ID: <875ystjzsd.fsf@dusky.pond.sub.org>
+ <20211115125536.3341681-2-armbru@redhat.com>
+ <CAFEAcA94NzZq6fnvvF6aRJtHV29Wnrtudz4QKSoADo6=-QF5JA@mail.gmail.com>
+Date: Mon, 15 Nov 2021 14:48:46 +0100
+In-Reply-To: <CAFEAcA94NzZq6fnvvF6aRJtHV29Wnrtudz4QKSoADo6=-QF5JA@mail.gmail.com>
+ (Peter Maydell's message of "Mon, 15 Nov 2021 13:40:36 +0000")
+Message-ID: <871r3hjzr5.fsf@dusky.pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain
-Received-SPF: pass client-ip=216.205.24.124; envelope-from=armbru@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
@@ -81,54 +82,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Nov 2021 13:48:16 -0000
+X-List-Received-Date: Mon, 15 Nov 2021 13:48:57 -0000
 
 Peter Maydell <peter.maydell@linaro.org> writes:
 
-> On Mon, 15 Nov 2021 at 12:55, Markus Armbruster <armbru@redhat.com> wrote:
+> On Mon, 15 Nov 2021 at 12:56, Markus Armbruster <armbru@redhat.com> wrote:
 >>
->> drive_get_next() is basically a bad idea.  It returns the "next" block
->> backend of a certain interface type.  "Next" means bus=0,unit=N, where
->> subsequent calls count N up from zero, per interface type.
+>> ssi_sd_realize() creates an "sd-card" device.  This is inappropriate,
+>> and marked FIXME.
 >>
->> This lets you define unit numbers implicitly by execution order.  If the
->> order changes, or new calls appear "in the middle", unit numbers change.
->> ABI break.  Hard to spot in review.
->>
->> Explicit is better than implicit: use drive_get() directly.
+>> Move it to the boards that create these devices.  Prior art: commit
+>> eb4f566bbb for device "generic-sdhci", and commit 26c607b86b for
+>> device "pl181".
 >>
 >> Signed-off-by: Markus Armbruster <armbru@redhat.com>
 >> ---
->>  include/sysemu/blockdev.h           |  1 -
->>  blockdev.c                          | 10 ----------
->>  hw/arm/aspeed.c                     | 21 +++++++++++++--------
->>  hw/arm/cubieboard.c                 |  2 +-
->>  hw/arm/imx25_pdk.c                  |  2 +-
->>  hw/arm/integratorcp.c               |  2 +-
->>  hw/arm/mcimx6ul-evk.c               |  2 +-
->>  hw/arm/mcimx7d-sabre.c              |  2 +-
->>  hw/arm/msf2-som.c                   |  2 +-
->>  hw/arm/npcm7xx_boards.c             |  6 +++---
->>  hw/arm/orangepi.c                   |  2 +-
->>  hw/arm/raspi.c                      |  2 +-
->>  hw/arm/realview.c                   |  2 +-
->>  hw/arm/sabrelite.c                  |  2 +-
->>  hw/arm/versatilepb.c                |  4 ++--
->>  hw/arm/vexpress.c                   |  6 +++---
->>  hw/arm/xilinx_zynq.c                | 16 +++++++++-------
->>  hw/arm/xlnx-versal-virt.c           |  3 ++-
->>  hw/arm/xlnx-zcu102.c                |  6 +++---
->>  hw/microblaze/petalogix_ml605_mmu.c |  2 +-
->>  hw/misc/sifive_u_otp.c              |  2 +-
->>  hw/riscv/microchip_pfsoc.c          |  2 +-
->>  hw/sparc64/niagara.c                |  2 +-
->>  23 files changed, 49 insertions(+), 52 deletions(-)
 >
-> This would be easier to review if it didn't try to change all of
-> these board/SoC models at once. Each one of them is entirely
-> separate review work.
+>> @@ -670,7 +672,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>>
+>>      /* Connect an SPI flash to SPI0 */
+>>      flash_dev = qdev_new("is25wp256");
+>> -    dinfo = drive_get_next(IF_MTD);
+>> +    dinfo = drive_get(IF_MTD, 0, 0);
+>>      if (dinfo) {
+>>          qdev_prop_set_drive_err(flash_dev, "drive",
+>>                                  blk_by_legacy_dinfo(dinfo),
+>
+>
+> This part looks like it should have been in the other patch.
 
-Happy to split, but first I'd like to get some advice on the part I'm
-unsure about; see my cover letter.
+You're right.  Thanks!
 
 
