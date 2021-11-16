@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mmouG-0004dF-PQ
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 22:13:12 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44030)
+	id 1mmouo-0005dD-4k
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 22:13:46 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44132)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmouE-0004cU-Tv; Mon, 15 Nov 2021 22:13:10 -0500
-Received: from [2607:f8b0:4864:20::d29] (port=41559
- helo=mail-io1-xd29.google.com)
+ id 1mmoum-0005YX-A8; Mon, 15 Nov 2021 22:13:44 -0500
+Received: from [2607:f8b0:4864:20::d2a] (port=40677
+ helo=mail-io1-xd2a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmouD-0001hC-C8; Mon, 15 Nov 2021 22:13:10 -0500
-Received: by mail-io1-xd29.google.com with SMTP id y16so24127167ioc.8;
- Mon, 15 Nov 2021 19:13:08 -0800 (PST)
+ id 1mmouk-0001ij-To; Mon, 15 Nov 2021 22:13:43 -0500
+Received: by mail-io1-xd2a.google.com with SMTP id r8so24162999iog.7;
+ Mon, 15 Nov 2021 19:13:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FjM7Fdqy/Og8DD/Ztwl8hX/alv9qvougFhs01SEpgL8=;
- b=ZR8omFL01uHjRGze/l27pX/dF8PoQznppyZQUJnxcZ021HI2uGFKQZVhrmBQmH64pj
- EdLkx98ETZbnp84ng68PRJTc07NaBcbVd3smz49b09mUUbvGbjaq+NloqJjZ8/3JVatM
- ToDYWcTDlMbxint3f1fbkepBOZ7aN2kJY2cZkVTtcd+U6P69inyD+dz3LrbvFuPeFyZ0
- aDkgl1l8MggvDlqRkC57UHH7GnppTg+anbkWmwTtN5Ez305j5Y8kzFQ1deSx/w9YAlGD
- rNotvDnx7uT7X/IMZk5NXcC+Q9iNPVsSBsBAfZv2KkFIdrTmK8OQJQ6iqScvGHB5WPeH
- 3mVg==
+ :cc; bh=XF8jRG7OGLr2+wMWOv+CefocHGRDs1owIplFqz+snIM=;
+ b=cSjtHnIDWlxyDCW3gioNpKVwzxyDhnqQNO1ZGQsAxUAhCe3uWSEPTcTEURvnbN7v6+
+ WvuuwhRckS1tVH/dZK2f/k+Fuk9naU3HZV6mt0IYrq0C28w1ik4uyRqmjdpm1R3zyByF
+ k3QybrlrKUtRscCd7Gr4Tfwbjtj4fSgvDYTTEukKDoJSUqNubUMdgxn9xAhezCev4xeC
+ rPrMFWU0BcfbdUGhrvqqnJtwv6KnyCjpZ4ZykVxVffejlHIAbyXdOqe9qJB47VwUfUV4
+ dAMyR/JmPtxysG40emEJW+/Ewo8LIdfXRsL1PUs5cZQ0WH3aDpGZto8oPazfmILRsKB7
+ qtOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=FjM7Fdqy/Og8DD/Ztwl8hX/alv9qvougFhs01SEpgL8=;
- b=c2EE3AwOE/wxuvIjGGrOhuy6QcA4DVKSA6sbZVcwKuy3sngNSaKTeq57fQpj02pFnW
- Vvy+pBcO3nt1LTDaFN3q3bGlg4AIejLwN1LgvOktQxmJGJi2ejXQMVuJyG7tNBRneInS
- rGwKd1m0muTy5+1+rQ8GBsUnDPHFXgrslv7i6Xppv55h+qTykNmHRGIBEN3uThRAE/Hr
- NbZh3BZry06bX5V7n4hcYdhSknjfpdDVOlPMZlQzZvGnOS0oNsW5LEy3Ld92kFklxSHW
- v42Drtqs4yn5LgRmDP8iaPUwbuXfavX4MDZoKmLrShqDa0sd/KjRt2Ua34+xWM+WZd7a
- gi2g==
-X-Gm-Message-State: AOAM533ld4cO4RyBzwSTUY2rwAKrgpkcEnbb01cAzY3dAqIf6E8kMmog
- lOZxcJUhsEvbnYbwA+29HychtDgj7boztz300WI=
-X-Google-Smtp-Source: ABdhPJxwb3beVxpAG0pC5fvjsGYUzR0TK3r9O6lUWKZ8ZLS0XbmFc/QRz7EOjjGcHbRpeEQKBQbMfGav1cVZlYLTHvM=
-X-Received: by 2002:a6b:f212:: with SMTP id q18mr2573032ioh.16.1637032387856; 
- Mon, 15 Nov 2021 19:13:07 -0800 (PST)
+ bh=XF8jRG7OGLr2+wMWOv+CefocHGRDs1owIplFqz+snIM=;
+ b=jQSEZ+DHVnfx2TLao75zl187rcWyCn23iinDDpWUAq/sR55vqgnOs/fqRjlBhdrSsi
+ LDz2H3MeR6QMbSXxGQqnOJqdQaTqWQJHHyHxeyMVOpIs1gcygkh2tFgEVaj7Gpgir7Hs
+ NvFi4kNOQGGBxuO2pIT36K364UgmF3H62L2JWXMV5YcylNL2FgsFz8qfhlVPXBcLqZk8
+ yIIpSPsn6MDe84h1krqfTNlNDeOlgOkoRQJeI4v8zeCgZ/Uvu5VMrkTA2JTTUhSq63qJ
+ JlB6Kpj5o+W+X0mlUlhErj5zELX0ce8mlKA7alvWSQpojPd9dWWlXXX4Fw6vijfnxdeA
+ j/9g==
+X-Gm-Message-State: AOAM531/T63jFNCMLiKM+ErA25E+yn7l/8ututVBm76vq44lGhMQdAJy
+ fNUb/W9KneRoEYT/aGIBn/8P0A/od91ycvWaMjo=
+X-Google-Smtp-Source: ABdhPJyXirRiTA+G9Ckqkc6L4B9bK5OLTi9mok8qVqslyMg29QfXuoQfjBwwwNKyxZY1WpZRWhcyCVT8IscrZ7AW4f0=
+X-Received: by 2002:a05:6638:d84:: with SMTP id
+ l4mr2898942jaj.18.1637032421734; 
+ Mon, 15 Nov 2021 19:13:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-6-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-6-zhiwei_liu@c-sky.com>
+ <20211111155149.58172-7-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-7-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Nov 2021 13:12:41 +1000
-Message-ID: <CAKmqyKPD4pBHK6G+Y-YRN-msPV1g_rj_-qPHwMLpJcQc_42JSw@mail.gmail.com>
-Subject: Re: [PATCH v4 05/20] target/riscv: Use gdb xml according to max mxlen
+Date: Tue, 16 Nov 2021 13:13:15 +1000
+Message-ID: <CAKmqyKPLXOopWbpTHKLfJxF0u0Ojv+x4ZHeZOE-nkZLhB9Uyrw@mail.gmail.com>
+Subject: Re: [PATCH v4 06/20] target/riscv: Relax debug check for pm write
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -52,10 +53,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -76,9 +77,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2021 03:13:11 -0000
+X-List-Received-Date: Tue, 16 Nov 2021 03:13:44 -0000
 
-On Fri, Nov 12, 2021 at 1:54 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Nov 12, 2021 at 2:12 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -88,110 +89,23 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/gdbstub.c | 71 +++++++++++++++++++++++++++++++-----------
->  1 file changed, 52 insertions(+), 19 deletions(-)
+>  target/riscv/csr.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index 23429179e2..8d0f9139d7 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -24,11 +24,23 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
-> +    target_ulong tmp;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9f41954894..74c0b788fd 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1445,6 +1445,9 @@ static bool check_pm_current_disabled(CPURISCVState *env, int csrno)
+>      int csr_priv = get_field(csrno, 0x300);
+>      int pm_current;
 >
->      if (n < 32) {
-> -        return gdb_get_regl(mem_buf, env->gpr[n]);
-> +        tmp = env->gpr[n];
->      } else if (n == 32) {
-> -        return gdb_get_regl(mem_buf, env->pc);
-> +        tmp = env->pc;
-> +    } else {
-> +        return 0;
+> +    if (env->debugger) {
+> +        return false;
 > +    }
-> +
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        return gdb_get_reg32(mem_buf, tmp);
-> +    case MXL_RV64:
-> +        return gdb_get_reg64(mem_buf, tmp);
-> +    default:
-> +        g_assert_not_reached();
->      }
->      return 0;
->  }
-> @@ -37,18 +49,32 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
-> -
-> -    if (n == 0) {
-> -        /* discard writes to x0 */
-> -        return sizeof(target_ulong);
-> -    } else if (n < 32) {
-> -        env->gpr[n] = ldtul_p(mem_buf);
-> -        return sizeof(target_ulong);
-> +    int length = 0;
-> +    target_ulong tmp;
-> +
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        tmp = (int32_t)ldl_p(mem_buf);
-> +        length = 4;
-> +        break;
-> +    case MXL_RV64:
-> +        if (cpu_get_xl(env) < MXL_RV64) {
-> +            tmp = (int32_t)ldq_p(mem_buf);
-> +        } else {
-> +            tmp = ldq_p(mem_buf);
-> +        }
-> +        length = 8;
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +    if (n > 0 && n < 32) {
-> +        env->gpr[n] = tmp;
->      } else if (n == 32) {
-> -        env->pc = ldtul_p(mem_buf);
-> -        return sizeof(target_ulong);
-> +        env->pc = tmp;
->      }
-> -    return 0;
-> +
-> +    return length;
->  }
->
->  static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
-> @@ -198,13 +224,20 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
->          gdb_register_coprocessor(cs, riscv_gdb_get_fpu, riscv_gdb_set_fpu,
->                                   36, "riscv-32bit-fpu.xml", 0);
->      }
-> -#if defined(TARGET_RISCV32)
-> -    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> -                             1, "riscv-32bit-virtual.xml", 0);
-> -#elif defined(TARGET_RISCV64)
-> -    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
-> -                             1, "riscv-64bit-virtual.xml", 0);
-> -#endif
-> +    switch (env->misa_mxl_max) {
-> +    case MXL_RV32:
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> +                                 riscv_gdb_set_virtual,
-> +                                 1, "riscv-32bit-virtual.xml", 0);
-> +        break;
-> +    case MXL_RV64:
-> +        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-> +                                 riscv_gdb_set_virtual,
-> +                                 1, "riscv-64bit-virtual.xml", 0);
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
->
->      gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
->                               riscv_gen_dynamic_csr_xml(cs, cs->gdb_num_regs),
+>      /*
+>       * If priv lvls differ that means we're accessing csr from higher priv lvl,
+>       * so allow the access
 > --
 > 2.25.1
 >
