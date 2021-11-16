@@ -1,70 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mmovZ-00077D-SW
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Nov 2021 22:14:33 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44216)
+	id 1mmtBr-0004YU-Ls
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 02:47:40 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56920)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmovX-00070g-Sb; Mon, 15 Nov 2021 22:14:31 -0500
-Received: from [2607:f8b0:4864:20::d2d] (port=42969
- helo=mail-io1-xd2d.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mmovW-0001m0-Dl; Mon, 15 Nov 2021 22:14:31 -0500
-Received: by mail-io1-xd2d.google.com with SMTP id x10so24172854ioj.9;
- Mon, 15 Nov 2021 19:14:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oMTg1wBY0JxL7n3oFgfpzFzne9Q2jgWYFfuzX54VuCM=;
- b=WfWfJkH0jUfKym2HG13nnKjGMGSdu/iqAN/ORvrqo0E7/C+xooAQ1kThJuPjZ0dLAm
- 6bCxWp3E54ivdFSFHnN3d35mHzSXP+HaWZ4Up0QlOE0NxRtL3zK3GOmbopSe5827YVtn
- 7c0V5dObpox9CSflDO5mHw5K+DvSAYMbXIK7lRsyvRPM1TOh9dUzTzeneHXSl+Ph666j
- xRou9HtXuwbLnnxVDAub6iSLzaQ0zLONTqk+8c2dr8mMBd6krEkFlI8kEgT1ThdCFx54
- 7heHRYh/Xny0/sZv6dSAM/6S23mKMdLt5b/rCuLuZBrD68drWlZjo8DnnCFOu1wyVDqL
- 4j2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oMTg1wBY0JxL7n3oFgfpzFzne9Q2jgWYFfuzX54VuCM=;
- b=1b/MJEpMHAKKg9drMEXp50cJ2wP3xg6lXSWDYBFtL3LTOhWRGI595KL0YucMfObY9m
- ihpvH9lmSCJNKwmLQOLBX2vFUaI9T+cHWITKPGezHhgDXUZ7NxFuKg+DmL79J1Zw3WeP
- cva52m9CDoYSm+NrCZBJ8gc1UkESbf1ClpK0dA9pqo1Ytui1pYExlzcQDoaMo+JdBUTV
- 7rhBTtwjLy7DF2HD+nCnqnxBhpqztg18jGpemOnwE/5FcfAmsGwYTqAiNMO4wQ4i5GQB
- ruydZKiWJ5HLrhwLYMAAWskvpvBvYq2+bfUVpLCHEOXbAhdSicbleDgLABsTRW02iAVe
- OxLg==
-X-Gm-Message-State: AOAM531VGyldVEDsU23TYt28hEciIe4zvqZ26+xTna92YETVL56mPOHc
- fTJIsnpHVfE32VY1WO167WHK9U+m8/y2DRd2PD8=
-X-Google-Smtp-Source: ABdhPJxo3jU+J20VeHQnK1R+huU/gGFe/L0tNxaP/rTpMSSCFUIC8SsMIme8gR+PAJwpTOLG/qpaPtO7bzOONduxM4k=
-X-Received: by 2002:a05:6602:1487:: with SMTP id
- a7mr2552547iow.57.1637032468950; 
- Mon, 15 Nov 2021 19:14:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmtBo-0004UW-4t
+ for qemu-riscv@nongnu.org; Tue, 16 Nov 2021 02:47:36 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:37480)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1mmtBm-0000ip-8X
+ for qemu-riscv@nongnu.org; Tue, 16 Nov 2021 02:47:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1637048853;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Pej0BvoWZ3cp9gwa8IVAvA5/kRkXJWghrp9vqCi+qjM=;
+ b=VG5xvcUx74EwdEN8mEosk5dzrxikRTMhr902IIRJ4673qYx6yHnyJ9GqIZf1rrx1LkWLZB
+ cH3q9s0lL0du4/pCN1qmehcxO89CnDFm79w+6fpl0CoqlU6ImBmErGfdGKYLsaI15Hv7Am
+ BscH2V1UFfiA9Ni2elFZEysck4wIoFo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-351-_GEhH1P2NLmUV_UA_vjWtQ-1; Tue, 16 Nov 2021 02:47:28 -0500
+X-MC-Unique: _GEhH1P2NLmUV_UA_vjWtQ-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1DAD510168C6;
+ Tue, 16 Nov 2021 07:47:25 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-7.ams2.redhat.com [10.36.112.7])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C00E75C1A1;
+ Tue, 16 Nov 2021 07:47:23 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 2790811380A7; Tue, 16 Nov 2021 08:47:22 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: peter.maydell@linaro.org,  bin.meng@windriver.com,
+ mark.cave-ayland@ilande.co.uk,  qemu-devel@nongnu.org,
+ jcd@tribudubois.net,  qemu-block@nongnu.org,  andrew.smirnov@gmail.com,
+ hskinnemoen@google.com,  joel@jms.id.au,  atar4qemu@gmail.com,
+ alistair@alistair23.me,  b.galvani@gmail.com,  nieklinnenbank@gmail.com,
+ qemu-arm@nongnu.org,  clg@kaod.org,  kwolf@redhat.com,
+ qemu-riscv@nongnu.org,  andrew@aj.id.au,  Andrew.Baumann@microsoft.com,
+ sundeep.lkml@gmail.com,  kfting@nuvoton.com,  hreitz@redhat.com,
+ palmer@dabbelt.com
+Subject: Re: [PATCH RFC 2/2] hw: Replace drive_get_next() by drive_get()
+References: <20211115125536.3341681-1-armbru@redhat.com>
+ <20211115125536.3341681-3-armbru@redhat.com>
+ <5b799ad5-a552-454f-dcc7-1ea6de22b397@amsat.org>
+ <87lf1pfm2z.fsf@dusky.pond.sub.org>
+ <b18519f7-7198-0965-a528-2d1a45c7c93c@amsat.org>
+Date: Tue, 16 Nov 2021 08:47:22 +0100
+In-Reply-To: <b18519f7-7198-0965-a528-2d1a45c7c93c@amsat.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 15 Nov 2021 22:15:12
+ +0100")
+Message-ID: <878rxoczjp.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-8-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-8-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 16 Nov 2021 13:14:02 +1000
-Message-ID: <CAKmqyKPrNtjb-tCEH5hoy+bjraB0P5Pp8MpW=Uq-MT2he8UCDw@mail.gmail.com>
-Subject: Re: [PATCH v4 07/20] target/riscv: Adjust csr write mask with XLEN
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.697,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,62 +86,133 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2021 03:14:32 -0000
+X-List-Received-Date: Tue, 16 Nov 2021 07:47:36 -0000
 
-On Fri, Nov 12, 2021 at 1:58 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Write mask is representing the bits we care about.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> On 11/15/21 16:57, Markus Armbruster wrote:
+>> Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
+>>> On 11/15/21 13:55, Markus Armbruster wrote:
+>>>> drive_get_next() is basically a bad idea.  It returns the "next" block
+>>>> backend of a certain interface type.  "Next" means bus=3D0,unit=3DN, w=
+here
+>>>> subsequent calls count N up from zero, per interface type.
+>>>>
+>>>> This lets you define unit numbers implicitly by execution order.  If t=
+he
+>>>> order changes, or new calls appear "in the middle", unit numbers chang=
+e.
+>>>> ABI break.  Hard to spot in review.
+>>>>
+>>>> Explicit is better than implicit: use drive_get() directly.
+>>>>
+>>>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>>>> ---
+>
+>>>> @@ -435,11 +438,13 @@ static void aspeed_machine_init(MachineState *ma=
+chine)
+>>>>      }
+>>>> =20
+>>>>      for (i =3D 0; i < bmc->soc.sdhci.num_slots; i++) {
+>>>> -        sdhci_attach_drive(&bmc->soc.sdhci.slots[i], drive_get_next(I=
+F_SD));
+>>>> +        sdhci_attach_drive(&bmc->soc.sdhci.slots[i],
+>>>> +                           drive_get(IF_SD, 0, i));
+>>>
+>>> If we put SD on bus #0, ...
+>>>
+>>>>      }
+>>>> =20
+>>>>      if (bmc->soc.emmc.num_slots) {
+>>>> -        sdhci_attach_drive(&bmc->soc.emmc.slots[0], drive_get_next(IF=
+_SD));
+>>>> +        sdhci_attach_drive(&bmc->soc.emmc.slots[0],
+>>>> +                           drive_get(IF_SD, 0, bmc->soc.sdhci.num_slo=
+ts));
+>>>
+>>> ... we'd want to put eMMC on bus #1
+>>=20
+>> Using separate buses for different kinds of devices would be neater, but
+>> it also would be an incompatible change.  This patch keeps existing
+>> bus/unit numbers working.  drive_get_next() can only use bus 0.
+>>=20
+>>>                                      but I see having eMMC cards on a
+>>> IF_SD bus as a bug, since these cards are soldered on the board.
+>>=20
+>> IF_SD is not a bus, it's an "block interface type", which is really just
+>> a user interface thing.
+>
+> Why are we discriminating by "block interface type" then?
+>
+> What is the difference between "block interfaces"? I see a block drive
+> as a generic unit, usable on multiple hardware devices.
+>
+> I never really understood how this "block interface type" helps
+> developers and users. I thought BlockInterfaceType and DriveInfo
+> were legacy / deprecated APIs we want to get rid of; and we would
+> come up with a replacement API using BlockDeviceInfo or providing
+> a BlockFrontend state of the art object.
+> Anyway, I suppose the explanation is buried in the git history
+> before the last 8 years. I need to keep reading.
 
-Alistair
+In the beginning (v0.4.2), there was -hda and -hdb, and life was simple.
 
-> ---
->  target/riscv/insn_trans/trans_rvi.c.inc | 4 ++--
->  target/riscv/op_helper.c                | 3 ++-
->  2 files changed, 4 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index e51dbc41c5..40c81421f2 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -486,7 +486,7 @@ static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
->          return do_csrw(ctx, a->csr, src);
->      }
->
-> -    TCGv mask = tcg_constant_tl(-1);
-> +    TCGv mask = tcg_constant_tl(get_xl(ctx) == MXL_RV32 ? UINT32_MAX : -1);
->      return do_csrrw(ctx, a->rd, a->csr, src, mask);
->  }
->
-> @@ -537,7 +537,7 @@ static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
->          return do_csrw(ctx, a->csr, src);
->      }
->
-> -    TCGv mask = tcg_constant_tl(-1);
-> +    TCGv mask = tcg_constant_tl(get_xl(ctx) == MXL_RV32 ? UINT32_MAX : -1);
->      return do_csrrw(ctx, a->rd, a->csr, src, mask);
->  }
->
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 095d39671b..561e156bec 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -50,7 +50,8 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
->
->  void helper_csrw(CPURISCVState *env, int csr, target_ulong src)
->  {
-> -    RISCVException ret = riscv_csrrw(env, csr, NULL, src, -1);
-> +    target_ulong mask = cpu_get_xl(env) == MXL_RV32 ? UINT32_MAX : -1;
-> +    RISCVException ret = riscv_csrrw(env, csr, NULL, src, mask);
->
->      if (ret != RISCV_EXCP_NONE) {
->          riscv_raise_exception(env, ret, GETPC());
-> --
-> 2.25.1
->
->
+Then there was -hdc, -hdd, -cdrom (v0.5.1), -fda, -fdb (v0.6.0),
+-mtdblock, -sd, -pflash (v0.9.1).
+
+All these options do two things: they create a block backend, and they
+request the board to create a certain block frontend for it, similar to
+other options of this vintage, like -serial, -parallel, and -net.
+Boards generally ignore requests they don't understand, but that's just
+sloppiness.
+
+For each set of related options, there was a global variable holding the
+requests: bs_table[] for -hda, -hdb, -hdc, -hdd, -cdrom; fd_table[]
+-fda, -fdb; mtd_bdrv for -mtd; sd_drv for -ds; pflash_table[] for
+-pflash.
+
+The options replaced prior ones, except for -pflash, which appended to
+its table.
+
+bs_table[]'s index had a peculiar meaning: it's bus * MAX_IDE_DEVS +
+unit.  This ensures that -hda (index 0) goes on IDE bus 0 as unit 0;
+-hdb on bus 0, unit 1; -hdc on 1, 0; -hdc on 1, 1.
+
+Life was now complicated enough for a generalization (v0.9.1), so there
+was -drive (v0.9.1).  All the variables holding requests were fused into
+drives_table[].  Table elements are identified by (type, bus, unit),
+where type is an enum whose members correspond to the old global
+variables: IF_IDE for bs_table[], IF_FLOPPY for fd_table[], and so
+forth.  So:
+
+    -hda becomes type =3D IF_IDE, bus =3D 0, unit =3D 0
+    -hdb becomes type =3D IF_IDE, bus =3D 0, unit =3D 1
+    ...
+    -sd becomes type =3D IF_SD, bus =3D 0, unit =3D 0
+    1st -pflash becomes type =3D IF_PFLASH, bus =3D 0, unit =3D 0
+    2nd -pflash becomes type =3D IF_PFLASH, bus =3D 0, unit =3D 1
+    ...
+
+Other mappings from old to new global variables would have been
+possible.  I figure this one was chosen because it comes with a
+reasonable user interface.  Identifying block devices by (interface
+type, bus, unit) is certainly nicer than by index in bs_table[].  Since
+bus and/or unit make sense only with some interface types, they are
+optional.
+
+Things calmed down for a couple of years, until -device appeared
+(v0.12).  Now we needed a way to define just a backend, without
+requesting a frontend from the board.  Instead of inventing a new
+option, this became IF_NONE, with meaningless bus and unit.
+
+Over the next years, the block layer outgrew -drive's limited
+capabilities to define frontends.  -blockdev appeard (v1.7.0) and
+matured over several releases.  I don't remember exactly when it became
+stable, relegating -drive if=3Dnone to legacy status.
+
+What's *not* legacy is -drive with other interface types, simply because
+there is no replacement.  Yet.  We clearly want one.
+
+Questions?
+
 
