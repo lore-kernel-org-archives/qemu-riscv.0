@@ -1,73 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mn10w-0001uo-6r
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 11:08:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47748)
+	id 1mn8QP-0007EQ-6R
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 19:03:41 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37646)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mn10r-0001qK-DI; Tue, 16 Nov 2021 11:08:49 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:40760)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mn10p-0001r9-9N; Tue, 16 Nov 2021 11:08:49 -0500
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id E078441BE8;
- Tue, 16 Nov 2021 17:08:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1637078922;
- bh=DL4zxXrRJux0eW+Y/dDFR7LVrm6ayBtVjJHL6TsV/I8=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=fCo0LAGATe8+KDTW1wpdf/Hi223m3H6tcYsl1EaztWkUrVHqZRLtRSV4QQnJB6xqk
- F8DE+aKl5YveMBjQOhaISIU1tTuR0/zOJ3Eq99B8xw+f0MkSvEnJd16NVxMUNZbesH
- nUK7lawY3enpXzxagOdYHmyTGedarr51ahn8Q2yQWYTP+5iGy42RU2vFNZu6rwYmZ8
- rPdlRKxM7NGm9i3xLtPqxfERn6jg33qmXKE+1WxqyIdzHEifAPmgVqh1aEKl3jmrDZ
- w/unBgYPZkNR9EEzsockTpSBpAvDHi0pFLC8/5ZA0zSkkOwAQ3pFT6eHXY5ik5Jm48
- tzjH6GAr1z1gQ==
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id CFED46006B;
- Tue, 16 Nov 2021 17:08:42 +0100 (CET)
-Received: from [147.171.185.230] (pers-185-230.vpn-inp.grenoble-inp.fr
- [147.171.185.230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 048B714005C;
- Tue, 16 Nov 2021 17:08:41 +0100 (CET)
-Message-ID: <fd6f35d6-6e13-a8b3-d47e-94fb8100ab32@univ-grenoble-alpes.fr>
-Date: Tue, 16 Nov 2021 17:08:41 +0100
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mn8QN-0007DY-F7; Tue, 16 Nov 2021 19:03:39 -0500
+Received: from [2607:f8b0:4864:20::d35] (port=42890
+ helo=mail-io1-xd35.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mn8QL-0003T1-L5; Tue, 16 Nov 2021 19:03:39 -0500
+Received: by mail-io1-xd35.google.com with SMTP id x10so781381ioj.9;
+ Tue, 16 Nov 2021 16:03:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=O8cGFq4ydty2yWe5+6EyLzcP72kskIVeKQM8JJewVqo=;
+ b=lQJ+wMixhF5ShBJUkn32RSjmg12ahlzTf983ZT5KnHH1EXPmkxvn19bNG+K5J1tJhe
+ qZ4Wwi3P2Keg+vo/1p9hxT5AFU0i1k2/G1jvVH21nInTbTZkjnMfcMm3sW2T632OfLk4
+ no1lN4Omx7Yn7ggj0X6R7dgpJvuKLEoe1XNJdl1B3A7kU/PdbcihpTA8+vDmL0Gu+up3
+ JyGjrzaVD+oRXJGzOug9pIT5atu9L14Aw9cckD3Xtk5krzz63ai8wTxzB6YvZDcR/oZ4
+ mRLORInOVjoJ3mIPI5MAfcau6QXS6QMTVqYhkwIGCBJgd8ZjKPofZmG0AAPVKgowdbpc
+ H5Fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=O8cGFq4ydty2yWe5+6EyLzcP72kskIVeKQM8JJewVqo=;
+ b=T/itaOoFeSX1gkdff/wRdvJkEq7hMT/s0exuB7K1CUVcyuvZWPKSlVU3ij08Nvc0En
+ BT0kbBiySdBpLIWEgQTRYgU8ec3WXvfCta40KGz53J33hdVbG4QImJ2qsRV3OCfDSkMt
+ 0up03Sis96CgdGmhajcUHOop2/2arDcz+EFy3CfxJGtrEgwDw4lot4umQQGgF68LgMqa
+ J/MJI2LwE+FGZP2qL0u8dIvTh21Hf/xbhNbbpUvHKT0o/syx7BU+yLpUTvN1VeQblkF9
+ 12jD3tGxNt5JKWzKXZ+xzw9tYWYHfbvSgTpnkzZDZAoqiLPasv4DbZKzFe9xw9OAQj5S
+ WdAw==
+X-Gm-Message-State: AOAM533njaslGnd50kNxMLik4SAVoy30W0hQpbf/mIAeR4a5kAd4IuoU
+ HHdiP23zZRKoPWVKVEHkrOwj3cmhwpZc/5ut2L8=
+X-Google-Smtp-Source: ABdhPJzWmwp/ro5em5q107Ph2Zn+ZCGzZcZ+KywPhJ58lSvOk1TUTQ954+puJmx8sLcGkU7hwSfNAKgnrmMBF3WCWIA=
+X-Received: by 2002:a02:9f0c:: with SMTP id z12mr8945778jal.117.1637107416374; 
+ Tue, 16 Nov 2021 16:03:36 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
- palmer@dabbelt.com, fabien.portas@grenoble-inp.org
-References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211112145902.205131-10-frederic.petrot@univ-grenoble-alpes.fr>
- <e3ab42c2-3c29-76bd-65e6-5c5b748b743b@linaro.org>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: Re: [PATCH v5 09/18] target/riscv: accessors to registers upper part
- and 128-bit load/store
-In-Reply-To: <e3ab42c2-3c29-76bd-65e6-5c5b748b743b@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.446,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20211116151138.81209-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211116151138.81209-1-zhiwei_liu@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 17 Nov 2021 10:03:10 +1000
+Message-ID: <CAKmqyKMAzzV=6pWY2V9r1UmCFGG__JBuFGhTQ19Uo=VwiD2eww@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Check PMP rules num before propagation
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d35
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,34 +74,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Nov 2021 16:08:50 -0000
+X-List-Received-Date: Wed, 17 Nov 2021 00:03:39 -0000
 
-On 15/11/2021 09:29, Richard Henderson wrote:
-> On 11/12/21 3:58 PM, Frédéric Pétrot wrote:
->> +        tcg_gen_qemu_ld_tl(memop & MO_BSWAP ? desth : destl, addrl,
->> +                           ctx->mem_idx, MO_TEUQ);
-> 
-> This isn't correct.  MO_BSWAP is related to the host, not the guest.
+On Wed, Nov 17, 2021 at 1:12 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>
+> If PMP rules number is zero, it should not influence the TLB entry for
+> M-mode program.
 
-   Argh! Thx for pointing out my misunderstanding.
-> You want
-> 
->      (memop & MO_BSWAP) == MO_LE ? destl : desth
-> 
-> Are there any big-endian RISC-V though?
+This doesn't sound right. From what I can tell if we have no rules
+pmp_is_range_in_tlb() shouldn't have an effect on the tlb_size. What
+error are you seeing?
 
-   Not that I know of, but the spec defines it since V2.0 (bitfields MBE/SBE/UBE
-   in mstatus), gcc supports it, and there is a check for it in get_dump_info
-   for the riscv, so I opted for adding that (wrong) line.
-   Since we can expect in the future endianness to be dynamic, you are probably
-   right that we should assume litte-endian accesses for now, as handling both
-   will anyway require many other changes.
+Alistair
 
-   Frédéric
--- 
-+---------------------------------------------------------------------------+
-| Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
-| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
-| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
-+---------------------------------------------------------------------------+
+>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> ---
+>  target/riscv/cpu_helper.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 9eeed38c7e..48da872d39 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -376,7 +376,7 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+>      }
+>
+>      *prot = pmp_priv_to_page_prot(pmp_priv);
+> -    if (tlb_size != NULL) {
+> +    if ((tlb_size != NULL) && pmp_get_num_rules(env)) {
+>          if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
+>              *tlb_size = tlb_size_pmp;
+>          }
+> --
+> 2.25.1
+>
+>
 
