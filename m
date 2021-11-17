@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mn99x-0004Cn-9c
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 19:50:45 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45516)
+	id 1mn9EO-0005wb-Ka
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 19:55:20 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46194)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mn99v-0004CN-JR; Tue, 16 Nov 2021 19:50:43 -0500
-Received: from [2607:f8b0:4864:20::d2f] (port=37554
+ id 1mn9EL-0005uS-Lq; Tue, 16 Nov 2021 19:55:17 -0500
+Received: from [2607:f8b0:4864:20::d2f] (port=46826
  helo=mail-io1-xd2f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mn99t-0000he-Ng; Tue, 16 Nov 2021 19:50:43 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id k21so922751ioh.4;
- Tue, 16 Nov 2021 16:50:41 -0800 (PST)
+ id 1mn9EJ-000185-Mx; Tue, 16 Nov 2021 19:55:17 -0500
+Received: by mail-io1-xd2f.google.com with SMTP id k22so868068iol.13;
+ Tue, 16 Nov 2021 16:55:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+HS/paWT2eFGVH/zcbAFPxotBiJDf5u4svbGpY0J+Lw=;
- b=huwLl+mshb9MprsUjGP7h9v6bCQPfDtH10bCWXOC0nGHTfhSIq7cKUbHbndSfMlpFw
- w+Noei5QgxtOONfTtJ3K5+R/S+SICIcVFi2wjKB3jRY3vjD6c3JihPMRo6oFjiZFCsqI
- NsFwZFn904iX90WjWA77CHntbmGNdvBOKDjjKAZmZ+P/KabFqbK3g7WNBKYvkrFpkhfg
- vVO7u8NugI53EYRNIDlyluqhlyVdbXdrliyudUjZLZja/0T8R2YIcxKHLcLCia/yxZYD
- Z8rTQegPHaik0GxVu7eYIyLavdt3PxA2A+5Xr2FGW0OOsXc0bqGWB1sDfgJEKhbcsHNJ
- BCiA==
+ :cc; bh=NmdEqO1sFkh3en13yjLWkMRl7j0DcC2d3PttldLYPWE=;
+ b=l4oT0vlj7Fz0ylPg7SpPVpEK4iEnVSdoqqDgE9tthXPvtYE3aOAcLNMKV3cUqoXiGl
+ O5dMlPIPir8aFxIeAEJgwG+M+dFCVBuBA5V9bbWv3vTqFZtPrMmsDyCgSWad7Nb7BLcL
+ WboxiPRmRCjYkRmqlSe1BqLYHNVntBboM2qizzyQA4ZFU4Y8yrUQYC4eOrPpUwhyoBry
+ dKql7vb2MUW5GSuuoReqmwor/MY2vn71Of960Rc5vQGbp+0yxOkWhfUBJlJpGSLbgY1b
+ h6mKh0QGCxRmIZhCViho//aM4+Q2A7NZuE7dNznTb1V1/mz5fS6jyKLrwubdvPGuT1P9
+ ByTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+HS/paWT2eFGVH/zcbAFPxotBiJDf5u4svbGpY0J+Lw=;
- b=GINzG0SM0ZnSvb17D5mDLfLreVOXoLwe9SiBtUiMafe3LOC8QxleEcQJyvnb1VkuBL
- /Ko5A/JNAS0vxWD4P6aRej13x+ChEsrGBQtiCJrUxgWUJ5V3EH6K/TDPWxljSR0S1YId
- g/RGCjxqZnbxwdM5X+pTqMr3rvFMs9VJSV2bgW3S03OwWe1Dq8aW+Z4pdR5n3beUuvwP
- PSOu5Y2pk1ZN1S9csR/d32AG1aSTu5oKnK3BybDdV6c2K+1xFF0FYPBF23hDK7zIa9a0
- lWPc4+v3pfooj2Fo3x0R3BJ9+a8VmN1ZGLrNBX2H/0zx0EPbnZffnvEVsUhX9V8yjfsj
- pVAA==
-X-Gm-Message-State: AOAM533+qJJ64lWoFwGZugF53BXBU8aq5hlyIR82rmwvHEFw9mLJR2nK
- SVVQnCvOFmL2ySScCFLPX2IkGPFjIwVgmBVm6O8=
-X-Google-Smtp-Source: ABdhPJx4SCoNmfyrYJU6ZvZn5o+4F3BpgwDzcvLnxFPCOdF6NqCwNGGgo+NTH/+hXfdh8s8ilSinj0FiPICZVDV40do=
-X-Received: by 2002:a05:6638:2656:: with SMTP id
- n22mr9466079jat.35.1637110240304; 
- Tue, 16 Nov 2021 16:50:40 -0800 (PST)
+ bh=NmdEqO1sFkh3en13yjLWkMRl7j0DcC2d3PttldLYPWE=;
+ b=mNtTzd0X8BASpJhCO0lgsxjb/su207B8I/F2Dva+feNzkOeWe2r5oTIKm9jfxBOaIL
+ nxM7+Nebuo6KV54DXGcQgUGtUXcB8pnPoilEV03rzWouWIEMT6XayN2BX+1RSty749nM
+ pPQS1ocgKjGOQ33nTz1VIVvOqo7UKBHMj7DOztSjHMUcp5oPi+ZRarQtZhE+VN7/psio
+ CscvT7v/U58C2yGgErLFxxCGQrEOOK3E7oWCrJMgROd4H4jMNlgJgh0hZWxfXOYTlbnW
+ xcam6mWJCZxpqsq0US0772HiOw2UMC9D4MC1JfaJYLVpXg5cCI9hecGq0iwgX7py4jcl
+ D/Uw==
+X-Gm-Message-State: AOAM530M6zy4Ddj9Va+/RO0ZRreW1hoIXxMgimPc9VQ/IFny/PkK9Go8
+ kiytIwbrkpDGgzBLFj+5VWds/ow421f4RyNGS8w=
+X-Google-Smtp-Source: ABdhPJzrSBAzcF6DKjT1LLDvO2mljkCQVzMMOS0kjhoNVdmsc+m+fhFA5GoNDBw2nFrHDwdgBxLGeqX4hahoLwOuIX0=
+X-Received: by 2002:a05:6602:1487:: with SMTP id
+ a7mr7908370iow.57.1637110514450; 
+ Tue, 16 Nov 2021 16:55:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20211030135513.18517-1-bin.meng@windriver.com>
- <20211030135513.18517-3-bin.meng@windriver.com>
-In-Reply-To: <20211030135513.18517-3-bin.meng@windriver.com>
+ <20211030135513.18517-4-bin.meng@windriver.com>
+In-Reply-To: <20211030135513.18517-4-bin.meng@windriver.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 17 Nov 2021 10:50:14 +1000
-Message-ID: <CAKmqyKODNi6bq_6n4zk0cfx6Gax6Aj3Bjna044rgxkXwJuF9Bg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/7] target/riscv: machine: Add debug state description
+Date: Wed, 17 Nov 2021 10:54:48 +1000
+Message-ID: <CAKmqyKOxJEaO5smixS=JLQ4zD9S=nSiSChZyUfE5gkSpuC9YGQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/7] target/riscv: debug: Implement debug related
+ TCGCPUOps
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -76,11 +77,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2021 00:50:44 -0000
+X-List-Received-Date: Wed, 17 Nov 2021 00:55:18 -0000
 
-On Sat, Oct 30, 2021 at 11:56 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sat, Oct 30, 2021 at 11:59 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Add a subsection to machine.c to migrate debug CSR state.
+> Implement .debug_excp_handler, .debug_check_{breakpoint, watchpoint}
+> TCGCPUOps and hook them into riscv_tcg_ops.
 >
 > Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
@@ -92,62 +94,123 @@ Alistair
 > ---
 >
 > Changes in v2:
-> - new patch: add debug state description
+> - use 0 instead of GETPC()
 >
->  target/riscv/machine.c | 33 +++++++++++++++++++++++++++++++++
->  1 file changed, 33 insertions(+)
+>  target/riscv/debug.h |  4 +++
+>  target/riscv/cpu.c   |  3 ++
+>  target/riscv/debug.c | 75 ++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 82 insertions(+)
 >
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index ad8248ebfd..25aa3b38f7 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -164,6 +164,38 @@ static const VMStateDescription vmstate_pointermasking = {
->      }
+> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+> index cb8a6e0024..fddc103650 100644
+> --- a/target/riscv/debug.h
+> +++ b/target/riscv/debug.h
+> @@ -107,4 +107,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val);
+>
+>  void riscv_trigger_init(CPURISCVState *env);
+>
+> +void riscv_cpu_debug_excp_handler(CPUState *cs);
+> +bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
+> +bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
+> +
+>  #endif /* RISCV_DEBUG_H */
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 7d53125dbc..7061ae05fb 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -701,6 +701,9 @@ static const struct TCGCPUOps riscv_tcg_ops = {
+>      .do_interrupt = riscv_cpu_do_interrupt,
+>      .do_transaction_failed = riscv_cpu_do_transaction_failed,
+>      .do_unaligned_access = riscv_cpu_do_unaligned_access,
+> +    .debug_excp_handler = riscv_cpu_debug_excp_handler,
+> +    .debug_check_breakpoint = riscv_cpu_debug_check_breakpoint,
+> +    .debug_check_watchpoint = riscv_cpu_debug_check_watchpoint,
+>  #endif /* !CONFIG_USER_ONLY */
 >  };
 >
-> +static bool debug_needed(void *opaque)
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 9bcca27b72..9cb2a6d7ba 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -364,3 +364,78 @@ void riscv_trigger_init(CPURISCVState *env)
+>          env->trigger_type2[i].wp = NULL;
+>      }
+>  }
+> +
+> +void riscv_cpu_debug_excp_handler(CPUState *cs)
 > +{
-> +    RISCVCPU *cpu = opaque;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
 > +    CPURISCVState *env = &cpu->env;
 > +
-> +    return riscv_feature(env, RISCV_FEATURE_DEBUG);
+> +    if (cs->watchpoint_hit) {
+> +        if (cs->watchpoint_hit->flags & BP_CPU) {
+> +            cs->watchpoint_hit = NULL;
+> +            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, 0);
+> +        }
+> +    } else {
+> +        if (cpu_breakpoint_test(cs, env->pc, BP_CPU)) {
+> +            riscv_raise_exception(env, RISCV_EXCP_BREAKPOINT, 0);
+> +        }
+> +    }
 > +}
 > +
-> +static const VMStateDescription vmstate_debug_type2 = {
-> +    .name = "cpu/debug/type2",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINTTL(mcontrol, trigger_type2_t),
-> +        VMSTATE_UINTTL(maddress, trigger_type2_t),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
+> +bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +    CPUBreakpoint *bp;
+> +    target_ulong ctrl;
+> +    target_ulong pc;
+> +    int i;
 > +
-> +static const VMStateDescription vmstate_debug = {
-> +    .name = "cpu/debug",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = debug_needed,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
-> +        VMSTATE_STRUCT_ARRAY(env.trigger_type2, RISCVCPU, TRIGGER_TYPE2_NUM,
-> +                             0, vmstate_debug_type2, trigger_type2_t),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
+> +    QTAILQ_FOREACH(bp, &cs->breakpoints, entry) {
+> +        for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> +            ctrl = env->trigger_type2[i].mcontrol;
+> +            pc = env->trigger_type2[i].maddress;
 > +
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
->      .version_id = 3,
-> @@ -218,6 +250,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          &vmstate_hyper,
->          &vmstate_vector,
->          &vmstate_pointermasking,
-> +        &vmstate_debug,
->          NULL
->      }
->  };
+> +            if ((ctrl & TYPE2_EXEC) && (bp->pc == pc)) {
+> +                /* check U/S/M bit against current privilege level */
+> +                if ((ctrl >> 3) & BIT(env->priv)) {
+> +                    return true;
+> +                }
+> +            }
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+> +{
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    CPURISCVState *env = &cpu->env;
+> +    target_ulong ctrl;
+> +    target_ulong addr;
+> +    int flags;
+> +    int i;
+> +
+> +    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> +        ctrl = env->trigger_type2[i].mcontrol;
+> +        addr = env->trigger_type2[i].maddress;
+> +        flags = 0;
+> +
+> +        if (ctrl & TYPE2_LOAD) {
+> +            flags |= BP_MEM_READ;
+> +        }
+> +        if (ctrl & TYPE2_STORE) {
+> +            flags |= BP_MEM_WRITE;
+> +        }
+> +
+> +        if ((wp->flags & flags) && (wp->vaddr == addr)) {
+> +            /* check U/S/M bit against current privilege level */
+> +            if ((ctrl >> 3) & BIT(env->priv)) {
+> +                return true;
+> +            }
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
 > --
 > 2.25.1
 >
