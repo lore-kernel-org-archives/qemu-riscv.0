@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mn9G2-0007se-7m
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 19:57:02 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46400)
+	id 1mn9HO-0001Bm-AT
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Nov 2021 19:58:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46740)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mn9G0-0007rB-FV; Tue, 16 Nov 2021 19:57:00 -0500
-Received: from [2607:f8b0:4864:20::d33] (port=40860
- helo=mail-io1-xd33.google.com)
+ id 1mn9HN-0001BS-AJ; Tue, 16 Nov 2021 19:58:25 -0500
+Received: from [2607:f8b0:4864:20::d31] (port=46846
+ helo=mail-io1-xd31.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mn9Fy-0001OO-JC; Tue, 16 Nov 2021 19:57:00 -0500
-Received: by mail-io1-xd33.google.com with SMTP id p23so919943iod.7;
- Tue, 16 Nov 2021 16:56:57 -0800 (PST)
+ id 1mn9HL-0001Vm-S5; Tue, 16 Nov 2021 19:58:24 -0500
+Received: by mail-io1-xd31.google.com with SMTP id k22so874604iol.13;
+ Tue, 16 Nov 2021 16:58:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=F5/O94tdN4nIGju2b2lzekpHFOAVSQAm+Gscvjtesqk=;
- b=CIa/ULm57QV7Qj0qaGGLrZZCZsLyWq3Zj1qUyR5kA5XZwuBUY8lDEnr4AYDfGHpnzn
- 5oeSouHnp329iHYRieaUMNOUJLDWgjUKziH+b3iVInMG/DgTd31s7haDmR0g+ErDMDv1
- 5oI82ftKwuRJMW6rS0Cuw6dDSotrYYq9kWFoHGn7PkRw7LhjOBUC2ySOALROwbG7rvJr
- eaVBRqz0672EEwrYYikZkASulBgRitY6+7fLvz9rG186D4ayoax6uSpczgs8bZTve3/y
- 92KMgWLorI3Jor5JY+n7BId/AlLeAptbGM5BUSvaDCEH8emsXm3wqLqk3elzKo55sUVm
- 9XSg==
+ :cc; bh=inwvB+2f3Ke+LnwljSoUZ+PJaCIuLj+SQOpz9ICw90I=;
+ b=ow3CUYTL0VDNjg4aB8aHE3NJLZ8zt2RCBxt7rOjBCgdoKrSV1zCVMBpJ0gk9DxL213
+ nf8ZGQXbBzODhYYr8SMfRDAYGEVY0k39WcrinFrlO6oPfDkRT+AUwLUWUtmdpT5jtX13
+ oOhQW+CzMmB3Lm5ymdOcmf5cfbvXg9BRWKEYirHLZrQX6cu2Invr0m9PSExcTu1QQq07
+ bQzGE55KrIcLmlkTF/szzsHVAK/iwdR/CFJYBd/O7whfnWnPq2QNJC6wsIEBg0lQNhy5
+ 2m6rGwqC2lAF0alSHFmsu6w+aP44YoArZyiUoZUFDinshx5A+WoMSgLeqVPHvlO2Z1gS
+ BA9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=F5/O94tdN4nIGju2b2lzekpHFOAVSQAm+Gscvjtesqk=;
- b=nVof/BbE1jpNMkENweO8mnhKA+PSXFyzdLDSTXgISiTGrBvzzHvc+86jOZwc71ITBO
- SZz+AV2uS0ovqDHUq4bNSFGMD7cqj7bXuzdImklc+l0uubGxwWzUVKufKCl8kAx/wRk7
- W4QHoDMEoVb/3rKsGTNbpgMELlMwxn+nKm4U5zYg3vxSvjVv4uQZcHbcA0rttTCPyv8J
- QDvEecwxafNdtnfIxeuwbRaNFAuCp4n9TfwY9mnMET0trDa+CL0shMPj1G2+Bw1krK6m
- ka+9MlZ6WuiCfxPrlinLM8kG//gfQTsE38LOqMZReRfWnjwBQTSS3S6CfjbTVSifZTeg
- Z24w==
-X-Gm-Message-State: AOAM530GwtfsSSKH/Ddxx6YKijm7JHIELXpuyX1U9Z97ZbEdWN2w4+Vl
- bRAUKa+TH2wEkw7Hw+7iAUfPhLYy/934Mnqq2sVRAaS83qk9CJH2uhY=
-X-Google-Smtp-Source: ABdhPJyo+PrkFtuQ6ndnhxd0bmKh1fE0JoCqOwsVC+fFPa0JUZCIjnK7oH81Yej4npJ69SYCcBIbBhBk5aAMxyLe3Xk=
-X-Received: by 2002:a6b:ea0a:: with SMTP id m10mr8120125ioc.91.1637110617254; 
- Tue, 16 Nov 2021 16:56:57 -0800 (PST)
+ bh=inwvB+2f3Ke+LnwljSoUZ+PJaCIuLj+SQOpz9ICw90I=;
+ b=19bPFraTNFhc1soHr7FReH7Diz8fVH3mmL8sX1LmF/9i/lPZfdO3KR3YBllDwUSBQL
+ 3AzIZ2N6zAy6ZxXtu5zWWcHaoRiMezDwkDdBgBxSTArtC392BjLsig16Ex41YyCquauj
+ ay7/KhwzxDwnpkE396sIqYsGxKu/aPWDQGEmTUaBoHh/JwMpNsQ8pEIIN6mVn5VY1XDV
+ pjV0VYpYZXVzLUYWVz0cT376l9kqG0W0hhZaIB6bdR9Ls395W+vH1WqrQslA/gi4qoLC
+ 4aFR1ovEkMVJB7sUmV2JjTWAKIlvTfsAVfcHdl49nds0dFeSl8c/s5mgl+xCtZqc9t14
+ UePg==
+X-Gm-Message-State: AOAM532yjljavRWwT96zS29I3eBPEVBRyLUaVEMBFNmDxjh4Ddm9C7YO
+ DKMzRUsDEs7IxZgJVmG7O19LvHQxn9RnPPbVi8I=
+X-Google-Smtp-Source: ABdhPJyop+R0T4z6A9/3PTSjSauiuZn129evA2g8Epl3gIuPnXvoBJkxn28miA2TOcsHhOG9yTL5YoCRRikNW8g2r5w=
+X-Received: by 2002:a02:9f0c:: with SMTP id z12mr9199412jal.117.1637110702653; 
+ Tue, 16 Nov 2021 16:58:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20211030135513.18517-1-bin.meng@windriver.com>
- <20211030135513.18517-6-bin.meng@windriver.com>
-In-Reply-To: <20211030135513.18517-6-bin.meng@windriver.com>
+ <20211030135513.18517-7-bin.meng@windriver.com>
+In-Reply-To: <20211030135513.18517-7-bin.meng@windriver.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 17 Nov 2021 10:56:30 +1000
-Message-ID: <CAKmqyKO04Sb2cpGD3=JQM7W=jmRp5LtND_10zS7Hmb1SsY7y7g@mail.gmail.com>
-Subject: Re: [PATCH v2 5/7] target/riscv: csr: Hook debug CSR read/write
+Date: Wed, 17 Nov 2021 10:57:56 +1000
+Message-ID: <CAKmqyKOXtJMETp0MF_dza7mDz8KgLkEC4iHt4VFubDnsjdFPrQ@mail.gmail.com>
+Subject: Re: [PATCH v2 6/7] target/riscv: cpu: Enable native debug feature on
+ virt and sifive_u CPUs
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Richard Henderson <richard.henderson@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d31
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -75,125 +76,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2021 00:57:00 -0000
+X-List-Received-Date: Wed, 17 Nov 2021 00:58:25 -0000
 
-On Sun, Oct 31, 2021 at 12:03 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Sat, Oct 30, 2021 at 11:56 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This adds debug CSR read/write support to the RISC-V CSR RW table.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
->
-> (no changes since v1)
->
->  target/riscv/cpu.c |  6 +++++
->  target/riscv/csr.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 63 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 84116768ce..6f69ef4f50 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -575,6 +575,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->
->      riscv_cpu_register_gdb_regs_for_features(cs);
->
-> +#ifndef CONFIG_USER_ONLY
-> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-> +        riscv_trigger_init(env);
+> Turn on native debug feature on virt and sifive_u CPUs.
 
-This function should be added here instead of patch 1
+Is there a reason why it's only these 2 machines? Could this be
+enabled by default for all CPUs?
 
 Alistair
 
-> +    }
-> +#endif
-> +
->      qemu_init_vcpu(cs);
->      cpu_reset(cs);
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9f41954894..dc47ec8d3b 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -219,6 +219,15 @@ static RISCVException epmp(CPURISCVState *env, int csrno)
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 >
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
-> +
-> +static RISCVException debug(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    return RISCV_EXCP_ILLEGAL_INST;
-> +}
->  #endif
+> ---
 >
->  /* User Floating-Point CSRs */
-> @@ -1435,6 +1444,48 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
+> Changes in v2:
+> - new patch: enable native debug feature on virt and sifive_u CPUs
+>
+>  target/riscv/cpu.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6f69ef4f50..b4d3c58dea 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -153,6 +153,7 @@ static void rv64_base_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+>      set_misa(env, MXL_RV64, 0);
+> +    qdev_prop_set_bit(DEVICE(obj), "debug", true);
 >  }
 >
-> +static RISCVException read_tselect(CPURISCVState *env, int csrno,
-> +                                   target_ulong *val)
-> +{
-> +    *val = tselect_csr_read(env);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tselect(CPURISCVState *env, int csrno,
-> +                                    target_ulong val)
-> +{
-> +    tselect_csr_write(env, val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_tdata(CPURISCVState *env, int csrno,
-> +                                 target_ulong *val)
-> +{
-> +    /* return 0 in tdata1 to end the trigger enumeration */
-> +    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
-> +        *val = 0;
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    *val = tdata_csr_read(env, csrno - CSR_TDATA1);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tdata(CPURISCVState *env, int csrno,
-> +                                  target_ulong val)
-> +{
-> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    tdata_csr_write(env, csrno - CSR_TDATA1, val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  /*
->   * Functions to access Pointer Masking feature registers
->   * We have to check if current priv lvl could modify
-> @@ -1931,6 +1982,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
->      [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+>  static void rv64_sifive_u_cpu_init(Object *obj)
+> @@ -160,6 +161,7 @@ static void rv64_sifive_u_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+> +    qdev_prop_set_bit(DEVICE(obj), "debug", true);
+>  }
 >
-> +    /* Debug CSRs */
-> +    [CSR_TSELECT]   =  { "tselect", debug, read_tselect, write_tselect },
-> +    [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
-> +    [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
-> +    [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
-> +
->      /* User Pointer Masking */
->      [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
->      [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
+>  static void rv64_sifive_e_cpu_init(Object *obj)
+> @@ -175,6 +177,7 @@ static void rv32_base_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+>      set_misa(env, MXL_RV32, 0);
+> +    qdev_prop_set_bit(DEVICE(obj), "debug", true);
+>  }
+>
+>  static void rv32_sifive_u_cpu_init(Object *obj)
+> @@ -182,6 +185,7 @@ static void rv32_sifive_u_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVD | RVC | RVS | RVU);
+>      set_priv_version(env, PRIV_VERSION_1_10_0);
+> +    qdev_prop_set_bit(DEVICE(obj), "debug", true);
+>  }
+>
+>  static void rv32_sifive_e_cpu_init(Object *obj)
 > --
 > 2.25.1
 >
