@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mnvwy-0005DL-69
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Nov 2021 23:56:37 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59610)
+	id 1mo168-00013D-1w
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 05:26:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59624)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mnvwt-0005B0-PY; Thu, 18 Nov 2021 23:56:32 -0500
-Received: from [2607:f8b0:4864:20::12f] (port=43618
- helo=mail-il1-x12f.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mnvwr-0002q6-RW; Thu, 18 Nov 2021 23:56:31 -0500
-Received: by mail-il1-x12f.google.com with SMTP id s14so9045656ilv.10;
- Thu, 18 Nov 2021 20:56:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1vstwSfqJbYULdBaVsaKoblKA0h/t1B1j6lZWfgDUxY=;
- b=N4ESlOmxRIqKcd3KitTWcSRS0gtJTaWDUVg7TfcbBkoODlCJVqawI8grWiADfitKxh
- BJF9Hm9uW6Uz3WBQMpwHT/TLHX/6899OEsMCFIIy6OrgaR4VYxFyk6HByNjo7ZuqGkcW
- /qYAN+oMfSsiEMmsG5K67sI/pA5ny0yCCTgLtdf7LGCsBS140R+Svb3AkzmlpO2Zer9e
- AXfztbUceVUOoM9SoEBIklNT/BcibXTxQ2xbzHU5pUSmwsOpLEdyi+wd5jSVN+GV/6m7
- ckwuhpuGAtI+aLY0jNEWUbi3kGxoFY6MgC8047FT4rvarwHaakrumfX9/dkZombWXNYj
- c6xQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1vstwSfqJbYULdBaVsaKoblKA0h/t1B1j6lZWfgDUxY=;
- b=sdqCRYgDEXAQqPvbfOKXQ3JIekiXw7C0SgZIRxcPuyN48kZOXvnod66kLm03wJcQLr
- pEMPECMHPIDnooPM0UrqkYu3VItFf8nMlWzugH7Vk0iI7YLGB+19lElv67l4+ksbEow6
- QApopfudFh6xXCn7F8nSvVZarWTaE7Zw+YllZSbMTzQiyKHCCarPThLs5Qm5O04qZWeO
- po8eO2pIGCVwwO83oREJu8vRaOsWIWTzDO47yRrqyeELB2Krg8Aw3KDH6JPP+tEOhAwF
- IwLz68kuCZfgaZ0+qx7LprFJK2M8JyLAnpNJ7/UaNnvWANMqTXO4Cl1lVjv8BXhbexon
- HE9A==
-X-Gm-Message-State: AOAM533beepAZAVtIzCWYNqeIGe9/1zTmQM7LDkihzKA6JOGDjUxhBAz
- AvaQhOWgip1Howv9YKdT+AK2SFZ9dSSeuuud9hq7i9gwwUPVDSkg
-X-Google-Smtp-Source: ABdhPJxa/uB5IkTpq3CJZciDllwETjSjIJ0H+5RHqKiwYye8/RT9GtTbH25ouft8GU9JVIELgpyuK6Mk7kVBU2OyY70=
-X-Received: by 2002:a05:6e02:1bec:: with SMTP id
- y12mr2728024ilv.74.1637297788255; 
- Thu, 18 Nov 2021 20:56:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1mo166-0000zH-HF
+ for qemu-riscv@nongnu.org; Fri, 19 Nov 2021 05:26:22 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:57805)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1mo164-00016n-Fk
+ for qemu-riscv@nongnu.org; Fri, 19 Nov 2021 05:26:22 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1637317579;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ZnsIxDJfxVC4Whf+bLr3CZwu5K/BN1hucIFa96vdynw=;
+ b=MO202SsXZuoca6ujQgN1lTVfeJjerJTSE7/CzYAB1mVOz80LPqBKdwlaAW05G86CzZE26h
+ x14xO4Myu5ePjWPtjYmLkRkqVY0GgUspxJZ7UGDjHFsxwXmY7jtLBfAuZ24ZaBeobfbUz+
+ C97fFIIVNaOhWdZxT+TIanCN2cC8TB0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-148-ipAJ8fh_P5aKdP-H-oC9iw-1; Fri, 19 Nov 2021 05:26:16 -0500
+X-MC-Unique: ipAJ8fh_P5aKdP-H-oC9iw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9CE991808318;
+ Fri, 19 Nov 2021 10:26:15 +0000 (UTC)
+Received: from thuth.com (unknown [10.39.193.85])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 527BA1970E;
+ Fri, 19 Nov 2021 10:25:52 +0000 (UTC)
+From: Thomas Huth <thuth@redhat.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+	armbru@redhat.com
+Subject: [PATCH for-6.2] hw/misc/sifive_u_otp: Use IF_PFLASH for the OTP
+ device instead of IF_NONE
+Date: Fri, 19 Nov 2021 11:25:49 +0100
+Message-Id: <20211119102549.217755-1-thuth@redhat.com>
 MIME-Version: 1.0
-References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-14-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-14-zhiwei_liu@c-sky.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 14:56:02 +1000
-Message-ID: <CAKmqyKPuE4se33KAJSMfNBXoEfT9fwcX=x3PAH3dxSegVD19nw@mail.gmail.com>
-Subject: Re: [PATCH v4 13/20] target/riscv: Fix RESERVED field length in VTYPE
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12f
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=thuth@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.7,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,36 +71,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 04:56:32 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 10:26:22 -0000
 
-On Fri, Nov 12, 2021 at 2:06 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Configuring a drive with "if=none" is meant for creation of a backend
+only, it should not get automatically assigned to a device frontend.
+Use "if=pflash" for the One-Time-Programmable device instead (like
+it is e.g. also done for the efuse device in hw/arm/xlnx-zcu102.c).
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Since the old way of configuring the device has already been published
+with the previous QEMU versions, we cannot remove this immediately, but
+have to deprecate it and support it for at least two more releases.
 
-Alistair
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ docs/about/deprecated.rst | 6 ++++++
+ hw/misc/sifive_u_otp.c    | 9 ++++++++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
-> ---
->  target/riscv/cpu.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 52ce670cbe..b48c7c346c 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -105,7 +105,7 @@ typedef struct CPURISCVState CPURISCVState;
->  FIELD(VTYPE, VLMUL, 0, 2)
->  FIELD(VTYPE, VSEW, 2, 3)
->  FIELD(VTYPE, VEDIV, 5, 2)
-> -FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
-> +FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 8)
->  FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
->
->  struct CPURISCVState {
-> --
-> 2.25.1
->
->
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index c03fcf951f..ff7488cb63 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -192,6 +192,12 @@ as short-form boolean values, and passed to plugins as ``arg_name=on``.
+ However, short-form booleans are deprecated and full explicit ``arg_name=on``
+ form is preferred.
+ 
++``-drive if=none`` for the sifive_u OTP device (since 6.2)
++''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++Using ``-drive if=none`` to configure the OTP device of the sifive_u
++RISC-V machine is deprecated. Use ``-drive if=pflash`` instead.
++
+ 
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
+index 18aa0bd55d..cf6098ff2c 100644
+--- a/hw/misc/sifive_u_otp.c
++++ b/hw/misc/sifive_u_otp.c
+@@ -209,7 +209,14 @@ static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
+                           TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
+     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
+ 
+-    dinfo = drive_get_next(IF_NONE);
++    dinfo = drive_get_next(IF_PFLASH);
++    if (!dinfo) {
++        dinfo = drive_get_next(IF_NONE);
++        if (dinfo) {
++            warn_report("using \"-drive if=none\" for the OTP is deprecated, "
++                        "use \"-drive if=pflash\" instead.");
++        }
++    }
+     if (dinfo) {
+         int ret;
+         uint64_t perm;
+-- 
+2.27.0
+
 
