@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mo35s-0003fl-CA
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:34:16 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38154)
+	id 1mo377-0005pI-8C
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:35:33 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38440)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo35r-0003cM-4J; Fri, 19 Nov 2021 07:34:15 -0500
-Received: from [2607:f8b0:4864:20::134] (port=38544
- helo=mail-il1-x134.google.com)
+ id 1mo371-0005lT-2P; Fri, 19 Nov 2021 07:35:29 -0500
+Received: from [2607:f8b0:4864:20::d2d] (port=39617
+ helo=mail-io1-xd2d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo35o-0002HK-4o; Fri, 19 Nov 2021 07:34:14 -0500
-Received: by mail-il1-x134.google.com with SMTP id j21so4508133ila.5;
- Fri, 19 Nov 2021 04:34:11 -0800 (PST)
+ id 1mo36z-0002Uq-Bp; Fri, 19 Nov 2021 07:35:26 -0500
+Received: by mail-io1-xd2d.google.com with SMTP id c3so12567290iob.6;
+ Fri, 19 Nov 2021 04:35:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=e9HQIZ5tw2eucYU0ROWkDDcQl7cKhahjAwNpjWACvNg=;
- b=fwP6zNZYaN4hV8rzA+mnufiBhoutt1bxOlIIhGVCerL44Htrwh1rfqsGCEr/fOT3Ka
- fY6y1tLccgyTeFOVb0ixJWNjR0lRw1IEQ5wRh64sK1cR4smkCZfHd2vEudHYJaQG48Cc
- TnrMxVJvM+yrTSvGzRnfjqRk58FFVIc1RgBYUe7/mn5Z+52FwLBgjhc6oCIJBiZ4sWaa
- rXZJ+kUtdUhSSpymqQVE9X91wZG26ThW6z3q39K4SSqpkKYr+Zts9MXyYcv9FXkwvX1c
- EwPWDTY10L4uiKhod/YPWERvI0iZYJIWqGU3bnOkffvNCuvsXjfivzaSlNAMafrvw2VZ
- DY4w==
+ :cc; bh=Xnp4vrtS40K43uYSA+X6rQd207dJb2t6Qf1FHmYhF1M=;
+ b=R55fxZOGAWDKhOJDHXu/UhnMkp/fPjYNDaUABHhJ5IMStyUtFUC/c6++3hBH5FJ4cj
+ XY/sbH9NYDm/nebkk60UjBJXLH/zdv/AE8c9SfiXxCb0OvKfmnksN2QNFKJzmj17DrtX
+ 1BmXtt2IoNN2oxhbI0RczPsp6iXu+GfHoydhRTuXRxS7QHQF9uzvIqvAWmjTgEA3uYXz
+ YfwbdtoWROmo3xdKkgtHsEvHr1Cob4j+94hgRKndN7YEyYWYKTufp7kyPZpraWVeNEq5
+ UeXU9ILHrotOo2Ew178xHPypS/C28jizcDw2SfazldlAbtNLn0d/QC1KaS+SCIQi6dNE
+ lE7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=e9HQIZ5tw2eucYU0ROWkDDcQl7cKhahjAwNpjWACvNg=;
- b=SucA9PTiZVBAKXs8lclT8GYWY6uTPpLyerSJo3rGh/UcYhv1WcIu5oOyhaX4T3NqCP
- JLAxeQvZ9dPzLSQrka/mvMvcANgK2nV8lCGzOYG1qMiWK3nTUhtjHfUCu8nGOSnY68cF
- v9nkt8ZkGdW2rO2hys47K64cXFhQ+WF1d/oM437rONllTUP1UglItJ7HZ/nBC/zvkbhp
- 3LsYOqAbLjccVeVy+pWURI9TUhPt0dw+q1kQEQfAidlB9ayChHovRZe+R0EqSzmUHDr/
- b12E/N6xqPRGGZ0d+DTYB9mMh40YQgdDH8v4DFeH1VwhqhJ1A4o4T7kPrJ3UdUyYoIHD
- /6hg==
-X-Gm-Message-State: AOAM530ek1DNWQFQ+af2KrP0p72nGrrvHPGwZ5ELsi6jDB15M7DvEpEU
- 5c0aJMbbMZZES2g/L/jgo89WYVOM9om+/IahsXo=
-X-Google-Smtp-Source: ABdhPJwTzdCPGYO+696qCQIkA8ucU7iwsB9OxpGIUEvWkLbM7nXIgVDIbXTqZGwdFUTAwVc4IW2SV4pSlrgzf3do9yE=
-X-Received: by 2002:a05:6e02:1bec:: with SMTP id
- y12mr4200825ilv.74.1637325250790; 
- Fri, 19 Nov 2021 04:34:10 -0800 (PST)
+ bh=Xnp4vrtS40K43uYSA+X6rQd207dJb2t6Qf1FHmYhF1M=;
+ b=PWlf0FVYxhR8n0r6FkCzuTVXldD6TW9O8BTdhfg1uTrXIKI7n2v45cfZJFdMaEUiEI
+ LKwXRon92KU7PpYf/fyg+2BoZ9r2MyEvagxtkU+qjbo2wxVpO6X+VpRtMdPhTGa/JCJr
+ 66dd9dJWOSl4VpIbhsN/yktmykgoouQdwt07912aZhist+46IR6iN4bSLLZzsaCokr+l
+ kgvYoo6qg9T9IJjC9ZcGqCcaXHoYX8iR4HL4nXGhjBG7zBHhzwEkf8EX0DEI1CNSwXLb
+ xqlduzQW0AAjGNdNBuP9oNgxCqJKvGvH1ARB6Fxnv58zcXpz+GGUzXqyQ7aefcuc/a9v
+ NzEQ==
+X-Gm-Message-State: AOAM5313+MGM+UZy4RVILjKhlT0hcZ1/MtqoAiI8PdIWCgxeDOtiDrWs
+ tZ6NzvgsyKMX/XuEJo1OTav8J/dvchFUkxyrIR3jxnxgE8//urMZ
+X-Google-Smtp-Source: ABdhPJwX9v3rV9Q5hAnbVS1C8Vs7LABZZuCaUG5HVg1FVTsZhVyrG9ikHJMzh9MOUf+DlVZekZ83WIQHMp5JWkmxTV8=
+X-Received: by 2002:a02:a601:: with SMTP id c1mr26971196jam.114.1637325324030; 
+ Fri, 19 Nov 2021 04:35:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-16-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-16-zhiwei_liu@c-sky.com>
+ <20211111155149.58172-17-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-17-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 22:33:44 +1000
-Message-ID: <CAKmqyKNkJ9WONjBfhb-PNbovvtbRQ3PBm1nUzfFrhWOo8DXXLw@mail.gmail.com>
-Subject: Re: [PATCH v4 15/20] target/riscv: Remove VILL field in VTYPE
+Date: Fri, 19 Nov 2021 22:34:58 +1000
+Message-ID: <CAKmqyKMAiuKHXhhGizeywWptoWM4nv=5UZ0Uh14+Nc==A1vT_g@mail.gmail.com>
+Subject: Re: [PATCH v4 16/20] target/riscv: Ajdust vector atomic check with
+ XLEN
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,10 +53,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::134
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -77,33 +77,35 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 12:34:15 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 12:35:30 -0000
 
-On Fri, Nov 12, 2021 at 2:09 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Nov 12, 2021 at 2:11 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h | 1 -
->  1 file changed, 1 deletion(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index b48c7c346c..5f35217f7d 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -106,7 +106,6 @@ FIELD(VTYPE, VLMUL, 0, 2)
->  FIELD(VTYPE, VSEW, 2, 3)
->  FIELD(VTYPE, VEDIV, 5, 2)
->  FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 8)
-> -FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 6fa673f4b2..6cc83356d9 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -739,7 +739,8 @@ static bool amo_check(DisasContext *s, arg_rwdvm* a)
+>              (!a->wd || vext_check_overlap_mask(s, a->rd, a->vm, false)) &&
+>              vext_check_reg(s, a->rd, false) &&
+>              vext_check_reg(s, a->rs2, false) &&
+> -            ((1 << s->sew) <= sizeof(target_ulong)) &&
+> +            /* TODO: RV128 could allow 128-bit atomics */
+> +            ((1 << s->sew) <=  (get_xl(s) == MXL_RV32 ? 4 : 8)) &&
+>              ((1 << s->sew) >= 4));
+>  }
 >
->  struct CPURISCVState {
->      target_ulong gpr[32];
 > --
 > 2.25.1
 >
