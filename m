@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mo3aF-0003da-JO
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 08:05:39 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46568)
+	id 1mo3d2-0006b1-JI
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 08:08:32 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3a4-0003b2-6h; Fri, 19 Nov 2021 08:05:32 -0500
-Received: from [2607:f8b0:4864:20::133] (port=43960
- helo=mail-il1-x133.google.com)
+ id 1mo3cy-0006RP-LG; Fri, 19 Nov 2021 08:08:28 -0500
+Received: from [2607:f8b0:4864:20::12e] (port=37612
+ helo=mail-il1-x12e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3a1-0003Tk-Hz; Fri, 19 Nov 2021 08:05:27 -0500
-Received: by mail-il1-x133.google.com with SMTP id s14so10131597ilv.10;
- Fri, 19 Nov 2021 05:05:20 -0800 (PST)
+ id 1mo3cv-0003ui-Qb; Fri, 19 Nov 2021 08:08:27 -0500
+Received: by mail-il1-x12e.google.com with SMTP id h23so10161198ila.4;
+ Fri, 19 Nov 2021 05:08:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=CoqYXV2MKbJj7YZE3rDxpsTOo8HygkWpcdGEQ1UE9IY=;
- b=LL1ITD2IlILvp2qrTxmeHhUK74F6WhvMFGUYziBGGqTCEGPoXduXjW5YYBtlYme8fS
- xnQCuYGmlukaAjQ45kx+SrlmRVQKNVq+tn8hY+9xX1v+2bCNt+5s5xLk+KwTFoD21zEb
- /HdAgXtu+9oLH7Y27Tnn6ku1e1IEiKCfQ40ZUoctKMwlj9HdDUDfFzm6KveLpU/aRljL
- scc/3fuLj1by2MdhfBJrWJBn0NernJmfuzvH4E85aM1qRWsia7Hnxwabknugoys1AJos
- LwsuDTgsf1ZRFUYHckxanrZjFVqmDmgYCOab02yx4Uz470XZ0o0yoOe7Sa0IRUc3icRh
- RFKA==
+ bh=0rWVR7VCNe/zsK2mWlDO3KyD+E2zjCjZTO+qf5mpQKQ=;
+ b=kslCOPSfrmJG78DzaVm+SDS2OtMvYJdwDd56Gls4BCKez5+jEbshFLQn+dzuzYiyfA
+ 9SW68K/U31hUP5g7/4UKaHJLMabirro4YKUbvgQ/HsILvgV5Bq4bu10JDAiyAts5MS2K
+ N0agw53XulMDKRURf7s0W23ljg62fEKLcE5Q22N1DiHY3V7Miyx9TBWFY0udD/ix25UN
+ Azs0fQ9vsBDtOgVAUXWvrZ+87ePcVsd5kQNv3gh2oKM4Oatn6nEgSVd+MDW+EHxVlce0
+ c5Zl0zh9z9Zku7XDFWDigWGudXwqaPcteVSlJqtN/ulMSzvqqZs1SrHWhLxV1jjeXd1T
+ deog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=CoqYXV2MKbJj7YZE3rDxpsTOo8HygkWpcdGEQ1UE9IY=;
- b=D52Fb586ZEtciFUhSNMslwpZ8//QJcfalgJt167Us71hTzoPw553ZwoMquuNpXIkCA
- 05RnjOUe+KJflVefQcAIbdTsRjaHNPG4WUCY5lfgeU5mYLSN+mBcg7ZbdRyO/wpVncer
- o79CB5PQ9ueWzOH8WjS3VrUDzS36aCpIx1zvQ0H2J/uD5aKgdCnm7WHagITM7BWwyvTF
- xw2HiqOTZpvEKA5ATFCBnntkn1+Ibx8rZ2fM39V7ZqsySBcbCfZwN0jIqRsStBybC8dt
- q2mTYhyQTRrkfMcunYIz1/7GAw25zu7mgaHdb8MjnMba7K98Altb07lKr9B9eavKiTDG
- rqHA==
-X-Gm-Message-State: AOAM530co0Qty+ziwUPyhhmJPfKyHWZkIPbl8pa1PYIgElBFs1k/T+L4
- tooP0sIvxA5zatJ4yhKXwCTHCD5LymKWo8Y8nk4=
-X-Google-Smtp-Source: ABdhPJwXONl0RLXi96MBcruIU03SCUcq6PuZFAix70jnprsWh/kNDvq2KwDnrrrjvX5dSf1d59+UJy6522oCfz/waVY=
+ bh=0rWVR7VCNe/zsK2mWlDO3KyD+E2zjCjZTO+qf5mpQKQ=;
+ b=Hhd1jq03M2xfPLQJAoqs5XUId4gugtcHvs82AirEfTyviiFwQ6VGJsEMg8EcFO90uB
+ VsNzE7ay5VQKDpLjQ9KBhNXOhBe0Uy2aqUjINGMg8FVPM4z0t9cItMqdMoOnJcii9XLz
+ UJ8oKojhnfZfTpETcrMi7K9cVbA7EN+WVs7PwnMR5ODyT+BiVYp/yzvqzl9WEo/Fu/cp
+ pnOUl1aZf3VAbh6SpO0BB1AB61F914+xJSRKHuKVBq6UYfVKFNjFVMI91pYqMunLAH3p
+ crWaNNHUkW7gy5QoYyKsc1DJmLmRN77r/mK3FZEffJ3ecL04snON8BkXk/IBFhTb+mr6
+ BcXA==
+X-Gm-Message-State: AOAM532QlNS6BOSDkgmbKi//z+Sqh96DEVoIeEpijPISwLpfsgVfYr8s
+ 8n/8f/mSTQimZKaYe3ItK1YYS0ZARrHBxGWuHWc=
+X-Google-Smtp-Source: ABdhPJxH+5x9zYF51cIpzf6PJWxV+ZTW8Oc11TmOpztljOesEOGZotOo5ZQZyY3a2rvywGRsWtGm83Dy31SalcNbWHo=
 X-Received: by 2002:a05:6e02:1bec:: with SMTP id
- y12mr4329689ilv.74.1637327119918; 
- Fri, 19 Nov 2021 05:05:19 -0800 (PST)
+ y12mr4349864ilv.74.1637327304050; 
+ Fri, 19 Nov 2021 05:08:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20211117163409.3587705-1-armbru@redhat.com>
- <20211117163409.3587705-2-armbru@redhat.com>
-In-Reply-To: <20211117163409.3587705-2-armbru@redhat.com>
+References: <20211119104757.331579-1-f4bug@amsat.org>
+In-Reply-To: <20211119104757.331579-1-f4bug@amsat.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 23:04:52 +1000
-Message-ID: <CAKmqyKNMsvp4GBMznqHdP7JiTPBYsK4RnvBHP+EtjcWmhdeHvA@mail.gmail.com>
-Subject: Re: [PATCH v2 01/13] hw/sd/ssi-sd: Do not create SD card within
- controller's realize
-To: Markus Armbruster <armbru@redhat.com>
+Date: Fri, 19 Nov 2021 23:07:57 +1000
+Message-ID: <CAKmqyKPzirPWG-o4EMxiBZfyjk5kw3zQtryDyua=2JKF+pn82w@mail.gmail.com>
+Subject: Re: [RFC PATCH-for-6.2?] hw/misc/sifive_u_otp: Do not reset OTP
+ content on hardware reset
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Qemu-block <qemu-block@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- qemu-arm <qemu-arm@nongnu.org>, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -82,179 +78,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 13:05:39 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 13:08:29 -0000
 
-On Thu, Nov 18, 2021 at 2:35 AM Markus Armbruster <armbru@redhat.com> wrote=
-:
+On Fri, Nov 19, 2021 at 8:48 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
 >
-> ssi_sd_realize() creates an "sd-card" device.  This is inappropriate,
-> and marked FIXME.
+> Once a "One Time Programmable" is programmed, it shouldn't be reset.
 >
-> Move it to the boards that create these devices.  Prior art: commit
-> eb4f566bbb for device "generic-sdhci", and commit 26c607b86b for
-> device "pl181".
+> Do not re-initialize the OTP content in the DeviceReset handler,
+> initialize it once in the DeviceRealize one.
 >
-> The device remains not user-creatable, because its users should (and
-> do) wire up its GPIO chip-select line.
->
-> Cc: Peter Maydell <peter.maydell@linaro.org>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: "Philippe Mathieu-Daud=C3=A9" <f4bug@amsat.org>
-> Cc: qemu-arm@nongnu.org
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+> Fixes: 9fb45c62ae8 ("riscv: sifive: Implement a model for SiFive FU540 OT=
+P")
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/arm/stellaris.c  | 15 ++++++++++++++-
->  hw/riscv/sifive_u.c | 13 ++++++++++++-
->  hw/sd/ssi-sd.c      | 29 +----------------------------
->  3 files changed, 27 insertions(+), 30 deletions(-)
+>  hw/misc/sifive_u_otp.c | 13 +++++--------
+>  1 file changed, 5 insertions(+), 8 deletions(-)
 >
-> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-> index 78827ace6b..b6c8a5d609 100644
-> --- a/hw/arm/stellaris.c
-> +++ b/hw/arm/stellaris.c
-> @@ -10,6 +10,7 @@
->  #include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "hw/sysbus.h"
-> +#include "hw/sd/sd.h"
->  #include "hw/ssi/ssi.h"
->  #include "hw/arm/boot.h"
->  #include "qemu/timer.h"
-> @@ -1157,6 +1158,9 @@ static void stellaris_init(MachineState *ms, stella=
-ris_board_info *board)
->              void *bus;
->              DeviceState *sddev;
->              DeviceState *ssddev;
-> +            DriveInfo *dinfo;
-> +            DeviceState *carddev;
-> +            BlockBackend *blk;
+> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
+> index 18aa0bd55d8..b5adcfa7cb4 100644
+> --- a/hw/misc/sifive_u_otp.c
+> +++ b/hw/misc/sifive_u_otp.c
+> @@ -235,14 +235,10 @@ static void sifive_u_otp_realize(DeviceState *dev, =
+Error **errp)
 >
->              /*
->               * Some boards have both an OLED controller and SD card conn=
-ected to
-> @@ -1221,8 +1225,17 @@ static void stellaris_init(MachineState *ms, stell=
-aris_board_info *board)
->               *  - Make the ssd0323 OLED controller chipselect active-low
->               */
->              bus =3D qdev_get_child_bus(dev, "ssi");
+>              if (blk_pread(s->blk, 0, s->fuse, filesize) !=3D filesize) {
+>                  error_setg(errp, "failed to read the initial flash conte=
+nt");
+> +                return;
+>              }
+>          }
+>      }
+> -}
 > -
->              sddev =3D ssi_create_peripheral(bus, "ssi-sd");
-> +
-> +            dinfo =3D drive_get(IF_SD, 0, 0);
-> +            blk =3D dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
-> +            carddev =3D qdev_new(TYPE_SD_CARD);
-> +            qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal)=
-;
-> +            qdev_prop_set_bit(carddev, "spi", true);
-> +            qdev_realize_and_unref(carddev,
-> +                                   qdev_get_child_bus(sddev, "sd-bus"),
-> +                                   &error_fatal);
-> +
->              ssddev =3D ssi_create_peripheral(bus, "ssd0323");
->              gpio_out[GPIO_D][0] =3D qemu_irq_split(
->                      qdev_get_gpio_in_named(sddev, SSI_GPIO_CS, 0),
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 589ae72a59..a4ecadaf12 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -46,6 +46,7 @@
->  #include "hw/char/serial.h"
->  #include "hw/cpu/cluster.h"
->  #include "hw/misc/unimp.h"
-> +#include "hw/sd/sd.h"
->  #include "hw/ssi/ssi.h"
->  #include "target/riscv/cpu.h"
->  #include "hw/riscv/riscv_hart.h"
-> @@ -536,7 +537,8 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->      uint32_t fdt_load_addr;
->      uint64_t kernel_entry;
->      DriveInfo *dinfo;
-> -    DeviceState *flash_dev, *sd_dev;
-> +    BlockBackend *blk;
-> +    DeviceState *flash_dev, *sd_dev, *card_dev;
->      qemu_irq flash_cs, sd_cs;
+> -static void sifive_u_otp_reset(DeviceState *dev)
+> -{
+> -    SiFiveUOTPState *s =3D SIFIVE_U_OTP(dev);
 >
->      /* Initialize SoC */
-> @@ -686,6 +688,15 @@ static void sifive_u_machine_init(MachineState *mach=
-ine)
+>      /* Initialize all fuses' initial value to 0xFFs */
+>      memset(s->fuse, 0xff, sizeof(s->fuse));
+> @@ -259,13 +255,15 @@ static void sifive_u_otp_reset(DeviceState *dev)
+>          serial_data =3D s->serial;
+>          if (blk_pwrite(s->blk, index * SIFIVE_U_OTP_FUSE_WORD,
+>                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+> -            error_report("write error index<%d>", index);
+> +            error_setg(errp, "failed to write index<%d>", index);
+> +            return;
+>          }
 >
->      sd_cs =3D qdev_get_gpio_in_named(sd_dev, SSI_GPIO_CS, 0);
->      sysbus_connect_irq(SYS_BUS_DEVICE(&s->soc.spi2), 1, sd_cs);
-> +
-> +    dinfo =3D drive_get(IF_SD, 0, 0);
-> +    blk =3D dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
-> +    card_dev =3D qdev_new(TYPE_SD_CARD);
-> +    qdev_prop_set_drive_err(card_dev, "drive", blk, &error_fatal);
-> +    qdev_prop_set_bit(card_dev, "spi", true);
-> +    qdev_realize_and_unref(card_dev,
-> +                           qdev_get_child_bus(sd_dev, "sd-bus"),
-> +                           &error_fatal);
+>          serial_data =3D ~(s->serial);
+>          if (blk_pwrite(s->blk, (index + 1) * SIFIVE_U_OTP_FUSE_WORD,
+>                         &serial_data, SIFIVE_U_OTP_FUSE_WORD, 0) < 0) {
+> -            error_report("write error index<%d>", index + 1);
+> +            error_setg(errp, "failed to write index<%d>", index + 1);
+> +            return;
+>          }
+>      }
+>
+> @@ -279,7 +277,6 @@ static void sifive_u_otp_class_init(ObjectClass *klas=
+s, void *data)
+>
+>      device_class_set_props(dc, sifive_u_otp_properties);
+>      dc->realize =3D sifive_u_otp_realize;
+> -    dc->reset =3D sifive_u_otp_reset;
 >  }
 >
->  static bool sifive_u_machine_get_start_in_flash(Object *obj, Error **err=
-p)
-> diff --git a/hw/sd/ssi-sd.c b/hw/sd/ssi-sd.c
-> index e60854eeef..167c03b780 100644
-> --- a/hw/sd/ssi-sd.c
-> +++ b/hw/sd/ssi-sd.c
-> @@ -368,36 +368,9 @@ static const VMStateDescription vmstate_ssi_sd =3D {
->
->  static void ssi_sd_realize(SSIPeripheral *d, Error **errp)
->  {
-> -    ERRP_GUARD();
->      ssi_sd_state *s =3D SSI_SD(d);
-> -    DeviceState *carddev;
-> -    DriveInfo *dinfo;
->
->      qbus_init(&s->sdbus, sizeof(s->sdbus), TYPE_SD_BUS, DEVICE(d), "sd-b=
-us");
-> -
-> -    /* Create and plug in the sd card */
-> -    /* FIXME use a qdev drive property instead of drive_get_next() */
-> -    dinfo =3D drive_get_next(IF_SD);
-> -    carddev =3D qdev_new(TYPE_SD_CARD);
-> -    if (dinfo) {
-> -        if (!qdev_prop_set_drive_err(carddev, "drive",
-> -                                     blk_by_legacy_dinfo(dinfo), errp)) =
-{
-> -            goto fail;
-> -        }
-> -    }
-> -
-> -    if (!object_property_set_bool(OBJECT(carddev), "spi", true, errp)) {
-> -        goto fail;
-> -    }
-> -
-> -    if (!qdev_realize_and_unref(carddev, BUS(&s->sdbus), errp)) {
-> -        goto fail;
-> -    }
-> -
-> -    return;
-> -
-> -fail:
-> -    error_prepend(errp, "failed to init SD card: ");
->  }
->
->  static void ssi_sd_reset(DeviceState *dev)
-> @@ -426,7 +399,7 @@ static void ssi_sd_class_init(ObjectClass *klass, voi=
-d *data)
->      k->cs_polarity =3D SSI_CS_LOW;
->      dc->vmsd =3D &vmstate_ssi_sd;
->      dc->reset =3D ssi_sd_reset;
-> -    /* Reason: init() method uses drive_get_next() */
-> +    /* Reason: GPIO chip-select line should be wired up */
->      dc->user_creatable =3D false;
->  }
->
+>  static const TypeInfo sifive_u_otp_info =3D {
 > --
 > 2.31.1
 >
