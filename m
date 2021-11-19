@@ -1,70 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mo3gG-0001YQ-Ac
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 08:11:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:48504)
+	id 1mo4Bj-0006fD-Ej
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 08:44:23 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58954)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3g6-0001Um-Qj; Fri, 19 Nov 2021 08:11:44 -0500
-Received: from [2607:f8b0:4864:20::d33] (port=38787
- helo=mail-io1-xd33.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3g4-00069K-Ka; Fri, 19 Nov 2021 08:11:42 -0500
-Received: by mail-io1-xd33.google.com with SMTP id z18so12676046iof.5;
- Fri, 19 Nov 2021 05:11:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yXhdhHUxMcjL9dVK7BTbnaul5VBhQTmwzP2QU2bc8EA=;
- b=IZqKQCQUWoUeDqNJ0caruFtSXUFAbB+i/FqEW0GQ9CBQttJ0KWEijCFSaMCqxQQtIe
- WlyE6c8mFMk3c/uqCurB7cIf7miB14rCQuykL4AouCwioTnHIZGqmghFuXPm6L5sxVFE
- pOoO4kDgv/FQcRVOlThKMXVWjNTi9V/R+EhzXfafGTr6KginCbbs5vP7dpgx7L7zlTVk
- vsZVQihMH3K6j0oC1PLx1Vw2VqQVKaD459nHOW60kasVYFPQk9iJ8vwOH0PQJxcvSOpW
- MaqByJQfVgTOUyP6jkcv0j0fPuMsmKWFFEzKPNkXxvWaGTuonzXifaeaSuNzuxKT0C4U
- kQFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=yXhdhHUxMcjL9dVK7BTbnaul5VBhQTmwzP2QU2bc8EA=;
- b=t0Yg7bcFkjf1AGb/6u4fVaSzbEaD5xqTCLXWFQO5kRgmQEI3AsTRMz099xDAXlqr8Z
- 2jKSrVN6LuHpfXX8K3u1wa3OL/5RaHNJI497s7Pt5DF1juMJxLlpemlVhnZr56yprUsH
- Qa3esVgJtvv7ozL+hPvE6mto0MHq7CLSKDLWKgVSl1BQW9Aw5YeYHuJHMk6mMB02iFl6
- 5NLSbH+nnPQlGughcEgWJ/Ze1ftjctJaWDHdpoJ+s2SEv/qRJUU8pypCq+u5dGK7w2ye
- JDXyFaOgA562eDcq2ifIgblIHlhIA5ibTqWinp6nPNIg/KD5ZtyuYVyRLsfjZSMzPgku
- V0zg==
-X-Gm-Message-State: AOAM530981N8RqB2x20nzWrtdh9dTNh378l+rPRzyUoNk9WMG/BJScNB
- E/+cKoVXi/EsItiHqBEOJ/wg2AWfjT05ND+FfqY=
-X-Google-Smtp-Source: ABdhPJwRD9BQHZ9t+oBAnkggaaYrdXWl9y8ncTG3b35eYbr7DdIZQypHvEUxS3bNyM31jqBpHw9K/VZzCr1RflVqVzk=
-X-Received: by 2002:a05:6602:204e:: with SMTP id
- z14mr5357891iod.90.1637327499183; 
- Fri, 19 Nov 2021 05:11:39 -0800 (PST)
-MIME-Version: 1.0
-References: <20211119102549.217755-1-thuth@redhat.com>
-In-Reply-To: <20211119102549.217755-1-thuth@redhat.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 23:11:12 +1000
-Message-ID: <CAKmqyKN99Yag2OyJfXzJD_tbiAPfWER=BmXP-taM298kAqLxUA@mail.gmail.com>
-Subject: Re: [PATCH for-6.2] hw/misc/sifive_u_otp: Use IF_PFLASH for the OTP
- device instead of IF_NONE
-To: Thomas Huth <thuth@redhat.com>
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mo4Bg-0006aj-17; Fri, 19 Nov 2021 08:44:20 -0500
+Received: from out28-149.mail.aliyun.com ([115.124.28.149]:57897)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1mo4Bd-0006rK-0l; Fri, 19 Nov 2021 08:44:19 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07453869|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0844409-0.00048377-0.915075;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047201; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LvrIocs_1637329445; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.LvrIocs_1637329445) by smtp.aliyun-inc.com(10.147.40.7);
+ Fri, 19 Nov 2021 21:44:06 +0800
+Subject: Re: [PATCH v4 00/20] Support UXL filed in xstatus
+To: Alistair Francis <alistair23@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell <peter.maydell@linaro.org>, 
- Markus Armbruster <armbru@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>
+References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKMg8bMjnkbDUBQhJy3VXnY=HTCne8D6uXFPceU4dezhTg@mail.gmail.com>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <6682e008-b597-74f9-a9b9-a237ce0a098f@c-sky.com>
+Date: Fri, 19 Nov 2021 21:44:03 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKMg8bMjnkbDUBQhJy3VXnY=HTCne8D6uXFPceU4dezhTg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.149; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-149.mail.aliyun.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-1.727,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,69 +58,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 13:11:46 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 13:44:21 -0000
 
-On Fri, Nov 19, 2021 at 8:27 PM Thomas Huth <thuth@redhat.com> wrote:
->
-> Configuring a drive with "if=none" is meant for creation of a backend
-> only, it should not get automatically assigned to a device frontend.
-> Use "if=pflash" for the One-Time-Programmable device instead (like
-> it is e.g. also done for the efuse device in hw/arm/xlnx-zcu102.c).
->
-> Since the old way of configuring the device has already been published
-> with the previous QEMU versions, we cannot remove this immediately, but
-> have to deprecate it and support it for at least two more releases.
->
-> Signed-off-by: Thomas Huth <thuth@redhat.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+On 2021/11/19 下午8:57, Alistair Francis wrote:
+> On Fri, Nov 12, 2021 at 1:52 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>> In this patch set, we process the pc reigsters writes,
+>> gdb reads and writes, and address calculation under
+>> different UXLEN settings.
+> Awesome!
+>
+> Do you have steps on how to test this?
 
-Alistair
+I have some little of weird tests. Compile 32 bit baremetal benchmarks, 
+such as dhrystone and coremark, and run them on qemu-system-riscv64. 
+These tests can pass.
+These tests cases cover the most of instruction translation.
 
-> ---
->  docs/about/deprecated.rst | 6 ++++++
->  hw/misc/sifive_u_otp.c    | 9 ++++++++-
->  2 files changed, 14 insertions(+), 1 deletion(-)
+I think some assembling test cases covering  XLEN change are also 
+needed. Not yet.
+
+Thanks,
+Zhiwei
+
 >
-> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-> index c03fcf951f..ff7488cb63 100644
-> --- a/docs/about/deprecated.rst
-> +++ b/docs/about/deprecated.rst
-> @@ -192,6 +192,12 @@ as short-form boolean values, and passed to plugins as ``arg_name=on``.
->  However, short-form booleans are deprecated and full explicit ``arg_name=on``
->  form is preferred.
+> Alistair
 >
-> +``-drive if=none`` for the sifive_u OTP device (since 6.2)
-> +''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-> +
-> +Using ``-drive if=none`` to configure the OTP device of the sifive_u
-> +RISC-V machine is deprecated. Use ``-drive if=pflash`` instead.
-> +
->
->  QEMU Machine Protocol (QMP) commands
->  ------------------------------------
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index 18aa0bd55d..cf6098ff2c 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -209,7 +209,14 @@ static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
->                            TYPE_SIFIVE_U_OTP, SIFIVE_U_OTP_REG_SIZE);
->      sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
->
-> -    dinfo = drive_get_next(IF_NONE);
-> +    dinfo = drive_get_next(IF_PFLASH);
-> +    if (!dinfo) {
-> +        dinfo = drive_get_next(IF_NONE);
-> +        if (dinfo) {
-> +            warn_report("using \"-drive if=none\" for the OTP is deprecated, "
-> +                        "use \"-drive if=pflash\" instead.");
-> +        }
-> +    }
->      if (dinfo) {
->          int ret;
->          uint64_t perm;
-> --
-> 2.27.0
->
->
+>> The patch set v4 mainly address Richard comments on v3.
+>> Patch 8, 18, 19, 20 have not been reviewed. Others have been reviewed or acked.
+>>
+>> v4:
+>>    Support SSTATUS64_UXL write
+>>    Bump vmstate version for vill split
+>>
+>> v3:
+>>    Merge gen_pm_adjust_address into a canonical address function
+>>    Adjust address for RVA with XLEN
+>>    Split pm_enabled into pm_mask_enabled and pm_base_enabled
+>>    Replace array of pm tcg globals with one scalar tcg global
+>>    Split and change patch sequence
+>>
+>> v2:
+>>    Split out vill from vtype
+>>    Remove context switch when xlen changes at exception
+>>    Use XL instead of OL in many places
+>>    Use pointer masking and XLEN for vector address
+>>    Define an common fuction to calculate address for ldst
+>>
+>>
+>> LIU Zhiwei (20):
+>>    target/riscv: Don't save pc when exception return
+>>    target/riscv: Sign extend pc for different XLEN
+>>    target/riscv: Ignore the pc bits above XLEN
+>>    target/riscv: Extend pc for runtime pc write
+>>    target/riscv: Use gdb xml according to max mxlen
+>>    target/riscv: Relax debug check for pm write
+>>    target/riscv: Adjust csr write mask with XLEN
+>>    target/riscv: Create current pm fields in env
+>>    target/riscv: Alloc tcg global for cur_pm[mask|base]
+>>    target/riscv: Calculate address according to XLEN
+>>    target/riscv: Split pm_enabled into mask and base
+>>    target/riscv: Split out the vill from vtype
+>>    target/riscv: Fix RESERVED field length in VTYPE
+>>    target/riscv: Adjust vsetvl according to XLEN
+>>    target/riscv: Remove VILL field in VTYPE
+>>    target/riscv: Ajdust vector atomic check with XLEN
+>>    target/riscv: Fix check range for first fault only
+>>    target/riscv: Adjust vector address with mask
+>>    target/riscv: Adjust scalar reg in vector with XLEN
+>>    target/riscv: Enable uxl field write
+>>
+>>   target/riscv/cpu.c                            | 23 +++++-
+>>   target/riscv/cpu.h                            | 13 +++-
+>>   target/riscv/cpu_bits.h                       |  2 +
+>>   target/riscv/cpu_helper.c                     | 66 ++++++++++++----
+>>   target/riscv/csr.c                            | 43 ++++++++++-
+>>   target/riscv/gdbstub.c                        | 71 ++++++++++++-----
+>>   target/riscv/helper.h                         |  6 +-
+>>   .../riscv/insn_trans/trans_privileged.c.inc   |  7 +-
+>>   target/riscv/insn_trans/trans_rva.c.inc       |  9 +--
+>>   target/riscv/insn_trans/trans_rvd.c.inc       | 19 +----
+>>   target/riscv/insn_trans/trans_rvf.c.inc       | 19 +----
+>>   target/riscv/insn_trans/trans_rvi.c.inc       | 22 +-----
+>>   target/riscv/insn_trans/trans_rvv.c.inc       | 51 ++++++++----
+>>   target/riscv/machine.c                        | 15 +++-
+>>   target/riscv/op_helper.c                      |  7 +-
+>>   target/riscv/translate.c                      | 77 +++++++++----------
+>>   target/riscv/vector_helper.c                  | 38 +++++----
+>>   17 files changed, 300 insertions(+), 188 deletions(-)
+>>
+>> --
+>> 2.25.1
+>>
+>>
 
