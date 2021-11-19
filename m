@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mo3Cg-00031R-Ks
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:41:18 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:39674)
+	id 1mo3E7-0003wE-Ka
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:42:47 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39982)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3Cd-0002tl-Jj; Fri, 19 Nov 2021 07:41:15 -0500
-Received: from [2607:f8b0:4864:20::d2c] (port=36799
- helo=mail-io1-xd2c.google.com)
+ id 1mo3E5-0003te-1V; Fri, 19 Nov 2021 07:42:45 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=33685
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3Cb-0003Yd-Ca; Fri, 19 Nov 2021 07:41:15 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id e144so12558740iof.3;
- Fri, 19 Nov 2021 04:41:12 -0800 (PST)
+ id 1mo3E3-0004Gp-79; Fri, 19 Nov 2021 07:42:44 -0500
+Received: by mail-io1-xd36.google.com with SMTP id m9so12653730iop.0;
+ Fri, 19 Nov 2021 04:42:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tC3FBFn0Wy0GqtZ0yinl046XjJqq23c2WFT+X7Z3XqY=;
- b=QiDaMNTPvnMRxtf8eIiY5J3oidg/+eDPTpR0U46E6u4NpD1U2kbuTxmFdJjctOqQ/L
- Zbo0/li8rBYc5duRbBUeEykA1SgvqPW+4deNPCx0nK8tcLobkAYvFQBPXRGFjpmHFec9
- Rh4XSxMQUX79GiksST++zEjJqqpP8VF2lC6F2iUUYSj5ys2ddvGk3Oo8mZecG12+5gUp
- 0ReonsQyftMyAt8MKWTIThyCsznNtC7g0VPEPLmqOTt03/UH6P2SkpxRd8HUMQi7iJhB
- snNixkWvJfZ9QUFTFiufx1I9SkDgZlPtT6ye6riRAz997zq9rwqqeFI4/Az+n6Lbc5dm
- Lw7A==
+ :cc; bh=2KZIoCF7BhzSQOaGIyBGlnLPP7rr4vErC3ItZkTiii4=;
+ b=iyF8JpesdG50oOJuz6ItvqR9J+jM6R/LaB8V+RSySwumO+H2RzqXzr/vGn4pT8cZuQ
+ 1Uo2Iu/XIOmPiqhLs1dO9nT74MclCWvl0c3KRS3F23sf5LnyqaZZ9pYgB9drFCCPqomO
+ 4gNd42qb2WYb8rMlpTPbMs3TeAY7ZphzHRYWAstLMXqLg0QGUozhAE/ffrMebe5Y0zac
+ 4VYZRCoGPWD90CnAf6nmpCEDhU/P40NSb8vWVdOpvEULLJrJtM9c3objOYfs6NAW2Eg9
+ e0zzLV/db+8dDD1uqOzDUAWY7/G2MnFfzA20YKxBxSVAhPda6Db2h4A/fgwl0KUDlz5O
+ E/kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=tC3FBFn0Wy0GqtZ0yinl046XjJqq23c2WFT+X7Z3XqY=;
- b=Ssnu9RiXi0060f9QzY0+9knplw4nmW91nwU1Tk88EbZ8K5P0V/vaKYIeWo6jZBQWJH
- t/xG2f/KbzCpVdxCo9ZrMgne4oInBeHp/hPLd3urot93tGEGDD/0U3/Uq3/f8FwYAz56
- GPpRbf2ZLcEVFl2wPvTiVq83gnBFeoQ0Nlh3+isSwEW0uF2KlkMP2lTsrv76cw10A28a
- PKgIHzIohDDImcMOwHjooIfssqOoDBsRRn7n+UxpxKYO4w5waCFSCO9xjb5vlag/I/iF
- 2NQSSeV6EpxjAJPAi9lOCQTy/G096/HT1Lzsc3Qr+JJyzzV/GDNsmD5dbFfoAVRTypgH
- ZthQ==
-X-Gm-Message-State: AOAM531T7w1DVsshfDSgw51D5NNYSgQ3cf3r3lcAI5Wnxvs9iAS2Tvge
- UIvJKIbpGiAA3hIVQFyDdlMGvG+N/l4V+o3S1Bw=
-X-Google-Smtp-Source: ABdhPJzjGWA9Fj1EV/5yGxpWA+KJHD2nxhbqR6CNERLc5anXswI/VssChwe7uaFOKx4q5GsZwtrPIoDYg4POrx3jYh0=
-X-Received: by 2002:a05:6602:204e:: with SMTP id
- z14mr5176824iod.90.1637325671740; 
- Fri, 19 Nov 2021 04:41:11 -0800 (PST)
+ bh=2KZIoCF7BhzSQOaGIyBGlnLPP7rr4vErC3ItZkTiii4=;
+ b=WLFTQPDqPiCAy1usgjj+dzGTI3FKCf2wK1R65kSEi1DnLM+hOe6EKQoFZJjTgwmqQT
+ X5+94xmwtH28y4OS46ro8OPKEGOuDqlZuEZW8UAbNEZKzgeEQYXEw2m1cfjgITC2OOTT
+ K5g6Fr0nySC2BVmSPHEJZrLLVH1/NS9U3VENSYobLWdnvbmhWep+D9hYJ1/vaTn0wNzR
+ cCrX8/ZHPyBGv4mhn6+kfnfpMKcZDYljmcjGLWWl9bxt14Ql7aKydzXNaZRm+bzJORSS
+ qkM0/KK3DA1UZbAxGx27Au+tDeiXafHNKgJEsYUTrO8Ven4WL/FJNQymHPKQYBGb5qVa
+ 2mnA==
+X-Gm-Message-State: AOAM533nralIJd5ZEeXPoy6TCjY3XqfvtkwDPRSVREW5FdRtG7MjdGeL
+ v9OKumntv6bCpcIUqwev2mEl+AkQuRUhA5ijffA=
+X-Google-Smtp-Source: ABdhPJxP6XS/oDUGXqcO7d/RqqkTIN1IJpFBBih6OTtOnM0LAVt60tul6pyxcHMv27vrDOexeS/eH3UVt9DbShAXRVU=
+X-Received: by 2002:a05:6638:32a2:: with SMTP id
+ f34mr26937763jav.63.1637325761679; 
+ Fri, 19 Nov 2021 04:42:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-15-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-15-zhiwei_liu@c-sky.com>
+ <20211111155149.58172-18-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-18-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 22:40:44 +1000
-Message-ID: <CAKmqyKMK7Zb3hiXect67Mo32UP_dAd_CRoGu8hpmng-ZWcyasA@mail.gmail.com>
-Subject: Re: [PATCH v4 14/20] target/riscv: Adjust vsetvl according to XLEN
+Date: Fri, 19 Nov 2021 22:42:15 +1000
+Message-ID: <CAKmqyKPBtn5ac5YjO_izdGCazDppS2hcoGxBq2hNfc6uxQdo3A@mail.gmail.com>
+Subject: Re: [PATCH v4 17/20] target/riscv: Fix check range for first fault
+ only
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,10 +54,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -77,9 +78,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 12:41:16 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 12:42:45 -0000
 
-On Fri, Nov 12, 2021 at 2:14 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Nov 12, 2021 at 2:05 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>
+> Only check the range that has passed the address translation.
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -89,70 +92,28 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/helper.h                   | 2 +-
->  target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
->  target/riscv/vector_helper.c            | 8 +++++---
->  3 files changed, 8 insertions(+), 6 deletions(-)
+>  target/riscv/vector_helper.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index c5098380dd..f2910f5f30 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -82,7 +82,7 @@ DEF_HELPER_2(hyp_hlvx_wu, tl, env, tl)
->  #endif
->
->  /* Vector functions */
-> -DEF_HELPER_3(vsetvl, tl, env, tl, tl)
-> +DEF_HELPER_4(vsetvl, tl, env, tl, tl, i32)
->  DEF_HELPER_5(vlb_v_b, void, ptr, ptr, tl, env, i32)
->  DEF_HELPER_5(vlb_v_b_mask, void, ptr, ptr, tl, env, i32)
->  DEF_HELPER_5(vlb_v_h, void, ptr, ptr, tl, env, i32)
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 17ee3babef..6fa673f4b2 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -37,7 +37,7 @@ static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
->      } else {
->          s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
->      }
-> -    gen_helper_vsetvl(dst, cpu_env, s1, s2);
-> +    gen_helper_vsetvl(dst, cpu_env, s1, s2, tcg_constant_i32(get_xlen(ctx)));
->      gen_set_gpr(ctx, a->rd, dst);
->
->      tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-> @@ -64,7 +64,7 @@ static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
->      } else {
->          s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
->      }
-> -    gen_helper_vsetvl(dst, cpu_env, s1, s2);
-> +    gen_helper_vsetvl(dst, cpu_env, s1, s2, tcg_constant_i32(get_xlen(ctx)));
->      gen_set_gpr(ctx, a->rd, dst);
->
->      gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index b02ccefa4d..e49b431610 100644
+> index e49b431610..4cd6476b82 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -27,14 +27,16 @@
->  #include <math.h>
->
->  target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-> -                            target_ulong s2)
-> +                            target_ulong s2, uint32_t xlen)
->  {
->      int vlmax, vl;
->      RISCVCPU *cpu = env_archcpu(env);
->      uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
->      uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
-> -    bool vill = FIELD_EX64(s2, VTYPE, VILL);
-> -    target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
-> +    bool vill = (s2 >> (xlen - 1)) & 0x1;
-> +    target_ulong reserved = s2 &
-> +                            MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
-> +                                            xlen - 1 - R_VTYPE_RESERVED_SHIFT);
->
->      if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
->          /* only set vill bit. */
+> @@ -630,12 +630,12 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>                                           cpu_mmu_index(env, false));
+>                  if (host) {
+>  #ifdef CONFIG_USER_ONLY
+> -                    if (page_check_range(addr, nf * msz, PAGE_READ) < 0) {
+> +                    if (page_check_range(addr, offset, PAGE_READ) < 0) {
+>                          vl = i;
+>                          goto ProbeSuccess;
+>                      }
+>  #else
+> -                    probe_pages(env, addr, nf * msz, ra, MMU_DATA_LOAD);
+> +                    probe_pages(env, addr, offset, ra, MMU_DATA_LOAD);
+>  #endif
+>                  } else {
+>                      vl = i;
 > --
 > 2.25.1
 >
