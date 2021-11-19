@@ -1,50 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mo3RR-00008f-1X
-	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:56:33 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43020)
+	id 1mo3Sg-00031i-Jr
+	for mharc-qemu-riscv@gnu.org; Fri, 19 Nov 2021 07:57:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:43486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3RM-0008Tz-Qb; Fri, 19 Nov 2021 07:56:30 -0500
-Received: from [2607:f8b0:4864:20::d29] (port=41956
- helo=mail-io1-xd29.google.com)
+ id 1mo3Se-0002ww-O1; Fri, 19 Nov 2021 07:57:48 -0500
+Received: from [2607:f8b0:4864:20::12e] (port=45632
+ helo=mail-il1-x12e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mo3RK-0006rE-UE; Fri, 19 Nov 2021 07:56:28 -0500
-Received: by mail-io1-xd29.google.com with SMTP id y16so12599104ioc.8;
- Fri, 19 Nov 2021 04:56:20 -0800 (PST)
+ id 1mo3Sc-0000WJ-9C; Fri, 19 Nov 2021 07:57:48 -0500
+Received: by mail-il1-x12e.google.com with SMTP id i12so10081321ila.12;
+ Fri, 19 Nov 2021 04:57:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6z4zqyXL3Cm63oWRoGBaIwU9Ujq35OfklRfiSEn2yio=;
- b=lAQ8Edy22sk9iiRuh1A1uLdBHy00Ce7YTmBlrYLXKYyqsbJPHRA3qpfbITDgFwQSVt
- jCvE44IYlC8bQ3HqF98pW8Q8om6k687goWmIPXZ1HMfIv8DDJ/Iw2KyMtD3tEsO52xid
- O117UFfVS53txhHfN57UHkieXNkehqEqcHu0XAPatdErNTlOsSGRmulbOz49f9Rot2pL
- g0i2eHECECz3HCodWz30MzdqJcoQlEIdVEg2XgvnVMJYPHVbuUVlFxuWiFaah1TiuuDC
- mljwACAp4Xy7vOmekSDfzc4no3ZqPDOzz6U2ZxzI1cZP3c0Y/lYS96aF5phOM3XERc2X
- 5drw==
+ :cc; bh=xLDB3O9Lsd4voAHIKL5OdHryF4ObCBcKnsYLhxBafg4=;
+ b=fVLRdqGjzm9ZA7J2VXAVrXVX8GBQsQg4AN8B8J+IREUKLN8QhRySqkzzK+sg0CSmkA
+ l5d/xtYZwEQuDuqj2bMg9HOuxvVxm7HTmeiWe4q4IgMaK/9Lv0EZiMLxmbs6lFAm1EYL
+ DJVbhjO8dfe+Ik1j8GGVvc0jQIXETyfoU4F4e9wFwcKMSqEr3iUNVM577pX4WBd8ckKv
+ 0Yi8qPx/V65IB9RQkE0dKK1A29xwXUuMLB8CSsYT+KBP5nwJcumAbMwDGqIfp5zNqCRR
+ cE2ss6+FV5XhEBTtDyCDRcFxoEcbHP/3ULZLgYVrPku6vGozGZEgdZbknK3lTBAWSQAb
+ FTzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=6z4zqyXL3Cm63oWRoGBaIwU9Ujq35OfklRfiSEn2yio=;
- b=am8jSWRqTTIx++r0A7sgwyma4vekJKE6f2kLDaa9erR+L6WezyOKcP0eKS26aNyy89
- Zbm+LIXmTtYTzbeLA53nB6FrJwp4dBnZeBA9aL3/RL9lZ7X08hHgbrEQ8ZVAz5i7JWOn
- /lJi1dZM5fYa2wmkmtPjTcB88ylXgTB8KB/InHAIQK/JTXfbolboPYqi5Ajm+GT7lcYz
- /ESHLL1n8/EmQMgzAmydZdbBtTRSZ3uqQXqzOmk8/5bt4v3oFrjdcKIxc6Yhr6mjUGYW
- O47G8ScC93XVWcFiAGBhKjmm67TG60IJEwj/AHy+bgDoptXil6mKk8NSpv81T1dA7qS+
- Lt2A==
-X-Gm-Message-State: AOAM532DFLhk0UjWy0uI8gDXQ4BKe6yQBfgb9gDGyOn7LNEU4WZ9npXf
- yNp1WewSqiSFH91rjYXK2QylkNwmehXiOhe+Nj8=
-X-Google-Smtp-Source: ABdhPJy4EvGBH59jupZgNeAW7O8ysiHXkBlb0vKvcr46RuHi5x8SbMZugznF1TiFEjmy+VskaN0FSTFEPnsq/ApdA0c=
-X-Received: by 2002:a02:9f0c:: with SMTP id z12mr27119730jal.117.1637326579916; 
- Fri, 19 Nov 2021 04:56:19 -0800 (PST)
+ bh=xLDB3O9Lsd4voAHIKL5OdHryF4ObCBcKnsYLhxBafg4=;
+ b=0pblv3IIGdX4jtCT+zevoJDRZQbJsWVhlGdwFrDZKBaOkHUx03OcltTF6IFzRueJvT
+ w+JH/1uevor5MPApw/FrwJt5H8SRH7smTSCwCRjqIX8D+RBisJOSoZBZW3sWzabTBocA
+ fpLGzjy1EzfHn/g9uRjeyb8sCERbaKxqF2I82AvVPtgill6nRoDBVTmH6nav3eKaczfU
+ bWR83HIvvOVnNMCn85duyezKZaU01/10orCpynW+paQU0hEjKY34XJQGxnBymxA3hlD7
+ cwrTmPkNYMO+TaxRKZmsGVP0DVaRjRijt474EJVuzPHKz4opDZ8A5Qa9vd4K/m5FJeTx
+ /CwA==
+X-Gm-Message-State: AOAM533XxzWIkB6uz1ddbQ7InB2mcgM45eoT1TYjyiBeoyYB0pIwtKv0
+ zochltuHuMd5e0vBvLoh5aTRm05r8vUmwTi/fYw=
+X-Google-Smtp-Source: ABdhPJwaWL/Pa4qERaMVc2ExtRJLzznhffdoOY+FmjyE9vH2+Bw1xDsKnnbz0rNyix4IAHP55RQe4IrorTSfQz0nGzI=
+X-Received: by 2002:a92:cda2:: with SMTP id g2mr4651639ild.46.1637326664705;
+ Fri, 19 Nov 2021 04:57:44 -0800 (PST)
 MIME-Version: 1.0
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-21-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-21-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 22:55:52 +1000
-Message-ID: <CAKmqyKOrFTekP+JM+EGr7HLZ-MS2USjSzByRmMS+LbsRxV=rvQ@mail.gmail.com>
-Subject: Re: [PATCH v4 20/20] target/riscv: Enable uxl field write
+Date: Fri, 19 Nov 2021 22:57:17 +1000
+Message-ID: <CAKmqyKMg8bMjnkbDUBQhJy3VXnY=HTCne8D6uXFPceU4dezhTg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/20] Support UXL filed in xstatus
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -52,10 +51,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -76,66 +75,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 12:56:30 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 12:57:49 -0000
 
-On Fri, Nov 12, 2021 at 2:14 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Nov 12, 2021 at 1:52 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> In this patch set, we process the pc reigsters writes,
+> gdb reads and writes, and address calculation under
+> different UXLEN settings.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Awesome!
+
+Do you have steps on how to test this?
 
 Alistair
 
-> ---
->  target/riscv/cpu_bits.h | 2 ++
->  target/riscv/csr.c      | 8 +++++---
->  2 files changed, 7 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 9913fa9f77..5106f0e769 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -413,6 +413,8 @@ typedef enum {
->  #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
->  #define SSTATUS_MXR         0x00080000
+> The patch set v4 mainly address Richard comments on v3.
+> Patch 8, 18, 19, 20 have not been reviewed. Others have been reviewed or acked.
 >
-> +#define SSTATUS64_UXL       0x0000000300000000ULL
-> +
->  #define SSTATUS32_SD        0x80000000
->  #define SSTATUS64_SD        0x8000000000000000ULL
+> v4:
+>   Support SSTATUS64_UXL write
+>   Bump vmstate version for vill split
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 8f8f170768..e79532053a 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -553,15 +553,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->           * RV32: MPV and GVA are not in mstatus. The current plan is to
->           * add them to mstatush. For now, we just don't support it.
->           */
-> -        mask |= MSTATUS_MPV | MSTATUS_GVA;
-> +        mask |= MSTATUS_MPV | MSTATUS_GVA | MSTATUS64_UXL;
->      }
+> v3:
+>   Merge gen_pm_adjust_address into a canonical address function
+>   Adjust address for RVA with XLEN
+>   Split pm_enabled into pm_mask_enabled and pm_base_enabled
+>   Replace array of pm tcg globals with one scalar tcg global
+>   Split and change patch sequence
 >
->      mstatus = (mstatus & ~mask) | (val & mask);
+> v2:
+>   Split out vill from vtype
+>   Remove context switch when xlen changes at exception
+>   Use XL instead of OL in many places
+>   Use pointer masking and XLEN for vector address
+>   Define an common fuction to calculate address for ldst
 >
->      if (riscv_cpu_mxl(env) == MXL_RV64) {
-> -        /* SXL and UXL fields are for now read only */
-> +        /* SXL fields are for now read only */
->          mstatus = set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
-> -        mstatus = set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
->      }
->      env->mstatus = mstatus;
 >
-> @@ -840,6 +839,9 @@ static RISCVException write_sstatus(CPURISCVState *env, int csrno,
->                                      target_ulong val)
->  {
->      target_ulong mask = (sstatus_v1_10_mask);
-> +    if (cpu_get_xl(env) != MXL_RV32) {
-> +        mask |= SSTATUS64_UXL;
-> +    }
->      target_ulong newval = (env->mstatus & ~mask) | (val & mask);
->      return write_mstatus(env, CSR_MSTATUS, newval);
->  }
+> LIU Zhiwei (20):
+>   target/riscv: Don't save pc when exception return
+>   target/riscv: Sign extend pc for different XLEN
+>   target/riscv: Ignore the pc bits above XLEN
+>   target/riscv: Extend pc for runtime pc write
+>   target/riscv: Use gdb xml according to max mxlen
+>   target/riscv: Relax debug check for pm write
+>   target/riscv: Adjust csr write mask with XLEN
+>   target/riscv: Create current pm fields in env
+>   target/riscv: Alloc tcg global for cur_pm[mask|base]
+>   target/riscv: Calculate address according to XLEN
+>   target/riscv: Split pm_enabled into mask and base
+>   target/riscv: Split out the vill from vtype
+>   target/riscv: Fix RESERVED field length in VTYPE
+>   target/riscv: Adjust vsetvl according to XLEN
+>   target/riscv: Remove VILL field in VTYPE
+>   target/riscv: Ajdust vector atomic check with XLEN
+>   target/riscv: Fix check range for first fault only
+>   target/riscv: Adjust vector address with mask
+>   target/riscv: Adjust scalar reg in vector with XLEN
+>   target/riscv: Enable uxl field write
+>
+>  target/riscv/cpu.c                            | 23 +++++-
+>  target/riscv/cpu.h                            | 13 +++-
+>  target/riscv/cpu_bits.h                       |  2 +
+>  target/riscv/cpu_helper.c                     | 66 ++++++++++++----
+>  target/riscv/csr.c                            | 43 ++++++++++-
+>  target/riscv/gdbstub.c                        | 71 ++++++++++++-----
+>  target/riscv/helper.h                         |  6 +-
+>  .../riscv/insn_trans/trans_privileged.c.inc   |  7 +-
+>  target/riscv/insn_trans/trans_rva.c.inc       |  9 +--
+>  target/riscv/insn_trans/trans_rvd.c.inc       | 19 +----
+>  target/riscv/insn_trans/trans_rvf.c.inc       | 19 +----
+>  target/riscv/insn_trans/trans_rvi.c.inc       | 22 +-----
+>  target/riscv/insn_trans/trans_rvv.c.inc       | 51 ++++++++----
+>  target/riscv/machine.c                        | 15 +++-
+>  target/riscv/op_helper.c                      |  7 +-
+>  target/riscv/translate.c                      | 77 +++++++++----------
+>  target/riscv/vector_helper.c                  | 38 +++++----
+>  17 files changed, 300 insertions(+), 188 deletions(-)
+>
 > --
 > 2.25.1
 >
