@@ -1,51 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mnvZf-0005qG-8I
-	for mharc-qemu-riscv@gnu.org; Thu, 18 Nov 2021 23:32:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55016)
+	id 1mnvsE-0002wi-QR
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Nov 2021 23:51:42 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58762)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mnvZd-0005q1-Q3; Thu, 18 Nov 2021 23:32:29 -0500
-Received: from [2607:f8b0:4864:20::130] (port=38805
- helo=mail-il1-x130.google.com)
+ id 1mnvsD-0002vu-2y; Thu, 18 Nov 2021 23:51:41 -0500
+Received: from [2607:f8b0:4864:20::d29] (port=42966
+ helo=mail-io1-xd29.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mnvZb-00046v-Og; Thu, 18 Nov 2021 23:32:29 -0500
-Received: by mail-il1-x130.google.com with SMTP id j21so3463947ila.5;
- Thu, 18 Nov 2021 20:32:27 -0800 (PST)
+ id 1mnvsA-0002HP-Qk; Thu, 18 Nov 2021 23:51:40 -0500
+Received: by mail-io1-xd29.google.com with SMTP id x10so11246754ioj.9;
+ Thu, 18 Nov 2021 20:51:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hEbZqFQqVGx96rIVVAYF969dWUzYqcSoNlGoq/uNabI=;
- b=nh5YJ6fG/nEu+3uCVUOdrZqxBCp9p0jiB7NXfcyfR5ZmSigCYZl6mEdpud0YL3nXjP
- 6FZ/r/WQfF/e1lbdJywu12XP/URiswkB389/un70R7T27McqLa8j/vygAP7vutL2MoKU
- vQWEuKvMy4CGE+w4nt5/6EvmdEahD0xd9cAI5uwM40wd4OqJyIi1adyDY4/WYRL6RYLJ
- nIxqtwD56Se9iJr+3i2vqV13a2bdM1MMDrl9ASmi9UCX1ellacptBoB5QQD1SyV3azBY
- CUFADoTyyTTfXNSouFUfdpO6gJS+NW2HHFBRVug6BRor4GnHBdal5xJAPp6tv4vG6PNl
- bF8Q==
+ :cc; bh=7b8AlAOqtxVq3rNi5M5FG5xeYJynJCxL/jtM1b3n/3w=;
+ b=LoZuk3+ELx3FKgegmtUNNm8XdKcAF0oudLr/jE3ac6UfXrA0lwXlsbs4Zhat4vMx5v
+ gydJFPgbzh2IYk9HctRvbdoVSanwx6s8+KZWx23pHzP6Y1T+ksZNerS9mI9mPuyI9yqi
+ /owRvivWlNZoG9LuiECcmxqjBb93VJFm7XGahOtlVpXRtYUM0gYGIbyOBRxR6njYrOQh
+ PeVGVLa1cDWZXmb8Iy82ElAkV/xSJKhM2TimLgqvjn7t83FYt7TQA+p7RimCSFbwu54k
+ aFeUhpOcIhECvV8l8zhhYJDeGR38u6cR6JdLGdemdDlydUWDcf1db99YWyt3msUKinV5
+ Ha9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=hEbZqFQqVGx96rIVVAYF969dWUzYqcSoNlGoq/uNabI=;
- b=vIMBTnqXqBAbdqyy5NUZ/iYHlE0jZrJT7rbKYtztG2/Gg6L5SrMp0aQ6Y3DtopigPL
- C76CNbxeu6uSzo3hze0YEJz+tN8cKaOD6yoJN1Wp/WRxB94XhOglH1bQgb9czB+hxc+m
- EWw1ouzRbEcm8K94DkScwISQlrxoCgkR/XycTdKrA9tv5Hrvrdevv8kmcvIKpt0uQe7N
- Jaey/ZGRv3BLxAfjrCqLDN0A1cgXZeqWkdqa2fDq7JmZw2a/U2SORDjO5b9mO02HjN0X
- BBFuW/qIhWJO1m1ZMO0KN6mC2OCuPeWRW6Vu9qezRuUK7PUJ7xix6rNimF8hBEpaj0yO
- hXVw==
-X-Gm-Message-State: AOAM530ZMpkTmnBtmWn1pexMidW/QKavMzZBmuWJLvyQs+U8aKY1dcNx
- yr1Pal2mfVTPzrKKX3cLvf4R4HfxtBNkBvewYJ4=
-X-Google-Smtp-Source: ABdhPJxqZLaEWzP5ijNggrvf9zClZhy6TJoEvAfpc+sWKRvvX2MznyqS8zjskuCfw3hldZsS2DYdzk1Q2aSm+L7jrvY=
-X-Received: by 2002:a05:6e02:1e02:: with SMTP id
- g2mr2942282ila.290.1637296346484; 
- Thu, 18 Nov 2021 20:32:26 -0800 (PST)
+ bh=7b8AlAOqtxVq3rNi5M5FG5xeYJynJCxL/jtM1b3n/3w=;
+ b=eczZDP44SJEUrqAP6EcqBBfp2scIx0THqYqV/0jxv/dKkGHkQw66pcfyQK527ZQk0H
+ 8n/PaIuwJ7ZM0Y5re/ncohqMNemki3fzl1gNF8xpd4QJEbEw3pzeMuJRMwsTIaa6MZO3
+ jx3zMpWbeXjXNRF7dj3QL5fSqVSUopgk1DEZo2/W7xrL2yeQz/7Fvy7LaiOUZIHeXba4
+ +pu1FV4e1VE+pRFA4TAN8aPlaLAOK2aNbt5fWzj6wHzv5efjat+rU/MLPkjw4KCKECxd
+ evq9cPP3H9IzqVPA1SsLI1mAYMG7GOSOYbNzJelXJxRSKQsrPs2phQc4jdjw09OgNYow
+ hs3g==
+X-Gm-Message-State: AOAM530L1wwvvyEKkVohdtQWR5rCDV8pQS5RtZRiDWrp2XI2FyU4xsOH
+ Q7mIoqBq6ZbJpgmBifQcgqsFzT8PXZ3B3ZUmxa8=
+X-Google-Smtp-Source: ABdhPJw8Zv7YN3Pcdm5lVWrUyCBCOCLdZhkbveCj+h/M4gWbtHkCrlYg43yvdJLpNLz+qacEeaXCG5LDEUWL31v3eUI=
+X-Received: by 2002:a02:9f0c:: with SMTP id z12mr24888401jal.117.1637297497393; 
+ Thu, 18 Nov 2021 20:51:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
- <20211111155149.58172-11-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211111155149.58172-11-zhiwei_liu@c-sky.com>
+ <20211111155149.58172-12-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-12-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 19 Nov 2021 14:32:00 +1000
-Message-ID: <CAKmqyKNsqLCwSLT9o4CRk5nT77WdFNmNHuCDV6Rj1JRW0KdJBw@mail.gmail.com>
-Subject: Re: [PATCH v4 10/20] target/riscv: Calculate address according to XLEN
+Date: Fri, 19 Nov 2021 14:51:10 +1000
+Message-ID: <CAKmqyKN9MoJtfxTay2bo2n=EsQ5ZHX1MuM3NA0UHn1fzGxQ8VQ@mail.gmail.com>
+Subject: Re: [PATCH v4 11/20] target/riscv: Split pm_enabled into mask and base
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,10 +52,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Richard Henderson <richard.henderson@linaro.org>, 
  Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::130
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -77,12 +76,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Nov 2021 04:32:30 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 04:51:41 -0000
 
-On Fri, Nov 12, 2021 at 1:59 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Fri, Nov 12, 2021 at 2:05 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> Define one common function to compute a canonical address from a register
-> plus offset. Merge gen_pm_adjust_address into this function.
+> Use cached cur_pmmask and cur_pmbase to infer the
+> current PM mode.
+>
+> This may decrease the TCG IR by one when pm_enabled
+> is true and pm_base_enabled is false.
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
@@ -92,206 +94,104 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rva.c.inc |  9 +++------
->  target/riscv/insn_trans/trans_rvd.c.inc | 19 ++---------------
->  target/riscv/insn_trans/trans_rvf.c.inc | 19 ++---------------
->  target/riscv/insn_trans/trans_rvi.c.inc | 18 ++---------------
->  target/riscv/translate.c                | 27 ++++++++++++-------------
->  5 files changed, 22 insertions(+), 70 deletions(-)
+>  target/riscv/cpu.h        |  3 ++-
+>  target/riscv/cpu_helper.c | 25 +++++++------------------
+>  target/riscv/translate.c  | 12 ++++++++----
+>  3 files changed, 17 insertions(+), 23 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-> index 40fe132b04..1f64b8d332 100644
-> --- a/target/riscv/insn_trans/trans_rva.c.inc
-> +++ b/target/riscv/insn_trans/trans_rva.c.inc
-> @@ -20,12 +20,11 @@
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index fa5a6ba1c8..9fba876e08 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -411,7 +411,8 @@ FIELD(TB_FLAGS, MSTATUS_HS_FS, 11, 2)
+>  /* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
+>  FIELD(TB_FLAGS, XL, 13, 2)
+>  /* If PointerMasking should be applied */
+> -FIELD(TB_FLAGS, PM_ENABLED, 15, 1)
+> +FIELD(TB_FLAGS, PM_MASK_ENABLED, 15, 1)
+> +FIELD(TB_FLAGS, PM_BASE_ENABLED, 16, 1)
 >
->  static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
->  {
-> -    TCGv src1 = get_gpr(ctx, a->rs1, EXT_ZERO);
-> +    TCGv src1 = get_address(ctx, a->rs1, 0);
->
->      if (a->rl) {
->          tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+>  #ifdef TARGET_RISCV32
+>  #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 8320f56d9f..a40ed6d748 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -108,26 +108,15 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>          flags = FIELD_DP32(flags, TB_FLAGS, MSTATUS_HS_FS,
+>                             get_field(env->mstatus_hs, MSTATUS_FS));
 >      }
-> -    src1 = gen_pm_adjust_address(ctx, src1);
->      tcg_gen_qemu_ld_tl(load_val, src1, ctx->mem_idx, mop);
->      if (a->aq) {
->          tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ);
-> @@ -44,8 +43,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
->      TCGLabel *l1 = gen_new_label();
->      TCGLabel *l2 = gen_new_label();
->
-> -    src1 = get_gpr(ctx, a->rs1, EXT_ZERO);
-> -    src1 = gen_pm_adjust_address(ctx, src1);
-> +    src1 = get_address(ctx, a->rs1, 0);
->      tcg_gen_brcond_tl(TCG_COND_NE, load_res, src1, l1);
->
->      /*
-> @@ -83,10 +81,9 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
->                      MemOp mop)
->  {
->      TCGv dest = dest_gpr(ctx, a->rd);
-> -    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv src1 = get_address(ctx, a->rs1, 0);
->      TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->
-> -    src1 = gen_pm_adjust_address(ctx, src1);
->      func(dest, src1, src2, ctx->mem_idx, mop);
->
->      gen_set_gpr(ctx, a->rd, dest);
-> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
-> index 64fb0046f7..88a491375c 100644
-> --- a/target/riscv/insn_trans/trans_rvd.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
-> @@ -25,14 +25,7 @@ static bool trans_fld(DisasContext *ctx, arg_fld *a)
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVD);
->
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
+> -    if (riscv_has_ext(env, RVJ)) {
+> -        int priv = flags & TB_FLAGS_PRIV_MMU_MASK;
+> -        bool pm_enabled = false;
+> -        switch (priv) {
+> -        case PRV_U:
+> -            pm_enabled = env->mmte & U_PM_ENABLE;
+> -            break;
+> -        case PRV_S:
+> -            pm_enabled = env->mmte & S_PM_ENABLE;
+> -            break;
+> -        case PRV_M:
+> -            pm_enabled = env->mmte & M_PM_ENABLE;
+> -            break;
+> -        default:
+> -            g_assert_not_reached();
+> -        }
+> -        flags = FIELD_DP32(flags, TB_FLAGS, PM_ENABLED, pm_enabled);
 > -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> -
-> +    addr = get_address(ctx, a->rs1, a->imm);
->      tcg_gen_qemu_ld_i64(cpu_fpr[a->rd], addr, ctx->mem_idx, MO_TEQ);
+>  #endif
 >
->      mark_fs_dirty(ctx);
-> @@ -46,16 +39,8 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVD);
+> +    if (env->cur_pmmask < (xl == MXL_RV32 ? UINT32_MAX : UINT64_MAX)) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_MASK_ENABLED, 1);
+> +    }
+> +    if (env->cur_pmbase != 0) {
+> +        flags = FIELD_DP32(flags, TB_FLAGS, PM_BASE_ENABLED, 1);
+> +    }
+> +
+>      flags = FIELD_DP32(flags, TB_FLAGS, XL, xl);
 >
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> -
-> +    addr = get_address(ctx, a->rs1, a->imm);
->      tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEQ);
-> -
->      return true;
->  }
->
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-> index b5459249c4..0aac87f7db 100644
-> --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> @@ -31,14 +31,7 @@ static bool trans_flw(DisasContext *ctx, arg_flw *a)
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVF);
->
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> -
-> +    addr = get_address(ctx, a->rs1, a->imm);
->      dest = cpu_fpr[a->rd];
->      tcg_gen_qemu_ld_i64(dest, addr, ctx->mem_idx, MO_TEUL);
->      gen_nanbox_s(dest, dest);
-> @@ -54,16 +47,8 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
->      REQUIRE_FPU;
->      REQUIRE_EXT(ctx, RVF);
->
-> -    addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -    if (a->imm) {
-> -        TCGv temp = tcg_temp_new();
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> -
-> +    addr = get_address(ctx, a->rs1, a->imm);
->      tcg_gen_qemu_st_i64(cpu_fpr[a->rs2], addr, ctx->mem_idx, MO_TEUL);
-> -
->      return true;
->  }
->
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 40c81421f2..cb73a2f1ee 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -137,14 +137,7 @@ static bool trans_bgeu(DisasContext *ctx, arg_bgeu *a)
->  static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->  {
->      TCGv dest = dest_gpr(ctx, a->rd);
-> -    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> -
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> +    TCGv addr = get_address(ctx, a->rs1, a->imm);
->
->      tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
->      gen_set_gpr(ctx, a->rd, dest);
-> @@ -178,16 +171,9 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
->
->  static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->  {
-> -    TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv addr = get_address(ctx, a->rs1, a->imm);
->      TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
->
-> -    if (a->imm) {
-> -        TCGv temp = temp_new(ctx);
-> -        tcg_gen_addi_tl(temp, addr, a->imm);
-> -        addr = temp;
-> -    }
-> -    addr = gen_pm_adjust_address(ctx, addr);
-> -
->      tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
->      return true;
->  }
+>      *pflags = flags;
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 6cb74c6355..fd75f7c4bc 100644
+> index fd75f7c4bc..10c16e759d 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -284,21 +284,20 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->      ctx->base.is_jmp = DISAS_NORETURN;
->  }
+> @@ -87,7 +87,8 @@ typedef struct DisasContext {
+>      /* Space for 3 operands plus 1 extra for address computation. */
+>      TCGv temp[4];
+>      /* PointerMasking extension */
+> -    bool pm_enabled;
+> +    bool pm_mask_enabled;
+> +    bool pm_base_enabled;
+>  } DisasContext;
 >
-> -/*
-> - * Generates address adjustment for PointerMasking
-> - */
-> -static TCGv gen_pm_adjust_address(DisasContext *s, TCGv src)
-> -{
-> -    TCGv temp;
-> -    if (!s->pm_enabled) {
-> -        /* Load unmodified address */
-> -        return src;
-> -    } else {
-> -        temp = temp_new(s);
-> -        tcg_gen_andc_tl(temp, src, pm_mask);
-> -        tcg_gen_or_tl(temp, temp, pm_base);
-> -        return temp;
-> +/* Compute a canonical address from a register plus offset. */
-> +static TCGv get_address(DisasContext *ctx, int rs1, int imm)
-> +{
-> +    TCGv addr = temp_new(ctx);
-> +    TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
-> +
-> +    tcg_gen_addi_tl(addr, src1, imm);
-> +    if (ctx->pm_enabled) {
-> +        tcg_gen_and_tl(addr, addr, pm_mask);
-> +        tcg_gen_or_tl(addr, addr, pm_base);
-> +    } else if (get_xl(ctx) == MXL_RV32) {
-> +        tcg_gen_ext32u_tl(addr, addr);
+>  static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+> @@ -291,12 +292,14 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
+>      TCGv src1 = get_gpr(ctx, rs1, EXT_NONE);
+>
+>      tcg_gen_addi_tl(addr, src1, imm);
+> -    if (ctx->pm_enabled) {
+> +    if (ctx->pm_mask_enabled) {
+>          tcg_gen_and_tl(addr, addr, pm_mask);
+> -        tcg_gen_or_tl(addr, addr, pm_base);
+>      } else if (get_xl(ctx) == MXL_RV32) {
+>          tcg_gen_ext32u_tl(addr, addr);
 >      }
-> +    return addr;
+> +    if (ctx->pm_base_enabled) {
+> +        tcg_gen_or_tl(addr, addr, pm_base);
+> +    }
+>      return addr;
 >  }
 >
->  #ifndef CONFIG_USER_ONLY
+> @@ -643,7 +646,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      ctx->cs = cs;
+>      ctx->ntemp = 0;
+>      memset(ctx->temp, 0, sizeof(ctx->temp));
+> -    ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
+> +    ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
+> +    ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
+>      ctx->zero = tcg_constant_tl(0);
+>  }
+>
 > --
 > 2.25.1
 >
