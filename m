@@ -1,84 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mnQs4-0003GM-Pt
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Nov 2021 14:45:28 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49286)
+	id 1mnvQi-0000YW-Bl
+	for mharc-qemu-riscv@gnu.org; Thu, 18 Nov 2021 23:23:16 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53302)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mnQs0-0003Et-SY; Wed, 17 Nov 2021 14:45:26 -0500
-Received: from [2a00:1450:4864:20::42a] (port=46989
- helo=mail-wr1-x42a.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mnvQg-0000Ul-UN; Thu, 18 Nov 2021 23:23:14 -0500
+Received: from [2607:f8b0:4864:20::12e] (port=46842
+ helo=mail-il1-x12e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1mnQrv-0000ap-RH; Wed, 17 Nov 2021 14:45:23 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id u1so6804354wru.13;
- Wed, 17 Nov 2021 11:45:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mnvQc-0001uu-Pb; Thu, 18 Nov 2021 23:23:13 -0500
+Received: by mail-il1-x12e.google.com with SMTP id j7so1687876ilk.13;
+ Thu, 18 Nov 2021 20:23:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=4eFPrPtK65vZsTz3tzd39EIfmfxT6Ag0N8Oz3HpTPmE=;
- b=T6fvcFlfHH6tNxeNaxODATJLdEv3KMeiqya3PHCMeMYDEEg9e/v4t5AgpFrSvad47k
- ve1Uwu2PQ6wRXS1tdohF+5LKnSEQNGrGXcocVSjrHzsSOXcjKUGKouDYj+UAhtVrfHX6
- rM+CFrwtGWYxf/aoEzreppB/MgP6NwBbKlqmuTWbNoZ/g2w4J8lpBD7o1fIcVjkqdgfz
- jKniRtqqdg6F3xyC7mOxBkCBIgPZAa/sn0Ng6CEkkrgFVe1SAz9dpxCAvCs2QHy6yOyU
- 93cd6v0xPUa6NbcPOQaa/mmnXW6zTLCpzPdOSlkcFj/EgFRCgYbHxSQjTDGO78EYl8JG
- r46g==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=LyItgRRNqdA9+uKpXK4bnBiMkPyz6rmixizXX8KPRg0=;
+ b=gLNeRCKS+Q24HMTiMzuq4ujdbf1TNlBKu/fA8S1vOmMxdv/3REgmsP5ygO8QQG+69S
+ etKls4gXUGHZ6jn/28ujJy+P3TU78jugrePJUQh8uVSlmIE7BV08O3eS2gQQvJ+Bzquz
+ QNg3Y3079mdw4sN0MWe7L2wf26C6aKAVV45SRYGJkcUeOc1h9Rabq/9iyoV9iy6molMJ
+ mHOabJIiWIgBjPp+LA1dr2fiJ4CxgroGn+L3cKjoJzix/IkWUNhQEEYyYu2/OcNSWbp9
+ 4GUgF/5hthewOXzKEVZH+Oafpx/kYFgrKS2lEHaPeOJS3/bcYG3GiQhSm0U44rQO1NeQ
+ CCww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=4eFPrPtK65vZsTz3tzd39EIfmfxT6Ag0N8Oz3HpTPmE=;
- b=Hnvy7URdRTHLWWKMx6EEePu0kQTMlttzTkOHi3zWMcXfOI8Fmoher+0NfUdd/or7nm
- JFjuxpJjsBIC0ihSeYV4U5Omrjtnsu7kmmAq0YmQKWUU/0kBGsHjHxJhOmG6o38Kw9IH
- txo+BmWxDq68AuJNwt6MMZXv+EE+7muE6UYlQWncUPwwqhffLQmwE+iI7tT89wDOIA+y
- Jp8vsQQtPxvrOO72DHBVHWWrDnbI8U1kSGYAQdgp/Wz7wSwEEudftVXud2wyyplYnd/k
- 7j8TXVU1gUGUgbj3YnwYVBN+iD5XgyfWgP/sQ5mdyObQLHNhb0y7JRAZ+Vh9hEWTKbEb
- OvJg==
-X-Gm-Message-State: AOAM532/OryER7ED3eDud5xmFJt9i1EqQilnVzUPWOlWS521kwfup1Oa
- Avne84lB4WTsp0D1PxkLvNk=
-X-Google-Smtp-Source: ABdhPJx4Td9SZBHuJSo/ouqiBkqSg0oiNDdmIb5QTiuqqbcObKT9TstL0Ybugwt9Sl5TPQ2bQluWSg==
-X-Received: by 2002:a05:6000:186e:: with SMTP id
- d14mr23254239wri.376.1637178316802; 
- Wed, 17 Nov 2021 11:45:16 -0800 (PST)
-Received: from [192.168.1.36] (62.red-83-57-168.dynamicip.rima-tde.net.
- [83.57.168.62])
- by smtp.gmail.com with ESMTPSA id x13sm880056wrr.47.2021.11.17.11.45.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Nov 2021 11:45:16 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <575fcf95-f4f0-3d88-ab08-b4d21f2da354@amsat.org>
-Date: Wed, 17 Nov 2021 20:45:15 +0100
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=LyItgRRNqdA9+uKpXK4bnBiMkPyz6rmixizXX8KPRg0=;
+ b=hZSyD9FVJf/9KK/yn7znISLXgL5uJFS+Fvwyl2yQ9IZt3c0yg1PtkL1YH3lp7KSfP7
+ BbN4WS+r2vSOBlJb+Qh++aEasp4nzrxOGimaRby8o7/sGNU0IAvH2GmXGAcGw8t3wSwX
+ IJ7TS9uQwNOlx8psaRZbTPdc8IinQeDgjdQP+0khILAMIiTFwERQ2UUOJVAV+VkbxbNT
+ dm25AxqQ0pjpKKmLVugUU4kMF2mkmod02WxymRqE6qPQqkQ7AL53M/OK9B895pSdpzCB
+ h1a6m56TIWjF38CBFMmMsxartIIqZ6V4aWSVCKcxZKRfmQM/Y5Vc8Z4xjngZ1DN8rQTO
+ eobA==
+X-Gm-Message-State: AOAM532Y9uZ1q2zYvw+lAjf4Q0dBA1jC7FCVkTP+fyhTxEFT/aBFJFVe
+ kaenRMnLlvWSkBIQB8PJn2vJ1R4nkdUmMjMxOdw=
+X-Google-Smtp-Source: ABdhPJxW0w8kXN82B1202sFQjU0ZhoKQaM2zpgtGLs+Tm3rdmClQGBOC5tVUFUJmAULJaEeqlohlrriWYZxedBblOLY=
+X-Received: by 2002:a05:6e02:16c9:: with SMTP id
+ 9mr1147948ilx.221.1637295789031; 
+ Thu, 18 Nov 2021 20:23:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2 01/13] hw/sd/ssi-sd: Do not create SD card within
- controller's realize
-Content-Language: en-US
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
- qemu-block@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- qemu-arm@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20211117163409.3587705-1-armbru@redhat.com>
- <20211117163409.3587705-2-armbru@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20211117163409.3587705-2-armbru@redhat.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42a
+References: <20211111155149.58172-1-zhiwei_liu@c-sky.com>
+ <20211111155149.58172-9-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211111155149.58172-9-zhiwei_liu@c-sky.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 19 Nov 2021 14:22:42 +1000
+Message-ID: <CAKmqyKOGUzqTRk9ORk3p_cvg7jP63PfZs30ymajoa7Y4KcH8rg@mail.gmail.com>
+Subject: Re: [PATCH v4 08/20] target/riscv: Create current pm fields in env
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
  (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x42a.google.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-1.009,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,80 +77,218 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Nov 2021 19:45:26 -0000
+X-List-Received-Date: Fri, 19 Nov 2021 04:23:15 -0000
 
-Hi Markus, Peter,
+On Fri, Nov 12, 2021 at 2:00 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 
-On 11/17/21 17:33, Markus Armbruster wrote:
-> ssi_sd_realize() creates an "sd-card" device.  This is inappropriate,
-> and marked FIXME.
-> 
-> Move it to the boards that create these devices.  Prior art: commit
-> eb4f566bbb for device "generic-sdhci", and commit 26c607b86b for
-> device "pl181".
-> 
-> The device remains not user-creatable, because its users should (and
-> do) wire up its GPIO chip-select line.
-> 
-> Cc: Peter Maydell <peter.maydell@linaro.org>
-> Cc: Alistair Francis <Alistair.Francis@wdc.com>
-> Cc: Bin Meng <bin.meng@windriver.com>
-> Cc: Palmer Dabbelt <palmer@dabbelt.com>
-> Cc: "Philippe Mathieu-Daudé" <f4bug@amsat.org>
-> Cc: qemu-arm@nongnu.org
-> Cc: qemu-riscv@nongnu.org
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Alistair
 
 > ---
->  hw/arm/stellaris.c  | 15 ++++++++++++++-
->  hw/riscv/sifive_u.c | 13 ++++++++++++-
->  hw/sd/ssi-sd.c      | 29 +----------------------------
->  3 files changed, 27 insertions(+), 30 deletions(-)
-> 
-> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-> index 78827ace6b..b6c8a5d609 100644
-> --- a/hw/arm/stellaris.c
-> +++ b/hw/arm/stellaris.c
-> @@ -10,6 +10,7 @@
->  #include "qemu/osdep.h"
->  #include "qapi/error.h"
->  #include "hw/sysbus.h"
-> +#include "hw/sd/sd.h"
->  #include "hw/ssi/ssi.h"
->  #include "hw/arm/boot.h"
->  #include "qemu/timer.h"
-> @@ -1157,6 +1158,9 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
->              void *bus;
->              DeviceState *sddev;
->              DeviceState *ssddev;
-> +            DriveInfo *dinfo;
-> +            DeviceState *carddev;
-> +            BlockBackend *blk;
->  
->              /*
->               * Some boards have both an OLED controller and SD card connected to
-> @@ -1221,8 +1225,17 @@ static void stellaris_init(MachineState *ms, stellaris_board_info *board)
->               *  - Make the ssd0323 OLED controller chipselect active-low
->               */
->              bus = qdev_get_child_bus(dev, "ssi");
-> -
->              sddev = ssi_create_peripheral(bus, "ssi-sd");
+>  target/riscv/cpu.c        |  1 +
+>  target/riscv/cpu.h        |  4 ++++
+>  target/riscv/cpu_helper.c | 43 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/csr.c        | 19 +++++++++++++++++
+>  target/riscv/machine.c    | 10 +++++++++
+>  5 files changed, 77 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 0d2d175fa2..4f01abc989 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -393,6 +393,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+>      /* mmte is supposed to have pm.current hardwired to 1 */
+>      env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
+>  #endif
+> +    riscv_cpu_update_mask(env);
+>      cs->exception_index = RISCV_EXCP_NONE;
+>      env->load_res = -1;
+>      set_default_nan_mode(1, &env->fp_status);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 8befff0166..fa5a6ba1c8 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -250,6 +250,8 @@ struct CPURISCVState {
+>      target_ulong upmmask;
+>      target_ulong upmbase;
+>  #endif
+> +    target_ulong cur_pmmask;
+> +    target_ulong cur_pmbase;
+>
+>      float_status fp_status;
+>
+> @@ -441,6 +443,8 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
+>  void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>                            target_ulong *cs_base, uint32_t *pflags);
+>
+> +void riscv_cpu_update_mask(CPURISCVState *env);
 > +
-> +            dinfo = drive_get(IF_SD, 0, 0);
-> +            blk = dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
-> +            carddev = qdev_new(TYPE_SD_CARD);
-> +            qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal);
-
-I guess a already asked this once but don't remember now... What is the
-point of creating a SD card without drive? Is this due to the old design
-issue we hotplug the drive to the SD card and not the SD card on the SD
-bus?
-
-> +            qdev_prop_set_bit(carddev, "spi", true);
-> +            qdev_realize_and_unref(carddev,
-> +                                   qdev_get_child_bus(sddev, "sd-bus"),
-> +                                   &error_fatal);
+>  RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>                             target_ulong *ret_value,
+>                             target_ulong new_value, target_ulong write_mask);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 79aba9c880..8320f56d9f 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -133,6 +133,48 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>      *pflags = flags;
+>  }
+>
+> +void riscv_cpu_update_mask(CPURISCVState *env)
+> +{
+> +    target_ulong mask = -1, base = 0;
+> +    /*
+> +     * TODO: Current RVJ spec does not specify
+> +     * how the extension interacts with XLEN.
+> +     */
+> +#ifndef CONFIG_USER_ONLY
+> +    if (riscv_has_ext(env, RVJ)) {
+> +        switch (env->priv) {
+> +        case PRV_M:
+> +            if (env->mmte & M_PM_ENABLE) {
+> +                mask = env->mpmmask;
+> +                base = env->mpmbase;
+> +            }
+> +            break;
+> +        case PRV_S:
+> +            if (env->mmte & S_PM_ENABLE) {
+> +                mask = env->spmmask;
+> +                base = env->spmbase;
+> +            }
+> +            break;
+> +        case PRV_U:
+> +            if (env->mmte & U_PM_ENABLE) {
+> +                mask = env->upmmask;
+> +                base = env->upmbase;
+> +            }
+> +            break;
+> +        default:
+> +            g_assert_not_reached();
+> +        }
+> +    }
+> +#endif
+> +    if (cpu_get_xl(env) == MXL_RV32) {
+> +        env->cur_pmmask = mask & UINT32_MAX;
+> +        env->cur_pmbase = base & UINT32_MAX;
+> +    } else {
+> +        env->cur_pmmask = mask;
+> +        env->cur_pmbase = base;
+> +    }
+> +}
 > +
+>  #ifndef CONFIG_USER_ONLY
+>  static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+>  {
+> @@ -331,6 +373,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+>      }
+>      /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+>      env->priv = newpriv;
+> +    riscv_cpu_update_mask(env);
+>
+>      /*
+>       * Clear the load reservation - otherwise a reservation placed in one
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 74c0b788fd..6bb2d09519 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1496,6 +1496,7 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
+>      /* hardwiring pm.instruction bit to 0, since it's not supported yet */
+>      wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
+>      env->mmte = wpri_val | PM_EXT_DIRTY;
+> +    riscv_cpu_update_mask(env);
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+>      mstatus = env->mstatus | MSTATUS_XS;
+> @@ -1571,6 +1572,9 @@ static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
+>      uint64_t mstatus;
+>
+>      env->mpmmask = val;
+> +    if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
+> +        env->cur_pmmask = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> @@ -1596,6 +1600,9 @@ static RISCVException write_spmmask(CPURISCVState *env, int csrno,
+>          return RISCV_EXCP_NONE;
+>      }
+>      env->spmmask = val;
+> +    if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
+> +        env->cur_pmmask = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> @@ -1621,6 +1628,9 @@ static RISCVException write_upmmask(CPURISCVState *env, int csrno,
+>          return RISCV_EXCP_NONE;
+>      }
+>      env->upmmask = val;
+> +    if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
+> +        env->cur_pmmask = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> @@ -1642,6 +1652,9 @@ static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
+>      uint64_t mstatus;
+>
+>      env->mpmbase = val;
+> +    if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
+> +        env->cur_pmbase = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> @@ -1667,6 +1680,9 @@ static RISCVException write_spmbase(CPURISCVState *env, int csrno,
+>          return RISCV_EXCP_NONE;
+>      }
+>      env->spmbase = val;
+> +    if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
+> +        env->cur_pmbase = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> @@ -1692,6 +1708,9 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+>          return RISCV_EXCP_NONE;
+>      }
+>      env->upmbase = val;
+> +    if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
+> +        env->cur_pmbase = val;
+> +    }
+>      env->mmte |= PM_EXT_DIRTY;
+>
+>      /* Set XS and SD bits, since PM CSRs are dirty */
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 7b4c739564..19e982d3f0 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -164,10 +164,20 @@ static const VMStateDescription vmstate_hyper = {
+>      }
+>  };
+>
+> +static int riscv_cpu_post_load(void *opaque, int version_id)
+> +{
+> +    RISCVCPU *cpu = opaque;
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    riscv_cpu_update_mask(env);
+> +    return 0;
+> +}
+> +
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+>      .version_id = 3,
+>      .minimum_version_id = 3,
+> +    .post_load = riscv_cpu_post_load,
+>      .fields = (VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+>          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+> --
+> 2.25.1
+>
+>
 
