@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1moL5e-0004G9-0G
-	for mharc-qemu-riscv@gnu.org; Sat, 20 Nov 2021 02:47:14 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46414)
+	id 1moL5f-0004NI-LW
+	for mharc-qemu-riscv@gnu.org; Sat, 20 Nov 2021 02:47:15 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46442)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1moL5b-00045A-Pz; Sat, 20 Nov 2021 02:47:11 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:4107)
+ id 1moL5d-0004Du-K7; Sat, 20 Nov 2021 02:47:13 -0500
+Received: from szxga03-in.huawei.com ([45.249.212.189]:3203)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1moL5V-0006f1-Kh; Sat, 20 Nov 2021 02:47:11 -0500
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.55])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4Hx5Fq45KYz9193;
- Sat, 20 Nov 2021 15:46:39 +0800 (CST)
+ id 1moL5b-0006gF-2r; Sat, 20 Nov 2021 02:47:13 -0500
+Received: from dggemv703-chm.china.huawei.com (unknown [172.30.72.54])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4Hx5DH4rJbz8vTM;
+ Sat, 20 Nov 2021 15:45:19 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
+ dggemv703-chm.china.huawei.com (10.3.19.46) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Sat, 20 Nov 2021 15:47:02 +0800
+ 15.1.2308.20; Sat, 20 Nov 2021 15:47:06 +0800
 Received: from huawei.com (10.174.186.236) by kwepemm600017.china.huawei.com
  (7.193.23.234) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.15; Sat, 20 Nov
- 2021 15:47:01 +0800
+ 2021 15:47:04 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -28,10 +28,9 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <wanghaibin.wang@huawei.com>, <wanbo13@huawei.com>,
  Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v1 07/12] target/riscv: Support setting external interrupt by
- KVM
-Date: Sat, 20 Nov 2021 15:46:39 +0800
-Message-ID: <20211120074644.729-8-jiangyifei@huawei.com>
+Subject: [PATCH v1 09/12] target/riscv: Add host cpu type
+Date: Sat, 20 Nov 2021 15:46:41 +0800
+Message-ID: <20211120074644.729-10-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20211120074644.729-1-jiangyifei@huawei.com>
 References: <20211120074644.729-1-jiangyifei@huawei.com>
@@ -42,8 +41,8 @@ X-Originating-IP: [10.174.186.236]
 X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
  kwepemm600017.china.huawei.com (7.193.23.234)
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.188;
- envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.189;
+ envelope-from=jiangyifei@huawei.com; helo=szxga03-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -62,171 +61,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Nov 2021 07:47:12 -0000
+X-List-Received-Date: Sat, 20 Nov 2021 07:47:14 -0000
 
-Extend riscv_cpu_update_mip() to support setting external interrupt
-by KVM. It will call kvm_riscv_set_irq() to change the IRQ state in
-the KVM module When kvm is enabled and the MIP_SEIP bit is set in "mask"
-
-In addition, bacause target/riscv/cpu_helper.c is used to TCG, so move
-riscv_cpu_update_mip() to target/riscv/cpu.c from target/riscv/cpu_helper.c
+'host' type cpu is set isa to RV32 or RV64 simply, more isa info
+will obtain from KVM in kvm_arch_init_vcpu()
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Mingwang Li <limingwang@huawei.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c        | 34 ++++++++++++++++++++++++++++++++++
- target/riscv/cpu_helper.c | 27 ---------------------------
- target/riscv/kvm-stub.c   |  5 +++++
- target/riscv/kvm.c        | 20 ++++++++++++++++++++
- target/riscv/kvm_riscv.h  |  1 +
- 5 files changed, 60 insertions(+), 27 deletions(-)
+ target/riscv/cpu.c | 15 +++++++++++++++
+ target/riscv/cpu.h |  1 +
+ 2 files changed, 16 insertions(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1c944872a3..a464845c99 100644
+index a464845c99..6512182c62 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -21,6 +21,7 @@
- #include "qemu/qemu-print.h"
- #include "qemu/ctype.h"
- #include "qemu/log.h"
-+#include "qemu/main-loop.h"
- #include "cpu.h"
- #include "internals.h"
- #include "exec/exec-all.h"
-@@ -131,6 +132,39 @@ static void set_feature(CPURISCVState *env, int feature)
-     env->features |= (1ULL << feature);
+@@ -247,6 +247,18 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
  }
+ #endif
  
-+#ifndef CONFIG_USER_ONLY
-+uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value)
++#if defined(CONFIG_KVM)
++static void riscv_host_cpu_init(Object *obj)
 +{
-+    CPURISCVState *env = &cpu->env;
-+    CPUState *cs = CPU(cpu);
-+    uint32_t old = env->mip;
-+    bool locked = false;
-+
-+    if (!qemu_mutex_iothread_locked()) {
-+        locked = true;
-+        qemu_mutex_lock_iothread();
-+    }
-+
-+    env->mip = (env->mip & ~mask) | (value & mask);
-+
-+    if (kvm_enabled() && (mask & MIP_SEIP)) {
-+        kvm_riscv_set_irq(RISCV_CPU(cpu), IRQ_S_EXT, value & MIP_SEIP);
-+    }
-+
-+    if (env->mip) {
-+        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-+    } else {
-+        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-+    }
-+
-+    if (locked) {
-+        qemu_mutex_unlock_iothread();
-+    }
-+
-+    return old;
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++#if defined(TARGET_RISCV32)
++    set_misa(env, MXL_RV32, 0);
++#elif defined(TARGET_RISCV64)
++    set_misa(env, MXL_RV64, 0);
++#endif
 +}
 +#endif
 +
- static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
+ static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
  {
- #ifndef CONFIG_USER_ONLY
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 9eeed38c7e..5e36c35b15 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -286,33 +286,6 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint32_t interrupts)
-     }
- }
+     ObjectClass *oc;
+@@ -844,6 +856,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .class_init = riscv_cpu_class_init,
+     },
+     DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
++#if defined(CONFIG_KVM)
++    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
++#endif
+ #if defined(TARGET_RISCV32)
+     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2807eb1bcb..e7dba35acb 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -45,6 +45,7 @@
+ #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
+ #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
+ #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
++#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
  
--uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value)
--{
--    CPURISCVState *env = &cpu->env;
--    CPUState *cs = CPU(cpu);
--    uint32_t old = env->mip;
--    bool locked = false;
--
--    if (!qemu_mutex_iothread_locked()) {
--        locked = true;
--        qemu_mutex_lock_iothread();
--    }
--
--    env->mip = (env->mip & ~mask) | (value & mask);
--
--    if (env->mip) {
--        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
--    } else {
--        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
--    }
--
--    if (locked) {
--        qemu_mutex_unlock_iothread();
--    }
--
--    return old;
--}
--
- void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
-                              uint32_t arg)
- {
-diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
-index 39b96fe3f4..4e8fc31a21 100644
---- a/target/riscv/kvm-stub.c
-+++ b/target/riscv/kvm-stub.c
-@@ -23,3 +23,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
- {
-     abort();
- }
-+
-+void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-+{
-+    abort();
-+}
-diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 7f3ffcc2b4..8da2648d1a 100644
---- a/target/riscv/kvm.c
-+++ b/target/riscv/kvm.c
-@@ -458,6 +458,26 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-     env->satp = 0;
- }
- 
-+void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-+{
-+    int ret;
-+    unsigned virq = level ? KVM_INTERRUPT_SET : KVM_INTERRUPT_UNSET;
-+
-+    if (irq != IRQ_S_EXT) {
-+        return;
-+    }
-+
-+    if (!kvm_enabled()) {
-+        return;
-+    }
-+
-+    ret = kvm_vcpu_ioctl(CPU(cpu), KVM_INTERRUPT, &virq);
-+    if (ret < 0) {
-+        perror("Set irq failed");
-+        abort();
-+    }
-+}
-+
- bool kvm_arch_cpu_check_are_resettable(void)
- {
-     return true;
-diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
-index f38c82bf59..ed281bdce0 100644
---- a/target/riscv/kvm_riscv.h
-+++ b/target/riscv/kvm_riscv.h
-@@ -20,5 +20,6 @@
- #define QEMU_KVM_RISCV_H
- 
- void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
-+void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
- 
- #endif
+ #if defined(TARGET_RISCV32)
+ # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
 -- 
 2.19.1
 
