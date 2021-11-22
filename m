@@ -1,73 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1moybN-0005t5-7V
-	for mharc-qemu-riscv@gnu.org; Sun, 21 Nov 2021 20:58:37 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38048)
+	id 1mp1ot-00041P-8I
+	for mharc-qemu-riscv@gnu.org; Mon, 22 Nov 2021 00:24:48 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:43688)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1moybI-0005sV-R6; Sun, 21 Nov 2021 20:58:33 -0500
-Received: from [2607:f8b0:4864:20::d36] (port=40564
- helo=mail-io1-xd36.google.com)
+ id 1mp1oo-00040y-UL; Mon, 22 Nov 2021 00:24:43 -0500
+Received: from [2607:f8b0:4864:20::d29] (port=33333
+ helo=mail-io1-xd29.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1moybH-00009e-49; Sun, 21 Nov 2021 20:58:32 -0500
-Received: by mail-io1-xd36.google.com with SMTP id p23so21283358iod.7;
- Sun, 21 Nov 2021 17:58:30 -0800 (PST)
+ id 1mp1on-0007n5-Fd; Mon, 22 Nov 2021 00:24:42 -0500
+Received: by mail-io1-xd29.google.com with SMTP id m9so21809564iop.0;
+ Sun, 21 Nov 2021 21:24:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=u1Ygz5hQs1Cxb2pKI34tUnAvp8b3L7Iq85EX8qUfHF4=;
- b=JIXcVcqtu3U4zp4JLEDhMciG+L2ZGYNewNCYEpYcNHJCB0lKhrqxKZBD+9OHg/RoSX
- Adzo9UapQ+myj71zeXNOZF9QRl/zmXb4LNvuDjlURowg895pxfv6v0LT4SCns34Akk4C
- ++umMZhGkQyuMuVyjNeCi4Z4c/0x4FNkvFfpDaVsvs3wGsFp6qP9FAkLRJgfvLfx32Ru
- 9ydyqsKyii9wxjPR+Whxwuw5s2dUEHhouFO7+9NmSagr1EXbXtCQW+9n/n6AUMeuuB5S
- pSWJtwsYoqnU5B6i3cLSUZhxRxyNLElu39j4x28u+l0rnuFnzXzOX5CZH7sVT58KpF5N
- 6hHA==
+ :cc:content-transfer-encoding;
+ bh=QRgEjlYAf56it6F+JCW1JomV/SUdQ3mSwbq6WuhvgW0=;
+ b=ouSTNCcNm7ZPjqIcPOgOkyTUEwTHCQhHYz91dRMCW4PhFFpN1xt8fhoEBpLYu2Kxjl
+ AM3JQE2SKdGY4LQcU1iA2sZokfWeQTYAzSR9eG06piIk1hXDhMqqPSzmB6hjDSGsGqSV
+ ObEzvGho8V6HXc/sBZxsPasNRHd9v+Eqk9txLws4pagv1r9EFmBTu9uQN2orMcGPtyjb
+ q8myXoDw+FlXzlpDdvb8jOiEiDHTg6jsFELHpGxsyuqmeq2MoieS1e2J/2npV8SF2f9N
+ Oepr9M4FoAeiWYYj4lR21BvQYDfDAp/OWDcIanoPmaVWPUMPvqh303a8vRqXrESRGKQ4
+ 9Geg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=u1Ygz5hQs1Cxb2pKI34tUnAvp8b3L7Iq85EX8qUfHF4=;
- b=LoGPM0K+3wVqluEqiVyhVovJTiSMRPIH8KFv1elBBg7SyguOAmV41iRgVJtTtKV38X
- UqlvlUVA/6Ddv/Y2+1mgQqifIMv3seb6/i0VHkMuOi0Wi6lho8t//Z+SAYLXT6je+bZZ
- HcDqSJt8bPCGxMxbR3Q0q+HCzBPN98KVL8GTXGgTHE4wVJTip/wPNrtVe+uVzLsj823u
- FeEnZHxavPwutU1OG4PZIG65CZPRM9bKJB1SUhG0BXY5cdtU/+UDMbaycF/q7c9HX7pU
- S/aeYKtpUUMuAqNbQFIzBTTYqxKKvasGXuIEt9FJ/IjxJQOuibnn/QfbTrwslo42wHuI
- tU2Q==
-X-Gm-Message-State: AOAM5303nkMJUlUftvN4r1RwTbr+o7TJSFugb75G1IZ45thSrjxCVIHW
- qkOV80aJQ+vPxBf1I9L6Ukd/jrrcvzQCUi0c0wk=
-X-Google-Smtp-Source: ABdhPJz3g2Ha3q83kvyr3JQv/KF3jo+U4E66XHPCQcC9vfw2VrFKVmL2ywm/RXje+b+HZjSf8KlhHXKUaWPd+ex0k3k=
-X-Received: by 2002:a05:6638:32a2:: with SMTP id
- f34mr44342976jav.63.1637546309727; 
- Sun, 21 Nov 2021 17:58:29 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=QRgEjlYAf56it6F+JCW1JomV/SUdQ3mSwbq6WuhvgW0=;
+ b=2S5LU6TKzq+OgTvVxyh73c5vM8OgxHqBRUs7UVyGsibvGulBdnt0Y9A3VEkTQ9PXaD
+ 6gjRi02O9xAhZc5W4boAl5YOPUh3WxKHstMUOpCQ42nO/HAB3f0J9HC3TxtZHq4FdCG5
+ /hJ52vrwD4siOxaSwgbkDtbilv8uRYcExO5aJalZ7wFv3DvTrEPoUelv1R0M/CGJTrlW
+ b5PP+GcOKfU+dvedclKRuQsT6uM39ZEv2rPq7tC+IXVIbWdEBtapcPv+/I0tkZ73s30H
+ oTy0csDN5+JDSqi0tTpPhmg9F5V0kds+pjLiiJbvvAjnJMYuOBCeJL/DgKNdYskPIA5s
+ qteQ==
+X-Gm-Message-State: AOAM532tNnPCViTUb5s29Tk1iSmNV3xTytd+57yI8JiL9NDHcDZqxrbT
+ s7d/NBrVxh9cywkS4JFDjLzIeKburK34RMvVInk=
+X-Google-Smtp-Source: ABdhPJygwGJkAvnktod+e3YvBfspNEP3TQWifZda7DsQRMu90ucQjBdKlj4Mluo64Hvq2wXaWMRVR0oHV4itDX9e1LA=
+X-Received: by 2002:a6b:f212:: with SMTP id q18mr19451148ioh.16.1637558679737; 
+ Sun, 21 Nov 2021 21:24:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20211116080621.2521-1-liweiwei@iscas.ac.cn>
- <20211116080621.2521-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20211116080621.2521-2-liweiwei@iscas.ac.cn>
+References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211112145902.205131-3-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211112145902.205131-3-frederic.petrot@univ-grenoble-alpes.fr>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 22 Nov 2021 11:58:03 +1000
-Message-ID: <CAKmqyKPDJ801SFJTBYfkcKQ9B295J+TKoAiY=syduuKSw3pS7Q@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 1/7] target/riscv: rvk: add cfg properties for zbk*
- and zk*
-To: liweiwei <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+Date: Mon, 22 Nov 2021 15:24:13 +1000
+Message-ID: <CAKmqyKOzeSYYW_cjv9qrnX8poLxpLo1X10sRf23V4C9B571B9g@mail.gmail.com>
+Subject: Re: [PATCH v5 02/18] exec/memop: Adding signed quad and octo defines
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, lazyparser@gmail.com, 
- luruibo2000@163.com, lustrew@foxmail.com
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Fabien Portas <fabien.portas@grenoble-inp.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
+Content-Transfer-Encoding: quoted-printable
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+X-Spam_score_int: -9
+X-Spam_score: -1.0
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-1.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001, UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,83 +82,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Nov 2021 01:58:33 -0000
+X-List-Received-Date: Mon, 22 Nov 2021 05:24:45 -0000
 
-On Tue, Nov 16, 2021 at 6:11 PM liweiwei <liweiwei@iscas.ac.cn> wrote:
+On Sat, Nov 13, 2021 at 1:13 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+<frederic.petrot@univ-grenoble-alpes.fr> wrote:
 >
-> Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
-> Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
+> Adding defines to handle signed 64-bit and unsigned 128-bit quantities in
+> memory accesses.
+>
+> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
+ble-alpes.fr>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 23 +++++++++++++++++++++++
->  target/riscv/cpu.h | 13 +++++++++++++
->  2 files changed, 36 insertions(+)
+>  include/exec/memop.h | 7 +++++++
+>  1 file changed, 7 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f812998123..a5ec182a86 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -491,6 +491,29 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              cpu->cfg.ext_d = true;
->          }
+> diff --git a/include/exec/memop.h b/include/exec/memop.h
+> index 72c2f0ff3d..2a885f3917 100644
+> --- a/include/exec/memop.h
+> +++ b/include/exec/memop.h
+> @@ -86,28 +86,35 @@ typedef enum MemOp {
+>      MO_UW    =3D MO_16,
+>      MO_UL    =3D MO_32,
+>      MO_UQ    =3D MO_64,
+> +    MO_UO    =3D MO_128,
+>      MO_SB    =3D MO_SIGN | MO_8,
+>      MO_SW    =3D MO_SIGN | MO_16,
+>      MO_SL    =3D MO_SIGN | MO_32,
+> +    MO_SQ    =3D MO_SIGN | MO_64,
+> +    MO_SO    =3D MO_SIGN | MO_128,
 >
-> +        if (cpu->cfg.ext_zk) {
-> +            cpu->cfg.ext_zkn = true;
-> +            cpu->cfg.ext_zkr = true;
-> +            cpu->cfg.ext_zkt = true;
-> +        }
-> +
-> +        if (cpu->cfg.ext_zkn) {
-> +            cpu->cfg.ext_zbkb = true;
-> +            cpu->cfg.ext_zbkc = true;
-> +            cpu->cfg.ext_zbkx = true;
-> +            cpu->cfg.ext_zkne = true;
-> +            cpu->cfg.ext_zknd = true;
-> +            cpu->cfg.ext_zknh = true;
-> +        }
-> +
-> +        if (cpu->cfg.ext_zks) {
-> +            cpu->cfg.ext_zbkb = true;
-> +            cpu->cfg.ext_zbkc = true;
-> +            cpu->cfg.ext_zbkx = true;
-> +            cpu->cfg.ext_zksed = true;
-> +            cpu->cfg.ext_zksh = true;
-> +        }
-> +
->          /* Set the ISA extensions, checks should have happened above */
->          if (cpu->cfg.ext_i) {
->              ext |= RVI;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 0760c0af93..74e8be4847 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -308,7 +308,20 @@ struct RISCVCPU {
->          bool ext_zba;
->          bool ext_zbb;
->          bool ext_zbc;
-> +        bool ext_zbkb;
-> +        bool ext_zbkc;
-> +        bool ext_zbkx;
->          bool ext_zbs;
-> +        bool ext_zk;
-> +        bool ext_zkn;
-> +        bool ext_zknd;
-> +        bool ext_zkne;
-> +        bool ext_zknh;
-> +        bool ext_zkr;
-> +        bool ext_zks;
-> +        bool ext_zksed;
-> +        bool ext_zksh;
-> +        bool ext_zkt;
->          bool ext_counters;
->          bool ext_ifencei;
->          bool ext_icsr;
+>      MO_LEUW  =3D MO_LE | MO_UW,
+>      MO_LEUL  =3D MO_LE | MO_UL,
+>      MO_LEUQ  =3D MO_LE | MO_UQ,
+>      MO_LESW  =3D MO_LE | MO_SW,
+>      MO_LESL  =3D MO_LE | MO_SL,
+> +    MO_LESQ  =3D MO_LE | MO_SQ,
+>
+>      MO_BEUW  =3D MO_BE | MO_UW,
+>      MO_BEUL  =3D MO_BE | MO_UL,
+>      MO_BEUQ  =3D MO_BE | MO_UQ,
+>      MO_BESW  =3D MO_BE | MO_SW,
+>      MO_BESL  =3D MO_BE | MO_SL,
+> +    MO_BESQ  =3D MO_BE | MO_SQ,
+>
+>  #ifdef NEED_CPU_H
+>      MO_TEUW  =3D MO_TE | MO_UW,
+>      MO_TEUL  =3D MO_TE | MO_UL,
+>      MO_TEUQ  =3D MO_TE | MO_UQ,
+> +    MO_TEUO  =3D MO_TE | MO_UO,
+>      MO_TESW  =3D MO_TE | MO_SW,
+>      MO_TESL  =3D MO_TE | MO_SL,
+> +    MO_TESQ  =3D MO_TE | MO_SQ,
+>  #endif
+>
+>      MO_SSIZE =3D MO_SIZE | MO_SIGN,
 > --
-> 2.17.1
+> 2.33.1
 >
 >
 
