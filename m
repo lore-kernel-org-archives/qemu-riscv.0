@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mplfE-0002ul-Ov
-	for mharc-qemu-riscv@gnu.org; Wed, 24 Nov 2021 01:21:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54886)
+	id 1mplgf-0003tc-4f
+	for mharc-qemu-riscv@gnu.org; Wed, 24 Nov 2021 01:23:21 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55144)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mplfD-0002uZ-NP; Wed, 24 Nov 2021 01:21:51 -0500
-Received: from [2607:f8b0:4864:20::12e] (port=45812
- helo=mail-il1-x12e.google.com)
+ id 1mplgb-0003rI-FX; Wed, 24 Nov 2021 01:23:18 -0500
+Received: from [2607:f8b0:4864:20::d34] (port=33504
+ helo=mail-io1-xd34.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mplfB-0001ms-Cl; Wed, 24 Nov 2021 01:21:51 -0500
-Received: by mail-il1-x12e.google.com with SMTP id w4so1406591ilv.12;
- Tue, 23 Nov 2021 22:21:48 -0800 (PST)
+ id 1mplgZ-0003Fk-Mw; Wed, 24 Nov 2021 01:23:17 -0500
+Received: by mail-io1-xd34.google.com with SMTP id m9so1905384iop.0;
+ Tue, 23 Nov 2021 22:23:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=aE/EsLMsrhA0ojqKnM0GeJTT4jwtRqW742fRpFZ0d7E=;
- b=gZVefNSr/YbeeEIEcN2yDiU9ybkmVezeg6svl/519D1/TYF8A8NVZw1qWT1Zqi/VnO
- +OPFlfblIug3Mx4MIBwCVCLomFXzSrXKzAyPtR9nI5aL7uLBCt6LVTpNZxkyMWt6KsWB
- mrYzBUz15n+TR+BLB0Tu3Zq5LFy/0hWfo8980DAVY3vA9rBoaA9zB93BSvskcIhHwS+Y
- iXGmI3getnoGO3gw6sTuVY/mTR5HBZU8onWgYhkEriaXZhxpCX3GRz7fVB4SYHIUzv5J
- mGTET4HK3HS/a3WwR2+ullAysUAa/NlnloO6JX4NJE1D9XEuffWstj7kJnrBWkmDErAI
- 840g==
+ bh=5JwIjRRfLFC5KNEVUe24jaJLfNyEtLz/qEFITb5SQsY=;
+ b=U9eHfRaNFDZwTaV3j46RRlYDq2LdTI8sceDbmksb7m2uLA5oBE9r7C25gjj8AwWnNu
+ nSRzqvJtO0tu8RfBg8TeeVaeZCUEmoJLB2ZK3nXFUT3UnReyIZUOvGu8RLVQnZnaAGIl
+ qPwG1zotrmxm0EGYv+HtnDTHO2nOTzcTIT9FzJXqCTLh8IUwrOkug3AfIjhGVUiTPaLv
+ DKKSrXDtBMlAwW5/7Sts26375QGoUZE2CKlLrE5FsFI2VjmqFmZV1bfTvXaOawVTRzJJ
+ zfk5q1tl7PEwI3uDfZr8VHECqmnDON2GZPVgpEcOVV6otU12zQQs0LjJ6z8iBF68SQF0
+ ukjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=aE/EsLMsrhA0ojqKnM0GeJTT4jwtRqW742fRpFZ0d7E=;
- b=vmgXJetOIJJ9hJDX0A5hEkPVcx8wECGV+Sr7IKdnNUUUuuvVXR8k+HSU22pJ1jDS9l
- sdj5rg+EuV7++vDQpgUf7PzxnigUXVrRx/FgGjGt8V3hwu0ClTJQZX6qL/TipNIWlyV4
- I6hg0g/LlJP17kBbbPE3jrF4gh1UQxoEA5M/vFh0hjEK1MdTS/fNEGnQtanX+JxRrT88
- WhwT+wwyXrGJrAShlJAKYkS1Bbsf/8rZ6Ku1Jul7mhCvd4F62UOxumLZrOOso9xKzUSu
- TA2bp9qJqkmoZXCokiR+I2kbs0qyh5gw3J1ypUz36j7G4mb3OkLLT2kr/IsV6XmnfmlD
- zS1g==
-X-Gm-Message-State: AOAM530njnsfTyCv2eP9RyFfeYO8EVqGkQKmDmZaCeEkdp18K7aqq46A
- E3gHwZdSuNPbDwCBeRE/devn4Dh9kducJ9TN04E=
-X-Google-Smtp-Source: ABdhPJwAF4pIZEc2IkVQMiATT4gSlw65ofn+bn2UMcpzhLMJ0YvjPdFuCPJdL77tHt1kk1IrtSVWeE+XUgkheRONBTQ=
-X-Received: by 2002:a92:cda2:: with SMTP id g2mr10922654ild.46.1637734907617; 
- Tue, 23 Nov 2021 22:21:47 -0800 (PST)
+ bh=5JwIjRRfLFC5KNEVUe24jaJLfNyEtLz/qEFITb5SQsY=;
+ b=PAoHOeH3S9o4VCSqVAp6xYtKqq6uTDSVDWHluqESJmbfs5zfJQxiC/UoToskGxp6Wz
+ g9zu2Dxjsy5N8y9u4Ls09YyatYR/H/aUXFRe9xTjGLdynEucbO3ZHgc5mCOSqpX5aa4x
+ nk0pJ1eeY5zKE/iWWhMw6CA3rY3Nh71GWwuPMjS9N4+/haQOTB7jpek7Mw/TLIa6WPV9
+ NBQ1vsG+8FuEHdxnUkhMhfPbERweqXMieFC+qFtZKZtFd1VWvTcyxdMhf7QeEWfd2JDU
+ hnzTriD1qQ9wm0lGR4kJeqWqb5CLiL1veu+Q8wvi07A9JKgOIuSYG+yH+qdLlB6TMXcs
+ Y4sQ==
+X-Gm-Message-State: AOAM531rqECgqT42h0vRak6WQnOdYcUUjo8hEUKZWZsqPWe+8mqmkGYx
+ BoPSWmVMOr8rvOWB3SX3SClQynAXIrZME5Om0As=
+X-Google-Smtp-Source: ABdhPJzBtF56lY+KXnv5VxiWuUJIhy6QuT2bHbyE7EhlACjKWdMpFK2s71K0JF0msGluRhcHMaQFOUXK+/tsyCdRubM=
+X-Received: by 2002:a05:6638:148b:: with SMTP id
+ j11mr12571493jak.114.1637734994212; 
+ Tue, 23 Nov 2021 22:23:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211112145902.205131-12-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20211112145902.205131-12-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211112145902.205131-16-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211112145902.205131-16-frederic.petrot@univ-grenoble-alpes.fr>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 24 Nov 2021 16:21:21 +1000
-Message-ID: <CAKmqyKP8eC3g1FYM_D8GoOqtDV2CNeBWhd=OSF0t8GrsRw2PAA@mail.gmail.com>
-Subject: Re: [PATCH v5 11/18] target/riscv: support for 128-bit U-type
- instructions
+Date: Wed, 24 Nov 2021 16:22:47 +1000
+Message-ID: <CAKmqyKOv25FY+jLNSwNVf2oS=pp2S+uVGAoT-nFd4qQROwFePg@mail.gmail.com>
+Subject: Re: [PATCH v5 15/18] target/riscv: adding high part of some csrs
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -59,10 +59,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d34
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -83,13 +83,12 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Nov 2021 06:21:52 -0000
+X-List-Received-Date: Wed, 24 Nov 2021 06:23:18 -0000
 
-On Sat, Nov 13, 2021 at 1:12 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+On Sat, Nov 13, 2021 at 1:19 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
 <frederic.petrot@univ-grenoble-alpes.fr> wrote:
 >
-> Adding the 128-bit version of lui and auipc, and introducing to that end
-> a "set register with immediate" function to handle extension on 128 bits.
+> Adding the high part of a very minimal set of csr.
 >
 > Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
 ble-alpes.fr>
@@ -101,78 +100,38 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/translate.c                | 21 +++++++++++++++++++++
->  target/riscv/insn_trans/trans_rvi.c.inc |  8 ++++----
->  2 files changed, 25 insertions(+), 4 deletions(-)
+>  target/riscv/cpu.h     | 4 ++++
+>  target/riscv/machine.c | 2 ++
+>  2 files changed, 6 insertions(+)
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 508ae87985..d2a2f1021d 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -289,6 +289,27 @@ static void gen_set_gpr(DisasContext *ctx, int reg_n=
-um, TCGv t)
->      }
->  }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index ae1f9cb876..15609a5533 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -195,6 +195,10 @@ struct CPURISCVState {
+>      target_ulong hgatp;
+>      uint64_t htimedelta;
 >
-> +static void gen_set_gpri(DisasContext *ctx, int reg_num, target_long imm=
-)
-> +{
-> +    if (reg_num !=3D 0) {
-> +        switch (get_ol(ctx)) {
-> +        case MXL_RV32:
-> +            tcg_gen_movi_tl(cpu_gpr[reg_num], (int32_t)imm);
-> +            break;
-> +        case MXL_RV64:
-> +        case MXL_RV128:
-> +            tcg_gen_movi_tl(cpu_gpr[reg_num], imm);
-> +            break;
-> +        default:
-> +            g_assert_not_reached();
-> +        }
+> +    /* Upper 64-bits of 128-bit CSRs */
+> +    uint64_t mscratchh;
+> +    uint64_t sscratchh;
 > +
-> +        if (get_xl_max(ctx) =3D=3D MXL_RV128) {
-> +            tcg_gen_movi_tl(cpu_gprh[reg_num], -(imm < 0));
-> +        }
-> +    }
-> +}
-> +
->  static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv=
- rh)
->  {
->      assert(get_ol(ctx) =3D=3D MXL_RV128);
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
-trans/trans_rvi.c.inc
-> index fc73735b9e..0070fe606a 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -26,14 +26,14 @@ static bool trans_illegal(DisasContext *ctx, arg_empt=
-y *a)
->
->  static bool trans_c64_illegal(DisasContext *ctx, arg_empty *a)
->  {
-> -     REQUIRE_64BIT(ctx);
-> -     return trans_illegal(ctx, a);
-> +    REQUIRE_64_OR_128BIT(ctx);
-> +    return trans_illegal(ctx, a);
->  }
->
->  static bool trans_lui(DisasContext *ctx, arg_lui *a)
->  {
->      if (a->rd !=3D 0) {
-> -        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm);
-> +        gen_set_gpri(ctx, a->rd, a->imm);
+>      /* Virtual CSRs */
+>      /*
+>       * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 7e2d02457e..6f0eabf66a 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -179,6 +179,8 @@ static const VMStateDescription vmstate_rv128 =3D {
+>      .needed =3D rv128_needed,
+>      .fields =3D (VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gprh, RISCVCPU, 32),
+> +        VMSTATE_UINT64(env.mscratchh, RISCVCPU),
+> +        VMSTATE_UINT64(env.sscratchh, RISCVCPU),
+>          VMSTATE_END_OF_LIST()
 >      }
->      return true;
->  }
-> @@ -41,7 +41,7 @@ static bool trans_lui(DisasContext *ctx, arg_lui *a)
->  static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
->  {
->      if (a->rd !=3D 0) {
-> -        tcg_gen_movi_tl(cpu_gpr[a->rd], a->imm + ctx->base.pc_next);
-> +        gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
->      }
->      return true;
->  }
+>  };
 > --
 > 2.33.1
 >
