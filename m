@@ -1,44 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mq9Xe-0003U0-HK
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Nov 2021 02:51:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:32862)
+	id 1mq9Y6-0004J4-NJ
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Nov 2021 02:52:07 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:32940)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mq9Xb-0003Je-UE; Thu, 25 Nov 2021 02:51:36 -0500
-Received: from out28-172.mail.aliyun.com ([115.124.28.172]:46201)
+ id 1mq9Xz-0004FQ-Ve; Thu, 25 Nov 2021 02:52:02 -0500
+Received: from out28-99.mail.aliyun.com ([115.124.28.99]:46803)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mq9XU-00063x-QO; Thu, 25 Nov 2021 02:51:35 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07609297|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_regular_dialog|0.411451-0.000991827-0.587557;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=7; RT=7; SR=0; TI=SMTPD_---.LyzuCJ9_1637826673; 
+ id 1mq9Xt-0006Bi-H3; Thu, 25 Nov 2021 02:51:59 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1217717|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0284492-2.96291e-05-0.971521; FP=0|0|0|0|0|-1|-1|-1;
+ HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=8; RT=7; SR=0;
+ TI=SMTPD_---.Lz-CM2L_1637826704; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.LyzuCJ9_1637826673)
- by smtp.aliyun-inc.com(10.147.42.135);
- Thu, 25 Nov 2021 15:51:13 +0800
+ fp:SMTPD_---.Lz-CM2L_1637826704)
+ by smtp.aliyun-inc.com(10.147.41.137);
+ Thu, 25 Nov 2021 15:51:45 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
- bin.meng@windriver.com, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v5 21/22] target/riscv: Adjust scalar reg in vector with XLEN
-Date: Thu, 25 Nov 2021 15:39:50 +0800
-Message-Id: <20211125073951.57678-22-zhiwei_liu@c-sky.com>
+ bin.meng@windriver.com, LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v5 22/22] target/riscv: Enable uxl field write
+Date: Thu, 25 Nov 2021 15:39:51 +0800
+Message-Id: <20211125073951.57678-23-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
 References: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.172; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-172.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.99; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-99.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -51,152 +51,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2021 07:51:36 -0000
-
-When sew <= 32bits, not need to extend scalar reg.
-When sew > 32bits, if xlen is less that sew, we should sign extend
-the scalar register, except explicitly specified by the spec.
+X-List-Received-Date: Thu, 25 Nov 2021 07:52:04 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 44 ++++++++++++++++++-------
- 1 file changed, 32 insertions(+), 12 deletions(-)
+ target/riscv/cpu_bits.h | 2 ++
+ target/riscv/csr.c      | 8 +++++---
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index aacb97d280..411b5414b2 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -833,7 +833,7 @@ typedef void gen_helper_opivx(TCGv_ptr, TCGv_ptr, TCGv, TCGv_ptr,
-                               TCGv_env, TCGv_i32);
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 9913fa9f77..5106f0e769 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -413,6 +413,8 @@ typedef enum {
+ #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
+ #define SSTATUS_MXR         0x00080000
  
- static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
--                        gen_helper_opivx *fn, DisasContext *s)
-+                        gen_helper_opivx *fn, DisasContext *s, DisasExtend ext)
- {
-     TCGv_ptr dest, src2, mask;
-     TCGv src1;
-@@ -846,7 +846,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
-     dest = tcg_temp_new_ptr();
-     mask = tcg_temp_new_ptr();
-     src2 = tcg_temp_new_ptr();
--    src1 = get_gpr(s, rs1, EXT_NONE);
-+    src1 = get_gpr(s, rs1, ext);
- 
-     data = FIELD_DP32(data, VDATA, MLEN, s->mlen);
-     data = FIELD_DP32(data, VDATA, VM, vm);
-@@ -895,7 +895,7 @@ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn *gvec_fn,
-         tcg_temp_free_i64(src1);
-         return true;
-     }
--    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
-+    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
- }
- 
- /* OPIVX with GVEC IR */
-@@ -1128,7 +1128,7 @@ static bool do_opivx_widen(DisasContext *s, arg_rmrr *a,
-                            gen_helper_opivx *fn)
- {
-     if (opivx_widen_check(s, a)) {
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
-     }
-     return false;
- }
-@@ -1213,7 +1213,7 @@ static bool do_opiwx_widen(DisasContext *s, arg_rmrr *a,
-                            gen_helper_opivx *fn)
- {
-     if (opiwx_widen_check(s, a)) {
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
-     }
-     return false;
- }
-@@ -1312,7 +1312,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
-         };                                                               \
-                                                                          \
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
-+                           fns[s->sew], s, EXT_SIGN);                    \
-     }                                                                    \
-     return false;                                                        \
- }
-@@ -1386,7 +1387,7 @@ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVecGen2sFn32 *gvec_fn,
-         tcg_temp_free_i32(src1);
-         return true;
-     }
--    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s);
-+    return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fn, s, EXT_SIGN);
- }
- 
- #define GEN_OPIVX_GVEC_SHIFT_TRANS(NAME, SUF) \
-@@ -1472,7 +1473,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-             gen_helper_##NAME##_h,                                       \
-             gen_helper_##NAME##_w,                                       \
-         };                                                               \
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);\
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
-+                           fns[s->sew], s, EXT_SIGN);                    \
-     }                                                                    \
-     return false;                                                        \
- }
-@@ -2670,6 +2672,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
-         /* This instruction ignores LMUL and vector register groups */
-         int maxsz = s->vlen >> 3;
-         TCGv_i64 t1;
-+        TCGv src1 = get_gpr(s, a->rs1, EXT_ZERO);
-         TCGLabel *over = gen_new_label();
- 
-         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-@@ -2679,7 +2682,7 @@ static bool trans_vmv_s_x(DisasContext *s, arg_vmv_s_x *a)
-         }
- 
-         t1 = tcg_temp_new_i64();
--        tcg_gen_extu_tl_i64(t1, cpu_gpr[a->rs1]);
-+        tcg_gen_extu_tl_i64(t1, src1);
-         vec_element_storei(s, a->rd, 0, t1);
-         tcg_temp_free_i64(t1);
-     done:
-@@ -2748,12 +2751,28 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
-             (a->rd != a->rs2));
- }
- 
-+/* OPIVXU without GVEC IR */
-+#define GEN_OPIVXU_TRANS(NAME, CHECK)                                    \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
-+{                                                                        \
-+    if (CHECK(s, a)) {                                                   \
-+        static gen_helper_opivx * const fns[4] = {                       \
-+            gen_helper_##NAME##_b, gen_helper_##NAME##_h,                \
-+            gen_helper_##NAME##_w, gen_helper_##NAME##_d,                \
-+        };                                                               \
-+                                                                         \
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,                 \
-+                           fns[s->sew], s, EXT_ZERO);                    \
-+    }                                                                    \
-+    return false;                                                        \
-+}
++#define SSTATUS64_UXL       0x0000000300000000ULL
 +
- GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
--GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
-+GEN_OPIVXU_TRANS(vslide1up_vx, slideup_check)
- GEN_OPIVI_TRANS(vslideup_vi, 1, vslideup_vx, slideup_check)
+ #define SSTATUS32_SD        0x80000000
+ #define SSTATUS64_SD        0x8000000000000000ULL
  
- GEN_OPIVX_TRANS(vslidedown_vx, opivx_check)
--GEN_OPIVX_TRANS(vslide1down_vx, opivx_check)
-+GEN_OPIVXU_TRANS(vslide1down_vx, opivx_check)
- GEN_OPIVI_TRANS(vslidedown_vi, 1, vslidedown_vx, opivx_check)
- 
- /* Vector Register Gather Instruction */
-@@ -2803,7 +2822,8 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
-             gen_helper_vrgather_vx_b, gen_helper_vrgather_vx_h,
-             gen_helper_vrgather_vx_w, gen_helper_vrgather_vx_d
-         };
--        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm, fns[s->sew], s);
-+        return opivx_trans(a->rd, a->rs1, a->rs2, a->vm,
-+                           fns[s->sew], s, EXT_SIGN);
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 3f284090fc..735d9a7825 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -553,15 +553,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+          * RV32: MPV and GVA are not in mstatus. The current plan is to
+          * add them to mstatush. For now, we just don't support it.
+          */
+-        mask |= MSTATUS_MPV | MSTATUS_GVA;
++        mask |= MSTATUS_MPV | MSTATUS_GVA | MSTATUS64_UXL;
      }
-     return true;
+ 
+     mstatus = (mstatus & ~mask) | (val & mask);
+ 
+     if (riscv_cpu_mxl(env) == MXL_RV64) {
+-        /* SXL and UXL fields are for now read only */
++        /* SXL fields are for now read only */
+         mstatus = set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
+-        mstatus = set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
+     }
+     env->mstatus = mstatus;
+     env->xl = cpu_get_xl(env);
+@@ -842,6 +841,9 @@ static RISCVException write_sstatus(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+     target_ulong mask = (sstatus_v1_10_mask);
++    if (env->xl != MXL_RV32) {
++        mask |= SSTATUS64_UXL;
++    }
+     target_ulong newval = (env->mstatus & ~mask) | (val & mask);
+     return write_mstatus(env, CSR_MSTATUS, newval);
  }
 -- 
 2.25.1
