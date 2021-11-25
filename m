@@ -1,44 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mq9Y6-0004J4-NJ
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Nov 2021 02:52:07 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:32940)
+	id 1mqDEM-0004wg-PW
+	for mharc-qemu-riscv@gnu.org; Thu, 25 Nov 2021 06:47:58 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39514)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mq9Xz-0004FQ-Ve; Thu, 25 Nov 2021 02:52:02 -0500
-Received: from out28-99.mail.aliyun.com ([115.124.28.99]:46803)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1mq9Xt-0006Bi-H3; Thu, 25 Nov 2021 02:51:59 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1217717|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_alarm|0.0284492-2.96291e-05-0.971521; FP=0|0|0|0|0|-1|-1|-1;
- HT=ay29a033018047206; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=8; RT=7; SR=0;
- TI=SMTPD_---.Lz-CM2L_1637826704; 
-Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Lz-CM2L_1637826704)
- by smtp.aliyun-inc.com(10.147.41.137);
- Thu, 25 Nov 2021 15:51:45 +0800
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: richard.henderson@linaro.org, Alistair.Francis@wdc.com, palmer@dabbelt.com,
- bin.meng@windriver.com, LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v5 22/22] target/riscv: Enable uxl field write
-Date: Thu, 25 Nov 2021 15:39:51 +0800
-Message-Id: <20211125073951.57678-23-zhiwei_liu@c-sky.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
-References: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mqDEL-0004vm-NU; Thu, 25 Nov 2021 06:47:57 -0500
+Received: from [2607:f8b0:4864:20::136] (port=41655
+ helo=mail-il1-x136.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mqDEK-0005Dp-8h; Thu, 25 Nov 2021 06:47:57 -0500
+Received: by mail-il1-x136.google.com with SMTP id t8so5566157ilu.8;
+ Thu, 25 Nov 2021 03:47:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=zSn9MQDIR2joyDoDlFHP8quwHvY0EI42m5U2g2WalAg=;
+ b=CFzjYMbVzoO+DsNQ9RbmvD1p5TtEhGWE1iCy6lI9ET/daZmb2U3fHpRpQ5bqaIVXKK
+ 29ow1AA8mVouEQdFTlpzyxWjFw8HsMjBYf9IIO7cTN4YeohXUN5RS/bCbRHcryx0p+kA
+ 2q8Hbs+SgHiBhXOMC2+xMReK950w8NgeMtYLKjzqKWOukYPdYhG2ewlHITya+LcUpTor
+ xlGrLOjy1W1TOziVhnF0Bb3mpQ+HBLDKFVSa/6WGPY7kHG6IL5iLYLftzPFhbnMS8oek
+ 7nJzC37HxZAyjX804eGyRWP/qknQHipruaHkd26RVJmR+rF1V0guaUK71xTbfQFf2dTb
+ 2xvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=zSn9MQDIR2joyDoDlFHP8quwHvY0EI42m5U2g2WalAg=;
+ b=bR8cV/1z05qj6YAnDEL0LLosZCN0PTnCbNol5vZHzwukuoLEnptR6erNOXDjd6Wt7o
+ BJug+3B+sNQgV20awJgWDA4fh0LpcgVDqn+YtY2gqU95MWWgEHRngQ+k0xm4TPpJyYzY
+ bxuKzD7naiSPbYHL6BChAsNnJy6xF4XfIr17aiDt7ppnz07fdD/iXpp0XZZGGLcouHq5
+ MG5oC/19tORfQYTxV7twmOBXRaD07kpk+oGBV+aKBXOpCak3HoUhjbEIKKy1Bh34rsft
+ JvH2op6+WbRJJ4PKH/j/Ee3AQe1HHdpi/4HxbiLb0MZWlnGm463z/hoGeaWQ1PkWq/iY
+ kLnw==
+X-Gm-Message-State: AOAM532UuiuKT6Xj0fczR5ceGyAxMuQUJUww/aTsCck957uTRftmSxAP
+ TdCU5j5ASyYkw3Hlo5h5SOP2UFvAtdCGnxeDJRw=
+X-Google-Smtp-Source: ABdhPJwPNx2BqY9RoyElpaulVrSX6bg7QQncC/E6r9XiHVxvp286MHMUN9eCd1QfWOlrHUxMpPVZ7Opnf7MLipKiguU=
+X-Received: by 2002:a05:6e02:1b08:: with SMTP id
+ i8mr18466393ilv.74.1637840874632; 
+ Thu, 25 Nov 2021 03:47:54 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.99; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-99.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211112145902.205131-8-frederic.petrot@univ-grenoble-alpes.fr>
+ <CAKmqyKM_6QH40iesGaCYLxWHzRyfoFACEH+eiOY-_YQTpeo=nw@mail.gmail.com>
+ <a68d73ec-bde8-5869-842f-e45bbdbdc5ed@univ-grenoble-alpes.fr>
+ <88c5fc89-49a3-0dd3-87bb-287ba590f915@amsat.org>
+In-Reply-To: <88c5fc89-49a3-0dd3-87bb-287ba590f915@amsat.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 25 Nov 2021 21:47:28 +1000
+Message-ID: <CAKmqyKN69JDsRfFvuJGaDxyP+LS+90PGjD-ACtFhdGmnBguApg@mail.gmail.com>
+Subject: Re: [PATCH v5 07/18] target/riscv: setup everything so that
+ riscv128-softmmu compiles
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Fabien Portas <fabien.portas@grenoble-inp.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::136
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -51,62 +86,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2021 07:52:04 -0000
+X-List-Received-Date: Thu, 25 Nov 2021 11:47:58 -0000
 
-Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu_bits.h | 2 ++
- target/riscv/csr.c      | 8 +++++---
- 2 files changed, 7 insertions(+), 3 deletions(-)
+On Wed, Nov 24, 2021 at 5:33 PM Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.or=
+g> wrote:
+>
+> Hi Fr=C3=A9d=C3=A9ric,
+>
+> On 11/24/21 07:55, Fr=C3=A9d=C3=A9ric P=C3=A9trot wrote:
+> > On 24/11/2021 07:12, Alistair Francis wrote:
+> >> On Sat, Nov 13, 2021 at 1:16 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+> >> <frederic.petrot@univ-grenoble-alpes.fr> wrote:
+> >>>
+> >>> This patch is kind of a mess because several files have to be slightl=
+y
+> >>> modified to allow for a new target. In the current status, we have do=
+ne
+> >>> our best to have RV64 and RV128 under the same RV64 umbrella, but the=
+re
+> >>> is still work to do to have a single executable for both.
+> >>> In particular, we have no atomic accesses for aligned 128-bit address=
+es.
+> >>>
+> >>> Once this patch applied, adding risc128-sofmmu to --target-list produ=
+ces
+> >>> a (no so useful yet) executable.
+> >>
+> >> I can't remember if we discussed this before, but do we need the
+> >> riscv128-sofmmu executable? Can we instead just use a riscv64-sofmmu
+> >> executable?
+> >
+> >   Hello Alistair,
+> >   Richard was also advocating for a single executable, but pointed out =
+that
+> >   we need to disable mttcg because there is a need for specific tcg
+> > support for
+> >   128-bit aligned atomics.
+> >   Given my understanding of that part of QEMU, I choose the easy way to
+> > disable
+> >   it once and for all at compile time until we have that.
+>
+>
+> In rv128_base_cpu_init():
+>
+>   if (qemu_tcg_mttcg_enabled) {
+>       /* Missing 128-bit aligned atomics */
+>       error_report("128-bit RISC-V currently does not work"
+>                    " with Multi Threaded TCG. Please use:"
+>                    " -accel tcg,thread=3Dsingle");
+>       exit(EXIT_FAILURE);
+>   }
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 9913fa9f77..5106f0e769 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -413,6 +413,8 @@ typedef enum {
- #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
- #define SSTATUS_MXR         0x00080000
- 
-+#define SSTATUS64_UXL       0x0000000300000000ULL
-+
- #define SSTATUS32_SD        0x80000000
- #define SSTATUS64_SD        0x8000000000000000ULL
- 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 3f284090fc..735d9a7825 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -553,15 +553,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-          * RV32: MPV and GVA are not in mstatus. The current plan is to
-          * add them to mstatush. For now, we just don't support it.
-          */
--        mask |= MSTATUS_MPV | MSTATUS_GVA;
-+        mask |= MSTATUS_MPV | MSTATUS_GVA | MSTATUS64_UXL;
-     }
- 
-     mstatus = (mstatus & ~mask) | (val & mask);
- 
-     if (riscv_cpu_mxl(env) == MXL_RV64) {
--        /* SXL and UXL fields are for now read only */
-+        /* SXL fields are for now read only */
-         mstatus = set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
--        mstatus = set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
-     }
-     env->mstatus = mstatus;
-     env->xl = cpu_get_xl(env);
-@@ -842,6 +841,9 @@ static RISCVException write_sstatus(CPURISCVState *env, int csrno,
-                                     target_ulong val)
- {
-     target_ulong mask = (sstatus_v1_10_mask);
-+    if (env->xl != MXL_RV32) {
-+        mask |= SSTATUS64_UXL;
-+    }
-     target_ulong newval = (env->mstatus & ~mask) | (val & mask);
-     return write_mstatus(env, CSR_MSTATUS, newval);
- }
--- 
-2.25.1
+That seems like a good option! I think we could add this to the CPU
+realise function.
 
+The problem with a riscv128-sofmmu executable is that it's hard to get
+rid of in the future. We are very slowly moving towards a single
+executable and adding a new one means we are stuck with it for a
+while.
+
+Alistair
+
+>
+> Regards,
+>
+> Phil.
 
