@@ -1,73 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mqZRh-0006rd-MR
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Nov 2021 06:31:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53510)
+	id 1mqZUT-0002N0-89
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Nov 2021 06:34:05 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54156)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mqZRf-0006qI-QM
- for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:31:11 -0500
-Received: from [2a00:1450:4864:20::332] (port=45682
- helo=mail-wm1-x332.google.com)
+ id 1mqZUR-0002MX-7B
+ for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:34:03 -0500
+Received: from [2a00:1450:4864:20::434] (port=44617
+ helo=mail-wr1-x434.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mqZRd-000449-F0
- for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:31:11 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- g191-20020a1c9dc8000000b0032fbf912885so6567313wme.4
- for <qemu-riscv@nongnu.org>; Fri, 26 Nov 2021 03:31:08 -0800 (PST)
+ id 1mqZUP-0004Q7-Cz
+ for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:34:02 -0500
+Received: by mail-wr1-x434.google.com with SMTP id l16so17967600wrp.11
+ for <qemu-riscv@nongnu.org>; Fri, 26 Nov 2021 03:34:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=9g6vC5Dke5AVe2GXZhMGWpnmT7U9Adgn/vesA08vVOk=;
- b=J92OKBWA0NpmDGS/IJU0vcLNgrJphimLU/Si7hhyF19bwxbzaYJdvA7coinFvpD7Dk
- FHhzAClLNqrCabIvwW5JbfdGSEI0UHwNKfSmz7Y5E1SHWjk0vRf2ow/wz5WDmirmPvf+
- RuOIeKYhDl4MEf1595dc4NbNrW0rZ6mmKTugHIotGPYZTyhYfX55HA41AtWrPAuWYBXM
- 3WRO8cGii/sAaxJ4rTsngjOK+6d1i79ERj26cu66GDxFTMuzW9skDHgZ6lfEL3yICheF
- JYjSvGL838/DvQKRkQJb9xJqFF2AgH3V0th595JX8PIE2kI++W3aIHni0ev0Hv4oQAE3
- XBYQ==
+ bh=dC0SNsEJG4l0DyToYMaI6r7Kwjn1uoWFJ8AMkKO6juM=;
+ b=DBspQZ9/ZMUnCjKx0g5CPahBR8B0DW+1gg3UF/XWUfYyxtZEU6xZ77kHLVWSvCf3kI
+ B2KmLb5JrJ1ryAVMa6k+ZDiEjjKuiylXx5L33MD05VLUWxzVXKdiJqRKDdItnece4y9P
+ 1+TdcXVvyt+YJH7fbA3gkA86wyvzRpjZUBjdaDqMoG56xq/A53khpWjHltBZwJMb5ChS
+ VDfSBIzsi4yhVNRZE5TxaolU1GzNssJewMIqbsYVpzFrJ+wFFQEajf1lAt9L1Lym/cUT
+ OA53SpSZLpKjcX8aAscCysjxHgrN+R/D5yUs2NOha3r5u1fCWrvdwUg7xXwWToNjmoLE
+ r/KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=9g6vC5Dke5AVe2GXZhMGWpnmT7U9Adgn/vesA08vVOk=;
- b=Jlf+M7oPfqa3nd7F6O7ZAzZa1ZgX58vsKU3FQNJQ8+qf9SwugWSGkTkljYMP9LO4YL
- t8EXMACG/mLyfugmJBioZWv66YJSpaWOc3V4r5K2C9hDwosJCqvlZ8a//AY1m3//K/FG
- 5tDHtVTkQecLu2PSd6QRV7dAdUw0hz14BY6t7EBxG7c75vln11VunrCdLVxfc6WQnVH5
- NdhpKj0bWp9REwZpMSWTMd8hUAdM4jEuqWaFpUPBsRb3B6aE4t+nRQQgmKSAT/qeRH3b
- hBNVUzO8PFPKbtDd2AuNc4f31l28GAh4PliMWakfB78NyF8Vqfzn/qMdjFhWONwjos43
- VZ2Q==
-X-Gm-Message-State: AOAM5301Wwn56hvaUAtqahkDXFwQeRQN2kKHyjRUhxipXccPEZ8oL7WA
- ofgAk6qU0iyA13DyxOOqHEk60Q==
-X-Google-Smtp-Source: ABdhPJxJqZ+aYuQmztVT9XoJPaQvwKETu5v6AUFPayxquKv201A+jEXqnkLrhivdgYU+068C+XlLFQ==
-X-Received: by 2002:a05:600c:104b:: with SMTP id
- 11mr15246556wmx.54.1637926267884; 
- Fri, 26 Nov 2021 03:31:07 -0800 (PST)
+ bh=dC0SNsEJG4l0DyToYMaI6r7Kwjn1uoWFJ8AMkKO6juM=;
+ b=onVPvJSPl6dlGyBBbpOUiPNqJwunkLPbBZ9fx83UBXbKCM2oHpH1kNlgROm+0T4Jeo
+ F4+KRWGzm0BvnrggsgKcU9RVh2JCsnVrr2l+PqQdqpOzvf3+OOr/Faql+3JbIxgqvt3V
+ FrJutSelGdQ0prdzxczJ584enmYNfHNkFiYH3RGcCLaAU66g1xrN34UMTbi/okT6lq9c
+ 6H4hQfLWGm8ktqq7BV85jTwb8S8eLV7yXFqBpJGnlvZFjbxHdjNsBQAvf0vKalKD9I2k
+ tuiFcRx3CzkXet2FDBmpIEoRy1A4CdQ1KaMMjyzXtsxj9lZWG2MURllKXd8Ws8SFderL
+ uqPg==
+X-Gm-Message-State: AOAM530EW0WDcirGDPIDpQlqxXNplgG/xreY+cxKw7XJuMxyf5un9AtM
+ UQGebFtbOUJFFPMk5lGYgaZXtw==
+X-Google-Smtp-Source: ABdhPJwQi5KLkkupYir4j6r8WVXtVsoVHdimpC6kh7yBHbu8ZkTSnEM7TK1aV0yx2PEcYE7xnEQjbg==
+X-Received: by 2002:adf:e482:: with SMTP id i2mr13577560wrm.284.1637926439973; 
+ Fri, 26 Nov 2021 03:33:59 -0800 (PST)
 Received: from [192.168.1.147] (149.164.14.37.dynamic.jazztel.es.
  [37.14.164.149])
- by smtp.gmail.com with ESMTPSA id r15sm10458130wmh.13.2021.11.26.03.31.06
+ by smtp.gmail.com with ESMTPSA id y12sm5359243wrn.73.2021.11.26.03.33.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Nov 2021 03:31:07 -0800 (PST)
-Subject: Re: [PATCH v5 10/22] target/riscv: Create current pm fields in env
+ Fri, 26 Nov 2021 03:33:59 -0800 (PST)
+Subject: Re: [PATCH v5 20/22] target/riscv: Adjust vector address with mask
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
 References: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
- <20211125073951.57678-11-zhiwei_liu@c-sky.com>
+ <20211125073951.57678-21-zhiwei_liu@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <32c4e078-bb8c-07fe-d69e-cdbd725d4726@linaro.org>
-Date: Fri, 26 Nov 2021 12:31:04 +0100
+Message-ID: <25c85dc9-3798-9cb8-6fea-6b5bd49e8530@linaro.org>
+Date: Fri, 26 Nov 2021 12:33:56 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211125073951.57678-11-zhiwei_liu@c-sky.com>
+In-Reply-To: <20211125073951.57678-21-zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::332
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::434
  (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -32
 X-Spam_score: -3.3
 X-Spam_bar: ---
@@ -87,18 +85,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2021 11:31:12 -0000
+X-List-Received-Date: Fri, 26 Nov 2021 11:34:03 -0000
 
 On 11/25/21 8:39 AM, LIU Zhiwei wrote:
+> The mask comes from the pointer masking extension, or the max value
+> corresponding to XLEN bits.
+> 
 > Signed-off-by: LIU Zhiwei<zhiwei_liu@c-sky.com>
-> Reviewed-by: Alistair Francis<alistair.francis@wdc.com>
+> Acked-by: Alistair Francis<alistair.francis@wdc.com>
 > ---
->   target/riscv/cpu.c        |  1 +
->   target/riscv/cpu.h        |  4 ++++
->   target/riscv/cpu_helper.c | 43 +++++++++++++++++++++++++++++++++++++++
->   target/riscv/csr.c        | 19 +++++++++++++++++
->   target/riscv/machine.c    | 10 +++++++++
->   5 files changed, 77 insertions(+)
+>   target/riscv/vector_helper.c | 23 ++++++++++++++---------
+>   1 file changed, 14 insertions(+), 9 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
