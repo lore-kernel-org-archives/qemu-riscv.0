@@ -1,79 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mqFzO-0005vS-4n
-	for mharc-qemu-riscv@gnu.org; Thu, 25 Nov 2021 09:44:42 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59782)
+	id 1mqZGv-0005uG-Bj
+	for mharc-qemu-riscv@gnu.org; Fri, 26 Nov 2021 06:20:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50596)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mqFzM-0005vE-JT; Thu, 25 Nov 2021 09:44:40 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:48726)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mqFzJ-0004oL-Iy; Thu, 25 Nov 2021 09:44:40 -0500
-Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 3717440369;
- Thu, 25 Nov 2021 15:44:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1637851472;
- bh=Sir65W8wSrb9DKwgN7qZ+0Ib/Io8sHJZdoHYHJ/JaUY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=2XSZrQ6VmYyRokHq93YYLjrll8YnVZOXGTaDQlGOrcLp50jG3cx785ZE2O97G+FWL
- PCHDqCoNku+tJUytrPtk9JeWqIoFkrNo2zJtPpzqa5FdBkzrlkwyJE/ojhLLDGKgb2
- h9Plev9284SAcIgmPpvIZuvC100Wl9S3zx2nUSc03GXuy9J/4DfuhUJWD3Lha8HIBP
- UKkOilwiaQk3L/9YZhyouMBipuw0fRqY5ggMYCEkrwmsX9IGSyiMNViKr9CU0ujews
- RXADW7wuhj9d0O8vz43qvyj2MfjnX9IhOnsZOPZZvPNA/JqCCHfrHGyG9gxc5kt3Wf
- ZKzEmRTHRqRaQ==
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 1FA5360066;
- Thu, 25 Nov 2021 15:44:32 +0100 (CET)
-Received: from [192.168.1.64] (35.201.90.79.rev.sfr.net [79.90.201.35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 54A26140079;
- Thu, 25 Nov 2021 15:44:31 +0100 (CET)
-Message-ID: <3fb387e9-407d-9ea0-063a-a96b45a7df16@univ-grenoble-alpes.fr>
-Date: Thu, 25 Nov 2021 15:44:30 +0100
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mqZGs-0005s0-F9
+ for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:20:02 -0500
+Received: from [2a00:1450:4864:20::42b] (port=45696
+ helo=mail-wr1-x42b.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mqZGp-0002Jx-M4
+ for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:20:02 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id o13so17846385wrs.12
+ for <qemu-riscv@nongnu.org>; Fri, 26 Nov 2021 03:19:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=4OKl01bOGIbyp4u55BVn47b+llH5FbyfeHC/mYV2utY=;
+ b=pA4tL6ot7juJ73bNX4Eua4dP9n+bB9A9rPDljbkrw+80ZxgSthUXc2wIGOl2/oRoih
+ Ahs2u/y9r13PVjVVxHac+z7ZpTH5ZGSUGoRWkIlWjNdpyzNVgqf+7F8gj6DmhLRKFxSQ
+ O0HSqTejOrWjgPey502tKnx6qgTCEJPTNyn+X/vm5131Qv14DfKrIE5k4DnjOvdl3HWE
+ Wwu2od0J/U2eHKBJ1Dn6rRuIjVu8e3G3fT65fOyB3O33voFu+yfFRzLzajWWhIOH58Bk
+ bvgRvBlL0ujk8TT0jwEFbxQFb4mfG87RnBl6cuztRPdu8MZZD8wCpHOphQ4v2tZHcnuY
+ A7Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=4OKl01bOGIbyp4u55BVn47b+llH5FbyfeHC/mYV2utY=;
+ b=mAXVmABAY7tWp5c/coMvL1r+UNT7b1G5kzRfToywJNKpZATMEpdTjm9cIdFQeMdLI9
+ Mwk42PpxpRwQfQIQVaGb8yjPklm+EWE0/xY2Cd6gUAfWaFKBsUUAqnvvf3ePSB3HVEc/
+ JWPo3tBuqvg4scjEW2dLyFFWEl5UN1Yy11z19KDnmWeFgOCr9EfF1oKQ6TkBT5G91q2B
+ d67IPQmYvhm9Pty+REYWcsgqLoqxMC54bnsvNuRRAHgw/2vehw36eqwWNXFr66YvRnQY
+ wHr8v8LEHCsREj6s1cAfMaVF6LIgI/WBFBOxFxdzxOoEXJ9CTTq+ouM0Lw6LVpS31EYB
+ QEZg==
+X-Gm-Message-State: AOAM531Bd8e+TD5w5p8DYkwZTbXlrmoJ12iXLaeLxOkQgT+P4K3YOEqE
+ sfDMxp/EYZiPQtip71wyijmc0g==
+X-Google-Smtp-Source: ABdhPJwD3tq41JZ+aG6Ej3Uw5EZvyM/RkjAcWHGLlcqLhR8MgphUjDWUoKBAd/Xy2l1LoTEUiyUlOw==
+X-Received: by 2002:a5d:452c:: with SMTP id j12mr13129504wra.430.1637925598107; 
+ Fri, 26 Nov 2021 03:19:58 -0800 (PST)
+Received: from [192.168.1.147] (149.164.14.37.dynamic.jazztel.es.
+ [37.14.164.149])
+ by smtp.gmail.com with ESMTPSA id d9sm5253075wre.52.2021.11.26.03.19.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Nov 2021 03:19:57 -0800 (PST)
+Subject: Re: [PATCH v5 01/22] target/riscv: Adjust pmpcfg access with mxl
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
+References: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
+ <20211125073951.57678-2-zhiwei_liu@c-sky.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <e0f578f7-63b3-691c-582b-0f79c5efba70@linaro.org>
+Date: Fri, 26 Nov 2021 12:19:54 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.0
-Subject: Re: [PATCH v5 07/18] target/riscv: setup everything so that
- riscv128-softmmu compiles
-Content-Language: fr
-To: Alistair Francis <alistair23@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng
- <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
- Fabien Portas <fabien.portas@grenoble-inp.org>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20211112145902.205131-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211112145902.205131-8-frederic.petrot@univ-grenoble-alpes.fr>
- <CAKmqyKM_6QH40iesGaCYLxWHzRyfoFACEH+eiOY-_YQTpeo=nw@mail.gmail.com>
- <a68d73ec-bde8-5869-842f-e45bbdbdc5ed@univ-grenoble-alpes.fr>
- <88c5fc89-49a3-0dd3-87bb-287ba590f915@amsat.org>
- <CAKmqyKN69JDsRfFvuJGaDxyP+LS+90PGjD-ACtFhdGmnBguApg@mail.gmail.com>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <CAKmqyKN69JDsRfFvuJGaDxyP+LS+90PGjD-ACtFhdGmnBguApg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (42)
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -61
-X-Spam_score: -6.2
-X-Spam_bar: ------
-X-Spam_report: (-6.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.1,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20211125073951.57678-2-zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42b
+ (failed)
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42b.google.com
+X-Spam_score_int: -32
+X-Spam_score: -3.3
+X-Spam_bar: ---
+X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.993,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,75 +85,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Nov 2021 14:44:41 -0000
+X-List-Received-Date: Fri, 26 Nov 2021 11:20:02 -0000
 
-On 25/11/2021 12:47, Alistair Francis wrote:
-> On Wed, Nov 24, 2021 at 5:33 PM Philippe Mathieu-Daudé <f4bug@amsat.org> wrote:
->>
->> Hi Frédéric,
->>
->> On 11/24/21 07:55, Frédéric Pétrot wrote:
->>> On 24/11/2021 07:12, Alistair Francis wrote:
->>>> On Sat, Nov 13, 2021 at 1:16 AM Frédéric Pétrot
->>>> <frederic.petrot@univ-grenoble-alpes.fr> wrote:
->>>>>
->>>>> This patch is kind of a mess because several files have to be slightly
->>>>> modified to allow for a new target. In the current status, we have done
->>>>> our best to have RV64 and RV128 under the same RV64 umbrella, but there
->>>>> is still work to do to have a single executable for both.
->>>>> In particular, we have no atomic accesses for aligned 128-bit addresses.
->>>>>
->>>>> Once this patch applied, adding risc128-sofmmu to --target-list produces
->>>>> a (no so useful yet) executable.
->>>>
->>>> I can't remember if we discussed this before, but do we need the
->>>> riscv128-sofmmu executable? Can we instead just use a riscv64-sofmmu
->>>> executable?
->>>
->>>    Hello Alistair,
->>>    Richard was also advocating for a single executable, but pointed out that
->>>    we need to disable mttcg because there is a need for specific tcg
->>> support for
->>>    128-bit aligned atomics.
->>>    Given my understanding of that part of QEMU, I choose the easy way to
->>> disable
->>>    it once and for all at compile time until we have that.
->>
->>
->> In rv128_base_cpu_init():
->>
->>    if (qemu_tcg_mttcg_enabled) {
->>        /* Missing 128-bit aligned atomics */
->>        error_report("128-bit RISC-V currently does not work"
->>                     " with Multi Threaded TCG. Please use:"
->>                     " -accel tcg,thread=single");
->>        exit(EXIT_FAILURE);
->>    }
-> 
-> That seems like a good option! I think we could add this to the CPU
-> realise function.
-> 
-> The problem with a riscv128-sofmmu executable is that it's hard to get
-> rid of in the future. We are very slowly moving towards a single
-> executable and adding a new one means we are stuck with it for a
-> while.
-> 
-> Alistair
+On 11/25/21 8:39 AM, LIU Zhiwei wrote:
+> +static bool check_pmp_reg_index(CPURISCVState *env, uint32_t reg_index)
+> +{
+> +    if ((reg_index & 1) && (riscv_cpu_mxl(env) == MXL_RV64)) {
 
-   Ooups, I replied yesterday to Philippe that I would work that out, but I
-   missed the reply all button, sorry.
+Let's make this != MXL_RV32.  I suppose real RV128 will extend this restriction to mod 4, 
+but that is not yet documented.
 
-   Frédéric
-> 
->>
->> Regards,
->>
->> Phil.
+Otherwise,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
--- 
-+---------------------------------------------------------------------------+
-| Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
-| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
-| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
-+---------------------------------------------------------------------------+
+
+r~
 
