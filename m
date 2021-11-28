@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrKhF-0006Og-Nn
+	id 1mrKhF-0006Pa-TJ
 	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:58:25 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45712)
+Received: from eggs.gnu.org ([209.51.188.92]:45804)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgj-0005vk-Dh; Sun, 28 Nov 2021 08:57:56 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34204)
+ id 1mrKgm-0005w6-SL; Sun, 28 Nov 2021 08:57:59 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34520)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgg-0004e1-LB; Sun, 28 Nov 2021 08:57:53 -0500
+ id 1mrKgk-0004fE-LP; Sun, 28 Nov 2021 08:57:56 -0500
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9AA7140257;
- Sun, 28 Nov 2021 14:57:46 +0100 (CET)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4C1F44029C;
+ Sun, 28 Nov 2021 14:57:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1638107866;
- bh=A6Sf5H4rnz3VydvZEMbTT+PEy6/9sn9Uk52qGvnAHf4=;
- h=From:To:Cc:Subject:Date:From;
- b=v594ASvm52/mLr+3dMG3eFmaRMrYCplLl8TFaJ8z1X+T2Sz53fZiumEpyEBWD+Wuq
- OLSawgyWFUeD9fqKOkdX/dQLRFTOQyfkHIVtd9wHqlrZe1MVuJTuQXZp3ykQJJDnYo
- 1AR6Kyu/TYUcE65hORscu+6fX12QmK5fNdxBegg4fPfgd6gup7tq+jkfIum4SEJgVm
- xbE46DjaU4enL6bYcqBOX2aE6id35gykm/8FqepaDhSDg8WPL9V0L5NlB4nqr9ub7c
- XD6jJIxq/Afw8CZrfiLH4/ZGWtieGkTMeyaFcpl1mQ7BBCZOx+MuIiY2SQTdamzjSW
- 0IB/4etG1pTXA==
+ d=univ-grenoble-alpes.fr; s=2020; t=1638107868;
+ bh=9lY2FGIpf15sOncuwIUpWSAkivmFPP7hbITPcjGi58c=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=VHYyT6YtsR2JHewwEF5ufp8I3LEqCHcS5ihoU91mDLgkKNnfziigS9hqB+OPB+/ae
+ AHhgKW3SQ4YTwyZSbo1KR1E7vjMyBbsEKn8/6wjrHP/zsrcV37QubUVyq7A0+CCIai
+ 1dnKc6cpxadFgVXvCwKCZRFz2p1CwoPxzyfeTy/4g/rJpGVan1Jvd99TL2EzAmpqmw
+ uX2JNLomJRGij2L5ghJFe7Ub28ZOw19PFJfYI3jsYUK2lYOc33+UypfOK7QIb5WXcg
+ FwjwWdph6oKudEGTMHG+uwOQhdfUTc0Uy0DKEKHMwV1w4Lc7K3X/ERX1/PJlxr94LT
+ XC5ZspsHGHHMA==
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 850CD60066;
- Sun, 28 Nov 2021 14:57:46 +0100 (CET)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 329D960066;
+ Sun, 28 Nov 2021 14:57:48 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id CD9C240069;
- Sun, 28 Nov 2021 14:57:45 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 014AD4006D;
+ Sun, 28 Nov 2021 14:57:47 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,10 +43,13 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v6 00/18] Adding partial support for 128-bit riscv target
-Date: Sun, 28 Nov 2021 14:57:01 +0100
-Message-Id: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v6 07/18] target/riscv: setup everything for rv64 to support
+ rv128 execution
+Date: Sun, 28 Nov 2021 14:57:08 +0100
+Message-Id: <20211128135719.50444-8-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.34.0
+In-Reply-To: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -77,136 +80,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 28 Nov 2021 13:58:01 -0000
 
-This series of patches provides partial 128-bit support for the riscv
-target architecture, namely RVI and RVM, with minimal csr support.
+This patch adds the support of the '-cpu rv128' option to
+qemu-system-riscv64 so that we can indicate that we want to run rv128
+executables.
+Still, there is no support for 128-bit insns at that stage so qemu fails
+miserably (as expected) if launched with this option.
 
-Thanks again for the reviews and suggestions.
+Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+---
+ include/disas/dis-asm.h |  1 +
+ target/riscv/cpu.h      |  1 +
+ disas/riscv.c           |  5 +++++
+ target/riscv/cpu.c      | 20 ++++++++++++++++++++
+ target/riscv/gdbstub.c  |  5 +++++
+ 5 files changed, 32 insertions(+)
 
-v6:
-- support for '-cpu rv128' in qemu-system-riscv64 to handle 128-bit
-  executables (no more qemu-system-riscv128)
-- remove useless (and buggy) big-endian support in lq/sq
-
-v5:
-- split the memop define renaming and addition in two patches
-- 128-bit div/rem operations using host-utils functions
-- removed useless rv128 tests at various places
-- refactoring the slt/bxx part so as to share the comparison part
-- refactoring the 128-bit csr handling to share code more largely
-  Also forwarding writes to the 64-bit version when not 128-bit version
-  exists, as a vast majority of the csrs does not use the upper 64-bits
-
-v4: 
-- safer and cleaner access to the gpr upper part
-- locals for load/store/div/rem helpers
-- cleans out the 128-bit div/rem code
-- corrects numerous bugs and performs optimizations on shifts and mults
-- withdraws the change in page size and the vm schemes we introduced
-
-v3:
-- v2 refactored following Richard's xl patch changes
-
-v2:
-- load and store making use of new memop.h sizes
-- use of the existing Int128 computations in helpers, and addition of
-  a few more operations there, in particular division and remainder
-- refactoring of the calls to the code generation helpers
-- split of the patch in smaller pieces
-
-v1:
-- introducing support for rv128 for basic integer and M extension insns
-
-Frédéric Pétrot (18):
-  exec/memop: Adding signedness to quad definitions
-  exec/memop: Adding signed quad and octo defines
-  qemu/int128: addition of div/rem 128-bit operations
-  target/riscv: additional macros to check instruction support
-  target/riscv: separation of bitwise logic and arithmetic helpers
-  target/riscv: array for the 64 upper bits of 128-bit registers
-  target/riscv: setup everything for rv64 to support rv128 execution
-  target/riscv: moving some insns close to similar insns
-  target/riscv: accessors to registers upper part and 128-bit load/store
-  target/riscv: support for 128-bit bitwise instructions
-  target/riscv: support for 128-bit U-type instructions
-  target/riscv: support for 128-bit shift instructions
-  target/riscv: support for 128-bit arithmetic instructions
-  target/riscv: support for 128-bit M extension
-  target/riscv: adding high part of some csrs
-  target/riscv: helper functions to wrap calls to 128-bit csr insns
-  target/riscv: modification of the trans_csrxx for 128-bit support
-  target/riscv: actual functions to realize crs 128-bit insns
-
- include/disas/dis-asm.h                    |   1 +
- include/exec/memop.h                       |  15 +-
- include/qemu/int128.h                      |   6 +
- include/tcg/tcg-op.h                       |   4 +-
- target/arm/translate-a32.h                 |   4 +-
- target/riscv/cpu.h                         |  21 +
- target/riscv/cpu_bits.h                    |   3 +
- target/riscv/helper.h                      |   9 +
- target/riscv/insn16.decode                 |  27 +-
- target/riscv/insn32.decode                 |  25 +
- accel/tcg/cputlb.c                         |  30 +-
- accel/tcg/user-exec.c                      |   8 +-
- disas/riscv.c                              |   5 +
- target/alpha/translate.c                   |  32 +-
- target/arm/helper-a64.c                    |   8 +-
- target/arm/translate-a64.c                 |   8 +-
- target/arm/translate-neon.c                |   6 +-
- target/arm/translate-sve.c                 |  10 +-
- target/arm/translate-vfp.c                 |   8 +-
- target/arm/translate.c                     |   2 +-
- target/cris/translate.c                    |   2 +-
- target/hppa/translate.c                    |   4 +-
- target/i386/tcg/mem_helper.c               |   2 +-
- target/i386/tcg/translate.c                |  36 +-
- target/m68k/op_helper.c                    |   2 +-
- target/mips/tcg/translate.c                |  58 +-
- target/mips/tcg/tx79_translate.c           |   8 +-
- target/ppc/translate.c                     |  32 +-
- target/riscv/cpu.c                         |  29 +
- target/riscv/csr.c                         | 194 +++++-
- target/riscv/gdbstub.c                     |   5 +
- target/riscv/m128_helper.c                 | 109 +++
- target/riscv/machine.c                     |  22 +
- target/riscv/op_helper.c                   |  44 ++
- target/riscv/translate.c                   | 252 ++++++-
- target/s390x/tcg/mem_helper.c              |   8 +-
- target/s390x/tcg/translate.c               |   8 +-
- target/sh4/translate.c                     |  12 +-
- target/sparc/translate.c                   |  36 +-
- target/tricore/translate.c                 |   4 +-
- target/xtensa/translate.c                  |   4 +-
- tcg/tcg.c                                  |   4 +-
- tcg/tci.c                                  |  16 +-
- util/int128.c                              | 145 ++++
- accel/tcg/ldst_common.c.inc                |   8 +-
- target/mips/tcg/micromips_translate.c.inc  |  10 +-
- target/ppc/translate/fixedpoint-impl.c.inc |  22 +-
- target/ppc/translate/fp-impl.c.inc         |   4 +-
- target/ppc/translate/vsx-impl.c.inc        |  42 +-
- target/riscv/insn_trans/trans_rva.c.inc    |  22 +-
- target/riscv/insn_trans/trans_rvb.c.inc    |  48 +-
- target/riscv/insn_trans/trans_rvd.c.inc    |   4 +-
- target/riscv/insn_trans/trans_rvh.c.inc    |   4 +-
- target/riscv/insn_trans/trans_rvi.c.inc    | 730 ++++++++++++++++++---
- target/riscv/insn_trans/trans_rvm.c.inc    | 192 +++++-
- target/s390x/tcg/translate_vx.c.inc        |  18 +-
- tcg/aarch64/tcg-target.c.inc               |   2 +-
- tcg/arm/tcg-target.c.inc                   |  10 +-
- tcg/i386/tcg-target.c.inc                  |  12 +-
- tcg/mips/tcg-target.c.inc                  |  12 +-
- tcg/ppc/tcg-target.c.inc                   |  16 +-
- tcg/riscv/tcg-target.c.inc                 |   6 +-
- tcg/s390x/tcg-target.c.inc                 |  18 +-
- tcg/sparc/tcg-target.c.inc                 |  16 +-
- target/riscv/meson.build                   |   1 +
- target/s390x/tcg/insn-data.def             |  28 +-
- util/meson.build                           |   1 +
- 67 files changed, 1982 insertions(+), 512 deletions(-)
- create mode 100644 target/riscv/m128_helper.c
- create mode 100644 util/int128.c
-
+diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
+index 08e1beec85..102a1e7f50 100644
+--- a/include/disas/dis-asm.h
++++ b/include/disas/dis-asm.h
+@@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
+ int print_insn_xtensa           (bfd_vma, disassemble_info*);
+ int print_insn_riscv32          (bfd_vma, disassemble_info*);
+ int print_insn_riscv64          (bfd_vma, disassemble_info*);
++int print_insn_riscv128         (bfd_vma, disassemble_info*);
+ int print_insn_rx(bfd_vma, disassemble_info *);
+ int print_insn_hexagon(bfd_vma, disassemble_info *);
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 53a295efb7..cbd4daa6d9 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -38,6 +38,7 @@
+ #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
++#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+ #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
+ #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
+ #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 793ad14c27..03c8dc9961 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -3090,3 +3090,8 @@ int print_insn_riscv64(bfd_vma memaddr, struct disassemble_info *info)
+ {
+     return print_insn_riscv(memaddr, info, rv64);
+ }
++
++int print_insn_riscv128(bfd_vma memaddr, struct disassemble_info *info)
++{
++    return print_insn_riscv(memaddr, info, rv128);
++}
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 364140f5ff..7f5370f2b2 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -178,6 +178,19 @@ static void rv64_sifive_e_cpu_init(Object *obj)
+     set_priv_version(env, PRIV_VERSION_1_10_0);
+     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
+ }
++
++static void rv128_base_cpu_init(Object *obj)
++{
++    if (qemu_tcg_mttcg_enabled()) {
++        /* Missing 128-bit aligned atomics */
++        error_report("128-bit RISC-V currently does not work with Multi "
++                     "Threaded TCG. Please use: -accel tcg,thread=single");
++        exit(EXIT_FAILURE);
++    }
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    /* We set this in the realise function */
++    set_misa(env, MXL_RV128, 0);
++}
+ #else
+ static void rv32_base_cpu_init(Object *obj)
+ {
+@@ -402,6 +415,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
+     case MXL_RV64:
+         info->print_insn = print_insn_riscv64;
+         break;
++    case MXL_RV128:
++        info->print_insn = print_insn_riscv128;
++        break;
+     default:
+         g_assert_not_reached();
+     }
+@@ -464,6 +480,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ #ifdef TARGET_RISCV64
+     case MXL_RV64:
+         break;
++    case MXL_RV128:
++        break;
+ #endif
+     case MXL_RV32:
+         break;
+@@ -670,6 +688,7 @@ static gchar *riscv_gdb_arch_name(CPUState *cs)
+     case MXL_RV32:
+         return g_strdup("riscv:rv32");
+     case MXL_RV64:
++    case MXL_RV128:
+         return g_strdup("riscv:rv64");
+     default:
+         g_assert_not_reached();
+@@ -822,6 +841,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
+     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
++    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
+ #endif
+ };
+ 
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index 23429179e2..2fbdcc5879 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -164,6 +164,11 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
+     int bitsize = 16 << env->misa_mxl_max;
+     int i;
+ 
++    /* Until gdb knows about 128-bit registers */
++    if (bitsize > 64) {
++        bitsize = 64;
++    }
++
+     g_string_printf(s, "<?xml version=\"1.0\"?>");
+     g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
+     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
 -- 
 2.34.0
 
