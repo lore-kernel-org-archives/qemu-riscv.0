@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrKhF-0006Pa-TJ
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:58:25 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45804)
+	id 1mrKhI-0006UO-6r
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:58:28 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:45942)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgm-0005w6-SL; Sun, 28 Nov 2021 08:57:59 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34520)
+ id 1mrKhD-0006Hq-4m; Sun, 28 Nov 2021 08:58:23 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34530)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgk-0004fE-LP; Sun, 28 Nov 2021 08:57:56 -0500
+ id 1mrKh5-0004fo-Sh; Sun, 28 Nov 2021 08:58:22 -0500
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4C1F44029C;
- Sun, 28 Nov 2021 14:57:48 +0100 (CET)
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 6C326402A5;
+ Sun, 28 Nov 2021 14:57:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1638107868;
- bh=9lY2FGIpf15sOncuwIUpWSAkivmFPP7hbITPcjGi58c=;
+ d=univ-grenoble-alpes.fr; s=2020; t=1638107869;
+ bh=PEBBTccQFpgWdL9qtbekKWN0xeksvdLNY59xqngujek=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=VHYyT6YtsR2JHewwEF5ufp8I3LEqCHcS5ihoU91mDLgkKNnfziigS9hqB+OPB+/ae
- AHhgKW3SQ4YTwyZSbo1KR1E7vjMyBbsEKn8/6wjrHP/zsrcV37QubUVyq7A0+CCIai
- 1dnKc6cpxadFgVXvCwKCZRFz2p1CwoPxzyfeTy/4g/rJpGVan1Jvd99TL2EzAmpqmw
- uX2JNLomJRGij2L5ghJFe7Ub28ZOw19PFJfYI3jsYUK2lYOc33+UypfOK7QIb5WXcg
- FwjwWdph6oKudEGTMHG+uwOQhdfUTc0Uy0DKEKHMwV1w4Lc7K3X/ERX1/PJlxr94LT
- XC5ZspsHGHHMA==
+ b=Rl76OVhP8y7w2cKboLQHMnhGSEPrTkHkfiSkA/1LKiwuVJFB3c7ZkupUeiHLklQWL
+ R4XJ5OljDxXvwj5w7QORrIaX2B5p8HtQdjqZZot7hhn+JHoRQAnJ3J+tNQ9Odr0cUS
+ D7TUuoStukCA/2908iyxuSR8eTDKyW63rHtEJ4KZjRk5RsGuT6AjPRIIzdM2sGVjJN
+ NndwT6tGq/vp4YHagnZPyNo+MBEU9bVOynVXh4a6jXjc8uoIu+J/WA0iLG+avMhmjM
+ zfhL2fUkf8mBYUGXgS4JH2FFkdqD3RwG04Xt4gSGsKtILxcswXzsGCPg5/eQaYD1V1
+ iqdOleggpY8QQ==
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 329D960066;
- Sun, 28 Nov 2021 14:57:48 +0100 (CET)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 55A8D60066;
+ Sun, 28 Nov 2021 14:57:49 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 014AD4006D;
- Sun, 28 Nov 2021 14:57:47 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 222A940069;
+ Sun, 28 Nov 2021 14:57:49 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,10 +43,9 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v6 07/18] target/riscv: setup everything for rv64 to support
- rv128 execution
-Date: Sun, 28 Nov 2021 14:57:08 +0100
-Message-Id: <20211128135719.50444-8-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v6 12/18] target/riscv: support for 128-bit shift instructions
+Date: Sun, 28 Nov 2021 14:57:13 +0100
+Message-Id: <20211128135719.50444-13-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -78,136 +77,592 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Nov 2021 13:58:01 -0000
+X-List-Received-Date: Sun, 28 Nov 2021 13:58:23 -0000
 
-This patch adds the support of the '-cpu rv128' option to
-qemu-system-riscv64 so that we can indicate that we want to run rv128
-executables.
-Still, there is no support for 128-bit insns at that stage so qemu fails
-miserably (as expected) if launched with this option.
+Handling shifts for 32, 64 and 128 operation length for RV128, following the
+general framework for handling various olens proposed by Richard.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 ---
- include/disas/dis-asm.h |  1 +
- target/riscv/cpu.h      |  1 +
- disas/riscv.c           |  5 +++++
- target/riscv/cpu.c      | 20 ++++++++++++++++++++
- target/riscv/gdbstub.c  |  5 +++++
- 5 files changed, 32 insertions(+)
+ target/riscv/insn32.decode              |  10 ++
+ target/riscv/translate.c                |  58 ++++--
+ target/riscv/insn_trans/trans_rvb.c.inc |  22 +--
+ target/riscv/insn_trans/trans_rvi.c.inc | 224 ++++++++++++++++++++++--
+ 4 files changed, 270 insertions(+), 44 deletions(-)
 
-diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
-index 08e1beec85..102a1e7f50 100644
---- a/include/disas/dis-asm.h
-+++ b/include/disas/dis-asm.h
-@@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
- int print_insn_xtensa           (bfd_vma, disassemble_info*);
- int print_insn_riscv32          (bfd_vma, disassemble_info*);
- int print_insn_riscv64          (bfd_vma, disassemble_info*);
-+int print_insn_riscv128         (bfd_vma, disassemble_info*);
- int print_insn_rx(bfd_vma, disassemble_info *);
- int print_insn_hexagon(bfd_vma, disassemble_info *);
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 02889c6082..e338a803a0 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -22,6 +22,7 @@
+ %rs1       15:5
+ %rd        7:5
+ %sh5       20:5
++%sh6       20:6
  
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 53a295efb7..cbd4daa6d9 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -38,6 +38,7 @@
- #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
- #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
- #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
-+#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
- #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
- #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 793ad14c27..03c8dc9961 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -3090,3 +3090,8 @@ int print_insn_riscv64(bfd_vma memaddr, struct disassemble_info *info)
+ %sh7    20:7
+ %csr    20:12
+@@ -92,6 +93,9 @@
+ # Formats 64:
+ @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+ 
++# Formats 128:
++@sh6       ...... ...... ..... ... ..... ....... &shift shamt=%sh6 %rs1 %rd
++
+ # *** Privileged Instructions ***
+ ecall       000000000000     00000 000 00000 1110011
+ ebreak      000000000001     00000 000 00000 1110011
+@@ -167,6 +171,12 @@ sraw     0100000 .....  ..... 101 ..... 0111011 @r
+ ldu      ............   ..... 111 ..... 0000011 @i
+ lq       ............   ..... 010 ..... 0001111 @i
+ sq       ............   ..... 100 ..... 0100011 @s
++sllid    000000 ......  ..... 001 ..... 1011011 @sh6
++srlid    000000 ......  ..... 101 ..... 1011011 @sh6
++sraid    010000 ......  ..... 101 ..... 1011011 @sh6
++slld     0000000 ..... .....  001 ..... 1111011 @r
++srld     0000000 ..... .....  101 ..... 1111011 @r
++srad     0100000 ..... .....  101 ..... 1111011 @r
+ 
+ # *** RV32M Standard Extension ***
+ mul      0000001 .....  ..... 000 ..... 0110011 @r
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 0b87312dda..15e628308d 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -560,7 +560,8 @@ static bool gen_arith_per_ol(DisasContext *ctx, arg_r *a, DisasExtend ext,
+ }
+ 
+ static bool gen_shift_imm_fn(DisasContext *ctx, arg_shift *a, DisasExtend ext,
+-                             void (*func)(TCGv, TCGv, target_long))
++                             void (*func)(TCGv, TCGv, target_long),
++                             void (*f128)(TCGv, TCGv, TCGv, TCGv, target_long))
  {
-     return print_insn_riscv(memaddr, info, rv64);
- }
-+
-+int print_insn_riscv128(bfd_vma memaddr, struct disassemble_info *info)
-+{
-+    return print_insn_riscv(memaddr, info, rv128);
-+}
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 364140f5ff..7f5370f2b2 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -178,6 +178,19 @@ static void rv64_sifive_e_cpu_init(Object *obj)
-     set_priv_version(env, PRIV_VERSION_1_10_0);
-     qdev_prop_set_bit(DEVICE(obj), "mmu", false);
- }
-+
-+static void rv128_base_cpu_init(Object *obj)
-+{
-+    if (qemu_tcg_mttcg_enabled()) {
-+        /* Missing 128-bit aligned atomics */
-+        error_report("128-bit RISC-V currently does not work with Multi "
-+                     "Threaded TCG. Please use: -accel tcg,thread=single");
-+        exit(EXIT_FAILURE);
+     TCGv dest, src1;
+     int max_len = get_olen(ctx);
+@@ -572,26 +573,38 @@ static bool gen_shift_imm_fn(DisasContext *ctx, arg_shift *a, DisasExtend ext,
+     dest = dest_gpr(ctx, a->rd);
+     src1 = get_gpr(ctx, a->rs1, ext);
+ 
+-    func(dest, src1, a->shamt);
++    if (max_len < 128) {
++        func(dest, src1, a->shamt);
++        gen_set_gpr(ctx, a->rd, dest);
++    } else {
++        TCGv src1h = get_gprh(ctx, a->rs1);
++        TCGv desth = dest_gprh(ctx, a->rd);
+ 
+-    gen_set_gpr(ctx, a->rd, dest);
++        if (f128 == NULL) {
++            return false;
++        }
++        f128(dest, desth, src1, src1h, a->shamt);
++        gen_set_gpr128(ctx, a->rd, dest, desth);
 +    }
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    /* We set this in the realise function */
-+    set_misa(env, MXL_RV128, 0);
-+}
- #else
- static void rv32_base_cpu_init(Object *obj)
+     return true;
+ }
+ 
+ static bool gen_shift_imm_fn_per_ol(DisasContext *ctx, arg_shift *a,
+                                     DisasExtend ext,
+                                     void (*f_tl)(TCGv, TCGv, target_long),
+-                                    void (*f_32)(TCGv, TCGv, target_long))
++                                    void (*f_32)(TCGv, TCGv, target_long),
++                                    void (*f_128)(TCGv, TCGv, TCGv, TCGv,
++                                                  target_long))
  {
-@@ -402,6 +415,9 @@ static void riscv_cpu_disas_set_info(CPUState *s, disassemble_info *info)
-     case MXL_RV64:
-         info->print_insn = print_insn_riscv64;
-         break;
-+    case MXL_RV128:
-+        info->print_insn = print_insn_riscv128;
-+        break;
-     default:
-         g_assert_not_reached();
+     int olen = get_olen(ctx);
+     if (olen != TARGET_LONG_BITS) {
+         if (olen == 32) {
+             f_tl = f_32;
+-        } else {
++        } else if (olen != 128) {
+             g_assert_not_reached();
+         }
      }
-@@ -464,6 +480,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
- #ifdef TARGET_RISCV64
-     case MXL_RV64:
-         break;
-+    case MXL_RV128:
-+        break;
- #endif
-     case MXL_RV32:
-         break;
-@@ -670,6 +688,7 @@ static gchar *riscv_gdb_arch_name(CPUState *cs)
-     case MXL_RV32:
-         return g_strdup("riscv:rv32");
-     case MXL_RV64:
-+    case MXL_RV128:
-         return g_strdup("riscv:rv64");
-     default:
-         g_assert_not_reached();
-@@ -822,6 +841,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_E51,       rv64_sifive_e_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SIFIVE_U54,       rv64_sifive_u_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_SHAKTI_C,         rv64_sifive_u_cpu_init),
-+    DEFINE_CPU(TYPE_RISCV_CPU_BASE128,          rv128_base_cpu_init),
- #endif
- };
+-    return gen_shift_imm_fn(ctx, a, ext, f_tl);
++    return gen_shift_imm_fn(ctx, a, ext, f_tl, f_128);
+ }
  
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 23429179e2..2fbdcc5879 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -164,6 +164,11 @@ static int riscv_gen_dynamic_csr_xml(CPUState *cs, int base_reg)
-     int bitsize = 16 << env->misa_mxl_max;
-     int i;
+ static bool gen_shift_imm_tl(DisasContext *ctx, arg_shift *a, DisasExtend ext,
+@@ -615,34 +628,49 @@ static bool gen_shift_imm_tl(DisasContext *ctx, arg_shift *a, DisasExtend ext,
+ }
  
-+    /* Until gdb knows about 128-bit registers */
-+    if (bitsize > 64) {
-+        bitsize = 64;
-+    }
+ static bool gen_shift(DisasContext *ctx, arg_r *a, DisasExtend ext,
+-                      void (*func)(TCGv, TCGv, TCGv))
++                      void (*func)(TCGv, TCGv, TCGv),
++                      void (*f128)(TCGv, TCGv, TCGv, TCGv, TCGv))
+ {
+-    TCGv dest = dest_gpr(ctx, a->rd);
+-    TCGv src1 = get_gpr(ctx, a->rs1, ext);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+     TCGv ext2 = tcg_temp_new();
++    int max_len = get_olen(ctx);
+ 
+-    tcg_gen_andi_tl(ext2, src2, get_olen(ctx) - 1);
+-    func(dest, src1, ext2);
++    tcg_gen_andi_tl(ext2, src2, max_len - 1);
+ 
+-    gen_set_gpr(ctx, a->rd, dest);
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, ext);
 +
-     g_string_printf(s, "<?xml version=\"1.0\"?>");
-     g_string_append_printf(s, "<!DOCTYPE feature SYSTEM \"gdb-target.dtd\">");
-     g_string_append_printf(s, "<feature name=\"org.gnu.gdb.riscv.csr\">");
++    if (max_len < 128) {
++        func(dest, src1, ext2);
++        gen_set_gpr(ctx, a->rd, dest);
++    } else {
++        TCGv src1h = get_gprh(ctx, a->rs1);
++        TCGv desth = dest_gprh(ctx, a->rd);
++
++        if (f128 == NULL) {
++            return false;
++        }
++        f128(dest, desth, src1, src1h, ext2);
++        gen_set_gpr128(ctx, a->rd, dest, desth);
++    }
+     tcg_temp_free(ext2);
+     return true;
+ }
+ 
+ static bool gen_shift_per_ol(DisasContext *ctx, arg_r *a, DisasExtend ext,
+                              void (*f_tl)(TCGv, TCGv, TCGv),
+-                             void (*f_32)(TCGv, TCGv, TCGv))
++                             void (*f_32)(TCGv, TCGv, TCGv),
++                             void (*f_128)(TCGv, TCGv, TCGv, TCGv, TCGv))
+ {
+     int olen = get_olen(ctx);
+     if (olen != TARGET_LONG_BITS) {
+         if (olen == 32) {
+             f_tl = f_32;
+-        } else {
++        } else if (olen != 128) {
+             g_assert_not_reached();
+         }
+     }
+-    return gen_shift(ctx, a, ext, f_tl);
++    return gen_shift(ctx, a, ext, f_tl, f_128);
+ }
+ 
+ static bool gen_unary(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index de2cd613b1..ad6548320f 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -156,7 +156,7 @@ static void gen_bset(TCGv ret, TCGv arg1, TCGv shamt)
+ static bool trans_bset(DisasContext *ctx, arg_bset *a)
+ {
+     REQUIRE_ZBS(ctx);
+-    return gen_shift(ctx, a, EXT_NONE, gen_bset);
++    return gen_shift(ctx, a, EXT_NONE, gen_bset, NULL);
+ }
+ 
+ static bool trans_bseti(DisasContext *ctx, arg_bseti *a)
+@@ -178,7 +178,7 @@ static void gen_bclr(TCGv ret, TCGv arg1, TCGv shamt)
+ static bool trans_bclr(DisasContext *ctx, arg_bclr *a)
+ {
+     REQUIRE_ZBS(ctx);
+-    return gen_shift(ctx, a, EXT_NONE, gen_bclr);
++    return gen_shift(ctx, a, EXT_NONE, gen_bclr, NULL);
+ }
+ 
+ static bool trans_bclri(DisasContext *ctx, arg_bclri *a)
+@@ -200,7 +200,7 @@ static void gen_binv(TCGv ret, TCGv arg1, TCGv shamt)
+ static bool trans_binv(DisasContext *ctx, arg_binv *a)
+ {
+     REQUIRE_ZBS(ctx);
+-    return gen_shift(ctx, a, EXT_NONE, gen_binv);
++    return gen_shift(ctx, a, EXT_NONE, gen_binv, NULL);
+ }
+ 
+ static bool trans_binvi(DisasContext *ctx, arg_binvi *a)
+@@ -218,7 +218,7 @@ static void gen_bext(TCGv ret, TCGv arg1, TCGv shamt)
+ static bool trans_bext(DisasContext *ctx, arg_bext *a)
+ {
+     REQUIRE_ZBS(ctx);
+-    return gen_shift(ctx, a, EXT_NONE, gen_bext);
++    return gen_shift(ctx, a, EXT_NONE, gen_bext, NULL);
+ }
+ 
+ static bool trans_bexti(DisasContext *ctx, arg_bexti *a)
+@@ -248,7 +248,7 @@ static void gen_rorw(TCGv ret, TCGv arg1, TCGv arg2)
+ static bool trans_ror(DisasContext *ctx, arg_ror *a)
+ {
+     REQUIRE_ZBB(ctx);
+-    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotr_tl, gen_rorw);
++    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotr_tl, gen_rorw, NULL);
+ }
+ 
+ static void gen_roriw(TCGv ret, TCGv arg1, target_long shamt)
+@@ -266,7 +266,7 @@ static bool trans_rori(DisasContext *ctx, arg_rori *a)
+ {
+     REQUIRE_ZBB(ctx);
+     return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
+-                                   tcg_gen_rotri_tl, gen_roriw);
++                                   tcg_gen_rotri_tl, gen_roriw, NULL);
+ }
+ 
+ static void gen_rolw(TCGv ret, TCGv arg1, TCGv arg2)
+@@ -290,7 +290,7 @@ static void gen_rolw(TCGv ret, TCGv arg1, TCGv arg2)
+ static bool trans_rol(DisasContext *ctx, arg_rol *a)
+ {
+     REQUIRE_ZBB(ctx);
+-    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotl_tl, gen_rolw);
++    return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotl_tl, gen_rolw, NULL);
+ }
+ 
+ static void gen_rev8_32(TCGv ret, TCGv src1)
+@@ -405,7 +405,7 @@ static bool trans_rorw(DisasContext *ctx, arg_rorw *a)
+     REQUIRE_64BIT(ctx);
+     REQUIRE_ZBB(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift(ctx, a, EXT_NONE, gen_rorw);
++    return gen_shift(ctx, a, EXT_NONE, gen_rorw, NULL);
+ }
+ 
+ static bool trans_roriw(DisasContext *ctx, arg_roriw *a)
+@@ -413,7 +413,7 @@ static bool trans_roriw(DisasContext *ctx, arg_roriw *a)
+     REQUIRE_64BIT(ctx);
+     REQUIRE_ZBB(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw, NULL);
+ }
+ 
+ static bool trans_rolw(DisasContext *ctx, arg_rolw *a)
+@@ -421,7 +421,7 @@ static bool trans_rolw(DisasContext *ctx, arg_rolw *a)
+     REQUIRE_64BIT(ctx);
+     REQUIRE_ZBB(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift(ctx, a, EXT_NONE, gen_rolw);
++    return gen_shift(ctx, a, EXT_NONE, gen_rolw, NULL);
+ }
+ 
+ #define GEN_SHADD_UW(SHAMT)                                       \
+@@ -478,7 +478,7 @@ static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
+ {
+     REQUIRE_64BIT(ctx);
+     REQUIRE_ZBA(ctx);
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_slli_uw);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_slli_uw, NULL);
+ }
+ 
+ static bool trans_clmul(DisasContext *ctx, arg_clmul *a)
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 6113acc669..2e3a6c6041 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -353,9 +353,22 @@ static bool trans_andi(DisasContext *ctx, arg_andi *a)
+     return gen_logic_imm_fn(ctx, a, tcg_gen_andi_tl);
+ }
+ 
++static void gen_slli_i128(TCGv retl, TCGv reth,
++                          TCGv src1l, TCGv src1h,
++                          target_long shamt)
++{
++    if (shamt >= 64) {
++        tcg_gen_shli_tl(reth, src1l, shamt - 64);
++        tcg_gen_movi_tl(retl, 0);
++    } else {
++        tcg_gen_extract2_tl(reth, src1l, src1h, 64 - shamt);
++        tcg_gen_shli_tl(retl, src1l, shamt);
++    }
++}
++
+ static bool trans_slli(DisasContext *ctx, arg_slli *a)
+ {
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl, gen_slli_i128);
+ }
+ 
+ static void gen_srliw(TCGv dst, TCGv src, target_long shamt)
+@@ -363,10 +376,23 @@ static void gen_srliw(TCGv dst, TCGv src, target_long shamt)
+     tcg_gen_extract_tl(dst, src, shamt, 32 - shamt);
+ }
+ 
++static void gen_srli_i128(TCGv retl, TCGv reth,
++                          TCGv src1l, TCGv src1h,
++                          target_long shamt)
++{
++    if (shamt >= 64) {
++        tcg_gen_shri_tl(retl, src1h, shamt - 64);
++        tcg_gen_movi_tl(reth, 0);
++    } else {
++        tcg_gen_extract2_tl(retl, src1l, src1h, shamt);
++        tcg_gen_shri_tl(reth, src1h, shamt);
++    }
++}
++
+ static bool trans_srli(DisasContext *ctx, arg_srli *a)
+ {
+     return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
+-                                   tcg_gen_shri_tl, gen_srliw);
++                                   tcg_gen_shri_tl, gen_srliw, gen_srli_i128);
+ }
+ 
+ static void gen_sraiw(TCGv dst, TCGv src, target_long shamt)
+@@ -374,10 +400,23 @@ static void gen_sraiw(TCGv dst, TCGv src, target_long shamt)
+     tcg_gen_sextract_tl(dst, src, shamt, 32 - shamt);
+ }
+ 
++static void gen_srai_i128(TCGv retl, TCGv reth,
++                          TCGv src1l, TCGv src1h,
++                          target_long shamt)
++{
++    if (shamt >= 64) {
++        tcg_gen_sari_tl(retl, src1h, shamt - 64);
++        tcg_gen_sari_tl(reth, src1h, 63);
++    } else {
++        tcg_gen_extract2_tl(retl, src1l, src1h, shamt);
++        tcg_gen_sari_tl(reth, src1h, shamt);
++    }
++}
++
+ static bool trans_srai(DisasContext *ctx, arg_srai *a)
+ {
+     return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
+-                                   tcg_gen_sari_tl, gen_sraiw);
++                                   tcg_gen_sari_tl, gen_sraiw, gen_srai_i128);
+ }
+ 
+ static bool trans_add(DisasContext *ctx, arg_add *a)
+@@ -390,9 +429,44 @@ static bool trans_sub(DisasContext *ctx, arg_sub *a)
+     return gen_arith(ctx, a, EXT_NONE, tcg_gen_sub_tl);
+ }
+ 
++static void gen_sll_i128(TCGv destl, TCGv desth,
++                         TCGv src1l, TCGv src1h, TCGv shamt)
++{
++    TCGv ls = tcg_temp_new();
++    TCGv rs = tcg_temp_new();
++    TCGv hs = tcg_temp_new();
++    TCGv ll = tcg_temp_new();
++    TCGv lr = tcg_temp_new();
++    TCGv h0 = tcg_temp_new();
++    TCGv h1 = tcg_temp_new();
++    TCGv zero = tcg_constant_tl(0);
++
++    tcg_gen_andi_tl(hs, shamt, 64);
++    tcg_gen_andi_tl(ls, shamt, 63);
++    tcg_gen_neg_tl(shamt, shamt);
++    tcg_gen_andi_tl(rs, shamt, 63);
++
++    tcg_gen_shl_tl(ll, src1l, ls);
++    tcg_gen_shl_tl(h0, src1h, ls);
++    tcg_gen_shr_tl(lr, src1l, rs);
++    tcg_gen_movcond_tl(TCG_COND_NE, lr, shamt, zero, lr, zero);
++    tcg_gen_or_tl(h1, h0, lr);
++
++    tcg_gen_movcond_tl(TCG_COND_NE, destl, hs, zero, zero, ll);
++    tcg_gen_movcond_tl(TCG_COND_NE, desth, hs, zero, ll, h1);
++
++    tcg_temp_free(ls);
++    tcg_temp_free(rs);
++    tcg_temp_free(hs);
++    tcg_temp_free(ll);
++    tcg_temp_free(lr);
++    tcg_temp_free(h0);
++    tcg_temp_free(h1);
++}
++
+ static bool trans_sll(DisasContext *ctx, arg_sll *a)
+ {
+-    return gen_shift(ctx, a, EXT_NONE, tcg_gen_shl_tl);
++    return gen_shift(ctx, a, EXT_NONE, tcg_gen_shl_tl, gen_sll_i128);
+ }
+ 
+ static bool trans_slt(DisasContext *ctx, arg_slt *a)
+@@ -405,14 +479,85 @@ static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
+     return gen_arith(ctx, a, EXT_SIGN, gen_sltu);
+ }
+ 
++static void gen_srl_i128(TCGv destl, TCGv desth,
++                         TCGv src1l, TCGv src1h, TCGv shamt)
++{
++    TCGv ls = tcg_temp_new();
++    TCGv rs = tcg_temp_new();
++    TCGv hs = tcg_temp_new();
++    TCGv ll = tcg_temp_new();
++    TCGv lr = tcg_temp_new();
++    TCGv h0 = tcg_temp_new();
++    TCGv h1 = tcg_temp_new();
++    TCGv zero = tcg_constant_tl(0);
++
++    tcg_gen_andi_tl(hs, shamt, 64);
++    tcg_gen_andi_tl(rs, shamt, 63);
++    tcg_gen_neg_tl(shamt, shamt);
++    tcg_gen_andi_tl(ls, shamt, 63);
++
++    tcg_gen_shr_tl(lr, src1l, rs);
++    tcg_gen_shr_tl(h1, src1h, rs);
++    tcg_gen_shl_tl(ll, src1h, ls);
++    tcg_gen_movcond_tl(TCG_COND_NE, ll, shamt, zero, ll, zero);
++    tcg_gen_or_tl(h0, ll, lr);
++
++    tcg_gen_movcond_tl(TCG_COND_NE, destl, hs, zero, h1, h0);
++    tcg_gen_movcond_tl(TCG_COND_NE, desth, hs, zero, zero, h1);
++
++    tcg_temp_free(ls);
++    tcg_temp_free(rs);
++    tcg_temp_free(hs);
++    tcg_temp_free(ll);
++    tcg_temp_free(lr);
++    tcg_temp_free(h0);
++    tcg_temp_free(h1);
++}
++
+ static bool trans_srl(DisasContext *ctx, arg_srl *a)
+ {
+-    return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl);
++    return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl, gen_srl_i128);
++}
++
++static void gen_sra_i128(TCGv destl, TCGv desth,
++                         TCGv src1l, TCGv src1h, TCGv shamt)
++{
++    TCGv ls = tcg_temp_new();
++    TCGv rs = tcg_temp_new();
++    TCGv hs = tcg_temp_new();
++    TCGv ll = tcg_temp_new();
++    TCGv lr = tcg_temp_new();
++    TCGv h0 = tcg_temp_new();
++    TCGv h1 = tcg_temp_new();
++    TCGv zero = tcg_constant_tl(0);
++
++    tcg_gen_andi_tl(hs, shamt, 64);
++    tcg_gen_andi_tl(rs, shamt, 63);
++    tcg_gen_neg_tl(shamt, shamt);
++    tcg_gen_andi_tl(ls, shamt, 63);
++
++    tcg_gen_shr_tl(lr, src1l, rs);
++    tcg_gen_sar_tl(h1, src1h, rs);
++    tcg_gen_shl_tl(ll, src1h, ls);
++    tcg_gen_movcond_tl(TCG_COND_NE, ll, shamt, zero, ll, zero);
++    tcg_gen_or_tl(h0, ll, lr);
++    tcg_gen_sari_tl(lr, src1h, 63);
++
++    tcg_gen_movcond_tl(TCG_COND_NE, destl, hs, zero, h1, h0);
++    tcg_gen_movcond_tl(TCG_COND_NE, desth, hs, zero, lr, h1);
++
++    tcg_temp_free(ls);
++    tcg_temp_free(rs);
++    tcg_temp_free(hs);
++    tcg_temp_free(ll);
++    tcg_temp_free(lr);
++    tcg_temp_free(h0);
++    tcg_temp_free(h1);
+ }
+ 
+ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+ {
+-    return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl);
++    return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl, gen_sra_i128);
+ }
+ 
+ static bool trans_xor(DisasContext *ctx, arg_xor *a)
+@@ -439,23 +584,44 @@ static bool trans_addiw(DisasContext *ctx, arg_addiw *a)
+ 
+ static bool trans_slliw(DisasContext *ctx, arg_slliw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl, NULL);
+ }
+ 
+ static bool trans_srliw(DisasContext *ctx, arg_srliw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_srliw);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_srliw, NULL);
+ }
+ 
+ static bool trans_sraiw(DisasContext *ctx, arg_sraiw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_sraiw);
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_sraiw, NULL);
++}
++
++static bool trans_sllid(DisasContext *ctx, arg_sllid *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shli_tl, NULL);
++}
++
++static bool trans_srlid(DisasContext *ctx, arg_srlid *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_shri_tl, NULL);
++}
++
++static bool trans_sraid(DisasContext *ctx, arg_sraid *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift_imm_fn(ctx, a, EXT_NONE, tcg_gen_sari_tl,  NULL);
+ }
+ 
+ static bool trans_addw(DisasContext *ctx, arg_addw *a)
+@@ -474,25 +640,47 @@ static bool trans_subw(DisasContext *ctx, arg_subw *a)
+ 
+ static bool trans_sllw(DisasContext *ctx, arg_sllw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift(ctx, a, EXT_NONE, tcg_gen_shl_tl);
++    return gen_shift(ctx, a, EXT_NONE, tcg_gen_shl_tl, NULL);
+ }
+ 
+ static bool trans_srlw(DisasContext *ctx, arg_srlw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl);
++    return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl, NULL);
+ }
+ 
+ static bool trans_sraw(DisasContext *ctx, arg_sraw *a)
+ {
+-    REQUIRE_64BIT(ctx);
++    REQUIRE_64_OR_128BIT(ctx);
+     ctx->ol = MXL_RV32;
+-    return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl);
++    return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl, NULL);
+ }
+ 
++static bool trans_slld(DisasContext *ctx, arg_slld *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift(ctx, a, EXT_NONE, tcg_gen_shl_tl, NULL);
++}
++
++static bool trans_srld(DisasContext *ctx, arg_srld *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl, NULL);
++}
++
++static bool trans_srad(DisasContext *ctx, arg_srad *a)
++{
++    REQUIRE_128BIT(ctx);
++    ctx->ol = MXL_RV64;
++    return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl, NULL);
++}
++
++
+ static bool trans_fence(DisasContext *ctx, arg_fence *a)
+ {
+     /* FENCE is a full memory barrier. */
 -- 
 2.34.0
 
