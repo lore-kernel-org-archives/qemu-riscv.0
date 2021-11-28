@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrKhD-0006IC-Ed
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:58:23 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45798)
+	id 1mrKhE-0006LD-3c
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:58:24 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:45716)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgm-0005w4-K1; Sun, 28 Nov 2021 08:57:59 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34522)
+ id 1mrKgj-0005vm-Qh; Sun, 28 Nov 2021 08:57:57 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:34278)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mrKgk-0004fF-Jd; Sun, 28 Nov 2021 08:57:56 -0500
-Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 85CDD4029D;
- Sun, 28 Nov 2021 14:57:48 +0100 (CET)
+ id 1mrKgh-0004eJ-5d; Sun, 28 Nov 2021 08:57:53 -0500
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9D04240291;
+ Sun, 28 Nov 2021 14:57:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1638107868;
- bh=nHJqAgL17DDkpMiqCCJ0hOlhaw6jj82jEOT7dj3zJHI=;
+ d=univ-grenoble-alpes.fr; s=2020; t=1638107867;
+ bh=YzmsrreUvLP0sRCYbZs6n4p+IgPxW/b5EsoH0fjVkCk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Qotl3E2XHCsmBI01NB3U4kIvcASCQB09e83CtdqxyzqSWifk4ThMsVGJ2xeHtXrgU
- Z8LMsBJpWY1S0NPO5yJgzTi8AnZnrOIF0UOWttfhb6Z3wAadWD3uLOPVmdxNx8ChkM
- 9OwmSQqmFTLif+91CTh8ALp3A2AjOe52SxAdAHm8Ucq1B2/R6oyh2bA/9x+gQKmMhw
- G15P4WawbdolOjuCImYEj7pYDDoXm+fKSL8eoBYCwoj6ZbF8R5vdUl05rgzH5pNiG/
- 0dWpCEgoGFn/CNvvnMAH/DS7p+k3GvpLJJdLQBph5+22xgaqPHpFAxIjpTCKxP1kR2
- +ATRWxklOIwRQ==
+ b=JWpwhhOFKSLkhmzXHQAHFjztr6UZ1KkQ1qA0gKMwejZk589dcUssg5WwNixCo5rko
+ xRb+aRoHcUnQgEMtRrkBA4IgCImEwnAmPEUy4F1lmPFIPVSZXuSl8R4TgGDf8cJRJA
+ XpENsI+FEDxtM3YfzOMTFo8vcBF6sy0DnmZ7R26Pnsce4a+vCJlxd4TJ3Sz89wqfAR
+ ibhaAFoHlm3tsR1UaLowxEqST7Kp5V73yGOFzGWHSZ0iuWchx5vZE8uDXqJq+lbOJG
+ KcTB3Bf3gAee4AfUzjEhIWy0YryyPNWEnUy3I9KfmuZK4dgGXlDBTKYO6LqZE8Nfr7
+ WQMZC1bJeLdMA==
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 6D04D60067;
- Sun, 28 Nov 2021 14:57:48 +0100 (CET)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 858A660066;
+ Sun, 28 Nov 2021 14:57:47 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 39CD640069;
- Sun, 28 Nov 2021 14:57:48 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 5700E40069;
+ Sun, 28 Nov 2021 14:57:47 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -42,12 +42,11 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  bin.meng@windriver.com, philmd@redhat.com, palmer@dabbelt.com,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>, 
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PATCH v6 08/18] target/riscv: moving some insns close to similar
- insns
-Date: Sun, 28 Nov 2021 14:57:09 +0100
-Message-Id: <20211128135719.50444-9-frederic.petrot@univ-grenoble-alpes.fr>
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v6 04/18] target/riscv: additional macros to check instruction
+ support
+Date: Sun, 28 Nov 2021 14:57:05 +0100
+Message-Id: <20211128135719.50444-5-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -81,87 +80,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 28 Nov 2021 13:58:01 -0000
 
-lwu and ld are functionally close to the other loads, but were after the
-stores in the source file.
-Similarly, xor was away from or and and by two arithmetic functions, while
-the immediate versions were nicely put together.
-This patch moves the aforementioned loads after lhu, and xor above or,
-where they more logically belong.
+Given that the 128-bit version of the riscv spec adds new instructions, and
+that some instructions that were previously only available in 64-bit mode
+are now available for both 64-bit and 128-bit, we added new macros to check
+for the processor mode during translation.
+Although RV128 is a superset of RV64, we keep for now the RV64 only tests
+for extensions other than RVI and RVM.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 34 ++++++++++++-------------
- 1 file changed, 17 insertions(+), 17 deletions(-)
+ target/riscv/translate.c | 20 ++++++++++++++++----
+ 1 file changed, 16 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 51607b3d40..710f5e6a85 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -176,6 +176,18 @@ static bool trans_lhu(DisasContext *ctx, arg_lhu *a)
-     return gen_load(ctx, a, MO_TEUW);
- }
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 1d57bc97b5..2718ff15a1 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -368,10 +368,22 @@ EX_SH(12)
+     }                              \
+ } while (0)
  
-+static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUL);
-+}
+-#define REQUIRE_64BIT(ctx) do {    \
+-    if (get_xl(ctx) < MXL_RV64) {  \
+-        return false;              \
+-    }                              \
++#define REQUIRE_64BIT(ctx) do {     \
++    if (get_xl(ctx) != MXL_RV64) {  \
++        return false;               \
++    }                               \
++} while (0)
 +
-+static bool trans_ld(DisasContext *ctx, arg_ld *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    return gen_load(ctx, a, MO_TEUQ);
-+}
++#define REQUIRE_128BIT(ctx) do {    \
++    if (get_xl(ctx) != MXL_RV128) { \
++        return false;               \
++    }                               \
++} while (0)
 +
- static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
- {
-     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -207,18 +219,6 @@ static bool trans_sw(DisasContext *ctx, arg_sw *a)
-     return gen_store(ctx, a, MO_TESL);
- }
++#define REQUIRE_64_OR_128BIT(ctx) do { \
++    if (get_xl(ctx) == MXL_RV32) {     \
++        return false;                  \
++    }                                  \
+ } while (0)
  
--static bool trans_lwu(DisasContext *ctx, arg_lwu *a)
--{
--    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEUL);
--}
--
--static bool trans_ld(DisasContext *ctx, arg_ld *a)
--{
--    REQUIRE_64BIT(ctx);
--    return gen_load(ctx, a, MO_TEUQ);
--}
--
- static bool trans_sd(DisasContext *ctx, arg_sd *a)
- {
-     REQUIRE_64BIT(ctx);
-@@ -317,11 +317,6 @@ static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
-     return gen_arith(ctx, a, EXT_SIGN, gen_sltu);
- }
- 
--static bool trans_xor(DisasContext *ctx, arg_xor *a)
--{
--    return gen_logic(ctx, a, tcg_gen_xor_tl);
--}
--
- static bool trans_srl(DisasContext *ctx, arg_srl *a)
- {
-     return gen_shift(ctx, a, EXT_ZERO, tcg_gen_shr_tl);
-@@ -332,6 +327,11 @@ static bool trans_sra(DisasContext *ctx, arg_sra *a)
-     return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl);
- }
- 
-+static bool trans_xor(DisasContext *ctx, arg_xor *a)
-+{
-+    return gen_logic(ctx, a, tcg_gen_xor_tl);
-+}
-+
- static bool trans_or(DisasContext *ctx, arg_or *a)
- {
-     return gen_logic(ctx, a, tcg_gen_or_tl);
+ static int ex_rvc_register(DisasContext *ctx, int reg)
 -- 
 2.34.0
 
