@@ -1,78 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mqZUT-0002N0-89
-	for mharc-qemu-riscv@gnu.org; Fri, 26 Nov 2021 06:34:05 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54156)
+	id 1mrKco-0008V7-R5
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 08:53:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44880)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mqZUR-0002MX-7B
- for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:34:03 -0500
-Received: from [2a00:1450:4864:20::434] (port=44617
- helo=mail-wr1-x434.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mqZUP-0004Q7-Cz
- for qemu-riscv@nongnu.org; Fri, 26 Nov 2021 06:34:02 -0500
-Received: by mail-wr1-x434.google.com with SMTP id l16so17967600wrp.11
- for <qemu-riscv@nongnu.org>; Fri, 26 Nov 2021 03:34:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=dC0SNsEJG4l0DyToYMaI6r7Kwjn1uoWFJ8AMkKO6juM=;
- b=DBspQZ9/ZMUnCjKx0g5CPahBR8B0DW+1gg3UF/XWUfYyxtZEU6xZ77kHLVWSvCf3kI
- B2KmLb5JrJ1ryAVMa6k+ZDiEjjKuiylXx5L33MD05VLUWxzVXKdiJqRKDdItnece4y9P
- 1+TdcXVvyt+YJH7fbA3gkA86wyvzRpjZUBjdaDqMoG56xq/A53khpWjHltBZwJMb5ChS
- VDfSBIzsi4yhVNRZE5TxaolU1GzNssJewMIqbsYVpzFrJ+wFFQEajf1lAt9L1Lym/cUT
- OA53SpSZLpKjcX8aAscCysjxHgrN+R/D5yUs2NOha3r5u1fCWrvdwUg7xXwWToNjmoLE
- r/KA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=dC0SNsEJG4l0DyToYMaI6r7Kwjn1uoWFJ8AMkKO6juM=;
- b=onVPvJSPl6dlGyBBbpOUiPNqJwunkLPbBZ9fx83UBXbKCM2oHpH1kNlgROm+0T4Jeo
- F4+KRWGzm0BvnrggsgKcU9RVh2JCsnVrr2l+PqQdqpOzvf3+OOr/Faql+3JbIxgqvt3V
- FrJutSelGdQ0prdzxczJ584enmYNfHNkFiYH3RGcCLaAU66g1xrN34UMTbi/okT6lq9c
- 6H4hQfLWGm8ktqq7BV85jTwb8S8eLV7yXFqBpJGnlvZFjbxHdjNsBQAvf0vKalKD9I2k
- tuiFcRx3CzkXet2FDBmpIEoRy1A4CdQ1KaMMjyzXtsxj9lZWG2MURllKXd8Ws8SFderL
- uqPg==
-X-Gm-Message-State: AOAM530EW0WDcirGDPIDpQlqxXNplgG/xreY+cxKw7XJuMxyf5un9AtM
- UQGebFtbOUJFFPMk5lGYgaZXtw==
-X-Google-Smtp-Source: ABdhPJwQi5KLkkupYir4j6r8WVXtVsoVHdimpC6kh7yBHbu8ZkTSnEM7TK1aV0yx2PEcYE7xnEQjbg==
-X-Received: by 2002:adf:e482:: with SMTP id i2mr13577560wrm.284.1637926439973; 
- Fri, 26 Nov 2021 03:33:59 -0800 (PST)
-Received: from [192.168.1.147] (149.164.14.37.dynamic.jazztel.es.
- [37.14.164.149])
- by smtp.gmail.com with ESMTPSA id y12sm5359243wrn.73.2021.11.26.03.33.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Nov 2021 03:33:59 -0800 (PST)
-Subject: Re: [PATCH v5 20/22] target/riscv: Adjust vector address with mask
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com
-References: <20211125073951.57678-1-zhiwei_liu@c-sky.com>
- <20211125073951.57678-21-zhiwei_liu@c-sky.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <25c85dc9-3798-9cb8-6fea-6b5bd49e8530@linaro.org>
-Date: Fri, 26 Nov 2021 12:33:56 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <20211125073951.57678-21-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::434
- (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x434.google.com
-X-Spam_score_int: -32
-X-Spam_score: -3.3
-X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.993,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1mrKcm-0008UJ-Rl; Sun, 28 Nov 2021 08:53:48 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25]:60540 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1mrKch-00046F-6t; Sun, 28 Nov 2021 08:53:46 -0500
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowACXeBXaiaNhLKY9AA--.11553S2;
+ Sun, 28 Nov 2021 21:53:32 +0800 (CST)
+From: liweiwei <liweiwei@iscas.ac.cn>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ liweiwei <liweiwei@iscas.ac.cn>
+Subject: [RFC PATCH 0/3] support subsets of virtual memory extension
+Date: Sun, 28 Nov 2021 21:52:52 +0800
+Message-Id: <20211128135255.22089-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+X-CM-TRANSID: zQCowACXeBXaiaNhLKY9AA--.11553S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrKr17Wr4UKrWxGr4UXFWkZwb_yoWkJrg_Gr
+ 1vgF97uw1q9a15KFZ8Cw1DWrW3KrZ5GFy0qa17tw4Y9a47WryUJwn7tFyDZr1UZF45J3Z2
+ yrn3JFyfKr1UWjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbzkFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
+ 0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+ 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+ 0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAK
+ I48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7
+ xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xII
+ jxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw2
+ 0EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF
+ 7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHUDUUUUU=
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H4=-0.01, RCVD_IN_MSPIKE_WL=-0.01, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,19 +59,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Nov 2021 11:34:03 -0000
+X-List-Received-Date: Sun, 28 Nov 2021 13:53:49 -0000
 
-On 11/25/21 8:39 AM, LIU Zhiwei wrote:
-> The mask comes from the pointer masking extension, or the max value
-> corresponding to XLEN bits.
-> 
-> Signed-off-by: LIU Zhiwei<zhiwei_liu@c-sky.com>
-> Acked-by: Alistair Francis<alistair.francis@wdc.com>
-> ---
->   target/riscv/vector_helper.c | 23 ++++++++++++++---------
->   1 file changed, 14 insertions(+), 9 deletions(-)
+This patchset implements virtual memory related RISC-V extensions: Svnapot version 0.1, Svinval vesion 0.1, Svpbmt version 0.1. 
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Specification:
+https://github.com/riscv/virtual-memory/tree/main/specs
 
-r~
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-vritmem-upstream
+
+To test svinval implementation, specify cpu argument with 'x-svinval=true'. Other two extensions are enabled by default.
+
+This implementation can pass the riscv-tests for rv64ssvnapot.
+
+liweiwei (3):
+  target/riscv: add support for svnapot extension
+  target/riscv: add support for svinval extension
+  target/riscv: add support for svpbmt extension
+
+ target/riscv/cpu.c                          |  1 +
+ target/riscv/cpu.h                          |  1 +
+ target/riscv/cpu_bits.h                     |  5 ++
+ target/riscv/cpu_helper.c                   | 25 +++++--
+ target/riscv/insn32.decode                  |  7 ++
+ target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 7 files changed, 108 insertions(+), 7 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
+
+-- 
+2.17.1
+
 
