@@ -1,78 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrX8o-00026V-R9
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:15:42 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47440)
+	id 1mrXAL-0005cw-QV
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:17:17 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47616)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX8n-000222-RW
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:15:41 -0500
-Received: from [2607:f8b0:4864:20::22e] (port=38462
- helo=mail-oi1-x22e.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mrXAI-0005aa-8N; Sun, 28 Nov 2021 22:17:15 -0500
+Received: from [2607:f8b0:4864:20::d2e] (port=38684
+ helo=mail-io1-xd2e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX8l-0001oJ-I4
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:15:41 -0500
-Received: by mail-oi1-x22e.google.com with SMTP id r26so31936592oiw.5
- for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:15:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=xf5tpZXCRD0n9JwPouUPPNJR4N9EmWXXjKWWY52NHpE=;
- b=km6dlanTNzXCKuUvzZlmPMsJSm6E5z+ci4zszt/rdJ2bWTV5ax4NbbUVO4qpBiMIWi
- u2O4PcQx5La/ZFrmbMmQbp+jRvBu/VFYyba8jffRUbdviCkqHH3O9MAtv9XfHknckbq5
- fLZL8Y6U86TrUXPr7qE5CjXedg03rD+4y+/3S/Nbc+FzNWZyabC2roYRl9pfJl+X5aWt
- FNWIBuiFFHONnbOe7BSzx97cQG3LfViUNb4i4ysFm0EYSUWsfzZcEPNIoeXokb8349aB
- dEMe3Pjz5npVKgQc6M/8vg8HG6l7miy6Jjwi9pYrxhA4JahRLrOstq2yBHBPfUqcMot0
- MzBQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mrXAG-00020T-Eg; Sun, 28 Nov 2021 22:17:13 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id z18so19592163iof.5;
+ Sun, 28 Nov 2021 19:17:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=9Y3oUSLzS9VQrH0sxhmNT6uoqbd/ySBskGg5HwMQ8zw=;
+ b=GUodPrZiV7defuMjXBIGUXFNUe1eQT6u1j77SEapGEc21MgXNbsDafntg5fbCNzmb4
+ r6owhbWqfvJVwdDM+OvDayJKvm9zOmBCYONKiYetysH3MBDRSYvor78HmUeL9E08JyXy
+ H+Fls6t4AIhj4cTXbbRg2bivTvtjXjwyNVBchZtPatEcc36y0TngM7TttECjMapufG9N
+ E0SexxISyFX7t/8DailHX8zhQVsQi5a0ByXxJPAnET0FsR9SsAMWRpc2nb3S3pb9sces
+ PIYo4pUd2rm68lalUFn9GEdQ0My0DzdKg4bbCG/S8HVx9XdB+D+uA6s9ADXH6QDBZu/Q
+ KeyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=xf5tpZXCRD0n9JwPouUPPNJR4N9EmWXXjKWWY52NHpE=;
- b=rNVdAy4UJaqsSam8vcvYFfiI5vSvJx63mgbmfxNFiOMZQiByF+2/pXwZZIduGK8oXt
- UAyoDLnCPhgYqA4q5VNks3Ndo9der1mVmzu0p0RuTPKd15VU3SHEpcMFxipK98KMbJwP
- sGImKZjOmtEQJwwcswmfKTn1GikhtkWa9jW9EhyczRNrrdohSfVCuTvRrnNTj0+MWk4U
- z5/WNjYEDJ3HWr1fhWjdOMRbvGmkq2fMAyXUm/OqYodzArV3EfGxwM9Ht54SLXgwK06R
- ca6NyastEPKeLcQZFphFXpnA9etuIkUMNg+GdSEVcF1a5qCXG/nFJEK6hZfft5TtoswP
- 96Qg==
-X-Gm-Message-State: AOAM530Qrf+CsMmNpH0oPDgRqa4PGFGqzen6HTXNM2E9bO5f6L7phC1f
- Sx8wdmRBs6d/TRlSVVbCnUg/HAfdX/JRn7Xj
-X-Google-Smtp-Source: ABdhPJxQgjZq1T6esQtRE16y9ifWN1MOysI6oTMNFM9Y57tYH9/Uue4wa0GX4pUUEBefiDreHQ2WIA==
-X-Received: by 2002:a17:90a:e7d1:: with SMTP id
- kb17mr35223658pjb.124.1638155283569; 
- Sun, 28 Nov 2021 19:08:03 -0800 (PST)
-Received: from frankchang-ThinkPad-T490.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.08.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Nov 2021 19:08:03 -0800 (PST)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v10 52/77] target/riscv: rvv-1.0: narrowing fixed-point clip
- instructions
-Date: Mon, 29 Nov 2021 11:03:12 +0800
-Message-Id: <20211129030340.429689-53-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211129030340.429689-1-frank.chang@sifive.com>
-References: <20211129030340.429689-1-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9Y3oUSLzS9VQrH0sxhmNT6uoqbd/ySBskGg5HwMQ8zw=;
+ b=FqJ8xBTroHFM2IF/ecV7NDLngDNARdwSuhSzAq7sQiFGZMK8yZ5MQmsaLJXmJY19zM
+ AOhO8Rjs+bywvLjvEUaP3/PST97k6eCNgXabs4mVIfFqpqhjN/fNnOFrnbDF9thUE8ky
+ 5JY646Ulss655OwMjzZqrzcG4s2/Oh+2g7iJWRIuKZQX4Oq8wKFW4QdY4+E1SRkOZ4mY
+ wbVqQ2kiH06bsMq9uLPgWLYnIz+XQyv/6USLUjbaXKre9vYD3EIL//g80rr2fDLTkg3a
+ 4tH+r4KqgS7w4iVphtrNldQmK5BzDI2nK5Pu9LGjXoMQbiWyFla5dE09y/UGgWUQR0o4
+ wm2g==
+X-Gm-Message-State: AOAM533HLv0OfC4Y+jkGh34wRpmcC7RebG4q50TkTZf1q2bO225aiZiy
+ 4Yl8z4uA8uWOzxnM0Y/pNjf/z9dFlrO0Pm+ehoM=
+X-Google-Smtp-Source: ABdhPJzW32wJEsgPyVlFg7CZdkwxIORfQXCtSi3h1KtZRlQJYS0s7GHrfXdH6D7f7h9IWrdhVA6jz1Zw9P+nmRigrUc=
+X-Received: by 2002:a6b:f212:: with SMTP id q18mr52564830ioh.16.1638155830578; 
+ Sun, 28 Nov 2021 19:17:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::22e
+References: <20211129030340.429689-1-frank.chang@sifive.com>
+ <20211129030340.429689-5-frank.chang@sifive.com>
+In-Reply-To: <20211129030340.429689-5-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 29 Nov 2021 13:16:44 +1000
+Message-ID: <CAKmqyKNuR5NKn3v6hzXu+4=CwsS46jQg10efqtOfrGuY773+xg@mail.gmail.com>
+Subject: Re: [PATCH v10 04/77] target/riscv: rvv-1.0: set mstatus.SD bit if
+ mstatus.VS is dirty
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22e;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x22e.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,179 +78,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2021 03:15:42 -0000
+X-List-Received-Date: Mon, 29 Nov 2021 03:17:15 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On Mon, Nov 29, 2021 at 1:07 PM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/helper.h                   | 24 ++++++------
- target/riscv/insn32.decode              | 12 +++---
- target/riscv/insn_trans/trans_rvv.c.inc | 12 +++---
- target/riscv/vector_helper.c            | 52 ++++++++++++-------------
- 4 files changed, 50 insertions(+), 50 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 012d0343771..3ea21b4a578 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -725,18 +725,18 @@ DEF_HELPER_6(vssra_vx_h, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vssra_vx_w, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vssra_vx_d, void, ptr, ptr, tl, ptr, env, i32)
- 
--DEF_HELPER_6(vnclip_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclip_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclip_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vx_b, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vx_h, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vnclipu_vx_w, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vnclip_vx_b, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vnclip_vx_h, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vnclip_vx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wv_b, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wv_h, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wv_w, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclipu_wx_w, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wx_b, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wx_h, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vnclip_wx_w, void, ptr, ptr, tl, ptr, env, i32)
- 
- DEF_HELPER_6(vfadd_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
- DEF_HELPER_6(vfadd_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index c5cc14c45c4..eeab6b00a1b 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -516,12 +516,12 @@ vssrl_vi        101010 . ..... ..... 011 ..... 1010111 @r_vm
- vssra_vv        101011 . ..... ..... 000 ..... 1010111 @r_vm
- vssra_vx        101011 . ..... ..... 100 ..... 1010111 @r_vm
- vssra_vi        101011 . ..... ..... 011 ..... 1010111 @r_vm
--vnclipu_vv      101110 . ..... ..... 000 ..... 1010111 @r_vm
--vnclipu_vx      101110 . ..... ..... 100 ..... 1010111 @r_vm
--vnclipu_vi      101110 . ..... ..... 011 ..... 1010111 @r_vm
--vnclip_vv       101111 . ..... ..... 000 ..... 1010111 @r_vm
--vnclip_vx       101111 . ..... ..... 100 ..... 1010111 @r_vm
--vnclip_vi       101111 . ..... ..... 011 ..... 1010111 @r_vm
-+vnclipu_wv      101110 . ..... ..... 000 ..... 1010111 @r_vm
-+vnclipu_wx      101110 . ..... ..... 100 ..... 1010111 @r_vm
-+vnclipu_wi      101110 . ..... ..... 011 ..... 1010111 @r_vm
-+vnclip_wv       101111 . ..... ..... 000 ..... 1010111 @r_vm
-+vnclip_wx       101111 . ..... ..... 100 ..... 1010111 @r_vm
-+vnclip_wi       101111 . ..... ..... 011 ..... 1010111 @r_vm
- vfadd_vv        000000 . ..... ..... 001 ..... 1010111 @r_vm
- vfadd_vf        000000 . ..... ..... 101 ..... 1010111 @r_vm
- vfsub_vv        000010 . ..... ..... 001 ..... 1010111 @r_vm
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 597a367444a..f5588d9832c 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2034,12 +2034,12 @@ GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
- GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
- 
- /* Vector Narrowing Fixed-Point Clip Instructions */
--GEN_OPIWV_NARROW_TRANS(vnclipu_vv)
--GEN_OPIWV_NARROW_TRANS(vnclip_vv)
--GEN_OPIWX_NARROW_TRANS(vnclipu_vx)
--GEN_OPIWX_NARROW_TRANS(vnclip_vx)
--GEN_OPIWI_NARROW_TRANS(vnclipu_vi, IMM_ZX, vnclipu_vx)
--GEN_OPIWI_NARROW_TRANS(vnclip_vi, IMM_ZX, vnclip_vx)
-+GEN_OPIWV_NARROW_TRANS(vnclipu_wv)
-+GEN_OPIWV_NARROW_TRANS(vnclip_wv)
-+GEN_OPIWX_NARROW_TRANS(vnclipu_wx)
-+GEN_OPIWX_NARROW_TRANS(vnclip_wx)
-+GEN_OPIWI_NARROW_TRANS(vnclipu_wi, IMM_ZX, vnclipu_wx)
-+GEN_OPIWI_NARROW_TRANS(vnclip_wi, IMM_ZX, vnclip_wx)
- 
- /*
-  *** Vector Float Point Arithmetic Instructions
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 7fa5189af4e..c95c8bd9db3 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -2875,19 +2875,19 @@ vnclip32(CPURISCVState *env, int vxrm, int64_t a, int32_t b)
-     }
- }
- 
--RVVCALL(OPIVV2_RM, vnclip_vv_b, NOP_SSS_B, H1, H2, H1, vnclip8)
--RVVCALL(OPIVV2_RM, vnclip_vv_h, NOP_SSS_H, H2, H4, H2, vnclip16)
--RVVCALL(OPIVV2_RM, vnclip_vv_w, NOP_SSS_W, H4, H8, H4, vnclip32)
--GEN_VEXT_VV_RM(vnclip_vv_b, 1, 1)
--GEN_VEXT_VV_RM(vnclip_vv_h, 2, 2)
--GEN_VEXT_VV_RM(vnclip_vv_w, 4, 4)
--
--RVVCALL(OPIVX2_RM, vnclip_vx_b, NOP_SSS_B, H1, H2, vnclip8)
--RVVCALL(OPIVX2_RM, vnclip_vx_h, NOP_SSS_H, H2, H4, vnclip16)
--RVVCALL(OPIVX2_RM, vnclip_vx_w, NOP_SSS_W, H4, H8, vnclip32)
--GEN_VEXT_VX_RM(vnclip_vx_b, 1, 1)
--GEN_VEXT_VX_RM(vnclip_vx_h, 2, 2)
--GEN_VEXT_VX_RM(vnclip_vx_w, 4, 4)
-+RVVCALL(OPIVV2_RM, vnclip_wv_b, NOP_SSS_B, H1, H2, H1, vnclip8)
-+RVVCALL(OPIVV2_RM, vnclip_wv_h, NOP_SSS_H, H2, H4, H2, vnclip16)
-+RVVCALL(OPIVV2_RM, vnclip_wv_w, NOP_SSS_W, H4, H8, H4, vnclip32)
-+GEN_VEXT_VV_RM(vnclip_wv_b, 1, 1)
-+GEN_VEXT_VV_RM(vnclip_wv_h, 2, 2)
-+GEN_VEXT_VV_RM(vnclip_wv_w, 4, 4)
-+
-+RVVCALL(OPIVX2_RM, vnclip_wx_b, NOP_SSS_B, H1, H2, vnclip8)
-+RVVCALL(OPIVX2_RM, vnclip_wx_h, NOP_SSS_H, H2, H4, vnclip16)
-+RVVCALL(OPIVX2_RM, vnclip_wx_w, NOP_SSS_W, H4, H8, vnclip32)
-+GEN_VEXT_VX_RM(vnclip_wx_b, 1, 1)
-+GEN_VEXT_VX_RM(vnclip_wx_h, 2, 2)
-+GEN_VEXT_VX_RM(vnclip_wx_w, 4, 4)
- 
- static inline uint8_t
- vnclipu8(CPURISCVState *env, int vxrm, uint16_t a, uint8_t b)
-@@ -2925,7 +2925,7 @@ static inline uint32_t
- vnclipu32(CPURISCVState *env, int vxrm, uint64_t a, uint32_t b)
- {
-     uint8_t round, shift = b & 0x3f;
--    int64_t res;
-+    uint64_t res;
- 
-     round = get_round(vxrm, a, shift);
-     res   = (a >> shift)  + round;
-@@ -2937,19 +2937,19 @@ vnclipu32(CPURISCVState *env, int vxrm, uint64_t a, uint32_t b)
-     }
- }
- 
--RVVCALL(OPIVV2_RM, vnclipu_vv_b, NOP_UUU_B, H1, H2, H1, vnclipu8)
--RVVCALL(OPIVV2_RM, vnclipu_vv_h, NOP_UUU_H, H2, H4, H2, vnclipu16)
--RVVCALL(OPIVV2_RM, vnclipu_vv_w, NOP_UUU_W, H4, H8, H4, vnclipu32)
--GEN_VEXT_VV_RM(vnclipu_vv_b, 1, 1)
--GEN_VEXT_VV_RM(vnclipu_vv_h, 2, 2)
--GEN_VEXT_VV_RM(vnclipu_vv_w, 4, 4)
-+RVVCALL(OPIVV2_RM, vnclipu_wv_b, NOP_UUU_B, H1, H2, H1, vnclipu8)
-+RVVCALL(OPIVV2_RM, vnclipu_wv_h, NOP_UUU_H, H2, H4, H2, vnclipu16)
-+RVVCALL(OPIVV2_RM, vnclipu_wv_w, NOP_UUU_W, H4, H8, H4, vnclipu32)
-+GEN_VEXT_VV_RM(vnclipu_wv_b, 1, 1)
-+GEN_VEXT_VV_RM(vnclipu_wv_h, 2, 2)
-+GEN_VEXT_VV_RM(vnclipu_wv_w, 4, 4)
- 
--RVVCALL(OPIVX2_RM, vnclipu_vx_b, NOP_UUU_B, H1, H2, vnclipu8)
--RVVCALL(OPIVX2_RM, vnclipu_vx_h, NOP_UUU_H, H2, H4, vnclipu16)
--RVVCALL(OPIVX2_RM, vnclipu_vx_w, NOP_UUU_W, H4, H8, vnclipu32)
--GEN_VEXT_VX_RM(vnclipu_vx_b, 1, 1)
--GEN_VEXT_VX_RM(vnclipu_vx_h, 2, 2)
--GEN_VEXT_VX_RM(vnclipu_vx_w, 4, 4)
-+RVVCALL(OPIVX2_RM, vnclipu_wx_b, NOP_UUU_B, H1, H2, vnclipu8)
-+RVVCALL(OPIVX2_RM, vnclipu_wx_h, NOP_UUU_H, H2, H4, vnclipu16)
-+RVVCALL(OPIVX2_RM, vnclipu_wx_w, NOP_UUU_W, H4, H8, vnclipu32)
-+GEN_VEXT_VX_RM(vnclipu_wx_b, 1, 1)
-+GEN_VEXT_VX_RM(vnclipu_wx_h, 2, 2)
-+GEN_VEXT_VX_RM(vnclipu_wx_w, 4, 4)
- 
- /*
-  *** Vector Float Point Arithmetic Instructions
--- 
-2.25.1
+Alistair
 
+> ---
+>  target/riscv/csr.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 9b5bd5d7b49..bb500afdeb5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -502,6 +502,7 @@ static RISCVException read_mhartid(CPURISCVState *env, int csrno,
+>  static uint64_t add_status_sd(RISCVMXL xl, uint64_t status)
+>  {
+>      if ((status & MSTATUS_FS) == MSTATUS_FS ||
+> +        (status & MSTATUS_VS) == MSTATUS_VS ||
+>          (status & MSTATUS_XS) == MSTATUS_XS) {
+>          switch (xl) {
+>          case MXL_RV32:
+> --
+> 2.25.1
+>
+>
 
