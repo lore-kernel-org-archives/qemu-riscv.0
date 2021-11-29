@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrX07-0006Q2-TL
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:06:43 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44800)
+	id 1mrX0L-00075u-BD
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:06:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44894)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX06-0006J9-DB
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:06:42 -0500
-Received: from [2607:f8b0:4864:20::432] (port=41755
- helo=mail-pf1-x432.google.com)
+ id 1mrX0I-00070N-KG
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:06:54 -0500
+Received: from [2607:f8b0:4864:20::102a] (port=54980
+ helo=mail-pj1-x102a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX04-0000Yg-UB
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:06:42 -0500
-Received: by mail-pf1-x432.google.com with SMTP id g19so15288889pfb.8
- for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:06:40 -0800 (PST)
+ id 1mrX0E-0000Zb-BH
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:06:54 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id np3so11498753pjb.4
+ for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:06:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=e1milFWRlxmjHs2wPWKUhveKm7jJqNElG1gH3QnTU80=;
- b=Z7dQeEHUNGsUIO+8fViE35iR4NNedmrdNU7mrTM8Cr5WursC2764DP3VYx0qd0kdhX
- 3pWJc8BKC0qorEa/LdjsmCN1G1n4+eV8Yz0p00VWi6S5wZCZl9BRJsnSVzdAnTXNEiER
- /XdHUdn3sGrApWWN1ZpnclkgRoFf5r75GVC1rune4ZP1RqUXFm7ios6qoGkmzTpwYrnV
- SNWvXuethWPMLYI7Skf9NeG214PRTjpm8eVq8TGSz3BPXUKAOKYfLMdsCKWihxEBEeGr
- OXvs1Hywd0xp5rigbTQHtJDfXRiHd/AmV8K4GctyRpqCGoxfKAE8Q3BXF+U0fbdnemjz
- +gnQ==
+ bh=iameDzlIZFC5MBedioABTAKKK+y1l970ikbZ8jXbdM0=;
+ b=F0lQhXaJkhQ6+KqxdaBhvVTEzy20eiEWaPtJnzAWxRa3tBh7uOkVWBLGdHukWkCbxu
+ 1bv8mT66Fd66jumgm28o6uoSogYCqcn80QTqN3b9BEZAs+f6xcPZS89Lj/orXiLkVYyV
+ QP0B01kIAwdypWJW8qEtINSV3tKYD+P2UPc32Sq1RKR8TUECSM8DpytdaHP5Nm+11ghy
+ gjWeeIg3fsuHbkLfI5Wr3pmMrUw/zKpGjCivfNy3K4H1N7M/kZqRnHno9j3zl4urwZEU
+ G4fWXghS4wLyK/bQYIpj+oobCk2BS4TPX0iAT6YWMoEnFW+oXnE4BssyWYRubM7uO0d5
+ vbFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=e1milFWRlxmjHs2wPWKUhveKm7jJqNElG1gH3QnTU80=;
- b=fGaV6dOpkPx2KM7J1ab+C+vc7ke13DApEdNjGrsi31wtyl4uk5B2/QioCdwTDpyOYo
- fEYQ8oSO1ASVPjCD95WekGn13T9Wsf27dl5dWUH88OEIizHSkVLftnQZFKl+j2b2YELS
- 88lWrie98wuMJOgEt8UrC5jmCQTx85n4wAAoZovUs02UxsaDQfmnJF3y9W2gjqWkdykj
- P3roZVfxroorXlDSEjHGOSgkNwSUMbFKtTzAEExbt4PLpYTChPWZxvv5kdmYy+oa47gR
- znr132gAp2Abb5lssGCoDrwJxQxm9UuUrWqQEtbL9r5GKUlxLq27Z0Q8Vbv2TWw4Cqtm
- TdKg==
-X-Gm-Message-State: AOAM531Lv0+0RIyDec9FhDKWupVy8DvYDuC1P1QsueNVp/VaOW6YRQnD
- uqVVEKLhHubahOJ7v3taZg7z/w==
-X-Google-Smtp-Source: ABdhPJwMcehGjVY1qz8UNJaWqMvlVQWO9OjLLSFLS80cP/xEmbn646fNjArO6fCco+slJgeGQW0N0A==
-X-Received: by 2002:aa7:98dd:0:b0:49f:bab8:3b67 with SMTP id
- e29-20020aa798dd000000b0049fbab83b67mr36646021pfm.86.1638155199687; 
- Sun, 28 Nov 2021 19:06:39 -0800 (PST)
+ bh=iameDzlIZFC5MBedioABTAKKK+y1l970ikbZ8jXbdM0=;
+ b=4A+J+ZbowgKFYRUHyIEfkvwlcM/FXzzzSPoKrO6dYfKcv+y9wUW6qnW0vP2+h9i2D3
+ CenlNeql40viURnXL9314nyBI99vMeFoMOul5TJTczuGR9naFGMFwuwu8ekyt3FGG9TK
+ zSc8y4WzYBYJWcgjx0OxEzHabtWYf3D45hKTUsLWj7Lxu1RllhhuzWm4/mq7D5sQUhSV
+ 3Adk4quAftX/n/y7nn+PDbLDMCTUWKK8yucYkCYXNn7jZWRzHo/zQ1SOpV8mXgfVsmdN
+ gyLVTedpLy+f62xEQV71SpKXvt88OSggDxP0i2k4UoB2IiqwwJRPT4zzgV/1vJjp1XL+
+ 6ZYw==
+X-Gm-Message-State: AOAM533of4h7TcYeEWuUsTegXoLxCyxnLUqqQjvnygPZLzzxUVsz4TZF
+ +Fbe3R0UZNj3+wcofYf7HNm99g==
+X-Google-Smtp-Source: ABdhPJxXeb5YCwsH8fLKJrpA9ZIwBsEIqvy+LDXnuPmf8NU4kn8kgLc+TL+k2THXWr917AyEt4aFcA==
+X-Received: by 2002:a17:902:f091:b0:143:b72e:c126 with SMTP id
+ p17-20020a170902f09100b00143b72ec126mr56169571pla.61.1638155209172; 
+ Sun, 28 Nov 2021 19:06:49 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.06.37
+ by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.06.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Nov 2021 19:06:39 -0800 (PST)
+ Sun, 28 Nov 2021 19:06:48 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -53,19 +53,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v10 37/77] target/riscv: rvv-1.0: floating-point move
- instruction
-Date: Mon, 29 Nov 2021 11:02:57 +0800
-Message-Id: <20211129030340.429689-38-frank.chang@sifive.com>
+Subject: [PATCH v10 39/77] target/riscv: rvv-1.0: whole register move
+ instructions
+Date: Mon, 29 Nov 2021 11:02:59 +0800
+Message-Id: <20211129030340.429689-40-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211129030340.429689-1-frank.chang@sifive.com>
 References: <20211129030340.429689-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::432
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -85,62 +85,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2021 03:06:42 -0000
+X-List-Received-Date: Mon, 29 Nov 2021 03:06:55 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-NaN-boxed the scalar floating-point register based on RVV 1.0's rules.
+Add the following instructions:
+
+* vmv1r.v
+* vmv2r.v
+* vmv4r.v
+* vmv8r.v
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 16 ++++++++++++++--
- 1 file changed, 14 insertions(+), 2 deletions(-)
+ target/riscv/insn32.decode              |  4 ++++
+ target/riscv/insn_trans/trans_rvv.c.inc | 25 +++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
 
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index ab5fdbf9be8..06a80763112 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -650,6 +650,10 @@ vrgatherei16_vv 001110 . ..... ..... 000 ..... 1010111 @r_vm
+ vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
+ vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
+ vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
++vmv1r_v         100111 1 ..... 00000 011 ..... 1010111 @r2rd
++vmv2r_v         100111 1 ..... 00001 011 ..... 1010111 @r2rd
++vmv4r_v         100111 1 ..... 00011 011 ..... 1010111 @r2rd
++vmv8r_v         100111 1 ..... 00111 011 ..... 1010111 @r2rd
+ 
+ vsetvli         0 ........... ..... 111 ..... 1010111  @r2_zimm
+ vsetvl          1000000 ..... ..... 111 ..... 1010111  @r
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index c250943dde8..2c8002af543 100644
+index 89f88a0ea70..91e7c14ec44 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2461,9 +2461,15 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-         require_rvf(s) &&
-         vext_check_isa_ill(s) &&
-         require_align(a->rd, s->lmul)) {
-+        TCGv_i64 t1;
-+
-         if (s->vl_eq_vlmax) {
-+            t1 = tcg_temp_new_i64();
-+            /* NaN-box f[rs1] */
-+            do_nanbox(s, t1, cpu_fpr[a->rs1]);
-+
-             tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
--                                 MAXSZ(s), MAXSZ(s), cpu_fpr[a->rs1]);
-+                                 MAXSZ(s), MAXSZ(s), t1);
-             mark_vs_dirty(s);
-         } else {
-             TCGv_ptr dest;
-@@ -2477,15 +2483,21 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-             TCGLabel *over = gen_new_label();
-             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
- 
-+            t1 = tcg_temp_new_i64();
-+            /* NaN-box f[rs1] */
-+            do_nanbox(s, t1, cpu_fpr[a->rs1]);
-+
-             dest = tcg_temp_new_ptr();
-             desc = tcg_constant_i32(simd_desc(s->vlen / 8, s->vlen / 8, data));
-             tcg_gen_addi_ptr(dest, cpu_env, vreg_ofs(s, a->rd));
--            fns[s->sew - 1](dest, cpu_fpr[a->rs1], cpu_env, desc);
-+
-+            fns[s->sew - 1](dest, t1, cpu_env, desc);
- 
-             tcg_temp_free_ptr(dest);
-             mark_vs_dirty(s);
-             gen_set_label(over);
-         }
-+        tcg_temp_free_i64(t1);
-         return true;
+@@ -3259,3 +3259,28 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
      }
      return false;
+ }
++
++/*
++ * Whole Vector Register Move Instructions ignore vtype and vl setting.
++ * Thus, we don't need to check vill bit. (Section 16.6)
++ */
++#define GEN_VMV_WHOLE_TRANS(NAME, LEN)                          \
++static bool trans_##NAME(DisasContext *s, arg_##NAME * a)       \
++{                                                               \
++    if (require_rvv(s) &&                                       \
++        QEMU_IS_ALIGNED(a->rd, LEN) &&                          \
++        QEMU_IS_ALIGNED(a->rs2, LEN)) {                         \
++        /* EEW = 8 */                                           \
++        tcg_gen_gvec_mov(MO_8, vreg_ofs(s, a->rd),              \
++                         vreg_ofs(s, a->rs2),                   \
++                         s->vlen / 8 * LEN, s->vlen / 8 * LEN); \
++        mark_vs_dirty(s);                                       \
++        return true;                                            \
++    }                                                           \
++    return false;                                               \
++}
++
++GEN_VMV_WHOLE_TRANS(vmv1r_v, 1)
++GEN_VMV_WHOLE_TRANS(vmv2r_v, 2)
++GEN_VMV_WHOLE_TRANS(vmv4r_v, 4)
++GEN_VMV_WHOLE_TRANS(vmv8r_v, 8)
 -- 
 2.25.1
 
