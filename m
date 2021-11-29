@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrX3i-0006mn-Ep
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:10:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46444)
+	id 1mrX3k-0006oz-Po
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:10:28 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX3d-0006eh-Ou
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:10:21 -0500
-Received: from [2607:f8b0:4864:20::52c] (port=35363
- helo=mail-pg1-x52c.google.com)
+ id 1mrX3h-0006lF-HA
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:10:26 -0500
+Received: from [2607:f8b0:4864:20::630] (port=38546
+ helo=mail-pl1-x630.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX3b-00010J-Tk
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:10:21 -0500
-Received: by mail-pg1-x52c.google.com with SMTP id j11so4613292pgs.2
- for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:10:19 -0800 (PST)
+ id 1mrX3f-00011l-E3
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:10:25 -0500
+Received: by mail-pl1-x630.google.com with SMTP id o14so11002857plg.5
+ for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Vow/08rZwsdmzI6+IaHCHrpHj7qfz3vkv9crs97YZQQ=;
- b=iVizPtzOBhkouYqImLN7FHJmwO0WUTK3trYzKHx8FcPiOl6p3S36FSVi3kmv2LcINW
- lLGr7Sc+AfuW0WNGSnwxX8lyHls/FU6ablxkZLR+qF7Y/1XjqpQWE7XnDp9SMecoxnRu
- QmXj7gbL9DvZdZ3z0gOMykUzMxD+TXV6q5WdbQ9KwPsR0qjEIcsP1zhjlKMB+CEGB6M3
- 11vjc++pmcG6NEbuy6vPQi2SnWPoLecFoQ+TOoUb3TBoJX+ZpkgMINtstEsGVDiFXWA8
- XyDiZJGc6CEuR2EDFA+rt95J58HtNgQo3cDcwjHall53O/Z3MHW6k7VoCAU+EsiWdm8V
- bqrA==
+ bh=Rbt+tpMjnq4IOuZ+lSlbc+IgtGOMsUMuQxTyTcKKG7g=;
+ b=aD7zgfMmC20HZ9B0LXkipbb/dzXMmMKmyx5bngpo+2UXGkKv77H4IqyZvEJ2xuB96s
+ 9NoBh9DmfN16IZvthzGkvUrQ4Z8jG1iSxL23S/FxunEXbmdSr6Wl07H8N5pk2tebTe7K
+ J8d64AioV9xCbgKdBXQYkrvKcBON8xgaIIvljyWJjMLEy4Tc/Ve/qv5uF09YCsjfW4B/
+ K2okoQvDtaa2gsYUBk8dMRm6Z6C39BfQ7mraQmU4khF3Hdcmysk4+x86PIPATIJBQb13
+ aT0TPMDz5KO9Oe9F/X4a8YE+oP4QWPe4BmHYbEksLhuG1Ad8wOexsHZTvDne352O3HS5
+ 4lCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Vow/08rZwsdmzI6+IaHCHrpHj7qfz3vkv9crs97YZQQ=;
- b=4VFYCKXiwQhPMDc2vcNER9HDZCSvTQE0BkLtxkv5hAc/mtx2Z3eLiFBDtWNcKKAP+O
- pCte8Q6VU9sJaJiVaShBRS+lhmYIzS15ZUDZ5T3SbyWySETurVH0/zOUOcKNMhGRLavT
- NfWRd8TExdtvYcTOsQtMsMBSjiFuKfUI1PXLzKjfFUmj9wRDttrOi9LcPFqJP8QsK78m
- kCO+xgXqE1klQ9mxY02+eq3rcDPhVdhH/vZh3+CddysIi6fuSohAfnDETlzb4opGCdB3
- j/lw2N05rpcXQ2F7Ntxj5FkxiiOPcaO66locYUPZBc1NpS907Ww+ssSCAbzBWjLvEyNz
- eLqA==
-X-Gm-Message-State: AOAM530626eNgsZT93PC0tz/MRge0WYDTDQmWb41jzsSSynxCb3Sb/9Y
- GIOj9pWwhZPUKEwNek8iypYKsQ==
-X-Google-Smtp-Source: ABdhPJx9eUK8w7OU/LVS8FnFbOXbzUBhVKWy1oMIJTSQ38M39HxvCJ/02C+hgv2HoDdYITfJ5epx9w==
-X-Received: by 2002:a63:6a02:: with SMTP id f2mr2421499pgc.515.1638155418730; 
- Sun, 28 Nov 2021 19:10:18 -0800 (PST)
+ bh=Rbt+tpMjnq4IOuZ+lSlbc+IgtGOMsUMuQxTyTcKKG7g=;
+ b=v9q9OVirP3LTXbRVqOxKanSCOERx8eUdS+sh3ST8JH+gZWKsuIhXgKeK2fzq7S0YYE
+ zL0LV6BT7hs+R32A0rPKztxG8bJp8huf8mfsJQuJeHlVA004ueGJpEYTOXz2+qiQT32/
+ tmbGvAd8ZxWRL/gtl0VwLkbNtxmK4M+AcK3Nrk16yMJ/BaLGuINdQPRhKF+nxEtnYAhT
+ jBjOu6sY6tiHe7PFgx7xL2D1nxWgU3aow585jJkFhkcvK8ajaa0LyJQRwyOhAYRWOmeo
+ FQ3Q9OLU9FjyhboLDUz6pPRMqGL3MVke2MzSMPbBP2yRseo3S4tdolouTTat7GTLw78i
+ YViA==
+X-Gm-Message-State: AOAM530VB8tsi67akURizoz6+sOaWrG4V70opJ37twFcaGCK0BGH2UbR
+ dUjkFUtNWM2rJKeICV//MdkTfg==
+X-Google-Smtp-Source: ABdhPJylH07B4nNTBwlhtSC+3+mFcM4j1pxK4MGb1A+jm6VWD9waxJx1CSam6RNQGx2l6GtA0nuXSQ==
+X-Received: by 2002:a17:902:d2c7:b0:142:f06:e5fa with SMTP id
+ n7-20020a170902d2c700b001420f06e5famr56187860plc.87.1638155422177; 
+ Sun, 28 Nov 2021 19:10:22 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.10.16
+ by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.10.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Nov 2021 19:10:18 -0800 (PST)
+ Sun, 28 Nov 2021 19:10:21 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -52,19 +53,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v10 74/77] target/riscv: rvv-1.0: add vector unit-stride mask
- load/store insns
-Date: Mon, 29 Nov 2021 11:03:34 +0800
-Message-Id: <20211129030340.429689-75-frank.chang@sifive.com>
+Subject: [PATCH v10 75/77] target/riscv: rvv-1.0: rename vmandnot.mm and
+ vmornot.mm to vmandn.mm and vmorn.mm
+Date: Mon, 29 Nov 2021 11:03:35 +0800
+Message-Id: <20211129030340.429689-76-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211129030340.429689-1-frank.chang@sifive.com>
 References: <20211129030340.429689-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::630
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -84,130 +85,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2021 03:10:22 -0000
+X-List-Received-Date: Mon, 29 Nov 2021 03:10:26 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/helper.h                   |  2 ++
- target/riscv/insn32.decode              |  4 +++
- target/riscv/insn_trans/trans_rvv.c.inc | 40 +++++++++++++++++++++++++
- target/riscv/vector_helper.c            | 21 +++++++++++++
- 4 files changed, 67 insertions(+)
+ target/riscv/helper.h                   | 4 ++--
+ target/riscv/insn32.decode              | 4 ++--
+ target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
+ target/riscv/vector_helper.c            | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index ab283d12b79..6e58343af35 100644
+index 6e58343af35..c15497e4a15 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -129,6 +129,8 @@ DEF_HELPER_5(vse8_v_mask, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vse16_v_mask, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vse32_v_mask, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_5(vse64_v_mask, void, ptr, ptr, tl, env, i32)
-+DEF_HELPER_5(vlm_v, void, ptr, ptr, tl, env, i32)
-+DEF_HELPER_5(vsm_v, void, ptr, ptr, tl, env, i32)
- DEF_HELPER_6(vlse8_v, void, ptr, ptr, tl, tl, env, i32)
- DEF_HELPER_6(vlse16_v, void, ptr, ptr, tl, tl, env, i32)
- DEF_HELPER_6(vlse32_v, void, ptr, ptr, tl, tl, env, i32)
+@@ -1016,11 +1016,11 @@ DEF_HELPER_6(vfwredsum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_6(vmand_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmnand_mm, void, ptr, ptr, ptr, ptr, env, i32)
+-DEF_HELPER_6(vmandnot_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmandn_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmxor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+-DEF_HELPER_6(vmornot_mm, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vmorn_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_4(vcpop_m, tl, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 3b6524bad91..1a4a2871464 100644
+index 1a4a2871464..8617307b29a 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -305,6 +305,10 @@ vse16_v    ... 000 . 00000 ..... 101 ..... 0100111 @r2_nfvm
- vse32_v    ... 000 . 00000 ..... 110 ..... 0100111 @r2_nfvm
- vse64_v    ... 000 . 00000 ..... 111 ..... 0100111 @r2_nfvm
- 
-+# Vector unit-stride mask load/store insns.
-+vlm_v      000 000 1 01011 ..... 000 ..... 0000111 @r2
-+vsm_v      000 000 1 01011 ..... 000 ..... 0100111 @r2
-+
- # Vector strided insns.
- vlse8_v     ... 010 . ..... ..... 000 ..... 0000111 @r_nfvm
- vlse16_v    ... 010 . ..... ..... 101 ..... 0000111 @r_nfvm
+@@ -635,11 +635,11 @@ vfredmax_vs     000111 . ..... ..... 001 ..... 1010111 @r_vm
+ vfwredsum_vs    1100-1 . ..... ..... 001 ..... 1010111 @r_vm
+ vmand_mm        011001 - ..... ..... 010 ..... 1010111 @r
+ vmnand_mm       011101 - ..... ..... 010 ..... 1010111 @r
+-vmandnot_mm     011000 - ..... ..... 010 ..... 1010111 @r
++vmandn_mm       011000 - ..... ..... 010 ..... 1010111 @r
+ vmxor_mm        011011 - ..... ..... 010 ..... 1010111 @r
+ vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
+ vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
+-vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
++vmorn_mm        011100 - ..... ..... 010 ..... 1010111 @r
+ vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
+ vcpop_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
+ vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index e540b5d33c2..97b1dc10265 100644
+index 97b1dc10265..33ef7926e64 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -697,6 +697,46 @@ GEN_VEXT_TRANS(vse16_v, MO_16, r2nfvm, st_us_op, st_us_check)
- GEN_VEXT_TRANS(vse32_v, MO_32, r2nfvm, st_us_op, st_us_check)
- GEN_VEXT_TRANS(vse64_v, MO_64, r2nfvm, st_us_op, st_us_check)
+@@ -2862,11 +2862,11 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
  
-+/*
-+ *** unit stride mask load and store
-+ */
-+static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
-+{
-+    uint32_t data = 0;
-+    gen_helper_ldst_us *fn = gen_helper_vlm_v;
-+
-+    /* EMUL = 1, NFIELDS = 1 */
-+    data = FIELD_DP32(data, VDATA, LMUL, 0);
-+    data = FIELD_DP32(data, VDATA, NF, 1);
-+    return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
-+}
-+
-+static bool ld_us_mask_check(DisasContext *s, arg_vlm_v *a, uint8_t eew)
-+{
-+    /* EMUL = 1, NFIELDS = 1 */
-+    return require_rvv(s) && vext_check_isa_ill(s);
-+}
-+
-+static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
-+{
-+    uint32_t data = 0;
-+    gen_helper_ldst_us *fn = gen_helper_vsm_v;
-+
-+    /* EMUL = 1, NFIELDS = 1 */
-+    data = FIELD_DP32(data, VDATA, LMUL, 0);
-+    data = FIELD_DP32(data, VDATA, NF, 1);
-+    return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
-+}
-+
-+static bool st_us_mask_check(DisasContext *s, arg_vsm_v *a, uint8_t eew)
-+{
-+    /* EMUL = 1, NFIELDS = 1 */
-+    return require_rvv(s) && vext_check_isa_ill(s);
-+}
-+
-+GEN_VEXT_TRANS(vlm_v, MO_8, vlm_v, ld_us_mask_op, ld_us_mask_check)
-+GEN_VEXT_TRANS(vsm_v, MO_8, vsm_v, st_us_mask_op, st_us_mask_check)
-+
- /*
-  *** stride load and store
-  */
+ GEN_MM_TRANS(vmand_mm)
+ GEN_MM_TRANS(vmnand_mm)
+-GEN_MM_TRANS(vmandnot_mm)
++GEN_MM_TRANS(vmandn_mm)
+ GEN_MM_TRANS(vmxor_mm)
+ GEN_MM_TRANS(vmor_mm)
+ GEN_MM_TRANS(vmnor_mm)
+-GEN_MM_TRANS(vmornot_mm)
++GEN_MM_TRANS(vmorn_mm)
+ GEN_MM_TRANS(vmxnor_mm)
+ 
+ /* Vector count population in mask vcpop */
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 83373ca6fc6..4c1a1310e63 100644
+index 4c1a1310e63..ad505ec9b21 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -345,6 +345,27 @@ GEN_VEXT_ST_US(vse16_v, int16_t, ste_h)
- GEN_VEXT_ST_US(vse32_v, int32_t, ste_w)
- GEN_VEXT_ST_US(vse64_v, int64_t, ste_d)
+@@ -4470,11 +4470,11 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
  
-+/*
-+ *** unit stride mask load and store, EEW = 1
-+ */
-+void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
-+                    CPURISCVState *env, uint32_t desc)
-+{
-+    /* evl = ceil(vl/8) */
-+    uint8_t evl = (env->vl + 7) >> 3;
-+    vext_ldst_us(vd, base, env, desc, lde_b,
-+                 0, evl, GETPC(), MMU_DATA_LOAD);
-+}
-+
-+void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
-+                    CPURISCVState *env, uint32_t desc)
-+{
-+    /* evl = ceil(vl/8) */
-+    uint8_t evl = (env->vl + 7) >> 3;
-+    vext_ldst_us(vd, base, env, desc, ste_b,
-+                 0, evl, GETPC(), MMU_DATA_STORE);
-+}
-+
- /*
-  *** index: access vector element from indexed memory
-  */
+ GEN_VEXT_MASK_VV(vmand_mm, DO_AND)
+ GEN_VEXT_MASK_VV(vmnand_mm, DO_NAND)
+-GEN_VEXT_MASK_VV(vmandnot_mm, DO_ANDNOT)
++GEN_VEXT_MASK_VV(vmandn_mm, DO_ANDNOT)
+ GEN_VEXT_MASK_VV(vmxor_mm, DO_XOR)
+ GEN_VEXT_MASK_VV(vmor_mm, DO_OR)
+ GEN_VEXT_MASK_VV(vmnor_mm, DO_NOR)
+-GEN_VEXT_MASK_VV(vmornot_mm, DO_ORNOT)
++GEN_VEXT_MASK_VV(vmorn_mm, DO_ORNOT)
+ GEN_VEXT_MASK_VV(vmxnor_mm, DO_XNOR)
+ 
+ /* Vector count population in mask vcpop */
 -- 
 2.25.1
 
