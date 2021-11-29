@@ -1,69 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrX6J-0003Ot-Qa
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:13:07 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46944)
+	id 1mrX6b-0003wd-0N
+	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:13:25 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46998)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX6I-0003Jy-9k
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:13:06 -0500
-Received: from [2607:f8b0:4864:20::231] (port=33617
- helo=mail-oi1-x231.google.com)
+ id 1mrX6Y-0003rm-7Z
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:13:22 -0500
+Received: from [2607:f8b0:4864:20::92f] (port=44855
+ helo=mail-ua1-x92f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mrX6F-0001Sr-UB
- for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:13:06 -0500
-Received: by mail-oi1-x231.google.com with SMTP id q25so32050369oiw.0
- for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:13:03 -0800 (PST)
+ id 1mrX6W-0001Tw-7c
+ for qemu-riscv@nongnu.org; Sun, 28 Nov 2021 22:13:21 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id p2so31012695uad.11
+ for <qemu-riscv@nongnu.org>; Sun, 28 Nov 2021 19:13:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=HXbubq06QeTEUpSUM9SlTQOqxIJyq3fOw+zIFTXU2f8=;
- b=c+LnNQc+7SRj8ssN9TrWJDFoegPrl3+8FP396EaLoXT+MTL6+QwH7jY9mISlxcsBRU
- LDBhji/L1OZxeQ79pvtw53R7Je5ctEj07k53Fiybn4vMpGsPa7kVuHsownsLqplhbRow
- Igoa5cDCcxqaPYei5kbBlHfuANG5dAStuwsgyZhx5+TLi8MjFDHjh9YdbzwERqYVp4t9
- 65tywUfgvVo4UAiTOz8SMrkg1I4u+SUI0rlM9d1uN7GPVkDRNk7/UAz41xSWP0h2FdUP
- AlR1uoApvs/L9L49Wg8uZpQfPpCFDAmz6Uschxp+ZtAaRd1Jq4vky0lGKm3+yk/Ne9f0
- 6uTw==
+ bh=mFtSZUdjeBlKUIHHZ7AnuPxZmIzGa/DanIR24aLooS8=;
+ b=BpMo5cT1fCrhOQw+ud1PsMPbFzGYly1XavyyejAK7u+BSMoBZjWDwXRmRE3yWZv/V3
+ BD9l2c6jTh7K81s/3MPeaKR3cyVNZEtlTzjDUjzgwmi23/3AIcXD2WWxo07fXu5ivJh3
+ hHbpdVlP1L+V8ceIQHK+XTA3dO+aa6HVm9S4NmjN1aWhU/vCw0TMPYPUfT4Uv/Ne6Phc
+ qvJ2bDraiSmd764JH6A8PQBrDDJlZMqte7Lev/3EUYUGd4QjYRHt1FK7FFyngexV36wd
+ Tk208GIVh26fS3DxkPk2PaRjVPRJRDSodOEXckKuHs/pYXD9lhx5aHxqCi2yUi2eowkC
+ xV7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=HXbubq06QeTEUpSUM9SlTQOqxIJyq3fOw+zIFTXU2f8=;
- b=hgFLg4d0WCWBJTA5uxIW32i7ZbgMTD5NojWGzDzGydtbxGOOs9vNIRICHg1/+cP2ru
- Rlc7GNfVdq7SvFzKj8TN9nyeME8PHzRwWMagBhkcW18WY3B46wdJ+dnj6cFu8nCNUnfJ
- aTUH5LLhgwhy1XrY0TDl7VQBol6ARja5A4B1bzzDyeoE9U0kjLWOaTFwUeOrAxGDTV86
- DHtUMIp7gCUxXFoCtShfzUyaNZcYg0jtJrMoFwVTczpLfmhkAXBy7xKw1dq8OCLyanfn
- xD45bvpSnuKo1RfwshzQPATQjCYjiWP35XKHxfYf8uoyRiUeGu6qoX3/CWhcBtsaoEzt
- 6pTQ==
-X-Gm-Message-State: AOAM531wJmrcCuqMCMcFJXwzMf+JtYqllsTHrtgbuHHigTHAtJ9zjOdH
- sEg5Jmk+z460ttoWdO5SoV6ttBF4ZNb+8sry
-X-Google-Smtp-Source: ABdhPJyPjxQJ11YEXlQavBAjMnwNFH8ML999uxQslnuO8hEaGKLB41QfX+hCvTZ6nfiKtJ321iau+g==
-X-Received: by 2002:a17:90a:7e10:: with SMTP id
- i16mr34560904pjl.185.1638155081968; 
- Sun, 28 Nov 2021 19:04:41 -0800 (PST)
+ bh=mFtSZUdjeBlKUIHHZ7AnuPxZmIzGa/DanIR24aLooS8=;
+ b=5Hqce30S1e21Cj62Xs8/Ol+yF3/EBeeysOJ7mdGdalna0/dbN9YhQRyOnFZZv1iL5Y
+ SgokT+2MNMSD3cs0OpJMDm6HAOxX1anp+C/GGWR6nFDvcXRNlGLWXKy9cqSzAi2vOn20
+ wd68ig6YFxlWaaqt/OxD6u6/JRo89YcxhQ+IDFhsn/5PJxzyUxBFRdKTIUcmXtsJgl+x
+ XZUMsP2wq4Iu7nFS/Z/7TKqxWWuSq3T7kauI6eIldyJXQVfccBXvZ76vSuPOaRvYMlpY
+ mQ8xe3rG46k/rQXXEo2y2nHdFF1VMyhH3I+v2yowBcnZA0cOlkJjvJIHrdpYPT9uVz1u
+ ObOA==
+X-Gm-Message-State: AOAM53202VyRe1ZIP+JT3m0etc/gm690DDpttZVjEKaTP3nXyMm4NwRH
+ fdTqYj2n75kV9w1QYfcA/92/hqlRXS2rvtRX
+X-Google-Smtp-Source: ABdhPJxwrvbHyIGLc3sPAVuexHj+kKtsyD6A1H/pwh38zwcXxn5U1h43a4KlCtvD8Yezo9jZb3dA7w==
+X-Received: by 2002:a17:903:286:b0:142:4abc:88b8 with SMTP id
+ j6-20020a170903028600b001424abc88b8mr57116744plr.25.1638155169443; 
+ Sun, 28 Nov 2021 19:06:09 -0800 (PST)
 Received: from frankchang-ThinkPad-T490.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.04.39
+ by smtp.gmail.com with ESMTPSA id oj11sm17904040pjb.46.2021.11.28.19.06.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Nov 2021 19:04:41 -0800 (PST)
+ Sun, 28 Nov 2021 19:06:09 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v10 13/77] target/riscv: rvv-1.0: add fractional LMUL
-Date: Mon, 29 Nov 2021 11:02:33 +0800
-Message-Id: <20211129030340.429689-14-frank.chang@sifive.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v10 30/77] target/riscv: rvv-1.0: find-first-set mask bit
+ instruction
+Date: Mon, 29 Nov 2021 11:02:50 +0800
+Message-Id: <20211129030340.429689-31-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211129030340.429689-1-frank.chang@sifive.com>
 References: <20211129030340.429689-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::231
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::92f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
- envelope-from=frank.chang@sifive.com; helo=mail-oi1-x231.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=frank.chang@sifive.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -83,135 +85,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2021 03:13:06 -0000
+X-List-Received-Date: Mon, 29 Nov 2021 03:13:22 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
-
-Introduce the concepts of fractional LMUL for RVV 1.0.
-In RVV 1.0, LMUL bits are contiguous in vtype register.
-
-Also rearrange rvv bits in TB_FLAGS to skip MSTATUS_VS (0x600)
-and MSTATUS_FS (0x6000) bits.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h           | 26 ++++++++++++++------------
- target/riscv/translate.c     | 16 ++++++++++++++--
- target/riscv/vector_helper.c | 16 ++++++++++++++--
- 3 files changed, 42 insertions(+), 16 deletions(-)
+ target/riscv/helper.h                   | 2 +-
+ target/riscv/insn32.decode              | 2 +-
+ target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
+ target/riscv/vector_helper.c            | 6 +++---
+ 4 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index eee2a2b19ed..17414bfff76 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -102,10 +102,10 @@ typedef struct CPURISCVState CPURISCVState;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 3f30882aec4..7646567eb27 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1022,7 +1022,7 @@ DEF_HELPER_6(vmxnor_mm, void, ptr, ptr, ptr, ptr, env, i32)
  
- #define RV_VLEN_MAX 256
+ DEF_HELPER_4(vcpop_m, tl, ptr, ptr, env, i32)
  
--FIELD(VTYPE, VLMUL, 0, 2)
--FIELD(VTYPE, VSEW, 2, 3)
--FIELD(VTYPE, VEDIV, 5, 2)
--FIELD(VTYPE, RESERVED, 7, sizeof(target_ulong) * 8 - 9)
-+FIELD(VTYPE, VLMUL, 0, 3)
-+FIELD(VTYPE, VSEW, 3, 3)
-+FIELD(VTYPE, VEDIV, 8, 2)
-+FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
- FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
+-DEF_HELPER_4(vmfirst_m, tl, ptr, ptr, env, i32)
++DEF_HELPER_4(vfirst_m, tl, ptr, ptr, env, i32)
  
- struct CPURISCVState {
-@@ -403,18 +403,20 @@ typedef RISCVCPU ArchCPU;
- #include "exec/cpu-all.h"
+ DEF_HELPER_5(vmsbf_m, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(vmsif_m, void, ptr, ptr, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index e748f7ca714..4df2aa9cddc 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -628,7 +628,7 @@ vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
+ vmornot_mm      011100 - ..... ..... 010 ..... 1010111 @r
+ vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
+ vcpop_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
+-vmfirst_m       010101 . ..... ----- 010 ..... 1010111 @r2_vm
++vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
+ vmsbf_m         010110 . ..... 00001 010 ..... 1010111 @r2_vm
+ vmsif_m         010110 . ..... 00011 010 ..... 1010111 @r2_vm
+ vmsof_m         010110 . ..... 00010 010 ..... 1010111 @r2_vm
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index b53cd2e6f37..3645bb96356 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2696,7 +2696,7 @@ static bool trans_vcpop_m(DisasContext *s, arg_rmr *a)
+ }
  
- FIELD(TB_FLAGS, MEM_IDX, 0, 3)
--FIELD(TB_FLAGS, VL_EQ_VLMAX, 3, 1)
--FIELD(TB_FLAGS, LMUL, 4, 2)
-+FIELD(TB_FLAGS, LMUL, 3, 3)
- FIELD(TB_FLAGS, SEW, 6, 3)
--FIELD(TB_FLAGS, VILL, 9, 1)
-+/* Skip MSTATUS_VS (0x600) bits */
-+FIELD(TB_FLAGS, VL_EQ_VLMAX, 11, 1)
-+FIELD(TB_FLAGS, VILL, 12, 1)
-+/* Skip MSTATUS_FS (0x6000) bits */
- /* Is a Hypervisor instruction load/store allowed? */
--FIELD(TB_FLAGS, HLSX, 10, 1)
--FIELD(TB_FLAGS, MSTATUS_HS_FS, 11, 2)
--FIELD(TB_FLAGS, MSTATUS_HS_VS, 13, 2)
-+FIELD(TB_FLAGS, HLSX, 15, 1)
-+FIELD(TB_FLAGS, MSTATUS_HS_FS, 16, 2)
-+FIELD(TB_FLAGS, MSTATUS_HS_VS, 18, 2)
- /* The combination of MXL/SXL/UXL that applies to the current cpu mode. */
--FIELD(TB_FLAGS, XL, 15, 2)
-+FIELD(TB_FLAGS, XL, 20, 2)
- /* If PointerMasking should be applied */
--FIELD(TB_FLAGS, PM_ENABLED, 17, 1)
-+FIELD(TB_FLAGS, PM_ENABLED, 22, 1)
+ /* vmfirst find-first-set mask bit */
+-static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
++static bool trans_vfirst_m(DisasContext *s, arg_rmr *a)
+ {
+     if (require_rvv(s) &&
+         vext_check_isa_ill(s)) {
+@@ -2715,7 +2715,7 @@ static bool trans_vmfirst_m(DisasContext *s, arg_rmr *a)
+         tcg_gen_addi_ptr(src2, cpu_env, vreg_ofs(s, a->rs2));
+         tcg_gen_addi_ptr(mask, cpu_env, vreg_ofs(s, 0));
  
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 17101d854bf..3688e80d03e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -80,7 +80,19 @@ typedef struct DisasContext {
-     bool hlsx;
-     /* vector extension */
-     bool vill;
--    uint8_t lmul;
-+    /*
-+     * Encode LMUL to lmul as follows:
-+     *     LMUL    vlmul    lmul
-+     *      1       000       0
-+     *      2       001       1
-+     *      4       010       2
-+     *      8       011       3
-+     *      -       100       -
-+     *     1/8      101      -3
-+     *     1/4      110      -2
-+     *     1/2      111      -1
-+     */
-+    int8_t lmul;
-     uint8_t sew;
-     uint16_t vlen;
-     bool vl_eq_vlmax;
-@@ -690,7 +702,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
-     ctx->vill = FIELD_EX32(tb_flags, TB_FLAGS, VILL);
-     ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
--    ctx->lmul = FIELD_EX32(tb_flags, TB_FLAGS, LMUL);
-+    ctx->lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
-     ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-     ctx->xl = FIELD_EX32(tb_flags, TB_FLAGS, XL);
-     ctx->cs = cs;
+-        gen_helper_vmfirst_m(dst, mask, src2, cpu_env, desc);
++        gen_helper_vfirst_m(dst, mask, src2, cpu_env, desc);
+         gen_set_gpr(s, a->rd, dst);
+ 
+         tcg_temp_free_ptr(mask);
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index ac6c7298bc0..866bfb35714 100644
+index 9451112b3da..f97783acf05 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -86,9 +86,21 @@ static inline uint32_t vext_vm(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, VM);
+@@ -4233,9 +4233,9 @@ target_ulong HELPER(vcpop_m)(void *v0, void *vs2, CPURISCVState *env,
+     return cnt;
  }
  
--static inline uint32_t vext_lmul(uint32_t desc)
-+/*
-+ * Encode LMUL to lmul as following:
-+ *     LMUL    vlmul    lmul
-+ *      1       000       0
-+ *      2       001       1
-+ *      4       010       2
-+ *      8       011       3
-+ *      -       100       -
-+ *     1/8      101      -3
-+ *     1/4      110      -2
-+ *     1/2      111      -1
-+ */
-+static inline int32_t vext_lmul(uint32_t desc)
+-/* vmfirst find-first-set mask bit*/
+-target_ulong HELPER(vmfirst_m)(void *v0, void *vs2, CPURISCVState *env,
+-                               uint32_t desc)
++/* vfirst find-first-set mask bit*/
++target_ulong HELPER(vfirst_m)(void *v0, void *vs2, CPURISCVState *env,
++                              uint32_t desc)
  {
--    return FIELD_EX32(simd_data(desc), VDATA, LMUL);
-+    return sextract32(FIELD_EX32(simd_data(desc), VDATA, LMUL), 0, 3);
- }
- 
- static uint32_t vext_wd(uint32_t desc)
+     uint32_t vm = vext_vm(desc);
+     uint32_t vl = env->vl;
 -- 
 2.25.1
 
