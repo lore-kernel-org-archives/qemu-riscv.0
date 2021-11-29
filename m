@@ -1,71 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mrXAL-0005cw-QV
-	for mharc-qemu-riscv@gnu.org; Sun, 28 Nov 2021 22:17:17 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47616)
+	id 1mrdZl-0008LB-6H
+	for mharc-qemu-riscv@gnu.org; Mon, 29 Nov 2021 05:07:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39030)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mrXAI-0005aa-8N; Sun, 28 Nov 2021 22:17:15 -0500
-Received: from [2607:f8b0:4864:20::d2e] (port=38684
- helo=mail-io1-xd2e.google.com)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mrdZj-0008L0-Av
+ for qemu-riscv@nongnu.org; Mon, 29 Nov 2021 05:07:55 -0500
+Received: from [2a00:1450:4864:20::42c] (port=36763
+ helo=mail-wr1-x42c.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mrXAG-00020T-Eg; Sun, 28 Nov 2021 22:17:13 -0500
-Received: by mail-io1-xd2e.google.com with SMTP id z18so19592163iof.5;
- Sun, 28 Nov 2021 19:17:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9Y3oUSLzS9VQrH0sxhmNT6uoqbd/ySBskGg5HwMQ8zw=;
- b=GUodPrZiV7defuMjXBIGUXFNUe1eQT6u1j77SEapGEc21MgXNbsDafntg5fbCNzmb4
- r6owhbWqfvJVwdDM+OvDayJKvm9zOmBCYONKiYetysH3MBDRSYvor78HmUeL9E08JyXy
- H+Fls6t4AIhj4cTXbbRg2bivTvtjXjwyNVBchZtPatEcc36y0TngM7TttECjMapufG9N
- E0SexxISyFX7t/8DailHX8zhQVsQi5a0ByXxJPAnET0FsR9SsAMWRpc2nb3S3pb9sces
- PIYo4pUd2rm68lalUFn9GEdQ0My0DzdKg4bbCG/S8HVx9XdB+D+uA6s9ADXH6QDBZu/Q
- KeyQ==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mrdZh-000838-GJ
+ for qemu-riscv@nongnu.org; Mon, 29 Nov 2021 05:07:54 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id s13so35561524wrb.3
+ for <qemu-riscv@nongnu.org>; Mon, 29 Nov 2021 02:07:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=EXfVJfqK3e3pqraXoVewEdOYrWyulMFLMp70dCoJZNs=;
+ b=nLSxsceTCvosd9bo85tU2/xJeJt3iMdsKim65cylSgnWasR04kAWbYTnstWCAuRqSZ
+ 4vwgHhEDvoj7atBMrjulqx+1FNEs2oZNd9Ym4IisPdipzi0Aua4KmUV0N/O+ajI5a4oU
+ ssVzDZfTgUqjUrkZR4uKGgBHkelCStbXwo74lkDaG+AK3qKT1NwaSj4qNI08vxQqr75o
+ RRQpW39pVlR/zcHiwtFZSW0ks6kTmevUH+EdeMzq5a5yesKX56gDHb1QsiFYey0jadWa
+ veFFfQoqYyglRG5PrJGqQc1E/wzLaQsTvnlpPbIvQDzxAuyB6bNrT5BCIwykoUc+tC8v
+ zKdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=9Y3oUSLzS9VQrH0sxhmNT6uoqbd/ySBskGg5HwMQ8zw=;
- b=FqJ8xBTroHFM2IF/ecV7NDLngDNARdwSuhSzAq7sQiFGZMK8yZ5MQmsaLJXmJY19zM
- AOhO8Rjs+bywvLjvEUaP3/PST97k6eCNgXabs4mVIfFqpqhjN/fNnOFrnbDF9thUE8ky
- 5JY646Ulss655OwMjzZqrzcG4s2/Oh+2g7iJWRIuKZQX4Oq8wKFW4QdY4+E1SRkOZ4mY
- wbVqQ2kiH06bsMq9uLPgWLYnIz+XQyv/6USLUjbaXKre9vYD3EIL//g80rr2fDLTkg3a
- 4tH+r4KqgS7w4iVphtrNldQmK5BzDI2nK5Pu9LGjXoMQbiWyFla5dE09y/UGgWUQR0o4
- wm2g==
-X-Gm-Message-State: AOAM533HLv0OfC4Y+jkGh34wRpmcC7RebG4q50TkTZf1q2bO225aiZiy
- 4Yl8z4uA8uWOzxnM0Y/pNjf/z9dFlrO0Pm+ehoM=
-X-Google-Smtp-Source: ABdhPJzW32wJEsgPyVlFg7CZdkwxIORfQXCtSi3h1KtZRlQJYS0s7GHrfXdH6D7f7h9IWrdhVA6jz1Zw9P+nmRigrUc=
-X-Received: by 2002:a6b:f212:: with SMTP id q18mr52564830ioh.16.1638155830578; 
- Sun, 28 Nov 2021 19:17:10 -0800 (PST)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=EXfVJfqK3e3pqraXoVewEdOYrWyulMFLMp70dCoJZNs=;
+ b=FgK9PVebZxwyMA3lmEDgu2NDblnAMBoY7gjz7l5GQVYfK2hlpqXjndlxEZI3U8O1dB
+ aUTy09Zd5ylcn4rvRYroWWFYWjE+zNFa56a84waKEk8k2+wk/2YJ13cRFA11TdBGDGKs
+ GabezepcCCGJwT2Yb7kRKpQTVplkNHBl83GpHQKFmMiqhe9c4hOFRvV+x5JRmIKoEe5G
+ v+7Qc/WF0+0b3dYidfrzmwZnqaZ/9Wq31RNKp8sG+/9LRW1ZbclU6C1jkOSU0cwNzeqF
+ c94oTKhCRfYKbz/kAor/Le3JhcfGzeLg74g3ShLjgEXx3Ns9+n0JqJNpbb8GHkHuVw/K
+ lR9g==
+X-Gm-Message-State: AOAM531A/rrz/w1j37BESzTo7sFom9eAs6eDqKjAJj3ZOqZqrGCRmdTX
+ nv1q18it9BuhbrFS4qusoInGAA==
+X-Google-Smtp-Source: ABdhPJxUaWkKJZmZJ8H1LjG4D5Jp2GGIJlwoPAOuoMsLQQXmnuDx01TrDqLhnCiYDtt3Ie+LnGLUiw==
+X-Received: by 2002:a5d:4d51:: with SMTP id a17mr30903499wru.384.1638180471641; 
+ Mon, 29 Nov 2021 02:07:51 -0800 (PST)
+Received: from [192.168.1.147] (149.164.14.37.dynamic.jazztel.es.
+ [37.14.164.149])
+ by smtp.gmail.com with ESMTPSA id j18sm1585507wmq.44.2021.11.29.02.07.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Nov 2021 02:07:50 -0800 (PST)
+Subject: Re: [PATCH v6 03/18] qemu/int128: addition of div/rem 128-bit
+ operations
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, philmd@redhat.com,
+ palmer@dabbelt.com, fabien.portas@grenoble-inp.org
+References: <20211128135719.50444-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211128135719.50444-4-frederic.petrot@univ-grenoble-alpes.fr>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <a37bf796-567e-2331-be42-38f756b105cd@linaro.org>
+Date: Mon, 29 Nov 2021 11:07:47 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <20211129030340.429689-1-frank.chang@sifive.com>
- <20211129030340.429689-5-frank.chang@sifive.com>
-In-Reply-To: <20211129030340.429689-5-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 29 Nov 2021 13:16:44 +1000
-Message-ID: <CAKmqyKNuR5NKn3v6hzXu+4=CwsS46jQg10efqtOfrGuY773+xg@mail.gmail.com>
-Subject: Re: [PATCH v10 04/77] target/riscv: rvv-1.0: set mstatus.SD bit if
- mstatus.VS is dirty
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
+In-Reply-To: <20211128135719.50444-4-frederic.petrot@univ-grenoble-alpes.fr>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42c
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -25
+X-Spam_score: -2.6
+X-Spam_bar: --
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-1.317,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,37 +88,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Nov 2021 03:17:15 -0000
+X-List-Received-Date: Mon, 29 Nov 2021 10:07:55 -0000
 
-On Mon, Nov 29, 2021 at 1:07 PM <frank.chang@sifive.com> wrote:
->
-> From: Frank Chang <frank.chang@sifive.com>
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+On 11/28/21 2:57 PM, Frédéric Pétrot wrote:
+> --- /dev/null
+> +++ b/util/int128.c
+> @@ -0,0 +1,145 @@
+> +#include "qemu/osdep.h"
+> +#include "qemu/host-utils.h"
+> +#include "qemu/int128.h"
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Missing file header and copyright boilerplate.
 
-Alistair
+> +#ifdef CONFIG_INT128
+> +
+> +Int128 int128_divu(Int128 a, Int128 b)
+> +{
+> +    return (__uint128_t)a / (__uint128_t)b;
+> +}
+> +
+> +Int128 int128_remu(Int128 a, Int128 b)
+> +{
+> +    return (__uint128_t)a % (__uint128_t)b;
+> +}
+> +
+> +Int128 int128_divs(Int128 a, Int128 b)
+> +{
+> +    return a / b;
+> +}
+> +
+> +Int128 int128_rems(Int128 a, Int128 b)
+> +{
+> +    return a % b;
+> +}
 
-> ---
->  target/riscv/csr.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9b5bd5d7b49..bb500afdeb5 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -502,6 +502,7 @@ static RISCVException read_mhartid(CPURISCVState *env, int csrno,
->  static uint64_t add_status_sd(RISCVMXL xl, uint64_t status)
->  {
->      if ((status & MSTATUS_FS) == MSTATUS_FS ||
-> +        (status & MSTATUS_VS) == MSTATUS_VS ||
->          (status & MSTATUS_XS) == MSTATUS_XS) {
->          switch (xl) {
->          case MXL_RV32:
-> --
-> 2.25.1
->
->
+I think we should simply expose these inline, and let the compiler call its runtime 
+function directly.
+
+
+r~
 
