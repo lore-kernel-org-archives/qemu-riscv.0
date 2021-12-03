@@ -1,53 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mt4qF-0000z8-K3
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Dec 2021 04:26:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33292)
+	id 1mt51l-0001j6-NU
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Dec 2021 04:38:49 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36640)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mt4qC-0000yf-JX
- for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 04:26:53 -0500
-Received: from [2a00:1450:4864:20::433] (port=42818
- helo=mail-wr1-x433.google.com)
+ id 1mt51g-0001hO-O7
+ for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 04:38:45 -0500
+Received: from [2a00:1450:4864:20::436] (port=38841
+ helo=mail-wr1-x436.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mt4q6-0008Um-BX
- for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 04:26:49 -0500
-Received: by mail-wr1-x433.google.com with SMTP id c4so4331939wrd.9
- for <qemu-riscv@nongnu.org>; Fri, 03 Dec 2021 01:26:41 -0800 (PST)
+ id 1mt51e-00051o-9V
+ for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 04:38:44 -0500
+Received: by mail-wr1-x436.google.com with SMTP id q3so4428257wru.5
+ for <qemu-riscv@nongnu.org>; Fri, 03 Dec 2021 01:38:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=k6aucabibQqs2VrbmkeB/1vOT7V/HEk3VUT4PvkHOkw=;
- b=FPuSCHw/zT6DJ0lhv7IoQXSVjI5n+H98+64+3h0S0ETjcsLeTbBlxrKrVTXZcHtIKU
- +4cCG0RZhG1yDMw4enjgsXixDYVQPcome7basTqRLhzwXUOzKC5ZcRuqQIduHvcQYxP8
- lMfeT4/zGRxb886vviKIa5Io6oXe/zbPUAs2/zqDowc5btiuJcKO4vpe6dfDlv46N71E
- FfoIcCo04Gqoyeb7wENRNbgujGZlOS4zF8m9Ry8qkKFu+h5e1nvy/h2rJfYMhQA+ZY3a
- bNefbqHXybE8y4qdmi1ygAYDcAtfJfZeDjQyjSHP3Y5jwm7gzss/5lmzdV49TOSkfLwE
- Bz5A==
+ :cc; bh=fPLe+X7B/92EvPeH79F8SC+4zXJechhiMlgJJ6ygJmM=;
+ b=CJaqo33rn2+ADYA2f/NMEfRi3vbkvCgT8HP4vhySKDcBqFs6H+5s0DmFpNUdTgaXb9
+ swu9tUt/h83MNptF7zM7T37Hau8UDcu9IEFeJtYOrDo9eaMrO0shVGyJ1kZuReH6PfuR
+ nfwLPAaxb5gMd9+pUwcVYUCpyhlo7YFxcqWsDfaUrfAVcmHinzpe+YvjKxiQvExpdUyV
+ +NkRwo6qJ2O6CKidqkOurhuU78GikV9ud2+p5sKI9BgzqapfQg9V9MROJbXY84/hYnwv
+ JLmDHTOI/xOjw4MRXjqSPQVwf82QqWHn2RSLMuVRA0umGUIzyQZYKB/wgYfa747Tzjtb
+ r1WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=k6aucabibQqs2VrbmkeB/1vOT7V/HEk3VUT4PvkHOkw=;
- b=WxpF0mn9Yxg4w5i3yhULk8iuJW6fRc8nD9Apt8jkiyJCAqXnrjGrBrfAue56QXbCRW
- BEHmg08nqsvMA9SygMWlcQUeWd3pcmuV1HF9FJIbI4+Pri4Ch//0d8D5QKOr1aK6eybm
- c20ONa52N0d6UhTJ+pwnGDYfwPPVkdvCvCkAsEorTf0BsKjANpV1BgI8/yDYrtUR3LPA
- xqVqRiT8TjhNPtTx70S7mg+56U87d88FsPP4LNhVm0cJM4ieCEHPVZlXcuDgZk0rBqGM
- fvUVxwca2xYgNgKrL27Omv/XAQ/xUDfLw6QbI51xO+ELO0wjMjpth2/KprscjBYDTvip
- bxbA==
-X-Gm-Message-State: AOAM530Bz/ZLRwX/D/0MBbUubrQ+/uOJlMBl/1BHgQMipUaiS0FUgIR9
- rA2KOsAK4t4oGvhDWBElZidpRrv0yzpFZ4EVZ6E8mw==
-X-Google-Smtp-Source: ABdhPJwUeNYaQU0w36sYC1UvpvhS+E+TnHxnjMCeQd2b4IcpfLtfyx8p2foRJeQJ/SPFuKvw8bGXIC1MssFG+bhn0E0=
-X-Received: by 2002:a5d:650f:: with SMTP id x15mr20299919wru.201.1638523600380; 
- Fri, 03 Dec 2021 01:26:40 -0800 (PST)
+ bh=fPLe+X7B/92EvPeH79F8SC+4zXJechhiMlgJJ6ygJmM=;
+ b=iY+oGdf7MTQbkxTGjuYb1oLARneypjRJAmpjBviHyAPWrVF+BjUyHU41ps1lHcWTxj
+ RwRr1Mnz/y+1iNbHXZYsWXifHgOI1jRfSeutJWFA4Zwa47leeA5Ik6GzkPhZhdQ1qbou
+ OAT0Bse4sDl48CgM6Dl4pf4jSUV3evhI6HNhAu9oqNxoJUY1RDlEo50RlkH4fansfSa5
+ eGosKcP1rbQJX1Yg3t6tBl4ZQqeKtxN75Vm8YcXgutnUwfLdeUZa+xescklVs89EFmeA
+ Wa3XllXTcPumcynrAGwS9VgIq5r8HPwl0irXj/LfsELSaASNlaBmL2m9oZNSvxH94qKV
+ kO+A==
+X-Gm-Message-State: AOAM530j4pBN8qD1WiyaaizuYjQNk4z6sZ1OGu1z/eN14VAKM91n+ggc
+ i8IQagfEj54qi98QzpK3At6EioQDkYDF+usS6yRhGQ==
+X-Google-Smtp-Source: ABdhPJysNJvbytvXQ9Wiw5VXNtJc5Npfsb4jjldQ+LMjn/PB6gfHLrfoog5BHaXm8GtO9JC9uFk0bMrmdlhQ7wr54uE=
+X-Received: by 2002:adf:e848:: with SMTP id d8mr20955918wrn.3.1638524320486;
+ Fri, 03 Dec 2021 01:38:40 -0800 (PST)
 MIME-Version: 1.0
 References: <20211120074644.729-1-jiangyifei@huawei.com>
- <20211120074644.729-10-jiangyifei@huawei.com>
-In-Reply-To: <20211120074644.729-10-jiangyifei@huawei.com>
+ <20211120074644.729-11-jiangyifei@huawei.com>
+In-Reply-To: <20211120074644.729-11-jiangyifei@huawei.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Fri, 3 Dec 2021 14:56:28 +0530
-Message-ID: <CAAhSdy2iy6caF3DLqvo=xpYst=QV4bSjTQjU0ZktV88Ez-QqPA@mail.gmail.com>
-Subject: Re: [PATCH v1 09/12] target/riscv: Add host cpu type
+Date: Fri, 3 Dec 2021 15:08:29 +0530
+Message-ID: <CAAhSdy075GcmcMTsVsvgXN+W9Cf7EKCrycnOG9BZAkfKfp3J-w@mail.gmail.com>
+Subject: Re: [PATCH v1 10/12] target/riscv: Add kvm_riscv_get/put_regs_timer
 To: Yifei Jiang <jiangyifei@huawei.com>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -59,10 +59,10 @@ Cc: QEMU Developers <qemu-devel@nongnu.org>,
  "Wubin (H)" <wu.wubin@huawei.com>, wanghaibin.wang@huawei.com,
  wanbo13@huawei.com, Mingwang Li <limingwang@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::433
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::436
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::433;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x433.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::436;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -82,74 +82,140 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2021 09:26:53 -0000
+X-List-Received-Date: Fri, 03 Dec 2021 09:38:47 -0000
 
 On Sat, Nov 20, 2021 at 1:17 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
 >
-> 'host' type cpu is set isa to RV32 or RV64 simply, more isa info
-> will obtain from KVM in kvm_arch_init_vcpu()
+> Add kvm_riscv_get/put_regs_timer to synchronize virtual time context
+> from KVM.
+>
+> To set register of RISCV_TIMER_REG(state) will occur a error from KVM
+> on kvm_timer_state == 0. It's better to adapt in KVM, but it doesn't matter
+> that adaping in QEMU.
 >
 > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 > Signed-off-by: Mingwang Li <limingwang@huawei.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/cpu.h |  6 ++++
+>  target/riscv/kvm.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 78 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e7dba35acb..dea49e53f0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -259,6 +259,12 @@ struct CPURISCVState {
+>
+>      hwaddr kernel_addr;
+>      hwaddr fdt_addr;
+> +
+> +    /* kvm timer */
+> +    bool kvm_timer_dirty;
+> +    uint64_t kvm_timer_time;
+> +    uint64_t kvm_timer_compare;
+> +    uint64_t kvm_timer_state;
 
-Looks good to me.
+We should also include kvm_timer_frequency here.
 
-Reviewed-by: Anup Patel <anup.patel@wdc.com>
+Currently, it is read-only but in-future KVM RISC-V will allow
+setting timer_frequency using SBI para-virt time scaling extension.
 
 Regards,
 Anup
 
-> ---
->  target/riscv/cpu.c | 15 +++++++++++++++
->  target/riscv/cpu.h |  1 +
->  2 files changed, 16 insertions(+)
+>  };
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a464845c99..6512182c62 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -247,6 +247,18 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
->  }
->  #endif
+>  OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 6d419ba02e..e5725770f2 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -64,6 +64,9 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
+>  #define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
+>                   KVM_REG_RISCV_CSR_REG(name))
 >
-> +#if defined(CONFIG_KVM)
-> +static void riscv_host_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +#if defined(TARGET_RISCV32)
-> +    set_misa(env, MXL_RV32, 0);
-> +#elif defined(TARGET_RISCV64)
-> +    set_misa(env, MXL_RV64, 0);
-> +#endif
-> +}
-> +#endif
+> +#define RISCV_TIMER_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_TIMER, \
+> +                 KVM_REG_RISCV_TIMER_REG(name))
 > +
->  static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
->  {
->      ObjectClass *oc;
-> @@ -844,6 +856,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->          .class_init = riscv_cpu_class_init,
->      },
->      DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
-> +#if defined(CONFIG_KVM)
-> +    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
-> +#endif
->  #if defined(TARGET_RISCV32)
->      DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
->      DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 2807eb1bcb..e7dba35acb 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -45,6 +45,7 @@
->  #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
->  #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
->  #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-> +#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>  #define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
 >
->  #if defined(TARGET_RISCV32)
->  # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
+>  #define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
+> @@ -310,6 +313,75 @@ static int kvm_riscv_put_regs_fp(CPUState *cs)
+>      return ret;
+>  }
+>
+> +static void kvm_riscv_get_regs_timer(CPUState *cs)
+> +{
+> +    int ret;
+> +    uint64_t reg;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    if (env->kvm_timer_dirty) {
+> +        return;
+> +    }
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_time = reg;
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_compare = reg;
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_state = reg;
+> +
+> +    env->kvm_timer_dirty = true;
+> +}
+> +
+> +static void kvm_riscv_put_regs_timer(CPUState *cs)
+> +{
+> +    int ret;
+> +    uint64_t reg;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    if (!env->kvm_timer_dirty) {
+> +        return;
+> +    }
+> +
+> +    reg = env->kvm_timer_time;
+> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +
+> +    reg = env->kvm_timer_compare;
+> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +
+> +    /*
+> +     * To set register of RISCV_TIMER_REG(state) will occur a error from KVM
+> +     * on env->kvm_timer_state == 0, It's better to adapt in KVM, but it
+> +     * doesn't matter that adaping in QEMU now.
+> +     * TODO If KVM changes, adapt here.
+> +     */
+> +    if (env->kvm_timer_state) {
+> +        reg = env->kvm_timer_state;
+> +        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
+> +        if (ret) {
+> +            abort();
+> +        }
+> +    }
+> +
+> +    env->kvm_timer_dirty = false;
+> +}
+>
+>  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+>      KVM_CAP_LAST_INFO
 > --
 > 2.19.1
 >
