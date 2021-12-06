@@ -1,93 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mt9Rg-00069s-Nn
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Dec 2021 09:21:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47694)
+	id 1muDDE-0001pR-IJ
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Dec 2021 07:35:21 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49190)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mprivozn@redhat.com>)
- id 1mt48r-00033c-Du
- for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 03:42:05 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42340)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1muDD4-0001lZ-Aa
+ for qemu-riscv@nongnu.org; Mon, 06 Dec 2021 07:35:13 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:53215)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mprivozn@redhat.com>)
- id 1mt48n-0003oR-4K
- for qemu-riscv@nongnu.org; Fri, 03 Dec 2021 03:42:04 -0500
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1muDCz-0003bB-BE
+ for qemu-riscv@nongnu.org; Mon, 06 Dec 2021 07:35:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1638520919;
+ s=mimecast20190719; t=1638794101;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6GZB4B1N+7654kHtpQfNF47RaDJVwe0bhDq5s6FRHyg=;
- b=RKnk/VC+UB4KX6FRQdz9/0Ei49OMNuOB82OgJiYQzA6jZ9cQox+b0k+2mdKYrihUYLpAAS
- DlaEmnnBEkmxe/Q4g/SBlHV3FzDYMp4J1k1SA70/iETNQRiKWWkQHvww17zoU2F4+TUm+o
- 4Sxb50AADVSJNwltxnrr697Tgf9A1Bg=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=NUtrJqK3wUAMb5eiBVNGE5aHlgdymb6vCYIWJKCdnTw=;
+ b=f0x5UE/z/DEGDCDrkhlZjDpPDr5v5oVfx8slKi4VT2ZEZQwH2gPXYt64WuLk9KE6WiVFB/
+ 6JKohL1gXg0gXd229Pe2K+lztlG88wqAK6nmpnY/9fFIQcunvmmE+OSOaZcePISxHpC7gh
+ c6kbeNJxuQ7lTniVRP9Tvre5kifoYAA=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-582-gpClPUwJNE-G-1G9cUKFbw-1; Fri, 03 Dec 2021 03:41:58 -0500
-X-MC-Unique: gpClPUwJNE-G-1G9cUKFbw-1
-Received: by mail-ed1-f72.google.com with SMTP id
- w5-20020a05640234c500b003f1b9ab06d2so1943242edc.13
- for <qemu-riscv@nongnu.org>; Fri, 03 Dec 2021 00:41:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=6GZB4B1N+7654kHtpQfNF47RaDJVwe0bhDq5s6FRHyg=;
- b=js2qP3MY+C8WO4IzG7IyEAOrnGAFW+MRupd9WkIPIMw9bc4Y0TTWLtfuqoEqyo4vEF
- XXWoc/NBv2Sy2VJdYKM/BY2aX8m+dl2mYv2+6Td9wEr0nSeOHILlTVxSlnWWNXeNDbb7
- gfohS0UIPhYA8NBZMJMIh6MbjSB8qMNxgQ0knxzUO81YSByalIBbReMlYH+LxuaITuYX
- cU+h1g3vqSmRJVSMXQXHeZnz2alJDVBFbo8Jj7exLZWSAbwa9n1M5Wh34Xu9/nVp4O1A
- 7SY+ZbKNdaD+o2ESBVN0oxWy+F7Hl0/IWZE+HxbKv8OuUoK+2y1vQvQTQB46KabMuWOD
- /NZQ==
-X-Gm-Message-State: AOAM5307dlbNZdCBbMuLfJ85ubslrzK/UiolNzoKx2oHDGr+qOn0Qr16
- rYIt4jKIiqhSpt1tVlJPcgFDd98rwtSjOApgTG5jCPzaE6spD5r208egV+JlwKfRGViXrbPBpEw
- L0OAztX4QPRA7jzE=
-X-Received: by 2002:a17:907:2da5:: with SMTP id
- gt37mr22331316ejc.316.1638520917750; 
- Fri, 03 Dec 2021 00:41:57 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzb/7LfnJkZdygdHrdv8Opu/P8GNBZ71fU2X1d4rvGa3jMNrBM7Vo1vtI9fJLdAjbdMVuP/5Q==
-X-Received: by 2002:a17:907:2da5:: with SMTP id
- gt37mr22331277ejc.316.1638520917422; 
- Fri, 03 Dec 2021 00:41:57 -0800 (PST)
-Received: from [10.43.2.64] (nat-pool-brq-t.redhat.com. [213.175.37.10])
- by smtp.gmail.com with ESMTPSA id j17sm1535384edj.0.2021.12.03.00.41.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 03 Dec 2021 00:41:57 -0800 (PST)
-Message-ID: <63d013c1-bacf-2c06-896a-fd9c2b010653@redhat.com>
-Date: Fri, 3 Dec 2021 09:41:56 +0100
+ us-mta-190-Fw2eJf1SPqO-9RiMdOFL-w-1; Mon, 06 Dec 2021 07:34:58 -0500
+X-MC-Unique: Fw2eJf1SPqO-9RiMdOFL-w-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 58D9010168C3;
+ Mon,  6 Dec 2021 12:34:56 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-112-7.ams2.redhat.com [10.36.112.7])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id D56CD694BF;
+ Mon,  6 Dec 2021 12:34:55 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 61FE1113865F; Mon,  6 Dec 2021 13:34:54 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org,  Peter Maydell <peter.maydell@linaro.org>,
+ qemu-riscv@nongnu.org,  qemu-block@nongnu.org,  Bin Meng
+ <bin.meng@windriver.com>,  qemu-arm@nongnu.org,  Alistair Francis
+ <Alistair.Francis@wdc.com>,  Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH v2 01/13] hw/sd/ssi-sd: Do not create SD card within
+ controller's realize
+References: <20211117163409.3587705-1-armbru@redhat.com>
+ <20211117163409.3587705-2-armbru@redhat.com>
+ <575fcf95-f4f0-3d88-ab08-b4d21f2da354@amsat.org>
+Date: Mon, 06 Dec 2021 13:34:54 +0100
+In-Reply-To: <575fcf95-f4f0-3d88-ab08-b4d21f2da354@amsat.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Wed, 17 Nov 2021 20:45:15
+ +0100")
+Message-ID: <87tufllxn5.fsf@dusky.pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.1
-Subject: Re: [PATCH v1 00/12] Add riscv kvm accel support
-To: Yifei Jiang <jiangyifei@huawei.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bin.meng@windriver.com, kvm@vger.kernel.org, libvir-list@redhat.com,
- anup.patel@wdc.com, wanbo13@huawei.com, Alistair.Francis@wdc.com,
- kvm-riscv@lists.infradead.org, wanghaibin.wang@huawei.com,
- palmer@dabbelt.com, fanliang@huawei.com, wu.wubin@huawei.com
-References: <20211120074644.729-1-jiangyifei@huawei.com>
-From: =?UTF-8?B?TWljaGFsIFByw612b3puw61r?= <mprivozn@redhat.com>
-In-Reply-To: <20211120074644.729-1-jiangyifei@huawei.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mprivozn@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=armbru@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mprivozn@redhat.com;
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.717,
+X-Spam_score_int: -33
+X-Spam_score: -3.4
+X-Spam_bar: ---
+X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.619,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.938, RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 03 Dec 2021 09:21:49 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,17 +81,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Dec 2021 08:42:05 -0000
+X-List-Received-Date: Mon, 06 Dec 2021 12:35:14 -0000
 
-On 11/20/21 08:46, Yifei Jiang wrote:
-> This series adds both riscv32 and riscv64 kvm support, and implements
-> migration based on riscv.
+Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org> writes:
 
-What libvirt does when detecting KVM support is issuing query-kvm
-monitor command and checking if both 'present' and 'enabled' bools are
-true. If this is what these patches end up with we should get KVM
-acceleration in Libvirt for free.
+> Hi Markus, Peter,
+>
+> On 11/17/21 17:33, Markus Armbruster wrote:
+>> ssi_sd_realize() creates an "sd-card" device.  This is inappropriate,
+>> and marked FIXME.
+>>=20
+>> Move it to the boards that create these devices.  Prior art: commit
+>> eb4f566bbb for device "generic-sdhci", and commit 26c607b86b for
+>> device "pl181".
+>>=20
+>> The device remains not user-creatable, because its users should (and
+>> do) wire up its GPIO chip-select line.
+>>=20
+>> Cc: Peter Maydell <peter.maydell@linaro.org>
+>> Cc: Alistair Francis <Alistair.Francis@wdc.com>
+>> Cc: Bin Meng <bin.meng@windriver.com>
+>> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+>> Cc: "Philippe Mathieu-Daud=C3=A9" <f4bug@amsat.org>
+>> Cc: qemu-arm@nongnu.org
+>> Cc: qemu-riscv@nongnu.org
+>> Signed-off-by: Markus Armbruster <armbru@redhat.com>
+>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>
+>> ---
+>>  hw/arm/stellaris.c  | 15 ++++++++++++++-
+>>  hw/riscv/sifive_u.c | 13 ++++++++++++-
+>>  hw/sd/ssi-sd.c      | 29 +----------------------------
+>>  3 files changed, 27 insertions(+), 30 deletions(-)
+>>=20
+>> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
+>> index 78827ace6b..b6c8a5d609 100644
+>> --- a/hw/arm/stellaris.c
+>> +++ b/hw/arm/stellaris.c
+>> @@ -10,6 +10,7 @@
+>>  #include "qemu/osdep.h"
+>>  #include "qapi/error.h"
+>>  #include "hw/sysbus.h"
+>> +#include "hw/sd/sd.h"
+>>  #include "hw/ssi/ssi.h"
+>>  #include "hw/arm/boot.h"
+>>  #include "qemu/timer.h"
+>> @@ -1157,6 +1158,9 @@ static void stellaris_init(MachineState *ms, stell=
+aris_board_info *board)
+>>              void *bus;
+>>              DeviceState *sddev;
+>>              DeviceState *ssddev;
+>> +            DriveInfo *dinfo;
+>> +            DeviceState *carddev;
+>> +            BlockBackend *blk;
+>> =20
+>>              /*
+>>               * Some boards have both an OLED controller and SD card con=
+nected to
+>> @@ -1221,8 +1225,17 @@ static void stellaris_init(MachineState *ms, stel=
+laris_board_info *board)
+>>               *  - Make the ssd0323 OLED controller chipselect active-lo=
+w
+>>               */
+>>              bus =3D qdev_get_child_bus(dev, "ssi");
+>> -
+>>              sddev =3D ssi_create_peripheral(bus, "ssi-sd");
+>> +
+>> +            dinfo =3D drive_get(IF_SD, 0, 0);
+>> +            blk =3D dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
+>> +            carddev =3D qdev_new(TYPE_SD_CARD);
+>> +            qdev_prop_set_drive_err(carddev, "drive", blk, &error_fatal=
+);
+>
+> I guess a already asked this once but don't remember now... What is the
+> point of creating a SD card without drive? Is this due to the old design
+> issue we hotplug the drive to the SD card and not the SD card on the SD
+> bus?
 
-Michal
+Device model "sd-card" implements BlockdevOps method change_media_cb().
+This menas it models a device with a removable medium.  No drive behaves
+like no medium.  I guess it's an SD card reader.
+
+>
+>> +            qdev_prop_set_bit(carddev, "spi", true);
+>> +            qdev_realize_and_unref(carddev,
+>> +                                   qdev_get_child_bus(sddev, "sd-bus"),
+>> +                                   &error_fatal);
+>> +
 
 
