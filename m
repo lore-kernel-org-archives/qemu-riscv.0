@@ -1,59 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1munYl-000755-36
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Dec 2021 22:23:59 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53996)
+	id 1munhY-0003wY-Nq
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Dec 2021 22:33:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55704)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1munYj-00074M-FI; Tue, 07 Dec 2021 22:23:57 -0500
-Received: from [2607:f8b0:4864:20::d2f] (port=35508
- helo=mail-io1-xd2f.google.com)
+ id 1munhV-0003ts-Sv; Tue, 07 Dec 2021 22:33:01 -0500
+Received: from [2607:f8b0:4864:20::d29] (port=33542
+ helo=mail-io1-xd29.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1munYh-0003SA-Ad; Tue, 07 Dec 2021 22:23:57 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id 14so1404505ioe.2;
- Tue, 07 Dec 2021 19:23:54 -0800 (PST)
+ id 1munhT-0006lS-Sy; Tue, 07 Dec 2021 22:33:01 -0500
+Received: by mail-io1-xd29.google.com with SMTP id m9so1476351iop.0;
+ Tue, 07 Dec 2021 19:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CgMj6dhwS+A8k13CeJBFh6LRffAllydxMjAnGRt/ZGk=;
- b=gjbZPCPhJq41SN2Vx9GvK03CuzDKTxF6meuEQGOv7K8ixdmY53Ux34TDgaMAF0FBpb
- /BKSvyz8cgfZC14WB+R4+bysQRpxidiJJ3Sb8rjUiNEHeUEj/RSXWr7fmFnnOz1QPdrG
- x7s6Wxo3CT6/tIraDmWl6xS+PMBV8OBTuVxkh2fJ60vAD27otr0HPKJoCGI2l4wrvVBY
- mEd2LboHj/MvgzvQsTvp5O/io+GvpGYC4bhCY/RiMu/OgQt8CaEQuMEYB/gjG5+ou5FY
- paWUFIA0ETTjO0A9BKAZzl9sLM4VCS/JisGMquLxQD5itNQcYdASXGsyT9K5vPzTGSzZ
- epIw==
+ :cc; bh=RAv/LSrrCuHvVlAsX2hmCNdMJyuucx16pWQpiTLoPrE=;
+ b=mYoH/x9YJPARtGaLx36dHGMWUFAK9JJe/PkFQHbmiONUJ2ZePtyaFwzN7LPi4Ou3sG
+ F3fCtRcMHq1Xjm3deTpvNlGsKS9q6KU02a5aYMVz7ntFazzoQCaQdYn1KXdWudxLR6X+
+ QRLzhadaIG4MTg51kfKoRzw9irhgiEWuP6igxXrA0Hvls5BtA+x5Tx0U6Yauhv9zBquP
+ ZQ8prNTthJfq0A0r4mThyjFF0TM7CqQWPr7L6WTQDCqiNVeivwzC2tdD51NBxg41lGAx
+ otEjPcZrYB+8lB3FjYY04TmXrWpayTGCaxh+la31Szz7Bcg/jk5sKusUF3ocqK8+oQx4
+ OR4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=CgMj6dhwS+A8k13CeJBFh6LRffAllydxMjAnGRt/ZGk=;
- b=BBXQ1NGzcd1tMcjS1O2iM469aIS7w1FtINSt33dOlNzCKGUBLM/6HHiRQORCnt6HQ+
- TbZaSZghImA5o0f+ebBxkFezLgppqTAIHt/F/s0faS5+mHkS9FJRjuLiPuEIJ0P0TL+S
- SorXTaIgD3imVUG+CxLAElyP2Ppt9XwXFUDrc/XZ6MK9YXiMRmfe5iyL1F0+VfO1v8cZ
- fF/AKEQhF90kqYTJBeqCK8P/BEZichygf/1H8GnCqlGmXe49I/LRGQZ3dqzrAeMVH+rN
- HlkQT//Wef9tsuizP1uX4bwjLe3koy2UIsrSVz3t98e24FvBYGIPnfYGvAxcrQpfRM/M
- X1Kw==
-X-Gm-Message-State: AOAM530e6cpULmHqbf77nU4NAArPd8kg9cuwGkwX7Rjzf6Milox9xmc9
- tcxN2iu541RKJryQXleR1AWlPUOL8qjDw7Jgmjg=
-X-Google-Smtp-Source: ABdhPJzFAXa2NOcVjtzh9plp8uQMq7b9PpXoix19E9RpH23cvxnAStrnhbPugpZy36576eEKUAGtJNXnFFzoLF38z/U=
-X-Received: by 2002:a6b:6802:: with SMTP id d2mr3596027ioc.187.1638933833846; 
- Tue, 07 Dec 2021 19:23:53 -0800 (PST)
+ bh=RAv/LSrrCuHvVlAsX2hmCNdMJyuucx16pWQpiTLoPrE=;
+ b=hcQ3f4UDSUVL/d8NJEHjYzjev2PN/YItGKaVLHlo+RV7kqo47+RCvcJ0y3NeEKT5KB
+ J/sDffT+CwKl0sknmTZNPFINcnDwsF2fh4+5QRSA1mEb0HI6lx9fhR8J9MIpdzuGEcN6
+ /AFCFu0SKO6nP6LU9rgy0wURbiZwuGll4lQ/BVdYrkCfK3B4OkLs/rp88BcQYyAr1tuP
+ pzk4JdsXQyLRBy/kQTyKGTI9NM4ktFKeZwpjuFJszCFTboeffFY5p3KC3+66sAa3xicU
+ UUP/4GBk3wp9fMycc8e/ZIOER3Cm63MMNdRudbFo0Sycu5VFseOkbMRFQ7kVaDHFMPC5
+ Zi/Q==
+X-Gm-Message-State: AOAM533oxIowMbokJgIO7EG2Q9UgKa5MRFL/ro/QZw+5N4E79aSyp6If
+ b/uXrc0LeVYIBJrkNUmlHhLpHaJhRxZSx+PV1k4=
+X-Google-Smtp-Source: ABdhPJw2XpBwltYQinhfd+9DpNcHmyUcQP7xWbq+NQG/fhvPGoKA1jMAt+DTpdU6o+RxRk1+bMD42ndSQeeRGrJCrxA=
+X-Received: by 2002:a05:6638:32a2:: with SMTP id
+ f34mr53296744jav.63.1638934378489; 
+ Tue, 07 Dec 2021 19:32:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20211123090902.23321-1-zhiwei_liu@c-sky.com>
-In-Reply-To: <20211123090902.23321-1-zhiwei_liu@c-sky.com>
+References: <20211129030340.429689-1-frank.chang@sifive.com>
+ <20211129030340.429689-70-frank.chang@sifive.com>
+In-Reply-To: <20211129030340.429689-70-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Dec 2021 13:23:27 +1000
-Message-ID: <CAKmqyKOD0JSY3FFBOt6L3=JwRVOsf35eCkpHrB4GvzsTUsOypw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] target/riscv: Fix PMP propagation for tlb
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Date: Wed, 8 Dec 2021 13:32:32 +1000
+Message-ID: <CAKmqyKPgFKwwDyzjfbWZw=z_+-GWgb5634FVYRqei8pLgJuv4w@mail.gmail.com>
+Subject: Re: [PATCH v10 69/77] target/riscv: rvv-1.0: floating-point
+ reciprocal square-root estimate instruction
+To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -74,206 +80,268 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2021 03:23:57 -0000
+X-List-Received-Date: Wed, 08 Dec 2021 03:33:02 -0000
 
-On Tue, Nov 23, 2021 at 7:09 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Mon, Nov 29, 2021 at 1:57 PM <frank.chang@sifive.com> wrote:
 >
-> Only the pmp index that be checked by pmp_hart_has_privs can be used
-> by pmp_get_tlb_size to avoid an error pmp index.
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> Before modification, we may use an error pmp index. For example,
-> we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
-> is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
-> will return true;
+> Implement the floating-point reciprocal square-root estimate to 7 bits
+> instruction.
 >
-> However, this checked pmp index is discarded as pmp_hart_has_privs
-> return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
-> rules. The tlb_sa will be 0x0, and tlb_ea will be 0x4fff. If there is
-> a pmp rule [0x10, 0x4]. It will be misused as it is legal in
-> pmp_get_tlb_size.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu_helper.c | 16 ++++++-----
->  target/riscv/pmp.c        | 56 +++++++++++++--------------------------
->  target/riscv/pmp.h        |  6 ++---
->  3 files changed, 31 insertions(+), 47 deletions(-)
+>  target/riscv/helper.h                   |   4 +
+>  target/riscv/insn32.decode              |   1 +
+>  target/riscv/insn_trans/trans_rvv.c.inc |   1 +
+>  target/riscv/vector_helper.c            | 183 ++++++++++++++++++++++++
+>  4 files changed, 189 insertions(+)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9eeed38c7e..4239bd2ca5 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -362,24 +362,26 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
->                                      int mode)
->  {
->      pmp_priv_t pmp_priv;
-> -    target_ulong tlb_size_pmp = 0;
-> +    int pmp_index = -1;
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index a717a87a0e0..bdf06dfb24d 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -841,6 +841,10 @@ DEF_HELPER_5(vfsqrt_v_h, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfsqrt_v_w, void, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_5(vfsqrt_v_d, void, ptr, ptr, ptr, env, i32)
 >
->      if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
->          *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->          return TRANSLATE_SUCCESS;
->      }
->
-> -    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
-> -                            mode)) {
-> +    pmp_index = pmp_hart_has_privs(env, addr, size, 1 << access_type,
-> +                                   &pmp_priv, mode);
-> +    if (pmp_index < 0) {
->          *prot = 0;
->          return TRANSLATE_PMP_FAIL;
->      }
->
->      *prot = pmp_priv_to_page_prot(pmp_priv);
-> -    if (tlb_size != NULL) {
-> -        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
-> -            *tlb_size = tlb_size_pmp;
-> -        }
-> +    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
-> +        target_ulong tlb_sa = addr & ~(*tlb_size - 1);
-> +        target_ulong tlb_ea = tlb_sa + *tlb_size - 1;
+> +DEF_HELPER_5(vfrsqrt7_v_h, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfrsqrt7_v_w, void, ptr, ptr, ptr, env, i32)
+> +DEF_HELPER_5(vfrsqrt7_v_d, void, ptr, ptr, ptr, env, i32)
 > +
-> +        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
->      }
->
->      return TRANSLATE_SUCCESS;
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 54abf42583..1172142e34 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -297,8 +297,11 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
->
->  /*
->   * Check if the address has required RWX privs to complete desired operation
-> + * Return PMP rule index if a pmp rule match
-> + * Return MAX_RISCV_PMPS if default match
-> + * Return negtive value if no match
->   */
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->      target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
->      target_ulong mode)
->  {
-> @@ -310,8 +313,10 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->
->      /* Short cut if no rules */
->      if (0 == pmp_get_num_rules(env)) {
-> -        return pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                          allowed_privs, mode);
-> +        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                       allowed_privs, mode)) {
-> +            ret = MAX_RISCV_PMPS;
-> +        }
->      }
->
->      if (size == 0) {
-> @@ -338,7 +343,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->          if ((s + e) == 1) {
->              qemu_log_mask(LOG_GUEST_ERROR,
->                            "pmp violation - access is partially inside\n");
-> -            ret = 0;
-> +            ret = -1;
->              break;
->          }
->
-> @@ -441,18 +446,22 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->                  }
->              }
->
-> -            ret = ((privs & *allowed_privs) == privs);
-> +            if ((privs & *allowed_privs) == privs) {
-> +                ret = i;
-> +            }
->              break;
->          }
->      }
->
->      /* No rule matched */
->      if (ret == -1) {
-> -        return pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                          allowed_privs, mode);
-> +        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                       allowed_privs, mode)) {
-> +            ret = MAX_RISCV_PMPS;
-> +        }
->      }
->
-> -    return ret == 1 ? true : false;
-> +    return ret;
+>  DEF_HELPER_6(vfmin_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vfmin_vv_w, void, ptr, ptr, ptr, ptr, env, i32)
+>  DEF_HELPER_6(vfmin_vv_d, void, ptr, ptr, ptr, ptr, env, i32)
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index c4fdc76a269..6e5f288943a 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -560,6 +560,7 @@ vfwmsac_vf      111110 . ..... ..... 101 ..... 1010111 @r_vm
+>  vfwnmsac_vv     111111 . ..... ..... 001 ..... 1010111 @r_vm
+>  vfwnmsac_vf     111111 . ..... ..... 101 ..... 1010111 @r_vm
+>  vfsqrt_v        010011 . ..... 00000 001 ..... 1010111 @r2_vm
+> +vfrsqrt7_v      010011 . ..... 00100 001 ..... 1010111 @r2_vm
+>  vfmin_vv        000100 . ..... ..... 001 ..... 1010111 @r_vm
+>  vfmin_vf        000100 . ..... ..... 101 ..... 1010111 @r_vm
+>  vfmax_vv        000110 . ..... ..... 001 ..... 1010111 @r_vm
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 53c8573f117..8fe718610a9 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2407,6 +2407,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  \
 >  }
 >
->  /*
-> @@ -595,8 +604,8 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
->   * Calculate the TLB size if the start address or the end address of
->   * PMP entry is presented in the TLB page.
->   */
-> -static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> -                                     target_ulong tlb_sa, target_ulong tlb_ea)
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> +                              target_ulong tlb_sa, target_ulong tlb_ea)
->  {
->      target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
->      target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
-> @@ -616,33 +625,6 @@ static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
->      return 0;
->  }
+>  GEN_OPFV_TRANS(vfsqrt_v, opfv_check, RISCV_FRM_DYN)
+> +GEN_OPFV_TRANS(vfrsqrt7_v, opfv_check, RISCV_FRM_DYN)
 >
-> -/*
-> - * Check is there a PMP entry which range covers this page. If so,
-> - * try to find the minimum granularity for the TLB size.
-> - */
-> -bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-> -                         target_ulong *tlb_size)
-> -{
-> -    int i;
-> -    target_ulong val;
-> -    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
-> -
-> -    for (i = 0; i < MAX_RISCV_PMPS; i++) {
-> -        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
-> -        if (val) {
-> -            if (*tlb_size == 0 || *tlb_size > val) {
-> -                *tlb_size = val;
-> -            }
-> -        }
-> -    }
-> -
-> -    if (*tlb_size != 0) {
-> -        return true;
-> -    }
-> -
-> -    return false;
-> -}
-> -
->  /*
->   * Convert PMP privilege to TLB page privilege.
->   */
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index a9a0b363a7..94c0b960fb 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -68,11 +68,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
->  void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->      target_ulong val);
->  target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->      target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
->      target_ulong mode);
-> -bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-> -                         target_ulong *tlb_size);
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> +                              target_ulong tlb_sa, target_ulong tlb_ea);
->  void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
->  void pmp_update_rule_nums(CPURISCVState *env);
->  uint32_t pmp_get_num_rules(CPURISCVState *env);
+>  /* Vector Floating-Point MIN/MAX Instructions */
+>  GEN_OPFVV_TRANS(vfmin_vv, opfvv_check)
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 22848d6b683..d5f3229bcb4 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -18,6 +18,7 @@
+>
+>  #include "qemu/osdep.h"
+>  #include "qemu/host-utils.h"
+> +#include "qemu/bitops.h"
+>  #include "cpu.h"
+>  #include "exec/memop.h"
+>  #include "exec/exec-all.h"
+> @@ -3404,6 +3405,188 @@ GEN_VEXT_V_ENV(vfsqrt_v_h, 2, 2)
+>  GEN_VEXT_V_ENV(vfsqrt_v_w, 4, 4)
+>  GEN_VEXT_V_ENV(vfsqrt_v_d, 8, 8)
+>
+> +/*
+> + * Vector Floating-Point Reciprocal Square-Root Estimate Instruction
+> + *
+> + * Adapted from riscv-v-spec recip.c:
+> + * https://github.com/riscv/riscv-v-spec/blob/master/recip.c
+> + */
+> +static uint64_t frsqrt7(uint64_t f, int exp_size, int frac_size)
+> +{
+> +    uint64_t sign = extract64(f, frac_size + exp_size, 1);
+> +    uint64_t exp = extract64(f, frac_size, exp_size);
+> +    uint64_t frac = extract64(f, 0, frac_size);
+> +
+> +    const uint8_t lookup_table[] = {
+> +        52, 51, 50, 48, 47, 46, 44, 43,
+> +        42, 41, 40, 39, 38, 36, 35, 34,
+> +        33, 32, 31, 30, 30, 29, 28, 27,
+> +        26, 25, 24, 23, 23, 22, 21, 20,
+> +        19, 19, 18, 17, 16, 16, 15, 14,
+> +        14, 13, 12, 12, 11, 10, 10, 9,
+> +        9, 8, 7, 7, 6, 6, 5, 4,
+> +        4, 3, 3, 2, 2, 1, 1, 0,
+> +        127, 125, 123, 121, 119, 118, 116, 114,
+> +        113, 111, 109, 108, 106, 105, 103, 102,
+> +        100, 99, 97, 96, 95, 93, 92, 91,
+> +        90, 88, 87, 86, 85, 84, 83, 82,
+> +        80, 79, 78, 77, 76, 75, 74, 73,
+> +        72, 71, 70, 70, 69, 68, 67, 66,
+> +        65, 64, 63, 63, 62, 61, 60, 59,
+> +        59, 58, 57, 56, 56, 55, 54, 53
+> +    };
+> +    const int precision = 7;
+> +
+> +    if (exp == 0 && frac != 0) { /* subnormal */
+> +        /* Normalize the subnormal. */
+> +        while (extract64(frac, frac_size - 1, 1) == 0) {
+> +            exp--;
+> +            frac <<= 1;
+> +        }
+> +
+> +        frac = (frac << 1) & MAKE_64BIT_MASK(0, frac_size);
+> +    }
+> +
+> +    int idx = ((exp & 1) << (precision - 1)) |
+> +                (frac >> (frac_size - precision + 1));
+> +    uint64_t out_frac = (uint64_t)(lookup_table[idx]) <<
+> +                            (frac_size - precision);
+> +    uint64_t out_exp = (3 * MAKE_64BIT_MASK(0, exp_size - 1) + ~exp) / 2;
+> +
+> +    uint64_t val = 0;
+> +    val = deposit64(val, 0, frac_size, out_frac);
+> +    val = deposit64(val, frac_size, exp_size, out_exp);
+> +    val = deposit64(val, frac_size + exp_size, 1, sign);
+> +    return val;
+> +}
+> +
+> +static float16 frsqrt7_h(float16 f, float_status *s)
+> +{
+> +    int exp_size = 5, frac_size = 10;
+> +    bool sign = float16_is_neg(f);
+> +
+> +    /*
+> +     * frsqrt7(sNaN) = canonical NaN
+> +     * frsqrt7(-inf) = canonical NaN
+> +     * frsqrt7(-normal) = canonical NaN
+> +     * frsqrt7(-subnormal) = canonical NaN
+> +     */
+> +    if (float16_is_signaling_nan(f, s) ||
+> +            (float16_is_infinity(f) && sign) ||
+> +            (float16_is_normal(f) && sign) ||
+> +            (float16_is_zero_or_denormal(f) && !float16_is_zero(f) && sign)) {
+> +        s->float_exception_flags |= float_flag_invalid;
+> +        return float16_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(qNaN) = canonical NaN */
+> +    if (float16_is_quiet_nan(f, s)) {
+> +        return float16_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(+-0) = +-inf */
+> +    if (float16_is_zero(f)) {
+> +        s->float_exception_flags |= float_flag_divbyzero;
+> +        return float16_set_sign(float16_infinity, sign);
+> +    }
+> +
+> +    /* frsqrt7(+inf) = +0 */
+> +    if (float16_is_infinity(f) && !sign) {
+> +        return float16_set_sign(float16_zero, sign);
+> +    }
+> +
+> +    /* +normal, +subnormal */
+> +    uint64_t val = frsqrt7(f, exp_size, frac_size);
+> +    return make_float16(val);
+> +}
+> +
+> +static float32 frsqrt7_s(float32 f, float_status *s)
+> +{
+> +    int exp_size = 8, frac_size = 23;
+> +    bool sign = float32_is_neg(f);
+> +
+> +    /*
+> +     * frsqrt7(sNaN) = canonical NaN
+> +     * frsqrt7(-inf) = canonical NaN
+> +     * frsqrt7(-normal) = canonical NaN
+> +     * frsqrt7(-subnormal) = canonical NaN
+> +     */
+> +    if (float32_is_signaling_nan(f, s) ||
+> +            (float32_is_infinity(f) && sign) ||
+> +            (float32_is_normal(f) && sign) ||
+> +            (float32_is_zero_or_denormal(f) && !float32_is_zero(f) && sign)) {
+> +        s->float_exception_flags |= float_flag_invalid;
+> +        return float32_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(qNaN) = canonical NaN */
+> +    if (float32_is_quiet_nan(f, s)) {
+> +        return float32_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(+-0) = +-inf */
+> +    if (float32_is_zero(f)) {
+> +        s->float_exception_flags |= float_flag_divbyzero;
+> +        return float32_set_sign(float32_infinity, sign);
+> +    }
+> +
+> +    /* frsqrt7(+inf) = +0 */
+> +    if (float32_is_infinity(f) && !sign) {
+> +        return float32_set_sign(float32_zero, sign);
+> +    }
+> +
+> +    /* +normal, +subnormal */
+> +    uint64_t val = frsqrt7(f, exp_size, frac_size);
+> +    return make_float32(val);
+> +}
+> +
+> +static float64 frsqrt7_d(float64 f, float_status *s)
+> +{
+> +    int exp_size = 11, frac_size = 52;
+> +    bool sign = float64_is_neg(f);
+> +
+> +    /*
+> +     * frsqrt7(sNaN) = canonical NaN
+> +     * frsqrt7(-inf) = canonical NaN
+> +     * frsqrt7(-normal) = canonical NaN
+> +     * frsqrt7(-subnormal) = canonical NaN
+> +     */
+> +    if (float64_is_signaling_nan(f, s) ||
+> +            (float64_is_infinity(f) && sign) ||
+> +            (float64_is_normal(f) && sign) ||
+> +            (float64_is_zero_or_denormal(f) && !float64_is_zero(f) && sign)) {
+> +        s->float_exception_flags |= float_flag_invalid;
+> +        return float64_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(qNaN) = canonical NaN */
+> +    if (float64_is_quiet_nan(f, s)) {
+> +        return float64_default_nan(s);
+> +    }
+> +
+> +    /* frsqrt7(+-0) = +-inf */
+> +    if (float64_is_zero(f)) {
+> +        s->float_exception_flags |= float_flag_divbyzero;
+> +        return float64_set_sign(float64_infinity, sign);
+> +    }
+> +
+> +    /* frsqrt7(+inf) = +0 */
+> +    if (float64_is_infinity(f) && !sign) {
+> +        return float64_set_sign(float64_zero, sign);
+> +    }
+> +
+> +    /* +normal, +subnormal */
+> +    uint64_t val = frsqrt7(f, exp_size, frac_size);
+> +    return make_float64(val);
+> +}
+> +
+> +RVVCALL(OPFVV1, vfrsqrt7_v_h, OP_UU_H, H2, H2, frsqrt7_h)
+> +RVVCALL(OPFVV1, vfrsqrt7_v_w, OP_UU_W, H4, H4, frsqrt7_s)
+> +RVVCALL(OPFVV1, vfrsqrt7_v_d, OP_UU_D, H8, H8, frsqrt7_d)
+> +GEN_VEXT_V_ENV(vfrsqrt7_v_h, 2, 2)
+> +GEN_VEXT_V_ENV(vfrsqrt7_v_w, 4, 4)
+> +GEN_VEXT_V_ENV(vfrsqrt7_v_d, 8, 8)
+> +
+>  /* Vector Floating-Point MIN/MAX Instructions */
+>  RVVCALL(OPFVV2, vfmin_vv_h, OP_UUU_H, H2, H2, H2, float16_minimum_number)
+>  RVVCALL(OPFVV2, vfmin_vv_w, OP_UUU_W, H4, H4, H4, float32_minimum_number)
 > --
 > 2.25.1
 >
