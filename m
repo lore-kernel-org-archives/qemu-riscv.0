@@ -1,84 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1muqgJ-0002RU-4H
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Dec 2021 01:44:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36160)
+	id 1muqgX-0002Tt-7k
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Dec 2021 01:44:13 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36244)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=96943765b=alistair.francis@opensource.wdc.com>)
- id 1muqgA-0002OD-D4
- for qemu-riscv@nongnu.org; Wed, 08 Dec 2021 01:43:50 -0500
+ id 1muqgI-0002RJ-EW
+ for qemu-riscv@nongnu.org; Wed, 08 Dec 2021 01:44:00 -0500
 Received: from esa6.hgst.iphmx.com ([216.71.154.45]:16960)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=96943765b=alistair.francis@opensource.wdc.com>)
- id 1muqg7-0006Cc-LP
- for qemu-riscv@nongnu.org; Wed, 08 Dec 2021 01:43:50 -0500
+ id 1muqgD-0006Cc-RL
+ for qemu-riscv@nongnu.org; Wed, 08 Dec 2021 01:43:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1638945828; x=1670481828;
+ t=1638945834; x=1670481834;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=SPZIA74TJTVMJ/EW0ChuA+m3vlMDh9qmBIfXrpPLqp8=;
- b=bMwaipb5/2HYRUSI1u2j90zw0gTSE0L/Ebnnk2Rdt6zHLHQIiG2PtkC6
- JjPyYrEOqcQ/nuj5XFc/hojTTDx+pFS1bLB64vt3Sl+yiORDmlOOWqFx4
- qN7l9F7JS1Kugsnj7yMyXNUGjLu3KBp+8rwKFQf5Joe/J3+L1hPyU3mYN
- FSMutlz58OfMuSTxkYcc6+K02xl8RBObptg+FqMVtG1CthTuorYHk3OKJ
- LTdWhCvZhZ0yY3OMtfJ6LvZTaWl7OV8EqJMUk09vuGZPz3Htt31BnOmS7
- X7goHdkRX4ZewBOzvedkXLii1Z7wd3aT/aNTCCuim9ybjduKQbzto0Usl w==;
-X-IronPort-AV: E=Sophos;i="5.87,296,1631548800"; d="scan'208";a="188732851"
+ bh=VoW/APYv+/Addxn8Vl3X/2aFIt0i7U7pteAN7/AtERQ=;
+ b=Uf96viLG69DGcp571XuetbeEnvqJwpX8XAQzIkS00bOwUxiYPcxQuKVd
+ ECgAXyrjdKDm9tkB53JUpTb8Y3Z7UGTsMPi9P/Ej2I4iOzY2TxPaoGsXA
+ +UwDfijLFrnWld82Bh5zizz9s9aJpE/jemlD6n1jIzn3WhToTq3l7FdzH
+ MxpaXxRo5cz9Gt7wkuer6rWtDEeidV8zcNmpPmIEWC1Gh6lTT+kzfYq7M
+ 5NWoLsaCAv21C5ZdpCfwG0GlxczZnhq8wFp/Lkhe76xzhLaGP1Wfo24EC
+ wNoGzFWBRmcbSc/Xyj+82ltEE6kpaWrlDusTptNq36xThFS/jACMLnIaS g==;
+X-IronPort-AV: E=Sophos;i="5.87,296,1631548800"; d="scan'208";a="188732857"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 08 Dec 2021 14:43:47 +0800
-IronPort-SDR: HgUJp9WnXwRUg+IR+c/3mhRYiJWJOpjfTqsmCHOdCK2ESART4NuYS/+zejwlwi9eGyPkEsVwSl
- TIJRziDYvTsARZfcRushZp83vj7om0SojPdTgKDQsPwuOWeBKoXMsTcBdTBczfPnjRbMjniFqG
- X3o/RFN0wbvBPlSUtclRfGaSJ7KOOjMsbYl6OlOB6Ylxcr42QUaOGMDyqriPmVdhvfIg3HMSVt
- CaQDuqvM7by+P4QlNF/kxn+wDBEyJGUHvG51dNJ28quMbHEz602MyCOy/GQ/+NgGi4jx1ldQqG
- ZORmP5/UUBfmgYpsFDGIWrtl
+ by ob1.hgst.iphmx.com with ESMTP; 08 Dec 2021 14:43:53 +0800
+IronPort-SDR: vEfzsm+wcOwTraRj1zd29xY8EzhRtuDtu/pHnjD1TsSBeaPAdNAvxJl/YfYVUXIMClsU4sgSL+
+ /CxZUZD4xDExltma0JfYzb2CQB7doSkU4joD0q1hb2lkYKYyGXcSSw/dSAkH3ZvYocliklmk70
+ mUcrEn6TPZbFExQp3ydRODU5CothDp5phlM+oCYEAGWJo5HqfLIDoON8L6yuZiE2gruHDGpJFN
+ Z8cKIykrxNGYBeJ/pU79NbN4A4rQldUqhfdM26Ik8BTK8hfoJ47WwsZjknErPyKayqnfjm6ntg
+ PfSAC8lMdSS5D14msF6WGUHV
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Dec 2021 22:16:50 -0800
-IronPort-SDR: m5lHDQk2vZYONgSEVc+wn30bdRNEanLqLbHtJgAVTxwI4cmxjHZHFb/CulvKvzHBZ94lnG8S68
- ukRN0cr3enrmHqTm2xbafuVOX+eIKM8TIjyE2u/RWcxpA4w5382kplYDJXuIfVs0OQgqNldQf1
- Krl8Ba8+VTQx6HlHzwc+jODweNBE/6zr0WuEYAnMFKErs4v1jIa4QkKVGuppGntT6AZBfotd/w
- Fg72jXMb2+vcQy0Dh57Dl0tCk0cLsD9PGE3VGfJCvUCB+2a2+6HEFqluNth7k/BOOy01X49cbk
- 2sk=
+ 07 Dec 2021 22:16:57 -0800
+IronPort-SDR: Z6FslV6FF/GMnSc/c5iyPafCMnWQcYQOJ3B+SCe4ElF71DHfbrf0diDn8nsj5JZIpD14k+TsLd
+ UTeG2M9nXlJ8HBbKHERDqKChDVBW9bXxVD7DWoV78hCQHgFvxXvWqLH7vpxBM6wqnafrShrgZg
+ HhWHmmJiRMQoKw1M9DJeq8CvLabyOmoRmKl8InBNNf3yYxoduEG4UkxHxAB7let3couB82Ez/s
+ OOsEbl0CMxsIChY8oiSbcTFHiF9PHurcDYEhkgl5SzjFxHXxSVesuNGYy120V5+BLQGgvy1qra
+ jBw=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Dec 2021 22:43:47 -0800
+ 07 Dec 2021 22:43:54 -0800
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4J870y1DfFz1Rwns
- for <qemu-riscv@nongnu.org>; Tue,  7 Dec 2021 22:43:46 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4J87144BMMz1Rwnx
+ for <qemu-riscv@nongnu.org>; Tue,  7 Dec 2021 22:43:52 -0800 (PST)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  opensource.wdc.com; h=content-transfer-encoding:mime-version
  :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1638945825; x=1641537826; bh=SPZIA74TJTVMJ/EW0C
- huA+m3vlMDh9qmBIfXrpPLqp8=; b=o7GHGcrB4mSA3F62M9UTEa6y6QUwTGSLkS
- gysZVzRNTvKlWzpgBARmZztpYLy1B5UAFeS3i9esoQ+AHzsY8a9Rrh1I0j/nbYWF
- CcgH8ji1aq5vjQwm79mLuWQsCjT8XxdA5on0OEae+oPM8EKrzw9YLoRC1PWfa2Ef
- xR4E4v9LzMlTZzXzuJ9UmBX57mi3KRW5vIUHAVLKTxhgotHLtafpijVep8JHJMqv
- osDjva35/wzTROwooWuzn6zm9g01fBjJ4DNTsGWZKupdG7KtjEaIbmX1s5o7RSsx
- os9ADw3YOtMlX6vd+DEa5KemZENHGDBUmihM2Xt3pqlLoZjW08IQ==
+ :from; s=dkim; t=1638945831; x=1641537832; bh=VoW/APYv+/Addxn8Vl
+ 3X/2aFIt0i7U7pteAN7/AtERQ=; b=LPyKdl/thFiYYsrqa2HsmVjGcKx8ztmdna
+ hMgFKyibdWZp9rlfdBm82dO3PUsuGd42E+R+89lDPuloO4SCklwC0puW//rrW1Ec
+ uCLA/H57YXK/U+8JpHwe2r1RGDgcypIlyBj1yfObHncTiYRL1G4PjFonHd7MHsI8
+ Zi7cAD+OqlR3dc3wBUx27r5QeJqzkZ3iUD0jMyNU0dsEyKdCfCtRS46w912mbUo0
+ uuylJFvKDKXz5PrpWgc73L5YOlVp5KWs2HmJoLfF8Drmb75gNY707WCcFm7rJteZ
+ zxVTe1aJswpWMkiYzuVokPEBZ/FCCD1iC66jUISOfgNzVIHj/AfA==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id YfNtZ_J0BpdS for <qemu-riscv@nongnu.org>;
- Tue,  7 Dec 2021 22:43:45 -0800 (PST)
+ port 10026) with ESMTP id 1_xC8smD5rkn for <qemu-riscv@nongnu.org>;
+ Tue,  7 Dec 2021 22:43:51 -0800 (PST)
 Received: from localhost.localdomain (unknown [10.225.165.65])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4J870r73ztz1RtVG;
- Tue,  7 Dec 2021 22:43:40 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4J870y59VKz1RtVG;
+ Tue,  7 Dec 2021 22:43:46 -0800 (PST)
 From: Alistair Francis <alistair.francis@opensource.wdc.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
  Alistair Francis <alistair.francis@wdc.com>, alistair23@gmail.com,
- Alistair Francis <Alistair.Francis@wdc.com>, bmeng.cn@gmail.com
-Subject: [PATCH 6/7] target/riscv: Enable the Hypervisor extension by default
-Date: Wed,  8 Dec 2021 16:42:51 +1000
-Message-Id: <20211208064252.375360-7-alistair.francis@opensource.wdc.com>
+ Alistair Francis <Alistair.Francis@wdc.com>, bmeng.cn@gmail.com,
+ Markus Armbruster <armbru@redhat.com>
+Subject: [PATCH 7/7] hw/riscv: Use error_fatal for SoC realisation
+Date: Wed,  8 Dec 2021 16:42:52 +1000
+Message-Id: <20211208064252.375360-8-alistair.francis@opensource.wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211208064252.375360-1-alistair.francis@opensource.wdc.com>
 References: <20211208064252.375360-1-alistair.francis@opensource.wdc.com>
@@ -106,32 +107,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2021 06:43:50 -0000
+X-List-Received-Date: Wed, 08 Dec 2021 06:44:02 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-Let's enable the Hypervisor extension by default. This doesn't affect
-named CPUs (such as lowrisc-ibex or sifive-u54) but does enable the
-Hypervisor extensions by default for the virt machine.
+When realising the SoC use error_fatal instead of error_abort as the
+process can fail and report useful information to the user.
+
+Currently a user can see this:
+
+   $ ../qemu/bld/qemu-system-riscv64 -M sifive_u -S -monitor stdio -displ=
+ay none -drive if=3Dpflash
+    QEMU 6.1.93 monitor - type 'help' for more information
+    (qemu) Unexpected error in sifive_u_otp_realize() at ../hw/misc/sifiv=
+e_u_otp.c:229:
+    qemu-system-riscv64: OTP drive size < 16K
+    Aborted (core dumped)
+
+Which this patch addresses
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+Reported-by: Markus Armbruster <armbru@redhat.com>
 ---
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/microchip_pfsoc.c | 2 +-
+ hw/riscv/opentitan.c       | 2 +-
+ hw/riscv/sifive_e.c        | 2 +-
+ hw/riscv/sifive_u.c        | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1edb2771b4..013a8760b5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -626,7 +626,7 @@ static Property riscv_cpu_properties[] =3D {
-     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
--    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
-+    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 57d779fb55..f16e4d10eb 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -471,7 +471,7 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc,
+                             TYPE_MICROCHIP_PFSOC);
+-    qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
++    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+=20
+     /* Split RAM into low and high regions using aliases to machine->ram=
+ */
+     mem_low_size =3D memmap[MICROCHIP_PFSOC_DRAM_LO].size;
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index c531450b9f..0856c347e8 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -80,7 +80,7 @@ static void opentitan_board_init(MachineState *machine)
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc,
+                             TYPE_RISCV_IBEX_SOC);
+-    qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
++    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+=20
+     memory_region_add_subregion(sys_mem,
+         memmap[IBEX_DEV_RAM].base, machine->ram);
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 9b206407a6..dcb87b6cfd 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -88,7 +88,7 @@ static void sifive_e_machine_init(MachineState *machine=
+)
+=20
+     /* Initialize SoC */
+     object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_=
+E_SOC);
+-    qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
++    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+=20
+     /* Data Tightly Integrated Memory */
+     memory_region_add_subregion(sys_mem,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 589ae72a59..d576484851 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -545,7 +545,7 @@ static void sifive_u_machine_init(MachineState *machi=
+ne)
+                              &error_abort);
+     object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_ty=
+pe,
+                              &error_abort);
+-    qdev_realize(DEVICE(&s->soc), NULL, &error_abort);
++    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+=20
+     /* register RAM */
+     memory_region_add_subregion(system_memory, memmap[SIFIVE_U_DEV_DRAM]=
+.base,
 --=20
 2.31.1
 
