@@ -1,64 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1munsd-0003AQ-H6
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Dec 2021 22:44:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57550)
+	id 1muqdG-0001aY-9E
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Dec 2021 01:40:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35292)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1munsb-000399-WC; Tue, 07 Dec 2021 22:44:30 -0500
-Received: from [2607:f8b0:4864:20::134] (port=34769
- helo=mail-il1-x134.google.com)
+ id 1muqd3-0001YM-54; Wed, 08 Dec 2021 01:40:37 -0500
+Received: from [2607:f8b0:4864:20::d31] (port=37620
+ helo=mail-io1-xd31.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1munsa-0002nR-DV; Tue, 07 Dec 2021 22:44:29 -0500
-Received: by mail-il1-x134.google.com with SMTP id i9so1045250ilu.1;
- Tue, 07 Dec 2021 19:44:27 -0800 (PST)
+ id 1muqcy-0001mK-Nr; Wed, 08 Dec 2021 01:40:36 -0500
+Received: by mail-io1-xd31.google.com with SMTP id k21so1735767ioh.4;
+ Tue, 07 Dec 2021 22:40:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=TiHdPn+t0yc7/sf2dpD6lJzqJb8pHT8YAUgtF1AbsJw=;
- b=nQhWdP5hVNc5Vua/41KCigTruJK59H7PDC4NqE9eqVUjWUZJL1gypNyxZ5vxYbcPKx
- TVhyGXn0gnhlCU6kzmlTl+Y8xMLI1iL8YCO/Amm/cD3Wl69t7DE0SD86Ge/Z0frlihIe
- svqqgh6DKPCNiRvLHN/RPSeFabBloUkTrzQ139NaehXZfwUBKcwGLKbhCMt+MEivxbuL
- tSXvXfkaznVUqJ8mEc+NUuiANCaJkD5Hpu8d/cEQ+S4DT0xbkuYRk1p+hX1HYKFx0knr
- EDI0jvy9mjyX0lArjOQb1yxJoD5UkEwQwqNZRj90Pyu/3GoImYuJGZjs8yPd77SPqZLp
- v7rw==
+ :cc; bh=k2d1COiBuoGKOPwOeR6V+bpMOBagEx1KqIXrrd5H7R8=;
+ b=PuICgB+5UrHjTgOmUmfrybFUxNcaWFTz1kUAxgidA3JFkwARpTYyuP/1p2VvO4DM8G
+ 6BRzQOaV/wU5YbNRyJ2oBShQa7HmzcxGzMrt9fhyc8aWPxz5wSgHy1d8d0YZSH20QW6e
+ CGYl6hZSXRme6ovQhxdoUmK5xEXigLmMDaNUVAfP+KRPp0TfyAfWw58n4t9PXH0lk2nW
+ Lenr6MAvtOfeNjWe7kjFAcobC0b1u7upZ+VQ4f/K41BJ6+CC8jQcOesO967pYGZu2k8J
+ O32QMIuJYVt23qsTRWeV8++FUKqe6KSuRnFnu/1SHlHPQ7tE4mrXtuLGQPOqMLMsVan9
+ Ti0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=TiHdPn+t0yc7/sf2dpD6lJzqJb8pHT8YAUgtF1AbsJw=;
- b=5U7VWp+kIAfPOYRnYHkC9S6XyZ4xdQpS33y4jFwNALqJtF1PeEv1ZwCh6nchZdCA0v
- AhRsJWLZEqiapUEO7o0/rpWBqOrtwTbssIDNtYuCXebcSetbg+bWZcRk2uj/K3l1KMGH
- lh/vcUyRrptvVuIrGmy17VZWtD1xVhYu0kvXskSLkkFveIQkBRjX7pmilLl+mIJiUMwT
- +iGKPiblJBsv3ypW1B2u5N5HBjiyf8gg8u10YduBHOQDYP6FoexMxr4cVx55wTkuj78M
- WF+M208qUT1jgemix0cc8fc7TnugCxb6e6dvdBZ/fcYHBlz9ZYcxYnzVmOosvNtx0u44
- fBEw==
-X-Gm-Message-State: AOAM530t1c7SDuoe/D95oZGqS4ArBLjdn5e8s7vFwGhjKRzmTrbbxMXC
- +tBR9PiKzWs6ezkmTEg7YTnwO0JP2H7PgaKez9s=
-X-Google-Smtp-Source: ABdhPJyavGbMXBMOD+pxIztaLmHbceLTMgGSnrVbdxdmko6CCoPpunKxbdthyrWyyGvx86orjPxceH5BEyecA3btuW0=
-X-Received: by 2002:a92:cd12:: with SMTP id z18mr3698705iln.290.1638935066900; 
- Tue, 07 Dec 2021 19:44:26 -0800 (PST)
+ bh=k2d1COiBuoGKOPwOeR6V+bpMOBagEx1KqIXrrd5H7R8=;
+ b=DTvxJzpAXXxeh61ajIa5mUJYLCeTTcB0Uxrqg04KrB3YVPTplCEsUH2Foqup9DLVv3
+ lLNNDvUETT1ro5KufP7exK1ZqoQJMheWU8oyApoaDOjCUaOkJ2MHYiBxwJkNtt48+7Lu
+ h2R80+VqdovBgDVRr8IKPwKfmhKCLKsmmxkC9Qc2yCbr+qfMefBDM3Vh8oxrPPMT87Eh
+ MKcF79DloxyNQ3lHSoNF+PHo8Z4nPVjb9xeWau2SqUQ7CnvDwm/T9VUFy9cblVYumyMq
+ se9LsvP3KMRGY7pRG6ti6/sPyhDlvbYbcBGEowjg12gogGXBkDl44l50Jrxq/cf4D7p2
+ I1mQ==
+X-Gm-Message-State: AOAM531R1lDinSq+QFrX2T7C5f3kfKkWawWktUEc+/NSXZHSqcolCji5
+ 8OblFNgU16EhJuiShlumvg0yfMknfEJ5tONR/X0=
+X-Google-Smtp-Source: ABdhPJxoS8mvYweLDSKZsSS4r/R6Lk+e6Chz91sQLZraGVYLqZ914Ox/dalFt15ijC6+JRwDI7m6y3hWDsUVAwuakKo=
+X-Received: by 2002:a6b:6802:: with SMTP id d2mr4083214ioc.187.1638945622429; 
+ Tue, 07 Dec 2021 22:40:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20211129030340.429689-1-frank.chang@sifive.com>
- <20211129030340.429689-78-frank.chang@sifive.com>
-In-Reply-To: <20211129030340.429689-78-frank.chang@sifive.com>
+In-Reply-To: <20211129030340.429689-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Dec 2021 13:44:00 +1000
-Message-ID: <CAKmqyKP8Xw5iqHNcQNuZgojU9pkGD7_y+trLftck0ucSrdAYRA@mail.gmail.com>
-Subject: Re: [PATCH v10 77/77] target/riscv: rvv-1.0: Add ELEN checks for
- widening and narrowing instructions
+Date: Wed, 8 Dec 2021 16:39:55 +1000
+Message-ID: <CAKmqyKPKZ9hkF5cncVf5bOJQ-wrTUA0YcR76xzQ+brxkUb=NiQ@mail.gmail.com>
+Subject: Re: [PATCH v10 00/77] support vector extension v1.0
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- LIU Zhiwei <zhiwei_liu@c-sky.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::134
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d31
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,108 +72,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Dec 2021 03:44:30 -0000
+X-List-Received-Date: Wed, 08 Dec 2021 06:40:42 -0000
 
-On Mon, Nov 29, 2021 at 1:54 PM <frank.chang@sifive.com> wrote:
+On Mon, Nov 29, 2021 at 1:04 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> SEW has the limitation which cannot exceed ELEN.
+> This patchset implements the vector extension v1.0 for RISC-V on QEMU.
 >
-> Widening instructions have a destination group with EEW = 2*SEW
-> and narrowing instructions have a source operand with EEW = 2*SEW.
-> Both of the instructions have the limitation of: 2*SEW <= ELEN.
+> RVV v1.0 spec is now fronzen for public review:
+> https://github.com/riscv/riscv-v-spec/releases/tag/v1.0
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> The port is available here:
+> https://github.com/sifive/qemu/tree/rvv-1.0-upstream-v10
+>
+> RVV v1.0 can be enabled with -cpu option: v=true and specify vext_spec
+> option to v1.0 (i.e. vext_spec=v1.0)
+>
+> Note: This patchset depends on other patchsets listed in Based-on
+>       section below so it is not able to be built unless those patchsets
+>       are applied.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+I think this is all reviewed now. Once your other patch sets are
+merged just re-send this and I can apply it.
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 17 +++++++++++------
->  target/riscv/translate.c                |  2 ++
->  2 files changed, 13 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 47eb3119cbe..5e3f7fdb77c 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -386,9 +386,10 @@ static bool vext_check_mss(DisasContext *s, int vd, int vs1, int vs2)
->   *      can not be greater than 8 vector registers (Section 5.2):
->   *      => LMUL < 8.
->   *      => SEW < 64.
-> - *   2. Destination vector register number is multiples of 2 * LMUL.
-> + *   2. Double-width SEW cannot greater than ELEN.
-> + *   3. Destination vector register number is multiples of 2 * LMUL.
->   *      (Section 3.4.2)
-> - *   3. Destination vector register group for a masked vector
-> + *   4. Destination vector register group for a masked vector
->   *      instruction cannot overlap the source mask register (v0).
->   *      (Section 5.3)
->   */
-> @@ -396,6 +397,7 @@ static bool vext_wide_check_common(DisasContext *s, int vd, int vm)
->  {
->      return (s->lmul <= 2) &&
->             (s->sew < MO_64) &&
-> +           ((s->sew + 1) <= (s->elen >> 4)) &&
->             require_align(vd, s->lmul + 1) &&
->             require_vm(vm, vd);
->  }
-> @@ -409,11 +411,12 @@ static bool vext_wide_check_common(DisasContext *s, int vd, int vm)
->   *      can not be greater than 8 vector registers (Section 5.2):
->   *      => LMUL < 8.
->   *      => SEW < 64.
-> - *   2. Source vector register number is multiples of 2 * LMUL.
-> + *   2. Double-width SEW cannot greater than ELEN.
-> + *   3. Source vector register number is multiples of 2 * LMUL.
->   *      (Section 3.4.2)
-> - *   3. Destination vector register number is multiples of LMUL.
-> + *   4. Destination vector register number is multiples of LMUL.
->   *      (Section 3.4.2)
-> - *   4. Destination vector register group for a masked vector
-> + *   5. Destination vector register group for a masked vector
->   *      instruction cannot overlap the source mask register (v0).
->   *      (Section 5.3)
->   */
-> @@ -422,6 +425,7 @@ static bool vext_narrow_check_common(DisasContext *s, int vd, int vs2,
->  {
->      return (s->lmul <= 2) &&
->             (s->sew < MO_64) &&
-> +           ((s->sew + 1) <= (s->elen >> 4)) &&
->             require_align(vs2, s->lmul + 1) &&
->             require_align(vd, s->lmul) &&
->             require_vm(vm, vd);
-> @@ -2806,7 +2810,8 @@ GEN_OPIVV_TRANS(vredxor_vs, reduction_check)
->  /* Vector Widening Integer Reduction Instructions */
->  static bool reduction_widen_check(DisasContext *s, arg_rmrr *a)
->  {
-> -    return reduction_check(s, a) && (s->sew < MO_64);
-> +    return reduction_check(s, a) && (s->sew < MO_64) &&
-> +           ((s->sew + 1) <= (s->elen >> 4));
->  }
+> Changelog:
 >
->  GEN_OPIVV_WIDEN_TRANS(vwredsum_vs, reduction_widen_check)
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 68edaaf6ac7..5df6c0d800b 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -96,6 +96,7 @@ typedef struct DisasContext {
->      int8_t lmul;
->      uint8_t sew;
->      uint16_t vlen;
-> +    uint16_t elen;
->      target_ulong vstart;
->      bool vl_eq_vlmax;
->      uint8_t ntemp;
-> @@ -705,6 +706,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->ext_zfh = cpu->cfg.ext_zfh;
->      ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
->      ctx->vlen = cpu->cfg.vlen;
-> +    ctx->elen = cpu->cfg.elen;
->      ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
->      ctx->mstatus_hs_vs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_VS);
->      ctx->hlsx = FIELD_EX32(tb_flags, TB_FLAGS, HLSX);
+> v10
+>   * Add ELEN checks for widening and narrowing instructions.
+>
+> v9
+>   * Remove explicitly set mstatus.SD patches as mstatus.SD is now
+>     set in add_status_sd().
+>   * Rebase on riscv-to-apply.next branch.
+>
+> v8
+>   * Use {get,dest}_gpr APIs.
+>   * remove vector AMO instructions.
+>   * rename vpopc.m to vcpop.m.
+>   * rename vle1.v and vse1.v to vlm.v and vsm.v.
+>   * rename vmandnot.mm and vmornot.mm to vmandn.mm and vmorn.mm.
+>
+> v7
+>   * remove hardcoded GDB vector registers list.
+>   * add vsetivli instruction.
+>   * add vle1.v and vse1.v instructions.
+>
+> v6
+>   * add vector floating-point reciprocal estimate instruction.
+>   * add vector floating-point reciprocal square-root estimate instruction.
+>   * update check rules for segment register groups, each segment register
+>     group has to follow overlap rules.
+>   * update viota.m instruction check rules.
+>
+> v5
+>   * refactor RVV v1.0 check functions.
+>     (Thanks to Richard Henderson's bitwise tricks.)
+>   * relax RV_VLEN_MAX to 1024-bits.
+>   * implement vstart CSR's behaviors.
+>   * trigger illegal instruction exception if frm is not valid for
+>     vector floating-point instructions.
+>   * rebase on riscv-to-apply.next.
+>
+> v4
+>   * remove explicit float flmul variable in DisasContext.
+>   * replace floating-point calculations with shift operations to
+>     improve performance.
+>   * relax RV_VLEN_MAX to 512-bits.
+>
+> v3
+>   * apply nan-box helpers from Richard Henderson.
+>   * remove fp16 api changes as they are sent independently in another
+>     pathcset by Chih-Min Chao.
+>   * remove all tail elements clear functions as tail elements can
+>     retain unchanged for either VTA set to undisturbed or agnostic.
+>   * add fp16 nan-box check generator function.
+>   * add floating-point rounding mode enum.
+>   * replace flmul arithmetic with shifts to avoid floating-point
+>     conversions.
+>   * add Zvqmac extension.
+>   * replace gdbstub vector register xml files with dynamic generator.
+>   * bumped to RVV v1.0.
+>   * RVV v1.0 related changes:
+>     * add vl<nf>re<eew>.v and vs<nf>r.v vector whole register
+>       load/store instructions
+>     * add vrgatherei16 instruction.
+>     * rearranged bits in vtype to make vlmul bits into a contiguous
+>       field.
+>
+> v2
+>   * drop v0.7.1 support.
+>   * replace invisible return check macros with functions.
+>   * move mark_vs_dirty() to translators.
+>   * add SSTATUS_VS flag for s-mode.
+>   * nan-box scalar fp register for floating-point operations.
+>   * add gdbstub files for vector registers to allow system-mode
+>     debugging with GDB.
+>
+> Based-on: <20211021160847.2748577-1-frank.chang@sifive.com>
+> Based-on: <20211021162956.2772656-1-frank.chang@sifive.com>
+>
+> Frank Chang (72):
+>   target/riscv: drop vector 0.7.1 and add 1.0 support
+>   target/riscv: Use FIELD_EX32() to extract wd field
+>   target/riscv: rvv-1.0: set mstatus.SD bit if mstatus.VS is dirty
+>   target/riscv: rvv-1.0: introduce writable misa.v field
+>   target/riscv: rvv-1.0: add translation-time vector context status
+>   target/riscv: rvv-1.0: remove rvv related codes from fcsr registers
+>   target/riscv: rvv-1.0: check MSTATUS_VS when accessing vector csr
+>     registers
+>   target/riscv: rvv-1.0: remove MLEN calculations
+>   target/riscv: rvv-1.0: add fractional LMUL
+>   target/riscv: rvv-1.0: add VMA and VTA
+>   target/riscv: rvv-1.0: update check functions
+>   target/riscv: introduce more imm value modes in translator functions
+>   target/riscv: rvv:1.0: add translation-time nan-box helper function
+>   target/riscv: rvv-1.0: remove amo operations instructions
+>   target/riscv: rvv-1.0: configure instructions
+>   target/riscv: rvv-1.0: stride load and store instructions
+>   target/riscv: rvv-1.0: index load and store instructions
+>   target/riscv: rvv-1.0: fix address index overflow bug of indexed
+>     load/store insns
+>   target/riscv: rvv-1.0: fault-only-first unit stride load
+>   target/riscv: rvv-1.0: load/store whole register instructions
+>   target/riscv: rvv-1.0: update vext_max_elems() for load/store insns
+>   target/riscv: rvv-1.0: take fractional LMUL into vector max elements
+>     calculation
+>   target/riscv: rvv-1.0: floating-point square-root instruction
+>   target/riscv: rvv-1.0: floating-point classify instructions
+>   target/riscv: rvv-1.0: count population in mask instruction
+>   target/riscv: rvv-1.0: find-first-set mask bit instruction
+>   target/riscv: rvv-1.0: set-X-first mask bit instructions
+>   target/riscv: rvv-1.0: iota instruction
+>   target/riscv: rvv-1.0: element index instruction
+>   target/riscv: rvv-1.0: allow load element with sign-extended
+>   target/riscv: rvv-1.0: register gather instructions
+>   target/riscv: rvv-1.0: integer scalar move instructions
+>   target/riscv: rvv-1.0: floating-point move instruction
+>   target/riscv: rvv-1.0: floating-point scalar move instructions
+>   target/riscv: rvv-1.0: whole register move instructions
+>   target/riscv: rvv-1.0: integer extension instructions
+>   target/riscv: rvv-1.0: single-width averaging add and subtract
+>     instructions
+>   target/riscv: rvv-1.0: single-width bit shift instructions
+>   target/riscv: rvv-1.0: integer add-with-carry/subtract-with-borrow
+>   target/riscv: rvv-1.0: narrowing integer right shift instructions
+>   target/riscv: rvv-1.0: widening integer multiply-add instructions
+>   target/riscv: rvv-1.0: single-width saturating add and subtract
+>     instructions
+>   target/riscv: rvv-1.0: integer comparison instructions
+>   target/riscv: rvv-1.0: floating-point compare instructions
+>   target/riscv: rvv-1.0: mask-register logical instructions
+>   target/riscv: rvv-1.0: slide instructions
+>   target/riscv: rvv-1.0: floating-point slide instructions
+>   target/riscv: rvv-1.0: narrowing fixed-point clip instructions
+>   target/riscv: rvv-1.0: single-width floating-point reduction
+>   target/riscv: rvv-1.0: widening floating-point reduction instructions
+>   target/riscv: rvv-1.0: single-width scaling shift instructions
+>   target/riscv: rvv-1.0: remove widening saturating scaled multiply-add
+>   target/riscv: rvv-1.0: remove vmford.vv and vmford.vf
+>   target/riscv: rvv-1.0: remove integer extract instruction
+>   target/riscv: rvv-1.0: floating-point min/max instructions
+>   target/riscv: introduce floating-point rounding mode enum
+>   target/riscv: rvv-1.0: floating-point/integer type-convert
+>     instructions
+>   target/riscv: rvv-1.0: widening floating-point/integer type-convert
+>   target/riscv: add "set round to odd" rounding mode helper function
+>   target/riscv: rvv-1.0: narrowing floating-point/integer type-convert
+>   target/riscv: rvv-1.0: relax RV_VLEN_MAX to 1024-bits
+>   target/riscv: rvv-1.0: implement vstart CSR
+>   target/riscv: rvv-1.0: trigger illegal instruction exception if frm is
+>     not valid
+>   target/riscv: rvv-1.0: floating-point reciprocal square-root estimate
+>     instruction
+>   target/riscv: rvv-1.0: floating-point reciprocal estimate instruction
+>   target/riscv: rvv-1.0: rename r2_zimm to r2_zimm11
+>   target/riscv: rvv-1.0: add vsetivli instruction
+>   target/riscv: rvv-1.0: add evl parameter to vext_ldst_us()
+>   target/riscv: rvv-1.0: add vector unit-stride mask load/store insns
+>   target/riscv: rvv-1.0: rename vmandnot.mm and vmornot.mm to vmandn.mm
+>     and vmorn.mm
+>   target/riscv: rvv-1.0: update opivv_vadc_check() comment
+>   target/riscv: rvv-1.0: Add ELEN checks for widening and narrowing
+>     instructions
+>
+> Greentime Hu (1):
+>   target/riscv: rvv-1.0: add vlenb register
+>
+> Hsiangkai Wang (1):
+>   target/riscv: gdb: support vector registers for rv64 & rv32
+>
+> LIU Zhiwei (3):
+>   target/riscv: rvv-1.0: add mstatus VS field
+>   target/riscv: rvv-1.0: add sstatus VS field
+>   target/riscv: rvv-1.0: add vcsr register
+>
+>  target/riscv/cpu.c                      |   18 +-
+>  target/riscv/cpu.h                      |   61 +-
+>  target/riscv/cpu_bits.h                 |   10 +
+>  target/riscv/cpu_helper.c               |   39 +-
+>  target/riscv/csr.c                      |   63 +-
+>  target/riscv/fpu_helper.c               |   17 +-
+>  target/riscv/gdbstub.c                  |  184 ++
+>  target/riscv/helper.h                   |  435 ++-
+>  target/riscv/insn32.decode              |  294 +-
+>  target/riscv/insn_trans/trans_rvv.c.inc | 2429 +++++++++------
+>  target/riscv/internals.h                |   24 +-
+>  target/riscv/translate.c                |   73 +-
+>  target/riscv/vector_helper.c            | 3601 ++++++++++++-----------
+>  13 files changed, 4157 insertions(+), 3091 deletions(-)
+>
 > --
 > 2.25.1
 >
