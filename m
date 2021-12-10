@@ -1,36 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvcov-0003Q3-EK
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:08:05 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47018)
+	id 1mvcow-0003Xk-Ri
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:08:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47102)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvcop-000379-QJ; Fri, 10 Dec 2021 05:08:00 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:2846)
+ id 1mvcou-0003L1-Cq; Fri, 10 Dec 2021 05:08:04 -0500
+Received: from szxga01-in.huawei.com ([45.249.212.187]:3508)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvcoo-0006OW-3n; Fri, 10 Dec 2021 05:07:59 -0500
-Received: from kwepemi100007.china.huawei.com (unknown [172.30.72.56])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4J9RRJ3qWCzbl6J;
- Fri, 10 Dec 2021 18:07:40 +0800 (CST)
+ id 1mvcos-0006PR-FO; Fri, 10 Dec 2021 05:08:04 -0500
+Received: from kwepemi100004.china.huawei.com (unknown [172.30.72.54])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4J9RNK4wRPzZdZG;
+ Fri, 10 Dec 2021 18:05:05 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi100007.china.huawei.com (7.221.188.115) with Microsoft SMTP Server
+ kwepemi100004.china.huawei.com (7.221.188.70) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Fri, 10 Dec 2021 18:07:54 +0800
+ 15.1.2308.20; Fri, 10 Dec 2021 18:07:58 +0800
 Received: from huawei.com (10.174.186.236) by kwepemm600017.china.huawei.com
  (7.193.23.234) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Fri, 10 Dec
- 2021 18:07:53 +0800
+ 2021 18:07:57 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <libvir-list@redhat.com>, <anup.patel@wdc.com>, <palmer@dabbelt.com>,
  <Alistair.Francis@wdc.com>, <bin.meng@windriver.com>, <fanliang@huawei.com>,
  <wu.wubin@huawei.com>, <wanghaibin.wang@huawei.com>, <wanbo13@huawei.com>,
- Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 09/12] target/riscv: Add host cpu type
-Date: Fri, 10 Dec 2021 18:07:29 +0800
-Message-ID: <20211210100732.1080-10-jiangyifei@huawei.com>
+ Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>
+Subject: [PATCH v2 11/12] target/riscv: Implement virtual time adjusting with
+ vm state changing
+Date: Fri, 10 Dec 2021 18:07:31 +0800
+Message-ID: <20211210100732.1080-12-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20211210100732.1080-1-jiangyifei@huawei.com>
 References: <20211210100732.1080-1-jiangyifei@huawei.com>
@@ -41,8 +41,8 @@ X-Originating-IP: [10.174.186.236]
 X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
  kwepemm600017.china.huawei.com (7.193.23.234)
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.188;
- envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.187;
+ envelope-from=jiangyifei@huawei.com; helo=szxga01-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -61,65 +61,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 10:08:01 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 10:08:04 -0000
 
-'host' type cpu is set isa to RV32 or RV64 simply, more isa info
-will obtain from KVM in kvm_arch_init_vcpu()
+We hope that virtual time adjusts with vm state changing. When a vm
+is stopped, guest virtual time should stop counting and kvm_timer
+should be stopped. When the vm is resumed, guest virtual time should
+continue to count and kvm_timer should be restored.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Mingwang Li <limingwang@huawei.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Anup Patel <anup.patel@wdc.com>
 ---
- target/riscv/cpu.c | 15 +++++++++++++++
- target/riscv/cpu.h |  1 +
- 2 files changed, 16 insertions(+)
+ target/riscv/kvm.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 71a7ac6831..a137fd3d2b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -213,6 +213,18 @@ static void rv32_imafcu_nommu_cpu_init(Object *obj)
- }
- #endif
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 802c076b22..be95dbc3f3 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -40,6 +40,7 @@
+ #include "kvm_riscv.h"
+ #include "sbi_ecall_interface.h"
+ #include "semihosting/console.h"
++#include "sysemu/runstate.h"
  
-+#if defined(CONFIG_KVM)
-+static void riscv_host_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+#if defined(TARGET_RISCV32)
-+    set_misa(env, MXL_RV32, 0);
-+#elif defined(TARGET_RISCV64)
-+    set_misa(env, MXL_RV64, 0);
-+#endif
-+}
-+#endif
-+
- static ObjectClass *riscv_cpu_class_by_name(const char *cpu_model)
+ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx)
  {
-     ObjectClass *oc;
-@@ -814,6 +826,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .class_init = riscv_cpu_class_init,
-     },
-     DEFINE_CPU(TYPE_RISCV_CPU_ANY,              riscv_any_cpu_init),
-+#if defined(CONFIG_KVM)
-+    DEFINE_CPU(TYPE_RISCV_CPU_HOST,             riscv_host_cpu_init),
-+#endif
- #if defined(TARGET_RISCV32)
-     DEFINE_CPU(TYPE_RISCV_CPU_BASE32,           rv32_base_cpu_init),
-     DEFINE_CPU(TYPE_RISCV_CPU_IBEX,             rv32_ibex_cpu_init),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 2807eb1bcb..e7dba35acb 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -45,6 +45,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-+#define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+@@ -377,6 +378,17 @@ unsigned long kvm_arch_vcpu_id(CPUState *cpu)
+     return cpu->cpu_index;
+ }
  
- #if defined(TARGET_RISCV32)
- # define TYPE_RISCV_CPU_BASE            TYPE_RISCV_CPU_BASE32
++static void kvm_riscv_vm_state_change(void *opaque, bool running, RunState state)
++{
++    CPUState *cs = opaque;
++
++    if (running) {
++        kvm_riscv_put_regs_timer(cs);
++    } else {
++        kvm_riscv_get_regs_timer(cs);
++    }
++}
++
+ void kvm_arch_init_irq_routing(KVMState *s)
+ {
+ }
+@@ -389,6 +401,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     CPURISCVState *env = &cpu->env;
+     uint64_t id;
+ 
++    qemu_add_vm_change_state_handler(kvm_riscv_vm_state_change, cs);
++
+     id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
+     ret = kvm_get_one_reg(cs, id, &isa);
+     if (ret) {
 -- 
 2.19.1
 
