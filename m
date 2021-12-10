@@ -1,57 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvccq-00059u-Cn
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 04:55:36 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41612)
+	id 1mvcf4-0000oA-12
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 04:57:54 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvcce-00051p-Kw; Fri, 10 Dec 2021 04:55:30 -0500
-Received: from szxga01-in.huawei.com ([45.249.212.187]:3506)
+ id 1mvcf2-0000gF-49; Fri, 10 Dec 2021 04:57:52 -0500
+Received: from szxga02-in.huawei.com ([45.249.212.188]:4109)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvccb-0001FF-NA; Fri, 10 Dec 2021 04:55:24 -0500
-Received: from canpemm100003.china.huawei.com (unknown [172.30.72.54])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4J9R5X0Z20zZcDQ;
- Fri, 10 Dec 2021 17:52:16 +0800 (CST)
+ id 1mvcez-0003Ee-7q; Fri, 10 Dec 2021 04:57:51 -0500
+Received: from canpemm100005.china.huawei.com (unknown [172.30.72.55])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4J9RC31fXNz92xw;
+ Fri, 10 Dec 2021 17:57:03 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- canpemm100003.china.huawei.com (7.192.104.85) with Microsoft SMTP Server
+ canpemm100005.china.huawei.com (7.192.105.21) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Fri, 10 Dec 2021 17:55:09 +0800
+ 15.1.2308.20; Fri, 10 Dec 2021 17:57:43 +0800
 Received: from kwepemm600017.china.huawei.com ([7.193.23.234]) by
  kwepemm600017.china.huawei.com ([7.193.23.234]) with mapi id 15.01.2308.020;
- Fri, 10 Dec 2021 17:55:08 +0800
+ Fri, 10 Dec 2021 17:57:42 +0800
 From: Jiangyifei <jiangyifei@huawei.com>
-To: Richard Henderson <richard.henderson@linaro.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-CC: "bin.meng@windriver.com" <bin.meng@windriver.com>, "limingwang (A)"
- <limingwang@huawei.com>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "libvir-list@redhat.com" <libvir-list@redhat.com>, "anup.patel@wdc.com"
- <anup.patel@wdc.com>, "wanbo (G)" <wanbo13@huawei.com>, Alistair Francis
- <alistair.francis@wdc.com>, "kvm-riscv@lists.infradead.org"
- <kvm-riscv@lists.infradead.org>, "Wanghaibin (D)"
- <wanghaibin.wang@huawei.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "Fanliang (EulerOS)" <fanliang@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>
-Subject: RE: [PATCH v1 03/12] target/riscv: Implement function
- kvm_arch_init_vcpu
-Thread-Topic: [PATCH v1 03/12] target/riscv: Implement function
- kvm_arch_init_vcpu
-Thread-Index: AQHX3eLJwQnXP9IbnEK93wh1nF4bZawMd2KAgB8ks/A=
-Date: Fri, 10 Dec 2021 09:55:08 +0000
-Message-ID: <8e09fe10ba1a4062831b934a836ff861@huawei.com>
+To: Anup Patel <anup@brainfault.org>
+CC: QEMU Developers <qemu-devel@nongnu.org>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, "kvm-riscv@lists.infradead.org"
+ <kvm-riscv@lists.infradead.org>, KVM General <kvm@vger.kernel.org>,
+ "libvir-list@redhat.com" <libvir-list@redhat.com>, Anup Patel
+ <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, "Fanliang
+ (EulerOS)" <fanliang@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>,
+ "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, "wanbo (G)"
+ <wanbo13@huawei.com>, "limingwang (A)" <limingwang@huawei.com>
+Subject: RE: [PATCH v1 04/12] target/riscv: Implement kvm_arch_get_registers
+Thread-Topic: [PATCH v1 04/12] target/riscv: Implement kvm_arch_get_registers
+Thread-Index: AQHX3eLLjNdjzYP2iE6AIP7NO6R7r6wf2ceAgAvDAxA=
+Date: Fri, 10 Dec 2021 09:57:42 +0000
+Message-ID: <7d88cc865bcc4dada21cfe09d9665d73@huawei.com>
 References: <20211120074644.729-1-jiangyifei@huawei.com>
- <20211120074644.729-4-jiangyifei@huawei.com>
- <d3f974e1-6278-8c11-898a-a1cc55965786@linaro.org>
-In-Reply-To: <d3f974e1-6278-8c11-898a-a1cc55965786@linaro.org>
+ <20211120074644.729-5-jiangyifei@huawei.com>
+ <CAAhSdy2gFufV4Xuu9Ewn2htLRB8SZ+xohbAnjYmnM1D_xMQP4A@mail.gmail.com>
+In-Reply-To: <CAAhSdy2gFufV4Xuu9Ewn2htLRB8SZ+xohbAnjYmnM1D_xMQP4A@mail.gmail.com>
 Accept-Language: zh-CN, en-US
 Content-Language: zh-CN
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [10.174.186.236]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=jiangyifei@huawei.com; helo=szxga01-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.188;
+ envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -70,27 +68,233 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 09:55:33 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 09:57:52 -0000
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJpY2hhcmQgSGVuZGVyc29u
-IFttYWlsdG86cmljaGFyZC5oZW5kZXJzb25AbGluYXJvLm9yZ10NCj4gU2VudDogU3VuZGF5LCBO
-b3ZlbWJlciAyMSwgMjAyMSA2OjE5IEFNDQo+IFRvOiBKaWFuZ3lpZmVpIDxqaWFuZ3lpZmVpQGh1
-YXdlaS5jb20+OyBxZW11LWRldmVsQG5vbmdudS5vcmc7DQo+IHFlbXUtcmlzY3ZAbm9uZ251Lm9y
-Zw0KPiBDYzogYmluLm1lbmdAd2luZHJpdmVyLmNvbTsgbGltaW5nd2FuZyAoQSkgPGxpbWluZ3dh
-bmdAaHVhd2VpLmNvbT47DQo+IGt2bUB2Z2VyLmtlcm5lbC5vcmc7IGxpYnZpci1saXN0QHJlZGhh
-dC5jb207IGFudXAucGF0ZWxAd2RjLmNvbTsgd2FuYm8gKEcpDQo+IDx3YW5ibzEzQGh1YXdlaS5j
-b20+OyBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+Ow0KPiBrdm0t
-cmlzY3ZAbGlzdHMuaW5mcmFkZWFkLm9yZzsgV2FuZ2hhaWJpbiAoRCkNCj4gPHdhbmdoYWliaW4u
-d2FuZ0BodWF3ZWkuY29tPjsgcGFsbWVyQGRhYmJlbHQuY29tOyBGYW5saWFuZyAoRXVsZXJPUykN
-Cj4gPGZhbmxpYW5nQGh1YXdlaS5jb20+OyBXdWJpbiAoSCkgPHd1Lnd1YmluQGh1YXdlaS5jb20+
-DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjEgMDMvMTJdIHRhcmdldC9yaXNjdjogSW1wbGVtZW50
-IGZ1bmN0aW9uDQo+IGt2bV9hcmNoX2luaXRfdmNwdQ0KPiANCj4gT24gMTEvMjAvMjEgODo0NiBB
-TSwgWWlmZWkgSmlhbmcgd3JvdGU6DQo+ID4gKyAgICBpZCA9IGt2bV9yaXNjdl9yZWdfaWQoZW52
-LCBLVk1fUkVHX1JJU0NWX0NPTkZJRywNCj4gS1ZNX1JFR19SSVNDVl9DT05GSUdfUkVHKGlzYSkp
-Ow0KPiA+ICsgICAgcmV0ID0ga3ZtX2dldF9vbmVfcmVnKGNzLCBpZCwgJmlzYSk7DQo+ID4gKyAg
-ICBpZiAocmV0KSB7DQo+ID4gKyAgICAgICAgcmV0dXJuIHJldDsNCj4gPiArICAgIH0NCj4gPiAr
-ICAgIGVudi0+bWlzYV9teGwgfD0gaXNhOw0KPiANCj4gVGhpcyBkb2Vzbid0IGxvb2sgcmlnaHQu
-DQo+IEknbSBzdXJlIHlvdSBtZWFudA0KPiANCj4gICAgICBlbnYtPm1pc2FfZXh0ID0gaXNhOw0K
-PiANCj4gDQo+IHJ+DQoNClRoYW5rcywgaXQgd2lsbCBiZSBtb2RpZmllZCBpbiB0aGUgbmV4dCBz
-ZXJpZXMuDQoNCllpZmVpDQo=
+
+> -----Original Message-----
+> From: kvm-riscv [mailto:kvm-riscv-bounces@lists.infradead.org] On Behalf =
+Of
+> Anup Patel
+> Sent: Friday, December 3, 2021 2:20 PM
+> To: Jiangyifei <jiangyifei@huawei.com>
+> Cc: QEMU Developers <qemu-devel@nongnu.org>; open list:RISC-V
+> <qemu-riscv@nongnu.org>; kvm-riscv@lists.infradead.org; KVM General
+> <kvm@vger.kernel.org>; libvir-list@redhat.com; Anup Patel
+> <anup.patel@wdc.com>; Palmer Dabbelt <palmer@dabbelt.com>; Alistair
+> Francis <Alistair.Francis@wdc.com>; Bin Meng <bin.meng@windriver.com>;
+> Fanliang (EulerOS) <fanliang@huawei.com>; Wubin (H)
+> <wu.wubin@huawei.com>; Wanghaibin (D) <wanghaibin.wang@huawei.com>;
+> wanbo (G) <wanbo13@huawei.com>; limingwang (A)
+> <limingwang@huawei.com>
+> Subject: Re: [PATCH v1 04/12] target/riscv: Implement kvm_arch_get_regist=
+ers
+>=20
+> On Sat, Nov 20, 2021 at 1:17 PM Yifei Jiang <jiangyifei@huawei.com> wrote=
+:
+> >
+> > Get GPR CSR and FP registers from kvm by KVM_GET_ONE_REG ioctl.
+> >
+> > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> > Signed-off-by: Mingwang Li <limingwang@huawei.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/kvm.c | 150
+> > ++++++++++++++++++++++++++++++++++++++++++++-
+> >  1 file changed, 149 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c index
+> > 9f9692fb9e..b49c24be0a 100644
+> > --- a/target/riscv/kvm.c
+> > +++ b/target/riscv/kvm.c
+> > @@ -55,13 +55,161 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState
+> *env, uint64_t type, uint64_t idx
+> >      return id;
+> >  }
+> >
+> > +#define RISCV_CORE_REG(env, name)  kvm_riscv_reg_id(env,
+> KVM_REG_RISCV_CORE, \
+> > +                 KVM_REG_RISCV_CORE_REG(name))
+> > +
+> > +#define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env,
+> KVM_REG_RISCV_CSR, \
+> > +                 KVM_REG_RISCV_CSR_REG(name))
+> > +
+> > +#define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env,
+> > +KVM_REG_RISCV_FP_F, idx)
+> > +
+> > +#define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env,
+> > +KVM_REG_RISCV_FP_D, idx)
+> > +
+> > +static int kvm_riscv_get_regs_core(CPUState *cs) {
+> > +    int ret =3D 0;
+> > +    int i;
+> > +    target_ulong reg;
+> > +    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->pc =3D reg;
+> > +
+> > +    for (i =3D 1; i < 32; i++) {
+> > +        uint64_t id =3D kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, i);
+> > +        ret =3D kvm_get_one_reg(cs, id, &reg);
+> > +        if (ret) {
+> > +            return ret;
+> > +        }
+> > +        env->gpr[i] =3D reg;
+> > +    }
+> > +
+> > +    return ret;
+> > +}
+> > +
+> > +static int kvm_riscv_get_regs_csr(CPUState *cs) {
+> > +    int ret =3D 0;
+> > +    target_ulong reg;
+> > +    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, sstatus), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->mstatus =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, sie), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->mie =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, stvec), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->stvec =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, sscratch), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->sscratch =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, sepc), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->sepc =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, scause), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->scause =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, stval), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->stval =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, sip), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->mip =3D reg;
+> > +
+> > +    ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(env, satp), &reg);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +    env->satp =3D reg;
+>=20
+> There is a common pattern in above kvm_get_one_reg() calls so I suggest
+> creating a macro for repeating code patterns. This can help us to have on=
+e line
+> for each CSR and in future it is easy to add more CSRs.
+>=20
+> Regards,
+> Anup
+>=20
+
+Thanks, it will be modified in the next series.
+
+Yifei
+
+> > +
+> > +    return ret;
+> > +}
+> > +
+> > +static int kvm_riscv_get_regs_fp(CPUState *cs) {
+> > +    int ret =3D 0;
+> > +    int i;
+> > +    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
+> > +
+> > +    if (riscv_has_ext(env, RVD)) {
+> > +        uint64_t reg;
+> > +        for (i =3D 0; i < 32; i++) {
+> > +            ret =3D kvm_get_one_reg(cs, RISCV_FP_D_REG(env, i), &reg);
+> > +            if (ret) {
+> > +                return ret;
+> > +            }
+> > +            env->fpr[i] =3D reg;
+> > +        }
+> > +        return ret;
+> > +    }
+> > +
+> > +    if (riscv_has_ext(env, RVF)) {
+> > +        uint32_t reg;
+> > +        for (i =3D 0; i < 32; i++) {
+> > +            ret =3D kvm_get_one_reg(cs, RISCV_FP_F_REG(env, i), &reg);
+> > +            if (ret) {
+> > +                return ret;
+> > +            }
+> > +            env->fpr[i] =3D reg;
+> > +        }
+> > +        return ret;
+> > +    }
+> > +
+> > +    return ret;
+> > +}
+> > +
+> >  const KVMCapabilityInfo kvm_arch_required_capabilities[] =3D {
+> >      KVM_CAP_LAST_INFO
+> >  };
+> >
+> >  int kvm_arch_get_registers(CPUState *cs)  {
+> > -    return 0;
+> > +    int ret =3D 0;
+> > +
+> > +    ret =3D kvm_riscv_get_regs_core(cs);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +
+> > +    ret =3D kvm_riscv_get_regs_csr(cs);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +
+> > +    ret =3D kvm_riscv_get_regs_fp(cs);
+> > +    if (ret) {
+> > +        return ret;
+> > +    }
+> > +
+> > +    return ret;
+> >  }
+> >
+> >  int kvm_arch_put_registers(CPUState *cs, int level)
+> > --
+> > 2.19.1
+> >
+> >
+> > --
+> > kvm-riscv mailing list
+> > kvm-riscv@lists.infradead.org
+> > http://lists.infradead.org/mailman/listinfo/kvm-riscv
+>=20
+> --
+> kvm-riscv mailing list
+> kvm-riscv@lists.infradead.org
+> http://lists.infradead.org/mailman/listinfo/kvm-riscv
 
