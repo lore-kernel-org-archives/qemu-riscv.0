@@ -1,84 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvcsG-0001wc-5h
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:11:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:48316)
+	id 1mvhfL-0002DZ-F0
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 10:18:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35250)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
- id 1mvcsE-0001qS-1y; Fri, 10 Dec 2021 05:11:30 -0500
-Received: from [2a00:1450:4864:20::530] (port=35494
- helo=mail-ed1-x530.google.com)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mvhfK-0002Bv-0v
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 10:18:30 -0500
+Received: from [2607:f8b0:4864:20::235] (port=38435
+ helo=mail-oi1-x235.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
- id 1mvcsC-0007xK-If; Fri, 10 Dec 2021 05:11:29 -0500
-Received: by mail-ed1-x530.google.com with SMTP id v1so28600801edx.2;
- Fri, 10 Dec 2021 02:11:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=l3qeEo+jWGYFV13NH3oOdulqHhDAMY2J0DO65Q819/8=;
- b=V84DNfMxZXBdpMkjS7DzgFDawHK00I0C+0iEewswkQ0JiNxPpciixx1vbYlDmTYs9s
- MqUOfXByP6cmtYHbyVuSa3Y0r9lTmxeSTBn3+nXXnHLP7drxQ4zkAF6dnXtya0H/oS2K
- iO2lAjSGQ5gza9CJlZEMuVgwohjUyTzW+JvEAo+YdVPL3HrdbWE21MX3wgyGwEE4omhg
- dmJzMlYDHXCjkGgMVa4611xpLiKzZBxocL13G1RkYxmX1/8IG8TqZ05yzzTcwV6GkS2T
- Sk9BTrkDVvZL4mswmYeEBFjTDLP/nMu6UHYMK4w4FMcMHNd+wveoFDqFM3py8N75HyME
- txvA==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mvhfI-0001vd-2i
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 10:18:29 -0500
+Received: by mail-oi1-x235.google.com with SMTP id r26so13632050oiw.5
+ for <qemu-riscv@nongnu.org>; Fri, 10 Dec 2021 07:18:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=uytk9CbZYhrrFVCeXAsOW+dc2f3EmOXFP9cLyrouMhc=;
+ b=oq64BG1SQ3CIA7I8iucaksrZACw8dZDbHfvW9rBCSQBkfondWRvs1k4lfusYFanfVR
+ IEea3QQXjjl8on5r1vZ+AmqjEY6FYfKHwj73T93tMFbviXzPVI7/y4uVMGqXDG/YGprZ
+ 0LopwKFUCFp2USf2ZflljF45txFviExZE16k9oZ2MK8dfszt508kb+C0SNaIq1bKKdh9
+ ZBSCLuXhlPbxRrSjjoYEaUq485kLvqyRHIgp+wjv39xYntD7wGfk6ffOu2BqwMt1cZIx
+ 53GATV1RvOuLoVGvdMbGBxYEUwSaM2SAR9hDd9YLd6rhrvNo7wvnPuZmYXwAyO4YNtGw
+ xjgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=l3qeEo+jWGYFV13NH3oOdulqHhDAMY2J0DO65Q819/8=;
- b=HSS2c/1w6KziA1zVNsn7OtrSHeyUTtN+Rj5+VIsEgylzzEwcKwe2aFyeeCHtBkYLxw
- i8dbExJ76iGVpOEBLtQynzcZ5NMYh65LL8wYv8M55JyOSD5J7UXZH5FqaCegHIXYH/F8
- FjWOThomMBcSHrUMoBZfr8FcAy6He6iMA6TGocCUzfwq+aQr3NkuQXTcaMlLCX+AUmPY
- reKKxdIVMvQ3tzF2qnmuzpfUL09icZ9vwZE3SIMzEUd8rrnR9hGcz8kfz3rncj1OJvEF
- EXCued6t3EHotOligXDvZUCDMvl79rDVqvyz2YqJcaSurlk2SUAFtjaDTaANki8rByLF
- sDpQ==
-X-Gm-Message-State: AOAM531dQf58qLaNeQEV/7iRNgzGLp+IQscMPjhNSI1qVj+XZvvgGHMc
- N+QtcnAbn5OR4z0UEKgfQLU=
-X-Google-Smtp-Source: ABdhPJzdgCERPEsFn+0ltSoWI8Y11Ak6TqpEH8ksNhEUWGG4fYeeF0xqE5idxUN1Na+O6b+2YsqE3w==
-X-Received: by 2002:a17:906:1599:: with SMTP id
- k25mr22566954ejd.298.1639131086120; 
- Fri, 10 Dec 2021 02:11:26 -0800 (PST)
-Received: from ?IPV6:2001:b07:6468:f312::973? ([2001:b07:6468:f312::973])
- by smtp.googlemail.com with ESMTPSA id jg32sm1336819ejc.43.2021.12.10.02.11.25
+ bh=uytk9CbZYhrrFVCeXAsOW+dc2f3EmOXFP9cLyrouMhc=;
+ b=WzP/zCicJYhf/bkNSdhhrGmGqmhBWug6ynKj6BSyV9W94QEfgr4qxkpvUHn4un40C9
+ pVvS7p2DfVTtbbp05b1RWKc3PE7DLxVK/5biytFVToQYsn87GHVHdjeqN9SmoStIDQNX
+ c7spZJ7dYW2MKaWFcUWC1qrhSfBZNRq2yaBh/xjIHePZMkqdYcoYaGMrmqx5P9dHiKNE
+ r8NBM8B/K4WHY5iHQ8LRk8oA4p6grvnbQCtthFgtWpKu37ejmebV2PIeaNEEz6xYsLAq
+ Mhlhc0A2einWjJyF5FWcD4HRhX75y8Lq1+g6wN8B93535RRx0GPYkLjC1cMx0k6vtYfu
+ d06Q==
+X-Gm-Message-State: AOAM533PuGSjoPrX+tlWqAp49IaWHrciQ74Np7MCDtK6n4rQRwtKkiJ4
+ /AONsqFNRyioQyhEFujQpsPoF/V0UpB0gQ==
+X-Google-Smtp-Source: ABdhPJzeL+wQmnwFPpkeYQCMrghLHdda0qtXv7+kRYSDby5J/TijJwfY+NOUgcxzg+b6ST8z1sr9FA==
+X-Received: by 2002:a17:90a:6e0c:: with SMTP id
+ b12mr24069938pjk.41.1639149116238; 
+ Fri, 10 Dec 2021 07:11:56 -0800 (PST)
+Received: from [172.20.1.20] (45-19-222-18.lightspeed.sntcca.sbcglobal.net.
+ [45.19.222.18])
+ by smtp.gmail.com with ESMTPSA id a18sm3332739pfn.185.2021.12.10.07.11.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Dec 2021 02:11:25 -0800 (PST)
-Sender: Paolo Bonzini <paolo.bonzini@gmail.com>
-Message-ID: <02a0ad69-4129-6e6c-06af-fc9c9e3047e1@redhat.com>
-Date: Fri, 10 Dec 2021 11:11:24 +0100
+ Fri, 10 Dec 2021 07:11:55 -0800 (PST)
+Subject: Re: [PATCH 2/2] target/riscv: Implement the stval/mtval illegal
+ instruction
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, palmer@dabbelt.com,
+ alistair23@gmail.com, Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com
+References: <20211210062638.824672-1-alistair.francis@opensource.wdc.com>
+ <20211210062638.824672-3-alistair.francis@opensource.wdc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <56a5e33d-bf0f-f588-d288-a302b5631fb4@linaro.org>
+Date: Fri, 10 Dec 2021 07:11:53 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 12/12] target/riscv: Support virtual time context
- synchronization
+In-Reply-To: <20211210062638.824672-3-alistair.francis@opensource.wdc.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-To: Richard Henderson <richard.henderson@linaro.org>,
- Yifei Jiang <jiangyifei@huawei.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: bin.meng@windriver.com, Mingwang Li <limingwang@huawei.com>,
- kvm@vger.kernel.org, libvir-list@redhat.com, anup.patel@wdc.com,
- wanbo13@huawei.com, Alistair.Francis@wdc.com, kvm-riscv@lists.infradead.org,
- wanghaibin.wang@huawei.com, fanliang@huawei.com, palmer@dabbelt.com,
- wu.wubin@huawei.com
-References: <20211120074644.729-1-jiangyifei@huawei.com>
- <20211120074644.729-13-jiangyifei@huawei.com>
- <d9c9196a-692c-cbcf-339b-8e84ecde7cee@linaro.org>
-From: Paolo Bonzini <pbonzini@redhat.com>
-In-Reply-To: <d9c9196a-692c-cbcf-339b-8e84ecde7cee@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::530
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::235
  (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=paolo.bonzini@gmail.com; helo=mail-ed1-x530.google.com
-X-Spam_score_int: -9
-X-Spam_score: -1.0
+Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x235.google.com
+X-Spam_score_int: -15
+X-Spam_score: -1.6
 X-Spam_bar: -
-X-Spam_report: (-1.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.317,
+X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.317,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -93,35 +88,90 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 10:11:30 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 15:18:30 -0000
 
-On 11/20/21 23:34, Richard Henderson wrote:
-> On 11/20/21 8:46 AM, Yifei Jiang wrote:
->>   const VMStateDescription vmstate_riscv_cpu = {
->>       .name = "cpu",
->>       .version_id = 3,
->>       .minimum_version_id = 3,
->> +    .post_load = cpu_post_load,
->>       .fields = (VMStateField[]) {
->>           VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
->>           VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
->> @@ -211,6 +221,10 @@ const VMStateDescription vmstate_riscv_cpu = {
->>           VMSTATE_UINT64(env.mtohost, RISCVCPU),
->>           VMSTATE_UINT64(env.timecmp, RISCVCPU),
->> +        VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
->> +        VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
->> +        VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
->> +
->>           VMSTATE_END_OF_LIST()
->>       },
-> 
-> Can't alter VMStateDescription.fields without bumping version.
-> 
-> If this is really kvm-only state, consider placing it into a 
-> subsection.  But I worry about kvm-only state because ideally we'd be 
-> able to migrate between tcg and kvm (if only for debugging).
+On 12/9/21 10:26 PM, Alistair Francis wrote:
+> @@ -975,7 +975,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>       bool async = !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
+>       target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
+>       target_ulong deleg = async ? env->mideleg : env->medeleg;
+> -    bool write_tval = false;
+>       target_ulong tval = 0;
+>       target_ulong htval = 0;
+>       target_ulong mtval2 = 0;
+> @@ -1004,9 +1003,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           case RISCV_EXCP_INST_PAGE_FAULT:
+>           case RISCV_EXCP_LOAD_PAGE_FAULT:
+>           case RISCV_EXCP_STORE_PAGE_FAULT:
+> -            write_tval  = true;
+>               tval = env->badaddr;
+>               break;
+...
+> @@ -1041,17 +1042,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           if (riscv_has_ext(env, RVH)) {
+>               target_ulong hdeleg = async ? env->hideleg : env->hedeleg;
+>   
+> -            if (env->two_stage_lookup && write_tval) {
+> -                /*
+> -                 * If we are writing a guest virtual address to stval, set
+> -                 * this to 1. If we are trapping to VS we will set this to 0
+> -                 * later.
+> -                 */
+> -                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 1);
+> -            } else {
+> -                /* For other HS-mode traps, we set this to 0. */
+> -                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
+> -            }
+> +            env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
+>   
+>               if (riscv_cpu_virt_enabled(env) && ((hdeleg >> cause) & 1)) {
+>                   /* Trap to VS mode */
+> @@ -1063,7 +1054,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                       cause == IRQ_VS_EXT) {
+>                       cause = cause - 1;
+>                   }
+> -                env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 0);
+>               } else if (riscv_cpu_virt_enabled(env)) {
+>                   /* Trap into HS mode, from virt */
+>                   riscv_cpu_swap_hypervisor_regs(env);
+> @@ -1071,6 +1061,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                                            env->priv);
+>                   env->hstatus = set_field(env->hstatus, HSTATUS_SPV,
+>                                            riscv_cpu_virt_enabled(env));
+> +                if (tval) {
+> +                    /*
+> +                     * If we are writing a guest virtual address to stval, set
+> +                     * this to 1.
+> +                     */
+> +                    env->hstatus = set_field(env->hstatus, HSTATUS_GVA, 1);
+> +                }
 
-Where is this state stored for TCG?
+The thing that concerns me here is the very legitimate badaddr of NULL.  I think you need 
+to keep some out-of-band flag for that.
 
-Paolo
+In addition, the out-of-band flag should probably be called write_gva, because tval from 
+ILLEGAL_INST is not a Guest Virtual Address, and so should not set GVA.
+
+You could even push the setting of the bit down so that it's only done once, e.g.
+
+     hstatus_gva = true;
+     tval = env->badaddr;
+
+     if (trap to vs) {
+        ...
+        hstatus_gva = false;
+     } else if (virt enabled) {
+        ...
+     } else {
+        trap into hs
+        hstatus_gva = false;
+     }
+     env->hstatus(set_field(env->hstatus, HSTATUS_GVA, hstatus_gva);
+
+
+The actual handling of ILLEGAL_INST looks fine.
+You may well want to split the GVA handling to a separate patch.
+
+
+r~
 
