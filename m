@@ -1,51 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvaow-0007Vo-Vn
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 02:59:58 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33612)
+	id 1mvaoz-0007cO-FK
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 03:00:01 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:33658)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvaov-0007Se-9l
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:57 -0500
-Received: from [2607:f8b0:4864:20::535] (port=42738
- helo=mail-pg1-x535.google.com)
+ id 1mvaox-0007Y7-TZ
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:59 -0500
+Received: from [2607:f8b0:4864:20::430] (port=33490
+ helo=mail-pf1-x430.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvaot-00074P-EK
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:56 -0500
-Received: by mail-pg1-x535.google.com with SMTP id l18so2694467pgj.9
- for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:59:55 -0800 (PST)
+ id 1mvaow-00074l-40
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:59 -0500
+Received: by mail-pf1-x430.google.com with SMTP id x5so7851662pfr.0
+ for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:59:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=CnAtznQmlgjT4+gZBNcoweme+F2gZDNVtpkqNmRLoPU=;
- b=EtL2cmY8Gj44580fkvC4FCcZ8bUxlWXty4te8TXOcx9iTSME3PiOwFDexbmgIVM4pC
- HQPn/5fvM0CuQeOI9Gyerpur/Ku+fN+D0cOUrIMSEuSTjjbwSEJcXKslgkFIAziHDVP7
- mHdBwi1XhQCjldukNkeEk0rpp5MpNNRdpur78AdtViRkX9svJ6eXpWP8ZLj7t3/VCgzu
- 3Nzyov34KD+Uvb7oH34qdqbn/6EFV+459VVMXsYq2MEqOe4RerITtV+YhgyNibYpsfbu
- Af/1M377NSBqeiXrTatYr2greCYYVn2HdTH2yr8dStszfH9rVe3Sw00hVTGhgIpXVnPf
- DJfg==
+ bh=v+sEuxg9eYRt1/Vx8zfdr1vqFD8qCJSCIkB6Tl6EbFs=;
+ b=KyGd23vY3t9CA5R7NQJvyRkdrYtzRDClYSfJCrAJ3zHI7gYav2CgxTF1vj+VK6EIOU
+ vbuithq/A+XsNtRNVeAyr4Mkbc5kYDmVcsJxOAafHqx+WjFcsZ+iwneqJM7ZgO5DQMoO
+ DtPWO+Efc5CzmZyhIlvLLUc0NzpdgxYRkDII4VqqpIoHOcH4e3r5/PK9yQlUQA+H3TdV
+ qdYvrHC7LAvQxy2ShyC0cDLCMBr0/q9DtLrcHmCdwk7AlqFTCEPvl02qK4fjmtfLd3G2
+ XuNeH0wVOCwx6r+kI4r/0QugPUGspCh1v+wVWQx9ZCUwDIBJt3q7d0qBzkm8HxULUYHp
+ wZfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=CnAtznQmlgjT4+gZBNcoweme+F2gZDNVtpkqNmRLoPU=;
- b=D2jjrBgXplPhQMIWZYdCHIjii845TQ2YG4gRAWBfyrSGxyzDCSaqdW1tFmcgXJHuPb
- YOl9cYLZL3qxk5ZsE6XCywA0/EgTJgJkwlg+ItCuBY9iVuxXNN0VOEqUdGdbDfPMaafr
- 24y8+PS9AXdbyuhm9s42MTLXzctXZdnAAkbgrzO7sn49cHGqfgYLKvTRf8Um5itId/5n
- vcuduo0FKTz0ki3oPk4dcTxujYIGLBz8j5ubbHseKi29vOnkxt6pAMO2IPXzX3MGue9W
- 41osfptdA71NIfQOT5Ec3AkkRhqQBEK+R5Yb5h7AAPvBMKdnKNO040FBGf47V4piygN6
- 0FPA==
-X-Gm-Message-State: AOAM530iYHE+Mm67+H56z3V4U46U9WnrSgZCFYP9obRW50gSpr9u52oA
- lDwdsd2ZK6sokJjxMjU+ePhAlg==
-X-Google-Smtp-Source: ABdhPJym5a+ivErqg2+MyzHwjRpkKt4s6SfRS5/fW4B7yIJ79lQBvMeFX49O+xM2Cdef7DxtrzylfA==
-X-Received: by 2002:a05:6a00:124a:b0:4a4:cfd2:b40f with SMTP id
- u10-20020a056a00124a00b004a4cfd2b40fmr16678208pfi.57.1639123194240; 
- Thu, 09 Dec 2021 23:59:54 -0800 (PST)
+ bh=v+sEuxg9eYRt1/Vx8zfdr1vqFD8qCJSCIkB6Tl6EbFs=;
+ b=K/GtTXruN7SNsoPveX2piGXlmZcdUaJ2/nR4cA2N+ydhe4ll+M+SWvlxDndHK4YCZV
+ j7eVHHppgd5LGp+YPjaDbWBBqPO83fgIoOJAaTHTmhCsLbS+qs3c+80wA1qqSXXsjNav
+ QeCzefMmnPaGjm0C1q9tI2Orj2tY6bWVA2o6I8SWalJ1JlKvP6WCeplbe1vXj6yZ5eJF
+ q9Kt9yRLV3FHdM5n3GU9x25xb7EUhDkCfKuG8CzQebNz99VKufbZ/hTD46OIvdF71RXs
+ IKGzjtFegXmY4TuRHNoNc6lGGSR0HcoOCZD6zGwT8G0TgmPX9pZ4gJAlrucN/gXJ/3oY
+ ++pw==
+X-Gm-Message-State: AOAM533Ei95ZI09hX0KFeSSBNby6ccfIJM/jiKkzs5/bw0Gmry9PQG/G
+ G6F9qcVUtVSjDHnlOoGKgwLMLg==
+X-Google-Smtp-Source: ABdhPJzlu6vDyymMrULPxHUyLXh2JMABNkX7cY42MPKzywTafG9l4Nk0g1ccN58ldpPFzEk+iLGMMQ==
+X-Received: by 2002:a63:f654:: with SMTP id u20mr38284331pgj.187.1639123196939; 
+ Thu, 09 Dec 2021 23:59:56 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.59.52
+ by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.59.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Dec 2021 23:59:54 -0800 (PST)
+ Thu, 09 Dec 2021 23:59:56 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -53,19 +52,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v11 54/77] target/riscv: rvv-1.0: widening floating-point
- reduction instructions
-Date: Fri, 10 Dec 2021 15:56:40 +0800
-Message-Id: <20211210075704.23951-55-frank.chang@sifive.com>
+Subject: [PATCH v11 55/77] target/riscv: rvv-1.0: single-width scaling shift
+ instructions
+Date: Fri, 10 Dec 2021 15:56:41 +0800
+Message-Id: <20211210075704.23951-56-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211210075704.23951-1-frank.chang@sifive.com>
 References: <20211210075704.23951-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::535
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::430
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -85,36 +84,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 07:59:57 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 08:00:00 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
+
+log(SEW) truncate vssra.vi immediate value.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 998247d71d..b43234ed3f 100644
+index b43234ed3f..03716ad706 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2648,7 +2648,14 @@ GEN_OPFVV_TRANS(vfredmax_vs, freduction_check)
- GEN_OPFVV_TRANS(vfredmin_vs, freduction_check)
+@@ -2030,8 +2030,8 @@ GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
+ GEN_OPIVV_TRANS(vssra_vv, opivv_check)
+ GEN_OPIVX_TRANS(vssrl_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vssra_vx,  opivx_check)
+-GEN_OPIVI_TRANS(vssrl_vi, IMM_ZX, vssrl_vx, opivx_check)
+-GEN_OPIVI_TRANS(vssra_vi, IMM_SX, vssra_vx, opivx_check)
++GEN_OPIVI_TRANS(vssrl_vi, IMM_TRUNC_SEW, vssrl_vx, opivx_check)
++GEN_OPIVI_TRANS(vssra_vi, IMM_TRUNC_SEW, vssra_vx, opivx_check)
  
- /* Vector Widening Floating-Point Reduction Instructions */
--GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, reduction_check)
-+static bool freduction_widen_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return reduction_widen_check(s, a) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8);
-+}
-+
-+GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, freduction_widen_check)
- 
- /*
-  *** Vector Mask Operations
+ /* Vector Narrowing Fixed-Point Clip Instructions */
+ GEN_OPIWV_NARROW_TRANS(vnclipu_wv)
 -- 
 2.31.1
 
