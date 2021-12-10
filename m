@@ -1,70 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvaop-0007BU-P2
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 02:59:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33384)
+	id 1mvaoq-0007DG-6B
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 02:59:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:33412)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvaog-0006Zc-9S
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:42 -0500
-Received: from [2607:f8b0:4864:20::42b] (port=34653
- helo=mail-pf1-x42b.google.com)
+ id 1mvaoh-0006em-PX
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:43 -0500
+Received: from [2607:f8b0:4864:20::52a] (port=47035
+ helo=mail-pg1-x52a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvaod-000717-7H
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:42 -0500
-Received: by mail-pf1-x42b.google.com with SMTP id r130so7808857pfc.1
- for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:59:38 -0800 (PST)
+ id 1mvaof-00071Z-61
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:59:43 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id r138so7355791pgr.13
+ for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:59:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=S+o1FmBo01epXVOovjS3eUnLJ5rYaUiD10Pv6WFeO4I=;
- b=DTZ2gW3WtirEb+ESPQf0sh4XefVR7sQSu506RJnWVx5XqvmZIWh3Smt/3ZpCc1buD7
- eqEEZsiYlTsi5V9MoDf8MhTb1IhL3TGtMarxnfrtzpDLa22rFr4ZlZUqxaa0OhF0zl7v
- YSC2QhdVqLx1yUj2pnUF5jPoQAmT0f4GjrIg0xuQ3Sqvh3r2gTuTgH/xh3WH6UT+CsAK
- JenslIOZ75DK7xEHueb6iOuj8TyRq+gxgqmBdbyVOdOWvjxVUehiuV0QvZz3WDVKmsG5
- YgeaMnebmQtCjViIw1hGymZ8iAXwk7MacZGjkSl8gCFYRYk0MexKwsfCkKrV+pRYGKzb
- o1tQ==
+ bh=j36ypXZHhaZHMYAYubo82Nrb0V4CPN+goTlHeUoXecc=;
+ b=O22QCTumXal+nZ8h6/eJF26ujV8Cr/rnlkJ5s5oCGBaoEtpWug8XvDIIX5eGIFTOyS
+ vOksqh2YSqvRwfMFiZHF7bJocaQtmiyZxLeDkbH3b1rr8jsQJqEw6g1gsFg/61f6CXWf
+ 5g8j0u0v+8kLZPDQtVuqxMoQy403i5FS3YwT34bvxckavRNUFMYSzmJO2FKbjFV+3EbO
+ TyMoezGAjpJ10U6NpemqfE0yr2BvZMRRwrJozi+Alg2/Lxm9lBFh4qiuOH6WJgjGycXv
+ hyEB2kOTh8+34S0cCs8BgyuR0BEUOak3j8cfdR2rFGZzfZ2m0N/MrNRx/Xnn015gTAdb
+ onVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=S+o1FmBo01epXVOovjS3eUnLJ5rYaUiD10Pv6WFeO4I=;
- b=Wyd4hJxRx+b6k/FnzjhEljd/s+HH2xGtqntM+cfq+i2UsNxhzBr9sgdCxiGSeE1zeK
- 9iz3RKokuQ2zoGaUQmu3Qs/5Engnax+seKNOoXe2Bap0XOyy+l3AhFvEcQA2ifcW8T1c
- pbSuAxbdHbezXJcQcOfqhqbOEKZWA+wLJXDF7UkSRQ4tDF9uMww2U7EKhgT4pd9j/IMV
- dF6Zogx4PO8TOBY/ugO0cqxfckrO+GMTUHtJfP/ouXkIyfp3d0C/a50anJtyaz/hWeg5
- QqbuHA1zpE6Bm01IZi+LmlVB4vJI+cbtkLzUf4SEz/82aKDypdNsjoOaeJRsY25C7APO
- mqcw==
-X-Gm-Message-State: AOAM530sSDFUBnMxIm/ijFXWKiaYRyZiE29feRbLhiGfbmRlKhk2ynYw
- 1DNKFM9+tKKh8Hb5zRTLUAtesw==
-X-Google-Smtp-Source: ABdhPJwRQb4raqn7tK56/9e76DRE3xBd3Y8Fz0ggbgPRGpLI0u89ZJ8BNlo4WGYH44niHTPKgIkjfQ==
-X-Received: by 2002:a63:7e0d:: with SMTP id z13mr37470683pgc.349.1639123177381; 
- Thu, 09 Dec 2021 23:59:37 -0800 (PST)
+ bh=j36ypXZHhaZHMYAYubo82Nrb0V4CPN+goTlHeUoXecc=;
+ b=r+cyvQznfaSz7Ny5zogaQhtVvHAUdYGG/MrwSkg0vXWsz5wcDnXtsyf9AgNZZYvLsu
+ 6qMM7srq/DnSFDgTwtVA7/GDhJJA4UNVT8q/AoZ1z6ZzVvszFlZxE/tSvGGyuatD2g/r
+ SiaKh1kQ+2FmeAJR+ztMyKduh6zZDRBSpJCo08DRuSL1bI5iBqibEFiPKfH7t7bIxTVc
+ vQfpbwpAj12jdp+qzNqAWdx89U13UUa80HnRY52KOEuEfqydn2IighEp8vJ/Y4VGCgcI
+ 3bJvON313d0oc5p7UCho27uXzBFVW9cLTs60YmIVg0rT/RgnNUxgu1nbS+1bjAJdEXPT
+ grdA==
+X-Gm-Message-State: AOAM533xkpfeu1keOBsarS2Qf4ea4f046tWUN88Q/QAN8dz334C7aUk9
+ ckLJZLTzKWY32NvOyN+U7o/VLA==
+X-Google-Smtp-Source: ABdhPJwMc0DZoT7XSp/yk03AhYRqJNF4RSwuckA1IRSZjioL6amXLf4GShIBQG+wQ36ENROe0lZ92Q==
+X-Received: by 2002:a65:6243:: with SMTP id q3mr38897273pgv.593.1639123180049; 
+ Thu, 09 Dec 2021 23:59:40 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.59.35
+ by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.59.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Dec 2021 23:59:37 -0800 (PST)
+ Thu, 09 Dec 2021 23:59:39 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v11 48/77] target/riscv: rvv-1.0: floating-point compare
+ Bin Meng <bin.meng@windriver.com>, LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v11 49/77] target/riscv: rvv-1.0: mask-register logical
  instructions
-Date: Fri, 10 Dec 2021 15:56:34 +0800
-Message-Id: <20211210075704.23951-49-frank.chang@sifive.com>
+Date: Fri, 10 Dec 2021 15:56:35 +0800
+Message-Id: <20211210075704.23951-50-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211210075704.23951-1-frank.chang@sifive.com>
 References: <20211210075704.23951-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42b
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -84,57 +84,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 07:59:42 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 07:59:44 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/vector_helper.c | 9 ---------
- 1 file changed, 9 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 3 ++-
+ target/riscv/vector_helper.c            | 4 ----
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 804f423d5b..5c0c3d2547 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2652,7 +2652,8 @@ GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, reduction_check)
+ #define GEN_MM_TRANS(NAME)                                         \
+ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
+ {                                                                  \
+-    if (vext_check_isa_ill(s)) {                                   \
++    if (require_rvv(s) &&                                          \
++        vext_check_isa_ill(s)) {                                   \
+         uint32_t data = 0;                                         \
+         gen_helper_gvec_4_ptr *fn = gen_helper_##NAME;             \
+         TCGLabel *over = gen_new_label();                          \
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 277a5e4120..71d7b1e879 100644
+index 71d7b1e879..f883fdf474 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -3710,8 +3710,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
- {                                                             \
-     uint32_t vm = vext_vm(desc);                              \
-     uint32_t vl = env->vl;                                    \
--    uint32_t vlmax = vext_max_elems(desc,                     \
--                                    ctzl(sizeof(ETYPE)));     \
-     uint32_t i;                                               \
-                                                               \
-     for (i = 0; i < vl; i++) {                                \
-@@ -3723,9 +3721,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
-         vext_set_elem_mask(vd, i,                             \
-                            DO_OP(s2, s1, &env->fp_status));   \
-     }                                                         \
--    for (; i < vlmax; i++) {                                  \
--        vext_set_elem_mask(vd, i, 0);                         \
--    }                                                         \
+@@ -4231,7 +4231,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+                   void *vs2, CPURISCVState *env,          \
+                   uint32_t desc)                          \
+ {                                                         \
+-    uint32_t vlmax = env_archcpu(env)->cfg.vlen;          \
+     uint32_t vl = env->vl;                                \
+     uint32_t i;                                           \
+     int a, b;                                             \
+@@ -4241,9 +4240,6 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+         b = vext_elem_mask(vs2, i);                       \
+         vext_set_elem_mask(vd, i, OP(b, a));              \
+     }                                                     \
+-    for (; i < vlmax; i++) {                              \
+-        vext_set_elem_mask(vd, i, 0);                     \
+-    }                                                     \
  }
  
- GEN_VEXT_CMP_VV_ENV(vmfeq_vv_h, uint16_t, H2, float16_eq_quiet)
-@@ -3738,7 +3733,6 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
- {                                                                   \
-     uint32_t vm = vext_vm(desc);                                    \
-     uint32_t vl = env->vl;                                          \
--    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(ETYPE)));     \
-     uint32_t i;                                                     \
-                                                                     \
-     for (i = 0; i < vl; i++) {                                      \
-@@ -3749,9 +3743,6 @@ void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,       \
-         vext_set_elem_mask(vd, i,                                   \
-                            DO_OP(s2, (ETYPE)s1, &env->fp_status));  \
-     }                                                               \
--    for (; i < vlmax; i++) {                                        \
--        vext_set_elem_mask(vd, i, 0);                               \
--    }                                                               \
- }
- 
- GEN_VEXT_CMP_VF(vmfeq_vf_h, uint16_t, H2, float16_eq_quiet)
+ #define DO_NAND(N, M)  (!(N & M))
 -- 
 2.31.1
 
