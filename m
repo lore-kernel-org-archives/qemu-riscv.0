@@ -1,70 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvanb-0005JR-P7
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 02:58:35 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:60534)
+	id 1mvane-0005RO-F5
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 02:58:38 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60638)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvanM-0004za-VC
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:58:20 -0500
-Received: from [2607:f8b0:4864:20::62d] (port=44723
- helo=mail-pl1-x62d.google.com)
+ id 1mvanX-00056x-6C
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:58:31 -0500
+Received: from [2607:f8b0:4864:20::52b] (port=36752
+ helo=mail-pg1-x52b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1mvanK-0006kf-N0
- for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:58:20 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id q17so5730740plr.11
- for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:58:18 -0800 (PST)
+ id 1mvanT-0006mk-1C
+ for qemu-riscv@nongnu.org; Fri, 10 Dec 2021 02:58:30 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id 137so7407997pgg.3
+ for <qemu-riscv@nongnu.org>; Thu, 09 Dec 2021 23:58:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=CyR2RIGgjqNCbyxtsog9tiUonYa85h58je0TPofWbS4=;
- b=fsALO4NNp5amltlCkvXlGxwEchk8Mjv0lJOPeGaU0G5RsZNmQ+dRfr+xOfDBN59wmQ
- Gn3946IREo8FZRV458gcRepiYzoS9bI9E5CA8K3qDcOQWJyk99tfYu2nzEkBIAjJD3m5
- ViwGy1TlWFp/OdGKInP/uy+Ux53T3aCWnTiPk0g9qLygjsCbaXU6ul/Ey0pCthNulijM
- DpScuBEqxvXG4o3iUYQeaT9uH9HyG7xlH8joj8cG+yH6JpJyZUKurl99bCZkoNCzBhk3
- VS8kzwb8K2WmkBz/7IlftVSlw88Xt6kvSTiM6yHDhzVbuFotNiZ9nFk/8RaClDkhIK8p
- JtBg==
+ bh=k9G1dAW6nMK0cDYaM+i2mYTi5BuGz+8IoxMCYf5y+uI=;
+ b=L7b6PIU6pBmpLHkVgH5e8KY/5TMxx+/VN4xTg6fC9E8xQESClf5ZFRP7FDbi9nsNLE
+ efh2HsnSp4sXr4JmYhthm3g/FfCy79CwZXYBdOIkrqdNvrc7QvkGhlhkYYnowwc8F+l4
+ g0xB4lZCLrHufep69uMod0QcF5yDStW0u+Y1ANtB/fCi390Mq+dAfvMkbit9bTp62h4P
+ 3dcWTEebs5tQKQrec5ykS9/HA0yBUJQno5S4bVzBGaX0joxLZ3gR3fUARtfANA6qmSHw
+ JCLEVMJ7hcx1XE9E8Lr6y4GZN5akD5KtWcPLWNRcYXhL9gxxbFBg1hb17Jmm2wnu6UUz
+ CEng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=CyR2RIGgjqNCbyxtsog9tiUonYa85h58je0TPofWbS4=;
- b=Ga5xQDmIu0kZg+j5+3hjCcNN42zOOQ2onMlgZkaWWhz92NRhoXTw2XZGIbZO9O9RCh
- 4ZfKTnZNUZZkqXV5cBsRX2zs0PE1qY+WXQaS76AeIlrVixx6AzlFZZ/t9WyqwNK7W28e
- DnePEXXqblBh/OI6t4Ybj63NU9uGFmZpPF6G8ATiy11eJCAU/hON497VJvchgSp3FSbh
- +PIqtZCHH3nmar2aHiwmO0xvK28/yELVbDVFmP8HAB3J5Y8ML+PVl0LWw6ePWwHh94gk
- /XnAJ2ESyy/DiNkRdUrU31R1jR1fSR+B8W48j50EORNZ7hBGZpFSqj+fOJOZXIRpFDYy
- HYUg==
-X-Gm-Message-State: AOAM531eN0Plfh4dsTzrXfsjRTEpAl6P9qSNmbtWhgSjgDNP/8DKdB16
- 0jXwovwhDrFS3PsJ0U2ZgzNqng==
-X-Google-Smtp-Source: ABdhPJyEMpIH7ExaykraCpwDKNChSd+hf9zNCYc9r8On8fkeZVOsCxieuQd8snA+V3H7PYqUKGIuSg==
-X-Received: by 2002:a17:90a:f0d1:: with SMTP id
- fa17mr21778016pjb.145.1639123097531; 
- Thu, 09 Dec 2021 23:58:17 -0800 (PST)
+ bh=k9G1dAW6nMK0cDYaM+i2mYTi5BuGz+8IoxMCYf5y+uI=;
+ b=lGLCeokk5Tc8gQgKzErN2E48CNNyAqTx3+j/HvvMnVwKYS6gA+He4u638/YTgkgQZ8
+ w2u9MCl7V37721QCNTTbCg77UyIfm2VZgYkOa1RlwTMcFX8YaSuRudW9zf/BFLdaglDI
+ xcchOUcQnxBP5D1l/KROKCnJdUFBqAXjDb0bHqxzCTubtT5ogRb4TLdqfQJpEcLUhJPL
+ csy/Td4rMGcYWa9aRyebVfmNAo5U+xT6Sgqic3PiZAZVgkBQUE3wygf8aqiQVYCGj0Zw
+ opvsC5ViZd97yXGNk4Gipot+l5zqnVCwyM6tLZ7tczkM5oQkBbZ3XZVAI9tX1vlxXb+q
+ d0Pg==
+X-Gm-Message-State: AOAM533qb8S2ypsWVkww8K8WEhsh1UEfoRmraQEVvUMQs77r5p7YfJE7
+ dehZVkwZK9Oe7nG50uvY+2gnWN/Ak3HAbWgI
+X-Google-Smtp-Source: ABdhPJwCZMgsT7TNmSkdV/iJKOCDa4LTMEArDMngOE6FaI23HCNA0mhPQbUY6fCkr8HvWm9fpLLIfg==
+X-Received: by 2002:a65:645a:: with SMTP id s26mr23816039pgv.316.1639123105891; 
+ Thu, 09 Dec 2021 23:58:25 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.58.15
+ by smtp.gmail.com with ESMTPSA id f4sm2087955pfg.34.2021.12.09.23.58.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Dec 2021 23:58:17 -0800 (PST)
+ Thu, 09 Dec 2021 23:58:25 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v11 19/77] target/riscv: rvv-1.0: configure instructions
-Date: Fri, 10 Dec 2021 15:56:05 +0800
-Message-Id: <20211210075704.23951-20-frank.chang@sifive.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH v11 22/77] target/riscv: rvv-1.0: fix address index overflow
+ bug of indexed load/store insns
+Date: Fri, 10 Dec 2021 15:56:08 +0800
+Message-Id: <20211210075704.23951-23-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211210075704.23951-1-frank.chang@sifive.com>
 References: <20211210075704.23951-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62d
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -84,139 +83,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 07:58:21 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 07:58:32 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
+
+Replace ETYPE from signed int to unsigned int to prevent index overflow
+issue, which would lead to wrong index address.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 62 +++++++++++--------------
- target/riscv/vector_helper.c            | 14 +++++-
- 2 files changed, 40 insertions(+), 36 deletions(-)
+ target/riscv/vector_helper.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index afec187333..049688d83a 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -120,59 +120,51 @@ static bool require_noover(const int8_t dst, const int8_t dst_lmul,
-     return !is_overlapped(dst, dst_size, src, src_size);
- }
- 
--static bool trans_vsetvl(DisasContext *ctx, arg_vsetvl *a)
-+static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
- {
--    TCGv s1, s2, dst;
-+    TCGv s1, dst;
- 
--    if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
-+    if (!require_rvv(s) || !has_ext(s, RVV)) {
-         return false;
-     }
- 
--    s2 = get_gpr(ctx, a->rs2, EXT_ZERO);
--    dst = dest_gpr(ctx, a->rd);
-+    dst = dest_gpr(s, rd);
- 
--    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
--    if (a->rs1 == 0) {
-+    if (rd == 0 && rs1 == 0) {
-+        s1 = tcg_temp_new();
-+        tcg_gen_mov_tl(s1, cpu_vl);
-+    } else if (rs1 == 0) {
-         /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
-         s1 = tcg_constant_tl(RV_VLEN_MAX);
-     } else {
--        s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
-+        s1 = get_gpr(s, rs1, EXT_ZERO);
-     }
-+
-     gen_helper_vsetvl(dst, cpu_env, s1, s2);
--    gen_set_gpr(ctx, a->rd, dst);
--    mark_vs_dirty(ctx);
-+    gen_set_gpr(s, rd, dst);
-+    mark_vs_dirty(s);
- 
--    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
-     tcg_gen_lookup_and_goto_ptr();
--    ctx->base.is_jmp = DISAS_NORETURN;
--    return true;
--}
-+    s->base.is_jmp = DISAS_NORETURN;
- 
--static bool trans_vsetvli(DisasContext *ctx, arg_vsetvli *a)
--{
--    TCGv s1, s2, dst;
--
--    if (!require_rvv(ctx) || !has_ext(ctx, RVV)) {
--        return false;
-+    if (rd == 0 && rs1 == 0) {
-+        tcg_temp_free(s1);
-     }
- 
--    s2 = tcg_constant_tl(a->zimm);
--    dst = dest_gpr(ctx, a->rd);
-+    return true;
-+}
- 
--    /* Using x0 as the rs1 register specifier, encodes an infinite AVL */
--    if (a->rs1 == 0) {
--        /* As the mask is at least one bit, RV_VLEN_MAX is >= VLMAX */
--        s1 = tcg_constant_tl(RV_VLEN_MAX);
--    } else {
--        s1 = get_gpr(ctx, a->rs1, EXT_ZERO);
--    }
--    gen_helper_vsetvl(dst, cpu_env, s1, s2);
--    gen_set_gpr(ctx, a->rd, dst);
--    mark_vs_dirty(ctx);
-+static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
-+{
-+    TCGv s2 = get_gpr(s, a->rs2, EXT_ZERO);
-+    return do_vsetvl(s, a->rd, a->rs1, s2);
-+}
- 
--    gen_goto_tb(ctx, 0, ctx->pc_succ_insn);
--    ctx->base.is_jmp = DISAS_NORETURN;
--    return true;
-+static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
-+{
-+    TCGv s2 = tcg_constant_tl(a->zimm);
-+    return do_vsetvl(s, a->rd, a->rs1, s2);
- }
- 
- /* vector register offset from env */
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index bf976d364f..78fae78284 100644
+index df45c1620c..3da4f3b1e6 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -31,12 +31,24 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
- {
-     int vlmax, vl;
-     RISCVCPU *cpu = env_archcpu(env);
-+    uint64_t lmul = FIELD_EX64(s2, VTYPE, VLMUL);
-     uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
-     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
-     bool vill = FIELD_EX64(s2, VTYPE, VILL);
-     target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
+@@ -374,10 +374,10 @@ static target_ulong NAME(target_ulong base,            \
+     return (base + *((ETYPE *)vs2 + H(idx)));          \
+ }
  
--    if ((sew > cpu->cfg.elen) || vill || (ediv != 0) || (reserved != 0)) {
-+    if (lmul & 4) {
-+        /* Fractional LMUL. */
-+        if (lmul == 4 ||
-+            cpu->cfg.elen >> (8 - lmul) < sew) {
-+            vill = true;
-+        }
-+    }
-+
-+    if ((sew > cpu->cfg.elen)
-+        || vill
-+        || (ediv != 0)
-+        || (reserved != 0)) {
-         /* only set vill bit. */
-         env->vtype = FIELD_DP64(0, VTYPE, VILL, 1);
-         env->vl = 0;
+-GEN_VEXT_GET_INDEX_ADDR(idx_b, int8_t,  H1)
+-GEN_VEXT_GET_INDEX_ADDR(idx_h, int16_t, H2)
+-GEN_VEXT_GET_INDEX_ADDR(idx_w, int32_t, H4)
+-GEN_VEXT_GET_INDEX_ADDR(idx_d, int64_t, H8)
++GEN_VEXT_GET_INDEX_ADDR(idx_b, uint8_t,  H1)
++GEN_VEXT_GET_INDEX_ADDR(idx_h, uint16_t, H2)
++GEN_VEXT_GET_INDEX_ADDR(idx_w, uint32_t, H4)
++GEN_VEXT_GET_INDEX_ADDR(idx_d, uint64_t, H8)
+ 
+ static inline void
+ vext_ldst_index(void *vd, void *v0, target_ulong base,
 -- 
 2.31.1
 
