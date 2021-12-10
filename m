@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvciZ-0008DX-TY
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:01:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43794)
+	id 1mvcjG-0001Uc-D5
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:02:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44036)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvciV-00087p-LZ; Fri, 10 Dec 2021 05:01:27 -0500
-Received: from szxga01-in.huawei.com ([45.249.212.187]:2961)
+ id 1mvcjD-0001Q1-TN; Fri, 10 Dec 2021 05:02:11 -0500
+Received: from szxga03-in.huawei.com ([45.249.212.189]:3206)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvciC-0004oF-RF; Fri, 10 Dec 2021 05:01:27 -0500
-Received: from dggpemm500024.china.huawei.com (unknown [172.30.72.56])
- by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4J9RHP68dtzcdDG;
- Fri, 10 Dec 2021 18:00:49 +0800 (CST)
-Received: from dggpemm500017.china.huawei.com (7.185.36.178) by
- dggpemm500024.china.huawei.com (7.185.36.203) with Microsoft SMTP Server
+ id 1mvcjB-0004zL-E9; Fri, 10 Dec 2021 05:02:11 -0500
+Received: from dggpeml500025.china.huawei.com (unknown [172.30.72.55])
+ by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4J9RGQ0dvcz8vmy;
+ Fri, 10 Dec 2021 17:59:58 +0800 (CST)
+Received: from dggpeml100022.china.huawei.com (7.185.36.176) by
+ dggpeml500025.china.huawei.com (7.185.36.35) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Fri, 10 Dec 2021 18:01:03 +0800
+ 15.1.2308.20; Fri, 10 Dec 2021 18:02:05 +0800
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- dggpemm500017.china.huawei.com (7.185.36.178) with Microsoft SMTP Server
+ dggpeml100022.china.huawei.com (7.185.36.176) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Fri, 10 Dec 2021 18:01:03 +0800
+ 15.1.2308.20; Fri, 10 Dec 2021 18:02:05 +0800
 Received: from kwepemm600017.china.huawei.com ([7.193.23.234]) by
  kwepemm600017.china.huawei.com ([7.193.23.234]) with mapi id 15.01.2308.020;
- Fri, 10 Dec 2021 18:01:03 +0800
+ Fri, 10 Dec 2021 18:02:05 +0800
 From: Jiangyifei <jiangyifei@huawei.com>
-To: Anup Patel <anup@brainfault.org>
-CC: QEMU Developers <qemu-devel@nongnu.org>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, "kvm-riscv@lists.infradead.org"
- <kvm-riscv@lists.infradead.org>, KVM General <kvm@vger.kernel.org>,
- "libvir-list@redhat.com" <libvir-list@redhat.com>, Anup Patel
- <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, "Fanliang
- (EulerOS)" <fanliang@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>,
- "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, "wanbo (G)"
- <wanbo13@huawei.com>, "limingwang (A)" <limingwang@huawei.com>
-Subject: RE: [PATCH v1 07/12] target/riscv: Support setting external interrupt
- by KVM
-Thread-Topic: [PATCH v1 07/12] target/riscv: Support setting external
- interrupt by KVM
-Thread-Index: AQHX3eLOQYyIjsANI0SxhcVCQ7WQtqwgCrqAgAuTD2A=
-Date: Fri, 10 Dec 2021 10:01:03 +0000
-Message-ID: <aa0f6d5e285f4d3992d8ab018d7c5c40@huawei.com>
+To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <f4bug@amsat.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
+ <qemu-riscv@nongnu.org>
+CC: "bin.meng@windriver.com" <bin.meng@windriver.com>, "limingwang (A)"
+ <limingwang@huawei.com>, "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "libvir-list@redhat.com" <libvir-list@redhat.com>, "anup.patel@wdc.com"
+ <anup.patel@wdc.com>, "wanbo (G)" <wanbo13@huawei.com>,
+ "Alistair.Francis@wdc.com" <Alistair.Francis@wdc.com>,
+ "kvm-riscv@lists.infradead.org" <kvm-riscv@lists.infradead.org>, "Wanghaibin
+ (D)" <wanghaibin.wang@huawei.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>, 
+ "Fanliang (EulerOS)" <fanliang@huawei.com>, "Wubin (H)"
+ <wu.wubin@huawei.com>, =?utf-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
+Subject: RE: [PATCH v1 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+Thread-Topic: [PATCH v1 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+Thread-Index: AQHX3eLPKi0N90Bnsk2GR2KUrJd5IKwL0V8AgB/MstA=
+Date: Fri, 10 Dec 2021 10:02:05 +0000
+Message-ID: <8722f544a1d747f6937dccf0b4272779@huawei.com>
 References: <20211120074644.729-1-jiangyifei@huawei.com>
- <20211120074644.729-8-jiangyifei@huawei.com>
- <CAAhSdy3suxztJYmOtEdtY+bpvESACc4QbPbv0jNL00qpw0WeUw@mail.gmail.com>
-In-Reply-To: <CAAhSdy3suxztJYmOtEdtY+bpvESACc4QbPbv0jNL00qpw0WeUw@mail.gmail.com>
+ <20211120074644.729-9-jiangyifei@huawei.com>
+ <afe5b14f-ec27-2722-73a8-b9f6716d207e@amsat.org>
+In-Reply-To: <afe5b14f-ec27-2722-73a8-b9f6716d207e@amsat.org>
 Accept-Language: zh-CN, en-US
 Content-Language: zh-CN
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-originating-ip: [10.174.186.236]
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.187;
- envelope-from=jiangyifei@huawei.com; helo=szxga01-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.189;
+ envelope-from=jiangyifei@huawei.com; helo=szxga03-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -74,228 +74,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 10:01:29 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 10:02:12 -0000
 
-
-> -----Original Message-----
-> From: kvm-riscv [mailto:kvm-riscv-bounces@lists.infradead.org] On Behalf =
-Of
-> Anup Patel
-> Sent: Friday, December 3, 2021 5:15 PM
-> To: Jiangyifei <jiangyifei@huawei.com>
-> Cc: QEMU Developers <qemu-devel@nongnu.org>; open list:RISC-V
-> <qemu-riscv@nongnu.org>; kvm-riscv@lists.infradead.org; KVM General
-> <kvm@vger.kernel.org>; libvir-list@redhat.com; Anup Patel
-> <anup.patel@wdc.com>; Palmer Dabbelt <palmer@dabbelt.com>; Alistair
-> Francis <Alistair.Francis@wdc.com>; Bin Meng <bin.meng@windriver.com>;
-> Fanliang (EulerOS) <fanliang@huawei.com>; Wubin (H)
-> <wu.wubin@huawei.com>; Wanghaibin (D) <wanghaibin.wang@huawei.com>;
-> wanbo (G) <wanbo13@huawei.com>; limingwang (A)
-> <limingwang@huawei.com>
-> Subject: Re: [PATCH v1 07/12] target/riscv: Support setting external inte=
-rrupt
-> by KVM
->=20
-> On Sat, Nov 20, 2021 at 1:17 PM Yifei Jiang <jiangyifei@huawei.com> wrote=
-:
-> >
-> > Extend riscv_cpu_update_mip() to support setting external interrupt by
-> > KVM. It will call kvm_riscv_set_irq() to change the IRQ state in the
-> > KVM module When kvm is enabled and the MIP_SEIP bit is set in "mask"
-> >
-> > In addition, bacause target/riscv/cpu_helper.c is used to TCG, so move
-> > riscv_cpu_update_mip() to target/riscv/cpu.c from
-> > target/riscv/cpu_helper.c
-> >
-> > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> > Signed-off-by: Mingwang Li <limingwang@huawei.com>
-> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.c        | 34 ++++++++++++++++++++++++++++++++++
-> >  target/riscv/cpu_helper.c | 27 ---------------------------
-> >  target/riscv/kvm-stub.c   |  5 +++++
-> >  target/riscv/kvm.c        | 20 ++++++++++++++++++++
-> >  target/riscv/kvm_riscv.h  |  1 +
-> >  5 files changed, 60 insertions(+), 27 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c index
-> > 1c944872a3..a464845c99 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -21,6 +21,7 @@
-> >  #include "qemu/qemu-print.h"
-> >  #include "qemu/ctype.h"
-> >  #include "qemu/log.h"
-> > +#include "qemu/main-loop.h"
-> >  #include "cpu.h"
-> >  #include "internals.h"
-> >  #include "exec/exec-all.h"
-> > @@ -131,6 +132,39 @@ static void set_feature(CPURISCVState *env, int
-> feature)
-> >      env->features |=3D (1ULL << feature);  }
-> >
-> > +#ifndef CONFIG_USER_ONLY
-> > +uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t
-> > +value) {
-> > +    CPURISCVState *env =3D &cpu->env;
-> > +    CPUState *cs =3D CPU(cpu);
-> > +    uint32_t old =3D env->mip;
-> > +    bool locked =3D false;
-> > +
-> > +    if (!qemu_mutex_iothread_locked()) {
-> > +        locked =3D true;
-> > +        qemu_mutex_lock_iothread();
-> > +    }
-> > +
-> > +    env->mip =3D (env->mip & ~mask) | (value & mask);
-> > +
-> > +    if (kvm_enabled() && (mask & MIP_SEIP)) {
-> > +        kvm_riscv_set_irq(RISCV_CPU(cpu), IRQ_S_EXT, value &
-> MIP_SEIP);
-> > +    }
-> > +
-> > +    if (env->mip) {
-> > +        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-> > +    } else {
-> > +        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-> > +    }
-> > +
-> > +    if (locked) {
-> > +        qemu_mutex_unlock_iothread();
-> > +    }
-> > +
-> > +    return old;
-> > +}
-> > +#endif
-> > +
->=20
-> We should not change riscv_cpu_update_mip() for injecting KVM interrupts
-> because this function touches the user-space state of MIP csr but for KVM=
- the
-> SIP csr state is always in kernel-space.
->=20
-> Further, the KVM kernel-space ensures synchronization so we don't need to=
- do
-> qemu_mutex_lock/unlock_iothread() for KVM interrupts.
->=20
-> I would suggest to extend riscv_cpu_set_irq() for KVM interrupts. When KV=
-M is
-> enabled, the riscv_cpu_set_irq() should throw warning/abort for any inter=
-rupt
-> other than S-mode external interrupts.
->=20
-> Regards,
-> Anup
->=20
-
-Thanks, it will be modified in the next series.
-
-Yifei
-
-> >  static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
-> > {  #ifndef CONFIG_USER_ONLY diff --git a/target/riscv/cpu_helper.c
-> > b/target/riscv/cpu_helper.c index 9eeed38c7e..5e36c35b15 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -286,33 +286,6 @@ int riscv_cpu_claim_interrupts(RISCVCPU *cpu,
-> uint32_t interrupts)
-> >      }
-> >  }
-> >
-> > -uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t
-> > value) -{
-> > -    CPURISCVState *env =3D &cpu->env;
-> > -    CPUState *cs =3D CPU(cpu);
-> > -    uint32_t old =3D env->mip;
-> > -    bool locked =3D false;
-> > -
-> > -    if (!qemu_mutex_iothread_locked()) {
-> > -        locked =3D true;
-> > -        qemu_mutex_lock_iothread();
-> > -    }
-> > -
-> > -    env->mip =3D (env->mip & ~mask) | (value & mask);
-> > -
-> > -    if (env->mip) {
-> > -        cpu_interrupt(cs, CPU_INTERRUPT_HARD);
-> > -    } else {
-> > -        cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-> > -    }
-> > -
-> > -    if (locked) {
-> > -        qemu_mutex_unlock_iothread();
-> > -    }
-> > -
-> > -    return old;
-> > -}
-> > -
-> >  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t
-> (*fn)(uint32_t),
-> >                               uint32_t arg)  { diff --git
-> > a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c index
-> > 39b96fe3f4..4e8fc31a21 100644
-> > --- a/target/riscv/kvm-stub.c
-> > +++ b/target/riscv/kvm-stub.c
-> > @@ -23,3 +23,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)  {
-> >      abort();
-> >  }
-> > +
-> > +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level) {
-> > +    abort();
-> > +}
-> > diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c index
-> > 7f3ffcc2b4..8da2648d1a 100644
-> > --- a/target/riscv/kvm.c
-> > +++ b/target/riscv/kvm.c
-> > @@ -458,6 +458,26 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-> >      env->satp =3D 0;
-> >  }
-> >
-> > +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level) {
-> > +    int ret;
-> > +    unsigned virq =3D level ? KVM_INTERRUPT_SET :
-> KVM_INTERRUPT_UNSET;
-> > +
-> > +    if (irq !=3D IRQ_S_EXT) {
-> > +        return;
-> > +    }
-> > +
-> > +    if (!kvm_enabled()) {
-> > +        return;
-> > +    }
-> > +
-> > +    ret =3D kvm_vcpu_ioctl(CPU(cpu), KVM_INTERRUPT, &virq);
-> > +    if (ret < 0) {
-> > +        perror("Set irq failed");
-> > +        abort();
-> > +    }
-> > +}
-> > +
-> >  bool kvm_arch_cpu_check_are_resettable(void)
-> >  {
-> >      return true;
-> > diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h index
-> > f38c82bf59..ed281bdce0 100644
-> > --- a/target/riscv/kvm_riscv.h
-> > +++ b/target/riscv/kvm_riscv.h
-> > @@ -20,5 +20,6 @@
-> >  #define QEMU_KVM_RISCV_H
-> >
-> >  void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
-> > +void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
-> >
-> >  #endif
-> > --
-> > 2.19.1
-> >
-> >
-> > --
-> > kvm-riscv mailing list
-> > kvm-riscv@lists.infradead.org
-> > http://lists.infradead.org/mailman/listinfo/kvm-riscv
->=20
-> --
-> kvm-riscv mailing list
-> kvm-riscv@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/kvm-riscv
+DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFBoaWxpcHBlIE1hdGhpZXUt
+RGF1ZMOpIFttYWlsdG86cGhpbGlwcGUubWF0aGlldS5kYXVkZUBnbWFpbC5jb21dDQo+IE9uIEJl
+aGFsZiBPZiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqQ0KPiBTZW50OiBTYXR1cmRheSwgTm92ZW1i
+ZXIgMjAsIDIwMjEgODoyNSBQTQ0KPiBUbzogSmlhbmd5aWZlaSA8amlhbmd5aWZlaUBodWF3ZWku
+Y29tPjsgcWVtdS1kZXZlbEBub25nbnUub3JnOw0KPiBxZW11LXJpc2N2QG5vbmdudS5vcmcNCj4g
+Q2M6IGJpbi5tZW5nQHdpbmRyaXZlci5jb207IGxpbWluZ3dhbmcgKEEpIDxsaW1pbmd3YW5nQGh1
+YXdlaS5jb20+Ow0KPiBrdm1Admdlci5rZXJuZWwub3JnOyBsaWJ2aXItbGlzdEByZWRoYXQuY29t
+OyBhbnVwLnBhdGVsQHdkYy5jb207IHdhbmJvIChHKQ0KPiA8d2FuYm8xM0BodWF3ZWkuY29tPjsg
+QWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tOw0KPiBrdm0tcmlzY3ZAbGlzdHMuaW5mcmFkZWFkLm9y
+ZzsgV2FuZ2hhaWJpbiAoRCkNCj4gPHdhbmdoYWliaW4ud2FuZ0BodWF3ZWkuY29tPjsgcGFsbWVy
+QGRhYmJlbHQuY29tOyBGYW5saWFuZyAoRXVsZXJPUykNCj4gPGZhbmxpYW5nQGh1YXdlaS5jb20+
+OyBXdWJpbiAoSCkgPHd1Lnd1YmluQGh1YXdlaS5jb20+OyBBbGV4IEJlbm7DqWUNCj4gPGFsZXgu
+YmVubmVlQGxpbmFyby5vcmc+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggdjEgMDgvMTJdIHRhcmdl
+dC9yaXNjdjogSGFuZGxlIEtWTV9FWElUX1JJU0NWX1NCSSBleGl0DQo+IA0KPiBIaSwNCj4gDQo+
+IE9uIDExLzIwLzIxIDA4OjQ2LCBZaWZlaSBKaWFuZyB3cm90ZToNCj4gPiBVc2UgY2hhci1mZSB0
+byBoYW5kbGUgY29uc29sZSBzYmkgY2FsbCwgd2hpY2ggaW1wbGVtZW50IGVhcmx5IGNvbnNvbGUN
+Cj4gPiBpbyB3aGlsZSBhcHBseSAnZWFybHljb249c2JpJyBpbnRvIGtlcm5lbCBwYXJhbWV0ZXJz
+Lg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogWWlmZWkgSmlhbmcgPGppYW5neWlmZWlAaHVhd2Vp
+LmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBNaW5nd2FuZyBMaSA8bGltaW5nd2FuZ0BodWF3ZWku
+Y29tPg0KPiA+IC0tLQ0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtLmMgICAgICAgICAgICAgICAgIHwg
+NDIgKysrKysrKysrKysrKysrKy0NCj4gPiAgdGFyZ2V0L3Jpc2N2L3NiaV9lY2FsbF9pbnRlcmZh
+Y2UuaCB8IDcyDQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIDIgZmls
+ZXMgY2hhbmdlZCwgMTEzIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkgIGNyZWF0ZSBtb2Rl
+IDEwMDY0NA0KPiA+IHRhcmdldC9yaXNjdi9zYmlfZWNhbGxfaW50ZXJmYWNlLmgNCj4gPg0KPiA+
+IGRpZmYgLS1naXQgYS90YXJnZXQvcmlzY3Yva3ZtLmMgYi90YXJnZXQvcmlzY3Yva3ZtLmMgaW5k
+ZXgNCj4gPiA4ZGEyNjQ4ZDFhLi42ZDQxOWJhMDJlIDEwMDY0NA0KPiA+IC0tLSBhL3RhcmdldC9y
+aXNjdi9rdm0uYw0KPiA+ICsrKyBiL3RhcmdldC9yaXNjdi9rdm0uYw0KPiA+IEBAIC0zOCw2ICsz
+OCw4IEBADQo+ID4gICNpbmNsdWRlICJxZW11L2xvZy5oIg0KPiA+ICAjaW5jbHVkZSAiaHcvbG9h
+ZGVyLmgiDQo+ID4gICNpbmNsdWRlICJrdm1fcmlzY3YuaCINCj4gPiArI2luY2x1ZGUgInNiaV9l
+Y2FsbF9pbnRlcmZhY2UuaCINCj4gPiArI2luY2x1ZGUgImNoYXJkZXYvY2hhci1mZS5oIg0KPiA+
+DQo+ID4gIHN0YXRpYyB1aW50NjRfdCBrdm1fcmlzY3ZfcmVnX2lkKENQVVJJU0NWU3RhdGUgKmVu
+diwgdWludDY0X3QgdHlwZSwNCj4gPiB1aW50NjRfdCBpZHgpICB7IEBAIC00NDAsOSArNDQyLDQ3
+IEBAIGJvb2wNCj4gPiBrdm1fYXJjaF9zdG9wX29uX2VtdWxhdGlvbl9lcnJvcihDUFVTdGF0ZSAq
+Y3MpDQo+ID4gICAgICByZXR1cm4gdHJ1ZTsNCj4gPiAgfQ0KPiA+DQo+ID4gK3N0YXRpYyBpbnQg
+a3ZtX3Jpc2N2X2hhbmRsZV9zYmkoc3RydWN0IGt2bV9ydW4gKnJ1bikgew0KPiA+ICsgICAgaW50
+IHJldCA9IDA7DQo+ID4gKyAgICB1bnNpZ25lZCBjaGFyIGNoOw0KPiA+ICsgICAgc3dpdGNoIChy
+dW4tPnJpc2N2X3NiaS5leHRlbnNpb25faWQpIHsNCj4gPiArICAgIGNhc2UgU0JJX0VYVF8wXzFf
+Q09OU09MRV9QVVRDSEFSOg0KPiA+ICsgICAgICAgIGNoID0gcnVuLT5yaXNjdl9zYmkuYXJnc1sw
+XTsNCj4gPiArICAgICAgICBxZW11X2Nocl9mZV93cml0ZShzZXJpYWxfaGQoMCktPmJlLCAmY2gs
+IHNpemVvZihjaCkpOw0KPiA+ICsgICAgICAgIGJyZWFrOw0KPiA+ICsgICAgY2FzZSBTQklfRVhU
+XzBfMV9DT05TT0xFX0dFVENIQVI6DQo+ID4gKyAgICAgICAgcmV0ID0gcWVtdV9jaHJfZmVfcmVh
+ZF9hbGwoc2VyaWFsX2hkKDApLT5iZSwgJmNoLCBzaXplb2YoY2gpKTsNCj4gPiArICAgICAgICBp
+ZiAocmV0ID09IHNpemVvZihjaCkpIHsNCj4gPiArICAgICAgICAgICAgcnVuLT5yaXNjdl9zYmku
+YXJnc1swXSA9IGNoOw0KPiA+ICsgICAgICAgIH0gZWxzZSB7DQo+ID4gKyAgICAgICAgICAgIHJ1
+bi0+cmlzY3Zfc2JpLmFyZ3NbMF0gPSAtMTsNCj4gPiArICAgICAgICB9DQo+ID4gKyAgICAgICAg
+YnJlYWs7DQo+IA0KPiBTaG91bGRuJ3QgdGhpcyBjb2RlIHVzZSB0aGUgU2VtaWhvc3RpbmcgQ29u
+c29sZSBBUEkgZnJvbQ0KPiAic2VtaWhvc3RpbmcvY29uc29sZS5oIiBpbnN0ZWFkPw0KDQpUaGFu
+a3MsIEkgd2lsbCB1c2UgdGhpcyBBUEkgaW4gdGhlIG5leHQgc2VyaWVzLg0KDQpZaWZlaQ0K
 
