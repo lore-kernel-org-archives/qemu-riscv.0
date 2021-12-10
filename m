@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mvcos-0003Aw-2c
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:08:02 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46964)
+	id 1mvcot-0003Hh-M0
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Dec 2021 05:08:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46936)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvcok-00033N-PU; Fri, 10 Dec 2021 05:07:56 -0500
-Received: from szxga08-in.huawei.com ([45.249.212.255]:2913)
+ id 1mvcoj-00032h-Jw; Fri, 10 Dec 2021 05:07:56 -0500
+Received: from szxga02-in.huawei.com ([45.249.212.188]:4112)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mvcoh-0006MG-RN; Fri, 10 Dec 2021 05:07:54 -0500
-Received: from kwepemi100010.china.huawei.com (unknown [172.30.72.56])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4J9RN62BR8z1DLc5;
- Fri, 10 Dec 2021 18:04:54 +0800 (CST)
+ id 1mvcof-0006Lm-Vx; Fri, 10 Dec 2021 05:07:51 -0500
+Received: from kwepemi500002.china.huawei.com (unknown [172.30.72.54])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4J9RQd2jpnz921n;
+ Fri, 10 Dec 2021 18:07:05 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi100010.china.huawei.com (7.221.188.54) with Microsoft SMTP Server
+ kwepemi500002.china.huawei.com (7.221.188.171) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Fri, 10 Dec 2021 18:07:47 +0800
+ 15.1.2308.20; Fri, 10 Dec 2021 18:07:45 +0800
 Received: from huawei.com (10.174.186.236) by kwepemm600017.china.huawei.com
  (7.193.23.234) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Fri, 10 Dec
- 2021 18:07:46 +0800
+ 2021 18:07:44 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -28,9 +28,9 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <wanghaibin.wang@huawei.com>, <wanbo13@huawei.com>,
  Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v2 05/12] target/riscv: Implement kvm_arch_put_registers
-Date: Fri, 10 Dec 2021 18:07:25 +0800
-Message-ID: <20211210100732.1080-6-jiangyifei@huawei.com>
+Subject: [PATCH v2 04/12] target/riscv: Implement kvm_arch_get_registers
+Date: Fri, 10 Dec 2021 18:07:24 +0800
+Message-ID: <20211210100732.1080-5-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20211210100732.1080-1-jiangyifei@huawei.com>
 References: <20211210100732.1080-1-jiangyifei@huawei.com>
@@ -41,13 +41,13 @@ X-Originating-IP: [10.174.186.236]
 X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
  kwepemm600017.china.huawei.com (7.193.23.234)
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.255;
- envelope-from=jiangyifei@huawei.com; helo=szxga08-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.188;
+ envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
 X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -61,98 +61,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Dec 2021 10:07:58 -0000
+X-List-Received-Date: Fri, 10 Dec 2021 10:07:57 -0000
 
-Put GPR CSR and FP registers to kvm by KVM_SET_ONE_REG ioctl
+Get GPR CSR and FP registers from kvm by KVM_GET_ONE_REG ioctl.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Mingwang Li <limingwang@huawei.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/kvm.c | 104 ++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 103 insertions(+), 1 deletion(-)
+ target/riscv/kvm.c | 112 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 111 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 6d4df0ef6d..e695b91dc7 100644
+index ccf3753048..6d4df0ef6d 100644
 --- a/target/riscv/kvm.c
 +++ b/target/riscv/kvm.c
-@@ -73,6 +73,14 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
-         } \
-     } while(0)
+@@ -55,13 +55,123 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
+     return id;
+ }
  
-+#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
++#define RISCV_CORE_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, \
++                 KVM_REG_RISCV_CORE_REG(name))
++
++#define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
++                 KVM_REG_RISCV_CSR_REG(name))
++
++#define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
++
++#define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
++
++#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
 +    do { \
-+        int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
 +        if (ret) { \
 +            return ret; \
 +        } \
 +    } while(0)
 +
- static int kvm_riscv_get_regs_core(CPUState *cs)
- {
-     int ret = 0;
-@@ -98,6 +106,31 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
-     return ret;
- }
- 
-+static int kvm_riscv_put_regs_core(CPUState *cs)
++static int kvm_riscv_get_regs_core(CPUState *cs)
 +{
 +    int ret = 0;
 +    int i;
 +    target_ulong reg;
 +    CPURISCVState *env = &RISCV_CPU(cs)->env;
 +
-+    reg = env->pc;
-+    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
++    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
 +    if (ret) {
 +        return ret;
 +    }
++    env->pc = reg;
 +
 +    for (i = 1; i < 32; i++) {
 +        uint64_t id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, i);
-+        reg = env->gpr[i];
-+        ret = kvm_set_one_reg(cs, id, &reg);
++        ret = kvm_get_one_reg(cs, id, &reg);
 +        if (ret) {
 +            return ret;
 +        }
++        env->gpr[i] = reg;
 +    }
 +
 +    return ret;
 +}
 +
- static int kvm_riscv_get_regs_csr(CPUState *cs)
- {
-     int ret = 0;
-@@ -115,6 +148,24 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
-     return ret;
- }
- 
-+static int kvm_riscv_put_regs_csr(CPUState *cs)
++static int kvm_riscv_get_regs_csr(CPUState *cs)
 +{
 +    int ret = 0;
 +    CPURISCVState *env = &RISCV_CPU(cs)->env;
 +
-+    KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-+    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
-+    KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
-+    KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
-+    KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
-+    KVM_RISCV_SET_CSR(cs, env, scause, env->scause);
-+    KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
-+    KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
-+    KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
-+
++    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
++    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
++    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
++    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
++    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
++    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
++    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
++    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
++    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
 +    return ret;
 +}
 +
- static int kvm_riscv_get_regs_fp(CPUState *cs)
- {
-     int ret = 0;
-@@ -148,6 +199,40 @@ static int kvm_riscv_get_regs_fp(CPUState *cs)
-     return ret;
- }
- 
-+static int kvm_riscv_put_regs_fp(CPUState *cs)
++static int kvm_riscv_get_regs_fp(CPUState *cs)
 +{
 +    int ret = 0;
 +    int i;
@@ -161,11 +149,11 @@ index 6d4df0ef6d..e695b91dc7 100644
 +    if (riscv_has_ext(env, RVD)) {
 +        uint64_t reg;
 +        for (i = 0; i < 32; i++) {
-+            reg = env->fpr[i];
-+            ret = kvm_set_one_reg(cs, RISCV_FP_D_REG(env, i), &reg);
++            ret = kvm_get_one_reg(cs, RISCV_FP_D_REG(env, i), &reg);
 +            if (ret) {
 +                return ret;
 +            }
++            env->fpr[i] = reg;
 +        }
 +        return ret;
 +    }
@@ -173,11 +161,11 @@ index 6d4df0ef6d..e695b91dc7 100644
 +    if (riscv_has_ext(env, RVF)) {
 +        uint32_t reg;
 +        for (i = 0; i < 32; i++) {
-+            reg = env->fpr[i];
-+            ret = kvm_set_one_reg(cs, RISCV_FP_F_REG(env, i), &reg);
++            ret = kvm_get_one_reg(cs, RISCV_FP_F_REG(env, i), &reg);
 +            if (ret) {
 +                return ret;
 +            }
++            env->fpr[i] = reg;
 +        }
 +        return ret;
 +    }
@@ -185,28 +173,26 @@ index 6d4df0ef6d..e695b91dc7 100644
 +    return ret;
 +}
 +
-+
  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
      KVM_CAP_LAST_INFO
  };
-@@ -176,7 +261,24 @@ int kvm_arch_get_registers(CPUState *cs)
  
- int kvm_arch_put_registers(CPUState *cs, int level)
+ int kvm_arch_get_registers(CPUState *cs)
  {
 -    return 0;
 +    int ret = 0;
 +
-+    ret = kvm_riscv_put_regs_core(cs);
++    ret = kvm_riscv_get_regs_core(cs);
 +    if (ret) {
 +        return ret;
 +    }
 +
-+    ret = kvm_riscv_put_regs_csr(cs);
++    ret = kvm_riscv_get_regs_csr(cs);
 +    if (ret) {
 +        return ret;
 +    }
 +
-+    ret = kvm_riscv_put_regs_fp(cs);
++    ret = kvm_riscv_get_regs_fp(cs);
 +    if (ret) {
 +        return ret;
 +    }
@@ -214,7 +200,7 @@ index 6d4df0ef6d..e695b91dc7 100644
 +    return ret;
  }
  
- int kvm_arch_release_virq_post(int virq)
+ int kvm_arch_put_registers(CPUState *cs, int level)
 -- 
 2.19.1
 
