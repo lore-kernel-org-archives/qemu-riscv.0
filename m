@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mwoLk-00039c-Mt
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 11:38:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51114)
+	id 1mwoM0-0003CD-KA
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 11:39:12 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51162)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mwoLg-0002yo-Bu; Mon, 13 Dec 2021 11:38:48 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:46260)
+ id 1mwoLh-00031e-Rb; Mon, 13 Dec 2021 11:38:49 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:46704)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mwoLc-0003Xk-HZ; Mon, 13 Dec 2021 11:38:48 -0500
+ id 1mwoLg-0003Zd-0O; Mon, 13 Dec 2021 11:38:49 -0500
 Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 1935D4034A;
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7F5E5402BC;
  Mon, 13 Dec 2021 17:38:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=univ-grenoble-alpes.fr; s=2020; t=1639413520;
- bh=XTxRfm9BdVnBnFiI5R4eIb6uQB8aJTIRuXIDG4Uwcv0=;
+ bh=PXmUhstDImS+6ROYl2DMuVTeeYjbTOpuKEYdpsXw8ak=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JzBfMv+VBYmCV2IqH0voh8PVXocg674D0gtuW3KdMg5Yai3wcOHwZjyXHdySLlhBj
- wrWJwlfuK+ISaiuW1AnoeZzSFXk8rY1no9K8iPi+ZeKOSGXWCNbeRpyxsBX8fvGXcU
- Qrqh49esjj9ODthKazUtCgUyhAs8Ng2RWepqbbTPflENfvFJkFODuHI38bglSEQCLn
- 9tZx3gLTJCRjxMU4zhcMilkqS6B9masSoroiZPBpTesP6pveFSmjz+M8eeGQ7wCTAH
- EKaVyxUtfSondhKxdWRL41KHp1IrOry5Ek31A3IOCvV+X5BCkUs91c9kSUsnSIQKLO
- MR6m5XIrqPu9Q==
+ b=InUryNUEdqWBtndsqIwKTOWbCAIfLdfGiR5p2SK7gs6NZWFYskLcHRRexClpJkrkx
+ ZvWBWoofqQXi8gU6afcC/NGaHv8/lort4J2Q6NEiWXjX2Y+lf8kqeGfeaXAPfmerTh
+ P61XJYTtE3efvt4iKGQv7bz6h/X4WZB8aG9t4M3GroikD748e3y8uOGKlzUpNKBBOY
+ 8xZlcidik7c0ap5+t8O3bS11kH70QOhKIMR7WPouaG2pZ9gslNLcrY+VMtQn8RmKbx
+ TmCGJh/GYnoLe6/O9knQcqTINxn49Q8TZsHYTRghMIxXQVbt6cmXM9xxUZWiX/HaqQ
+ YoZuXGqYvG1Ug==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 0226B6006D;
- Mon, 13 Dec 2021 17:38:39 +0100 (CET)
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 6B8336006B;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id C8A6414007F;
- Mon, 13 Dec 2021 17:38:39 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 3EC6314007F;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,9 +43,10 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v7 03/18] qemu/int128: addition of div/rem 128-bit operations
-Date: Mon, 13 Dec 2021 17:38:19 +0100
-Message-Id: <20211213163834.170504-4-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v7 05/18] target/riscv: separation of bitwise logic and
+ arithmetic helpers
+Date: Mon, 13 Dec 2021 17:38:21 +0100
+Message-Id: <20211213163834.170504-6-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
 References: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
@@ -77,238 +78,137 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2021 16:38:49 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 16:38:50 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 16:38:50 -0000
 
-Addition of div and rem on 128-bit integers, using the 128/64->128 divu and
-64x64->128 mulu in host-utils.
-These operations will be used within div/rem helpers in the 128-bit riscv
-target.
+Introduction of a gen_logic function for bitwise logic to implement
+instructions in which no propagation of information occurs between bits and
+use of this function on the bitwise instructions.
 
 Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- include/qemu/int128.h |  27 ++++++++
- util/int128.c         | 147 ++++++++++++++++++++++++++++++++++++++++++
- util/meson.build      |   1 +
- 3 files changed, 175 insertions(+)
- create mode 100644 util/int128.c
+ target/riscv/translate.c                | 27 +++++++++++++++++++++++++
+ target/riscv/insn_trans/trans_rvb.c.inc |  6 +++---
+ target/riscv/insn_trans/trans_rvi.c.inc | 12 +++++------
+ 3 files changed, 36 insertions(+), 9 deletions(-)
 
-diff --git a/include/qemu/int128.h b/include/qemu/int128.h
-index b6d517aea4..2c4064256c 100644
---- a/include/qemu/int128.h
-+++ b/include/qemu/int128.h
-@@ -172,6 +172,26 @@ static inline Int128 bswap128(Int128 a)
- #endif
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 2718ff15a1..9d102f21ee 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -400,6 +400,33 @@ static int ex_rvc_shifti(DisasContext *ctx, int imm)
+ /* Include the auto-generated decoder for 32 bit insn */
+ #include "decode-insn32.c.inc"
+ 
++static bool gen_logic_imm_fn(DisasContext *ctx, arg_i *a,
++                             void (*func)(TCGv, TCGv, target_long))
++{
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++
++    func(dest, src1, a->imm);
++
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool gen_logic(DisasContext *ctx, arg_r *a,
++                      void (*func)(TCGv, TCGv, TCGv))
++{
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    func(dest, src1, src2);
++
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
+ static bool gen_arith_imm_fn(DisasContext *ctx, arg_i *a, DisasExtend ext,
+                              void (*func)(TCGv, TCGv, target_long))
+ {
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index c8d31907c5..de2cd613b1 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -86,19 +86,19 @@ static bool trans_cpop(DisasContext *ctx, arg_cpop *a)
+ static bool trans_andn(DisasContext *ctx, arg_andn *a)
+ {
+     REQUIRE_ZBB(ctx);
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_andc_tl);
++    return gen_logic(ctx, a, tcg_gen_andc_tl);
  }
  
-+static inline Int128 int128_divu(Int128 a, Int128 b)
-+{
-+    return (__uint128_t)a / (__uint128_t)b;
-+}
-+
-+static inline Int128 int128_remu(Int128 a, Int128 b)
-+{
-+    return (__uint128_t)a % (__uint128_t)b;
-+}
-+
-+static inline Int128 int128_divs(Int128 a, Int128 b)
-+{
-+    return a / b;
-+}
-+
-+static inline Int128 int128_rems(Int128 a, Int128 b)
-+{
-+    return a % b;
-+}
-+
- #else /* !CONFIG_INT128 */
- 
- typedef struct Int128 Int128;
-@@ -379,6 +399,11 @@ static inline Int128 bswap128(Int128 a)
-     return int128_make128(bswap64(a.hi), bswap64(a.lo));
+ static bool trans_orn(DisasContext *ctx, arg_orn *a)
+ {
+     REQUIRE_ZBB(ctx);
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_orc_tl);
++    return gen_logic(ctx, a, tcg_gen_orc_tl);
  }
  
-+Int128 int128_divu(Int128, Int128);
-+Int128 int128_remu(Int128, Int128);
-+Int128 int128_divs(Int128, Int128);
-+Int128 int128_rems(Int128, Int128);
-+
- #endif /* CONFIG_INT128 */
- 
- static inline void bswap128s(Int128 *s)
-@@ -386,4 +411,6 @@ static inline void bswap128s(Int128 *s)
-     *s = bswap128(*s);
+ static bool trans_xnor(DisasContext *ctx, arg_xnor *a)
+ {
+     REQUIRE_ZBB(ctx);
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_eqv_tl);
++    return gen_logic(ctx, a, tcg_gen_eqv_tl);
  }
  
-+#define UINT128_MAX int128_make128(~0LL, ~0LL)
-+
- #endif /* INT128_H */
-diff --git a/util/int128.c b/util/int128.c
-new file mode 100644
-index 0000000000..ed8f25fef1
---- /dev/null
-+++ b/util/int128.c
-@@ -0,0 +1,147 @@
-+/*
-+ * 128-bit division and remainder for compilers not supporting __int128
-+ *
-+ * Copyright (c) 2021 Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to deal
-+ * in the Software without restriction, including without limitation the rights
-+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-+ * copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-+ * THE SOFTWARE.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/host-utils.h"
-+#include "qemu/int128.h"
-+
-+#ifndef CONFIG_INT128
-+
-+/*
-+ * Division and remainder algorithms for 128-bit due to Stefan Kanthak,
-+ * https://skanthak.homepage.t-online.de/integer.html#udivmodti4
-+ * Preconditions:
-+ *     - function should never be called with v equals to 0, it has to
-+ *       be dealt with beforehand
-+ *     - quotien pointer must be valid
-+ */
-+static Int128 divrem128(Int128 u, Int128 v, Int128 *q)
-+{
-+    Int128 qq;
-+    uint64_t hi, lo, tmp;
-+    int s = clz64(v.hi);
-+
-+    if (s == 64) {
-+        /* we have uu÷0v => let's use divu128 */
-+        hi = u.hi;
-+        lo = u.lo;
-+        tmp = divu128(&lo, &hi, v.lo);
-+        *q = int128_make128(lo, hi);
-+        return int128_make128(tmp, 0);
-+    } else {
-+        hi = int128_gethi(int128_lshift(v, s));
-+
-+        if (hi > u.hi) {
-+            lo = u.lo;
-+            tmp = u.hi;
-+            divu128(&lo, &tmp, hi);
-+            lo = int128_gethi(int128_lshift(int128_make128(lo, 0), s));
-+        } else { /* prevent overflow */
-+            lo = u.lo;
-+            tmp = u.hi - hi;
-+            divu128(&lo, &tmp, hi);
-+            lo = int128_gethi(int128_lshift(int128_make128(lo, 1), s));
-+        }
-+
-+        qq = int128_make64(lo);
-+
-+        tmp = lo * v.hi;
-+        mulu64(&lo, &hi, lo, v.lo);
-+        hi += tmp;
-+
-+        if (hi < tmp     /* quotient * divisor >= 2**128 > dividend */
-+            || hi > u.hi /* quotient * divisor > dividend */
-+            || (hi == u.hi && lo > u.lo)) {
-+            qq.lo -= 1;
-+            mulu64(&lo, &hi, qq.lo, v.lo);
-+            hi += qq.lo * v.hi;
-+        }
-+
-+        *q = qq;
-+        u.hi -= hi + (u.lo < lo);
-+        u.lo -= lo;
-+        return u;
-+    }
-+}
-+
-+Int128 int128_divu(Int128 a, Int128 b)
-+{
-+    Int128 q;
-+    divrem128(a, b, &q);
-+    return q;
-+}
-+
-+Int128 int128_remu(Int128 a, Int128 b)
-+{
-+    Int128 q;
-+    return divrem128(a, b, &q);
-+}
-+
-+Int128 int128_divs(Int128 a, Int128 b)
-+{
-+    Int128 q;
-+    bool sgna = !int128_nonneg(a);
-+    bool sgnb = !int128_nonneg(b);
-+
-+    if (sgna) {
-+        a = int128_neg(a);
-+    }
-+
-+    if (sgnb) {
-+        b = int128_neg(b);
-+    }
-+
-+    divrem128(a, b, &q);
-+
-+    if (sgna != sgnb) {
-+        q = int128_neg(q);
-+    }
-+
-+    return q;
-+}
-+
-+Int128 int128_rems(Int128 a, Int128 b)
-+{
-+    Int128 q, r;
-+    bool sgna = !int128_nonneg(a);
-+    bool sgnb = !int128_nonneg(b);
-+
-+    if (sgna) {
-+        a = int128_neg(a);
-+    }
-+
-+    if (sgnb) {
-+        b = int128_neg(b);
-+    }
-+
-+    r = divrem128(a, b, &q);
-+
-+    if (sgna) {
-+        r = int128_neg(r);
-+    }
-+
-+    return r;
-+}
-+
-+#endif
-diff --git a/util/meson.build b/util/meson.build
-index 05b593055a..e676b2f6c6 100644
---- a/util/meson.build
-+++ b/util/meson.build
-@@ -48,6 +48,7 @@ util_ss.add(files('transactions.c'))
- util_ss.add(when: 'CONFIG_POSIX', if_true: files('drm.c'))
- util_ss.add(files('guest-random.c'))
- util_ss.add(files('yank.c'))
-+util_ss.add(files('int128.c'))
+ static bool trans_min(DisasContext *ctx, arg_min *a)
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 4a2aefe3a5..51607b3d40 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -252,17 +252,17 @@ static bool trans_sltiu(DisasContext *ctx, arg_sltiu *a)
  
- if have_user
-   util_ss.add(files('selfmap.c'))
+ static bool trans_xori(DisasContext *ctx, arg_xori *a)
+ {
+-    return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_xori_tl);
++    return gen_logic_imm_fn(ctx, a, tcg_gen_xori_tl);
+ }
+ 
+ static bool trans_ori(DisasContext *ctx, arg_ori *a)
+ {
+-    return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_ori_tl);
++    return gen_logic_imm_fn(ctx, a, tcg_gen_ori_tl);
+ }
+ 
+ static bool trans_andi(DisasContext *ctx, arg_andi *a)
+ {
+-    return gen_arith_imm_fn(ctx, a, EXT_NONE, tcg_gen_andi_tl);
++    return gen_logic_imm_fn(ctx, a, tcg_gen_andi_tl);
+ }
+ 
+ static bool trans_slli(DisasContext *ctx, arg_slli *a)
+@@ -319,7 +319,7 @@ static bool trans_sltu(DisasContext *ctx, arg_sltu *a)
+ 
+ static bool trans_xor(DisasContext *ctx, arg_xor *a)
+ {
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_xor_tl);
++    return gen_logic(ctx, a, tcg_gen_xor_tl);
+ }
+ 
+ static bool trans_srl(DisasContext *ctx, arg_srl *a)
+@@ -334,12 +334,12 @@ static bool trans_sra(DisasContext *ctx, arg_sra *a)
+ 
+ static bool trans_or(DisasContext *ctx, arg_or *a)
+ {
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_or_tl);
++    return gen_logic(ctx, a, tcg_gen_or_tl);
+ }
+ 
+ static bool trans_and(DisasContext *ctx, arg_and *a)
+ {
+-    return gen_arith(ctx, a, EXT_NONE, tcg_gen_and_tl);
++    return gen_logic(ctx, a, tcg_gen_and_tl);
+ }
+ 
+ static bool trans_addiw(DisasContext *ctx, arg_addiw *a)
 -- 
 2.34.1
 
