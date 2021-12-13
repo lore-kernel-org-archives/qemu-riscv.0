@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mwoLj-000357-21
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 11:38:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51082)
+	id 1mwoLk-00039c-Mt
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 11:38:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51114)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mwoLf-0002xm-4p; Mon, 13 Dec 2021 11:38:47 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:46096)
+ id 1mwoLg-0002yo-Bu; Mon, 13 Dec 2021 11:38:48 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:46260)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1mwoLc-0003Xc-Hf; Mon, 13 Dec 2021 11:38:46 -0500
-Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4CC0E40340;
- Mon, 13 Dec 2021 17:38:39 +0100 (CET)
+ id 1mwoLc-0003Xk-HZ; Mon, 13 Dec 2021 11:38:48 -0500
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 1935D4034A;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1639413519;
- bh=nrkbyJxLpQVjY6ajaq2WLsXrbyrOIhQheKqjMZXO6aI=;
- h=From:To:Cc:Subject:Date:From;
- b=PUx73RgBbZQFOefVUobhoF8KSNv2i9FLiW3w7EuHAIdizicUtoRHjxNSzFiD/UETR
- l65ayoShJChGwkZnfdP7DrUfXLUeP7JPtwggdxuMiZWyZVnIhGa6FrQf+uy1uSEJ8b
- TrAeJ52fvezdpMwrqPE+ZLADAW3yqQTKcxRqQyoImvdWbdx+Zb4lDevwhMNMArP6+K
- Wykv3P8Az7BotW9oZhtqtl64xsbSdtlYh11wckAUCH5FUJE9V0e8Wy7jTQnDJEpcZp
- 19JEcbPjWAiHJyJQgP9WyEt6B7Gn7lRsr2MAb3fdF1HLQ1u5moLcZRh6m3FtK4gApy
- 0FoDRkRBHcxyQ==
+ d=univ-grenoble-alpes.fr; s=2020; t=1639413520;
+ bh=XTxRfm9BdVnBnFiI5R4eIb6uQB8aJTIRuXIDG4Uwcv0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=JzBfMv+VBYmCV2IqH0voh8PVXocg674D0gtuW3KdMg5Yai3wcOHwZjyXHdySLlhBj
+ wrWJwlfuK+ISaiuW1AnoeZzSFXk8rY1no9K8iPi+ZeKOSGXWCNbeRpyxsBX8fvGXcU
+ Qrqh49esjj9ODthKazUtCgUyhAs8Ng2RWepqbbTPflENfvFJkFODuHI38bglSEQCLn
+ 9tZx3gLTJCRjxMU4zhcMilkqS6B9masSoroiZPBpTesP6pveFSmjz+M8eeGQ7wCTAH
+ EKaVyxUtfSondhKxdWRL41KHp1IrOry5Ek31A3IOCvV+X5BCkUs91c9kSUsnSIQKLO
+ MR6m5XIrqPu9Q==
 Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhost.u-ga.fr (Postfix) with ESMTP id 32E0960074;
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 0226B6006D;
  Mon, 13 Dec 2021 17:38:39 +0100 (CET)
 Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 6BBAB14005C;
- Mon, 13 Dec 2021 17:38:38 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id C8A6414007F;
+ Mon, 13 Dec 2021 17:38:39 +0100 (CET)
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 To: qemu-devel@nongnu.org,
@@ -43,10 +43,12 @@ Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
  fabien.portas@grenoble-inp.org,
  =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v7 00/18]  Adding partial support for 128-bit riscv target
-Date: Mon, 13 Dec 2021 17:38:16 +0100
-Message-Id: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v7 03/18] qemu/int128: addition of div/rem 128-bit operations
+Date: Mon, 13 Dec 2021 17:38:19 +0100
+Message-Id: <20211213163834.170504-4-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -75,146 +77,238 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2021 16:38:47 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 16:38:49 -0000
 
-This series of patches provides partial 128-bit support for the riscv
-target architecture, namely RVI and RVM, with minimal csr support.
+Addition of div and rem on 128-bit integers, using the 128/64->128 divu and
+64x64->128 mulu in host-utils.
+These operations will be used within div/rem helpers in the 128-bit riscv
+target.
 
-Thanks again for the reviews and advices.
-
-v7:
-- code motion following reviews
-- correction of a bug preventing riscv{32,64}-linux-user to compile
-- sync with master
-- Note that 'make check' fails for 5 qemu-iotests cases, namely
-  040, 041, 127, 256, and 267, but they also fail with
-  qemu-system-riscv{32,64} from current master
-
-v6:
-- support for '-cpu rv128' in qemu-system-riscv64 to handle 128-bit
-  executables (no more qemu-system-riscv128)
-- remove useless (and buggy) big-endian support in lq/sq
-
-v5:
-- split the memop define renaming and addition in two patches
-- 128-bit div/rem operations using host-utils functions
-- removed useless rv128 tests at various places
-- refactoring the slt/bxx part so as to share the comparison part
-- refactoring the 128-bit csr handling to share code more largely
-  Also forwarding writes to the 64-bit version when not 128-bit version
-  exists, as a vast majority of the csrs does not use the upper 64-bits
-
-v4: 
-- safer and cleaner access to the gpr upper part
-- locals for load/store/div/rem helpers
-- cleans out the 128-bit div/rem code
-- corrects numerous bugs and performs optimizations on shifts and mults
-- withdraws the change in page size and the vm schemes we introduced
-
-v3:
-- v2 refactored following Richard's xl patch changes
-
-v2:
-- load and store making use of new memop.h sizes
-- use of the existing Int128 computations in helpers, and addition of
-  a few more operations there, in particular division and remainder
-- refactoring of the calls to the code generation helpers
-- split of the patch in smaller pieces
-
-v1:
-- introducing support for rv128 for basic integer and M extension insns
-
-Frédéric Pétrot (18):
-  exec/memop: Adding signedness to quad definitions
-  exec/memop: Adding signed quad and octo defines
-  qemu/int128: addition of div/rem 128-bit operations
-  target/riscv: additional macros to check instruction support
-  target/riscv: separation of bitwise logic and arithmetic helpers
-  target/riscv: array for the 64 upper bits of 128-bit registers
-  target/riscv: setup everything for rv64 to support rv128 execution
-  target/riscv: moving some insns close to similar insns
-  target/riscv: accessors to registers upper part and 128-bit load/store
-  target/riscv: support for 128-bit bitwise instructions
-  target/riscv: support for 128-bit U-type instructions
-  target/riscv: support for 128-bit shift instructions
-  target/riscv: support for 128-bit arithmetic instructions
-  target/riscv: support for 128-bit M extension
-  target/riscv: adding high part of some csrs
-  target/riscv: helper functions to wrap calls to 128-bit csr insns
-  target/riscv: modification of the trans_csrxx for 128-bit support
-  target/riscv: actual functions to realize crs 128-bit insns
-
- include/disas/dis-asm.h                    |   1 +
- include/exec/memop.h                       |  15 +-
- include/qemu/int128.h                      |  27 +
- include/tcg/tcg-op.h                       |   4 +-
- target/arm/translate-a32.h                 |   4 +-
- target/riscv/cpu.h                         |  22 +
- target/riscv/cpu_bits.h                    |   3 +
- target/riscv/helper.h                      |   9 +
- target/riscv/insn16.decode                 |  27 +-
- target/riscv/insn32.decode                 |  25 +
- accel/tcg/cputlb.c                         |  30 +-
- accel/tcg/user-exec.c                      |   8 +-
- disas/riscv.c                              |   5 +
- target/alpha/translate.c                   |  32 +-
- target/arm/helper-a64.c                    |   8 +-
- target/arm/translate-a64.c                 |   8 +-
- target/arm/translate-neon.c                |   6 +-
- target/arm/translate-sve.c                 |  10 +-
- target/arm/translate-vfp.c                 |   8 +-
- target/arm/translate.c                     |   2 +-
- target/cris/translate.c                    |   2 +-
- target/hppa/translate.c                    |   4 +-
- target/i386/tcg/mem_helper.c               |   2 +-
- target/i386/tcg/translate.c                |  36 +-
- target/m68k/op_helper.c                    |   2 +-
- target/mips/tcg/translate.c                |  58 +-
- target/mips/tcg/tx79_translate.c           |   8 +-
- target/ppc/translate.c                     |  32 +-
- target/riscv/cpu.c                         |  29 +
- target/riscv/csr.c                         | 194 +++++-
- target/riscv/gdbstub.c                     |   5 +
- target/riscv/m128_helper.c                 | 109 +++
- target/riscv/machine.c                     |  22 +
- target/riscv/op_helper.c                   |  44 ++
- target/riscv/translate.c                   | 252 ++++++-
- target/s390x/tcg/mem_helper.c              |   8 +-
- target/s390x/tcg/translate.c               |   8 +-
- target/sh4/translate.c                     |  12 +-
- target/sparc/translate.c                   |  36 +-
- target/tricore/translate.c                 |   4 +-
- target/xtensa/translate.c                  |   4 +-
- tcg/tcg.c                                  |   4 +-
- tcg/tci.c                                  |  16 +-
- util/int128.c                              | 147 +++++
- accel/tcg/ldst_common.c.inc                |   8 +-
- target/mips/tcg/micromips_translate.c.inc  |  10 +-
- target/ppc/translate/fixedpoint-impl.c.inc |  22 +-
- target/ppc/translate/fp-impl.c.inc         |   4 +-
- target/ppc/translate/vsx-impl.c.inc        |  42 +-
- target/riscv/insn_trans/trans_rva.c.inc    |  22 +-
- target/riscv/insn_trans/trans_rvb.c.inc    |  48 +-
- target/riscv/insn_trans/trans_rvd.c.inc    |   4 +-
- target/riscv/insn_trans/trans_rvh.c.inc    |   4 +-
- target/riscv/insn_trans/trans_rvi.c.inc    | 730 ++++++++++++++++++---
- target/riscv/insn_trans/trans_rvm.c.inc    | 192 +++++-
- target/s390x/tcg/translate_vx.c.inc        |  18 +-
- tcg/aarch64/tcg-target.c.inc               |   2 +-
- tcg/arm/tcg-target.c.inc                   |  10 +-
- tcg/i386/tcg-target.c.inc                  |  12 +-
- tcg/mips/tcg-target.c.inc                  |  12 +-
- tcg/ppc/tcg-target.c.inc                   |  16 +-
- tcg/riscv/tcg-target.c.inc                 |   6 +-
- tcg/s390x/tcg-target.c.inc                 |  18 +-
- tcg/sparc/tcg-target.c.inc                 |  16 +-
- target/riscv/meson.build                   |   1 +
- target/s390x/tcg/insn-data.def             |  28 +-
- util/meson.build                           |   1 +
- 67 files changed, 2006 insertions(+), 512 deletions(-)
- create mode 100644 target/riscv/m128_helper.c
+Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ include/qemu/int128.h |  27 ++++++++
+ util/int128.c         | 147 ++++++++++++++++++++++++++++++++++++++++++
+ util/meson.build      |   1 +
+ 3 files changed, 175 insertions(+)
  create mode 100644 util/int128.c
 
+diff --git a/include/qemu/int128.h b/include/qemu/int128.h
+index b6d517aea4..2c4064256c 100644
+--- a/include/qemu/int128.h
++++ b/include/qemu/int128.h
+@@ -172,6 +172,26 @@ static inline Int128 bswap128(Int128 a)
+ #endif
+ }
+ 
++static inline Int128 int128_divu(Int128 a, Int128 b)
++{
++    return (__uint128_t)a / (__uint128_t)b;
++}
++
++static inline Int128 int128_remu(Int128 a, Int128 b)
++{
++    return (__uint128_t)a % (__uint128_t)b;
++}
++
++static inline Int128 int128_divs(Int128 a, Int128 b)
++{
++    return a / b;
++}
++
++static inline Int128 int128_rems(Int128 a, Int128 b)
++{
++    return a % b;
++}
++
+ #else /* !CONFIG_INT128 */
+ 
+ typedef struct Int128 Int128;
+@@ -379,6 +399,11 @@ static inline Int128 bswap128(Int128 a)
+     return int128_make128(bswap64(a.hi), bswap64(a.lo));
+ }
+ 
++Int128 int128_divu(Int128, Int128);
++Int128 int128_remu(Int128, Int128);
++Int128 int128_divs(Int128, Int128);
++Int128 int128_rems(Int128, Int128);
++
+ #endif /* CONFIG_INT128 */
+ 
+ static inline void bswap128s(Int128 *s)
+@@ -386,4 +411,6 @@ static inline void bswap128s(Int128 *s)
+     *s = bswap128(*s);
+ }
+ 
++#define UINT128_MAX int128_make128(~0LL, ~0LL)
++
+ #endif /* INT128_H */
+diff --git a/util/int128.c b/util/int128.c
+new file mode 100644
+index 0000000000..ed8f25fef1
+--- /dev/null
++++ b/util/int128.c
+@@ -0,0 +1,147 @@
++/*
++ * 128-bit division and remainder for compilers not supporting __int128
++ *
++ * Copyright (c) 2021 Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ * THE SOFTWARE.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/host-utils.h"
++#include "qemu/int128.h"
++
++#ifndef CONFIG_INT128
++
++/*
++ * Division and remainder algorithms for 128-bit due to Stefan Kanthak,
++ * https://skanthak.homepage.t-online.de/integer.html#udivmodti4
++ * Preconditions:
++ *     - function should never be called with v equals to 0, it has to
++ *       be dealt with beforehand
++ *     - quotien pointer must be valid
++ */
++static Int128 divrem128(Int128 u, Int128 v, Int128 *q)
++{
++    Int128 qq;
++    uint64_t hi, lo, tmp;
++    int s = clz64(v.hi);
++
++    if (s == 64) {
++        /* we have uu÷0v => let's use divu128 */
++        hi = u.hi;
++        lo = u.lo;
++        tmp = divu128(&lo, &hi, v.lo);
++        *q = int128_make128(lo, hi);
++        return int128_make128(tmp, 0);
++    } else {
++        hi = int128_gethi(int128_lshift(v, s));
++
++        if (hi > u.hi) {
++            lo = u.lo;
++            tmp = u.hi;
++            divu128(&lo, &tmp, hi);
++            lo = int128_gethi(int128_lshift(int128_make128(lo, 0), s));
++        } else { /* prevent overflow */
++            lo = u.lo;
++            tmp = u.hi - hi;
++            divu128(&lo, &tmp, hi);
++            lo = int128_gethi(int128_lshift(int128_make128(lo, 1), s));
++        }
++
++        qq = int128_make64(lo);
++
++        tmp = lo * v.hi;
++        mulu64(&lo, &hi, lo, v.lo);
++        hi += tmp;
++
++        if (hi < tmp     /* quotient * divisor >= 2**128 > dividend */
++            || hi > u.hi /* quotient * divisor > dividend */
++            || (hi == u.hi && lo > u.lo)) {
++            qq.lo -= 1;
++            mulu64(&lo, &hi, qq.lo, v.lo);
++            hi += qq.lo * v.hi;
++        }
++
++        *q = qq;
++        u.hi -= hi + (u.lo < lo);
++        u.lo -= lo;
++        return u;
++    }
++}
++
++Int128 int128_divu(Int128 a, Int128 b)
++{
++    Int128 q;
++    divrem128(a, b, &q);
++    return q;
++}
++
++Int128 int128_remu(Int128 a, Int128 b)
++{
++    Int128 q;
++    return divrem128(a, b, &q);
++}
++
++Int128 int128_divs(Int128 a, Int128 b)
++{
++    Int128 q;
++    bool sgna = !int128_nonneg(a);
++    bool sgnb = !int128_nonneg(b);
++
++    if (sgna) {
++        a = int128_neg(a);
++    }
++
++    if (sgnb) {
++        b = int128_neg(b);
++    }
++
++    divrem128(a, b, &q);
++
++    if (sgna != sgnb) {
++        q = int128_neg(q);
++    }
++
++    return q;
++}
++
++Int128 int128_rems(Int128 a, Int128 b)
++{
++    Int128 q, r;
++    bool sgna = !int128_nonneg(a);
++    bool sgnb = !int128_nonneg(b);
++
++    if (sgna) {
++        a = int128_neg(a);
++    }
++
++    if (sgnb) {
++        b = int128_neg(b);
++    }
++
++    r = divrem128(a, b, &q);
++
++    if (sgna) {
++        r = int128_neg(r);
++    }
++
++    return r;
++}
++
++#endif
+diff --git a/util/meson.build b/util/meson.build
+index 05b593055a..e676b2f6c6 100644
+--- a/util/meson.build
++++ b/util/meson.build
+@@ -48,6 +48,7 @@ util_ss.add(files('transactions.c'))
+ util_ss.add(when: 'CONFIG_POSIX', if_true: files('drm.c'))
+ util_ss.add(files('guest-random.c'))
+ util_ss.add(files('yank.c'))
++util_ss.add(files('int128.c'))
+ 
+ if have_user
+   util_ss.add(files('selfmap.c'))
 -- 
 2.34.1
 
