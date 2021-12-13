@@ -1,55 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mwdAK-0003OI-H6
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Dec 2021 23:42:20 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54464)
+	id 1mwdXS-0002O3-Kx
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 00:06:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59696)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mwdAJ-0003M7-Dl
- for qemu-riscv@nongnu.org; Sun, 12 Dec 2021 23:42:19 -0500
-Received: from [2a00:1450:4864:20::335] (port=42506
+ id 1mwdXR-0002Lj-MU
+ for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 00:06:13 -0500
+Received: from [2a00:1450:4864:20::335] (port=39735
  helo=mail-wm1-x335.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mwdAC-0001ny-Lr
- for qemu-riscv@nongnu.org; Sun, 12 Dec 2021 23:42:19 -0500
+ id 1mwdXQ-0005D8-5A
+ for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 00:06:13 -0500
 Received: by mail-wm1-x335.google.com with SMTP id
- d72-20020a1c1d4b000000b00331140f3dc8so10829405wmd.1
- for <qemu-riscv@nongnu.org>; Sun, 12 Dec 2021 20:42:12 -0800 (PST)
+ n33-20020a05600c502100b0032fb900951eso13187008wmr.4
+ for <qemu-riscv@nongnu.org>; Sun, 12 Dec 2021 21:06:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/xqCJCFenZgSfOUl/R4/U5gUMa3ys+XwRbdFxwDxzVI=;
- b=v+4+5tDc+1I7MKA8DsmriXHI5GHQNcgvZkDy3QRlLzvN8Xyt2LOhd0jeygmuzoP35o
- AqWE+PkcZtfGODyckJ71I+X6J/y04K9zdKlkxzF1mw50sTuCW2gnqsn3IdfXAjv7QmwN
- CL9BT8dfmdIXMZoZjbenzI4xFEZTlyNM/2oyktf1Y12NybkdIGxXCOHTachQYkggQe/V
- +3spzsQBs/5d4iFGxfiw3NKxBIrPDAgYk1w9AzDy7BPXH2/ZREk5JFkr0H15t3Q5Exix
- jNMLcGdTwbLeRS4szddE1C0v+75SGngsCoOAbKv3co1AiZ7tAjT9E0D6d2FekoNC0LFd
- aCWg==
+ :cc; bh=CXDbZ72EhvPIsbyJ5EezoEwlOzUgft6D4XqjM/k4Tos=;
+ b=KSCMfIXUndmM5XtTu7qvshpTyYQ+K4SvpaqDdOqNi2TfOfuEoxNE5PUoIRlE/UnWvM
+ LyKmhmwQuCXgl+JQ2b8cHpfzGr1BcLgVQL3LFYREOKqN/rh82VjT4GGcUUyT39OuWQju
+ d8O5AaXIEvGizGSfZqVgbKd+oYfw+SYFwVN+7jOlC21RhcG5zWKOlqeu+9/GedtmQNvn
+ K2qveAB13BUIQBlvO8gK/KbGiTEyKkeCWsBsmkksGh+PAwGP+exdnaglc16o9g3ce50M
+ cQegVUDBeeqtG7toIbbN8qEUL9phsyYYnB/p9fWmhS6GTTVQs7C1GwruxCRCsA2vn+8m
+ YhvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/xqCJCFenZgSfOUl/R4/U5gUMa3ys+XwRbdFxwDxzVI=;
- b=t+ZZGNLgEcTxFw7asEyom8+8dyDo3cwoEGh0Qdc1uNvaQfj5vNlpCQnUriudAMCEE5
- hl4Z45X4xuXyF41lWLWKbv5davmvVWGxarotDJcv7xG9F7igDl/xTxGvzcS6eUgGKXat
- wpxg//12se9r1k+02sZSf6urPVkeViIM5sA3YA3zbWQOkDVvOelRVkeaC9R9RIW1YiyQ
- +aorDg+V0Yw6FlJVKTNOOYvDbMKOKV1V0mMiGmhcXHjcRs9CI/VrgVY3r6cNdeRJEjNS
- 7pIl1b36MBQn7qUj4yfmgVpUPE8y7QLvGPRmvjY4iYjEBEI+QBNN6yQP2wx1Uy16qWiZ
- YswA==
-X-Gm-Message-State: AOAM531dM2aKz8JQzRgR/T+GpOEZO2KTsCBL+CBL7sx9mJPVN4F1R6Bv
- OX3R/LVi4J+czaU5ghc7htFl4Xf/C0Bio5kvyhJScg==
-X-Google-Smtp-Source: ABdhPJzorqtXGn5jowXDbWdLBNKLpCk/IlBNYlbHqTEuTlQaxIoYUzbl/nmKUQFFbSTBgGYotftzdwkI6SaDQ5MVD+U=
-X-Received: by 2002:a7b:c017:: with SMTP id c23mr34740152wmb.137.1639370531176; 
- Sun, 12 Dec 2021 20:42:11 -0800 (PST)
+ bh=CXDbZ72EhvPIsbyJ5EezoEwlOzUgft6D4XqjM/k4Tos=;
+ b=tSx0d2pLZ2NDYUefOmLr89irR9Sliph+SSUmv4HTw28fISwGNrvmHg2ypQHnjT15Uc
+ 3f5KRtLTRy8EV+lmsdsdsb012cMm7IGtJM0XQpIX+Z+KvkfGkNw1Zyc1MMKbZBTTknRy
+ o3QxKVSq8/ASmky+tYl8fNajglFfLmKBf7dYu2yNX0uwD9Ts2VhR8xqVMQRo6soIWOP5
+ 4w2g0nLDG0o2n364kFgu92BvDF8AKvqjMbrlilONrgG3HuwvRS2v1DzuHO4sYva4hMJG
+ u+jvTG1Z13k69kLGN0SI83sNG5CUN11M+axHYHSHaRVQdSvrsYJdvfHlvoJQUpiZSsbJ
+ nZgw==
+X-Gm-Message-State: AOAM530Unw8PEe/Rl7qY/MLdXquIN0IOAQGdNSDH1Auk40T2o7RjCpPn
+ LhcoLIwLeVufy53hYDrUqkHJE2/QZnXuCeqija+2Pw==
+X-Google-Smtp-Source: ABdhPJzffgWI5BpJ72eaC/aE9on/1jFRzBqZ0PO6HX1zF1PGpy7gZGBrO+0xBSdDIZvjqofZjzR0DSV1/EJw8UQpHro=
+X-Received: by 2002:a7b:c256:: with SMTP id b22mr34822265wmj.176.1639371970299; 
+ Sun, 12 Dec 2021 21:06:10 -0800 (PST)
 MIME-Version: 1.0
 References: <20211210100732.1080-1-jiangyifei@huawei.com>
- <20211210100732.1080-13-jiangyifei@huawei.com>
-In-Reply-To: <20211210100732.1080-13-jiangyifei@huawei.com>
+ <20211210100732.1080-11-jiangyifei@huawei.com>
+In-Reply-To: <20211210100732.1080-11-jiangyifei@huawei.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Mon, 13 Dec 2021 10:12:00 +0530
-Message-ID: <CAAhSdy34UorkvYVi7vUUifBh_TRvrQZW4c7uy1nQrj0UNMKGbg@mail.gmail.com>
-Subject: Re: [PATCH v2 12/12] target/riscv: Support virtual time context
- synchronization
+Date: Mon, 13 Dec 2021 10:35:59 +0530
+Message-ID: <CAAhSdy11yd+f6OZZxjX9mWxkVH4AC7Kz5Vp+RPUz6cCam9GvNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 10/12] target/riscv: Add kvm_riscv_get/put_regs_timer
 To: Yifei Jiang <jiangyifei@huawei.com>
 Cc: QEMU Developers <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -83,92 +82,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2021 04:42:19 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 05:06:13 -0000
 
-On Fri, Dec 10, 2021 at 3:38 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
+On Fri, Dec 10, 2021 at 3:37 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
 >
-> Add virtual time context description to vmstate_kvmtimer. After cpu being
-> loaded, virtual time context is updated to KVM.
+> Add kvm_riscv_get/put_regs_timer to synchronize virtual time context
+> from KVM.
+>
+> To set register of RISCV_TIMER_REG(state) will occur a error from KVM
+> on kvm_timer_state == 0. It's better to adapt in KVM, but it doesn't matter
+> that adaping in QEMU.
 >
 > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 > Signed-off-by: Mingwang Li <limingwang@huawei.com>
 > ---
->  target/riscv/machine.c | 37 +++++++++++++++++++++++++++++++++++--
->  1 file changed, 35 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.h |  7 +++++
+>  target/riscv/kvm.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 79 insertions(+)
 >
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index ad8248ebfd..f46443c316 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -164,10 +164,42 @@ static const VMStateDescription vmstate_pointermasking = {
->      }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e7dba35acb..c892a2c8b7 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -259,6 +259,13 @@ struct CPURISCVState {
+>
+>      hwaddr kernel_addr;
+>      hwaddr fdt_addr;
+> +
+> +    /* kvm timer */
+> +    bool kvm_timer_dirty;
+> +    uint64_t kvm_timer_time;
+> +    uint64_t kvm_timer_compare;
+> +    uint64_t kvm_timer_state;
+> +    uint64_t kvm_timer_frequency;
 >  };
 >
-> +static bool kvmtimer_needed(void *opaque)
+>  OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 171a32adf9..802c076b22 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -64,6 +64,9 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
+>  #define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
+>                   KVM_REG_RISCV_CSR_REG(name))
+>
+> +#define RISCV_TIMER_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_TIMER, \
+> +                 KVM_REG_RISCV_TIMER_REG(name))
+> +
+>  #define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
+>
+>  #define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
+> @@ -235,6 +238,75 @@ static int kvm_riscv_put_regs_fp(CPUState *cs)
+>      return ret;
+>  }
+>
+> +static void kvm_riscv_get_regs_timer(CPUState *cs)
 > +{
-> +    return kvm_enabled();
+> +    int ret;
+> +    uint64_t reg;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    if (env->kvm_timer_dirty) {
+> +        return;
+> +    }
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_time = reg;
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_compare = reg;
+> +
+> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +    env->kvm_timer_state = reg;
+
+Please read the timer frequency here.
+
+> +
+> +    env->kvm_timer_dirty = true;
 > +}
 > +
-> +
-
-Remove extra newline from here.
-
-> +static const VMStateDescription vmstate_kvmtimer = {
-> +    .name = "cpu/kvmtimer",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = kvmtimer_needed,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
-> +        VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
-> +        VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
-> +
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static int cpu_post_load(void *opaque, int version_id)
+> +static void kvm_riscv_put_regs_timer(CPUState *cs)
 > +{
-> +    RISCVCPU *cpu = opaque;
-> +    CPURISCVState *env = &cpu->env;
+> +    int ret;
+> +    uint64_t reg;
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
 > +
-> +    if (kvm_enabled()) {
-> +        env->kvm_timer_dirty = true;
+> +    if (!env->kvm_timer_dirty) {
+> +        return;
 > +    }
-> +    return 0;
-> +}
-> +
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
-> -    .version_id = 3,
-> -    .minimum_version_id = 3,
-> +    .version_id = 4,
-> +    .minimum_version_id = 4,
-> +    .post_load = cpu_post_load,
->      .fields = (VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
->          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
-> @@ -218,6 +250,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          &vmstate_hyper,
->          &vmstate_vector,
->          &vmstate_pointermasking,
-> +        &vmstate_kvmtimer,
->          NULL
->      }
->  };
-> --
-> 2.19.1
->
->
-> --
-> kvm-riscv mailing list
-> kvm-riscv@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/kvm-riscv
 
-Otherwise, it looks good to me.
+Over here, we should get the timer frequency and abort() with an
+error message if it does not match env->kvm_timer_frequency
 
-Reviewed-by: Anup Patel <anup.patel@wdc.com>
+For now, migration will not work between Hosts with different
+timer frequency.
 
 Regards,
 Anup
+
+> +
+> +    reg = env->kvm_timer_time;
+> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +
+> +    reg = env->kvm_timer_compare;
+> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
+> +    if (ret) {
+> +        abort();
+> +    }
+> +
+> +    /*
+> +     * To set register of RISCV_TIMER_REG(state) will occur a error from KVM
+> +     * on env->kvm_timer_state == 0, It's better to adapt in KVM, but it
+> +     * doesn't matter that adaping in QEMU now.
+> +     * TODO If KVM changes, adapt here.
+> +     */
+> +    if (env->kvm_timer_state) {
+> +        reg = env->kvm_timer_state;
+> +        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
+> +        if (ret) {
+> +            abort();
+> +        }
+> +    }
+> +
+> +    env->kvm_timer_dirty = false;
+> +}
+>
+>  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+>      KVM_CAP_LAST_INFO
+> --
+> 2.19.1
+>
 
