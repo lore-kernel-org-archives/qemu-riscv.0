@@ -1,82 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mwn9G-0001fO-Nw
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 10:21:54 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58424)
+	id 1mwoLg-0002yS-9W
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 11:38:48 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51074)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mwn9F-0001cQ-7Q
- for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 10:21:53 -0500
-Received: from [2607:f8b0:4864:20::62a] (port=36419
- helo=mail-pl1-x62a.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mwn9D-0007Se-PT
- for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 10:21:52 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id u11so11399044plf.3
- for <qemu-riscv@nongnu.org>; Mon, 13 Dec 2021 07:21:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=AGc1PquQXh0+9331OAt9/t/pIqsDq0eIaBHESSHpnxA=;
- b=HzoQt+uthV6vbcJBqrKhH8j/XHs+GtMpyP7UM24kBENT+NfcMcD8q73DEayMJFAfXW
- T/H0duDe+hRFBkSje431MCOqjpnoeAzMinRBa/7+ZVIIa4YNDlfHT4AuuVcnptlaHPPX
- dj/pZL1t99ystjuI/QFfjp+cSMxA6ptDeiX2+id4PhthCtDq7alneV5MFNn8z3VgwScN
- dEgYKBBD5L40M72WwasSMttpH+1qv3ghydG+CuGiP0596hH956hilMQFSiV6qYyH8Xdk
- 2vzSOGEN/TN2gvnlk/Dw+P2/zeG1czRpibulnt88oawnU1fUxdO8ZagCubTCFdoUrq+y
- iqPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=AGc1PquQXh0+9331OAt9/t/pIqsDq0eIaBHESSHpnxA=;
- b=TqV6ZtGr5TWLVHPtypKQSQWchOylawzNxQNMvuL28NSy0mYedwr1TAd7zidOK1ttq4
- xPwVmPqICVz55dzZHhy/zVCajIFbWeDlzaU2PoM/AVCBGqiM23edNsL4crlnAgXfSR7a
- 5mSMnQ5lsD4TiPoPmoZ8f98X5pVWYW8KvAiVQ9Pcy1etG7iitEzb7SmM4MEx/+vbJ4DB
- iqouownBD02OwO79o/lTuaGSAXkpOjsrrWrr8x0WQp4xMLdUwaGH8pVHCU+DlE1wuQAF
- NmheDVz1W1xWm5QYmrWkjqEHrHYCESG8LeSpgy8cc/x9jcwnYeW8ixYywcT6zoFDd3IM
- /lbw==
-X-Gm-Message-State: AOAM530K3eLPR8yM2o/c6/3WtZA5TxbfZOPwoT1PsYbKgjpUxNzWFYKn
- XkV2mbvdZhdIbbZl1PzPhl5vZQ==
-X-Google-Smtp-Source: ABdhPJxGt30nuzSBLZfqYPjbexcn085QFp2N6BpQabQxMRsjKxAHXZAfch8zfO4BJ3JlY+kcXaTqIg==
-X-Received: by 2002:a17:90b:4c8c:: with SMTP id
- my12mr44483778pjb.157.1639408910304; 
- Mon, 13 Dec 2021 07:21:50 -0800 (PST)
-Received: from [192.168.1.11] (174-21-75-75.tukw.qwest.net. [174.21.75.75])
- by smtp.gmail.com with ESMTPSA id t191sm5315472pgd.3.2021.12.13.07.21.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Dec 2021 07:21:49 -0800 (PST)
-Subject: Re: [PATCH v2 12/12] target/riscv: Support virtual time context
- synchronization
-To: Yifei Jiang <jiangyifei@huawei.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: kvm-riscv@lists.infradead.org, kvm@vger.kernel.org,
- libvir-list@redhat.com, anup.patel@wdc.com, palmer@dabbelt.com,
- Alistair.Francis@wdc.com, bin.meng@windriver.com, fanliang@huawei.com,
- wu.wubin@huawei.com, wanghaibin.wang@huawei.com, wanbo13@huawei.com,
- Mingwang Li <limingwang@huawei.com>
-References: <20211210100732.1080-1-jiangyifei@huawei.com>
- <20211210100732.1080-13-jiangyifei@huawei.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <10d2d911-e975-64b3-8ab6-e950c5064b9e@linaro.org>
-Date: Mon, 13 Dec 2021 07:21:48 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mwoLe-0002xa-IG; Mon, 13 Dec 2021 11:38:46 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:46304)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1mwoLc-0003Xn-Gi; Mon, 13 Dec 2021 11:38:46 -0500
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 4D8D94034D;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1639413520;
+ bh=VEu66ZfC7VzbkVKvz68XN6w+dvnIWvN/uEOLlhcRHlg=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=e1cDV1OMs1Y5wtUAVOO3jwz3bx4h7zoMZydtrgfuIqgOJ8JVklRZMdq/d2NIwfgFy
+ gBogMrDgOa+N5XQ0d1+dGQL7QLy8AmSNq7Vm8Jr51yiunVrg1PwiMM1h4Av8MT7vT3
+ t81TfiT/LVrWaEiifDCffrasFr7jNH6Aw9gGIIVrk+hRFdYNFb9/fk6z4Hl1PP0awC
+ g1r3soz2L0N/PBeVLqTi+nFbvGnI3jV05Q5hja4V7ZwG4ZqNuOWofkkFOI2e33XOWY
+ rhYHIX0EgGeMVKzvLJTq9eo/uA17432B46lRMlrGbxJ5WNHRYpnZ1Nr82y17SZ3jb9
+ ZP5+cHIvv1g6g==
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhost.u-ga.fr (Postfix) with ESMTP id 3889E6006B;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
+Received: from palmier.tima.u-ga.fr (35.201.90.79.rev.sfr.net [79.90.201.35])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 086E014005C;
+ Mon, 13 Dec 2021 17:38:40 +0100 (CET)
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, richard.henderson@linaro.org,
+ bin.meng@windriver.com, philmd@redhat.com, palmer@dabbelt.com,
+ fabien.portas@grenoble-inp.org,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v7 04/18] target/riscv: additional macros to check instruction
+ support
+Date: Mon, 13 Dec 2021 17:38:20 +0100
+Message-Id: <20211213163834.170504-5-frederic.petrot@univ-grenoble-alpes.fr>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
 MIME-Version: 1.0
-In-Reply-To: <20211210100732.1080-13-jiangyifei@huawei.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62a
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
-X-Spam_score_int: -53
-X-Spam_score: -5.4
-X-Spam_bar: -----
-X-Spam_report: (-5.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.093,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (42)
+X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -90,53 +78,55 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2021 15:21:53 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 16:38:47 -0000
 
-On 12/10/21 2:07 AM, Yifei Jiang via wrote:
-> +static bool kvmtimer_needed(void *opaque)
-> +{
-> +    return kvm_enabled();
-> +}
-> +
-> +
-> +static const VMStateDescription vmstate_kvmtimer = {
-> +    .name = "cpu/kvmtimer",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = kvmtimer_needed,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
-> +        VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
-> +        VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
-> +
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
-> +static int cpu_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    if (kvm_enabled()) {
-> +        env->kvm_timer_dirty = true;
-> +    }
-> +    return 0;
-> +}
+Given that the 128-bit version of the riscv spec adds new instructions, and
+that some instructions that were previously only available in 64-bit mode
+are now available for both 64-bit and 128-bit, we added new macros to check
+for the processor mode during translation.
+Although RV128 is a superset of RV64, we keep for now the RV64 only tests
+for extensions other than RVI and RVM.
 
-This post-load belongs on the vmstate_kvmtimer struct, so that you need not re-check 
-kvm_enabled().
+Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/translate.c | 20 ++++++++++++++++----
+ 1 file changed, 16 insertions(+), 4 deletions(-)
 
->   const VMStateDescription vmstate_riscv_cpu = {
->       .name = "cpu",
-> -    .version_id = 3,
-> -    .minimum_version_id = 3,
-> +    .version_id = 4,
-> +    .minimum_version_id = 4,
-> +    .post_load = cpu_post_load,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 1d57bc97b5..2718ff15a1 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -368,10 +368,22 @@ EX_SH(12)
+     }                              \
+ } while (0)
+ 
+-#define REQUIRE_64BIT(ctx) do {    \
+-    if (get_xl(ctx) < MXL_RV64) {  \
+-        return false;              \
+-    }                              \
++#define REQUIRE_64BIT(ctx) do {     \
++    if (get_xl(ctx) != MXL_RV64) {  \
++        return false;               \
++    }                               \
++} while (0)
++
++#define REQUIRE_128BIT(ctx) do {    \
++    if (get_xl(ctx) != MXL_RV128) { \
++        return false;               \
++    }                               \
++} while (0)
++
++#define REQUIRE_64_OR_128BIT(ctx) do { \
++    if (get_xl(ctx) == MXL_RV32) {     \
++        return false;                  \
++    }                                  \
+ } while (0)
+ 
+ static int ex_rvc_register(DisasContext *ctx, int reg)
+-- 
+2.34.1
 
-No need for version change.
-
-
-r~
 
