@@ -1,75 +1,86 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mwdXS-0002O3-Kx
-	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 00:06:14 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59696)
+	id 1mwn7K-0007Sg-9T
+	for mharc-qemu-riscv@gnu.org; Mon, 13 Dec 2021 10:19:54 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:57858)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mwdXR-0002Lj-MU
- for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 00:06:13 -0500
-Received: from [2a00:1450:4864:20::335] (port=39735
- helo=mail-wm1-x335.google.com)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mwn7H-0007Pn-Uy
+ for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 10:19:52 -0500
+Received: from [2607:f8b0:4864:20::102c] (port=42730
+ helo=mail-pj1-x102c.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1mwdXQ-0005D8-5A
- for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 00:06:13 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- n33-20020a05600c502100b0032fb900951eso13187008wmr.4
- for <qemu-riscv@nongnu.org>; Sun, 12 Dec 2021 21:06:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CXDbZ72EhvPIsbyJ5EezoEwlOzUgft6D4XqjM/k4Tos=;
- b=KSCMfIXUndmM5XtTu7qvshpTyYQ+K4SvpaqDdOqNi2TfOfuEoxNE5PUoIRlE/UnWvM
- LyKmhmwQuCXgl+JQ2b8cHpfzGr1BcLgVQL3LFYREOKqN/rh82VjT4GGcUUyT39OuWQju
- d8O5AaXIEvGizGSfZqVgbKd+oYfw+SYFwVN+7jOlC21RhcG5zWKOlqeu+9/GedtmQNvn
- K2qveAB13BUIQBlvO8gK/KbGiTEyKkeCWsBsmkksGh+PAwGP+exdnaglc16o9g3ce50M
- cQegVUDBeeqtG7toIbbN8qEUL9phsyYYnB/p9fWmhS6GTTVQs7C1GwruxCRCsA2vn+8m
- YhvQ==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1mwn7D-00077Y-UE
+ for qemu-riscv@nongnu.org; Mon, 13 Dec 2021 10:19:50 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ fv9-20020a17090b0e8900b001a6a5ab1392so13619274pjb.1
+ for <qemu-riscv@nongnu.org>; Mon, 13 Dec 2021 07:19:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=wRQAdwlSSg+bW7hgiu0nEjyCka8fgmrwoXgoQdwAwg8=;
+ b=Ma7t3l5fQrrhWhCF88CDY8aSKMwrsIT2PFUDhbJrSkkF75g91uGWjG9Zxe9VMgfttm
+ w7lnEVeTmbF4fmyDP5ZlWJVaqWqxuo9jPJ9Q2nU1DKOciN0Idmsd0knN2G6acDyhucn4
+ X5lhVsRs1HdLbXH21xDUBMMpQsC3gJ02ef0uha/mcucMYtkTOE7ZsHey0SNQhhltEBpZ
+ khxTQHEh7RaLEGpObxPH9eHAHllyrcsZ6Jk5KDjN4BVCfIHDAs71B7ZliiLlzhsSZ3VB
+ IvuQ96b3ScOQQYi6YqzYgN2826dx7xvq5x0ZsV+YU84vou0Zi602RlrsF5DCsZ1GV1d/
+ IyQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=CXDbZ72EhvPIsbyJ5EezoEwlOzUgft6D4XqjM/k4Tos=;
- b=tSx0d2pLZ2NDYUefOmLr89irR9Sliph+SSUmv4HTw28fISwGNrvmHg2ypQHnjT15Uc
- 3f5KRtLTRy8EV+lmsdsdsb012cMm7IGtJM0XQpIX+Z+KvkfGkNw1Zyc1MMKbZBTTknRy
- o3QxKVSq8/ASmky+tYl8fNajglFfLmKBf7dYu2yNX0uwD9Ts2VhR8xqVMQRo6soIWOP5
- 4w2g0nLDG0o2n364kFgu92BvDF8AKvqjMbrlilONrgG3HuwvRS2v1DzuHO4sYva4hMJG
- u+jvTG1Z13k69kLGN0SI83sNG5CUN11M+axHYHSHaRVQdSvrsYJdvfHlvoJQUpiZSsbJ
- nZgw==
-X-Gm-Message-State: AOAM530Unw8PEe/Rl7qY/MLdXquIN0IOAQGdNSDH1Auk40T2o7RjCpPn
- LhcoLIwLeVufy53hYDrUqkHJE2/QZnXuCeqija+2Pw==
-X-Google-Smtp-Source: ABdhPJzffgWI5BpJ72eaC/aE9on/1jFRzBqZ0PO6HX1zF1PGpy7gZGBrO+0xBSdDIZvjqofZjzR0DSV1/EJw8UQpHro=
-X-Received: by 2002:a7b:c256:: with SMTP id b22mr34822265wmj.176.1639371970299; 
- Sun, 12 Dec 2021 21:06:10 -0800 (PST)
-MIME-Version: 1.0
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=wRQAdwlSSg+bW7hgiu0nEjyCka8fgmrwoXgoQdwAwg8=;
+ b=V+7vYmNdXKGB8oZPQaibL6AKD8Dl9BC6EfBDUaXIk/XkAUqYzKTmCc13kulCyW81A9
+ mJrUk11Ek5RpQmVgvs/6czXyyAitZpTH4FfU0up3dNx/o9ISZ8QuQ5Gz/WzkRWYkZlQl
+ KJbue+neDTwdPqJIP0jB1UiiMfZQP4dpw7glMhrYhNqJaur9CQR4D0bhkF+gwKWaQ/wd
+ w5GFlNwZQiztBeYOrWUq0lvUlRZeF0uZJ1mDZ3ysFcaRtG1d2+ER3VsKGXWBX1BNwgVT
+ B11qacdao+9LajhA1OFWQicSVpZiXg1199+qnZMSdFrTWMNh5STQr4lxEimTy7GPUUOq
+ 5lTg==
+X-Gm-Message-State: AOAM531XsAtzYTcyRKzWOiW7zN1l1TTHQjlNFTjXO+argyZ3UZFey2FB
+ cb3XpUl09Lc2sAYpZ+ucDg8vXg==
+X-Google-Smtp-Source: ABdhPJwbaG79dJScJWvcC0ogdKFfMMGqBdfnrx/CE72uqmWs8soTZH0BMziycvnXeMZf8h+kNZjtKg==
+X-Received: by 2002:a17:902:7284:b0:142:728b:46a6 with SMTP id
+ d4-20020a170902728400b00142728b46a6mr96313949pll.45.1639408786350; 
+ Mon, 13 Dec 2021 07:19:46 -0800 (PST)
+Received: from [192.168.1.11] (174-21-75-75.tukw.qwest.net. [174.21.75.75])
+ by smtp.gmail.com with ESMTPSA id e29sm10643082pge.17.2021.12.13.07.19.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Dec 2021 07:19:45 -0800 (PST)
+Subject: Re: [PATCH v2 10/12] target/riscv: Add kvm_riscv_get/put_regs_timer
+To: Anup Patel <anup@brainfault.org>, Yifei Jiang <jiangyifei@huawei.com>
+Cc: Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Mingwang Li <limingwang@huawei.com>, KVM General <kvm@vger.kernel.org>,
+ libvir-list@redhat.com, Anup Patel <anup.patel@wdc.com>,
+ QEMU Developers <qemu-devel@nongnu.org>, wanbo13@huawei.com,
+ Palmer Dabbelt <palmer@dabbelt.com>, kvm-riscv@lists.infradead.org,
+ wanghaibin.wang@huawei.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ fanliang@huawei.com, "Wubin (H)" <wu.wubin@huawei.com>
 References: <20211210100732.1080-1-jiangyifei@huawei.com>
  <20211210100732.1080-11-jiangyifei@huawei.com>
-In-Reply-To: <20211210100732.1080-11-jiangyifei@huawei.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Mon, 13 Dec 2021 10:35:59 +0530
-Message-ID: <CAAhSdy11yd+f6OZZxjX9mWxkVH4AC7Kz5Vp+RPUz6cCam9GvNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 10/12] target/riscv: Add kvm_riscv_get/put_regs_timer
-To: Yifei Jiang <jiangyifei@huawei.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- kvm-riscv@lists.infradead.org, KVM General <kvm@vger.kernel.org>,
- libvir-list@redhat.com, 
- Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- fanliang@huawei.com, 
- "Wubin (H)" <wu.wubin@huawei.com>, wanghaibin.wang@huawei.com,
- wanbo13@huawei.com, Mingwang Li <limingwang@huawei.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::335
+ <CAAhSdy11yd+f6OZZxjX9mWxkVH4AC7Kz5Vp+RPUz6cCam9GvNQ@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <dec3147b-24bc-7e48-680b-a7423b0640f9@linaro.org>
+Date: Mon, 13 Dec 2021 07:19:43 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+MIME-Version: 1.0
+In-Reply-To: <CAAhSdy11yd+f6OZZxjX9mWxkVH4AC7Kz5Vp+RPUz6cCam9GvNQ@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102c
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::335;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x335.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102c.google.com
+X-Spam_score_int: -53
+X-Spam_score: -5.4
+X-Spam_bar: -----
+X-Spam_report: (-5.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-4.093,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,146 +93,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Dec 2021 05:06:13 -0000
+X-List-Received-Date: Mon, 13 Dec 2021 15:19:52 -0000
 
-On Fri, Dec 10, 2021 at 3:37 PM Yifei Jiang <jiangyifei@huawei.com> wrote:
->
-> Add kvm_riscv_get/put_regs_timer to synchronize virtual time context
-> from KVM.
->
-> To set register of RISCV_TIMER_REG(state) will occur a error from KVM
-> on kvm_timer_state == 0. It's better to adapt in KVM, but it doesn't matter
-> that adaping in QEMU.
->
-> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
-> Signed-off-by: Mingwang Li <limingwang@huawei.com>
-> ---
->  target/riscv/cpu.h |  7 +++++
->  target/riscv/kvm.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 79 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index e7dba35acb..c892a2c8b7 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -259,6 +259,13 @@ struct CPURISCVState {
->
->      hwaddr kernel_addr;
->      hwaddr fdt_addr;
-> +
-> +    /* kvm timer */
-> +    bool kvm_timer_dirty;
-> +    uint64_t kvm_timer_time;
-> +    uint64_t kvm_timer_compare;
-> +    uint64_t kvm_timer_state;
-> +    uint64_t kvm_timer_frequency;
->  };
->
->  OBJECT_DECLARE_TYPE(RISCVCPU, RISCVCPUClass,
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 171a32adf9..802c076b22 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -64,6 +64,9 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
->  #define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
->                   KVM_REG_RISCV_CSR_REG(name))
->
-> +#define RISCV_TIMER_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_TIMER, \
-> +                 KVM_REG_RISCV_TIMER_REG(name))
-> +
->  #define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
->
->  #define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
-> @@ -235,6 +238,75 @@ static int kvm_riscv_put_regs_fp(CPUState *cs)
->      return ret;
->  }
->
-> +static void kvm_riscv_get_regs_timer(CPUState *cs)
-> +{
-> +    int ret;
-> +    uint64_t reg;
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
-> +    if (env->kvm_timer_dirty) {
-> +        return;
-> +    }
-> +
-> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
-> +    if (ret) {
-> +        abort();
-> +    }
-> +    env->kvm_timer_time = reg;
-> +
-> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
-> +    if (ret) {
-> +        abort();
-> +    }
-> +    env->kvm_timer_compare = reg;
-> +
-> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
-> +    if (ret) {
-> +        abort();
-> +    }
-> +    env->kvm_timer_state = reg;
+On 12/12/21 9:05 PM, Anup Patel wrote:
+>> +    ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
+>> +    if (ret) {
+>> +        abort();
+>> +    }
+>> +    env->kvm_timer_state = reg;
+> 
+> Please read the timer frequency here.
 
-Please read the timer frequency here.
+Yep.
 
-> +
-> +    env->kvm_timer_dirty = true;
-> +}
-> +
-> +static void kvm_riscv_put_regs_timer(CPUState *cs)
-> +{
-> +    int ret;
-> +    uint64_t reg;
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
-> +    if (!env->kvm_timer_dirty) {
-> +        return;
-> +    }
+>> +
+>> +    env->kvm_timer_dirty = true;
+>> +}
+>> +
+>> +static void kvm_riscv_put_regs_timer(CPUState *cs)
+>> +{
+>> +    int ret;
+>> +    uint64_t reg;
+>> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+>> +
+>> +    if (!env->kvm_timer_dirty) {
+>> +        return;
+>> +    }
+> 
+> Over here, we should get the timer frequency and abort() with an
+> error message if it does not match env->kvm_timer_frequency
+> 
+> For now, migration will not work between Hosts with different
+> timer frequency.
 
-Over here, we should get the timer frequency and abort() with an
-error message if it does not match env->kvm_timer_frequency
+You shouldn't have to do this every "put", only on migration, at which point you can 
+actually signal a migration error rather than aborting directly.
 
-For now, migration will not work between Hosts with different
-timer frequency.
 
-Regards,
-Anup
-
-> +
-> +    reg = env->kvm_timer_time;
-> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, time), &reg);
-> +    if (ret) {
-> +        abort();
-> +    }
-> +
-> +    reg = env->kvm_timer_compare;
-> +    ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, compare), &reg);
-> +    if (ret) {
-> +        abort();
-> +    }
-> +
-> +    /*
-> +     * To set register of RISCV_TIMER_REG(state) will occur a error from KVM
-> +     * on env->kvm_timer_state == 0, It's better to adapt in KVM, but it
-> +     * doesn't matter that adaping in QEMU now.
-> +     * TODO If KVM changes, adapt here.
-> +     */
-> +    if (env->kvm_timer_state) {
-> +        reg = env->kvm_timer_state;
-> +        ret = kvm_set_one_reg(cs, RISCV_TIMER_REG(env, state), &reg);
-> +        if (ret) {
-> +            abort();
-> +        }
-> +    }
-> +
-> +    env->kvm_timer_dirty = false;
-> +}
->
->  const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
->      KVM_CAP_LAST_INFO
-> --
-> 2.19.1
->
+r~
 
