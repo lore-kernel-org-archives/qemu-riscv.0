@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxG8m-0002pm-Lj
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Dec 2021 17:19:20 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35288)
+	id 1mxGrZ-0003zu-89
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Dec 2021 18:05:37 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mxG8l-0002pY-Ao; Tue, 14 Dec 2021 17:19:19 -0500
-Received: from [2607:f8b0:4864:20::d2c] (port=39881
- helo=mail-io1-xd2c.google.com)
+ id 1mxGrX-0003yW-9t; Tue, 14 Dec 2021 18:05:35 -0500
+Received: from [2607:f8b0:4864:20::d33] (port=46831
+ helo=mail-io1-xd33.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mxG8j-0001CH-1i; Tue, 14 Dec 2021 17:19:18 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id c3so26881312iob.6;
- Tue, 14 Dec 2021 14:19:15 -0800 (PST)
+ id 1mxGrV-0006Rd-Hy; Tue, 14 Dec 2021 18:05:34 -0500
+Received: by mail-io1-xd33.google.com with SMTP id x6so26816107iol.13;
+ Tue, 14 Dec 2021 15:05:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jEVjzENtxHAv5iTm51KWK2yi/DGicjeKnxOZbjNNoQU=;
- b=Nm3MYCWAHSqrXtQSPd0kPEQ9F0EaDWJpfKf2MZDRKyAJg+ZxZc6Urh6lF3S9QO88b8
- mbWiB0izskBIcUaxGC7b+eqbGr41OTdKqC2SHVvzultIa9nVWlhrVyBiz+RubZh//eiG
- 0aHPnPO9Pf8X/ONpGU4K+oNQ873FgkuuI5H5yUxst71sjKrrEXb4br40wR0TLQq8Av2T
- 4vTS1t6wNMenZMyzrwHjeWb0AGa/aGpbSxkgNCpJ1t53XmMBIUJCOXZ1WK6Hrfs4K7Rx
- Z7azDeL7B7kqx/7a6tizThY2+V7pnU2HBPJlYK4p+qqZtrLEJODvS4tJJlPAYln+S9kO
- swKg==
+ :cc; bh=o+ITWRUmIHQWVBRxImwEIdNh8qETyqn/2WsI66fHIu4=;
+ b=HJfA7oW6LAbesnLp02w2ZMEV8AXinHEx0X6n+VuuldxXSGDMYJ9lgiWdTef5m06/k9
+ bH59liLT9YFMa7JHKsl3vWeeA2aboEFkdxXILY2+FpV52E5M/EtEDtn0Mi0L5tsXhNtn
+ rtQ+vuSPTjuccbEn1sNLPQUTHZA1NS5wvUaiEbdUnMIeUBRoecpcaIRE4X8caZZ8ySnz
+ yKQMa8l1d9DjB3kqe1ta/Wvk7oOU3woNSvc6TQipTuWmVzCJ8Fsa10bc+fjzaLp9zi3b
+ sRhjAAbRPGqK49SIiO9aqejUk9pRil8Fs2MCu67Cq+cbsXFjikCSBOfqpFsc86Qe1JM8
+ N5KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=jEVjzENtxHAv5iTm51KWK2yi/DGicjeKnxOZbjNNoQU=;
- b=2RNXtB/4BF0jzFe170CfPnt1NfZt6WSyMj9nnPrixwyq3E0tkJurF1pUTurAC/+Ch3
- KNxfQwhr6O9VuLJD3mnyEPrWq63U/8sGoezNBoIrZFF9tjLSREF+S9mVvIHbM9pC/iUl
- swsGvGQEVYjvG05BaceI0cP9sOOhrD6m9VrmG/vYTGZmuKIV0DnsN89RjcWPwGfBGLWe
- F5I8q3aKDovMKteQB6WHZFU2PsAr5hzTfygZoGZTocZkTR48bXBDSmTbxiK9pdMwRk1/
- LzobR72mZ66ahWMchbBIyr3GFXPAyNKnDu5mq5yVSGCW1GO5Cej8BtIg2BG+azp3TIak
- YATA==
-X-Gm-Message-State: AOAM531X/j35M/BCVWn4TGpIfc1ln3B1GBUPP4zslFXNwaSwasclTZZT
- zgXrZZHFZ3Lrrw/U+RFEBlxK0KNR8qADbMnH1no=
-X-Google-Smtp-Source: ABdhPJx/RsajC+XaAYsu7YxKnBfyP2skMhlRAkJW6rmPdacGWq06DtWjP0j9ZZuNm0bSE6pm7jz0wfmOEQ5M0akOukY=
-X-Received: by 2002:a02:854c:: with SMTP id g70mr4608031jai.756.1639520355074; 
- Tue, 14 Dec 2021 14:19:15 -0800 (PST)
+ bh=o+ITWRUmIHQWVBRxImwEIdNh8qETyqn/2WsI66fHIu4=;
+ b=75uyWARVJ7gwUdCumXX3e6c+3GH+96PmfJHCV/yvLH7vPjZy9OCbFzJt9KX14XOj51
+ RuJJRrerWB2sVQSBKPcz7LDQBSr/JIHs389NdMe/Cdn9ILbxOIwYXn4hXYZyRXvCKLwo
+ JqJ2W28aIzlDQDA7R7b8JsaLkS3AurBpXTrWDeVU44WqZFf9D1Du5DxinsXqX3j8ZyKl
+ 7iiZNfabjY1FmKRA9Y3OkE6uAgPBqziQeUCW4PVD3jRYZk6d8s6LWgRfE1KgQxZ1goAv
+ Mn0Ev2diWxgn7EEG2ysvsxB3J7GHvOoi7gJ1XMUGo7NaVUO3ief/hQl3oKSEbqWa+AuQ
+ CNpg==
+X-Gm-Message-State: AOAM530Dbj6cMh/zM9RUX7WFtxo3UzvRewoTOLUhPu+dpbMtjwD7Cvtn
+ JZvIpkyX6+EOjoXl0LM4EUZ2Ij/5z2+Xv8RTnOQ=
+X-Google-Smtp-Source: ABdhPJxeB/G5R2aLbzwglPWe7iRb/srbcwhkfOpfML6VnCA2BXFJkc96b9kGQeqr3NHhpP66RGFi58oCPOZsLDjXwUo=
+X-Received: by 2002:a05:6638:6a8:: with SMTP id
+ d8mr4347912jad.672.1639523131571; 
+ Tue, 14 Dec 2021 15:05:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20211128135255.22089-1-liweiwei@iscas.ac.cn>
- <20211128135255.22089-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20211128135255.22089-2-liweiwei@iscas.ac.cn>
+References: <20211210074329.5775-1-frank.chang@sifive.com>
+In-Reply-To: <20211210074329.5775-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 15 Dec 2021 08:18:48 +1000
-Message-ID: <CAKmqyKONSekj-WQ_HegL+JesGrPD=KRQnFTtW7y=ks4SKQMaow@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/3] target/riscv: add support for svnapot extension
-To: liweiwei <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, lazyparser@gmail.com
+Date: Wed, 15 Dec 2021 09:05:05 +1000
+Message-ID: <CAKmqyKN5VFD9aaTTAQA15c-0yjKvk9-Ekpo9M8Fz_PWMv8WR2Q@mail.gmail.com>
+Subject: Re: [PATCH v6 0/8] target/riscv: support Zfh, Zfhmin extension v0.1
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -76,93 +73,87 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2021 22:19:19 -0000
+X-List-Received-Date: Tue, 14 Dec 2021 23:05:35 -0000
 
-On Sun, Nov 28, 2021 at 11:54 PM liweiwei <liweiwei@iscas.ac.cn> wrote:
+On Fri, Dec 10, 2021 at 5:44 PM <frank.chang@sifive.com> wrote:
 >
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Zfh - Half width floating point
+> Zfhmin - Subset of half width floating point
+>
+> Zfh, Zfhmin v0.1 is now in public review period and is required by
+> RVV extension:
+> https://groups.google.com/a/groups.riscv.org/g/isa-dev/c/63gDCinXTwE/m/871Wm9XIBQAJ
+>
+> Zfh, Zfhmin can be enabled with -cpu option: Zfh=true and Zfhmin=true
+> respectively.
+>
+> The port is available at:
+> https://github.com/sifive/qemu/tree/zfh-upstream-v6
+>
+> Note: This patchset depends on another patchset listed in Based-on
+>       section below so it is not able to be built unless the patchset
+>       is applied.
+>
+> Changelog:
+>
+> v6:
+>   * Rebase on riscv-to-apply.next.
+>
+> v5:
+>   * Rebase on riscv-to-apply.next.
+>
+> v4:
+>   * Spilt Zfh, Zfhmin cpu properties related changes into individual
+>     patches.
+>
+> v3:
+>   * Use the renamed softfloat min/max APIs: *_minimum_number()
+>     and *_maximum_number().
+>   * Pick softfloat min/max APIs based on CPU privilege spec version.
+>   * Add braces for if statements in REQUIRE_ZFH() and
+>     REQUIRE_ZFH_OR_ZFHMIN().
+>   * Rearrange the positions of Zfh and Zfhmin cpu properties.
+>
+> v2:
+>   * Use {get,dest}_gpr APIs.
+>   * Add Zfhmin extension.
+>
+> Based-on: <20211021160847.2748577-1-frank.chang@sifive.com>
+>
+> Frank Chang (3):
+>   target/riscv: zfh: add Zfh cpu property
+>   target/riscv: zfh: implement zfhmin extension
+>   target/riscv: zfh: add Zfhmin cpu property
+>
+> Kito Cheng (5):
+>   target/riscv: zfh: half-precision load and store
+>   target/riscv: zfh: half-precision computational
+>   target/riscv: zfh: half-precision convert and move
+>   target/riscv: zfh: half-precision floating-point compare
+>   target/riscv: zfh: half-precision floating-point classify
+>
+>  target/riscv/cpu.c                        |   2 +
+>  target/riscv/cpu.h                        |   2 +
+>  target/riscv/fpu_helper.c                 | 180 ++++++++
+>  target/riscv/helper.h                     |  29 ++
+>  target/riscv/insn32.decode                |  38 ++
+>  target/riscv/insn_trans/trans_rvzfh.c.inc | 537 ++++++++++++++++++++++
+>  target/riscv/internals.h                  |  16 +
+>  target/riscv/translate.c                  |  20 +
+>  8 files changed, 824 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_rvzfh.c.inc
 
-Can you add a commit message that describes what you are changing?
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
-> Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
-> ---
->  target/riscv/cpu_bits.h   |  1 +
->  target/riscv/cpu_helper.c | 18 ++++++++++++------
->  2 files changed, 13 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 9913fa9f77..70391424b0 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -473,6 +473,7 @@ typedef enum {
->  #define PTE_A               0x040 /* Accessed */
->  #define PTE_D               0x080 /* Dirty */
->  #define PTE_SOFT            0x300 /* Reserved for Software */
-> +#define PTE_N               0x8000000000000000
->
->  /* Page table PPN shift amount */
->  #define PTE_PPN_SHIFT       10
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9eeed38c7e..e68db3e119 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -588,7 +588,7 @@ restart:
->              return TRANSLATE_FAIL;
->          }
->
-> -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-> +        hwaddr ppn = (pte & ~(target_ulong)PTE_N) >> PTE_PPN_SHIFT;
->
->          if (!(pte & PTE_V)) {
->              /* Invalid PTE */
-> @@ -668,8 +668,17 @@ restart:
->              /* for superpage mappings, make a fake leaf PTE for the TLB's
->                 benefit. */
->              target_ulong vpn = addr >> PGSHIFT;
-> -            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
-> -                        (addr & ~TARGET_PAGE_MASK);
-> +
-> +            int napot_bits = ((pte & PTE_N) ? (ctzl(ppn) + 1) : 0);
-> +            if (((pte & PTE_N) && ((ppn == 0) || (i != (levels - 1)))) ||
-> +                (napot_bits != 0 && napot_bits != 4)) {
-> +                return TRANSLATE_FAIL;
-> +            }
-> +
-> +            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
-> +                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
-> +                          (vpn & (((target_ulong)1 << ptshift) - 1))
-> +                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
->
->              /* set permissions on the TLB entry */
->              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
-> @@ -856,7 +865,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          ret = get_physical_address(env, &pa, &prot, address,
->                                     &env->guest_phys_fault_addr, access_type,
->                                     mmu_idx, true, true, false);
-> -
->          /*
->           * A G-stage exception may be triggered during two state lookup.
->           * And the env->guest_phys_fault_addr has already been set in
-> @@ -879,7 +887,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->              ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
->                                         access_type, mmu_idx, false, true,
->                                         false);
-> -
->              qemu_log_mask(CPU_LOG_MMU,
->                      "%s 2nd-stage address=%" VADDR_PRIx " ret %d physical "
->                      TARGET_FMT_plx " prot %d\n",
-> @@ -914,7 +921,6 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->          /* Single stage lookup */
->          ret = get_physical_address(env, &pa, &prot, address, NULL,
->                                     access_type, mmu_idx, true, false, false);
-> -
->          qemu_log_mask(CPU_LOG_MMU,
->                        "%s address=%" VADDR_PRIx " ret %d physical "
->                        TARGET_FMT_plx " prot %d\n",
 > --
-> 2.17.1
+> 2.31.1
 >
 >
 
