@@ -1,59 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mx45f-0002OW-9Q
-	for mharc-qemu-riscv@gnu.org; Tue, 14 Dec 2021 04:27:19 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59492)
+	id 1mx9Rr-00061z-Dy
+	for mharc-qemu-riscv@gnu.org; Tue, 14 Dec 2021 10:10:35 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48100)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
- id 1mx45d-0002Nq-Rx; Tue, 14 Dec 2021 04:27:17 -0500
-Received: from forward105o.mail.yandex.net ([37.140.190.183]:47978)
+ (Exim 4.90_1) (envelope-from <heiko@sntech.de>)
+ id 1mx9JU-0002R1-Ez; Tue, 14 Dec 2021 10:01:56 -0500
+Received: from gloria.sntech.de ([185.11.138.130]:54462)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nikita.shubin@maquefel.me>)
- id 1mx45b-0003dj-2Q; Tue, 14 Dec 2021 04:27:16 -0500
-Received: from iva7-79032ba5307a.qloud-c.yandex.net
- (iva7-79032ba5307a.qloud-c.yandex.net
- [IPv6:2a02:6b8:c0c:320d:0:640:7903:2ba5])
- by forward105o.mail.yandex.net (Yandex) with ESMTP id 7BA3F4C3914;
- Tue, 14 Dec 2021 12:27:01 +0300 (MSK)
-Received: from iva6-2d18925256a6.qloud-c.yandex.net
- (iva6-2d18925256a6.qloud-c.yandex.net [2a02:6b8:c0c:7594:0:640:2d18:9252])
- by iva7-79032ba5307a.qloud-c.yandex.net (mxback/Yandex) with ESMTP id
- jvVNqH1obf-R0eCX0lL; Tue, 14 Dec 2021 12:27:01 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maquefel.me; s=mail;
- t=1639474021; bh=st95ymli/fBelVAP9yu08SDGy3O7W+hZ7SEWKAx/JMM=;
- h=Date:Subject:To:From:Message-Id:Cc;
- b=sb69spbPdkkcv+LvIbiyp4vr/Ge2Xc9O47wLkVbtBKfkaneyf+NATPUC9DqPHG/zB
- msjT6r+pkhloPjGn6+ib6oiymwcVMQffWsY0GwTZMuL+KXbv7AefI0EXyOV+18z2Ts
- L2KhMbenKP04C1f7yK9WrXdj8lNmwDl6suTlkrW4=
-Authentication-Results: iva7-79032ba5307a.qloud-c.yandex.net;
- dkim=pass header.i=@maquefel.me
-Received: by iva6-2d18925256a6.qloud-c.yandex.net (smtp/Yandex) with ESMTPSA
- id i0RMZllY0d-R0PquiO5; Tue, 14 Dec 2021 12:27:00 +0300
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client certificate not present)
-X-Yandex-Fwd: 2
-From: Nikita Shubin <nikita.shubin@maquefel.me>
-To: 
-Cc: atishp@atishpatra.org, Nikita Shubin <n.shubin@yadro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Subject: [PATCH] target/riscv/pmp: fix no pmp illegal intrs
-Date: Tue, 14 Dec 2021 12:26:59 +0300
-Message-Id: <20211214092659.15709-1-nikita.shubin@maquefel.me>
-X-Mailer: git-send-email 2.31.1
+ (Exim 4.90_1) (envelope-from <heiko@sntech.de>)
+ id 1mx9JQ-0001Yh-UX; Tue, 14 Dec 2021 10:01:56 -0500
+Received: from p5b127e95.dip0.t-ipconnect.de ([91.18.126.149]
+ helo=phil.localnet)
+ by gloria.sntech.de with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <heiko@sntech.de>)
+ id 1mx9JH-0008Un-4l; Tue, 14 Dec 2021 16:01:43 +0100
+From: Heiko Stuebner <heiko@sntech.de>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, liweiwei <liweiwei@iscas.ac.cn>,
+ lazyparser@gmail.com, liweiwei <liweiwei@iscas.ac.cn>
+Subject: Re: [RFC PATCH 3/3] target/riscv: add support for svpbmt extension
+Date: Tue, 14 Dec 2021 16:01:42 +0100
+Message-ID: <2304988.zUQuKtGZoq@phil>
+In-Reply-To: <20211128135255.22089-4-liweiwei@iscas.ac.cn>
+References: <20211128135255.22089-1-liweiwei@iscas.ac.cn>
+ <20211128135255.22089-4-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=37.140.190.183;
- envelope-from=nikita.shubin@maquefel.me; helo=forward105o.mail.yandex.net
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
+Received-SPF: none client-ip=185.11.138.130; envelope-from=heiko@sntech.de;
+ helo=gloria.sntech.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_NONE=0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 14 Dec 2021 10:10:34 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,35 +48,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Dec 2021 09:27:18 -0000
+X-List-Received-Date: Tue, 14 Dec 2021 15:01:57 -0000
 
-From: Nikita Shubin <n.shubin@yadro.com>
+Am Sonntag, 28. November 2021, 14:52:55 CET schrieb liweiwei:
+> It uses two PTE bits, but QEMU is sequentially consistent, So it has no effect on QEMU currently.
+> 
+> Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
+> Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
 
-As per the privilege specification, any access from S/U mode should fail
-if no pmp region is configured and pmp is present, othwerwise access
-should succeed.
+with the Linux svpbmt patchset
+Tested-by: Heiko Stuebner <heiko@sntech.de>
 
-Fixes: d102f19a208 (target/riscv/pmp: Raise exception if no PMP entry is configured)
-Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
----
- target/riscv/op_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Thanks
+Heiko
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index ee7c24efe7..58d992e98a 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -146,7 +146,8 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
-     uint64_t mstatus = env->mstatus;
-     target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
- 
--    if (!pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
-+    if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-+        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
-     }
- 
--- 
-2.31.1
+> ---
+>  target/riscv/cpu_bits.h   | 4 ++++
+>  target/riscv/cpu_helper.c | 9 +++++++--
+>  2 files changed, 11 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 70391424b0..62713ec37a 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -473,7 +473,11 @@ typedef enum {
+>  #define PTE_A               0x040 /* Accessed */
+>  #define PTE_D               0x080 /* Dirty */
+>  #define PTE_SOFT            0x300 /* Reserved for Software */
+> +#define PTE_RSVD            0x1FC0000000000000 /* Reserved for future use */
+> +#define PTE_PBMT            0x6000000000000000 /* Page-based memory types */
+>  #define PTE_N               0x8000000000000000
+> +#define PTE_ATTR            0xFFC0000000000000 /* All attributes bits */
+> +
+>  
+>  /* Page table PPN shift amount */
+>  #define PTE_PPN_SHIFT       10
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e68db3e119..94b01bbf78 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -588,13 +588,18 @@ restart:
+>              return TRANSLATE_FAIL;
+>          }
+>  
+> -        hwaddr ppn = (pte & ~(target_ulong)PTE_N) >> PTE_PPN_SHIFT;
+> +        hwaddr ppn = (pte & ~(target_ulong)PTE_ATTR) >> PTE_PPN_SHIFT;
+>  
+> -        if (!(pte & PTE_V)) {
+> +        if (pte & PTE_RSVD) {
+> +            return TRANSLATE_FAIL;
+> +        } else if (!(pte & PTE_V)) {
+>              /* Invalid PTE */
+>              return TRANSLATE_FAIL;
+>          } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>              /* Inner PTE, continue walking */
+> +            if (pte & (PTE_D | PTE_A | PTE_U | PTE_N | PTE_PBMT)) {
+> +                return TRANSLATE_FAIL;
+> +            }
+>              base = ppn << PGSHIFT;
+>          } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+>              /* Reserved leaf PTE flags: PTE_W */
+> 
+
+
+
 
 
