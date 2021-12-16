@@ -1,75 +1,100 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxbhf-0000TC-9C
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 16:20:47 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44856)
+	id 1mxin0-0002IJ-DD
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:54:46 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51774)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <raj.khem@gmail.com>)
- id 1mxY2j-0006Ub-38
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 12:26:17 -0500
-Received: from [2607:f8b0:4864:20::532] (port=42999
- helo=mail-pg1-x532.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <raj.khem@gmail.com>)
- id 1mxY2h-0005wY-EG
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 12:26:16 -0500
-Received: by mail-pg1-x532.google.com with SMTP id l18so15991303pgj.9
- for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 09:26:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=usIBRdAq1zApdJQtT5S0XOjkrgEQzATABbaNkeFAxZg=;
- b=aKxFceNVucQXw+h4Zb5FpNkbfe/hwnlExIMoaECZPn4P5JY2R8nKbBu9Tx0BQksro+
- K7tJVDzq9xxX7O7Zu8JRquRLXDeUAC/Hj4B3qkIeHN6hRD8o2rAvEIogzc0odJe0PCwx
- EGSvtAoncmbdYbMiqkVzLCjDcDBJBmoZ/I2kpOEYYK1rHjgsqq5428hcR+VUY41nys2n
- FJmh12ydv5JfnuGhDcqLxfd7Ssk1mph4xIUmHEUU5DkaAPG54U2blHOybQdGYd2uu44Q
- rF9/w3Z4JqomPok2BUb8H9ZwA7yAwKD3kSBdKqCopzbj/C7qVoVCg1sUTc+q8f3DKJFU
- D+Zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=usIBRdAq1zApdJQtT5S0XOjkrgEQzATABbaNkeFAxZg=;
- b=WTPBVi/k+jjMUNhgRDKbdmPGcinTuuq3FTpOcBY1os15Nxm6iJ9hBK9nhkOWbuE5fW
- W6P4qe1VfUrNKq0iLGrV/mr7W6R7lQ6RuxDkQIfN0r+zskF7vLT21ZbqaYnZQwYBouMu
- 7Zw9JLufhKEPvUDSOJopTUiZFr91mAJM5HGZh66eRo+jmD8sOSiy4dd0dOkr957YyRl9
- zQ0JcE3q7G9Sg5uLLeOjSxVj/8xunsdbSqQw/F34GPbzTQyy3MaMgCB6T+nWPp0w1ZVY
- rgDvnKYQUrG9uVfRXEftG+aWXYcayZUVbW5SmS14JqKV54i83qeqEOOWyM+w2rR+bfnX
- VLeQ==
-X-Gm-Message-State: AOAM533YoJbzlYY8aJfoe7KQn8rx1/hIk/1R03ZVePXDoRRWoF6Fkyt5
- HRrKatyzdOZUuNUbl/cC9GXMYAXqbzp8Cw==
-X-Google-Smtp-Source: ABdhPJwhAIVEDELtcDbz+JXsbn5AXTOarnVOKCG1RRzImzWzNGhDp9DS/qBROCNILHedhBsqdqL82g==
-X-Received: by 2002:a05:6a00:1310:b0:4b9:f9b8:1f47 with SMTP id
- j16-20020a056a00131000b004b9f9b81f47mr1907339pfu.25.1639589172994; 
- Wed, 15 Dec 2021 09:26:12 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:a0f0::2b9d])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-148bb55d2desm498805ad.98.2021.12.15.09.26.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Dec 2021 09:26:12 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: qemu-riscv@nongnu.org
-Cc: Khem Raj <raj.khem@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] riscv: Set 5.4 as minimum kernel version for riscv32
-Date: Wed, 15 Dec 2021 09:26:08 -0800
-Message-Id: <20211215172608.1625941-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
+ id 1mximy-0002I4-Me
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:44 -0500
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:45669)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
+ id 1mximw-0003oJ-2M
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1639630482; x=1671166482;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=a5GlfVVoy9AEKVLH8CrZSSzqoUOWy1GWj6EYcgPFIq4=;
+ b=q3kWMPhArRmHzr8shsl/lv/oafNzPm9+OC1/WUkI3FkXwLvdi/dHwWEh
+ Uz7jTUNbykSxS+Y2JMQ7i7uvabZlujQpTxaB+Sh1pGob88WeSQrjwlsDQ
+ XNcQZFwKMgU2gG4431z37mcvdeT2TFLAe9VsiXDQTKEmpo0J7r/NEJMc2
+ 3/Qkk5Gp412iiGzIvHlLMz/QlSE12Dxsit/yjxJCT0Pk9IsYHtv83M/D/
+ joekzQ6v7wfG7aABA6cdlF7aGREcD0nf6rXrWNI15OeoKuXe3hyJLW71x
+ TeXcApmruCnxHKxwFQ09lUZzeAbHXF5iipT1vDNcb8ohaz9WYO5Op5TC/ Q==;
+X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="189397522"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:54:39 +0800
+IronPort-SDR: o9N0QyddvjpR1XyvwYfC2bX1PWGWJZ+DL8jJP6fABZ0aVWNon/sWeO3MbMR2HXxbVT/6HcNnbF
+ mS3SW4gm3jJn8DvO0S3gmmPVZoBqhWj6jLIuicIijuEmKwkBuciEOUdKKH3i/qBsTjCWO/L15d
+ dZtNv9fNgMSpzMFscO++H2p+sEShxeOm6m4l9T3VvTuxpZkDZ2HJz8EathFxfKedOzss4xgPbm
+ YC/yRcRP8ihKJ+tQgL9Ie84t56s7O45E/QTJJMFuDKPJEo/9GRfl0aI+3sr10AOcy4lwGgORIS
+ qNuGVos8qdd2p9ieOB+Egl5M
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Dec 2021 20:27:32 -0800
+IronPort-SDR: nfhRjvq8A73OTVcwu+9ur2qWevRON5lihsuEvTbE9Evo74pyIh/5VISKCkFCnwQcD9gz22+CEB
+ vlGfcW/eKHLt/zvqjDV3pr6jswdK9aR5cIeLes0T7PduIk0rgOFzcg1oPZRw3zAJfOfR5i9XNT
+ XeD2Lqn4nCkG7yCudUXORkRaTYVxCvbBAN5G8Ckk6kUp66lw6mQUBIIMtyZ1xXWZaybn2oPz1f
+ St9SVL+XO/szOgolRtWehpR2TDxtJ4JooFcz9Cu7SnxHwpBoRXKg/MVIhbKdSY0tHZ9UAzadBn
+ se0=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 Dec 2021 20:54:39 -0800
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0CL3k9Nz1Rwnv
+ for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:54:38 -0800 (PST)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:content-type
+ :mime-version:x-mailer:message-id:date:subject:to:from; s=dkim;
+ t=1639630478; x=1642222479; bh=a5GlfVVoy9AEKVLH8CrZSSzqoUOWy1GW
+ j6EYcgPFIq4=; b=jwJ9NXxdmiJAlAT7sR0eqRUeFdAemgG6mYkcljSOFB+3T/LR
+ xrwV7rWH1Tcd0fraoHkcHIZsogPCarvHAFReAIl/va6kvJ8gqSh60mcfzg2PNx0j
+ LwKO9d+msMu516Wuonf2g8zlFcPjssaHJQ28mk2aLVOHgE72LAlOgbegZrlVOb/0
+ K8XkzC1LlSLa43bdj+FeoqXNdC0EbsQvG9rFxIHFf0p3AJu1IyKG3WXNVruAzLJs
+ inDkiis/gGpJnmpaTRK8yNxMB9Hu/okD+DezwMgslxCHytWHhH0hnWqN6lwGRQB9
+ IexfRF0Y1UmbbMDqWi48SAKJXXEK3B2DR7Sf2g==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id VUaO8_5Uyznd for <qemu-riscv@nongnu.org>;
+ Wed, 15 Dec 2021 20:54:38 -0800 (PST)
+Received: from toolbox.alistair23.me (unknown [10.225.165.66])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0CF3Ssyz1RtVG;
+ Wed, 15 Dec 2021 20:54:32 -0800 (PST)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com
+Subject: [PATCH v2 0/9] A collection of RISC-V cleanups and improvements
+Date: Thu, 16 Dec 2021 14:54:18 +1000
+Message-Id: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::532
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=raj.khem@gmail.com; helo=mail-pg1-x532.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.154.45;
+ envelope-from=prvs=977d27bfe=alistair.francis@opensource.wdc.com;
+ helo=esa6.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 15 Dec 2021 16:20:41 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,38 +106,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Dec 2021 17:26:17 -0000
+X-List-Received-Date: Thu, 16 Dec 2021 04:54:44 -0000
 
-5.4 is first stable API as far as rv32 is concerned see [1]
+From: Alistair Francis <alistair.francis@wdc.com>=0D
 
-[1] https://sourceware.org/git/?p=glibc.git;a=commit;h=7a55dd3fb6d2c307a002a16776be84310b9c8989
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bin.meng@windriver.com>
----
- linux-user/riscv/target_syscall.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/linux-user/riscv/target_syscall.h b/linux-user/riscv/target_syscall.h
-index dc597c8972..9b13161324 100644
---- a/linux-user/riscv/target_syscall.h
-+++ b/linux-user/riscv/target_syscall.h
-@@ -45,10 +45,11 @@ struct target_pt_regs {
- 
- #ifdef TARGET_RISCV32
- #define UNAME_MACHINE "riscv32"
-+#define UNAME_MINIMUM_RELEASE "5.4.0"
- #else
- #define UNAME_MACHINE "riscv64"
--#endif
- #define UNAME_MINIMUM_RELEASE "4.15.0"
-+#endif
- 
- #define TARGET_MINSIGSTKSZ 2048
- #define TARGET_MCL_CURRENT 1
--- 
-2.34.1
-
+This is a few patches to cleanup some RISC-V hardware and mark the=0D
+Hyperisor extension as non experimental.=0D
+=0D
+v2:=0D
+ - Add some more fixes=0D
+ - Address review comments=0D
+=0D
+Alistair Francis (9):=0D
+  hw/intc: sifive_plic: Add a reset function=0D
+  hw/intc: sifive_plic: Cleanup the write function=0D
+  hw/intc: sifive_plic: Cleanup the read function=0D
+  hw/intc: sifive_plic: Cleanup remaining functions=0D
+  target/riscv: Mark the Hypervisor extension as non experimental=0D
+  target/riscv: Enable the Hypervisor extension by default=0D
+  hw/riscv: Use error_fatal for SoC realisation=0D
+  hw/riscv: virt: Allow support for 32 cores=0D
+  hw/riscv: virt: Set the clock-frequency=0D
+=0D
+ include/hw/riscv/virt.h    |   2 +-=0D
+ hw/intc/sifive_plic.c      | 254 +++++++++++--------------------------=0D
+ hw/riscv/microchip_pfsoc.c |   2 +-=0D
+ hw/riscv/opentitan.c       |   2 +-=0D
+ hw/riscv/sifive_e.c        |   2 +-=0D
+ hw/riscv/sifive_u.c        |   2 +-=0D
+ hw/riscv/virt.c            |   1 +=0D
+ target/riscv/cpu.c         |   2 +-=0D
+ 8 files changed, 83 insertions(+), 184 deletions(-)=0D
+=0D
+-- =0D
+2.31.1=0D
+=0D
 
