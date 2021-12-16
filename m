@@ -1,75 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxinM-0002uZ-97
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:55:08 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52010)
+	id 1mxinN-00030t-Ul
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:55:09 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:52074)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mxinK-0002p4-8H
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:06 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:18147)
+ id 1mxinN-0002xu-4Q
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:09 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:18154)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mxinI-0003rR-1z
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:05 -0500
+ id 1mxinL-0003ts-4d
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1639630504; x=1671166504;
+ t=1639630507; x=1671166507;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=CJtqDU6sPemWcmNX1wfyiQbcFiKIABpaeUjMPTCGpig=;
- b=EJ6jFPryoyb57XcRL5AlDQU0wXLqP3dgr/dp7UXOELc+Pv3vUQiaPRuf
- LiCFMUZ2FNRbO2KF5eqzffEWspLRfJiYeL1wW5ShEh/2QEWXxBDO1RCiI
- XAzWE7FYL1/BdyxVz/4ZdLpUwIKPcF0u9SCyOAz58nbm273SYvVUmGdhL
- G72MCzNaa20T4YC86E/Ee5Vk+0xE/lPJmwXHBSGLShBwD4sQyK/2d0Ir7
- 1pbAG8ObE24YNvFSsUrN5XCHAk4yqgw8I6h1V48gei3P/oKiKZ6UXfpuT
- lvH90GWNW0nNucJgTz/x1wtvSlg+OdTXnlPXcBu/AYkk39GjXfcqk4Zse w==;
-X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="187354571"
+ bh=ayBTYXwSr3LpHDfXsatQL6OmSGThM5dBa3wy7BLUtaE=;
+ b=baPKBcfSarcCmtUKJkXnMG7dZJC+ktfP6QNrvWtyFI23DesaQI1m1hjy
+ W4g92+FnKb462OwIEA207DdVZCGWk9qZYhLEYF5tuggOI1kGMj/+G7FrA
+ BBMNxciEmGQwvFBpFqJXq9fYQdsO4rL3FkgSbzawVXANcnKL3bh0d5ZeG
+ L/lyphTv4uFHoFywV2PzrNP9KIp6ENnLaOc/NU/gEiEKQ9icfnMHOKuB7
+ nXAI7ZeOT7sc6GQYf1C1gQ6MXdCBpGYi5LH7ZCq7MfuDX1ZNMzw6O+Jxo
+ 4neFfBG+tIF2YsWf0wUXhlQwxiqwB/i+DaU2hOz0LU6cNbnQ7ExHH13s7 A==;
+X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="187354577"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:55:00 +0800
-IronPort-SDR: Qqelh8ocGyCimLZPE5x1JDavHjwQ+A6fZ2iF6sOv0uAYjg4l93oY+lWts0sv09zDlK6ufjcGih
- a0fGutk7DwhRr+2xHRi34aUp+84UiQ2WY5lSTRMriUVcvVfoWYkY9/HWZ01HeugCAf40WvlXSI
- fhqPfbXxJ/Cxm31V470rreNPirstsN7rsV0VS3psgvdesm933cqbIUi0cD0mBkZ2KYNJ06vlf+
- v7SkeZ/4xySuCeqoFod1pako5iVFIy0gE+VL0mlH37HX2hSDyaqqaUhOjJce5V16UFndCHypux
- pC/M4yBl0cdsRboLfjuhexkB
+ by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:55:06 +0800
+IronPort-SDR: LYduyMdycbfRBCEzF85S7OS3p1x564lu1YKTEga3N/ARanPdx6K3s0vvLeJ7mjmWNOyvOnKpgw
+ 2gjOnY+00S1byP/MWIMxu3EhqVj2hE36yu63Id1LLJbnGMlWmJa1VlOrU2ugNMdeO9RE9eDVP8
+ e6lHNGVwa8sC/qDWswb4OONev3qq0pIU3jtB3ZP42YOyPkakv03LJuWQsUXkTAYvlcBNEjiygP
+ OLX1+uWARpmxPWXC9qlfwaMWcwBueNY+fdhLTwAlKo1LpjYsFA4qlkeWdDiX+4BulBlUghkQIG
+ pCxsBopv5nh4zKqDUiw3BgGr
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:27:55 -0800
-IronPort-SDR: J2fJ28vlfpN34Dty0C9cSeG4fDUEXoZqAcCueQ2xkpQC50ay/Hw40qmSmt8QdDjpUbRizfGy4o
- oDTLrFe6uHXyUgXAvgKgRiYQLUdOGH7mosRdIt9N0Fupf28HFkrlWTIsFWbPlAWab4tSE+xk7S
- FmrHWZXmYef1olXohqu/ugLad7mvy3vhhHK36I+GvO5FmcjgcCrwioQuSW1qBiwTFp10C5jPPn
- Iuy7mQWnyoHqMm/SCesAeOyGmY91ruRp38uc68X921+wcMXMSWY+aPUUnYkuYZxoB+Kct0ESJK
- IQw=
+ 15 Dec 2021 20:28:00 -0800
+IronPort-SDR: EUaJSguIdYQBGjBdHgtS4vVvOb5YZoKS63ha5DdxJWdFlMz/Jl+Up7NitrB/LYo8mnu9kWgN25
+ cUPdv7NEQ8hNvahok2XbpYj/nNm/p3Z3wA111RrOEb/GTYqA4QBzoYREph5YTcZG1ctsjHd7Mx
+ lo3OWAQOc0Bfq7pKRE545P5mju52bhbgsYbxHgP9KLph9HjKMW4Z77fTTEVNKXKe0d22S93Nkv
+ tnuYeVMLJ3uZlVv227it1Laik9nARrRA1Vbkj63V7AS2kIuLf+1BBB1GbZbvkQMN0bVDr4wdtK
+ yAc=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:55:02 -0800
+ 15 Dec 2021 20:55:07 -0800
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0Cm3s76z1Rwnx
- for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:55:00 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0Cs3pXhz1Rwnv
+ for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:55:05 -0800 (PST)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  opensource.wdc.com; h=content-transfer-encoding:mime-version
  :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1639630499; x=1642222500; bh=CJtqDU6sPemWcmNX1w
- fyiQbcFiKIABpaeUjMPTCGpig=; b=pz8tFgGBuNfAeHXB/riSMcbUOj9qGaG3Gp
- S2fLvxcyvDkYPyPKQOYP15FAfy/dbLZ/5P/DJRFVm/QwtzWsLyBWy6BJ3hFYLHV1
- yHo4wEjMDw+70Y9q3orqTfn1OkcWn6IyMcZKXKwOq2FOr0vb//wVVs6Ce8dah6rs
- SJuDl0xdYxzFMw7rFMGhvJyG3sO4TNz2uqewb494roM3Uhtf/mcF02AagVSfJMFw
- nOfA+T3DxNzq2l5jMDqYP6vi4gv58/8Q6AnFV32wY8sDfBPG7HhmYDWpPcd1VrfX
- O3Ue27ci6PdQzugP+nLqa2HnBbcWd5PxKbm1H+dZcpwoSr2ze2IQ==
+ :from; s=dkim; t=1639630505; x=1642222506; bh=ayBTYXwSr3LpHDfXsa
+ tQL6OmSGThM5dBa3wy7BLUtaE=; b=i6Oxe4x0hZqPYWqMoKJnO6vc6wcPapDJfV
+ 7dK+iK2Q1q6xlmhfZV5pIfvNL8G3tLskNM6o6tW6cvCmVPR6MbGlvdspx01b8IGo
+ YU3VybzAS573Ox6BbXTLNoTPJjc5Gp7UOtBJPweJOB2oXifZODhQgKdwBJ65qfDr
+ ziunGRppeeu/EO8i2hiz5bRmtyeW24h++xZMqQ+Mic3UeadIqQjdjlvb9xPGfH6O
+ Fxc01AnXaibRgmYWBVlJrSKmpypJRMGAHgmoBBabc3fulXU0rAl1O+sotivUgZFb
+ osNSswvWQyEN09/WDGshpYT9qDyLrnlCyDht9AvUhovv4otHC88Q==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id kQDX3C2Vz64p for <qemu-riscv@nongnu.org>;
- Wed, 15 Dec 2021 20:54:59 -0800 (PST)
+ port 10026) with ESMTP id gl2lfpi7mm_Z for <qemu-riscv@nongnu.org>;
+ Wed, 15 Dec 2021 20:55:05 -0800 (PST)
 Received: from toolbox.alistair23.me (unknown [10.225.165.66])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0Cg13Dxz1RtVG;
- Wed, 15 Dec 2021 20:54:54 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0Cm4Hrdz1RtVG;
+ Wed, 15 Dec 2021 20:55:00 -0800 (PST)
 From: Alistair Francis <alistair.francis@opensource.wdc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -77,9 +77,10 @@ Cc: Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com
-Subject: [PATCH v2 4/9] hw/intc: sifive_plic: Cleanup remaining functions
-Date: Thu, 16 Dec 2021 14:54:22 +1000
-Message-Id: <20211216045427.757779-5-alistair.francis@opensource.wdc.com>
+Subject: [PATCH v2 5/9] target/riscv: Mark the Hypervisor extension as non
+ experimental
+Date: Thu, 16 Dec 2021 14:54:23 +1000
+Message-Id: <20211216045427.757779-6-alistair.francis@opensource.wdc.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
 References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
@@ -107,207 +108,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2021 04:55:06 -0000
+X-List-Received-Date: Thu, 16 Dec 2021 04:55:09 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-We can remove the original sifive_plic_irqs_pending() function and
-instead just use the sifive_plic_claim() function (renamed to
-sifive_plic_claimed()) to determine if any interrupts are pending.
-
-This requires move the side effects outside of sifive_plic_claimed(),
-but as they are only invoked once that isn't a problem.
-
-We have also removed all of the old #ifdef debugging logs, so let's
-cleanup the last remaining debug function while we are here.
+The Hypervisor spec is now frozen, so remove the experimental tag.
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/intc/sifive_plic.c | 109 +++++++++---------------------------------
- 1 file changed, 22 insertions(+), 87 deletions(-)
+ target/riscv/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 44d24b3c59..746c0f0343 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -31,8 +31,6 @@
- #include "migration/vmstate.h"
- #include "hw/irq.h"
-=20
--#define RISCV_DEBUG_PLIC 0
--
- static bool addr_between(uint32_t addr, uint32_t base, uint32_t num)
- {
-     return addr >=3D base && addr - base < num;
-@@ -51,47 +49,6 @@ static PLICMode char_to_mode(char c)
-     }
- }
-=20
--static char mode_to_char(PLICMode m)
--{
--    switch (m) {
--    case PLICMode_U: return 'U';
--    case PLICMode_S: return 'S';
--    case PLICMode_H: return 'H';
--    case PLICMode_M: return 'M';
--    default: return '?';
--    }
--}
--
--static void sifive_plic_print_state(SiFivePLICState *plic)
--{
--    int i;
--    int addrid;
--
--    /* pending */
--    qemu_log("pending       : ");
--    for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--        qemu_log("%08x", plic->pending[i]);
--    }
--    qemu_log("\n");
--
--    /* pending */
--    qemu_log("claimed       : ");
--    for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--        qemu_log("%08x", plic->claimed[i]);
--    }
--    qemu_log("\n");
--
--    for (addrid =3D 0; addrid < plic->num_addrs; addrid++) {
--        qemu_log("hart%d-%c enable: ",
--            plic->addr_config[addrid].hartid,
--            mode_to_char(plic->addr_config[addrid].mode));
--        for (i =3D plic->bitfield_words - 1; i >=3D 0; i--) {
--            qemu_log("%08x", plic->enable[addrid * plic->bitfield_words =
-+ i]);
--        }
--        qemu_log("\n");
--    }
--}
--
- static uint32_t atomic_set_masked(uint32_t *a, uint32_t mask, uint32_t v=
-alue)
- {
-     uint32_t old, new, cmp =3D qatomic_read(a);
-@@ -115,26 +72,34 @@ static void sifive_plic_set_claimed(SiFivePLICState =
-*plic, int irq, bool level)
-     atomic_set_masked(&plic->claimed[irq >> 5], 1 << (irq & 31), -!!leve=
-l);
- }
-=20
--static int sifive_plic_irqs_pending(SiFivePLICState *plic, uint32_t addr=
-id)
-+static uint32_t sifive_plic_claimed(SiFivePLICState *plic, uint32_t addr=
-id)
- {
-+    uint32_t max_irq =3D 0;
-+    uint32_t max_prio =3D plic->target_priority[addrid];
-     int i, j;
-+
-     for (i =3D 0; i < plic->bitfield_words; i++) {
-         uint32_t pending_enabled_not_claimed =3D
--            (plic->pending[i] & ~plic->claimed[i]) &
--            plic->enable[addrid * plic->bitfield_words + i];
-+                        (plic->pending[i] & ~plic->claimed[i]) &
-+                            plic->enable[addrid * plic->bitfield_words +=
- i];
-+
-         if (!pending_enabled_not_claimed) {
-             continue;
-         }
-+
-         for (j =3D 0; j < 32; j++) {
-             int irq =3D (i << 5) + j;
-             uint32_t prio =3D plic->source_priority[irq];
-             int enabled =3D pending_enabled_not_claimed & (1 << j);
--            if (enabled && prio > plic->target_priority[addrid]) {
--                return 1;
-+
-+            if (enabled && prio > max_prio) {
-+                max_irq =3D irq;
-+                max_prio =3D prio;
-             }
-         }
-     }
--    return 0;
-+
-+    return max_irq;
- }
-=20
- static void sifive_plic_update(SiFivePLICState *plic)
-@@ -145,7 +110,7 @@ static void sifive_plic_update(SiFivePLICState *plic)
-     for (addrid =3D 0; addrid < plic->num_addrs; addrid++) {
-         uint32_t hartid =3D plic->addr_config[addrid].hartid;
-         PLICMode mode =3D plic->addr_config[addrid].mode;
--        int level =3D sifive_plic_irqs_pending(plic, addrid);
-+        bool level =3D !!sifive_plic_claimed(plic, addrid);
-=20
-         switch (mode) {
-         case PLICMode_M:
-@@ -158,41 +123,6 @@ static void sifive_plic_update(SiFivePLICState *plic=
-)
-             break;
-         }
-     }
--
--    if (RISCV_DEBUG_PLIC) {
--        sifive_plic_print_state(plic);
--    }
--}
--
--static uint32_t sifive_plic_claim(SiFivePLICState *plic, uint32_t addrid=
-)
--{
--    int i, j;
--    uint32_t max_irq =3D 0;
--    uint32_t max_prio =3D plic->target_priority[addrid];
--
--    for (i =3D 0; i < plic->bitfield_words; i++) {
--        uint32_t pending_enabled_not_claimed =3D
--            (plic->pending[i] & ~plic->claimed[i]) &
--            plic->enable[addrid * plic->bitfield_words + i];
--        if (!pending_enabled_not_claimed) {
--            continue;
--        }
--        for (j =3D 0; j < 32; j++) {
--            int irq =3D (i << 5) + j;
--            uint32_t prio =3D plic->source_priority[irq];
--            int enabled =3D pending_enabled_not_claimed & (1 << j);
--            if (enabled && prio > max_prio) {
--                max_irq =3D irq;
--                max_prio =3D prio;
--            }
--        }
--    }
--
--    if (max_irq) {
--        sifive_plic_set_pending(plic, max_irq, false);
--        sifive_plic_set_claimed(plic, max_irq, true);
--    }
--    return max_irq;
- }
-=20
- static uint64_t sifive_plic_read(void *opaque, hwaddr addr, unsigned siz=
-e)
-@@ -223,10 +153,15 @@ static uint64_t sifive_plic_read(void *opaque, hwad=
-dr addr, unsigned size)
-         if (contextid =3D=3D 0) {
-             return plic->target_priority[addrid];
-         } else if (contextid =3D=3D 4) {
--            uint32_t value =3D sifive_plic_claim(plic, addrid);
-+            uint32_t max_irq =3D sifive_plic_claimed(plic, addrid);
-+
-+            if (max_irq) {
-+                sifive_plic_set_pending(plic, max_irq, false);
-+                sifive_plic_set_claimed(plic, max_irq, true);
-+            }
-=20
-             sifive_plic_update(plic);
--            return value;
-+            return max_irq;
-         }
-     }
-=20
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f812998123..1edb2771b4 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -626,6 +626,7 @@ static Property riscv_cpu_properties[] =3D {
+     DEFINE_PROP_BOOL("c", RISCVCPU, cfg.ext_c, true),
+     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
++    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+@@ -639,7 +640,6 @@ static Property riscv_cpu_properties[] =3D {
+     DEFINE_PROP_BOOL("x-zbb", RISCVCPU, cfg.ext_zbb, false),
+     DEFINE_PROP_BOOL("x-zbc", RISCVCPU, cfg.ext_zbc, false),
+     DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
+-    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
 --=20
 2.31.1
 
