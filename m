@@ -1,75 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxin0-0002IJ-DD
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:54:46 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51774)
+	id 1mxin4-0002LB-CT
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:54:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51816)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mximy-0002I4-Me
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:44 -0500
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:45669)
+ id 1mxin1-0002K9-Dx
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:48 -0500
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:18119)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mximw-0003oJ-2M
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:44 -0500
+ id 1mximz-0003oX-B8
+ for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:54:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1639630482; x=1671166482;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=a5GlfVVoy9AEKVLH8CrZSSzqoUOWy1GWj6EYcgPFIq4=;
- b=q3kWMPhArRmHzr8shsl/lv/oafNzPm9+OC1/WUkI3FkXwLvdi/dHwWEh
- Uz7jTUNbykSxS+Y2JMQ7i7uvabZlujQpTxaB+Sh1pGob88WeSQrjwlsDQ
- XNcQZFwKMgU2gG4431z37mcvdeT2TFLAe9VsiXDQTKEmpo0J7r/NEJMc2
- 3/Qkk5Gp412iiGzIvHlLMz/QlSE12Dxsit/yjxJCT0Pk9IsYHtv83M/D/
- joekzQ6v7wfG7aABA6cdlF7aGREcD0nf6rXrWNI15OeoKuXe3hyJLW71x
- TeXcApmruCnxHKxwFQ09lUZzeAbHXF5iipT1vDNcb8ohaz9WYO5Op5TC/ Q==;
-X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="189397522"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ t=1639630485; x=1671166485;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=3lLEZM4gScoF01+Fu+KXzGB/NfgDsTqudT14Hm+pxMs=;
+ b=bPTLKAN68+xWKvC4Yimw+RirTxTTuLIFWukVKLP3NruDnxTsUtEEmbVz
+ fLjAx9+zRfg+FuSNgeF1ihEk0ZDlz4maib3ZZUyocpk6ucEppW/HyHpPx
+ 9AEH5Lhu8HJC8CccNYbzZkpIxlIDi7X5Z2BuThl6XR0/b9wbi1cTtpRos
+ 2ctiLGqfc7UdSrPbp/zewhPq70Pft1iugrAqBorut+rKqbf/BVTnfCjns
+ tkZ8RL+ZYsPL8VelJaiFz2sFSgB/S2tGHKBB7q/IM5JtMsvSpI+rKCQ//
+ rMm9bVeY9cOa1x2Yq6GR5nl2bmCtxW/naP5qqfIABLoTYUCKnmtf/xukw A==;
+X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="187354554"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:54:39 +0800
-IronPort-SDR: o9N0QyddvjpR1XyvwYfC2bX1PWGWJZ+DL8jJP6fABZ0aVWNon/sWeO3MbMR2HXxbVT/6HcNnbF
- mS3SW4gm3jJn8DvO0S3gmmPVZoBqhWj6jLIuicIijuEmKwkBuciEOUdKKH3i/qBsTjCWO/L15d
- dZtNv9fNgMSpzMFscO++H2p+sEShxeOm6m4l9T3VvTuxpZkDZ2HJz8EathFxfKedOzss4xgPbm
- YC/yRcRP8ihKJ+tQgL9Ie84t56s7O45E/QTJJMFuDKPJEo/9GRfl0aI+3sr10AOcy4lwGgORIS
- qNuGVos8qdd2p9ieOB+Egl5M
+ by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:54:44 +0800
+IronPort-SDR: kdFzAuVrHDdSN0fah4sSntPnx81kteEp/T1oPlnHk6O0ppMrCiY+QDo3wqDFty0auiFbf1Ztpv
+ Ydqr2L8ArC1hskiq5hZJONPN0O6Q5wm2gocHeQnk5kxUYdWoZJ6Zdkb4cFwNSQ04VT4o6o2TfU
+ G9yHJ6beI7fHzq+w5UwWRKTQ9NnfpXFYyKKi/nGR2ARIj+5/14h1LDMOmocLM6qzhopZQCMLP/
+ pno8h8/2Gd9N3UnQPcanb+/Mq6NwUX2sMGZAuOB3FTUJf/GF+fNiehB0Rcqmesn2xbLoRQ5DJE
+ GFDNFP9xAfEmM0qC2XcAb+e0
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:27:32 -0800
-IronPort-SDR: nfhRjvq8A73OTVcwu+9ur2qWevRON5lihsuEvTbE9Evo74pyIh/5VISKCkFCnwQcD9gz22+CEB
- vlGfcW/eKHLt/zvqjDV3pr6jswdK9aR5cIeLes0T7PduIk0rgOFzcg1oPZRw3zAJfOfR5i9XNT
- XeD2Lqn4nCkG7yCudUXORkRaTYVxCvbBAN5G8Ckk6kUp66lw6mQUBIIMtyZ1xXWZaybn2oPz1f
- St9SVL+XO/szOgolRtWehpR2TDxtJ4JooFcz9Cu7SnxHwpBoRXKg/MVIhbKdSY0tHZ9UAzadBn
- se0=
+ 15 Dec 2021 20:27:38 -0800
+IronPort-SDR: BC93lUCl2BsA0yEl7NAO7Qdb70zRi87HMi1fEQuDhuar82NKphazm7MsbW4z1wl3YGIpZlayiQ
+ 79lEQKcNr7S57Fr54UwZS/IGm8ws7Ci/rs6PYJJZ4LWM1A6B407iZyT7pcltmRT3NOPgE+oux7
+ Q5CF7CfjPgSaKxXmbCjjA4umBCxf1Li4LZ78fNdbILj39DWSS4W/BkoKSFqPLXGjxfE7wIlvMm
+ XuGYaClna0gqrOuWYs3ozKT1peJiQwK60qCNDK9sIfeMAXJnrMcAyTsgyMf7HOaN1g3U+EXyD5
+ PBM=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:54:39 -0800
+ 15 Dec 2021 20:54:45 -0800
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0CL3k9Nz1Rwnv
- for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:54:38 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0CR61Nmz1Rwns
+ for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:54:43 -0800 (PST)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:content-type
- :mime-version:x-mailer:message-id:date:subject:to:from; s=dkim;
- t=1639630478; x=1642222479; bh=a5GlfVVoy9AEKVLH8CrZSSzqoUOWy1GW
- j6EYcgPFIq4=; b=jwJ9NXxdmiJAlAT7sR0eqRUeFdAemgG6mYkcljSOFB+3T/LR
- xrwV7rWH1Tcd0fraoHkcHIZsogPCarvHAFReAIl/va6kvJ8gqSh60mcfzg2PNx0j
- LwKO9d+msMu516Wuonf2g8zlFcPjssaHJQ28mk2aLVOHgE72LAlOgbegZrlVOb/0
- K8XkzC1LlSLa43bdj+FeoqXNdC0EbsQvG9rFxIHFf0p3AJu1IyKG3WXNVruAzLJs
- inDkiis/gGpJnmpaTRK8yNxMB9Hu/okD+DezwMgslxCHytWHhH0hnWqN6lwGRQB9
- IexfRF0Y1UmbbMDqWi48SAKJXXEK3B2DR7Sf2g==
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :references:in-reply-to:x-mailer:message-id:date:subject:to
+ :from; s=dkim; t=1639630483; x=1642222484; bh=3lLEZM4gScoF01+Fu+
+ KXzGB/NfgDsTqudT14Hm+pxMs=; b=ZqJs7pBl+ppXh5r6N+asKBA/UtqKHGMx72
+ XTIWpwSdoi3dj3tSzoSG2Z0lBWdJfkv8meE0UZCITcmeFmhvVz/wWBpVurktwp00
+ sLpCFBIrD0AbdpTCBTOC15wi34YQSmlLROUxkritHTlSjG4l0mBHp4zezp6a+oRd
+ luKuKeQo2wQ4TENd/z51Zujb4VUTCAlRfvEi+FOw7TFFUqugOfZ3/9NUlf5ZS9V7
+ 8eHdqaKg7EdJ477ZaZp1bYGg0CFnKQdNdYtp2nNs/8DDCpQWSajbBR4Gir5iHWPH
+ 0/GAkwRrwPzBzH/PcP2LrEERNzvYx9oVgOiPz5uKhmHQYmNZmmIg==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id VUaO8_5Uyznd for <qemu-riscv@nongnu.org>;
- Wed, 15 Dec 2021 20:54:38 -0800 (PST)
+ port 10026) with ESMTP id nxVbNQefx8T9 for <qemu-riscv@nongnu.org>;
+ Wed, 15 Dec 2021 20:54:43 -0800 (PST)
 Received: from toolbox.alistair23.me (unknown [10.225.165.66])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0CF3Ssyz1RtVG;
- Wed, 15 Dec 2021 20:54:32 -0800 (PST)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0CL6BDLz1RtVG;
+ Wed, 15 Dec 2021 20:54:38 -0800 (PST)
 From: Alistair Francis <alistair.francis@opensource.wdc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -77,16 +77,17 @@ Cc: Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com
-Subject: [PATCH v2 0/9] A collection of RISC-V cleanups and improvements
-Date: Thu, 16 Dec 2021 14:54:18 +1000
-Message-Id: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+Subject: [PATCH v2 1/9] hw/intc: sifive_plic: Add a reset function
+Date: Thu, 16 Dec 2021 14:54:19 +1000
+Message-Id: <20211216045427.757779-2-alistair.francis@opensource.wdc.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.45;
+Received-SPF: pass client-ip=216.71.154.42;
  envelope-from=prvs=977d27bfe=alistair.francis@opensource.wdc.com;
- helo=esa6.hgst.iphmx.com
+ helo=esa4.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -106,39 +107,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2021 04:54:44 -0000
+X-List-Received-Date: Thu, 16 Dec 2021 04:54:48 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>=0D
+From: Alistair Francis <alistair.francis@wdc.com>
 
-This is a few patches to cleanup some RISC-V hardware and mark the=0D
-Hyperisor extension as non experimental.=0D
-=0D
-v2:=0D
- - Add some more fixes=0D
- - Address review comments=0D
-=0D
-Alistair Francis (9):=0D
-  hw/intc: sifive_plic: Add a reset function=0D
-  hw/intc: sifive_plic: Cleanup the write function=0D
-  hw/intc: sifive_plic: Cleanup the read function=0D
-  hw/intc: sifive_plic: Cleanup remaining functions=0D
-  target/riscv: Mark the Hypervisor extension as non experimental=0D
-  target/riscv: Enable the Hypervisor extension by default=0D
-  hw/riscv: Use error_fatal for SoC realisation=0D
-  hw/riscv: virt: Allow support for 32 cores=0D
-  hw/riscv: virt: Set the clock-frequency=0D
-=0D
- include/hw/riscv/virt.h    |   2 +-=0D
- hw/intc/sifive_plic.c      | 254 +++++++++++--------------------------=0D
- hw/riscv/microchip_pfsoc.c |   2 +-=0D
- hw/riscv/opentitan.c       |   2 +-=0D
- hw/riscv/sifive_e.c        |   2 +-=0D
- hw/riscv/sifive_u.c        |   2 +-=0D
- hw/riscv/virt.c            |   1 +=0D
- target/riscv/cpu.c         |   2 +-=0D
- 8 files changed, 83 insertions(+), 184 deletions(-)=0D
-=0D
--- =0D
-2.31.1=0D
-=0D
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ hw/intc/sifive_plic.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 877e76877c..a9f7a1bfb0 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -355,6 +355,23 @@ static const MemoryRegionOps sifive_plic_ops =3D {
+     }
+ };
+=20
++static void sifive_plic_reset(DeviceState *dev)
++{
++    SiFivePLICState *s =3D SIFIVE_PLIC(dev);
++    int i;
++
++    memset(s->source_priority, 0, sizeof(uint32_t) * s->num_sources);
++    memset(s->target_priority, 0, sizeof(uint32_t) * s->num_addrs);
++    memset(s->pending, 0, sizeof(uint32_t) * s->bitfield_words);
++    memset(s->claimed, 0, sizeof(uint32_t) * s->bitfield_words);
++    memset(s->enable, 0, sizeof(uint32_t) * s->num_enables);
++
++    for (i =3D 0; i < s->num_harts; i++) {
++        qemu_set_irq(s->m_external_irqs[i], 0);
++        qemu_set_irq(s->s_external_irqs[i], 0);
++    }
++}
++
+ /*
+  * parse PLIC hart/mode address offset config
+  *
+@@ -501,6 +518,7 @@ static void sifive_plic_class_init(ObjectClass *klass=
+, void *data)
+ {
+     DeviceClass *dc =3D DEVICE_CLASS(klass);
+=20
++    dc->reset =3D sifive_plic_reset;
+     device_class_set_props(dc, sifive_plic_properties);
+     dc->realize =3D sifive_plic_realize;
+     dc->vmsd =3D &vmstate_sifive_plic;
+--=20
+2.31.1
+
 
