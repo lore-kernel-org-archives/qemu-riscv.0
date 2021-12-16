@@ -1,100 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxino-0004W1-JV
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Dec 2021 23:55:36 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52278)
+	id 1mxjgk-00088D-HM
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 00:52:22 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60780)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mxinm-0004Q1-VP
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:35 -0500
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:18178)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=977d27bfe=alistair.francis@opensource.wdc.com>)
- id 1mxinl-00041i-5j
- for qemu-riscv@nongnu.org; Wed, 15 Dec 2021 23:55:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1639630533; x=1671166533;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=3X15HcUvQRy3KpgAj7UNFaQ0IIYxsE7ynJ42gJyEVqg=;
- b=OlTI8Jb0U37K2vY3JMGGm6VwXKPXjkI5HMXWn+E+P8ZprI31wf6jUQZJ
- mJDnsAiGok/rYmbUtbfYhGb/VDx5/8wYhDjV5Yjp8LH8MR2zGzeUkUC1T
- 2meO6ONd9rVfgWNAsYNF060PniTghYj7IQCz3aNYndfQDLtryjtnZIhQD
- U1TMjEUIXAPnmMsoFruBeRNZoBFRambyjR11gAh4/ECGDKp6ympUIoLJt
- aYyBbDxwSVNPATy6vUzojdJN6EuKH9L9VKiAOjR6R0WDoi77/xMm43wrC
- KJ7eDW02A4jXdVDlkLu7kMzg3D/xKZXkOKcjUyudXWk7lXV1hSfc8ST4H A==;
-X-IronPort-AV: E=Sophos;i="5.88,210,1635177600"; d="scan'208";a="187354604"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 16 Dec 2021 12:55:29 +0800
-IronPort-SDR: 9HezgTAcGs9uhTjrm9rQhYI2Wosv3fV/aalQpY6hL8IrPV4q/qGjB/TaYkVGV4tIRzIC7rB25a
- 2X+ew9dA1TZC/Wa4GnR91nokNvYCGx2s1w/AOf3JmwTwIfkfq0whwGf6/zNEmFbEDX47wS0P89
- MHlffzlu/t2OsVB6Wf7NGYg6HUqruId8jQ0doGdCoJtHDkKLDeWkP69gygGlB0XlzJTp9A08qL
- XufmQN011nuV/alpDY5LNtYQitnk7PbZd4X7bjhIH7hC13LrKCPc/Zt4IbGOHTSWr5B4dwZUw/
- KhB9/3ldwdBUmFzoda1GkUk7
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:29:51 -0800
-IronPort-SDR: 2z+dg4PjVSbTjR3N11VLQocEzODY/Qupkabcf146nZT2u4YocZ9AIiBlYaff+iyKZgNMKwYi61
- QQ2FVAnvoMXssobQMBLaOtJXB2CwBBEdxE3uv6QhtrWrswL2PoWrG9ztBLHB21+SpCB5e2ePR5
- ju/2X9ZWOj6LSxwdYFl7r1xRkfcWT2fnDClfT8kHyiQRuitdgu/WyfpqmqkQeiZ1g2ZiZNJpM4
- vSqJosmPlWMJ1U9DZirRh3OqsZXmdq847t+abKRFiS4eyLabZnU0vxFhPFgRdFVEwIWKXE3e7Z
- g8Q=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Dec 2021 20:55:30 -0800
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JF0DJ6hr2z1Rwnx
- for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 20:55:28 -0800 (PST)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1639630528; x=1642222529; bh=3X15HcUvQRy3KpgAj7
- UNFaQ0IIYxsE7ynJ42gJyEVqg=; b=Ieoa19D+IXxSdKlUIz63VrlHuR/7Auulnt
- A/wgMtB2Nu4vX06xI1gMQMEx8sD+apV9tSOGPGkhWhjStTS+2woaX+6Y7PLzC2pB
- RtFmzOGUfHgE3gcAKktJTtsIFWq34P5iyQknjrh7BRdZx+6BwapyM6uGF6qd75dT
- Gx+8IwguvLWwEP6RhE4Pp5Bp38Vk/gFvPM80aJvxapiSVECOX6xfIae0s+IvyJPW
- ZMKalVH6+HDTyzeV9i7PpVIEBdcCA7VyZt83CcIpGl1IaY9goVFawVCmlZWgydDK
- Fc2Zy7Ztnmp/pcAlvJFLCLKN9qQYVza34BYL3Rgq0O8yAWpAV6Mg==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id XJOCt-3VU4BE for <qemu-riscv@nongnu.org>;
- Wed, 15 Dec 2021 20:55:28 -0800 (PST)
-Received: from toolbox.alistair23.me (unknown [10.225.165.66])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JF0DC5rj7z1RtVG;
- Wed, 15 Dec 2021 20:55:23 -0800 (PST)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com
-Subject: [PATCH v2 9/9] hw/riscv: virt: Set the clock-frequency
-Date: Thu, 16 Dec 2021 14:54:27 +1000
-Message-Id: <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
-References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mxjgi-00086C-Ct
+ for qemu-riscv@nongnu.org; Thu, 16 Dec 2021 00:52:20 -0500
+Received: from [2a00:1450:4864:20::32a] (port=50974
+ helo=mail-wm1-x32a.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mxjgf-0000AM-BP
+ for qemu-riscv@nongnu.org; Thu, 16 Dec 2021 00:52:20 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id b73so2716016wmd.0
+ for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 21:52:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tMPSN2ANwa090WgYIMxJe5NVOEMqce7qNPskw7/FOCI=;
+ b=72wRnxxco19XRDiOBn1f6i43OG8zB2OJk/fDr7P7tnKmDdjQyFgtipLBAbuOAshFHE
+ QDHtr3DC81FN/28ipeodZ1W9gNocJuTJQPmC7nj72yN/SUQ2cM+Fafy8a79EdI5HPzBT
+ 56gWCCQKFj7rjdwdfBl1Y9qw4jQvZ1scC9isqI45fmdeaUPimflXJSMKq2xpPQCqw1Qu
+ rsjtBsZgikJMzYkokxO64YUj09ge2opOTdWJblgUhEiAmsV/P232U+iOwM2QCE5TckO2
+ VBakgXBQyEdhjpypACaoZGXK4WWC2i0cu51PwwgwPsJLA8XD06RlVKAfH77moIHRuTny
+ W80A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tMPSN2ANwa090WgYIMxJe5NVOEMqce7qNPskw7/FOCI=;
+ b=JLPedyVZLu143g+UdhqZQJDzxmoxekr87SnzS4QKojxr6qd4bZ4wCzbvh278eMD63V
+ W/b01WW/zYYvNondiYdJXSkgWfvjrkaFysdtw1oWtuHI5UDMQM4UPGFvMXN16vn1lUwL
+ U8XnofzDKYc/pa4nmmay8npdv+DIXsp61X/xhD94W87M9Qc27Z/xadNfArGi2LGU2eme
+ Lqs2BxLQtka1FWyS+T33pbB+Apnk/Bh+DcOLF6YKfuzKAKqv6OP3+4k16++anGZ+KWSn
+ MjkS0oh9C+g8PLAW2sKW7Hqc2FGNdEODFzIlvBxNSpSg4kHwEB6TwwnPTR5L+oh/kKAf
+ VDuQ==
+X-Gm-Message-State: AOAM533ActIhKTvkKKFY83o5+wVV8RxSU2ClZOqHcrbcbZaqLshtz2eO
+ DOcrZJgGIHWGzUqY7H3nt/x+z8dErmDyrNClFUs40A==
+X-Google-Smtp-Source: ABdhPJwCkTKV63kPtFI7EPfEq8dOp7mvT5s5vkxG6D5tM9O+YTGESbORx/0mAD9rVMTnVZ7FgT/V/bSSJ9YPwfJLlYc=
+X-Received: by 2002:a7b:c194:: with SMTP id y20mr3361474wmi.61.1639633935667; 
+ Wed, 15 Dec 2021 21:52:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.42;
- envelope-from=prvs=977d27bfe=alistair.francis@opensource.wdc.com;
- helo=esa4.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+ <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 16 Dec 2021 11:22:04 +0530
+Message-ID: <CAAhSdy1vuOPJxykzM7C3csvJPbMK9dOAskbQkMLQMQ289hDyEg@mail.gmail.com>
+Subject: Re: [PATCH v2 9/9] hw/riscv: virt: Set the clock-frequency
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair23@gmail.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32a
+ (failed)
+Received-SPF: none client-ip=2a00:1450:4864:20::32a;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x32a.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,39 +77,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2021 04:55:35 -0000
+X-List-Received-Date: Thu, 16 Dec 2021 05:52:20 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+On Thu, Dec 16, 2021 at 10:31 AM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> As per the device tree specification let's set the clock-frequency for
+> the virt CPUs.
+>
+> QEMU doesn't really have an exact clock, so let's just 1000000 as it's a
+> nice round number and matches the sifive_u CLINT_TIMEBASE_FREQ.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/472 (RISC-V virt)
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  hw/riscv/virt.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 3af074148e..41a85cfc60 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -202,6 +202,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
+>              s->soc[socket].hartid_base + cpu);
+>          qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
+> +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "clock-frequency", 1000000);
 
-As per the device tree specification let's set the clock-frequency for
-the virt CPUs.
+Instead of hard-coding, please use the same define used for timebase-frequency
+(i.e. RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ)
 
-QEMU doesn't really have an exact clock, so let's just 1000000 as it's a
-nice round number and matches the sifive_u CLINT_TIMEBASE_FREQ.
+Regards,
+Anup
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/472 (RISC-V virt)
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/virt.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3af074148e..41a85cfc60 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -202,6 +202,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s,=
- int socket,
-         qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
-             s->soc[socket].hartid_base + cpu);
-         qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu")=
-;
-+        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "clock-frequency", 1000=
-000);
-         riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
-         qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle)=
-;
-=20
---=20
-2.31.1
-
+>          riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
+>          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
+>
+> --
+> 2.31.1
+>
+>
 
