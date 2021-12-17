@@ -1,59 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1my62J-0004Pl-Vj
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Dec 2021 00:44:08 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47296)
+	id 1my65D-0005lq-24
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Dec 2021 00:47:07 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48470)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1my62F-0004NA-Uo; Fri, 17 Dec 2021 00:44:05 -0500
-Received: from [2607:f8b0:4864:20::130] (port=46903
- helo=mail-il1-x130.google.com)
+ id 1my657-0005l2-Js; Fri, 17 Dec 2021 00:47:03 -0500
+Received: from [2607:f8b0:4864:20::d33] (port=39516
+ helo=mail-io1-xd33.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1my62E-0007Kv-8x; Fri, 17 Dec 2021 00:44:03 -0500
-Received: by mail-il1-x130.google.com with SMTP id s11so783845ilt.13;
- Thu, 16 Dec 2021 21:44:01 -0800 (PST)
+ id 1my655-0003bw-Vz; Fri, 17 Dec 2021 00:47:01 -0500
+Received: by mail-io1-xd33.google.com with SMTP id c3so1480970iob.6;
+ Thu, 16 Dec 2021 21:46:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5LTPXOS1W8BVbmDHaufae9dxVyQwLN9iyolUriwjOfQ=;
- b=FlMlQcLgEZ+2dulIWDuUN2d3tB2eGGNm8aL63A6YVS2a3c0OBwWsvIV7hp/zuvVeRv
- wdFwBRNoeMJiUX2QK62UuvCM0wY+/++8JP/a7C/lcEoyxR9a7Wbo9mUdl5jH8poPS0Mv
- FQG92iYDTRfVcbP+ARDQRlpZ0TnoW0mX2lDSlhZM74ZGmIUxDezTj9P83i7NPYjn+N0X
- 9n4zJHoK/CYohNh/8dGUDe47Fcpk3S7r0Ti3DPIlDP8j6FuP51sNUMoZj17QwdAfIZtw
- 3dYZTbOI4QsOEWmWMPhMjEhiqVBAdKnrdKImN6wJaRuelJdldK1TnBLM+/5ycKTEtGK2
- LtXQ==
+ :cc; bh=MR8IyO1wlDBy4M1pGrAdlcj6CT6XwwZ+bZlEK4UwxpU=;
+ b=osgGIOctdKf1w186wxh3deYirdKwaWUUImMFifbs+8ZdrTZRpYmvAs67rgfzQMcR+v
+ Npj/cANPnoEI5pri5NkHFQoBfJQkMck1t+tPGEc2kkqDr6aTZG8euOic3aDd2nWoSQ7B
+ 5kaddFFaiJ4Zx3rbZN9ZHTwoNoqKQnRu/LxZism5Ih2ZtDHh2YiTQQouTyAP4kEMuUqs
+ ryNLgP96BUS46fe7jqm0UzZ3YsGhsdNI//Zbgu8/dV0z3RK1bbbxtgeoAomTbX3BqpQi
+ t2CYQEeUEwft3QikAe/pJo1ec5wT9HT0B0zzk8ElZNX4YpQD7ssYDUWNhDRsPEvDddnT
+ X7Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5LTPXOS1W8BVbmDHaufae9dxVyQwLN9iyolUriwjOfQ=;
- b=ZIF20awS7+D4ZkhvWVm8si9tM70lneL74oKDN++j6xQXg9WUYLxx0HoCelZ2WZrqiY
- BBj5FRpjvxVr4C+ZHpWfqsfj8BUzX+AiRaCnikVT9tgK6J1F+IvR0lOnHrQPfyhDSOls
- iCTMnwKtpQUIeseGjRMNsXhm02UVFqjouXAKMqhs+Mgz8KHchDr8g/tYEN6ZKd0pS1Q3
- lZjEISI6rrCOliujWVcawcAW6w0VWhMLeeUD4y5vFIbz+zJTY2ieETaiFzQDO/I3VD/A
- 8TQ14V1ow/2Q73fniviAUm7H6I9ftMs2x6F1zb1ruzW0oaSBNvADsWsuQw/KFbIy4VD3
- aDlw==
-X-Gm-Message-State: AOAM533AQUKQJmdDVaHnQpxtoGFPEnXbkMX4PgFuHqkY/Z6tuwsj1F/N
- opaZlAuNAkCHM6+ktqJBftCLF7kIfWdayGu+G7I=
-X-Google-Smtp-Source: ABdhPJzyiRI6gikVpTWmdwNkuPaiYw8cJ1rhgy7KYJaT+Fn3tnyfsahhLKELTRxND4VvRpccX0eBHd7YzmN/saJf7Ng=
-X-Received: by 2002:a92:c802:: with SMTP id v2mr755391iln.208.1639719840756;
- Thu, 16 Dec 2021 21:44:00 -0800 (PST)
+ bh=MR8IyO1wlDBy4M1pGrAdlcj6CT6XwwZ+bZlEK4UwxpU=;
+ b=nOMmb4YgbOYeYlw0slLwqvBKwTz4U/CDzSKOLsg0c8o/ZT0ORwVqbo2TkgOwz5pgG4
+ gj0ZOSkRcWZuLyz3FB6bn0mThY7wTWiiVicef/E/nUSNuMIYlVWvigGy2emPRaNsiXSX
+ MfHZasS4Pk4dB0J7D7Z3FQs6DS6VI3XUY0keMogEdmgAuea80joedUgTn6RfTLDVLIye
+ 3YJ0XO4jszKM3W5v4OcrxXMgQqLhdvkPS8zJ44tfuc4LGGSoIynspHq74BBh9VMWlkLY
+ Bgag/wFvdsZOA/IUTAIVgqzbQHQx8o/zQELirn+4SwT+d0ORXCNlpgEF3QxT4yymDfHs
+ W/UA==
+X-Gm-Message-State: AOAM531DhtS39MRmeRQVUPox93UezUoDEq+P9XgkEZ1r4PLO7OWPyvOu
+ cs2R/yJbnHliiRzybFxCfnZaJ2bJKlDJYxoGq5Y=
+X-Google-Smtp-Source: ABdhPJztc1+4Cx40HejjQuajZAVMUEtBgQ6Mt2njFj60NBVB4ba8wFsGs6+V7hxZTfq3IWMazaheiNyiBgXFUzIndYo=
+X-Received: by 2002:a05:6638:3384:: with SMTP id
+ h4mr806758jav.169.1639720018497; 
+ Thu, 16 Dec 2021 21:46:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20211216051844.3921088-1-vineetg@rivosinc.com>
-In-Reply-To: <20211216051844.3921088-1-vineetg@rivosinc.com>
+References: <20211214032456.70203-1-jrtc27@jrtc27.com>
+In-Reply-To: <20211214032456.70203-1-jrtc27@jrtc27.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Dec 2021 15:43:34 +1000
-Message-ID: <CAKmqyKNtQj0vsjo5qf=Nk2RtRHn3xCqdmTjn4kHeeSP=E5JtXg@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Enable bitmanip Zb[abcs] instructions
-To: Vineet Gupta <vineetg@rivosinc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+Date: Fri, 17 Dec 2021 15:46:32 +1000
+Message-ID: <CAKmqyKOuydbUXerGWPZDgJFoA1zSM4+octxJAoYC3ZQquMdvqg@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Use load address rather than entry point for
+ fw_dynamic next_addr
+To: Jessica Clarke <jrtc27@jrtc27.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:All patches CC here" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::130
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -74,49 +76,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Dec 2021 05:44:05 -0000
+X-List-Received-Date: Fri, 17 Dec 2021 05:47:04 -0000
 
-On Thu, Dec 16, 2021 at 3:21 PM Vineet Gupta <vineetg@rivosinc.com> wrote:
+On Tue, Dec 14, 2021 at 1:25 PM Jessica Clarke <jrtc27@jrtc27.com> wrote:
 >
-> The bitmanip extension has now been ratified [1] and upstream tooling
-> (gcc/binutils) support it too, so move them out of experimental and also
-> enable by default (for better test exposure/coverage)
+> The original BBL boot method had the kernel embedded as an opaque blob
+> that was blindly jumped to, which OpenSBI implemented as fw_payload.
+> OpenSBI then implemented fw_jump, which allows the payload to be loaded
+> elsewhere, but still blindly jumps to a fixed address at which the
+> kernel is to be loaded. Finally, OpenSBI introduced fw_dynamic, which
+> allows the previous stage to inform it where to jump to, rather than
+> having to blindly guess like fw_jump, or embed the payload as part of
+> the build like fw_payload. When used with an opaque binary (i.e. the
+> output of objcopy -O binary), it matches the behaviour of the previous
+> methods. However, when used with an ELF, QEMU currently passes on the
+> ELF's entry point address, which causes a discrepancy compared with all
+> the other boot methods if that entry point is not the first instruction
+> in the binary.
 >
-> [1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+> This difference specific to fw_dynamic with an ELF is not apparent when
+> booting Linux, since its entry point is the first instruction in the
+> binary. However, FreeBSD has a separate ELF entry point, following the
+> calling convention used by its bootloader, that differs from the first
+> instruction in the binary, used for the legacy SBI entry point, and so
+> the specific combination of QEMU's default fw_dynamic firmware with
+> booting FreeBSD as an ELF rather than a raw binary does not work.
 >
-> Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
+> Thus, align the behaviour when loading an ELF with the behaviour when
+> loading a raw binary; namely, use the base address of the loaded kernel
+> in place of the entry point.
+>
+> The uImage code is left as-is in using the U-Boot header's entry point,
+> since the calling convention for that entry point is the same as the SBI
+> one and it mirrors what U-Boot will do.
+>
+> Signed-off-by: Jessica Clarke <jrtc27@jrtc27.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  hw/riscv/boot.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f81299812350..c00d59cd04b5 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -635,10 +635,10 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 519fa455a1..f67264374e 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -151,12 +151,19 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
+>                                 target_ulong kernel_start_addr,
+>                                 symbol_fn_t sym_cb)
+>  {
+> -    uint64_t kernel_entry;
+> +    uint64_t kernel_load_base, kernel_entry;
 >
->      /* These are experimental so mark with 'x-' */
-> -    DEFINE_PROP_BOOL("x-zba", RISCVCPU, cfg.ext_zba, false),
-> -    DEFINE_PROP_BOOL("x-zbb", RISCVCPU, cfg.ext_zbb, false),
-> -    DEFINE_PROP_BOOL("x-zbc", RISCVCPU, cfg.ext_zbc, false),
-> -    DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
-> +    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-> +    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-> +    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-> +    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
->      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
->      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->      DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+> +    /*
+> +     * NB: Use low address not ELF entry point to ensure that the fw_dynamic
+> +     * behaviour when loading an ELF matches the fw_payload, fw_jump and BBL
+> +     * behaviour, as well as fw_dynamic with a raw binary, all of which jump to
+> +     * the (expected) load address load address. This allows kernels to have
+> +     * separate SBI and ELF entry points (used by FreeBSD, for example).
+> +     */
+>      if (load_elf_ram_sym(kernel_filename, NULL, NULL, NULL,
+> -                         &kernel_entry, NULL, NULL, NULL, 0,
+> +                         NULL, &kernel_load_base, NULL, NULL, 0,
+>                           EM_RISCV, 1, 0, NULL, true, sym_cb) > 0) {
+> -        return kernel_entry;
+> +        return kernel_load_base;
+>      }
+>
+>      if (load_uimage_as(kernel_filename, &kernel_entry, NULL, NULL,
 > --
-> 2.30.2
+> 2.33.1
 >
 >
 
