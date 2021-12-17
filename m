@@ -1,44 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1my3w2-0004ZM-Sb
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 22:29:30 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46212)
+	id 1my40c-0007oU-4H
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 22:34:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47288)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1my3vx-0004Xv-QJ; Thu, 16 Dec 2021 22:29:25 -0500
-Received: from mail142-21.mail.alibaba.com ([198.11.142.21]:34768)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1my3vp-0003qk-5E; Thu, 16 Dec 2021 22:29:25 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436283|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.00467366-0.000113613-0.995213;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047199; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=5; RT=5; SR=0; TI=SMTPD_---.MGzHUd4_1639711734; 
-Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MGzHUd4_1639711734)
- by smtp.aliyun-inc.com(33.37.68.188); Fri, 17 Dec 2021 11:28:55 +0800
-Subject: Re: [PATCH v3 1/1] target/riscv: Fix PMP propagation for tlb
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, bin.meng@windriver.com, Alistair.Francis@wdc.com
-References: <20211123090902.23321-1-zhiwei_liu@c-sky.com>
-From: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Message-ID: <be20b27e-ee11-477c-4f67-8301398cb416@c-sky.com>
-Date: Fri, 17 Dec 2021 11:28:54 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1my40Y-0007iw-UI; Thu, 16 Dec 2021 22:34:10 -0500
+Received: from [2607:f8b0:4864:20::d35] (port=45750
+ helo=mail-io1-xd35.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1my40U-0004WD-BM; Thu, 16 Dec 2021 22:34:08 -0500
+Received: by mail-io1-xd35.google.com with SMTP id q72so1142325iod.12;
+ Thu, 16 Dec 2021 19:34:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=RnIo9Uhua4UCEl7q2nD44MO4B7TN8ti8zAuQe2ag0/g=;
+ b=N/tH+L5w4iFozdrGCSUyhmDjWic/0fRjo7D7Egl7LTL2SEczLFcI2EUi0XP4i/kU9D
+ PKIN2AUAQ3XyAK9dm3t+75PuDGG3IilZM7ZzyFgcooVc+romYMc07LBMqQDYpN+88cpf
+ NgvCq+GElFZ4cpBmzYRen+c4mzGSKJI0LuWJolRTJGPu0jZY9YELco8MIhVAxVMeYtxO
+ UOyTPZtauE4Rf3XnZ49QkBi1E5gynkJdLOLJOQ8qnL8zu95IqzkK3WgJ3ShgzAghgTNI
+ qrHvbjDUqWjL9zb6/dfs4A60cZk6J1uxjIyvxhWs03ww65CtEgB4bVVIogQMYgl9Rfr3
+ PRSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=RnIo9Uhua4UCEl7q2nD44MO4B7TN8ti8zAuQe2ag0/g=;
+ b=Dn7zqZUmHHIUkZjhTl6rSO5rzaow9t276MuojsEVyfJaxUG+SQef51l7Y+1aUh7hS8
+ TjKsMqefGeLwHFXgvRgeGtL04ENL6l0GsVbNQVBhmnM+YWsLIkCk6Ka5n1VBmS47X4PR
+ KZDi/evrsf5zXDM1fOiemjuvZF5nnXO77RAXV/qsYIsxlEWiJd/W6GilGJpwrFVdZ7e9
+ A9DH0cjJdcLaW7lqcDsVXKT/vk5EgxPiU8ziiqwBKbpTeUlZYJbpJcyhTqtMBERKX5Zz
+ u3mHd57oFRyc33rzfPRfUnvElqNgYaqSzkUzjX2O3skqbN0sBMACzCYQ/2/MLlh3Plo/
+ MQhQ==
+X-Gm-Message-State: AOAM5331AgwKFqVP2op8hv7vpsf9sfQZ/caeaF+fq+vIGX5WUVTrxdUE
+ yj9A8EbOyYh0JF2hjPRTWK8KUAqiWiJHDxD00i4=
+X-Google-Smtp-Source: ABdhPJyc3TkKxfQbYGHmiQZUNLgDVkW9cp/M+9aWcDIUA+MepzeZs99xwpp2xc+7mMqHBZaFryiY9HVsl4qWmOv0V5k=
+X-Received: by 2002:a05:6638:1395:: with SMTP id
+ w21mr653133jad.125.1639712044924; 
+ Thu, 16 Dec 2021 19:34:04 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20211123090902.23321-1-zhiwei_liu@c-sky.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-Received-SPF: none client-ip=198.11.142.21; envelope-from=zhiwei_liu@c-sky.com;
- helo=mail142-21.mail.alibaba.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.034,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <20211216051844.3921088-1-vineetg@rivosinc.com>
+In-Reply-To: <20211216051844.3921088-1-vineetg@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 17 Dec 2021 13:33:38 +1000
+Message-ID: <CAKmqyKPVU0RNhAq43KTAkBq+0PtZNQVYf1nqVMXXh7Kwpb8fow@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Enable bitmanip Zb[abcs] instructions
+To: Vineet Gupta <vineetg@rivosinc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d35
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -51,211 +75,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Dec 2021 03:29:26 -0000
+X-List-Received-Date: Fri, 17 Dec 2021 03:34:11 -0000
 
+On Thu, Dec 16, 2021 at 3:21 PM Vineet Gupta <vineetg@rivosinc.com> wrote:
+>
+> The bitmanip extension has now been ratified [1] and upstream tooling
+> (gcc/binutils) support it too, so move them out of experimental and also
+> enable by default (for better test exposure/coverage)
+>
+> [1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+>
+> Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
 
-On 2021/11/23 下午5:09, LIU Zhiwei wrote:
-> Only the pmp index that be checked by pmp_hart_has_privs can be used
-> by pmp_get_tlb_size to avoid an error pmp index.
->
-> Before modification, we may use an error pmp index. For example,
-> we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
-> is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
-> will return true;
->
-> However, this checked pmp index is discarded as pmp_hart_has_privs
-> return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
-> rules. The tlb_sa will be 0x0, and tlb_ea will be 0x4fff. If there is
-> a pmp rule [0x10, 0x4]. It will be misused as it is legal in
-> pmp_get_tlb_size.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
 > ---
->   target/riscv/cpu_helper.c | 16 ++++++-----
->   target/riscv/pmp.c        | 56 +++++++++++++--------------------------
->   target/riscv/pmp.h        |  6 ++---
->   3 files changed, 31 insertions(+), 47 deletions(-)
+>  target/riscv/cpu.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9eeed38c7e..4239bd2ca5 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -362,24 +362,26 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
->                                       int mode)
->   {
->       pmp_priv_t pmp_priv;
-> -    target_ulong tlb_size_pmp = 0;
-> +    int pmp_index = -1;
->   
->       if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
->           *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
->           return TRANSLATE_SUCCESS;
->       }
->   
-> -    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
-> -                            mode)) {
-> +    pmp_index = pmp_hart_has_privs(env, addr, size, 1 << access_type,
-> +                                   &pmp_priv, mode);
-> +    if (pmp_index < 0) {
->           *prot = 0;
->           return TRANSLATE_PMP_FAIL;
->       }
->   
->       *prot = pmp_priv_to_page_prot(pmp_priv);
-> -    if (tlb_size != NULL) {
-> -        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
-> -            *tlb_size = tlb_size_pmp;
-> -        }
-> +    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
-> +        target_ulong tlb_sa = addr & ~(*tlb_size - 1);
-> +        target_ulong tlb_ea = tlb_sa + *tlb_size - 1;
-> +
-> +        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
->       }
->   
->       return TRANSLATE_SUCCESS;
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 54abf42583..1172142e34 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -297,8 +297,11 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
->   
->   /*
->    * Check if the address has required RWX privs to complete desired operation
-> + * Return PMP rule index if a pmp rule match
-> + * Return MAX_RISCV_PMPS if default match
-> + * Return negtive value if no match
->    */
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->       target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
->       target_ulong mode)
->   {
-> @@ -310,8 +313,10 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->   
->       /* Short cut if no rules */
->       if (0 == pmp_get_num_rules(env)) {
-> -        return pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                          allowed_privs, mode);
-> +        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                       allowed_privs, mode)) {
-> +            ret = MAX_RISCV_PMPS;
-> +        }
->       }
->   
->       if (size == 0) {
-> @@ -338,7 +343,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->           if ((s + e) == 1) {
->               qemu_log_mask(LOG_GUEST_ERROR,
->                             "pmp violation - access is partially inside\n");
-> -            ret = 0;
-> +            ret = -1;
->               break;
->           }
->   
-> @@ -441,18 +446,22 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->                   }
->               }
->   
-> -            ret = ((privs & *allowed_privs) == privs);
-> +            if ((privs & *allowed_privs) == privs) {
-> +                ret = i;
-> +            }
->               break;
->           }
->       }
->   
->       /* No rule matched */
->       if (ret == -1) {
-> -        return pmp_hart_has_privs_default(env, addr, size, privs,
-> -                                          allowed_privs, mode);
-> +        if (pmp_hart_has_privs_default(env, addr, size, privs,
-> +                                       allowed_privs, mode)) {
-> +            ret = MAX_RISCV_PMPS;
-> +        }
->       }
->   
-> -    return ret == 1 ? true : false;
-> +    return ret;
->   }
->   
->   /*
-> @@ -595,8 +604,8 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
->    * Calculate the TLB size if the start address or the end address of
->    * PMP entry is presented in the TLB page.
->    */
-> -static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> -                                     target_ulong tlb_sa, target_ulong tlb_ea)
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> +                              target_ulong tlb_sa, target_ulong tlb_ea)
->   {
->       target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
->       target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
-
-Error here.
-
-Add "
-
-+    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
-+        return tlb_ea - tlb_sa + 1;
-+    }
-
-"
-
-Thanks,
-Zhiwei
-
-> @@ -616,33 +625,6 @@ static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
->       return 0;
->   }
->   
-> -/*
-> - * Check is there a PMP entry which range covers this page. If so,
-> - * try to find the minimum granularity for the TLB size.
-> - */
-> -bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-> -                         target_ulong *tlb_size)
-> -{
-> -    int i;
-> -    target_ulong val;
-> -    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
-> -
-> -    for (i = 0; i < MAX_RISCV_PMPS; i++) {
-> -        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
-> -        if (val) {
-> -            if (*tlb_size == 0 || *tlb_size > val) {
-> -                *tlb_size = val;
-> -            }
-> -        }
-> -    }
-> -
-> -    if (*tlb_size != 0) {
-> -        return true;
-> -    }
-> -
-> -    return false;
-> -}
-> -
->   /*
->    * Convert PMP privilege to TLB page privilege.
->    */
-> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-> index a9a0b363a7..94c0b960fb 100644
-> --- a/target/riscv/pmp.h
-> +++ b/target/riscv/pmp.h
-> @@ -68,11 +68,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
->   void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->       target_ulong val);
->   target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
-> -bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
-> +int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
->       target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
->       target_ulong mode);
-> -bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
-> -                         target_ulong *tlb_size);
-> +target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
-> +                              target_ulong tlb_sa, target_ulong tlb_ea);
->   void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
->   void pmp_update_rule_nums(CPURISCVState *env);
->   uint32_t pmp_get_num_rules(CPURISCVState *env);
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f81299812350..c00d59cd04b5 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -635,10 +635,10 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>
+>      /* These are experimental so mark with 'x-' */
+> -    DEFINE_PROP_BOOL("x-zba", RISCVCPU, cfg.ext_zba, false),
+> -    DEFINE_PROP_BOOL("x-zbb", RISCVCPU, cfg.ext_zbb, false),
+> -    DEFINE_PROP_BOOL("x-zbc", RISCVCPU, cfg.ext_zbc, false),
+> -    DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
+> +    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+> +    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+> +    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+> +    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+>      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>      DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
+> --
+> 2.30.2
+>
+>
 
