@@ -1,73 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1my3kb-0007vv-GS
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 22:17:42 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43734)
+	id 1my3nB-0001HX-Ol
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 22:20:21 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44242)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1my3kU-0007sN-VU; Thu, 16 Dec 2021 22:17:36 -0500
-Received: from [2607:f8b0:4864:20::d30] (port=38690
- helo=mail-io1-xd30.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1my3kT-0007fO-F9; Thu, 16 Dec 2021 22:17:34 -0500
-Received: by mail-io1-xd30.google.com with SMTP id z18so1152679iof.5;
- Thu, 16 Dec 2021 19:17:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BKHji+IkuyOpiN39efIMxEhXh4gUFKzskwRo2bL9pLE=;
- b=e6SB6betrXUQ66mNEntZbWfjvvewq1R0oj9L2Z3DEghAFgDg4CXPpYEE+MmUL/dzmd
- 12zWXyqFWFfUu2i0oyH54alrrZFdvEsJKpGPq8BNQaQzu5RPcRCaKXvEIQWcQeYS8SmS
- WPb5og+9AsJbO1QEmB3aSUxPr87Gom1SFVWytAIohApXbbISbydfZ6seQtcnjgGvZdO1
- 5aqb1nVpA+rsnHLtV/YoxsLd+1UsNcS/xLF+eyRCGUWzfXIvHGABwYaWt3BrcJJHor3A
- W66QFciUen4cl+pCph7S0Rs8eijBjrNsKfBdX5+9N7ZMe7DnnMTnfdttolQ7z5yFukbq
- 4YPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BKHji+IkuyOpiN39efIMxEhXh4gUFKzskwRo2bL9pLE=;
- b=MIjT7WkC3FMgbzv/IS0T9zgoJuavwXbO7y1ATNWGzTvip0xjgk2DWETZ35LYm4GlZx
- mkIOUMBoKGpv3DzhL7HuXWWY1zdd6BicQetv/TdsIbNB1K+PClRtTQttF/MSwiJAjtpF
- etU8hoc7wtH3c5kGyPBfmv+Zk0zutGCQoS/EM0EqGRBZ4wl3r/DDoMc3TgXY1/L63UAd
- 0tyUCUn/3PDFRnG+Ogb2sIaU3Uos2InKlSLB6esQqiiU+jfgVGEvrl23XBLRAXR8h7+T
- PBGEOEHikzwsE2SinC43Qb9lSTqcLVT7iNmOfFzogf8YtKjd4NSAyOrROqNoiJg9iwfi
- V+Kw==
-X-Gm-Message-State: AOAM5313vbDtQkz8gkyRr3Vlawgt5mgm1czwlnUxBUpMXDM4mlTc8134
- 93qC1bJZyIUxPiYp7Dxodwintt/8J64YfM1xCyY=
-X-Google-Smtp-Source: ABdhPJy2zicmts1/gCcSWNmNCLMRRdfoR2Y/cqK9Ha7uq7SXOn17P5dHxC/fOIe9zSC+yVYKsIHNWnErFYh5vINlj10=
-X-Received: by 2002:a05:6638:1395:: with SMTP id
- w21mr625940jad.125.1639711050489; 
- Thu, 16 Dec 2021 19:17:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1my3n8-0001EO-CD; Thu, 16 Dec 2021 22:20:19 -0500
+Received: from out28-53.mail.aliyun.com ([115.124.28.53]:36065)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1my3n4-0001u5-NY; Thu, 16 Dec 2021 22:20:18 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436284|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.00447079-8.70868e-05-0.995442;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.MGwx4CF_1639711203; 
+Received: from localhost.localdomain(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.MGwx4CF_1639711203)
+ by smtp.aliyun-inc.com(10.147.41.120);
+ Fri, 17 Dec 2021 11:20:04 +0800
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v4 1/1] target/riscv: Fix PMP propagation for tlb
+Date: Fri, 17 Dec 2021 11:20:00 +0800
+Message-Id: <20211217032000.235214-1-zhiwei_liu@c-sky.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20211211041917.135345-1-anup.patel@wdc.com>
- <20211211041917.135345-9-anup.patel@wdc.com>
-In-Reply-To: <20211211041917.135345-9-anup.patel@wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 17 Dec 2021 13:17:04 +1000
-Message-ID: <CAKmqyKNZQPWV3dV5wQqs3fCxPT-_cAFmAdX53=jWBz1oztaShQ@mail.gmail.com>
-Subject: Re: [PATCH v5 08/23] target/riscv: Allow AIA device emulation to set
- ireg rmw callback
-To: Anup Patel <anup.patel@wdc.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup@brainfault.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+Content-Transfer-Encoding: 8bit
+Received-SPF: none client-ip=115.124.28.53; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-53.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,93 +49,202 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Dec 2021 03:17:36 -0000
+X-List-Received-Date: Fri, 17 Dec 2021 03:20:19 -0000
 
-On Sat, Dec 11, 2021 at 2:26 PM Anup Patel <anup.patel@wdc.com> wrote:
->
-> The AIA device emulation (such as AIA IMSIC) should be able to set
-> (or provide) AIA ireg read-modify-write callback for each privilege
-> level of a RISC-V HART.
->
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+Only the pmp index that be checked by pmp_hart_has_privs can be used
+by pmp_get_tlb_size to avoid an error pmp index.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Before modification, we may use an error pmp index. For example,
+we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
+is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
+will return true;
 
-Alistair
+However, this checked pmp index is discarded as pmp_hart_has_privs
+return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
+rules. The tlb_sa will be 0x0, and tlb_ea will be 0x4fff. If there is
+a pmp rule [0x10, 0x14). It will be misused as it is legal in
+pmp_get_tlb_size.
 
-> ---
->  target/riscv/cpu.h        | 23 +++++++++++++++++++++++
->  target/riscv/cpu_helper.c | 14 ++++++++++++++
->  2 files changed, 37 insertions(+)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 6e5b6acd44..df1d792951 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -240,6 +240,22 @@ struct CPURISCVState {
->      uint64_t (*rdtime_fn)(uint32_t);
->      uint32_t rdtime_fn_arg;
->
-> +    /* machine specific AIA ireg read-modify-write callback */
-> +#define AIA_MAKE_IREG(__isel, __priv, __virt, __vgein, __xlen) \
-> +    ((((__xlen) & 0xff) << 24) | \
-> +     (((__vgein) & 0x3f) << 20) | \
-> +     (((__virt) & 0x1) << 18) | \
-> +     (((__priv) & 0x3) << 16) | \
-> +     (__isel & 0xffff))
-> +#define AIA_IREG_ISEL(__ireg)                  ((__ireg) & 0xffff)
-> +#define AIA_IREG_PRIV(__ireg)                  (((__ireg) >> 16) & 0x3)
-> +#define AIA_IREG_VIRT(__ireg)                  (((__ireg) >> 18) & 0x1)
-> +#define AIA_IREG_VGEIN(__ireg)                 (((__ireg) >> 20) & 0x3f)
-> +#define AIA_IREG_XLEN(__ireg)                  (((__ireg) >> 24) & 0xff)
-> +    int (*aia_ireg_rmw_fn[4])(void *arg, target_ulong reg,
-> +        target_ulong *val, target_ulong new_val, target_ulong write_mask);
-> +    void *aia_ireg_rmw_fn_arg[4];
-> +
->      /* True if in debugger mode.  */
->      bool debugger;
->
-> @@ -391,6 +407,13 @@ uint32_t riscv_cpu_update_mip(RISCVCPU *cpu, uint32_t mask, uint32_t value);
->  #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
->  void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
->                               uint32_t arg);
-> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-> +                                   int (*rmw_fn)(void *arg,
-> +                                                 target_ulong reg,
-> +                                                 target_ulong *val,
-> +                                                 target_ulong new_val,
-> +                                                 target_ulong write_mask),
-> +                                   void *rmw_fn_arg);
->  #endif
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv);
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 1fa9f0e584..57c07ba1a4 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -364,6 +364,20 @@ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(uint32_t),
->      env->rdtime_fn_arg = arg;
->  }
->
-> +void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
-> +                                   int (*rmw_fn)(void *arg,
-> +                                                 target_ulong reg,
-> +                                                 target_ulong *val,
-> +                                                 target_ulong new_val,
-> +                                                 target_ulong write_mask),
-> +                                   void *rmw_fn_arg)
-> +{
-> +    if (priv <= PRV_M) {
-> +        env->aia_ireg_rmw_fn[priv] = rmw_fn;
-> +        env->aia_ireg_rmw_fn_arg[priv] = rmw_fn_arg;
-> +    }
-> +}
-> +
->  void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
->  {
->      if (newpriv > PRV_M) {
-> --
-> 2.25.1
->
->
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+---
+ target/riscv/cpu_helper.c | 16 ++++++-----
+ target/riscv/pmp.c        | 58 +++++++++++++++------------------------
+ target/riscv/pmp.h        |  6 ++--
+ 3 files changed, 34 insertions(+), 46 deletions(-)
+
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9eeed38c7e..4239bd2ca5 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -362,24 +362,26 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot,
+                                     int mode)
+ {
+     pmp_priv_t pmp_priv;
+-    target_ulong tlb_size_pmp = 0;
++    int pmp_index = -1;
+ 
+     if (!riscv_feature(env, RISCV_FEATURE_PMP)) {
+         *prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+         return TRANSLATE_SUCCESS;
+     }
+ 
+-    if (!pmp_hart_has_privs(env, addr, size, 1 << access_type, &pmp_priv,
+-                            mode)) {
++    pmp_index = pmp_hart_has_privs(env, addr, size, 1 << access_type,
++                                   &pmp_priv, mode);
++    if (pmp_index < 0) {
+         *prot = 0;
+         return TRANSLATE_PMP_FAIL;
+     }
+ 
+     *prot = pmp_priv_to_page_prot(pmp_priv);
+-    if (tlb_size != NULL) {
+-        if (pmp_is_range_in_tlb(env, addr & ~(*tlb_size - 1), &tlb_size_pmp)) {
+-            *tlb_size = tlb_size_pmp;
+-        }
++    if ((tlb_size != NULL) && pmp_index != MAX_RISCV_PMPS) {
++        target_ulong tlb_sa = addr & ~(*tlb_size - 1);
++        target_ulong tlb_ea = tlb_sa + *tlb_size - 1;
++
++        *tlb_size = pmp_get_tlb_size(env, pmp_index, tlb_sa, tlb_ea);
+     }
+ 
+     return TRANSLATE_SUCCESS;
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 54abf42583..d5b6d36259 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -297,8 +297,11 @@ static bool pmp_hart_has_privs_default(CPURISCVState *env, target_ulong addr,
+ 
+ /*
+  * Check if the address has required RWX privs to complete desired operation
++ * Return PMP rule index if a pmp rule match
++ * Return MAX_RISCV_PMPS if default match
++ * Return negtive value if no match
+  */
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+     target_ulong mode)
+ {
+@@ -310,8 +313,10 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+ 
+     /* Short cut if no rules */
+     if (0 == pmp_get_num_rules(env)) {
+-        return pmp_hart_has_privs_default(env, addr, size, privs,
+-                                          allowed_privs, mode);
++        if (pmp_hart_has_privs_default(env, addr, size, privs,
++                                       allowed_privs, mode)) {
++            ret = MAX_RISCV_PMPS;
++        }
+     }
+ 
+     if (size == 0) {
+@@ -338,7 +343,7 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+         if ((s + e) == 1) {
+             qemu_log_mask(LOG_GUEST_ERROR,
+                           "pmp violation - access is partially inside\n");
+-            ret = 0;
++            ret = -1;
+             break;
+         }
+ 
+@@ -441,18 +446,22 @@ bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+                 }
+             }
+ 
+-            ret = ((privs & *allowed_privs) == privs);
++            if ((privs & *allowed_privs) == privs) {
++                ret = i;
++            }
+             break;
+         }
+     }
+ 
+     /* No rule matched */
+     if (ret == -1) {
+-        return pmp_hart_has_privs_default(env, addr, size, privs,
+-                                          allowed_privs, mode);
++        if (pmp_hart_has_privs_default(env, addr, size, privs,
++                                       allowed_privs, mode)) {
++            ret = MAX_RISCV_PMPS;
++        }
+     }
+ 
+-    return ret == 1 ? true : false;
++    return ret;
+ }
+ 
+ /*
+@@ -595,8 +604,8 @@ target_ulong mseccfg_csr_read(CPURISCVState *env)
+  * Calculate the TLB size if the start address or the end address of
+  * PMP entry is presented in the TLB page.
+  */
+-static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+-                                     target_ulong tlb_sa, target_ulong tlb_ea)
++target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
++                              target_ulong tlb_sa, target_ulong tlb_ea)
+ {
+     target_ulong pmp_sa = env->pmp_state.addr[pmp_index].sa;
+     target_ulong pmp_ea = env->pmp_state.addr[pmp_index].ea;
+@@ -613,34 +622,11 @@ static target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
+         return pmp_ea - tlb_sa + 1;
+     }
+ 
+-    return 0;
+-}
+-
+-/*
+- * Check is there a PMP entry which range covers this page. If so,
+- * try to find the minimum granularity for the TLB size.
+- */
+-bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+-                         target_ulong *tlb_size)
+-{
+-    int i;
+-    target_ulong val;
+-    target_ulong tlb_ea = (tlb_sa + TARGET_PAGE_SIZE - 1);
+-
+-    for (i = 0; i < MAX_RISCV_PMPS; i++) {
+-        val = pmp_get_tlb_size(env, i, tlb_sa, tlb_ea);
+-        if (val) {
+-            if (*tlb_size == 0 || *tlb_size > val) {
+-                *tlb_size = val;
+-            }
+-        }
+-    }
+-
+-    if (*tlb_size != 0) {
+-        return true;
++    if (pmp_sa <= tlb_sa && pmp_ea >= tlb_ea) {
++        return tlb_ea - tlb_sa + 1;
+     }
+ 
+-    return false;
++    return 0;
+ }
+ 
+ /*
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index a9a0b363a7..94c0b960fb 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -68,11 +68,11 @@ target_ulong mseccfg_csr_read(CPURISCVState *env);
+ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
+     target_ulong val);
+ target_ulong pmpaddr_csr_read(CPURISCVState *env, uint32_t addr_index);
+-bool pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
++int pmp_hart_has_privs(CPURISCVState *env, target_ulong addr,
+     target_ulong size, pmp_priv_t privs, pmp_priv_t *allowed_privs,
+     target_ulong mode);
+-bool pmp_is_range_in_tlb(CPURISCVState *env, hwaddr tlb_sa,
+-                         target_ulong *tlb_size);
++target_ulong pmp_get_tlb_size(CPURISCVState *env, int pmp_index,
++                              target_ulong tlb_sa, target_ulong tlb_ea);
+ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index);
+ void pmp_update_rule_nums(CPURISCVState *env);
+ uint32_t pmp_get_num_rules(CPURISCVState *env);
+-- 
+2.25.1
+
 
