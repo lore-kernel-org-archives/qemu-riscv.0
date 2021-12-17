@@ -1,76 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mxr73-0003bS-Dq
-	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 08:48:01 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:56124)
+	id 1my1G6-0003gK-Dg
+	for mharc-qemu-riscv@gnu.org; Thu, 16 Dec 2021 19:38:02 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
- id 1mxjAJ-0007qg-JW
- for qemu-riscv@nongnu.org; Thu, 16 Dec 2021 00:18:51 -0500
-Received: from [2607:f8b0:4864:20::42d] (port=35451
- helo=mail-pf1-x42d.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1my1Fw-0003fL-RS; Thu, 16 Dec 2021 19:37:54 -0500
+Received: from [2607:f8b0:4864:20::d2a] (port=35499
+ helo=mail-io1-xd2a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <vineetg@rivosinc.com>)
- id 1mxjAH-0002cm-Ll
- for qemu-riscv@nongnu.org; Thu, 16 Dec 2021 00:18:51 -0500
-Received: by mail-pf1-x42d.google.com with SMTP id p13so22673845pfw.2
- for <qemu-riscv@nongnu.org>; Wed, 15 Dec 2021 21:18:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=/3ih0jQP3bVdDSUp6/JrmQ/9EepiccfZebbj0OoY6T0=;
- b=JEv/j0LOdoGKeQTM0dIYOSP88BKwoPLmLW7ffSgy4DoT6W+IAlBLEsRwk/ixjVYVpR
- 9q+5DlSpWG+f8BCtdvoxT0lKOk9McNfCvcns4MSEYIfpLb6eQVD5IE0dfjsJqmp3KqZ5
- zZR+0wm0wR8/a4ii80u2XQWW8eblV6nlj91agrLYNZQ1HeIvzPdjl9nyOTtd9lbmkyAe
- y57KEgEKyEKCLCfuBwXXT2Yl/Wx+PI7fzerbBREbMkSE7bLDObV12TSSnBi763qNHiv7
- dPO87zIgJKhah6MtQuMYPpj8ixHUVrDrY69US6JdizIC3PeshfMR7scik2oy9AuTpDn6
- RNVA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1my1Fv-00074M-Dx; Thu, 16 Dec 2021 19:37:52 -0500
+Received: by mail-io1-xd2a.google.com with SMTP id 14so810830ioe.2;
+ Thu, 16 Dec 2021 16:37:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+hOz8IxXG4sIt5jxiS7v3+2MQSrZNOG0/+ISRJ3HY2s=;
+ b=L/6d66ZEJcvf7mWM8oOorzY3RFWCehwBsGAAdecWpwyrJKgv4vCoUEbPZnGK87Cj8T
+ c/GxAPHT7sZQGDUD/Y3j/nXPs3YZk4yYRIuDM45oK4WWQ8y8p+L2oEmcY4IJC5IvvQuf
+ 8RbUvpvOv601jBOePHkMvd0uZwKVo2rPQgvK68kO1HORNAyiM5PLY/UDIZe8hKtdOUfm
+ p2k+H9J7ROnEiwaVAz3vgKzB0WOVkZlgRVSeHdCLjJo9MY5VfWJlPx1MS9YdPoDA9UaZ
+ VTkRrP9JXjHabVPJgoPk3+b7vc8f5FTgcj7BdJxV/TWWaIN4Wrvn/32A8iMwFjwTSKtd
+ ZShg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=/3ih0jQP3bVdDSUp6/JrmQ/9EepiccfZebbj0OoY6T0=;
- b=B1ItR44zKKROvZdLeY4O1uON917l1Gwebp/PFHreV7svldhLZtgZyLy6I+xB/ahuRv
- u6Iai9qpHgnQNtFQKvjb+hpCh+aV63s9U8y132nFgG+AOsV+kaPlAkzJ2GvPZ0951yqq
- BgNAxAMCxohLNWsttsWbGct9Hgb2nm30qjXeq0ck3nsUWlLaQMCX7ipyvKjYc6ll/Yw2
- A+Bzdll+RqwYMtU+ihz3BU4ddtg0pgA59mHRPsSVjvMIXPVD3VdrIQrLbj0MP9/dLjIY
- Wf+C8+A3j4s1T+HM94mIMzRfkNd4nEH6kHGK63GaGPw6RSZSE51550pBTBeAA0tUqoer
- V5Hw==
-X-Gm-Message-State: AOAM530HOqazag5BJjQYFiVCXYpsjWhd+omfPrAw/S1Gdh2Z5k5p6aLs
- 0AocmHer+mQVki+epesWLd2DIQ==
-X-Google-Smtp-Source: ABdhPJznXifEgc1J9fFnvBpwHpyrzgvH+BvMB/R1oZufiTh3P6BMaZWF8uHqB7sDbBiTjJ074WZu8A==
-X-Received: by 2002:a05:6a00:2134:b0:4b0:bf74:a64d with SMTP id
- n20-20020a056a00213400b004b0bf74a64dmr12625486pfj.56.1639631927469; 
- Wed, 15 Dec 2021 21:18:47 -0800 (PST)
-Received: from vineetg-ThinkPad-X1-Carbon-Gen-9.ba.rivosinc.com
- (c-24-4-73-83.hsd1.ca.comcast.net. [24.4.73.83])
- by smtp.gmail.com with ESMTPSA id n15sm3961785pgs.59.2021.12.15.21.18.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Dec 2021 21:18:47 -0800 (PST)
-From: Vineet Gupta <vineetg@rivosinc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Vineet Gupta <vineetg@rivosinc.com>
-Subject: [PATCH] target/riscv: Enable bitmanip Zb[abcs] instructions
-Date: Wed, 15 Dec 2021 21:18:44 -0800
-Message-Id: <20211216051844.3921088-1-vineetg@rivosinc.com>
-X-Mailer: git-send-email 2.30.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+hOz8IxXG4sIt5jxiS7v3+2MQSrZNOG0/+ISRJ3HY2s=;
+ b=rkIQsoMMaMNnm2qc4u7cZE88lYOmclCSCnJ/1gyT5hUI77Clwhd1BJaFc/3IqRy1Ck
+ qV3gd2mBCT8Fc7DeKEEcpFR4RVGPBOKO7TMM3lLRJJwuNp0ELlAYzBT186WQvK/fv7s3
+ 1+r6/VTQpCP/rROvXcXnM3SYVUT7n/WJf+OAUfZMGFFNHI9NxKvLGa0hlrS/AFzh4J61
+ w6/yJkG+BeEYp20g3xVupdih3nuU066MkpjRUVa5Zyqpem6RxIKneTnSv74jsTWvXLSg
+ eHo5ntjN0FrYmyGhnqpuqDCYPgdfmudbmxqPTU6ib2SA8dCfJ4iKRvKEsr+AlHv2quyl
+ 8X0A==
+X-Gm-Message-State: AOAM530hzueghLd0WyKmo3wG2MXX7ZVLeMcA8mO2Um0lVXf8CcpM6e9h
+ 6HCBLsII9XttR0JectEBAEH9fw2UrTFtQ8psl/Q=
+X-Google-Smtp-Source: ABdhPJzATcSKSIS4Ge+fgztL1BNeytuPggajHqg/aWy4RjP8alzh+w/GqEiINydI+lAG8mAALuitNblhsSEtQQ2FC4A=
+X-Received: by 2002:a6b:f212:: with SMTP id q18mr434473ioh.16.1639701469586;
+ Thu, 16 Dec 2021 16:37:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42d
+References: <20211123090902.23321-1-zhiwei_liu@c-sky.com>
+ <CAKmqyKOD0JSY3FFBOt6L3=JwRVOsf35eCkpHrB4GvzsTUsOypw@mail.gmail.com>
+In-Reply-To: <CAKmqyKOD0JSY3FFBOt6L3=JwRVOsf35eCkpHrB4GvzsTUsOypw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 17 Dec 2021 10:37:23 +1000
+Message-ID: <CAKmqyKPiqLhw0zZK_f-8-WYdc4NYDgqrLTTE9_3k8YgX54F3LA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/1] target/riscv: Fix PMP propagation for tlb
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=vineetg@rivosinc.com; helo=mail-pf1-x42d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
 X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 16 Dec 2021 08:47:56 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,39 +75,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Dec 2021 05:18:51 -0000
+X-List-Received-Date: Fri, 17 Dec 2021 00:37:56 -0000
 
-The bitmanip extension has now been ratified [1] and upstream tooling
-(gcc/binutils) support it too, so move them out of experimental and also
-enable by default (for better test exposure/coverage)
+On Wed, Dec 8, 2021 at 1:23 PM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Tue, Nov 23, 2021 at 7:09 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+> >
+> > Only the pmp index that be checked by pmp_hart_has_privs can be used
+> > by pmp_get_tlb_size to avoid an error pmp index.
+> >
+> > Before modification, we may use an error pmp index. For example,
+> > we check address 0x4fc, and the size 0x4 in pmp_hart_has_privs. If there
+> > is an pmp rule, valid range is [0x4fc, 0x500), then pmp_hart_has_privs
+> > will return true;
+> >
+> > However, this checked pmp index is discarded as pmp_hart_has_privs
+> > return bool value. In pmp_is_range_in_tlb, it will traverse all pmp
+> > rules. The tlb_sa will be 0x0, and tlb_ea will be 0x4fff. If there is
+> > a pmp rule [0x10, 0x4]. It will be misused as it is legal in
+> > pmp_get_tlb_size.
+> >
+> > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+>
+> Thanks!
+>
+> Applied to riscv-to-apply.next
 
-[1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+This patch causes lots of Linux boot failures. I see messages like this:
 
-Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
----
- target/riscv/cpu.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Invalid write at addr 0x22048, size 8, region '(null)', reason: rejected
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f81299812350..c00d59cd04b5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -635,10 +635,10 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
- 
-     /* These are experimental so mark with 'x-' */
--    DEFINE_PROP_BOOL("x-zba", RISCVCPU, cfg.ext_zba, false),
--    DEFINE_PROP_BOOL("x-zbb", RISCVCPU, cfg.ext_zbb, false),
--    DEFINE_PROP_BOOL("x-zbc", RISCVCPU, cfg.ext_zbc, false),
--    DEFINE_PROP_BOOL("x-zbs", RISCVCPU, cfg.ext_zbs, false),
-+    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-+    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-+    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-+    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     DEFINE_PROP_BOOL("x-v", RISCVCPU, cfg.ext_v, false),
--- 
-2.30.2
+from QEMU and the guest fails to start.
 
+Alistair
 
