@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzKiH-0003Gg-CJ
+	id 1mzKiH-0003Hj-Mh
 	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 10:36:33 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33288)
+Received: from eggs.gnu.org ([209.51.188.92]:33280)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKhx-000377-20; Mon, 20 Dec 2021 10:36:17 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:4148)
+ id 1mzKhx-000374-0w; Mon, 20 Dec 2021 10:36:17 -0500
+Received: from szxga02-in.huawei.com ([45.249.212.188]:4147)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKho-000683-Sz; Mon, 20 Dec 2021 10:36:07 -0500
-Received: from kwepemi100010.china.huawei.com (unknown [172.30.72.56])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JHfzT6VZhz91ph;
- Mon, 20 Dec 2021 21:08:37 +0800 (CST)
+ id 1mzKho-000680-Ty; Mon, 20 Dec 2021 10:36:09 -0500
+Received: from kwepemi100009.china.huawei.com (unknown [172.30.72.55])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JHfzc0Czcz91Px;
+ Mon, 20 Dec 2021 21:08:44 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi100010.china.huawei.com (7.221.188.54) with Microsoft SMTP Server
+ kwepemi100009.china.huawei.com (7.221.188.242) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Mon, 20 Dec 2021 21:09:26 +0800
+ 15.1.2308.20; Mon, 20 Dec 2021 21:09:32 +0800
 Received: from huawei.com (10.174.186.236) by kwepemm600017.china.huawei.com
  (7.193.23.234) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Mon, 20 Dec
- 2021 21:09:25 +0800
+ 2021 21:09:31 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -28,9 +28,9 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <wanghaibin.wang@huawei.com>, <wanbo13@huawei.com>,
  Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 01/12] update-linux-headers: Add asm-riscv/kvm.h
-Date: Mon, 20 Dec 2021 21:09:08 +0800
-Message-ID: <20211220130919.413-2-jiangyifei@huawei.com>
+Subject: [PATCH v3 04/12] target/riscv: Implement kvm_arch_get_registers
+Date: Mon, 20 Dec 2021 21:09:11 +0800
+Message-ID: <20211220130919.413-5-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20211220130919.413-1-jiangyifei@huawei.com>
 References: <20211220130919.413-1-jiangyifei@huawei.com>
@@ -63,151 +63,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 20 Dec 2021 15:36:30 -0000
 
-Add asm-riscv/kvm.h for RISC-V KVM, and update linux/kvm.h
+Get GPR CSR and FP registers from kvm by KVM_GET_ONE_REG ioctl.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Mingwang Li <limingwang@huawei.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Anup Patel <anup.patel@wdc.com>
 ---
- linux-headers/asm-riscv/kvm.h | 128 ++++++++++++++++++++++++++++++++++
- 1 file changed, 128 insertions(+)
- create mode 100644 linux-headers/asm-riscv/kvm.h
+ target/riscv/kvm.c | 112 ++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 111 insertions(+), 1 deletion(-)
 
-diff --git a/linux-headers/asm-riscv/kvm.h b/linux-headers/asm-riscv/kvm.h
-new file mode 100644
-index 0000000000..f808ad1ce5
---- /dev/null
-+++ b/linux-headers/asm-riscv/kvm.h
-@@ -0,0 +1,128 @@
-+/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-+/*
-+ * Copyright (C) 2019 Western Digital Corporation or its affiliates.
-+ *
-+ * Authors:
-+ *     Anup Patel <anup.patel@wdc.com>
-+ */
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index ccf3753048..6d4df0ef6d 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -55,13 +55,123 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
+     return id;
+ }
+ 
++#define RISCV_CORE_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, \
++                 KVM_REG_RISCV_CORE_REG(name))
 +
-+#ifndef __LINUX_KVM_RISCV_H
-+#define __LINUX_KVM_RISCV_H
++#define RISCV_CSR_REG(env, name)  kvm_riscv_reg_id(env, KVM_REG_RISCV_CSR, \
++                 KVM_REG_RISCV_CSR_REG(name))
 +
-+#ifndef __ASSEMBLY__
++#define RISCV_FP_F_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_F, idx)
 +
-+#include <linux/types.h>
-+#include <asm/ptrace.h>
++#define RISCV_FP_D_REG(env, idx)  kvm_riscv_reg_id(env, KVM_REG_RISCV_FP_D, idx)
 +
-+#define __KVM_HAVE_READONLY_MEM
++#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
++    do { \
++        int ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        if (ret) { \
++            return ret; \
++        } \
++    } while(0)
 +
-+#define KVM_COALESCED_MMIO_PAGE_OFFSET 1
++static int kvm_riscv_get_regs_core(CPUState *cs)
++{
++    int ret = 0;
++    int i;
++    target_ulong reg;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
 +
-+#define KVM_INTERRUPT_SET	-1U
-+#define KVM_INTERRUPT_UNSET	-2U
++    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
++    if (ret) {
++        return ret;
++    }
++    env->pc = reg;
 +
-+/* for KVM_GET_REGS and KVM_SET_REGS */
-+struct kvm_regs {
-+};
++    for (i = 1; i < 32; i++) {
++        uint64_t id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CORE, i);
++        ret = kvm_get_one_reg(cs, id, &reg);
++        if (ret) {
++            return ret;
++        }
++        env->gpr[i] = reg;
++    }
 +
-+/* for KVM_GET_FPU and KVM_SET_FPU */
-+struct kvm_fpu {
-+};
++    return ret;
++}
 +
-+/* KVM Debug exit structure */
-+struct kvm_debug_exit_arch {
-+};
++static int kvm_riscv_get_regs_csr(CPUState *cs)
++{
++    int ret = 0;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
 +
-+/* for KVM_SET_GUEST_DEBUG */
-+struct kvm_guest_debug_arch {
-+};
++    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
++    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
++    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
++    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
++    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
++    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
++    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
++    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
++    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
++    return ret;
++}
 +
-+/* definition of registers in kvm_run */
-+struct kvm_sync_regs {
-+};
++static int kvm_riscv_get_regs_fp(CPUState *cs)
++{
++    int ret = 0;
++    int i;
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
 +
-+/* for KVM_GET_SREGS and KVM_SET_SREGS */
-+struct kvm_sregs {
-+};
++    if (riscv_has_ext(env, RVD)) {
++        uint64_t reg;
++        for (i = 0; i < 32; i++) {
++            ret = kvm_get_one_reg(cs, RISCV_FP_D_REG(env, i), &reg);
++            if (ret) {
++                return ret;
++            }
++            env->fpr[i] = reg;
++        }
++        return ret;
++    }
 +
-+/* CONFIG registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+struct kvm_riscv_config {
-+	unsigned long isa;
-+};
++    if (riscv_has_ext(env, RVF)) {
++        uint32_t reg;
++        for (i = 0; i < 32; i++) {
++            ret = kvm_get_one_reg(cs, RISCV_FP_F_REG(env, i), &reg);
++            if (ret) {
++                return ret;
++            }
++            env->fpr[i] = reg;
++        }
++        return ret;
++    }
 +
-+/* CORE registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+struct kvm_riscv_core {
-+	struct user_regs_struct regs;
-+	unsigned long mode;
-+};
++    return ret;
++}
 +
-+/* Possible privilege modes for kvm_riscv_core */
-+#define KVM_RISCV_MODE_S	1
-+#define KVM_RISCV_MODE_U	0
+ const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
+     KVM_CAP_LAST_INFO
+ };
+ 
+ int kvm_arch_get_registers(CPUState *cs)
+ {
+-    return 0;
++    int ret = 0;
 +
-+/* CSR registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+struct kvm_riscv_csr {
-+	unsigned long sstatus;
-+	unsigned long sie;
-+	unsigned long stvec;
-+	unsigned long sscratch;
-+	unsigned long sepc;
-+	unsigned long scause;
-+	unsigned long stval;
-+	unsigned long sip;
-+	unsigned long satp;
-+	unsigned long scounteren;
-+};
++    ret = kvm_riscv_get_regs_core(cs);
++    if (ret) {
++        return ret;
++    }
 +
-+/* TIMER registers for KVM_GET_ONE_REG and KVM_SET_ONE_REG */
-+struct kvm_riscv_timer {
-+	__u64 frequency;
-+	__u64 time;
-+	__u64 compare;
-+	__u64 state;
-+};
++    ret = kvm_riscv_get_regs_csr(cs);
++    if (ret) {
++        return ret;
++    }
 +
-+/* Possible states for kvm_riscv_timer */
-+#define KVM_RISCV_TIMER_STATE_OFF	0
-+#define KVM_RISCV_TIMER_STATE_ON	1
++    ret = kvm_riscv_get_regs_fp(cs);
++    if (ret) {
++        return ret;
++    }
 +
-+#define KVM_REG_SIZE(id)		\
-+	(1U << (((id) & KVM_REG_SIZE_MASK) >> KVM_REG_SIZE_SHIFT))
-+
-+/* If you need to interpret the index values, here is the key: */
-+#define KVM_REG_RISCV_TYPE_MASK		0x00000000FF000000
-+#define KVM_REG_RISCV_TYPE_SHIFT	24
-+
-+/* Config registers are mapped as type 1 */
-+#define KVM_REG_RISCV_CONFIG		(0x01 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_CONFIG_REG(name)	\
-+	(offsetof(struct kvm_riscv_config, name) / sizeof(unsigned long))
-+
-+/* Core registers are mapped as type 2 */
-+#define KVM_REG_RISCV_CORE		(0x02 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_CORE_REG(name)	\
-+		(offsetof(struct kvm_riscv_core, name) / sizeof(unsigned long))
-+
-+/* Control and status registers are mapped as type 3 */
-+#define KVM_REG_RISCV_CSR		(0x03 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_CSR_REG(name)	\
-+		(offsetof(struct kvm_riscv_csr, name) / sizeof(unsigned long))
-+
-+/* Timer registers are mapped as type 4 */
-+#define KVM_REG_RISCV_TIMER		(0x04 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_TIMER_REG(name)	\
-+		(offsetof(struct kvm_riscv_timer, name) / sizeof(__u64))
-+
-+/* F extension registers are mapped as type 5 */
-+#define KVM_REG_RISCV_FP_F		(0x05 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_FP_F_REG(name)	\
-+		(offsetof(struct __riscv_f_ext_state, name) / sizeof(__u32))
-+
-+/* D extension registers are mapped as type 6 */
-+#define KVM_REG_RISCV_FP_D		(0x06 << KVM_REG_RISCV_TYPE_SHIFT)
-+#define KVM_REG_RISCV_FP_D_REG(name)	\
-+		(offsetof(struct __riscv_d_ext_state, name) / sizeof(__u64))
-+
-+#endif
-+
-+#endif /* __LINUX_KVM_RISCV_H */
++    return ret;
+ }
+ 
+ int kvm_arch_put_registers(CPUState *cs, int level)
 -- 
 2.19.1
 
