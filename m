@@ -1,62 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzKth-00062D-Jp
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 10:48:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49000)
+	id 1mzLbg-0007oc-Vg
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 11:33:49 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59220)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mzKtf-0005xG-UT; Mon, 20 Dec 2021 10:48:19 -0500
-Received: from [2607:f8b0:4864:20::936] (port=42853
- helo=mail-ua1-x936.google.com)
+ id 1mzLbY-0007lO-Is; Mon, 20 Dec 2021 11:33:43 -0500
+Received: from [2607:f8b0:4864:20::b2b] (port=45735
+ helo=mail-yb1-xb2b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1mzKte-0003aK-6i; Mon, 20 Dec 2021 10:48:19 -0500
-Received: by mail-ua1-x936.google.com with SMTP id t13so18417915uad.9;
- Mon, 20 Dec 2021 07:48:17 -0800 (PST)
+ id 1mzLbQ-0005KS-1n; Mon, 20 Dec 2021 11:33:33 -0500
+Received: by mail-yb1-xb2b.google.com with SMTP id x32so30388923ybi.12;
+ Mon, 20 Dec 2021 08:33:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=eRwpW0zhQeUBvdYiXpiKE27jw6XbT23AuDJWyED2G+o=;
- b=KYTrgl7wqJ4TBwJDkZnMJS2O+tLaMgIypLXruZmQ2zyLNwimJvLEopzgqA/iGWR7DV
- Sjv+SVrW7YFf3mD1GvDbTA0/pGFmXJwVLtrbBKj+4G8XUIhLFXurHNAgpSsD4AeQ2B9t
- K0jEt+jvUwPMRlus7AkGK7VIPGp24ZvsfIQsMlWYIdE34U7CXuI8otV57m8bWPQH4Zjd
- H5ZHD2hBPBIc3NAyZEkD4VsJ8BSqcV0kCywNCmKARlRm/NCy94vKeFcuC2VPBDOZYmm/
- T0WsGCK0fd99bpjlJ2l9OzR1+NpuQ+7OiEy/l3pOeDzeDdqGBbqSUzXezYeejOJB5kUa
- 3JRA==
+ :cc:content-transfer-encoding;
+ bh=oo8YARp/DN6toFCr0pSd09y+S8arKbsdWcxCLxa4sEU=;
+ b=YpqY0jEaZLhLGJidhtd4n+PVzRW727FFzHT6ym+rwy/OqGb+V7eZg6SLg+1hlmn/Ru
+ qxVDkO4k3iB9WLLnaYRp+wE7E+QOVGDNW3BNvm4A6y4Rh4Cfr8SVAc1ZOxAHqwUikzAO
+ HhCrVf0P7gKSPkgb6FE5U5+JbrKbms8ySAK174W5CFHgT7o+WqW7bHTckX36LJC1BQ8f
+ w904++IJo0cO/7rehjoogp/pOA4j8C33CYcu5N28c6xau7+VfywT26zFK9NfB3+mh7Bs
+ NReMs9Z0yOOLsGhhVsD4rDtcweYQfGi8JGXACJ9zVS3n/QAOUaX/0xTBUdru2bHnla40
+ w+yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=eRwpW0zhQeUBvdYiXpiKE27jw6XbT23AuDJWyED2G+o=;
- b=Co4yT3VgqR1pE+f8Z/CURrnKBdno2IjlLX/bt29sm/hF2QMBZPIc3UL6rqu4AKqIRL
- 2QsWa0rUHW8Snw1uupM8YkgdTWNJxD9zPJO1CPqwZ85dEAxmwZNPXRIDndh6nrfrKCtb
- 582Uu2njzzCplw1gvwqjqxVnBWhh4y2AX1feTj5ky5sFZ3NJ6GYffFB3wQob6BQctKCJ
- Rno2Dx3LK/wxCU4n61qBXsPEmFOo2+/YjeXPoC1H8cOk9w8UFAKB3FYVFMwe/9Qb5h3U
- P/IenpbF06xXuonFXrkbiMa1FmHIM9NG3V4gAVbyhRkx7wDwoYqKB9JQx0dpSNuyokuI
- 0bYg==
-X-Gm-Message-State: AOAM530r0BqfrNQbOENEqPcwSkLBjzEOsWOM5VYnMYztftwsAwsK0kmV
- 4tCd1Siy2ZxDp1toOScmv3GrNHxkFIleVJivQjT2FQYC7/U=
-X-Google-Smtp-Source: ABdhPJzSxxxk8NQbI14OSRJ6y+ndDpyM1wEZTjca3RzzpQsp8YvxYLBaCZImUbdeIxg1YZ0SU0tCRxI2qpXXapJWkac=
-X-Received: by 2002:a25:8804:: with SMTP id c4mr20687381ybl.148.1639986722658; 
- Sun, 19 Dec 2021 23:52:02 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=oo8YARp/DN6toFCr0pSd09y+S8arKbsdWcxCLxa4sEU=;
+ b=4rmC2nECgHeMQaskokly7rN5Q39fczN6/A+GseNJ8JzOVLa+Wrn7V2BfCPEbtwIpa+
+ XRI95gDe156JupMZrCseGSK1QMnZEw4z0EDTXBlQpyM7JJDj62vlBYQd2MqkxGSwWKwD
+ jWZN6gwHAErUrL2snHKarnBgzL9E1Xecrkx8O1Q6NVZuaZ70W2BLWEaNkQ5CHr5tbtrk
+ +2kiQLvTqioVBP7gwkhFmvMSnzHX4BYRmUiXep/aclaaaCYtmiR1dX7b/OW2AQZ9rrft
+ +WXbseykJ9i/8bHZGDqbz4wSD/IHlS1nZy1kYfxoKBAJFXf0HHoJ0swhxZuO9+Wp7/5g
+ lDjA==
+X-Gm-Message-State: AOAM5326JjHn6BeJDKypeOelq/m9WpXi1NzblCyKDuRR0oiKnfQKL2Fn
+ 8Hxl96H2s38eVD8ORzEZtelk5tSuFnZeB9mhlg9w3NcYBU0=
+X-Google-Smtp-Source: ABdhPJyRd3ERKY25H++U/bKxLq0AGYmmtHkdTm5w0ekMI3e/hc+zbyTkSM5bcePsXEJbSBW1YueRuP+DLs8eActUExQ=
+X-Received: by 2002:a25:3787:: with SMTP id e129mr22207784yba.91.1639985904965; 
+ Sun, 19 Dec 2021 23:38:24 -0800 (PST)
 MIME-Version: 1.0
 References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
- <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
+ <20211216045427.757779-8-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20211216045427.757779-8-alistair.francis@opensource.wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 20 Dec 2021 15:51:51 +0800
-Message-ID: <CAEUhbmVpGwjqvhLN1LCY3EokL9_a_v9okL=ZwUb_JYMZcvv3zw@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] hw/riscv: virt: Set the clock-frequency
+Date: Mon, 20 Dec 2021 15:38:13 +0800
+Message-ID: <CAEUhbmVrK3W4zRKnhkpq2e3vdSiNu2qaJe5y6nA+X_8ex3KLmg@mail.gmail.com>
+Subject: Re: [PATCH v2 7/9] hw/riscv: Use error_fatal for SoC realisation
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, 
  Alistair Francis <alistair23@gmail.com>,
  Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Markus Armbruster <armbru@redhat.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::936
+Content-Transfer-Encoding: quoted-printable
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b2b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=bmeng.cn@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2b.google.com
 X-Spam_score_int: 2
 X-Spam_score: 0.2
 X-Spam_bar: /
@@ -76,47 +79,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2021 15:48:20 -0000
+X-List-Received-Date: Mon, 20 Dec 2021 16:33:44 -0000
 
 On Thu, Dec 16, 2021 at 12:55 PM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
 >
 > From: Alistair Francis <alistair.francis@wdc.com>
 >
-> As per the device tree specification let's set the clock-frequency for
-> the virt CPUs.
+> When realising the SoC use error_fatal instead of error_abort as the
+> process can fail and report useful information to the user.
 >
-> QEMU doesn't really have an exact clock, so let's just 1000000 as it's a
-> nice round number and matches the sifive_u CLINT_TIMEBASE_FREQ.
+> Currently a user can see this:
 >
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/472 (RISC-V virt)
-
-I tend to think this issue is not valid, as the comment in the issue
-says the value should reflect the running frequency.
-
-Note the "clock-frequency" was once in the codes but was intentionally
-removed before because it is not needed:
-
-See commit 7ae05377b85f (" riscv: hw: Drop "clock-frequency" property
-of cpu nodes")
-
+>    $ ../qemu/bld/qemu-system-riscv64 -M sifive_u -S -monitor stdio -displ=
+ay none -drive if=3Dpflash
+>     QEMU 6.1.93 monitor - type 'help' for more information
+>     (qemu) Unexpected error in sifive_u_otp_realize() at ../hw/misc/sifiv=
+e_u_otp.c:229:
+>     qemu-system-riscv64: OTP drive size < 16K
+>     Aborted (core dumped)
+>
+> Which this patch addresses
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Reported-by: Markus Armbruster <armbru@redhat.com>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> Reviewed-by: Markus Armbruster <armbru@redhat.com>
 > ---
->  hw/riscv/virt.c | 1 +
->  1 file changed, 1 insertion(+)
+>  hw/riscv/microchip_pfsoc.c | 2 +-
+>  hw/riscv/opentitan.c       | 2 +-
+>  hw/riscv/sifive_e.c        | 2 +-
+>  hw/riscv/sifive_u.c        | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 3af074148e..41a85cfc60 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -202,6 +202,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
->              s->soc[socket].hartid_base + cpu);
->          qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
-> +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "clock-frequency", 1000000);
->          riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
->          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
 
-Regards,
-Bin
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
