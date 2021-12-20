@@ -1,62 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzKdV-0007Lb-FB
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 10:31:37 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55296)
+	id 1mzKhK-00027N-8i
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 10:35:34 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60000)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKdR-0007HQ-Jw; Mon, 20 Dec 2021 10:31:35 -0500
-Received: from szxga08-in.huawei.com ([45.249.212.255]:3252)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKdI-00045M-TO; Mon, 20 Dec 2021 10:31:32 -0500
-Received: from canpemm100007.china.huawei.com (unknown [172.30.72.56])
- by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4JHfnH37hxz1DK9N;
- Mon, 20 Dec 2021 20:59:47 +0800 (CST)
-Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- canpemm100007.china.huawei.com (7.192.105.181) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Mon, 20 Dec 2021 21:02:53 +0800
-Received: from kwepemm600017.china.huawei.com ([7.193.23.234]) by
- kwepemm600017.china.huawei.com ([7.193.23.234]) with mapi id 15.01.2308.020;
- Mon, 20 Dec 2021 21:02:53 +0800
-From: Jiangyifei <jiangyifei@huawei.com>
-To: Richard Henderson <richard.henderson@linaro.org>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
-CC: "kvm-riscv@lists.infradead.org" <kvm-riscv@lists.infradead.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>, "libvir-list@redhat.com"
- <libvir-list@redhat.com>, "anup.patel@wdc.com" <anup.patel@wdc.com>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>, "Alistair.Francis@wdc.com"
- <Alistair.Francis@wdc.com>, "bin.meng@windriver.com"
- <bin.meng@windriver.com>, "Fanliang (EulerOS)" <fanliang@huawei.com>, "Wubin
- (H)" <wu.wubin@huawei.com>, "Wanghaibin (D)" <wanghaibin.wang@huawei.com>,
- "wanbo (G)" <wanbo13@huawei.com>, "limingwang (A)" <limingwang@huawei.com>
-Subject: RE: [PATCH v2 12/12] target/riscv: Support virtual time context
- synchronization
-Thread-Topic: [PATCH v2 12/12] target/riscv: Support virtual time context
- synchronization
-Thread-Index: AQHX7a3Q8Bse7NrOd02XaMfvJUw+zqwwCNIAgAtfe4A=
-Date: Mon, 20 Dec 2021 13:02:53 +0000
-Message-ID: <93bc5000c51042e5bb45053707109947@huawei.com>
-References: <20211210100732.1080-1-jiangyifei@huawei.com>
- <20211210100732.1080-13-jiangyifei@huawei.com>
- <10d2d911-e975-64b3-8ab6-e950c5064b9e@linaro.org>
-In-Reply-To: <10d2d911-e975-64b3-8ab6-e950c5064b9e@linaro.org>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.174.186.236]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mzKgp-00022c-7Y; Mon, 20 Dec 2021 10:35:22 -0500
+Received: from [2607:f8b0:4864:20::b32] (port=38456
+ helo=mail-yb1-xb32.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1mzKgn-0005dK-76; Mon, 20 Dec 2021 10:35:02 -0500
+Received: by mail-yb1-xb32.google.com with SMTP id v64so29936652ybi.5;
+ Mon, 20 Dec 2021 07:35:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=nAeoiPJvlQI2MudQ6Cu1Ik/hFKunVLHmRpMet7ck/pI=;
+ b=RWh9aySlWazYyxxu2V+F9pMam6cuMIRQNfxGqiDlMA5ZesBHFUM5cKvx+lX032T5Lt
+ YdmRln7+xPlS2Q5EcGU9D0z/a7682qh1JdSQf/P33Q1YvjiVsHc+FUrCRIqshSrP/N7A
+ 10UorQrDCcLv+BLwT3f5cbXWaVVuuCx2BzvNDyaKUUGZ2M0/KfX4N63qzcDqhYx8GWbu
+ yhpIvvTaZJIXXlKwB0NKVHFUi1KTxzGgzY8TdDr+gbjH0Cl2M6Rqpcy7fGjMirm2XJ00
+ FUvjjMKx6lmVZwqB3Bhgw5PYnrIwH7rpPrLZCl5Fr5r8GC8ywi0qpWd0r/WT6hEueMsP
+ /+Og==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=nAeoiPJvlQI2MudQ6Cu1Ik/hFKunVLHmRpMet7ck/pI=;
+ b=P8bxA5T6MX52UABFg8/QDDwtbN/gTqeICJGAsy+kuXSls7RfC2kaBFLSjMm7KmO1P/
+ GmzRlnEjU52oh26vKUvFTkbd8cF4G6ekxtbUMKfEfVvrjEaxYJ5D70qNSIhN1AvlJ+p4
+ dAx5U5I5ogRoBbyLmS/6I+sFfA8O1yXm0M/Un9qwM1kn22/2h37oaS7c5Zkg62Acnt9/
+ aUPfs0rJpb3/VDvof7SHvwKsdgbcTA/1zhhAMMT2PidgeXVJnsYqmsWigmx4heZ/r16T
+ R+9I058GzD5EDUZTRew5AIi6rQuMiCpFMLGzcm1vH8lOkEpNA+Yap10i2WMdUj2u3Qhp
+ iWJA==
+X-Gm-Message-State: AOAM533TyGwUayY8K3kcGUN4E3GFd6Y59RILOdVw8zV0diAEdTROFaRe
+ s+qjLoSJ/askmysFom3CLDvhWsZUbNIXM6Z1ZBjs9DhMtLk=
+X-Google-Smtp-Source: ABdhPJw2p+E5lGVX0o2u0/d4PRr/ZxFgBvxksNm/+9nKoxmiyhXbJBH676mUapZwqM2sczSBPZoRhPcHJFuB66Cg660=
+X-Received: by 2002:a25:b47:: with SMTP id 68mr21781636ybl.378.1639985983201; 
+ Sun, 19 Dec 2021 23:39:43 -0800 (PST)
 MIME-Version: 1.0
-X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.255;
- envelope-from=jiangyifei@huawei.com; helo=szxga08-in.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+ <20211216045427.757779-9-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20211216045427.757779-9-alistair.francis@opensource.wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Mon, 20 Dec 2021 15:39:32 +0800
+Message-ID: <CAEUhbmV3PDFEQqjOVpLVg2w5650QYW+Ss8fcesV8xdkv5K4uQw@mail.gmail.com>
+Subject: Re: [PATCH v2 8/9] hw/riscv: virt: Allow support for 32 cores
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair23@gmail.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b32
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_06_12=1.543,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,43 +76,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2021 15:31:35 -0000
+X-List-Received-Date: Mon, 20 Dec 2021 15:35:29 -0000
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJpY2hhcmQgSGVuZGVyc29u
-IFttYWlsdG86cmljaGFyZC5oZW5kZXJzb25AbGluYXJvLm9yZ10NCj4gU2VudDogTW9uZGF5LCBE
-ZWNlbWJlciAxMywgMjAyMSAxMToyMiBQTQ0KPiBUbzogSmlhbmd5aWZlaSA8amlhbmd5aWZlaUBo
-dWF3ZWkuY29tPjsgcWVtdS1kZXZlbEBub25nbnUub3JnOw0KPiBxZW11LXJpc2N2QG5vbmdudS5v
-cmcNCj4gQ2M6IGt2bS1yaXNjdkBsaXN0cy5pbmZyYWRlYWQub3JnOyBrdm1Admdlci5rZXJuZWwu
-b3JnOw0KPiBsaWJ2aXItbGlzdEByZWRoYXQuY29tOyBhbnVwLnBhdGVsQHdkYy5jb207IHBhbG1l
-ckBkYWJiZWx0LmNvbTsNCj4gQWxpc3RhaXIuRnJhbmNpc0B3ZGMuY29tOyBiaW4ubWVuZ0B3aW5k
-cml2ZXIuY29tOyBGYW5saWFuZyAoRXVsZXJPUykNCj4gPGZhbmxpYW5nQGh1YXdlaS5jb20+OyBX
-dWJpbiAoSCkgPHd1Lnd1YmluQGh1YXdlaS5jb20+OyBXYW5naGFpYmluIChEKQ0KPiA8d2FuZ2hh
-aWJpbi53YW5nQGh1YXdlaS5jb20+OyB3YW5ibyAoRykgPHdhbmJvMTNAaHVhd2VpLmNvbT47DQo+
-IGxpbWluZ3dhbmcgKEEpIDxsaW1pbmd3YW5nQGh1YXdlaS5jb20+DQo+IFN1YmplY3Q6IFJlOiBb
-UEFUQ0ggdjIgMTIvMTJdIHRhcmdldC9yaXNjdjogU3VwcG9ydCB2aXJ0dWFsIHRpbWUgY29udGV4
-dA0KPiBzeW5jaHJvbml6YXRpb24NCj4gDQo+IE9uIDEyLzEwLzIxIDI6MDcgQU0sIFlpZmVpIEpp
-YW5nIHZpYSB3cm90ZToNCj4gPiArc3RhdGljIGJvb2wga3ZtdGltZXJfbmVlZGVkKHZvaWQgKm9w
-YXF1ZSkgew0KPiA+ICsgICAgcmV0dXJuIGt2bV9lbmFibGVkKCk7DQo+ID4gK30NCj4gPiArDQo+
-ID4gKw0KPiA+ICtzdGF0aWMgY29uc3QgVk1TdGF0ZURlc2NyaXB0aW9uIHZtc3RhdGVfa3ZtdGlt
-ZXIgPSB7DQo+ID4gKyAgICAubmFtZSA9ICJjcHUva3ZtdGltZXIiLA0KPiA+ICsgICAgLnZlcnNp
-b25faWQgPSAxLA0KPiA+ICsgICAgLm1pbmltdW1fdmVyc2lvbl9pZCA9IDEsDQo+ID4gKyAgICAu
-bmVlZGVkID0ga3ZtdGltZXJfbmVlZGVkLA0KPiA+ICsgICAgLmZpZWxkcyA9IChWTVN0YXRlRmll
-bGRbXSkgew0KPiA+ICsgICAgICAgIFZNU1RBVEVfVUlOVDY0KGVudi5rdm1fdGltZXJfdGltZSwg
-UklTQ1ZDUFUpLA0KPiA+ICsgICAgICAgIFZNU1RBVEVfVUlOVDY0KGVudi5rdm1fdGltZXJfY29t
-cGFyZSwgUklTQ1ZDUFUpLA0KPiA+ICsgICAgICAgIFZNU1RBVEVfVUlOVDY0KGVudi5rdm1fdGlt
-ZXJfc3RhdGUsIFJJU0NWQ1BVKSwNCj4gPiArDQo+ID4gKyAgICAgICAgVk1TVEFURV9FTkRfT0Zf
-TElTVCgpDQo+ID4gKyAgICB9DQo+ID4gK307DQo+ID4gKw0KPiA+ICtzdGF0aWMgaW50IGNwdV9w
-b3N0X2xvYWQodm9pZCAqb3BhcXVlLCBpbnQgdmVyc2lvbl9pZCkgew0KPiA+ICsgICAgUklTQ1ZD
-UFUgKmNwdSA9IG9wYXF1ZTsNCj4gPiArICAgIENQVVJJU0NWU3RhdGUgKmVudiA9ICZjcHUtPmVu
-djsNCj4gPiArDQo+ID4gKyAgICBpZiAoa3ZtX2VuYWJsZWQoKSkgew0KPiA+ICsgICAgICAgIGVu
-di0+a3ZtX3RpbWVyX2RpcnR5ID0gdHJ1ZTsNCj4gPiArICAgIH0NCj4gPiArICAgIHJldHVybiAw
-Ow0KPiA+ICt9DQo+IA0KPiBUaGlzIHBvc3QtbG9hZCBiZWxvbmdzIG9uIHRoZSB2bXN0YXRlX2t2
-bXRpbWVyIHN0cnVjdCwgc28gdGhhdCB5b3UgbmVlZCBub3QNCj4gcmUtY2hlY2sga3ZtX2VuYWJs
-ZWQoKS4NCj4gDQo+ID4gICBjb25zdCBWTVN0YXRlRGVzY3JpcHRpb24gdm1zdGF0ZV9yaXNjdl9j
-cHUgPSB7DQo+ID4gICAgICAgLm5hbWUgPSAiY3B1IiwNCj4gPiAtICAgIC52ZXJzaW9uX2lkID0g
-MywNCj4gPiAtICAgIC5taW5pbXVtX3ZlcnNpb25faWQgPSAzLA0KPiA+ICsgICAgLnZlcnNpb25f
-aWQgPSA0LA0KPiA+ICsgICAgLm1pbmltdW1fdmVyc2lvbl9pZCA9IDQsDQo+ID4gKyAgICAucG9z
-dF9sb2FkID0gY3B1X3Bvc3RfbG9hZCwNCj4gDQo+IE5vIG5lZWQgZm9yIHZlcnNpb24gY2hhbmdl
-Lg0KPiANCj4gDQo+IHJ+DQoNCk9rLCBpdCB3aWxsIGJlIG1vZGlmaWVkIGluIHRoZSBuZXh0IHNl
-cmllcy4NCg0KWWlmZWkNCg==
+On Thu, Dec 16, 2021 at 12:55 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> Linux supports up to 32 cores for both 32-bit and 64-bit RISC-V, so
+> let's set that as the maximum for the virt board.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/435
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  include/hw/riscv/virt.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
