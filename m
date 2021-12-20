@@ -1,25 +1,25 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzKhY-0002cn-0n
+	id 1mzKhY-0002dc-7t
 	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 10:35:48 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:60714)
+Received: from eggs.gnu.org ([209.51.188.92]:60712)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKhT-0002Qi-Iw; Mon, 20 Dec 2021 10:35:43 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:3058)
+ id 1mzKhT-0002Qe-J3; Mon, 20 Dec 2021 10:35:43 -0500
+Received: from szxga02-in.huawei.com ([45.249.212.188]:3059)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1mzKhN-0005nt-Pq; Mon, 20 Dec 2021 10:35:43 -0500
-Received: from kwepemi500001.china.huawei.com (unknown [172.30.72.57])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JHg045Rj3zbjZw;
- Mon, 20 Dec 2021 21:09:08 +0800 (CST)
+ id 1mzKhN-0005ny-Pn; Mon, 20 Dec 2021 10:35:43 -0500
+Received: from kwepemi100003.china.huawei.com (unknown [172.30.72.53])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JHg0F0Z5gzbjPr;
+ Mon, 20 Dec 2021 21:09:17 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi500001.china.huawei.com (7.221.188.114) with Microsoft SMTP Server
+ kwepemi100003.china.huawei.com (7.221.188.122) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Mon, 20 Dec 2021 21:09:30 +0800
+ 15.1.2308.20; Mon, 20 Dec 2021 21:09:39 +0800
 Received: from huawei.com (10.174.186.236) by kwepemm600017.china.huawei.com
  (7.193.23.234) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Mon, 20 Dec
- 2021 21:09:29 +0800
+ 2021 21:09:37 +0800
 From: Yifei Jiang <jiangyifei@huawei.com>
 To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
 CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
@@ -28,9 +28,10 @@ CC: <kvm-riscv@lists.infradead.org>, <kvm@vger.kernel.org>,
  <wu.wubin@huawei.com>, <wanghaibin.wang@huawei.com>, <wanbo13@huawei.com>,
  Yifei Jiang <jiangyifei@huawei.com>, Mingwang Li <limingwang@huawei.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 03/12] target/riscv: Implement function kvm_arch_init_vcpu
-Date: Mon, 20 Dec 2021 21:09:10 +0800
-Message-ID: <20211220130919.413-4-jiangyifei@huawei.com>
+Subject: [PATCH v3 07/12] target/riscv: Support setting external interrupt by
+ KVM
+Date: Mon, 20 Dec 2021 21:09:14 +0800
+Message-ID: <20211220130919.413-8-jiangyifei@huawei.com>
 X-Mailer: git-send-email 2.26.2.windows.1
 In-Reply-To: <20211220130919.413-1-jiangyifei@huawei.com>
 References: <20211220130919.413-1-jiangyifei@huawei.com>
@@ -63,66 +64,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Mon, 20 Dec 2021 15:35:44 -0000
 
-Get isa info from kvm while kvm init.
+When KVM is enabled, set the S-mode external interrupt through
+kvm_riscv_set_irq function.
 
 Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 Signed-off-by: Mingwang Li <limingwang@huawei.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Anup Patel <anup.patel@wdc.com>
 ---
- target/riscv/kvm.c | 32 +++++++++++++++++++++++++++++++-
- 1 file changed, 31 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c       |  6 +++++-
+ target/riscv/kvm-stub.c  |  5 +++++
+ target/riscv/kvm.c       | 17 +++++++++++++++++
+ target/riscv/kvm_riscv.h |  1 +
+ 4 files changed, 28 insertions(+), 1 deletion(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1c944872a3..3fc3a9c45b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -603,7 +603,11 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+     case IRQ_S_EXT:
+     case IRQ_VS_EXT:
+     case IRQ_M_EXT:
+-        riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level));
++        if (kvm_enabled()) {
++            kvm_riscv_set_irq(cpu, irq, level);
++        } else {
++            riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level));
++        }
+         break;
+     default:
+         g_assert_not_reached();
+diff --git a/target/riscv/kvm-stub.c b/target/riscv/kvm-stub.c
+index 39b96fe3f4..4e8fc31a21 100644
+--- a/target/riscv/kvm-stub.c
++++ b/target/riscv/kvm-stub.c
+@@ -23,3 +23,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+ {
+     abort();
+ }
++
++void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
++{
++    abort();
++}
 diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-index 687dd4b621..ccf3753048 100644
+index db6d8a5b6e..0027f11f45 100644
 --- a/target/riscv/kvm.c
 +++ b/target/riscv/kvm.c
-@@ -38,6 +38,23 @@
- #include "qemu/log.h"
- #include "hw/loader.h"
- 
-+static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx)
-+{
-+    uint64_t id = KVM_REG_RISCV | type | idx;
-+
-+    switch (riscv_cpu_mxl(env)) {
-+    case MXL_RV32:
-+        id |= KVM_REG_SIZE_U32;
-+        break;
-+    case MXL_RV64:
-+        id |= KVM_REG_SIZE_U64;
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+    return id;
-+}
-+
- const KVMCapabilityInfo kvm_arch_required_capabilities[] = {
-     KVM_CAP_LAST_INFO
- };
-@@ -79,7 +96,20 @@ void kvm_arch_init_irq_routing(KVMState *s)
- 
- int kvm_arch_init_vcpu(CPUState *cs)
- {
--    return 0;
-+    int ret = 0;
-+    target_ulong isa;
-+    RISCVCPU *cpu = RISCV_CPU(cs);
-+    CPURISCVState *env = &cpu->env;
-+    uint64_t id;
-+
-+    id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
-+    ret = kvm_get_one_reg(cs, id, &isa);
-+    if (ret) {
-+        return ret;
-+    }
-+    env->misa_ext = isa;
-+
-+    return ret;
+@@ -383,6 +383,23 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+     env->satp = 0;
  }
  
- int kvm_arch_msi_data_to_gsi(uint32_t data)
++void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
++{
++    int ret;
++    unsigned virq = level ? KVM_INTERRUPT_SET : KVM_INTERRUPT_UNSET;
++
++    if (irq != IRQ_S_EXT) {
++        perror("kvm riscv set irq != IRQ_S_EXT\n");
++        abort();
++    }
++
++    ret = kvm_vcpu_ioctl(CPU(cpu), KVM_INTERRUPT, &virq);
++    if (ret < 0) {
++        perror("Set irq failed");
++        abort();
++    }
++}
++
+ bool kvm_arch_cpu_check_are_resettable(void)
+ {
+     return true;
+diff --git a/target/riscv/kvm_riscv.h b/target/riscv/kvm_riscv.h
+index f38c82bf59..ed281bdce0 100644
+--- a/target/riscv/kvm_riscv.h
++++ b/target/riscv/kvm_riscv.h
+@@ -20,5 +20,6 @@
+ #define QEMU_KVM_RISCV_H
+ 
+ void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
++void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
+ 
+ #endif
 -- 
 2.19.1
 
