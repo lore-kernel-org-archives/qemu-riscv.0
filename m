@@ -1,60 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzYjU-0005XR-ID
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 01:34:44 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54956)
+	id 1mzYwb-0000eq-17
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 01:48:17 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56778)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mzYjS-0005Vo-0Y; Tue, 21 Dec 2021 01:34:42 -0500
-Received: from [2607:f8b0:4864:20::d2f] (port=33618
- helo=mail-io1-xd2f.google.com)
+ id 1mzYwO-0000dV-Tc; Tue, 21 Dec 2021 01:48:05 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=44887
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mzYjQ-0007Nj-DQ; Tue, 21 Dec 2021 01:34:41 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id m9so16485548iop.0;
- Mon, 20 Dec 2021 22:34:39 -0800 (PST)
+ id 1mzYwL-0000UG-7r; Tue, 21 Dec 2021 01:48:03 -0500
+Received: by mail-io1-xd36.google.com with SMTP id b187so16402758iof.11;
+ Mon, 20 Dec 2021 22:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=87jO2CGfdDyFX4fYvkxb0eoRWzthkWRvONFVUUzPEzM=;
- b=c79H1m3J2JPc5eCj09YWohAROZuHcGH5niYfLCI+Kqb8ry8FRpbYNA1AwXKBmrupyR
- v3yKZBsK19RkglHabSdZ1BUJ2+81r63bFxjb6Y9rgdm6rzKDC3DwEsccg9hw2PjVkfGn
- RytRfl8qYZrwPH/+psbL7X6QrwNY7pLoQRDsLumzXGLbMjr5xN8/dytYBgCwldAhNCle
- I4ZDGpS2fptF3uo2KKxKxNT1vFdi/Bp6EM7NEbJsV9WyV65DpebCBCVdWz+QuScHCMtB
- JxcC90CIySVU5SI3l6ThIjPfd4t2+MTZYVt2E/8p45WsKStlw8vQUTyVjeWliS4trq9B
- 2ieg==
+ :cc; bh=MADL4sSEbcrpEAi+a08np2U8YSsjLj7T/O8v4ettDYI=;
+ b=od/+SUFZPC7C3JHR5DewjVL6gkZJ//5otfNjUJVuOKzRTmrKivzOmiZotOc0P5akyX
+ +SX2Zcq29qeDuDo3CNcMAKP9og4WhTBgQNwrvcNpovm6KyHYrZvnJ1MaQvWYZ4FyWR/D
+ kOT4VPl8lGWG/9Nx56Ue9IcZwB1GIxyYEdK7im3eu8OKzWsDhe06F0o7EcUJNB+wqbyB
+ 2rjCXPEEM1lnbjTGF/nc7OX/z962kEvAaq0/cJqfR6N09FRHq4vjpm3NmKAQx5j9Z1+X
+ 4BxthGQCsaRvkXnRr961hBZg7lbNAaipa68Jbf6G33kZQ4Etvp/H79gTpZNKNJ88/4wv
+ zkYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=87jO2CGfdDyFX4fYvkxb0eoRWzthkWRvONFVUUzPEzM=;
- b=KDvsqlqzZnYEaV+lpp6e5CwTKFvh7EEdQPzHy2llpp2Mnc4ii8BQZpn57fEUixZUJu
- L3a6FX/Ya8ss+OnK5r60hB4Ju+wwPMTyTEuzPuc0frGTtnxEnD7oOoAc1W4fVuQnbNXB
- 0GblulJakqEQRiRpQ/EH4HM7TNE0hq5/vKkGoXkQ+JRe9cf302dGuwaJqfIFK/xbE2kc
- 3NVxJQn/0CN1lFCkIRLIb46uztYuhbhO1rq5G5IqijwUggF570rE6kfTZ9f92k5gakul
- nKec+304i93RXi2x9H4k211u4RKUY4fJLrZQN1fK9jt06+X2mpT60Bv/8V0w7ld70LE/
- JCWw==
-X-Gm-Message-State: AOAM531HxxJZjVOs5pG+xicMELmRDKf/Gjm3JwT4orlgF8UVyQVvorKP
- uK4QWSlqHDpItTy+xjxGX3VCl5xZVryv3oLBwFk=
-X-Google-Smtp-Source: ABdhPJz1gAMu5lwTp6aLexg5qx6dmHlFi6qW04ko+ycua0c7Ysx68XTHarI2DtzTIWSJHOnT8K8HclPdi2X6Mo6zmB8=
-X-Received: by 2002:a02:aa8f:: with SMTP id u15mr1025532jai.63.1640068478643; 
- Mon, 20 Dec 2021 22:34:38 -0800 (PST)
+ bh=MADL4sSEbcrpEAi+a08np2U8YSsjLj7T/O8v4ettDYI=;
+ b=ZPfFbKXD6/wI2OFqAOWJqxGDtdZCRgXV1BVvWdlSDvwmLdCsE8xWmou8OBLa5UrpAO
+ 4puKIvNMB54+hE0TebLCnKVr9lTXvsevNRNOWxFxpyoeG9YrAq0WK1EBhlF9ojaJGFH9
+ b+nUPNWVTAgs9xj3AoTH+YS44RvI1fKtw6W52WTA61MGdO3Kn1naG7YLmnp9qmqMojlt
+ 4B1CsuVPAD4RClsmaNgcYUAASw86hyJWryf9vNKHmxZcGnTnjTMkmo2xii9nIf3utkFe
+ +tJNHYXyLcM61uIX9+aPXnkfFwdF/FLibMbVKPmjmftGypbtmzkgynFREGFFrVa8XAhI
+ +WpA==
+X-Gm-Message-State: AOAM533N89VeR/8I2oSyfa4mHOj2n5UYADHAd5t7Ug+EvoV8NWfYcxCy
+ fMyuOsQJITK7+APp2sDkjXwkHj4iM1pKYZIKPAI=
+X-Google-Smtp-Source: ABdhPJw6vyzBNDrRU+5o35OK2IfJBCweVXJn1TJjU4M4urYKUBAXE+RGkRjO8lYzTK/I8qpCBo2wc7jFrhf3gt5uaFM=
+X-Received: by 2002:a6b:ea0a:: with SMTP id m10mr916292ioc.91.1640069279861;
+ Mon, 20 Dec 2021 22:47:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20211214092659.15709-1-nikita.shubin@maquefel.me>
-In-Reply-To: <20211214092659.15709-1-nikita.shubin@maquefel.me>
+References: <20211211041917.135345-1-anup.patel@wdc.com>
+ <20211211041917.135345-14-anup.patel@wdc.com>
+In-Reply-To: <20211211041917.135345-14-anup.patel@wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Dec 2021 16:34:12 +1000
-Message-ID: <CAKmqyKOmKHjBYhBJP7EwDvKiV+H=y4jVheaJe8Wp46aBQWKgOA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/pmp: fix no pmp illegal intrs
-To: Nikita Shubin <nikita.shubin@maquefel.me>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Nikita Shubin <n.shubin@yadro.com>, Bin Meng <bin.meng@windriver.com>, 
+Date: Tue, 21 Dec 2021 16:47:34 +1000
+Message-ID: <CAKmqyKNTF7mQP-oxeWL94XgywQGehSL6y6U_JJws9wOkT8dUPg@mail.gmail.com>
+Subject: Re: [PATCH v5 13/23] target/riscv: Implement AIA mtopi, stopi, and
+ vstopi CSRs
+To: Anup Patel <anup.patel@wdc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup@brainfault.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -75,52 +79,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2021 06:34:42 -0000
+X-List-Received-Date: Tue, 21 Dec 2021 06:48:05 -0000
 
-On Wed, Dec 15, 2021 at 1:00 AM Nikita Shubin <nikita.shubin@maquefel.me> wrote:
+On Sat, Dec 11, 2021 at 2:34 PM Anup Patel <anup.patel@wdc.com> wrote:
 >
-> From: Nikita Shubin <n.shubin@yadro.com>
+> The AIA specification introduces new [m|s|vs]topi CSRs for
+> reporting pending local IRQ number and associated IRQ priority.
 >
-> As per the privilege specification, any access from S/U mode should fail
-> if no pmp region is configured and pmp is present, othwerwise access
-> should succeed.
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> ---
+>  target/riscv/csr.c | 155 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 155 insertions(+)
 >
-> Fixes: d102f19a208 (target/riscv/pmp: Raise exception if no PMP entry is configured)
-> Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4b3edc1043..6f613d182d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -189,6 +189,15 @@ static int smode32(CPURISCVState *env, int csrno)
+>      return smode(env, csrno);
+>  }
+>
+> +static int aia_smode(CPURISCVState *env, int csrno)
+> +{
+> +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    return smode(env, csrno);
+> +}
+> +
+>  static int aia_smode32(CPURISCVState *env, int csrno)
+>  {
+>      if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> @@ -833,6 +842,28 @@ static RISCVException rmw_mieh(CPURISCVState *env, int csrno,
+>      return ret;
+>  }
+>
+> +static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    int irq;
+> +    uint8_t iprio;
+> +
+> +    irq = riscv_cpu_mirq_pending(env);
+> +    if (irq <= 0 || irq > 63) {
+> +       *val = 0;
+> +    } else {
+> +       iprio = env->miprio[irq];
+> +       if (!iprio) {
+> +           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_M) {
+> +               iprio = IPRIO_MMAXIPRIO;
+> +           }
+> +       }
+> +       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
+> +       *val |= iprio;
+> +    }
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  static RISCVException read_mtvec(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>  {
+> @@ -1362,6 +1393,121 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    int irq, ret;
+> +    target_ulong topei;
+> +    uint64_t vseip, vsgein;
+> +    uint32_t iid, iprio, hviid, hviprio, gein;
+> +#define VSTOPI_NUM_SRCS 5
 
-Whoops!
-
-I sent a patch to fix the exact same issue :)
-
-I'll drop mine and we can merge yours. Do you mind adding this and
-resending the patch
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/585
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This should be defined at the top of the file.
 
 Alistair
-
-> ---
->  target/riscv/op_helper.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index ee7c24efe7..58d992e98a 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -146,7 +146,8 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
->      uint64_t mstatus = env->mstatus;
->      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
->
-> -    if (!pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
-> +    if (riscv_feature(env, RISCV_FEATURE_PMP) &&
-> +        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
->          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
->      }
->
-> --
-> 2.31.1
->
->
 
