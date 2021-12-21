@@ -1,64 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzYhj-0004jK-7S
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 01:32:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54860)
+	id 1mzYjU-0005XR-ID
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 01:34:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54956)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mzYhh-0004hi-KR; Tue, 21 Dec 2021 01:32:53 -0500
-Received: from [2607:f8b0:4864:20::d2d] (port=40522
- helo=mail-io1-xd2d.google.com)
+ id 1mzYjS-0005Vo-0Y; Tue, 21 Dec 2021 01:34:42 -0500
+Received: from [2607:f8b0:4864:20::d2f] (port=33618
+ helo=mail-io1-xd2f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mzYhf-0007IP-W7; Tue, 21 Dec 2021 01:32:53 -0500
-Received: by mail-io1-xd2d.google.com with SMTP id p23so16379047iod.7;
- Mon, 20 Dec 2021 22:32:50 -0800 (PST)
+ id 1mzYjQ-0007Nj-DQ; Tue, 21 Dec 2021 01:34:41 -0500
+Received: by mail-io1-xd2f.google.com with SMTP id m9so16485548iop.0;
+ Mon, 20 Dec 2021 22:34:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wW/V9Lug/QAgluXyZXSKnDCGcXcm5ALFI5ghPgvY1yA=;
- b=RG9xXY/INK2eINR4Rfk7YEKrRuPYPORLIucXOUh3ff2kkLYPLXKRK/G5f11oCvVxu4
- 6cFoDJF6Kys8D36uRqIXEQMywNpuIvz/G0IVkF5zJbzs4M9N3GpmGwBlYGxkXaNdgcBT
- liUbmp6UNo42tDgBrsNhKCU5ePl4iVVvzP1ETP0xuXHXaR+19yGr81SMen7gUYEp+P8d
- dShL1mEpGfY2WBBgGHJmnjSxs4SoddQoA1/v0BU/7FPM7BkyFiRCB0G2xdmorphFrZH7
- CVkL4mHJeeGh2AbDIameTiicknAIIBuaFXuIykB7udP2eUNfbMzO8LxrJ6ZpDXHHGr9T
- OKLg==
+ :cc; bh=87jO2CGfdDyFX4fYvkxb0eoRWzthkWRvONFVUUzPEzM=;
+ b=c79H1m3J2JPc5eCj09YWohAROZuHcGH5niYfLCI+Kqb8ry8FRpbYNA1AwXKBmrupyR
+ v3yKZBsK19RkglHabSdZ1BUJ2+81r63bFxjb6Y9rgdm6rzKDC3DwEsccg9hw2PjVkfGn
+ RytRfl8qYZrwPH/+psbL7X6QrwNY7pLoQRDsLumzXGLbMjr5xN8/dytYBgCwldAhNCle
+ I4ZDGpS2fptF3uo2KKxKxNT1vFdi/Bp6EM7NEbJsV9WyV65DpebCBCVdWz+QuScHCMtB
+ JxcC90CIySVU5SI3l6ThIjPfd4t2+MTZYVt2E/8p45WsKStlw8vQUTyVjeWliS4trq9B
+ 2ieg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=wW/V9Lug/QAgluXyZXSKnDCGcXcm5ALFI5ghPgvY1yA=;
- b=zxjkDuCzaHmxon9MJniSB9dqfVWLNDKO/HYGHmpDsesnyFMaEjL28b+YNx3EpKOMkf
- MHwpgepg0s+fD0qyOU3vBwijulo55wsf04h+Ws+pNjBLor8fdko+J6K7nNXCMN8hhIQ2
- BRvRAQxSE6taXpJ8aZLWPX3Km+zEDipKyk5kNkvrBh/Qwx8vuzvDF3pUyYfTTAEq01wP
- SDxQRBpiaquC7GjWF7UpkJhMieMnBYA+8Hhw3WgJeUj7QDeiHX4qnXJ4V+3+Vtd4Nk8U
- UuDlVOoJ/gGcbg5lCDa0knwBMfM2M6v7MDbNN24Md3PkizrvkgORNjSbI8uAhPYWTZ5e
- aMbw==
-X-Gm-Message-State: AOAM531fsN7eyVeL5p14FTSx1e1LhPalyYQSgl/vjvNYdz/J9HNG/Clz
- JpDAy+/ABmuMTGoLzUgNCKm+mvZ4nfIGBJCaSlU=
-X-Google-Smtp-Source: ABdhPJxuFmD57sIsW4JTrL3PO4BTY7Qpyh78vXAsB487cAW/R48Zw9Rci0vH3zTSkKr0AUq7uoRpDi69hBBTYSAdgEk=
-X-Received: by 2002:a05:6638:12d3:: with SMTP id
- v19mr1045370jas.318.1640068370065; 
- Mon, 20 Dec 2021 22:32:50 -0800 (PST)
+ bh=87jO2CGfdDyFX4fYvkxb0eoRWzthkWRvONFVUUzPEzM=;
+ b=KDvsqlqzZnYEaV+lpp6e5CwTKFvh7EEdQPzHy2llpp2Mnc4ii8BQZpn57fEUixZUJu
+ L3a6FX/Ya8ss+OnK5r60hB4Ju+wwPMTyTEuzPuc0frGTtnxEnD7oOoAc1W4fVuQnbNXB
+ 0GblulJakqEQRiRpQ/EH4HM7TNE0hq5/vKkGoXkQ+JRe9cf302dGuwaJqfIFK/xbE2kc
+ 3NVxJQn/0CN1lFCkIRLIb46uztYuhbhO1rq5G5IqijwUggF570rE6kfTZ9f92k5gakul
+ nKec+304i93RXi2x9H4k211u4RKUY4fJLrZQN1fK9jt06+X2mpT60Bv/8V0w7ld70LE/
+ JCWw==
+X-Gm-Message-State: AOAM531HxxJZjVOs5pG+xicMELmRDKf/Gjm3JwT4orlgF8UVyQVvorKP
+ uK4QWSlqHDpItTy+xjxGX3VCl5xZVryv3oLBwFk=
+X-Google-Smtp-Source: ABdhPJz1gAMu5lwTp6aLexg5qx6dmHlFi6qW04ko+ycua0c7Ysx68XTHarI2DtzTIWSJHOnT8K8HclPdi2X6Mo6zmB8=
+X-Received: by 2002:a02:aa8f:: with SMTP id u15mr1025532jai.63.1640068478643; 
+ Mon, 20 Dec 2021 22:34:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
- <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
- <CAEUhbmVpGwjqvhLN1LCY3EokL9_a_v9okL=ZwUb_JYMZcvv3zw@mail.gmail.com>
-In-Reply-To: <CAEUhbmVpGwjqvhLN1LCY3EokL9_a_v9okL=ZwUb_JYMZcvv3zw@mail.gmail.com>
+References: <20211214092659.15709-1-nikita.shubin@maquefel.me>
+In-Reply-To: <20211214092659.15709-1-nikita.shubin@maquefel.me>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 21 Dec 2021 16:32:23 +1000
-Message-ID: <CAKmqyKNLZGD-81xnFp_NMXKRuK-0EgP4FqW4AeLeKuMD+TAQEw@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] hw/riscv: virt: Set the clock-frequency
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Tue, 21 Dec 2021 16:34:12 +1000
+Message-ID: <CAKmqyKOmKHjBYhBJP7EwDvKiV+H=y4jVheaJe8Wp46aBQWKgOA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/pmp: fix no pmp illegal intrs
+To: Nikita Shubin <nikita.shubin@maquefel.me>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Nikita Shubin <n.shubin@yadro.com>, Bin Meng <bin.meng@windriver.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,57 +75,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2021 06:32:54 -0000
+X-List-Received-Date: Tue, 21 Dec 2021 06:34:42 -0000
 
-On Mon, Dec 20, 2021 at 5:52 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Dec 15, 2021 at 1:00 AM Nikita Shubin <nikita.shubin@maquefel.me> wrote:
 >
-> On Thu, Dec 16, 2021 at 12:55 PM Alistair Francis
-> <alistair.francis@opensource.wdc.com> wrote:
-> >
-> > From: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > As per the device tree specification let's set the clock-frequency for
-> > the virt CPUs.
-> >
-> > QEMU doesn't really have an exact clock, so let's just 1000000 as it's a
-> > nice round number and matches the sifive_u CLINT_TIMEBASE_FREQ.
-> >
-> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/472 (RISC-V virt)
+> From: Nikita Shubin <n.shubin@yadro.com>
 >
-> I tend to think this issue is not valid, as the comment in the issue
-> says the value should reflect the running frequency.
+> As per the privilege specification, any access from S/U mode should fail
+> if no pmp region is configured and pmp is present, othwerwise access
+> should succeed.
 >
-> Note the "clock-frequency" was once in the codes but was intentionally
-> removed before because it is not needed:
->
-> See commit 7ae05377b85f (" riscv: hw: Drop "clock-frequency" property
-> of cpu nodes")
+> Fixes: d102f19a208 (target/riscv/pmp: Raise exception if no PMP entry is configured)
+> Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
 
-Hmmm... Good point.
+Whoops!
 
-But if the device tree spec says it's required then I think we should
-include it. Even if it isn't super relevant for us
+I sent a patch to fix the exact same issue :)
+
+I'll drop mine and we can merge yours. Do you mind adding this and
+resending the patch
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/585
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/op_helper.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  hw/riscv/virt.c | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index 3af074148e..41a85cfc60 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -202,6 +202,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
-> >          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
-> >              s->soc[socket].hartid_base + cpu);
-> >          qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
-> > +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "clock-frequency", 1000000);
-> >          riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
-> >          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index ee7c24efe7..58d992e98a 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -146,7 +146,8 @@ target_ulong helper_mret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>      uint64_t mstatus = env->mstatus;
+>      target_ulong prev_priv = get_field(mstatus, MSTATUS_MPP);
 >
-> Regards,
-> Bin
+> -    if (!pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+> +    if (riscv_feature(env, RISCV_FEATURE_PMP) &&
+> +        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
+>
+> --
+> 2.31.1
+>
+>
 
