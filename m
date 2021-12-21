@@ -1,80 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mzOVI-00057M-VG
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Dec 2021 14:39:24 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:60200)
+	id 1mzYhj-0004jK-7S
+	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 01:32:55 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54860)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mzOVE-000510-9g
- for qemu-riscv@nongnu.org; Mon, 20 Dec 2021 14:39:20 -0500
-Received: from [2607:f8b0:4864:20::429] (port=44573
- helo=mail-pf1-x429.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mzYhh-0004hi-KR; Tue, 21 Dec 2021 01:32:53 -0500
+Received: from [2607:f8b0:4864:20::d2d] (port=40522
+ helo=mail-io1-xd2d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1mzOVC-00066Q-Sk
- for qemu-riscv@nongnu.org; Mon, 20 Dec 2021 14:39:20 -0500
-Received: by mail-pf1-x429.google.com with SMTP id k64so9582204pfd.11
- for <qemu-riscv@nongnu.org>; Mon, 20 Dec 2021 11:39:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=4kVwmEHEmH6r99st4Q92PqMdtWDnuzKRYiqcng4XJjA=;
- b=xXA/wFRogaH8k9YdlJUB0CwllxxzbZ2Fh3eMjRRQF+UiTgye0weMbaCEhu0QC27ok9
- htOcHCBv4edJD8EjDqsdwRumlmddgFUU/pr+MpxpuOo2eeNSWWZrbpl6RopFaHUzAJcC
- AtwjOOWIy1NKZY89nISmhnH69I9u7sgLadY0cgwmCIHF5+IN80L4jJMwTsI56KmCSYEF
- TGC9rv8KoDgXuKLNiBX+7TUoHYb1dQDdBdZ4O+iisWh//dbHVyAokiD6X+rKRLUQ84zh
- wtyefdjldyc6xSfHeB+EFUzqbu3kKcIMwU2YeG1YK8/aTbQ8Kz3tTwAw4bb+ZS2gfCYW
- 1EKQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1mzYhf-0007IP-W7; Tue, 21 Dec 2021 01:32:53 -0500
+Received: by mail-io1-xd2d.google.com with SMTP id p23so16379047iod.7;
+ Mon, 20 Dec 2021 22:32:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wW/V9Lug/QAgluXyZXSKnDCGcXcm5ALFI5ghPgvY1yA=;
+ b=RG9xXY/INK2eINR4Rfk7YEKrRuPYPORLIucXOUh3ff2kkLYPLXKRK/G5f11oCvVxu4
+ 6cFoDJF6Kys8D36uRqIXEQMywNpuIvz/G0IVkF5zJbzs4M9N3GpmGwBlYGxkXaNdgcBT
+ liUbmp6UNo42tDgBrsNhKCU5ePl4iVVvzP1ETP0xuXHXaR+19yGr81SMen7gUYEp+P8d
+ dShL1mEpGfY2WBBgGHJmnjSxs4SoddQoA1/v0BU/7FPM7BkyFiRCB0G2xdmorphFrZH7
+ CVkL4mHJeeGh2AbDIameTiicknAIIBuaFXuIykB7udP2eUNfbMzO8LxrJ6ZpDXHHGr9T
+ OKLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=4kVwmEHEmH6r99st4Q92PqMdtWDnuzKRYiqcng4XJjA=;
- b=o3eAPdx3YWQfQiwypJvVYq8hD1Y9NGv0YqrmnmacxUoGTrzCW5nn2b7d8ZtaJzVI05
- VqKqSGGoPr+HLY0VVc+WDbvpUVEgpOhpq8e5Ui8DJsJWlgOVYZs3r9jrhUJNTsZrNz2S
- M+M+AMIACBfa0g4Ty7mlZO+lf1cJ+t7B0M/ZbXL0fwVT6dmpkcpS0gQvd3jVBdq/Ocrd
- RbJIOfpbMjQ6HUNiTtUSjlH5uBPBD0l1ZiOxSz81dU0+FXMk6m8FZN6/VpzhpZWM0q6e
- vGtILY0g2R889l5HaCKbqZJVSwM0JPalfcOgTiPAQfIlY7CEi3S/+PzQ2IVVVQo0NTVj
- 0uYw==
-X-Gm-Message-State: AOAM532lOv6R39gnMI1cWzFSURPah50dXZcGM5BFlhuba7Vg4oEo2pOH
- mh9oJFwqV4eQV/3QQuxFHERsDw==
-X-Google-Smtp-Source: ABdhPJx8mw8Ep+UESign8gSNX+Tko5bb3h+/MMUCtdoMo78idsxYMnyVAoqYpD9gTCpLeITPFZfQ5w==
-X-Received: by 2002:a63:1b0a:: with SMTP id b10mr16451943pgb.183.1640029157498; 
- Mon, 20 Dec 2021 11:39:17 -0800 (PST)
-Received: from [192.168.4.112] ([156.19.246.20])
- by smtp.gmail.com with ESMTPSA id h5sm20968902pfc.113.2021.12.20.11.39.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Dec 2021 11:39:17 -0800 (PST)
-Subject: Re: [PATCH v4 3/3] target/riscv: Implement the stval/mtval illegal
- instruction
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, bmeng.cn@gmail.com,
- alistair23@gmail.com, Bin Meng <bin.meng@windriver.com>
-References: <20211220064916.107241-1-alistair.francis@opensource.wdc.com>
- <20211220064916.107241-4-alistair.francis@opensource.wdc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <7a82115c-363b-f747-a628-8161429d0b97@linaro.org>
-Date: Mon, 20 Dec 2021 11:39:15 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wW/V9Lug/QAgluXyZXSKnDCGcXcm5ALFI5ghPgvY1yA=;
+ b=zxjkDuCzaHmxon9MJniSB9dqfVWLNDKO/HYGHmpDsesnyFMaEjL28b+YNx3EpKOMkf
+ MHwpgepg0s+fD0qyOU3vBwijulo55wsf04h+Ws+pNjBLor8fdko+J6K7nNXCMN8hhIQ2
+ BRvRAQxSE6taXpJ8aZLWPX3Km+zEDipKyk5kNkvrBh/Qwx8vuzvDF3pUyYfTTAEq01wP
+ SDxQRBpiaquC7GjWF7UpkJhMieMnBYA+8Hhw3WgJeUj7QDeiHX4qnXJ4V+3+Vtd4Nk8U
+ UuDlVOoJ/gGcbg5lCDa0knwBMfM2M6v7MDbNN24Md3PkizrvkgORNjSbI8uAhPYWTZ5e
+ aMbw==
+X-Gm-Message-State: AOAM531fsN7eyVeL5p14FTSx1e1LhPalyYQSgl/vjvNYdz/J9HNG/Clz
+ JpDAy+/ABmuMTGoLzUgNCKm+mvZ4nfIGBJCaSlU=
+X-Google-Smtp-Source: ABdhPJxuFmD57sIsW4JTrL3PO4BTY7Qpyh78vXAsB487cAW/R48Zw9Rci0vH3zTSkKr0AUq7uoRpDi69hBBTYSAdgEk=
+X-Received: by 2002:a05:6638:12d3:: with SMTP id
+ v19mr1045370jas.318.1640068370065; 
+ Mon, 20 Dec 2021 22:32:50 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20211220064916.107241-4-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::429
+References: <20211216045427.757779-1-alistair.francis@opensource.wdc.com>
+ <20211216045427.757779-10-alistair.francis@opensource.wdc.com>
+ <CAEUhbmVpGwjqvhLN1LCY3EokL9_a_v9okL=ZwUb_JYMZcvv3zw@mail.gmail.com>
+In-Reply-To: <CAEUhbmVpGwjqvhLN1LCY3EokL9_a_v9okL=ZwUb_JYMZcvv3zw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 21 Dec 2021 16:32:23 +1000
+Message-ID: <CAKmqyKNLZGD-81xnFp_NMXKRuK-0EgP4FqW4AeLeKuMD+TAQEw@mail.gmail.com>
+Subject: Re: [PATCH v2 9/9] hw/riscv: virt: Set the clock-frequency
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
-X-Spam_score_int: -48
-X-Spam_score: -4.9
-X-Spam_bar: ----
-X-Spam_report: (-4.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.608,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,32 +79,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Dec 2021 19:39:21 -0000
+X-List-Received-Date: Tue, 21 Dec 2021 06:32:54 -0000
 
-On 12/19/21 10:49 PM, Alistair Francis wrote:
-> From: Alistair Francis<alistair.francis@wdc.com>
-> 
-> The stval and mtval registers can optionally contain the faulting
-> instruction on an illegal instruction exception. This patch adds support
-> for setting the stval and mtval registers.
-> 
-> The RISC-V spec states that "The stval register can optionally also be
-> used to return the faulting instruction bits on an illegal instruction
-> exception...". In this case we are always writing the value on an
-> illegal instruction.
-> 
-> This doesn't match all CPUs (some CPUs won't write the data), but in
-> QEMU let's just populate the value on illegal instructions. This won't
-> break any guest software, but will provide more information to guests.
-> 
-> Signed-off-by: Alistair Francis<alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.h        | 2 ++
->   target/riscv/cpu_helper.c | 3 +++
->   target/riscv/translate.c  | 3 +++
->   3 files changed, 8 insertions(+)
+On Mon, Dec 20, 2021 at 5:52 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Thu, Dec 16, 2021 at 12:55 PM Alistair Francis
+> <alistair.francis@opensource.wdc.com> wrote:
+> >
+> > From: Alistair Francis <alistair.francis@wdc.com>
+> >
+> > As per the device tree specification let's set the clock-frequency for
+> > the virt CPUs.
+> >
+> > QEMU doesn't really have an exact clock, so let's just 1000000 as it's a
+> > nice round number and matches the sifive_u CLINT_TIMEBASE_FREQ.
+> >
+> > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/472 (RISC-V virt)
+>
+> I tend to think this issue is not valid, as the comment in the issue
+> says the value should reflect the running frequency.
+>
+> Note the "clock-frequency" was once in the codes but was intentionally
+> removed before because it is not needed:
+>
+> See commit 7ae05377b85f (" riscv: hw: Drop "clock-frequency" property
+> of cpu nodes")
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Hmmm... Good point.
 
-r~
+But if the device tree spec says it's required then I think we should
+include it. Even if it isn't super relevant for us
+
+Alistair
+
+>
+> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  hw/riscv/virt.c | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 3af074148e..41a85cfc60 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -202,6 +202,7 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+> >          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "reg",
+> >              s->soc[socket].hartid_base + cpu);
+> >          qemu_fdt_setprop_string(mc->fdt, cpu_name, "device_type", "cpu");
+> > +        qemu_fdt_setprop_cell(mc->fdt, cpu_name, "clock-frequency", 1000000);
+> >          riscv_socket_fdt_write_id(mc, mc->fdt, cpu_name, socket);
+> >          qemu_fdt_setprop_cell(mc->fdt, cpu_name, "phandle", cpu_phandle);
+>
+> Regards,
+> Bin
 
