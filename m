@@ -1,68 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1mznUi-00064h-SB
-	for mharc-qemu-riscv@gnu.org; Tue, 21 Dec 2021 17:20:29 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35640)
+	id 1mzxon-00083B-NM
+	for mharc-qemu-riscv@gnu.org; Wed, 22 Dec 2021 04:21:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44362)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mznUd-000630-8q; Tue, 21 Dec 2021 17:20:24 -0500
-Received: from [2607:f8b0:4864:20::d2a] (port=37585
- helo=mail-io1-xd2a.google.com)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mzxom-00082t-RT
+ for qemu-riscv@nongnu.org; Wed, 22 Dec 2021 04:21:52 -0500
+Received: from [2a00:1450:4864:20::42c] (port=43894
+ helo=mail-wr1-x42c.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1mznUZ-0007Bo-Tl; Tue, 21 Dec 2021 17:20:21 -0500
-Received: by mail-io1-xd2a.google.com with SMTP id k21so444699ioh.4;
- Tue, 21 Dec 2021 14:20:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1mzxol-0002EQ-5j
+ for qemu-riscv@nongnu.org; Wed, 22 Dec 2021 04:21:52 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id v11so3521835wrw.10
+ for <qemu-riscv@nongnu.org>; Wed, 22 Dec 2021 01:21:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jsQ7m3ivUznDZE7iJVOX1DIzFUHeIAxG2ijhiRy6Gf8=;
- b=hbuKnOx0xULD9bPqkEU9cV8Z9loXth4QliK50Q/I20faJc2ZFu8wyJy4nmjvIP9jWb
- FgEpKZ1UPEesNzKbpDeR1ojdahj8FP0Ha+avZ4OSwZDW65nPr1yGFrcXylWG3cI/kiqm
- MXgLWKN5c69e9jLJt83iui5nhzqnS86q6J2wcPV/g+9ghY1CtBTUnqTp20sHl+cWurGg
- 71lVpVTbDQLLK215MXU2YnxJePi9jhoewgXdDb1LX5vOrFXenZm2Ld69ASwHYOQzPtU4
- K7dZ8aqfYr2m4b+dZ7H5TZQ99IE53Gs2n/xOJMW7Sczv2hLaFEnenV9morKJdCTUZIst
- wqRA==
+ :cc; bh=CdpsWbpmfVOm1srHfBrUthHDr/pq8aMO9TIQNY/fLlY=;
+ b=cJRJM+DiK1rz5NB/qVhgxgUzZl1qmDxq7Tg/hwPpbLyiXeEnX+P67DyTR4YT+G5yO6
+ zUDnO4ComvRkCu1ZDAdy4A1i1JCdjmFRRNRbCRomvCd3KdxlSO6y1Uo5ROLeczHDtv9+
+ ++1ANXRuqMDxWR/IxmfOxfaz1b9NesRK6b8VW/DQkrvo9ljIE9MAgb5J6eAsRrRrhMxi
+ KVMz/smVYxjbKmD6iOPSRbqJ6AfJjNX9kHpGLk3HefJHUNrCe4tFJbO2/NRt8kjDpJU0
+ XI/Jn2/CwzBD8Q/K+0vy1KaFYl+ZhYnC/raT2oFcdGnCd+9LbGALy3WQWj84DIlfMrHM
+ u+UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=jsQ7m3ivUznDZE7iJVOX1DIzFUHeIAxG2ijhiRy6Gf8=;
- b=VWGn4qp1cN7OacI10BwuYvafHAmpFW6EmUvHiyElTygRDgV/9szIB9GNq4S4jKqyIG
- 06F3OlndaOsDm1Heq/xr0qRDpBVz9a2oUfriMMycSgUp7SQxucMbw+IETIp95NtAzyIK
- ft+wEEIiGK1QfbMn5VrU5sBglzpsd52FEHt+MyJj6Zr4rCMx/ljI5Wwi8BuoR8LhqbBL
- +u6seDeeIQexWV4EfR6I+L5R+pzez+JzPWi6Rbz1Garr2eSb7/CKpCw2jO05YeL2g1sp
- bOtfLZV2DJBpD8HSzN/nhdKzc1CNeGKvMccQUtRl1einQXSxxR2GSQdKu5HX5vHN1uwE
- 6Vkw==
-X-Gm-Message-State: AOAM531Axt8tjPrOiOwm778M+81cWNcizlkvI3T28pFWJ9MxGFhAATBS
- 5sssenwgwhxvlMVu9YwPn77CeF00HqR8RPPR8MM=
-X-Google-Smtp-Source: ABdhPJxKh/wuRwxN2BYW0qOwRsnzgDSrwO1oQ3tMptANB9aUmdVWfujfIHPHb5diOq9D+iJ17zyBxDlVAuDRxJFNnio=
-X-Received: by 2002:a05:6638:204c:: with SMTP id
- t12mr104441jaj.169.1640125218520; 
- Tue, 21 Dec 2021 14:20:18 -0800 (PST)
+ bh=CdpsWbpmfVOm1srHfBrUthHDr/pq8aMO9TIQNY/fLlY=;
+ b=B/tXb/oOX+Cy2wxjoAQyShQF43Xr9PKBs7b3RA4QQmrTYlF+h34t7tmK6oDi6rrzAe
+ K97W5GmKX9EBkR5hG1wC0s3Ghl+dmMBT6f09EYFOSqUjJG733sIZKiMbBheWRfDD8hI6
+ +YvreyQ3lmHaiDJ1cfN6UjvXN/lFhdeujxMXCUT1HNooZHKI8dGjIbrjRil7gq+Pzp++
+ T1i2jrMQibOSglKCBA4UcopMbzvSi6lgG1JhApsOAzs/1+GKx1i1EVTnhRIPWUUKoQQF
+ v7n8RI7cmAtQ1yyucMuNzjrCf1dLzMYqYffVpQoAgxqpm4qWzvkDQpyKHL6WvVg4l7IP
+ K5WQ==
+X-Gm-Message-State: AOAM531WamijhNT18p/jf+6i0ZAEhF0RDoWVuWz9bDk3enWqVKNt2E4k
+ OFp23gT4ZIAeKw/HaUwYA7m1YCBVF+0F+dBrzcZ+OQ==
+X-Google-Smtp-Source: ABdhPJzlEo9yWtrHfOUTwlmMPmriT19osxSDv2x+Rgq7z0ACImykp0UIbHfOVSEYP2sebLqca7Ksfo19vuC9RN7ccBU=
+X-Received: by 2002:adf:eb0f:: with SMTP id s15mr1483467wrn.690.1640164909026; 
+ Wed, 22 Dec 2021 01:21:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20211221172157.2572503-1-vineetg@rivosinc.com>
-In-Reply-To: <20211221172157.2572503-1-vineetg@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 22 Dec 2021 08:19:52 +1000
-Message-ID: <CAKmqyKMBHB3egJptvARUqecvVQEDMXgfFN74_1s8y3F4rrPqiQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: make H-extension non-experimental
-To: Vineet Gupta <vineetg@rivosinc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+References: <20211211041917.135345-1-anup.patel@wdc.com>
+ <20211211041917.135345-14-anup.patel@wdc.com>
+ <CAKmqyKNTF7mQP-oxeWL94XgywQGehSL6y6U_JJws9wOkT8dUPg@mail.gmail.com>
+In-Reply-To: <CAKmqyKNTF7mQP-oxeWL94XgywQGehSL6y6U_JJws9wOkT8dUPg@mail.gmail.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Wed, 22 Dec 2021 14:51:37 +0530
+Message-ID: <CAAhSdy04d5hbFLArjkZiyc4M58bXtbj5ezR25SB697M3yhUfcg@mail.gmail.com>
+Subject: Re: [PATCH v5 13/23] target/riscv: Implement AIA mtopi, stopi, and
+ vstopi CSRs
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Anup Patel <anup.patel@wdc.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42c
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::42c;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
 X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,48 +81,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Dec 2021 22:20:26 -0000
+X-List-Received-Date: Wed, 22 Dec 2021 09:21:53 -0000
 
-On Wed, Dec 22, 2021 at 3:22 AM Vineet Gupta <vineetg@rivosinc.com> wrote:
+On Tue, Dec 21, 2021 at 12:18 PM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> H-ext v1.0 was ratified recently as part of Privileged Spec 1.12.
-> So move it out of experimental.
+> On Sat, Dec 11, 2021 at 2:34 PM Anup Patel <anup.patel@wdc.com> wrote:
+> >
+> > The AIA specification introduces new [m|s|vs]topi CSRs for
+> > reporting pending local IRQ number and associated IRQ priority.
+> >
+> > Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> > ---
+> >  target/riscv/csr.c | 155 +++++++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 155 insertions(+)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 4b3edc1043..6f613d182d 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -189,6 +189,15 @@ static int smode32(CPURISCVState *env, int csrno)
+> >      return smode(env, csrno);
+> >  }
+> >
+> > +static int aia_smode(CPURISCVState *env, int csrno)
+> > +{
+> > +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    return smode(env, csrno);
+> > +}
+> > +
+> >  static int aia_smode32(CPURISCVState *env, int csrno)
+> >  {
+> >      if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> > @@ -833,6 +842,28 @@ static RISCVException rmw_mieh(CPURISCVState *env, int csrno,
+> >      return ret;
+> >  }
+> >
+> > +static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
+> > +{
+> > +    int irq;
+> > +    uint8_t iprio;
+> > +
+> > +    irq = riscv_cpu_mirq_pending(env);
+> > +    if (irq <= 0 || irq > 63) {
+> > +       *val = 0;
+> > +    } else {
+> > +       iprio = env->miprio[irq];
+> > +       if (!iprio) {
+> > +           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_M) {
+> > +               iprio = IPRIO_MMAXIPRIO;
+> > +           }
+> > +       }
+> > +       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
+> > +       *val |= iprio;
+> > +    }
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >  static RISCVException read_mtvec(CPURISCVState *env, int csrno,
+> >                                   target_ulong *val)
+> >  {
+> > @@ -1362,6 +1393,121 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > +static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *val)
+> > +{
+> > +    int irq, ret;
+> > +    target_ulong topei;
+> > +    uint64_t vseip, vsgein;
+> > +    uint32_t iid, iprio, hviid, hviprio, gein;
+> > +#define VSTOPI_NUM_SRCS 5
 >
-> [1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
->
-> Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
+> This should be defined at the top of the file.
 
-Thanks for the patch!
+Okay, I will update.
 
-There is already a similar patch on the mailing list though.
+Regards,
+Anup
 
-Alistair
-
-> ---
->  target/riscv/cpu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6ef3314bced8..a582179b1773 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -640,12 +640,12 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->
-> -    /* These are experimental so mark with 'x-' */
->      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
->      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
->      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
->      DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
-> -    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-> +    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
-> +    /* These are experimental so mark with 'x-' */
->      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->      /* ePMP 0.9.3 */
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> --
-> 2.30.2
->
->
+> Alistair
 
