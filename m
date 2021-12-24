@@ -1,72 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n0t6z-0007AZ-9l
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Dec 2021 17:32:29 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41088)
+	id 1n0t7H-0007j5-FP
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Dec 2021 17:32:47 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41132)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1n0t6x-00075y-Rb
- for qemu-riscv@nongnu.org; Fri, 24 Dec 2021 17:32:27 -0500
-Received: from [2607:f8b0:4864:20::530] (port=45015
- helo=mail-pg1-x530.google.com)
+ id 1n0t7C-0007ft-DG
+ for qemu-riscv@nongnu.org; Fri, 24 Dec 2021 17:32:43 -0500
+Received: from [2607:f8b0:4864:20::1032] (port=33527
+ helo=mail-pj1-x1032.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1n0t6w-0001jc-ED
- for qemu-riscv@nongnu.org; Fri, 24 Dec 2021 17:32:27 -0500
-Received: by mail-pg1-x530.google.com with SMTP id m15so8502333pgu.11
- for <qemu-riscv@nongnu.org>; Fri, 24 Dec 2021 14:32:26 -0800 (PST)
+ id 1n0t7A-0001lt-Rw
+ for qemu-riscv@nongnu.org; Fri, 24 Dec 2021 17:32:42 -0500
+Received: by mail-pj1-x1032.google.com with SMTP id
+ x1-20020a17090a2b0100b001b103e48cfaso8550369pjc.0
+ for <qemu-riscv@nongnu.org>; Fri, 24 Dec 2021 14:32:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=g/xzk76qJgEQKrpBfHFLJ/ww1pOt8DJdlgWZ/XEbBfk=;
- b=i2lHdKkMTpXfCP3kpFf7qdi0VHlnrC6jec8rHZ/OznZdGRLyIFErX3O6Mh2CEw9hud
- GMFT/x0N96WPHkmRVEp9Cc2mc9wRcNdTh2uKn3L+lExjobu6Nqm7t9NHhJ2AzgERrpPK
- xwyCJRDfgjFfdtz4elrhPD+83VsFjVBv9KiPIcYqt2DsWGlbTiDULFFft3nfhYV+ljhi
- GUMc8hojoIyufOvg6/HEXytUYdtXfuyAjXQYGTgK5dvZaB/J0E5YnVDsIJ2fNm1SydDm
- xYmbZQ8mtySGjFK4TJFE2EyiBpjv01DaNmNW+nTjOTnDz0ukSXx29+Uv/P1MPs53WerI
- e9DA==
+ bh=tq1OxEwLLycubPx5xI0peBbyRqoKzJ/bEvPvhp6uHYA=;
+ b=yrzLWLIhKBSuLK8W6njA5vViEWC6Uje32++QFUal71sHGtkVHsRXAF+zuoLEbSezcA
+ tFGv13zFSHMy2CVC0/nZJJkijyJNSXsSurCmQ4mvtjcg4ElwN2ensXxQrIN6vOE2WptM
+ arGhODlGThfDMd3YMFH9CLwCQ0p/KuFCuKGYQw74O3dDJpGNLm34Y25nc1Ck1F7WcBbP
+ a3yK3DtayRIjJSUS8h1Si4ZLzvLpDyrBQ6yGE0OdUkcPSrP9BTjbgnVRkpI8umYFttoh
+ h6CnjeUmBfEIajRHsOuPGUPIZOAKR1cJPO1sD1JZp5HmJCZdzCoFd+B6Ga/HNxsX6SX7
+ Fo/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=g/xzk76qJgEQKrpBfHFLJ/ww1pOt8DJdlgWZ/XEbBfk=;
- b=0VkKh51rdEtVVwQl/dYs8lThO9TzOJcpXapwe6adSbhFLAThnLVqrtHmtTlQ2jeT3d
- ZSznxqjdot1EZBsAD6TazaLZES1BXmp1HUnvBnCz/yO6qnBj56w6E3j1Sr3ThUL9b5cp
- SHbUwl2R5QyAh7yrlM8216pro0okNuG+BLxBGhCfUSof8zzANHvO6t+8h0s5axdik3+t
- buLggp+EI9pv+3fl+HuVkhMvKVArbIfy/ZX5/XQtxliM6Faw7+5hwI8mtJbc0JiF+dnc
- 0q0JKSGPZRq9gFRZJUQYtvZC/tlRPgrm+0CH9WRwkO7obdAodfPVZaB+3IdIvjDFivS/
- 4/ag==
-X-Gm-Message-State: AOAM533sO05zEdNtVsWy8CKO/TrL1BDNGibnPI5B7U+tcEHz82TViAfk
- TeRoWDJDEfOeUy/Eji13i+dDVg==
-X-Google-Smtp-Source: ABdhPJxTDBxRSg8ntxUxUYHcSoE1VdmiirWd2LJq2RAuFZfoJcRlK/F7fHj1BI9dBe4XE9VyJL8Cug==
-X-Received: by 2002:a62:36c1:0:b0:4ba:da22:218c with SMTP id
- d184-20020a6236c1000000b004bada22218cmr8608827pfa.26.1640385144942; 
- Fri, 24 Dec 2021 14:32:24 -0800 (PST)
+ bh=tq1OxEwLLycubPx5xI0peBbyRqoKzJ/bEvPvhp6uHYA=;
+ b=jx5X1IC646qb+sLJhsMyaLNVzloRMduWHSqcCKuHaAPC7aafID5WusEY5q4DTGGUyA
+ FAwkIWakH7ugKwAzOPQTE5uJg2VOtLFMrOorHso91Tqo1ccwoTv0J2eQIdBXyhYAe+bS
+ uGRz74HJ6uI9HCI1H0nF2tK134GvNjwBkx8ArFIgYrAPczDwcvHx6YcafNB7N/ghqPAD
+ 209v3yYEYaYv14zuaBVI7Ct4r69Mb48jy+CyCUY6Bi4IvJNJRifOz/OL10BCuwfLQLrR
+ kJz2JEK/GfUMDPlo+Icw2waJhq439v/OJ5T45txqlzd7zLrmnDdeRxfctCd10Ui2DB77
+ 65Uw==
+X-Gm-Message-State: AOAM53286vt7oTewDidRUc3D+TldP3fMw2vfoRLBCrvbmzjtOU6vVUUo
+ NUNb7XtefKxs62z+NluJl/GeHw==
+X-Google-Smtp-Source: ABdhPJyRaKyQ8Ou+a72L2Eap8CiRe6wElsXNA6SkqeEzd9f2wBZVYujMkbz5tDHK7l6ZikZxnwMGeA==
+X-Received: by 2002:a17:902:b712:b0:143:72b7:4096 with SMTP id
+ d18-20020a170902b71200b0014372b74096mr8314475pls.25.1640385159654; 
+ Fri, 24 Dec 2021 14:32:39 -0800 (PST)
 Received: from [172.20.100.20] ([156.19.246.20])
- by smtp.gmail.com with ESMTPSA id m68sm8518153pga.30.2021.12.24.14.32.24
+ by smtp.gmail.com with ESMTPSA id 15sm399121pfy.151.2021.12.24.14.32.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Dec 2021 14:32:24 -0800 (PST)
-Subject: Re: [PATCH 5/6] target/riscv: add support for zhinx/zhinxmin
+ Fri, 24 Dec 2021 14:32:39 -0800 (PST)
+Subject: Re: [PATCH 6/6] target/riscv: expose zfinx, zdinx, zhinx{min}
+ properties
 To: liweiwei <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com
 References: <20211224034915.17204-1-liweiwei@iscas.ac.cn>
- <20211224034915.17204-6-liweiwei@iscas.ac.cn>
+ <20211224034915.17204-7-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <7a1db384-de9f-ae96-ce63-0f921a201179@linaro.org>
-Date: Fri, 24 Dec 2021 14:32:22 -0800
+Message-ID: <e2209460-1592-e6fa-18be-54a7f66c9387@linaro.org>
+Date: Fri, 24 Dec 2021 14:32:37 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211224034915.17204-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20211224034915.17204-7-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::530
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1032
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -33
 X-Spam_score: -3.4
 X-Spam_bar: ---
@@ -86,17 +88,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Dec 2021 22:32:28 -0000
+X-List-Received-Date: Fri, 24 Dec 2021 22:32:45 -0000
 
 On 12/23/21 7:49 PM, liweiwei wrote:
-> +static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
->   {
-> +    /* Disable nanbox check when enable zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx)
-> +        return (uint16_t)f;
+> Co-authored-by: ardxwe <ardxwe@gmail.com>
+> Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
+> Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/cpu.c | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a5fa14f2ac..dbd15693be 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -657,6 +657,10 @@ static Property riscv_cpu_properties[] = {
+>       DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>       DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+>       DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+> +    DEFINE_PROP_BOOL("Zdinx", RISCVCPU, cfg.ext_zdinx, false),
+> +    DEFINE_PROP_BOOL("Zfinx", RISCVCPU, cfg.ext_zfinx, false),
+> +    DEFINE_PROP_BOOL("Zhinx", RISCVCPU, cfg.ext_zhinx, false),
+> +    DEFINE_PROP_BOOL("Zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
+>       DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>       /* ePMP 0.9.3 */
+> 
 
-Braces.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
