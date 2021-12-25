@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n0xiA-0005nb-3J
-	for mharc-qemu-riscv@gnu.org; Fri, 24 Dec 2021 22:27:10 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47790)
+	id 1n0xqN-0008RT-GH
+	for mharc-qemu-riscv@gnu.org; Fri, 24 Dec 2021 22:35:39 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48758)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n0xi9-0005nN-2G; Fri, 24 Dec 2021 22:27:09 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:42482 helo=cstnet.cn)
+ id 1n0xqM-0008NF-3k; Fri, 24 Dec 2021 22:35:38 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:44100 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n0xi6-0006cF-PS; Fri, 24 Dec 2021 22:27:08 -0500
+ id 1n0xqJ-0000yU-N0; Fri, 24 Dec 2021 22:35:37 -0500
 Received: from [192.168.0.104] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAD3zKWFj8Zh5v0dBQ--.1541S2;
- Sat, 25 Dec 2021 11:27:02 +0800 (CST)
-Subject: Re: [PATCH 4/6] target/riscv: add support for zdinx
+ by APP-01 (Coremail) with SMTP id qwCowABHT1eBkcZhZCUeBQ--.31219S2;
+ Sat, 25 Dec 2021 11:35:30 +0800 (CST)
+Subject: Re: [PATCH 5/6] target/riscv: add support for zhinx/zhinxmin
 To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com
 References: <20211224034915.17204-1-liweiwei@iscas.ac.cn>
- <20211224034915.17204-5-liweiwei@iscas.ac.cn>
- <39665e5f-f672-45d6-d3f1-39136a5c1c08@linaro.org>
+ <20211224034915.17204-6-liweiwei@iscas.ac.cn>
+ <7a1db384-de9f-ae96-ce63-0f921a201179@linaro.org>
 From: liweiwei <liweiwei@iscas.ac.cn>
-Message-ID: <201ca05d-d8cc-75fd-f284-4a6179791752@iscas.ac.cn>
-Date: Sat, 25 Dec 2021 11:27:01 +0800
+Message-ID: <6f80b987-ce4e-3765-200b-f95e54bbd4e1@iscas.ac.cn>
+Date: Sat, 25 Dec 2021 11:35:29 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <39665e5f-f672-45d6-d3f1-39136a5c1c08@linaro.org>
+In-Reply-To: <7a1db384-de9f-ae96-ce63-0f921a201179@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: qwCowAD3zKWFj8Zh5v0dBQ--.1541S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrZF47Ar48Xw4UuF47Aw1UZFb_yoW3Zwb_Jw
- 4kuFs2vr4UZay3Zr1vkr1fua47Ar4qvryrXFZ09rnrGF10q395Xw1fCas5Aa4aga98Grya
- 9FyrJ343A3ZIgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbSkFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
- 0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
- 0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2
- Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
- 6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0x
- vE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE
- 42xK8VAvwI8IcIk0rVW3JVWrJr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aV
- CY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUj2jg7UUUUU==
+X-CM-TRANSID: qwCowABHT1eBkcZhZCUeBQ--.31219S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+ VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYt7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
+ 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
+ kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8I
+ cVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87
+ Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAK
+ zVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx
+ 8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwAC
+ I402YVCY1x02628vn2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c
+ 8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r
+ 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUx
+ 73kUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -69,35 +68,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Dec 2021 03:27:09 -0000
+X-List-Received-Date: Sat, 25 Dec 2021 03:35:38 -0000
 
 
-在 2021/12/25 上午6:30, Richard Henderson 写道:
+在 2021/12/25 上午6:32, Richard Henderson 写道:
 > On 12/23/21 7:49 PM, liweiwei wrote:
->>   static bool trans_fsgnj_d(DisasContext *ctx, arg_fsgnj_d *a)
+>> +static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
 >>   {
->> +    REQUIRE_FPU;
->> +    REQUIRE_ZDINX_OR_D(ctx);
->> +
->> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
->> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
->> +
->>       if (a->rs1 == a->rs2) { /* FMOV */
+>> +    /* Disable nanbox check when enable zfinx */
+>> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx)
+>> +        return (uint16_t)f;
 >
-> Applies to the F version as well, but we should not assemble src2 when 
-> we don't need it.
-OK, I'll fix this.
+> Braces.
 >
->> - tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
->> +        tcg_gen_mov_i64(dest, src1);
->
->
-> I think this can just be dest = get_fpr_d(ctx, a->src1), leaving the 
-> final "move" to gen_set_fpr_d.
-OK. I'll update this.
->
->
+OK. I'll add this later.
 > r~
 
 
