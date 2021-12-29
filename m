@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2OnB-0003T2-7U
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:34:17 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55626)
+	id 1n2OnE-0003ck-If
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:34:20 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55658)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2On9-0003Nv-Ne
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:15 -0500
-Received: from [2607:f8b0:4864:20::62b] (port=43000
- helo=mail-pl1-x62b.google.com)
+ id 1n2OnC-0003ZD-QZ
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:18 -0500
+Received: from [2607:f8b0:4864:20::52f] (port=40455
+ helo=mail-pg1-x52f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2On7-0004ce-Th
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:15 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id u16so14828630plg.9
- for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:34:13 -0800 (PST)
+ id 1n2OnB-0004dB-7t
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:18 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id l10so17334400pgm.7
+ for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:34:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=TqjBR2rdF5LZaas3NxvRjCd3bRaUxrMW/OmvY9gd7hc=;
- b=QeIsN0eZuhkwirT9k+nvBabgcKZ903fJyfJ3xluLawua1TzNP0QPVm/jQ8BR2l2xii
- qwM0Bb5ocYmARu9kwZ8mITgNtcr+tA+NMBCOyJqDw56c/plLvH+IFpE9rw214zmVaX0J
- mK6icVBRdYORcbztg0gbFwjR/rpyICajgMMpiOke37SOHiql9sYENLpJat90bKAuA3BV
- +npenpBc/n1WNu0svF5fr03sGZlHnd6lwM9JJWQP2H93f1jMRj/+0goS2D8yrtNDpEGj
- F3tHLSt9vSJfIuDddfOEob/vuGZwcTxW3OfVzLn0AKC2sCtJrvNOmnGBq/uB79OhNJeH
- OSuA==
+ bh=63Y4BCN3lQXD6KqJW3XIboe0KMpiBnXkS6TapXO/9NA=;
+ b=CUdgsu97NPEUVVeKcUndM7xnEW3vxt7u4uTECsQAWozZFbzD0j1e4wkemg05kvAjBx
+ 1C03/pP7ji4mNWDAZraA4RK1o0A9cfF45Cpd7AwzNuc+Mb+SvnpQ/Kz7buRH5NBNEGBp
+ tECoMAQBgkO+zpxQcrSlghPCbHEuGfVwSE+F7cZCDWwGe6OjEdDfROXQNqj5fjc+aChl
+ S/PrlG5ZivXcjdSfbUd/ULxzDnGK9Fu+oNGJ57qL1+yPU4eaURuuQJs1iXAbnXVupSbk
+ h/SfMbpuAnHug1OpzRiVupOJZVCx4Z0ut0NNOgcxjI53w+b1+UEdQPfq6prelIHfW5CN
+ F+KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=TqjBR2rdF5LZaas3NxvRjCd3bRaUxrMW/OmvY9gd7hc=;
- b=oXmc4ae5otyGRBIOTl/977XkKvcJcD3L2kzJ+JSGKZdXJbi4XKAyqnm2v15dgigGzP
- 9uAGlkqSdyMOTD74TamPs2VECKZMqAFd04loVClgMBwt1Ri6vxUCgqK6Tkh0Ae8tSBmf
- PEhFH53JgB4oGhDTN7hcxuACcm8JnkUnsFMS9ceDlQqOzAvyzALxe0HCvr5pjj/bLb2y
- ykr8jsGWSJthTZwZszZpRGP1xvBdiEk9goetOIF9kE+qifYbtps1ZaWxEKgRSd6TaTRo
- O64ysKBd+u6+5EWlTXyV3r9Rd4oDXCpv3nw4rxTT/pjxjFkeK6s8SetJEAqKfpmlRZOv
- 72pw==
-X-Gm-Message-State: AOAM531C3/ZeUlXAP6w3R1KpMoSBZwEtiRp2QhmfWEWGheDxiRfFwRCJ
- pXUfQoJJuZ9/wduQi8TXY+Y80A==
-X-Google-Smtp-Source: ABdhPJwKFB4+iK2TcS40HNz00M+uw17eCHTlw3evX1GN4khQoFmG711KiaQM/nJi5WLZbR9M7UeGaw==
-X-Received: by 2002:a17:902:ea03:b0:148:ea19:557 with SMTP id
- s3-20020a170902ea0300b00148ea190557mr23950332plg.129.1640745252811; 
- Tue, 28 Dec 2021 18:34:12 -0800 (PST)
+ bh=63Y4BCN3lQXD6KqJW3XIboe0KMpiBnXkS6TapXO/9NA=;
+ b=Xq6yzqMHVPAcTTtXwR0KTFDEZK5iV2iltg4dZqzwF+Xk+K5rcMLCvN3Yeg+21oN1RR
+ vZRTsgn8oFbC0lsZg2bAiWJNBHdh+ezyBvaN/1Hv6sjFIF05sAJTs04AUFfX6XGsjHsR
+ /yNIY03CmjwdNWIJrvPcTvXzZFSguMpCwhCPm4xaybfQmn/ZMnTsx8od5o2QUX37pi37
+ wFvjNBHsLARVht19KCHMh5+6PBbHYZKmZNhutJaF+1gX1Jf4/yV745QiE1SnQLH0GVy0
+ 3CgSJ0zePILTNzlN4MTuOBsE28ddLQiFPKsymMJN6Ge39p1czr3Ekg1X+HBzGop/HOlo
+ qhmw==
+X-Gm-Message-State: AOAM533LmcZePzpVI4KIlmAM55EYn64nAW2meTu+XIeZrAdXTg4Lxutw
+ kKvvFKX7WaxblP+qRtSMTg4wXg==
+X-Google-Smtp-Source: ABdhPJy+iLzEDa1qDqa1f4ZqNkUV3zzFmECXd6NkcT6eEemVzhBGlKo65PFMg4g/qyF8LT15ENPMRw==
+X-Received: by 2002:a63:2c8e:: with SMTP id
+ s136mr21729045pgs.431.1640745256133; 
+ Tue, 28 Dec 2021 18:34:16 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id m3sm22613635pjz.10.2021.12.28.18.34.10
+ by smtp.gmail.com with ESMTPSA id m3sm22613635pjz.10.2021.12.28.18.34.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Dec 2021 18:34:12 -0800 (PST)
+ Tue, 28 Dec 2021 18:34:15 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -54,19 +54,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 06/17] target/riscv: rvv-1.0: Add Zve64f support for scalar fp
- insns
-Date: Wed, 29 Dec 2021 10:33:33 +0800
-Message-Id: <20211229023348.12606-7-frank.chang@sifive.com>
+Subject: [PATCH 07/17] target/riscv: rvv-1.0: Add Zve64f support for
+ single-width fp reduction insns
+Date: Wed, 29 Dec 2021 10:33:34 +0800
+Message-Id: <20211229023348.12606-8-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211229023348.12606-1-frank.chang@sifive.com>
 References: <20211229023348.12606-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62b
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: 6
 X-Spam_score: 0.6
 X-Spam_bar: /
@@ -86,140 +86,32 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2021 02:34:16 -0000
+X-List-Received-Date: Wed, 29 Dec 2021 02:34:19 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Zve64f extension requires the scalar processor to implement the F
-extension and implement all vector floating-point instructions for
-floating-point operands with EEW=32 (i.e., no widening floating-point
-operations).
+Vector single-width floating-point reduction operations for EEW=32 are
+supported for Zve64f extension.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 41 +++++++++++++++++++------
- 1 file changed, 31 insertions(+), 10 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index a1e403fe86..0aa8b7918f 100644
+index 0aa8b7918f..d7e288b87f 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -66,6 +66,17 @@ static bool require_scale_rvf(DisasContext *s)
-     }
- }
- 
-+static bool require_zve64f(DisasContext *s)
-+{
-+    /* RVV + Zve64f = RVV. */
-+    if (has_ext(s, RVV)) {
-+        return true;
-+    }
-+
-+    /* Zve64f doesn't support FP64. (Section 18.2) */
-+    return s->ext_zve64f ? s->sew <= MO_32 : true;
-+}
-+
- /* Destination vector register group cannot overlap source mask register. */
- static bool require_vm(int vm, int vd)
+@@ -2935,7 +2935,8 @@ GEN_OPIVV_WIDEN_TRANS(vwredsumu_vs, reduction_widen_check)
+ static bool freduction_check(DisasContext *s, arg_rmrr *a)
  {
-@@ -2204,7 +2215,8 @@ static bool opfvv_check(DisasContext *s, arg_rmrr *a)
-     return require_rvv(s) &&
-            require_rvf(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm);
-+           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm) &&
-+           require_zve64f(s);
- }
- 
- /* OPFVV without GVEC IR */
-@@ -2284,7 +2296,8 @@ static bool opfvf_check(DisasContext *s, arg_rmrr *a)
-     return require_rvv(s) &&
-            require_rvf(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_ss(s, a->rd, a->rs2, a->vm);
-+           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
-+           require_zve64f(s);
- }
- 
- /* OPFVF without GVEC IR */
-@@ -2501,7 +2514,8 @@ static bool opfv_check(DisasContext *s, arg_rmr *a)
-            require_rvf(s) &&
-            vext_check_isa_ill(s) &&
-            /* OPFV instructions ignore vs1 check */
--           vext_check_ss(s, a->rd, a->rs2, a->vm);
-+           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
-+           require_zve64f(s);
- }
- 
- static bool do_opfv(DisasContext *s, arg_rmr *a,
-@@ -2566,7 +2580,8 @@ static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
-     return require_rvv(s) &&
-            require_rvf(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_mss(s, a->rd, a->rs1, a->rs2);
-+           vext_check_mss(s, a->rd, a->rs1, a->rs2) &&
-+           require_zve64f(s);
- }
- 
- GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
-@@ -2579,7 +2594,8 @@ static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
-     return require_rvv(s) &&
-            require_rvf(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_ms(s, a->rd, a->rs2);
-+           vext_check_ms(s, a->rd, a->rs2) &&
-+           require_zve64f(s);
- }
- 
- GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
-@@ -2600,7 +2616,8 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
-     if (require_rvv(s) &&
-         require_rvf(s) &&
-         vext_check_isa_ill(s) &&
--        require_align(a->rd, s->lmul)) {
-+        require_align(a->rd, s->lmul) &&
-+        require_zve64f(s)) {
-         gen_set_rm(s, RISCV_FRM_DYN);
- 
-         TCGv_i64 t1;
-@@ -3326,7 +3343,8 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
- {
-     if (require_rvv(s) &&
-         require_rvf(s) &&
--        vext_check_isa_ill(s)) {
-+        vext_check_isa_ill(s) &&
-+        require_zve64f(s)) {
-         gen_set_rm(s, RISCV_FRM_DYN);
- 
-         unsigned int ofs = (8 << s->sew);
-@@ -3352,7 +3370,8 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
- {
-     if (require_rvv(s) &&
-         require_rvf(s) &&
--        vext_check_isa_ill(s)) {
-+        vext_check_isa_ill(s) &&
-+        require_zve64f(s)) {
-         gen_set_rm(s, RISCV_FRM_DYN);
- 
-         /* The instructions ignore LMUL and vector register group. */
-@@ -3403,13 +3422,15 @@ GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
- static bool fslideup_check(DisasContext *s, arg_rmrr *a)
- {
-     return slideup_check(s, a) &&
+     return reduction_check(s, a) &&
 -           require_rvf(s);
 +           require_rvf(s) &&
 +           require_zve64f(s);
  }
  
- static bool fslidedown_check(DisasContext *s, arg_rmrr *a)
- {
-     return slidedown_check(s, a) &&
--           require_rvf(s);
-+           require_rvf(s) &&
-+           require_zve64f(s);
- }
- 
- GEN_OPFVF_TRANS(vfslide1up_vf, fslideup_check)
+ GEN_OPFVV_TRANS(vfredsum_vs, freduction_check)
 -- 
 2.31.1
 
