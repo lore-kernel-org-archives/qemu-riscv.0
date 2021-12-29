@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2On4-00032s-Cm
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:34:10 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55542)
+	id 1n2On7-0003GQ-Im
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:34:13 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55590)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2On3-0002yx-BJ
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:09 -0500
-Received: from [2607:f8b0:4864:20::62b] (port=39548
- helo=mail-pl1-x62b.google.com)
+ id 1n2On6-0003B0-Ei
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:12 -0500
+Received: from [2607:f8b0:4864:20::102a] (port=55962
+ helo=mail-pj1-x102a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2On1-0004bA-GE
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:09 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id h6so10988332plf.6
- for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:34:07 -0800 (PST)
+ id 1n2On4-0004bu-No
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:34:12 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id iy13so17325689pjb.5
+ for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:34:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=5BjYN/Qmz8BZog3r8YldBNpOG88WmJHhnqNdxU3htQ0=;
- b=BDP7yl4xphrcJGao37+LWZsGa1Z/zq+du+snSK61nLcUid5UGOuXDRSk+HRLJuCyow
- qnaCXlAfHa6VvOHu9EfCeoIp0OLO3PLona6Tw1nvYX3UC60FMKGnINTBTz6LR6Qv9IHm
- FNCgI+oFv0DFXIbG8acIhxPrRzFVZzu3jShHPivN5IpBw2jitTNrtszXxJuuqejHg8TI
- BE+qM8Nrv4sttOi6Y7aazM94cI9HJjKa3z9kHYHtpe9MLt93t1KUwJy5F+bbulHrOJKf
- cRaJ8oJPKBQ5xtIzDU9i2i8zg1wNcjs+njBRC+HBxFnBLeDHtgR9P4DpLumNC/zBYtnb
- Ic4A==
+ bh=bsCcWlWnK/y8bx98uJLBXekQNGdwFDxga/0IN3bxlvI=;
+ b=OJUf/QRwdYLVTuUFPPN1OxWtjelrrZhgetMyqHcoFjXUcHwfbbrDBv0JYcq/6JrC2e
+ Ihxv1T8oFR1t4Vra8KTuOKb/fW2oDNsy4mHeW69TpWo/YI4XTUrd8aqwPzbP5evoP5W9
+ 7BU1g1eZu5AiEz+qFCtkHDvnQeV65kGF+dggLbc/nP55AV6FUl8heUdSSiv9S439f1fb
+ U3O5vLV9IzrhHZQ/JSawKsGVMNGNGD1VpUvdA1/r6SIyC0EeUM0flMVkS8JAa4BQcUsl
+ bZQ5ykRQqPS0/PGY0rjOVXZoo3d82H4N3wFGpr5Vwc0NAERnE1yfrXWAmnIAdhPmQks6
+ LWow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=5BjYN/Qmz8BZog3r8YldBNpOG88WmJHhnqNdxU3htQ0=;
- b=JD6GtqH+QDnJXYa7xhO20l0ZXejbySQXGtPl3R675GYnPtEBqH1BfOfPjAmhiyUBWq
- h9wmYX7cZlVQD8k2Hd6dZtnQ+mLS0DC4unWM2lDzZhEKiHgZjIzLa5zr0bfLax7q1Jf9
- HXi3J5zWLN8iKf2Ol2OSO/z+3DqlIXqk91N+YEhw+s6Dt2Ubcdlj7oGSL7EQ51WER6Ao
- myy5nn2K6KMCTzk28e7MNC+ddzxkoOKn0MDt5vGkB8u6RGE3VV4bEA/dMkMEqEjZUqQC
- dlr7nVZDs6yCABKYiUoi7SCXkWuANUMM8a5T995YUvrU9YPBUQ7dUJ3z87XRRK39CGj7
- tfbg==
-X-Gm-Message-State: AOAM532T06Ysz9CN/82hMnwgVmsyTARFdhahplZYFebyPBmYQJ6YTGqn
- 1OzOvv25ptsFBZZVCZcVzfSyBQ==
-X-Google-Smtp-Source: ABdhPJywqCFp0hqFW16bCXf51g/LVJgveRAcNZ0DkzIW9gzaNPgGQuiwdi+qQGq+xpAN1mWHCB5rdg==
-X-Received: by 2002:a17:90a:207:: with SMTP id
- c7mr30077491pjc.58.1640745246345; 
- Tue, 28 Dec 2021 18:34:06 -0800 (PST)
+ bh=bsCcWlWnK/y8bx98uJLBXekQNGdwFDxga/0IN3bxlvI=;
+ b=K6iI39P8jcwAzh4nV9W0JHrusIVYFwwJNZ5DbeUtfIwmKNIXEHYBxtf6n4SZwRHDRe
+ 5G01ydgneaOf0WMYRYXDvP+6VXb7IeNtppD1efb9A2XL49vyAneRx00kACuuCb90JyzX
+ hd6o0flXr497VJIa1MrHgIorwupa9An/KrTrpc0EkAR7k71Ys/aP8OE+dDdirObETBF+
+ ReJCvzV3ViI4AtirQJKe1i8x3vL2C5wxaT/fLqsN/OIx/zdGcADBWdx3SnEIImRk+x1V
+ 1jXg3rCxJyurZdL87Djuu8hKMd37qqnCKTZcS7ysnGOZUdJu/7142lcVwHQwcMGnqGip
+ B05A==
+X-Gm-Message-State: AOAM531Cb4onnl0mVIA1MJFMJaOS/ixuljhyUV+Ln1t5UJzR5taF9I3W
+ hFUT6TqgquDSG71zEWFoA/z1QQ==
+X-Google-Smtp-Source: ABdhPJwqhsZsLbaICCFKRZCWbUW6msj4VNPzggoqfsekmdAidpDjd7XWTlM3WUf9bI+yzV4RNdPptw==
+X-Received: by 2002:a17:90b:20b:: with SMTP id
+ fy11mr29909676pjb.238.1640745249595; 
+ Tue, 28 Dec 2021 18:34:09 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id m3sm22613635pjz.10.2021.12.28.18.34.04
+ by smtp.gmail.com with ESMTPSA id m3sm22613635pjz.10.2021.12.28.18.34.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Dec 2021 18:34:05 -0800 (PST)
+ Tue, 28 Dec 2021 18:34:09 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -54,19 +54,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 04/17] target/riscv: rvv-1.0: Add Zve64f support for vmulh
- variant insns
-Date: Wed, 29 Dec 2021 10:33:31 +0800
-Message-Id: <20211229023348.12606-5-frank.chang@sifive.com>
+Subject: [PATCH 05/17] target/riscv: rvv-1.0: Add Zve64f support for vsmul.vv
+ and vsmul.vx insns
+Date: Wed, 29 Dec 2021 10:33:32 +0800
+Message-Id: <20211229023348.12606-6-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211229023348.12606-1-frank.chang@sifive.com>
 References: <20211229023348.12606-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62b
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: 6
 X-Spam_score: 0.6
 X-Spam_bar: /
@@ -86,72 +86,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2021 02:34:09 -0000
+X-List-Received-Date: Wed, 29 Dec 2021 02:34:12 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-All Zve* extensions support all vector integer instructions,
-except that the vmulh integer multiply variants that return the
-high word of the product (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx,
-vmulhsu.vv, vmulhsu.vx) are not included for EEW=64 in Zve64*.
+All Zve* extensions support all vector fixed-point arithmetic
+instructions, except that vsmul.vv and vsmul.vx are not supported
+for EEW=64 in Zve64*.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 39 +++++++++++++++++++++----
- 1 file changed, 33 insertions(+), 6 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 820a3387db..658cfbe10e 100644
+index 658cfbe10e..a1e403fe86 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1906,14 +1906,41 @@ GEN_OPIVX_TRANS(vmaxu_vx, opivx_check)
- GEN_OPIVX_TRANS(vmax_vx,  opivx_check)
+@@ -2121,8 +2121,31 @@ GEN_OPIVX_TRANS(vasub_vx,  opivx_check)
+ GEN_OPIVX_TRANS(vasubu_vx,  opivx_check)
  
- /* Vector Single-Width Integer Multiply Instructions */
+ /* Vector Single-Width Fractional Multiply with Rounding and Saturation */
+-GEN_OPIVV_TRANS(vsmul_vv, opivv_check)
+-GEN_OPIVX_TRANS(vsmul_vx,  opivx_check)
 +
-+static bool vmulh_vv_check(DisasContext *s, arg_rmrr *a)
++static bool vsmul_vv_check(DisasContext *s, arg_rmrr *a)
 +{
 +    /*
-+     * All Zve* extensions support all vector integer instructions,
-+     * except that the vmulh integer multiply variants
-+     * that return the high word of the product
-+     * (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx, vmulhsu.vv, vmulhsu.vx)
-+     * are not included for EEW=64 in Zve64*. (Section 18.2)
++     * All Zve* extensions support all vector fixed-point arithmetic
++     * instructions, except that vsmul.vv and vsmul.vx are not supported
++     * for EEW=64 in Zve64*. (Section 18.2)
 +     */
 +    return opivv_check(s, a) &&
 +           (!has_ext(s, RVV) && s->ext_zve64f ? s->sew != MO_64 : true);
 +}
 +
-+static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
++static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
 +{
 +    /*
-+     * All Zve* extensions support all vector integer instructions,
-+     * except that the vmulh integer multiply variants
-+     * that return the high word of the product
-+     * (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx, vmulhsu.vv, vmulhsu.vx)
-+     * are not included for EEW=64 in Zve64*. (Section 18.2)
++     * All Zve* extensions support all vector fixed-point arithmetic
++     * instructions, except that vsmul.vv and vsmul.vx are not supported
++     * for EEW=64 in Zve64*. (Section 18.2)
 +     */
 +    return opivx_check(s, a) &&
 +           (!has_ext(s, RVV) && s->ext_zve64f ? s->sew != MO_64 : true);
 +}
 +
- GEN_OPIVV_GVEC_TRANS(vmul_vv,  mul)
--GEN_OPIVV_TRANS(vmulh_vv, opivv_check)
--GEN_OPIVV_TRANS(vmulhu_vv, opivv_check)
--GEN_OPIVV_TRANS(vmulhsu_vv, opivv_check)
-+GEN_OPIVV_TRANS(vmulh_vv, vmulh_vv_check)
-+GEN_OPIVV_TRANS(vmulhu_vv, vmulh_vv_check)
-+GEN_OPIVV_TRANS(vmulhsu_vv, vmulh_vv_check)
- GEN_OPIVX_GVEC_TRANS(vmul_vx,  muls)
--GEN_OPIVX_TRANS(vmulh_vx, opivx_check)
--GEN_OPIVX_TRANS(vmulhu_vx, opivx_check)
--GEN_OPIVX_TRANS(vmulhsu_vx, opivx_check)
-+GEN_OPIVX_TRANS(vmulh_vx, vmulh_vx_check)
-+GEN_OPIVX_TRANS(vmulhu_vx, vmulh_vx_check)
-+GEN_OPIVX_TRANS(vmulhsu_vx, vmulh_vx_check)
++GEN_OPIVV_TRANS(vsmul_vv, vsmul_vv_check)
++GEN_OPIVX_TRANS(vsmul_vx,  vsmul_vx_check)
  
- /* Vector Integer Divide Instructions */
- GEN_OPIVV_TRANS(vdivu_vv, opivv_check)
+ /* Vector Single-Width Scaling Shift Instructions */
+ GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
 -- 
 2.31.1
 
