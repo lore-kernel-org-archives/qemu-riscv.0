@@ -1,77 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2OSn-0002CI-GM
-	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:13:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51908)
+	id 1n2Omr-0002hS-9G
+	for mharc-qemu-riscv@gnu.org; Tue, 28 Dec 2021 21:33:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55376)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2OSj-00028n-7B
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:13:10 -0500
-Received: from [2607:f8b0:4864:20::531] (port=45648
- helo=mail-pg1-x531.google.com)
+ id 1n2Omp-0002gs-TE
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:33:55 -0500
+Received: from [2607:f8b0:4864:20::1036] (port=39490
+ helo=mail-pj1-x1036.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n2OSh-0001Wj-IC
- for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:13:08 -0500
-Received: by mail-pg1-x531.google.com with SMTP id 2so17251407pgb.12
- for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:13:07 -0800 (PST)
+ id 1n2Omn-0004Y2-Mg
+ for qemu-riscv@nongnu.org; Tue, 28 Dec 2021 21:33:55 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id
+ z9-20020a17090a7b8900b001b13558eadaso23225478pjc.4
+ for <qemu-riscv@nongnu.org>; Tue, 28 Dec 2021 18:33:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=lcxkfLDjFOWX3IL1YOje/OBFiAcSnNeG897+Wew0UM0=;
- b=Rdp8y/wVdvneOQLRKWG6pG2OnOxwWvwFQwNbVAdqXXfHC7ei2fY7F5KJTMbYvdzxTT
- jd0nkWu2vusDfL0l5Vnn4YWPMjsYxEdZxQj8a94T/Jd4cPEkj2bqTr+algvkLGaA6MWD
- iD2TAGLTS2dLej/9JrAK+PwVFIRlEU4BlDhh3H5kjT4aGn8h5vBjFzsqUrqRCZAET7mU
- QpSgDY+gfa2PGYpWozvStY2NPZ4FKCmXolYkrtCumvyCFyl0l8/RKCjr9ZAsI1PFwVj4
- Q/hWw7Ibo95e1l0DMBQTEkWEicKMSFzZrXNE/hxgOPLn7gEenkMbEG4EUhsX0bfG2I27
- Wrhw==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=lnMaw/HNnyt1pXZ4wN7VWyHxV57NRSbuiZnc1O1zyUo=;
+ b=B2tAXli1W+GTiblsuZ4NiPE/GLk2DeGrC/8Igm7onr8ukuxGbXLzfk1AiMpIaAbDue
+ BrAFCyfigfAHkHus1DO+JK2ubLHoiEuUAD9ra9If2gxJ/FmxBwPVvs/zxTjjOJXgWWtR
+ WoFd84Z9OrZvxd2yTqFb7kRFCagA0BpPAA9WQR/gCU/0fCSSJQWK+SB4qfX1aONuMye5
+ Lu/l+6efeC6Cyi0CkLz+kuRWJm4gC1fgLE4Kx5JkrUUW7apRu3PgQo2hKu08K9NJ5PHa
+ AsmLEd1giGOJeT3XsrnJSz8ltQG5iKaanJstjwzRNnFSufyygTEcKvHfPWsLWHIm6Uer
+ bXpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=lcxkfLDjFOWX3IL1YOje/OBFiAcSnNeG897+Wew0UM0=;
- b=5ICED41somwMizEweW2nTerEIQ4/9nqPm59V0GpvX1i9E4FRJVxTaOCcwf7JA/xYFS
- zuQNsTYqQclUAxsnDplxtQAW6fZAbLA2hHMXV63E94lQhEaCUKQ+AYtsXufv1DaF/XCH
- 5L+swbBpRM/j334pl66wrEzjXPZWHHeFyqOV6hizloZzWKCbWj2P2Q+YTEMfF9z8MkZC
- yZBgPpU740hIVoZtRYGgOKJ6ud+MRRlUyPfeoW6jRI8pa/iH7IJyxjpUVEMdfwB9rHfX
- W6jAOrVohzFPJIJYv/uJwCvK1VDCzBhi6QhC9Wk0qOwc8UXx2jAvyzcLLDHeJ9UsIJ+4
- 4qcQ==
-X-Gm-Message-State: AOAM530mKGnZZScS0870wzTQmNx5iHienXgo+4sza4kWlBylBD6ntxsY
- NfgO/1PDytPeQRyBhC0S+we0Nw==
-X-Google-Smtp-Source: ABdhPJyhMFw+9/+RE1c5aJX9wcocOBUUJTnwWCnGNffVPhh2gr1TW9QD0qY3gF2ITds7esB8C40wjQ==
-X-Received: by 2002:a65:680a:: with SMTP id l10mr21315621pgt.52.1640743986508; 
- Tue, 28 Dec 2021 18:13:06 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=lnMaw/HNnyt1pXZ4wN7VWyHxV57NRSbuiZnc1O1zyUo=;
+ b=jIk+636ZlLg4jDMD23/vytQs0vxCf+yG0vwOL6fHj7C8PqRfL1V8dGPGTFIxNJRDzi
+ XlGr+yj6NN6jiEfU5SgCD8yo+XJAz1Ei/7spddMbPhr4CihEHYl+vbLkeMIaglyQrmzj
+ eDDJd1feqmBXgNsd/Aht2NegrLnXZCnTj2BWcNjLZc7ftczXhieYEPOW42Vm2p+eUJRy
+ cgFyf7+giqDHbthViCGKXhhsnLknJcBjpeb/DE0JOvuA2Oi6CWUr821s+09G379ZVPj3
+ MVkHyz4gFkfiHRNxCcrV7zjtGXhgp5fnVw0x4eRGt59U75PA5NpJvYzkYdhbL9WsMsDF
+ csjA==
+X-Gm-Message-State: AOAM531TBcLNIjZ4qeC9JQvwX8Y4C87AehnjoMVA6vKK4jKtnDLgg+iI
+ C1ACGvHHlDapx+x+R7oD/gkKgQ==
+X-Google-Smtp-Source: ABdhPJwJkhCK9Lj0D75uRwnPWpYO6x0Q1RA1gc64GMo6hiyH7WR0BKRdqZBLHl7jua702fe6Z2Xy5A==
+X-Received: by 2002:a17:90b:3850:: with SMTP id
+ nl16mr29569608pjb.18.1640745232219; 
+ Tue, 28 Dec 2021 18:33:52 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id k8sm15693975pjs.53.2021.12.28.18.13.04
+ by smtp.gmail.com with ESMTPSA id m3sm22613635pjz.10.2021.12.28.18.33.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Dec 2021 18:13:06 -0800 (PST)
+ Tue, 28 Dec 2021 18:33:51 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH 3/3] target/riscv: rvv-1.0: Call the correct RVF/RVD check
- funtion for narrowing fp/int type-convert insns
-Date: Wed, 29 Dec 2021 10:12:48 +0800
-Message-Id: <20211229021250.29804-4-frank.chang@sifive.com>
+Cc: qemu-riscv@nongnu.org,
+	Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH 00/17] Add RISC-V RVV Zve32f and Zve64f extensions
+Date: Wed, 29 Dec 2021 10:33:27 +0800
+Message-Id: <20211229023348.12606-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20211229021250.29804-1-frank.chang@sifive.com>
-References: <20211229021250.29804-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::531
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1036
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: 6
+X-Spam_score: 0.6
+X-Spam_bar: /
+X-Spam_report: (0.6 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,80 +80,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Dec 2021 02:13:10 -0000
+X-List-Received-Date: Wed, 29 Dec 2021 02:33:56 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-vfncvt.f.xu.w, vfncvt.f.x.w convert double-width integer to single-width
-floating-point. Therefore, should use require_rvf() to check whether
-RVF/RVD is enabled.
+In RVV v1.0 spec, several Zve* vector extensions for embedded processors
+are defined in Chapter 18.2:
+https://github.com/riscv/riscv-v-spec/blob/v1.0/v-spec.adoc#zve-vector-extensions-for-embedded-processors
 
-vfncvt.f.f.w, vfncvt.rod.f.f.w convert double-width floating-point to
-single-width integer. Therefore, should use require_scale_rvf() to check
-whether RVF/RVD is enabled.
----
- target/riscv/insn_trans/trans_rvv.c.inc | 32 ++++++++++++++++++-------
- 1 file changed, 24 insertions(+), 8 deletions(-)
+This patchset implements Zve32f and Zve64f extensions.
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index f1b44ccad2..6c285c958b 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2719,17 +2719,29 @@ GEN_OPFXV_WIDEN_TRANS(vfwcvt_f_x_v)
- static bool opfv_narrow_check(DisasContext *s, arg_rmr *a)
- {
-     return require_rvv(s) &&
--           require_rvf(s) &&
--           (s->sew != MO_64) &&
-            vext_check_isa_ill(s) &&
-            /* OPFV narrowing instructions ignore vs1 check */
-            vext_check_sd(s, a->rd, a->rs2, a->vm);
- }
- 
--#define GEN_OPFV_NARROW_TRANS(NAME, HELPER, FRM)                   \
-+static bool opfxv_narrow_check(DisasContext *s, arg_rmr *a)
-+{
-+    return opfv_narrow_check(s, a) &&
-+           require_rvf(s) &&
-+           (s->sew != MO_64);
-+}
-+
-+static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
-+{
-+    return opfv_narrow_check(s, a) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8);
-+}
-+
-+#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
- static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
- {                                                                  \
--    if (opfv_narrow_check(s, a)) {                                 \
-+    if (CHECK(s, a)) {                                             \
-         if (FRM != RISCV_FRM_DYN) {                                \
-             gen_set_rm(s, RISCV_FRM_DYN);                          \
-         }                                                          \
-@@ -2756,11 +2768,15 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-     return false;                                                  \
- }
- 
--GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, vfncvt_f_xu_w, RISCV_FRM_DYN)
--GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, vfncvt_f_x_w, RISCV_FRM_DYN)
--GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, vfncvt_f_f_w, RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, opfxv_narrow_check, vfncvt_f_xu_w,
-+                      RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, opfxv_narrow_check, vfncvt_f_x_w,
-+                      RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
-+                      RISCV_FRM_DYN)
- /* Reuse the helper function from vfncvt.f.f.w */
--GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, vfncvt_f_f_w, RISCV_FRM_ROD)
-+GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
-+                      RISCV_FRM_ROD)
- 
- static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
- {
--- 
+The port is available at:
+https://github.com/sifive/qemu/tree/rvv-zve32f-zve64f-upstream
+
+Zve32f can be enabled with -cpu option: Zve32f=true and
+Zve64f can be enabled with -cpu option: Zve64f=true.
+V is not required to be enabled explicitly.
+
+Quote from the inclusion diagram for the six standard vector extensions
+from Nick Knight <nick.knight@sifive.com>:
+
+      V
+      |
+    Zve64d
+      |
+    Zve64f
+   /      \
+Zve64x   Zve32f
+   \      /
+    Zve32x
+
+Note: This patchset depends on other patchsets listed in Based-on
+      section below so it is not able to be built unless those patchsets
+      are applied.
+
+Based-on: <20211229021250.29804-1-frank.chang@sifive.com>
+
+Frank Chang (17):
+  target/riscv: rvv-1.0: Add Zve64f extension into RISC-V
+  target/riscv: rvv-1.0: Add Zve64f support for configuration insns
+  target/riscv: rvv-1.0: Add Zve64f support for load and store insns
+  target/riscv: rvv-1.0: Add Zve64f support for vmulh variant insns
+  target/riscv: rvv-1.0: Add Zve64f support for vsmul.vv and vsmul.vx
+    insns
+  target/riscv: rvv-1.0: Add Zve64f support for scalar fp insns
+  target/riscv: rvv-1.0: Add Zve64f support for single-width fp
+    reduction insns
+  target/riscv: rvv-1.0: Add Zve64f support for widening type-convert
+    insns
+  target/riscv: rvv-1.0: Add Zve64f support for narrowing type-convert
+    insns
+  target/riscv: rvv-1.0: Allow Zve64f extension to be turned on
+  target/riscv: rvv-1.0: Add Zve32f extension into RISC-V
+  target/riscv: rvv-1.0: Add Zve32f support for configuration insns
+  target/riscv: rvv-1.0: Add Zve32f support for scalar fp insns
+  target/riscv: rvv-1.0: Add Zve32f support for single-width fp
+    reduction insns
+  target/riscv: rvv-1.0: Add Zve32f support for widening type-convert
+    insns
+  target/riscv: rvv-1.0: Add Zve32f support for narrowing type-convert
+    insns
+  target/riscv: rvv-1.0: Allow Zve32f extension to be turned on
+
+ target/riscv/cpu.c                      |   6 +
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/cpu_helper.c               |   5 +-
+ target/riscv/csr.c                      |   6 +-
+ target/riscv/insn_trans/trans_rvv.c.inc | 217 ++++++++++++++++++++----
+ target/riscv/translate.c                |   4 +
+ 6 files changed, 203 insertions(+), 37 deletions(-)
+
+--
 2.31.1
 
 
