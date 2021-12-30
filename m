@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2ufq-0003eX-Sb
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:36:50 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54270)
+	id 1n2uft-0003l7-3O
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:36:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54324)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2ufo-0003am-DN
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:48 -0500
-Received: from [2607:f8b0:4864:20::52e] (port=33456
- helo=mail-pg1-x52e.google.com)
+ id 1n2ufr-0003gZ-El
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:51 -0500
+Received: from [2607:f8b0:4864:20::436] (port=38799
+ helo=mail-pf1-x436.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2ufm-0003SI-9J
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:47 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id 7so8676815pgn.0
- for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:36:45 -0800 (PST)
+ id 1n2ufp-0003Si-TV
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:51 -0500
+Received: by mail-pf1-x436.google.com with SMTP id b22so21286095pfb.5
+ for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:36:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=6KNcxB0lI+145naSOKpjow3XUCsQJZAnp5v4CWe5LiQ=;
- b=i/XLEi9gvP9RnOOUcndn4eoQFfHb7Lp2xSMNLauICR5/FWFTqT6q8dfVGDnWSg2j9x
- EkJUekUiK0coZ5hUvPcVwdavwZUcr2mAMl036in9LjFUMYM0+R7biWBbVmK0ImdYV++Z
- +Xm8OOW0++8J3O1d2RbfxSKDBoFz4wqPyJ3vshHGVtWEo0AIvNZu2+SHRWfhDwjdWRMI
- 4hub/BVIKyXA3u14GTQCLP+cDXnu2smPPs+GjIqZUJv8ZfZHBUSt5KRW7xuQiYydSG1w
- +QSrGtfg9Wqi+uRb4265/zJaOyVTPQtWGGULBCNTiMcST6evW+L0opF13JPYSuTB07gj
- Jy1w==
+ bh=szxG0zC+dinkde1NF2ex/5I2Wd5dXXIcK9MoqYV/l2c=;
+ b=KTrZzzqAUw1HcQ9IhOVIIvpTsnp2cQ8JZ3UupQNTDXXreJ7gvoAEjV0b+SltybBAqB
+ hdHDYCCp9Tt29RpXMTY4TVGkHswdyZUh+Q33VvVqP267IFzMTZyh615OLYJShSPGUuA6
+ O7KjR+hloc2Lcltu5IhJtvKm78Cz9F7bJ4t+4OLKKdqkxO5mllUFin9Q0ssnrhYQf37U
+ a0hqLJ/7j/h0BxXj1T5HgR0afzK5pg0zZJI5LzW0VrTDvlGxshC36c4io70AYVGfQZLp
+ JxOxrLukLQBtCC8J/TrUOiXOxGlnkt0HPjx2hHSGZD4S1I9XJRmYotz7Hklt2rieJTpW
+ 1Gww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=6KNcxB0lI+145naSOKpjow3XUCsQJZAnp5v4CWe5LiQ=;
- b=E9a6d6jQTxjD3689yN7xq94JQc3VMuvFHi/TwSpM3hgZ+2VF9giryhy3hzZdlGaQ96
- UA29SgYUH4fyUqlJdczYg+/5vhLOzfSJaSHpDLCIWWf75iavp/lwEYSHoeLholC9qjp/
- QZ9ts3OuXMLz4LDNFG8b7WpqPH9avzlxqhGy3kR7mAd0kKc05StqS2SFSQmyedhAJOPC
- nJgYKQa2rlrc4hZ5OXIHvCy+I5hq8i4G/4ZXaayHXhJZKjt7LRqT6Sw9DU1/u4K0eELH
- ngAO0ByYGMamNJmGeNAhwfhGI3K0wiODTTdd0T/S7HzrPEUSWJ0i2uJc6GNqq205uf7e
- YuSw==
-X-Gm-Message-State: AOAM533DxceHE5pUNNTfEfpzEa27k64j76IQiNJ1oJI50HRtcc5F4Xd/
- FiivsjeQw+tIB6Rp4nuxiU0f7w==
-X-Google-Smtp-Source: ABdhPJzJwf3dkh3dhpoIpux70bsHIbxkE9En0c7Q4BEhtUqeAIMh05POl2dYt5TVhrO4aCSJ5l9gvg==
-X-Received: by 2002:aa7:868d:0:b0:4ba:e919:b2f1 with SMTP id
- d13-20020aa7868d000000b004bae919b2f1mr31130673pfo.31.1640867805001; 
- Thu, 30 Dec 2021 04:36:45 -0800 (PST)
+ bh=szxG0zC+dinkde1NF2ex/5I2Wd5dXXIcK9MoqYV/l2c=;
+ b=p6+5rM1mWeXpzv4swjwitU9MV4WSEDs050d5Ys7zYnxW6xksrRaZzqlHczUtmCDGdW
+ V/KxEmLOHdA6Ug9b5n4rgFM5mJTnXt53EFdUZAMuNLGwrkX/znqi2MsjC3So3dsjUqZS
+ Cr6At6KQBuCINROnPV8Jb/N0LV44vIqIBoWX35tKKOVUM9p25QMDIVmj+Hgygl6bf7aZ
+ YQ6/t1X+nJ0cssRAxw4invB0lshC3/Ohon/DBSfqxTCmtOyIds2C1CVgDPOjjaoqgBKd
+ azTzXZ00ZSdI4hBP9sEChKjeMLUkV44OXudBm9P8fCtEVRl7vo/afBQT+4zYUSLoVKky
+ s2iQ==
+X-Gm-Message-State: AOAM532NI1SHQIl9tf1+Wd3SIIfybOSblY4cTr2twMHXic9WYDnX+Ww+
+ qP9jaak/ABjIusqMGT/OH8dGBw==
+X-Google-Smtp-Source: ABdhPJw6UM0m9sArf6qCEyiyO3wJInQb6JF89Js4HOvqP/t0+pBwc6sysknGtpl2SEhORYXho80IbQ==
+X-Received: by 2002:aa7:9482:0:b0:4ba:d167:ffec with SMTP id
+ z2-20020aa79482000000b004bad167ffecmr31122893pfk.57.1640867808489; 
+ Thu, 30 Dec 2021 04:36:48 -0800 (PST)
 Received: from localhost.localdomain ([171.61.71.9])
- by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.36.41
+ by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.36.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Dec 2021 04:36:44 -0800 (PST)
+ Thu, 30 Dec 2021 04:36:47 -0800 (PST)
 From: Anup Patel <anup@brainfault.org>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -54,19 +54,19 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 16/23] hw/riscv: virt: Use AIA INTC compatible string when
- available
-Date: Thu, 30 Dec 2021 18:05:32 +0530
-Message-Id: <20211230123539.52786-17-anup@brainfault.org>
+Subject: [PATCH v6 17/23] target/riscv: Allow users to force enable AIA CSRs
+ in HART
+Date: Thu, 30 Dec 2021 18:05:33 +0530
+Message-Id: <20211230123539.52786-18-anup@brainfault.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211230123539.52786-1-anup@brainfault.org>
 References: <20211230123539.52786-1-anup@brainfault.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::436
  (failed)
-Received-SPF: none client-ip=2607:f8b0:4864:20::52e;
- envelope-from=anup@brainfault.org; helo=mail-pg1-x52e.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::436;
+ envelope-from=anup@brainfault.org; helo=mail-pf1-x436.google.com
 X-Spam_score_int: 8
 X-Spam_score: 0.8
 X-Spam_bar: /
@@ -85,45 +85,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2021 12:36:49 -0000
+X-List-Received-Date: Thu, 30 Dec 2021 12:36:51 -0000
 
 From: Anup Patel <anup.patel@wdc.com>
 
-We should use the AIA INTC compatible string in the CPU INTC
-DT nodes when the CPUs support AIA feature. This will allow
-Linux INTC driver to use AIA local interrupt CSRs.
+We add "x-aia" command-line option for RISC-V HART using which
+allows users to force enable CPU AIA CSRs without changing the
+interrupt controller available in RISC-V machine.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Signed-off-by: Anup Patel <anup@brainfault.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/virt.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c | 5 +++++
+ target/riscv/cpu.h | 1 +
+ 2 files changed, 6 insertions(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3af074148e..720641b1dd 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -211,8 +211,17 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
-         qemu_fdt_add_subnode(mc->fdt, intc_name);
-         qemu_fdt_setprop_cell(mc->fdt, intc_name, "phandle",
-             intc_phandles[cpu]);
--        qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
--            "riscv,cpu-intc");
-+        if (riscv_feature(&s->soc[socket].harts[cpu].env,
-+                          RISCV_FEATURE_AIA)) {
-+            static const char * const compat[2] = {
-+                "riscv,cpu-intc-aia", "riscv,cpu-intc"
-+            };
-+            qemu_fdt_setprop_string_array(mc->fdt, intc_name, "compatible",
-+                                      (char **)&compat, ARRAY_SIZE(compat));
-+        } else {
-+            qemu_fdt_setprop_string(mc->fdt, intc_name, "compatible",
-+                "riscv,cpu-intc");
-+        }
-         qemu_fdt_setprop(mc->fdt, intc_name, "interrupt-controller", NULL, 0);
-         qemu_fdt_setprop_cell(mc->fdt, intc_name, "#interrupt-cells", 1);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9ad26035e1..1ae9e15b27 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -463,6 +463,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+     }
  
++    if (cpu->cfg.aia) {
++        riscv_set_feature(env, RISCV_FEATURE_AIA);
++    }
++
+     set_resetvec(env, cpu->cfg.resetvec);
+ 
+     /* Validate that MISA_MXL is set properly. */
+@@ -691,6 +695,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
++    DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
+ 
+     DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+     DEFINE_PROP_END_OF_LIST(),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 82272f99fd..0b24c4324b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -362,6 +362,7 @@ struct RISCVCPU {
+         bool mmu;
+         bool pmp;
+         bool epmp;
++        bool aia;
+         uint64_t resetvec;
+     } cfg;
+ };
 -- 
 2.25.1
 
