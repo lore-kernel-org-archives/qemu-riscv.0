@@ -1,76 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2ugE-00051h-NM
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:37:14 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54546)
+	id 1n2wTF-0000H6-GR
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 09:31:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51294)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2ugC-0004uH-QJ
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:37:12 -0500
-Received: from [2607:f8b0:4864:20::52c] (port=43763
- helo=mail-pg1-x52c.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2ugB-0003Wh-AL
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:37:12 -0500
-Received: by mail-pg1-x52c.google.com with SMTP id 8so21326316pgc.10
- for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:37:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=ba+tzdtFHkcsjjcU0If6YzKpfeahDC/ZvvxeQqTk1fU=;
- b=OXtMeouxigNm1ThXSWWtgDgKPSCOjChpBvq0QyvZEDuoxkMKtrBQAG7Hvo4XAC4uLZ
- EUHgorH/8I+0a+TyMd+JgAJWro73V1JJfgkhViNFlIp9Yr4FeOzwBDr8jj9AD9pEMhMd
- mxqYwBFvHLOMLrcI2eIu+fTZR88AzU39C5GlvweVuBXQJlGOlPLvOydqgfcbzbPglEbn
- SzF5EGIirtidGmRevuWmFfb/cc1c9L3pdPRisw9gbOynaTENbucCH/QDSm4KBcLvFe1d
- 3J3aPOQk+34K4H7ymAHrsNM/NaLwbMc8ayCcWFSQeKvPYyRTjujvyIdzW7dwqXKlAXrV
- qUSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=ba+tzdtFHkcsjjcU0If6YzKpfeahDC/ZvvxeQqTk1fU=;
- b=6Fn8idtD0Spm3KIQOkZdhv1Ud0y1Gf6l6R3ZuI16kwQnujsnQjbUU9vXKLAWXbhAAK
- NoG/sc0iQjy3zNsscWFEoAbhVMFBlcz2SompTJvdSykt+DEdM204O+/rryflH5MvWuCM
- DxNmtrPYjVli7quspxICu65wTfPWEo3Ng8K/GnHkR+HCYigt/hI0A1ncgoRf1SDjSFRU
- 1zdg0C8l2GlAC7dwng6cV88A3gX/w8c5LpnvSTYsbEX1CRb6xV5apDEDvbvfTk3CRgDf
- 1Qlv/kQ6HuQCyQnf3HZoqDYXttawzn8WlengDJwT1Tth66IvN0KUxPiELedxrGgzDQ9d
- o1fg==
-X-Gm-Message-State: AOAM530BOa2fllhGkfi7cRmFYVpgsNtBNJxckUuEbnybtbhdgxyzCLqJ
- hdjO4W1DzzXxztneAf/SR0VTDg==
-X-Google-Smtp-Source: ABdhPJzRs5T5PfWaGR+h9fMG34gOOXKE9jH+/0HPBLtEYtwOrmNt67rle1vAJuVYquwqy62gyNJ/kw==
-X-Received: by 2002:a63:354c:: with SMTP id c73mr27248603pga.532.1640867830026; 
- Thu, 30 Dec 2021 04:37:10 -0800 (PST)
-Received: from localhost.localdomain ([171.61.71.9])
- by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.37.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Dec 2021 04:37:09 -0800 (PST)
-From: Anup Patel <anup@brainfault.org>
-To: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v6 23/23] hw/riscv: virt: Increase maximum number of allowed
- CPUs
-Date: Thu, 30 Dec 2021 18:05:39 +0530
-Message-Id: <20211230123539.52786-24-anup@brainfault.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211230123539.52786-1-anup@brainfault.org>
-References: <20211230123539.52786-1-anup@brainfault.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52c
- (failed)
-Received-SPF: none client-ip=2607:f8b0:4864:20::52c;
- envelope-from=anup@brainfault.org; helo=mail-pg1-x52c.google.com
-X-Spam_score_int: 8
-X-Spam_score: 0.8
-X-Spam_bar: /
-X-Spam_report: (0.8 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1n2wTD-0000FU-HI; Thu, 30 Dec 2021 09:31:55 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:55252 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1n2wTA-0004AX-Mn; Thu, 30 Dec 2021 09:31:55 -0500
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowADHzFjJws1h4_TqBA--.24839S3;
+ Thu, 30 Dec 2021 22:31:39 +0800 (CST)
+From: liweiwei <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com, liweiwei <liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 1/7] target/riscv: rvk: add cfg properties for zbk* and zk*
+Date: Thu, 30 Dec 2021 22:30:52 +0800
+Message-Id: <20211230143058.7352-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20211230143058.7352-1-liweiwei@iscas.ac.cn>
+References: <20211230143058.7352-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: rQCowADHzFjJws1h4_TqBA--.24839S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZFW8JrW5JFy7ury7Kr17KFg_yoW8Ar13pr
+ WDGa1YyryDXF9rCw4fJa4jgFyrWwn3ua4Iga92qrn3GrWxGrW3JF1qkw1UuF4Yga1rXFy3
+ WF1qkFyjkF47Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBC14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I2
+ 62IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcV
+ AFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG
+ 0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0xkIwI
+ 1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWU
+ JVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7V
+ AKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42
+ IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU86wZUUUUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_BL=0.001, RCVD_IN_MSPIKE_L4=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,58 +62,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2021 12:37:13 -0000
+X-List-Received-Date: Thu, 30 Dec 2021 14:31:55 -0000
 
-From: Anup Patel <anup.patel@wdc.com>
-
-To facilitate software development of RISC-V systems with large number
-of HARTs, we increase the maximum number of allowed CPUs to 512 (2^9).
-
-We also add a detailed source level comments about limit defines which
-impact the physical address space utilization.
-
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Signed-off-by: Anup Patel <anup@brainfault.org>
+Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
+Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/virt.c         | 10 ++++++++++
- include/hw/riscv/virt.h |  2 +-
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c | 23 +++++++++++++++++++++++
+ target/riscv/cpu.h | 13 +++++++++++++
+ 2 files changed, 36 insertions(+)
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7579f7b41f..86b03736eb 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -44,6 +44,16 @@
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6ef3314bce..961c5f4334 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -491,6 +491,29 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             cpu->cfg.ext_d = true;
+         }
  
-+/*
-+ * The virt machine physical address space used by some of the devices
-+ * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-+ * number of CPUs, and number of IMSIC guest files.
-+ *
-+ * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-+ * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-+ * of virt machine physical address space.
-+ */
++        if (cpu->cfg.ext_zk) {
++            cpu->cfg.ext_zkn = true;
++            cpu->cfg.ext_zkr = true;
++            cpu->cfg.ext_zkt = true;
++        }
 +
- #define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
- #if VIRT_IMSIC_GROUP_MAX_SIZE < \
-     IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index e12e8ddcae..62d8e9c6d0 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -24,7 +24,7 @@
- #include "hw/block/flash.h"
- #include "qom/object.h"
- 
--#define VIRT_CPUS_MAX_BITS             3
-+#define VIRT_CPUS_MAX_BITS             9
- #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
- #define VIRT_SOCKETS_MAX_BITS          2
- #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
++        if (cpu->cfg.ext_zkn) {
++            cpu->cfg.ext_zbkb = true;
++            cpu->cfg.ext_zbkc = true;
++            cpu->cfg.ext_zbkx = true;
++            cpu->cfg.ext_zkne = true;
++            cpu->cfg.ext_zknd = true;
++            cpu->cfg.ext_zknh = true;
++        }
++
++        if (cpu->cfg.ext_zks) {
++            cpu->cfg.ext_zbkb = true;
++            cpu->cfg.ext_zbkc = true;
++            cpu->cfg.ext_zbkx = true;
++            cpu->cfg.ext_zksed = true;
++            cpu->cfg.ext_zksh = true;
++        }
++
+         /* Set the ISA extensions, checks should have happened above */
+         if (cpu->cfg.ext_i) {
+             ext |= RVI;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index dc10f27093..edca7118ff 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -311,7 +311,20 @@ struct RISCVCPU {
+         bool ext_zba;
+         bool ext_zbb;
+         bool ext_zbc;
++        bool ext_zbkb;
++        bool ext_zbkc;
++        bool ext_zbkx;
+         bool ext_zbs;
++        bool ext_zk;
++        bool ext_zkn;
++        bool ext_zknd;
++        bool ext_zkne;
++        bool ext_zknh;
++        bool ext_zkr;
++        bool ext_zks;
++        bool ext_zksed;
++        bool ext_zksh;
++        bool ext_zkt;
+         bool ext_counters;
+         bool ext_ifencei;
+         bool ext_icsr;
 -- 
-2.25.1
+2.17.1
 
 
