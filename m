@@ -1,57 +1,91 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2wTQ-0000YL-Ga
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 09:32:08 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51382)
+	id 1n2whY-00020y-0y
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 09:46:47 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n2wTG-0000I4-OG; Thu, 30 Dec 2021 09:31:59 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:55286 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n2wTA-0004An-Ny; Thu, 30 Dec 2021 09:31:58 -0500
-Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowADHzFjJws1h4_TqBA--.24839S6;
- Thu, 30 Dec 2021 22:31:41 +0800 (CST)
-From: liweiwei <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
- luruibo2000@163.com, liweiwei <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 4/7] target/riscv: rvk: add implementation of instructions
- for Zk*
-Date: Thu, 30 Dec 2021 22:30:55 +0800
-Message-Id: <20211230143058.7352-5-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20211230143058.7352-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1n2whT-0001y0-AF
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 09:46:39 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:41137)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <philmd@redhat.com>) id 1n2whQ-0001IE-QQ
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 09:46:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1640875593;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kMrKXo7xkCpLD4GNZ+ajbcGDV/Mzs/7dS6YnmXW9hF8=;
+ b=EkBbgVOGyr21aUFJYeITFMQ27WJkN0McQaoPKEyYE9mB12BdZzt9KyiUh+YJkYOwsILBUc
+ IzEtztRBYHMoaGEDzTTAkeqdNxnfspS/nlY3ulO3V5ernY/ig0mwMKf1VmnjsuPF3IWRbh
+ xrwQXrwV2iGQO6QZYVrL8KlThuW1Qr0=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-653-GDkbxY8uOAuOb1XKWL2MsA-1; Thu, 30 Dec 2021 09:46:32 -0500
+X-MC-Unique: GDkbxY8uOAuOb1XKWL2MsA-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ w25-20020adf8bd9000000b001a255212b7cso6257762wra.18
+ for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 06:46:32 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=kMrKXo7xkCpLD4GNZ+ajbcGDV/Mzs/7dS6YnmXW9hF8=;
+ b=IA5ygzS/MeR2792Jj2qd8giBj7m1Cdi6e2IOxeUAdszY2gGQGcFPdJVLuBTqG+j9ZW
+ Bp8d0yPVrQW1kW4aXL+5irmATLWVb0BS0di1ihtDe/DxTRPs1M2MbIa9kfvYebw11kS5
+ Sk5TUM9rW87b3d6C6qAxYwvt0GsNnHuS7hxEmwGhSJ728X29iDspvdjrOSd5TbYztzxD
+ dqY4XKXCMl8+tt+mhHVJF+B0Qlbrv9A3KCdlsY1+ocuG2AhnTRHZn+LaA+keCf+f17qL
+ DPbGFDpt5HY3ZF17cbX21GNPp1wi5XzaDCSdVGWQ5pK2gMr+Hlv/MyW8ZK/6SfB/1XIE
+ 7bvQ==
+X-Gm-Message-State: AOAM532kHHGufzD3c6pari//G0phExJn69zmhCPzCxHA2L0VemA8nIYV
+ 5iOW7HdqnJBvHiSbcR7Zkk8Wb2s93h5um5UauL8sVnfG91Xye79lKXqkL2W0UYfNa7c+nKAZjiP
+ NOafF0cus67JfvvQ=
+X-Received: by 2002:a05:600c:154f:: with SMTP id
+ f15mr26727582wmg.62.1640875591315; 
+ Thu, 30 Dec 2021 06:46:31 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzTh0Cqw1A4+rQmVnp8vblZpwCTEv8fj5GTKJAbENF9W2OZ2aAjlQNLNoHEIKpsl6ZeQ4IV7A==
+X-Received: by 2002:a05:600c:154f:: with SMTP id
+ f15mr26727565wmg.62.1640875591135; 
+ Thu, 30 Dec 2021 06:46:31 -0800 (PST)
+Received: from [192.168.50.34] (static-180-27-86-188.ipcom.comunitel.net.
+ [188.86.27.180])
+ by smtp.gmail.com with ESMTPSA id bd19sm26348672wmb.23.2021.12.30.06.46.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 30 Dec 2021 06:46:30 -0800 (PST)
+Message-ID: <faa025d1-0c8f-b0ed-74d6-575c008edd84@redhat.com>
+Date: Thu, 30 Dec 2021 15:46:29 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [PATCH v3 3/7] crypto include/crypto target/arm: move sm4_sbox to
+ crypto
+To: liweiwei <liweiwei@iscas.ac.cn>, richard.henderson@linaro.org,
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, luruibo2000@163.com,
+ lustrew@foxmail.com
 References: <20211230143058.7352-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowADHzFjJws1h4_TqBA--.24839S6
-X-Coremail-Antispam: 1UD129KBjvAXoWfXFy3Jw43XF4kJrWrJr48Xrb_yoW5AF1Uto
- WxWr45Jrn3Gr1fu3Z7Ca1kXFWUAFy29a1rJrs5uwsruan7WryFgr1UJrn5Za1xKr4aqrWr
- XFsaqFnxAa45C3srn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUOb7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
- Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
- 84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r
- 4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
- 3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
- IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
- M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
- kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
- 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
- kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
- wI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
- W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
- UUUUU
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -22
-X-Spam_score: -2.3
-X-Spam_bar: --
-X-Spam_report: (-2.3 / 5.0 requ) RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_BL=0.001, RCVD_IN_MSPIKE_L4=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <20211230143058.7352-4-liweiwei@iscas.ac.cn>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+In-Reply-To: <20211230143058.7352-4-liweiwei@iscas.ac.cn>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=philmd@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) DKIMWL_WL_HIGH=-0.573, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-3.024,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,1088 +98,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2021 14:31:59 -0000
+X-List-Received-Date: Thu, 30 Dec 2021 14:46:40 -0000
 
-Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
-Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/crypto_helper.c            | 446 ++++++++++++++++++++++
- target/riscv/helper.h                   |  43 +++
- target/riscv/insn32.decode              |  42 +++
- target/riscv/insn_trans/trans_rvk.c.inc | 467 ++++++++++++++++++++++++
- target/riscv/meson.build                |   1 +
- target/riscv/translate.c                |   1 +
- 6 files changed, 1000 insertions(+)
- create mode 100644 target/riscv/crypto_helper.c
- create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+Hi,
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-new file mode 100644
-index 0000000000..344eea4287
---- /dev/null
-+++ b/target/riscv/crypto_helper.c
-@@ -0,0 +1,446 @@
-+/*
-+ * RISC-V Crypto Emulation Helpers for QEMU.
-+ *
-+ * Copyright (c) 2021 Ruibo Lu, luruibo2000@163.com
-+ * Copyright (c) 2021 Zewen Ye, lustrew@foxmail.com
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "exec/exec-all.h"
-+#include "exec/helper-proto.h"
-+#include "crypto/aes.h"
-+#include "crypto/sm4.h"
-+
-+#define AES_XTIME(a) \
-+    ((a << 1) ^ ((a & 0x80) ? 0x1b : 0))
-+
-+#define AES_GFMUL(a, b) (( \
-+    (((b) & 0x1) ?                              (a)   : 0) ^ \
-+    (((b) & 0x2) ?                     AES_XTIME(a)   : 0) ^ \
-+    (((b) & 0x4) ?           AES_XTIME(AES_XTIME(a))  : 0) ^ \
-+    (((b) & 0x8) ? AES_XTIME(AES_XTIME(AES_XTIME(a))) : 0)) & 0xFF)
-+
-+#define BY(X, I) ((X >> (8 * I)) & 0xFF)
-+
-+#define AES_SHIFROWS_LO(RS1, RS2) ( \
-+    (((RS1 >> 24) & 0xFF) << 56) | \
-+    (((RS2 >> 48) & 0xFF) << 48) | \
-+    (((RS2 >>  8) & 0xFF) << 40) | \
-+    (((RS1 >> 32) & 0xFF) << 32) | \
-+    (((RS2 >> 56) & 0xFF) << 24) | \
-+    (((RS2 >> 16) & 0xFF) << 16) | \
-+    (((RS1 >> 40) & 0xFF) <<  8) | \
-+    (((RS1 >>  0) & 0xFF) <<  0))
-+
-+#define AES_INVSHIFROWS_LO(RS1, RS2) ( \
-+    (((RS2 >> 24) & 0xFF) << 56) | \
-+    (((RS2 >> 48) & 0xFF) << 48) | \
-+    (((RS1 >>  8) & 0xFF) << 40) | \
-+    (((RS1 >> 32) & 0xFF) << 32) | \
-+    (((RS1 >> 56) & 0xFF) << 24) | \
-+    (((RS2 >> 16) & 0xFF) << 16) | \
-+    (((RS2 >> 40) & 0xFF) <<  8) | \
-+    (((RS1 >>  0) & 0xFF) <<  0))
-+
-+#define AES_MIXBYTE(COL, B0, B1, B2, B3) ( \
-+              BY(COL, B3)     ^ \
-+              BY(COL, B2)     ^ \
-+    AES_GFMUL(BY(COL, B1), 3) ^ \
-+    AES_GFMUL(BY(COL, B0), 2)   \
-+)
-+
-+#define AES_MIXCOLUMN(COL) ( \
-+    AES_MIXBYTE(COL, 3, 0, 1, 2) << 24 | \
-+    AES_MIXBYTE(COL, 2, 3, 0, 1) << 16 | \
-+    AES_MIXBYTE(COL, 1, 2, 3, 0) <<  8 | \
-+    AES_MIXBYTE(COL, 0, 1, 2, 3) <<  0   \
-+)
-+
-+#define AES_INVMIXBYTE(COL, B0, B1, B2, B3) ( \
-+    AES_GFMUL(BY(COL, B3), 0x9) ^ \
-+    AES_GFMUL(BY(COL, B2), 0xd) ^ \
-+    AES_GFMUL(BY(COL, B1), 0xb) ^ \
-+    AES_GFMUL(BY(COL, B0), 0xe)   \
-+)
-+
-+#define AES_INVMIXCOLUMN(COL) ( \
-+    AES_INVMIXBYTE(COL, 3, 0, 1, 2) << 24 | \
-+    AES_INVMIXBYTE(COL, 2, 3, 0, 1) << 16 | \
-+    AES_INVMIXBYTE(COL, 1, 2, 3, 0) <<  8 | \
-+    AES_INVMIXBYTE(COL, 0, 1, 2, 3) <<  0   \
-+)
-+
-+static inline uint32_t aes_mixcolumn_byte(uint8_t x, bool fwd)
-+{
-+    uint32_t u;
-+    if (fwd) {
-+        u = (AES_GFMUL(x, 3) << 24) |
-+                          (x << 16) |
-+                          (x <<  8) |
-+            (AES_GFMUL(x, 2) <<  0);
-+    } else {
-+        u = (AES_GFMUL(x, 0xb) << 24) |
-+            (AES_GFMUL(x, 0xd) << 16) |
-+            (AES_GFMUL(x, 0x9) <<  8) |
-+            (AES_GFMUL(x, 0xe) <<  0);
-+    }
-+    return u;
-+}
-+
-+#define XLEN (8 * sizeof(target_ulong))
-+#define zext32(x) ((uint64_t)(uint32_t)(x))
-+#define sext_xlen(x) (target_ulong)(int32_t)(x)
-+
-+static inline target_ulong aes32_operation(target_ulong bs, target_ulong rs1,
-+                                           target_ulong rs2, bool enc,
-+                                           bool mix)
-+{
-+    uint8_t shamt = bs << 3;
-+    uint8_t si = rs2 >> shamt;
-+    uint8_t so;
-+    uint32_t mixed;
-+    if (enc) {
-+        so = AES_sbox[si];
-+        if (mix) {
-+            mixed = aes_mixcolumn_byte(so, true);
-+        } else {
-+            mixed = so;
-+        }
-+
-+    } else {
-+        so = AES_isbox[si];
-+        if (mix) {
-+            mixed = aes_mixcolumn_byte(so, false);
-+        } else {
-+            mixed = so;
-+        }
-+    }
-+    mixed = (mixed << shamt) | (mixed >> (32 - shamt));
-+    target_ulong res = rs1 ^ mixed;
-+    return sext_xlen(res);
-+}
-+
-+target_ulong HELPER(aes32esmi)(target_ulong rs1, target_ulong rs2,
-+                               target_ulong bs)
-+{
-+    return aes32_operation(bs, rs1, rs2, true, true);
-+}
-+
-+target_ulong HELPER(aes32esi)(target_ulong rs1, target_ulong rs2,
-+                              target_ulong bs)
-+{
-+    return aes32_operation(bs, rs1, rs2, true, false);
-+}
-+
-+target_ulong HELPER(aes32dsmi)(target_ulong rs1, target_ulong rs2,
-+                               target_ulong bs)
-+{
-+    return aes32_operation(bs, rs1, rs2, false, true);
-+}
-+
-+target_ulong HELPER(aes32dsi)(target_ulong rs1, target_ulong rs2,
-+                              target_ulong bs)
-+{
-+    return aes32_operation(bs, rs1, rs2, false, false);
-+}
-+
-+static inline target_ulong aes64_operation(target_ulong rs1, target_ulong rs2,
-+                                           bool enc, bool mix)
-+{
-+    uint64_t RS1 = rs1;
-+    uint64_t RS2 = rs2;
-+    uint64_t result;
-+    uint64_t temp;
-+    uint32_t col_0;
-+    uint32_t col_1;
-+    if (enc) {
-+        temp = AES_SHIFROWS_LO(RS1, RS2);
-+        temp = (
-+            ((uint64_t)AES_sbox[(temp >>  0) & 0xFF] <<  0) |
-+            ((uint64_t)AES_sbox[(temp >>  8) & 0xFF] <<  8) |
-+            ((uint64_t)AES_sbox[(temp >> 16) & 0xFF] << 16) |
-+            ((uint64_t)AES_sbox[(temp >> 24) & 0xFF] << 24) |
-+            ((uint64_t)AES_sbox[(temp >> 32) & 0xFF] << 32) |
-+            ((uint64_t)AES_sbox[(temp >> 40) & 0xFF] << 40) |
-+            ((uint64_t)AES_sbox[(temp >> 48) & 0xFF] << 48) |
-+            ((uint64_t)AES_sbox[(temp >> 56) & 0xFF] << 56)
-+        );
-+        if (mix) {
-+            col_0 = temp & 0xFFFFFFFF;
-+            col_1 = temp >> 32       ;
-+
-+            col_0 = AES_MIXCOLUMN(col_0);
-+            col_1 = AES_MIXCOLUMN(col_1);
-+
-+            result = ((uint64_t)col_1 << 32) | col_0;
-+        } else {
-+            result = temp;
-+        }
-+    } else {
-+        temp = AES_INVSHIFROWS_LO(RS1, RS2);
-+        temp = (
-+            ((uint64_t)AES_isbox[(temp >>  0) & 0xFF] <<  0) |
-+            ((uint64_t)AES_isbox[(temp >>  8) & 0xFF] <<  8) |
-+            ((uint64_t)AES_isbox[(temp >> 16) & 0xFF] << 16) |
-+            ((uint64_t)AES_isbox[(temp >> 24) & 0xFF] << 24) |
-+            ((uint64_t)AES_isbox[(temp >> 32) & 0xFF] << 32) |
-+            ((uint64_t)AES_isbox[(temp >> 40) & 0xFF] << 40) |
-+            ((uint64_t)AES_isbox[(temp >> 48) & 0xFF] << 48) |
-+            ((uint64_t)AES_isbox[(temp >> 56) & 0xFF] << 56)
-+        );
-+        if (mix) {
-+            col_0 = temp & 0xFFFFFFFF;
-+            col_1 = temp >> 32       ;
-+
-+            col_0 = AES_INVMIXCOLUMN(col_0);
-+            col_1 = AES_INVMIXCOLUMN(col_1);
-+
-+            result = ((uint64_t)col_1 << 32) | col_0;
-+        } else {
-+            result = temp;
-+        }
-+    }
-+    return result;
-+}
-+
-+target_ulong HELPER(aes64esm)(target_ulong rs1, target_ulong rs2)
-+{
-+    return aes64_operation(rs1, rs2, true, true);
-+}
-+
-+target_ulong HELPER(aes64es)(target_ulong rs1, target_ulong rs2)
-+{
-+    return aes64_operation(rs1, rs2, true, false);
-+}
-+
-+target_ulong HELPER(aes64ds)(target_ulong rs1, target_ulong rs2)
-+{
-+    return aes64_operation(rs1, rs2, false, false);
-+}
-+
-+target_ulong HELPER(aes64dsm)(target_ulong rs1, target_ulong rs2)
-+{
-+    return aes64_operation(rs1, rs2, false, true);
-+}
-+
-+target_ulong HELPER(aes64ks2)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t RS1 = rs1;
-+    uint64_t RS2 = rs2;
-+    uint32_t rs1_hi =  RS1 >> 32;
-+    uint32_t rs2_lo =  RS2      ;
-+    uint32_t rs2_hi =  RS2 >> 32;
-+
-+    uint32_t r_lo   = (rs1_hi ^ rs2_lo) ;
-+    uint32_t r_hi   = (rs1_hi ^ rs2_lo ^ rs2_hi) ;
-+    target_ulong result =  ((uint64_t)r_hi << 32) | r_lo ;
-+    return result;
-+}
-+
-+target_ulong HELPER(aes64ks1i)(target_ulong rs1, target_ulong rnum)
-+{
-+    uint64_t RS1 = rs1;
-+    uint8_t round_consts[10] = {
-+        0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
-+    };
-+
-+    uint8_t enc_rnum = rnum;
-+    uint32_t temp = (RS1 >> 32) & 0xFFFFFFFF;
-+    uint8_t rcon_ = 0;
-+    target_ulong result;
-+
-+    if (enc_rnum != 0xA) {
-+        temp = (temp >> 8) | (temp << 24); /* Rotate right by 8 */
-+        rcon_ = round_consts[enc_rnum];
-+    }
-+
-+    temp =
-+        ((uint32_t)AES_sbox[(temp >> 24) & 0xFF] << 24) |
-+        ((uint32_t)AES_sbox[(temp >> 16) & 0xFF] << 16) |
-+        ((uint32_t)AES_sbox[(temp >>  8) & 0xFF] <<  8) |
-+        ((uint32_t)AES_sbox[(temp >>  0) & 0xFF] <<  0) ;
-+
-+    temp ^= rcon_;
-+
-+    result = ((uint64_t)temp << 32) | temp;
-+    return result;
-+}
-+
-+target_ulong HELPER(aes64im)(target_ulong rs1)
-+{
-+    uint64_t RS1 = rs1;
-+    uint32_t col_0 = RS1 & 0xFFFFFFFF;
-+    uint32_t col_1 = RS1 >> 32       ;
-+
-+    col_0 = AES_INVMIXCOLUMN(col_0);
-+    col_1 = AES_INVMIXCOLUMN(col_1);
-+
-+    target_ulong result = ((uint64_t)col_1 << 32) | col_0;
-+    return result;
-+}
-+
-+#define ROR32(a, amt) ((a << (-amt & 31)) | (a >> (amt & 31)))
-+target_ulong HELPER(sha256sig0)(target_ulong rs1)
-+{
-+    uint32_t a = rs1;
-+    return sext_xlen(ROR32(a, 7) ^ ROR32(a, 18) ^ (a >> 3));
-+}
-+
-+target_ulong HELPER(sha256sig1)(target_ulong rs1)
-+{
-+    uint32_t a = rs1;
-+    return sext_xlen(ROR32(a, 17) ^ ROR32(a, 19) ^ (a >> 10));
-+}
-+
-+target_ulong HELPER(sha256sum0)(target_ulong rs1)
-+{
-+    uint32_t a = rs1;
-+    return sext_xlen(ROR32(a, 2) ^ ROR32(a, 13) ^ ROR32(a, 22));
-+}
-+
-+target_ulong HELPER(sha256sum1)(target_ulong rs1)
-+{
-+    uint32_t a = rs1;
-+    return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
-+}
-+#undef ROR32
-+
-+target_ulong HELPER(sha512sum0r)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) << 25) ^ (zext32(RS1) << 30) ^ (zext32(RS1) >> 28) ^
-+        (zext32(RS2) >>  7) ^ (zext32(RS2) >>  2) ^ (zext32(RS2) <<  4);
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sum1r)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) << 23) ^ (zext32(RS1) >> 14) ^ (zext32(RS1) >> 18) ^
-+        (zext32(RS2) >>  9) ^ (zext32(RS2) << 18) ^ (zext32(RS2) << 14);
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig0l)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) >>  1) ^ (zext32(RS1) >>  7) ^ (zext32(RS1) >>  8) ^
-+        (zext32(RS2) << 31) ^ (zext32(RS2) << 25) ^ (zext32(RS2) << 24);
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig0h)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) >>  1) ^ (zext32(RS1) >>  7) ^ (zext32(RS1) >>  8) ^
-+        (zext32(RS2) << 31) ^                       (zext32(RS2) << 24);
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig1l)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) <<  3) ^ (zext32(RS1) >>  6) ^ (zext32(RS1) >> 19) ^
-+        (zext32(RS2) >> 29) ^ (zext32(RS2) << 26) ^ (zext32(RS2) << 13);
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig1h)(target_ulong RS1, target_ulong RS2)
-+{
-+    uint64_t result =
-+        (zext32(RS1) <<  3) ^ (zext32(RS1) >>  6) ^ (zext32(RS1) >> 19) ^
-+        (zext32(RS2) >> 29) ^                       (zext32(RS2) << 13);
-+    return sext_xlen(result);
-+}
-+
-+#define ROR64(a, amt) ((a << (-amt & 63)) | (a >> (amt & 63)))
-+target_ulong HELPER(sha512sig0)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+    return ROR64(a,  1) ^ ROR64(a, 8) ^ (a >>  7);
-+}
-+
-+target_ulong HELPER(sha512sig1)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+    return ROR64(a, 19) ^ ROR64(a, 61) ^ (a >>  6);
-+}
-+
-+target_ulong HELPER(sha512sum0)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+    return ROR64(a, 28) ^ ROR64(a, 34) ^ ROR64(a, 39);
-+}
-+
-+target_ulong HELPER(sha512sum1)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+    return ROR64(a, 14) ^ ROR64(a, 18) ^ ROR64(a, 41);
-+}
-+#undef ROR64
-+
-+#define ROL32(a, amt) ((a >> (-amt & 31)) | (a << (amt & 31)))
-+target_ulong HELPER(sm3p0)(target_ulong rs1)
-+{
-+    uint32_t src    = rs1;
-+    uint32_t result = src ^ ROL32(src, 9) ^ ROL32(src, 17);
-+    return sext_xlen(result);
-+}
-+target_ulong HELPER(sm3p1)(target_ulong rs1)
-+{
-+    uint32_t src    = rs1;
-+    uint32_t result = src ^ ROL32(src, 15) ^ ROL32(src, 23);
-+    return sext_xlen(result);
-+}
-+#undef ROL32
-+
-+
-+target_ulong HELPER(sm4ed)(target_ulong rs2, target_ulong rt, target_ulong bs)
-+{
-+    uint8_t  bs_t   = bs;
-+
-+    uint32_t sb_in  = (uint8_t)(rs2 >> (8 * bs_t));
-+    uint32_t sb_out = (uint32_t)sm4_sbox[sb_in];
-+
-+    uint32_t linear = sb_out ^  (sb_out         <<  8) ^
-+                                (sb_out         <<  2) ^
-+                                (sb_out         << 18) ^
-+                               ((sb_out & 0x3f) << 26) ^
-+                               ((sb_out & 0xC0) << 10) ;
-+
-+    uint32_t rotl   = (linear << (8 * bs_t)) | (linear >> (32 - 8 * bs_t));
-+
-+    return sext_xlen(rotl ^ (uint32_t)rt);
-+}
-+
-+target_ulong HELPER(sm4ks)(target_ulong rs2, target_ulong rs1, target_ulong bs)
-+{
-+    uint8_t  bs_t   = bs;
-+
-+    uint32_t sb_in  = (uint8_t)(rs2 >> (8 * bs_t));
-+    uint32_t sb_out = sm4_sbox[sb_in];
-+
-+    uint32_t x      = sb_out ^
-+                      ((sb_out & 0x07) << 29) ^ ((sb_out & 0xFE) <<  7) ^
-+                      ((sb_out & 0x01) << 23) ^ ((sb_out & 0xF8) << 13) ;
-+
-+    uint32_t rotl   = (x << (8 * bs_t)) | (x >> (32 - 8 * bs_t));
-+
-+    return sext_xlen(rotl ^ (uint32_t)rs1);
-+}
-+#undef XLEN
-+#undef zext32
-+#undef sext_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 5cf1b41e3d..9a46eae4ea 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1106,3 +1106,46 @@ DEF_HELPER_5(vsext_vf2_d, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vsext_vf4_w, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vsext_vf4_d, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(vsext_vf8_d, void, ptr, ptr, ptr, env, i32)
-+
-+/* Crypto Extension - aes 32 */
-+DEF_HELPER_3(aes32esmi, tl, tl, tl, tl)
-+DEF_HELPER_3(aes32esi, tl, tl, tl, tl)
-+DEF_HELPER_3(aes32dsmi, tl, tl, tl, tl)
-+DEF_HELPER_3(aes32dsi, tl, tl, tl, tl)
-+
-+/* Crypto Extension - aes 64 */
-+DEF_HELPER_2(aes64esm, tl, tl, tl)
-+DEF_HELPER_2(aes64es, tl, tl, tl)
-+DEF_HELPER_2(aes64ds, tl, tl, tl)
-+DEF_HELPER_2(aes64dsm, tl, tl, tl)
-+DEF_HELPER_2(aes64ks2, tl, tl, tl)
-+DEF_HELPER_2(aes64ks1i, tl, tl, tl)
-+DEF_HELPER_1(aes64im, tl, tl)
-+
-+/* Crypto Extension - sha256 */
-+DEF_HELPER_1(sha256sig0, tl, tl)
-+DEF_HELPER_1(sha256sig1, tl, tl)
-+DEF_HELPER_1(sha256sum0, tl, tl)
-+DEF_HELPER_1(sha256sum1, tl, tl)
-+
-+/* Crypto Extension - sha512 */
-+DEF_HELPER_2(sha512sum0r, tl, tl, tl)
-+DEF_HELPER_2(sha512sum1r, tl, tl, tl)
-+DEF_HELPER_2(sha512sig0l, tl, tl, tl)
-+DEF_HELPER_2(sha512sig0h, tl, tl, tl)
-+DEF_HELPER_2(sha512sig1l, tl, tl, tl)
-+DEF_HELPER_2(sha512sig1h, tl, tl, tl)
-+
-+/* Crypto Extension - sha512 */
-+DEF_HELPER_1(sha512sig0, tl, tl)
-+DEF_HELPER_1(sha512sig1, tl, tl)
-+DEF_HELPER_1(sha512sum0, tl, tl)
-+DEF_HELPER_1(sha512sum1, tl, tl)
-+
-+/* Crypto Extension - sm3 */
-+DEF_HELPER_1(sm3p0, tl, tl)
-+DEF_HELPER_1(sm3p1, tl, tl)
-+
-+/* Crypto Extension - sm4 */
-+DEF_HELPER_3(sm4ed, tl, tl, tl, tl)
-+DEF_HELPER_3(sm4ks, tl, tl, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 82bddbc934..f613fa0362 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -17,8 +17,10 @@
- # this program.  If not, see <http://www.gnu.org/licenses/>.
- 
- # Fields:
-+%bs        30:2
- %rs3       27:5
- %rs2       20:5
-+%rnum      20:4
- %rs1       15:5
- %rd        7:5
- %sh5       20:5
-@@ -90,6 +92,7 @@
- 
- # Formats 64:
- @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
-+@k_aes       .. ..... ..... ..... ... ..... ....... %bs %rs2 %rs1 %rd
- 
- # *** Privileged Instructions ***
- ecall       000000000000     00000 000 00000 1110011
-@@ -802,3 +805,42 @@ fcvt_l_h   1100010  00010 ..... ... ..... 1010011 @r2_rm
- fcvt_lu_h  1100010  00011 ..... ... ..... 1010011 @r2_rm
- fcvt_h_l   1101010  00010 ..... ... ..... 1010011 @r2_rm
- fcvt_h_lu  1101010  00011 ..... ... ..... 1010011 @r2_rm
-+
-+# *** RV32 Zknd Standard Extension ***
-+aes32dsmi   .. 10111 ..... ..... 000 ..... 0110011 @k_aes
-+aes32dsi    .. 10101 ..... ..... 000 ..... 0110011 @k_aes
-+# *** RV64 Zknd Standard Extension ***
-+aes64dsm    00 11111 ..... ..... 000 ..... 0110011 @r
-+aes64ds     00 11101 ..... ..... 000 ..... 0110011 @r
-+aes64im     00 11000 00000 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zkne Standard Extension ***
-+aes32esmi   .. 10011 ..... ..... 000 ..... 0110011 @k_aes
-+aes32esi    .. 10001 ..... ..... 000 ..... 0110011 @k_aes
-+# *** RV64 Zkne Standard Extension ***
-+aes64es     00 11001 ..... ..... 000 ..... 0110011 @r
-+aes64esm    00 11011 ..... ..... 000 ..... 0110011 @r
-+# *** RV64 Zkne/zknd Standard Extension ***
-+aes64ks2    01 11111 ..... ..... 000 ..... 0110011 @r
-+aes64ks1i   00 11000 1.... ..... 001 ..... 0010011 %rnum %rs1 %rd
-+# *** RV32 Zknh Standard Extension ***
-+sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
-+sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
-+sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
-+sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
-+sha512sum0r 01 01000 ..... ..... 000 ..... 0110011 @r
-+sha512sum1r 01 01001 ..... ..... 000 ..... 0110011 @r
-+sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
-+sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
-+sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
-+sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
-+# *** RV64 Zknh Standard Extension ***
-+sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
-+sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
-+sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
-+sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksh Standard Extension ***
-+sm3p0       00 01000 01000 ..... 001 ..... 0010011 @r2
-+sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksed Standard Extension ***
-+sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
-+sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-new file mode 100644
-index 0000000000..da8dea69b8
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -0,0 +1,467 @@
-+/*
-+ * RISC-V translation routines for the Zk[nd,ne,nh,sed,sh] Standard Extension.
-+ *
-+ * Copyright (c) 2021 Ruibo Lu, luruibo2000@163.com
-+ * Copyright (c) 2021 Zewen Ye, lustrew@foxmail.com
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZKND(ctx) do {                  \
-+    if (!RISCV_CPU(ctx->cs)->cfg.ext_zknd) {    \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKNE(ctx) do {                  \
-+    if (!RISCV_CPU(ctx->cs)->cfg.ext_zkne) {    \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKNH(ctx) do {                  \
-+    if (!RISCV_CPU(ctx->cs)->cfg.ext_zknh) {    \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKSED(ctx) do {                 \
-+    if (!RISCV_CPU(ctx->cs)->cfg.ext_zksed) {   \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKSH(ctx) do {                  \
-+    if (!RISCV_CPU(ctx->cs)->cfg.ext_zksh) {    \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+static bool trans_aes32esmi(DisasContext *ctx, arg_aes32esmi *a)
-+{
-+    REQUIRE_ZKNE(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes32esmi(dest, src1, src2, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_aes64esm(DisasContext *ctx, arg_aes64esm *a)
-+{
-+    REQUIRE_ZKNE(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes64esm(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_aes32esi(DisasContext *ctx, arg_aes32esi *a)
-+{
-+    REQUIRE_ZKNE(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes32esi(dest, src1, src2, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_aes64es(DisasContext *ctx, arg_aes64es *a)
-+{
-+    REQUIRE_ZKNE(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes64es(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_aes32dsmi(DisasContext *ctx, arg_aes32dsmi *a)
-+{
-+    REQUIRE_ZKND(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes32dsmi(dest, src1, src2, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_aes64dsm(DisasContext *ctx, arg_aes64dsm *a)
-+{
-+    REQUIRE_ZKND(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes64dsm(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_aes64ks2(DisasContext *ctx, arg_aes64ks2 *a)
-+{
-+    REQUIRE_EITHER_EXT(ctx, zknd, zkne);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes64ks2(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(dest);
-+    tcg_temp_free(src1);
-+    tcg_temp_free(src2);
-+
-+    return true;
-+}
-+
-+static bool trans_aes32dsi(DisasContext *ctx, arg_aes32dsi *a)
-+{
-+    REQUIRE_ZKND(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes32dsi(dest, src1, src2, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_aes64ds(DisasContext *ctx, arg_aes64ds *a)
-+{
-+    REQUIRE_ZKND(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_aes64ds(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_aes64ks1i(DisasContext *ctx, arg_aes64ks1i *a)
-+{
-+    REQUIRE_EITHER_EXT(ctx, zknd, zkne);
-+
-+    if (a->rnum > 0xA) {
-+        return false;
-+    }
-+
-+    TCGv rnum;
-+    rnum = tcg_const_tl(a->rnum);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_aes64ks1i(dest, src1, rnum);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(rnum);
-+    return true;
-+}
-+
-+static bool trans_aes64im(DisasContext *ctx, arg_aes64im *a)
-+{
-+    REQUIRE_ZKND(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_aes64im(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha256sig0(DisasContext *ctx, arg_sha256sig0 *a)
-+{
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha256sig0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha256sig1(DisasContext *ctx, arg_sha256sig1 *a)
-+{
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha256sig1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha256sum0(DisasContext *ctx, arg_sha256sum0 *a)
-+{
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha256sum0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
-+{
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha256sum1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sum0r(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sum1r(DisasContext *ctx, arg_sha512sum1r *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sum1r(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sig0l(DisasContext *ctx, arg_sha512sig0l *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig0l(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig0h(DisasContext *ctx, arg_sha512sig0h *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig0h(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sig1l(DisasContext *ctx, arg_sha512sig1l *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig1l(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig1h(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig0(DisasContext *ctx, arg_sha512sig0 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sig0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sig1(DisasContext *ctx, arg_sha512sig1 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sig1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sum0(DisasContext *ctx, arg_sha512sum0 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sum0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sum1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+/* SM3 */
-+static bool trans_sm3p0(DisasContext *ctx, arg_sm3p0 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sm3p0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_sm3p1(DisasContext *ctx, arg_sm3p1 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sm3p1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+/* SM4 */
-+static bool trans_sm4ed(DisasContext *ctx, arg_sm4ed *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sm4ed(dest, src2, src1, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_sm4ks(DisasContext *ctx, arg_sm4ks *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sm4ks(dest, src2, src1, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index d5e0bc93ea..4fc385c2fb 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -18,6 +18,7 @@ riscv_ss.add(files(
-   'vector_helper.c',
-   'bitmanip_helper.c',
-   'translate.c',
-+  'crypto_helper.c',
- ))
- 
- riscv_softmmu_ss = ss.source_set()
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 1b39c24ff4..21b98e73a4 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -657,6 +657,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvv.c.inc"
- #include "insn_trans/trans_rvb.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
-+#include "insn_trans/trans_rvk.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
- 
- /* Include the auto-generated decoder for 16 bit insn */
--- 
-2.17.1
+On 12/30/21 15:30, liweiwei wrote:
+>    - share it between target/arm and target/riscv
+
+"Share sm4_sbox between ARM and RISCV targets."?
+
+> 
+> Signed-off-by: liweiwei <liweiwei@iscas.ac.cn>
+> Signed-off-by: wangjunqiang <wangjunqiang@iscas.ac.cn>
+> ---
+>  crypto/meson.build         |  1 +
+>  crypto/sm4.c               | 48 ++++++++++++++++++++++++++++++++++++++
+>  include/crypto/sm4.h       |  6 +++++
+>  meson                      |  2 +-
+>  target/arm/crypto_helper.c | 36 +---------------------------
+>  5 files changed, 57 insertions(+), 36 deletions(-)
+
+> diff --git a/crypto/sm4.c b/crypto/sm4.c
+> new file mode 100644
+> index 0000000000..1cdcb8a620
+> --- /dev/null
+> +++ b/crypto/sm4.c
+
+> +uint8_t const sm4_sbox[] = {
+
+Please explicit the [256] array size.
+
+> diff --git a/meson b/meson
+> index 12f9f04ba0..b25d94e7c7 160000
+> --- a/meson
+> +++ b/meson
+> @@ -1 +1 @@
+> -Subproject commit 12f9f04ba0decfda425dbbf9a501084c153a2d18
+> +Subproject commit b25d94e7c77fda05a7fdfe8afe562cf9760d69da
+
+Unrelated change...
+
+Otherwise (without the submodule change):
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+
+Thanks,
+
+Phil.
 
 
