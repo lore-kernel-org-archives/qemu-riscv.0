@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2uf8-0001o7-Bf
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:36:07 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53888)
+	id 1n2ufB-0001t8-Gq
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:36:09 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53920)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2uf6-0001jK-BI
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:04 -0500
-Received: from [2607:f8b0:4864:20::1034] (port=51043
- helo=mail-pj1-x1034.google.com)
+ id 1n2uf9-0001pU-Um
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:07 -0500
+Received: from [2607:f8b0:4864:20::102b] (port=39726
+ helo=mail-pj1-x102b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2uf4-0003Fc-T6
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:04 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id gj24so21169614pjb.0
- for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:36:02 -0800 (PST)
+ id 1n2uf8-0003G3-En
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:36:07 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ z9-20020a17090a7b8900b001b13558eadaso27857325pjc.4
+ for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:36:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=4/faZkg58Jf+x/baAEshxr35wC0Pr5DAdvUkI/KiX30=;
- b=l7b8Gd5W069fO50Rd5So5b59/iqAZmYZAOGZXV3TPx3gnZn9w3xX9yS6o1VEDpiaZ+
- aWlq7degpIXNgZVtChFIet6KCYS/aKGzF49Fw0J/Ywd/l9Du1HxvZYiE2xhCOldzZG1K
- OSFfCKCtbOq5vc9WlpAuksEK/GCq4kCKHgPhcDaUa/zAfCCe9oHphLaQIAV5JWOd/qR3
- 7IwO1jx9TQl/cQk7xPJg0HK6phfz5+jCzPzugYc223zwbNG6vpN8zT2Thc0kuNo0xnNt
- P2wtesr/ACbeAuJ948sfdoOinjZPkqa1IA1Rv8pqsUx2jjT1M6LSlBEmjn0dcMf1g7nm
- 60Hg==
+ bh=1sKP19GxQSLqAfGy/1NeVArDCUFUYjdYUqW4H4z3IXU=;
+ b=WKAPtxbpAzNcNaIZkV2BCzf0dC0Twh44XkhLuP+VzxnHFHuDGYygYlOjRZNLivTRmG
+ MRcV1kjxP5octo4zlNPYBO1SaJa8+JNQfB/4Vmsg6GXSWoW86WJjaFR4XAmfsdWkr4Sw
+ nCI6QkxxHxl2vzta4hIeN0NYGNTGS6nroeEeBzCtFR+ZBa2Qjw/XuGFjIdnUCmcY3wty
+ T5eU5KTXboV3iXaafDXv+5pJcQTyMZcb0RrQp+8TNGiW3aSMmr8N8xKfYkWeRxmkSc9w
+ ELaGToXsI2+2d5sbZsXnbBzKJm7CS94nULQ4LA7pilZKGI/1heXXsyhaURfLoKj2CRNv
+ jA+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=4/faZkg58Jf+x/baAEshxr35wC0Pr5DAdvUkI/KiX30=;
- b=eLRb98OdjZ9eEMkcXlbFHSUwFyaeCyXTO4dp/8W22EX+rNz5UqOqIe+qim7zncibAh
- OldPR5GVyZRC7I6ZY+oSB5Xauo+h/xH8NMajyFtmLc2sUJvRGhj5Djr/bDwtlqQzXo8I
- i6Mnnj4oL/VoQutnua4FuHgaB+h93f44zOe80ozvaiLVMDEWAoRfUo9Ip1Vgv0bI/MjE
- cIikgX0gSBm1N4/z4XkKDlr3aY4JbfIN+qblb+9Jj0s9sG8BQ2AgUBk3bXNRos6J9P/M
- Utu+prD8n3MnyQhmYycKXVHoDmF2gcn/PwnA2eKntZML2IJ41QdrDSooNcKaa7N+qXSg
- 4SSg==
-X-Gm-Message-State: AOAM531p6F0dsBAvxyD21qS8HejbMc5kaLGLFNmQfSRgA4ltWvXxGEcu
- gnFB+Q+fqnZrAYCbSf5Z7Tn2Qw==
-X-Google-Smtp-Source: ABdhPJyoTtw1KqkpURMipOtI1WIYWEFREx1QZcDnHwoUnJZ4LwoVKsI1B4PjpQv/LaBUePCXiItg3Q==
-X-Received: by 2002:a17:902:e5c4:b0:149:5945:72e8 with SMTP id
- u4-20020a170902e5c400b00149594572e8mr29196587plf.142.1640867761702; 
- Thu, 30 Dec 2021 04:36:01 -0800 (PST)
+ bh=1sKP19GxQSLqAfGy/1NeVArDCUFUYjdYUqW4H4z3IXU=;
+ b=yQHC1svkRhQBnKMLp9l0+5OgWrY3qjSwP6SJQPgiTQ6WeJHmOeAg7Nyx564mTyyoRy
+ ignQ0MHn8xLZBztDDsjdxdvUs4PZrILnb89Q4o7jj/B+QJLMjFZYKZOU7E1axSBIec6i
+ g6ZuJP5iI8jXZ2xxHC0/ib+gjtFXf/YFWIzy4tlXgL0/i4jWnxu5Z3u1UUQp8CT0Un1P
+ rNDZWb9nERR6EkQWKx7KbdU47Br9b5O/UCOcmjvFNcf7pXvYdeVELrJOY/4t2ILI3gSV
+ e1OsU3rApVYRHTW+AHt9p0oouMJjJxdmWVxrr6N4KZ7aKAzaEUZHqst8LkaCwmOwyIRz
+ mCFA==
+X-Gm-Message-State: AOAM533cFUhCccaqlPEZZBiI8KpJujm941zH9Ilv+STh/tjXaW+3QTbF
+ QWXDfoDoals4vMF8sVzjscUMqA==
+X-Google-Smtp-Source: ABdhPJy9gnkg5wm5CjmWpj6jSvcKp0LHiJ6Rs4E4OZYj6hTLobNv4O5h4hPByKYXamSNJJS0lM6wQw==
+X-Received: by 2002:a17:90b:1e41:: with SMTP id
+ pi1mr38351698pjb.151.1640867765154; 
+ Thu, 30 Dec 2021 04:36:05 -0800 (PST)
 Received: from localhost.localdomain ([171.61.71.9])
- by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.35.58
+ by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.36.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Dec 2021 04:36:01 -0800 (PST)
+ Thu, 30 Dec 2021 04:36:04 -0800 (PST)
 From: Anup Patel <anup@brainfault.org>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -54,19 +55,19 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 04/23] target/riscv: Improve delivery of guest external
- interrupts
-Date: Thu, 30 Dec 2021 18:05:20 +0530
-Message-Id: <20211230123539.52786-5-anup@brainfault.org>
+Subject: [PATCH v6 05/23] target/riscv: Allow setting CPU feature from
+ machine/device emulation
+Date: Thu, 30 Dec 2021 18:05:21 +0530
+Message-Id: <20211230123539.52786-6-anup@brainfault.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211230123539.52786-1-anup@brainfault.org>
 References: <20211230123539.52786-1-anup@brainfault.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1034
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102b
  (failed)
-Received-SPF: none client-ip=2607:f8b0:4864:20::1034;
- envelope-from=anup@brainfault.org; helo=mail-pj1-x1034.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=anup@brainfault.org; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: 8
 X-Spam_score: 0.8
 X-Spam_bar: /
@@ -85,49 +86,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2021 12:36:05 -0000
+X-List-Received-Date: Thu, 30 Dec 2021 12:36:08 -0000
 
 From: Anup Patel <anup.patel@wdc.com>
 
-The guest external interrupts from an interrupt controller are
-delivered only when the Guest/VM is running (i.e. V=1). This means
-any guest external interrupt which is triggered while the Guest/VM
-is not running (i.e. V=0) will be missed on QEMU resulting in Guest
-with sluggish response to serial console input and other I/O events.
-
-To solve this, we check and inject interrupt after setting V=1.
+The machine or device emulation should be able to force set certain
+CPU features because:
+1) We can have certain CPU features which are in-general optional
+   but implemented by RISC-V CPUs on the machine.
+2) We can have devices which require a certain CPU feature. For example,
+   AIA IMSIC devices expect AIA CSRs implemented by RISC-V CPUs.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Signed-off-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ target/riscv/cpu.c | 11 +++--------
+ target/riscv/cpu.h |  5 +++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index bf50699b1f..43d6311e49 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -325,6 +325,19 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable)
-     }
- 
-     env->virt = set_field(env->virt, VIRT_ONOFF, enable);
-+
-+    if (enable) {
-+       /*
-+        * The guest external interrupts from an interrupt controller are
-+        * delivered only when the Guest/VM is running (i.e. V=1). This means
-+        * any guest external interrupt which is triggered while the Guest/VM
-+        * is not running (i.e. V=0) will be missed on QEMU resulting in guest
-+        * with sluggish response to serial console input and other I/O events.
-+        *
-+        * To solve this, we check and inject interrupt after setting V=1.
-+        */
-+        riscv_cpu_update_mip(env_archcpu(env), 0, 0);
-+    }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f4dbc766c2..9f1a4d1088 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -124,11 +124,6 @@ static void set_vext_version(CPURISCVState *env, int vext_ver)
+     env->vext_ver = vext_ver;
  }
  
- bool riscv_cpu_two_stage_lookup(int mmu_idx)
+-static void set_feature(CPURISCVState *env, int feature)
+-{
+-    env->features |= (1ULL << feature);
+-}
+-
+ static void set_resetvec(CPURISCVState *env, target_ulong resetvec)
+ {
+ #ifndef CONFIG_USER_ONLY
+@@ -434,18 +429,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     }
+ 
+     if (cpu->cfg.mmu) {
+-        set_feature(env, RISCV_FEATURE_MMU);
++        riscv_set_feature(env, RISCV_FEATURE_MMU);
+     }
+ 
+     if (cpu->cfg.pmp) {
+-        set_feature(env, RISCV_FEATURE_PMP);
++        riscv_set_feature(env, RISCV_FEATURE_PMP);
+ 
+         /*
+          * Enhanced PMP should only be available
+          * on harts with PMP support
+          */
+         if (cpu->cfg.epmp) {
+-            set_feature(env, RISCV_FEATURE_EPMP);
++            riscv_set_feature(env, RISCV_FEATURE_EPMP);
+         }
+     }
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 6895ac138c..1bdd03731f 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -344,6 +344,11 @@ static inline bool riscv_feature(CPURISCVState *env, int feature)
+     return env->features & (1ULL << feature);
+ }
+ 
++static inline void riscv_set_feature(CPURISCVState *env, int feature)
++{
++    env->features |= (1ULL << feature);
++}
++
+ #include "cpu_user.h"
+ 
+ extern const char * const riscv_int_regnames[];
 -- 
 2.25.1
 
