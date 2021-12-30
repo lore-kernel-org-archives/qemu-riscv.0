@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n2uf0-0001ZC-Cb
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:35:58 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53792)
+	id 1n2uf4-0001gF-Vv
+	for mharc-qemu-riscv@gnu.org; Thu, 30 Dec 2021 07:36:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53826)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2uew-0001X1-PH
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:35:54 -0500
-Received: from [2607:f8b0:4864:20::633] (port=38806
- helo=mail-pl1-x633.google.com)
+ id 1n2uf0-0001ZY-GI
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:35:58 -0500
+Received: from [2607:f8b0:4864:20::534] (port=33457
+ helo=mail-pg1-x534.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n2ueu-0003Dh-MP
- for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:35:53 -0500
-Received: by mail-pl1-x633.google.com with SMTP id c3so4948803pls.5
- for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:35:51 -0800 (PST)
+ id 1n2uey-0003Eb-CV
+ for qemu-riscv@nongnu.org; Thu, 30 Dec 2021 07:35:57 -0500
+Received: by mail-pg1-x534.google.com with SMTP id 7so8675165pgn.0
+ for <qemu-riscv@nongnu.org>; Thu, 30 Dec 2021 04:35:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=nMqGk0W7XfrdTRmlcJcxhCvTcCA5k+Lt7a0o0slCIGY=;
- b=KyLp+ZSiX1RIvoixxfU97OqYmo8WMXo4zTw4E5iIfxFAsYFmMwK00B6MkraaMbQO7V
- c3RWTKCL3RfX6DLIkX3/n0fQnKKe3k6qIfhhOtPHIScRSPki8GvTAStS6zkuhNvz0SSm
- GWyVig1jKs4RnQcAyLJMFSVtYhk551aZ11rPeCRCJ/1O3wuZEvt2dbjTX8iyQfd6N/EX
- sXqB4UJvXqGMMsEgbrN7T54kE/2XllMaQtgLRZD6Q8uOOHaDK1S6sdoU/ddLt80ArWel
- IeLU5pLbTunPd5I7EWXzCzZ9auNLZl5viL/c/PPeNWZWlzWfVXDxmeGf13c0M1krvbT4
- gwrw==
+ bh=X+NcYTu4vtnvT9iritxHsZv9XrI8LDFmq8DEcK3eg+k=;
+ b=QEAR/GhJLPFvhObmUHikP4nFsIDYeYMhmQh2y6eLSd48cXd7yW58WLVnJqJ5JgOJnr
+ 9mS0uoEOiJJhSwFb2omrP1pHmbpTMHXbV8q1gjGo3AKh+JX4cK0rtGlOrjZwQOr3n8+4
+ bYbBEH88vRRzDHqCDJSffZn7hSLaY7hdKcb5Wfy/yF0UcAY+JC4ImnGO5SmqBCFnwy/h
+ RbLjBGD45cez4DJinFjNpu6cQnNBxqL0Synk/sDxeYsMvXARvoOLKPWrs3LkKcCMpw97
+ bXKG8KMqB9AsPsWyMQkO1GNAMWI0gvVND5K++KpBatNM5hQC4t09ee6iKNMdGbFGyP3S
+ KfaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=nMqGk0W7XfrdTRmlcJcxhCvTcCA5k+Lt7a0o0slCIGY=;
- b=XsUEoaIblkKaaA3iqOC6bju1C/uFrfYXxqFJfmWtRPFYsbLi1kdT2X4keDqxAdyaUg
- rUsneSaI9fIzRPzayDFQBgrcVlRWh24i4QFM2Zp4eyeRLoxzNjKhE6e2rI+rCUP6fubD
- Wnpl+iqzlsVEZTkrGI5Cci8+jySf+bo8gJUtIBBrIDCsmRw2ar62NEBVAYBSG1NR/Fmi
- aRJc/xxYOIIDaw+mx6SZV4fl979X6iJnR/MauzuQrZU6pd45F/zGNxLPM9IdohFeGAw/
- xmHbx0UfdRdWMf1faM0XZpd+6zrUumQnpRnaO/RyREwUkDul9LhZQ4fCD7KXE1ZFV3AT
- EHzA==
-X-Gm-Message-State: AOAM531mUGHvraKtpy1woKftaNKtyKrjCpVWgxQvc44PwsEkrYTMD9fN
- D2mseO+ruFv4w3k8VqzPBNS1LHuvb3BnWg==
-X-Google-Smtp-Source: ABdhPJzL6aj1O4HjU/6ZdJh+9iuhi1r5pVUmVAoGe2x62SIt6e7/PJBUIfd0aPyfRTp6LeJ8U4xOnA==
-X-Received: by 2002:a17:902:e549:b0:149:22b4:530c with SMTP id
- n9-20020a170902e54900b0014922b4530cmr30086104plf.17.1640867750908; 
- Thu, 30 Dec 2021 04:35:50 -0800 (PST)
+ bh=X+NcYTu4vtnvT9iritxHsZv9XrI8LDFmq8DEcK3eg+k=;
+ b=0+iJIbx8BsLiMhSu1oTuoaWGlY1AfC2jVzO+rorrXJYWT+LB5oPOpvt4MMJxIMT8LS
+ Y/dQiyTCV2DZ1CUiZGUQZ6O9FcZjrX/iaej7GlUAo2ETUUd/Oc7dpXSGv9hcPsYRSEWC
+ hwdkQObwsq0tmPnGTWvk+9N734vZetXFqecDAanUuGNSJnCqW5zchXBA3sS+FF8YFd5T
+ QuE8lSHfoOP3ozowUqTKLZw1U6KCQFZyokyfkecyZKfSHxSstpBPRgRQnAxkepts1NT0
+ +Tlbd2krqXMMbWyAsozchaQ0BVPEAu0esS2NbW7mV+yvUxWt2bqF/N2mWUjqOOVcNVPM
+ Vf7Q==
+X-Gm-Message-State: AOAM532bmcsK97BOH4Gjhm3PMD3barwYWjWCuhAcFq/MkJ4bxL1zB972
+ innqrU/qaNHfvbOWXaIjJyD3IA==
+X-Google-Smtp-Source: ABdhPJw80zlTPMeakIHtOa4L6OW1cDef81VJlYVho4qSiuHa4Kaa5vY3oyUe+O3Y+DrUmhGwdCaxEw==
+X-Received: by 2002:a62:e516:0:b0:4bc:c00:d919 with SMTP id
+ n22-20020a62e516000000b004bc0c00d919mr14608440pff.69.1640867754462; 
+ Thu, 30 Dec 2021 04:35:54 -0800 (PST)
 Received: from localhost.localdomain ([171.61.71.9])
- by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.35.47
+ by smtp.gmail.com with ESMTPSA id a3sm28588348pfv.47.2021.12.30.04.35.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Dec 2021 04:35:50 -0800 (PST)
+ Thu, 30 Dec 2021 04:35:53 -0800 (PST)
 From: Anup Patel <anup@brainfault.org>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -54,19 +54,18 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 01/23] target/riscv: Fix trap cause for RV32 HS-mode CSR
- access from RV64 HS-mode
-Date: Thu, 30 Dec 2021 18:05:17 +0530
-Message-Id: <20211230123539.52786-2-anup@brainfault.org>
+Subject: [PATCH v6 02/23] target/riscv: Implement SGEIP bit in hip and hie CSRs
+Date: Thu, 30 Dec 2021 18:05:18 +0530
+Message-Id: <20211230123539.52786-3-anup@brainfault.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211230123539.52786-1-anup@brainfault.org>
 References: <20211230123539.52786-1-anup@brainfault.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::633
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::534
  (failed)
-Received-SPF: none client-ip=2607:f8b0:4864:20::633;
- envelope-from=anup@brainfault.org; helo=mail-pl1-x633.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::534;
+ envelope-from=anup@brainfault.org; helo=mail-pg1-x534.google.com
 X-Spam_score_int: 8
 X-Spam_score: 0.8
 X-Spam_bar: /
@@ -85,35 +84,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Dec 2021 12:35:55 -0000
+X-List-Received-Date: Thu, 30 Dec 2021 12:35:58 -0000
 
 From: Anup Patel <anup.patel@wdc.com>
 
-We should be returning illegal instruction trap when RV64 HS-mode tries
-to access RV32 HS-mode CSR.
+A hypervisor can optionally take guest external interrupts using
+SGEIP bit of hip and hie CSRs.
 
-Fixes: d6f20dacea51 ("target/riscv: Fix 32-bit HS mode access permissions")
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Signed-off-by: Anup Patel <anup@brainfault.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c      |  3 ++-
+ target/riscv/cpu_bits.h |  3 +++
+ target/riscv/csr.c      | 18 +++++++++++-------
+ 3 files changed, 16 insertions(+), 8 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6ef3314bce..7d92ce7555 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -372,6 +372,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+         env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
+     }
+     env->mcause = 0;
++    env->miclaim = MIP_SGEIP;
+     env->pc = env->resetvec;
+     env->two_stage_lookup = false;
+     /* mmte is supposed to have pm.current hardwired to 1 */
+@@ -610,7 +611,7 @@ static void riscv_cpu_init(Object *obj)
+     cpu_set_cpustate_pointers(cpu);
+ 
+ #ifndef CONFIG_USER_ONLY
+-    qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq, 12);
++    qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq, IRQ_LOCAL_MAX);
+ #endif /* CONFIG_USER_ONLY */
+ }
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 1e31f4d35f..fe276d4b34 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -534,6 +534,8 @@ typedef enum RISCVException {
+ #define IRQ_S_EXT                          9
+ #define IRQ_VS_EXT                         10
+ #define IRQ_M_EXT                          11
++#define IRQ_S_GEXT                         12
++#define IRQ_LOCAL_MAX                      16
+ 
+ /* mip masks */
+ #define MIP_USIP                           (1 << IRQ_U_SOFT)
+@@ -548,6 +550,7 @@ typedef enum RISCVException {
+ #define MIP_SEIP                           (1 << IRQ_S_EXT)
+ #define MIP_VSEIP                          (1 << IRQ_VS_EXT)
+ #define MIP_MEIP                           (1 << IRQ_M_EXT)
++#define MIP_SGEIP                          (1 << IRQ_S_GEXT)
+ 
+ /* sip masks */
+ #define SIP_SSIP                           MIP_SSIP
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 146447eac5..fd7110c38b 100644
+index fd7110c38b..a4028f28e0 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -182,7 +182,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
- static RISCVException hmode32(CPURISCVState *env, int csrno)
+@@ -446,12 +446,13 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+ #define M_MODE_INTERRUPTS  (MIP_MSIP | MIP_MTIP | MIP_MEIP)
+ #define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP)
+ #define VS_MODE_INTERRUPTS (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
++#define HS_MODE_INTERRUPTS (MIP_SGEIP | VS_MODE_INTERRUPTS)
+ 
+ static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
+                                            VS_MODE_INTERRUPTS;
+ static const target_ulong vs_delegable_ints = VS_MODE_INTERRUPTS;
+ static const target_ulong all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+-                                     VS_MODE_INTERRUPTS;
++                                     HS_MODE_INTERRUPTS;
+ #define DELEGABLE_EXCPS ((1ULL << (RISCV_EXCP_INST_ADDR_MIS)) | \
+                          (1ULL << (RISCV_EXCP_INST_ACCESS_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_ILLEGAL_INST)) | \
+@@ -712,7 +713,7 @@ static RISCVException write_mideleg(CPURISCVState *env, int csrno,
  {
-     if (riscv_cpu_mxl(env) != MXL_RV32) {
--        if (riscv_cpu_virt_enabled(env)) {
-+        if (!riscv_cpu_virt_enabled(env)) {
-             return RISCV_EXCP_ILLEGAL_INST;
-         } else {
-             return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+     env->mideleg = (env->mideleg & ~delegable_ints) | (val & delegable_ints);
+     if (riscv_has_ext(env, RVH)) {
+-        env->mideleg |= VS_MODE_INTERRUPTS;
++        env->mideleg |= HS_MODE_INTERRUPTS;
+     }
+     return RISCV_EXCP_NONE;
+ }
+@@ -728,6 +729,9 @@ static RISCVException write_mie(CPURISCVState *env, int csrno,
+                                 target_ulong val)
+ {
+     env->mie = (env->mie & ~all_ints) | (val & all_ints);
++    if (!riscv_has_ext(env, RVH)) {
++        env->mie &= ~MIP_SGEIP;
++    }
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -1023,7 +1027,7 @@ static RISCVException rmw_sip(CPURISCVState *env, int csrno,
+     }
+ 
+     if (ret_value) {
+-        *ret_value &= env->mideleg;
++        *ret_value &= env->mideleg & S_MODE_INTERRUPTS;
+     }
+     return ret;
+ }
+@@ -1141,7 +1145,7 @@ static RISCVException rmw_hvip(CPURISCVState *env, int csrno,
+                       write_mask & hvip_writable_mask);
+ 
+     if (ret_value) {
+-        *ret_value &= hvip_writable_mask;
++        *ret_value &= VS_MODE_INTERRUPTS;
+     }
+     return ret;
+ }
+@@ -1154,7 +1158,7 @@ static RISCVException rmw_hip(CPURISCVState *env, int csrno,
+                       write_mask & hip_writable_mask);
+ 
+     if (ret_value) {
+-        *ret_value &= hip_writable_mask;
++        *ret_value &= HS_MODE_INTERRUPTS;
+     }
+     return ret;
+ }
+@@ -1162,14 +1166,14 @@ static RISCVException rmw_hip(CPURISCVState *env, int csrno,
+ static RISCVException read_hie(CPURISCVState *env, int csrno,
+                                target_ulong *val)
+ {
+-    *val = env->mie & VS_MODE_INTERRUPTS;
++    *val = env->mie & HS_MODE_INTERRUPTS;
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException write_hie(CPURISCVState *env, int csrno,
+                                 target_ulong val)
+ {
+-    target_ulong newval = (env->mie & ~VS_MODE_INTERRUPTS) | (val & VS_MODE_INTERRUPTS);
++    target_ulong newval = (env->mie & ~HS_MODE_INTERRUPTS) | (val & HS_MODE_INTERRUPTS);
+     return write_mie(env, CSR_MIE, newval);
+ }
+ 
 -- 
 2.25.1
 
