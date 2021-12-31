@@ -1,68 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n3O0t-0005hs-FE
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Dec 2021 14:56:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51296)
+	id 1n3O88-0007qk-Oa
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Dec 2021 15:04:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:52356)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1n3O0q-0005hX-Es
- for qemu-riscv@nongnu.org; Fri, 31 Dec 2021 14:56:28 -0500
-Received: from [2607:f8b0:4864:20::102d] (port=36490
+ id 1n3O84-0007pe-RN
+ for qemu-riscv@nongnu.org; Fri, 31 Dec 2021 15:03:57 -0500
+Received: from [2607:f8b0:4864:20::102d] (port=42868
  helo=mail-pj1-x102d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1n3O0o-0006RV-V1
- for qemu-riscv@nongnu.org; Fri, 31 Dec 2021 14:56:28 -0500
+ id 1n3O82-0008VW-Ij
+ for qemu-riscv@nongnu.org; Fri, 31 Dec 2021 15:03:56 -0500
 Received: by mail-pj1-x102d.google.com with SMTP id
- c9-20020a17090a1d0900b001b2b54bd6c5so10018223pjd.1
- for <qemu-riscv@nongnu.org>; Fri, 31 Dec 2021 11:56:26 -0800 (PST)
+ lr15-20020a17090b4b8f00b001b19671cbebso26636562pjb.1
+ for <qemu-riscv@nongnu.org>; Fri, 31 Dec 2021 12:03:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=0Hu5sPv8A8l2igdkc8ULtmQYc0Ed0J68BztDlsfNVug=;
- b=lYaSFmLe40qbi/zSuYQLItHUz+BlyfcEo6OWyqKzsuPIo5cqPE0RmAC3f8K4XEWk5/
- UTlLRo6ZCRR1yNngEyktffozoRvE2kByTUhWIws4JYTOTy5JbQt797MXq/IlMc8Qe36z
- /bkdNrFq8pIsKW8ZbPh+DWrKihbP93LkIpBMZzQTA9UJJ9/Z16uA6OZRMWcES9AO8dtB
- dl/XxUufp+WSC6CJC3Whv7mtix0LMbntq0unT3IOpH4LwX1M1uH+/2PNXHl5+HsQzy36
- pNQavlHTF7i2gVWAY9aJvYkCPZMxpQ7L4+zHF9NtGU6LT+tqhemHLqhfMFD990/frkp1
- 04ew==
+ bh=gG7RXgRlm2AYt1ljvPE4NwgBPrdvl/u/jy/2qZB4Ik8=;
+ b=u5pmnuKjp651FqjorS3+QRp+PgXilV47QVe0pa5XOqiXgS0sXb57LTtF7gP898HItW
+ HYVnlD3ZQ4mIvKE/QkRIMVhvi3J4ucz8NffXwP768P1k4RR08YB9dUUgAyn0o6zMSs5I
+ 0KAfP7LlsbaVKvJ0TJZwNxcGXm0EY7AhEH/v9aT7EE0JNghqyuZCUKx0cuX4u4Orznku
+ /7o9z3U/NEma1HlSZ2LcJhHmpIKYv0B53mhJPMyiQ3dgi4GoV4gE1UQ58gG16Hp36QBs
+ swM4pdjYj+xi7ubGBqze+HwlKqBVA0uHmrJPdi/gN0fgEuiD96WLj7Z+K+73nCGpFw3b
+ RPkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=0Hu5sPv8A8l2igdkc8ULtmQYc0Ed0J68BztDlsfNVug=;
- b=Zm4VSKrPWnph7G0NO+q5FkVNq/TO6dylqKm/FqsuhFh6rss0JkE1wd/HZpUpD+4B+P
- XC8V7x3fsTxPzdHNuaT86x5JmT//6tlKY1fHg0mdaFUvDQCZjWlZX3UrLziIPlzsTqKK
- 8LmFWPsRbgxb6A8Mm4WRXGX0KqaC35f86qbS26hJZuB+5rzf3kab3tpd/1nsYOjqMB0T
- y8WZBj2oa5wEPDT1WJ1ogJTg/ZxM9W7qNjqusj589c9Rm3YSKHXhtxKJhIzyCrZV+Mv0
- rMBiTk80YPQF9ooDvSfesTnrKVj1rvMetmzKHhQi/tBSewwoJ8RJtkEyCl0Bbv7v01wQ
- 9AjQ==
-X-Gm-Message-State: AOAM530KpvoCTgTAlySBZBfulordRmWWzprA1veFOC/fmXWdVeuzHrNi
- R/rTnqwmfwKfTcDmlYiJmeMBIw==
-X-Google-Smtp-Source: ABdhPJwfqgv5JYFV0I9qLS6VPClfQI/oEP4Yy/CgNaF2ewkm0win4nD+Ay5jQ/GZv4PDDi16BxdtQw==
-X-Received: by 2002:a17:90b:3607:: with SMTP id
- ml7mr44396532pjb.56.1640980585254; 
- Fri, 31 Dec 2021 11:56:25 -0800 (PST)
+ bh=gG7RXgRlm2AYt1ljvPE4NwgBPrdvl/u/jy/2qZB4Ik8=;
+ b=SBAzqj7UBq33ux5z2S/o3vqDXxVeObP/fAA4Hdbk6Et6htZe7H2XS5dU0z9Y3TaUhB
+ J0oY5t398zS10nt15MEbGYRUubdQja6W57dxZd2vsytQU1cn8vKBtf0Os7h3HxKb59ws
+ H/UNSB6a0YfCNliuGPthkKiGhxET6A7Zmp0BzCMJz7mdHnr/0+3/eiJUWAmGZ9arqbpH
+ DyiOQ3eoMcxOKw/C2YzmZALrZdxfW6irgdiHW2KdPI+2T3npNRolFtN0WQWphNy8hKZe
+ 44A0QW+8vFmevrNWsrrk5uFQBVte6+dgk81PkIu0WC2A6BEd1at+8dtq6Yhs8tCibXl6
+ 9MKQ==
+X-Gm-Message-State: AOAM533ltTJCWJhJ6kvcn08HbuRJdsINST2OwniQkqg6kB2IY5IoHjEN
+ N8fpZebOMbRLBxub4meqyX0MUQ==
+X-Google-Smtp-Source: ABdhPJw5nXiXhqS/VHbfV08kteHOLoyklDUMZ9T2tHCIc968K+KKzqR4zJgiDu2mGUW7SlVUInvdlA==
+X-Received: by 2002:a17:90b:2249:: with SMTP id
+ hk9mr43336614pjb.246.1640981033172; 
+ Fri, 31 Dec 2021 12:03:53 -0800 (PST)
 Received: from ?IPv6:2601:1c0:6101:be80:9312:6940:7d21:4efb?
  ([2601:1c0:6101:be80:9312:6940:7d21:4efb])
- by smtp.gmail.com with ESMTPSA id z19sm23054652pfe.94.2021.12.31.11.56.24
+ by smtp.gmail.com with ESMTPSA id j23sm25395488pga.59.2021.12.31.12.03.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 31 Dec 2021 11:56:24 -0800 (PST)
-Subject: Re: [PATCH v2 2/6] target/riscv: hardwire mstatus.FS to zero when
- enable zfinx
+ Fri, 31 Dec 2021 12:03:52 -0800 (PST)
+Subject: Re: [PATCH v2 3/6] target/riscv: add support for zfinx
 To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com
 References: <20211231032337.15579-1-liweiwei@iscas.ac.cn>
- <20211231032337.15579-3-liweiwei@iscas.ac.cn>
+ <20211231032337.15579-4-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <09ecdc1d-2f51-d5bf-1ecd-9ab6c132fd2e@linaro.org>
-Date: Fri, 31 Dec 2021 11:56:22 -0800
+Message-ID: <20101077-e471-fc29-2c83-92778f24bfc4@linaro.org>
+Date: Fri, 31 Dec 2021 12:03:50 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211231032337.15579-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20211231032337.15579-4-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -89,32 +88,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Dec 2021 19:56:29 -0000
+X-List-Received-Date: Fri, 31 Dec 2021 20:03:57 -0000
 
 On 12/30/21 7:23 PM, Weiwei Li wrote:
-> @@ -363,6 +363,10 @@ static void riscv_cpu_reset(DeviceState *dev)
->       env->misa_mxl = env->misa_mxl_max;
->       env->priv = PRV_M;
->       env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
-> +    /* hardwire mstatus.FS to zero when enable zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        env->mstatus &= ~MSTATUS_FS;
-> +    }
+> From: liweiwei<liweiwei@iscas.ac.cn>
+> 
+>    - update extension check REQUIRE_ZFINX_OR_F
+>    - update single float point register read/write
+>    - disable nanbox_s check
+> 
+> Co-authored-by: ardxwe<ardxwe@gmail.com>
+> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/fpu_helper.c               |  89 +++----
+>   target/riscv/helper.h                   |   2 +-
+>   target/riscv/insn_trans/trans_rvf.c.inc | 314 ++++++++++++++++--------
+>   target/riscv/internals.h                |  16 +-
+>   target/riscv/translate.c                |  90 +++++++
+>   5 files changed, 367 insertions(+), 144 deletions(-)
 
-This shouldn't be necessary because it should never have been set.
-
-> -    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-> +    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM|
->                               MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
->                               MSTATUS64_UXL | MSTATUS_VS;
-> +    /* hardwire mstatus.FS to zero when enable zfinx */
-> +    if (!RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        mstatus_mask |= MSTATUS_FS;
-> +    }
-
-I would think it would be more correct to have a positive test for RVF, rather than a 
-negative test for ZFINX?
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
