@@ -1,71 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n3BP6-000428-Ko
-	for mharc-qemu-riscv@gnu.org; Fri, 31 Dec 2021 01:28:40 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37564)
+	id 1n3Cz6-0003rt-BY
+	for mharc-qemu-riscv@gnu.org; Fri, 31 Dec 2021 03:09:59 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53644)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n3BP4-0003zA-2U; Fri, 31 Dec 2021 01:28:39 -0500
-Received: from [2607:f8b0:4864:20::b32] (port=44994
- helo=mail-yb1-xb32.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n3BP2-0005t9-Fn; Fri, 31 Dec 2021 01:28:37 -0500
-Received: by mail-yb1-xb32.google.com with SMTP id i3so63737084ybh.11;
- Thu, 30 Dec 2021 22:28:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qC4p5MBo1f2jzshZnn28VPpiyg3eAGA22vMrjRj/y8k=;
- b=jXTm41uvD+1pLnNvqKASuOwYP/siy2O88y4i4N3QkEAwc6FTiNB6mffCK5drVR/Uqw
- yiSJOtdVD0kK2dXQfgCN2Gcqc9lOq0kWYdhbb/nJtdlEjMnX4kMEyj90dDWuHAF5FRVW
- 7zq6WQauyoodxZ5R6sRhlu+C8d9k1q37u1guRJ1jsJeGpPltvWzrnuSaFGvrdfFMz6xH
- FXhgGa+EypqCtZFFkcpcYu/x3zpHsgy94QXwkMkTgWWSbTmg+tT1oeQ3B1poyWiB+CJd
- Thg1r9Y1FbckI/homy74HhNmYbkOYzDIo2ft/t7Ae8Q0p781YWmFicWRuu2SlALUWANY
- Mwaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=qC4p5MBo1f2jzshZnn28VPpiyg3eAGA22vMrjRj/y8k=;
- b=y/x5gEjS2WROzMtUqX1XSQpnWjqpKylvumR9wlZMBODb9+b8RF37pbp2LwI2JCn01X
- AV2Q/rG+rCez5iD0bsCo8nINc8b8KNdvvHoHxcRf4x/njioPojafAhV5raZTsT1XzQ4/
- BOYhwMnr0ku0HZUCMW66p5WF0QBmSE9hexGXqeAtAHdsDmq9nGhImmjRrjSr24e2d8jd
- qVyHvC7vCIgxuP/agGJ/fElYxf1gwU294FRYPxh9UQ4Kh79UJm2Qf/na8if9zk7d06LE
- GezjjkMIsNADuVbpwW96x7+0aVnakquqsJ1gcA6zgDudVp0xzMvZHiJy+ie8dfTkggz1
- qoQg==
-X-Gm-Message-State: AOAM532qNef09g8DDPwK5MrG5OOlZxLxu/0GmT07WiwqydKJuMta0cW+
- M86syQU6LmX93QM0YUKJfToI8e5mdddTTjDu7Yw=
-X-Google-Smtp-Source: ABdhPJw4i7j+UrTk5nbh7ej3FRN8jC8N0ACEWUoglUi9+7jKpXTHcOaQYusq2VtX2TFmqxQmlAhp93xqjHURMlA7fHQ=
-X-Received: by 2002:a25:3242:: with SMTP id y63mr27856104yby.670.1640932115091; 
- Thu, 30 Dec 2021 22:28:35 -0800 (PST)
-MIME-Version: 1.0
-References: <20211231032337.15579-1-liweiwei@iscas.ac.cn>
- <20211231032337.15579-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20211231032337.15579-2-liweiwei@iscas.ac.cn>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 31 Dec 2021 14:28:23 +0800
-Message-ID: <CAEUhbmWG-G96R6k8frQg+cdwkEV84xkQKt3h8zd=Wg1H8_aSfA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] target/riscv: add cfg properties for zfinx, zdinx
- and zhinx{min}
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, lazyparser@gmail.com, 
- ardxwe@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b32
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
-X-Spam_score_int: 6
-X-Spam_score: 0.6
-X-Spam_bar: /
-X-Spam_report: (0.6 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1n3Cz3-0003r2-1r; Fri, 31 Dec 2021 03:09:53 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:54114 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1n3Cyy-0002UF-KF; Fri, 31 Dec 2021 03:09:52 -0500
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-01 (Coremail) with SMTP id qwCowACnrZ3Dus5h9gmUBQ--.44953S3;
+ Fri, 31 Dec 2021 16:09:40 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 1/3] target/riscv: add support for svnapot extension
+Date: Fri, 31 Dec 2021 16:09:21 +0800
+Message-Id: <20211231080923.24252-2-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20211231080923.24252-1-liweiwei@iscas.ac.cn>
+References: <20211231080923.24252-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: qwCowACnrZ3Dus5h9gmUBQ--.44953S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxAF1kWFyxtr1DGryfur4xtFb_yoW5Ar4Dpr
+ s8G3y2kFZ7JFW3Aa1fKF1UXw1rCwsI9r4Fkw4xZrs7Jw4rJrW3W3Wqkw1F9F15XF4rXrya
+ 9a1DCF1YyF48ZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9l14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrwCFx2
+ IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
+ 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
+ AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IY
+ s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUnID2UUUUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -22
+X-Spam_score: -2.3
+X-Spam_bar: --
+X-Spam_report: (-2.3 / 5.0 requ) RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,104 +62,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Dec 2021 06:28:39 -0000
+X-List-Received-Date: Fri, 31 Dec 2021 08:09:53 -0000
 
-On Fri, Dec 31, 2021 at 11:26 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->
-> From: liweiwei <liweiwei@iscas.ac.cn>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c        |  1 +
+ target/riscv/cpu.h        |  1 +
+ target/riscv/cpu_bits.h   |  1 +
+ target/riscv/cpu_helper.c | 20 ++++++++++++++++----
+ 4 files changed, 19 insertions(+), 4 deletions(-)
 
-You missed here, "From" should match "SoB" name
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6ef3314bce..cbcb7f522b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -647,6 +647,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
++    DEFINE_PROP_BOOL("x-svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     /* ePMP 0.9.3 */
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index dc10f27093..1fbbde28c6 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -315,6 +315,7 @@ struct RISCVCPU {
+         bool ext_counters;
+         bool ext_ifencei;
+         bool ext_icsr;
++        bool ext_svnapot;
+         bool ext_zfh;
+         bool ext_zfhmin;
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 1e31f4d35f..1156c941cb 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -483,6 +483,7 @@ typedef enum {
+ #define PTE_A               0x040 /* Accessed */
+ #define PTE_D               0x080 /* Dirty */
+ #define PTE_SOFT            0x300 /* Reserved for Software */
++#define PTE_N               0x8000000000000000 /* NAPOT translation */
+ 
+ /* Page table PPN shift amount */
+ #define PTE_PPN_SHIFT       10
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 10f3baba53..e044153986 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -619,9 +619,12 @@ restart:
+             return TRANSLATE_FAIL;
+         }
+ 
+-        hwaddr ppn = pte >> PTE_PPN_SHIFT;
++        hwaddr ppn = (pte & ~(target_ulong)PTE_N) >> PTE_PPN_SHIFT;
+ 
+-        if (!(pte & PTE_V)) {
++        RISCVCPU *cpu = env_archcpu(env);
++        if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
++            return TRANSLATE_FAIL;
++        } else if (!(pte & PTE_V)) {
+             /* Invalid PTE */
+             return TRANSLATE_FAIL;
+         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+@@ -699,8 +702,17 @@ restart:
+             /* for superpage mappings, make a fake leaf PTE for the TLB's
+                benefit. */
+             target_ulong vpn = addr >> PGSHIFT;
+-            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+-                        (addr & ~TARGET_PAGE_MASK);
++
++            int napot_bits = ((pte & PTE_N) ? (ctzl(ppn) + 1) : 0);
++            if (((pte & PTE_N) && ((ppn == 0) || (i != (levels - 1)))) ||
++                (napot_bits != 0 && napot_bits != 4)) {
++                return TRANSLATE_FAIL;
++            }
++
++            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
++                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
++                          (vpn & (((target_ulong)1 << ptshift) - 1))
++                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
+ 
+             /* set permissions on the TLB entry */
+             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+-- 
+2.17.1
 
->
-> Co-authored-by: ardxwe <ardxwe@gmail.com>
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->  target/riscv/cpu.c       | 12 ++++++++++++
->  target/riscv/cpu.h       |  4 ++++
->  target/riscv/translate.c |  8 ++++++++
->  3 files changed, 24 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6ef3314bce..d9ea005724 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -491,6 +491,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              cpu->cfg.ext_d = true;
->          }
->
-> +        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> +            cpu->cfg.ext_zhinxmin) {
-> +            cpu->cfg.ext_zfinx = true;
-> +        }
-> +
->          /* Set the ISA extensions, checks should have happened above */
->          if (cpu->cfg.ext_i) {
->              ext |= RVI;
-> @@ -565,6 +570,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          if (cpu->cfg.ext_j) {
->              ext |= RVJ;
->          }
-> +        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
-> +                                   cpu->cfg.ext_zfhmin)) {
-> +            error_setg(errp,
-> +                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
-> +                    " 'Zfhmin'");
-> +            return;
-> +        }
->
->          set_misa(env, env->misa_mxl, ext);
->      }
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index dc10f27093..6fba31c5cd 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -315,8 +315,12 @@ struct RISCVCPU {
->          bool ext_counters;
->          bool ext_ifencei;
->          bool ext_icsr;
-> +        bool ext_zdinx;
->          bool ext_zfh;
->          bool ext_zfhmin;
-> +        bool ext_zfinx;
-> +        bool ext_zhinx;
-> +        bool ext_zhinxmin;
->
->          char *priv_spec;
->          char *user_spec;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 5df6c0d800..8b1cdacf50 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -76,8 +76,12 @@ typedef struct DisasContext {
->      RISCVMXL ol;
->      bool virt_enabled;
->      bool ext_ifencei;
-> +    bool ext_zdinx;
->      bool ext_zfh;
->      bool ext_zfhmin;
-> +    bool ext_zfinx;
-> +    bool ext_zhinx;
-> +    bool ext_zhinxmin;
->      bool hlsx;
->      /* vector extension */
->      bool vill;
-> @@ -703,8 +707,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->misa_ext = env->misa_ext;
->      ctx->frm = -1;  /* unknown rounding mode */
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
-> +    ctx->ext_zdinx = cpu->cfg.ext_zdinx;
->      ctx->ext_zfh = cpu->cfg.ext_zfh;
->      ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
-> +    ctx->ext_zfinx = cpu->cfg.ext_zfinx;
-> +    ctx->ext_zhinx = cpu->cfg.ext_zhinx;
-> +    ctx->ext_zhinxmin = cpu->cfg.ext_zhinxmin;
->      ctx->vlen = cpu->cfg.vlen;
->      ctx->elen = cpu->cfg.elen;
->      ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
-> --
-
-Regards,
-Bin
 
