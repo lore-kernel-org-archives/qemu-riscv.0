@@ -1,55 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n3tom-0001O9-C0
-	for mharc-qemu-riscv@gnu.org; Sun, 02 Jan 2022 00:54:08 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51454)
+	id 1n3trd-0002tp-Sr
+	for mharc-qemu-riscv@gnu.org; Sun, 02 Jan 2022 00:57:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n3toi-0001Mc-PG; Sun, 02 Jan 2022 00:54:04 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:59454 helo=cstnet.cn)
+ id 1n3trU-0002s9-Oo; Sun, 02 Jan 2022 00:56:58 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:59718 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n3tog-0008Ih-B5; Sun, 02 Jan 2022 00:54:04 -0500
+ id 1n3trS-0000Sj-1w; Sun, 02 Jan 2022 00:56:55 -0500
 Received: from [192.168.0.103] (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowADX3lrwPdFhJAoFBQ--.49869S2;
- Sun, 02 Jan 2022 13:53:53 +0800 (CST)
-Subject: Re: [PATCH v2 2/6] target/riscv: hardwire mstatus.FS to zero when
- enable zfinx
+ by APP-03 (Coremail) with SMTP id rQCowACHjVmcPtFhFw4FBQ--.59158S2;
+ Sun, 02 Jan 2022 13:56:45 +0800 (CST)
+Subject: Re: [PATCH v2 3/6] target/riscv: add support for zfinx
 To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com
 References: <20211231032337.15579-1-liweiwei@iscas.ac.cn>
- <20211231032337.15579-3-liweiwei@iscas.ac.cn>
- <09ecdc1d-2f51-d5bf-1ecd-9ab6c132fd2e@linaro.org>
- <4b38e2e8-f288-f53a-71a6-f34feafb18b4@iscas.ac.cn>
- <43631cc8-64c1-9998-f693-51bff18b0671@linaro.org>
+ <20211231032337.15579-4-liweiwei@iscas.ac.cn>
+ <a522f7f6-b6ad-02de-dabc-0511740aef83@linaro.org>
+ <7096a296-f1c2-44e7-d084-1c473b50a711@iscas.ac.cn>
+ <120dea96-eade-bcd6-eea0-0017b165f1ca@linaro.org>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <f744f8ac-77ad-95f0-7c13-d3c27d4fe4bf@iscas.ac.cn>
-Date: Sun, 2 Jan 2022 13:53:52 +0800
+Message-ID: <1219e20b-eb43-ed52-3ea5-41b24fdf8210@iscas.ac.cn>
+Date: Sun, 2 Jan 2022 13:56:44 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <43631cc8-64c1-9998-f693-51bff18b0671@linaro.org>
+In-Reply-To: <120dea96-eade-bcd6-eea0-0017b165f1ca@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: rQCowADX3lrwPdFhJAoFBQ--.49869S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrKr48ZF18Ary7KFW7KrWfZrb_yoWfurb_Xr
- s29rsrA3yDCFWavw4vyrs3Wr92grZrAayxurWqgrWavw17trZrCF4Dur18tFWxAa1fWrnI
- kF1aq345u343WjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbh8FF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJV
- WxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
- 0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2
- Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
- 6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0x
- vE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE
- 42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87
- Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUnXdbUUUUU
+X-CM-TRANSID: rQCowACHjVmcPtFhFw4FBQ--.59158S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+ VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUYZ7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E
+ 6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28Cjx
+ kF64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8I
+ cVCY1x0267AKxVW8JVWxJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2js
+ IEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAK
+ zVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx
+ 8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwAC
+ I402YVCY1x02628vn2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c
+ 8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E
+ 14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIx
+ kGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAF
+ wI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6Fyj6rWUJwCI42IY6I8E87Iv67AKxVWUJV
+ W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUnXdb
+ UUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -72,34 +70,17 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Jan 2022 05:54:07 -0000
+X-List-Received-Date: Sun, 02 Jan 2022 05:57:00 -0000
 
 
-在 2022/1/2 上午3:46, Richard Henderson 写道:
-> On 12/31/21 9:55 PM, Weiwei Li wrote:
->>> This shouldn't be necessary because it should never have been set.
->> Yes, I think so. However, I have a question about MSTATUS_MIE and 
->> MSTATUS_MPRV, will they be set before cpu reset?
+在 2022/1/2 上午3:48, Richard Henderson 写道:
+> ol is the operation length; xl is the register length.
 >
-> Yes, via warm reset.
-Thanks. I'll fix this later.
+> In this case, the operation length doesn't matter -- we're interested 
+> in distinguishing RV32 and RV64, because that's where the change in 
+> semantics comes from.
 >
->>> I would think it would be more correct to have a positive test for 
->>> RVF, rather than a negative test for ZFINX?
->> It may  deviate from the original value of mstatus_mask with a 
->> positive test for RVF.
->
-> Oh, you mean misa_ext?  Hmm.  Interesting point.
->
-> When F extension is not implemented, FS is either hardwired to zero 
-> (without S-mode) or optionally zero.  So this looks like an existing 
-> bug to be fixed.
->
-OK.  There is similar logic in write_mstatus and .  I'll fix it too.
-
-I'll also update write_frm,  write_fflags and write_fflags to have a 
-positive test for RVF .
-
+So both read and write fpr should use get_xl from this point.
 >
 > r~
 
