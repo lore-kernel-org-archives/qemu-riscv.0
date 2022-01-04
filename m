@@ -1,78 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4dPl-0000jy-2t
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 01:35:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:34580)
+	id 1n4rhS-0003Fx-No
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 16:50:38 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:32822)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1n4dPc-0000iV-Vr
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 01:35:15 -0500
-Received: from [2607:f8b0:4864:20::62b] (port=42919
- helo=mail-pl1-x62b.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1n4rhE-0003Dk-QQ; Tue, 04 Jan 2022 16:50:21 -0500
+Received: from [2607:f8b0:4864:20::d30] (port=39486
+ helo=mail-io1-xd30.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1n4dPX-0002XX-T7
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 01:35:12 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id u16so26414295plg.9
- for <qemu-riscv@nongnu.org>; Mon, 03 Jan 2022 22:35:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=gkygk7HFkDRQqBR7gPramWeqcVEw4UkCyEe2l45+d4s=;
- b=SnH5pxHJLncjnBkK3NfPVznNU4C+DEBPjgbHB+QzQunwAU/taKFwmHmyapddJfprF3
- mifc6rUWkElhtQQwFFkB6cLQAoWsjUrFydTLP8h2jzVmMB6ijTpCz8Wu3t8dhkihvVGX
- jGI81w4qd+jHMv058V9JbQl1KzjJOpL9udWT0eciQ14qSn3uxXdvwS2fXX0FB5FuFx+E
- XslQcaV+5afg0rBXZVTHsWvpbLN3LPjNJ12obKwjYEA4aPOk6cVqORz8kmGWSfCrRKsu
- SKUzFlUj4Rba5wf2w+IyeK8gL2L9SmXC3zl4f+HTnpadhUxwgGQl5sWykpcAoBL9Vpio
- 35VA==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1n4rhA-0004NA-2s; Tue, 04 Jan 2022 16:50:17 -0500
+Received: by mail-io1-xd30.google.com with SMTP id y11so40635722iod.6;
+ Tue, 04 Jan 2022 13:50:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=YH9Leo9srv0mjnG3XtGtDkXI8iCi7ViITDy07e20ir4=;
+ b=oCewEJSOzWWWn2HRrd9stapjDqmltBdBzqElGsdIxLNxIPe4H1381El3NLfuwmgsNr
+ oj+BsHOsMNC5iSLX3GspF7gYoxzcJTDabQF9sfrNEwV7+FUO9CQSpcHloL6mojqHY6RO
+ y2pPdWJmyaWpreHc9+2P9DAIlRHU5rYz1Y/4JAFXc3bhsLoGpQ4zxZ9BB/QdYC6+jky6
+ WrIYrgfaiXjIbLlz/SCU0i76YBoD18nB3nJx43Tf5G6BclOCins7FpLTY9N4tuBb8vKe
+ fHu79ZWe5hHnzkd6ijFAvA5RpJKgWJ6hmeBqYrCi5Ts+soWO8/ZDur83aawI45T2QpBf
+ 5CXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=gkygk7HFkDRQqBR7gPramWeqcVEw4UkCyEe2l45+d4s=;
- b=W7uTQZTft5A7DfeYQBcDYo2VGu8g3duvfbtK3u1gdPDvaMxmzsGttnPQU5EtSb1aWe
- ESqXBu7/TLvDnYYeaVy2BIlJKlvhFwyT1b97m+7tL2uNmlIyCzpUPd0rmX87X6EZrOeK
- iIvyFFQaG/fEUOZXf3QoEnIZdru2Jew7OZl8QqEC/1GJ45EjOytApr7AYXSzQ+4qBJMn
- Sk+S8b82D/JOgJwm9HTivDFOzwFV9daYUThiUCuykI+50wmqrY4HtEfceJKvrsL3YdjI
- FFQR+j2wCyPIl0q2bSTfn7010ClXYNicndqMeumqVNdQkkc2jWSe11anto5oPOyi7yL+
- sU6Q==
-X-Gm-Message-State: AOAM530AkGGQwWc1t20nEMObj/B1YbasyAVvG29BhC/b4xsfpG9cFYLU
- BmhI5IHownhi1MsBDfdPfGW4Wg==
-X-Google-Smtp-Source: ABdhPJzmMGZPbbVIqmegnGuFfEtplZk88t1NsnxnAEqASyucQ+PWC0Z192QXm2HufXx3lgq6hHG6Ag==
-X-Received: by 2002:a17:902:a584:b0:143:c2e3:c4 with SMTP id
- az4-20020a170902a58400b00143c2e300c4mr48258648plb.69.1641278106711; 
- Mon, 03 Jan 2022 22:35:06 -0800 (PST)
-Received: from jimshu-VirtualBox.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id b65sm39371533pfg.209.2022.01.03.22.35.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Jan 2022 22:35:06 -0800 (PST)
-From: Jim Shu <jim.shu@sifive.com>
-To: Alistair.Francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com,
- frank.chang@sifive.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Jim Shu <jim.shu@sifive.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v2 2/2] hw/dma: sifive_pdma: permit 4/8-byte access size of
- PDMA registers
-Date: Tue,  4 Jan 2022 14:34:08 +0800
-Message-Id: <20220104063408.658169-3-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220104063408.658169-1-jim.shu@sifive.com>
-References: <20220104063408.658169-1-jim.shu@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=YH9Leo9srv0mjnG3XtGtDkXI8iCi7ViITDy07e20ir4=;
+ b=BeTLbqduKIZP5/BUQV3fZceQkr3k9X5Phu879VMtcezOfx8CH38YC3QKFTBpHuXLvV
+ 4gpFXRrF/U09KzH0AIMmzG4uNKPHDNzYhhdSbSfKzg4b96jIYaCgiRnhmwOI00MccwZ/
+ yURpxOQXCTNEZCrjFeDgU9qqI9tpttbXK0AVIehlhFl4486lA4RuRowkDgeD5g09NpSl
+ FAVVkPz+AjO00GYBRZvXAFvphc4MFYpFX2R0rO0YhRtEpJSX7MTcr7rpxvA/pX7nmQAM
+ q5FquN8P0jYJ4EvFdESlO0hue1sgAEQtxiqNIiQ/neJEeXdc/8URG/lMCuQdX0DSfm9+
+ C8FA==
+X-Gm-Message-State: AOAM533jZvP3M8qK3WB4dd+9WTbxcvqvnjDttHcwVdirLa8djZY4HdpW
+ HxNoqZXhDAH/LLNjUF13BGs4sC3Gdq7EZM8c8kk=
+X-Google-Smtp-Source: ABdhPJyGAmPDm3rs1v8CFgwYLTIXyZsmv1JWOUbDvYrAgTn2hV0xC5Qz+LxKt3hDtB6IY95J4u+BoFe+vfKkrza61Hs=
+X-Received: by 2002:a02:aa8f:: with SMTP id u15mr23735183jai.63.1641333014723; 
+ Tue, 04 Jan 2022 13:50:14 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62b
+References: <20211229021250.29804-1-frank.chang@sifive.com>
+ <20211229021250.29804-2-frank.chang@sifive.com>
+In-Reply-To: <20211229021250.29804-2-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 5 Jan 2022 07:49:48 +1000
+Message-ID: <CAKmqyKPdkj9VLLHN-gL=yEeeK7K3L2mqjrDTgCBRgDpvRbKw4Q@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: rvv-1.0: Call the correct RVF/RVD check
+ funtion for widening fp insns
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: 6
-X-Spam_score: 0.6
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+X-Spam_score_int: 8
+X-Spam_score: 0.8
 X-Spam_bar: /
-X-Spam_report: (0.6 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (0.8 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,39 +78,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Jan 2022 06:35:17 -0000
+X-List-Received-Date: Tue, 04 Jan 2022 21:50:22 -0000
 
-It's obvious that PDMA supports 64-bit access of 64-bit registers, and
-in previous commit, we confirm that PDMA supports 32-bit access of
-both 32/64-bit registers. Thus, we configure 32/64-bit memory access
-of PDMA registers as valid in general.
+On Wed, Dec 29, 2021 at 12:15 PM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> Vector widening floating-point instructions should use
+> require_scale_rvf() instead of require_rvf() to check whether RVF/RVD is
+> enabled.
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Tested-by: Bin Meng <bmeng.cn@gmail.com>
----
- hw/dma/sifive_pdma.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Missing Signed off by line
 
-diff --git a/hw/dma/sifive_pdma.c b/hw/dma/sifive_pdma.c
-index f4df16449b..1dd88f3479 100644
---- a/hw/dma/sifive_pdma.c
-+++ b/hw/dma/sifive_pdma.c
-@@ -444,6 +444,10 @@ static const MemoryRegionOps sifive_pdma_ops = {
-     .impl = {
-         .min_access_size = 4,
-         .max_access_size = 8,
-+    },
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 8,
-     }
- };
- 
--- 
-2.25.1
+Alistair
 
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 5e3f7fdb77..8d92243f2b 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2254,7 +2254,8 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
+>  static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
+>  }
+> @@ -2292,7 +2293,8 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
+>  static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_ds(s, a->rd, a->rs2, a->vm);
+>  }
+> @@ -2321,7 +2323,8 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
+>  static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm);
+>  }
+> @@ -2359,7 +2362,8 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
+>  static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dd(s, a->rd, a->rs2, a->vm);
+>  }
+> --
+> 2.31.1
+>
+>
 
