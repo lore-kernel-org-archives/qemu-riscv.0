@@ -1,78 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4vxL-0001SN-F0
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 21:23:15 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52336)
+	id 1n4wYY-0007Z5-P0
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:01:42 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58810)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n4vxI-0001MQ-3M
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:23:13 -0500
-Received: from [2607:f8b0:4864:20::102f] (port=37439
- helo=mail-pj1-x102f.google.com)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1n4wYX-0007Yr-5E; Tue, 04 Jan 2022 22:01:41 -0500
+Received: from [2607:f8b0:4864:20::532] (port=45760
+ helo=mail-pg1-x532.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n4vxF-0005Yj-ML
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:23:11 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id
- y16-20020a17090a6c9000b001b13ffaa625so1857679pjj.2
- for <qemu-riscv@nongnu.org>; Tue, 04 Jan 2022 18:23:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=ooreh3rb7r9FjgRMrvUAmcp7hG8h0BcZ1KVzhQuCEks=;
- b=b59hyNHvarTN5IJrwke8y/5CByJbdfgIOyh4Ye+vXZepHwe90Vyuxf1muv90QvRBwE
- UD4lPlsc90p3hbRufx1yvwbiFKvVKhNx4gbNwRlcagLx/3r8iwe8Ur9dOwbwAOb7Re8a
- t6/x10kNI7JVAk0bJB5631kAUBfhLi5tlUrrsJ58+37wHS2jVL3d0lyZUkRWz9/BH/EI
- OxOYAHvBmxUwVX0lahZ5yIEM3qbJPRljTtgvOz8YRz2nLX7aaXg5HRViS2XB2KeIYCgc
- 1irsNrXg36UtJuwsY7gGxXjfpJy2jXbrp3KYDZmZQzkKPPBgwSoyKGO0US/EeIAGVwPr
- Gibw==
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1n4wYV-0007OW-G4; Tue, 04 Jan 2022 22:01:40 -0500
+Received: by mail-pg1-x532.google.com with SMTP id f5so4954845pgk.12;
+ Tue, 04 Jan 2022 19:01:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=bwwm7MMG2W9lViBn22omkQyDlbrVWbdFwAfuyNMQXbA=;
+ b=CIiA6Ty2rljP/DXQSKhEe+j5jmN2G5tlb0cf6zIO577jfN69SvEJyoUt10dCp3xAqz
+ BFHDUBs8F/BMAJ4zhOY+ZJQAD/1QhHQ/v10s5gvmeubDp3VivP2aPPJPHxX0FSHW3s5L
+ iwF4AvUveC05LaKbqDzNeiGRiCa5tPvfdFvKyfY4Bvfy3riSquOqns/Rh9U2UX6joAuF
+ 3NOQ/+GXk0YM8G4xvUboXQUZT6BRSjPynrWlul+4TSUZztIrmhCjmCB/1SmXf6dOT3h9
+ A1WqHPcHfWzB1JsO9BX0NeIqVhiOFfR/4yICXeRIf3JE89hnDAZtZk6Fspl0GeW9BTix
+ s/CQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=ooreh3rb7r9FjgRMrvUAmcp7hG8h0BcZ1KVzhQuCEks=;
- b=pYDtxmIYXqwifLsZhXSsGvGSWGs2KO87CKn3jJTPps0U4RyzkyCXhLup+9SjG7CsFZ
- CKPZg/MIiG8OZ5bt8llLusLonCuO1qB9gOlUZ8m2PE5hLkUhBlV6x/9FS9T9l/LEIw3f
- +spiDYw7+f3MJ+fOSHlETdSv6bCyY2DF+U3gKlVBpLaUxp8VnbhWcEF9PUPGbmq0qKn7
- pEixsuY0LTEAOXLy2ZP7Ukb4j3g4Kygac6Y3J9ZnYndV0qpBObxrgOw/8Wd+HnSIxYGL
- MjNbEo7jv1jjbe8JSuXkyf77ydIzhcj4X6jpgeMVvdaqi3axzMmNTm9U4HwXeHRn7kQ6
- WZYg==
-X-Gm-Message-State: AOAM5319oxgdSCMeLC5SMgQX6M/N9WXCkPPkod88cecD9MrWHFeuQgCR
- SGQjkY2wJeOB3O98xDBJSumUPfnJ+I0Vug==
-X-Google-Smtp-Source: ABdhPJwT698Myz11xkomSjgtxL/cJvysS7DtrY8HCgBie6/aRQZjdSqX801WY4ZDvaSGNrvQcaMX4g==
-X-Received: by 2002:a17:90b:4ac5:: with SMTP id
- mh5mr1576125pjb.2.1641349384535; 
- Tue, 04 Jan 2022 18:23:04 -0800 (PST)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id x19sm193593pgi.19.2022.01.04.18.23.02
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=bwwm7MMG2W9lViBn22omkQyDlbrVWbdFwAfuyNMQXbA=;
+ b=DDwW75OACpW2qIrtU3NLLiDvH9yX4oRRLGJ3jz+i6RBBJHEpJ1hL3xVDllL6QMzHs+
+ OB+luLZEI6lbV5FwHX5ZZXtZOgoBgijf1mFYkCN0lEQfK3v8J7D3a1eKJ3vL8hCtzxO4
+ G9m04OeAbDqxHPdBOULq5V5OZlz2VR0YcSJPIDlKzG+nIpaaJ2n6MzugGos5mE9O1t3Z
+ cFdrVIr2etBytmfKJ7+on0Iv5SxJazbu3zD+M42Y/WryhmkEDwmfnONLKBp4Pwj4Z15D
+ i3czaY4EWNMEqd4vSA0ia5Ec8tf8QkTKeINkHq1r1bm3F+iP2/lso5JisHW7F8YQ14H7
+ cXDw==
+X-Gm-Message-State: AOAM532xXa49kiZbO/wMvoIZNkQK32Q8eT4MPMXUsC+8xP8UqWCPcTJJ
+ GJ/CKjN54JH2WFd3/U72D3A=
+X-Google-Smtp-Source: ABdhPJyqaetU3BlLxAK2h/0uH5eb1/HzI9MTZ3jiBZn8TSbNDVqY0QDL8Y8PyyzW1LxeXXu4AU8YiA==
+X-Received: by 2002:a62:78d3:0:b0:4ba:7141:83e9 with SMTP id
+ t202-20020a6278d3000000b004ba714183e9mr53460961pfc.83.1641351697217; 
+ Tue, 04 Jan 2022 19:01:37 -0800 (PST)
+Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
+ [147.11.176.192])
+ by smtp.gmail.com with ESMTPSA id nu14sm23011pjb.17.2022.01.04.19.01.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jan 2022 18:23:04 -0800 (PST)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 3/3] target/riscv: rvv-1.0: Call the correct RVF/RVD check
- function for narrowing fp/int type-convert insns
-Date: Wed,  5 Jan 2022 10:22:46 +0800
-Message-Id: <20220105022247.21131-4-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220105022247.21131-1-frank.chang@sifive.com>
-References: <20220105022247.21131-1-frank.chang@sifive.com>
+ Tue, 04 Jan 2022 19:01:36 -0800 (PST)
+From: Bin Meng <bmeng.cn@gmail.com>
+X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
+To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v3 0/7] target/riscv: Initial support for native debug feature
+ via M-mode CSRs
+Date: Wed,  5 Jan 2022 11:01:19 +0800
+Message-Id: <20220105030126.778503-1-bin.meng@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::532
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
 X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -87,82 +78,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 02:23:13 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 03:01:41 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
 
-vfncvt.f.xu.w, vfncvt.f.x.w convert double-width integer to single-width
-floating-point. Therefore, should use require_rvf() to check whether
-RVF/RVD is enabled.
+This adds initial support for the native debug via the Trigger Module,
+as defined in the RISC-V Debug Specification [1].
 
-vfncvt.f.f.w, vfncvt.rod.f.f.w convert double-width floating-point to
-single-width integer. Therefore, should use require_scale_rvf() to check
-whether RVF/RVD is enabled.
+Only "Address / Data Match" trigger (type 2) is implemented as of now,
+which is mainly used for hardware breakpoint and watchpoint. The number
+of type 2 triggers implemented is 2, which is the number that we can
+find in the SiFive U54/U74 cores.
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 32 ++++++++++++++++++-------
- 1 file changed, 24 insertions(+), 8 deletions(-)
+[1] https://github.com/riscv/riscv-debug-spec/raw/master/riscv-debug-stable.pdf
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index f1b44ccad2..6c285c958b 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2719,17 +2719,29 @@ GEN_OPFXV_WIDEN_TRANS(vfwcvt_f_x_v)
- static bool opfv_narrow_check(DisasContext *s, arg_rmr *a)
- {
-     return require_rvv(s) &&
--           require_rvf(s) &&
--           (s->sew != MO_64) &&
-            vext_check_isa_ill(s) &&
-            /* OPFV narrowing instructions ignore vs1 check */
-            vext_check_sd(s, a->rd, a->rs2, a->vm);
- }
- 
--#define GEN_OPFV_NARROW_TRANS(NAME, HELPER, FRM)                   \
-+static bool opfxv_narrow_check(DisasContext *s, arg_rmr *a)
-+{
-+    return opfv_narrow_check(s, a) &&
-+           require_rvf(s) &&
-+           (s->sew != MO_64);
-+}
-+
-+static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
-+{
-+    return opfv_narrow_check(s, a) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8);
-+}
-+
-+#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
- static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
- {                                                                  \
--    if (opfv_narrow_check(s, a)) {                                 \
-+    if (CHECK(s, a)) {                                             \
-         if (FRM != RISCV_FRM_DYN) {                                \
-             gen_set_rm(s, RISCV_FRM_DYN);                          \
-         }                                                          \
-@@ -2756,11 +2768,15 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
-     return false;                                                  \
- }
- 
--GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, vfncvt_f_xu_w, RISCV_FRM_DYN)
--GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, vfncvt_f_x_w, RISCV_FRM_DYN)
--GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, vfncvt_f_f_w, RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, opfxv_narrow_check, vfncvt_f_xu_w,
-+                      RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, opfxv_narrow_check, vfncvt_f_x_w,
-+                      RISCV_FRM_DYN)
-+GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
-+                      RISCV_FRM_DYN)
- /* Reuse the helper function from vfncvt.f.f.w */
--GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, vfncvt_f_f_w, RISCV_FRM_ROD)
-+GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
-+                      RISCV_FRM_ROD)
- 
- static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
- {
+Changes in v3:
+- drop riscv_trigger_init(), which will be moved to patch #5
+- add riscv_trigger_init(), moved from patch #1 to this patch
+- enable debug feature by default for all CPUs
+
+Changes in v2:
+- new patch: add debug state description
+- use 0 instead of GETPC()
+- change the config option to 'disabled' by default
+
+Bin Meng (7):
+  target/riscv: Add initial support for native debug
+  target/riscv: machine: Add debug state description
+  target/riscv: debug: Implement debug related TCGCPUOps
+  target/riscv: cpu: Add a config option for native debug
+  target/riscv: csr: Hook debug CSR read/write
+  target/riscv: cpu: Enable native debug feature
+  hw/core: tcg-cpu-ops.h: Update comments of debug_check_watchpoint()
+
+ include/hw/core/tcg-cpu-ops.h |   1 +
+ target/riscv/cpu.h            |   7 +
+ target/riscv/debug.h          | 114 +++++++++
+ target/riscv/cpu.c            |  14 ++
+ target/riscv/csr.c            |  57 +++++
+ target/riscv/debug.c          | 441 ++++++++++++++++++++++++++++++++++
+ target/riscv/machine.c        |  33 +++
+ target/riscv/meson.build      |   1 +
+ 8 files changed, 668 insertions(+)
+ create mode 100644 target/riscv/debug.h
+ create mode 100644 target/riscv/debug.c
+
 -- 
-2.31.1
+2.25.1
 
 
