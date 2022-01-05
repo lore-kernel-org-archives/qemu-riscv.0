@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4vxE-0001La-2s
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 21:23:11 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52244)
+	id 1n4vxK-0001Pr-Iv
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 21:23:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:52318)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n4vx4-0001HB-ES
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:23:00 -0500
-Received: from [2607:f8b0:4864:20::632] (port=45908
- helo=mail-pl1-x632.google.com)
+ id 1n4vxH-0001Ls-EN
+ for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:23:12 -0500
+Received: from [2607:f8b0:4864:20::1029] (port=39456
+ helo=mail-pj1-x1029.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n4vx2-0005Xo-Tu
- for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:22:58 -0500
-Received: by mail-pl1-x632.google.com with SMTP id s15so903908plg.12
- for <qemu-riscv@nongnu.org>; Tue, 04 Jan 2022 18:22:56 -0800 (PST)
+ id 1n4vxF-0005YU-8J
+ for qemu-riscv@nongnu.org; Tue, 04 Jan 2022 21:23:10 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ c14-20020a17090a674e00b001b31e16749cso355200pjm.4
+ for <qemu-riscv@nongnu.org>; Tue, 04 Jan 2022 18:23:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=myqKEKIIilGrtf+5BHRfjIFtKgmbKL8Q3XQqV6+1lbc=;
- b=B3EJxETK40jraOqTPZq98FJjmBIG9PDXOB8rXIYEoLdLEW5HyOezuxfSzE0qiar2Tw
- iLvf18FXBMo2CUQKb2czO6yLl3ffZHSIlLJIFn0GvkKBf6e2rxU5uulyraB4LBWYrj9Y
- 2q96Ach/yEbkEToJUMC+pHQTu7cfV6aukdTgEnmqHt42xhW4X3HPwBJZmK8Ct5oK/mp9
- h9kbUwtUb333a6EM42ef8uRrv88UW6lLtGBV4484gjcxWGhHt+ZR+TkOyLh4bT/6O5AH
- wU28A25hNhPHEXMSUXRlPXd2pg/W3vWMXtGrlvKMXFpeN3WnDmng9iBtfyCyYsxrqkjD
- erwQ==
+ bh=bCr1OXLLj1AnANQae2OL1jralQRJuDCEr6CZgNDTrlY=;
+ b=CPRvkwP5HdSv78oBDKFFoz9g0k7vp5ugMuVqzc1xfmTnpY2whzAwNWJn52SBTIsKAI
+ /Vpm/K0vXYIXPqzUbK/hLXYI9CJSRgJGn6398O12ItjAqSwjGp0MJnemJyfi70MNPpC3
+ rJYeUsw/Dez+U/d1pcouhVRXh+0k4WOKG7vmBT4CcMjol8Uv5vgpC9/bqkyDw3rjlsKX
+ I7qMzQMYJG94QGOvnXMxuqnWA//q4G9HLP4skrfPCq88O52xfLaYplvdX30eEIfaasm5
+ Ph0szTwPDqm/CLTSaglMJmtx0X6ghZKW3n7OqY2QxRpixCbeua05GiVQUI3bVdrY8j8d
+ 26xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=myqKEKIIilGrtf+5BHRfjIFtKgmbKL8Q3XQqV6+1lbc=;
- b=g9B4YzpaWDtaRxp3kX0ETq4lmLxWFVvhco3GQBAmXjr/2i6775yZJGTrYIbdW8pzdj
- Rot2P1E6wmByNO2KLyTv2rjAYBNPZkNZF8wZEQUNwKvjOdf9PSvULrViJO3NxN9qQVkq
- hbc3dJPhzB0v37RL1CIqFyteRxWDC/XjeXjsOg4xBGlvFXLuvvJ3gdTTU34dvFe03Ezp
- LWh37JgAhin38UbSZjJlxCRWQG13SjCIph37B7Qf6zEVDuQ9NRn1RxbvBc43lSR7pQjG
- FCWbF7tQVkCBPlTWv5Y+lUR9CpQHsoYZDvmgaSu0a4kbPP9YouIkhynxouT/P7Ll4z2F
- yRpg==
-X-Gm-Message-State: AOAM531eGb8R6bn83MPb1XHoVXp+R3v5CDMVZq4wnrpc8uzLGOFsT0dg
- EYHth3hKXKJOVC/aME0fhV3JZg==
-X-Google-Smtp-Source: ABdhPJzifhy90jSzKgBKIipm7n/E9mHYnUGXdlHxJjO14C5PQaQROzEo+UhoClBlcCxlH90Ih4dzxg==
-X-Received: by 2002:a17:90b:8d:: with SMTP id
- bb13mr1538344pjb.156.1641349375703; 
- Tue, 04 Jan 2022 18:22:55 -0800 (PST)
+ bh=bCr1OXLLj1AnANQae2OL1jralQRJuDCEr6CZgNDTrlY=;
+ b=O2ZOLTRCOKg4fZ7nY1z8/gu4khsfvKjVTzePoYKc7AKAXAzFG3cI/y6XFR/0wkW1h8
+ 4dEZ2TM0L7Ref15scWgwpk8t68dLWi9paNVS94ezIQ2KRahWEKS0MwhzGdTZa4Chnvcs
+ x/Gz88TNiQ2WIcJ8rEUivciPhLH4r+F6Dlyc/uOpS+rAVHYLHa5pdzExasu0NQhsR2gN
+ 1tRjiPAzhjPtArFAd2DhxlUpOzqPEnlJaL6tPoOihuzCVC/48NGxKx5poQgvC4/AucJC
+ u6Q+sFnmBmMbvBWwZz5Xs1XO8RAKiy+w+TbcxQqRyyZYGQKFGJ2+goW70LOXgpTXTD6C
+ 1AwA==
+X-Gm-Message-State: AOAM530E6crA5/TcT8ZknHwcTw7mxqflkB2TS1H3Wln60zS1YzB6DqBm
+ 97weatDKB/A/7H+SroLedKML7w==
+X-Google-Smtp-Source: ABdhPJwQK+WUYhQDNlkqJqJVCVzMhqXgehOQz+NY7Re9NXCs5d6iR2BdJ2O6YjYig9QFBWfS0cmPcg==
+X-Received: by 2002:a17:90a:7023:: with SMTP id
+ f32mr1540939pjk.226.1641349380775; 
+ Tue, 04 Jan 2022 18:23:00 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id x19sm193593pgi.19.2022.01.04.18.22.53
+ by smtp.gmail.com with ESMTPSA id x19sm193593pgi.19.2022.01.04.18.22.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jan 2022 18:22:55 -0800 (PST)
+ Tue, 04 Jan 2022 18:23:00 -0800 (PST)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
@@ -54,19 +55,19 @@ Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
  Bin Meng <bin.meng@windriver.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v2 1/3] target/riscv: rvv-1.0: Call the correct RVF/RVD check
- function for widening fp insns
-Date: Wed,  5 Jan 2022 10:22:44 +0800
-Message-Id: <20220105022247.21131-2-frank.chang@sifive.com>
+Subject: [PATCH v2 2/3] target/riscv: rvv-1.0: Call the correct RVF/RVD check
+ function for widening fp/int type-convert insns
+Date: Wed,  5 Jan 2022 10:22:45 +0800
+Message-Id: <20220105022247.21131-3-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220105022247.21131-1-frank.chang@sifive.com>
 References: <20220105022247.21131-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::632
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1029
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -86,63 +87,83 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 02:23:01 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 02:23:13 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-Vector widening floating-point instructions should use
-require_scale_rvf() instead of require_rvf() to check whether RVF/RVD is
-enabled.
+vfwcvt.xu.f.v, vfwcvt.x.f.v, vfwcvt.rtz.xu.f.v and vfwcvt.rtz.x.f.v
+convert single-width floating-point to double-width integer.
+Therefore, should use require_rvf() to check whether RVF/RVD is enabled.
+
+vfwcvt.f.xu.v, vfwcvt.f.x.v convert single-width integer to double-width
+floating-point, and vfwcvt.f.f.v convert double-width floating-point to
+single-width floating-point. Therefore, should use require_scale_rvf() to
+check whether RVF/RVD is enabled.
 
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 34 ++++++++++++++++++-------
+ 1 file changed, 25 insertions(+), 9 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 5e3f7fdb77..8d92243f2b 100644
+index 8d92243f2b..f1b44ccad2 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -2254,7 +2254,8 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
- static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+@@ -2613,16 +2613,27 @@ GEN_OPFV_CVT_TRANS(vfcvt_rtz_x_f_v, vfcvt_x_f_v, RISCV_FRM_RTZ)
+ static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
  {
      return require_rvv(s) &&
--           require_rvf(s) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8) &&
-            vext_check_isa_ill(s) &&
-            vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
- }
-@@ -2292,7 +2293,8 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
- static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
- {
-     return require_rvv(s) &&
--           require_rvf(s) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8) &&
+-           require_scale_rvf(s) &&
+-           (s->sew != MO_8) &&
             vext_check_isa_ill(s) &&
             vext_check_ds(s, a->rd, a->rs2, a->vm);
  }
-@@ -2321,7 +2323,8 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
- static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
- {
-     return require_rvv(s) &&
--           require_rvf(s) &&
+ 
+-#define GEN_OPFV_WIDEN_TRANS(NAME, HELPER, FRM)                    \
++static bool opxfv_widen_check(DisasContext *s, arg_rmr *a)
++{
++    return opfv_widen_check(s, a) &&
++           require_rvf(s);
++}
++
++static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
++{
++    return opfv_widen_check(s, a) &&
 +           require_scale_rvf(s) &&
-+           (s->sew != MO_8) &&
-            vext_check_isa_ill(s) &&
-            vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm);
++           (s->sew != MO_8);
++}
++
++#define GEN_OPFV_WIDEN_TRANS(NAME, CHECK, HELPER, FRM)             \
+ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+ {                                                                  \
+-    if (opfv_widen_check(s, a)) {                                  \
++    if (CHECK(s, a)) {                                             \
+         if (FRM != RISCV_FRM_DYN) {                                \
+             gen_set_rm(s, RISCV_FRM_DYN);                          \
+         }                                                          \
+@@ -2649,12 +2660,17 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+     return false;                                                  \
  }
-@@ -2359,7 +2362,8 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
- static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+ 
+-GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_DYN)
+-GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v, vfwcvt_x_f_v, RISCV_FRM_DYN)
+-GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v, vfwcvt_f_f_v, RISCV_FRM_DYN)
++GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v, opxfv_widen_check, vfwcvt_xu_f_v,
++                     RISCV_FRM_DYN)
++GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v, opxfv_widen_check, vfwcvt_x_f_v,
++                     RISCV_FRM_DYN)
++GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v, opffv_widen_check, vfwcvt_f_f_v,
++                     RISCV_FRM_DYN)
+ /* Reuse the helper functions from vfwcvt.xu.f.v and vfwcvt.x.f.v */
+-GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_RTZ)
+-GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_x_f_v, vfwcvt_x_f_v, RISCV_FRM_RTZ)
++GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_xu_f_v, opxfv_widen_check, vfwcvt_xu_f_v,
++                     RISCV_FRM_RTZ)
++GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_x_f_v, opxfv_widen_check, vfwcvt_x_f_v,
++                     RISCV_FRM_RTZ)
+ 
+ static bool opfxv_widen_check(DisasContext *s, arg_rmr *a)
  {
-     return require_rvv(s) &&
--           require_rvf(s) &&
-+           require_scale_rvf(s) &&
-+           (s->sew != MO_8) &&
-            vext_check_isa_ill(s) &&
-            vext_check_dd(s, a->rd, a->rs2, a->vm);
- }
 -- 
 2.31.1
 
