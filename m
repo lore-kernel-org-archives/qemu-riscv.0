@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4wdJ-0004Qf-Rk
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:06:39 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59752)
+	id 1n4wfY-0006zK-UP
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:08:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60350)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wdA-0004O3-1u; Tue, 04 Jan 2022 22:06:29 -0500
-Received: from [2607:f8b0:4864:20::42c] (port=44620
- helo=mail-pf1-x42c.google.com)
+ id 1n4wfX-0006wR-SS; Tue, 04 Jan 2022 22:08:55 -0500
+Received: from [2607:f8b0:4864:20::1032] (port=37734
+ helo=mail-pj1-x1032.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wd6-0000VZ-Ak; Tue, 04 Jan 2022 22:06:25 -0500
-Received: by mail-pf1-x42c.google.com with SMTP id t187so20388046pfb.11;
- Tue, 04 Jan 2022 19:06:23 -0800 (PST)
+ id 1n4wfV-0001w8-85; Tue, 04 Jan 2022 22:08:55 -0500
+Received: by mail-pj1-x1032.google.com with SMTP id
+ y16-20020a17090a6c9000b001b13ffaa625so1989183pjj.2; 
+ Tue, 04 Jan 2022 19:08:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
  bh=6V3xBbUXu97kY2IqEv6ttjjQLe4n266tAoPJgk+b2Ug=;
- b=o+IWrUjzMAismXsJQFXQ8dTjYN9BeGbH8zAHPFfO2wpznSu2IY8Py4hj0pzwX613aQ
- XLKpzsYvWdOV92t5x/0M2FnoQofIZrYWtFRrkP+XRc9vnGoeT5e+z55LVtBcSPGuuh9q
- vakbbDXiCh06ARqh1VI9YXMkD7lNBeBZzQcrmDx/kjwPCq1vsRXzMz4KsJ8QJc3Gs0+d
- ejkh2u2J2k3Yc9Dul6L918Ll5PWlFEYBLzgYTKm24SJdUvzxDtq7F8Nd7ilFFFWQlE2W
- 7j8jBvVnKBd/WQwTDlbkWdanFYEu/SlbRdI4Ar8EVs8Dp8gRhNGsKf3Am9tXSY/mG5B6
- w/TQ==
+ b=cW7vg0Q9DrBpZ1eLHK/sND1pUs9OE6VwnULLAOU2Gyx/RjmunyvXYxgoRH41XPqppc
+ z0QbVTloYHDcQpafQb3VHQumQKyTWnfhqwLDEXAyYFcGyOLyEVWxqUurdq5gcqbykvo9
+ dvyGxTsKgfmaF9a+D/sQdoI2z4UG52kanG2LDrQyhpvmC8pbnbOyi9GxLcdY+S4Z+1Kq
+ s6h5NcB0VnOdby0V41uuDWWjPE7yzDNp7nv+g9EBj5d5aTA3zFYuGuZ1QxenQJNGFtij
+ LHOPfq6dTbLcrI0DBTl1auizhNP1dIgTET03PfR2UHRe+GCMLRpyAru1yPXPygZqyBk0
+ CXRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
  bh=6V3xBbUXu97kY2IqEv6ttjjQLe4n266tAoPJgk+b2Ug=;
- b=ZpglDsoWJR+LfVLsaKVwr1c1ObLantMTK7UJlP1Ar86IiX76+6loDdZZOsE09982if
- VjKfeddck8cZiC5qYn/mZlJbkUoWrNvq8EMRMrlhsXuBzIpBSRzMfq5kx2/ZB9KRYf9A
- vRYMaOEmyfVuNwVvOPyvVN3H1OTMlYYRncxkKVU7mujHPBbjy/MdAtlYxclC8elJk4h8
- koqFjff+n7hdDTgFlNHNznSeDdyXBiiffkzK1CK5Sr5QBoQCCWw1lRzKhFN51ql2P8i7
- ztWsv3Tb0Q4P00u+R3pnvn/dFeV/h4ZqN/Dcyz/A5eCAMjv3+i9FH0DrRZdT5xlHI6ci
- 7GCg==
-X-Gm-Message-State: AOAM532ZZl1/X/J/RRpdDAztZHvQ+ocAc4GD/Gx7Ehiohb9XvP6UqBAm
- odXm4f1BDaz7WQ9T1WFvwwrfuppJcazsog==
-X-Google-Smtp-Source: ABdhPJyBWSqrsB6B1JfVDoKwSFydU+u9Vka476wckcT9iQwaejjKnvAxTEgliqiTqOjw12Lyf7iLuA==
-X-Received: by 2002:a63:3ece:: with SMTP id
- l197mr30759907pga.371.1641351982765; 
- Tue, 04 Jan 2022 19:06:22 -0800 (PST)
+ b=0XVjvAfMBQPvlpUaCZtaxrxlJTVNXMJUVo3rr/ZkFxvpdtTPLjeC1l0Iw0MrO+/HoD
+ LMd4Y9w8H3IVbC8HJqIKKNIns26PP8BrC7DmW0ht8kq01sJX8BBvHcCRmj0u+LQfcz6o
+ opGv5QnoP44n9qLadwqejJI7h04zbSJKH04GGqBPyrmYwmhQlffe+VLytL6xdPxVQ4x/
+ zZ1oNpZgV9uynoXEEMO/szrdWx5q9OZRb+TNvYozFP/6oGLfalkyrxNq7OxhFjs0Jjbq
+ yS+iyxOcCiunCRBvFa8uaa0X9ybP3pBD8NLvNWuQ+02yKPkdhJkjmy0v1WrWANGb8Lys
+ QXSA==
+X-Gm-Message-State: AOAM531a3UdIHrtvPBQaIZ1t0bOnUw2rlC2DN6zixLckGkyqhi364YHF
+ cOl857XLm9cTMfQdl0axmHk=
+X-Google-Smtp-Source: ABdhPJxpRyGNTT5yDQL1iGzwQwNUXytcFjpcvrs75ch6/rhsZSKLXUBVdvTCyoIOPoA/LWTuYSI3og==
+X-Received: by 2002:a17:90b:3b49:: with SMTP id
+ ot9mr1755161pjb.110.1641352129335; 
+ Tue, 04 Jan 2022 19:08:49 -0800 (PST)
 Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
  [147.11.176.192])
- by smtp.gmail.com with ESMTPSA id mh3sm657281pjb.26.2022.01.04.19.06.21
+ by smtp.gmail.com with ESMTPSA id t191sm36206889pgd.3.2022.01.04.19.08.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jan 2022 19:06:22 -0800 (PST)
+ Tue, 04 Jan 2022 19:08:49 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Subject: [RESEND PATCH v3 0/7] target/riscv: Initial support for native debug
  feature via M-mode CSRs
-Date: Wed,  5 Jan 2022 11:06:11 +0800
-Message-Id: <20220105030618.779257-1-bmeng.cn@gmail.com>
+Date: Wed,  5 Jan 2022 11:08:37 +0800
+Message-Id: <20220105030844.780642-1-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1032
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -77,7 +78,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 03:06:32 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 03:08:56 -0000
 
 
 This adds initial support for the native debug via the Trigger Module,
