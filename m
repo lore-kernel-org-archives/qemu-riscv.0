@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5EO4-0002sP-Sz
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 17:04:04 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42628)
+	id 1n5EOr-0004Ge-45
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 17:04:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:43164)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5EO2-0002jI-I4; Wed, 05 Jan 2022 17:04:02 -0500
-Received: from [2607:f8b0:4864:20::129] (port=47090
- helo=mail-il1-x129.google.com)
+ id 1n5EOo-00048l-SM; Wed, 05 Jan 2022 17:04:50 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=44711
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5ENz-0006Bp-Sz; Wed, 05 Jan 2022 17:04:02 -0500
-Received: by mail-il1-x129.google.com with SMTP id e8so588563ilm.13;
- Wed, 05 Jan 2022 14:03:59 -0800 (PST)
+ id 1n5EOm-0006K1-3V; Wed, 05 Jan 2022 17:04:50 -0500
+Received: by mail-io1-xd36.google.com with SMTP id h23so790645iol.11;
+ Wed, 05 Jan 2022 14:04:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=0l4CifLn/vQpDug8sVembxTHnVdIt3FA7HaSgzF02kM=;
- b=G9B9ngw2+C+rrrZ0fNYLacRDsEpoLsAdL+VTtbE6x2GspJh3PUuCng+HZLj4vZELIQ
- grtdXbgWONl7LDfW2AEdtzMDkpMvFm8VM+zwn3cdjUbmQLNW09KeS/uFZg8X28sfJIPC
- KXxJCZFRK7/bWmMDPM6OMaBkwy41l2LuROCQ32l9FVM0F8zeOjnCV6GAb79IPlcjkUv6
- LAWfJmeRxEEYtEnpJ3g1QME7Gx0zdoMocozwHa0aSKESPwxZfFTqzaMSaTqZP5z2d1dw
- F0NgHDZm/W2ii96YZBhkwNDAxNfJYPoLmHkhL2hKLfqlVJoGA/3ZNLS2Y/Ysy52MHy3M
- 5RSg==
+ :cc; bh=zm6hq7hdTHha4uq0ZX23dBVJPJI05eLjkVtrtmDeGKU=;
+ b=D7AjArZ1OD/OfOcakflZMiChjBF78hJMhN5Kz+SdMcORQM5kz4ZH43poi++XRmaYfw
+ 34EzVTrBD3G3SGOQnSpXJrgl9Wruuh6Aa43Gq7qjUk6bukIPukXmNCGNh9JIhiBHRcTN
+ UFkBgzMawNH4RI3PFBieMGyiBF2cLLg04ucgFNM+INos1XN6EfxvHaEYI+pQRQRwVeLQ
+ hXO++Rqf2gF7NFMKrZLwYDiF8dAmzJSPfq8Psj4FM73toA11ch9ioBDP3AG44kKepmtX
+ hjp8+ipHnMrvfabURMhmcKTfFf6dWnHatnjiYiBnoNYq2eNaVEW57HkN2JS0zfJsf0lA
+ xTbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=0l4CifLn/vQpDug8sVembxTHnVdIt3FA7HaSgzF02kM=;
- b=4IIV6MDvx7F/ot7u2zyXuzK1QTOQPiIfTF3vMmSkLg+XgUb4dzuLrnX3ZQQTiYPaVC
- KsMlaJHsX1Ev23PIYlB/8Iytdxx5icqneE+694gG6EAtd67nQOQ3CypcdZnxGtSbW4II
- eT4BUU6xMw7DgPhQ2LByf75uMu0JOdXSZmluca2uam0CoVYTUgB26RS9cYSUFGGEyjzG
- 7QvgIpXVCRPE9RkhW5LIXnQAzUI6/aeNkaw+HlADS2XO6L+Gc8Y6AawZYBKJoan/4D+W
- W04S4Gaqo7EpB889/HidaSax9ieT23Sb7LMv0oTuAj4UEf9lGAlOSYyayrJqOioiIypC
- BXMQ==
-X-Gm-Message-State: AOAM532+TN+DGibvspUY4XPskTMOPKe/5LAujG9qUGG2hdut3YWNKYBz
- 5xc2pA+uZQeQdCbfr5YNoDoV0rl67wbKMWZ341g=
-X-Google-Smtp-Source: ABdhPJxqYlNe0qCnG/rahQ2aNhVsFb61xIb8f3Rr9II4KBnCJ9O6OZXqCDqKEfR8uFAoD4xv5so0pz/zGPhOi/eRlWA=
-X-Received: by 2002:a05:6e02:194b:: with SMTP id
- x11mr2612704ilu.208.1641420238171; 
- Wed, 05 Jan 2022 14:03:58 -0800 (PST)
+ bh=zm6hq7hdTHha4uq0ZX23dBVJPJI05eLjkVtrtmDeGKU=;
+ b=yqt1q+in3fLbZsbdtJ0853iHX8F4ukBw0Df0UsHsfPoeAIU1hi/iCGSaa6CthcXt9t
+ bhx9JmTlTesr5HEwBFWIPcBgxx1voIK4gurCV8Rowks5LtUIlhE89ybJjuzEt+lHCnOv
+ 5CW/IQdsZ4Wc2hFcw10v18hdYhWiHWwCEFnbUCUykNvOprqhY3IlZ5OJxVsvY1hfYdDS
+ zpEYHqym7633ocC7kmGXNs+JC1dwEfEb22ugMTq0twBfL2FbBBh8f0hq+YVy+PCJ2a7r
+ MkZW2T6PAtqamngMT/QYOFNWKoFqXFvSHEBEqw3K9+iZNUrHNKVHMYasgzBvDzt/29Tb
+ G7DQ==
+X-Gm-Message-State: AOAM533TlgMQNbk5Nmm+LOywezj9Em9HCJEeFNU/RUHgU0Z/O1qauyhu
+ Dthwzv/Ao9/mW/cPMKLpJMrSE+UuSXsXIC0o1Fg=
+X-Google-Smtp-Source: ABdhPJy3d/D66OUGPIk5j3YmZLVa9IC9mu9NfLTOqB44PEuZ0wOMV0+yv9NdUxR2M1BgfOgxXzK53qfgK02BQrW6XzI=
+X-Received: by 2002:a05:6602:1487:: with SMTP id
+ a7mr26307777iow.57.1641420286640; 
+ Wed, 05 Jan 2022 14:04:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20211220130919.413-1-jiangyifei@huawei.com>
- <20211220130919.413-9-jiangyifei@huawei.com>
-In-Reply-To: <20211220130919.413-9-jiangyifei@huawei.com>
+ <20211220130919.413-12-jiangyifei@huawei.com>
+In-Reply-To: <20211220130919.413-12-jiangyifei@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jan 2022 08:03:32 +1000
-Message-ID: <CAKmqyKOtOFmy1_9W785DZiFCc=Us6O_pVpLsBOyXOk32zansnA@mail.gmail.com>
-Subject: Re: [PATCH v3 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+Date: Thu, 6 Jan 2022 08:04:20 +1000
+Message-ID: <CAKmqyKO8qvAY=jPC1BnjXqy5=Lakxg7+OkznGQqBhLAJr4r9FA@mail.gmail.com>
+Subject: Re: [PATCH v3 11/12] target/riscv: Implement virtual time adjusting
+ with vm state changing
 To: Yifei Jiang <jiangyifei@huawei.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -57,10 +58,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "Wubin (H)" <wu.wubin@huawei.com>, wanghaibin.wang@huawei.com,
  wanbo13@huawei.com, Mingwang Li <limingwang@huawei.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::129
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -81,173 +82,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 22:04:03 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 22:04:51 -0000
 
-On Tue, Dec 21, 2021 at 3:41 AM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
+On Tue, Dec 21, 2021 at 3:45 AM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
 >
-> Use char-fe to handle console sbi call, which implement early
-> console io while apply 'earlycon=sbi' into kernel parameters.
+> We hope that virtual time adjusts with vm state changing. When a vm
+> is stopped, guest virtual time should stop counting and kvm_timer
+> should be stopped. When the vm is resumed, guest virtual time should
+> continue to count and kvm_timer should be restored.
 >
 > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 > Signed-off-by: Mingwang Li <limingwang@huawei.com>
 > Reviewed-by: Anup Patel <anup.patel@wdc.com>
-> ---
->  target/riscv/kvm.c                 | 43 +++++++++++++++++-
->  target/riscv/sbi_ecall_interface.h | 72 ++++++++++++++++++++++++++++++
->  2 files changed, 114 insertions(+), 1 deletion(-)
->  create mode 100644 target/riscv/sbi_ecall_interface.h
->
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 0027f11f45..4d08669c81 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -38,6 +38,9 @@
->  #include "qemu/log.h"
->  #include "hw/loader.h"
->  #include "kvm_riscv.h"
-> +#include "sbi_ecall_interface.h"
-> +#include "chardev/char-fe.h"
-> +#include "semihosting/console.h"
->
->  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx)
->  {
-> @@ -365,9 +368,47 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
->      return true;
->  }
->
-> +static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
-> +{
-> +    int ret = 0;
-> +    unsigned char ch;
-> +    switch (run->riscv_sbi.extension_id) {
-> +    case SBI_EXT_0_1_CONSOLE_PUTCHAR:
-> +        ch = run->riscv_sbi.args[0];
-> +        qemu_semihosting_log_out((const char *)&ch, sizeof(ch));
 
-Hmmm... We print to the semihosting
-
-> +        break;
-> +    case SBI_EXT_0_1_CONSOLE_GETCHAR:
-> +        ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
-
-but then read from the first serial device.
-
-That seems a little strange. Would it be better to just print to serial as well?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +        if (ret == sizeof(ch)) {
-> +            run->riscv_sbi.args[0] = ch;
-> +        } else {
-> +            run->riscv_sbi.args[0] = -1;
-> +        }
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_UNIMP,
-> +                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
-> +                      __func__, run->riscv_sbi.extension_id);
-> +        ret = -1;
-> +        break;
-> +    }
-> +    return ret;
-> +}
-> +
->  int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+> ---
+>  target/riscv/kvm.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 3c20ec5ad3..6c0306bd2b 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -42,6 +42,7 @@
+>  #include "chardev/char-fe.h"
+>  #include "semihosting/console.h"
+>  #include "migration/migration.h"
+> +#include "sysemu/runstate.h"
+>
+>  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx)
 >  {
-> -    return 0;
-> +    int ret = 0;
-> +    switch (run->exit_reason) {
-> +    case KVM_EXIT_RISCV_SBI:
-> +        ret = kvm_riscv_handle_sbi(cs, run);
-> +        break;
-> +    default:
-> +        qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
-> +                      __func__, run->exit_reason);
-> +        ret = -1;
-> +        break;
-> +    }
-> +    return ret;
+> @@ -378,6 +379,17 @@ unsigned long kvm_arch_vcpu_id(CPUState *cpu)
+>      return cpu->cpu_index;
 >  }
 >
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
-> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
-> new file mode 100644
-> index 0000000000..fb1a3fa8f2
-> --- /dev/null
-> +++ b/target/riscv/sbi_ecall_interface.h
-> @@ -0,0 +1,72 @@
-> +/*
-> + * SPDX-License-Identifier: BSD-2-Clause
-> + *
-> + * Copyright (c) 2019 Western Digital Corporation or its affiliates.
-> + *
-> + * Authors:
-> + *   Anup Patel <anup.patel@wdc.com>
-> + */
+> +static void kvm_riscv_vm_state_change(void *opaque, bool running, RunState state)
+> +{
+> +    CPUState *cs = opaque;
 > +
-> +#ifndef __SBI_ECALL_INTERFACE_H__
-> +#define __SBI_ECALL_INTERFACE_H__
+> +    if (running) {
+> +        kvm_riscv_put_regs_timer(cs);
+> +    } else {
+> +        kvm_riscv_get_regs_timer(cs);
+> +    }
+> +}
 > +
-> +/* clang-format off */
+>  void kvm_arch_init_irq_routing(KVMState *s)
+>  {
+>  }
+> @@ -390,6 +402,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+>      CPURISCVState *env = &cpu->env;
+>      uint64_t id;
+>
+> +    qemu_add_vm_change_state_handler(kvm_riscv_vm_state_change, cs);
 > +
-> +/* SBI Extension IDs */
-> +#define SBI_EXT_0_1_SET_TIMER           0x0
-> +#define SBI_EXT_0_1_CONSOLE_PUTCHAR     0x1
-> +#define SBI_EXT_0_1_CONSOLE_GETCHAR     0x2
-> +#define SBI_EXT_0_1_CLEAR_IPI           0x3
-> +#define SBI_EXT_0_1_SEND_IPI            0x4
-> +#define SBI_EXT_0_1_REMOTE_FENCE_I      0x5
-> +#define SBI_EXT_0_1_REMOTE_SFENCE_VMA   0x6
-> +#define SBI_EXT_0_1_REMOTE_SFENCE_VMA_ASID 0x7
-> +#define SBI_EXT_0_1_SHUTDOWN            0x8
-> +#define SBI_EXT_BASE                    0x10
-> +#define SBI_EXT_TIME                    0x54494D45
-> +#define SBI_EXT_IPI                     0x735049
-> +#define SBI_EXT_RFENCE                  0x52464E43
-> +#define SBI_EXT_HSM                     0x48534D
-> +
-> +/* SBI function IDs for BASE extension*/
-> +#define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
-> +#define SBI_EXT_BASE_GET_IMP_ID         0x1
-> +#define SBI_EXT_BASE_GET_IMP_VERSION    0x2
-> +#define SBI_EXT_BASE_PROBE_EXT          0x3
-> +#define SBI_EXT_BASE_GET_MVENDORID      0x4
-> +#define SBI_EXT_BASE_GET_MARCHID        0x5
-> +#define SBI_EXT_BASE_GET_MIMPID         0x6
-> +
-> +/* SBI function IDs for TIME extension*/
-> +#define SBI_EXT_TIME_SET_TIMER          0x0
-> +
-> +/* SBI function IDs for IPI extension*/
-> +#define SBI_EXT_IPI_SEND_IPI            0x0
-> +
-> +/* SBI function IDs for RFENCE extension*/
-> +#define SBI_EXT_RFENCE_REMOTE_FENCE_I       0x0
-> +#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA    0x1
-> +#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID  0x2
-> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA   0x3
-> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA_VMID 0x4
-> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA   0x5
-> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID 0x6
-> +
-> +/* SBI function IDs for HSM extension */
-> +#define SBI_EXT_HSM_HART_START          0x0
-> +#define SBI_EXT_HSM_HART_STOP           0x1
-> +#define SBI_EXT_HSM_HART_GET_STATUS     0x2
-> +
-> +#define SBI_HSM_HART_STATUS_STARTED     0x0
-> +#define SBI_HSM_HART_STATUS_STOPPED     0x1
-> +#define SBI_HSM_HART_STATUS_START_PENDING   0x2
-> +#define SBI_HSM_HART_STATUS_STOP_PENDING    0x3
-> +
-> +#define SBI_SPEC_VERSION_MAJOR_OFFSET   24
-> +#define SBI_SPEC_VERSION_MAJOR_MASK     0x7f
-> +#define SBI_SPEC_VERSION_MINOR_MASK     0xffffff
-> +#define SBI_EXT_VENDOR_START            0x09000000
-> +#define SBI_EXT_VENDOR_END              0x09FFFFFF
-> +/* clang-format on */
-> +
-> +#endif
+>      id = kvm_riscv_reg_id(env, KVM_REG_RISCV_CONFIG, KVM_REG_RISCV_CONFIG_REG(isa));
+>      ret = kvm_get_one_reg(cs, id, &isa);
+>      if (ret) {
 > --
 > 2.19.1
 >
