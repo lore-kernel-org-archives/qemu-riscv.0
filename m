@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5E7T-0006Qr-MW
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 16:46:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38718)
+	id 1n5E8Y-0000DR-7Y
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 16:48:02 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39014)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5E7R-0006JW-FJ; Wed, 05 Jan 2022 16:46:53 -0500
-Received: from [2607:f8b0:4864:20::d34] (port=34705
+ id 1n5E8Q-0008Su-Qk; Wed, 05 Jan 2022 16:47:55 -0500
+Received: from [2607:f8b0:4864:20::d34] (port=35524
  helo=mail-io1-xd34.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5E7N-00070X-J5; Wed, 05 Jan 2022 16:46:53 -0500
-Received: by mail-io1-xd34.google.com with SMTP id e128so805156iof.1;
- Wed, 05 Jan 2022 13:46:46 -0800 (PST)
+ id 1n5E8P-0007Xy-CU; Wed, 05 Jan 2022 16:47:54 -0500
+Received: by mail-io1-xd34.google.com with SMTP id y70so797736iof.2;
+ Wed, 05 Jan 2022 13:47:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PPbwE9lwiJDySNWFfaJNy7P7zChfAc3AdqXJXQIDvCQ=;
- b=e/bm/V30eGpba8aCs0rWafDS2zoSWCqdPhvo7CTvONvzIz17ZZLH3/ajltdA/K+2qx
- qfnloslepszvWGaO7QYmRLl83TBp2Ki8SlNJaepa2iXzo/Z42BV8q8+Imk4svwukDOnV
- jL28Lz2Mdv3dEOQpmNhc/1U4+3ZK53Wn1+Cn3glcL4Rzt3jt/nh40aAlbah5nmLuFL9R
- dcZmYS58y894HD1N31wVgv+ebKsRQC7ot0z0SeLYjWCpk0W+jFNmfNUFa2P+cGnhSrNt
- bOFlLtsDRYxLr3oeNqcf0OJ80miIJJLHFY6oMrAXtNEYqywMgzxBLGUKTazfGS8fzKnK
- lc7Q==
+ :cc; bh=7/GzFftVx1E45hDuy01Z7N4xKMCwq45/2deZ9rvtfNs=;
+ b=ZULu8RVHeXdVVyow7p/YnSarVLCJZKPoEGq/Ad8ZmUle/IgMpu3PH1lAIl2qd28sfA
+ ysME9+DHXsywKrFR6Huc9WeoslftfRymSOqDPEnjyTd9j+T9xND3Mx9YHW1F+hmHWkRz
+ 00t5d4Zp4wvsonz9C8AAcbU64VcpFVsH88qfB3VWjvEfltiK8GC9Bfd/sT9QF2Rkl6tP
+ VtLLE4T+NyZtsvb6cN9VCWOLngFMUh7GA250jJ/haFRZR1dk+tia+fcpY/Rzb3GO5pNM
+ hb4r06JsTfMMKC7BhCEsC7OM3Zp8HyZ+/JklL0VsOF8cA/Z6Dbn6GDb2gejOISICOQqk
+ 2o7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=PPbwE9lwiJDySNWFfaJNy7P7zChfAc3AdqXJXQIDvCQ=;
- b=aCDVXvYKAqd16NEAK6EosHhrzr9ev8aKx07/qXEImQB64NKh3w/lGWLmiwFegJ9+Ry
- OmGNSNt2G0Ieu/hwqecQA2P/wx8CWAu+zlk/TwoqE+hMCI8mwdvoKU9huQZphEqYolco
- NDcqqBBHpMGQlTgDyceO2sRtShpK4vxeNHOK0su5lUHzmronF5dcpHackrfn7GKOAb9i
- xCX5S0Xn1PpYJrKRHoINQ+RncSw1QiT9ZDvC1Yu1SguooOByPiYS5bvbK22wCIwvdpE4
- 0uOgHzgon05zHKgCPo4BRImso/GW+liNSw+AvpcH6TjTFtSyv525pwfasblzK9W1Xpuz
- 2iMQ==
-X-Gm-Message-State: AOAM532APCl7JljmedoaEFo1Ckjh3LUvFvpeJ5/RLAEmRiB2LQK/ilC4
- WfflIAfzQQCeuwMzYe9ZMN+teAIkSxEpVVEfDMzS3Zbu7xgHFQMZ
-X-Google-Smtp-Source: ABdhPJxh6n2IQEUvhvCqcygPOwy12CcrO2mFhidP5k2fWG++rS8+9hFwBAuEEUrihcyZju+RiTIuMIG59aUxuT2Fk+0=
-X-Received: by 2002:a05:6602:140c:: with SMTP id
- t12mr26569296iov.187.1641419205895; 
- Wed, 05 Jan 2022 13:46:45 -0800 (PST)
+ bh=7/GzFftVx1E45hDuy01Z7N4xKMCwq45/2deZ9rvtfNs=;
+ b=Tr9G3xLcYxaB8GeNVk89QboEgiurR07DZg8d/SyxPaYQ9mGORpWloJN0DgaRLyWLaT
+ fvwM+Cjd2rC/VKzDge82m86YklCjc52rW+Lv5UKFyF4+clwhHGL4sme/j8+iDP4uoYIm
+ dxEU06iMGW5mE36+Igfi4QP4oJzXZB8TPzFmZyHJFg660hs1HCM6Q1DeRxgc9jIPJUES
+ Xvy0yL/ssy/dfr71O6/ZozizOpet+Rz/DzxKpUU+3RARy2uo7ceHrfX++9lQphJe/QpW
+ Xz8A/wOArasC7HX0x4Hh5T6EJvXtmvLgoCVK/jMXFGpMZbaBACXWcKNVzc2iRkm1HFyA
+ nQzw==
+X-Gm-Message-State: AOAM5339CrnV9XyprW4qQ1xSppb+Gw4vaDFZkpPz9hxeGr6A8BOfHOb/
+ p8iPk9sJCi58+4ryJlHQ+J591d19t6zSMoevMBZzwaY31h905ZpD
+X-Google-Smtp-Source: ABdhPJyFFAbJbmG9XqYh6fyc1hmkJjSuof2vh10eSHlw9yNDJuMDhP5x2zW0XgUMR95lIfFBkaYB4ujM/+yx9G4KGQU=
+X-Received: by 2002:a05:6638:38d:: with SMTP id
+ y13mr24172899jap.318.1641419271943; 
+ Wed, 05 Jan 2022 13:47:51 -0800 (PST)
 MIME-Version: 1.0
 References: <20220105022247.21131-1-frank.chang@sifive.com>
- <20220105022247.21131-3-frank.chang@sifive.com>
-In-Reply-To: <20220105022247.21131-3-frank.chang@sifive.com>
+ <20220105022247.21131-4-frank.chang@sifive.com>
+In-Reply-To: <20220105022247.21131-4-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jan 2022 07:46:19 +1000
-Message-ID: <CAKmqyKME8+jeYxeu4fc4EARBavSBbJ4sEvGo+ArMOag74WGfCA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] target/riscv: rvv-1.0: Call the correct RVF/RVD
- check function for widening fp/int type-convert insns
+Date: Thu, 6 Jan 2022 07:47:25 +1000
+Message-ID: <CAKmqyKO_rQn9j5zn0K_HSRuC5xb99mxGvzc-P1tnVhWo9iGQ3Q@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] target/riscv: rvv-1.0: Call the correct RVF/RVD
+ check function for narrowing fp/int type-convert insns
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -80,20 +80,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 21:46:53 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 21:48:01 -0000
 
-On Wed, Jan 5, 2022 at 12:25 PM <frank.chang@sifive.com> wrote:
+On Wed, Jan 5, 2022 at 12:24 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> vfwcvt.xu.f.v, vfwcvt.x.f.v, vfwcvt.rtz.xu.f.v and vfwcvt.rtz.x.f.v
-> convert single-width floating-point to double-width integer.
-> Therefore, should use require_rvf() to check whether RVF/RVD is enabled.
+> vfncvt.f.xu.w, vfncvt.f.x.w convert double-width integer to single-width
+> floating-point. Therefore, should use require_rvf() to check whether
+> RVF/RVD is enabled.
 >
-> vfwcvt.f.xu.v, vfwcvt.f.x.v convert single-width integer to double-width
-> floating-point, and vfwcvt.f.f.v convert double-width floating-point to
-> single-width floating-point. Therefore, should use require_scale_rvf() to
-> check whether RVF/RVD is enabled.
+> vfncvt.f.f.w, vfncvt.rod.f.f.w convert double-width floating-point to
+> single-width integer. Therefore, should use require_scale_rvf() to check
+> whether RVF/RVD is enabled.
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
@@ -102,67 +101,66 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 34 ++++++++++++++++++-------
->  1 file changed, 25 insertions(+), 9 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 32 ++++++++++++++++++-------
+>  1 file changed, 24 insertions(+), 8 deletions(-)
 >
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 8d92243f2b..f1b44ccad2 100644
+> index f1b44ccad2..6c285c958b 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2613,16 +2613,27 @@ GEN_OPFV_CVT_TRANS(vfcvt_rtz_x_f_v, vfcvt_x_f_v, RISCV_FRM_RTZ)
->  static bool opfv_widen_check(DisasContext *s, arg_rmr *a)
+> @@ -2719,17 +2719,29 @@ GEN_OPFXV_WIDEN_TRANS(vfwcvt_f_x_v)
+>  static bool opfv_narrow_check(DisasContext *s, arg_rmr *a)
 >  {
 >      return require_rvv(s) &&
-> -           require_scale_rvf(s) &&
-> -           (s->sew != MO_8) &&
+> -           require_rvf(s) &&
+> -           (s->sew != MO_64) &&
 >             vext_check_isa_ill(s) &&
->             vext_check_ds(s, a->rd, a->rs2, a->vm);
+>             /* OPFV narrowing instructions ignore vs1 check */
+>             vext_check_sd(s, a->rd, a->rs2, a->vm);
 >  }
 >
-> -#define GEN_OPFV_WIDEN_TRANS(NAME, HELPER, FRM)                    \
-> +static bool opxfv_widen_check(DisasContext *s, arg_rmr *a)
+> -#define GEN_OPFV_NARROW_TRANS(NAME, HELPER, FRM)                   \
+> +static bool opfxv_narrow_check(DisasContext *s, arg_rmr *a)
 > +{
-> +    return opfv_widen_check(s, a) &&
-> +           require_rvf(s);
+> +    return opfv_narrow_check(s, a) &&
+> +           require_rvf(s) &&
+> +           (s->sew != MO_64);
 > +}
 > +
-> +static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
+> +static bool opffv_narrow_check(DisasContext *s, arg_rmr *a)
 > +{
-> +    return opfv_widen_check(s, a) &&
+> +    return opfv_narrow_check(s, a) &&
 > +           require_scale_rvf(s) &&
 > +           (s->sew != MO_8);
 > +}
 > +
-> +#define GEN_OPFV_WIDEN_TRANS(NAME, CHECK, HELPER, FRM)             \
+> +#define GEN_OPFV_NARROW_TRANS(NAME, CHECK, HELPER, FRM)            \
 >  static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
 >  {                                                                  \
-> -    if (opfv_widen_check(s, a)) {                                  \
+> -    if (opfv_narrow_check(s, a)) {                                 \
 > +    if (CHECK(s, a)) {                                             \
 >          if (FRM != RISCV_FRM_DYN) {                                \
 >              gen_set_rm(s, RISCV_FRM_DYN);                          \
 >          }                                                          \
-> @@ -2649,12 +2660,17 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+> @@ -2756,11 +2768,15 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
 >      return false;                                                  \
 >  }
 >
-> -GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_DYN)
-> -GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v, vfwcvt_x_f_v, RISCV_FRM_DYN)
-> -GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v, vfwcvt_f_f_v, RISCV_FRM_DYN)
-> +GEN_OPFV_WIDEN_TRANS(vfwcvt_xu_f_v, opxfv_widen_check, vfwcvt_xu_f_v,
-> +                     RISCV_FRM_DYN)
-> +GEN_OPFV_WIDEN_TRANS(vfwcvt_x_f_v, opxfv_widen_check, vfwcvt_x_f_v,
-> +                     RISCV_FRM_DYN)
-> +GEN_OPFV_WIDEN_TRANS(vfwcvt_f_f_v, opffv_widen_check, vfwcvt_f_f_v,
-> +                     RISCV_FRM_DYN)
->  /* Reuse the helper functions from vfwcvt.xu.f.v and vfwcvt.x.f.v */
-> -GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_xu_f_v, vfwcvt_xu_f_v, RISCV_FRM_RTZ)
-> -GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_x_f_v, vfwcvt_x_f_v, RISCV_FRM_RTZ)
-> +GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_xu_f_v, opxfv_widen_check, vfwcvt_xu_f_v,
-> +                     RISCV_FRM_RTZ)
-> +GEN_OPFV_WIDEN_TRANS(vfwcvt_rtz_x_f_v, opxfv_widen_check, vfwcvt_x_f_v,
-> +                     RISCV_FRM_RTZ)
+> -GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, vfncvt_f_xu_w, RISCV_FRM_DYN)
+> -GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, vfncvt_f_x_w, RISCV_FRM_DYN)
+> -GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, vfncvt_f_f_w, RISCV_FRM_DYN)
+> +GEN_OPFV_NARROW_TRANS(vfncvt_f_xu_w, opfxv_narrow_check, vfncvt_f_xu_w,
+> +                      RISCV_FRM_DYN)
+> +GEN_OPFV_NARROW_TRANS(vfncvt_f_x_w, opfxv_narrow_check, vfncvt_f_x_w,
+> +                      RISCV_FRM_DYN)
+> +GEN_OPFV_NARROW_TRANS(vfncvt_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
+> +                      RISCV_FRM_DYN)
+>  /* Reuse the helper function from vfncvt.f.f.w */
+> -GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, vfncvt_f_f_w, RISCV_FRM_ROD)
+> +GEN_OPFV_NARROW_TRANS(vfncvt_rod_f_f_w, opffv_narrow_check, vfncvt_f_f_w,
+> +                      RISCV_FRM_ROD)
 >
->  static bool opfxv_widen_check(DisasContext *s, arg_rmr *a)
+>  static bool opxfv_narrow_check(DisasContext *s, arg_rmr *a)
 >  {
 > --
 > 2.31.1
