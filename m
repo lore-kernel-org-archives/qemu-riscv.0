@@ -1,101 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5ENC-0001XN-4P
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 17:03:10 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42404)
+	id 1n5EO4-0002sP-Sz
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 17:04:04 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42628)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=9978dc08b=alistair.francis@opensource.wdc.com>)
- id 1n5EN7-0001Ul-C8
- for qemu-riscv@nongnu.org; Wed, 05 Jan 2022 17:03:05 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:55126)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=9978dc08b=alistair.francis@opensource.wdc.com>)
- id 1n5EN4-0004wo-Kl
- for qemu-riscv@nongnu.org; Wed, 05 Jan 2022 17:03:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1641420182; x=1672956182;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ZGx1B3MgM+U6Kfsl3iEYfy3ZvGCUTB6i+cs1K5eEnAk=;
- b=g/j4PwrhNJmGnYTPCOtrtgNdoM3o/P/cz3lG5/6w3S/wUz2hMerMtDRm
- xgWq9cJyoPYWajwO981X9nPvA16vCRIpm3vdrMn6rNeUj5x629H3e//5I
- u0TmjnNODrj3B4Su1I9+gzTS/gedKVY0qMXu25+4fmkbn3VTWgoyKlPv3
- flfcaEYE0YucbkQ8uZmtqfBkHX51O321c1gwVTKnSi3W/rJTwnMBonTO4
- FT04AGfDbr2mc96gvJJtjCPPks0S343up9a6eu7klU74DmH9kAHEEJDLV
- hObkBFQap8e6OiM4px3TSuHbVs8VWroDS7V9S9VU8NUPEad1jXHMGMpDA A==;
-X-IronPort-AV: E=Sophos;i="5.88,265,1635177600"; d="scan'208";a="293830348"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 06 Jan 2022 05:40:19 +0800
-IronPort-SDR: AP1EEKfbuIHqeMwOYehPk8ONUtwd22kkPKFl8GpAKiEZoSvoB07Ls44nT1CcOkX9UnJvhoxWA1
- u5H8hk4RYw/mRsac8h19bDkh42tVTpD9A/tkbpcX8UoqM4FhZU8gcNezs6SmQjN6tXXNuTivKj
- c/3E9/xB9X6Gqoc7KjRQ2ZuD2JySbkODEqfQNBw0YtPN85NiJz8EnfydUQb8gzVUmJWOxQb8JO
- 0YhK6c92kNmx+KOFRqIATmXRqLlNL3Q4y6BdliBVe1PVNd7mwvvBN1Lz44Cj44LCseXvyYH+pY
- VLqlHk9SGlhyQdw5z6P24NHl
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Jan 2022 13:14:11 -0800
-IronPort-SDR: 8+vTujYICao8bcTTg/8HMBC3NS+dWXwi6Ovnf+ewcNHpqvXKcVo9pSOVoLqNEgy7Qe/cfQVMM/
- CVlE3nlRxFkguBYN8PukcmwT6ZRBsJ1Lorbz5Dk6yDggDZ7TEDo8qkV208VZ4soTTk6zSHh92B
- lrfCqooNLOArqTWkoUHaoq52/LXbyHYfy6fPhbLLm93sy5Vxywcsl1BBdx4D0L9vE46FchdBls
- eiI3r4dEhx6TGs8IDWoJjD6fJX1oRqsuzpjfwAi/J0SPwByk0t4C7r2s3w3PLb8sfttYBclZqE
- Btc=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Jan 2022 13:40:20 -0800
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4JTjZW25Cfz1VSkd
- for <qemu-riscv@nongnu.org>; Wed,  5 Jan 2022 13:40:19 -0800 (PST)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1641418818; x=1644010819; bh=ZGx1B3MgM+U6Kfsl3i
- EYfy3ZvGCUTB6i+cs1K5eEnAk=; b=HwTyC69yi/HyiZeCZdY6VHp/HP6oFlWV6a
- aaIHLUb9xQn3uMtbMwBI6crIA29NjdRu1W6zNUHUgY1WHcqvONoQgVrVU2dfX9hr
- 38zXA87Hvep0QiWg5Pg1xQddHPe1wUL1YL/CwIgwfRV51HJSTaOI+MU0KXppjiMP
- cfWLnE/AH6kPuGUBc7JkXAWS0bSIlQVxWvQXs1rnmjgbUXueENCWmLEVb9Iz+h1G
- ZYmvY/uQ99LnJ45EHADOrzFDfDUk9x0qUvylvJaaQfKDryW62Flk/MRqnBoP6ET9
- JD2Se8VaNRiEzYxq+dcKFVOjrXZR3X9XypH5SQwqnFr0T/LNoMSQ==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id yosnBtysSeBO for <qemu-riscv@nongnu.org>;
- Wed,  5 Jan 2022 13:40:18 -0800 (PST)
-Received: from toolbox.wdc.com (unknown [10.225.165.73])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4JTjZP01mwz1VSkV;
- Wed,  5 Jan 2022 13:40:12 -0800 (PST)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, Palmer Dabbelt <palmer@dabbelt.com>,
- alistair23@gmail.com, Alistair Francis <alistair.francis@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Anup Patel <anup.patel@wdc.com>
-Subject: [PATCH v4 5/8] target/riscv: Mark the Hypervisor extension as non
- experimental
-Date: Thu,  6 Jan 2022 07:39:34 +1000
-Message-Id: <20220105213937.1113508-6-alistair.francis@opensource.wdc.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20220105213937.1113508-1-alistair.francis@opensource.wdc.com>
-References: <20220105213937.1113508-1-alistair.francis@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1n5EO2-0002jI-I4; Wed, 05 Jan 2022 17:04:02 -0500
+Received: from [2607:f8b0:4864:20::129] (port=47090
+ helo=mail-il1-x129.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1n5ENz-0006Bp-Sz; Wed, 05 Jan 2022 17:04:02 -0500
+Received: by mail-il1-x129.google.com with SMTP id e8so588563ilm.13;
+ Wed, 05 Jan 2022 14:03:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0l4CifLn/vQpDug8sVembxTHnVdIt3FA7HaSgzF02kM=;
+ b=G9B9ngw2+C+rrrZ0fNYLacRDsEpoLsAdL+VTtbE6x2GspJh3PUuCng+HZLj4vZELIQ
+ grtdXbgWONl7LDfW2AEdtzMDkpMvFm8VM+zwn3cdjUbmQLNW09KeS/uFZg8X28sfJIPC
+ KXxJCZFRK7/bWmMDPM6OMaBkwy41l2LuROCQ32l9FVM0F8zeOjnCV6GAb79IPlcjkUv6
+ LAWfJmeRxEEYtEnpJ3g1QME7Gx0zdoMocozwHa0aSKESPwxZfFTqzaMSaTqZP5z2d1dw
+ F0NgHDZm/W2ii96YZBhkwNDAxNfJYPoLmHkhL2hKLfqlVJoGA/3ZNLS2Y/Ysy52MHy3M
+ 5RSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0l4CifLn/vQpDug8sVembxTHnVdIt3FA7HaSgzF02kM=;
+ b=4IIV6MDvx7F/ot7u2zyXuzK1QTOQPiIfTF3vMmSkLg+XgUb4dzuLrnX3ZQQTiYPaVC
+ KsMlaJHsX1Ev23PIYlB/8Iytdxx5icqneE+694gG6EAtd67nQOQ3CypcdZnxGtSbW4II
+ eT4BUU6xMw7DgPhQ2LByf75uMu0JOdXSZmluca2uam0CoVYTUgB26RS9cYSUFGGEyjzG
+ 7QvgIpXVCRPE9RkhW5LIXnQAzUI6/aeNkaw+HlADS2XO6L+Gc8Y6AawZYBKJoan/4D+W
+ W04S4Gaqo7EpB889/HidaSax9ieT23Sb7LMv0oTuAj4UEf9lGAlOSYyayrJqOioiIypC
+ BXMQ==
+X-Gm-Message-State: AOAM532+TN+DGibvspUY4XPskTMOPKe/5LAujG9qUGG2hdut3YWNKYBz
+ 5xc2pA+uZQeQdCbfr5YNoDoV0rl67wbKMWZ341g=
+X-Google-Smtp-Source: ABdhPJxqYlNe0qCnG/rahQ2aNhVsFb61xIb8f3Rr9II4KBnCJ9O6OZXqCDqKEfR8uFAoD4xv5so0pz/zGPhOi/eRlWA=
+X-Received: by 2002:a05:6e02:194b:: with SMTP id
+ x11mr2612704ilu.208.1641420238171; 
+ Wed, 05 Jan 2022 14:03:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=9978dc08b=alistair.francis@opensource.wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20211220130919.413-1-jiangyifei@huawei.com>
+ <20211220130919.413-9-jiangyifei@huawei.com>
+In-Reply-To: <20211220130919.413-9-jiangyifei@huawei.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 6 Jan 2022 08:03:32 +1000
+Message-ID: <CAKmqyKOtOFmy1_9W785DZiFCc=Us6O_pVpLsBOyXOk32zansnA@mail.gmail.com>
+Subject: Re: [PATCH v3 08/12] target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+To: Yifei Jiang <jiangyifei@huawei.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ kvm-riscv@lists.infradead.org, "open list:Overall" <kvm@vger.kernel.org>,
+ libvir-list@redhat.com, 
+ Anup Patel <anup.patel@wdc.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ fanliang@huawei.com, 
+ "Wubin (H)" <wu.wubin@huawei.com>, wanghaibin.wang@huawei.com,
+ wanbo13@huawei.com, Mingwang Li <limingwang@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::129
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,40 +81,175 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 22:03:05 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 22:04:03 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+On Tue, Dec 21, 2021 at 3:41 AM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
+>
+> Use char-fe to handle console sbi call, which implement early
+> console io while apply 'earlycon=sbi' into kernel parameters.
+>
+> Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
+> Signed-off-by: Mingwang Li <limingwang@huawei.com>
+> Reviewed-by: Anup Patel <anup.patel@wdc.com>
+> ---
+>  target/riscv/kvm.c                 | 43 +++++++++++++++++-
+>  target/riscv/sbi_ecall_interface.h | 72 ++++++++++++++++++++++++++++++
+>  2 files changed, 114 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/sbi_ecall_interface.h
+>
+> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+> index 0027f11f45..4d08669c81 100644
+> --- a/target/riscv/kvm.c
+> +++ b/target/riscv/kvm.c
+> @@ -38,6 +38,9 @@
+>  #include "qemu/log.h"
+>  #include "hw/loader.h"
+>  #include "kvm_riscv.h"
+> +#include "sbi_ecall_interface.h"
+> +#include "chardev/char-fe.h"
+> +#include "semihosting/console.h"
+>
+>  static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx)
+>  {
+> @@ -365,9 +368,47 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
+>      return true;
+>  }
+>
+> +static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+> +{
+> +    int ret = 0;
+> +    unsigned char ch;
+> +    switch (run->riscv_sbi.extension_id) {
+> +    case SBI_EXT_0_1_CONSOLE_PUTCHAR:
+> +        ch = run->riscv_sbi.args[0];
+> +        qemu_semihosting_log_out((const char *)&ch, sizeof(ch));
 
-The Hypervisor spec is now frozen, so remove the experimental tag.
+Hmmm... We print to the semihosting
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Anup Patel <anup.patel@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
----
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> +        break;
+> +    case SBI_EXT_0_1_CONSOLE_GETCHAR:
+> +        ret = qemu_chr_fe_read_all(serial_hd(0)->be, &ch, sizeof(ch));
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6ef3314bce..9ea67bedd3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -627,6 +627,7 @@ static Property riscv_cpu_properties[] =3D {
-     DEFINE_PROP_BOOL("s", RISCVCPU, cfg.ext_s, true),
-     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
-     DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
-+    DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-@@ -645,7 +646,6 @@ static Property riscv_cpu_properties[] =3D {
-     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
--    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     /* ePMP 0.9.3 */
-     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
---=20
-2.31.1
+but then read from the first serial device.
 
+That seems a little strange. Would it be better to just print to serial as well?
+
+Alistair
+
+> +        if (ret == sizeof(ch)) {
+> +            run->riscv_sbi.args[0] = ch;
+> +        } else {
+> +            run->riscv_sbi.args[0] = -1;
+> +        }
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_UNIMP,
+> +                      "%s: un-handled SBI EXIT, specific reasons is %lu\n",
+> +                      __func__, run->riscv_sbi.extension_id);
+> +        ret = -1;
+> +        break;
+> +    }
+> +    return ret;
+> +}
+> +
+>  int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+>  {
+> -    return 0;
+> +    int ret = 0;
+> +    switch (run->exit_reason) {
+> +    case KVM_EXIT_RISCV_SBI:
+> +        ret = kvm_riscv_handle_sbi(cs, run);
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_UNIMP, "%s: un-handled exit reason %d\n",
+> +                      __func__, run->exit_reason);
+> +        ret = -1;
+> +        break;
+> +    }
+> +    return ret;
+>  }
+>
+>  void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+> diff --git a/target/riscv/sbi_ecall_interface.h b/target/riscv/sbi_ecall_interface.h
+> new file mode 100644
+> index 0000000000..fb1a3fa8f2
+> --- /dev/null
+> +++ b/target/riscv/sbi_ecall_interface.h
+> @@ -0,0 +1,72 @@
+> +/*
+> + * SPDX-License-Identifier: BSD-2-Clause
+> + *
+> + * Copyright (c) 2019 Western Digital Corporation or its affiliates.
+> + *
+> + * Authors:
+> + *   Anup Patel <anup.patel@wdc.com>
+> + */
+> +
+> +#ifndef __SBI_ECALL_INTERFACE_H__
+> +#define __SBI_ECALL_INTERFACE_H__
+> +
+> +/* clang-format off */
+> +
+> +/* SBI Extension IDs */
+> +#define SBI_EXT_0_1_SET_TIMER           0x0
+> +#define SBI_EXT_0_1_CONSOLE_PUTCHAR     0x1
+> +#define SBI_EXT_0_1_CONSOLE_GETCHAR     0x2
+> +#define SBI_EXT_0_1_CLEAR_IPI           0x3
+> +#define SBI_EXT_0_1_SEND_IPI            0x4
+> +#define SBI_EXT_0_1_REMOTE_FENCE_I      0x5
+> +#define SBI_EXT_0_1_REMOTE_SFENCE_VMA   0x6
+> +#define SBI_EXT_0_1_REMOTE_SFENCE_VMA_ASID 0x7
+> +#define SBI_EXT_0_1_SHUTDOWN            0x8
+> +#define SBI_EXT_BASE                    0x10
+> +#define SBI_EXT_TIME                    0x54494D45
+> +#define SBI_EXT_IPI                     0x735049
+> +#define SBI_EXT_RFENCE                  0x52464E43
+> +#define SBI_EXT_HSM                     0x48534D
+> +
+> +/* SBI function IDs for BASE extension*/
+> +#define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+> +#define SBI_EXT_BASE_GET_IMP_ID         0x1
+> +#define SBI_EXT_BASE_GET_IMP_VERSION    0x2
+> +#define SBI_EXT_BASE_PROBE_EXT          0x3
+> +#define SBI_EXT_BASE_GET_MVENDORID      0x4
+> +#define SBI_EXT_BASE_GET_MARCHID        0x5
+> +#define SBI_EXT_BASE_GET_MIMPID         0x6
+> +
+> +/* SBI function IDs for TIME extension*/
+> +#define SBI_EXT_TIME_SET_TIMER          0x0
+> +
+> +/* SBI function IDs for IPI extension*/
+> +#define SBI_EXT_IPI_SEND_IPI            0x0
+> +
+> +/* SBI function IDs for RFENCE extension*/
+> +#define SBI_EXT_RFENCE_REMOTE_FENCE_I       0x0
+> +#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA    0x1
+> +#define SBI_EXT_RFENCE_REMOTE_SFENCE_VMA_ASID  0x2
+> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA   0x3
+> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_GVMA_VMID 0x4
+> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA   0x5
+> +#define SBI_EXT_RFENCE_REMOTE_HFENCE_VVMA_ASID 0x6
+> +
+> +/* SBI function IDs for HSM extension */
+> +#define SBI_EXT_HSM_HART_START          0x0
+> +#define SBI_EXT_HSM_HART_STOP           0x1
+> +#define SBI_EXT_HSM_HART_GET_STATUS     0x2
+> +
+> +#define SBI_HSM_HART_STATUS_STARTED     0x0
+> +#define SBI_HSM_HART_STATUS_STOPPED     0x1
+> +#define SBI_HSM_HART_STATUS_START_PENDING   0x2
+> +#define SBI_HSM_HART_STATUS_STOP_PENDING    0x3
+> +
+> +#define SBI_SPEC_VERSION_MAJOR_OFFSET   24
+> +#define SBI_SPEC_VERSION_MAJOR_MASK     0x7f
+> +#define SBI_SPEC_VERSION_MINOR_MASK     0xffffff
+> +#define SBI_EXT_VENDOR_START            0x09000000
+> +#define SBI_EXT_VENDOR_END              0x09FFFFFF
+> +/* clang-format on */
+> +
+> +#endif
+> --
+> 2.19.1
+>
+>
 
