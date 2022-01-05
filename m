@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4wYY-0007Z5-P0
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:01:42 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58810)
+	id 1n4wYg-0007eW-UQ
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:01:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58836)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wYX-0007Yr-5E; Tue, 04 Jan 2022 22:01:41 -0500
-Received: from [2607:f8b0:4864:20::532] (port=45760
- helo=mail-pg1-x532.google.com)
+ id 1n4wYe-0007c8-PL; Tue, 04 Jan 2022 22:01:48 -0500
+Received: from [2607:f8b0:4864:20::1029] (port=43783
+ helo=mail-pj1-x1029.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wYV-0007OW-G4; Tue, 04 Jan 2022 22:01:40 -0500
-Received: by mail-pg1-x532.google.com with SMTP id f5so4954845pgk.12;
- Tue, 04 Jan 2022 19:01:38 -0800 (PST)
+ id 1n4wYZ-0007PS-Vw; Tue, 04 Jan 2022 22:01:46 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ a11-20020a17090a854b00b001b11aae38d6so5064621pjw.2; 
+ Tue, 04 Jan 2022 19:01:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=bwwm7MMG2W9lViBn22omkQyDlbrVWbdFwAfuyNMQXbA=;
- b=CIiA6Ty2rljP/DXQSKhEe+j5jmN2G5tlb0cf6zIO577jfN69SvEJyoUt10dCp3xAqz
- BFHDUBs8F/BMAJ4zhOY+ZJQAD/1QhHQ/v10s5gvmeubDp3VivP2aPPJPHxX0FSHW3s5L
- iwF4AvUveC05LaKbqDzNeiGRiCa5tPvfdFvKyfY4Bvfy3riSquOqns/Rh9U2UX6joAuF
- 3NOQ/+GXk0YM8G4xvUboXQUZT6BRSjPynrWlul+4TSUZztIrmhCjmCB/1SmXf6dOT3h9
- A1WqHPcHfWzB1JsO9BX0NeIqVhiOFfR/4yICXeRIf3JE89hnDAZtZk6Fspl0GeW9BTix
- s/CQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=jrAL6g1TphcXjMCq2zldzmFnpuJynAAzFwwf2uBTSZk=;
+ b=qdHdsHbRqx/V8KEO71KncmLPurE5FIhw/oHW7uPsiag5Dc/hO+AvsbrJ6cvAqdPqON
+ JO7a4H5bm9+h591UZLwXurKMlsG3SX14IOdd9dPObkQIn/nQZUNcxCH9+4UrI8nM1E5Q
+ cooslR0tNiqXFmdS8ysfsS2jhk9ZcukF8bv2Wv11Mw5sOFOcDwoTaa1ai9r2ZOEpQts0
+ XyzVM0BXRoTJ/L88rmmwq280nvMZgLK8NWz/NHgywlDEhmIWBb+j3gsNe8mmoQFvL7Ni
+ 1r1Rh4jZbUO9BET13A69V8gvq1QFAkNUGX9Q/A84m9vkHbEBe2efNgRkjo6Rto8xNg8q
+ OczQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=bwwm7MMG2W9lViBn22omkQyDlbrVWbdFwAfuyNMQXbA=;
- b=DDwW75OACpW2qIrtU3NLLiDvH9yX4oRRLGJ3jz+i6RBBJHEpJ1hL3xVDllL6QMzHs+
- OB+luLZEI6lbV5FwHX5ZZXtZOgoBgijf1mFYkCN0lEQfK3v8J7D3a1eKJ3vL8hCtzxO4
- G9m04OeAbDqxHPdBOULq5V5OZlz2VR0YcSJPIDlKzG+nIpaaJ2n6MzugGos5mE9O1t3Z
- cFdrVIr2etBytmfKJ7+on0Iv5SxJazbu3zD+M42Y/WryhmkEDwmfnONLKBp4Pwj4Z15D
- i3czaY4EWNMEqd4vSA0ia5Ec8tf8QkTKeINkHq1r1bm3F+iP2/lso5JisHW7F8YQ14H7
- cXDw==
-X-Gm-Message-State: AOAM532xXa49kiZbO/wMvoIZNkQK32Q8eT4MPMXUsC+8xP8UqWCPcTJJ
- GJ/CKjN54JH2WFd3/U72D3A=
-X-Google-Smtp-Source: ABdhPJyqaetU3BlLxAK2h/0uH5eb1/HzI9MTZ3jiBZn8TSbNDVqY0QDL8Y8PyyzW1LxeXXu4AU8YiA==
-X-Received: by 2002:a62:78d3:0:b0:4ba:7141:83e9 with SMTP id
- t202-20020a6278d3000000b004ba714183e9mr53460961pfc.83.1641351697217; 
- Tue, 04 Jan 2022 19:01:37 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jrAL6g1TphcXjMCq2zldzmFnpuJynAAzFwwf2uBTSZk=;
+ b=owqlr6UoCA4ULDb/Ti5i3tT+KLlDvgor9UyNeZyVyGX1lyhbATzdHJW0ei+mDbGis/
+ H8q3x4gVaR9U6ThkfLVWNmi/IGfECia/ylI44yKDiECZHlpGBAluXt7pcKV3IA282TCT
+ ht1bzRFYsynEK/LggpsEI5b7oprra7iptfTzbwNm/Uzbk/e/uRACwVvoWus1T/ZkSJ42
+ R48+qBXoB6VDwTN+UEgQ/w9rzO8GmoJZLGPMBU2vx0D7Zaas7Vr6F4CekdaShLAJvYKG
+ xNRASvik5uQjGph4ERkblxhPYwODtzAm0sB9Y1LEC2ExIU5da498atbLKOS6RkeH4k7V
+ f1hQ==
+X-Gm-Message-State: AOAM531vUhYTvbmPuE+XtbO83SGvt2jXpvkCjJwkmWsvaYbh+l0PsIE3
+ KAwGTYxZjg4w9n7lpCP2S6Y=
+X-Google-Smtp-Source: ABdhPJyyzqF7TjTv05xFneXy23U1S0u1h3Q9qmFh73EKHBuBwUo+ekOpnQsqz9NkoYCOz9pJ8ccb0Q==
+X-Received: by 2002:a17:90b:33d2:: with SMTP id
+ lk18mr1682773pjb.218.1641351701895; 
+ Tue, 04 Jan 2022 19:01:41 -0800 (PST)
 Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
  [147.11.176.192])
- by smtp.gmail.com with ESMTPSA id nu14sm23011pjb.17.2022.01.04.19.01.35
+ by smtp.gmail.com with ESMTPSA id nu14sm23011pjb.17.2022.01.04.19.01.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jan 2022 19:01:36 -0800 (PST)
+ Tue, 04 Jan 2022 19:01:41 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 0/7] target/riscv: Initial support for native debug feature
- via M-mode CSRs
-Date: Wed,  5 Jan 2022 11:01:19 +0800
-Message-Id: <20220105030126.778503-1-bin.meng@windriver.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v3 2/7] target/riscv: machine: Add debug state description
+Date: Wed,  5 Jan 2022 11:01:21 +0800
+Message-Id: <20220105030126.778503-3-bin.meng@windriver.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220105030126.778503-1-bin.meng@windriver.com>
+References: <20220105030126.778503-1-bin.meng@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::532
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1029
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -78,50 +81,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 03:01:41 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 03:01:49 -0000
 
+Add a subsection to machine.c to migrate debug CSR state.
 
-This adds initial support for the native debug via the Trigger Module,
-as defined in the RISC-V Debug Specification [1].
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Only "Address / Data Match" trigger (type 2) is implemented as of now,
-which is mainly used for hardware breakpoint and watchpoint. The number
-of type 2 triggers implemented is 2, which is the number that we can
-find in the SiFive U54/U74 cores.
+---
 
-[1] https://github.com/riscv/riscv-debug-spec/raw/master/riscv-debug-stable.pdf
-
-Changes in v3:
-- drop riscv_trigger_init(), which will be moved to patch #5
-- add riscv_trigger_init(), moved from patch #1 to this patch
-- enable debug feature by default for all CPUs
+(no changes since v2)
 
 Changes in v2:
 - new patch: add debug state description
-- use 0 instead of GETPC()
-- change the config option to 'disabled' by default
 
-Bin Meng (7):
-  target/riscv: Add initial support for native debug
-  target/riscv: machine: Add debug state description
-  target/riscv: debug: Implement debug related TCGCPUOps
-  target/riscv: cpu: Add a config option for native debug
-  target/riscv: csr: Hook debug CSR read/write
-  target/riscv: cpu: Enable native debug feature
-  hw/core: tcg-cpu-ops.h: Update comments of debug_check_watchpoint()
+ target/riscv/machine.c | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
- include/hw/core/tcg-cpu-ops.h |   1 +
- target/riscv/cpu.h            |   7 +
- target/riscv/debug.h          | 114 +++++++++
- target/riscv/cpu.c            |  14 ++
- target/riscv/csr.c            |  57 +++++
- target/riscv/debug.c          | 441 ++++++++++++++++++++++++++++++++++
- target/riscv/machine.c        |  33 +++
- target/riscv/meson.build      |   1 +
- 8 files changed, 668 insertions(+)
- create mode 100644 target/riscv/debug.h
- create mode 100644 target/riscv/debug.c
-
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index ad8248ebfd..25aa3b38f7 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -164,6 +164,38 @@ static const VMStateDescription vmstate_pointermasking = {
+     }
+ };
+ 
++static bool debug_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++
++    return riscv_feature(env, RISCV_FEATURE_DEBUG);
++}
++
++static const VMStateDescription vmstate_debug_type2 = {
++    .name = "cpu/debug/type2",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(mcontrol, trigger_type2_t),
++        VMSTATE_UINTTL(maddress, trigger_type2_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
++static const VMStateDescription vmstate_debug = {
++    .name = "cpu/debug",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = debug_needed,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
++        VMSTATE_STRUCT_ARRAY(env.trigger_type2, RISCVCPU, TRIGGER_TYPE2_NUM,
++                             0, vmstate_debug_type2, trigger_type2_t),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 3,
+@@ -218,6 +250,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_hyper,
+         &vmstate_vector,
+         &vmstate_pointermasking,
++        &vmstate_debug,
+         NULL
+     }
+ };
 -- 
 2.25.1
 
