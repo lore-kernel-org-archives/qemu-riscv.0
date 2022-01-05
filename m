@@ -1,67 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n4wYg-0007eW-UQ
-	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:01:50 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58836)
+	id 1n4wYl-0007k1-CD
+	for mharc-qemu-riscv@gnu.org; Tue, 04 Jan 2022 22:01:55 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58864)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wYe-0007c8-PL; Tue, 04 Jan 2022 22:01:48 -0500
-Received: from [2607:f8b0:4864:20::1029] (port=43783
- helo=mail-pj1-x1029.google.com)
+ id 1n4wYg-0007dw-Ct; Tue, 04 Jan 2022 22:01:50 -0500
+Received: from [2607:f8b0:4864:20::52f] (port=45758
+ helo=mail-pg1-x52f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n4wYZ-0007PS-Vw; Tue, 04 Jan 2022 22:01:46 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- a11-20020a17090a854b00b001b11aae38d6so5064621pjw.2; 
- Tue, 04 Jan 2022 19:01:42 -0800 (PST)
+ id 1n4wYe-0007Pu-Sa; Tue, 04 Jan 2022 22:01:50 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id f5so4955457pgk.12;
+ Tue, 04 Jan 2022 19:01:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=jrAL6g1TphcXjMCq2zldzmFnpuJynAAzFwwf2uBTSZk=;
- b=qdHdsHbRqx/V8KEO71KncmLPurE5FIhw/oHW7uPsiag5Dc/hO+AvsbrJ6cvAqdPqON
- JO7a4H5bm9+h591UZLwXurKMlsG3SX14IOdd9dPObkQIn/nQZUNcxCH9+4UrI8nM1E5Q
- cooslR0tNiqXFmdS8ysfsS2jhk9ZcukF8bv2Wv11Mw5sOFOcDwoTaa1ai9r2ZOEpQts0
- XyzVM0BXRoTJ/L88rmmwq280nvMZgLK8NWz/NHgywlDEhmIWBb+j3gsNe8mmoQFvL7Ni
- 1r1Rh4jZbUO9BET13A69V8gvq1QFAkNUGX9Q/A84m9vkHbEBe2efNgRkjo6Rto8xNg8q
- OczQ==
+ bh=b5NAdpMm2U58lIzwIEChXRECAvMzIUZbnYwnZLt4VXI=;
+ b=BRQvLtIk6W6NWIWXISMotoQaD4dxwkUY1kTLuyaExOUq/JL/+oOhR8dGvr1KacEylK
+ cNRhieAKsr+/L+YxFwZy11/xDQQ/s6QEA76g300YvPsDhUnR7xhB5eELE6nCvTu8tIUJ
+ TWopmQlsZZVF1di0i9Zf3Yz6/FbHzYG7m3dAWnCvrKqSLDlzHofRZ4Zbb2eWM6n8kOrA
+ uZ3znjenbyKtXiwTpWcJSKNHxRw/qE6VUIg2iVOm97XZP03ME8P1q2QVT86YxwHkhSxD
+ akYOSItrlyL8dtYO0EAv2KoG9uVBRDxG5guvjlFSHnMnJtCGBmP/s92ItKSyYKSnI1i3
+ bQLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=jrAL6g1TphcXjMCq2zldzmFnpuJynAAzFwwf2uBTSZk=;
- b=owqlr6UoCA4ULDb/Ti5i3tT+KLlDvgor9UyNeZyVyGX1lyhbATzdHJW0ei+mDbGis/
- H8q3x4gVaR9U6ThkfLVWNmi/IGfECia/ylI44yKDiECZHlpGBAluXt7pcKV3IA282TCT
- ht1bzRFYsynEK/LggpsEI5b7oprra7iptfTzbwNm/Uzbk/e/uRACwVvoWus1T/ZkSJ42
- R48+qBXoB6VDwTN+UEgQ/w9rzO8GmoJZLGPMBU2vx0D7Zaas7Vr6F4CekdaShLAJvYKG
- xNRASvik5uQjGph4ERkblxhPYwODtzAm0sB9Y1LEC2ExIU5da498atbLKOS6RkeH4k7V
- f1hQ==
-X-Gm-Message-State: AOAM531vUhYTvbmPuE+XtbO83SGvt2jXpvkCjJwkmWsvaYbh+l0PsIE3
- KAwGTYxZjg4w9n7lpCP2S6Y=
-X-Google-Smtp-Source: ABdhPJyyzqF7TjTv05xFneXy23U1S0u1h3Q9qmFh73EKHBuBwUo+ekOpnQsqz9NkoYCOz9pJ8ccb0Q==
-X-Received: by 2002:a17:90b:33d2:: with SMTP id
- lk18mr1682773pjb.218.1641351701895; 
- Tue, 04 Jan 2022 19:01:41 -0800 (PST)
+ bh=b5NAdpMm2U58lIzwIEChXRECAvMzIUZbnYwnZLt4VXI=;
+ b=xI5oEvU3EFRv1gb5T7DY9PBgUM/PhtpsllqdxBXayofKk9UR2wUPKKqAARTveiOw+K
+ Px87oqSnWwnT/m4ANX4to6fEpajlcgBPkOnsalEm4gfzDebSPOZfAWygV7w6XOeRIFs3
+ Fj6tRbYtSyy1Q0UpLnaLf/ZGzXK0D9psnmkHyLGgnCAgs+Ej+Wa8XUIXN7KGlgeFLYHi
+ mRs3I+4fq61VMpTSqpTHBPdI+zNCUrF/l7jesiL70ibV7FRE1Usoq9JyhiXS92BvU+5A
+ mqEyFJXOKUKaoDZNGJ0XJSYwq98pbrpqm8OyumiC325gsaTwk7QqNMofuDgGenSo4BCA
+ fKgA==
+X-Gm-Message-State: AOAM530SOsY0l1p5DGZXRHqEhRu1X+Hgr33r1XcXVtyNsKXq3nYEYz2/
+ fjV6nt0YtVh9GKPomGUk0ruCDz6eg18b3A==
+X-Google-Smtp-Source: ABdhPJx4RXcJqeoa3dPkZy7KiLbrCZMNJKiWXV6mUjfv232FtyY0ASb5NMUGEl+liBkvO/9Viq3elA==
+X-Received: by 2002:a63:b954:: with SMTP id v20mr27457581pgo.302.1641351706550; 
+ Tue, 04 Jan 2022 19:01:46 -0800 (PST)
 Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
  [147.11.176.192])
- by smtp.gmail.com with ESMTPSA id nu14sm23011pjb.17.2022.01.04.19.01.39
+ by smtp.gmail.com with ESMTPSA id nu14sm23011pjb.17.2022.01.04.19.01.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Jan 2022 19:01:41 -0800 (PST)
+ Tue, 04 Jan 2022 19:01:46 -0800 (PST)
 From: Bin Meng <bmeng.cn@gmail.com>
 X-Google-Original-From: Bin Meng <bin.meng@windriver.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v3 2/7] target/riscv: machine: Add debug state description
-Date: Wed,  5 Jan 2022 11:01:21 +0800
-Message-Id: <20220105030126.778503-3-bin.meng@windriver.com>
+Subject: [PATCH v3 4/7] target/riscv: cpu: Add a config option for native debug
+Date: Wed,  5 Jan 2022 11:01:23 +0800
+Message-Id: <20220105030126.778503-5-bin.meng@windriver.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220105030126.778503-1-bin.meng@windriver.com>
 References: <20220105030126.778503-1-bin.meng@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1029
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -81,9 +79,10 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 03:01:49 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 03:01:50 -0000
 
-Add a subsection to machine.c to migrate debug CSR state.
+Add a config option to enable support for native M-mode debug.
+This is disabled by default and can be enabled with 'debug=true'.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -93,62 +92,55 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 (no changes since v2)
 
 Changes in v2:
-- new patch: add debug state description
+- change the config option to 'disabled' by default
 
- target/riscv/machine.c | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ target/riscv/cpu.h | 2 ++
+ target/riscv/cpu.c | 5 +++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index ad8248ebfd..25aa3b38f7 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -164,6 +164,38 @@ static const VMStateDescription vmstate_pointermasking = {
-     }
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0f3b3a4219..35445bbc86 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -75,6 +75,7 @@ enum {
+     RISCV_FEATURE_MMU,
+     RISCV_FEATURE_PMP,
+     RISCV_FEATURE_EPMP,
++    RISCV_FEATURE_DEBUG,
+     RISCV_FEATURE_MISA
  };
  
-+static bool debug_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    return riscv_feature(env, RISCV_FEATURE_DEBUG);
-+}
-+
-+static const VMStateDescription vmstate_debug_type2 = {
-+    .name = "cpu/debug/type2",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(mcontrol, trigger_type2_t),
-+        VMSTATE_UINTTL(maddress, trigger_type2_t),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static const VMStateDescription vmstate_debug = {
-+    .name = "cpu/debug",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = debug_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
-+        VMSTATE_STRUCT_ARRAY(env.trigger_type2, RISCVCPU, TRIGGER_TYPE2_NUM,
-+                             0, vmstate_debug_type2, trigger_type2_t),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 3,
-@@ -218,6 +250,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_hyper,
-         &vmstate_vector,
-         &vmstate_pointermasking,
-+        &vmstate_debug,
-         NULL
-     }
+@@ -332,6 +333,7 @@ struct RISCVCPU {
+         bool mmu;
+         bool pmp;
+         bool epmp;
++        bool debug;
+         uint64_t resetvec;
+     } cfg;
  };
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3aa07bc019..d36c31ce9a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -448,6 +448,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
++    if (cpu->cfg.debug) {
++        set_feature(env, RISCV_FEATURE_DEBUG);
++    }
++
+     set_resetvec(env, cpu->cfg.resetvec);
+ 
+     /* Validate that MISA_MXL is set properly. */
+@@ -634,6 +638,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
++    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, false),
+ 
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
 -- 
 2.25.1
 
