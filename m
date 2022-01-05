@@ -1,58 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5E4L-000243-FH
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 16:43:41 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38100)
+	id 1n5E5F-0003N5-5T
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 16:44:37 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38272)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5E4I-0001yn-1S; Wed, 05 Jan 2022 16:43:38 -0500
-Received: from [2607:f8b0:4864:20::12e] (port=40453
- helo=mail-il1-x12e.google.com)
+ id 1n5E5C-0003Eh-R7; Wed, 05 Jan 2022 16:44:34 -0500
+Received: from [2607:f8b0:4864:20::d2e] (port=36384
+ helo=mail-io1-xd2e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5E4E-0004op-Qt; Wed, 05 Jan 2022 16:43:37 -0500
-Received: by mail-il1-x12e.google.com with SMTP id c4so583963iln.7;
- Wed, 05 Jan 2022 13:43:33 -0800 (PST)
+ id 1n5E5B-0004u0-9o; Wed, 05 Jan 2022 16:44:34 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id p65so789198iof.3;
+ Wed, 05 Jan 2022 13:44:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=UQAV4p36/9o9FWtna1Jb17XyCJnZsqH31QaSk+2npfQ=;
- b=DeqeDweNdH2+T7BhCEppu03/U50M7xKUdtCsP04X9jioayUyFdKbCbcSk7XDzekbt6
- BqugL1JuLNA+DjLSI/8DUPRMXVywjrOx4SF3+fzUwVgZZh+clr77yJvn9YlJQMi71YzZ
- +RCXuPmMHw1Hdn+Xw755FDSxvkHqZNxndGTZUutjoGHfyjjiYi7xbWJnBAfEaMsPJ8VO
- Xkqrxsm1/yRuYobiAsVxqEJ+S98dKSvUZ5E2QQVGt+qK+DhQdyraaL0m+fhz/kuyK1ct
- 7UY/xotKxOnV5mcYEzXW80Ax1GcceqQ6kYBOo5yKNb+sSiM1lot5SOodWBlxAh7lytMK
- XYpQ==
+ :cc; bh=jAm6YrytEGgOhkDv5p62cUpTUpERbqfLXhEAtgUpHl4=;
+ b=abUErB65uFtVDD99jdtlujWQdbTbOQSkpXxU5NC0wZZYbXaYYAzsAZBJM0fV0qUlmE
+ MsEmBBZy1zGhD3IPxQxgNI4lHg2nX3k7dIlDXSF2WCF9rBgQ1PLLJnO1hJnBVYPOBERz
+ 9OXqt25oXbjYj9Qva+4nwSB8GVA0iV/h1QCJ4j1KELGIvRln4he+OIXu3QKeogi8FRJb
+ 82SoiU2sF6VNvUKGCR045OIPqdKLP7yJommJ6qJrATBI4foIwUFNschefSHbRHeJ31KO
+ bShxaPGjCov1g00s67u74Chcgk1YbAcg1J3GJ7PT1AuPt1sHiYebBzEfnxrbb7/gY9bH
+ qzJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=UQAV4p36/9o9FWtna1Jb17XyCJnZsqH31QaSk+2npfQ=;
- b=zI9fyl+nik6+/ybFvf61d/Pn7jVDyjMy30x2q8spxrWLL6xqZgxr2Pi7pYe54OzZ8u
- WDQuEvR3JOfNz/QBFV5wdBFoRpPcaNIGXLiNDzypxPHTC36cqPbULZOULsa4PcgjViwK
- A92jkViP8P6+x/B4jlPlRk59KBOSQqM18/8obJRdH9CcSnVBQ5J+p105NhjW3Dg1dn91
- 5gX7yzyetNtjk8jKpsxM8D3yd71Ow9DUK+ucg7XHulSmYe20E8BAPy6HqNPJLJgFp3Ll
- cBBzwm3r0XA47EYiJTaMtbiJ6WyZ6luKWpgfhGKKJK8OcaY4jHkfJsgog+e4Hfsxj5p+
- yerA==
-X-Gm-Message-State: AOAM531jraX9k0DU2aRWBt2fc/Kw4TxZi2b0TEbKvNPEq8amFGI7aSWY
- HhKguS8Ht3g/PgEondxtoTfNrTiQuMys+wASVss=
-X-Google-Smtp-Source: ABdhPJzWe6IaE40Ahm1B/Dvq6I9Hw/CR7rYPWe/oaQNF0kT1RF8GSDFLfT74C3ASVJecSpqRASqcp3/ViT18nxa+jgA=
-X-Received: by 2002:a92:c510:: with SMTP id r16mr1446828ilg.74.1641419012822; 
- Wed, 05 Jan 2022 13:43:32 -0800 (PST)
+ bh=jAm6YrytEGgOhkDv5p62cUpTUpERbqfLXhEAtgUpHl4=;
+ b=QWVaYRp4tVv56UgsbBqZyL4DBi0zm4upV6Hn3JVHJQwWWgaovKGF2SLKOchssxdGBi
+ RlfAFqV6YWbVdiVRP85ogxAexotrfeZn1/EsJyt/CeirjxR9Gg8Vxm487FqYKHNnVTNl
+ q2PIExGCOJvwH8QlS0kN+ERrUffnG172PnI9NcgW/pqjGbOQV1eIwBLp1ZYdl/eTO52i
+ 8p0gkUOj/iDC/CqcjXTDnHbftXJN2qw/+5mOjE4c6Gpu7bDwuvrMdXfDfzVtspxiFHEo
+ Esh3oxexYaNi4eoRG3oq4Q5qux3vudjHFaF2rsv3YF37uLhA8c0zBKRCPt8gnCgFxzX1
+ PPtw==
+X-Gm-Message-State: AOAM531CBW6ZjwRKv4JVKnK2/NzR3XpMQJfbPKeqo9T4k9M7sd+Xtr0I
+ Rd+Xe/ltDtIoF8nubN3PRAvGGASHaTr9DaYh7Uk=
+X-Google-Smtp-Source: ABdhPJyO6SS0Lve0pPWVGCqsEkrRRFVVJNwW8KpHoKqf1sGOLIoKT90BnKCejWmWLMlUdWnnDbRR0HUTzoccR4ibTZY=
+X-Received: by 2002:a5d:8f88:: with SMTP id l8mr26677268iol.91.1641419070780; 
+ Wed, 05 Jan 2022 13:44:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20220105015752.752517-1-bmeng.cn@gmail.com>
-In-Reply-To: <20220105015752.752517-1-bmeng.cn@gmail.com>
+References: <20220105022247.21131-1-frank.chang@sifive.com>
+ <20220105022247.21131-2-frank.chang@sifive.com>
+In-Reply-To: <20220105022247.21131-2-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jan 2022 07:43:06 +1000
-Message-ID: <CAKmqyKMwVnhOAXtFNE=Wt+NjbS+OFojKPdnTri4xjgjTJ9sUPQ@mail.gmail.com>
-Subject: Re: [PATCH] roms/opensbi: Upgrade from v0.9 to v1.0
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Thu, 6 Jan 2022 07:44:04 +1000
+Message-ID: <CAKmqyKOefc0rtAZL10pQVGr-aMq0Ggz9igbh=20aBx6usxpm0g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] target/riscv: rvv-1.0: Call the correct RVF/RVD
+ check function for widening fp insns
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -73,254 +79,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jan 2022 21:43:38 -0000
+X-List-Received-Date: Wed, 05 Jan 2022 21:44:35 -0000
 
-On Wed, Jan 5, 2022 at 11:58 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Wed, Jan 5, 2022 at 12:24 PM <frank.chang@sifive.com> wrote:
 >
-> Upgrade OpenSBI from v0.9 to v1.0 and the pre-built bios images.
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> The v1.0 release includes the following commits:
+> Vector widening floating-point instructions should use
+> require_scale_rvf() instead of require_rvf() to check whether RVF/RVD is
+> enabled.
 >
-> ec5274b platform: implement K210 system reset
-> 5487cf0 include: sbi: Simplify HSM state define names
-> 8df1f9a lib: sbi: Use SBI_HSM_STATE_xyz defines instead of SBI_STATE_xyz defines
-> 7c867fd lib: sbi: Rename sbi_hsm_hart_started_mask() function
-> 638c948 lib: sbi: Remove redundant sbi_hsm_hart_started() function
-> ca864a9 lib: sbi: Fix error codes returned by HSM start() and stop() functions
-> 6290a22 include: sbi: Add HSM suspend related defines
-> 4b05df6 lib: sbi: Add sbi_hart_reinit() function
-> 807d71c include: sbi: Add hart_suspend() platform callback
-> 7475689 lib: sbi: Implement SBI HSM suspend function
-> b9cf617 include: sbi: Upgrade SBI implementation version to v0.3
-> 50d4fde lib: Remove redundant sbi_platform_ipi_clear() calls
-> ff5bd94 include: sbi: SBI function IDs for RFENCE extension
-> 22d8ee9 firmware: Use lla to access all global symbols
-> 0f20e8a firmware: Support position independent execution
-> ddad02d lib: sbi: illegal CSR 0x306 access in hpm_allowed()
-> bfc85c7 include: headers: Replace __ASSEMBLY__ with __ASSEMBLER__
-> 9190ad1 lib/utils: Support the official clint DT bindings
-> ca3f358 lib/utils: Drop the 'compat' parameter of fdt_plic_fixup()
-> 4edc822 lib/utils: Support fixing up the official DT bindings of PLIC
-> 4ef2f5d firware: optimize the exception exit code
-> 3d8a952 lib: fix csr detect support
-> e71a7c1 firmware: Remove redundant add instruction from trap restore path
-> d4a94ea include: types: Add __aligned(x) to define the minimum alignement
-> d0e406f include: sbi: Allow direct initialization via SPIN_LOCK_INIT()
-> 4d8e2f1 lib: sbi: Replace test-and-set locks by ticket locks
-> 70ffc3e lib: sbi: fix atomic_add_return
-> 27a16b1 docs: fix link to OpenPiton documentation
-> b1df1ac lib: sbi: Domains can be registered only before finalizing domains
-> 7495bce lib: sbi: Add sbi_domain_memregion_init() API
-> 4dc0001 lib: sbi: Add sbi_domain_root_add_memregion() API
-> 8b56980 lib: utils/sys: Add CLINT memregion in the root domain
-> fc37c97 lib: sbi: Make the root domain instance global variable
-> e7e4bcd lib: utils: Copy over restricted root domain memregions to FDT domains
-> f41196a lib: sbi: Make sbi_domain_memregion_initfw() a local function
-> c5d0645 lib: utils: Implement "64bit-mmio" property parsing
-> 49e422c lib: utils: reset: Add T-HEAD sample platform reset driver
-> 0d56293 lib: sbi: Fix sbi_domain_root_add_memregion() for merging memregions
-> bf3ef53 firmware: Enable FW_PIC by default
-> 1db8436 platform: Remove platform/thead
-> 6d1642f docs: generic: Add T-HEAD C9xx series processors
-> a3689db lib: sbi: Remove domains_root_regions() platform callback
-> 068ca08 lib: sbi: Simplify console platform operations
-> 559a8f1 lib: sbi: Simplify timer platform operations
-> dc39c7b lib: sbi: Simplify ipi platform operations
-> 043d088 lib: sbi: Simplify system reset platform operations
-> a84a1dd lib: sbi: Simplify HSM platform operations
-> e9a27ab lib: sbi: Show devices provided by platform in boot prints
-> 632e27b docs/platform: sifive_fu540: Update U-Boot defconfig name
-> 117fb6d lib: utils/serial: Add support for Gaisler APBUART
-> 552f53f docs: platform: Sort platform names
-> d4177e7 docs: platform: Describe sifive_fu540 as supported generic platform
-> 26998f3 platform: Remove sifive/fu540 platform
-> f90c4c2 lib: sbi: Have spinlock checks return bool
-> e822b75 lib: utils/serial: Support Synopsys DesignWare APB UART
-> 6139ab2 Makefile: unconditionally disable SSP
-> c9ef2bc lib: utils: Add strncpy macro to libfdt_env.h
-> ee7c2b2 lib: utils/fdt: Don't use sbi_string functions
-> fe92347 lib: utils/fdt: Replace strcmp with strncmp
-> b2dbbc0 lib: Check region base for merging in sbi_domain_root_add_memregion()
-> 54d7def lib: utils: Try other FDT drivers when we see SBI_ENODEV
-> d9ba653 docs: debugging OpenSBI
-> 66c4fca lib: utils: consider ':' in stdout-path
-> f30b189 lib: sbi_scratch: remove owner from sbi_scratch_alloc_offset
-> a03ea2e platform: andes/ae350: Cosmetic fixes in plicsw.c
-> b32fac4 docs/platform: andes-ae350: Fix missing spaces
-> de446cc platform: andes/ae350: Drop plicsw_get_pending()
-> 434198e platform: andes/ae350: Drop plicsw_ipi_sync()
-> 1da3d80 lib: sbi_scratch: zero out scratch memory on all harts
-> 360ab88 lib: utils: missing initialization in thead_reset_init
-> 79f9b42 lib: sbi: Fix GET_F64_REG inline assembly
-> eb90e0a lib: utils/libfdt: Upgrade to v1.6.1 release
-> cdcf907 lib: sign conflict in sbi_tlb_entry_process()
-> 9901794 lib: sign conflict in wake_coldboot_harts()
-> 11c345f lib: simplify sbi_fifo_inplace_update()
-> 4519e29 lib: utils/timer: Add ACLINT MTIMER library
-> 5a049fe lib: utils/ipi: Add ACLINT MSWI library
-> bd5d208 lib: utils: Add FDT parsing API common for both ACLINT and CLINT
-> 56fc5f7 lib: utils/ipi: Add FDT based ACLINT MSWI IPI driver
-> 03d6bb5 lib: utils/timer: Add FDT based ACLINT MTIMER driver
-> a731c7e platform: Replace CLINT library usage with ACLINT library
-> b7f2cd2 lib: utils: reset: unify naming of 'sifive_test' device
-> 197e089 docs/platform: thead-c9xx: Remove FW_PIC=y
-> 17e23b6 platform: generic: Terminate platform.name with null
-> 3e8b31a docs: Add device tree bindings for SBI PMU extension
-> fde28fa lib: sbi: Detect mcountinihibit support at runtime
-> d3a96cc lib: sbi: Remove stray '\' character
-> 0829f2b lib: sbi: Detect number of bits implemented in mhpmcounter
-> 9c9b4ad lib: sbi: Disable m/scounteren & enable mcountinhibit
-> 41ae63c include: Add a list empty check function
-> fd9116b lib: sbi: Remove redundant boot time print statement
-> 49966db lib: sbi: Use csr_read/write_num to read/update PMU counters
-> e7cc7a3 lib: sbi: Add PMU specific platform hooks
-> 13d40f2 lib: sbi: Add PMU support
-> ae72ec0 utils: fdt: Add fdt helper functions to parse PMU DT nodes
-> 37f9b0f lib: sbi: Implement SBI PMU extension
-> 764a17d lib: sbi: Implement firmware counters
-> ec1b8bb lib: sbi: Improve TLB function naming
-> 0e12aa8 platform: generic: Add PMU support
-> 14c7f71 firmware: Minor optimization in _scratch_init()
-> dafaa0f docs: Correct a typo in platform_guide.md
-> abfce9b docs: Make <xyz> visible in the rendered platform guide
-> dcb756b firmware: Remove the sanity checks in fw_save_info()
-> b88b366 firmware: Define a macro for version of struct fw_dynamic_info
-> a76ac44 lib: sbi: Fix sbi_pmu_exit() for systems not having MCOUNTINHIBIT csr
-> 7f1be8a fw_base: Don't mark fw_platform_init as both global and weak
-> 397afe5 fw_base: Put data in .data rather than .text
-> a3d328a firmware: Explicitly pass -pie to the linker, not just the driver
-> 09ad811 firmware: Only default FW_PIC to y if supported
-> 2942777 Makefile: Support building with Clang and LLVM binutils
-> 17729d4 lib: utils: Drop dependency on libgcc by importing part of FreeBSD's libquad
-> e931f38 lib: utils/fdt: Add fdt_parse_phandle_with_args() API
-> 36b8eff lib: utils/gpio: Add generic GPIO configuration library
-> c14f1fe lib: utils/gpio: Add simple FDT based GPIO framework
-> 4c3df2a lib: utils/gpio: Add minimal SiFive GPIO driver
-> e3d6919 lib: utils/reset: Add generic GPIO reset driver
-> 7210e90 firmware: use __SIZEOF_LONG__ for field offsets in fw_dynamic.h
-> f3a8f60 include: types: Use __builtin_offsetof when supported
-> 8a1475b firmware: Remove the unhelpful alignment codes before fdt relocation
-> a4555e5 docs: Document parameters passed to firmware and alignment requirement
-> 2c74dc3 docs: Document FW_PIC compile time option
-> 81eb708 README: Update toolchain information
-> 9890391 Makefile: Manually forward RELAX_FLAG to the assembler when linking with LLD
-> 74db0ac firmware: use _fw_start for load address
-> 217d5e4 generic: fu740: add workaround for CIP-1200 errata
-> ce03c88 lib: utils: remove unused variable in fdt_reset_init
-> e928472 lib: utils: support both of gpio-poweroff, gpio-reset
-> d244f3d lib: sbi: Fix bug in strncmp function when count is 0
-> 47a4765 lib: utils/fdt: Change addr and size to uint64_t
-> e0d1b9d lib: utils/timer: Allow separate base addresses for MTIME and MTIMECMP
-> 7a3a0cc lib: utils: Extend fdt_get_node_addr_size() for multiple register sets
-> f3a0eb8 lib: utils/fdt: Extend fdt_parse_aclint_node() function
-> b35f782 lib: utils/timer: Allow ACLINT MTIMER supporting only 32-bit MMIO
-> 7aa6c9a lib: utils/timer: Simplify MTIMER synchronization
-> 33eac76 lib: sbi: Fix bug in sbi_ecall_rfence that misses checking
-> ee27437 lib: sbi_trap: Restore redirect for access faults
-> b1d3e91 payloads/test: Add support for SBI v0.2 ecalls
-> bd316e2 lib: sbi: Correct typo in faults delegation CSR name
-> c262306 lib: sbi: protect dprintf output with spinlock
-> 1718b16 lib: sbi: Checking fifo validness in sbi_fifo_is_empty and is_full
-> bd35521 lib: sbi: Refine the way to construct platform features
-> 0274a96 lib: utils/reset: Sort fdt_reset driver list
-> 395ff7e lib: utils/reset: Add a sunxi watchdog reset driver
-> 3477f08 lib: sbi: fix ctz bug
-> 12753d2 lib: sbi: add some macros to detect BUG at runtime
-> 51113fe lib: sbi: Add BUG() macro for csr_read/write_num() and misa_string()
-> 72154f4 lib: utils/fdt: Add fdt_parse_timebase_frequency() function
-> 12e7af9 lib: sbi: Add timer frequency to struct sbi_timer_device
-> 6355155 lib: sbi: Print timer frequency at boot time
-> 9d0ab35 lib: sbi: Add generic timer delay loop function
-> fa59dd3 lib: utils/reset: use sbi_timer_mdelay() in gpio reset driver
-> 754d511 lib: utils: identify supported GPIO reset methods
-> 516161c lib: sbi: convert reset to list
-> 9283d50 lib: sbi: add priority for reset handler
-> c38973e lib: sbi: Save context for all non-retentive suspend types
-> 67cbbcb lib: sbi: system reset with invalid parameters
-> 422eda4 Makefile: Add build time and compiler info string
-> 78c2b19 lib: utils/irqchip: Automatically delegate T-HEAD PLIC access
-> 309e8bd lib: utils/reset: Register separate GPIO system reset devices
-> 723aa88 lib: sbi: Refine addr format in sbi_printf
-> c891acc include: sbi_utils: Introduce an helper to get fdt base address
-> 013ba4e lib: sbi: Fix GPA passed to __sbi_hfence_gvma_xyz() functions
-> 0979ffd lib: utils/gpio: use list for drivers
-> 2fe2f55 lib: sbi: move sbi_boot_print_general()
-> 57f094e platform: generic: move fdt_reset_init to final_init
-> be245ac lib: sbi: error handling in fdt_reset_init()
-> a74daf2 riscv: Add new CSRs introduced by Sscofpmf[1] extension
-> 7084ad9 lib: sbi: Update csr_read/write_num for PMU
-> 867c653 lib: sbi: Detect Sscofpmf extension at run time
-> 9134c36 lib: sbi: Delegate PMU counter overflow interrupt to S mode
-> 730f01b lib: sbi: Support sscofpmf extension in OpenSBI
-> 2363f95 lib: sbi: Always enable access for all counters
-> 0c304b6 lib: sbi: Allow programmable counters to monitor cycle/instret events
-> 1e14732 lib: sbi: Reset the mhpmevent value upon counter reset
-> b628cfd lib: sbi: Counter info width should be zero indexed
-> b28f070 lib: sbi: Enable PMU extension for platforms without mcountinhibit
-> 15906a3 lib: utils: Rename the prefix in PMU DT properties
-> b8845e4 lib: sbi: Fix initial value mask while updating the counters
-> 31fe5a7 lib: sbi: Fix PMP address bits detection
-> 94eba23 lib: utils/reset: add priority to gpio reset
-> 1d462e0 lib: utils/reset: separate driver init func
-> 2c964a2 lib: utils/i2c: Add generic I2C configuration library
-> 6ca6bca lib: utils/i2c: Add simple FDT based I2C framework
-> 13a1158 lib: utils/i2c: Add minimal SiFive I2C driver
-> f374496 platform: sifive_fu740: add platform reset driver
-> d335a17 lib: sbi: clear pmpcfg.A before setting in pmp_set()
-> 52af6e4 lib: utils: Add LiteX UART support
-> 22d556d lib: sbi: Fix spelling of "address" in sbi_domain.c
-> 7a22c78 lib: sbi: Fix missing space
-> 7e77706 lib: sbi: Resolve the uninitialized complaint in sbi_pmu
-> 14faee6 lib: sbi: Improve fatal error handling
-> 2428987 lib: pmu: support the event ID encoded by a bitmap.
-> 66fbcc0 docs/platform: spike: Enhance Spike examples
-> 460041c lib: pmu: check SSCOF before masking
-> 69d7e53 Makefile: Fix -msave-restore compile warning with CLANG-10 (or lower)
-> d249d65 lib: sbi: Fix compile errors using -Os option
-> f270359 Makefile: Improve the method to disable -m(no-)save-restore option
-> 2082153 lib: sbi: simplify pmp_set(), pmp_get()
-> d30bde3 firmware: Move memcpy/memset mapping to fw_base.S
-> 48f91ee include: Bump-up version to 1.0
->
-> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
 > ---
-> please pull the full contents from https://github.com/lbmeng/qemu/
-> opensbi branch
+>  target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
 >
->  .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 78680 -> 108504 bytes
->  .../opensbi-riscv32-generic-fw_dynamic.elf    | Bin 727464 -> 838904 bytes
->  .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 75096 -> 105296 bytes
->  .../opensbi-riscv64-generic-fw_dynamic.elf    | Bin 781264 -> 934696 bytes
->  roms/opensbi                                  |   2 +-
->  5 files changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
-> index ae651e2993..dba8e8655f 100644
-> Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
-> diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.elf b/pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
-> index 3250d89408..a19363e27c 100644
-> Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.elf and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.elf differ
-> diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
-> index f039884483..f223e56991 100644
-> Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
-> diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.elf b/pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
-> index ef261c98d1..c59573d026 100644
-> Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.elf and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.elf differ
-> diff --git a/roms/opensbi b/roms/opensbi
-> index 234ed8e427..48f91ee9c9 160000
-> --- a/roms/opensbi
-> +++ b/roms/opensbi
-> @@ -1 +1 @@
-> -Subproject commit 234ed8e427f4d92903123199f6590d144e0d9351
-> +Subproject commit 48f91ee9c960f048c4a7d1da4447d31e04931e38
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 5e3f7fdb77..8d92243f2b 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2254,7 +2254,8 @@ GEN_OPFVF_TRANS(vfrsub_vf,  opfvf_check)
+>  static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
+>  }
+> @@ -2292,7 +2293,8 @@ GEN_OPFVV_WIDEN_TRANS(vfwsub_vv, opfvv_widen_check)
+>  static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_ds(s, a->rd, a->rs2, a->vm);
+>  }
+> @@ -2321,7 +2323,8 @@ GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
+>  static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm);
+>  }
+> @@ -2359,7 +2362,8 @@ GEN_OPFWV_WIDEN_TRANS(vfwsub_wv)
+>  static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+>  {
+>      return require_rvv(s) &&
+> -           require_rvf(s) &&
+> +           require_scale_rvf(s) &&
+> +           (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dd(s, a->rd, a->rs2, a->vm);
+>  }
 > --
-> 2.25.1
+> 2.31.1
 >
 >
 
