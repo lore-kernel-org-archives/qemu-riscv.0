@@ -1,68 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5U62-0001vX-N3
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 09:50:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37740)
+	id 1n5UKa-00033l-W6
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 10:05:33 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47586)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n5U5u-0001sZ-Eu; Thu, 06 Jan 2022 09:50:24 -0500
-Received: from [2607:f8b0:4864:20::b31] (port=41709
- helo=mail-yb1-xb31.google.com)
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1n5T0H-0002D8-Nl
+ for qemu-riscv@nongnu.org; Thu, 06 Jan 2022 08:40:29 -0500
+Received: from [2a00:1450:4864:20::22f] (port=36589
+ helo=mail-lj1-x22f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n5U5t-0004wC-2H; Thu, 06 Jan 2022 09:50:22 -0500
-Received: by mail-yb1-xb31.google.com with SMTP id y130so8009838ybe.8;
- Thu, 06 Jan 2022 06:50:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ztRfInFr/BFTEFbI+H+ZdQUEXvNgj36MIMMt9VFoyAU=;
- b=kQfp/INEu+oZ8jBDVeyGNhiBPnHAKDGYIRmJPhsCa+FjcUSlh+i6pji5WpBB7R3/gv
- R0FOsxFyQ8CtsimDf+75zJmM4Cf1DuTml4N83KgjLDSrFasaEPFs+TkqLlEsLSKf+I4I
- pdjcsXxRYAkDqCgb0K47gO8WuePht7YkGm40SXY2cDCnjUpfxWxq09hi1TbsFwin9Dac
- Yq5NFZb4bkhW51tKLv5sWuooSI2aoI/gMq7Mg00Xk6vjlaqHp2gbVzlkjJa8yMp5y9ik
- fgJELBJTKn/dE4NdjxY28YPzgUE2XDvKI8eFlKp27hLyvq6n4RZE7GdFneLqNSO3noeg
- M3MQ==
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1n5T0F-0005H2-Pq
+ for qemu-riscv@nongnu.org; Thu, 06 Jan 2022 08:40:29 -0500
+Received: by mail-lj1-x22f.google.com with SMTP id h21so4158114ljh.3
+ for <qemu-riscv@nongnu.org>; Thu, 06 Jan 2022 05:40:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=0uJ97Utl42Dw2KuxPdQDJkAGqv7RwUA/bCw3Y6Nu5vk=;
+ b=lIRS8kaJuNsrqBnEuHVLxRwIK3lJhHEon2c6kzelYXyfJuhX9yo1jgnocSyJwqmfAf
+ /9tF5hRbtmMPMVo28PFSEfREPmU4HqMCOfQTBEkxWrz5sT6UDpNOE00UXPrQDSfahAXQ
+ 6k/wXayBV6MBzdbfmdMecDPPYm0Zp7EgdTm5mmwKzouexqj3MOaNWqlGF5A5K3x3fGQ+
+ aZw5z0HJkUv7wuk8d5R/Azc8eWp8uVzDZqSQWkJyYE5SHhMpJkS77gaKpKx2sYb3WIG/
+ 27+Oyta1CXzXRcNXzwb27GXXv1bu0GvapZJJOhHOz5xR3YV0Yhj1u4FRa82+fin7/r2w
+ uHow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ztRfInFr/BFTEFbI+H+ZdQUEXvNgj36MIMMt9VFoyAU=;
- b=ATC6dKxfcZQO5cTc6raxs21DxvcdwdDWYGbEbQNy/513k6EFw3mw2KCSFr2+uoH/V/
- ZwPpb+kpcpbzaQUXWK86XV3vCVmg7mZprWAf2RafbxKiulwBjAp2hNjE3+yAJ1OSQtZn
- 45nGc4RzNoQHKydLbknN2rYHm9y/fa/J56dRwMq74Vkuh43Bwzwp/kBO2qvzttsjmfMp
- os2yZf3bQYCHL1W2NZ6n3ogFYT4TUZKOsRsinrGHB09uf8VFOpN8vzE0IyxUEQIe19mF
- rZUjMYZf4/OhjlnsUdaooDbNgUDrGEOL5ftXF+VGjfd2w5Tp1vlDCFG35ajU8+YEhIkd
- dFEA==
-X-Gm-Message-State: AOAM5320z64FKmGphRfnu/UkuUaB3cgNBXToM2yZSQS/fN2tupiAf1A1
- /9iU23bW1zmHU0RgdHhsKGKZ76c48MXyTEss5XY=
-X-Google-Smtp-Source: ABdhPJz2Pb6sLfv0ouuSrAJF4aS8sFXmLFJkrX+SkB23jECw/PBOw4oVcPRKtx+sagqvv2mdyUgsTgPZc4V2QMgyzu8=
-X-Received: by 2002:a25:3242:: with SMTP id y63mr61835732yby.670.1641480614248; 
- Thu, 06 Jan 2022 06:50:14 -0800 (PST)
-MIME-Version: 1.0
-References: <20220106134020.1628889-1-philipp.tomsich@vrull.eu>
-In-Reply-To: <20220106134020.1628889-1-philipp.tomsich@vrull.eu>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 6 Jan 2022 22:50:02 +0800
-Message-ID: <CAEUhbmU3Xrj-wYMRzteHmFp_fqmzZPFC_JgmYZq1eVBLxbNgZQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix position of 'experimental' comment
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Vineet Gupta <vineetg@rivosinc.com>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=0uJ97Utl42Dw2KuxPdQDJkAGqv7RwUA/bCw3Y6Nu5vk=;
+ b=BbIj/FvTrkOSPZUhXPADi2obibKYPTNKtW2tPnfEiHPtF0c7dX/w94vwP8rQHHj69M
+ AG+0+oK/tOzAIME9y8CNEBAiP5EwnJ/fq+Gq57vjW5JOI1szC2+J8HuNLwiShM5QlRNd
+ 2oIGb43Xwg5Fu6k7LCK1fdTlJb4etOq93pZoYpYSzkn6fYKR0w7Qad7jbmbt3mGFNHKu
+ dju7WjMU8vEvntMqznueJdO2dlTja5I75EAYfS7V5WK/wVZtH0Hv7H/ZYcEcuvHF6icq
+ 2BcG0nZZ7Ic1qpCI5tyTqE2Jp7zp1aGzVjxIZ6nmFPc4+juRzGxhUyOURndoJZXz3H44
+ UOCQ==
+X-Gm-Message-State: AOAM533PCzYJCzan3rlX9pQox45e/BZqYVthOauK4tSrajFaw3VcJpsD
+ AZxxzGQwbLsAxn+xOFYmb4Ki1Q==
+X-Google-Smtp-Source: ABdhPJyCEPscb5ZfhXlXrg2+eD5jwU6E18kI1u2ivoxE2KHXMd3QHTM3218ZXTtrRH9v41acAtEoCQ==
+X-Received: by 2002:a2e:bd14:: with SMTP id n20mr5637830ljq.336.1641476424780; 
+ Thu, 06 Jan 2022 05:40:24 -0800 (PST)
+Received: from ubuntu-focal.. ([2a01:4f9:3a:1e26::2])
+ by smtp.gmail.com with ESMTPSA id h2sm179293lji.50.2022.01.06.05.40.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Jan 2022 05:40:24 -0800 (PST)
+From: Philipp Tomsich <philipp.tomsich@vrull.eu>
+To: qemu-devel@nongnu.org
+Cc: Vineet Gupta <vineetg@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b31
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH] target/riscv: Fix position of 'experimental' comment
+Date: Thu,  6 Jan 2022 14:40:20 +0100
+Message-Id: <20220106134020.1628889-1-philipp.tomsich@vrull.eu>
+X-Mailer: git-send-email 2.33.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::22f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=philipp.tomsich@vrull.eu; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
 X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 06 Jan 2022 10:05:26 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,25 +81,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2022 14:50:28 -0000
+X-List-Received-Date: Thu, 06 Jan 2022 13:40:30 -0000
 
-On Thu, Jan 6, 2022 at 10:29 PM Philipp Tomsich
-<philipp.tomsich@vrull.eu> wrote:
->
-> When commit 0643c12e4b dropped the 'x-' prefix for Zb[abcs] and set
-> them to be enabled by default, the comment about experimental
-> extensions was kept in place above them.  This moves it down a few
-> lines to only cover experimental extensions.
->
-> References: 0643c12e4b ("target/riscv: Enable bitmanip Zb[abcs] instructions")
->
-> Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
->
-> ---
->
->  target/riscv/cpu.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
+When commit 0643c12e4b dropped the 'x-' prefix for Zb[abcs] and set
+them to be enabled by default, the comment about experimental
+extensions was kept in place above them.  This moves it down a few
+lines to only cover experimental extensions.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+References: 0643c12e4b ("target/riscv: Enable bitmanip Zb[abcs] instructions")
+
+Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+
+---
+
+ target/riscv/cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6ef3314bce..e322e729d2 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -640,11 +640,12 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+ 
+-    /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
++
++    /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     /* ePMP 0.9.3 */
+-- 
+2.33.1
+
 
