@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5HXM-0004OQ-5Y
-	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 20:25:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54262)
+	id 1n5I3P-00032I-Ju
+	for mharc-qemu-riscv@gnu.org; Wed, 05 Jan 2022 20:58:59 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59008)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5HXF-0004LR-SL; Wed, 05 Jan 2022 20:25:47 -0500
-Received: from [2607:f8b0:4864:20::d2f] (port=34468
- helo=mail-io1-xd2f.google.com)
+ id 1n5I3M-00031M-8C; Wed, 05 Jan 2022 20:58:56 -0500
+Received: from [2607:f8b0:4864:20::42f] (port=44871
+ helo=mail-pf1-x42f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5HXD-0005zQ-7k; Wed, 05 Jan 2022 20:25:45 -0500
-Received: by mail-io1-xd2f.google.com with SMTP id e128so1319575iof.1;
- Wed, 05 Jan 2022 17:25:40 -0800 (PST)
+ id 1n5I3F-0007zc-LU; Wed, 05 Jan 2022 20:58:55 -0500
+Received: by mail-pf1-x42f.google.com with SMTP id t187so1234185pfb.11;
+ Wed, 05 Jan 2022 17:58:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=XzVIJ/2wmFNmM8HijNvzs8drJ/8htsZ0fa7r+KDkM1k=;
- b=TQY8WGiaixTLStnA02vewB/2RRSKtptFTRsbraDOjdzccf5jiSRSvAZuGGVm8d3Tk9
- +KyoelIYHlGY6e8i5GTQe7N6j1pOGseGakeNWhfNmJo74sGIQG7jyWDLG015mHKPNQNw
- ZNHXRq84k8pcmgnxnCS+shq4bStMfYXmYzukwFjX6WJfNSob+xG0R7Ua9moCnvn1lFww
- kr2bygRPJ1MYe8C7KtcPsokdNR5AoWiY0UOWkWkNUfcCusrY5K+ighCHDjzQqhSSBrhd
- DTHcDgQzTHb7V350Nn5P9r1DhxOuxhMNz4eVRvU4IeRCQp4c+wTvc2t2g/itG+KJNaS8
- yXjQ==
+ bh=elLvJPc1jxdTJuJvA24XNv07jTMdBgoO7bjiITVIIzw=;
+ b=MSpZJOodQzYImccZ+LKy6y1FsErELi/bgHgVqnNDFGKb/VdJDcQLvDdbEa2VsVYa9p
+ O+OzmauatbAPdVcMCdUR/tzWsdkXs7QQPPnOgSEzKe2nLoMz/L7mcBOi2BMeQOvyViKT
+ j4teD/fYTrhBAI8rtpueBfkrChsSBxxlEIwSDX9dkTyEnd+wbqxcuDoSLi3Q28FUI7vN
+ YCbpH+LEjk7iL9W+wvN2NKn05gBh7co62XvKfOEZT7aAUaA+Ce+T66NQyNUQT3mZtsef
+ J2z+RotgtaRt6dlnsiBqswp8aezwQ/Lcj9F8xDiXh69drSa8y+tAUOERgRmY7S7PY4vT
+ hcYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=XzVIJ/2wmFNmM8HijNvzs8drJ/8htsZ0fa7r+KDkM1k=;
- b=PjNl3e1hgd5TvuX1LoiulgwTBVAjssluBcsmqRwTjC4CyBJl8xAPSnwZ0/E53ncctk
- 0JZwc6al65YYN38CuXHEDkcKIW7tdIYAQSk4mnurwCTbDPsE259+6kJEbLv4fw7Y33Zm
- yMEGE9toBX+PKLckAanf8wL//9NxRnbLgOuGA4avfpo5ubE185RxcnDarplSwRtJQNeX
- /FNGlGIE6LQmwAAxDQ/+RJMHj05caAJJIR4jPj/dbFGCfWgtDOT68N42LydoPWdwpmK7
- e5G4GnjQ1P5bD7h+L8tLQ3xv5RVc9VaVzNzM1S92MkkxSxyRHZ49IisvVytbHfmjdz/7
- GCRg==
-X-Gm-Message-State: AOAM531xGMwcvAjuR1mXMedrHK+3m+ZkOiINQYlygGbEwKyKQUiyWMam
- +RN5+aix+RIiaUYEuat08Z0trtXl0VvT+PUxFmc=
-X-Google-Smtp-Source: ABdhPJzf0ry1jQi9zCLv4tInj5Ek8T5oC8zFlImgDvGSsMjv0MFIe1o8BNf5cyHjFF+r9TBZ9snNINzeu/rESz9oKmQ=
-X-Received: by 2002:a05:6638:38d:: with SMTP id
- y13mr24465113jap.318.1641432340241; 
- Wed, 05 Jan 2022 17:25:40 -0800 (PST)
+ bh=elLvJPc1jxdTJuJvA24XNv07jTMdBgoO7bjiITVIIzw=;
+ b=Ow710kfo4WYTKLvRojiNYVKOD3ey/r9ygpKeyZd4tOZKmTYHVIKDu0ZYwDmQ5Pst6t
+ eJiUnPUqJ0eVK9Lb8IVXEw0GcZ6EmzXKbEMxJZWgXYqurdEk1JavRIvQ/UO+FLocN7D+
+ lVnYmjyjL59QctdrFkI/cWWuw6CWKbXVrdMYjJpcmHeACkwDqqp3dpoteWBLWtkf9SiT
+ D3N/M7uxKwGdCf9oecIXmJMjgnwNbhd5r3tEadd0tQxBaqrQXG6Ebq10sgUJDU5i8g8I
+ ro/uDHK0Alr6isyuQEX/33EgHORML0j04fdy4XvvxE2m8Q2Fq6DLYMVZoKT/3xdYDNLm
+ uOcw==
+X-Gm-Message-State: AOAM531jsmGQh4BM4cmjG5YH8NR1Yrwg+cT7nDjRlNtkXq7Ige4MFvvk
+ ttExMksla4UV7R6wMbZ1pVMqPobYMOmtGCxedUQ=
+X-Google-Smtp-Source: ABdhPJwlQGaG7XZuIM7Y0W5c+zgMd//Ow3RUpMryjvhYPUtOObhqCHWipCLVa1pSHDqxn2ke9J8kZe6t3EN3NRg8eYo=
+X-Received: by 2002:a63:9207:: with SMTP id o7mr50284091pgd.430.1641434327739; 
+ Wed, 05 Jan 2022 17:58:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211213163834.170504-17-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20211213163834.170504-17-frederic.petrot@univ-grenoble-alpes.fr>
+ <20211213163834.170504-18-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211213163834.170504-18-frederic.petrot@univ-grenoble-alpes.fr>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jan 2022 11:25:13 +1000
-Message-ID: <CAKmqyKPd9oVOHqSpNWB8HrY3XCeM0kXsmv1+dox0k4xCjuwhDw@mail.gmail.com>
-Subject: Re: [PATCH v7 16/18] target/riscv: helper functions to wrap calls to
- 128-bit csr insns
+Date: Thu, 6 Jan 2022 11:58:17 +1000
+Message-ID: <CAKmqyKP9bxvwZXdnFs5G_y0QoGbc9Yxz1JfUz9gO4KhsMu=fSg@mail.gmail.com>
+Subject: Re: [PATCH v7 17/18] target/riscv: modification of the trans_csrxx
+ for 128-bit support
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -60,10 +59,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -84,17 +83,16 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2022 01:25:48 -0000
+X-List-Received-Date: Thu, 06 Jan 2022 01:58:56 -0000
 
-On Tue, Dec 14, 2021 at 2:46 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+On Tue, Dec 14, 2021 at 2:48 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
 <frederic.petrot@univ-grenoble-alpes.fr> wrote:
 >
-> Given the side effects they have, the csr instructions are realized as
-> helpers. We extend this existing infrastructure for 128-bit sized csr.
-> We return 128-bit values using the same approach as for div/rem.
-> Theses helpers all call a unique function that is currently a fallback
-> on the 64-bit version.
-> The trans_csrxx functions supporting 128-bit are yet to be implemented.
+> As opposed to the gen_arith and gen_shift generation helpers, the csr ins=
+ns
+> do not have a common prototype, so the choice to generate 32/64 or 128-bi=
+t
+> helper calls is done in the trans_csrxx functions.
 >
 > Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
 ble-alpes.fr>
@@ -106,135 +104,283 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.h       |  5 +++++
->  target/riscv/helper.h    |  3 +++
->  target/riscv/csr.c       | 17 ++++++++++++++++
->  target/riscv/op_helper.c | 44 ++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 69 insertions(+)
+>  target/riscv/insn_trans/trans_rvi.c.inc | 205 ++++++++++++++++++------
+>  1 file changed, 160 insertions(+), 45 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a7c2e5c93e..00e5081598 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -25,6 +25,7 @@
->  #include "exec/cpu-defs.h"
->  #include "fpu/softfloat-types.h"
->  #include "qom/object.h"
-> +#include "qemu/int128.h"
->  #include "cpu_bits.h"
->
->  #define TCG_GUEST_DEFAULT_MO 0
-> @@ -481,6 +482,10 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVSt=
-ate *env, int csrno,
->                                            target_ulong new_value,
->                                            target_ulong write_mask);
->
-> +RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-> +                                Int128 *ret_value,
-> +                                Int128 new_value, Int128 write_mask);
-> +
->  typedef struct {
->      const char *name;
->      riscv_csr_predicate_fn predicate;
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index c036825723..bf2b338bfd 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -66,6 +66,9 @@ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, =
-tl)
->  DEF_HELPER_2(csrr, tl, env, int)
->  DEF_HELPER_3(csrw, void, env, int, tl)
->  DEF_HELPER_4(csrrw, tl, env, int, tl, tl)
-> +DEF_HELPER_2(csrr_i128, tl, env, int)
-> +DEF_HELPER_4(csrw_i128, void, env, int, tl, tl)
-> +DEF_HELPER_6(csrrw_i128, tl, env, int, tl, tl, tl, tl)
->  #ifndef CONFIG_USER_ONLY
->  DEF_HELPER_2(sret, tl, env, tl)
->  DEF_HELPER_2(mret, tl, env, tl)
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9f41954894..dca9e19a64 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1788,6 +1788,23 @@ RISCVException riscv_csrrw(CPURISCVState *env, int=
- csrno,
->      return RISCV_EXCP_NONE;
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
+trans/trans_rvi.c.inc
+> index ca354130ec..3a0ae28fef 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -881,20 +881,78 @@ static bool do_csrrw(DisasContext *ctx, int rd, int=
+ rc, TCGv src, TCGv mask)
+>      return do_csr_post(ctx);
 >  }
 >
-> +RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-> +                               Int128 *ret_value,
-> +                               Int128 new_value, Int128 write_mask)
+> +static bool do_csrr_i128(DisasContext *ctx, int rd, int rc)
 > +{
-> +    /* fall back to 64-bit version for now */
-> +    target_ulong ret_64;
-> +    RISCVException ret =3D riscv_csrrw(env, csrno, &ret_64,
-> +                                     int128_getlo(new_value),
-> +                                     int128_getlo(write_mask));
+> +    TCGv destl =3D dest_gpr(ctx, rd);
+> +    TCGv desth =3D dest_gprh(ctx, rd);
+> +    TCGv_i32 csr =3D tcg_constant_i32(rc);
 > +
-> +    if (ret_value) {
-> +        *ret_value =3D int128_make64(ret_64);
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
 > +    }
-> +
-> +    return ret;
+> +    gen_helper_csrr_i128(destl, cpu_env, csr);
+> +    tcg_gen_ld_tl(desth, cpu_env, offsetof(CPURISCVState, retxh));
+> +    gen_set_gpr128(ctx, rd, destl, desth);
+> +    return do_csr_post(ctx);
 > +}
 > +
->  /*
->   * Debugger support.  If not in user mode, set env->debugger before the
->   * riscv_csrrw call and clear it after the call.
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index ee7c24efe7..f4cf9c4698 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -69,6 +69,50 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
->      return val;
+> +static bool do_csrw_i128(DisasContext *ctx, int rc, TCGv srcl, TCGv srch=
+)
+> +{
+> +    TCGv_i32 csr =3D tcg_constant_i32(rc);
+> +
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
+> +    }
+> +    gen_helper_csrw_i128(cpu_env, csr, srcl, srch);
+> +    return do_csr_post(ctx);
+> +}
+> +
+> +static bool do_csrrw_i128(DisasContext *ctx, int rd, int rc,
+> +                          TCGv srcl, TCGv srch, TCGv maskl, TCGv maskh)
+> +{
+> +    TCGv destl =3D dest_gpr(ctx, rd);
+> +    TCGv desth =3D dest_gprh(ctx, rd);
+> +    TCGv_i32 csr =3D tcg_constant_i32(rc);
+> +
+> +    if (tb_cflags(ctx->base.tb) & CF_USE_ICOUNT) {
+> +        gen_io_start();
+> +    }
+> +    gen_helper_csrrw_i128(destl, cpu_env, csr, srcl, srch, maskl, maskh)=
+;
+> +    tcg_gen_ld_tl(desth, cpu_env, offsetof(CPURISCVState, retxh));
+> +    gen_set_gpr128(ctx, rd, destl, desth);
+> +    return do_csr_post(ctx);
+> +}
+> +
+>  static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
+>  {
+> -    TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
+> -
+> -    /*
+> -     * If rd =3D=3D 0, the insn shall not read the csr, nor cause any of=
+ the
+> -     * side effects that might occur on a csr read.
+> -     */
+> -    if (a->rd =3D=3D 0) {
+> -        return do_csrw(ctx, a->csr, src);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        TCGv src =3D get_gpr(ctx, a->rs1, EXT_NONE);
+> +
+> +        /*
+> +         * If rd =3D=3D 0, the insn shall not read the csr, nor cause an=
+y of the
+> +         * side effects that might occur on a csr read.
+> +         */
+> +        if (a->rd =3D=3D 0) {
+> +            return do_csrw(ctx, a->csr, src);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(-1);
+> +        return do_csrrw(ctx, a->rd, a->csr, src, mask);
+> +    } else {
+> +        TCGv srcl =3D get_gpr(ctx, a->rs1, EXT_NONE);
+> +        TCGv srch =3D get_gprh(ctx, a->rs1);
+> +
+> +        /*
+> +         * If rd =3D=3D 0, the insn shall not read the csr, nor cause an=
+y of the
+> +         * side effects that might occur on a csr read.
+> +         */
+> +        if (a->rd =3D=3D 0) {
+> +            return do_csrw_i128(ctx, a->csr, srcl, srch);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(-1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr, srcl, srch, mask, mask)=
+;
+>      }
+> -
+> -    TCGv mask =3D tcg_constant_tl(-1);
+> -    return do_csrrw(ctx, a->rd, a->csr, src, mask);
 >  }
 >
-> +target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
-> +{
-> +    Int128 rv =3D int128_zero();
-> +    RISCVException ret =3D riscv_csrrw_i128(env, csr, &rv,
-> +                                          int128_zero(),
-> +                                          int128_zero());
+>  static bool trans_csrrs(DisasContext *ctx, arg_csrrs *a)
+> @@ -906,13 +964,24 @@ static bool trans_csrrs(DisasContext *ctx, arg_csrr=
+s *a)
+>       * a zero value, the instruction will still attempt to write the
+>       * unmodified value back to the csr and will cause side effects.
+>       */
+> -    if (a->rs1 =3D=3D 0) {
+> -        return do_csrr(ctx, a->rd, a->csr);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr(ctx, a->rd, a->csr);
+> +        }
 > +
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        riscv_raise_exception(env, ret, GETPC());
-> +    }
+> +        TCGv ones =3D tcg_constant_tl(-1);
+> +        TCGv mask =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> +        return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+> +    } else {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr_i128(ctx, a->rd, a->csr);
+> +        }
 > +
-> +    env->retxh =3D int128_gethi(rv);
-> +    return int128_getlo(rv);
-> +}
-> +
-> +void helper_csrw_i128(CPURISCVState *env, int csr,
-> +                      target_ulong srcl, target_ulong srch)
-> +{
-> +    RISCVException ret =3D riscv_csrrw_i128(env, csr, NULL,
-> +                                          int128_make128(srcl, srch),
-> +                                          UINT128_MAX);
-> +
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        riscv_raise_exception(env, ret, GETPC());
-> +    }
-> +}
-> +
-> +target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
-> +                       target_ulong srcl, target_ulong srch,
-> +                       target_ulong maskl, target_ulong maskh)
-> +{
-> +    Int128 rv =3D int128_zero();
-> +    RISCVException ret =3D riscv_csrrw_i128(env, csr, &rv,
-> +                                          int128_make128(srcl, srch),
-> +                                          int128_make128(maskl, maskh));
-> +
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        riscv_raise_exception(env, ret, GETPC());
-> +    }
-> +
-> +    env->retxh =3D int128_gethi(rv);
-> +    return int128_getlo(rv);
-> +}
-> +
->  #ifndef CONFIG_USER_ONLY
+> +        TCGv ones =3D tcg_constant_tl(-1);
+> +        TCGv maskl =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> +        TCGv maskh =3D get_gprh(ctx, a->rs1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr, ones, ones, maskl, mask=
+h);
+>      }
+> -
+> -    TCGv ones =3D tcg_constant_tl(-1);
+> -    TCGv mask =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> -    return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+>  }
 >
->  target_ulong helper_sret(CPURISCVState *env, target_ulong cpu_pc_deb)
+>  static bool trans_csrrc(DisasContext *ctx, arg_csrrc *a)
+> @@ -924,28 +993,54 @@ static bool trans_csrrc(DisasContext *ctx, arg_csrr=
+c *a)
+>       * a zero value, the instruction will still attempt to write the
+>       * unmodified value back to the csr and will cause side effects.
+>       */
+> -    if (a->rs1 =3D=3D 0) {
+> -        return do_csrr(ctx, a->rd, a->csr);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv mask =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> +        return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+> +    } else {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr_i128(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv maskl =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> +        TCGv maskh =3D get_gprh(ctx, a->rs1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr,
+> +                             ctx->zero, ctx->zero, maskl, maskh);
+>      }
+> -
+> -    TCGv mask =3D get_gpr(ctx, a->rs1, EXT_ZERO);
+> -    return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+>  }
+>
+>  static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
+>  {
+> -    TCGv src =3D tcg_constant_tl(a->rs1);
+> -
+> -    /*
+> -     * If rd =3D=3D 0, the insn shall not read the csr, nor cause any of=
+ the
+> -     * side effects that might occur on a csr read.
+> -     */
+> -    if (a->rd =3D=3D 0) {
+> -        return do_csrw(ctx, a->csr, src);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        TCGv src =3D tcg_constant_tl(a->rs1);
+> +
+> +        /*
+> +         * If rd =3D=3D 0, the insn shall not read the csr, nor cause an=
+y of the
+> +         * side effects that might occur on a csr read.
+> +         */
+> +        if (a->rd =3D=3D 0) {
+> +            return do_csrw(ctx, a->csr, src);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(-1);
+> +        return do_csrrw(ctx, a->rd, a->csr, src, mask);
+> +    } else {
+> +        TCGv src =3D tcg_constant_tl(a->rs1);
+> +
+> +        /*
+> +         * If rd =3D=3D 0, the insn shall not read the csr, nor cause an=
+y of the
+> +         * side effects that might occur on a csr read.
+> +         */
+> +        if (a->rd =3D=3D 0) {
+> +            return do_csrw_i128(ctx, a->csr, src, ctx->zero);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(-1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr, src, ctx->zero, mask, m=
+ask);
+>      }
+> -
+> -    TCGv mask =3D tcg_constant_tl(-1);
+> -    return do_csrrw(ctx, a->rd, a->csr, src, mask);
+>  }
+>
+>  static bool trans_csrrsi(DisasContext *ctx, arg_csrrsi *a)
+> @@ -957,16 +1052,26 @@ static bool trans_csrrsi(DisasContext *ctx, arg_cs=
+rrsi *a)
+>       * a zero value, the instruction will still attempt to write the
+>       * unmodified value back to the csr and will cause side effects.
+>       */
+> -    if (a->rs1 =3D=3D 0) {
+> -        return do_csrr(ctx, a->rd, a->csr);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv ones =3D tcg_constant_tl(-1);
+> +        TCGv mask =3D tcg_constant_tl(a->rs1);
+> +        return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+> +    } else {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr_i128(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv ones =3D tcg_constant_tl(-1);
+> +        TCGv mask =3D tcg_constant_tl(a->rs1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr, ones, ones, mask, ctx->=
+zero);
+>      }
+> -
+> -    TCGv ones =3D tcg_constant_tl(-1);
+> -    TCGv mask =3D tcg_constant_tl(a->rs1);
+> -    return do_csrrw(ctx, a->rd, a->csr, ones, mask);
+>  }
+>
+> -static bool trans_csrrci(DisasContext *ctx, arg_csrrci *a)
+> +static bool trans_csrrci(DisasContext *ctx, arg_csrrci * a)
+>  {
+>      /*
+>       * If rs1 =3D=3D 0, the insn shall not write to the csr at all, nor
+> @@ -975,10 +1080,20 @@ static bool trans_csrrci(DisasContext *ctx, arg_cs=
+rrci *a)
+>       * a zero value, the instruction will still attempt to write the
+>       * unmodified value back to the csr and will cause side effects.
+>       */
+> -    if (a->rs1 =3D=3D 0) {
+> -        return do_csrr(ctx, a->rd, a->csr);
+> +    if (get_xl(ctx) < MXL_RV128) {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(a->rs1);
+> +        return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+> +    } else {
+> +        if (a->rs1 =3D=3D 0) {
+> +            return do_csrr_i128(ctx, a->rd, a->csr);
+> +        }
+> +
+> +        TCGv mask =3D tcg_constant_tl(a->rs1);
+> +        return do_csrrw_i128(ctx, a->rd, a->csr,
+> +                             ctx->zero, ctx->zero, mask, ctx->zero);
+>      }
+> -
+> -    TCGv mask =3D tcg_constant_tl(a->rs1);
+> -    return do_csrrw(ctx, a->rd, a->csr, ctx->zero, mask);
+>  }
 > --
 > 2.34.1
 >
