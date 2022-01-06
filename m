@@ -1,69 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5aFS-0005Ns-7x
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 16:24:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40638)
+	id 1n5aLN-00051F-U0
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 16:30:45 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42030)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5aFO-0005MJ-DF; Thu, 06 Jan 2022 16:24:35 -0500
-Received: from [2607:f8b0:4864:20::136] (port=43723
- helo=mail-il1-x136.google.com)
+ id 1n5aLM-0004zJ-PN; Thu, 06 Jan 2022 16:30:44 -0500
+Received: from [2607:f8b0:4864:20::133] (port=41865
+ helo=mail-il1-x133.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5aFM-0000yB-Pv; Thu, 06 Jan 2022 16:24:34 -0500
-Received: by mail-il1-x136.google.com with SMTP id d3so3079336ilr.10;
- Thu, 06 Jan 2022 13:24:32 -0800 (PST)
+ id 1n5aLL-0002Dj-61; Thu, 06 Jan 2022 16:30:44 -0500
+Received: by mail-il1-x133.google.com with SMTP id r16so1413997ile.8;
+ Thu, 06 Jan 2022 13:30:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=3ZZgx1lKmfGR5UTPfUfTNyFikZXD7nhlz4qKMhxLYms=;
- b=m13fEMSpbueSylh5H7jt1K3JnvfAxlx4L3Um96fQBhijUccwjD4EnNO0DYZaL5g4gj
- gd5lzOcCmloTcWB0JceV997A2WE95g7N86m8GeGjEAbnqXp6MCdlO0w8RazAa+6h37dR
- wViv74/Qky7guBdt8BPGobAZX1TEFsW1KFN+sForRw9up0kahaarvnUZ0UzoyFPivAQp
- apqcWWofSurpmbwY3XiV8sifLgZVvGVM2yggWL0BQ9A1khZ4U6uKEi8KRne2t8hoYVfp
- 2dQdcqEhsiArRw/I0SLu0kuLLpQ2eIo28ldvMJn1MJnY21TSIh5WtUoL5ZrsCu69PMxk
- UM+g==
+ :cc; bh=EHDqSzQq9d5rvs/fWBJCpGh6zHf8jrG5WwPdUWwMyXM=;
+ b=dqG2cIO6KptW68YgjwqyNheBcixS50kBIoKw6NVVLubxJJXa/J+Rp7CpAujHoDxYjR
+ pwh64gzjlHjRwFi1Ank2C69RA5WV79Jx4zTvE/8cj7290dDM0Aic09JhiYUIMQjFxSX8
+ hdhmPRZIbZl/WFmxe4Bo1R0eTSYXKqIS3hiub7VnIUaYAU2kaEnu2NRVfSKS4Q3h35NH
+ iWltrX4DLKKrI/xgzUXWHiVO5A9Z+BuXBAoxGs9NZ4G9oN/KwP6bVy2aW2I79JmEo7BI
+ 82cCl214HAqWb7wSKV14OviqXd/MfrIRVGLav/kyNl1AJyurd1g+K4nRFfmbyzMHnUJk
+ y36A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=3ZZgx1lKmfGR5UTPfUfTNyFikZXD7nhlz4qKMhxLYms=;
- b=yl4P3AXJhJQIn4kQ+Gof80/u1tPWcHSQzL6FrRkK9LqI64CC6ydOcyBCgETdV0SUgi
- eqU1AW+lzPT+2nWsthGFzuWjdMYIo9zueHuLiP0hvfKKNO56uq+F1BIKf24yYHNIGeO4
- Ms9tGDXajjj0PeIC3RQ6KEYICiKSeYCZOKov7QAk3cwzJwpiM5kgJU2/TAcDBiLff1x/
- Hlhfp29X3K8ulyXMmOGOvwQDdVTjoHAah4d6GDOnN6SyDzDRKUyb3VOJOfMbA9Sh+dcE
- 23bK1Wsn8rl9igJ+F6h3m93uZ5bCoJXWFn1MY5pOGwFTAoh72Gikbi5+GIB3SrJqlghN
- 21AQ==
-X-Gm-Message-State: AOAM533HVd4lz2z79s9eCun9ZN0dRQNXu59b067dvcelGq6S9tev1C4b
- GmfO9cFlP33ootikK8vNIGN50A0G1cRZkHdCms8=
-X-Google-Smtp-Source: ABdhPJxFNfpYAT2VmuyGYA2JbNrcKkEYxHnXSRgWehxa5g5y98YyAC6mzyzYxQAslJ8kn93Y/xuXUXM4f1qAeYfzaRE=
+ :message-id:subject:to:cc;
+ bh=EHDqSzQq9d5rvs/fWBJCpGh6zHf8jrG5WwPdUWwMyXM=;
+ b=5f6Hs5YuRaR1ICbSQuQyCtSE9FRZLTGpWkkVTXXntSqy0GWSAR/5gbs1iK3tD4JfGq
+ gdjSDsjQVmFu8R62NdBayfCKWtUlZjQm3NM4IliwBcSZVDXjhS5rrk4o7hQYksxveTGt
+ Gu/vx6sAaORM0rgyyoECrntl1YwxfoKVhxtmqpqsc3fm5n4Gz4tPPtFsZUY8qDVGzi+Q
+ Es/jFA3y+SCNGzF4L12XsxZ3pggKMrtNWrsJHSYs3pk9pTkWaMKvg09N+ShbBpoDDQeG
+ LUbiYPbFSyk/IFu8ddXX5GHB7oyJXx6x3c+CtIgL212wwYVbYuQAFOVoXmwahfj2v0ge
+ eO2A==
+X-Gm-Message-State: AOAM533DFCwqVjLPN7sgYsbQMKWd6q2d9Bw0xnlozTluaoRa90/vllv/
+ Neyxs0hxeRfFqdTWMfqO4GQnDeRKS7yBvUcg9vQ=
+X-Google-Smtp-Source: ABdhPJwA9SCEbsMGgMzmgIY0dWI2keuo7ceaxVTH3TYQ38WzVu67+6kVddsLI1FO55nxKZtgi8RpJo5fifKouluXSUA=
 X-Received: by 2002:a05:6e02:1569:: with SMTP id
- k9mr27242941ilu.290.1641504271157; 
- Thu, 06 Jan 2022 13:24:31 -0800 (PST)
+ k9mr27251063ilu.290.1641504641577; 
+ Thu, 06 Jan 2022 13:30:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20220106210108.138226-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20220106210108.138226-8-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20220106210108.138226-8-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20220106134020.1628889-1-philipp.tomsich@vrull.eu>
+In-Reply-To: <20220106134020.1628889-1-philipp.tomsich@vrull.eu>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 7 Jan 2022 07:24:05 +1000
-Message-ID: <CAKmqyKMB-zZKNf-HRz-=RR+wtM7UHFo4wCJUiCwF0nJrH4OzOg@mail.gmail.com>
-Subject: Re: [PATCH v8 07/18] target/riscv: setup everything for rv64 to
- support rv128 execution
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
+Date: Fri, 7 Jan 2022 07:30:15 +1000
+Message-ID: <CAKmqyKPcYRPsvLvCUs-kL6f+4YJPZBgcL02Eoegrmv=HLiAUrg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix position of 'experimental' comment
+To: Philipp Tomsich <philipp.tomsich@vrull.eu>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Fabien Portas <fabien.portas@grenoble-inp.org>, 
- Alistair Francis <alistair.francis@wdc.com>
+ Bin Meng <bin.meng@windriver.com>, Vineet Gupta <vineetg@rivosinc.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::136
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -84,57 +76,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2022 21:24:37 -0000
+X-List-Received-Date: Thu, 06 Jan 2022 21:30:45 -0000
 
-On Fri, Jan 7, 2022 at 7:04 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
-<frederic.petrot@univ-grenoble-alpes.fr> wrote:
+On Fri, Jan 7, 2022 at 12:30 AM Philipp Tomsich
+<philipp.tomsich@vrull.eu> wrote:
 >
-> This patch adds the support of the '-cpu rv128' option to
-> qemu-system-riscv64 so that we can indicate that we want to run rv128
-> executables.
-> Still, there is no support for 128-bit insns at that stage so qemu fails
-> miserably (as expected) if launched with this option.
+> When commit 0643c12e4b dropped the 'x-' prefix for Zb[abcs] and set
+> them to be enabled by default, the comment about experimental
+> extensions was kept in place above them.  This moves it down a few
+> lines to only cover experimental extensions.
 >
-> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
-ble-alpes.fr>
-> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  include/disas/dis-asm.h |  1 +
->  target/riscv/cpu.h      |  1 +
->  disas/riscv.c           |  5 +++++
->  target/riscv/cpu.c      | 20 ++++++++++++++++++++
->  target/riscv/gdbstub.c  |  5 +++++
->  5 files changed, 32 insertions(+)
+> References: 0643c12e4b ("target/riscv: Enable bitmanip Zb[abcs] instructions")
 >
-> diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
-> index 08e1beec85..102a1e7f50 100644
-> --- a/include/disas/dis-asm.h
-> +++ b/include/disas/dis-asm.h
-> @@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
->  int print_insn_xtensa           (bfd_vma, disassemble_info*);
->  int print_insn_riscv32          (bfd_vma, disassemble_info*);
->  int print_insn_riscv64          (bfd_vma, disassemble_info*);
-> +int print_insn_riscv128         (bfd_vma, disassemble_info*);
->  int print_insn_rx(bfd_vma, disassemble_info *);
->  int print_insn_hexagon(bfd_vma, disassemble_info *);
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index fa5d238530..efe481f5fb 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -38,6 +38,7 @@
->  #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
->  #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
->  #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
-> +#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+> Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
 
-As this series only adds partial support for 128-bit support, I think
-we should probably change this to "x-rv128". That way we indicate to
-users that it is experimental. That allows us more flexibility in the
-future to have breaking changes and will hopefully avoid confusion
-about the current state. What do you think? I can just make the change
-when I apply the patches.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+>
+> ---
+>
+>  target/riscv/cpu.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6ef3314bce..e322e729d2 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -640,11 +640,12 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+>
+> -    /* These are experimental so mark with 'x-' */
+>      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+>      DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+> +
+> +    /* These are experimental so mark with 'x-' */
+>      DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>      /* ePMP 0.9.3 */
+> --
+> 2.33.1
+>
+>
 
