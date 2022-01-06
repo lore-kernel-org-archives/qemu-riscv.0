@@ -1,53 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5MZp-0001bS-Sl
-	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 01:48:46 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41954)
+	id 1n5ODZ-0002zr-R2
+	for mharc-qemu-riscv@gnu.org; Thu, 06 Jan 2022 03:33:54 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35200)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5MZj-0001Y8-89; Thu, 06 Jan 2022 01:48:39 -0500
-Received: from [2607:f8b0:4864:20::d2e] (port=40475
- helo=mail-io1-xd2e.google.com)
+ id 1n5ODV-0002z1-Cc; Thu, 06 Jan 2022 03:33:50 -0500
+Received: from [2607:f8b0:4864:20::12d] (port=34725
+ helo=mail-il1-x12d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n5MZg-0003al-Sr; Thu, 06 Jan 2022 01:48:38 -0500
-Received: by mail-io1-xd2e.google.com with SMTP id q5so1975701ioj.7;
- Wed, 05 Jan 2022 22:48:36 -0800 (PST)
+ id 1n5ODT-0005Oe-Kq; Thu, 06 Jan 2022 03:33:49 -0500
+Received: by mail-il1-x12d.google.com with SMTP id d14so1563939ila.1;
+ Thu, 06 Jan 2022 00:33:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=R+IODdW14SUUsmk3u4dlBPdT56pjyvHBc0NcQcAIrfg=;
- b=Tr9AFq44C6+aoZcz7Ny53QFywGU2e5SoMsE7R4rQMc6xEc5BE0dI9RVkPXXtd24lIj
- A9I0sAQ5BAqs5kGYqxnPXv4Y7Y2gXJnor0T6z2Zz8NvafXis4CicFx6Y0sJFS7AZr533
- M4FJXVG+gX0NpfBoNzfw7TJtAeuA/kETQ07QTVFG/iACDH/9GQ3cQIlXqPIrNgjt2TZr
- LvgoRjbQgNS7hXDW8LeXUXAG2Ufoa8zji/ZaBSGGzKWXx4QautZTCVtvTzDLEuJfn71y
- 8/+ju5LOBOK9KlR4axA/K/AnIIvTndWRX+hXMjMWbPaEbB0Vagkv6FuUEMe07/VSVksx
- XF3w==
+ bh=+20Jk4BIpCSccG46Mua2Pahpidr/Wmod4eO3mnfxAP0=;
+ b=kYiwkeg3uns6BVOFNrj7PRyBTQryfsQBKpjQ+IWTT7l9SlrltTH8/IwzRpGJzm6zTy
+ amCNGbii/N52d5oKPpfWFML72sbX6ZksClUTLbLZKZlHBF/H+37WmlZH7NtFGu6rufk+
+ 3+H86RPGt/GPRCtwhbGuBidakwO/eP/Lt7I/3LbX0qvD4rdfSNYTaLlbPWhH3j9OP9/8
+ Gv5okyysD7HifF+B2RVml0q/oLj83l/g1odiz1XAmTBIzPN4lnIXna10OaTzBgrpGubv
+ vyzz9jgG+jn1/O30d6ouyGm2WLBycliwyiDs+teliXXWWi4sHL2uDyqlW71d+st3ArnH
+ HDGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=R+IODdW14SUUsmk3u4dlBPdT56pjyvHBc0NcQcAIrfg=;
- b=igqRRB8SEYfkS3rQ3Z3Jv05N9XvNdYGrVvxubDdJK7N+qqd3PQMYMgMrDrtaWfjHjA
- KrXnpl5n0bgwKda9kK+x65/WXz74fssrWIUzY9iiAUDuhLvQWWVq80REmZRVg4TcnNMO
- aailHMgzf10zQ+oiV/Fwlwa5PptdtNOj3vMQBHq+BULyzwCuh1Zo3BTTWTH4K4TDTko6
- iiR4M3GRq3nhJr0FCmeWX6T1WdY4jwSORU8JwgoOOVEdHxy2OtxzuRgHslk8lMTso5ba
- 8mmbbgPEUfMaiVa8wTVETMm/hdogYtX8HkgYkI3U6QEJKqFXLBJMjUd2KZO+UEh0+BI/
- 8Lgg==
-X-Gm-Message-State: AOAM533a405i8LptYQKx1JLDEFAcHX7n7qGo11za3I3nl/dOn2AjgPZr
- XnNLT02DGnSEFvWTWpkI0ufvQlFizv87glh3WX8=
-X-Google-Smtp-Source: ABdhPJxvr/EKm5ROOeuVIoU865qQs1cZ9J7eE6WRnnBMyjr2bTNBoyIEYYzej+G1RspfpQzCplA8LLvOJidviVkBO/A=
-X-Received: by 2002:a05:6602:140c:: with SMTP id
- t12mr27262710iov.187.1641451715272; 
- Wed, 05 Jan 2022 22:48:35 -0800 (PST)
+ bh=+20Jk4BIpCSccG46Mua2Pahpidr/Wmod4eO3mnfxAP0=;
+ b=r5MBCybkK5zngHIF2he84WkVGj8zc476Dsnb5mTZSYBwDQPhBxGKBUiO9oWxsLqfPg
+ TsaBc5E+WaCv9oviDzkJjMYp1/rJj+kSU/V1Z9YfXTbZ7kbBKbLGAK2doM/CFhuPGstU
+ BMgQF9+88uB8f+vfQjVU9CgsuxIWd4XQ3n8OdH5+wtHVfQyBuBGpROTG2Xde7zD0Xf24
+ upx+cJE31HGjZrZb5132ttlt1TjYwVUif1L9M8SQlnjE096ZgKNa1QtuLYC3i40raxUC
+ HMxswIk8iWafhYbHq244eWjFla98hNTHaKi2w/0WfaeDwueh24Tjk05eli1drLbQda7X
+ +7QQ==
+X-Gm-Message-State: AOAM532bzLp/oQdZhwOH9ndGDnEzu6DtNhoYOeqw7FnoQmB/jjpBmTPm
+ o1OsN6gHAsSLbMuFLkXroZaOSi1D8t/kB9swcZk=
+X-Google-Smtp-Source: ABdhPJyai4ISXF0lO9mEDc9Fv8DjJulvEWFS6gIN0uCgMMwPcFDQ2t4VxQmZCy7HxLezCXrYMmbJ+VKVsFQ1+sVaiRM=
+X-Received: by 2002:a05:6e02:1806:: with SMTP id
+ a6mr24581674ilv.221.1641458026117; 
+ Thu, 06 Jan 2022 00:33:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
- <20211213163834.170504-19-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20211213163834.170504-19-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20211213163834.170504-1-frederic.petrot@univ-grenoble-alpes.fr>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Jan 2022 16:48:08 +1000
-Message-ID: <CAKmqyKPqX0iGJ3T6+PDHvbF+MLHD=n4JqQt3Cs6ORd_sfQ5sxQ@mail.gmail.com>
-Subject: Re: [PATCH v7 18/18] target/riscv: actual functions to realize crs
- 128-bit insns
+Date: Thu, 6 Jan 2022 18:33:19 +1000
+Message-ID: <CAKmqyKPTa3sOJa403rgPhL=Us=+c-QhT1fRvj-arm9HkPhKZnA@mail.gmail.com>
+Subject: Re: [PATCH v7 00/18] Adding partial support for 128-bit riscv target
 To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
  <frederic.petrot@univ-grenoble-alpes.fr>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
@@ -60,10 +58,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12d
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -84,438 +82,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jan 2022 06:48:40 -0000
+X-List-Received-Date: Thu, 06 Jan 2022 08:33:51 -0000
 
-On Tue, Dec 14, 2021 at 3:01 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+On Tue, Dec 14, 2021 at 2:39 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
 <frederic.petrot@univ-grenoble-alpes.fr> wrote:
 >
-> The csrs are accessed through function pointers: we add 128-bit read
-> operations in the table for three csrs (writes fallback to the
-> 64-bit version as the upper 64-bit information is handled elsewhere):
-> - misa, as mxl is needed for proper operation,
-> - mstatus and sstatus, to return sd
-> In addition, we also add read and write accesses to the machine and
-> supervisor scratch registers.
+> This series of patches provides partial 128-bit support for the riscv
+> target architecture, namely RVI and RVM, with minimal csr support.
 >
-> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
-ble-alpes.fr>
-> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+> Thanks again for the reviews and advices.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I think this is all reviewed now. I was getting an error when trying
+to apply it though, do you mind rebasing on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
 
 Alistair
 
-> ---
->  target/riscv/cpu.h      |   7 ++
->  target/riscv/cpu_bits.h |   3 +
->  target/riscv/csr.c      | 195 +++++++++++++++++++++++++++++++++-------
->  3 files changed, 175 insertions(+), 30 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 00e5081598..3e770e3d03 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -486,12 +486,19 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env,=
- int csrno,
->                                  Int128 *ret_value,
->                                  Int128 new_value, Int128 write_mask);
+> v7:
+> - code motion following reviews
+> - correction of a bug preventing riscv{32,64}-linux-user to compile
+> - sync with master
+> - Note that 'make check' fails for 5 qemu-iotests cases, namely
+>   040, 041, 127, 256, and 267, but they also fail with
+>   qemu-system-riscv{32,64} from current master
 >
-> +typedef RISCVException (*riscv_csr_read128_fn)(CPURISCVState *env, int c=
-srno,
-> +                                               Int128 *ret_value);
-> +typedef RISCVException (*riscv_csr_write128_fn)(CPURISCVState *env, int =
-csrno,
-> +                                             Int128 new_value);
-> +
->  typedef struct {
->      const char *name;
->      riscv_csr_predicate_fn predicate;
->      riscv_csr_read_fn read;
->      riscv_csr_write_fn write;
->      riscv_csr_op_fn op;
-> +    riscv_csr_read128_fn read128;
-> +    riscv_csr_write128_fn write128;
->  } riscv_csr_operations;
+> v6:
+> - support for '-cpu rv128' in qemu-system-riscv64 to handle 128-bit
+>   executables (no more qemu-system-riscv128)
+> - remove useless (and buggy) big-endian support in lq/sq
 >
->  /* CSR function table constants */
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 9913fa9f77..390ba0a52f 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -392,6 +392,7 @@
+> v5:
+> - split the memop define renaming and addition in two patches
+> - 128-bit div/rem operations using host-utils functions
+> - removed useless rv128 tests at various places
+> - refactoring the slt/bxx part so as to share the comparison part
+> - refactoring the 128-bit csr handling to share code more largely
+>   Also forwarding writes to the 64-bit version when not 128-bit version
+>   exists, as a vast majority of the csrs does not use the upper 64-bits
 >
->  #define MSTATUS32_SD        0x80000000
->  #define MSTATUS64_SD        0x8000000000000000ULL
-> +#define MSTATUSH128_SD      0x8000000000000000ULL
+> v4:
+> - safer and cleaner access to the gpr upper part
+> - locals for load/store/div/rem helpers
+> - cleans out the 128-bit div/rem code
+> - corrects numerous bugs and performs optimizations on shifts and mults
+> - withdraws the change in page size and the vm schemes we introduced
 >
->  #define MISA32_MXL          0xC0000000
->  #define MISA64_MXL          0xC000000000000000ULL
-> @@ -413,6 +414,8 @@ typedef enum {
->  #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
->  #define SSTATUS_MXR         0x00080000
+> v3:
+> - v2 refactored following Richard's xl patch changes
 >
-> +#define SSTATUS64_UXL       0x0000000300000000ULL
-> +
->  #define SSTATUS32_SD        0x80000000
->  #define SSTATUS64_SD        0x8000000000000000ULL
+> v2:
+> - load and store making use of new memop.h sizes
+> - use of the existing Int128 computations in helpers, and addition of
+>   a few more operations there, in particular division and remainder
+> - refactoring of the calls to the code generation helpers
+> - split of the patch in smaller pieces
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index dca9e19a64..404aa2f31d 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -453,7 +453,7 @@ static const target_ulong vs_delegable_excps =3D DELE=
-GABLE_EXCPS &
->        (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
->  static const target_ulong sstatus_v1_10_mask =3D SSTATUS_SIE | SSTATUS_S=
-PIE |
->      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
-> -    SSTATUS_SUM | SSTATUS_MXR;
-> +    SSTATUS_SUM | SSTATUS_MXR | (target_ulong)SSTATUS64_UXL;
->  static const target_ulong sip_writable_mask =3D SIP_SSIP | MIP_USIP | MI=
-P_UEIP;
->  static const target_ulong hip_writable_mask =3D MIP_VSSIP;
->  static const target_ulong hvip_writable_mask =3D MIP_VSSIP | MIP_VSTIP |=
- MIP_VSEIP;
-> @@ -498,6 +498,8 @@ static uint64_t add_status_sd(RISCVMXL xl, uint64_t s=
-tatus)
->              return status | MSTATUS32_SD;
->          case MXL_RV64:
->              return status | MSTATUS64_SD;
-> +        case MXL_RV128:
-> +            return MSTATUSH128_SD;
->          default:
->              g_assert_not_reached();
->          }
-> @@ -547,10 +549,11 @@ static RISCVException write_mstatus(CPURISCVState *=
-env, int csrno,
+> v1:
+> - introducing support for rv128 for basic integer and M extension insns
 >
->      mstatus =3D (mstatus & ~mask) | (val & mask);
+> Fr=C3=A9d=C3=A9ric P=C3=A9trot (18):
+>   exec/memop: Adding signedness to quad definitions
+>   exec/memop: Adding signed quad and octo defines
+>   qemu/int128: addition of div/rem 128-bit operations
+>   target/riscv: additional macros to check instruction support
+>   target/riscv: separation of bitwise logic and arithmetic helpers
+>   target/riscv: array for the 64 upper bits of 128-bit registers
+>   target/riscv: setup everything for rv64 to support rv128 execution
+>   target/riscv: moving some insns close to similar insns
+>   target/riscv: accessors to registers upper part and 128-bit load/store
+>   target/riscv: support for 128-bit bitwise instructions
+>   target/riscv: support for 128-bit U-type instructions
+>   target/riscv: support for 128-bit shift instructions
+>   target/riscv: support for 128-bit arithmetic instructions
+>   target/riscv: support for 128-bit M extension
+>   target/riscv: adding high part of some csrs
+>   target/riscv: helper functions to wrap calls to 128-bit csr insns
+>   target/riscv: modification of the trans_csrxx for 128-bit support
+>   target/riscv: actual functions to realize crs 128-bit insns
 >
-> -    if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
-> +    RISCVMXL xl =3D riscv_cpu_mxl(env);
-> +    if (xl > MXL_RV32) {
->          /* SXL and UXL fields are for now read only */
-> -        mstatus =3D set_field(mstatus, MSTATUS64_SXL, MXL_RV64);
-> -        mstatus =3D set_field(mstatus, MSTATUS64_UXL, MXL_RV64);
-> +        mstatus =3D set_field(mstatus, MSTATUS64_SXL, xl);
-> +        mstatus =3D set_field(mstatus, MSTATUS64_UXL, xl);
->      }
->      env->mstatus =3D mstatus;
+>  include/disas/dis-asm.h                    |   1 +
+>  include/exec/memop.h                       |  15 +-
+>  include/qemu/int128.h                      |  27 +
+>  include/tcg/tcg-op.h                       |   4 +-
+>  target/arm/translate-a32.h                 |   4 +-
+>  target/riscv/cpu.h                         |  22 +
+>  target/riscv/cpu_bits.h                    |   3 +
+>  target/riscv/helper.h                      |   9 +
+>  target/riscv/insn16.decode                 |  27 +-
+>  target/riscv/insn32.decode                 |  25 +
+>  accel/tcg/cputlb.c                         |  30 +-
+>  accel/tcg/user-exec.c                      |   8 +-
+>  disas/riscv.c                              |   5 +
+>  target/alpha/translate.c                   |  32 +-
+>  target/arm/helper-a64.c                    |   8 +-
+>  target/arm/translate-a64.c                 |   8 +-
+>  target/arm/translate-neon.c                |   6 +-
+>  target/arm/translate-sve.c                 |  10 +-
+>  target/arm/translate-vfp.c                 |   8 +-
+>  target/arm/translate.c                     |   2 +-
+>  target/cris/translate.c                    |   2 +-
+>  target/hppa/translate.c                    |   4 +-
+>  target/i386/tcg/mem_helper.c               |   2 +-
+>  target/i386/tcg/translate.c                |  36 +-
+>  target/m68k/op_helper.c                    |   2 +-
+>  target/mips/tcg/translate.c                |  58 +-
+>  target/mips/tcg/tx79_translate.c           |   8 +-
+>  target/ppc/translate.c                     |  32 +-
+>  target/riscv/cpu.c                         |  29 +
+>  target/riscv/csr.c                         | 194 +++++-
+>  target/riscv/gdbstub.c                     |   5 +
+>  target/riscv/m128_helper.c                 | 109 +++
+>  target/riscv/machine.c                     |  22 +
+>  target/riscv/op_helper.c                   |  44 ++
+>  target/riscv/translate.c                   | 252 ++++++-
+>  target/s390x/tcg/mem_helper.c              |   8 +-
+>  target/s390x/tcg/translate.c               |   8 +-
+>  target/sh4/translate.c                     |  12 +-
+>  target/sparc/translate.c                   |  36 +-
+>  target/tricore/translate.c                 |   4 +-
+>  target/xtensa/translate.c                  |   4 +-
+>  tcg/tcg.c                                  |   4 +-
+>  tcg/tci.c                                  |  16 +-
+>  util/int128.c                              | 147 +++++
+>  accel/tcg/ldst_common.c.inc                |   8 +-
+>  target/mips/tcg/micromips_translate.c.inc  |  10 +-
+>  target/ppc/translate/fixedpoint-impl.c.inc |  22 +-
+>  target/ppc/translate/fp-impl.c.inc         |   4 +-
+>  target/ppc/translate/vsx-impl.c.inc        |  42 +-
+>  target/riscv/insn_trans/trans_rva.c.inc    |  22 +-
+>  target/riscv/insn_trans/trans_rvb.c.inc    |  48 +-
+>  target/riscv/insn_trans/trans_rvd.c.inc    |   4 +-
+>  target/riscv/insn_trans/trans_rvh.c.inc    |   4 +-
+>  target/riscv/insn_trans/trans_rvi.c.inc    | 730 ++++++++++++++++++---
+>  target/riscv/insn_trans/trans_rvm.c.inc    | 192 +++++-
+>  target/s390x/tcg/translate_vx.c.inc        |  18 +-
+>  tcg/aarch64/tcg-target.c.inc               |   2 +-
+>  tcg/arm/tcg-target.c.inc                   |  10 +-
+>  tcg/i386/tcg-target.c.inc                  |  12 +-
+>  tcg/mips/tcg-target.c.inc                  |  12 +-
+>  tcg/ppc/tcg-target.c.inc                   |  16 +-
+>  tcg/riscv/tcg-target.c.inc                 |   6 +-
+>  tcg/s390x/tcg-target.c.inc                 |  18 +-
+>  tcg/sparc/tcg-target.c.inc                 |  16 +-
+>  target/riscv/meson.build                   |   1 +
+>  target/s390x/tcg/insn-data.def             |  28 +-
+>  util/meson.build                           |   1 +
+>  67 files changed, 2006 insertions(+), 512 deletions(-)
+>  create mode 100644 target/riscv/m128_helper.c
+>  create mode 100644 util/int128.c
 >
-> @@ -579,6 +582,20 @@ static RISCVException write_mstatush(CPURISCVState *=
-env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException read_mstatus_i128(CPURISCVState *env, int csrno,
-> +                                        Int128 *val)
-> +{
-> +    *val =3D int128_make128(env->mstatus, add_status_sd(MXL_RV128, env->=
-mstatus));
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_misa_i128(CPURISCVState *env, int csrno,
-> +                                     Int128 *val)
-> +{
-> +    *val =3D int128_make128(env->misa_ext, (uint64_t)MXL_RV128 << 62);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_misa(CPURISCVState *env, int csrno,
->                                  target_ulong *val)
->  {
-> @@ -736,6 +753,21 @@ static RISCVException write_mcounteren(CPURISCVState=
- *env, int csrno,
->  }
->
->  /* Machine Trap Handling */
-> +static RISCVException read_mscratch_i128(CPURISCVState *env, int csrno,
-> +                                         Int128 *val)
-> +{
-> +    *val =3D int128_make128(env->mscratch, env->mscratchh);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_mscratch_i128(CPURISCVState *env, int csrno,
-> +                                          Int128 val)
-> +{
-> +    env->mscratch =3D int128_getlo(val);
-> +    env->mscratchh =3D int128_gethi(val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_mscratch(CPURISCVState *env, int csrno,
->                                      target_ulong *val)
->  {
-> @@ -815,6 +847,16 @@ static RISCVException rmw_mip(CPURISCVState *env, in=
-t csrno,
->  }
->
->  /* Supervisor Trap Setup */
-> +static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-> +                                        Int128 *val)
-> +{
-> +    uint64_t mask =3D sstatus_v1_10_mask;
-> +    uint64_t sstatus =3D env->mstatus & mask;
-> +
-> +    *val =3D int128_make128(sstatus, add_status_sd(MXL_RV128, sstatus));
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_sstatus(CPURISCVState *env, int csrno,
->                                     target_ulong *val)
->  {
-> @@ -908,6 +950,21 @@ static RISCVException write_scounteren(CPURISCVState=
- *env, int csrno,
->  }
->
->  /* Supervisor Trap Handling */
-> +static RISCVException read_sscratch_i128(CPURISCVState *env, int csrno,
-> +                                         Int128 *val)
-> +{
-> +    *val =3D int128_make128(env->sscratch, env->sscratchh);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_sscratch_i128(CPURISCVState *env, int csrno,
-> +                                          Int128 val)
-> +{
-> +    env->sscratch =3D int128_getlo(val);
-> +    env->sscratchh =3D int128_gethi(val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_sscratch(CPURISCVState *env, int csrno,
->                                      target_ulong *val)
->  {
-> @@ -1708,16 +1765,13 @@ static RISCVException write_upmbase(CPURISCVState=
- *env, int csrno,
->   * csrrc  <->  riscv_csrrw(env, csrno, ret_value, 0, value);
->   */
->
-> -RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-> -                           target_ulong *ret_value,
-> -                           target_ulong new_value, target_ulong write_ma=
-sk)
-> +static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
-> +                                               int csrno,
-> +                                               bool write_mask,
-> +                                               RISCVCPU *cpu)
->  {
-> -    RISCVException ret;
-> -    target_ulong old_value;
-> -    RISCVCPU *cpu =3D env_archcpu(env);
-> -    int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;
-> -
->      /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fail=
-s */
-> +    int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;
->  #if !defined(CONFIG_USER_ONLY)
->      int effective_priv =3D env->priv;
->
-> @@ -1749,10 +1803,17 @@ RISCVException riscv_csrrw(CPURISCVState *env, in=
-t csrno,
->      if (!csr_ops[csrno].predicate) {
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
-> -    ret =3D csr_ops[csrno].predicate(env, csrno);
-> -    if (ret !=3D RISCV_EXCP_NONE) {
-> -        return ret;
-> -    }
-> +
-> +    return csr_ops[csrno].predicate(env, csrno);
-> +}
-> +
-> +static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-> +                                       target_ulong *ret_value,
-> +                                       target_ulong new_value,
-> +                                       target_ulong write_mask)
-> +{
-> +    RISCVException ret;
-> +    target_ulong old_value;
->
->      /* execute combined read/write operation if it exists */
->      if (csr_ops[csrno].op) {
-> @@ -1788,20 +1849,89 @@ RISCVException riscv_csrrw(CPURISCVState *env, in=
-t csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-> +                           target_ulong *ret_value,
-> +                           target_ulong new_value, target_ulong write_ma=
-sk)
-> +{
-> +    RISCVCPU *cpu =3D env_archcpu(env);
-> +
-> +    RISCVException ret =3D riscv_csrrw_check(env, csrno, write_mask, cpu=
-);
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask=
-);
-> +}
-> +
-> +static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-> +                                        Int128 *ret_value,
-> +                                        Int128 new_value,
-> +                                        Int128 write_mask)
-> +{
-> +    RISCVException ret;
-> +    Int128 old_value;
-> +
-> +    /* read old value */
-> +    ret =3D csr_ops[csrno].read128(env, csrno, &old_value);
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
-> +    /* write value if writable and write mask set, otherwise drop writes=
- */
-> +    if (int128_nz(write_mask)) {
-> +        new_value =3D int128_or(int128_and(old_value, int128_not(write_m=
-ask)),
-> +                              int128_and(new_value, write_mask));
-> +        if (csr_ops[csrno].write128) {
-> +            ret =3D csr_ops[csrno].write128(env, csrno, new_value);
-> +            if (ret !=3D RISCV_EXCP_NONE) {
-> +                return ret;
-> +            }
-> +        } else if (csr_ops[csrno].write) {
-> +            /* avoids having to write wrappers for all registers */
-> +            ret =3D csr_ops[csrno].write(env, csrno, int128_getlo(new_va=
-lue));
-> +            if (ret !=3D RISCV_EXCP_NONE) {
-> +                return ret;
-> +            }
-> +        }
-> +    }
-> +
-> +    /* return old value */
-> +    if (ret_value) {
-> +        *ret_value =3D old_value;
-> +    }
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-> -                               Int128 *ret_value,
-> -                               Int128 new_value, Int128 write_mask)
-> +                                Int128 *ret_value,
-> +                                Int128 new_value, Int128 write_mask)
->  {
-> -    /* fall back to 64-bit version for now */
-> -    target_ulong ret_64;
-> -    RISCVException ret =3D riscv_csrrw(env, csrno, &ret_64,
-> -                                     int128_getlo(new_value),
-> -                                     int128_getlo(write_mask));
-> +    RISCVException ret;
-> +    RISCVCPU *cpu =3D env_archcpu(env);
->
-> -    if (ret_value) {
-> -        *ret_value =3D int128_make64(ret_64);
-> +    ret =3D riscv_csrrw_check(env, csrno, int128_nz(write_mask), cpu);
-> +    if (ret !=3D RISCV_EXCP_NONE) {
-> +        return ret;
->      }
->
-> +    if (csr_ops[csrno].read128) {
-> +        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write=
-_mask);
-> +    }
-> +
-> +    /*
-> +     * Fall back to 64-bit version for now, if the 128-bit alternative i=
-sn't
-> +     * at all defined.
-> +     * Note, some CSRs don't need to extend to MXLEN (64 upper bits non
-> +     * significant), for those, this fallback is correctly handling the =
-accesses
-> +     */
-> +    target_ulong old_value;
-> +    ret =3D riscv_csrrw_do64(env, csrno, &old_value,
-> +                           int128_getlo(new_value),
-> +                           int128_getlo(write_mask));
-> +    if (ret =3D=3D RISCV_EXCP_NONE && ret_value) {
-> +        *ret_value =3D int128_make64(old_value);
-> +    }
->      return ret;
->  }
->
-> @@ -1864,8 +1994,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->      [CSR_MHARTID]   =3D { "mhartid",   any,   read_mhartid },
->
->      /* Machine Trap Setup */
-> -    [CSR_MSTATUS]     =3D { "mstatus",    any,   read_mstatus,     write=
-_mstatus     },
-> -    [CSR_MISA]        =3D { "misa",       any,   read_misa,        write=
-_misa        },
-> +    [CSR_MSTATUS]     =3D { "mstatus",    any,   read_mstatus,     write=
-_mstatus, NULL,
-> +                                               read_mstatus_i128        =
-           },
-> +    [CSR_MISA]        =3D { "misa",       any,   read_misa,        write=
-_misa, NULL,
-> +                                               read_misa_i128           =
-           },
->      [CSR_MIDELEG]     =3D { "mideleg",    any,   read_mideleg,     write=
-_mideleg     },
->      [CSR_MEDELEG]     =3D { "medeleg",    any,   read_medeleg,     write=
-_medeleg     },
->      [CSR_MIE]         =3D { "mie",        any,   read_mie,         write=
-_mie         },
-> @@ -1875,20 +2007,23 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
-{
->      [CSR_MSTATUSH]    =3D { "mstatush",   any32, read_mstatush,    write=
-_mstatush    },
->
->      /* Machine Trap Handling */
-> -    [CSR_MSCRATCH] =3D { "mscratch", any,  read_mscratch, write_mscratch=
- },
-> +    [CSR_MSCRATCH] =3D { "mscratch", any,  read_mscratch,      write_msc=
-ratch, NULL,
-> +                                         read_mscratch_i128, write_mscra=
-tch_i128   },
->      [CSR_MEPC]     =3D { "mepc",     any,  read_mepc,     write_mepc    =
- },
->      [CSR_MCAUSE]   =3D { "mcause",   any,  read_mcause,   write_mcause  =
- },
->      [CSR_MTVAL]    =3D { "mtval",    any,  read_mtval,    write_mtval   =
- },
->      [CSR_MIP]      =3D { "mip",      any,  NULL,    NULL, rmw_mip       =
- },
->
->      /* Supervisor Trap Setup */
-> -    [CSR_SSTATUS]    =3D { "sstatus",    smode, read_sstatus,    write_s=
-status    },
-> +    [CSR_SSTATUS]    =3D { "sstatus",    smode, read_sstatus,    write_s=
-status, NULL,
-> +                                              read_sstatus_i128         =
-        },
->      [CSR_SIE]        =3D { "sie",        smode, read_sie,        write_s=
-ie        },
->      [CSR_STVEC]      =3D { "stvec",      smode, read_stvec,      write_s=
-tvec      },
->      [CSR_SCOUNTEREN] =3D { "scounteren", smode, read_scounteren, write_s=
-counteren },
->
->      /* Supervisor Trap Handling */
-> -    [CSR_SSCRATCH] =3D { "sscratch", smode, read_sscratch, write_sscratc=
-h },
-> +    [CSR_SSCRATCH] =3D { "sscratch", smode, read_sscratch, write_sscratc=
-h, NULL,
-> +                                          read_sscratch_i128, write_sscr=
-atch_i128  },
->      [CSR_SEPC]     =3D { "sepc",     smode, read_sepc,     write_sepc   =
-  },
->      [CSR_SCAUSE]   =3D { "scause",   smode, read_scause,   write_scause =
-  },
->      [CSR_STVAL]    =3D { "stval",    smode, read_stval,   write_stval   =
-},
 > --
 > 2.34.1
 >
