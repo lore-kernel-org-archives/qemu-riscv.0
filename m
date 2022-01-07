@@ -1,56 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5nQ7-0005Ht-7Q
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Jan 2022 06:28:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49826)
+	id 1n5qMM-0005ch-Ry
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jan 2022 09:36:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n5nPx-0004o0-3N; Fri, 07 Jan 2022 06:28:21 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:54258 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n5nPu-0006VA-1m; Fri, 07 Jan 2022 06:28:20 -0500
-Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowAB3fS3CI9hh_s5CBQ--.4982S3;
- Fri, 07 Jan 2022 19:28:04 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 1/6] target/riscv: add cfg properties for zfinx,
- zdinx and zhinx{min}
-Date: Fri,  7 Jan 2022 19:27:44 +0800
-Message-Id: <20220107112749.981-2-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220107112749.981-1-liweiwei@iscas.ac.cn>
-References: <20220107112749.981-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowAB3fS3CI9hh_s5CBQ--.4982S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxWr43uF17GrWUAryrCr43GFg_yoW5XrWkpr
- WUW3WakF98Xry7A3Z3JF1UtF1rWwn7GFWrK392vwn3WrWaqrW5JF1qka4UuF4jq3WrXF1a
- 9F4qkFy5Ar48Aa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBK14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
- xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
- vE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
- r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
- v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
- Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
- 0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8
- JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIx
- AIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbLFxUUUUUU=
- =
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_BL=0.001, RCVD_IN_MSPIKE_L4=0.001, SPF_HELO_PASS=-0.001,
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1n5qMK-0005Y1-KD; Fri, 07 Jan 2022 09:36:48 -0500
+Received: from [2a00:1450:4864:20::431] (port=43633
+ helo=mail-wr1-x431.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1n5qMJ-0008WP-5c; Fri, 07 Jan 2022 09:36:48 -0500
+Received: by mail-wr1-x431.google.com with SMTP id o3so11394029wrh.10;
+ Fri, 07 Jan 2022 06:36:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=+3Nc6zEdR43z3razwv1XE8PU4kQ0+jJ55RCBwOavKuA=;
+ b=jApoJ9XGqXm3hOEhdShp1rGvr94Yt6XizpCBLgn8FCzTw66TsZOoYtVySLcKLOtafL
+ SH3p6btCdNYcFDJg5EXpS8vNfckMgqQVLGFeSDEpUI3N/e5OG0Nwn7xiAzbov964kEea
+ L8loS5iHOTYjm1qrWICIwODU29bMDEfQnpvClQrj4vqIsndxW3YsaBXa5JMxbivqNjGr
+ u3TP32j3msHZnt6b7ToUh1uv6y9KAH5IHYUBwgMRLvLbnIjiB8cFqM7NIBjHQ6nrwJpV
+ g13IioVx1R525HVACDWbT3/QTkDW26FTVeeWPk0iblKDSPna8o1p94trVE35hGhofsAp
+ cOaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=+3Nc6zEdR43z3razwv1XE8PU4kQ0+jJ55RCBwOavKuA=;
+ b=RdwAe/DZ6sYQnZfSz6XJsc3x8uxgv+ujc5StjY3yzL1By5z33kCBqfqoGofZD7APH8
+ C/GHdW3EcpuV8+S/d01T+qOln5pJ/Fxt82GmEPzclqnpHZCYn/NcMpwCU37/aheq3ly6
+ kyDKIEN0lLVTKW7WCpC/wMjxHxXMYkObjiKU9MrcbkRfOTkvwr8OMI8WlcEN0ktoZYd5
+ VHb3wASAQQASbo/DuM1+pJUztwJjH6AalonA65wXlLUHOhdIGuH60l3yVV9kPP2QB+3t
+ 7e+fhnDUhjtEqEeGjAfPsirS0+ZBbSwvieUmByqDMHJpfBW9eaDN3S63rKucqw6TK9k1
+ 13AA==
+X-Gm-Message-State: AOAM532I3cwGzLj/Z+sWcNC10MbMj1N3AJoCOEyVXK9yjQGwQfTfo8i6
+ 5N0fwb0MC1uYZf5RqhgftrxIENXFTxo/+A==
+X-Google-Smtp-Source: ABdhPJxHODe4fb/rT3lPIHwubYbtgR/QsnnvRLSNMKU03+ATwD3Z8EkNtp3XG3dy6+NN7vt9d4gYNA==
+X-Received: by 2002:adf:f5cd:: with SMTP id k13mr175266wrp.673.1641566205287; 
+ Fri, 07 Jan 2022 06:36:45 -0800 (PST)
+Received: from [192.168.1.33] (83.red-83-50-87.dynamicip.rima-tde.net.
+ [83.50.87.83])
+ by smtp.gmail.com with ESMTPSA id e12sm5346255wrg.110.2022.01.07.06.36.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 07 Jan 2022 06:36:44 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <9c8adbbf-e80a-894f-48e5-cf8f35093d4f@amsat.org>
+Date: Fri, 7 Jan 2022 14:51:58 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.4.1
+Subject: Re: [PATCH v4 11/11] hw/riscv: virt: Add PMU DT node to the device
+ tree
+Content-Language: en-US
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+References: <20220107004846.378859-1-atishp@rivosinc.com>
+ <20220107004846.378859-12-atishp@rivosinc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20220107004846.378859-12-atishp@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::431
+ (failed)
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -33
+X-Spam_score: -3.4
+X-Spam_bar: ---
+X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-2.691,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -64,96 +89,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2022 11:28:21 -0000
+X-List-Received-Date: Fri, 07 Jan 2022 14:36:49 -0000
 
-Co-authored-by: ardxwe <ardxwe@gmail.com>
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.c       | 12 ++++++++++++
- target/riscv/cpu.h       |  4 ++++
- target/riscv/translate.c |  8 ++++++++
- 3 files changed, 24 insertions(+)
+On 7/1/22 01:48, Atish Patra wrote:
+> Qemu virt machine can support few cache events and cycle/instret counters.
+> It also supports counter overflow for these events.
+> 
+> Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
+> capabilities. There are some dummy nodes added for testing as well.
+> 
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>   hw/riscv/virt.c    | 38 ++++++++++++++++++++++++++++++++++++++
+>   target/riscv/pmu.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
+>   target/riscv/pmu.h |  1 +
+>   3 files changed, 84 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6ef3314bce..d9ea005724 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -491,6 +491,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             cpu->cfg.ext_d = true;
-         }
- 
-+        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-+            cpu->cfg.ext_zhinxmin) {
-+            cpu->cfg.ext_zfinx = true;
-+        }
-+
-         /* Set the ISA extensions, checks should have happened above */
-         if (cpu->cfg.ext_i) {
-             ext |= RVI;
-@@ -565,6 +570,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         if (cpu->cfg.ext_j) {
-             ext |= RVJ;
-         }
-+        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
-+                                   cpu->cfg.ext_zfhmin)) {
-+            error_setg(errp,
-+                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
-+                    " 'Zfhmin'");
-+            return;
-+        }
- 
-         set_misa(env, env->misa_mxl, ext);
-     }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index dc10f27093..6fba31c5cd 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -315,8 +315,12 @@ struct RISCVCPU {
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
-+        bool ext_zdinx;
-         bool ext_zfh;
-         bool ext_zfhmin;
-+        bool ext_zfinx;
-+        bool ext_zhinx;
-+        bool ext_zhinxmin;
- 
-         char *priv_spec;
-         char *user_spec;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 5df6c0d800..8b1cdacf50 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -76,8 +76,12 @@ typedef struct DisasContext {
-     RISCVMXL ol;
-     bool virt_enabled;
-     bool ext_ifencei;
-+    bool ext_zdinx;
-     bool ext_zfh;
-     bool ext_zfhmin;
-+    bool ext_zfinx;
-+    bool ext_zhinx;
-+    bool ext_zhinxmin;
-     bool hlsx;
-     /* vector extension */
-     bool vill;
-@@ -703,8 +707,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
-     ctx->misa_ext = env->misa_ext;
-     ctx->frm = -1;  /* unknown rounding mode */
-     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
-+    ctx->ext_zdinx = cpu->cfg.ext_zdinx;
-     ctx->ext_zfh = cpu->cfg.ext_zfh;
-     ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
-+    ctx->ext_zfinx = cpu->cfg.ext_zfinx;
-+    ctx->ext_zhinx = cpu->cfg.ext_zhinx;
-+    ctx->ext_zhinxmin = cpu->cfg.ext_zhinxmin;
-     ctx->vlen = cpu->cfg.vlen;
-     ctx->elen = cpu->cfg.elen;
-     ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
--- 
-2.17.1
+> +static void create_fdt_socket_pmu(RISCVVirtState *s,
+> +                                  int socket, uint32_t *phandle,
+> +                                  uint32_t *intc_phandles)
+> +{
+> +    int cpu;
+> +    char *pmu_name;
+> +    uint32_t *pmu_cells;
+> +    MachineState *mc = MACHINE(s);
+> +    RISCVCPU hart = s->soc[socket].harts[0];
+> +
+> +    pmu_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
+> +
+> +    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +        pmu_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +        pmu_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_PMU_OVF);
+> +    }
+> +
+> +    pmu_name = g_strdup_printf("/soc/pmu");
+> +    qemu_fdt_add_subnode(mc->fdt, pmu_name);
+> +    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
+> +    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
+
+pmu_cells[] is not consumed...
+
+> +
+> +    g_free(pmu_name);
+> +    g_free(pmu_cells);
+> +}
 
 
