@@ -1,47 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5nQ0-0004xz-9R
+	id 1n5nQ0-0004yu-Fv
 	for mharc-qemu-riscv@gnu.org; Fri, 07 Jan 2022 06:28:24 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49846)
+Received: from eggs.gnu.org ([209.51.188.92]:49848)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n5nPy-0004sG-G3; Fri, 07 Jan 2022 06:28:22 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:54282 helo=cstnet.cn)
+ id 1n5nPy-0004sY-JC; Fri, 07 Jan 2022 06:28:22 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:54262 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n5nPu-0006Vh-1o; Fri, 07 Jan 2022 06:28:22 -0500
+ id 1n5nPu-0006V9-1k; Fri, 07 Jan 2022 06:28:22 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowAB3fS3CI9hh_s5CBQ--.4982S8;
- Fri, 07 Jan 2022 19:28:07 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowAB3fS3CI9hh_s5CBQ--.4982S2;
+ Fri, 07 Jan 2022 19:28:02 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v3 6/6] target/riscv: expose zfinx, zdinx,
- zhinx{min} properties
-Date: Fri,  7 Jan 2022 19:27:49 +0800
-Message-Id: <20220107112749.981-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v3 0/6] support subsets of Float-Point in Integer Registers
+ extensions
+Date: Fri,  7 Jan 2022 19:27:43 +0800
+Message-Id: <20220107112749.981-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220107112749.981-1-liweiwei@iscas.ac.cn>
-References: <20220107112749.981-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowAB3fS3CI9hh_s5CBQ--.4982S8
-X-Coremail-Antispam: 1UD129KBjvdXoW7GFyrJF43Ww4xXrW7Cry7GFg_yoWkXwc_Jr
- y093Wvya4UZFy29r4DAw1UKrW0krW0qan0gF4ayay7GFWkWFn0yw1vkw4fGF1UGr13CF4f
- AFyfJrZ7G39IvjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbDAFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
- IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
- F7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
- 1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
- IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
- wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
- 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AK
- xVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F
- 4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUArcfU
- UUUU=
+X-CM-TRANSID: rQCowAB3fS3CI9hh_s5CBQ--.4982S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7uFW3tryfCrW5CrW8Ar1fWFg_yoW8Zr4kpF
+ 4rGw43KrZ5JFWfXw4ftF1qyw45XF4rW3yjywn7Jwn7Aa13ArW5JFnrKw1fW3W8Jay8Wry2
+ 93WUAr13ur4UAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUv014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxa
+ n2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
+ AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
+ c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267
+ AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAIcVC2z280aVAFwI0_
+ Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1
+ a9aPUUUUU==
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -66,29 +63,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 07 Jan 2022 11:28:22 -0000
 
-Co-authored-by: ardxwe <ardxwe@gmail.com>
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+This patchset implements RISC-V Float-Point in Integer Registers extensions(Version 1.0.0-rc), which includes Zfinx, Zdinx, Zhinx and Zhinxmin extension. 
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d9ea005724..9e4fa87aa8 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -657,6 +657,10 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
-+    DEFINE_PROP_BOOL("Zdinx", RISCVCPU, cfg.ext_zdinx, false),
-+    DEFINE_PROP_BOOL("Zfinx", RISCVCPU, cfg.ext_zfinx, false),
-+    DEFINE_PROP_BOOL("Zhinx", RISCVCPU, cfg.ext_zhinx, false),
-+    DEFINE_PROP_BOOL("Zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
-     DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
-     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-     /* ePMP 0.9.3 */
+Specification:
+https://github.com/riscv/riscv-zfinx/blob/main/zfinx-1.0.0-rc.pdf
+
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-zfinx-upstream-v3
+
+To test this implementation, specify cpu argument with 'Zfinx =true,Zdinx=true,Zhinx=true,Zhinxmin=true' with 'g=false,f=false,d=false,Zfh=false,Zfhmin=false'
+This implementation can pass gcc tests, ci result can be found in https://ci.rvperf.org/job/plct-qemu-zfinx-upstream/.
+
+v3:
+* delete unused reset for mstatus.FS
+* use positive test for RVF instead of negative test for ZFINX
+* replace get_ol with get_xl
+* use tcg_gen_concat_tl_i64 to unify tcg_gen_concat_i32_i64 and tcg_gen_deposit_i64
+
+v2:
+* hardwire mstatus.FS to zero when enable zfinx
+* do register-pair check at the begin of translation
+* optimize partial implemention as suggested
+
+Weiwei Li (6):
+  target/riscv: add cfg properties for zfinx, zdinx and zhinx{min}
+  target/riscv: hardwire mstatus.FS to zero when enable zfinx
+  target/riscv: add support for zfinx
+  target/riscv: add support for zdinx
+  target/riscv: add support for zhinx/zhinxmin
+  target/riscv: expose zfinx, zdinx, zhinx{min} properties
+
+ target/riscv/cpu.c                        |  16 ++
+ target/riscv/cpu.h                        |   4 +
+ target/riscv/cpu_helper.c                 |   6 +-
+ target/riscv/csr.c                        |  21 +-
+ target/riscv/fpu_helper.c                 | 178 ++++++------
+ target/riscv/helper.h                     |   4 +-
+ target/riscv/insn_trans/trans_rvd.c.inc   | 319 ++++++++++++++++-----
+ target/riscv/insn_trans/trans_rvf.c.inc   | 314 +++++++++++++-------
+ target/riscv/insn_trans/trans_rvzfh.c.inc | 332 +++++++++++++++-------
+ target/riscv/internals.h                  |  32 ++-
+ target/riscv/translate.c                  | 155 ++++++++++
+ 11 files changed, 1010 insertions(+), 371 deletions(-)
+
 -- 
 2.17.1
 
