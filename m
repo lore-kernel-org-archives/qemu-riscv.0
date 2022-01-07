@@ -1,81 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n5qMM-0005ch-Ry
-	for mharc-qemu-riscv@gnu.org; Fri, 07 Jan 2022 09:36:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35746)
+	id 1n5sNm-00031k-R0
+	for mharc-qemu-riscv@gnu.org; Fri, 07 Jan 2022 11:46:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39138)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1n5qMK-0005Y1-KD; Fri, 07 Jan 2022 09:36:48 -0500
-Received: from [2a00:1450:4864:20::431] (port=43633
- helo=mail-wr1-x431.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1n5qMJ-0008WP-5c; Fri, 07 Jan 2022 09:36:48 -0500
-Received: by mail-wr1-x431.google.com with SMTP id o3so11394029wrh.10;
- Fri, 07 Jan 2022 06:36:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=+3Nc6zEdR43z3razwv1XE8PU4kQ0+jJ55RCBwOavKuA=;
- b=jApoJ9XGqXm3hOEhdShp1rGvr94Yt6XizpCBLgn8FCzTw66TsZOoYtVySLcKLOtafL
- SH3p6btCdNYcFDJg5EXpS8vNfckMgqQVLGFeSDEpUI3N/e5OG0Nwn7xiAzbov964kEea
- L8loS5iHOTYjm1qrWICIwODU29bMDEfQnpvClQrj4vqIsndxW3YsaBXa5JMxbivqNjGr
- u3TP32j3msHZnt6b7ToUh1uv6y9KAH5IHYUBwgMRLvLbnIjiB8cFqM7NIBjHQ6nrwJpV
- g13IioVx1R525HVACDWbT3/QTkDW26FTVeeWPk0iblKDSPna8o1p94trVE35hGhofsAp
- cOaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=+3Nc6zEdR43z3razwv1XE8PU4kQ0+jJ55RCBwOavKuA=;
- b=RdwAe/DZ6sYQnZfSz6XJsc3x8uxgv+ujc5StjY3yzL1By5z33kCBqfqoGofZD7APH8
- C/GHdW3EcpuV8+S/d01T+qOln5pJ/Fxt82GmEPzclqnpHZCYn/NcMpwCU37/aheq3ly6
- kyDKIEN0lLVTKW7WCpC/wMjxHxXMYkObjiKU9MrcbkRfOTkvwr8OMI8WlcEN0ktoZYd5
- VHb3wASAQQASbo/DuM1+pJUztwJjH6AalonA65wXlLUHOhdIGuH60l3yVV9kPP2QB+3t
- 7e+fhnDUhjtEqEeGjAfPsirS0+ZBbSwvieUmByqDMHJpfBW9eaDN3S63rKucqw6TK9k1
- 13AA==
-X-Gm-Message-State: AOAM532I3cwGzLj/Z+sWcNC10MbMj1N3AJoCOEyVXK9yjQGwQfTfo8i6
- 5N0fwb0MC1uYZf5RqhgftrxIENXFTxo/+A==
-X-Google-Smtp-Source: ABdhPJxHODe4fb/rT3lPIHwubYbtgR/QsnnvRLSNMKU03+ATwD3Z8EkNtp3XG3dy6+NN7vt9d4gYNA==
-X-Received: by 2002:adf:f5cd:: with SMTP id k13mr175266wrp.673.1641566205287; 
- Fri, 07 Jan 2022 06:36:45 -0800 (PST)
-Received: from [192.168.1.33] (83.red-83-50-87.dynamicip.rima-tde.net.
- [83.50.87.83])
- by smtp.gmail.com with ESMTPSA id e12sm5346255wrg.110.2022.01.07.06.36.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Jan 2022 06:36:44 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <9c8adbbf-e80a-894f-48e5-cf8f35093d4f@amsat.org>
-Date: Fri, 7 Jan 2022 14:51:58 +0100
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1n5sNh-0002xx-Ns; Fri, 07 Jan 2022 11:46:24 -0500
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:35632)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1n5sNZ-0000gt-HM; Fri, 07 Jan 2022 11:46:21 -0500
+Received: from mailhost.u-ga.fr (mailhost2.u-ga.fr [129.88.177.242])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id DF40540260;
+ Fri,  7 Jan 2022 17:46:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1641573967;
+ bh=sE5Zpkf7aFnS9rQsSMDYcrXKflWzBT5NFmD2eZq2w04=;
+ h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
+ b=Ke8YTHqLnNOfPIH1H6A+c7p8MbA+WSGX2267LMasx2XdDxB3dZdHaYIa3tEQfC4D5
+ QVZ3NDEXZvUpdFkJhQbi6AvemMMSMfQyJv/EgoSNQRJm80c7vN7inUnYgpsEpvkLv2
+ bkw+lsc4BxPx9av8YOlMKxvNe/XCsm+14rGpNH7j47FVTh3V/YrgrL09n2T81jhawb
+ 5+m7UP/CcA8Ox7ekAZq+/wS9Qh7ECoTuI+577OXnj0PsolhCC9GB1bqIsFDlG/d+ky
+ 37hp1SBVwvsAuHw2LVzSix68xltiJIHerbASSE8aY+hlHomlsvsi5xwWSa75cj6rp3
+ +vsqE8QKXnXew==
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhost.u-ga.fr (Postfix) with ESMTP id CB1646005B;
+ Fri,  7 Jan 2022 17:46:07 +0100 (CET)
+Received: from [147.171.132.208] (palmier.tima.u-ga.fr [147.171.132.208])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id D537914005C;
+ Fri,  7 Jan 2022 17:46:06 +0100 (CET)
+Message-ID: <674625c4-dd38-20d3-fc10-3f6dffb940ae@univ-grenoble-alpes.fr>
+Date: Fri, 7 Jan 2022 17:46:06 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.4.1
-Subject: Re: [PATCH v4 11/11] hw/riscv: virt: Add PMU DT node to the device
- tree
-Content-Language: en-US
-To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-References: <20220107004846.378859-1-atishp@rivosinc.com>
- <20220107004846.378859-12-atishp@rivosinc.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20220107004846.378859-12-atishp@rivosinc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.1
+Content-Language: fr
+To: Alistair Francis <alistair23@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Bin Meng
+ <bin.meng@windriver.com>, Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Fabien Portas <fabien.portas@grenoble-inp.org>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20220106210108.138226-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <20220106210108.138226-8-frederic.petrot@univ-grenoble-alpes.fr>
+ <CAKmqyKMB-zZKNf-HRz-=RR+wtM7UHFo4wCJUiCwF0nJrH4OzOg@mail.gmail.com>
+ <cb76d285-7071-c70d-3cb7-ad2978f400dd@univ-grenoble-alpes.fr>
+ <CAKmqyKNd77rb9gSqriv_gykfBT_G+9hVKZVKp-JB2A3d9sXkrg@mail.gmail.com>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: Re: [PATCH v8 07/18] target/riscv: setup everything for rv64 to
+ support rv128 execution
+In-Reply-To: <CAKmqyKNd77rb9gSqriv_gykfBT_G+9hVKZVKp-JB2A3d9sXkrg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::431
- (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -33
-X-Spam_score: -3.4
-X-Spam_bar: ---
-X-Spam_report: (-3.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.25,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.25, NICE_REPLY_A=-2.691,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (42)
+X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 152.77.18.2
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -47
+X-Spam_score: -4.8
+X-Spam_bar: ----
+X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-2.691,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -89,50 +85,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Jan 2022 14:36:49 -0000
+X-List-Received-Date: Fri, 07 Jan 2022 16:46:24 -0000
 
-On 7/1/22 01:48, Atish Patra wrote:
-> Qemu virt machine can support few cache events and cycle/instret counters.
-> It also supports counter overflow for these events.
+On 07/01/2022 07:47, Alistair Francis wrote:
+> On Fri, Jan 7, 2022 at 4:23 PM Frédéric Pétrot
+> <frederic.petrot@univ-grenoble-alpes.fr> wrote:
+>>
+>> On 06/01/2022 22:24, Alistair Francis wrote:
+>>> On Fri, Jan 7, 2022 at 7:04 AM Frédéric Pétrot
+>>> <frederic.petrot@univ-grenoble-alpes.fr> wrote:
+>>>>
+>>>> This patch adds the support of the '-cpu rv128' option to
+>>>> qemu-system-riscv64 so that we can indicate that we want to run rv128
+>>>> executables.
+>>>> Still, there is no support for 128-bit insns at that stage so qemu fails
+>>>> miserably (as expected) if launched with this option.
+>>>>
+>>>> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+>>>> Co-authored-by: Fabien Portas <fabien.portas@grenoble-inp.org>
+>>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>>> ---
+>>>>    include/disas/dis-asm.h |  1 +
+>>>>    target/riscv/cpu.h      |  1 +
+>>>>    disas/riscv.c           |  5 +++++
+>>>>    target/riscv/cpu.c      | 20 ++++++++++++++++++++
+>>>>    target/riscv/gdbstub.c  |  5 +++++
+>>>>    5 files changed, 32 insertions(+)
+>>>>
+>>>> diff --git a/include/disas/dis-asm.h b/include/disas/dis-asm.h
+>>>> index 08e1beec85..102a1e7f50 100644
+>>>> --- a/include/disas/dis-asm.h
+>>>> +++ b/include/disas/dis-asm.h
+>>>> @@ -459,6 +459,7 @@ int print_insn_nios2(bfd_vma, disassemble_info*);
+>>>>    int print_insn_xtensa           (bfd_vma, disassemble_info*);
+>>>>    int print_insn_riscv32          (bfd_vma, disassemble_info*);
+>>>>    int print_insn_riscv64          (bfd_vma, disassemble_info*);
+>>>> +int print_insn_riscv128         (bfd_vma, disassemble_info*);
+>>>>    int print_insn_rx(bfd_vma, disassemble_info *);
+>>>>    int print_insn_hexagon(bfd_vma, disassemble_info *);
+>>>>
+>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>>>> index fa5d238530..efe481f5fb 100644
+>>>> --- a/target/riscv/cpu.h
+>>>> +++ b/target/riscv/cpu.h
+>>>> @@ -38,6 +38,7 @@
+>>>>    #define TYPE_RISCV_CPU_ANY              RISCV_CPU_TYPE_NAME("any")
+>>>>    #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>>>>    #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+>>>> +#define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("rv128")
+>>>
+>>> As this series only adds partial support for 128-bit support, I think
+>>> we should probably change this to "x-rv128". That way we indicate to
+>>> users that it is experimental. That allows us more flexibility in the
+>>> future to have breaking changes and will hopefully avoid confusion
+>>> about the current state. What do you think? I can just make the change
+>>> when I apply the patches.
+>>
+>>     Sure, this is clearly experimental (the spec is a draft) and should be
+>>     marked so, I totally agree. Please make the change as you suggest,
 > 
-> Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
-> capabilities. There are some dummy nodes added for testing as well.
+> Great!
 > 
-> Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
->   hw/riscv/virt.c    | 38 ++++++++++++++++++++++++++++++++++++++
->   target/riscv/pmu.c | 45 +++++++++++++++++++++++++++++++++++++++++++++
->   target/riscv/pmu.h |  1 +
->   3 files changed, 84 insertions(+)
+> Applied to riscv-to-apply.next
+> 
+> If you want to make sure my change didn't break anything you can test
+> the tree here: https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
-> +static void create_fdt_socket_pmu(RISCVVirtState *s,
-> +                                  int socket, uint32_t *phandle,
-> +                                  uint32_t *intc_phandles)
-> +{
-> +    int cpu;
-> +    char *pmu_name;
-> +    uint32_t *pmu_cells;
-> +    MachineState *mc = MACHINE(s);
-> +    RISCVCPU hart = s->soc[socket].harts[0];
-> +
-> +    pmu_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-> +
-> +    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-> +        pmu_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-> +        pmu_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_PMU_OVF);
-> +    }
-> +
-> +    pmu_name = g_strdup_printf("/soc/pmu");
-> +    qemu_fdt_add_subnode(mc->fdt, pmu_name);
-> +    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
-> +    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
+   Works like a charm !
+   Thanks,
+   Frédéric
 
-pmu_cells[] is not consumed...
+> 
+> I'll send a PR this weekend or next week.
+> 
+> Alistair
+> 
+>>
+>>     Thanks,
+>>     Frédéric
+>>
+>>>
+>>> Alistair
+>>
+>> --
+>> +---------------------------------------------------------------------------+
+>> | Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
+>> | Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+>> | http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
+>> +---------------------------------------------------------------------------+
 
-> +
-> +    g_free(pmu_name);
-> +    g_free(pmu_cells);
-> +}
-
+-- 
++---------------------------------------------------------------------------+
+| Frédéric Pétrot, Pr. Grenoble INP-Ensimag/TIMA,   Ensimag deputy director |
+| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
++---------------------------------------------------------------------------+
 
