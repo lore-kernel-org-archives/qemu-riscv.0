@@ -1,60 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n6nyb-0001Iu-Iu
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 01:16:19 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55638)
+	id 1n6nzU-0002JS-J3
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 01:17:12 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55728)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n6nyX-0001FK-OV; Mon, 10 Jan 2022 01:16:13 -0500
-Received: from [2607:f8b0:4864:20::136] (port=33305
- helo=mail-il1-x136.google.com)
+ id 1n6nzT-0002GS-2R; Mon, 10 Jan 2022 01:17:11 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=39589
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n6nyW-000250-53; Mon, 10 Jan 2022 01:16:13 -0500
-Received: by mail-il1-x136.google.com with SMTP id o20so3984211ill.0;
- Sun, 09 Jan 2022 22:16:11 -0800 (PST)
+ id 1n6nzR-00028Y-I1; Mon, 10 Jan 2022 01:17:10 -0500
+Received: by mail-io1-xd36.google.com with SMTP id y11so16120944iod.6;
+ Sun, 09 Jan 2022 22:17:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tc0B9g2KemGmqfVVJCIKZIsthvvsmzRcETbZ/7lZXTc=;
- b=K/qgw4P3KpjlQkN5Ms3hcM1WtcCrdDP8ySp/yoZICvUmnDraI61lE29KVfdYEHIsdl
- MyKH1yt7GvqlBtqoYaD4mYurQqf/iPqQAAh9b+Q3jlmnvEIQbciLYwwzuePVVz+Wfzao
- FJpDHKgGmhmChjN8I+GK7KE/ll4gEnhGx3e0MC9yMPttHpi30SrFeEvZbENd780ZTDlE
- if0/NnPM7H0p2RyY8P2gj2QgejLQfgme/QlZxdt3k16aiapn09F8N10X/M3VZHbbb1uO
- 3+639yqwwXPcbDydBD0CBBo4dbwvvJeNX8FGDEEwYcktrNkKE9eYXLAdDgQnoH6LXDqc
- mPgg==
+ :cc; bh=bHt5Ou1JCPsbKtdj3+iMCLb0ug9H+0JvvRybux60U9w=;
+ b=a+Q4TSAeF5k2euVyzSFVKm30KNQOMGhTetyu3pNkg9ogbetc4f+dIa28u7aqlTxBZK
+ SginE4AD1nM35CaT5FAxhnvwVn5ecq2XM9gQ4OQXrfS96XYjf/qZQ08o/DTDfoeYrnzD
+ ayrr0VqVgDjenkadNVtyCoSje4EnFmVrK39YWHj2KsUBqbopG+0dte3xk2Lg5r+BcmmP
+ DZPoc9gRKhNkRutWdl8EaIXsGdwU0+EUHa/3fSFgyWEcjYFSiiezWHxLsjFYSDZolDKR
+ mCiehE77iwq+w6OLQ6df+LTSjP4Tt/36pP55lUtFKe6aaNegSl91lAL6cMp1EUk3gkyv
+ pCxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=tc0B9g2KemGmqfVVJCIKZIsthvvsmzRcETbZ/7lZXTc=;
- b=eARLGXOsKgZ5RCTSHOnk2EGv/nbdzbqo3AEkHtkhl3iEkhI91JM2AqMnyfWhHMkpgL
- gyFFp6rbcJr16211k02UJrBIBsgZYCb6fuPGDFToIXMSGgCrRjIIhUSlXYPFElSN4Cu3
- 2skBR4mYXLQxzS5i6g9mcnAKy8HAbJoEa0neMoQCW7NxKES9Fz4+kOgzx12fb+0HSVZY
- LN8iJOj3C/YazcOjJDNaxlgiJL1p9ZztAuCqjJ7QKM5zf4Tipk6FIrTF2j+sZ4PxDOjZ
- FJBwa3EEXvvj8SJj4c0Yit3PG5jSN4lHoQVXKrEEvoYtxPLlQKVsc3SB8ca5s0oRnT2c
- YCrQ==
-X-Gm-Message-State: AOAM533YGo3fNjnOALIhHkEzsSwOh4qlj3EE8n2hQ+gIyZSKRywpWrYE
- iTDkndL4kAaCNAKjtQC8oxVnN/mXe/8gdQyNATA=
-X-Google-Smtp-Source: ABdhPJz9KOKhMLUKTZATczIePvS1cIyyhCvDX9iyJsUUTAIP6EuOO8qW0md2WU7dRzaO6JKmL6Fg+NW+hD8r67UzJOc=
-X-Received: by 2002:a05:6e02:1569:: with SMTP id
- k9mr33371072ilu.290.1641795370694; 
- Sun, 09 Jan 2022 22:16:10 -0800 (PST)
+ bh=bHt5Ou1JCPsbKtdj3+iMCLb0ug9H+0JvvRybux60U9w=;
+ b=WT/TYU1rbFVmHUBzgZ7uyvbWuzNBPPjwXHQX3RlmDi88kfbidUs31OxgwKUYgLG8/O
+ UkWehsDjoFVahIOXfWmUWcaLBQleYAzkK/I6wBdHnxesJXPb3MjjCJu9nx/9D3tuLsi2
+ 0vQVHtAwumFmki1IoBOoU7q51I1gFn5kwHT7einZTHV2LWaRxxvWDd0AY+tdwAQ5SUlZ
+ ziMsO7HDuwJncN/CIrNHfAoDkx87CHwRpY3BS1CmrXyHnPzDTuyzzwC7TpQmE2FsKq20
+ 7rZlKN3/N5K1XfTA2a21KdTDKk0kiyXzKwq/W1TxrMCrbZRYHUO50j8EaE4zeh2PuqiC
+ l3cQ==
+X-Gm-Message-State: AOAM532GfM9HBe2IpoFGgqZsmlRWAai3aFlmUZJbpMOSCob3DD2C9Fq7
+ Slsvcqxm6Bco8mAPmajriN8nMQIrIctyBYhV38M=
+X-Google-Smtp-Source: ABdhPJy/UltdbtMcB9Hgp3vHyZX1pTwpsPViqeKFZFMG8BMNaGkRoFviVs5w2PkVJh+oMiq17wlR/CU/bqwP8qyua6U=
+X-Received: by 2002:a5e:9905:: with SMTP id t5mr32123936ioj.16.1641795428080; 
+ Sun, 09 Jan 2022 22:17:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20220110061321.4040589-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220110061321.4040589-1-alistair.francis@opensource.wdc.com>
+ <20220110061321.4040589-2-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220110061321.4040589-2-alistair.francis@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Jan 2022 16:15:44 +1000
-Message-ID: <CAKmqyKMwUUpHpWanceX8anb+cSiOhxwWoG+bTMtm5XRGsT7FzA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] riscv: opentitan: fixup plic stride len
+Date: Mon, 10 Jan 2022 16:16:41 +1000
+Message-ID: <CAKmqyKM3mEvEuj7p8f+rnv7rG6FmLAuxH6xxAKBX9gwsKTPjQQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw: timer: ibex_timer: update/add reg address
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::136
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -75,17 +75,24 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 06:16:14 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 06:17:11 -0000
 
 On Mon, Jan 10, 2022 at 4:13 PM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
 >
 > From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> The following change was made to rectify incorrectly set stride length
-> on the PLIC. Where it should be 32bit and not 24bit (0x18). This was
-> discovered whilst attempting to fix a bug where a timer_interrupt was
-> not serviced on TockOS-OpenTitan.
+> The following changes:
+> 1. Fixes the incorrectly set CTRL register address. As
+> per [1] https://docs.opentitan.org/hw/ip/rv_timer/doc/#register-table
+>
+> The CTRL register is @ 0x04.
+>
+> This was found when attempting to fixup a bug where a timer_interrupt
+> was not serviced on TockOS-OpenTitan.
+>
+> 2. Adds ALERT_TEST register as documented on [1], adding repective
+>    switch cases to error handle and later implement functionality.
 >
 > Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
@@ -95,22 +102,45 @@ Tested-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/opentitan.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  hw/timer/ibex_timer.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index c531450b9f..5144845567 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -160,7 +160,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->      qdev_prop_set_uint32(DEVICE(&s->plic), "priority-base", 0x00);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "pending-base", 0x1000);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "enable-base", 0x2000);
-> -    qdev_prop_set_uint32(DEVICE(&s->plic), "enable-stride", 0x18);
-> +    qdev_prop_set_uint32(DEVICE(&s->plic), "enable-stride", 32);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "context-base", 0x200000);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "context-stride", 8);
->      qdev_prop_set_uint32(DEVICE(&s->plic), "aperture-size", memmap[IBEX_DEV_PLIC].size);
+> diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
+> index 66e1f8e48c..096588ac8a 100644
+> --- a/hw/timer/ibex_timer.c
+> +++ b/hw/timer/ibex_timer.c
+> @@ -34,7 +34,9 @@
+>  #include "target/riscv/cpu.h"
+>  #include "migration/vmstate.h"
+>
+> -REG32(CTRL, 0x00)
+> +REG32(ALERT_TEST, 0x00)
+> +    FIELD(ALERT_TEST, FATAL_FAULT, 0, 1)
+> +REG32(CTRL, 0x04)
+>      FIELD(CTRL, ACTIVE, 0, 1)
+>  REG32(CFG0, 0x100)
+>      FIELD(CFG0, PRESCALE, 0, 12)
+> @@ -143,6 +145,10 @@ static uint64_t ibex_timer_read(void *opaque, hwaddr addr,
+>      uint64_t retvalue = 0;
+>
+>      switch (addr >> 2) {
+> +    case R_ALERT_TEST:
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                        "Attempted to read ALERT_TEST, a write only register");
+> +        break;
+>      case R_CTRL:
+>          retvalue = s->timer_ctrl;
+>          break;
+> @@ -186,6 +192,9 @@ static void ibex_timer_write(void *opaque, hwaddr addr,
+>      uint32_t val = val64;
+>
+>      switch (addr >> 2) {
+> +    case R_ALERT_TEST:
+> +        qemu_log_mask(LOG_UNIMP, "Alert triggering not supported");
+> +        break;
+>      case R_CTRL:
+>          s->timer_ctrl = val;
+>          break;
 > --
 > 2.34.1
 >
