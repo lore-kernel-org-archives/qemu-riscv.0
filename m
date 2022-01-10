@@ -1,69 +1,85 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n6sx1-00073N-Pg
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 06:34:59 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59458)
+	id 1n6uPX-0006rO-Je
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 08:08:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55552)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n6swv-00070v-H2
- for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 06:34:57 -0500
-Received: from [2a00:1450:4864:20::433] (port=38464
- helo=mail-wr1-x433.google.com)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1n6uPV-0006nx-JD
+ for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:08:29 -0500
+Received: from [2607:f8b0:4864:20::102f] (port=42687
+ helo=mail-pj1-x102f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n6sws-00074F-89
- for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 06:34:53 -0500
-Received: by mail-wr1-x433.google.com with SMTP id a5so22217539wrh.5
- for <qemu-riscv@nongnu.org>; Mon, 10 Jan 2022 03:34:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1n6uPR-0007vq-VM
+ for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:08:29 -0500
+Received: by mail-pj1-x102f.google.com with SMTP id
+ lr15-20020a17090b4b8f00b001b19671cbebso15890054pjb.1
+ for <qemu-riscv@nongnu.org>; Mon, 10 Jan 2022 05:08:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qqoCBRhUbnMe69Dv5+fFiZ/6Ii511+mc5jjCVwsZtQE=;
- b=xGnroSeW7Zqpxckt8yx/6Sy8Pd7dfBr0Hglpb3NzRBmYHFekbfwiWEQlLOLKo62/Bg
- 72jkQx270oDA33j4bn6pI5gonQN1IPWrgstEAXDt3K7ZX+t7J4sIcpL64aU9Cf8pOFjS
- KZHKCrcYjynbO8y34CG7xNC531rQDJ9Kh1OcA15JHwfq7i86AFuYXqj7EUxAMo0GcIVU
- ik0+49yEyMRfcEihUnXsfIBv3QGYeGv1dEjpVjDEubpsOr31cr9RqJhtGQX7+hKKx2ye
- /15ojIaXuEzEMFMmwpZ/Qe7fRxJW2Jzroij3mAmUDVjrPkzMuLMBdvsUqWp1OH2ZAgpF
- e1ug==
+ :cc; bh=E2siM23rLYm/2G9JWr6JsdZnAbbds4fQLcscg9a0kAM=;
+ b=e75K7H4NPEXymmHCgdmZt6EZ2Za5jXIxXuH8+JtJWBPpaQNGFqMVnKekHtzX9R/w+S
+ uehhntiwPAYxqxo7AxURjN/hOH9aoyGYxAyFntI6Mn4DgCLFtf+8rPyn6WJ4WG/odeux
+ qBAWkVK31uq1HJqxuGAPMem/ZPazKZmzKsvtRkDEqsMsRAZnLfd8CfSWcfva16N8M34H
+ y8cdKYFZD8nC3TLBGolTUCCl/5Ik+jd2scz37FTbtSCUJfZPjUWS6yKyZeo4zoRNmPYv
+ THf+jBU6ylFhmVs+cI/To6LleBHbhSftA/EaLCS1BS1KwOhpVW8hSQ5EMDtmBxjFBQEi
+ 1law==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=qqoCBRhUbnMe69Dv5+fFiZ/6Ii511+mc5jjCVwsZtQE=;
- b=RaStRYoyFMQanzoEuz9fBfTRkjE1mxJOjUwq5JaBdeV2mOmtzN1h/ZtwgMrNSH5Ukb
- 6I0bKVq31kuMeC4H5NRNG4gJbt9b3sh6U+CL9BNTJ1wNQs+jH1m0/jv0I1ZTRDKeW0yt
- OzPrb/uQSX1IVyiSZODhCsMBGiVcK6lfXPjg99djQDALy6fuApokTaeNKWYuX9fjaefc
- oTTea/RQjhw63UWaweiahrUyU6X7OqBgcu6znMN6has0ctl9DjZsLd7f2w2VeZ648S4j
- ozy/9Ck0xDQQSo0Z5v+aNJCZkHJEUNZyM8xAnG3gPPO6vuuegXNHxdwZyeoRqqOnb+q1
- b/Mg==
-X-Gm-Message-State: AOAM533vl/xquIzSBuc5dbfAoh64QP4vnr/zhvOhUNCgRe+gM7qJFpSW
- 4mEnfkUx///7E4R78g1owSPF0OguGk6obzs6j4RjhA==
-X-Google-Smtp-Source: ABdhPJwTH6Dt6G9bBkFPSXE7Lmet+eKsbyswdyGcSL8AfxCD+XBvhxgVexOYjewGRhRhCBUmj3tUlS1y0JtqcfFXxko=
-X-Received: by 2002:adf:df0f:: with SMTP id y15mr4842883wrl.313.1641814486925; 
- Mon, 10 Jan 2022 03:34:46 -0800 (PST)
+ bh=E2siM23rLYm/2G9JWr6JsdZnAbbds4fQLcscg9a0kAM=;
+ b=O8Dph9GzRseq1JnZdMPyeOF8z0xfriyguY17b1Any4c99sfc616npn0OqtlpJDbvYZ
+ h20JtfJdE8df8mMFtJeLd/wMrQf0A+7s+P+2wdXU8yYC/8acHo25hYtzvyi5P44vDOKb
+ MycYKxhxflfS68CEnTusxcrr+DwsiukGI89sEeSv8pLNFUz22snaf/Q7y+ndL78fOpPp
+ Ei8xPoq4y8SgChz6DUywQeKSOO3G4D8KSh5W7La8ltS2yWkigc5K5zFlP6DpBUGQ0IE2
+ PJQDc/5Z0yWFkm+gins6sD9dTwX1qAU+Y5psEOMABaHIhbPh26Kk8V0Unq4JoRxFLd6r
+ 49xg==
+X-Gm-Message-State: AOAM532CdmOfr3Q4N1gpKXpQrQT2aGth9tIwB0B+0nmICQY1N347LxSn
+ RhM7cNPMX6sGNWj+28qDm4MWYCUZXjvPXA==
+X-Google-Smtp-Source: ABdhPJxmBjohLIm3Ij1B4O7NNYAPNUANwc+RXIzNOuvq70kNeOQf65X/Glmqf4de3JiwbUD9uOOrYg==
+X-Received: by 2002:a63:7f17:: with SMTP id a23mr7684326pgd.203.1641820103705; 
+ Mon, 10 Jan 2022 05:08:23 -0800 (PST)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com.
+ [209.85.214.178])
+ by smtp.gmail.com with ESMTPSA id s30sm6935333pfw.195.2022.01.10.05.08.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Jan 2022 05:08:22 -0800 (PST)
+Received: by mail-pl1-f178.google.com with SMTP id q14so11841493plx.4;
+ Mon, 10 Jan 2022 05:08:22 -0800 (PST)
+X-Received: by 2002:a17:902:ced2:b0:149:2f04:e00c with SMTP id
+ d18-20020a170902ced200b001492f04e00cmr73743569plg.13.1641820101734; Mon, 10
+ Jan 2022 05:08:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20220107004846.378859-1-atishp@rivosinc.com>
- <20220107004846.378859-9-atishp@rivosinc.com>
-In-Reply-To: <20220107004846.378859-9-atishp@rivosinc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Mon, 10 Jan 2022 17:04:35 +0530
-Message-ID: <CAAhSdy0hgwC=TNesrvgBtNUHq=GyinyHeLY0WuypFnSF1SOCvA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/11] target/riscv: Add sscofpmf extension support
-To: Atish Patra <atishp@rivosinc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::433
+References: <20211230123539.52786-1-anup@brainfault.org>
+ <20211230123539.52786-10-anup@brainfault.org>
+In-Reply-To: <20211230123539.52786-10-anup@brainfault.org>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 10 Jan 2022 21:08:10 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0XZ1SfNKHp9sd+FKMt40N3RXO92XbqbjiFq=DUAp18NQ@mail.gmail.com>
+Message-ID: <CANzO1D0XZ1SfNKHp9sd+FKMt40N3RXO92XbqbjiFq=DUAp18NQ@mail.gmail.com>
+Subject: Re: [PATCH v6 09/23] target/riscv: Implement AIA local interrupt
+ priorities
+To: Anup Patel <anup@brainfault.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000f2f68205d53a07fc"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102f
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::433;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x433.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_NONE=0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,901 +92,1025 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 11:34:57 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 13:08:30 -0000
 
-On Fri, Jan 7, 2022 at 7:45 AM Atish Patra <atishp@rivosinc.com> wrote:
+--000000000000f2f68205d53a07fc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Anup Patel <anup@brainfault.org> =E6=96=BC 2021=E5=B9=B412=E6=9C=8830=E6=97=
+=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=888:38=E5=AF=AB=E9=81=93=EF=BC=9A
+
+> From: Anup Patel <anup.patel@wdc.com>
 >
-> The Sscofpmf ('Ss' for Privileged arch and Supervisor-level extensions,
-> and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
-> extension allows the perf to handle overflow interrupts and filtering
-> support. This patch provides a framework for programmable
-> counters to leverage the extension. As the extension doesn't have any
-> provision for the overflow bit for fixed counters, the fixed events
-> can also be monitoring using programmable counters. The underlying
-> counters for cycle and instruction counters are always running. Thus,
-> a separate timer device is programmed to handle the overflow.
+> The AIA spec defines programmable 8-bit priority for each local interrupt
+> at M-level, S-level and VS-level so we extend local interrupt processing
+> to consider AIA interrupt priorities. The AIA CSRs which help software
+> configure local interrupt priorities will be added by subsequent patches.
 >
-> Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> Signed-off-by: Anup Patel <anup@brainfault.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c      |  12 ++
->  target/riscv/cpu.h      |  25 +++
->  target/riscv/cpu_bits.h |  55 +++++++
->  target/riscv/csr.c      | 156 ++++++++++++++++--
->  target/riscv/pmu.c      | 346 +++++++++++++++++++++++++++++++++++++++-
->  target/riscv/pmu.h      |   8 +
->  6 files changed, 591 insertions(+), 11 deletions(-)
+>  target/riscv/cpu.c        |  19 ++++
+>  target/riscv/cpu.h        |  12 ++
+>  target/riscv/cpu_helper.c | 231 ++++++++++++++++++++++++++++++++++----
+>  target/riscv/machine.c    |   3 +
+>  4 files changed, 244 insertions(+), 21 deletions(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9448c4335347..2ca9f8480b9d 100644
+> index 9f1a4d1088..9ad26035e1 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -22,6 +22,7 @@
->  #include "qemu/ctype.h"
->  #include "qemu/log.h"
->  #include "cpu.h"
-> +#include "pmu.h"
->  #include "internals.h"
->  #include "exec/exec-all.h"
->  #include "qapi/error.h"
-> @@ -569,6 +570,16 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          set_misa(env, env->misa_mxl, ext);
->      }
+> @@ -348,6 +348,10 @@ void restore_state_to_opc(CPURISCVState *env,
+> TranslationBlock *tb,
 >
-> +    if (cpu->cfg.pmu_num) {
-> +        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscof) {
-> +            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> +                                          riscv_pmu_timer_cb, cpu);
-> +            if (!cpu->pmu_timer) {
-> +                cpu->cfg.ext_sscof = false;
-> +            }
-> +        }
-> +     }
+>  static void riscv_cpu_reset(DeviceState *dev)
+>  {
+> +#ifndef CONFIG_USER_ONLY
+> +    uint8_t iprio;
+> +    int i, irq, rdzero;
+> +#endif
+>      CPUState *cs =3D CPU(dev);
+>      RISCVCPU *cpu =3D RISCV_CPU(cs);
+>      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);
+> @@ -370,6 +374,21 @@ static void riscv_cpu_reset(DeviceState *dev)
+>      env->miclaim =3D MIP_SGEIP;
+>      env->pc =3D env->resetvec;
+>      env->two_stage_lookup =3D false;
 > +
->      riscv_cpu_register_gdb_regs_for_features(cs);
->
->      qemu_init_vcpu(cs);
-> @@ -628,6 +639,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
->      DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
->      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> +    DEFINE_PROP_BOOL("sscof", RISCVCPU, cfg.ext_sscof, false),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
->      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
->      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+> +    /* Initialized default priorities of local interrupts. */
+> +    for (i =3D 0; i < ARRAY_SIZE(env->miprio); i++) {
+> +        iprio =3D riscv_cpu_default_priority(i);
+> +        env->miprio[i] =3D (i =3D=3D IRQ_M_EXT) ? 0 : iprio;
+> +        env->siprio[i] =3D (i =3D=3D IRQ_S_EXT) ? 0 : iprio;
+> +        env->hviprio[i] =3D 0;
+> +    }
+> +    i =3D 0;
+> +    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
+> +        if (!rdzero) {
+> +            env->hviprio[irq] =3D env->miprio[irq];
+> +        }
+> +        i++;
+> +    }
+>      /* mmte is supposed to have pm.current hardwired to 1 */
+>      env->mmte |=3D (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
+>  #endif
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5fe9c51b38c7..1e5f307df919 100644
+> index 02f3ef2c3c..140fabfdf9 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -123,6 +123,8 @@ struct PMUCTRState {
->      /* Snapshort value of a counter in RV32 */
->      target_ulong mhpmcounterh_prev;
->      bool started;
-> +    /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
-> +    target_ulong irq_overflow_left;
->  };
+> @@ -182,6 +182,10 @@ struct CPURISCVState {
+>      target_ulong mcause;
+>      target_ulong mtval;  /* since: priv-1.10.0 */
 >
->  struct CPURISCVState {
-> @@ -245,6 +247,9 @@ struct CPURISCVState {
->      /* PMU event selector configured values. First three are unused*/
->      target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
->
-> +    /* PMU event selector configured values for RV32*/
-> +    target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
+> +    /* Machine and Supervisor interrupt priorities */
+> +    uint8_t miprio[64];
+> +    uint8_t siprio[64];
 > +
->      target_ulong sscratch;
->      target_ulong mscratch;
+>      /* Hypervisor CSRs */
+>      target_ulong hstatus;
+>      target_ulong hedeleg;
+> @@ -194,6 +198,9 @@ struct CPURISCVState {
+>      target_ulong hgeip;
+>      uint64_t htimedelta;
 >
-> @@ -339,6 +344,7 @@ struct RISCVCPU {
->          bool ext_icsr;
->          bool ext_zfh;
->          bool ext_zfhmin;
-> +        bool ext_sscof;
->
->          uint8_t pmu_num;
->          char *priv_spec;
-> @@ -352,6 +358,12 @@ struct RISCVCPU {
->          bool epmp;
->          uint64_t resetvec;
->      } cfg;
+> +    /* Hypervisor controlled virtual interrupt priorities */
+> +    uint8_t hviprio[64];
 > +
-> +    QEMUTimer *pmu_timer;
-> +    /* A bitmask of Available programmable counters */
-> +    uint32_t pmu_avail_ctrs;
-> +    /* Mapping of events to counters */
-> +    GHashTable *pmu_event_ctr_map;
->  };
+>      /* Virtual CSRs */
+>      /*
+>       * For RV32 this is 32-bit vsstatus and 32-bit vsstatush.
+> @@ -379,6 +386,11 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunction
+> f, CPUState *cs,
+>                                 int cpuid, void *opaque);
+>  int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg)=
+;
+>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
+> +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero=
+);
+> +uint8_t riscv_cpu_default_priority(int irq);
+> +int riscv_cpu_mirq_pending(CPURISCVState *env);
+> +int riscv_cpu_sirq_pending(CPURISCVState *env);
+> +int riscv_cpu_vsirq_pending(CPURISCVState *env);
+>  bool riscv_cpu_fp_enabled(CPURISCVState *env);
+>  target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
+>  void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index f94a36fa89..e3532de4cf 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -151,36 +151,225 @@ void cpu_get_tb_cpu_state(CPURISCVState *env,
+> target_ulong *pc,
+>  }
 >
->  static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
-> @@ -526,6 +538,19 @@ enum {
->      CSR_TABLE_SIZE = 0x1000
->  };
->
-> +/**
-> + * The event id are encoded based on the encoding specified in the
-> + * SBI specification v0.3
+>  #ifndef CONFIG_USER_ONLY
+> -static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> +
+> +/*
+> + * The HS-mode is allowed to configure priority only for the
+> + * following VS-mode local interrupts:
+> + *
+> + * 0  (Reserved interrupt, reads as zero)
+> + * 1  Supervisor software interrupt
+> + * 4  (Reserved interrupt, reads as zero)
+> + * 5  Supervisor timer interrupt
+> + * 8  (Reserved interrupt, reads as zero)
+> + * 13 (Reserved interrupt)
+> + * 14 "
+> + * 15 "
+> + * 16 "
+> + * 18 Debug/trace interrupt
+> + * 20 (Reserved interrupt)
+> + * 22 "
+> + * 24 "
+> + * 26 "
+> + * 28 "
+> + * 30 (Reserved for standard reporting of bus or system errors)
 > + */
 > +
-> +enum riscv_pmu_event_idx {
-> +    RISCV_PMU_EVENT_HW_CPU_CYCLES = 0x01,
-> +    RISCV_PMU_EVENT_HW_INSTRUCTIONS = 0x02,
-> +    RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS = 0x10019,
-> +    RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS = 0x1001B,
-> +    RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS = 0x10021,
-> +};
+> +static int hviprio_index2irq[] =3D
+> +    { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 };
+> +static int hviprio_index2rdzero[] =3D
+> +    { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 > +
->  /* CSR function table */
->  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index dbd9ce9a85a3..559b60675132 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -316,6 +316,37 @@
->  #define CSR_MHPMEVENT29     0x33d
->  #define CSR_MHPMEVENT30     0x33e
->  #define CSR_MHPMEVENT31     0x33f
-> +
-> +#define CSR_MHPMEVENT3H     0x723
-> +#define CSR_MHPMEVENT4H     0x724
-> +#define CSR_MHPMEVENT5H     0x725
-> +#define CSR_MHPMEVENT6H     0x726
-> +#define CSR_MHPMEVENT7H     0x727
-> +#define CSR_MHPMEVENT8H     0x728
-> +#define CSR_MHPMEVENT9H     0x729
-> +#define CSR_MHPMEVENT10H    0x72a
-> +#define CSR_MHPMEVENT11H    0x72b
-> +#define CSR_MHPMEVENT12H    0x72c
-> +#define CSR_MHPMEVENT13H    0x72d
-> +#define CSR_MHPMEVENT14H    0x72e
-> +#define CSR_MHPMEVENT15H    0x72f
-> +#define CSR_MHPMEVENT16H    0x730
-> +#define CSR_MHPMEVENT17H    0x731
-> +#define CSR_MHPMEVENT18H    0x732
-> +#define CSR_MHPMEVENT19H    0x733
-> +#define CSR_MHPMEVENT20H    0x734
-> +#define CSR_MHPMEVENT21H    0x735
-> +#define CSR_MHPMEVENT22H    0x736
-> +#define CSR_MHPMEVENT23H    0x737
-> +#define CSR_MHPMEVENT24H    0x738
-> +#define CSR_MHPMEVENT25H    0x739
-> +#define CSR_MHPMEVENT26H    0x73a
-> +#define CSR_MHPMEVENT27H    0x73b
-> +#define CSR_MHPMEVENT28H    0x73c
-> +#define CSR_MHPMEVENT29H    0x73d
-> +#define CSR_MHPMEVENT30H    0x73e
-> +#define CSR_MHPMEVENT31H    0x73f
-> +
->  #define CSR_MHPMCOUNTER3H   0xb83
->  #define CSR_MHPMCOUNTER4H   0xb84
->  #define CSR_MHPMCOUNTER5H   0xb85
-> @@ -377,6 +408,7 @@
->  #define CSR_VSMTE           0x2c0
->  #define CSR_VSPMMASK        0x2c1
->  #define CSR_VSPMBASE        0x2c2
-> +#define CSR_SCOUNTOVF       0xda0
->
->  /* mstatus CSR bits */
->  #define MSTATUS_UIE         0x00000001
-> @@ -538,6 +570,7 @@ typedef enum RISCVException {
->  #define IRQ_S_EXT                          9
->  #define IRQ_VS_EXT                         10
->  #define IRQ_M_EXT                          11
-> +#define IRQ_PMU_OVF                        13
->
->  /* mip masks */
->  #define MIP_USIP                           (1 << IRQ_U_SOFT)
-> @@ -552,11 +585,13 @@ typedef enum RISCVException {
->  #define MIP_SEIP                           (1 << IRQ_S_EXT)
->  #define MIP_VSEIP                          (1 << IRQ_VS_EXT)
->  #define MIP_MEIP                           (1 << IRQ_M_EXT)
-> +#define MIP_LCOFIP                         (1 << IRQ_PMU_OVF)
->
->  /* sip masks */
->  #define SIP_SSIP                           MIP_SSIP
->  #define SIP_STIP                           MIP_STIP
->  #define SIP_SEIP                           MIP_SEIP
-> +#define SIP_LCOFIP                         MIP_LCOFIP
->
->  /* MIE masks */
->  #define MIE_SEIE                           (1 << IRQ_S_EXT)
-> @@ -629,4 +664,24 @@ typedef enum RISCVException {
->  #define UMTE_U_PM_INSN      U_PM_INSN
->  #define UMTE_MASK     (UMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | UMTE_U_PM_INSN)
->
-> +/* PMU related bits */
-> +#define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
-> +
-> +#define MHPMEVENT_BIT_OF                   BIT(63)
-> +#define MHPMEVENTH_BIT_OF                  BIT(31)
-> +#define MHPMEVENT_BIT_MINH                 BIT(62)
-> +#define MHPMEVENTH_BIT_MINH                BIT(30)
-> +#define MHPMEVENT_BIT_SINH                 BIT(61)
-> +#define MHPMEVENTH_BIT_SINH                BIT(29)
-> +#define MHPMEVENT_BIT_UINH                 BIT(60)
-> +#define MHPMEVENTH_BIT_UINH                BIT(28)
-> +#define MHPMEVENT_BIT_VSINH                BIT(59)
-> +#define MHPMEVENTH_BIT_VSINH               BIT(27)
-> +#define MHPMEVENT_BIT_VUINH                BIT(58)
-> +#define MHPMEVENTH_BIT_VUINH               BIT(26)
-> +
-> +#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
-> +#define MHPMEVENT_IDX_MASK                 0xFFFFF
-> +#define MHPMEVENT_SSCOF_RESVD              16
-> +
->  #endif
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d4449ada557c..d3a8bba6a518 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -90,13 +90,26 @@ static RISCVException mctr32(CPURISCVState *env, int csrno)
->      return mctr(env, csrno);
->  }
->
-> +static RISCVException sscof(CPURISCVState *env, int csrno)
-> +{
-> + #if !defined(CONFIG_USER_ONLY)
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    if (!cpu->cfg.ext_sscof) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +#endif
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException ctr(CPURISCVState *env, int csrno)
+> +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero=
+)
 >  {
->  #if !defined(CONFIG_USER_ONLY)
->      CPUState *cs = env_cpu(env);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      int ctr_index;
-> -    int base_csrno = CSR_HPMCOUNTER3;
-> +    int base_csrno = CSR_CYCLE;
->      bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
->
->      if (rv32 && csrno >= CSR_CYCLEH) {
-> @@ -105,11 +118,18 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->      }
->      ctr_index = csrno - base_csrno;
->
-> -    if (!cpu->cfg.pmu_num || ctr_index >= (cpu->cfg.pmu_num)) {
-> +    if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-> +        (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
-> +        goto skip_ext_pmu_check;
+> -    target_ulong virt_enabled =3D riscv_cpu_virt_enabled(env);
+> +    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <=3D index) {
+> +        return -EINVAL;
 > +    }
 > +
-> +    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
->          /* No counter is enabled in PMU or the counter is out of range */
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
->
-> +skip_ext_pmu_check:
-> +
->      if (env->priv == PRV_S) {
->          switch (csrno) {
->          case CSR_CYCLE:
-> @@ -128,7 +148,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->              }
->              break;
->          case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> -            ctr_index = csrno - CSR_CYCLE;
->              if (!get_field(env->mcounteren, 1 << ctr_index)) {
->                  return RISCV_EXCP_ILLEGAL_INST;
->              }
-> @@ -152,7 +171,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->                  }
->                  break;
->              case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> -                ctr_index = csrno - CSR_CYCLEH;
->                  if (!get_field(env->mcounteren, 1 << ctr_index)) {
->                      return RISCV_EXCP_ILLEGAL_INST;
->                  }
-> @@ -182,7 +200,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->              }
->              break;
->          case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> -            ctr_index = csrno - CSR_CYCLE;
->              if (!get_field(env->hcounteren, 1 << ctr_index) &&
->                   get_field(env->mcounteren, 1 << ctr_index)) {
->                  return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> @@ -210,7 +227,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->                  }
->                  break;
->              case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> -                ctr_index = csrno - CSR_CYCLEH;
->                  if (!get_field(env->hcounteren, 1 << ctr_index) &&
->                       get_field(env->mcounteren, 1 << ctr_index)) {
->                      return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> @@ -462,7 +478,7 @@ static int write_vcsr(CPURISCVState *env, int csrno, target_ulong val)
->  }
->
->  /* User Timers and Counters */
-> -static target_ulong get_icount_ticks(bool brv32)
-> +target_ulong get_icount_ticks(bool brv32)
->  {
->      int64_t val;
->      target_ulong result;
-> @@ -499,11 +515,36 @@ static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
->  {
->      int evt_index = csrno - CSR_MCOUNTINHIBIT;
->
-> +    if (riscv_cpu_mxl(env) != MXL_RV32) {
-> +        riscv_pmu_update_event_map(env, val, evt_index);
+> +    if (out_irq) {
+> +        *out_irq =3D hviprio_index2irq[index];
 > +    }
->      env->mhpmevent_val[evt_index] = val;
 >
->      return RISCV_EXCP_NONE;
->  }
+> -    target_ulong mstatus_mie =3D get_field(env->mstatus, MSTATUS_MIE);
+> -    target_ulong mstatus_sie =3D get_field(env->mstatus, MSTATUS_SIE);
+> +    if (out_rdzero) {
+> +        *out_rdzero =3D hviprio_index2rdzero[index];
+> +    }
 >
-> +static int read_mhpmeventh(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
-> +
-> +    *val = env->mhpmevent_val[evt_index];
-> +
-> +    return RISCV_EXCP_NONE;
+> -    target_ulong vsgemask =3D
+> -                (target_ulong)1 << get_field(env->hstatus, HSTATUS_VGEIN=
+);
+> -    target_ulong vsgein =3D (env->hgeip & vsgemask) ? MIP_VSEIP : 0;
+> +    return 0;
 > +}
-> +
-> +static int write_mhpmeventh(CPURISCVState *env, int csrno, target_ulong val)
+>
+> -    target_ulong pending =3D (env->mip | vsgein) & env->mie;
+> +uint8_t riscv_cpu_default_priority(int irq)
 > +{
-> +    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
-> +    uint64_t mhpmevth_val = val;
-> +    uint64_t mhpmevt_val = env->mhpmevent_val[evt_index];
-> +
-> +    mhpmevt_val = mhpmevt_val | (mhpmevth_val << 32);
-> +    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
-> +    env->mhpmeventh_val[evt_index] = val;
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
->  {
->      int ctr_idx = csrno - CSR_MCYCLE;
-> @@ -513,6 +554,9 @@ static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
->      if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->          riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
->          counter->mhpmcounter_prev = get_icount_ticks(false);
-> +        if (ctr_idx > 2) {
-> +            riscv_pmu_setup_timer(env, val, ctr_idx);
-> +        }
->       } else {
->          /* Other counters can keep incrementing from the given value */
->          counter->mhpmcounter_prev = val;
-> @@ -525,11 +569,17 @@ static int write_mhpmcounterh(CPURISCVState *env, int csrno, target_ulong val)
->  {
->      int ctr_idx = csrno - CSR_MCYCLEH;
->      PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> +    uint64_t mhpmctr_val = counter->mhpmcounter_val;
-> +    uint64_t mhpmctrh_val = val;
+> +    int u, l;
+> +    uint8_t iprio =3D IPRIO_MMAXIPRIO;
 >
->      counter->mhpmcounterh_val = val;
-> +    mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
->      if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->          riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
->          counter->mhpmcounterh_prev = get_icount_ticks(false);
-> +        if (ctr_idx > 2) {
-> +            riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
-> +        }
->      } else {
->          counter->mhpmcounterh_prev = val;
->      }
-> @@ -599,6 +649,32 @@ static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
->      return riscv_pmu_read_ctr(env, val, true, ctr_index);
->  }
->
-> +static int read_scountovf(CPURISCVState *env, int csrno, target_ulong *val)
-> +{
-> +    int mhpmevt_start = CSR_MHPMEVENT3 - CSR_MCOUNTINHIBIT;
-> +    int i;
-> +    *val = 0;
-> +    target_ulong *mhpm_evt_val;
-> +    uint64_t of_bit_mask;
-> +
-> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +        mhpm_evt_val = env->mhpmeventh_val;
-> +        of_bit_mask = MHPMEVENTH_BIT_OF;
-> +    } else {
-> +        mhpm_evt_val = env->mhpmevent_val;
-> +        of_bit_mask = MHPMEVENT_BIT_OF;
+> -    target_ulong mie    =3D env->priv < PRV_M ||
+> -                          (env->priv =3D=3D PRV_M && mstatus_mie);
+> -    target_ulong sie    =3D env->priv < PRV_S ||
+> -                          (env->priv =3D=3D PRV_S && mstatus_sie);
+> -    target_ulong hsie   =3D virt_enabled || sie;
+> -    target_ulong vsie   =3D virt_enabled && sie;
+> +    if (irq < 0 || irq > 63) {
+> +        return iprio;
 > +    }
-> +
-> +    for (i = mhpmevt_start; i < RV_MAX_MHPMEVENTS; i++) {
-> +        if ((get_field(env->mcounteren, BIT(i))) &&
-> +            (mhpm_evt_val[i] & of_bit_mask)) {
-> +                    *val |= BIT(i);
-> +            }
-> +    }
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  #if defined(CONFIG_USER_ONLY)
->  static RISCVException read_time(CPURISCVState *env, int csrno,
->                                  target_ulong *val)
-> @@ -645,7 +721,7 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
->  /* Machine constants */
 >
->  #define M_MODE_INTERRUPTS  (MIP_MSIP | MIP_MTIP | MIP_MEIP)
-> -#define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP)
-> +#define S_MODE_INTERRUPTS  (MIP_SSIP | MIP_STIP | MIP_SEIP | MIP_LCOFIP)
->  #define VS_MODE_INTERRUPTS (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP)
+> -    target_ulong irqs =3D
+> -            (pending & ~env->mideleg & -mie) |
+> -            (pending &  env->mideleg & ~env->hideleg & -hsie) |
+> -            (pending &  env->mideleg &  env->hideleg & -vsie);
+> +    /*
+> +     * Default priorities of local interrupts are defined in the
+> +     * RISC-V Advanced Interrupt Architecture specification.
+> +     *
+> +     * ----------------------------------------------------------------
+> +     *  Default  |
+> +     *  Priority | Major Interrupt Numbers
+> +     * ----------------------------------------------------------------
+> +     *  Highest  | 63 (3f), 62 (3e), 31 (1f), 30 (1e), 61 (3d), 60 (3c),
+> +     *           | 59 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56 (38),
+> +     *           | 55 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52 (34),
+> +     *           | 51 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (30)
+> +     *           |
+> +     *           | 11 (0b),  3 (03),  7 (07)
+> +     *           |  9 (09),  1 (01),  5 (05)
+> +     *           | 12 (0c)
+> +     *           | 10 (0a),  2 (02),  6 (06)
+> +     *           |
+> +     *           | 47 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44 (2c),
+> +     *           | 43 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40 (28),
+> +     *           | 39 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36 (24),
+> +     *  Lowest   | 35 (23), 34 (22), 17 (11), 16 (10), 33 (21), 32 (20)
+> +     * ----------------------------------------------------------------
+> +     */
 >
->  static const target_ulong delegable_ints = S_MODE_INTERRUPTS |
-> @@ -683,7 +759,8 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
->  static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
->      SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
->      SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
-> -static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
-> +static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP |
-> +                                              SIP_LCOFIP;
->  static const target_ulong hip_writable_mask = MIP_VSSIP;
->  static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
->  static const target_ulong vsip_writable_mask = MIP_VSSIP;
-> @@ -2362,6 +2439,65 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
->                                                         write_mhpmevent },
->
-> +    [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT4H]    = { "mhpmevent4h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT5H]    = { "mhpmevent5h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT6H]    = { "mhpmevent6h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT7H]    = { "mhpmevent7h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT8H]    = { "mhpmevent8h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT9H]    = { "mhpmevent9h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT10H]   = { "mhpmevent10h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT11H]   = { "mhpmevent11h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT12H]   = { "mhpmevent12h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT13H]   = { "mhpmevent13h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT14H]   = { "mhpmevent14h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT15H]   = { "mhpmevent15h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT16H]   = { "mhpmevent16h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT17H]   = { "mhpmevent17h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT18H]   = { "mhpmevent18h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT19H]   = { "mhpmevent19h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT20H]   = { "mhpmevent20h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT21H]   = { "mhpmevent21h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT22H]   = { "mhpmevent22h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT23H]   = { "mhpmevent23h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT24H]   = { "mhpmevent24h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT25H]   = { "mhpmevent25h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT26H]   = { "mhpmevent26h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT27H]   = { "mhpmevent27h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT28H]   = { "mhpmevent28h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT29H]   = { "mhpmevent29h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT30H]   = { "mhpmevent30h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +    [CSR_MHPMEVENT31H]   = { "mhpmevent31h",    sscof,  read_mhpmeventh,
-> +                                                       write_mhpmeventh},
-> +
->      [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
->      [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
->      [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_hpmcounterh },
-> @@ -2450,5 +2586,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->                                                         write_mhpmcounterh },
->      [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
->                                                         write_mhpmcounterh },
-> +    [CSR_SCOUNTOVF]      = { "scountovf", sscof,  read_scountovf },
-> +
->  #endif /* !CONFIG_USER_ONLY */
->  };
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index 000fe8da45ef..15f161059fb7 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -20,13 +20,355 @@
->  #include "cpu.h"
->  #include "pmu.h"
->
-> +#define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
-> +#define MAKE_32BIT_MASK(shift, length) \
-> +        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
-> +
-> +static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
-> +{
-> +    if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
-> +        !(cpu->pmu_avail_ctrs & BIT(ctr_idx))) {
-> +        return false;
-> +    } else {
-> +        return true;
-> +    }
-> +}
-> +
-> +static bool riscv_pmu_counter_enabled(RISCVCPU *cpu, uint32_t ctr_idx)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    if (!riscv_pmu_counter_valid(cpu, ctr_idx) ||
-> +        !get_field(env->mcounteren, BIT(ctr_idx))) {
-> +        return false;
-> +    } else {
-> +        return true;
-> +    }
-> +}
-> +
-> +static int riscv_pmu_incr_ctr_rv32(RISCVCPU *cpu, uint32_t ctr_idx)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +    target_ulong max_val = UINT32_MAX;
-> +    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> +
-> +    /* Privilege mode filtering */
-> +    if ((env->priv == PRV_M &&
-> +        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_MINH)) ||
-> +        (env->priv == PRV_S &&
-> +        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_SINH)) ||
-> +        (env->priv == PRV_U &&
-> +        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_UINH))) {
-> +        return 0;
-> +    }
-
-This does not consider VS/VU modes.
-
-Please update it here and below as well.
-
-Regards,
-Anup
-
-> +
-> +    /* Handle the overflow scenario */
-> +    if (counter->mhpmcounter_val == max_val) {
-> +        if (counter->mhpmcounterh_val == max_val) {
-> +            counter->mhpmcounter_val = 0;
-> +            counter->mhpmcounterh_val = 0;
-> +            /* Generate interrupt only if OF bit is clear */
-> +            if (!(env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_OF)) {
-> +                env->mhpmeventh_val[ctr_idx] |= MHPMEVENTH_BIT_OF;
-> +                riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
-> +            }
+> -    if (irqs) {
+> -        return ctz64(irqs); /* since non-zero */
+> +    u =3D IPRIO_DEFAULT_U(irq);
+> +    l =3D IPRIO_DEFAULT_L(irq);
+> +    if (u =3D=3D 0) {
+> +        if (irq =3D=3D IRQ_VS_EXT || irq =3D=3D IRQ_VS_TIMER ||
+> +            irq =3D=3D IRQ_VS_SOFT) {
+> +            iprio =3D IPRIO_DEFAULT_VS;
+> +        } else if (irq =3D=3D IRQ_S_GEXT) {
+> +            iprio =3D IPRIO_DEFAULT_SGEXT;
+> +        } else if (irq =3D=3D IRQ_S_EXT || irq =3D=3D IRQ_S_TIMER ||
+> +                   irq =3D=3D IRQ_S_SOFT) {
+> +            iprio =3D IPRIO_DEFAULT_S;
+> +        } else if (irq =3D=3D IRQ_M_EXT || irq =3D=3D IRQ_M_TIMER ||
+> +                   irq =3D=3D IRQ_M_SOFT) {
+> +            iprio =3D IPRIO_DEFAULT_M;
 > +        } else {
-> +            counter->mhpmcounterh_val++;
+> +            iprio =3D IPRIO_DEFAULT_VS;
 > +        }
-> +    } else {
-> +        counter->mhpmcounter_val++;
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
-> +{
-> +    CPURISCVState *env = &cpu->env;
-> +    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> +    uint64_t max_val = UINT64_MAX;
-> +
-> +    /* Privilege mode filtering */
-> +    if ((env->priv == PRV_M &&
-> +        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_MINH)) ||
-> +        (env->priv == PRV_S &&
-> +        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_SINH)) ||
-> +        (env->priv == PRV_U &&
-> +        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_UINH))) {
-> +        return 0;
-> +    }
-> +
-> +    /* Handle the overflow scenario */
-> +    if (counter->mhpmcounter_val == max_val) {
-> +        counter->mhpmcounter_val = 0;
-> +        /* Generate interrupt only if OF bit is clear */
-> +        if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
-> +            env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
-> +            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
+> +    } else if (u =3D=3D 1) {
+> +        if (l < 8) {
+> +            iprio =3D IPRIO_DEFAULT_16_23(irq);
+> +        } else {
+> +            iprio =3D IPRIO_DEFAULT_24_31(irq);
 > +        }
-> +    } else {
-> +        counter->mhpmcounter_val++;
+> +    } else if (u =3D=3D 2) {
+> +        iprio =3D IPRIO_DEFAULT_32_47(irq);
+> +    } else if (u =3D=3D 3) {
+> +        iprio =3D IPRIO_DEFAULT_48_63(irq);
 > +    }
-> +    return 0;
+> +
+> +    return iprio;
 > +}
 > +
-> +int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+> +static int riscv_cpu_pending_to_irq(CPURISCVState *env,
+> +                                    uint64_t pending, uint8_t *iprio)
 > +{
-> +    uint32_t ctr_idx;
-> +    int ret;
-> +    CPURISCVState *env = &cpu->env;
-> +    gpointer value;
+> +    int irq, best_irq =3D RISCV_EXCP_NONE;
+> +    unsigned int prio, best_prio =3D UINT_MAX;
 > +
-> +    value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> +                                GUINT_TO_POINTER(event_idx));
-> +    if (!value) {
-> +        return -1;
+> +    if (!pending) {
+> +        return RISCV_EXCP_NONE;
 > +    }
 > +
-> +    ctr_idx = GPOINTER_TO_UINT(value);
-> +    if (!riscv_pmu_counter_enabled(cpu, ctr_idx) ||
-> +        get_field(env->mcountinhibit, BIT(ctr_idx))) {
-> +        return -1;
+> +    irq =3D ctz64(pending);
+> +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
+> +        return irq;
 > +    }
 > +
-> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +        ret = riscv_pmu_incr_ctr_rv32(cpu, ctr_idx);
-> +    } else {
-> +        ret = riscv_pmu_incr_ctr_rv64(cpu, ctr_idx);
+> +    pending =3D pending >> irq;
+> +    while (pending) {
+> +        prio =3D iprio[irq];
+> +        if (!prio) {
+> +            prio =3D (riscv_cpu_default_priority(irq) < IPRIO_DEFAULT_M)=
+ ?
+> +                   1 : IPRIO_MMAXIPRIO;
+>
+
+Hi Anup,
+
+I have a question regarding configuring priorities of major interrupts.
+
+riscv_cpu_default_priority() for M-mode external interrupt would return
+IPRIO_DEFAULT_M (8).
+but the comparison here is < IPRIO_DEFAULT_M,
+so if M-mode external interrupt is pending, the prio would be assigned to
+IPRIO_MMAXIPRIO (255).
+Is this the expected behavior?
+
+Also, why is IPRIO_DEFAULT_M been compared?
+Should IPRIO_DEFAULT_S and IPRIO_DEFAULT_VS be used for S-mode and VS-mode
+interrupts?
+
+
+> +        }
+> +        if ((pending & 0x1) && (prio < best_prio)) {
+>
+
+If both interrupt 63 and 62 are pending-and-enabled,
+with their iprio values both assigned to zero.
+Interrupt 62 would be picked, because best_prio will be 1 when interrupt 62
+is been checked.
+As the default priority order for interrupt 63 is also less than
+IPRIO_DEFAULT_M (8),
+so prio would be assigned to 1 as well.
+But as prio is not less than best_prio, so best_irq would still be
+interrupt 62.
+
+However, according to the default priority table in AIA spec,
+interrupt 63 should have a higher priority than interrupt 62:
+  Interrupt 63 has the highest default priority, and interrupt 32 has the
+lowest default priority.
+
+
+> +            best_irq =3D irq;
+> +            best_prio =3D prio;
+> +        }
+> +        irq++;
+> +        pending =3D pending >> 1;
 > +    }
 > +
-> +    return ret;
+> +    return best_irq;
+> +}
+>
+
+Yet I have another question for major interrupts priorities.
+
+According to AIA spec (v0.2-draft.28):
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+The priority number for a machine-level external interrupt (bits 31:24 of
+register iprio2)
+must also be read-only zero.
+
+When an interrupt=E2=80=99s priority number in the array is zero (either re=
+ad-only
+zero or set to zero),
+its priority is the default order from Section 6.1.
+Setting an interrupt=E2=80=99s priority number instead to a nonzero value p=
+ gives
+that interrupt nominally
+the same priority as a machine-level external interrupt with priority
+number p.
+For a major interrupt that defaults to a higher priority than machine
+external interrupts,
+setting its priority number to a nonzero value lowers its priority.
+For a major interrupt that defaults to a lower priority than machine
+external interrupts,
+setting its priority number to a nonzero value raises its priority.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+From the above sentences,
+The M-mode external interrupt has iprio value of 0, so the default priority
+order is applied.
+
+What are the priorities for the major interrupt interrupts which are
+higher/lower than
+M-mode external interrupt when their iprio values are not 0?
+
+Which interrupt will be picked when:
+  M-mode external interrupt is pending-and-enabled,
+  Interrupt with higher default priority than M-mode external interrupt is
+pending-and-enabled, and
+  Interrupt with lower default priority than M-mode external interrupt is
+pending-and-enabled/
+
+From the above riscv_cpu_pending_to_irq(),
+If both interrupt 63 and interrupt 18's iprio values are assigned to the
+value of 10,
+and interrupt 63, interrupt 18 and M-mode external interrupts are
+pending-and-enabled.
+Interrupt 18 would be picked.
+Is this the correct expectation?
+I'm a bit confused with the correct priority order of the interrupts
+with/without non-zero value iprio and the default priority.
+
+Thanks,
+Frank Chang
+
+
+> +
+> +static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
+> +{
+> +    uint32_t gein =3D get_field(env->hstatus, HSTATUS_VGEIN);
+> +    uint64_t vsgein =3D (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
+> +
+> +    return (env->mip | vsgein) & env->mie;
 > +}
 > +
->  bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
->                                          uint32_t target_ctr)
->  {
-> -    return (target_ctr == 0) ? true : false;
-> +    RISCVCPU *cpu;
-> +    uint32_t event_idx;
-> +    uint32_t ctr_idx;
+> +int riscv_cpu_mirq_pending(CPURISCVState *env)
+> +{
+> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & ~env->mideleg &
+> +                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
 > +
-> +    /* Fixed instret counter */
-> +    if (target_ctr == 2) {
-> +        return true;
+> +    return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
+> +}
+> +
+> +int riscv_cpu_sirq_pending(CPURISCVState *env)
+> +{
+> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & env->mideleg &
+> +                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> +
+> +    return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
+> +}
+> +
+> +int riscv_cpu_vsirq_pending(CPURISCVState *env)
+> +{
+> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & env->mideleg &
+> +                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
+> +
+> +    return riscv_cpu_pending_to_irq(env, irqs >> 1, env->hviprio);
+> +}
+> +
+> +static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+> +{
+> +    int virq;
+> +    uint64_t irqs, pending, mie, hsie, vsie;
+> +
+> +    /* Determine interrupt enable state of all privilege modes */
+> +    if (riscv_cpu_virt_enabled(env)) {
+> +        mie =3D 1;
+> +        hsie =3D 1;
+> +        vsie =3D (env->priv < PRV_S) ||
+> +               (env->priv =3D=3D PRV_S && get_field(env->mstatus,
+> MSTATUS_SIE));
+>      } else {
+> -        return RISCV_EXCP_NONE; /* indicates no pending interrupt */
+> +        mie =3D (env->priv < PRV_M) ||
+> +              (env->priv =3D=3D PRV_M && get_field(env->mstatus,
+> MSTATUS_MIE));
+> +        hsie =3D (env->priv < PRV_S) ||
+> +               (env->priv =3D=3D PRV_S && get_field(env->mstatus,
+> MSTATUS_SIE));
+> +        vsie =3D 0;
+>      }
+> +
+> +    /* Determine all pending interrupts */
+> +    pending =3D riscv_cpu_all_pending(env);
+> +
+> +    /* Check M-mode interrupts */
+> +    irqs =3D pending & ~env->mideleg & -mie;
+> +    if (irqs) {
+> +        return riscv_cpu_pending_to_irq(env, irqs, env->miprio);
 > +    }
 > +
-> +    cpu = RISCV_CPU(env_cpu(env));
-> +    event_idx = RISCV_PMU_EVENT_HW_INSTRUCTIONS;
-> +    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> +                               GUINT_TO_POINTER(event_idx)));
-> +    if (!ctr_idx) {
-> +        return false;
+> +    /* Check HS-mode interrupts */
+> +    irqs =3D pending & env->mideleg & ~env->hideleg & -hsie;
+> +    if (irqs) {
+> +        return riscv_cpu_pending_to_irq(env, irqs, env->siprio);
 > +    }
 > +
-> +    return target_ctr == ctr_idx ? true : false;
+> +    /* Check VS-mode interrupts */
+> +    irqs =3D pending & env->mideleg & env->hideleg & -vsie;
+> +    if (irqs) {
+> +        virq =3D riscv_cpu_pending_to_irq(env, irqs >> 1, env->hviprio);
+> +        return (virq <=3D 0) ? virq : virq + 1;
+> +    }
+> +
+> +    /* Indicate no pending interrupt */
+> +    return RISCV_EXCP_NONE;
 >  }
 >
->  bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
->  {
-> -    return (target_ctr == 2) ? true : false;
-> +    RISCVCPU *cpu;
-> +    uint32_t event_idx;
-> +    uint32_t ctr_idx;
-> +
-> +    /* Fixed mcycle counter */
-> +    if (target_ctr == 0) {
-> +        return true;
-> +    }
-> +
-> +    cpu = RISCV_CPU(env_cpu(env));
-> +    event_idx = RISCV_PMU_EVENT_HW_CPU_CYCLES;
-> +    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> +                               GUINT_TO_POINTER(event_idx)));
-> +
-> +    /* Counter zero is not used for event_ctr_map */
-> +    if (!ctr_idx) {
-> +        return false;
-> +    }
-> +
-> +    return (target_ctr == ctr_idx) ? true : false;
-> +}
-> +
-> +static gboolean pmu_remove_event_map(gpointer key, gpointer value,
-> +                                     gpointer udata)
-> +{
-> +    return (GPOINTER_TO_UINT(value) == GPOINTER_TO_UINT(udata)) ? true : false;
-> +}
-> +
-> +static int64_t pmu_icount_ticks_to_ns(int64_t value)
-> +{
-> +    int64_t ret = 0;
-> +
-> +    if (icount_enabled()) {
-> +        ret = icount_to_ns(value);
-> +    } else {
-> +        ret = (NANOSECONDS_PER_SECOND / RISCV_TIMEBASE_FREQ) * value;
-> +    }
-> +
-> +    return ret;
-> +}
-> +
-> +int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-> +                               uint32_t ctr_idx)
-> +{
-> +    uint32_t event_idx;
-> +    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
-> +
-> +    if (!riscv_pmu_counter_valid(cpu, ctr_idx)) {
-> +        return -1;
-> +    }
-> +
-> +    /**
-> +     * Expected mhpmevent value is zero for reset case. Remove the current
-> +     * mapping.
-> +     */
-> +    if (!value) {
-> +        g_hash_table_foreach_remove(cpu->pmu_event_ctr_map,
-> +                                    pmu_remove_event_map,
-> +                                    GUINT_TO_POINTER(ctr_idx));
-> +        return 0;
-> +    }
-> +
-> +    event_idx = value & MHPMEVENT_IDX_MASK;
-> +    if (g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> +                            GUINT_TO_POINTER(event_idx))) {
-> +        return 0;
-> +    }
-> +
-> +    switch (event_idx) {
-> +    case RISCV_PMU_EVENT_HW_CPU_CYCLES:
-> +    case RISCV_PMU_EVENT_HW_INSTRUCTIONS:
-> +    case RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS:
-> +    case RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS:
-> +    case RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS:
-> +        break;
-> +    default:
-> +        /* We don't support any raw events right now */
-> +        return -1;
-> +    }
-> +    g_hash_table_insert(cpu->pmu_event_ctr_map, GUINT_TO_POINTER(event_idx),
-> +                        GUINT_TO_POINTER(ctr_idx));
-> +
-> +    return 0;
-> +}
-> +
-> +static void pmu_timer_trigger_irq(RISCVCPU *cpu,
-> +                                  enum riscv_pmu_event_idx evt_idx)
-> +{
-> +    uint32_t ctr_idx;
-> +    CPURISCVState *env = &cpu->env;
-> +    PMUCTRState *counter;
-> +    target_ulong *mhpmevent_val;
-> +    uint64_t of_bit_mask;
-> +    int64_t irq_trigger_at;
-> +
-> +    if (evt_idx != RISCV_PMU_EVENT_HW_CPU_CYCLES &&
-> +        evt_idx != RISCV_PMU_EVENT_HW_INSTRUCTIONS) {
-> +        return;
-> +    }
-> +
-> +    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
-> +                               GUINT_TO_POINTER(evt_idx)));
-> +    if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
-> +        return;
-> +    }
-> +
-> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +        mhpmevent_val = &env->mhpmeventh_val[ctr_idx];
-> +        of_bit_mask = MHPMEVENTH_BIT_OF;
-> +     } else {
-> +        mhpmevent_val = &env->mhpmevent_val[ctr_idx];
-> +        of_bit_mask = MHPMEVENT_BIT_OF;
-> +    }
-> +
-> +    counter = &env->pmu_ctrs[ctr_idx];
-> +    if (counter->irq_overflow_left > 0) {
-> +        irq_trigger_at = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> +                        counter->irq_overflow_left;
-> +        timer_mod_anticipate_ns(cpu->pmu_timer, irq_trigger_at);
-> +        counter->irq_overflow_left = 0;
-> +        return;
-> +    }
-> +
-> +    if (cpu->pmu_avail_ctrs & BIT(ctr_idx)) {
-> +        /* Generate interrupt only if OF bit is clear */
-> +        if (!(*mhpmevent_val & of_bit_mask)) {
-> +            *mhpmevent_val |= of_bit_mask;
-> +            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
-> +        }
-> +    }
-> +}
-> +
-> +/* Timer callback for instret and cycle counter overflow */
-> +void riscv_pmu_timer_cb(void *priv)
-> +{
-> +    RISCVCPU *cpu = priv;
-> +
-> +    /* Timer event was triggered only for these events */
-> +    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES);
-> +    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
-> +}
-> +
-> +int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value, uint32_t ctr_idx)
-> +{
-> +    uint64_t overflow_delta, overflow_at;
-> +    int64_t overflow_ns, overflow_left = 0;
-> +    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
-> +    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
-> +
-> +    if (!riscv_pmu_counter_valid(cpu, ctr_idx) || !cpu->cfg.ext_sscof) {
-> +        return -1;
-> +    }
-> +
-> +    if (value) {
-> +        overflow_delta = UINT64_MAX - value + 1;
-> +    } else {
-> +        overflow_delta = UINT64_MAX - value;
-> +    }
-> +
-> +    /**
-> +     * QEMU supports only int64_t timers while RISC-V counters are uint64_t.
-> +     * Compute the leftover and save it so that it can be reprogrammed again
-> +     * when timer expires.
-> +     */
-> +    if (overflow_delta > INT64_MAX) {
-> +        overflow_left = overflow_delta - INT64_MAX;
-> +    }
-> +
-> +    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
-> +        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
-> +        overflow_ns = pmu_icount_ticks_to_ns((int64_t)overflow_delta);
-> +        overflow_left = pmu_icount_ticks_to_ns(overflow_left) ;
-> +    } else {
-> +        return -1;
-> +    }
-> +    overflow_at = (uint64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + overflow_ns;
-> +
-> +    if (overflow_at > INT64_MAX) {
-> +        overflow_left += overflow_at - INT64_MAX;
-> +        counter->irq_overflow_left = overflow_left;
-> +        overflow_at = INT64_MAX;
-> +    }
-> +    timer_mod_anticipate_ns(cpu->pmu_timer, overflow_at);
-> +
-> +    return 0;
-> +}
-> +
-> +
-> +int riscv_pmu_init(RISCVCPU *cpu, int num_counters)
-> +{
-> +    if (num_counters > (RV_MAX_MHPMCOUNTERS - 3)) {
-> +        return -1;
-> +    }
-> +
-> +    cpu->pmu_event_ctr_map = g_hash_table_new(g_direct_hash, g_direct_equal);
-> +    if (!cpu->pmu_event_ctr_map) {
-> +        /* PMU support can not be enabled */
-> +        qemu_log_mask(LOG_UNIMP, "PMU events can't be supported\n");
-> +        cpu->cfg.pmu_num = 0;
-> +        return -1;
-> +    }
-> +
-> +    /* Create a bitmask of available programmable counters */
-> +    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, num_counters);
-> +
-> +    return 0;
->  }
-> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-> index 58a5bc3a4089..9b400c3522f2 100644
-> --- a/target/riscv/pmu.h
-> +++ b/target/riscv/pmu.h
-> @@ -26,3 +26,11 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
->                                          uint32_t target_ctr);
->  bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env,
->                                    uint32_t target_ctr);
-> +void riscv_pmu_timer_cb(void *priv);
-> +int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
-> +int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-> +                               uint32_t ctr_idx);
-> +int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
-> +target_ulong get_icount_ticks(bool brv32);
-> +int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-> +                          uint32_t ctr_idx);
+>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 76dd0d415c..cffc444969 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =3D {
+>          VMSTATE_UINTTL(env.hgeie, RISCVCPU),
+>          VMSTATE_UINTTL(env.hgeip, RISCVCPU),
+>          VMSTATE_UINT64(env.htimedelta, RISCVCPU),
+> +        VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
+>
+>          VMSTATE_UINT64(env.vsstatus, RISCVCPU),
+>          VMSTATE_UINTTL(env.vstvec, RISCVCPU),
+> @@ -173,6 +174,8 @@ const VMStateDescription vmstate_riscv_cpu =3D {
+>      .fields =3D (VMStateField[]) {
+>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+>          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
+> +        VMSTATE_UINT8_ARRAY(env.miprio, RISCVCPU, 64),
+> +        VMSTATE_UINT8_ARRAY(env.siprio, RISCVCPU, 64),
+>          VMSTATE_UINTTL(env.pc, RISCVCPU),
+>          VMSTATE_UINTTL(env.load_res, RISCVCPU),
+>          VMSTATE_UINTTL(env.load_val, RISCVCPU),
 > --
-> 2.30.2
+> 2.25.1
 >
 >
+>
+
+--000000000000f2f68205d53a07fc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Anup Patel &lt;<a href=3D"mailto:anup@bra=
+infault.org">anup@brainfault.org</a>&gt; =E6=96=BC 2021=E5=B9=B412=E6=9C=88=
+30=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=888:38=E5=AF=AB=E9=81=93=EF=
+=BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex">From: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com=
+" target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
+<br>
+The AIA spec defines programmable 8-bit priority for each local interrupt<b=
+r>
+at M-level, S-level and VS-level so we extend local interrupt processing<br=
+>
+to consider AIA interrupt priorities. The AIA CSRs which help software<br>
+configure local interrupt priorities will be added by subsequent patches.<b=
+r>
+<br>
+Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com" target=
+=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
+Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup@brainfault.org" target=
+=3D"_blank">anup@brainfault.org</a>&gt;<br>
+Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
+m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
+---<br>
+=C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 19 ++++<br>
+=C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 12 ++<br>
+=C2=A0target/riscv/cpu_helper.c | 231 ++++++++++++++++++++++++++++++++++---=
+-<br>
+=C2=A0target/riscv/machine.c=C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
+=C2=A04 files changed, 244 insertions(+), 21 deletions(-)<br>
+<br>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
+index 9f1a4d1088..9ad26035e1 100644<br>
+--- a/target/riscv/cpu.c<br>
++++ b/target/riscv/cpu.c<br>
+@@ -348,6 +348,10 @@ void restore_state_to_opc(CPURISCVState *env, Translat=
+ionBlock *tb,<br>
+<br>
+=C2=A0static void riscv_cpu_reset(DeviceState *dev)<br>
+=C2=A0{<br>
++#ifndef CONFIG_USER_ONLY<br>
++=C2=A0 =C2=A0 uint8_t iprio;<br>
++=C2=A0 =C2=A0 int i, irq, rdzero;<br>
++#endif<br>
+=C2=A0 =C2=A0 =C2=A0CPUState *cs =3D CPU(dev);<br>
+=C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
+=C2=A0 =C2=A0 =C2=A0RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);<br>
+@@ -370,6 +374,21 @@ static void riscv_cpu_reset(DeviceState *dev)<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;miclaim =3D MIP_SGEIP;<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;pc =3D env-&gt;resetvec;<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;two_stage_lookup =3D false;<br>
++<br>
++=C2=A0 =C2=A0 /* Initialized default priorities of local interrupts. */<br=
+>
++=C2=A0 =C2=A0 for (i =3D 0; i &lt; ARRAY_SIZE(env-&gt;miprio); i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D riscv_cpu_default_priority(i);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;miprio[i] =3D (i =3D=3D IRQ_M_EXT) ? 0=
+ : iprio;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;siprio[i] =3D (i =3D=3D IRQ_S_EXT) ? 0=
+ : iprio;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;hviprio[i] =3D 0;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 i =3D 0;<br>
++=C2=A0 =C2=A0 while (!riscv_cpu_hviprio_index2irq(i, &amp;irq, &amp;rdzero=
+)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!rdzero) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;hviprio[irq] =3D env-&gt=
+;miprio[irq];<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 i++;<br>
++=C2=A0 =C2=A0 }<br>
+=C2=A0 =C2=A0 =C2=A0/* mmte is supposed to have pm.current hardwired to 1 *=
+/<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;mmte |=3D (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);=
+<br>
+=C2=A0#endif<br>
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+index 02f3ef2c3c..140fabfdf9 100644<br>
+--- a/target/riscv/cpu.h<br>
++++ b/target/riscv/cpu.h<br>
+@@ -182,6 +182,10 @@ struct CPURISCVState {<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mcause;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong mtval;=C2=A0 /* since: priv-1.10.0 */<br>
+<br>
++=C2=A0 =C2=A0 /* Machine and Supervisor interrupt priorities */<br>
++=C2=A0 =C2=A0 uint8_t miprio[64];<br>
++=C2=A0 =C2=A0 uint8_t siprio[64];<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0/* Hypervisor CSRs */<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong hstatus;<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong hedeleg;<br>
+@@ -194,6 +198,9 @@ struct CPURISCVState {<br>
+=C2=A0 =C2=A0 =C2=A0target_ulong hgeip;<br>
+=C2=A0 =C2=A0 =C2=A0uint64_t htimedelta;<br>
+<br>
++=C2=A0 =C2=A0 /* Hypervisor controlled virtual interrupt priorities */<br>
++=C2=A0 =C2=A0 uint8_t hviprio[64];<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0/* Virtual CSRs */<br>
+=C2=A0 =C2=A0 =C2=A0/*<br>
+=C2=A0 =C2=A0 =C2=A0 * For RV32 this is 32-bit vsstatus and 32-bit vsstatus=
+h.<br>
+@@ -379,6 +386,11 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpFunction f=
+, CPUState *cs,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 int cpuid, void *opaque);<br>
+=C2=A0int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int r=
+eg);<br>
+=C2=A0int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg=
+);<br>
++int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);=
+<br>
++uint8_t riscv_cpu_default_priority(int irq);<br>
++int riscv_cpu_mirq_pending(CPURISCVState *env);<br>
++int riscv_cpu_sirq_pending(CPURISCVState *env);<br>
++int riscv_cpu_vsirq_pending(CPURISCVState *env);<br>
+=C2=A0bool riscv_cpu_fp_enabled(CPURISCVState *env);<br>
+=C2=A0target_ulong riscv_cpu_get_geilen(CPURISCVState *env);<br>
+=C2=A0void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);<b=
+r>
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+index f94a36fa89..e3532de4cf 100644<br>
+--- a/target/riscv/cpu_helper.c<br>
++++ b/target/riscv/cpu_helper.c<br>
+@@ -151,36 +151,225 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target=
+_ulong *pc,<br>
+=C2=A0}<br>
+<br>
+=C2=A0#ifndef CONFIG_USER_ONLY<br>
+-static int riscv_cpu_local_irq_pending(CPURISCVState *env)<br>
++<br>
++/*<br>
++ * The HS-mode is allowed to configure priority only for the<br>
++ * following VS-mode local interrupts:<br>
++ *<br>
++ * 0=C2=A0 (Reserved interrupt, reads as zero)<br>
++ * 1=C2=A0 Supervisor software interrupt<br>
++ * 4=C2=A0 (Reserved interrupt, reads as zero)<br>
++ * 5=C2=A0 Supervisor timer interrupt<br>
++ * 8=C2=A0 (Reserved interrupt, reads as zero)<br>
++ * 13 (Reserved interrupt)<br>
++ * 14 &quot;<br>
++ * 15 &quot;<br>
++ * 16 &quot;<br>
++ * 18 Debug/trace interrupt<br>
++ * 20 (Reserved interrupt)<br>
++ * 22 &quot;<br>
++ * 24 &quot;<br>
++ * 26 &quot;<br>
++ * 28 &quot;<br>
++ * 30 (Reserved for standard reporting of bus or system errors)<br>
++ */<br>
++<br>
++static int hviprio_index2irq[] =3D<br>
++=C2=A0 =C2=A0 { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 =
+};<br>
++static int hviprio_index2rdzero[] =3D<br>
++=C2=A0 =C2=A0 { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };<br>
++<br>
++int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)<=
+br>
+=C2=A0{<br>
+-=C2=A0 =C2=A0 target_ulong virt_enabled =3D riscv_cpu_virt_enabled(env);<b=
+r>
++=C2=A0 =C2=A0 if (index &lt; 0 || ARRAY_SIZE(hviprio_index2irq) &lt;=3D in=
+dex) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 if (out_irq) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *out_irq =3D hviprio_index2irq[index];<br>
++=C2=A0 =C2=A0 }<br>
+<br>
+-=C2=A0 =C2=A0 target_ulong mstatus_mie =3D get_field(env-&gt;mstatus, MSTA=
+TUS_MIE);<br>
+-=C2=A0 =C2=A0 target_ulong mstatus_sie =3D get_field(env-&gt;mstatus, MSTA=
+TUS_SIE);<br>
++=C2=A0 =C2=A0 if (out_rdzero) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *out_rdzero =3D hviprio_index2rdzero[index];<b=
+r>
++=C2=A0 =C2=A0 }<br>
+<br>
+-=C2=A0 =C2=A0 target_ulong vsgemask =3D<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (target_ulong)1 &l=
+t;&lt; get_field(env-&gt;hstatus, HSTATUS_VGEIN);<br>
+-=C2=A0 =C2=A0 target_ulong vsgein =3D (env-&gt;hgeip &amp; vsgemask) ? MIP=
+_VSEIP : 0;<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
+<br>
+-=C2=A0 =C2=A0 target_ulong pending =3D (env-&gt;mip | vsgein) &amp; env-&g=
+t;mie;<br>
++uint8_t riscv_cpu_default_priority(int irq)<br>
++{<br>
++=C2=A0 =C2=A0 int u, l;<br>
++=C2=A0 =C2=A0 uint8_t iprio =3D IPRIO_MMAXIPRIO;<br>
+<br>
+-=C2=A0 =C2=A0 target_ulong mie=C2=A0 =C2=A0 =3D env-&gt;priv &lt; PRV_M ||=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_M &amp;&amp; mstatus_mie);<br>
+-=C2=A0 =C2=A0 target_ulong sie=C2=A0 =C2=A0 =3D env-&gt;priv &lt; PRV_S ||=
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_S &amp;&amp; mstatus_sie);<br>
+-=C2=A0 =C2=A0 target_ulong hsie=C2=A0 =C2=A0=3D virt_enabled || sie;<br>
+-=C2=A0 =C2=A0 target_ulong vsie=C2=A0 =C2=A0=3D virt_enabled &amp;&amp; si=
+e;<br>
++=C2=A0 =C2=A0 if (irq &lt; 0 || irq &gt; 63) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return iprio;<br>
++=C2=A0 =C2=A0 }<br>
+<br>
+-=C2=A0 =C2=A0 target_ulong irqs =3D<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp; ~env-&gt;mideleg =
+&amp; -mie) |<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp;=C2=A0 env-&gt;mid=
+eleg &amp; ~env-&gt;hideleg &amp; -hsie) |<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp;=C2=A0 env-&gt;mid=
+eleg &amp;=C2=A0 env-&gt;hideleg &amp; -vsie);<br>
++=C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0* Default priorities of local interrupts are defined i=
+n the<br>
++=C2=A0 =C2=A0 =C2=A0* RISC-V Advanced Interrupt Architecture specification=
+.<br>
++=C2=A0 =C2=A0 =C2=A0*<br>
++=C2=A0 =C2=A0 =C2=A0* ----------------------------------------------------=
+------------<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 Default=C2=A0 |<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 Priority | Major Interrupt Numbers<br>
++=C2=A0 =C2=A0 =C2=A0* ----------------------------------------------------=
+------------<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 Highest=C2=A0 | 63 (3f), 62 (3e), 31 (1f), 30 =
+(1e), 61 (3d), 60 (3c),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 59 (3b), 5=
+8 (3a), 29 (1d), 28 (1c), 57 (39), 56 (38),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 55 (37), 5=
+4 (36), 27 (1b), 26 (1a), 53 (35), 52 (34),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 51 (33), 5=
+0 (32), 25 (19), 24 (18), 49 (31), 48 (30)<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 11 (0b),=
+=C2=A0 3 (03),=C2=A0 7 (07)<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 9 (0=
+9),=C2=A0 1 (01),=C2=A0 5 (05)<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 12 (0c)<br=
+>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 10 (0a),=
+=C2=A0 2 (02),=C2=A0 6 (06)<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 47 (2f), 4=
+6 (2e), 23 (17), 22 (16), 45 (2d), 44 (2c),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 43 (2b), 4=
+2 (2a), 21 (15), 20 (14), 41 (29), 40 (28),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 39 (27), 3=
+8 (26), 19 (13), 18 (12), 37 (25), 36 (24),<br>
++=C2=A0 =C2=A0 =C2=A0*=C2=A0 Lowest=C2=A0 =C2=A0| 35 (23), 34 (22), 17 (11)=
+, 16 (10), 33 (21), 32 (20)<br>
++=C2=A0 =C2=A0 =C2=A0* ----------------------------------------------------=
+------------<br>
++=C2=A0 =C2=A0 =C2=A0*/<br>
+<br>
+-=C2=A0 =C2=A0 if (irqs) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return ctz64(irqs); /* since non-zero */<br>
++=C2=A0 =C2=A0 u =3D IPRIO_DEFAULT_U(irq);<br>
++=C2=A0 =C2=A0 l =3D IPRIO_DEFAULT_L(irq);<br>
++=C2=A0 =C2=A0 if (u =3D=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (irq =3D=3D IRQ_VS_EXT || irq =3D=3D IRQ_VS=
+_TIMER ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 irq =3D=3D IRQ_VS_SOFT) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_VS;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_S_GEXT) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_SGEXT;<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_S_EXT || irq =3D=3D =
+IRQ_S_TIMER ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0irq =
+=3D=3D IRQ_S_SOFT) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_S;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_M_EXT || irq =3D=3D =
+IRQ_M_TIMER ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0irq =
+=3D=3D IRQ_M_SOFT) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_M;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_VS;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 } else if (u =3D=3D 1) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (l &lt; 8) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_16_23(ir=
+q);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_24_31(ir=
+q);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 } else if (u =3D=3D 2) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_32_47(irq);<br>
++=C2=A0 =C2=A0 } else if (u =3D=3D 3) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_48_63(irq);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return iprio;<br>
++}<br>
++<br>
++static int riscv_cpu_pending_to_irq(CPURISCVState *env,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint64_t pending, uint=
+8_t *iprio)<br>
++{<br>
++=C2=A0 =C2=A0 int irq, best_irq =3D RISCV_EXCP_NONE;<br>
++=C2=A0 =C2=A0 unsigned int prio, best_prio =3D UINT_MAX;<br>
++<br>
++=C2=A0 =C2=A0 if (!pending) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 irq =3D ctz64(pending);<br>
++=C2=A0 =C2=A0 if (!riscv_feature(env, RISCV_FEATURE_AIA)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return irq;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 pending =3D pending &gt;&gt; irq;<br>
++=C2=A0 =C2=A0 while (pending) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D iprio[irq];<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!prio) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D (riscv_cpu_default_prio=
+rity(irq) &lt; IPRIO_DEFAULT_M) ?<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 : I=
+PRIO_MMAXIPRIO;<br></blockquote><div><br></div><div>Hi Anup,</div><div><br>=
+</div><div>I have a question regarding configuring priorities of major inte=
+rrupts.</div><div><br></div><div>riscv_cpu_default_priority() for M-mode ex=
+ternal interrupt would return IPRIO_DEFAULT_M (8).</div><div>but the compar=
+ison here is &lt; IPRIO_DEFAULT_M,</div><div>so if M-mode external interrup=
+t is pending, the prio would be assigned to IPRIO_MMAXIPRIO (255).</div><di=
+v>Is this the expected behavior?</div><div><br></div><div>Also, why is IPRI=
+O_DEFAULT_M been compared?</div><div>Should IPRIO_DEFAULT_S and IPRIO_DEFAU=
+LT_VS be used for S-mode and VS-mode interrupts?</div><div>=C2=A0<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((pending &amp; 0x1) &amp;&amp; (prio &lt; =
+best_prio)) {<br></blockquote><div><br></div><div>If both interrupt 63 and =
+62 are pending-and-enabled,</div><div>with their iprio values both assigned=
+ to zero.</div><div>Interrupt 62 would be picked, because best_prio will be=
+ 1 when interrupt 62 is been checked.</div><div>As the default priority ord=
+er for interrupt 63 is also less than IPRIO_DEFAULT_M (8),</div><div>so pri=
+o would be assigned to 1 as well.</div><div>But as prio is not less than be=
+st_prio, so best_irq would still be interrupt 62.</div><div><br></div><div>=
+However, according to the default priority table in AIA spec,</div><div>int=
+errupt 63 should have a higher priority than interrupt 62:</div><div>=C2=A0=
+=C2=A0Interrupt 63 has the highest default
+priority, and interrupt 32 has the lowest default priority.</div><div>=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_irq =3D irq;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_prio =3D prio;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 irq++;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 pending =3D pending &gt;&gt; 1;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return best_irq;<br>
++}<br></blockquote><div><br></div><div>Yet I have another question for majo=
+r interrupts priorities.</div><div><br></div><div>According to AIA spec (v0=
+.2-draft.28):</div><div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br></div><div>The pr=
+iority number for a machine-level external interrupt (bits 31:24 of registe=
+r
+iprio2)</div><div>must also be read-only zero.<br></div><div><br></div><div=
+>When an interrupt=E2=80=99s priority number in the array is zero (either r=
+ead-only
+zero or set to zero),</div><div>its priority is the default order from Sect=
+ion 6.1.<br></div><div>Setting an interrupt=E2=80=99s priority
+number instead to a nonzero value p gives that interrupt nominally</div><di=
+v>the same priority as a machine-level external interrupt with priority num=
+ber p.<br></div><div><div>For a major interrupt that defaults to a higher p=
+riority than machine external interrupts,</div><div>setting its priority nu=
+mber to a nonzero value lowers its priority.<br></div><div>For a major inte=
+rrupt that defaults to a lower priority than machine external interrupts,</=
+div><div>setting its priority number to a nonzero value raises its priority=
+.</div></div><div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br></div><div><br></div><d=
+iv>From the above sentences,<br></div><div>The M-mode external interrupt ha=
+s iprio value of 0, so the default priority order is applied.</div><div><br=
+></div><div>What are the priorities for the major interrupt interrupts whic=
+h are higher/lower than<br></div><div>M-mode external interrupt when their =
+iprio values are not 0?</div><div><br></div><div>Which interrupt will be pi=
+cked=C2=A0when:</div><div>=C2=A0 M-mode external interrupt is pending-and-e=
+nabled,</div><div>=C2=A0 Interrupt with higher default priority than M-mode=
+ external interrupt is pending-and-enabled, and</div><div>=C2=A0 Interrupt =
+with lower default priority than M-mode external interrupt is pending-and-e=
+nabled/<br></div><div><br></div><div>From the above riscv_cpu_pending_to_ir=
+q(),</div><div>If both interrupt 63 and interrupt 18&#39;s iprio values are=
+ assigned to the value of 10,</div><div>and interrupt 63, interrupt 18 and =
+M-mode external interrupts are pending-and-enabled.</div><div>Interrupt 18 =
+would be picked.</div><div>Is this the correct expectation?</div><div>I&#39=
+;m a bit confused with the correct priority order of the interrupts with/wi=
+thout non-zero value iprio and the default priority.<br></div><div><br></di=
+v><div>Thanks,</div><div>Frank Chang</div><div>=C2=A0<br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">
++<br>
++static uint64_t riscv_cpu_all_pending(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 uint32_t gein =3D get_field(env-&gt;hstatus, HSTATUS_VGEIN);=
+<br>
++=C2=A0 =C2=A0 uint64_t vsgein =3D (env-&gt;hgeip &amp; (1ULL &lt;&lt; gein=
+)) ? MIP_VSEIP : 0;<br>
++<br>
++=C2=A0 =C2=A0 return (env-&gt;mip | vsgein) &amp; env-&gt;mie;<br>
++}<br>
++<br>
++int riscv_cpu_mirq_pending(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; ~env-&gt;=
+mideleg &amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~(MI=
+P_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
++<br>
++=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, irqs, env-&gt;miprio);<=
+br>
++}<br>
++<br>
++int riscv_cpu_sirq_pending(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; env-&gt;m=
+ideleg &amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ~(MI=
+P_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
++<br>
++=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, irqs, env-&gt;siprio);<=
+br>
++}<br>
++<br>
++int riscv_cpu_vsirq_pending(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; env-&gt;m=
+ideleg &amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (MIP=
+_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
++<br>
++=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, irqs &gt;&gt; 1, env-&g=
+t;hviprio);<br>
++}<br>
++<br>
++static int riscv_cpu_local_irq_pending(CPURISCVState *env)<br>
++{<br>
++=C2=A0 =C2=A0 int virq;<br>
++=C2=A0 =C2=A0 uint64_t irqs, pending, mie, hsie, vsie;<br>
++<br>
++=C2=A0 =C2=A0 /* Determine interrupt enable state of all privilege modes *=
+/<br>
++=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 mie =3D 1;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 hsie =3D 1;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vsie =3D (env-&gt;priv &lt; PRV_S) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(env-&gt;priv =3D=
+=3D PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_SIE));<br>
+=C2=A0 =C2=A0 =C2=A0} else {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE; /* indicates no pendin=
+g interrupt */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 mie =3D (env-&gt;priv &lt; PRV_M) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_=
+M &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_MIE));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 hsie =3D (env-&gt;priv &lt; PRV_S) ||<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(env-&gt;priv =3D=
+=3D PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_SIE));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 vsie =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
++<br>
++=C2=A0 =C2=A0 /* Determine all pending interrupts */<br>
++=C2=A0 =C2=A0 pending =3D riscv_cpu_all_pending(env);<br>
++<br>
++=C2=A0 =C2=A0 /* Check M-mode interrupts */<br>
++=C2=A0 =C2=A0 irqs =3D pending &amp; ~env-&gt;mideleg &amp; -mie;<br>
++=C2=A0 =C2=A0 if (irqs) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, irqs, env=
+-&gt;miprio);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Check HS-mode interrupts */<br>
++=C2=A0 =C2=A0 irqs =3D pending &amp; env-&gt;mideleg &amp; ~env-&gt;hidele=
+g &amp; -hsie;<br>
++=C2=A0 =C2=A0 if (irqs) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, irqs, env=
+-&gt;siprio);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Check VS-mode interrupts */<br>
++=C2=A0 =C2=A0 irqs =3D pending &amp; env-&gt;mideleg &amp; env-&gt;hideleg=
+ &amp; -vsie;<br>
++=C2=A0 =C2=A0 if (irqs) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 virq =3D riscv_cpu_pending_to_irq(env, irqs &g=
+t;&gt; 1, env-&gt;hviprio);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return (virq &lt;=3D 0) ? virq : virq + 1;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Indicate no pending interrupt */<br>
++=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+=C2=A0}<br>
+<br>
+=C2=A0bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)<br=
+>
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
+index 76dd0d415c..cffc444969 100644<br>
+--- a/target/riscv/machine.c<br>
++++ b/target/riscv/machine.c<br>
+@@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =3D {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.hgeie, RISCVCPU),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.hgeip, RISCVCPU),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.htimedelta, RISCVCPU),=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64)=
+,<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.vsstatus, RISCVCPU),<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.vstvec, RISCVCPU),<br>
+@@ -173,6 +174,8 @@ const VMStateDescription vmstate_riscv_cpu =3D {<br>
+=C2=A0 =C2=A0 =C2=A0.fields =3D (VMStateField[]) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 3=
+2),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 3=
+2),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.miprio, RISCVCPU, 64),=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.siprio, RISCVCPU, 64),=
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.pc, RISCVCPU),<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.load_res, RISCVCPU),<b=
+r>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.load_val, RISCVCPU),<b=
+r>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+</blockquote></div></div>
+
+--000000000000f2f68205d53a07fc--
 
