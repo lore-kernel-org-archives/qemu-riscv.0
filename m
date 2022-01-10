@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n73l8-0000Az-A8
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 18:07:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38160)
+	id 1n73nz-0003qB-5D
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 18:10:23 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n73l3-00009Z-Na; Mon, 10 Jan 2022 18:07:21 -0500
-Received: from [2607:f8b0:4864:20::d2d] (port=44800
- helo=mail-io1-xd2d.google.com)
+ id 1n73nx-0003oy-8y; Mon, 10 Jan 2022 18:10:21 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=37743
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n73l2-0005Ad-Ao; Mon, 10 Jan 2022 18:07:21 -0500
-Received: by mail-io1-xd2d.google.com with SMTP id h23so19802139iol.11;
- Mon, 10 Jan 2022 15:07:13 -0800 (PST)
+ id 1n73nv-0005cy-SF; Mon, 10 Jan 2022 18:10:21 -0500
+Received: by mail-io1-xd36.google.com with SMTP id 19so19877246ioz.4;
+ Mon, 10 Jan 2022 15:10:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9yk6Bcu1fitpNUpPqU1IkNlHV7SkcpGxAs+8b8ya+Jw=;
- b=kp5nhNlVfP5cUSmergeH2yUe2An8sATSkHa4jRRtTrVAMYvQZP/FZNWmKHZ3qOcRIc
- L6U/5IGi6b/ysGAvkNSykzQHtPz7peRkZwVymngeuQnIKWEdZKgMSwoAvZYAZ9tA/xh4
- LZwpz7vNXH0sXSmoBV0I5ELJCvN7753ZKRBHnRMCdHO6XxfciAKiFRbd6Xc9vnhZ+Ufv
- 1PvBGG1LfDONWRH23TWZfGj2LKvhxAjydIw4UzIvxRpvJFQt9OAAEoCW3AFDyj2BMClX
- iv6pQGmRzhCB6wpQjOOc6vAPugTvrfLiYoN/1vQy3qHds667CJ4CspDZxJvLiKGpgma2
- n3qQ==
+ :cc; bh=i56dmiKFJTz7J+/29IVu7tJ1DviTvoTcjNMgMReords=;
+ b=NISRuqHiFv5JvcDKDmKF2qp7N46SKxQSlEzzm7du49yfGeG7oR+jS3JZo3KVecwaNd
+ +Ese/IqFOmACd4oIGTV5C0UtauHkpjzz4RtzXAQ3/1sAfZZtyQyjRZKv/jnolSjdO/Tu
+ b4DFChNxUt9GS4sZI1oFm+8v/bf0QPHYTjdGt0NWkpP0L/zz75dTL+eM/JDGZqdBltST
+ ktjTGb5o0xKaMT/uOx0bkwXzJvHCvcCg2QvbSRkxBT/3uATJ2f4dFxIk0x1GWEBKyeSM
+ hoGvQVL9ZHFn2l+/RWoydIxVogRgyK82xFoskil3ksISXzQCQualWXMLePKucAFyVKci
+ /S9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9yk6Bcu1fitpNUpPqU1IkNlHV7SkcpGxAs+8b8ya+Jw=;
- b=kl9jkqU5Pv9gDzMJS1dQHiPzcUnBIBkUBtUxN1cNvQiPwKCkJOOyi5KGpFPBoSKFRM
- aeoi4kY0V4wsZMH7/oR9NQ5a3XF39TJON3R9x7RxzwnFFjx6ybb8ZzubMMBt1dVavFno
- QmiBassev2Gl92eEdniy3/RONjvSaU0TkKufH9vjRadNsRziW6HqwXvjuG/tRstLTtgW
- v0JJIV1KVMrAd4zbLvtq8Cn15a6hSg6HxouAEfzBjv6cMdLSor8+W0+AXnSFtw9KXLhe
- YF2yLAO5o8u3Q4LqVDu8VPwc0wvpfVzW3KO51mYhMD+08rO0+wzuMsfityx21yP+MP1w
- 4G9Q==
-X-Gm-Message-State: AOAM533PTCVJTZ2G37RQiv8qOyNQY1r2XfeHOh7w9PpNuvXn4chyVKH2
- pHU4lHt57NlIZzs+evdnqLk7pJ2M2xNMPyOfKgg=
-X-Google-Smtp-Source: ABdhPJzwjiMQFRGUsTNJWfxyanbFpK/E3qPuRVxLdqjeusRLwOMQDlDT2t/VSj7mrqld5jzDVwQcC+4z1iWgVrrDbFs=
-X-Received: by 2002:a05:6602:140c:: with SMTP id
- t12mr922733iov.187.1641856032412; 
- Mon, 10 Jan 2022 15:07:12 -0800 (PST)
+ bh=i56dmiKFJTz7J+/29IVu7tJ1DviTvoTcjNMgMReords=;
+ b=CF+nFApyDkjdVbPs+vPUG5n1D187e1XFLZqBd82a1PJ+BEQpnfMW69BTluJCEULiIA
+ 0tICrKhhYjZQ9LtwYLRikoi92C5u12GAYQVHmvAeZh+miEZRA4i1Ojp+8QYsCbduo5M7
+ 4WlODtmBG24PDEuMnCxR+rw4wzENrb7UzlJJCHqZFpEc8hlKlP9sIytXvN1qXNSwfYRF
+ LycKPbvR1iOcsPpjnVtm/Ruy2YK+biqLEkmOivEZGnpZalrEcjKfZGpB/b5ZxAQF+MCt
+ h3qOIlt3yKfJ9GuzOXnkixKzjIhwKCZM/y9WOmsx2RmvM3jNZVPcrSBNCrh9zn33ilSs
+ 5skQ==
+X-Gm-Message-State: AOAM531wtW33+sbdN5W5n7sgE6E0Tg4K/p4QAcHpiPNDvaACxd40Uqt6
+ fqf+DwBJriH0p6ErraAQNnV9AQmNMr44Lf/ABqE=
+X-Google-Smtp-Source: ABdhPJwHQXu+ExB9DkfL21+E0aF1Eeg/9j8DWaYEDlnnIJKMSrfVOWFNGIJHNe3qZCFl/uFnjXBf4rw0fnIAd3GNZkk=
+X-Received: by 2002:a02:6954:: with SMTP id e81mr93782jac.63.1641856218466;
+ Mon, 10 Jan 2022 15:10:18 -0800 (PST)
 MIME-Version: 1.0
 References: <20220110013831.1594-1-jiangyifei@huawei.com>
- <20220110013831.1594-6-jiangyifei@huawei.com>
-In-Reply-To: <20220110013831.1594-6-jiangyifei@huawei.com>
+ <20220110013831.1594-3-jiangyifei@huawei.com>
+In-Reply-To: <20220110013831.1594-3-jiangyifei@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Jan 2022 09:06:46 +1000
-Message-ID: <CAKmqyKPsSidxir_1fncugsmLK33aSbHk63MP0JnS3OJLvy65EA@mail.gmail.com>
-Subject: Re: [PATCH v4 05/12] target/riscv: Implement kvm_arch_put_registers
+Date: Tue, 11 Jan 2022 09:09:52 +1000
+Message-ID: <CAKmqyKOOD-iRxX8aj7V2Vtfmi6=i9jCDT=0qgUvxX1j1DOOHXg@mail.gmail.com>
+Subject: Re: [PATCH v4 02/12] target/riscv: Add target/riscv/kvm.c to place
+ the public kvm interface
 To: Yifei Jiang <jiangyifei@huawei.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -58,10 +58,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  wanbo13@huawei.com, 
  Mingwang Li <limingwang@huawei.com>, Anup Patel <anup.patel@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -82,40 +82,41 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 23:07:25 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 23:10:21 -0000
 
-On Mon, Jan 10, 2022 at 11:57 AM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
+On Mon, Jan 10, 2022 at 11:48 AM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
 >
-> Put GPR CSR and FP registers to kvm by KVM_SET_ONE_REG ioctl
+> Add target/riscv/kvm.c to place kvm_arch_* function needed by
+> kvm/kvm-all.c. Meanwhile, add kvm support in meson.build file.
 >
 > Signed-off-by: Yifei Jiang <jiangyifei@huawei.com>
 > Signed-off-by: Mingwang Li <limingwang@huawei.com>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > Reviewed-by: Anup Patel <anup.patel@wdc.com>
 > ---
->  target/riscv/kvm.c | 104 ++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 103 insertions(+), 1 deletion(-)
+>  meson.build              |   2 +
+>  target/riscv/kvm.c       | 133 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/meson.build |   1 +
+>  3 files changed, 136 insertions(+)
+>  create mode 100644 target/riscv/kvm.c
 >
-> diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
-> index 6d4df0ef6d..e695b91dc7 100644
-> --- a/target/riscv/kvm.c
-> +++ b/target/riscv/kvm.c
-> @@ -73,6 +73,14 @@ static uint64_t kvm_riscv_reg_id(CPURISCVState *env, uint64_t type, uint64_t idx
->          } \
->      } while(0)
->
-> +#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
-> +    do { \
-> +        int ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-> +        if (ret) { \
-> +            return ret; \
-> +        } \
-> +    } while(0)
+> diff --git a/meson.build b/meson.build
+> index 53065e96ec..7eaec31a3a 100644
+> --- a/meson.build
+> +++ b/meson.build
+> @@ -90,6 +90,8 @@ elif cpu in ['ppc', 'ppc64']
+>    kvm_targets = ['ppc-softmmu', 'ppc64-softmmu']
+>  elif cpu in ['mips', 'mips64']
+>    kvm_targets = ['mips-softmmu', 'mipsel-softmmu', 'mips64-softmmu', 'mips64el-softmmu']
+> +elif cpu in ['riscv']
+> +  kvm_targets = ['riscv32-softmmu', 'riscv64-softmmu']
+>  else
+>    kvm_targets = []
+>  endif
 
-This fails checkpatch. I know there is lots of QEMU code like this,
-but it probably should be `while (0)` to keep checkpatch happy.
+Can you add this as a separate commit at the end of the series?
 
-Please run checkpatch on all the patches.
+That way we have implemented KVM support before we enable it for users.
 
 Alistair
 
