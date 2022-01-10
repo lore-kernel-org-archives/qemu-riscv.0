@@ -1,49 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n6pCD-0003O5-Mq
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 02:34:27 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36704)
+	id 1n6pID-0007z8-FS
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 02:40:37 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37382)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n6pC4-0003M3-CK; Mon, 10 Jan 2022 02:34:17 -0500
-Received: from [2607:f8b0:4864:20::b2f] (port=35838
- helo=mail-yb1-xb2f.google.com)
+ id 1n6pHy-0007nY-OH; Mon, 10 Jan 2022 02:40:25 -0500
+Received: from [2607:f8b0:4864:20::b34] (port=44674
+ helo=mail-yb1-xb34.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n6pC2-0003r5-MK; Mon, 10 Jan 2022 02:34:15 -0500
-Received: by mail-yb1-xb2f.google.com with SMTP id j83so35690167ybg.2;
- Sun, 09 Jan 2022 23:34:13 -0800 (PST)
+ id 1n6pHw-0004lv-Om; Mon, 10 Jan 2022 02:40:21 -0500
+Received: by mail-yb1-xb34.google.com with SMTP id i3so35562646ybh.11;
+ Sun, 09 Jan 2022 23:40:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+j7IfziZ6uWB2bo7sc4T3tNKt38P1h3b4hmZ6iMB8fI=;
- b=lKMLKE1OVnmnvu6ruiPilJwgG5FUOIS0icDJRgyk2qdLJUVh0CHs9GHuGBTWzxE3lk
- 8UmlgfswhJMbqYGZ1LEOqkKD7zx2tC2qKDUGSXQaQ8DF/dI3ZiRD8M58JJxUJwkB4pAq
- 2QVMJIr/yOIjHKfMWwhJulU9ZabZ9p7e32LIqpIMQXK+9Vccwxzx2GpuJx0zsm1gFj8U
- 8yvxjNLEQYNF4kd6VjGxzXMBlbhbirb2rBm2dL7ny/7vIAmwOv3Y1mPkjBFPFEmVuHVq
- hocGQPE8yOEAFM8p5rqQJwPrUHmDFYX+kxL5+enJjACuLjFSgcTmP+fSZgUjSnOWXif3
- Y2WA==
+ :cc; bh=m7dKT7IIcvSqBeMDd5YMI0ivThxt0lVbt20roNXHgtA=;
+ b=l6kC+FoFaLRw+hgSgzVvh+wPdsk6IsNO64zipK0lDVwBBMghSyDHdtoI4oYohe8vv9
+ Thm9Lt3lK4UANt9Gh0/jh3LFGb5cQgR9IjxO0Kb+UzxYFwmTOF4MDOxPye8u795mDS3Q
+ gj83FZ26/pwOr4M2fri5P0i4gGa/jpOXDBGD7dcpLxgfuvg1LRPWUF3Z0UGNduBRuzxB
+ MHmk5aO/CfZ4B/NVggoPhZOm7Mmflj3pQklx3LQgbEhZrcZlIneZQ5Xg23PgNtFR8yF1
+ XM+23lmrdKFvUkwcQ7UAYA8XHZlblhznM4Sd5PQQoSNdzBzMI2CIwAa68lbwrjzeX4Vj
+ aPTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+j7IfziZ6uWB2bo7sc4T3tNKt38P1h3b4hmZ6iMB8fI=;
- b=Qr2jcPDre0Gx7jYmmChY4pum2Low7IuE3Y6eQYYMHlFetAzN0zxnW+cSqtWG4W57iI
- t2rmkR0YXPc8SSfqOconU3XHEwcE92LIBbMFI41Y9fObEdNxJLajwGatCn3hhwXCcVJb
- INhGqdsKGXXfiQOITbKlQOiUrXu5cwuQAFpgRbH8TJiM/6+cYZ3QkQi9MkI3m0t/5ygY
- us/o6QYP/xT7PzVdnItKc+O+Nqas+9BiFHhqS5lgrSYR3iFU7P/ur+M8tEj5NzqiiN3w
- nu12Wz7QtFt0H9vVt6Cm4WmfHUaiy2nATzv+JnG+Srl0q/bLFTeTe03ngdvrPGOBrBho
- 6uUA==
-X-Gm-Message-State: AOAM531mic8na7Cq6bqtdQEMDCUFA0Da9hstIprttOB/TKXgA+PEGFOE
- qeOfBf2wihlJxR/kw540hoz+W0ygA1xEC++Wsjc=
-X-Google-Smtp-Source: ABdhPJx+W1/Bts3bss/GMr7+/dxKmCxfXb+LlXURf3x38m7X5V1EEsHsglW/pWA1Yr4VVYzryO/8TcdnRS6OjRUgjEw=
-X-Received: by 2002:a5b:3c2:: with SMTP id t2mr86043716ybp.747.1641800053310; 
- Sun, 09 Jan 2022 23:34:13 -0800 (PST)
+ bh=m7dKT7IIcvSqBeMDd5YMI0ivThxt0lVbt20roNXHgtA=;
+ b=IGSTAXSqsTmpUqEBAhDSAtCGT1RFZgkeOwLtU8QXOZ0mKLo6o4pYFJwNbZDJwEeY9D
+ thuI/VyseYLG2OmroW739n4NwwURgCZJ6MrYcyZLuqGuMqjhgcjeevtdAoL3jMmkX++x
+ gzgQJtUVV4UNt2kQ2tL8uVsV4JTtyqD0hAOTk+YIO3vpgSEWamjUJCWWZO+u8K3PrMB9
+ qh41brXImBKaqIxkybUheLW/IEJUVBW+jteGZphOPqtwIfD7i7dfsgP4PIxo4ZaYWo5Y
+ DiU1TX4sPKZT37Ae1zNp3PK3EXTBNPwKcbSw69s30qvO574VoLQ8/Up/L8w7zpDFOwKb
+ +lqw==
+X-Gm-Message-State: AOAM533Jm2nqthPYxsjnWMksq45GOO9lfXdy64UgJ7LAOUdx1ulIuzql
+ kKBWXrgcdVMWzmNm2NNMdEHgH6wNLQ8Q03AeDJ4=
+X-Google-Smtp-Source: ABdhPJzcLGtnWZljiwbFOrAqIgdjHnaYrrnigH4ixDHe3KcIWCX3y24pqZ7LVbvV1/ZGe9Omesr9H+ey51G6MWGAHM0=
+X-Received: by 2002:a25:d153:: with SMTP id i80mr81637946ybg.622.1641800417489; 
+ Sun, 09 Jan 2022 23:40:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20220110061321.4040589-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220110061321.4040589-1-alistair.francis@opensource.wdc.com>
+ <20220110061321.4040589-2-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220110061321.4040589-2-alistair.francis@opensource.wdc.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 10 Jan 2022 15:34:01 +0800
-Message-ID: <CAEUhbmVjdMfF5G-xbjBCFWE13PGtVG9WveXfDSyAAO3Q0Fpukw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] riscv: opentitan: fixup plic stride len
+Date: Mon, 10 Jan 2022 15:40:06 +0800
+Message-ID: <CAEUhbmVwaWExigOyvbptCU9TJhfXUMsFSjCMPbLhhDSdPjSaGg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw: timer: ibex_timer: update/add reg address
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -51,10 +52,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Alistair Francis <alistair23@gmail.com>, wilfred.mallawa@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b2f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b34
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb34.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -74,28 +75,29 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 07:34:18 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 07:40:32 -0000
 
 On Mon, Jan 10, 2022 at 2:13 PM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
 >
 > From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> The following change was made to rectify incorrectly set stride length
-> on the PLIC. Where it should be 32bit and not 24bit (0x18). This was
-
-PLIC [1]
-
-> discovered whilst attempting to fix a bug where a timer_interrupt was
-> not serviced on TockOS-OpenTitan.
+> The following changes:
+> 1. Fixes the incorrectly set CTRL register address. As
+> per [1] https://docs.opentitan.org/hw/ip/rv_timer/doc/#register-table
 >
-
-[1] https://docs.opentitan.org/hw/top_earlgrey/ip_autogen/rv_plic/doc/
-
+> The CTRL register is @ 0x04.
+>
+> This was found when attempting to fixup a bug where a timer_interrupt
+> was not serviced on TockOS-OpenTitan.
+>
+> 2. Adds ALERT_TEST register as documented on [1], adding repective
+>    switch cases to error handle and later implement functionality.
+>
 > Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 > ---
->  hw/riscv/opentitan.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  hw/timer/ibex_timer.c | 11 ++++++++++-
+>  1 file changed, 10 insertions(+), 1 deletion(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
