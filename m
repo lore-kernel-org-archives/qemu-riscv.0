@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n6uPX-0006rO-Je
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 08:08:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55552)
+	id 1n6ugi-0004vw-5a
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 08:26:21 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60402)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n6uPV-0006nx-JD
- for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:08:29 -0500
-Received: from [2607:f8b0:4864:20::102f] (port=42687
- helo=mail-pj1-x102f.google.com)
+ id 1n6ugd-0004qX-Et
+ for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:26:13 -0500
+Received: from [2607:f8b0:4864:20::632] (port=45002
+ helo=mail-pl1-x632.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n6uPR-0007vq-VM
- for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:08:29 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id
- lr15-20020a17090b4b8f00b001b19671cbebso15890054pjb.1
- for <qemu-riscv@nongnu.org>; Mon, 10 Jan 2022 05:08:25 -0800 (PST)
+ id 1n6uga-0002Vq-3o
+ for qemu-riscv@nongnu.org; Mon, 10 Jan 2022 08:26:10 -0500
+Received: by mail-pl1-x632.google.com with SMTP id h1so11877507pls.11
+ for <qemu-riscv@nongnu.org>; Mon, 10 Jan 2022 05:25:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E2siM23rLYm/2G9JWr6JsdZnAbbds4fQLcscg9a0kAM=;
- b=e75K7H4NPEXymmHCgdmZt6EZ2Za5jXIxXuH8+JtJWBPpaQNGFqMVnKekHtzX9R/w+S
- uehhntiwPAYxqxo7AxURjN/hOH9aoyGYxAyFntI6Mn4DgCLFtf+8rPyn6WJ4WG/odeux
- qBAWkVK31uq1HJqxuGAPMem/ZPazKZmzKsvtRkDEqsMsRAZnLfd8CfSWcfva16N8M34H
- y8cdKYFZD8nC3TLBGolTUCCl/5Ik+jd2scz37FTbtSCUJfZPjUWS6yKyZeo4zoRNmPYv
- THf+jBU6ylFhmVs+cI/To6LleBHbhSftA/EaLCS1BS1KwOhpVW8hSQ5EMDtmBxjFBQEi
- 1law==
+ :cc; bh=xnbMbq9OPRh9xur2WOwhL5+sDOA3qYY1QHbzu0/4rPQ=;
+ b=XxumbOiRZXQ7qc4tmWx8A9mBIK0lQBO4NJNpYNoSPfNg4JrGNhzl3mvIlq+X7hpPot
+ 79jJ++UtBHnVZpyWnDwse5lYcKl8CSkHaDJdh3s4mso8ftA3gmJogt10dezT4hWCGgT+
+ NwmfsgiX1ObOn3hj59R8z1qbwS1mI/cWl0zPs6iEvolY9+sxGICX9fEXzTawcI/TsGwW
+ GQWhFqXLaPw8W2U18Ya+u+EqVzGOCTIIypqgOzjUIi3s7KUcLodnuWorECNgCJgWQ/UV
+ rF9Dx1TGb0jtxVnSRLx9PMZkkNQN1gv2X+7YdGwVKQSTwhJZfrP0nbq/GzPQWeBUKeSY
+ z7yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=E2siM23rLYm/2G9JWr6JsdZnAbbds4fQLcscg9a0kAM=;
- b=O8Dph9GzRseq1JnZdMPyeOF8z0xfriyguY17b1Any4c99sfc616npn0OqtlpJDbvYZ
- h20JtfJdE8df8mMFtJeLd/wMrQf0A+7s+P+2wdXU8yYC/8acHo25hYtzvyi5P44vDOKb
- MycYKxhxflfS68CEnTusxcrr+DwsiukGI89sEeSv8pLNFUz22snaf/Q7y+ndL78fOpPp
- Ei8xPoq4y8SgChz6DUywQeKSOO3G4D8KSh5W7La8ltS2yWkigc5K5zFlP6DpBUGQ0IE2
- PJQDc/5Z0yWFkm+gins6sD9dTwX1qAU+Y5psEOMABaHIhbPh26Kk8V0Unq4JoRxFLd6r
- 49xg==
-X-Gm-Message-State: AOAM532CdmOfr3Q4N1gpKXpQrQT2aGth9tIwB0B+0nmICQY1N347LxSn
- RhM7cNPMX6sGNWj+28qDm4MWYCUZXjvPXA==
-X-Google-Smtp-Source: ABdhPJxmBjohLIm3Ij1B4O7NNYAPNUANwc+RXIzNOuvq70kNeOQf65X/Glmqf4de3JiwbUD9uOOrYg==
-X-Received: by 2002:a63:7f17:: with SMTP id a23mr7684326pgd.203.1641820103705; 
- Mon, 10 Jan 2022 05:08:23 -0800 (PST)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com.
- [209.85.214.178])
- by smtp.gmail.com with ESMTPSA id s30sm6935333pfw.195.2022.01.10.05.08.22
+ bh=xnbMbq9OPRh9xur2WOwhL5+sDOA3qYY1QHbzu0/4rPQ=;
+ b=gLwatWuEnaFH9Bo/r6vXuennHvveNc8/pyc8cpUtI2vkx4ULK5F0Kqcl1YzgPoyih9
+ 5cCKfA0m7lp/Lh2WdtHo7jZuFAPODg10qVyLpEFb4uKuAqyQWzyQqbc/ATUq73IgWmQN
+ v3qkp8shPvOjJCI8wLtaT4fprunIbh05iKC/OHbfD9GC+GBWPmhBOd0U00cmrRC1Nf9e
+ 3AcXxz0GfrofEqBJjuBDk3q7sEp0PXCA3HGA7L7C+e2y7ubPDZ8BD+OWzDnNN+4zOm8t
+ XH6XQTIYOBz4FCwI/NMFJcLRfBFfN0XBL79Yd2r1X7w7CIi/ySZWhiURjrRxa5jZKWQL
+ rr2w==
+X-Gm-Message-State: AOAM533wLOjRc0WZuuUWjMfxVmrRzN2Pup3jZnAI9VK4JIG8aroJGvNw
+ AOK6sr4R8HHvt1ykbiHI14YVT44yUfbryjHS
+X-Google-Smtp-Source: ABdhPJzSYlI3OeC8X51SSLnSSflv9Ez504wDSu0IQ0Uy9cmai1MTYTKQqEEX2Ki8IGa4LUalwlDVQg==
+X-Received: by 2002:a17:903:110c:b0:149:8018:e9d4 with SMTP id
+ n12-20020a170903110c00b001498018e9d4mr62067759plh.117.1641821132632; 
+ Mon, 10 Jan 2022 05:25:32 -0800 (PST)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com.
+ [209.85.214.179])
+ by smtp.gmail.com with ESMTPSA id p11sm3635088pgh.23.2022.01.10.05.25.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Jan 2022 05:08:22 -0800 (PST)
-Received: by mail-pl1-f178.google.com with SMTP id q14so11841493plx.4;
- Mon, 10 Jan 2022 05:08:22 -0800 (PST)
-X-Received: by 2002:a17:902:ced2:b0:149:2f04:e00c with SMTP id
- d18-20020a170902ced200b001492f04e00cmr73743569plg.13.1641820101734; Mon, 10
- Jan 2022 05:08:21 -0800 (PST)
+ Mon, 10 Jan 2022 05:25:32 -0800 (PST)
+Received: by mail-pl1-f179.google.com with SMTP id c3so11900208pls.5;
+ Mon, 10 Jan 2022 05:25:31 -0800 (PST)
+X-Received: by 2002:a17:902:b710:b0:14a:28ee:fe6b with SMTP id
+ d16-20020a170902b71000b0014a28eefe6bmr7402865pls.119.1641821131460; Mon, 10
+ Jan 2022 05:25:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20211230123539.52786-1-anup@brainfault.org>
  <20211230123539.52786-10-anup@brainfault.org>
 In-Reply-To: <20211230123539.52786-10-anup@brainfault.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 10 Jan 2022 21:08:10 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0XZ1SfNKHp9sd+FKMt40N3RXO92XbqbjiFq=DUAp18NQ@mail.gmail.com>
-Message-ID: <CANzO1D0XZ1SfNKHp9sd+FKMt40N3RXO92XbqbjiFq=DUAp18NQ@mail.gmail.com>
+Date: Mon, 10 Jan 2022 21:25:20 +0800
+X-Gmail-Original-Message-ID: <CANzO1D1J8Xar_aN1u+QoHTC9GONkEKA4=gQFR3HtmPoeW=nZ7A@mail.gmail.com>
+Message-ID: <CANzO1D1J8Xar_aN1u+QoHTC9GONkEKA4=gQFR3HtmPoeW=nZ7A@mail.gmail.com>
 Subject: Re: [PATCH v6 09/23] target/riscv: Implement AIA local interrupt
  priorities
 To: Anup Patel <anup@brainfault.org>
@@ -68,11 +68,11 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000f2f68205d53a07fc"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102f
+Content-Type: multipart/alternative; boundary="00000000000053562a05d53a45f9"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::632
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -92,9 +92,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 13:08:30 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 13:26:13 -0000
 
---000000000000f2f68205d53a07fc
+--00000000000053562a05d53a45f9
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -320,6 +320,27 @@ Anup Patel <anup@brainfault.org> =E6=96=BC 2021=E5=B9=B412=E6=9C=8830=E6=97=
 > +        } else if (irq =3D=3D IRQ_M_EXT || irq =3D=3D IRQ_M_TIMER ||
 > +                   irq =3D=3D IRQ_M_SOFT) {
 > +            iprio =3D IPRIO_DEFAULT_M;
+>
+
+RISC-V Priv spec defines the priority order:
+  Multiple simultaneous interrupts destined for the same privilege mode
+  are handled in the following decreasing priority order: MEI, MSI, MTI,
+SEI, SSI, STI, UEI,
+  USI, UTI.
+
+So the priority order should be: MEI (11) > MSI (3) > MTI (7).
+
+But if MEI, MSI and MTI are all pending-and-enabled,
+with all of their iprio assigned to zero (i.e. the default priority orders
+are applied).
+riscv_cpu_pending_to_irq() would pick MSI, instead of the correct MEI,
+because they all have the same priority order: IPRIO_DEFAULT_M.
+
+Regards,
+Frank Chang
+
+
+
 > +        } else {
 > +            iprio =3D IPRIO_DEFAULT_VS;
 > +        }
@@ -360,44 +381,8 @@ Anup Patel <anup@brainfault.org> =E6=96=BC 2021=E5=B9=B412=E6=9C=8830=E6=97=
 > +            prio =3D (riscv_cpu_default_priority(irq) < IPRIO_DEFAULT_M)=
  ?
 > +                   1 : IPRIO_MMAXIPRIO;
->
-
-Hi Anup,
-
-I have a question regarding configuring priorities of major interrupts.
-
-riscv_cpu_default_priority() for M-mode external interrupt would return
-IPRIO_DEFAULT_M (8).
-but the comparison here is < IPRIO_DEFAULT_M,
-so if M-mode external interrupt is pending, the prio would be assigned to
-IPRIO_MMAXIPRIO (255).
-Is this the expected behavior?
-
-Also, why is IPRIO_DEFAULT_M been compared?
-Should IPRIO_DEFAULT_S and IPRIO_DEFAULT_VS be used for S-mode and VS-mode
-interrupts?
-
-
 > +        }
 > +        if ((pending & 0x1) && (prio < best_prio)) {
->
-
-If both interrupt 63 and 62 are pending-and-enabled,
-with their iprio values both assigned to zero.
-Interrupt 62 would be picked, because best_prio will be 1 when interrupt 62
-is been checked.
-As the default priority order for interrupt 63 is also less than
-IPRIO_DEFAULT_M (8),
-so prio would be assigned to 1 as well.
-But as prio is not less than best_prio, so best_irq would still be
-interrupt 62.
-
-However, according to the default priority table in AIA spec,
-interrupt 63 should have a higher priority than interrupt 62:
-  Interrupt 63 has the highest default priority, and interrupt 32 has the
-lowest default priority.
-
-
 > +            best_irq =3D irq;
 > +            best_prio =3D prio;
 > +        }
@@ -407,62 +392,6 @@ lowest default priority.
 > +
 > +    return best_irq;
 > +}
->
-
-Yet I have another question for major interrupts priorities.
-
-According to AIA spec (v0.2-draft.28):
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-The priority number for a machine-level external interrupt (bits 31:24 of
-register iprio2)
-must also be read-only zero.
-
-When an interrupt=E2=80=99s priority number in the array is zero (either re=
-ad-only
-zero or set to zero),
-its priority is the default order from Section 6.1.
-Setting an interrupt=E2=80=99s priority number instead to a nonzero value p=
- gives
-that interrupt nominally
-the same priority as a machine-level external interrupt with priority
-number p.
-For a major interrupt that defaults to a higher priority than machine
-external interrupts,
-setting its priority number to a nonzero value lowers its priority.
-For a major interrupt that defaults to a lower priority than machine
-external interrupts,
-setting its priority number to a nonzero value raises its priority.
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-From the above sentences,
-The M-mode external interrupt has iprio value of 0, so the default priority
-order is applied.
-
-What are the priorities for the major interrupt interrupts which are
-higher/lower than
-M-mode external interrupt when their iprio values are not 0?
-
-Which interrupt will be picked when:
-  M-mode external interrupt is pending-and-enabled,
-  Interrupt with higher default priority than M-mode external interrupt is
-pending-and-enabled, and
-  Interrupt with lower default priority than M-mode external interrupt is
-pending-and-enabled/
-
-From the above riscv_cpu_pending_to_irq(),
-If both interrupt 63 and interrupt 18's iprio values are assigned to the
-value of 10,
-and interrupt 63, interrupt 18 and M-mode external interrupts are
-pending-and-enabled.
-Interrupt 18 would be picked.
-Is this the correct expectation?
-I'm a bit confused with the correct priority order of the interrupts
-with/without non-zero value iprio and the default priority.
-
-Thanks,
-Frank Chang
-
-
 > +
 > +static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
 > +{
@@ -573,7 +502,7 @@ Frank Chang
 >
 >
 
---000000000000f2f68205d53a07fc
+--00000000000053562a05d53a45f9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -858,7 +787,20 @@ IRQ_S_TIMER ||<br>
 IRQ_M_TIMER ||<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0irq =
 =3D=3D IRQ_M_SOFT) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_M;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_M;<br></=
+blockquote><div><br></div><div>RISC-V Priv spec defines the priority order:=
+</div><div>=C2=A0 Multiple simultaneous interrupts destined for the same pr=
+ivilege mode</div><div>=C2=A0 are handled in the following decreasing prior=
+ity order: MEI, MSI, MTI, SEI, SSI, STI, UEI,<br>=C2=A0 USI, UTI.<br></div>=
+<div><br></div><div>So the priority order should be: MEI (11) &gt; MSI (3) =
+&gt; MTI (7).</div><div><br></div><div>But if MEI, MSI and MTI are all pend=
+ing-and-enabled,</div><div>with all of their iprio assigned to zero (i.e. t=
+he default priority orders are applied).</div><div>riscv_cpu_pending_to_irq=
+() would pick MSI, instead of the correct MEI,</div><div>because they all h=
+ave the same priority order: IPRIO_DEFAULT_M.<br></div><div><br></div><div>=
+Regards,<br></div><div>Frank Chang</div><div><br></div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
+t:1px solid rgb(204,204,204);padding-left:1ex">
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_VS;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
@@ -903,32 +845,10 @@ q);<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D (riscv_cpu_default_prio=
 rity(irq) &lt; IPRIO_DEFAULT_M) ?<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01 : I=
-PRIO_MMAXIPRIO;<br></blockquote><div><br></div><div>Hi Anup,</div><div><br>=
-</div><div>I have a question regarding configuring priorities of major inte=
-rrupts.</div><div><br></div><div>riscv_cpu_default_priority() for M-mode ex=
-ternal interrupt would return IPRIO_DEFAULT_M (8).</div><div>but the compar=
-ison here is &lt; IPRIO_DEFAULT_M,</div><div>so if M-mode external interrup=
-t is pending, the prio would be assigned to IPRIO_MMAXIPRIO (255).</div><di=
-v>Is this the expected behavior?</div><div><br></div><div>Also, why is IPRI=
-O_DEFAULT_M been compared?</div><div>Should IPRIO_DEFAULT_S and IPRIO_DEFAU=
-LT_VS be used for S-mode and VS-mode interrupts?</div><div>=C2=A0<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">
+PRIO_MMAXIPRIO;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((pending &amp; 0x1) &amp;&amp; (prio &lt; =
-best_prio)) {<br></blockquote><div><br></div><div>If both interrupt 63 and =
-62 are pending-and-enabled,</div><div>with their iprio values both assigned=
- to zero.</div><div>Interrupt 62 would be picked, because best_prio will be=
- 1 when interrupt 62 is been checked.</div><div>As the default priority ord=
-er for interrupt 63 is also less than IPRIO_DEFAULT_M (8),</div><div>so pri=
-o would be assigned to 1 as well.</div><div>But as prio is not less than be=
-st_prio, so best_irq would still be interrupt 62.</div><div><br></div><div>=
-However, according to the default priority table in AIA spec,</div><div>int=
-errupt 63 should have a higher priority than interrupt 62:</div><div>=C2=A0=
-=C2=A0Interrupt 63 has the highest default
-priority, and interrupt 32 has the lowest default priority.</div><div>=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+best_prio)) {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_irq =3D irq;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_prio =3D prio;<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
@@ -937,43 +857,7 @@ x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
 +=C2=A0 =C2=A0 }<br>
 +<br>
 +=C2=A0 =C2=A0 return best_irq;<br>
-+}<br></blockquote><div><br></div><div>Yet I have another question for majo=
-r interrupts priorities.</div><div><br></div><div>According to AIA spec (v0=
-.2-draft.28):</div><div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br></div><div>The pr=
-iority number for a machine-level external interrupt (bits 31:24 of registe=
-r
-iprio2)</div><div>must also be read-only zero.<br></div><div><br></div><div=
->When an interrupt=E2=80=99s priority number in the array is zero (either r=
-ead-only
-zero or set to zero),</div><div>its priority is the default order from Sect=
-ion 6.1.<br></div><div>Setting an interrupt=E2=80=99s priority
-number instead to a nonzero value p gives that interrupt nominally</div><di=
-v>the same priority as a machine-level external interrupt with priority num=
-ber p.<br></div><div><div>For a major interrupt that defaults to a higher p=
-riority than machine external interrupts,</div><div>setting its priority nu=
-mber to a nonzero value lowers its priority.<br></div><div>For a major inte=
-rrupt that defaults to a lower priority than machine external interrupts,</=
-div><div>setting its priority number to a nonzero value raises its priority=
-.</div></div><div>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br></div><div><br></div><d=
-iv>From the above sentences,<br></div><div>The M-mode external interrupt ha=
-s iprio value of 0, so the default priority order is applied.</div><div><br=
-></div><div>What are the priorities for the major interrupt interrupts whic=
-h are higher/lower than<br></div><div>M-mode external interrupt when their =
-iprio values are not 0?</div><div><br></div><div>Which interrupt will be pi=
-cked=C2=A0when:</div><div>=C2=A0 M-mode external interrupt is pending-and-e=
-nabled,</div><div>=C2=A0 Interrupt with higher default priority than M-mode=
- external interrupt is pending-and-enabled, and</div><div>=C2=A0 Interrupt =
-with lower default priority than M-mode external interrupt is pending-and-e=
-nabled/<br></div><div><br></div><div>From the above riscv_cpu_pending_to_ir=
-q(),</div><div>If both interrupt 63 and interrupt 18&#39;s iprio values are=
- assigned to the value of 10,</div><div>and interrupt 63, interrupt 18 and =
-M-mode external interrupts are pending-and-enabled.</div><div>Interrupt 18 =
-would be picked.</div><div>Is this the correct expectation?</div><div>I&#39=
-;m a bit confused with the correct priority order of the interrupts with/wi=
-thout non-zero value iprio and the default priority.<br></div><div><br></di=
-v><div>Thanks,</div><div>Frank Chang</div><div>=C2=A0<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
-id rgb(204,204,204);padding-left:1ex">
++}<br>
 +<br>
 +static uint64_t riscv_cpu_all_pending(CPURISCVState *env)<br>
 +{<br>
@@ -1112,5 +996,5 @@ r>
 <br>
 </blockquote></div></div>
 
---000000000000f2f68205d53a07fc--
+--00000000000053562a05d53a45f9--
 
