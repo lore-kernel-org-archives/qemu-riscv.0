@@ -1,65 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n6q1i-0001JJ-JM
-	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 03:27:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46432)
+	id 1n6qnL-0001ve-Sm
+	for mharc-qemu-riscv@gnu.org; Mon, 10 Jan 2022 04:16:55 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54616)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n6q1S-0001G8-R4; Mon, 10 Jan 2022 03:27:24 -0500
-Received: from [2607:f8b0:4864:20::b31] (port=39489
- helo=mail-yb1-xb31.google.com)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1n6qnH-0001sI-Na; Mon, 10 Jan 2022 04:16:49 -0500
+Received: from [2a00:1450:4864:20::334] (port=36850
+ helo=mail-wm1-x334.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1n6q1G-0003Vl-U7; Mon, 10 Jan 2022 03:27:22 -0500
-Received: by mail-yb1-xb31.google.com with SMTP id d1so35886063ybh.6;
- Mon, 10 Jan 2022 00:27:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1n6qnG-0002qF-6z; Mon, 10 Jan 2022 04:16:47 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ n19-20020a7bc5d3000000b003466ef16375so9296439wmk.1; 
+ Mon, 10 Jan 2022 01:16:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fnoiSlihgKzYJPgj/QeJ+deaGITy/G4IJaquhUuLYL0=;
- b=ZxsdqHzqOgmqwvI8alc64enUlQeaKvLVJTDxzi/4L1J4d6kBfDLYNixMfQsSlXZ2lk
- dBO3jL/SLsya5vwSdxGsvt89nf77mhUtoJSG4KXXk5rlQOvE52yX7IgQFfrm5kB7N+O7
- ClVIhR2svn6e+4d1OWYAp+Y1msNAC3tBQASArrvsacQnRydMscKkC7nauchM81ykK+GV
- yWAQgCKMQVXOKl4yrOClcISGluDvv+3Az9cgTT/VStQyHAT7afNC/oCP00EBnLQ76knn
- XuJ/XkzvGDThQxF/CQ/NbPrkEoehsfo275I3QLL5a+g85wFNTBLwzNu64YekEXbPFovJ
- RZ1g==
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=jOyzg3Rt8z3MJD3QWTZsoIE3qmNx0cA+eSBO5UhQJWg=;
+ b=l28Lka42sui1gH+YQDUmlVXRpYop6EvX3VOjE+rPb5Kt1uQyPToMNuPJ/cfA/PkN1O
+ SAcoB3yV501YLXfdFEJtJfXKGjOvZSCizMHyM3zZzv8VjPTthkgqFd5KxyiGh1pWpPjf
+ 2YTMRedYzBfwoKfDJ6AdaFUkX4z8VwocxHQutwbP8ukV08+SEv8EJuOm+v9yZC79oAqZ
+ dVBkkfw2DLAQld9nQy14M4Rd9BvP99ww8pgdGohzqhidT6B3RPPZPFNir+W6x0kRgRlQ
+ UMaUM4+pyEHl1GIqRIxs2FkNMZGvREt8pUdVK9ZWtCX7MAZoPdtovh+sBbl5xtJFV2Qq
+ VYyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fnoiSlihgKzYJPgj/QeJ+deaGITy/G4IJaquhUuLYL0=;
- b=zxjwZgPMWX3uvFRX4v0uZO8nXlpvW68Lt73Z4GujJxV8FM5YchbRMwsE0a7ZWUuqIr
- 452LlFx1JRoou8oKBtQK7gevn68kDCuzjpMGAYy5tRzBFyGsSnr9nKTO4LO0wD+ykIDD
- cHr7LlsqNoZSqqwYjKav35CAnRXb6yw6psT0n0mPgRPnkJJIMBeecH55JW2LGUII/fA1
- 7ZrDi0XqeVlo3ahOegBDniQPdah/5i9t9gjgWHHuqswGVqkikHdNlCjUJCmg9DXTOQo3
- c541UJWQopGCRFGKEALiynututn+FBXP3g15dFnpdt9ZMhBvBfOmN9XAJwQH8Vto+GbQ
- MSJQ==
-X-Gm-Message-State: AOAM533aBqSxVlKp2WC5r3SorZSGiLJFsCN4x9Ti11bTamo4j79GQI+m
- dfYuhSDMp74ivv0bTYSJ4vQPpEqpt4JEDNFEaN8=
-X-Google-Smtp-Source: ABdhPJwbQxu0aEf7qM3ZyP0ucfJI0/DULm56XjOcr1Ky7makdonOwNJv2rN/KptGSBAA+j3IlchHHlSWACUCPuEuxP4=
-X-Received: by 2002:a25:9012:: with SMTP id s18mr2148034ybl.148.1641803221908; 
- Mon, 10 Jan 2022 00:27:01 -0800 (PST)
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=jOyzg3Rt8z3MJD3QWTZsoIE3qmNx0cA+eSBO5UhQJWg=;
+ b=jsx2sa+skO16hNbE2fSIGPKr2I9LxyuCPaxEOO8pVlztyHTqt6Yfc2poMVDSq+9shW
+ Q68Zz4eTuo0nFmJ+vUFUsgtQDp7f2JdemJPMHP0X346PHDq2v+vgOogRF5nx97RPBiMF
+ gGxhiW1MDN3zRVKdCNc+/3YxG4yf+oB6DQkVCLd3T5G8DksOkiFLFbosaORviBK+7gGa
+ fb5ahpOw04NOjW3mpQZK8R4lUv1zpzx6qTGbb9sQlRYekcWtiEUwEggYJVLNmRka0Ac8
+ JmSZDIrdg5EwAAFaXX34NlVeYD3xUpdw4e5vCyMYk72uz5g3yVaJS8SLnYszHId5uqm+
+ 5MLw==
+X-Gm-Message-State: AOAM5327VQg63LQfbEC3IrWgRcqRqMXLLFt0Mq/+2o/Uh4QGXC85eau3
+ ocLSy731B+JcaWvIRQb3NHY=
+X-Google-Smtp-Source: ABdhPJzl7d7Z+zY9NvUdkc3z/lR1dRAVey4gjz/ncq5Xo1pzJyORhnCdmUiN7bQmicuyzw6bQyrOAA==
+X-Received: by 2002:a1c:9acc:: with SMTP id c195mr10815129wme.10.1641806203204; 
+ Mon, 10 Jan 2022 01:16:43 -0800 (PST)
+Received: from [192.168.1.40] (83.red-83-50-87.dynamicip.rima-tde.net.
+ [83.50.87.83])
+ by smtp.gmail.com with ESMTPSA id e13sm1229347wrw.3.2022.01.10.01.16.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Jan 2022 01:16:42 -0800 (PST)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <fca7449f-b42c-4c9e-44bf-152b4b01ba37@amsat.org>
+Date: Mon, 10 Jan 2022 10:16:40 +0100
 MIME-Version: 1.0
-References: <20220107004846.378859-1-atishp@rivosinc.com>
- <20220107004846.378859-10-atishp@rivosinc.com>
-In-Reply-To: <20220107004846.378859-10-atishp@rivosinc.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 10 Jan 2022 16:26:50 +0800
-Message-ID: <CAEUhbmUmdQxFmn8r1gNNrD8+QGP85=_P_Hqw5ocerbUzti-r4A@mail.gmail.com>
-Subject: Re: [PATCH v4 09/11] target/riscv: Simplify counter predicate function
-To: Atish Patra <atishp@rivosinc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b31
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [PATCH] hw: timer: ibex_timer: Fixup reading w/o register
+Content-Language: en-US
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com, wilfred.mallawa@wdc.com
+References: <20220110051606.4031241-1-alistair.francis@opensource.wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20220110051606.4031241-1-alistair.francis@opensource.wdc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::334
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b31;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb31.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
-X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x334.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.248,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
@@ -74,168 +88,20 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jan 2022 08:27:30 -0000
+X-List-Received-Date: Mon, 10 Jan 2022 09:16:49 -0000
 
-On Fri, Jan 7, 2022 at 10:22 AM Atish Patra <atishp@rivosinc.com> wrote:
->
-> All the hpmcounters and the fixed counters (CY, IR, TM) can be represented
-> as a unified counter. Thus, the predicate function doesn't need handle each
-> case separately.
->
-> Simplify the predicate function so that we just handle things differently
-> between RV32/RV64 and S/HS mode.
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+On 1/10/22 06:16, Alistair Francis wrote:
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> 
+> This change fixes a bug where a write only register is read.
+> As per https://docs.opentitan.org/hw/ip/rv_timer/doc/#register-table
+> the 'INTR_TEST0' register is write only.
+> 
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 > ---
->  target/riscv/csr.c | 111 ++++-----------------------------------------
->  1 file changed, 10 insertions(+), 101 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d3a8bba6a518..feb053eb3f7b 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -109,6 +109,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->      CPUState *cs = env_cpu(env);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      int ctr_index;
-> +    uint64_t ctr_mask;
+>  hw/timer/ibex_timer.c         | 14 +++++---------
+>  include/hw/timer/ibex_timer.h |  1 -
+>  2 files changed, 5 insertions(+), 10 deletions(-)
 
-Use target_ulong should be enough?
-
->      int base_csrno = CSR_CYCLE;
->      bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
->
-> @@ -117,122 +118,30 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
->          base_csrno += 0x80;
->      }
->      ctr_index = csrno - base_csrno;
-> +    ctr_mask = BIT(ctr_index);
->
->      if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
->          (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
->          goto skip_ext_pmu_check;
->      }
->
-> -    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
-> +    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & ctr_mask))) {
->          /* No counter is enabled in PMU or the counter is out of range */
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
->
->  skip_ext_pmu_check:
->
-> -    if (env->priv == PRV_S) {
-> -        switch (csrno) {
-> -        case CSR_CYCLE:
-> -            if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> -                return RISCV_EXCP_ILLEGAL_INST;
-> -            }
-> -            break;
-> -        case CSR_TIME:
-> -            if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> -                return RISCV_EXCP_ILLEGAL_INST;
-> -            }
-> -            break;
-> -        case CSR_INSTRET:
-> -            if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> -                return RISCV_EXCP_ILLEGAL_INST;
-> -            }
-> -            break;
-> -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> -            if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> -                return RISCV_EXCP_ILLEGAL_INST;
-> -            }
-> -            break;
-> -        }
-> -        if (rv32) {
-> -            switch (csrno) {
-> -            case CSR_CYCLEH:
-> -                if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> -                    return RISCV_EXCP_ILLEGAL_INST;
-> -                }
-> -                break;
-> -            case CSR_TIMEH:
-> -                if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> -                    return RISCV_EXCP_ILLEGAL_INST;
-> -                }
-> -                break;
-> -            case CSR_INSTRETH:
-> -                if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> -                    return RISCV_EXCP_ILLEGAL_INST;
-> -                }
-> -                break;
-> -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> -                if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> -                    return RISCV_EXCP_ILLEGAL_INST;
-> -                }
-> -                break;
-> -            }
-> -        }
-> +    if ((env->priv == PRV_S) && (!get_field(env->mcounteren, ctr_mask))) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
->      }
->
->      if (riscv_cpu_virt_enabled(env)) {
-> -        switch (csrno) {
-> -        case CSR_CYCLE:
-> -            if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-> -                get_field(env->mcounteren, COUNTEREN_CY)) {
-> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -            }
-> -            break;
-> -        case CSR_TIME:
-> -            if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-> -                get_field(env->mcounteren, COUNTEREN_TM)) {
-> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -            }
-> -            break;
-> -        case CSR_INSTRET:
-> -            if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-> -                get_field(env->mcounteren, COUNTEREN_IR)) {
-> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -            }
-> -            break;
-> -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> -            if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> -                 get_field(env->mcounteren, 1 << ctr_index)) {
-> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -            }
-> -            break;
-> -        }
-> -        if (rv32) {
-> -            switch (csrno) {
-> -            case CSR_CYCLEH:
-> -                if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-> -                    get_field(env->mcounteren, COUNTEREN_CY)) {
-> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -                }
-> -                break;
-> -            case CSR_TIMEH:
-> -                if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-> -                    get_field(env->mcounteren, COUNTEREN_TM)) {
-> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -                }
-> -                break;
-> -            case CSR_INSTRETH:
-> -                if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-> -                    get_field(env->mcounteren, COUNTEREN_IR)) {
-> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -                }
-> -                break;
-> -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> -                if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> -                     get_field(env->mcounteren, 1 << ctr_index)) {
-> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -                }
-> -                break;
-> -            }
-> +        if (!get_field(env->mcounteren, ctr_mask)) {
-> +            /* The bit must be set in mcountern for HS mode access */
-> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> +        } else if (!get_field(env->hcounteren, ctr_mask)) {
-> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->          }
->      }
-
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
