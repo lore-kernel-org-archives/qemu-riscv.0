@@ -1,80 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7db5-00026W-48
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 08:23:27 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49110)
+	id 1n7de4-0004rq-PZ
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 08:26:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49616)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n7dav-00022h-Hq
- for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:23:22 -0500
-Received: from [2607:f8b0:4864:20::102b] (port=39617
- helo=mail-pj1-x102b.google.com)
+ id 1n7dds-0004oT-Qx
+ for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:26:20 -0500
+Received: from [2607:f8b0:4864:20::1036] (port=53770
+ helo=mail-pj1-x1036.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n7dat-0004pN-FD
- for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:23:17 -0500
-Received: by mail-pj1-x102b.google.com with SMTP id
- c14-20020a17090a674e00b001b31e16749cso12015807pjm.4
- for <qemu-riscv@nongnu.org>; Wed, 12 Jan 2022 05:23:15 -0800 (PST)
+ id 1n7ddr-0005F8-53
+ for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:26:20 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id m13so4815750pji.3
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jan 2022 05:26:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=27fNSMg2VqF3iINeXPKi+bPCAJxOUAoNPZl8wQE/2PQ=;
- b=g2iKNKlhnV4ZRcLBBZzuYIERXxlXkjop5FXykX15I0uUgnbLpGg4D2iZpjzFbafFxJ
- xzD91pAGFCWyA4Pr/ZUhMoAWekzpNmAUMAtWEq9r2oCXddL88oQkYoChHbBXGLjhDhQj
- olyW4VfhmjgkhVceaQ1zkE2tttPxrfzP4ycT81rch8uZMTF4r9XNQlnIuTjnYCyxergi
- 0SPfRUUwKrrEd5L/qe1+KKe9ZcoP467dl+P7dY7Ttps4E41q0xWc8KdqwkK18534tgxP
- 9PVJd1cc//LUCDjqk+YwMOeOhJDfz9fXdbN91atfm/KlbDDIIMZkD0azugI0AvZry0z/
- vC1w==
+ :cc; bh=z4nFbChKtI5HFpRaHGd2jNtuyH9zhZGk8AL/mAFl/7o=;
+ b=eOG+v487EQQVDwICp3+LbhZZuR4E0+g3iDFgS45kMNIpaM8RowhKWhMZCmpsHPBr+O
+ FsLFXMta3VYTAAuRxOQIYwHVWejX+4I/XZP2Gn8R/nPBdjsysnKjimYqbAjZlhLD3e64
+ 0PNdh6KfFm09HIaTBL2NMDHd7HYcU2kxoR1wL5bTAH4+cpanF2D9i6cYgvgli3WU4OF5
+ tpzxD9qO7A3Jo1rksfpCrQiBkmt7jXjziFHr14XgNfljWA7SaieBcQDnwIbzzyIFuK9V
+ YZ2JxMus3kb1XgDZojL4J1utnVjXEe2wmMzVU6sVvUafv0sYS6IttNSgzhihPcbQ2SGp
+ B9YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=27fNSMg2VqF3iINeXPKi+bPCAJxOUAoNPZl8wQE/2PQ=;
- b=pGfj3fd8ZxQlgq4k7ovwy6GWqb29c/FZgrOJ2BLfjzHLfx9iVCH4HRWjiYMEQARaR9
- V09XJL8g6og5z4Fheiqrk7+A/ZC1prxnsZIiMnoGjbfMZ+FN651XpfxtrSJB8yMWAPqL
- c7P1MzOj+9izKfsQAkM0xrK6J/l5dtQM7gr7JDieJJ7DoylAZ//LlyUJzZXsKWogsV92
- C3t/GMDKcFyuL9SdUiGAA4QndorkKhE1Bh8bp/lAxzwLQ9M3ygzYXS6+OZ9Y5OTDukAR
- vQ5ys4v5eioGnMvO/WNAWvhWMzvD4PeUq7+A+U7TlwNiL5/3VjkVO7LO5W7ybpML1RgV
- 7mvg==
-X-Gm-Message-State: AOAM533gZ5VvKxZig+Ijp9j2SBfGjHeqiorhhOiDpV/cSi2a1UyMLOQG
- 9Lo2ZwLLzO/cSn7ylvlopx62ds1mc080tfKV
-X-Google-Smtp-Source: ABdhPJxie+1SBLyXV0DN1szo6HasmBWrUpaculF6M82XzbFt88yA8pyuNgmfMJ2m9LQmavfKQhGWkw==
-X-Received: by 2002:a17:90b:17c6:: with SMTP id
- me6mr5422786pjb.141.1641993793639; 
- Wed, 12 Jan 2022 05:23:13 -0800 (PST)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com.
- [209.85.216.43])
- by smtp.gmail.com with ESMTPSA id g14sm2671011pgp.76.2022.01.12.05.23.12
+ bh=z4nFbChKtI5HFpRaHGd2jNtuyH9zhZGk8AL/mAFl/7o=;
+ b=U3iNJD8AfHpUwlf66JodJXpOVZbkTuYRjEBnHappMTHB+E79qnCXbgoFGjL51GyRjt
+ km0OCA7dfwQfef/1zslDIPksjM51/Jkjp48tq6seEIfSPCtTMKeVw8H80be6i/bhFZHx
+ lX5WQ7iOWwH//i5ZKVm455R/jzhICOfTaOf+OLWNgelc8EN2Eo7noNoUdoeTlQrXN5xR
+ SAgYIVvn9MoD0JdMUr3tOabJOk8v6t1FEiJCe787iUje1b5cuXDiiMnBxo6hxCBd8Ynv
+ 7JahixQqm3xgPMYMfCMm+mDkNB3kP79UoRf0BOHYEyNpk0NPDP/xfxMTluSsaGhDCmmu
+ lFQg==
+X-Gm-Message-State: AOAM533Rskvs4eZ3HhI0x2oYe1aIOCJuUH1Hp3fe8OSqL2GaayaSpfby
+ LnX3hl7Eu4xdEFl/Wnim3QDrmkCnLlaOWqxp
+X-Google-Smtp-Source: ABdhPJz+Rql7B/iSen1XSmdwxn8BSxzISl0oJde4bVqh+94ibMoXcYMEYjd6vnZJvK3RvxxZTvyDRQ==
+X-Received: by 2002:a63:705c:: with SMTP id a28mr4553662pgn.339.1641993977646; 
+ Wed, 12 Jan 2022 05:26:17 -0800 (PST)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com.
+ [209.85.214.181])
+ by smtp.gmail.com with ESMTPSA id h5sm14379291pfi.46.2022.01.12.05.26.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jan 2022 05:23:13 -0800 (PST)
-Received: by mail-pj1-f43.google.com with SMTP id
- rj2-20020a17090b3e8200b001b1944bad25so4661859pjb.5; 
- Wed, 12 Jan 2022 05:23:12 -0800 (PST)
-X-Received: by 2002:a05:6a00:26c5:b0:4bd:4ad6:9c71 with SMTP id
- p5-20020a056a0026c500b004bd4ad69c71mr9380126pfw.45.1641993792356; Wed, 12 Jan
- 2022 05:23:12 -0800 (PST)
+ Wed, 12 Jan 2022 05:26:16 -0800 (PST)
+Received: by mail-pl1-f181.google.com with SMTP id h1so4048161pls.11;
+ Wed, 12 Jan 2022 05:26:16 -0800 (PST)
+X-Received: by 2002:a17:90a:4b0d:: with SMTP id
+ g13mr8780276pjh.83.1641993976314; 
+ Wed, 12 Jan 2022 05:26:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20211230123539.52786-1-anup@brainfault.org>
- <20211230123539.52786-23-anup@brainfault.org>
-In-Reply-To: <20211230123539.52786-23-anup@brainfault.org>
+ <20211230123539.52786-24-anup@brainfault.org>
+In-Reply-To: <20211230123539.52786-24-anup@brainfault.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 12 Jan 2022 21:23:01 +0800
-X-Gmail-Original-Message-ID: <CANzO1D2uubuM5gc0n3YbMQ-J2PmUa8djLxsGcPrVT4AKOsZR7A@mail.gmail.com>
-Message-ID: <CANzO1D2uubuM5gc0n3YbMQ-J2PmUa8djLxsGcPrVT4AKOsZR7A@mail.gmail.com>
-Subject: Re: [PATCH v6 22/23] docs/system: riscv: Document AIA options for
- virt machine
+Date: Wed, 12 Jan 2022 21:26:05 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0y_-ryTOKt4XDJUzk0tbHF1qsvj5ytU=cTSXrLVZ4gUA@mail.gmail.com>
+Message-ID: <CANzO1D0y_-ryTOKt4XDJUzk0tbHF1qsvj5ytU=cTSXrLVZ4gUA@mail.gmail.com>
+Subject: Re: [PATCH v6 23/23] hw/riscv: virt: Increase maximum number of
+ allowed CPUs
 To: Anup Patel <anup@brainfault.org>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000b7853605d562781c"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102b
+ Atish Patra <atishp@atishpatra.org>
+Content-Type: multipart/alternative; boundary="000000000000ae7fe305d562836f"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1036
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -94,60 +91,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2022 13:23:23 -0000
+X-List-Received-Date: Wed, 12 Jan 2022 13:26:22 -0000
 
---000000000000b7853605d562781c
+--000000000000ae7fe305d562836f
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Anup Patel <anup@brainfault.org> =E6=96=BC 2021=E5=B9=B412=E6=9C=8830=E6=97=
-=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:03=E5=AF=AB=E9=81=93=EF=BC=9A
+=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:06=E5=AF=AB=E9=81=93=EF=BC=9A
 
 > From: Anup Patel <anup.patel@wdc.com>
 >
-> We have two new machine options "aia" and "aia-guests" available
-> for the RISC-V virt machine so let's document these options.
+> To facilitate software development of RISC-V systems with large number
+> of HARTs, we increase the maximum number of allowed CPUs to 512 (2^9).
+>
+> We also add a detailed source level comments about limit defines which
+> impact the physical address space utilization.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
 > Signed-off-by: Anup Patel <anup@brainfault.org>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  docs/system/riscv/virt.rst | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
+>  hw/riscv/virt.c         | 10 ++++++++++
+>  include/hw/riscv/virt.h |  2 +-
+>  2 files changed, 11 insertions(+), 1 deletion(-)
 >
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index fa016584bf..373645513a 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -63,6 +63,22 @@ The following machine-specific options are supported:
->    When this option is "on", ACLINT devices will be emulated instead of
->    SiFive CLINT. When not specified, this option is assumed to be "off".
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 7579f7b41f..86b03736eb 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -44,6 +44,16 @@
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
 >
-> +- aia=3D[none|aplic|aplic-imsic]
+> +/*
+> + * The virt machine physical address space used by some of the devices
+> + * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
+> + * number of CPUs, and number of IMSIC guest files.
+> + *
+> + * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
+> + * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
+> + * of virt machine physical address space.
+> + */
 > +
-> +  This option allows selecting interrupt controller defined by the AIA
-> +  (advanced interrupt architecture) specification. The "aia=3Daplic" sel=
-ects
-> +  APLIC (advanced platform level interrupt controller) to handle wired
-> +  interrupts whereas the "aia=3Daplic-imsic" selects APLIC and IMSIC
-> (incoming
-> +  message signaled interrupt controller) to handle both wired interrupts
-> and
-> +  MSIs. When not specified, this option is assumed to be "none" which
-> selects
-> +  SiFive PLIC to handle wired interrupts.
-> +
-> +- aia-guests=3Dnnn
-> +
-> +  The number of per-HART VS-level AIA IMSIC pages to be emulated for a
-> guest
-> +  having AIA IMSIC (i.e. "aia=3Daplic-imsic" selected). When not specifi=
-ed,
-> +  the default number of per-HART VS-level AIA IMSIC pages is 0.
-> +
->  Running Linux kernel
->  --------------------
+>  #define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT=
+)
+>  #if VIRT_IMSIC_GROUP_MAX_SIZE < \
+>      IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index e12e8ddcae..62d8e9c6d0 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -24,7 +24,7 @@
+>  #include "hw/block/flash.h"
+>  #include "qom/object.h"
 >
+> -#define VIRT_CPUS_MAX_BITS             3
+> +#define VIRT_CPUS_MAX_BITS             9
+>  #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
+>  #define VIRT_SOCKETS_MAX_BITS          2
+>  #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
 > --
 > 2.25.1
 >
@@ -155,70 +157,74 @@ ed,
 >
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
---000000000000b7853605d562781c
+--000000000000ae7fe305d562836f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr">Anup Patel &lt;<a href=3D"mailto:anup@bra=
-infault.org">anup@brainfault.org</a>&gt; =E6=96=BC 2021=E5=B9=B412=E6=9C=88=
-30=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:03=E5=AF=AB=E9=81=93=EF=
-=BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex">From: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com=
-" target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
+infault.org" target=3D"_blank">anup@brainfault.org</a>&gt; =E6=96=BC 2021=
+=E5=B9=B412=E6=9C=8830=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:06=
+=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><div class=3D"gmail_quote"><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">From: Anup Patel &lt;<a href=3D"mail=
+to:anup.patel@wdc.com" target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
 <br>
-We have two new machine options &quot;aia&quot; and &quot;aia-guests&quot; =
-available<br>
-for the RISC-V virt machine so let&#39;s document these options.<br>
+To facilitate software development of RISC-V systems with large number<br>
+of HARTs, we increase the maximum number of allowed CPUs to 512 (2^9).<br>
+<br>
+We also add a detailed source level comments about limit defines which<br>
+impact the physical address space utilization.<br>
 <br>
 Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com" target=
 =3D"_blank">anup.patel@wdc.com</a>&gt;<br>
 Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup@brainfault.org" target=
 =3D"_blank">anup@brainfault.org</a>&gt;<br>
-Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
-m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 ---<br>
-=C2=A0docs/system/riscv/virt.rst | 16 ++++++++++++++++<br>
-=C2=A01 file changed, 16 insertions(+)<br>
+=C2=A0hw/riscv/virt.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 10 ++++++++++<br>
+=C2=A0include/hw/riscv/virt.h |=C2=A0 2 +-<br>
+=C2=A02 files changed, 11 insertions(+), 1 deletion(-)<br>
 <br>
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst<br>
-index fa016584bf..373645513a 100644<br>
---- a/docs/system/riscv/virt.rst<br>
-+++ b/docs/system/riscv/virt.rst<br>
-@@ -63,6 +63,22 @@ The following machine-specific options are supported:<br=
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c<br>
+index 7579f7b41f..86b03736eb 100644<br>
+--- a/hw/riscv/virt.c<br>
++++ b/hw/riscv/virt.c<br>
+@@ -44,6 +44,16 @@<br>
+=C2=A0#include &quot;hw/pci-host/gpex.h&quot;<br>
+=C2=A0#include &quot;hw/display/ramfb.h&quot;<br>
+<br>
++/*<br>
++ * The virt machine physical address space used by some of the devices<br>
++ * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,<br>
++ * number of CPUs, and number of IMSIC guest files.<br>
++ *<br>
++ * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,<br=
 >
-=C2=A0 =C2=A0When this option is &quot;on&quot;, ACLINT devices will be emu=
-lated instead of<br>
-=C2=A0 =C2=A0SiFive CLINT. When not specified, this option is assumed to be=
- &quot;off&quot;.<br>
++ * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization<br>
++ * of virt machine physical address space.<br>
++ */<br>
++<br>
+=C2=A0#define VIRT_IMSIC_GROUP_MAX_SIZE=C2=A0 =C2=A0 =C2=A0 (1U &lt;&lt; IM=
+SIC_MMIO_GROUP_MIN_SHIFT)<br>
+=C2=A0#if VIRT_IMSIC_GROUP_MAX_SIZE &lt; \<br>
+=C2=A0 =C2=A0 =C2=A0IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_G=
+UESTS_BITS)<br>
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h<br>
+index e12e8ddcae..62d8e9c6d0 100644<br>
+--- a/include/hw/riscv/virt.h<br>
++++ b/include/hw/riscv/virt.h<br>
+@@ -24,7 +24,7 @@<br>
+=C2=A0#include &quot;hw/block/flash.h&quot;<br>
+=C2=A0#include &quot;qom/object.h&quot;<br>
 <br>
-+- aia=3D[none|aplic|aplic-imsic]<br>
-+<br>
-+=C2=A0 This option allows selecting interrupt controller defined by the AI=
-A<br>
-+=C2=A0 (advanced interrupt architecture) specification. The &quot;aia=3Dap=
-lic&quot; selects<br>
-+=C2=A0 APLIC (advanced platform level interrupt controller) to handle wire=
-d<br>
-+=C2=A0 interrupts whereas the &quot;aia=3Daplic-imsic&quot; selects APLIC =
-and IMSIC (incoming<br>
-+=C2=A0 message signaled interrupt controller) to handle both wired interru=
-pts and<br>
-+=C2=A0 MSIs. When not specified, this option is assumed to be &quot;none&q=
-uot; which selects<br>
-+=C2=A0 SiFive PLIC to handle wired interrupts.<br>
-+<br>
-+- aia-guests=3Dnnn<br>
-+<br>
-+=C2=A0 The number of per-HART VS-level AIA IMSIC pages to be emulated for =
-a guest<br>
-+=C2=A0 having AIA IMSIC (i.e. &quot;aia=3Daplic-imsic&quot; selected). Whe=
-n not specified,<br>
-+=C2=A0 the default number of per-HART VS-level AIA IMSIC pages is 0.<br>
-+<br>
-=C2=A0Running Linux kernel<br>
-=C2=A0--------------------<br>
-<br>
+-#define VIRT_CPUS_MAX_BITS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+3<br>
++#define VIRT_CPUS_MAX_BITS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+9<br>
+=C2=A0#define VIRT_CPUS_MAX=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 (1 &lt;&lt; VIRT_CPUS_MAX_BITS)<br>
+=C2=A0#define VIRT_SOCKETS_MAX_BITS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 2<br>
+=C2=A0#define VIRT_SOCKETS_MAX=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0(1 &lt;&lt; VIRT_SOCKETS_MAX_BITS)<br>
 -- <br>
 2.25.1<br>
 <br>
@@ -226,5 +232,5 @@ n not specified,<br>
 =3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com=
 </a>&gt;=C2=A0</div></div></div>
 
---000000000000b7853605d562781c--
+--000000000000ae7fe305d562836f--
 
