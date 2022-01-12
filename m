@@ -1,66 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7dXo-0005zs-BJ
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 08:20:04 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:48290)
+	id 1n7db5-00026W-48
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 08:23:27 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49110)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n7dXh-0005uD-3Q
- for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:19:58 -0500
-Received: from [2607:f8b0:4864:20::1031] (port=44770
- helo=mail-pj1-x1031.google.com)
+ id 1n7dav-00022h-Hq
+ for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:23:22 -0500
+Received: from [2607:f8b0:4864:20::102b] (port=39617
+ helo=mail-pj1-x102b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n7dXe-00048p-Gr
- for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:19:56 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- n30-20020a17090a5aa100b001b2b6509685so4663419pji.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Jan 2022 05:19:53 -0800 (PST)
+ id 1n7dat-0004pN-FD
+ for qemu-riscv@nongnu.org; Wed, 12 Jan 2022 08:23:17 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ c14-20020a17090a674e00b001b31e16749cso12015807pjm.4
+ for <qemu-riscv@nongnu.org>; Wed, 12 Jan 2022 05:23:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IKRnPBwvStuYmtP9VBY0hs/lBM87YEuHTI8MryYLbEs=;
- b=DprAxNNugwyaysm5Xrv7hpwMGAR4RpxznvuTEL2/GOTEnyyAAZk5UpkEZcdRo4YvOh
- UzDJVaiq90o1TNyaTaOSETtuotjKmy43CyzOh71WXdWzXSeXzdrfHncBulYbfRHgaUuu
- CM0zJ2hm1THjUEFwkCBsUX8eN0X6aGitqJgi/gfd4DEqMwBeUkq0sNHK/yHIVwvp4MOk
- A30GAViMdrDdq9gja25QD7/xTANl6790XU0xIDqgIPzfMKdLMC3sfoDpapr3qlmSikZL
- pvFNR0Ab741Jgo7D2bU+ba8bkfID0o9q7bYKS9uZCkWvCqzLzIFy7UfEcCL9g8S+jF5A
- BrzQ==
+ :cc; bh=27fNSMg2VqF3iINeXPKi+bPCAJxOUAoNPZl8wQE/2PQ=;
+ b=g2iKNKlhnV4ZRcLBBZzuYIERXxlXkjop5FXykX15I0uUgnbLpGg4D2iZpjzFbafFxJ
+ xzD91pAGFCWyA4Pr/ZUhMoAWekzpNmAUMAtWEq9r2oCXddL88oQkYoChHbBXGLjhDhQj
+ olyW4VfhmjgkhVceaQ1zkE2tttPxrfzP4ycT81rch8uZMTF4r9XNQlnIuTjnYCyxergi
+ 0SPfRUUwKrrEd5L/qe1+KKe9ZcoP467dl+P7dY7Ttps4E41q0xWc8KdqwkK18534tgxP
+ 9PVJd1cc//LUCDjqk+YwMOeOhJDfz9fXdbN91atfm/KlbDDIIMZkD0azugI0AvZry0z/
+ vC1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=IKRnPBwvStuYmtP9VBY0hs/lBM87YEuHTI8MryYLbEs=;
- b=F/H6EOQIArtDsAJeWmbFU4ZzSmNNJjbZUBoWqeeMlJ8IFChzXqV9vn0vjBzOFVMGZE
- pMgKaL4z/xQ9tV1KY/HXM9IvBMC+fzIbk+odRZbz1QZuXvxX/x7DS4FPLAcrQMUvM3/b
- KIEItvsshkFYy0e9qgX/Hn8FDZCj8x7dGu9lm4lz2ETG4NriKOe4NYX1S1rIIeOiJ1JO
- vN4uzJdaFnwtrO2njwNvlSpiUHiC90mCAsw+m+vOcgLi7FCE1XOVP/jDwNXiDVlbWHG8
- twBb7U2A7ctTLkXSsftxyQ/IHFllUz+Ixi9PFvV1lw41uqMFpmb/LxxuKzAorQMx4YCK
- R8FA==
-X-Gm-Message-State: AOAM530yYt0HmwYmNVq981ex5MASqlcvYeAWWoYltEySactjbgsugu8C
- SOqbknL4rc/HoNNoL2tyK3D2jBLi4Ktf/PhX
-X-Google-Smtp-Source: ABdhPJwbYIDqVbONQFCKZ9tQKMq8tTFrt3yKAqQG2qFHm83zQsTH0dgGltMeguc4hypOkn73G6Lxrg==
-X-Received: by 2002:a17:902:8d82:b0:149:a740:d8d0 with SMTP id
- v2-20020a1709028d8200b00149a740d8d0mr9453840plo.5.1641993591604; 
- Wed, 12 Jan 2022 05:19:51 -0800 (PST)
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com.
- [209.85.216.53])
- by smtp.gmail.com with ESMTPSA id x6sm2691016pge.50.2022.01.12.05.19.50
+ bh=27fNSMg2VqF3iINeXPKi+bPCAJxOUAoNPZl8wQE/2PQ=;
+ b=pGfj3fd8ZxQlgq4k7ovwy6GWqb29c/FZgrOJ2BLfjzHLfx9iVCH4HRWjiYMEQARaR9
+ V09XJL8g6og5z4Fheiqrk7+A/ZC1prxnsZIiMnoGjbfMZ+FN651XpfxtrSJB8yMWAPqL
+ c7P1MzOj+9izKfsQAkM0xrK6J/l5dtQM7gr7JDieJJ7DoylAZ//LlyUJzZXsKWogsV92
+ C3t/GMDKcFyuL9SdUiGAA4QndorkKhE1Bh8bp/lAxzwLQ9M3ygzYXS6+OZ9Y5OTDukAR
+ vQ5ys4v5eioGnMvO/WNAWvhWMzvD4PeUq7+A+U7TlwNiL5/3VjkVO7LO5W7ybpML1RgV
+ 7mvg==
+X-Gm-Message-State: AOAM533gZ5VvKxZig+Ijp9j2SBfGjHeqiorhhOiDpV/cSi2a1UyMLOQG
+ 9Lo2ZwLLzO/cSn7ylvlopx62ds1mc080tfKV
+X-Google-Smtp-Source: ABdhPJxie+1SBLyXV0DN1szo6HasmBWrUpaculF6M82XzbFt88yA8pyuNgmfMJ2m9LQmavfKQhGWkw==
+X-Received: by 2002:a17:90b:17c6:: with SMTP id
+ me6mr5422786pjb.141.1641993793639; 
+ Wed, 12 Jan 2022 05:23:13 -0800 (PST)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com.
+ [209.85.216.43])
+ by smtp.gmail.com with ESMTPSA id g14sm2671011pgp.76.2022.01.12.05.23.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Jan 2022 05:19:51 -0800 (PST)
-Received: by mail-pj1-f53.google.com with SMTP id pj2so4811989pjb.2;
- Wed, 12 Jan 2022 05:19:50 -0800 (PST)
-X-Received: by 2002:a17:902:b710:b0:14a:28ee:fe6b with SMTP id
- d16-20020a170902b71000b0014a28eefe6bmr9188968pls.119.1641993590486; Wed, 12
- Jan 2022 05:19:50 -0800 (PST)
+ Wed, 12 Jan 2022 05:23:13 -0800 (PST)
+Received: by mail-pj1-f43.google.com with SMTP id
+ rj2-20020a17090b3e8200b001b1944bad25so4661859pjb.5; 
+ Wed, 12 Jan 2022 05:23:12 -0800 (PST)
+X-Received: by 2002:a05:6a00:26c5:b0:4bd:4ad6:9c71 with SMTP id
+ p5-20020a056a0026c500b004bd4ad69c71mr9380126pfw.45.1641993792356; Wed, 12 Jan
+ 2022 05:23:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20211230123539.52786-1-anup@brainfault.org>
- <20211230123539.52786-18-anup@brainfault.org>
-In-Reply-To: <20211230123539.52786-18-anup@brainfault.org>
+ <20211230123539.52786-23-anup@brainfault.org>
+In-Reply-To: <20211230123539.52786-23-anup@brainfault.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 12 Jan 2022 21:19:39 +0800
-X-Gmail-Original-Message-ID: <CANzO1D2woQKeqP8XnJ9c8z0MvBjiUAPnYVGLJMZX5sMGwj=_Aw@mail.gmail.com>
-Message-ID: <CANzO1D2woQKeqP8XnJ9c8z0MvBjiUAPnYVGLJMZX5sMGwj=_Aw@mail.gmail.com>
-Subject: Re: [PATCH v6 17/23] target/riscv: Allow users to force enable AIA
- CSRs in HART
+Date: Wed, 12 Jan 2022 21:23:01 +0800
+X-Gmail-Original-Message-ID: <CANzO1D2uubuM5gc0n3YbMQ-J2PmUa8djLxsGcPrVT4AKOsZR7A@mail.gmail.com>
+Message-ID: <CANzO1D2uubuM5gc0n3YbMQ-J2PmUa8djLxsGcPrVT4AKOsZR7A@mail.gmail.com>
+Subject: Re: [PATCH v6 22/23] docs/system: riscv: Document AIA options for
+ virt machine
 To: Anup Patel <anup@brainfault.org>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -69,11 +70,11 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000af405805d5626c9d"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1031
+Content-Type: multipart/alternative; boundary="000000000000b7853605d562781c"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -93,67 +94,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2022 13:20:00 -0000
+X-List-Received-Date: Wed, 12 Jan 2022 13:23:23 -0000
 
---000000000000af405805d5626c9d
+--000000000000b7853605d562781c
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 Anup Patel <anup@brainfault.org> =E6=96=BC 2021=E5=B9=B412=E6=9C=8830=E6=97=
-=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=888:57=E5=AF=AB=E9=81=93=EF=BC=9A
+=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:03=E5=AF=AB=E9=81=93=EF=BC=9A
 
 > From: Anup Patel <anup.patel@wdc.com>
 >
-> We add "x-aia" command-line option for RISC-V HART using which
-> allows users to force enable CPU AIA CSRs without changing the
-> interrupt controller available in RISC-V machine.
+> We have two new machine options "aia" and "aia-guests" available
+> for the RISC-V virt machine so let's document these options.
 >
 > Signed-off-by: Anup Patel <anup.patel@wdc.com>
 > Signed-off-by: Anup Patel <anup@brainfault.org>
 > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c | 5 +++++
->  target/riscv/cpu.h | 1 +
->  2 files changed, 6 insertions(+)
+>  docs/system/riscv/virt.rst | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9ad26035e1..1ae9e15b27 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -463,6 +463,10 @@ static void riscv_cpu_realize(DeviceState *dev, Erro=
-r
-> **errp)
->          }
->      }
+> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+> index fa016584bf..373645513a 100644
+> --- a/docs/system/riscv/virt.rst
+> +++ b/docs/system/riscv/virt.rst
+> @@ -63,6 +63,22 @@ The following machine-specific options are supported:
+>    When this option is "on", ACLINT devices will be emulated instead of
+>    SiFive CLINT. When not specified, this option is assumed to be "off".
 >
-> +    if (cpu->cfg.aia) {
-> +        riscv_set_feature(env, RISCV_FEATURE_AIA);
-> +    }
+> +- aia=3D[none|aplic|aplic-imsic]
 > +
->      set_resetvec(env, cpu->cfg.resetvec);
+> +  This option allows selecting interrupt controller defined by the AIA
+> +  (advanced interrupt architecture) specification. The "aia=3Daplic" sel=
+ects
+> +  APLIC (advanced platform level interrupt controller) to handle wired
+> +  interrupts whereas the "aia=3Daplic-imsic" selects APLIC and IMSIC
+> (incoming
+> +  message signaled interrupt controller) to handle both wired interrupts
+> and
+> +  MSIs. When not specified, this option is assumed to be "none" which
+> selects
+> +  SiFive PLIC to handle wired interrupts.
+> +
+> +- aia-guests=3Dnnn
+> +
+> +  The number of per-HART VS-level AIA IMSIC pages to be emulated for a
+> guest
+> +  having AIA IMSIC (i.e. "aia=3Daplic-imsic" selected). When not specifi=
+ed,
+> +  the default number of per-HART VS-level AIA IMSIC pages is 0.
+> +
+>  Running Linux kernel
+>  --------------------
 >
->      /* Validate that MISA_MXL is set properly. */
-> @@ -691,6 +695,7 @@ static Property riscv_cpu_properties[] =3D {
->      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->      /* ePMP 0.9.3 */
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> +    DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec,
-> DEFAULT_RSTVEC),
->      DEFINE_PROP_END_OF_LIST(),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 82272f99fd..0b24c4324b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -362,6 +362,7 @@ struct RISCVCPU {
->          bool mmu;
->          bool pmp;
->          bool epmp;
-> +        bool aia;
->          uint64_t resetvec;
->      } cfg;
->  };
 > --
 > 2.25.1
 >
@@ -161,22 +155,21 @@ r
 >
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
---000000000000af405805d5626c9d
+--000000000000b7853605d562781c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr">Anup Patel &lt;<a href=3D"mailto:anup@bra=
 infault.org">anup@brainfault.org</a>&gt; =E6=96=BC 2021=E5=B9=B412=E6=9C=88=
-30=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=888:57=E5=AF=AB=E9=81=93=EF=
+30=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8B=E5=8D=889:03=E5=AF=AB=E9=81=93=EF=
 =BC=9A<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
 " style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
 padding-left:1ex">From: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com=
 " target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
 <br>
-We add &quot;x-aia&quot; command-line option for RISC-V HART using which<br=
->
-allows users to force enable CPU AIA CSRs without changing the<br>
-interrupt controller available in RISC-V machine.<br>
+We have two new machine options &quot;aia&quot; and &quot;aia-guests&quot; =
+available<br>
+for the RISC-V virt machine so let&#39;s document these options.<br>
 <br>
 Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com" target=
 =3D"_blank">anup.patel@wdc.com</a>&gt;<br>
@@ -185,50 +178,47 @@ Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup@brainfault.org" target=
 Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
 m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
 ---<br>
-=C2=A0target/riscv/cpu.c | 5 +++++<br>
-=C2=A0target/riscv/cpu.h | 1 +<br>
-=C2=A02 files changed, 6 insertions(+)<br>
+=C2=A0docs/system/riscv/virt.rst | 16 ++++++++++++++++<br>
+=C2=A01 file changed, 16 insertions(+)<br>
 <br>
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-index 9ad26035e1..1ae9e15b27 100644<br>
---- a/target/riscv/cpu.c<br>
-+++ b/target/riscv/cpu.c<br>
-@@ -463,6 +463,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error =
-**errp)<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst<br>
+index fa016584bf..373645513a 100644<br>
+--- a/docs/system/riscv/virt.rst<br>
++++ b/docs/system/riscv/virt.rst<br>
+@@ -63,6 +63,22 @@ The following machine-specific options are supported:<br=
+>
+=C2=A0 =C2=A0When this option is &quot;on&quot;, ACLINT devices will be emu=
+lated instead of<br>
+=C2=A0 =C2=A0SiFive CLINT. When not specified, this option is assumed to be=
+ &quot;off&quot;.<br>
 <br>
-+=C2=A0 =C2=A0 if (cpu-&gt;cfg.aia) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_set_feature(env, RISCV_FEATURE_AIA);<br>
-+=C2=A0 =C2=A0 }<br>
++- aia=3D[none|aplic|aplic-imsic]<br>
 +<br>
-=C2=A0 =C2=A0 =C2=A0set_resetvec(env, cpu-&gt;cfg.resetvec);<br>
++=C2=A0 This option allows selecting interrupt controller defined by the AI=
+A<br>
++=C2=A0 (advanced interrupt architecture) specification. The &quot;aia=3Dap=
+lic&quot; selects<br>
++=C2=A0 APLIC (advanced platform level interrupt controller) to handle wire=
+d<br>
++=C2=A0 interrupts whereas the &quot;aia=3Daplic-imsic&quot; selects APLIC =
+and IMSIC (incoming<br>
++=C2=A0 message signaled interrupt controller) to handle both wired interru=
+pts and<br>
++=C2=A0 MSIs. When not specified, this option is assumed to be &quot;none&q=
+uot; which selects<br>
++=C2=A0 SiFive PLIC to handle wired interrupts.<br>
++<br>
++- aia-guests=3Dnnn<br>
++<br>
++=C2=A0 The number of per-HART VS-level AIA IMSIC pages to be emulated for =
+a guest<br>
++=C2=A0 having AIA IMSIC (i.e. &quot;aia=3Daplic-imsic&quot; selected). Whe=
+n not specified,<br>
++=C2=A0 the default number of per-HART VS-level AIA IMSIC pages is 0.<br>
++<br>
+=C2=A0Running Linux kernel<br>
+=C2=A0--------------------<br>
 <br>
-=C2=A0 =C2=A0 =C2=A0/* Validate that MISA_MXL is set properly. */<br>
-@@ -691,6 +695,7 @@ static Property riscv_cpu_properties[] =3D {<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;x-j&quot;, RISCVCPU, cfg.ext_j, =
-false),<br>
-=C2=A0 =C2=A0 =C2=A0/* ePMP 0.9.3 */<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_BOOL(&quot;x-epmp&quot;, RISCVCPU, cfg.epmp=
-, false),<br>
-+=C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;x-aia&quot;, RISCVCPU, cfg.aia, false=
-),<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_UINT64(&quot;resetvec&quot;, RISCVCPU, cfg.=
-resetvec, DEFAULT_RSTVEC),<br>
-=C2=A0 =C2=A0 =C2=A0DEFINE_PROP_END_OF_LIST(),<br>
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-index 82272f99fd..0b24c4324b 100644<br>
---- a/target/riscv/cpu.h<br>
-+++ b/target/riscv/cpu.h<br>
-@@ -362,6 +362,7 @@ struct RISCVCPU {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bool mmu;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bool pmp;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bool epmp;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 bool aia;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t resetvec;<br>
-=C2=A0 =C2=A0 =C2=A0} cfg;<br>
-=C2=A0};<br>
 -- <br>
 2.25.1<br>
 <br>
@@ -236,5 +226,5 @@ index 82272f99fd..0b24c4324b 100644<br>
 =3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com=
 </a>&gt;=C2=A0</div></div></div>
 
---000000000000af405805d5626c9d--
+--000000000000b7853605d562781c--
 
