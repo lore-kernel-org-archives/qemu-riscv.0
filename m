@@ -1,24 +1,24 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7YZw-00053b-73
-	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 03:01:57 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41020)
+	id 1n7Yca-0007If-Mn
+	for mharc-qemu-riscv@gnu.org; Wed, 12 Jan 2022 03:04:45 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41538)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1n7YZm-000527-Am; Wed, 12 Jan 2022 03:01:47 -0500
-Received: from szxga02-in.huawei.com ([45.249.212.188]:3077)
+ id 1n7YcW-0007GS-MJ; Wed, 12 Jan 2022 03:04:37 -0500
+Received: from szxga01-in.huawei.com ([45.249.212.187]:3451)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jiangyifei@huawei.com>)
- id 1n7YZi-0006S4-O7; Wed, 12 Jan 2022 03:01:45 -0500
-Received: from canpemm100004.china.huawei.com (unknown [172.30.72.56])
- by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4JYg3h1dT1zbjsF;
- Wed, 12 Jan 2022 16:00:48 +0800 (CST)
+ id 1n7YcU-0006nJ-Ep; Wed, 12 Jan 2022 03:04:36 -0500
+Received: from dggeme708-chm.china.huawei.com (unknown [172.30.72.53])
+ by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JYg7B1zKdzccYv;
+ Wed, 12 Jan 2022 16:03:50 +0800 (CST)
 Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- canpemm100004.china.huawei.com (7.192.105.92) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.20; Wed, 12 Jan 2022 16:01:27 +0800
+ dggeme708-chm.china.huawei.com (10.1.199.104) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2308.20; Wed, 12 Jan 2022 16:04:28 +0800
 Received: from kwepemm600017.china.huawei.com ([7.193.23.234]) by
  kwepemm600017.china.huawei.com ([7.193.23.234]) with mapi id 15.01.2308.020;
- Wed, 12 Jan 2022 16:01:27 +0800
+ Wed, 12 Jan 2022 16:04:28 +0800
 From: Jiangyifei <jiangyifei@huawei.com>
 To: Alistair Francis <alistair23@gmail.com>
 CC: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
@@ -29,17 +29,18 @@ CC: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, "open
  <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, "Fanliang
  (EulerOS)" <fanliang@huawei.com>, "Wubin (H)" <wu.wubin@huawei.com>,
  "Wanghaibin (D)" <wanghaibin.wang@huawei.com>, "wanbo (G)"
- <wanbo13@huawei.com>, "limingwang (A)" <limingwang@huawei.com>, Anup Patel
- <anup.patel@wdc.com>
-Subject: RE: [PATCH v4 05/12] target/riscv: Implement kvm_arch_put_registers
-Thread-Topic: [PATCH v4 05/12] target/riscv: Implement kvm_arch_put_registers
-Thread-Index: AQHYBcLY5qBMkgvcJUyw1KKH9Z+yrqxcW9gAgAKtocA=
-Date: Wed, 12 Jan 2022 08:01:27 +0000
-Message-ID: <d5f384244df6442faae5e4812d9791ab@huawei.com>
+ <wanbo13@huawei.com>, "limingwang (A)" <limingwang@huawei.com>
+Subject: RE: [PATCH v4 02/12] target/riscv: Add target/riscv/kvm.c to place
+ the public kvm interface
+Thread-Topic: [PATCH v4 02/12] target/riscv: Add target/riscv/kvm.c to place
+ the public kvm interface
+Thread-Index: AQHYBcLUGMfQsFAEYkiaTOaz7LIFQKxcXLYAgAKtIxA=
+Date: Wed, 12 Jan 2022 08:04:28 +0000
+Message-ID: <d0b2766fb1c3465095c76e2b1efbae5c@huawei.com>
 References: <20220110013831.1594-1-jiangyifei@huawei.com>
- <20220110013831.1594-6-jiangyifei@huawei.com>
- <CAKmqyKPsSidxir_1fncugsmLK33aSbHk63MP0JnS3OJLvy65EA@mail.gmail.com>
-In-Reply-To: <CAKmqyKPsSidxir_1fncugsmLK33aSbHk63MP0JnS3OJLvy65EA@mail.gmail.com>
+ <20220110013831.1594-3-jiangyifei@huawei.com>
+ <CAKmqyKOOD-iRxX8aj7V2Vtfmi6=i9jCDT=0qgUvxX1j1DOOHXg@mail.gmail.com>
+In-Reply-To: <CAKmqyKOOD-iRxX8aj7V2Vtfmi6=i9jCDT=0qgUvxX1j1DOOHXg@mail.gmail.com>
 Accept-Language: zh-CN, en-US
 Content-Language: zh-CN
 X-MS-Has-Attach: 
@@ -49,8 +50,8 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 MIME-Version: 1.0
 X-CFilter-Loop: Reflected
-Received-SPF: pass client-ip=45.249.212.188;
- envelope-from=jiangyifei@huawei.com; helo=szxga02-in.huawei.com
+Received-SPF: pass client-ip=45.249.212.187;
+ envelope-from=jiangyifei@huawei.com; helo=szxga01-in.huawei.com
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
@@ -69,11 +70,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jan 2022 08:01:51 -0000
+X-List-Received-Date: Wed, 12 Jan 2022 08:04:38 -0000
 
 DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFsaXN0YWlyIEZyYW5jaXMg
 W21haWx0bzphbGlzdGFpcjIzQGdtYWlsLmNvbV0NCj4gU2VudDogVHVlc2RheSwgSmFudWFyeSAx
-MSwgMjAyMiA3OjA3IEFNDQo+IFRvOiBKaWFuZ3lpZmVpIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+
+MSwgMjAyMiA3OjEwIEFNDQo+IFRvOiBKaWFuZ3lpZmVpIDxqaWFuZ3lpZmVpQGh1YXdlaS5jb20+
 DQo+IENjOiBxZW11LWRldmVsQG5vbmdudS5vcmcgRGV2ZWxvcGVycyA8cWVtdS1kZXZlbEBub25n
 bnUub3JnPjsgb3Blbg0KPiBsaXN0OlJJU0MtViA8cWVtdS1yaXNjdkBub25nbnUub3JnPjsga3Zt
 LXJpc2N2QGxpc3RzLmluZnJhZGVhZC5vcmc7IG9wZW4NCj4gbGlzdDpPdmVyYWxsIDxrdm1Admdl
@@ -85,29 +86,31 @@ aHVhd2VpLmNvbT47IFd1YmluIChIKQ0KPiA8d3Uud3ViaW5AaHVhd2VpLmNvbT47IFdhbmdoYWli
 aW4gKEQpIDx3YW5naGFpYmluLndhbmdAaHVhd2VpLmNvbT47DQo+IHdhbmJvIChHKSA8d2FuYm8x
 M0BodWF3ZWkuY29tPjsgbGltaW5nd2FuZyAoQSkNCj4gPGxpbWluZ3dhbmdAaHVhd2VpLmNvbT47
 IEFudXAgUGF0ZWwgPGFudXAucGF0ZWxAd2RjLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCB2
-NCAwNS8xMl0gdGFyZ2V0L3Jpc2N2OiBJbXBsZW1lbnQga3ZtX2FyY2hfcHV0X3JlZ2lzdGVycw0K
-PiANCj4gT24gTW9uLCBKYW4gMTAsIDIwMjIgYXQgMTE6NTcgQU0gWWlmZWkgSmlhbmcgdmlhIDxx
-ZW11LWRldmVsQG5vbmdudS5vcmc+DQo+IHdyb3RlOg0KPiA+DQo+ID4gUHV0IEdQUiBDU1IgYW5k
-IEZQIHJlZ2lzdGVycyB0byBrdm0gYnkgS1ZNX1NFVF9PTkVfUkVHIGlvY3RsDQo+ID4NCj4gPiBT
-aWduZWQtb2ZmLWJ5OiBZaWZlaSBKaWFuZyA8amlhbmd5aWZlaUBodWF3ZWkuY29tPg0KPiA+IFNp
-Z25lZC1vZmYtYnk6IE1pbmd3YW5nIExpIDxsaW1pbmd3YW5nQGh1YXdlaS5jb20+DQo+ID4gUmV2
-aWV3ZWQtYnk6IEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4NCj4g
-PiBSZXZpZXdlZC1ieTogQW51cCBQYXRlbCA8YW51cC5wYXRlbEB3ZGMuY29tPg0KPiA+IC0tLQ0K
-PiA+ICB0YXJnZXQvcmlzY3Yva3ZtLmMgfCAxMDQNCj4gPiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKy0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDEwMyBpbnNlcnRp
-b25zKCspLCAxIGRlbGV0aW9uKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2
-L2t2bS5jIGIvdGFyZ2V0L3Jpc2N2L2t2bS5jIGluZGV4DQo+ID4gNmQ0ZGYwZWY2ZC4uZTY5NWI5
-MWRjNyAxMDA2NDQNCj4gPiAtLS0gYS90YXJnZXQvcmlzY3Yva3ZtLmMNCj4gPiArKysgYi90YXJn
-ZXQvcmlzY3Yva3ZtLmMNCj4gPiBAQCAtNzMsNiArNzMsMTQgQEAgc3RhdGljIHVpbnQ2NF90IGt2
-bV9yaXNjdl9yZWdfaWQoQ1BVUklTQ1ZTdGF0ZSAqZW52LA0KPiB1aW50NjRfdCB0eXBlLCB1aW50
-NjRfdCBpZHgNCj4gPiAgICAgICAgICB9IFwNCj4gPiAgICAgIH0gd2hpbGUoMCkNCj4gPg0KPiA+
-ICsjZGVmaW5lIEtWTV9SSVNDVl9TRVRfQ1NSKGNzLCBlbnYsIGNzciwgcmVnKSBcDQo+ID4gKyAg
-ICBkbyB7IFwNCj4gPiArICAgICAgICBpbnQgcmV0ID0ga3ZtX3NldF9vbmVfcmVnKGNzLCBSSVND
-Vl9DU1JfUkVHKGVudiwgY3NyKSwgJnJlZyk7IFwNCj4gPiArICAgICAgICBpZiAocmV0KSB7IFwN
-Cj4gPiArICAgICAgICAgICAgcmV0dXJuIHJldDsgXA0KPiA+ICsgICAgICAgIH0gXA0KPiA+ICsg
-ICAgfSB3aGlsZSgwKQ0KPiANCj4gVGhpcyBmYWlscyBjaGVja3BhdGNoLiBJIGtub3cgdGhlcmUg
-aXMgbG90cyBvZiBRRU1VIGNvZGUgbGlrZSB0aGlzLCBidXQgaXQgcHJvYmFibHkNCj4gc2hvdWxk
-IGJlIGB3aGlsZSAoMClgIHRvIGtlZXAgY2hlY2twYXRjaCBoYXBweS4NCj4gDQo+IFBsZWFzZSBy
-dW4gY2hlY2twYXRjaCBvbiBhbGwgdGhlIHBhdGNoZXMuDQo+IA0KPiBBbGlzdGFpcg0KDQpPSywg
-aXQgd2lsbCBiZSBtb2RpZmllZCBpbiB0aGUgbmV4dCBzZXJpZXMuDQoNCllpZmVpDQo=
+NCAwMi8xMl0gdGFyZ2V0L3Jpc2N2OiBBZGQgdGFyZ2V0L3Jpc2N2L2t2bS5jIHRvIHBsYWNlIHRo
+ZQ0KPiBwdWJsaWMga3ZtIGludGVyZmFjZQ0KPiANCj4gT24gTW9uLCBKYW4gMTAsIDIwMjIgYXQg
+MTE6NDggQU0gWWlmZWkgSmlhbmcgdmlhIDxxZW11LWRldmVsQG5vbmdudS5vcmc+DQo+IHdyb3Rl
+Og0KPiA+DQo+ID4gQWRkIHRhcmdldC9yaXNjdi9rdm0uYyB0byBwbGFjZSBrdm1fYXJjaF8qIGZ1
+bmN0aW9uIG5lZWRlZCBieQ0KPiA+IGt2bS9rdm0tYWxsLmMuIE1lYW53aGlsZSwgYWRkIGt2bSBz
+dXBwb3J0IGluIG1lc29uLmJ1aWxkIGZpbGUuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBZaWZl
+aSBKaWFuZyA8amlhbmd5aWZlaUBodWF3ZWkuY29tPg0KPiA+IFNpZ25lZC1vZmYtYnk6IE1pbmd3
+YW5nIExpIDxsaW1pbmd3YW5nQGh1YXdlaS5jb20+DQo+ID4gUmV2aWV3ZWQtYnk6IEFsaXN0YWly
+IEZyYW5jaXMgPGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4NCj4gPiBSZXZpZXdlZC1ieTogQW51
+cCBQYXRlbCA8YW51cC5wYXRlbEB3ZGMuY29tPg0KPiA+IC0tLQ0KPiA+ICBtZXNvbi5idWlsZCAg
+ICAgICAgICAgICAgfCAgIDIgKw0KPiA+ICB0YXJnZXQvcmlzY3Yva3ZtLmMgICAgICAgfCAxMzMN
+Cj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIHRhcmdldC9y
+aXNjdi9tZXNvbi5idWlsZCB8ICAgMSArDQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMTM2IGluc2Vy
+dGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IHRhcmdldC9yaXNjdi9rdm0uYw0KPiA+
+DQo+ID4gZGlmZiAtLWdpdCBhL21lc29uLmJ1aWxkIGIvbWVzb24uYnVpbGQgaW5kZXggNTMwNjVl
+OTZlYy4uN2VhZWMzMWEzYQ0KPiA+IDEwMDY0NA0KPiA+IC0tLSBhL21lc29uLmJ1aWxkDQo+ID4g
+KysrIGIvbWVzb24uYnVpbGQNCj4gPiBAQCAtOTAsNiArOTAsOCBAQCBlbGlmIGNwdSBpbiBbJ3Bw
+YycsICdwcGM2NCddDQo+ID4gICAga3ZtX3RhcmdldHMgPSBbJ3BwYy1zb2Z0bW11JywgJ3BwYzY0
+LXNvZnRtbXUnXSAgZWxpZiBjcHUgaW4NCj4gPiBbJ21pcHMnLCAnbWlwczY0J10NCj4gPiAgICBr
+dm1fdGFyZ2V0cyA9IFsnbWlwcy1zb2Z0bW11JywgJ21pcHNlbC1zb2Z0bW11JywgJ21pcHM2NC1z
+b2Z0bW11JywNCj4gPiAnbWlwczY0ZWwtc29mdG1tdSddDQo+ID4gK2VsaWYgY3B1IGluIFsncmlz
+Y3YnXQ0KPiA+ICsgIGt2bV90YXJnZXRzID0gWydyaXNjdjMyLXNvZnRtbXUnLCAncmlzY3Y2NC1z
+b2Z0bW11J10NCj4gPiAgZWxzZQ0KPiA+ICAgIGt2bV90YXJnZXRzID0gW10NCj4gPiAgZW5kaWYN
+Cj4gDQo+IENhbiB5b3UgYWRkIHRoaXMgYXMgYSBzZXBhcmF0ZSBjb21taXQgYXQgdGhlIGVuZCBv
+ZiB0aGUgc2VyaWVzPw0KPiANCj4gVGhhdCB3YXkgd2UgaGF2ZSBpbXBsZW1lbnRlZCBLVk0gc3Vw
+cG9ydCBiZWZvcmUgd2UgZW5hYmxlIGl0IGZvciB1c2Vycy4NCj4gDQo+IEFsaXN0YWlyDQoNClll
+cywgdGhhdCBtYWtlcyBzZW5zZS4NCg0KWWlmZWkNCg==
 
