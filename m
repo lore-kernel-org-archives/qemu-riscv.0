@@ -1,45 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7yUq-00046t-3j
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:42:24 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33288)
+	id 1n7yVH-00053b-BN
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:42:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:33338)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7yUm-0003uz-AQ; Thu, 13 Jan 2022 06:42:20 -0500
-Received: from out28-149.mail.aliyun.com ([115.124.28.149]:57055)
+ id 1n7yVF-0004yT-NC; Thu, 13 Jan 2022 06:42:49 -0500
+Received: from out28-123.mail.aliyun.com ([115.124.28.123]:59269)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7yUk-0003Hq-38; Thu, 13 Jan 2022 06:42:19 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07444472|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0401184-0.000771777-0.95911;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047192; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.Mb1FSBh_1642074131; 
+ id 1n7yVC-0003KA-Sq; Thu, 13 Jan 2022 06:42:49 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436284|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0449918-0.00112837-0.95388;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047193; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=8; RT=8; SR=0; TI=SMTPD_---.Mb1CocH_1642074162; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Mb1FSBh_1642074131)
- by smtp.aliyun-inc.com(10.147.44.129);
- Thu, 13 Jan 2022 19:42:11 +0800
+ fp:SMTPD_---.Mb1CocH_1642074162)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Thu, 13 Jan 2022 19:42:42 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
- LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 04/22] target/riscv: Sign extend pc for different XLEN
-Date: Thu, 13 Jan 2022 19:39:46 +0800
-Message-Id: <20220113114004.286796-5-zhiwei_liu@c-sky.com>
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
+Subject: [PATCH v6 05/22] target/riscv: Create xl field in env
+Date: Thu, 13 Jan 2022 19:39:47 +0800
+Message-Id: <20220113114004.286796-6-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
 References: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.149; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-149.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.123; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-123.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -52,138 +51,182 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2022 11:42:20 -0000
-
-When pc is written, it is sign-extended to fill the widest supported XLEN.
+X-List-Received-Date: Thu, 13 Jan 2022 11:42:50 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../riscv/insn_trans/trans_privileged.c.inc   |  2 +-
- target/riscv/insn_trans/trans_rvi.c.inc       |  5 ++--
- target/riscv/insn_trans/trans_rvv.c.inc       |  4 +--
- target/riscv/translate.c                      | 25 ++++++++++++++++---
- 4 files changed, 27 insertions(+), 9 deletions(-)
+ target/riscv/cpu.c        |  1 +
+ target/riscv/cpu.h        | 31 +++++++++++++++++++++++++++++++
+ target/riscv/cpu_helper.c | 34 ++--------------------------------
+ target/riscv/csr.c        |  2 ++
+ target/riscv/machine.c    | 10 ++++++++++
+ 5 files changed, 46 insertions(+), 32 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-index 6077bbbf11..53613682e8 100644
---- a/target/riscv/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/insn_trans/trans_privileged.c.inc
-@@ -102,7 +102,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
- static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- {
- #ifndef CONFIG_USER_ONLY
--    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-     gen_helper_wfi(cpu_env);
-     return true;
- #else
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index b9ba57f266..04d3ea237f 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -59,6 +59,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
-     tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
-     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 9bc25d3055..54c1cf8ec5 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -399,6 +399,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+     /* mmte is supposed to have pm.current hardwired to 1 */
+     env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
+ #endif
++    env->xl = riscv_cpu_mxl(env);
+     cs->exception_index = RISCV_EXCP_NONE;
+     env->load_res = -1;
+     set_default_nan_mode(1, &env->fp_status);
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4d63086765..65fd849bef 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -145,6 +145,7 @@ struct CPURISCVState {
+     uint32_t misa_mxl_max;  /* max mxl for this cpu */
+     uint32_t misa_ext;      /* current extensions */
+     uint32_t misa_ext_mask; /* max ext for this cpu */
++    uint32_t xl;            /* current xlen */
  
-+    gen_set_pc(ctx, cpu_pc);
-     if (!has_ext(ctx, RVC)) {
-         TCGv t0 = tcg_temp_new();
+     /* 128-bit helpers upper part return value */
+     target_ulong retxh;
+@@ -443,6 +444,36 @@ static inline RISCVMXL riscv_cpu_mxl(CPURISCVState *env)
+ }
+ #endif
  
-@@ -827,7 +828,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
-      * FENCE_I is a no-op in QEMU,
-      * however we need to end the translation block
-      */
--    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-     tcg_gen_exit_tb(NULL, 0);
-     ctx->base.is_jmp = DISAS_NORETURN;
-     return true;
-@@ -836,7 +837,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
- static bool do_csr_post(DisasContext *ctx)
- {
-     /* We may have changed important cpu state -- exit to main loop. */
--    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-     tcg_gen_exit_tb(NULL, 0);
-     ctx->base.is_jmp = DISAS_NORETURN;
-     return true;
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 6c285c958b..1c8086d3a6 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -149,7 +149,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
-     gen_set_gpr(s, rd, dst);
-     mark_vs_dirty(s);
- 
--    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
-+    gen_set_pc_imm(s, s->pc_succ_insn);
-     tcg_gen_lookup_and_goto_ptr();
-     s->base.is_jmp = DISAS_NORETURN;
- 
-@@ -173,7 +173,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
-     gen_helper_vsetvl(dst, cpu_env, s1, s2);
-     gen_set_gpr(s, rd, dst);
-     mark_vs_dirty(s);
--    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
-+    gen_set_pc_imm(s, s->pc_succ_insn);
-     tcg_gen_lookup_and_goto_ptr();
-     s->base.is_jmp = DISAS_NORETURN;
- 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index b47b308920..d8b7c48600 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -191,16 +191,33 @@ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
-     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
++#if defined(TARGET_RISCV32)
++#define cpu_recompute_xl(env)  ((void)(env), MXL_RV32)
++#else
++static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
++{
++    RISCVMXL xl = env->misa_mxl;
++#if !defined(CONFIG_USER_ONLY)
++    /*
++     * When emulating a 32-bit-only cpu, use RV32.
++     * When emulating a 64-bit cpu, and MXL has been reduced to RV32,
++     * MSTATUSH doesn't have UXL/SXL, therefore XLEN cannot be widened
++     * back to RV64 for lower privs.
++     */
++    if (xl != MXL_RV32) {
++        switch (env->priv) {
++        case PRV_M:
++            break;
++        case PRV_U:
++            xl = get_field(env->mstatus, MSTATUS64_UXL);
++            break;
++        default: /* PRV_S | PRV_H */
++            xl = get_field(env->mstatus, MSTATUS64_SXL);
++            break;
++        }
++    }
++#endif
++    return xl;
++}
++#endif
++
+ /*
+  * Encode LMUL to lmul as follows:
+  *     LMUL    vlmul    lmul
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 434a83e66a..32ea066ef0 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -35,37 +35,6 @@ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ #endif
  }
  
-+static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
-+{
-+    if (get_xl(ctx) == MXL_RV32) {
-+        dest = (int32_t)dest;
-+    }
-+    tcg_gen_movi_tl(cpu_pc, dest);
-+}
-+
-+static void gen_set_pc(DisasContext *ctx, TCGv dest)
-+{
-+    if (get_xl(ctx) == MXL_RV32) {
-+        tcg_gen_ext32s_tl(cpu_pc, dest);
-+    } else {
-+        tcg_gen_mov_tl(cpu_pc, dest);
-+    }
-+}
-+
- static void generate_exception(DisasContext *ctx, int excp)
+-static RISCVMXL cpu_get_xl(CPURISCVState *env)
+-{
+-#if defined(TARGET_RISCV32)
+-    return MXL_RV32;
+-#elif defined(CONFIG_USER_ONLY)
+-    return MXL_RV64;
+-#else
+-    RISCVMXL xl = riscv_cpu_mxl(env);
+-
+-    /*
+-     * When emulating a 32-bit-only cpu, use RV32.
+-     * When emulating a 64-bit cpu, and MXL has been reduced to RV32,
+-     * MSTATUSH doesn't have UXL/SXL, therefore XLEN cannot be widened
+-     * back to RV64 for lower privs.
+-     */
+-    if (xl != MXL_RV32) {
+-        switch (env->priv) {
+-        case PRV_M:
+-            break;
+-        case PRV_U:
+-            xl = get_field(env->mstatus, MSTATUS64_UXL);
+-            break;
+-        default: /* PRV_S | PRV_H */
+-            xl = get_field(env->mstatus, MSTATUS64_SXL);
+-            break;
+-        }
+-    }
+-    return xl;
+-#endif
+-}
+-
+ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+                           target_ulong *cs_base, uint32_t *pflags)
  {
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_set_pc_imm(ctx, ctx->base.pc_next);
-     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
- }
- 
- static void generate_exception_mtval(DisasContext *ctx, int excp)
- {
--    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
-+    gen_set_pc_imm(ctx, ctx->base.pc_next);
-     tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
-     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
-     ctx->base.is_jmp = DISAS_NORETURN;
-@@ -223,10 +240,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
- {
-     if (translator_use_goto_tb(&ctx->base, dest)) {
-         tcg_gen_goto_tb(n);
--        tcg_gen_movi_tl(cpu_pc, dest);
-+        gen_set_pc_imm(ctx, dest);
-         tcg_gen_exit_tb(ctx->base.tb, n);
-     } else {
--        tcg_gen_movi_tl(cpu_pc, dest);
-+        gen_set_pc_imm(ctx, dest);
-         tcg_gen_lookup_and_goto_ptr();
+@@ -145,7 +114,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
      }
+ #endif
+ 
+-    flags = FIELD_DP32(flags, TB_FLAGS, XL, cpu_get_xl(env));
++    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+ 
+     *pflags = flags;
  }
+@@ -361,6 +330,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
+     }
+     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
+     env->priv = newpriv;
++    env->xl = cpu_recompute_xl(env);
+ 
+     /*
+      * Clear the load reservation - otherwise a reservation placed in one
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index e7578f3e0f..b282a642f5 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -585,6 +585,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+         mstatus = set_field(mstatus, MSTATUS64_UXL, xl);
+     }
+     env->mstatus = mstatus;
++    env->xl = cpu_recompute_xl(env);
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -700,6 +701,7 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+     /* flush translation cache */
+     tb_flush(env_cpu(env));
+     env->misa_ext = val;
++    env->xl = riscv_cpu_mxl(env);
+     return RISCV_EXCP_NONE;
+ }
+ 
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 13b9ab375b..e1d1029e88 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -185,10 +185,20 @@ static const VMStateDescription vmstate_rv128 = {
+     }
+ };
+ 
++static int riscv_cpu_post_load(void *opaque, int version_id)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++
++    env->xl = cpu_recompute_xl(env);
++    return 0;
++}
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 3,
+     .minimum_version_id = 3,
++    .post_load = riscv_cpu_post_load,
+     .fields = (VMStateField[]) {
+         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+         VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
 -- 
 2.25.1
 
