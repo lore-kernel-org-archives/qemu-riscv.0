@@ -1,43 +1,44 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7ySv-0002fq-Hx
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:40:25 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:32950)
+	id 1n7yTL-00034K-LK
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:40:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:33028)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7ySq-0002eI-8a; Thu, 13 Jan 2022 06:40:20 -0500
-Received: from out28-75.mail.aliyun.com ([115.124.28.75]:58315)
+ id 1n7yTJ-00032e-Bg; Thu, 13 Jan 2022 06:40:49 -0500
+Received: from out28-100.mail.aliyun.com ([115.124.28.100]:47838)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7ySn-0002n2-2G; Thu, 13 Jan 2022 06:40:19 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07537566|-1; CH=green;
- DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0248949-0.000271598-0.974834;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047190; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=8; RT=8; SR=0; TI=SMTPD_---.Mb0yr6K_1642074009; 
+ id 1n7yTF-00030C-HJ; Thu, 13 Jan 2022 06:40:47 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07576766|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.193991-0.000184048-0.805825;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=8; RT=8; SR=0; TI=SMTPD_---.Mb0JPfc_1642074039; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Mb0yr6K_1642074009)
- by smtp.aliyun-inc.com(10.147.41.178);
- Thu, 13 Jan 2022 19:40:09 +0800
+ fp:SMTPD_---.Mb0JPfc_1642074039)
+ by smtp.aliyun-inc.com(10.147.42.253);
+ Thu, 13 Jan 2022 19:40:40 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>
-Subject: [PATCH v6 00/22] Support UXL filed in xstatus
-Date: Thu, 13 Jan 2022 19:39:42 +0800
-Message-Id: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
+Subject: [PATCH v6 01/22] target/riscv: Adjust pmpcfg access with mxl
+Date: Thu, 13 Jan 2022 19:39:43 +0800
+Message-Id: <20220113114004.286796-2-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
+References: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.75; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-75.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.100; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-100.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -50,101 +51,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2022 11:40:21 -0000
+X-List-Received-Date: Thu, 13 Jan 2022 11:40:49 -0000
 
-In this patch set, we process the pc reigsters writes,
-gdb reads and writes, and address calculation under
-different UXLEN settings.
+Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/csr.c | 19 +++++++++++++++++++
+ target/riscv/pmp.c | 12 ++++--------
+ 2 files changed, 23 insertions(+), 8 deletions(-)
 
-The patch set v6 has been tested by running rv64 Linux with 
-rv32 rootfs in compat mode. You can almost follow the test [1]
-given by GuoRen, except using the branch riscv-upstream-uxl-v6
-on my QEMU repo [2].
-
-[1] https://lore.kernel.org/linux-arm-kernel/20211228143958.3409187-17-guoren@kernel.org/t/
-[2] https://github.com/romanheros/qemu.git 
-
-Patch 3, 5, 20, 22, have not been reviewed. Others have been reviewed or acked.
-
-v6:
-  Pass boot 32bit rootfs on compat Linux
-  Pass test cases on compat OpenTee
-  Fix csr write mask 
-  Fix WARL for uxl
-  Fix sstatus read for uxl
-  Relax UXL field for debugging
-  Don't bump machine state version for xl
-  Rename cpu_get_xl to cpu_recompute_xl
-  Rebase to vector v1.0
-  Rebase to 128 bit cpu
-
-v5:
-  Add xl field in env to clear up redundant riscv_cpu_xl
-  Adjust pmpcfg access with mxl
-  Select gdb core xml according to mxl 
-
-v4:
-  Support SSTATUS64_UXL write
-  Bump vmstate version for vill split
-
-v3:
-  Merge gen_pm_adjust_address into a canonical address function
-  Adjust address for RVA with XLEN
-  Split pm_enabled into pm_mask_enabled and pm_base_enabled
-  Replace array of pm tcg globals with one scalar tcg global
-  Split and change patch sequence
-
-v2:
-  Split out vill from vtype
-  Remove context switch when xlen changes at exception
-  Use XL instead of OL in many places
-  Use pointer masking and XLEN for vector address
-  Define an common fuction to calculate address for ld
-
-
-LIU Zhiwei (22):
-  target/riscv: Adjust pmpcfg access with mxl
-  target/riscv: Don't save pc when exception return
-  target/riscv: Sign extend link reg for jal and jalr
-  target/riscv: Sign extend pc for different XLEN
-  target/riscv: Create xl field in env
-  target/riscv: Ignore the pc bits above XLEN
-  target/riscv: Extend pc for runtime pc write
-  target/riscv: Use gdb xml according to max mxlen
-  target/riscv: Relax debug check for pm write
-  target/riscv: Adjust csr write mask with XLEN
-  target/riscv: Create current pm fields in env
-  target/riscv: Alloc tcg global for cur_pm[mask|base]
-  target/riscv: Calculate address according to XLEN
-  target/riscv: Split pm_enabled into mask and base
-  target/riscv: Split out the vill from vtype
-  target/riscv: Adjust vsetvl according to XLEN
-  target/riscv: Remove VILL field in VTYPE
-  target/riscv: Fix check range for first fault only
-  target/riscv: Adjust vector address with mask
-  target/riscv: Adjust scalar reg in vector with XLEN
-  target/riscv: Enable uxl field write
-  target/riscv: Relax UXL field for debugging
-
- target/riscv/cpu.c                            | 32 +++++--
- target/riscv/cpu.h                            | 45 ++++++++-
- target/riscv/cpu_helper.c                     | 94 +++++++++----------
- target/riscv/csr.c                            | 74 +++++++++++++--
- target/riscv/gdbstub.c                        | 71 ++++++++++----
- target/riscv/helper.h                         |  4 +-
- .../riscv/insn_trans/trans_privileged.c.inc   |  9 +-
- target/riscv/insn_trans/trans_rva.c.inc       |  9 +-
- target/riscv/insn_trans/trans_rvd.c.inc       | 19 +---
- target/riscv/insn_trans/trans_rvf.c.inc       | 19 +---
- target/riscv/insn_trans/trans_rvi.c.inc       | 39 +++-----
- target/riscv/insn_trans/trans_rvv.c.inc       |  6 +-
- target/riscv/machine.c                        | 16 +++-
- target/riscv/op_helper.c                      |  7 +-
- target/riscv/pmp.c                            | 12 +--
- target/riscv/translate.c                      | 90 +++++++++---------
- target/riscv/vector_helper.c                  | 39 +++++---
- 17 files changed, 355 insertions(+), 230 deletions(-)
-
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index adb3d4381d..e7578f3e0f 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -1493,9 +1493,23 @@ static RISCVException write_mseccfg(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static bool check_pmp_reg_index(CPURISCVState *env, uint32_t reg_index)
++{
++    /* TODO: RV128 restriction check */
++    if ((reg_index & 1) && (riscv_cpu_mxl(env) == MXL_RV64)) {
++        return false;
++    }
++    return true;
++}
++
+ static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
+                                   target_ulong *val)
+ {
++    uint32_t reg_index = csrno - CSR_PMPCFG0;
++
++    if (!check_pmp_reg_index(env, reg_index)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
+     *val = pmpcfg_csr_read(env, csrno - CSR_PMPCFG0);
+     return RISCV_EXCP_NONE;
+ }
+@@ -1503,6 +1517,11 @@ static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
+ static RISCVException write_pmpcfg(CPURISCVState *env, int csrno,
+                                    target_ulong val)
+ {
++    uint32_t reg_index = csrno - CSR_PMPCFG0;
++
++    if (!check_pmp_reg_index(env, reg_index)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
+     pmpcfg_csr_write(env, csrno - CSR_PMPCFG0, val);
+     return RISCV_EXCP_NONE;
+ }
+diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+index 54abf42583..81b61bb65c 100644
+--- a/target/riscv/pmp.c
++++ b/target/riscv/pmp.c
+@@ -463,16 +463,11 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
+ {
+     int i;
+     uint8_t cfg_val;
++    int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
+ 
+     trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
+ 
+-    if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
+-        qemu_log_mask(LOG_GUEST_ERROR,
+-                      "ignoring pmpcfg write - incorrect address\n");
+-        return;
+-    }
+-
+-    for (i = 0; i < sizeof(target_ulong); i++) {
++    for (i = 0; i < pmpcfg_nums; i++) {
+         cfg_val = (val >> 8 * i)  & 0xff;
+         pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
+     }
+@@ -490,8 +485,9 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
+     int i;
+     target_ulong cfg_val = 0;
+     target_ulong val = 0;
++    int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
+ 
+-    for (i = 0; i < sizeof(target_ulong); i++) {
++    for (i = 0; i < pmpcfg_nums; i++) {
+         val = pmp_read_cfg(env, (reg_index * 4) + i);
+         cfg_val |= (val << (i * 8));
+     }
 -- 
 2.25.1
 
