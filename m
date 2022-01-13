@@ -1,21 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n7yWN-0006Wg-8R
-	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:43:59 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:33484)
+	id 1n7yWt-0006zH-N3
+	for mharc-qemu-riscv@gnu.org; Thu, 13 Jan 2022 06:44:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:33576)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7yWL-0006Q4-FR; Thu, 13 Jan 2022 06:43:57 -0500
-Received: from out28-122.mail.aliyun.com ([115.124.28.122]:56299)
+ id 1n7yWj-0006vU-K8; Thu, 13 Jan 2022 06:44:21 -0500
+Received: from out28-124.mail.aliyun.com ([115.124.28.124]:33231)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1n7yWF-0003NN-QG; Thu, 13 Jan 2022 06:43:57 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07909417|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.292496-0.000508526-0.706996;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.Mb1OaKW_1642074222; 
+ id 1n7yWg-0003PQ-MH; Thu, 13 Jan 2022 06:44:21 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436366|-1; CH=green;
+ DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0231685-0.000144035-0.976687;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047199; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.Mb1b6fQ_1642074253; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.Mb1OaKW_1642074222)
- by smtp.aliyun-inc.com(10.147.40.44); Thu, 13 Jan 2022 19:43:43 +0800
+ fp:SMTPD_---.Mb1b6fQ_1642074253)
+ by smtp.aliyun-inc.com(10.147.44.118);
+ Thu, 13 Jan 2022 19:44:14 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -23,16 +25,16 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v6 07/22] target/riscv: Extend pc for runtime pc write
-Date: Thu, 13 Jan 2022 19:39:49 +0800
-Message-Id: <20220113114004.286796-8-zhiwei_liu@c-sky.com>
+Subject: [PATCH v6 08/22] target/riscv: Use gdb xml according to max mxlen
+Date: Thu, 13 Jan 2022 19:39:50 +0800
+Message-Id: <20220113114004.286796-9-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
 References: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.122; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-122.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.124; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-124.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -51,66 +53,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Jan 2022 11:43:57 -0000
-
-In some cases, we must restore the guest PC to the address of the start of
-the TB, such as when the instruction counter hits zero. So extend pc register
-according to current xlen for these cases.
+X-List-Received-Date: Thu, 13 Jan 2022 11:44:29 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 22 +++++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
+ target/riscv/cpu.c     |  8 ++---
+ target/riscv/gdbstub.c | 71 +++++++++++++++++++++++++++++++-----------
+ 2 files changed, 55 insertions(+), 24 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 54c1cf8ec5..db16aaf7c9 100644
+index db16aaf7c9..a21287253a 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -341,7 +341,12 @@ static void riscv_cpu_set_pc(CPUState *cs, vaddr value)
+@@ -446,6 +446,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     RISCVCPU *cpu = RISCV_CPU(dev);
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
++    CPUClass *cc = CPU_CLASS(mcc);
+     int priv_version = 0;
+     Error *local_err = NULL;
+ 
+@@ -496,11 +497,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     switch (env->misa_mxl_max) {
+ #ifdef TARGET_RISCV64
+     case MXL_RV64:
++        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+         break;
+     case MXL_RV128:
+         break;
+ #endif
+     case MXL_RV32:
++        cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+         break;
+     default:
+         g_assert_not_reached();
+@@ -772,11 +775,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     cc->gdb_read_register = riscv_cpu_gdb_read_register;
+     cc->gdb_write_register = riscv_cpu_gdb_write_register;
+     cc->gdb_num_core_regs = 33;
+-#if defined(TARGET_RISCV32)
+-    cc->gdb_core_xml_file = "riscv-32bit-cpu.xml";
+-#elif defined(TARGET_RISCV64)
+-    cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+-#endif
+     cc->gdb_stop_before_watchpoint = true;
+     cc->disas_set_info = riscv_cpu_disas_set_info;
+ #ifndef CONFIG_USER_ONLY
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index a5429b92d4..f531a74c2f 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -50,11 +50,23 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
  {
      RISCVCPU *cpu = RISCV_CPU(cs);
      CPURISCVState *env = &cpu->env;
--    env->pc = value;
-+
-+    if (env->xl == MXL_RV32) {
-+        env->pc = (int32_t)value;
-+    } else {
-+        env->pc = value;
-+    }
- }
++    target_ulong tmp;
  
- static void riscv_cpu_synchronize_from_tb(CPUState *cs,
-@@ -349,7 +354,13 @@ static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+     if (n < 32) {
+-        return gdb_get_regl(mem_buf, env->gpr[n]);
++        tmp = env->gpr[n];
+     } else if (n == 32) {
+-        return gdb_get_regl(mem_buf, env->pc);
++        tmp = env->pc;
++    } else {
++        return 0;
++    }
++
++    switch (env->misa_mxl_max) {
++    case MXL_RV32:
++        return gdb_get_reg32(mem_buf, tmp);
++    case MXL_RV64:
++        return gdb_get_reg64(mem_buf, tmp);
++    default:
++        g_assert_not_reached();
+     }
+     return 0;
+ }
+@@ -63,18 +75,32 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
  {
      RISCVCPU *cpu = RISCV_CPU(cs);
      CPURISCVState *env = &cpu->env;
--    env->pc = tb->pc;
-+    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
+-
+-    if (n == 0) {
+-        /* discard writes to x0 */
+-        return sizeof(target_ulong);
+-    } else if (n < 32) {
+-        env->gpr[n] = ldtul_p(mem_buf);
+-        return sizeof(target_ulong);
++    int length = 0;
++    target_ulong tmp;
 +
-+    if (xl == MXL_RV32) {
-+        env->pc = (int32_t)tb->pc;
-+    } else {
-+        env->pc = tb->pc;
++    switch (env->misa_mxl_max) {
++    case MXL_RV32:
++        tmp = (int32_t)ldl_p(mem_buf);
++        length = 4;
++        break;
++    case MXL_RV64:
++        if (env->xl < MXL_RV64) {
++            tmp = (int32_t)ldq_p(mem_buf);
++        } else {
++            tmp = ldq_p(mem_buf);
++        }
++        length = 8;
++        break;
++    default:
++        g_assert_not_reached();
 +    }
++    if (n > 0 && n < 32) {
++        env->gpr[n] = tmp;
+     } else if (n == 32) {
+-        env->pc = ldtul_p(mem_buf);
+-        return sizeof(target_ulong);
++        env->pc = tmp;
+     }
+-    return 0;
++
++    return length;
  }
  
- static bool riscv_cpu_has_work(CPUState *cs)
-@@ -370,7 +381,12 @@ static bool riscv_cpu_has_work(CPUState *cs)
- void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
-                           target_ulong *data)
- {
--    env->pc = data[0];
-+    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
-+    if (xl == MXL_RV32) {
-+        env->pc = (int32_t)data[0];
-+    } else {
-+        env->pc = data[0];
+ static int riscv_gdb_get_fpu(CPURISCVState *env, GByteArray *buf, int n)
+@@ -387,13 +413,20 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+                                                               cs->gdb_num_regs),
+                                  "riscv-vector.xml", 0);
+     }
+-#if defined(TARGET_RISCV32)
+-    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+-                             1, "riscv-32bit-virtual.xml", 0);
+-#elif defined(TARGET_RISCV64)
+-    gdb_register_coprocessor(cs, riscv_gdb_get_virtual, riscv_gdb_set_virtual,
+-                             1, "riscv-64bit-virtual.xml", 0);
+-#endif
++    switch (env->misa_mxl_max) {
++    case MXL_RV32:
++        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
++                                 riscv_gdb_set_virtual,
++                                 1, "riscv-32bit-virtual.xml", 0);
++        break;
++    case MXL_RV64:
++        gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
++                                 riscv_gdb_set_virtual,
++                                 1, "riscv-64bit-virtual.xml", 0);
++        break;
++    default:
++        g_assert_not_reached();
 +    }
- }
  
- static void riscv_cpu_reset(DeviceState *dev)
+     gdb_register_coprocessor(cs, riscv_gdb_get_csr, riscv_gdb_set_csr,
+                              riscv_gen_dynamic_csr_xml(cs, cs->gdb_num_regs),
 -- 
 2.25.1
 
