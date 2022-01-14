@@ -1,54 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n8N71-0006C9-L1
-	for mharc-qemu-riscv@gnu.org; Fri, 14 Jan 2022 08:59:27 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45636)
+	id 1n8N9e-0000DV-Jz
+	for mharc-qemu-riscv@gnu.org; Fri, 14 Jan 2022 09:02:10 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46272)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n8N70-00066O-8s
- for qemu-riscv@nongnu.org; Fri, 14 Jan 2022 08:59:26 -0500
-Received: from [2a00:1450:4864:20::333] (port=37790
- helo=mail-wm1-x333.google.com)
+ id 1n8N9b-000096-U3
+ for qemu-riscv@nongnu.org; Fri, 14 Jan 2022 09:02:08 -0500
+Received: from [2a00:1450:4864:20::42b] (port=47072
+ helo=mail-wr1-x42b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n8N6v-0001Ic-4v
- for qemu-riscv@nongnu.org; Fri, 14 Jan 2022 08:59:25 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- l12-20020a7bc34c000000b003467c58cbdfso7386460wmj.2
- for <qemu-riscv@nongnu.org>; Fri, 14 Jan 2022 05:59:20 -0800 (PST)
+ id 1n8N9X-0001cg-20
+ for qemu-riscv@nongnu.org; Fri, 14 Jan 2022 09:02:07 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id l25so15714954wrb.13
+ for <qemu-riscv@nongnu.org>; Fri, 14 Jan 2022 06:01:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KtUcHSmge2QSVydb9urxGo3M98dxQbThYoAYxDnm36E=;
- b=Dym374zo4ti3y8QiZG0O2IPqrX8ysSGDF27HwmVq/EF0d+G55u+BPfdOMXY4h3u8id
- YUoRhn24EEgEAu6HX3KdCDwdQ4psgQtCDyKRPNIJcwFuy0lJQHxTfFB+/EObriXMnU+u
- 5/htRmDYnpw3CUmMRUwH9I/R3x9oefV5N1TR2OZ4BVzeip/71x2ItUXkLdqutcjEMsus
- Nwg6mBsvaz+Vx1SeUSzPQEO4mVOnE/vUgMd0WmOtHa22Vxur7/cYOpYS3g0h72yNv8Ti
- Sci4ZQSsx1rHDPTECQ8XOeV/LKUp0zPWixK1Un5fG7UUxFu6or4psloOj31ghv+VSeDw
- ry0g==
+ :cc:content-transfer-encoding;
+ bh=m7eKgeijq1/hXsahomS3u6Px2JAXH2eEzgaGqsoUwus=;
+ b=cKt5X/no5IKD/sL9CA5O1uVFrDm5RcbtxsoNUnft/A8VjAfv8qGppgvXPCe1wsXsDp
+ gYqGgCU8swTB3FSl56maT/RvN/l/tq23DMwkN8wOtyGl209tzatipOtSkkMs3w+IuZoh
+ Vv2x0/jOO/M2/P0I+rMtZMbhvIiPbGe+jD6PZMIpcjo5u9xFheBxbv8rXQRV1dm//HXp
+ FDN4Pn11/5oCrsftJnbljtd20sOZotqKfvyRan8C1BvVP1wTgVM9Euee7LSA4oclcK1R
+ 8DhM7IkMbgSWqyXZAl1/Lk1br5FkzdHUbI9Xeh9N1NVdkkN5towcszJZBwyH25EyLv2P
+ Netg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=KtUcHSmge2QSVydb9urxGo3M98dxQbThYoAYxDnm36E=;
- b=oZSM9wyRvr0X7vmpPmjux+q707BpmIQTO4xkeBikLjlWtgjgQhYjGKaUDCb/9QgJ2B
- 6aTmbUeJ4VdwE7DtVRLZ4zCTBC66e2UT8jVn6XHI2Ov7mWt9TOs63js4KW17KEqlFYUu
- bs6XqoL07NpwulURkErQSp6lAhyvEJUT8ysWi46pbK0nSR3yMJu2pLAjHX5g+XbimfmH
- J9KUl2boDktiMR0GXtphsEAAwulJEzOP+DrCtOYLPPxc/Kq9MVtuCREQrLRT/W4JIAX4
- M1XnFvKP2U8WF/EtSf/tJNblKoWz2LqKNTjbuMFMPwkmc+9OMwPbG3vVeTj+nHtJf1d6
- qd3Q==
-X-Gm-Message-State: AOAM5300eiCVnTWRb20qYsxEZin8pb8H9kvbAiGfww4r89HH02D0M5Bq
- iRyceXFOsD3PuyGXvMmHJqsQ79Gg569xR/bZRYCmkw==
-X-Google-Smtp-Source: ABdhPJz5cx6wRliPErM59LhbOtL+E847KLJrSn24ULQlLlMaNDJoCadsQ4fgzxbDaem4qKl5PRNGCDZ5OCTocZ0G0Kk=
-X-Received: by 2002:a1c:7709:: with SMTP id t9mr4389001wmi.176.1642168759191; 
- Fri, 14 Jan 2022 05:59:19 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=m7eKgeijq1/hXsahomS3u6Px2JAXH2eEzgaGqsoUwus=;
+ b=UC+5XdEGIwLH6l4SW0AcU8c92UNU1enjo2k6WQoXszS/jeTnyfIB5eAOb4I7Jq6Ki6
+ xroUgOHLpOl6bJbGh+QzpSFjqWwrWdU5LhL3+/6fi2u3y0aqs8uYPUfbbXkyEVUswuW4
+ /0EAkj7LlN2trWY4O4SaWeA2rB8ptJT/EjWnOIPzMrIrP7JIbvI0o8RL0oxYkRm83eDw
+ /4yNplrQ4n4WZVNOtFxcF8Eey19CpCEivIcTes9zqEz4RTJO/dzhoUWZ9Kf9x+1Drvm/
+ oPTA/w5JStFxvT70jhIn2nWI1412zwfkbH9WYTZyJhQlxZDYG5FblE+LJMZyKFibLFCv
+ oo/Q==
+X-Gm-Message-State: AOAM530JzD5nFPhtzWsfv3z6QP+A+dOcY99CPza+rB1LTBTWdBY9i8mp
+ xlUzsG0ceisj8R/3gGMiGdklFVjLzX/YG++fnwsVzA==
+X-Google-Smtp-Source: ABdhPJyTly3m+RD6uBUKg19prRPVFkVAu4O0BQhjWwQ5hKIpWzN9htGMmzTsC5/hIjyAQkcqeRtSMjlT6eqHWfe6CXA=
+X-Received: by 2002:adf:d1e1:: with SMTP id g1mr8841746wrd.214.1642168879965; 
+ Fri, 14 Jan 2022 06:01:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20220114014059.23300-1-liweiwei@iscas.ac.cn>
- <20220114014059.23300-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220114014059.23300-4-liweiwei@iscas.ac.cn>
+ <20220114014059.23300-3-liweiwei@iscas.ac.cn>
+ <CAAhSdy0KEm=CeG4TCLdyf1i_aO-pKG9N5yYQU6_OLPE44fQi-g@mail.gmail.com>
+ <a67b7ae3-e741-487d-765a-9fc98e53ca95@iscas.ac.cn>
+In-Reply-To: <a67b7ae3-e741-487d-765a-9fc98e53ca95@iscas.ac.cn>
 From: Anup Patel <anup@brainfault.org>
-Date: Fri, 14 Jan 2022 19:29:07 +0530
-Message-ID: <CAAhSdy3pwbw8E7KnjQBguY83DbVYhX4LiLK2WBwb_A9KvyAivQ@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] target/riscv: add support for svpbmt extension
+Date: Fri, 14 Jan 2022 19:31:08 +0530
+Message-ID: <CAAhSdy0eQ+aX1G0sP8+Q6UQEefrj7Cz4tbyUvkvc4NXxhdFp9g@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] target/riscv: add support for svinval extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -56,10 +58,11 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  QEMU Developers <qemu-devel@nongnu.org>, wangjunqiang@iscas.ac.cn, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::333
+Content-Transfer-Encoding: quoted-printable
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42b
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::333;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x333.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::42b;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,108 +82,207 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jan 2022 13:59:26 -0000
+X-List-Received-Date: Fri, 14 Jan 2022 14:02:08 -0000
 
-On Fri, Jan 14, 2022 at 7:11 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Fri, Jan 14, 2022 at 7:24 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> It uses two PTE bits, but otherwise has no effect on QEMU, since QEMU is sequentially consistent and doesn't model PMAs currently
+> Thanks for your comments.
+>
+> =E5=9C=A8 2022/1/14 =E4=B8=8B=E5=8D=889:40, Anup Patel =E5=86=99=E9=81=93=
+:
+>
+> On Fri, Jan 14, 2022 at 7:11 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Tested-by: Heiko Stuebner <heiko@sntech.de>
 > ---
->  target/riscv/cpu.c        | 1 +
->  target/riscv/cpu.h        | 1 +
->  target/riscv/cpu_bits.h   | 3 +++
->  target/riscv/cpu_helper.c | 9 ++++++++-
->  4 files changed, 13 insertions(+), 1 deletion(-)
+>  target/riscv/cpu.c                          |  1 +
+>  target/riscv/cpu.h                          |  1 +
+>  target/riscv/insn32.decode                  |  7 ++
+>  target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
+>  target/riscv/translate.c                    |  1 +
+>  5 files changed, 85 insertions(+)
+>  create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 45ac98e06b..4f82bd00a3 100644
+> index ff6c86c85b..45ac98e06b 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -670,6 +670,7 @@ static Property riscv_cpu_properties[] = {
+> @@ -668,6 +668,7 @@ static Property riscv_cpu_properties[] =3D {
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
 >
->      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+> +    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
 >      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-> +    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
 >
 >      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
->      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c3d1845ca1..53f314c752 100644
+> index d3d17cde82..c3d1845ca1 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -329,6 +329,7 @@ struct RISCVCPU {
+> @@ -327,6 +327,7 @@ struct RISCVCPU {
+>          bool ext_counters;
+>          bool ext_ifencei;
 >          bool ext_icsr;
->          bool ext_svinval;
+> +        bool ext_svinval;
 >          bool ext_svnapot;
-> +        bool ext_svpbmt;
 >          bool ext_zfh;
 >          bool ext_zfhmin;
+> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+> index 5bbedc254c..7a0351fde2 100644
+> --- a/target/riscv/insn32.decode
+> +++ b/target/riscv/insn32.decode
+> @@ -809,3 +809,10 @@ fcvt_l_h   1100010  00010 ..... ... ..... 1010011 @r=
+2_rm
+>  fcvt_lu_h  1100010  00011 ..... ... ..... 1010011 @r2_rm
+>  fcvt_h_l   1101010  00010 ..... ... ..... 1010011 @r2_rm
+>  fcvt_h_lu  1101010  00011 ..... ... ..... 1010011 @r2_rm
+> +
+> +# *** Svinval Standard Extension ***
+> +sinval_vma        0001011 ..... ..... 000 00000 1110011 @sfence_vma
+> +sfence_w_inval    0001100 00000 00000 000 00000 1110011
+> +sfence_inval_ir   0001100 00001 00000 000 00000 1110011
+> +hinval_vvma       0011011 ..... ..... 000 00000 1110011 @hfence_vvma
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index bc23e3b523..ee294c1d0b 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -486,7 +486,10 @@ typedef enum {
->  #define PTE_A               0x040 /* Accessed */
->  #define PTE_D               0x080 /* Dirty */
->  #define PTE_SOFT            0x300 /* Reserved for Software */
-> +#define PTE_RSVD            0x1FC0000000000000 /* Reserved for future use */
-> +#define PTE_PBMT            0x6000000000000000 /* Page-based memory types */
->  #define PTE_N               0x8000000000000000 /* NAPOT translation */
-> +#define PTE_ATTR            0xFFC0000000000000 /* All attributes bits */
+> s/0011011/0010011/
 >
->  /* Page table PPN shift amount */
->  #define PTE_PPN_SHIFT       10
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 58ab85bca3..f90766e026 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -619,16 +619,23 @@ restart:
->              return TRANSLATE_FAIL;
->          }
+> +hinval_gvma       0111011 ..... ..... 000 00000 1110011 @hfence_gvma
 >
-> -        hwaddr ppn = (pte & ~(target_ulong)PTE_N) >> PTE_PPN_SHIFT;
-> +        hwaddr ppn = (pte & ~(target_ulong)PTE_ATTR) >> PTE_PPN_SHIFT;
+> s/0111011/0110011/
 >
->          RISCVCPU *cpu = env_archcpu(env);
->          if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
->              return TRANSLATE_FAIL;
-> +        } else if (!cpu->cfg.ext_svpbmt && (pte & PTE_PBMT)) {
-> +            return TRANSLATE_FAIL;
-> +        } else if (pte & PTE_RSVD) {
-> +            return TRANSLATE_FAIL;
->          } else if (!(pte & PTE_V)) {
->              /* Invalid PTE */
->              return TRANSLATE_FAIL;
->          } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
->              /* Inner PTE, continue walking */
-> +            if (pte & (PTE_D | PTE_A | PTE_U | PTE_N | PTE_PBMT)) {
-> +                return TRANSLATE_FAIL;
-> +            }
-
-I think you should add a patch before PATCH1 to add following:
-
-if (pte & (PTE_D | PTE_A | PTE_U)) {
-    return TRANSLATE_FAIL;
-}
-
-The current PATCH1 should add PTE_N to the comparison and
-this patch can add PTE_PBMT to the comparison.
-
->              base = ppn << PGSHIFT;
->          } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
->              /* Reserved leaf PTE flags: PTE_W */
-> --
-> 2.17.1
+> Sorry. I didn't find the encodings for svinval instructions from the spec=
+. So I get them from  spike (https://github.com/riscv-software-src/riscv-is=
+a-sim/blob/master/riscv/encoding.h) which are as follows:
 >
+> #define MATCH_HINVAL_VVMA 0x36000073
+> #define MASK_HINVAL_VVMA 0xfe007fff
+> #define MATCH_HINVAL_GVMA 0x76000073
+> #define MASK_HINVAL_GVMA 0xfe007fff
+> Are they not the latest encodings?
 
-Apart from the minor comment above, it looks good to me.
+The code in Spike seems to be buggy but that's a separate issue.
 
-Reviewed-by: Anup Patel <anup@brainfault.org>
+Refer, page 138 of
+https://github.com/riscv/riscv-isa-manual/releases/download/draft-20220110-=
+eae4f00/riscv-privileged.pdf
 
 Regards,
 Anup
+
+>
+> diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/i=
+nsn_trans/trans_svinval.c.inc
+> new file mode 100644
+> index 0000000000..1dde665661
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_svinval.c.inc
+> @@ -0,0 +1,75 @@
+> +/*
+> + * RISC-V translation routines for the Svinval Standard Instruction Set.
+> + *
+> + * Copyright (c) 2020-2021 PLCT lab
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License=
+ for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License alo=
+ng with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#define REQUIRE_SVINVAL(ctx) do {                    \
+> +    if (!RISCV_CPU(ctx->cs)->cfg.ext_svinval) {      \
+> +        return false;                                \
+> +    }                                                \
+> +} while (0)
+> +
+> +static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
+> +{
+> +    REQUIRE_SVINVAL(ctx);
+> +    /* Do the same as sfence.vma currently */
+> +    REQUIRE_EXT(ctx, RVS);
+> +#ifndef CONFIG_USER_ONLY
+> +    gen_helper_tlb_flush(cpu_env);
+> +    return true;
+> +#endif
+> +    return false;
+> +}
+> +
+> +static bool trans_sfence_w_inval(DisasContext *ctx, arg_sfence_w_inval *=
+a)
+> +{
+> +    REQUIRE_SVINVAL(ctx);
+> +    REQUIRE_EXT(ctx, RVS);
+> +    /* Do nothing currently */
+> +    return true;
+> +}
+> +
+> +static bool trans_sfence_inval_ir(DisasContext *ctx, arg_sfence_inval_ir=
+ *a)
+> +{
+> +    REQUIRE_SVINVAL(ctx);
+> +    REQUIRE_EXT(ctx, RVS);
+> +    /* Do nothing currently */
+> +    return true;
+> +}
+> +
+> +static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
+> +{
+> +    REQUIRE_SVINVAL(ctx);
+> +    /* Do the same as hfence.vvma currently */
+> +    REQUIRE_EXT(ctx, RVH);
+> +#ifndef CONFIG_USER_ONLY
+> +    gen_helper_hyp_tlb_flush(cpu_env);
+> +    return true;
+> +#endif
+> +    return false;
+> +}
+> +
+> +static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
+> +{
+> +    REQUIRE_SVINVAL(ctx);
+> +    /* Do the same as hfence.gvma currently */
+> +    REQUIRE_EXT(ctx, RVH);
+> +#ifndef CONFIG_USER_ONLY
+> +    gen_helper_hyp_gvma_tlb_flush(cpu_env);
+> +    return true;
+> +#endif
+> +    return false;
+> +}
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 615048ec87..4e5a9660a4 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -838,6 +838,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, t=
+arget_ulong pc)
+>  #include "insn_trans/trans_rvb.c.inc"
+>  #include "insn_trans/trans_rvzfh.c.inc"
+>  #include "insn_trans/trans_privileged.c.inc"
+> +#include "insn_trans/trans_svinval.c.inc"
+>
+>  /* Include the auto-generated decoder for 16 bit insn */
+>  #include "decode-insn16.c.inc"
+> --
+> 2.17.1
+>
+>
+> Apart from the minor mistake above, it looks good to me.
+>
+> Reviewed-by: Anup Patel <anup@brainfault.org>
+>
+> Regards,
+> Anup
+>
+>
+> Regards,
+> Weiwei Li
 
