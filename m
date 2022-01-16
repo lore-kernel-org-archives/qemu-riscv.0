@@ -1,45 +1,42 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n8vnl-0003VH-1V
-	for mharc-qemu-riscv@gnu.org; Sat, 15 Jan 2022 22:01:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53250)
+	id 1n8vnm-0003YZ-7s
+	for mharc-qemu-riscv@gnu.org; Sat, 15 Jan 2022 22:01:54 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53244)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n8vnd-0003RK-1p; Sat, 15 Jan 2022 22:01:45 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:56476 helo=cstnet.cn)
+ id 1n8vnd-0003RG-0W; Sat, 15 Jan 2022 22:01:45 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:56466 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n8vnL-0002lJ-AB; Sat, 15 Jan 2022 22:01:31 -0500
+ id 1n8vnJ-0002lG-Bd; Sat, 15 Jan 2022 22:01:28 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABXXVluiuNhImeeBQ--.54727S4;
- Sun, 16 Jan 2022 11:01:04 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABXXVluiuNhImeeBQ--.54727S2;
+ Sun, 16 Jan 2022 11:01:03 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: anup@brainfault.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v4 2/4] target/riscv: add support for svnapot extension
-Date: Sun, 16 Jan 2022 10:59:23 +0800
-Message-Id: <20220116025925.29973-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v4 0/4] support subsets of virtual memory extension
+Date: Sun, 16 Jan 2022 10:59:21 +0800
+Message-Id: <20220116025925.29973-1-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220116025925.29973-1-liweiwei@iscas.ac.cn>
-References: <20220116025925.29973-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowABXXVluiuNhImeeBQ--.54727S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxCr4DAw4fXF43XF1xWFyrXrb_yoW5Zw4fpr
- Z8G39FkrZ7JFW3Aa1fKF1UJw1rGw4Y93yF9w4xZrs7Gw4rJrW5W3Wqkws09F45XFW8ZryY
- 9an8CF1Yyr4UZaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9G14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI48JMx
- C20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAF
- wI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20x
- vE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v2
- 0xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxV
- W8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjYiiDUUUUU==
+X-CM-TRANSID: rQCowABXXVluiuNhImeeBQ--.54727S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWfKryfZw4ftrykWr4fGrg_yoW8GFWUpF
+ 45K3yakFs8JayxXw1SqF1UJrW5Zw48ur47Jwn3Aw1kXa13ZrW5Jrnak39xCFyUXFy0grya
+ 9a1j9r1fua1UJrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUyK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0E
+ wIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E74
+ 80Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0
+ I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04
+ k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY
+ 1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,101 +61,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 16 Jan 2022 03:01:45 -0000
 
-- add PTE_N bit
-- add PTE_N bit check for inner PTE
-- update address translation to support 64KiB continuous region (napot_bits = 4)
+This patchset implements virtual memory related RISC-V extensions: Svnapot version 1.0, Svinval vesion 1.0, Svpbmt version 1.0. 
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/cpu.c        |  2 ++
- target/riscv/cpu.h        |  1 +
- target/riscv/cpu_bits.h   |  1 +
- target/riscv/cpu_helper.c | 22 +++++++++++++++++-----
- 4 files changed, 21 insertions(+), 5 deletions(-)
+Specification:
+https://github.com/riscv/virtual-memory/tree/main/specs
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9bc25d3055..ff6c86c85b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -668,6 +668,8 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
- 
-+    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-+
-     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 4d63086765..d3d17cde82 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -327,6 +327,7 @@ struct RISCVCPU {
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
-+        bool ext_svnapot;
-         bool ext_zfh;
-         bool ext_zfhmin;
- 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 5a6d49aa64..bc23e3b523 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -486,6 +486,7 @@ typedef enum {
- #define PTE_A               0x040 /* Accessed */
- #define PTE_D               0x080 /* Dirty */
- #define PTE_SOFT            0x300 /* Reserved for Software */
-+#define PTE_N               0x8000000000000000 /* NAPOT translation */
- 
- /* Page table PPN shift amount */
- #define PTE_PPN_SHIFT       10
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d84cde424d..832a2dd79c 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -619,14 +619,17 @@ restart:
-             return TRANSLATE_FAIL;
-         }
- 
--        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-+        hwaddr ppn = (pte & ~(target_ulong)PTE_N) >> PTE_PPN_SHIFT;
- 
--        if (!(pte & PTE_V)) {
-+        RISCVCPU *cpu = env_archcpu(env);
-+        if (!cpu->cfg.ext_svnapot && (pte & PTE_N)) {
-+            return TRANSLATE_FAIL;
-+        } else if (!(pte & PTE_V)) {
-             /* Invalid PTE */
-             return TRANSLATE_FAIL;
-         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
-             /* Inner PTE, continue walking */
--            if (pte & (PTE_D | PTE_A | PTE_U)) {
-+            if (pte & (PTE_D | PTE_A | PTE_U | PTE_N)) {
-                 return TRANSLATE_FAIL;
-             }
-             base = ppn << PGSHIFT;
-@@ -702,8 +705,17 @@ restart:
-             /* for superpage mappings, make a fake leaf PTE for the TLB's
-                benefit. */
-             target_ulong vpn = addr >> PGSHIFT;
--            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
--                        (addr & ~TARGET_PAGE_MASK);
-+
-+            int napot_bits = ((pte & PTE_N) ? (ctzl(ppn) + 1) : 0);
-+            if (((pte & PTE_N) && ((ppn == 0) || (i != (levels - 1)))) ||
-+                (napot_bits != 0 && napot_bits != 4)) {
-+                return TRANSLATE_FAIL;
-+            }
-+
-+            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
-+                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
-+                          (vpn & (((target_ulong)1 << ptshift) - 1))
-+                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
- 
-             /* set permissions on the TLB entry */
-             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-virtmem-upstream-v4
+
+To test this implementation, specify cpu argument with 'svinval=true,svnapot=true,svpbmt=true'.
+
+This implementation can pass the riscv-tests for rv64ssvnapot.
+
+v4:
+* fix encodings for hinval_vvma and hinval_gvma
+* partition inner PTE check into several steps added in first, second and fourth commits
+* improve commit messages to describe changes
+
+v3:
+* drop "x-" in exposed properties
+
+v2:
+* add extension check for svnapot and svpbmt
+
+Weiwei Li (4):
+  target/riscv: add PTE_A/PTE_D/PTE_U bits check for inner PTE
+  target/riscv: add support for svnapot extension
+  target/riscv: add support for svinval extension
+  target/riscv: add support for svpbmt extension
+
+ target/riscv/cpu.c                          |  4 ++
+ target/riscv/cpu.h                          |  3 +
+ target/riscv/cpu_bits.h                     |  4 ++
+ target/riscv/cpu_helper.c                   | 27 ++++++--
+ target/riscv/insn32.decode                  |  7 ++
+ target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 7 files changed, 117 insertions(+), 4 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
+
 -- 
 2.17.1
 
