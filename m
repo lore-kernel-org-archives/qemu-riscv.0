@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9aWc-0000ba-4k
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:30:54 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:52268)
+	id 1n9aXr-00017C-S8
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:32:11 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:52480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aWX-0000YG-Hu; Mon, 17 Jan 2022 17:30:50 -0500
-Received: from [2607:f8b0:4864:20::d31] (port=38474
- helo=mail-io1-xd31.google.com)
+ id 1n9aXo-00015K-GL; Mon, 17 Jan 2022 17:32:08 -0500
+Received: from [2607:f8b0:4864:20::d2b] (port=39701
+ helo=mail-io1-xd2b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aWV-0006Vp-8Z; Mon, 17 Jan 2022 17:30:49 -0500
-Received: by mail-io1-xd31.google.com with SMTP id w7so18127852ioj.5;
- Mon, 17 Jan 2022 14:30:46 -0800 (PST)
+ id 1n9aXn-0006fz-1T; Mon, 17 Jan 2022 17:32:08 -0500
+Received: by mail-io1-xd2b.google.com with SMTP id v6so23332060iom.6;
+ Mon, 17 Jan 2022 14:31:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mR+8I6s4kOmNe5sthdqXA9ByBR4CKg5jyeVgO73oWHA=;
- b=XNRWtk9OePh/4P9BAHTMyy4pv5ln5KkK6Th0Tk7xlN70yhjNlf//+rZqCZucWZIpB9
- qynLY8hc27dAIFq9xJCoAQVsobjFic3HQ9IgdCqDWMA3/4xu03xWR3feI5zlUt0gnb+U
- Ig5AZo8oWXpxNUdZW1zysed+Q2UL8uHG2ePK2zGVEYoIOLC01Rk34CZSwrdvoHQFkGdD
- K1BkTxL3JARfQsfxPiXUmj7bbkXNu6b1CHQpvUtLUnxkn+IkO6rbjSuMqYXpFHfCuNmt
- hV8wxifIz7G/6fFF+Jbw2yYUMa1R89P1Nos64ubD1hzr8wJGrchgNeQ+xDIhsJSAw/i2
- oMiw==
+ :cc; bh=EjNGB7poZCAU7Rpz1PZ+LxHLQL0hC/pyLbX9nOjSXPQ=;
+ b=UAmYyOLuq8DudE0GYlGeWdoPBLeXKjnfXHEUtgI2u/WmMPGxcDVoDtDgumQHu8RXjz
+ 5W/hdVXjSdlwbi+BVp0yAZJzpe/vYT6YQl1b92roJVFySlPPGJ2WiiSYsM+K7gQzZKHB
+ RaLCpnHVxytRYwNuoUcsDee2BfFWwm/uBg5CqjQY3G+ASU1yTP8z6NX8AMFGvOVeSJ5q
+ 42wciocrSw6xVh/M2Gd6knB3FxRBca4huTfVyYZTGS1k8bMDZkIxtGqClv3BoG9HYbse
+ xMV4rEL0aJd+GpSGF1VjK6K50UwVHBtY+TDP5W8c4s480EwnervhKwdtWKado4Q0u8Q5
+ 5zZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mR+8I6s4kOmNe5sthdqXA9ByBR4CKg5jyeVgO73oWHA=;
- b=6sDr/AaKsxaeGcu1BUbJKLgxwstP7S4fJSzYxnkRBBI+yn0oq3fUzl3EkDGos3q1/T
- cxP/ChwexuzoqxFAB9mg+i4nuctBk/l8s6UinDS+R3c2bLnOY1QfUgB2swvZTvYtPtFS
- SPMrSyduV6qjdpKORQqi2XkXimS5/yjpB5fOKxnRHc3jpfXa+s0EKNR4WIfnn32+hpMp
- 9Grehhfqc+fQOw6UmC5jSgfMryWRz6boZaxwzJMRyG4ZKcOyX5crAteHXr4IYmRceek+
- djPAzCirsg8AFMtsj6m1g+ljcGWqaV0Stw6wQffb9cvTx6brAKhp+vrymEWXUa/Tok4e
- F5CA==
-X-Gm-Message-State: AOAM532AA5quv1GhSZhqk3fSiPlAu3vJMDWaiZ6y1m4DDQYwpR664XV9
- TTN0fC0XUKpQ2W3FY83nXNck1eoUxmITZgp/lOg=
-X-Google-Smtp-Source: ABdhPJwUQkwTT9n9o2JqAYG13GBJN/yYQvYju9u9q8sycgg5hv8A+ydWM9KGNa3ahH/7iCOTrfykf9Lkf6vZ8BQ80oI=
-X-Received: by 2002:a02:a818:: with SMTP id f24mr10842065jaj.125.1642458645760; 
- Mon, 17 Jan 2022 14:30:45 -0800 (PST)
+ bh=EjNGB7poZCAU7Rpz1PZ+LxHLQL0hC/pyLbX9nOjSXPQ=;
+ b=HM6SAkoprZKiasofr4GSeZJaYU+Vk4ghsHlDizxOtjDlA+3vEz9rZnjw/xslbS2zJ4
+ 0rpteUES8mKAxcUrjgtZ/stm7OFIDpD3Br8Zoy9J4Tw2z/DfuRMdqSk7CWjXwbrNoqc8
+ cFaMuFzu9OjWtm2ksL634Ee2z+VsZaD4r5w2iLQsZ4IfOIkBAJqBtzDmawZUam4OlsVv
+ 0HJw7LgYEEp65NUswGLFEVbsYCXBayc5QgGP3nJOQUoOrKvrAbFYf42Zq49eBrG6Lo3C
+ EukXPZWEbTl+SeyQeXnlpCObZ+0lZ9c2JPu6uwqwGyBszpnFXrh1QeMY0dofH+RI/l6p
+ LIRw==
+X-Gm-Message-State: AOAM531BnHZY//mGxNHjaa5xhbGKukXE47KHE/96qLmi6QiVYU8h+5JH
+ jsHl7ygT6OGU3+Ip96R1iBJMOiJAG3LGX0Nf8PN9LJywsyVq8/Pj
+X-Google-Smtp-Source: ABdhPJzfkhn4l+ARKv22XfMz5uIERqlJnz32573iqYmeYHQwDqaQ2s/GOeg0m2k/R7okYcmgHhKotDUPvC6G2ZwEo5s=
+X-Received: by 2002:a02:6954:: with SMTP id e81mr10426556jac.63.1642458717341; 
+ Mon, 17 Jan 2022 14:31:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20211229023348.12606-1-frank.chang@sifive.com>
- <20211229023348.12606-5-frank.chang@sifive.com>
-In-Reply-To: <20211229023348.12606-5-frank.chang@sifive.com>
+ <20211229023348.12606-6-frank.chang@sifive.com>
+In-Reply-To: <20211229023348.12606-6-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Jan 2022 08:30:19 +1000
-Message-ID: <CAKmqyKNm1XxsiJ8u8Wg5jjcwqNpkoRUeLQoOgGv71CTVxbfTWQ@mail.gmail.com>
-Subject: Re: [PATCH 04/17] target/riscv: rvv-1.0: Add Zve64f support for vmulh
- variant insns
+Date: Tue, 18 Jan 2022 08:31:31 +1000
+Message-ID: <CAKmqyKPMRy+ZgS+qb0ixNc0ALvPs=CCfPv_RTq8_xsX6m8-zVQ@mail.gmail.com>
+Subject: Re: [PATCH 05/17] target/riscv: rvv-1.0: Add Zve64f support for
+ vsmul.vv and vsmul.vx insns
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -55,10 +55,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d31
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,16 +79,15 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2022 22:30:52 -0000
+X-List-Received-Date: Mon, 17 Jan 2022 22:32:08 -0000
 
-On Wed, Dec 29, 2021 at 12:36 PM <frank.chang@sifive.com> wrote:
+On Wed, Dec 29, 2021 at 12:37 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> All Zve* extensions support all vector integer instructions,
-> except that the vmulh integer multiply variants that return the
-> high word of the product (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx,
-> vmulhsu.vv, vmulhsu.vx) are not included for EEW=64 in Zve64*.
+> All Zve* extensions support all vector fixed-point arithmetic
+> instructions, except that vsmul.vv and vsmul.vx are not supported
+> for EEW=64 in Zve64*.
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
@@ -97,61 +96,47 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 39 +++++++++++++++++++++----
->  1 file changed, 33 insertions(+), 6 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++--
+>  1 file changed, 25 insertions(+), 2 deletions(-)
 >
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 820a3387db..658cfbe10e 100644
+> index 658cfbe10e..a1e403fe86 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1906,14 +1906,41 @@ GEN_OPIVX_TRANS(vmaxu_vx, opivx_check)
->  GEN_OPIVX_TRANS(vmax_vx,  opivx_check)
+> @@ -2121,8 +2121,31 @@ GEN_OPIVX_TRANS(vasub_vx,  opivx_check)
+>  GEN_OPIVX_TRANS(vasubu_vx,  opivx_check)
 >
->  /* Vector Single-Width Integer Multiply Instructions */
+>  /* Vector Single-Width Fractional Multiply with Rounding and Saturation */
+> -GEN_OPIVV_TRANS(vsmul_vv, opivv_check)
+> -GEN_OPIVX_TRANS(vsmul_vx,  opivx_check)
 > +
-> +static bool vmulh_vv_check(DisasContext *s, arg_rmrr *a)
+> +static bool vsmul_vv_check(DisasContext *s, arg_rmrr *a)
 > +{
 > +    /*
-> +     * All Zve* extensions support all vector integer instructions,
-> +     * except that the vmulh integer multiply variants
-> +     * that return the high word of the product
-> +     * (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx, vmulhsu.vv, vmulhsu.vx)
-> +     * are not included for EEW=64 in Zve64*. (Section 18.2)
+> +     * All Zve* extensions support all vector fixed-point arithmetic
+> +     * instructions, except that vsmul.vv and vsmul.vx are not supported
+> +     * for EEW=64 in Zve64*. (Section 18.2)
 > +     */
 > +    return opivv_check(s, a) &&
 > +           (!has_ext(s, RVV) && s->ext_zve64f ? s->sew != MO_64 : true);
 > +}
 > +
-> +static bool vmulh_vx_check(DisasContext *s, arg_rmrr *a)
+> +static bool vsmul_vx_check(DisasContext *s, arg_rmrr *a)
 > +{
 > +    /*
-> +     * All Zve* extensions support all vector integer instructions,
-> +     * except that the vmulh integer multiply variants
-> +     * that return the high word of the product
-> +     * (vmulh.vv, vmulh.vx, vmulhu.vv, vmulhu.vx, vmulhsu.vv, vmulhsu.vx)
-> +     * are not included for EEW=64 in Zve64*. (Section 18.2)
+> +     * All Zve* extensions support all vector fixed-point arithmetic
+> +     * instructions, except that vsmul.vv and vsmul.vx are not supported
+> +     * for EEW=64 in Zve64*. (Section 18.2)
 > +     */
 > +    return opivx_check(s, a) &&
 > +           (!has_ext(s, RVV) && s->ext_zve64f ? s->sew != MO_64 : true);
 > +}
 > +
->  GEN_OPIVV_GVEC_TRANS(vmul_vv,  mul)
-> -GEN_OPIVV_TRANS(vmulh_vv, opivv_check)
-> -GEN_OPIVV_TRANS(vmulhu_vv, opivv_check)
-> -GEN_OPIVV_TRANS(vmulhsu_vv, opivv_check)
-> +GEN_OPIVV_TRANS(vmulh_vv, vmulh_vv_check)
-> +GEN_OPIVV_TRANS(vmulhu_vv, vmulh_vv_check)
-> +GEN_OPIVV_TRANS(vmulhsu_vv, vmulh_vv_check)
->  GEN_OPIVX_GVEC_TRANS(vmul_vx,  muls)
-> -GEN_OPIVX_TRANS(vmulh_vx, opivx_check)
-> -GEN_OPIVX_TRANS(vmulhu_vx, opivx_check)
-> -GEN_OPIVX_TRANS(vmulhsu_vx, opivx_check)
-> +GEN_OPIVX_TRANS(vmulh_vx, vmulh_vx_check)
-> +GEN_OPIVX_TRANS(vmulhu_vx, vmulh_vx_check)
-> +GEN_OPIVX_TRANS(vmulhsu_vx, vmulh_vx_check)
+> +GEN_OPIVV_TRANS(vsmul_vv, vsmul_vv_check)
+> +GEN_OPIVX_TRANS(vsmul_vx,  vsmul_vx_check)
 >
->  /* Vector Integer Divide Instructions */
->  GEN_OPIVV_TRANS(vdivu_vv, opivv_check)
+>  /* Vector Single-Width Scaling Shift Instructions */
+>  GEN_OPIVV_TRANS(vssrl_vv, opivv_check)
 > --
 > 2.31.1
 >
