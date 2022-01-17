@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9S6L-0001iy-Kr
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 08:31:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38838)
+	id 1n9S6M-0001jM-0R
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 08:31:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38852)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9S5T-0001Me-K0
+ id 1n9S5T-0001Mj-NZ
  for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 08:30:20 -0500
-Received: from [2607:f8b0:4864:20::62f] (port=40564
- helo=mail-pl1-x62f.google.com)
+Received: from [2607:f8b0:4864:20::62e] (port=43928
+ helo=mail-pl1-x62e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9S5N-0000pj-Rx
- for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 08:30:16 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id b3so12158004plc.7
- for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 05:30:04 -0800 (PST)
+ id 1n9S5N-0000w3-Qy
+ for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 08:30:15 -0500
+Received: by mail-pl1-x62e.google.com with SMTP id e19so21208484plc.10
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 05:30:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=3nsDPgbxXT0RftBOVWKLNr91iXQOw4zty79cR5/Fa/E=;
- b=JWZHJ9gi2nRZXcv1ifovMY+zJwhn1Lt2FznCkiXnpk+1OkZQlQuxe8EqC3zYTJXmea
- ok9O2diCD51GagOieuT/7WLTRo8UxV1lEFLUbuGrOWqcWKUPUC3aXoaQd+mqQ4YLs3Ea
- 0MfWz8vEPSRAZ74dKF5LZGIIeg0ry+8mGyNX5+cGTQQw3uKm9ZfSx/2nGVbUPimZ6XQt
- 4Ilm95wq23UiNWP0jtuMKQ2nHN4+tpMSddufAeinvWvNMhCWWdcXqqYAAETX1XkS8bPa
- uerAzAe6LpKaalyHTTQlZv7lMc0iXgxBBA12HQ4qqS0gfwZgcesFxd4ny5sY41Tv3JAZ
- sCnw==
+ bh=KTfk3DmbikzaVS0b0VI0kpffQBFqqD7zkkReLT20zDw=;
+ b=rQGkqXsHmexJOwR4o1Hlk28gvsqB3R1ZSWWZ4yjHWbAe8Y1vA2ge4FSfKgGf0D+Nlc
+ jcWJr7xJ6aJL6YIFMlWiY6Qa4YYXP/kHHL09FcZJCpDka/iB6kn/WIH3kK3hGk7bmYAy
+ NMT1tkYu34Rg/Q/lF5+NGimo2/0Arw2EAnoWRjxLeeH5j8MzLD6WsQZcdZRbSPBilJ9v
+ YnCPTRG/f/2Mt69tufJIVYptlrAwEFOjDSUArk766z8nOvUwC5SooX/Kc4fs5AjDmKp3
+ LDNynZYOUa2neT3T94mCY7cLh7r8wX+fRoPBZuenbNqL43IXg57yyHn/COq7DWJHKUFR
+ tFYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=3nsDPgbxXT0RftBOVWKLNr91iXQOw4zty79cR5/Fa/E=;
- b=ghUMWIPVfkBL1JZO1sS9Hx4b1XY4gWV5P1OLvvHMJcSKUkkmD688SXsIwgqI62WhkB
- tNOHIJJn4rG9Dy8yMLqxO4UUwSfh4QwoxPy1rRuoaYlJ7Bf6RM+mvWNy9DxWq19BfN7L
- bOVOPzMTxaBqsrUuDFY9YRzJVpmuNdZ6YYeLEK07Wza+wEEdBsLLvwQRwhWt0acPZ4T1
- fUEo4Q2hC9YYrC3ivuketPwo9X9jXt4Zc5BWWZSItAQtl/9bMHNbisr0X422yNagBTLr
- Vw3WGUKhXkMOwZEkrrS8MM7cQ0vyUfF3+SNe62LnOM21Qz90Ib2d3rMaDJKephoQbAdP
- CqbA==
-X-Gm-Message-State: AOAM533YmxrKiIZhiBk+/Gy34v0wA3kf5c91sZEvF82oMyXkhJMrYVOw
- FV1nb21Ze6Lf2/sbl0r14w5sBA==
-X-Google-Smtp-Source: ABdhPJwV+iOf/oPXQi289mF3/UHgVUEo4hLskHAqB4SjYNYnHS+YjWsaPsuBZ2XFvsCRbSGz07zQ9A==
-X-Received: by 2002:a17:903:11c3:b0:14a:58c4:f34c with SMTP id
- q3-20020a17090311c300b0014a58c4f34cmr22119295plh.151.1642426203487; 
- Mon, 17 Jan 2022 05:30:03 -0800 (PST)
+ bh=KTfk3DmbikzaVS0b0VI0kpffQBFqqD7zkkReLT20zDw=;
+ b=HXOKhBSTrdmWpyH1Q3tYoR28C46U8OmaYpeqXwbtM1RhamIuK3zFDjd7YLwH7W7hU/
+ OGMeqTMDc3Co11iSXlQatpClOg/uSZEPK0O4rP5uEn39emoJKRpvjzAy5B9plG1gO3Ss
+ c9vDVUBhl5beS8aiSuOuGsTjJdmWXRi1qjkneM3tL4H/hTkdCeS9wp2Dh+rs2DbmgEbY
+ fujRGBqdK6JJIwNjuRa0PxW6cl6/RFcoDDxxsq2mHWEVtWE63xMO8VeC9e9Aj54vp7SP
+ iYPcFxTguxoNT4Bech8FcE2duIPb8jh4q2aHitfO9iDiUxtfmzEEhsb/XmqzSfGzCLnJ
+ 30xg==
+X-Gm-Message-State: AOAM530Fcu0sNUtMH5b1nMK02TJzuUj7RRZ4uXoqDkkQqVSbYH7LWHHt
+ uIOeV/pNUPX6hJXwSQJhs7O/Zg==
+X-Google-Smtp-Source: ABdhPJymj2i9SN59Sc9E0i5atMX94LWenCmEGABR2jw73jU75H/iBAHBfb38zsEWQi4RRh3tSyJwcg==
+X-Received: by 2002:a17:902:b204:b0:149:d1ca:4e57 with SMTP id
+ t4-20020a170902b20400b00149d1ca4e57mr22875819plr.126.1642426208629; 
+ Mon, 17 Jan 2022 05:30:08 -0800 (PST)
 Received: from localhost.localdomain ([122.179.70.109])
- by smtp.gmail.com with ESMTPSA id 7sm9532607pfm.25.2022.01.17.05.29.59
+ by smtp.gmail.com with ESMTPSA id 7sm9532607pfm.25.2022.01.17.05.30.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Jan 2022 05:30:02 -0800 (PST)
+ Mon, 17 Jan 2022 05:30:07 -0800 (PST)
 From: Anup Patel <anup@brainfault.org>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -53,20 +53,20 @@ To: Peter Maydell <peter.maydell@linaro.org>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>
 Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
  Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v7 12/23] target/riscv: Implement AIA interrupt filtering CSRs
-Date: Mon, 17 Jan 2022 18:58:15 +0530
-Message-Id: <20220117132826.426418-13-anup@brainfault.org>
+ qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v7 13/23] target/riscv: Implement AIA mtopi, stopi,
+ and vstopi CSRs
+Date: Mon, 17 Jan 2022 18:58:16 +0530
+Message-Id: <20220117132826.426418-14-anup@brainfault.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220117132826.426418-1-anup@brainfault.org>
 References: <20220117132826.426418-1-anup@brainfault.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62f
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62e
  (failed)
-Received-SPF: none client-ip=2607:f8b0:4864:20::62f;
- envelope-from=anup@brainfault.org; helo=mail-pl1-x62f.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=anup@brainfault.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -90,87 +90,225 @@ X-List-Received-Date: Mon, 17 Jan 2022 13:30:24 -0000
 
 From: Anup Patel <anup.patel@wdc.com>
 
-The AIA specificaiton adds interrupt filtering support for M-mode
-and HS-mode. Using AIA interrupt filtering M-mode and H-mode can
-take local interrupt 13 or above and selectively inject same local
-interrupt to lower privilege modes.
-
-At the moment, we don't have any local interrupts above 12 so we
-add dummy implementation (i.e. read zero and ignore write) of AIA
-interrupt filtering CSRs.
+The AIA specification introduces new [m|s|vs]topi CSRs for
+reporting pending local IRQ number and associated IRQ priority.
 
 Signed-off-by: Anup Patel <anup.patel@wdc.com>
 Signed-off-by: Anup Patel <anup@brainfault.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/csr.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ target/riscv/csr.c | 156 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 156 insertions(+)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index f0d8cb097b..d018cbae72 100644
+index d018cbae72..e92a1915a8 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -154,6 +154,15 @@ static RISCVException any32(CPURISCVState *env, int csrno)
- 
+@@ -190,6 +190,15 @@ static int smode32(CPURISCVState *env, int csrno)
+     return smode(env, csrno);
  }
  
-+static int aia_any(CPURISCVState *env, int csrno)
++static int aia_smode(CPURISCVState *env, int csrno)
 +{
 +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
 +        return RISCV_EXCP_ILLEGAL_INST;
 +    }
 +
-+    return any(env, csrno);
++    return smode(env, csrno);
 +}
 +
- static int aia_any32(CPURISCVState *env, int csrno)
+ static int aia_smode32(CPURISCVState *env, int csrno)
  {
      if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-@@ -553,6 +562,12 @@ static RISCVException read_zero(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
+@@ -502,6 +511,8 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+ #define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP))
+ #define HS_MODE_INTERRUPTS ((uint64_t)(MIP_SGEIP | VS_MODE_INTERRUPTS))
+ 
++#define VSTOPI_NUM_SRCS 5
++
+ static const uint64_t delegable_ints = S_MODE_INTERRUPTS |
+                                            VS_MODE_INTERRUPTS;
+ static const uint64_t vs_delegable_ints = VS_MODE_INTERRUPTS;
+@@ -879,6 +890,28 @@ static RISCVException rmw_mieh(CPURISCVState *env, int csrno,
+     return ret;
  }
  
-+static RISCVException write_ignore(CPURISCVState *env, int csrno,
-+                                   target_ulong val)
++static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
 +{
++    int irq;
++    uint8_t iprio;
++
++    irq = riscv_cpu_mirq_pending(env);
++    if (irq <= 0 || irq > 63) {
++       *val = 0;
++    } else {
++       iprio = env->miprio[irq];
++       if (!iprio) {
++           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_M) {
++               iprio = IPRIO_MMAXIPRIO;
++           }
++       }
++       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
++       *val |= iprio;
++    }
++
 +    return RISCV_EXCP_NONE;
 +}
 +
- static RISCVException read_mhartid(CPURISCVState *env, int csrno,
-                                    target_ulong *val)
+ static RISCVException read_mtvec(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
  {
-@@ -2524,9 +2539,15 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+@@ -1448,6 +1481,120 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static int read_vstopi(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    int irq, ret;
++    target_ulong topei;
++    uint64_t vseip, vsgein;
++    uint32_t iid, iprio, hviid, hviprio, gein;
++    uint32_t s, scount = 0, siid[VSTOPI_NUM_SRCS], siprio[VSTOPI_NUM_SRCS];
++
++    gein = get_field(env->hstatus, HSTATUS_VGEIN);
++    hviid = get_field(env->hvictl, HVICTL_IID);
++    hviprio = get_field(env->hvictl, HVICTL_IPRIO);
++
++    if (gein) {
++        vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
++        vseip = env->mie & (env->mip | vsgein) & MIP_VSEIP;
++        if (gein <= env->geilen && vseip) {
++            siid[scount] = IRQ_S_EXT;
++            siprio[scount] = IPRIO_MMAXIPRIO + 1;
++            if (env->aia_ireg_rmw_fn[PRV_S]) {
++                /*
++                 * Call machine specific IMSIC register emulation for
++                 * reading TOPEI.
++                 */
++                ret = env->aia_ireg_rmw_fn[PRV_S](
++                        env->aia_ireg_rmw_fn_arg[PRV_S],
++                        AIA_MAKE_IREG(ISELECT_IMSIC_TOPEI, PRV_S, true, gein,
++                                      riscv_cpu_mxl_bits(env)),
++                        &topei, 0, 0);
++                if (!ret && topei) {
++                    siprio[scount] = topei & IMSIC_TOPEI_IPRIO_MASK;
++                }
++            }
++            scount++;
++        }
++    } else {
++        if (hviid == IRQ_S_EXT && hviprio) {
++            siid[scount] = IRQ_S_EXT;
++            siprio[scount] = hviprio;
++            scount++;
++        }
++    }
++
++    if (env->hvictl & HVICTL_VTI) {
++        if (hviid != IRQ_S_EXT) {
++            siid[scount] = hviid;
++            siprio[scount] = hviprio;
++            scount++;
++        }
++    } else {
++        irq = riscv_cpu_vsirq_pending(env);
++        if (irq != IRQ_S_EXT && 0 < irq && irq <= 63) {
++           siid[scount] = irq;
++           siprio[scount] = env->hviprio[irq];
++           scount++;
++        }
++    }
++
++    iid = 0;
++    iprio = UINT_MAX;
++    for (s = 0; s < scount; s++) {
++        if (siprio[s] < iprio) {
++            iid = siid[s];
++            iprio = siprio[s];
++        }
++    }
++
++    if (iid) {
++        if (env->hvictl & HVICTL_IPRIOM) {
++            if (iprio > IPRIO_MMAXIPRIO) {
++                iprio = IPRIO_MMAXIPRIO;
++            }
++            if (!iprio) {
++                if (riscv_cpu_default_priority(iid) > IPRIO_DEFAULT_S) {
++                    iprio = IPRIO_MMAXIPRIO;
++                }
++            }
++        } else {
++            iprio = 1;
++        }
++    } else {
++        iprio = 0;
++    }
++
++    *val = (iid & TOPI_IID_MASK) << TOPI_IID_SHIFT;
++    *val |= iprio;
++    return RISCV_EXCP_NONE;
++}
++
++static int read_stopi(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    int irq;
++    uint8_t iprio;
++
++    if (riscv_cpu_virt_enabled(env)) {
++        return read_vstopi(env, CSR_VSTOPI, val);
++    }
++
++    irq = riscv_cpu_sirq_pending(env);
++    if (irq <= 0 || irq > 63) {
++       *val = 0;
++    } else {
++       iprio = env->siprio[irq];
++       if (!iprio) {
++           if (riscv_cpu_default_priority(irq) > IPRIO_DEFAULT_S) {
++               iprio = IPRIO_MMAXIPRIO;
++           }
++       }
++       *val = (irq & TOPI_IID_MASK) << TOPI_IID_SHIFT;
++       *val |= iprio;
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ /* Hypervisor Extensions */
+ static RISCVException read_hstatus(CPURISCVState *env, int csrno,
+                                    target_ulong *val)
+@@ -2539,6 +2686,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
      [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
      [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
  
-+    /* Virtual Interrupts for Supervisor Level (AIA) */
-+    [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
-+    [CSR_MVIP]       = { "mvip",  aia_any, read_zero, write_ignore },
++    /* Machine-Level Interrupts (AIA) */
++    [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
 +
-     /* Machine-Level High-Half CSRs (AIA) */
-     [CSR_MIDELEGH] = { "midelegh", aia_any32, NULL, NULL, rmw_midelegh },
-     [CSR_MIEH]     = { "mieh",     aia_any32, NULL, NULL, rmw_mieh     },
-+    [CSR_MVIENH]   = { "mvienh",   aia_any32, read_zero,  write_ignore },
-+    [CSR_MVIPH]    = { "mviph",    aia_any32, read_zero,  write_ignore },
-     [CSR_MIPH]     = { "miph",     aia_any32, NULL, NULL, rmw_miph     },
+     /* Virtual Interrupts for Supervisor Level (AIA) */
+     [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
+     [CSR_MVIP]       = { "mvip",  aia_any, read_zero, write_ignore },
+@@ -2568,6 +2718,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Supervisor Protection and Translation */
+     [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
  
-     /* Supervisor Trap Setup */
-@@ -2580,12 +2601,14 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,      write_mtinst      },
- 
-     /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
-+    [CSR_HVIEN]       = { "hvien",       aia_hmode, read_zero, write_ignore },
-     [CSR_HVICTL]      = { "hvictl",      aia_hmode, read_hvictl, write_hvictl },
++    /* Supervisor-Level Interrupts (AIA) */
++    [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
++
+     /* Supervisor-Level High-Half CSRs (AIA) */
+     [CSR_SIEH]       = { "sieh",   aia_smode32, NULL, NULL, rmw_sieh },
+     [CSR_SIPH]       = { "siph",   aia_smode32, NULL, NULL, rmw_siph },
+@@ -2606,6 +2759,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
      [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,   write_hviprio1 },
      [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,   write_hviprio2 },
  
++    /* VS-Level Interrupts (H-extension with AIA) */
++    [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
++
      /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
      [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL, rmw_hidelegh },
-+    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero, write_ignore },
-     [CSR_HVIPH]       = { "hviph",       aia_hmode32, NULL, NULL, rmw_hviph },
-     [CSR_HVIPRIO1H]   = { "hviprio1h",   aia_hmode32, read_hviprio1h, write_hviprio1h },
-     [CSR_HVIPRIO2H]   = { "hviprio2h",   aia_hmode32, read_hviprio2h, write_hviprio2h },
+     [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero, write_ignore },
 -- 
 2.25.1
 
