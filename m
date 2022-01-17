@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9aex-0006Uf-WD
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:39:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53222)
+	id 1n9ao3-0000uo-3u
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:48:58 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54798)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aew-0006Tg-96; Mon, 17 Jan 2022 17:39:30 -0500
-Received: from [2607:f8b0:4864:20::133] (port=33698
- helo=mail-il1-x133.google.com)
+ id 1n9anz-0000rF-CY; Mon, 17 Jan 2022 17:48:52 -0500
+Received: from [2607:f8b0:4864:20::d33] (port=44761
+ helo=mail-io1-xd33.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aeu-0007Ta-P4; Mon, 17 Jan 2022 17:39:29 -0500
-Received: by mail-il1-x133.google.com with SMTP id a2so10133030ilr.0;
- Mon, 17 Jan 2022 14:39:28 -0800 (PST)
+ id 1n9anv-0000Ok-T8; Mon, 17 Jan 2022 17:48:50 -0500
+Received: by mail-io1-xd33.google.com with SMTP id h23so23226121iol.11;
+ Mon, 17 Jan 2022 14:48:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CCuZd4k4pJMjMvTrczKQQIZUc6D9beR9U8HIUs17Cbo=;
- b=ED2AH8sxilUtYIsH58W1SHo4wcP9LwahXJhDF611vz82Vh9y5xUvxz1BHrRf1WcKRP
- XchO0cY8sl2bl/vYP+ziAe3y38PdmbcrVP7KMIlmyGpy4imrrrI/aEvLWTnsU29EMb9J
- eIGFnUoqORanLv0MeKEyP3IBU2NDKTTDt6iElmEdBzQquW+QzrTuDqHHftJxiHUTbJWJ
- OOkZ5YSdhNXIm6u7ScYX3cIzNSp1QabACymZswyIh+SR+GCUW0UXbs0Kgrm0blzL7lcY
- H9yd0l6ZPEkljTBeUuxmhkRUczNnk+Pd7SIywyjAeKfhJR1nEMBE25iNJwVtP2Tasp4M
- yxfw==
+ :cc; bh=EcdR1AHcB+Wsmc2souX2vZeAdLHZkB3gZF3osCxqYcs=;
+ b=lu0Wi+UTzC5aYVhJJLA0lbY0BZ4Zfs2O+b0fg8S/BSVONr/a0fm/HYCCTyP4ly/8c9
+ QIa5mG8aTnHQ4rMVpmfEZZ9PCwYarAnpGEqOAHEcI9kUsR18AMGa8yBP+T+9xsFF2wLV
+ VhxZqx9UxjcC5HA8ISnTKv1zUSyRDKyW/ca8kpXi+Z5aBLRzrX1/MMgKEjfW8geMnYaB
+ ROTiwQ3l7oq+dHNcORh6HGJ8VrEqaITVLqFZ1uHi2PRoDIHMNgue3i3kDLrkjH/h22A/
+ uGPRsVXh6aGuS25lWJU9a983u8FTz9qi4gjz+QvwIxw5Px3jUK8cAWTyym4vi4mCoThQ
+ 7glw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=CCuZd4k4pJMjMvTrczKQQIZUc6D9beR9U8HIUs17Cbo=;
- b=zmR+dUdLx6AjuvoU1ZAvmxAMbTSw8nBHdCszmQA1ECRWGwWmCbo61wKhzzBxglXx/U
- 5fAABg53pHmTD3dQ/vwAbo3BDXi02CtmNWl7gnyPK7eVL6u2QFZinsVfg0MbTx3LuGJp
- X3t4vBErmWCrAQ6IzNvFOjXzqAKWlDVBePyIEpXFd0gBz0IsUgKi6aQZSKYstIdQsC1Q
- jVMRroHM+KR3N2lbTjz6+9FcYKi/tmiiL35J4PyJwGV4Jl8Zfq7PTi9b/G01aBSnAJno
- +06Py+QhHh6t8jD28DM2IZ4fpuTuHia9yMgz68xxhO+yC0IyXJt/JpT4eqhj4sD984L0
- N+2g==
-X-Gm-Message-State: AOAM53263jsihA9Bj8aWJTg12ubbZZFoLOSNqbLwBbQ2W3LyNQ5gVX5a
- 62Q2srexMNNRq9r/pivFNJBdHxjgytj6XBIMVgs=
-X-Google-Smtp-Source: ABdhPJytow7oAvAVubeViGjQvNljP+KUHgJVRf0Rp5UGDCSQRmmIQabMg+zZUGg1S7iMPEe4vZ8XFZaIUylN0hj2vzs=
-X-Received: by 2002:a05:6e02:1569:: with SMTP id
- k9mr12287534ilu.290.1642459167379; 
- Mon, 17 Jan 2022 14:39:27 -0800 (PST)
+ bh=EcdR1AHcB+Wsmc2souX2vZeAdLHZkB3gZF3osCxqYcs=;
+ b=kcznE43lyJ0B3t3b0CVWYq8uKp6scfE9Mu1qAdrPoRXtPSt8+FXXhVYB/YJ2pd3bSR
+ 3YXxLHqkLNOjaSzwPpU1cglLTDMMR25w3Z9EV4Yl9AhGOJzs5SdP3ztI4gAPyNeA1X0g
+ R2e5jNAEIXoVHePONBkQzROJ1/vvvr03BaARd7DkbNxwXQfnLS5oWUMnd3Wag1lZYLzw
+ 0JIjcB8FseybgohwVWUVlyuPEWjO+V3uuO8ZV938A5xQtr3T8k3CnqBx4W6VwtYLBNMY
+ u3iyqeWIh32QjV3JJiodH9s3s9T85XrDAinGG9a/lqajpb3ckg6qTqrbm886qQzliMOF
+ KXMg==
+X-Gm-Message-State: AOAM531Dbj34rUJ8xWYhdnW4zWFmSHkpE4Qj6rdykRYS3HQTtKF8I4Bk
+ T279At170WxRm27VC60nKIXBb/bh0FsaupVNVbs=
+X-Google-Smtp-Source: ABdhPJz38DW7GPkHoX8/vQGy11Al3GVlytUW2dHFKjEqs0D8Im24gf8PJltjVx+bcRDF4+K09VTRXl2CC36hKeKmF5M=
+X-Received: by 2002:a5e:8912:: with SMTP id k18mr9651868ioj.90.1642459726388; 
+ Mon, 17 Jan 2022 14:48:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20211229023348.12606-1-frank.chang@sifive.com>
- <20211229023348.12606-7-frank.chang@sifive.com>
-In-Reply-To: <20211229023348.12606-7-frank.chang@sifive.com>
+References: <20220112081329.1835-1-jiangyifei@huawei.com>
+In-Reply-To: <20220112081329.1835-1-jiangyifei@huawei.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Jan 2022 08:39:00 +1000
-Message-ID: <CAKmqyKNYaN1HYRP+MR=Q10JZ-nW4VOCTQoG3H8Mq6VEtAqCJfg@mail.gmail.com>
-Subject: Re: [PATCH 06/17] target/riscv: rvv-1.0: Add Zve64f support for
- scalar fp insns
-To: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 18 Jan 2022 08:48:19 +1000
+Message-ID: <CAKmqyKOEB279xvYAjEgwyAsbz=NtsqnhX6oE=W5Lik4Yp+X_Mw@mail.gmail.com>
+Subject: Re: [PATCH v5 00/13] Add riscv kvm accel support
+To: Yifei Jiang <jiangyifei@huawei.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- LIU Zhiwei <zhiwei_liu@c-sky.com>
+ kvm-riscv@lists.infradead.org, "open list:Overall" <kvm@vger.kernel.org>,
+ libvir-list@redhat.com, 
+ Anup Patel <anup@brainfault.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ fanliang@huawei.com, 
+ "Wubin (H)" <wu.wubin@huawei.com>, wanghaibin.wang@huawei.com,
+ wanbo13@huawei.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -80,149 +79,159 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2022 22:39:30 -0000
+X-List-Received-Date: Mon, 17 Jan 2022 22:48:53 -0000
 
-On Wed, Dec 29, 2021 at 12:43 PM <frank.chang@sifive.com> wrote:
+On Wed, Jan 12, 2022 at 6:20 PM Yifei Jiang via <qemu-devel@nongnu.org> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> This series adds both riscv32 and riscv64 kvm support, and implements
+> migration based on riscv.
 >
-> Zve64f extension requires the scalar processor to implement the F
-> extension and implement all vector floating-point instructions for
-> floating-point operands with EEW=32 (i.e., no widening floating-point
-> operations).
+> Because of RISC-V KVM has been merged into the Linux master, so this
+> series are changed from RFC to patch.
 >
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Several steps to use this:
+> 1. Build emulation
+> $ ./configure --target-list=riscv64-softmmu
+> $ make -j$(nproc)
+>
+> 2. Build kernel
+>
+> 3. Build QEMU VM
+> Cross built in riscv toolchain.
+> $ PKG_CONFIG_LIBDIR=<toolchain pkgconfig path>
+> $ export PKG_CONFIG_SYSROOT_DIR=<toolchain sysroot path>
+> $ ./configure --target-list=riscv64-softmmu --enable-kvm \
+> --cross-prefix=riscv64-linux-gnu- --disable-libiscsi --disable-glusterfs \
+> --disable-libusb --disable-usb-redir --audio-drv-list= --disable-opengl \
+> --disable-libxml2
+> $ make -j$(nproc)
+>
+> 4. Start emulation
+> $ ./qemu-system-riscv64 -M virt -m 4096M -cpu rv64 -nographic \
+>         -name guest=riscv-hyp,debug-threads=on \
+>         -smp 4 \
+>         -bios ./fw_jump.bin \
+>         -kernel ./Image \
+>         -drive file=./hyp.img,format=raw,id=hd0 \
+>         -device virtio-blk-device,drive=hd0 \
+>         -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
+>
+> 5. Start kvm-acceled QEMU VM in emulation
+> $ ./qemu-system-riscv64 -M virt,accel=kvm -m 1024M -cpu host -nographic \
+>         -name guest=riscv-guset \
+>         -smp 2 \
+>         -bios none \
+>         -kernel ./Image \
+>         -drive file=./guest.img,format=raw,id=hd0 \
+>         -device virtio-blk-device,drive=hd0 \
+>         -append "root=/dev/vda rw console=ttyS0 earlycon=sbi"
+>
+> Changes since patch v4
+> - Commit enable kvm accel as an independent patch.
+> - Bugfix some checkpatch errors.
+> - Bugfix lost a interrupt in the sifive_u machine.
+>
+> Changes since patch v3
+> - Re-write the for-loop in sifive_plic_create().
+> - Drop unnecessary change in hw/riscv/virt.c.
+> - Use serial to handle console sbi call.
+>
+> Changes since patch v2
+> - Create a macro for get and put timer csr.
+> - Remove M-mode PLIC contexts when kvm is enabled.
+> - Add get timer frequency.
+> - Move cpu_host_load to vmstate_kvmtimer.
+>
+> Changes since patch v1
+> - Rebase on recent commit a216e7cf119c91ffdf5931834a1a030ebea40d70
+> - Sync-up headers with Linux-5.16-rc4.
+> - Fixbug in kvm_arch_init_vcpu.
+> - Create a macro for get and put regs csr.
+> - Start kernel directly when kvm_enabled.
+> - Use riscv_cpu_set_irq to inject KVM interrupts.
+> - Use the Semihosting Console API for RISC-V kvm handle sbi.
+> - Update vmstate_riscv_cpu version id.
+>   Placing kvm_timer into a subsection.
+>
+> Changes since RFC v6
+> - Rebase on recent commit 8627edfb3f1fca24a96a0954148885c3241c10f8
+> - Sync-up headers with Linux-5.16-rc1
+>
+> Changes since RFC v5
+> - Rebase on QEMU v6.1.0-rc1 and kvm-riscv linux v19.
+> - Move kvm interrupt setting to riscv_cpu_update_mip().
+> - Replace __u64 with uint64_t.
+>
+> Changes since RFC v4
+> - Rebase on QEMU v6.0.0-rc2 and kvm-riscv linux v17.
+> - Remove time scaling support as software solution is incomplete.
+>   Because it will cause unacceptable performance degradation. and
+>   We will post a better solution.
+> - Revise according to Alistair's review comments.
+>   - Remove compile time XLEN checks in kvm_riscv_reg_id
+>   - Surround TYPE_RISCV_CPU_HOST definition by CONFIG_KVM and share
+>     it between RV32 and RV64.
+>   - Add kvm-stub.c for reduce unnecessary compilation checks.
+>   - Add riscv_setup_direct_kernel() to direct boot kernel for KVM.
+>
+> Changes since RFC v3
+> - Rebase on QEMU v5.2.0-rc2 and kvm-riscv linux v15.
+> - Add time scaling support(New patches 13, 14 and 15).
+> - Fix the bug that guest vm can't reboot.
+>
+> Changes since RFC v2
+> - Fix checkpatch error at target/riscv/sbi_ecall_interface.h.
+> - Add riscv migration support.
+>
+> Changes since RFC v1
+> - Add separate SBI ecall interface header.
+> - Add riscv32 kvm accel support.
+>
+> Yifei Jiang (13):
+>   update-linux-headers: Add asm-riscv/kvm.h
+>   target/riscv: Add target/riscv/kvm.c to place the public kvm interface
+>   target/riscv: Implement function kvm_arch_init_vcpu
+>   target/riscv: Implement kvm_arch_get_registers
+>   target/riscv: Implement kvm_arch_put_registers
+>   target/riscv: Support start kernel directly by KVM
+>   target/riscv: Support setting external interrupt by KVM
+>   target/riscv: Handle KVM_EXIT_RISCV_SBI exit
+>   target/riscv: Add host cpu type
+>   target/riscv: Add kvm_riscv_get/put_regs_timer
+>   target/riscv: Implement virtual time adjusting with vm state changing
+>   target/riscv: Support virtual time context synchronization
+>   target/riscv: enable riscv kvm accel
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 41 +++++++++++++++++++------
->  1 file changed, 31 insertions(+), 10 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index a1e403fe86..0aa8b7918f 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -66,6 +66,17 @@ static bool require_scale_rvf(DisasContext *s)
->      }
->  }
+>  hw/intc/sifive_plic.c              |  20 +-
+>  hw/riscv/boot.c                    |  16 +-
+>  hw/riscv/virt.c                    |  83 +++--
+>  include/hw/riscv/boot.h            |   1 +
+>  linux-headers/asm-riscv/kvm.h      | 128 +++++++
+>  meson.build                        |   2 +
+>  target/riscv/cpu.c                 |  29 +-
+>  target/riscv/cpu.h                 |  11 +
+>  target/riscv/kvm-stub.c            |  30 ++
+>  target/riscv/kvm.c                 | 535 +++++++++++++++++++++++++++++
+>  target/riscv/kvm_riscv.h           |  25 ++
+>  target/riscv/machine.c             |  30 ++
+>  target/riscv/meson.build           |   1 +
+>  target/riscv/sbi_ecall_interface.h |  72 ++++
+>  14 files changed, 951 insertions(+), 32 deletions(-)
+>  create mode 100644 linux-headers/asm-riscv/kvm.h
+>  create mode 100644 target/riscv/kvm-stub.c
+>  create mode 100644 target/riscv/kvm.c
+>  create mode 100644 target/riscv/kvm_riscv.h
+>  create mode 100644 target/riscv/sbi_ecall_interface.h
 >
-> +static bool require_zve64f(DisasContext *s)
-> +{
-> +    /* RVV + Zve64f = RVV. */
-> +    if (has_ext(s, RVV)) {
-> +        return true;
-> +    }
-> +
-> +    /* Zve64f doesn't support FP64. (Section 18.2) */
-> +    return s->ext_zve64f ? s->sew <= MO_32 : true;
-> +}
-> +
->  /* Destination vector register group cannot overlap source mask register. */
->  static bool require_vm(int vm, int vd)
->  {
-> @@ -2204,7 +2215,8 @@ static bool opfvv_check(DisasContext *s, arg_rmrr *a)
->      return require_rvv(s) &&
->             require_rvf(s) &&
->             vext_check_isa_ill(s) &&
-> -           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm);
-> +           vext_check_sss(s, a->rd, a->rs1, a->rs2, a->vm) &&
-> +           require_zve64f(s);
->  }
->
->  /* OPFVV without GVEC IR */
-> @@ -2284,7 +2296,8 @@ static bool opfvf_check(DisasContext *s, arg_rmrr *a)
->      return require_rvv(s) &&
->             require_rvf(s) &&
->             vext_check_isa_ill(s) &&
-> -           vext_check_ss(s, a->rd, a->rs2, a->vm);
-> +           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
-> +           require_zve64f(s);
->  }
->
->  /* OPFVF without GVEC IR */
-> @@ -2501,7 +2514,8 @@ static bool opfv_check(DisasContext *s, arg_rmr *a)
->             require_rvf(s) &&
->             vext_check_isa_ill(s) &&
->             /* OPFV instructions ignore vs1 check */
-> -           vext_check_ss(s, a->rd, a->rs2, a->vm);
-> +           vext_check_ss(s, a->rd, a->rs2, a->vm) &&
-> +           require_zve64f(s);
->  }
->
->  static bool do_opfv(DisasContext *s, arg_rmr *a,
-> @@ -2566,7 +2580,8 @@ static bool opfvv_cmp_check(DisasContext *s, arg_rmrr *a)
->      return require_rvv(s) &&
->             require_rvf(s) &&
->             vext_check_isa_ill(s) &&
-> -           vext_check_mss(s, a->rd, a->rs1, a->rs2);
-> +           vext_check_mss(s, a->rd, a->rs1, a->rs2) &&
-> +           require_zve64f(s);
->  }
->
->  GEN_OPFVV_TRANS(vmfeq_vv, opfvv_cmp_check)
-> @@ -2579,7 +2594,8 @@ static bool opfvf_cmp_check(DisasContext *s, arg_rmrr *a)
->      return require_rvv(s) &&
->             require_rvf(s) &&
->             vext_check_isa_ill(s) &&
-> -           vext_check_ms(s, a->rd, a->rs2);
-> +           vext_check_ms(s, a->rd, a->rs2) &&
-> +           require_zve64f(s);
->  }
->
->  GEN_OPFVF_TRANS(vmfeq_vf, opfvf_cmp_check)
-> @@ -2600,7 +2616,8 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
->      if (require_rvv(s) &&
->          require_rvf(s) &&
->          vext_check_isa_ill(s) &&
-> -        require_align(a->rd, s->lmul)) {
-> +        require_align(a->rd, s->lmul) &&
-> +        require_zve64f(s)) {
->          gen_set_rm(s, RISCV_FRM_DYN);
->
->          TCGv_i64 t1;
-> @@ -3326,7 +3343,8 @@ static bool trans_vfmv_f_s(DisasContext *s, arg_vfmv_f_s *a)
->  {
->      if (require_rvv(s) &&
->          require_rvf(s) &&
-> -        vext_check_isa_ill(s)) {
-> +        vext_check_isa_ill(s) &&
-> +        require_zve64f(s)) {
->          gen_set_rm(s, RISCV_FRM_DYN);
->
->          unsigned int ofs = (8 << s->sew);
-> @@ -3352,7 +3370,8 @@ static bool trans_vfmv_s_f(DisasContext *s, arg_vfmv_s_f *a)
->  {
->      if (require_rvv(s) &&
->          require_rvf(s) &&
-> -        vext_check_isa_ill(s)) {
-> +        vext_check_isa_ill(s) &&
-> +        require_zve64f(s)) {
->          gen_set_rm(s, RISCV_FRM_DYN);
->
->          /* The instructions ignore LMUL and vector register group. */
-> @@ -3403,13 +3422,15 @@ GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
->  static bool fslideup_check(DisasContext *s, arg_rmrr *a)
->  {
->      return slideup_check(s, a) &&
-> -           require_rvf(s);
-> +           require_rvf(s) &&
-> +           require_zve64f(s);
->  }
->
->  static bool fslidedown_check(DisasContext *s, arg_rmrr *a)
->  {
->      return slidedown_check(s, a) &&
-> -           require_rvf(s);
-> +           require_rvf(s) &&
-> +           require_zve64f(s);
->  }
->
->  GEN_OPFVF_TRANS(vfslide1up_vf, fslideup_check)
 > --
-> 2.31.1
+> 2.19.1
 >
 >
 
