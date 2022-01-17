@@ -1,62 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9aPl-0002Zr-IU
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:23:49 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:51266)
+	id 1n9aTf-0005sl-SV
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:27:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51758)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aPj-0002W7-Dj; Mon, 17 Jan 2022 17:23:47 -0500
-Received: from [2607:f8b0:4864:20::12a] (port=34526
- helo=mail-il1-x12a.google.com)
+ id 1n9aTd-0005mx-N6; Mon, 17 Jan 2022 17:27:49 -0500
+Received: from [2607:f8b0:4864:20::d2e] (port=39680
+ helo=mail-io1-xd2e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9aPh-0005SB-Nv; Mon, 17 Jan 2022 17:23:46 -0500
-Received: by mail-il1-x12a.google.com with SMTP id d14so16010684ila.1;
- Mon, 17 Jan 2022 14:23:45 -0800 (PST)
+ id 1n9aTc-000621-5E; Mon, 17 Jan 2022 17:27:49 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id v6so23320909iom.6;
+ Mon, 17 Jan 2022 14:27:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Qqj2eDYYegV7RumMuF3lGIoyGPymVa15N0wqTPh7j70=;
- b=GOyZonUrtYFeYsnb9OH/ZrJMCwlqAQua7MEEWQ2031frQOIYHjy1u/RRU4ywrVmB8l
- UCMn2rekL8OVDY+6cSG+2ZmNFiimQyEqOCNLlHOqRRycfD6Xe7djVrarua54MMXyY5g5
- o6ivqtak1GsV1bt+VIjWeguL0ZSIRscVMPC0q5+z5Fx3hkB02EhvWzQiOfZ3ZwgasSci
- QE6VefBlBX322Viq117bVpbFmEG2cufrHKKsARDWE0QqsIC9AuygYAt4AmFlQGaVfy+S
- WIgqf3y3li7r2jzfIfIdDBlv8mHrRU3h/vvjUDjTWu7WdyO4h5tUVmReE4/zDZFcZCPJ
- QIQg==
+ :cc; bh=XHWKvGXcbd94AeluMeM/ka5JFJ+Hc9kYb5Hvhfeen30=;
+ b=kw8y2T4oDNoL9d+u2HWI2bVL4kpN05JnzvVeO+8M9hLtVCYSO50lJOH9pzEXthXNWT
+ IZwafcVQVEay/MVhCRCdXUmsLTKRNd00evQlfSjrcZ/KQYdV49/4e43EcT19PXqwc94+
+ IXr56Nyee9ijGQWPiPU5gXWttwA341yqC06L8Pj2WcMc3C302asGle07vD11I5owsoYh
+ kbruecwJcu/KgYprRBb8azJbiByY2nxqefrw6V5KD6QU5IJ/vVkeZO8nS5UA4769M6Fe
+ lDNfGJTMkRYA/1oUOtaUhsKxbMv0e1ruOYC8rQhYQo98Hu+1BldQrFuURV3wkUq3cHRU
+ MPUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Qqj2eDYYegV7RumMuF3lGIoyGPymVa15N0wqTPh7j70=;
- b=DbAtqGt6Gn9buRUFsWbFUbJjZZdtBNLhX2dYcWRbtFZZaT0ItbSkuAknuhDca2xZbq
- eqUHNVh8i6LWbzrrkInQy1g6lIM/2e07xn3K2FPV4uk+xx+xNTbWANW4KzbmX4KOi+Zd
- eC8Tgcp39hxfRMLZi9/JqOS8/lSuYnwQtuM6YVMiT4FHdHuzRPdsnNQJ+/wlPtLul66x
- SrOsWcSoIBcLsJfRproEiv3cuPE200DibcF3e1uxold4uAH3b78KUc+giWZluQws1IT2
- JesMC6/4UCozJ0AIDD5zBkw9k5nP6LDGRyC6KNNGZ88O8dx7+X2jeD4jUf5KfepoYexY
- Uf4w==
-X-Gm-Message-State: AOAM533CTcdvi2mp9H1KN0wITdoIGYFGaZS1jlw1LfXB+M+OWd2w4SVy
- Yw6YOXcxRT9SjHCVfU9uutcv8Va8NQL4cBSSYjc=
-X-Google-Smtp-Source: ABdhPJwCTH9+gorOchiNz+/V/suWejqBAOZ5qEOlunsWfel4GciJxOoaHwMfhY5UyclZGW94y6ldThfodKCuyxOK82U=
-X-Received: by 2002:a05:6e02:1569:: with SMTP id
- k9mr12264917ilu.290.1642458224279; 
- Mon, 17 Jan 2022 14:23:44 -0800 (PST)
+ bh=XHWKvGXcbd94AeluMeM/ka5JFJ+Hc9kYb5Hvhfeen30=;
+ b=7t9EIUgjQQFaAvu25LooOfE59IW/xLOSnUhyIeZdrs9drsJr6zve5B8f9U6Cz5HfkQ
+ R78KN+ykpjos4u7nJSukHbbsRPtZWGm8IO4wN3oKbmH+BXRehvXhqaPexiaHL1tKXGXZ
+ ZCNkphhaPHg8ktiuEIRlrjcAUIq2Ft85KUNJpySnecWksq79dmn2lssPLcuimI7QpDBt
+ vfjinwODx2GiprK6ZGFU+BaLt8eF3zexy4y9/U8jwE2/0so7RRa8DkaFL9EmQJhtAGiy
+ v4XF/BUG9OB7RTL8Tl2wsyE+D9kXuiTmSrbeR7HJ4QWyjd4dXtKKBVUm8IOdNrKOHKi8
+ Mzqg==
+X-Gm-Message-State: AOAM531AcKxeE7m0EcpKTibL9CcZKJtz8o5whXq/rizj5yvH2iJi3PBB
+ pV4m15l4ymzhIJuMWKLByF+RXTrpsMzAORLtY98=
+X-Google-Smtp-Source: ABdhPJxcH8Jq//8gKgcX/MSUP1XJevXmow792+GnHI6Xp1I9346fCzlMlIYnhXQsmCBpFoTaOfvOfPE6X7MxT/jHNWM=
+X-Received: by 2002:a02:6954:: with SMTP id e81mr10421144jac.63.1642458466001; 
+ Mon, 17 Jan 2022 14:27:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20211229023348.12606-1-frank.chang@sifive.com>
- <20211229023348.12606-2-frank.chang@sifive.com>
-In-Reply-To: <20211229023348.12606-2-frank.chang@sifive.com>
+ <20211229023348.12606-4-frank.chang@sifive.com>
+In-Reply-To: <20211229023348.12606-4-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Jan 2022 08:23:18 +1000
-Message-ID: <CAKmqyKPrBcROVj=ykv3F-wwtYUGu=jTT_F055n8nHC8_K=USKw@mail.gmail.com>
-Subject: Re: [PATCH 01/17] target/riscv: rvv-1.0: Add Zve64f extension into
- RISC-V
+Date: Tue, 18 Jan 2022 08:27:20 +1000
+Message-ID: <CAKmqyKPCCAzjkNGPe3E9etbKPzG3KS24eaqbo0nAjP7RpGaUJA@mail.gmail.com>
+Subject: Re: [PATCH 03/17] target/riscv: rvv-1.0: Add Zve64f support for load
+ and store insns
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -77,111 +79,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2022 22:23:47 -0000
+X-List-Received-Date: Mon, 17 Jan 2022 22:27:50 -0000
 
 On Wed, Dec 29, 2021 at 12:34 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
+> All Zve* extensions support all vector load and store instructions,
+> except Zve64* extensions do not support EEW=64 for index values when
+> XLEN=32.
+>
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 17 +++++++++++++----
+>  1 file changed, 13 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 5b47729a21..820a3387db 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -263,10 +263,19 @@ static bool vext_check_st_index(DisasContext *s, int vd, int vs2, int nf,
+>                                  uint8_t eew)
+>  {
+>      int8_t emul = eew - s->sew + s->lmul;
+> -    return (emul >= -3 && emul <= 3) &&
+> -            require_align(vs2, emul) &&
+> -            require_align(vd, s->lmul) &&
+> -            require_nf(vd, nf, s->lmul);
+> +    bool ret = (emul >= -3 && emul <= 3) &&
+> +               require_align(vs2, emul) &&
+> +               require_align(vd, s->lmul) &&
+> +               require_nf(vd, nf, s->lmul);
+> +#ifdef TARGET_RISCV32
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Don't use hardcoded macros for this, instead use get_xl()
 
 Alistair
 
-> ---
->  target/riscv/cpu.c        | 4 ++++
->  target/riscv/cpu.h        | 1 +
->  target/riscv/cpu_helper.c | 5 ++++-
->  target/riscv/csr.c        | 6 +++++-
->  target/riscv/translate.c  | 2 ++
->  5 files changed, 16 insertions(+), 2 deletions(-)
+> +    /*
+> +     * All Zve* extensions support all vector load and store instructions,
+> +     * except Zve64* extensions do not support EEW=64 for index values
+> +     * when XLEN=32. (Section 18.2)
+> +     */
+> +    ret &= (!has_ext(s, RVV) && s->ext_zve64f ? eew != MO_64 : true);
+> +#endif
+> +    return ret;
+>  }
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6ef3314bce..01239620ca 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -562,6 +562,10 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              }
->              set_vext_version(env, vext_version);
->          }
-> +        if (cpu->cfg.ext_zve64f && !cpu->cfg.ext_f) {
-> +            error_setg(errp, "Zve64f extension depends upon RVF.");
-> +            return;
-> +        }
->          if (cpu->cfg.ext_j) {
->              ext |= RVJ;
->          }
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index dc10f27093..d7b2db2b2f 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -317,6 +317,7 @@ struct RISCVCPU {
->          bool ext_icsr;
->          bool ext_zfh;
->          bool ext_zfhmin;
-> +        bool ext_zve64f;
->
->          char *priv_spec;
->          char *user_spec;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 10f3baba53..52d93a41fd 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -69,12 +69,15 @@ static RISCVMXL cpu_get_xl(CPURISCVState *env)
->  void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
->                            target_ulong *cs_base, uint32_t *pflags)
->  {
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
->      uint32_t flags = 0;
->
->      *pc = env->pc;
->      *cs_base = 0;
->
-> -    if (riscv_has_ext(env, RVV)) {
-> +    if (riscv_has_ext(env, RVV) || cpu->cfg.ext_zve64f) {
->          /*
->           * If env->vl equals to VLMAX, we can use generic vector operation
->           * expanders (GVEC) to accerlate the vector operations.
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 146447eac5..340b9661a8 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -47,7 +47,11 @@ static RISCVException fs(CPURISCVState *env, int csrno)
->
->  static RISCVException vs(CPURISCVState *env, int csrno)
->  {
-> -    if (env->misa_ext & RVV) {
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    if (env->misa_ext & RVV ||
-> +        cpu->cfg.ext_zve64f) {
->  #if !defined(CONFIG_USER_ONLY)
->          if (!env->debugger && !riscv_cpu_vector_enabled(env)) {
->              return RISCV_EXCP_ILLEGAL_INST;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 5df6c0d800..8c3b0168b7 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -78,6 +78,7 @@ typedef struct DisasContext {
->      bool ext_ifencei;
->      bool ext_zfh;
->      bool ext_zfhmin;
-> +    bool ext_zve64f;
->      bool hlsx;
->      /* vector extension */
->      bool vill;
-> @@ -705,6 +706,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
->      ctx->ext_zfh = cpu->cfg.ext_zfh;
->      ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
-> +    ctx->ext_zve64f = cpu->cfg.ext_zve64f;
->      ctx->vlen = cpu->cfg.vlen;
->      ctx->elen = cpu->cfg.elen;
->      ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
+>  /*
 > --
 > 2.31.1
 >
