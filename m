@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9avm-0007vZ-SJ
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:56:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:56336)
+	id 1n9aw6-00086e-6C
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 17:57:15 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56406)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9avZ-0007jR-QA; Mon, 17 Jan 2022 17:56:42 -0500
-Received: from [2607:f8b0:4864:20::129] (port=42971
- helo=mail-il1-x129.google.com)
+ id 1n9aw1-00083S-Dl; Mon, 17 Jan 2022 17:57:10 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=33455
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9avY-0001ZJ-Az; Mon, 17 Jan 2022 17:56:41 -0500
-Received: by mail-il1-x129.google.com with SMTP id u5so11769560ilq.9;
- Mon, 17 Jan 2022 14:56:39 -0800 (PST)
+ id 1n9avz-0001bO-Ta; Mon, 17 Jan 2022 17:57:09 -0500
+Received: by mail-io1-xd36.google.com with SMTP id f24so17468587ioc.0;
+ Mon, 17 Jan 2022 14:57:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=joYxvGMSfQq5SJzhwpwJXhn+Y2hQqq2kmwT1jhKdEds=;
- b=NR3ea9IarLdVL/q5jDWUD6efUSolT4KQybr+dTyCb+S7ly0/JyVHs8Tv4CVwuKvCrG
- uBZjZT+tgXj51jgKqE172C+GCDs7w5KhOELuw9cF2csHrQmRfbKTPXK9QBR3yjxDy7ua
- +d4tQcbLIDe9ONMDS0XCKjk/9o4b4Bj9DVqXEXNZqBwUPTaIXiVwqxfL+fZdJ7PDeXXZ
- YFSJCgeXVTQq9lEL6TlQXoRtLLSR80i0M2N5iit/Ngsk87djOZrz8/R6MHbYIE7DyrvJ
- cmhhxVPKtL8TGlH049qChN+XmcMQCUOZjwRicC4/mSiuRTRWH8dMAU6K4RLvAq3tRjH6
- QbXw==
+ :cc; bh=IA9Zrbi2ikI294mw6l+zoFib/I2aTGvGOV0imdp81hI=;
+ b=i7Zp3c6PHr39PAxM6h2nGXyKcsLpQmBhmUzYFJvrdQc339QmxKeuUL53f6qF4eykcr
+ aBUNDXt9lWm0JZWx8KXG4gzQUynJkW07MtzeaLX/Nyki3dOtLO0xq2qs+C7EjhBsv1ni
+ /7AyxHRHrQ/fI0ZeybqDxBBBpUap0j2wCLvwF5MMFWmoGQqiNfo8O6wA4KzWCwfB4r5i
+ 7qNnFn5oS9mVF8/By3vJRHbbjSLCnxw6uzbL/bCE0SN23Ff+FKED5memakRaiRYGBAit
+ Ax9LAwJspWpAxnVf8nI+Ay7h7g2WhNF6LOCZhsyf7GDh2ny6Cc8nto9b3McxEvlBN44u
+ 0PXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=joYxvGMSfQq5SJzhwpwJXhn+Y2hQqq2kmwT1jhKdEds=;
- b=HpTk2zsg4xowk65lin2sBaATv4J8yPVaYbxC7WTx/a9/jt7TkZ4b/mbHNTpj1a/+Xn
- MXrc01Ce25uPgOV/LN8ENt1994t3nE7YE/QYksTH+hDUK/AC5fnTrL8+OUpTPOYn8QIK
- Cexgxh8q0rfwNfN9bPnPJKiPjby/UfIvw/HrCE28a6VWitwI0n32nv71TKpoCpcfJS/W
- rsn1sqY93uF9fEyJDDKFH+PV9JQb+R/r9pAxuDgvyg19/4Mg2DPFHCJzPTjClbdBNT1y
- AXrHgqUDOcEKu/nUGX2GZuaRnlCu+De82cUSZMrxjoAdJ7+K86GmiMs8VLTYOPT+gPr9
- GOIg==
-X-Gm-Message-State: AOAM533vFVjzLBw+tjcM0x98gzKWJlL7tfXvGotRJ7l9asmZxcgJ0lkh
- YprzhxONU2Ak70vnvNAsMmtCVBYGIQULS1/K/VeeCfeAAZRxygLn
-X-Google-Smtp-Source: ABdhPJz0Hd3MKIrbjLAR+Z5K7luKIRFVzCaC1xZPL+JCZMVkzbJ/T/JhFYAhwQX8UcsDPWzf5rCh0nRQUx5aY+Nh8ig=
-X-Received: by 2002:a05:6e02:b4c:: with SMTP id
- f12mr12436096ilu.208.1642460198930; 
- Mon, 17 Jan 2022 14:56:38 -0800 (PST)
+ bh=IA9Zrbi2ikI294mw6l+zoFib/I2aTGvGOV0imdp81hI=;
+ b=CZfbCi6JW1aono/sE+H7fnPldWdhqOr1//voFVU9Hr/OSNwTTR7WdgZtLxATcGDfML
+ xOTHE2+5Wtnj4/GGN2nELC1y2g5z5nEXvlnxLw7SMP7LUNGVBn9vl56RXJhT5DDnY5Bo
+ oKHtoHNr1DKo8RwMCTG8FaVVdHIL8riDItNm+6fAIwp3+gctNnuviUowkDLzokOyAQwB
+ CiGZWw+NS5NcEoVrnJHhvnsHgqZrRLD1vE51GxZw2/uIMO4SuIsxq4gZnzcVKj6J1VOT
+ Dv5m/hSxYRRTKYdRp3KvuC8p9vDO8rcrOmhB01aEgnMTy9svouF8XVfpI7D3kjBrcXGh
+ VlVw==
+X-Gm-Message-State: AOAM533V5SupRPsfwzW1JoUldoaOqrGyDRVTYTCGOSWAS1sM9sU+Mh7s
+ 2YFt4CXclyK5zd9qDUsLuJhl6Ku0jpmx1Fu/u7A=
+X-Google-Smtp-Source: ABdhPJzQ4OqO3Gg17c/cBkmQUIjAEGULOyF6iyGyj/GlZa20jo6H1DVw6FNEpuuPn/kT3JjAJp7s6z4yV05K950UPsk=
+X-Received: by 2002:a02:5d84:: with SMTP id w126mr9735176jaa.169.1642460226763; 
+ Mon, 17 Jan 2022 14:57:06 -0800 (PST)
 MIME-Version: 1.0
 References: <20211229023348.12606-1-frank.chang@sifive.com>
- <20211229023348.12606-15-frank.chang@sifive.com>
-In-Reply-To: <20211229023348.12606-15-frank.chang@sifive.com>
+ <20211229023348.12606-16-frank.chang@sifive.com>
+In-Reply-To: <20211229023348.12606-16-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 18 Jan 2022 08:56:12 +1000
-Message-ID: <CAKmqyKPC++e6S-12sf9S+7wnCtv4dNkv9zMMKCM4+8eNKVBc6A@mail.gmail.com>
-Subject: Re: [PATCH 14/17] target/riscv: rvv-1.0: Add Zve32f support for
- single-width fp reduction insns
+Date: Tue, 18 Jan 2022 08:56:40 +1000
+Message-ID: <CAKmqyKOUfmtN2Y9v-N0xNTjCZbFfu8bD70S9G1qMTYrg2TdnZg@mail.gmail.com>
+Subject: Re: [PATCH 15/17] target/riscv: rvv-1.0: Add Zve32f support for
+ widening type-convert insns
 To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -56,10 +55,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  LIU Zhiwei <zhiwei_liu@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::129
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -80,14 +79,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jan 2022 22:56:43 -0000
+X-List-Received-Date: Mon, 17 Jan 2022 22:57:11 -0000
 
-On Wed, Dec 29, 2021 at 12:48 PM <frank.chang@sifive.com> wrote:
+On Wed, Dec 29, 2021 at 12:50 PM <frank.chang@sifive.com> wrote:
 >
 > From: Frank Chang <frank.chang@sifive.com>
 >
-> Vector single-width floating-point reduction operations for EEW=32 are
-> supported for Zve32f extension.
+> Vector widening conversion instructions are provided to and from all
+> supported integer EEWs for Zve32f extension.
 >
 > Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
@@ -96,19 +95,85 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 1 +
->  1 file changed, 1 insertion(+)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
 >
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 1f5a75eca7..c3f4dabf36 100644
+> index c3f4dabf36..da0e501f85 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2974,6 +2974,7 @@ static bool freduction_check(DisasContext *s, arg_rmrr *a)
+> @@ -77,6 +77,17 @@ static bool require_zve32f(DisasContext *s)
+>      return s->ext_zve32f ? s->sew <= MO_32 : true;
+>  }
+>
+> +static bool require_scale_zve32f(DisasContext *s)
+> +{
+> +    /* RVV + Zve32f = RVV. */
+> +    if (has_ext(s, RVV)) {
+> +        return true;
+> +    }
+> +
+> +    /* Zve32f doesn't support FP64. (Section 18.2) */
+> +    return s->ext_zve64f ? s->sew <= MO_16 : true;
+> +}
+> +
+>  static bool require_zve64f(DisasContext *s)
 >  {
->      return reduction_check(s, a) &&
+>      /* RVV + Zve64f = RVV. */
+> @@ -2356,6 +2367,7 @@ static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+>             (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
+>  }
+>
+> @@ -2396,6 +2408,7 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+>             (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_ds(s, a->rd, a->rs2, a->vm) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
+>  }
+>
+> @@ -2427,6 +2440,7 @@ static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+>             (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dds(s, a->rd, a->rs1, a->rs2, a->vm) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
+>  }
+>
+> @@ -2467,6 +2481,7 @@ static bool opfwf_widen_check(DisasContext *s, arg_rmrr *a)
+>             (s->sew != MO_8) &&
+>             vext_check_isa_ill(s) &&
+>             vext_check_dd(s, a->rd, a->rs2, a->vm) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
+>  }
+>
+> @@ -2731,6 +2746,7 @@ static bool opxfv_widen_check(DisasContext *s, arg_rmr *a)
+>  {
+>      return opfv_widen_check(s, a) &&
 >             require_rvf(s) &&
 > +           require_zve32f(s) &&
 >             require_zve64f(s);
+>  }
+>
+> @@ -2739,6 +2755,7 @@ static bool opffv_widen_check(DisasContext *s, arg_rmr *a)
+>      return opfv_widen_check(s, a) &&
+>             require_scale_rvf(s) &&
+>             (s->sew != MO_8) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
+>  }
+>
+> @@ -2791,6 +2808,7 @@ static bool opfxv_widen_check(DisasContext *s, arg_rmr *a)
+>             vext_check_isa_ill(s) &&
+>             /* OPFV widening instructions ignore vs1 check */
+>             vext_check_ds(s, a->rd, a->rs2, a->vm) &&
+> +           require_scale_zve32f(s) &&
+>             require_scale_zve64f(s);
 >  }
 >
 > --
