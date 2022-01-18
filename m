@@ -1,82 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9fWO-0008Jg-75
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 22:51:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40258)
+	id 1n9fiG-0003Bh-Rv
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 23:03:16 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n9fWL-0008G0-CF
- for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:50:57 -0500
-Received: from [2607:f8b0:4864:20::62d] (port=35631
- helo=mail-pl1-x62d.google.com)
+ id 1n9fiC-00037M-AP
+ for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 23:03:13 -0500
+Received: from [2607:f8b0:4864:20::433] (port=45707
+ helo=mail-pf1-x433.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1n9fWF-00087x-VT
- for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:50:56 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id u15so23246076ple.2
- for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 19:50:50 -0800 (PST)
+ id 1n9fi4-00017W-CJ
+ for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 23:03:10 -0500
+Received: by mail-pf1-x433.google.com with SMTP id 128so11945939pfe.12
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 20:03:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=yuF+Tfvqe3trrj8YXP6uluf7J5lCntcQbXhexVi1Yys=;
- b=TAurKlK0R0bg3chkH/DpL7gknG+0Rvh/l0xLOBXWXKHaqjE5X6BZ4DbYvmZmeYt/ej
- c6o2yvCUGRWScEEFj35qv1driuy1cR86AWoHw0TkXLKqreIIpkwknedqvOcY0HKqmY3c
- TGqQhE3izl5pb1azB7HDDpzeSC6poFmQaGNkPSdhO6QVRO2BCIz0IlbFiwaSNM3J/9ZZ
- 9bi7VstguFpi0KaiOVEy8TovyGGFyBHbxwqlvJrtL7zo8vl3qdM/TQYNpyAYGfWdsRH6
- iwSaglcCflpdkV9aAcL2WA0S+7bsBU+2nHVX2bNKB7XeUkBc0AeMmpg8ALAyRf8frAiB
- AMwA==
+ :cc; bh=9GYD0R3b+Vphcu871cKigV7iTPjK5AQ5c2HCCX/8ZrY=;
+ b=jvcpi1AmQbJ5JcHJJi7fYYOFKSAH8jWDxP7uh3TdUNRv+ibjUDuC8oXRj3fXwK8WQb
+ W+kHfOFR3w+uA2arcFsqSxfTeJwp8TaNWsLvcJmX4DILL3TYOwuTzyJ7//lkSGks4lY5
+ vVcvMpQCvRGKHCX5XWWZ22gqZl3SW+IKlv+/u1z2lpxEkZYMDD8E97FJexHC/4lz4f6f
+ yEzGFzkMlSI6mCpKgGBT3+zwkw4Visk92UPzhv74smtbMbQo3Ds2E4odCq5IhZ9HHRN3
+ c5TEa5ocXrHlfTSY0KISvG2zgW5mCb5P1SkGLas1b+31iAquLobfYfLwlC9RrK3IU0Vl
+ 2vuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=yuF+Tfvqe3trrj8YXP6uluf7J5lCntcQbXhexVi1Yys=;
- b=5j8gdU974iNWUXZ7NiUKT+uJeDsub8h7srreamy5d/LNu/J6uu/ayhY9UbQvqKMdaP
- hTzBRyjkNmHFM6glC5pNxp+9t0LinPqMiGx0+JwajMg3Dn+z12G8qtcL6obe+EmZeEqG
- 21Kp6ljjs1ceBrJDUr/1oiP7uu3hcuBHlfKLTUdejBMkSqAicqjs+i+UOG30q/59RC+O
- nCHGX0CWnqh9YaACGoh3hQ+w6uv4Ky9MJMli46mlmlpEMZMrVc2jwBfTr5i9tZCgGxq5
- jEfUyji+rmWM6JuMcJ1BjMGR3KLU+uDFpNYObfbd2F3HDgNzzax2VzaklroFHe/+VLcw
- SyLw==
-X-Gm-Message-State: AOAM532ojgOEcloMYqqSyC3SCTx40VQX24Ej8rZPnUFD/8/Ci7K5w7WF
- mNMuiwixQzjtV35beLYPs6/+9RNnftvGCPwf
-X-Google-Smtp-Source: ABdhPJyOxaOILL9Nwm0ZYpZMP+thUH7Ho8XJf9iKHAQwadGY30hxChe0uBXS3rqFPaLZ3kxA457M5Q==
-X-Received: by 2002:a17:90a:eac7:: with SMTP id
- ev7mr552815pjb.235.1642477849496; 
- Mon, 17 Jan 2022 19:50:49 -0800 (PST)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com.
- [209.85.214.181])
- by smtp.gmail.com with ESMTPSA id ip13sm744636pjb.13.2022.01.17.19.50.47
+ bh=9GYD0R3b+Vphcu871cKigV7iTPjK5AQ5c2HCCX/8ZrY=;
+ b=Eqn3L+uI4pSCjQeB2x+V6LIeBl4coM47UzBNiCBQOgB+PNHcWTdY0jPbI0N5h8TPlv
+ cBKMTIv6CX3eg9ZZq+/5YS6fd1i+KK0yX9eklT1tx5+mtyBsUBRxMAAK6yUs18tnoSir
+ Pqvp+OFi+/gmNe9r6ICXV3HdDPBUzCLtICBoO69WLY8HTZXFFMtUIgCG8R6GHOG0+frF
+ nUabdPg2TFwkLLVjHsUZx+ScNPB6nKXSGSdHGok0nKPgFk6T+buskEiF4hxc+9Njckxh
+ /MF2KBgL2TCuPBrGBXd0dpJnMgb5daYuc3jws4KnmgsrHdxWaa8T6ToD37/vMBmhtxS4
+ evJQ==
+X-Gm-Message-State: AOAM532IO4cXvi+/qcCQEjWqeZGNkMZaqTLLen6X3qiJeM85IPvGIDtP
+ WrB83rdFmKaOSgbJJ11/RPQ9bVgInEueXMn+
+X-Google-Smtp-Source: ABdhPJxXR7VznS9QnDhEI2D4bx5Bg/vhIAgn7W7a/wRLgpJ9kVO2zhJ8SI72wE/FGcgpskhaWfDVbQ==
+X-Received: by 2002:a63:d312:: with SMTP id b18mr6016256pgg.440.1642478582648; 
+ Mon, 17 Jan 2022 20:03:02 -0800 (PST)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com.
+ [209.85.214.175])
+ by smtp.gmail.com with ESMTPSA id ob12sm830442pjb.17.2022.01.17.20.03.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Jan 2022 19:50:47 -0800 (PST)
-Received: by mail-pl1-f181.google.com with SMTP id v2so8287281ply.11;
- Mon, 17 Jan 2022 19:50:47 -0800 (PST)
-X-Received: by 2002:a17:902:b710:b0:14a:28ee:fe6b with SMTP id
- d16-20020a170902b71000b0014a28eefe6bmr25604643pls.119.1642477847020; Mon, 17
- Jan 2022 19:50:47 -0800 (PST)
+ Mon, 17 Jan 2022 20:03:02 -0800 (PST)
+Received: by mail-pl1-f175.google.com with SMTP id t18so23189885plg.9;
+ Mon, 17 Jan 2022 20:03:01 -0800 (PST)
+X-Received: by 2002:a17:90b:1bcc:: with SMTP id
+ oa12mr28964040pjb.4.1642478581493; 
+ Mon, 17 Jan 2022 20:03:01 -0800 (PST)
 MIME-Version: 1.0
 References: <20220117132826.426418-1-anup@brainfault.org>
- <20220117132826.426418-10-anup@brainfault.org>
- <CANzO1D2OXSvhYgNKJSNTJaF7g5oJoP6pVj-+K+wWz0uWkQvbLw@mail.gmail.com>
- <CAK9=C2XwwT-uu+RaNTyrODtwxinxK--z1xhPPF5nztJmyNgnkA@mail.gmail.com>
-In-Reply-To: <CAK9=C2XwwT-uu+RaNTyrODtwxinxK--z1xhPPF5nztJmyNgnkA@mail.gmail.com>
+ <20220117132826.426418-21-anup@brainfault.org>
+In-Reply-To: <20220117132826.426418-21-anup@brainfault.org>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 18 Jan 2022 11:50:36 +0800
-X-Gmail-Original-Message-ID: <CANzO1D3uZaPbZ9tJc8Krg6h4N6TA=h2osoAwKX24MNPJBap=vw@mail.gmail.com>
-Message-ID: <CANzO1D3uZaPbZ9tJc8Krg6h4N6TA=h2osoAwKX24MNPJBap=vw@mail.gmail.com>
-Subject: Re: [PATCH v7 09/23] target/riscv: Implement AIA local interrupt
- priorities
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Frank Chang <frank.chang@sifive.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
+Date: Tue, 18 Jan 2022 12:02:50 +0800
+X-Gmail-Original-Message-ID: <CANzO1D0x0PtGgo7BPg0ytLoVuAjN1-K7cDOUY_9c_Vk6Rz__BA@mail.gmail.com>
+Message-ID: <CANzO1D0x0PtGgo7BPg0ytLoVuAjN1-K7cDOUY_9c_Vk6Rz__BA@mail.gmail.com>
+Subject: Re: [PATCH v7 20/23] hw/intc: Add RISC-V AIA IMSIC device emulation
+To: Anup Patel <anup@brainfault.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup@brainfault.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bmeng.cn@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000009f882105d5d32c2c"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62d
+ Atish Patra <atishp@atishpatra.org>
+Content-Type: multipart/alternative; boundary="00000000000066b3bd05d5d35877"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::433
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -96,1087 +90,1409 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 03:50:57 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 04:03:13 -0000
 
---0000000000009f882105d5d32c2c
+--00000000000066b3bd05d5d35877
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Anup Patel <apatel@ventanamicro.com> =E6=96=BC 2022=E5=B9=B41=E6=9C=8818=E6=
-=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=8811:41=E5=AF=AB=E9=81=93=EF=BC=
-=9A
+Anup Patel <anup@brainfault.org> =E6=96=BC 2022=E5=B9=B41=E6=9C=8817=E6=97=
+=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8810:29=E5=AF=AB=E9=81=93=EF=BC=9A
 
-> On Tue, Jan 18, 2022 at 9:04 AM Frank Chang <frank.chang@sifive.com>
-> wrote:
-> >
-> > Anup Patel <anup@brainfault.org> =E6=96=BC 2022=E5=B9=B41=E6=9C=8817=E6=
-=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8810:28=E5=AF=AB=E9=81=93=EF=BC=
-=9A
-> >>
-> >> From: Anup Patel <anup.patel@wdc.com>
-> >>
-> >> The AIA spec defines programmable 8-bit priority for each local
-> interrupt
-> >> at M-level, S-level and VS-level so we extend local interrupt processi=
-ng
-> >> to consider AIA interrupt priorities. The AIA CSRs which help software
-> >> configure local interrupt priorities will be added by subsequent
-> patches.
-> >>
-> >> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> >> Signed-off-by: Anup Patel <anup@brainfault.org>
-> >> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> >> ---
-> >>  target/riscv/cpu.c        |  19 +++
-> >>  target/riscv/cpu.h        |  12 ++
-> >>  target/riscv/cpu_helper.c | 242 ++++++++++++++++++++++++++++++++++---=
--
-> >>  target/riscv/machine.c    |   3 +
-> >>  4 files changed, 255 insertions(+), 21 deletions(-)
-> >>
-> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> >> index 76f9786836..167d86eef7 100644
-> >> --- a/target/riscv/cpu.c
-> >> +++ b/target/riscv/cpu.c
-> >> @@ -370,6 +370,10 @@ void restore_state_to_opc(CPURISCVState *env,
-> TranslationBlock *tb,
-> >>
-> >>  static void riscv_cpu_reset(DeviceState *dev)
-> >>  {
-> >> +#ifndef CONFIG_USER_ONLY
-> >> +    uint8_t iprio;
-> >> +    int i, irq, rdzero;
-> >> +#endif
-> >>      CPUState *cs =3D CPU(dev);
-> >>      RISCVCPU *cpu =3D RISCV_CPU(cs);
-> >>      RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu);
-> >> @@ -392,6 +396,21 @@ static void riscv_cpu_reset(DeviceState *dev)
-> >>      env->miclaim =3D MIP_SGEIP;
-> >>      env->pc =3D env->resetvec;
-> >>      env->two_stage_lookup =3D false;
-> >> +
-> >> +    /* Initialized default priorities of local interrupts. */
-> >> +    for (i =3D 0; i < ARRAY_SIZE(env->miprio); i++) {
-> >> +        iprio =3D riscv_cpu_default_priority(i);
-> >> +        env->miprio[i] =3D (i =3D=3D IRQ_M_EXT) ? 0 : iprio;
-> >> +        env->siprio[i] =3D (i =3D=3D IRQ_S_EXT) ? 0 : iprio;
-> >> +        env->hviprio[i] =3D 0;
-> >> +    }
-> >> +    i =3D 0;
-> >> +    while (!riscv_cpu_hviprio_index2irq(i, &irq, &rdzero)) {
-> >> +        if (!rdzero) {
-> >> +            env->hviprio[irq] =3D env->miprio[irq];
-> >> +        }
-> >> +        i++;
-> >> +    }
-> >>      /* mmte is supposed to have pm.current hardwired to 1 */
-> >>      env->mmte |=3D (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
-> >>  #endif
-> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> >> index cee70f8608..65d2b606fc 100644
-> >> --- a/target/riscv/cpu.h
-> >> +++ b/target/riscv/cpu.h
-> >> @@ -190,6 +190,10 @@ struct CPURISCVState {
-> >>      target_ulong mcause;
-> >>      target_ulong mtval;  /* since: priv-1.10.0 */
-> >>
-> >> +    /* Machine and Supervisor interrupt priorities */
-> >> +    uint8_t miprio[64];
-> >> +    uint8_t siprio[64];
-> >> +
-> >>      /* Hypervisor CSRs */
-> >>      target_ulong hstatus;
-> >>      target_ulong hedeleg;
-> >> @@ -202,6 +206,9 @@ struct CPURISCVState {
-> >>      target_ulong hgeip;
-> >>      uint64_t htimedelta;
-> >>
-> >> +    /* Hypervisor controlled virtual interrupt priorities */
-> >> +    uint8_t hviprio[64];
-> >> +
-> >>      /* Upper 64-bits of 128-bit CSRs */
-> >>      uint64_t mscratchh;
-> >>      uint64_t sscratchh;
-> >> @@ -392,6 +399,11 @@ int
-> riscv_cpu_write_elf32_note(WriteCoreDumpFunction f, CPUState *cs,
-> >>                                 int cpuid, void *opaque);
-> >>  int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int
-> reg);
-> >>  int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg=
-);
-> >> +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int
-> *out_rdzero);
-> >> +uint8_t riscv_cpu_default_priority(int irq);
-> >> +int riscv_cpu_mirq_pending(CPURISCVState *env);
-> >> +int riscv_cpu_sirq_pending(CPURISCVState *env);
-> >> +int riscv_cpu_vsirq_pending(CPURISCVState *env);
-> >>  bool riscv_cpu_fp_enabled(CPURISCVState *env);
-> >>  target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
-> >>  void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
-> >> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> >> index 59c8f900df..3a36200780 100644
-> >> --- a/target/riscv/cpu_helper.c
-> >> +++ b/target/riscv/cpu_helper.c
-> >> @@ -151,36 +151,236 @@ void cpu_get_tb_cpu_state(CPURISCVState *env,
-> target_ulong *pc,
-> >>  }
-> >>
-> >>  #ifndef CONFIG_USER_ONLY
-> >> -static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-> >> +
-> >> +/*
-> >> + * The HS-mode is allowed to configure priority only for the
-> >> + * following VS-mode local interrupts:
-> >> + *
-> >> + * 0  (Reserved interrupt, reads as zero)
-> >> + * 1  Supervisor software interrupt
-> >> + * 4  (Reserved interrupt, reads as zero)
-> >> + * 5  Supervisor timer interrupt
-> >> + * 8  (Reserved interrupt, reads as zero)
-> >> + * 13 (Reserved interrupt)
-> >> + * 14 "
-> >> + * 15 "
-> >> + * 16 "
-> >> + * 18 Debug/trace interrupt
-> >> + * 20 (Reserved interrupt)
-> >> + * 22 "
-> >> + * 24 "
-> >> + * 26 "
-> >> + * 28 "
-> >> + * 30 (Reserved for standard reporting of bus or system errors)
-> >> + */
-> >> +
-> >> +static int hviprio_index2irq[] =3D
-> >> +    { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 };
-> >> +static int hviprio_index2rdzero[] =3D
-> >> +    { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-> >> +
-> >> +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int
-> *out_rdzero)
-> >>  {
-> >> -    target_ulong virt_enabled =3D riscv_cpu_virt_enabled(env);
-> >> +    if (index < 0 || ARRAY_SIZE(hviprio_index2irq) <=3D index) {
-> >> +        return -EINVAL;
-> >> +    }
-> >> +
-> >> +    if (out_irq) {
-> >> +        *out_irq =3D hviprio_index2irq[index];
-> >> +    }
-> >>
-> >> -    target_ulong mstatus_mie =3D get_field(env->mstatus, MSTATUS_MIE)=
-;
-> >> -    target_ulong mstatus_sie =3D get_field(env->mstatus, MSTATUS_SIE)=
-;
-> >> +    if (out_rdzero) {
-> >> +        *out_rdzero =3D hviprio_index2rdzero[index];
-> >> +    }
-> >>
-> >> -    target_ulong vsgemask =3D
-> >> -                (target_ulong)1 << get_field(env->hstatus,
-> HSTATUS_VGEIN);
-> >> -    target_ulong vsgein =3D (env->hgeip & vsgemask) ? MIP_VSEIP : 0;
-> >> +    return 0;
-> >> +}
-> >>
-> >> -    target_ulong pending =3D (env->mip | vsgein) & env->mie;
-> >> +uint8_t riscv_cpu_default_priority(int irq)
-> >> +{
-> >> +    int u, l;
-> >> +    uint8_t iprio =3D IPRIO_MMAXIPRIO;
-> >>
-> >> -    target_ulong mie    =3D env->priv < PRV_M ||
-> >> -                          (env->priv =3D=3D PRV_M && mstatus_mie);
-> >> -    target_ulong sie    =3D env->priv < PRV_S ||
-> >> -                          (env->priv =3D=3D PRV_S && mstatus_sie);
-> >> -    target_ulong hsie   =3D virt_enabled || sie;
-> >> -    target_ulong vsie   =3D virt_enabled && sie;
-> >> +    if (irq < 0 || irq > 63) {
-> >> +        return iprio;
-> >> +    }
-> >>
-> >> -    target_ulong irqs =3D
-> >> -            (pending & ~env->mideleg & -mie) |
-> >> -            (pending &  env->mideleg & ~env->hideleg & -hsie) |
-> >> -            (pending &  env->mideleg &  env->hideleg & -vsie);
-> >> +    /*
-> >> +     * Default priorities of local interrupts are defined in the
-> >> +     * RISC-V Advanced Interrupt Architecture specification.
-> >> +     *
-> >> +     * --------------------------------------------------------------=
---
-> >> +     *  Default  |
-> >> +     *  Priority | Major Interrupt Numbers
-> >> +     * --------------------------------------------------------------=
---
-> >> +     *  Highest  | 63 (3f), 62 (3e), 31 (1f), 30 (1e), 61 (3d), 60
-> (3c),
-> >> +     *           | 59 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56
-> (38),
-> >> +     *           | 55 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52
-> (34),
-> >> +     *           | 51 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (3=
-0)
-> >> +     *           |
-> >> +     *           | 11 (0b),  3 (03),  7 (07)
-> >> +     *           |  9 (09),  1 (01),  5 (05)
-> >> +     *           | 12 (0c)
-> >> +     *           | 10 (0a),  2 (02),  6 (06)
-> >> +     *           |
-> >> +     *           | 47 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44
-> (2c),
-> >> +     *           | 43 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40
-> (28),
-> >> +     *           | 39 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36
-> (24),
-> >> +     *  Lowest   | 35 (23), 34 (22), 17 (11), 16 (10), 33 (21), 32 (2=
-0)
-> >> +     * --------------------------------------------------------------=
---
-> >> +     */
-> >>
-> >> -    if (irqs) {
-> >> -        return ctz64(irqs); /* since non-zero */
-> >> +    u =3D IPRIO_DEFAULT_U(irq);
-> >> +    l =3D IPRIO_DEFAULT_L(irq);
-> >> +    if (u =3D=3D 0) {
-> >> +        if (irq =3D=3D IRQ_VS_EXT || irq =3D=3D IRQ_VS_TIMER ||
-> >> +            irq =3D=3D IRQ_VS_SOFT) {
-> >> +            iprio =3D IPRIO_DEFAULT_VS;
-> >> +        } else if (irq =3D=3D IRQ_S_GEXT) {
-> >> +            iprio =3D IPRIO_DEFAULT_SGEXT;
-> >> +        } else if (irq =3D=3D IRQ_S_EXT || irq =3D=3D IRQ_S_TIMER ||
-> >> +                   irq =3D=3D IRQ_S_SOFT) {
-> >> +            iprio =3D IPRIO_DEFAULT_S;
-> >> +        } else if (irq =3D=3D IRQ_M_EXT || irq =3D=3D IRQ_M_TIMER ||
-> >> +                   irq =3D=3D IRQ_M_SOFT) {
-> >> +            iprio =3D IPRIO_DEFAULT_M;
-> >> +        } else {
-> >> +            iprio =3D IPRIO_DEFAULT_VS;
-> >> +        }
-> >> +    } else if (u =3D=3D 1) {
-> >> +        if (l < 8) {
-> >> +            iprio =3D IPRIO_DEFAULT_16_23(irq);
-> >> +        } else {
-> >> +            iprio =3D IPRIO_DEFAULT_24_31(irq);
-> >> +        }
-> >> +    } else if (u =3D=3D 2) {
-> >> +        iprio =3D IPRIO_DEFAULT_32_47(irq);
-> >> +    } else if (u =3D=3D 3) {
-> >> +        iprio =3D IPRIO_DEFAULT_48_63(irq);
-> >> +    }
-> >> +
-> >> +    return iprio;
-> >> +}
-> >> +
-> >> +static int riscv_cpu_pending_to_irq(CPURISCVState *env,
-> >> +                                    int extirq, unsigned int
-> extirq_def_prio,
-> >> +                                    uint64_t pending, uint8_t *iprio)
-> >> +{
-> >> +    int irq, best_irq =3D RISCV_EXCP_NONE;
-> >> +    unsigned int prio, best_prio =3D UINT_MAX;
-> >> +
-> >> +    if (!pending) {
-> >> +        return RISCV_EXCP_NONE;
-> >> +    }
-> >> +
-> >> +    irq =3D ctz64(pending);
-> >> +    if (!riscv_feature(env, RISCV_FEATURE_AIA)) {
-> >> +        return irq;
-> >> +    }
-> >> +
-> >> +    pending =3D pending >> irq;
-> >> +    while (pending) {
-> >> +        prio =3D iprio[irq];
-> >> +        if (!prio) {
-> >> +            if (irq =3D=3D extirq) {
-> >> +                prio =3D extirq_def_prio;
-> >> +            } else {
-> >> +                prio =3D (riscv_cpu_default_priority(irq) <
-> extirq_def_prio) ?
-> >> +                       1 : IPRIO_MMAXIPRIO;
-> >> +            }
-> >> +        }
-> >> +        if ((pending & 0x1) && (prio <=3D best_prio)) {
-> >> +            best_irq =3D irq;
-> >> +            best_prio =3D prio;
-> >> +        }
-> >> +        irq++;
-> >> +        pending =3D pending >> 1;
-> >> +    }
-> >> +
-> >> +    return best_irq;
-> >> +}
-> >
-> >
-> > Hi Anup,
-> >
-> > RISC-V Priv spec defines the priority order:
-> >   Multiple simultaneous interrupts destined for the same privilege mode
-> >   are handled in the following decreasing priority order: MEI, MSI, MTI=
+> From: Anup Patel <anup.patel@wdc.com>
+>
+> The RISC-V AIA (Advanced Interrupt Architecture) defines a new
+> interrupt controller for MSIs (message signal interrupts) called
+> IMSIC (Incoming Message Signal Interrupt Controller). The IMSIC
+> is per-HART device and also suppport virtualizaiton of MSIs using
+> dedicated VS-level guest interrupt files.
+>
+> This patch adds device emulation for RISC-V AIA IMSIC which
+> supports M-level, S-level, and VS-level MSIs.
+>
+> Signed-off-by: Anup Patel <anup.patel@wdc.com>
+> Signed-off-by: Anup Patel <anup@brainfault.org>
+> ---
+>  hw/intc/Kconfig               |   3 +
+>  hw/intc/meson.build           |   1 +
+>  hw/intc/riscv_imsic.c         | 448 ++++++++++++++++++++++++++++++++++
+>  include/hw/intc/riscv_imsic.h |  68 ++++++
+>  4 files changed, 520 insertions(+)
+>  create mode 100644 hw/intc/riscv_imsic.c
+>  create mode 100644 include/hw/intc/riscv_imsic.h
+>
+> diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
+> index 528e77b4a6..ec8d4cec29 100644
+> --- a/hw/intc/Kconfig
+> +++ b/hw/intc/Kconfig
+> @@ -73,6 +73,9 @@ config RISCV_ACLINT
+>  config RISCV_APLIC
+>      bool
+>
+> +config RISCV_IMSIC
+> +    bool
+> +
+>  config SIFIVE_PLIC
+>      bool
+>
+> diff --git a/hw/intc/meson.build b/hw/intc/meson.build
+> index 7466024402..5caa337654 100644
+> --- a/hw/intc/meson.build
+> +++ b/hw/intc/meson.build
+> @@ -51,6 +51,7 @@ specific_ss.add(when: 'CONFIG_S390_FLIC_KVM', if_true:
+> files('s390_flic_kvm.c'))
+>  specific_ss.add(when: 'CONFIG_SH_INTC', if_true: files('sh_intc.c'))
+>  specific_ss.add(when: 'CONFIG_RISCV_ACLINT', if_true:
+> files('riscv_aclint.c'))
+>  specific_ss.add(when: 'CONFIG_RISCV_APLIC', if_true:
+> files('riscv_aplic.c'))
+> +specific_ss.add(when: 'CONFIG_RISCV_IMSIC', if_true:
+> files('riscv_imsic.c'))
+>  specific_ss.add(when: 'CONFIG_SIFIVE_PLIC', if_true:
+> files('sifive_plic.c'))
+>  specific_ss.add(when: 'CONFIG_XICS', if_true: files('xics.c'))
+>  specific_ss.add(when: ['CONFIG_KVM', 'CONFIG_XICS'],
+> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+> new file mode 100644
+> index 0000000000..18d2877832
+> --- /dev/null
+> +++ b/hw/intc/riscv_imsic.c
+> @@ -0,0 +1,448 @@
+> +/*
+> + * RISC-V IMSIC (Incoming Message Signaled Interrupt Controller)
+> + *
+> + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qapi/error.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "qemu/error-report.h"
+> +#include "qemu/bswap.h"
+> +#include "exec/address-spaces.h"
+> +#include "hw/sysbus.h"
+> +#include "hw/pci/msi.h"
+> +#include "hw/boards.h"
+> +#include "hw/qdev-properties.h"
+> +#include "hw/intc/riscv_imsic.h"
+> +#include "hw/irq.h"
+> +#include "target/riscv/cpu.h"
+> +#include "target/riscv/cpu_bits.h"
+> +#include "sysemu/sysemu.h"
+> +#include "migration/vmstate.h"
+> +
+> +#define IMSIC_MMIO_PAGE_LE             0x00
+> +#define IMSIC_MMIO_PAGE_BE             0x04
+> +
+> +#define IMSIC_MIN_ID                   ((IMSIC_EIPx_BITS * 2) - 1)
+> +#define IMSIC_MAX_ID                   (IMSIC_TOPEI_IID_MASK)
+> +
+> +#define IMSIC_EISTATE_PENDING          (1U << 0)
+> +#define IMSIC_EISTATE_ENABLED          (1U << 1)
+> +#define IMSIC_EISTATE_ENPEND           (IMSIC_EISTATE_ENABLED | \
+> +                                        IMSIC_EISTATE_PENDING)
+> +
+> +static uint32_t riscv_imsic_topei(RISCVIMSICState *imsic, uint32_t page)
+> +{
+> +    uint32_t i, max_irq, base;
+> +
+> +    base =3D page * imsic->num_irqs;
+> +    max_irq =3D (imsic->eithreshold[page] &&
+> +               (imsic->eithreshold[page] <=3D imsic->num_irqs)) ?
+> +               imsic->eithreshold[page] : imsic->num_irqs;
+> +    for (i =3D 1; i < max_irq; i++) {
+> +        if ((imsic->eistate[base + i] & IMSIC_EISTATE_ENPEND) =3D=3D
+> +                IMSIC_EISTATE_ENPEND) {
+> +            return (i << IMSIC_TOPEI_IID_SHIFT) | i;
+> +        }
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +static void riscv_imsic_update(RISCVIMSICState *imsic, uint32_t page)
+> +{
+> +    if (imsic->eidelivery[page] && riscv_imsic_topei(imsic, page)) {
+> +        qemu_irq_raise(imsic->external_irqs[page]);
+> +    } else {
+> +        qemu_irq_lower(imsic->external_irqs[page]);
+> +    }
+> +}
+> +
+> +static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t
+> page,
+> +                                      target_ulong *val,
+> +                                      target_ulong new_val,
+> +                                      target_ulong wr_mask)
+> +{
+> +    target_ulong old_val =3D imsic->eidelivery[page];
+> +
+> +    if (val) {
+> +        *val =3D old_val;
+> +    }
+> +
+> +    wr_mask &=3D 0x1;
+> +    imsic->eidelivery[page] =3D (old_val & ~wr_mask) | (new_val & wr_mas=
+k);
+> +
+> +    riscv_imsic_update(imsic, page);
+> +    return 0;
+> +}
+> +
+> +static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t
+> page,
+> +                                      target_ulong *val,
+> +                                      target_ulong new_val,
+> +                                      target_ulong wr_mask)
+> +{
+> +    target_ulong old_val =3D imsic->eithreshold[page];
+> +
+> +    if (val) {
+> +        *val =3D old_val;
+> +    }
+> +
+> +    wr_mask &=3D IMSIC_MAX_ID;
+> +    imsic->eithreshold[page] =3D (old_val & ~wr_mask) | (new_val & wr_ma=
+sk);
+> +
+> +    riscv_imsic_update(imsic, page);
+> +    return 0;
+> +}
+> +
+> +static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,
+> +                                 target_ulong *val, target_ulong new_val=
 ,
-> SEI, SSI, STI, UEI,
-> >   USI, UTI.
-> >
-> > So the priority order should be: MEI (11) > MSI (3) > MTI (7).
-> >
-> > But if MSI and MTI are pending-and-enabled,
-> > with all of their iprio assigned to their default priority orders
-> (IPRIO_DEFAULT_M)
-> > (or iprio assigned to zero, which the default priority orders are
-> applied as well).
-> > riscv_cpu_pending_to_irq() would incorrectly pick MTI (7), instead of
-> MSI (3),
-> > because they all have the same default priority order: IPRIO_DEFAULT_M.
->
-> Ahh yes, I missed addressing this one.
->
-> If you can review other patches as well then I can send v8 this week
-> itself.
->
-> Thanks,
-> Anup
->
-
-Sure, I'll review the remaining patches 15, 18, 20.
-
-Sorry that I'm not familiar with PCIe IRQ mapping and DTS creation,
-so I will leave patches 19 and 21 for other experts.
-But I think the APLIC and IMSIC creation parts in virt machine look good to
-me.
-
-Regards,
-Frank Chang
-
-
->
-> >
-> > Regards,
-> > Frank Chang
-> >
-> >>
-> >> +
-> >> +static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
-> >> +{
-> >> +    uint32_t gein =3D get_field(env->hstatus, HSTATUS_VGEIN);
-> >> +    uint64_t vsgein =3D (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0=
+> +                                 target_ulong wr_mask)
+> +{
+> +    uint32_t base, topei =3D riscv_imsic_topei(imsic, page);
+> +
+> +    /* Read pending and enabled interrupt with highest priority */
+> +    if (val) {
+> +        *val =3D topei;
+> +    }
+> +
+> +    /* Writes ignore value and clear top pending interrupt */
+> +    if (topei && wr_mask) {
+> +        topei >>=3D IMSIC_TOPEI_IID_SHIFT;
+> +        base =3D page * imsic->num_irqs;
+> +        if (topei) {
+> +            imsic->eistate[base + topei] &=3D ~IMSIC_EISTATE_PENDING;
+> +        }
+> +
+> +        riscv_imsic_update(imsic, page);
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic,
+> +                               uint32_t xlen, uint32_t page,
+> +                               uint32_t num, bool pend, target_ulong *va=
+l,
+> +                               target_ulong new_val, target_ulong wr_mas=
+k)
+> +{
+> +    uint32_t i, base;
+> +    target_ulong mask;
+> +    uint32_t state =3D (pend) ? IMSIC_EISTATE_PENDING :
+> IMSIC_EISTATE_ENABLED;
+> +
+> +    if (xlen !=3D 32) {
+> +        if (num & 0x1) {
+> +            return -EINVAL;
+> +        }
+> +        num >>=3D 1;
+> +    }
+> +    if (num >=3D (imsic->num_irqs / xlen)) {
+> +        return -EINVAL;
+> +    }
+> +
+> +    base =3D (page * imsic->num_irqs) + (num * xlen);
+> +
+> +    if (val) {
+> +        *val =3D 0;
+> +        for (i =3D 0; i < xlen; i++) {
+> +            mask =3D (target_ulong)1 << i;
+> +            *val |=3D (imsic->eistate[base + i] & state) ? mask : 0;
+> +        }
+> +    }
+> +
+> +    for (i =3D 0; i < xlen; i++) {
+> +        /* Bit0 of eip0 and eie0 are read-only zero */
+> +        if (!num && !i) {
+> +            continue;
+> +        }
+> +
+> +        mask =3D (target_ulong)1 << i;
+> +        if (wr_mask & mask) {
+> +            if (new_val & mask) {
+> +                imsic->eistate[base + i] |=3D state;
+> +            } else {
+> +                imsic->eistate[base + i] &=3D ~state;
+> +            }
+> +        }
+> +    }
+> +
+> +    riscv_imsic_update(imsic, page);
+> +    return 0;
+> +}
+> +
+> +static int riscv_imsic_rmw(void *arg, target_ulong reg, target_ulong *va=
+l,
+> +                           target_ulong new_val, target_ulong wr_mask)
+> +{
+> +    RISCVIMSICState *imsic =3D arg;
+> +    uint32_t isel, priv, virt, vgein, xlen, page;
+> +
+> +    priv =3D AIA_IREG_PRIV(reg);
+> +    virt =3D AIA_IREG_VIRT(reg);
+> +    isel =3D AIA_IREG_ISEL(reg);
+> +    vgein =3D AIA_IREG_VGEIN(reg);
+> +    xlen =3D AIA_IREG_XLEN(reg);
+> +
+> +    if (imsic->mmode) {
+> +        if (priv =3D=3D PRV_M && !virt) {
+> +            page =3D 0;
+> +        } else {
+> +            goto err;
+> +        }
+> +    } else {
+> +        if (priv =3D=3D PRV_S) {
+> +            if (virt) {
+> +                if (vgein && vgein < imsic->num_pages) {
+> +                    page =3D vgein;
+> +                } else {
+> +                    goto err;
+> +                }
+> +            } else {
+> +                page =3D 0;
+> +            }
+> +        } else {
+> +            goto err;
+> +        }
+> +    }
+> +
+> +    switch (isel) {
+> +    case ISELECT_IMSIC_EIDELIVERY:
+> +        return riscv_imsic_eidelivery_rmw(imsic, page, val,
+> +                                          new_val, wr_mask);
+> +    case ISELECT_IMSIC_EITHRESHOLD:
+> +        return riscv_imsic_eithreshold_rmw(imsic, page, val,
+> +                                           new_val, wr_mask);
+> +    case ISELECT_IMSIC_TOPEI:
+> +        return riscv_imsic_topei_rmw(imsic, page, val, new_val, wr_mask)=
 ;
-> >> +
-> >> +    return (env->mip | vsgein) & env->mie;
-> >> +}
-> >> +
-> >> +int riscv_cpu_mirq_pending(CPURISCVState *env)
-> >> +{
-> >> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & ~env->mideleg &
-> >> +                    ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-> >> +
-> >> +    return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPRIO_DEFAULT_M,
-> >> +                                    irqs, env->miprio);
-> >> +}
-> >> +
-> >> +int riscv_cpu_sirq_pending(CPURISCVState *env)
-> >> +{
-> >> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & env->mideleg &
-> >> +                    ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-> >> +
-> >> +    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-> >> +                                    irqs, env->siprio);
-> >> +}
-> >> +
-> >> +int riscv_cpu_vsirq_pending(CPURISCVState *env)
-> >> +{
-> >> +    uint64_t irqs =3D riscv_cpu_all_pending(env) & env->mideleg &
-> >> +                    (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);
-> >> +
-> >> +    return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPRIO_DEFAULT_S,
-> >> +                                    irqs >> 1, env->hviprio);
-> >> +}
-> >> +
-> >> +static int riscv_cpu_local_irq_pending(CPURISCVState *env)
-> >> +{
-> >> +    int virq;
-> >> +    uint64_t irqs, pending, mie, hsie, vsie;
-> >> +
-> >> +    /* Determine interrupt enable state of all privilege modes */
-> >> +    if (riscv_cpu_virt_enabled(env)) {
-> >> +        mie =3D 1;
-> >> +        hsie =3D 1;
-> >> +        vsie =3D (env->priv < PRV_S) ||
-> >> +               (env->priv =3D=3D PRV_S && get_field(env->mstatus,
-> MSTATUS_SIE));
-> >>      } else {
-> >> -        return RISCV_EXCP_NONE; /* indicates no pending interrupt */
-> >> +        mie =3D (env->priv < PRV_M) ||
-> >> +              (env->priv =3D=3D PRV_M && get_field(env->mstatus,
-> MSTATUS_MIE));
-> >> +        hsie =3D (env->priv < PRV_S) ||
-> >> +               (env->priv =3D=3D PRV_S && get_field(env->mstatus,
-> MSTATUS_SIE));
-> >> +        vsie =3D 0;
-> >>      }
-> >> +
-> >> +    /* Determine all pending interrupts */
-> >> +    pending =3D riscv_cpu_all_pending(env);
-> >> +
-> >> +    /* Check M-mode interrupts */
-> >> +    irqs =3D pending & ~env->mideleg & -mie;
-> >> +    if (irqs) {
-> >> +        return riscv_cpu_pending_to_irq(env, IRQ_M_EXT,
-> IPRIO_DEFAULT_M,
-> >> +                                        irqs, env->miprio);
-> >> +    }
-> >> +
-> >> +    /* Check HS-mode interrupts */
-> >> +    irqs =3D pending & env->mideleg & ~env->hideleg & -hsie;
-> >> +    if (irqs) {
-> >> +        return riscv_cpu_pending_to_irq(env, IRQ_S_EXT,
-> IPRIO_DEFAULT_S,
-> >> +                                        irqs, env->siprio);
-> >> +    }
-> >> +
-> >> +    /* Check VS-mode interrupts */
-> >> +    irqs =3D pending & env->mideleg & env->hideleg & -vsie;
-> >> +    if (irqs) {
-> >> +        virq =3D riscv_cpu_pending_to_irq(env, IRQ_S_EXT,
-> IPRIO_DEFAULT_S,
-> >> +                                        irqs >> 1, env->hviprio);
-> >> +        return (virq <=3D 0) ? virq : virq + 1;
-> >> +    }
-> >> +
-> >> +    /* Indicate no pending interrupt */
-> >> +    return RISCV_EXCP_NONE;
-> >>  }
-> >>
-> >>  bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
-> >> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> >> index c11eb4639c..bae4f69725 100644
-> >> --- a/target/riscv/machine.c
-> >> +++ b/target/riscv/machine.c
-> >> @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =3D {
-> >>          VMSTATE_UINTTL(env.hgeie, RISCVCPU),
-> >>          VMSTATE_UINTTL(env.hgeip, RISCVCPU),
-> >>          VMSTATE_UINT64(env.htimedelta, RISCVCPU),
-> >> +        VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
-> >>
-> >>          VMSTATE_UINT64(env.vsstatus, RISCVCPU),
-> >>          VMSTATE_UINTTL(env.vstvec, RISCVCPU),
-> >> @@ -194,6 +195,8 @@ const VMStateDescription vmstate_riscv_cpu =3D {
-> >>      .fields =3D (VMStateField[]) {
-> >>          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> >>          VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
-> >> +        VMSTATE_UINT8_ARRAY(env.miprio, RISCVCPU, 64),
-> >> +        VMSTATE_UINT8_ARRAY(env.siprio, RISCVCPU, 64),
-> >>          VMSTATE_UINTTL(env.pc, RISCVCPU),
-> >>          VMSTATE_UINTTL(env.load_res, RISCVCPU),
-> >>          VMSTATE_UINTTL(env.load_val, RISCVCPU),
-> >> --
-> >> 2.25.1
-> >>
-> >>
+> +    case ISELECT_IMSIC_EIP0 ... ISELECT_IMSIC_EIP63:
+> +        return riscv_imsic_eix_rmw(imsic, xlen, page,
+> +                                   isel - ISELECT_IMSIC_EIP0,
+> +                                   true, val, new_val, wr_mask);
+> +    case ISELECT_IMSIC_EIE0 ... ISELECT_IMSIC_EIE63:
+> +        return riscv_imsic_eix_rmw(imsic, xlen, page,
+> +                                   isel - ISELECT_IMSIC_EIE0,
+> +                                   false, val, new_val, wr_mask);
+> +    default:
+> +        break;
+> +    };
+> +
+> +err:
+> +    qemu_log_mask(LOG_GUEST_ERROR,
+> +                  "%s: Invalid register priv=3D%d virt=3D%d isel=3D%d
+> vgein=3D%d\n",
+> +                  __func__, priv, virt, isel, vgein);
+> +    return -EINVAL;
+> +}
+> +
+> +static uint64_t riscv_imsic_read(void *opaque, hwaddr addr, unsigned siz=
+e)
+> +{
+> +    RISCVIMSICState *imsic =3D opaque;
+> +
+> +    /* Reads must be 4 byte words */
+> +    if ((addr & 0x3) !=3D 0) {
+> +        goto err;
+> +    }
+> +
+> +    /* Reads cannot be out of range */
+> +    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
+> +        goto err;
+> +    }
+> +
+> +    return 0;
+> +
+> +err:
+> +    qemu_log_mask(LOG_GUEST_ERROR,
+> +                  "%s: Invalid register read 0x%" HWADDR_PRIx "\n",
+> +                  __func__, addr);
+> +    return 0;
+> +}
+> +
+> +static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
+> +        unsigned size)
+> +{
+> +    RISCVIMSICState *imsic =3D opaque;
+> +    uint32_t page;
+> +
+> +    /* Writes must be 4 byte words */
+> +    if ((addr & 0x3) !=3D 0) {
+> +        goto err;
+> +    }
+> +
+> +    /* Writes cannot be out of range */
+> +    if (addr > IMSIC_MMIO_SIZE(imsic->num_pages)) {
+> +        goto err;
+> +    }
+> +
+> +    /* Writes only supported for MSI little-endian registers */
+> +    page =3D addr >> IMSIC_MMIO_PAGE_SHIFT;
+> +    if ((addr & (IMSIC_MMIO_PAGE_SZ - 1)) =3D=3D IMSIC_MMIO_PAGE_LE) {
+> +        if (value && (value < imsic->num_irqs)) {
+> +            imsic->eistate[(page * imsic->num_irqs) + value] |=3D
+> +                                                    IMSIC_EISTATE_PENDIN=
+G;
+> +        }
+> +    }
+> +
+> +    /* Update CPU external interrupt status */
+> +    riscv_imsic_update(imsic, page);
+> +
+> +    return;
+> +
+> +err:
+> +    qemu_log_mask(LOG_GUEST_ERROR,
+> +                  "%s: Invalid register write 0x%" HWADDR_PRIx "\n",
+> +                  __func__, addr);
+> +}
+> +
+> +static const MemoryRegionOps riscv_imsic_ops =3D {
+> +    .read =3D riscv_imsic_read,
+> +    .write =3D riscv_imsic_write,
+> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
+> +    .valid =3D {
+> +        .min_access_size =3D 4,
+> +        .max_access_size =3D 4
+> +    }
+> +};
+> +
+> +static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+> +{
+> +    RISCVIMSICState *imsic =3D RISCV_IMSIC(dev);
+> +    RISCVCPU *rcpu =3D RISCV_CPU(qemu_get_cpu(imsic->hartid));
+> +    CPUState *cpu =3D qemu_get_cpu(imsic->hartid);
+> +    CPURISCVState *env =3D cpu ? cpu->env_ptr : NULL;
+> +
+> +    imsic->num_eistate =3D imsic->num_pages * imsic->num_irqs;
+> +    imsic->eidelivery =3D g_new0(uint32_t, imsic->num_pages);
+> +    imsic->eithreshold =3D g_new0(uint32_t, imsic->num_pages);
+> +    imsic->eistate =3D g_new0(uint32_t, imsic->num_eistate);
+> +
+> +    memory_region_init_io(&imsic->mmio, OBJECT(dev), &riscv_imsic_ops,
+> +                          imsic, TYPE_RISCV_IMSIC,
+> +                          IMSIC_MMIO_SIZE(imsic->num_pages));
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &imsic->mmio);
+> +
+> +    /* Claim the CPU interrupt to be triggered by this IMSIC */
+> +    if (riscv_cpu_claim_interrupts(rcpu,
+> +            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
+> +        error_report("%s already claimed",
+> +                     (imsic->mmode) ? "MEIP" : "SEIP");
+> +        exit(1);
+> +    }
+> +
+> +    /* Create output IRQ lines */
+> +    imsic->external_irqs =3D g_malloc(sizeof(qemu_irq) * imsic->num_page=
+s);
+> +    qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
+> +
+> +    /* Force select AIA feature and setup CSR read-modify-write callback
+> */
+> +    if (env) {
+> +        riscv_set_feature(env, RISCV_FEATURE_AIA);
+> +        if (!imsic->mmode) {
+> +            riscv_cpu_set_geilen(env, imsic->num_pages - 1);
+> +        }
+> +        riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_=
+S,
+> +                                      riscv_imsic_rmw, imsic);
+> +    }
+> +
+> +    msi_nonbroken =3D true;
+> +}
+> +
+> +static Property riscv_imsic_properties[] =3D {
+> +    DEFINE_PROP_BOOL("mmode", RISCVIMSICState, mmode, 0),
+> +    DEFINE_PROP_UINT32("hartid", RISCVIMSICState, hartid, 0),
+> +    DEFINE_PROP_UINT32("num-pages", RISCVIMSICState, num_pages, 0),
+> +    DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
+> +    DEFINE_PROP_END_OF_LIST(),
+> +};
+> +
+> +static const VMStateDescription vmstate_riscv_imsic =3D {
+> +    .name =3D "riscv_imsic",
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .fields =3D (VMStateField[]) {
+> +            VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
+> +                                  num_pages, 0,
+> +                                  vmstate_info_uint32, uint32_t),
+> +            VMSTATE_VARRAY_UINT32(eithreshold, RISCVIMSICState,
+> +                                  num_pages, 0,
+> +                                  vmstate_info_uint32, uint32_t),
+> +            VMSTATE_VARRAY_UINT32(eistate, RISCVIMSICState,
+> +                                  num_eistate, 0,
+> +                                  vmstate_info_uint32, uint32_t),
+> +            VMSTATE_END_OF_LIST()
+> +        }
+> +};
+> +
+> +static void riscv_imsic_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc =3D DEVICE_CLASS(klass);
+> +
+> +    device_class_set_props(dc, riscv_imsic_properties);
+> +    dc->realize =3D riscv_imsic_realize;
+> +    dc->vmsd =3D &vmstate_riscv_imsic;
+> +}
+> +
+> +static const TypeInfo riscv_imsic_info =3D {
+> +    .name          =3D TYPE_RISCV_IMSIC,
+> +    .parent        =3D TYPE_SYS_BUS_DEVICE,
+> +    .instance_size =3D sizeof(RISCVIMSICState),
+> +    .class_init    =3D riscv_imsic_class_init,
+> +};
+> +
+> +static void riscv_imsic_register_types(void)
+> +{
+> +    type_register_static(&riscv_imsic_info);
+> +}
+> +
+> +type_init(riscv_imsic_register_types)
+> +
+> +/*
+> + * Create IMSIC device.
+> + */
+> +DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode=
+,
+> +                                uint32_t num_pages, uint32_t num_ids)
+> +{
+> +    DeviceState *dev =3D qdev_new(TYPE_RISCV_IMSIC);
+> +    CPUState *cpu =3D qemu_get_cpu(hartid);
+> +    uint32_t i;
+> +
+> +    assert(!(addr & (IMSIC_MMIO_PAGE_SZ - 1)));
+> +    if (mmode) {
+> +        assert(num_pages =3D=3D 1);
+> +    } else {
+> +        assert(num_pages >=3D 1 && num_pages <=3D (IRQ_LOCAL_GUEST_MAX +=
+ 1));
+> +    }
+> +    assert(IMSIC_MIN_ID <=3D num_ids);
+> +    assert(num_ids <=3D IMSIC_MAX_ID);
+> +    assert((num_ids & IMSIC_MIN_ID) =3D=3D IMSIC_MIN_ID);
+> +
+> +    qdev_prop_set_bit(dev, "mmode", mmode);
+> +    qdev_prop_set_uint32(dev, "hartid", hartid);
+> +    qdev_prop_set_uint32(dev, "num-pages", num_pages);
+> +    qdev_prop_set_uint32(dev, "num-irqs", num_ids + 1);
+> +
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+> +
+> +    for (i =3D 0; i < num_pages; i++) {
+> +        if (!i) {
+> +            qdev_connect_gpio_out_named(dev, NULL, i,
+> +                                        qdev_get_gpio_in(DEVICE(cpu),
+> +                                            (mmode) ? IRQ_M_EXT :
+> IRQ_S_EXT));
+> +        } else {
+> +            qdev_connect_gpio_out_named(dev, NULL, i,
+> +                                        qdev_get_gpio_in(DEVICE(cpu),
+> +                                            IRQ_LOCAL_MAX + i - 1));
+> +        }
+> +    }
+> +
+> +    return dev;
+> +}
+> diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.=
+h
+> new file mode 100644
+> index 0000000000..58c2aaa8dc
+> --- /dev/null
+> +++ b/include/hw/intc/riscv_imsic.h
+> @@ -0,0 +1,68 @@
+> +/*
+> + * RISC-V IMSIC (Incoming Message Signal Interrupt Controller) interface
+> + *
+> + * Copyright (c) 2021 Western Digital Corporation or its affiliates.
+> + *
+> + * This program is free software; you can redistribute it and/or modify =
+it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOU=
+T
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+> for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef HW_RISCV_IMSIC_H
+> +#define HW_RISCV_IMSIC_H
+> +
+> +#include "hw/sysbus.h"
+> +#include "qom/object.h"
+> +
+> +#define TYPE_RISCV_IMSIC "riscv.imsic"
+> +
+> +typedef struct RISCVIMSICState RISCVIMSICState;
+> +DECLARE_INSTANCE_CHECKER(RISCVIMSICState, RISCV_IMSIC, TYPE_RISCV_IMSIC)
+> +
+> +#define IMSIC_MMIO_PAGE_SHIFT          12
+> +#define IMSIC_MMIO_PAGE_SZ             (1UL << IMSIC_MMIO_PAGE_SHIFT)
+> +#define IMSIC_MMIO_SIZE(__num_pages)   ((__num_pages) *
+> IMSIC_MMIO_PAGE_SZ)
+> +
+> +#define IMSIC_MMIO_HART_GUEST_MAX_BTIS 6
+> +#define IMSIC_MMIO_GROUP_MIN_SHIFT     24
+> +
+> +#define IMSIC_HART_NUM_GUESTS(__guest_bits)           \
+> +    (1U << (__guest_bits))
+> +#define IMSIC_HART_SIZE(__guest_bits)                 \
+> +    (IMSIC_HART_NUM_GUESTS(__guest_bits) * IMSIC_MMIO_PAGE_SZ)
+> +#define IMSIC_GROUP_NUM_HARTS(__hart_bits)            \
+> +    (1U << (__hart_bits))
+> +#define IMSIC_GROUP_SIZE(__hart_bits, __guest_bits)   \
+> +    (IMSIC_GROUP_NUM_HARTS(__hart_bits) * IMSIC_HART_SIZE(__guest_bits))
+> +
+> +struct RISCVIMSICState {
+> +    /*< private >*/
+> +    SysBusDevice parent_obj;
+> +    qemu_irq *external_irqs;
+> +
+> +    /*< public >*/
+> +    MemoryRegion mmio;
+> +    uint32_t num_eistate;
+> +    uint32_t *eidelivery;
+> +    uint32_t *eithreshold;
+> +    uint32_t *eistate;
+> +
+> +    /* config */
+> +    bool mmode;
+> +    uint32_t hartid;
+> +    uint32_t num_pages;
+> +    uint32_t num_irqs;
+> +};
+> +
+> +DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode=
+,
+> +                                uint32_t num_pages, uint32_t num_ids);
+> +
+> +#endif
+> --
+> 2.25.1
 >
 >
+>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
---0000000000009f882105d5d32c2c
+--00000000000066b3bd05d5d35877
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">Anup Patel &lt;<a href=3D"mailto:apatel@v=
-entanamicro.com" target=3D"_blank">apatel@ventanamicro.com</a>&gt; =E6=96=
-=BC 2022=E5=B9=B41=E6=9C=8818=E6=97=A5 =E9=80=B1=E4=BA=8C =E4=B8=8A=E5=8D=
-=8811:41=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><div class=3D"gmail_quote"><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">On Tue, Jan 18, 2022 at 9:04=
- AM Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" target=3D"_bl=
-ank">frank.chang@sifive.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Anup Patel &lt;<a href=3D"mailto:anup@brainfault.org" target=3D"_blank=
-">anup@brainfault.org</a>&gt; =E6=96=BC 2022=E5=B9=B41=E6=9C=8817=E6=97=A5 =
-=E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8810:28=E5=AF=AB=E9=81=93=EF=BC=9A<br>
-&gt;&gt;<br>
-&gt;&gt; From: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com" target=
+<div dir=3D"ltr"><div dir=3D"ltr">Anup Patel &lt;<a href=3D"mailto:anup@bra=
+infault.org" target=3D"_blank">anup@brainfault.org</a>&gt; =E6=96=BC 2022=
+=E5=B9=B41=E6=9C=8817=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8810:29=
+=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><div class=3D"gmail_quote"><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">From: Anup Patel &lt;<a href=3D"mail=
+to:anup.patel@wdc.com" target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
+<br>
+The RISC-V AIA (Advanced Interrupt Architecture) defines a new<br>
+interrupt controller for MSIs (message signal interrupts) called<br>
+IMSIC (Incoming Message Signal Interrupt Controller). The IMSIC<br>
+is per-HART device and also suppport virtualizaiton of MSIs using<br>
+dedicated VS-level guest interrupt files.<br>
+<br>
+This patch adds device emulation for RISC-V AIA IMSIC which<br>
+supports M-level, S-level, and VS-level MSIs.<br>
+<br>
+Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com" target=
 =3D"_blank">anup.patel@wdc.com</a>&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; The AIA spec defines programmable 8-bit priority for each local in=
-terrupt<br>
-&gt;&gt; at M-level, S-level and VS-level so we extend local interrupt proc=
-essing<br>
-&gt;&gt; to consider AIA interrupt priorities. The AIA CSRs which help soft=
-ware<br>
-&gt;&gt; configure local interrupt priorities will be added by subsequent p=
-atches.<br>
-&gt;&gt;<br>
-&gt;&gt; Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup.patel@wdc.com=
-" target=3D"_blank">anup.patel@wdc.com</a>&gt;<br>
-&gt;&gt; Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup@brainfault.or=
-g" target=3D"_blank">anup@brainfault.org</a>&gt;<br>
-&gt;&gt; Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.franc=
-is@wdc.com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-&gt;&gt; ---<br>
-&gt;&gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 19 +++=
+Signed-off-by: Anup Patel &lt;<a href=3D"mailto:anup@brainfault.org" target=
+=3D"_blank">anup@brainfault.org</a>&gt;<br>
+---<br>
+=C2=A0hw/intc/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0|=C2=A0 =C2=A03 +<br>
+=C2=A0hw/intc/meson.build=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+=C2=A01 +<br>
+=C2=A0hw/intc/riscv_imsic.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 448 ++++++++=
+++++++++++++++++++++++++++<br>
+=C2=A0include/hw/intc/riscv_imsic.h |=C2=A0 68 ++++++<br>
+=C2=A04 files changed, 520 insertions(+)<br>
+=C2=A0create mode 100644 hw/intc/riscv_imsic.c<br>
+=C2=A0create mode 100644 include/hw/intc/riscv_imsic.h<br>
 <br>
-&gt;&gt;=C2=A0 target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 12 ++<=
+diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig<br>
+index 528e77b4a6..ec8d4cec29 100644<br>
+--- a/hw/intc/Kconfig<br>
++++ b/hw/intc/Kconfig<br>
+@@ -73,6 +73,9 @@ config RISCV_ACLINT<br>
+=C2=A0config RISCV_APLIC<br>
+=C2=A0 =C2=A0 =C2=A0bool<br>
+<br>
++config RISCV_IMSIC<br>
++=C2=A0 =C2=A0 bool<br>
++<br>
+=C2=A0config SIFIVE_PLIC<br>
+=C2=A0 =C2=A0 =C2=A0bool<br>
+<br>
+diff --git a/hw/intc/meson.build b/hw/intc/meson.build<br>
+index 7466024402..5caa337654 100644<br>
+--- a/hw/intc/meson.build<br>
++++ b/hw/intc/meson.build<br>
+@@ -51,6 +51,7 @@ specific_ss.add(when: &#39;CONFIG_S390_FLIC_KVM&#39;, if_=
+true: files(&#39;s390_flic_kvm.c&#39;))<br>
+=C2=A0specific_ss.add(when: &#39;CONFIG_SH_INTC&#39;, if_true: files(&#39;s=
+h_intc.c&#39;))<br>
+=C2=A0specific_ss.add(when: &#39;CONFIG_RISCV_ACLINT&#39;, if_true: files(&=
+#39;riscv_aclint.c&#39;))<br>
+=C2=A0specific_ss.add(when: &#39;CONFIG_RISCV_APLIC&#39;, if_true: files(&#=
+39;riscv_aplic.c&#39;))<br>
++specific_ss.add(when: &#39;CONFIG_RISCV_IMSIC&#39;, if_true: files(&#39;ri=
+scv_imsic.c&#39;))<br>
+=C2=A0specific_ss.add(when: &#39;CONFIG_SIFIVE_PLIC&#39;, if_true: files(&#=
+39;sifive_plic.c&#39;))<br>
+=C2=A0specific_ss.add(when: &#39;CONFIG_XICS&#39;, if_true: files(&#39;xics=
+.c&#39;))<br>
+=C2=A0specific_ss.add(when: [&#39;CONFIG_KVM&#39;, &#39;CONFIG_XICS&#39;],<=
 br>
-&gt;&gt;=C2=A0 target/riscv/cpu_helper.c | 242 ++++++++++++++++++++++++++++=
-++++++----<br>
-&gt;&gt;=C2=A0 target/riscv/machine.c=C2=A0 =C2=A0 |=C2=A0 =C2=A03 +<br>
-&gt;&gt;=C2=A0 4 files changed, 255 insertions(+), 21 deletions(-)<br>
-&gt;&gt;<br>
-&gt;&gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-&gt;&gt; index 76f9786836..167d86eef7 100644<br>
-&gt;&gt; --- a/target/riscv/cpu.c<br>
-&gt;&gt; +++ b/target/riscv/cpu.c<br>
-&gt;&gt; @@ -370,6 +370,10 @@ void restore_state_to_opc(CPURISCVState *env,=
- TranslationBlock *tb,<br>
-&gt;&gt;<br>
-&gt;&gt;=C2=A0 static void riscv_cpu_reset(DeviceState *dev)<br>
-&gt;&gt;=C2=A0 {<br>
-&gt;&gt; +#ifndef CONFIG_USER_ONLY<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint8_t iprio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 int i, irq, rdzero;<br>
-&gt;&gt; +#endif<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 CPUState *cs =3D CPU(dev);<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 RISCVCPUClass *mcc =3D RISCV_CPU_GET_CLASS(cpu=
-);<br>
-&gt;&gt; @@ -392,6 +396,21 @@ static void riscv_cpu_reset(DeviceState *dev)=
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c<br>
+new file mode 100644<br>
+index 0000000000..18d2877832<br>
+--- /dev/null<br>
++++ b/hw/intc/riscv_imsic.c<br>
+@@ -0,0 +1,448 @@<br>
++/*<br>
++ * RISC-V IMSIC (Incoming Message Signaled Interrupt Controller)<br>
++ *<br>
++ * Copyright (c) 2021 Western Digital Corporation or its affiliates.<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
 <br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;miclaim =3D MIP_SGEIP;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;pc =3D env-&gt;resetvec;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;two_stage_lookup =3D false;<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Initialized default priorities of local interrup=
-ts. */<br>
-&gt;&gt; +=C2=A0 =C2=A0 for (i =3D 0; i &lt; ARRAY_SIZE(env-&gt;miprio); i+=
-+) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D riscv_cpu_default_priority(=
-i);<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;miprio[i] =3D (i =3D=3D IRQ_M=
-_EXT) ? 0 : iprio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;siprio[i] =3D (i =3D=3D IRQ_S=
-_EXT) ? 0 : iprio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;hviprio[i] =3D 0;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 i =3D 0;<br>
-&gt;&gt; +=C2=A0 =C2=A0 while (!riscv_cpu_hviprio_index2irq(i, &amp;irq, &a=
-mp;rdzero)) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!rdzero) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;hviprio[irq] =
-=3D env-&gt;miprio[irq];<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 i++;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 /* mmte is supposed to have pm.current hardwir=
-ed to 1 */<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 env-&gt;mmte |=3D (PM_EXT_INITIAL | MMTE_M_PM_=
-CURRENT);<br>
-&gt;&gt;=C2=A0 #endif<br>
-&gt;&gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-&gt;&gt; index cee70f8608..65d2b606fc 100644<br>
-&gt;&gt; --- a/target/riscv/cpu.h<br>
-&gt;&gt; +++ b/target/riscv/cpu.h<br>
-&gt;&gt; @@ -190,6 +190,10 @@ struct CPURISCVState {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mcause;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 target_ulong mtval;=C2=A0 /* since: priv-1.10.=
-0 */<br>
-&gt;&gt;<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Machine and Supervisor interrupt priorities */<b=
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
+br>
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
 r>
-&gt;&gt; +=C2=A0 =C2=A0 uint8_t miprio[64];<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint8_t siprio[64];<br>
-&gt;&gt; +<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 /* Hypervisor CSRs */<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 target_ulong hstatus;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 target_ulong hedeleg;<br>
-&gt;&gt; @@ -202,6 +206,9 @@ struct CPURISCVState {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 target_ulong hgeip;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t htimedelta;<br>
-&gt;&gt;<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Hypervisor controlled virtual interrupt prioriti=
-es */<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint8_t hviprio[64];<br>
-&gt;&gt; +<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 /* Upper 64-bits of 128-bit CSRs */<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t mscratchh;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 uint64_t sscratchh;<br>
-&gt;&gt; @@ -392,6 +399,11 @@ int riscv_cpu_write_elf32_note(WriteCoreDumpF=
-unction f, CPUState *cs,<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int cpuid, void *opaque=
-);<br>
-&gt;&gt;=C2=A0 int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *b=
-uf, int reg);<br>
-&gt;&gt;=C2=A0 int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf=
-, int reg);<br>
-&gt;&gt; +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out=
-_rdzero);<br>
-&gt;&gt; +uint8_t riscv_cpu_default_priority(int irq);<br>
-&gt;&gt; +int riscv_cpu_mirq_pending(CPURISCVState *env);<br>
-&gt;&gt; +int riscv_cpu_sirq_pending(CPURISCVState *env);<br>
-&gt;&gt; +int riscv_cpu_vsirq_pending(CPURISCVState *env);<br>
-&gt;&gt;=C2=A0 bool riscv_cpu_fp_enabled(CPURISCVState *env);<br>
-&gt;&gt;=C2=A0 target_ulong riscv_cpu_get_geilen(CPURISCVState *env);<br>
-&gt;&gt;=C2=A0 void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong g=
-eilen);<br>
-&gt;&gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c=
-<br>
-&gt;&gt; index 59c8f900df..3a36200780 100644<br>
-&gt;&gt; --- a/target/riscv/cpu_helper.c<br>
-&gt;&gt; +++ b/target/riscv/cpu_helper.c<br>
-&gt;&gt; @@ -151,36 +151,236 @@ void cpu_get_tb_cpu_state(CPURISCVState *en=
-v, target_ulong *pc,<br>
-&gt;&gt;=C2=A0 }<br>
-&gt;&gt;<br>
-&gt;&gt;=C2=A0 #ifndef CONFIG_USER_ONLY<br>
-&gt;&gt; -static int riscv_cpu_local_irq_pending(CPURISCVState *env)<br>
-&gt;&gt; +<br>
-&gt;&gt; +/*<br>
-&gt;&gt; + * The HS-mode is allowed to configure priority only for the<br>
-&gt;&gt; + * following VS-mode local interrupts:<br>
-&gt;&gt; + *<br>
-&gt;&gt; + * 0=C2=A0 (Reserved interrupt, reads as zero)<br>
-&gt;&gt; + * 1=C2=A0 Supervisor software interrupt<br>
-&gt;&gt; + * 4=C2=A0 (Reserved interrupt, reads as zero)<br>
-&gt;&gt; + * 5=C2=A0 Supervisor timer interrupt<br>
-&gt;&gt; + * 8=C2=A0 (Reserved interrupt, reads as zero)<br>
-&gt;&gt; + * 13 (Reserved interrupt)<br>
-&gt;&gt; + * 14 &quot;<br>
-&gt;&gt; + * 15 &quot;<br>
-&gt;&gt; + * 16 &quot;<br>
-&gt;&gt; + * 18 Debug/trace interrupt<br>
-&gt;&gt; + * 20 (Reserved interrupt)<br>
-&gt;&gt; + * 22 &quot;<br>
-&gt;&gt; + * 24 &quot;<br>
-&gt;&gt; + * 26 &quot;<br>
-&gt;&gt; + * 28 &quot;<br>
-&gt;&gt; + * 30 (Reserved for standard reporting of bus or system errors)<b=
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#include &quot;qemu/osdep.h&quot;<br>
++#include &quot;qapi/error.h&quot;<br>
++#include &quot;qemu/log.h&quot;<br>
++#include &quot;qemu/module.h&quot;<br>
++#include &quot;qemu/error-report.h&quot;<br>
++#include &quot;qemu/bswap.h&quot;<br>
++#include &quot;exec/address-spaces.h&quot;<br>
++#include &quot;hw/sysbus.h&quot;<br>
++#include &quot;hw/pci/msi.h&quot;<br>
++#include &quot;hw/boards.h&quot;<br>
++#include &quot;hw/qdev-properties.h&quot;<br>
++#include &quot;hw/intc/riscv_imsic.h&quot;<br>
++#include &quot;hw/irq.h&quot;<br>
++#include &quot;target/riscv/cpu.h&quot;<br>
++#include &quot;target/riscv/cpu_bits.h&quot;<br>
++#include &quot;sysemu/sysemu.h&quot;<br>
++#include &quot;migration/vmstate.h&quot;<br>
++<br>
++#define IMSIC_MMIO_PAGE_LE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x00<br>
++#define IMSIC_MMIO_PAGE_BE=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x04<br>
++<br>
++#define IMSIC_MIN_ID=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0((IMSIC_EIPx_BITS * 2) - 1)<br>
++#define IMSIC_MAX_ID=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0(IMSIC_TOPEI_IID_MASK)<br>
++<br>
++#define IMSIC_EISTATE_PENDING=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (1U &lt;&l=
+t; 0)<br>
++#define IMSIC_EISTATE_ENABLED=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (1U &lt;&l=
+t; 1)<br>
++#define IMSIC_EISTATE_ENPEND=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(IMSI=
+C_EISTATE_ENABLED | \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 IMSIC_EI=
+STATE_PENDING)<br>
++<br>
++static uint32_t riscv_imsic_topei(RISCVIMSICState *imsic, uint32_t page)<b=
 r>
-&gt;&gt; + */<br>
-&gt;&gt; +<br>
-&gt;&gt; +static int hviprio_index2irq[] =3D<br>
-&gt;&gt; +=C2=A0 =C2=A0 { 0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26=
-, 28, 30 };<br>
-&gt;&gt; +static int hviprio_index2rdzero[] =3D<br>
-&gt;&gt; +=C2=A0 =C2=A0 { 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };=
++{<br>
++=C2=A0 =C2=A0 uint32_t i, max_irq, base;<br>
++<br>
++=C2=A0 =C2=A0 base =3D page * imsic-&gt;num_irqs;<br>
++=C2=A0 =C2=A0 max_irq =3D (imsic-&gt;eithreshold[page] &amp;&amp;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(imsic-&gt;eithresh=
+old[page] &lt;=3D imsic-&gt;num_irqs)) ?<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0imsic-&gt;eithresho=
+ld[page] : imsic-&gt;num_irqs;<br>
++=C2=A0 =C2=A0 for (i =3D 1; i &lt; max_irq; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((imsic-&gt;eistate[base + i] &amp; IMSIC_E=
+ISTATE_ENPEND) =3D=3D<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 IMSIC_EISTATE_ENPE=
+ND) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return (i &lt;&lt; IMSIC_TOPEI_I=
+ID_SHIFT) | i;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static void riscv_imsic_update(RISCVIMSICState *imsic, uint32_t page)<br>
++{<br>
++=C2=A0 =C2=A0 if (imsic-&gt;eidelivery[page] &amp;&amp; riscv_imsic_topei(=
+imsic, page)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_irq_raise(imsic-&gt;external_irqs[page]);=
 <br>
-&gt;&gt; +<br>
-&gt;&gt; +int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out=
-_rdzero)<br>
-&gt;&gt;=C2=A0 {<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong virt_enabled =3D riscv_cpu_virt_enable=
-d(env);<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (index &lt; 0 || ARRAY_SIZE(hviprio_index2irq) &=
-lt;=3D index) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (out_irq) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *out_irq =3D hviprio_index2irq[index]=
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_irq_lower(imsic-&gt;external_irqs[page]);=
+<br>
++=C2=A0 =C2=A0 }<br>
++}<br>
++<br>
++static int riscv_imsic_eidelivery_rmw(RISCVIMSICState *imsic, uint32_t pag=
+e,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *v=
+al,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong ne=
+w_val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong wr=
+_mask)<br>
++{<br>
++=C2=A0 =C2=A0 target_ulong old_val =3D imsic-&gt;eidelivery[page];<br>
++<br>
++=C2=A0 =C2=A0 if (val) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D old_val;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 wr_mask &amp;=3D 0x1;<br>
++=C2=A0 =C2=A0 imsic-&gt;eidelivery[page] =3D (old_val &amp; ~wr_mask) | (n=
+ew_val &amp; wr_mask);<br>
++<br>
++=C2=A0 =C2=A0 riscv_imsic_update(imsic, page);<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static int riscv_imsic_eithreshold_rmw(RISCVIMSICState *imsic, uint32_t pa=
+ge,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *v=
+al,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong ne=
+w_val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong wr=
+_mask)<br>
++{<br>
++=C2=A0 =C2=A0 target_ulong old_val =3D imsic-&gt;eithreshold[page];<br>
++<br>
++=C2=A0 =C2=A0 if (val) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D old_val;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 wr_mask &amp;=3D IMSIC_MAX_ID;<br>
++=C2=A0 =C2=A0 imsic-&gt;eithreshold[page] =3D (old_val &amp; ~wr_mask) | (=
+new_val &amp; wr_mask);<br>
++<br>
++=C2=A0 =C2=A0 riscv_imsic_update(imsic, page);<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static int riscv_imsic_topei_rmw(RISCVIMSICState *imsic, uint32_t page,<br=
+>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong *val, target_ulon=
+g new_val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong wr_mask)<br>
++{<br>
++=C2=A0 =C2=A0 uint32_t base, topei =3D riscv_imsic_topei(imsic, page);<br>
++<br>
++=C2=A0 =C2=A0 /* Read pending and enabled interrupt with highest priority =
+*/<br>
++=C2=A0 =C2=A0 if (val) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D topei;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Writes ignore value and clear top pending interrupt */<br=
+>
++=C2=A0 =C2=A0 if (topei &amp;&amp; wr_mask) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 topei &gt;&gt;=3D IMSIC_TOPEI_IID_SHIFT;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 base =3D page * imsic-&gt;num_irqs;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (topei) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 imsic-&gt;eistate[base + topei] =
+&amp;=3D ~IMSIC_EISTATE_PENDING;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_imsic_update(imsic, page);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static int riscv_imsic_eix_rmw(RISCVIMSICState *imsic,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t xlen, uint32_t page,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t num, bool pend, target_ulong=
+ *val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong new_val, target_ulong wr=
+_mask)<br>
++{<br>
++=C2=A0 =C2=A0 uint32_t i, base;<br>
++=C2=A0 =C2=A0 target_ulong mask;<br>
++=C2=A0 =C2=A0 uint32_t state =3D (pend) ? IMSIC_EISTATE_PENDING : IMSIC_EI=
+STATE_ENABLED;<br>
++<br>
++=C2=A0 =C2=A0 if (xlen !=3D 32) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (num &amp; 0x1) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 num &gt;&gt;=3D 1;<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 if (num &gt;=3D (imsic-&gt;num_irqs / xlen)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return -EINVAL;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 base =3D (page * imsic-&gt;num_irqs) + (num * xlen);<br>
++<br>
++=C2=A0 =C2=A0 if (val) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D 0;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 for (i =3D 0; i &lt; xlen; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D (target_ulong)1 &lt;&lt=
+; i;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *val |=3D (imsic-&gt;eistate[bas=
+e + i] &amp; state) ? mask : 0;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 for (i =3D 0; i &lt; xlen; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Bit0 of eip0 and eie0 are read-only zero */=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!num &amp;&amp; !i) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 continue;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D (target_ulong)1 &lt;&lt; i;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (wr_mask &amp; mask) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (new_val &amp; mask) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 imsic-&gt;eistate[=
+base + i] |=3D state;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 imsic-&gt;eistate[=
+base + i] &amp;=3D ~state;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 riscv_imsic_update(imsic, page);<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static int riscv_imsic_rmw(void *arg, target_ulong reg, target_ulong *val,=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0target_ulong new_val, target_ulong wr_mask)<br>
++{<br>
++=C2=A0 =C2=A0 RISCVIMSICState *imsic =3D arg;<br>
++=C2=A0 =C2=A0 uint32_t isel, priv, virt, vgein, xlen, page;<br>
++<br>
++=C2=A0 =C2=A0 priv =3D AIA_IREG_PRIV(reg);<br>
++=C2=A0 =C2=A0 virt =3D AIA_IREG_VIRT(reg);<br>
++=C2=A0 =C2=A0 isel =3D AIA_IREG_ISEL(reg);<br>
++=C2=A0 =C2=A0 vgein =3D AIA_IREG_VGEIN(reg);<br>
++=C2=A0 =C2=A0 xlen =3D AIA_IREG_XLEN(reg);<br>
++<br>
++=C2=A0 =C2=A0 if (imsic-&gt;mmode) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (priv =3D=3D PRV_M &amp;&amp; !virt) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 page =3D 0;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (priv =3D=3D PRV_S) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (virt) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (vgein &amp;&am=
+p; vgein &lt; imsic-&gt;num_pages) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 page=
+ =3D vgein;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto=
+ err;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 page =3D 0;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 switch (isel) {<br>
++=C2=A0 =C2=A0 case ISELECT_IMSIC_EIDELIVERY:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_imsic_eidelivery_rmw(imsic, page,=
+ val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 n=
+ew_val, wr_mask);<br>
++=C2=A0 =C2=A0 case ISELECT_IMSIC_EITHRESHOLD:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_imsic_eithreshold_rmw(imsic, page=
+, val,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0new_val, wr_mask);<br>
++=C2=A0 =C2=A0 case ISELECT_IMSIC_TOPEI:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_imsic_topei_rmw(imsic, page, val,=
+ new_val, wr_mask);<br>
++=C2=A0 =C2=A0 case ISELECT_IMSIC_EIP0 ... ISELECT_IMSIC_EIP63:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_imsic_eix_rmw(imsic, xlen, page,<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0isel - ISELECT_IMSIC_EI=
+P0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0true, val, new_val, wr_=
+mask);<br>
++=C2=A0 =C2=A0 case ISELECT_IMSIC_EIE0 ... ISELECT_IMSIC_EIE63:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_imsic_eix_rmw(imsic, xlen, page,<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0isel - ISELECT_IMSIC_EI=
+E0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0false, val, new_val, wr=
+_mask);<br>
++=C2=A0 =C2=A0 default:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
++=C2=A0 =C2=A0 };<br>
++<br>
++err:<br>
++=C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;%s: I=
+nvalid register priv=3D%d virt=3D%d isel=3D%d vgein=3D%d\n&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __func__, p=
+riv, virt, isel, vgein);<br>
++=C2=A0 =C2=A0 return -EINVAL;<br>
++}<br>
++<br>
++static uint64_t riscv_imsic_read(void *opaque, hwaddr addr, unsigned size)=
+<br>
++{<br>
++=C2=A0 =C2=A0 RISCVIMSICState *imsic =3D opaque;<br>
++<br>
++=C2=A0 =C2=A0 /* Reads must be 4 byte words */<br>
++=C2=A0 =C2=A0 if ((addr &amp; 0x3) !=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Reads cannot be out of range */<br>
++=C2=A0 =C2=A0 if (addr &gt; IMSIC_MMIO_SIZE(imsic-&gt;num_pages)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return 0;<br>
++<br>
++err:<br>
++=C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;%s: I=
+nvalid register read 0x%&quot; HWADDR_PRIx &quot;\n&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __func__, a=
+ddr);<br>
++=C2=A0 =C2=A0 return 0;<br>
++}<br>
++<br>
++static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned size)<br>
++{<br>
++=C2=A0 =C2=A0 RISCVIMSICState *imsic =3D opaque;<br>
++=C2=A0 =C2=A0 uint32_t page;<br>
++<br>
++=C2=A0 =C2=A0 /* Writes must be 4 byte words */<br>
++=C2=A0 =C2=A0 if ((addr &amp; 0x3) !=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Writes cannot be out of range */<br>
++=C2=A0 =C2=A0 if (addr &gt; IMSIC_MMIO_SIZE(imsic-&gt;num_pages)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto err;<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Writes only supported for MSI little-endian registers */<=
+br>
++=C2=A0 =C2=A0 page =3D addr &gt;&gt; IMSIC_MMIO_PAGE_SHIFT;<br>
++=C2=A0 =C2=A0 if ((addr &amp; (IMSIC_MMIO_PAGE_SZ - 1)) =3D=3D IMSIC_MMIO_=
+PAGE_LE) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (value &amp;&amp; (value &lt; imsic-&gt;num=
+_irqs)) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 imsic-&gt;eistate[(page * imsic-=
+&gt;num_irqs) + value] |=3D<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 IMSIC_EISTATE_PENDING;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Update CPU external interrupt status */<br>
++=C2=A0 =C2=A0 riscv_imsic_update(imsic, page);<br>
++<br>
++=C2=A0 =C2=A0 return;<br>
++<br>
++err:<br>
++=C2=A0 =C2=A0 qemu_log_mask(LOG_GUEST_ERROR,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;%s: I=
+nvalid register write 0x%&quot; HWADDR_PRIx &quot;\n&quot;,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __func__, a=
+ddr);<br>
++}<br>
++<br>
++static const MemoryRegionOps riscv_imsic_ops =3D {<br>
++=C2=A0 =C2=A0 .read =3D riscv_imsic_read,<br>
++=C2=A0 =C2=A0 .write =3D riscv_imsic_write,<br>
++=C2=A0 =C2=A0 .endianness =3D DEVICE_LITTLE_ENDIAN,<br>
++=C2=A0 =C2=A0 .valid =3D {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 .min_access_size =3D 4,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 .max_access_size =3D 4<br>
++=C2=A0 =C2=A0 }<br>
++};<br>
++<br>
++static void riscv_imsic_realize(DeviceState *dev, Error **errp)<br>
++{<br>
++=C2=A0 =C2=A0 RISCVIMSICState *imsic =3D RISCV_IMSIC(dev);<br>
++=C2=A0 =C2=A0 RISCVCPU *rcpu =3D RISCV_CPU(qemu_get_cpu(imsic-&gt;hartid))=
 ;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong mstatus_mie =3D get_field(env-&gt;msta=
-tus, MSTATUS_MIE);<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong mstatus_sie =3D get_field(env-&gt;msta=
-tus, MSTATUS_SIE);<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (out_rdzero) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *out_rdzero =3D hviprio_index2rdzero[=
-index];<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong vsgemask =3D<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (target_u=
-long)1 &lt;&lt; get_field(env-&gt;hstatus, HSTATUS_VGEIN);<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong vsgein =3D (env-&gt;hgeip &amp; vsgema=
-sk) ? MIP_VSEIP : 0;<br>
-&gt;&gt; +=C2=A0 =C2=A0 return 0;<br>
-&gt;&gt; +}<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong pending =3D (env-&gt;mip | vsgein) &am=
-p; env-&gt;mie;<br>
-&gt;&gt; +uint8_t riscv_cpu_default_priority(int irq)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 int u, l;<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint8_t iprio =3D IPRIO_MMAXIPRIO;<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong mie=C2=A0 =C2=A0 =3D env-&gt;priv &lt;=
- PRV_M ||<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_M &amp;&amp; mstatus_m=
-ie);<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong sie=C2=A0 =C2=A0 =3D env-&gt;priv &lt;=
- PRV_S ||<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =3D=3D PRV_S &amp;&amp; mstatus_s=
-ie);<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong hsie=C2=A0 =C2=A0=3D virt_enabled || s=
-ie;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong vsie=C2=A0 =C2=A0=3D virt_enabled &amp=
-;&amp; sie;<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (irq &lt; 0 || irq &gt; 63) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return iprio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 target_ulong irqs =3D<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp; ~env-&gt=
-;mideleg &amp; -mie) |<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp;=C2=A0 en=
-v-&gt;mideleg &amp; ~env-&gt;hideleg &amp; -hsie) |<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (pending &amp;=C2=A0 en=
-v-&gt;mideleg &amp;=C2=A0 env-&gt;hideleg &amp; -vsie);<br>
-&gt;&gt; +=C2=A0 =C2=A0 /*<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* Default priorities of local interrupts are =
-defined in the<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* RISC-V Advanced Interrupt Architecture spec=
-ification.<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* -------------------------------------------=
----------------------<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 Default=C2=A0 |<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 Priority | Major Interrupt Numbers<br=
->
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* -------------------------------------------=
----------------------<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 Highest=C2=A0 | 63 (3f), 62 (3e), 31 =
-(1f), 30 (1e), 61 (3d), 60 (3c),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 5=
-9 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56 (38),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 5=
-5 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52 (34),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 5=
-1 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (30)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|<b=
-r>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
-1 (0b),=C2=A0 3 (03),=C2=A0 7 (07)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
-=C2=A0 9 (09),=C2=A0 1 (01),=C2=A0 5 (05)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
-2 (0c)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
-0 (0a),=C2=A0 2 (02),=C2=A0 6 (06)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|<b=
-r>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 4=
-7 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44 (2c),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 4=
-3 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40 (28),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 3=
-9 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36 (24),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 Lowest=C2=A0 =C2=A0| 35 (23), 34 (22)=
-, 17 (11), 16 (10), 33 (21), 32 (20)<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0* -------------------------------------------=
----------------------<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt;&gt;<br>
-&gt;&gt; -=C2=A0 =C2=A0 if (irqs) {<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 return ctz64(irqs); /* since non-zero=
- */<br>
-&gt;&gt; +=C2=A0 =C2=A0 u =3D IPRIO_DEFAULT_U(irq);<br>
-&gt;&gt; +=C2=A0 =C2=A0 l =3D IPRIO_DEFAULT_L(irq);<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (u =3D=3D 0) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (irq =3D=3D IRQ_VS_EXT || irq =3D=
-=3D IRQ_VS_TIMER ||<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 irq =3D=3D IRQ_VS_SOFT)=
- {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_VS;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_S_GEXT) {<b=
-r>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_SGEXT;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_S_EXT || ir=
-q =3D=3D IRQ_S_TIMER ||<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0irq =3D=3D IRQ_S_SOFT) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_S;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else if (irq =3D=3D IRQ_M_EXT || ir=
-q =3D=3D IRQ_M_TIMER ||<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0irq =3D=3D IRQ_M_SOFT) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_M;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_VS;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 } else if (u =3D=3D 1) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (l &lt; 8) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_16_23(irq);<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT=
-_24_31(irq);<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 } else if (u =3D=3D 2) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_32_47(irq);<b=
-r>
-&gt;&gt; +=C2=A0 =C2=A0 } else if (u =3D=3D 3) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 iprio =3D IPRIO_DEFAULT_48_63(irq);<b=
-r>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return iprio;<br>
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt; +static int riscv_cpu_pending_to_irq(CPURISCVState *env,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 int extirq, =
-unsigned int extirq_def_prio,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint64_t pen=
-ding, uint8_t *iprio)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 int irq, best_irq =3D RISCV_EXCP_NONE;<br>
-&gt;&gt; +=C2=A0 =C2=A0 unsigned int prio, best_prio =3D UINT_MAX;<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (!pending) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 irq =3D ctz64(pending);<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (!riscv_feature(env, RISCV_FEATURE_AIA)) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return irq;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 pending =3D pending &gt;&gt; irq;<br>
-&gt;&gt; +=C2=A0 =C2=A0 while (pending) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D iprio[irq];<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!prio) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (irq =3D=3D extirq) =
-{<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D =
-extirq_def_prio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 prio =3D =
-(riscv_cpu_default_priority(irq) &lt; extirq_def_prio) ?<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A01 : IPRIO_MMAXIPRIO;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if ((pending &amp; 0x1) &amp;&amp; (p=
-rio &lt;=3D best_prio)) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_irq =3D irq;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 best_prio =3D prio;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 irq++;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 pending =3D pending &gt;&gt; 1;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return best_irq;<br>
-&gt;&gt; +}<br>
-&gt;<br>
-&gt;<br>
-&gt; Hi Anup,<br>
-&gt;<br>
-&gt; RISC-V Priv spec defines the priority order:<br>
-&gt;=C2=A0 =C2=A0Multiple simultaneous interrupts destined for the same pri=
-vilege mode<br>
-&gt;=C2=A0 =C2=A0are handled in the following decreasing priority order: ME=
-I, MSI, MTI, SEI, SSI, STI, UEI,<br>
-&gt;=C2=A0 =C2=A0USI, UTI.<br>
-&gt;<br>
-&gt; So the priority order should be: MEI (11) &gt; MSI (3) &gt; MTI (7).<b=
-r>
-&gt;<br>
-&gt; But if MSI and MTI are pending-and-enabled,<br>
-&gt; with all of their iprio assigned to their default priority orders (IPR=
-IO_DEFAULT_M)<br>
-&gt; (or iprio assigned to zero, which the default priority orders are appl=
-ied as well).<br>
-&gt; riscv_cpu_pending_to_irq() would incorrectly pick MTI (7), instead of =
-MSI (3),<br>
-&gt; because they all have the same default priority order: IPRIO_DEFAULT_M=
-.<br>
-<br>
-Ahh yes, I missed addressing this one.<br>
-<br>
-If you can review other patches as well then I can send v8 this week itself=
-.<br>
-<br>
-Thanks,<br>
-Anup<br></blockquote><div><br></div><div>Sure, I&#39;ll review the remainin=
-g patches 15, 18, 20.<br></div><div><br></div><div>Sorry that I&#39;m not f=
-amiliar with PCIe IRQ mapping and DTS creation,</div><div>so I will leave p=
-atches 19 and 21 for other experts.</div><div>But I think the APLIC and IMS=
-IC creation parts in virt machine look good to me.</div><div><br></div><div=
->Regards,</div><div>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
-4,204,204);padding-left:1ex">
-<br>
-&gt;<br>
-&gt; Regards,<br>
-&gt; Frank Chang<br>
-&gt;<br>
-&gt;&gt;<br>
-&gt;&gt; +<br>
-&gt;&gt; +static uint64_t riscv_cpu_all_pending(CPURISCVState *env)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint32_t gein =3D get_field(env-&gt;hstatus, HSTATU=
-S_VGEIN);<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint64_t vsgein =3D (env-&gt;hgeip &amp; (1ULL &lt;=
-&lt; gein)) ? MIP_VSEIP : 0;<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return (env-&gt;mip | vsgein) &amp; env-&gt;mie;<br=
->
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt; +int riscv_cpu_mirq_pending(CPURISCVState *env)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; =
-~env-&gt;mideleg &amp;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 ~(MIP_SGEIP | MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, IRQ_M_EXT, IPR=
-IO_DEFAULT_M,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 irqs, env-&g=
-t;miprio);<br>
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt; +int riscv_cpu_sirq_pending(CPURISCVState *env)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; =
-env-&gt;mideleg &amp;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 ~(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPR=
-IO_DEFAULT_S,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 irqs, env-&g=
-t;siprio);<br>
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt; +int riscv_cpu_vsirq_pending(CPURISCVState *env)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint64_t irqs =3D riscv_cpu_all_pending(env) &amp; =
-env-&gt;mideleg &amp;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 (MIP_VSSIP | MIP_VSTIP | MIP_VSEIP);<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, IRQ_S_EXT, IPR=
-IO_DEFAULT_S,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 irqs &gt;&gt=
-; 1, env-&gt;hviprio);<br>
-&gt;&gt; +}<br>
-&gt;&gt; +<br>
-&gt;&gt; +static int riscv_cpu_local_irq_pending(CPURISCVState *env)<br>
-&gt;&gt; +{<br>
-&gt;&gt; +=C2=A0 =C2=A0 int virq;<br>
-&gt;&gt; +=C2=A0 =C2=A0 uint64_t irqs, pending, mie, hsie, vsie;<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Determine interrupt enable state of all privileg=
-e modes */<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mie =3D 1;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 hsie =3D 1;<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 vsie =3D (env-&gt;priv &lt; PRV_S) ||=
-<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(env-&gt;p=
-riv =3D=3D PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_SIE));<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt;&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE; /* indicates =
-no pending interrupt */<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mie =3D (env-&gt;priv &lt; PRV_M) ||<=
++=C2=A0 =C2=A0 CPUState *cpu =3D qemu_get_cpu(imsic-&gt;hartid);<br>
++=C2=A0 =C2=A0 CPURISCVState *env =3D cpu ? cpu-&gt;env_ptr : NULL;<br>
++<br>
++=C2=A0 =C2=A0 imsic-&gt;num_eistate =3D imsic-&gt;num_pages * imsic-&gt;nu=
+m_irqs;<br>
++=C2=A0 =C2=A0 imsic-&gt;eidelivery =3D g_new0(uint32_t, imsic-&gt;num_page=
+s);<br>
++=C2=A0 =C2=A0 imsic-&gt;eithreshold =3D g_new0(uint32_t, imsic-&gt;num_pag=
+es);<br>
++=C2=A0 =C2=A0 imsic-&gt;eistate =3D g_new0(uint32_t, imsic-&gt;num_eistate=
+);<br>
++<br>
++=C2=A0 =C2=A0 memory_region_init_io(&amp;imsic-&gt;mmio, OBJECT(dev), &amp=
+;riscv_imsic_ops,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 imsic, TYPE_RISCV_IMSIC,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 IMSIC_MMIO_SIZE(imsic-&gt;num_pages));<br>
++=C2=A0 =C2=A0 sysbus_init_mmio(SYS_BUS_DEVICE(dev), &amp;imsic-&gt;mmio);<=
 br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (env-&gt;priv =
-=3D=3D PRV_M &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_MIE));<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 hsie =3D (env-&gt;priv &lt; PRV_S) ||=
-<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(env-&gt;p=
-riv =3D=3D PRV_S &amp;&amp; get_field(env-&gt;mstatus, MSTATUS_SIE));<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 vsie =3D 0;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Determine all pending interrupts */<br>
-&gt;&gt; +=C2=A0 =C2=A0 pending =3D riscv_cpu_all_pending(env);<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Check M-mode interrupts */<br>
-&gt;&gt; +=C2=A0 =C2=A0 irqs =3D pending &amp; ~env-&gt;mideleg &amp; -mie;=
-<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (irqs) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, =
-IRQ_M_EXT, IPRIO_DEFAULT_M,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 irqs, env-&gt;miprio);<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Check HS-mode interrupts */<br>
-&gt;&gt; +=C2=A0 =C2=A0 irqs =3D pending &amp; env-&gt;mideleg &amp; ~env-&=
-gt;hideleg &amp; -hsie;<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (irqs) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return riscv_cpu_pending_to_irq(env, =
-IRQ_S_EXT, IPRIO_DEFAULT_S,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 irqs, env-&gt;siprio);<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Check VS-mode interrupts */<br>
-&gt;&gt; +=C2=A0 =C2=A0 irqs =3D pending &amp; env-&gt;mideleg &amp; env-&g=
-t;hideleg &amp; -vsie;<br>
-&gt;&gt; +=C2=A0 =C2=A0 if (irqs) {<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 virq =3D riscv_cpu_pending_to_irq(env=
-, IRQ_S_EXT, IPRIO_DEFAULT_S,<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 irqs &gt;&gt; 1, env-&gt;hviprio);<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return (virq &lt;=3D 0) ? virq : virq=
- + 1;<br>
-&gt;&gt; +=C2=A0 =C2=A0 }<br>
-&gt;&gt; +<br>
-&gt;&gt; +=C2=A0 =C2=A0 /* Indicate no pending interrupt */<br>
-&gt;&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt;&gt;=C2=A0 }<br>
-&gt;&gt;<br>
-&gt;&gt;=C2=A0 bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_re=
-quest)<br>
-&gt;&gt; diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
-&gt;&gt; index c11eb4639c..bae4f69725 100644<br>
-&gt;&gt; --- a/target/riscv/machine.c<br>
-&gt;&gt; +++ b/target/riscv/machine.c<br>
-&gt;&gt; @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =
-=3D {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.hgeie, RISCVC=
-PU),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.hgeip, RISCVC=
-PU),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.htimedelta, R=
-ISCVCPU),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.hviprio, RISC=
-VCPU, 64),<br>
-&gt;&gt;<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.vsstatus, RIS=
-CVCPU),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.vstvec, RISCV=
-CPU),<br>
-&gt;&gt; @@ -194,6 +195,8 @@ const VMStateDescription vmstate_riscv_cpu =3D=
- {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 .fields =3D (VMStateField[]) {<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL_ARRAY(env.gpr, RI=
-SCVCPU, 32),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64_ARRAY(env.fpr, RI=
-SCVCPU, 32),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.miprio, RISCV=
-CPU, 64),<br>
-&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT8_ARRAY(env.siprio, RISCV=
-CPU, 64),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.pc, RISCVCPU)=
++<br>
++=C2=A0 =C2=A0 /* Claim the CPU interrupt to be triggered by this IMSIC */<=
+br>
++=C2=A0 =C2=A0 if (riscv_cpu_claim_interrupts(rcpu,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (imsic-&gt;mmode) ? MIP_MEIP : M=
+IP_SEIP) &lt; 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_report(&quot;%s already claimed&quot;,<b=
+r>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0(imsic-&gt;mmode) ? &quot;MEIP&quot; : &quot;SEIP&quot;);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 exit(1);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 /* Create output IRQ lines */<br>
++=C2=A0 =C2=A0 imsic-&gt;external_irqs =3D g_malloc(sizeof(qemu_irq) * imsi=
+c-&gt;num_pages);<br>
++=C2=A0 =C2=A0 qdev_init_gpio_out(dev, imsic-&gt;external_irqs, imsic-&gt;n=
+um_pages);<br>
++<br>
++=C2=A0 =C2=A0 /* Force select AIA feature and setup CSR read-modify-write =
+callback */<br>
++=C2=A0 =C2=A0 if (env) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_set_feature(env, RISCV_FEATURE_AIA);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!imsic-&gt;mmode) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_geilen(env, imsic-=
+&gt;num_pages - 1);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic-&gt;=
+mmode) ? PRV_M : PRV_S,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_imsic_rmw=
+, imsic);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 msi_nonbroken =3D true;<br>
++}<br>
++<br>
++static Property riscv_imsic_properties[] =3D {<br>
++=C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;mmode&quot;, RISCVIMSICState, mmode, =
+0),<br>
++=C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;hartid&quot;, RISCVIMSICState, hart=
+id, 0),<br>
++=C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;num-pages&quot;, RISCVIMSICState, n=
+um_pages, 0),<br>
++=C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;num-irqs&quot;, RISCVIMSICState, nu=
+m_irqs, 0),<br>
++=C2=A0 =C2=A0 DEFINE_PROP_END_OF_LIST(),<br>
++};<br>
++<br>
++static const VMStateDescription vmstate_riscv_imsic =3D {<br>
++=C2=A0 =C2=A0 .name =3D &quot;riscv_imsic&quot;,<br>
++=C2=A0 =C2=A0 .version_id =3D 1,<br>
++=C2=A0 =C2=A0 .minimum_version_id =3D 1,<br>
++=C2=A0 =C2=A0 .fields =3D (VMStateField[]) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_VARRAY_UINT32(eidelivery=
+, RISCVIMSICState,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 num_pages, 0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vmstate_info_uint32, uint32_t=
+),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_VARRAY_UINT32(eithreshol=
+d, RISCVIMSICState,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 num_pages, 0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vmstate_info_uint32, uint32_t=
+),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_VARRAY_UINT32(eistate, R=
+ISCVIMSICState,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 num_eistate, 0,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vmstate_info_uint32, uint32_t=
+),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_END_OF_LIST()<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++};<br>
++<br>
++static void riscv_imsic_class_init(ObjectClass *klass, void *data)<br>
++{<br>
++=C2=A0 =C2=A0 DeviceClass *dc =3D DEVICE_CLASS(klass);<br>
++<br>
++=C2=A0 =C2=A0 device_class_set_props(dc, riscv_imsic_properties);<br>
++=C2=A0 =C2=A0 dc-&gt;realize =3D riscv_imsic_realize;<br>
++=C2=A0 =C2=A0 dc-&gt;vmsd =3D &amp;vmstate_riscv_imsic;<br>
++}<br>
++<br>
++static const TypeInfo riscv_imsic_info =3D {<br>
++=C2=A0 =C2=A0 .name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_RISCV_IMSIC=
 ,<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.load_res, RIS=
-CVCPU),<br>
-&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINTTL(env.load_val, RIS=
-CVCPU),<br>
-&gt;&gt; --<br>
-&gt;&gt; 2.25.1<br>
-&gt;&gt;<br>
-&gt;&gt;<br>
++=C2=A0 =C2=A0 .parent=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_SYS_BUS_DEVICE,<=
+br>
++=C2=A0 =C2=A0 .instance_size =3D sizeof(RISCVIMSICState),<br>
++=C2=A0 =C2=A0 .class_init=C2=A0 =C2=A0 =3D riscv_imsic_class_init,<br>
++};<br>
++<br>
++static void riscv_imsic_register_types(void)<br>
++{<br>
++=C2=A0 =C2=A0 type_register_static(&amp;riscv_imsic_info);<br>
++}<br>
++<br>
++type_init(riscv_imsic_register_types)<br>
++<br>
++/*<br>
++ * Create IMSIC device.<br>
++ */<br>
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t num_pages, uint32_t num_ids=
+)<br>
++{<br>
++=C2=A0 =C2=A0 DeviceState *dev =3D qdev_new(TYPE_RISCV_IMSIC);<br>
++=C2=A0 =C2=A0 CPUState *cpu =3D qemu_get_cpu(hartid);<br>
++=C2=A0 =C2=A0 uint32_t i;<br>
++<br>
++=C2=A0 =C2=A0 assert(!(addr &amp; (IMSIC_MMIO_PAGE_SZ - 1)));<br>
++=C2=A0 =C2=A0 if (mmode) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(num_pages =3D=3D 1);<br>
++=C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(num_pages &gt;=3D 1 &amp;&amp; num_page=
+s &lt;=3D (IRQ_LOCAL_GUEST_MAX + 1));<br>
++=C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 assert(IMSIC_MIN_ID &lt;=3D num_ids);<br>
++=C2=A0 =C2=A0 assert(num_ids &lt;=3D IMSIC_MAX_ID);<br>
++=C2=A0 =C2=A0 assert((num_ids &amp; IMSIC_MIN_ID) =3D=3D IMSIC_MIN_ID);<br=
+>
++<br>
++=C2=A0 =C2=A0 qdev_prop_set_bit(dev, &quot;mmode&quot;, mmode);<br>
++=C2=A0 =C2=A0 qdev_prop_set_uint32(dev, &quot;hartid&quot;, hartid);<br>
++=C2=A0 =C2=A0 qdev_prop_set_uint32(dev, &quot;num-pages&quot;, num_pages);=
 <br>
-</blockquote></div></div>
++=C2=A0 =C2=A0 qdev_prop_set_uint32(dev, &quot;num-irqs&quot;, num_ids + 1)=
+;<br>
++<br>
++=C2=A0 =C2=A0 sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &amp;error_fat=
+al);<br>
++=C2=A0 =C2=A0 sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);<br>
++<br>
++=C2=A0 =C2=A0 for (i =3D 0; i &lt; num_pages; i++) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!i) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qdev_connect_gpio_out_named(dev,=
+ NULL, i,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qdev_get=
+_gpio_in(DEVICE(cpu),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 (mmode) ? IRQ_M_EXT : IRQ_S_EXT));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qdev_connect_gpio_out_named(dev,=
+ NULL, i,<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qdev_get=
+_gpio_in(DEVICE(cpu),<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 IRQ_LOCAL_MAX + i - 1));<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 }<br>
++<br>
++=C2=A0 =C2=A0 return dev;<br>
++}<br>
+diff --git a/include/hw/intc/riscv_imsic.h b/include/hw/intc/riscv_imsic.h<=
+br>
+new file mode 100644<br>
+index 0000000000..58c2aaa8dc<br>
+--- /dev/null<br>
++++ b/include/hw/intc/riscv_imsic.h<br>
+@@ -0,0 +1,68 @@<br>
++/*<br>
++ * RISC-V IMSIC (Incoming Message Signal Interrupt Controller) interface<b=
+r>
++ *<br>
++ * Copyright (c) 2021 Western Digital Corporation or its affiliates.<br>
++ *<br>
++ * This program is free software; you can redistribute it and/or modify it=
+<br>
++ * under the terms and conditions of the GNU General Public License,<br>
++ * version 2 or later, as published by the Free Software Foundation.<br>
++ *<br>
++ * This program is distributed in the hope it will be useful, but WITHOUT<=
+br>
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or<b=
+r>
++ * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public Lice=
+nse for<br>
++ * more details.<br>
++ *<br>
++ * You should have received a copy of the GNU General Public License along=
+ with<br>
++ * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/licen=
+ses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses/</a>=
+&gt;.<br>
++ */<br>
++<br>
++#ifndef HW_RISCV_IMSIC_H<br>
++#define HW_RISCV_IMSIC_H<br>
++<br>
++#include &quot;hw/sysbus.h&quot;<br>
++#include &quot;qom/object.h&quot;<br>
++<br>
++#define TYPE_RISCV_IMSIC &quot;riscv.imsic&quot;<br>
++<br>
++typedef struct RISCVIMSICState RISCVIMSICState;<br>
++DECLARE_INSTANCE_CHECKER(RISCVIMSICState, RISCV_IMSIC, TYPE_RISCV_IMSIC)<b=
+r>
++<br>
++#define IMSIC_MMIO_PAGE_SHIFT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 12<br>
++#define IMSIC_MMIO_PAGE_SZ=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+(1UL &lt;&lt; IMSIC_MMIO_PAGE_SHIFT)<br>
++#define IMSIC_MMIO_SIZE(__num_pages)=C2=A0 =C2=A0((__num_pages) * IMSIC_MM=
+IO_PAGE_SZ)<br>
++<br>
++#define IMSIC_MMIO_HART_GUEST_MAX_BTIS 6<br>
++#define IMSIC_MMIO_GROUP_MIN_SHIFT=C2=A0 =C2=A0 =C2=A024<br>
++<br>
++#define IMSIC_HART_NUM_GUESTS(__guest_bits)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 (1U &lt;&lt; (__guest_bits))<br>
++#define IMSIC_HART_SIZE(__guest_bits)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 (IMSIC_HART_NUM_GUESTS(__guest_bits) * IMSIC_MMIO_PAGE_SZ)<b=
+r>
++#define IMSIC_GROUP_NUM_HARTS(__hart_bits)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 \<br>
++=C2=A0 =C2=A0 (1U &lt;&lt; (__hart_bits))<br>
++#define IMSIC_GROUP_SIZE(__hart_bits, __guest_bits)=C2=A0 =C2=A0\<br>
++=C2=A0 =C2=A0 (IMSIC_GROUP_NUM_HARTS(__hart_bits) * IMSIC_HART_SIZE(__gues=
+t_bits))<br>
++<br>
++struct RISCVIMSICState {<br>
++=C2=A0 =C2=A0 /*&lt; private &gt;*/<br>
++=C2=A0 =C2=A0 SysBusDevice parent_obj;<br>
++=C2=A0 =C2=A0 qemu_irq *external_irqs;<br>
++<br>
++=C2=A0 =C2=A0 /*&lt; public &gt;*/<br>
++=C2=A0 =C2=A0 MemoryRegion mmio;<br>
++=C2=A0 =C2=A0 uint32_t num_eistate;<br>
++=C2=A0 =C2=A0 uint32_t *eidelivery;<br>
++=C2=A0 =C2=A0 uint32_t *eithreshold;<br>
++=C2=A0 =C2=A0 uint32_t *eistate;<br>
++<br>
++=C2=A0 =C2=A0 /* config */<br>
++=C2=A0 =C2=A0 bool mmode;<br>
++=C2=A0 =C2=A0 uint32_t hartid;<br>
++=C2=A0 =C2=A0 uint32_t num_pages;<br>
++=C2=A0 =C2=A0 uint32_t num_irqs;<br>
++};<br>
++<br>
++DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint32_t num_pages, uint32_t num_ids=
+);<br>
++<br>
++#endif<br>
+-- <br>
+2.25.1<br>
+<br>
+<br></blockquote><div><br></div><div>Reviewed-by: Frank Chang &lt;<a href=
+=3D"mailto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com=
+</a>&gt;<br></div></div></div>
 
---0000000000009f882105d5d32c2c--
+--00000000000066b3bd05d5d35877--
 
