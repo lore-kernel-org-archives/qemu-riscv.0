@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9jw0-0004BI-71
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 03:33:44 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58800)
+	id 1n9jwO-0004Ph-23
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 03:34:08 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58944)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n9jvs-00045q-RL; Tue, 18 Jan 2022 03:33:36 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25]:33008 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n9jvq-0006Ft-QG; Tue, 18 Jan 2022 03:33:36 -0500
-Received: from [192.168.0.102] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAB3fwNYe+ZhjTx1Bg--.55063S2;
- Tue, 18 Jan 2022 16:33:29 +0800 (CST)
-Subject: Re: [PATCH v5 5/5] target/riscv: add support for svpbmt extension
-To: Anup Patel <anup@brainfault.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, QEMU Developers <qemu-devel@nongnu.org>,
- wangjunqiang@iscas.ac.cn, =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?=
- <lazyparser@gmail.com>, Heiko Stuebner <heiko@sntech.de>
-References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
- <20220118011711.7243-6-liweiwei@iscas.ac.cn>
- <CAAhSdy3bMG3htJSCMsT9HjrYXQP5XZk8y_8KN7pXjPoNPzc58w@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <9f4821ae-b688-c908-7f93-6f4daed2554a@iscas.ac.cn>
-Date: Tue, 18 Jan 2022 16:33:28 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
+ id 1n9jwJ-0004Nf-G2; Tue, 18 Jan 2022 03:34:04 -0500
+Received: from dfw.source.kernel.org ([139.178.84.217]:49966)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
+ id 1n9jwH-0006H1-7Z; Tue, 18 Jan 2022 03:34:03 -0500
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id E7C7E60AB6;
+ Tue, 18 Jan 2022 08:33:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 589B2C340E6;
+ Tue, 18 Jan 2022 08:33:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1642494828;
+ bh=sCKL6LSN+t5gbMYxwDGzs2FfADys/CVkPenCtSBuwdg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=OuXCVaiJFv5OB2M6nHLHKX6zgfr18BSqDQrwAkppjlzSi0rMXqbUlLAl1XWidoX+n
+ 71h+MYpMRDx9hPRt2pmPN6Bi7YI+U0Ww/ZfYHSYlRITolmWLBYUO9oLFfBFF8Iaehr
+ KDPXbJYXYOGyFIRfTr0wM03H7//pUj2Xytwr4hOCCuP37pSBaZRyHHTXgq2keUc7J7
+ XiOronbgsQCtNfqsVSvAzFLYzH9Jv7uw+EiZpJLmMHEG9meTGU+1hPteyc2zn2xQ/O
+ vKQkGG32ffEKJsR3C4EW84YrYwLYcVerezKAEzxfz2UKV78kM/mIEwj5lMlfZUvjij
+ 1y3BU3mYnVdkw==
+Received: by mail-ua1-f52.google.com with SMTP id p1so35067317uap.9;
+ Tue, 18 Jan 2022 00:33:48 -0800 (PST)
+X-Gm-Message-State: AOAM5322SYxXZ5RdKKOsphv/AyplEgsVEGYFgVmkpNlbzRkxRiSDMrx4
+ uGACbb+L2/1b3/syyZUbSY8ReRsiDMRqKETc2pg=
+X-Google-Smtp-Source: ABdhPJzSnET6CMGle4d0/7o1Xy5eKA36ruTsR/hqGmmVXD/XJahY6zP787nLcMaCNm98eGLysL/EpIfzTI9uTUJgOwA=
+X-Received: by 2002:a05:6102:2d5:: with SMTP id
+ h21mr8161378vsh.51.1642494827311; 
+ Tue, 18 Jan 2022 00:33:47 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAAhSdy3bMG3htJSCMsT9HjrYXQP5XZk8y_8KN7pXjPoNPzc58w@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowAB3fwNYe+ZhjTx1Bg--.55063S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxXw1rWr4xAFWfCw13Gr4fGrg_yoW5Cw15pr
- WkGay2kayktFW2ka1xt3W5tw1UJwsI9F4Fkws7Zrs7Jw4rJ3yfGF1DKw43GF45XF48Zr1Y
- 9F1j9F1Yvr4jqaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBI14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
- c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x
- 0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E
- 7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcV
- C0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
- 04k26cxKx2IYs7xG6Fyj6rWUJwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6x
- kF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUUyCJPUUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
+ <20220118011711.7243-2-liweiwei@iscas.ac.cn>
+ <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
+In-Reply-To: <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
+From: Guo Ren <guoren@kernel.org>
+Date: Tue, 18 Jan 2022 16:33:36 +0800
+X-Gmail-Original-Message-ID: <CAJF2gTSztdr_geRwQAU=Y3T14urwwpi8+K5uzjf8K_R5ecfLqQ@mail.gmail.com>
+Message-ID: <CAJF2gTSztdr_geRwQAU=Y3T14urwwpi8+K5uzjf8K_R5ecfLqQ@mail.gmail.com>
+Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
+To: Anup Patel <anup@brainfault.org>
+Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Wang Junqiang <wangjunqiang@iscas.ac.cn>, 
+ Bin Meng <bin.meng@windriver.com>, QEMU Developers <qemu-devel@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Guo Ren <ren_guo@c-sky.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=139.178.84.217; envelope-from=guoren@kernel.org;
+ helo=dfw.source.kernel.org
+X-Spam_score_int: -77
+X-Spam_score: -7.8
+X-Spam_bar: -------
+X-Spam_report: (-7.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.7,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_HI=-5, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,94 +74,105 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 08:33:37 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 08:34:05 -0000
 
-
-在 2022/1/18 上午11:35, Anup Patel 写道:
+On Tue, Jan 18, 2022 at 11:32 AM Anup Patel <anup@brainfault.org> wrote:
+>
 > On Tue, Jan 18, 2022 at 6:47 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->> - add PTE_PBMT bits: It uses two PTE bits, but otherwise has no effect on QEMU, since QEMU is sequentially consistent and doesn't model PMAs currently
->> - add PTE_PBMT bit check for inner PTE
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> Cc: Heiko Stuebner <heiko@sntech.de>
->> Cc: Anup Patel <anup@brainfault.org>
->> ---
->>   target/riscv/cpu.c        | 1 +
->>   target/riscv/cpu.h        | 1 +
->>   target/riscv/cpu_bits.h   | 2 ++
->>   target/riscv/cpu_helper.c | 4 +++-
->>   4 files changed, 7 insertions(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 45ac98e06b..4f82bd00a3 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -670,6 +670,7 @@ static Property riscv_cpu_properties[] = {
->>
->>       DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
->>       DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
->> +    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
->>
->>       DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
->>       DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index c3d1845ca1..53f314c752 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -329,6 +329,7 @@ struct RISCVCPU {
->>           bool ext_icsr;
->>           bool ext_svinval;
->>           bool ext_svnapot;
->> +        bool ext_svpbmt;
->>           bool ext_zfh;
->>           bool ext_zfhmin;
->>
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index 5501e9698b..24b7eb2b1f 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -486,7 +486,9 @@ typedef enum {
->>   #define PTE_A               0x040 /* Accessed */
->>   #define PTE_D               0x080 /* Dirty */
->>   #define PTE_SOFT            0x300 /* Reserved for Software */
->> +#define PTE_PBMT            0x6000000000000000 /* Page-based memory types */
->>   #define PTE_N               0x8000000000000000 /* NAPOT translation */
->> +#define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
->>
->>   /* Page table PPN shift amount */
->>   #define PTE_PPN_SHIFT       10
->> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> index c276760c7f..9fffaccffb 100644
->> --- a/target/riscv/cpu_helper.c
->> +++ b/target/riscv/cpu_helper.c
->> @@ -625,9 +625,11 @@ restart:
->>           if (!(pte & PTE_V)) {
->>               /* Invalid PTE */
->>               return TRANSLATE_FAIL;
->> +        } else if (!cpu->cfg.ext_svpbmt && (pte & (target_ulong)PTE_PBMT)) {
-> Rather than, type-casting defines here you can simply define
-> ULL constants. E.g.
-> #define PTE_PBMT            0x6000000000000000ULL
+> >
+> > From: Guo Ren <ren_guo@c-sky.com>
+> >
+> > Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
+> > need to ignore them. They cannot be a part of ppn.
+> >
+> > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
+> >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
+> >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+> >
+> > 2: https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt-diff.pdf
+> >
+> > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
+> > Tested-by: Bin Meng <bmeng.cn@gmail.com>
+> > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
+> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > ---
+> >  target/riscv/cpu_bits.h   | 7 +++++++
+> >  target/riscv/cpu_helper.c | 2 +-
+> >  2 files changed, 8 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index 5a6d49aa64..282cd8eecd 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -490,6 +490,13 @@ typedef enum {
+> >  /* Page table PPN shift amount */
+> >  #define PTE_PPN_SHIFT       10
+> >
+> > +/* Page table PPN mask */
+> > +#if defined(TARGET_RISCV32)
+> > +#define PTE_PPN_MASK        0xffffffffUL
+> > +#elif defined(TARGET_RISCV64)
+> > +#define PTE_PPN_MASK        0x3fffffffffffffULL
+> > +#endif
+> > +
+>
+> Going forward we should avoid using target specific "#if"
+> so that we can use the same qemu-system-riscv64 for both
+> RV32 and RV64.
+>
+> >  /* Leaf page shift amount */
+> >  #define PGSHIFT             12
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 434a83e66a..26608ddf1c 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -619,7 +619,7 @@ restart:
+> >              return TRANSLATE_FAIL;
+> >          }
+> >
+> > -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+> > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>
+> Rather than using "#if", please use "xlen" comparison to extract
+> PPN correctly from PTE.
+Do you mean?
 
-OK. I'll update this.
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 9fffaccffb..071b7ea4cf 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -619,7 +619,11 @@ restart:
+             return TRANSLATE_FAIL;
+         }
 
-Regards,
+-        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
++        if (riscv_cpu_mxl(env) == MXL_RV32) {
++               hwaddr ppn = pte  >> PTE_PPN_SHIFT;
++       } else {
++               hwaddr ppn = (pte &  0x3fffffffffffffULL) >> PTE_PPN_SHIFT;
++       }
 
-Weiwei Li
+         RISCVCPU *cpu = env_archcpu(env);
+         if (!(pte & PTE_V)) {
 
->> +            return TRANSLATE_FAIL;
->>           } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
->>               /* Inner PTE, continue walking */
->> -            if (pte & (target_ulong)(PTE_D | PTE_A | PTE_U | PTE_N)) {
->> +            if (pte & (target_ulong)(PTE_D | PTE_A | PTE_U | PTE_ATTR)) {
->>                   return TRANSLATE_FAIL;
->>               }
->>               base = ppn << PGSHIFT;
->> --
->> 2.17.1
->>
+>
 > Regards,
 > Anup
+>
+> >
+> >          if (!(pte & PTE_V)) {
+> >              /* Invalid PTE */
+> > --
+> > 2.17.1
+> >
+>
 
+
+-- 
+Best Regards
+ Guo Ren
+
+ML: https://lore.kernel.org/linux-csky/
 
