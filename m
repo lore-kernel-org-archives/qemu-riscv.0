@@ -1,65 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9fD8-0005Lo-4S
-	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 22:31:12 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37780)
+	id 1n9fEO-0006xK-W4
+	for mharc-qemu-riscv@gnu.org; Mon, 17 Jan 2022 22:32:25 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37968)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9fD3-0005JE-1q
- for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:31:01 -0500
-Received: from [2a00:1450:4864:20::32a] (port=55881
- helo=mail-wm1-x32a.google.com)
+ id 1n9fEN-0006vR-Hh
+ for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:32:23 -0500
+Received: from [2a00:1450:4864:20::334] (port=55206
+ helo=mail-wm1-x334.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9fCl-0005Ii-1z
- for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:30:48 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id c66so24633423wma.5
- for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 19:30:42 -0800 (PST)
+ id 1n9fEM-0005WY-1f
+ for qemu-riscv@nongnu.org; Mon, 17 Jan 2022 22:32:23 -0500
+Received: by mail-wm1-x334.google.com with SMTP id p18so24653944wmg.4
+ for <qemu-riscv@nongnu.org>; Mon, 17 Jan 2022 19:32:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WXixNQENw0ofQFg0k2+qJaD+/ihEPIpKWp5U9V+8KQE=;
- b=bic0RvFUr+Tsu0q5oljTq+A53V6mW+Y0A7GAaiwiU+zfgysJVPCysJzBMZ9xSOe9lb
- V4ruW6klKqiee0edH4i9JfSF2OMzcbUemzVAMhBj1101n+YVf4/pPanug07hinzJkDwQ
- CgDH9NK1c5yPLAkWw7kUDfjpykdTreeNs7IrkMS4AcAlg6zPv2lba+FeqUMh5yquyltz
- +TEwN0dSJzYysqzlNfJzEN9SLC7uq6zkwHwbixUgMojPLvMFLTMwlN1asNINSAthnVmD
- 38voU/dTtEE/0PaUSfj3QelloRhp+wbdmHaVqyT4vvliooFJFPEYtBJ2ZX8JqUB5x7p/
- qGng==
+ :cc; bh=r1s9ORPSa9ns8X8jKGvjMoVR35efRhCu+m1zU8F7ob4=;
+ b=D0OjJ88z8ctKNl/175CBLhlFyCUR2yW9wYwl2dIl6jHjw0a2lvdmrdi0xz2Wf4vbxb
+ 6/3usdlO8qrINTVQYQ21z7sBm5H6jdI79NDvW0xmIpHlzLj8Uy+ulEwHL83cEFg7ERKd
+ X5pFSFd/ebbFms3LsqtA8sh55mrtV2V0vEIxEK61JTQp9sKsmHjrixP2bOGQ7wJ1nKvg
+ nsFzlrYS+txUYuE6WGsd2jwRxgnCj+FMjJyksWFbpoARt1/lQe79CYuLuvHi8I8D/2d6
+ tBdXjrm7YUxeaJuM0TLAgOrQCkuOhx42LNuxil3PpYJYVmUTNZQYMNQYFN2dviQ6t+uM
+ Y7Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WXixNQENw0ofQFg0k2+qJaD+/ihEPIpKWp5U9V+8KQE=;
- b=uXbX5IkeDKK8tFu50Y15NQN3Eoc9S1nbjvN9nqQOS8TjCvpBzqHWNc+shapSy6DfpH
- XwCwlVQOCg1ErK0qMfOOjFFlN62xFOrCmqbJe5eiJJO7Y9UHcnlAaVdVvq4CagyBVF4T
- QlM0t1dI5hcQXKPeTkvR5PYClYu2033zrJahNr7n/NOiYmTJ7CAFsRsng7m5aN8mU5yM
- Ri2VBDUJyk/PIMSiCH3UgBzwK5uH7UAvOEd7MKI3GsSn6W9CCiRMdW1i7D4PkNZH4CHv
- W9fezxZJ727XAmMosxJaX5VrRUAT/rwTZ5CqpKcCpsiFswudQs5cAntricARUDfDOE7r
- wnUQ==
-X-Gm-Message-State: AOAM531wtuNnwnts+WaYCvM2OWgI9E3Q+8HD4OmujKWuiyb31b/FwgeD
- 3tIiQ6rCe2i5dwHflxf11DuKcKd8I0f5tdjVP/aTXA==
-X-Google-Smtp-Source: ABdhPJxKz89a8NGUAXscOC9XN/WPi3hDIVeFmKWPL4perXDzrEfCRgG41L5skrtBaNJG69JNGraE+eGlwcwzhnN1SgA=
-X-Received: by 2002:a7b:cb05:: with SMTP id u5mr24217880wmj.59.1642476641108; 
- Mon, 17 Jan 2022 19:30:41 -0800 (PST)
+ bh=r1s9ORPSa9ns8X8jKGvjMoVR35efRhCu+m1zU8F7ob4=;
+ b=G4JOzSePdzO8BLDrhRy2yTerPigC0kaTXof5hcLDapcmIHD6yhHJ1Pjw6XpomnpbcS
+ F6cuimkGBqyEkRQHZz/gTlwF1jqApecBzCZqJ/kKEadR3659ed/7+z9SvAee23M7tBZd
+ cWw0JtaYzN8aA53NxwUfB4txGcADAKZcDsaROaSJVwAUpoTuqvJBqskImQ6c51DOSMJZ
+ e827P7ulTEIabo0D73SLnEpyjGaHVXW0hhae2U7hYEEgomao0P9u9SgTM71WCbZVsKOz
+ /NJTsgEipuwppaPJcKdhfvFxciCWGGvJB4uxAlRyoZh7MRNsyGOL8AIZuQ8yGkZh4Q9n
+ ozfQ==
+X-Gm-Message-State: AOAM5328f7Afwgmu/itGptUbTR+BIlRHG0ARoGB7lOaaS0tFK28cuyu5
+ RSjDV3Q7/tfLX4dB2NVKW/AewJ1vWWzN+Ewc0ggvGg==
+X-Google-Smtp-Source: ABdhPJwCdegztHw0oZFeTmirZvfzNh0Y48umYiNaOBuiHoyeH7LCAqroWOuYaX3bd5GREf91BHrvsQkhIphf4L02U0g=
+X-Received: by 2002:adf:9d81:: with SMTP id p1mr21709135wre.313.1642476739616; 
+ Mon, 17 Jan 2022 19:32:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
- <20220118011711.7243-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220118011711.7243-2-liweiwei@iscas.ac.cn>
+ <20220118011711.7243-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220118011711.7243-4-liweiwei@iscas.ac.cn>
 From: Anup Patel <anup@brainfault.org>
-Date: Tue, 18 Jan 2022 09:00:29 +0530
-Message-ID: <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
-Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
+Date: Tue, 18 Jan 2022 09:02:07 +0530
+Message-ID: <CAAhSdy3C7eNcrq2WJ_u7GnY-z=MJQCVQXL=iKufFETswzZ0awQ@mail.gmail.com>
+Subject: Re: [PATCH v5 3/5] target/riscv: add support for svnapot extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  QEMU Developers <qemu-devel@nongnu.org>, wangjunqiang@iscas.ac.cn, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
- Guo Ren <ren_guo@c-sky.com>
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::334
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::32a;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32a.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::334;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,74 +78,112 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 03:31:01 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 03:32:23 -0000
 
 On Tue, Jan 18, 2022 at 6:47 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> From: Guo Ren <ren_guo@c-sky.com>
+> - add PTE_N bit
+> - add PTE_N bit check for inner PTE
+> - update address translation to support 64KiB continuous region (napot_bits = 4)
 >
-> Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
-> need to ignore them. They cannot be a part of ppn.
->
-> 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
->    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
->    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
->
-> 2: https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt-diff.pdf
->
-> Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  target/riscv/cpu_bits.h   | 7 +++++++
->  target/riscv/cpu_helper.c | 2 +-
->  2 files changed, 8 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 5a6d49aa64..282cd8eecd 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -490,6 +490,13 @@ typedef enum {
->  /* Page table PPN shift amount */
->  #define PTE_PPN_SHIFT       10
->
-> +/* Page table PPN mask */
-> +#if defined(TARGET_RISCV32)
-> +#define PTE_PPN_MASK        0xffffffffUL
-> +#elif defined(TARGET_RISCV64)
-> +#define PTE_PPN_MASK        0x3fffffffffffffULL
-> +#endif
-> +
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Cc: Anup Patel <anup@brainfault.org>
 
-Going forward we should avoid using target specific "#if"
-so that we can use the same qemu-system-riscv64 for both
-RV32 and RV64.
+I did review this patch previously.
 
->  /* Leaf page shift amount */
->  #define PGSHIFT             12
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 434a83e66a..26608ddf1c 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -619,7 +619,7 @@ restart:
->              return TRANSLATE_FAIL;
->          }
->
-> -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-> +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+In any case, this looks good to me.
 
-Rather than using "#if", please use "xlen" comparison to extract
-PPN correctly from PTE.
+Reviewed-by: Anup Patel <anup@brainfault.org>
 
 Regards,
 Anup
 
+> ---
+>  target/riscv/cpu.c        |  2 ++
+>  target/riscv/cpu.h        |  1 +
+>  target/riscv/cpu_bits.h   |  1 +
+>  target/riscv/cpu_helper.c | 18 +++++++++++++++---
+>  4 files changed, 19 insertions(+), 3 deletions(-)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9bc25d3055..ff6c86c85b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -668,6 +668,8 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+>
+> +    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+> +
+>      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4d63086765..d3d17cde82 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -327,6 +327,7 @@ struct RISCVCPU {
+>          bool ext_counters;
+>          bool ext_ifencei;
+>          bool ext_icsr;
+> +        bool ext_svnapot;
+>          bool ext_zfh;
+>          bool ext_zfhmin;
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 282cd8eecd..5501e9698b 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -486,6 +486,7 @@ typedef enum {
+>  #define PTE_A               0x040 /* Accessed */
+>  #define PTE_D               0x080 /* Dirty */
+>  #define PTE_SOFT            0x300 /* Reserved for Software */
+> +#define PTE_N               0x8000000000000000 /* NAPOT translation */
+>
+>  /* Page table PPN shift amount */
+>  #define PTE_PPN_SHIFT       10
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 1820188f41..c276760c7f 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -621,12 +621,13 @@ restart:
+>
+>          hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>
+> +        RISCVCPU *cpu = env_archcpu(env);
 >          if (!(pte & PTE_V)) {
 >              /* Invalid PTE */
+>              return TRANSLATE_FAIL;
+>          } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>              /* Inner PTE, continue walking */
+> -            if (pte & (PTE_D | PTE_A | PTE_U)) {
+> +            if (pte & (target_ulong)(PTE_D | PTE_A | PTE_U | PTE_N)) {
+>                  return TRANSLATE_FAIL;
+>              }
+>              base = ppn << PGSHIFT;
+> @@ -702,8 +703,19 @@ restart:
+>              /* for superpage mappings, make a fake leaf PTE for the TLB's
+>                 benefit. */
+>              target_ulong vpn = addr >> PGSHIFT;
+> -            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+> -                        (addr & ~TARGET_PAGE_MASK);
+> +
+> +            int napot_bits = 0;
+> +            if (cpu->cfg.ext_svnapot && (pte & (target_ulong)PTE_N)) {
+> +                napot_bits = ctzl(ppn) + 1;
+> +                if ((i != (levels - 1)) || (napot_bits != 4)) {
+> +                    return TRANSLATE_FAIL;
+> +                }
+> +            }
+> +
+> +            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
+> +                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
+> +                          (vpn & (((target_ulong)1 << ptshift) - 1))
+> +                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
+>
+>              /* set permissions on the TLB entry */
+>              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
 > --
 > 2.17.1
 >
