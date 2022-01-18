@@ -1,19 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9jYn-0003dc-M5
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 03:09:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53990)
+	id 1n9jZ6-0003hj-CC
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 03:10:04 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54086)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n9jYJ-0003bY-1H; Tue, 18 Jan 2022 03:09:20 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25]:55056 helo=cstnet.cn)
+ id 1n9jZ1-0003fH-Iu; Tue, 18 Jan 2022 03:10:01 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25]:55274 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1n9jYE-0002Nw-3N; Tue, 18 Jan 2022 03:09:12 -0500
+ id 1n9jYz-0002Rw-Ls; Tue, 18 Jan 2022 03:09:59 -0500
 Received: from [192.168.0.102] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAB3fwOZdeZhGuF0Bg--.54775S2;
- Tue, 18 Jan 2022 16:08:58 +0800 (CST)
-Subject: Re: [PATCH v4 4/7] target/riscv: rvk: add implementation of
- instructions for Zk*
+ by APP-05 (Coremail) with SMTP id zQCowADnyRbOdeZh++J0Bg--.39567S2;
+ Tue, 18 Jan 2022 16:09:51 +0800 (CST)
+Subject: Re: [PATCH v4 7/7] target/riscv: rvk: expose zbk* and zk* properties
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -24,35 +23,35 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, lazyparser@gmail.com,
  luruibo2000@163.com, lustrew@foxmail.com
 References: <20220111035124.9468-1-liweiwei@iscas.ac.cn>
- <20220111035124.9468-5-liweiwei@iscas.ac.cn>
- <CAKmqyKMAohGZQ0q2XuO8i=PYcNwveYy6GPajHGFNrxXZmR-wsA@mail.gmail.com>
+ <20220111035124.9468-8-liweiwei@iscas.ac.cn>
+ <CAKmqyKNNWDxQ_TUDgRgri3p67u6v4i3v1oV=HMicQVyqnuJ=SA@mail.gmail.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <c230dbb6-7fcb-2448-cd5d-f527df01cf7f@iscas.ac.cn>
-Date: Tue, 18 Jan 2022 16:08:57 +0800
+Message-ID: <eab6c7bc-0336-bfc0-9037-0e531b4d8172@iscas.ac.cn>
+Date: Tue, 18 Jan 2022 16:09:50 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMAohGZQ0q2XuO8i=PYcNwveYy6GPajHGFNrxXZmR-wsA@mail.gmail.com>
+In-Reply-To: <CAKmqyKNNWDxQ_TUDgRgri3p67u6v4i3v1oV=HMicQVyqnuJ=SA@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: zQCowAB3fwOZdeZhGuF0Bg--.54775S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxCryfGF4kGr47Xry5XryrWFg_yoWruryfpr
- W5CFs0kFWUX343KrWfXF1YqryrJ395KF1DCFyxWr15A39xtrykZrnxG345KF48Xa18Cryj
- 9FsrZr43ua4xtFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUB214x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowADnyRbOdeZh++J0Bg--.39567S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CFyUWFWfXr1UCr1UAr1DWrg_yoW8Zw47pr
+ 15JFZrK3Z7JFySk3yUtw1DtrWrG3WrA39Fq3yIv3ZrAr4xGrnxGF1DKa1vkr42yr48Zw4I
+ 9F43ur1FvrZ0va7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
- 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
- jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
- 1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY
- 04v7Mxk0xIA0c2IEe2xFo4CEbIxvr21lc7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7V
- AKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCj
- r7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6x
- IIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAI
- w20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6x
- kF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU8VbyDUUUU
+ 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kI
+ c2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x
+ 0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E
+ 7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcV
+ C0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF
+ 04k26cxKx2IYs7xG6r4j6FyUMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7
+ CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUTOJ5UUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -75,147 +74,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 08:09:37 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 08:10:02 -0000
 
 
-在 2022/1/18 下午12:21, Alistair Francis 写道:
-> On Tue, Jan 11, 2022 at 2:01 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->> Co-authored-by: Ruibo Lu <luruibo2000@163.com>
->> Co-authored-by: Zewen Ye <lustrew@foxmail.com>
+在 2022/1/18 下午12:23, Alistair Francis 写道:
+> On Tue, Jan 11, 2022 at 1:53 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 >> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 >> ---
->>   target/riscv/crypto_helper.c            | 446 ++++++++++++++++++++++
->>   target/riscv/helper.h                   |  37 ++
->>   target/riscv/insn32.decode              |  42 +++
->>   target/riscv/insn_trans/trans_rvk.c.inc | 467 ++++++++++++++++++++++++
->>   target/riscv/meson.build                |   3 +-
->>   target/riscv/translate.c                |   1 +
->>   6 files changed, 995 insertions(+), 1 deletion(-)
->>   create mode 100644 target/riscv/crypto_helper.c
->>   create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+>>   target/riscv/cpu.c | 14 ++++++++++++++
+>>   1 file changed, 14 insertions(+)
 >>
->> diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
->> new file mode 100644
->> index 0000000000..344eea4287
->> --- /dev/null
->> +++ b/target/riscv/crypto_helper.c
->> @@ -0,0 +1,446 @@
->> +/*
->> + * RISC-V Crypto Emulation Helpers for QEMU.
->> + *
->> + * Copyright (c) 2021 Ruibo Lu, luruibo2000@163.com
->> + * Copyright (c) 2021 Zewen Ye, lustrew@foxmail.com
->> + *
->> + * This program is free software; you can redistribute it and/or modify it
->> + * under the terms and conditions of the GNU General Public License,
->> + * version 2 or later, as published by the Free Software Foundation.
->> + *
->> + * This program is distributed in the hope it will be useful, but WITHOUT
->> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
->> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
->> + * more details.
->> + *
->> + * You should have received a copy of the GNU General Public License along with
->> + * this program.  If not, see <http://www.gnu.org/licenses/>.
->> + */
->> +
->> +#include "qemu/osdep.h"
->> +#include "cpu.h"
->> +#include "exec/exec-all.h"
->> +#include "exec/helper-proto.h"
->> +#include "crypto/aes.h"
->> +#include "crypto/sm4.h"
->> +
->> +#define AES_XTIME(a) \
->> +    ((a << 1) ^ ((a & 0x80) ? 0x1b : 0))
->> +
->> +#define AES_GFMUL(a, b) (( \
->> +    (((b) & 0x1) ?                              (a)   : 0) ^ \
->> +    (((b) & 0x2) ?                     AES_XTIME(a)   : 0) ^ \
->> +    (((b) & 0x4) ?           AES_XTIME(AES_XTIME(a))  : 0) ^ \
->> +    (((b) & 0x8) ? AES_XTIME(AES_XTIME(AES_XTIME(a))) : 0)) & 0xFF)
->> +
->> +#define BY(X, I) ((X >> (8 * I)) & 0xFF)
->> +
->> +#define AES_SHIFROWS_LO(RS1, RS2) ( \
->> +    (((RS1 >> 24) & 0xFF) << 56) | \
->> +    (((RS2 >> 48) & 0xFF) << 48) | \
->> +    (((RS2 >>  8) & 0xFF) << 40) | \
->> +    (((RS1 >> 32) & 0xFF) << 32) | \
->> +    (((RS2 >> 56) & 0xFF) << 24) | \
->> +    (((RS2 >> 16) & 0xFF) << 16) | \
->> +    (((RS1 >> 40) & 0xFF) <<  8) | \
->> +    (((RS1 >>  0) & 0xFF) <<  0))
->> +
->> +#define AES_INVSHIFROWS_LO(RS1, RS2) ( \
->> +    (((RS2 >> 24) & 0xFF) << 56) | \
->> +    (((RS2 >> 48) & 0xFF) << 48) | \
->> +    (((RS1 >>  8) & 0xFF) << 40) | \
->> +    (((RS1 >> 32) & 0xFF) << 32) | \
->> +    (((RS1 >> 56) & 0xFF) << 24) | \
->> +    (((RS2 >> 16) & 0xFF) << 16) | \
->> +    (((RS2 >> 40) & 0xFF) <<  8) | \
->> +    (((RS1 >>  0) & 0xFF) <<  0))
->> +
->> +#define AES_MIXBYTE(COL, B0, B1, B2, B3) ( \
->> +              BY(COL, B3)     ^ \
->> +              BY(COL, B2)     ^ \
->> +    AES_GFMUL(BY(COL, B1), 3) ^ \
->> +    AES_GFMUL(BY(COL, B0), 2)   \
->> +)
->> +
->> +#define AES_MIXCOLUMN(COL) ( \
->> +    AES_MIXBYTE(COL, 3, 0, 1, 2) << 24 | \
->> +    AES_MIXBYTE(COL, 2, 3, 0, 1) << 16 | \
->> +    AES_MIXBYTE(COL, 1, 2, 3, 0) <<  8 | \
->> +    AES_MIXBYTE(COL, 0, 1, 2, 3) <<  0   \
->> +)
->> +
->> +#define AES_INVMIXBYTE(COL, B0, B1, B2, B3) ( \
->> +    AES_GFMUL(BY(COL, B3), 0x9) ^ \
->> +    AES_GFMUL(BY(COL, B2), 0xd) ^ \
->> +    AES_GFMUL(BY(COL, B1), 0xb) ^ \
->> +    AES_GFMUL(BY(COL, B0), 0xe)   \
->> +)
->> +
->> +#define AES_INVMIXCOLUMN(COL) ( \
->> +    AES_INVMIXBYTE(COL, 3, 0, 1, 2) << 24 | \
->> +    AES_INVMIXBYTE(COL, 2, 3, 0, 1) << 16 | \
->> +    AES_INVMIXBYTE(COL, 1, 2, 3, 0) <<  8 | \
->> +    AES_INVMIXBYTE(COL, 0, 1, 2, 3) <<  0   \
->> +)
->> +
->> +static inline uint32_t aes_mixcolumn_byte(uint8_t x, bool fwd)
->> +{
->> +    uint32_t u;
->> +    if (fwd) {
->> +        u = (AES_GFMUL(x, 3) << 24) |
->> +                          (x << 16) |
->> +                          (x <<  8) |
->> +            (AES_GFMUL(x, 2) <<  0);
->> +    } else {
->> +        u = (AES_GFMUL(x, 0xb) << 24) |
->> +            (AES_GFMUL(x, 0xd) << 16) |
->> +            (AES_GFMUL(x, 0x9) <<  8) |
->> +            (AES_GFMUL(x, 0xe) <<  0);
->> +    }
->> +    return u;
->> +}
->> +
->> +#define XLEN (8 * sizeof(target_ulong))
-> I don't think this is used, but please don't hard coded xlen's.
-> Everything should be dynamic based on the CPU xlen.
->
-> It would also be great if you could split this patch up more. There is
-> a lot being added here.
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index b487a8282c..628a782ba9 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -694,9 +694,23 @@ static Property riscv_cpu_properties[] = {
+>>       DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>>       DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>>       DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+>> +    DEFINE_PROP_BOOL("zbkb", RISCVCPU, cfg.ext_zbkb, false),
+>> +    DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
+>> +    DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
+>>       DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+>> +    DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
+>> +    DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
+>> +    DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
+>> +    DEFINE_PROP_BOOL("zkne", RISCVCPU, cfg.ext_zkne, false),
+>> +    DEFINE_PROP_BOOL("zknh", RISCVCPU, cfg.ext_zknh, false),
+>> +    DEFINE_PROP_BOOL("zkr", RISCVCPU, cfg.ext_zkr, false),
+>> +    DEFINE_PROP_BOOL("zks", RISCVCPU, cfg.ext_zks, false),
+>> +    DEFINE_PROP_BOOL("zksed", RISCVCPU, cfg.ext_zksed, false),
+>> +    DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
+>> +    DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
+>>
+>>       /* These are experimental so mark with 'x-' */
+>> +    DEFINE_PROP_BOOL("x-h", RISCVCPU, cfg.ext_h, false),
+> Looks like a rebase error
 >
 > Alistair
 
-OK. Thanks for your comments. I'll delete XLEN and split this patch.
+Yeah. I'll fix this.
 
 Regards,
 
 Weiwei Li
+
+>>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>>       /* ePMP 0.9.3 */
+>>       DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+>> --
+>> 2.17.1
+>>
+>>
 
 
