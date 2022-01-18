@@ -1,70 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9mSr-0000ZE-K9
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 06:15:51 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41580)
+	id 1n9mV1-0001Us-4j
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 06:18:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42002)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
- id 1n9mSo-0000YD-8r; Tue, 18 Jan 2022 06:15:46 -0500
-Received: from [2604:1380:4641:c500::1] (port=59918 helo=dfw.source.kernel.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
- id 1n9mSl-0006y8-J7; Tue, 18 Jan 2022 06:15:45 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 12ABC612BA;
- Tue, 18 Jan 2022 11:15:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79569C340E1;
- Tue, 18 Jan 2022 11:15:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642504540;
- bh=CwamJ4JhNKW8W3dwltChxy6z8jCNz8yyJVoM/8g8Ylw=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=DaJHU/ZLMV3UKkxsCSOgFE49CwupTtvyP4KQBS4BgUvY32A9E7F+oQx47KRZE0mR9
- onaJLYxfja54bqjJPS3nKah0aD3gWwO2arS4Nb9bIsLfeFUWhEz9Ti6c1tgstPzFis
- IxjBmBPVN4XKSrRxQW4fOnC1Y59gBVUF8VcT2jT8psuL418YUIXZxrVNS6MJDCJb2B
- QlIlGlztcGrOf2dnN/7xGoSKdgmCT/4OXq3ppUZRv9Oqq4tV/eUbwMh1pVK1dTWBHI
- 31h9H8EckLQWT8DUeW5W0GNGXPXO7ETfHOu1GA7iTyiAwGDbnwRfGZrx/kZM5tK7tl
- dy1NsQv2679SQ==
-Received: by mail-ua1-f53.google.com with SMTP id p1so35747087uap.9;
- Tue, 18 Jan 2022 03:15:40 -0800 (PST)
-X-Gm-Message-State: AOAM53017ML11yp2zV2BAO1Y6ifgvv++yUjyhiFs2FvNrmgQcCOQRP59
- CrMIQPbTHpAr0kXsdX3iNGLaWvduiA4tcGDlzm0=
-X-Google-Smtp-Source: ABdhPJxW3Or/iZiKxZAu23ZMC7+10DIcq4Su8NzxbZd6yuEadKF4zBvYfQgycIQx3KGRgCvt3+UmCNaJ65A1RLSlg1Q=
-X-Received: by 2002:a67:fd64:: with SMTP id h4mr9177575vsa.8.1642504539505;
- Tue, 18 Jan 2022 03:15:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1n9mUz-0001Tl-Vt
+ for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:18:02 -0500
+Received: from [2a00:1450:4864:20::336] (port=35612
+ helo=mail-wm1-x336.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1n9mUy-00079H-Dz
+ for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:18:01 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ q9-20020a7bce89000000b00349e697f2fbso4983724wmj.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Jan 2022 03:17:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=rHHhRvqhMoS9M7tdur2lIhRR3Zu8vmsJW9kqVPLlT6A=;
+ b=FXmUpipu/oMxuIRHq2zpxk+Qcax3C+g7b9G2hPbzwz2sxYrJc6+4/2E4PwPy5u9NYZ
+ OiJHurOIL7RpT5LQTP+uY6HtjEsmrk2ZLWe3cudDcREgh6H+VxDFTtR15j0R3vhXL4UL
+ afgLJgBLX1xqp1UuPM8wFsywlL0wupQjnu+NkBNHEZamRMsl/XTNZT7opLWri3Z/dBM8
+ r6E8R5duj9ppvObAAfg814sbnGBZOzhCX4qhsIRktNGAeMiROcCDzzDJl4qo+1Rt6Cma
+ 5ZxWkhG96MohQINBcAhy5wAIukOnTbp2C1fLMGbhjZ03/8sAA1wUJ/Yyv9kS8EvSw6Qd
+ LrTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=rHHhRvqhMoS9M7tdur2lIhRR3Zu8vmsJW9kqVPLlT6A=;
+ b=YVhPr2LMnF07dkrvXTRZFunBksuhGBjvmWFx8NsB9+4B9fUwu15JlK9hPnq91OPuYz
+ IkwVbHBO4DXshVUxyCSpRzXGeqFhuyYwG+rW256/9Fnk2lqj7XhWx763rVUSfx0OqUwV
+ nM243tUjd8ZqscCY+PiagV0NDuyLiqO/2XK6ZoxYqE8NfkXELX9uXnxwpwCQoJdCg8Lv
+ RC2zrqpfYdQamI9MN30UHQ/BOk76Na6PArmoXmEm5E+nbarKI6WWcaYNFoo1c8lsLhrh
+ VrojvjezJ2npsFMjPrbNb0xL0rQut8XaOLFl3hbEihYCBpPCcuTU5lCgSf6YNqWCNzqi
+ BuQw==
+X-Gm-Message-State: AOAM533k1Zatf4RUYJ0ypNXGtiIXDLJW0106HSHA2glMldSMpTzOj4U0
+ 944CXjTrBeFU9Yw51085vzqAIw==
+X-Google-Smtp-Source: ABdhPJzLXgsl44NVrT1dThnyrMNF8Z7rqn6cQfuP7opVS6u1j8/vPHwUMJ85BhRJawOR25ULzfMZtQ==
+X-Received: by 2002:a1c:9acb:: with SMTP id c194mr28963105wme.89.1642504677015; 
+ Tue, 18 Jan 2022 03:17:57 -0800 (PST)
+Received: from localhost.localdomain ([122.167.36.211])
+ by smtp.gmail.com with ESMTPSA id p4sm2156939wmq.40.2022.01.18.03.17.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Jan 2022 03:17:56 -0800 (PST)
+From: Anup Patel <apatel@ventanamicro.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Anup Patel <apatel@ventanamicro.com>
+Subject: [PATCH v2 0/3] Improve RISC-V spike machine bios support
+Date: Tue, 18 Jan 2022 16:47:33 +0530
+Message-Id: <20220118111736.454150-1-apatel@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
- <20220118011711.7243-2-liweiwei@iscas.ac.cn>
- <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
- <CAJF2gTSztdr_geRwQAU=Y3T14urwwpi8+K5uzjf8K_R5ecfLqQ@mail.gmail.com>
- <CAK9=C2Wr1aci6Z3wAKh3Bh_BYyY86BZ_0SRF7pfvKak6HXNvsQ@mail.gmail.com>
-In-Reply-To: <CAK9=C2Wr1aci6Z3wAKh3Bh_BYyY86BZ_0SRF7pfvKak6HXNvsQ@mail.gmail.com>
-From: Guo Ren <guoren@kernel.org>
-Date: Tue, 18 Jan 2022 19:15:28 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTQp3RTbj51-5J4md_6UWT7qTYxXvvyZmSK5LN91h4fB0w@mail.gmail.com>
-Message-ID: <CAJF2gTQp3RTbj51-5J4md_6UWT7qTYxXvvyZmSK5LN91h4fB0w@mail.gmail.com>
-Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Anup Patel <anup@brainfault.org>, Weiwei Li <liweiwei@iscas.ac.cn>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Wang Junqiang <wangjunqiang@iscas.ac.cn>, 
- Bin Meng <bin.meng@windriver.com>, QEMU Developers <qemu-devel@nongnu.org>, 
- Alistair Francis <alistair.francis@wdc.com>, Guo Ren <ren_guo@c-sky.com>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2604:1380:4641:c500::1
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::336
  (failed)
-Received-SPF: pass client-ip=2604:1380:4641:c500::1;
- envelope-from=guoren@kernel.org; helo=dfw.source.kernel.org
-X-Spam_score_int: -69
-X-Spam_score: -7.0
-X-Spam_bar: -------
-X-Spam_report: (-7.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.7,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=apatel@ventanamicro.com; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,135 +83,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 11:15:47 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 11:18:02 -0000
 
-On Tue, Jan 18, 2022 at 4:51 PM Anup Patel <apatel@ventanamicro.com> wrote:
->
-> On Tue, Jan 18, 2022 at 2:16 PM Guo Ren <guoren@kernel.org> wrote:
-> >
-> > On Tue, Jan 18, 2022 at 11:32 AM Anup Patel <anup@brainfault.org> wrote:
-> > >
-> > > On Tue, Jan 18, 2022 at 6:47 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
-> > > >
-> > > > From: Guo Ren <ren_guo@c-sky.com>
-> > > >
-> > > > Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
-> > > > need to ignore them. They cannot be a part of ppn.
-> > > >
-> > > > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-> > > >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-> > > >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
-> > > >
-> > > > 2: https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt-diff.pdf
-> > > >
-> > > > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> > > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> > > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > > ---
-> > > >  target/riscv/cpu_bits.h   | 7 +++++++
-> > > >  target/riscv/cpu_helper.c | 2 +-
-> > > >  2 files changed, 8 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > > > index 5a6d49aa64..282cd8eecd 100644
-> > > > --- a/target/riscv/cpu_bits.h
-> > > > +++ b/target/riscv/cpu_bits.h
-> > > > @@ -490,6 +490,13 @@ typedef enum {
-> > > >  /* Page table PPN shift amount */
-> > > >  #define PTE_PPN_SHIFT       10
-> > > >
-> > > > +/* Page table PPN mask */
-> > > > +#if defined(TARGET_RISCV32)
-> > > > +#define PTE_PPN_MASK        0xffffffffUL
-> > > > +#elif defined(TARGET_RISCV64)
-> > > > +#define PTE_PPN_MASK        0x3fffffffffffffULL
-> > > > +#endif
-> > > > +
-> > >
-> > > Going forward we should avoid using target specific "#if"
-> > > so that we can use the same qemu-system-riscv64 for both
-> > > RV32 and RV64.
-> > >
-> > > >  /* Leaf page shift amount */
-> > > >  #define PGSHIFT             12
-> > > >
-> > > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > > index 434a83e66a..26608ddf1c 100644
-> > > > --- a/target/riscv/cpu_helper.c
-> > > > +++ b/target/riscv/cpu_helper.c
-> > > > @@ -619,7 +619,7 @@ restart:
-> > > >              return TRANSLATE_FAIL;
-> > > >          }
-> > > >
-> > > > -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-> > > > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-> > >
-> > > Rather than using "#if", please use "xlen" comparison to extract
-> > > PPN correctly from PTE.
-> > Do you mean?
-> >
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index 9fffaccffb..071b7ea4cf 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -619,7 +619,11 @@ restart:
-> >              return TRANSLATE_FAIL;
-> >          }
-> >
-> > -        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-> > +        if (riscv_cpu_mxl(env) == MXL_RV32) {
-> > +               hwaddr ppn = pte  >> PTE_PPN_SHIFT;
-> > +       } else {
-> > +               hwaddr ppn = (pte &  0x3fffffffffffffULL) >> PTE_PPN_SHIFT;
-> > +       }
->
-> Yes, something like this but use a define for 0x3fffffffffffffULL
-Just as Alistair said: This will need to be dynamic based on get_xl()
+This series aims at improving RISC-V spike machine BIOS support by allowing
+use of binary firmware as bios. Further, this also allows us to totally
+remove the ELF bios images shipped with QEMU RISC-V.
 
- I still prefer:
-+#if defined(TARGET_RISCV32)
-+#define PTE_PPN_MASK        0xffffffffUL
-+#elif defined(TARGET_RISCV64)
-+#define PTE_PPN_MASK        0x3fffffffffffffULL
-+#endif
+These patches can also be found in riscv_spike_imp_v2 branch at:
+https://github.com/avpatel/qemu.git
 
-+        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+Changes since v1:
+ - Use htif_uses_elf_symbols() in htif_mm_init() for PATCH1
+ - Added PATCH2 and PATCH3 to remove ELF bios images
 
->
-> Regards,
-> Anup
->
-> >
-> >          RISCVCPU *cpu = env_archcpu(env);
-> >          if (!(pte & PTE_V)) {
-> >
-> > >
-> > > Regards,
-> > > Anup
-> > >
-> > > >
-> > > >          if (!(pte & PTE_V)) {
-> > > >              /* Invalid PTE */
-> > > > --
-> > > > 2.17.1
-> > > >
-> > >
-> >
-> >
-> > --
-> > Best Regards
-> >  Guo Ren
-> >
-> > ML: https://lore.kernel.org/linux-csky/
-> >
+Anup Patel (3):
+  hw/riscv: spike: Allow using binary firmware as bios
+  hw/riscv: Remove macros for ELF BIOS image names
+  roms/opensbi: Remove ELF images
 
-
+ hw/char/riscv_htif.c                          |  33 ++++++++-----
+ hw/riscv/spike.c                              |  45 +++++++++++-------
+ include/hw/char/riscv_htif.h                  |   5 +-
+ include/hw/riscv/boot.h                       |   2 -
+ include/hw/riscv/spike.h                      |   1 +
+ pc-bios/meson.build                           |   2 -
+ .../opensbi-riscv32-generic-fw_dynamic.elf    | Bin 838904 -> 0 bytes
+ .../opensbi-riscv64-generic-fw_dynamic.elf    | Bin 934696 -> 0 bytes
+ roms/Makefile                                 |   2 -
+ 9 files changed, 54 insertions(+), 36 deletions(-)
+ delete mode 100644 pc-bios/opensbi-riscv32-generic-fw_dynamic.elf
+ delete mode 100644 pc-bios/opensbi-riscv64-generic-fw_dynamic.elf
 
 -- 
-Best Regards
- Guo Ren
+2.25.1
 
-ML: https://lore.kernel.org/linux-csky/
 
