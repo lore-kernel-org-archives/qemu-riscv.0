@@ -1,46 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9mds-00045h-V1
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 06:27:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43710)
+	id 1n9mfr-0005Z0-7R
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 06:29:16 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44470)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9mdp-00040l-87
- for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:27:09 -0500
-Received: from [2a00:1450:4864:20::32e] (port=35739
- helo=mail-wm1-x32e.google.com)
+ id 1n9mfM-0005Mf-Th
+ for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:28:46 -0500
+Received: from [2a00:1450:4864:20::32f] (port=40712
+ helo=mail-wm1-x32f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1n9mcn-0008PF-38
- for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:26:11 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- q9-20020a7bce89000000b00349e697f2fbso5037213wmj.0
- for <qemu-riscv@nongnu.org>; Tue, 18 Jan 2022 03:25:49 -0800 (PST)
+ id 1n9mfL-0000Pu-4W
+ for qemu-riscv@nongnu.org; Tue, 18 Jan 2022 06:28:44 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 25-20020a05600c231900b003497473a9c4so4936877wmo.5
+ for <qemu-riscv@nongnu.org>; Tue, 18 Jan 2022 03:28:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Jt04BQHrNI+Iv2fQFB0Lbhcq5ROcKpE09Ft7v8m6BLs=;
- b=zKEjVqglDtXjpyF0GlSHW5JRGA8F4+xffNJdp6BFPYdubn9c4pOvLMrUVWd32/iUZu
- Pw7KSAUQwduMA5ei9SdcGBTZNvdWAAqAft11N9JgbBJcsliBeuNNkjxf0m9kQrBnv6k4
- WoNh9Yk3N5ZRTVbMsme1875aEOfqGa1/77pDir/riN6JLbQqv0g6ME83W28dNBhTln/v
- NsR8NQm3zEnCjLRNNNCPuTNi3JGcJxhIPQp1aUVw7uzsFAqM2WLvgMc/MxHbUOZ+mNCf
- V8xt3JUG/xbOsXgo7hATCk4qwGB5OlWM9tieYqefK5a4WZHSljAJfYM12+Zz7lpFlg/s
- 3oYA==
+ :cc; bh=oAHXc4l1gAho/jBjM07HWwh4Wk1Wumfqz0S/jU8qNCc=;
+ b=07DQ86MCEPkKpfTA12P4VxcH1BCCyOAzOSRjdIAUadjlpSGlWDR33OTkvHjVZk8h7e
+ 9Wh6iFGLIG7Rgu80Td0q02tU3FfBndpVrUBIE0iDnJOR2F8TS7uYi+ooXXrF1GtbLBJ5
+ SKBuAW/C7R2dv4u+dz3DsQPKycHbMrFi1r6dRCeVbfNH8ae1rLiT7T6q1soALZbpGZ9K
+ J07CfbUYNcAfi7+AcmcXz68temwlhggvnnGy1MrDA31qtKDeXJAD5IOFdAcKn6VIrH9M
+ hS0jFtTbiEcalVv8vbHXGuYc6tp9ErJwh6DRa7LaAOiZKV5Elgx8dvfV603TsDhWID2F
+ CaWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Jt04BQHrNI+Iv2fQFB0Lbhcq5ROcKpE09Ft7v8m6BLs=;
- b=GvJh4XEsKbIgqa6q9sZA+p8yzlQR+IMprAraNRpv8NwZxPKuKPDo1fA1wMps3X0toq
- lDhkNZrIyBc3GWeOpFq8jQ6HPnYx+kyHtKSzfLAqgN04ARU3WNeYJCTVbEz9WCJS0Aqs
- dxUBuSGqHSvbq4c0GSqm+hY6nhz1RX6zOK9j+Fv+5MrzaZcUFC5QQqhXxtUZWBsif9pt
- 6z+gQUGmNzyaxugmJr0zQMZlKDwyUA015VCsdNUVw/e6Twta3xVLxw4AQojMNDXcx10p
- xLgN+Pv+en4TT05bo1VOgia7wt++i4tCGDB7uCiI+3QHtSpChmY0HNS1KTe1rPCd86wl
- oAzg==
-X-Gm-Message-State: AOAM532rj91+MgJavhl6QQmHgNWmrDKHd5SC1Zgq8z1H5N4YsZ6oUHjE
- Vmgv+vOkqAOXEDsHGh1MiPyGpRWE8mMIDDcDBR+few==
-X-Google-Smtp-Source: ABdhPJyI44U0Xiz72WeNushcxTcazlDRTKq2cO9m0Hn5hZBmnfrN/BbLQCGAhrA5mwLDqHzd/yR5i3R+nKD65WiAIaI=
-X-Received: by 2002:a5d:584e:: with SMTP id i14mr9211085wrf.690.1642505148359; 
- Tue, 18 Jan 2022 03:25:48 -0800 (PST)
+ bh=oAHXc4l1gAho/jBjM07HWwh4Wk1Wumfqz0S/jU8qNCc=;
+ b=fu471gbvu/LZMhtCgRh8R2QG4jZcyB5WPxskI8Zt2+4RqJ2Dv3hQw5STiTn1vftItp
+ NRnHdQ945i5+LHpjru7McddSwyPeZE23uya0KykXuIfzFQdB5Vb4wyR48FcXPdqyFbND
+ 01f5+cbStTjI0H8KThaJOJP1AVbR+xW9bYRBMCYVdrHUeKAk8sjzlo48/JoLHKbqrGoL
+ 09fD2Nf9fCb11ilSyXiUq7/Xbl4KJqqwdhBFCb+QcodNhC3FglOjvoke74utntfCJbqR
+ afQr+7iDVcGeB+vZyBo/ia/LWjkdgu2W3Toy8fHiMWj8l/+8mZXm8WBi1sshpELl+4w4
+ pM3Q==
+X-Gm-Message-State: AOAM533rxhaAxN58mKv9af3RWCRMAFlFaCD3kL3W1M/DF4D4jzsO70rF
+ XYv/R3lTvFQ95sVpNsd04fQHncJzE5EoGH9iEygp6A==
+X-Google-Smtp-Source: ABdhPJwzWy+zXknXIeYQPlMzcX0IL5Ffu38BYeyE6UD2tUayTCzKbSLwVffuLyZDZPyvjaNquu+sRQyU62nUXkwAEgw=
+X-Received: by 2002:a05:600c:4e15:: with SMTP id
+ b21mr10791805wmq.59.1642505321730; 
+ Tue, 18 Jan 2022 03:28:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
  <20220118011711.7243-2-liweiwei@iscas.ac.cn>
@@ -50,8 +51,8 @@ References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
  <CAJF2gTQp3RTbj51-5J4md_6UWT7qTYxXvvyZmSK5LN91h4fB0w@mail.gmail.com>
 In-Reply-To: <CAJF2gTQp3RTbj51-5J4md_6UWT7qTYxXvvyZmSK5LN91h4fB0w@mail.gmail.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Tue, 18 Jan 2022 16:55:35 +0530
-Message-ID: <CAAhSdy03q3FSmoK790aE0KycPis97h7O5Sv0qt-8QsBYSc1SyA@mail.gmail.com>
+Date: Tue, 18 Jan 2022 16:58:29 +0530
+Message-ID: <CAAhSdy2Pvo5AFk-FJEcwYOKBuOxcS8P-T0W=BtLm4fzR+K8_OQ@mail.gmail.com>
 Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
 To: Guo Ren <guoren@kernel.org>
 Cc: Anup Patel <apatel@ventanamicro.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
@@ -62,10 +63,10 @@ Cc: Anup Patel <apatel@ventanamicro.com>, Weiwei Li <liweiwei@iscas.ac.cn>,
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32f
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::32e;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32e.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::32f;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -85,7 +86,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jan 2022 11:27:09 -0000
+X-List-Received-Date: Tue, 18 Jan 2022 11:29:10 -0000
 
 On Tue, Jan 18, 2022 at 4:45 PM Guo Ren <guoren@kernel.org> wrote:
 >
@@ -173,9 +174,6 @@ On Tue, Jan 18, 2022 at 4:45 PM Guo Ren <guoren@kernel.org> wrote:
 > >
 > > Yes, something like this but use a define for 0x3fffffffffffffULL
 > Just as Alistair said: This will need to be dynamic based on get_xl()
-
-By get_xl() Alistair meant riscv_cpu_mxl()
-
 >
 >  I still prefer:
 > +#if defined(TARGET_RISCV32)
@@ -186,8 +184,8 @@ By get_xl() Alistair meant riscv_cpu_mxl()
 >
 > +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
 
-This approach does not allow us to use same
-qemu-system-riscv64 for RV32 emulation.
+Actually, using cpu_get_xl() is even better because it allows
+having lower privilege mode running at different XLEN.
 
 Regards,
 Anup
