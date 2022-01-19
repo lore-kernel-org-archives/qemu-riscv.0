@@ -1,22 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nA3Ul-0005Se-6q
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 00:26:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59228)
+	id 1nA3V9-00068R-UI
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 00:27:20 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59352)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nA3Ud-0005P4-EG; Wed, 19 Jan 2022 00:26:48 -0500
-Received: from out28-76.mail.aliyun.com ([115.124.28.76]:41798)
+ id 1nA3V7-00060s-DP; Wed, 19 Jan 2022 00:27:17 -0500
+Received: from out28-221.mail.aliyun.com ([115.124.28.221]:50535)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nA3Ub-0002Bl-H0; Wed, 19 Jan 2022 00:26:47 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.08862134|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.00809396-0.000703759-0.991202;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047198; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfCCb-m_1642569999; 
+ id 1nA3V5-0002F2-8i; Wed, 19 Jan 2022 00:27:17 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1592441|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0674551-0.00050581-0.932039;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047211; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfD5D58_1642570030; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MfCCb-m_1642569999)
- by smtp.aliyun-inc.com(10.147.41.120);
- Wed, 19 Jan 2022 13:26:40 +0800
+ fp:SMTPD_---.MfD5D58_1642570030)
+ by smtp.aliyun-inc.com(10.147.40.26); Wed, 19 Jan 2022 13:27:10 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -24,16 +23,16 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v7 16/22] target/riscv: Adjust vsetvl according to XLEN
-Date: Wed, 19 Jan 2022 13:18:18 +0800
-Message-Id: <20220119051824.17494-17-zhiwei_liu@c-sky.com>
+Subject: [PATCH v7 17/22] target/riscv: Remove VILL field in VTYPE
+Date: Wed, 19 Jan 2022 13:18:19 +0800
+Message-Id: <20220119051824.17494-18-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220119051824.17494-1-zhiwei_liu@c-sky.com>
 References: <20220119051824.17494-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.76; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-76.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.221; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-221.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -52,50 +51,27 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 05:26:50 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 05:27:17 -0000
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Acked-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.h           | 5 +++++
- target/riscv/vector_helper.c | 7 +++++--
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ target/riscv/cpu.h | 1 -
+ 1 file changed, 1 deletion(-)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 6c740b92c1..fe58ccaeae 100644
+index fe58ccaeae..55635d68d5 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -491,6 +491,11 @@ static inline RISCVMXL cpu_recompute_xl(CPURISCVState *env)
- }
- #endif
+@@ -111,7 +111,6 @@ FIELD(VTYPE, VTA, 6, 1)
+ FIELD(VTYPE, VMA, 7, 1)
+ FIELD(VTYPE, VEDIV, 8, 2)
+ FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
+-FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
  
-+static inline int riscv_cpu_xlen(CPURISCVState *env)
-+{
-+    return 16 << env->xl;
-+}
-+
- /*
-  * Encode LMUL to lmul as follows:
-  *     LMUL    vlmul    lmul
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index a9484c22ea..8b7c9ec890 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -36,8 +36,11 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-     uint64_t lmul = FIELD_EX64(s2, VTYPE, VLMUL);
-     uint16_t sew = 8 << FIELD_EX64(s2, VTYPE, VSEW);
-     uint8_t ediv = FIELD_EX64(s2, VTYPE, VEDIV);
--    bool vill = FIELD_EX64(s2, VTYPE, VILL);
--    target_ulong reserved = FIELD_EX64(s2, VTYPE, RESERVED);
-+    int xlen = riscv_cpu_xlen(env);
-+    bool vill = (s2 >> (xlen - 1)) & 0x1;
-+    target_ulong reserved = s2 &
-+                            MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
-+                                            xlen - 1 - R_VTYPE_RESERVED_SHIFT);
- 
-     if (lmul & 4) {
-         /* Fractional LMUL. */
+ struct CPURISCVState {
+     target_ulong gpr[32];
 -- 
 2.25.1
 
