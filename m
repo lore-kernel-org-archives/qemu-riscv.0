@@ -1,68 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nA1JE-0006VU-7l
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 22:06:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:34608)
+	id 1nA1Qm-0000ro-VR
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 22:14:40 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35562)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nA1JC-0006Tn-2W; Tue, 18 Jan 2022 22:06:50 -0500
-Received: from [2607:f8b0:4864:20::d33] (port=46916
- helo=mail-io1-xd33.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nA1J8-0000PN-ML; Tue, 18 Jan 2022 22:06:49 -0500
-Received: by mail-io1-xd33.google.com with SMTP id e79so1112110iof.13;
- Tue, 18 Jan 2022 19:06:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7HwJvxqXKn5XKfK/a63Dzk1w/H20JE9ScCZuZY3PfPs=;
- b=aB1C0lZfwDZ27h6kkCeGHL+EyouL1YmMirRU1vJtL8yYy3x0i6D8GvP9y4WudfDDc5
- xQ6yoe23W1rRELYWyBMDBM6sI5ZUDCVD7UeL/DBo62/nDfD+kWsGmIJohWdivndvRyiW
- wasQ/JG7ftP7KouI7Nh46ISumbY33LMwywmy8voE6+ggQpeyS2EqR1AiVvZj2HKViHb4
- HwZo50uzNq0gKLt85G4x0RZ/lPiLEQCOXO02WtUKHaSMKyalrPa9Mtf1wXgcPMGulEul
- I6+dW3cQSbNPVl/l/a0mUPdre/+srrq+WVJq+qOjziYJNiPMTd70OAcZezJ7z9acXVK0
- YPKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7HwJvxqXKn5XKfK/a63Dzk1w/H20JE9ScCZuZY3PfPs=;
- b=dwKsi9sqvx7fvRC1j/faOzuE+8YAUJ1fKAiuXvojU2HxieZz4PaWF0ziJytZyoerDj
- i3n6Iun2f3z5tVXjr0AemoMDpnqK7FPcpUwx5qladS08m+SW6u151DTpwbuCPoBlo5Gq
- wqZNL2lMcHEJTQ9rDwn7Pcv+0Bv4gpwntRil7HnAJBoRqOVDWb/TM4ffY30izUrTTLNq
- HvOk8kL0j2oCjMmSizQ1LD0q6G0nF+Cqiu0ws+qHI40UWu0Vlol9/rWFznM6K1lr+ARb
- m9GLYgOEpepbbyNCHv7KyHMpG724t8F8mF68m3Ddk9F1WfqBF6rr7wp0whFBjiiSG7Fq
- zOAA==
-X-Gm-Message-State: AOAM5309/0+tsQyL2PUOet4Rix6ptYWM54H6SFurKELqHg0YbJDvyQJS
- 30FSkFbRecv0NwcPOEIpYYSM11eGAhuyhwL8hUE=
-X-Google-Smtp-Source: ABdhPJyAh4of3/TWuExYzQ2iqBCBSGXnAH2RsgBWgzOz26FgprYcM+v4afXUmGPUvCvv5ojZODUuMsNB+Dct4uDhAGg=
-X-Received: by 2002:a02:7702:: with SMTP id g2mr14069914jac.206.1642561605331; 
- Tue, 18 Jan 2022 19:06:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1nA1Ql-0000rb-0s; Tue, 18 Jan 2022 22:14:39 -0500
+Received: from out28-218.mail.aliyun.com ([115.124.28.218]:60008)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1nA1Qh-0001Pi-6E; Tue, 18 Jan 2022 22:14:38 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436287|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_social|0.0126536-0.000613953-0.986732;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047212; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=12; RT=12; SR=0; TI=SMTPD_---.Mf90QoW_1642562063; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.Mf90QoW_1642562063)
+ by smtp.aliyun-inc.com(10.147.41.138);
+ Wed, 19 Jan 2022 11:14:23 +0800
+Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
+To: Weiwei Li <liweiwei@iscas.ac.cn>, Guo Ren <guoren@kernel.org>,
+ Anup Patel <apatel@ventanamicro.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Anup Patel <anup@brainfault.org>, Wang Junqiang <wangjunqiang@iscas.ac.cn>,
+ Bin Meng <bin.meng@windriver.com>, QEMU Developers <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, Guo Ren <ren_guo@c-sky.com>,
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
+ <20220118011711.7243-2-liweiwei@iscas.ac.cn>
+ <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
+ <CAJF2gTSztdr_geRwQAU=Y3T14urwwpi8+K5uzjf8K_R5ecfLqQ@mail.gmail.com>
+ <CAK9=C2Wr1aci6Z3wAKh3Bh_BYyY86BZ_0SRF7pfvKak6HXNvsQ@mail.gmail.com>
+ <CAJF2gTQp3RTbj51-5J4md_6UWT7qTYxXvvyZmSK5LN91h4fB0w@mail.gmail.com>
+ <bdb141c7-e45c-b05e-60ff-9e60603df6e6@iscas.ac.cn>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <762305fc-bf26-ca46-0d00-b8b58d82d49b@c-sky.com>
+Date: Wed, 19 Jan 2022 11:14:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <20220105030844.780642-1-bmeng.cn@gmail.com>
- <20220105030844.780642-6-bmeng.cn@gmail.com>
-In-Reply-To: <20220105030844.780642-6-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jan 2022 13:06:19 +1000
-Message-ID: <CAKmqyKMA-s-1=mhAO3ODMUK00aNJkw5u2H2oOGbjbd9ODKw5=w@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 5/7] target/riscv: csr: Hook debug CSR read/write
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+In-Reply-To: <bdb141c7-e45c-b05e-60ff-9e60603df6e6@iscas.ac.cn>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+Received-SPF: none client-ip=115.124.28.218; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-218.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,178 +63,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 03:06:51 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 03:14:39 -0000
 
-On Wed, Jan 5, 2022 at 1:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> This adds debug CSR read/write support to the RISC-V CSR RW table.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
-> ---
->
-> Changes in v3:
-> - add riscv_trigger_init(), moved from patch #1 to this patch
->
->  target/riscv/debug.h |  2 ++
->  target/riscv/cpu.c   |  6 +++++
->  target/riscv/csr.c   | 57 ++++++++++++++++++++++++++++++++++++++++++++
->  target/riscv/debug.c | 27 +++++++++++++++++++++
->  4 files changed, 92 insertions(+)
->
-> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-> index d0f63e2414..f4da2db35d 100644
-> --- a/target/riscv/debug.h
-> +++ b/target/riscv/debug.h
-> @@ -109,4 +109,6 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
->  bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
->  bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
->
-> +void riscv_trigger_init(CPURISCVState *env);
-> +
->  #endif /* RISCV_DEBUG_H */
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d36c31ce9a..17dcc3c14f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -575,6 +575,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->
->      riscv_cpu_register_gdb_regs_for_features(cs);
->
-> +#ifndef CONFIG_USER_ONLY
-> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-> +        riscv_trigger_init(env);
-> +    }
-> +#endif
-> +
->      qemu_init_vcpu(cs);
->      cpu_reset(cs);
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 146447eac5..189b9cc8c6 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -220,6 +220,15 @@ static RISCVException epmp(CPURISCVState *env, int csrno)
->
->      return RISCV_EXCP_ILLEGAL_INST;
->  }
-> +
-> +static RISCVException debug(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    return RISCV_EXCP_ILLEGAL_INST;
-> +}
->  #endif
->
->  /* User Floating-Point CSRs */
-> @@ -1464,6 +1473,48 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException read_tselect(CPURISCVState *env, int csrno,
-> +                                   target_ulong *val)
-> +{
-> +    *val = tselect_csr_read(env);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tselect(CPURISCVState *env, int csrno,
-> +                                    target_ulong val)
-> +{
-> +    tselect_csr_write(env, val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_tdata(CPURISCVState *env, int csrno,
-> +                                 target_ulong *val)
-> +{
-> +    /* return 0 in tdata1 to end the trigger enumeration */
-> +    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
-> +        *val = 0;
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    *val = tdata_csr_read(env, csrno - CSR_TDATA1);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_tdata(CPURISCVState *env, int csrno,
-> +                                  target_ulong val)
-> +{
-> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    tdata_csr_write(env, csrno - CSR_TDATA1, val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  /*
->   * Functions to access Pointer Masking feature registers
->   * We have to check if current priv lvl could modify
-> @@ -1962,6 +2013,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
->      [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
->
-> +    /* Debug CSRs */
-> +    [CSR_TSELECT]   =  { "tselect", debug, read_tselect, write_tselect },
-> +    [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
-> +    [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
-> +    [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
-> +
->      /* User Pointer Masking */
->      [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
->      [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
-> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-> index 7760c4611f..041a0d3a89 100644
-> --- a/target/riscv/debug.c
-> +++ b/target/riscv/debug.c
-> @@ -412,3 +412,30 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
->
->      return false;
->  }
-> +
-> +void riscv_trigger_init(CPURISCVState *env)
-> +{
-> +    target_ulong type2 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
-> +    int i;
-> +
-> +    /* type 2 triggers */
-> +    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-> +        /*
-> +         * type = TRIGGER_TYPE_AD_MATCH
-> +         * dmode = 0 (both debug and M-mode can write tdata)
-> +         * maskmax = 0 (unimplemented, always 0)
-> +         * sizehi = 0 (match against any size, RV64 only)
-> +         * hit = 0 (unimplemented, always 0)
-> +         * select = 0 (always 0, perform match on address)
-> +         * timing = 0 (always 0, trigger before instruction)
-> +         * sizelo = 0 (match against any size)
-> +         * action = 0 (always 0, raise a breakpoint exception)
-> +         * chain = 0 (unimplemented, always 0)
-> +         * match = 0 (always 0, when any compare value equals tdata2)
-> +         */
-> +        env->trigger_type2[i].mcontrol = type2;
-> +        env->trigger_type2[i].maddress = 0;
-> +        env->trigger_type2[i].bp = NULL;
-> +        env->trigger_type2[i].wp = NULL;
-> +    }
 
-Should this be called at reset instead?
+On 2022/1/18 下午7:29, Weiwei Li wrote:
+>
+> 在 2022/1/18 下午7:15, Guo Ren 写道:
+>> On Tue, Jan 18, 2022 at 4:51 PM Anup Patel <apatel@ventanamicro.com> 
+>> wrote:
+>>> On Tue, Jan 18, 2022 at 2:16 PM Guo Ren <guoren@kernel.org> wrote:
+>>>> On Tue, Jan 18, 2022 at 11:32 AM Anup Patel <anup@brainfault.org> 
+>>>> wrote:
+>>>>> On Tue, Jan 18, 2022 at 6:47 AM Weiwei Li <liweiwei@iscas.ac.cn> 
+>>>>> wrote:
+>>>>>> From: Guo Ren <ren_guo@c-sky.com>
+>>>>>>
+>>>>>> Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
+>>>>>> need to ignore them. They cannot be a part of ppn.
+>>>>>>
+>>>>>> 1: The RISC-V Instruction Set Manual, Volume II: Privileged 
+>>>>>> Architecture
+>>>>>>     4.4 Sv39: Page-Based 39-bit Virtual-Memory System
+>>>>>>     4.5 Sv48: Page-Based 48-bit Virtual-Memory System
+>>>>>>
+>>>>>> 2: 
+>>>>>> https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt-diff.pdf
+>>>>>>
+>>>>>> Signed-off-by: Guo Ren <ren_guo@c-sky.com>
+>>>>>> Tested-by: Bin Meng <bmeng.cn@gmail.com>
+>>>>>> Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
+>>>>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+>>>>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+>>>>>> ---
+>>>>>>   target/riscv/cpu_bits.h   | 7 +++++++
+>>>>>>   target/riscv/cpu_helper.c | 2 +-
+>>>>>>   2 files changed, 8 insertions(+), 1 deletion(-)
+>>>>>>
+>>>>>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>>>>>> index 5a6d49aa64..282cd8eecd 100644
+>>>>>> --- a/target/riscv/cpu_bits.h
+>>>>>> +++ b/target/riscv/cpu_bits.h
+>>>>>> @@ -490,6 +490,13 @@ typedef enum {
+>>>>>>   /* Page table PPN shift amount */
+>>>>>>   #define PTE_PPN_SHIFT       10
+>>>>>>
+>>>>>> +/* Page table PPN mask */
+>>>>>> +#if defined(TARGET_RISCV32)
+>>>>>> +#define PTE_PPN_MASK        0xffffffffUL
+>>>>>> +#elif defined(TARGET_RISCV64)
+>>>>>> +#define PTE_PPN_MASK        0x3fffffffffffffULL
+>>>>>> +#endif
+>>>>>> +
+>>>>> Going forward we should avoid using target specific "#if"
+>>>>> so that we can use the same qemu-system-riscv64 for both
+>>>>> RV32 and RV64.
+>>>>>
+>>>>>>   /* Leaf page shift amount */
+>>>>>>   #define PGSHIFT             12
+>>>>>>
+>>>>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>>>>> index 434a83e66a..26608ddf1c 100644
+>>>>>> --- a/target/riscv/cpu_helper.c
+>>>>>> +++ b/target/riscv/cpu_helper.c
+>>>>>> @@ -619,7 +619,7 @@ restart:
+>>>>>>               return TRANSLATE_FAIL;
+>>>>>>           }
+>>>>>>
+>>>>>> -        hwaddr ppn = pte >> PTE_PPN_SHIFT;
+>>>>>> +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>>>>> Rather than using "#if", please use "xlen" comparison to extract
+>>>>> PPN correctly from PTE.
+>>>> Do you mean?
+>>>>
+>>>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>>>> index 9fffaccffb..071b7ea4cf 100644
+>>>> --- a/target/riscv/cpu_helper.c
+>>>> +++ b/target/riscv/cpu_helper.c
+>>>> @@ -619,7 +619,11 @@ restart:
+>>>>               return TRANSLATE_FAIL;
+>>>>           }
+>>>>
+>>>> -        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>>>> +        if (riscv_cpu_mxl(env) == MXL_RV32) {
+>>>> +               hwaddr ppn = pte  >> PTE_PPN_SHIFT;
+>>>> +       } else {
+>>>> +               hwaddr ppn = (pte & 0x3fffffffffffffULL) >> 
+>>>> PTE_PPN_SHIFT;
+>>>> +       }
+>>> Yes, something like this but use a define for 0x3fffffffffffffULL
+>> Just as Alistair said: This will need to be dynamic based on get_xl()
+>>
+>>   I still prefer:
+>> +#if defined(TARGET_RISCV32)
+>> +#define PTE_PPN_MASK        0xffffffffUL
+>> +#elif defined(TARGET_RISCV64)
+>> +#define PTE_PPN_MASK        0x3fffffffffffffULL
+>> +#endif
+>>
+>> +        hwaddr ppn = (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
+>
+> I think the difference may be xl = MXL_RV32 in RV64.
+Agree.
+>
+> Or we may  define  PTE_PPN_MASK as  0x3fffffffffffffULL, and use type 
+> contrast
+>
+> +        hwaddr ppn = (pte & (target_ulong)PTE_PPN_MASK) >> 
+> PTE_PPN_SHIFT;
 
-Alistair
+It is absolutely not right to use target_ulong here.
 
-> +}
-> --
-> 2.25.1
+Although we don't support dynamic SXLEN currently,   we should avoid 
+assuming  that SXLEN is always 64 on qemu-system-riscv64. Get_cpu_xl is 
+the right way.
+
+I have  moved  xl to CPURISCVState in my patch set v6 for UXL. I think 
+it will be much convenient for this situation and you can just use 
+env->xl to get right XLEN.
+But I don't know when it will be merged.
+
+Thanks,
+Zhiwei
+
+>
+> Regards,
+> Weiwei Li
+>
+>>> Regards,
+>>> Anup
+>>>
+>>>>           RISCVCPU *cpu = env_archcpu(env);
+>>>>           if (!(pte & PTE_V)) {
+>>>>
+>>>>> Regards,
+>>>>> Anup
+>>>>>
+>>>>>>           if (!(pte & PTE_V)) {
+>>>>>>               /* Invalid PTE */
+>>>>>> -- 
+>>>>>> 2.17.1
+>>>>>>
+>>>>
+>>>> -- 
+>>>> Best Regards
+>>>>   Guo Ren
+>>>>
+>>>> ML: https://lore.kernel.org/linux-csky/
+>>>>
+>>
+>>
 >
 >
 
