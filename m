@@ -1,68 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1n9zoc-0001Pb-Ur
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 20:31:11 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46490)
+	id 1nA1JE-0006VU-7l
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 22:06:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:34608)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9zoa-0001Mq-5u; Tue, 18 Jan 2022 20:31:08 -0500
-Received: from [2607:f8b0:4864:20::135] (port=42742
- helo=mail-il1-x135.google.com)
+ id 1nA1JC-0006Tn-2W; Tue, 18 Jan 2022 22:06:50 -0500
+Received: from [2607:f8b0:4864:20::d33] (port=46916
+ helo=mail-io1-xd33.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1n9zoR-0001lk-4C; Tue, 18 Jan 2022 20:31:07 -0500
-Received: by mail-il1-x135.google.com with SMTP id u5so817695ilq.9;
- Tue, 18 Jan 2022 17:30:58 -0800 (PST)
+ id 1nA1J8-0000PN-ML; Tue, 18 Jan 2022 22:06:49 -0500
+Received: by mail-io1-xd33.google.com with SMTP id e79so1112110iof.13;
+ Tue, 18 Jan 2022 19:06:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=9W7NkSeX1AsVM06H020ofJkD7tyk1nckWF5a2VbStR4=;
- b=OIgILNBF/6sIeDLYud5mp8A2V8bZkoa1C754dkE51ml3HNSLQDkZ7ankinHbr8O6zH
- SXk9MTxfY8SLLrBzYvtqsvqJ69/eodpFAQfwM3oB9oJjYqxaL3Kj10+wtqjfyJWlE5cA
- 9TgpCJgEXb8EypjCR3tgxWqFrWS5SHgSiF4ZcU+BLs2nZwqxXDnkkCDh8147Go8PsRYL
- 99XgIwzsM28Kr/cXOZ+nuWDO2Y/plVILWZ0ClYCME+EdFrMyre7v+oS1ID3h2LB88PX5
- NQURwglsbwo3fUHIrn1b6GGUWRxETzf76mJHArs/bVpKSUV4kvmlr0YpZ0rS7JxNwjGd
- 9uog==
+ :cc; bh=7HwJvxqXKn5XKfK/a63Dzk1w/H20JE9ScCZuZY3PfPs=;
+ b=aB1C0lZfwDZ27h6kkCeGHL+EyouL1YmMirRU1vJtL8yYy3x0i6D8GvP9y4WudfDDc5
+ xQ6yoe23W1rRELYWyBMDBM6sI5ZUDCVD7UeL/DBo62/nDfD+kWsGmIJohWdivndvRyiW
+ wasQ/JG7ftP7KouI7Nh46ISumbY33LMwywmy8voE6+ggQpeyS2EqR1AiVvZj2HKViHb4
+ HwZo50uzNq0gKLt85G4x0RZ/lPiLEQCOXO02WtUKHaSMKyalrPa9Mtf1wXgcPMGulEul
+ I6+dW3cQSbNPVl/l/a0mUPdre/+srrq+WVJq+qOjziYJNiPMTd70OAcZezJ7z9acXVK0
+ YPKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=9W7NkSeX1AsVM06H020ofJkD7tyk1nckWF5a2VbStR4=;
- b=FVWAqtEHB5qsW4e4H5ru7AUztpLZtS4UztvPO3cc0lIpH7MJWP7RxcFFIEaRtXhlVK
- erdPLnoSIeaOnP7ZIb1YKW0a/ba7lapbZYgQGtBzaKOOzm6Lc7OUIVWerI3vd/dSWcnq
- NQvFTmCygYXU5kjg/rmvAbxWvb4lFUNLj15LeKb+mJJJv24mIJgYojeYuGNBnVejxfaW
- mDx2jS80GahS2uX5aUwsPADWVcTlDU195xXdVxUkn8Eb574ic4PYPcjnBgGO8W4302R7
- xxC9MGLhgu4PVhL9aVCMSlPXl7YV5g/TKAcO21o2Iuww+qWlbb0/uY9MLabgA7ZgQfHv
- o99A==
-X-Gm-Message-State: AOAM5327BzuFul6oeSgtNrCxxrwwqRVooI0+J/i8GCQVYGuH4ysr22WR
- a7tqA5mSoXGcRSbewnFOAVZ0fqlhqiyuNE+EGZ8=
-X-Google-Smtp-Source: ABdhPJwMSSYY+dGogHH34Ta7iPIvqFNIJscb+3vyLA6sZfSssZpd6qGscQdTc9ZObGjPAxp7jB6zAaTWIVno1dsblNk=
-X-Received: by 2002:a05:6e02:b4c:: with SMTP id
- f12mr15514706ilu.208.1642555857102; 
- Tue, 18 Jan 2022 17:30:57 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=7HwJvxqXKn5XKfK/a63Dzk1w/H20JE9ScCZuZY3PfPs=;
+ b=dwKsi9sqvx7fvRC1j/faOzuE+8YAUJ1fKAiuXvojU2HxieZz4PaWF0ziJytZyoerDj
+ i3n6Iun2f3z5tVXjr0AemoMDpnqK7FPcpUwx5qladS08m+SW6u151DTpwbuCPoBlo5Gq
+ wqZNL2lMcHEJTQ9rDwn7Pcv+0Bv4gpwntRil7HnAJBoRqOVDWb/TM4ffY30izUrTTLNq
+ HvOk8kL0j2oCjMmSizQ1LD0q6G0nF+Cqiu0ws+qHI40UWu0Vlol9/rWFznM6K1lr+ARb
+ m9GLYgOEpepbbyNCHv7KyHMpG724t8F8mF68m3Ddk9F1WfqBF6rr7wp0whFBjiiSG7Fq
+ zOAA==
+X-Gm-Message-State: AOAM5309/0+tsQyL2PUOet4Rix6ptYWM54H6SFurKELqHg0YbJDvyQJS
+ 30FSkFbRecv0NwcPOEIpYYSM11eGAhuyhwL8hUE=
+X-Google-Smtp-Source: ABdhPJyAh4of3/TWuExYzQ2iqBCBSGXnAH2RsgBWgzOz26FgprYcM+v4afXUmGPUvCvv5ojZODUuMsNB+Dct4uDhAGg=
+X-Received: by 2002:a02:7702:: with SMTP id g2mr14069914jac.206.1642561605331; 
+ Tue, 18 Jan 2022 19:06:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
- <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
- <CAKmqyKOzVi9MiXt+2ESEr28EQ7M6wEyTon+a=h4do9fy4KN=Pw@mail.gmail.com>
- <CAAeLtUBJ4sSZaDqe1Z_431LMDtuQ996OLoE6t_Zh6TLH+_gPHg@mail.gmail.com>
- <CAKmqyKPcYBDJqQ88BZ3TDwiGz6=M3kfB2Bc8YXcQJ=+G0Og4gQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKPcYBDJqQ88BZ3TDwiGz6=M3kfB2Bc8YXcQJ=+G0Og4gQ@mail.gmail.com>
+References: <20220105030844.780642-1-bmeng.cn@gmail.com>
+ <20220105030844.780642-6-bmeng.cn@gmail.com>
+In-Reply-To: <20220105030844.780642-6-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jan 2022 11:30:30 +1000
-Message-ID: <CAKmqyKMvEft2RxbxB92D7F=dZz0nuEJQYHFvVBnQJrt6d80x6A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] target/riscv: Add XVentanaCondOps custom extension
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 19 Jan 2022 13:06:19 +1000
+Message-ID: <CAKmqyKMA-s-1=mhAO3ODMUK00aNJkw5u2H2oOGbjbd9ODKw5=w@mail.gmail.com>
+Subject: Re: [RESEND PATCH v3 5/7] target/riscv: csr: Hook debug CSR read/write
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Greg Favor <gfavor@ventanamicro.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Kito Cheng <kito.cheng@sifive.com>
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::135
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -83,186 +75,178 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 01:31:08 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 03:06:51 -0000
 
-On Wed, Jan 19, 2022 at 11:19 AM Alistair Francis <alistair23@gmail.com> wr=
-ote:
+On Wed, Jan 5, 2022 at 1:15 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On Wed, Jan 19, 2022 at 9:22 AM Philipp Tomsich
-> <philipp.tomsich@vrull.eu> wrote:
-> >
-> > Alistair,
-> >
-> > Some of us (the merit almost exclusively goes to Kito) have been
-> > working towards a similar policy for GCC/binutils and LLVM.
-> > This currently lives in:
-> >    https://github.com/riscv-non-isa/riscv-toolchain-conventions/pull/17
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> Ah cool! We can use that as a good starting point.
+> This adds debug CSR read/write support to the RISC-V CSR RW table.
 >
-> >
-> > A few comments & a question below.
-> >
-> > Thanks,
-> > Philipp.
-> >
-> > On Tue, 18 Jan 2022 at 23:53, Alistair Francis <alistair23@gmail.com> w=
-rote:
-> > >
-> > > On Fri, Jan 14, 2022 at 6:22 AM Philipp Tomsich
-> > > <philipp.tomsich@vrull.eu> wrote:
-> > > >
-> > > > This adds the decoder and translation for the XVentanaCondOps custo=
-m
-> > > > extension (vendor-defined by Ventana Micro Systems), which is
-> > > > documented at https://github.com/ventanamicro/ventana-custom-extens=
-ions/releases/download/v1.0.0/ventana-custom-extensions-v1.0.0.pdf
-> > > >
-> > > > This commit then also adds a guard-function (has_XVentanaCondOps_p)
-> > > > and the decoder function to the table of decoders, enabling the
-> > > > support for the XVentanaCondOps extension.
-> > > >
-> > > > Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> > >
-> > > This looks reasonable to me.
-> > >
-> > > I'm going to leave this for a bit in case there are any more comments=
-.
-> > >
-> > > I was a little worried that taking vendor extensions isn't the right
-> > > move, as we might get stuck with a large number of them. But this is
-> > > pretty self contained and I think with the growing RISC-V interest
-> > > it's something we will eventually need to support.
-> > >
-> > > I'm going to update the QEMU RISC-V wiki page with this to make the
-> > > position clear (comments very welcome)
-> > >
-> > > =3D=3D=3D RISC-V Extensions =3D=3D=3D
-> > > As RISC-V has a range of possible extensions, QEMU has guidelines for
-> > > supporting them all.
-> > >
-> > > If an extension is frozen or ratified by the RISC-V foundation, it ca=
-n
-> > > be supported in QEMU.
-> > >
-> > > If an official RISC-V foundation extension is in a reasonable draft
-> > > state, that is not too many changes are still expected, it can be
-> > > supported experimentally by QEMU. Experimental support means it must
-> > > be disabled by default and marked with a "x-" in the properties. QEMU
-> > > will only support the latest version of patches submitted for a draft
-> > > extension. A draft extension can also be removed at any time if it
-> > > conflicts with other extensions.
-> > >
-> > > QEMU will also support vendor extensions. Vendor extensions must be
-> > > disabled by default, but can be enabled for specific vendor CPUs and
-> > > boards. Vendor extensions must be maintained and tested by the vendor=
-.
-> >
-> > I guess I should create a v3 with appropriate paths in the MAINTAINERS =
-file?
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> ---
 >
-> Hmm... Good point. I don't think you have to if you don't want to.
+> Changes in v3:
+> - add riscv_trigger_init(), moved from patch #1 to this patch
 >
-> My point here was more to just make it clear that upstream QEMU is not
-> a dumping ground for vendor extensions to get them maintained by
-> someone else. Obviously we won't purposely break things just for fun.
-> There is an expectation that the vendor tests their extensions and
-> responds to bug reports and things like that.
+>  target/riscv/debug.h |  2 ++
+>  target/riscv/cpu.c   |  6 +++++
+>  target/riscv/csr.c   | 57 ++++++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/debug.c | 27 +++++++++++++++++++++
+>  4 files changed, 92 insertions(+)
 >
-> >
-> > > Vendor extensions can not interfere with other extensions and can not
-> > > be obtrusive to the RISC-V target code.
-> >
-> > I know that there is some interest to have the XtheadV (the
-> > instructions previously known as vectors 0.7.1-draft) supported and we
-> > have the reality of a deployed base that implements it in hardware.
-> > This would conflict with the opcode space used by the standard RISC-V
-> > vectors, so it makes for an interesting test case (even if just to
-> > clarify our intent)...
-> > Personally, I would like to avoid precluding inclusion of something
-> > useful (of course, "Vendor extensions must be maintained and tested by
-> > the vendor." has to apply!), if a vendor was going to step up and also
-> > offers to maintain it.
+> diff --git a/target/riscv/debug.h b/target/riscv/debug.h
+> index d0f63e2414..f4da2db35d 100644
+> --- a/target/riscv/debug.h
+> +++ b/target/riscv/debug.h
+> @@ -109,4 +109,6 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
+>  bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
+>  bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
 >
-> Yeah... this is unfortunate. I agree that having the 0.7.1-draft
-> extensions supported would be great. There is hardware that supports
-> it.
+> +void riscv_trigger_init(CPURISCVState *env);
+> +
+>  #endif /* RISCV_DEBUG_H */
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d36c31ce9a..17dcc3c14f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -575,6 +575,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
 >
-> I think this point still stands though. IF the XtheadV implementation
-> is self contained and doesn't interfere with the vector extensions,
-> then that's great and we can support it. If instead it adds a large
-> amount of conditionals to the released vector extension code then I
-> don't think we can take it.
+>      riscv_cpu_register_gdb_regs_for_features(cs);
 >
-> There is some wiggle room, but the RISC-V tree already has enough
-> going on and very little reviewers. If in the future we get more
-> reviewers and testers we can re-evaulate what is acceptable, but for
-> now I think we need to be a little strict. (Hint to any companies to
-> give developers time to review)
+> +#ifndef CONFIG_USER_ONLY
+> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
+> +        riscv_trigger_init(env);
+> +    }
+> +#endif
+> +
+>      qemu_init_vcpu(cs);
+>      cpu_reset(cs);
 >
-> >
-> > So let's assume such a (very significant) addition were factored out
-> > similarly, interfacing just through a hook in decode_op and
-> > argument-parsing logic that ensures that the conflicting
-> > standard-extension is turned off: would this still be acceptable under
-> > this policy =E2=80=94 or would it trip the "obtrusive" condition?
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 146447eac5..189b9cc8c6 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -220,6 +220,15 @@ static RISCVException epmp(CPURISCVState *env, int csrno)
 >
-> I think that would be acceptable, I wouldn't say that is obtrusive as
-> it's self contained.
+>      return RISCV_EXCP_ILLEGAL_INST;
+>  }
+> +
+> +static RISCVException debug(CPURISCVState *env, int csrno)
+> +{
+> +    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    return RISCV_EXCP_ILLEGAL_INST;
+> +}
+>  #endif
+>
+>  /* User Floating-Point CSRs */
+> @@ -1464,6 +1473,48 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +static RISCVException read_tselect(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    *val = tselect_csr_read(env);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_tselect(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    tselect_csr_write(env, val);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_tdata(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    /* return 0 in tdata1 to end the trigger enumeration */
+> +    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
+> +        *val = 0;
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +
+> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    *val = tdata_csr_read(env, csrno - CSR_TDATA1);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_tdata(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    if (!tdata_available(env, csrno - CSR_TDATA1)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    tdata_csr_write(env, csrno - CSR_TDATA1, val);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  /*
+>   * Functions to access Pointer Masking feature registers
+>   * We have to check if current priv lvl could modify
+> @@ -1962,6 +2013,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
+>      [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
+>
+> +    /* Debug CSRs */
+> +    [CSR_TSELECT]   =  { "tselect", debug, read_tselect, write_tselect },
+> +    [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
+> +    [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
+> +    [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
+> +
+>      /* User Pointer Masking */
+>      [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
+>      [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 7760c4611f..041a0d3a89 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -412,3 +412,30 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>
+>      return false;
+>  }
+> +
+> +void riscv_trigger_init(CPURISCVState *env)
+> +{
+> +    target_ulong type2 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
+> +    int i;
+> +
+> +    /* type 2 triggers */
+> +    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
+> +        /*
+> +         * type = TRIGGER_TYPE_AD_MATCH
+> +         * dmode = 0 (both debug and M-mode can write tdata)
+> +         * maskmax = 0 (unimplemented, always 0)
+> +         * sizehi = 0 (match against any size, RV64 only)
+> +         * hit = 0 (unimplemented, always 0)
+> +         * select = 0 (always 0, perform match on address)
+> +         * timing = 0 (always 0, trigger before instruction)
+> +         * sizelo = 0 (match against any size)
+> +         * action = 0 (always 0, raise a breakpoint exception)
+> +         * chain = 0 (unimplemented, always 0)
+> +         * match = 0 (always 0, when any compare value equals tdata2)
+> +         */
+> +        env->trigger_type2[i].mcontrol = type2;
+> +        env->trigger_type2[i].maddress = 0;
+> +        env->trigger_type2[i].bp = NULL;
+> +        env->trigger_type2[i].wp = NULL;
+> +    }
 
-Ok, take two:
-
-=3D=3D=3D RISC-V Foundation Extensions =3D=3D=3D
-As RISC-V has a range of possible extensions, QEMU has guidelines for
-supporting them all.
-
-If an extension is frozen or ratified by the RISC-V foundation, it can
-be supported in QEMU. Generally we will try to support as many versions
-as feasible, following the usual QEMU deprecation policy to remove old
-versions.
-
-If an official RISC-V foundation extension is in a reasonable draft
-state, that is not too many changes are still expected, it can be
-supported experimentally by QEMU. Experimental support means it must
-be disabled by default and marked with a "x-" in the CPU/board properties.
-Draft extensions can be enabled by specific CPUs or boards if the hardware
-supports that extension.
-
-QEMU will only support the latest version of patches submitted for a draft
-extension. A draft extension can also be removed at any time and does not
-follow QEMU's deprecation policy.
-
-=3D=3D=3D RISC-V Custom Extensions/Instructions =3D=3D=3D
-Support for custom instruction set extensions are an important part of RISC=
--V,
-with large encoding spaces reserved of vendor extensions.
-
-QEMU follows similar rules to the RISC-V toolchain convention, as described
-here: https://github.com/riscv-non-isa/riscv-toolchain-conventions/pull/17
-
-QEMU will support vendor extensions. Vendor extensions must be
-disabled by default, but can be enabled for specific vendor CPUs and
-boards. The vendor extensions should use prefixes and names as described in
-https://github.com/riscv-non-isa/riscv-toolchain-conventions
-
-Vendor extensions must be maintained and tested by the vendor. Upstream wil=
-l
-take efforts to not break extensions, but testing and bug fixes should be
-done by the vendor. Patches to add support for open source toolchains are
-unlikely to be accepted without specification documents being made availabl=
-e
-publicly.
-
-Vendor extensions can not interfere with other extensions and can not
-be obtrusive to the core RISC-V target code.
-
-If you are looking to add support for vendor extensions, it is recommended
-that you get involved in the QEMU review process. It is also recommended th=
-at
-you send your patches as early as possible to get community feedback before
-they are fully implemented. This is especially important if you are modifyi=
-ng
-core code.
+Should this be called at reset instead?
 
 Alistair
+
+> +}
+> --
+> 2.25.1
+>
+>
 
