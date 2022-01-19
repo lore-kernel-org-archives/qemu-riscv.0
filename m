@@ -1,82 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nA9B6-0001nT-4z
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 06:31:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:56032)
+	id 1nA9IN-0001Mb-5a
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 06:38:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58072)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1nA9Az-0001gz-4X; Wed, 19 Jan 2022 06:30:54 -0500
-Received: from [2607:f8b0:4864:20::52b] (port=35679
- helo=mail-pg1-x52b.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1nA9Au-0004Pp-SA; Wed, 19 Jan 2022 06:30:51 -0500
-Received: by mail-pg1-x52b.google.com with SMTP id p125so2154191pga.2;
- Wed, 19 Jan 2022 03:30:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=sender:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=Ej0vmGelmEU05/ZQCgcGrDZolvzUZdt1Pp06L/DdvOw=;
- b=Rh7MXDzVbgGF5UOD/M1m7nrbV9d9blU6V3kU/A7USGivs9rerIuMDQJDs5F/mi1jGW
- hcfueDDq9tjhqgIDKr5oBl85RGjPt2Tcb4BWz2QMRFHMe8P8jmhKEEyJzv1mN+eW8CYB
- h4kzm1zGeSGdZMC/fW5zbD1ClyKMRMS3ioNw3VR9TRR1BDXMYmqyOfmCmd70bliq5pqa
- ZNKCwcFnTKCSOHP+8q4ArBcsYH6YUhNll3gMaojtUiJ3ROsmpAXPdhiH2ea19+F5fhXT
- JKISsT1w6atovPKchHtgbPzAmwd8Kc3MF8MLBrXNaRNkXmRKHJbSF7lsWpcfuzcLSslU
- yH1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
- :subject:content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=Ej0vmGelmEU05/ZQCgcGrDZolvzUZdt1Pp06L/DdvOw=;
- b=61upZoV4C3f7UcDMCDoE6etvMkOTGtam6sHW8ch3mdoYFkhPJrC7k8rRfobQdsNG6s
- HjkC0LLKNRQEAoEzNkJ7DP6ijF3MGwwFlwuUyQ2fwmR4oRLgbk+hFA3OFUY9VpqLLXHU
- xjLX5GN7YvLyrY80kKlQp8XloJt5rwx25HQvvT5STpn9DuEd0oP6c4f/XVvW6+eQfWRY
- Lv9vduEVSWh4MkAiqj2yEfmYwC/SUsTj4QSp351Hhcvj/Nl2/T+zkJPrltJ012VCKcG+
- DAJGZAmduvNzFtFjkUahaER0UAXYMx8JQ87pF29+cSP+xlDHT8vI26kfyoB3xRLC4uc/
- RfPw==
-X-Gm-Message-State: AOAM532qiZu6OEuwVpvg4YM8pHm8QUQQcadx995HDuJe/vepSGDmvXQI
- 510kRVxI1GOF6ZmZ6jAd1Ac=
-X-Google-Smtp-Source: ABdhPJy6VOEma+usakZT2PCFQGC4zs5uE4/W0d/ibVMj9X/2/ynaJOYHrhWLpVe7yIn1QQjEmuyy+Q==
-X-Received: by 2002:aa7:9543:0:b0:4bf:2a07:5bc7 with SMTP id
- w3-20020aa79543000000b004bf2a075bc7mr30344941pfq.73.1642591841152; 
- Wed, 19 Jan 2022 03:30:41 -0800 (PST)
-Received: from [192.168.1.33] (154.red-83-50-83.dynamicip.rima-tde.net.
- [83.50.83.154])
- by smtp.gmail.com with ESMTPSA id 14sm9232826pgp.86.2022.01.19.03.30.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Jan 2022 03:30:40 -0800 (PST)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <aaf525e8-7dc5-f93d-0cc5-5ba560b5650f@amsat.org>
-Date: Wed, 19 Jan 2022 12:30:35 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.5.0
-Subject: Re: [PATCH v2 1/2] target/riscv: iterate over a table of decoders
-Content-Language: en-US
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- Greg Favor <gfavor@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Kito Cheng <kito.cheng@sifive.com>
-References: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52b
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-pg1-x52b.google.com
-X-Spam_score_int: -6
-X-Spam_score: -0.7
-X-Spam_bar: /
-X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.248, NICE_REPLY_A=-0.001,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nA9IH-0001Hl-8W; Wed, 19 Jan 2022 06:38:25 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:60262 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nA9ID-0002Hu-It; Wed, 19 Jan 2022 06:38:24 -0500
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowABnblof+Odh7EjABQ--.19898S5;
+ Wed, 19 Jan 2022 19:38:12 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [RFC PATCH v5 03/14] target/riscv: rvk: add support for zbkc extension
+Date: Wed, 19 Jan 2022 19:37:43 +0800
+Message-Id: <20220119113754.20323-4-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220119113754.20323-1-liweiwei@iscas.ac.cn>
+References: <20220119113754.20323-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: rQCowABnblof+Odh7EjABQ--.19898S5
+X-Coremail-Antispam: 1UD129KBjvJXoW7uryrZFyxZFy3KFWkury5XFb_yoW8Cr1rpr
+ 4F9FyUGrWvgFyfAa4ftF15XF17GFsa9ay7JwnIywn5Jay5JFZ8Arn8K3y7KrWUXFykur4j
+ 93WUA3yayrWrta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+ A2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU
+ =
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_BL=0.001, RCVD_IN_MSPIKE_L4=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,106 +63,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 11:30:55 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 11:38:25 -0000
 
-On 13/1/22 21:20, Philipp Tomsich wrote:
-> To split up the decoder into multiple functions (both to support
-> vendor-specific opcodes in separate files and to simplify maintenance
-> of orthogonal extensions), this changes decode_op to iterate over a
-> table of decoders predicated on guard functions.
-> 
-> This commit only adds the new structure and the table, allowing for
-> the easy addition of additional decoders in the future.
-> 
-> Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> ---
-> 
-> Changes in v2:
-> - (new patch) iterate over a table of guarded decoder functions
-> 
->   target/riscv/translate.c | 38 ++++++++++++++++++++++++++++++++------
->   1 file changed, 32 insertions(+), 6 deletions(-)
-> 
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 615048ec87..2cbf9cbb6f 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -116,6 +116,12 @@ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
->       return ctx->misa_ext & ext;
->   }
->   
-> +static inline bool always_true_p(CPURISCVState *env  __attribute__((__unused__)),
-> +                                 DisasContext *ctx  __attribute__((__unused__)))
-> +{
-> +    return true;
-> +}
-> +
->   #ifdef TARGET_RISCV32
->   #define get_xl(ctx)    MXL_RV32
->   #elif defined(CONFIG_USER_ONLY)
-> @@ -844,16 +850,28 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
->   
->   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->   {
-> -    /* check for compressed insn */
-> +    /* If not handled, we'll raise an illegal instruction exception */
-> +    bool handled = false;
-> +
-> +    /*
-> +     * A table with predicate (i.e., guard) functions and decoder functions
-> +     * that are tested in-order until a decoder matches onto the opcode.
-> +     */
-> +    const struct {
-> +        bool (*guard_func)(CPURISCVState *, DisasContext *);
-> +        bool (*decode_func)(DisasContext *, uint32_t);
-> +    } decoders[] = {
-> +        { always_true_p,  decode_insn32 },
-> +    };
-> +
-> +    /* Check for compressed insn */
->       if (extract16(opcode, 0, 2) != 3) {
->           if (!has_ext(ctx, RVC)) {
->               gen_exception_illegal(ctx);
->           } else {
->               ctx->opcode = opcode;
->               ctx->pc_succ_insn = ctx->base.pc_next + 2;
-> -            if (!decode_insn16(ctx, opcode)) {
-> -                gen_exception_illegal(ctx);
-> -            }
-> +            handled = decode_insn16(ctx, opcode);
->           }
->       } else {
->           uint32_t opcode32 = opcode;
-> @@ -862,10 +880,18 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->                                                ctx->base.pc_next + 2));
->           ctx->opcode = opcode32;
->           ctx->pc_succ_insn = ctx->base.pc_next + 4;
-> -        if (!decode_insn32(ctx, opcode32)) {
-> -            gen_exception_illegal(ctx);
-> +
-> +        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
-> +            if (!decoders[i].guard_func(env, ctx))
-> +                continue;
-> +
-> +            if ((handled = decoders[i].decode_func(ctx, opcode32)))
-> +                break;
+ - reuse partial instructions of zbc extension, update extension check for them
 
-Again, while we might check whether "Vendor Extensions" are enabled or
-not at runtime, they are specific to a (vendor) core model, so we know
-their availability  at instantiation time.
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/insn32.decode              | 3 ++-
+ target/riscv/insn_trans/trans_rvb.c.inc | 4 ++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-I don't understand the need to iterate. You can check for vendor
-extensions in riscv_tr_init_disas_context() and set a vendor_decoder()
-handler in DisasContext, which ends calling the generic decode_opc()
-one.
-
->           }
->       }
-> +
-> +    if (!handled)
-> +        gen_exception_illegal(ctx);
->   }
->   
->   static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index bf080cb489..9fd900f4bd 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -770,9 +770,10 @@ clzw       0110000 00000 ..... 001 ..... 0011011 @r2
+ ctzw       0110000 00001 ..... 001 ..... 0011011 @r2
+ cpopw      0110000 00010 ..... 001 ..... 0011011 @r2
+ 
+-# *** RV32 Zbc Standard Extension ***
++# *** RV32 Zbc/Zbkc Standard Extension ***
+ clmul      0000101 .......... 001 ..... 0110011 @r
+ clmulh     0000101 .......... 011 ..... 0110011 @r
++# *** RV32 extra Zbc Standard Extension ***
+ clmulr     0000101 .......... 010 ..... 0110011 @r
+ 
+ # *** RV32 Zbs Standard Extension ***
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index 7590c0538e..2a565b98c0 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -489,7 +489,7 @@ static bool trans_slli_uw(DisasContext *ctx, arg_slli_uw *a)
+ 
+ static bool trans_clmul(DisasContext *ctx, arg_clmul *a)
+ {
+-    REQUIRE_ZBC(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbc, zbkc);
+     return gen_arith(ctx, a, EXT_NONE, gen_helper_clmul, NULL);
+ }
+ 
+@@ -501,7 +501,7 @@ static void gen_clmulh(TCGv dst, TCGv src1, TCGv src2)
+ 
+ static bool trans_clmulh(DisasContext *ctx, arg_clmulr *a)
+ {
+-    REQUIRE_ZBC(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbc, zbkc);
+     return gen_arith(ctx, a, EXT_NONE, gen_clmulh, NULL);
+ }
+ 
+-- 
+2.17.1
 
 
