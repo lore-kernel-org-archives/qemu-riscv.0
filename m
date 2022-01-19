@@ -1,50 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nA1Wq-0004NB-G9
-	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 22:20:56 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36950)
+	id 1nA1Xh-0005MW-NB
+	for mharc-qemu-riscv@gnu.org; Tue, 18 Jan 2022 22:21:49 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37052)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nA1Wo-0004Mk-Si; Tue, 18 Jan 2022 22:20:54 -0500
-Received: from [2607:f8b0:4864:20::12e] (port=45846
- helo=mail-il1-x12e.google.com)
+ id 1nA1Xg-0005Jh-L8; Tue, 18 Jan 2022 22:21:48 -0500
+Received: from [2607:f8b0:4864:20::d2c] (port=44571
+ helo=mail-io1-xd2c.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nA1Wl-0002S6-QM; Tue, 18 Jan 2022 22:20:53 -0500
-Received: by mail-il1-x12e.google.com with SMTP id h30so989824ila.12;
- Tue, 18 Jan 2022 19:20:36 -0800 (PST)
+ id 1nA1Xf-0002gO-5m; Tue, 18 Jan 2022 22:21:48 -0500
+Received: by mail-io1-xd2c.google.com with SMTP id h23so1155514iol.11;
+ Tue, 18 Jan 2022 19:21:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hAi5K/ymxEKoBBwqwnnp2J11F/NVkgBLskUneXyUDGQ=;
- b=Ca8boraTuczqnvuQtueQAtN5gN01geKG022Gh6eC6uCYHqO4Bp/sq8r+UGXqafdwEU
- qvGS0hSef+oeJ6/RTUY48A2oEE1ERL7xkb9bjMafX5dHEAhzSzzM+8apT9CMlDf6JTdd
- Ce/Gby5KSskcQiKwAMUHsXcoCcth70dI1rcsotYedje/7p9WXiygc6TITAbO121H7XWH
- tSmT/dGbXWdtLnjgr0xNVsWgWhInhGhCI6nhGV50SAOnutWlgd36L0AxKTlcWw3e8X+U
- qHYh9cx3QL69peucZbdPSMpTUu9EBgKVzhttvqNBG9A6w7IPVmVWtifEXhftFBQj1uzk
- COpQ==
+ :cc; bh=V1J/Bp5+6N9bCAEx+sqRp4UoJOkinCqzS4GvwFmKa1I=;
+ b=Ohaz2FB58VoWqgvOiCdbiinZ7adUUIGbWmNkqNbmE8wNAU545wvF3nanHr7y13y03b
+ tcFpuqXDJ0GLL34ynRJFR02ICsbfo7Nl6LasoPm9rjv4CC7GRscIohmfgH+EGB5DsHPN
+ T6HJGsciTdobnWU7NuDT8q+l7iVR2T5rPEKmBKD7OmlcNgsNT8ix8AxL8n+jObiUnlWt
+ s0v4GDajLTlVLqB9v6bf7L8qKK/JhWCLRTqkkrAyKGst1A157xy/wI/X5oXmw9Dcnfvb
+ lsPrxMh/7ch8+nfBbvBKLhEfz0wU27dN2j9Z+miN40wF9zKlFxfgnbv2TL/zVmr+CR3L
+ QnZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=hAi5K/ymxEKoBBwqwnnp2J11F/NVkgBLskUneXyUDGQ=;
- b=6ddX2N9+VVdOdi/zZH55vRnYzOISE4a6sAZc1VV+Ym9EUx703kXtwpcRmUyzNUAH36
- AIn8Kd5pF7Ht/nY59lVOrum0TJk6U8UBMsID6jeNfeC9XUlP3ALvwp17JzyiqmlLY7Vf
- C2KeNc1/5p4Y2gZ7HIBRkbhl4vsOTkmVzAsFRY+xjda6z+xderpY7b57mXkKlsUptvwO
- o33tJqY2Zp61Nxa6NhCmN2BER0eiIVA1P0qf0f+yaMgnylGSkclApdU8gOT+VIYH4gfp
- f0UgoCsJWWYvKZKX05W+BkP8bVTb2Img5amJNPBp0qq8NVnIdvnuhBOCenEoqsQAPkuR
- nBdg==
-X-Gm-Message-State: AOAM530vLpX/ePcQj8o/0H/B18CNva52nOJrK+SJsTPMBSf0FpsxV4kA
- 8QbwNqQ+FSALvEDcXUi9d4w1pG4BDpmgXQP8arU=
-X-Google-Smtp-Source: ABdhPJxhRluCqqyHlkpof3ClJRB0hFa6kuJT6mSSexXESxO6umrOgcvG5S3zGl53TOng8OUrOLFIM7/ZiQK2HZQZMWQ=
-X-Received: by 2002:a92:3012:: with SMTP id x18mr14605552ile.221.1642562436174; 
- Tue, 18 Jan 2022 19:20:36 -0800 (PST)
+ bh=V1J/Bp5+6N9bCAEx+sqRp4UoJOkinCqzS4GvwFmKa1I=;
+ b=zO2m+xQogxV88UBr1sdVV+RKk/IYaGvwSbslOhZmpznrA5VqNq2ffEHRvTp0NIG/HU
+ irC+0I90+mWuwTGs6/3DnTMBL0jTLmRVHIlywgMJBt4hIsiRkLJlsEYpuirTze1qIpUe
+ t6wl0aQhb9ClvAP8ZGKRTVtVyrEcCJq6smOo1EGeS2rLMK1ML46nBBPk2bZg50uXWFq1
+ ReDdRj03zAUKRbhW2/uXl1lI3GaQstcWi8Cq/Lmt8ay13rUTe9Gwtmg+UglWEgcHHLxN
+ Amvk5njYb3r2lpwSNqF5jHACeQXvZp1Z8zOYOo8rQmavRmurnYn0jwvDgJzfLUuxwvgf
+ F3NA==
+X-Gm-Message-State: AOAM532PDk3HSfmde3KbcZAk7Y1IqFKi490ylv6Zr0UMdewZ1y+4C+JC
+ tx+jKKzJ2QEnwxOea7fUBzEi0I0UA+c+mych4+w=
+X-Google-Smtp-Source: ABdhPJzN17t9D0NfccYW1Y6I7iYw7CuQ25i1DrQ9KyUaVQoM1ZFVjdxSnxh1pMtazQsM4OnSfyZqC0j+4lfpct5JPoU=
+X-Received: by 2002:a02:6954:: with SMTP id e81mr13212488jac.63.1642562505726; 
+ Tue, 18 Jan 2022 19:21:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20220113114004.286796-1-zhiwei_liu@c-sky.com>
- <20220113114004.286796-2-zhiwei_liu@c-sky.com>
-In-Reply-To: <20220113114004.286796-2-zhiwei_liu@c-sky.com>
+ <20220113114004.286796-4-zhiwei_liu@c-sky.com>
+In-Reply-To: <20220113114004.286796-4-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Jan 2022 13:20:10 +1000
-Message-ID: <CAKmqyKMCwFdRqzd3tcGh++tGbtF6TTOdAY5VKzqNMcCBOnZsXA@mail.gmail.com>
-Subject: Re: [PATCH v6 01/22] target/riscv: Adjust pmpcfg access with mxl
+Date: Wed, 19 Jan 2022 13:21:19 +1000
+Message-ID: <CAKmqyKP5EyPV5tn9pZOXaMsYRKOCG-5AoCZrusnK1EPCDMqxxA@mail.gmail.com>
+Subject: Re: [PATCH v6 03/22] target/riscv: Sign extend link reg for jal and
+ jalr
 To: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,10 +54,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2c
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -77,96 +78,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 03:20:55 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 03:21:49 -0000
 
-On Thu, Jan 13, 2022 at 9:41 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
+On Thu, Jan 13, 2022 at 9:45 PM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
 > Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/csr.c | 19 +++++++++++++++++++
->  target/riscv/pmp.c | 12 ++++--------
->  2 files changed, 23 insertions(+), 8 deletions(-)
+>  target/riscv/insn_trans/trans_rvi.c.inc | 4 +---
+>  target/riscv/translate.c                | 4 +---
+>  2 files changed, 2 insertions(+), 6 deletions(-)
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index adb3d4381d..e7578f3e0f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1493,9 +1493,23 @@ static RISCVException write_mseccfg(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index 3a0ae28fef..b9ba57f266 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -68,9 +68,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+>          tcg_temp_free(t0);
+>      }
 >
-> +static bool check_pmp_reg_index(CPURISCVState *env, uint32_t reg_index)
-> +{
-> +    /* TODO: RV128 restriction check */
-> +    if ((reg_index & 1) && (riscv_cpu_mxl(env) == MXL_RV64)) {
-> +        return false;
-> +    }
-> +    return true;
-> +}
-> +
->  static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
->                                    target_ulong *val)
->  {
-> +    uint32_t reg_index = csrno - CSR_PMPCFG0;
-> +
-> +    if (!check_pmp_reg_index(env, reg_index)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
->      *val = pmpcfg_csr_read(env, csrno - CSR_PMPCFG0);
->      return RISCV_EXCP_NONE;
->  }
-> @@ -1503,6 +1517,11 @@ static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
->  static RISCVException write_pmpcfg(CPURISCVState *env, int csrno,
->                                     target_ulong val)
->  {
-> +    uint32_t reg_index = csrno - CSR_PMPCFG0;
-> +
-> +    if (!check_pmp_reg_index(env, reg_index)) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
->      pmpcfg_csr_write(env, csrno - CSR_PMPCFG0, val);
->      return RISCV_EXCP_NONE;
->  }
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 54abf42583..81b61bb65c 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -463,16 +463,11 @@ void pmpcfg_csr_write(CPURISCVState *env, uint32_t reg_index,
->  {
->      int i;
->      uint8_t cfg_val;
-> +    int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
->
->      trace_pmpcfg_csr_write(env->mhartid, reg_index, val);
->
-> -    if ((reg_index & 1) && (sizeof(target_ulong) == 8)) {
-> -        qemu_log_mask(LOG_GUEST_ERROR,
-> -                      "ignoring pmpcfg write - incorrect address\n");
-> -        return;
+> -    if (a->rd != 0) {
+> -        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
 > -    }
-> -
-> -    for (i = 0; i < sizeof(target_ulong); i++) {
-> +    for (i = 0; i < pmpcfg_nums; i++) {
->          cfg_val = (val >> 8 * i)  & 0xff;
->          pmp_write_cfg(env, (reg_index * 4) + i, cfg_val);
->      }
-> @@ -490,8 +485,9 @@ target_ulong pmpcfg_csr_read(CPURISCVState *env, uint32_t reg_index)
->      int i;
->      target_ulong cfg_val = 0;
->      target_ulong val = 0;
-> +    int pmpcfg_nums = 2 << riscv_cpu_mxl(env);
+> +    gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
+>      tcg_gen_lookup_and_goto_ptr();
 >
-> -    for (i = 0; i < sizeof(target_ulong); i++) {
-> +    for (i = 0; i < pmpcfg_nums; i++) {
->          val = pmp_read_cfg(env, (reg_index * 4) + i);
->          cfg_val |= (val << (i * 8));
+>      if (misaligned) {
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 615048ec87..b47b308920 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -367,10 +367,8 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>              return;
+>          }
 >      }
+> -    if (rd != 0) {
+> -        tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
+> -    }
+>
+> +    gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
+>      gen_goto_tb(ctx, 0, ctx->base.pc_next + imm); /* must use this for safety */
+>      ctx->base.is_jmp = DISAS_NORETURN;
+>  }
 > --
 > 2.25.1
 >
