@@ -1,21 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nA3SC-00044m-GE
-	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 00:24:16 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58852)
+	id 1nA3Sj-0004z4-WD
+	for mharc-qemu-riscv@gnu.org; Wed, 19 Jan 2022 00:24:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58920)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nA3S9-00040Y-Br; Wed, 19 Jan 2022 00:24:13 -0500
-Received: from out28-149.mail.aliyun.com ([115.124.28.149]:60460)
+ id 1nA3Sg-0004rZ-77; Wed, 19 Jan 2022 00:24:47 -0500
+Received: from out28-219.mail.aliyun.com ([115.124.28.219]:45247)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nA3S7-0001ep-4q; Wed, 19 Jan 2022 00:24:13 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07436283|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0680127-0.00242263-0.929565;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047212; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfBu2qM_1642569846; 
+ id 1nA3Sb-0001gA-Sr; Wed, 19 Jan 2022 00:24:45 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07449551|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0061735-0.00216247-0.991664;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047204; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfCdxab_1642569877; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MfBu2qM_1642569846)
- by smtp.aliyun-inc.com(10.147.42.16); Wed, 19 Jan 2022 13:24:06 +0800
+ fp:SMTPD_---.MfCdxab_1642569877)
+ by smtp.aliyun-inc.com(10.147.42.241);
+ Wed, 19 Jan 2022 13:24:37 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -23,22 +24,22 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v7 11/22] target/riscv: Create current pm fields in env
-Date: Wed, 19 Jan 2022 13:18:13 +0800
-Message-Id: <20220119051824.17494-12-zhiwei_liu@c-sky.com>
+Subject: [PATCH v7 12/22] target/riscv: Alloc tcg global for cur_pm[mask|base]
+Date: Wed, 19 Jan 2022 13:18:14 +0800
+Message-Id: <20220119051824.17494-13-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220119051824.17494-1-zhiwei_liu@c-sky.com>
 References: <20220119051824.17494-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.149; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-149.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.219; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-219.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -51,198 +52,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jan 2022 05:24:14 -0000
+X-List-Received-Date: Wed, 19 Jan 2022 05:24:48 -0000
+
+Replace the array of pm_mask/pm_base with scalar variables.
+Remove the cached array value in DisasContext.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c        |  1 +
- target/riscv/cpu.h        |  4 ++++
- target/riscv/cpu_helper.c | 43 +++++++++++++++++++++++++++++++++++++++
- target/riscv/csr.c        | 19 +++++++++++++++++
- target/riscv/machine.c    |  1 +
- 5 files changed, 68 insertions(+)
+ target/riscv/translate.c | 32 ++++++++------------------------
+ 1 file changed, 8 insertions(+), 24 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 690c879901..a120d474df 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -430,6 +430,7 @@ static void riscv_cpu_reset(DeviceState *dev)
-     env->mmte |= (PM_EXT_INITIAL | MMTE_M_PM_CURRENT);
- #endif
-     env->xl = riscv_cpu_mxl(env);
-+    riscv_cpu_update_mask(env);
-     cs->exception_index = RISCV_EXCP_NONE;
-     env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 7657e22a56..6fe842edfd 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -266,6 +266,8 @@ struct CPURISCVState {
-     target_ulong upmmask;
-     target_ulong upmbase;
- #endif
-+    target_ulong cur_pmmask;
-+    target_ulong cur_pmbase;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 2a88bd99dc..43e2ec6dce 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -38,8 +38,8 @@ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+ static TCGv load_res;
+ static TCGv load_val;
+ /* globals for PM CSRs */
+-static TCGv pm_mask[4];
+-static TCGv pm_base[4];
++static TCGv pm_mask;
++static TCGv pm_base;
  
-     float_status fp_status;
+ #include "exec/gen-icount.h"
  
-@@ -515,6 +517,8 @@ static inline uint32_t vext_get_vlmax(RISCVCPU *cpu, target_ulong vtype)
- void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-                           target_ulong *cs_base, uint32_t *pflags);
+@@ -109,8 +109,6 @@ typedef struct DisasContext {
+     TCGv temp[4];
+     /* PointerMasking extension */
+     bool pm_enabled;
+-    TCGv pm_mask;
+-    TCGv pm_base;
+ } DisasContext;
  
-+void riscv_cpu_update_mask(CPURISCVState *env);
-+
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d73925a823..b239d721f4 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -122,6 +122,48 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
-     *pflags = flags;
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -403,8 +401,8 @@ static TCGv gen_pm_adjust_address(DisasContext *s, TCGv src)
+         return src;
+     } else {
+         temp = temp_new(s);
+-        tcg_gen_andc_tl(temp, src, s->pm_mask);
+-        tcg_gen_or_tl(temp, temp, s->pm_base);
++        tcg_gen_andc_tl(temp, src, pm_mask);
++        tcg_gen_or_tl(temp, temp, pm_base);
+         return temp;
+     }
+ }
+@@ -929,10 +927,6 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->ntemp = 0;
+     memset(ctx->temp, 0, sizeof(ctx->temp));
+     ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
+-    int priv = tb_flags & TB_FLAGS_PRIV_MMU_MASK;
+-    ctx->pm_mask = pm_mask[priv];
+-    ctx->pm_base = pm_base[priv];
+-
+     ctx->zero = tcg_constant_tl(0);
  }
  
-+void riscv_cpu_update_mask(CPURISCVState *env)
-+{
-+    target_ulong mask = -1, base = 0;
-+    /*
-+     * TODO: Current RVJ spec does not specify
-+     * how the extension interacts with XLEN.
-+     */
-+#ifndef CONFIG_USER_ONLY
-+    if (riscv_has_ext(env, RVJ)) {
-+        switch (env->priv) {
-+        case PRV_M:
-+            if (env->mmte & M_PM_ENABLE) {
-+                mask = env->mpmmask;
-+                base = env->mpmbase;
-+            }
-+            break;
-+        case PRV_S:
-+            if (env->mmte & S_PM_ENABLE) {
-+                mask = env->spmmask;
-+                base = env->spmbase;
-+            }
-+            break;
-+        case PRV_U:
-+            if (env->mmte & U_PM_ENABLE) {
-+                mask = env->upmmask;
-+                base = env->upmbase;
-+            }
-+            break;
-+        default:
-+            g_assert_not_reached();
-+        }
-+    }
-+#endif
-+    if (env->xl == MXL_RV32) {
-+        env->cur_pmmask = mask & UINT32_MAX;
-+        env->cur_pmbase = base & UINT32_MAX;
-+    } else {
-+        env->cur_pmmask = mask;
-+        env->cur_pmbase = base;
-+    }
-+}
-+
- #ifndef CONFIG_USER_ONLY
- static int riscv_cpu_local_irq_pending(CPURISCVState *env)
- {
-@@ -334,6 +376,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv)
-     /* tlb_flush is unnecessary as mode is contained in mmu_idx */
-     env->priv = newpriv;
-     env->xl = cpu_recompute_xl(env);
-+    riscv_cpu_update_mask(env);
- 
-     /*
-      * Clear the load reservation - otherwise a reservation placed in one
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index c00a82022e..292f7e1624 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1607,6 +1607,7 @@ static RISCVException write_mmte(CPURISCVState *env, int csrno,
-     /* hardwiring pm.instruction bit to 0, since it's not supported yet */
-     wpri_val &= ~(MMTE_M_PM_INSN | MMTE_S_PM_INSN | MMTE_U_PM_INSN);
-     env->mmte = wpri_val | PM_EXT_DIRTY;
-+    riscv_cpu_update_mask(env);
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-     mstatus = env->mstatus | MSTATUS_XS;
-@@ -1682,6 +1683,9 @@ static RISCVException write_mpmmask(CPURISCVState *env, int csrno,
-     uint64_t mstatus;
- 
-     env->mpmmask = val;
-+    if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
-+        env->cur_pmmask = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-@@ -1707,6 +1711,9 @@ static RISCVException write_spmmask(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
-     env->spmmask = val;
-+    if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
-+        env->cur_pmmask = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-@@ -1732,6 +1739,9 @@ static RISCVException write_upmmask(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
-     env->upmmask = val;
-+    if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
-+        env->cur_pmmask = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-@@ -1753,6 +1763,9 @@ static RISCVException write_mpmbase(CPURISCVState *env, int csrno,
-     uint64_t mstatus;
- 
-     env->mpmbase = val;
-+    if ((env->priv == PRV_M) && (env->mmte & M_PM_ENABLE)) {
-+        env->cur_pmbase = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-@@ -1778,6 +1791,9 @@ static RISCVException write_spmbase(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
-     env->spmbase = val;
-+    if ((env->priv == PRV_S) && (env->mmte & S_PM_ENABLE)) {
-+        env->cur_pmbase = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-@@ -1803,6 +1819,9 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
-     env->upmbase = val;
-+    if ((env->priv == PRV_U) && (env->mmte & U_PM_ENABLE)) {
-+        env->cur_pmbase = val;
-+    }
-     env->mmte |= PM_EXT_DIRTY;
- 
-     /* Set XS and SD bits, since PM CSRs are dirty */
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index b76e4db99c..a4b7859c2a 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -220,6 +220,7 @@ static int riscv_cpu_post_load(void *opaque, int version_id)
-     CPURISCVState *env = &cpu->env;
- 
-     env->xl = cpu_recompute_xl(env);
-+    riscv_cpu_update_mask(env);
-     return 0;
+@@ -1050,19 +1044,9 @@ void riscv_translate_init(void)
+                              "load_res");
+     load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
+                              "load_val");
+-#ifndef CONFIG_USER_ONLY
+     /* Assign PM CSRs to tcg globals */
+-    pm_mask[PRV_U] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
+-    pm_base[PRV_U] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
+-    pm_mask[PRV_S] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
+-    pm_base[PRV_S] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
+-    pm_mask[PRV_M] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
+-    pm_base[PRV_M] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
+-#endif
++    pm_mask = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, cur_pmmask),
++                                 "pmmask");
++    pm_base = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, cur_pmbase),
++                                 "pmbase");
  }
- 
 -- 
 2.25.1
 
