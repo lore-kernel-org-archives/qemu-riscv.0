@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAWTe-0003rV-Ji
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:23:42 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38492)
+	id 1nAWU9-0004aP-Qe
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:24:13 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38602)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWTc-0003lX-ND; Thu, 20 Jan 2022 07:23:40 -0500
-Received: from out28-196.mail.aliyun.com ([115.124.28.196]:43223)
+ id 1nAWU6-0004Sg-Dx; Thu, 20 Jan 2022 07:24:11 -0500
+Received: from out28-149.mail.aliyun.com ([115.124.28.149]:43400)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWTa-0007qY-De; Thu, 20 Jan 2022 07:23:40 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.110418|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_alarm|0.0613642-0.000762315-0.937873; FP=0|0|0|0|0|-1|-1|-1;
- HT=ay29a033018047201; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=9; RT=8; SR=0;
- TI=SMTPD_---.MfwN9dh_1642681409; 
+ id 1nAWU3-0007tP-SE; Thu, 20 Jan 2022 07:24:10 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.0744539|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_alarm|0.0352721-0.00066645-0.964061; FP=0|0|0|0|0|-1|-1|-1;
+ HT=ay29a033018047198; MF=zhiwei_liu@c-sky.com; NM=1; PH=DS; RN=9; RT=8; SR=0;
+ TI=SMTPD_---.Mfw94pc_1642681443; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MfwN9dh_1642681409)
- by smtp.aliyun-inc.com(10.147.41.121);
- Thu, 20 Jan 2022 20:23:33 +0800
+ fp:SMTPD_---.Mfw94pc_1642681443)
+ by smtp.aliyun-inc.com(10.147.41.199);
+ Thu, 20 Jan 2022 20:24:03 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -24,21 +24,21 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v8 03/23] target/riscv: Sign extend link reg for jal and jalr
-Date: Thu, 20 Jan 2022 20:20:30 +0800
-Message-Id: <20220120122050.41546-4-zhiwei_liu@c-sky.com>
+Subject: [PATCH v8 04/23] target/riscv: Sign extend pc for different XLEN
+Date: Thu, 20 Jan 2022 20:20:31 +0800
+Message-Id: <20220120122050.41546-5-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 References: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.196; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-196.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.149; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-149.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
  SPF_NONE=0.001, UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -52,45 +52,137 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 12:23:41 -0000
+X-List-Received-Date: Thu, 20 Jan 2022 12:24:12 -0000
+
+When pc is written, it is sign-extended to fill the widest supported XLEN.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 4 +---
- target/riscv/translate.c                | 4 +---
- 2 files changed, 2 insertions(+), 6 deletions(-)
+ .../riscv/insn_trans/trans_privileged.c.inc   |  2 +-
+ target/riscv/insn_trans/trans_rvi.c.inc       |  5 ++--
+ target/riscv/insn_trans/trans_rvv.c.inc       |  4 +--
+ target/riscv/translate.c                      | 25 ++++++++++++++++---
+ 4 files changed, 27 insertions(+), 9 deletions(-)
 
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 6077bbbf11..53613682e8 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -102,7 +102,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
+ {
+ #ifndef CONFIG_USER_ONLY
+-    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
++    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
+     gen_helper_wfi(cpu_env);
+     return true;
+ #else
 diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 3a0ae28fef..b9ba57f266 100644
+index b9ba57f266..04d3ea237f 100644
 --- a/target/riscv/insn_trans/trans_rvi.c.inc
 +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -68,9 +68,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
-         tcg_temp_free(t0);
-     }
+@@ -59,6 +59,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     tcg_gen_addi_tl(cpu_pc, get_gpr(ctx, a->rs1, EXT_NONE), a->imm);
+     tcg_gen_andi_tl(cpu_pc, cpu_pc, (target_ulong)-2);
  
--    if (a->rd != 0) {
--        tcg_gen_movi_tl(cpu_gpr[a->rd], ctx->pc_succ_insn);
--    }
-+    gen_set_gpri(ctx, a->rd, ctx->pc_succ_insn);
++    gen_set_pc(ctx, cpu_pc);
+     if (!has_ext(ctx, RVC)) {
+         TCGv t0 = tcg_temp_new();
+ 
+@@ -827,7 +828,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+      * FENCE_I is a no-op in QEMU,
+      * however we need to end the translation block
+      */
+-    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
++    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
+     tcg_gen_exit_tb(NULL, 0);
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+@@ -836,7 +837,7 @@ static bool trans_fence_i(DisasContext *ctx, arg_fence_i *a)
+ static bool do_csr_post(DisasContext *ctx)
+ {
+     /* We may have changed important cpu state -- exit to main loop. */
+-    tcg_gen_movi_tl(cpu_pc, ctx->pc_succ_insn);
++    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
+     tcg_gen_exit_tb(NULL, 0);
+     ctx->base.is_jmp = DISAS_NORETURN;
+     return true;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 7a040b3089..e03959c46f 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -194,7 +194,7 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+     gen_set_gpr(s, rd, dst);
+     mark_vs_dirty(s);
+ 
+-    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
++    gen_set_pc_imm(s, s->pc_succ_insn);
      tcg_gen_lookup_and_goto_ptr();
+     s->base.is_jmp = DISAS_NORETURN;
  
-     if (misaligned) {
+@@ -219,7 +219,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+     gen_helper_vsetvl(dst, cpu_env, s1, s2);
+     gen_set_gpr(s, rd, dst);
+     mark_vs_dirty(s);
+-    tcg_gen_movi_tl(cpu_pc, s->pc_succ_insn);
++    gen_set_pc_imm(s, s->pc_succ_insn);
+     tcg_gen_lookup_and_goto_ptr();
+     s->base.is_jmp = DISAS_NORETURN;
+ 
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 330904265e..30c0e28778 100644
+index 30c0e28778..2a88bd99dc 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -369,10 +369,8 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
-             return;
-         }
-     }
--    if (rd != 0) {
--        tcg_gen_movi_tl(cpu_gpr[rd], ctx->pc_succ_insn);
--    }
+@@ -193,16 +193,33 @@ static void gen_check_nanbox_s(TCGv_i64 out, TCGv_i64 in)
+     tcg_gen_movcond_i64(TCG_COND_GEU, out, in, t_max, in, t_nan);
+ }
  
-+    gen_set_gpri(ctx, rd, ctx->pc_succ_insn);
-     gen_goto_tb(ctx, 0, ctx->base.pc_next + imm); /* must use this for safety */
++static void gen_set_pc_imm(DisasContext *ctx, target_ulong dest)
++{
++    if (get_xl(ctx) == MXL_RV32) {
++        dest = (int32_t)dest;
++    }
++    tcg_gen_movi_tl(cpu_pc, dest);
++}
++
++static void gen_set_pc(DisasContext *ctx, TCGv dest)
++{
++    if (get_xl(ctx) == MXL_RV32) {
++        tcg_gen_ext32s_tl(cpu_pc, dest);
++    } else {
++        tcg_gen_mov_tl(cpu_pc, dest);
++    }
++}
++
+ static void generate_exception(DisasContext *ctx, int excp)
+ {
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++    gen_set_pc_imm(ctx, ctx->base.pc_next);
+     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
      ctx->base.is_jmp = DISAS_NORETURN;
+ }
+ 
+ static void generate_exception_mtval(DisasContext *ctx, int excp)
+ {
+-    tcg_gen_movi_tl(cpu_pc, ctx->base.pc_next);
++    gen_set_pc_imm(ctx, ctx->base.pc_next);
+     tcg_gen_st_tl(cpu_pc, cpu_env, offsetof(CPURISCVState, badaddr));
+     gen_helper_raise_exception(cpu_env, tcg_constant_i32(excp));
+     ctx->base.is_jmp = DISAS_NORETURN;
+@@ -225,10 +242,10 @@ static void gen_goto_tb(DisasContext *ctx, int n, target_ulong dest)
+ {
+     if (translator_use_goto_tb(&ctx->base, dest)) {
+         tcg_gen_goto_tb(n);
+-        tcg_gen_movi_tl(cpu_pc, dest);
++        gen_set_pc_imm(ctx, dest);
+         tcg_gen_exit_tb(ctx->base.tb, n);
+     } else {
+-        tcg_gen_movi_tl(cpu_pc, dest);
++        gen_set_pc_imm(ctx, dest);
+         tcg_gen_lookup_and_goto_ptr();
+     }
  }
 -- 
 2.25.1
