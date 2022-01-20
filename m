@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAWXE-0007gF-1y
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:27:27 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:39436)
+	id 1nAWYG-0007uu-R9
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:28:28 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39678)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWX2-0007dZ-FC; Thu, 20 Jan 2022 07:27:12 -0500
-Received: from out28-5.mail.aliyun.com ([115.124.28.5]:50735)
+ id 1nAWYF-0007qg-EH; Thu, 20 Jan 2022 07:28:27 -0500
+Received: from out28-97.mail.aliyun.com ([115.124.28.97]:58851)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWX0-0008Uf-Ku; Thu, 20 Jan 2022 07:27:12 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07556053|-1; CH=green;
- DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.00456155-0.000179524-0.995259;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047202; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfyGv8l_1642681626; 
+ id 1nAWYB-0000DA-M5; Thu, 20 Jan 2022 07:28:27 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07450344|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.0061735-0.00216247-0.991664;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047204; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfxfjN1_1642681687; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MfyGv8l_1642681626)
- by smtp.aliyun-inc.com(10.147.41.143);
- Thu, 20 Jan 2022 20:27:06 +0800
+ fp:SMTPD_---.MfxfjN1_1642681687)
+ by smtp.aliyun-inc.com(10.147.43.230);
+ Thu, 20 Jan 2022 20:28:07 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -24,16 +24,16 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v8 10/23] target/riscv: Adjust csr write mask with XLEN
-Date: Thu, 20 Jan 2022 20:20:37 +0800
-Message-Id: <20220120122050.41546-11-zhiwei_liu@c-sky.com>
+Subject: [PATCH v8 12/23] target/riscv: Alloc tcg global for cur_pm[mask|base]
+Date: Thu, 20 Jan 2022 20:20:39 +0800
+Message-Id: <20220120122050.41546-13-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 References: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.5; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-5.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.97; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-97.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -52,76 +52,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 12:27:14 -0000
+X-List-Received-Date: Thu, 20 Jan 2022 12:28:27 -0000
 
-Write mask is representing the bits we care about.
+Replace the array of pm_mask/pm_base with scalar variables.
+Remove the cached array value in DisasContext.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvi.c.inc | 12 ++++++++----
- target/riscv/op_helper.c                |  3 ++-
- 2 files changed, 10 insertions(+), 5 deletions(-)
+ target/riscv/translate.c | 32 ++++++++------------------------
+ 1 file changed, 8 insertions(+), 24 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-index 04d3ea237f..631bc1f09e 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -924,7 +924,8 @@ static bool do_csrrw_i128(DisasContext *ctx, int rd, int rc,
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 2a88bd99dc..43e2ec6dce 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -38,8 +38,8 @@ static TCGv_i64 cpu_fpr[32]; /* assume F and D extensions */
+ static TCGv load_res;
+ static TCGv load_val;
+ /* globals for PM CSRs */
+-static TCGv pm_mask[4];
+-static TCGv pm_base[4];
++static TCGv pm_mask;
++static TCGv pm_base;
  
- static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
- {
--    if (get_xl(ctx) < MXL_RV128) {
-+    RISCVMXL xl = get_xl(ctx);
-+    if (xl < MXL_RV128) {
-         TCGv src = get_gpr(ctx, a->rs1, EXT_NONE);
+ #include "exec/gen-icount.h"
  
-         /*
-@@ -935,7 +936,8 @@ static bool trans_csrrw(DisasContext *ctx, arg_csrrw *a)
-             return do_csrw(ctx, a->csr, src);
-         }
+@@ -109,8 +109,6 @@ typedef struct DisasContext {
+     TCGv temp[4];
+     /* PointerMasking extension */
+     bool pm_enabled;
+-    TCGv pm_mask;
+-    TCGv pm_base;
+ } DisasContext;
  
--        TCGv mask = tcg_constant_tl(-1);
-+        TCGv mask = tcg_constant_tl(xl == MXL_RV32 ? UINT32_MAX :
-+                                                     (target_ulong)-1);
-         return do_csrrw(ctx, a->rd, a->csr, src, mask);
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -403,8 +401,8 @@ static TCGv gen_pm_adjust_address(DisasContext *s, TCGv src)
+         return src;
      } else {
-         TCGv srcl = get_gpr(ctx, a->rs1, EXT_NONE);
-@@ -1013,7 +1015,8 @@ static bool trans_csrrc(DisasContext *ctx, arg_csrrc *a)
+         temp = temp_new(s);
+-        tcg_gen_andc_tl(temp, src, s->pm_mask);
+-        tcg_gen_or_tl(temp, temp, s->pm_base);
++        tcg_gen_andc_tl(temp, src, pm_mask);
++        tcg_gen_or_tl(temp, temp, pm_base);
+         return temp;
+     }
+ }
+@@ -929,10 +927,6 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->ntemp = 0;
+     memset(ctx->temp, 0, sizeof(ctx->temp));
+     ctx->pm_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_ENABLED);
+-    int priv = tb_flags & TB_FLAGS_PRIV_MMU_MASK;
+-    ctx->pm_mask = pm_mask[priv];
+-    ctx->pm_base = pm_base[priv];
+-
+     ctx->zero = tcg_constant_tl(0);
+ }
  
- static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
- {
--    if (get_xl(ctx) < MXL_RV128) {
-+    RISCVMXL xl = get_xl(ctx);
-+    if (xl < MXL_RV128) {
-         TCGv src = tcg_constant_tl(a->rs1);
- 
-         /*
-@@ -1024,7 +1027,8 @@ static bool trans_csrrwi(DisasContext *ctx, arg_csrrwi *a)
-             return do_csrw(ctx, a->csr, src);
-         }
- 
--        TCGv mask = tcg_constant_tl(-1);
-+        TCGv mask = tcg_constant_tl(xl == MXL_RV32 ? UINT32_MAX :
-+                                                     (target_ulong)-1);
-         return do_csrrw(ctx, a->rd, a->csr, src, mask);
-     } else {
-         TCGv src = tcg_constant_tl(a->rs1);
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index 67693cb42b..1a75ba11e6 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -50,7 +50,8 @@ target_ulong helper_csrr(CPURISCVState *env, int csr)
- 
- void helper_csrw(CPURISCVState *env, int csr, target_ulong src)
- {
--    RISCVException ret = riscv_csrrw(env, csr, NULL, src, -1);
-+    target_ulong mask = env->xl == MXL_RV32 ? UINT32_MAX : (target_ulong)-1;
-+    RISCVException ret = riscv_csrrw(env, csr, NULL, src, mask);
- 
-     if (ret != RISCV_EXCP_NONE) {
-         riscv_raise_exception(env, ret, GETPC());
+@@ -1050,19 +1044,9 @@ void riscv_translate_init(void)
+                              "load_res");
+     load_val = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, load_val),
+                              "load_val");
+-#ifndef CONFIG_USER_ONLY
+     /* Assign PM CSRs to tcg globals */
+-    pm_mask[PRV_U] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmmask), "upmmask");
+-    pm_base[PRV_U] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, upmbase), "upmbase");
+-    pm_mask[PRV_S] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmmask), "spmmask");
+-    pm_base[PRV_S] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, spmbase), "spmbase");
+-    pm_mask[PRV_M] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmmask), "mpmmask");
+-    pm_base[PRV_M] =
+-      tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, mpmbase), "mpmbase");
+-#endif
++    pm_mask = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, cur_pmmask),
++                                 "pmmask");
++    pm_base = tcg_global_mem_new(cpu_env, offsetof(CPURISCVState, cur_pmbase),
++                                 "pmbase");
+ }
 -- 
 2.25.1
 
