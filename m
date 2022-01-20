@@ -1,22 +1,21 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAWVQ-0006Hi-2X
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:25:37 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38910)
+	id 1nAWVk-0006TY-7J
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 07:25:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:39062)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWVF-00069o-Ui; Thu, 20 Jan 2022 07:25:23 -0500
-Received: from out28-1.mail.aliyun.com ([115.124.28.1]:39954)
+ id 1nAWVa-0006Ln-UV; Thu, 20 Jan 2022 07:25:50 -0500
+Received: from out28-147.mail.aliyun.com ([115.124.28.147]:35329)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
- id 1nAWV3-00080r-4N; Thu, 20 Jan 2022 07:25:14 -0500
-X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1744883|-1; CH=green; DM=|CONTINUE|false|;
- DS=CONTINUE|ham_system_inform|0.0435317-0.00254838-0.95392;
- FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047194; MF=zhiwei_liu@c-sky.com; NM=1;
- PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfxKnQ0_1642681504; 
+ id 1nAWVY-0008Ec-Lo; Thu, 20 Jan 2022 07:25:42 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.07938297|-1; CH=green;
+ DM=|CONTINUE|false|; DS=CONTINUE|ham_alarm|0.35604-0.000583857-0.643376;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047199; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=9; RT=8; SR=0; TI=SMTPD_---.MfxOzV3_1642681534; 
 Received: from roman-VirtualBox.hz.ali.com(mailfrom:zhiwei_liu@c-sky.com
- fp:SMTPD_---.MfxKnQ0_1642681504)
- by smtp.aliyun-inc.com(10.147.40.200);
- Thu, 20 Jan 2022 20:25:04 +0800
+ fp:SMTPD_---.MfxOzV3_1642681534)
+ by smtp.aliyun-inc.com(10.147.42.16); Thu, 20 Jan 2022 20:25:34 +0800
 From: LIU Zhiwei <zhiwei_liu@c-sky.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -24,16 +23,16 @@ Cc: Alistair.Francis@wdc.com, palmer@dabbelt.com, bin.meng@windriver.com,
  richard.henderson@linaro.org, guoren@linux.alibaba.com,
  LIU Zhiwei <zhiwei_liu@c-sky.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v8 06/23] target/riscv: Ignore the pc bits above XLEN
-Date: Thu, 20 Jan 2022 20:20:33 +0800
-Message-Id: <20220120122050.41546-7-zhiwei_liu@c-sky.com>
+Subject: [PATCH v8 07/23] target/riscv: Extend pc for runtime pc write
+Date: Thu, 20 Jan 2022 20:20:34 +0800
+Message-Id: <20220120122050.41546-8-zhiwei_liu@c-sky.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 References: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=115.124.28.1; envelope-from=zhiwei_liu@c-sky.com;
- helo=out28-1.mail.aliyun.com
+Received-SPF: none client-ip=115.124.28.147; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-147.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -52,30 +51,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 12:25:28 -0000
+X-List-Received-Date: Thu, 20 Jan 2022 12:25:50 -0000
 
-The read from PC for translation is in cpu_get_tb_cpu_state, before translation.
+In some cases, we must restore the guest PC to the address of the start of
+the TB, such as when the instruction counter hits zero. So extend pc register
+according to current xlen for these cases.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@c-sky.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 8ebcd57af0..d73925a823 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -43,7 +43,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 736cf1d4e7..eac5f7bf03 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -355,7 +355,12 @@ static void riscv_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    env->pc = value;
++
++    if (env->xl == MXL_RV32) {
++        env->pc = (int32_t)value;
++    } else {
++        env->pc = value;
++    }
+ }
  
-     uint32_t flags = 0;
+ static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+@@ -363,7 +368,13 @@ static void riscv_cpu_synchronize_from_tb(CPUState *cs,
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+-    env->pc = tb->pc;
++    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
++
++    if (xl == MXL_RV32) {
++        env->pc = (int32_t)tb->pc;
++    } else {
++        env->pc = tb->pc;
++    }
+ }
  
--    *pc = env->pc;
-+    *pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc;
-     *cs_base = 0;
+ static bool riscv_cpu_has_work(CPUState *cs)
+@@ -384,7 +395,12 @@ static bool riscv_cpu_has_work(CPUState *cs)
+ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
+                           target_ulong *data)
+ {
+-    env->pc = data[0];
++    RISCVMXL xl = FIELD_EX32(tb->flags, TB_FLAGS, XL);
++    if (xl == MXL_RV32) {
++        env->pc = (int32_t)data[0];
++    } else {
++        env->pc = data[0];
++    }
+ }
  
-     if (riscv_has_ext(env, RVV) || cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) {
+ static void riscv_cpu_reset(DeviceState *dev)
 -- 
 2.25.1
 
