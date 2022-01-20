@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAdjC-00037E-Ez
+	id 1nAdjC-000385-Ku
 	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 15:08:14 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44526)
+Received: from eggs.gnu.org ([209.51.188.92]:44606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nAdj7-0002pa-Rh
- for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 15:08:09 -0500
-Received: from [2607:f8b0:4864:20::829] (port=43649
- helo=mail-qt1-x829.google.com)
+ id 1nAdjA-0002zw-Mj
+ for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 15:08:12 -0500
+Received: from [2607:f8b0:4864:20::f29] (port=39577
+ helo=mail-qv1-xf29.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nAdj5-0006hw-Nq
- for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 15:08:09 -0500
-Received: by mail-qt1-x829.google.com with SMTP id m9so3850295qtq.10
- for <qemu-riscv@nongnu.org>; Thu, 20 Jan 2022 12:08:07 -0800 (PST)
+ id 1nAdj8-0006k7-Lp
+ for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 15:08:12 -0500
+Received: by mail-qv1-xf29.google.com with SMTP id k4so8013704qvt.6
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jan 2022 12:08:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=D+ihxa1Ld5LxT20StF+81LT6lsXU3VYkkQbIBKYyb9w=;
- b=EbqYbbOu9agKYYpJipy722ZUTzDgTp25eZ+Y7AlBKndmwkenu4yJ1+S7UjS1nzWO0e
- 2/s4LyUypr1TncQoulW2uk60+MIiw+sPvgn7htpwTW9TJ5uSRD8BHlj0BK5cJhufKq7b
- Vm3ryvYwK4goxLQxHDSaslVhS+XCsuEKgeb8V+9v8Ur02SGDpE2Jk0g7yn6NK40QngEr
- u8E9nTR2lJ4sdYxtjff/LsDQ+Ho3CR0jliEFwJvrR+bWjMCbxlG8nEExTgsgwoetIm98
- t6qwThhw7eAlv6K3ohA4OY2iSPYvjhOvl26yJH4nxh9Ng2nTrCn6zg0COl8fftE20Scc
- xdyQ==
+ bh=Nj3WhyNP+S00BDAxW6pcamIiXSThg7IDMnlWfmpaY40=;
+ b=y96BYY53dBdQRUpCo8YwTGjwEiPm5R9t0F2mEI61W7XzNgMm4ifQXQDc79+z8gTb28
+ OHABvV0U9dPcefonpC7BD17hpQTJzEpITdtIl6ELyCrIrhUAcbfr/TBJBTPFiseRjB8N
+ Jq4opnwudcOkRzzOdprLGx5fdcvJk8oyZKloKOoZTXZe+CJrxPak/zxvhMBYjdcbfcj9
+ RW9laG3z541VkKHuq2UhXiP/4AtyhYbIGaaawc7dlXNtlBZAqgqozPyGz+3vAtIihm+b
+ rrrQ2dLltTEk6tvf7IHypz6UDF1Qs8L23OGZwmq0wnkwWbM2NiyagAeK3Ce8l38KYfLJ
+ p0FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=D+ihxa1Ld5LxT20StF+81LT6lsXU3VYkkQbIBKYyb9w=;
- b=U8tQayf0u7qbIGHFqjW9qrug2EUpuzMQ15FM8hmg34BngKMFSsHK/DcJnsZlJukazg
- A+Vn9w5b5rsBcfO+I+87AgYHntd8f4ukMWBNTSCcbvTUCOx0usnneAcV0kD1UV80V1O0
- kKZPjoNxFvcF2/oXUosjST6m9566MvOqYtZjHzPGW/TSv1KQSke53KfSWe1GZIBn4nsC
- 9y80RKi+kkrIrL6dqjuLjtS+T2qcEtwW/tjNVnsWqZANdQ/hJgmUN8mdqyX0D56eFfsu
- GtvOcvnmq5OpD6q2ZytoLpNtyJkfA3ERZ6pOvLhjcyhFpmyEvqMVaJpqV5iSM4pejW2I
- OKQg==
-X-Gm-Message-State: AOAM53222IBlTkQvdLm37FpZjMEftMQhoDEMt+cOrt+a6uUEAxqG61s4
- W7h+LdITQOQ8Tms5RBMhtsYD8Q==
-X-Google-Smtp-Source: ABdhPJw+Vp5wD9222Ynvu/EQCjpP8cSEINE6XOkd9qh8kq+l86VQk+Rouu0C7OqVicbMVLR7YIj4nQ==
-X-Received: by 2002:a05:622a:512:: with SMTP id
- l18mr641866qtx.120.1642709286765; 
- Thu, 20 Jan 2022 12:08:06 -0800 (PST)
+ bh=Nj3WhyNP+S00BDAxW6pcamIiXSThg7IDMnlWfmpaY40=;
+ b=fTSGJDL8MV+qwF+er4UXfToLrwkQPuGt/IhdG4ntaepGD1DqIgO036SBylN1QYnYEh
+ FCordB5fB87gc4H8mymQrWLD5wVgzNy6BYcMCpIeZEU/Px917/CQdUsC/fqUX3rpHPgu
+ LYzrCHUMnFv1nhuw85D/m9p0AqmjWMfGaN7bz4fmcMvELHyWi+4rT1vjKxzfQCikmBjA
+ OhdAGlH2IJYJVw+pzx8Hauqp/FP3EAFkwVC3Nubryo/q3BgazNuCJ0HhhIGNSm5zY+i0
+ bUTBOkkBgi3koXsPRqoVTML2O5SSfz4iOQHlKYl7vOnkH9RCCjYI1RxyeoBcOjQV7CuS
+ uSZQ==
+X-Gm-Message-State: AOAM53148uHNWSprv1IAcmU8oOLYY3hEye1FKnGxZBKBefj2ophC+ep/
+ yfa2wUTCqwkW0t4hsZeoQP1frA==
+X-Google-Smtp-Source: ABdhPJy7c+hgD4+rE/KHuvcdYqDNArNJOu7WNoqW5k4khnJlQZ8bjenW4fZo5D0Od7KKUTBeP5w/cg==
+X-Received: by 2002:ad4:4c50:: with SMTP id cs16mr493477qvb.74.1642709289676; 
+ Thu, 20 Jan 2022 12:08:09 -0800 (PST)
 Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
  [70.228.75.190])
- by smtp.gmail.com with ESMTPSA id a136sm1834160qkc.56.2022.01.20.12.08.05
+ by smtp.gmail.com with ESMTPSA id a136sm1834160qkc.56.2022.01.20.12.08.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jan 2022 12:08:06 -0800 (PST)
+ Thu, 20 Jan 2022 12:08:09 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Anup Patel <anup@brainfault.org>, qemu-riscv@nongnu.org
-Subject: [RFC 2/5] target/riscv: Introduce privilege version field in the CSR
- ops.
-Date: Thu, 20 Jan 2022 12:07:32 -0800
-Message-Id: <20220120200735.2739543-3-atishp@rivosinc.com>
+Subject: [RFC 4/5] target/riscv: Add *envcfg* CSRs support
+Date: Thu, 20 Jan 2022 12:07:34 -0800
+Message-Id: <20220120200735.2739543-5-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220120200735.2739543-1-atishp@rivosinc.com>
 References: <20220120200735.2739543-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::829
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::f29
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::829;
- envelope-from=atishp@rivosinc.com; helo=mail-qt1-x829.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f29;
+ envelope-from=atishp@rivosinc.com; helo=mail-qv1-xf29.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -85,154 +83,250 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 20:08:10 -0000
+X-List-Received-Date: Thu, 20 Jan 2022 20:08:13 -0000
 
-To allow/disallow the CSR access based on the privilege spec, a new field
-in the csr_ops is introduced. It also adds the privileged specification
-version (v1.12) for the CSRs introduced in the v1.12. This includes the
-new ratified extensions such as Vector, Hypervisor and secconfig CSR.
+The RISC-V privileged specification v1.12 defines few execution
+environment configuration CSRs that can be used enable/disable
+extensions per privilege levels.
+
+Add the basic support for these CSRs.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu.h |   1 +
- target/riscv/csr.c | 103 ++++++++++++++++++++++++++++++---------------
- 2 files changed, 69 insertions(+), 35 deletions(-)
+ target/riscv/cpu.h      |  8 ++++
+ target/riscv/cpu_bits.h | 31 +++++++++++++++
+ target/riscv/csr.c      | 84 +++++++++++++++++++++++++++++++++++++++++
+ target/riscv/machine.c  | 26 +++++++++++++
+ 4 files changed, 149 insertions(+)
 
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 671f65100b1a..7f87917204c5 100644
+index 7f87917204c5..b9462300a472 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -521,6 +521,7 @@ typedef struct {
-     riscv_csr_op_fn op;
-     riscv_csr_read128_fn read128;
-     riscv_csr_write128_fn write128;
-+    uint32_t min_priv_ver;
- } riscv_csr_operations;
+@@ -264,6 +264,14 @@ struct CPURISCVState {
+     target_ulong spmbase;
+     target_ulong upmmask;
+     target_ulong upmbase;
++
++    /* CSRs for execution enviornment configuration */
++
++    target_ulong menvcfg;
++    target_ulong menvcfgh;
++    target_ulong senvcfg;
++    target_ulong henvcfg;
++    target_ulong henvcfgh;
+ #endif
  
- /* CSR function table constants */
+     float_status fp_status;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index f6f90b5cbd52..afb237c2313b 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -177,6 +177,9 @@
+ #define CSR_STVEC           0x105
+ #define CSR_SCOUNTEREN      0x106
+ 
++/* Supervisor Configuration CSRs */
++#define CSR_SENVCFG         0x10A
++
+ /* Supervisor Trap Handling */
+ #define CSR_SSCRATCH        0x140
+ #define CSR_SEPC            0x141
+@@ -204,6 +207,10 @@
+ #define CSR_HTIMEDELTA      0x605
+ #define CSR_HTIMEDELTAH     0x615
+ 
++/* Hypervisor Configuration CSRs */
++#define CSR_HENVCFG         0x60A
++#define CSR_HENVCFGH        0x61A
++
+ /* Virtual CSRs */
+ #define CSR_VSSTATUS        0x200
+ #define CSR_VSIE            0x204
+@@ -218,6 +225,10 @@
+ #define CSR_MTINST          0x34a
+ #define CSR_MTVAL2          0x34b
+ 
++/* Machine Configuration CSRs */
++#define CSR_MENVCFG         0x30A
++#define CSR_MENVCFGH        0x31A
++
+ /* Enhanced Physical Memory Protection (ePMP) */
+ #define CSR_MSECCFG         0x747
+ #define CSR_MSECCFGH        0x757
+@@ -578,6 +589,26 @@ typedef enum RISCVException {
+ #define PM_EXT_CLEAN    0x00000002ULL
+ #define PM_EXT_DIRTY    0x00000003ULL
+ 
++/* Execution enviornment configuration bits */
++#define MENVCFG_FIOM                       (1 << 0)
++#define MENVCFG_CBE                        0x30000ULL
++#define MENVCFG_CBCFE                      (1 << 6)
++#define MENVCFG_CBZE                       (1 << 7)
++#define MENVCFG_PBMTE                      (1 << 62)
++#define MENVCFG_STCE                       (1 << 63)
++
++#define SENVCFG_FIOM                       MENVCFG_FIOM
++#define SENVCFG_CBE                        MENVCFG_CBE
++#define SENVCFG_CBCFE                      MENVCFG_CBCFE
++#define SENVCFG_CBZE                       MENVCFG_CBZE
++
++#define HENVCFG_FIOM                       MENVCFG_FIOM
++#define HENVCFG_CBE                        MENVCFG_CBE
++#define HENVCFG_CBCFE                      MENVCFG_CBCFE
++#define HENVCFG_CBZE                       MENVCFG_CBZE
++#define HENVCFG_PBMTE                      MENVCFG_PBMTE
++#define HENVCFG_STCE                       MENVCFG_STCE
++
+ /* Offsets for every pair of control bits per each priv level */
+ #define XS_OFFSET    0ULL
+ #define U_OFFSET     2ULL
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index adb3d4381d1f..762d3269b4a4 100644
+index e66bf2201857..a4bbae7a1bbd 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -1991,13 +1991,20 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
-     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
--    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
--    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
--    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
--    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
--    [CSR_VL]       = { "vl",       vs,     read_vl                    },
--    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
--    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
-+    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart, NULL,
-+                                           NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat, NULL,
-+                                           NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm, NULL,
-+                                           NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr, NULL,
-+                                           NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VL]       = { "vl",       vs,     read_vl, NULL, NULL, NULL, NULL,
-+                                           PRIV_VERSION_1_12_0 },
-+    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype, NULL, NULL, NULL, NULL,
-+                                           PRIV_VERSION_1_12_0 },
-+    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb, NULL, NULL, NULL, NULL,
-+                                           PRIV_VERSION_1_12_0 },
-     /* User Timers and Counters */
-     [CSR_CYCLE]    = { "cycle",    ctr,    read_instret  },
-     [CSR_INSTRET]  = { "instret",  ctr,    read_instret  },
-@@ -2063,36 +2070,62 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Supervisor Protection and Translation */
-     [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
+@@ -853,6 +853,77 @@ static RISCVException write_mtval(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
  
--    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,     write_hstatus     },
--    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,     write_hedeleg     },
--    [CSR_HIDELEG]     = { "hideleg",     hmode,   read_hideleg,     write_hideleg     },
--    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,     rmw_hvip          },
--    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,     rmw_hip           },
--    [CSR_HIE]         = { "hie",         hmode,   read_hie,         write_hie         },
--    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren,  write_hcounteren  },
--    [CSR_HGEIE]       = { "hgeie",       hmode,   read_zero,        write_hgeie       },
--    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,       write_htval       },
--    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,      write_htinst      },
--    [CSR_HGEIP]       = { "hgeip",       hmode,   read_zero,        write_hgeip       },
--    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,       write_hgatp       },
--    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta,  write_htimedelta  },
--    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah },
--
--    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,    write_vsstatus    },
--    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,    rmw_vsip          },
--    [CSR_VSIE]        = { "vsie",        hmode,   read_vsie,        write_vsie        },
--    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,      write_vstvec      },
--    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch,   write_vsscratch   },
--    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,       write_vsepc       },
--    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,     write_vscause     },
--    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,      write_vstval      },
--    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,       write_vsatp       },
--
--    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,      write_mtval2      },
--    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,      write_mtinst      },
-+    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,   write_hstatus,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,   write_hedeleg,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HIDELEG]     = { "hideleg",     hmode,   read_hideleg,   write_hideleg,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,   rmw_hvip,
-+                                         NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,   rmw_hip,
-+                                         NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HIE]         = { "hie",         hmode,   read_hie,       write_hie,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren, write_hcounteren,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HGEIE]       = { "hgeie",       hmode,   read_zero,      write_hgeie,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,     write_htval,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,    write_htinst,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HGEIP]       = { "hgeip",       hmode,   read_zero,      write_hgeip,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,     write_hgatp,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta, write_htimedelta,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
++/* Execution environment configuration setup */
++static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    *val = env->menvcfg;
++    return RISCV_EXCP_NONE;
++}
 +
-+    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,  write_vsstatus,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,  rmw_vsip,
-+                                         NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSIE]        = { "vsie",        hmode,   read_vsie,      write_vsie,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,    write_vstvec,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch, write_vsscratch,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,     write_vsepc,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,   write_vscause,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,    write_vstval,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,     write_vsatp,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
++static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
++                                  target_ulong val)
++{
++    env->menvcfg = val;
++    return RISCV_EXCP_NONE;
++}
 +
-+    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,    write_mtval2,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-+    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,    write_mtinst,
-+                                         NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
++static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    *val = env->menvcfgh;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
++                                  target_ulong val)
++{
++    env->menvcfgh = val;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    *val = env->senvcfg;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
++                                  target_ulong val)
++{
++    env->senvcfg = val;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    *val = env->henvcfg;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
++                                  target_ulong val)
++{
++    env->henvcfg = val;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    *val = env->henvcfgh;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
++                                  target_ulong val)
++{
++    env->henvcfgh = val;
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException rmw_mip(CPURISCVState *env, int csrno,
+                               target_ulong *ret_value,
+                               target_ulong new_value, target_ulong write_mask)
+@@ -2054,6 +2125,19 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
+     [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
  
-     /* Physical Memory Protection */
--    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg },
-+    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
-+                                     NULL, NULL, NULL, PRIV_VERSION_1_12_0 },
-     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
-     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
-     [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
++    /* Execution environment configuration */
++    [CSR_MENVCFG]  = { "menvcfg",  any,     read_menvcfg,  write_menvcfg, NULL,
++                                            NULL, NULL, PRIV_VERSION_1_12_0},
++    [CSR_MENVCFGH] = { "menvcfgh", any32,   read_menvcfgh, write_menvcfgh, NULL,
++                                            NULL, NULL, PRIV_VERSION_1_12_0},
++    [CSR_SENVCFG]  = { "senvcfg",  smode,   read_senvcfg,  write_senvcfg, NULL,
++                                            NULL, NULL, PRIV_VERSION_1_12_0},
++    [CSR_HENVCFG]  = { "henvcfg",  hmode,   read_henvcfg, write_henvcfg, NULL,
++                                            NULL, NULL, PRIV_VERSION_1_12_0},
++    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh, NULL,
++                                            NULL, NULL, PRIV_VERSION_1_12_0},
++
++
+     /* Supervisor Trap Setup */
+     [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
+                                               read_sstatus_i128                 },
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 13b9ab375b95..59479a999b87 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -185,6 +185,31 @@ static const VMStateDescription vmstate_rv128 = {
+     }
+ };
+ 
++/* TODO: henvcfg need both hyper_needed & envcfg_needed */
++static bool envcfg_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++    CPURISCVState *env = &cpu->env;
++
++    return (env->priv_ver >= PRIV_VERSION_1_12_0 ? 1 : 0);
++}
++
++static const VMStateDescription vmstate_envcfg = {
++    .name = "cpu/envcfg",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = envcfg_needed,
++    .fields = (VMStateField[]) {
++        VMSTATE_UINTTL(env.menvcfg, RISCVCPU),
++        VMSTATE_UINTTL(env.menvcfgh, RISCVCPU),
++        VMSTATE_UINTTL(env.senvcfg, RISCVCPU),
++        VMSTATE_UINTTL(env.henvcfg, RISCVCPU),
++        VMSTATE_UINTTL(env.henvcfgh, RISCVCPU),
++
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+     .version_id = 3,
+@@ -240,6 +265,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_vector,
+         &vmstate_pointermasking,
+         &vmstate_rv128,
++        &vmstate_envcfg,
+         NULL
+     }
+ };
 -- 
 2.30.2
 
