@@ -1,70 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAXo5-0006Ab-A6
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 08:48:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59128)
+	id 1nAZJq-0008GT-C7
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 10:25:46 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54476)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
- id 1nAXo1-00067P-Qq; Thu, 20 Jan 2022 08:48:50 -0500
-Received: from [2604:1380:4601:e00::1] (port=47634 helo=ams.source.kernel.org)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <guoren@kernel.org>)
- id 1nAXnT-0005fI-AG; Thu, 20 Jan 2022 08:48:19 -0500
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 1A3C7B81CEC;
- Thu, 20 Jan 2022 13:48:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BF7FC340E9;
- Thu, 20 Jan 2022 13:48:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642686481;
- bh=oK0CYQZnYcHey/+ETgqMPTGSVAOfiMBVqluGWfjrz7o=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=hWEf+8AlvChjyP9LLxFIkpeK8O8rzFMxbDo/DAjWQbKKnCeFEpyvuHgj8msf6Qnxz
- 0QFz76ePiLqa5Xk0O7jFeM5RXJIxSUXq16zgBZ1Am7VFKWHsLSFugBQ9o6Rf3MlmNm
- G/J3Ph9cmAHsYF7aHw3UH4uYSmTDC1PUDvsik9zeHodro+80aWo5aIIWzFXfm+nxTx
- hAcHPKTewA1FmgtzP/oU66i6vdruOVkN+vNIq8j6XMqL/Ria4hWVkp+XwOrfrkm/XF
- TwSBeTT/X2owO3CYWi0G+6m+hVlQ7meE8i0SG24mbH9npl0g5x3TxWd1K4sJBm9y0a
- 5nLzdcQScn2qQ==
-Received: by mail-ua1-f50.google.com with SMTP id c36so10851835uae.13;
- Thu, 20 Jan 2022 05:48:01 -0800 (PST)
-X-Gm-Message-State: AOAM531Bqd0pEK6N6icSzbudhRvm3hmlKhqaRkEIMWsZHI5FoGqWx7KZ
- marYKirfZwxuMhvc8SU4RTLYKPGajdUyrDXFqrY=
-X-Google-Smtp-Source: ABdhPJzYW6wciMIIpevCJuZQfn/tPCFpbVY9GmzzMdt15N15zOTbqxBJk9BigM5jdUDuNuYCGheK2WINOH9nRMThxQg=
-X-Received: by 2002:ab0:728c:: with SMTP id w12mr13901543uao.108.1642686480296; 
- Thu, 20 Jan 2022 05:48:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1nAZJo-0008AM-Kj
+ for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 10:25:44 -0500
+Received: from [2a00:1450:4864:20::32c] (port=52862
+ helo=mail-wm1-x32c.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1nAZJI-0004po-KK
+ for qemu-riscv@nongnu.org; Thu, 20 Jan 2022 10:25:34 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id v123so12860018wme.2
+ for <qemu-riscv@nongnu.org>; Thu, 20 Jan 2022 07:25:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=MxQ+/K9sLDW9+fxH7+O52SQ+Jhlx5kvAv5onxVfBpGM=;
+ b=Fz6kbe/olH5oJ8JE23l5+DPaxMBcUGSJ2DfxycuYjYNmMrKrEAa9ajARDkXF/LvUGH
+ 7oLm6BaCwFMDjlUuRxJG1xa17bFVrKLR9yrARNHppTAgmzbQFRl1oKJGF0iZPxd22FPp
+ O10DY/6SS9yjQysPAmhmOrYlNNUVM3D+ccHg04y4Uca/7z1a+enYfiR4yiufVFmt8ijG
+ jME7EKWPOp4zUBMd3cVnNstOIRvkg9qDkM1gl7HK6MDXb2LPOWjy/f1N6/WcoQDIKtpo
+ QOxcGd0XCA53YMnE2Ekd9pHxgq2mmVBzkfcUOnYVWROp4ym//u9JjR8p5368hSXix6Wf
+ VbJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=MxQ+/K9sLDW9+fxH7+O52SQ+Jhlx5kvAv5onxVfBpGM=;
+ b=JnMZaldyouDxdkiOiEhV2JyB7cMNXSA/GOyaSTiWaWICb2tK1PGsNWqGgyNI5t0pyh
+ 15qa1D0InM5R+Rt9BR/bLsqx43PzT0S8Y3/hMAji/e56AQlTVXdd1Aw3Ymzs/rrwLO2k
+ jnEvxYLtqgTV98WoMpljx0uy+IxEB39iQ6Qu0baShaYqQNUPBJeavfxsL1uax+tcp7QO
+ BDxTZ//ehn2IkneVDI3yx3NzXoxmn5BhCQlTET1ltxPgB53jn9FrsMxEzj3xAwJiW0qV
+ FT6BbhGRW/LiUqV30noNfLQJGe7RWrqrFyUU1I1gjgvsOaOahRF/OFjGkHpoTKP8Bky3
+ C7Aw==
+X-Gm-Message-State: AOAM532iRrP+t8kI78X0WHQEPJqgErasEjZM1ZJr3gItn+vRzbFhamvy
+ Ce1FG/d3lUQ4xx5lVSEq9759EPMX1izzbnLpFawIsw==
+X-Google-Smtp-Source: ABdhPJzbKhhez7HnyI3TO5gc9TokaX2+lz/7P+OmVTPIMKe5rWXhPMeZGnigX2cJ9ECj368zhOQ4V9ACPy8r+yVBYNw=
+X-Received: by 2002:adf:f683:: with SMTP id v3mr11670157wrp.306.1642692306350; 
+ Thu, 20 Jan 2022 07:25:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20220118011711.7243-1-liweiwei@iscas.ac.cn>
- <20220118011711.7243-2-liweiwei@iscas.ac.cn>
- <CAAhSdy3zjeW-WkbiicTJfurQkhts4m9XwvmoS+Zr1XVMzhy+3w@mail.gmail.com>
- <CAKmqyKNajL8kJL4HExN8CDCYwrVcUx4dcnn77wY5zCZu9M6SGg@mail.gmail.com>
-In-Reply-To: <CAKmqyKNajL8kJL4HExN8CDCYwrVcUx4dcnn77wY5zCZu9M6SGg@mail.gmail.com>
-From: Guo Ren <guoren@kernel.org>
-Date: Thu, 20 Jan 2022 21:47:49 +0800
-X-Gmail-Original-Message-ID: <CAJF2gTRV55B+9AaFHDXW9R7cvEXO+R3dFs6RVRGnkKwZX5fCLg@mail.gmail.com>
-Message-ID: <CAJF2gTRV55B+9AaFHDXW9R7cvEXO+R3dFs6RVRGnkKwZX5fCLg@mail.gmail.com>
-Subject: Re: [PATCH v5 1/5] target/riscv: Ignore reserved bits in PTE for RV64
-To: Alistair Francis <alistair23@gmail.com>, Anup Patel <anup@brainfault.org>
-Cc: Weiwei Li <liweiwei@iscas.ac.cn>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- wangjunqiang <wangjunqiang@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, 
- QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, Guo Ren <ren_guo@c-sky.com>,
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
+References: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
+ <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
+ <d237abed-fe8c-fb29-3ec0-27a0504eeffc@amsat.org>
+In-Reply-To: <d237abed-fe8c-fb29-3ec0-27a0504eeffc@amsat.org>
+From: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Date: Thu, 20 Jan 2022 16:24:55 +0100
+Message-ID: <CAAeLtUCUZh+yx72Cq3L8bHCshdMrX=LJj2vJZcHZL6=RZMmzYw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] target/riscv: Add XVentanaCondOps custom extension
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Bin Meng <bin.meng@windriver.com>, Greg Favor <gfavor@ventanamicro.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Kito Cheng <kito.cheng@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2604:1380:4601:e00::1
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32c
  (failed)
-Received-SPF: pass client-ip=2604:1380:4601:e00::1;
- envelope-from=guoren@kernel.org; helo=ams.source.kernel.org
-X-Spam_score_int: -69
-X-Spam_score: -7.0
-X-Spam_bar: -------
-X-Spam_report: (-7.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.698,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philipp.tomsich@vrull.eu; helo=mail-wm1-x32c.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,125 +80,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 13:48:51 -0000
+X-List-Received-Date: Thu, 20 Jan 2022 15:25:45 -0000
 
-Hi Alistair and Anup,
+On Wed, 19 Jan 2022 at 12:17, Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>=
+ wrote:
+>
+> On 13/1/22 21:20, Philipp Tomsich wrote:
+> > This adds the decoder and translation for the XVentanaCondOps custom
+> > extension (vendor-defined by Ventana Micro Systems), which is
+> > documented at https://github.com/ventanamicro/ventana-custom-extensions=
+/releases/download/v1.0.0/ventana-custom-extensions-v1.0.0.pdf
+> >
+> > This commit then also adds a guard-function (has_XVentanaCondOps_p)
+> > and the decoder function to the table of decoders, enabling the
+> > support for the XVentanaCondOps extension.
+> >
+> > Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+> >
+> > ---
+> >
+> > Changes in v2:
+> > - Split off decode table into XVentanaCondOps.decode
+> > - Wire up XVentanaCondOps in the decoder-table
+>
+> >   static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_=
+t opcode)
+> >   {
+> > @@ -862,6 +874,7 @@ static void decode_opc(CPURISCVState *env, DisasCon=
+text *ctx, uint16_t opcode)
+> >           bool (*decode_func)(DisasContext *, uint32_t);
+> >       } decoders[] =3D {
+> >           { always_true_p,  decode_insn32 },
+>
+> "always_true" is the first entry,
+>
+> > +        { has_XVentanaCondOps_p,  decode_XVentanaCodeOps },
+>
+> so is that ever called?
 
-On Tue, Jan 18, 2022 at 12:56 PM Alistair Francis <alistair23@gmail.com> wr=
-ote:
->
-> On Tue, Jan 18, 2022 at 1:31 PM Anup Patel <anup@brainfault.org> wrote:
-> >
-> > On Tue, Jan 18, 2022 at 6:47 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
-> > >
-> > > From: Guo Ren <ren_guo@c-sky.com>
-> > >
-> > > Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
-> > > need to ignore them. They cannot be a part of ppn.
-> > >
-> > > 1: The RISC-V Instruction Set Manual, Volume II: Privileged Architect=
-ure
-> > >    4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-> > >    4.5 Sv48: Page-Based 48-bit Virtual-Memory System
-> > >
-> > > 2: https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt=
--diff.pdf
-> > >
-> > > Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-> > > Tested-by: Bin Meng <bmeng.cn@gmail.com>
-> > > Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-> > > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> > > ---
-> > >  target/riscv/cpu_bits.h   | 7 +++++++
-> > >  target/riscv/cpu_helper.c | 2 +-
-> > >  2 files changed, 8 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > > index 5a6d49aa64..282cd8eecd 100644
-> > > --- a/target/riscv/cpu_bits.h
-> > > +++ b/target/riscv/cpu_bits.h
-> > > @@ -490,6 +490,13 @@ typedef enum {
-> > >  /* Page table PPN shift amount */
-> > >  #define PTE_PPN_SHIFT       10
-> > >
-> > > +/* Page table PPN mask */
-> > > +#if defined(TARGET_RISCV32)
-> > > +#define PTE_PPN_MASK        0xffffffffUL
-> > > +#elif defined(TARGET_RISCV64)
-> > > +#define PTE_PPN_MASK        0x3fffffffffffffULL
-> > > +#endif
-> > > +
-> >
-> > Going forward we should avoid using target specific "#if"
-> > so that we can use the same qemu-system-riscv64 for both
-> > RV32 and RV64.
-> >
-> > >  /* Leaf page shift amount */
-> > >  #define PGSHIFT             12
-> > >
-> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > index 434a83e66a..26608ddf1c 100644
-> > > --- a/target/riscv/cpu_helper.c
-> > > +++ b/target/riscv/cpu_helper.c
-> > > @@ -619,7 +619,7 @@ restart:
-> > >              return TRANSLATE_FAIL;
-> > >          }
-> > >
-> > > -        hwaddr ppn =3D pte >> PTE_PPN_SHIFT;
-> > > +        hwaddr ppn =3D (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-> >
-> > Rather than using "#if", please use "xlen" comparison to extract
-> > PPN correctly from PTE.
->
-> This will need to be dynamic based on get_xl()
->
-> It does look like we should check the existence of the extensions though:
->
-> "Bit 63 is reserved for use by the Svnapot extension in Chapter 5. If
-> Svnapot is not implemented, bit 63 remains reserved and must be zeroed
-> by software for forward compatibility, or else a page-fault exception
-> is raised. Bits 62=E2=80=9361 are reserved for use by the Svpbmt extensio=
-n in
-> Chapter 6. If Svpbmt is not implemented, bits 62=E2=80=9361 remain reserv=
-ed
-> and must be zeroed by software for forward compatibility, or else a
-> page-fault exception is raised."
-How about:
+Please refer to patch 1/2:
+1. The guard-function only gates whether a decoder function is enabled/call=
+ed.
+2. Enabled decoders are iterated over until a decoder handles the
+instruction-word=E2=80=94or we run out of decoders.
+3. If no enabled decoder handled an instruction word, we raise an
+illegal instruction.
 
-+       RISCVCPU *cpu =3D env_archcpu(env);
-+       hwaddr ppn;
-+
-+       if (get_field(env->mstatus, MSTATUS64_SXL) =3D=3D MXL_RV32) {
-+               ppn =3D pte >> PTE_PPN_SHIFT;
-+       } else if (cpu->cfg.ext_svpbmt || cpu->cfg.ext_svnapot) {
-+               ppn =3D (pte & PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-+       } else {
-+               ppn =3D pte >> PTE_PPN_SHIFT;
-+               if ((pte & ~PTE_PPN_MASK) >> PTE_PPN_SHIFT)
-+                       return TRANSLATE_FAIL;
-+       }
+This really is just a table-based form of the what would be equivalent
+to the following pseudocode:
+   if (guard_func_1() && decoder1(=E2=80=A6))
+     /* pass */ ;
+   else if (guard_func_2() && decoder2(...))
+     /* pass */ ;
+   [...]
+   else
+     raise_illegal();
+
+And just as an aside (before we start discussing performance), let's
+make sure we all agree that this is perfectly optimizable (I may be
+missing a 'const') by a compiler:
+1. The number of entries in the array are known at compile-time and
+small integer =E2=80=94 a compiler can thus peel the loop.
+2. The function pointers are in the same compilation unit, so this can
+be converted from indirect to direct calls (a special case of
+constant-propagation).
+3. Predicate functions (given that they will be very small) can be inlined.
+
+Best,
+Philipp.
 
 >
-> Alistair
 >
+> >       };
 > >
-> > Regards,
-> > Anup
-> >
-> > >
-> > >          if (!(pte & PTE_V)) {
-> > >              /* Invalid PTE */
-> > > --
-> > > 2.17.1
-> > >
-> >
+> >       /* Check for compressed insn */
 >
-
-
---=20
-Best Regards
- Guo Ren
-
-ML: https://lore.kernel.org/linux-csky/
 
