@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nAhLB-0002iJ-A9
-	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 18:59:41 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:39276)
+	id 1nAhPT-0005fG-4M
+	for mharc-qemu-riscv@gnu.org; Thu, 20 Jan 2022 19:04:07 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40460)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nAhL9-0002fO-KF; Thu, 20 Jan 2022 18:59:39 -0500
-Received: from [2607:f8b0:4864:20::133] (port=42634
- helo=mail-il1-x133.google.com)
+ id 1nAhPR-0005cV-5F; Thu, 20 Jan 2022 19:04:05 -0500
+Received: from [2607:f8b0:4864:20::d30] (port=35331
+ helo=mail-io1-xd30.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nAhL7-0005tl-Bc; Thu, 20 Jan 2022 18:59:39 -0500
-Received: by mail-il1-x133.google.com with SMTP id u5so6343379ilq.9;
- Thu, 20 Jan 2022 15:59:34 -0800 (PST)
+ id 1nAhPO-00012P-SO; Thu, 20 Jan 2022 19:04:04 -0500
+Received: by mail-io1-xd30.google.com with SMTP id p7so8983641iod.2;
+ Thu, 20 Jan 2022 16:04:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EhjzVjs1Jp79YEAy51JghEC6x5Ox2ek5v0xoOw/Q0ww=;
- b=ipj81tTvxUjvVh2/HjZFcNUMzdPDElRqh0sdtV9y4bDTnCuHa9Hcqs9l11QS4DzqpW
- Ptn7JXc7hk/18JTxgd9LiZXth5tHe6PNsI/k9eHWQ8D7JLO06jfDzzdMZD5bm2g8pQMN
- LRX1iupEM079/45kUoFVwzvwPq7Qzoy9e8DPTeDC3EEDsSmpaw2yxEdUThFJb8YsL0xc
- qYRI22LUA4CPqCszJzmIwSkQwiKRd4by5wganGZfAvhdj3FsjgFQFoeay7IbP88ELjuy
- 3cvsYDk6jdhNS2xVKGaCTgySqBU3bCDBd1lx0hugjgu5pmu2aYIAc9w3OsFxVT2ClNK1
- pbRA==
+ :cc; bh=cybhzHD7y3vE4+KzdrnmjtyKsz8VQiCYwtF3PshR8j8=;
+ b=n4KEudS/4WR+/w3oxda9/6VwSCmrl49S8jg2Qct5SNj0jGX6yTZkGYYaO8unAHV5ch
+ K40kkBOC1V0+6NZGIvKZ4loMAWhBPykKXb2WFsRNMigYRZnFQZr/UbaKKuypwTsqxW4D
+ oi1qHyV3qqeVBvHQwY6XL5iFJfrIAzczjs0HRtoMS8EkgMW/ZKZxt2l0qIlGmdgI3dKS
+ xaYw/FR+0JHSz5hTEPR/DaLFEBwqePLHGY65gH3eyrEghHbs1LiH7F1RKRx6YEtOHOoX
+ MF7lO5wR7co1oogNj+y5f03ly4jqW7L5e7hOHoZvMnRWaT7Igabtg7UV3CydscKhrc8f
+ AHYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=EhjzVjs1Jp79YEAy51JghEC6x5Ox2ek5v0xoOw/Q0ww=;
- b=FCZCbAV2gSfiu5YLy0HOjfXpWpOTJE+f2A+dC73Eor9QIW9KV5zWGEDgbsfjq8sg4L
- GzOYbr4A7ziOTn1F/izbLqgMQZDsHznRpeKCihNDUrYen67ibc9ouYG/+zDMEL1M+1XY
- XpuKkMGHaaHJEiW+1oO+NgiVe5drpjZ0Ozbc1S5F5Vepr9h3KyxvoviVnOEM/i6AlWtv
- Z5bR8AjiIo2PrfWvux4htnSQu5IW8teC6qhrrro1eVj7K3CQDowhbRFVh1Gd9hMiUx8u
- vJD7KUWFbJ8HlxsywE78gWzBr6jyP7/oRgL2fy2osEPk8xQzCVO3LDDx+8541hPVKDCU
- YMvw==
-X-Gm-Message-State: AOAM533+kpsLQ5Y5jcExWOedmQplaStoaRBcVeTrhNEf4XiTo4VQgvEK
- v+lDobbmPMaacl7+HuW+r7RbCqhsAVp1ZJg/FrQ=
-X-Google-Smtp-Source: ABdhPJwrhMGPHhshFH/mSlFBAKx301iqkhc33D+sXMgLBvxkfCtMy0SZu8f15qf1zymzmLX4MzAN3WCevj6GPjEaorc=
-X-Received: by 2002:a92:3012:: with SMTP id x18mr741260ile.221.1642723173681; 
- Thu, 20 Jan 2022 15:59:33 -0800 (PST)
+ bh=cybhzHD7y3vE4+KzdrnmjtyKsz8VQiCYwtF3PshR8j8=;
+ b=nL5vG2qd2fFZynOs/tEk/+PGiCGfpQOLDNbqfbJpG308JW7YUtdO5vORQR7rHFelnM
+ SJagRdosMExM0pWNhhZAT/d67YV0OUaIvDMoagI/fXNgwusN+RTX8oiV9Zb5TUI/UHi5
+ iwCBNczI0SMsRa1ywm90P5QXRgLcEdq9uYlfBPHmafjLzFw/1BzXjD4nUPVHgkVPDEdA
+ tLu0pytwd/LqyjbgGArgFfYTzS/aj01lyhL4xKUmO0dY0vaoz5gGUL/Hc7ePqoQt/z7B
+ w1hRF65K+AAYC1fxgW5oVuuDAuJUrdDMkEhBgV66AjwKa+yvXQP5gHv0X5Sk4Rp++iAx
+ Z3vQ==
+X-Gm-Message-State: AOAM533iL1IGf1KeflRARqN0uP/TY1TSNVBqnYT7//RsGBFTWnwSXbrJ
+ Opo2QiSbEdMPtuGUcYvzR3xlwP0eX05mIUR4iUw=
+X-Google-Smtp-Source: ABdhPJzfYBqmdjNJJTO0h1TTbMSwA7IMMV6o9nS2j9RqCZ5fuI4ji1HRRl0tzhDH9jpq4PRbG5LZbYhkjXFn31NE5VA=
+X-Received: by 2002:a02:a403:: with SMTP id c3mr593991jal.318.1642723441187;
+ Thu, 20 Jan 2022 16:04:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20220119152614.27548-1-anup@brainfault.org>
- <20220119152614.27548-15-anup@brainfault.org>
-In-Reply-To: <20220119152614.27548-15-anup@brainfault.org>
+References: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
+In-Reply-To: <20220120122050.41546-1-zhiwei_liu@c-sky.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 21 Jan 2022 09:59:07 +1000
-Message-ID: <CAKmqyKNBnRxkFRBBSdS0oeSwNU_uw1hW29Eo7VVT=3og=gT-dw@mail.gmail.com>
-Subject: Re: [PATCH v8 14/23] target/riscv: Implement AIA xiselect and xireg
- CSRs
-To: Anup Patel <anup@brainfault.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
+Date: Fri, 21 Jan 2022 10:03:34 +1000
+Message-ID: <CAKmqyKN-QptM5sxdm6bDuBCEPKDh2OyS9x3pqqjYiM4deayh8Q@mail.gmail.com>
+Subject: Re: [PATCH v8 00/23] Support UXL filed in xstatus
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ guoren@linux.alibaba.com, Bin Meng <bin.meng@windriver.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>, Bin Meng <bmeng.cn@gmail.com>
+ Alistair Francis <Alistair.Francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -80,283 +76,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jan 2022 23:59:39 -0000
+X-List-Received-Date: Fri, 21 Jan 2022 00:04:05 -0000
 
-On Thu, Jan 20, 2022 at 2:32 AM Anup Patel <anup@brainfault.org> wrote:
+On Fri, Jan 21, 2022 at 1:51 AM LIU Zhiwei <zhiwei_liu@c-sky.com> wrote:
 >
-> From: Anup Patel <anup.patel@wdc.com>
+> In this patch set, we process the pc reigsters writes,
+> gdb reads and writes, and address calculation under
+> different UXLEN settings.
 >
-> The AIA specification defines [m|s|vs]iselect and [m|s|vs]ireg CSRs
-> which allow indirect access to interrupt priority arrays and per-HART
-> IMSIC registers. This patch implements AIA xiselect and xireg CSRs.
+> The patch set v8 has been tested by running rv64 Linux with
+> rv32 rootfs in compat mode. You can almost follow the test [1]
+> given by GuoRen, except using the branch riscv-upstream-uxl-v8
+> on my QEMU repo [2].
 >
-> Signed-off-by: Anup Patel <anup.patel@wdc.com>
-> Signed-off-by: Anup Patel <anup@brainfault.org>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> [1] https://lore.kernel.org/linux-arm-kernel/20211228143958.3409187-17-guoren@kernel.org/t/
+> [2] https://github.com/romanheros/qemu.git
+>
+> Except patch 22 is new, the other patches have been reviewed or acked.
+>
+> v8:
+>   Set default XLEN for hypervisor vsstatus and mstatus_hs
+>
+> v7:
+>   Rebase to Alistair riscv_to_apply.next branch
+>   Add commit message for create xl field in CPURISCVState
+>
+> v6:
+>   Pass boot 32bit rootfs on compat Linux
+>   Pass test cases on compat OpenTee
+>   Fix csr write mask
+>   Fix WARL for uxl
+>   Fix sstatus read for uxl
+>   Relax UXL field for debugging
+>   Don't bump machine state version for xl
+>   Rename cpu_get_xl to cpu_recompute_xl
+>   Rebase to vector v1.0
+>   Rebase to 128 bit cpu
+>
+> v5:
+>   Add xl field in env to clear up redundant riscv_cpu_xl
+>   Adjust pmpcfg access with mxl
+>   Select gdb core xml according to mxl
+>
+> v4:
+>   Support SSTATUS64_UXL write
+>   Bump vmstate version for vill split
+>
+> v3:
+>   Merge gen_pm_adjust_address into a canonical address function
+>   Adjust address for RVA with XLEN
+>   Split pm_enabled into pm_mask_enabled and pm_base_enabled
+>   Replace array of pm tcg globals with one scalar tcg global
+>   Split and change patch sequence
+>
+> v2:
+>   Split out vill from vtype
+>   Remove context switch when xlen changes at exception
+>   Use XL instead of OL in many places
+>   Use pointer masking and XLEN for vector address
+>   Define an common fuction to calculate address for ld
+>
+> LIU Zhiwei (23):
+>   target/riscv: Adjust pmpcfg access with mxl
+>   target/riscv: Don't save pc when exception return
+>   target/riscv: Sign extend link reg for jal and jalr
+>   target/riscv: Sign extend pc for different XLEN
+>   target/riscv: Create xl field in env
+>   target/riscv: Ignore the pc bits above XLEN
+>   target/riscv: Extend pc for runtime pc write
+>   target/riscv: Use gdb xml according to max mxlen
+>   target/riscv: Relax debug check for pm write
+>   target/riscv: Adjust csr write mask with XLEN
+>   target/riscv: Create current pm fields in env
+>   target/riscv: Alloc tcg global for cur_pm[mask|base]
+>   target/riscv: Calculate address according to XLEN
+>   target/riscv: Split pm_enabled into mask and base
+>   target/riscv: Split out the vill from vtype
+>   target/riscv: Adjust vsetvl according to XLEN
+>   target/riscv: Remove VILL field in VTYPE
+>   target/riscv: Fix check range for first fault only
+>   target/riscv: Adjust vector address with mask
+>   target/riscv: Adjust scalar reg in vector with XLEN
+>   target/riscv: Set default XLEN for hypervisor
+>   target/riscv: Enable uxl field write
+>   target/riscv: Relax UXL field for debugging
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.h     |   7 ++
->  target/riscv/csr.c     | 175 +++++++++++++++++++++++++++++++++++++++++
->  target/riscv/machine.c |   3 +
->  3 files changed, 185 insertions(+)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 65ffd31801..058ea9ce99 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -195,6 +195,10 @@ struct CPURISCVState {
->      uint8_t miprio[64];
->      uint8_t siprio[64];
+>  target/riscv/cpu.c                            | 42 +++++++--
+>  target/riscv/cpu.h                            | 45 ++++++++-
+>  target/riscv/cpu_bits.h                       |  3 +
+>  target/riscv/cpu_helper.c                     | 94 +++++++++----------
+>  target/riscv/csr.c                            | 84 +++++++++++++++--
+>  target/riscv/gdbstub.c                        | 71 ++++++++++----
+>  target/riscv/helper.h                         |  4 +-
+>  .../riscv/insn_trans/trans_privileged.c.inc   |  9 +-
+>  target/riscv/insn_trans/trans_rva.c.inc       |  9 +-
+>  target/riscv/insn_trans/trans_rvd.c.inc       | 19 +---
+>  target/riscv/insn_trans/trans_rvf.c.inc       | 19 +---
+>  target/riscv/insn_trans/trans_rvi.c.inc       | 39 +++-----
+>  target/riscv/insn_trans/trans_rvv.c.inc       |  6 +-
+>  target/riscv/machine.c                        | 16 +++-
+>  target/riscv/op_helper.c                      |  7 +-
+>  target/riscv/pmp.c                            | 12 +--
+>  target/riscv/translate.c                      | 90 +++++++++---------
+>  target/riscv/vector_helper.c                  | 39 +++++---
+>  18 files changed, 377 insertions(+), 231 deletions(-)
 >
-> +    /* AIA CSRs */
-> +    target_ulong miselect;
-> +    target_ulong siselect;
-> +
->      /* Hypervisor CSRs */
->      target_ulong hstatus;
->      target_ulong hedeleg;
-> @@ -228,6 +232,9 @@ struct CPURISCVState {
->      target_ulong vstval;
->      target_ulong vsatp;
->
-> +    /* AIA VS-mode CSRs */
-> +    target_ulong vsiselect;
-> +
->      target_ulong mtval2;
->      target_ulong mtinst;
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index f7904c003f..e40620f455 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -916,6 +916,169 @@ static int read_mtopi(CPURISCVState *env, int csrno, target_ulong *val)
->      return RISCV_EXCP_NONE;
->  }
->
-> +static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
-> +{
-> +    if (!riscv_cpu_virt_enabled(env)) {
-> +        return csrno;
-> +    }
-> +
-> +    switch (csrno) {
-> +    case CSR_SISELECT:
-> +        return CSR_VSISELECT;
-> +    case CSR_SIREG:
-> +        return CSR_VSIREG;
-> +    default:
-> +        return csrno;
-> +    };
-> +}
-> +
-> +static int rmw_xiselect(CPURISCVState *env, int csrno, target_ulong *val,
-> +                        target_ulong new_val, target_ulong wr_mask)
-> +{
-> +    target_ulong *iselect;
-> +
-> +    /* Translate CSR number for VS-mode */
-> +    csrno = aia_xlate_vs_csrno(env, csrno);
-> +
-> +    /* Find the iselect CSR based on CSR number */
-> +    switch (csrno) {
-> +    case CSR_MISELECT:
-> +        iselect = &env->miselect;
-> +        break;
-> +    case CSR_SISELECT:
-> +        iselect = &env->siselect;
-> +        break;
-> +    case CSR_VSISELECT:
-> +        iselect = &env->vsiselect;
-> +        break;
-> +    default:
-> +         return RISCV_EXCP_ILLEGAL_INST;
-> +    };
-> +
-> +    if (val) {
-> +        *val = *iselect;
-> +    }
-> +
-> +    wr_mask &= ISELECT_MASK;
-> +    if (wr_mask) {
-> +        *iselect = (*iselect & ~wr_mask) | (new_val & wr_mask);
-> +    }
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static int rmw_iprio(target_ulong xlen,
-> +                     target_ulong iselect, uint8_t *iprio,
-> +                     target_ulong *val, target_ulong new_val,
-> +                     target_ulong wr_mask, int ext_irq_no)
-> +{
-> +    int i, firq, nirqs;
-> +    target_ulong old_val;
-> +
-> +    if (iselect < ISELECT_IPRIO0 || ISELECT_IPRIO15 < iselect) {
-> +        return -EINVAL;
-> +    }
-> +    if (xlen != 32 && iselect & 0x1) {
-> +        return -EINVAL;
-> +    }
-> +
-> +    nirqs = 4 * (xlen / 32);
-> +    firq = ((iselect - ISELECT_IPRIO0) / (xlen / 32)) * (nirqs);
-> +
-> +    old_val = 0;
-> +    for (i = 0; i < nirqs; i++) {
-> +        old_val |= ((target_ulong)iprio[firq + i]) << (IPRIO_IRQ_BITS * i);
-> +    }
-> +
-> +    if (val) {
-> +        *val = old_val;
-> +    }
-> +
-> +    if (wr_mask) {
-> +        new_val = (old_val & ~wr_mask) | (new_val & wr_mask);
-> +        for (i = 0; i < nirqs; i++) {
-> +            /*
-> +             * M-level and S-level external IRQ priority always read-only
-> +             * zero. This means default priority order is always preferred
-> +             * for M-level and S-level external IRQs.
-> +             */
-> +            if ((firq + i) == ext_irq_no) {
-> +                continue;
-> +            }
-> +            iprio[firq + i] = (new_val >> (IPRIO_IRQ_BITS * i)) & 0xff;
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int rmw_xireg(CPURISCVState *env, int csrno, target_ulong *val,
-> +                     target_ulong new_val, target_ulong wr_mask)
-> +{
-> +    bool virt;
-> +    uint8_t *iprio;
-> +    int ret = -EINVAL;
-> +    target_ulong priv, isel, vgein;
-> +
-> +    /* Translate CSR number for VS-mode */
-> +    csrno = aia_xlate_vs_csrno(env, csrno);
-> +
-> +    /* Decode register details from CSR number */
-> +    virt = false;
-> +    switch (csrno) {
-> +    case CSR_MIREG:
-> +        iprio = env->miprio;
-> +        isel = env->miselect;
-> +        priv = PRV_M;
-> +        break;
-> +    case CSR_SIREG:
-> +        iprio = env->siprio;
-> +        isel = env->siselect;
-> +        priv = PRV_S;
-> +        break;
-> +    case CSR_VSIREG:
-> +        iprio = env->hviprio;
-> +        isel = env->vsiselect;
-> +        priv = PRV_S;
-> +        virt = true;
-> +        break;
-> +    default:
-> +         goto done;
-> +    };
-> +
-> +    /* Find the selected guest interrupt file */
-> +    vgein = (virt) ? get_field(env->hstatus, HSTATUS_VGEIN) : 0;
-> +
-> +    if (ISELECT_IPRIO0 <= isel && isel <= ISELECT_IPRIO15) {
-> +        /* Local interrupt priority registers not available for VS-mode */
-> +        if (!virt) {
-> +            ret = rmw_iprio(riscv_cpu_mxl_bits(env),
-> +                            isel, iprio, val, new_val, wr_mask,
-> +                            (priv == PRV_M) ? IRQ_M_EXT : IRQ_S_EXT);
-> +        }
-> +    } else if (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST) {
-> +        /* IMSIC registers only available when machine implements it. */
-> +        if (env->aia_ireg_rmw_fn[priv]) {
-> +            /* Selected guest interrupt file should not be zero */
-> +            if (virt && (!vgein || env->geilen < vgein)) {
-> +                goto done;
-> +            }
-> +            /* Call machine specific IMSIC register emulation */
-> +            ret = env->aia_ireg_rmw_fn[priv](env->aia_ireg_rmw_fn_arg[priv],
-> +                                    AIA_MAKE_IREG(isel, priv, virt, vgein,
-> +                                                  riscv_cpu_mxl_bits(env)),
-> +                                    val, new_val, wr_mask);
-> +        }
-> +    }
-> +
-> +done:
-> +    if (ret) {
-> +        return (riscv_cpu_virt_enabled(env) && virt) ?
-> +               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_mtvec(CPURISCVState *env, int csrno,
->                                   target_ulong *val)
->  {
-> @@ -2690,6 +2853,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
->      [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
->
-> +    /* Machine-Level Window to Indirectly Accessed Registers (AIA) */
-> +    [CSR_MISELECT] = { "miselect", aia_any,   NULL, NULL,    rmw_xiselect },
-> +    [CSR_MIREG]    = { "mireg",    aia_any,   NULL, NULL,    rmw_xireg },
-> +
->      /* Machine-Level Interrupts (AIA) */
->      [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
->
-> @@ -2722,6 +2889,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      /* Supervisor Protection and Translation */
->      [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
->
-> +    /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
-> +    [CSR_SISELECT]   = { "siselect",   aia_smode, NULL, NULL, rmw_xiselect },
-> +    [CSR_SIREG]      = { "sireg",      aia_smode, NULL, NULL, rmw_xireg },
-> +
->      /* Supervisor-Level Interrupts (AIA) */
->      [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
->
-> @@ -2763,6 +2934,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,   write_hviprio1 },
->      [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,   write_hviprio2 },
->
-> +    /* VS-Level Window to Indirectly Accessed Registers (H-extension with AIA) */
-> +    [CSR_VSISELECT]   = { "vsiselect",   aia_hmode, NULL, NULL,      rmw_xiselect },
-> +    [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL,      rmw_xireg },
-> +
->      /* VS-Level Interrupts (H-extension with AIA) */
->      [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
->
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index c6a01ba953..9895930b29 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -103,6 +103,7 @@ static const VMStateDescription vmstate_hyper = {
->          VMSTATE_UINTTL(env.vscause, RISCVCPU),
->          VMSTATE_UINTTL(env.vstval, RISCVCPU),
->          VMSTATE_UINTTL(env.vsatp, RISCVCPU),
-> +        VMSTATE_UINTTL(env.vsiselect, RISCVCPU),
->
->          VMSTATE_UINTTL(env.mtval2, RISCVCPU),
->          VMSTATE_UINTTL(env.mtinst, RISCVCPU),
-> @@ -260,6 +261,8 @@ const VMStateDescription vmstate_riscv_cpu = {
->          VMSTATE_UINTTL(env.mepc, RISCVCPU),
->          VMSTATE_UINTTL(env.mcause, RISCVCPU),
->          VMSTATE_UINTTL(env.mtval, RISCVCPU),
-> +        VMSTATE_UINTTL(env.miselect, RISCVCPU),
-> +        VMSTATE_UINTTL(env.siselect, RISCVCPU),
->          VMSTATE_UINTTL(env.scounteren, RISCVCPU),
->          VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
->          VMSTATE_UINTTL(env.sscratch, RISCVCPU),
 > --
 > 2.25.1
 >
