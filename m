@@ -1,73 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nBuD9-0005Pq-9h
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 02:56:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44294)
+	id 1nBuGG-0007Uu-Q2
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 02:59:36 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:45046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nBuD1-0005Mf-5g
- for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:56:15 -0500
-Received: from [2607:f8b0:4864:20::52a] (port=36848
- helo=mail-pg1-x52a.google.com)
+ id 1nBuGE-0007R6-VG
+ for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:59:35 -0500
+Received: from [2607:f8b0:4864:20::42b] (port=35724
+ helo=mail-pf1-x42b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nBuCy-0001fp-TX
- for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:56:14 -0500
-Received: by mail-pg1-x52a.google.com with SMTP id e9so14663465pgb.3
- for <qemu-riscv@nongnu.org>; Sun, 23 Jan 2022 23:56:12 -0800 (PST)
+ id 1nBuGD-0001z0-D3
+ for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:59:34 -0500
+Received: by mail-pf1-x42b.google.com with SMTP id u130so10893829pfc.2
+ for <qemu-riscv@nongnu.org>; Sun, 23 Jan 2022 23:59:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=dTA7B7YwhZo/CfGsq+HdQYfOE7m/WD1pPEXixsDQtlA=;
- b=jFc4NPGO/OK9jbn8zVfW8GjbxyrJEKL+JE5dbP6IJvMzmwmFFV8w1dmutTR43FxGkh
- oxGXbqbdJQ8jFAUxQcXIqDDPIe5jhRQ0axC2UMUOd8DmBrLfntQqeh//estbUcly2TGr
- ko8xBFBF7j1detE3TmwRlefLXw0dMtaHzY+QW/KJ6Ww1MJslbWOoLXy6WBXa7IRjg2UM
- YThZ8VBqULLaJ9UUgwyuiheUPkIvWhzl1/HaBGCGu7pVHoWAK5CqLA74aZ5ADRjstCrt
- BisV6sQJbJ9KY+4RE/6LTThh3L2wpCv0yIoKIt30N6VF6yZaPmFseA0ef3qCr/HjqmOC
- 6ZzQ==
+ bh=c8U1cz0HEd9IgJCBG1xfmsD8ZQM/nuAq7+GOtah1T/A=;
+ b=ekwu7BwlZTQqYnBVPfs/Wqgq9Ya+aqfGStgI9n3WDOzVCe7JZwli4/3zeywvInb/ja
+ e9l1lNUrjSZq7TuTOMtvnuMXLlSHkUH/0Ilm2ut+XrzvRA2mKZnJp4ZIv6g+Y1qN+fCy
+ pQ1j+Yro4vbo82E47rlBZv5oRM7+VOgOUCnozokrjj2XZo9+AC+SMei9QU9Z2Nz82w0h
+ 1CysKvgieQdO6Q0pSMMgJJI1oKA6bwEjLExYfincsnT37hGatT75zuSb9ISaibh+nO7W
+ HX4WFE08VqidBBrKne3S3IL9m9wxhtBF4gonEMBG/tsq3OE7Rdh8XNRSy+06P6c5q937
+ vVMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=dTA7B7YwhZo/CfGsq+HdQYfOE7m/WD1pPEXixsDQtlA=;
- b=FNDu/OucC5HuM1tgD5qk2Kw/qWHgf5A4TDn1c6ynMe8WdZdTIf8Z8xJpX2PJuOygaq
- +/jXbjYTbhRMHWM9UwbTzQyinY9uJF7i3M+6p1QWEYV7kQm3w1mKGgwYVGHpiyefGxtA
- rwvfgr5M8c4Uw/ua3v1U67Gb2RsrZJT1kH7H+agSfnod1m2urJ9WezrQaZrx4Qr1FFLB
- x58XMpIOfDM3ZlVnapK5DrTJDfOli6HE4EUa3gZF1wKlmBO6LXkcwlPgkP4hVEcxghWB
- DkXQEHLeerI3cLRMZQZ+wE+EwORNpCjyEd48gm5aIGBfQI3qZ/RAT5bpThepRv7jGAnI
- TfbA==
-X-Gm-Message-State: AOAM5331pgX4Z/9ZGt+T8fn47q7mI6LMs/8zeW1b7GooRJnJT8jL/XRB
- dcc+9hk38bhIDgqsqrtsD2vRPQ==
-X-Google-Smtp-Source: ABdhPJyVNfkfqBRswZaOspM45Azgzat0cl1Khs/Kj9JpU2x6nmf1bfkBq2YRJ4G1s9Jtzpsl+2TcnA==
-X-Received: by 2002:a63:84c3:: with SMTP id k186mr6155288pgd.473.1643010971365; 
- Sun, 23 Jan 2022 23:56:11 -0800 (PST)
+ bh=c8U1cz0HEd9IgJCBG1xfmsD8ZQM/nuAq7+GOtah1T/A=;
+ b=PNPad4GwzDeyZUQeEFyTvFHIs9+4iYc7FOoaLsuB0ikz4x+pdl8ttUqh6ygulRu2Sw
+ 4TIlgO+64JCmAKftThxwnSRCzZq3KiXshum38viwi7Vri1IeM4LNRPbi3t63jtYuf8xl
+ fqP8OAfKj1z16/wkUutAeEaN2LmwNV0WrhN3aPQJ6OLHi3ZpT071k2CpRfQ+361vKYb/
+ 2cqsK/YI80ofEEPXEuPIYhxerOQlHP30PCc4M1XE3oj6Z9JwqBwBMf+hjhZoIyzS0zVK
+ z8drLCqCYoWGUov4+ZFXa7w7yLMv7GBjobw14LWhEopwbq+wDKNWd333l0zP/jnE9qJZ
+ Vu0w==
+X-Gm-Message-State: AOAM531DxBrt9sWEVlR0U8cQkYuMJiayEPin2IHsSyv1+96M3PEdCGva
+ DcBLlbKVPJCpbqYI1RVFWqAIHg==
+X-Google-Smtp-Source: ABdhPJxu3VP8sqSvCYceMWOebKB3uOtdAjNMHVqyVhetUw7C28xdseVFWTUWDD+NT0Gx8iqvJpCX9g==
+X-Received: by 2002:a62:7602:0:b0:4c6:864b:6400 with SMTP id
+ r2-20020a627602000000b004c6864b6400mr13198064pfc.14.1643011172061; 
+ Sun, 23 Jan 2022 23:59:32 -0800 (PST)
 Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id b12sm15468082pfv.148.2022.01.23.23.56.08
+ by smtp.gmail.com with ESMTPSA id s22sm15302896pfu.34.2022.01.23.23.59.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Jan 2022 23:56:11 -0800 (PST)
-Subject: Re: [RFC 2/5] target/riscv: Introduce privilege version field in the
- CSR ops.
+ Sun, 23 Jan 2022 23:59:31 -0800 (PST)
+Subject: Re: [RFC 1/5] target/riscv: Add the privileged spec version 1.12.0
 To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Anup Patel <anup@brainfault.org>,
  Bin Meng <bin.meng@windriver.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 References: <20220120200735.2739543-1-atishp@rivosinc.com>
- <20220120200735.2739543-3-atishp@rivosinc.com>
+ <20220120200735.2739543-2-atishp@rivosinc.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <936ade43-0fc9-56a5-f7a3-17180128a985@linaro.org>
-Date: Mon, 24 Jan 2022 18:56:05 +1100
+Message-ID: <fc833a66-c0fe-931a-ab7e-e81917a8d786@linaro.org>
+Date: Mon, 24 Jan 2022 18:59:25 +1100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20220120200735.2739543-3-atishp@rivosinc.com>
+In-Reply-To: <20220120200735.2739543-2-atishp@rivosinc.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -87,18 +87,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2022 07:56:15 -0000
+X-List-Received-Date: Mon, 24 Jan 2022 07:59:35 -0000
 
 On 1/21/22 7:07 AM, Atish Patra wrote:
-> +    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart, NULL,
-> +                                           NULL, NULL, PRIV_VERSION_1_12_0 },
+> Add the definition for ratified privileged specification version v1.12
+> 
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>   target/riscv/cpu.h | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4d630867650a..671f65100b1a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -82,6 +82,7 @@ enum {
+>   
+>   #define PRIV_VERSION_1_10_0 0x00011000
+>   #define PRIV_VERSION_1_11_0 0x00011100
+> +#define PRIV_VERSION_1_12_0 0x00011200
 
-I think adding all of these NULLs are hard to read.
-Better to just add
+Is there any good reason for defining things this way, as opposed to a simple enumeration?
+A simple enum would eliminate the need for
 
-     .min_priv_ver = PRIV_VERSION_1_12_0
 
-to the existing entry.
+> +    /* The default privilege specification version supported is 1.10 */
+> +    if (!csr_min_priv) {
+> +        csr_min_priv = PRIV_VERSION_1_10_0;
+> +    }
+
+in patch 5.
 
 
 r~
