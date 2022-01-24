@@ -1,80 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nBuGG-0007Uu-Q2
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 02:59:36 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45046)
+	id 1nBv18-0004tl-Cq
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 03:48:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53854)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nBuGE-0007R6-VG
- for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:59:35 -0500
-Received: from [2607:f8b0:4864:20::42b] (port=35724
- helo=mail-pf1-x42b.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nBuGD-0001z0-D3
- for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:59:34 -0500
-Received: by mail-pf1-x42b.google.com with SMTP id u130so10893829pfc.2
- for <qemu-riscv@nongnu.org>; Sun, 23 Jan 2022 23:59:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=c8U1cz0HEd9IgJCBG1xfmsD8ZQM/nuAq7+GOtah1T/A=;
- b=ekwu7BwlZTQqYnBVPfs/Wqgq9Ya+aqfGStgI9n3WDOzVCe7JZwli4/3zeywvInb/ja
- e9l1lNUrjSZq7TuTOMtvnuMXLlSHkUH/0Ilm2ut+XrzvRA2mKZnJp4ZIv6g+Y1qN+fCy
- pQ1j+Yro4vbo82E47rlBZv5oRM7+VOgOUCnozokrjj2XZo9+AC+SMei9QU9Z2Nz82w0h
- 1CysKvgieQdO6Q0pSMMgJJI1oKA6bwEjLExYfincsnT37hGatT75zuSb9ISaibh+nO7W
- HX4WFE08VqidBBrKne3S3IL9m9wxhtBF4gonEMBG/tsq3OE7Rdh8XNRSy+06P6c5q937
- vVMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=c8U1cz0HEd9IgJCBG1xfmsD8ZQM/nuAq7+GOtah1T/A=;
- b=PNPad4GwzDeyZUQeEFyTvFHIs9+4iYc7FOoaLsuB0ikz4x+pdl8ttUqh6ygulRu2Sw
- 4TIlgO+64JCmAKftThxwnSRCzZq3KiXshum38viwi7Vri1IeM4LNRPbi3t63jtYuf8xl
- fqP8OAfKj1z16/wkUutAeEaN2LmwNV0WrhN3aPQJ6OLHi3ZpT071k2CpRfQ+361vKYb/
- 2cqsK/YI80ofEEPXEuPIYhxerOQlHP30PCc4M1XE3oj6Z9JwqBwBMf+hjhZoIyzS0zVK
- z8drLCqCYoWGUov4+ZFXa7w7yLMv7GBjobw14LWhEopwbq+wDKNWd333l0zP/jnE9qJZ
- Vu0w==
-X-Gm-Message-State: AOAM531DxBrt9sWEVlR0U8cQkYuMJiayEPin2IHsSyv1+96M3PEdCGva
- DcBLlbKVPJCpbqYI1RVFWqAIHg==
-X-Google-Smtp-Source: ABdhPJxu3VP8sqSvCYceMWOebKB3uOtdAjNMHVqyVhetUw7C28xdseVFWTUWDD+NT0Gx8iqvJpCX9g==
-X-Received: by 2002:a62:7602:0:b0:4c6:864b:6400 with SMTP id
- r2-20020a627602000000b004c6864b6400mr13198064pfc.14.1643011172061; 
- Sun, 23 Jan 2022 23:59:32 -0800 (PST)
-Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id s22sm15302896pfu.34.2022.01.23.23.59.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 23 Jan 2022 23:59:31 -0800 (PST)
-Subject: Re: [RFC 1/5] target/riscv: Add the privileged spec version 1.12.0
-To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Anup Patel <anup@brainfault.org>,
- Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20220120200735.2739543-1-atishp@rivosinc.com>
- <20220120200735.2739543-2-atishp@rivosinc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <fc833a66-c0fe-931a-ab7e-e81917a8d786@linaro.org>
-Date: Mon, 24 Jan 2022 18:59:25 +1100
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1nBv0p-0004sP-0p; Mon, 24 Jan 2022 03:47:43 -0500
+Received: from out28-145.mail.aliyun.com ([115.124.28.145]:53286)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@c-sky.com>)
+ id 1nBv0k-0000lA-7b; Mon, 24 Jan 2022 03:47:42 -0500
+X-Alimail-AntiSpam: AC=CONTINUE; BC=0.1099965|-1; CH=green; DM=|CONTINUE|false|;
+ DS=CONTINUE|ham_system_inform|0.0215965-0.00446824-0.973935;
+ FP=0|0|0|0|0|-1|-1|-1; HT=ay29a033018047201; MF=zhiwei_liu@c-sky.com; NM=1;
+ PH=DS; RN=6; RT=6; SR=0; TI=SMTPD_---.MhaohZg_1643014052; 
+Received: from 10.0.2.15(mailfrom:zhiwei_liu@c-sky.com
+ fp:SMTPD_---.MhaohZg_1643014052)
+ by smtp.aliyun-inc.com(10.147.42.198);
+ Mon, 24 Jan 2022 16:47:32 +0800
+Subject: Re: [PATCH] target/riscv: correct "code should not be reached" for
+ x-rv128
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, palmer@dabbelt.com
+References: <20220124074940.363064-1-frederic.petrot@univ-grenoble-alpes.fr>
+From: LIU Zhiwei <zhiwei_liu@c-sky.com>
+Message-ID: <dcab99a5-4c85-0434-d094-90c7429ba479@c-sky.com>
+Date: Mon, 24 Jan 2022 16:47:32 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20220120200735.2739543-2-atishp@rivosinc.com>
+In-Reply-To: <20220124074940.363064-1-frederic.petrot@univ-grenoble-alpes.fr>
 Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42b
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
+Received-SPF: none client-ip=115.124.28.145; envelope-from=zhiwei_liu@c-sky.com;
+ helo=out28-145.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,37 +55,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2022 07:59:35 -0000
+X-List-Received-Date: Mon, 24 Jan 2022 08:47:44 -0000
 
-On 1/21/22 7:07 AM, Atish Patra wrote:
-> Add the definition for ratified privileged specification version v1.12
-> 
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+
+On 2022/1/24 下午3:49, Frédéric Pétrot wrote:
+> The addition of uxl support in gdbstub adds a few checks on the maximum
+> register length, but omitted MXL_RV128, leading to the occurence of
+> "code should not be reached" in a few places.
+> This patch makes rv128 react as rv64 for gdb, as previously.
+
+If that is case for rv128, you should also add
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1cb0436187..5ada71e5bf 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -528,9 +528,8 @@ static void riscv_cpu_realize(DeviceState *dev, 
+Error **errp)
+      switch (env->misa_mxl_max) {
+  #ifdef TARGET_RISCV64
+      case MXL_RV64:
+-        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+-        break;
+      case MXL_RV128:
++        cc->gdb_core_xml_file = "riscv-64bit-cpu.xml";
+          break;
+
+Still I don't know why we should make rv128 react as rv64 for gdb?
+
+Thanks,
+Zhiwei
+
+>
+> Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 > ---
->   target/riscv/cpu.h | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 4d630867650a..671f65100b1a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -82,6 +82,7 @@ enum {
->   
->   #define PRIV_VERSION_1_10_0 0x00011000
->   #define PRIV_VERSION_1_11_0 0x00011100
-> +#define PRIV_VERSION_1_12_0 0x00011200
-
-Is there any good reason for defining things this way, as opposed to a simple enumeration?
-A simple enum would eliminate the need for
-
-
-> +    /* The default privilege specification version supported is 1.10 */
-> +    if (!csr_min_priv) {
-> +        csr_min_priv = PRIV_VERSION_1_10_0;
-> +    }
-
-in patch 5.
-
-
-r~
+>   target/riscv/gdbstub.c | 3 +++
+>   1 file changed, 3 insertions(+)
+>
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index f531a74c2f..9ed049c29e 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -64,6 +64,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+>       case MXL_RV32:
+>           return gdb_get_reg32(mem_buf, tmp);
+>       case MXL_RV64:
+> +    case MXL_RV128:
+>           return gdb_get_reg64(mem_buf, tmp);
+>       default:
+>           g_assert_not_reached();
+> @@ -84,6 +85,7 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+>           length = 4;
+>           break;
+>       case MXL_RV64:
+> +    case MXL_RV128:
+>           if (env->xl < MXL_RV64) {
+>               tmp = (int32_t)ldq_p(mem_buf);
+>           } else {
+> @@ -420,6 +422,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
+>                                    1, "riscv-32bit-virtual.xml", 0);
+>           break;
+>       case MXL_RV64:
+> +    case MXL_RV128:
+>           gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
+>                                    riscv_gdb_set_virtual,
+>                                    1, "riscv-64bit-virtual.xml", 0);
 
