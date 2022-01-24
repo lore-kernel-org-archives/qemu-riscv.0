@@ -1,57 +1,80 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nBu7j-0003CL-66
-	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 02:50:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:43034)
+	id 1nBuD9-0005Pq-9h
+	for mharc-qemu-riscv@gnu.org; Mon, 24 Jan 2022 02:56:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44294)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1nBu7V-0003A6-Gt; Mon, 24 Jan 2022 02:50:35 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:47456)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1nBu7S-0000lr-B2; Mon, 24 Jan 2022 02:50:32 -0500
-Received: from mailhub.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id F0C0F403AD;
- Mon, 24 Jan 2022 08:50:24 +0100 (CET)
-Received: from mailhost.u-ga.fr (mailhost1.u-ga.fr [152.77.1.10])
- by mailhub.u-ga.fr (Postfix) with ESMTP id EE26B100085;
- Mon, 24 Jan 2022 08:50:24 +0100 (CET)
-Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhost.u-ga.fr (Postfix) with ESMTP id E139760067;
- Mon, 24 Jan 2022 08:50:24 +0100 (CET)
-Received: from palmier.vpn.u-ga.fr (pers-165-10.vpn.u-ga.fr [147.171.165.10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 5031C40069;
- Mon, 24 Jan 2022 08:50:24 +0100 (CET)
-From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
- =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH] target/riscv: correct "code should not be reached" for x-rv128
-Date: Mon, 24 Jan 2022 08:49:40 +0100
-Message-Id: <20220124074940.363064-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nBuD1-0005Mf-5g
+ for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:56:15 -0500
+Received: from [2607:f8b0:4864:20::52a] (port=36848
+ helo=mail-pg1-x52a.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nBuCy-0001fp-TX
+ for qemu-riscv@nongnu.org; Mon, 24 Jan 2022 02:56:14 -0500
+Received: by mail-pg1-x52a.google.com with SMTP id e9so14663465pgb.3
+ for <qemu-riscv@nongnu.org>; Sun, 23 Jan 2022 23:56:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=dTA7B7YwhZo/CfGsq+HdQYfOE7m/WD1pPEXixsDQtlA=;
+ b=jFc4NPGO/OK9jbn8zVfW8GjbxyrJEKL+JE5dbP6IJvMzmwmFFV8w1dmutTR43FxGkh
+ oxGXbqbdJQ8jFAUxQcXIqDDPIe5jhRQ0axC2UMUOd8DmBrLfntQqeh//estbUcly2TGr
+ ko8xBFBF7j1detE3TmwRlefLXw0dMtaHzY+QW/KJ6Ww1MJslbWOoLXy6WBXa7IRjg2UM
+ YThZ8VBqULLaJ9UUgwyuiheUPkIvWhzl1/HaBGCGu7pVHoWAK5CqLA74aZ5ADRjstCrt
+ BisV6sQJbJ9KY+4RE/6LTThh3L2wpCv0yIoKIt30N6VF6yZaPmFseA0ef3qCr/HjqmOC
+ 6ZzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=dTA7B7YwhZo/CfGsq+HdQYfOE7m/WD1pPEXixsDQtlA=;
+ b=FNDu/OucC5HuM1tgD5qk2Kw/qWHgf5A4TDn1c6ynMe8WdZdTIf8Z8xJpX2PJuOygaq
+ +/jXbjYTbhRMHWM9UwbTzQyinY9uJF7i3M+6p1QWEYV7kQm3w1mKGgwYVGHpiyefGxtA
+ rwvfgr5M8c4Uw/ua3v1U67Gb2RsrZJT1kH7H+agSfnod1m2urJ9WezrQaZrx4Qr1FFLB
+ x58XMpIOfDM3ZlVnapK5DrTJDfOli6HE4EUa3gZF1wKlmBO6LXkcwlPgkP4hVEcxghWB
+ DkXQEHLeerI3cLRMZQZ+wE+EwORNpCjyEd48gm5aIGBfQI3qZ/RAT5bpThepRv7jGAnI
+ TfbA==
+X-Gm-Message-State: AOAM5331pgX4Z/9ZGt+T8fn47q7mI6LMs/8zeW1b7GooRJnJT8jL/XRB
+ dcc+9hk38bhIDgqsqrtsD2vRPQ==
+X-Google-Smtp-Source: ABdhPJyVNfkfqBRswZaOspM45Azgzat0cl1Khs/Kj9JpU2x6nmf1bfkBq2YRJ4G1s9Jtzpsl+2TcnA==
+X-Received: by 2002:a63:84c3:: with SMTP id k186mr6155288pgd.473.1643010971365; 
+ Sun, 23 Jan 2022 23:56:11 -0800 (PST)
+Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
+ by smtp.gmail.com with ESMTPSA id b12sm15468082pfv.148.2022.01.23.23.56.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 23 Jan 2022 23:56:11 -0800 (PST)
+Subject: Re: [RFC 2/5] target/riscv: Introduce privilege version field in the
+ CSR ops.
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20220120200735.2739543-1-atishp@rivosinc.com>
+ <20220120200735.2739543-3-atishp@rivosinc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+Message-ID: <936ade43-0fc9-56a5-f7a3-17180128a985@linaro.org>
+Date: Mon, 24 Jan 2022 18:56:05 +1100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-X-Greylist: Whitelist-UGA MAILHOST (SMTP non authentifie) depuis 195.83.24.62
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+In-Reply-To: <20220120200735.2739543-3-atishp@rivosinc.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52a
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,47 +87,19 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jan 2022 07:50:35 -0000
+X-List-Received-Date: Mon, 24 Jan 2022 07:56:15 -0000
 
-The addition of uxl support in gdbstub adds a few checks on the maximum
-register length, but omitted MXL_RV128, leading to the occurence of
-"code should not be reached" in a few places.
-This patch makes rv128 react as rv64 for gdb, as previously.
+On 1/21/22 7:07 AM, Atish Patra wrote:
+> +    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart, NULL,
+> +                                           NULL, NULL, PRIV_VERSION_1_12_0 },
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
----
- target/riscv/gdbstub.c | 3 +++
- 1 file changed, 3 insertions(+)
+I think adding all of these NULLs are hard to read.
+Better to just add
 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index f531a74c2f..9ed049c29e 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -64,6 +64,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
-     case MXL_RV32:
-         return gdb_get_reg32(mem_buf, tmp);
-     case MXL_RV64:
-+    case MXL_RV128:
-         return gdb_get_reg64(mem_buf, tmp);
-     default:
-         g_assert_not_reached();
-@@ -84,6 +85,7 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-         length = 4;
-         break;
-     case MXL_RV64:
-+    case MXL_RV128:
-         if (env->xl < MXL_RV64) {
-             tmp = (int32_t)ldq_p(mem_buf);
-         } else {
-@@ -420,6 +422,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUState *cs)
-                                  1, "riscv-32bit-virtual.xml", 0);
-         break;
-     case MXL_RV64:
-+    case MXL_RV128:
-         gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
-                                  riscv_gdb_set_virtual,
-                                  1, "riscv-64bit-virtual.xml", 0);
--- 
-2.34.1
+     .min_priv_ver = PRIV_VERSION_1_12_0
 
+to the existing entry.
+
+
+r~
 
