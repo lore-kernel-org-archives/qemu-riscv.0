@@ -1,72 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nCTNN-0002wS-NC
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 16:29:17 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53114)
+	id 1nCTae-0003qL-PA
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 16:43:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60600)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCTNL-0002sw-LL
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:29:15 -0500
-Received: from [2607:f8b0:4864:20::52a] (port=41800
- helo=mail-pg1-x52a.google.com)
+ id 1nCTac-0003oD-Sd
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:42:58 -0500
+Received: from [2607:f8b0:4864:20::531] (port=43651
+ helo=mail-pg1-x531.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCTNE-0005fk-Ql
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:29:11 -0500
-Received: by mail-pg1-x52a.google.com with SMTP id f8so19345207pgf.8
- for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 13:29:07 -0800 (PST)
+ id 1nCTaa-00087d-JT
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:42:58 -0500
+Received: by mail-pg1-x531.google.com with SMTP id g20so1273394pgn.10
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 13:42:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=p6QxOBBoehsHvuIMymY7X+IU/5J7rQ7Ji1uG58YXztY=;
- b=JzS4wm8MG7+BZBIM4wqekVesDUKuYGwsTjactRpgXTXGpkRya2If1nK3wMBvKitIyW
- qMLSEbU6XwFtnJ5aNWa3tW2FfPsvKq7fRZAEUnfNj7jJkf/DSxDyohHvh7/Li2+rUJTs
- lKWDpzoMvWDLDmxX0nsaC1DGsnDYuvE/u8y1qLtWMp24lo8p3uAbfTpOtGb7n05hrl2u
- f+jrSExpzFKw+Rx6VbuL/5Wn7x6ZltZk+k0CcrzngUT42gStC61ZgFK9m+s8Qpozed/z
- oUVK5Io/aIUznotUNE+s5Lx5NLdRXCHQSMtpfk59pe/I0kDzJC/RrCdn/UhrzyqMhOpn
- DqsA==
+ bh=Kyhcw1i1SBBoYowtsywmXmAedG72zAVOvX1eb/yfMAE=;
+ b=N78VcB4fEwKXxtUiociPqDt5s29RGpJPIMA6mdo2Yfk4HiSxnZMDHl4bgjGMc59MJ3
+ A1EEQ1wNVUX4M9aaqf0SO3/ej9W35MdLecw41NoEm0/YjDTjfgd/XRPDHQ1yuRSJJDlt
+ YSVgGgcSUfJXz/FXkQVffeQD4k4XLUcD3BfrWh1SaP+jqSWhAJm8uWmPbOGzFLPeA6T0
+ joMSH4HJMOc4fG7Wk+rR0Nt5SRByxJXQR6/G5DSvMXChs/qxvK/0GmmE7Rpf7K5XSTzL
+ 1m7SpWt/dCvH33zD0xex7/iv4crflgNrIrm9fL1UbmS2VmRtL0xz6Y2Xw0AAhNBYS2zP
+ g5Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=p6QxOBBoehsHvuIMymY7X+IU/5J7rQ7Ji1uG58YXztY=;
- b=05OUUhjD33KiwDBN3mACqaYMV+VYQ7R2rRcZ3PRBr908HXssGAbiEM+5MG0YJME/ig
- riZLGh5JnfGNc/LcriQM1wlUw4z3T09ZWwWSZTh33Hgpo4LS39NRBFVl+9Xs1waJuR9F
- xrOKeXU83TCH5f0c7KyishfcxRMF2Rh88ai4Dc9T6cExHj4GY2zFkCmaEFrwvPEgvFXb
- CtjRND11BZjXZntcQWHGEk+uXJ44Amx0SFxhaH0kkn4C4LMbOtlnhaJG10lcU388b06f
- Pnt/2+GOERmHqN4K5fp7B4yFqxNcDF3mhfWIaIn9HGpcDJawlNyVkDOxwWkthfO9UU8q
- YFIQ==
-X-Gm-Message-State: AOAM531Tt9LBuAJiarErw/rROpIitgKds/O61alfjqDsg/S47DEtxV3O
- HNrk7I3qMO9XQzu1R1+g90E++w==
-X-Google-Smtp-Source: ABdhPJwaol/W9YlCNaYBsMSVPv0momiaGDpZGrBapgSYf6GKEEWMasdCfBMaUyquaiD2jT8uV3NhQg==
-X-Received: by 2002:a62:5211:0:b0:4bc:c949:ae8d with SMTP id
- g17-20020a625211000000b004bcc949ae8dmr20369119pfb.26.1643146146604; 
- Tue, 25 Jan 2022 13:29:06 -0800 (PST)
+ bh=Kyhcw1i1SBBoYowtsywmXmAedG72zAVOvX1eb/yfMAE=;
+ b=nLq2xE91TzSMctf1g4hpTZEcR7oxFI8i0SzkJajGN3tJbByXHX5TrLRhCaGE8STxLR
+ UlPrqgT64s8dhBu2XWKSwB2MH7bCxC2L7nIxp9Pz7ElhVJjZ2we634Srk4m8n4lMHKkB
+ 0YYZdHENaeNLDTOMYP9Q6oI5xmtvzX8Nw5IKMjTZVg6HK1NaUHORF93glpx8nCwRs3ms
+ +NshkkSaVPmdjttzxK8VczX9FC9KKW1IFJN3NGjbKiaTI/hIJjHKEl9NpSl30RtSmOGh
+ JxNCIbCNBZPTn5fKqMl/2AoydmXM+1I+3qG0wiQ4kY68XAroyQgo8GDHjvw6ZABtXPIx
+ bssw==
+X-Gm-Message-State: AOAM533jhPaSYLlz3mccglPGEpIK03UpX6zG9yJiYwxBkTgK+3OE2fkA
+ THgQaXUl9cf/tAZHE0gq+uC7Ag==
+X-Google-Smtp-Source: ABdhPJyCAlLfbhnfIyS0BEEx2DsBR0sxsdXvINHqt7o5HPZE28/AKo4ukYDEVc15lwVqRmngUvxu2w==
+X-Received: by 2002:a63:ce4c:: with SMTP id r12mr16645492pgi.21.1643146974811; 
+ Tue, 25 Jan 2022 13:42:54 -0800 (PST)
 Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id mu13sm1312958pjb.28.2022.01.25.13.29.03
+ by smtp.gmail.com with ESMTPSA id l26sm15342635pgm.73.2022.01.25.13.42.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Jan 2022 13:29:06 -0800 (PST)
-Subject: Re: [PATCH v2 1/2] target/riscv: iterate over a table of decoders
+ Tue, 25 Jan 2022 13:42:54 -0800 (PST)
+Subject: Re: [PATCH v2 2/2] target/riscv: Add XVentanaCondOps custom extension
 To: Philipp Tomsich <philipp.tomsich@vrull.eu>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
  Greg Favor <gfavor@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Kito Cheng <kito.cheng@sifive.com>
 References: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
+ <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <d93c61fc-03a7-5968-e97b-3430d703d671@linaro.org>
-Date: Wed, 26 Jan 2022 08:28:59 +1100
+Message-ID: <279dadc7-496b-6b04-a011-b5eb27162cf7@linaro.org>
+Date: Wed, 26 Jan 2022 08:42:47 +1100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
+In-Reply-To: <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::531
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -86,74 +86,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2022 21:29:15 -0000
+X-List-Received-Date: Tue, 25 Jan 2022 21:42:59 -0000
 
 On 1/14/22 7:20 AM, Philipp Tomsich wrote:
-> +static inline bool always_true_p(CPURISCVState *env  __attribute__((__unused__)),
-> +                                 DisasContext *ctx  __attribute__((__unused__)))
+> new file mode 100644
+> index 0000000000..b8a5d031b5
+> --- /dev/null
+> +++ b/target/riscv/insn_trans/trans_xventanacondops.inc
+
+The filename suffix should be ".c.inc".
+
+> +static bool gen_condmask(DisasContext *ctx, arg_r *a, TCGCond cond)
 > +{
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+> +
+> +    tcg_gen_movcond_tl(cond, dest, src2, ctx->zero, src1, ctx->zero);
+> +
+> +    gen_set_gpr(ctx, a->rd, dest);
 > +    return true;
 > +}
-
-Drop the inline; the function will be instantiated so that it can be put in the table.
-Drop the env pointer.  Everything this hook should examine must be in DisasContext.
-
->  static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->  {
-> -    /* check for compressed insn */
-> +    /* If not handled, we'll raise an illegal instruction exception */
-> +    bool handled = false;
 > +
-> +    /*
-> +     * A table with predicate (i.e., guard) functions and decoder functions
-> +     * that are tested in-order until a decoder matches onto the opcode.
-> +     */
-> +    const struct {
-
-static const.
-
-> +        bool (*guard_func)(CPURISCVState *, DisasContext *);
-> +        bool (*decode_func)(DisasContext *, uint32_t);
-> +    } decoders[] = {
-> +        { always_true_p,  decode_insn32 },
-> +    };
+> +static bool trans_vt_maskc(DisasContext *ctx, arg_r *a)
+> +{
+> +    return gen_condmask(ctx, a, TCG_COND_NE);
+> +}
 > +
-> +    /* Check for compressed insn */
->      if (extract16(opcode, 0, 2) != 3) {
->          if (!has_ext(ctx, RVC)) {
->              gen_exception_illegal(ctx);
->          } else {
->              ctx->opcode = opcode;
->              ctx->pc_succ_insn = ctx->base.pc_next + 2;
-> -            if (!decode_insn16(ctx, opcode)) {
-> -                gen_exception_illegal(ctx);
-> -            }
-> +            handled = decode_insn16(ctx, opcode);
->          }
->      } else {
->          uint32_t opcode32 = opcode;
-> @@ -862,10 +880,18 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
->                                               ctx->base.pc_next + 2));
->          ctx->opcode = opcode32;
->          ctx->pc_succ_insn = ctx->base.pc_next + 4;
-> -        if (!decode_insn32(ctx, opcode32)) {
-> -            gen_exception_illegal(ctx);
-> +
-> +        for (size_t i = 0; i < ARRAY_SIZE(decoders); ++i) {
-> +            if (!decoders[i].guard_func(env, ctx))
-> +                continue;
-> +
-> +            if ((handled = decoders[i].decode_func(ctx, opcode32)))
+> +static bool trans_vt_maskcn(DisasContext *ctx, arg_r *a)
+> +{
+> +    return gen_condmask(ctx, a, TCG_COND_EQ);
+> +}
 
-Never put an assignment in an if like this.
+Implementation looks good.
 
-I think it would be cleaner to just do
+> +#define MATERIALISE_EXT_PREDICATE(ext)  \
+> +    static inline bool has_ ## ext ## _p(CPURISCVState *env, \
+> +                                         DisasContext *ctx  __attribute__((__unused__)))  \
+> +    { \
+> +        return RISCV_CPU(ctx->cs)->cfg.ext_ ## ext ; \
+> +    }
 
-     if (decode()) {
-         return;
-     }
+Again, no inline.
 
-and drop the handled variable entirely.
+Don't look back to RISCV_CPU here.  We shouldn't even have access to that here, as it 
+leads to temptation to do invalid things at translation time (this isn't one of them, 
+since it only accesses constant state).  What we have been doing is copying ext_foo into 
+DisasContext in riscv_tr_init_disas_context.  Though it might be time to revisit that.
+
+Perhaps give the cpu->cfg structure type a name, e.g. RISCVCPUConfig.  Add  "const 
+RISCVCPUConfig *cfg" to DisasContext and copy the pointer across in init_disas_context.
 
 
 r~
