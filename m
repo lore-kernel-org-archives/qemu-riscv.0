@@ -1,53 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nCdOT-0001D4-Hh
-	for mharc-qemu-riscv@gnu.org; Wed, 26 Jan 2022 03:11:05 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45704)
+	id 1nCdnw-0000k8-LG
+	for mharc-qemu-riscv@gnu.org; Wed, 26 Jan 2022 03:37:24 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51166)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nCdOJ-0001BF-9H; Wed, 26 Jan 2022 03:11:01 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25]:34874 helo=cstnet.cn)
+ id 1nCdnu-0000eh-Hy; Wed, 26 Jan 2022 03:37:22 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25]:41622 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nCdMa-00062y-C0; Wed, 26 Jan 2022 03:09:12 -0500
+ id 1nCdnr-00021W-3q; Wed, 26 Jan 2022 03:37:22 -0500
 Received: from [192.168.0.104] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAA3JkGOAfFhuRYAAA--.387S2;
- Wed, 26 Jan 2022 16:08:47 +0800 (CST)
-Subject: Re: [PATCH v2] target/riscv: Enable bitmanip Zicbo[m,z,p] instructions
-To: Christoph Muellner <cmuellner@linux.com>,
- Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>,
- =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20220124140023.1165850-1-cmuellner@linux.com>
+ by APP-05 (Coremail) with SMTP id zQCowAA3JkE2CPFh5V8AAA--.1543S2;
+ Wed, 26 Jan 2022 16:37:11 +0800 (CST)
+Subject: Re: [RFC 4/5] target/riscv: Add *envcfg* CSRs support
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+References: <20220120200735.2739543-1-atishp@rivosinc.com>
+ <20220120200735.2739543-5-atishp@rivosinc.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <d27e6334-14e5-eaa4-836c-0a9cc0b1f34e@iscas.ac.cn>
-Date: Wed, 26 Jan 2022 16:08:46 +0800
+Message-ID: <91dbc7a1-f23f-709b-82e8-10e4c96e4482@iscas.ac.cn>
+Date: Wed, 26 Jan 2022 16:37:10 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20220124140023.1165850-1-cmuellner@linux.com>
+In-Reply-To: <20220120200735.2739543-5-atishp@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: zQCowAA3JkGOAfFhuRYAAA--.387S2
-X-Coremail-Antispam: 1UD129KBjvAXoWfGrWrCw43ZFyrur1UtF1UKFg_yoW8JFWxKo
- WxGr4xZrs5Kr13CFn5Cw1UXr17Xr409FZ3Jr4q9r1qgFs7Zr1fGr1Dtws5Jw48Jr1fKrWU
- Ja97JFy5Aa1rW3s3n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUYC7AC8VAFwI0_Gr0_Xr1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2
- x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWx
- JVW8Jr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
- CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka
- 0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2
- Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s02
- 6x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0x
- vE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE
- 42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2js
- IEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU2fOwUUUUU=
+X-CM-TRANSID: zQCowAA3JkE2CPFh5V8AAA--.1543S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3Gry7ur4kCrW5WrWkJr4xZwb_yoW3Gw4kpF
+ 1UuF98G3yvqFyIq3Z3Kry5WF13Aw1xGa9xZws7C395tF45J3yrGFnFgrsxJrW8Wa95Gr1j
+ va1qkr13Cr4DZa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
+ Y487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
+ WUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
+ 67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
+ IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rWUJVWrZr1U
+ MIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIda
+ VFxhVjvjDU0xZFpf9x0JU2fOwUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -70,382 +69,262 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2022 08:11:03 -0000
+X-List-Received-Date: Wed, 26 Jan 2022 08:37:22 -0000
 
 
-在 2022/1/24 下午10:00, Christoph Muellner 写道:
-> The RISC-V base cache management operation ISA extension has been
-> ratified [1]. This patch adds support for the defined instructions.
-> Overlap groups are used to resolve the overlapping patterns
-> of the prefetch*/ori and cbo_*/lq instructions.
+在 2022/1/21 上午4:07, Atish Patra 写道:
+> The RISC-V privileged specification v1.12 defines few execution
+> environment configuration CSRs that can be used enable/disable
+> extensions per privilege levels.
 >
-> This patch depends on a patchset that introduces the Priv 1.12 CSRs:
-> https://lists.nongnu.org/archive/html/qemu-devel/2022-01/msg04478.html
+> Add the basic support for these CSRs.
 >
-> [1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
->
-> v2:
-> - Fix overlapping instruction encoding with LQ instructions
-> - Drop CSR related changes and rebase on Priv 1.12 patchset
->
-> https://lists.gnu.org/archive/html/qemu-devel/2022-01/msg04213.html
->
-> Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Signed-off-by: Christoph Muellner <cmuellner@linux.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   target/riscv/cpu.c                        |  4 +
->   target/riscv/cpu.h                        |  4 +
->   target/riscv/cpu_bits.h                   |  5 ++
->   target/riscv/helper.h                     |  5 ++
->   target/riscv/insn32.decode                | 29 +++++++-
->   target/riscv/insn_trans/trans_zicbo.c.inc | 72 ++++++++++++++++++
->   target/riscv/op_helper.c                  | 89 +++++++++++++++++++++++
->   target/riscv/translate.c                  |  1 +
->   8 files changed, 207 insertions(+), 2 deletions(-)
->   create mode 100644 target/riscv/insn_trans/trans_zicbo.c.inc
+>   target/riscv/cpu.h      |  8 ++++
+>   target/riscv/cpu_bits.h | 31 +++++++++++++++
+>   target/riscv/csr.c      | 84 +++++++++++++++++++++++++++++++++++++++++
+>   target/riscv/machine.c  | 26 +++++++++++++
+>   4 files changed, 149 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 3cba82e560..0deed67497 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -721,6 +721,10 @@ static Property riscv_cpu_properties[] = {
->       DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
->       DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
->       DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-> +    DEFINE_PROP_BOOL("Zicbom", RISCVCPU, cfg.ext_zicbom, false),
-> +    DEFINE_PROP_BOOL("Zicbop", RISCVCPU, cfg.ext_zicbop, false),
-> +    DEFINE_PROP_BOOL("Zicboz", RISCVCPU, cfg.ext_zicboz, false),
-> +    DEFINE_PROP_UINT16("cbolen", RISCVCPU, cfg.cbolen, 64),
->       DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
->       DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
->       DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
 > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 2f678e6c4f..7612a59161 100644
+> index 7f87917204c5..b9462300a472 100644
 > --- a/target/riscv/cpu.h
 > +++ b/target/riscv/cpu.h
-> @@ -354,6 +354,9 @@ struct RISCVCPU {
->           bool ext_zfhmin;
->           bool ext_zve32f;
->           bool ext_zve64f;
-> +        bool ext_zicbom;
-> +        bool ext_zicbop;
-> +        bool ext_zicboz;
+> @@ -264,6 +264,14 @@ struct CPURISCVState {
+>       target_ulong spmbase;
+>       target_ulong upmmask;
+>       target_ulong upmbase;
+> +
+> +    /* CSRs for execution enviornment configuration */
+> +
+> +    target_ulong menvcfg;
+> +    target_ulong menvcfgh;
+
+I think we needn't maintain seperate menvcfg and menvcfgh, just use 
+"uint64_t menvcfg" as the way of mstatus.
+
+Similar to  henvcfg and henvcfg.
+
+> +    target_ulong senvcfg;
+> +    target_ulong henvcfg;
+> +    target_ulong henvcfgh;
+>   #endif
 >   
->           char *priv_spec;
->           char *user_spec;
-> @@ -361,6 +364,7 @@ struct RISCVCPU {
->           char *vext_spec;
->           uint16_t vlen;
->           uint16_t elen;
-> +        uint16_t cbolen;
->           bool mmu;
->           bool pmp;
->           bool epmp;
+>       float_status fp_status;
 > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 47ed4d6cab..62c38595d7 100644
+> index f6f90b5cbd52..afb237c2313b 100644
 > --- a/target/riscv/cpu_bits.h
 > +++ b/target/riscv/cpu_bits.h
-> @@ -464,6 +464,11 @@ typedef enum {
->   /* vsstatus CSR bits */
->   #define VSSTATUS64_UXL       0x0000000300000000ULL
+> @@ -177,6 +177,9 @@
+>   #define CSR_STVEC           0x105
+>   #define CSR_SCOUNTEREN      0x106
 >   
-> +/* [msh]envcfg CSR bits */
-> +#define ENVCFG_CBIE          (0b11 << 4)
-> +#define ENVCFG_CBCFE         (1 << 6)
-> +#define ENVCFG_CBZE          (1 << 7)
+> +/* Supervisor Configuration CSRs */
+> +#define CSR_SENVCFG         0x10A
 > +
->   /* Privilege modes */
->   #define PRV_U 0
->   #define PRV_S 1
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 72cc2582f4..0e068ac6cd 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -92,6 +92,11 @@ DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
->   DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
->   DEF_HELPER_FLAGS_1(fclass_h, TCG_CALL_NO_RWG_SE, tl, i64)
+>   /* Supervisor Trap Handling */
+>   #define CSR_SSCRATCH        0x140
+>   #define CSR_SEPC            0x141
+> @@ -204,6 +207,10 @@
+>   #define CSR_HTIMEDELTA      0x605
+>   #define CSR_HTIMEDELTAH     0x615
 >   
-> +/* Cache-block operations */
-> +DEF_HELPER_2(cbo_inval, void, env, tl)
-> +DEF_HELPER_2(cbo_clean, void, env, tl)
-> +DEF_HELPER_2(cbo_zero, void, env, tl)
+> +/* Hypervisor Configuration CSRs */
+> +#define CSR_HENVCFG         0x60A
+> +#define CSR_HENVCFGH        0x61A
 > +
->   /* Special functions */
->   DEF_HELPER_2(csrr, tl, env, int)
->   DEF_HELPER_3(csrw, void, env, int, tl)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 5bbedc254c..8d86628784 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -89,6 +89,8 @@
->   @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
->   @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+>   /* Virtual CSRs */
+>   #define CSR_VSSTATUS        0x200
+>   #define CSR_VSIE            0x204
+> @@ -218,6 +225,10 @@
+>   #define CSR_MTINST          0x34a
+>   #define CSR_MTVAL2          0x34b
 >   
-> +@cbo_pref   simm:7 ..... .....   ... ..... ....... %rs1
+> +/* Machine Configuration CSRs */
+> +#define CSR_MENVCFG         0x30A
+> +#define CSR_MENVCFGH        0x31A
 > +
->   # Formats 64:
->   @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+>   /* Enhanced Physical Memory Protection (ePMP) */
+>   #define CSR_MSECCFG         0x747
+>   #define CSR_MSECCFGH        0x757
+> @@ -578,6 +589,26 @@ typedef enum RISCVException {
+>   #define PM_EXT_CLEAN    0x00000002ULL
+>   #define PM_EXT_DIRTY    0x00000003ULL
 >   
-> @@ -128,7 +130,17 @@ addi     ............     ..... 000 ..... 0010011 @i
->   slti     ............     ..... 010 ..... 0010011 @i
->   sltiu    ............     ..... 011 ..... 0010011 @i
->   xori     ............     ..... 100 ..... 0010011 @i
-> -ori      ............     ..... 110 ..... 0010011 @i
-> +{
-> +  [
-> +    # *** RV32 Zicbop Sandard Extension (hints in the ori-space) ***
-> +    prefetch_i  ....... 00000 ..... 110 00000 0010011 @cbo_pref
-> +    prefetch_r  ....... 00001 ..... 110 00000 0010011 @cbo_pref
-> +    prefetch_w  ....... 00011 ..... 110 00000 0010011 @cbo_pref
-> +  ]
+> +/* Execution enviornment configuration bits */
+> +#define MENVCFG_FIOM                       (1 << 0)
+> +#define MENVCFG_CBE                        0x30000ULL
+> +#define MENVCFG_CBCFE                      (1 << 6)
+> +#define MENVCFG_CBZE                       (1 << 7)
+> +#define MENVCFG_PBMTE                      (1 << 62)
+> +#define MENVCFG_STCE                       (1 << 63)
 > +
-> +  # *** RV32I ori ***
-> +  ori      ............     ..... 110 ..... 0010011 @i
-> +}
->   andi     ............     ..... 111 ..... 0010011 @i
->   slli     00000. ......    ..... 001 ..... 0010011 @sh
->   srli     00000. ......    ..... 101 ..... 0010011 @sh
-> @@ -168,7 +180,20 @@ sraw     0100000 .....  ..... 101 ..... 0111011 @r
->   
->   # *** RV128I Base Instruction Set (in addition to RV64I) ***
->   ldu      ............   ..... 111 ..... 0000011 @i
-> -lq       ............   ..... 010 ..... 0001111 @i
-> +{
-> +  [
-> +    # *** RV32 Zicbom Standard Extension ***
-> +    cbo_clean  0000000 00001 ..... 010 00000 0001111 @sfence_vm
-> +    cbo_flush  0000000 00010 ..... 010 00000 0001111 @sfence_vm
-> +    cbo_inval  0000000 00000 ..... 010 00000 0001111 @sfence_vm
+> +#define SENVCFG_FIOM                       MENVCFG_FIOM
+> +#define SENVCFG_CBE                        MENVCFG_CBE
+> +#define SENVCFG_CBCFE                      MENVCFG_CBCFE
+> +#define SENVCFG_CBZE                       MENVCFG_CBZE
 > +
-> +    # *** RV32 Zicboz Standard Extension ***
-> +    cbo_zero   0000000 00100 ..... 010 00000 0001111 @sfence_vm
-> +  ]
+> +#define HENVCFG_FIOM                       MENVCFG_FIOM
+> +#define HENVCFG_CBE                        MENVCFG_CBE
+> +#define HENVCFG_CBCFE                      MENVCFG_CBCFE
+> +#define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_PBMTE                      MENVCFG_PBMTE
+> +#define HENVCFG_STCE                       MENVCFG_STCE
 > +
-> +  # *** RVI128 lq ***
-> +  lq       ............   ..... 010 ..... 0001111 @i
-> +}
->   sq       ............   ..... 100 ..... 0100011 @s
->   addid    ............  .....  000 ..... 1011011 @i
->   sllid    000000 ......  ..... 001 ..... 1011011 @sh6
-> diff --git a/target/riscv/insn_trans/trans_zicbo.c.inc b/target/riscv/insn_trans/trans_zicbo.c.inc
-> new file mode 100644
-> index 0000000000..e75f7d99e3
-> --- /dev/null
-> +++ b/target/riscv/insn_trans/trans_zicbo.c.inc
-> @@ -0,0 +1,72 @@
-> +/*
-> + * RISC-V translation routines for the RISC-V CBO Extension.
-> + *
-> + * Copyright (c) 2021 Philipp Tomsich, philipp.tomsich@vrull.eu
-> + *
-> + * This program is free software; you can redistribute it and/or modify it
-> + * under the terms and conditions of the GNU General Public License,
-> + * version 2 or later, as published by the Free Software Foundation.
-> + *
-> + * This program is distributed in the hope it will be useful, but WITHOUT
-> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-> + * more details.
-> + *
-> + * You should have received a copy of the GNU General Public License along with
-> + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> + */
-> +
-> +#define REQUIRE_ZICBOM(ctx) do {                 \
-> +    if (!RISCV_CPU(ctx->cs)->cfg.ext_zicbom) {   \
-> +        return false;                            \
-> +    }                                            \
-> +} while (0)
-> +
-> +#define REQUIRE_ZICBOZ(ctx) do {                 \
-> +    if (!RISCV_CPU(ctx->cs)->cfg.ext_zicboz) {   \
-> +        return false;                            \
-> +    }                                            \
-> +} while (0)
-> +
-> +static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
-> +{
-> +    REQUIRE_ZICBOM(ctx);
-> +    gen_helper_cbo_clean(cpu_env, cpu_gpr[a->rs1]);
-> +    return true;
-> +}
-> +
-> +static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
-> +{
-> +    REQUIRE_ZICBOM(ctx);
-> +    gen_helper_cbo_clean(cpu_env, cpu_gpr[a->rs1]);
-> +    return true;
-> +}
-> +
-> +static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
-> +{
-> +    REQUIRE_ZICBOM(ctx);
-> +    gen_helper_cbo_inval(cpu_env, cpu_gpr[a->rs1]);
-> +    return true;
-> +}
-> +
-> +static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
-> +{
-> +    REQUIRE_ZICBOZ(ctx);
-> +    gen_helper_cbo_zero(cpu_env, cpu_gpr[a->rs1]);
-> +    return true;
-> +}
-> +
-> +static bool trans_prefetch_i(DisasContext *ctx, arg_prefetch_i *a)
-> +{
-> +    return true;
-> +}
-> +
-
-If we add these instructions, maybe we need add REQUIRE_ZICBOP(ctx) here.
-
-> +static bool trans_prefetch_r(DisasContext *ctx, arg_prefetch_i *a)
-> +{
-> +    return true;
-> +}
-> +
-> +static bool trans_prefetch_w(DisasContext *ctx, arg_prefetch_i *a)
-> +{
-> +    return true;
-> +}
-> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-> index 1a75ba11e6..3c410358d4 100644
-> --- a/target/riscv/op_helper.c
-> +++ b/target/riscv/op_helper.c
-> @@ -3,6 +3,7 @@
->    *
->    * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
->    * Copyright (c) 2017-2018 SiFive, Inc.
-> + * Copyright (c) 2021      VRULL GmbH
->    *
->    * This program is free software; you can redistribute it and/or modify it
->    * under the terms and conditions of the GNU General Public License,
-> @@ -70,6 +71,33 @@ target_ulong helper_csrrw(CPURISCVState *env, int csr,
->       return val;
+>   /* Offsets for every pair of control bits per each priv level */
+>   #define XS_OFFSET    0ULL
+>   #define U_OFFSET     2ULL
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e66bf2201857..a4bbae7a1bbd 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -853,6 +853,77 @@ static RISCVException write_mtval(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
 >   }
 >   
-> +/* helper_zicbo_envcfg
-> + *
-> + * Raise virtual exceptions and illegal instruction exceptions for
-> + * Zicbo[mz] instructions based on the settings of [mhs]envcfg.
-> + */
-> +static void helper_zicbo_envcfg(CPURISCVState *env, target_ulong envbits)
+> +/* Execution environment configuration setup */
+> +static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
 > +{
-> +#ifndef CONFIG_USER_ONLY
-> +    target_ulong ra = GETPC();
-> +
-> +    /* Check for virtual instruction exceptions first, as we don't see
-> +     * VU and VS reflected in env->priv (these are just the translated
-> +     * U and S stated with virtualisation enabled.
-> +     */
-> +    if (riscv_cpu_virt_enabled(env) &&
-> +        (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
-> +         ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
-> +        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
-> +    }
-> +
-> +    if (((env->priv < PRV_M) && !get_field(env->menvcfg, envbits)) ||
-> +        ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits))) {
-> +        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
-> +    }
-> +#endif
+> +    *val = env->menvcfg;
+> +    return RISCV_EXCP_NONE;
 > +}
 > +
->   target_ulong helper_csrr_i128(CPURISCVState *env, int csr)
->   {
->       Int128 rv = int128_zero();
-> @@ -114,6 +142,67 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
->       return int128_getlo(rv);
->   }
+> +static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    env->menvcfg = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->menvcfgh;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    env->menvcfgh = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->senvcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    env->senvcfg = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->henvcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    env->henvcfg = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->henvcfgh;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    env->henvcfgh = val;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>   static RISCVException rmw_mip(CPURISCVState *env, int csrno,
+>                                 target_ulong *ret_value,
+>                                 target_ulong new_value, target_ulong write_mask)
+> @@ -2054,6 +2125,19 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>       [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
+>       [CSR_MIP]      = { "mip",      any,  NULL,    NULL, rmw_mip        },
 >   
-> +/* helper_zicbom_access
-> + *
-> + * Check access permissions (LOAD or STORE or FETCH) for Zicbom,
-> + * raising either store page-fault (non-virtualised) or store
-> + * guest-page fault (virtualised).
-> + */
-> +static void helper_zicbom_access(CPURISCVState *env, target_ulong address)
+> +    /* Execution environment configuration */
+> +    [CSR_MENVCFG]  = { "menvcfg",  any,     read_menvcfg,  write_menvcfg, NULL,
+> +                                            NULL, NULL, PRIV_VERSION_1_12_0},
+> +    [CSR_MENVCFGH] = { "menvcfgh", any32,   read_menvcfgh, write_menvcfgh, NULL,
+> +                                            NULL, NULL, PRIV_VERSION_1_12_0},
+> +    [CSR_SENVCFG]  = { "senvcfg",  smode,   read_senvcfg,  write_senvcfg, NULL,
+> +                                            NULL, NULL, PRIV_VERSION_1_12_0},
+> +    [CSR_HENVCFG]  = { "henvcfg",  hmode,   read_henvcfg, write_henvcfg, NULL,
+> +                                            NULL, NULL, PRIV_VERSION_1_12_0},
+> +    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh, NULL,
+> +                                            NULL, NULL, PRIV_VERSION_1_12_0},
+> +
+> +
+Two new lines here.
+>       /* Supervisor Trap Setup */
+>       [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
+>                                                 read_sstatus_i128                 },
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 13b9ab375b95..59479a999b87 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -185,6 +185,31 @@ static const VMStateDescription vmstate_rv128 = {
+>       }
+>   };
+>   
+> +/* TODO: henvcfg need both hyper_needed & envcfg_needed */
+> +static bool envcfg_needed(void *opaque)
 > +{
-> +    void* phost;
-> +    int ret = TLB_INVALID_MASK;
-> +    MMUAccessType access_type = MMU_DATA_LOAD;
-> +    target_ulong ra = GETPC();
+> +    RISCVCPU *cpu = opaque;
+> +    CPURISCVState *env = &cpu->env;
 > +
-> +    while (ret == TLB_INVALID_MASK && access_type <= MMU_INST_FETCH) {
-> +        ret = probe_access_flags(env, address, access_type++,
-> +                                 cpu_mmu_index(env, false),
-> +                                 true, &phost, ra);
-> +    }
-> +
-
-The permission check have been relaxed in the v1.0 spec . So I think 
-only do LOAD check is OK here.
-
-> +    if (ret == TLB_INVALID_MASK) {
-> +        uint32_t exc = RISCV_EXCP_STORE_PAGE_FAULT;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +        /* User-mode emulation does not have virtualisation... */
-> +        if (riscv_cpu_virt_enabled(env)) {
-> +            exc = RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
-> +        }
-> +#endif
-> +        riscv_raise_exception(env, exc, ra);
-> +    }
+> +    return (env->priv_ver >= PRIV_VERSION_1_12_0 ? 1 : 0);
 > +}
 > +
-
-It seems that  current implementation doesn't  take PMP check(access 
-fault) into consideration.
+> +static const VMStateDescription vmstate_envcfg = {
+> +    .name = "cpu/envcfg",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .needed = envcfg_needed,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINTTL(env.menvcfg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.menvcfgh, RISCVCPU),
+> +        VMSTATE_UINTTL(env.senvcfg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.henvcfg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.henvcfgh, RISCVCPU),
+> +
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+>   const VMStateDescription vmstate_riscv_cpu = {
+>       .name = "cpu",
+>       .version_id = 3,
+> @@ -240,6 +265,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>           &vmstate_vector,
+>           &vmstate_pointermasking,
+>           &vmstate_rv128,
+> +        &vmstate_envcfg,
+>           NULL
+>       }
+>   };
 
 Regards,
 
 Weiwei Li
-
-> +void helper_cbo_inval(CPURISCVState *env, target_ulong address)
-> +{
-> +    helper_zicbo_envcfg(env, ENVCFG_CBIE);
-> +    helper_zicbom_access(env, address);
-> +
-> +    /* We don't emulate the cache-hierarchy, so we're done. */
-> +}
-> +
-> +void helper_cbo_clean(CPURISCVState *env, target_ulong address)
-> +{
-> +    helper_zicbo_envcfg(env, ENVCFG_CBCFE);
-> +    helper_zicbom_access(env, address);
-> +
-> +    /* We don't emulate the cache-hierarchy, so we're done. */
-> +}
-> +
-> +void helper_cbo_zero(CPURISCVState *env, target_ulong address)
-> +{
-> +    helper_zicbo_envcfg(env, ENVCFG_CBZE);
-> +
-> +    /* mask off low-bits to align-down to the cache-block */
-> +    address &= ~(RISCV_CPU(env)->cfg.cbolen - 1);
-> +    void* mem = probe_access(env, address, 4, MMU_DATA_STORE,
-> +                             cpu_mmu_index(env, false), GETPC());
-> +
-> +    /* Zeroize the block */
-> +    memset(mem, 0, RISCV_CPU(env)->cfg.cbolen);
-> +}
-> +
->   #ifndef CONFIG_USER_ONLY
->   
->   target_ulong helper_sret(CPURISCVState *env)
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index f0bbe80875..8f25a6d02f 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -854,6 +854,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
->   #include "insn_trans/trans_rvv.c.inc"
->   #include "insn_trans/trans_rvb.c.inc"
->   #include "insn_trans/trans_rvzfh.c.inc"
-> +#include "insn_trans/trans_zicbo.c.inc"
->   #include "insn_trans/trans_privileged.c.inc"
->   
->   /* Include the auto-generated decoder for 16 bit insn */
 
 
