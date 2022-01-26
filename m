@@ -1,72 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nCTae-0003qL-PA
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 16:43:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:60600)
+	id 1nCVsS-000604-LO
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 19:09:32 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCTac-0003oD-Sd
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:42:58 -0500
-Received: from [2607:f8b0:4864:20::531] (port=43651
- helo=mail-pg1-x531.google.com)
+ id 1nCVsP-0005xd-FP
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 19:09:30 -0500
+Received: from [2607:f8b0:4864:20::1036] (port=37460
+ helo=mail-pj1-x1036.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCTaa-00087d-JT
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 16:42:58 -0500
-Received: by mail-pg1-x531.google.com with SMTP id g20so1273394pgn.10
- for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 13:42:56 -0800 (PST)
+ id 1nCVsM-0006EI-LH
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 19:09:29 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id
+ s2-20020a17090ad48200b001b501977b23so3214284pju.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 16:09:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=Kyhcw1i1SBBoYowtsywmXmAedG72zAVOvX1eb/yfMAE=;
- b=N78VcB4fEwKXxtUiociPqDt5s29RGpJPIMA6mdo2Yfk4HiSxnZMDHl4bgjGMc59MJ3
- A1EEQ1wNVUX4M9aaqf0SO3/ej9W35MdLecw41NoEm0/YjDTjfgd/XRPDHQ1yuRSJJDlt
- YSVgGgcSUfJXz/FXkQVffeQD4k4XLUcD3BfrWh1SaP+jqSWhAJm8uWmPbOGzFLPeA6T0
- joMSH4HJMOc4fG7Wk+rR0Nt5SRByxJXQR6/G5DSvMXChs/qxvK/0GmmE7Rpf7K5XSTzL
- 1m7SpWt/dCvH33zD0xex7/iv4crflgNrIrm9fL1UbmS2VmRtL0xz6Y2Xw0AAhNBYS2zP
- g5Jw==
+ bh=4HF7wLuxfSuEzncaeCa3tIHO8CR4NPk77onD3UVpJvg=;
+ b=itGmavk1zdREbPigpEtPtzfU/HVtIT2bVt9D/SEvH73RhRBj663/g7lqd/NbzwZn2v
+ v3stk3Lo2e9pf4zq6ULDDBHuqlGlb1Q4nMhAyJe15LSs7YMTSH+VoBwR6q1sLTIT68ND
+ 4eAdiX0Zc/hizL+X7pmbhskyILX9scEYqwITq9zB6MS+Co7ek/ou4IMZR9cfvzxt0Cez
+ QhZbzErrOLDrfIf/8TqnaI/vWzRkWrnCQGOecnVgUOseP1QLGwPw+x2Nj799aeCo6phE
+ L02Y6Qjtw6BTaHdRkQNQhPiwtoBTyDmhATJtUHwoZ6K8uwxf5CJryyF34/vyzbmC1iWB
+ XguA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=Kyhcw1i1SBBoYowtsywmXmAedG72zAVOvX1eb/yfMAE=;
- b=nLq2xE91TzSMctf1g4hpTZEcR7oxFI8i0SzkJajGN3tJbByXHX5TrLRhCaGE8STxLR
- UlPrqgT64s8dhBu2XWKSwB2MH7bCxC2L7nIxp9Pz7ElhVJjZ2we634Srk4m8n4lMHKkB
- 0YYZdHENaeNLDTOMYP9Q6oI5xmtvzX8Nw5IKMjTZVg6HK1NaUHORF93glpx8nCwRs3ms
- +NshkkSaVPmdjttzxK8VczX9FC9KKW1IFJN3NGjbKiaTI/hIJjHKEl9NpSl30RtSmOGh
- JxNCIbCNBZPTn5fKqMl/2AoydmXM+1I+3qG0wiQ4kY68XAroyQgo8GDHjvw6ZABtXPIx
- bssw==
-X-Gm-Message-State: AOAM533jhPaSYLlz3mccglPGEpIK03UpX6zG9yJiYwxBkTgK+3OE2fkA
- THgQaXUl9cf/tAZHE0gq+uC7Ag==
-X-Google-Smtp-Source: ABdhPJyCAlLfbhnfIyS0BEEx2DsBR0sxsdXvINHqt7o5HPZE28/AKo4ukYDEVc15lwVqRmngUvxu2w==
-X-Received: by 2002:a63:ce4c:: with SMTP id r12mr16645492pgi.21.1643146974811; 
- Tue, 25 Jan 2022 13:42:54 -0800 (PST)
+ bh=4HF7wLuxfSuEzncaeCa3tIHO8CR4NPk77onD3UVpJvg=;
+ b=U6G3to3JIgI5tW2MIa7FGxAJx25mb1PU3gUZh5IJmHhChVy17bq3URLKG8ok2H7l35
+ H5dabFPC0ErdnF5QzMgv+3rf8wNGFyYxhebPfbf8qpXjfHmYt0XSSpLpMo7aCWxjARLc
+ NzPWHCBrEnM1KN21s2NGShZltZ/I8Ah9UmZwXD/o5WmQTDe4cWF+U4+zdzFsfY716tKy
+ ELCem/tivSxTf2mCaFmVcF5piFn8YLtCsPfmKWjpNh+b9FJ/xa+2Gwu1emy/dNyg1D4/
+ 0Kr248kjQz8ARc6onazy5T9ptc+ko3rwpRlgPeGYFl414nIuVVwDOqZX8c1IImFWwpJM
+ vnHg==
+X-Gm-Message-State: AOAM5306JZ0o7DBQrRixxpRMncxqp62TcR24sLjq6JsNLyqfrXOnGzme
+ 3zVbnC5dzcBzv99e1gEYMg/rRg==
+X-Google-Smtp-Source: ABdhPJwU6JrfOAXbVOwlxvWATaGt8eYUk5wvgR3gNr6tBT5IfX/klz/uTl9DN7iB1liO6muoxmGK8A==
+X-Received: by 2002:a17:902:ab8d:b0:14a:98aa:b87 with SMTP id
+ f13-20020a170902ab8d00b0014a98aa0b87mr21208453plr.100.1643155764798; 
+ Tue, 25 Jan 2022 16:09:24 -0800 (PST)
 Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id l26sm15342635pgm.73.2022.01.25.13.42.51
+ by smtp.gmail.com with ESMTPSA id om6sm1478217pjb.24.2022.01.25.16.09.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Jan 2022 13:42:54 -0800 (PST)
-Subject: Re: [PATCH v2 2/2] target/riscv: Add XVentanaCondOps custom extension
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Bin Meng <bin.meng@windriver.com>,
- Greg Favor <gfavor@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Kito Cheng <kito.cheng@sifive.com>
-References: <20220113202033.3320854-1-philipp.tomsich@vrull.eu>
- <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
+ Tue, 25 Jan 2022 16:09:24 -0800 (PST)
+Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
+To: LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, alistair23@gmail.com,
+ Bin Meng <bin.meng@windriver.com>, palmer@dabbelt.com,
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>, bmeng.cn@gmail.com
+References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
+ <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <279dadc7-496b-6b04-a011-b5eb27162cf7@linaro.org>
-Date: Wed, 26 Jan 2022 08:42:47 +1100
+Message-ID: <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
+Date: Wed, 26 Jan 2022 11:09:15 +1100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20220113202033.3320854-2-philipp.tomsich@vrull.eu>
+In-Reply-To: <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::531
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1036
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x531.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -86,56 +91,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jan 2022 21:42:59 -0000
+X-List-Received-Date: Wed, 26 Jan 2022 00:09:30 -0000
 
-On 1/14/22 7:20 AM, Philipp Tomsich wrote:
-> new file mode 100644
-> index 0000000000..b8a5d031b5
-> --- /dev/null
-> +++ b/target/riscv/insn_trans/trans_xventanacondops.inc
+On 1/24/22 4:17 PM, LIU Zhiwei wrote:
+> 
+> On 2022/1/24 上午8:59, Alistair Francis wrote:
+>> From: Alistair Francis <alistair.francis@wdc.com>
+>>
+>> This series adds a MO_ op to specify that a load instruction should
+>> produce a store fault. This is used on RISC-V to produce a store/amo
+>> fault when an atomic access fails.
+> 
+> Hi Alistair,
+> 
+> As Richard said,  we  can address this issue in two ways, probe_read(I think probe_write 
+> is typo)
 
-The filename suffix should be ".c.inc".
+It is not a typo: we want to verify that the memory is writable before we perform the 
+load.  This will raise a write fault on a no-access page before a read fault would be 
+generated by the load.  This may still generate the wrong fault for a write-only page. 
+(Is such a page permission encoding possible with RISCV?  Not all cpus support that, since 
+at first blush it seems to be mostly useless.  But some do, and a generic tcg feature 
+should be designed with those in mind.)
 
-> +static bool gen_condmask(DisasContext *ctx, arg_r *a, TCGCond cond)
-> +{
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-> +
-> +    tcg_gen_movcond_tl(cond, dest, src2, ctx->zero, src1, ctx->zero);
-> +
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +    return true;
-> +}
-> +
-> +static bool trans_vt_maskc(DisasContext *ctx, arg_r *a)
-> +{
-> +    return gen_condmask(ctx, a, TCG_COND_NE);
-> +}
-> +
-> +static bool trans_vt_maskcn(DisasContext *ctx, arg_r *a)
-> +{
-> +    return gen_condmask(ctx, a, TCG_COND_EQ);
-> +}
+> In my opinion use MO_op in io_readx may be not right because the issue is not only with IO 
+> access. And MO_ op in io_readx is too later because the exception has been created when 
+> tlb_fill.
 
-Implementation looks good.
+You are correct that changing only io_readx is insufficient.  Very much so.
 
-> +#define MATERIALISE_EXT_PREDICATE(ext)  \
-> +    static inline bool has_ ## ext ## _p(CPURISCVState *env, \
-> +                                         DisasContext *ctx  __attribute__((__unused__)))  \
-> +    { \
-> +        return RISCV_CPU(ctx->cs)->cfg.ext_ ## ext ; \
-> +    }
+Alistair, you're only changing the reporting of MMIO faults for which read permission is 
+missing.  Importantly, the actual permission check is done elsewhere, and you aren't 
+changing that to perform a write access check.  Also, you very much need to handle normal 
+memory not just MMIO.  Which will require changes across all tcg/arch/, as well as in all 
+of the memory access helpers in accel/tcg/.
 
-Again, no inline.
-
-Don't look back to RISCV_CPU here.  We shouldn't even have access to that here, as it 
-leads to temptation to do invalid things at translation time (this isn't one of them, 
-since it only accesses constant state).  What we have been doing is copying ext_foo into 
-DisasContext in riscv_tr_init_disas_context.  Though it might be time to revisit that.
-
-Perhaps give the cpu->cfg structure type a name, e.g. RISCVCPUConfig.  Add  "const 
-RISCVCPUConfig *cfg" to DisasContext and copy the pointer across in init_disas_context.
+We may not want to add this check along the normal hot path of a normal load, but create 
+separate helpers for "load with write-permission-check".  And we should answer the 
+question of whether it should really be "load with read-write-permission-check", which 
+will make the changes to tcg/arch/ harder.
 
 
 r~
