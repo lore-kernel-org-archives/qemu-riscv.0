@@ -1,77 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nCVsS-000604-LO
-	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 19:09:32 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38598)
+	id 1nCWwZ-0008Qu-Ry
+	for mharc-qemu-riscv@gnu.org; Tue, 25 Jan 2022 20:17:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49260)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCVsP-0005xd-FP
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 19:09:30 -0500
-Received: from [2607:f8b0:4864:20::1036] (port=37460
- helo=mail-pj1-x1036.google.com)
+ id 1nCWwT-0008Mo-EU
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 20:17:46 -0500
+Received: from [2607:f8b0:4864:20::1033] (port=52959
+ helo=mail-pj1-x1033.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nCVsM-0006EI-LH
- for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 19:09:29 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id
- s2-20020a17090ad48200b001b501977b23so3214284pju.2
- for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 16:09:26 -0800 (PST)
+ id 1nCWwQ-0007yQ-KP
+ for qemu-riscv@nongnu.org; Tue, 25 Jan 2022 20:17:45 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id o64so21771088pjo.2
+ for <qemu-riscv@nongnu.org>; Tue, 25 Jan 2022 17:17:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=4HF7wLuxfSuEzncaeCa3tIHO8CR4NPk77onD3UVpJvg=;
- b=itGmavk1zdREbPigpEtPtzfU/HVtIT2bVt9D/SEvH73RhRBj663/g7lqd/NbzwZn2v
- v3stk3Lo2e9pf4zq6ULDDBHuqlGlb1Q4nMhAyJe15LSs7YMTSH+VoBwR6q1sLTIT68ND
- 4eAdiX0Zc/hizL+X7pmbhskyILX9scEYqwITq9zB6MS+Co7ek/ou4IMZR9cfvzxt0Cez
- QhZbzErrOLDrfIf/8TqnaI/vWzRkWrnCQGOecnVgUOseP1QLGwPw+x2Nj799aeCo6phE
- L02Y6Qjtw6BTaHdRkQNQhPiwtoBTyDmhATJtUHwoZ6K8uwxf5CJryyF34/vyzbmC1iWB
- XguA==
+ h=subject:to:references:from:message-id:date:user-agent:mime-version
+ :in-reply-to:content-language:content-transfer-encoding;
+ bh=ihsHOZ2FBQzlNIvnQDEEc9XCiMkpxQQQXrLkOHwsHnc=;
+ b=ecU35o6iNYiOSwougDP7Sn7GP8yF+LgiyFTYlOTuvZaQz0ouM/tzDKMnX331904aov
+ L6rXr06ic7IJZbF/sPp/qysRbFVYN4NMSXCrXsDtriqi0R2kPwG0kclRdFp9YQSWAjfv
+ Mgbu3HJf+w8eIpjrGNkBhily8UfbckbFSDT1kyggkyHSkZMFXaFXeZlD1fMlkqCFOUIy
+ 32c+Ko3T+xDw4QFK9kxu/hZUPb1Hdq3wuUdEhBNI5BN8HsezP4VagFA+1VBav1aQCXYV
+ PsVKTasgiI0reV4HETnfY29rhj+2ZN9OyjPQKHn5JdflKOYtIENjUsmyyxLrDAxezUP4
+ VGuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ h=x-gm-message-state:subject:to:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=4HF7wLuxfSuEzncaeCa3tIHO8CR4NPk77onD3UVpJvg=;
- b=U6G3to3JIgI5tW2MIa7FGxAJx25mb1PU3gUZh5IJmHhChVy17bq3URLKG8ok2H7l35
- H5dabFPC0ErdnF5QzMgv+3rf8wNGFyYxhebPfbf8qpXjfHmYt0XSSpLpMo7aCWxjARLc
- NzPWHCBrEnM1KN21s2NGShZltZ/I8Ah9UmZwXD/o5WmQTDe4cWF+U4+zdzFsfY716tKy
- ELCem/tivSxTf2mCaFmVcF5piFn8YLtCsPfmKWjpNh+b9FJ/xa+2Gwu1emy/dNyg1D4/
- 0Kr248kjQz8ARc6onazy5T9ptc+ko3rwpRlgPeGYFl414nIuVVwDOqZX8c1IImFWwpJM
- vnHg==
-X-Gm-Message-State: AOAM5306JZ0o7DBQrRixxpRMncxqp62TcR24sLjq6JsNLyqfrXOnGzme
- 3zVbnC5dzcBzv99e1gEYMg/rRg==
-X-Google-Smtp-Source: ABdhPJwU6JrfOAXbVOwlxvWATaGt8eYUk5wvgR3gNr6tBT5IfX/klz/uTl9DN7iB1liO6muoxmGK8A==
-X-Received: by 2002:a17:902:ab8d:b0:14a:98aa:b87 with SMTP id
- f13-20020a170902ab8d00b0014a98aa0b87mr21208453plr.100.1643155764798; 
- Tue, 25 Jan 2022 16:09:24 -0800 (PST)
+ bh=ihsHOZ2FBQzlNIvnQDEEc9XCiMkpxQQQXrLkOHwsHnc=;
+ b=wXU3h/2kBGXmh6n6Iqzt33k1GUEQILV33Z8+4wj+NHT+AioVPApedMzApIQSuenoLv
+ kuvTiWf8Ep1LCH7F30Rx+eO6jNzePlz9S7vn9VRPTYmoU0u5fvEQIdPu5d88qjWPF4F3
+ u5Qz+1UoNv8Svd/N5tIooqcWZsF2e8Rc3E5e3nft5grnGAnMvJrXHtn23xtk3HYomyfW
+ nBuSgPjJMLpjvspOIxShjjtfrkvsu5DDqYKUqFsyisAd8/lvgYNI/fnjOk9xir9xHKLd
+ aQ9pGIojP4yKHl+nV0nYyPYgTvTLr0GtMZb9rDAgDS34wsGLItLQSXCJdOy6Z2guSecv
+ LZBA==
+X-Gm-Message-State: AOAM533tC+N+c1kbqoTIFSK14gtBz9fGu2T5SFDOybnUMXWFf8PnBcbK
+ KzX2a0NDXs7vCDvGnYMbcOFGmw==
+X-Google-Smtp-Source: ABdhPJzVgudiIK9mFi5Iy5YN37azX1D/UgfQSz266lS+MJsv+iRyxGIxor8baIaJJ6GRkg+bIHOMEg==
+X-Received: by 2002:a17:90b:3803:: with SMTP id
+ mq3mr6198326pjb.103.1643159860607; 
+ Tue, 25 Jan 2022 17:17:40 -0800 (PST)
 Received: from [192.168.15.44] (alanje.lnk.telstra.net. [120.151.179.201])
- by smtp.gmail.com with ESMTPSA id om6sm1478217pjb.24.2022.01.25.16.09.19
+ by smtp.gmail.com with ESMTPSA id u18sm218699pfi.185.2022.01.25.17.17.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Jan 2022 16:09:24 -0800 (PST)
-Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
-To: LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, alistair23@gmail.com,
- Bin Meng <bin.meng@windriver.com>, palmer@dabbelt.com,
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>, bmeng.cn@gmail.com
-References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
- <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
+ Tue, 25 Jan 2022 17:17:40 -0800 (PST)
+Subject: Re: [PATCH v2] target/riscv: Enable bitmanip Zicbo[m,z,p] instructions
+To: Christoph Muellner <cmuellner@linux.com>,
+ Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>,
+ =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Philipp Tomsich <philipp.tomsich@vrull.eu>
+References: <20220124140023.1165850-1-cmuellner@linux.com>
 From: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
-Date: Wed, 26 Jan 2022 11:09:15 +1100
+Message-ID: <437cfc65-bf60-2524-387e-cca2f8aff4c6@linaro.org>
+Date: Wed, 26 Jan 2022 12:17:33 +1100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
+In-Reply-To: <20220124140023.1165850-1-cmuellner@linux.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1036
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1033
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -12
 X-Spam_score: -1.3
 X-Spam_bar: -
@@ -91,45 +88,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jan 2022 00:09:30 -0000
+X-List-Received-Date: Wed, 26 Jan 2022 01:17:47 -0000
 
-On 1/24/22 4:17 PM, LIU Zhiwei wrote:
-> 
-> On 2022/1/24 上午8:59, Alistair Francis wrote:
->> From: Alistair Francis <alistair.francis@wdc.com>
->>
->> This series adds a MO_ op to specify that a load instruction should
->> produce a store fault. This is used on RISC-V to produce a store/amo
->> fault when an atomic access fails.
-> 
-> Hi Alistair,
-> 
-> As Richard said,  we  can address this issue in two ways, probe_read(I think probe_write 
-> is typo)
+On 1/25/22 1:00 AM, Christoph Muellner wrote:
+> -ori      ............     ..... 110 ..... 0010011 @i
+> +{
+> +  [
+> +    # *** RV32 Zicbop Sandard Extension (hints in the ori-space) ***
+> +    prefetch_i  ....... 00000 ..... 110 00000 0010011 @cbo_pref
+> +    prefetch_r  ....... 00001 ..... 110 00000 0010011 @cbo_pref
+> +    prefetch_w  ....... 00011 ..... 110 00000 0010011 @cbo_pref
+> +  ]
+> +
+> +  # *** RV32I ori ***
+> +  ori      ............     ..... 110 ..... 0010011 @i
+> +}
 
-It is not a typo: we want to verify that the memory is writable before we perform the 
-load.  This will raise a write fault on a no-access page before a read fault would be 
-generated by the load.  This may still generate the wrong fault for a write-only page. 
-(Is such a page permission encoding possible with RISCV?  Not all cpus support that, since 
-at first blush it seems to be mostly useless.  But some do, and a generic tcg feature 
-should be designed with those in mind.)
+Hmm.  I would simply add a comment about these, without changing any code.  They are 
+implemented as nops, so there's no point in the decode distinguishing these from the 
+"normal" nop that ori r0, rx, y will (not) generate.
 
-> In my opinion use MO_op in io_readx may be not right because the issue is not only with IO 
-> access. And MO_ op in io_readx is too later because the exception has been created when 
-> tlb_fill.
+> +static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
+> +{
+> +    REQUIRE_ZICBOM(ctx);
+> +    gen_helper_cbo_clean(cpu_env, cpu_gpr[a->rs1]);
+> +    return true;
+> +}
+> +
+> +static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
+> +{
+> +    REQUIRE_ZICBOM(ctx);
+> +    gen_helper_cbo_clean(cpu_env, cpu_gpr[a->rs1]);
+> +    return true;
+> +}
 
-You are correct that changing only io_readx is insufficient.  Very much so.
+Clean and flush are the same thing?
 
-Alistair, you're only changing the reporting of MMIO faults for which read permission is 
-missing.  Importantly, the actual permission check is done elsewhere, and you aren't 
-changing that to perform a write access check.  Also, you very much need to handle normal 
-memory not just MMIO.  Which will require changes across all tcg/arch/, as well as in all 
-of the memory access helpers in accel/tcg/.
+> +/* helper_zicbo_envcfg
+> + *
+> + * Raise virtual exceptions and illegal instruction exceptions for
+> + * Zicbo[mz] instructions based on the settings of [mhs]envcfg.
+> + */
+> +static void helper_zicbo_envcfg(CPURISCVState *env, target_ulong envbits)
+> +{
+> +#ifndef CONFIG_USER_ONLY
+> +    target_ulong ra = GETPC();
 
-We may not want to add this check along the normal hot path of a normal load, but create 
-separate helpers for "load with write-permission-check".  And we should answer the 
-question of whether it should really be "load with read-write-permission-check", which 
-will make the changes to tcg/arch/ harder.
+GETPC may only be called from the outermost helper function (the one directly invoked from 
+tcg generated code).  This will not unwind the cpu state correctly.
+
+> +static void helper_zicbom_access(CPURISCVState *env, target_ulong address)
+> +{
+> +    void* phost;
+> +    int ret = TLB_INVALID_MASK;
+> +    MMUAccessType access_type = MMU_DATA_LOAD;
+> +    target_ulong ra = GETPC();
+
+Likewise.
+
+> +    address &= ~(RISCV_CPU(env)->cfg.cbolen - 1);
+
+RISCV_CPU is to be applied to CPUState, not CPUArchState.  You've dereferenced the wrong 
+pointer.  You want env_archcpu() instead.  Pull that out to a local variable for clarity 
+and do not...
+
+> +    /* Zeroize the block */
+> +    memset(mem, 0, RISCV_CPU(env)->cfg.cbolen);
+
+... call it twice.  Also, s/zeroize/zero/.
 
 
 r~
