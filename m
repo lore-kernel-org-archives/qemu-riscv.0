@@ -1,45 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nDN2s-0004Lm-5K
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 03:55:50 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54848)
+	id 1nDN2v-0004Qu-6u
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 03:55:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:54870)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDN2m-0004GB-Jl; Fri, 28 Jan 2022 03:55:45 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25]:57558 helo=cstnet.cn)
+ id 1nDN2p-0004HR-0h; Fri, 28 Jan 2022 03:55:47 -0500
+Received: from smtp25.cstnet.cn ([159.226.251.25]:57552 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDN2i-0002Jk-Rk; Fri, 28 Jan 2022 03:55:43 -0500
+ id 1nDN2j-0002Jg-1R; Fri, 28 Jan 2022 03:55:44 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAAX+fGCr_NhQg8YAA--.29604S3;
- Fri, 28 Jan 2022 16:55:33 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAAX+fGCr_NhQg8YAA--.29604S5;
+ Fri, 28 Jan 2022 16:55:34 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: anup@brainfault.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ren_guo@c-sky.com,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v7 1/5] target/riscv: Ignore reserved bits in PTE for RV64
-Date: Fri, 28 Jan 2022 16:54:57 +0800
-Message-Id: <20220128085501.8014-2-liweiwei@iscas.ac.cn>
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v7 3/5] target/riscv: add support for svnapot extension
+Date: Fri, 28 Jan 2022 16:54:59 +0800
+Message-Id: <20220128085501.8014-4-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220128085501.8014-1-liweiwei@iscas.ac.cn>
 References: <20220128085501.8014-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: zQCowAAX+fGCr_NhQg8YAA--.29604S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxJFykXw15Cw48WFW7Jr1xuFg_yoW5Xry8pr
- Z7Ga4fArWDXFZ3JayfKF15twn8Jws29r4rCws7urnrtF4rXrZ5W3Wqk3WIvFnxXF18WF1Y
- 9F1qkFy5AF4DZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBmb7Iv0xC_tr1lb4IE77IF4wAFF20E14v26ryj6rWUM7CY07I2
- 0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
- 8067AKxVWUGwA2048vs2IY020Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF
- 64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcV
- CY1x0267AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv
- 6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
- 02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
- 4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l42
- xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWU
- GwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI4
- 8JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4U
- MIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I
- 8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxUcy8BUUUUU
+X-CM-TRANSID: zQCowAAX+fGCr_NhQg8YAA--.29604S5
+X-Coremail-Antispam: 1UD129KBjvJXoWxCr4kXw4DtrW8Xw4xtr4UCFg_yoW5XrW8pF
+ s5G39FkFZ7JFW3ta1xKF1Dtw1rGw4Y93yF9a1xZrs7Cw4rJrWrW3WDKws09F4UXF48Xr1a
+ 9a1DZF1YyrW8ZaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
+ 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
+ IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
+ Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2
+ xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMI
+ IF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU
+ =
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
@@ -62,101 +63,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2022 08:55:46 -0000
+X-List-Received-Date: Fri, 28 Jan 2022 08:55:47 -0000
 
-From: Guo Ren <ren_guo@c-sky.com>
+- add PTE_N bit
+- add PTE_N bit check for inner PTE
+- update address translation to support 64KiB continuous region (napot_bits = 4)
 
-Highest bits of PTE has been used for svpbmt, ref: [1], [2], so we
-need to ignore them. They cannot be a part of ppn.
-
-1: The RISC-V Instruction Set Manual, Volume II: Privileged Architecture
-   4.4 Sv39: Page-Based 39-bit Virtual-Memory System
-   4.5 Sv48: Page-Based 48-bit Virtual-Memory System
-
-2: https://github.com/riscv/virtual-memory/blob/main/specs/663-Svpbmt-diff.pdf
-
-Signed-off-by: Guo Ren <ren_guo@c-sky.com>
-Reviewed-by: Liu Zhiwei <zhiwei_liu@c-sky.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Anup Patel <anup@brainfault.org>
 ---
- target/riscv/cpu.h        | 15 +++++++++++++++
- target/riscv/cpu_bits.h   |  3 +++
- target/riscv/cpu_helper.c | 14 +++++++++++++-
- 3 files changed, 31 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c        |  2 ++
+ target/riscv/cpu_bits.h   |  1 +
+ target/riscv/cpu_helper.c | 17 ++++++++++++++---
+ 3 files changed, 17 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 55635d68d5..336fe8e3d5 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -341,6 +341,8 @@ struct RISCVCPU {
-         bool ext_counters;
-         bool ext_ifencei;
-         bool ext_icsr;
-+        bool ext_svnapot;
-+        bool ext_svpbmt;
-         bool ext_zfh;
-         bool ext_zfhmin;
-         bool ext_zve32f;
-@@ -495,6 +497,19 @@ static inline int riscv_cpu_xlen(CPURISCVState *env)
-     return 16 << env->xl;
- }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1cb0436187..8752fa1544 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -729,6 +729,8 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
  
-+#ifdef TARGET_RISCV32
-+#define riscv_cpu_sxl(env)  ((void)(env), MXL_RV32)
-+#else
-+static inline RISCVMXL riscv_cpu_sxl(CPURISCVState *env)
-+{
-+#ifdef CONFIG_USER_ONLY
-+    return env->misa_mxl;
-+#else
-+    return get_field(env->mstatus, MSTATUS64_SXL);
-+#endif
-+}
-+#endif
++    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
 +
- /*
-  * Encode LMUL to lmul as follows:
-  *     LMUL    vlmul    lmul
+     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7c87433645..6ea3944423 100644
+index 6ea3944423..f6ff1c5012 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -493,6 +493,9 @@ typedef enum {
+@@ -489,6 +489,7 @@ typedef enum {
+ #define PTE_A               0x040 /* Accessed */
+ #define PTE_D               0x080 /* Dirty */
+ #define PTE_SOFT            0x300 /* Reserved for Software */
++#define PTE_N               0x8000000000000000 /* NAPOT translation */
+ 
  /* Page table PPN shift amount */
  #define PTE_PPN_SHIFT       10
- 
-+/* Page table PPN mask */
-+#define PTE_PPN_MASK        0x3FFFFFFFFFFC00ULL
-+
- /* Leaf page shift amount */
- #define PGSHIFT             12
- 
 diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 327a2c4f1d..5a1c0e239e 100644
+index b820166dc5..6262d157e2 100644
 --- a/target/riscv/cpu_helper.c
 +++ b/target/riscv/cpu_helper.c
-@@ -622,7 +622,19 @@ restart:
+@@ -641,7 +641,7 @@ restart:
              return TRANSLATE_FAIL;
-         }
- 
--        hwaddr ppn = pte >> PTE_PPN_SHIFT;
-+        hwaddr ppn;
-+        RISCVCPU *cpu = env_archcpu(env);
+         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+             /* Inner PTE, continue walking */
+-            if (pte & (PTE_D | PTE_A | PTE_U)) {
++            if (pte & (target_ulong)(PTE_D | PTE_A | PTE_U | PTE_N)) {
+                 return TRANSLATE_FAIL;
+             }
+             base = ppn << PGSHIFT;
+@@ -717,8 +717,19 @@ restart:
+             /* for superpage mappings, make a fake leaf PTE for the TLB's
+                benefit. */
+             target_ulong vpn = addr >> PGSHIFT;
+-            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+-                        (addr & ~TARGET_PAGE_MASK);
 +
-+        if (riscv_cpu_sxl(env) == MXL_RV32) {
-+            ppn = pte >> PTE_PPN_SHIFT;
-+        } else if (cpu->cfg.ext_svpbmt || cpu->cfg.ext_svnapot) {
-+            ppn = (pte & (target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT;
-+        } else {
-+            ppn = pte >> PTE_PPN_SHIFT;
-+            if ((pte & ~(target_ulong)PTE_PPN_MASK) >> PTE_PPN_SHIFT) {
-+                return TRANSLATE_FAIL;
++            int napot_bits = 0;
++            if (cpu->cfg.ext_svnapot && (pte & (target_ulong)PTE_N)) {
++                napot_bits = ctzl(ppn) + 1;
++                if ((i != (levels - 1)) || (napot_bits != 4)) {
++                    return TRANSLATE_FAIL;
++                }
 +            }
-+        }
++
++            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
++                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
++                          (vpn & (((target_ulong)1 << ptshift) - 1))
++                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
  
-         if (!(pte & PTE_V)) {
-             /* Invalid PTE */
+             /* set permissions on the TLB entry */
+             if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
 -- 
 2.17.1
 
