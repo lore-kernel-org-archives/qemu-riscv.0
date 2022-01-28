@@ -1,51 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nDN2w-0004Vo-T6
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 03:55:54 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:54864)
+	id 1nDR8N-0006Dg-0G
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 08:17:47 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49846)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDN2p-0004HL-0J; Fri, 28 Jan 2022 03:55:47 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25]:57530 helo=cstnet.cn)
+ id 1nDR8B-000688-H5; Fri, 28 Jan 2022 08:17:39 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:53824 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDN2i-0002H6-Si; Fri, 28 Jan 2022 03:55:44 -0500
+ id 1nDR87-0000e2-7c; Fri, 28 Jan 2022 08:17:34 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAAX+fGCr_NhQg8YAA--.29604S2;
- Fri, 28 Jan 2022 16:55:31 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABXd5jL7PNhJ3MVAA--.49965S8;
+ Fri, 28 Jan 2022 21:17:06 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: anup@brainfault.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ren_guo@c-sky.com,
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v7 0/5] support subsets of virtual memory extension
-Date: Fri, 28 Jan 2022 16:54:56 +0800
-Message-Id: <20220128085501.8014-1-liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 6/6] target/riscv: expose zfinx, zdinx,
+ zhinx{min} properties
+Date: Fri, 28 Jan 2022 21:16:43 +0800
+Message-Id: <20220128131643.13938-7-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: zQCowAAX+fGCr_NhQg8YAA--.29604S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZrW3Jw1UKw4kXr18uw4kZwb_yoW8AF48pF
- 45K3yakFZ8tFZ7Jw4ftF18Ar45Xw48ur45Jwn3Jw1kXa13ZrW5Jrnak3y3CryUWFy0gry2
- 9F4Uur13uayUJrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUv014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
- 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
- IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
- AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_
- Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUb
- XdbUUUUUU==
+In-Reply-To: <20220128131643.13938-1-liweiwei@iscas.ac.cn>
+References: <20220128131643.13938-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: rQCowABXd5jL7PNhJ3MVAA--.49965S8
+X-Coremail-Antispam: 1UD129KBjvdXoW7GFyrJF43Ww4xXrW7Cry7GFg_yoWkXrX_Jr
+ y09F1vy34UXF9F9r1DAw1UKr4Fkry0g3Z0gF4ayay3GFW8WF15Aw1vkw4fGr1qkr43CF1f
+ AFyxJrZrG39IvjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbq8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
+ 1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
+ M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+ v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+ F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
+ IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
+ wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
+ 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x0267AK
+ xVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F
+ 4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
+ UUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=liweiwei@iscas.ac.cn;
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+X-Spam_score_int: -25
+X-Spam_score: -2.6
+X-Spam_bar: --
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
  SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -60,62 +64,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2022 08:55:47 -0000
+X-List-Received-Date: Fri, 28 Jan 2022 13:17:42 -0000
 
-This patchset implements virtual memory related RISC-V extensions: Svnapot version 1.0, Svinval vesion 1.0, Svpbmt version 1.0. 
+Co-authored-by: ardxwe <ardxwe@gmail.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Specification:
-https://github.com/riscv/virtual-memory/tree/main/specs
-
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-virtmem-upstream-v7
-
-To test this implementation, specify cpu argument with 'svinval=true,svnapot=true,svpbmt=true'.
-
-This implementation can pass the riscv-tests for rv64ssvnapot.
-
-v7:
-* delete definition of PTE_PPN_MASK for TARGET_RISCV32
-* make riscv_cpu_sxl works for user mode
-* add commit msg for patch 2
-
-v6:
-* select ppn mask base on sxl
-
-v5:
-* merge patch https://lore.kernel.org/qemu-devel/1569456861-8502-1-git-send-email-guoren@kernel.org/
-* relax pte attribute check
-
-v4:
-* fix encodings for hinval_vvma and hinval_gvma
-* partition inner PTE check into several steps
-* improve commit messages to describe changes
-
-v3:
-* drop "x-" in exposed properties
-
-v2:
-* add extension check for svnapot and svpbmt
-
-Guo Ren (1):
-  target/riscv: Ignore reserved bits in PTE for RV64
-
-Weiwei Li (4):
-  target/riscv: add PTE_A/PTE_D/PTE_U bits check for inner PTE
-  target/riscv: add support for svnapot extension
-  target/riscv: add support for svinval extension
-  target/riscv: add support for svpbmt extension
-
- target/riscv/cpu.c                          |  4 ++
- target/riscv/cpu.h                          | 16 +++++
- target/riscv/cpu_bits.h                     |  6 ++
- target/riscv/cpu_helper.c                   | 34 +++++++++-
- target/riscv/insn32.decode                  |  7 ++
- target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
- target/riscv/translate.c                    |  1 +
- 7 files changed, 140 insertions(+), 3 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 7006e6647b..e96d0a73f5 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -746,6 +746,11 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+ 
++    DEFINE_PROP_BOOL("Zdinx", RISCVCPU, cfg.ext_zdinx, false),
++    DEFINE_PROP_BOOL("Zfinx", RISCVCPU, cfg.ext_zfinx, false),
++    DEFINE_PROP_BOOL("Zhinx", RISCVCPU, cfg.ext_zhinx, false),
++    DEFINE_PROP_BOOL("Zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
++
+     /* These are experimental so mark with 'x-' */
+     DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+     /* ePMP 0.9.3 */
 -- 
 2.17.1
 
