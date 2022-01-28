@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nDJjJ-00025J-U9
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 00:23:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50368)
+	id 1nDJlH-0002LY-3a
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 00:25:27 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nDJjF-000248-Fm; Fri, 28 Jan 2022 00:23:22 -0500
-Received: from [2607:f8b0:4864:20::d30] (port=45817
- helo=mail-io1-xd30.google.com)
+ id 1nDJkg-0002Iu-Ao; Fri, 28 Jan 2022 00:24:50 -0500
+Received: from [2607:f8b0:4864:20::d29] (port=44987
+ helo=mail-io1-xd29.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nDJjD-0006ZK-T5; Fri, 28 Jan 2022 00:23:21 -0500
-Received: by mail-io1-xd30.google.com with SMTP id s18so6399928ioa.12;
- Thu, 27 Jan 2022 21:23:19 -0800 (PST)
+ id 1nDJkc-0006cd-Io; Fri, 28 Jan 2022 00:24:48 -0500
+Received: by mail-io1-xd29.google.com with SMTP id p63so5567360iod.11;
+ Thu, 27 Jan 2022 21:24:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QhIG/ECTxvcC2ZjOERhrRIhE5u9ElhunErGFfFqbcmE=;
- b=SNpiBuvYQtgTl7rjOf6ASWFuaioapy0ts6+1JVANy4FBQm+4BFAq27rHhb9o4+KWXQ
- 71swFrsH4wpt7DcATOIBiE0Tj/8KszOH8oyA+JvctnqK222g6Tm4JLYccbohB7p9qgkf
- 4nAlHOYFZ8/8InQDoThP/aFyj1P33hVmW6kCogZ4ouebpgcWQog0XFgzOoAkkOjZlB5j
- ZiePq3KExlQsQlgabaXJM5abifgY9Eazce6ab6fGI5rK19S7Ov34w7zXyepaBFf76/Eo
- GoEbWd636toN4yFMC/CLxA/gTy8ceIo8PoyzuaRYRsbnEEG8c59MpA602mXsyg7wqoN8
- KOdQ==
+ :cc; bh=/7Rzz7XDvG2StgENnegg9VlNHYH2oCb8vPWsmy+YA/k=;
+ b=Jajctx83qqxqSAtXFDvRECJBm5dA2lgfsL2skVmzbSIgHwMzhX+ts1lcYg16r1xSqB
+ 7Ai5tkUUP+MUxbwgS525/x71R8vjtyxUUBMWj/0IKX5TsSaRLtASEecNMXVNnbdfTeEq
+ CTCIwNsWJfc/91MFm1+uXYWzy+aYiEUCPuls1EyFX1hzssqcXRZegtektG6XR5btv/Fe
+ 2gggaYY3vEeqwT7DwQT5YwY0PVO7YbJsWiXFNUY6o9fb0WKzwNjKqZMyqVsSbaESOcWX
+ o2w8n5w5mv3JkBfjKyoz4nqs5p3EgvxJJg64ZH5inAGBiIM3TdS31JMcPMcynmcM/n2x
+ 9meA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=QhIG/ECTxvcC2ZjOERhrRIhE5u9ElhunErGFfFqbcmE=;
- b=xMboTHMv/3wxU/KgI8euCTDP3gdAhG9XAR8qb6LZ3wVXU086M1EMwXTYgAqYY+Fi1R
- 4DtqespADQU5bUZyH9u/Zm92NY+5nRS4npSuLIINcje9ftWTDMGXXJhvo+/yYc6w9b7m
- hXu0S5XTq0ZMnp9ZUp3wDMKCthcaoFW0JgJH8z+ENYYss1J2r8NUEoqZQiFgVGX/Z1Th
- KOckEeyZFFUJqYGyoUDQaBUCEIqLmu5dXwAY7uczaYFo9sOuUNuPUGTsoOlj8gngrLRE
- RiI+tDoVTc4e0iKG2NeZZOV5w6mWHAnkMU0B39p7SN7NqXuVwhW/Xugq/BivlVQo03JZ
- +nEg==
-X-Gm-Message-State: AOAM530tJk9yWAAijlG4HPMxlosgxTgEr1q7fIVx6i24T3y0bhkZFuSQ
- X3Ea93odb/O29WW8uMqHlq+PC0tQ9IOIYvb9dnY=
-X-Google-Smtp-Source: ABdhPJzvDL4VESOE4gMIWr1X4sQXTC7CNqDHKNs/KQWghsJrduSAEEXf/7R0aBY7KMu11f+QkZnVILpgo7BsBa4lZlY=
-X-Received: by 2002:a02:3b2d:: with SMTP id c45mr3802559jaa.125.1643347398526; 
- Thu, 27 Jan 2022 21:23:18 -0800 (PST)
+ bh=/7Rzz7XDvG2StgENnegg9VlNHYH2oCb8vPWsmy+YA/k=;
+ b=gkH+JxPo4AFsBsAURXRci45Kk7O/KZdRpcRrxFtqUowQ3kOnwrhIs/HK7Uud2lp+/k
+ cWTX7EBH1LHAWgvx5J/c0hwnr8tu8Ifr1Kcwrvg5N+ddEpX9UruXnLybmnOB8/7Bm29P
+ dSGAQm0Zh3AiS0JmZCOrdUoQzFSobC/qBsx9ffYUaDdIMDLmFaBynhffHa9LIUoRoC8X
+ KHtR/mdq7qi+3pbAXXd7KshUFoY/R7fwCgdbYwIlip8wHVu0KtFJmuzJBK2W5583GiYv
+ Eqy6uPEbPlZKpvfjdl8yMY01IC2p8Gx7yUTjKuG420hOn9FGl7XVvXH0zMnn1OHGNiiJ
+ xu9Q==
+X-Gm-Message-State: AOAM533zbKgcB63BxYomTt2J1AXR0Jr1611CfnmxZcjCSL66W9LL+2tM
+ TKoYvH5E4rSuQSNRevD4ISw0gJ/iaJBEmsSMzRw=
+X-Google-Smtp-Source: ABdhPJzu54z48BYLys48JKpbW59Uh3JTj2mEMhb1+xyYeJQPl1bTSKCKpo+nXhshq78AD4vO/B5QLxh+fR90FAvbk8c=
+X-Received: by 2002:a02:9606:: with SMTP id c6mr3578446jai.169.1643347477913; 
+ Thu, 27 Jan 2022 21:24:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20220113014959.21429-1-liweiwei@iscas.ac.cn>
- <20220113014959.21429-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220113014959.21429-2-liweiwei@iscas.ac.cn>
+ <20220113014959.21429-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220113014959.21429-7-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 28 Jan 2022 15:22:52 +1000
-Message-ID: <CAKmqyKN9uSd9Bd063S6nmwo+RCassbuyOn0isUStcQD4b1orEQ@mail.gmail.com>
-Subject: Re: [PATCH v4 1/6] target/riscv: add cfg properties for zfinx, zdinx
- and zhinx{min}
+Date: Fri, 28 Jan 2022 15:24:11 +1000
+Message-ID: <CAKmqyKOMxX8JZwnub7ohJ3iqtHq6hOu4joryTE0v_3O1OnZ7vA@mail.gmail.com>
+Subject: Re: [PATCH v4 6/6] target/riscv: expose zfinx, zdinx,
+ zhinx{min} properties
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,10 +55,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, ardxwe@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -79,9 +79,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2022 05:23:23 -0000
+X-List-Received-Date: Fri, 28 Jan 2022 05:24:52 -0000
 
-On Thu, Jan 13, 2022 at 11:51 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Thu, Jan 13, 2022 at 11:56 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
 > Co-authored-by: ardxwe <ardxwe@gmail.com>
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
@@ -93,88 +93,25 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c       | 12 ++++++++++++
->  target/riscv/cpu.h       |  4 ++++
->  target/riscv/translate.c |  8 ++++++++
->  3 files changed, 24 insertions(+)
+>  target/riscv/cpu.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9bc25d3055..fc3ec5bca1 100644
+> index fc3ec5bca1..d5e772b2b8 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -518,6 +518,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              cpu->cfg.ext_d = true;
->          }
+> @@ -685,6 +685,11 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+>      DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
 >
-> +        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> +            cpu->cfg.ext_zhinxmin) {
-> +            cpu->cfg.ext_zfinx = true;
-> +        }
+> +    DEFINE_PROP_BOOL("Zdinx", RISCVCPU, cfg.ext_zdinx, false),
+> +    DEFINE_PROP_BOOL("Zfinx", RISCVCPU, cfg.ext_zfinx, false),
+> +    DEFINE_PROP_BOOL("Zhinx", RISCVCPU, cfg.ext_zhinx, false),
+> +    DEFINE_PROP_BOOL("Zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
 > +
->          /* Set the ISA extensions, checks should have happened above */
->          if (cpu->cfg.ext_i) {
->              ext |= RVI;
-> @@ -592,6 +597,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          if (cpu->cfg.ext_j) {
->              ext |= RVJ;
->          }
-> +        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
-> +                                   cpu->cfg.ext_zfhmin)) {
-> +            error_setg(errp,
-> +                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
-> +                    " 'Zfhmin'");
-> +            return;
-> +        }
->
->          set_misa(env, env->misa_mxl, ext);
->      }
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 4d63086765..b202bcbeff 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -327,8 +327,12 @@ struct RISCVCPU {
->          bool ext_counters;
->          bool ext_ifencei;
->          bool ext_icsr;
-> +        bool ext_zdinx;
->          bool ext_zfh;
->          bool ext_zfhmin;
-> +        bool ext_zfinx;
-> +        bool ext_zhinx;
-> +        bool ext_zhinxmin;
->
->          char *priv_spec;
->          char *user_spec;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 615048ec87..9687fa3e7c 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -77,8 +77,12 @@ typedef struct DisasContext {
->      RISCVMXL ol;
->      bool virt_enabled;
->      bool ext_ifencei;
-> +    bool ext_zdinx;
->      bool ext_zfh;
->      bool ext_zfhmin;
-> +    bool ext_zfinx;
-> +    bool ext_zhinx;
-> +    bool ext_zhinxmin;
->      bool hlsx;
->      /* vector extension */
->      bool vill;
-> @@ -892,8 +896,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->misa_ext = env->misa_ext;
->      ctx->frm = -1;  /* unknown rounding mode */
->      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
-> +    ctx->ext_zdinx = cpu->cfg.ext_zdinx;
->      ctx->ext_zfh = cpu->cfg.ext_zfh;
->      ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
-> +    ctx->ext_zfinx = cpu->cfg.ext_zfinx;
-> +    ctx->ext_zhinx = cpu->cfg.ext_zhinx;
-> +    ctx->ext_zhinxmin = cpu->cfg.ext_zhinxmin;
->      ctx->vlen = cpu->cfg.vlen;
->      ctx->elen = cpu->cfg.elen;
->      ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
+>      /* These are experimental so mark with 'x-' */
+>      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+>      /* ePMP 0.9.3 */
 > --
 > 2.17.1
 >
