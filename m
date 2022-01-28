@@ -1,63 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nDJfk-0000cm-Va
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 00:19:44 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50144)
+	id 1nDJjJ-00025J-U9
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 00:23:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50368)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nDJfi-0000c5-Bc; Fri, 28 Jan 2022 00:19:42 -0500
-Received: from [2607:f8b0:4864:20::131] (port=33698
- helo=mail-il1-x131.google.com)
+ id 1nDJjF-000248-Fm; Fri, 28 Jan 2022 00:23:22 -0500
+Received: from [2607:f8b0:4864:20::d30] (port=45817
+ helo=mail-io1-xd30.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nDJfg-00062d-SK; Fri, 28 Jan 2022 00:19:42 -0500
-Received: by mail-il1-x131.google.com with SMTP id o10so4518321ilh.0;
- Thu, 27 Jan 2022 21:19:40 -0800 (PST)
+ id 1nDJjD-0006ZK-T5; Fri, 28 Jan 2022 00:23:21 -0500
+Received: by mail-io1-xd30.google.com with SMTP id s18so6399928ioa.12;
+ Thu, 27 Jan 2022 21:23:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=SOOgEYSsLgEfw5SG+e/mUHAbkLbUkoeyExLU84eIH4g=;
- b=aklocPVrgAF2ZNIgmGW+XGGPdEZslnrvM7fHvfXDhdh6EOU6lbyKCDN6eAxyBIpsGI
- TdWvXBQKVeyzV4Rr1dHn46BXzSBNn/EWPyN8Ka42TkkrUtO3QJpzheoUqT0Knkxnmo0E
- UigrAlndipv60i02csGTTyEy7OrdCWyrSXVj3Rj6VVArJYemOeLt4kX+jGDwnadjzHYl
- 4ZdoLotzqfrqeU6u2tjP1LoOaSwnOV3P5heXHMcEbjTYkPaONujmEFaApAd01mGNXvPI
- w8T4BqZDMLAuzcoYXllgssgfx5OZPmSW9yziemST69DtC6WvSI3iycxQMRD5NfmNWlj3
- Y96A==
+ :cc; bh=QhIG/ECTxvcC2ZjOERhrRIhE5u9ElhunErGFfFqbcmE=;
+ b=SNpiBuvYQtgTl7rjOf6ASWFuaioapy0ts6+1JVANy4FBQm+4BFAq27rHhb9o4+KWXQ
+ 71swFrsH4wpt7DcATOIBiE0Tj/8KszOH8oyA+JvctnqK222g6Tm4JLYccbohB7p9qgkf
+ 4nAlHOYFZ8/8InQDoThP/aFyj1P33hVmW6kCogZ4ouebpgcWQog0XFgzOoAkkOjZlB5j
+ ZiePq3KExlQsQlgabaXJM5abifgY9Eazce6ab6fGI5rK19S7Ov34w7zXyepaBFf76/Eo
+ GoEbWd636toN4yFMC/CLxA/gTy8ceIo8PoyzuaRYRsbnEEG8c59MpA602mXsyg7wqoN8
+ KOdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=SOOgEYSsLgEfw5SG+e/mUHAbkLbUkoeyExLU84eIH4g=;
- b=KVcBBoFjN8zH2hvzTD8/OCPIZsfMbdyCZbmIttAtjTboFGvy33Wo/y7BHnXEGkVRql
- 3Wcgt0xEqO7fIs5Pf13TGsPfa03f87Sw24SfEdx78jwSJpByeneh8LNdtlnZgwbEZGVx
- ynsUorXKbURhFTlRZIgPtYUXIlx0qPqsuvb09QaEJbfHLSjFpoJ9G9DHCrZwrpVRIOHW
- gb/oHAbx9dezyd9OOAf4NCCaocXyJKjn67sCkc1lfV3q7fjRkz/2OjvT5lb6gs0JKXMR
- SLWO9OTAouOU1QsJ8n94dYpVycBK3KXrtK4+X4563NhlpVh3I3Q3/P0GIPGnB2JJS/bU
- 0xwg==
-X-Gm-Message-State: AOAM531LgsmCrL1DL8sr5Z6Rvzl2ia9X98coidZDB7e8SDMxanWajpyP
- YlzLaFidaNS29RM/IF4mfc9JZuQAyQs8wFo2mCw=
-X-Google-Smtp-Source: ABdhPJya88M1qJPjYj3TnihVzONosiLIVz8MIuEf//WuPfsSYwOyn3zz+0tD2Cy7AYmn0igsFWQH8paPyyES1drNJKk=
-X-Received: by 2002:a92:680b:: with SMTP id d11mr4673031ilc.74.1643347179499; 
- Thu, 27 Jan 2022 21:19:39 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=QhIG/ECTxvcC2ZjOERhrRIhE5u9ElhunErGFfFqbcmE=;
+ b=xMboTHMv/3wxU/KgI8euCTDP3gdAhG9XAR8qb6LZ3wVXU086M1EMwXTYgAqYY+Fi1R
+ 4DtqespADQU5bUZyH9u/Zm92NY+5nRS4npSuLIINcje9ftWTDMGXXJhvo+/yYc6w9b7m
+ hXu0S5XTq0ZMnp9ZUp3wDMKCthcaoFW0JgJH8z+ENYYss1J2r8NUEoqZQiFgVGX/Z1Th
+ KOckEeyZFFUJqYGyoUDQaBUCEIqLmu5dXwAY7uczaYFo9sOuUNuPUGTsoOlj8gngrLRE
+ RiI+tDoVTc4e0iKG2NeZZOV5w6mWHAnkMU0B39p7SN7NqXuVwhW/Xugq/BivlVQo03JZ
+ +nEg==
+X-Gm-Message-State: AOAM530tJk9yWAAijlG4HPMxlosgxTgEr1q7fIVx6i24T3y0bhkZFuSQ
+ X3Ea93odb/O29WW8uMqHlq+PC0tQ9IOIYvb9dnY=
+X-Google-Smtp-Source: ABdhPJzvDL4VESOE4gMIWr1X4sQXTC7CNqDHKNs/KQWghsJrduSAEEXf/7R0aBY7KMu11f+QkZnVILpgo7BsBa4lZlY=
+X-Received: by 2002:a02:3b2d:: with SMTP id c45mr3802559jaa.125.1643347398526; 
+ Thu, 27 Jan 2022 21:23:18 -0800 (PST)
 MIME-Version: 1.0
-References: <20220124074940.363064-1-frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <20220124074940.363064-1-frederic.petrot@univ-grenoble-alpes.fr>
+References: <20220113014959.21429-1-liweiwei@iscas.ac.cn>
+ <20220113014959.21429-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220113014959.21429-2-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 28 Jan 2022 15:19:13 +1000
-Message-ID: <CAKmqyKO19vdmU64vSAyCQZgdFF+DmROwk02UUTkMyXasvdB4oA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: correct "code should not be reached" for
- x-rv128
-To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Fri, 28 Jan 2022 15:22:52 +1000
+Message-ID: <CAKmqyKN9uSd9Bd063S6nmwo+RCassbuyOn0isUStcQD4b1orEQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/6] target/riscv: add cfg properties for zfinx, zdinx
+ and zhinx{min}
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, ardxwe@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::131
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -78,62 +79,104 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Jan 2022 05:19:42 -0000
+X-List-Received-Date: Fri, 28 Jan 2022 05:23:23 -0000
 
-On Mon, Jan 24, 2022 at 5:54 PM Fr=C3=A9d=C3=A9ric P=C3=A9trot
-<frederic.petrot@univ-grenoble-alpes.fr> wrote:
+On Thu, Jan 13, 2022 at 11:51 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> The addition of uxl support in gdbstub adds a few checks on the maximum
-> register length, but omitted MXL_RV128, leading to the occurence of
-> "code should not be reached" in a few places.
-> This patch makes rv128 react as rv64 for gdb, as previously.
->
-> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
-ble-alpes.fr>
+> Co-authored-by: ardxwe <ardxwe@gmail.com>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/gdbstub.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  target/riscv/cpu.c       | 12 ++++++++++++
+>  target/riscv/cpu.h       |  4 ++++
+>  target/riscv/translate.c |  8 ++++++++
+>  3 files changed, 24 insertions(+)
 >
-> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> index f531a74c2f..9ed049c29e 100644
-> --- a/target/riscv/gdbstub.c
-> +++ b/target/riscv/gdbstub.c
-> @@ -64,6 +64,7 @@ int riscv_cpu_gdb_read_register(CPUState *cs, GByteArra=
-y *mem_buf, int n)
->      case MXL_RV32:
->          return gdb_get_reg32(mem_buf, tmp);
->      case MXL_RV64:
-> +    case MXL_RV128:
->          return gdb_get_reg64(mem_buf, tmp);
->      default:
->          g_assert_not_reached();
-> @@ -84,6 +85,7 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t =
-*mem_buf, int n)
->          length =3D 4;
->          break;
->      case MXL_RV64:
-> +    case MXL_RV128:
->          if (env->xl < MXL_RV64) {
->              tmp =3D (int32_t)ldq_p(mem_buf);
->          } else {
-> @@ -420,6 +422,7 @@ void riscv_cpu_register_gdb_regs_for_features(CPUStat=
-e *cs)
->                                   1, "riscv-32bit-virtual.xml", 0);
->          break;
->      case MXL_RV64:
-> +    case MXL_RV128:
->          gdb_register_coprocessor(cs, riscv_gdb_get_virtual,
->                                   riscv_gdb_set_virtual,
->                                   1, "riscv-64bit-virtual.xml", 0);
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 9bc25d3055..fc3ec5bca1 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -518,6 +518,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              cpu->cfg.ext_d = true;
+>          }
+>
+> +        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+> +            cpu->cfg.ext_zhinxmin) {
+> +            cpu->cfg.ext_zfinx = true;
+> +        }
+> +
+>          /* Set the ISA extensions, checks should have happened above */
+>          if (cpu->cfg.ext_i) {
+>              ext |= RVI;
+> @@ -592,6 +597,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          if (cpu->cfg.ext_j) {
+>              ext |= RVJ;
+>          }
+> +        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
+> +                                   cpu->cfg.ext_zfhmin)) {
+> +            error_setg(errp,
+> +                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
+> +                    " 'Zfhmin'");
+> +            return;
+> +        }
+>
+>          set_misa(env, env->misa_mxl, ext);
+>      }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 4d63086765..b202bcbeff 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -327,8 +327,12 @@ struct RISCVCPU {
+>          bool ext_counters;
+>          bool ext_ifencei;
+>          bool ext_icsr;
+> +        bool ext_zdinx;
+>          bool ext_zfh;
+>          bool ext_zfhmin;
+> +        bool ext_zfinx;
+> +        bool ext_zhinx;
+> +        bool ext_zhinxmin;
+>
+>          char *priv_spec;
+>          char *user_spec;
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 615048ec87..9687fa3e7c 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -77,8 +77,12 @@ typedef struct DisasContext {
+>      RISCVMXL ol;
+>      bool virt_enabled;
+>      bool ext_ifencei;
+> +    bool ext_zdinx;
+>      bool ext_zfh;
+>      bool ext_zfhmin;
+> +    bool ext_zfinx;
+> +    bool ext_zhinx;
+> +    bool ext_zhinxmin;
+>      bool hlsx;
+>      /* vector extension */
+>      bool vill;
+> @@ -892,8 +896,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>      ctx->misa_ext = env->misa_ext;
+>      ctx->frm = -1;  /* unknown rounding mode */
+>      ctx->ext_ifencei = cpu->cfg.ext_ifencei;
+> +    ctx->ext_zdinx = cpu->cfg.ext_zdinx;
+>      ctx->ext_zfh = cpu->cfg.ext_zfh;
+>      ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
+> +    ctx->ext_zfinx = cpu->cfg.ext_zfinx;
+> +    ctx->ext_zhinx = cpu->cfg.ext_zhinx;
+> +    ctx->ext_zhinxmin = cpu->cfg.ext_zhinxmin;
+>      ctx->vlen = cpu->cfg.vlen;
+>      ctx->elen = cpu->cfg.elen;
+>      ctx->mstatus_hs_fs = FIELD_EX32(tb_flags, TB_FLAGS, MSTATUS_HS_FS);
 > --
-> 2.34.1
+> 2.17.1
 >
 >
 
