@@ -1,36 +1,36 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nDR8T-0006Ir-Om
-	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 08:17:53 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49900)
+	id 1nDR8V-0006MU-O5
+	for mharc-qemu-riscv@gnu.org; Fri, 28 Jan 2022 08:17:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49852)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDR8D-00068F-FV; Fri, 28 Jan 2022 08:17:39 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:53802 helo=cstnet.cn)
+ id 1nDR8B-00068A-D7; Fri, 28 Jan 2022 08:17:39 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:53772 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nDR88-0000dl-AF; Fri, 28 Jan 2022 08:17:36 -0500
+ id 1nDR87-0000df-Qv; Fri, 28 Jan 2022 08:17:35 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABXd5jL7PNhJ3MVAA--.49965S4;
- Fri, 28 Jan 2022 21:17:02 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABXd5jL7PNhJ3MVAA--.49965S3;
+ Fri, 28 Jan 2022 21:17:01 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v5 2/6] target/riscv: hardwire mstatus.FS to zero when enable
- zfinx
-Date: Fri, 28 Jan 2022 21:16:39 +0800
-Message-Id: <20220128131643.13938-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v5 1/6] target/riscv: add cfg properties for zfinx,
+ zdinx and zhinx{min}
+Date: Fri, 28 Jan 2022 21:16:38 +0800
+Message-Id: <20220128131643.13938-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220128131643.13938-1-liweiwei@iscas.ac.cn>
 References: <20220128131643.13938-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowABXd5jL7PNhJ3MVAA--.49965S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fJw1rKryDZrWDZr4fZrb_yoWrXF1fpr
- WkC3y7u347K397t3WfJF4qgr15Jry8G398Aa1ku39YyF4rJrWYkF98tr9FvFyDXFy7Wryj
- 9Fyj934kAF47ZFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+X-CM-TRANSID: rQCowABXd5jL7PNhJ3MVAA--.49965S3
+X-Coremail-Antispam: 1UD129KBjvJXoWxWr4xWr17Xw43ur18Kw1xXwb_yoW5XFWkpr
+ WUW3W3Ar98XrW7C3ZrJF1Utr18Wwn7GFWxK3929wnagrWaqrW5JF1qkw1UuF4Yq3WrXF1a
+ 9F4qkF45Ar48Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBE14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
  Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
  8EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2AI
  xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
@@ -39,8 +39,8 @@ X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fJw1rKryDZrWDZr4fZrb_yoWrXF1fpr
  v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
  Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
  0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8
- JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIx
- AIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUc6pPUUUUU
+ JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIx
+ AIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUqAp5UUUUU
  =
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
@@ -69,121 +69,91 @@ X-List-Received-Date: Fri, 28 Jan 2022 13:17:42 -0000
 Co-authored-by: ardxwe <ardxwe@gmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c |  6 +++++-
- target/riscv/csr.c        | 25 ++++++++++++++++++++-----
- target/riscv/translate.c  |  4 ++++
- 3 files changed, 29 insertions(+), 6 deletions(-)
+ target/riscv/cpu.c       | 12 ++++++++++++
+ target/riscv/cpu.h       |  4 ++++
+ target/riscv/translate.c |  8 ++++++++
+ 3 files changed, 24 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 327a2c4f1d..023e011923 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -223,9 +223,13 @@ bool riscv_cpu_vector_enabled(CPURISCVState *env)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1cb0436187..7006e6647b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -569,6 +569,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             cpu->cfg.ext_d = true;
+         }
  
- void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
- {
--    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-+    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM |
-                             MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
-                             MSTATUS64_UXL | MSTATUS_VS;
++        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
++            cpu->cfg.ext_zhinxmin) {
++            cpu->cfg.ext_zfinx = true;
++        }
 +
-+    if (riscv_has_ext(env, RVF)) {
-+        mstatus_mask |= MSTATUS_FS;
-+    }
-     bool current_virt = riscv_cpu_virt_enabled(env);
+         /* Set the ISA extensions, checks should have happened above */
+         if (cpu->cfg.ext_i) {
+             ext |= RVI;
+@@ -647,6 +652,13 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         if (cpu->cfg.ext_j) {
+             ext |= RVJ;
+         }
++        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
++                                   cpu->cfg.ext_zfhmin)) {
++            error_setg(errp,
++                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
++                    " 'Zfhmin'");
++            return;
++        }
  
-     g_assert(riscv_has_ext(env, RVH));
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e5f9d4ef93..238e1d1858 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -38,7 +38,8 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- static RISCVException fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env) &&
-+        !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-         return RISCV_EXCP_ILLEGAL_INST;
+         set_misa(env, env->misa_mxl, ext);
      }
- #endif
-@@ -238,7 +239,9 @@ static RISCVException write_fflags(CPURISCVState *env, int csrno,
-                                    target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
-     return RISCV_EXCP_NONE;
-@@ -255,7 +258,9 @@ static RISCVException write_frm(CPURISCVState *env, int csrno,
-                                 target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
-     return RISCV_EXCP_NONE;
-@@ -273,7 +278,9 @@ static RISCVException write_fcsr(CPURISCVState *env, int csrno,
-                                  target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
-     riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
-@@ -580,10 +587,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         tlb_flush(env_cpu(env));
-     }
-     mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
--        MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-+        MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
-         MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-         MSTATUS_TW | MSTATUS_VS;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 55635d68d5..be46840541 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -341,8 +341,12 @@ struct RISCVCPU {
+         bool ext_counters;
+         bool ext_ifencei;
+         bool ext_icsr;
++        bool ext_zdinx;
+         bool ext_zfh;
+         bool ext_zfhmin;
++        bool ext_zfinx;
++        bool ext_zhinx;
++        bool ext_zhinxmin;
+         bool ext_zve32f;
+         bool ext_zve64f;
  
-+    if (riscv_has_ext(env, RVF)) {
-+        mask |= MSTATUS_FS;
-+    }
-+
-     if (xl != MXL_RV32 || env->debugger) {
-         /*
-          * RV32: MPV and GVA are not in mstatus. The current plan is to
-@@ -715,6 +726,10 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
-+    if (!(val & RVF)) {
-+        env->mstatus &= ~MSTATUS_FS;
-+    }
-+
-     /* flush translation cache */
-     tb_flush(env_cpu(env));
-     env->misa_ext = val;
 diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 1484586fe7..c9baf2a87a 100644
+index f0bbe80875..1484586fe7 100644
 --- a/target/riscv/translate.c
 +++ b/target/riscv/translate.c
-@@ -423,6 +423,10 @@ static void mark_fs_dirty(DisasContext *ctx)
- {
-     TCGv tmp;
- 
-+    if (!has_ext(ctx, RVF)) {
-+        return;
-+    }
-+
-     if (ctx->mstatus_fs != MSTATUS_FS) {
-         /* Remember the state change for the rest of the TB. */
-         ctx->mstatus_fs = MSTATUS_FS;
+@@ -77,8 +77,12 @@ typedef struct DisasContext {
+     RISCVMXL ol;
+     bool virt_enabled;
+     bool ext_ifencei;
++    bool ext_zdinx;
+     bool ext_zfh;
+     bool ext_zfhmin;
++    bool ext_zfinx;
++    bool ext_zhinx;
++    bool ext_zhinxmin;
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool hlsx;
+@@ -909,8 +913,12 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->misa_ext = env->misa_ext;
+     ctx->frm = -1;  /* unknown rounding mode */
+     ctx->ext_ifencei = cpu->cfg.ext_ifencei;
++    ctx->ext_zdinx = cpu->cfg.ext_zdinx;
+     ctx->ext_zfh = cpu->cfg.ext_zfh;
+     ctx->ext_zfhmin = cpu->cfg.ext_zfhmin;
++    ctx->ext_zfinx = cpu->cfg.ext_zfinx;
++    ctx->ext_zhinx = cpu->cfg.ext_zhinx;
++    ctx->ext_zhinxmin = cpu->cfg.ext_zhinxmin;
+     ctx->ext_zve32f = cpu->cfg.ext_zve32f;
+     ctx->ext_zve64f = cpu->cfg.ext_zve64f;
+     ctx->vlen = cpu->cfg.vlen;
 -- 
 2.17.1
 
