@@ -1,70 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nEkyA-00073b-1o
-	for mharc-qemu-riscv@gnu.org; Mon, 31 Jan 2022 23:40:43 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49604)
+	id 1nEmZA-0001Cl-Ji
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Feb 2022 01:23:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:35558)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nEky8-00072H-45; Mon, 31 Jan 2022 23:40:40 -0500
-Received: from [2607:f8b0:4864:20::d2c] (port=33448
- helo=mail-io1-xd2c.google.com)
+ id 1nEmZ8-0001Bu-Td; Tue, 01 Feb 2022 01:22:58 -0500
+Received: from [2607:f8b0:4864:20::12b] (port=44631
+ helo=mail-il1-x12b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nEky6-0000OS-Hf; Mon, 31 Jan 2022 23:40:39 -0500
-Received: by mail-io1-xd2c.google.com with SMTP id y84so19808505iof.0;
- Mon, 31 Jan 2022 20:40:37 -0800 (PST)
+ id 1nEmZ7-0005tr-Af; Tue, 01 Feb 2022 01:22:58 -0500
+Received: by mail-il1-x12b.google.com with SMTP id q11so5263341ild.11;
+ Mon, 31 Jan 2022 22:22:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=b2jnqckeZ/6TLfasN+xZyDJXiHIkS5FYYOTHKUJgduc=;
- b=fHtsuVwl/1diMAZt+TqC2pOt97tiT6HP7gFWnHAdlCxDdONkU1GMQY4u8ZJ3ECkCIv
- AvrjE23w9GwO+tMAwxYGqz9mSNN7+Xu/2Wv7WXuydZeGYW+yAyxc1MzbxSF57d2UT9z+
- A0luIXz4OvvAeBok8+/K7RAyEiPmcVnsc+sxBR4Vq2RBk9TcwFbBscl1xnLQezSlLe+v
- sLdw09CaTpF0I2mg7H466NAcM4/iY+ARD1I6DdZA+Y9Q7vdeUYpbl75rix0+HlBlW76A
- 9tvmQy1BiTzFzBFldLkQTJSMu13D7pds4GP2PEu7NKaZ207M7X120BW3+h6PLBqWBwrM
- fwPQ==
+ :cc; bh=Aa4ZdSlgRZ8MhLbGVS9JTsBuvPwZ0tX7KIRYiE7d8JI=;
+ b=hO5EM8hAyjTtmJRri57jwpXjgfMfaDCLfMDLeeu/qK25ETFPr3QuchCIMZ8wNcdy87
+ 3pyt9kg5YE7expeP6MbBIcLr00fyrAUs1kqka4nd3kBPVjG44zdM/s1W9TMNoTRn+NwZ
+ Xe+4sh0jqm1QF9H0DbgdweZphGWtPqEBGSZXnvKEHuyixT1FBCj66RGYJbhbXB0fTWcG
+ jshNBA3QKKDHDyCAM8Dr1A0HwEpkZhDytvZ83uShaSy3BFNZ7RuwbbRXavhH8lvP+y0c
+ GmnPRod1hq+0DL8bPwsuL5U/QKyo7acX7vvadhrWpW6hsaqEba6i7Y1Y/huN/iQZOouS
+ 3heQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=b2jnqckeZ/6TLfasN+xZyDJXiHIkS5FYYOTHKUJgduc=;
- b=GPnXNTCw2rCb73oiBptD/q9mslUTynyP6wIFtTQ1zznQLqosLvDx6tU/hGT2OdcR9N
- TYpahhOOGeFnup04MZI4QCy9/1l9GM3caovmGI4sEQUmPpQyvXxmB8heGrdnkRTAggdc
- DQEEK71moLLQH7cmKoQdv7xY8PfQcKv/FRtghtwS75koz/a7vDKR6J0SkTLYhbRXIanm
- A+VlMNfbPIMuKYK7IVwVpzzoQFYy+GZaJWPDFB3syzWWOFfRHrG7dQrOEx8R7Nc5U5Xc
- m2zOlgkyJI6PxXrmESl0b3cXRKmZfMhOZlXXL2JNrkFKewshbpWcNEynyFpbqTGhqwGh
- RnNQ==
-X-Gm-Message-State: AOAM532SK0ThhpXNlqcnDtQMvoT19LwGaxrX6JL4sbXf4EGufwUC06Ct
- DsvSd2ZPRvjsdNil2DEjGeKBQaaBtrZrSX49bqk=
-X-Google-Smtp-Source: ABdhPJyOecxkxs7RlRi1PG6z91vyjVL3rSALBf/kT9z8BncN4f5AGEzbScDx/MQTcYftYW/ALa1JZZnGeYhY0xXyZW8=
-X-Received: by 2002:a05:6638:1028:: with SMTP id
- n8mr12531953jan.318.1643690437091; 
- Mon, 31 Jan 2022 20:40:37 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=Aa4ZdSlgRZ8MhLbGVS9JTsBuvPwZ0tX7KIRYiE7d8JI=;
+ b=eTZOqbpCfz9anm+y2GtLm9VXry4pK0KIYRKj8QcxfussWRrT83ThJCfn4WJMpORVDV
+ ayda/PxA++jWHTcyo3R2hISVfAAPU1dXu8G35CljhXK3lbAdXgjSlivy5GNHKBQHMNjW
+ Z6n2zMBNlJEaIfuRxxoo06wYVZABfOTYoMiqS2hyVAOuU9KXMJRcQ5MhGtcDNsGaCSyZ
+ yWbY+TR648NNEXfIVSIWEElX98k7IW1Gkks1KRDZ8mhTafil2Fyd3GjZ6P+BA0TAciFa
+ /LHQ8CkB/gIDndt0SkIjh4+QMK0+tDnacWHPByOAce6wNgjLc4AR92YRCdjfxXLykWkO
+ Z4vA==
+X-Gm-Message-State: AOAM5309BXTwlQaCBD0xkTPPpVYBT5Zl4G+sAuGeYZ4y8uDLWAN+e6nY
+ BaXotc2W7bfrebKgtcjCq9rm6yumOlTUdATOHAE=
+X-Google-Smtp-Source: ABdhPJzz0qZbPcrLCgsflC8UeAba5kwD4vRoLQscbAelORTLss+4uJe4pWxkJI2gjPqM1dFbtnv8IPvtMerFm3Jneik=
+X-Received: by 2002:a05:6e02:1307:: with SMTP id
+ g7mr3335619ilr.46.1643696575491; 
+ Mon, 31 Jan 2022 22:22:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
- <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
- <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
-In-Reply-To: <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
+References: <20220128085501.8014-1-liweiwei@iscas.ac.cn>
+ <20220128085501.8014-4-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220128085501.8014-4-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 1 Feb 2022 14:40:10 +1000
-Message-ID: <CAKmqyKNpefaQMZcW1CsKK22wKMRUxbkPjPAOumei+5NCQsLEVQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>, 
- Alistair Francis <alistair.francis@opensource.wdc.com>, 
+Date: Tue, 1 Feb 2022 16:22:28 +1000
+Message-ID: <CAKmqyKN_iCjfhk=pb1uP=j1=H_Y2FZRmoWoahj5d9_RRYoFpvw@mail.gmail.com>
+Subject: Re: [PATCH v7 3/5] target/riscv: add support for svnapot extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Anup Patel <anup@brainfault.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Xu <peterx@redhat.com>, 
- David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Bin Meng <bmeng.cn@gmail.com>
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
+ Guo Ren <ren_guo@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -85,102 +79,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2022 04:40:40 -0000
+X-List-Received-Date: Tue, 01 Feb 2022 06:22:59 -0000
 
-On Wed, Jan 26, 2022 at 10:09 AM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Fri, Jan 28, 2022 at 6:57 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> On 1/24/22 4:17 PM, LIU Zhiwei wrote:
-> >
-> > On 2022/1/24 =E4=B8=8A=E5=8D=888:59, Alistair Francis wrote:
-> >> From: Alistair Francis <alistair.francis@wdc.com>
-> >>
-> >> This series adds a MO_ op to specify that a load instruction should
-> >> produce a store fault. This is used on RISC-V to produce a store/amo
-> >> fault when an atomic access fails.
-> >
-> > Hi Alistair,
-> >
-> > As Richard said,  we  can address this issue in two ways, probe_read(I =
-think probe_write
-> > is typo)
+> - add PTE_N bit
+> - add PTE_N bit check for inner PTE
+> - update address translation to support 64KiB continuous region (napot_bits = 4)
 >
-> It is not a typo: we want to verify that the memory is writable before we=
- perform the
-> load.  This will raise a write fault on a no-access page before a read fa=
-ult would be
-> generated by the load.  This may still generate the wrong fault for a wri=
-te-only page.
-> (Is such a page permission encoding possible with RISCV?  Not all cpus su=
-pport that, since
-
-It's not. RISC-V doesn't have write only pages, at least not in the
-current priv spec (maybe some extension allows it).
-
-> at first blush it seems to be mostly useless.  But some do, and a generic=
- tcg feature
-> should be designed with those in mind.)
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Anup Patel <anup@brainfault.org>
+> ---
+>  target/riscv/cpu.c        |  2 ++
+>  target/riscv/cpu_bits.h   |  1 +
+>  target/riscv/cpu_helper.c | 17 ++++++++++++++---
+>  3 files changed, 17 insertions(+), 3 deletions(-)
 >
-> > In my opinion use MO_op in io_readx may be not right because the issue =
-is not only with IO
-> > access. And MO_ op in io_readx is too later because the exception has b=
-een created when
-> > tlb_fill.
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 1cb0436187..8752fa1544 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -729,6 +729,8 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
 >
-> You are correct that changing only io_readx is insufficient.  Very much s=
-o.
->
-> Alistair, you're only changing the reporting of MMIO faults for which rea=
-d permission is
-> missing.  Importantly, the actual permission check is done elsewhere, and=
- you aren't
-> changing that to perform a write access check.  Also, you very much need =
-to handle normal
+> +    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+> +
+>      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>      DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 6ea3944423..f6ff1c5012 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -489,6 +489,7 @@ typedef enum {
+>  #define PTE_A               0x040 /* Accessed */
+>  #define PTE_D               0x080 /* Dirty */
+>  #define PTE_SOFT            0x300 /* Reserved for Software */
+> +#define PTE_N               0x8000000000000000 /* NAPOT translation */
 
-I'm a little confused with this part.
-
-Looking at tcg_gen_atomic_cmpxchg_i64() for example we either:
- 1. call tcg_gen_qemu_ld_i64() then tcg_gen_qemu_st_i64()
- 2. call table_cmpxchg[] which eventually calls atomic_mmu_lookup()
- 3. call tcg_gen_atomic_cmpxchg_i32() which is pretty much the same as
-the above two
-
-That means in both cases we end up performing a load or tlb_fill(..,
-MMU_DATA_LOAD, ..) operation as well as a store operation.
-
-So we are already performing a write permission check, if that fails
-on RISC-V we correctly generate the RISCV_EXCP_STORE_AMO_ACCESS_FAULT
-fault. I guess on some architectures there might be a specific atomic
-fault, which we will still not correctly trigger though.
-
-The part we are interested in is the load, and ensuring that we
-generate a store fault if that fails. At least for RISC-V.
-
-> memory not just MMIO.  Which will require changes across all tcg/arch/, a=
-s well as in all
-> of the memory access helpers in accel/tcg/.
-
-Argh, yeah
+This should be 0x8000000000000000ULL to avoid casting
 
 >
-> We may not want to add this check along the normal hot path of a normal l=
-oad, but create
+>  /* Page table PPN shift amount */
+>  #define PTE_PPN_SHIFT       10
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index b820166dc5..6262d157e2 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -641,7 +641,7 @@ restart:
+>              return TRANSLATE_FAIL;
+>          } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+>              /* Inner PTE, continue walking */
+> -            if (pte & (PTE_D | PTE_A | PTE_U)) {
+> +            if (pte & (target_ulong)(PTE_D | PTE_A | PTE_U | PTE_N)) {
+>                  return TRANSLATE_FAIL;
+>              }
+>              base = ppn << PGSHIFT;
+> @@ -717,8 +717,19 @@ restart:
+>              /* for superpage mappings, make a fake leaf PTE for the TLB's
+>                 benefit. */
+>              target_ulong vpn = addr >> PGSHIFT;
+> -            *physical = ((ppn | (vpn & ((1L << ptshift) - 1))) << PGSHIFT) |
+> -                        (addr & ~TARGET_PAGE_MASK);
+> +
+> +            int napot_bits = 0;
+> +            if (cpu->cfg.ext_svnapot && (pte & (target_ulong)PTE_N)) {
+> +                napot_bits = ctzl(ppn) + 1;
+> +                if ((i != (levels - 1)) || (napot_bits != 4)) {
+> +                    return TRANSLATE_FAIL;
+> +                }
+> +            }
+> +
+> +            *physical = (((ppn & ~(((target_ulong)1 << napot_bits) - 1)) |
 
-Can't we just do the check in the slow path? By the time we get to the
-fast path shouldn't we already have permissions?
-
-> separate helpers for "load with write-permission-check".  And we should a=
-nswer the
-
-As in add a new INDEX_op_qemu_ld_write_perm_i32/i64, make edits to
-atomic_mmu_lookup() and all of the plumbing for those?
+It might be clearer to create the mask as a variable, there are a lot
+of brackets here :)
 
 Alistair
 
-> question of whether it should really be "load with read-write-permission-=
-check", which
-> will make the changes to tcg/arch/ harder.
+> +                          (vpn & (((target_ulong)1 << napot_bits) - 1)) |
+> +                          (vpn & (((target_ulong)1 << ptshift) - 1))
+> +                        ) << PGSHIFT) | (addr & ~TARGET_PAGE_MASK);
+>
+>              /* set permissions on the TLB entry */
+>              if ((pte & PTE_R) || ((pte & PTE_X) && mxr)) {
+> --
+> 2.17.1
 >
 >
-> r~
 
