@@ -1,43 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nEuT0-0003X1-Jc
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Feb 2022 09:49:10 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38058)
+	id 1nEuT1-0003bd-Oe
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Feb 2022 09:49:11 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38178)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nEuRn-0002sN-MR; Tue, 01 Feb 2022 09:48:01 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:39330 helo=cstnet.cn)
+ id 1nEuRr-0002tD-Iu; Tue, 01 Feb 2022 09:48:06 -0500
+Received: from smtp23.cstnet.cn ([159.226.251.23]:39332 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nEuRL-0002sc-16; Tue, 01 Feb 2022 09:47:45 -0500
+ id 1nEuRL-0002sd-5r; Tue, 01 Feb 2022 09:47:46 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowAC3v5uxQvlhjpc3AA--.47720S2;
- Tue, 01 Feb 2022 22:24:50 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowAC3v5uxQvlhjpc3AA--.47720S4;
+ Tue, 01 Feb 2022 22:24:53 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: anup@brainfault.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ren_guo@c-sky.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v8 0/5] support subsets of virtual memory extension
-Date: Tue,  1 Feb 2022 22:24:10 +0800
-Message-Id: <20220201142415.29980-1-liweiwei@iscas.ac.cn>
+Subject: [PATCH v8 2/5] target/riscv: add PTE_A/PTE_D/PTE_U bits check for
+ inner PTE
+Date: Tue,  1 Feb 2022 22:24:12 +0800
+Message-Id: <20220201142415.29980-3-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: rQCowAC3v5uxQvlhjpc3AA--.47720S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWfXF43Kw4xurW3Aw1rtFb_yoW8ZrWrpr
- 45K3yakFZ8tFZ7Jw4fta18Ar45Xw4rur47Awn3Jw1kXa13ZrZ8trZak3yakryDXFy8Wry2
- 9a17ur13uayUJrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvY14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
- 0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
- xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
- MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
- 0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v2
- 6r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0J
- UdHUDUUUUU=
+In-Reply-To: <20220201142415.29980-1-liweiwei@iscas.ac.cn>
+References: <20220201142415.29980-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: rQCowAC3v5uxQvlhjpc3AA--.47720S4
+X-Coremail-Antispam: 1UD129KBjvdXoW7JFykXry7Kw17XF43Gw13twb_yoWfWrb_CF
+ W0gFn7X3s7ua929FnYyr1qqr1Fgas5KF1Fka17GF4fGryjgryfA34vyrZ5G34UuF13ArnF
+ v3ZrGrW3Cr45CjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUb6AFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
+ 0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+ wVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
+ x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr1j6rxdM2AI
+ xVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20x
+ vE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xv
+ r2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2IY04
+ v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_
+ Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x
+ 0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8
+ JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIx
+ AIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjYiiDUUUUU=
+ =
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -62,67 +66,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 01 Feb 2022 14:48:11 -0000
 
-This patchset implements virtual memory related RISC-V extensions: Svnapot version 1.0, Svinval vesion 1.0, Svpbmt version 1.0. 
+For non-leaf PTEs, the D, A, and U bits are reserved for future standard use.
 
-Specification:
-https://github.com/riscv/virtual-memory/tree/main/specs
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_helper.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-virtmem-upstream-v8
-
-To test this implementation, specify cpu argument with 'svinval=true,svnapot=true,svpbmt=true'.
-
-This implementation can pass the riscv-tests for rv64ssvnapot.
-
-v8:
-* rebase on https://lore.kernel.org/qemu-devel/20220131110201.2303275-1-philipp.tomsich@vrull.eu/
-* move variables to tops of function
-* add ULL for PTE_N and PTE_PMBT
-* add mask variable for napot_bits
-
-v7:
-* delete definition of PTE_PPN_MASK for TARGET_RISCV32
-* make riscv_cpu_sxl works for user mode
-* add commit msg for patch 2
-
-v6:
-* select ppn mask base on sxl
-
-v5:
-* merge patch https://lore.kernel.org/qemu-devel/1569456861-8502-1-git-send-email-guoren@kernel.org/
-* relax pte attribute check
-
-v4:
-* fix encodings for hinval_vvma and hinval_gvma
-* partition inner PTE check into several steps
-* improve commit messages to describe changes
-
-v3:
-* drop "x-" in exposed properties
-
-v2:
-* add extension check for svnapot and svpbmt
-
-
-Guo Ren (1):
-  target/riscv: Ignore reserved bits in PTE for RV64
-
-Weiwei Li (4):
-  target/riscv: add PTE_A/PTE_D/PTE_U bits check for inner PTE
-  target/riscv: add support for svnapot extension
-  target/riscv: add support for svinval extension
-  target/riscv: add support for svpbmt extension
-
- target/riscv/cpu.c                          |  4 ++
- target/riscv/cpu.h                          | 16 +++++
- target/riscv/cpu_bits.h                     |  6 ++
- target/riscv/cpu_helper.c                   | 34 +++++++++-
- target/riscv/insn32.decode                  |  7 ++
- target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
- target/riscv/translate.c                    |  1 +
- 7 files changed, 140 insertions(+), 3 deletions(-)
- create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
-
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index de07aee301..61c3a9a4ad 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -640,6 +640,9 @@ restart:
+             return TRANSLATE_FAIL;
+         } else if (!(pte & (PTE_R | PTE_W | PTE_X))) {
+             /* Inner PTE, continue walking */
++            if (pte & (PTE_D | PTE_A | PTE_U)) {
++                return TRANSLATE_FAIL;
++            }
+             base = ppn << PGSHIFT;
+         } else if ((pte & (PTE_R | PTE_W | PTE_X)) == PTE_W) {
+             /* Reserved leaf PTE flags: PTE_W */
 -- 
 2.17.1
 
