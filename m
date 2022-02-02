@@ -1,56 +1,89 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nEuhV-0004Q1-K4
-	for mharc-qemu-riscv@gnu.org; Tue, 01 Feb 2022 10:04:09 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57606)
+	id 1nF3eI-00054t-O0
+	for mharc-qemu-riscv@gnu.org; Tue, 01 Feb 2022 19:37:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42176)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nEuhQ-0004IE-I8; Tue, 01 Feb 2022 10:04:04 -0500
-Received: from smtp23.cstnet.cn ([159.226.251.23]:41273 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nEuhG-00060L-Hq; Tue, 01 Feb 2022 10:04:04 -0500
-Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowAC3v5uxQvlhjpc3AA--.47720S6;
- Tue, 01 Feb 2022 22:24:54 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: anup@brainfault.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ren_guo@c-sky.com,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v8 4/5] target/riscv: add support for svinval extension
-Date: Tue,  1 Feb 2022 22:24:14 +0800
-Message-Id: <20220201142415.29980-5-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220201142415.29980-1-liweiwei@iscas.ac.cn>
-References: <20220201142415.29980-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowAC3v5uxQvlhjpc3AA--.47720S6
-X-Coremail-Antispam: 1UD129KBjvJXoW3XrykAF4rJr15Gr4xCr1fXrb_yoW7WFWrpF
- 4UKFW7Cr4kGFyfAa4ftr45JFyUGrs3CayUG3saywn5Xa15GrWDJr1DKrW7KrZ8JF4kWr1Y
- 9F4qyryYyrW0qaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_
- GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
- JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
- ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
- 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
- IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E
- 14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJV
- W8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTY
- UUUUU
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nF3eF-00052O-3h
+ for qemu-riscv@nongnu.org; Tue, 01 Feb 2022 19:37:24 -0500
+Received: from [2607:f8b0:4864:20::429] (port=44920
+ helo=mail-pf1-x429.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nF3eC-00004r-DF
+ for qemu-riscv@nongnu.org; Tue, 01 Feb 2022 19:37:21 -0500
+Received: by mail-pf1-x429.google.com with SMTP id n32so17347990pfv.11
+ for <qemu-riscv@nongnu.org>; Tue, 01 Feb 2022 16:37:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=Jhsz2icLGKf29iT+HllDQ3q/SO5RJF21P2Q3G8ic0lw=;
+ b=g4Miv8/yUbTODj9KdWjOYmmKlylEBYdHV1FwgPikauANQ0DS5Us4G7a8XfzpouSfye
+ YY7i816qaEK9ijZsBpHSqb3/O10XCG2/stz90cyeG4kKH968OMA0ntUz5mXZJLdYEVw1
+ D0LoaqkqCCw3wkcr2Iq8GqLePl+2bCWSAoqcBykyR9YQPmqqvPyRpG/koPfp8OKJCu4o
+ j8fzejtUAtnVNzCCGk12OXN4PTRVZxhwjH4YaykCc4CBgvIEq0D4eAkheLVkFIv0whxh
+ HSw7ip7yNbKa442fU6yNKcauWnNFkxc3M47KnWfMJXaa0KPVaOcEgCp8+9rOOoU+j+wo
+ pS9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=Jhsz2icLGKf29iT+HllDQ3q/SO5RJF21P2Q3G8ic0lw=;
+ b=GnLIjDTnBHwBqAhqbph+sMdEo3m/iWqoW7of1iM9cAbfyaU3E0YW0hCWPfYgiBjWB8
+ ajkME0rH8NJlMKTS1/oaw6OIjSGU32XV73c4jSEheIJIVsNSDvDaX2NQHzICzBLgWwrZ
+ WxjsvArbePiWgjZBfDTiUO/VX1WvUPW8fOMtt3WRVoWs3pLi7hUIWDwyQG9ym6w6+4Aa
+ PReXuEIHlEhpqPFbOGCIoTO3ryRCNdNwP1uT0YVQbNl2kS1lTPhPIfYBeANiCn1S3PIW
+ YXGLkvP67b8Atwrc6KkDfZZp+rVxr9mVaiC1blAeDIVrVljeVbrfW/zSCxGhgOMWp0PQ
+ YYFw==
+X-Gm-Message-State: AOAM5327SHGsLV8ps349FYs+yUpHr8J0jvUpWzOxajD1TrGYAQyDxqBX
+ 1BM0C0u4T0FR74nWSymZ0RxMXw==
+X-Google-Smtp-Source: ABdhPJw+ejomQCraBq7AZbNHppJ0tNWtAJWxbi50JWtbOlby/ZB0wTXpASBs+vQ054J8aJLxkgWflw==
+X-Received: by 2002:a63:dd4d:: with SMTP id g13mr22868303pgj.202.1643762238787; 
+ Tue, 01 Feb 2022 16:37:18 -0800 (PST)
+Received: from ?IPV6:2001:8003:3a49:fd00:91e3:5d6a:70ac:f94c?
+ ([2001:8003:3a49:fd00:91e3:5d6a:70ac:f94c])
+ by smtp.gmail.com with ESMTPSA id o9sm11870148pfw.86.2022.02.01.16.37.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Feb 2022 16:37:18 -0800 (PST)
+Message-ID: <2cb994f2-85e1-451f-c83c-a8403135cdc0@linaro.org>
+Date: Wed, 2 Feb 2022 11:37:10 +1100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@opensource.wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Xu <peterx@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
+ <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
+ <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
+ <CAKmqyKNpefaQMZcW1CsKK22wKMRUxbkPjPAOumei+5NCQsLEVQ@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAKmqyKNpefaQMZcW1CsKK22wKMRUxbkPjPAOumei+5NCQsLEVQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::429
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
+X-Spam_bar: -
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,156 +96,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Feb 2022 15:04:05 -0000
+X-List-Received-Date: Wed, 02 Feb 2022 00:37:25 -0000
 
-- sinval.vma, hinval.vvma and hinval.gvma do the same as sfence.vma, hfence.vvma and hfence.gvma except extension check
-- do nothing other than extension check for sfence.w.inval and sfence.inval.ir
+On 2/1/22 15:40, Alistair Francis wrote:
+>> Alistair, you're only changing the reporting of MMIO faults for which read permission is
+>> missing.  Importantly, the actual permission check is done elsewhere, and you aren't
+>> changing that to perform a write access check.  Also, you very much need to handle normal
+> 
+> I'm a little confused with this part.
+> 
+> Looking at tcg_gen_atomic_cmpxchg_i64() for example we either:
+>   1. call tcg_gen_qemu_ld_i64() then tcg_gen_qemu_st_i64()
+>   2. call table_cmpxchg[] which eventually calls atomic_mmu_lookup()
+>   3. call tcg_gen_atomic_cmpxchg_i32() which is pretty much the same as
+> the above two
+> 
+> That means in both cases we end up performing a load or tlb_fill(..,
+> MMU_DATA_LOAD, ..) operation as well as a store operation.
 
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Anup Patel <anup@brainfault.org>
----
- target/riscv/cpu.c                          |  1 +
- target/riscv/cpu.h                          |  1 +
- target/riscv/insn32.decode                  |  7 ++
- target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
- target/riscv/translate.c                    |  1 +
- 5 files changed, 85 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
+Yep...
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index cfaccdfc72..4442c4b81d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -729,6 +729,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
- 
-+    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
- 
-     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 8e7c33c9cb..5622478eb5 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -324,6 +324,7 @@ struct RISCVCPUConfig {
-     bool ext_counters;
-     bool ext_ifencei;
-     bool ext_icsr;
-+    bool ext_svinval;
-     bool ext_svnapot;
-     bool ext_svpbmt;
-     bool ext_zfh;
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 5bbedc254c..1d3ff1efe1 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -809,3 +809,10 @@ fcvt_l_h   1100010  00010 ..... ... ..... 1010011 @r2_rm
- fcvt_lu_h  1100010  00011 ..... ... ..... 1010011 @r2_rm
- fcvt_h_l   1101010  00010 ..... ... ..... 1010011 @r2_rm
- fcvt_h_lu  1101010  00011 ..... ... ..... 1010011 @r2_rm
-+
-+# *** Svinval Standard Extension ***
-+sinval_vma        0001011 ..... ..... 000 00000 1110011 @sfence_vma
-+sfence_w_inval    0001100 00000 00000 000 00000 1110011
-+sfence_inval_ir   0001100 00001 00000 000 00000 1110011
-+hinval_vvma       0010011 ..... ..... 000 00000 1110011 @hfence_vvma
-+hinval_gvma       0110011 ..... ..... 000 00000 1110011 @hfence_gvma
-diff --git a/target/riscv/insn_trans/trans_svinval.c.inc b/target/riscv/insn_trans/trans_svinval.c.inc
-new file mode 100644
-index 0000000000..2682bd969f
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_svinval.c.inc
-@@ -0,0 +1,75 @@
-+/*
-+ * RISC-V translation routines for the Svinval Standard Instruction Set.
-+ *
-+ * Copyright (c) 2020-2022 PLCT lab
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_SVINVAL(ctx) do {          \
-+    if (!ctx->cfg_ptr->ext_svinval) {      \
-+        return false;                      \
-+    }                                      \
-+} while (0)
-+
-+static bool trans_sinval_vma(DisasContext *ctx, arg_sinval_vma *a)
-+{
-+    REQUIRE_SVINVAL(ctx);
-+    /* Do the same as sfence.vma currently */
-+    REQUIRE_EXT(ctx, RVS);
-+#ifndef CONFIG_USER_ONLY
-+    gen_helper_tlb_flush(cpu_env);
-+    return true;
-+#endif
-+    return false;
-+}
-+
-+static bool trans_sfence_w_inval(DisasContext *ctx, arg_sfence_w_inval *a)
-+{
-+    REQUIRE_SVINVAL(ctx);
-+    REQUIRE_EXT(ctx, RVS);
-+    /* Do nothing currently */
-+    return true;
-+}
-+
-+static bool trans_sfence_inval_ir(DisasContext *ctx, arg_sfence_inval_ir *a)
-+{
-+    REQUIRE_SVINVAL(ctx);
-+    REQUIRE_EXT(ctx, RVS);
-+    /* Do nothing currently */
-+    return true;
-+}
-+
-+static bool trans_hinval_vvma(DisasContext *ctx, arg_hinval_vvma *a)
-+{
-+    REQUIRE_SVINVAL(ctx);
-+    /* Do the same as hfence.vvma currently */
-+    REQUIRE_EXT(ctx, RVH);
-+#ifndef CONFIG_USER_ONLY
-+    gen_helper_hyp_tlb_flush(cpu_env);
-+    return true;
-+#endif
-+    return false;
-+}
-+
-+static bool trans_hinval_gvma(DisasContext *ctx, arg_hinval_gvma *a)
-+{
-+    REQUIRE_SVINVAL(ctx);
-+    /* Do the same as hfence.gvma currently */
-+    REQUIRE_EXT(ctx, RVH);
-+#ifndef CONFIG_USER_ONLY
-+    gen_helper_hyp_gvma_tlb_flush(cpu_env);
-+    return true;
-+#endif
-+    return false;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index eaf5a72c81..84dbfa6340 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -862,6 +862,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvb.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
-+#include "insn_trans/trans_svinval.c.inc"
- #include "insn_trans/trans_xventanacondops.c.inc"
- 
- /* Include the auto-generated decoder for 16 bit insn */
--- 
-2.17.1
+> So we are already performing a write permission check...
 
+... but we're doing so *after* the load.
+
+Which means that for a completely unmapped page (as opposed to a read-only page) we will 
+generate a read fault, which generates RISCV_EXCP_LOAD_ACCESS_FAULT and *not* 
+RISCV_EXCP_STORE_AMO_ACCESS_FAULT.
+
+So we need to check for write permission first, before performing the load.
+
+> Can't we just do the check in the slow path? By the time we get to the
+> fast path shouldn't we already have permissions?
+
+No, the fast path performs the permissions check on one bit [rwx] depending on which tlb 
+comparator it loads.
+
+> As in add a new INDEX_op_qemu_ld_write_perm_i32/i64, make edits to
+> atomic_mmu_lookup() and all of the plumbing for those?
+
+That's one possibility, sure.
+
+
+r~
 
