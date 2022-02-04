@@ -1,80 +1,90 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nG2i8-0007Hi-CR
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 12:49:28 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40584)
+	id 1nG5Gt-0002UK-C8
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 15:33:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49170)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nG2i6-00079v-C8
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 12:49:26 -0500
-Received: from [2a00:1450:4864:20::32d] (port=36709
- helo=mail-wm1-x32d.google.com)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nG5Gs-0002Rs-1Q
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 15:33:30 -0500
+Received: from [2607:f8b0:4864:20::529] (port=40954
+ helo=mail-pg1-x529.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nG2i3-0004Dd-6b
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 12:49:26 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- i187-20020a1c3bc4000000b0034d2ed1be2aso9939017wma.1
- for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 09:49:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=QNnaZkIXpPRbtWA7ShgFZN0d59sV6eg5/LyFV0oNLa0=;
- b=o1vTZQb1W6pI2oM1io+5Q0cnQfHtHOSvaRDCx2qLAop1U5JSME/o776KWwpiNf+Daq
- m++zxRJ5IGdSiq6E5rqo4Gp50Tya6zgeme5eAB5M+q+FaSdn3LhQEz+9dtCpJcFZhDnE
- Rwwes6nj4z+pX9dk5jPf3ZWjAneV/3E4Lu2HkeUYnAaIxJsqbfhdq9nMG+OMsmeqMKBI
- egKrmcpecQJaLWMKeTFlXispjuCm4B8xRk8sNWpwkj9cVGTHTOjtkjZlQvYczzbXGcbt
- Z9beLUqNDK+9UkscByagPCGg6tLaOPJkpILpJ1ktQA9/v+tmaM26HVcvz7jQvjjLs+Rf
- mZyw==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nG5Gq-0005fF-0M
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 15:33:29 -0500
+Received: by mail-pg1-x529.google.com with SMTP id q132so5932564pgq.7
+ for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 12:33:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=KqpTNMmFfys3C40DPRngPUWMearuow7Tf85/Nof3KlU=;
+ b=p81AHRRF6oqxHqzMIOtf8Jp1qGtxhXnQikwVYDrHpSGpJBd46kQljYf/7JdlWIkOAV
+ SmIyZWqPon7ZlJ3ZuS3Xx3/J2QjuYsd0Ln1x2kpfjNvPMeAwipAaG0LrWakJlml1pYuW
+ fa78NGFsLORBEqPT0ScVSVXEBV7lj8KEePLpOGCmIh/axJulECFaPjMRUghiSQbGCLgO
+ 81YK0AX3+uMpI6M4K6yS45wYR3i5HvB5xZPOLvb2SYoZbKaKixYDVfwKoJDTeP/efmKx
+ QJ90cSTBm9OxcB4k9W+BWiMBcahvki6vzoENcPNAUKjIElZopBq2lTR1ilqTdceW+OUE
+ hH7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=QNnaZkIXpPRbtWA7ShgFZN0d59sV6eg5/LyFV0oNLa0=;
- b=nn2X/TyMMKp+l5RgUb6gdJ9cxSkQllO52n5q8LgKZY8tRjqzoID4BQrbb73Pzi7lGl
- xurs51VpkLG5CvczqcSjEddVNem8lwKbt7FZteOMYts+dLRUM7EY6DJ2aIP15sczEZke
- DB0pRgWGVd8zKqGRaT7apFq0sscJJHMhr66O+9lpHg6XEHu3vWsa2uQUdg/KGLzTz8or
- pTSQYURFMGHSGtIkInQGu40KErzmoA4jWo6ZYhLISzr8DgnpGteMbwL8y1oO18Y8sFZU
- e2W3rJKQRH5NSYrFeJqfNFjVPNQMe/UT7uurqt/+2fsXHtgBW8I/NRvmbeNwkw3xiypE
- rSjQ==
-X-Gm-Message-State: AOAM532i7XkhNaORLKATImBtGxdFt4f0oG25h2Fjwm5gK/6xlcSFZNwY
- MykTgES5cJq9Gj5inFnzxAGaVA==
-X-Google-Smtp-Source: ABdhPJyN2N0SrdjzujgnPFPho1XspbmjTUOq9s4WUxU6GsKU13s5IjLbr2KWlso8BLJ+HbJI34e1hQ==
-X-Received: by 2002:a05:600c:2dd7:: with SMTP id
- e23mr3188825wmh.65.1643996961801; 
- Fri, 04 Feb 2022 09:49:21 -0800 (PST)
-Received: from localhost.localdomain ([122.167.157.188])
- by smtp.gmail.com with ESMTPSA id f13sm11381876wmq.29.2022.02.04.09.49.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Feb 2022 09:49:20 -0800 (PST)
-From: Anup Patel <anup@brainfault.org>
-To: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v9 23/23] hw/riscv: virt: Increase maximum number of allowed
- CPUs
-Date: Fri,  4 Feb 2022 23:16:59 +0530
-Message-Id: <20220204174700.534953-24-anup@brainfault.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220204174700.534953-1-anup@brainfault.org>
-References: <20220204174700.534953-1-anup@brainfault.org>
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=KqpTNMmFfys3C40DPRngPUWMearuow7Tf85/Nof3KlU=;
+ b=JD+0XxzRUizBTZtx18hezIFa6dniv1xmywGtIumuAs1cDle8nmuN03Sq++MpeMcEb9
+ L53t859LeCcfBxbHAIUJ/GfO1BdHdAVmJfsCYQyTXeB91+WGfP2UxNWQ2mAGGQBeHiUo
+ b+G3oWFbJm2eJbO2FXB4FOL+RYkw+aJIfbKRkEjEbhsINgX4vb5vIKhDpTZ6k490wjLr
+ +FmMwBHHvMTiKl1+bcTsL4WN9kXLxOOS8YmT8BDVhOc0MDzIYi6cNtHaYHudnUPmaJbv
+ 3XGodIdMuhN8IV1OwgQGAzcvHakmfOk8cFn1lkRQj9e3hSFJdp9JIRuMQSotfAjDCLG/
+ 3ybQ==
+X-Gm-Message-State: AOAM533P6Q0WwvHaaorqgtEsNomM0aiQuX/ev3UvI7aPnSvhUyzJvz1a
+ mijm4UMqXdTI3g4ZjbffR6akpA==
+X-Google-Smtp-Source: ABdhPJxIGeHcOF7/0VBplkwdvL6Zff5U7QPd322hq7/3bjcD0nYFxW+PEx0A1hrei4r7MJ0MJT5NVQ==
+X-Received: by 2002:a63:f006:: with SMTP id k6mr599786pgh.173.1644006806388;
+ Fri, 04 Feb 2022 12:33:26 -0800 (PST)
+Received: from ?IPV6:2001:8003:3a49:fd00:d2cd:dac2:7e7f:5850?
+ ([2001:8003:3a49:fd00:d2cd:dac2:7e7f:5850])
+ by smtp.gmail.com with ESMTPSA id 16sm3581265pfl.99.2022.02.04.12.33.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Feb 2022 12:33:25 -0800 (PST)
+Message-ID: <d1efe6e1-083e-e419-87aa-7513ee3b28e9@linaro.org>
+Date: Sat, 5 Feb 2022 07:33:17 +1100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32d
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
+Content-Language: en-US
+To: Alistair Francis <alistair23@gmail.com>
+Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
+ Alistair Francis <alistair.francis@opensource.wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Xu <peterx@redhat.com>,
+ David Hildenbrand <david@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
+ <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
+ <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
+ <CAKmqyKNpefaQMZcW1CsKK22wKMRUxbkPjPAOumei+5NCQsLEVQ@mail.gmail.com>
+ <2cb994f2-85e1-451f-c83c-a8403135cdc0@linaro.org>
+ <CAKmqyKMRmjwu_DQvZduYwnBwxp1KsY07wzKVLzdw30PWBBEjZA@mail.gmail.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <CAKmqyKMRmjwu_DQvZduYwnBwxp1KsY07wzKVLzdw30PWBBEjZA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::529
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::32d;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32d.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
+X-Spam_score_int: -12
+X-Spam_score: -1.3
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -88,60 +98,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2022 17:49:26 -0000
+X-List-Received-Date: Fri, 04 Feb 2022 20:33:30 -0000
 
-From: Anup Patel <anup.patel@wdc.com>
+On 2/4/22 18:36, Alistair Francis wrote:
+>> So we need to check for write permission first, before performing the load.
+> 
+> Isn't that what this series does though, albeit for IO accesses only
 
-To facilitate software development of RISC-V systems with large number
-of HARTs, we increase the maximum number of allowed CPUs to 512 (2^9).
+No.
 
-We also add a detailed source level comments about limit defines which
-impact the physical address space utilization.
+> Using probe_write() solves part of this problem. If we have RAM at the
+> address but no permissions to access it, then probe_write() will
+> generate a store/AMO fault. But it won't help if nothing is mapped at
+> that address.
+> 
+> Let's say you are performing an atomic operation at an unmapped
+> address 0x00, in M mode (so no MMU). probe_write() will eventually
+> call riscv_cpu_tlb_fill() and get_physical_address(). On a system
+> without an MMU and no PMP enforcement we get full read/write/execute
+> permissions from riscv_cpu_tlb_fill(). So probe_write() succeeds.
 
-Signed-off-by: Anup Patel <anup.patel@wdc.com>
-Signed-off-by: Anup Patel <anup@brainfault.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- hw/riscv/virt.c         | 10 ++++++++++
- include/hw/riscv/virt.h |  2 +-
- 2 files changed, 11 insertions(+), 1 deletion(-)
+True.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index dc1b3dc751..367d01d3a9 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -45,6 +45,16 @@
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
- 
-+/*
-+ * The virt machine physical address space used by some of the devices
-+ * namely ACLINT, PLIC, APLIC, and IMSIC depend on number of Sockets,
-+ * number of CPUs, and number of IMSIC guest files.
-+ *
-+ * Various limits defined by VIRT_SOCKETS_MAX_BITS, VIRT_CPUS_MAX_BITS,
-+ * and VIRT_IRQCHIP_MAX_GUESTS_BITS are tuned for maximum utilization
-+ * of virt machine physical address space.
-+ */
-+
- #define VIRT_IMSIC_GROUP_MAX_SIZE      (1U << IMSIC_MMIO_GROUP_MIN_SHIFT)
- #if VIRT_IMSIC_GROUP_MAX_SIZE < \
-     IMSIC_GROUP_SIZE(VIRT_CPUS_MAX_BITS, VIRT_IRQCHIP_MAX_GUESTS_BITS)
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 7898c574af..78f450eb60 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -24,7 +24,7 @@
- #include "hw/block/flash.h"
- #include "qom/object.h"
- 
--#define VIRT_CPUS_MAX_BITS             3
-+#define VIRT_CPUS_MAX_BITS             9
- #define VIRT_CPUS_MAX                  (1 << VIRT_CPUS_MAX_BITS)
- #define VIRT_SOCKETS_MAX_BITS          2
- #define VIRT_SOCKETS_MAX               (1 << VIRT_SOCKETS_MAX_BITS)
--- 
-2.25.1
+But there it's not a permission problem, per se.  What are you supposed to get here on 
+riscv?  On some other cpus you don't get a "normal" segv, but a machine check.  I suppose 
+you still want to see "store" rather than "load" in reporting that...
 
+
+>>> Can't we just do the check in the slow path? By the time we get to the
+>>> fast path shouldn't we already have permissions?
+>>
+>> No, the fast path performs the permissions check on one bit [rwx] depending on which tlb
+>> comparator it loads.
+> 
+> If you have permissions then that's fine. I thought we went via the
+> slow path if the permission check fails?
+
+We do.  But you haven't changed any permissions checks, so you don't really know what 
+you're getting -- you may not arrive at the slow path at all.
+
+
+r~
 
