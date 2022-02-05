@@ -1,90 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nG5Gt-0002UK-C8
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 15:33:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49170)
+	id 1nG94T-00021i-OT
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 19:36:57 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41684)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nG5Gs-0002Rs-1Q
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 15:33:30 -0500
-Received: from [2607:f8b0:4864:20::529] (port=40954
- helo=mail-pg1-x529.google.com)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nG94S-00021H-5a
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:36:56 -0500
+Received: from [2607:f8b0:4864:20::22f] (port=44598
+ helo=mail-oi1-x22f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nG5Gq-0005fF-0M
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 15:33:29 -0500
-Received: by mail-pg1-x529.google.com with SMTP id q132so5932564pgq.7
- for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 12:33:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=message-id:date:mime-version:user-agent:subject:content-language:to
- :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=KqpTNMmFfys3C40DPRngPUWMearuow7Tf85/Nof3KlU=;
- b=p81AHRRF6oqxHqzMIOtf8Jp1qGtxhXnQikwVYDrHpSGpJBd46kQljYf/7JdlWIkOAV
- SmIyZWqPon7ZlJ3ZuS3Xx3/J2QjuYsd0Ln1x2kpfjNvPMeAwipAaG0LrWakJlml1pYuW
- fa78NGFsLORBEqPT0ScVSVXEBV7lj8KEePLpOGCmIh/axJulECFaPjMRUghiSQbGCLgO
- 81YK0AX3+uMpI6M4K6yS45wYR3i5HvB5xZPOLvb2SYoZbKaKixYDVfwKoJDTeP/efmKx
- QJ90cSTBm9OxcB4k9W+BWiMBcahvki6vzoENcPNAUKjIElZopBq2lTR1ilqTdceW+OUE
- hH7A==
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nG94P-0001ll-Rb
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:36:55 -0500
+Received: by mail-oi1-x22f.google.com with SMTP id 4so10399107oil.11
+ for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 16:36:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Y2tcMCDmFtSM7eKk3eKqNe+/OAAgB42qjeSPCisRDIk=;
+ b=mwpsOgCjmQpzdBsHQAuaPIpxZFwTEZDP1tYOuNpvSUOyTnW9jJUlH421wLzUlQawbu
+ X0TaeJ6e7EnnA+tvtwvRF9TS9J8HPWhEondF3OaC0RYIyor4er8lbUFVIom1bPYgxXwX
+ VYu/U23dISqd3NVMp2URMpBRY62TmrwMQMU/ym48epssfP8ytiU/IQe0gKpKpSno/P+c
+ yv7Irt0W6/6QJ8tUZ75ugc+z8z1cAMsxKfRx4ziDPHmAU341uO6aPfy06EVs+PDkMkuU
+ ESbBt5zEY22nfcgF/LQsBHAfNec2CPVD/8QDwi/oK7eHwkLINroB0ec2q1JTH1x+U3xR
+ 4Vow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=KqpTNMmFfys3C40DPRngPUWMearuow7Tf85/Nof3KlU=;
- b=JD+0XxzRUizBTZtx18hezIFa6dniv1xmywGtIumuAs1cDle8nmuN03Sq++MpeMcEb9
- L53t859LeCcfBxbHAIUJ/GfO1BdHdAVmJfsCYQyTXeB91+WGfP2UxNWQ2mAGGQBeHiUo
- b+G3oWFbJm2eJbO2FXB4FOL+RYkw+aJIfbKRkEjEbhsINgX4vb5vIKhDpTZ6k490wjLr
- +FmMwBHHvMTiKl1+bcTsL4WN9kXLxOOS8YmT8BDVhOc0MDzIYi6cNtHaYHudnUPmaJbv
- 3XGodIdMuhN8IV1OwgQGAzcvHakmfOk8cFn1lkRQj9e3hSFJdp9JIRuMQSotfAjDCLG/
- 3ybQ==
-X-Gm-Message-State: AOAM533P6Q0WwvHaaorqgtEsNomM0aiQuX/ev3UvI7aPnSvhUyzJvz1a
- mijm4UMqXdTI3g4ZjbffR6akpA==
-X-Google-Smtp-Source: ABdhPJxIGeHcOF7/0VBplkwdvL6Zff5U7QPd322hq7/3bjcD0nYFxW+PEx0A1hrei4r7MJ0MJT5NVQ==
-X-Received: by 2002:a63:f006:: with SMTP id k6mr599786pgh.173.1644006806388;
- Fri, 04 Feb 2022 12:33:26 -0800 (PST)
-Received: from ?IPV6:2001:8003:3a49:fd00:d2cd:dac2:7e7f:5850?
- ([2001:8003:3a49:fd00:d2cd:dac2:7e7f:5850])
- by smtp.gmail.com with ESMTPSA id 16sm3581265pfl.99.2022.02.04.12.33.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Feb 2022 12:33:25 -0800 (PST)
-Message-ID: <d1efe6e1-083e-e419-87aa-7513ee3b28e9@linaro.org>
-Date: Sat, 5 Feb 2022 07:33:17 +1100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH 0/2] RISC-V: Correctly generate store/amo faults
-Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: LIU Zhiwei <zhiwei_liu@c-sky.com>,
- Alistair Francis <alistair.francis@opensource.wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ bh=Y2tcMCDmFtSM7eKk3eKqNe+/OAAgB42qjeSPCisRDIk=;
+ b=gMC296JVkYj0ieBtR31HKq/6cfoEh9g7GO4YXfheluKGV8ZF5xNg4MawMxCiU8Uax9
+ g2yiQ9FwPisr3qKQSmL240t2X2UIxRMiHL217OmJ1e3cNpil28kopsv+X6bnFUW6L6Ig
+ bOyH6NkTagyN1j/NvLTMNOJUh/Y2tIyFL/t2eXXq999D98RBZudzGUKo8DF3Vari06oN
+ vV1jAdP79aYej7IceH4CuxMrd3hCXpW68AlfgmuQsCw/NJ1nkzOM2gAyL3h2yHm9G40+
+ Ba1h6BEXjJol0PrucFoRl4+eFnYWm0QpwRYuEjbZQB3oAJnX3HHNfHvmYjuXH6j9QX6q
+ 6ZOA==
+X-Gm-Message-State: AOAM5326fVEntOwpWE2jvbDAb1OypeVHFLnBNdlgKBSssgSTm+jIDgWj
+ 7R+y+2xXESyZSOVtWHTNp65epA==
+X-Google-Smtp-Source: ABdhPJx2sOVcivcAVVMhdjvV8jZsuUp8Q9gDA3kdz5p1woktwugoezhpbnrqgFsJ9TWNVOqWilXtdw==
+X-Received: by 2002:a05:6808:148e:: with SMTP id
+ e14mr2569876oiw.188.1644021411780; 
+ Fri, 04 Feb 2022 16:36:51 -0800 (PST)
+Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
+ [70.228.75.190])
+ by smtp.gmail.com with ESMTPSA id c22sm1148888oao.43.2022.02.04.16.36.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Feb 2022 16:36:51 -0800 (PST)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Xu <peterx@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- Bin Meng <bmeng.cn@gmail.com>
-References: <20220124005958.38848-1-alistair.francis@opensource.wdc.com>
- <bdc7e993-1baa-0ce9-75f9-fc078617ed4f@c-sky.com>
- <9fe41ac9-f0d9-1122-7ec3-3f20e3667826@linaro.org>
- <CAKmqyKNpefaQMZcW1CsKK22wKMRUxbkPjPAOumei+5NCQsLEVQ@mail.gmail.com>
- <2cb994f2-85e1-451f-c83c-a8403135cdc0@linaro.org>
- <CAKmqyKMRmjwu_DQvZduYwnBwxp1KsY07wzKVLzdw30PWBBEjZA@mail.gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAKmqyKMRmjwu_DQvZduYwnBwxp1KsY07wzKVLzdw30PWBBEjZA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::529
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 0/6] Privilege version update
+Date: Fri,  4 Feb 2022 16:35:59 -0800
+Message-Id: <20220205003605.1150143-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.30.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::22f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
+ envelope-from=atishp@rivosinc.com; helo=mail-oi1-x22f.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,45 +82,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Feb 2022 20:33:30 -0000
+X-List-Received-Date: Sat, 05 Feb 2022 00:36:56 -0000
 
-On 2/4/22 18:36, Alistair Francis wrote:
->> So we need to check for write permission first, before performing the load.
-> 
-> Isn't that what this series does though, albeit for IO accesses only
+RISC-V International (RVI) has ratified many RISC-V ISA extensions recently[1].
+The privileged specification version is also upgraded to v1.12. It means
+certain CSRs introduced in v1.12 should only be accessible only if the
+priv specification version supported is equal or greater than v1.12.
+Doing this check in predicate function is not scalable as there will be
+new CSRs introduced in the future versions of the privileged specification.
 
-No.
+This series tries to address this problem by adding a field in the csr_ops
+which can be checked in csrrw function before invoking the predicate function.
+To keep the code churn to minimum, it is assumed that the minimum version of
+the privilege version supported for any CSR is v1.10 unless specified
+explicitly in the csr_ops table. Any new CSRs introduced in v1.12 have been
+updated accordingly.
 
-> Using probe_write() solves part of this problem. If we have RAM at the
-> address but no permissions to access it, then probe_write() will
-> generate a store/AMO fault. But it won't help if nothing is mapped at
-> that address.
-> 
-> Let's say you are performing an atomic operation at an unmapped
-> address 0x00, in M mode (so no MMU). probe_write() will eventually
-> call riscv_cpu_tlb_fill() and get_physical_address(). On a system
-> without an MMU and no PMP enforcement we get full read/write/execute
-> permissions from riscv_cpu_tlb_fill(). So probe_write() succeeds.
+This will work fine for any ratified extensions. However, it is bit unclear
+what should be done for the stable draft extensions. My suggestion is not
+to update the priv field in the CSR ops table until the extension is
+marked experimental (i.e. not frozen/ratified). Once the extension is
+ratified and graduated from experimental to available stage, the privileged
+spec version should be updated in the csr table if required. I am open to
+other suggestions as well.
 
-True.
+[1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
 
-But there it's not a permission problem, per se.  What are you supposed to get here on 
-riscv?  On some other cpus you don't get a "normal" segv, but a machine check.  I suppose 
-you still want to see "store" rather than "load" in reporting that...
+This series is rebased on top of the AIA v8 to avoid conflicts.
 
+Changes from v1->v2:
+1. Unified both [m/h]envcfg & [m/h]envcfgh into one.
+2. Changed the priv spec version enumeration
+3. Improved csr_ops table to provide better redability.
+4. Fixed the compilation error for CONFIG_USER_ONLY
+5. Rebased on top of the AIA series.
 
->>> Can't we just do the check in the slow path? By the time we get to the
->>> fast path shouldn't we already have permissions?
->>
->> No, the fast path performs the permissions check on one bit [rwx] depending on which tlb
->> comparator it loads.
-> 
-> If you have permissions then that's fine. I thought we went via the
-> slow path if the permission check fails?
+Atish Patra (6):
+target/riscv: Define simpler privileged spec version numbering
+target/riscv: Add the privileged spec version 1.12.0
+target/riscv: Introduce privilege version field in the CSR ops.
+target/riscv: Add support for mconfigptr
+target/riscv: Add *envcfg* CSRs support
+target/riscv: Enable privileged spec version 1.12
 
-We do.  But you haven't changed any permissions checks, so you don't really know what 
-you're getting -- you may not arrive at the slow path at all.
+target/riscv/cpu.c      |   8 +-
+target/riscv/cpu.h      |  16 +++-
+target/riscv/cpu_bits.h |  40 ++++++++
+target/riscv/csr.c      | 197 +++++++++++++++++++++++++++++++++-------
+target/riscv/machine.c  |  24 +++++
+5 files changed, 245 insertions(+), 40 deletions(-)
 
+--
+2.30.2
 
-r~
 
