@@ -1,71 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nG99b-0003iV-49
-	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 19:42:15 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42246)
+	id 1nG9BK-0004Gx-UQ
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Feb 2022 19:44:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42486)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nG99S-0003go-Qv
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:42:10 -0500
-Received: from [2607:f8b0:4864:20::c2c] (port=41913
- helo=mail-oo1-xc2c.google.com)
+ id 1nG9BI-0004Fn-5g
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:44:00 -0500
+Received: from [2607:f8b0:4864:20::236] (port=37793
+ helo=mail-oi1-x236.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nG99Q-0002aO-Tg
- for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:42:06 -0500
-Received: by mail-oo1-xc2c.google.com with SMTP id
- q145-20020a4a3397000000b002e85c7234b1so6541031ooq.8
- for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 16:42:03 -0800 (PST)
+ id 1nG9BF-0002k2-F8
+ for qemu-riscv@nongnu.org; Fri, 04 Feb 2022 19:43:59 -0500
+Received: by mail-oi1-x236.google.com with SMTP id r27so10487011oiw.4
+ for <qemu-riscv@nongnu.org>; Fri, 04 Feb 2022 16:43:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=O+UQgPTWo4oSI1lXL4qP4CNWV5vH/WcWtAOvp8yVUj8=;
- b=w17XdDKF1j0rYLuNdsuG075oPsqjU+JFepUG7YE84E2cbd4gBINzGq1SgKnrcClIzs
- 3HH3aUa0T2F+IHo0y5FDAuxidr0b+/V0YleKm8Ukgc/zzxgUjzpm1gyQSEkyTw9quBdk
- eiHBeCmt4Ww8EDzrjiwPmJa4BF6onBCIJEdv+KSA3cj0ba1Onr8h0aQxJ6F087AKvgqj
- VeNfdGRtxNwmgs2Dry/F454sZHam8CD5EtGkypP550Y5rBjxK3t/BKUSDHjeLi5fdqjF
- FnAADby3AyEBf3WXXVyL4pFldgVaWqR0wqfVyzGDhUdGSZG3IOz9jdrSgp3XAR8A5H3t
- WmEQ==
+ bh=O6PObwqwUIyUdHO/OYUSJ8TGMiaYgn/szHFribdqUcc=;
+ b=cOVnl9CT8NKpSCuBAxYkQsfoOPdaa0gm6K8SzA/J26tm0cTLr2CLAusN6Rss3v3xsf
+ sweftwQ93s1r5ZfvSn21EPViljWI/k6v9OtMHGB9tX6zgRO9X8YG4cpPx1OZHdpnuUIy
+ OJsZ6DPAQsjkGAzbmAGg5IGfSBulqhUTgINIXODVglOFQiGJ5VOLIhMyIcWtEvk1nmpe
+ +Y2WLE6atQnOlkaewAJMib0OplzW4b/Nqie+Q4CDfPmMHHJ40S3ymDq+mpeTmz0/pDIy
+ 0uX/AiIA3zKQbPICe+aiaYNYcQ46tPbTm3CreiyjC+P+6yByIJnEG5k8tGU35Qr2i8DG
+ mzmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=O+UQgPTWo4oSI1lXL4qP4CNWV5vH/WcWtAOvp8yVUj8=;
- b=2BhddF/U9X9YcYHPjafgU+jPMoe7Wn04tDrqh+qdXeM7sjr9YLxLYQwnTcjv9wmIJZ
- 0TgvNWyOzMoTWWDfjv2VV7DLbThP8Un7NN/lH7fztFj1oq1di+dCQjtmq8ZFqhvSTEXX
- ApwxArNrcOCoLHL/M4ESafOubxx+++Fs6SM15FymVYKw2Lu8sIE90PTFWQDMEH3vpEUd
- sjERSoNfOjRn5bk5oqh1p+A8XahNi6gPqjcgog0rMJAenK0YuIjBvaiiADuD4BJhlIeE
- 35yC85DOYOYFbOwUmotpbeKuStkdI37FKW/zjiIItKbGT9IMaOZYCtQgG4I68s1ROD4J
- 3u5A==
-X-Gm-Message-State: AOAM532SeaIiDkxYAKN+HcNPGPIKMbIYbYZ2b43BvZSpzorUNC6oz1Hk
- XZMsYPGtlYKAD5dMmttiPtn4ZrPnkbHM+p67
-X-Google-Smtp-Source: ABdhPJxYtxPUmxf0rxfmsjQLVAFLHcgpKjtCDI0MUDmH+L5V5p3+Ct0bjIeEE8q4MvkP2Sczeo2gaA==
-X-Received: by 2002:a05:6870:3845:: with SMTP id
- z5mr1380989oal.77.1644021416679; 
- Fri, 04 Feb 2022 16:36:56 -0800 (PST)
+ bh=O6PObwqwUIyUdHO/OYUSJ8TGMiaYgn/szHFribdqUcc=;
+ b=QDd9mmCHVkOYsBrwQGEg1tJikWgYrJmiAiaqaq/C3UQTLCMCtCt8HWeajKRCO1R4wJ
+ rQ79r6Kct2rKUjJuvuhqJBmP1+sKNR2/TfwwWkdM337RewiC1cB3SGbkE++0xmo5fCH1
+ GcW6TpoAHEaiwUIfKrCRE4TzQ/fedoE1D1gEATwyEpYxfmIwio/oDcVxDp2lIVU3uXNH
+ 3WIwhTOurLcimq716ozqQjXxx9+nP7IXbLL07g+IpJI2Nu7GCQz6QygGKcMG9PUYqNds
+ 4DCNG8dEROjrwHV83Rx7B5zZM/xWEFdO5fdIxDJ3J1kuP7kXCxoxqZT62Ltso5lhnu1j
+ CTGg==
+X-Gm-Message-State: AOAM531GZcip1KvSuSttZULYHhkxXfWdV1TXEDrHZ5QJFThO5IWgSaoY
+ +FdabGE5c3bfRyaG/RDTsUIXRiCfL80H+FwQ
+X-Google-Smtp-Source: ABdhPJwDtDvViBx68TcnEF7CDux9XUNJ+pBtMLPwoLWSQ9uUR7dcmt30RFp6NpWMb9Vh5aKqHsJKTQ==
+X-Received: by 2002:a05:6870:d413:: with SMTP id
+ i19mr435049oag.54.1644021415431; 
+ Fri, 04 Feb 2022 16:36:55 -0800 (PST)
 Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
  [70.228.75.190])
- by smtp.gmail.com with ESMTPSA id c22sm1148888oao.43.2022.02.04.16.36.55
+ by smtp.gmail.com with ESMTPSA id c22sm1148888oao.43.2022.02.04.16.36.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Feb 2022 16:36:56 -0800 (PST)
+ Fri, 04 Feb 2022 16:36:54 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 4/6] target/riscv: Add support for mconfigptr
-Date: Fri,  4 Feb 2022 16:36:03 -0800
-Message-Id: <20220205003605.1150143-5-atishp@rivosinc.com>
+Subject: [PATCH v2 3/6] target/riscv: Introduce privilege version field in the
+ CSR ops.
+Date: Fri,  4 Feb 2022 16:36:02 -0800
+Message-Id: <20220205003605.1150143-4-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220205003605.1150143-1-atishp@rivosinc.com>
 References: <20220205003605.1150143-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::c2c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::236
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c2c;
- envelope-from=atishp@rivosinc.com; helo=mail-oo1-xc2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
+ envelope-from=atishp@rivosinc.com; helo=mail-oi1-x236.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -85,44 +85,160 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Feb 2022 00:42:11 -0000
+X-List-Received-Date: Sat, 05 Feb 2022 00:44:01 -0000
 
-RISC-V privileged specification v1.12 introduced a mconfigptr
-which will hold the physical address of a configuration data
-structure. As Qemu doesn't have a configuration data structure,
-is read as zero which is valid as per the priv spec.
+To allow/disallow the CSR access based on the privilege spec, a new field
+in the csr_ops is introduced. It also adds the privileged specification
+version (v1.12) for the CSRs introduced in the v1.12. This includes the
+new ratified extensions such as Vector, Hypervisor and secconfig CSR.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu_bits.h | 1 +
- target/riscv/csr.c      | 2 ++
- 2 files changed, 3 insertions(+)
+ target/riscv/cpu.h |   2 +
+ target/riscv/csr.c | 103 ++++++++++++++++++++++++++++++---------------
+ 2 files changed, 70 insertions(+), 35 deletions(-)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index f96d26399607..89440241632a 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -148,6 +148,7 @@
- #define CSR_MARCHID         0xf12
- #define CSR_MIMPID          0xf13
- #define CSR_MHARTID         0xf14
-+#define CSR_MCONFIGPTR      0xf15
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 60b847141db2..0741f9822cf0 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -593,6 +593,8 @@ typedef struct {
+     riscv_csr_op_fn op;
+     riscv_csr_read128_fn read128;
+     riscv_csr_write128_fn write128;
++    /* The default priv spec version should be PRIV_VERSION_1_10_0 (i.e 0) */
++    uint32_t min_priv_ver;
+ } riscv_csr_operations;
  
- /* Machine Trap Setup */
- #define CSR_MSTATUS         0x300
+ /* CSR function table constants */
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 25a0df498669..4366e5e95ce8 100644
+index 8c63caa39245..25a0df498669 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -3020,6 +3020,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
-     [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
-     [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
-+    [CSR_MCONFIGPTR]   = { "mconfigptr", any, read_zero,
+@@ -2981,13 +2981,20 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
+     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
+     /* Vector CSRs */
+-    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
+-    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
+-    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
+-    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
+-    [CSR_VL]       = { "vl",       vs,     read_vl                    },
+-    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype                 },
+-    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb                 },
++    [CSR_VSTART]   = { "vstart",   vs,    read_vstart,  write_vstart,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VXSAT]    = { "vxsat",    vs,    read_vxsat,   write_vxsat,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VXRM]     = { "vxrm",     vs,    read_vxrm,    write_vxrm,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VCSR]     = { "vcsr",     vs,    read_vcsr,    write_vcsr,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VL]       = { "vl",       vs,    read_vl,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VTYPE]    = { "vtype",    vs,    read_vtype,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VLENB]    = { "vlenb",    vs,    read_vlenb,
++                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+     /* User Timers and Counters */
+     [CSR_CYCLE]    = { "cycle",    ctr,    read_instret  },
+     [CSR_INSTRET]  = { "instret",  ctr,    read_instret  },
+@@ -3096,33 +3103,58 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_SIEH]       = { "sieh",   aia_smode32, NULL, NULL, rmw_sieh },
+     [CSR_SIPH]       = { "siph",   aia_smode32, NULL, NULL, rmw_siph },
+ 
+-    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,     write_hstatus     },
+-    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,     write_hedeleg     },
+-    [CSR_HIDELEG]     = { "hideleg",     hmode,   NULL,   NULL,     rmw_hideleg       },
+-    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,     rmw_hvip          },
+-    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,     rmw_hip           },
+-    [CSR_HIE]         = { "hie",         hmode,   NULL,   NULL,     rmw_hie           },
+-    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren,  write_hcounteren  },
+-    [CSR_HGEIE]       = { "hgeie",       hmode,   read_hgeie,       write_hgeie       },
+-    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,       write_htval       },
+-    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,      write_htinst      },
+-    [CSR_HGEIP]       = { "hgeip",       hmode,   read_hgeip,       NULL              },
+-    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,       write_hgatp       },
+-    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta,  write_htimedelta  },
+-    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah },
+-
+-    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,    write_vsstatus    },
+-    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,    rmw_vsip          },
+-    [CSR_VSIE]        = { "vsie",        hmode,   NULL,    NULL,    rmw_vsie          },
+-    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,      write_vstvec      },
+-    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch,   write_vsscratch   },
+-    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,       write_vsepc       },
+-    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,     write_vscause     },
+-    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,      write_vstval      },
+-    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,       write_vsatp       },
+-
+-    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,      write_mtval2      },
+-    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,      write_mtinst      },
++    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,   write_hstatus,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,   write_hedeleg,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HIDELEG]     = { "hideleg",     hmode,   NULL,   NULL, rmw_hideleg,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,   rmw_hvip,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,   rmw_hip,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HIE]         = { "hie",         hmode,   NULL,   NULL,    rmw_hie,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren, write_hcounteren,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HGEIE]       = { "hgeie",       hmode,   read_hgeie,       write_hgeie,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,     write_htval,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,    write_htinst,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HGEIP]       = { "hgeip",       hmode,   read_hgeip,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,     write_hgatp,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta, write_htimedelta,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++
++    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,  write_vsstatus,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,  rmw_vsip,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSIE]        = { "vsie",        hmode,   NULL,    NULL,    rmw_vsie ,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,    write_vstvec,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch, write_vsscratch,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,     write_vsepc,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,   write_vscause,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,    write_vstval,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,     write_vsatp,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++
++    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,    write_mtval2,
++                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,    write_mtinst,
 +                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
  
-     /* Machine Trap Setup */
-     [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
+     /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
+     [CSR_HVIEN]       = { "hvien",       aia_hmode, read_zero, write_ignore },
+@@ -3154,7 +3186,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
+ 
+     /* Physical Memory Protection */
+-    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg },
++    [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
++                                     .min_priv_ver = PRIV_VERSION_1_12_0 },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
 -- 
 2.30.2
 
