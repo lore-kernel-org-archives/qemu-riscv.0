@@ -1,76 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nHL1B-00063N-8M
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Feb 2022 02:34:30 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55296)
+	id 1nHR7C-0004C7-7a
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Feb 2022 09:05:06 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:56852)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nHL0E-0005yD-Vp
- for qemu-riscv@nongnu.org; Tue, 08 Feb 2022 02:33:39 -0500
-Received: from [2a00:1450:4864:20::22f] (port=37481
- helo=mail-lj1-x22f.google.com)
+ (Exim 4.90_1) (envelope-from <liyu.yukiteru@bytedance.com>)
+ id 1nHQDY-00025f-U9
+ for qemu-riscv@nongnu.org; Tue, 08 Feb 2022 08:07:36 -0500
+Received: from [2607:f8b0:4864:20::1034] (port=43653
+ helo=mail-pj1-x1034.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nHKzj-0003Jc-OY
- for qemu-riscv@nongnu.org; Tue, 08 Feb 2022 02:33:03 -0500
-Received: by mail-lj1-x22f.google.com with SMTP id z7so23196964ljj.4
- for <qemu-riscv@nongnu.org>; Mon, 07 Feb 2022 23:32:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <liyu.yukiteru@bytedance.com>)
+ id 1nHQDT-0000JQ-Uz
+ for qemu-riscv@nongnu.org; Tue, 08 Feb 2022 08:07:33 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id
+ t14-20020a17090a3e4e00b001b8f6032d96so1458603pjm.2
+ for <qemu-riscv@nongnu.org>; Tue, 08 Feb 2022 05:07:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=teBn2gs/mOGngDUEriQQpdd1/dGVQQWNhYE6egkr9cE=;
- b=ky1UamkKyBx0mTqmwZQjdHqTZjAZyvATzk5i2q+s5xlTI4ZogZ6/HEFR3h3S6VENWv
- n6ndFczYTY36umWlXwQtPY0ePe9NZYHT24cZVsHW9G60JWJmXA2vo/MEMfeysZnCaMpZ
- eTQDsLi99Iyaye8dWJTp78yt4TXpc9qL8V6k0uji71/iF/bH89Hu4p2qffSFBceu9h94
- Hzi6L2WEV5WOuTbe0pRR3W6+XSsyV4KuLuI3Km08rQHklT0ow7nmup8G1WLirJw5hk3x
- 8oGQTGAJd9KLSam5ECbOOhoK8uLW/zDFQKTcGqYnanweOsk9kBw+HFPzTW+6l2vqG7lg
- Qasw==
+ d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+ h=message-id:date:mime-version:user-agent:to:cc:from:subject
+ :content-transfer-encoding;
+ bh=9VVXLv9TyUydx6CgAjhNGzuxF7/DiDjXDAwDUWWiWzA=;
+ b=xRl0wDP+zkzmNoLVh14/ZRr0d8QAbrCaxSpQ7rCZq8FUfEJScToJ0sehyvuz0Tj1bF
+ prPDlVti4gbQ0HG9T2jdrIIYAuy8CRqnNewy3sW+WmJ+I3jqcE1YlkahzKjdaznWFDMC
+ rdaZh9t9INw/JG7ab9XXugycXROaZ6XA1f2SSyr2qD5RWKcrqKMNqGTs3WXrxrO+BVBh
+ 2xzUBzM3QnHntdaJlLV4m8eaaM+3lG9UxXrWT81oUQ6A2YffgbUky/6NAUHbEY6VFp+n
+ Ftkqhlrv1t1zxDwtYd1zHdt3/JULUsAKzo/YdCdJlr4I0iHYpj/LIPElDoc+cPsVO8lC
+ QI9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=teBn2gs/mOGngDUEriQQpdd1/dGVQQWNhYE6egkr9cE=;
- b=E6Qxb7xcMkz+Dgdw3HuVlzbNgRtRBiP7FA/ozl2Di4K3s/12ebmddIKGImSfJUR0EV
- Hx+UN4dt7sqPNs0AUiusvBRAuIb2XOZrspA37G1p7OsbHW6IsC3JgmX7vt0W0b8VgdFx
- 98B3Pdf5/LgAvjz+JymRBtasivbYxjTXS4N6sMkUGWDHvyM6EBLdA/s3Nl+x1qje0rFE
- 8lpEd1V1fDPozf9LQjreN77W9guIdKlzDxw6Af5cmfYNdCICLkUy1nEtsih6KCf5fiMv
- qS298OuvDUOWIqn7THp0A5BfxfPcgSQ2JQ8QRcvZpfT3fsrr/Qx4+xJyY2obgHJWBJOg
- 2t2g==
-X-Gm-Message-State: AOAM530b5q+xVQQi7AtVzGpNiuD0koIwE2QsThsRJObOTS0mY2hbJofd
- N8NfRjcpljos2U4a7grzWB4Nq2GDfMTkMnZyyh+WBA==
-X-Google-Smtp-Source: ABdhPJwYzIyWG2b64y7pU0XlehVVyXkL7RhxCGAj+QAL5Vu4uMdXqmIMcxSTAC3nvGGj1cVFesHR9C4Zu54C44/MOOs=
-X-Received: by 2002:a2e:bc09:: with SMTP id b9mr2034144ljf.24.1644305562930;
- Mon, 07 Feb 2022 23:32:42 -0800 (PST)
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:to:cc
+ :from:subject:content-transfer-encoding;
+ bh=9VVXLv9TyUydx6CgAjhNGzuxF7/DiDjXDAwDUWWiWzA=;
+ b=oPHuDvkGpzP+Z87CxBgc/Ro9fUWzucU1bSJH4+/MTHSJivWUJkhIDw6HsQy3ZBOvEQ
+ fi1xY2MHB1mNI/SgGB7agl2Gyx59gzV3DuNGKBCHqQ9js2bQYJ1yw4nMSUvKHI0btoAZ
+ vt6mzlZ13O3MYcF824pljnNru7JR94ToMhe18wLS3LZf6o4asa3Sg6psUS62EDL3L4Bg
+ eTnqN6EkKED749e6IodhtYdj7aAlz8bdgWa4IGk3TJTv4FOMuMQFHjgffrCva+HCtuU6
+ kOSwFu6HOB50whOOh44iGbFqyb2ZODkGWMVKYWgX/Of+0GIWfLxtbtEwSdaUaWmdtt/8
+ gxIQ==
+X-Gm-Message-State: AOAM53280/K+dae1C2NI/N44H3yH7ufuDvMHohJrMHDbAg/N7sxc000Z
+ gqdcb4Yp/ITB0UKKh1ehT955Uw==
+X-Google-Smtp-Source: ABdhPJwu1tS82V3naUaMqFuWAnnxxGM0cseEvS4MIfLwi6FwMC2VfrKuILsqp3mgISeyZyWWfqozsg==
+X-Received: by 2002:a17:902:f549:: with SMTP id
+ h9mr4626554plf.62.1644325648814; 
+ Tue, 08 Feb 2022 05:07:28 -0800 (PST)
+Received: from [10.87.51.42] ([139.177.225.229])
+ by smtp.gmail.com with ESMTPSA id s84sm11625532pgs.77.2022.02.08.05.07.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Feb 2022 05:07:28 -0800 (PST)
+Message-ID: <9040401e-8f87-ef4a-d840-6703f08d068c@bytedance.com>
+Date: Tue, 8 Feb 2022 21:07:23 +0800
 MIME-Version: 1.0
-References: <20220204174700.534953-1-anup@brainfault.org>
- <CAKmqyKO7QnMwSL1Mpa5BJU44EAQxyG2M-sOE8+yAH0SWrmVDug@mail.gmail.com>
- <CAKmqyKOjr3Dcs8_QZKsa=WkBp0BaYghcUNYMEU3RfyJJmcqJOQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKOjr3Dcs8_QZKsa=WkBp0BaYghcUNYMEU3RfyJJmcqJOQ@mail.gmail.com>
-From: Anup Patel <apatel@ventanamicro.com>
-Date: Tue, 8 Feb 2022 13:02:31 +0530
-Message-ID: <CAK9=C2UPEn3qP99QyrJn4w4DxPKH+giwDWNMbBaBVC=ZraDhDQ@mail.gmail.com>
-Subject: Re: [PATCH v9 00/23] QEMU RISC-V AIA support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Anup Patel <anup@brainfault.org>, Peter Maydell <peter.maydell@linaro.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bmeng.cn@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::22f
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.2
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, liyu.yukiteru@bytedance.com
+From: Yu Li <liyu.yukiteru@bytedance.com>
+Subject: [PATCH] docs/system: riscv: Update description of CPU
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1034
  (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=apatel@ventanamicro.com; helo=mail-lj1-x22f.google.com
-X-Spam_score_int: -12
-X-Spam_score: -1.3
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=liyu.yukiteru@bytedance.com; helo=mail-pj1-x1034.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.3 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 08 Feb 2022 09:05:04 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,139 +82,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Feb 2022 07:33:55 -0000
+X-List-Received-Date: Tue, 08 Feb 2022 13:07:37 -0000
 
-On Tue, Feb 8, 2022 at 12:27 PM Alistair Francis <alistair23@gmail.com> wrote:
->
-> On Tue, Feb 8, 2022 at 2:16 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Sat, Feb 5, 2022 at 3:47 AM Anup Patel <anup@brainfault.org> wrote:
-> > >
-> > > From: Anup Patel <anup.patel@wdc.com>
-> > >
-> > > The advanced interrupt architecture (AIA) extends the per-HART local
-> > > interrupt support. Along with this, it also adds IMSIC (MSI contrllor)
-> > > and Advanced PLIC (wired interrupt controller).
-> > >
-> > > The latest AIA draft specification can be found here:
-> > > https://github.com/riscv/riscv-aia/releases/download/0.2-draft.28/riscv-interrupts-028.pdf
-> > >
-> > > This series adds RISC-V AIA support in QEMU which includes emulating all
-> > > AIA local CSRs, APLIC, and IMSIC. Only AIA local interrupt filtering is
-> > > not implemented because we don't have any local interrupt greater than 12.
-> > >
-> > > To enable AIA in QEMU, use one of the following:
-> > > 1) Only AIA local interrupt CSRs: Pass "x-aia=true" as CPU paramenter
-> > >    in the QEMU command-line
-> > > 2) Only APLIC for virt machine: Pass "aia=aplic" as machine parameter
-> > >    in the QEMU command-line
-> > > 3) Both APLIC and IMSIC for virt machine: Pass "aia=aplic-imsic" as
-> > >    machine parameter in the QEMU command-line
-> > > 4) Both APLIC and IMSIC with 2 guest files for virt machine: Pass
-> > >    "aia=aplic-imsic,aia-guests=2" as machine parameter in the QEMU
-> > >    command-line
-> > >
-> > > To test series, we require OpenSBI and Linux with AIA support which can
-> > > be found in:
-> > > riscv_aia_v2 branch at https://github.com/avpatel/opensbi.git
-> > > riscv_aia_v1 branch at https://github.com/avpatel/linux.git
-> > >
-> > > This series can be found riscv_aia_v9 branch at:
-> > > https://github.com/avpatel/qemu.git
-> > >
-> > > Changes since v8:
-> > >  - Use error_setg() in riscv_imsic_realize() added by PATCH20
-> > >
-> > > Changes since v7:
-> > >  - Rebased on latest riscv-to-apply.next branch of Alistair's repo
-> > >  - Improved default priority assignment in PATCH9
-> > >
-> > > Changes since v6:
-> > >  - Fixed priority comparison in riscv_cpu_pending_to_irq() of PATCH9
-> > >  - Fixed typos in comments added by PATCH11
-> > >  - Added "pend = true;" for CSR_MSETEIPNUM case of rmw_xsetclreinum()
-> > >    in PATCH15
-> > >  - Handle ithreshold == 0 case in riscv_aplic_idc_topi() of PATCH18
-> > >  - Allow setting pending bit for Level0 or Level1 interrupts in
-> > >    riscv_aplic_set_pending() of PATCH18
-> > >  - Force DOMAINCFG[31:24] bits to 0x80 in riscv_aplic_read() of PATCH18
-> > >  - For APLIC direct mode, set target.iprio to 1 when zero is writtern
-> > >    in PATCH18
-> > >  - Handle eithreshold == 0 case in riscv_imsic_topei() of PATCH20
-> > >
-> > > Changes since v5:
-> > >  - Moved VSTOPI_NUM_SRCS define to top of the file in PATCH13
-> > >  - Fixed typo in PATCH16
-> > >
-> > > Changes since v4:
-> > >  - Changed IRQ_LOCAL_MAX to 16 in PATCH2
-> > >  - Fixed typo in PATCH10
-> > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH11
-> > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH14
-> > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH15
-> > >  - Replaced TARGET_LONG_BITS with xlen passed via ireg callback in PATCH20
-> > >  - Retrict maximum IMSIC guest files per-HART of virt machine to 7 in
-> > >    PATCH21.
-> > >  - Added separate PATCH23 to increase maximum number of allowed CPUs
-> > >    for virt machine
-> > >
-> > > Changes since v3:
-> > >  - Replaced "aplic,xyz" and "imsic,xyz" DT properties with "riscv,xyz"
-> > >    DT properties because "aplic" and "imsic" are not valid vendor names
-> > >    required by Linux DT schema checker.
-> > >
-> > > Changes since v2:
-> > >  - Update PATCH4 to check and inject interrupt after V=1 when
-> > >    transitioning from V=0 to V=1
-> > >
-> > > Changes since v1:
-> > >  - Revamped whole series and created more granular patches
-> > >  - Added HGEIE and HGEIP CSR emulation for H-extension
-> > >  - Added APLIC emulation
-> > >  - Added IMSIC emulation
-> > >
-> > > Anup Patel (23):
-> > >   target/riscv: Fix trap cause for RV32 HS-mode CSR access from RV64
-> > >     HS-mode
-> > >   target/riscv: Implement SGEIP bit in hip and hie CSRs
-> > >   target/riscv: Implement hgeie and hgeip CSRs
-> > >   target/riscv: Improve delivery of guest external interrupts
-> > >   target/riscv: Allow setting CPU feature from machine/device emulation
-> > >   target/riscv: Add AIA cpu feature
-> > >   target/riscv: Add defines for AIA CSRs
-> > >   target/riscv: Allow AIA device emulation to set ireg rmw callback
-> > >   target/riscv: Implement AIA local interrupt priorities
-> > >   target/riscv: Implement AIA CSRs for 64 local interrupts on RV32
-> > >   target/riscv: Implement AIA hvictl and hviprioX CSRs
-> > >   target/riscv: Implement AIA interrupt filtering CSRs
-> > >   target/riscv: Implement AIA mtopi, stopi, and vstopi CSRs
-> > >   target/riscv: Implement AIA xiselect and xireg CSRs
-> > >   target/riscv: Implement AIA IMSIC interface CSRs
-> > >   hw/riscv: virt: Use AIA INTC compatible string when available
-> > >   target/riscv: Allow users to force enable AIA CSRs in HART
-> > >   hw/intc: Add RISC-V AIA APLIC device emulation
-> > >   hw/riscv: virt: Add optional AIA APLIC support to virt machine
-> > >   hw/intc: Add RISC-V AIA IMSIC device emulation
-> > >   hw/riscv: virt: Add optional AIA IMSIC support to virt machine
-> > >   docs/system: riscv: Document AIA options for virt machine
-> > >   hw/riscv: virt: Increase maximum number of allowed CPUs
->
-> Hey Anup,
->
-> There are lots of checkpatch errors in these patches. In the future
-> can you please make sure you run checkpatch on all patches.
+Since the hypervisor extension been non experimental and enabled for
+default CPU, the previous command is no longer available and the
+option `x-h=true` or `h=true` is also no longer required.
 
-I had run checkpatch on initial patch revisions but at some point I
-stopped running checkpatch on every patch revision.
+Signed-off-by: Yu Li <liyu.yukiteru@bytedance.com>
+---
+  docs/system/riscv/virt.rst | 6 +++---
+  1 file changed, 3 insertions(+), 3 deletions(-)
 
-I will make sure to run checkpatch on all patch revisions going
-forward.
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index fa016584bf..08ce3c4177 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -23,9 +23,9 @@ The ``virt`` machine supports the following devices:
+  * 1 generic PCIe host bridge
+  * The fw_cfg device that allows a guest to obtain data from QEMU
 
->
-> In this case I have manually fixed them up.
+-Note that the default CPU is a generic RV32GC/RV64GC. Optional extensions
+-can be enabled via command line parameters, e.g.: ``-cpu rv64,x-h=true``
+-enables the hypervisor extension for RV64.
++The hypervisor extension has been enabled for the default CPU, so virtual
++machines with hypervisor extension can simply be used without explicitly
++declaring.
 
-Thanks and my apologies for the inconvenience.
-
-Regards,
-Anup
+  Hardware configuration information
+  ----------------------------------
+-- 
+2.20.1
 
