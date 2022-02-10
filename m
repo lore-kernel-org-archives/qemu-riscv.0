@@ -1,77 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nI6db-0001xh-Bd
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Feb 2022 05:25:19 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55212)
+	id 1nICPO-0007dJ-Es
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Feb 2022 11:35:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:40606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nI6dU-0001ub-GK
- for qemu-riscv@nongnu.org; Thu, 10 Feb 2022 05:25:13 -0500
-Received: from [2a00:1450:4864:20::435] (port=42752
- helo=mail-wr1-x435.google.com)
+ (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
+ id 1nICPL-0007bg-EB; Thu, 10 Feb 2022 11:34:59 -0500
+Received: from mail-ej1-f44.google.com ([209.85.218.44]:34503)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nI6dP-00014K-T8
- for qemu-riscv@nongnu.org; Thu, 10 Feb 2022 05:25:12 -0500
-Received: by mail-wr1-x435.google.com with SMTP id h6so8619212wrb.9
- for <qemu-riscv@nongnu.org>; Thu, 10 Feb 2022 02:24:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=znHsyHjkEqwu7kVELjfsYjFqo4jsJ7jk+ioSeqZ1JNg=;
- b=n9nWgQHiHf+ok45v43IWPd/nkLSxndg62uHkPuWBCXQWOLmJtWaDr9sECiOe2rsJBS
- EabytwNfrIoRiVvJyBOiFGVPAv+/J2SpvGETvh2sG7hlerO0WTWJ/4S92nLEOTT7xPuT
- NZKG5wbOlOBy/spMLbNbDJo8tiz9yms4sfXqZc4oAO2hVF07tBorPc5mLLp+3aDmbuWe
- SnIzb3ZnIYofxF9fur1zkXEGeGAnu3AgZyy/4VZIHaXGexXs66qKqBZEuhOBohD1sgrE
- gOhMMC86M2kwpxF9/AKve+ZfktUABLTEwtP6OXEKFyrUHN7r/amN89IH2DRavHHbhfo4
- X4Bw==
+ (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
+ id 1nICPI-0005gk-V7; Thu, 10 Feb 2022 11:34:59 -0500
+Received: by mail-ej1-f44.google.com with SMTP id p24so16734210ejo.1;
+ Thu, 10 Feb 2022 08:34:55 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=znHsyHjkEqwu7kVELjfsYjFqo4jsJ7jk+ioSeqZ1JNg=;
- b=miRcpwkV8UZfJILtN9RucqmPzdBXPEtjj0koEDMz2PJ2+/zbehF7dRoWP+5A/QnOQk
- qRXElORJV10syFnR+sdpg91SLCkujZ9S7k80YLUAAwjmu43gI6Ke5bqqYxZgtQk4cJ8G
- 5DYCc65aHmCZ8LPooRYPRoMhRXtD5kijbuSqUx+nWjI9Ocutscfz+L6HnynB/BtN3Br7
- 05AP31QqAx0pW0arjUiMRRacjGt/+6xrmXtrwraFtoBOoOPg6VOndgkqM50axpPPuX3o
- 8RgIK2zVqrFxVZcSWUgUUSbtw2bsrd5RRbwZF1AZzhyKMYqBrfL8iFVTAT9h4xglz/xA
- 2QYQ==
-X-Gm-Message-State: AOAM530k6wvm6NF97BHkLNHytvJFTqEe+aBcAGX/nlqcD5hG22YQIFyn
- w72haKwfsARZjld+F8c7IJyMJsXP4Xu0InGe44ahjg==
-X-Google-Smtp-Source: ABdhPJxr6yOLlqHB1kUVN/bMBjk1Jc9n6MdJvlwpkDV4AqaNQB4ij3j6lE7HiJfuakVBWzTTNybASsWp4++qzokKisI=
-X-Received: by 2002:a05:6000:1e0a:: with SMTP id
- bj10mr5735021wrb.313.1644488688916; 
- Thu, 10 Feb 2022 02:24:48 -0800 (PST)
-MIME-Version: 1.0
-References: <20220204174700.534953-1-anup@brainfault.org>
- <CAKmqyKO7QnMwSL1Mpa5BJU44EAQxyG2M-sOE8+yAH0SWrmVDug@mail.gmail.com>
- <CAKmqyKOjr3Dcs8_QZKsa=WkBp0BaYghcUNYMEU3RfyJJmcqJOQ@mail.gmail.com>
- <CAOnJCUJFQjk_sagCEYYTuD+Gh-9RuD6wsFkdnFhY2kHE7shZtg@mail.gmail.com>
-In-Reply-To: <CAOnJCUJFQjk_sagCEYYTuD+Gh-9RuD6wsFkdnFhY2kHE7shZtg@mail.gmail.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 10 Feb 2022 15:54:38 +0530
-Message-ID: <CAAhSdy1Xc7k5V55Bkgv1-Z6BGtJ7BsXgLMF437p7mh7QC+H8=A@mail.gmail.com>
-Subject: Re: [PATCH v9 00/23] QEMU RISC-V AIA support
-To: Atish Patra <atishp@atishpatra.org>
-Cc: Alistair Francis <alistair23@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=elasF3qA5b9pvXrd+VIVl8HzTV5vAD7ztUaAwNVvaWI=;
+ b=HwosmPEHuB7/dIFCyKSwRm/CIBXhEX041FmNcIhvDB/BMtVutMLMXUJAmGEbWRydsr
+ fVSmaYlbk902ciogh2fe9EWnzHeF8KdvF5x8f5k9mUnuf0jG/XiAUewzPkVcHiQU6lon
+ /n+6lOW3Vz8b0iBs5qYBpNjV4jJcusVsXv+jPupyCZJGBxqQJMSBhRaTNGGi4pWd5LvK
+ 0tziJRMI2cTxnX491IiiW2pHc9EMVz2cD44fN8UdtKph9rhXF3kjZx4rWHKTC9ooUlrv
+ YtmSh9qSU+ke+9OzBfIeoP37/sndVsAw1wFosdLLsj3R08KOKqgGMom2fj6ZnMsOxSP3
+ w0KA==
+X-Gm-Message-State: AOAM531yfxEr16qQBpyfnqf8IiZomWlu5026YjSk+XGWvuTO3wU1zowD
+ NSsecbjz0+5K+QCoM8fdVpI=
+X-Google-Smtp-Source: ABdhPJz65qeEWT4HuDetRyi4Egne8DO48GOy8Adbgvbw7LL/49FGlr0xvGXSyC+Jw7ng79U4Qr9Yaw==
+X-Received: by 2002:a17:906:6a0f:: with SMTP id
+ qw15mr7164764ejc.66.1644510894018; 
+ Thu, 10 Feb 2022 08:34:54 -0800 (PST)
+Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
+ [62.178.148.172])
+ by smtp.gmail.com with ESMTPSA id t8sm3968247eji.94.2022.02.10.08.34.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Feb 2022 08:34:53 -0800 (PST)
+From: Christoph Muellner <cmuellner@linux.com>
+To: Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
+ <frederic.petrot@univ-grenoble-alpes.fr>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Bin Meng <bmeng.cn@gmail.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::435
- (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::435;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x435.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Christoph Muellner <cmuellner@linux.com>
+Subject: [PATCH v3] target/riscv: Enable Zicbo[m,z,p] instructions
+Date: Thu, 10 Feb 2022 17:34:49 +0100
+Message-Id: <20220210163449.3859905-1-cmuellner@linux.com>
+X-Mailer: git-send-email 2.35.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=209.85.218.44;
+ envelope-from=christophm30@gmail.com; helo=mail-ej1-f44.google.com
+X-Spam_score_int: -11
+X-Spam_score: -1.2
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FORGED_FROMDOMAIN=0.248, FREEMAIL_FROM=0.001,
+ HEADER_FROM_DIFFERENT_DOMAINS=0.248, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,186 +72,324 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2022 10:25:13 -0000
+X-List-Received-Date: Thu, 10 Feb 2022 16:35:00 -0000
 
-On Thu, Feb 10, 2022 at 1:58 PM Atish Patra <atishp@atishpatra.org> wrote:
->
-> On Mon, Feb 7, 2022 at 10:51 PM Alistair Francis <alistair23@gmail.com> w=
-rote:
-> >
-> > On Tue, Feb 8, 2022 at 2:16 PM Alistair Francis <alistair23@gmail.com> =
-wrote:
-> > >
-> > > On Sat, Feb 5, 2022 at 3:47 AM Anup Patel <anup@brainfault.org> wrote=
-:
-> > > >
-> > > > From: Anup Patel <anup.patel@wdc.com>
-> > > >
-> > > > The advanced interrupt architecture (AIA) extends the per-HART loca=
-l
-> > > > interrupt support. Along with this, it also adds IMSIC (MSI contrll=
-or)
-> > > > and Advanced PLIC (wired interrupt controller).
-> > > >
-> > > > The latest AIA draft specification can be found here:
-> > > > https://github.com/riscv/riscv-aia/releases/download/0.2-draft.28/r=
-iscv-interrupts-028.pdf
-> > > >
-> > > > This series adds RISC-V AIA support in QEMU which includes emulatin=
-g all
-> > > > AIA local CSRs, APLIC, and IMSIC. Only AIA local interrupt filterin=
-g is
-> > > > not implemented because we don't have any local interrupt greater t=
-han 12.
-> > > >
-> > > > To enable AIA in QEMU, use one of the following:
-> > > > 1) Only AIA local interrupt CSRs: Pass "x-aia=3Dtrue" as CPU parame=
-nter
-> > > >    in the QEMU command-line
-> > > > 2) Only APLIC for virt machine: Pass "aia=3Daplic" as machine param=
-eter
-> > > >    in the QEMU command-line
-> > > > 3) Both APLIC and IMSIC for virt machine: Pass "aia=3Daplic-imsic" =
-as
-> > > >    machine parameter in the QEMU command-line
-> > > > 4) Both APLIC and IMSIC with 2 guest files for virt machine: Pass
-> > > >    "aia=3Daplic-imsic,aia-guests=3D2" as machine parameter in the Q=
-EMU
-> > > >    command-line
-> > > >
-> > > > To test series, we require OpenSBI and Linux with AIA support which=
- can
-> > > > be found in:
-> > > > riscv_aia_v2 branch at https://github.com/avpatel/opensbi.git
-> > > > riscv_aia_v1 branch at https://github.com/avpatel/linux.git
-> > > >
-> > > > This series can be found riscv_aia_v9 branch at:
-> > > > https://github.com/avpatel/qemu.git
-> > > >
-> > > > Changes since v8:
-> > > >  - Use error_setg() in riscv_imsic_realize() added by PATCH20
-> > > >
-> > > > Changes since v7:
-> > > >  - Rebased on latest riscv-to-apply.next branch of Alistair's repo
-> > > >  - Improved default priority assignment in PATCH9
-> > > >
-> > > > Changes since v6:
-> > > >  - Fixed priority comparison in riscv_cpu_pending_to_irq() of PATCH=
-9
-> > > >  - Fixed typos in comments added by PATCH11
-> > > >  - Added "pend =3D true;" for CSR_MSETEIPNUM case of rmw_xsetclrein=
-um()
-> > > >    in PATCH15
-> > > >  - Handle ithreshold =3D=3D 0 case in riscv_aplic_idc_topi() of PAT=
-CH18
-> > > >  - Allow setting pending bit for Level0 or Level1 interrupts in
-> > > >    riscv_aplic_set_pending() of PATCH18
-> > > >  - Force DOMAINCFG[31:24] bits to 0x80 in riscv_aplic_read() of PAT=
-CH18
-> > > >  - For APLIC direct mode, set target.iprio to 1 when zero is writte=
-rn
-> > > >    in PATCH18
-> > > >  - Handle eithreshold =3D=3D 0 case in riscv_imsic_topei() of PATCH=
-20
-> > > >
-> > > > Changes since v5:
-> > > >  - Moved VSTOPI_NUM_SRCS define to top of the file in PATCH13
-> > > >  - Fixed typo in PATCH16
-> > > >
-> > > > Changes since v4:
-> > > >  - Changed IRQ_LOCAL_MAX to 16 in PATCH2
-> > > >  - Fixed typo in PATCH10
-> > > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH1=
-1
-> > > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH1=
-4
-> > > >  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH1=
-5
-> > > >  - Replaced TARGET_LONG_BITS with xlen passed via ireg callback in =
-PATCH20
-> > > >  - Retrict maximum IMSIC guest files per-HART of virt machine to 7 =
-in
-> > > >    PATCH21.
-> > > >  - Added separate PATCH23 to increase maximum number of allowed CPU=
-s
-> > > >    for virt machine
-> > > >
-> > > > Changes since v3:
-> > > >  - Replaced "aplic,xyz" and "imsic,xyz" DT properties with "riscv,x=
-yz"
-> > > >    DT properties because "aplic" and "imsic" are not valid vendor n=
-ames
-> > > >    required by Linux DT schema checker.
-> > > >
-> > > > Changes since v2:
-> > > >  - Update PATCH4 to check and inject interrupt after V=3D1 when
-> > > >    transitioning from V=3D0 to V=3D1
-> > > >
-> > > > Changes since v1:
-> > > >  - Revamped whole series and created more granular patches
-> > > >  - Added HGEIE and HGEIP CSR emulation for H-extension
-> > > >  - Added APLIC emulation
-> > > >  - Added IMSIC emulation
-> > > >
-> > > > Anup Patel (23):
-> > > >   target/riscv: Fix trap cause for RV32 HS-mode CSR access from RV6=
-4
-> > > >     HS-mode
-> > > >   target/riscv: Implement SGEIP bit in hip and hie CSRs
-> > > >   target/riscv: Implement hgeie and hgeip CSRs
-> > > >   target/riscv: Improve delivery of guest external interrupts
-> > > >   target/riscv: Allow setting CPU feature from machine/device emula=
-tion
-> > > >   target/riscv: Add AIA cpu feature
-> > > >   target/riscv: Add defines for AIA CSRs
-> > > >   target/riscv: Allow AIA device emulation to set ireg rmw callback
-> > > >   target/riscv: Implement AIA local interrupt priorities
-> > > >   target/riscv: Implement AIA CSRs for 64 local interrupts on RV32
-> > > >   target/riscv: Implement AIA hvictl and hviprioX CSRs
-> > > >   target/riscv: Implement AIA interrupt filtering CSRs
-> > > >   target/riscv: Implement AIA mtopi, stopi, and vstopi CSRs
-> > > >   target/riscv: Implement AIA xiselect and xireg CSRs
-> > > >   target/riscv: Implement AIA IMSIC interface CSRs
-> > > >   hw/riscv: virt: Use AIA INTC compatible string when available
-> > > >   target/riscv: Allow users to force enable AIA CSRs in HART
-> > > >   hw/intc: Add RISC-V AIA APLIC device emulation
-> > > >   hw/riscv: virt: Add optional AIA APLIC support to virt machine
-> > > >   hw/intc: Add RISC-V AIA IMSIC device emulation
-> > > >   hw/riscv: virt: Add optional AIA IMSIC support to virt machine
-> > > >   docs/system: riscv: Document AIA options for virt machine
-> > > >   hw/riscv: virt: Increase maximum number of allowed CPUs
-> >
-> > Hey Anup,
-> >
-> > There are lots of checkpatch errors in these patches. In the future
-> > can you please make sure you run checkpatch on all patches.
-> >
-> > In this case I have manually fixed them up.
-> >
-> > Alistair
->
-> I am also getting this error in gcc 11.1.0 on your tree "riscv-to-apply.n=
-ext"
->
-> ../target/riscv/csr.c: In function =E2=80=98rmw_sie=E2=80=99:
-> ../target/riscv/csr.c:1571:18: error: =E2=80=98rval=E2=80=99 may be used =
-uninitialized
-> in this function [-Werror=3Dmaybe-uninitialized]
->  1571 |         *ret_val =3D rval;
->       |         ~~~~~~~~~^~~~~~
-> cc1: all warnings being treated as errors
->
-> I guess you will fix it directly in the correct patch. Let me know if
-> you want me to send a patch.
+The RISC-V base cache management operation ISA extension has been
+ratified [1]. This patch adds support for the defined instructions.
 
-I suggest you directly send a fix since you are able to reproduce
-this error.
+The cmo.prefetch instructions are nops for QEMU (no emulation of the memory
+hierarchy, no illegal instructions, no permission faults, no traps),
+therefore there's only a comment where they would be decoded.
 
-Regards,
-Anup
+The other cbo* instructions are moved into an overlap group to
+resolve the overlapping pattern with the LQ instruction.
+The cbo.zero zeros a configurable amount of bytes.
+Similar to other extensions (e.g. atomic instructions),
+the trap behavior is limited such, that only the page permissions
+are checked (ignoring other optional protection mechanisms like
+PMA or PMP).
 
->
-> --
-> Regards,
-> Atish
+[1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+
+v3:
+- Enable by default (like zb*)
+- Rename flags Zicbo* -> zicbo* (like zb*)
+- Rename ext_zicbo* -> ext_icbo* (like ext_icsr)
+- Rename trans_zicbo.c.inc -> trans_rvzicbo.c.inc (like all others)
+- Simplify prefetch instruction support to a single comment
+- Rebase on top of github-alistair23/riscv-to-apply.next plus the
+  Priv v1.12 series from github-atishp04/priv_1_12_support_v3
+
+v2:
+- Fix overlapping instruction encoding with LQ instructions
+- Drop CSR related changes and rebase on Priv 1.12 patchset
+
+Co-developed-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Signed-off-by: Christoph Muellner <cmuellner@linux.com>
+---
+ target/riscv/cpu.c                          |  3 +
+ target/riscv/cpu.h                          |  3 +
+ target/riscv/helper.h                       |  5 ++
+ target/riscv/insn32.decode                  | 16 +++-
+ target/riscv/insn_trans/trans_rvzicbo.c.inc | 57 +++++++++++++
+ target/riscv/op_helper.c                    | 94 +++++++++++++++++++++
+ target/riscv/translate.c                    |  1 +
+ 7 files changed, 178 insertions(+), 1 deletion(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicbo.c.inc
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 39ffb883fc..cbd0a34318 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -764,6 +764,9 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
++    DEFINE_PROP_BOOL("zicbom", RISCVCPU, cfg.ext_icbom, true),
++    DEFINE_PROP_BOOL("zicboz", RISCVCPU, cfg.ext_icboz, true),
++    DEFINE_PROP_UINT16("cbozlen", RISCVCPU, cfg.cbozlen, 64),
+     DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+     DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+     DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index fe80caeec0..7bd2fd26d6 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -368,6 +368,8 @@ struct RISCVCPUConfig {
+     bool ext_counters;
+     bool ext_ifencei;
+     bool ext_icsr;
++    bool ext_icbom;
++    bool ext_icboz;
+     bool ext_zfh;
+     bool ext_zfhmin;
+     bool ext_zve32f;
+@@ -382,6 +384,7 @@ struct RISCVCPUConfig {
+     char *vext_spec;
+     uint16_t vlen;
+     uint16_t elen;
++    uint16_t cbozlen;
+     bool mmu;
+     bool pmp;
+     bool epmp;
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 72cc2582f4..ef1944da8f 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -92,6 +92,11 @@ DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
+ DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
+ DEF_HELPER_FLAGS_1(fclass_h, TCG_CALL_NO_RWG_SE, tl, i64)
+ 
++/* Cache-block operations */
++DEF_HELPER_2(cbo_clean_flush, void, env, tl)
++DEF_HELPER_2(cbo_inval, void, env, tl)
++DEF_HELPER_2(cbo_zero, void, env, tl)
++
+ /* Special functions */
+ DEF_HELPER_2(csrr, tl, env, int)
+ DEF_HELPER_3(csrw, void, env, int, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 5bbedc254c..d5f8329970 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -128,6 +128,7 @@ addi     ............     ..... 000 ..... 0010011 @i
+ slti     ............     ..... 010 ..... 0010011 @i
+ sltiu    ............     ..... 011 ..... 0010011 @i
+ xori     ............     ..... 100 ..... 0010011 @i
++# cbo.prefetch_{i,r,m} instructions are ori with rd=x0 and not decoded.
+ ori      ............     ..... 110 ..... 0010011 @i
+ andi     ............     ..... 111 ..... 0010011 @i
+ slli     00000. ......    ..... 001 ..... 0010011 @sh
+@@ -168,7 +169,20 @@ sraw     0100000 .....  ..... 101 ..... 0111011 @r
+ 
+ # *** RV128I Base Instruction Set (in addition to RV64I) ***
+ ldu      ............   ..... 111 ..... 0000011 @i
+-lq       ............   ..... 010 ..... 0001111 @i
++{
++  [
++    # *** RV32 Zicbom Standard Extension ***
++    cbo_clean  0000000 00001 ..... 010 00000 0001111 @sfence_vm
++    cbo_flush  0000000 00010 ..... 010 00000 0001111 @sfence_vm
++    cbo_inval  0000000 00000 ..... 010 00000 0001111 @sfence_vm
++
++    # *** RV32 Zicboz Standard Extension ***
++    cbo_zero   0000000 00100 ..... 010 00000 0001111 @sfence_vm
++  ]
++
++  # *** RVI128 lq ***
++  lq       ............   ..... 010 ..... 0001111 @i
++}
+ sq       ............   ..... 100 ..... 0100011 @s
+ addid    ............  .....  000 ..... 1011011 @i
+ sllid    000000 ......  ..... 001 ..... 1011011 @sh6
+diff --git a/target/riscv/insn_trans/trans_rvzicbo.c.inc b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+new file mode 100644
+index 0000000000..35c277261f
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzicbo.c.inc
+@@ -0,0 +1,57 @@
++/*
++ * RISC-V translation routines for the RISC-V CBO Extension.
++ *
++ * Copyright (c) 2021 Philipp Tomsich, philipp.tomsich@vrull.eu
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZICBOM(ctx) do {		\
++    if (!RISCV_CPU(ctx->cs)->cfg.ext_icbom) {	\
++        return false;				\
++    }						\
++} while (0)
++
++#define REQUIRE_ZICBOZ(ctx) do {		\
++    if (!RISCV_CPU(ctx->cs)->cfg.ext_icboz) {	\
++        return false;				\
++    }						\
++} while (0)
++
++static bool trans_cbo_clean(DisasContext *ctx, arg_cbo_clean *a)
++{
++    REQUIRE_ZICBOM(ctx);
++    gen_helper_cbo_clean_flush(cpu_env, cpu_gpr[a->rs1]);
++    return true;
++}
++
++static bool trans_cbo_flush(DisasContext *ctx, arg_cbo_flush *a)
++{
++    REQUIRE_ZICBOM(ctx);
++    gen_helper_cbo_clean_flush(cpu_env, cpu_gpr[a->rs1]);
++    return true;
++}
++
++static bool trans_cbo_inval(DisasContext *ctx, arg_cbo_inval *a)
++{
++    REQUIRE_ZICBOM(ctx);
++    gen_helper_cbo_inval(cpu_env, cpu_gpr[a->rs1]);
++    return true;
++}
++
++static bool trans_cbo_zero(DisasContext *ctx, arg_cbo_zero *a)
++{
++    REQUIRE_ZICBOZ(ctx);
++    gen_helper_cbo_zero(cpu_env, cpu_gpr[a->rs1]);
++    return true;
++}
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 1a75ba11e6..21762bc2e0 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -3,6 +3,7 @@
+  *
+  * Copyright (c) 2016-2017 Sagar Karandikar, sagark@eecs.berkeley.edu
+  * Copyright (c) 2017-2018 SiFive, Inc.
++ * Copyright (c) 2022      VRULL GmbH
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
+@@ -114,6 +115,99 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
+     return int128_getlo(rv);
+ }
+ 
++
++/* helper_zicbo_envcfg
++ *
++ * Raise virtual exceptions and illegal instruction exceptions for
++ * Zicbo[mz] instructions based on the settings of [mhs]envcfg as
++ * specified in section 2.5.1 of the CMO specification.
++ */
++static void helper_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
++                                uintptr_t ra)
++{
++#ifndef CONFIG_USER_ONLY
++    /* Check for virtual instruction exceptions first, as we don't see
++     * VU and VS reflected in env->priv (these are just the translated
++     * U and S stated with virtualisation enabled.
++     */
++    if (riscv_cpu_virt_enabled(env) &&
++        (((env->priv < PRV_H) && !get_field(env->henvcfg, envbits)) ||
++         ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)))) {
++        riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
++    }
++
++    if (((env->priv < PRV_M) && !get_field(env->menvcfg, envbits)) ||
++        ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits))) {
++        riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
++    }
++#endif
++}
++
++/* helper_zicbom_access
++ *
++ * Check access permissions (LOAD, STORE or FETCH as specified in section
++ * 2.5.2 of the CMO specification) for Zicbom, raising either store
++ * page-fault (non-virtualised) or store guest-page fault (virtualised).
++ */
++static void helper_zicbom_access(CPURISCVState *env, target_ulong address,
++                                 uintptr_t ra)
++{
++    void* phost;
++    int ret = TLB_INVALID_MASK;
++    MMUAccessType access_type = MMU_DATA_LOAD;
++
++    while (ret == TLB_INVALID_MASK && access_type <= MMU_INST_FETCH) {
++        ret = probe_access_flags(env, address, access_type++,
++                                 cpu_mmu_index(env, false),
++                                 true, &phost, ra);
++    }
++
++    if (ret == TLB_INVALID_MASK) {
++        uint32_t exc = RISCV_EXCP_STORE_PAGE_FAULT;
++
++#ifndef CONFIG_USER_ONLY
++        /* User-mode emulation does not have virtualisation. */
++        if (riscv_cpu_virt_enabled(env)) {
++            exc = RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT;
++        }
++#endif
++        riscv_raise_exception(env, exc, ra);
++    }
++}
++
++void helper_cbo_clean_flush(CPURISCVState *env, target_ulong address)
++{
++    uintptr_t ra = GETPC();
++    helper_zicbo_envcfg(env, MENVCFG_CBCFE, ra);
++    helper_zicbom_access(env, address, ra);
++}
++
++void helper_cbo_inval(CPURISCVState *env, target_ulong address)
++{
++    uintptr_t ra = GETPC();
++    helper_zicbo_envcfg(env, MENVCFG_CBIE, ra);
++    helper_zicbom_access(env, address, ra);
++}
++
++void helper_cbo_zero(CPURISCVState *env, target_ulong address)
++{
++    uintptr_t ra = GETPC();
++    helper_zicbo_envcfg(env, MENVCFG_CBZE, ra);
++
++    /* Get the size of the cache block for zero instructions. */
++    RISCVCPU *cpu = env_archcpu(env);
++    uint16_t cbozlen = cpu->cfg.cbozlen;
++
++    /* Mask off low-bits to align-down to the cache-block. */
++    address &= ~(cbozlen - 1);
++
++    void* mem = probe_access(env, address, cbozlen, MMU_DATA_STORE,
++                             cpu_mmu_index(env, false), GETPC());
++
++    /* Zero the block */
++    memset(mem, 0, cbozlen);
++}
++
+ #ifndef CONFIG_USER_ONLY
+ 
+ target_ulong helper_sret(CPURISCVState *env)
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index eaf5a72c81..0ee2ce85ec 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -861,6 +861,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvv.c.inc"
+ #include "insn_trans/trans_rvb.c.inc"
+ #include "insn_trans/trans_rvzfh.c.inc"
++#include "insn_trans/trans_rvzicbo.c.inc"
+ #include "insn_trans/trans_privileged.c.inc"
+ #include "insn_trans/trans_xventanacondops.c.inc"
+ 
+-- 
+2.35.1
+
 
