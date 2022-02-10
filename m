@@ -1,59 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nHyGE-0003XY-Nl
-	for mharc-qemu-riscv@gnu.org; Wed, 09 Feb 2022 20:28:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:55560)
+	id 1nHzoV-00009Y-Kc
+	for mharc-qemu-riscv@gnu.org; Wed, 09 Feb 2022 22:08:08 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44802)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nHyGA-0003VK-Py; Wed, 09 Feb 2022 20:28:35 -0500
-Received: from [2607:f8b0:4864:20::d34] (port=42645
- helo=mail-io1-xd34.google.com)
+ id 1nHzoS-00009F-Cm; Wed, 09 Feb 2022 22:08:04 -0500
+Received: from [2607:f8b0:4864:20::d2e] (port=45588
+ helo=mail-io1-xd2e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nHyG8-0000Jv-En; Wed, 09 Feb 2022 20:28:34 -0500
-Received: by mail-io1-xd34.google.com with SMTP id r144so5499063iod.9;
- Wed, 09 Feb 2022 17:28:31 -0800 (PST)
+ id 1nHzo5-0004BD-3m; Wed, 09 Feb 2022 22:07:44 -0500
+Received: by mail-io1-xd2e.google.com with SMTP id s18so5677254ioa.12;
+ Wed, 09 Feb 2022 19:07:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=z94e35i69YLvuwrL3zllw6Mvm/NCQ6vX/1zTOfafJAg=;
- b=Ix8NxkAYUkoSm6QyMWMqduH+u6OU5A0kO/Lnq4fBWB7hZAQJMa/m4jYrCMcAyDhQAD
- DBzdWNxU6VwyJ92Ww5soSbTnt3TDU5U6tA+66gkqct5z5F/O+6jsRNX2rnd+iVFImZ1D
- 137x08E0DlavMzLCJrwnesB0zo8dnstSmLnvuE30HDXDV+hL7cs2/KFDnB5rUnlkLCd6
- F4sUThXAa29QSIBi2uhAOgc5+BvqePm/weEE2OWRCVEQwqJPk8ABl0I0Tn46k2/Ozmp9
- HiOkxzwHl5OOzAO/0iIUNtbA+4gM5mBax270qD31HHV4L/3gxq+5HIO1rutbx8ztfRaj
- mJPg==
+ :cc; bh=5HARNDOch051tubGfEPzahIMKlYtJeCAEKPSJ1brXd0=;
+ b=cMQpRMu3R/Mnvlpxiktspjee7Zu/JttIv+ldBHioukRoq1oGPDHT+S8a3SYuWF7Nvh
+ KL7MWzIQGMXHqcyUiyHcnNB2O26ya0mF1wqo8UC3Ic6LMqueSdtgC0jmRVmRLOOJfcYF
+ H/RlGP/mm04/CwnXjTuKmiarSxKVsGdOKyvkC8gus8mPXJG9niRoona9VgiSG8MLt60+
+ MZHebiLWrw7GMKfy0nde0LjjpI06QewGDwKNbV+rnAHAJ5ghdgGkDyBqxCTLQ7H9XXM+
+ BsSw9gxuzgqhifSVvmkh3jma3/p3Mjh7xzNKQbwLpjoNLHEwKoPiJiTZM/2ejtvE9kXF
+ DHsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=z94e35i69YLvuwrL3zllw6Mvm/NCQ6vX/1zTOfafJAg=;
- b=aQtexqCTD9IgD1KXPRUAJAdKuW8EXLKNtT1BWLUH/EbH5JuRb1L2ekRs/T73wuGz8o
- C7fpfY05EerfUMCbz0H4m3c+wWBA6OOoTm3BlSEq02L5+LcH7T2FXqzQAs1nswyVGCfP
- 108+B1lefTt09bA+KtLQaWsIQRdQqkHN/CbWJUzLTtbw9OvtjU0sWgaYXWQf/aJDpwWp
- YErQgDU31FEJD96Lef8J6HQAZqeRZ2dryuUTUgA0e+PslMdU6WsQfn38mIBYFmkvSJDI
- pfSr4v1TZiUlImPLCE/4hzq+pAYVBf+vQsYnv9OI6ZWrTP4Sc79rZfYU1xI3g4tM75Qx
- oMKQ==
-X-Gm-Message-State: AOAM531UnosT21JlJU5xIwcbZ1NJr4JGqyDky5x3w1z73506nDurDyiv
- VBpWWsEkAaztYJn/y8jOsrpZYFU/9V0szjBIgMU=
-X-Google-Smtp-Source: ABdhPJw+j4vOpWXSVSDDuneN+YvzRLPvEOd/8Q35AMkf2p35PNvHxONvT+eqvPu0mu8scvMUNzwI6rzV6vMOmZV+l94=
-X-Received: by 2002:a05:6638:2609:: with SMTP id
- m9mr1221447jat.169.1644456510310; 
- Wed, 09 Feb 2022 17:28:30 -0800 (PST)
+ bh=5HARNDOch051tubGfEPzahIMKlYtJeCAEKPSJ1brXd0=;
+ b=t2WvYkM5Q64c7uJLy9GAiIuj+ii/byZOmw6pz7ML5AYJ+jh9AWG1seXzDRKYY6TqSQ
+ KQhdFuUVq5dN2Kwgr/X7JzbfLvpeinjSoJWD8/uco/uTtCHmp7zbSnq/U04h0u0SLQSq
+ mJPjT6dtIJDJ3w7h3Bw56K6BZSKU0mJplFl+JdJTO5f2I9fOBH32bGF2SVENvb8Fdzjh
+ qRDrLnhKZgxQCD6Js3XqH4DDJItMmktwYoB+jkwyxTzzr171PbrN452Cyu3qZ+to1akW
+ 4+62ryXKpAfyf30q5zO39wsMDpK5358v2nb3UbYRLh286ar39OHO3UF/AqKfusHJKArn
+ CMEg==
+X-Gm-Message-State: AOAM5318ACOjgwc7OeaI7SC+vYlEUfYBL4sp4aN/K9OM6jBs4MW8hhYQ
+ 65yvsACYcX6DoolZMjzkPzz026ssvm8xsy7DkKE=
+X-Google-Smtp-Source: ABdhPJwZOK8U+tYytvP/R7sy3X1VowFIbxUR4+Aqwl1ZheqbDHqIequNHgfN/8tcjLxv5hYKjd/8QdejZMmnudf7ZQ4=
+X-Received: by 2002:a05:6602:727:: with SMTP id
+ g7mr2844061iox.90.1644462459694; 
+ Wed, 09 Feb 2022 19:07:39 -0800 (PST)
 MIME-Version: 1.0
-References: <9040401e-8f87-ef4a-d840-6703f08d068c@bytedance.com>
-In-Reply-To: <9040401e-8f87-ef4a-d840-6703f08d068c@bytedance.com>
+References: <20220204022658.18097-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220204022658.18097-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 10 Feb 2022 11:28:04 +1000
-Message-ID: <CAKmqyKONLubCHR_t+Zv1j6ycrEiyDtF2BYdn9eADnyUDcnG7pw@mail.gmail.com>
-Subject: Re: [PATCH] docs/system: riscv: Update description of CPU
-To: Yu Li <liyu.yukiteru@bytedance.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Thu, 10 Feb 2022 13:07:13 +1000
+Message-ID: <CAKmqyKPF7o=if6hR+pZWEgBkwsXgBr1x09f5-ucoAvwpX1Zk5A@mail.gmail.com>
+Subject: Re: [PATCH v9 0/5] support subsets of virtual memory extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Anup Patel <anup@brainfault.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, 
+ Guo Ren <ren_guo@c-sky.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d34
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -74,42 +78,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Feb 2022 01:28:36 -0000
+X-List-Received-Date: Thu, 10 Feb 2022 03:08:04 -0000
 
-On Wed, Feb 9, 2022 at 1:49 AM Yu Li <liyu.yukiteru@bytedance.com> wrote:
+On Fri, Feb 4, 2022 at 12:32 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Since the hypervisor extension been non experimental and enabled for
-> default CPU, the previous command is no longer available and the
-> option `x-h=true` or `h=true` is also no longer required.
+> This patchset implements virtual memory related RISC-V extensions: Svnapot version 1.0, Svinval vesion 1.0, Svpbmt version 1.0.
 >
-> Signed-off-by: Yu Li <liyu.yukiteru@bytedance.com>
+> Specification:
+> https://github.com/riscv/virtual-memory/tree/main/specs
+>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-virtmem-upstream-v9
+>
+> To test this implementation, specify cpu argument with 'svinval=true,svnapot=true,svpbmt=true'.
+>
+> This implementation can pass the riscv-tests for rv64ssvnapot.
+>
+> v9:
+> * delete cast for PTE bits check
+>
+> v8:
+> * rebase on https://lore.kernel.org/qemu-devel/20220131110201.2303275-1-philipp.tomsich@vrull.eu/
+> * move variables to tops of function
+> * add ULL for PTE_N and PTE_PMBT
+> * add mask variable for napot_bits
+>
+> v7:
+> * delete definition of PTE_PPN_MASK for TARGET_RISCV32
+> * make riscv_cpu_sxl works for user mode
+> * add commit msg for patch 2
+>
+> v6:
+> * select ppn mask base on sxl
+>
+> v5:
+> * merge patch https://lore.kernel.org/qemu-devel/1569456861-8502-1-git-send-email-guoren@kernel.org/
+> * relax pte attribute check
+>
+> v4:
+> * fix encodings for hinval_vvma and hinval_gvma
+> * partition inner PTE check into several steps
+> * improve commit messages to describe changes
+>
+> v3:
+> * drop "x-" in exposed properties
+>
+> v2:
+> * add extension check for svnapot and svpbmt
+>
+> Guo Ren (1):
+>   target/riscv: Ignore reserved bits in PTE for RV64
+>
+> Weiwei Li (4):
+>   target/riscv: add PTE_A/PTE_D/PTE_U bits check for inner PTE
+>   target/riscv: add support for svnapot extension
+>   target/riscv: add support for svinval extension
+>   target/riscv: add support for svpbmt extension
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->   docs/system/riscv/virt.rst | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index fa016584bf..08ce3c4177 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -23,9 +23,9 @@ The ``virt`` machine supports the following devices:
->   * 1 generic PCIe host bridge
->   * The fw_cfg device that allows a guest to obtain data from QEMU
+>  target/riscv/cpu.c                          |  4 ++
+>  target/riscv/cpu.h                          | 16 +++++
+>  target/riscv/cpu_bits.h                     |  6 ++
+>  target/riscv/cpu_helper.c                   | 34 +++++++++-
+>  target/riscv/insn32.decode                  |  7 ++
+>  target/riscv/insn_trans/trans_svinval.c.inc | 75 +++++++++++++++++++++
+>  target/riscv/translate.c                    |  1 +
+>  7 files changed, 140 insertions(+), 3 deletions(-)
+>  create mode 100644 target/riscv/insn_trans/trans_svinval.c.inc
 >
-> -Note that the default CPU is a generic RV32GC/RV64GC. Optional extensions
-> -can be enabled via command line parameters, e.g.: ``-cpu rv64,x-h=true``
-> -enables the hypervisor extension for RV64.
-> +The hypervisor extension has been enabled for the default CPU, so virtual
-> +machines with hypervisor extension can simply be used without explicitly
-> +declaring.
->
->   Hardware configuration information
->   ----------------------------------
 > --
-> 2.20.1
+> 2.17.1
+>
 >
 
