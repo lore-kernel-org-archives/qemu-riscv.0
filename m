@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nINk2-00027G-Sd
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Feb 2022 23:41:07 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50892)
+	id 1nINk5-00029N-RH
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Feb 2022 23:41:10 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:50926)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nINit-0001t7-PT; Thu, 10 Feb 2022 23:39:56 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:36204 helo=cstnet.cn)
+ id 1nINiu-0001tM-Sv; Thu, 10 Feb 2022 23:39:56 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:36244 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nINip-0005n8-HL; Thu, 10 Feb 2022 23:39:55 -0500
+ id 1nINis-0005nk-Ff; Thu, 10 Feb 2022 23:39:56 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAA3PvqN6AViFBirAA--.58859S4;
- Fri, 11 Feb 2022 12:39:45 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAA3PvqN6AViFBirAA--.58859S8;
+ Fri, 11 Feb 2022 12:39:49 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, ardxwe@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 2/6] target/riscv: hardwire mstatus.FS to zero when enable
- zfinx
-Date: Fri, 11 Feb 2022 12:39:16 +0800
-Message-Id: <20220211043920.28981-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 6/6] target/riscv: expose zfinx, zdinx,
+ zhinx{min} properties
+Date: Fri, 11 Feb 2022 12:39:20 +0800
+Message-Id: <20220211043920.28981-7-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
 References: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowAA3PvqN6AViFBirAA--.58859S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fJw4UGrW7CrWxAry3CFg_yoWrXF1fpr
- WkC3y7W3srK397ta1fJF4qgr15Jry8G398Aa1kW3yFyF4rJrWYkFs8tr9FvFyDXFy7Xryj
- 9Fyj934kAF47AFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
- 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
- jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
- kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
- xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
- kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
- 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
- CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU8BMNUUUU
- U
+X-CM-TRANSID: qwCowAA3PvqN6AViFBirAA--.58859S8
+X-Coremail-Antispam: 1UD129KBjvdXoW7GFyrJF43Ww4xXrW7Cry7GFg_yoWkWrX_Gr
+ y09F1kA34UXFy29r4DAw1jgr4Fkr9YgFZ0gF4ayay8GFW8WFy5Aw1vkw4fGr1UKr43CF1f
+ AFyxJFZrKFnIvjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbqxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+ IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+ F7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr
+ 1l84ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWx
+ Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2
+ ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG
+ 67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MI
+ IYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E
+ 14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
+ 0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZ
+ X7UUUUU==
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -69,121 +69,28 @@ X-List-Received-Date: Fri, 11 Feb 2022 04:39:57 -0000
 Co-authored-by: ardxwe <ardxwe@gmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_helper.c |  6 +++++-
- target/riscv/csr.c        | 25 ++++++++++++++++++++-----
- target/riscv/translate.c  |  4 ++++
- 3 files changed, 29 insertions(+), 6 deletions(-)
+ target/riscv/cpu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 746335bfd6..1c60fb2e80 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -466,9 +466,13 @@ bool riscv_cpu_vector_enabled(CPURISCVState *env)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 55371b1aa5..ddda4906ff 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -795,6 +795,11 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
  
- void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
- {
--    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM | MSTATUS_FS |
-+    uint64_t mstatus_mask = MSTATUS_MXR | MSTATUS_SUM |
-                             MSTATUS_SPP | MSTATUS_SPIE | MSTATUS_SIE |
-                             MSTATUS64_UXL | MSTATUS_VS;
++    DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
++    DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
++    DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
++    DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
 +
-+    if (riscv_has_ext(env, RVF)) {
-+        mstatus_mask |= MSTATUS_FS;
-+    }
-     bool current_virt = riscv_cpu_virt_enabled(env);
+     /* Vendor-specific custom extensions */
+     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
  
-     g_assert(riscv_has_ext(env, RVH));
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 387088a86c..93bba1ca1c 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -38,7 +38,8 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
- static RISCVException fs(CPURISCVState *env, int csrno)
- {
- #if !defined(CONFIG_USER_ONLY)
--    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
-+    if (!env->debugger && !riscv_cpu_fp_enabled(env) &&
-+        !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- #endif
-@@ -301,7 +302,9 @@ static RISCVException write_fflags(CPURISCVState *env, int csrno,
-                                    target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     riscv_cpu_set_fflags(env, val & (FSR_AEXC >> FSR_AEXC_SHIFT));
-     return RISCV_EXCP_NONE;
-@@ -318,7 +321,9 @@ static RISCVException write_frm(CPURISCVState *env, int csrno,
-                                 target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     env->frm = val & (FSR_RD >> FSR_RD_SHIFT);
-     return RISCV_EXCP_NONE;
-@@ -336,7 +341,9 @@ static RISCVException write_fcsr(CPURISCVState *env, int csrno,
-                                  target_ulong val)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_FS;
-+    if (riscv_has_ext(env, RVF)) {
-+        env->mstatus |= MSTATUS_FS;
-+    }
- #endif
-     env->frm = (val & FSR_RD) >> FSR_RD_SHIFT;
-     riscv_cpu_set_fflags(env, (val & FSR_AEXC) >> FSR_AEXC_SHIFT);
-@@ -652,10 +659,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         tlb_flush(env_cpu(env));
-     }
-     mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
--        MSTATUS_SPP | MSTATUS_FS | MSTATUS_MPRV | MSTATUS_SUM |
-+        MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
-         MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
-         MSTATUS_TW | MSTATUS_VS;
- 
-+    if (riscv_has_ext(env, RVF)) {
-+        mask |= MSTATUS_FS;
-+    }
-+
-     if (xl != MXL_RV32 || env->debugger) {
-         /*
-          * RV32: MPV and GVA are not in mstatus. The current plan is to
-@@ -787,6 +798,10 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
-         return RISCV_EXCP_NONE;
-     }
- 
-+    if (!(val & RVF)) {
-+        env->mstatus &= ~MSTATUS_FS;
-+    }
-+
-     /* flush translation cache */
-     tb_flush(env_cpu(env));
-     env->misa_ext = val;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 84dbfa6340..c7232de326 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -426,6 +426,10 @@ static void mark_fs_dirty(DisasContext *ctx)
- {
-     TCGv tmp;
- 
-+    if (!has_ext(ctx, RVF)) {
-+        return;
-+    }
-+
-     if (ctx->mstatus_fs != MSTATUS_FS) {
-         /* Remember the state change for the rest of the TB. */
-         ctx->mstatus_fs = MSTATUS_FS;
 -- 
 2.17.1
 
