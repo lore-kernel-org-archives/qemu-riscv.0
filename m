@@ -1,37 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nIr3n-0005Xa-J1
-	for mharc-qemu-riscv@gnu.org; Sat, 12 Feb 2022 06:59:27 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37366)
+	id 1nIr3o-0005Yb-3M
+	for mharc-qemu-riscv@gnu.org; Sat, 12 Feb 2022 06:59:28 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37362)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nIr3m-0005Vl-5k
- for qemu-riscv@nongnu.org; Sat, 12 Feb 2022 06:59:26 -0500
-Received: from mail-sender.a4lg.com ([153.120.152.154]:57939
+ id 1nIr3l-0005Uc-OG
+ for qemu-riscv@nongnu.org; Sat, 12 Feb 2022 06:59:25 -0500
+Received: from [2401:2500:203:30b:4000:6bfe:4757:0] (port=46696
  helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nIr3k-0006WA-80
+ id 1nIr3i-0006Vd-2L
  for qemu-riscv@nongnu.org; Sat, 12 Feb 2022 06:59:25 -0500
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 Authentication-Results: mail-sender-0.a4lg.com;
  dkim=permerror (bad message/signature format)
 To: Tsukasa OI <research_trasio@irq.a4lg.com>
 Cc: qemu-riscv@nongnu.org
-Subject: [RESEND PATCH 1/1] target/riscv: misa to ISA string conversion fix
-Date: Sat, 12 Feb 2022 20:59:10 +0900
-Message-Id: <66cd3545068a8ab9d67bd4bd1f9a68a2c50cbdab.1644667142.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <cover.1644667142.git.research_trasio@irq.a4lg.com>
-References: <cover.1644667142.git.research_trasio@irq.a4lg.com>
+Subject: [RESEND PATCH 0/1] target/riscv: misa to ISA string conversion fix
+Date: Sat, 12 Feb 2022 20:59:09 +0900
+Message-Id: <cover.1644667142.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=153.120.152.154;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for
+ 2401:2500:203:30b:4000:6bfe:4757:0 (failed)
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, TO_EQ_FM_DIRECT_MX=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, TO_EQ_FM_DIRECT_MX=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -46,52 +46,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 12 Feb 2022 11:59:26 -0000
 
-Some bits in RISC-V `misa' CSR should not be reflected in the ISA
-string.  For instance, `S' and `U' (represents existence of supervisor
-and user mode, respectively) in `misa' CSR must not be copied since
-neither `S' nor `U' are valid single-letter extensions.
+S and U are misa bits but not extensions.  Thus, they should not be
+copied to the ISA string.
 
-This commit restricts which bits to copy from `misa' CSR to ISA string
-with another fix: `C' extension should be preceded by `L' extension.
+I am truly surprised that this patchset is the THIRD attempt to fix this
+longstanding problem.
 
-It also clarifies that RISC-V extension order string is actually a
-single-letter extension order list.
+(1) August 2019: by Palmer Dabbelt
+<https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00165.html>
+<https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00141.html>
+<https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00259.html>
 
-Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
----
+(2) April 2021: by Emmanuel Blot
+<https://lists.nongnu.org/archive/html/qemu-riscv/2021-04/msg00248.html>
+
+(3) February 2022: by me (this patchset)
+
+I feel this is urgent to eliminate this bug now considering it required
+a workaround to RISC-V Linux kernel as I pointed out:
+<http://lists.infradead.org/pipermail/linux-riscv/2022-February/012252.html>
+
+
+Though my patchset is first developed independently, this submitted
+version is influenced by (2) Emmanuel Blot's patchset.  Thanks to this,
+constant "[n]" can now be variable "[]".
+
+It also fixes an ordering issue where 'C' should be preceded by 'L'
+(order: 'L' -> 'C') as per the RISC-V ISA Manual (version 20191213),
+Table 27.1.
+
+It clarifies the role of `riscv_exts'.  It's a single-letter extrension
+ordering list.
+
+
+
+
+Tsukasa OI (1):
+  target/riscv: misa to ISA string conversion fix
+
  target/riscv/cpu.c | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1cb0436187..7a8d6ce104 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -34,7 +34,7 @@
- 
- /* RISC-V CPU definitions */
- 
--static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
-+static const char riscv_single_letter_exts[] = "IEMAFDQLCBJTPVNH";
- 
- const char * const riscv_int_regnames[] = {
-   "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
-@@ -831,12 +831,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
- char *riscv_isa_string(RISCVCPU *cpu)
- {
-     int i;
--    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) + 1;
-+    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
-     char *isa_str = g_new(char, maxlen);
-     char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
--    for (i = 0; i < sizeof(riscv_exts); i++) {
--        if (cpu->env.misa_ext & RV(riscv_exts[i])) {
--            *p++ = qemu_tolower(riscv_exts[i]);
-+    for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
-+        if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
-+            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
-         }
-     }
-     *p = '\0';
+
+base-commit: 0a301624c2f4ced3331ffd5bce85b4274fe132af
 -- 
 2.32.0
 
