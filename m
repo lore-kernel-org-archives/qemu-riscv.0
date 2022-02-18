@@ -1,69 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nL35Y-0000NN-Qr
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Feb 2022 08:14:20 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:53974)
+	id 1nL5Tq-0007ML-3X
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Feb 2022 10:47:34 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58098)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1nL35X-0000LL-0f
- for qemu-riscv@nongnu.org; Fri, 18 Feb 2022 08:14:19 -0500
-Received: from [2607:f8b0:4864:20::b34] (port=44843
- helo=mail-yb1-xb34.google.com)
+ (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
+ id 1nL5Tp-0007JH-1N; Fri, 18 Feb 2022 10:47:33 -0500
+Received: from [2a00:1450:4864:20::635] (port=38820
+ helo=mail-ej1-x635.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1nL35U-0006xl-Py
- for qemu-riscv@nongnu.org; Fri, 18 Feb 2022 08:14:18 -0500
-Received: by mail-yb1-xb34.google.com with SMTP id 124so19427363ybn.11
- for <qemu-riscv@nongnu.org>; Fri, 18 Feb 2022 05:14:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=t7dWSBaEI4sryHmzz0lZxu4tlr5G7J4fSVYonKCI2C4=;
- b=b0BO4YBfbpyf9b/5YVMvY3w3snknOkW8guoA4TiM3I08LzoyUJ3KOKoeLRw8aC4C4i
- r0MRL9Xx8SMwTsOWzBeaDfMAS5A4edsx/FI0nxgUBkYOynKjNgCv4M+RUl7a2jFQvvQb
- zpbfijXEbAMK/llT+SjkTK4zw1GKUypLph8T18FMo6mZLrXrxjd5SD9hN0GYIw+0017O
- QmzN3Ylv/s+C5c/jGsSOwTsAXv+uFgkGns/HD5uP5BwQ0WEQ9yruGO0XG+6hTxKB3AbL
- mNfS6SHExQ/btmYjsCDYqMmob2dc+b1D/fA307h/XSL6QOloDMWW5a6zzaun1BvjwnK3
- H0ig==
+ (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
+ id 1nL5Tm-0007ET-RW; Fri, 18 Feb 2022 10:47:32 -0500
+Received: by mail-ej1-x635.google.com with SMTP id k25so15979389ejp.5;
+ Fri, 18 Feb 2022 07:47:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=tUspLoosayPzAlzgOJvmnRsJVz3fYizL8nWqce0JyyQ=;
+ b=LDxvp61kD/PRqbT4S6YI8/xznyFD1rOAhbb7JfEm91dPMAfeBG97KLFXMQZ6Ze+2ui
+ HNvL3TnuhI50DueU11pd0tFllI+KiVrigDbQJ6wQ/OFyce4+1fPTTSN+ePf0rOT4A296
+ Y6eL6/hZTJLP87EvJQWHyxnZWM7PKbhQQe1ABl/DXd1vQ97wj23Vizu9uzh6077BOt/p
+ BQ8nDiEBoUn8ve1bDB6AcWeogoZhr5br0J5ucVuWUdZSr6lVsbxQCEbG43vICgEPzQQV
+ 1GRToRrxO/smbIFjXR6qydkbq08tAzo4oGE9NhDvN7FMFO4At9J0h/q1/OSpgVgu5HRd
+ h20Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=t7dWSBaEI4sryHmzz0lZxu4tlr5G7J4fSVYonKCI2C4=;
- b=P8nfe9rGWw1qUpTwQUTUsKGhTkb3oL7TpwHq7eoTMHj4EXMGrcpNXrhC95kmZ5GFb0
- pGWHPltiuZ8IYzXvi+0psFpEtDx9NuYt3gioabRL9eZWTnEZVcaiI8+iDMBhAaAVn3+S
- +3UuZxkHtFa79rWEivKhBTlSz7crftSqHkzRwSfb4jDFJf1YadnszDpuCn+t4V0EC5ER
- oEbPh1Dfp4s+RxTFKK/iAJrvlU9kQbiMJO96Isvquq23Igkp9L4HvBVBnfpRf0APjrH7
- yn7Gk9eCMADRkp1NqPfaZhBvmUYt9imKoRg5vejsrTGsRsHsNY4obr1iXeX3+Z/wYoR5
- LFaA==
-X-Gm-Message-State: AOAM530ZDj07AfcFAWFnP1tO8gj19cDs+xKjFULRaiuEnYaRwRimvdks
- oMxtKYKnMvpXsqOdr3AO7o76yXYgPP7KEIr2oo53YA==
-X-Google-Smtp-Source: ABdhPJwN3s0Aiwhls6Tq8PJKdyQZNwtKp9DdmQJn45BchcA7WjGJiuVULX68X8Do1PWyAOU09myGes91axWkg97aWRs=
-X-Received: by 2002:a25:dc87:0:b0:624:4104:a331 with SMTP id
- y129-20020a25dc87000000b006244104a331mr4053797ybe.67.1645190050144; Fri, 18
- Feb 2022 05:14:10 -0800 (PST)
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=tUspLoosayPzAlzgOJvmnRsJVz3fYizL8nWqce0JyyQ=;
+ b=x3oP9NGBbH1Amye+Ko8if3pJTE6Z5vhrcaS0LUajJlhcgcKzGOB+B9WY4HVlVjL0Wq
+ MCFRG2NnoHNqxrwmSpnxYENvLRxMsNqFh7L/MF4N4uwlZB/le9p+QyZ9clfH0/xx3hgj
+ 5RqZ4Xa0Hkzp1oVbhKITUgMYJTzXysxJJCRW7L1RF+WLM1b763qtCUT4Z2FlFNsqrT2U
+ yw25v05hprW01piB2QjlDzymwSIfaHKHBPg4Vs2KU/qtjeW0FzWsZdSfhQJ0Z0cXOQKm
+ iH6Cs9bogDTkvSPVJHd2ZBmtidSFLW90icumWUHxjb5Px3kJz2joAb4zv3K3IwG03Rf3
+ Pqfw==
+X-Gm-Message-State: AOAM532Ofp5fSvgZEWsd4FvBTwzDAzk2LIMYn2tGJq33z1IcoqQulvqt
+ KzLt2wb/e5oJYwYkchFLtukXCP3yihU=
+X-Google-Smtp-Source: ABdhPJz8kDA1/zUy21/H8i9WfClf4/uvf02mTUH2cv05uigulSvXk54Z8do63SX6uOKsjBaZwQb+EA==
+X-Received: by 2002:a17:906:2b93:b0:6cf:bb48:5a80 with SMTP id
+ m19-20020a1709062b9300b006cfbb485a80mr6675524ejg.681.1645199249005; 
+ Fri, 18 Feb 2022 07:47:29 -0800 (PST)
+Received: from ?IPV6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
+ ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+ by smtp.googlemail.com with ESMTPSA id v5sm4880911edb.15.2022.02.18.07.47.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Feb 2022 07:47:28 -0800 (PST)
+Sender: Paolo Bonzini <paolo.bonzini@gmail.com>
+Message-ID: <335a7af3-b5af-3117-2647-783a217d75a2@redhat.com>
+Date: Fri, 18 Feb 2022 16:47:27 +0100
 MIME-Version: 1.0
-References: <20220208211937.79580-1-vineetg@rivosinc.com>
-In-Reply-To: <20220208211937.79580-1-vineetg@rivosinc.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 18 Feb 2022 13:13:59 +0000
-Message-ID: <CAFEAcA8-h2TH0kG64mec6Yu6MTTSKOVTpVAToqA167MYWa4ZxQ@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
 Subject: Re: [PATCH] build: fix build failure with gcc 11.2 by disabling
  -fcf-protection
-To: Vineet Gupta <vineetg@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org, 
+Content-Language: en-US
+To: Vineet Gupta <vineetg@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
  gnu-toolchain@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b34
+References: <20220208211937.79580-1-vineetg@rivosinc.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+In-Reply-To: <20220208211937.79580-1-vineetg@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::635
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb34.google.com
-X-Spam_score_int: -6
-X-Spam_score: -0.7
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=paolo.bonzini@gmail.com; helo=mail-ej1-x635.google.com
+X-Spam_score_int: 0
+X-Spam_score: -0.1
 X-Spam_bar: /
-X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
  PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
@@ -79,38 +89,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Feb 2022 13:14:19 -0000
+X-List-Received-Date: Fri, 18 Feb 2022 15:47:33 -0000
 
-On Tue, 8 Feb 2022 at 21:29, Vineet Gupta <vineetg@rivosinc.com> wrote:
->
-> When doing RV qemu builds with host gcc 11.2, ran into following build fa=
-ilure
->
-> | cc -MMD -MP -MT linuxboot_dma.o -MF ./linuxboot_dma.d -O2 -g -march=3Di=
-486 -Wall \
-> |   -Wstrict-prototypes -Wredundant-decls -Wundef -Wwrite-strings -Wmissi=
-ng-prototypes \
-> |   -Wold-style-declaration -Wold-style-definition -Wtype-limits -Wformat=
--security \
-> |   -Wformat-y2k -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-e=
-xterns \
-> |   -Wendif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=3D2 -Wno=
--missing-include-dirs \
-> |   -Wno-shift-negative-value -Wno-psabi -fno-pie -ffreestanding -IQEMU/i=
-nclude \
+On 2/8/22 22:19, Vineet Gupta wrote:
+> When doing RV qemu builds with host gcc 11.2, ran into following build failure
+> 
+> | cc -MMD -MP -MT linuxboot_dma.o -MF ./linuxboot_dma.d -O2 -g -march=i486 -Wall \
+> |   -Wstrict-prototypes -Wredundant-decls -Wundef -Wwrite-strings -Wmissing-prototypes \
+> |   -Wold-style-declaration -Wold-style-definition -Wtype-limits -Wformat-security \
+> |   -Wformat-y2k -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs \
+> |   -Wendif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=2 -Wno-missing-include-dirs \
+> |   -Wno-shift-negative-value -Wno-psabi -fno-pie -ffreestanding -IQEMU/include \
 > |   -fno-stack-protector   -m16   -Wa,-32 \
 > |   -c QEMU/pc-bios/optionrom/linuxboot_dma.c -o linuxboot_dma.o
-> |cc1: error: =E2=80=98-fcf-protection=E2=80=99 is not compatible with thi=
-s target
->
+> |cc1: error: ‘-fcf-protection’ is not compatible with this target
+> 
 > Signed-off-by: Vineet Gupta <vineetg@rivosinc.com>
 > ---
 > This might be a crude fix to the problem
+> ---
+>   pc-bios/optionrom/Makefile | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/pc-bios/optionrom/Makefile b/pc-bios/optionrom/Makefile
+> index 5d55d25acca2..8f843ee803c1 100644
+> --- a/pc-bios/optionrom/Makefile
+> +++ b/pc-bios/optionrom/Makefile
+> @@ -22,6 +22,9 @@ override CFLAGS += $(CFLAGS_NOPIE) -ffreestanding -I$(TOPSRC_DIR)/include
+>   override CFLAGS += $(call cc-option, -fno-stack-protector)
+>   override CFLAGS += $(call cc-option, -m16)
+>   
+> +# issue with gcc 11.2
+> +override CFLAGS += $(call cc-option, -fcf-protection=none)
+> +
+>   ifeq ($(filter -m16, $(CFLAGS)),)
+>   # Attempt to work around compilers that lack -m16 (GCC <= 4.8, clang <= ??)
+>   # On GCC we add -fno-toplevel-reorder to keep the order of asm blocks with
 
-I think this patch
-https://patchew.org/QEMU/20220103090112.312202-1-bjorn@kernel.org/
-fixes the same problem...
+This is a problem in the Ubuntu compiler that you're using.  If 
+-fcf-protection is not compatible with -m16, Ubuntu should not enable it 
+instead of breaking -m16.
 
-thanks
--- PMM
+Besides, QEMU is not at all compatible with -fcf-protection, not just 
+the ROMs.  So it should be added to QEMU_CFLAGS in configure as well.
+
+Paolo
 
