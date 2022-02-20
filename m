@@ -1,77 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nLDaI-0000Nk-6S
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Feb 2022 19:26:46 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50052)
+	id 1nLi0g-0004w9-2b
+	for mharc-qemu-riscv@gnu.org; Sun, 20 Feb 2022 03:56:02 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:44526)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nLDaB-0000Ef-4H
- for qemu-riscv@nongnu.org; Fri, 18 Feb 2022 19:26:39 -0500
-Received: from [2607:f8b0:4864:20::334] (port=33711
- helo=mail-ot1-x334.google.com)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nLi0f-0004vG-22
+ for qemu-riscv@nongnu.org; Sun, 20 Feb 2022 03:56:01 -0500
+Received: from [2607:f8b0:4864:20::42f] (port=38718
+ helo=mail-pf1-x42f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nLDZa-000740-QE
- for qemu-riscv@nongnu.org; Fri, 18 Feb 2022 19:26:38 -0500
-Received: by mail-ot1-x334.google.com with SMTP id
- j8-20020a056830014800b005ad00ef6d5dso3108950otp.0
- for <qemu-riscv@nongnu.org>; Fri, 18 Feb 2022 16:25:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nLi0c-0002P6-BN
+ for qemu-riscv@nongnu.org; Sun, 20 Feb 2022 03:56:00 -0500
+Received: by mail-pf1-x42f.google.com with SMTP id x18so6068464pfh.5
+ for <qemu-riscv@nongnu.org>; Sun, 20 Feb 2022 00:55:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=O+TAsTb0YDZkAb19nkPyl6+rbdBOWvZTNZKyEPjrLhY=;
- b=Fk8OBH2TYnxMi2/e2bmFwEv/xLsq9XJr5QKVm4dfPFRv4TokporrLO4DGZiiGp5SYy
- MuZXBga8iUhkIGd9DYAL7O6PvAwu18nGeJMMYBtQwd41l/AoW1jBqU7nW8oOfYzn050P
- OrPc4jotLHR/s9BZJvWV2BvY43KqgL2qATeSuz9fKFdsnXi6oCLRbjR3rS4ULh089tE1
- QPt5PgXKmKSlhWx+cZtcmfp8PpEz7kdLwGA+JK/yHqnKclscSOJFOtEMYm9HiauSisMk
- SURJleQLYuEJmWqhbXuAhrigQERje54DOPoKZ3swuzBp5N+VIXS9U5bzhL3/pGpgb1Td
- eiVQ==
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t0xu7VwLHGvAVYIIcR2PYfMgf5aBKKE8vEoHO22TGAQ=;
+ b=meyel16VCPfldq8kXz0Tk81JOy2ZIX8NSoE3WkEZy7aTw4HDqpfYoXmv8Na+Dsi6w+
+ 1tTLxHBg5+CAI5TSM56aS2dCLCy+D5o0106gbV0UWY6SUBR6Qskq6tBc+GFwO1319EcO
+ lnZULrYmpKc/Ucpig+K5P5uOILP4QsXUM2KRePmKRna2ZR8rO2YiqdiWqi0dR/E+VyrP
+ RFTSCPLN+nYKafd8DB7l4lXn8j5MVnhHg/6DPPGNtHo8svQmu6UTMtkN759fcKzZ5xGu
+ kFK3NzPDA3WYajKtzzpoUnDLAaCD5xYxoSSd0on3HS62EhXFbViwDi3cK2vGYhbrSkgv
+ ySpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=O+TAsTb0YDZkAb19nkPyl6+rbdBOWvZTNZKyEPjrLhY=;
- b=XI3a/rYfe2GG4TjhVQtXv60M7+UCOUq2cMe8ZH64RYcMc2CuFo4wuK4f2ZTUc2SU/o
- ysTs79fbDx40YZj9U1tsRkGoS4iHUlCtEp9cfSIDUZlALF0SdPu9E5umSlTx6TIvImQd
- c9tLwXqdsUHHKWhP8RU+p7V+Cli5X4bAJqZs+Gav4cB+924tYQohqYLFYwrIKgpLCtaa
- ltfJKlh2YQLvhZRr89kIOYj4042+3TblYcXJbeLrGxpv8sUp8WmQwkHY9vAVg6fv/gBX
- xKZkS/aG9+jeuvftmzxGcdUav/CJ4AYUtJhPr2Ev1bGVMlJ+AzvKaaNlkC1nk6iN6rNf
- i9JA==
-X-Gm-Message-State: AOAM533a4MQebyKtoNbWvS7ZBum6cNNeF7El62JxlQFDqTEqHqpxV/0N
- ImVJfoMX1PNlC4VIIZOuuLICaV7K10lMz2Vs
-X-Google-Smtp-Source: ABdhPJzVmNTd+yl/b5icvnRLignkntCm8+3x12e9yIDpGCmZ42M2h9SFIDxhno++BJFKAzWONcGcJQ==
-X-Received: by 2002:a9d:44a:0:b0:591:cc04:997c with SMTP id
- 68-20020a9d044a000000b00591cc04997cmr3320901otc.128.1645230349380; 
- Fri, 18 Feb 2022 16:25:49 -0800 (PST)
-Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
- [70.228.75.190])
- by smtp.gmail.com with ESMTPSA id r38sm2315588otv.72.2022.02.18.16.25.48
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t0xu7VwLHGvAVYIIcR2PYfMgf5aBKKE8vEoHO22TGAQ=;
+ b=UbHBo3yv5miZoHxTK4SJ+bjrUK1V+0C2q7hlZ2eZzURmXitjl6/n4MII9f6srl01xS
+ t8K908fxLdTlnHewh+iTcyu6xIhGjVaOrcKI2BDvArkUcoVMn/NetgtJ+KtyWULd19an
+ /lDoypa5MsTlVH/JlfwMK8bxr5BMhqi9VLEcE4eaaGYRjopFmgPlM61WTtumXNB/Dglb
+ VGIq+oj2vM+z3RNTf804MEJZtVB5prfdm9iqoAjgs7d1r4t5t4PX/iFC8EmJQtdk0B6z
+ nklTDi7mMC74iTBO0GKgiDxPYF4w31AC1yRj0pBbdzBsqGsPq5xVa2wSzWGIkG7wyK8o
+ YfNQ==
+X-Gm-Message-State: AOAM530oaLliCmnEz+3ei5j+h6zWkuEvJsouw8xK7nj0qXtr/SXRxdP7
+ ilAF7vkcjBvUjVPpqf2zKq568Q==
+X-Google-Smtp-Source: ABdhPJwRllbLtyxxv5Yf67wS3/DqWH0yVKsdRu2nTbbOO0KuzDQoUFvJ2BqXbreJ8F+agPXyAkrPOA==
+X-Received: by 2002:a63:2786:0:b0:365:8a2d:327b with SMTP id
+ n128-20020a632786000000b003658a2d327bmr12152138pgn.16.1645347353878; 
+ Sun, 20 Feb 2022 00:55:53 -0800 (PST)
+Received: from localhost.localdomain ([122.162.118.38])
+ by smtp.gmail.com with ESMTPSA id q13sm9317220pfl.210.2022.02.20.00.55.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Feb 2022 16:25:48 -0800 (PST)
-From: Atish Patra <atishp@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v5 11/12] hw/riscv: virt: Add PMU DT node to the device tree
-Date: Fri, 18 Feb 2022 16:25:17 -0800
-Message-Id: <20220219002518.1936806-12-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220219002518.1936806-1-atishp@rivosinc.com>
-References: <20220219002518.1936806-1-atishp@rivosinc.com>
+ Sun, 20 Feb 2022 00:55:52 -0800 (PST)
+From: Anup Patel <anup@brainfault.org>
+To: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: [PATCH v10 0/5] QEMU RISC-V AIA support
+Date: Sun, 20 Feb 2022 14:25:21 +0530
+Message-Id: <20220220085526.808674-1-anup@brainfault.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::334
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::42f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::334;
- envelope-from=atishp@rivosinc.com; helo=mail-ot1-x334.google.com
+Received-SPF: none client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=anup@brainfault.org; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -4
 X-Spam_score: -0.5
 X-Spam_bar: /
 X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -85,174 +82,114 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Feb 2022 00:26:39 -0000
+X-List-Received-Date: Sun, 20 Feb 2022 08:56:01 -0000
 
-Qemu virt machine can support few cache events and cycle/instret counters.
-It also supports counter overflow for these events.
+From: Anup Patel <anup.patel@wdc.com>
 
-Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
-capabilities. There are some dummy nodes added for testing as well.
+The advanced interrupt architecture (AIA) extends the per-HART local
+interrupt support. Along with this, it also adds IMSIC (MSI contrllor)
+and Advanced PLIC (wired interrupt controller).
 
-Signed-off-by: Atish Patra <atish.patra@wdc.com>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- hw/riscv/virt.c    | 28 +++++++++++++++++++++++
- target/riscv/cpu.c |  1 +
- target/riscv/pmu.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
- target/riscv/pmu.h |  1 +
- 4 files changed, 87 insertions(+)
+The latest AIA draft specification can be found here:
+https://github.com/riscv/riscv-aia/releases/download/0.2-draft.28/riscv-interrupts-028.pdf
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 7d5f1e58c983..6288e436aa73 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -28,6 +28,7 @@
- #include "hw/qdev-properties.h"
- #include "hw/char/serial.h"
- #include "target/riscv/cpu.h"
-+#include "target/riscv/pmu.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/boot.h"
-@@ -687,6 +688,32 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
-     aplic_phandles[socket] = aplic_s_phandle;
- }
- 
-+static void create_fdt_socket_pmu(RISCVVirtState *s,
-+                                  int socket, uint32_t *phandle,
-+                                  uint32_t *intc_phandles)
-+{
-+    int cpu;
-+    char *pmu_name;
-+    uint32_t *pmu_cells;
-+    MachineState *mc = MACHINE(s);
-+    RISCVCPU hart = s->soc[socket].harts[0];
-+
-+    pmu_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+
-+    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-+        pmu_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        pmu_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_PMU_OVF);
-+    }
-+
-+    pmu_name = g_strdup_printf("/soc/pmu");
-+    qemu_fdt_add_subnode(mc->fdt, pmu_name);
-+    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
-+    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
-+
-+    g_free(pmu_name);
-+    g_free(pmu_cells);
-+}
-+
- static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                                bool is_32_bit, uint32_t *phandle,
-                                uint32_t *irq_mmio_phandle,
-@@ -732,6 +759,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                     &intc_phandles[phandle_pos]);
-             }
-         }
-+        create_fdt_socket_pmu(s, socket, phandle, intc_phandles);
-     }
- 
-     if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 677210bc6d94..00c385009d67 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -910,6 +910,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char *isa_str, int max_str_len)
-         { "svpbmt", cpu->cfg.ext_svpbmt   },
-         { "svinval", cpu->cfg.ext_svinval },
-         { "svnapot", cpu->cfg.ext_svnapot },
-+        { "sscofpmf", cpu->cfg.ext_sscofpmf },
-     };
- 
-     for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 5b212d2eb630..6e470a1d5f66 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -19,11 +19,68 @@
- #include "qemu/osdep.h"
- #include "cpu.h"
- #include "pmu.h"
-+#include "sysemu/device_tree.h"
- 
- #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
- #define MAKE_32BIT_MASK(shift, length) \
-         (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
- 
-+/**
-+ * To keep it simple, any event can be mapped to any programmable counters in
-+ * QEMU. The generic cycle & instruction count events can also be monitored
-+ * using programmable counters. In that case, mcycle & minstret must continue
-+ * to provide the correct value as well. Heterogeneous PMU per hart is not
-+ * supported yet. Thus, number of counters are same across all harts.
-+ */
-+void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name)
-+{
-+    uint32_t fdt_event_ctr_map[20] = {};
-+    uint32_t cmask;
-+
-+    /* All the programmable counters can map to any event */
-+    cmask = MAKE_32BIT_MASK(3, num_ctrs);
-+
-+   /**
-+    * The event encoding is specified in the SBI specification
-+    * Event idx is a 20bits wide number encoded as follows:
-+    * event_idx[19:16] = type
-+    * event_idx[15:0] = code
-+    * The code field in cache events are encoded as follows:
-+    * event_idx.code[15:3] = cache_id
-+    * event_idx.code[2:1] = op_id
-+    * event_idx.code[0:0] = result_id
-+    */
-+
-+   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
-+   fdt_event_ctr_map[0] = cpu_to_be32(0x00000001);
-+   fdt_event_ctr_map[1] = cpu_to_be32(0x00000001);
-+   fdt_event_ctr_map[2] = cpu_to_be32(cmask | 1 << 0);
-+
-+   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
-+   fdt_event_ctr_map[3] = cpu_to_be32(0x00000002);
-+   fdt_event_ctr_map[4] = cpu_to_be32(0x00000002);
-+   fdt_event_ctr_map[5] = cpu_to_be32(cmask | 1 << 2);
-+
-+   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[6] = cpu_to_be32(0x00010019);
-+   fdt_event_ctr_map[7] = cpu_to_be32(0x00010019);
-+   fdt_event_ctr_map[8] = cpu_to_be32(cmask);
-+
-+   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[9] = cpu_to_be32(0x0001001B);
-+   fdt_event_ctr_map[10] = cpu_to_be32(0x0001001B);
-+   fdt_event_ctr_map[11] = cpu_to_be32(cmask);
-+
-+   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[12] = cpu_to_be32(0x00010021);
-+   fdt_event_ctr_map[13] = cpu_to_be32(0x00010021);
-+   fdt_event_ctr_map[14] = cpu_to_be32(cmask);
-+
-+   /* This a OpenSBI specific DT property documented in OpenSBI docs */
-+   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
-+                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
-+}
-+
- static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
- {
-     if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index 9b400c3522f2..63c4b533b223 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -31,6 +31,7 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
- int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-                                uint32_t ctr_idx);
- int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
-+void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pmu_name);
- target_ulong get_icount_ticks(bool brv32);
- int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-                           uint32_t ctr_idx);
+This series adds RISC-V AIA support in QEMU which includes emulating all
+AIA local CSRs, APLIC, and IMSIC. Only AIA local interrupt filtering is
+not implemented because we don't have any local interrupt greater than 12.
+
+To enable AIA in QEMU, use one of the following:
+1) Only AIA local interrupt CSRs: Pass "x-aia=true" as CPU paramenter
+   in the QEMU command-line
+2) Only APLIC for virt machine: Pass "aia=aplic" as machine parameter
+   in the QEMU command-line
+3) Both APLIC and IMSIC for virt machine: Pass "aia=aplic-imsic" as
+   machine parameter in the QEMU command-line
+4) Both APLIC and IMSIC with 2 guest files for virt machine: Pass
+   "aia=aplic-imsic,aia-guests=2" as machine parameter in the QEMU
+   command-line
+
+To test series, we require Linux with AIA support which can be found in:
+riscv_aia_v1 branch at https://github.com/avpatel/linux.git
+
+This series can be found riscv_aia_v10 branch at:
+https://github.com/avpatel/qemu.git
+
+Changes since v9:
+ - Rebased on latest riscv-to-apply.next branch of Alistair's repo
+ - Removed first 18 PATCHs since these are already merged
+ - Fixed 32-bit system compile error in PATCH3
+
+Changes since v8:
+ - Use error_setg() in riscv_imsic_realize() added by PATCH20
+
+Changes since v7:
+ - Rebased on latest riscv-to-apply.next branch of Alistair's repo
+ - Improved default priority assignment in PATCH9
+
+Changes since v6:
+ - Fixed priority comparison in riscv_cpu_pending_to_irq() of PATCH9
+ - Fixed typos in comments added by PATCH11
+ - Added "pend = true;" for CSR_MSETEIPNUM case of rmw_xsetclreinum()
+   in PATCH15
+ - Handle ithreshold == 0 case in riscv_aplic_idc_topi() of PATCH18
+ - Allow setting pending bit for Level0 or Level1 interrupts in
+   riscv_aplic_set_pending() of PATCH18
+ - Force DOMAINCFG[31:24] bits to 0x80 in riscv_aplic_read() of PATCH18
+ - For APLIC direct mode, set target.iprio to 1 when zero is writtern
+   in PATCH18
+ - Handle eithreshold == 0 case in riscv_imsic_topei() of PATCH20
+
+Changes since v5:
+ - Moved VSTOPI_NUM_SRCS define to top of the file in PATCH13
+ - Fixed typo in PATCH16
+
+Changes since v4:
+ - Changed IRQ_LOCAL_MAX to 16 in PATCH2
+ - Fixed typo in PATCH10
+ - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH11
+ - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH14
+ - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH15
+ - Replaced TARGET_LONG_BITS with xlen passed via ireg callback in PATCH20
+ - Retrict maximum IMSIC guest files per-HART of virt machine to 7 in
+   PATCH21.
+ - Added separate PATCH23 to increase maximum number of allowed CPUs
+   for virt machine
+
+Changes since v3:
+ - Replaced "aplic,xyz" and "imsic,xyz" DT properties with "riscv,xyz"
+   DT properties because "aplic" and "imsic" are not valid vendor names
+   required by Linux DT schema checker.
+
+Changes since v2:
+ - Update PATCH4 to check and inject interrupt after V=1 when
+   transitioning from V=0 to V=1
+
+Changes since v1:
+ - Revamped whole series and created more granular patches
+ - Added HGEIE and HGEIP CSR emulation for H-extension
+ - Added APLIC emulation
+ - Added IMSIC emulation
+
+Anup Patel (5):
+  hw/riscv: virt: Add optional AIA APLIC support to virt machine
+  hw/intc: Add RISC-V AIA IMSIC device emulation
+  hw/riscv: virt: Add optional AIA IMSIC support to virt machine
+  docs/system: riscv: Document AIA options for virt machine
+  hw/riscv: virt: Increase maximum number of allowed CPUs
+
+ docs/system/riscv/virt.rst    |  16 +
+ hw/intc/Kconfig               |   3 +
+ hw/intc/meson.build           |   1 +
+ hw/intc/riscv_imsic.c         | 448 ++++++++++++++++++++++
+ hw/riscv/Kconfig              |   2 +
+ hw/riscv/virt.c               | 698 ++++++++++++++++++++++++++++------
+ include/hw/intc/riscv_imsic.h |  68 ++++
+ include/hw/riscv/virt.h       |  41 +-
+ 8 files changed, 1156 insertions(+), 121 deletions(-)
+ create mode 100644 hw/intc/riscv_imsic.c
+ create mode 100644 include/hw/intc/riscv_imsic.h
+
 -- 
-2.30.2
+2.25.1
 
 
