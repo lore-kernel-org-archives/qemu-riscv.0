@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMGRm-0003F8-Do
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 16:42:18 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35662)
+	id 1nMGVe-0006wQ-33
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 16:46:18 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36694)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMGRl-0003C1-2s; Mon, 21 Feb 2022 16:42:17 -0500
-Received: from [2607:f8b0:4864:20::d2b] (port=43574
- helo=mail-io1-xd2b.google.com)
+ id 1nMGVa-0006un-8d; Mon, 21 Feb 2022 16:46:15 -0500
+Received: from [2607:f8b0:4864:20::12e] (port=41750
+ helo=mail-il1-x12e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMGRj-0000Y0-KN; Mon, 21 Feb 2022 16:42:16 -0500
-Received: by mail-io1-xd2b.google.com with SMTP id m185so17650678iof.10;
- Mon, 21 Feb 2022 13:42:14 -0800 (PST)
+ id 1nMGVY-0001Jm-Ds; Mon, 21 Feb 2022 16:46:13 -0500
+Received: by mail-il1-x12e.google.com with SMTP id d7so11070175ilf.8;
+ Mon, 21 Feb 2022 13:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hxuIw9VJUgoO7iSFVD2hy28+5jP61hdnOJ1IATOHxLg=;
- b=QpcqDgBe/MX4vAQgsQJHRtHg0URyotAQ/mybvzf7CgLWuPv3WKtOWi6cHSLb/6RPc9
- VtAk3qyIUCausFZv4t9fRsB4+ACe4gtaossCQNfj0hN08fA1WODNta++Uri7B5/ohJgp
- l94v/7317kv+Bu9+93zDNkLoZM94SWF16bmm+EWXb/1vwM4hcZwU0nSsVuvqoWmHBNCV
- q9fk6qmJBU6ZWvlWIJuNHTwoVPPpZAkC71amzoDMYTJ4/yYyNZWSRmBKg3LrHOeraD2p
- /ea5yfh+TvOiYhcQrKjyu0ZGtPHgX+7IR3JAVL3yHdHLLBg7BF2SvPEfDbDGbcSqx6gY
- 8chg==
+ :cc; bh=EfGe20YoNZZyqS3mWhvOHP8r+8i/gwoGir8idGOPOSc=;
+ b=Lp++EeEMjjmDYehgxvNYeftnF8TCVCdhU75LFsKYYV298zFZ04tURWRhGvIclEBddR
+ Ef6OozpC13wsCMRvNsDdU+49X4D7N2mDWFHmVdNLPLwhovW7NM6darnaBm8fq0ZmXQC9
+ PG+1v6rUoJxCeKyew6Rokn+1EL7tjVZg27P/Pk/R3ESqQhbaLBaLNGt/6QV3Xy8QAOAQ
+ 3flYCyM2clbJhJxkN01UiSEL6u0vJP/e4StWwh4J6Bb27NmXuNXAXsolLYnLnGlIYgfn
+ +ynSqeDqgcfmKw7GEugDBvLzSjji+nMVYjHgIWsjJ3oKT194MJzVwgB55zlhYkM5GiP7
+ OQ7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=hxuIw9VJUgoO7iSFVD2hy28+5jP61hdnOJ1IATOHxLg=;
- b=KbhZVHpm7KG8ZMpNOMghdlqT6K3HRQX5rx5mapo0p/hJC1NfwMFyzX1qCqx6vhrkcl
- h6dP3GeGANGxskuIuoIEgJrbatYZfDNRgR3H02CgfkpluUw+2p5CzrkNyIC3TEMifqXm
- TpwTcg+Vptw1YH0o7d/xEvdQ+KSW80NdEZrZIOhl3nXCY2VhQniaz6KFsqo5wTbBJCYZ
- 7dMt1D1ybcSlw+oShBax62Py1trdFKkB90Wgd27epYe+WCO7B9YvnQkd2wcwmQr5ybST
- vU3VjLkKwnftUkVex3u0ow6PvVQDPM3c6PsN7Ie07gQiNpyY0rSI/5X0awykC8OqJ9FQ
- bz0Q==
-X-Gm-Message-State: AOAM532o+tHLsZJK/v4MjhD/Klf38VLwT0qrwfp1FAaCySKQsX0FO85X
- EsCp4x7dV4v9COeRs31j+HkglCash3NfB1g7Auc=
-X-Google-Smtp-Source: ABdhPJyD9b30GIZCOpY5/2mMLPEifzDwTNZS+MeqNeiececkR0xLU55yA3QUG2B6mIYIFVcHO4N1i5WZ3MFy5JYn6Tc=
-X-Received: by 2002:a05:6638:25b:b0:314:21b0:fb61 with SMTP id
- w27-20020a056638025b00b0031421b0fb61mr16486585jaq.66.1645479734263; Mon, 21
- Feb 2022 13:42:14 -0800 (PST)
+ bh=EfGe20YoNZZyqS3mWhvOHP8r+8i/gwoGir8idGOPOSc=;
+ b=0js18UDcioGhhrBOWX7o41ekEyPO0QO8Rjjwpw2eASFV2zkbMPUm0rE9u1wlUig1rk
+ CvNptq9wQpK7yL73x9NZt6oV1351BulA6CUFbdk5RmGHkyulgk8h1OuZoT5NSVYuEkCl
+ wO402LisuiNbuyrQm08RsqtrZlKhCZ23o0cLz9reIvDp3ZHk2vq4b6u5uecWPpfAImWG
+ 3Rm4Uu3y30g9V5ZG7n74bRXRTDmWlg+e2qUf3Y4frSq2GqT3UYkzVBIAc+Z+zl+1FT4w
+ lql8VG0QSKY8UPO5TmhnltZSucPVoHzEahq53tdIfPTa5JjWnYOaghZeh6RqalXVkQVR
+ Yuyw==
+X-Gm-Message-State: AOAM533nz67ts/7VN7aWyaem51ukbc8VCyGsni9xFw41CmLk3sLt+j06
+ 9NNvxx96o6OAHTI2QmaUSyN9BsM9prCX46lMtDw=
+X-Google-Smtp-Source: ABdhPJx14r4X1WInlaCR6cB4ikJs0lvNHYwGL33Bcht4dQnZ40uJsAGJmYEeoI5N2slL3WMutjPrlqzBZklHwpgXhtA=
+X-Received: by 2002:a05:6e02:1e0b:b0:2be:e272:e5b9 with SMTP id
+ g11-20020a056e021e0b00b002bee272e5b9mr17235747ila.310.1645479961140; Mon, 21
+ Feb 2022 13:46:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20220206091835.1244296-1-atishp@rivosinc.com>
- <20220206091835.1244296-5-atishp@rivosinc.com>
-In-Reply-To: <20220206091835.1244296-5-atishp@rivosinc.com>
+References: <20220217225351.140095-1-shentey@gmail.com>
+ <20220217225351.140095-4-shentey@gmail.com>
+In-Reply-To: <20220217225351.140095-4-shentey@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Feb 2022 07:41:47 +1000
-Message-ID: <CAKmqyKPuPRXZkuV4g+AYNRn8HPriBbnnnW-cK7+F9=3jhLat2Q@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] target/riscv: Add support for mconfigptr
-To: Atish Patra <atishp@rivosinc.com>
+Date: Tue, 22 Feb 2022 07:45:35 +1000
+Message-ID: <CAKmqyKN73Oh40Fyh9QMadS1WC1TEud5yn+L9KJ=sYqDDmrvFvg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv/sifive_u: Resolve redundant property
+ accessors
+To: Bernhard Beschow <shentey@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2b
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -76,53 +77,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2022 21:42:17 -0000
+X-List-Received-Date: Mon, 21 Feb 2022 21:46:16 -0000
 
-On Sun, Feb 6, 2022 at 7:43 PM Atish Patra <atishp@rivosinc.com> wrote:
+On Fri, Feb 18, 2022 at 8:54 AM Bernhard Beschow <shentey@gmail.com> wrote:
 >
-> RISC-V privileged specification v1.12 introduced a mconfigptr
-> which will hold the physical address of a configuration data
-> structure. As Qemu doesn't have a configuration data structure,
-> is read as zero which is valid as per the priv spec.
+> The QOM API already provides accessors for uint32 values, so reuse them.
 >
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu_bits.h | 1 +
->  target/riscv/csr.c      | 2 ++
->  2 files changed, 3 insertions(+)
+>  hw/riscv/sifive_u.c | 24 ++++--------------------
+>  1 file changed, 4 insertions(+), 20 deletions(-)
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index f96d26399607..89440241632a 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -148,6 +148,7 @@
->  #define CSR_MARCHID         0xf12
->  #define CSR_MIMPID          0xf13
->  #define CSR_MHARTID         0xf14
-> +#define CSR_MCONFIGPTR      0xf15
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 7fbc7dea42..747eb4ee89 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -713,36 +713,20 @@ static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error *
+>      s->start_in_flash = value;
+>  }
 >
->  /* Machine Trap Setup */
->  #define CSR_MSTATUS         0x300
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 25a0df498669..18fe17b62f51 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3021,6 +3021,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
->      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
+> -static void sifive_u_machine_get_uint32_prop(Object *obj, Visitor *v,
+> -                                             const char *name, void *opaque,
+> -                                             Error **errp)
+> -{
+> -    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+> -}
+> -
+> -static void sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
+> -                                             const char *name, void *opaque,
+> -                                             Error **errp)
+> -{
+> -    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
+> -}
+> -
+>  static void sifive_u_machine_instance_init(Object *obj)
+>  {
+>      SiFiveUState *s = RISCV_U_MACHINE(obj);
 >
-> +    [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
-> +                                        .min_priv_ver = PRIV_VERSION_1_12_0 },
->      /* Machine Trap Setup */
->      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
->                                                 read_mstatus_i128                   },
+>      s->start_in_flash = false;
+>      s->msel = 0;
+> -    object_property_add(obj, "msel", "uint32",
+> -                        sifive_u_machine_get_uint32_prop,
+> -                        sifive_u_machine_set_uint32_prop, NULL, &s->msel);
+> +    object_property_add_uint32_ptr(obj, "msel", &s->msel,
+> +                                   OBJ_PROP_FLAG_READWRITE);
+>      object_property_set_description(obj, "msel",
+>                                      "Mode Select (MSEL[3:0]) pin state");
+>
+>      s->serial = OTP_SERIAL;
+> -    object_property_add(obj, "serial", "uint32",
+> -                        sifive_u_machine_get_uint32_prop,
+> -                        sifive_u_machine_set_uint32_prop, NULL, &s->serial);
+> +    object_property_add_uint32_ptr(obj, "serial", &s->serial,
+> +                                   OBJ_PROP_FLAG_READWRITE);
+>      object_property_set_description(obj, "serial", "Board serial number");
+>  }
+>
 > --
-> 2.30.2
+> 2.35.1
 >
 >
 
