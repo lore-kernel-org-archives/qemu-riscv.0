@@ -1,63 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nM2rh-0002yq-Vu
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 02:12:11 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:46450)
+	id 1nM2uK-0005f5-Dz
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 02:14:53 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48416)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nM2rg-0002vr-K9; Mon, 21 Feb 2022 02:12:08 -0500
-Received: from [2607:f8b0:4864:20::d34] (port=38904
- helo=mail-io1-xd34.google.com)
+ id 1nM2uE-0005bD-6e; Mon, 21 Feb 2022 02:14:47 -0500
+Received: from [2607:f8b0:4864:20::d31] (port=45648
+ helo=mail-io1-xd31.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nM2rd-00070C-Eb; Mon, 21 Feb 2022 02:12:07 -0500
-Received: by mail-io1-xd34.google.com with SMTP id w7so14920518ioj.5;
- Sun, 20 Feb 2022 23:12:04 -0800 (PST)
+ id 1nM2uC-0007bE-GQ; Mon, 21 Feb 2022 02:14:45 -0500
+Received: by mail-io1-xd31.google.com with SMTP id c14so11168037ioa.12;
+ Sun, 20 Feb 2022 23:14:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ncvz0MehaMYhM7DtHeUns9mADOZ/Bx9H62AvaYPt5Ec=;
- b=mdv+badxMYSVUKEHH7qJsrr+ni1Ktn+PDuA8jfsfclstZ+QW9nfzxjjKDVZf5lH66c
- 4AZfoDra+1xtFxsQY+nuR94QyqRMjGGtShzRJnzt1TaA3fG2a1HDC6ou9itoFDxY0fEl
- CbPhR/7YMmw4Tt66fUXpg5gQ0vbmq8VH9GtdYtstNm0CkSZt0IFd8YvDUB9Y9MowwoPa
- suIRN+9pguaLCSNsbrrfdJOuznPoVXgUjPf0kAH5iEUKhRgKRuQwEvxrtvSk1uR0FYc6
- rzp1Sw9phkF5HME3J888n3R0QKjYU0dnaaHb49dPhFjb1oVJmLcxEhPoK430QwBolxVZ
- KaAw==
+ :cc; bh=wyuvi++3GHxJkTVBhmKUJKnAHEs0xOr21Qt5lj5iU+I=;
+ b=qh+o7XRxHBY18lTkCgchMrnyE6wbF5hqlgbRlz/YTuKdQgfa5IO0QlIz1VbgTFp4xM
+ Yk0IFRHK4j0RdlVFIp+Y4JaoZi8Rv8cXew4kigEdzj/oteyD7qY57pL2/DLFA6nhpjkE
+ /HAuKK7IMw8gGNdT0qv5BphwlWHNCZtJ/mZdanPbw2KSRPiNYHpIwH9bXbZN5bdOK5DU
+ NIyG6JZ/u8oCT3QlHp+92gMfjDck5bGOfGFQmOhR+ALKp6A5rpqyCmWEKLPregucHRNr
+ Mdk7L6PNtw7VUOOFXUNiL9tWW/5PQtNrLDWM+yfPoNpb28Z7vZJICNAFecG6DAsw9YYd
+ qZww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Ncvz0MehaMYhM7DtHeUns9mADOZ/Bx9H62AvaYPt5Ec=;
- b=PbCyE5fm5U+p++PRId8Kswihbsp2j4W5Sc+BWsPMkZA9aM2zfBrHMF/vA/FhS4eM1m
- 6taJgSsPCrUxEKrg0GgC2o2nzxQugVVSwlQ7a5fE/Zv7brZphZpjqRXW9iEUOLiE/9PG
- kfMC2K5qor93Fp6ygYVdB7xluvC5y8qI1Pky624xvLlUUPhi1BHwQlaTm9RG7r8zaZb7
- fmxbUBZfpS6tPrv5QXMI/F6vwARaWLgtwfFVnUe4KTUEuNveSNI+V+oty+5dKqfQc6o6
- IT+2dUu44Sj25mUQO1l+0aWl3q2IMUsbzSir4+6LxFhq5YAhIRPUbYNwz2DwtZJzTaKS
- CgEg==
-X-Gm-Message-State: AOAM533I/kkNIPHEkTST8rP+d6OuBm0aQpNmJx2o51C9OnqqB20VYRo9
- 5FgGMI2EW8hpwzrXJqZ+PfY+NlucDU8bsere8Ew=
-X-Google-Smtp-Source: ABdhPJw2GIbx8kKzFQcyOiF9q1dlcSO29HAV41mBeib4J7J8V3NBBuy2EIGTxHLhtUqlBo7OelPfiF2N3MI51OefSW8=
-X-Received: by 2002:a05:6602:2988:b0:640:9fdc:752f with SMTP id
- o8-20020a056602298800b006409fdc752fmr8680998ior.31.1645427523575; Sun, 20 Feb
- 2022 23:12:03 -0800 (PST)
+ bh=wyuvi++3GHxJkTVBhmKUJKnAHEs0xOr21Qt5lj5iU+I=;
+ b=0gb+HRPPjp6MXfWA4SoDEeI0r2m+iL0GuW2e/6R2i2/5szygCOpW9KTF2XXs7sn0oT
+ XbWB7f9UGFR8elO/rjYJM62ik93kk2uKMWgfk77hWyNkmy04eNy5zK6hb0+gS24BCDdk
+ kh+bFyPgeQxPmVDrx9ltgfV30Hl82bAy/El4tFYfr0WGr0OM0/uMV5jZw1AnzSFI211t
+ I9zbIKB5/CGToPviOP5tMfzGruOIVV2Rq61rsC1TrwWKTr2aEH/HKYk+nxsw3TEhfCSL
+ 1jMxaVIGrLwGpoVwRsC2+opxK+Cn93q0WFN57yJCESOfaeldooM7d3/mYGfoA8awHd7w
+ BT4w==
+X-Gm-Message-State: AOAM533to1u9MuIssqZAnVmsu3IcbTuK3Ul1h6vDeLUhla6sKxY9A72P
+ ezE/ECNJDTvlIeKkpS7s7k33ogYm97fCQQ6DVB8=
+X-Google-Smtp-Source: ABdhPJzUvsct/km8GguDBByPtI0M2qbGruzqODfFcxHsWh+j2BL+yzlbpMa+aFhpBggcUqf1vz7akUWrhytabPyGWhQ=
+X-Received: by 2002:a5d:8b8c:0:b0:613:8223:321a with SMTP id
+ p12-20020a5d8b8c000000b006138223321amr14520717iol.203.1645427673158; Sun, 20
+ Feb 2022 23:14:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20220220085526.808674-1-anup@brainfault.org>
-In-Reply-To: <20220220085526.808674-1-anup@brainfault.org>
+References: <20220218063839.405082-1-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220218063839.405082-1-alistair.francis@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Feb 2022 17:11:37 +1000
-Message-ID: <CAKmqyKPooZqF-mo3gNdj0rd-fGephzmX4OVAARGcwCL14dF2Ew@mail.gmail.com>
-Subject: Re: [PATCH v10 0/5] QEMU RISC-V AIA support
-To: Anup Patel <anup@brainfault.org>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>
+Date: Mon, 21 Feb 2022 17:14:06 +1000
+Message-ID: <CAKmqyKOaoDvRygbCz__kxJ4rU8HW_9E-dR6GAvF3W43nArOKqA@mail.gmail.com>
+Subject: Re: [PATCH v2] hw: riscv: opentitan: fixup SPI addresses
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d34
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d31
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -78,102 +75,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2022 07:12:09 -0000
+X-List-Received-Date: Mon, 21 Feb 2022 07:14:49 -0000
 
-On Sun, Feb 20, 2022 at 6:57 PM Anup Patel <anup@brainfault.org> wrote:
+On Fri, Feb 18, 2022 at 4:38 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
 >
-> From: Anup Patel <anup.patel@wdc.com>
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> The advanced interrupt architecture (AIA) extends the per-HART local
-> interrupt support. Along with this, it also adds IMSIC (MSI contrllor)
-> and Advanced PLIC (wired interrupt controller).
+> This patch updates the SPI_DEVICE, SPI_HOST0, SPI_HOST1
+> base addresses. Also adds these as unimplemented devices.
 >
-> The latest AIA draft specification can be found here:
-> https://github.com/riscv/riscv-aia/releases/download/0.2-draft.28/riscv-interrupts-028.pdf
+> The address references can be found [1].
 >
-> This series adds RISC-V AIA support in QEMU which includes emulating all
-> AIA local CSRs, APLIC, and IMSIC. Only AIA local interrupt filtering is
-> not implemented because we don't have any local interrupt greater than 12.
+> [1] https://github.com/lowRISC/opentitan/blob/6c317992fbd646818b34f2a2dbf44bc850e461e4/hw/top_earlgrey/sw/autogen/top_earlgrey_memory.h#L107
 >
-> To enable AIA in QEMU, use one of the following:
-> 1) Only AIA local interrupt CSRs: Pass "x-aia=true" as CPU paramenter
->    in the QEMU command-line
-> 2) Only APLIC for virt machine: Pass "aia=aplic" as machine parameter
->    in the QEMU command-line
-> 3) Both APLIC and IMSIC for virt machine: Pass "aia=aplic-imsic" as
->    machine parameter in the QEMU command-line
-> 4) Both APLIC and IMSIC with 2 guest files for virt machine: Pass
->    "aia=aplic-imsic,aia-guests=2" as machine parameter in the QEMU
->    command-line
->
-> To test series, we require Linux with AIA support which can be found in:
-> riscv_aia_v1 branch at https://github.com/avpatel/linux.git
->
-> This series can be found riscv_aia_v10 branch at:
-> https://github.com/avpatel/qemu.git
->
-> Changes since v9:
->  - Rebased on latest riscv-to-apply.next branch of Alistair's repo
->  - Removed first 18 PATCHs since these are already merged
->  - Fixed 32-bit system compile error in PATCH3
->
-> Changes since v8:
->  - Use error_setg() in riscv_imsic_realize() added by PATCH20
->
-> Changes since v7:
->  - Rebased on latest riscv-to-apply.next branch of Alistair's repo
->  - Improved default priority assignment in PATCH9
->
-> Changes since v6:
->  - Fixed priority comparison in riscv_cpu_pending_to_irq() of PATCH9
->  - Fixed typos in comments added by PATCH11
->  - Added "pend = true;" for CSR_MSETEIPNUM case of rmw_xsetclreinum()
->    in PATCH15
->  - Handle ithreshold == 0 case in riscv_aplic_idc_topi() of PATCH18
->  - Allow setting pending bit for Level0 or Level1 interrupts in
->    riscv_aplic_set_pending() of PATCH18
->  - Force DOMAINCFG[31:24] bits to 0x80 in riscv_aplic_read() of PATCH18
->  - For APLIC direct mode, set target.iprio to 1 when zero is writtern
->    in PATCH18
->  - Handle eithreshold == 0 case in riscv_imsic_topei() of PATCH20
->
-> Changes since v5:
->  - Moved VSTOPI_NUM_SRCS define to top of the file in PATCH13
->  - Fixed typo in PATCH16
->
-> Changes since v4:
->  - Changed IRQ_LOCAL_MAX to 16 in PATCH2
->  - Fixed typo in PATCH10
->  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH11
->  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH14
->  - Replaced TARGET_LONG_BITS with riscv_cpu_mxl_bits(env) in PATCH15
->  - Replaced TARGET_LONG_BITS with xlen passed via ireg callback in PATCH20
->  - Retrict maximum IMSIC guest files per-HART of virt machine to 7 in
->    PATCH21.
->  - Added separate PATCH23 to increase maximum number of allowed CPUs
->    for virt machine
->
-> Changes since v3:
->  - Replaced "aplic,xyz" and "imsic,xyz" DT properties with "riscv,xyz"
->    DT properties because "aplic" and "imsic" are not valid vendor names
->    required by Linux DT schema checker.
->
-> Changes since v2:
->  - Update PATCH4 to check and inject interrupt after V=1 when
->    transitioning from V=0 to V=1
->
-> Changes since v1:
->  - Revamped whole series and created more granular patches
->  - Added HGEIE and HGEIP CSR emulation for H-extension
->  - Added APLIC emulation
->  - Added IMSIC emulation
->
-> Anup Patel (5):
->   hw/riscv: virt: Add optional AIA APLIC support to virt machine
->   hw/intc: Add RISC-V AIA IMSIC device emulation
->   hw/riscv: virt: Add optional AIA IMSIC support to virt machine
->   docs/system: riscv: Document AIA options for virt machine
->   hw/riscv: virt: Increase maximum number of allowed CPUs
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Thanks!
 
@@ -181,21 +98,66 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+> v2: arranged base addrs in sorted order
 >
->  docs/system/riscv/virt.rst    |  16 +
->  hw/intc/Kconfig               |   3 +
->  hw/intc/meson.build           |   1 +
->  hw/intc/riscv_imsic.c         | 448 ++++++++++++++++++++++
->  hw/riscv/Kconfig              |   2 +
->  hw/riscv/virt.c               | 698 ++++++++++++++++++++++++++++------
->  include/hw/intc/riscv_imsic.h |  68 ++++
->  include/hw/riscv/virt.h       |  41 +-
->  8 files changed, 1156 insertions(+), 121 deletions(-)
->  create mode 100644 hw/intc/riscv_imsic.c
->  create mode 100644 include/hw/intc/riscv_imsic.h
+>  hw/riscv/opentitan.c         | 12 +++++++++---
+>  include/hw/riscv/opentitan.h |  4 +++-
+>  2 files changed, 12 insertions(+), 4 deletions(-)
 >
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index aec7cfa33f..833624d66c 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -34,13 +34,15 @@ static const MemMapEntry ibex_memmap[] = {
+>      [IBEX_DEV_FLASH] =          {  0x20000000,  0x80000 },
+>      [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
+>      [IBEX_DEV_GPIO] =           {  0x40040000,  0x1000  },
+> -    [IBEX_DEV_SPI] =            {  0x40050000,  0x1000  },
+> +    [IBEX_DEV_SPI_DEVICE] =     {  0x40050000,  0x1000  },
+>      [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
+>      [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
+>      [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
+>      [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
+>      [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
+>      [IBEX_DEV_USBDEV] =         {  0x40150000,  0x1000  },
+> +    [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x1000  },
+> +    [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x1000  },
+>      [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
+>      [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
+>      [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
+> @@ -209,8 +211,12 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>
+>      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+>          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
+> -    create_unimplemented_device("riscv.lowrisc.ibex.spi",
+> -        memmap[IBEX_DEV_SPI].base, memmap[IBEX_DEV_SPI].size);
+> +    create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
+> +        memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].size);
+> +    create_unimplemented_device("riscv.lowrisc.ibex.spi_host0",
+> +        memmap[IBEX_DEV_SPI_HOST0].base, memmap[IBEX_DEV_SPI_HOST0].size);
+> +    create_unimplemented_device("riscv.lowrisc.ibex.spi_host1",
+> +        memmap[IBEX_DEV_SPI_HOST1].base, memmap[IBEX_DEV_SPI_HOST1].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.i2c",
+>          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> index eac35ef590..00da9ded43 100644
+> --- a/include/hw/riscv/opentitan.h
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -57,8 +57,10 @@ enum {
+>      IBEX_DEV_FLASH,
+>      IBEX_DEV_FLASH_VIRTUAL,
+>      IBEX_DEV_UART,
+> +    IBEX_DEV_SPI_DEVICE,
+> +    IBEX_DEV_SPI_HOST0,
+> +    IBEX_DEV_SPI_HOST1,
+>      IBEX_DEV_GPIO,
+> -    IBEX_DEV_SPI,
+>      IBEX_DEV_I2C,
+>      IBEX_DEV_PATTGEN,
+>      IBEX_DEV_TIMER,
 > --
-> 2.25.1
->
+> 2.35.1
 >
 
