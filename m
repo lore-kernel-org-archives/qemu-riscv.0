@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMGVe-0006wQ-33
-	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 16:46:18 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36694)
+	id 1nMGXR-0000HB-Ts
+	for mharc-qemu-riscv@gnu.org; Mon, 21 Feb 2022 16:48:10 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37068)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMGVa-0006un-8d; Mon, 21 Feb 2022 16:46:15 -0500
-Received: from [2607:f8b0:4864:20::12e] (port=41750
- helo=mail-il1-x12e.google.com)
+ id 1nMGXL-0000Er-Et; Mon, 21 Feb 2022 16:48:03 -0500
+Received: from [2607:f8b0:4864:20::d31] (port=46743
+ helo=mail-io1-xd31.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMGVY-0001Jm-Ds; Mon, 21 Feb 2022 16:46:13 -0500
-Received: by mail-il1-x12e.google.com with SMTP id d7so11070175ilf.8;
- Mon, 21 Feb 2022 13:46:01 -0800 (PST)
+ id 1nMGXK-0001Rj-1Y; Mon, 21 Feb 2022 16:48:03 -0500
+Received: by mail-io1-xd31.google.com with SMTP id e79so17639259iof.13;
+ Mon, 21 Feb 2022 13:48:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=EfGe20YoNZZyqS3mWhvOHP8r+8i/gwoGir8idGOPOSc=;
- b=Lp++EeEMjjmDYehgxvNYeftnF8TCVCdhU75LFsKYYV298zFZ04tURWRhGvIclEBddR
- Ef6OozpC13wsCMRvNsDdU+49X4D7N2mDWFHmVdNLPLwhovW7NM6darnaBm8fq0ZmXQC9
- PG+1v6rUoJxCeKyew6Rokn+1EL7tjVZg27P/Pk/R3ESqQhbaLBaLNGt/6QV3Xy8QAOAQ
- 3flYCyM2clbJhJxkN01UiSEL6u0vJP/e4StWwh4J6Bb27NmXuNXAXsolLYnLnGlIYgfn
- +ynSqeDqgcfmKw7GEugDBvLzSjji+nMVYjHgIWsjJ3oKT194MJzVwgB55zlhYkM5GiP7
- OQ7A==
+ :cc; bh=0+DNzORnvCezlmzZD3rsEARJ/OLpjwfCPP3aMzMwYIU=;
+ b=ga29Z/8HSjCBlCnKJdqXHJiVXH3EQpQVsa5j52e2eTtqvv4z+I7h8VN/3u1Z46/gRd
+ GVwsP0yylsntmUaGe1LKLXg2AKjxMiBNVf37+xq727sZ3H/F8LTMiG+vGaNna4bwUw6H
+ /AnB5hjNqBVyLWd50PT05q0HvEEtb5GzCFhwxoan4AMlkJxAvM4UQq76Pe7htTaBpsGt
+ buBFmi/XEtnIbscLhEWkSKszzDMVqVvwSIVWhGdVKUoSXjHE9Ic+jcmAlNwEVCjNEAc0
+ rYibWTopu/VoczGvgHJ2KEQDkbLu6BrV/jeJ0wW4F0f4Rr6CxRJbUQbNn8nQ7l8SSjqx
+ haZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=EfGe20YoNZZyqS3mWhvOHP8r+8i/gwoGir8idGOPOSc=;
- b=0js18UDcioGhhrBOWX7o41ekEyPO0QO8Rjjwpw2eASFV2zkbMPUm0rE9u1wlUig1rk
- CvNptq9wQpK7yL73x9NZt6oV1351BulA6CUFbdk5RmGHkyulgk8h1OuZoT5NSVYuEkCl
- wO402LisuiNbuyrQm08RsqtrZlKhCZ23o0cLz9reIvDp3ZHk2vq4b6u5uecWPpfAImWG
- 3Rm4Uu3y30g9V5ZG7n74bRXRTDmWlg+e2qUf3Y4frSq2GqT3UYkzVBIAc+Z+zl+1FT4w
- lql8VG0QSKY8UPO5TmhnltZSucPVoHzEahq53tdIfPTa5JjWnYOaghZeh6RqalXVkQVR
- Yuyw==
-X-Gm-Message-State: AOAM533nz67ts/7VN7aWyaem51ukbc8VCyGsni9xFw41CmLk3sLt+j06
- 9NNvxx96o6OAHTI2QmaUSyN9BsM9prCX46lMtDw=
-X-Google-Smtp-Source: ABdhPJx14r4X1WInlaCR6cB4ikJs0lvNHYwGL33Bcht4dQnZ40uJsAGJmYEeoI5N2slL3WMutjPrlqzBZklHwpgXhtA=
-X-Received: by 2002:a05:6e02:1e0b:b0:2be:e272:e5b9 with SMTP id
- g11-20020a056e021e0b00b002bee272e5b9mr17235747ila.310.1645479961140; Mon, 21
- Feb 2022 13:46:01 -0800 (PST)
+ bh=0+DNzORnvCezlmzZD3rsEARJ/OLpjwfCPP3aMzMwYIU=;
+ b=l9cYOEcV1+oKZCZts/O4YoXXXMKAYQQhgiFWStxTxXdQqzRO9bOxTrr6VwBEhKAa+n
+ ClZg1Tf4ySP96CX0xIg6JUSuxcE7DjSPImQB2XDQj3XutHRZTD4b2QGyY+5V1rAFW9eV
+ w+mDQqxZ3tfwzgaNdqXLml3EyVEYdd3BjqU4Qk/CjjLTWVXx2Sbhrz0bSqqs4zqADIPA
+ whkVCVVDR5xFRlVSlubN0rlL4ViOJCNUjUXHSjTNSAT2WjNPLQK64KCVJLwzGpmKhN/7
+ R4Oztimysry3PyGCehyU4pcvCwH5Tw9YpXwskaYr74axvZDi9awQ4zGOOFmAqKTEz+Nv
+ HJ2A==
+X-Gm-Message-State: AOAM533avDygv8ocB3J/COQkB5PT+AVrInBnN6cO4yfEoLmsYt69Nd6O
+ 2tGJHFxU3HPHX+N4JQhNz3USJN93CRzU4zN92z0=
+X-Google-Smtp-Source: ABdhPJyn5iwakeStVf5/YQpzrtEiW8JpImK1qjx1ykDb0yvkv9sR+yyQYGPBwD9GjVNACyMupUwT5lGAX8ZtFLzoUBk=
+X-Received: by 2002:a6b:e707:0:b0:640:7c3f:e93d with SMTP id
+ b7-20020a6be707000000b006407c3fe93dmr12721484ioh.114.1645480080653; Mon, 21
+ Feb 2022 13:48:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20220217225351.140095-1-shentey@gmail.com>
- <20220217225351.140095-4-shentey@gmail.com>
-In-Reply-To: <20220217225351.140095-4-shentey@gmail.com>
+References: <20220210061737.1171-1-frank.chang@sifive.com>
+ <20220210061737.1171-2-frank.chang@sifive.com>
+In-Reply-To: <20220210061737.1171-2-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 22 Feb 2022 07:45:35 +1000
-Message-ID: <CAKmqyKN73Oh40Fyh9QMadS1WC1TEud5yn+L9KJ=sYqDDmrvFvg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/riscv/sifive_u: Resolve redundant property
- accessors
-To: Bernhard Beschow <shentey@gmail.com>
+Date: Tue, 22 Feb 2022 07:47:34 +1000
+Message-ID: <CAKmqyKOSyC6JYfCrpqS=nD3KdPGzVL5BudgEom_KbP12sPhvgQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 1/3] hw/intc: Add .impl.[min|max]_access_size
+ declaration in RISC-V ACLINT
+To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+ David Hoppenbrouwers <david@salt-inc.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Anup Patel <anup.patel@wdc.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d31
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -77,69 +77,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Feb 2022 21:46:16 -0000
+X-List-Received-Date: Mon, 21 Feb 2022 21:48:04 -0000
 
-On Fri, Feb 18, 2022 at 8:54 AM Bernhard Beschow <shentey@gmail.com> wrote:
+On Thu, Feb 10, 2022 at 4:19 PM <frank.chang@sifive.com> wrote:
 >
-> The QOM API already provides accessors for uint32 values, so reuse them.
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+> If device's MemoryRegion doesn't have .impl.[min|max]_access_size
+> declaration, the default access_size_min would be 1 byte and
+> access_size_max would be 4 bytes (see: softmmu/memory.c).
+> This will cause a 64-bit memory access to ACLINT to be splitted into
+> two 32-bit memory accesses.
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/sifive_u.c | 24 ++++--------------------
->  1 file changed, 4 insertions(+), 20 deletions(-)
+>  hw/intc/riscv_aclint.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 7fbc7dea42..747eb4ee89 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -713,36 +713,20 @@ static void sifive_u_machine_set_start_in_flash(Object *obj, bool value, Error *
->      s->start_in_flash = value;
->  }
->
-> -static void sifive_u_machine_get_uint32_prop(Object *obj, Visitor *v,
-> -                                             const char *name, void *opaque,
-> -                                             Error **errp)
-> -{
-> -    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-> -}
-> -
-> -static void sifive_u_machine_set_uint32_prop(Object *obj, Visitor *v,
-> -                                             const char *name, void *opaque,
-> -                                             Error **errp)
-> -{
-> -    visit_type_uint32(v, name, (uint32_t *)opaque, errp);
-> -}
-> -
->  static void sifive_u_machine_instance_init(Object *obj)
->  {
->      SiFiveUState *s = RISCV_U_MACHINE(obj);
->
->      s->start_in_flash = false;
->      s->msel = 0;
-> -    object_property_add(obj, "msel", "uint32",
-> -                        sifive_u_machine_get_uint32_prop,
-> -                        sifive_u_machine_set_uint32_prop, NULL, &s->msel);
-> +    object_property_add_uint32_ptr(obj, "msel", &s->msel,
-> +                                   OBJ_PROP_FLAG_READWRITE);
->      object_property_set_description(obj, "msel",
->                                      "Mode Select (MSEL[3:0]) pin state");
->
->      s->serial = OTP_SERIAL;
-> -    object_property_add(obj, "serial", "uint32",
-> -                        sifive_u_machine_get_uint32_prop,
-> -                        sifive_u_machine_set_uint32_prop, NULL, &s->serial);
-> +    object_property_add_uint32_ptr(obj, "serial", &s->serial,
-> +                                   OBJ_PROP_FLAG_READWRITE);
->      object_property_set_description(obj, "serial", "Board serial number");
->  }
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index f1a5d3d284..3b598d8a7e 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -208,6 +208,10 @@ static const MemoryRegionOps riscv_aclint_mtimer_ops = {
+>      .valid = {
+>          .min_access_size = 4,
+>          .max_access_size = 8
+> +    },
+> +    .impl = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+>      }
+>  };
 >
 > --
-> 2.35.1
+> 2.31.1
 >
 >
 
