@@ -1,76 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMdJh-0005xW-PB
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 17:07:29 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49074)
+	id 1nMdeZ-000546-IE
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 17:29:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:53418)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nMdJg-0005vk-1O
- for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:07:28 -0500
-Received: from [2607:f8b0:4864:20::230] (port=46822
- helo=mail-oi1-x230.google.com)
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1nMdeY-00051v-Ee
+ for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:29:02 -0500
+Received: from [2607:f8b0:4864:20::b33] (port=46745
+ helo=mail-yb1-xb33.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nMdJV-0005Ma-27
- for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:07:27 -0500
-Received: by mail-oi1-x230.google.com with SMTP id l25so10517818oic.13
- for <qemu-riscv@nongnu.org>; Tue, 22 Feb 2022 14:07:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1nMdeW-00009S-2s
+ for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:29:02 -0500
+Received: by mail-yb1-xb33.google.com with SMTP id b35so16494759ybi.13
+ for <qemu-riscv@nongnu.org>; Tue, 22 Feb 2022 14:28:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=er3O3f7Ph7vBsTAPhBit3sfvbgYjjR3ybH8BV0JDaWk=;
- b=dBhmo/XnAWDQxfXl4mSL5mHvuXKC/sfS2IU0Bo62L4CGFja2n7OZDq007puo3k4IQD
- 2G11ZuiXedRawl0WKqTOgn0OS7RHSNKPVARYfJ5wc4GLL5yNuaXQEmROeNI1bCz5BHWn
- XHTaQmDmcI89jeSbqOhPgw70TVirdkQCnvPQVUVy+ah4t++sj5J/KUiUgxvXk5G2mVZE
- 44acRMOVsg3Sa2GqaZhuwBaSsFxMu0MphtubbCMEmBruSv78mhDnNm3HXgJtabxl36Jf
- Pz8djKNGDDCAuOucQqMbAwHaz0/rTafCnIu6/avuYzBrgXsiEOHi6VF68kgn78B27BCw
- ADXQ==
+ d=atishpatra.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Bsc55VRk8Lv6a/4+tnEqvi9VUlYITCP0nu4RXH6P5To=;
+ b=tboQ7nyAwPfsPcxccmqikD8/7uFqdZPNRP+NAXIsTcTrzewgW8GescgpxvoqNiCHO1
+ ojtH4WDmkljfgKmfScE9rEeQLEU7eXCyWX1N6Bd7gLqGFPWd2YvTUA+opaIFdOJBq6nm
+ +6HSDeaBlwh200q95AiBaEG8zVIe8Du88OQrM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=er3O3f7Ph7vBsTAPhBit3sfvbgYjjR3ybH8BV0JDaWk=;
- b=js8i/Kgp83Vb3b8b/ikZiCuLtbuSLmcuVFkMsXjsyhc5yJ+3SB6Azyr9TJBaw5epMj
- 60qBOzOraPCDgmcP6qhGtpRU12kllont7aYuMvHiGTCAhxVKf4pV3UtLgtOCK5j/d714
- +vHW0MQKsaR3pL4OUhWXBBTBd/NP0EiKeATCqloD4FdN7yHQZLGcBf+FVr4yviB+A0Sq
- 0cpuvRRW0+effQZs/1nkUVH4cvThk33FBDZ+RR2AttW6jj8SlSqanaGs49+8r7SQb5gA
- C/VzPTS6NergRM03thCft5UQJoXW6SueNGA8WhC/OfNJTy3VNwVdsoRkT1V2/rAIbXQn
- ttKg==
-X-Gm-Message-State: AOAM532RMyTAXaIN20aR7FfsBn7lwbXBySnUVwK9qH9TNlxEVs0vEBMN
- 8JoGTC4xCO4o4EN0cC+qWjXVlA==
-X-Google-Smtp-Source: ABdhPJxQ7voxIY88OxVhRzFYhIrez6QrCdUXcEqWGtKuYUGQsegn/gGXHfOynPKNKmwps7MIojGsVg==
-X-Received: by 2002:a05:6808:124f:b0:2cd:199d:ee01 with SMTP id
- o15-20020a056808124f00b002cd199dee01mr3182119oiv.101.1645567635290; 
- Tue, 22 Feb 2022 14:07:15 -0800 (PST)
-Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
- [70.228.75.190])
- by smtp.gmail.com with ESMTPSA id n25sm4901913otq.78.2022.02.22.14.07.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Feb 2022 14:07:14 -0800 (PST)
-From: Atish Patra <atishp@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v4 5/6] target/riscv: Add *envcfg* CSRs support
-Date: Tue, 22 Feb 2022 14:07:03 -0800
-Message-Id: <20220222220704.2294924-6-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220222220704.2294924-1-atishp@rivosinc.com>
-References: <20220222220704.2294924-1-atishp@rivosinc.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Bsc55VRk8Lv6a/4+tnEqvi9VUlYITCP0nu4RXH6P5To=;
+ b=rRwZPGOkrGp+7xvLWgqbsuS8gp2zOV3TR6i3XiBCblQ7zyWaYxPz/p+B/jlr02t4BE
+ cYQXR5LytwEsY//Cx6NCt9DZsOT94dZReFqzs28o22xNJ96+t7jRI4zXLp2qZR4/XSuC
+ hv7L8wpmf7iE5ll2XPULCDttYQHxbFjpb8/B4t3z5gWmPBy7HIcWkI9q5wfLUt1WFZdi
+ O1KO7aj3dZ7JRkZadOCtfDf0H2+yh3Q9zLqMU84eAm2HG5uYvf22gUqpQd7G5yQp/4rp
+ 62A2HkUS5EudfPpy6UBnP/JhTnrWZ5LUJbrOWeKllaPerQGxA9TCw9uh7DGXDAtayv9x
+ VG4Q==
+X-Gm-Message-State: AOAM530TWJt/23EG6cC2lByxvJBrFWgG1keY/y8ZzsR4uC9y6XL0lrdX
+ nYtRc19rofKEDp2cj/ms/sok6FpAceoDq9t6akBWxxr3vQ==
+X-Google-Smtp-Source: ABdhPJxJ67sPo4NL9rnC08yMlYAliTDaDLQlFdp9PKu85XUXgROkMw6idVFq+IwS+/4y7J8/UNbIO6Yt4/tOT/js1sY=
+X-Received: by 2002:a25:d858:0:b0:623:f93c:7e97 with SMTP id
+ p85-20020a25d858000000b00623f93c7e97mr25029366ybg.53.1645568938705; Tue, 22
+ Feb 2022 14:28:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::230
+References: <20220216000904.1217872-1-atishp@rivosinc.com>
+ <CAAhSdy0zv2Cj-h503EVmwDXpa=SE3W9Bk8P3-baiYZaw750ZUw@mail.gmail.com>
+In-Reply-To: <CAAhSdy0zv2Cj-h503EVmwDXpa=SE3W9Bk8P3-baiYZaw750ZUw@mail.gmail.com>
+From: Atish Patra <atishp@atishpatra.org>
+Date: Tue, 22 Feb 2022 14:28:48 -0800
+Message-ID: <CAOnJCUJs_TQk8dgijUrxvdBQi6Unoh59BtnDcyJ5LhCArFrzVg@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Add isa extenstion strings to the device
+ tree
+To: Anup Patel <anup@brainfault.org>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, Heiko Stubner <heiko@sntech.de>,
+ Bin Meng <bin.meng@windriver.com>, QEMU Developers <qemu-devel@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b33
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::230;
- envelope-from=atishp@rivosinc.com; helo=mail-oi1-x230.google.com
-X-Spam_score_int: -4
-X-Spam_score: -0.5
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
+ envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb33.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
 X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -84,277 +77,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2022 22:07:28 -0000
+X-List-Received-Date: Tue, 22 Feb 2022 22:29:02 -0000
 
-The RISC-V privileged specification v1.12 defines few execution
-environment configuration CSRs that can be used enable/disable
-extensions per privilege levels.
+On Tue, Feb 15, 2022 at 7:19 PM Anup Patel <anup@brainfault.org> wrote:
+>
+> On Wed, Feb 16, 2022 at 5:39 AM Atish Patra <atishp@rivosinc.com> wrote:
+> >
+> > The Linux kernel parses the ISA extensions from "riscv,isa" DT
+> > property. It used to parse only the single letter base extensions
+> > until now. A generic ISA extension parsing framework was proposed[1]
+> > recently that can parse multi-letter ISA extensions as well.
+> >
+> > Generate the extended ISA string by appending  the available ISA extensions
+> > to the "riscv,isa" string if it is enabled so that kernel can process it.
+> >
+> > [1] https://lkml.org/lkml/2022/2/15/263
+> >
+> > Suggested-by: Heiko Stubner <heiko@sntech.de>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> > Changes from v1->v2:
+> > 1. Improved the code redability by using arrays instead of individual check
+> > ---
+> >  target/riscv/cpu.c | 35 ++++++++++++++++++++++++++++++++++-
+> >  1 file changed, 34 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index b0a40b83e7a8..9bf8923f164b 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -34,6 +34,13 @@
+> >
+> >  /* RISC-V CPU definitions */
+> >
+> > +/* This includes the null terminated character '\0' */
+> > +#define MAX_ISA_EXT_LEN 256
+> > +struct isa_ext_data {
+> > +        const char *name;
+> > +        bool enabled;
+> > +};
+> > +
+> >  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
+> >
+> >  const char * const riscv_int_regnames[] = {
+> > @@ -881,10 +888,35 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+> >      device_class_set_props(dc, riscv_cpu_properties);
+> >  }
+> >
+> > +static void riscv_isa_string_ext(RISCVCPU *cpu, char *isa_str, int max_str_len)
+> > +{
+> > +    int offset = strnlen(isa_str, max_str_len);
+> > +    int i;
+> > +    struct isa_ext_data isa_edata_arr[] = {
+> > +        { "svpbmt", cpu->cfg.ext_svpbmt   },
+> > +        { "svinval", cpu->cfg.ext_svinval },
+> > +        { "svnapot", cpu->cfg.ext_svnapot },
+> > +    };
+> > +
+> > +    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> > +        if (!isa_edata_arr[i].enabled) {
+> > +            continue;
+> > +        }
+> > +        /* check available space */
+> > +        if ((offset + strlen(isa_edata_arr[i].name) + 1) > max_str_len) {
+> > +            qemu_log("No space left to append isa extension");
+> > +            return;
+> > +        }
+> > +        offset += snprintf(isa_str + offset, max_str_len, "_%s",
+> > +                           isa_edata_arr[i].name);
+>
+> You don't need to use snprintf() and MAX_ISA_EXT_LEN if you
+> use g_strconcat() for creating new concat strings and freeing
+> original string using g_free().
+>
 
-Add the basic support for these CSRs.
+Yeah. That is better. I have reimplemented this part in v3.
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.h      |   5 ++
- target/riscv/cpu_bits.h |  39 +++++++++++++++
- target/riscv/csr.c      | 107 ++++++++++++++++++++++++++++++++++++++++
- target/riscv/machine.c  |  24 +++++++++
- 4 files changed, 175 insertions(+)
+> Regards,
+> Anup
+>
+> > +    }
+> > +}
+> > +
+> >  char *riscv_isa_string(RISCVCPU *cpu)
+> >  {
+> >      int i;
+> > -    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) + 1;
+> > +    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) +
+> > +                          MAX_ISA_EXT_LEN;
+> >      char *isa_str = g_new(char, maxlen);
+> >      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+> >      for (i = 0; i < sizeof(riscv_exts); i++) {
+> > @@ -893,6 +925,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+> >          }
+> >      }
+> >      *p = '\0';
+> > +    riscv_isa_string_ext(cpu, isa_str, maxlen);
+> >      return isa_str;
+> >  }
+> >
+> > --
+> > 2.30.2
+> >
+> >
+>
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0741f9822cf0..e5c8694cf081 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -303,6 +303,11 @@ struct CPURISCVState {
-     target_ulong spmbase;
-     target_ulong upmmask;
-     target_ulong upmbase;
-+
-+    /* CSRs for execution enviornment configuration */
-+    uint64_t menvcfg;
-+    target_ulong senvcfg;
-+    uint64_t henvcfg;
- #endif
- 
-     float_status fp_status;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 89440241632a..58a0a8d69f72 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -202,6 +202,9 @@
- #define CSR_STVEC           0x105
- #define CSR_SCOUNTEREN      0x106
- 
-+/* Supervisor Configuration CSRs */
-+#define CSR_SENVCFG         0x10A
-+
- /* Supervisor Trap Handling */
- #define CSR_SSCRATCH        0x140
- #define CSR_SEPC            0x141
-@@ -247,6 +250,10 @@
- #define CSR_HTIMEDELTA      0x605
- #define CSR_HTIMEDELTAH     0x615
- 
-+/* Hypervisor Configuration CSRs */
-+#define CSR_HENVCFG         0x60A
-+#define CSR_HENVCFGH        0x61A
-+
- /* Virtual CSRs */
- #define CSR_VSSTATUS        0x200
- #define CSR_VSIE            0x204
-@@ -290,6 +297,10 @@
- #define CSR_VSIEH           0x214
- #define CSR_VSIPH           0x254
- 
-+/* Machine Configuration CSRs */
-+#define CSR_MENVCFG         0x30A
-+#define CSR_MENVCFGH        0x31A
-+
- /* Enhanced Physical Memory Protection (ePMP) */
- #define CSR_MSECCFG         0x747
- #define CSR_MSECCFGH        0x757
-@@ -654,6 +665,34 @@ typedef enum RISCVException {
- #define PM_EXT_CLEAN    0x00000002ULL
- #define PM_EXT_DIRTY    0x00000003ULL
- 
-+/* Execution enviornment configuration bits */
-+#define MENVCFG_FIOM                       BIT(0)
-+#define MENVCFG_CBIE                       (3UL << 4)
-+#define MENVCFG_CBCFE                      BIT(6)
-+#define MENVCFG_CBZE                       BIT(7)
-+#define MENVCFG_PBMTE                      BIT(62)
-+#define MENVCFG_STCE                       BIT(63)
-+
-+/* For RV32 */
-+#define MENVCFGH_PBMTE                     BIT(30)
-+#define MENVCFGH_STCE                      BIT(31)
-+
-+#define SENVCFG_FIOM                       MENVCFG_FIOM
-+#define SENVCFG_CBIE                       MENVCFG_CBIE
-+#define SENVCFG_CBCFE                      MENVCFG_CBCFE
-+#define SENVCFG_CBZE                       MENVCFG_CBZE
-+
-+#define HENVCFG_FIOM                       MENVCFG_FIOM
-+#define HENVCFG_CBIE                       MENVCFG_CBIE
-+#define HENVCFG_CBCFE                      MENVCFG_CBCFE
-+#define HENVCFG_CBZE                       MENVCFG_CBZE
-+#define HENVCFG_PBMTE                      MENVCFG_PBMTE
-+#define HENVCFG_STCE                       MENVCFG_STCE
-+
-+/* For RV32 */
-+#define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
-+#define HENVCFGH_STCE                       MENVCFGH_STCE
-+
- /* Offsets for every pair of control bits per each priv level */
- #define XS_OFFSET    0ULL
- #define U_OFFSET     2ULL
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 18fe17b62f51..ff7e36596447 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1366,6 +1366,101 @@ static RISCVException write_mtval(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+/* Execution environment configuration setup */
-+static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = env->menvcfg;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE | MENVCFG_CBZE;
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV64) {
-+        mask |= MENVCFG_PBMTE | MENVCFG_STCE;
-+    }
-+    env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = env->menvcfg >> 32;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    uint64_t mask = MENVCFG_PBMTE | MENVCFG_STCE;
-+    uint64_t valh = (uint64_t)val << 32;
-+
-+    env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = env->senvcfg;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    uint64_t mask = SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENVCFG_CBZE;
-+
-+    env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = env->henvcfg;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-+
-+    if (riscv_cpu_mxl(env) == MXL_RV64) {
-+        mask |= HENVCFG_PBMTE | HENVCFG_STCE;
-+    }
-+
-+    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    *val = env->henvcfg >> 32;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    uint64_t mask = HENVCFG_PBMTE | HENVCFG_STCE;
-+    uint64_t valh = (uint64_t)val << 32;
-+
-+    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
-                                 uint64_t *ret_val,
-                                 uint64_t new_val, uint64_t wr_mask)
-@@ -3069,6 +3164,18 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_MVIPH]    = { "mviph",    aia_any32, read_zero,  write_ignore },
-     [CSR_MIPH]     = { "miph",     aia_any32, NULL, NULL, rmw_miph     },
- 
-+    /* Execution environment configuration */
-+    [CSR_MENVCFG]  = { "menvcfg",  any,   read_menvcfg,  write_menvcfg,
-+                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_MENVCFGH] = { "menvcfgh", any32, read_menvcfgh, write_menvcfgh,
-+                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_SENVCFG]  = { "senvcfg",  smode, read_senvcfg,  write_senvcfg,
-+                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_HENVCFG]  = { "henvcfg",  hmode, read_henvcfg, write_henvcfg,
-+                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
-+                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+
-     /* Supervisor Trap Setup */
-     [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
-                                               read_sstatus_i128                 },
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 9895930b2976..4a50a05937fa 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -220,6 +220,29 @@ static const VMStateDescription vmstate_kvmtimer = {
-     }
- };
- 
-+/* TODO: henvcfg need both hyper_needed & envcfg_needed */
-+static bool envcfg_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+    CPURISCVState *env = &cpu->env;
-+
-+    return (env->priv_ver >= PRIV_VERSION_1_12_0 ? 1 : 0);
-+}
-+
-+static const VMStateDescription vmstate_envcfg = {
-+    .name = "cpu/envcfg",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = envcfg_needed,
-+    .fields = (VMStateField[]) {
-+        VMSTATE_UINT64(env.menvcfg, RISCVCPU),
-+        VMSTATE_UINTTL(env.senvcfg, RISCVCPU),
-+        VMSTATE_UINT64(env.henvcfg, RISCVCPU),
-+
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 3,
-@@ -280,6 +303,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_pointermasking,
-         &vmstate_rv128,
-         &vmstate_kvmtimer,
-+        &vmstate_envcfg,
-         NULL
-     }
- };
+
 -- 
-2.30.2
-
+Regards,
+Atish
 
