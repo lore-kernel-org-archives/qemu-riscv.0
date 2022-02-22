@@ -1,98 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMcyB-0001nI-L6
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 16:45:15 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44796)
+	id 1nMdJb-0005mb-Kk
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 17:07:23 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48890)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=045d7fed6=alistair.francis@opensource.wdc.com>)
- id 1nMcyA-0001kR-Ek
- for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 16:45:14 -0500
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:48803)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=045d7fed6=alistair.francis@opensource.wdc.com>)
- id 1nMcy7-00020Z-4z
- for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 16:45:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1645566311; x=1677102311;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=wl/+WSzCFoq5nO90BN6K5istP41jyA7U1JfB2b4EWHI=;
- b=fM1qvsu6wRSwebsu+0i77lJjmSt1GH+h+HBcCwc/jvksrHH6Ye88ioc4
- WyKQ7z7qP0MhS4Q3HuxkSjLDM+69xYaPPKLLKsFHSPyPOEugnvUruitiW
- BBkyurnjoz6bzQJS865grUcO/OIIm18qfY1QpVhW9zXsGOwMJDImHFUCM
- NNm3dDsrveorFZPedHLB+5vB2InRoLaLpcNSw8E07f5gtTnpa37L7nqbX
- jG4rdAu2ePgklZZx/4moiG3gnSTFaiRQ1t7kQbpPH6zi+Qp5d9Q2DBhyq
- XX87m8ay5kqf18nufZ/x4vdRbObf09++s86Le625tf3lJFM71kerh5CGq w==;
-X-IronPort-AV: E=Sophos;i="5.88,389,1635177600"; d="scan'208";a="297822900"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 23 Feb 2022 05:45:04 +0800
-IronPort-SDR: /exwtucFSBytWql7YJYkescS7f4G0q9E4hwtNsyNCHmvDwdW0hWLWdcB8bQkP3kw63uIbDo5IR
- X2TCUn7MpuvRmaCsQ8GrlLwf1fz4wHutCafEns6sIaL4wjmwbmFaXHsFLnaxu7eB7hDkWsoRRM
- q81a4Rwl//ic8YMf0KkvY2lpKpMfo9W8yMYZAmhtdprFw0eWgjI7oCgvCyCXOzvxdDu3VszISS
- LHRG/7PfJe2SpZwOuSbP50Hnm3phwqbuV+Bi4ugTeb9hQsm4XrF3KaOAga8Ejd5sXnMb7JbJVf
- 15IBpGaMpeH3lpVd5s4w5toe
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Feb 2022 13:17:42 -0800
-IronPort-SDR: 0ptZPhg3WyV13iV7GnCOuCKpdafQ6hb9sYD//XDpTduoameLZTvOhAK3TGY4ox6jGdEdtaQ+Ls
- Z0JxCUSCb1Sf8YKD+z38SPsNL+hnEwh8vwXzWuyVSmVHMoDmZQ+ht4GqgdpVXziT65uqqLrzTh
- 7ylzWuVoEOS72M5gPlIwo3zQI4Po2vW9A1WuYfw7TIHxuNYPyDEf9Je1Ls4+8h/auGp0gSikie
- F5nmhphqr8AVWLI5z9vK361YGY8ltHZ86dIU+FPB7pi+/BSXgJKPDQf5zcrjQVY4UE5uo6pWmR
- bsU=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Feb 2022 13:45:05 -0800
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4K3CPr1R2fz1SVp2
- for <qemu-riscv@nongnu.org>; Tue, 22 Feb 2022 13:45:04 -0800 (PST)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1645566303; x=1648158304; bh=wl/+WSzCFoq5nO90BN
- 6K5istP41jyA7U1JfB2b4EWHI=; b=S0y1J81EsYBjbimLDDFtxUzFy0jgMif3Hd
- cpZVC/vzPg8SLFUIvvJVMy7v4aWAfVqpzVs+ixK+zC2/ZpfFCT2Ts+qpMuYB7BSL
- czGfrTQme6owpEjvFWC1viCGn86OzFcrKvf/pyHTQAZsqLeUxRcIMiCJf3OBMylo
- /FfyCHneR+vgnmofRnK/7Y29r4N/rbydWkhbgG/BIvywseFjBFcimJZnNv1+/l+s
- gd8ta7ZVv97/M/y/yYbcrX5vCHYJhzT4NaByeq6VG0PE0WTtGsjMNU51+sYp7TqM
- niPJyd4jLVg1LVk/HeUpG+onhtbkg4R/6BifI48M1y+0da4C+QMQ==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id nFhZlXvcE4TU for <qemu-riscv@nongnu.org>;
- Tue, 22 Feb 2022 13:45:03 -0800 (PST)
-Received: from toolbox.alistair23.me (unknown [10.225.165.99])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4K3CPl0Yx3z1Rwrw;
- Tue, 22 Feb 2022 13:44:58 -0800 (PST)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, wilfred.mallawa@wdc.com
-Subject: [PATCH v1 2/2] riscv: opentitan: Connect opentitan SPI Host
-Date: Wed, 23 Feb 2022 07:44:43 +1000
-Message-Id: <20220222214443.4081039-2-alistair.francis@opensource.wdc.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220222214443.4081039-1-alistair.francis@opensource.wdc.com>
-References: <20220222214443.4081039-1-alistair.francis@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nMdJY-0005lG-JC
+ for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:07:20 -0500
+Received: from [2607:f8b0:4864:20::231] (port=33633
+ helo=mail-oi1-x231.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nMdJV-0005LQ-2j
+ for qemu-riscv@nongnu.org; Tue, 22 Feb 2022 17:07:19 -0500
+Received: by mail-oi1-x231.google.com with SMTP id x193so16220934oix.0
+ for <qemu-riscv@nongnu.org>; Tue, 22 Feb 2022 14:07:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8e87MQxDP9WKfM/Uq6rVPbcX7ntV66CZys3ScGDzKSY=;
+ b=hekAWtb02YnJhNzU3v6cJrMxx6LaEW/CwSccmW/lnOD+Cmwh++CoxVJdq9xRFKK3aD
+ iGWj+BqbOnc4YjtAuxAaliwpDULxxmA2lr4Em+LUCDljr7cVeWULfrf/Fwgt9laaSUUk
+ Cck7Hn/WCwnqa4NzSglGel7TwqeOX05R//yxbYGqkpSe2CcO0/QUf4SFbima82+y6f+I
+ ybFoKns3bASQQXZZuUtF1vFnhWWyCr4HR4k+VV60E927qkK2q9P79U+lT0Y06zd+XIjV
+ UleDEsJJFEOz+ZRU6LjcYArrSI57cgyf1rRSNxoa38AnxjJ25H1ZLAgIwwUiO/OFtOAU
+ SlDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8e87MQxDP9WKfM/Uq6rVPbcX7ntV66CZys3ScGDzKSY=;
+ b=mjDZ9Df+wOfAJ0nmbVTIRrxbT9G/z1jW9MYlisFpd8zTzgg8lx1TP8shjsMPdZN59G
+ sY3YcRmE0D3AePCo//9KN7X8L49g8hEOheLm5JBAc60gowLWF8tmzc604VWPOeEh6AaH
+ JY5YOIfNYUaD6nem9Zn/2R46EjWwSaZzRhhm3aV1VK5d3BUVhnfwEXBtNMAoB4/CCvjN
+ 5Cy0qAbvktEMXSeb36S44CUNr7HlR73EHVl7w3nJ7UP02iYznO5DE46m6GFagjeI8GrT
+ pH8DF8qMXRM6Zds2weBbO/m+TkpdCrfsoknsavXSFcj1cQaOHiQrCaYcLBT5N5O1ljFa
+ xYVg==
+X-Gm-Message-State: AOAM532073PbHFKt0Jj6FOWzlh92mubSLwAi7ypzA2s4q60DWx2olB2F
+ 4uQt183R5gJ8OcsYuuZhFSJEww==
+X-Google-Smtp-Source: ABdhPJyITVm9vGD/pLSGY8B1jLk7+s6RqNFeRKdu9m8dH9Od3xJeIMHHhMVXJwz14r+gLaWt+RcuTw==
+X-Received: by 2002:a05:6808:1205:b0:2d4:6eed:edd1 with SMTP id
+ a5-20020a056808120500b002d46eededd1mr2963764oil.154.1645567628190; 
+ Tue, 22 Feb 2022 14:07:08 -0800 (PST)
+Received: from rivos-atish.. (adsl-70-228-75-190.dsl.akrnoh.ameritech.net.
+ [70.228.75.190])
+ by smtp.gmail.com with ESMTPSA id n25sm4901913otq.78.2022.02.22.14.07.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Feb 2022 14:07:07 -0800 (PST)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v4 0/6] Privilege version update
+Date: Tue, 22 Feb 2022 14:06:58 -0800
+Message-Id: <20220222220704.2294924-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=045d7fed6=alistair.francis@opensource.wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::231
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
+ envelope-from=atishp@rivosinc.com; helo=mail-oi1-x231.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,174 +82,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Feb 2022 21:45:14 -0000
+X-List-Received-Date: Tue, 22 Feb 2022 22:07:21 -0000
 
-From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+RISC-V International (RVI) has ratified many RISC-V ISA extensions recently[1].
+The privileged specification version is also upgraded to v1.12. It means
+certain CSRs introduced in v1.12 should only be accessible only if the
+priv specification version supported is equal or greater than v1.12.
+Doing this check in predicate function is not scalable as there will be
+new CSRs introduced in the future versions of the privileged specification.
 
-Conenct spi host[1/0] to opentitan.
+This series tries to address this problem by adding a field in the csr_ops
+which can be checked in csrrw function before invoking the predicate function.
+To keep the code churn to minimum, it is assumed that the minimum version of
+the privilege version supported for any CSR is v1.10 unless specified
+explicitly in the csr_ops table. Any new CSRs introduced in v1.12 have been
+updated accordingly.
 
-Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
----
- hw/riscv/opentitan.c         | 42 ++++++++++++++++++++++++++++++++----
- include/hw/riscv/opentitan.h | 16 ++++++++++++--
- 2 files changed, 52 insertions(+), 6 deletions(-)
+This will work fine for any ratified extensions. However, it is bit unclear
+what should be done for the stable draft extensions. My suggestion is not
+to update the priv field in the CSR ops table until the extension is
+marked experimental (i.e. not frozen/ratified). Once the extension is
+ratified and graduated from experimental to available stage, the privileged
+spec version should be updated in the csr table if required. I am open to
+other suggestions as well.
 
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index aec7cfa33f..abbe08d4d4 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -1,7 +1,7 @@
- /*
-  * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
-  *
-- * Copyright (c) 2020 Western Digital
-+ * Copyright (c) 2022 Western Digital
-  *
-  * Provides a board compatible with the OpenTitan FPGA platform:
-  *
-@@ -34,13 +34,15 @@ static const MemMapEntry ibex_memmap[] =3D {
-     [IBEX_DEV_FLASH] =3D          {  0x20000000,  0x80000 },
-     [IBEX_DEV_UART] =3D           {  0x40000000,  0x1000  },
-     [IBEX_DEV_GPIO] =3D           {  0x40040000,  0x1000  },
--    [IBEX_DEV_SPI] =3D            {  0x40050000,  0x1000  },
-+    [IBEX_DEV_SPI_DEVICE] =3D     {  0x40050000,  0x1000  },
-     [IBEX_DEV_I2C] =3D            {  0x40080000,  0x1000  },
-     [IBEX_DEV_PATTGEN] =3D        {  0x400e0000,  0x1000  },
-     [IBEX_DEV_TIMER] =3D          {  0x40100000,  0x1000  },
-     [IBEX_DEV_SENSOR_CTRL] =3D    {  0x40110000,  0x1000  },
-     [IBEX_DEV_OTP_CTRL] =3D       {  0x40130000,  0x4000  },
-     [IBEX_DEV_USBDEV] =3D         {  0x40150000,  0x1000  },
-+    [IBEX_DEV_SPI_HOST0] =3D      {  0x40300000,  0x1000  },
-+    [IBEX_DEV_SPI_HOST1] =3D      {  0x40310000,  0x1000  },
-     [IBEX_DEV_PWRMGR] =3D         {  0x40400000,  0x1000  },
-     [IBEX_DEV_RSTMGR] =3D         {  0x40410000,  0x1000  },
-     [IBEX_DEV_CLKMGR] =3D         {  0x40420000,  0x1000  },
-@@ -118,11 +120,18 @@ static void lowrisc_ibex_soc_init(Object *obj)
-     object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
-=20
-     object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
-+
-+    for (int i =3D 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
-+        object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
-+                                TYPE_IBEX_SPI_HOST);
-+    }
- }
-=20
- static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
- {
-     const MemMapEntry *memmap =3D ibex_memmap;
-+    DeviceState *dev;
-+    SysBusDevice *busdev;
-     MachineState *ms =3D MACHINE(qdev_get_machine());
-     LowRISCIbexSoCState *s =3D RISCV_IBEX_SOC(dev_soc);
-     MemoryRegion *sys_mem =3D get_system_memory();
-@@ -207,10 +216,35 @@ static void lowrisc_ibex_soc_realize(DeviceState *d=
-ev_soc, Error **errp)
-                           qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
-                                            IRQ_M_TIMER));
-=20
-+    /* SPI-Hosts */
-+    for (int i =3D 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-+        dev =3D DEVICE(&(s->spi_host[i]));
-+        if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
-+            return;
-+        }
-+        busdev =3D SYS_BUS_DEVICE(dev);
-+        sysbus_mmio_map(busdev, 0, memmap[IBEX_DEV_SPI_HOST0 + i].base);
-+
-+        switch (i) {
-+        case OPENTITAN_SPI_HOST0:
-+            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-+                                IBEX_SPI_HOST0_ERR_IRQ));
-+            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-+                                IBEX_SPI_HOST0_SPI_EVENT_IRQ));
-+            break;
-+        case OPENTITAN_SPI_HOST1:
-+            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-+                                IBEX_SPI_HOST1_ERR_IRQ));
-+            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-+                                IBEX_SPI_HOST1_SPI_EVENT_IRQ));
-+            break;
-+        }
-+    }
-+
-     create_unimplemented_device("riscv.lowrisc.ibex.gpio",
-         memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
--    create_unimplemented_device("riscv.lowrisc.ibex.spi",
--        memmap[IBEX_DEV_SPI].base, memmap[IBEX_DEV_SPI].size);
-+    create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
-+        memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].si=
-ze);
-     create_unimplemented_device("riscv.lowrisc.ibex.i2c",
-         memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
-     create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
-diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-index eac35ef590..3a3f412ef8 100644
---- a/include/hw/riscv/opentitan.h
-+++ b/include/hw/riscv/opentitan.h
-@@ -1,7 +1,7 @@
- /*
-  * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
-  *
-- * Copyright (c) 2020 Western Digital
-+ * Copyright (c) 2022 Western Digital
-  *
-  * This program is free software; you can redistribute it and/or modify =
-it
-  * under the terms and conditions of the GNU General Public License,
-@@ -23,11 +23,16 @@
- #include "hw/intc/sifive_plic.h"
- #include "hw/char/ibex_uart.h"
- #include "hw/timer/ibex_timer.h"
-+#include "hw/ssi/ibex_spi_host.h"
- #include "qom/object.h"
-=20
- #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
- OBJECT_DECLARE_SIMPLE_TYPE(LowRISCIbexSoCState, RISCV_IBEX_SOC)
-=20
-+#define OPENTITAN_NUM_SPI_HOSTS 2
-+#define OPENTITAN_SPI_HOST0 0
-+#define OPENTITAN_SPI_HOST1 1
-+
- struct LowRISCIbexSoCState {
-     /*< private >*/
-     SysBusDevice parent_obj;
-@@ -37,6 +42,7 @@ struct LowRISCIbexSoCState {
-     SiFivePLICState plic;
-     IbexUartState uart;
-     IbexTimerState timer;
-+    IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
-=20
-     MemoryRegion flash_mem;
-     MemoryRegion rom;
-@@ -57,8 +63,10 @@ enum {
-     IBEX_DEV_FLASH,
-     IBEX_DEV_FLASH_VIRTUAL,
-     IBEX_DEV_UART,
-+    IBEX_DEV_SPI_DEVICE,
-+    IBEX_DEV_SPI_HOST0,
-+    IBEX_DEV_SPI_HOST1,
-     IBEX_DEV_GPIO,
--    IBEX_DEV_SPI,
-     IBEX_DEV_I2C,
-     IBEX_DEV_PATTGEN,
-     IBEX_DEV_TIMER,
-@@ -88,6 +96,10 @@ enum {
-=20
- enum {
-     IBEX_TIMER_TIMEREXPIRED0_0 =3D 126,
-+    IBEX_SPI_HOST1_SPI_EVENT_IRQ =3D 153,
-+    IBEX_SPI_HOST1_ERR_IRQ =3D 152,
-+    IBEX_SPI_HOST0_SPI_EVENT_IRQ =3D 151,
-+    IBEX_SPI_HOST0_ERR_IRQ =3D 150,
-     IBEX_UART0_RX_PARITY_ERR_IRQ =3D 8,
-     IBEX_UART0_RX_TIMEOUT_IRQ =3D 7,
-     IBEX_UART0_RX_BREAK_ERR_IRQ =3D 6,
---=20
-2.35.1
+[1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+
+This series is rebased on top of the AIA v8 to avoid conflicts.
+
+Changes from v3->v4:
+1. Added reviewed-by tags.
+2. Improved the commit text in PATCH 3 & 6.
+
+Changes from v2->v3:
+1. Only update the bits defined in *envcfg CSR
+
+Changes from v1->v2:
+1. Unified both [m/h]envcfg & [m/h]envcfgh into one.
+2. Changed the priv spec version enumeration
+3. Improved csr_ops table to provide better redability.
+4. Fixed the compilation error for CONFIG_USER_ONLY
+5. Rebased on top of the AIA series.
+
+Atish Patra (6):
+target/riscv: Define simpler privileged spec version numbering
+target/riscv: Add the privileged spec version 1.12.0
+target/riscv: Introduce privilege version field in the CSR ops.
+target/riscv: Add support for mconfigptr
+target/riscv: Add *envcfg* CSRs support
+target/riscv: Enable privileged spec version 1.12
+
+target/riscv/cpu.c      |   8 +-
+target/riscv/cpu.h      |  15 ++-
+target/riscv/cpu_bits.h |  40 ++++++++
+target/riscv/csr.c      | 217 +++++++++++++++++++++++++++++++++-------
+target/riscv/machine.c  |  24 +++++
+5 files changed, 264 insertions(+), 40 deletions(-)
+
+--
+2.30.2
 
 
