@@ -1,72 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMlO0-0000Jy-R7
-	for mharc-qemu-riscv@gnu.org; Wed, 23 Feb 2022 01:44:35 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:45792)
+	id 1nMnd4-0001xJ-Ee
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Feb 2022 04:08:14 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48512)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nMlNx-0000HO-BF
- for qemu-riscv@nongnu.org; Wed, 23 Feb 2022 01:44:26 -0500
-Received: from [2a00:1450:4864:20::42c] (port=37689
- helo=mail-wr1-x42c.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nMlNv-00040E-6m
- for qemu-riscv@nongnu.org; Wed, 23 Feb 2022 01:44:24 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id d28so10158729wra.4
- for <qemu-riscv@nongnu.org>; Tue, 22 Feb 2022 22:44:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=HpQ6Uq/fRTVdqVXz+QpJO36cY9eJmY/BvWw+xYmzHMs=;
- b=HOi57t2nu1a2RfYGlLua0iIw4Jjrn9HpR219LI7GLbNenhlSPsXpDRQKCYGMBIHrzq
- PPmRAYj211QMfWxke3Yw/641W06SAc0aqM6dwuenmFtfEv7UZS/B0fM+UginbXyW+YrQ
- BRiJAfhCp4Lp+UDARUjGhU9zrp5DiGMIUwemQ7DSIf4FiDiJfR9YcP1fhrF3pvQOFw2L
- Mo3u4/yRBmVzEC3Fbg1md4DIg/QVBdeuCblKh6b676FB+4qB0B3pxkttdxDUxQmsd8bb
- E102mLU4jzeoWe/gLZJuKTk1IPthKfyK7fDiMkG82DGTNqvx3gXUIPISkw2efzbTvj/V
- FwlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=HpQ6Uq/fRTVdqVXz+QpJO36cY9eJmY/BvWw+xYmzHMs=;
- b=FzE8tpO/BnCI1qvfe5qmkSUZm9oJR1gV5FDJDruxgh2moQ46IKbIFC5AbW9iTlfjO3
- rKRikwquI98e/e6hQYGb7WCWaiSkeOtPLlekfrmhNEaPZCwzm3K6Qsouq9f9g3IqxWBG
- FcL7zJMiD03mpDVN3xC2wl5v3JYnkzO+QvHXMpl9oVQEkEBoovpXWTkyi7QXMSCv3HI3
- rz7ShgDOqJpmIeWbdFkLFFHI/GdwXb8tlLogIgbheglnTXMY4Jrys+AUkh22O+2bpB+k
- UCa89Sdtn8HWG473BaDkrwxwShcEsZ1DczB1y2f8WD77MC6rnCsPYNasf5pGGabLleCS
- N5YQ==
-X-Gm-Message-State: AOAM532ugdnsM0IG2gUI4uCxmCr+8g3C1eGlFriby8WXYFt/pWpHwhzr
- W93RX+uqyO3N7Zr2PD4bIcLJx8xW0LcQ954ZLYgAlQ==
-X-Google-Smtp-Source: ABdhPJz9KtJ5xNzftce4Bvy2YNTMON+d3essYwuoGw2X2XbCe8esYCcDIMpdlBp4vLmt/l/aiJwAbLxcizYJzWKn3dw=
-X-Received: by 2002:a05:6000:11c5:b0:1ed:9e98:20b0 with SMTP id
- i5-20020a05600011c500b001ed9e9820b0mr2337563wrx.214.1645598658064; Tue, 22
- Feb 2022 22:44:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1nMnd1-0001rL-O3; Wed, 23 Feb 2022 04:08:07 -0500
+Received: from beetle.greensocs.com ([5.135.226.135]:50392)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
+ id 1nMncz-00023Q-5H; Wed, 23 Feb 2022 04:08:07 -0500
+Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
+ by beetle.greensocs.com (Postfix) with ESMTPS id 89B0021EC7;
+ Wed, 23 Feb 2022 09:07:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+ s=mail; t=1645607243;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Qk+gMrnBuDwA4drP9M9tff9or15I+dFur3lZMPXIvp0=;
+ b=NqvYpP9ztjWoFW3/YETDtLGUC3hSVlYVEiMIfX4oESzcUt8ef01tQLp5rrk4SbKFhexk0F
+ QMtjgYMJDoxiqHa7QMJNIQlFudjpyPUmGLsc7v4FfSbaj7LH+RStSH+jcqHWa78C07ZiVs
+ WL3VglpG7Le0+b2FqB9ckbWF9J3XhW8=
+From: Damien Hedde <damien.hedde@greensocs.com>
+To: qemu-devel@nongnu.org,
+	mark.burton@greensocs.com,
+	edgari@xilinx.com
+Cc: Damien Hedde <damien.hedde@greensocs.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ qemu-riscv@nongnu.org (open list:OpenTitan)
+Subject: [PATCH v4 14/14] hw: set user_creatable on opentitan/sifive_e devices
+Date: Wed, 23 Feb 2022 10:07:06 +0100
+Message-Id: <20220223090706.4888-15-damien.hedde@greensocs.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220223090706.4888-1-damien.hedde@greensocs.com>
+References: <20220223090706.4888-1-damien.hedde@greensocs.com>
 MIME-Version: 1.0
-References: <20220222223830.2319856-1-atishp@rivosinc.com>
-In-Reply-To: <20220222223830.2319856-1-atishp@rivosinc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Wed, 23 Feb 2022 12:14:05 +0530
-Message-ID: <CAAhSdy0rW-UGUaeTcMYLjLn-197stWbNiF8xAh9WusSzVhjXOw@mail.gmail.com>
-Subject: Re: [PATCH v3] target/riscv: Add isa extenstion strings to the device
- tree
-To: Atish Patra <atishp@rivosinc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Heiko Stubner <heiko@sntech.de>, Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::42c
- (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::42c;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -4
-X-Spam_score: -0.5
-X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=5.135.226.135;
+ envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,99 +62,182 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2022 06:44:28 -0000
+X-List-Received-Date: Wed, 23 Feb 2022 09:08:08 -0000
 
-On Wed, Feb 23, 2022 at 4:09 AM Atish Patra <atishp@rivosinc.com> wrote:
->
-> The Linux kernel parses the ISA extensions from "riscv,isa" DT
-> property. It used to parse only the single letter base extensions
-> until now. A generic ISA extension parsing framework was proposed[1]
-> recently that can parse multi-letter ISA extensions as well.
->
-> Generate the extended ISA string by appending  the available ISA extensions
-> to the "riscv,isa" string if it is enabled so that kernel can process it.
->
-> [1] https://lkml.org/lkml/2022/2/15/263
->
-> Suggested-by: Heiko Stubner <heiko@sntech.de>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+The devices are:
++ ibex-timer
++ ibex-uart
++ riscv.aclint.swi
++ riscv.aclint.mtimer
++ riscv.hart_array
++ riscv.sifive.e.prci
++ riscv.sifive.plic
++ riscv.sifive.uart
++ sifive_soc.gpio
++ unimplemented-device
 
-Looks good to me.
+These devices are clean regarding error handling in realize.
 
-Reviewed-by: Anup Patel <anup@brainfault.org>
+They are all sysbus devices, so setting user-creatable will only
+enable cold-plugging them on machine having explicitely allowed them
+(only _none_ machine does that).
 
-Regards,
-Anup
+Note that this commit include the ricv_array which embeds cpus. There
+are some deep internal constraints about them: you cannot create more
+cpus than the machine's maxcpus. TCG accelerator's code will for example
+assert if a user try to create too many cpus.
 
-> ---
-> Changes from v2->v3:
-> 1. Used g_strconcat to replace snprintf & a max isa string length as
-> suggested by Anup.
-> 2. I have not included the Tested-by Tag from Heiko because the
-> implementation changed from v2 to v3.
->
-> Changes from v1->v2:
-> 1. Improved the code redability by using arrays instead of individual check
-> ---
->  target/riscv/cpu.c | 29 +++++++++++++++++++++++++++++
->  1 file changed, 29 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b0a40b83e7a8..2c7ff6ef555a 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -34,6 +34,12 @@
->
->  /* RISC-V CPU definitions */
->
-> +/* This includes the null terminated character '\0' */
-> +struct isa_ext_data {
-> +        const char *name;
-> +        bool enabled;
-> +};
-> +
->  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
->
->  const char * const riscv_int_regnames[] = {
-> @@ -881,6 +887,28 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->      device_class_set_props(dc, riscv_cpu_properties);
->  }
->
-> +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-> +{
-> +    char *old = *isa_str;
-> +    char *new = *isa_str;
-> +    int i;
-> +    struct isa_ext_data isa_edata_arr[] = {
-> +        { "svpbmt", cpu->cfg.ext_svpbmt   },
-> +        { "svinval", cpu->cfg.ext_svinval },
-> +        { "svnapot", cpu->cfg.ext_svnapot },
-> +    };
-> +
-> +    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-> +        if (isa_edata_arr[i].enabled) {
-> +            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
-> +            g_free(old);
-> +            old = new;
-> +        }
-> +    }
-> +
-> +    *isa_str = new;
-> +}
-> +
->  char *riscv_isa_string(RISCVCPU *cpu)
->  {
->      int i;
-> @@ -893,6 +921,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
->          }
->      }
->      *p = '\0';
-> +    riscv_isa_string_ext(cpu, &isa_str, maxlen);
->      return isa_str;
->  }
->
-> --
-> 2.30.2
->
->
+Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+---
+
+I can also split this patch if you think it's better.
+But it is mostly a one-line fix per file.
+
+This patch requires first some cleanups in order to fix error errors
+and some more memory leaks that could happend in legit user-related
+life cycles: a miss-configuration should not be a fatal error anymore.
+https://lore.kernel.org/qemu-devel/20220218164646.132112-1-damien.hedde@greensocs.com
+---
+ hw/char/ibex_uart.c     | 1 +
+ hw/char/sifive_uart.c   | 1 +
+ hw/gpio/sifive_gpio.c   | 1 +
+ hw/intc/riscv_aclint.c  | 2 ++
+ hw/intc/sifive_plic.c   | 1 +
+ hw/misc/sifive_e_prci.c | 8 ++++++++
+ hw/misc/unimp.c         | 1 +
+ hw/riscv/riscv_hart.c   | 1 +
+ hw/timer/ibex_timer.c   | 1 +
+ 9 files changed, 17 insertions(+)
+
+diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
+index e58181fcf4..0b6d45f2e7 100644
+--- a/hw/char/ibex_uart.c
++++ b/hw/char/ibex_uart.c
+@@ -546,6 +546,7 @@ static void ibex_uart_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+ 
++    dc->user_creatable = true;
+     dc->reset = ibex_uart_reset;
+     dc->realize = ibex_uart_realize;
+     dc->vmsd = &vmstate_ibex_uart;
+diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+index 1c75f792b3..6e88778c03 100644
+--- a/hw/char/sifive_uart.c
++++ b/hw/char/sifive_uart.c
+@@ -243,6 +243,7 @@ static void sifive_uart_class_init(ObjectClass *oc, void *data)
+     DeviceClass *dc = DEVICE_CLASS(oc);
+     ResettableClass *rc = RESETTABLE_CLASS(oc);
+ 
++    dc->user_creatable = true;
+     dc->realize = sifive_uart_realize;
+     dc->vmsd = &vmstate_sifive_uart;
+     rc->phases.enter = sifive_uart_reset_enter;
+diff --git a/hw/gpio/sifive_gpio.c b/hw/gpio/sifive_gpio.c
+index 78bf29e996..8443befa20 100644
+--- a/hw/gpio/sifive_gpio.c
++++ b/hw/gpio/sifive_gpio.c
+@@ -380,6 +380,7 @@ static void sifive_gpio_class_init(ObjectClass *klass, void *data)
+     dc->realize = sifive_gpio_realize;
+     dc->reset = sifive_gpio_reset;
+     dc->desc = "SiFive GPIO";
++    dc->user_creatable = true;
+ }
+ 
+ static const TypeInfo sifive_gpio_info = {
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index bef2e1988b..fbf63a52b7 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -283,6 +283,7 @@ static void riscv_aclint_mtimer_class_init(ObjectClass *klass, void *data)
+     DeviceClass *dc = DEVICE_CLASS(klass);
+     dc->realize = riscv_aclint_mtimer_realize;
+     device_class_set_props(dc, riscv_aclint_mtimer_properties);
++    dc->user_creatable = true;
+ }
+ 
+ static const TypeInfo riscv_aclint_mtimer_info = {
+@@ -466,6 +467,7 @@ static void riscv_aclint_swi_class_init(ObjectClass *klass, void *data)
+     DeviceClass *dc = DEVICE_CLASS(klass);
+     dc->realize = riscv_aclint_swi_realize;
+     device_class_set_props(dc, riscv_aclint_swi_properties);
++    dc->user_creatable = true;
+ }
+ 
+ static const TypeInfo riscv_aclint_swi_info = {
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index 8692ea6725..4e5831b487 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -434,6 +434,7 @@ static void sifive_plic_class_init(ObjectClass *klass, void *data)
+ 
+     dc->reset = sifive_plic_reset;
+     device_class_set_props(dc, sifive_plic_properties);
++    dc->user_creatable = true;
+     dc->realize = sifive_plic_realize;
+     dc->vmsd = &vmstate_sifive_plic;
+ }
+diff --git a/hw/misc/sifive_e_prci.c b/hw/misc/sifive_e_prci.c
+index a8702c6a5d..7341823e43 100644
+--- a/hw/misc/sifive_e_prci.c
++++ b/hw/misc/sifive_e_prci.c
+@@ -97,11 +97,19 @@ static void sifive_e_prci_init(Object *obj)
+     s->plloutdiv = SIFIVE_E_PRCI_PLLOUTDIV_DIV1;
+ }
+ 
++static void sifive_e_prci_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    dc->user_creatable = true;
++}
++
+ static const TypeInfo sifive_e_prci_info = {
+     .name          = TYPE_SIFIVE_E_PRCI,
+     .parent        = TYPE_SYS_BUS_DEVICE,
+     .instance_size = sizeof(SiFiveEPRCIState),
+     .instance_init = sifive_e_prci_init,
++    .class_init    = sifive_e_prci_class_init,
+ };
+ 
+ static void sifive_e_prci_register_types(void)
+diff --git a/hw/misc/unimp.c b/hw/misc/unimp.c
+index 6cfc5727f0..fb2a0b23dd 100644
+--- a/hw/misc/unimp.c
++++ b/hw/misc/unimp.c
+@@ -80,6 +80,7 @@ static void unimp_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+ 
++    dc->user_creatable = true;
+     dc->realize = unimp_realize;
+     device_class_set_props(dc, unimp_properties);
+ }
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index 4aed6c2a59..85fae44048 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -77,6 +77,7 @@ static void riscv_harts_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+ 
++    dc->user_creatable = true;
+     device_class_set_props(dc, riscv_harts_props);
+     dc->realize = riscv_harts_realize;
+ }
+diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
+index 8c2ca364da..d1cc337416 100644
+--- a/hw/timer/ibex_timer.c
++++ b/hw/timer/ibex_timer.c
+@@ -295,6 +295,7 @@ static void ibex_timer_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+ 
++    dc->user_creatable = true;
+     dc->reset = ibex_timer_reset;
+     dc->vmsd = &vmstate_ibex_timer;
+     dc->realize = ibex_timer_realize;
+-- 
+2.35.1
+
 
