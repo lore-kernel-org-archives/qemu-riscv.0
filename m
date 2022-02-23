@@ -1,61 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nMj2W-0000y7-1z
-	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 23:14:08 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44726)
+	id 1nMjLl-0005Zo-37
+	for mharc-qemu-riscv@gnu.org; Tue, 22 Feb 2022 23:34:01 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47732)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMj2T-0000x3-TP; Tue, 22 Feb 2022 23:14:05 -0500
-Received: from [2607:f8b0:4864:20::132] (port=34785
- helo=mail-il1-x132.google.com)
+ id 1nMjLj-0005Z2-Ai; Tue, 22 Feb 2022 23:33:59 -0500
+Received: from [2607:f8b0:4864:20::d35] (port=33403
+ helo=mail-io1-xd35.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nMj2R-0006Kw-PT; Tue, 22 Feb 2022 23:14:05 -0500
-Received: by mail-il1-x132.google.com with SMTP id f2so2799568ilq.1;
- Tue, 22 Feb 2022 20:13:58 -0800 (PST)
+ id 1nMjLh-0000lw-1S; Tue, 22 Feb 2022 23:33:58 -0500
+Received: by mail-io1-xd35.google.com with SMTP id 195so12818560iou.0;
+ Tue, 22 Feb 2022 20:33:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=O8dx97wwbRITbUMl4md9KnwfbQHj7EuZVnIJoD1M6A8=;
- b=e0SScMMelYndDGRwyf0UA52S5Zn7mpiykcB02s4hjpK6cFldnlhn24oK7eo3CZP8h5
- nH2ctxgGqkOIUVwmYHax04Esc8mTxOyGcFceH1T8nCqzgMRIruMxuCWg0Qsn0jSj7eNN
- zcPR82Y2XBssFSL9RKYjqDDj1ZADFSVnY/IXuGXMLwVxFNJMb2NOD44s+2ncpWRbU3w/
- E0Q7lGRINqrdYw0nbdLakFbLMi2/rxfrLRt5F8+53GBKkla2lK6s/40+EZVW3CMGhJcW
- 6n9LjYSZ2HUOv4XLsGgxYZ3eDLwyKd5pQaNLirgBKaNK/DLiFGsMRzA75ZH3JwGoDQ3b
- rRKg==
+ :cc; bh=5/idmmEmQBlrcywWa3OO3ziM7haTVY4RZD6OM/lUS24=;
+ b=GhonPsBv2BSFHzdpkSHDnAg7zzxRPVeSngNm5ZabzDD9ASZwLqmkySiglVXmRKBs3b
+ jBT76QH7cbBMT4iAKmvB5Pt88tciLwAXFOuAt8TCrKBne9frOrcUGLPVHhjqbntH5fRm
+ P/G/xXHfqaVpY3cz2xFdx58BElwuQBwS1yEzZo/qYD/2l690eag90ngSN+kcvMQ1Yh21
+ cJL0Fa7ymTvvXl9WMeQr7bhmV5+rQKtUhwjV/TIiSslggj9U6ZBE9O0BzpkYjvzzjKKs
+ I7EH1CVkApQVSOlkJnvZ2WhgJVACWfcKEWajsRwbGWMHwymkydSRWR0uQC52aQLbl9ku
+ jWUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=O8dx97wwbRITbUMl4md9KnwfbQHj7EuZVnIJoD1M6A8=;
- b=OUCXgAO5o7FRZN1nTM/gsK4fRFwapiwayhiQ9nh3VNAnq6Ocgsi00WLJQcVStdlmta
- VoHRvs3yGMkVDm8z5rDOgrFjZmz5pB39rDEojoGAOvMqr0a0Te5/4nMZ+LcDCiKTTQfB
- ikErRQuTtKb+NVYXiqnOF1XVdPKqMOdtCvFmgdDfubNjwWipt5qe4EBM5NkjxPaPqVPS
- ps4YR+OaY1dXbpqxEKMkcE6AIWzn4NXML0qY0mBpDA5oqqjZmOY0BdnM50YSw6NCxHzt
- 5D4H5MCUrsmoH5kAv6O6RWytQo6uovt2zsodgy5WR0Wtw9zzFjzsd6XygY+1lW9qrTUr
- ubkQ==
-X-Gm-Message-State: AOAM531S+30+W1x61gxWxClt3QlXPqmGqelWaK37oRvtPVhR440Rs7HV
- 9mFqJOQpXXfbcCi1xhF5l3Ft9gWauJ5ZyogyhA4=
-X-Google-Smtp-Source: ABdhPJzgyX+m6duCoynQKz8aqc/prvOrVCP5kwpH5+dXv/0ecoa1AxdxGKWXEqFSct/BzMH7adngBQEiE1o5M21UHuc=
-X-Received: by 2002:a92:ca4b:0:b0:2bf:20a9:d19c with SMTP id
- q11-20020a92ca4b000000b002bf20a9d19cmr22652085ilo.260.1645589637127; Tue, 22
- Feb 2022 20:13:57 -0800 (PST)
+ bh=5/idmmEmQBlrcywWa3OO3ziM7haTVY4RZD6OM/lUS24=;
+ b=vc84Y248zyke4vmueMxcXspEgkpn7F1wV8bYRlE3z4KMC1gP4ggTAUZCWhunKX662v
+ EDdssOX9FG+QiUiENgpDpXN+3LaCq79tQnYN9tqO/qo75pXAbsKi0pi9+Dsbd7BhC9hR
+ XLOvMjt7XKEMvyCAF5owVO7i1CwLfWMp7FYQ7sDFanZCMxBIQ8fvULBv6L5xdz4dXgVY
+ J0ALPYNj9yN829M39j0N7I4pseKUBSDp+x7XSVBqqMwuE0YJyeBWmido2lh3nS4ZQINt
+ 6cjS9DTUFf19M9f2ywpqMdCx5LSZtwNtjvbFbRS/Cx5S4JBtoFR4Z0QmrHxBB+LmCvXT
+ rSEQ==
+X-Gm-Message-State: AOAM531/rucs9Rf0BpEkXRQzCPAUIklRbdFs3s4/bzi9WyesQvpR1k3X
+ 0zZUFbbavVv2rKFC7GLCGtww3oRoPHlnD4Vp6EE=
+X-Google-Smtp-Source: ABdhPJyD27HIfsj6qILYDe4Mhex1kvEBkl3sU1F1kpyE33K+F/sYpvgwNzFJGMsS8K5IsS8gcU00hYbETPXLwkRkTKw=
+X-Received: by 2002:a05:6638:218a:b0:30f:ade1:d2e0 with SMTP id
+ s10-20020a056638218a00b0030fade1d2e0mr21378311jaj.267.1645590835558; Tue, 22
+ Feb 2022 20:33:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20220222214443.4081039-1-alistair.francis@opensource.wdc.com>
- <20220222214443.4081039-2-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220222214443.4081039-2-alistair.francis@opensource.wdc.com>
+References: <20220222220704.2294924-1-atishp@rivosinc.com>
+ <20220222220704.2294924-6-atishp@rivosinc.com>
+In-Reply-To: <20220222220704.2294924-6-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 23 Feb 2022 14:13:30 +1000
-Message-ID: <CAKmqyKM8_NDGbe6+eWUS9OBFQK4LT-DinOBq7Dgarnt8nTAe=g@mail.gmail.com>
-Subject: Re: [PATCH v1 2/2] riscv: opentitan: Connect opentitan SPI Host
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Date: Wed, 23 Feb 2022 14:33:29 +1000
+Message-ID: <CAKmqyKM4LxJvE+4KOVQzJAxJYDFfrnQe9KKcv4o9OiKULXTBvQ@mail.gmail.com>
+Subject: Re: [PATCH v4 5/6] target/riscv: Add *envcfg* CSRs support
+To: Atish Patra <atishp@rivosinc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::132
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d35
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -76,180 +76,287 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Feb 2022 04:14:06 -0000
+X-List-Received-Date: Wed, 23 Feb 2022 04:33:59 -0000
 
-On Wed, Feb 23, 2022 at 7:45 AM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Wed, Feb 23, 2022 at 8:09 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> The RISC-V privileged specification v1.12 defines few execution
+> environment configuration CSRs that can be used enable/disable
+> extensions per privilege levels.
 >
-> Conenct spi host[1/0] to opentitan.
+> Add the basic support for these CSRs.
 >
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-> ---
->  hw/riscv/opentitan.c         | 42 ++++++++++++++++++++++++++++++++----
->  include/hw/riscv/opentitan.h | 16 ++++++++++++--
->  2 files changed, 52 insertions(+), 6 deletions(-)
->
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index aec7cfa33f..abbe08d4d4 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -1,7 +1,7 @@
->  /*
->   * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
->   *
-> - * Copyright (c) 2020 Western Digital
-> + * Copyright (c) 2022 Western Digital
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 
-You don't need to update this
+Do you mind rebasing this on:
 
->   *
->   * Provides a board compatible with the OpenTitan FPGA platform:
->   *
-> @@ -34,13 +34,15 @@ static const MemMapEntry ibex_memmap[] = {
->      [IBEX_DEV_FLASH] =          {  0x20000000,  0x80000 },
->      [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
->      [IBEX_DEV_GPIO] =           {  0x40040000,  0x1000  },
-> -    [IBEX_DEV_SPI] =            {  0x40050000,  0x1000  },
-> +    [IBEX_DEV_SPI_DEVICE] =     {  0x40050000,  0x1000  },
-
-This will conflict with the latest RISC-V tree as:
-
-"hw: riscv: opentitan: fixup SPI addresses" has been applied.
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
->      [IBEX_DEV_I2C] =            {  0x40080000,  0x1000  },
->      [IBEX_DEV_PATTGEN] =        {  0x400e0000,  0x1000  },
->      [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
->      [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
->      [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
->      [IBEX_DEV_USBDEV] =         {  0x40150000,  0x1000  },
-> +    [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x1000  },
-> +    [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x1000  },
->      [IBEX_DEV_PWRMGR] =         {  0x40400000,  0x1000  },
->      [IBEX_DEV_RSTMGR] =         {  0x40410000,  0x1000  },
->      [IBEX_DEV_CLKMGR] =         {  0x40420000,  0x1000  },
-> @@ -118,11 +120,18 @@ static void lowrisc_ibex_soc_init(Object *obj)
->      object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
+> ---
+>  target/riscv/cpu.h      |   5 ++
+>  target/riscv/cpu_bits.h |  39 +++++++++++++++
+>  target/riscv/csr.c      | 107 ++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/machine.c  |  24 +++++++++
+>  4 files changed, 175 insertions(+)
 >
->      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 0741f9822cf0..e5c8694cf081 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -303,6 +303,11 @@ struct CPURISCVState {
+>      target_ulong spmbase;
+>      target_ulong upmmask;
+>      target_ulong upmbase;
 > +
-> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
-> +        object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
-> +                                TYPE_IBEX_SPI_HOST);
-> +    }
+> +    /* CSRs for execution enviornment configuration */
+> +    uint64_t menvcfg;
+> +    target_ulong senvcfg;
+> +    uint64_t henvcfg;
+>  #endif
+>
+>      float_status fp_status;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 89440241632a..58a0a8d69f72 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -202,6 +202,9 @@
+>  #define CSR_STVEC           0x105
+>  #define CSR_SCOUNTEREN      0x106
+>
+> +/* Supervisor Configuration CSRs */
+> +#define CSR_SENVCFG         0x10A
+> +
+>  /* Supervisor Trap Handling */
+>  #define CSR_SSCRATCH        0x140
+>  #define CSR_SEPC            0x141
+> @@ -247,6 +250,10 @@
+>  #define CSR_HTIMEDELTA      0x605
+>  #define CSR_HTIMEDELTAH     0x615
+>
+> +/* Hypervisor Configuration CSRs */
+> +#define CSR_HENVCFG         0x60A
+> +#define CSR_HENVCFGH        0x61A
+> +
+>  /* Virtual CSRs */
+>  #define CSR_VSSTATUS        0x200
+>  #define CSR_VSIE            0x204
+> @@ -290,6 +297,10 @@
+>  #define CSR_VSIEH           0x214
+>  #define CSR_VSIPH           0x254
+>
+> +/* Machine Configuration CSRs */
+> +#define CSR_MENVCFG         0x30A
+> +#define CSR_MENVCFGH        0x31A
+> +
+>  /* Enhanced Physical Memory Protection (ePMP) */
+>  #define CSR_MSECCFG         0x747
+>  #define CSR_MSECCFGH        0x757
+> @@ -654,6 +665,34 @@ typedef enum RISCVException {
+>  #define PM_EXT_CLEAN    0x00000002ULL
+>  #define PM_EXT_DIRTY    0x00000003ULL
+>
+> +/* Execution enviornment configuration bits */
+> +#define MENVCFG_FIOM                       BIT(0)
+> +#define MENVCFG_CBIE                       (3UL << 4)
+> +#define MENVCFG_CBCFE                      BIT(6)
+> +#define MENVCFG_CBZE                       BIT(7)
+> +#define MENVCFG_PBMTE                      BIT(62)
+> +#define MENVCFG_STCE                       BIT(63)
+> +
+> +/* For RV32 */
+> +#define MENVCFGH_PBMTE                     BIT(30)
+> +#define MENVCFGH_STCE                      BIT(31)
+> +
+> +#define SENVCFG_FIOM                       MENVCFG_FIOM
+> +#define SENVCFG_CBIE                       MENVCFG_CBIE
+> +#define SENVCFG_CBCFE                      MENVCFG_CBCFE
+> +#define SENVCFG_CBZE                       MENVCFG_CBZE
+> +
+> +#define HENVCFG_FIOM                       MENVCFG_FIOM
+> +#define HENVCFG_CBIE                       MENVCFG_CBIE
+> +#define HENVCFG_CBCFE                      MENVCFG_CBCFE
+> +#define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_PBMTE                      MENVCFG_PBMTE
+> +#define HENVCFG_STCE                       MENVCFG_STCE
+> +
+> +/* For RV32 */
+> +#define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+> +#define HENVCFGH_STCE                       MENVCFGH_STCE
+> +
+>  /* Offsets for every pair of control bits per each priv level */
+>  #define XS_OFFSET    0ULL
+>  #define U_OFFSET     2ULL
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 18fe17b62f51..ff7e36596447 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1366,6 +1366,101 @@ static RISCVException write_mtval(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
 >  }
 >
->  static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->  {
->      const MemMapEntry *memmap = ibex_memmap;
-> +    DeviceState *dev;
-> +    SysBusDevice *busdev;
->      MachineState *ms = MACHINE(qdev_get_machine());
->      LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
->      MemoryRegion *sys_mem = get_system_memory();
-> @@ -207,10 +216,35 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->                            qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
->                                             IRQ_M_TIMER));
->
-> +    /* SPI-Hosts */
-> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-> +        dev = DEVICE(&(s->spi_host[i]));
-> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
-> +            return;
-> +        }
-> +        busdev = SYS_BUS_DEVICE(dev);
-> +        sysbus_mmio_map(busdev, 0, memmap[IBEX_DEV_SPI_HOST0 + i].base);
+> +/* Execution environment configuration setup */
+> +static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->menvcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
 > +
-> +        switch (i) {
-> +        case OPENTITAN_SPI_HOST0:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST0_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST0_SPI_EVENT_IRQ));
-> +            break;
-> +        case OPENTITAN_SPI_HOST1:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST1_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST1_SPI_EVENT_IRQ));
-> +            break;
-> +        }
+> +static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE | MENVCFG_CBZE;
+> +
+> +    if (riscv_cpu_mxl(env) == MXL_RV64) {
+> +        mask |= MENVCFG_PBMTE | MENVCFG_STCE;
+> +    }
+> +    env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->menvcfg >> 32;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    uint64_t mask = MENVCFG_PBMTE | MENVCFG_STCE;
+> +    uint64_t valh = (uint64_t)val << 32;
+> +
+> +    env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_senvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->senvcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    uint64_t mask = SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENVCFG_CBZE;
+> +
+> +    env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->henvcfg;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+> +
+> +    if (riscv_cpu_mxl(env) == MXL_RV64) {
+> +        mask |= HENVCFG_PBMTE | HENVCFG_STCE;
 > +    }
 > +
->      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.spi",
-> -        memmap[IBEX_DEV_SPI].base, memmap[IBEX_DEV_SPI].size);
-> +    create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
-> +        memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.i2c",
->          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index eac35ef590..3a3f412ef8 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -1,7 +1,7 @@
->  /*
->   * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
->   *
-> - * Copyright (c) 2020 Western Digital
-> + * Copyright (c) 2022 Western Digital
->   *
->   * This program is free software; you can redistribute it and/or modify it
->   * under the terms and conditions of the GNU General Public License,
-> @@ -23,11 +23,16 @@
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/char/ibex_uart.h"
->  #include "hw/timer/ibex_timer.h"
-> +#include "hw/ssi/ibex_spi_host.h"
->  #include "qom/object.h"
->
->  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
->  OBJECT_DECLARE_SIMPLE_TYPE(LowRISCIbexSoCState, RISCV_IBEX_SOC)
->
-> +#define OPENTITAN_NUM_SPI_HOSTS 2
-> +#define OPENTITAN_SPI_HOST0 0
-> +#define OPENTITAN_SPI_HOST1 1
+> +    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
 > +
->  struct LowRISCIbexSoCState {
->      /*< private >*/
->      SysBusDevice parent_obj;
-> @@ -37,6 +42,7 @@ struct LowRISCIbexSoCState {
->      SiFivePLICState plic;
->      IbexUartState uart;
->      IbexTimerState timer;
-> +    IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    *val = env->henvcfg >> 32;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+> +                                  target_ulong val)
+> +{
+> +    uint64_t mask = HENVCFG_PBMTE | HENVCFG_STCE;
+> +    uint64_t valh = (uint64_t)val << 32;
+> +
+> +    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
+>                                  uint64_t *ret_val,
+>                                  uint64_t new_val, uint64_t wr_mask)
+> @@ -3069,6 +3164,18 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_MVIPH]    = { "mviph",    aia_any32, read_zero,  write_ignore },
+>      [CSR_MIPH]     = { "miph",     aia_any32, NULL, NULL, rmw_miph     },
 >
->      MemoryRegion flash_mem;
->      MemoryRegion rom;
-> @@ -57,8 +63,10 @@ enum {
->      IBEX_DEV_FLASH,
->      IBEX_DEV_FLASH_VIRTUAL,
->      IBEX_DEV_UART,
-> +    IBEX_DEV_SPI_DEVICE,
-> +    IBEX_DEV_SPI_HOST0,
-> +    IBEX_DEV_SPI_HOST1,
->      IBEX_DEV_GPIO,
-> -    IBEX_DEV_SPI,
->      IBEX_DEV_I2C,
->      IBEX_DEV_PATTGEN,
->      IBEX_DEV_TIMER,
-> @@ -88,6 +96,10 @@ enum {
+> +    /* Execution environment configuration */
+> +    [CSR_MENVCFG]  = { "menvcfg",  any,   read_menvcfg,  write_menvcfg,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_MENVCFGH] = { "menvcfgh", any32, read_menvcfgh, write_menvcfgh,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_SENVCFG]  = { "senvcfg",  smode, read_senvcfg,  write_senvcfg,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_HENVCFG]  = { "henvcfg",  hmode, read_henvcfg, write_henvcfg,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +
+>      /* Supervisor Trap Setup */
+>      [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
+>                                                read_sstatus_i128                 },
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 9895930b2976..4a50a05937fa 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -220,6 +220,29 @@ static const VMStateDescription vmstate_kvmtimer = {
+>      }
+>  };
 >
->  enum {
->      IBEX_TIMER_TIMEREXPIRED0_0 = 126,
-> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ = 153,
-> +    IBEX_SPI_HOST1_ERR_IRQ = 152,
-> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ = 151,
-> +    IBEX_SPI_HOST0_ERR_IRQ = 150,
->      IBEX_UART0_RX_PARITY_ERR_IRQ = 8,
->      IBEX_UART0_RX_TIMEOUT_IRQ = 7,
->      IBEX_UART0_RX_BREAK_ERR_IRQ = 6,
+> +/* TODO: henvcfg need both hyper_needed & envcfg_needed */
+> +static bool envcfg_needed(void *opaque)
+> +{
+> +    RISCVCPU *cpu = opaque;
+> +    CPURISCVState *env = &cpu->env;
+> +
+> +    return (env->priv_ver >= PRIV_VERSION_1_12_0 ? 1 : 0);
+> +}
+> +
+> +static const VMStateDescription vmstate_envcfg = {
+> +    .name = "cpu/envcfg",
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .needed = envcfg_needed,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINT64(env.menvcfg, RISCVCPU),
+> +        VMSTATE_UINTTL(env.senvcfg, RISCVCPU),
+> +        VMSTATE_UINT64(env.henvcfg, RISCVCPU),
+> +
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+>  const VMStateDescription vmstate_riscv_cpu = {
+>      .name = "cpu",
+>      .version_id = 3,
+> @@ -280,6 +303,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          &vmstate_pointermasking,
+>          &vmstate_rv128,
+>          &vmstate_kvmtimer,
+> +        &vmstate_envcfg,
+>          NULL
+>      }
+>  };
 > --
-> 2.35.1
+> 2.30.2
+>
 >
 
