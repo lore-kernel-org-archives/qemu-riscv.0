@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOKWp-0003oC-7s
+	id 1nOKWp-0003p4-E7
 	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:28:03 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58854)
+Received: from eggs.gnu.org ([209.51.188.92]:58894)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWh-0003Te-VW; Sun, 27 Feb 2022 09:27:55 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:35340 helo=cstnet.cn)
+ id 1nOKWj-0003WZ-Em; Sun, 27 Feb 2022 09:27:57 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:35456 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWR-0003i7-Fs; Sun, 27 Feb 2022 09:27:55 -0500
+ id 1nOKWS-0003jp-5n; Sun, 27 Feb 2022 09:27:57 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S3;
- Sun, 27 Feb 2022 22:27:27 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S11;
+ Sun, 27 Feb 2022 22:27:33 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 01/14] target/riscv: rvk: add cfg properties for zbk* and
- zk*
-Date: Sun, 27 Feb 2022 22:25:40 +0800
-Message-Id: <20220227142553.25815-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 09/14] target/riscv: rvk: add support for sha512 related
+ instructions for RV32 in zknh extension
+Date: Sun, 27 Feb 2022 22:25:48 +0800
+Message-Id: <20220227142553.25815-10-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4rXr1DXF1xKrW3ZFb_yoW8Ar45pr
- WUGa1YyryDXF9rCw4fJFyjgF1rWwn3Ca4Iga9Fvrn3WrW7GrW3JF1qkw1UuF4Yga1rJF1a
- gF1qkFyjkF47Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUP014x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
- IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
- wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
- 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
- xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
- 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjeWlDUU
- UUU==
+X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S11
+X-Coremail-Antispam: 1UD129KBjvJXoW3XrykGr18KFyrWry7tF1UKFg_yoWxWr48pr
+ 1rKryfKFWUJFW3Aa1Fka1Uur47AF4fK3yrt393t3WI9a15Xa95tr4UJr4akr4UXF98ZFWU
+ uan7Aa4jyrs7t3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
+ JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
+ 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
+ JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
+ A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
+ x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
+ 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF
+ 7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14
+ v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuY
+ vjfUOBTYUUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,75 +64,213 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 14:27:56 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 14:27:57 -0000
 
+ - add sha512sum0r, sha512sig0l, sha512sum1r, sha512sig1l, sha512sig0h and sha512sig1h instructions
+
+Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 23 +++++++++++++++++++++++
- target/riscv/cpu.h | 13 +++++++++++++
- 2 files changed, 36 insertions(+)
+ target/riscv/crypto_helper.c            | 57 ++++++++++++++++
+ target/riscv/helper.h                   |  7 ++
+ target/riscv/insn32.decode              |  6 ++
+ target/riscv/insn_trans/trans_rvk.c.inc | 90 +++++++++++++++++++++++++
+ 4 files changed, 160 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b0a40b83e7..d30534ead5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -587,6 +587,29 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             cpu->cfg.ext_d = true;
-         }
+diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
+index f5ffc262f2..6cd2a92b86 100644
+--- a/target/riscv/crypto_helper.c
++++ b/target/riscv/crypto_helper.c
+@@ -303,4 +303,61 @@ target_ulong HELPER(sha256sum1)(target_ulong rs1)
+     return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
+ }
+ #undef ROR32
++
++#define zext32(x) ((uint64_t)(uint32_t)(x))
++
++target_ulong HELPER(sha512sum0r)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) << 25) ^ (zext32(rs1) << 30) ^
++                      (zext32(rs1) >> 28) ^ (zext32(rs2) >> 7) ^
++                      (zext32(rs2) >> 2) ^ (zext32(rs2) << 4);
++
++    return sext_xlen(result);
++}
++
++target_ulong HELPER(sha512sum1r)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) << 23) ^ (zext32(rs1) >> 14) ^
++                      (zext32(rs1) >> 18) ^ (zext32(rs2) >> 9) ^
++                      (zext32(rs2) << 18) ^ (zext32(rs2) << 14);
++
++    return sext_xlen(result);
++}
++
++target_ulong HELPER(sha512sig0l)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) >> 1) ^ (zext32(rs1) >> 7) ^
++                      (zext32(rs1) >> 8) ^ (zext32(rs2) << 31) ^
++                      (zext32(rs2) << 25) ^ (zext32(rs2) << 24);
++
++    return sext_xlen(result);
++}
++
++target_ulong HELPER(sha512sig0h)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) >> 1) ^ (zext32(rs1) >> 7) ^
++                      (zext32(rs1) >> 8) ^ (zext32(rs2) << 31) ^
++                      (zext32(rs2) << 24);
++
++    return sext_xlen(result);
++}
++
++target_ulong HELPER(sha512sig1l)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) << 3) ^ (zext32(rs1) >> 6) ^
++                      (zext32(rs1) >> 19) ^ (zext32(rs2) >> 29) ^
++                      (zext32(rs2) << 26) ^ (zext32(rs2) << 13);
++
++    return sext_xlen(result);
++}
++
++target_ulong HELPER(sha512sig1h)(target_ulong rs1, target_ulong rs2)
++{
++    uint64_t result = (zext32(rs1) << 3) ^ (zext32(rs1) >> 6) ^
++                      (zext32(rs1) >> 19) ^ (zext32(rs2) >> 29) ^
++                      (zext32(rs2) << 13);
++
++    return sext_xlen(result);
++}
++#undef zext32
+ #undef sext_xlen
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 898d093ae9..207d298fde 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1134,3 +1134,10 @@ DEF_HELPER_1(sha256sig0, tl, tl)
+ DEF_HELPER_1(sha256sig1, tl, tl)
+ DEF_HELPER_1(sha256sum0, tl, tl)
+ DEF_HELPER_1(sha256sum1, tl, tl)
++
++DEF_HELPER_2(sha512sum0r, tl, tl, tl)
++DEF_HELPER_2(sha512sum1r, tl, tl, tl)
++DEF_HELPER_2(sha512sig0l, tl, tl, tl)
++DEF_HELPER_2(sha512sig0h, tl, tl, tl)
++DEF_HELPER_2(sha512sig1l, tl, tl, tl)
++DEF_HELPER_2(sha512sig1h, tl, tl, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index f86745edcb..6064dadef8 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -859,3 +859,9 @@ sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
+ sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
+ sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
+ sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
++sha512sum0r 01 01000 ..... ..... 000 ..... 0110011 @r
++sha512sum1r 01 01001 ..... ..... 000 ..... 0110011 @r
++sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
++sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
++sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
++sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
+index ce29eaa2f4..e56040d07b 100644
+--- a/target/riscv/insn_trans/trans_rvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvk.c.inc
+@@ -252,3 +252,93 @@ static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
  
-+        if (cpu->cfg.ext_zk) {
-+            cpu->cfg.ext_zkn = true;
-+            cpu->cfg.ext_zkr = true;
-+            cpu->cfg.ext_zkt = true;
-+        }
+     return true;
+ }
 +
-+        if (cpu->cfg.ext_zkn) {
-+            cpu->cfg.ext_zbkb = true;
-+            cpu->cfg.ext_zbkc = true;
-+            cpu->cfg.ext_zbkx = true;
-+            cpu->cfg.ext_zkne = true;
-+            cpu->cfg.ext_zknd = true;
-+            cpu->cfg.ext_zknh = true;
-+        }
++static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
 +
-+        if (cpu->cfg.ext_zks) {
-+            cpu->cfg.ext_zbkb = true;
-+            cpu->cfg.ext_zbkc = true;
-+            cpu->cfg.ext_zbkx = true;
-+            cpu->cfg.ext_zksed = true;
-+            cpu->cfg.ext_zksh = true;
-+        }
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 +
-         /* Set the ISA extensions, checks should have happened above */
-         if (cpu->cfg.ext_i) {
-             ext |= RVI;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 8183fb86d5..a78d396f8c 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -355,7 +355,20 @@ struct RISCVCPUConfig {
-     bool ext_zba;
-     bool ext_zbb;
-     bool ext_zbc;
-+    bool ext_zbkb;
-+    bool ext_zbkc;
-+    bool ext_zbkx;
-     bool ext_zbs;
-+    bool ext_zk;
-+    bool ext_zkn;
-+    bool ext_zknd;
-+    bool ext_zkne;
-+    bool ext_zknh;
-+    bool ext_zkr;
-+    bool ext_zks;
-+    bool ext_zksed;
-+    bool ext_zksh;
-+    bool ext_zkt;
-     bool ext_counters;
-     bool ext_ifencei;
-     bool ext_icsr;
++    gen_helper_sha512sum0r(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha512sum1r(DisasContext *ctx, arg_sha512sum1r *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    gen_helper_sha512sum1r(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha512sig0l(DisasContext *ctx, arg_sha512sig0l *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    gen_helper_sha512sig0l(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha512sig0h(DisasContext *ctx, arg_sha512sig0h *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    gen_helper_sha512sig0h(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha512sig1l(DisasContext *ctx, arg_sha512sig1l *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    gen_helper_sha512sig1l(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++
++    gen_helper_sha512sig1h(dest, src1, src2);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
 -- 
 2.17.1
 
