@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOOdu-0008Uu-2E
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 13:51:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:38788)
+	id 1nOOrL-0007pa-Pl
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 14:05:31 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:41396)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nOOdl-0008Sa-1y
- for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:51:30 -0500
-Received: from [2607:f8b0:4864:20::434] (port=34728
- helo=mail-pf1-x434.google.com)
+ id 1nOOrK-0007nf-9Y
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 14:05:30 -0500
+Received: from [2607:f8b0:4864:20::52e] (port=45909
+ helo=mail-pg1-x52e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nOOdj-00060n-74
- for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:51:28 -0500
-Received: by mail-pf1-x434.google.com with SMTP id g1so9136283pfv.1
- for <qemu-riscv@nongnu.org>; Sun, 27 Feb 2022 10:51:26 -0800 (PST)
+ id 1nOOrH-0000ul-Rg
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 14:05:30 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id z4so9581500pgh.12
+ for <qemu-riscv@nongnu.org>; Sun, 27 Feb 2022 11:05:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=message-id:date:mime-version:user-agent:subject:content-language:to
  :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=RLHBL3JagmCoUGNMMJMHaIspdw14OW7z5m0+E5Qi16c=;
- b=FlxtHcq9sNQcAGxYGRZY4wdeSI8cnqqDSjOR2KXaZOIsHyhdpZzi4fupWoJ6PMB/CJ
- ESsgE0pYt0oKELH5c1sSkOX4j9bmubfi5v9lxSztb4gtYlkypeI163b7WkrUOOKNUN9N
- 7WuGl/J7gT02ZCvBg9x3uTvO1TeN2jdrj5XFOPbps2U8OfQpA3VDeZ7Z+e1RzYiUARvd
- kW9z3a4fDuGLTz8/R3p8AtmbM40ql1SOoZiU/5ZcVlKcQJfBc+taCD2KZAeth3t4z5Gl
- GywHGmWHzfpKYLNuMmRxwpuCQ99xP6aEAaBA87Wvf9JggyHDUA7yL4TT5pEx6jW5X+gI
- NUaw==
+ bh=7SpCVqRmagiShxj+GTma6iQom7dIl4JKkPCq0Ks/rc8=;
+ b=ONlYOklZ536PguyB39C2qP58YtmDYzOtz5kGKl6Bos40mg2rTKp9DoAqQsVltYlPJL
+ TCRkaBAzcune11B3y1HqIXw5xZ/5ctFRx5YnoCP+pB9aX6PZePoCfJ86EPdxaLbGjkxi
+ VgClGY4rvRIGxjoatqP2sRwzRyqDKi4KdwpqxvANqE7r3PhX99gqVVo7hDTZDyL+qWuU
+ UJdomycsbfElLFiyLSiwcq6j5LJHfGJWLaQw/12AnmvCLHRIq8sJC9I2XSXcdoHZ4nzi
+ rSvkcO6EuDu+zAfGvwj/LB7hmh5rBSPkrDDT4WkjGpwZEKN0mquDnduBy7YE104EXQgH
+ ij3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=RLHBL3JagmCoUGNMMJMHaIspdw14OW7z5m0+E5Qi16c=;
- b=UXV1xSa1n4nmHi6TsAKF/J/60/34n030wRQWCHwChUm2CzK9l/zpoYoxqaG/bnR+Nu
- 7B1XS13lS7L/or702qPFklf8XjtxvRxD0z1WrlkV3jNtm7dqeTyHr12q7xlQWjqBjIV0
- siGcn7xWoN0JcNND7fM2xWMymm8pXpTV/HyOm23vQ4Gfyg9yVPv8XlXMLe2qfOqZl97n
- 5VU71eokzere0MOH+WPerVADXaPpUjULINtP/pvgwi4r6RD1BgM7oM5aedsLfaA88jtm
- 5hcpVO/JKaz65lK0QSnQrsuDnvKOa8Re8E2+/hZ3CvIKB69NzZFc9MS5ScUbazT0pkWv
- ulbA==
-X-Gm-Message-State: AOAM531Tf6/Y1U3lcMbZAAe4JPB8SAPinxGtOTavzKIClVWK/Xg2Ibod
- TesNygSInxHHeFCsRD1A/Se1pw==
-X-Google-Smtp-Source: ABdhPJy9KO6El2UJpOULHa56a6cmdSNQ3FM8J/Nvo2ezb3P7b7iUYx8GdPQuKbhZO+rlt/bmn2Y2yQ==
-X-Received: by 2002:a05:6a00:140c:b0:4e1:530c:edc0 with SMTP id
- l12-20020a056a00140c00b004e1530cedc0mr17998720pfu.18.1645987885531; 
- Sun, 27 Feb 2022 10:51:25 -0800 (PST)
+ bh=7SpCVqRmagiShxj+GTma6iQom7dIl4JKkPCq0Ks/rc8=;
+ b=dRn8TOS/mAIgpJLVUaGNMs0YSMEYlhpfcEIHE4Uo10gEDSWqfTuqXzz8xePraZK2Jf
+ fB2uug+AGT5MzBJ8izVmVXC4lQftZ4lK5j6snKN5k4QTfgdRXa0acQwxHDMQb7GbTu51
+ rdtTAj65cW9ExpC0WPb92GjrF1D14PwldVQ/+gtlsFM8UfmrBsfFizm98xahARUl7zzG
+ O6ImJwPD4DfE1bmh+2pUYOJ9O/ofjMWN6n7g5Q0aIcn0xxgmsbkdwAzyRuGFZQs3kxmJ
+ sUUYZQZ/Gz5Y/Mq6OHbMjAoz1xRd1GqdC9w5mAcFl4PR56XDYlLsFb20j2ma1dgXtSeX
+ DGzw==
+X-Gm-Message-State: AOAM532O4fE98gisRu8+g4TvjCvNP4Eiqqzn5YXgSkTB5A7yP1533xGI
+ kCndaD2HtUeSgbhLs0oJRq/i2A==
+X-Google-Smtp-Source: ABdhPJwhZ/j/ATtL+cC6AtdoLgq9wUasLYebV6y4UaFFaqAj2HOuJdIIO3LsRRTldEkEbPe/P/b4ZA==
+X-Received: by 2002:a63:595e:0:b0:378:b203:a74e with SMTP id
+ j30-20020a63595e000000b00378b203a74emr615925pgm.328.1645988726379; 
+ Sun, 27 Feb 2022 11:05:26 -0800 (PST)
 Received: from ?IPV6:2603:800c:1201:c600:23be:43d9:7006:705a?
  (2603-800c-1201-c600-23be-43d9-7006-705a.res6.spectrum.com.
  [2603:800c:1201:c600:23be:43d9:7006:705a])
  by smtp.gmail.com with ESMTPSA id
- q13-20020a056a00088d00b004e1bea9c582sm10593006pfj.43.2022.02.27.10.51.23
+ c15-20020a056a00248f00b004f10a245b83sm10623252pfv.73.2022.02.27.11.05.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Feb 2022 10:51:25 -0800 (PST)
-Message-ID: <9f65cc93-49bf-2514-9d92-02d13212e288@linaro.org>
-Date: Sun, 27 Feb 2022 08:51:21 -1000
+ Sun, 27 Feb 2022 11:05:25 -0800 (PST)
+Message-ID: <71666709-7115-81ec-2db0-bd0db525796b@linaro.org>
+Date: Sun, 27 Feb 2022 09:05:22 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
-Subject: Re: [PATCH v6 05/14] crypto: move sm4_sbox from target/arm
+Subject: Re: [PATCH v6 06/14] target/riscv: rvk: add support for zknd/zkne
+ extension in RV32
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
@@ -62,15 +63,15 @@ To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
- <20220227142553.25815-6-liweiwei@iscas.ac.cn>
+ <20220227142553.25815-7-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220227142553.25815-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220227142553.25815-7-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::434
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::52e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52e.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
@@ -91,25 +92,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 18:51:31 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 19:05:30 -0000
 
 On 2/27/22 04:25, Weiwei Li wrote:
->     - share it between target/arm and target/riscv
-> 
-> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Philippe Mathieu-Daudé<philmd@redhat.com>
-> Reviewed-by: Alistair Francis<alistair.francis@wdc.com>
-> ---
->   crypto/meson.build         |  1 +
->   crypto/sm4.c               | 49 ++++++++++++++++++++++++++++++++++++++
->   include/crypto/sm4.h       |  6 +++++
->   target/arm/crypto_helper.c | 36 +---------------------------
->   4 files changed, 57 insertions(+), 35 deletions(-)
->   create mode 100644 crypto/sm4.c
->   create mode 100644 include/crypto/sm4.h
+> +#define AES_SHIFROWS_LO(RS1, RS2) ( \
+> +    (((RS1 >> 24) & 0xFF) << 56) | (((RS2 >> 48) & 0xFF) << 48) | \
+> +    (((RS2 >> 8) & 0xFF) << 40) | (((RS1 >> 32) & 0xFF) << 32) | \
+> +    (((RS2 >> 56) & 0xFF) << 24) | (((RS2 >> 16) & 0xFF) << 16) | \
+> +    (((RS1 >> 40) & 0xFF) << 8) | (((RS1 >> 0) & 0xFF) << 0))
+> +
+> +#define AES_INVSHIFROWS_LO(RS1, RS2) ( \
+> +    (((RS2 >> 24) & 0xFF) << 56) | (((RS2 >> 48) & 0xFF) << 48) | \
+> +    (((RS1 >> 8) & 0xFF) << 40) | (((RS1 >> 32) & 0xFF) << 32) | \
+> +    (((RS1 >> 56) & 0xFF) << 24) | (((RS2 >> 16) & 0xFF) << 16) | \
+> +    (((RS2 >> 40) & 0xFF) << 8) | (((RS1 >> 0) & 0xFF) << 0))
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Unused.  Whcih is good, because it shifts an unknown type by 56.
+
+
+> +DEF_HELPER_3(aes32esmi, tl, tl, tl, tl)
+> +DEF_HELPER_3(aes32esi, tl, tl, tl, tl)
+> +DEF_HELPER_3(aes32dsmi, tl, tl, tl, tl)
+> +DEF_HELPER_3(aes32dsi, tl, tl, tl, tl)
+
+DEF_HELPER_FLAGS_3, with TCG_CALL_NO_RWG_SE.
+
+> +static inline target_ulong aes32_operation(target_ulong bs, target_ulong rs1,
+> +                                           target_ulong rs2, bool enc,
+> +                                           bool mix)
+> +{
+> +    uint8_t shamt = bs << 3;
+
+Just thinking it would be better to pass in shamt, since bs is otherwise unused.
+
+> +    mixed = (mixed << shamt) | (mixed >> (32 - shamt));
+
+This is broken for shamt == 0.  This is intending a rol32(), I assume?
+
+
+> +static bool trans_aes32esmi(DisasContext *ctx, arg_aes32esmi *a)
+> +{
+> +    REQUIRE_ZKNE(ctx);
+> +
+> +    TCGv bs = tcg_const_tl(a->bs);
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
+> +
+> +    gen_helper_aes32esmi(dest, src1, src2, bs);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +
+> +    tcg_temp_free(bs);
+> +    return true;
+> +}
+> +
+
+tcg_constant_tl, which then need not be freed.
+You should create a common helper for these 4 functions, so that you do not replicate so 
+much code between them.
+
 
 r~
 
