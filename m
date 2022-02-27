@@ -1,35 +1,33 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOKWl-0003cK-9d
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:27:59 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58826)
+	id 1nOKWm-0003gH-Ff
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:28:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:58892)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWg-0003QA-Sg; Sun, 27 Feb 2022 09:27:54 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:35414 helo=cstnet.cn)
+ id 1nOKWj-0003WP-DG; Sun, 27 Feb 2022 09:27:57 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:35454 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWR-0003jY-2e; Sun, 27 Feb 2022 09:27:54 -0500
+ id 1nOKWS-0003jm-3H; Sun, 27 Feb 2022 09:27:57 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S7;
- Sun, 27 Feb 2022 22:27:30 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S10;
+ Sun, 27 Feb 2022 22:27:33 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 05/14] crypto: move sm4_sbox from target/arm
-Date: Sun, 27 Feb 2022 22:25:44 +0800
-Message-Id: <20220227142553.25815-6-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 08/14] target/riscv: rvk: add support for sha256 related
+ instructions in zknh extension
+Date: Sun, 27 Feb 2022 22:25:47 +0800
+Message-Id: <20220227142553.25815-9-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S7
-X-Coremail-Antispam: 1UD129KBjvJXoW3WF4kXr1UZr4ftw15Jry7KFg_yoW7ur1xpr
- 15Gw1Sqr4fXrnrt39Iqr10yr48Ary0y3WYyw4xury8Zan7Gw4rJF9IyrW8GryUAr15CFy5
- uF92yr15GF18Jr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S10
+X-Coremail-Antispam: 1UD129KBjvJXoWxJFW7Ar4fCw18WFy7uFW8tFb_yoWrCw4kpr
+ 4rKrWfGrWUGFWSya1fKa15Gr13Ar4xuryUtws3tw1Iya1fXrZ5Xr1qqw4aka1UJF98ur1Y
+ kayDCFyakrsYqa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUPa14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -48,11 +46,12 @@ X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
  helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -65,156 +64,159 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 14:27:55 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 14:27:57 -0000
 
-   - share it between target/arm and target/riscv
+ - add sha256sig0, sha256sig1, sha256sum0 and sha256sum1 instructions
 
+Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- crypto/meson.build         |  1 +
- crypto/sm4.c               | 49 ++++++++++++++++++++++++++++++++++++++
- include/crypto/sm4.h       |  6 +++++
- target/arm/crypto_helper.c | 36 +---------------------------
- 4 files changed, 57 insertions(+), 35 deletions(-)
- create mode 100644 crypto/sm4.c
- create mode 100644 include/crypto/sm4.h
+ target/riscv/crypto_helper.c            | 31 +++++++++++++
+ target/riscv/helper.h                   |  5 +++
+ target/riscv/insn32.decode              |  5 +++
+ target/riscv/insn_trans/trans_rvk.c.inc | 58 +++++++++++++++++++++++++
+ 4 files changed, 99 insertions(+)
 
-diff --git a/crypto/meson.build b/crypto/meson.build
-index 19c44bea89..b47352180f 100644
---- a/crypto/meson.build
-+++ b/crypto/meson.build
-@@ -40,6 +40,7 @@ if have_afalg
- endif
- crypto_ss.add(when: gnutls, if_true: files('tls-cipher-suites.c'))
+diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
+index 9e56668627..f5ffc262f2 100644
+--- a/target/riscv/crypto_helper.c
++++ b/target/riscv/crypto_helper.c
+@@ -272,4 +272,35 @@ target_ulong HELPER(aes64im)(target_ulong rs1)
  
-+util_ss.add(files('sm4.c'))
- util_ss.add(files('aes.c'))
- util_ss.add(files('init.c'))
- if gnutls.found()
-diff --git a/crypto/sm4.c b/crypto/sm4.c
-new file mode 100644
-index 0000000000..9f0cd452c7
---- /dev/null
-+++ b/crypto/sm4.c
-@@ -0,0 +1,49 @@
-+/*
-+ * QEMU crypto sm4 support
-+ *
-+ * Copyright (C) 2013 - 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
-+ */
+     return result;
+ }
 +
-+#include "qemu/osdep.h"
-+#include "crypto/sm4.h"
++#define ROR32(a, amt) ((a << (-amt & 31)) | (a >> (amt & 31)))
 +
-+uint8_t const sm4_sbox[] = {
-+    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
-+    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
-+    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
-+    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
-+    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
-+    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
-+    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
-+    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
-+    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
-+    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
-+    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
-+    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
-+    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
-+    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
-+    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
-+    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
-+    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
-+    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
-+    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
-+    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
-+    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
-+    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
-+    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
-+    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
-+    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
-+    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
-+    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
-+    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
-+    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
-+    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
-+    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
-+    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
-+};
++target_ulong HELPER(sha256sig0)(target_ulong rs1)
++{
++    uint32_t a = rs1;
 +
-diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
-new file mode 100644
-index 0000000000..9bd3ebc62e
---- /dev/null
-+++ b/include/crypto/sm4.h
-@@ -0,0 +1,6 @@
-+#ifndef QEMU_SM4_H
-+#define QEMU_SM4_H
++    return sext_xlen(ROR32(a, 7) ^ ROR32(a, 18) ^ (a >> 3));
++}
 +
-+extern const uint8_t sm4_sbox[256];
++target_ulong HELPER(sha256sig1)(target_ulong rs1)
++{
++    uint32_t a = rs1;
 +
-+#endif
-diff --git a/target/arm/crypto_helper.c b/target/arm/crypto_helper.c
-index 28a84c2dbd..390020672a 100644
---- a/target/arm/crypto_helper.c
-+++ b/target/arm/crypto_helper.c
-@@ -15,6 +15,7 @@
- #include "exec/helper-proto.h"
- #include "tcg/tcg-gvec-desc.h"
- #include "crypto/aes.h"
-+#include "crypto/sm4.h"
- #include "vec_internal.h"
++    return sext_xlen(ROR32(a, 17) ^ ROR32(a, 19) ^ (a >> 10));
++}
++
++target_ulong HELPER(sha256sum0)(target_ulong rs1)
++{
++    uint32_t a = rs1;
++
++    return sext_xlen(ROR32(a, 2) ^ ROR32(a, 13) ^ ROR32(a, 22));
++}
++
++target_ulong HELPER(sha256sum1)(target_ulong rs1)
++{
++    uint32_t a = rs1;
++
++    return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
++}
++#undef ROR32
+ #undef sext_xlen
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 040b771eb6..898d093ae9 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1129,3 +1129,8 @@ DEF_HELPER_2(aes64dsm, tl, tl, tl)
+ DEF_HELPER_2(aes64ks2, tl, tl, tl)
+ DEF_HELPER_2(aes64ks1i, tl, tl, tl)
+ DEF_HELPER_1(aes64im, tl, tl)
++
++DEF_HELPER_1(sha256sig0, tl, tl)
++DEF_HELPER_1(sha256sig1, tl, tl)
++DEF_HELPER_1(sha256sum0, tl, tl)
++DEF_HELPER_1(sha256sum1, tl, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index bf6a8797a2..f86745edcb 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -854,3 +854,8 @@ aes64esm    00 11011 ..... ..... 000 ..... 0110011 @r
+ # *** RV64 Zkne/zknd Standard Extension ***
+ aes64ks2    01 11111 ..... ..... 000 ..... 0110011 @r
+ aes64ks1i   00 11000 1.... ..... 001 ..... 0010011 %rnum %rs1 %rd
++# *** RV32 Zknh Standard Extension ***
++sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
++sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
++sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
++sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
+diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
+index 3dc855fd3c..ce29eaa2f4 100644
+--- a/target/riscv/insn_trans/trans_rvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvk.c.inc
+@@ -29,6 +29,12 @@
+     }                                           \
+ } while (0)
  
- union CRYPTO_STATE {
-@@ -694,41 +695,6 @@ DO_SM3TT(crypto_sm3tt2b, 3)
- 
- #undef DO_SM3TT
- 
--static uint8_t const sm4_sbox[] = {
--    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
--    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
--    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
--    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
--    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
--    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
--    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
--    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
--    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
--    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
--    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
--    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
--    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
--    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
--    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
--    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
--    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
--    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
--    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
--    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
--    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
--    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
--    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
--    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
--    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
--    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
--    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
--    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
--    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
--    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
--    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
--    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
--};
--
- static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
++#define REQUIRE_ZKNH(ctx) do {                  \
++    if (!ctx->cfg_ptr->ext_zknh) {    \
++        return false;                           \
++    }                                           \
++} while (0)
++
+ static bool trans_aes32esmi(DisasContext *ctx, arg_aes32esmi *a)
  {
-     union CRYPTO_STATE d = { .l = { rn[0], rn[1] } };
+     REQUIRE_ZKNE(ctx);
+@@ -194,3 +200,55 @@ static bool trans_aes64im(DisasContext *ctx, arg_aes64im *a)
+ 
+     return true;
+ }
++
++static bool trans_sha256sig0(DisasContext *ctx, arg_sha256sig0 *a)
++{
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++
++    gen_helper_sha256sig0(dest, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha256sig1(DisasContext *ctx, arg_sha256sig1 *a)
++{
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++
++    gen_helper_sha256sig1(dest, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha256sum0(DisasContext *ctx, arg_sha256sum0 *a)
++{
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++
++    gen_helper_sha256sum0(dest, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
++
++static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
++{
++    REQUIRE_ZKNH(ctx);
++
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++
++    gen_helper_sha256sum1(dest, src1);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    return true;
++}
 -- 
 2.17.1
 
