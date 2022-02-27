@@ -1,33 +1,32 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOKdv-0000qF-MH
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:35:24 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59966)
+	id 1nOKdx-0000uf-KL
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:35:25 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:59980)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKdu-0000nV-2D; Sun, 27 Feb 2022 09:35:22 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:36624 helo=cstnet.cn)
+ id 1nOKdv-0000pE-Di; Sun, 27 Feb 2022 09:35:23 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:36626 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKdr-0007fv-OX; Sun, 27 Feb 2022 09:35:21 -0500
+ id 1nOKdr-0007fw-OZ; Sun, 27 Feb 2022 09:35:22 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S13;
- Sun, 27 Feb 2022 22:27:35 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S16;
+ Sun, 27 Feb 2022 22:27:38 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 11/14] target/riscv: rvk: add support for zksed/zksh
- extension
-Date: Sun, 27 Feb 2022 22:25:50 +0800
-Message-Id: <20220227142553.25815-12-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 14/14] target/riscv: rvk: expose zbk* and zk* properties
+Date: Sun, 27 Feb 2022 22:25:53 +0800
+Message-Id: <20220227142553.25815-15-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S13
-X-Coremail-Antispam: 1UD129KBjvJXoW3WrWfKw43ZF1kWF4kGr47XFb_yoW7Ar13pr
- 4rKrW7KayUWFWfAa1ftF15ur13XFsakFy0g393J340ka1FqrZ5Ar4Utw4akr45XFyDury5
- Can8AFyYkr4fX3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S16
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF1kXrWUCw4rtw17GFg_yoW8Ar1fpr
+ y5JFW7KwnxJry3Cay8tw1DJ3ykCa1rA39Fq3yxZws7Ar4fGr43GF1DGanYkr47Xr48Za1f
+ uF13ur1F9390ya7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -64,193 +63,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 14:35:22 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 14:35:23 -0000
 
- - add sm3p0, sm3p1, sm4ed and sm4ks instructions
-
-Co-authored-by: Ruibo Lu <luruibo2000@163.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/crypto_helper.c            | 49 +++++++++++++++++
- target/riscv/helper.h                   |  6 +++
- target/riscv/insn32.decode              |  6 +++
- target/riscv/insn_trans/trans_rvk.c.inc | 72 +++++++++++++++++++++++++
- 4 files changed, 133 insertions(+)
+ target/riscv/cpu.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-index fd50a034a3..d712854a9c 100644
---- a/target/riscv/crypto_helper.c
-+++ b/target/riscv/crypto_helper.c
-@@ -391,4 +391,53 @@ target_ulong HELPER(sha512sum1)(target_ulong rs1)
-     return ROR64(a, 14) ^ ROR64(a, 18) ^ ROR64(a, 41);
- }
- #undef ROR64
-+
-+#define ROL32(a, amt) ((a >> (-amt & 31)) | (a << (amt & 31)))
-+
-+target_ulong HELPER(sm3p0)(target_ulong rs1)
-+{
-+    uint32_t src = rs1;
-+    uint32_t result = src ^ ROL32(src, 9) ^ ROL32(src, 17);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sm3p1)(target_ulong rs1)
-+{
-+    uint32_t src = rs1;
-+    uint32_t result = src ^ ROL32(src, 15) ^ ROL32(src, 23);
-+
-+    return sext_xlen(result);
-+}
-+#undef ROL32
-+
-+target_ulong HELPER(sm4ed)(target_ulong rs2, target_ulong rt, target_ulong bs)
-+{
-+    uint8_t bs_t = bs;
-+
-+    uint32_t sb_in = (uint8_t)(rs2 >> (8 * bs_t));
-+    uint32_t sb_out = (uint32_t)sm4_sbox[sb_in];
-+
-+    uint32_t linear = sb_out ^ (sb_out << 8) ^ (sb_out << 2) ^ (sb_out << 18) ^
-+        ((sb_out & 0x3f) << 26) ^ ((sb_out & 0xC0) << 10);
-+
-+    uint32_t rotl = (linear << (8 * bs_t)) | (linear >> (32 - 8 * bs_t));
-+
-+    return sext_xlen(rotl ^ (uint32_t)rt);
-+}
-+
-+target_ulong HELPER(sm4ks)(target_ulong rs2, target_ulong rs1, target_ulong bs)
-+{
-+    uint8_t bs_t = bs;
-+
-+    uint32_t sb_in = (uint8_t)(rs2 >> (8 * bs_t));
-+    uint32_t sb_out = sm4_sbox[sb_in];
-+
-+    uint32_t x = sb_out ^ ((sb_out & 0x07) << 29) ^ ((sb_out & 0xFE) << 7) ^
-+        ((sb_out & 0x01) << 23) ^ ((sb_out & 0xF8) << 13);
-+
-+    uint32_t rotl = (x << (8 * bs_t)) | (x >> (32 - 8 * bs_t));
-+
-+    return sext_xlen(rotl ^ (uint32_t)rs1);
-+}
- #undef sext_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 393cca85b4..826eba032f 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1146,3 +1146,9 @@ DEF_HELPER_1(sha512sig0, tl, tl)
- DEF_HELPER_1(sha512sig1, tl, tl)
- DEF_HELPER_1(sha512sum0, tl, tl)
- DEF_HELPER_1(sha512sum1, tl, tl)
-+
-+DEF_HELPER_1(sm3p0, tl, tl)
-+DEF_HELPER_1(sm3p1, tl, tl)
-+
-+DEF_HELPER_3(sm4ed, tl, tl, tl, tl)
-+DEF_HELPER_3(sm4ks, tl, tl, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 592efda019..37c29da763 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -870,3 +870,9 @@ sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
- sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
- sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
- sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksh Standard Extension ***
-+sm3p0       00 01000 01000 ..... 001 ..... 0010011 @r2
-+sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksed Standard Extension ***
-+sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
-+sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-index 2b3ac67afd..5b1770fe66 100644
---- a/target/riscv/insn_trans/trans_rvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -35,6 +35,18 @@
-     }                                           \
- } while (0)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d30534ead5..64bc776072 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -804,7 +804,20 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
++    DEFINE_PROP_BOOL("zbkb", RISCVCPU, cfg.ext_zbkb, false),
++    DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
++    DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
++    DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
++    DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
++    DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
++    DEFINE_PROP_BOOL("zkne", RISCVCPU, cfg.ext_zkne, false),
++    DEFINE_PROP_BOOL("zknh", RISCVCPU, cfg.ext_zknh, false),
++    DEFINE_PROP_BOOL("zkr", RISCVCPU, cfg.ext_zkr, false),
++    DEFINE_PROP_BOOL("zks", RISCVCPU, cfg.ext_zks, false),
++    DEFINE_PROP_BOOL("zksed", RISCVCPU, cfg.ext_zksed, false),
++    DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
++    DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
  
-+#define REQUIRE_ZKSED(ctx) do {                 \
-+    if (!ctx->cfg_ptr->ext_zksed) {   \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKSH(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zksh) {    \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
- static bool trans_aes32esmi(DisasContext *ctx, arg_aes32esmi *a)
- {
-     REQUIRE_ZKNE(ctx);
-@@ -398,3 +410,63 @@ static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
- 
-     return true;
- }
-+
-+/* SM3 */
-+static bool trans_sm3p0(DisasContext *ctx, arg_sm3p0 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sm3p0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sm3p1(DisasContext *ctx, arg_sm3p1 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sm3p1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+/* SM4 */
-+static bool trans_sm4ed(DisasContext *ctx, arg_sm4ed *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sm4ed(dest, src2, src1, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
-+
-+static bool trans_sm4ks(DisasContext *ctx, arg_sm4ks *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+
-+    TCGv bs = tcg_const_tl(a->bs);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sm4ks(dest, src2, src1, bs);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free(bs);
-+    return true;
-+}
+     /* Vendor-specific custom extensions */
+     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
 -- 
 2.17.1
 
