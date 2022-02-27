@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOOZg-0005PV-Dj
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 13:47:16 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:37880)
+	id 1nOOd1-0007sc-Tl
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 13:50:45 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38484)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nOOZb-0005Nn-7C
- for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:47:11 -0500
-Received: from [2607:f8b0:4864:20::631] (port=38845
- helo=mail-pl1-x631.google.com)
+ id 1nOOcx-0007oS-Nf
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:50:39 -0500
+Received: from [2607:f8b0:4864:20::102a] (port=36470
+ helo=mail-pj1-x102a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nOOZX-00084U-HR
- for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:47:10 -0500
-Received: by mail-pl1-x631.google.com with SMTP id h17so3341692plc.5
- for <qemu-riscv@nongnu.org>; Sun, 27 Feb 2022 10:47:07 -0800 (PST)
+ id 1nOOcw-0005pZ-2c
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:50:39 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ g7-20020a17090a708700b001bb78857ccdso12904636pjk.1
+ for <qemu-riscv@nongnu.org>; Sun, 27 Feb 2022 10:50:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=message-id:date:mime-version:user-agent:subject:content-language:to
  :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=3OzMR6GGv8dxv8BQ1qJzQJO/Pek8EQYtC24Q7zBAutk=;
- b=jXYnEyJsmblRHER/DylA7A0JPiqJ0Js2ah8a7OXjezV+lOXTW+Z38qLxeRR2Rqzk+F
- FAsRBCJr0iBayWNkMiOj2FffRCqmnKhkRZF7iEaJbUJ2ejb0Oy9B40KmPB1l+cj6nlEx
- mNZU+pa8xttFXHEzqVdGA3IN1zzg2A5kaowOIdS5W10eyKNTsab0ZVLmSiOHcc151GfM
- mOWRfJoa7H4vGoflF0WTT66monUK0ti6klL4405GCcv4bany26P3+5HaKmZ8IagW0bJT
- Nk+YXNNFyQL8fD6TC2ImMv2g1EVVPKmBZFnelojGxvxLTdMzZihvfpZhgH9Q0xuzSQU1
- Lygg==
+ bh=xzduNgMDW5z7SEedhMhxumYg/Ic635OdJBUksogcrFw=;
+ b=fBSnxtHAIDOUcOS77CWJBDPtlOpWjyPvD14iBefP64ULMeyuUQCLlDu8WMX+/wCQfd
+ w9YyuEtQef+Qhfq/yIZVGNFO681Wd/e14yYoFmIh/O2yxbsBq1qIIwf2Ql/H0eF9PGVU
+ c2OMJvoiH0cUO2kWV47a0ZRezkQIY/PvfiBByyXqHB0BR88xAPEfAod9LDTwLzqg7eal
+ giC/RV5NDcQvltxra0ERifD0/pqJD3SimEqb6lXXc5co7C4Nrls4MBhqEJXBBOBkzIY7
+ c3+fZuZMXLD5avzMTK9drGCTiBigyhYq4N/Obnl4GMYIAQK32OSy+XUi6giMr95DFEHC
+ jPwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=3OzMR6GGv8dxv8BQ1qJzQJO/Pek8EQYtC24Q7zBAutk=;
- b=0Znh7E249pK2rXe9ErNAOrNamCV7uh5a+1uwpU7EhNY2dQZnvxk5/HQ7Vxwd4EEDox
- Y9xWPNV+HoIYcMMOcnSmnHXbjfv/+T5/I1xRl/ue9PxMCoJ+57ZvdGEJ71p1tKt2xXTp
- Be5u5VbQ7sLxQno2112p1TZf+piknXJCbx9ak8nnIuH6c76tACfdzj9DBhlDutGCnDpn
- kht1KDxjbC2Q+F5M1yIRAhVSOF13/LJpLF6SJUfvHLee6D7N+z3c4cAoesUuJmbi1ESK
- xkZL7IcAjbsEYP36qY/Gf8qaQGC9Tsi0Brxw8dvFTltoekmWBspbm0tS468PSrQBUrgq
- fT3Q==
-X-Gm-Message-State: AOAM533bnW1mGgPiVy7gZEgyTiCLTRTpzTjuETnhid154xFLoOgMly3m
- 97maUP0UozZJN0xAUrFCi3ZQIw==
-X-Google-Smtp-Source: ABdhPJzKepUDdOYtFePU2+dDvfJ8zzryR9oFMmX4AyOTIh/6JIJ2pMFLH6I2zfNaIAf0GSmEs1zJUg==
-X-Received: by 2002:a17:90b:2513:b0:1bc:545d:8dbe with SMTP id
- ns19-20020a17090b251300b001bc545d8dbemr13032311pjb.182.1645987626162; 
- Sun, 27 Feb 2022 10:47:06 -0800 (PST)
+ bh=xzduNgMDW5z7SEedhMhxumYg/Ic635OdJBUksogcrFw=;
+ b=f2of+Hs+ZzaupOtv8E344YA3kBVdd7gIFgJqJ0l9p/Zs3Gk3D3PCtXXyaJ5qN636d4
+ n4gPtkdsVQar+zXTcIGxpgP6P7UtT+sC+/82/jklU5W+Jxi2tCAo+lf8dY3NPRHe548/
+ Z5z3+2KwF82M2T/mhv34QMFl6GKbTvsvbqMeMe77O/k8/N0h3iDIHMBlpyNY//Kdx5sZ
+ IIO5vDFZokZr915xf5fazpY/U/VPI8uy0yShn5NQyy06FJuo0Zxv6V/BUOy+89rkTtfV
+ zoG2Nzskb0hI/qVCvpCGVkvlfM+CScN6dBS2a5gz5vp0wDMya/cUhwfEOWfbvIyPvh2t
+ ewyQ==
+X-Gm-Message-State: AOAM530G2SOVDauekBRo0U4AOFIJp51CvTv/5SSdFny9LCBOLYeO2Yuf
+ kquq8NPmhytMJh0R4sSDH0jNgg==
+X-Google-Smtp-Source: ABdhPJxAgMz9nBiec5yYGsiOAJQMI1tWAJ6PpAXRS5okETj+V6Cf4gq/UoJMzWePSqEEyFvzgQhyKg==
+X-Received: by 2002:a17:902:b204:b0:14d:a8c8:af37 with SMTP id
+ t4-20020a170902b20400b0014da8c8af37mr17196667plr.108.1645987836320; 
+ Sun, 27 Feb 2022 10:50:36 -0800 (PST)
 Received: from ?IPV6:2603:800c:1201:c600:23be:43d9:7006:705a?
  (2603-800c-1201-c600-23be-43d9-7006-705a.res6.spectrum.com.
  [2603:800c:1201:c600:23be:43d9:7006:705a])
  by smtp.gmail.com with ESMTPSA id
- a11-20020a056a001d0b00b004f4057fafe2sm1632186pfx.94.2022.02.27.10.47.04
+ o17-20020a056a0015d100b004c59f7dc606sm10670597pfu.28.2022.02.27.10.50.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 27 Feb 2022 10:47:05 -0800 (PST)
-Message-ID: <e6a2401d-5ce2-c2cb-7ee2-fefe99818533@linaro.org>
-Date: Sun, 27 Feb 2022 08:47:01 -1000
+ Sun, 27 Feb 2022 10:50:35 -0800 (PST)
+Message-ID: <29d8b5d3-2f48-656a-a868-37154c75f756@linaro.org>
+Date: Sun, 27 Feb 2022 08:50:32 -1000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
-Subject: Re: [PATCH v6 02/14] target/riscv: rvk: add support for zbkb extension
+Subject: Re: [PATCH v6 04/14] target/riscv: rvk: add support for zbkx extension
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
@@ -62,15 +63,15 @@ To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
- <20220227142553.25815-3-liweiwei@iscas.ac.cn>
+ <20220227142553.25815-5-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220227142553.25815-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220227142553.25815-5-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::631
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
@@ -91,73 +92,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 18:47:13 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 18:50:40 -0000
 
 On 2/27/22 04:25, Weiwei Li wrote:
-> +static void gen_packh(TCGv ret, TCGv src1, TCGv src2)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +
-> +    tcg_gen_ext8u_tl(t, src2);
-> +    tcg_gen_deposit_tl(ret, src1, t, 8, TARGET_LONG_BITS - 8);
-> +    tcg_temp_free(t);
-> +}
-> +
-> +static void gen_packw(TCGv ret, TCGv src1, TCGv src2)
-> +{
-> +    TCGv t = tcg_temp_new();
-> +
-> +    tcg_gen_ext16s_tl(t, src2);
-> +    tcg_gen_deposit_tl(ret, src1, t, 16, 48);
-> +    tcg_temp_free(t);
-> +}
-
-Missing TARGET_LONG_BITS here; would break on RV32.
-
+>   - add xperm4 and xperm8 instructions
 > 
-> +static bool trans_brev8(DisasContext *ctx, arg_brev8 *a)
-> +{
-> +    REQUIRE_ZBKB(ctx);
-> +
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +
-> +    gen_helper_brev8(dest, src1);
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    return true;
-> +}
-...
-> 
-> +static bool trans_unzip(DisasContext *ctx, arg_unzip *a)
-> +{
-> +    REQUIRE_ZBKB(ctx);
-> +    REQUIRE_32BIT(ctx);
-> +
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +
-> +    gen_helper_unzip(dest, src1);
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    return true;
-> +}
-> +
-> +static bool trans_zip(DisasContext *ctx, arg_zip *a)
-> +{
-> +    REQUIRE_ZBKB(ctx);
-> +    REQUIRE_32BIT(ctx);
-> +
-> +    TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-> +
-> +    gen_helper_zip(dest, src1);
-> +    gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    return true;
-> +}
+> Signed-off-by: Weiwei Li<liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang<wangjunqiang@iscas.ac.cn>
+> ---
+>   target/riscv/bitmanip_helper.c          | 27 +++++++++++++++++++++++++
+>   target/riscv/helper.h                   |  2 ++
+>   target/riscv/insn32.decode              |  4 ++++
+>   target/riscv/insn_trans/trans_rvb.c.inc | 18 +++++++++++++++++
+>   4 files changed, 51 insertions(+)
 
-Use gen_unary.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
