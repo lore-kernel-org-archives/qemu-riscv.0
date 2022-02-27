@@ -1,47 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOKWp-0003p4-E7
+	id 1nOKWp-0003r9-R1
 	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:28:03 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:58894)
+Received: from eggs.gnu.org ([209.51.188.92]:58924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWj-0003WZ-Em; Sun, 27 Feb 2022 09:27:57 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:35456 helo=cstnet.cn)
+ id 1nOKWo-0003lp-Kj; Sun, 27 Feb 2022 09:28:02 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21]:35498 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKWS-0003jp-5n; Sun, 27 Feb 2022 09:27:57 -0500
+ id 1nOKWl-0003kh-Fs; Sun, 27 Feb 2022 09:28:02 -0500
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S11;
- Sun, 27 Feb 2022 22:27:33 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S14;
+ Sun, 27 Feb 2022 22:27:35 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 09/14] target/riscv: rvk: add support for sha512 related
- instructions for RV32 in zknh extension
-Date: Sun, 27 Feb 2022 22:25:48 +0800
-Message-Id: <20220227142553.25815-10-liweiwei@iscas.ac.cn>
+Subject: [PATCH v6 12/14] target/riscv: rvk: add CSR support for Zkr
+Date: Sun, 27 Feb 2022 22:25:51 +0800
+Message-Id: <20220227142553.25815-13-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S11
-X-Coremail-Antispam: 1UD129KBjvJXoW3XrykGr18KFyrWry7tF1UKFg_yoWxWr48pr
- 1rKryfKFWUJFW3Aa1Fka1Uur47AF4fK3yrt393t3WI9a15Xa95tr4UJr4akr4UXF98ZFWU
- uan7Aa4jyrs7t3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S14
+X-Coremail-Antispam: 1UD129KBjvJXoWxCF15WF4DAFyxXrWkAw15twb_yoWrZw4rpr
+ 4jkay5GrW5ZFZ7A34ftF15WF15Gw1rGay3G3929w4DAF13J3yrJrn0gwsIqFn5X3ZYyry2
+ 9Fs0kFn0kr47Xa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
- JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
- 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
- JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
- A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
- x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
- 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF
- 7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14
- v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuY
- vjfUOBTYUUUUU
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F4U
+ JVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+ C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+ 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+ 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
+ 0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
+ 0JUQSdkUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,213 +63,161 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 14:27:57 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 14:28:02 -0000
 
- - add sha512sum0r, sha512sig0l, sha512sum1r, sha512sig1l, sha512sig0h and sha512sig1h instructions
+   - add SEED CSR
+   - add USEED, SSEED fields for MSECCFG CSR
 
+Co-authored-by: Ruibo Lu <luruibo2000@163.com>
 Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/crypto_helper.c            | 57 ++++++++++++++++
- target/riscv/helper.h                   |  7 ++
- target/riscv/insn32.decode              |  6 ++
- target/riscv/insn_trans/trans_rvk.c.inc | 90 +++++++++++++++++++++++++
- 4 files changed, 160 insertions(+)
+ target/riscv/cpu_bits.h |  9 ++++++
+ target/riscv/csr.c      | 64 +++++++++++++++++++++++++++++++++++++++++
+ target/riscv/pmp.h      |  8 ++++--
+ 3 files changed, 78 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-index f5ffc262f2..6cd2a92b86 100644
---- a/target/riscv/crypto_helper.c
-+++ b/target/riscv/crypto_helper.c
-@@ -303,4 +303,61 @@ target_ulong HELPER(sha256sum1)(target_ulong rs1)
-     return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
- }
- #undef ROR32
-+
-+#define zext32(x) ((uint64_t)(uint32_t)(x))
-+
-+target_ulong HELPER(sha512sum0r)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) << 25) ^ (zext32(rs1) << 30) ^
-+                      (zext32(rs1) >> 28) ^ (zext32(rs2) >> 7) ^
-+                      (zext32(rs2) >> 2) ^ (zext32(rs2) << 4);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sum1r)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) << 23) ^ (zext32(rs1) >> 14) ^
-+                      (zext32(rs1) >> 18) ^ (zext32(rs2) >> 9) ^
-+                      (zext32(rs2) << 18) ^ (zext32(rs2) << 14);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig0l)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) >> 1) ^ (zext32(rs1) >> 7) ^
-+                      (zext32(rs1) >> 8) ^ (zext32(rs2) << 31) ^
-+                      (zext32(rs2) << 25) ^ (zext32(rs2) << 24);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig0h)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) >> 1) ^ (zext32(rs1) >> 7) ^
-+                      (zext32(rs1) >> 8) ^ (zext32(rs2) << 31) ^
-+                      (zext32(rs2) << 24);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig1l)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) << 3) ^ (zext32(rs1) >> 6) ^
-+                      (zext32(rs1) >> 19) ^ (zext32(rs2) >> 29) ^
-+                      (zext32(rs2) << 26) ^ (zext32(rs2) << 13);
-+
-+    return sext_xlen(result);
-+}
-+
-+target_ulong HELPER(sha512sig1h)(target_ulong rs1, target_ulong rs2)
-+{
-+    uint64_t result = (zext32(rs1) << 3) ^ (zext32(rs1) >> 6) ^
-+                      (zext32(rs1) >> 19) ^ (zext32(rs2) >> 29) ^
-+                      (zext32(rs2) << 13);
-+
-+    return sext_xlen(result);
-+}
-+#undef zext32
- #undef sext_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 898d093ae9..207d298fde 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1134,3 +1134,10 @@ DEF_HELPER_1(sha256sig0, tl, tl)
- DEF_HELPER_1(sha256sig1, tl, tl)
- DEF_HELPER_1(sha256sum0, tl, tl)
- DEF_HELPER_1(sha256sum1, tl, tl)
-+
-+DEF_HELPER_2(sha512sum0r, tl, tl, tl)
-+DEF_HELPER_2(sha512sum1r, tl, tl, tl)
-+DEF_HELPER_2(sha512sig0l, tl, tl, tl)
-+DEF_HELPER_2(sha512sig0h, tl, tl, tl)
-+DEF_HELPER_2(sha512sig1l, tl, tl, tl)
-+DEF_HELPER_2(sha512sig1h, tl, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index f86745edcb..6064dadef8 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -859,3 +859,9 @@ sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
- sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
- sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
- sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
-+sha512sum0r 01 01000 ..... ..... 000 ..... 0110011 @r
-+sha512sum1r 01 01001 ..... ..... 000 ..... 0110011 @r
-+sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
-+sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
-+sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
-+sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-index ce29eaa2f4..e56040d07b 100644
---- a/target/riscv/insn_trans/trans_rvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -252,3 +252,93 @@ static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 0fe01d7da5..94ad56b155 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -446,6 +446,9 @@
+ #define CSR_VSPMMASK        0x2c1
+ #define CSR_VSPMBASE        0x2c2
  
-     return true;
++/* Crypto Extension */
++#define CSR_SEED           0x015
++
+ /* mstatus CSR bits */
+ #define MSTATUS_UIE         0x00000001
+ #define MSTATUS_SIE         0x00000002
+@@ -760,4 +763,10 @@ typedef enum RISCVException {
+ #define HVICTL_VALID_MASK                  \
+     (HVICTL_VTI | HVICTL_IID | HVICTL_IPRIOM | HVICTL_IPRIO)
+ 
++/* seed CSR bits */
++#define SEED_OPST                        (0b11 << 30)
++#define SEED_OPST_BIST                   (0b00 << 30)
++#define SEED_OPST_WAIT                   (0b01 << 30)
++#define SEED_OPST_ES16                   (0b10 << 30)
++#define SEED_OPST_DEAD                   (0b11 << 30)
+ #endif
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index a938760a3f..c612e98b24 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -23,6 +23,8 @@
+ #include "cpu.h"
+ #include "qemu/main-loop.h"
+ #include "exec/exec-all.h"
++#include "qemu/guest-random.h"
++#include "qapi/error.h"
+ 
+ /* CSR function table public API */
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops)
+@@ -290,6 +292,39 @@ static RISCVException epmp(CPURISCVState *env, int csrno)
  }
-+
-+static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
+ #endif
+ 
++/* Predicates */
++static RISCVException seed(CPURISCVState *env, int csrno)
 +{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
++    RISCVCPU *cpu = env_archcpu(env);
 +
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sum0r(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
++    if (!cpu->cfg.ext_zkr) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++#if !defined(CONFIG_USER_ONLY)
++    if (riscv_has_ext(env, RVS) && riscv_has_ext(env, RVH)) {
++        /* Hypervisor extension is supported */
++        if (riscv_cpu_virt_enabled(env) && (env->priv != PRV_M)) {
++            if (env->mseccfg & MSECCFG_SSEED) {
++                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++            } else {
++                return RISCV_EXCP_ILLEGAL_INST;
++            }
++        }
++    }
++    if (env->priv == PRV_M) {
++        return RISCV_EXCP_NONE;
++    } else if (env->priv == PRV_S && (env->mseccfg & MSECCFG_SSEED)) {
++        return RISCV_EXCP_NONE;
++    } else if (env->priv == PRV_U && (env->mseccfg & MSECCFG_USEED)) {
++        return RISCV_EXCP_NONE;
++    } else {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++#else
++    return RISCV_EXCP_NONE;
++#endif
 +}
 +
-+static bool trans_sha512sum1r(DisasContext *ctx, arg_sha512sum1r *a)
+ /* User Floating-Point CSRs */
+ static RISCVException read_fflags(CPURISCVState *env, int csrno,
+                                   target_ulong *val)
+@@ -2846,6 +2881,32 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+ 
+ #endif
+ 
++/* Crypto Extension */
++static RISCVException rmw_seed(CPURISCVState *env, int csrno,
++                              target_ulong *ret_value,
++                              target_ulong new_value, target_ulong write_mask)
 +{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
++    if (!write_mask) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
 +
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++    uint32_t return_status =  SEED_OPST_ES16;
 +
-+    gen_helper_sha512sum1r(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
++    *ret_value = return_status;
++    if (return_status == SEED_OPST_ES16) {
++        uint16_t random_number;
++        qemu_guest_getrandom_nofail(&random_number, sizeof(random_number));
++        *ret_value = (*ret_value) | random_number;
++    } else if (return_status == SEED_OPST_BIST) {
++        /* Do nothing */
++    } else if (return_status == SEED_OPST_WAIT) {
++        /* Do nothing */
++    } else if (return_status == SEED_OPST_DEAD) {
++        /* Do nothing */
++    }
++    return RISCV_EXCP_NONE;
 +}
 +
-+static bool trans_sha512sig0l(DisasContext *ctx, arg_sha512sig0l *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
+ /*
+  * riscv_csrrw - read and/or update control and status register
+  *
+@@ -3072,6 +3133,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_TIME]  = { "time",  ctr,   read_time  },
+     [CSR_TIMEH] = { "timeh", ctr32, read_timeh },
+ 
++    /* Crypto Extension */
++    [CSR_SEED] = { "seed", seed, NULL, NULL, rmw_seed},
 +
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig0l(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig0h(DisasContext *ctx, arg_sha512sig0h *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig0h(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig1l(DisasContext *ctx, arg_sha512sig1l *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig1l(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    gen_helper_sha512sig1h(dest, src1, src2);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
+ #if !defined(CONFIG_USER_ONLY)
+     /* Machine Timers and Counters */
+     [CSR_MCYCLE]    = { "mcycle",    any,   read_instret  },
+diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+index a9a0b363a7..83135849bb 100644
+--- a/target/riscv/pmp.h
++++ b/target/riscv/pmp.h
+@@ -37,9 +37,11 @@ typedef enum {
+ } pmp_am_t;
+ 
+ typedef enum {
+-    MSECCFG_MML  = 1 << 0,
+-    MSECCFG_MMWP = 1 << 1,
+-    MSECCFG_RLB  = 1 << 2
++    MSECCFG_MML   = 1 << 0,
++    MSECCFG_MMWP  = 1 << 1,
++    MSECCFG_RLB   = 1 << 2,
++    MSECCFG_USEED = 1 << 8,
++    MSECCFG_SSEED = 1 << 9
+ } mseccfg_field_t;
+ 
+ typedef struct {
 -- 
 2.17.1
 
