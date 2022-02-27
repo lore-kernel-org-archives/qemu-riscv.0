@@ -1,57 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOKdy-0000yo-HF
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 09:35:26 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59976)
+	id 1nOOZg-0005PV-Dj
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 13:47:16 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:37880)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKdu-0000nW-GH; Sun, 27 Feb 2022 09:35:22 -0500
-Received: from smtp21.cstnet.cn ([159.226.251.21]:36628 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOKdr-0007fu-OW; Sun, 27 Feb 2022 09:35:22 -0500
-Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACX3sZLihti7HLGAQ--.65305S12;
- Sun, 27 Feb 2022 22:27:34 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nOOZb-0005Nn-7C
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:47:11 -0500
+Received: from [2607:f8b0:4864:20::631] (port=38845
+ helo=mail-pl1-x631.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1nOOZX-00084U-HR
+ for qemu-riscv@nongnu.org; Sun, 27 Feb 2022 13:47:10 -0500
+Received: by mail-pl1-x631.google.com with SMTP id h17so3341692plc.5
+ for <qemu-riscv@nongnu.org>; Sun, 27 Feb 2022 10:47:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=3OzMR6GGv8dxv8BQ1qJzQJO/Pek8EQYtC24Q7zBAutk=;
+ b=jXYnEyJsmblRHER/DylA7A0JPiqJ0Js2ah8a7OXjezV+lOXTW+Z38qLxeRR2Rqzk+F
+ FAsRBCJr0iBayWNkMiOj2FffRCqmnKhkRZF7iEaJbUJ2ejb0Oy9B40KmPB1l+cj6nlEx
+ mNZU+pa8xttFXHEzqVdGA3IN1zzg2A5kaowOIdS5W10eyKNTsab0ZVLmSiOHcc151GfM
+ mOWRfJoa7H4vGoflF0WTT66monUK0ti6klL4405GCcv4bany26P3+5HaKmZ8IagW0bJT
+ Nk+YXNNFyQL8fD6TC2ImMv2g1EVVPKmBZFnelojGxvxLTdMzZihvfpZhgH9Q0xuzSQU1
+ Lygg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=3OzMR6GGv8dxv8BQ1qJzQJO/Pek8EQYtC24Q7zBAutk=;
+ b=0Znh7E249pK2rXe9ErNAOrNamCV7uh5a+1uwpU7EhNY2dQZnvxk5/HQ7Vxwd4EEDox
+ Y9xWPNV+HoIYcMMOcnSmnHXbjfv/+T5/I1xRl/ue9PxMCoJ+57ZvdGEJ71p1tKt2xXTp
+ Be5u5VbQ7sLxQno2112p1TZf+piknXJCbx9ak8nnIuH6c76tACfdzj9DBhlDutGCnDpn
+ kht1KDxjbC2Q+F5M1yIRAhVSOF13/LJpLF6SJUfvHLee6D7N+z3c4cAoesUuJmbi1ESK
+ xkZL7IcAjbsEYP36qY/Gf8qaQGC9Tsi0Brxw8dvFTltoekmWBspbm0tS468PSrQBUrgq
+ fT3Q==
+X-Gm-Message-State: AOAM533bnW1mGgPiVy7gZEgyTiCLTRTpzTjuETnhid154xFLoOgMly3m
+ 97maUP0UozZJN0xAUrFCi3ZQIw==
+X-Google-Smtp-Source: ABdhPJzKepUDdOYtFePU2+dDvfJ8zzryR9oFMmX4AyOTIh/6JIJ2pMFLH6I2zfNaIAf0GSmEs1zJUg==
+X-Received: by 2002:a17:90b:2513:b0:1bc:545d:8dbe with SMTP id
+ ns19-20020a17090b251300b001bc545d8dbemr13032311pjb.182.1645987626162; 
+ Sun, 27 Feb 2022 10:47:06 -0800 (PST)
+Received: from ?IPV6:2603:800c:1201:c600:23be:43d9:7006:705a?
+ (2603-800c-1201-c600-23be-43d9-7006-705a.res6.spectrum.com.
+ [2603:800c:1201:c600:23be:43d9:7006:705a])
+ by smtp.gmail.com with ESMTPSA id
+ a11-20020a056a001d0b00b004f4057fafe2sm1632186pfx.94.2022.02.27.10.47.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 27 Feb 2022 10:47:05 -0800 (PST)
+Message-ID: <e6a2401d-5ce2-c2cb-7ee2-fefe99818533@linaro.org>
+Date: Sun, 27 Feb 2022 08:47:01 -1000
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Subject: Re: [PATCH v6 02/14] target/riscv: rvk: add support for zbkb extension
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
- luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v6 10/14] target/riscv: rvk: add support for sha512 related
- instructions for RV64 in zknh extension
-Date: Sun, 27 Feb 2022 22:25:49 +0800
-Message-Id: <20220227142553.25815-11-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
+ luruibo2000@163.com
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowACX3sZLihti7HLGAQ--.65305S12
-X-Coremail-Antispam: 1UD129KBjvJXoWxGryDCw45uFW8JFWkZrWrKrg_yoWrCr4fpF
- 4rGryUKFWUJFy3Aa1ftF15ur17ZFsak3yrt393tw1vka1rJ3ykX39rtw43KF47XF9ruFyj
- kF4kCFyjkrsaq3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
- JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
- 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
- JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
- A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
- x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
- 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0I7IYx2IY6xkF
- 7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14
- v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuY
- vjfUOBTYUUUUU
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ <20220227142553.25815-3-liweiwei@iscas.ac.cn>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20220227142553.25815-3-liweiwei@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::631
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x631.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -64,151 +91,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Feb 2022 14:35:22 -0000
+X-List-Received-Date: Sun, 27 Feb 2022 18:47:13 -0000
 
- - add sha512sum0, sha512sig0, sha512sum1 and sha512sig1 instructions
+On 2/27/22 04:25, Weiwei Li wrote:
+> +static void gen_packh(TCGv ret, TCGv src1, TCGv src2)
+> +{
+> +    TCGv t = tcg_temp_new();
+> +
+> +    tcg_gen_ext8u_tl(t, src2);
+> +    tcg_gen_deposit_tl(ret, src1, t, 8, TARGET_LONG_BITS - 8);
+> +    tcg_temp_free(t);
+> +}
+> +
+> +static void gen_packw(TCGv ret, TCGv src1, TCGv src2)
+> +{
+> +    TCGv t = tcg_temp_new();
+> +
+> +    tcg_gen_ext16s_tl(t, src2);
+> +    tcg_gen_deposit_tl(ret, src1, t, 16, 48);
+> +    tcg_temp_free(t);
+> +}
 
-Co-authored-by: Zewen Ye <lustrew@foxmail.com>
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
----
- target/riscv/crypto_helper.c            | 31 ++++++++++++++
- target/riscv/helper.h                   |  5 +++
- target/riscv/insn32.decode              |  5 +++
- target/riscv/insn_trans/trans_rvk.c.inc | 56 +++++++++++++++++++++++++
- 4 files changed, 97 insertions(+)
+Missing TARGET_LONG_BITS here; would break on RV32.
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-index 6cd2a92b86..fd50a034a3 100644
---- a/target/riscv/crypto_helper.c
-+++ b/target/riscv/crypto_helper.c
-@@ -360,4 +360,35 @@ target_ulong HELPER(sha512sig1h)(target_ulong rs1, target_ulong rs2)
-     return sext_xlen(result);
- }
- #undef zext32
-+
-+#define ROR64(a, amt) ((a << (-amt & 63)) | (a >> (amt & 63)))
-+
-+target_ulong HELPER(sha512sig0)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+
-+    return ROR64(a, 1) ^ ROR64(a, 8) ^ (a >> 7);
-+}
-+
-+target_ulong HELPER(sha512sig1)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+
-+    return ROR64(a, 19) ^ ROR64(a, 61) ^ (a >> 6);
-+}
-+
-+target_ulong HELPER(sha512sum0)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+
-+    return ROR64(a, 28) ^ ROR64(a, 34) ^ ROR64(a, 39);
-+}
-+
-+target_ulong HELPER(sha512sum1)(target_ulong rs1)
-+{
-+    uint64_t a = rs1;
-+
-+    return ROR64(a, 14) ^ ROR64(a, 18) ^ ROR64(a, 41);
-+}
-+#undef ROR64
- #undef sext_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 207d298fde..393cca85b4 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1141,3 +1141,8 @@ DEF_HELPER_2(sha512sig0l, tl, tl, tl)
- DEF_HELPER_2(sha512sig0h, tl, tl, tl)
- DEF_HELPER_2(sha512sig1l, tl, tl, tl)
- DEF_HELPER_2(sha512sig1h, tl, tl, tl)
-+
-+DEF_HELPER_1(sha512sig0, tl, tl)
-+DEF_HELPER_1(sha512sig1, tl, tl)
-+DEF_HELPER_1(sha512sum0, tl, tl)
-+DEF_HELPER_1(sha512sum1, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 6064dadef8..592efda019 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -865,3 +865,8 @@ sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
- sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
- sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
- sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
-+# *** RV64 Zknh Standard Extension ***
-+sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
-+sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
-+sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
-+sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-index e56040d07b..2b3ac67afd 100644
---- a/target/riscv/insn_trans/trans_rvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -342,3 +342,59 @@ static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
- 
-     return true;
- }
-+
-+static bool trans_sha512sig0(DisasContext *ctx, arg_sha512sig0 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sig0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sig1(DisasContext *ctx, arg_sha512sig1 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sig1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sum0(DisasContext *ctx, arg_sha512sum0 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sum0(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
-+
-+static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+
-+    gen_helper_sha512sum1(dest, src1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    return true;
-+}
--- 
-2.17.1
+> 
+> +static bool trans_brev8(DisasContext *ctx, arg_brev8 *a)
+> +{
+> +    REQUIRE_ZBKB(ctx);
+> +
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +
+> +    gen_helper_brev8(dest, src1);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +
+> +    return true;
+> +}
+...
+> 
+> +static bool trans_unzip(DisasContext *ctx, arg_unzip *a)
+> +{
+> +    REQUIRE_ZBKB(ctx);
+> +    REQUIRE_32BIT(ctx);
+> +
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +
+> +    gen_helper_unzip(dest, src1);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +
+> +    return true;
+> +}
+> +
+> +static bool trans_zip(DisasContext *ctx, arg_zip *a)
+> +{
+> +    REQUIRE_ZBKB(ctx);
+> +    REQUIRE_32BIT(ctx);
+> +
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+> +
+> +    gen_helper_zip(dest, src1);
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +
+> +    return true;
+> +}
 
+Use gen_unary.
+
+r~
 
