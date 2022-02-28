@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOX8M-0002bq-I2
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 22:55:38 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:47958)
+	id 1nOXEG-0006Pm-1F
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 23:01:44 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:49126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nOX8K-0002bM-Rx; Sun, 27 Feb 2022 22:55:36 -0500
-Received: from [2607:f8b0:4864:20::d33] (port=41869
- helo=mail-io1-xd33.google.com)
+ id 1nOXEF-0006PW-8M; Sun, 27 Feb 2022 23:01:43 -0500
+Received: from [2607:f8b0:4864:20::12b] (port=34811
+ helo=mail-il1-x12b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nOX8G-0000ZH-Db; Sun, 27 Feb 2022 22:55:35 -0500
-Received: by mail-io1-xd33.google.com with SMTP id d19so13391757ioc.8;
- Sun, 27 Feb 2022 19:55:30 -0800 (PST)
+ id 1nOXEB-0001jJ-Vb; Sun, 27 Feb 2022 23:01:42 -0500
+Received: by mail-il1-x12b.google.com with SMTP id f2so9087842ilq.1;
+ Sun, 27 Feb 2022 20:01:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bZOwe2tr1Bl6PTrAca3DbRW+BKJJ8mgPjLUUDFvV5q0=;
- b=ADmraMi63VOArzij9T5pikhcct/tUiqFP3sVY+B2ZP+cddLTGe5loqbHfCwQZyUYnl
- MV/KAbvvNYZpmO21smBqADeXja3uVq8NsAEX0bEzcUjdXf91yud8GzG4xkbRaKeR3Nv1
- 07pTSywC2DBswRRJSJj6ooHEGmjB31Vw1i2gbhfm6rWFFQfDyvF6faENKk7E9WiFUhxb
- X914k9XoRu5jg3Pa3bil3jBY0FC1QxK1FogdYSn6C7G3vEO40/+iAlfKW5249S91exXL
- odjrLSCUbKN8UpTdzMw+YNZKq3wE7+DDHo3BHgltZd7KF+B1cVKHMH0srqVnR7MqdmHZ
- RHpw==
+ :cc; bh=ylvlGYGvVsV5pQ7qUeSurEd9cBNaaHYsx2WTS/WVQWE=;
+ b=BG2QCVueX9qi2eh9dx6uTVjGDXTspvVg6PlEEIYCM6uYAecj1XPg+jlosBGQpF8nyH
+ U+P3wDjQyey1pMtqEwzaJZg0KHeOvyTETKucxyEZZ4m2Blx4jTPJH4W8W0YvOYx4/S7x
+ 6B81QyPRiheyVP7UjlxzXEIgmsOBl6DnaQBTru1s5PdjKSRtgIGggrwo2eT+tqyzn6et
+ WLmwqfLvff8A1DZ7rraWGcdbxNfqVK1g3nXiLP6NTvrjPN3y+ygLazvkQsFxYzkUaQri
+ WQboeHI/xmeFvlgLdG2rz0R0PQNfd0eOsc7vb0fVM1Fo9Ri3edcMCvcgeEcGxTxVul6v
+ hEoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=bZOwe2tr1Bl6PTrAca3DbRW+BKJJ8mgPjLUUDFvV5q0=;
- b=MB9I5bgLFnVT6XC2wU+Ct2yl46LUlYRnK6rmm8Hs/3vXS521qhyWPlzCBJm2fQci7N
- HooOa8K4ZAdG3yAVDjA96UWTNg+Y7QxqcCttGyU9OOpYo7OHpZN539Ob+OAqrq2ccvjN
- PXjCLThsqyFVV+M9nMzWLxM6tEuNCjOtOXOK9yBuWjUVux5RM5+qdjpXPA+xJhMMR+k7
- 37xzFYoMonkH/TT/4cSgyxZWZOSlfXuM7xatvIrxyQO55aYa2gnX4u2NhHCahSRsq9R3
- 7kgig+cdHHHPO/kQBcWZ1u+u0wT9L6KG1vKQFXTKbUP9YAJ9De39kLv28zR0uB3oI6Kh
- C9lQ==
-X-Gm-Message-State: AOAM530tJmzX/FhCsLv2nzmsBxAt0RC8hYV19Gs0hxRo1j/3RslNYWsC
- ofqeVrub/STUiNHnTTV8H79trbW8aLTadedeKEU=
-X-Google-Smtp-Source: ABdhPJwl/2idf/K3vi7quaoSbz0O3WOi6KRiEUSgLvwoihfPXdbIBPEt9FhTWYZMq2N6HHI0LbxQ0Gr9z7YORMGn0+k=
-X-Received: by 2002:a6b:e707:0:b0:640:7c3f:e93d with SMTP id
- b7-20020a6be707000000b006407c3fe93dmr14048051ioh.114.1646020529329; Sun, 27
- Feb 2022 19:55:29 -0800 (PST)
+ bh=ylvlGYGvVsV5pQ7qUeSurEd9cBNaaHYsx2WTS/WVQWE=;
+ b=zD7HZfhvu5J41wQpLmOXNZ9CPTDiw+MX5RU6SqHbp4wbvQ4HvrNWE/u0YrA3m3HmnW
+ 1MXZPrRlqWH9gj381eRC0E2Q1pGhOweVHjA5QKNV52x15bGGgRcc/clf/Hnr7vjaP1g4
+ 1AzLZmzC4CldLaLuUH85j5JuKlGqM33+LNforvt15V0HpDTKibXhydZvYITH3+DNv6PQ
+ 4Dm2OCYJxuAvNpexS+gDQZwQxnnZ31cvdIeuglzj6VA7l4LBQSdxzVQvV3OaSQbgo34O
+ D14PLItWf3m5Fy//uC9l7EurG/bEOdqxf0w2xydTyKtLO6tuQQoGWMoWTX1o0eCN3euY
+ M6DA==
+X-Gm-Message-State: AOAM532kKYa7lr/iZNZgp/dTVb7DxzmeQWIGnFzivNb3BXsnp15l8cnd
+ x6u0jX6EJIaS+d3nz/2W+MUlizmWaz+lPJde0a0=
+X-Google-Smtp-Source: ABdhPJyPwYg0sDKGnZ31KbEkQmF84/den6KYN1y+t5Loyqtv8HExMWg6Ccs79FLkVhtjSRemC6bp+Ufyn0HSlsbqwpA=
+X-Received: by 2002:a92:c246:0:b0:2c2:740d:1c12 with SMTP id
+ k6-20020a92c246000000b002c2740d1c12mr16219765ilo.55.1646020897863; Sun, 27
+ Feb 2022 20:01:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
- <20220211043920.28981-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220211043920.28981-4-liweiwei@iscas.ac.cn>
+ <20220211043920.28981-5-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220211043920.28981-5-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Feb 2022 13:55:02 +1000
-Message-ID: <CAKmqyKO5mKdxHM-TYyb=UEhfh6W25m7Ctn1Ny6M5X5Pj7u1vRg@mail.gmail.com>
-Subject: Re: [PATCH v6 3/6] target/riscv: add support for zfinx
+Date: Mon, 28 Feb 2022 14:01:11 +1000
+Message-ID: <CAKmqyKMi_f+PmafPmyKbenHYoxx_xgqsEOGfaKRuDvEyeWxYVw@mail.gmail.com>
+Subject: Re: [PATCH v6 4/6] target/riscv: add support for zdinx
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,10 +55,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, ardxwe@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d33
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -79,936 +79,606 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2022 03:55:37 -0000
+X-List-Received-Date: Mon, 28 Feb 2022 04:01:43 -0000
 
-On Fri, Feb 11, 2022 at 2:41 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Fri, Feb 11, 2022 at 2:45 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
->   - update extension check REQUIRE_ZFINX_OR_F
->   - update single float point register read/write
->   - disable nanbox_s check
+>   -- update extension check REQUIRE_ZDINX_OR_D
+>   -- update double float point register read/write
 >
 > Co-authored-by: ardxwe <ardxwe@gmail.com>
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/fpu_helper.c               |  89 +++----
->  target/riscv/helper.h                   |   2 +-
->  target/riscv/insn_trans/trans_rvf.c.inc | 314 ++++++++++++++++--------
->  target/riscv/internals.h                |  16 +-
->  target/riscv/translate.c                |  93 ++++++-
->  5 files changed, 369 insertions(+), 145 deletions(-)
+>  target/riscv/insn_trans/trans_rvd.c.inc | 285 +++++++++++++++++-------
+>  target/riscv/translate.c                |  52 +++++
+>  2 files changed, 259 insertions(+), 78 deletions(-)
 >
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index 4a5982d594..63ca703459 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -98,10 +98,11 @@ static uint64_t do_fmadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
->  static uint64_t do_fmadd_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
->                             uint64_t rs3, int flags)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    float32 frs3 = check_nanbox_s(rs3);
-> -    return nanbox_s(float32_muladd(frs1, frs2, frs3, flags, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    float32 frs3 = check_nanbox_s(env, rs3);
-> +    return nanbox_s(env, float32_muladd(frs1, frs2, frs3, flags,
-> +                                        &env->fp_status));
->  }
+> diff --git a/target/riscv/insn_trans/trans_rvd.c.inc b/target/riscv/insn_trans/trans_rvd.c.inc
+> index 091ed3a8ad..1397c1ce1c 100644
+> --- a/target/riscv/insn_trans/trans_rvd.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvd.c.inc
+> @@ -18,6 +18,19 @@
+>   * this program.  If not, see <http://www.gnu.org/licenses/>.
+>   */
 >
->  uint64_t helper_fmadd_s(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
-> @@ -183,124 +184,124 @@ uint64_t helper_fnmadd_h(CPURISCVState *env, uint64_t frs1, uint64_t frs2,
->
->  uint64_t helper_fadd_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(float32_add(frs1, frs2, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, float32_add(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fsub_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(float32_sub(frs1, frs2, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, float32_sub(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fmul_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(float32_mul(frs1, frs2, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, float32_mul(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fdiv_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(float32_div(frs1, frs2, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, float32_div(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fmin_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(env->priv_ver < PRIV_VERSION_1_11_0 ?
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, env->priv_ver < PRIV_VERSION_1_11_0 ?
->                      float32_minnum(frs1, frs2, &env->fp_status) :
->                      float32_minimum_number(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fmax_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> -    return nanbox_s(env->priv_ver < PRIV_VERSION_1_11_0 ?
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
-> +    return nanbox_s(env, env->priv_ver < PRIV_VERSION_1_11_0 ?
->                      float32_maxnum(frs1, frs2, &env->fp_status) :
->                      float32_maximum_number(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fsqrt_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    return nanbox_s(float32_sqrt(frs1, &env->fp_status));
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    return nanbox_s(env, float32_sqrt(frs1, &env->fp_status));
->  }
->
->  target_ulong helper_fle_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
->      return float32_le(frs1, frs2, &env->fp_status);
->  }
->
->  target_ulong helper_flt_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
->      return float32_lt(frs1, frs2, &env->fp_status);
->  }
->
->  target_ulong helper_feq_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> -    float32 frs2 = check_nanbox_s(rs2);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
-> +    float32 frs2 = check_nanbox_s(env, rs2);
->      return float32_eq_quiet(frs1, frs2, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_w_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return float32_to_int32(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_wu_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return (int32_t)float32_to_uint32(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_l_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return float32_to_int64(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_lu_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return float32_to_uint64(frs1, &env->fp_status);
->  }
->
->  uint64_t helper_fcvt_s_w(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_s(int32_to_float32((int32_t)rs1, &env->fp_status));
-> +    return nanbox_s(env, int32_to_float32((int32_t)rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_s_wu(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_s(uint32_to_float32((uint32_t)rs1, &env->fp_status));
-> +    return nanbox_s(env, uint32_to_float32((uint32_t)rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_s_l(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_s(int64_to_float32(rs1, &env->fp_status));
-> +    return nanbox_s(env, int64_to_float32(rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_s_lu(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_s(uint64_to_float32(rs1, &env->fp_status));
-> +    return nanbox_s(env, uint64_to_float32(rs1, &env->fp_status));
->  }
->
-> -target_ulong helper_fclass_s(uint64_t rs1)
-> +target_ulong helper_fclass_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return fclass_s(frs1);
->  }
->
-> @@ -340,12 +341,12 @@ uint64_t helper_fmax_d(CPURISCVState *env, uint64_t frs1, uint64_t frs2)
->
->  uint64_t helper_fcvt_s_d(CPURISCVState *env, uint64_t rs1)
->  {
-> -    return nanbox_s(float64_to_float32(rs1, &env->fp_status));
-> +    return nanbox_s(env, float64_to_float32(rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_d_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return float32_to_float64(frs1, &env->fp_status);
->  }
->
-> @@ -539,14 +540,14 @@ uint64_t helper_fcvt_h_lu(CPURISCVState *env, target_ulong rs1)
->
->  uint64_t helper_fcvt_h_s(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float32 frs1 = check_nanbox_s(rs1);
-> +    float32 frs1 = check_nanbox_s(env, rs1);
->      return nanbox_h(float32_to_float16(frs1, true, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_s_h(CPURISCVState *env, uint64_t rs1)
->  {
->      float16 frs1 = check_nanbox_h(rs1);
-> -    return nanbox_s(float16_to_float32(frs1, true, &env->fp_status));
-> +    return nanbox_s(env, float16_to_float32(frs1, true, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_d(CPURISCVState *env, uint64_t rs1)
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 72cc2582f4..89195aad9d 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -38,7 +38,7 @@ DEF_HELPER_FLAGS_2(fcvt_s_w, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_s_wu, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_s_l, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_s_lu, TCG_CALL_NO_RWG, i64, env, tl)
-> -DEF_HELPER_FLAGS_1(fclass_s, TCG_CALL_NO_RWG_SE, tl, i64)
-> +DEF_HELPER_FLAGS_2(fclass_s, TCG_CALL_NO_RWG_SE, tl, env, i64)
->
->  /* Floating Point - Double Precision */
->  DEF_HELPER_FLAGS_3(fadd_d, TCG_CALL_NO_RWG, i64, env, i64, i64)
-> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
-> index 0aac87f7db..a1d3eb52ad 100644
-> --- a/target/riscv/insn_trans/trans_rvf.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
-> @@ -20,7 +20,14 @@
->
->  #define REQUIRE_FPU do {\
->      if (ctx->mstatus_fs == 0) \
-> -        return false;                       \
-> +        if (!ctx->cfg_ptr->ext_zfinx) \
-> +            return false; \
+> +#define REQUIRE_ZDINX_OR_D(ctx) do { \
+> +    if (!ctx->cfg_ptr->ext_zdinx) { \
+> +        REQUIRE_EXT(ctx, RVD); \
+> +    } \
 > +} while (0)
 > +
-> +#define REQUIRE_ZFINX_OR_F(ctx) do {\
-> +    if (!ctx->cfg_ptr->ext_zfinx) { \
-> +        REQUIRE_EXT(ctx, RVF); \
+> +#define REQUIRE_EVEN(ctx, reg) do { \
+> +    if (ctx->cfg_ptr->ext_zdinx && (get_xl(ctx) == MXL_RV32) && \
+> +        ((reg) & 0x1)) { \
+> +        return false; \
 > +    } \
->  } while (0)
->
->  static bool trans_flw(DisasContext *ctx, arg_flw *a)
-> @@ -55,10 +62,16 @@ static bool trans_fsw(DisasContext *ctx, arg_fsw *a)
->  static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
+> +} while (0)
+> +
+>  static bool trans_fld(DisasContext *ctx, arg_fld *a)
+>  {
+>      TCGv addr;
+> @@ -47,10 +60,17 @@ static bool trans_fsd(DisasContext *ctx, arg_fsd *a)
+>  static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2 | a->rs3);
 > +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+> +    TCGv_i64 src3 = get_fpr_d(ctx, a->rs3);
 > +
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmadd_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
+> -    gen_helper_fmadd_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
 > -                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fmadd_s(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_helper_fmadd_d(dest, cpu_env, src1, src2, src3);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -66,10 +79,16 @@ static bool trans_fmadd_s(DisasContext *ctx, arg_fmadd_s *a)
->  static bool trans_fmsub_s(DisasContext *ctx, arg_fmsub_s *a)
+> @@ -58,10 +78,17 @@ static bool trans_fmadd_d(DisasContext *ctx, arg_fmadd_d *a)
+>  static bool trans_fmsub_d(DisasContext *ctx, arg_fmsub_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2 | a->rs3);
 > +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+> +    TCGv_i64 src3 = get_fpr_d(ctx, a->rs3);
 > +
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmsub_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
+> -    gen_helper_fmsub_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
 > -                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fmsub_s(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_helper_fmsub_d(dest, cpu_env, src1, src2, src3);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -77,10 +96,16 @@ static bool trans_fmsub_s(DisasContext *ctx, arg_fmsub_s *a)
->  static bool trans_fnmsub_s(DisasContext *ctx, arg_fnmsub_s *a)
+> @@ -69,10 +96,17 @@ static bool trans_fmsub_d(DisasContext *ctx, arg_fmsub_d *a)
+>  static bool trans_fnmsub_d(DisasContext *ctx, arg_fnmsub_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2 | a->rs3);
 > +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+> +    TCGv_i64 src3 = get_fpr_d(ctx, a->rs3);
 > +
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fnmsub_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
+> -    gen_helper_fnmsub_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
 > -                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fnmsub_s(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_helper_fnmsub_d(dest, cpu_env, src1, src2, src3);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -88,10 +113,16 @@ static bool trans_fnmsub_s(DisasContext *ctx, arg_fnmsub_s *a)
->  static bool trans_fnmadd_s(DisasContext *ctx, arg_fnmadd_s *a)
+> @@ -80,10 +114,17 @@ static bool trans_fnmsub_d(DisasContext *ctx, arg_fnmsub_d *a)
+>  static bool trans_fnmadd_d(DisasContext *ctx, arg_fnmadd_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2 | a->rs3);
 > +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+> +    TCGv_i64 src3 = get_fpr_d(ctx, a->rs3);
 > +
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fnmadd_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
+> -    gen_helper_fnmadd_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
 > -                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fnmadd_s(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_helper_fnmadd_d(dest, cpu_env, src1, src2, src3);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -99,11 +130,15 @@ static bool trans_fnmadd_s(DisasContext *ctx, arg_fnmadd_s *a)
->  static bool trans_fadd_s(DisasContext *ctx, arg_fadd_s *a)
+> @@ -91,12 +132,16 @@ static bool trans_fnmadd_d(DisasContext *ctx, arg_fnmadd_d *a)
+>  static bool trans_fadd_d(DisasContext *ctx, arg_fadd_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fadd_s(cpu_fpr[a->rd], cpu_env,
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fadd_d(cpu_fpr[a->rd], cpu_env,
 > -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fadd_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fadd_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -111,11 +146,15 @@ static bool trans_fadd_s(DisasContext *ctx, arg_fadd_s *a)
->  static bool trans_fsub_s(DisasContext *ctx, arg_fsub_s *a)
+> @@ -104,12 +149,16 @@ static bool trans_fadd_d(DisasContext *ctx, arg_fadd_d *a)
+>  static bool trans_fsub_d(DisasContext *ctx, arg_fsub_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fsub_s(cpu_fpr[a->rd], cpu_env,
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fsub_d(cpu_fpr[a->rd], cpu_env,
 > -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fsub_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fsub_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -123,11 +162,15 @@ static bool trans_fsub_s(DisasContext *ctx, arg_fsub_s *a)
->  static bool trans_fmul_s(DisasContext *ctx, arg_fmul_s *a)
+> @@ -117,12 +166,16 @@ static bool trans_fsub_d(DisasContext *ctx, arg_fsub_d *a)
+>  static bool trans_fmul_d(DisasContext *ctx, arg_fmul_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmul_s(cpu_fpr[a->rd], cpu_env,
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fmul_d(cpu_fpr[a->rd], cpu_env,
 > -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fmul_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fmul_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -135,11 +178,15 @@ static bool trans_fmul_s(DisasContext *ctx, arg_fmul_s *a)
->  static bool trans_fdiv_s(DisasContext *ctx, arg_fdiv_s *a)
+> @@ -130,12 +183,16 @@ static bool trans_fmul_d(DisasContext *ctx, arg_fmul_d *a)
+>  static bool trans_fdiv_d(DisasContext *ctx, arg_fdiv_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fdiv_s(cpu_fpr[a->rd], cpu_env,
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fdiv_d(cpu_fpr[a->rd], cpu_env,
 > -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fdiv_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fdiv_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -147,10 +194,14 @@ static bool trans_fdiv_s(DisasContext *ctx, arg_fdiv_s *a)
->  static bool trans_fsqrt_s(DisasContext *ctx, arg_fsqrt_s *a)
+> @@ -143,23 +200,34 @@ static bool trans_fdiv_d(DisasContext *ctx, arg_fdiv_d *a)
+>  static bool trans_fsqrt_d(DisasContext *ctx, arg_fsqrt_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fsqrt_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fsqrt_s(dest, cpu_env, src1);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fsqrt_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fsqrt_d(dest, cpu_env, src1);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -158,22 +209,37 @@ static bool trans_fsqrt_s(DisasContext *ctx, arg_fsqrt_s *a)
->  static bool trans_fsgnj_s(DisasContext *ctx, arg_fsgnj_s *a)
+>
+>  static bool trans_fsgnj_d(DisasContext *ctx, arg_fsgnj_d *a)
 >  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> +    REQUIRE_FPU;
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 > +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
 >      if (a->rs1 == a->rs2) { /* FMOV */
-> -        gen_check_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_s(dest, src1);
-> +        } else {
-> +            tcg_gen_ext32s_i64(dest, src1);
-> +        }
->      } else { /* FSGNJ */
-> -        TCGv_i64 rs1 = tcg_temp_new_i64();
-> -        TCGv_i64 rs2 = tcg_temp_new_i64();
-> -
-> -        gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
-> -        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> -
-> -        /* This formulation retains the nanboxing of rs2. */
-> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 31);
-> -        tcg_temp_free_i64(rs1);
-> -        tcg_temp_free_i64(rs2);
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            TCGv_i64 rs1 = tcg_temp_new_i64();
-> +            TCGv_i64 rs2 = tcg_temp_new_i64();
-> +            gen_check_nanbox_s(rs1, src1);
-> +            gen_check_nanbox_s(rs2, src2);
-> +
-> +            /* This formulation retains the nanboxing of rs2 in normal 'F'. */
-> +            tcg_gen_deposit_i64(dest, rs2, rs1, 0, 31);
-> +
-> +            tcg_temp_free_i64(rs1);
-> +            tcg_temp_free_i64(rs2);
-> +        } else {
-> +            tcg_gen_deposit_i64(dest, src2, src1, 0, 31);
-> +            tcg_gen_ext32s_i64(dest, dest);
-> +        }
+> -        tcg_gen_mov_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
+> +        dest = get_fpr_d(ctx, a->rs1);
+>      } else {
+> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], cpu_fpr[a->rs2],
+> -                            cpu_fpr[a->rs1], 0, 63);
+> +        TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +        TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+> +        tcg_gen_deposit_i64(dest, src2, src1, 0, 63);
 >      }
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -183,16 +249,27 @@ static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
->      TCGv_i64 rs1, rs2, mask;
->
+> @@ -167,15 +235,22 @@ static bool trans_fsgnj_d(DisasContext *ctx, arg_fsgnj_d *a)
+>  static bool trans_fsgnjn_d(DisasContext *ctx, arg_fsgnjn_d *a)
+>  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
-> -    rs1 = tcg_temp_new_i64();
-> -    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
+> +
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
-> +    rs1 = tcg_temp_new_i64();
-> +    if (!ctx->cfg_ptr->ext_zfinx) {
-> +        gen_check_nanbox_s(rs1, src1);
-> +    } else {
-> +        tcg_gen_mov_i64(rs1, src1);
-> +    }
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +
 >      if (a->rs1 == a->rs2) { /* FNEG */
-> -        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1, MAKE_64BIT_MASK(31, 1));
-> +        tcg_gen_xori_i64(dest, rs1, MAKE_64BIT_MASK(31, 1));
+> -        tcg_gen_xori_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], INT64_MIN);
+> +        tcg_gen_xori_i64(dest, src1, INT64_MIN);
 >      } else {
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->          rs2 = tcg_temp_new_i64();
-> -        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_s(rs2, src2);
-> +        } else {
-> +            tcg_gen_mov_i64(rs2, src2);
-> +        }
->
->          /*
->           * Replace bit 31 in rs1 with inverse in rs2.
-> @@ -200,13 +277,17 @@ static bool trans_fsgnjn_s(DisasContext *ctx, arg_fsgnjn_s *a)
->           */
->          mask = tcg_constant_i64(~MAKE_64BIT_MASK(31, 1));
->          tcg_gen_nor_i64(rs2, rs2, mask);
-> -        tcg_gen_and_i64(rs1, mask, rs1);
-> -        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
-> +        tcg_gen_and_i64(dest, mask, rs1);
-> +        tcg_gen_or_i64(dest, dest, rs2);
->
->          tcg_temp_free_i64(rs2);
+> +        TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>          TCGv_i64 t0 = tcg_temp_new_i64();
+> -        tcg_gen_not_i64(t0, cpu_fpr[a->rs2]);
+> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], t0, cpu_fpr[a->rs1], 0, 63);
+> +        tcg_gen_not_i64(t0, src2);
+> +        tcg_gen_deposit_i64(dest, t0, src1, 0, 63);
+>          tcg_temp_free_i64(t0);
 >      }
-> +    /* signed-extended intead of nanboxing for result if enable zfinx */
-> +    if (ctx->cfg_ptr->ext_zfinx) {
-> +        tcg_gen_ext32s_i64(dest, dest);
-> +    }
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      tcg_temp_free_i64(rs1);
-> -
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -216,28 +297,45 @@ static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)
->      TCGv_i64 rs1, rs2;
->
+> @@ -183,15 +258,22 @@ static bool trans_fsgnjn_d(DisasContext *ctx, arg_fsgnjn_d *a)
+>  static bool trans_fsgnjx_d(DisasContext *ctx, arg_fsgnjx_d *a)
+>  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->      rs1 = tcg_temp_new_i64();
-> -    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
 > +
-> +    if (!ctx->cfg_ptr->ext_zfinx) {
-> +        gen_check_nanbox_s(rs1, src1);
-> +    } else {
-> +        tcg_gen_mov_i64(rs1, src1);
-> +    }
->
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +
 >      if (a->rs1 == a->rs2) { /* FABS */
-> -        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1, ~MAKE_64BIT_MASK(31, 1));
-> +        tcg_gen_andi_i64(dest, rs1, ~MAKE_64BIT_MASK(31, 1));
+> -        tcg_gen_andi_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], ~INT64_MIN);
+> +        tcg_gen_andi_i64(dest, src1, ~INT64_MIN);
 >      } else {
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->          rs2 = tcg_temp_new_i64();
-> -        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
-> +
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_s(rs2, src2);
-> +        } else {
-> +            tcg_gen_mov_i64(rs2, src2);
-> +        }
->
->          /*
->           * Xor bit 31 in rs1 with that in rs2.
->           * This formulation retains the nanboxing of rs1.
->           */
-> -        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(31, 1));
-> -        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
-> +        tcg_gen_andi_i64(dest, rs2, MAKE_64BIT_MASK(31, 1));
-> +        tcg_gen_xor_i64(dest, rs1, dest);
->
->          tcg_temp_free_i64(rs2);
+> +        TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>          TCGv_i64 t0 = tcg_temp_new_i64();
+> -        tcg_gen_andi_i64(t0, cpu_fpr[a->rs2], INT64_MIN);
+> -        tcg_gen_xor_i64(cpu_fpr[a->rd], cpu_fpr[a->rs1], t0);
+> +        tcg_gen_andi_i64(t0, src2, INT64_MIN);
+> +        tcg_gen_xor_i64(dest, src1, t0);
+>          tcg_temp_free_i64(t0);
 >      }
-> +    /* signed-extended intead of nanboxing for result if enable zfinx */
-> +    if (ctx->cfg_ptr->ext_zfinx) {
-> +        tcg_gen_ext32s_i64(dest, dest);
-> +    }
->      tcg_temp_free_i64(rs1);
-> -
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>      mark_fs_dirty(ctx);
+>      return true;
+>  }
+> @@ -199,11 +281,15 @@ static bool trans_fsgnjx_d(DisasContext *ctx, arg_fsgnjx_d *a)
+>  static bool trans_fmin_d(DisasContext *ctx, arg_fmin_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
+>
+> -    gen_helper_fmin_d(cpu_fpr[a->rd], cpu_env,
+> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_helper_fmin_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>      mark_fs_dirty(ctx);
+>      return true;
+>  }
+> @@ -211,11 +297,15 @@ static bool trans_fmin_d(DisasContext *ctx, arg_fmin_d *a)
+>  static bool trans_fmax_d(DisasContext *ctx, arg_fmax_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd | a->rs1 | a->rs2);
+>
+> -    gen_helper_fmax_d(cpu_fpr[a->rd], cpu_env,
+> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> +    gen_helper_fmax_d(dest, cpu_env, src1, src2);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>      mark_fs_dirty(ctx);
+>      return true;
+>  }
+> @@ -223,11 +313,15 @@ static bool trans_fmax_d(DisasContext *ctx, arg_fmax_d *a)
+>  static bool trans_fcvt_s_d(DisasContext *ctx, arg_fcvt_s_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
+>
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_s_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+>
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fcvt_s_d(dest, cpu_env, src1);
 > +    gen_set_fpr_hs(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -245,10 +343,14 @@ static bool trans_fsgnjx_s(DisasContext *ctx, arg_fsgnjx_s *a)
->  static bool trans_fmin_s(DisasContext *ctx, arg_fmin_s *a)
+> @@ -235,11 +329,15 @@ static bool trans_fcvt_s_d(DisasContext *ctx, arg_fcvt_s_d *a)
+>  static bool trans_fcvt_d_s(DisasContext *ctx, arg_fcvt_d_s *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd);
+>
+> -    gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_d_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
 > +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
 >
-> -    gen_helper_fmin_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                      cpu_fpr[a->rs2]);
-> +    gen_helper_fmin_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> +    gen_set_rm(ctx, a->rm);
+> +    gen_helper_fcvt_d_s(dest, cpu_env, src1);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
 >      mark_fs_dirty(ctx);
 >      return true;
 >  }
-> @@ -256,10 +358,14 @@ static bool trans_fmin_s(DisasContext *ctx, arg_fmin_s *a)
->  static bool trans_fmax_s(DisasContext *ctx, arg_fmax_s *a)
+> @@ -247,11 +345,14 @@ static bool trans_fcvt_d_s(DisasContext *ctx, arg_fcvt_d_s *a)
+>  static bool trans_feq_d(DisasContext *ctx, arg_feq_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_fmax_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                      cpu_fpr[a->rs2]);
-> +    gen_helper_fmax_s(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -267,12 +373,13 @@ static bool trans_fmax_s(DisasContext *ctx, arg_fmax_s *a)
->  static bool trans_fcvt_w_s(DisasContext *ctx, arg_fcvt_w_s *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1 | a->rs2);
 >
 >      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> -    gen_helper_feq_d(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+> +    gen_helper_feq_d(dest, cpu_env, src1, src2);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
+>  }
+> @@ -259,11 +360,14 @@ static bool trans_feq_d(DisasContext *ctx, arg_feq_d *a)
+>  static bool trans_flt_d(DisasContext *ctx, arg_flt_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1 | a->rs2);
+>
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> -    gen_helper_flt_d(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+> +    gen_helper_flt_d(dest, cpu_env, src1, src2);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
+>  }
+> @@ -271,11 +375,14 @@ static bool trans_flt_d(DisasContext *ctx, arg_flt_d *a)
+>  static bool trans_fle_d(DisasContext *ctx, arg_fle_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1 | a->rs2);
+>
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+> +    TCGv_i64 src2 = get_fpr_d(ctx, a->rs2);
+>
+> -    gen_helper_fle_d(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
+> +    gen_helper_fle_d(dest, cpu_env, src1, src2);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
+>  }
+> @@ -283,11 +390,13 @@ static bool trans_fle_d(DisasContext *ctx, arg_fle_d *a)
+>  static bool trans_fclass_d(DisasContext *ctx, arg_fclass_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
+>
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+>
+> -    gen_helper_fclass_d(dest, cpu_fpr[a->rs1]);
+> +    gen_helper_fclass_d(dest, src1);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
+>  }
+> @@ -295,12 +404,14 @@ static bool trans_fclass_d(DisasContext *ctx, arg_fclass_d *a)
+>  static bool trans_fcvt_w_d(DisasContext *ctx, arg_fcvt_w_d *a)
+>  {
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
+>
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
 >
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_w_s(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_w_s(dest, cpu_env, src1);
+> -    gen_helper_fcvt_w_d(dest, cpu_env, cpu_fpr[a->rs1]);
+> +    gen_helper_fcvt_w_d(dest, cpu_env, src1);
 >      gen_set_gpr(ctx, a->rd, dest);
 >      return true;
 >  }
-> @@ -280,12 +387,13 @@ static bool trans_fcvt_w_s(DisasContext *ctx, arg_fcvt_w_s *a)
->  static bool trans_fcvt_wu_s(DisasContext *ctx, arg_fcvt_wu_s *a)
+> @@ -308,12 +419,14 @@ static bool trans_fcvt_w_d(DisasContext *ctx, arg_fcvt_w_d *a)
+>  static bool trans_fcvt_wu_d(DisasContext *ctx, arg_fcvt_wu_d *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
 >
 >      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
 >
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_wu_s(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_wu_s(dest, cpu_env, src1);
+> -    gen_helper_fcvt_wu_d(dest, cpu_env, cpu_fpr[a->rs1]);
+> +    gen_helper_fcvt_wu_d(dest, cpu_env, src1);
 >      gen_set_gpr(ctx, a->rd, dest);
 >      return true;
 >  }
-> @@ -294,14 +402,14 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
->  {
->      /* NOTE: This was FMV.X.S in an earlier version of the ISA spec! */
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> -
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->  #if defined(TARGET_RISCV64)
-> -    tcg_gen_ext32s_tl(dest, cpu_fpr[a->rs1]);
-> +    tcg_gen_ext32s_tl(dest, src1);
->  #else
-> -    tcg_gen_extrl_i64_i32(dest, cpu_fpr[a->rs1]);
-> +    tcg_gen_extrl_i64_i32(dest, src1);
->  #endif
->
->      gen_set_gpr(ctx, a->rd, dest);
-> @@ -311,11 +419,13 @@ static bool trans_fmv_x_w(DisasContext *ctx, arg_fmv_x_w *a)
->  static bool trans_feq_s(DisasContext *ctx, arg_feq_s *a)
+> @@ -321,12 +434,15 @@ static bool trans_fcvt_wu_d(DisasContext *ctx, arg_fcvt_wu_d *a)
+>  static bool trans_fcvt_d_w(DisasContext *ctx, arg_fcvt_d_w *a)
 >  {
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_feq_s(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_feq_s(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -323,11 +433,13 @@ static bool trans_feq_s(DisasContext *ctx, arg_feq_s *a)
->  static bool trans_flt_s(DisasContext *ctx, arg_flt_s *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_flt_s(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_flt_s(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -335,11 +447,13 @@ static bool trans_flt_s(DisasContext *ctx, arg_flt_s *a)
->  static bool trans_fle_s(DisasContext *ctx, arg_fle_s *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_fle_s(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fle_s(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -347,11 +461,12 @@ static bool trans_fle_s(DisasContext *ctx, arg_fle_s *a)
->  static bool trans_fclass_s(DisasContext *ctx, arg_fclass_s *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
-> -    gen_helper_fclass_s(dest, cpu_fpr[a->rs1]);
-> +    gen_helper_fclass_s(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -359,13 +474,14 @@ static bool trans_fclass_s(DisasContext *ctx, arg_fclass_s *a)
->  static bool trans_fcvt_s_w(DisasContext *ctx, arg_fcvt_s_w *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv src = get_gpr(ctx, a->rs1, EXT_SIGN);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_s_w(cpu_fpr[a->rd], cpu_env, src);
-> -
-> +    gen_helper_fcvt_s_w(dest, cpu_env, src);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -373,13 +489,14 @@ static bool trans_fcvt_s_w(DisasContext *ctx, arg_fcvt_s_w *a)
->  static bool trans_fcvt_s_wu(DisasContext *ctx, arg_fcvt_s_wu *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_s_wu(cpu_fpr[a->rd], cpu_env, src);
-> -
-> +    gen_helper_fcvt_s_wu(dest, cpu_env, src);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -388,13 +505,14 @@ static bool trans_fmv_w_x(DisasContext *ctx, arg_fmv_w_x *a)
->  {
->      /* NOTE: This was FMV.S.X in an earlier version of the ISA spec! */
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
->
-> -    tcg_gen_extu_tl_i64(cpu_fpr[a->rd], src);
-> -    gen_nanbox_s(cpu_fpr[a->rd], cpu_fpr[a->rd]);
-> -
-> +    tcg_gen_extu_tl_i64(dest, src);
-> +    gen_nanbox_s(dest, dest);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -403,12 +521,13 @@ static bool trans_fcvt_l_s(DisasContext *ctx, arg_fcvt_l_s *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_l_s(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_l_s(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -417,12 +536,13 @@ static bool trans_fcvt_lu_s(DisasContext *ctx, arg_fcvt_lu_s *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_lu_s(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_lu_s(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -431,13 +551,14 @@ static bool trans_fcvt_s_l(DisasContext *ctx, arg_fcvt_s_l *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd);
 >
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
 >      TCGv src = get_gpr(ctx, a->rs1, EXT_SIGN);
 >
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_s_l(cpu_fpr[a->rd], cpu_env, src);
-> -
-> +    gen_helper_fcvt_s_l(dest, cpu_env, src);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> -    gen_helper_fcvt_d_w(cpu_fpr[a->rd], cpu_env, src);
+> +    gen_helper_fcvt_d_w(dest, cpu_env, src);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>
 >      mark_fs_dirty(ctx);
 >      return true;
->  }
-> @@ -446,13 +567,14 @@ static bool trans_fcvt_s_lu(DisasContext *ctx, arg_fcvt_s_lu *a)
+> @@ -335,12 +451,15 @@ static bool trans_fcvt_d_w(DisasContext *ctx, arg_fcvt_d_w *a)
+>  static bool trans_fcvt_d_wu(DisasContext *ctx, arg_fcvt_d_wu *a)
 >  {
->      REQUIRE_64BIT(ctx);
 >      REQUIRE_FPU;
-> -    REQUIRE_EXT(ctx, RVF);
-> +    REQUIRE_ZFINX_OR_F(ctx);
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd);
 >
 > +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
 >      TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
 >
 >      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_s_lu(cpu_fpr[a->rd], cpu_env, src);
-> -
-> +    gen_helper_fcvt_s_lu(dest, cpu_env, src);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
+> -    gen_helper_fcvt_d_wu(cpu_fpr[a->rd], cpu_env, src);
+> +    gen_helper_fcvt_d_wu(dest, cpu_env, src);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>
 >      mark_fs_dirty(ctx);
 >      return true;
->  }
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index 065e8162a2..6237bb3115 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -46,13 +46,23 @@ enum {
->      RISCV_FRM_ROD = 8,  /* Round to Odd */
->  };
->
-> -static inline uint64_t nanbox_s(float32 f)
-> +static inline uint64_t nanbox_s(CPURISCVState *env, float32 f)
+> @@ -350,12 +469,14 @@ static bool trans_fcvt_l_d(DisasContext *ctx, arg_fcvt_l_d *a)
 >  {
-> -    return f | MAKE_64BIT_MASK(32, 32);
-> +    /* the value is sign-extended instead of NaN-boxing for zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        return (int32_t)f;
-> +    } else {
-> +        return f | MAKE_64BIT_MASK(32, 32);
-> +    }
+>      REQUIRE_64BIT(ctx);
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
+>
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+>
+>      gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_l_d(dest, cpu_env, cpu_fpr[a->rs1]);
+> +    gen_helper_fcvt_l_d(dest, cpu_env, src1);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
 >  }
->
-> -static inline float32 check_nanbox_s(uint64_t f)
-> +static inline float32 check_nanbox_s(CPURISCVState *env, uint64_t f)
+> @@ -364,12 +485,14 @@ static bool trans_fcvt_lu_d(DisasContext *ctx, arg_fcvt_lu_d *a)
 >  {
-> +    /* Disable NaN-boxing check when enable zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        return (uint32_t)f;
-> +    }
-> +
->      uint64_t mask = MAKE_64BIT_MASK(32, 32);
+>      REQUIRE_64BIT(ctx);
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rs1);
 >
->      if (likely((f & mask) == mask)) {
+>      TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
+>
+>      gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_lu_d(dest, cpu_env, cpu_fpr[a->rs1]);
+> +    gen_helper_fcvt_lu_d(dest, cpu_env, src1);
+>      gen_set_gpr(ctx, a->rd, dest);
+>      return true;
+>  }
+> @@ -392,12 +515,15 @@ static bool trans_fcvt_d_l(DisasContext *ctx, arg_fcvt_d_l *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd);
+>
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+>      TCGv src = get_gpr(ctx, a->rs1, EXT_SIGN);
+>
+>      gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_d_l(cpu_fpr[a->rd], cpu_env, src);
+> +    gen_helper_fcvt_d_l(dest, cpu_env, src);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>
+>      mark_fs_dirty(ctx);
+>      return true;
+> @@ -407,12 +533,15 @@ static bool trans_fcvt_d_lu(DisasContext *ctx, arg_fcvt_d_lu *a)
+>  {
+>      REQUIRE_64BIT(ctx);
+>      REQUIRE_FPU;
+> -    REQUIRE_EXT(ctx, RVD);
+> +    REQUIRE_ZDINX_OR_D(ctx);
+> +    REQUIRE_EVEN(ctx, a->rd);
+>
+> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
+>      TCGv src = get_gpr(ctx, a->rs1, EXT_ZERO);
+>
+>      gen_set_rm(ctx, a->rm);
+> -    gen_helper_fcvt_d_lu(cpu_fpr[a->rd], cpu_env, src);
+> +    gen_helper_fcvt_d_lu(dest, cpu_env, src);
+> +    gen_set_fpr_d(ctx, a->rd, dest);
+>
+>      mark_fs_dirty(ctx);
+>      return true;
 > diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index c7232de326..10cf37be41 100644
+> index 10cf37be41..fac998a6b5 100644
 > --- a/target/riscv/translate.c
 > +++ b/target/riscv/translate.c
-> @@ -101,6 +101,9 @@ typedef struct DisasContext {
->      TCGv zero;
->      /* Space for 3 operands plus 1 extra for address computation. */
->      TCGv temp[4];
-> +    /* Space for 4 operands(1 dest and <=3 src) for float point computation */
-> +    TCGv_i64 ftemp[4];
-> +    uint8_t nftemp;
->      /* PointerMasking extension */
->      bool pm_mask_enabled;
->      bool pm_base_enabled;
-> @@ -380,6 +383,86 @@ static void gen_set_gpr128(DisasContext *ctx, int reg_num, TCGv rl, TCGv rh)
+> @@ -416,6 +416,31 @@ static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
 >      }
 >  }
 >
-> +static TCGv_i64 ftemp_new(DisasContext *ctx)
-> +{
-> +    assert(ctx->nftemp < ARRAY_SIZE(ctx->ftemp));
-> +    return ctx->ftemp[ctx->nftemp++] = tcg_temp_new_i64();
-> +}
-> +
-> +static TCGv_i64 get_fpr_hs(DisasContext *ctx, int reg_num)
+> +static TCGv_i64 get_fpr_d(DisasContext *ctx, int reg_num)
 > +{
 > +    if (!ctx->cfg_ptr->ext_zfinx) {
 > +        return cpu_fpr[reg_num];
@@ -1019,35 +689,11 @@ Alistair
 > +    }
 > +    switch (get_xl(ctx)) {
 > +    case MXL_RV32:
-> +#ifdef TARGET_RISCV32
 > +    {
 > +        TCGv_i64 t = ftemp_new(ctx);
-> +        tcg_gen_ext_i32_i64(t, cpu_gpr[reg_num]);
+> +        tcg_gen_concat_tl_i64(t, cpu_gpr[reg_num], cpu_gpr[reg_num + 1]);
 > +        return t;
 > +    }
-> +#else
-> +    /* fall through */
-> +    case MXL_RV64:
-> +        return cpu_gpr[reg_num];
-> +#endif
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +}
-> +
-> +static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
-> +{
-> +    if (!ctx->cfg_ptr->ext_zfinx) {
-> +        return cpu_fpr[reg_num];
-> +    }
-> +
-> +    if (reg_num == 0) {
-> +        return ftemp_new(ctx);
-> +    }
-> +
-> +    switch (get_xl(ctx)) {
-> +    case MXL_RV32:
-> +        return ftemp_new(ctx);
 > +#ifdef TARGET_RISCV64
 > +    case MXL_RV64:
 > +        return cpu_gpr[reg_num];
@@ -1057,21 +703,30 @@ Alistair
 > +    }
 > +}
 > +
-> +/* assume t is nanboxing (for normal) or sign-extended (for zfinx) */
-> +static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
+>  static TCGv_i64 dest_fpr(DisasContext *ctx, int reg_num)
+>  {
+>      if (!ctx->cfg_ptr->ext_zfinx) {
+> @@ -463,6 +488,33 @@ static void gen_set_fpr_hs(DisasContext *ctx, int reg_num, TCGv_i64 t)
+>      }
+>  }
+>
+> +static void gen_set_fpr_d(DisasContext *ctx, int reg_num, TCGv_i64 t)
 > +{
 > +    if (!ctx->cfg_ptr->ext_zfinx) {
 > +        tcg_gen_mov_i64(cpu_fpr[reg_num], t);
 > +        return;
 > +    }
+> +
 > +    if (reg_num != 0) {
 > +        switch (get_xl(ctx)) {
 > +        case MXL_RV32:
 > +#ifdef TARGET_RISCV32
-> +            tcg_gen_extrl_i64_i32(cpu_gpr[reg_num], t);
+> +            tcg_gen_extr_i64_i32(cpu_gpr[reg_num], cpu_gpr[reg_num + 1], t);
 > +            break;
 > +#else
-> +        /* fall through */
+> +            tcg_gen_ext32s_i64(cpu_gpr[reg_num], t);
+> +            tcg_gen_sari_i64(cpu_gpr[reg_num + 1], t, 32);
+> +            break;
 > +        case MXL_RV64:
 > +            tcg_gen_mov_i64(cpu_gpr[reg_num], t);
 > +            break;
@@ -1085,39 +740,6 @@ Alistair
 >  static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
 >  {
 >      target_ulong next_pc;
-> @@ -955,6 +1038,8 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->      ctx->cs = cs;
->      ctx->ntemp = 0;
->      memset(ctx->temp, 0, sizeof(ctx->temp));
-> +    ctx->nftemp = 0;
-> +    memset(ctx->ftemp, 0, sizeof(ctx->ftemp));
->      ctx->pm_mask_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_MASK_ENABLED);
->      ctx->pm_base_enabled = FIELD_EX32(tb_flags, TB_FLAGS, PM_BASE_ENABLED);
->      ctx->zero = tcg_constant_tl(0);
-> @@ -976,16 +1061,22 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
->      DisasContext *ctx = container_of(dcbase, DisasContext, base);
->      CPURISCVState *env = cpu->env_ptr;
->      uint16_t opcode16 = translator_lduw(env, &ctx->base, ctx->base.pc_next);
-> +    int i;
->
->      ctx->ol = ctx->xl;
->      decode_opc(env, ctx, opcode16);
->      ctx->base.pc_next = ctx->pc_succ_insn;
->
-> -    for (int i = ctx->ntemp - 1; i >= 0; --i) {
-> +    for (i = ctx->ntemp - 1; i >= 0; --i) {
->          tcg_temp_free(ctx->temp[i]);
->          ctx->temp[i] = NULL;
->      }
->      ctx->ntemp = 0;
-> +    for (i = ctx->nftemp - 1; i >= 0; --i) {
-> +        tcg_temp_free_i64(ctx->ftemp[i]);
-> +        ctx->ftemp[i] = NULL;
-> +    }
-> +    ctx->nftemp = 0;
->
->      if (ctx->base.is_jmp == DISAS_NEXT) {
->          target_ulong page_start;
 > --
 > 2.17.1
 >
