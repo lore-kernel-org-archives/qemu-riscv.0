@@ -1,54 +1,54 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOWSB-0002GL-FL
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 22:12:03 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41390)
+	id 1nOWXx-0004Na-KC
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 22:18:01 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42248)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOWS9-0002G3-QL; Sun, 27 Feb 2022 22:12:01 -0500
-Received: from smtp84.cstnet.cn ([159.226.251.84]:36748 helo=cstnet.cn)
+ id 1nOWXv-0004M9-Vp; Sun, 27 Feb 2022 22:18:00 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84]:38956 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nOWS7-0008Kf-H2; Sun, 27 Feb 2022 22:12:01 -0500
+ id 1nOWXt-0000iY-UK; Sun, 27 Feb 2022 22:17:59 -0500
 Received: from [192.168.0.104] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAD3_kJ6PRxiucm5AQ--.33748S2;
- Mon, 28 Feb 2022 11:11:55 +0800 (CST)
-Subject: Re: [PATCH v6 08/14] target/riscv: rvk: add support for sha256
- related instructions in zknh extension
+ by APP-05 (Coremail) with SMTP id zQCowAAX+PDdPhxiFuK5AQ--.25345S2;
+ Mon, 28 Feb 2022 11:17:51 +0800 (CST)
+Subject: Re: [PATCH v6 09/14] target/riscv: rvk: add support for sha512
+ related instructions for RV32 in zknh extension
 To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com
 References: <20220227142553.25815-1-liweiwei@iscas.ac.cn>
- <20220227142553.25815-9-liweiwei@iscas.ac.cn>
- <91b397ee-7b68-653c-8b73-4b0a91b057e0@linaro.org>
+ <20220227142553.25815-10-liweiwei@iscas.ac.cn>
+ <4afce030-a071-c653-9ad4-78d2f2ec1eb5@linaro.org>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <c59c7852-46d0-9750-0b31-c024f8393015@iscas.ac.cn>
-Date: Mon, 28 Feb 2022 11:11:54 +0800
+Message-ID: <a6d45038-616f-6d91-a624-b6452ce0bab9@iscas.ac.cn>
+Date: Mon, 28 Feb 2022 11:17:49 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <91b397ee-7b68-653c-8b73-4b0a91b057e0@linaro.org>
+In-Reply-To: <4afce030-a071-c653-9ad4-78d2f2ec1eb5@linaro.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: zQCowAD3_kJ6PRxiucm5AQ--.33748S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxCr13AFWfuFy5Gr1UXF47urg_yoW5XrWfpF
- 1kGrWrJrWUXrZ3t3W3Ka1UXr9xAr1xCw1jyws7ta43J3yUArsa9r17ZwsIgr1UAF4fur1Y
- kFyq9r1a9F4DXFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBq14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: zQCowAAX+PDdPhxiFuK5AQ--.25345S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxZFy7Jw4fXry3Ww48tF18Xwb_yoW5Ww43pF
+ n5GrWrtFWUJFZ3Aa1fJw4UXry3AF48tw45JrZ7t3WUAay7JrWFqrW7Xr1agr1UJF4xKF1j
+ kr1Dur17ur48XrDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxV
- WxJr0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
- Y2ka0xkIwI1lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82
- IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
- 0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
- IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
- 0xvE42xK8VAvwI8IcIk0rVW3JVWrJr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z2
- 80aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjr-BtUUUUU==
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+ 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20x
+ vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
+ 3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
+ AIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAI
+ cVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4
+ A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUx73kUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
@@ -71,98 +71,88 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2022 03:12:02 -0000
+X-List-Received-Date: Mon, 28 Feb 2022 03:18:00 -0000
 
 
-在 2022/2/28 上午3:21, Richard Henderson 写道:
+在 2022/2/28 上午3:36, Richard Henderson 写道:
 > On 2/27/22 04:25, Weiwei Li wrote:
->>   - add sha256sig0, sha256sig1, sha256sum0 and sha256sum1 instructions
+>>   - add sha512sum0r, sha512sig0l, sha512sum1r, sha512sig1l, 
+>> sha512sig0h and sha512sig1h instructions
 >>
 >> Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 >> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 >> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 >> ---
->>   target/riscv/crypto_helper.c            | 31 +++++++++++++
->>   target/riscv/helper.h                   |  5 +++
->>   target/riscv/insn32.decode              |  5 +++
->>   target/riscv/insn_trans/trans_rvk.c.inc | 58 +++++++++++++++++++++++++
->>   4 files changed, 99 insertions(+)
+>>   target/riscv/crypto_helper.c            | 57 ++++++++++++++++
+>>   target/riscv/helper.h                   |  7 ++
+>>   target/riscv/insn32.decode              |  6 ++
+>>   target/riscv/insn_trans/trans_rvk.c.inc | 90 +++++++++++++++++++++++++
+>>   4 files changed, 160 insertions(+)
 >>
 >> diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
->> index 9e56668627..f5ffc262f2 100644
+>> index f5ffc262f2..6cd2a92b86 100644
 >> --- a/target/riscv/crypto_helper.c
 >> +++ b/target/riscv/crypto_helper.c
->> @@ -272,4 +272,35 @@ target_ulong HELPER(aes64im)(target_ulong rs1)
->>         return result;
+>> @@ -303,4 +303,61 @@ target_ulong HELPER(sha256sum1)(target_ulong rs1)
+>>       return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
 >>   }
+>>   #undef ROR32
 >> +
->> +#define ROR32(a, amt) ((a << (-amt & 31)) | (a >> (amt & 31)))
->
-> We already have a ror32 function.  However...
-OK. I'll change to use it.
->
->> +target_ulong HELPER(sha256sig0)(target_ulong rs1)
+>> +#define zext32(x) ((uint64_t)(uint32_t)(x))
+>> +
+>> +target_ulong HELPER(sha512sum0r)(target_ulong rs1, target_ulong rs2)
 >> +{
->> +    uint32_t a = rs1;
+>> +    uint64_t result = (zext32(rs1) << 25) ^ (zext32(rs1) << 30) ^
+>> +                      (zext32(rs1) >> 28) ^ (zext32(rs2) >> 7) ^
+>> +                      (zext32(rs2) >> 2) ^ (zext32(rs2) << 4);
 >> +
->> +    return sext_xlen(ROR32(a, 7) ^ ROR32(a, 18) ^ (a >> 3));
->> +}
->> +
->> +target_ulong HELPER(sha256sig1)(target_ulong rs1)
->> +{
->> +    uint32_t a = rs1;
->> +
->> +    return sext_xlen(ROR32(a, 17) ^ ROR32(a, 19) ^ (a >> 10));
->> +}
->> +
->> +target_ulong HELPER(sha256sum0)(target_ulong rs1)
->> +{
->> +    uint32_t a = rs1;
->> +
->> +    return sext_xlen(ROR32(a, 2) ^ ROR32(a, 13) ^ ROR32(a, 22));
->> +}
->> +
->> +target_ulong HELPER(sha256sum1)(target_ulong rs1)
->> +{
->> +    uint32_t a = rs1;
->> +
->> +    return sext_xlen(ROR32(a, 6) ^ ROR32(a, 11) ^ ROR32(a, 25));
+>> +    return sext_xlen(result);
 >> +}
 >
-> All of these functions are quite small, and could easily be generated 
-> inline.
+> I'm a little confused as to why you're extending back to uint64_t?  
+> Especially since the top 32 are discarded.
 >
->     tcg_gen_trunc_tl_i32(a, reg);
->     tcg_gen_rotri_i32(t1, a, 7);
->     tcg_gen_rotri_i32(t2, a, 18);
->     tcg_gen_xor_i32(t1, t1, t2);
->     tcg_gen_shri_i32(t2, a, 3);
->     tcg_gen_xor_i32(t1, t1, t2);
->     tcg_gen_ext_i32_tl(reg, t1);
-OK. I'll change to this.
+> Also, I think sext_xlen is a bad name -- sext32_xlen would be better.  
+> It confused me here for a bit, and I went off on a bit of an 
+> irrelevant tangent.
 >
->> +static bool trans_sha256sig0(DisasContext *ctx, arg_sha256sig0 *a)
+> These could also be implemented inline.  I count 12 instructions. The 
+> overhead of a function call is about 7.
+Yeah. It's not necessary to extend to uint64_t.  I'll try to change them 
+to inline later.
+>
+>> +DEF_HELPER_2(sha512sum0r, tl, tl, tl)
+>> +DEF_HELPER_2(sha512sum1r, tl, tl, tl)
+>> +DEF_HELPER_2(sha512sig0l, tl, tl, tl)
+>> +DEF_HELPER_2(sha512sig0h, tl, tl, tl)
+>> +DEF_HELPER_2(sha512sig1l, tl, tl, tl)
+>> +DEF_HELPER_2(sha512sig1h, tl, tl, tl)
+>
+> DEF_HELPER_FLAGS.
+>
+>> +static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
 >> +{
+>> +    REQUIRE_32BIT(ctx);
 >> +    REQUIRE_ZKNH(ctx);
 >> +
 >> +    TCGv dest = dest_gpr(ctx, a->rd);
 >> +    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
+>> +    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
 >> +
->> +    gen_helper_sha256sig0(dest, src1);
+>> +    gen_helper_sha512sum0r(dest, src1, src2);
 >> +    gen_set_gpr(ctx, a->rd, dest);
 >> +
 >> +    return true;
 >> +}
 >
-> gen_unary, etc.
-
-OK. I'll fix it.
+> gen_arith.
+>
+OK. I'll fix them.
 
 Regards,
 
 Weiwei Li
 
->
 >
 > r~
 
