@@ -1,64 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nObNw-0008L0-11
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 03:28:00 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:35606)
+	id 1nObRg-0003BD-6c
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 03:31:52 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nObNr-0008Ha-FP; Mon, 28 Feb 2022 03:27:55 -0500
-Received: from [2607:f8b0:4864:20::12a] (port=45646
- helo=mail-il1-x12a.google.com)
+ id 1nObRc-00038N-Vi; Mon, 28 Feb 2022 03:31:50 -0500
+Received: from [2607:f8b0:4864:20::12b] (port=36721
+ helo=mail-il1-x12b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nObNp-0001Zv-MM; Mon, 28 Feb 2022 03:27:55 -0500
-Received: by mail-il1-x12a.google.com with SMTP id x14so4276514ill.12;
- Mon, 28 Feb 2022 00:27:53 -0800 (PST)
+ id 1nObRb-0002lr-23; Mon, 28 Feb 2022 03:31:48 -0500
+Received: by mail-il1-x12b.google.com with SMTP id e11so9426377ils.3;
+ Mon, 28 Feb 2022 00:31:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cAIxYvnV6osTfOFYhB385fapGTbc3BLSgWF8ELo1vU4=;
- b=QLDtmxThOrxefFnkvDMFG4gNC+mEb+Y3a1uzrqp9Teo1ir3MLMkuAvm8iLAuy4ZJLC
- ZXv5gQFRFE2z0AHgUXdheYLZI5cZihfUCitCL8uaymBb7PrIR5NsaGfh1bkTaPgHkJBt
- mrcQPwmdXGiII8D7kNJVhNHDDF205gSWUHhzyyfcQ7BEo4wbLPvbW3/JezZ5pUiNLjhH
- M2ijYYYN8viKoH2mLpNX5E8uZt3WtfmYJ+ECQ5LdxCOfmCQTb1ZDQ521aJ3oCqzAMPtc
- lOHESkXv5/mD1m1CPrp0X0NGURpENmOMvPS78S6VOe/tN4hg4/N/d0LfsKD2lfu3VA6p
- NfwQ==
+ :cc; bh=Of4thXHnEThHbA7w2hsqMPdOII2UcsL82r4fI0fEKss=;
+ b=CL/IB82b9tu2FhmLNSB+9k/0wXm6106bRFnkjIzhXb983a5WOPdrQ+FZlDO27ie6yE
+ 3YBIEZdj5Lun3sZ43gnQJRyo7eWu7t/XsMDKsBPgKqvnhavB9qxesFrtlve2fuQ7DgO+
+ 2L2rXbnzTqwC5l7/819MxrPdj1tEDEDAmPcvRRKlfWGQvsJZZYaD44iSVdAx4NxJx+mK
+ gsh7Qmf/h/5W1E8Bj5zMh2atd07QA/Lg5hIvUi8m7SRV/NBovXL7F3ZBPMESvbvDFs5n
+ oc25dlD80ekRI+1mt48D+/RmfdBrv/AIlaCH+duaUzs4YL23X4SNegf9MhbCt2raN+dz
+ IJiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=cAIxYvnV6osTfOFYhB385fapGTbc3BLSgWF8ELo1vU4=;
- b=b2WTuSuQX8T88Ws7H5jhg8bwBAyXpT75eltID0DZ7EG2n6OUjTjVelVbEmfhdGdqZ2
- /QOX7u9vloj+VSJ3HJCCt/ov5GhKgZ90Q71eg3NkGRnGOmb9laJTK5LFnqnzvwbnSNua
- htF9gMwNlntefgcZ7nEzLNxBrsYQ/eZ/D5602DltQyKj3qJC/2nSFU1Qf6LACxMcLd5Y
- IORDaHgigHGDg93pAhq2C3uX9CEsnifPkFgqHT6Xs7l/qRNn3iLvTXUG+RvOAeVkIvLV
- gx/BeFTju3XezCeE+f9k8OQWWUJ6jBsXKrrKHcklPhtijgwjyLlshNeW730hExEaFL+R
- 8Qwg==
-X-Gm-Message-State: AOAM533gvNHf1O4GNufpcOyZigFMYAE+Jg6To594klTwQ2PzYuQyY4vL
- ZkrEuaN0a3b0haBcX4Z36R05xm/bPJi9OvTTVyc=
-X-Google-Smtp-Source: ABdhPJwPRkLcGB/XI/Gtsof/ySHkH+k8Bt3r6TEG36yJnhkRlaaxMIzogK8hE0fbyco5+r2kTxotRWcmwdQemrI/V9c=
-X-Received: by 2002:a92:d80c:0:b0:2c2:c40c:7bd4 with SMTP id
- y12-20020a92d80c000000b002c2c40c7bd4mr9471759ilm.310.1646036872303; Mon, 28
- Feb 2022 00:27:52 -0800 (PST)
+ bh=Of4thXHnEThHbA7w2hsqMPdOII2UcsL82r4fI0fEKss=;
+ b=SAc37qE10JW6bI7dmyaRiKn1WrYznUAQpKkROISPDb14dkloZdIOMPVuaQen3RfCJ1
+ HrQeRGac38Eb8uznorwofk6QVwwzKupAULykvRs8HfqcRXuVgyF99gPvtitgEzFdqU4G
+ DGt7d+/3Li+QorpLcTDBRMhTsLCWZIeyYA2aItXkYTdWdeO/YBwQhHUANKZqiQOQFQkB
+ Hy9mtmN0SmKwGFyKY5h2amC43sjGx5WAWOZtO2KT5btAoL/CaJQC6OI2qHmseR7GyI3W
+ WT0HjjQ9yiRqpJRhkVN0+Lk+PzI59Gkct7YLQtk7CFyOXz+w+mf43LmztGHj0N90Hkd5
+ 7QpA==
+X-Gm-Message-State: AOAM5300xtQibS9PUKUCV2tOf4n/jxY91BL/m3iDUjkCKj7iNu+YtXoS
+ Ph3ycaH37UDNkfnsaMzbnG3Mo1Lq2bWzJUkxZCitSW1zYatrCLIO
+X-Google-Smtp-Source: ABdhPJzax2s28HOKhHkl3tgEeC8t8NFZW0POwSoltwXhnZ8feB1W7JCVe02Td3ketdFQK+MJNuAfjgNncqimeSsb4Hs=
+X-Received: by 2002:a92:ca47:0:b0:2c2:ab28:1163 with SMTP id
+ q7-20020a92ca47000000b002c2ab281163mr13957958ilo.260.1646037104712; Mon, 28
+ Feb 2022 00:31:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
+References: <20220228034047.34612-1-alistair.francis@opensource.wdc.com>
+ <20220228034047.34612-2-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220228034047.34612-2-alistair.francis@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Feb 2022 18:27:25 +1000
-Message-ID: <CAKmqyKOAwdwcCMqAYZ+EjZmLaHg8mVOxf+_MYxx05rVLSzBUjA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] support subsets of Float-Point in Integer
- Registers extensions
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+Date: Mon, 28 Feb 2022 18:31:18 +1000
+Message-ID: <CAKmqyKNh8qHt=i98YjOWpJ+iHur=9XcmwV-09JNvpmwnBbj3=A@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] riscv: opentitan: Connect opentitan SPI Host
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, ardxwe@gmail.com
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12b
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -79,74 +76,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2022 08:27:56 -0000
+X-List-Received-Date: Mon, 28 Feb 2022 08:31:50 -0000
 
-On Fri, Feb 11, 2022 at 2:49 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Mon, Feb 28, 2022 at 1:41 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
 >
-> This patchset implements RISC-V Float-Point in Integer Registers extensions(Version 1.0), which includes Zfinx, Zdinx, Zhinx and Zhinxmin extension.
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> Specification:
-> https://github.com/riscv/riscv-zfinx/blob/main/zfinx-1.0.0.pdf
+> Conenct spi host[1/0] to opentitan.
 >
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-zfinx-upstream-v6
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> ---
+>  hw/riscv/opentitan.c         | 36 ++++++++++++++++++++++++++++++++----
+>  include/hw/riscv/opentitan.h | 12 +++++++++++-
+>  2 files changed, 43 insertions(+), 5 deletions(-)
 >
-> To test this implementation, specify cpu argument with 'zfinx =true,zdinx=true,zhinx=true,zhinxmin=true' with 'g=false,f=false,d=false,Zfh=false,Zfhmin=false'
-> This implementation can pass gcc tests, ci result can be found in https://ci.rvperf.org/job/plct-qemu-zfinx-upstream/.
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 833624d66c..2d401dcb23 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -120,11 +120,18 @@ static void lowrisc_ibex_soc_init(Object *obj)
+>      object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
 >
-> v6:
-> * rename flags Z*inx to z*inx
-> * rebase on apply-to-riscv.next
+>      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
+> +
+> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
+> +        object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
+> +                                TYPE_IBEX_SPI_HOST);
+> +    }
+>  }
 >
-> v5:
-> * put definition of ftemp and nftemp together, add comments for them
-> * sperate the declare of variable i from loop
+>  static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>  {
+>      const MemMapEntry *memmap = ibex_memmap;
+> +    DeviceState *dev;
+> +    SysBusDevice *busdev;
+>      MachineState *ms = MACHINE(qdev_get_machine());
+>      LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
+>      MemoryRegion *sys_mem = get_system_memory();
+> @@ -209,14 +216,35 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>                            qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
+>                                             IRQ_M_TIMER));
 >
-> v4:
-> * combine register pair check for rv32 zdinx
-> * clear mstatus.FS when RVF is disabled by write_misa
->
-> v3:
-> * delete unused reset for mstatus.FS
-> * use positive test for RVF instead of negative test for ZFINX
-> * replace get_ol with get_xl
-> * use tcg_gen_concat_tl_i64 to unify tcg_gen_concat_i32_i64 and tcg_gen_deposit_i64
->
-> v2:
-> * hardwire mstatus.FS to zero when enable zfinx
-> * do register-pair check at the begin of translation
-> * optimize partial implemention as suggested
->
-> Weiwei Li (6):
->   target/riscv: add cfg properties for zfinx, zdinx and zhinx{min}
->   target/riscv: hardwire mstatus.FS to zero when enable zfinx
->   target/riscv: add support for zfinx
->   target/riscv: add support for zdinx
->   target/riscv: add support for zhinx/zhinxmin
->   target/riscv: expose zfinx, zdinx, zhinx{min} properties
+> +    /* SPI-Hosts */
+> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
+> +        dev = DEVICE(&(s->spi_host[i]));
+> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
+> +            return;
+> +        }
+> +        busdev = SYS_BUS_DEVICE(dev);
+> +        sysbus_mmio_map(busdev, 0, memmap[IBEX_DEV_SPI_HOST0 + i].base);
+> +
+> +        switch (i) {
+> +        case OPENTITAN_SPI_HOST0:
+> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
+> +                                IBEX_SPI_HOST0_ERR_IRQ));
+> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
+> +                                IBEX_SPI_HOST0_SPI_EVENT_IRQ));
+> +            break;
+> +        case OPENTITAN_SPI_HOST1:
+> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
+> +                                IBEX_SPI_HOST1_ERR_IRQ));
+> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
+> +                                IBEX_SPI_HOST1_SPI_EVENT_IRQ));
+> +            break;
+> +        }
+> +    }
+> +
+>      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
+>          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
+>          memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].size);
+> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host0",
+> -        memmap[IBEX_DEV_SPI_HOST0].base, memmap[IBEX_DEV_SPI_HOST0].size);
+> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host1",
+> -        memmap[IBEX_DEV_SPI_HOST1].base, memmap[IBEX_DEV_SPI_HOST1].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.i2c",
+>          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
+>      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
+> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
+> index 00da9ded43..3a3f412ef8 100644
+> --- a/include/hw/riscv/opentitan.h
+> +++ b/include/hw/riscv/opentitan.h
+> @@ -1,7 +1,7 @@
+>  /*
+>   * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
+>   *
+> - * Copyright (c) 2020 Western Digital
+> + * Copyright (c) 2022 Western Digital
 
-Thanks!
+Drop this change, otherwise:
 
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+>   *
+>   * This program is free software; you can redistribute it and/or modify it
+>   * under the terms and conditions of the GNU General Public License,
+> @@ -23,11 +23,16 @@
+>  #include "hw/intc/sifive_plic.h"
+>  #include "hw/char/ibex_uart.h"
+>  #include "hw/timer/ibex_timer.h"
+> +#include "hw/ssi/ibex_spi_host.h"
+>  #include "qom/object.h"
 >
->  target/riscv/cpu.c                        |  17 ++
->  target/riscv/cpu.h                        |   4 +
->  target/riscv/cpu_helper.c                 |   6 +-
->  target/riscv/csr.c                        |  25 +-
->  target/riscv/fpu_helper.c                 | 178 ++++++------
->  target/riscv/helper.h                     |   4 +-
->  target/riscv/insn_trans/trans_rvd.c.inc   | 285 ++++++++++++++-----
->  target/riscv/insn_trans/trans_rvf.c.inc   | 314 +++++++++++++-------
->  target/riscv/insn_trans/trans_rvzfh.c.inc | 332 +++++++++++++++-------
->  target/riscv/internals.h                  |  32 ++-
->  target/riscv/translate.c                  | 149 +++++++++-
->  11 files changed, 974 insertions(+), 372 deletions(-)
+>  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
+>  OBJECT_DECLARE_SIMPLE_TYPE(LowRISCIbexSoCState, RISCV_IBEX_SOC)
 >
+> +#define OPENTITAN_NUM_SPI_HOSTS 2
+> +#define OPENTITAN_SPI_HOST0 0
+> +#define OPENTITAN_SPI_HOST1 1
+> +
+>  struct LowRISCIbexSoCState {
+>      /*< private >*/
+>      SysBusDevice parent_obj;
+> @@ -37,6 +42,7 @@ struct LowRISCIbexSoCState {
+>      SiFivePLICState plic;
+>      IbexUartState uart;
+>      IbexTimerState timer;
+> +    IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
+>
+>      MemoryRegion flash_mem;
+>      MemoryRegion rom;
+> @@ -90,6 +96,10 @@ enum {
+>
+>  enum {
+>      IBEX_TIMER_TIMEREXPIRED0_0 = 126,
+> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ = 153,
+> +    IBEX_SPI_HOST1_ERR_IRQ = 152,
+> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ = 151,
+> +    IBEX_SPI_HOST0_ERR_IRQ = 150,
+>      IBEX_UART0_RX_PARITY_ERR_IRQ = 8,
+>      IBEX_UART0_RX_TIMEOUT_IRQ = 7,
+>      IBEX_UART0_RX_BREAK_ERR_IRQ = 6,
 > --
-> 2.17.1
->
+> 2.35.1
 >
 
