@@ -1,61 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nObRg-0003BD-6c
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 03:31:52 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:36738)
+	id 1nOc6X-0006u7-RC
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 04:14:05 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46760)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nObRc-00038N-Vi; Mon, 28 Feb 2022 03:31:50 -0500
-Received: from [2607:f8b0:4864:20::12b] (port=36721
- helo=mail-il1-x12b.google.com)
+ id 1nOc6W-0006rp-04; Mon, 28 Feb 2022 04:14:04 -0500
+Received: from [2607:f8b0:4864:20::135] (port=38451
+ helo=mail-il1-x135.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nObRb-0002lr-23; Mon, 28 Feb 2022 03:31:48 -0500
-Received: by mail-il1-x12b.google.com with SMTP id e11so9426377ils.3;
- Mon, 28 Feb 2022 00:31:46 -0800 (PST)
+ id 1nOc6S-0001H5-Of; Mon, 28 Feb 2022 04:14:03 -0500
+Received: by mail-il1-x135.google.com with SMTP id w4so9471813ilj.5;
+ Mon, 28 Feb 2022 01:14:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Of4thXHnEThHbA7w2hsqMPdOII2UcsL82r4fI0fEKss=;
- b=CL/IB82b9tu2FhmLNSB+9k/0wXm6106bRFnkjIzhXb983a5WOPdrQ+FZlDO27ie6yE
- 3YBIEZdj5Lun3sZ43gnQJRyo7eWu7t/XsMDKsBPgKqvnhavB9qxesFrtlve2fuQ7DgO+
- 2L2rXbnzTqwC5l7/819MxrPdj1tEDEDAmPcvRRKlfWGQvsJZZYaD44iSVdAx4NxJx+mK
- gsh7Qmf/h/5W1E8Bj5zMh2atd07QA/Lg5hIvUi8m7SRV/NBovXL7F3ZBPMESvbvDFs5n
- oc25dlD80ekRI+1mt48D+/RmfdBrv/AIlaCH+duaUzs4YL23X4SNegf9MhbCt2raN+dz
- IJiw==
+ :cc; bh=8cfMA4VrwiHWDvCrWo66gUgb/yTG+9zVRQuakmt3DTk=;
+ b=CQjriXiY0LjF3lVbAkRsq4mkoNvrRH94tjHXEqAEx/Y2guroOxp98qSHQbBXrCDTK6
+ Z972QcyYI55uEpdf9qCiY4KVzEC5AfsrDwEg/KQsagrf5IesjGhW0iLS7YuvK13PHeLC
+ SKTBNTertHi+fCfvU+ppERPM6eSGLVvcLaZh/uaWQHL2RqXVqnX9u05nAyDZeE8OEiBh
+ zq6O4LQCtYK7/8eINsELpPpTuwt4d9OzvJ5b1MfUCTyeF6N1Li+FVjajCkjK7r87FmMK
+ xgUF/+5pRztpoZaBS1ypo1JJA0G+2Ovdrdx/rkFV2WtvadY1blvs99mAgvrxQDOu4pR7
+ GyUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Of4thXHnEThHbA7w2hsqMPdOII2UcsL82r4fI0fEKss=;
- b=SAc37qE10JW6bI7dmyaRiKn1WrYznUAQpKkROISPDb14dkloZdIOMPVuaQen3RfCJ1
- HrQeRGac38Eb8uznorwofk6QVwwzKupAULykvRs8HfqcRXuVgyF99gPvtitgEzFdqU4G
- DGt7d+/3Li+QorpLcTDBRMhTsLCWZIeyYA2aItXkYTdWdeO/YBwQhHUANKZqiQOQFQkB
- Hy9mtmN0SmKwGFyKY5h2amC43sjGx5WAWOZtO2KT5btAoL/CaJQC6OI2qHmseR7GyI3W
- WT0HjjQ9yiRqpJRhkVN0+Lk+PzI59Gkct7YLQtk7CFyOXz+w+mf43LmztGHj0N90Hkd5
- 7QpA==
-X-Gm-Message-State: AOAM5300xtQibS9PUKUCV2tOf4n/jxY91BL/m3iDUjkCKj7iNu+YtXoS
- Ph3ycaH37UDNkfnsaMzbnG3Mo1Lq2bWzJUkxZCitSW1zYatrCLIO
-X-Google-Smtp-Source: ABdhPJzax2s28HOKhHkl3tgEeC8t8NFZW0POwSoltwXhnZ8feB1W7JCVe02Td3ketdFQK+MJNuAfjgNncqimeSsb4Hs=
-X-Received: by 2002:a92:ca47:0:b0:2c2:ab28:1163 with SMTP id
- q7-20020a92ca47000000b002c2ab281163mr13957958ilo.260.1646037104712; Mon, 28
- Feb 2022 00:31:44 -0800 (PST)
+ bh=8cfMA4VrwiHWDvCrWo66gUgb/yTG+9zVRQuakmt3DTk=;
+ b=deSpNkQcdmZAC2ZAy8GEhi6bZgjkCq23VpBXXoqRTgED48iDPZ7xwYMJyGRx3BRjju
+ xXJaexIWvhZkiDbad08Pd/dx2Z4Po+hEEs2wo6MyGROLeHorPulWqUbcJCwLV6UeYx3c
+ 68DaVAFuqADp2LPi9SnAZk4WpN6bc1CFY8OpA3/36ULzJAh5R+S1mrQlm0xc0ivAnxSb
+ UeCtfTysRfPvbYG8lMVNmdJrfXEwFpnvebuFxAWy7gb93zRIPAoC7DOZRTnu+Cj9uU4f
+ 9PzMRrlVrf1FIgvTYnfrwvs/Q7biMSdRc4FUUIdI6Xjh5/7TprEiC6ruwnecpvXwDt/l
+ FDlw==
+X-Gm-Message-State: AOAM532RDUaExf9shfxaDhFCESq42qDEkVg30/6r2GrmeMyO+1sluosD
+ AmykB4kTcI4CKckNkFJTpzjJbwF0Md0u2boEpdE=
+X-Google-Smtp-Source: ABdhPJxQK9mmVtcaP7N3+SolrdxSSXgnZ94PJe83mcBcY3kBw9gqHSM/VlTZ1Jq3yBSqru0+qs8iNoviEDO4mgUPk+A=
+X-Received: by 2002:a92:d80c:0:b0:2c2:c40c:7bd4 with SMTP id
+ y12-20020a92d80c000000b002c2c40c7bd4mr9610999ilm.310.1646039639172; Mon, 28
+ Feb 2022 01:13:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20220228034047.34612-1-alistair.francis@opensource.wdc.com>
- <20220228034047.34612-2-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220228034047.34612-2-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220228034047.34612-1-alistair.francis@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Feb 2022 18:31:18 +1000
-Message-ID: <CAKmqyKNh8qHt=i98YjOWpJ+iHur=9XcmwV-09JNvpmwnBbj3=A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] riscv: opentitan: Connect opentitan SPI Host
+Date: Mon, 28 Feb 2022 19:13:31 +1000
+Message-ID: <CAKmqyKMaX6ExVyVfFhdKvmXL4e+uPuczJwYLLVxMbKrED0-ksg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] hw/ssi: Add Ibex SPI device model
 To: Alistair Francis <alistair.francis@opensource.wdc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12b
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::135
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::135;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x135.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -76,140 +75,781 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2022 08:31:50 -0000
+X-List-Received-Date: Mon, 28 Feb 2022 09:14:04 -0000
 
 On Mon, Feb 28, 2022 at 1:41 PM Alistair Francis
 <alistair.francis@opensource.wdc.com> wrote:
 >
 > From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> Conenct spi host[1/0] to opentitan.
+> Adds the SPI_HOST device model for ibex. The device specification is as per
+> [1]. The model has been tested on opentitan with spi_host unit tests
+> written for TockOS.
+>
+> [1] https://docs.opentitan.org/hw/ip/spi_host/doc/
 >
 > Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 > ---
->  hw/riscv/opentitan.c         | 36 ++++++++++++++++++++++++++++++++----
->  include/hw/riscv/opentitan.h | 12 +++++++++++-
->  2 files changed, 43 insertions(+), 5 deletions(-)
+>  hw/ssi/ibex_spi_host.c         | 613 +++++++++++++++++++++++++++++++++
+>  hw/ssi/meson.build             |   1 +
+>  hw/ssi/trace-events            |   7 +
+>  include/hw/ssi/ibex_spi_host.h |  94 +++++
+>  4 files changed, 715 insertions(+)
+>  create mode 100644 hw/ssi/ibex_spi_host.c
+>  create mode 100644 include/hw/ssi/ibex_spi_host.h
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 833624d66c..2d401dcb23 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -120,11 +120,18 @@ static void lowrisc_ibex_soc_init(Object *obj)
->      object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
->
->      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
+> diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
+> new file mode 100644
+> index 0000000000..bee2ade3ef
+> --- /dev/null
+> +++ b/hw/ssi/ibex_spi_host.c
+> @@ -0,0 +1,613 @@
 > +
-> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
-> +        object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
-> +                                TYPE_IBEX_SPI_HOST);
-> +    }
->  }
->
->  static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->  {
->      const MemMapEntry *memmap = ibex_memmap;
-> +    DeviceState *dev;
-> +    SysBusDevice *busdev;
->      MachineState *ms = MACHINE(qdev_get_machine());
->      LowRISCIbexSoCState *s = RISCV_IBEX_SOC(dev_soc);
->      MemoryRegion *sys_mem = get_system_memory();
-> @@ -209,14 +216,35 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->                            qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
->                                             IRQ_M_TIMER));
->
-> +    /* SPI-Hosts */
-> +    for (int i = 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-> +        dev = DEVICE(&(s->spi_host[i]));
-> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
-> +            return;
-> +        }
-> +        busdev = SYS_BUS_DEVICE(dev);
-> +        sysbus_mmio_map(busdev, 0, memmap[IBEX_DEV_SPI_HOST0 + i].base);
-> +
-> +        switch (i) {
-> +        case OPENTITAN_SPI_HOST0:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST0_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST0_SPI_EVENT_IRQ));
-> +            break;
-> +        case OPENTITAN_SPI_HOST1:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST1_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->plic),
-> +                                IBEX_SPI_HOST1_SPI_EVENT_IRQ));
-> +            break;
-> +        }
-> +    }
-> +
->      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
->          memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host0",
-> -        memmap[IBEX_DEV_SPI_HOST0].base, memmap[IBEX_DEV_SPI_HOST0].size);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host1",
-> -        memmap[IBEX_DEV_SPI_HOST1].base, memmap[IBEX_DEV_SPI_HOST1].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.i2c",
->          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 00da9ded43..3a3f412ef8 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -1,7 +1,7 @@
->  /*
->   * QEMU RISC-V Board Compatible with OpenTitan FPGA platform
->   *
-> - * Copyright (c) 2020 Western Digital
-> + * Copyright (c) 2022 Western Digital
 
-Drop this change, otherwise:
+No newline here
+
+Otherwise:
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->   *
->   * This program is free software; you can redistribute it and/or modify it
->   * under the terms and conditions of the GNU General Public License,
-> @@ -23,11 +23,16 @@
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/char/ibex_uart.h"
->  #include "hw/timer/ibex_timer.h"
-> +#include "hw/ssi/ibex_spi_host.h"
->  #include "qom/object.h"
->
->  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
->  OBJECT_DECLARE_SIMPLE_TYPE(LowRISCIbexSoCState, RISCV_IBEX_SOC)
->
-> +#define OPENTITAN_NUM_SPI_HOSTS 2
-> +#define OPENTITAN_SPI_HOST0 0
-> +#define OPENTITAN_SPI_HOST1 1
+> +/*
+> + * QEMU model of the Ibex SPI Controller
+> + * SPEC Reference: https://docs.opentitan.org/hw/ip/spi_host/doc/
+> + *
+> + * Copyright (C) 2022 Western Digital
+> + *
+> + * Permission is hereby granted, free of charge, to any person obtaining a copy
+> + * of this software and associated documentation files (the "Software"), to deal
+> + * in the Software without restriction, including without limitation the rights
+> + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> + * copies of the Software, and to permit persons to whom the Software is
+> + * furnished to do so, subject to the following conditions:
+> + *
+> + * The above copyright notice and this permission notice shall be included in
+> + * all copies or substantial portions of the Software.
+> + *
+> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> + * THE SOFTWARE.
+> + */
 > +
->  struct LowRISCIbexSoCState {
->      /*< private >*/
->      SysBusDevice parent_obj;
-> @@ -37,6 +42,7 @@ struct LowRISCIbexSoCState {
->      SiFivePLICState plic;
->      IbexUartState uart;
->      IbexTimerState timer;
-> +    IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
->
->      MemoryRegion flash_mem;
->      MemoryRegion rom;
-> @@ -90,6 +96,10 @@ enum {
->
->  enum {
->      IBEX_TIMER_TIMEREXPIRED0_0 = 126,
-> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ = 153,
-> +    IBEX_SPI_HOST1_ERR_IRQ = 152,
-> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ = 151,
-> +    IBEX_SPI_HOST0_ERR_IRQ = 150,
->      IBEX_UART0_RX_PARITY_ERR_IRQ = 8,
->      IBEX_UART0_RX_TIMEOUT_IRQ = 7,
->      IBEX_UART0_RX_BREAK_ERR_IRQ = 6,
+> +#include "qemu/osdep.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "hw/ssi/ibex_spi_host.h"
+> +#include "hw/irq.h"
+> +#include "hw/qdev-properties.h"
+> +#include "hw/qdev-properties-system.h"
+> +#include "migration/vmstate.h"
+> +#include "trace.h"
+> +
+> +REG32(INTR_STATE, 0x00)
+> +    FIELD(INTR_STATE, ERROR, 0, 1)
+> +    FIELD(INTR_STATE, SPI_EVENT, 1, 1)
+> +REG32(INTR_ENABLE, 0x04)
+> +    FIELD(INTR_ENABLE, ERROR, 0, 1)
+> +    FIELD(INTR_ENABLE, SPI_EVENT, 1, 1)
+> +REG32(INTR_TEST, 0x08)
+> +    FIELD(INTR_TEST, ERROR, 0, 1)
+> +    FIELD(INTR_TEST, SPI_EVENT, 1, 1)
+> +REG32(ALERT_TEST, 0x0c)
+> +    FIELD(ALERT_TEST, FETAL_TEST, 0, 1)
+> +REG32(CONTROL, 0x10)
+> +    FIELD(CONTROL, RX_WATERMARK, 0, 8)
+> +    FIELD(CONTROL, TX_WATERMARK, 1, 8)
+> +    FIELD(CONTROL, OUTPUT_EN, 29, 1)
+> +    FIELD(CONTROL, SW_RST, 30, 1)
+> +    FIELD(CONTROL, SPIEN, 31, 1)
+> +REG32(STATUS, 0x14)
+> +    FIELD(STATUS, TXQD, 0, 8)
+> +    FIELD(STATUS, RXQD, 18, 8)
+> +    FIELD(STATUS, CMDQD, 16, 3)
+> +    FIELD(STATUS, RXWM, 20, 1)
+> +    FIELD(STATUS, BYTEORDER, 22, 1)
+> +    FIELD(STATUS, RXSTALL, 23, 1)
+> +    FIELD(STATUS, RXEMPTY, 24, 1)
+> +    FIELD(STATUS, RXFULL, 25, 1)
+> +    FIELD(STATUS, TXWM, 26, 1)
+> +    FIELD(STATUS, TXSTALL, 27, 1)
+> +    FIELD(STATUS, TXEMPTY, 28, 1)
+> +    FIELD(STATUS, TXFULL, 29, 1)
+> +    FIELD(STATUS, ACTIVE, 30, 1)
+> +    FIELD(STATUS, READY, 31, 1)
+> +REG32(CONFIGOPTS, 0x18)
+> +    FIELD(CONFIGOPTS, CLKDIV_0, 0, 16)
+> +    FIELD(CONFIGOPTS, CSNIDLE_0, 16, 4)
+> +    FIELD(CONFIGOPTS, CSNTRAIL_0, 20, 4)
+> +    FIELD(CONFIGOPTS, CSNLEAD_0, 24, 4)
+> +    FIELD(CONFIGOPTS, FULLCYC_0, 29, 1)
+> +    FIELD(CONFIGOPTS, CPHA_0, 30, 1)
+> +    FIELD(CONFIGOPTS, CPOL_0, 31, 1)
+> +REG32(CSID, 0x1c)
+> +    FIELD(CSID, CSID, 0, 32)
+> +REG32(COMMAND, 0x20)
+> +    FIELD(COMMAND, LEN, 0, 8)
+> +    FIELD(COMMAND, CSAAT, 9, 1)
+> +    FIELD(COMMAND, SPEED, 10, 2)
+> +    FIELD(COMMAND, DIRECTION, 12, 2)
+> +REG32(ERROR_ENABLE, 0x2c)
+> +    FIELD(ERROR_ENABLE, CMDBUSY, 0, 1)
+> +    FIELD(ERROR_ENABLE, OVERFLOW, 1, 1)
+> +    FIELD(ERROR_ENABLE, UNDERFLOW, 2, 1)
+> +    FIELD(ERROR_ENABLE, CMDINVAL, 3, 1)
+> +    FIELD(ERROR_ENABLE, CSIDINVAL, 4, 1)
+> +REG32(ERROR_STATUS, 0x30)
+> +    FIELD(ERROR_STATUS, CMDBUSY, 0, 1)
+> +    FIELD(ERROR_STATUS, OVERFLOW, 1, 1)
+> +    FIELD(ERROR_STATUS, UNDERFLOW, 2, 1)
+> +    FIELD(ERROR_STATUS, CMDINVAL, 3, 1)
+> +    FIELD(ERROR_STATUS, CSIDINVAL, 4, 1)
+> +    FIELD(ERROR_STATUS, ACCESSINVAL, 5, 1)
+> +REG32(EVENT_ENABLE, 0x30)
+> +    FIELD(EVENT_ENABLE, RXFULL, 0, 1)
+> +    FIELD(EVENT_ENABLE, TXEMPTY, 1, 1)
+> +    FIELD(EVENT_ENABLE, RXWM, 2, 1)
+> +    FIELD(EVENT_ENABLE, TXWM, 3, 1)
+> +    FIELD(EVENT_ENABLE, READY, 4, 1)
+> +    FIELD(EVENT_ENABLE, IDLE, 5, 1)
+> +
+> +static inline uint8_t div4_round_up(uint8_t dividend)
+> +{
+> +    return (dividend + 3) / 4;
+> +}
+> +
+> +static void ibex_spi_rxfifo_reset(IbexSPIHostState *s)
+> +{
+> +    /* Empty the RX FIFO and assert RXEMPTY */
+> +    fifo8_reset(&s->rx_fifo);
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXFULL_MASK;
+> +    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_RXEMPTY_MASK;
+> +}
+> +
+> +static void ibex_spi_txfifo_reset(IbexSPIHostState *s)
+> +{
+> +    /* Empty the TX FIFO and assert TXEMPTY */
+> +    fifo8_reset(&s->tx_fifo);
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXFULL_MASK;
+> +    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_TXEMPTY_MASK;
+> +}
+> +
+> +static void ibex_spi_host_reset(DeviceState *dev)
+> +{
+> +    IbexSPIHostState *s = IBEX_SPI_HOST(dev);
+> +    trace_ibex_spi_host_reset("Resetting Ibex SPI");
+> +
+> +    /* SPI Host Register Reset */
+> +    s->regs[IBEX_SPI_HOST_INTR_STATE]   = 0x00;
+> +    s->regs[IBEX_SPI_HOST_INTR_ENABLE]  = 0x00;
+> +    s->regs[IBEX_SPI_HOST_INTR_TEST]    = 0x00;
+> +    s->regs[IBEX_SPI_HOST_ALERT_TEST]   = 0x00;
+> +    s->regs[IBEX_SPI_HOST_CONTROL]      = 0x7f;
+> +    s->regs[IBEX_SPI_HOST_STATUS]       = 0x00;
+> +    s->regs[IBEX_SPI_HOST_CONFIGOPTS]   = 0x00;
+> +    s->regs[IBEX_SPI_HOST_CSID]         = 0x00;
+> +    s->regs[IBEX_SPI_HOST_COMMAND]      = 0x00;
+> +    /* RX/TX Modelled by FIFO */
+> +    s->regs[IBEX_SPI_HOST_RXDATA]       = 0x00;
+> +    s->regs[IBEX_SPI_HOST_TXDATA]       = 0x00;
+> +
+> +    s->regs[IBEX_SPI_HOST_ERROR_ENABLE] = 0x1F;
+> +    s->regs[IBEX_SPI_HOST_ERROR_STATUS] = 0x00;
+> +    s->regs[IBEX_SPI_HOST_EVENT_ENABLE] = 0x00;
+> +
+> +    ibex_spi_rxfifo_reset(s);
+> +    ibex_spi_txfifo_reset(s);
+> +
+> +    return;
+> +}
+> +
+> +/*
+> + * Check if we need to trigger an interrupt.
+> + * The two interrupts lines (host_err and event) can
+> + * be enabled separately in 'IBEX_SPI_HOST_INTR_ENABLE'.
+> + *
+> + * Interrupts are triggered based on the ones
+> + * enabled in the `IBEX_SPI_HOST_EVENT_ENABLE` and `IBEX_SPI_HOST_ERROR_ENABLE`.
+> + */
+> +static void ibex_spi_host_irq(IbexSPIHostState *s)
+> +{
+> +    bool error_en = s->regs[IBEX_SPI_HOST_INTR_ENABLE]
+> +                    & R_INTR_ENABLE_ERROR_MASK;
+> +    bool event_en = s->regs[IBEX_SPI_HOST_INTR_ENABLE]
+> +                    & R_INTR_ENABLE_SPI_EVENT_MASK;
+> +    bool err_pending = s->regs[IBEX_SPI_HOST_INTR_STATE]
+> +                        & R_INTR_STATE_ERROR_MASK;
+> +    bool status_pending = s->regs[IBEX_SPI_HOST_INTR_STATE]
+> +                        & R_INTR_STATE_SPI_EVENT_MASK;
+> +    int err_irq = 0, event_irq = 0;
+> +
+> +    /* Error IRQ enabled and Error IRQ Cleared*/
+> +    if (error_en && !err_pending) {
+> +        /* Event enabled, Interrupt Test Error */
+> +        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_ERROR_MASK) {
+> +            err_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+> +                    &  R_ERROR_ENABLE_CMDBUSY_MASK) &&
+> +                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+> +                    & R_ERROR_STATUS_CMDBUSY_MASK) {
+> +            /* Wrote to COMMAND when not READY */
+> +            err_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+> +                    &  R_ERROR_ENABLE_CMDINVAL_MASK) &&
+> +                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+> +                    & R_ERROR_STATUS_CMDINVAL_MASK) {
+> +            /* Invalid command segment */
+> +            err_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+> +                    & R_ERROR_ENABLE_CSIDINVAL_MASK) &&
+> +                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+> +                    & R_ERROR_STATUS_CSIDINVAL_MASK) {
+> +            /* Invalid value for CSID */
+> +            err_irq = 1;
+> +        }
+> +        if (err_irq) {
+> +            s->regs[IBEX_SPI_HOST_INTR_STATE] |= R_INTR_STATE_ERROR_MASK;
+> +        }
+> +        qemu_set_irq(s->host_err, err_irq);
+> +    }
+> +
+> +    /* Event IRQ Enabled and Event IRQ Cleared */
+> +    if (event_en && !status_pending) {
+> +        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_SPI_EVENT_MASK) {
+> +            /* Event enabled, Interrupt Test Event */
+> +            event_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+> +                    & R_EVENT_ENABLE_READY_MASK) &&
+> +                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK)) {
+> +            /* SPI Host ready for next command */
+> +            event_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+> +                    & R_EVENT_ENABLE_TXEMPTY_MASK) &&
+> +                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_TXEMPTY_MASK)) {
+> +            /* SPI TXEMPTY, TXFIFO drained */
+> +            event_irq = 1;
+> +        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+> +                    & R_EVENT_ENABLE_RXFULL_MASK) &&
+> +                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_RXFULL_MASK)) {
+> +            /* SPI RXFULL, RXFIFO  full */
+> +            event_irq = 1;
+> +        }
+> +        if (event_irq) {
+> +            s->regs[IBEX_SPI_HOST_INTR_STATE] |= R_INTR_STATE_SPI_EVENT_MASK;
+> +        }
+> +        qemu_set_irq(s->event, event_irq);
+> +    }
+> +}
+> +
+> +static void ibex_spi_host_transfer(IbexSPIHostState *s)
+> +{
+> +    uint32_t rx, tx;
+> +    /* Get num of one byte transfers */
+> +    uint8_t segment_len = ((s->regs[IBEX_SPI_HOST_COMMAND] & R_COMMAND_LEN_MASK)
+> +                          >> R_COMMAND_LEN_SHIFT);
+> +    while (segment_len > 0) {
+> +        if (fifo8_is_empty(&s->tx_fifo)) {
+> +            /* Assert Stall */
+> +            s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_TXSTALL_MASK;
+> +            break;
+> +        } else if (fifo8_is_full(&s->rx_fifo)) {
+> +            /* Assert Stall */
+> +            s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_RXSTALL_MASK;
+> +            break;
+> +        } else {
+> +            tx = fifo8_pop(&s->tx_fifo);
+> +        }
+> +
+> +        rx = ssi_transfer(s->ssi, tx);
+> +
+> +        trace_ibex_spi_host_transfer(tx, rx);
+> +
+> +        if (!fifo8_is_full(&s->rx_fifo)) {
+> +            fifo8_push(&s->rx_fifo, rx);
+> +        } else {
+> +            /* Assert RXFULL */
+> +            s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_RXFULL_MASK;
+> +        }
+> +        --segment_len;
+> +    }
+> +
+> +    /* Assert Ready */
+> +    s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_READY_MASK;
+> +    /* Set RXQD */
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXQD_MASK;
+> +    s->regs[IBEX_SPI_HOST_STATUS] |= (R_STATUS_RXQD_MASK
+> +                                    & div4_round_up(segment_len));
+> +    /* Set TXQD */
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXQD_MASK;
+> +    s->regs[IBEX_SPI_HOST_STATUS] |= (fifo8_num_used(&s->tx_fifo) / 4)
+> +                                    & R_STATUS_TXQD_MASK;
+> +    /* Clear TXFULL */
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXFULL_MASK;
+> +    /* Assert TXEMPTY and drop remaining bytes that exceed segment_len */
+> +    ibex_spi_txfifo_reset(s);
+> +    /* Reset RXEMPTY */
+> +    s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXEMPTY_MASK;
+> +
+> +    ibex_spi_host_irq(s);
+> +}
+> +
+> +static uint64_t ibex_spi_host_read(void *opaque, hwaddr addr,
+> +                                     unsigned int size)
+> +{
+> +    IbexSPIHostState *s = opaque;
+> +    uint32_t rc = 0;
+> +    uint8_t rx_byte = 0;
+> +
+> +    trace_ibex_spi_host_read(addr, size);
+> +
+> +    /* Match reg index */
+> +    addr = addr >> 2;
+> +    switch (addr) {
+> +    /* Skipping any W/O registers */
+> +    case IBEX_SPI_HOST_INTR_STATE...IBEX_SPI_HOST_INTR_ENABLE:
+> +    case IBEX_SPI_HOST_CONTROL...IBEX_SPI_HOST_STATUS:
+> +        rc = s->regs[addr];
+> +        break;
+> +    case IBEX_SPI_HOST_CSID:
+> +        rc = s->regs[addr];
+> +        break;
+> +    case IBEX_SPI_HOST_CONFIGOPTS:
+> +        rc = s->config_opts[s->regs[IBEX_SPI_HOST_CSID]];
+> +        break;
+> +    case IBEX_SPI_HOST_TXDATA:
+> +        rc = s->regs[addr];
+> +        break;
+> +    case IBEX_SPI_HOST_RXDATA:
+> +        /* Clear RXFULL */
+> +        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_RXFULL_MASK;
+> +
+> +        for (int i = 0; i < 4; ++i) {
+> +            if (fifo8_is_empty(&s->rx_fifo)) {
+> +                /* Assert RXEMPTY, no IRQ */
+> +                s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_RXEMPTY_MASK;
+> +                s->regs[IBEX_SPI_HOST_ERROR_STATUS] |=
+> +                                                R_ERROR_STATUS_UNDERFLOW_MASK;
+> +                return rc;
+> +            }
+> +            rx_byte = fifo8_pop(&s->rx_fifo);
+> +            rc |= rx_byte << (i * 8);
+> +        }
+> +        break;
+> +    case IBEX_SPI_HOST_ERROR_ENABLE...IBEX_SPI_HOST_EVENT_ENABLE:
+> +        rc = s->regs[addr];
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "Bad offset 0x%" HWADDR_PRIx "\n",
+> +                      addr << 2);
+> +    }
+> +    return rc;
+> +}
+> +
+> +
+> +static void ibex_spi_host_write(void *opaque, hwaddr addr,
+> +                                uint64_t val64, unsigned int size)
+> +{
+> +    IbexSPIHostState *s = opaque;
+> +    uint32_t val32 = val64;
+> +    uint32_t shift_mask = 0xff;
+> +    uint8_t txqd_len;
+> +
+> +    trace_ibex_spi_host_write(addr, size, val64);
+> +
+> +    /* Match reg index */
+> +    addr = addr >> 2;
+> +
+> +    switch (addr) {
+> +    /* Skipping any R/O registers */
+> +    case IBEX_SPI_HOST_INTR_STATE...IBEX_SPI_HOST_INTR_ENABLE:
+> +        s->regs[addr] = val32;
+> +        break;
+> +    case IBEX_SPI_HOST_INTR_TEST:
+> +        s->regs[addr] = val32;
+> +        ibex_spi_host_irq(s);
+> +        break;
+> +    case IBEX_SPI_HOST_ALERT_TEST:
+> +        s->regs[addr] = val32;
+> +        qemu_log_mask(LOG_UNIMP,
+> +                        "%s: SPI_ALERT_TEST is not supported\n", __func__);
+> +        break;
+> +    case IBEX_SPI_HOST_CONTROL:
+> +        s->regs[addr] = val32;
+> +
+> +        if (val32 & R_CONTROL_SW_RST_MASK)  {
+> +            ibex_spi_host_reset((DeviceState *)s);
+> +            /* Clear active if any */
+> +            s->regs[IBEX_SPI_HOST_STATUS] &=  ~R_STATUS_ACTIVE_MASK;
+> +        }
+> +
+> +        if (val32 & R_CONTROL_OUTPUT_EN_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: CONTROL_OUTPUT_EN is not supported\n", __func__);
+> +        }
+> +        break;
+> +    case IBEX_SPI_HOST_CONFIGOPTS:
+> +        /* Update the respective config-opts register based on CSIDth index */
+> +        s->config_opts[s->regs[IBEX_SPI_HOST_CSID]] = val32;
+> +        qemu_log_mask(LOG_UNIMP,
+> +                      "%s: CONFIGOPTS Hardware settings not supported\n",
+> +                         __func__);
+> +        break;
+> +    case IBEX_SPI_HOST_CSID:
+> +        if (val32 >= s->num_cs) {
+> +            /* CSID exceeds max num_cs */
+> +            s->regs[IBEX_SPI_HOST_ERROR_STATUS] |=
+> +                                                R_ERROR_STATUS_CSIDINVAL_MASK;
+> +            ibex_spi_host_irq(s);
+> +            return;
+> +        }
+> +        s->regs[addr] = val32;
+> +        break;
+> +    case IBEX_SPI_HOST_COMMAND:
+> +        s->regs[addr] = val32;
+> +
+> +        /* STALL, IP not enabled */
+> +        if (!(s->regs[IBEX_SPI_HOST_CONTROL] & R_CONTROL_SPIEN_MASK)) {
+> +            return;
+> +        }
+> +
+> +        /* SPI not ready, IRQ Error */
+> +        if (!(s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK)) {
+> +            s->regs[IBEX_SPI_HOST_ERROR_STATUS] |= R_ERROR_STATUS_CMDBUSY_MASK;
+> +            ibex_spi_host_irq(s);
+> +            return;
+> +        }
+> +        /* Assert Not Ready */
+> +        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_READY_MASK;
+> +
+> +        if (((val32 & R_COMMAND_DIRECTION_MASK) >> R_COMMAND_DIRECTION_SHIFT)
+> +            != BIDIRECTIONAL_TRANSFER) {
+> +                qemu_log_mask(LOG_UNIMP,
+> +                          "%s: Rx Only/Tx Only are not supported\n", __func__);
+> +        }
+> +
+> +        if (val32 & R_COMMAND_CSAAT_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: CSAAT is not supported\n", __func__);
+> +        }
+> +        if (val32 & R_COMMAND_SPEED_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: SPEED is not supported\n", __func__);
+> +        }
+> +
+> +        /* Set Transfer Callback */
+> +        timer_mod(s->fifo_trigger_handle,
+> +                    qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
+> +                    (TX_INTERRUPT_TRIGGER_DELAY_NS));
+> +
+> +        break;
+> +    case IBEX_SPI_HOST_TXDATA:
+> +        /*
+> +         * This is a hardware `feature` where
+> +         * the first word written TXDATA after init is omitted entirely
+> +         */
+> +        if (s->init_status) {
+> +            s->init_status = false;
+> +            return;
+> +        }
+> +
+> +        for (int i = 0; i < 4; ++i) {
+> +            /* Attempting to write when TXFULL */
+> +            if (fifo8_is_full(&s->tx_fifo)) {
+> +                /* Assert RXEMPTY, no IRQ */
+> +                s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_TXFULL_MASK;
+> +                s->regs[IBEX_SPI_HOST_ERROR_STATUS] |=
+> +                                                 R_ERROR_STATUS_OVERFLOW_MASK;
+> +                ibex_spi_host_irq(s);
+> +                return;
+> +            }
+> +            /* Byte ordering is set by the IP */
+> +            if ((s->regs[IBEX_SPI_HOST_STATUS] &
+> +                R_STATUS_BYTEORDER_MASK) == 0) {
+> +                /* LE: LSB transmitted first (default for ibex processor) */
+> +                shift_mask = 0xff << (i * 8);
+> +            } else {
+> +                /* BE: MSB transmitted first */
+> +                qemu_log_mask(LOG_UNIMP,
+> +                             "%s: Big endian is not supported\n", __func__);
+> +            }
+> +
+> +            fifo8_push(&s->tx_fifo, (val32 & shift_mask) >> (i * 8));
+> +        }
+> +
+> +        /* Reset TXEMPTY */
+> +        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXEMPTY_MASK;
+> +        /* Update TXQD */
+> +        txqd_len = (s->regs[IBEX_SPI_HOST_STATUS] &
+> +                    R_STATUS_TXQD_MASK) >> R_STATUS_TXQD_SHIFT;
+> +        /* Partial bytes (size < 4) are padded, in words. */
+> +        txqd_len += 1;
+> +        s->regs[IBEX_SPI_HOST_STATUS] &= ~R_STATUS_TXQD_MASK;
+> +        s->regs[IBEX_SPI_HOST_STATUS] |= txqd_len;
+> +        /* Assert Ready */
+> +        s->regs[IBEX_SPI_HOST_STATUS] |= R_STATUS_READY_MASK;
+> +        break;
+> +    case IBEX_SPI_HOST_ERROR_ENABLE:
+> +        s->regs[addr] = val32;
+> +
+> +        if (val32 & R_ERROR_ENABLE_CMDINVAL_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: Segment Length is not supported\n", __func__);
+> +        }
+> +        break;
+> +    case IBEX_SPI_HOST_ERROR_STATUS:
+> +    /*
+> +     *  Indicates that any errors that have occurred.
+> +     *  When an error occurs, the corresponding bit must be cleared
+> +     *  here before issuing any further commands
+> +     */
+> +        s->regs[addr] = val32;
+> +        break;
+> +    case IBEX_SPI_HOST_EVENT_ENABLE:
+> +    /* Controls which classes of SPI events raise an interrupt. */
+> +        s->regs[addr] = val32;
+> +
+> +        if (val32 & R_EVENT_ENABLE_RXWM_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: RXWM is not supported\n", __func__);
+> +        }
+> +        if (val32 & R_EVENT_ENABLE_TXWM_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: TXWM is not supported\n", __func__);
+> +        }
+> +
+> +        if (val32 & R_EVENT_ENABLE_IDLE_MASK)  {
+> +            qemu_log_mask(LOG_UNIMP,
+> +                          "%s: IDLE is not supported\n", __func__);
+> +        }
+> +        break;
+> +    default:
+> +        qemu_log_mask(LOG_GUEST_ERROR, "Bad offset 0x%" HWADDR_PRIx "\n",
+> +                      addr << 2);
+> +    }
+> +}
+> +
+> +static const MemoryRegionOps ibex_spi_ops = {
+> +    .read = ibex_spi_host_read,
+> +    .write = ibex_spi_host_write,
+> +    /* Ibex default LE */
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +};
+> +
+> +static Property ibex_spi_properties[] = {
+> +    DEFINE_PROP_UINT32("num_cs", IbexSPIHostState, num_cs, 1),
+> +    DEFINE_PROP_END_OF_LIST(),
+> +};
+> +
+> +static const VMStateDescription vmstate_ibex = {
+> +    .name = TYPE_IBEX_SPI_HOST,
+> +    .version_id = 1,
+> +    .minimum_version_id = 1,
+> +    .fields = (VMStateField[]) {
+> +        VMSTATE_UINT32_ARRAY(regs, IbexSPIHostState, IBEX_SPI_HOST_MAX_REGS),
+> +        VMSTATE_VARRAY_UINT32(config_opts, IbexSPIHostState,
+> +                              num_cs, 0, vmstate_info_uint32, uint32_t),
+> +        VMSTATE_FIFO8(rx_fifo, IbexSPIHostState),
+> +        VMSTATE_FIFO8(tx_fifo, IbexSPIHostState),
+> +        VMSTATE_TIMER_PTR(fifo_trigger_handle, IbexSPIHostState),
+> +        VMSTATE_BOOL(init_status, IbexSPIHostState),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static void fifo_trigger_update(void *opaque)
+> +{
+> +    IbexSPIHostState *s = opaque;
+> +    ibex_spi_host_transfer(s);
+> +}
+> +
+> +static void ibex_spi_host_realize(DeviceState *dev, Error **errp)
+> +{
+> +    IbexSPIHostState *s = IBEX_SPI_HOST(dev);
+> +    int i;
+> +
+> +    s->ssi = ssi_create_bus(dev, "ssi");
+> +    s->cs_lines = g_new0(qemu_irq, s->num_cs);
+> +
+> +    for (i = 0; i < s->num_cs; ++i) {
+> +        sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->cs_lines[i]);
+> +    }
+> +
+> +    /* Setup CONFIGOPTS Multi-register */
+> +    s->config_opts = malloc(sizeof(uint32_t) * s->num_cs);
+> +
+> +    /* Setup FIFO Interrupt Timer */
+> +    s->fifo_trigger_handle = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> +                                          fifo_trigger_update, s);
+> +
+> +    /* FIFO sizes as per OT Spec */
+> +    fifo8_create(&s->tx_fifo, IBEX_SPI_HOST_TXFIFO_LEN);
+> +    fifo8_create(&s->rx_fifo, IBEX_SPI_HOST_RXFIFO_LEN);
+> +}
+> +
+> +static void ibex_spi_host_init(Object *obj)
+> +{
+> +    IbexSPIHostState *s = IBEX_SPI_HOST(obj);
+> +
+> +    s->init_status = true;
+> +    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->host_err);
+> +    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->event);
+> +
+> +    memory_region_init_io(&s->mmio, obj, &ibex_spi_ops, s,
+> +                          TYPE_IBEX_SPI_HOST, 0x1000);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
+> +}
+> +
+> +static void ibex_spi_host_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    dc->realize = ibex_spi_host_realize;
+> +    dc->reset = ibex_spi_host_reset;
+> +    dc->vmsd = &vmstate_ibex;
+> +    device_class_set_props(dc, ibex_spi_properties);
+> +}
+> +
+> +static const TypeInfo ibex_spi_host_info = {
+> +    .name          = TYPE_IBEX_SPI_HOST,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(IbexSPIHostState),
+> +    .instance_init = ibex_spi_host_init,
+> +    .class_init    = ibex_spi_host_class_init,
+> +};
+> +
+> +static void ibex_spi_host_register_types(void)
+> +{
+> +    type_register_static(&ibex_spi_host_info);
+> +}
+> +
+> +type_init(ibex_spi_host_register_types)
+> diff --git a/hw/ssi/meson.build b/hw/ssi/meson.build
+> index 0ded9cd092..702aa5e4df 100644
+> --- a/hw/ssi/meson.build
+> +++ b/hw/ssi/meson.build
+> @@ -10,3 +10,4 @@ softmmu_ss.add(when: 'CONFIG_XILINX_SPIPS', if_true: files('xilinx_spips.c'))
+>  softmmu_ss.add(when: 'CONFIG_XLNX_VERSAL', if_true: files('xlnx-versal-ospi.c'))
+>  softmmu_ss.add(when: 'CONFIG_IMX', if_true: files('imx_spi.c'))
+>  softmmu_ss.add(when: 'CONFIG_OMAP', if_true: files('omap_spi.c'))
+> +softmmu_ss.add(when: 'CONFIG_IBEX', if_true: files('ibex_spi_host.c'))
+> diff --git a/hw/ssi/trace-events b/hw/ssi/trace-events
+> index 612d3d6087..c707d4aaba 100644
+> --- a/hw/ssi/trace-events
+> +++ b/hw/ssi/trace-events
+> @@ -20,3 +20,10 @@ npcm7xx_fiu_ctrl_read(const char *id, uint64_t addr, uint32_t data) "%s offset:
+>  npcm7xx_fiu_ctrl_write(const char *id, uint64_t addr, uint32_t data) "%s offset: 0x%04" PRIx64 " value: 0x%08" PRIx32
+>  npcm7xx_fiu_flash_read(const char *id, int cs, uint64_t addr, unsigned int size, uint64_t value) "%s[%d] offset: 0x%08" PRIx64 " size: %u value: 0x%" PRIx64
+>  npcm7xx_fiu_flash_write(const char *id, unsigned cs, uint64_t addr, unsigned int size, uint64_t value) "%s[%d] offset: 0x%08" PRIx64 " size: %u value: 0x%" PRIx64
+> +
+> +# ibex_spi_host.c
+> +
+> +ibex_spi_host_reset(const char *msg) "%s"
+> +ibex_spi_host_transfer(uint32_t tx_data, uint32_t rx_data) "tx_data: 0x%" PRIx32 " rx_data: @0x%" PRIx32
+> +ibex_spi_host_write(uint64_t addr, uint32_t size, uint64_t data) "@0x%" PRIx64 " size %u: 0x%" PRIx64
+> +ibex_spi_host_read(uint64_t addr, uint32_t size) "@0x%" PRIx64 " size %u:"
+> diff --git a/include/hw/ssi/ibex_spi_host.h b/include/hw/ssi/ibex_spi_host.h
+> new file mode 100644
+> index 0000000000..3fedcb6805
+> --- /dev/null
+> +++ b/include/hw/ssi/ibex_spi_host.h
+> @@ -0,0 +1,94 @@
+> +
+> +/*
+> + * QEMU model of the Ibex SPI Controller
+> + * SPEC Reference: https://docs.opentitan.org/hw/ip/spi_host/doc/
+> + *
+> + * Copyright (C) 2022 Western Digital
+> + *
+> + * Permission is hereby granted, free of charge, to any person obtaining a copy
+> + * of this software and associated documentation files (the "Software"), to deal
+> + * in the Software without restriction, including without limitation the rights
+> + * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> + * copies of the Software, and to permit persons to whom the Software is
+> + * furnished to do so, subject to the following conditions:
+> + *
+> + * The above copyright notice and this permission notice shall be included in
+> + * all copies or substantial portions of the Software.
+> + *
+> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+> + * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> + * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> + * THE SOFTWARE.
+> + */
+> +
+> +#ifndef IBEX_SPI_HOST_H
+> +#define IBEX_SPI_HOST_H
+> +
+> +#include "hw/sysbus.h"
+> +#include "hw/hw.h"
+> +#include "hw/ssi/ssi.h"
+> +#include "qemu/fifo8.h"
+> +#include "qom/object.h"
+> +#include "hw/registerfields.h"
+> +#include "qemu/timer.h"
+> +
+> +#define TYPE_IBEX_SPI_HOST "ibex-spi"
+> +#define IBEX_SPI_HOST(obj) \
+> +    OBJECT_CHECK(IbexSPIHostState, (obj), TYPE_IBEX_SPI_HOST)
+> +
+> +/* SPI Registers */
+> +#define IBEX_SPI_HOST_INTR_STATE         (0x00 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_INTR_ENABLE        (0x04 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_INTR_TEST          (0x08 / 4)  /* wo */
+> +#define IBEX_SPI_HOST_ALERT_TEST         (0x0c / 4)  /* wo */
+> +#define IBEX_SPI_HOST_CONTROL            (0x10 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_STATUS             (0x14 / 4)  /* ro */
+> +#define IBEX_SPI_HOST_CONFIGOPTS         (0x18 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_CSID               (0x1c / 4)  /* rw */
+> +#define IBEX_SPI_HOST_COMMAND            (0x20 / 4)  /* wo */
+> +/* RX/TX Modelled by FIFO */
+> +#define IBEX_SPI_HOST_RXDATA             (0x24 / 4)
+> +#define IBEX_SPI_HOST_TXDATA             (0x28 / 4)
+> +
+> +#define IBEX_SPI_HOST_ERROR_ENABLE       (0x2c / 4)  /* rw */
+> +#define IBEX_SPI_HOST_ERROR_STATUS       (0x30 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_EVENT_ENABLE       (0x34 / 4)  /* rw */
+> +
+> +/* FIFO Len in Bytes */
+> +#define IBEX_SPI_HOST_TXFIFO_LEN         288
+> +#define IBEX_SPI_HOST_RXFIFO_LEN         256
+> +
+> +/*  Max Register (Based on addr) */
+> +#define IBEX_SPI_HOST_MAX_REGS           (IBEX_SPI_HOST_EVENT_ENABLE + 1)
+> +
+> +/* MISC */
+> +#define TX_INTERRUPT_TRIGGER_DELAY_NS    100
+> +#define BIDIRECTIONAL_TRANSFER           3
+> +
+> +typedef struct {
+> +    /* <private> */
+> +    SysBusDevice parent_obj;
+> +
+> +    /* <public> */
+> +    MemoryRegion mmio;
+> +    uint32_t regs[IBEX_SPI_HOST_MAX_REGS];
+> +    /* Multi-reg that sets config opts per CS */
+> +    uint32_t *config_opts;
+> +    Fifo8 rx_fifo;
+> +    Fifo8 tx_fifo;
+> +    QEMUTimer *fifo_trigger_handle;
+> +
+> +    qemu_irq event;
+> +    qemu_irq host_err;
+> +    uint32_t num_cs;
+> +    qemu_irq *cs_lines;
+> +    SSIBus *ssi;
+> +
+> +    /* Used to track the init status, for replicating TXDATA ghost writes */
+> +    bool init_status;
+> +} IbexSPIHostState;
+> +
+> +#endif
 > --
 > 2.35.1
 >
