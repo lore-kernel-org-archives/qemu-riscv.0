@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOXMp-0000u1-6v
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 23:10:35 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:50218)
+	id 1nOXTw-000322-7j
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Feb 2022 23:17:56 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:51294)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nOXMn-0000tN-9r; Sun, 27 Feb 2022 23:10:33 -0500
-Received: from [2607:f8b0:4864:20::d35] (port=36776
- helo=mail-io1-xd35.google.com)
+ id 1nOXTv-00031i-Aj; Sun, 27 Feb 2022 23:17:55 -0500
+Received: from [2607:f8b0:4864:20::d36] (port=45710
+ helo=mail-io1-xd36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nOXMh-00033x-PA; Sun, 27 Feb 2022 23:10:31 -0500
-Received: by mail-io1-xd35.google.com with SMTP id r7so13446494iot.3;
- Sun, 27 Feb 2022 20:10:26 -0800 (PST)
+ id 1nOXTs-00044L-2S; Sun, 27 Feb 2022 23:17:54 -0500
+Received: by mail-io1-xd36.google.com with SMTP id c14so13402331ioa.12;
+ Sun, 27 Feb 2022 20:17:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IdkzKfnXHYFoL58lWR5M1Y5mQ2eEaRtTG5M7fsndj1M=;
- b=KmHEmlMgBYBSx8QC5D74AsmKjYrUH415rNADOlzzTRao9oOxvTPsErvxxTgo+B0Lme
- R8GoIrauqkIUgZ4praeLCs7kYLX7IPugKfy20oAgCX0IM5YYfUijTDyXjQBGT5EgqxjR
- 4vSqzxwUIZq5xSimK/4Cr8kybS94ND+aD38zd2yffP5rFUMi/4CfpE6338BzKx1Kiq++
- t7D9wh5FF7A5wiTi7h1Gs0Upcyd0zfo8mVP3mFARJ2vKq3Vm+jNOz5E31ogrCdcU1oPR
- rph/kS0Vtp81eY7wYm7YdIx0FlMba02h2um9c2OuOoWHIV4QmuF0HcFaxt79dLXr0whV
- +3/w==
+ :cc; bh=xx+1VhpHD3qQcVE1Zgb3kUH01ZOhSaVGhOJEcHYwpZQ=;
+ b=T25uaNm2bi/bNxX8RaCDST9nEEcWn6Zzw02i5t97tm6w8UvmSL0XP1RpUW+59UOCJj
+ Ffn8YVrNX7t+oyNkkPrJe/v5R9OHf1Zg07AkqGo3WQNyJ9jbt0B7APk55gQ4gyB1pOzz
+ NfycM2tY+dZkYdL/UlEzcAY5SE4Bv6nqJ/QBNKb4gvO/O/6Bd2v8RsRbSYTlrjzm9jSW
+ dsFoa3FGFM//4jYSaHbc4KhmbpTYRxp/hUQti3wCxKKE2ddHyQdLeniZARpCviK/GABR
+ bahjQIuEzHUelZoX/UwjhSjmoli8lmM0wgTaduzDMAzWbsE3dYQAmUwJba0SFtVT4eKL
+ PuHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=IdkzKfnXHYFoL58lWR5M1Y5mQ2eEaRtTG5M7fsndj1M=;
- b=VXoyDdKbQRdpsI+AxHbH5MShRt6exfpIqjM3QPsdv2DQPWTbnvnJGOdz0GP7pAy97/
- NhQynrpHiHwQdk6eAlj+cr8K8kONnj0z4r5IKCOV3t8dWFAr+9bKjyLBhFUQUYV7sTjE
- AuCbexSgJ9rAhOnDEQ+9HH2UOwO3hlKvA8H9DB386LtYwwdGPVNH1fIJ4rLKBf2DUtx/
- GANW/96y6C0WCMzqOKqOGm8l9xaAxit+Jhd2buv6VAGel5Y3Ty7Munyi3hyn+tt6JY1n
- 4Akw/zZk8R/Dawmg6bru2+1laNSxMkNHXn9JERsT+7NEluqPScvlBVwX4ep7195LLg9g
- kfWg==
-X-Gm-Message-State: AOAM531btmvIlOLfaQXcmKUlGyqZFz246MRGdLvVWnUdJ2nIq+l0bTJi
- fkKhcyryI3j9l7UPjpWZArrFx9HTSi2zefXU3Rc=
-X-Google-Smtp-Source: ABdhPJwGi+6SA6Jt64YxRFZ7sJlDInKftzEHsPzaeukys/RIn+vCeYF7ZTXpljydL/ud8bm+2MtYzoaWWPX1wHOtF/8=
-X-Received: by 2002:a05:6602:2c0b:b0:63d:dfb2:9a95 with SMTP id
- w11-20020a0566022c0b00b0063ddfb29a95mr14182498iov.93.1646021425442; Sun, 27
- Feb 2022 20:10:25 -0800 (PST)
+ bh=xx+1VhpHD3qQcVE1Zgb3kUH01ZOhSaVGhOJEcHYwpZQ=;
+ b=NK+uz44GcW/LzL89g9iDOpvx5ONVYrmVy+Y0n9uHWxlrV/UgbcNvLdg4V7NcI7g+Ry
+ 76sRM4kY2gmYZmW64uzAjlUtiXuKhGNeEMH2e650YJcfRY9Go6hLNxtkcZEwPuf9ca1y
+ VZZzApksY3BNsgAQ4oxsHZQOWppwc6icJyAT2g605WQy+D1JXBktI+qOllHCPmNgaida
+ 5gNkKCbYbdJzCiqXNgVdZfBmyKoKKcHFy/sz37fNcZKu41q8O2GEg8w6zm3DBRKnd2Hb
+ 3VjmFOPDa/ovAH+gKY5nkjP8GgQqhfgcg16pWRRNpeQXi+Qb8lUQJzovf4j66yZ2Iv+P
+ X8hQ==
+X-Gm-Message-State: AOAM530P3j+Wieo9gwgJ8CF6lfbfxS/mbbAMMYWaZQvINjSqD1/UXKnQ
+ 4pdNp2e5g6P1sQaVC95ljcq7+PJJLzswjeOiAio=
+X-Google-Smtp-Source: ABdhPJxVAhu6PFlAmN7EnxjhE1W0yqrYgVJDp4d84xhrSuX7DPcm7eVZt/Q/+qJBdSnkEMHuhZVz4BsYi0zxdoo7zLw=
+X-Received: by 2002:a02:9529:0:b0:314:5808:5de2 with SMTP id
+ y38-20020a029529000000b0031458085de2mr15160941jah.68.1646021870166; Sun, 27
+ Feb 2022 20:17:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20220211043920.28981-1-liweiwei@iscas.ac.cn>
- <20220211043920.28981-6-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220211043920.28981-6-liweiwei@iscas.ac.cn>
+References: <20220219002518.1936806-1-atishp@rivosinc.com>
+ <20220219002518.1936806-7-atishp@rivosinc.com>
+In-Reply-To: <20220219002518.1936806-7-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Feb 2022 14:09:57 +1000
-Message-ID: <CAKmqyKMtDmqiq1DbDtoufuTk7eS4O6C0juObgzeD3D4-VA2GUg@mail.gmail.com>
-Subject: Re: [PATCH v6 5/6] target/riscv: add support for zhinx/zhinxmin
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+Date: Mon, 28 Feb 2022 14:17:20 +1000
+Message-ID: <CAKmqyKPdnUMGTyePoywZE_Pis_Trx6YxCP7ji=5HAdNJyzcO_g@mail.gmail.com>
+Subject: Re: [PATCH v5 06/12] target/riscv: Add support for
+ hpmcounters/hpmevents
+To: Atish Patra <atishp@rivosinc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, ardxwe@gmail.com
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d35
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -79,950 +77,565 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Feb 2022 04:10:33 -0000
+X-List-Received-Date: Mon, 28 Feb 2022 04:17:55 -0000
 
-On Fri, Feb 11, 2022 at 2:45 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Sat, Feb 19, 2022 at 10:58 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
->   - update extension check REQUIRE_ZHINX_OR_ZFH and REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN
->   - update half float point register read/write
->   - disable nanbox_h check
+> From: Atish Patra <atish.patra@wdc.com>
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> With SBI PMU extension, user can use any of the available hpmcounters to
+> track any perf events based on the value written to mhpmevent csr.
+> Add read/write functionality for these csrs.
+>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/fpu_helper.c                 |  89 +++---
->  target/riscv/helper.h                     |   2 +-
->  target/riscv/insn_trans/trans_rvzfh.c.inc | 332 +++++++++++++++-------
->  target/riscv/internals.h                  |  16 +-
->  4 files changed, 296 insertions(+), 143 deletions(-)
+>  target/riscv/cpu.h     |  11 +
+>  target/riscv/csr.c     | 466 +++++++++++++++++++++++++++--------------
+>  target/riscv/machine.c |   3 +
+>  3 files changed, 328 insertions(+), 152 deletions(-)
 >
-> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-> index 63ca703459..5699c9517f 100644
-> --- a/target/riscv/fpu_helper.c
-> +++ b/target/riscv/fpu_helper.c
-> @@ -89,10 +89,11 @@ void helper_set_rod_rounding_mode(CPURISCVState *env)
->  static uint64_t do_fmadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
->                             uint64_t rs3, int flags)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    float16 frs3 = check_nanbox_h(rs3);
-> -    return nanbox_h(float16_muladd(frs1, frs2, frs3, flags, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    float16 frs3 = check_nanbox_h(env, rs3);
-> +    return nanbox_h(env, float16_muladd(frs1, frs2, frs3, flags,
-> +                                        &env->fp_status));
->  }
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index ea3862ccbf5c..cce5c3538c89 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -109,6 +109,8 @@ typedef struct CPURISCVState CPURISCVState;
+>  #endif
 >
->  static uint64_t do_fmadd_s(CPURISCVState *env, uint64_t rs1, uint64_t rs2,
-> @@ -417,146 +418,146 @@ target_ulong helper_fclass_d(uint64_t frs1)
+>  #define RV_VLEN_MAX 1024
+> +#define RV_MAX_MHPMEVENTS 29
+> +#define RV_MAX_MHPMCOUNTERS 32
 >
->  uint64_t helper_fadd_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(float16_add(frs1, frs2, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, float16_add(frs1, frs2, &env->fp_status));
->  }
+>  FIELD(VTYPE, VLMUL, 0, 3)
+>  FIELD(VTYPE, VSEW, 3, 3)
+> @@ -261,6 +263,15 @@ struct CPURISCVState {
 >
->  uint64_t helper_fsub_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(float16_sub(frs1, frs2, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, float16_sub(frs1, frs2, &env->fp_status));
->  }
+>      target_ulong mcountinhibit;
 >
->  uint64_t helper_fmul_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(float16_mul(frs1, frs2, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, float16_mul(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fdiv_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(float16_div(frs1, frs2, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, float16_div(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fmin_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(env->priv_ver < PRIV_VERSION_1_11_0 ?
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, env->priv_ver < PRIV_VERSION_1_11_0 ?
->                      float16_minnum(frs1, frs2, &env->fp_status) :
->                      float16_minimum_number(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fmax_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> -    return nanbox_h(env->priv_ver < PRIV_VERSION_1_11_0 ?
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
-> +    return nanbox_h(env, env->priv_ver < PRIV_VERSION_1_11_0 ?
->                      float16_maxnum(frs1, frs2, &env->fp_status) :
->                      float16_maximum_number(frs1, frs2, &env->fp_status));
->  }
->
->  uint64_t helper_fsqrt_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    return nanbox_h(float16_sqrt(frs1, &env->fp_status));
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    return nanbox_h(env, float16_sqrt(frs1, &env->fp_status));
->  }
->
->  target_ulong helper_fle_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
->      return float16_le(frs1, frs2, &env->fp_status);
->  }
->
->  target_ulong helper_flt_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
->      return float16_lt(frs1, frs2, &env->fp_status);
->  }
->
->  target_ulong helper_feq_h(CPURISCVState *env, uint64_t rs1, uint64_t rs2)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> -    float16 frs2 = check_nanbox_h(rs2);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
-> +    float16 frs2 = check_nanbox_h(env, rs2);
->      return float16_eq_quiet(frs1, frs2, &env->fp_status);
->  }
->
-> -target_ulong helper_fclass_h(uint64_t rs1)
-> +target_ulong helper_fclass_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return fclass_h(frs1);
->  }
->
->  target_ulong helper_fcvt_w_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return float16_to_int32(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_wu_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return (int32_t)float16_to_uint32(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_l_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return float16_to_int64(frs1, &env->fp_status);
->  }
->
->  target_ulong helper_fcvt_lu_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return float16_to_uint64(frs1, &env->fp_status);
->  }
->
->  uint64_t helper_fcvt_h_w(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_h(int32_to_float16((int32_t)rs1, &env->fp_status));
-> +    return nanbox_h(env, int32_to_float16((int32_t)rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_wu(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_h(uint32_to_float16((uint32_t)rs1, &env->fp_status));
-> +    return nanbox_h(env, uint32_to_float16((uint32_t)rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_l(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_h(int64_to_float16(rs1, &env->fp_status));
-> +    return nanbox_h(env, int64_to_float16(rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_lu(CPURISCVState *env, target_ulong rs1)
->  {
-> -    return nanbox_h(uint64_to_float16(rs1, &env->fp_status));
-> +    return nanbox_h(env, uint64_to_float16(rs1, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_s(CPURISCVState *env, uint64_t rs1)
->  {
->      float32 frs1 = check_nanbox_s(env, rs1);
-> -    return nanbox_h(float32_to_float16(frs1, true, &env->fp_status));
-> +    return nanbox_h(env, float32_to_float16(frs1, true, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_s_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return nanbox_s(env, float16_to_float32(frs1, true, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_h_d(CPURISCVState *env, uint64_t rs1)
->  {
-> -    return nanbox_h(float64_to_float16(rs1, true, &env->fp_status));
-> +    return nanbox_h(env, float64_to_float16(rs1, true, &env->fp_status));
->  }
->
->  uint64_t helper_fcvt_d_h(CPURISCVState *env, uint64_t rs1)
->  {
-> -    float16 frs1 = check_nanbox_h(rs1);
-> +    float16 frs1 = check_nanbox_h(env, rs1);
->      return float16_to_float64(frs1, true, &env->fp_status);
->  }
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 89195aad9d..26bbab2fab 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -90,7 +90,7 @@ DEF_HELPER_FLAGS_2(fcvt_h_w, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_h_wu, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_h_l, TCG_CALL_NO_RWG, i64, env, tl)
->  DEF_HELPER_FLAGS_2(fcvt_h_lu, TCG_CALL_NO_RWG, i64, env, tl)
-> -DEF_HELPER_FLAGS_1(fclass_h, TCG_CALL_NO_RWG_SE, tl, i64)
-> +DEF_HELPER_FLAGS_2(fclass_h, TCG_CALL_NO_RWG_SE, tl, env, i64)
->
->  /* Special functions */
->  DEF_HELPER_2(csrr, tl, env, int)
-> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> index 608c51da2c..5d07150cd0 100644
-> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
-> @@ -22,12 +22,25 @@
->      }                         \
->  } while (0)
->
-> +#define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
-> +    if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
-> +        return false;                  \
-> +    }                                  \
-> +} while (0)
+> +    /* PMU counter configured values */
+> +    target_ulong mhpmcounter_val[RV_MAX_MHPMCOUNTERS];
 > +
->  #define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {       \
->      if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin)) { \
->          return false;                         \
->      }                                         \
->  } while (0)
->
-> +#define REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx) do { \
-> +    if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin ||          \
-> +          ctx->cfg_ptr->ext_zhinx || ctx->cfg_ptr->ext_zhinxmin)) {     \
-> +        return false;                                        \
-> +    }                                                        \
-> +} while (0)
+> +    /* for RV32 */
+> +    target_ulong mhpmcounterh_val[RV_MAX_MHPMCOUNTERS];
 > +
->  static bool trans_flh(DisasContext *ctx, arg_flh *a)
->  {
->      TCGv_i64 dest;
-> @@ -73,11 +86,16 @@ static bool trans_fsh(DisasContext *ctx, arg_fsh *a)
->  static bool trans_fmadd_h(DisasContext *ctx, arg_fmadd_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    /* PMU event selector configured values */
+> +    target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
+>      target_ulong sscratch;
+>      target_ulong mscratch;
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmadd_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fmadd_h(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 2283ff33a5d7..dbb723a3307b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -84,6 +84,15 @@ static RISCVException mctr(CPURISCVState *env, int csrno)
+>      return RISCV_EXCP_NONE;
 >  }
-> @@ -85,11 +103,16 @@ static bool trans_fmadd_h(DisasContext *ctx, arg_fmadd_h *a)
->  static bool trans_fmsub_h(DisasContext *ctx, arg_fmsub_h *a)
+>
+> +static RISCVException mctr32(CPURISCVState *env, int csrno)
+> +{
+> +    if (riscv_cpu_mxl(env) != MXL_RV32) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    return mctr(env, csrno);
+> +}
+> +
+>  static RISCVException ctr(CPURISCVState *env, int csrno)
 >  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmsub_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                       cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fmsub_h(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
+>  #if !defined(CONFIG_USER_ONLY)
+> @@ -560,6 +569,72 @@ static RISCVException read_instreth(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
 >  }
-> @@ -97,11 +120,16 @@ static bool trans_fmsub_h(DisasContext *ctx, arg_fmsub_h *a)
->  static bool trans_fnmsub_h(DisasContext *ctx, arg_fnmsub_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
 >
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fnmsub_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fnmsub_h(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -109,11 +137,16 @@ static bool trans_fnmsub_h(DisasContext *ctx, arg_fnmsub_h *a)
->  static bool trans_fnmadd_h(DisasContext *ctx, arg_fnmadd_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    int evt_index = csrno - CSR_MHPMEVENT3;
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +    TCGv_i64 src3 = get_fpr_hs(ctx, a->rs3);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fnmadd_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                        cpu_fpr[a->rs2], cpu_fpr[a->rs3]);
-> +    gen_helper_fnmadd_h(dest, cpu_env, src1, src2, src3);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -121,11 +154,15 @@ static bool trans_fnmadd_h(DisasContext *ctx, arg_fnmadd_h *a)
->  static bool trans_fadd_h(DisasContext *ctx, arg_fadd_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    *val = env->mhpmevent_val[evt_index];
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fadd_h(cpu_fpr[a->rd], cpu_env,
-> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fadd_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -133,11 +170,15 @@ static bool trans_fadd_h(DisasContext *ctx, arg_fadd_h *a)
->  static bool trans_fsub_h(DisasContext *ctx, arg_fsub_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    return RISCV_EXCP_NONE;
+> +}
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fsub_h(cpu_fpr[a->rd], cpu_env,
-> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fsub_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -145,11 +186,15 @@ static bool trans_fsub_h(DisasContext *ctx, arg_fsub_h *a)
->  static bool trans_fmul_h(DisasContext *ctx, arg_fmul_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    int evt_index = csrno - CSR_MHPMEVENT3;
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fmul_h(cpu_fpr[a->rd], cpu_env,
-> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fmul_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -157,11 +202,15 @@ static bool trans_fmul_h(DisasContext *ctx, arg_fmul_h *a)
->  static bool trans_fdiv_h(DisasContext *ctx, arg_fdiv_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    env->mhpmevent_val[evt_index] = val;
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fdiv_h(cpu_fpr[a->rd], cpu_env,
-> -                      cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fdiv_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -169,10 +218,14 @@ static bool trans_fdiv_h(DisasContext *ctx, arg_fdiv_h *a)
->  static bool trans_fsqrt_h(DisasContext *ctx, arg_fsqrt_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    return RISCV_EXCP_NONE;
+> +}
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fsqrt_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fsqrt_h(dest, cpu_env, src1);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -180,23 +233,37 @@ static bool trans_fsqrt_h(DisasContext *ctx, arg_fsqrt_h *a)
->  static bool trans_fsgnj_h(DisasContext *ctx, arg_fsgnj_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    int ctr_index = csrno - CSR_MHPMCOUNTER3 + 3;
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      if (a->rs1 == a->rs2) { /* FMOV */
-> -        gen_check_nanbox_h(cpu_fpr[a->rd], cpu_fpr[a->rs1]);
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_h(dest, src1);
-> +        } else {
-> +            tcg_gen_ext16s_i64(dest, src1);
-> +        }
->      } else {
-> -        TCGv_i64 rs1 = tcg_temp_new_i64();
-> -        TCGv_i64 rs2 = tcg_temp_new_i64();
-> -
-> -        gen_check_nanbox_h(rs1, cpu_fpr[a->rs1]);
-> -        gen_check_nanbox_h(rs2, cpu_fpr[a->rs2]);
-> -
-> -        /* This formulation retains the nanboxing of rs2. */
-> -        tcg_gen_deposit_i64(cpu_fpr[a->rd], rs2, rs1, 0, 15);
-> -        tcg_temp_free_i64(rs1);
-> -        tcg_temp_free_i64(rs2);
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
+> +    env->mhpmcounter_val[ctr_index] = val;
 > +
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            TCGv_i64 rs1 = tcg_temp_new_i64();
-> +            TCGv_i64 rs2 = tcg_temp_new_i64();
-> +            gen_check_nanbox_h(rs1, src1);
-> +            gen_check_nanbox_h(rs2, src2);
+> +    return RISCV_EXCP_NONE;
+> +}
 > +
-> +            /* This formulation retains the nanboxing of rs2 in normal 'Zfh'. */
-> +            tcg_gen_deposit_i64(dest, rs2, rs1, 0, 15);
+> +static int write_mhpmcounterh(CPURISCVState *env, int csrno, target_ulong val)
+> +{
+> +    int ctr_index = csrno - CSR_MHPMCOUNTER3H + 3;
 > +
-> +            tcg_temp_free_i64(rs1);
-> +            tcg_temp_free_i64(rs2);
-> +        } else {
-> +            tcg_gen_deposit_i64(dest, src2, src1, 0, 15);
-> +            tcg_gen_ext16s_i64(dest, dest);
-> +        }
->      }
-> -
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -206,16 +273,29 @@ static bool trans_fsgnjn_h(DisasContext *ctx, arg_fsgnjn_h *a)
->      TCGv_i64 rs1, rs2, mask;
->
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    env->mhpmcounterh_val[ctr_index] = val;
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      rs1 = tcg_temp_new_i64();
-> -    gen_check_nanbox_h(rs1, cpu_fpr[a->rs1]);
-> +    if (!ctx->cfg_ptr->ext_zfinx) {
-> +        gen_check_nanbox_h(rs1, src1);
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static int read_hpmcounter(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    int ctr_index;
+> +
+> +    if (env->priv == PRV_M) {
+> +        ctr_index = csrno - CSR_MHPMCOUNTER3 + 3;
 > +    } else {
-> +        tcg_gen_mov_i64(rs1, src1);
+> +        ctr_index = csrno - CSR_HPMCOUNTER3 + 3;
 > +    }
->
->      if (a->rs1 == a->rs2) { /* FNEG */
-> -        tcg_gen_xori_i64(cpu_fpr[a->rd], rs1, MAKE_64BIT_MASK(15, 1));
-> +        tcg_gen_xori_i64(dest, rs1, MAKE_64BIT_MASK(15, 1));
->      } else {
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->          rs2 = tcg_temp_new_i64();
-> -        gen_check_nanbox_h(rs2, cpu_fpr[a->rs2]);
+> +    *val = env->mhpmcounter_val[ctr_index];
 > +
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_h(rs2, src2);
-> +        } else {
-> +            tcg_gen_mov_i64(rs2, src2);
-> +        }
->
->          /*
->           * Replace bit 15 in rs1 with inverse in rs2.
-> @@ -224,12 +304,17 @@ static bool trans_fsgnjn_h(DisasContext *ctx, arg_fsgnjn_h *a)
->          mask = tcg_const_i64(~MAKE_64BIT_MASK(15, 1));
->          tcg_gen_not_i64(rs2, rs2);
->          tcg_gen_andc_i64(rs2, rs2, mask);
-> -        tcg_gen_and_i64(rs1, mask, rs1);
-> -        tcg_gen_or_i64(cpu_fpr[a->rd], rs1, rs2);
-> +        tcg_gen_and_i64(dest, mask, rs1);
-> +        tcg_gen_or_i64(dest, dest, rs2);
->
->          tcg_temp_free_i64(mask);
->          tcg_temp_free_i64(rs2);
->      }
-> +    /* signed-extended intead of nanboxing for result if enable zfinx */
-> +    if (ctx->cfg_ptr->ext_zfinx) {
-> +        tcg_gen_ext16s_i64(dest, dest);
-> +    }
-> +    tcg_temp_free_i64(rs1);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -239,27 +324,44 @@ static bool trans_fsgnjx_h(DisasContext *ctx, arg_fsgnjx_h *a)
->      TCGv_i64 rs1, rs2;
->
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
+> +    return RISCV_EXCP_NONE;
+> +}
 > +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      rs1 = tcg_temp_new_i64();
-> -    gen_check_nanbox_s(rs1, cpu_fpr[a->rs1]);
-> +    if (!ctx->cfg_ptr->ext_zfinx) {
-> +        gen_check_nanbox_h(rs1, src1);
+> +static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
+> +{
+> +    int ctr_index;
+> +
+> +    if (env->priv == PRV_M) {
+> +        ctr_index = csrno - CSR_MHPMCOUNTER3H + 3;
 > +    } else {
-> +        tcg_gen_mov_i64(rs1, src1);
+> +        ctr_index = csrno - CSR_HPMCOUNTER3H + 3;
 > +    }
->
->      if (a->rs1 == a->rs2) { /* FABS */
-> -        tcg_gen_andi_i64(cpu_fpr[a->rd], rs1, ~MAKE_64BIT_MASK(15, 1));
-> +        tcg_gen_andi_i64(dest, rs1, ~MAKE_64BIT_MASK(15, 1));
->      } else {
-> +        TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->          rs2 = tcg_temp_new_i64();
-> -        gen_check_nanbox_s(rs2, cpu_fpr[a->rs2]);
 > +
-> +        if (!ctx->cfg_ptr->ext_zfinx) {
-> +            gen_check_nanbox_h(rs2, src2);
-> +        } else {
-> +            tcg_gen_mov_i64(rs2, src2);
-> +        }
+> +    *val = env->mhpmcounterh_val[ctr_index];
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +
+>  #if defined(CONFIG_USER_ONLY)
+>  static RISCVException read_time(CPURISCVState *env, int csrno,
+>                                  target_ulong *val)
+> @@ -3515,157 +3590,244 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase, write_spmbase },
 >
->          /*
->           * Xor bit 15 in rs1 with that in rs2.
->           * This formulation retains the nanboxing of rs1.
->           */
-> -        tcg_gen_andi_i64(rs2, rs2, MAKE_64BIT_MASK(15, 1));
-> -        tcg_gen_xor_i64(cpu_fpr[a->rd], rs1, rs2);
-> +        tcg_gen_andi_i64(dest, rs2, MAKE_64BIT_MASK(15, 1));
-> +        tcg_gen_xor_i64(dest, rs1, dest);
->
->          tcg_temp_free_i64(rs2);
->      }
+>      /* Performance Counters */
+> -    [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER5]    = { "hpmcounter5",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER6]    = { "hpmcounter6",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER7]    = { "hpmcounter7",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER8]    = { "hpmcounter8",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER9]    = { "hpmcounter9",    ctr,    read_zero },
+> -    [CSR_HPMCOUNTER10]   = { "hpmcounter10",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER11]   = { "hpmcounter11",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER12]   = { "hpmcounter12",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER13]   = { "hpmcounter13",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER14]   = { "hpmcounter14",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER15]   = { "hpmcounter15",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER16]   = { "hpmcounter16",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER17]   = { "hpmcounter17",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER18]   = { "hpmcounter18",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER19]   = { "hpmcounter19",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER20]   = { "hpmcounter20",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER21]   = { "hpmcounter21",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER22]   = { "hpmcounter22",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER23]   = { "hpmcounter23",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER24]   = { "hpmcounter24",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER25]   = { "hpmcounter25",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER26]   = { "hpmcounter26",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER27]   = { "hpmcounter27",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER28]   = { "hpmcounter28",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER29]   = { "hpmcounter29",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER30]   = { "hpmcounter30",   ctr,    read_zero },
+> -    [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_zero },
 > -
-> +    /* signed-extended intead of nanboxing for result if enable zfinx */
-> +    if (ctx->cfg_ptr->ext_zfinx) {
-> +        tcg_gen_ext16s_i64(dest, dest);
-> +    }
-> +    tcg_temp_free_i64(rs1);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -267,10 +369,14 @@ static bool trans_fsgnjx_h(DisasContext *ctx, arg_fsgnjx_h *a)
->  static bool trans_fmin_h(DisasContext *ctx, arg_fmin_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_fmin_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                      cpu_fpr[a->rs2]);
-> +    gen_helper_fmin_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -278,10 +384,14 @@ static bool trans_fmin_h(DisasContext *ctx, arg_fmin_h *a)
->  static bool trans_fmax_h(DisasContext *ctx, arg_fmax_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
-> -    gen_helper_fmax_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1],
-> -                      cpu_fpr[a->rs2]);
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
-> +
-> +    gen_helper_fmax_h(dest, cpu_env, src1, src2);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->      return true;
->  }
-> @@ -289,10 +399,14 @@ static bool trans_fmax_h(DisasContext *ctx, arg_fmax_h *a)
->  static bool trans_fcvt_s_h(DisasContext *ctx, arg_fcvt_s_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-> +    REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_s_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_s_h(dest, cpu_env, src1);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->
-> @@ -302,26 +416,32 @@ static bool trans_fcvt_s_h(DisasContext *ctx, arg_fcvt_s_h *a)
->  static bool trans_fcvt_d_h(DisasContext *ctx, arg_fcvt_d_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-> -    REQUIRE_EXT(ctx, RVD);
-> +    REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx);
-> +    REQUIRE_ZDINX_OR_D(ctx);
-> +
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_d_h(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_d_h(dest, cpu_env, src1);
-> +    gen_set_fpr_d(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->
+> -    [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,   read_zero },
+> -    [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,   read_zero },
 > -
->      return true;
->  }
->
->  static bool trans_fcvt_h_s(DisasContext *ctx, arg_fcvt_h_s *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-> +    REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx);
->
-> -    gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_s(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
-> +    gen_set_rm(ctx, a->rm);
-> +    gen_helper_fcvt_h_s(dest, cpu_env, src1);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->
->      return true;
-> @@ -330,12 +450,15 @@ static bool trans_fcvt_h_s(DisasContext *ctx, arg_fcvt_h_s *a)
->  static bool trans_fcvt_h_d(DisasContext *ctx, arg_fcvt_h_d *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH_OR_ZFHMIN(ctx);
-> -    REQUIRE_EXT(ctx, RVD);
-> +    REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx);
-> +    REQUIRE_ZDINX_OR_D(ctx);
->
-> -    gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_d(cpu_fpr[a->rd], cpu_env, cpu_fpr[a->rs1]);
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_d(ctx, a->rs1);
->
-> +    gen_set_rm(ctx, a->rm);
-> +    gen_helper_fcvt_h_d(dest, cpu_env, src1);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->      mark_fs_dirty(ctx);
->
->      return true;
-> @@ -344,11 +467,13 @@ static bool trans_fcvt_h_d(DisasContext *ctx, arg_fcvt_h_d *a)
->  static bool trans_feq_h(DisasContext *ctx, arg_feq_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_feq_h(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_feq_h(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -356,11 +481,13 @@ static bool trans_feq_h(DisasContext *ctx, arg_feq_h *a)
->  static bool trans_flt_h(DisasContext *ctx, arg_flt_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_flt_h(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_flt_h(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->
->      return true;
-> @@ -369,11 +496,13 @@ static bool trans_flt_h(DisasContext *ctx, arg_flt_h *a)
->  static bool trans_fle_h(DisasContext *ctx, arg_fle_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
-> +    TCGv_i64 src2 = get_fpr_hs(ctx, a->rs2);
->
-> -    gen_helper_fle_h(dest, cpu_env, cpu_fpr[a->rs1], cpu_fpr[a->rs2]);
-> +    gen_helper_fle_h(dest, cpu_env, src1, src2);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -381,11 +510,12 @@ static bool trans_fle_h(DisasContext *ctx, arg_fle_h *a)
->  static bool trans_fclass_h(DisasContext *ctx, arg_fclass_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
-> -    gen_helper_fclass_h(dest, cpu_fpr[a->rs1]);
-> +    gen_helper_fclass_h(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -393,12 +523,13 @@ static bool trans_fclass_h(DisasContext *ctx, arg_fclass_h *a)
->  static bool trans_fcvt_w_h(DisasContext *ctx, arg_fcvt_w_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_w_h(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_w_h(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -406,12 +537,13 @@ static bool trans_fcvt_w_h(DisasContext *ctx, arg_fcvt_w_h *a)
->  static bool trans_fcvt_wu_h(DisasContext *ctx, arg_fcvt_wu_h *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_wu_h(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_wu_h(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -419,12 +551,14 @@ static bool trans_fcvt_wu_h(DisasContext *ctx, arg_fcvt_wu_h *a)
->  static bool trans_fcvt_h_w(DisasContext *ctx, arg_fcvt_h_w *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv t0 = get_gpr(ctx, a->rs1, EXT_SIGN);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_w(cpu_fpr[a->rd], cpu_env, t0);
-> +    gen_helper_fcvt_h_w(dest, cpu_env, t0);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->      return true;
-> @@ -433,12 +567,14 @@ static bool trans_fcvt_h_w(DisasContext *ctx, arg_fcvt_h_w *a)
->  static bool trans_fcvt_h_wu(DisasContext *ctx, arg_fcvt_h_wu *a)
->  {
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv t0 = get_gpr(ctx, a->rs1, EXT_SIGN);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_wu(cpu_fpr[a->rd], cpu_env, t0);
-> +    gen_helper_fcvt_h_wu(dest, cpu_env, t0);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->      return true;
-> @@ -482,12 +618,13 @@ static bool trans_fcvt_l_h(DisasContext *ctx, arg_fcvt_l_h *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_l_h(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_l_h(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -496,12 +633,13 @@ static bool trans_fcvt_lu_h(DisasContext *ctx, arg_fcvt_lu_h *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
->      TCGv dest = dest_gpr(ctx, a->rd);
-> +    TCGv_i64 src1 = get_fpr_hs(ctx, a->rs1);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_lu_h(dest, cpu_env, cpu_fpr[a->rs1]);
-> +    gen_helper_fcvt_lu_h(dest, cpu_env, src1);
->      gen_set_gpr(ctx, a->rd, dest);
->      return true;
->  }
-> @@ -510,12 +648,14 @@ static bool trans_fcvt_h_l(DisasContext *ctx, arg_fcvt_h_l *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv t0 = get_gpr(ctx, a->rs1, EXT_SIGN);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_l(cpu_fpr[a->rd], cpu_env, t0);
-> +    gen_helper_fcvt_h_l(dest, cpu_env, t0);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->      return true;
-> @@ -525,12 +665,14 @@ static bool trans_fcvt_h_lu(DisasContext *ctx, arg_fcvt_h_lu *a)
->  {
->      REQUIRE_64BIT(ctx);
->      REQUIRE_FPU;
-> -    REQUIRE_ZFH(ctx);
-> +    REQUIRE_ZHINX_OR_ZFH(ctx);
->
-> +    TCGv_i64 dest = dest_fpr(ctx, a->rd);
->      TCGv t0 = get_gpr(ctx, a->rs1, EXT_SIGN);
->
->      gen_set_rm(ctx, a->rm);
-> -    gen_helper_fcvt_h_lu(cpu_fpr[a->rd], cpu_env, t0);
-> +    gen_helper_fcvt_h_lu(dest, cpu_env, t0);
-> +    gen_set_fpr_hs(ctx, a->rd, dest);
->
->      mark_fs_dirty(ctx);
->      return true;
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index 6237bb3115..dbb322bfa7 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -72,13 +72,23 @@ static inline float32 check_nanbox_s(CPURISCVState *env, uint64_t f)
->      }
->  }
->
-> -static inline uint64_t nanbox_h(float16 f)
-> +static inline uint64_t nanbox_h(CPURISCVState *env, float16 f)
->  {
-> -    return f | MAKE_64BIT_MASK(16, 48);
-> +    /* the value is sign-extended instead of NaN-boxing for zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        return (int16_t)f;
-> +    } else {
-> +        return f | MAKE_64BIT_MASK(16, 48);
-> +    }
->  }
->
-> -static inline float16 check_nanbox_h(uint64_t f)
-> +static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
->  {
-> +    /* Disable nanbox check when enable zfinx */
-> +    if (RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
-> +        return (uint16_t)f;
-> +    }
+> -    [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",   any,    read_mcountinhibit,
+> -                                                       write_mcountinhibit },
+> -
+> -    [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_zero },
+> -    [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_zero },
+> -    [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_zero },
+> -    [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_zero },
+> -    [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_zero },
+> -    [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_zero },
+> -    [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_zero },
+> -    [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_zero },
+> -    [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_zero },
+> -    [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_zero },
+> -    [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_zero },
+> -    [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_zero },
+> -    [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_zero },
+> -    [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_zero },
+> -    [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_zero },
+> -    [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_zero },
+> -    [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_zero },
+> -    [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_zero },
+> -    [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_zero },
+> -    [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_zero },
+> -    [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_zero },
+> -    [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_zero },
+> -    [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_zero },
+> -    [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_zero },
+> -    [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_zero },
+> -    [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_zero },
+> -    [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_zero },
+> -    [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_zero },
+> -    [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_zero },
+> -
+> -    [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER6H]   = { "hpmcounter6h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER7H]   = { "hpmcounter7h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER8H]   = { "hpmcounter8h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER9H]   = { "hpmcounter9h",   ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER10H]  = { "hpmcounter10h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER11H]  = { "hpmcounter11h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER12H]  = { "hpmcounter12h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER13H]  = { "hpmcounter13h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER14H]  = { "hpmcounter14h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER15H]  = { "hpmcounter15h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER16H]  = { "hpmcounter16h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER17H]  = { "hpmcounter17h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER18H]  = { "hpmcounter18h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER19H]  = { "hpmcounter19h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER20H]  = { "hpmcounter20h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER21H]  = { "hpmcounter21h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER22H]  = { "hpmcounter22h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER23H]  = { "hpmcounter23h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER24H]  = { "hpmcounter24h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER25H]  = { "hpmcounter25h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER26H]  = { "hpmcounter26h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER27H]  = { "hpmcounter27h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER28H]  = { "hpmcounter28h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER29H]  = { "hpmcounter29h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER30H]  = { "hpmcounter30h",  ctr32,  read_zero },
+> -    [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_zero },
+> -
+> -    [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  any32,  read_zero },
+> -    [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", any32,  read_zero },
+> -    [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", any32,  read_zero },
+> +    [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER5]    = { "hpmcounter5",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER6]    = { "hpmcounter6",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER7]    = { "hpmcounter7",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER8]    = { "hpmcounter8",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER9]    = { "hpmcounter9",    ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER10]   = { "hpmcounter10",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER11]   = { "hpmcounter11",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER12]   = { "hpmcounter12",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER13]   = { "hpmcounter13",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER14]   = { "hpmcounter14",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER15]   = { "hpmcounter15",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER16]   = { "hpmcounter16",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER17]   = { "hpmcounter17",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER18]   = { "hpmcounter18",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER19]   = { "hpmcounter19",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER20]   = { "hpmcounter20",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER21]   = { "hpmcounter21",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER22]   = { "hpmcounter22",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER23]   = { "hpmcounter23",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER24]   = { "hpmcounter24",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER25]   = { "hpmcounter25",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER26]   = { "hpmcounter26",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER27]   = { "hpmcounter27",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER28]   = { "hpmcounter28",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER29]   = { "hpmcounter29",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER30]   = { "hpmcounter30",   ctr,    read_hpmcounter },
+> +    [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_hpmcounter },
 > +
->      uint64_t mask = MAKE_64BIT_MASK(16, 48);
->
->      if (likely((f & mask) == mask)) {
+> +    [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +    [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,    read_hpmcounter,
+> +                                                       write_mhpmcounter },
+> +
+> +    [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",  any, read_mcountinhibit,
+> +                                                    write_mcountinhibit },
+> +
+> +    [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +    [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
+> +                                                       write_mhpmevent },
+> +
+> +    [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER6H]   = { "hpmcounter6h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER7H]   = { "hpmcounter7h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER8H]   = { "hpmcounter8h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER9H]   = { "hpmcounter9h",   ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER10H]  = { "hpmcounter10h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER11H]  = { "hpmcounter11h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER12H]  = { "hpmcounter12h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER13H]  = { "hpmcounter13h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER14H]  = { "hpmcounter14h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER15H]  = { "hpmcounter15h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER16H]  = { "hpmcounter16h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER17H]  = { "hpmcounter17h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER18H]  = { "hpmcounter18h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER19H]  = { "hpmcounter19h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER20H]  = { "hpmcounter20h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER21H]  = { "hpmcounter21h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER22H]  = { "hpmcounter22h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER23H]  = { "hpmcounter23h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER24H]  = { "hpmcounter24h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER25H]  = { "hpmcounter25h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER26H]  = { "hpmcounter26h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER27H]  = { "hpmcounter27h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER28H]  = { "hpmcounter28h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER29H]  = { "hpmcounter29h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER30H]  = { "hpmcounter30h",  ctr32,  read_hpmcounterh },
+> +    [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_hpmcounterh },
+> +
+> +    [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+> +    [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
+> +                                                       write_mhpmcounterh },
+>  #endif /* !CONFIG_USER_ONLY */
+>  };
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index a34cc3f69c4b..042d655ce3ef 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -300,6 +300,9 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+>          VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
+>          VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
+> +        VMSTATE_UINTTL_ARRAY(env.mhpmcounter_val, RISCVCPU, RV_MAX_MHPMCOUNTERS),
+> +        VMSTATE_UINTTL_ARRAY(env.mhpmcounterh_val, RISCVCPU, RV_MAX_MHPMCOUNTERS),
+> +        VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
+>          VMSTATE_UINTTL(env.sscratch, RISCVCPU),
+>          VMSTATE_UINTTL(env.mscratch, RISCVCPU),
+>          VMSTATE_UINT64(env.mfromhost, RISCVCPU),
 > --
-> 2.17.1
+> 2.30.2
 >
 >
 
