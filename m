@@ -1,82 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nOqAT-0006Qu-M7
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 19:15:05 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:40412)
+	id 1nOrK2-0005sA-0q
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Feb 2022 20:29:03 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:55494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1nOqAO-0006Oy-O5; Mon, 28 Feb 2022 19:15:01 -0500
-Received: from [2a00:1450:4864:20::32a] (port=53854
- helo=mail-wm1-x32a.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1nOqAM-0005L7-V1; Mon, 28 Feb 2022 19:15:00 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id i20so6630455wmc.3;
- Mon, 28 Feb 2022 16:14:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=message-id:date:mime-version:user-agent:subject:content-language:to
- :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=nRXzGm1tTr+lcQI5RkHkPfC04rl1jWoXmAMM9OCIX8Y=;
- b=qFLkMN0ID42xLwgyChgqEXlUkgMv2HELW18OjGN5TlP0yGlP4Wr4Ws9hF8obRdotIz
- JR+moNdT+FD0bxJHFTLlluDXkuSesbnGlB2cLQyM13NUxj0KEtxEBl3240C52m84P4Fo
- 2KTh955sIJ3FzLFS84rCLwG2oeHsYHVrp5g5Ne7Qpx0GI/okGfDwhwRVDMWCo7Fy4r6+
- J0fQqFSqS14L040PzBZU55VIrifXgUl7/ulHikKuECNeUrc7r7zocramso9LzrOjtse/
- TaDTxxCdtWfB9Z+d84YVk2hT99SRL7R0dwIBxVfea2/H5HXBItzrj5JsQXbmMkAJvv7A
- uCIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=nRXzGm1tTr+lcQI5RkHkPfC04rl1jWoXmAMM9OCIX8Y=;
- b=kP0aLTKJig5UTx+tm0RuUkOKKLdwL0PEOXWknMMjfLbLXTgT0lC8YOQ0buVD5Qy3d3
- g3miPiWSGPzx0CBqc0xHrIB3YlNpiiCxBcIlvxHRbb7sRNqDymM0/AY7f/AJcJiOlolc
- aW8GMa9NMgTL3v9AQkSUZtT+pr3R+nFxsM+rxhsf328w0kBfho20Z05kr0cnwhSNlbDU
- ocaIPb2alzgNHDEYD59j0Fot7rTSEk+VIk7jz210LRbIN6XF4BnYyDP8Pl93O+ahwN24
- Rb5oPjApBNFd8n/ib94ex1Vw72AW8RwE+dWCaPMPrfS0q3sxBBxbe+bCnw+szlDmLZQh
- XhJw==
-X-Gm-Message-State: AOAM531QqbAJfC7kbi8jdjwqhTlurgehSpcNtFEJDsteB2FS9GhqTRHX
- m1rJ/+Dglw9XG29WJEMmwcY=
-X-Google-Smtp-Source: ABdhPJwa9aU5M0nvrx/x+cphkXL5mnkZ5ms2az1Trcu2S+2FquOMyXFYSIkc/gCcM/sUgRNnVoU4dA==
-X-Received: by 2002:a7b:c3d5:0:b0:381:2ed5:aee1 with SMTP id
- t21-20020a7bc3d5000000b003812ed5aee1mr15153229wmj.113.1646093696965; 
- Mon, 28 Feb 2022 16:14:56 -0800 (PST)
-Received: from [192.168.131.175] (62.red-95-127-166.staticip.rima-tde.net.
- [95.127.166.62]) by smtp.gmail.com with ESMTPSA id
- o13-20020a5d648d000000b001efd62a840dsm4994628wri.111.2022.02.28.16.14.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Feb 2022 16:14:56 -0800 (PST)
-Message-ID: <2d6f54e0-c96a-91dd-0fe6-099f2715cfbb@gmail.com>
-Date: Tue, 1 Mar 2022 00:52:22 +0100
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nOrJn-0005pY-Tz; Mon, 28 Feb 2022 20:28:49 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84]:53380 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nOrJl-0007lF-Ax; Mon, 28 Feb 2022 20:28:47 -0500
+Received: from [192.168.0.104] (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowAB3V_DBdh1iU_rPAQ--.16838S2;
+ Tue, 01 Mar 2022 09:28:34 +0800 (CST)
+Subject: Re: [PATCH v7 09/14] target/riscv: rvk: add support for sha512
+ related instructions for RV32 in zknh extension
+To: Richard Henderson <richard.henderson@linaro.org>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com
+References: <20220228144810.7284-1-liweiwei@iscas.ac.cn>
+ <20220228144810.7284-10-liweiwei@iscas.ac.cn>
+ <ea054747-9c1b-4e0b-f084-6063d19207ca@linaro.org>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <c12ae766-fd80-241f-899e-5f7e62682450@iscas.ac.cn>
+Date: Tue, 1 Mar 2022 09:28:33 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.6.1
-Subject: Re: [PATCH v2 1/2] hw/ssi: Add Ibex SPI device model
+In-Reply-To: <ea054747-9c1b-4e0b-f084-6063d19207ca@linaro.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>,
- Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, wilfred.mallawa@wdc.com,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
-References: <20220228034047.34612-1-alistair.francis@opensource.wdc.com>
- <CAKmqyKMaX6ExVyVfFhdKvmXL4e+uPuczJwYLLVxMbKrED0-ksg@mail.gmail.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <philippe.mathieu.daude@gmail.com>
-In-Reply-To: <CAKmqyKMaX6ExVyVfFhdKvmXL4e+uPuczJwYLLVxMbKrED0-ksg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::32a
- (failed)
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -6
-X-Spam_score: -0.7
-X-Spam_bar: /
-X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- NICE_REPLY_A=-0.001, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-CM-TRANSID: zQCowAB3V_DBdh1iU_rPAQ--.16838S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJrW8Gry3GryDXrWUCw4kZwb_yoW8GrWkpF
+ 1ktrWvqF4kJFsY9ryjyr1vqryxZ34UA3WYy340q34ftrW5tr10kFW5Wan0gFW7Ca95ur1U
+ AF40ga4a93W3AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBq14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+ n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20x
+ vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
+ 3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
+ AIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAI
+ cVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z2
+ 80aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUj0JPtUUUUU==
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,75 +71,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Mar 2022 00:15:01 -0000
+X-List-Received-Date: Tue, 01 Mar 2022 01:28:51 -0000
 
-Hi Wilfred,
 
-On 28/2/22 10:13, Alistair Francis wrote:
-> On Mon, Feb 28, 2022 at 1:41 PM Alistair Francis
-> <alistair.francis@opensource.wdc.com> wrote:
->>
->> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
->>
->> Adds the SPI_HOST device model for ibex. The device specification is as per
->> [1]. The model has been tested on opentitan with spi_host unit tests
->> written for TockOS.
->>
->> [1] https://docs.opentitan.org/hw/ip/spi_host/doc/
->>
->> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
->> ---
->>   hw/ssi/ibex_spi_host.c         | 613 +++++++++++++++++++++++++++++++++
->>   hw/ssi/meson.build             |   1 +
->>   hw/ssi/trace-events            |   7 +
->>   include/hw/ssi/ibex_spi_host.h |  94 +++++
->>   4 files changed, 715 insertions(+)
->>   create mode 100644 hw/ssi/ibex_spi_host.c
->>   create mode 100644 include/hw/ssi/ibex_spi_host.h
+在 2022/3/1 上午3:38, Richard Henderson 写道:
+> On 2/28/22 04:48, Weiwei Li wrote:
+>> +#define GEN_SHA512H_RV32(NAME, OP, NUM1, NUM2, NUM3) \
+>> +static void gen_##NAME(TCGv dest, TCGv src1, TCGv src2) \
+>> +{ \
+>> +    TCGv_i64 t0 = tcg_temp_new_i64(); \
+>> +    TCGv_i64 t1 = tcg_temp_new_i64(); \
+>> +    TCGv_i64 t2 = tcg_temp_new_i64(); \
+>> +    \
+>> +    tcg_gen_concat_tl_i64(t0, src1, src2); \
+>> +    tcg_gen_##OP##_i64(t1, t0, NUM1); \
+>> +    tcg_gen_concat_tl_i64(t2, src1, tcg_const_tl(0)); \
+>
+> The bug here is tcg_const_tl instead of tcg_constant_tl, which leaks a 
+> temporary.
+>
+> It's not the best option for zero-extension, though, as we don't 
+> optimize a deposit of zero like this (we probably should, but, hey).
+>
+> Better would be
+>
+>     tcg_gen_extu_tl_i64(t2, src1);
+>     tcg_gen_ext32u_i64(t2, t2);
+>
+> Note that the first operation will *not* extend if TARGET_RISCV64, 
+> since it doesn't actually change type.  The second operation will be 
+> optimized away if TARGET_RISCV32, since the zero-extend has already 
+> happened.
+>
+OK. I'll update this.
 
->> +static void ibex_spi_host_realize(DeviceState *dev, Error **errp)
->> +{
->> +    IbexSPIHostState *s = IBEX_SPI_HOST(dev);
->> +    int i;
->> +
->> +    s->ssi = ssi_create_bus(dev, "ssi");
->> +    s->cs_lines = g_new0(qemu_irq, s->num_cs);
->> +
->> +    for (i = 0; i < s->num_cs; ++i) {
->> +        sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->cs_lines[i]);
->> +    }
->> +
->> +    /* Setup CONFIGOPTS Multi-register */
->> +    s->config_opts = malloc(sizeof(uint32_t) * s->num_cs);
+> BTW, it would be better to not use a large macro for this, and in the 
+> previous patch. Passing in parameters to a helper function would be 
+> easier to read and debug.
+>
+OK I'll try to replace this as parameters to a function.
 
-This array is not zeroed. Clearer as:
+Regards,
 
-         s->config_opts = g_new0(uint32_t, s->num_cs);
+Weiwei Li
 
->> +
->> +    /* Setup FIFO Interrupt Timer */
->> +    s->fifo_trigger_handle = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->> +                                          fifo_trigger_update, s);
->> +
->> +    /* FIFO sizes as per OT Spec */
->> +    fifo8_create(&s->tx_fifo, IBEX_SPI_HOST_TXFIFO_LEN);
->> +    fifo8_create(&s->rx_fifo, IBEX_SPI_HOST_RXFIFO_LEN);
->> +}
->> +
->> +static void ibex_spi_host_init(Object *obj)
->> +{
->> +    IbexSPIHostState *s = IBEX_SPI_HOST(obj);
->> +
->> +    s->init_status = true;
-
-What about reset?
-
->> +    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->host_err);
->> +    sysbus_init_irq(SYS_BUS_DEVICE(obj), &s->event);
->> +
->> +    memory_region_init_io(&s->mmio, obj, &ibex_spi_ops, s,
->> +                          TYPE_IBEX_SPI_HOST, 0x1000);
->> +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
->> +}
+>
+> r~
 
 
