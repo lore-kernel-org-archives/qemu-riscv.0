@@ -1,74 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nPJv7-00055o-G8
-	for mharc-qemu-riscv@gnu.org; Wed, 02 Mar 2022 03:01:13 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:44140)
+	id 1nPO7j-0000wd-9Q
+	for mharc-qemu-riscv@gnu.org; Wed, 02 Mar 2022 07:30:32 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:48516)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nPJv4-00054X-KG; Wed, 02 Mar 2022 03:01:10 -0500
-Received: from [2607:f8b0:4864:20::d2d] (port=40451
- helo=mail-io1-xd2d.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nPJv1-0001F7-AL; Wed, 02 Mar 2022 03:01:09 -0500
-Received: by mail-io1-xd2d.google.com with SMTP id t11so940979ioi.7;
- Wed, 02 Mar 2022 00:01:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E8JSNjAdEPn05CrRUmNOidfDCUSrwpFB7Wy5Fn6CHJA=;
- b=iVDlOhmAmfspnMNWGHuHiJq6qX10Blo+rykqnqKtWHVkAYy5lXfyvKFnXXIIzZdSmW
- X+yKDevHLjZ9mGmY1ZAgkNhA/jv7Wbahzdg7M0mQhx2nBkM9LOysfDdkD9J5hRPmx5Tu
- 9Zg8o4M+iKoUkL9yn4BPoYx3GvbYLA419HAh8KxmFIix9AzvL60liEhwZdQpqdGUgIK/
- PE6j+JrVRAMud5hPjaDPZT2ulWbpqWXiCOX+sCDweOAdq8ojCXYw04FiFKT2BGfsFp6/
- hmn7yxYaeGzg3xqtXWj2RQyxPkYPi7UuNemjQ0fgtNApNSeHTydSTRMGEK6tykLz5rV3
- SW9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=E8JSNjAdEPn05CrRUmNOidfDCUSrwpFB7Wy5Fn6CHJA=;
- b=CxELn07/9yEv2sF3MOYfd91DaJoD6gzirFYM8XgRBhWlNcWXGVrQlbH7WbSmqeeBXr
- XuHqQsq1LoKzo33caU9A0KNyLHZwRxHrpqjRdOuKBkqGzJJReUAdrijTeyDpmQAFbKn0
- JQP0qMRP8VEcrWQEaf/ljauWW1e1mhj93S4RkF44QNzV9KMztBeHOhC3gg+JEUOApTn4
- vT65srng8T+g15qzw3A3qZkpHuKUgH5pqpOM31jKUf5v2MRES8HJ1EvA+qYOuno7XG+B
- gWz1fdkY4c7ilPx/D2O/+HEomFwS3adljaMeqb8Xb9+rk7SCBcrPPcGAnXCcfA0GPqvJ
- hBGA==
-X-Gm-Message-State: AOAM533LleXdlIt98Jhu6vO3FtGMAHrkglBdjIpuAPA9TaI+H35bkh+6
- kEMqKnmYQRMzCBYORMyGGMmUs6pvZHQn1OiF/Ps=
-X-Google-Smtp-Source: ABdhPJz6CdqsmJAgtCitjwRfm6fj1JVxMDwKkJ5GvBC9Z1f8rhvhOz0LEaPkNPqeLzeTERQ3ib6dpaZ5L9S5gU5cjnU=
-X-Received: by 2002:a02:9529:0:b0:314:5808:5de2 with SMTP id
- y38-20020a029529000000b0031458085de2mr23570586jah.68.1646208065330; Wed, 02
- Mar 2022 00:01:05 -0800 (PST)
-MIME-Version: 1.0
-References: <20220216154839.1024927-1-cmuellner@linux.com>
- <20220216154839.1024927-2-cmuellner@linux.com>
-In-Reply-To: <20220216154839.1024927-2-cmuellner@linux.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 2 Mar 2022 18:00:38 +1000
-Message-ID: <CAKmqyKOCkWnOo9+bCfzRWBjPJ2-0iA6Gh1bEem9BkAoWg3AiCw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/2] accel/tcg: Add probe_access_range_flags interface
-To: Christoph Muellner <cmuellner@linux.com>
-Cc: Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>, 
- =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?= <frederic.petrot@univ-grenoble-alpes.fr>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Richard Henderson <richard.henderson@linaro.org>,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nPO7V-0000ok-Lu; Wed, 02 Mar 2022 07:30:21 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84]:42148 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nPO7N-0001Jr-LJ; Wed, 02 Mar 2022 07:30:15 -0500
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_0NIYx9iZCvwAQ--.51923S2;
+ Wed, 02 Mar 2022 20:30:02 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2d
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
-X-Spam_score_int: -3
-X-Spam_score: -0.4
-X-Spam_bar: /
-X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Subject: [PATCH] target/riscv: write back unmodified value for csrrc/csrrs
+ with rs1 is not x0 but holding zero
+Date: Wed,  2 Mar 2022 20:29:46 +0800
+Message-Id: <20220302122946.29635-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+X-CM-TRANSID: zQCowAD3_0NIYx9iZCvwAQ--.51923S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3Ar1UtF43Cr4ruF4rKF1rJFb_yoW7WFy5pr
+ Wak39xW3yvqFZ7X3Zay3WDJw1rJw48G3yfCwn2qw45Jr1fJFWYyF4qqFsayFyDua4Syr4F
+ vFs09FyI9w4UAFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUyG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+ I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+ 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxG
+ rwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
+ vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
+ x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26c
+ xKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x02
+ 67AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,141 +59,158 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Mar 2022 08:01:10 -0000
+X-List-Received-Date: Wed, 02 Mar 2022 12:30:26 -0000
 
-On Thu, Feb 17, 2022 at 1:49 AM Christoph Muellner <cmuellner@linux.com> wrote:
->
-> The existing probe_access* functions do not allow to specify the
-> access size and a non-faulting behavior at the same time.
->
-> This is resolved by adding a generalization of probe_access_flags()
-> that takes an additional size parameter.
->
-> The semantics is basically the same as probe_access_flags(),
-> but instead of assuming an access to any byte of the addressed
-> page, we can restrict to access to a specific area, like
-> probe_access() allows.
->
-> Signed-off-by: Christoph Muellner <cmuellner@linux.com>
+     For csrrs and csrrc, if rs1 specifies a register other than x0, holding
+     a zero value, the instruction will still attempt to write the unmodified
+     value back to the csr and will cause side effects
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/csr.c       | 46 ++++++++++++++++++++++++++++------------
+ target/riscv/op_helper.c |  7 +++++-
+ 2 files changed, 39 insertions(+), 14 deletions(-)
 
-Alistair
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index aea82dff4a..f4774ca07b 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2872,7 +2872,7 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+ 
+ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+                                                int csrno,
+-                                               bool write_mask,
++                                               bool write_csr,
+                                                RISCVCPU *cpu)
+ {
+     /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+@@ -2895,7 +2895,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ #endif
+-    if (write_mask && read_only) {
++    if (write_csr && read_only) {
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+@@ -2915,7 +2915,8 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+                                        target_ulong *ret_value,
+                                        target_ulong new_value,
+-                                       target_ulong write_mask)
++                                       target_ulong write_mask,
++                                       bool write_csr)
+ {
+     RISCVException ret;
+     target_ulong old_value;
+@@ -2935,8 +2936,8 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
+-    /* write value if writable and write mask set, otherwise drop writes */
+-    if (write_mask) {
++    /* write value if needed, otherwise drop writes */
++    if (write_csr) {
+         new_value = (old_value & ~write_mask) | (new_value & write_mask);
+         if (csr_ops[csrno].write) {
+             ret = csr_ops[csrno].write(env, csrno, new_value);
+@@ -2960,18 +2961,27 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+ {
+     RISCVCPU *cpu = env_archcpu(env);
+ 
+-    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask, cpu);
++    /*
++     * write value when write_mask is set or rs1 is not x0 but holding zero
++     * value for csrrc(new_value is zero) and csrrs(new_value is all-ones)
++     */
++    bool write_csr = write_mask || ((write_mask == 0) &&
++                                    ((new_value == 0) ||
++                                     (new_value == (target_ulong)-1)));
++
++    RISCVException ret = riscv_csrrw_check(env, csrno, write_csr, cpu);
+     if (ret != RISCV_EXCP_NONE) {
+         return ret;
+     }
+ 
+-    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
++    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask,
++                            write_csr);
+ }
+ 
+ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+                                         Int128 *ret_value,
+                                         Int128 new_value,
+-                                        Int128 write_mask)
++                                        Int128 write_mask, bool write_csr)
+ {
+     RISCVException ret;
+     Int128 old_value;
+@@ -2982,8 +2992,8 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
+-    /* write value if writable and write mask set, otherwise drop writes */
+-    if (int128_nz(write_mask)) {
++    /* write value if needed, otherwise drop writes */
++    if (write_csr) {
+         new_value = int128_or(int128_and(old_value, int128_not(write_mask)),
+                               int128_and(new_value, write_mask));
+         if (csr_ops[csrno].write128) {
+@@ -3015,13 +3025,22 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+     RISCVException ret;
+     RISCVCPU *cpu = env_archcpu(env);
+ 
+-    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask), cpu);
++    /*
++     * write value when write_mask is set or rs1 is not x0 but holding zero
++     * value for csrrc(new_value is zero) and csrrs(new_value is all-ones)
++     */
++    bool write_csr = write_mask || ((write_mask == 0) &&
++                                    ((new_value == 0) ||
++                                     (new_value == UINT128_MAX)));
++
++    ret = riscv_csrrw_check(env, csrno, write_csr, cpu);
+     if (ret != RISCV_EXCP_NONE) {
+         return ret;
+     }
+ 
+     if (csr_ops[csrno].read128) {
+-        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write_mask);
++        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write_mask,
++                                 write_csr);
+     }
+ 
+     /*
+@@ -3033,7 +3052,8 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+     target_ulong old_value;
+     ret = riscv_csrrw_do64(env, csrno, &old_value,
+                            int128_getlo(new_value),
+-                           int128_getlo(write_mask));
++                           int128_getlo(write_mask),
++                           write_csr);
+     if (ret == RISCV_EXCP_NONE && ret_value) {
+         *ret_value = int128_make64(old_value);
+     }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 1a75ba11e6..b2ad465533 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -40,7 +40,12 @@ void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+ target_ulong helper_csrr(CPURISCVState *env, int csr)
+ {
+     target_ulong val = 0;
+-    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
++
++    /*
++     * new_value here should be none-zero or none-all-ones here to
++     * distinguish with csrrc/csrrs with rs1 is not x0 but holding zero value
++     */
++    RISCVException ret = riscv_csrrw(env, csr, &val, 1, 0);
+ 
+     if (ret != RISCV_EXCP_NONE) {
+         riscv_raise_exception(env, ret, GETPC());
+-- 
+2.17.1
 
-> ---
->  accel/tcg/cputlb.c      | 17 +++++++++++++----
->  accel/tcg/user-exec.c   | 15 ++++++++++++---
->  include/exec/exec-all.h | 24 ++++++++++++++++++++++++
->  3 files changed, 49 insertions(+), 7 deletions(-)
->
-> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-> index 5e0d0eebc3..b4f0eb20b0 100644
-> --- a/accel/tcg/cputlb.c
-> +++ b/accel/tcg/cputlb.c
-> @@ -1624,13 +1624,14 @@ static int probe_access_internal(CPUArchState *env, target_ulong addr,
->      return flags;
->  }
->
-> -int probe_access_flags(CPUArchState *env, target_ulong addr,
-> -                       MMUAccessType access_type, int mmu_idx,
-> -                       bool nonfault, void **phost, uintptr_t retaddr)
-> +int probe_access_range_flags(CPUArchState *env, target_ulong addr,
-> +                             int size, MMUAccessType access_type,
-> +                             int mmu_idx, bool nonfault, void **phost,
-> +                             uintptr_t retaddr)
->  {
->      int flags;
->
-> -    flags = probe_access_internal(env, addr, 0, access_type, mmu_idx,
-> +    flags = probe_access_internal(env, addr, size, access_type, mmu_idx,
->                                    nonfault, phost, retaddr);
->
->      /* Handle clean RAM pages.  */
-> @@ -1645,6 +1646,14 @@ int probe_access_flags(CPUArchState *env, target_ulong addr,
->      return flags;
->  }
->
-> +int probe_access_flags(CPUArchState *env, target_ulong addr,
-> +                       MMUAccessType access_type, int mmu_idx,
-> +                       bool nonfault, void **phost, uintptr_t retaddr)
-> +{
-> +    return probe_access_range_flags(env, addr, 0, access_type, mmu_idx,
-> +                                    nonfault, phost, retaddr);
-> +}
-> +
->  void *probe_access(CPUArchState *env, target_ulong addr, int size,
->                     MMUAccessType access_type, int mmu_idx, uintptr_t retaddr)
->  {
-> diff --git a/accel/tcg/user-exec.c b/accel/tcg/user-exec.c
-> index 6f5d4933f0..0dbc345e63 100644
-> --- a/accel/tcg/user-exec.c
-> +++ b/accel/tcg/user-exec.c
-> @@ -176,9 +176,10 @@ static int probe_access_internal(CPUArchState *env, target_ulong addr,
->      cpu_loop_exit_sigsegv(env_cpu(env), addr, access_type, maperr, ra);
->  }
->
-> -int probe_access_flags(CPUArchState *env, target_ulong addr,
-> -                       MMUAccessType access_type, int mmu_idx,
-> -                       bool nonfault, void **phost, uintptr_t ra)
-> +int probe_access_range_flags(CPUArchState *env, target_ulong addr,
-> +                             int size, MMUAccessType access_type,
-> +                             int mmu_idx, bool nonfault, void **phost,
-> +                             uintptr_t ra)
->  {
->      int flags;
->
-> @@ -187,6 +188,14 @@ int probe_access_flags(CPUArchState *env, target_ulong addr,
->      return flags;
->  }
->
-> +int probe_access_flags(CPUArchState *env, target_ulong addr,
-> +                       MMUAccessType access_type, int mmu_idx,
-> +                       bool nonfault, void **phost, uintptr_t ra)
-> +{
-> +    return probe_access_range_flags(env, addr, 0, access_type, mmu_idx,
-> +                                    nonfault, phost, ra);
-> +}
-> +
->  void *probe_access(CPUArchState *env, target_ulong addr, int size,
->                     MMUAccessType access_type, int mmu_idx, uintptr_t ra)
->  {
-> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-> index 35d8e93976..0d06b45c62 100644
-> --- a/include/exec/exec-all.h
-> +++ b/include/exec/exec-all.h
-> @@ -441,6 +441,30 @@ static inline void *probe_read(CPUArchState *env, target_ulong addr, int size,
->      return probe_access(env, addr, size, MMU_DATA_LOAD, mmu_idx, retaddr);
->  }
->
-> +/**
-> + * probe_access_range_flags:
-> + * @env: CPUArchState
-> + * @addr: guest virtual address to look up
-> + * @size: size of the access
-> + * @access_type: read, write or execute permission
-> + * @mmu_idx: MMU index to use for lookup
-> + * @nonfault: suppress the fault
-> + * @phost: return value for host address
-> + * @retaddr: return address for unwinding
-> + *
-> + * Similar to probe_access, loosely returning the TLB_FLAGS_MASK for
-> + * the access range, and storing the host address for RAM in @phost.
-> + *
-> + * If @nonfault is set, do not raise an exception but return TLB_INVALID_MASK.
-> + * Do not handle watchpoints, but include TLB_WATCHPOINT in the returned flags.
-> + * Do handle clean pages, so exclude TLB_NOTDIRY from the returned flags.
-> + * For simplicity, all "mmio-like" flags are folded to TLB_MMIO.
-> + */
-> +int probe_access_range_flags(CPUArchState *env, target_ulong addr,
-> +                             int size, MMUAccessType access_type,
-> +                             int mmu_idx, bool nonfault, void **phost,
-> +                             uintptr_t retaddr);
-> +
->  /**
->   * probe_access_flags:
->   * @env: CPUArchState
-> --
-> 2.35.1
->
->
 
