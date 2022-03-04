@@ -1,71 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nPzC4-0001Lv-Rt
-	for mharc-qemu-riscv@gnu.org; Thu, 03 Mar 2022 23:05:29 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57360)
+	id 1nQ9GE-00060q-1p
+	for mharc-qemu-riscv@gnu.org; Fri, 04 Mar 2022 09:50:26 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:46438)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nPzC1-0001KX-4r
- for qemu-riscv@nongnu.org; Thu, 03 Mar 2022 23:05:25 -0500
-Received: from [2a00:1450:4864:20::430] (port=34621
- helo=mail-wr1-x430.google.com)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1nQ9GC-0005to-6l; Fri, 04 Mar 2022 09:50:24 -0500
+Received: from [2a00:1450:4864:20::329] (port=55850
+ helo=mail-wm1-x329.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nPzBz-0001Ax-5n
- for qemu-riscv@nongnu.org; Thu, 03 Mar 2022 23:05:24 -0500
-Received: by mail-wr1-x430.google.com with SMTP id j26so408738wrb.1
- for <qemu-riscv@nongnu.org>; Thu, 03 Mar 2022 20:05:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3D0i1qD3+g6hEHFwkYhMrNGOOIatV/jutGJWb60WWfI=;
- b=2DhZAOnPEyjAvbDhyAJiQsfchNezGP72RudnUsWL7jnx/IbJwKeOiOWD7e+DEJRgpz
- EJA5ElVxNKfHe2kfnqQaEyte4rbVwfF2rsAwUTEFBWQTdi4dgxiVaME6Bj+9/Q0Bbbdc
- eG7lonvYjFzRN+bfP4eN2V/7NeBdfdyH1QYsen2n5wIU14nAmJOTDBgFj7XXHasmXMy+
- m0R40NBrtloDl1m+m3aIOEYd9f7W6oEw6az/roKvXujgJkqyb8O9JOWs/l8syVnrcA/Q
- dQ/ez/4IwG5clwdKEKMhArZeb0p9evrPCKCXCuCk9r0KwQgS0kUtohXyGZOe6e8eFWBn
- MEJg==
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1nQ9G9-00037J-1d; Fri, 04 Mar 2022 09:50:23 -0500
+Received: by mail-wm1-x329.google.com with SMTP id i66so5146288wma.5;
+ Fri, 04 Mar 2022 06:50:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=TVXD4dj9GpshhDxg4kkvPv9EmNEBNrYlzIRgUSLQXPo=;
+ b=UpweMWdq1NPaEB/0/nhZJva7aoFXk1mRcOmRUGzv6+8kjfYDNb/aY+cSFBtlJqLCB+
+ 7Cc8tU1ffxAxaErQK1yUTojsueJOsdvttQ+n0naG84fbZ1I6CUJkd8hZUoQOJ0HV+A8u
+ AtvAGKQV0Pfpdq7yI0oCyHCBA6Ih/fy0Wd9hynTSOrZ8DxSWJgr9ozBfORj0s2iYO/Hf
+ 1GMV6qPdcmchmtfCPMcZ0aaUG4YY/KMTWOVeY2J4RX0J9/fXOSzS6PTSrlxmL5HTDnXp
+ zXqc7m1n6PGGBHlJJY1CE90BsF4R77xPCtk/ES8S+pXh0Sdi6JCHi7islMV5cmu+IRPM
+ i6xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3D0i1qD3+g6hEHFwkYhMrNGOOIatV/jutGJWb60WWfI=;
- b=0PEfrCGLAPMxzgO+jUzgG7UJFmR1wJd0nZI+9RVyJusMHlgRVtVQD7W5uTW9vKfWY2
- G2EUB2uIQWmOR5268GjZ38iPgFh5j5RmwJAqZmRZ7HvyEeh4A+wMO/28KBvxt/tp4cYW
- ji0GjsYYF5lgVgNVa979WK8hF2O6qULUjbxKiBAjYPOqe0+jrIBjZ6bVdP8TrVHacsBh
- hx4Y/tP2uF0BxNetLsl0pIqlBheAUJNFI4Zl1t0ZGoKkKCcQr7rxR07QSYvciEbocxp1
- YKHlgKX59wgLItUBYX6v5/O0m3N/2AOS7VCL7D3xYCZxSAulvKQ60UXcWgb2LkaEHJ5y
- fOsQ==
-X-Gm-Message-State: AOAM530ihAbdv31dx0Glk1pomsv/JQnDxrSQqtk3RwfeqKNcrC8dV0K7
- oaEPCTS8QE8D7d23uvGbgtGuAtfaKcWpJAB+0VCvCQ==
-X-Google-Smtp-Source: ABdhPJxGwu869lt41yeW+9WDeistv6eUXDDI6ZIFxOmERe6GZ1qSGFSktVwQr+7F8dp1yIdAPE3w1xlxoXvZBIKaW2c=
-X-Received: by 2002:a5d:6c6b:0:b0:1ea:77ea:dde8 with SMTP id
- r11-20020a5d6c6b000000b001ea77eadde8mr29085283wrz.690.1646366720968; Thu, 03
- Mar 2022 20:05:20 -0800 (PST)
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=TVXD4dj9GpshhDxg4kkvPv9EmNEBNrYlzIRgUSLQXPo=;
+ b=mQcxOZugaXgnCXNDUIvYWbWL+tNvee0VfWfbLkMgilsFNO3raj96ZhBGQSK9A0y9Ud
+ N+96+su+/VicYil+9OrmDe5gDKbd4EaTvO9MSgiuKFXTkiZlfB9xzf85U/9MZb88hnBB
+ 2a5f21i+ljRVx2y7bPPnbT+2Y9E37evUA/d1ueXFZ+9P1/ukOdhr3O3DxYDJWdRm8XIf
+ LWeefrppB22PL0i7UclDH/apS7s/sR8YQBqiun4iOVZPFpJze/f3dWbXjEuBriyzuzP2
+ 6AdULN8pkXnOg+2SwjDBuOIgeAGZq44+MsqI2vbWV4dGO++w3ZkUVC4N6Bu3FWY+A80+
+ XlGQ==
+X-Gm-Message-State: AOAM532WoANFwruk7Yc6xPfE16qp71QE4v540WMHl4JS3kyP7r+gKMoo
+ xEg1DNL3Zu3pPK/XjOYJiCg=
+X-Google-Smtp-Source: ABdhPJxrtmgr6cjH+H4S0gSf6RMS8sz9uT1qDTLctB21i4LtAKuGe5IaX3QTUuGCCWlaoc905zdHNA==
+X-Received: by 2002:a05:600c:3d99:b0:381:546c:8195 with SMTP id
+ bi25-20020a05600c3d9900b00381546c8195mr8056940wmb.112.1646405419188; 
+ Fri, 04 Mar 2022 06:50:19 -0800 (PST)
+Received: from [192.168.88.252] ([185.126.107.38])
+ by smtp.gmail.com with ESMTPSA id
+ m14-20020a05600c4f4e00b0038181486018sm6040353wmq.40.2022.03.04.06.50.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 04 Mar 2022 06:50:18 -0800 (PST)
+Message-ID: <5eadd17a-9fb4-4a0a-2608-c2ca08b18645@gmail.com>
+Date: Fri, 4 Mar 2022 13:58:36 +0100
 MIME-Version: 1.0
-References: <20220304032023.730344-1-atishp@rivosinc.com>
- <20220304032023.730344-2-atishp@rivosinc.com>
-In-Reply-To: <20220304032023.730344-2-atishp@rivosinc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Fri, 4 Mar 2022 09:35:07 +0530
-Message-ID: <CAAhSdy2W4aDauH50zS_BNaeghTsDNVMsYHQtkaeydz5Ob-O_SQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/3] target/riscv: Rename timer & timecmp to mtimer
- and mtimecmp
-To: Atish Patra <atishp@rivosinc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::430
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.6.1
+Subject: Re: [PATCH v4 14/14] hw: set user_creatable on opentitan/sifive_e
+ devices
+Content-Language: en-US
+To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org,
+ mark.burton@greensocs.com, edgari@xilinx.com
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+ <peter.maydell@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <f4bug@amsat.org>, "open list:OpenTitan" <qemu-riscv@nongnu.org>
+References: <20220223090706.4888-1-damien.hedde@greensocs.com>
+ <20220223090706.4888-15-damien.hedde@greensocs.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <philippe.mathieu.daude@gmail.com>
+In-Reply-To: <20220223090706.4888-15-damien.hedde@greensocs.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::329
  (failed)
-Received-SPF: none client-ip=2a00:1450:4864:20::430;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -4
-X-Spam_score: -0.5
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
 X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_NONE=0.001,
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ NICE_REPLY_A=-0.001, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -79,201 +92,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Mar 2022 04:05:26 -0000
+X-List-Received-Date: Fri, 04 Mar 2022 14:50:24 -0000
 
-On Fri, Mar 4, 2022 at 8:50 AM Atish Patra <atishp@rivosinc.com> wrote:
->
-> Currently, the aclint and ibex timer devices uses the "timer" &
-> "timecmp" to generate the m-mode timer interrupt. In future,
-> we will have timer interrupt injected to S/VS mode directly.
-> No functionality change introduced in this patch.
+On 23/2/22 10:07, Damien Hedde wrote:
+> The devices are:
+> + ibex-timer
+> + ibex-uart
+> + riscv.aclint.swi
+> + riscv.aclint.mtimer
+> + riscv.hart_array
+> + riscv.sifive.e.prci
+> + riscv.sifive.plic
+> + riscv.sifive.uart
+> + sifive_soc.gpio
+> + unimplemented-device
+> 
+> These devices are clean regarding error handling in realize.
+> 
+> They are all sysbus devices, so setting user-creatable will only
+> enable cold-plugging them on machine having explicitely allowed them
+> (only _none_ machine does that).
+> 
+> Note that this commit include the ricv_array which embeds cpus. There
 
-s/have timer/have a timer/
+Typo "includes" I guess.
 
->
-> Add a prefix "m" these enviornment variables to indicate its
-> true purpose.
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-s/enviornment/environment/
-
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-
-I suggest we should remove mtimecmp and mtimer from
-target/riscv because mtimer is a memory mapped device.
-
-Regards,
-Anup
-
+> are some deep internal constraints about them: you cannot create more
+> cpus than the machine's maxcpus. TCG accelerator's code will for example
+> assert if a user try to create too many cpus.
+> 
+> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 > ---
->  hw/intc/riscv_aclint.c | 20 ++++++++++----------
->  hw/timer/ibex_timer.c  | 14 +++++++-------
->  target/riscv/cpu.h     |  4 ++--
->  target/riscv/machine.c |  2 +-
->  4 files changed, 20 insertions(+), 20 deletions(-)
->
-> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> index f1a5d3d284fd..642794a06865 100644
-> --- a/hw/intc/riscv_aclint.c
-> +++ b/hw/intc/riscv_aclint.c
-> @@ -59,8 +59,8 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
->
->      uint64_t rtc_r = cpu_riscv_read_rtc(timebase_freq);
->
-> -    cpu->env.timecmp = value;
-> -    if (cpu->env.timecmp <= rtc_r) {
-> +    cpu->env.mtimecmp = value;
-> +    if (cpu->env.mtimecmp <= rtc_r) {
->          /*
->           * If we're setting an MTIMECMP value in the "past",
->           * immediately raise the timer interrupt
-> @@ -71,7 +71,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
->
->      /* otherwise, set up the future timer interrupt */
->      qemu_irq_lower(mtimer->timer_irqs[hartid - mtimer->hartid_base]);
-> -    diff = cpu->env.timecmp - rtc_r;
-> +    diff = cpu->env.mtimecmp - rtc_r;
->      /* back to ns (note args switched in muldiv64) */
->      uint64_t ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
->
-> @@ -96,7 +96,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
->          next = MIN(next, INT64_MAX);
->      }
->
-> -    timer_mod(cpu->env.timer, next);
-> +    timer_mod(cpu->env.mtimer, next);
->  }
->
->  /*
-> @@ -127,11 +127,11 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
->                            "aclint-mtimer: invalid hartid: %zu", hartid);
->          } else if ((addr & 0x7) == 0) {
->              /* timecmp_lo */
-> -            uint64_t timecmp = env->timecmp;
-> +            uint64_t timecmp = env->mtimecmp;
->              return timecmp & 0xFFFFFFFF;
->          } else if ((addr & 0x7) == 4) {
->              /* timecmp_hi */
-> -            uint64_t timecmp = env->timecmp;
-> +            uint64_t timecmp = env->mtimecmp;
->              return (timecmp >> 32) & 0xFFFFFFFF;
->          } else {
->              qemu_log_mask(LOG_UNIMP,
-> @@ -168,14 +168,14 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
->                            "aclint-mtimer: invalid hartid: %zu", hartid);
->          } else if ((addr & 0x7) == 0) {
->              /* timecmp_lo */
-> -            uint64_t timecmp_hi = env->timecmp >> 32;
-> +            uint64_t timecmp_hi = env->mtimecmp >> 32;
->              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
->                  timecmp_hi << 32 | (value & 0xFFFFFFFF),
->                  mtimer->timebase_freq);
->              return;
->          } else if ((addr & 0x7) == 4) {
->              /* timecmp_hi */
-> -            uint64_t timecmp_lo = env->timecmp;
-> +            uint64_t timecmp_lo = env->mtimecmp;
->              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
->                  value << 32 | (timecmp_lo & 0xFFFFFFFF),
->                  mtimer->timebase_freq);
-> @@ -304,9 +304,9 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
->
->          cb->s = RISCV_ACLINT_MTIMER(dev);
->          cb->num = i;
-> -        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> +        env->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->                                    &riscv_aclint_mtimer_cb, cb);
-> -        env->timecmp = 0;
-> +        env->mtimecmp = 0;
->
->          qdev_connect_gpio_out(dev, i,
->                                qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
-> diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-> index 8c2ca364daab..4c34f9e08282 100644
-> --- a/hw/timer/ibex_timer.c
-> +++ b/hw/timer/ibex_timer.c
-> @@ -73,9 +73,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
->      }
->
->      /* Update the CPUs mtimecmp */
-> -    cpu->env.timecmp = value;
-> +    cpu->env.mtimecmp = value;
->
-> -    if (cpu->env.timecmp <= now) {
-> +    if (cpu->env.mtimecmp <= now) {
->          /*
->           * If the mtimecmp was in the past raise the interrupt now.
->           */
-> @@ -91,7 +91,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
->      qemu_irq_lower(s->m_timer_irq);
->      qemu_set_irq(s->irq, false);
->
-> -    diff = cpu->env.timecmp - now;
-> +    diff = cpu->env.mtimecmp - now;
->      next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
->                                   muldiv64(diff,
->                                            NANOSECONDS_PER_SECOND,
-> @@ -99,9 +99,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
->
->      if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
->          /* We overflowed the timer, just set it as large as we can */
-> -        timer_mod(cpu->env.timer, 0x7FFFFFFFFFFFFFFF);
-> +        timer_mod(cpu->env.mtimer, 0x7FFFFFFFFFFFFFFF);
->      } else {
-> -        timer_mod(cpu->env.timer, next);
-> +        timer_mod(cpu->env.mtimer, next);
->      }
->  }
->
-> @@ -122,9 +122,9 @@ static void ibex_timer_reset(DeviceState *dev)
->
->      CPUState *cpu = qemu_get_cpu(0);
->      CPURISCVState *env = cpu->env_ptr;
-> -    env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> +    env->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
->                                &ibex_timer_cb, s);
-> -    env->timecmp = 0;
-> +    env->mtimecmp = 0;
->
->      s->timer_ctrl = 0x00000000;
->      s->timer_cfg0 = 0x00010000;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 5d914bd34550..94234c59ffa8 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -265,7 +265,7 @@ struct CPURISCVState {
->      /* temporary htif regs */
->      uint64_t mfromhost;
->      uint64_t mtohost;
-> -    uint64_t timecmp;
-> +    uint64_t mtimecmp;
->
->      /* physical memory protection */
->      pmp_table_t pmp_state;
-> @@ -316,7 +316,7 @@ struct CPURISCVState {
->      float_status fp_status;
->
->      /* Fields from here on are preserved across CPU reset. */
-> -    QEMUTimer *timer; /* Internal timer */
-> +    QEMUTimer *mtimer; /* Internal timer for M-mode interrupt */
->
->      hwaddr kernel_addr;
->      hwaddr fdt_addr;
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index ebc33c9e2781..be3022082a46 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -303,7 +303,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          VMSTATE_UINTTL(env.mscratch, RISCVCPU),
->          VMSTATE_UINT64(env.mfromhost, RISCVCPU),
->          VMSTATE_UINT64(env.mtohost, RISCVCPU),
-> -        VMSTATE_UINT64(env.timecmp, RISCVCPU),
-> +        VMSTATE_UINT64(env.mtimecmp, RISCVCPU),
->
->          VMSTATE_END_OF_LIST()
->      },
-> --
-> 2.30.2
->
->
+> 
+> I can also split this patch if you think it's better.
+> But it is mostly a one-line fix per file.
+> 
+> This patch requires first some cleanups in order to fix error errors
+> and some more memory leaks that could happend in legit user-related
+> life cycles: a miss-configuration should not be a fatal error anymore.
+> https://lore.kernel.org/qemu-devel/20220218164646.132112-1-damien.hedde@greensocs.com
+> ---
+>   hw/char/ibex_uart.c     | 1 +
+>   hw/char/sifive_uart.c   | 1 +
+>   hw/gpio/sifive_gpio.c   | 1 +
+>   hw/intc/riscv_aclint.c  | 2 ++
+>   hw/intc/sifive_plic.c   | 1 +
+>   hw/misc/sifive_e_prci.c | 8 ++++++++
+>   hw/misc/unimp.c         | 1 +
+>   hw/riscv/riscv_hart.c   | 1 +
+>   hw/timer/ibex_timer.c   | 1 +
+>   9 files changed, 17 insertions(+)
 
