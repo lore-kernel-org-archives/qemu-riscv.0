@@ -1,64 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nR2pi-0005DG-2S
-	for mharc-qemu-riscv@gnu.org; Sun, 06 Mar 2022 21:10:46 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42418)
+	id 1nR2te-0008HN-1z
+	for mharc-qemu-riscv@gnu.org; Sun, 06 Mar 2022 21:14:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:42760)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nR2pg-0005Ar-Of; Sun, 06 Mar 2022 21:10:44 -0500
-Received: from [2607:f8b0:4864:20::d34] (port=47103
- helo=mail-io1-xd34.google.com)
+ id 1nR2tc-0008Gp-JQ; Sun, 06 Mar 2022 21:14:48 -0500
+Received: from [2607:f8b0:4864:20::12d] (port=34573
+ helo=mail-il1-x12d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nR2pf-00078Z-3g; Sun, 06 Mar 2022 21:10:44 -0500
-Received: by mail-io1-xd34.google.com with SMTP id d62so15424962iog.13;
- Sun, 06 Mar 2022 18:10:34 -0800 (PST)
+ id 1nR2ta-0007QR-Tf; Sun, 06 Mar 2022 21:14:48 -0500
+Received: by mail-il1-x12d.google.com with SMTP id h7so2361434ile.1;
+ Sun, 06 Mar 2022 18:14:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=LjOhmsgnAesF3r6G9AUvVvl1u7Dja6cNjtK8/AS2Qp0=;
- b=I1YmfUWr7dkKHDGNhsQsf0QYbIy+5jFDD26YnvKp81jjcM46hjOXxoGjt3Gznc1fuf
- jMDYJSPfvTdqu+eSYEQStkDrC+RiY+kzWY69EXe12LesOp1T0Amn8YxvLiKcbo/brldQ
- NPYahiBrTgy5oXvG27GzAdUq9a2YV8Zws/Z2dPpNuX6y3codIuujBBflzKdWaUnwI9Jf
- +c/KeCDEjoJ4nIftolWWg9vZaUbGae7+NBdhJqJjOH4dVgAuu7xg++JgWNwr0UfYrSeH
- voBkFVz7wpV4Ydp5v7mJBIOAvcmEgpp40wA82tWUXUJqL4djK+8wOdhgWmwmTLjoejRZ
- BNPQ==
+ :cc; bh=rKsSB6aVlVBmdIvqhEDjDLnRzOt2FGJymI4pYjkls/c=;
+ b=nJMas7lm8pfMZYx+i2UGtYd0SnXnlcbZ3i50UU6vd5fMEyDdzJdSPK5CcPJaINY7QC
+ NX2u3BYX+QTa0RKqO6yBhNFJYAMKNw/zP9nk8hVBYD96wZNsl81mciLa43va+Mr52XBd
+ qF0AayHSivMXqoK8ESVhrfaBDixe5oEWNXhyMi/B0eaFYRYb5DvOauAUOPSSdYgmPV45
+ qukZmAvFA+qk57vpcNHAjbDnvFkhkvjDYcrCt7Ca9Xq14xfmLFDplKv1QjLoGv6BIDhT
+ s5dP3TiwtUYZB2kCj6g50VtVnsrtmM8O5r3UmbbzSsES4Q0XqM87EKArBcumsvxpNazr
+ wB7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=LjOhmsgnAesF3r6G9AUvVvl1u7Dja6cNjtK8/AS2Qp0=;
- b=oc6SaJnMNbRODKp67A3QFPi26cIwnfsFUTIeJqkrLQGeoldTAo1MWc6GoDbSn9RcAg
- ZCQFVr/w25a3gLc/tgIRJWGr9D21x1Ta1SXk/x/pS9mJ5CC8UqUTRGVQXXJohjeBOpWc
- F9VgkB85/h7TEBYKRU1lHeCUJRjHFi0FcPT+S3NLSMPoB9FQCDmayVuFrfYQM7DX72Y7
- vlHUNP77MTtjTHOo1xAM0CH8BnO47MtpEY6oczFlVqWeOaynyOtAxreI5MuUZe0Ckns9
- UwV97wUMx+0I8DYKnuVaVO0KQYrOWqBzHw1F4Ij35NcYCVTmqyYZpsbutkeQZ7O0vNN3
- 4n7A==
-X-Gm-Message-State: AOAM533pOMJDPAF54yTekq19d2Akiawfn8t1w8UN5comVVLgVBiHSoWO
- ONMX7GKSDzRAMtWIl6PgEmnn67uF9QHo/y6s7to=
-X-Google-Smtp-Source: ABdhPJxxH4mYGbTCutYk9vfhW9taome/ZQIJTzHQc/XfFUPsimTCB4mRNvrRLRTNmhoe0DYoHR09Eb2Ic5hdI6A/rHw=
-X-Received: by 2002:a6b:d60a:0:b0:63a:be64:c652 with SMTP id
- w10-20020a6bd60a000000b0063abe64c652mr8729323ioa.27.1646619033660; Sun, 06
- Mar 2022 18:10:33 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=rKsSB6aVlVBmdIvqhEDjDLnRzOt2FGJymI4pYjkls/c=;
+ b=iR34LjtViZzBw0P912Xjf9SSMYl2rQxOTcwTGdcBeRXIappnJ1k3lmJpEl0+ahtqq+
+ 1WJedhCoMus+7C0z02CjpW72QgPIUmsv8CuMJ8aS9YYKWjRc8MUnyI7361qFeHSvqPFh
+ 1JWwUDTSX2OrqFbtOENHTe57rjAipNc5gWJi0sNhscf0BOk3Tlak9lahMOOL35RofEFn
+ JOfZQV75FGwNFw5Yj+JkZDjLBPPy3Qm9ebWaWP+8jEJDgU9gCSEWCHogE7vz7Hl0DkFK
+ Dx0jNDJLvGrtD/KomZjGYY/rXmgtRvyDMBeTGiB/GI6bwMhhKCVN0nHtJV+m0EhUNlHv
+ A+3g==
+X-Gm-Message-State: AOAM532qkhjpin0yaOFqUVvQbR3r1/WD/Rl8C6loCXYkb7IapbAicvoS
+ wB9KUivAoeJWz3SOcFE5uFRmzMqqblbo96rIxPI=
+X-Google-Smtp-Source: ABdhPJyuU5nUJ9NiSnDdQvA0fk+XxMyCkcLHHOK/gEwgoDv5cAiR+p5AM8lLd3R9sKnk0k+CKN1TXO3yzOS+iqtw/0k=
+X-Received: by 2002:a92:c246:0:b0:2c2:740d:1c12 with SMTP id
+ k6-20020a92c246000000b002c2740d1c12mr9201923ilo.55.1646619285488; Sun, 06 Mar
+ 2022 18:14:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20220303045426.511588-1-alistair.francis@opensource.wdc.com>
- <20220303045426.511588-2-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220303045426.511588-2-alistair.francis@opensource.wdc.com>
+References: <20220303185440.512391-1-atishp@rivosinc.com>
+In-Reply-To: <20220303185440.512391-1-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 7 Mar 2022 12:10:07 +1000
-Message-ID: <CAKmqyKNe2WSEKffBSnr_4VpCDO1Fo=2UxrzJJ68asOz+x5RUTA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] riscv: opentitan: Connect opentitan SPI Host
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Date: Mon, 7 Mar 2022 12:14:19 +1000
+Message-ID: <CAKmqyKPpEzk_QrCte6m=SRwCZL-1+osFa9j28N6q9nYzKwo-pg@mail.gmail.com>
+Subject: Re: [PATCH v5 0/6] Privilege version update
+To: Atish Patra <atishp@rivosinc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, wilfred.mallawa@wdc.com, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d34
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12d
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -79,169 +75,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Mar 2022 02:10:45 -0000
+X-List-Received-Date: Mon, 07 Mar 2022 02:14:48 -0000
 
-On Thu, Mar 3, 2022 at 2:55 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Fri, Mar 4, 2022 at 4:59 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> RISC-V International (RVI) has ratified many RISC-V ISA extensions recently[1].
+> The privileged specification version is also upgraded to v1.12. It means
+> certain CSRs introduced in v1.12 should only be accessible only if the
+> priv specification version supported is equal or greater than v1.12.
+> Doing this check in predicate function is not scalable as there will be
+> new CSRs introduced in the future versions of the privileged specification.
 >
-> Connect spi host[1/0] to opentitan.
+> This series tries to address this problem by adding a field in the csr_ops
+> which can be checked in csrrw function before invoking the predicate function.
+> To keep the code churn to minimum, it is assumed that the minimum version of
+> the privilege version supported for any CSR is v1.10 unless specified
+> explicitly in the csr_ops table. Any new CSRs introduced in v1.12 have been
+> updated accordingly.
 >
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+> This will work fine for any ratified extensions. However, it is bit unclear
+> what should be done for the stable draft extensions. My suggestion is not
+> to update the priv field in the CSR ops table until the extension is
+> marked experimental (i.e. not frozen/ratified). Once the extension is
+> ratified and graduated from experimental to available stage, the privileged
+> spec version should be updated in the csr table if required. I am open to
+> other suggestions as well.
+>
+> [1] https://wiki.riscv.org/display/TECH/Recently+Ratified+Extensions
+>
+> Changes from v4->v5:
+> 1. Rebased on top of riscv-to-apply.next
+>
+> Changes from v3->v4:
+> 1. Added reviewed-by tags.
+> 2. Improved the commit text in PATCH 3 & 6.
+>
+> Changes from v2->v3:
+> 1. Only update the bits defined in *envcfg CSR
+>
+> Changes from v1->v2:
+> 1. Unified both [m/h]envcfg & [m/h]envcfgh into one.
+> 2. Changed the priv spec version enumeration
+> 3. Improved csr_ops table to provide better redability.
+> 4. Fixed the compilation error for CONFIG_USER_ONLY
+> 5. Rebased on top of the AIA series.
+>
+> Atish Patra (6):
+> target/riscv: Define simpler privileged spec version numbering
+> target/riscv: Add the privileged spec version 1.12.0
+> target/riscv: Introduce privilege version field in the CSR ops.
+> target/riscv: Add support for mconfigptr
+> target/riscv: Add *envcfg* CSRs support
+> target/riscv: Enable privileged spec version 1.12
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> ---
-> V2 -> V3 Changes:
-> 1. Fixup commit message typo.
-> In `opentitan.h`:
-> 1. Revert copyright year change from 2022 to 2020
-> 2. Moved `OPENTITAN_SPI_X` #defines into an enum
-> 3. Sorted IBEX_X_IRQ enum in ascending order.
 >
->  hw/riscv/opentitan.c         | 36 ++++++++++++++++++++++++++++++++----
->  include/hw/riscv/opentitan.h | 30 +++++++++++++++++++++---------
->  2 files changed, 53 insertions(+), 13 deletions(-)
+> target/riscv/cpu.c      |   8 +-
+> target/riscv/cpu.h      |  15 ++-
+> target/riscv/cpu_bits.h |  40 ++++++++
+> target/riscv/csr.c      | 217 +++++++++++++++++++++++++++++++++-------
+> target/riscv/machine.c  |  23 +++++
+> 5 files changed, 263 insertions(+), 40 deletions(-)
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 833624d66c..2d401dcb23 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -120,11 +120,18 @@ static void lowrisc_ibex_soc_init(Object *obj)
->      object_initialize_child(obj, "uart", &s->uart, TYPE_IBEX_UART);
->
->      object_initialize_child(obj, "timer", &s->timer, TYPE_IBEX_TIMER);
-> +
-> +    for (int i =3D 0; i < OPENTITAN_NUM_SPI_HOSTS; i++) {
-> +        object_initialize_child(obj, "spi_host[*]", &s->spi_host[i],
-> +                                TYPE_IBEX_SPI_HOST);
-> +    }
->  }
->
->  static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->  {
->      const MemMapEntry *memmap =3D ibex_memmap;
-> +    DeviceState *dev;
-> +    SysBusDevice *busdev;
->      MachineState *ms =3D MACHINE(qdev_get_machine());
->      LowRISCIbexSoCState *s =3D RISCV_IBEX_SOC(dev_soc);
->      MemoryRegion *sys_mem =3D get_system_memory();
-> @@ -209,14 +216,35 @@ static void lowrisc_ibex_soc_realize(DeviceState *d=
-ev_soc, Error **errp)
->                            qdev_get_gpio_in(DEVICE(qemu_get_cpu(0)),
->                                             IRQ_M_TIMER));
->
-> +    /* SPI-Hosts */
-> +    for (int i =3D 0; i < OPENTITAN_NUM_SPI_HOSTS; ++i) {
-> +        dev =3D DEVICE(&(s->spi_host[i]));
-> +        if (!sysbus_realize(SYS_BUS_DEVICE(&s->spi_host[i]), errp)) {
-> +            return;
-> +        }
-> +        busdev =3D SYS_BUS_DEVICE(dev);
-> +        sysbus_mmio_map(busdev, 0, memmap[IBEX_DEV_SPI_HOST0 + i].base);
-> +
-> +        switch (i) {
-> +        case OPENTITAN_SPI_HOST0:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-> +                                IBEX_SPI_HOST0_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-> +                                IBEX_SPI_HOST0_SPI_EVENT_IRQ));
-> +            break;
-> +        case OPENTITAN_SPI_HOST1:
-> +            sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-> +                                IBEX_SPI_HOST1_ERR_IRQ));
-> +            sysbus_connect_irq(busdev, 1, qdev_get_gpio_in(DEVICE(&s->pl=
-ic),
-> +                                IBEX_SPI_HOST1_SPI_EVENT_IRQ));
-> +            break;
-> +        }
-> +    }
-> +
->      create_unimplemented_device("riscv.lowrisc.ibex.gpio",
->          memmap[IBEX_DEV_GPIO].base, memmap[IBEX_DEV_GPIO].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.spi_device",
->          memmap[IBEX_DEV_SPI_DEVICE].base, memmap[IBEX_DEV_SPI_DEVICE].si=
-ze);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host0",
-> -        memmap[IBEX_DEV_SPI_HOST0].base, memmap[IBEX_DEV_SPI_HOST0].size=
-);
-> -    create_unimplemented_device("riscv.lowrisc.ibex.spi_host1",
-> -        memmap[IBEX_DEV_SPI_HOST1].base, memmap[IBEX_DEV_SPI_HOST1].size=
-);
->      create_unimplemented_device("riscv.lowrisc.ibex.i2c",
->          memmap[IBEX_DEV_I2C].base, memmap[IBEX_DEV_I2C].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pattgen",
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 00da9ded43..68892cd8e5 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -23,11 +23,18 @@
->  #include "hw/intc/sifive_plic.h"
->  #include "hw/char/ibex_uart.h"
->  #include "hw/timer/ibex_timer.h"
-> +#include "hw/ssi/ibex_spi_host.h"
->  #include "qom/object.h"
->
->  #define TYPE_RISCV_IBEX_SOC "riscv.lowrisc.ibex.soc"
->  OBJECT_DECLARE_SIMPLE_TYPE(LowRISCIbexSoCState, RISCV_IBEX_SOC)
->
-> +enum {
-> +    OPENTITAN_SPI_HOST0,
-> +    OPENTITAN_SPI_HOST1,
-> +    OPENTITAN_NUM_SPI_HOSTS,
-> +};
-> +
->  struct LowRISCIbexSoCState {
->      /*< private >*/
->      SysBusDevice parent_obj;
-> @@ -37,6 +44,7 @@ struct LowRISCIbexSoCState {
->      SiFivePLICState plic;
->      IbexUartState uart;
->      IbexTimerState timer;
-> +    IbexSPIHostState spi_host[OPENTITAN_NUM_SPI_HOSTS];
->
->      MemoryRegion flash_mem;
->      MemoryRegion rom;
-> @@ -89,15 +97,19 @@ enum {
->  };
->
->  enum {
-> -    IBEX_TIMER_TIMEREXPIRED0_0 =3D 126,
-> -    IBEX_UART0_RX_PARITY_ERR_IRQ =3D 8,
-> -    IBEX_UART0_RX_TIMEOUT_IRQ =3D 7,
-> -    IBEX_UART0_RX_BREAK_ERR_IRQ =3D 6,
-> -    IBEX_UART0_RX_FRAME_ERR_IRQ =3D 5,
-> -    IBEX_UART0_RX_OVERFLOW_IRQ =3D 4,
-> -    IBEX_UART0_TX_EMPTY_IRQ =3D 3,
-> -    IBEX_UART0_RX_WATERMARK_IRQ =3D 2,
-> -    IBEX_UART0_TX_WATERMARK_IRQ =3D 1,
-> +    IBEX_UART0_TX_WATERMARK_IRQ   =3D 1,
-> +    IBEX_UART0_RX_WATERMARK_IRQ   =3D 2,
-> +    IBEX_UART0_TX_EMPTY_IRQ       =3D 3,
-> +    IBEX_UART0_RX_OVERFLOW_IRQ    =3D 4,
-> +    IBEX_UART0_RX_FRAME_ERR_IRQ   =3D 5,
-> +    IBEX_UART0_RX_BREAK_ERR_IRQ   =3D 6,
-> +    IBEX_UART0_RX_TIMEOUT_IRQ     =3D 7,
-> +    IBEX_UART0_RX_PARITY_ERR_IRQ  =3D 8,
-> +    IBEX_TIMER_TIMEREXPIRED0_0    =3D 126,
-> +    IBEX_SPI_HOST0_ERR_IRQ        =3D 150,
-> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ  =3D 151,
-> +    IBEX_SPI_HOST1_ERR_IRQ        =3D 152,
-> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ  =3D 153,
->  };
->
->  #endif
 > --
-> 2.35.1
+> 2.30.2
+>
 >
 
