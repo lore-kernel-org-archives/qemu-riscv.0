@@ -1,65 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nRiYE-0000UM-SN
-	for mharc-qemu-riscv@gnu.org; Tue, 08 Mar 2022 17:43:31 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:41084)
+	id 1nRihP-0005PX-LG
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Mar 2022 17:52:59 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:43106)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1nRiYE-0000U6-46
- for qemu-riscv@nongnu.org; Tue, 08 Mar 2022 17:43:30 -0500
-Received: from [2607:f8b0:4864:20::b33] (port=41602
- helo=mail-yb1-xb33.google.com)
+ id 1nRihN-0005Ou-GN
+ for qemu-riscv@nongnu.org; Tue, 08 Mar 2022 17:52:57 -0500
+Received: from [2607:f8b0:4864:20::b36] (port=33356
+ helo=mail-yb1-xb36.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1nRiYC-0004aw-37
- for qemu-riscv@nongnu.org; Tue, 08 Mar 2022 17:43:29 -0500
-Received: by mail-yb1-xb33.google.com with SMTP id l2so698929ybe.8
- for <qemu-riscv@nongnu.org>; Tue, 08 Mar 2022 14:43:27 -0800 (PST)
+ id 1nRihK-0006f3-VM
+ for qemu-riscv@nongnu.org; Tue, 08 Mar 2022 17:52:57 -0500
+Received: by mail-yb1-xb36.google.com with SMTP id j2so866633ybu.0
+ for <qemu-riscv@nongnu.org>; Tue, 08 Mar 2022 14:52:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=atishpatra.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=md7kLhrPRaa1BOY+jseqm7DsyRmatKiprgRqclGq0fY=;
- b=gn/SmQj03Lsq5MzFNueZ7NOA+S5PrjvWRw/UPSXZCnfMFhwHiJyAUmvyVcWBXqlL4v
- RpLs3W3S7pVITDOl+i5OJihngws8U+0r370wSY/JBcanLvr50tt0S6bywgXDn3GSkwwz
- 9j7xgqQBnADmCNLxDibiKKuNMUD8n9iyue9lE=
+ :cc:content-transfer-encoding;
+ bh=ZcURH1zAFiUTayS/1I/47ni6JDvnLrFa5nSVuSyQW1w=;
+ b=tr5zJknd1Geafsowh6HLzAtg4LI2nQigePV6dRLrW6M12jv/rynKEMhuuv8IzEnXY6
+ j2AdAUThFynW62VfUY8YRAnT3wgieiVaLMhN0qpyrsY8t+qqMJIDv30L9fMf4sSqUe/E
+ gBUeTtnp9+b1BL6OCRfzhn4d8RyuusKudgmEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=md7kLhrPRaa1BOY+jseqm7DsyRmatKiprgRqclGq0fY=;
- b=cG1Adt1BSMdfMblWNBfJ2O6DNZM4YhWGdCHeijFY3W2WzEEaOXJcTrRr32HA1wRHsi
- q9NUfFyPfe1i41STEnUtwQfrQfdW/EIGVMaUY+edBl9fwmGJWvXLssMu4cyzd+FoaUuC
- KGiS/zj31Exlqwx8ssa3C4XOkrLUrOHq2TD6VEgr/yzx4K5Te3ERD7wu9tuKbvtUTKCh
- Glho86kLvIRHa1/h85X2WvTVQ/1r7KKTb3UdzX8ELTLEeEmvH1GQlC8dKEryC8HQm+z2
- ww0zcMPl25CLZslGvrjPgUp64F+BrO4hIMW6YL3si2tNQ0RKKSb7o0FrS7icbXFHnWDL
- k9zQ==
-X-Gm-Message-State: AOAM533XN5TuY/pa2+10+GaxhDbvzRPSmjzCSgu1jx95KyePUWbfE543
- jSXRjNWPfd93iGaPBDTBulR9Y0/n2U4WOokrDvh9
-X-Google-Smtp-Source: ABdhPJxGZPwDY6qV9lYLrxSW21eRPE2dxEiNDjkeQ0nr+UHu4O/a64JgtcdE3SPqq83yFPhARXFaUxiIoDJHjTipIaI=
-X-Received: by 2002:a25:f904:0:b0:628:a84d:a105 with SMTP id
- q4-20020a25f904000000b00628a84da105mr13816931ybe.53.1646779406432; Tue, 08
- Mar 2022 14:43:26 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=ZcURH1zAFiUTayS/1I/47ni6JDvnLrFa5nSVuSyQW1w=;
+ b=3wr++8INTVsYGtm+jS2RYxs8emyh0AZTX3JrZ7U+P57W6/ogVW9dI+KXCRoiGk6tet
+ si/Z1ueQsvRZ1Twu0PmgB+Jd86y+V9OdFUmuWg8OGapirUxUP2eBa2GpJsbSLDAPHV+J
+ Nb72Gyz53tm0KGo5rPohIe4WwQvipFwPWZg7GPxNJKeSjT5A3ZHK9kHog1ZbJbmUcyVx
+ l3C9dAqhI7a56uJzRhV2QNE0Twr4tc2WKIQTEzrkxsCrP9l7mm042IOG3k+Y3j8cirEa
+ UBNSigR31ihWU3Zd9g4RLntcXKGmHlGW+DZoKysFAkn/l9EACPgXAqEADKj1eX08mpFP
+ zFLQ==
+X-Gm-Message-State: AOAM531bLhFExlisEqxuk5i7HAllb7FA3jkuAtLhYqyV0cXP6K3f9oPv
+ roVbw6XoBr8okaY3KHdKVLujQGJq00XOAaDc0Y7F
+X-Google-Smtp-Source: ABdhPJwXqQ8bsxaJAsWCFJrJwlpS0mVDgs9N6dsAttUAZytUIixu7YYUH+1TWx4GyBomGUclECSbWKiDScrlCWcAaxA=
+X-Received: by 2002:a25:df02:0:b0:629:7c93:eb2e with SMTP id
+ w2-20020a25df02000000b006297c93eb2emr6728020ybg.69.1646779973617; Tue, 08 Mar
+ 2022 14:52:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20220304032023.730344-1-atishp@rivosinc.com>
- <20220304032023.730344-2-atishp@rivosinc.com>
- <CAAhSdy2W4aDauH50zS_BNaeghTsDNVMsYHQtkaeydz5Ob-O_SQ@mail.gmail.com>
- <CAKmqyKOLh4bHdRiTj6oMZR36+Wo4mLhEw=8G5US-NUobjWdhCw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOLh4bHdRiTj6oMZR36+Wo4mLhEw=8G5US-NUobjWdhCw@mail.gmail.com>
+References: <20220222223830.2319856-1-atishp@rivosinc.com>
+ <CANzO1D05q8_-PSs5KJsnO+MPWVWLrFoYsvhPXGK2eUC8rwBqDw@mail.gmail.com>
+ <CAE_xrPjKd0NEz3ZiYA5w+noG2XDtY0sqQYKbo=wNjAHicRw+dQ@mail.gmail.com>
+In-Reply-To: <CAE_xrPjKd0NEz3ZiYA5w+noG2XDtY0sqQYKbo=wNjAHicRw+dQ@mail.gmail.com>
 From: Atish Patra <atishp@atishpatra.org>
-Date: Tue, 8 Mar 2022 14:43:15 -0800
-Message-ID: <CAOnJCUK_XRH4hJAJ-rajnDcNkoHp_7b0EV+=GnerD9VLrwUuSw@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/3] target/riscv: Rename timer & timecmp to mtimer
- and mtimecmp
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Anup Patel <anup@brainfault.org>,
+Date: Tue, 8 Mar 2022 14:52:43 -0800
+Message-ID: <CAOnJCULev3CB0rS+dhHr-0je_Wg00BNYXB9sg50J-tLMo8kONQ@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Add isa extenstion strings to the device
+ tree
+To: Frank Chang <frank.chang@sifive.com>
+Cc: Atish Patra <atishp@rivosinc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Atish Patra <atishp@rivosinc.com>, 
- QEMU Developers <qemu-devel@nongnu.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>
+ Heiko Stubner <heiko@sntech.de>, Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b33
+Content-Transfer-Encoding: quoted-printable
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::b36
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
- envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb36.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
@@ -80,225 +82,131 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2022 22:43:30 -0000
+X-List-Received-Date: Tue, 08 Mar 2022 22:52:58 -0000
 
-On Tue, Mar 8, 2022 at 1:33 PM Alistair Francis <alistair23@gmail.com> wrote:
+On Sat, Mar 5, 2022 at 10:47 PM Frank Chang <frank.chang@sifive.com> wrote:
 >
-> On Fri, Mar 4, 2022 at 2:08 PM Anup Patel <anup@brainfault.org> wrote:
-> >
-> > On Fri, Mar 4, 2022 at 8:50 AM Atish Patra <atishp@rivosinc.com> wrote:
-> > >
-> > > Currently, the aclint and ibex timer devices uses the "timer" &
-> > > "timecmp" to generate the m-mode timer interrupt. In future,
-> > > we will have timer interrupt injected to S/VS mode directly.
-> > > No functionality change introduced in this patch.
-> >
-> > s/have timer/have a timer/
-> >
-> > >
-> > > Add a prefix "m" these enviornment variables to indicate its
-> > > true purpose.
-> >
-> > s/enviornment/environment/
-> >
-> > >
-> > > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> >
-> > I suggest we should remove mtimecmp and mtimer from
-> > target/riscv because mtimer is a memory mapped device.
->
-> I agree. I guess this is in the CPU as it's per hart, and it's easy to
-> store here instead of in the timer, but we could convert aclint to use
-> an array of timers (Ibex only ever has one hart).
->
-> That would probably be a closer match to hardware, as the timer is
-> external to the CPU
+> Typo in patch title:
+> s/extenstion/extension/g
 >
 
-ok sure. I will revise that.
+Thanks for catching it. Will fix it.
 
-> Alistair
+> Regards,
+> Frank Chang
 >
-> >
-> > Regards,
-> > Anup
-> >
-> > > ---
-> > >  hw/intc/riscv_aclint.c | 20 ++++++++++----------
-> > >  hw/timer/ibex_timer.c  | 14 +++++++-------
-> > >  target/riscv/cpu.h     |  4 ++--
-> > >  target/riscv/machine.c |  2 +-
-> > >  4 files changed, 20 insertions(+), 20 deletions(-)
-> > >
-> > > diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> > > index f1a5d3d284fd..642794a06865 100644
-> > > --- a/hw/intc/riscv_aclint.c
-> > > +++ b/hw/intc/riscv_aclint.c
-> > > @@ -59,8 +59,8 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
-> > >
-> > >      uint64_t rtc_r = cpu_riscv_read_rtc(timebase_freq);
-> > >
-> > > -    cpu->env.timecmp = value;
-> > > -    if (cpu->env.timecmp <= rtc_r) {
-> > > +    cpu->env.mtimecmp = value;
-> > > +    if (cpu->env.mtimecmp <= rtc_r) {
-> > >          /*
-> > >           * If we're setting an MTIMECMP value in the "past",
-> > >           * immediately raise the timer interrupt
-> > > @@ -71,7 +71,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
-> > >
-> > >      /* otherwise, set up the future timer interrupt */
-> > >      qemu_irq_lower(mtimer->timer_irqs[hartid - mtimer->hartid_base]);
-> > > -    diff = cpu->env.timecmp - rtc_r;
-> > > +    diff = cpu->env.mtimecmp - rtc_r;
-> > >      /* back to ns (note args switched in muldiv64) */
-> > >      uint64_t ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> > >
-> > > @@ -96,7 +96,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
-> > >          next = MIN(next, INT64_MAX);
-> > >      }
-> > >
-> > > -    timer_mod(cpu->env.timer, next);
-> > > +    timer_mod(cpu->env.mtimer, next);
-> > >  }
-> > >
-> > >  /*
-> > > @@ -127,11 +127,11 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
-> > >                            "aclint-mtimer: invalid hartid: %zu", hartid);
-> > >          } else if ((addr & 0x7) == 0) {
-> > >              /* timecmp_lo */
-> > > -            uint64_t timecmp = env->timecmp;
-> > > +            uint64_t timecmp = env->mtimecmp;
-> > >              return timecmp & 0xFFFFFFFF;
-> > >          } else if ((addr & 0x7) == 4) {
-> > >              /* timecmp_hi */
-> > > -            uint64_t timecmp = env->timecmp;
-> > > +            uint64_t timecmp = env->mtimecmp;
-> > >              return (timecmp >> 32) & 0xFFFFFFFF;
-> > >          } else {
-> > >              qemu_log_mask(LOG_UNIMP,
-> > > @@ -168,14 +168,14 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
-> > >                            "aclint-mtimer: invalid hartid: %zu", hartid);
-> > >          } else if ((addr & 0x7) == 0) {
-> > >              /* timecmp_lo */
-> > > -            uint64_t timecmp_hi = env->timecmp >> 32;
-> > > +            uint64_t timecmp_hi = env->mtimecmp >> 32;
-> > >              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
-> > >                  timecmp_hi << 32 | (value & 0xFFFFFFFF),
-> > >                  mtimer->timebase_freq);
-> > >              return;
-> > >          } else if ((addr & 0x7) == 4) {
-> > >              /* timecmp_hi */
-> > > -            uint64_t timecmp_lo = env->timecmp;
-> > > +            uint64_t timecmp_lo = env->mtimecmp;
-> > >              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
-> > >                  value << 32 | (timecmp_lo & 0xFFFFFFFF),
-> > >                  mtimer->timebase_freq);
-> > > @@ -304,9 +304,9 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
-> > >
-> > >          cb->s = RISCV_ACLINT_MTIMER(dev);
-> > >          cb->num = i;
-> > > -        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > > +        env->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > >                                    &riscv_aclint_mtimer_cb, cb);
-> > > -        env->timecmp = 0;
-> > > +        env->mtimecmp = 0;
-> > >
-> > >          qdev_connect_gpio_out(dev, i,
-> > >                                qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
-> > > diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
-> > > index 8c2ca364daab..4c34f9e08282 100644
-> > > --- a/hw/timer/ibex_timer.c
-> > > +++ b/hw/timer/ibex_timer.c
-> > > @@ -73,9 +73,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
-> > >      }
-> > >
-> > >      /* Update the CPUs mtimecmp */
-> > > -    cpu->env.timecmp = value;
-> > > +    cpu->env.mtimecmp = value;
-> > >
-> > > -    if (cpu->env.timecmp <= now) {
-> > > +    if (cpu->env.mtimecmp <= now) {
-> > >          /*
-> > >           * If the mtimecmp was in the past raise the interrupt now.
-> > >           */
-> > > @@ -91,7 +91,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
-> > >      qemu_irq_lower(s->m_timer_irq);
-> > >      qemu_set_irq(s->irq, false);
-> > >
-> > > -    diff = cpu->env.timecmp - now;
-> > > +    diff = cpu->env.mtimecmp - now;
-> > >      next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
-> > >                                   muldiv64(diff,
-> > >                                            NANOSECONDS_PER_SECOND,
-> > > @@ -99,9 +99,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
-> > >
-> > >      if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
-> > >          /* We overflowed the timer, just set it as large as we can */
-> > > -        timer_mod(cpu->env.timer, 0x7FFFFFFFFFFFFFFF);
-> > > +        timer_mod(cpu->env.mtimer, 0x7FFFFFFFFFFFFFFF);
-> > >      } else {
-> > > -        timer_mod(cpu->env.timer, next);
-> > > +        timer_mod(cpu->env.mtimer, next);
-> > >      }
-> > >  }
-> > >
-> > > @@ -122,9 +122,9 @@ static void ibex_timer_reset(DeviceState *dev)
-> > >
-> > >      CPUState *cpu = qemu_get_cpu(0);
-> > >      CPURISCVState *env = cpu->env_ptr;
-> > > -    env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > > +    env->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > >                                &ibex_timer_cb, s);
-> > > -    env->timecmp = 0;
-> > > +    env->mtimecmp = 0;
-> > >
-> > >      s->timer_ctrl = 0x00000000;
-> > >      s->timer_cfg0 = 0x00010000;
-> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > index 5d914bd34550..94234c59ffa8 100644
-> > > --- a/target/riscv/cpu.h
-> > > +++ b/target/riscv/cpu.h
-> > > @@ -265,7 +265,7 @@ struct CPURISCVState {
-> > >      /* temporary htif regs */
-> > >      uint64_t mfromhost;
-> > >      uint64_t mtohost;
-> > > -    uint64_t timecmp;
-> > > +    uint64_t mtimecmp;
-> > >
-> > >      /* physical memory protection */
-> > >      pmp_table_t pmp_state;
-> > > @@ -316,7 +316,7 @@ struct CPURISCVState {
-> > >      float_status fp_status;
-> > >
-> > >      /* Fields from here on are preserved across CPU reset. */
-> > > -    QEMUTimer *timer; /* Internal timer */
-> > > +    QEMUTimer *mtimer; /* Internal timer for M-mode interrupt */
-> > >
-> > >      hwaddr kernel_addr;
-> > >      hwaddr fdt_addr;
-> > > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> > > index ebc33c9e2781..be3022082a46 100644
-> > > --- a/target/riscv/machine.c
-> > > +++ b/target/riscv/machine.c
-> > > @@ -303,7 +303,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-> > >          VMSTATE_UINTTL(env.mscratch, RISCVCPU),
-> > >          VMSTATE_UINT64(env.mfromhost, RISCVCPU),
-> > >          VMSTATE_UINT64(env.mtohost, RISCVCPU),
-> > > -        VMSTATE_UINT64(env.timecmp, RISCVCPU),
-> > > +        VMSTATE_UINT64(env.mtimecmp, RISCVCPU),
-> > >
-> > >          VMSTATE_END_OF_LIST()
-> > >      },
-> > > --
-> > > 2.30.2
-> > >
-> > >
-> >
->
+> On Sat, Feb 26, 2022 at 3:45 PM Frank Chang <frank.chang@sifive.com> wrot=
+e:
+>>
+>>
+>>
+>> Atish Patra <atishp@rivosinc.com> =E6=96=BC 2022=E5=B9=B42=E6=9C=8823=E6=
+=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=886:39=E5=AF=AB=E9=81=93=EF=BC=9A
+>>>
+>>> The Linux kernel parses the ISA extensions from "riscv,isa" DT
+>>> property. It used to parse only the single letter base extensions
+>>> until now. A generic ISA extension parsing framework was proposed[1]
+>>> recently that can parse multi-letter ISA extensions as well.
+>>>
+>>> Generate the extended ISA string by appending  the available ISA extens=
+ions
+>>> to the "riscv,isa" string if it is enabled so that kernel can process i=
+t.
+>>>
+>>> [1] https://lkml.org/lkml/2022/2/15/263
+>>>
+>>> Suggested-by: Heiko Stubner <heiko@sntech.de>
+>>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+>>> ---
+>>> Changes from v2->v3:
+>>> 1. Used g_strconcat to replace snprintf & a max isa string length as
+>>> suggested by Anup.
+>>> 2. I have not included the Tested-by Tag from Heiko because the
+>>> implementation changed from v2 to v3.
+>>>
+>>> Changes from v1->v2:
+>>> 1. Improved the code redability by using arrays instead of individual c=
+heck
+>>> ---
+>>>  target/riscv/cpu.c | 29 +++++++++++++++++++++++++++++
+>>>  1 file changed, 29 insertions(+)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index b0a40b83e7a8..2c7ff6ef555a 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -34,6 +34,12 @@
+>>>
+>>>  /* RISC-V CPU definitions */
+>>>
+>>> +/* This includes the null terminated character '\0' */
+>>> +struct isa_ext_data {
+>>> +        const char *name;
+>>> +        bool enabled;
+>>> +};
+>>> +
+>>>  static const char riscv_exts[26] =3D "IEMAFDQCLBJTPVNSUHKORWXYZG";
+>>>
+>>>  const char * const riscv_int_regnames[] =3D {
+>>> @@ -881,6 +887,28 @@ static void riscv_cpu_class_init(ObjectClass *c, v=
+oid *data)
+>>>      device_class_set_props(dc, riscv_cpu_properties);
+>>>  }
+>>>
+>>> +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int ma=
+x_str_len)
+>>> +{
+>>> +    char *old =3D *isa_str;
+>>> +    char *new =3D *isa_str;
+>>> +    int i;
+>>> +    struct isa_ext_data isa_edata_arr[] =3D {
+>>> +        { "svpbmt", cpu->cfg.ext_svpbmt   },
+>>> +        { "svinval", cpu->cfg.ext_svinval },
+>>> +        { "svnapot", cpu->cfg.ext_svnapot },
+>>
+>>
+>> We still have other sub-extensions, e.g. Zfh, Zba, Zbb, Zbc, Zbs... etc.
+>> Do you mind adding them as well?
+>>
+>> Also, I think the order of ISA strings should be alphabetical as describ=
+ed:
+>> https://github.com/riscv/riscv-isa-manual/blob/master/src/naming.tex#L96
+>>
+>> Regards,
+>> Frank Chang
+>>
+>>>
+>>> +    };
+>>> +
+>>> +    for (i =3D 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+>>> +        if (isa_edata_arr[i].enabled) {
+>>> +            new =3D g_strconcat(old, "_", isa_edata_arr[i].name, NULL)=
+;
+>>> +            g_free(old);
+>>> +            old =3D new;
+>>> +        }
+>>> +    }
+>>> +
+>>> +    *isa_str =3D new;
+>>> +}
+>>> +
+>>>  char *riscv_isa_string(RISCVCPU *cpu)
+>>>  {
+>>>      int i;
+>>> @@ -893,6 +921,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>>>          }
+>>>      }
+>>>      *p =3D '\0';
+>>> +    riscv_isa_string_ext(cpu, &isa_str, maxlen);
+>>>      return isa_str;
+>>>  }
+>>>
+>>> --
+>>> 2.30.2
+>>>
 
 
--- 
+--=20
 Regards,
 Atish
 
