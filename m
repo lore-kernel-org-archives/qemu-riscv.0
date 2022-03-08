@@ -1,63 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nRRYD-000355-84
-	for mharc-qemu-riscv@gnu.org; Mon, 07 Mar 2022 23:34:21 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:48884)
+	id 1nRTWl-0006cL-NU
+	for mharc-qemu-riscv@gnu.org; Tue, 08 Mar 2022 01:41:00 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:38686)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <laokz@foxmail.com>)
- id 1nRRYB-00034a-Ln; Mon, 07 Mar 2022 23:34:19 -0500
-Received: from out203-205-221-190.mail.qq.com ([203.205.221.190]:60536)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <laokz@foxmail.com>)
- id 1nRRY3-0006Vl-Gj; Mon, 07 Mar 2022 23:34:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foxmail.com;
- s=s201512; t=1646714037;
- bh=Izmzw9Ny52QScMjhq5hfi46rlYy6asfwONWJxGLBz8s=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=nrdgNpSrN7BtK/jrkR1Fc9hz6zvddBTqEHoLbArz8uklj6uzqCUbwdkNcYv9HgFyI
- TXs4mEQ9Yi1nGMeTAYtHeSoJuRBmLTM90VFA8r7eQM8+o76o+ZnIK/ABvwJRPqiEX0
- RTx6lEyIlF038mKz0mVIn2lZ9eqNngRNm7fRQltY=
-Received: from swind.os ([60.17.0.33])
- by newxmesmtplogicsvrsza5.qq.com (NewEsmtp) with SMTP
- id 869A50F9; Tue, 08 Mar 2022 12:33:41 +0800
-X-QQ-mid: xmsmtpt1646714021t4oxr669u
-Message-ID: <tencent_E4219E870165A978DB5BBE50BD53D33D2E06@qq.com>
-X-QQ-XMAILINFO: MB5+LsFw85Nonwl8x2jCHWZ6n0Pc5TDvyhjdfKIhXWSgQJUKbq27sAKhUoecPM
- MMRY72+fhKvaCkoqGs8o08Jf+QFlsKLVsZjkvQjHTmbIqSAF6o752fI96CSKxmae6QDSchFPOuSC
- n3yXSEop61UIh98rpryUorMLpgkRxXkpw3bSjlNwDSp/JnB3XlMKWqJy94SfpWZeRZ6ENKQjTlHD
- xL4/w08FY+Dw4UU9RQZBdfnUMdPTwNeRwB9PdrLE1SkgGYjrPc2S//IGNBfTYS+c8CXtk3ZHiOdG
- 1EPpXfQoKW1kOkvufD0nFicA+GWz7jEQ/07BQnIvdIUpaWVZw+fvHw/2+fo9Lpvfu7j8oEtAboRN
- 4sFxPeVSYaDf6QbfCzmU4WQX3Nop4xmvypfL65jFLFcbO6rPTzh1BHpJ1xJE3zj2ry8Iu71fbSkm
- +TnDNrDrhUGjrujkN+ehbXK0WzepE/r8L/osg5PZMGRwn1UwfB/JOkaEbVLIXRR335uvfZCCiByN
- NSwxaT3Be5oScMpcbC7nmA6lbId4CHh+JXDy3de6EPSPk/lf3D/76CoAnySGtYLmeVp7HmG7UFmT
- nLZA/u8lPkshWPXKtM3t67uB27Hf2E1JRnsre3MClc0+DcxBtn3Ec4iFL2qCXdj5Ny5w0L1TXd/Z
- KoXJjupLNsIUhYuYqElHXZn6LvnPq5otaC4LHRlkQ2sptwQmSvggXBme242p/tv5V51Prpl/llN3
- RDYTmCPJcDJjEkPX5Mx03T/kx6NW/X481BjFIkkQstOSjMdp5B6+agnfm5pTtX/8dqdl3bcBkEhg
- vmeQL9SuvORWS0kelg9DE0BdmI8xtL3ICV0Gqiyt5kwbtlMLuTHkFyYilfryA+fbktsF93DKAI1J
- AwlIAaaPpE
-From: laokz <laokz@foxmail.com>
-To: hreitz@redhat.com,
-	qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: kwolf@redhat.com,
-	laokz <laokz@foxmail.com>
-Subject: [PATCH v2] tests: add (riscv virt) machine mapping to testenv
-Date: Tue,  8 Mar 2022 12:33:39 +0800
-X-OQ-MSGID: <20220308043339.7148-1-laokz@foxmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <35ea2e99-8049-9b72-b639-744afcdde726@redhat.com>
-References: <35ea2e99-8049-9b72-b639-744afcdde726@redhat.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nRTWj-0006bw-2e; Tue, 08 Mar 2022 01:40:57 -0500
+Received: from [2607:f8b0:4864:20::12f] (port=40744
+ helo=mail-il1-x12f.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nRTWg-0000HB-WD; Tue, 08 Mar 2022 01:40:56 -0500
+Received: by mail-il1-x12f.google.com with SMTP id i1so13352260ila.7;
+ Mon, 07 Mar 2022 22:40:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=jQWWhlj97dz/Glr3McLXROqZ1E1eIQRXyILh7Hl+pMA=;
+ b=V6TIuT15ZZVcrKUBnDXibhOWPEYzPhBsUu+rBFd+Mj9FKIdmbtwJryeJ5NH0BW64sh
+ Sl+E7lr7/t4Fd95FbHX3yoL2JDkfrHwqLWkoDiYdtHWWxpa9E//zMgO5wG3xyDdTF/tu
+ A/fRLYexWa66ApF0zxQfoxraCR/x473lgNSjRE0WZ7gXl77W3vCBJjAJ+ZnxMJIVn2w9
+ NaosZ54OTTw6QZx/x6cIlh6PA640/okKKPrNF4Q04MqyNQUr1PkH5q27/SOEBktSHHyi
+ VaEqyHAEb3oGW85D2KFjtwnZDx6OoFVkwpXGcAAayZtV3fWD4KvvPYOPO/e/Z4oHfrC5
+ XIQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=jQWWhlj97dz/Glr3McLXROqZ1E1eIQRXyILh7Hl+pMA=;
+ b=KigEZsJ1Typp1oNeHz+p7slarnpx51E7A5WxHqG4KOej69qNToh9HqqrJOzaollLFs
+ PoTnrCRb7pUjNmDSOuJzFtZ8YrucAVhe/4O7sAX+C3z3wxY8SFkB9YjXI8/8KuNz3Y+h
+ 2nyfYOPlzLqL17OJsatoDFmeUrp69mS45qvlseYClpcq+Iky07ozo+4slU5Fw3+r9vue
+ iCPyBOdEV8XkB5f4ezsfGxhpNOt2qQ097R6tT++2meoyIUleZSz6gtu5Mm1i5bW0wt+l
+ llK25d/dI0Lz+R4lnWkeKhiBLjPgp6jbvy/O7ujITmpvyQEoovu9wZdY0rclWIc1eV1v
+ Vtwg==
+X-Gm-Message-State: AOAM5315+sI0R+BT0lWm+QaGH8QEOBokE3934dsZ56Jx116VxDHs3aVF
+ ZcNmCpTciasLrxAfP+UPzxAbQFoc5IKcSfmV64c=
+X-Google-Smtp-Source: ABdhPJzwOHdJIU+BkLakpSmHkcVII7jdwwN+ThJ0+EWeylfAFTOjCHUabbtraY3YcJ6LGBPorGS2hqHXZNZlu45CekA=
+X-Received: by 2002:a05:6e02:20ec:b0:2c6:158a:cb33 with SMTP id
+ q12-20020a056e0220ec00b002c6158acb33mr14562146ilv.113.1646721652955; Mon, 07
+ Mar 2022 22:40:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=203.205.221.190; envelope-from=laokz@foxmail.com;
- helo=out203-205-221-190.mail.qq.com
-X-Spam_score_int: 8
-X-Spam_score: 0.8
+References: <35ea2e99-8049-9b72-b639-744afcdde726@redhat.com>
+ <tencent_E4219E870165A978DB5BBE50BD53D33D2E06@qq.com>
+In-Reply-To: <tencent_E4219E870165A978DB5BBE50BD53D33D2E06@qq.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 8 Mar 2022 16:40:26 +1000
+Message-ID: <CAKmqyKOsH=wAm2TWswsP-CUW=YAQ=_gY0YFr_tT7AdfugViJfA@mail.gmail.com>
+Subject: Re: [PATCH v2] tests: add (riscv virt) machine mapping to testenv
+To: laokz <laokz@foxmail.com>
+Cc: hreitz@redhat.com, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, Kevin Wolf <kwolf@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12f
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+X-Spam_score_int: -3
+X-Spam_score: -0.4
 X-Spam_bar: /
-X-Spam_report: (0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_DYNAMIC=0.982,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,35 +75,43 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Mar 2022 04:34:20 -0000
+X-List-Received-Date: Tue, 08 Mar 2022 06:40:58 -0000
 
-Some qemu-iotests(040 etc) use PCI disk to do test. Without the
-mapping, RISC-V flavor use spike as default machine which has no
-PCI bus, causing test failure.
+On Tue, Mar 8, 2022 at 2:34 PM laokz <laokz@foxmail.com> wrote:
+>
+> Some qemu-iotests(040 etc) use PCI disk to do test. Without the
+> mapping, RISC-V flavor use spike as default machine which has no
+> PCI bus, causing test failure.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/894
+>
+> Signed-off-by: Kai Zhang <laokz@foxmail.com>
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/894
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Kai Zhang <laokz@foxmail.com>
----
-Thanks for the detailed info. Corrected S-o-b tag.
+Alistair
 
- tests/qemu-iotests/testenv.py | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/tests/qemu-iotests/testenv.py b/tests/qemu-iotests/testenv.py
-index 0f32897fe8..975f26a785 100644
---- a/tests/qemu-iotests/testenv.py
-+++ b/tests/qemu-iotests/testenv.py
-@@ -238,6 +238,8 @@ def __init__(self, imgfmt: str, imgproto: str, aiomode: str,
-             ('aarch64', 'virt'),
-             ('avr', 'mega2560'),
-             ('m68k', 'virt'),
-+            ('riscv32', 'virt'),
-+            ('riscv64', 'virt'),
-             ('rx', 'gdbsim-r5f562n8'),
-             ('tricore', 'tricore_testboard')
-         )
--- 
-2.34.1
-
+> ---
+> Thanks for the detailed info. Corrected S-o-b tag.
+>
+>  tests/qemu-iotests/testenv.py | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/tests/qemu-iotests/testenv.py b/tests/qemu-iotests/testenv.py
+> index 0f32897fe8..975f26a785 100644
+> --- a/tests/qemu-iotests/testenv.py
+> +++ b/tests/qemu-iotests/testenv.py
+> @@ -238,6 +238,8 @@ def __init__(self, imgfmt: str, imgproto: str, aiomode: str,
+>              ('aarch64', 'virt'),
+>              ('avr', 'mega2560'),
+>              ('m68k', 'virt'),
+> +            ('riscv32', 'virt'),
+> +            ('riscv64', 'virt'),
+>              ('rx', 'gdbsim-r5f562n8'),
+>              ('tricore', 'tricore_testboard')
+>          )
+> --
+> 2.34.1
+>
+>
 
