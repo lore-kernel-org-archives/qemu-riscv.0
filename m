@@ -1,61 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nSUzW-0003lO-Md
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Mar 2022 21:26:55 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:42542)
+	id 1nSVUQ-0001sz-7T
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Mar 2022 21:58:50 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:47772)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSUzM-0003i0-0T; Thu, 10 Mar 2022 21:26:45 -0500
-Received: from [2607:f8b0:4864:20::d2b] (port=33352
+ id 1nSVUN-0001s9-UP; Thu, 10 Mar 2022 21:58:48 -0500
+Received: from [2607:f8b0:4864:20::d2b] (port=37669
  helo=mail-io1-xd2b.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSUzJ-0003Oa-BA; Thu, 10 Mar 2022 21:26:43 -0500
-Received: by mail-io1-xd2b.google.com with SMTP id 195so8775745iou.0;
- Thu, 10 Mar 2022 18:26:40 -0800 (PST)
+ id 1nSVUM-0003TB-3A; Thu, 10 Mar 2022 21:58:47 -0500
+Received: by mail-io1-xd2b.google.com with SMTP id c23so8772714ioi.4;
+ Thu, 10 Mar 2022 18:58:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=wf2UXCVMSQukxPmc7EC0b1uZk4qeoNh+M8T0SFcyVcc=;
- b=i9se3NMuyP/khDkp9L8Ee337hLbEsISiSCOi7xH1gDhWWpvCptrpun9FGT6CqsGgD2
- KkwhpP/8n/T5GQF82YmPhX8bDZTcpwtFbyX3gg1+H4WeOrDKoBjHb5WxmGtfluJW6K6T
- NNLQYW3mf474JnjW+VxJM+hko9fGr5J6d27fKKd1F7UJN9ttodw6TT2IB4vPKv4S7TDh
- bz69qPG1r61TcxV7B8gyckIwjEXqVmGDqKKqp2/n8roV98sAF1t3K0QpbYGPTagyOz0h
- LwN+SuKy19lu5sYTdPlWoK5eCCzaNhYMA1BCHlnZHHT3NeCr5gSERBrLKv98hWleh5L6
- WALg==
+ :cc; bh=7M9tkwr5Q2awQPjcN6ksvJ3f7TdEZ6MisTpSkWiRtMQ=;
+ b=lQ3yWQZ6r75p8ObkH1DS7Ef/L0QXusgYDnW/aXNBNQYwGw+8aHC6Ti2ewo9PH0Ektw
+ zEUGfQ6glNRWVJIS6GTB7gEkqOUowFhgyt0N0T3z9ecAH9mJToj56qmCcejiMQD38mi5
+ K5PrM82KTqNyJ99aI0NZ7f6D994vdeySZDStm6LtmI3RLwxiqENZWC+KTozsY1nOmdGr
+ HO0uapVi8AmO4OUbSopI/9yVJYEzdJVTrjzd/h0jcyqdeU05fPedRfwKucxE6oK3MvSm
+ rU5PJ1d15+duoRP7SiT3JK/xmanKBVT8oyet2DCgn+NupzGpOh6EQmuq923SO53ZU1fu
+ 8yYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=wf2UXCVMSQukxPmc7EC0b1uZk4qeoNh+M8T0SFcyVcc=;
- b=mG69hcphL0ISU2sTk8GgceA9+3Kf1QF2RqbwRDK3IXX04xUhlNC/L5s0Il4g3w/z3Y
- aTwNp/3RIJ9AdM5p9RrPuXLcVHbJh/zoR6t9qmFceFdGj3L0SFisgPbAknAyTL6henB9
- JEcL7gU18/xNcWfzqMiLj9LNi89UNhOtWoOAYLqkVL7a1GwVhfu14+nkeuur1B5FJ0M0
- syYJ6VxXAKbDTkyYzyrtTlvsBCKD3adKqf1uT5xDoWnCcgRykNJ1OoNF5uM5mv0BH78c
- lmZZVQhnfrd3wIfu9XpNCJ4ocJs0Ia4hbiKcLkWn9V/4BvNkrUgSGivcaJ8Ei6MiC/jK
- i4LA==
-X-Gm-Message-State: AOAM533pA4gETLj+36beOT6ZwwwBkush2UrCY0x4dqmxEgIU0iiskM9b
- GWV0CeU9D0ETSe7qPB8E9WIqYgRUU5SCt53SdZg=
-X-Google-Smtp-Source: ABdhPJxzJirnzhIhN28ap93uYoZkuj0hzhvqGKV7FCVIqHG+FVQbZDfE2/5g2lQWFEmgAnHpKpIgUO353P+JUPC/dYI=
-X-Received: by 2002:a05:6602:2c0b:b0:63d:dfb2:9a95 with SMTP id
- w11-20020a0566022c0b00b0063ddfb29a95mr6265465iov.93.1646965599674; Thu, 10
- Mar 2022 18:26:39 -0800 (PST)
+ bh=7M9tkwr5Q2awQPjcN6ksvJ3f7TdEZ6MisTpSkWiRtMQ=;
+ b=eLjqm5iBlpXP1W/wk/BEvcLN6hDIVwGY0yxZ/M0B25Q27NKPTBS/JZklxhpkRcAJfN
+ zHhrS5jMhmcjemKsFD0Vac4S32R2MdDpgCbKeB9NsKKWBF8e37EwDjlbdmGuUhL97gqz
+ MkFArBcbJO+clqExrwqCj9FobvrLZOABh9Yq+dlxE7IxKyw9qWtH7hyvVfFqUb2KfoQh
+ BX+rY1mdbQzCdKGg5f/BsttoYnbAgz6Conkhqdv3bsbsL6b9vtjGYiKLdtj+ZjvbxZL5
+ FkIRGllwEefSQeYPL2TsHhUBAkNWiIvg5botJF8rtqW8q1a+OxN5oHvVndQbHUu3wFMH
+ Xw3g==
+X-Gm-Message-State: AOAM532H/XEIYqgoV1O1OJxA8XeZ3kNJjfGs/psSD/B3ilYAbelylXbz
+ hpyVqjmKECYUHvN89IOAb/JXXtDQjajdy2M5mX4=
+X-Google-Smtp-Source: ABdhPJyibsnDTarar/LVjBgFQRI10Kzk2ktY3wXsMh320EZlTUMMU6eBChEjNCysE8iah8WKaaGLpqfigchNOJscxJQ=
+X-Received: by 2002:a02:3f09:0:b0:307:f175:e7bd with SMTP id
+ d9-20020a023f09000000b00307f175e7bdmr6649996jaa.21.1646967524635; Thu, 10 Mar
+ 2022 18:58:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20220301115828.355-1-liweiwei@iscas.ac.cn>
- <20220301115828.355-8-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220301115828.355-8-liweiwei@iscas.ac.cn>
+References: <20220302122946.29635-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220302122946.29635-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Mar 2022 12:26:13 +1000
-Message-ID: <CAKmqyKNgeE5-K3GbRLMcA2Xtw+vicsgFuco9A8bF1S0xKJe6hA@mail.gmail.com>
-Subject: Re: [PATCH v8 07/14] target/riscv: rvk: add support for zkne/zknd
- extension in RV64
+Date: Fri, 11 Mar 2022 12:58:18 +1000
+Message-ID: <CAKmqyKOgJA49Mc4H=WFN+soxaFKtJc+d+nviKiro7eCdMg7hcA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: write back unmodified value for csrrc/csrrs
+ with rs1 is not x0 but holding zero
 To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
+Cc: Richard Henderson <richard.henderson@linaro.org>, 
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
- lustrew@foxmail.com
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2b
  (failed)
@@ -81,315 +78,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2022 02:26:45 -0000
+X-List-Received-Date: Fri, 11 Mar 2022 02:58:48 -0000
 
-On Tue, Mar 1, 2022 at 10:03 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Wed, Mar 2, 2022 at 11:50 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
->  - add aes64dsm, aes64ds, aes64im, aes64es, aes64esm, aes64ks2, aes64ks1i instructions
+>      For csrrs and csrrc, if rs1 specifies a register other than x0, holding
+>      a zero value, the instruction will still attempt to write the unmodified
+>      value back to the csr and will cause side effects
 >
-> Co-authored-by: Ruibo Lu <luruibo2000@163.com>
-> Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  target/riscv/csr.c       | 46 ++++++++++++++++++++++++++++------------
+>  target/riscv/op_helper.c |  7 +++++-
+>  2 files changed, 39 insertions(+), 14 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index aea82dff4a..f4774ca07b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2872,7 +2872,7 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+>
+>  static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>                                                 int csrno,
+> -                                               bool write_mask,
+> +                                               bool write_csr,
+>                                                 RISCVCPU *cpu)
+>  {
+>      /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+> @@ -2895,7 +2895,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>  #endif
+> -    if (write_mask && read_only) {
+> +    if (write_csr && read_only) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> @@ -2915,7 +2915,8 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>  static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+>                                         target_ulong *ret_value,
+>                                         target_ulong new_value,
+> -                                       target_ulong write_mask)
+> +                                       target_ulong write_mask,
+> +                                       bool write_csr)
+>  {
+>      RISCVException ret;
+>      target_ulong old_value;
+> @@ -2935,8 +2936,8 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+>          return ret;
+>      }
+>
+> -    /* write value if writable and write mask set, otherwise drop writes */
+> -    if (write_mask) {
+> +    /* write value if needed, otherwise drop writes */
+> +    if (write_csr) {
+>          new_value = (old_value & ~write_mask) | (new_value & write_mask);
+>          if (csr_ops[csrno].write) {
+>              ret = csr_ops[csrno].write(env, csrno, new_value);
+> @@ -2960,18 +2961,27 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>  {
+>      RISCVCPU *cpu = env_archcpu(env);
+>
+> -    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask, cpu);
+> +    /*
+> +     * write value when write_mask is set or rs1 is not x0 but holding zero
+> +     * value for csrrc(new_value is zero) and csrrs(new_value is all-ones)
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+I don't understand this. Won't write_mask also be zero and when reading?
 
 Alistair
 
-> ---
->  target/riscv/crypto_helper.c            | 169 ++++++++++++++++++++++++
->  target/riscv/helper.h                   |   8 ++
->  target/riscv/insn32.decode              |  12 ++
->  target/riscv/insn_trans/trans_rvk.c.inc |  47 +++++++
->  4 files changed, 236 insertions(+)
+> +     */
+> +    bool write_csr = write_mask || ((write_mask == 0) &&
+> +                                    ((new_value == 0) ||
+> +                                     (new_value == (target_ulong)-1)));
+> +
+> +    RISCVException ret = riscv_csrrw_check(env, csrno, write_csr, cpu);
+>      if (ret != RISCV_EXCP_NONE) {
+>          return ret;
+>      }
 >
-> diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-> index 220d51c742..cb4783a1e9 100644
-> --- a/target/riscv/crypto_helper.c
-> +++ b/target/riscv/crypto_helper.c
-> @@ -102,4 +102,173 @@ target_ulong HELPER(aes32dsi)(target_ulong rs1, target_ulong rs2,
+> -    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
+> +    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask,
+> +                            write_csr);
+>  }
+>
+>  static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+>                                          Int128 *ret_value,
+>                                          Int128 new_value,
+> -                                        Int128 write_mask)
+> +                                        Int128 write_mask, bool write_csr)
 >  {
->      return aes32_operation(shamt, rs1, rs2, false, false);
->  }
-> +
-> +#define BY(X, I) ((X >> (8 * I)) & 0xFF)
-> +
-> +#define AES_SHIFROWS_LO(RS1, RS2) ( \
-> +    (((RS1 >> 24) & 0xFF) << 56) | (((RS2 >> 48) & 0xFF) << 48) | \
-> +    (((RS2 >> 8) & 0xFF) << 40) | (((RS1 >> 32) & 0xFF) << 32) | \
-> +    (((RS2 >> 56) & 0xFF) << 24) | (((RS2 >> 16) & 0xFF) << 16) | \
-> +    (((RS1 >> 40) & 0xFF) << 8) | (((RS1 >> 0) & 0xFF) << 0))
-> +
-> +#define AES_INVSHIFROWS_LO(RS1, RS2) ( \
-> +    (((RS2 >> 24) & 0xFF) << 56) | (((RS2 >> 48) & 0xFF) << 48) | \
-> +    (((RS1 >> 8) & 0xFF) << 40) | (((RS1 >> 32) & 0xFF) << 32) | \
-> +    (((RS1 >> 56) & 0xFF) << 24) | (((RS2 >> 16) & 0xFF) << 16) | \
-> +    (((RS2 >> 40) & 0xFF) << 8) | (((RS1 >> 0) & 0xFF) << 0))
-> +
-> +#define AES_MIXBYTE(COL, B0, B1, B2, B3) ( \
-> +    BY(COL, B3) ^ BY(COL, B2) ^ AES_GFMUL(BY(COL, B1), 3) ^ \
-> +    AES_GFMUL(BY(COL, B0), 2))
-> +
-> +#define AES_MIXCOLUMN(COL) ( \
-> +    AES_MIXBYTE(COL, 3, 0, 1, 2) << 24 | \
-> +    AES_MIXBYTE(COL, 2, 3, 0, 1) << 16 | \
-> +    AES_MIXBYTE(COL, 1, 2, 3, 0) << 8 | AES_MIXBYTE(COL, 0, 1, 2, 3) << 0)
-> +
-> +#define AES_INVMIXBYTE(COL, B0, B1, B2, B3) ( \
-> +    AES_GFMUL(BY(COL, B3), 0x9) ^ AES_GFMUL(BY(COL, B2), 0xd) ^ \
-> +    AES_GFMUL(BY(COL, B1), 0xb) ^ AES_GFMUL(BY(COL, B0), 0xe))
-> +
-> +#define AES_INVMIXCOLUMN(COL) ( \
-> +    AES_INVMIXBYTE(COL, 3, 0, 1, 2) << 24 | \
-> +    AES_INVMIXBYTE(COL, 2, 3, 0, 1) << 16 | \
-> +    AES_INVMIXBYTE(COL, 1, 2, 3, 0) << 8 | \
-> +    AES_INVMIXBYTE(COL, 0, 1, 2, 3) << 0)
-> +
-> +static inline target_ulong aes64_operation(target_ulong rs1, target_ulong rs2,
-> +                                           bool enc, bool mix)
-> +{
-> +    uint64_t RS1 = rs1;
-> +    uint64_t RS2 = rs2;
-> +    uint64_t result;
-> +    uint64_t temp;
-> +    uint32_t col_0;
-> +    uint32_t col_1;
-> +
-> +    if (enc) {
-> +        temp = AES_SHIFROWS_LO(RS1, RS2);
-> +        temp = (((uint64_t)AES_sbox[(temp >> 0) & 0xFF] << 0) |
-> +                ((uint64_t)AES_sbox[(temp >> 8) & 0xFF] << 8) |
-> +                ((uint64_t)AES_sbox[(temp >> 16) & 0xFF] << 16) |
-> +                ((uint64_t)AES_sbox[(temp >> 24) & 0xFF] << 24) |
-> +                ((uint64_t)AES_sbox[(temp >> 32) & 0xFF] << 32) |
-> +                ((uint64_t)AES_sbox[(temp >> 40) & 0xFF] << 40) |
-> +                ((uint64_t)AES_sbox[(temp >> 48) & 0xFF] << 48) |
-> +                ((uint64_t)AES_sbox[(temp >> 56) & 0xFF] << 56));
-> +        if (mix) {
-> +            col_0 = temp & 0xFFFFFFFF;
-> +            col_1 = temp >> 32;
-> +
-> +            col_0 = AES_MIXCOLUMN(col_0);
-> +            col_1 = AES_MIXCOLUMN(col_1);
-> +
-> +            result = ((uint64_t)col_1 << 32) | col_0;
-> +        } else {
-> +            result = temp;
-> +        }
-> +    } else {
-> +        temp = AES_INVSHIFROWS_LO(RS1, RS2);
-> +        temp = (((uint64_t)AES_isbox[(temp >> 0) & 0xFF] << 0) |
-> +                ((uint64_t)AES_isbox[(temp >> 8) & 0xFF] << 8) |
-> +                ((uint64_t)AES_isbox[(temp >> 16) & 0xFF] << 16) |
-> +                ((uint64_t)AES_isbox[(temp >> 24) & 0xFF] << 24) |
-> +                ((uint64_t)AES_isbox[(temp >> 32) & 0xFF] << 32) |
-> +                ((uint64_t)AES_isbox[(temp >> 40) & 0xFF] << 40) |
-> +                ((uint64_t)AES_isbox[(temp >> 48) & 0xFF] << 48) |
-> +                ((uint64_t)AES_isbox[(temp >> 56) & 0xFF] << 56));
-> +        if (mix) {
-> +            col_0 = temp & 0xFFFFFFFF;
-> +            col_1 = temp >> 32;
-> +
-> +            col_0 = AES_INVMIXCOLUMN(col_0);
-> +            col_1 = AES_INVMIXCOLUMN(col_1);
-> +
-> +            result = ((uint64_t)col_1 << 32) | col_0;
-> +        } else {
-> +            result = temp;
-> +        }
-> +    }
-> +
-> +    return result;
-> +}
-> +
-> +target_ulong HELPER(aes64esm)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return aes64_operation(rs1, rs2, true, true);
-> +}
-> +
-> +target_ulong HELPER(aes64es)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return aes64_operation(rs1, rs2, true, false);
-> +}
-> +
-> +target_ulong HELPER(aes64ds)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return aes64_operation(rs1, rs2, false, false);
-> +}
-> +
-> +target_ulong HELPER(aes64dsm)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return aes64_operation(rs1, rs2, false, true);
-> +}
-> +
-> +target_ulong HELPER(aes64ks2)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    uint64_t RS1 = rs1;
-> +    uint64_t RS2 = rs2;
-> +    uint32_t rs1_hi = RS1 >> 32;
-> +    uint32_t rs2_lo = RS2;
-> +    uint32_t rs2_hi = RS2 >> 32;
-> +
-> +    uint32_t r_lo = (rs1_hi ^ rs2_lo);
-> +    uint32_t r_hi = (rs1_hi ^ rs2_lo ^ rs2_hi);
-> +    target_ulong result = ((uint64_t)r_hi << 32) | r_lo;
-> +
-> +    return result;
-> +}
-> +
-> +target_ulong HELPER(aes64ks1i)(target_ulong rs1, target_ulong rnum)
-> +{
-> +    uint64_t RS1 = rs1;
-> +    static const uint8_t round_consts[10] = {
-> +        0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
-> +    };
-> +
-> +    uint8_t enc_rnum = rnum;
-> +    uint32_t temp = (RS1 >> 32) & 0xFFFFFFFF;
-> +    uint8_t rcon_ = 0;
-> +    target_ulong result;
-> +
-> +    if (enc_rnum != 0xA) {
-> +        temp = ror32(temp, 8); /* Rotate right by 8 */
-> +        rcon_ = round_consts[enc_rnum];
-> +    }
-> +
-> +    temp = ((uint32_t)AES_sbox[(temp >> 24) & 0xFF] << 24) |
-> +           ((uint32_t)AES_sbox[(temp >> 16) & 0xFF] << 16) |
-> +           ((uint32_t)AES_sbox[(temp >> 8) & 0xFF] << 8) |
-> +           ((uint32_t)AES_sbox[(temp >> 0) & 0xFF] << 0);
-> +
-> +    temp ^= rcon_;
-> +
-> +    result = ((uint64_t)temp << 32) | temp;
-> +
-> +    return result;
-> +}
-> +
-> +target_ulong HELPER(aes64im)(target_ulong rs1)
-> +{
-> +    uint64_t RS1 = rs1;
-> +    uint32_t col_0 = RS1 & 0xFFFFFFFF;
-> +    uint32_t col_1 = RS1 >> 32;
-> +    target_ulong result;
-> +
-> +    col_0 = AES_INVMIXCOLUMN(col_0);
-> +    col_1 = AES_INVMIXCOLUMN(col_1);
-> +
-> +    result = ((uint64_t)col_1 << 32) | col_0;
-> +
-> +    return result;
-> +}
->  #undef sext32_xlen
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index d31bfadb3e..0df0a05b11 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -1121,3 +1121,11 @@ DEF_HELPER_FLAGS_3(aes32esmi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
->  DEF_HELPER_FLAGS_3(aes32esi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
->  DEF_HELPER_FLAGS_3(aes32dsmi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
->  DEF_HELPER_FLAGS_3(aes32dsi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-> +
-> +DEF_HELPER_FLAGS_2(aes64esm, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(aes64es, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(aes64ds, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(aes64dsm, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(aes64ks2, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(aes64ks1i, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 0f2e661583..0b800b4093 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -36,6 +36,7 @@
->  %imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
->  %imm_u    12:s20                 !function=ex_shift_12
->  %imm_bs   30:2                   !function=ex_shift_3
-> +%imm_rnum 20:4
+>      RISCVException ret;
+>      Int128 old_value;
+> @@ -2982,8 +2992,8 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+>          return ret;
+>      }
 >
->  # Argument sets:
->  &empty
-> @@ -92,6 +93,7 @@
->  @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+> -    /* write value if writable and write mask set, otherwise drop writes */
+> -    if (int128_nz(write_mask)) {
+> +    /* write value if needed, otherwise drop writes */
+> +    if (write_csr) {
+>          new_value = int128_or(int128_and(old_value, int128_not(write_mask)),
+>                                int128_and(new_value, write_mask));
+>          if (csr_ops[csrno].write128) {
+> @@ -3015,13 +3025,22 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+>      RISCVException ret;
+>      RISCVCPU *cpu = env_archcpu(env);
 >
->  @k_aes   .. ..... ..... .....  ... ..... ....... &k_aes  shamt=%imm_bs   %rs2 %rs1 %rd
-> +@i_aes   .. ..... ..... .....  ... ..... ....... &i      imm=%imm_rnum        %rs1 %rd
+> -    ret = riscv_csrrw_check(env, csrno, int128_nz(write_mask), cpu);
+> +    /*
+> +     * write value when write_mask is set or rs1 is not x0 but holding zero
+> +     * value for csrrc(new_value is zero) and csrrs(new_value is all-ones)
+> +     */
+> +    bool write_csr = write_mask || ((write_mask == 0) &&
+> +                                    ((new_value == 0) ||
+> +                                     (new_value == UINT128_MAX)));
+> +
+> +    ret = riscv_csrrw_check(env, csrno, write_csr, cpu);
+>      if (ret != RISCV_EXCP_NONE) {
+>          return ret;
+>      }
 >
->  # Formats 64:
->  @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
-> @@ -842,6 +844,16 @@ hinval_gvma       0110011 ..... ..... 000 00000 1110011 @hfence_gvma
->  # *** RV32 Zknd Standard Extension ***
->  aes32dsmi   .. 10111 ..... ..... 000 ..... 0110011 @k_aes
->  aes32dsi    .. 10101 ..... ..... 000 ..... 0110011 @k_aes
-> +# *** RV64 Zknd Standard Extension ***
-> +aes64dsm    00 11111 ..... ..... 000 ..... 0110011 @r
-> +aes64ds     00 11101 ..... ..... 000 ..... 0110011 @r
-> +aes64im     00 11000 00000 ..... 001 ..... 0010011 @r2
->  # *** RV32 Zkne Standard Extension ***
->  aes32esmi   .. 10011 ..... ..... 000 ..... 0110011 @k_aes
->  aes32esi    .. 10001 ..... ..... 000 ..... 0110011 @k_aes
-> +# *** RV64 Zkne Standard Extension ***
-> +aes64es     00 11001 ..... ..... 000 ..... 0110011 @r
-> +aes64esm    00 11011 ..... ..... 000 ..... 0110011 @r
-> +# *** RV64 Zkne/zknd Standard Extension ***
-> +aes64ks2    01 11111 ..... ..... 000 ..... 0110011 @r
-> +aes64ks1i   00 11000 1.... ..... 001 ..... 0010011 @i_aes
-> diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-> index 74f9f826b9..b86f931b13 100644
-> --- a/target/riscv/insn_trans/trans_rvk.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvk.c.inc
-> @@ -65,3 +65,50 @@ static bool trans_aes32dsi(DisasContext *ctx, arg_aes32dsi *a)
->      REQUIRE_ZKND(ctx);
->      return gen_aes32_sm4(ctx, a, gen_helper_aes32dsi);
->  }
+>      if (csr_ops[csrno].read128) {
+> -        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write_mask);
+> +        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write_mask,
+> +                                 write_csr);
+>      }
+>
+>      /*
+> @@ -3033,7 +3052,8 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+>      target_ulong old_value;
+>      ret = riscv_csrrw_do64(env, csrno, &old_value,
+>                             int128_getlo(new_value),
+> -                           int128_getlo(write_mask));
+> +                           int128_getlo(write_mask),
+> +                           write_csr);
+>      if (ret == RISCV_EXCP_NONE && ret_value) {
+>          *ret_value = int128_make64(old_value);
+>      }
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 1a75ba11e6..b2ad465533 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -40,7 +40,12 @@ void helper_raise_exception(CPURISCVState *env, uint32_t exception)
+>  target_ulong helper_csrr(CPURISCVState *env, int csr)
+>  {
+>      target_ulong val = 0;
+> -    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
 > +
-> +static bool trans_aes64es(DisasContext *ctx, arg_aes64es *a)
-> +{
-> +    REQUIRE_ZKNE(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_aes64es, NULL);
-> +}
-> +
-> +static bool trans_aes64esm(DisasContext *ctx, arg_aes64esm *a)
-> +{
-> +    REQUIRE_ZKNE(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_aes64esm, NULL);
-> +}
-> +
-> +static bool trans_aes64ds(DisasContext *ctx, arg_aes64ds *a)
-> +{
-> +    REQUIRE_ZKND(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_aes64ds, NULL);
-> +}
-> +
-> +static bool trans_aes64dsm(DisasContext *ctx, arg_aes64dsm *a)
-> +{
-> +    REQUIRE_ZKND(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_aes64dsm, NULL);
-> +}
-> +
-> +static bool trans_aes64ks2(DisasContext *ctx, arg_aes64ks2 *a)
-> +{
-> +    REQUIRE_EITHER_EXT(ctx, zknd, zkne);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_aes64ks2, NULL);
-> +}
-> +
-> +static bool trans_aes64ks1i(DisasContext *ctx, arg_aes64ks1i *a)
-> +{
-> +    REQUIRE_EITHER_EXT(ctx, zknd, zkne);
-> +
-> +    if (a->imm > 0xA) {
-> +        return false;
-> +    }
-> +
-> +    return gen_arith_imm_tl(ctx, a, EXT_NONE, gen_helper_aes64ks1i, NULL);
-> +}
-> +
-> +static bool trans_aes64im(DisasContext *ctx, arg_aes64im *a)
-> +{
-> +    REQUIRE_ZKND(ctx);
-> +    return gen_unary(ctx, a, EXT_NONE, gen_helper_aes64im);
-> +}
+> +    /*
+> +     * new_value here should be none-zero or none-all-ones here to
+> +     * distinguish with csrrc/csrrs with rs1 is not x0 but holding zero value
+> +     */
+> +    RISCVException ret = riscv_csrrw(env, csr, &val, 1, 0);
+>
+>      if (ret != RISCV_EXCP_NONE) {
+>          riscv_raise_exception(env, ret, GETPC());
 > --
 > 2.17.1
 >
