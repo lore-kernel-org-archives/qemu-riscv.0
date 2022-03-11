@@ -1,52 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nSZP2-0003Es-PL
-	for mharc-qemu-riscv@gnu.org; Fri, 11 Mar 2022 02:09:34 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:59172)
+	id 1nSZUB-0006rf-KH
+	for mharc-qemu-riscv@gnu.org; Fri, 11 Mar 2022 02:14:51 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:60000)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSZOz-0003DE-7y; Fri, 11 Mar 2022 02:09:29 -0500
-Received: from [2607:f8b0:4864:20::133] (port=39777
- helo=mail-il1-x133.google.com)
+ id 1nSZU9-0006od-DS; Fri, 11 Mar 2022 02:14:49 -0500
+Received: from [2607:f8b0:4864:20::12c] (port=37829
+ helo=mail-il1-x12c.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSZOx-0005J8-D2; Fri, 11 Mar 2022 02:09:28 -0500
-Received: by mail-il1-x133.google.com with SMTP id b14so5399220ilf.6;
- Thu, 10 Mar 2022 23:09:16 -0800 (PST)
+ id 1nSZU7-00064e-9m; Fri, 11 Mar 2022 02:14:48 -0500
+Received: by mail-il1-x12c.google.com with SMTP id j29so5400378ila.4;
+ Thu, 10 Mar 2022 23:14:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=U9Cg9LDGRSRNWKVhIi8Dgou251u7kPB1hbhTCK5s5nQ=;
- b=fC7xaP+a08/PMhHa6IrXw73fBmxXg0Tu6p3TxdZBAtgZx6FPaSpqzwl9fzXFqMwup0
- JG2me98AvVgUe2QNOhe1fP3X6CywwtuHltaIu8whFWLOIZBM3mk3ahrEMtjmdSJYBa3O
- qjlwKYGs0aK4wYVW1WI3FU//wcqLiBKWGgbX5sHRwbMAjCvz1OerscrHprlFtMrLY7ZH
- cfmJ3Mhq8Ao4Jy8h0cjUDLlo46+i4lf7sopzhVtUOfe+CS5FNdAtQnvaZHPPrDr8fdlC
- QJqYPXupPom6Sy20p/g7vcfpCBTHxfZAoOYmNGWddDcCmHKOLvkjzIB6DVRpsFD+L83h
- 8bPQ==
+ :cc; bh=fb4RMpQdI11GTLJ+5IjzyChRL6lwFloiycOPCuKl/C8=;
+ b=hBAIjDkqFTD1O18BS16AEElhItM0Re+lKPrVHvpThGI+Akxc8XE3MIPV+a9Mni//qp
+ nXyoJkX71iZ3hyhKgnO7RzD+be9Ny8jV2ZMSG2nZ7TN1MixJZfD9Qrqfl7jBM5kPqlOE
+ KEgpdlPewMLjrAhh5UAzFqNtHscu7TY+K/X6QxlfCjwk43CyX5o7R1fepm3IigV2X1CO
+ VncFtJkFlg5TspyypNcLt4TtEdI8ox1oObW+p0CM5MkWIYm38O2YwqfUEuK2bfjLgzs1
+ aRQrNeB8kurBLfTZ6JwuRXn5YWwOuSRqe12Eq9y75t5Khbw6cwbOLiszTJ+MhohbVivX
+ +C2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=U9Cg9LDGRSRNWKVhIi8Dgou251u7kPB1hbhTCK5s5nQ=;
- b=ScCuCK4S1w1oK27vP2uaeHUNVylZezG/SFBsQAjCMHDN0tRt2ZAY/Qe8hf8qMRoLpO
- jmGl3ofAfrfIKyiwvzCK8gAlNSauhl9iGFMc09UotVsjDp2L3G6d6qoTUdZVz7eQ/2MD
- MQR/W6UgtCBOirowFxtZDY7mcihdnijr7AWTA0sf8EqnhgWKrZb84Gb8tknAtGj84Azz
- +VwRIZXjPXbEAwAMvKdwvt1upD3GxasyNoGaSjavm/AnVhIy0L1tU5/ZiMjyPXYa/ydp
- 4PC48kAeTjAj7ddNMgQId0OTf6W3+4h5A6zMd8o8xoRYZnbgIF9ty+cxL9LLx97KnTbY
- B4fQ==
-X-Gm-Message-State: AOAM5333WaH6W+PNHvh+HQpdk6AJGzvOQ4fHDFPRq0nbw7MMWe9vqr+V
- LOLdk2rNjnnDbgEI+wx+15+VsGpdQtUeJmh0N04=
-X-Google-Smtp-Source: ABdhPJwHJc5C+bUErPToP3p1NZubn1EZcfCSTN23ps2C9DurAme3kE81M1R+qpCosM/twIJ+2iCPMw1M94jytf/qQu4=
-X-Received: by 2002:a05:6e02:154c:b0:2c6:4ffa:57ec with SMTP id
- j12-20020a056e02154c00b002c64ffa57ecmr6502688ilu.55.1646982555655; Thu, 10
- Mar 2022 23:09:15 -0800 (PST)
+ bh=fb4RMpQdI11GTLJ+5IjzyChRL6lwFloiycOPCuKl/C8=;
+ b=0HmJEHI65Tl82MiSOYvoGytmnhcoVplQZW8hgb4atw6q6XI6dovekcrx0A7cGMqbkq
+ 8QuN864UunjpRfKvqjktPD5QE6LT3qVFF38v52C8GxGA0/OmMhnJpPltb7Z2uHVp2NCZ
+ JnBe+fmMWvwMTZDt+G7LZy368CaNnVr+ToDwRgubmSAppDIvJeS3vg8S1hbzoNI5Js1H
+ J+Ib2+GJx4k2TizH5/a0U5gh1bLE6um6pm/kBLNDRTIJks0bX15vk8YeiSGHuWxee2tF
+ znb1mI5ZyTraLcvWhnLVVXrYsoSB6ZD8FJyudVqXE5hwzBnH4xcXqaHNWSlr8lVFUsyQ
+ SZWw==
+X-Gm-Message-State: AOAM532jWYSrXh/7iD1R1VT7oA2ImCHhiyztYy2s6NKmyf/yhG+hrtbK
+ 1L37CkSv43ngJb+saD+hzQG7KLkOahmCQDp6/OI=
+X-Google-Smtp-Source: ABdhPJyHSkqo+8f9nos0G2jxoH2XuQMJOTiDqsUaMq+GnMRlzyXW1jFdFp7EYh/NBBt1PhvvsmxROu+nDz3fNgOik/c=
+X-Received: by 2002:a05:6e02:20ec:b0:2c6:158a:cb33 with SMTP id
+ q12-20020a056e0220ec00b002c6158acb33mr6738576ilv.113.1646982885767; Thu, 10
+ Mar 2022 23:14:45 -0800 (PST)
 MIME-Version: 1.0
 References: <20220301115828.355-1-liweiwei@iscas.ac.cn>
- <20220301115828.355-9-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220301115828.355-9-liweiwei@iscas.ac.cn>
+ <20220301115828.355-10-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220301115828.355-10-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Mar 2022 17:08:49 +1000
-Message-ID: <CAKmqyKMWF2ebp2SmRNg0SNCxXo3nvWDdGmnLi9418zveukSktg@mail.gmail.com>
-Subject: Re: [PATCH v8 08/14] target/riscv: rvk: add support for sha256
- related instructions in zknh extension
+Date: Fri, 11 Mar 2022 17:14:19 +1000
+Message-ID: <CAKmqyKPioFgCJtyts9pF8EXjigOmTyvvhu937am-CNOJKLeavQ@mail.gmail.com>
+Subject: Re: [PATCH v8 09/14] target/riscv: rvk: add support for sha512
+ related instructions for RV32 in zknh extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -57,10 +57,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
  lustrew@foxmail.com
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::133
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12c
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -81,108 +81,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2022 07:09:29 -0000
+X-List-Received-Date: Fri, 11 Mar 2022 07:14:49 -0000
 
-On Tue, Mar 1, 2022 at 10:09 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Tue, Mar 1, 2022 at 10:01 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
->  - add sha256sig0, sha256sig1, sha256sum0 and sha256sum1 instructions
+>  - add sha512sum0r, sha512sig0l, sha512sum1r, sha512sig1l, sha512sig0h and sha512sig1h instructions
 >
 > Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/insn32.decode              |  5 +++
->  target/riscv/insn_trans/trans_rvk.c.inc | 55 +++++++++++++++++++++++++
->  2 files changed, 60 insertions(+)
+>  target/riscv/insn32.decode              |   6 ++
+>  target/riscv/insn_trans/trans_rvk.c.inc | 100 ++++++++++++++++++++++++
+>  2 files changed, 106 insertions(+)
 >
 > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 0b800b4093..db28ecdd2b 100644
+> index db28ecdd2b..02a0c71890 100644
 > --- a/target/riscv/insn32.decode
 > +++ b/target/riscv/insn32.decode
-> @@ -857,3 +857,8 @@ aes64esm    00 11011 ..... ..... 000 ..... 0110011 @r
->  # *** RV64 Zkne/zknd Standard Extension ***
->  aes64ks2    01 11111 ..... ..... 000 ..... 0110011 @r
->  aes64ks1i   00 11000 1.... ..... 001 ..... 0010011 @i_aes
-> +# *** RV32 Zknh Standard Extension ***
-> +sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
-> +sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
-> +sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
-> +sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
+> @@ -862,3 +862,9 @@ sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
+>  sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
+>  sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
+>  sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
+> +sha512sum0r 01 01000 ..... ..... 000 ..... 0110011 @r
+> +sha512sum1r 01 01001 ..... ..... 000 ..... 0110011 @r
+> +sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
+> +sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
+> +sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
+> +sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
 > diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-> index b86f931b13..beea7f8e96 100644
+> index beea7f8e96..bb89a53f52 100644
 > --- a/target/riscv/insn_trans/trans_rvk.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvk.c.inc
-> @@ -29,6 +29,12 @@
->      }                                           \
->  } while (0)
->
-> +#define REQUIRE_ZKNH(ctx) do {                  \
-> +    if (!ctx->cfg_ptr->ext_zknh) {              \
-> +        return false;                           \
-> +    }                                           \
-> +} while (0)
-> +
->  static bool gen_aes32_sm4(DisasContext *ctx, arg_k_aes *a,
->                            void (*func)(TCGv, TCGv, TCGv, TCGv))
->  {
-> @@ -112,3 +118,52 @@ static bool trans_aes64im(DisasContext *ctx, arg_aes64im *a)
->      REQUIRE_ZKND(ctx);
->      return gen_unary(ctx, a, EXT_NONE, gen_helper_aes64im);
+> @@ -167,3 +167,103 @@ static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
+>      REQUIRE_ZKNH(ctx);
+>      return gen_sha256(ctx, a, EXT_NONE, tcg_gen_rotri_i32, 6, 11, 25);
 >  }
 > +
-> +static bool gen_sha256(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
-> +                       void (*func)(TCGv_i32, TCGv_i32, int32_t),
-> +                       int32_t num1, int32_t num2, int32_t num3)
+> +static bool gen_sha512_rv32(DisasContext *ctx, arg_r *a, DisasExtend ext,
+> +                            void (*func1)(TCGv_i64, TCGv_i64, int64_t),
+> +                            void (*func2)(TCGv_i64, TCGv_i64, int64_t),
+> +                            int64_t num1, int64_t num2, int64_t num3)
 > +{
 > +    TCGv dest = dest_gpr(ctx, a->rd);
 > +    TCGv src1 = get_gpr(ctx, a->rs1, ext);
-> +    TCGv_i32 t0 = tcg_temp_new_i32();
-> +    TCGv_i32 t1 = tcg_temp_new_i32();
-> +    TCGv_i32 t2 = tcg_temp_new_i32();
+> +    TCGv src2 = get_gpr(ctx, a->rs2, ext);
+> +    TCGv_i64 t0 = tcg_temp_new_i64();
+> +    TCGv_i64 t1 = tcg_temp_new_i64();
+> +    TCGv_i64 t2 = tcg_temp_new_i64();
 > +
-> +    tcg_gen_trunc_tl_i32(t0, src1);
-> +    tcg_gen_rotri_i32(t1, t0, num1);
-> +    tcg_gen_rotri_i32(t2, t0, num2);
-> +    tcg_gen_xor_i32(t1, t1, t2);
-> +    func(t2, t0, num3);
-> +    tcg_gen_xor_i32(t1, t1, t2);
-> +    tcg_gen_ext_i32_tl(dest, t1);
+> +    tcg_gen_concat_tl_i64(t0, src1, src2);
+> +    func1(t1, t0, num1);
+> +    func2(t2, t0, num2);
+> +    tcg_gen_xor_i64(t1, t1, t2);
+> +    tcg_gen_rotri_i64(t2, t0, num3);
+> +    tcg_gen_xor_i64(t1, t1, t2);
+> +    tcg_gen_trunc_i64_tl(dest, t1);
 > +
 > +    gen_set_gpr(ctx, a->rd, dest);
-> +    tcg_temp_free_i32(t0);
-> +    tcg_temp_free_i32(t1);
-> +    tcg_temp_free_i32(t2);
+> +    tcg_temp_free_i64(t0);
+> +    tcg_temp_free_i64(t1);
+> +    tcg_temp_free_i64(t2);
 > +    return true;
 > +}
 > +
-> +static bool trans_sha256sig0(DisasContext *ctx, arg_sha256sig0 *a)
+> +static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
 > +{
+> +    REQUIRE_32BIT(ctx);
 > +    REQUIRE_ZKNH(ctx);
-> +    return gen_sha256(ctx, a, EXT_NONE, tcg_gen_shri_i32, 7, 18, 3);
+> +    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
+> +                           tcg_gen_rotli_i64, 25, 30, 28);
 > +}
 > +
-> +static bool trans_sha256sig1(DisasContext *ctx, arg_sha256sig1 *a)
+> +static bool trans_sha512sum1r(DisasContext *ctx, arg_sha512sum1r *a)
 > +{
+> +    REQUIRE_32BIT(ctx);
 > +    REQUIRE_ZKNH(ctx);
-> +    return gen_sha256(ctx, a, EXT_NONE, tcg_gen_shri_i32, 17, 19, 10);
+> +    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
+> +                           tcg_gen_rotri_i64, 23, 14, 18);
 > +}
 > +
-> +static bool trans_sha256sum0(DisasContext *ctx, arg_sha256sum0 *a)
+> +static bool trans_sha512sig0l(DisasContext *ctx, arg_sha512sig0l *a)
 > +{
+> +    REQUIRE_32BIT(ctx);
 > +    REQUIRE_ZKNH(ctx);
-> +    return gen_sha256(ctx, a, EXT_NONE, tcg_gen_rotri_i32, 2, 13, 22);
+> +    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotri_i64,
+> +                           tcg_gen_rotri_i64, 1, 7, 8);
 > +}
 > +
-> +static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
+> +static bool trans_sha512sig1l(DisasContext *ctx, arg_sha512sig1l *a)
 > +{
+> +    REQUIRE_32BIT(ctx);
 > +    REQUIRE_ZKNH(ctx);
-> +    return gen_sha256(ctx, a, EXT_NONE, tcg_gen_rotri_i32, 6, 11, 25);
+> +    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
+> +                           tcg_gen_rotri_i64, 3, 6, 19);
+> +}
+> +
+> +static bool gen_sha512h_rv32(DisasContext *ctx, arg_r *a, DisasExtend ext,
+> +                             void (*func)(TCGv_i64, TCGv_i64, int64_t),
+> +                             int64_t num1, int64_t num2, int64_t num3)
+> +{
+> +    TCGv dest = dest_gpr(ctx, a->rd);
+> +    TCGv src1 = get_gpr(ctx, a->rs1, ext);
+> +    TCGv src2 = get_gpr(ctx, a->rs2, ext);
+> +    TCGv_i64 t0 = tcg_temp_new_i64();
+> +    TCGv_i64 t1 = tcg_temp_new_i64();
+> +    TCGv_i64 t2 = tcg_temp_new_i64();
+> +
+> +    tcg_gen_concat_tl_i64(t0, src1, src2);
+> +    func(t1, t0, num1);
+> +    tcg_gen_ext32u_i64(t2, t0);
+> +    tcg_gen_shri_i64(t2, t2, num2);
+> +    tcg_gen_xor_i64(t1, t1, t2);
+> +    tcg_gen_rotri_i64(t2, t0, num3);
+> +    tcg_gen_xor_i64(t1, t1, t2);
+> +    tcg_gen_trunc_i64_tl(dest, t1);
+> +
+> +    gen_set_gpr(ctx, a->rd, dest);
+> +    tcg_temp_free_i64(t0);
+> +    tcg_temp_free_i64(t1);
+> +    tcg_temp_free_i64(t2);
+> +    return true;
+> +}
+> +
+> +static bool trans_sha512sig0h(DisasContext *ctx, arg_sha512sig0h *a)
+> +{
+> +    REQUIRE_32BIT(ctx);
+> +    REQUIRE_ZKNH(ctx);
+> +    return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 1, 7, 8);
+> +}
+> +
+> +static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
+> +{
+> +    REQUIRE_32BIT(ctx);
+> +    REQUIRE_ZKNH(ctx);
+> +    return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64, 3, 6, 19);
 > +}
 > --
 > 2.17.1
