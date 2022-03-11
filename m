@@ -1,73 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nSVfA-0006N3-Em
-	for mharc-qemu-riscv@gnu.org; Thu, 10 Mar 2022 22:09:56 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:49760)
+	id 1nSXLk-0002nH-0r
+	for mharc-qemu-riscv@gnu.org; Thu, 10 Mar 2022 23:58:01 -0500
+Received: from eggs.gnu.org ([209.51.188.92]:36988)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSVf9-0006Mp-0F; Thu, 10 Mar 2022 22:09:55 -0500
-Received: from [2607:f8b0:4864:20::d2e] (port=46859
- helo=mail-io1-xd2e.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nSVf7-0005WH-4y; Thu, 10 Mar 2022 22:09:54 -0500
-Received: by mail-io1-xd2e.google.com with SMTP id d62so8722815iog.13;
- Thu, 10 Mar 2022 19:09:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Lb12b4ngtJEbu4dFiEnKcx0u14oZracj076XFWMDHPE=;
- b=gPDqS+ZmiF8IAU8mkUEvmzSA2KquP2Y44htjhUqzEIxn+ebVymYTe3EvKGmPzKFU7K
- fOu+LwBzB0Hc7uDbnptUmUeRX73D6SVUCxEjQf48hSUxOIsnU5cS7g3DIUQPXL7tM4wA
- hoKq3lBC8oLGjkuy7O4QYneg7sx1IjOqUAprYi9abgnTOwFN1AscxU+9aqdsSZ0t0AS1
- v/kxIOl0pO4B21lQKP0XGh+WJtO8omL7vsDfQyX/RN8awqDYKuqWqM39i7UX6wcNJHB1
- qLbEza1W0OWcVzJP6ce+vzEhRq+vunaCUZmyunz3c0K4/1pnzl9AoD2PKJu0oQBNzzEO
- 1x0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Lb12b4ngtJEbu4dFiEnKcx0u14oZracj076XFWMDHPE=;
- b=oNBDjTbicKl178K/W/wyRUp4aAQZ/0qdSoacwBgT+4UBSgPfYMSD3lGUKS/ep4x9zi
- S2KpC83vEcC1TaESx+IEKd8PyIGAywLd/zV8XyzOMkPUisAcs2fYhwCLi69L9TEvUwcH
- tPq6H8oD1ZGe+liWuksqwfuCvSAMO8Iu8pmYsNayKiVFCrLGRDgDwZ8+QJUf8PyxoMoE
- KFlMPWjrLwBOqFdpstt0PlieGpGp9PLj3H1S1HESD/aDKemLhDV7/Mt6cVOQI2POU6XO
- YdEoeODH7jPRlJYt/nWKBg+8rBtYYxS5L2ucQ+e0X52tg81cArPNTdBgVlAvq/YBCZuW
- LDGw==
-X-Gm-Message-State: AOAM530COuB2BQ/DNtMUiM0YEQcVBcxca2EmFp8AHO3Awic/+72YjFZ3
- MKDYsrnAOd4FmYHV1loLim8OjTS5Pwy7cvHIltk=
-X-Google-Smtp-Source: ABdhPJzF/06Qq80HoEWsbwfkmq8O49+WDJcGNtWF/9e/shH952DL0cQL4QrcfGkGjz8myYYsdK+5swusDbeaGoi+PbY=
-X-Received: by 2002:a05:6602:2c0b:b0:63d:dfb2:9a95 with SMTP id
- w11-20020a0566022c0b00b0063ddfb29a95mr6377629iov.93.1646968191600; Thu, 10
- Mar 2022 19:09:51 -0800 (PST)
-MIME-Version: 1.0
-References: <20220301115828.355-1-liweiwei@iscas.ac.cn>
- <20220301115828.355-5-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220301115828.355-5-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Mar 2022 13:09:25 +1000
-Message-ID: <CAKmqyKP8oYYkM4T19LMQ4qaykyFUC0LW4OUf6CB1spFnenYNDg@mail.gmail.com>
-Subject: Re: [PATCH v8 04/14] target/riscv: rvk: add support for zbkx extension
-To: Weiwei Li <liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nSXLf-0002mu-2s; Thu, 10 Mar 2022 23:57:56 -0500
+Received: from smtp84.cstnet.cn ([159.226.251.84]:55466 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nSXLc-0000kB-7W; Thu, 10 Mar 2022 23:57:54 -0500
+Received: from [192.168.0.105] (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowAC3v9vE1ipiSBXpAg--.35079S2;
+ Fri, 11 Mar 2022 12:57:42 +0800 (CST)
+Subject: Re: [PATCH] target/riscv: write back unmodified value for csrrc/csrrs
+ with rs1 is not x0 but holding zero
+To: Alistair Francis <alistair23@gmail.com>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
- lustrew@foxmail.com
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
-X-Spam_score_int: -3
-X-Spam_score: -0.4
-X-Spam_bar: /
-X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?=
+ <lazyparser@gmail.com>
+References: <20220302122946.29635-1-liweiwei@iscas.ac.cn>
+ <CAKmqyKOgJA49Mc4H=WFN+soxaFKtJc+d+nviKiro7eCdMg7hcA@mail.gmail.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <bde533f4-e55d-1058-9cad-6b0aca2fd70d@iscas.ac.cn>
+Date: Fri, 11 Mar 2022 12:57:40 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKOgJA49Mc4H=WFN+soxaFKtJc+d+nviKiro7eCdMg7hcA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-CM-TRANSID: zQCowAC3v9vE1ipiSBXpAg--.35079S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtryxJF4fAry3WF45tr48Crg_yoWxWFWxpr
+ 48Jr1UJryUJr18Gr1UJr1UJryUJr1UJw1UJr1UJF1UJr15Jryjqr1UXr1jgr1UJr48Jr1U
+ JF1jyr1xZr4UJFUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
+ IcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
+ v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
+ 1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
+ AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0D
+ MIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvf
+ C2KfnxnUUI43ZEXa7VUj0JPtUUUUU==
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,125 +73,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Mar 2022 03:09:55 -0000
+X-List-Received-Date: Fri, 11 Mar 2022 04:57:58 -0000
 
-On Tue, Mar 1, 2022 at 10:06 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->
->  - add xperm4 and xperm8 instructions
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+在 2022/3/11 上午10:58, Alistair Francis 写道:
+> On Wed, Mar 2, 2022 at 11:50 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>>       For csrrs and csrrc, if rs1 specifies a register other than x0, holding
+>>       a zero value, the instruction will still attempt to write the unmodified
+>>       value back to the csr and will cause side effects
+>>
+>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>> ---
+>>   target/riscv/csr.c       | 46 ++++++++++++++++++++++++++++------------
+>>   target/riscv/op_helper.c |  7 +++++-
+>>   2 files changed, 39 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index aea82dff4a..f4774ca07b 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -2872,7 +2872,7 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
+>>
+>>   static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>>                                                  int csrno,
+>> -                                               bool write_mask,
+>> +                                               bool write_csr,
+>>                                                  RISCVCPU *cpu)
+>>   {
+>>       /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
+>> @@ -2895,7 +2895,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>>           return RISCV_EXCP_ILLEGAL_INST;
+>>       }
+>>   #endif
+>> -    if (write_mask && read_only) {
+>> +    if (write_csr && read_only) {
+>>           return RISCV_EXCP_ILLEGAL_INST;
+>>       }
+>>
+>> @@ -2915,7 +2915,8 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>>   static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+>>                                          target_ulong *ret_value,
+>>                                          target_ulong new_value,
+>> -                                       target_ulong write_mask)
+>> +                                       target_ulong write_mask,
+>> +                                       bool write_csr)
+>>   {
+>>       RISCVException ret;
+>>       target_ulong old_value;
+>> @@ -2935,8 +2936,8 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+>>           return ret;
+>>       }
+>>
+>> -    /* write value if writable and write mask set, otherwise drop writes */
+>> -    if (write_mask) {
+>> +    /* write value if needed, otherwise drop writes */
+>> +    if (write_csr) {
+>>           new_value = (old_value & ~write_mask) | (new_value & write_mask);
+>>           if (csr_ops[csrno].write) {
+>>               ret = csr_ops[csrno].write(env, csrno, new_value);
+>> @@ -2960,18 +2961,27 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+>>   {
+>>       RISCVCPU *cpu = env_archcpu(env);
+>>
+>> -    RISCVException ret = riscv_csrrw_check(env, csrno, write_mask, cpu);
+>> +    /*
+>> +     * write value when write_mask is set or rs1 is not x0 but holding zero
+>> +     * value for csrrc(new_value is zero) and csrrs(new_value is all-ones)
+> I don't understand this. Won't write_mask also be zero and when reading?
+>
+> Alistair
+>
+Yeah. It's true. To distinguish only-read operation with the special 
+write case(write_mask = 0), I also modified the new_value of riscv_csrrw 
+from 0 to 1 in helper_csrr :
 
-Alistair
+  target_ulong helper_csrr(CPURISCVState *env, int csr)
+  {
+      target_ulong val = 0;
+-    RISCVException ret = riscv_csrrw(env, csr, &val, 0, 0);
++
++    /*
++     * new_value here should be none-zero or none-all-ones here to
++     * distinguish with csrrc/csrrs with rs1 is not x0 but holding zero value
++     */
++    RISCVException ret = riscv_csrrw(env, csr, &val, 1, 0);
 
-> ---
->  target/riscv/bitmanip_helper.c          | 27 +++++++++++++++++++++++++
->  target/riscv/helper.h                   |  2 ++
->  target/riscv/insn32.decode              |  4 ++++
->  target/riscv/insn_trans/trans_rvb.c.inc | 18 +++++++++++++++++
->  4 files changed, 51 insertions(+)
->
-> diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
-> index e003e8b25b..b99c4a39a1 100644
-> --- a/target/riscv/bitmanip_helper.c
-> +++ b/target/riscv/bitmanip_helper.c
-> @@ -102,3 +102,30 @@ target_ulong HELPER(zip)(target_ulong rs1)
->      x = do_shuf_stage(x, shuf_masks[0], shuf_masks[0] >> 1, 1);
->      return x;
->  }
-> +
-> +static inline target_ulong do_xperm(target_ulong rs1, target_ulong rs2,
-> +                                    uint32_t sz_log2)
-> +{
-> +    target_ulong r = 0;
-> +    target_ulong sz = 1LL << sz_log2;
-> +    target_ulong mask = (1LL << sz) - 1;
-> +    target_ulong pos;
-> +
-> +    for (int i = 0; i < TARGET_LONG_BITS; i += sz) {
-> +        pos = ((rs2 >> i) & mask) << sz_log2;
-> +        if (pos < sizeof(target_ulong) * 8) {
-> +            r |= ((rs1 >> pos) & mask) << i;
-> +        }
-> +    }
-> +    return r;
-> +}
-> +
-> +target_ulong HELPER(xperm4)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return do_xperm(rs1, rs2, 2);
-> +}
-> +
-> +target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
-> +{
-> +    return do_xperm(rs1, rs2, 3);
-> +}
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 7331d32dbf..a1d28b257f 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -69,6 +69,8 @@ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, tl)
->  DEF_HELPER_FLAGS_1(brev8, TCG_CALL_NO_RWG_SE, tl, tl)
->  DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
->  DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
-> +DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-> +DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
->
->  /* Floating Point - Half Precision */
->  DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 3a49acab37..75ffac9c81 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -776,6 +776,10 @@ clmulh     0000101 .......... 011 ..... 0110011 @r
->  # *** RV32 extra Zbc Standard Extension ***
->  clmulr     0000101 .......... 010 ..... 0110011 @r
->
-> +# *** RV32 Zbkx Standard Extension ***
-> +xperm4     0010100 .......... 010 ..... 0110011 @r
-> +xperm8     0010100 .......... 100 ..... 0110011 @r
-> +
->  # *** RV32 Zbs Standard Extension ***
->  bclr       0100100 .......... 001 ..... 0110011 @r
->  bclri      01001. ........... 001 ..... 0010011 @sh
-> diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-> index 1980bfe971..54927ba763 100644
-> --- a/target/riscv/insn_trans/trans_rvb.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvb.c.inc
-> @@ -48,6 +48,12 @@
->      }                                            \
->  } while (0)
->
-> +#define REQUIRE_ZBKX(ctx) do {                   \
-> +    if (!ctx->cfg_ptr->ext_zbkx) {               \
-> +        return false;                            \
-> +    }                                            \
-> +} while (0)
-> +
->  static void gen_clz(TCGv ret, TCGv arg1)
->  {
->      tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
-> @@ -574,3 +580,15 @@ static bool trans_zip(DisasContext *ctx, arg_zip *a)
->      REQUIRE_ZBKB(ctx);
->      return gen_unary(ctx, a, EXT_NONE, gen_helper_zip);
->  }
-> +
-> +static bool trans_xperm4(DisasContext *ctx, arg_xperm4 *a)
-> +{
-> +    REQUIRE_ZBKX(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm4, NULL);
-> +}
-> +
-> +static bool trans_xperm8(DisasContext *ctx, arg_xperm8 *a)
-> +{
-> +    REQUIRE_ZBKX(ctx);
-> +    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm8, NULL);
-> +}
-> --
-> 2.17.1
->
->
+      if (ret != RISCV_EXCP_NONE) {
+          riscv_raise_exception(env, ret, GETPC());
+
+
+After modification, the cases for all csr related instructions is as follows:
+
+index     instruction                   helper write_mask      
+new_value        Read/Write     write_csr
+
+1              csrrw                         csrrw/csrw all-ones         
+         src1 (R)W                 true
+
+2             csrrs(rs1=0) csrr                      zero 
+1                           R                      false
+
+3              csrrs(rs1!=0)               csrrw                   src1 
+                  all-ones RW                   true
+
+4              csrrs(rs1=0) csrr                     zero 
+1                           R                     false
+
+5              csrrc(rs1!=0)               csrrw                   src1 
+                       zero                     RW                  true
+
+6              csrrc(rs1=0) csrr                      zero 
+1                           R                    false
+
+7              csrrwi                     csrrw/csrw 
+all-ones                rs1 (R)W                  true
+
+8              csrrsi(rs1=0) csrr                      zero 
+1                           R                    false
+
+9              csrrsi(rs1!=0)               csrrw                    rs1 
+                  all-ones RW                   true
+
+10           csrrci(rs1=0) csrr                      zero 
+1                           R                    false
+
+11           csrrci(rs1!=0)               csrrw                    rs1 
+                         zero                   RW                    true
+
+
+Only row 3 and 5 can be Write-operation with write_mask = 0 when src1 = 
+0.  And it's the special case will be identified by :
+
+((write_mask == 0) && ((new_value == 0) || (new_value == (target_ulong)-1)));
+
+for other only-read instructions, the write_mask is zero, but the new_value is changed to 1 (none-zero and none-all-ones), so they will make write_csr to be false.
+
+Regards,
+Weiwei Li
+
+>> +     */
+>> +    bool write_csr = write_mask || ((write_mask == 0) &&
+>> +                                    ((new_value == 0) ||
+>> +                                     (new_value == (target_ulong)-1)));
+>> +
+>>
+>> --
+>> 2.17.1
+>>
+>>
+
 
