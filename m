@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nUG2M-0000B5-TR
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 18:53:06 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:49344)
+	id 1nUGou-000673-6W
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 19:43:16 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:56922)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nUG2F-0000Aj-1P; Tue, 15 Mar 2022 18:53:01 -0400
-Received: from [2607:f8b0:4864:20::d2c] (port=35625
- helo=mail-io1-xd2c.google.com)
+ id 1nUGos-00066K-3r; Tue, 15 Mar 2022 19:43:14 -0400
+Received: from [2607:f8b0:4864:20::12e] (port=42762
+ helo=mail-il1-x12e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nUG2C-0002xV-Sp; Tue, 15 Mar 2022 18:52:58 -0400
-Received: by mail-io1-xd2c.google.com with SMTP id l18so535677ioj.2;
- Tue, 15 Mar 2022 15:52:56 -0700 (PDT)
+ id 1nUGoq-0001cS-Gg; Tue, 15 Mar 2022 19:43:13 -0400
+Received: by mail-il1-x12e.google.com with SMTP id b5so526838ilj.9;
+ Tue, 15 Mar 2022 16:43:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=XLP/oThFAq+OPDkGOUaEmErSXHSm/3h7AAe8EIwxF/E=;
- b=gKxsxNEftw8AxSJTZkmPPGMrkB/192dj0AD5uYtvUfJCP7J2INijJpfjWI1FrILLtH
- t4i/4tqc4Xt5OUquDjenttt+K0AT70AN5vkjnUOkNJt8SF8sZvDOhdoeA4Rau37kP20Q
- QUylh5gy/PCATcTI8fTRuWUVZG5iHTNN4ZiDhVvf44zGXZ5nF6cuppYnPt6IvMF2GQI9
- SB65p9nfUMwR6UGVNaXgpmi+u462jNtEH7vJukYeYcCCqBZ3CRiJgIHifNKw3mg6KEq0
- jaep7PJ8uZX3pJaxJIupdRZ5Yymd/D6eRX6oUsTeqFXAdqP/RxcaIJ2CRuILdTOBTIDj
- xkdw==
+ :cc; bh=JZDV9kTvCBfYgpaIkH2VGpA4AZd1jtBTqqXJP0UciQw=;
+ b=DvKuY9qZTQlDMZieg3F37tdk95WZmUWgiEsUhyvGOsC/Hqjx8vQG1VxhocAXPS0sOL
+ Cb07030oEXD+kqR9bhV23hgkNyM5UtE38kFPuw4iQDVPUX2daKSW042CqJZvZWhsBqcz
+ Te2HvKJvECbZuVnKXN7LmdZrDSUzqmPIV+XO8YWPTl5LnlnHcAIxD7pJK48jkOJtIn5x
+ sZRCR32hATCiXnNEg1fh/gO6nlto9BbgojpSCqUjIVFb0XRuBNVWIvKIg6/89e7Vl0uM
+ ONEnkkKpY5CAb/UiGQKLPySkwVXYhyxzPssqalaNus0XTetA4hrYjfFMEY4DVQkZZtD+
+ W08A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=XLP/oThFAq+OPDkGOUaEmErSXHSm/3h7AAe8EIwxF/E=;
- b=n/aKH253fh9/Efng2WSFC6o4044+W3V6LJs4Opt1JhxwUMpSvkmLljsXn0XeWG02Qn
- hsQlM3qdpxcv8ICAS49WoiMfMBzDyMFkvjduEAUKLXLxzryZKUa253Ss+Z9F3Q6p84oQ
- 2XBdNznRx+0zW2uPD1vHwnu2uVTXRdZxEiF2dttsVnHxpyJ/a8dv99CWWKVHJCk5N307
- /i4Nja8Cn3XolzWs1tp7NQjF3hBgqiMCNJzWxIgfkQhT2eYYXMyoBF3DmSfrOHgGo+9o
- c56zql7NlQLV3Bz4in6kyhy5l1FwQNWtx5v1ZeUd6nMoUiCMUyTmu34/vuginLX2IlIm
- aTeQ==
-X-Gm-Message-State: AOAM531MGRR8QyalWxtViY68LVKEc0nO+cJiqxTKrDE3pWJrOez5gxCH
- 13Sq+xPvjaDLCE+FG2X84O1ktsNf3cYGn9gT2ko=
-X-Google-Smtp-Source: ABdhPJw+ot+Xmke25PEyc0ZFQNpVFyLowDRI/vmzTrTsqtzRyiJmag+iTPsISJyZaguCf89DUFp7DSGjCL7nH7VewWI=
-X-Received: by 2002:a02:a1dd:0:b0:317:b0c9:254b with SMTP id
- o29-20020a02a1dd000000b00317b0c9254bmr24158389jah.68.1647384775209; Tue, 15
- Mar 2022 15:52:55 -0700 (PDT)
+ bh=JZDV9kTvCBfYgpaIkH2VGpA4AZd1jtBTqqXJP0UciQw=;
+ b=q5UHbgxmx1+Syg0uOaFl7qLpoDe8mqzVsb7dfjomalmbrsVNbPA3KobdnpXyRWMjwW
+ PYeTiIfgQS4Z5ztjy9dVkT6wJpdtqdkpmWXGEmyqFEjGq0aaALN2yLbAHBNYR7cBrBqQ
+ GjZC35c5/yiJFBqCsabjMfaglMAUQqs70+Oajr3UbJiZtuH5ArBh18LNjOOyvi/Xrf4e
+ NkJQcYgxViVJMeBovzaoEbAc2qfnIkLCu2uYQRYQ9cRvixomCx2RpfNO6QoK4LGtX0pf
+ N4tw9kmiEwQ5lYP+6PDyE4qmRrilI/vh40HyQ4Qr7kJ+o7kvE/RtsZaK/HweeCGXTDFL
+ If/g==
+X-Gm-Message-State: AOAM5304diIY3M7hlGKbM1tsANGTcJNKM6qCqsT36hlgVKp29jWn2i7d
+ Xj4d+tZG0w+bP4oe1hbcgCiGo6FxRw0xhTlJ2/k=
+X-Google-Smtp-Source: ABdhPJy15JktwgkaFIRte1qUp57ofozi36gwQvSTpKGEfAIZv7qdQA3l0PeVBVVXH10f3Og8rawjk5TZooXdGtoNbSM=
+X-Received: by 2002:a05:6e02:20ec:b0:2c6:158a:cb33 with SMTP id
+ q12-20020a056e0220ec00b002c6158acb33mr22899212ilv.113.1647387791072; Tue, 15
+ Mar 2022 16:43:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220315192300.250310-1-idan.horowitz@gmail.com>
 In-Reply-To: <20220315192300.250310-1-idan.horowitz@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 16 Mar 2022 08:52:29 +1000
-Message-ID: <CAKmqyKPmYyh8+jnmB0O5GeNtSZPgZ5B=YffvQUmjZNH=K7eXbA@mail.gmail.com>
+Date: Wed, 16 Mar 2022 09:42:45 +1000
+Message-ID: <CAKmqyKPu71vO6WtqSHc_XjXrzCicj-_GRm+11njcRxYH3KhbQA@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Exit current TB after an sfence.vma
 To: Idan Horowitz <idan.horowitz@gmail.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
@@ -51,10 +51,10 @@ Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2c
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2c;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -75,7 +75,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2022 22:53:02 -0000
+X-List-Received-Date: Tue, 15 Mar 2022 23:43:14 -0000
 
 On Wed, Mar 16, 2022 at 5:26 AM Idan Horowitz <idan.horowitz@gmail.com> wrote:
 >
@@ -86,7 +86,9 @@ On Wed, Mar 16, 2022 at 5:26 AM Idan Horowitz <idan.horowitz@gmail.com> wrote:
 >
 > Signed-off-by: Idan Horowitz <idan.horowitz@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
