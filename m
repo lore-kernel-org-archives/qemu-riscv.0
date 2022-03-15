@@ -1,63 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nU8ed-0000QI-VT
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 11:00:07 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:33494)
+	id 1nUBnc-0007Lq-0N
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 14:21:36 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:50350)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nU8eb-0000Pb-QR; Tue, 15 Mar 2022 11:00:05 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:35378 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nU8eY-0004Gp-Ky; Tue, 15 Mar 2022 11:00:05 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAD3_NjmqTBi+CqQAw--.54635S2;
- Tue, 15 Mar 2022 22:59:51 +0800 (CST)
-Subject: Re: [PATCH 1/2] target/riscv: cpu: Fixup indentation
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, alistair23@gmail.com,
- Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20220315064007.3600746-1-alistair.francis@opensource.wdc.com>
- <20220315064007.3600746-2-alistair.francis@opensource.wdc.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <f3e03984-6e44-4e44-b644-61b72ae4a690@iscas.ac.cn>
-Date: Tue, 15 Mar 2022 22:59:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nUBna-0007H7-8E
+ for qemu-riscv@nongnu.org; Tue, 15 Mar 2022 14:21:34 -0400
+Received: from [2a00:1450:4864:20::62a] (port=33501
+ helo=mail-ej1-x62a.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nUBnX-0002Ej-Pr
+ for qemu-riscv@nongnu.org; Tue, 15 Mar 2022 14:21:33 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id pv16so3957555ejb.0
+ for <qemu-riscv@nongnu.org>; Tue, 15 Mar 2022 11:21:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=PCGx1NjBWrDVJQEbyV1ZyQVYTrM0sT4a3BVfRXKJXf0=;
+ b=IJCykTU5Ihl37KTcHwd1GPxjhTlhJNCrg9EDUSPdyXKX7MNVVZXxryf7vYtOqnbdJw
+ ezmzsN/hOQnihI0yrvycdve7rhPQACE6w6xZdzzUAijqM/PIo4UOVdkILHGVybcfSCPK
+ 6vmVTDmRcOwWAd36gB1uwatwcBI8oBPezNo2yC0Hqe8Gj2tBUDbR/orOk7CjJffJ/Yfs
+ 6Ma1wEWlqM+i4i15idDfTCJHxkqtoGal0LkcGCYoAkJv+vHvhFoJt8pB9V/LMmgsvVN9
+ 38airilK+W72ocuM18l8b7CjU7+5pyNIZsl4TSlBebBbtmV0KYCxTtxNqCPhNx0UVQxs
+ 5i5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=PCGx1NjBWrDVJQEbyV1ZyQVYTrM0sT4a3BVfRXKJXf0=;
+ b=qewPlVAzX9XgmJ+biVTbHxsxFEB6xCa3AcD4+PhNH5yRbu8sb4d1sF0xekz1NMz0RA
+ mu4QZeszsrAaMSZn3GAEkNS3TtDX8eUSSg04n1UJXJAr59XVJ17V5pVNx0oOQVPUUpQu
+ 3Nl5x5avQtTf7/0NBGlWw86VcPMOYSvPfGsY1tEUKUcHNSF7ptCRn2Pc8xzaM8uy5lsg
+ zPIM/BjIn1ReccH/+qKR+vEqHEqxa7jtsCabkyQKIKsJky/IaS8X1O7+8kFActZo3bR3
+ Zv/MMthdjkGSuyx6vPGG55VPIHG9F2wwct6KKA5dr6kWlCpCEq2LHUkfCnKXCCUVxnj4
+ 5jgA==
+X-Gm-Message-State: AOAM531I0j5lBE05uZxPj9RIPi5K9L6y/ln3AR1cZXZ9K5KTADqH6B+m
+ YW7qNGpUhpjqchr4pSBd1vTiKRamH1ojMGdNJR4eHA==
+X-Google-Smtp-Source: ABdhPJxS/ODCWzid+JOCiHyX1uvOWtMV6L43UN5pYP215nJ27UynZ+bK0429bNrpdkRGQkZo4Trk92uBOCQU5M4zp8g=
+X-Received: by 2002:a17:907:3dab:b0:6d6:a9a8:be4b with SMTP id
+ he43-20020a1709073dab00b006d6a9a8be4bmr23894335ejc.34.1647368489861; Tue, 15
+ Mar 2022 11:21:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20220315064007.3600746-2-alistair.francis@opensource.wdc.com>
-Content-Type: multipart/alternative;
- boundary="------------9B4381D7D23E5E871EA66B3C"
-Content-Language: en-US
-X-CM-TRANSID: zQCowAD3_NjmqTBi+CqQAw--.54635S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrurW7CFyDJF47Xr1UtFWxCrg_yoWkZwc_Ga
- 4IgFZrW3y7Jr40vrWUua18trn3Ga95Wrn2gws7ta1rGry7Ww1rAan7JF18Zr1fuay5CF9a
- vryxGrW3Cw18tjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbyAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
- 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21lYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2
- jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II
- 8E6IAqYI8I648v4I1lFcxC0VAYjxAxZF0Ew4CEw7xC0wACY4xI67k04243AVC20s07Mx8G
- jcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij2
- 8IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
- 6r106r1rMI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
- Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
- Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr
- 1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JwCE64xvF2IEb7IF0Fy7YxBIdaVFxhVjvjDU
- 0xZFpf9x0JUySoJUUUUU=
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220314234250.846613-1-atishp@rivosinc.com>
+ <CAEUhbmUt2=RCQTLPA-G65Gs_D42ExncXcO2JJ1WCnov69kdQ+A@mail.gmail.com>
+In-Reply-To: <CAEUhbmUt2=RCQTLPA-G65Gs_D42ExncXcO2JJ1WCnov69kdQ+A@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Tue, 15 Mar 2022 11:21:18 -0700
+Message-ID: <CAHBxVyGf4OSCGhp3R8ptyo2khqVSb7_d9qC0RnA0PptOnc=0yA@mail.gmail.com>
+Subject: Re: [PATCH v5] target/riscv: Add isa extenstion strings to the device
+ tree
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Heiko Stubner <heiko@sntech.de>, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2a00:1450:4864:20::62a
+ (failed)
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=atishp@rivosinc.com; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,154 +81,197 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2022 15:00:06 -0000
+X-List-Received-Date: Tue, 15 Mar 2022 18:21:34 -0000
 
-This is a multi-part message in MIME format.
---------------9B4381D7D23E5E871EA66B3C
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi Alistair,
-
-It seems that there is other indentation problem in  cpu.c. Maybe they 
-can be fixed together.
-
-/* Do some ISA extension error checking */
-if(cpu->cfg.ext_i&& cpu->cfg.ext_e) {
-error_setg(errp,
-"I and E extensions are incompatible");
-return;
-}
-if(!cpu->cfg.ext_i&& !cpu->cfg.ext_e) {
-error_setg(errp,
-"Either I or E extension must be set");
-return;
-}
-
-Regards,
-
-Weiwei Li
-
-在 2022/3/15 下午2:40, Alistair Francis 写道:
-> From: Alistair Francis <alistair.francis@wdc.com>
+On Tue, Mar 15, 2022 at 2:17 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+> On Tue, Mar 15, 2022 at 7:43 AM Atish Patra <atishp@rivosinc.com> wrote:
+> >
+> > The Linux kernel parses the ISA extensions from "riscv,isa" DT
+> > property. It used to parse only the single letter base extensions
+> > until now. A generic ISA extension parsing framework was proposed[1]
+> > recently that can parse multi-letter ISA extensions as well.
+> >
+> > Generate the extended ISA string by appending  the available ISA extensions
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..a4120c7fb4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -709,11 +709,11 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
->           case IRQ_S_EXT:
->           case IRQ_VS_EXT:
->           case IRQ_M_EXT:
-> -             if (kvm_enabled()) {
-> +            if (kvm_enabled()) {
->                   kvm_riscv_set_irq(cpu, irq, level);
-> -             } else {
-> +            } else {
->                   riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level));
-> -             }
-> +            }
->                break;
->           default:
->               g_assert_not_reached();
+> nits: remove one space after "appending"
+>
 
---------------9B4381D7D23E5E871EA66B3C
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: base64
+Will fix it.
 
-PGh0bWw+CiAgPGhlYWQ+CiAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNv
-bnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCI+CiAgPC9oZWFkPgogIDxib2R5Pgog
-ICAgPHA+SGkgQWxpc3RhaXIsPC9wPgogICAgPHA+SXQgc2VlbXMgdGhhdCB0aGVyZSBpcyBv
-dGhlciBpbmRlbnRhdGlvbiBwcm9ibGVtIGluwqAgY3B1LmMuwqAKICAgICAgTWF5YmUgdGhl
-eSBjYW4gYmUgZml4ZWQgdG9nZXRoZXIuPC9wPgogICAgPHA+PC9wPgogICAgPHA+PC9wPgog
-ICAgPGRpdiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7YmFja2dyb3VuZC1jb2xvcjogI2ZmZmZm
-Zjtmb250LWZhbWlseTogJ0Ryb2lkIFNhbnMgTW9ubycsICdtb25vc3BhY2UnLCBtb25vc3Bh
-Y2UsICdEcm9pZCBTYW5zIEZhbGxiYWNrJztmb250LXdlaWdodDogbm9ybWFsO2ZvbnQtc2l6
-ZTogMThweDtsaW5lLWhlaWdodDogMjRweDt3aGl0ZS1zcGFjZTogcHJlOyI+PGRpdj48c3Bh
-biBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0i
-Y29sb3I6ICMwMDgwMDA7Ij4vKiBEbyBzb21lIElTQSBleHRlbnNpb24gZXJyb3IgY2hlY2tp
-bmcgKi88L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4g
-ICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICNhZjAwZGI7Ij5pZjwvc3Bhbj48
-c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gKDwvc3Bhbj48c3BhbiBzdHlsZT0iY29s
-b3I6ICMwMDEwODA7Ij5jcHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+
-LSZndDs8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFuPjxz
-cGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9y
-OiAjMDAxMDgwOyI+ZXh0X2k8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+
-ICZhbXA7JmFtcDsgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMTA4MDsiPmNwdTwv
-c3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4tJmd0Ozwvc3Bhbj48c3BhbiBz
-dHlsZT0iY29sb3I6ICMwMDEwODA7Ij5jZmc8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAj
-MDAwMDAwOyI+Ljwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDEwODA7Ij5leHRfZTwv
-c3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4pIHs8L3NwYW4+PC9kaXY+PGRp
-dj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgICAgICA8L3NwYW4+PHNw
-YW4gc3R5bGU9ImNvbG9yOiAjMDAwMGZmOyI+ZXJyb3Jfc2V0Zzwvc3Bhbj48c3BhbiBzdHls
-ZT0iY29sb3I6ICMwMDAwMDA7Ij4oPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMTA4
-MDsiPmVycnA8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+LDwvc3Bhbj48
-L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAgICAgICAgICAgICAg
-ICAgICAgICAgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogI2EzMTUxNTsiPiJJIGFuZCBF
-IGV4dGVuc2lvbnMgYXJlIGluY29tcGF0aWJsZSI8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9y
-OiAjMDAwMDAwOyI+KTs8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMw
-MDAwMDA7Ij4gICAgICAgICAgICAgICAgICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29s
-b3I6ICNhZjAwZGI7Ij5yZXR1cm48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
-OyI+Ozwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAg
-ICAgICB9PC9zcGFuPjwvZGl2Pgo8ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsi
-PiAgICAgICAgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogI2FmMDBkYjsiPmlmPC9zcGFu
-PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAoITwvc3Bhbj48c3BhbiBzdHlsZT0i
-Y29sb3I6ICMwMDEwODA7Ij5jcHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
-OyI+LSZndDs8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFu
-PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNv
-bG9yOiAjMDAxMDgwOyI+ZXh0X2k8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
-OyI+ICZhbXA7JmFtcDsgITwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDEwODA7Ij5j
-cHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+LSZndDs8L3NwYW4+PHNw
-YW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xv
-cjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+ZXh0
-X2U8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+KSB7PC9zcGFuPjwvZGl2
-PjxkaXY+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+ICAgICAgICAgICAgPC9zcGFu
-PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDBmZjsiPmVycm9yX3NldGc8L3NwYW4+PHNwYW4g
-c3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+KDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMw
-MDEwODA7Ij5lcnJwPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiw8L3Nw
-YW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgICAg
-ICAgICAgICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICNhMzE1MTU7Ij4iRWl0
-aGVyIEkgb3IgRSBleHRlbnNpb24gbXVzdCBiZSBzZXQiPC9zcGFuPjxzcGFuIHN0eWxlPSJj
-b2xvcjogIzAwMDAwMDsiPik7PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImNvbG9y
-OiAjMDAwMDAwOyI+ICAgICAgICAgICAgICAgICAgICAgICA8L3NwYW4+PHNwYW4gc3R5bGU9
-ImNvbG9yOiAjYWYwMGRiOyI+cmV0dXJuPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAw
-MDAwMDsiPjs8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7
-Ij4gICAgICAgfTwvc3Bhbj48L2Rpdj48L2Rpdj4KICAgIDxwPlJlZ2FyZHMsPC9wPgogICAg
-PHA+V2Vpd2VpIExpPGJyPgogICAgPC9wPgogICAgPGRpdiBzdHlsZT0iY29sb3I6ICMwMDAw
-MDA7YmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtmb250LWZhbWlseTogJ0Ryb2lkIFNhbnMg
-TW9ubycsICdtb25vc3BhY2UnLCBtb25vc3BhY2UsICdEcm9pZCBTYW5zIEZhbGxiYWNrJztm
-b250LXdlaWdodDogbm9ybWFsO2ZvbnQtc2l6ZTogMThweDtsaW5lLWhlaWdodDogMjRweDt3
-aGl0ZS1zcGFjZTogcHJlOyI+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4K
-PC9zcGFuPjwvZGl2PjwvZGl2PgogICAgPGRpdiBjbGFzcz0ibW96LWNpdGUtcHJlZml4Ij7l
-nKggMjAyMi8zLzE1IOS4i+WNiDI6NDAsIEFsaXN0YWlyIEZyYW5jaXMKICAgICAg5YaZ6YGT
-Ojxicj4KICAgIDwvZGl2PgogICAgPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIKICAgICAgY2l0
-ZT0ibWlkOjIwMjIwMzE1MDY0MDA3LjM2MDA3NDYtMi1hbGlzdGFpci5mcmFuY2lzQG9wZW5z
-b3VyY2Uud2RjLmNvbSI+CiAgICAgIDxwcmUgY2xhc3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9
-IiI+RnJvbTogQWxpc3RhaXIgRnJhbmNpcyA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIz
-OTZFIiBocmVmPSJtYWlsdG86YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tIj4mbHQ7YWxpc3Rh
-aXIuZnJhbmNpc0B3ZGMuY29tJmd0OzwvYT4KClNpZ25lZC1vZmYtYnk6IEFsaXN0YWlyIEZy
-YW5jaXMgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOmFs
-aXN0YWlyLmZyYW5jaXNAd2RjLmNvbSI+Jmx0O2FsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSZn
-dDs8L2E+Ci0tLQogdGFyZ2V0L3Jpc2N2L2NwdS5jIHwgNiArKystLS0KIDEgZmlsZSBjaGFu
-Z2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdGFy
-Z2V0L3Jpc2N2L2NwdS5jIGIvdGFyZ2V0L3Jpc2N2L2NwdS5jCmluZGV4IGRkZGE0OTA2ZmYu
-LmE0MTIwYzdmYjQgMTAwNjQ0Ci0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYworKysgYi90YXJn
-ZXQvcmlzY3YvY3B1LmMKQEAgLTcwOSwxMSArNzA5LDExIEBAIHN0YXRpYyB2b2lkIHJpc2N2
-X2NwdV9zZXRfaXJxKHZvaWQgKm9wYXF1ZSwgaW50IGlycSwgaW50IGxldmVsKQogICAgICAg
-ICBjYXNlIElSUV9TX0VYVDoKICAgICAgICAgY2FzZSBJUlFfVlNfRVhUOgogICAgICAgICBj
-YXNlIElSUV9NX0VYVDoKLSAgICAgICAgICAgICBpZiAoa3ZtX2VuYWJsZWQoKSkgeworICAg
-ICAgICAgICAgaWYgKGt2bV9lbmFibGVkKCkpIHsKICAgICAgICAgICAgICAgICBrdm1fcmlz
-Y3Zfc2V0X2lycShjcHUsIGlycSwgbGV2ZWwpOwotICAgICAgICAgICAgIH0gZWxzZSB7Cisg
-ICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgIHJpc2N2X2NwdV91cGRhdGVf
-bWlwKGNwdSwgMSAmbHQ7Jmx0OyBpcnEsIEJPT0xfVE9fTUFTSyhsZXZlbCkpOwotICAgICAg
-ICAgICAgIH0KKyAgICAgICAgICAgIH0KICAgICAgICAgICAgICBicmVhazsKICAgICAgICAg
-ZGVmYXVsdDoKICAgICAgICAgICAgIGdfYXNzZXJ0X25vdF9yZWFjaGVkKCk7CjwvcHJlPgog
-ICAgPC9ibG9ja3F1b3RlPgogIDwvYm9keT4KPC9odG1sPgo=
---------------9B4381D7D23E5E871EA66B3C--
+> > to the "riscv,isa" string if it is enabled so that kernel can process it.
+> >
+> > [1] https://lkml.org/lkml/2022/2/15/263
+>
+> Could you please post a link to the "riscv,isa" DT bindings spec or
+> discussion thread? It seems not mentioned in the above LKML thread.
+>
 
+Latest discussion on the discussion:
+https://lkml.org/lkml/2022/3/10/1416
+
+riscv,isa DT binding:
+https://elixir.bootlin.com/linux/v5.17-rc8/source/Documentation/devicetree/bindings/riscv/cpus.yaml#L66
+
+> >
+> > Reviewed-by: Anup Patel <anup@brainfault.org>
+> > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > Suggested-by: Heiko Stubner <heiko@sntech.de>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> > Changes from v4->v5:
+> > 1. Fixed the order of Zxx extensions.
+> > 2. Added a comment clearly describing the rules of extension order.
+> >
+> > Changes from v3->v4:
+> > 1. Fixed the order of the extension names.
+> > 2. Added all the available ISA extensions in Qemu.
+> >
+> > Changes from v2->v3:
+> > 1. Used g_strconcat to replace snprintf & a max isa string length as
+> > suggested by Anup.
+> > 2. I have not included the Tested-by Tag from Heiko because the
+> > implementation changed from v2 to v3.
+> >
+> > Changes from v1->v2:
+> > 1. Improved the code redability by using arrays instead of individual check
+> > ---
+> >  target/riscv/cpu.c | 61 ++++++++++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 61 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index ddda4906ffb7..097c42f5c50f 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -34,6 +34,12 @@
+> >
+> >  /* RISC-V CPU definitions */
+> >
+> > +/* This includes the null terminated character '\0' */
+> > +struct isa_ext_data {
+> > +        const char *name;
+> > +        bool enabled;
+> > +};
+> > +
+> >  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
+> >
+> >  const char * const riscv_int_regnames[] = {
+> > @@ -898,6 +904,60 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+> >      device_class_set_props(dc, riscv_cpu_properties);
+> >  }
+> >
+> > +#define ISA_EDATA_ENTRY(name, prop) {#name, cpu->cfg.prop}
+> > +
+> > +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> > +{
+> > +    char *old = *isa_str;
+> > +    char *new = *isa_str;
+> > +    int i;
+> > +
+> > +    /**
+> > +     * Here are the ordering rules of extension naming defined by RISC-V
+> > +     * specification :
+> > +     * 1. All extensions should be separated from other multi-letter extensions
+> > +     *    from other multi-letter extensions by an underscore.
+>
+> redundant "from other multi-letter extensions"
+>
+
+Oops. Will fix it.
+
+> > +     * 2. The first letter following the 'Z' conventionally indicates the most
+>
+> Should this be lower case "z"?
+
+Nope. I am just iterating the rules defined by the spec. The device
+tree has lower case 'z'
+as per the device binding which mandates all lower case.
+
+>
+> > +     *    closely related alphabetical extension category, IMAFDQLCBKJTPVH.
+> > +     *    If multiple 'Z' extensions are named, they should be ordered first
+> > +     *    by category, then alphabetically within a category.
+> > +     * 3. Standard supervisor-level extensions (starts with 'S') should be
+>
+> lower case "s"?
+
+Same reasoning as above.
+
+>
+> > +     *    listed after standard unprivileged extensions.  If multiple
+> > +     *    supervisor-level extensions are listed, they should be ordered
+> > +     *    alphabetically.
+> > +     * 4. Non-standard extensions (starts with 'X') must be listed after all
+> > +     *    standard extensions. They must be separated from other multi-letter
+> > +     *    extensions by an underscore.
+> > +     */
+> > +    struct isa_ext_data isa_edata_arr[] = {
+> > +        ISA_EDATA_ENTRY(zfh, ext_zfhmin),
+>
+> This should be (zfh, ext_zfh)
+
+Yeah. It's a typo. Thanks for catching it.
+
+>
+> > +        ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+> > +        ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> > +        ISA_EDATA_ENTRY(zdinx, ext_zdinx),
+>
+> Should "zdinx" come before "zfinx" *alphabetically* ?
+
+As per the ISA naming rules,
+
+"The first letter following the 'Z' conventionally indicates the most
+closely related alphabetical extension category, IMAFDQLCBKJTPVH.
+If multiple 'Z' extensions are named, they should be ordered first
+by category, then alphabetically within a category."
+
+That's why, zfinx comes before zdinx.
+>
+> > +        ISA_EDATA_ENTRY(zba, ext_zba),
+> > +        ISA_EDATA_ENTRY(zbb, ext_zbb),
+> > +        ISA_EDATA_ENTRY(zbc, ext_zbc),
+> > +        ISA_EDATA_ENTRY(zbs, ext_zbs),
+>
+> I don't understand why "zb*" come after "zf*". Alphabetically they
+> should come before.
+>
+
+Same reasoning as above. But for one category, they are ordered alphabetically.
+That's why you see ext_zba, ext_zbb, ext_zbc, ext_zbs in alphabetical order.
+
+> > +        ISA_EDATA_ENTRY(zve32f, ext_zve32f),
+> > +        ISA_EDATA_ENTRY(zve64f, ext_zve64f),
+> > +        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
+> > +        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
+> > +        ISA_EDATA_ENTRY(svinval, ext_svinval),
+> > +        ISA_EDATA_ENTRY(svnapot, ext_svnapot),
+> > +        ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> > +    };
+> > +
+> > +    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> > +        if (isa_edata_arr[i].enabled) {
+> > +            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> > +            g_free(old);
+> > +            old = new;
+> > +        }
+> > +    }
+> > +
+> > +    *isa_str = new;
+> > +}
+> > +
+> >  char *riscv_isa_string(RISCVCPU *cpu)
+> >  {
+> >      int i;
+> > @@ -910,6 +970,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+> >          }
+> >      }
+> >      *p = '\0';
+> > +    riscv_isa_string_ext(cpu, &isa_str, maxlen);
+> >      return isa_str;
+> >  }
+> >
+>
+> Regards,
+> Bin
 
