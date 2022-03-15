@@ -1,84 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nU3QX-0005Lz-5F
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 05:25:13 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:34598)
+	id 1nU8ed-0000QI-VT
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 11:00:07 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:33494)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nU3QU-0005In-SM
- for qemu-riscv@nongnu.org; Tue, 15 Mar 2022 05:25:10 -0400
-Received: from [2607:f8b0:4864:20::62b] (port=40847
- helo=mail-pl1-x62b.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nU3QR-0003BB-BN
- for qemu-riscv@nongnu.org; Tue, 15 Mar 2022 05:25:09 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id h5so14365928plf.7
- for <qemu-riscv@nongnu.org>; Tue, 15 Mar 2022 02:25:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Hu1630KcC8UiBL/yt4gRTLyOBkC277DC+vMeJ8/dUqM=;
- b=Oi+H4G8U7towPE+eVXSpBejvrhyw37dBFMSGdiOe6B6Ap4FWH3F5USZBxZVdNmFldH
- tQQQD6t+EzEQN27TXQPR5Y3uIOB8LHPUAcO/HzgZdxT34eidEB2RkP5/zLRgrjk/rKXA
- 6p+b0LELMdz4rVdPwTPKr92pIvDDgHQ6X2uYwjqf+HqdwQ/ZmccgqOZFwK878f7TXNFF
- Y1mDW1Y5uAuZ98H99QX+8tOA6mJlrUvREbMlkcdxpXUaut3++uq24LZaobPj4Ztkuk/0
- vJcQjxR+uQh8PkVq+l7VGOaFTBkQaTrbp9zQqcCTFPitf4K3OhgPngqkRmAKtMkaxpx8
- lofA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Hu1630KcC8UiBL/yt4gRTLyOBkC277DC+vMeJ8/dUqM=;
- b=vjDrW6CIewRQKQhoOoSCyn6NRbBOu4RuVj6opw22f4ouZrmWXbwzv3U5RyEIoIbKSI
- lBvYf5vDSXPfEjsih90XN5XA6ZlAJ3iIkvdNZl346kQXswVkU/E7Wouk3l0Ivmcmzehh
- quz7HHls0eaNQyDDUKKcrY9fgzkSCB3Tdlx7gQpYC33SVEZ1Q0EeRRzBY1yovlu7sU9w
- LnoTGjuu+8+x7zepnTRG01IFHVchntacfqWX4gLgmwL0kbE7Olbk7ebfRjxFwHq29yPd
- F4zoXQGHCwwN+Ka6x571HIjnuaa1hio+/X/YaIo8jmUmEVl+tSEJ0j65CD6p9o2PoUTF
- quQw==
-X-Gm-Message-State: AOAM531pKJ7NoRrjzau6qcJPoYJ2fVDqxpxQvv0Km5315HvCjvoDfepI
- SdZPVxtlv1UD/Pb8Yn6FsHjCGT+8EnyvIm7+
-X-Google-Smtp-Source: ABdhPJwhUms+kvkQvLphgex0IrgjBO62SzxQx9J5tMgi/a+RTUZQ8klyC5ORbSqQTK0jfh7Vv2slZQ==
-X-Received: by 2002:a17:902:ea0d:b0:151:df90:779f with SMTP id
- s13-20020a170902ea0d00b00151df90779fmr27900753plg.1.1647336304806; 
- Tue, 15 Mar 2022 02:25:04 -0700 (PDT)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com.
- [209.85.216.52]) by smtp.gmail.com with ESMTPSA id
- nv4-20020a17090b1b4400b001bf64a39579sm2532156pjb.4.2022.03.15.02.25.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 15 Mar 2022 02:25:04 -0700 (PDT)
-Received: by mail-pj1-f52.google.com with SMTP id
- gj15-20020a17090b108f00b001bef86c67c1so1858955pjb.3; 
- Tue, 15 Mar 2022 02:25:03 -0700 (PDT)
-X-Received: by 2002:a17:902:e88d:b0:151:ba78:3bc1 with SMTP id
- w13-20020a170902e88d00b00151ba783bc1mr26973798plg.13.1647336303220; Tue, 15
- Mar 2022 02:25:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nU8eb-0000Pb-QR; Tue, 15 Mar 2022 11:00:05 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84]:35378 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nU8eY-0004Gp-Ky; Tue, 15 Mar 2022 11:00:05 -0400
+Received: from [192.168.3.6] (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowAD3_NjmqTBi+CqQAw--.54635S2;
+ Tue, 15 Mar 2022 22:59:51 +0800 (CST)
+Subject: Re: [PATCH 1/2] target/riscv: cpu: Fixup indentation
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, alistair23@gmail.com,
+ Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20220315064007.3600746-1-alistair.francis@opensource.wdc.com>
+ <20220315064007.3600746-2-alistair.francis@opensource.wdc.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <f3e03984-6e44-4e44-b644-61b72ae4a690@iscas.ac.cn>
+Date: Tue, 15 Mar 2022 22:59:50 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-References: <20220303235440.638790-1-atishp@rivosinc.com>
- <20220303235440.638790-11-atishp@rivosinc.com>
-In-Reply-To: <20220303235440.638790-11-atishp@rivosinc.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Tue, 15 Mar 2022 17:24:52 +0800
-X-Gmail-Original-Message-ID: <CANzO1D3nJmpcBCpH_ih2uDmrfKYVZ17XMvJCLGqKo-L1uy459g@mail.gmail.com>
-Message-ID: <CANzO1D3nJmpcBCpH_ih2uDmrfKYVZ17XMvJCLGqKo-L1uy459g@mail.gmail.com>
-Subject: Re: [PATCH v6 10/12] target/riscv: Add few cache related PMU events
-To: Atish Patra <atishp@rivosinc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="0000000000002dda9605da3e5f7f"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62b
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -6
-X-Spam_score: -0.7
-X-Spam_bar: /
-X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+In-Reply-To: <20220315064007.3600746-2-alistair.francis@opensource.wdc.com>
+Content-Type: multipart/alternative;
+ boundary="------------9B4381D7D23E5E871EA66B3C"
+Content-Language: en-US
+X-CM-TRANSID: zQCowAD3_NjmqTBi+CqQAw--.54635S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrurW7CFyDJF47Xr1UtFWxCrg_yoWkZwc_Ga
+ 4IgFZrW3y7Jr40vrWUua18trn3Ga95Wrn2gws7ta1rGry7Ww1rAan7JF18Zr1fuay5CF9a
+ vryxGrW3Cw18tjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+ 9fnUUIcSsGvfJTRUUUbyAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+ 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+ A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+ Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21lYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2
+ jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II
+ 8E6IAqYI8I648v4I1lFcxC0VAYjxAxZF0Ew4CEw7xC0wACY4xI67k04243AVC20s07Mx8G
+ jcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij2
+ 8IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v2
+ 6r106r1rMI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2
+ Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_
+ Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr
+ 1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JwCE64xvF2IEb7IF0Fy7YxBIdaVFxhVjvjDU
+ 0xZFpf9x0JUySoJUUUUU=
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,208 +70,154 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2022 09:25:12 -0000
+X-List-Received-Date: Tue, 15 Mar 2022 15:00:06 -0000
 
---0000000000002dda9605da3e5f7f
-Content-Type: text/plain; charset="UTF-8"
+This is a multi-part message in MIME format.
+--------------9B4381D7D23E5E871EA66B3C
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, Mar 4, 2022 at 8:11 AM Atish Patra <atishp@rivosinc.com> wrote:
+Hi Alistair,
 
-> From: Atish Patra <atish.patra@wdc.com>
->
-> Qemu can monitor the following cache related PMU events through
-> tlb_fill functions.
->
-> 1. DTLB load/store miss
-> 3. ITLB prefetch miss
->
-> Increment the PMU counter in tlb_fill function.
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
->  target/riscv/cpu_helper.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 1c60fb2e8057..72ae1a612ae8 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -21,10 +21,13 @@
->  #include "qemu/log.h"
->  #include "qemu/main-loop.h"
->  #include "cpu.h"
-> +#include "pmu.h"
->  #include "exec/exec-all.h"
->  #include "tcg/tcg-op.h"
->  #include "trace.h"
->  #include "semihosting/common-semi.h"
-> +#include "cpu.h"
->
+It seems that there is other indentation problem in  cpu.c. Maybe they 
+can be fixed together.
 
-Redundant: #include "cpu.h"
+/* Do some ISA extension error checking */
+if(cpu->cfg.ext_i&& cpu->cfg.ext_e) {
+error_setg(errp,
+"I and E extensions are incompatible");
+return;
+}
+if(!cpu->cfg.ext_i&& !cpu->cfg.ext_e) {
+error_setg(errp,
+"Either I or E extension must be set");
+return;
+}
 
 Regards,
-Frank Chang
 
+Weiwei Li
 
-> +#include "cpu_bits.h"
+在 2022/3/15 下午2:40, Alistair Francis 写道:
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
->  int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
->  {
-> @@ -1178,6 +1181,28 @@ void riscv_cpu_do_unaligned_access(CPUState *cs,
-> vaddr addr,
->      riscv_raise_exception(env, cs->exception_index, retaddr);
->  }
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/cpu.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> +
-> +static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType
-> access_type)
-> +{
-> +    enum riscv_pmu_event_idx pmu_event_type;
-> +
-> +    switch (access_type) {
-> +    case MMU_INST_FETCH:
-> +        pmu_event_type = RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
-> +        break;
-> +    case MMU_DATA_LOAD:
-> +        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS;
-> +        break;
-> +    case MMU_DATA_STORE:
-> +        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
-> +        break;
-> +    default:
-> +        return;
-> +    }
-> +
-> +    riscv_pmu_incr_ctr(cpu, pmu_event_type);
-> +}
-> +
->  bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->                          MMUAccessType access_type, int mmu_idx,
->                          bool probe, uintptr_t retaddr)
-> @@ -1274,6 +1299,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address,
-> int size,
->              }
->          }
->      } else {
-> +        pmu_tlb_fill_incr_ctr(cpu, access_type);
->          /* Single stage lookup */
->          ret = get_physical_address(env, &pa, &prot, address, NULL,
->                                     access_type, mmu_idx, true, false,
-> false);
-> --
-> 2.30.2
->
->
->
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ddda4906ff..a4120c7fb4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -709,11 +709,11 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+>           case IRQ_S_EXT:
+>           case IRQ_VS_EXT:
+>           case IRQ_M_EXT:
+> -             if (kvm_enabled()) {
+> +            if (kvm_enabled()) {
+>                   kvm_riscv_set_irq(cpu, irq, level);
+> -             } else {
+> +            } else {
+>                   riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level));
+> -             }
+> +            }
+>                break;
+>           default:
+>               g_assert_not_reached();
 
---0000000000002dda9605da3e5f7f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--------------9B4381D7D23E5E871EA66B3C
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: base64
 
-<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Mar 4, 2022 at 8:11 AM Atish Patr=
-a &lt;<a href=3D"mailto:atishp@rivosinc.com">atishp@rivosinc.com</a>&gt; wr=
-ote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);pa=
-dding-left:1ex">From: Atish Patra &lt;<a href=3D"mailto:atish.patra@wdc.com=
-" target=3D"_blank">atish.patra@wdc.com</a>&gt;<br>
-<br>
-Qemu can monitor the following cache related PMU events through<br>
-tlb_fill functions.<br>
-<br>
-1. DTLB load/store miss<br>
-3. ITLB prefetch miss<br>
-<br>
-Increment the PMU counter in tlb_fill function.<br>
-<br>
-Reviewed-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.co=
-m" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-Signed-off-by: Atish Patra &lt;<a href=3D"mailto:atish.patra@wdc.com" targe=
-t=3D"_blank">atish.patra@wdc.com</a>&gt;<br>
-Signed-off-by: Atish Patra &lt;<a href=3D"mailto:atishp@rivosinc.com" targe=
-t=3D"_blank">atishp@rivosinc.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu_helper.c | 26 ++++++++++++++++++++++++++<br>
-=C2=A01 file changed, 26 insertions(+)<br>
-<br>
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-index 1c60fb2e8057..72ae1a612ae8 100644<br>
---- a/target/riscv/cpu_helper.c<br>
-+++ b/target/riscv/cpu_helper.c<br>
-@@ -21,10 +21,13 @@<br>
-=C2=A0#include &quot;qemu/log.h&quot;<br>
-=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
-=C2=A0#include &quot;cpu.h&quot;<br>
-+#include &quot;pmu.h&quot;<br>
-=C2=A0#include &quot;exec/exec-all.h&quot;<br>
-=C2=A0#include &quot;tcg/tcg-op.h&quot;<br>
-=C2=A0#include &quot;trace.h&quot;<br>
-=C2=A0#include &quot;semihosting/common-semi.h&quot;<br>
-+#include &quot;cpu.h&quot;<br></blockquote><div><br></div><div>Redundant:=
-=C2=A0#include &quot;cpu.h&quot;</div><div><br></div><div>Regards,</div><di=
-v>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
-+#include &quot;cpu_bits.h&quot;<br>
-<br>
-=C2=A0int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)<br>
-=C2=A0{<br>
-@@ -1178,6 +1181,28 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vad=
-dr addr,<br>
-=C2=A0 =C2=A0 =C2=A0riscv_raise_exception(env, cs-&gt;exception_index, reta=
-ddr);<br>
-=C2=A0}<br>
-<br>
-+<br>
-+static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type=
-)<br>
-+{<br>
-+=C2=A0 =C2=A0 enum riscv_pmu_event_idx pmu_event_type;<br>
-+<br>
-+=C2=A0 =C2=A0 switch (access_type) {<br>
-+=C2=A0 =C2=A0 case MMU_INST_FETCH:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmu_event_type =3D RISCV_PMU_EVENT_CACHE_ITLB_=
-PREFETCH_MISS;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case MMU_DATA_LOAD:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmu_event_type =3D RISCV_PMU_EVENT_CACHE_DTLB_=
-READ_MISS;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 case MMU_DATA_STORE:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmu_event_type =3D RISCV_PMU_EVENT_CACHE_DTLB_=
-WRITE_MISS;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 default:<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 riscv_pmu_incr_ctr(cpu, pmu_event_type);<br>
-+}<br>
-+<br>
-=C2=A0bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0MMUAccessType access_type, int mmu_idx,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0bool probe, uintptr_t retaddr)<br>
-@@ -1274,6 +1299,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, =
-int size,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0 =C2=A0 =C2=A0} else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pmu_tlb_fill_incr_ctr(cpu, access_type);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Single stage lookup */<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ret =3D get_physical_address(env, &amp;pa=
-, &amp;prot, address, NULL,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 access_type, mmu_idx, =
-true, false, false);<br>
--- <br>
-2.30.2<br>
-<br>
-<br>
-</blockquote></div></div>
+PGh0bWw+CiAgPGhlYWQ+CiAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNv
+bnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD1VVEYtOCI+CiAgPC9oZWFkPgogIDxib2R5Pgog
+ICAgPHA+SGkgQWxpc3RhaXIsPC9wPgogICAgPHA+SXQgc2VlbXMgdGhhdCB0aGVyZSBpcyBv
+dGhlciBpbmRlbnRhdGlvbiBwcm9ibGVtIGluwqAgY3B1LmMuwqAKICAgICAgTWF5YmUgdGhl
+eSBjYW4gYmUgZml4ZWQgdG9nZXRoZXIuPC9wPgogICAgPHA+PC9wPgogICAgPHA+PC9wPgog
+ICAgPGRpdiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7YmFja2dyb3VuZC1jb2xvcjogI2ZmZmZm
+Zjtmb250LWZhbWlseTogJ0Ryb2lkIFNhbnMgTW9ubycsICdtb25vc3BhY2UnLCBtb25vc3Bh
+Y2UsICdEcm9pZCBTYW5zIEZhbGxiYWNrJztmb250LXdlaWdodDogbm9ybWFsO2ZvbnQtc2l6
+ZTogMThweDtsaW5lLWhlaWdodDogMjRweDt3aGl0ZS1zcGFjZTogcHJlOyI+PGRpdj48c3Bh
+biBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0i
+Y29sb3I6ICMwMDgwMDA7Ij4vKiBEbyBzb21lIElTQSBleHRlbnNpb24gZXJyb3IgY2hlY2tp
+bmcgKi88L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4g
+ICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICNhZjAwZGI7Ij5pZjwvc3Bhbj48
+c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gKDwvc3Bhbj48c3BhbiBzdHlsZT0iY29s
+b3I6ICMwMDEwODA7Ij5jcHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+
+LSZndDs8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFuPjxz
+cGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9y
+OiAjMDAxMDgwOyI+ZXh0X2k8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+
+ICZhbXA7JmFtcDsgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMTA4MDsiPmNwdTwv
+c3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4tJmd0Ozwvc3Bhbj48c3BhbiBz
+dHlsZT0iY29sb3I6ICMwMDEwODA7Ij5jZmc8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAj
+MDAwMDAwOyI+Ljwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDEwODA7Ij5leHRfZTwv
+c3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4pIHs8L3NwYW4+PC9kaXY+PGRp
+dj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgICAgICA8L3NwYW4+PHNw
+YW4gc3R5bGU9ImNvbG9yOiAjMDAwMGZmOyI+ZXJyb3Jfc2V0Zzwvc3Bhbj48c3BhbiBzdHls
+ZT0iY29sb3I6ICMwMDAwMDA7Ij4oPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMTA4
+MDsiPmVycnA8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+LDwvc3Bhbj48
+L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAgICAgICAgICAgICAg
+ICAgICAgICAgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogI2EzMTUxNTsiPiJJIGFuZCBF
+IGV4dGVuc2lvbnMgYXJlIGluY29tcGF0aWJsZSI8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9y
+OiAjMDAwMDAwOyI+KTs8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMw
+MDAwMDA7Ij4gICAgICAgICAgICAgICAgICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29s
+b3I6ICNhZjAwZGI7Ij5yZXR1cm48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
+OyI+Ozwvc3Bhbj48L2Rpdj48ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAg
+ICAgICB9PC9zcGFuPjwvZGl2Pgo8ZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsi
+PiAgICAgICAgPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogI2FmMDBkYjsiPmlmPC9zcGFu
+PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiAoITwvc3Bhbj48c3BhbiBzdHlsZT0i
+Y29sb3I6ICMwMDEwODA7Ij5jcHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
+OyI+LSZndDs8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFu
+PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNv
+bG9yOiAjMDAxMDgwOyI+ZXh0X2k8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAw
+OyI+ICZhbXA7JmFtcDsgITwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDEwODA7Ij5j
+cHU8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+LSZndDs8L3NwYW4+PHNw
+YW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+Y2ZnPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xv
+cjogIzAwMDAwMDsiPi48L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAxMDgwOyI+ZXh0
+X2U8L3NwYW4+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+KSB7PC9zcGFuPjwvZGl2
+PjxkaXY+PHNwYW4gc3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+ICAgICAgICAgICAgPC9zcGFu
+PjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDBmZjsiPmVycm9yX3NldGc8L3NwYW4+PHNwYW4g
+c3R5bGU9ImNvbG9yOiAjMDAwMDAwOyI+KDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICMw
+MDEwODA7Ij5lcnJwPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAwMDAwMDsiPiw8L3Nw
+YW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4gICAgICAgICAg
+ICAgICAgICAgICAgIDwvc3Bhbj48c3BhbiBzdHlsZT0iY29sb3I6ICNhMzE1MTU7Ij4iRWl0
+aGVyIEkgb3IgRSBleHRlbnNpb24gbXVzdCBiZSBzZXQiPC9zcGFuPjxzcGFuIHN0eWxlPSJj
+b2xvcjogIzAwMDAwMDsiPik7PC9zcGFuPjwvZGl2PjxkaXY+PHNwYW4gc3R5bGU9ImNvbG9y
+OiAjMDAwMDAwOyI+ICAgICAgICAgICAgICAgICAgICAgICA8L3NwYW4+PHNwYW4gc3R5bGU9
+ImNvbG9yOiAjYWYwMGRiOyI+cmV0dXJuPC9zcGFuPjxzcGFuIHN0eWxlPSJjb2xvcjogIzAw
+MDAwMDsiPjs8L3NwYW4+PC9kaXY+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7
+Ij4gICAgICAgfTwvc3Bhbj48L2Rpdj48L2Rpdj4KICAgIDxwPlJlZ2FyZHMsPC9wPgogICAg
+PHA+V2Vpd2VpIExpPGJyPgogICAgPC9wPgogICAgPGRpdiBzdHlsZT0iY29sb3I6ICMwMDAw
+MDA7YmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjtmb250LWZhbWlseTogJ0Ryb2lkIFNhbnMg
+TW9ubycsICdtb25vc3BhY2UnLCBtb25vc3BhY2UsICdEcm9pZCBTYW5zIEZhbGxiYWNrJztm
+b250LXdlaWdodDogbm9ybWFsO2ZvbnQtc2l6ZTogMThweDtsaW5lLWhlaWdodDogMjRweDt3
+aGl0ZS1zcGFjZTogcHJlOyI+PGRpdj48c3BhbiBzdHlsZT0iY29sb3I6ICMwMDAwMDA7Ij4K
+PC9zcGFuPjwvZGl2PjwvZGl2PgogICAgPGRpdiBjbGFzcz0ibW96LWNpdGUtcHJlZml4Ij7l
+nKggMjAyMi8zLzE1IOS4i+WNiDI6NDAsIEFsaXN0YWlyIEZyYW5jaXMKICAgICAg5YaZ6YGT
+Ojxicj4KICAgIDwvZGl2PgogICAgPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIKICAgICAgY2l0
+ZT0ibWlkOjIwMjIwMzE1MDY0MDA3LjM2MDA3NDYtMi1hbGlzdGFpci5mcmFuY2lzQG9wZW5z
+b3VyY2Uud2RjLmNvbSI+CiAgICAgIDxwcmUgY2xhc3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9
+IiI+RnJvbTogQWxpc3RhaXIgRnJhbmNpcyA8YSBjbGFzcz0ibW96LXR4dC1saW5rLXJmYzIz
+OTZFIiBocmVmPSJtYWlsdG86YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tIj4mbHQ7YWxpc3Rh
+aXIuZnJhbmNpc0B3ZGMuY29tJmd0OzwvYT4KClNpZ25lZC1vZmYtYnk6IEFsaXN0YWlyIEZy
+YW5jaXMgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOmFs
+aXN0YWlyLmZyYW5jaXNAd2RjLmNvbSI+Jmx0O2FsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbSZn
+dDs8L2E+Ci0tLQogdGFyZ2V0L3Jpc2N2L2NwdS5jIHwgNiArKystLS0KIDEgZmlsZSBjaGFu
+Z2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdGFy
+Z2V0L3Jpc2N2L2NwdS5jIGIvdGFyZ2V0L3Jpc2N2L2NwdS5jCmluZGV4IGRkZGE0OTA2ZmYu
+LmE0MTIwYzdmYjQgMTAwNjQ0Ci0tLSBhL3RhcmdldC9yaXNjdi9jcHUuYworKysgYi90YXJn
+ZXQvcmlzY3YvY3B1LmMKQEAgLTcwOSwxMSArNzA5LDExIEBAIHN0YXRpYyB2b2lkIHJpc2N2
+X2NwdV9zZXRfaXJxKHZvaWQgKm9wYXF1ZSwgaW50IGlycSwgaW50IGxldmVsKQogICAgICAg
+ICBjYXNlIElSUV9TX0VYVDoKICAgICAgICAgY2FzZSBJUlFfVlNfRVhUOgogICAgICAgICBj
+YXNlIElSUV9NX0VYVDoKLSAgICAgICAgICAgICBpZiAoa3ZtX2VuYWJsZWQoKSkgeworICAg
+ICAgICAgICAgaWYgKGt2bV9lbmFibGVkKCkpIHsKICAgICAgICAgICAgICAgICBrdm1fcmlz
+Y3Zfc2V0X2lycShjcHUsIGlycSwgbGV2ZWwpOwotICAgICAgICAgICAgIH0gZWxzZSB7Cisg
+ICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgIHJpc2N2X2NwdV91cGRhdGVf
+bWlwKGNwdSwgMSAmbHQ7Jmx0OyBpcnEsIEJPT0xfVE9fTUFTSyhsZXZlbCkpOwotICAgICAg
+ICAgICAgIH0KKyAgICAgICAgICAgIH0KICAgICAgICAgICAgICBicmVhazsKICAgICAgICAg
+ZGVmYXVsdDoKICAgICAgICAgICAgIGdfYXNzZXJ0X25vdF9yZWFjaGVkKCk7CjwvcHJlPgog
+ICAgPC9ibG9ja3F1b3RlPgogIDwvYm9keT4KPC9odG1sPgo=
+--------------9B4381D7D23E5E871EA66B3C--
 
---0000000000002dda9605da3e5f7f--
 
