@@ -1,65 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nU169-00006v-Lm
-	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 02:56:01 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:47002)
+	id 1nU16E-0000DJ-Oe
+	for mharc-qemu-riscv@gnu.org; Tue, 15 Mar 2022 02:56:06 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:47016)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nU167-0008VW-8j; Tue, 15 Mar 2022 02:56:00 -0400
-Received: from [2607:f8b0:4864:20::430] (port=37399
- helo=mail-pf1-x430.google.com)
+ id 1nU169-00005g-Ea; Tue, 15 Mar 2022 02:56:01 -0400
+Received: from [2607:f8b0:4864:20::102d] (port=39917
+ helo=mail-pj1-x102d.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nU165-00024e-IP; Tue, 15 Mar 2022 02:55:59 -0400
-Received: by mail-pf1-x430.google.com with SMTP id t5so18136602pfg.4;
- Mon, 14 Mar 2022 23:55:56 -0700 (PDT)
+ id 1nU168-00024m-1k; Tue, 15 Mar 2022 02:56:01 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ mr24-20020a17090b239800b001bf0a375440so1472357pjb.4; 
+ Mon, 14 Mar 2022 23:55:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=jHSkv0qE2OlmJxavDPt8a/C4lvFDwFk2dnqGbzwfFDQ=;
- b=nLDeeek+uoVKS1ZzOUs05TtQ+M3va8Pog1ydQAMMJzXrP71hfJWdSDVQxnCLOYk4aN
- pUtYCMnvuR0H/akHegovUAlEN8bwmLM7VUYp3dW7dyfdFqVqvF9XoYMeveOl2nlHeSjI
- XOmmGxtVWYdViZOhEgVVOOZVE56kZYPiCtbG4k+zkOBoMlnMXQvvN6x2EpKEHOii9fqh
- X+8LrIsBp8UE/7UhSZWjK0LFruUXk/oooJex1F6jhDTNoCCjg9zhNrE3Fi697Qp+xctl
- GfZM5Fxw8Z0pvHnCDVktecGhMJSTATqncrgmGbUpqvKZRFAJanvyE39RIS2rgB4lJCjR
- FQ7w==
+ bh=VR9EE00fMhTE+6DR1Hf+kiPhRLGTDrPJyiDc0tREi5g=;
+ b=pX3VTHbrBg/XqUmh+gmbEfECTmUBWoma6AzV2QF5AnZuMfpKpjuIz+r5QVcfg0OtA+
+ VO4KWvpMV363UTXJJ7lHchi6xCEJVH3mhSdiU/0vTchhJPHpvbtA5RJ60zeQ4Zosnj6p
+ qJlHD2+ZJy6/k44T/G3TQZ+L61HCGKKXdFat/zbx/IC0QIP553+tWh2shL3+rxOQmb2t
+ 2+hhonpNNwmsExxs7rw8tq23L6JnWTml35fA5k/Pc254PVasDH5uGfvL7ihvcf89WBIX
+ DBTAqPcOzbAA2jtPxHbRNNLuIbx0ajB3z708mfts+gzaCMvn73W89wT9S/Dcw7kjrCSm
+ 1c9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=jHSkv0qE2OlmJxavDPt8a/C4lvFDwFk2dnqGbzwfFDQ=;
- b=NgWbRCTmIJKDN7ZHKIj5tKKCdItZBtoWHrq5HpY9/G5TCjMd5q4CqsO3CZjZ7rPVFY
- s6iwU+3CWkSfiVuIX1ky/owQtkUcr2zre8lLj13BKOzzW00j79tTA0boLINJHPv5BBWo
- itIIykK6dfaCDGXoikkKVsvuKsV/ZbK374IM++sFBV67LzgDDl0NEt6GrPq+E06gJjBY
- qbRhgazdPBUnUN+IMuKcv2fLNk5wjPT/e4xAouTFwnZ+BFidIwE5yRf3kNMwDB1uVXSc
- uPQbAEPOZroFLI6kbG07DNAjWGGNTzHTAEp6/mXDeY4rk7ov04HcgQZWTN6H4ENREK7K
- rscA==
-X-Gm-Message-State: AOAM530PP/LmXA8zIzJ/CecX1GW+wMHzHHmzY/6xc9KvSnDTNwXiJDEc
- BZwuGZ0BbVdP9SncZi/A/Kc=
-X-Google-Smtp-Source: ABdhPJy5qjVehqd8ooN+FrhcWYtLs+6JsVBIejZpPhOlPEhDpe5LfJwNsj8kgCvf92bm1thj/qzvhA==
-X-Received: by 2002:a62:63c1:0:b0:4f6:f215:93cb with SMTP id
- x184-20020a6263c1000000b004f6f21593cbmr27140666pfb.81.1647327355854; 
- Mon, 14 Mar 2022 23:55:55 -0700 (PDT)
+ bh=VR9EE00fMhTE+6DR1Hf+kiPhRLGTDrPJyiDc0tREi5g=;
+ b=2F8Cw0FkqjrE3YPgm1mflZr4oxFk9+sJfG12HDAKljQ1Pv051CNulTuglpnPKSxD8/
+ fsQkUitQXPzqNdoD2zW4BoXnGeK+a9/3SzNPbuuzYjqQDAdlxqjVEF1TiXLtOwJkCHyB
+ AueM+kfjeFNIk5pEGrl9h5IWlcldO79oSdmnPPCuZhfjNVCi16tvYLE8fwzhgkuaczqx
+ WdJr34PpHHhoPaPRnw90H7C7j74ktzduAXXcu1X6ltGki7tpc6HZ6gXsU3RG/ZkkNj6k
+ 7fyftkavS1OUYu8menZ484CkTwHIKiz6KPw1Rs3XFpGYJbW4tI/R2hyyHEAyBFYeMm2H
+ Uydw==
+X-Gm-Message-State: AOAM532EXUhPjKH/2k+EQpZ4ZJyoNgzbrdTiWFw3uT2EI2SQ3uikPUuy
+ xuv4IrqxJvH3md4dPMYYh9dq3tB5LyMoNg==
+X-Google-Smtp-Source: ABdhPJztQcLQ/JtcafI6l5e5wL4oBtF2wmODB8OS01IfCTpQSzoYAjCipIYtseU7CRY10OiCl2wAFw==
+X-Received: by 2002:a17:90b:1652:b0:1bf:32e9:6db3 with SMTP id
+ il18-20020a17090b165200b001bf32e96db3mr2970295pjb.179.1647327358554; 
+ Mon, 14 Mar 2022 23:55:58 -0700 (PDT)
 Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
  [147.11.176.192]) by smtp.gmail.com with ESMTPSA id
- g12-20020a056a001a0c00b004e1307b249csm22970500pfv.69.2022.03.14.23.55.53
+ g12-20020a056a001a0c00b004e1307b249csm22970500pfv.69.2022.03.14.23.55.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Mar 2022 23:55:55 -0700 (PDT)
+ Mon, 14 Mar 2022 23:55:58 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <Alistair.Francis@wdc.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH v4 5/7] target/riscv: csr: Hook debug CSR read/write
-Date: Tue, 15 Mar 2022 14:55:27 +0800
-Message-Id: <20220315065529.62198-6-bmeng.cn@gmail.com>
+Subject: [PATCH v4 6/7] target/riscv: cpu: Enable native debug feature
+Date: Tue, 15 Mar 2022 14:55:28 +0800
+Message-Id: <20220315065529.62198-7-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220315065529.62198-1-bmeng.cn@gmail.com>
 References: <20220315065529.62198-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::430
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102d
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
@@ -80,170 +81,36 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Mar 2022 06:56:01 -0000
+X-List-Received-Date: Tue, 15 Mar 2022 06:56:03 -0000
 
 From: Bin Meng <bin.meng@windriver.com>
 
-This adds debug CSR read/write support to the RISC-V CSR RW table.
+Turn on native debug feature by default for all CPUs.
 
 Signed-off-by: Bin Meng <bin.meng@windriver.com>
 ---
 
-Changes in v4:
-- move riscv_trigger_init() call to riscv_cpu_reset()
+(no changes since v3)
 
 Changes in v3:
-- add riscv_trigger_init(), moved from patch #1 to this patch
+- enable debug feature by default for all CPUs
 
- target/riscv/debug.h |  2 ++
- target/riscv/cpu.c   |  4 ++++
- target/riscv/csr.c   | 57 ++++++++++++++++++++++++++++++++++++++++++++
- target/riscv/debug.c | 27 +++++++++++++++++++++
- 4 files changed, 90 insertions(+)
+ target/riscv/cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-index fb21706e1c..27b9cac6b4 100644
---- a/target/riscv/debug.h
-+++ b/target/riscv/debug.h
-@@ -109,4 +109,6 @@ void riscv_cpu_debug_excp_handler(CPUState *cs);
- bool riscv_cpu_debug_check_breakpoint(CPUState *cs);
- bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp);
- 
-+void riscv_trigger_init(CPURISCVState *env);
-+
- #endif /* RISCV_DEBUG_H */
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index eb2be5fa05..ba9cc3bcd6 100644
+index ba9cc3bcd6..08266b163d 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -461,6 +461,10 @@ static void riscv_cpu_reset(DeviceState *dev)
-     set_default_nan_mode(1, &env->fp_status);
+@@ -788,7 +788,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
+     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+-    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, false),
++    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
  
- #ifndef CONFIG_USER_ONLY
-+    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-+        riscv_trigger_init(env);
-+    }
-+
-     if (kvm_enabled()) {
-         kvm_riscv_reset_vcpu(cpu);
-     }
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0606cd0ea8..3b9008709d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -290,6 +290,15 @@ static RISCVException epmp(CPURISCVState *env, int csrno)
- 
-     return RISCV_EXCP_ILLEGAL_INST;
- }
-+
-+static RISCVException debug(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_feature(env, RISCV_FEATURE_DEBUG)) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
- #endif
- 
- /* User Floating-Point CSRs */
-@@ -2576,6 +2585,48 @@ static RISCVException write_pmpaddr(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException read_tselect(CPURISCVState *env, int csrno,
-+                                   target_ulong *val)
-+{
-+    *val = tselect_csr_read(env);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_tselect(CPURISCVState *env, int csrno,
-+                                    target_ulong val)
-+{
-+    tselect_csr_write(env, val);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException read_tdata(CPURISCVState *env, int csrno,
-+                                 target_ulong *val)
-+{
-+    /* return 0 in tdata1 to end the trigger enumeration */
-+    if (env->trigger_cur >= TRIGGER_NUM && csrno == CSR_TDATA1) {
-+        *val = 0;
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    *val = tdata_csr_read(env, csrno - CSR_TDATA1);
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_tdata(CPURISCVState *env, int csrno,
-+                                  target_ulong val)
-+{
-+    if (!tdata_available(env, csrno - CSR_TDATA1)) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    tdata_csr_write(env, csrno - CSR_TDATA1, val);
-+    return RISCV_EXCP_NONE;
-+}
-+
- /*
-  * Functions to access Pointer Masking feature registers
-  * We have to check if current priv lvl could modify
-@@ -3265,6 +3316,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_PMPADDR14] =  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr },
-     [CSR_PMPADDR15] =  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr },
- 
-+    /* Debug CSRs */
-+    [CSR_TSELECT]   =  { "tselect", debug, read_tselect, write_tselect },
-+    [CSR_TDATA1]    =  { "tdata1",  debug, read_tdata,   write_tdata   },
-+    [CSR_TDATA2]    =  { "tdata2",  debug, read_tdata,   write_tdata   },
-+    [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
-+
-     /* User Pointer Masking */
-     [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
-     [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 1a9392645e..2f2a51c732 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -412,3 +412,30 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
- 
-     return false;
- }
-+
-+void riscv_trigger_init(CPURISCVState *env)
-+{
-+    target_ulong type2 = trigger_type(env, TRIGGER_TYPE_AD_MATCH);
-+    int i;
-+
-+    /* type 2 triggers */
-+    for (i = 0; i < TRIGGER_TYPE2_NUM; i++) {
-+        /*
-+         * type = TRIGGER_TYPE_AD_MATCH
-+         * dmode = 0 (both debug and M-mode can write tdata)
-+         * maskmax = 0 (unimplemented, always 0)
-+         * sizehi = 0 (match against any size, RV64 only)
-+         * hit = 0 (unimplemented, always 0)
-+         * select = 0 (always 0, perform match on address)
-+         * timing = 0 (always 0, trigger before instruction)
-+         * sizelo = 0 (match against any size)
-+         * action = 0 (always 0, raise a breakpoint exception)
-+         * chain = 0 (unimplemented, always 0)
-+         * match = 0 (always 0, when any compare value equals tdata2)
-+         */
-+        env->type2_trig[i].mcontrol = type2;
-+        env->type2_trig[i].maddress = 0;
-+        env->type2_trig[i].bp = NULL;
-+        env->type2_trig[i].wp = NULL;
-+    }
-+}
+     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
 -- 
 2.25.1
 
