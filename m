@@ -1,68 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nUfbY-0003vt-LE
-	for mharc-qemu-riscv@gnu.org; Wed, 16 Mar 2022 22:11:08 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:54738)
+	id 1nUhGk-0002tb-O8
+	for mharc-qemu-riscv@gnu.org; Wed, 16 Mar 2022 23:57:46 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40806)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nUfbW-0003uK-44; Wed, 16 Mar 2022 22:11:06 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:40274 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nUfbR-0003eQ-0p; Wed, 16 Mar 2022 22:11:05 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAC3vkKqmDJil2nMAw--.13141S2;
- Thu, 17 Mar 2022 10:10:52 +0800 (CST)
-Subject: Re: [PATCH v2] target/riscv: write back unmodified value for
- csrrc/csrrs with rs1 is not x0 but holding zero
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>, wangjunqiang <wangjunqiang@iscas.ac.cn>,
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
-References: <20220311094601.30440-1-liweiwei@iscas.ac.cn>
- <CAEUhbmX7wBzhvojSioQnB=T-DDuq9FX7UTPdvtR=oXHDm5Ra4A@mail.gmail.com>
- <769fe78f-e4c0-83c1-d5fc-65fbf40bb5ff@iscas.ac.cn>
- <CAKmqyKMpWFo5-=XSTBy_B9aTqDsw6-uxWfe3RwNnKUCKXQtjeQ@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <f5a1d76b-12a9-6d84-f73f-2dc523cfa4ee@iscas.ac.cn>
-Date: Thu, 17 Mar 2022 10:10:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1nUhGi-0002t1-PG; Wed, 16 Mar 2022 23:57:44 -0400
+Received: from [2607:f8b0:4864:20::1134] (port=36261
+ helo=mail-yw1-x1134.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1nUhGg-0001p6-Vg; Wed, 16 Mar 2022 23:57:44 -0400
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-2e5a8a8c1cdso36625637b3.3; 
+ Wed, 16 Mar 2022 20:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=dVOHmxiVQqBe5dGpnBVqUhETt8NzSW+qKwcjjvV/dgY=;
+ b=KQYY6qWIheo1KWXDFj+13ul12oZmrLOgD2Ne/BAKi1q3HMvO/HdDDeuaz0OaiWUzLU
+ /fwDtei5Zzg4FjZYBJ3wwsf36u1Dq5tA6cGNANJIJ5qytmGzLK7RFLTo5sbcG/iXt2Zx
+ KqWZnFxI7FtpIWmzdaqFoP9589bVypfR/Dbm/4jrRFMku4o8Wzgbovq9aWfl50UAfqYb
+ ZwtSOJMbDpXDKfnuPmUCL15kfifvCUIRnLO2ChOupQIr7QfNjYrmvFXKL0erMAuBXK4n
+ XweoNhYs9NlE8LgW3zoEaqy2rMV7jTUhBiusoQWpJ6pOzO5AX5qJsuY5mu512ZW/LtqG
+ iC6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=dVOHmxiVQqBe5dGpnBVqUhETt8NzSW+qKwcjjvV/dgY=;
+ b=eBHQo6yvcDrQicaW897G5IDoHHG5U6ch3kQ0ICOtzfvnV2Yp/PVUyuoL9L9YxDMeAx
+ zhPdARmL99XlLoVXjIvvWWqbN/s7JWCspmj2lQnx4FG5+mBS96XqUhbWJOWZxvjZG36H
+ VaqiVJWp/NJhEd3aMS30CBTqe2zhbbHSrZvX5N0NNm7/iEb9nmxgzP90qr/YfsWWzQab
+ UCGUxa8w7IH4KXxeQAwLYHerqaRAvhnVueyf/8P2cW9C4zzJJUNm0gcCeG3ApogPHCsT
+ 50UlhzgQBomvez+zwYbYXGAWFODz2nuXuZl+c+/IsyGXSKkgAYxUZs7Zw3n+wrP87ofF
+ a1ng==
+X-Gm-Message-State: AOAM533oZCAum8jgTI5EfCwv6ah4so7cU0w80NlMvla0MIJTrLq5TGXF
+ iR4h9yg8wBL3/IoGXDYIbbqpeC9OcGAqkzN/0QA=
+X-Google-Smtp-Source: ABdhPJyXJ56o8odvu1sIFa0yHES0zd/30012w/TKnYyshm9r5iAJmyENnw4mw/mM8JNGXFdYa+PdoBiKkRtZEnZU5mM=
+X-Received: by 2002:a0d:edc7:0:b0:2d8:2ec:2e87 with SMTP id
+ w190-20020a0dedc7000000b002d802ec2e87mr3694771ywe.209.1647489461468; Wed, 16
+ Mar 2022 20:57:41 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKMpWFo5-=XSTBy_B9aTqDsw6-uxWfe3RwNnKUCKXQtjeQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowAC3vkKqmDJil2nMAw--.13141S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxWrWkGFy5AFyDXw4fXrWkJFb_yoW5Xw1Dp3
- y0qF4Yyr4kWF929w1vqw4rt3WYq3yrJryrXr4kJ34Yy3s0qF98Jr40yrsYkayDJr4Fyr12
- vFnFyr93uay5AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUBv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
- n2kIc2xKxwCYjI0SjxkI62AI1cAE67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20x
- vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
- 3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
- AIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAI
- cVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4
- A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU2fOwUUUUU=
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220316175759.821785-1-atishp@rivosinc.com>
+In-Reply-To: <20220316175759.821785-1-atishp@rivosinc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 17 Mar 2022 11:57:30 +0800
+Message-ID: <CAEUhbmVXC-EdyjxQLsi3EGZ04D27azyKBkF4QtsDaiBHJgyXyA@mail.gmail.com>
+Subject: Re: [PATCH v6] target/riscv: Add isa extenstion strings to the device
+ tree
+To: Atish Patra <atishp@rivosinc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Heiko Stubner <heiko@sntech.de>, Anup Patel <anup@brainfault.org>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1134
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1134;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yw1-x1134.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,94 +79,139 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2022 02:11:06 -0000
+X-List-Received-Date: Thu, 17 Mar 2022 03:57:45 -0000
 
-
-在 2022/3/17 上午6:35, Alistair Francis 写道:
-> On Thu, Mar 17, 2022 at 1:13 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>
->>>>            riscv_raise_exception(env, ret, GETPC());
->>>> @@ -90,7 +90,7 @@ void helper_csrw_i128(CPURISCVState *env, int csr,
->>>>    {
->>>>        RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
->>>>                                              int128_make128(srcl, srch),
->>>> -                                          UINT128_MAX);
->>>> +                                          UINT128_MAX, true);
->>>>
->>>>        if (ret != RISCV_EXCP_NONE) {
->>>>            riscv_raise_exception(env, ret, GETPC());
->>>> @@ -104,7 +104,7 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
->>>>        Int128 rv = int128_zero();
->>>>        RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
->>>>                                              int128_make128(srcl, srch),
->>>> -                                          int128_make128(maskl, maskh));
->>>> +                                          int128_make128(maskl, maskh), true);
->>>>
->>>>        if (ret != RISCV_EXCP_NONE) {
->>>>            riscv_raise_exception(env, ret, GETPC());
->>> I am afraid the adding of "bool write_op" argument was done on many
->>> functions, some of which do not look good to me, e.g.: predicate
->>> funcs. v1 is much better.*>
->> Yeah, I agree adding  argument to predicate is not a good idea. However
->> it seems that the csr(like seed)
->>
->> itself cannot  distinguish whether it's to be written or not except
->> these two ways(in v1 and v2).
->>
->> Or we can take seed CSR as a special case  in riscv_csrrw_check since no
->> other csr will limit itself
->>
->> to be accessed only with read-write instruction currently.
->>
->>> Or maybe, is that possible we do something in trans_csrrs() instead?
-> That might be a better option. Unless there are other CSRs we expect
-> to do this I think trans_csrr*() is probably the place to have this,
-> similar to the `rd == 0` case.
+On Thu, Mar 17, 2022 at 1:58 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> It could also go in helper_csrr() which would just be a simple if check.
+> The Linux kernel parses the ISA extensions from "riscv,isa" DT
+> property. It used to parse only the single letter base extensions
+> until now. A generic ISA extension parsing framework was proposed[1]
+> recently that can parse multi-letter ISA extensions as well.
 >
-> Alistair
+> Generate the extended ISA string by appending the available ISA extensions
+> to the "riscv,isa" string if it is enabled so that kernel can process it.
 >
-Sorry. I don't understand what can be done in trans_csrr*(). As I said 
-in last email: trans_csr*
+> [1] https://lkml.org/lkml/2022/2/15/263
+>
+> Reviewed-by: Anup Patel <anup@brainfault.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Suggested-by: Heiko Stubner <heiko@sntech.de>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+> Changes from v5->v6:
+> 1. Improved commit message.
+> 2. Fixed a typo for Zfh.
+>
+> Changes from v4->v5:
+> 1. Fixed the order of Zxx extensions.
+> 2. Added a comment clearly describing the rules of extension order.
+>
+> Changes from v3->v4:
+> 1. Fixed the order of the extension names.
+> 2. Added all the available ISA extensions in Qemu.
+>
+> Changes from v2->v3:
+> 1. Used g_strconcat to replace snprintf & a max isa string length as
+> suggested by Anup.
+> 2. I have not included the Tested-by Tag from Heiko because the
+> implementation changed from v2 to v3.
+>
+> Changes from v1->v2:
+> 1. Improved the code redability by using arrays instead of individual check
+> ---
+>  target/riscv/cpu.c | 60 ++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 60 insertions(+)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index ddda4906ffb7..937ccdda997b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -34,6 +34,11 @@
+>
+>  /* RISC-V CPU definitions */
+>
+> +struct isa_ext_data {
+> +        const char *name;
+> +        bool enabled;
+> +};
+> +
+>  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
+>
+>  const char * const riscv_int_regnames[] = {
+> @@ -898,6 +903,60 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+>      device_class_set_props(dc, riscv_cpu_properties);
+>  }
+>
+> +#define ISA_EDATA_ENTRY(name, prop) {#name, cpu->cfg.prop}
+> +
+> +static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> +{
+> +    char *old = *isa_str;
+> +    char *new = *isa_str;
+> +    int i;
+> +
+> +    /**
+> +     * Here are the ordering rules of extension naming defined by RISC-V
+> +     * specification :
+> +     * 1. All extensions should be separated from from other multi-letter
 
-have made all the read operation will go to the helper_csrr. However 
-helper_csrr share the progress
+redundant "from"
 
-of riscv_csrrw*  with helper_csrrw/helper_csrw to implement its function.
+> +     *    extensions by an underscore.
+> +     * 2. The first letter following the 'Z' conventionally indicates the most
+> +     *    closely related alphabetical extension category, IMAFDQLCBKJTPVH.
+> +     *    If multiple 'Z' extensions are named, they should be ordered first
+> +     *    by category, then alphabetically within a category.
+> +     * 3. Standard supervisor-level extensions (starts with 'S') should be
+> +     *    listed after standard unprivileged extensions.  If multiple
+> +     *    supervisor-level extensions are listed, they should be ordered
+> +     *    alphabetically.
+> +     * 4. Non-standard extensions (starts with 'X') must be listed after all
+> +     *    standard extensions. They must be separated from other multi-letter
+> +     *    extensions by an underscore.
+> +     */
+> +    struct isa_ext_data isa_edata_arr[] = {
+> +        ISA_EDATA_ENTRY(zfh, ext_zfh),
+> +        ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+> +        ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> +        ISA_EDATA_ENTRY(zdinx, ext_zdinx),
+> +        ISA_EDATA_ENTRY(zba, ext_zba),
+> +        ISA_EDATA_ENTRY(zbb, ext_zbb),
+> +        ISA_EDATA_ENTRY(zbc, ext_zbc),
+> +        ISA_EDATA_ENTRY(zbs, ext_zbs),
+> +        ISA_EDATA_ENTRY(zve32f, ext_zve32f),
+> +        ISA_EDATA_ENTRY(zve64f, ext_zve64f),
+> +        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
+> +        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
+> +        ISA_EDATA_ENTRY(svinval, ext_svinval),
+> +        ISA_EDATA_ENTRY(svnapot, ext_svnapot),
+> +        ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> +    };
+> +
+> +    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> +        if (isa_edata_arr[i].enabled) {
+> +            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> +            g_free(old);
+> +            old = new;
+> +        }
+> +    }
+> +
+> +    *isa_str = new;
+> +}
+> +
+>  char *riscv_isa_string(RISCVCPU *cpu)
+>  {
+>      int i;
+> @@ -910,6 +969,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>          }
+>      }
+>      *p = '\0';
+> +    riscv_isa_string_ext(cpu, &isa_str, maxlen);
+>      return isa_str;
+>  }
+>
 
-The truely question is that helper_csrr will call riscv_csrrw*with 
-write_mask = zero, new_value=zero,
-
-which cannot distinguished from the call from helper_csrrw of which its 
-write_mask all can be zero
-
-(origin from trans_csrrs/trans_csrrc when rs1 is not x0 and the value of 
-rs1 reg is zero).
-
-Regards,
-
-Weiwei Li
-
-
->> The read and write operation in trans_csr*  have been truely
->> distinguished in original code:
->>
->> all the read operation will go to  the helper_csrr,  write to
->> helper_csrrw, read/write to helper_csrrw.
->>
->> However, they all go to the same progress  riscv_csrrw* in the helper
->> with different arguments.
->>
->> Regards,
->>
->> Weiwei Li
->>
->>> Regards,
->>> Bin
->>
->>
->>
->>
-
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
 
