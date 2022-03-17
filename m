@@ -1,81 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nUoLj-0006d1-Cg
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 07:31:23 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:34172)
+	id 1nUzK3-00027Y-T3
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 19:14:24 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:59372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1nUoLc-0006Zg-Pr; Thu, 17 Mar 2022 07:31:21 -0400
-Received: from smtpout2.mo529.mail-out.ovh.net ([79.137.123.220]:34573)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1nUoLa-00016d-Ds; Thu, 17 Mar 2022 07:31:16 -0400
-Received: from mxplan5.mail.ovh.net (unknown [10.109.156.35])
- by mo529.mail-out.ovh.net (Postfix) with ESMTPS id 44086EB32323;
- Thu, 17 Mar 2022 12:31:09 +0100 (CET)
-Received: from kaod.org (37.59.142.102) by DAG4EX1.mxp5.local (172.16.2.31)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24; Thu, 17 Mar
- 2022 12:31:07 +0100
-Authentication-Results: garm.ovh; auth=pass
- (GARM-102R0040d7befd2-d587-4337-9758-2bcf085c86e9,
- 0530BE337510AE92842F4B01C4CA167143738EB5) smtp.auth=clg@kaod.org
-X-OVh-ClientIp: 82.64.250.170
-Message-ID: <1b0f4be3-84e3-3188-63c9-8235e4dfc5ce@kaod.org>
-Date: Thu, 17 Mar 2022 12:31:06 +0100
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nUzK0-00026s-EW; Thu, 17 Mar 2022 19:14:20 -0400
+Received: from [2607:f8b0:4864:20::d29] (port=40868
+ helo=mail-io1-xd29.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nUzJy-0000bb-Nj; Thu, 17 Mar 2022 19:14:20 -0400
+Received: by mail-io1-xd29.google.com with SMTP id x4so7644738iop.7;
+ Thu, 17 Mar 2022 16:14:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=UnsVjflfcmGg02Z1z/+1wvaeaxQFtcxm/Bz93+wUHo4=;
+ b=JEMt7iQtOtaK7uR6Ke/vytsr9EqXubICYmexQfR3WYM4qYy1mY6WV/jCrnPLoC2rza
+ BTmHCymh3HcjcWBLeuDfeqy3gFOcKoXM0xLPelqCGDjvd4IQR7FAag/F420ujUJqUr7P
+ +uqCljRQFaOHwXfXithYQTw5Sut6zf06PHyb/XuY0RdCfl9IXpDjygempIOxvKDbKSpP
+ 8YcBt+xxB5gsfl9LEe7gGiTlymL7p8slc2iFZsEZDK/b/aoKF+uSPwhvp789sQwBJahw
+ L35BxYuLJYN9TpQdngpoO17+aIIRLch+vQA32UOmC/CuHVyPYEZ1hmEXILx5sSKjE09Y
+ bixw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=UnsVjflfcmGg02Z1z/+1wvaeaxQFtcxm/Bz93+wUHo4=;
+ b=b4pyv4H9VBjcEQA+x2c2zPmDK/z5YKVA+j0ws+tq2npRdui339pe3LYDRM2g/dKwXh
+ SItAmz9hWKyiwl80OwjmHOC7d2f32OdrS85mmKL34QWPFG8zmAGTS68aZMLSgtbeFopp
+ hPFqwTLrFqdrMSndnTq3fBoM3+4SzZGlQsKfprCo4YErkCrVM6azuDxudcFShki1Q3aw
+ HG1t7l2WxpARyDScZZkXDyRVHAE/KPVBRA43KUZiYgofEDsWtBOG1A93UYGUIAMH6HYU
+ GjekM8Vmvl1r4IsSxjmda7oL6a8WihRcRJf1X3u8kxRlxno7VWiiJKdB86rOXnr4m833
+ 2BYw==
+X-Gm-Message-State: AOAM530sNqhN4jVfwQH0kiLr6odRfzp1pj3QGfsf4IWVJtFNFDp0Pb0b
+ 65qWtXrgKRWWhqJ9E89FUAyxHC1TRg/rBMHCOVA=
+X-Google-Smtp-Source: ABdhPJyyixkHMxxcpaGCkz4FTiWCL+Raj+Nd/VWZu7wjOGeQrSd6mv85oRilL7uNnCiy/LQKO7UaPoiSlJJL5CeUjTs=
+X-Received: by 2002:a05:6602:2c0b:b0:63d:dfb2:9a95 with SMTP id
+ w11-20020a0566022c0b00b0063ddfb29a95mr3427142iov.93.1647558857044; Thu, 17
+ Mar 2022 16:14:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.2
-Subject: Re: [PATCH 10/27] Replace config-time define HOST_WORDS_BIGENDIAN
-Content-Language: en-US
-To: <marcandre.lureau@redhat.com>, <qemu-devel@nongnu.org>
-CC: Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>, Gerd Hoffmann <kraxel@redhat.com>, Peter
- Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Pisa <pisa@cmp.felk.cvut.cz>, Vikram Garhwal <fnu.vikram@xilinx.com>,
- Jason Wang <jasowang@redhat.com>, Dmitry Fleytman
- <dmitry.fleytman@gmail.com>, Halil Pasic <pasic@linux.ibm.com>, Christian
- Borntraeger <borntraeger@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>,
- Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>, David
- Hildenbrand <david@redhat.com>, Peter Xu <peterx@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>, Aurelien Jarno
- <aurelien@aurel32.net>, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, Eduardo Habkost <eduardo@habkost.net>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Yanan Wang <wangyanan55@huawei.com>,
- Laurent Vivier <laurent@vivier.eu>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, Daniel Henrique Barboza
- <danielhb413@gmail.com>, David Gibson <david@gibson.dropbear.id.au>, Greg
- Kurz <groug@kaod.org>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>, Artyom Tarasenko
- <atar4qemu@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>, Huacai Chen
- <chenhuacai@kernel.org>, Coiby Xu <Coiby.Xu@gmail.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, "open list:Overall KVM CPUs" <kvm@vger.kernel.org>,
- "open list:ARM PrimeCell and..." <qemu-arm@nongnu.org>, "open list:S390
- SCLP-backed..." <qemu-s390x@nongnu.org>, "open list:PowerPC TCG CPUs"
- <qemu-ppc@nongnu.org>, "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- "open list:virtio-blk" <qemu-block@nongnu.org>
-References: <20220316095308.2613651-1-marcandre.lureau@redhat.com>
-From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
-In-Reply-To: <20220316095308.2613651-1-marcandre.lureau@redhat.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [37.59.142.102]
-X-ClientProxiedBy: DAG7EX2.mxp5.local (172.16.2.62) To DAG4EX1.mxp5.local
- (172.16.2.31)
-X-Ovh-Tracer-GUID: 66bfd7d2-5c46-48ea-8d2c-a21dc2d819c4
-X-Ovh-Tracer-Id: 2016768211438242587
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvvddrudefgedgvdekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepkfffgggfuffvfhfhjggtgfhisehtkeertddtfeejnecuhfhrohhmpeevrogurhhitggpnfgvpgfiohgrthgvrhcuoegtlhhgsehkrghougdrohhrgheqnecuggftrfgrthhtvghrnhepieegvdffkeegfeetuddttddtveduiefhgeduffekiedtkeekteekhfffleevleelnecukfhppedtrddtrddtrddtpdefjedrheelrddugedvrddutddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpohhuthdphhgvlhhopehmgihplhgrnhehrdhmrghilhdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomheptghlgheskhgrohgurdhorhhgpdhnsggprhgtphhtthhopedupdhrtghpthhtohepghhrohhugheskhgrohgurdhorhhg
-Received-SPF: pass client-ip=79.137.123.220; envelope-from=clg@kaod.org;
- helo=smtpout2.mo529.mail-out.ovh.net
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+References: <20220317061817.3856850-1-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220317061817.3856850-1-alistair.francis@opensource.wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 18 Mar 2022 09:13:51 +1000
+Message-ID: <CAKmqyKPH62JfMTCDwWWUvCr2mZ7ZtyyXVYpQ5sTf1LaP2EFcKA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] target/riscv: Allow software access to MIP SEIP
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d29
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+X-Spam_score_int: -3
+X-Spam_score: -0.4
+X-Spam_bar: /
+X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,115 +75,48 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2022 11:31:21 -0000
+X-List-Received-Date: Thu, 17 Mar 2022 23:14:21 -0000
 
-On 3/16/22 10:53, marcandre.lureau@redhat.com wrote:
-> From: Marc-André Lureau <marcandre.lureau@redhat.com>
-> 
-> Replace a config-time define with a compile time condition
-> define (compatible with clang and gcc) that must be declared prior to
-> its usage. This avoids having a global configure time define, but also
-> prevents from bad usage, if the config header wasn't included before.
-> 
-> This can help to make some code independent from qemu too.
-> 
-> gcc supports __BYTE_ORDER__ from about 4.6 and clang from 3.2.
-> 
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> ---
->   meson.build                             |  1 -
->   accel/tcg/atomic_template.h             |  4 +-
->   audio/audio.h                           |  2 +-
->   hw/display/pl110_template.h             |  6 +--
->   hw/net/can/ctucan_core.h                |  2 +-
->   hw/net/vmxnet3.h                        |  4 +-
->   include/exec/cpu-all.h                  |  4 +-
->   include/exec/cpu-common.h               |  2 +-
->   include/exec/memop.h                    |  2 +-
->   include/exec/memory.h                   |  2 +-
->   include/fpu/softfloat-types.h           |  2 +-
->   include/hw/core/cpu.h                   |  2 +-
->   include/hw/i386/intel_iommu.h           |  6 +--
->   include/hw/i386/x86-iommu.h             |  4 +-
->   include/hw/virtio/virtio-access.h       |  6 +--
->   include/hw/virtio/virtio-gpu-bswap.h    |  2 +-
->   include/libdecnumber/dconfig.h          |  2 +-
->   include/net/eth.h                       |  2 +-
->   include/qemu/bswap.h                    |  8 ++--
->   include/qemu/compiler.h                 |  2 +
->   include/qemu/host-utils.h               |  2 +-
->   include/qemu/int128.h                   |  2 +-
->   include/ui/qemu-pixman.h                |  2 +-
->   net/util.h                              |  2 +-
->   target/arm/cpu.h                        |  8 ++--
->   target/arm/translate-a64.h              |  2 +-
->   target/arm/vec_internal.h               |  2 +-
->   target/i386/cpu.h                       |  2 +-
->   target/mips/cpu.h                       |  2 +-
->   target/ppc/cpu.h                        |  2 +-
->   target/s390x/tcg/vec.h                  |  2 +-
->   target/xtensa/cpu.h                     |  2 +-
->   tests/fp/platform.h                     |  4 +-
->   accel/kvm/kvm-all.c                     |  4 +-
->   audio/dbusaudio.c                       |  2 +-
->   disas.c                                 |  2 +-
->   hw/core/loader.c                        |  4 +-
->   hw/display/artist.c                     |  6 +--
->   hw/display/pxa2xx_lcd.c                 |  2 +-
->   hw/display/vga.c                        | 12 +++---
->   hw/display/virtio-gpu-gl.c              |  2 +-
->   hw/s390x/event-facility.c               |  2 +-
->   hw/virtio/vhost.c                       |  2 +-
->   linux-user/arm/nwfpe/double_cpdo.c      |  4 +-
->   linux-user/arm/nwfpe/fpa11_cpdt.c       |  4 +-
->   linux-user/ppc/signal.c                 |  3 +-
->   linux-user/syscall.c                    |  6 +--
->   net/net.c                               |  4 +-
->   target/alpha/translate.c                |  2 +-
->   target/arm/crypto_helper.c              |  2 +-
->   target/arm/helper.c                     |  2 +-
->   target/arm/kvm64.c                      |  4 +-
->   target/arm/neon_helper.c                |  2 +-
->   target/arm/sve_helper.c                 |  4 +-
->   target/arm/translate-sve.c              |  6 +--
->   target/arm/translate-vfp.c              |  2 +-
->   target/arm/translate.c                  |  2 +-
->   target/hppa/translate.c                 |  2 +-
->   target/i386/tcg/translate.c             |  2 +-
->   target/mips/tcg/lmmi_helper.c           |  2 +-
->   target/mips/tcg/msa_helper.c            | 54 ++++++++++++-------------
->   target/ppc/arch_dump.c                  |  2 +-
->   target/ppc/int_helper.c                 | 22 +++++-----
->   target/ppc/kvm.c                        |  4 +-
->   target/ppc/mem_helper.c                 |  2 +-
->   target/riscv/vector_helper.c            |  2 +-
->   target/s390x/tcg/translate.c            |  2 +-
->   target/sparc/vis_helper.c               |  4 +-
->   tcg/tcg-op.c                            |  4 +-
->   tcg/tcg.c                               | 12 +++---
->   tests/qtest/vhost-user-blk-test.c       |  2 +-
->   tests/qtest/virtio-blk-test.c           |  2 +-
->   ui/vdagent.c                            |  2 +-
->   ui/vnc.c                                |  2 +-
->   util/bitmap.c                           |  2 +-
->   util/host-utils.c                       |  2 +-
->   target/ppc/translate/vmx-impl.c.inc     |  4 +-
->   target/ppc/translate/vsx-impl.c.inc     |  2 +-
->   target/riscv/insn_trans/trans_rvv.c.inc |  4 +-
->   target/s390x/tcg/translate_vx.c.inc     |  2 +-
->   tcg/aarch64/tcg-target.c.inc            |  4 +-
->   tcg/arm/tcg-target.c.inc                |  4 +-
->   tcg/mips/tcg-target.c.inc               |  2 +-
->   tcg/ppc/tcg-target.c.inc                | 10 ++---
->   tcg/riscv/tcg-target.c.inc              |  4 +-
->   85 files changed, 173 insertions(+), 173 deletions(-)
+On Thu, Mar 17, 2022 at 4:18 PM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> The RISC-V specification states that:
+>   "Supervisor-level external interrupts are made pending based on the
+>   logical-OR of the software-writable SEIP bit and the signal from the
+>   external interrupt controller."
+>
+> We currently only allow either the interrupt controller or software to
+> set the bit, which is incorrect.
+>
+> This patch removes the miclaim mask when writing MIP to allow M-mode
+> software to inject interrupts, even with an interrupt controller.
+>
+> We then also need to keep track of which source is setting MIP_SEIP. The
+> final value is a OR of both, so we add two bools and use that to keep
+> track of the current state. This way either source can change without
+> losing the correct value.
+>
+> This fixes: https://gitlab.com/qemu-project/qemu/-/issues/904
+>
+> Alistair Francis (2):
+>   target/riscv: cpu: Fixup indentation
+>   target/riscv: Allow software access to MIP SEIP
 
-For the ppc part:
+Thanks!
 
-Reviewed-by: Cédric Le Goater <clg@kaod.org>
+Applied to riscv-to-apply.next
 
-Thanks,
+Alistair
 
-C.
-
+>
+>  target/riscv/cpu.h |  8 ++++++++
+>  target/riscv/cpu.c | 30 +++++++++++++++++++-----------
+>  target/riscv/csr.c |  8 ++++++--
+>  3 files changed, 33 insertions(+), 13 deletions(-)
+>
+> --
+> 2.35.1
+>
 
