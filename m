@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nUmtE-0000jP-Ud
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 05:57:52 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:42636)
+	id 1nUniJ-0003cp-Eb
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 06:50:39 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53170)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nUmtD-0000iy-1f
- for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 05:57:51 -0400
-Received: from [2607:f8b0:4864:20::534] (port=34428
- helo=mail-pg1-x534.google.com)
+ id 1nUniH-0003Vk-3G
+ for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 06:50:37 -0400
+Received: from [2607:f8b0:4864:20::62a] (port=39695
+ helo=mail-pl1-x62a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nUmtA-0002KZ-HR
- for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 05:57:50 -0400
-Received: by mail-pg1-x534.google.com with SMTP id t187so2266529pgb.1
- for <qemu-riscv@nongnu.org>; Thu, 17 Mar 2022 02:57:48 -0700 (PDT)
+ id 1nUniE-0002FR-8E
+ for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 06:50:36 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id d18so4120131plr.6
+ for <qemu-riscv@nongnu.org>; Thu, 17 Mar 2022 03:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bigXU4UIDhO2tR/loz255+aZBYK2dhzBkGjin5Tpwgs=;
- b=HJOThLWYmK/ighRS6/thYpA9t8L5gCkDVeM5eE/Te4KWgWNJdUb3Z6yGmk947nQQH0
- ohI0syzO2FQWU8KwQB1D0wZg2OgEnPrgOS858bwFxErHFr/bYoVKO8k+Wy73iKZus8w9
- lYgfrnFaVktFs91mhB7aOZdzsLQPnerBdaLyBc96mu/TM3HybCpJVqInujbsxxcFu3jb
- iZypXNKULGziohaiXeZMUH1DVeRb+Q/p8T0JE8lklxVDit6U+r1iwQhJecZNq+SCvtxa
- iyhziL1bWrw6uGHmKBHlEWmaNmHUY6vAyV++wisjKb4SSjPL3OoQNoHbwhvcaYwaxCWX
- G7Vg==
+ :cc; bh=8dsGzh7OzwqMzf0UX0mIcrVi62Va0oZfgy9O0WF9Pbc=;
+ b=mrC3A0cJxz6MP00betJXO0JsfHk2qgmDVfi7fIIvHhZcRsG2T9ku7XtqJ6SaSL4CJS
+ xGhCNN7RxohBpDEzAjviqa5AWd2FOzY/S0+yutnd7AZT6eZ9bF1ro88xpZl1RuywcHXL
+ WQSqI/smxaJQqrqmjKebm/ajibiTP0FwTIOwCdqzGHg0t2uSCdYKngNYGqbhzqOX93Jk
+ JP/YfM/CXkhF61717iQHW7eoN9E8vSUBhGyhiVf3M+IDbWNRMkL8QjGcFbrbBRuJx2Is
+ rlzzsPUKOULbPYO6Kps82+VuhHXWdCGT4i8RGJcFAE7AK3Nl5WFdqwl139nCLOjl9oxA
+ DnVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=bigXU4UIDhO2tR/loz255+aZBYK2dhzBkGjin5Tpwgs=;
- b=VJm+53MdRWzeIyN0nil3MuZs2sCM2+SFGfJg37Bv5k/fFUMa90UCgGkSRGhzzA0BcY
- OlIffgeh6cypr//mWNVwYeiyBnSsVXN+BtxWKHwyASK8//jwhLc++7PXW/jYbGZvudBD
- D0rX52Ccwi+gVGHKwh3EzdSVgKVf8hw3sZSFlAHQvSV+g9y3Yn20hg2fVSQuOcUihqUM
- jGJpZegWe1Py5ItElHGNk8s8bChHcdSBKGh7IzOMasEDDP0Iq85K4yXrQEw7O1glnUVk
- V5cegwyoH7nYPGva50lFZeGBVlKsHvYrXiUIQ9tsVaLotaFlk2pLomYa3QebIkU85yV7
- yACQ==
-X-Gm-Message-State: AOAM5318MSmbwt7EfEwwJJQvsjaKLt5QaxPyuBk/BWnk69XrAkhTSSFK
- PYJEriQAonAvm9+jj6RVL0MHSraG+S3eXrpw
-X-Google-Smtp-Source: ABdhPJwMNQh4WbXLWXoOfLrsH/YQgYt7EewSq/+YYBVAbIfQ0d8+5aQSG1eZtNfAYXSFfBW8UV7JAg==
-X-Received: by 2002:a05:6a00:1a88:b0:4fa:58f3:c55e with SMTP id
- e8-20020a056a001a8800b004fa58f3c55emr952585pfv.82.1647511066695; 
- Thu, 17 Mar 2022 02:57:46 -0700 (PDT)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com.
- [209.85.216.45]) by smtp.gmail.com with ESMTPSA id
- k1-20020a056a00134100b004f78df32666sm6765867pfu.198.2022.03.17.02.57.45
+ bh=8dsGzh7OzwqMzf0UX0mIcrVi62Va0oZfgy9O0WF9Pbc=;
+ b=0GPgICUNImAPsgb3mJzJx1jcv04QOuo7701NhFmjDiGgasBiPep7zA4/oXDflDQMoB
+ KMJPZBAAqyE844C57gNk6kXPprGk0BpXf9kOqe3Ok8oY+JuFoRnERLhxfoxNPZtiYzxs
+ hLH37h1O6h7op61CtLB+yypEyy/vq5ZQq2nQKNh8JEo0i9NM4Z8MOdBfnk3xC8AH+wrY
+ TCyG2SpmH5yhxM8VSNU3QtMOxSTJktUjSeUAz/vI6HGovNPU3H9uOP7hYghUG08U1AXV
+ onOIFBSCpySDStyE4FNhzXd5xcMIIhMYL3zW9GVDzttxZVDTo0vyGlPuW8Jtj3HMzpQ/
+ Rnyg==
+X-Gm-Message-State: AOAM533sRdwaxABjouBgBmQ3kMPJWR+//RwUfIy5zYnucKeJJMoaibNg
+ U9/EwGqa4YnkEiE0Xt5aueB60jGV+16o7pub
+X-Google-Smtp-Source: ABdhPJyFYj3el022xodgh4w85koj8PXoOncKahSpEkOA8pG8kHTds641Wd3YH6VKnwqEURhACl2sJg==
+X-Received: by 2002:a17:902:d2cc:b0:152:fda8:f3ff with SMTP id
+ n12-20020a170902d2cc00b00152fda8f3ffmr4461664plc.92.1647514232456; 
+ Thu, 17 Mar 2022 03:50:32 -0700 (PDT)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com.
+ [209.85.210.174]) by smtp.gmail.com with ESMTPSA id
+ c7-20020aa78e07000000b004f6e4d8ccc8sm6264521pfr.163.2022.03.17.03.50.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 17 Mar 2022 02:57:45 -0700 (PDT)
-Received: by mail-pj1-f45.google.com with SMTP id
- mp6-20020a17090b190600b001c6841b8a52so1130698pjb.5; 
- Thu, 17 Mar 2022 02:57:45 -0700 (PDT)
-X-Received: by 2002:a17:902:e88d:b0:151:ba78:3bc1 with SMTP id
- w13-20020a170902e88d00b00151ba783bc1mr3879780plg.13.1647511064661; Thu, 17
- Mar 2022 02:57:44 -0700 (PDT)
+ Thu, 17 Mar 2022 03:50:31 -0700 (PDT)
+Received: by mail-pf1-f174.google.com with SMTP id p5so368264pfo.5;
+ Thu, 17 Mar 2022 03:50:30 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1304:b0:4e1:2338:f11e with SMTP id
+ j4-20020a056a00130400b004e12338f11emr4366547pfu.24.1647514230019; Thu, 17 Mar
+ 2022 03:50:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220316175759.821785-1-atishp@rivosinc.com>
 In-Reply-To: <20220316175759.821785-1-atishp@rivosinc.com>
 From: Frank Chang <frank.chang@sifive.com>
-Date: Thu, 17 Mar 2022 17:57:33 +0800
-X-Gmail-Original-Message-ID: <CANzO1D3jsXMKQ3UUjR8p-9PxHh_YK9rtNVFcr-+S0ZGB3S26RA@mail.gmail.com>
-Message-ID: <CANzO1D3jsXMKQ3UUjR8p-9PxHh_YK9rtNVFcr-+S0ZGB3S26RA@mail.gmail.com>
+Date: Thu, 17 Mar 2022 18:50:19 +0800
+X-Gmail-Original-Message-ID: <CANzO1D2sBc-VVrNWFwo48Gavnn2cS09s48dReLKaL8Swqt--aA@mail.gmail.com>
+Message-ID: <CANzO1D2sBc-VVrNWFwo48Gavnn2cS09s48dReLKaL8Swqt--aA@mail.gmail.com>
 Subject: Re: [PATCH v6] target/riscv: Add isa extenstion strings to the device
  tree
 To: Atish Patra <atishp@rivosinc.com>
@@ -67,11 +66,11 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, 
  Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: multipart/alternative; boundary="000000000000c5d66705da670fb2"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::534
+Content-Type: multipart/alternative; boundary="000000000000715d3105da67cce9"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::62a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
- envelope-from=frank.chang@sifive.com; helo=mail-pg1-x534.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
@@ -92,9 +91,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2022 09:57:51 -0000
+X-List-Received-Date: Thu, 17 Mar 2022 10:50:37 -0000
 
---000000000000c5d66705da670fb2
+--000000000000715d3105da67cce9
 Content-Type: text/plain; charset="UTF-8"
 
 On Thu, Mar 17, 2022 at 1:58 AM Atish Patra <atishp@rivosinc.com> wrote:
@@ -149,6 +148,14 @@ On Thu, Mar 17, 2022 at 1:58 AM Atish Patra <atishp@rivosinc.com> wrote:
 > +struct isa_ext_data {
 > +        const char *name;
 > +        bool enabled;
+>
+
+Nit: Should be 4 spaces indent.
+
+Regards,
+Frank Chang
+
+
 > +};
 > +
 >  static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
@@ -235,9 +242,8 @@ On Thu, Mar 17, 2022 at 1:58 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
 >
 >
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
---000000000000c5d66705da670fb2
+--000000000000715d3105da67cce9
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -305,7 +311,11 @@ index ddda4906ffb7..937ccdda997b 100644<br>
 <br>
 +struct isa_ext_data {<br>
 +=C2=A0 =C2=A0 =C2=A0 =C2=A0 const char *name;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 bool enabled;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 bool enabled;<br></blockquote><div><br></div><=
+div>Nit: Should be 4 spaces indent.</div><div><br></div><div>Regards,</div>=
+<div>Frank Chang</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">
 +};<br>
 +<br>
 =C2=A0static const char riscv_exts[26] =3D &quot;IEMAFDQCLBJTPVNSUHKORWXYZG=
@@ -398,9 +408,8 @@ ated from other multi-letter<br>
 -- <br>
 2.25.1<br>
 <br>
-<br></blockquote><div><br></div><div>Reviewed-by: Frank Chang &lt;<a href=
-=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com</a>&gt;<br></div>=
-</div></div>
+<br>
+</blockquote></div></div>
 
---000000000000c5d66705da670fb2--
+--000000000000715d3105da67cce9--
 
