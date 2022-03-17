@@ -1,99 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nUjTf-00022l-2g
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 02:19:15 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:34664)
+	id 1nUkhj-0000JC-DI
+	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 03:37:51 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:45734)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=068022f98=alistair.francis@opensource.wdc.com>)
- id 1nUjTX-0001wH-Mn
- for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 02:19:09 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:14060)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=068022f98=alistair.francis@opensource.wdc.com>)
- id 1nUjTU-0004O8-4Q
- for qemu-riscv@nongnu.org; Thu, 17 Mar 2022 02:19:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1647497945; x=1679033945;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=C5wN6WlN5i9pO/tHVRZgvTh0eiaKx6kGq+rPWLq5OMs=;
- b=h1qE5LMWQBhXOam/unkz+XaWpBnOVuI4FjreLYsrEpeWo41qybioOBVs
- 4btCEG+sB6EWNZpmdl4ltzE48DjZwxpJM0uAuxrEpS+dI9T31SQHgDJI5
- B921G/ewT4XEld0YSk49HOFpe7PWIh/HyyvqfEDvdltsTr28oLA2mBjMF
- wH93y+ZO2H+Upb9jfZ1j0uhA3ZDbo/lh9YPQrsr+2ALilVqq0/B0Zfbs/
- L17xrjB3hCyL4qT7U3hZpFIir3t8U9Mp1c0GuwXkzov9rRgljuc5jB7zE
- +GV5YTRvYDBzxee76MKHZa6B2GFDdSDO7uwQ9Z4G93cCrii0MsXRqUBjU g==;
-X-IronPort-AV: E=Sophos;i="5.90,188,1643644800"; d="scan'208";a="196509683"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 17 Mar 2022 14:18:37 +0800
-IronPort-SDR: 7PoGoYpGuhzbTNzUAC4AR/mG4lOmSUsUjc2c2qu2gtB9bCjrQqaxyysgkPVPSDKPbrBxusQw9j
- pX9cVGzn0CoA3G98+KtR8WzHGcZYhIQOFh4GeA2K/LxxUSkeQl0kFgdvK5mPirJelCgDPfNOau
- ltiuablH/J2sD9yfh+dOAQb4G9S1VG3Oy4qiyg/j2vXaLpJKv/xrgRoVOIG4OJu62IO5ctUrKP
- 9EG3XtHmFM0o954y+BX5ByIYVZLV2k2beBhNO8CDoSSB1/ZYEcB5T5wwGWR6Am2b9nKTD8Oscu
- dEQBEW5LPR+8QfrkyNYjlSdR
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Mar 2022 22:49:42 -0700
-IronPort-SDR: cBhDo7kV6HhutL9ROFqy2CuD40EJCL2hxYXt6CGr3kQeWiXbsD2nTC7dhnDbIYEco9e7iK6mRk
- I+YBFOOerb32GN2sbpw81nw1UUXe+speVSsYGa273owANUTKIiy+kS/rWEAAV5Tm0n+Aha8uga
- XoT9h5tUTXhulCRD8AB5uGdNecxPDp2ORSrYiuGf5qcSHuN8KmLOK7eEYyJS7Xq8Ba9ctKY7tt
- NoPkRi1EwUIxcT/4xdudgkMJDU8tRrHqocKmKNOSSB4/s6Gsmbz3v+Lw/4qfrkCLRbSt+yzJWG
- gnI=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 16 Mar 2022 23:18:37 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KJxmD4Lvfz1SVp4
- for <qemu-riscv@nongnu.org>; Wed, 16 Mar 2022 23:18:36 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1647497915; x=1650089916; bh=C5wN6WlN5i9pO/tHVR
- ZgvTh0eiaKx6kGq+rPWLq5OMs=; b=hylb7qYs2IJJOqVCCLqrkvg3m8fc27OJc5
- p7+QlYKifPNOX04s0xyPnpTDVt4aIovjOAztxfQ1qxnIaSl3s+9NArFMcNTkS+kk
- kPc+5BAeKnNHnF03sKFvurFmfnAJ0U1V6u2Rh8/YAYRR7gN2IYPpBxs5OXYkrycL
- Vf6pclyweqrMHZGJy1jT+JuomcUKF+hICmQFz7xDZpEbXUkOP1Ojynce9LOOM60o
- xo3t0SjoW1IxsXzC0vn+8xmiJ0I2nhrgHLeK9UqQ0Z85f7DT+4wRsZB9CbD4NFwH
- OUezfinx6LP/EpCx7SOk9BfGdJcfPSOeEK9dIUXEoWwdVNs9ojIw==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id xelPSlPBVv9R for <qemu-riscv@nongnu.org>;
- Wed, 16 Mar 2022 23:18:35 -0700 (PDT)
-Received: from toolbox.wdc.com (unknown [10.225.165.107])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KJxm66fjmz1Rvlx;
- Wed, 16 Mar 2022 23:18:30 -0700 (PDT)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: bmeng.cn@gmail.com, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, palmer@dabbelt.com,
- alistair23@gmail.com, Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v3 2/2] target/riscv: Allow software access to MIP SEIP
-Date: Thu, 17 Mar 2022 16:18:17 +1000
-Message-Id: <20220317061817.3856850-3-alistair.francis@opensource.wdc.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220317061817.3856850-1-alistair.francis@opensource.wdc.com>
-References: <20220317061817.3856850-1-alistair.francis@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nUkhh-0000H5-Kt; Thu, 17 Mar 2022 03:37:49 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:51968 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nUkhe-00071p-2Z; Thu, 17 Mar 2022 03:37:49 -0400
+Received: from [192.168.3.6] (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowADX38M+5TJiHk4uAw--.47943S2;
+ Thu, 17 Mar 2022 15:37:36 +0800 (CST)
+Subject: Re: [PATCH v2] target/riscv: write back unmodified value for
+ csrrc/csrrs with rs1 is not x0 but holding zero
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V"
+ <qemu-riscv@nongnu.org>, wangjunqiang <wangjunqiang@iscas.ac.cn>,
+ Bin Meng <bin.meng@windriver.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
+References: <20220311094601.30440-1-liweiwei@iscas.ac.cn>
+ <CAEUhbmX7wBzhvojSioQnB=T-DDuq9FX7UTPdvtR=oXHDm5Ra4A@mail.gmail.com>
+ <769fe78f-e4c0-83c1-d5fc-65fbf40bb5ff@iscas.ac.cn>
+ <CAKmqyKMpWFo5-=XSTBy_B9aTqDsw6-uxWfe3RwNnKUCKXQtjeQ@mail.gmail.com>
+ <f5a1d76b-12a9-6d84-f73f-2dc523cfa4ee@iscas.ac.cn>
+ <CAKmqyKOFJBKG7t0+6bxf+rzNDgMeOkjZoBok=6SUucOp5A0dvg@mail.gmail.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <bb9fa46c-2930-6ce4-69c4-3c8876ef8bf4@iscas.ac.cn>
+Date: Thu, 17 Mar 2022 15:37:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=068022f98=alistair.francis@opensource.wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
+In-Reply-To: <CAKmqyKOFJBKG7t0+6bxf+rzNDgMeOkjZoBok=6SUucOp5A0dvg@mail.gmail.com>
+Content-Type: multipart/alternative;
+ boundary="------------83CD7DA0F9418DA76FDB66DC"
+Content-Language: en-US
+X-CM-TRANSID: rQCowADX38M+5TJiHk4uAw--.47943S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxCr4kArW8KryDWw4rAFWfGrg_yoWrCw43pr
+ WFgr4Yyr4kXF1v9w1kJw4rt3W5Z3yrJry5Xr48t3yavwn5X34qvFWxtFs0kFWDGrsayr12
+ vFsFyryxuay5AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr
+ 0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2
+ z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67
+ IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2kIc2xKxwCjr7xvwVCIw2I0I7xG6c02
+ F41lc7I2V7IY0VAS07AlzVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64
+ vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUGVWUWwC20s026x8G
+ jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2I
+ x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK
+ 8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7
+ CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUSsjbUUUUU=
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
 X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,112 +77,364 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Mar 2022 06:19:09 -0000
+X-List-Received-Date: Thu, 17 Mar 2022 07:37:50 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+This is a multi-part message in MIME format.
+--------------83CD7DA0F9418DA76FDB66DC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The RISC-V specification states that:
-  "Supervisor-level external interrupts are made pending based on the
-  logical-OR of the software-writable SEIP bit and the signal from the
-  external interrupt controller."
 
-We currently only allow either the interrupt controller or software to
-set the bit, which is incorrect.
+在 2022/3/17 下午12:39, Alistair Francis 写道:
+> On Thu, Mar 17, 2022 at 12:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>>
+>> 在 2022/3/17 上午6:35, Alistair Francis 写道:
+>>> On Thu, Mar 17, 2022 at 1:13 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>>>>>>             riscv_raise_exception(env, ret, GETPC());
+>>>>>> @@ -90,7 +90,7 @@ void helper_csrw_i128(CPURISCVState *env, int csr,
+>>>>>>     {
+>>>>>>         RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
+>>>>>>                                               int128_make128(srcl, srch),
+>>>>>> -                                          UINT128_MAX);
+>>>>>> +                                          UINT128_MAX, true);
+>>>>>>
+>>>>>>         if (ret != RISCV_EXCP_NONE) {
+>>>>>>             riscv_raise_exception(env, ret, GETPC());
+>>>>>> @@ -104,7 +104,7 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
+>>>>>>         Int128 rv = int128_zero();
+>>>>>>         RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
+>>>>>>                                               int128_make128(srcl, srch),
+>>>>>> -                                          int128_make128(maskl, maskh));
+>>>>>> +                                          int128_make128(maskl, maskh), true);
+>>>>>>
+>>>>>>         if (ret != RISCV_EXCP_NONE) {
+>>>>>>             riscv_raise_exception(env, ret, GETPC());
+>>>>> I am afraid the adding of "bool write_op" argument was done on many
+>>>>> functions, some of which do not look good to me, e.g.: predicate
+>>>>> funcs. v1 is much better.*>
+>>>> Yeah, I agree adding  argument to predicate is not a good idea. However
+>>>> it seems that the csr(like seed)
+>>>>
+>>>> itself cannot  distinguish whether it's to be written or not except
+>>>> these two ways(in v1 and v2).
+>>>>
+>>>> Or we can take seed CSR as a special case  in riscv_csrrw_check since no
+>>>> other csr will limit itself
+>>>>
+>>>> to be accessed only with read-write instruction currently.
+>>>>
+>>>>> Or maybe, is that possible we do something in trans_csrrs() instead?
+>>> That might be a better option. Unless there are other CSRs we expect
+>>> to do this I think trans_csrr*() is probably the place to have this,
+>>> similar to the `rd == 0` case.
+>>>
+>>> It could also go in helper_csrr() which would just be a simple if check.
+>>>
+>>> Alistair
+>>>
+>> Sorry. I don't understand what can be done in trans_csrr*(). As I said
+>> in last email: trans_csr*
+>>
+>> have made all the read operation will go to the helper_csrr. However
+>> helper_csrr share the progress
+>>
+>> of riscv_csrrw*  with helper_csrrw/helper_csrw to implement its function.
+> Yep, so the problem you are trying to solve is the seed CSR access right?
 
-This patch removes the miclaim mask when writing MIP to allow M-mode
-software to inject interrupts, even with an interrupt controller.
+To solve the seed CSR access problem is my initial purpose.
 
-We then also need to keep track of which source is setting MIP_SEIP. The
-final value is a OR of both, so we add two bools and use that to keep
-track of the current state. This way either source can change without
-losing the correct value.
+The other purpose is to write back the  unmodified value back  as the 
+coments in trans_csrrs/trans_csrrc:
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/904
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/cpu.h |  8 ++++++++
- target/riscv/cpu.c | 10 +++++++++-
- target/riscv/csr.c |  8 ++++++--
- 3 files changed, 23 insertions(+), 3 deletions(-)
+"
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index c069fe85fa..05d40f8dbd 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -173,6 +173,14 @@ struct CPUArchState {
-     uint64_t mstatus;
-=20
-     uint64_t mip;
-+    /*
-+     * MIP contains the software writable version of SEIP ORed with the
-+     * external interrupt value. The MIP register is always up-to-date.
-+     * To keep track of the current source, we also save booleans of the=
- values
-+     * here.
-+     */
-+    bool external_seip;
-+    bool software_seip;
-=20
-     uint64_t miclaim;
-=20
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 41b757995d..68373b769c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -706,7 +706,6 @@ static void riscv_cpu_set_irq(void *opaque, int irq, =
-int level)
-         case IRQ_VS_TIMER:
-         case IRQ_M_TIMER:
-         case IRQ_U_EXT:
--        case IRQ_S_EXT:
-         case IRQ_VS_EXT:
-         case IRQ_M_EXT:
-             if (kvm_enabled()) {
-@@ -715,6 +714,15 @@ static void riscv_cpu_set_irq(void *opaque, int irq,=
- int level)
-                 riscv_cpu_update_mip(cpu, 1 << irq, BOOL_TO_MASK(level))=
-;
-             }
-              break;
-+        case IRQ_S_EXT:
-+            if (kvm_enabled()) {
-+                kvm_riscv_set_irq(cpu, irq, level);
-+            } else {
-+                env->external_seip =3D level;
-+                riscv_cpu_update_mip(cpu, 1 << irq,
-+                                     BOOL_TO_MASK(level | env->software_=
-seip));
-+            }
-+            break;
-         default:
-             g_assert_not_reached();
-         }
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0606cd0ea8..77726ccefb 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1403,10 +1403,14 @@ static RISCVException rmw_mip64(CPURISCVState *en=
-v, int csrno,
-                                 uint64_t new_val, uint64_t wr_mask)
- {
-     RISCVCPU *cpu =3D env_archcpu(env);
--    /* Allow software control of delegable interrupts not claimed by har=
-dware */
--    uint64_t old_mip, mask =3D wr_mask & delegable_ints & ~env->miclaim;
-+    uint64_t old_mip, mask =3D wr_mask & delegable_ints;
-     uint32_t gin;
-=20
-+    if (mask & MIP_SEIP) {
-+        env->software_seip =3D new_val & MIP_SEIP;
-+        new_val |=3D env->external_seip * MIP_SEIP;
-+    }
-+
-     if (mask) {
-         old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_val & mask));
-     } else {
---=20
-2.35.1
+* Note that if rs1 specifies a register other than x0, holding
+* a zero value, the instruction will still attempt to write the
+* unmodified value back to the csr and will cause side effects.
+*/
+"
+
+For this purpose,  we still should distinguish the two cases in 
+riscv_csrrw, since whether write_mask
+
+is zero is used to distinguish read and write operation currently.
+
+>
+> "The seed CSR must be accessed with a read-write instruction. A
+> read-only instruction such as CSRRS/CSRRC with rs1=x0 or CSRRSI/CSRRCI
+> with uimm=0 will raise an illegal instruction exception. The write
+> value (in rs1 or uimm) must be ignored by implementations. The purpose
+> of the write is to signal polling and flushing."
+>
+> So trans_csr*() probably isn't the right place, but you could do the
+> check in helper_csr*()
+>
+> helper_csrr() is only called from do_csrr(), which should only be
+> called on an invalid access for the seed CSR.
+>
+>> The truely question is that helper_csrr will call riscv_csrrw*with
+>> write_mask = zero, new_value=zero,
+>>
+>> which cannot distinguished from the call from helper_csrrw of which its
+>> write_mask all can be zero
+> Agreed. But helper_csrrw() isn't called if rs1=x0 or uimm=0. So if
+> helper_csrrw() is called no matter the write mask then you should be
+> fine.
+>
+> So a simple:
+> if (csr == CSR_SEED) {
+>      riscv_raise_exception()
+> }
+>
+> in helper_csrr() and helper_csrw() should be fine. Or am I missing something?
+
+It's OK to do this to solve the seed csr problem. Maybe it's unnecessary 
+to do this in helper_csrw since the spec
+
+seems not specify the case that rd = x0 to raise an illegal instruction 
+exception.
+
+Regards,
+
+Weiwei Li
+
+>
+> Alistair
+>
+>> (origin from trans_csrrs/trans_csrrc when rs1 is not x0 and the value of
+>> rs1 reg is zero).
+>>
+>> Regards,
+>>
+>> Weiwei Li
+>>
+>>
+>>>> The read and write operation in trans_csr*  have been truely
+>>>> distinguished in original code:
+>>>>
+>>>> all the read operation will go to  the helper_csrr,  write to
+>>>> helper_csrrw, read/write to helper_csrrw.
+>>>>
+>>>> However, they all go to the same progress  riscv_csrrw* in the helper
+>>>> with different arguments.
+>>>>
+>>>> Regards,
+>>>>
+>>>> Weiwei Li
+>>>>
+>>>>> Regards,
+>>>>> Bin
+>>>>
+>>>>
+>>>>
+
+--------------83CD7DA0F9418DA76FDB66DC
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">在 2022/3/17 下午12:39, Alistair Francis
+      写道:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CAKmqyKOFJBKG7t0+6bxf+rzNDgMeOkjZoBok=6SUucOp5A0dvg@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">On Thu, Mar 17, 2022 at 12:10 PM Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a> wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+
+在 2022/3/17 上午6:35, Alistair Francis 写道:
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">On Thu, Mar 17, 2022 at 1:13 AM Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a> wrote:
+</pre>
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">
+</pre>
+            <blockquote type="cite">
+              <blockquote type="cite">
+                <pre class="moz-quote-pre" wrap="">           riscv_raise_exception(env, ret, GETPC());
+@@ -90,7 +90,7 @@ void helper_csrw_i128(CPURISCVState *env, int csr,
+   {
+       RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
+                                             int128_make128(srcl, srch),
+-                                          UINT128_MAX);
++                                          UINT128_MAX, true);
+
+       if (ret != RISCV_EXCP_NONE) {
+           riscv_raise_exception(env, ret, GETPC());
+@@ -104,7 +104,7 @@ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
+       Int128 rv = int128_zero();
+       RISCVException ret = riscv_csrrw_i128(env, csr, &amp;rv,
+                                             int128_make128(srcl, srch),
+-                                          int128_make128(maskl, maskh));
++                                          int128_make128(maskl, maskh), true);
+
+       if (ret != RISCV_EXCP_NONE) {
+           riscv_raise_exception(env, ret, GETPC());
+</pre>
+              </blockquote>
+              <pre class="moz-quote-pre" wrap="">I am afraid the adding of "bool write_op" argument was done on many
+functions, some of which do not look good to me, e.g.: predicate
+funcs. v1 is much better.*&gt;
+</pre>
+            </blockquote>
+            <pre class="moz-quote-pre" wrap="">Yeah, I agree adding  argument to predicate is not a good idea. However
+it seems that the csr(like seed)
+
+itself cannot  distinguish whether it's to be written or not except
+these two ways(in v1 and v2).
+
+Or we can take seed CSR as a special case  in riscv_csrrw_check since no
+other csr will limit itself
+
+to be accessed only with read-write instruction currently.
+
+</pre>
+            <blockquote type="cite">
+              <pre class="moz-quote-pre" wrap="">Or maybe, is that possible we do something in trans_csrrs() instead?
+</pre>
+            </blockquote>
+          </blockquote>
+          <pre class="moz-quote-pre" wrap="">That might be a better option. Unless there are other CSRs we expect
+to do this I think trans_csrr*() is probably the place to have this,
+similar to the `rd == 0` case.
+
+It could also go in helper_csrr() which would just be a simple if check.
+
+Alistair
+
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">Sorry. I don't understand what can be done in trans_csrr*(). As I said
+in last email: trans_csr*
+
+have made all the read operation will go to the helper_csrr. However
+helper_csrr share the progress
+
+of riscv_csrrw*  with helper_csrrw/helper_csrw to implement its function.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Yep, so the problem you are trying to solve is the seed CSR access right?</pre>
+    </blockquote>
+    <p>To solve the seed CSR access problem is my initial purpose.</p>
+    <p>The other purpose is to write back the  unmodified value back  as
+      the coments in trans_csrrs/trans_csrrc:</p>
+    <p>"<br>
+    </p>
+    <div style="color: #000000;background-color: #ffffff;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 18px;line-height: 24px;white-space: pre;"><div><span style="color: #008000;">     * Note that if rs1 specifies a register other than x0, holding</span></div><div><span style="color: #008000;">     * a zero value, the instruction will still attempt to write the</span></div><div><span style="color: #008000;">     * unmodified value back to the csr and will cause side effects.</span></div><div><span style="color: #008000;">     */</span></div><div><span style="color: #008000;">"
+</span></div></div>
+    <p>For this purpose,  we still should distinguish the two cases in
+      riscv_csrrw, since whether write_mask <br>
+    </p>
+    <p>is zero is used to distinguish read and write operation
+      currently.<br>
+    </p>
+    <blockquote type="cite"
+cite="mid:CAKmqyKOFJBKG7t0+6bxf+rzNDgMeOkjZoBok=6SUucOp5A0dvg@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">
+
+"The seed CSR must be accessed with a read-write instruction. A
+read-only instruction such as CSRRS/CSRRC with rs1=x0 or CSRRSI/CSRRCI
+with uimm=0 will raise an illegal instruction exception. The write
+value (in rs1 or uimm) must be ignored by implementations. The purpose
+of the write is to signal polling and flushing."
+
+So trans_csr*() probably isn't the right place, but you could do the
+check in helper_csr*()
+
+helper_csrr() is only called from do_csrr(), which should only be
+called on an invalid access for the seed CSR.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+The truely question is that helper_csrr will call riscv_csrrw*with
+write_mask = zero, new_value=zero,
+
+which cannot distinguished from the call from helper_csrrw of which its
+write_mask all can be zero
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Agreed. But helper_csrrw() isn't called if rs1=x0 or uimm=0. So if
+helper_csrrw() is called no matter the write mask then you should be
+fine.
+
+So a simple:
+if (csr == CSR_SEED) {
+    riscv_raise_exception()
+}
+
+in helper_csrr() and helper_csrw() should be fine. Or am I missing something?</pre>
+    </blockquote>
+    <p>It's OK to do this to solve the seed csr problem. Maybe it's
+      unnecessary to do this in helper_csrw since the spec</p>
+    <p>seems not specify the case that rd = x0 to raise an illegal
+      instruction exception.</p>
+    <p>Regards,</p>
+    <p>Weiwei Li<br>
+    </p>
+    <blockquote type="cite"
+cite="mid:CAKmqyKOFJBKG7t0+6bxf+rzNDgMeOkjZoBok=6SUucOp5A0dvg@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">
+
+Alistair
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+(origin from trans_csrrs/trans_csrrc when rs1 is not x0 and the value of
+rs1 reg is zero).
+
+Regards,
+
+Weiwei Li
+
+
+</pre>
+        <blockquote type="cite">
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">The read and write operation in trans_csr*  have been truely
+distinguished in original code:
+
+all the read operation will go to  the helper_csrr,  write to
+helper_csrrw, read/write to helper_csrrw.
+
+However, they all go to the same progress  riscv_csrrw* in the helper
+with different arguments.
+
+Regards,
+
+Weiwei Li
+
+</pre>
+            <blockquote type="cite">
+              <pre class="moz-quote-pre" wrap="">Regards,
+Bin
+</pre>
+            </blockquote>
+            <pre class="moz-quote-pre" wrap="">
+
+
+
+</pre>
+          </blockquote>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">
+</pre>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------83CD7DA0F9418DA76FDB66DC--
 
 
