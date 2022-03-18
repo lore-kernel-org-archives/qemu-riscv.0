@@ -1,69 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nV2BV-0004nR-BV
-	for mharc-qemu-riscv@gnu.org; Thu, 17 Mar 2022 22:17:45 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:56944)
+	id 1nV46C-0004ie-G9
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Mar 2022 00:20:24 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44034)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nV2BT-0004hA-79; Thu, 17 Mar 2022 22:17:43 -0400
-Received: from [2607:f8b0:4864:20::12b] (port=41567
- helo=mail-il1-x12b.google.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nV2BR-0001UE-Rr; Thu, 17 Mar 2022 22:17:42 -0400
-Received: by mail-il1-x12b.google.com with SMTP id b9so5000842ila.8;
- Thu, 17 Mar 2022 19:17:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=FU8aQW3ScKD8zKIpN8izTE70fNJXm77kNkP7juKBRho=;
- b=GSGZaIBw811oV6PMm6sMG531y5Z+MVHgNlBAIyvv+yFtJp1cGxkRBuq1bLWN20fwcH
- NGRq5JTV9G7uL+TmOjNseztWWDS7vVq4DQ4K1jNmcO3VKkqWZhH5lgEifIyH6t5x70Rr
- svtowZRYWRlYHp0T9TJTiWwFFQRI4/wbWE7/TniPhSzx053FpmP8Qsvy7SL8GjpmxwgZ
- Rz+m0MfAKEF2tszK6Y6dvt0y/3d9lCzZi6+WnS85sQ2SdhFzPNHD49ewImV381qZ5II7
- Wl0tgqWuBDUw5FxA0f6eaCQwgjrWgRO8LWtqYXdjcn1weFQGlTm9QYxBuerMuRBxTavl
- pZ2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=FU8aQW3ScKD8zKIpN8izTE70fNJXm77kNkP7juKBRho=;
- b=67JGVzUu9wJjynb/rLFOV0S+lttvdEIOKOBMdNsAmUAByNfIIk1NRdKbd6ytEeiCJs
- bhG5pqmzIbxZJMwjsKs+iWdc0urdoilrWXRNrdNZBZ35BG4UJc3s7ws2HSnrQ0eCA5KB
- y+rQ1P23a8HRpFtFwMkBB/oanqcY1/VYH4aOY5sAtSjUsnthJyQpFlnWNRNG8K8qx1yj
- vPuQ6hy1PuhRzE+mXaFlXW0Nz/ukxB0XXBm4wOI6EDwbVHRY1rwtPkMS4sYruUGOPIA2
- un5mpzY5lLFnDlLNa9f9cnidIynJhIFm6If4qaOxprSfh8M2eNMOB/GPPHdGw8rGfTku
- bs0A==
-X-Gm-Message-State: AOAM53148pA0gndIqxpO95sxwQBnktbYdPg7IxNxyU/rzqq3UOWGi73y
- 5+j3UiYRJauySINUslV4HMBhgM5Vmh1hUh2HXHM=
-X-Google-Smtp-Source: ABdhPJz9jWCVxXbE4OjgvrLV0YwGKMUq990A/P9R6ItzKbPIHd2s/FCaYzl1F4mXag4/j04S8pjJmO90ec7GGozz8yw=
-X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
- u18-20020a926012000000b002bdfb5fd627mr3420772ilb.86.1647569860404; Thu, 17
- Mar 2022 19:17:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nV45z-0004eU-HG; Fri, 18 Mar 2022 00:20:13 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84]:56892 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1nV45t-0001mD-Ft; Fri, 18 Mar 2022 00:20:10 -0400
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-05 (Coremail) with SMTP id zQCowABHKfJmCDRijsoBBA--.29102S2;
+ Fri, 18 Mar 2022 12:19:51 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v9 00/14] support subsets of scalar crypto extension
+Date: Fri, 18 Mar 2022 12:19:30 +0800
+Message-Id: <20220318041944.19859-1-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20220315065529.62198-1-bmeng.cn@gmail.com>
- <20220315065529.62198-7-bmeng.cn@gmail.com>
-In-Reply-To: <20220315065529.62198-7-bmeng.cn@gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 18 Mar 2022 12:17:14 +1000
-Message-ID: <CAKmqyKOmD5ew=7zLVh0uDwBM2g0ofctOoKXd+5UZq55thSp7xw@mail.gmail.com>
-Subject: Re: [PATCH v4 6/7] target/riscv: cpu: Enable native debug feature
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12b
- (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12b;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12b.google.com
-X-Spam_score_int: -3
-X-Spam_score: -0.4
-X-Spam_bar: /
-X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: zQCowABHKfJmCDRijsoBBA--.29102S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAFy7KrW5uF17GFy8ur1fCrg_yoWrXryrpr
+ s5C3yYkrZ8J397Gryft3W8Ar15JFs5Wr4rJwn3Jw1kJ39xJrWrJFZak3WYkF1UJF18Wr12
+ 93WUAr13ua1UAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
+ 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+ 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+ 0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
+ 8cxan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
+ 8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8
+ ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
+ 0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AK
+ xVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvj
+ fUoOJ5UUUUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,45 +62,106 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2022 02:17:43 -0000
+X-List-Received-Date: Fri, 18 Mar 2022 04:20:13 -0000
 
-On Tue, Mar 15, 2022 at 5:02 PM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> From: Bin Meng <bin.meng@windriver.com>
->
-> Turn on native debug feature by default for all CPUs.
->
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+This patchset implements RISC-V scalar crypto extension v1.0.0 version instructions. 
+Partial instructions are reused from B-extension.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Specification:
+https://github.com/riscv/riscv-crypto
 
-Alistair
+The port is available here:
+https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v9
 
-> ---
->
-> (no changes since v3)
->
-> Changes in v3:
-> - enable debug feature by default for all CPUs
->
->  target/riscv/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ba9cc3bcd6..08266b163d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -788,7 +788,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, false),
-> +    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
->
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> --
-> 2.25.1
->
->
+To test rvk implementation, specify cpu argument with 'zks=true,zkn=true' or "zbkb=true,zbkc=true,zbkx=true,zknd=true,zkne=true,zknh=true,zksed=true,zksh=true,zkr=true" to enable K-extension support. This implementation can pass the ACT tests for K with our extended act support for qemu (available at https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v9-with-act)
+
+Review status:
+patch 1~9 and 14 are acked or reviewed by Alistair Francis
+patch 2~11 are reviewed by Richard Henderson
+patch 5 is reviewed by Philippe Mathieu-Daudé
+
+v9:
+* check whether seed is accessed by a read-write instruction in helper_csrr.
+* fix disas for partial scalar crypto instructions
+* rebase on https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg00156.html
+
+v8:
+* replace large macro for trans function of sha256/512 instructions with parameters to gen_sha* function in patch 8,9,10
+* fix tcg_const_tl to tcg_constant_tl
+* fix rmw_seed function
+
+v7:
+* reuse gen_unary/gen_arith to simplify trans_* functions
+* replace DEF_HELPER_* with DEF_HEPER_FLAG_*
+* move aes64 related macros from patch 6 to patch 7
+* create common helper gen_aes32_sm4 for aes32 and sm4 related instructions
+* replace bs with shamt (bs << 3)
+* optimize trans function for sha256, sha512 and sm4 instructions to be generated inline
+
+v6:
+* add reviewed-by tags
+* rebase on upstream
+
+v5:
+* split the big patches
+
+v4:
+* drop "x-" in exposed properties
+* delete unrelated changes
+
+v3:
+* add extension check for SEED csr access
+
+v2:
+* optimize implementation for brev8, xperm, zip, unzip
+* use aes related sbox array from crypto/aes.h
+* move sm4_sbox to crypto/sm4.c, and share it with target/arm
+
+Weiwei Li (14):
+  target/riscv: rvk: add cfg properties for zbk* and zk*
+  target/riscv: rvk: add support for zbkb extension
+  target/riscv: rvk: add support for zbkc extension
+  target/riscv: rvk: add support for zbkx extension
+  crypto: move sm4_sbox from target/arm
+  target/riscv: rvk: add support for zknd/zkne extension in RV32
+  target/riscv: rvk: add support for zkne/zknd extension in RV64
+  target/riscv: rvk: add support for sha256 related instructions in zknh
+    extension
+  target/riscv: rvk: add support for sha512 related instructions for
+    RV32 in zknh extension
+  target/riscv: rvk: add support for sha512 related instructions for
+    RV64 in zknh extension
+  target/riscv: rvk: add support for zksed/zksh extension
+  target/riscv: rvk: add CSR support for Zkr
+  disas/riscv.c: rvk: add disas support for Zbk* and Zk* instructions
+  target/riscv: rvk: expose zbk* and zk* properties
+
+ crypto/meson.build                      |   1 +
+ crypto/sm4.c                            |  49 +++
+ disas/riscv.c                           | 173 ++++++++++-
+ include/crypto/sm4.h                    |   6 +
+ target/arm/crypto_helper.c              |  36 +--
+ target/riscv/bitmanip_helper.c          |  80 +++++
+ target/riscv/cpu.c                      |  36 +++
+ target/riscv/cpu.h                      |  13 +
+ target/riscv/cpu_bits.h                 |   9 +
+ target/riscv/crypto_helper.c            | 302 +++++++++++++++++++
+ target/riscv/csr.c                      |  68 +++++
+ target/riscv/helper.h                   |  22 ++
+ target/riscv/insn32.decode              |  97 ++++--
+ target/riscv/insn_trans/trans_rvb.c.inc | 116 +++++++-
+ target/riscv/insn_trans/trans_rvk.c.inc | 380 ++++++++++++++++++++++++
+ target/riscv/meson.build                |   3 +-
+ target/riscv/op_helper.c                |   9 +
+ target/riscv/pmp.h                      |   8 +-
+ target/riscv/translate.c                |   8 +
+ 19 files changed, 1345 insertions(+), 71 deletions(-)
+ create mode 100644 crypto/sm4.c
+ create mode 100644 include/crypto/sm4.h
+ create mode 100644 target/riscv/crypto_helper.c
+ create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+
+-- 
+2.17.1
+
 
