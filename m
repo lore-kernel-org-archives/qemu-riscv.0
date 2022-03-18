@@ -1,33 +1,33 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nV46E-0004jy-3Y
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Mar 2022 00:20:26 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:44020)
+	id 1nV46O-00053g-EI
+	for mharc-qemu-riscv@gnu.org; Fri, 18 Mar 2022 00:20:36 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:44134)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nV45z-0004eP-91; Fri, 18 Mar 2022 00:20:12 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:57014 helo=cstnet.cn)
+ id 1nV46I-0004s2-NI; Fri, 18 Mar 2022 00:20:30 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84]:57054 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nV45t-0001nE-2m; Fri, 18 Mar 2022 00:20:10 -0400
+ id 1nV46D-0001wA-Hm; Fri, 18 Mar 2022 00:20:30 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowABHKfJmCDRijsoBBA--.29102S12;
+ by APP-05 (Coremail) with SMTP id zQCowABHKfJmCDRijsoBBA--.29102S13;
  Fri, 18 Mar 2022 12:19:59 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v9 10/14] target/riscv: rvk: add support for sha512 related
- instructions for RV64 in zknh extension
-Date: Fri, 18 Mar 2022 12:19:40 +0800
-Message-Id: <20220318041944.19859-11-liweiwei@iscas.ac.cn>
+Subject: [PATCH v9 11/14] target/riscv: rvk: add support for zksed/zksh
+ extension
+Date: Fri, 18 Mar 2022 12:19:41 +0800
+Message-Id: <20220318041944.19859-12-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220318041944.19859-1-liweiwei@iscas.ac.cn>
 References: <20220318041944.19859-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: zQCowABHKfJmCDRijsoBBA--.29102S12
-X-Coremail-Antispam: 1UD129KBjvJXoWxGryDCw1DKF1UXF1rJw1kKrg_yoW5ZF1UpF
- 18K34UWFWkJFyfAa9xtF15ZF43uFs7C3y5t3sxtwn5Ca15Ja1kJ3yYk3yakrsFqF9F9FyY
- kFWkCa45KrWvq3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowABHKfJmCDRijsoBBA--.29102S13
+X-Coremail-Antispam: 1UD129KBjvJXoWxGFyUuw4ktr45Cr1kWFWrAFb_yoW7JrykpF
+ 1FkrWUCFW8JFyfZa1SyF15Z343Ars7uryjv39ay3yrWayYq3yrAw1jkw4akF45XFykur1j
+ ka1DAFyakr4Iq3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -63,92 +63,155 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2022 04:20:13 -0000
+X-List-Received-Date: Fri, 18 Mar 2022 04:20:31 -0000
 
- - add sha512sum0, sha512sig0, sha512sum1 and sha512sig1 instructions
+ - add sm3p0, sm3p1, sm4ed and sm4ks instructions
 
-Co-authored-by: Zewen Ye <lustrew@foxmail.com>
+Co-authored-by: Ruibo Lu <luruibo2000@163.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/insn32.decode              |  5 +++
- target/riscv/insn_trans/trans_rvk.c.inc | 53 +++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+ target/riscv/crypto_helper.c            | 28 ++++++++++++
+ target/riscv/helper.h                   |  3 ++
+ target/riscv/insn32.decode              |  6 +++
+ target/riscv/insn_trans/trans_rvk.c.inc | 58 +++++++++++++++++++++++++
+ 4 files changed, 95 insertions(+)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 02a0c71890..d9ebb138d1 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -868,3 +868,8 @@ sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
- sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
- sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
- sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
-+# *** RV64 Zknh Standard Extension ***
-+sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
-+sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
-+sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
-+sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-index bb89a53f52..b1ce4f27cf 100644
---- a/target/riscv/insn_trans/trans_rvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -267,3 +267,56 @@ static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
-     REQUIRE_ZKNH(ctx);
-     return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64, 3, 6, 19);
+diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
+index cb4783a1e9..2ef30281b1 100644
+--- a/target/riscv/crypto_helper.c
++++ b/target/riscv/crypto_helper.c
+@@ -271,4 +271,32 @@ target_ulong HELPER(aes64im)(target_ulong rs1)
+ 
+     return result;
  }
 +
-+static bool gen_sha512_rv64(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
-+                            void (*func)(TCGv_i64, TCGv_i64, int64_t),
-+                            int64_t num1, int64_t num2, int64_t num3)
++target_ulong HELPER(sm4ed)(target_ulong rs1, target_ulong rs2,
++                           target_ulong shamt)
++{
++    uint32_t sb_in = (uint8_t)(rs2 >> shamt);
++    uint32_t sb_out = (uint32_t)sm4_sbox[sb_in];
++
++    uint32_t x = sb_out ^ (sb_out << 8) ^ (sb_out << 2) ^ (sb_out << 18) ^
++                 ((sb_out & 0x3f) << 26) ^ ((sb_out & 0xC0) << 10);
++
++    uint32_t rotl = rol32(x, shamt);
++
++    return sext32_xlen(rotl ^ (uint32_t)rs1);
++}
++
++target_ulong HELPER(sm4ks)(target_ulong rs1, target_ulong rs2,
++                           target_ulong shamt)
++{
++    uint32_t sb_in = (uint8_t)(rs2 >> shamt);
++    uint32_t sb_out = sm4_sbox[sb_in];
++
++    uint32_t x = sb_out ^ ((sb_out & 0x07) << 29) ^ ((sb_out & 0xFE) << 7) ^
++                 ((sb_out & 0x01) << 23) ^ ((sb_out & 0xF8) << 13);
++
++    uint32_t rotl = rol32(x, shamt);
++
++    return sext32_xlen(rotl ^ (uint32_t)rs1);
++}
+ #undef sext32_xlen
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 0df0a05b11..863e0edd84 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1129,3 +1129,6 @@ DEF_HELPER_FLAGS_2(aes64dsm, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_2(aes64ks2, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_2(aes64ks1i, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
++
++DEF_HELPER_FLAGS_3(sm4ed, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
++DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index d9ebb138d1..4033565393 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -873,3 +873,9 @@ sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
+ sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
+ sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
+ sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
++# *** RV32 Zksh Standard Extension ***
++sm3p0       00 01000 01000 ..... 001 ..... 0010011 @r2
++sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
++# *** RV32 Zksed Standard Extension ***
++sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
++sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
+diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
+index b1ce4f27cf..b5e946566a 100644
+--- a/target/riscv/insn_trans/trans_rvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvk.c.inc
+@@ -35,6 +35,18 @@
+     }                                           \
+ } while (0)
+ 
++#define REQUIRE_ZKSED(ctx) do {                 \
++    if (!ctx->cfg_ptr->ext_zksed) {             \
++        return false;                           \
++    }                                           \
++} while (0)
++
++#define REQUIRE_ZKSH(ctx) do {                  \
++    if (!ctx->cfg_ptr->ext_zksh) {              \
++        return false;                           \
++    }                                           \
++} while (0)
++
+ static bool gen_aes32_sm4(DisasContext *ctx, arg_k_aes *a,
+                           void (*func)(TCGv, TCGv, TCGv, TCGv))
+ {
+@@ -320,3 +332,49 @@ static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
+     REQUIRE_ZKNH(ctx);
+     return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 14, 18, 41);
+ }
++
++/* SM3 */
++static bool gen_sm3(DisasContext *ctx, arg_r2 *a, int32_t b, int32_t c)
 +{
 +    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, ext);
-+    TCGv_i64 t0 = tcg_temp_new_i64();
-+    TCGv_i64 t1 = tcg_temp_new_i64();
-+    TCGv_i64 t2 = tcg_temp_new_i64();
++    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
++    TCGv_i32 t0 = tcg_temp_new_i32();
++    TCGv_i32 t1 = tcg_temp_new_i32();
 +
-+    tcg_gen_extu_tl_i64(t0, src1);
-+    tcg_gen_rotri_i64(t1, t0, num1);
-+    tcg_gen_rotri_i64(t2, t0, num2);
-+    tcg_gen_xor_i64(t1, t1, t2);
-+    func(t2, t0, num3);
-+    tcg_gen_xor_i64(t1, t1, t2);
-+    tcg_gen_trunc_i64_tl(dest, t1);
-+
++    tcg_gen_trunc_tl_i32(t0, src1);
++    tcg_gen_rotli_i32(t1, t0, b);
++    tcg_gen_xor_i32(t1, t0, t1);
++    tcg_gen_rotli_i32(t0, t0, c);
++    tcg_gen_xor_i32(t1, t1, t0);
++    tcg_gen_ext_i32_tl(dest, t1);
 +    gen_set_gpr(ctx, a->rd, dest);
-+    tcg_temp_free_i64(t0);
-+    tcg_temp_free_i64(t1);
-+    tcg_temp_free_i64(t2);
++
++    tcg_temp_free_i32(t0);
++    tcg_temp_free_i32(t1);
 +    return true;
 +}
 +
-+static bool trans_sha512sig0(DisasContext *ctx, arg_sha512sig0 *a)
++static bool trans_sm3p0(DisasContext *ctx, arg_sm3p0 *a)
 +{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_shri_i64, 1, 8, 7);
++    REQUIRE_ZKSH(ctx);
++    return gen_sm3(ctx, a, 9, 17);
 +}
 +
-+static bool trans_sha512sig1(DisasContext *ctx, arg_sha512sig1 *a)
++static bool trans_sm3p1(DisasContext *ctx, arg_sm3p1 *a)
 +{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_shri_i64, 19, 61, 6);
++    REQUIRE_ZKSH(ctx);
++    return gen_sm3(ctx, a, 15, 23);
 +}
 +
-+static bool trans_sha512sum0(DisasContext *ctx, arg_sha512sum0 *a)
++/* SM4 */
++static bool trans_sm4ed(DisasContext *ctx, arg_sm4ed *a)
 +{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 28, 34, 39);
++    REQUIRE_ZKSED(ctx);
++    return gen_aes32_sm4(ctx, a, gen_helper_sm4ed);
 +}
 +
-+static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
++static bool trans_sm4ks(DisasContext *ctx, arg_sm4ks *a)
 +{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZKNH(ctx);
-+    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 14, 18, 41);
++    REQUIRE_ZKSED(ctx);
++    return gen_aes32_sm4(ctx, a, gen_helper_sm4ks);
 +}
 -- 
 2.17.1
