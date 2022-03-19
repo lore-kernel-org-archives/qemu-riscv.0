@@ -1,42 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nVJeu-0007eH-4e
-	for mharc-qemu-riscv@gnu.org; Fri, 18 Mar 2022 16:57:16 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:58078)
+	id 1nVYXs-0004wa-Ff
+	for mharc-qemu-riscv@gnu.org; Sat, 19 Mar 2022 08:51:00 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:57512)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nVH6R-0001My-Bo; Fri, 18 Mar 2022 14:13:31 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:35974)
+ id 1nVYXe-0004n1-5E; Sat, 19 Mar 2022 08:50:46 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:35982)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nVH6O-0008NS-3X; Fri, 18 Mar 2022 14:13:31 -0400
+ id 1nVYXa-0003XP-U3; Sat, 19 Mar 2022 08:50:44 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 075C811EE5E;
- Fri, 18 Mar 2022 18:13:26 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 91C6511EEB5;
+ Sat, 19 Mar 2022 12:50:40 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Date: Thu, 17 Mar 2022 00:09:09 -0700
-Subject: [PATCH qemu] target/riscv: rvv: Add missing early exit condition for
- whole register load/store
+Date: Sat, 19 Mar 2022 12:50:39 +0000
 MIME-Version: 1.0
-Message-ID: <164762720573.18409.3931931227997483525-0@git.sr.ht>
+Subject: [PATCH qemu 00/13] Add tail agnostic behavior for rvv instructions
+Message-ID: <164769423983.18409.14760549429989700286-0@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 15
-X-Spam_score: 1.5
-X-Spam_bar: +
-X-Spam_report: (1.5 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_24_48=1.34,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 18 Mar 2022 16:57:14 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -48,50 +47,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Mar 2022 18:13:31 -0000
+X-List-Received-Date: Sat, 19 Mar 2022 12:50:48 -0000
 
-From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
+According to v-spec, tail agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of tail policies, qemu should be able to simulate the tail
+agnostic behavior as "set tail elements' bits to all 1s". An option
+'rvv_ta_all_1s' is added to enable the behavior, it is default as
+disabled.
 
-According to v-spec (section 7.9):
-The instructions operate with an effective vector length, evl=3DNFIELDS*VLEN/=
-EEW,
-regardless of current settings in vtype and vl. The usual property that no
-elements are written if vstart =E2=89=A5 vl does not apply to these instructi=
-ons.
-Instead, no elements are written if vstart =E2=89=A5 evl.
+eopXD (13):
+  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
+  target/riscv: rvv: Rename ambiguous esz
+  target/riscv: rvv: Early exit when vstart >= vl
+  target/riscv: rvv: Add tail agnostic for vv instructions
+  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
+  target/riscv: rvv: Add tail agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer merge and move
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector reduction instructions
+  target/riscv: rvv: Add tail agnostic for vector mask instructions
+  target/riscv: rvv: Add tail agnostic for vector permutation
+    instructions
 
-Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ target/riscv/cpu.c                      |    1 +
+ target/riscv/cpu.h                      |    2 +
+ target/riscv/cpu_helper.c               |    2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |   58 +
+ target/riscv/internals.h                |    5 +-
+ target/riscv/translate.c                |    2 +
+ target/riscv/vector_helper.c            | 1508 ++++++++++++++---------
+ 7 files changed, 961 insertions(+), 617 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
-s/trans_rvv.c.inc
-index 275fded6e4..4ea7e41e1a 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1121,6 +1121,10 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1=
-, uint32_t nf,
-                              gen_helper_ldst_whole *fn, DisasContext *s,
-                              bool is_store)
- {
-+    uint32_t evl =3D (s->cfg_ptr->vlen / 8) * nf / (1 << s->sew);
-+    TCGLabel *over =3D gen_new_label();
-+    tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
-+
-     TCGv_ptr dest;
-     TCGv base;
-     TCGv_i32 desc;
-@@ -1140,6 +1144,7 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1,=
- uint32_t nf,
-     if (!is_store) {
-         mark_vs_dirty(s);
-     }
-+    gen_set_label(over);
-=20
-     return true;
- }
---=20
+-- 
 2.34.1
 
