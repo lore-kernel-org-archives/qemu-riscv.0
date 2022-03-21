@@ -1,50 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nW5I4-0001px-Oi
-	for mharc-qemu-riscv@gnu.org; Sun, 20 Mar 2022 19:48:52 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:35360)
+	id 1nW5nd-0002bi-7w
+	for mharc-qemu-riscv@gnu.org; Sun, 20 Mar 2022 20:21:29 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:40404)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nW5I1-0001p4-Jy; Sun, 20 Mar 2022 19:48:50 -0400
-Received: from [2607:f8b0:4864:20::130] (port=33668
- helo=mail-il1-x130.google.com)
+ id 1nW5nV-0002ZH-Ha; Sun, 20 Mar 2022 20:21:22 -0400
+Received: from [2607:f8b0:4864:20::12f] (port=39482
+ helo=mail-il1-x12f.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nW5Hz-0002xR-Sw; Sun, 20 Mar 2022 19:48:49 -0400
-Received: by mail-il1-x130.google.com with SMTP id r2so9416244ilh.0;
- Sun, 20 Mar 2022 16:48:46 -0700 (PDT)
+ id 1nW5nT-0006LE-Vw; Sun, 20 Mar 2022 20:21:21 -0400
+Received: by mail-il1-x12f.google.com with SMTP id y7so2397942ilv.6;
+ Sun, 20 Mar 2022 17:21:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=nFjCQ9jHjQCujGQAULU0XTTWu4OKaaXuSje1wF9gAqo=;
- b=j+kUOC+MGG1QB4n3hsLrvQW5zCY+mLca/uwqkwuV3BQQfUmRuS2VbOyinKc6rtCYOd
- YC5Y8dMyJpo3JHp6q8OroFsyNFUcU6qZU3/hRglLaDGlmKDUDMgHWZLlClG+Aiz5jITd
- bU0kgtQbiqCt319QRo4u/XDaJ0GVRM4vv6qznDU/uSdGYt9qSv0fNKVrugZR0rfIUuOd
- HcG8o/aReJUKC3XnQ3K6BHW+S0yUJBazRhb5ZJj2LEipRitvnzVuu4Fxc0kOvUKP0HTp
- l9ljJhIToUy3tNoVqb6q0WiLjKGZd7Thy9gFse2KCT4pDxpfnglQFb5C5U7i2ue8ZDa9
- c8tg==
+ bh=i1ThPEmkMYxK1gTbRn8SRqAJAKq/gtMjb7SwTrDIymU=;
+ b=Fji6ByDyLYnSdZWUhzh6z7gmrCU2B6PiuKiPd9nt+1hdiWwdEvruz8wPqGQSrtt3Gf
+ 9KiVXjHZgIrbeK4FFVwB3M6dQHAyOoEJlRH5Ydic61RSx7EB8sQ+4fJdtThB9oKg0lwB
+ TIne/qZXH5D90uqJAqnL8+tqAYkbBbw4RZiI9ixprzRr81APLFCM7rlWMZLTFgkntVA4
+ OkGbxlNIt83NW3i5q/08kKRMulahXnrcUTiB0KN4nklooZMUo8lqX1cJcIQ2VNLNyfq9
+ QLc6d3RuElPnOlCbRXtQPIMfIGj4tuMmeby3vdGbYoCNOvE0ySDRKzkYd7/StahwAQC1
+ AUUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=nFjCQ9jHjQCujGQAULU0XTTWu4OKaaXuSje1wF9gAqo=;
- b=1LVY8iHFJjubBAVp5T4rQ4OwrcPU07v6fKpQsZQwzqSBuG9/XNnSCpqGdcB5hOaJ+4
- BKvAtltTFRrnXsB0z81zrWBelGpGCteg/LMTA5bAesR4vl1lwDw4EhFbF+y0I7OWI1ox
- pKiCQ/n3vuwpI/bELW+jvXBFPPJfLls2JFTICBDK7KTZ2GCB6UOgWOcSsG3YjXVIRHq1
- kERo319hNSK7kniVvESJNHO0BGsnC1CI96IU8UD/vExOyjrmz5yul+md8aG1s+NVLu5c
- 7OoeW5egLWVOJZpviuG0kylV4t3f52hhK41O4HfT59hsWzIktLZrHUlEZsDg3AnTmp1I
- S7FA==
-X-Gm-Message-State: AOAM5337QTkdKEoZOkcZ0uBFKgy1N0KDEjMoSzMSdJ3xS+3oUaokbJ7E
- CxKDYXfQZxdXpfPQol5mehtNVFN8/N6wh/cDkhs=
-X-Google-Smtp-Source: ABdhPJw9rO7Uc5n3Tnfv35IdN/p1JJk1d6VBQworMUcwAQ5hvAdhlLEpe0lXE7Ylacg8GUuvwWMS1TUaKPx0KQt9Fr4=
+ bh=i1ThPEmkMYxK1gTbRn8SRqAJAKq/gtMjb7SwTrDIymU=;
+ b=vo4UlcCm/XOizZFjXtszi8HibCwhF4/tjUi+UhFZkC9b8AKAM2mHPm36LcAfUw29M3
+ LiZAclqq1Cl4bUxku1tFwVPb2jsa3QFsEYtaMX5tI2KfObnOAgtn8vLaPmiuPQFvQlB4
+ PYycPgoHNBRRKx9NcB0fKtjYmLwmllvhCiTFhXdVQAJ2hUgJIbixL+K/5S9wbn8FU1ds
+ DCz4+HE3qJurbSQS87eH++G9IxIaDhJZsigyFXbt6feUWJ7GvjeSxmU4i2xGnMcNWBwv
+ Zqok6h/RoVX8EEpJUW1TVZPohhAHztXYOYHYVsPItREqCMAbdOUPlj5h3jkqggYJ7zGy
+ hboQ==
+X-Gm-Message-State: AOAM531i5GpznYKxc43WsonHa8QAq1w6FL6NHpyDYKWtVSV90ISy0InO
+ ffwF1E8syF/4/+JnZt8sSCXYl9ErBuy4pa/iccQ=
+X-Google-Smtp-Source: ABdhPJzKOvtIwXAZkgM9TAHWcnj6ZN8uRxsTeI7En8XMn7rCtb68ACI3lipZ5dMB6h2lwiCoDkheCASPIqT9n8PUYS0=
 X-Received: by 2002:a05:6e02:218a:b0:2c8:1bf8:e15e with SMTP id
- j10-20020a056e02218a00b002c81bf8e15emr2728697ila.55.1647820125880; Sun, 20
- Mar 2022 16:48:45 -0700 (PDT)
+ j10-20020a056e02218a00b002c81bf8e15emr2767101ila.55.1647822077955; Sun, 20
+ Mar 2022 17:21:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <164762720573.18409.3931931227997483525-0@git.sr.ht>
 In-Reply-To: <164762720573.18409.3931931227997483525-0@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 21 Mar 2022 09:48:20 +1000
-Message-ID: <CAKmqyKNbxh_zWiWwOEvJZ8YvGEoN-0pcy9itnYwvYa+eVVaiMA@mail.gmail.com>
+Date: Mon, 21 Mar 2022 10:20:52 +1000
+Message-ID: <CAKmqyKPZUUJf7D56nFHosNeCUueeS4srV_TYGBepriz3xOGyDg@mail.gmail.com>
 Subject: Re: [PATCH qemu] target/riscv: rvv: Add missing early exit condition
  for whole register load/store
 To: "~eopxd" <yueh.ting.chen@gmail.com>
@@ -54,10 +54,10 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::130
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12f
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::130;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x130.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -78,7 +78,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Mar 2022 23:48:50 -0000
+X-List-Received-Date: Mon, 21 Mar 2022 00:21:24 -0000
 
 On Sat, Mar 19, 2022 at 6:59 AM ~eopxd <eopxd@git.sr.ht> wrote:
 >
@@ -96,7 +96,9 @@ uctions.
 > Signed-off-by: eop Chen <eop.chen@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
