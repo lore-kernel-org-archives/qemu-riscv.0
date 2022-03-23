@@ -1,63 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nWvpV-0000I6-FQ
-	for mharc-qemu-riscv@gnu.org; Wed, 23 Mar 2022 03:54:53 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:48896)
+	id 1nWyvl-00053m-HV
+	for mharc-qemu-riscv@gnu.org; Wed, 23 Mar 2022 07:13:33 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:35578)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nWvpQ-0000Gv-Gn; Wed, 23 Mar 2022 03:54:48 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:48646 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nWvpM-00028D-0U; Wed, 23 Mar 2022 03:54:48 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAC3vkI60jpiRYkDBQ--.38288S2;
- Wed, 23 Mar 2022 15:54:34 +0800 (CST)
-Subject: Re: [PATCH qemu v3 00/14] Add tail agnostic behavior for rvv
- instructions
-To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: WeiWei Li <liweiwei@iscas.ac.cn>, Frank Chang <frank.chang@sifive.com>,
- eop Chen <eop.chen@sifive.com>, Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <164800788276.12449.15168787569124374586-0@git.sr.ht>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <ec87cb8d-423f-794e-0864-2f4f7cf483e2@iscas.ac.cn>
-Date: Wed, 23 Mar 2022 15:54:34 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <164800788276.12449.15168787569124374586-0@git.sr.ht>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowAC3vkI60jpiRYkDBQ--.38288S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxCrWDtrW7Cr1UWryfGry8Krg_yoW5XF1kpF
- 4kCa13GrZ5XrZrWw1SgF48Ar15tFZ3Gw4rJwnrJ34UJ39xtrWktF1kK34j9FnrJFyUWry7
- K3WDAr13Zws8ArDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUv014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
- 4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
- 67vIY487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3Jr1lIxAIcVC2z280aVAFwI0_
- Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VU1
- a9aPUUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1nWyvf-00053B-2V
+ for qemu-riscv@nongnu.org; Wed, 23 Mar 2022 07:13:27 -0400
+Received: from [2607:f8b0:4864:20::635] (port=41491
+ helo=mail-pl1-x635.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1nWyva-0007It-JS
+ for qemu-riscv@nongnu.org; Wed, 23 Mar 2022 07:13:26 -0400
+Received: by mail-pl1-x635.google.com with SMTP id j13so1183836plj.8
+ for <qemu-riscv@nongnu.org>; Wed, 23 Mar 2022 04:13:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=/nBwTzZoAqfE2DaZUbpvgceUUYSjkvKzw2P86oSeMZ4=;
+ b=cQNhQ81gA++kRISqEBu60YYymNy0woUIuvGT4yXUKLpQ7NTgmdwoQNoSklNWtB9crX
+ RIF8VgUE/DDeF1ma/IlIavHRJmBn9ev6FF0V+u3l1jqHA5DBkYL+drFujmMh7xhKWVy9
+ CNWpY0qqCoLIwc8V7vJYl6vd4Xhyb9u57Xsg4H2+8xHz8UMyYfbzs5K4JeQmpTnObwJi
+ FM4APTmpNSaY1H4iESV4ye9QgarJJjBLJVEJdRKH/ZdcdGLxAnLDqsB2ml88XP2wJgSa
+ rJLEErD+3oqLy7/tsyHISX0vc7/sPO8EnaC2bnxtCXAAU7FuEQjadTJGNN/NB07GIZ31
+ QS3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=/nBwTzZoAqfE2DaZUbpvgceUUYSjkvKzw2P86oSeMZ4=;
+ b=IoTXNtyRLPGuzj00tSJDI9IOSiWu6BDqRy7T/K78ZfIxM0nq1nLeDQnwDqZM8IVOpr
+ lwVRow+OC3gnb990oj1wfQZzqiT06zC66WV3LWXpLPXOLa5IS30q3x0AGzawMv6BKFB1
+ ifz6ZVKoV+qwnTT/O2cXjsV+cIPEj0lW83lrIcKpgGtg6ANRAq3AxLQ1ghbJzd1fuCDi
+ hfB+SlfGL5k6/1w4HuOZD4Eo1rWn+xOWesLQsDO3t1EExI0JyE4v5pB7E9AAQ2fWH7KM
+ ksB8tpdLqWx7haq5S6iTGMVM97KTlROzWtuEsQgxQeg+XcT8qNZ1EJtYvhrMS3GBUy0p
+ j8dg==
+X-Gm-Message-State: AOAM5325UTEv2qn92gkpM0MjQCCDAqS5GDjiayse0Z14I28E92lTxo3q
+ f4mckNGpqV4bPks8SiLIWrSFoQ==
+X-Google-Smtp-Source: ABdhPJxzz9F5SbCoXFjLn752LZXmJqFbpOEZodCa1JewesU8fMpFRY8T1fBGyLQF6JUqh+nwXV0D8g==
+X-Received: by 2002:a17:90b:4b8b:b0:1c6:452c:f76f with SMTP id
+ lr11-20020a17090b4b8b00b001c6452cf76fmr11016063pjb.28.1648034000496; 
+ Wed, 23 Mar 2022 04:13:20 -0700 (PDT)
+Received: from ThinkPad-T490.dc1.ventanamicro.com ([171.50.204.174])
+ by smtp.googlemail.com with ESMTPSA id
+ f31-20020a631f1f000000b003742e45f7d7sm19798002pgf.32.2022.03.23.04.13.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Mar 2022 04:13:19 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+	alistair.francis@wdc.com
+Subject: [RFC PATCH v2 0/4] RISC-V Smstateen support
+Date: Wed, 23 Mar 2022 16:43:05 +0530
+Message-Id: <20220323111309.9109-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.17.1
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::635
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -6
+X-Spam_score: -0.7
+X-Spam_bar: /
+X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,80 +78,37 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Mar 2022 07:54:48 -0000
+X-List-Received-Date: Wed, 23 Mar 2022 11:13:27 -0000
+
+This series adds support for the Smstateen specification which provides
+a mechanism plug potential covert channels which are opened by extensions
+that add to processor state that may not get context-switched. Currently
+access to AIA registers, *envcfg registers and floating point(fcsr) is
+controlled via smstateen.
+
+This series depends on the following series from Atish Patra:
+
+https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg00031.html
+https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg00142.html
 
 
-在 2022/3/23 上午11:58, ~eopxd 写道:
-> According to v-spec, tail agnostic behavior can be either kept as
-> undisturbed or set elements' bits to all 1s. To distinguish the
-> difference of tail policies, QEMU should be able to simulate the tail
-> agnostic behavior as "set tail elements' bits to all 1s". An option
-> 'rvv_ta_all_1s' is added to enable the behavior, it is default as
-> disabled.
->
-> There are multiple possibility for agnostic elements according to
-> v-spec. The main intent of this patch-set tries to add option that
-> can distinguish between tail policies. Setting agnostic elements to
-> all 1s makes things simple and allow QEMU to express this.
->
-> We may explore other possibility of agnostic behavior by adding
-> other options in the future. Please understand that this patch-set
-> is limited.
->
-> v2 updates:
-> - Addressed comments from Weiwei Li
-> - Added commit tail agnostic on load / store instructions (which
->     I forgot to include into the patch-set)
->
-> v3 updates:
-> - Missed the very 1st commit, adding it back
+Changes in v2:
+- Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
 
-I find  some trans_* function for vector instructions are optimized  to 
-use tcg_gen_gvec_*
+Mayuresh Chitale (4):
+  target/riscv: Add smstateen support
+  target/riscv: smstateen check for h/senvcfg
+  target/riscv: smstateen check for fcsr
+  target/riscv: smstateen check for AIA/IMSIC
 
-directly when vl = vlmax (vl_eq_vlmax is true). However, as discussed 
-before,
+ target/riscv/cpu.c      |   2 +
+ target/riscv/cpu.h      |   4 +
+ target/riscv/cpu_bits.h |  36 +++
+ target/riscv/csr.c      | 554 +++++++++++++++++++++++++++++++++++++++-
+ target/riscv/machine.c  |  22 +-
+ 5 files changed, 614 insertions(+), 4 deletions(-)
 
-tail elements may pass vlmax when lmul < 0.
-
-So additional tail elements  may also need to overwrite here.
-
-Regards,
-
-Weiwei Li
-
->
-> eopXD (14):
->    target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
->    target/riscv: rvv: Rename ambiguous esz
->    target/riscv: rvv: Early exit when vstart >= vl
->    target/riscv: rvv: Add tail agnostic for vv instructions
->    target/riscv: rvv: Add tail agnostic for vector load / store
->      instructions
->    target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
->    target/riscv: rvv: Add tail agnostic for vector integer shift
->      instructions
->    target/riscv: rvv: Add tail agnostic for vector integer comparison
->      instructions
->    target/riscv: rvv: Add tail agnostic for vector integer merge and move
->      instructions
->    target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
->      instructions
->    target/riscv: rvv: Add tail agnostic for vector floating-point
->      instructions
->    target/riscv: rvv: Add tail agnostic for vector reduction instructions
->    target/riscv: rvv: Add tail agnostic for vector mask instructions
->    target/riscv: rvv: Add tail agnostic for vector permutation
->      instructions
->
->   target/riscv/cpu.c                      |    1 +
->   target/riscv/cpu.h                      |    2 +
->   target/riscv/cpu_helper.c               |    2 +
->   target/riscv/insn_trans/trans_rvv.c.inc |   66 +
->   target/riscv/internals.h                |    5 +-
->   target/riscv/translate.c                |    2 +
->   target/riscv/vector_helper.c            | 1571 ++++++++++++++---------
->   7 files changed, 1026 insertions(+), 623 deletions(-)
->
+-- 
+2.17.1
 
 
