@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nWs8k-0005On-EL
+	id 1nWs8k-0005QY-Sa
 	for mharc-qemu-riscv@gnu.org; Tue, 22 Mar 2022 23:58:30 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:57356)
+Received: from eggs.gnu.org ([209.51.188.92]:57402)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nWs8S-0004vv-6e; Tue, 22 Mar 2022 23:58:13 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:36440)
+ id 1nWs8U-0004xv-W1; Tue, 22 Mar 2022 23:58:15 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:36446)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nWs8N-0005xU-4B; Tue, 22 Mar 2022 23:58:11 -0400
+ id 1nWs8S-0005yS-19; Tue, 22 Mar 2022 23:58:14 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 18A0D11F033;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id A5C0411F102;
  Wed, 23 Mar 2022 03:58:04 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v3 06/14] target/riscv: rvv: Add tail agnostic for vx,
- vvm, vxm instructions
-Message-ID: <164800788276.12449.15168787569124374586-6@git.sr.ht>
+Subject: [PATCH qemu v3 10/14] target/riscv: rvv: Add tail agnostic for vector
+ fix-point arithmetic instructions
+Message-ID: <164800788276.12449.15168787569124374586-10@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <164800788276.12449.15168787569124374586-0@git.sr.ht>
@@ -48,533 +48,462 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Wed, 23 Mar 2022 03:58:16 -0000
-X-Original-Date: Sun, 06 Mar 2022 23:32:57 -0800
-X-List-Received-Date: Wed, 23 Mar 2022 03:58:16 -0000
+Date: Wed, 23 Mar 2022 03:58:17 -0000
+X-Original-Date: Mon, 07 Mar 2022 02:04:21 -0800
+X-List-Received-Date: Wed, 23 Mar 2022 03:58:17 -0000
 
 From: eopXD <eop.chen@sifive.com>
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc |   5 +
- target/riscv/vector_helper.c            | 311 +++++++++++++-----------
- 2 files changed, 178 insertions(+), 138 deletions(-)
+ target/riscv/vector_helper.c | 220 ++++++++++++++++++-----------------
+ 1 file changed, 114 insertions(+), 106 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
-s/trans_rvv.c.inc
-index e503c31111..4e885da187 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1287,6 +1287,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint=
-32_t vs2, uint32_t vm,
-=20
-     data =3D FIELD_DP32(data, VDATA, VM, vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
-                                       s->cfg_ptr->vlen / 8, data));
-=20
-@@ -1452,6 +1453,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint=
-32_t vs2, uint32_t vm,
-=20
-     data =3D FIELD_DP32(data, VDATA, VM, vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
-                                       s->cfg_ptr->vlen / 8, data));
-=20
-@@ -1534,6 +1536,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
-=20
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1615,6 +1618,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
-=20
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1693,6 +1697,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
-            \
-                                                                    \
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);               \
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env,           \
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 082b12ad1d..df1c79d8d3 100644
+index 77a5629b73..661e78797f 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -861,10 +861,12 @@ RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
-=20
- static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-                        CPURISCVState *env, uint32_t desc,
--                       opivx2_fn fn)
-+                       opivx2_fn fn, uint32_t esz)
+@@ -2103,10 +2103,12 @@ static inline void
+ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+              CPURISCVState *env,
+              uint32_t desc,
+-             opivv2_rm_fn *fn)
++             opivv2_rm_fn *fn, uint32_t esz)
  {
      uint32_t vm =3D vext_vm(desc);
      uint32_t vl =3D env->vl;
 +    uint32_t vlmax =3D vext_get_total_elem(env_archcpu(env), env->vtype);
 +    uint32_t vta =3D vext_vta(desc);
-     uint32_t i;
 =20
-     for (i =3D env->vstart; i < vl; i++) {
-@@ -874,30 +876,32 @@ static void do_vext_vx(void *vd, void *v0, target_long =
-s1, void *vs2,
-         fn(vd, s1, vs2, i);
+     switch (env->vxrm) {
+     case 0: /* rnu */
+@@ -2126,15 +2128,17 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+                      env, vl, vm, 3, fn);
+         break;
      }
-     env->vstart =3D 0;
 +    /* set tail elements to 1s */
 +    vext_set_elems_1s_fns[ctzl(esz)](vd, vta, vl, vl * esz, vlmax * esz);
  }
 =20
- /* generate the helpers for OPIVX */
--#define GEN_VEXT_VX(NAME)                                 \
-+#define GEN_VEXT_VX(NAME, ESZ)                            \
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
-     do_vext_vx(vd, v0, s1, vs2, env, desc,                \
--               do_##NAME);                                \
--}
--
--GEN_VEXT_VX(vadd_vx_b)
--GEN_VEXT_VX(vadd_vx_h)
--GEN_VEXT_VX(vadd_vx_w)
--GEN_VEXT_VX(vadd_vx_d)
--GEN_VEXT_VX(vsub_vx_b)
--GEN_VEXT_VX(vsub_vx_h)
--GEN_VEXT_VX(vsub_vx_w)
--GEN_VEXT_VX(vsub_vx_d)
--GEN_VEXT_VX(vrsub_vx_b)
--GEN_VEXT_VX(vrsub_vx_h)
--GEN_VEXT_VX(vrsub_vx_w)
--GEN_VEXT_VX(vrsub_vx_d)
-+               do_##NAME, ESZ);                           \
-+}
-+
-+GEN_VEXT_VX(vadd_vx_b, 1)
-+GEN_VEXT_VX(vadd_vx_h, 2)
-+GEN_VEXT_VX(vadd_vx_w, 4)
-+GEN_VEXT_VX(vadd_vx_d, 8)
-+GEN_VEXT_VX(vsub_vx_b, 1)
-+GEN_VEXT_VX(vsub_vx_h, 2)
-+GEN_VEXT_VX(vsub_vx_w, 4)
-+GEN_VEXT_VX(vsub_vx_d, 8)
-+GEN_VEXT_VX(vrsub_vx_b, 1)
-+GEN_VEXT_VX(vrsub_vx_h, 2)
-+GEN_VEXT_VX(vrsub_vx_w, 4)
-+GEN_VEXT_VX(vrsub_vx_d, 8)
-=20
- void HELPER(vec_rsubs8)(void *d, void *a, uint64_t b, uint32_t desc)
- {
-@@ -1025,30 +1029,30 @@ RVVCALL(OPIVX2, vwadd_wx_w, WOP_WSSS_W, H8, H4, DO_AD=
-D)
- RVVCALL(OPIVX2, vwsub_wx_b, WOP_WSSS_B, H2, H1, DO_SUB)
- RVVCALL(OPIVX2, vwsub_wx_h, WOP_WSSS_H, H4, H2, DO_SUB)
- RVVCALL(OPIVX2, vwsub_wx_w, WOP_WSSS_W, H8, H4, DO_SUB)
--GEN_VEXT_VX(vwaddu_vx_b)
--GEN_VEXT_VX(vwaddu_vx_h)
--GEN_VEXT_VX(vwaddu_vx_w)
--GEN_VEXT_VX(vwsubu_vx_b)
--GEN_VEXT_VX(vwsubu_vx_h)
--GEN_VEXT_VX(vwsubu_vx_w)
--GEN_VEXT_VX(vwadd_vx_b)
--GEN_VEXT_VX(vwadd_vx_h)
--GEN_VEXT_VX(vwadd_vx_w)
--GEN_VEXT_VX(vwsub_vx_b)
--GEN_VEXT_VX(vwsub_vx_h)
--GEN_VEXT_VX(vwsub_vx_w)
--GEN_VEXT_VX(vwaddu_wx_b)
--GEN_VEXT_VX(vwaddu_wx_h)
--GEN_VEXT_VX(vwaddu_wx_w)
--GEN_VEXT_VX(vwsubu_wx_b)
--GEN_VEXT_VX(vwsubu_wx_h)
--GEN_VEXT_VX(vwsubu_wx_w)
--GEN_VEXT_VX(vwadd_wx_b)
--GEN_VEXT_VX(vwadd_wx_h)
--GEN_VEXT_VX(vwadd_wx_w)
--GEN_VEXT_VX(vwsub_wx_b)
--GEN_VEXT_VX(vwsub_wx_h)
--GEN_VEXT_VX(vwsub_wx_w)
-+GEN_VEXT_VX(vwaddu_vx_b, 2)
-+GEN_VEXT_VX(vwaddu_vx_h, 4)
-+GEN_VEXT_VX(vwaddu_vx_w, 8)
-+GEN_VEXT_VX(vwsubu_vx_b, 2)
-+GEN_VEXT_VX(vwsubu_vx_h, 4)
-+GEN_VEXT_VX(vwsubu_vx_w, 8)
-+GEN_VEXT_VX(vwadd_vx_b, 2)
-+GEN_VEXT_VX(vwadd_vx_h, 4)
-+GEN_VEXT_VX(vwadd_vx_w, 8)
-+GEN_VEXT_VX(vwsub_vx_b, 2)
-+GEN_VEXT_VX(vwsub_vx_h, 4)
-+GEN_VEXT_VX(vwsub_vx_w, 8)
-+GEN_VEXT_VX(vwaddu_wx_b, 2)
-+GEN_VEXT_VX(vwaddu_wx_h, 4)
-+GEN_VEXT_VX(vwaddu_wx_w, 8)
-+GEN_VEXT_VX(vwsubu_wx_b, 2)
-+GEN_VEXT_VX(vwsubu_wx_h, 4)
-+GEN_VEXT_VX(vwsubu_wx_w, 8)
-+GEN_VEXT_VX(vwadd_wx_b, 2)
-+GEN_VEXT_VX(vwadd_wx_h, 4)
-+GEN_VEXT_VX(vwadd_wx_w, 8)
-+GEN_VEXT_VX(vwsub_wx_b, 2)
-+GEN_VEXT_VX(vwsub_wx_h, 4)
-+GEN_VEXT_VX(vwsub_wx_w, 8)
-=20
- /* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
- #define DO_VADC(N, M, C) (N + M + C)
-@@ -1059,6 +1063,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-                   CPURISCVState *env, uint32_t desc)          \
- {                                                             \
-     uint32_t vl =3D env->vl;                                    \
-+    uint32_t esz =3D sizeof(ETYPE);                             \
-+    uint32_t vlmax =3D                                          \
-+        vext_get_total_elem(env_archcpu(env), env->vtype);    \
-+    uint32_t vta =3D vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1069,6 +1077,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
-         *((ETYPE *)vd + H(i)) =3D DO_OP(s2, s1, carry);         \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* set tail elements to 1s */                             \
-+    vext_set_elems_1s_fns[ctzl(esz)](vd, vta, vl, vl * esz,   \
-+                                     vlmax * esz);            \
- }
-=20
- GEN_VEXT_VADC_VVM(vadc_vvm_b, uint8_t,  H1, DO_VADC)
-@@ -1086,6 +1097,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
- void *vs2,        \
-                   CPURISCVState *env, uint32_t desc)                     \
- {                                                                        \
-     uint32_t vl =3D env->vl;                                               \
-+    uint32_t esz =3D sizeof(ETYPE);                                        \
-+    uint32_t vlmax =3D                                                     \
-+        vext_get_total_elem(env_archcpu(env), env->vtype);               \
-+    uint32_t vta =3D vext_vta(desc);                                       \
-     uint32_t i;                                                          \
-                                                                          \
-     for (i =3D env->vstart; i < vl; i++) {                                 \
-@@ -1095,6 +1110,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,        \
-         *((ETYPE *)vd + H(i)) =3D DO_OP(s2, (ETYPE)(target_long)s1, carry);\
-     }                                                                    \
-     env->vstart =3D 0;                                          \
-+    /* set tail elements to 1s */                                        \
-+    vext_set_elems_1s_fns[ctzl(esz)](vd, vta, vl, vl * esz, vlmax * esz);\
- }
-=20
- GEN_VEXT_VADC_VXM(vadc_vxm_b, uint8_t,  H1, DO_VADC)
-@@ -1117,6 +1134,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
- {                                                             \
-     uint32_t vl =3D env->vl;                                    \
-     uint32_t vm =3D vext_vm(desc);                              \
-+    uint32_t vlmax =3D                                          \
-+        vext_get_total_elem(env_archcpu(env), env->vtype);    \
-+    uint32_t vta =3D vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1126,6 +1146,12 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));      \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* set tail elements to 1s */                             \
-+    if (vta) {                                                \
-+        for (; i < vlmax; i++) {                              \
-+            vext_set_elem_mask(vd, i, 1);                     \
-+        }                                                     \
-+    }                                                         \
- }
-=20
- GEN_VEXT_VMADC_VVM(vmadc_vvm_b, uint8_t,  H1, DO_MADC)
-@@ -1144,6 +1170,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-         \
+ /* generate helpers for fixed point instructions with OPIVV format */
+-#define GEN_VEXT_VV_RM(NAME)                                    \
++#define GEN_VEXT_VV_RM(NAME, ESZ)                               \
+ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,     \
+                   CPURISCVState *env, uint32_t desc)            \
  {                                                               \
-     uint32_t vl =3D env->vl;                                      \
-     uint32_t vm =3D vext_vm(desc);                                \
-+    uint32_t vlmax =3D                                            \
-+        vext_get_total_elem(env_archcpu(env), env->vtype);      \
-+    uint32_t vta =3D vext_vta(desc);                              \
-     uint32_t i;                                                 \
-                                                                 \
-     for (i =3D env->vstart; i < vl; i++) {                        \
-@@ -1153,6 +1182,12 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
-          \
-                 DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-     }                                                           \
-     env->vstart =3D 0;                                            \
-+    /* set tail elements to 1s */                               \
-+    if (vta) {                                                  \
-+        for (; i < vlmax; i++) {                                \
-+            vext_set_elem_mask(vd, i, 1);                       \
-+        }                                                       \
-+    }                                                           \
+     vext_vv_rm_2(vd, v0, vs1, vs2, env, desc,                   \
+-                 do_##NAME);                                    \
++                 do_##NAME, ESZ);                               \
  }
 =20
- GEN_VEXT_VMADC_VXM(vmadc_vxm_b, uint8_t,  H1, DO_MADC)
-@@ -1203,18 +1238,18 @@ RVVCALL(OPIVX2, vxor_vx_b, OP_SSS_B, H1, H1, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_h, OP_SSS_H, H2, H2, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_w, OP_SSS_W, H4, H4, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_d, OP_SSS_D, H8, H8, DO_XOR)
--GEN_VEXT_VX(vand_vx_b)
--GEN_VEXT_VX(vand_vx_h)
--GEN_VEXT_VX(vand_vx_w)
--GEN_VEXT_VX(vand_vx_d)
--GEN_VEXT_VX(vor_vx_b)
--GEN_VEXT_VX(vor_vx_h)
--GEN_VEXT_VX(vor_vx_w)
--GEN_VEXT_VX(vor_vx_d)
--GEN_VEXT_VX(vxor_vx_b)
--GEN_VEXT_VX(vxor_vx_h)
--GEN_VEXT_VX(vxor_vx_w)
--GEN_VEXT_VX(vxor_vx_d)
-+GEN_VEXT_VX(vand_vx_b, 1)
-+GEN_VEXT_VX(vand_vx_h, 2)
-+GEN_VEXT_VX(vand_vx_w, 4)
-+GEN_VEXT_VX(vand_vx_d, 8)
-+GEN_VEXT_VX(vor_vx_b, 1)
-+GEN_VEXT_VX(vor_vx_h, 2)
-+GEN_VEXT_VX(vor_vx_w, 4)
-+GEN_VEXT_VX(vor_vx_d, 8)
-+GEN_VEXT_VX(vxor_vx_b, 1)
-+GEN_VEXT_VX(vxor_vx_h, 2)
-+GEN_VEXT_VX(vxor_vx_w, 4)
-+GEN_VEXT_VX(vxor_vx_d, 8)
+ static inline uint8_t saddu8(CPURISCVState *env, int vxrm, uint8_t a, uint8_=
+t b)
+@@ -2184,10 +2188,10 @@ RVVCALL(OPIVV2_RM, vsaddu_vv_b, OP_UUU_B, H1, H1, H1,=
+ saddu8)
+ RVVCALL(OPIVV2_RM, vsaddu_vv_h, OP_UUU_H, H2, H2, H2, saddu16)
+ RVVCALL(OPIVV2_RM, vsaddu_vv_w, OP_UUU_W, H4, H4, H4, saddu32)
+ RVVCALL(OPIVV2_RM, vsaddu_vv_d, OP_UUU_D, H8, H8, H8, saddu64)
+-GEN_VEXT_VV_RM(vsaddu_vv_b)
+-GEN_VEXT_VV_RM(vsaddu_vv_h)
+-GEN_VEXT_VV_RM(vsaddu_vv_w)
+-GEN_VEXT_VV_RM(vsaddu_vv_d)
++GEN_VEXT_VV_RM(vsaddu_vv_b, 1)
++GEN_VEXT_VV_RM(vsaddu_vv_h, 2)
++GEN_VEXT_VV_RM(vsaddu_vv_w, 4)
++GEN_VEXT_VV_RM(vsaddu_vv_d, 8)
 =20
- /* Vector Single-Width Bit Shift Instructions */
- #define DO_SLL(N, M)  (N << (M))
-@@ -1468,22 +1503,22 @@ RVVCALL(OPIVX2, vmax_vx_b, OP_SSS_B, H1, H1, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_h, OP_SSS_H, H2, H2, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_w, OP_SSS_W, H4, H4, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_d, OP_SSS_D, H8, H8, DO_MAX)
--GEN_VEXT_VX(vminu_vx_b)
--GEN_VEXT_VX(vminu_vx_h)
--GEN_VEXT_VX(vminu_vx_w)
--GEN_VEXT_VX(vminu_vx_d)
--GEN_VEXT_VX(vmin_vx_b)
--GEN_VEXT_VX(vmin_vx_h)
--GEN_VEXT_VX(vmin_vx_w)
--GEN_VEXT_VX(vmin_vx_d)
--GEN_VEXT_VX(vmaxu_vx_b)
--GEN_VEXT_VX(vmaxu_vx_h)
--GEN_VEXT_VX(vmaxu_vx_w)
--GEN_VEXT_VX(vmaxu_vx_d)
--GEN_VEXT_VX(vmax_vx_b)
--GEN_VEXT_VX(vmax_vx_h)
--GEN_VEXT_VX(vmax_vx_w)
--GEN_VEXT_VX(vmax_vx_d)
-+GEN_VEXT_VX(vminu_vx_b, 1)
-+GEN_VEXT_VX(vminu_vx_h, 2)
-+GEN_VEXT_VX(vminu_vx_w, 4)
-+GEN_VEXT_VX(vminu_vx_d, 8)
-+GEN_VEXT_VX(vmin_vx_b, 1)
-+GEN_VEXT_VX(vmin_vx_h, 2)
-+GEN_VEXT_VX(vmin_vx_w, 4)
-+GEN_VEXT_VX(vmin_vx_d, 8)
-+GEN_VEXT_VX(vmaxu_vx_b, 1)
-+GEN_VEXT_VX(vmaxu_vx_h, 2)
-+GEN_VEXT_VX(vmaxu_vx_w, 4)
-+GEN_VEXT_VX(vmaxu_vx_d, 8)
-+GEN_VEXT_VX(vmax_vx_b, 1)
-+GEN_VEXT_VX(vmax_vx_h, 2)
-+GEN_VEXT_VX(vmax_vx_w, 4)
-+GEN_VEXT_VX(vmax_vx_d, 8)
+ typedef void opivx2_rm_fn(void *vd, target_long s1, void *vs2, int i,
+                           CPURISCVState *env, int vxrm);
+@@ -2220,10 +2224,12 @@ static inline void
+ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
+              CPURISCVState *env,
+              uint32_t desc,
+-             opivx2_rm_fn *fn)
++             opivx2_rm_fn *fn, uint32_t esz)
+ {
+     uint32_t vm =3D vext_vm(desc);
+     uint32_t vl =3D env->vl;
++    uint32_t vlmax =3D vext_get_total_elem(env_archcpu(env), env->vtype);
++    uint32_t vta =3D vext_vta(desc);
 =20
- /* Vector Single-Width Integer Multiply Instructions */
- #define DO_MUL(N, M) (N * M)
-@@ -1627,22 +1662,22 @@ RVVCALL(OPIVX2, vmulhsu_vx_b, OP_SUS_B, H1, H1, do_mu=
-lhsu_b)
- RVVCALL(OPIVX2, vmulhsu_vx_h, OP_SUS_H, H2, H2, do_mulhsu_h)
- RVVCALL(OPIVX2, vmulhsu_vx_w, OP_SUS_W, H4, H4, do_mulhsu_w)
- RVVCALL(OPIVX2, vmulhsu_vx_d, OP_SUS_D, H8, H8, do_mulhsu_d)
--GEN_VEXT_VX(vmul_vx_b)
--GEN_VEXT_VX(vmul_vx_h)
--GEN_VEXT_VX(vmul_vx_w)
--GEN_VEXT_VX(vmul_vx_d)
--GEN_VEXT_VX(vmulh_vx_b)
--GEN_VEXT_VX(vmulh_vx_h)
--GEN_VEXT_VX(vmulh_vx_w)
--GEN_VEXT_VX(vmulh_vx_d)
--GEN_VEXT_VX(vmulhu_vx_b)
--GEN_VEXT_VX(vmulhu_vx_h)
--GEN_VEXT_VX(vmulhu_vx_w)
--GEN_VEXT_VX(vmulhu_vx_d)
--GEN_VEXT_VX(vmulhsu_vx_b)
--GEN_VEXT_VX(vmulhsu_vx_h)
--GEN_VEXT_VX(vmulhsu_vx_w)
--GEN_VEXT_VX(vmulhsu_vx_d)
-+GEN_VEXT_VX(vmul_vx_b, 1)
-+GEN_VEXT_VX(vmul_vx_h, 2)
-+GEN_VEXT_VX(vmul_vx_w, 4)
-+GEN_VEXT_VX(vmul_vx_d, 8)
-+GEN_VEXT_VX(vmulh_vx_b, 1)
-+GEN_VEXT_VX(vmulh_vx_h, 2)
-+GEN_VEXT_VX(vmulh_vx_w, 4)
-+GEN_VEXT_VX(vmulh_vx_d, 8)
-+GEN_VEXT_VX(vmulhu_vx_b, 1)
-+GEN_VEXT_VX(vmulhu_vx_h, 2)
-+GEN_VEXT_VX(vmulhu_vx_w, 4)
-+GEN_VEXT_VX(vmulhu_vx_d, 8)
-+GEN_VEXT_VX(vmulhsu_vx_b, 1)
-+GEN_VEXT_VX(vmulhsu_vx_h, 2)
-+GEN_VEXT_VX(vmulhsu_vx_w, 4)
-+GEN_VEXT_VX(vmulhsu_vx_d, 8)
+     switch (env->vxrm) {
+     case 0: /* rnu */
+@@ -2243,25 +2249,27 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void=
+ *vs2,
+                      env, vl, vm, 3, fn);
+         break;
+     }
++    /* set tail elements to 1s */
++    vext_set_elems_1s_fns[ctzl(esz)](vd, vta, vl, vl * esz, vlmax * esz);
+ }
 =20
- /* Vector Integer Divide Instructions */
- #define DO_DIVU(N, M) (unlikely(M =3D=3D 0) ? (__typeof(N))(-1) : N / M)
-@@ -1701,22 +1736,22 @@ RVVCALL(OPIVX2, vrem_vx_b, OP_SSS_B, H1, H1, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_h, OP_SSS_H, H2, H2, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_w, OP_SSS_W, H4, H4, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_d, OP_SSS_D, H8, H8, DO_REM)
--GEN_VEXT_VX(vdivu_vx_b)
--GEN_VEXT_VX(vdivu_vx_h)
--GEN_VEXT_VX(vdivu_vx_w)
--GEN_VEXT_VX(vdivu_vx_d)
--GEN_VEXT_VX(vdiv_vx_b)
--GEN_VEXT_VX(vdiv_vx_h)
--GEN_VEXT_VX(vdiv_vx_w)
--GEN_VEXT_VX(vdiv_vx_d)
--GEN_VEXT_VX(vremu_vx_b)
--GEN_VEXT_VX(vremu_vx_h)
--GEN_VEXT_VX(vremu_vx_w)
--GEN_VEXT_VX(vremu_vx_d)
--GEN_VEXT_VX(vrem_vx_b)
--GEN_VEXT_VX(vrem_vx_h)
--GEN_VEXT_VX(vrem_vx_w)
--GEN_VEXT_VX(vrem_vx_d)
-+GEN_VEXT_VX(vdivu_vx_b, 1)
-+GEN_VEXT_VX(vdivu_vx_h, 2)
-+GEN_VEXT_VX(vdivu_vx_w, 4)
-+GEN_VEXT_VX(vdivu_vx_d, 8)
-+GEN_VEXT_VX(vdiv_vx_b, 1)
-+GEN_VEXT_VX(vdiv_vx_h, 2)
-+GEN_VEXT_VX(vdiv_vx_w, 4)
-+GEN_VEXT_VX(vdiv_vx_d, 8)
-+GEN_VEXT_VX(vremu_vx_b, 1)
-+GEN_VEXT_VX(vremu_vx_h, 2)
-+GEN_VEXT_VX(vremu_vx_w, 4)
-+GEN_VEXT_VX(vremu_vx_d, 8)
-+GEN_VEXT_VX(vrem_vx_b, 1)
-+GEN_VEXT_VX(vrem_vx_h, 2)
-+GEN_VEXT_VX(vrem_vx_w, 4)
-+GEN_VEXT_VX(vrem_vx_d, 8)
+ /* generate helpers for fixed point instructions with OPIVX format */
+-#define GEN_VEXT_VX_RM(NAME)                              \
++#define GEN_VEXT_VX_RM(NAME, ESZ)                         \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
+         void *vs2, CPURISCVState *env, uint32_t desc)     \
+ {                                                         \
+     vext_vx_rm_2(vd, v0, s1, vs2, env, desc,              \
+-                 do_##NAME);                              \
++                 do_##NAME, ESZ);                         \
+ }
 =20
- /* Vector Widening Integer Multiply Instructions */
- RVVCALL(OPIVV2, vwmul_vv_b, WOP_SSS_B, H2, H1, H1, DO_MUL)
-@@ -1747,15 +1782,15 @@ RVVCALL(OPIVX2, vwmulu_vx_w, WOP_UUU_W, H8, H4, DO_MU=
-L)
- RVVCALL(OPIVX2, vwmulsu_vx_b, WOP_SUS_B, H2, H1, DO_MUL)
- RVVCALL(OPIVX2, vwmulsu_vx_h, WOP_SUS_H, H4, H2, DO_MUL)
- RVVCALL(OPIVX2, vwmulsu_vx_w, WOP_SUS_W, H8, H4, DO_MUL)
--GEN_VEXT_VX(vwmul_vx_b)
--GEN_VEXT_VX(vwmul_vx_h)
--GEN_VEXT_VX(vwmul_vx_w)
--GEN_VEXT_VX(vwmulu_vx_b)
--GEN_VEXT_VX(vwmulu_vx_h)
--GEN_VEXT_VX(vwmulu_vx_w)
--GEN_VEXT_VX(vwmulsu_vx_b)
--GEN_VEXT_VX(vwmulsu_vx_h)
--GEN_VEXT_VX(vwmulsu_vx_w)
-+GEN_VEXT_VX(vwmul_vx_b, 2)
-+GEN_VEXT_VX(vwmul_vx_h, 4)
-+GEN_VEXT_VX(vwmul_vx_w, 8)
-+GEN_VEXT_VX(vwmulu_vx_b, 2)
-+GEN_VEXT_VX(vwmulu_vx_h, 4)
-+GEN_VEXT_VX(vwmulu_vx_w, 8)
-+GEN_VEXT_VX(vwmulsu_vx_b, 2)
-+GEN_VEXT_VX(vwmulsu_vx_h, 4)
-+GEN_VEXT_VX(vwmulsu_vx_w, 8)
+ RVVCALL(OPIVX2_RM, vsaddu_vx_b, OP_UUU_B, H1, H1, saddu8)
+ RVVCALL(OPIVX2_RM, vsaddu_vx_h, OP_UUU_H, H2, H2, saddu16)
+ RVVCALL(OPIVX2_RM, vsaddu_vx_w, OP_UUU_W, H4, H4, saddu32)
+ RVVCALL(OPIVX2_RM, vsaddu_vx_d, OP_UUU_D, H8, H8, saddu64)
+-GEN_VEXT_VX_RM(vsaddu_vx_b)
+-GEN_VEXT_VX_RM(vsaddu_vx_h)
+-GEN_VEXT_VX_RM(vsaddu_vx_w)
+-GEN_VEXT_VX_RM(vsaddu_vx_d)
++GEN_VEXT_VX_RM(vsaddu_vx_b, 1)
++GEN_VEXT_VX_RM(vsaddu_vx_h, 2)
++GEN_VEXT_VX_RM(vsaddu_vx_w, 4)
++GEN_VEXT_VX_RM(vsaddu_vx_d, 8)
 =20
- /* Vector Single-Width Integer Multiply-Add Instructions */
- #define OPIVV3(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)   \
-@@ -1828,22 +1863,22 @@ RVVCALL(OPIVX3, vnmsub_vx_b, OP_SSS_B, H1, H1, DO_NMS=
-UB)
- RVVCALL(OPIVX3, vnmsub_vx_h, OP_SSS_H, H2, H2, DO_NMSUB)
- RVVCALL(OPIVX3, vnmsub_vx_w, OP_SSS_W, H4, H4, DO_NMSUB)
- RVVCALL(OPIVX3, vnmsub_vx_d, OP_SSS_D, H8, H8, DO_NMSUB)
--GEN_VEXT_VX(vmacc_vx_b)
--GEN_VEXT_VX(vmacc_vx_h)
--GEN_VEXT_VX(vmacc_vx_w)
--GEN_VEXT_VX(vmacc_vx_d)
--GEN_VEXT_VX(vnmsac_vx_b)
--GEN_VEXT_VX(vnmsac_vx_h)
--GEN_VEXT_VX(vnmsac_vx_w)
--GEN_VEXT_VX(vnmsac_vx_d)
--GEN_VEXT_VX(vmadd_vx_b)
--GEN_VEXT_VX(vmadd_vx_h)
--GEN_VEXT_VX(vmadd_vx_w)
--GEN_VEXT_VX(vmadd_vx_d)
--GEN_VEXT_VX(vnmsub_vx_b)
--GEN_VEXT_VX(vnmsub_vx_h)
--GEN_VEXT_VX(vnmsub_vx_w)
--GEN_VEXT_VX(vnmsub_vx_d)
-+GEN_VEXT_VX(vmacc_vx_b, 1)
-+GEN_VEXT_VX(vmacc_vx_h, 2)
-+GEN_VEXT_VX(vmacc_vx_w, 4)
-+GEN_VEXT_VX(vmacc_vx_d, 8)
-+GEN_VEXT_VX(vnmsac_vx_b, 1)
-+GEN_VEXT_VX(vnmsac_vx_h, 2)
-+GEN_VEXT_VX(vnmsac_vx_w, 4)
-+GEN_VEXT_VX(vnmsac_vx_d, 8)
-+GEN_VEXT_VX(vmadd_vx_b, 1)
-+GEN_VEXT_VX(vmadd_vx_h, 2)
-+GEN_VEXT_VX(vmadd_vx_w, 4)
-+GEN_VEXT_VX(vmadd_vx_d, 8)
-+GEN_VEXT_VX(vnmsub_vx_b, 1)
-+GEN_VEXT_VX(vnmsub_vx_h, 2)
-+GEN_VEXT_VX(vnmsub_vx_w, 4)
-+GEN_VEXT_VX(vnmsub_vx_d, 8)
+ static inline int8_t sadd8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
+ {
+@@ -2307,19 +2315,19 @@ RVVCALL(OPIVV2_RM, vsadd_vv_b, OP_SSS_B, H1, H1, H1, =
+sadd8)
+ RVVCALL(OPIVV2_RM, vsadd_vv_h, OP_SSS_H, H2, H2, H2, sadd16)
+ RVVCALL(OPIVV2_RM, vsadd_vv_w, OP_SSS_W, H4, H4, H4, sadd32)
+ RVVCALL(OPIVV2_RM, vsadd_vv_d, OP_SSS_D, H8, H8, H8, sadd64)
+-GEN_VEXT_VV_RM(vsadd_vv_b)
+-GEN_VEXT_VV_RM(vsadd_vv_h)
+-GEN_VEXT_VV_RM(vsadd_vv_w)
+-GEN_VEXT_VV_RM(vsadd_vv_d)
++GEN_VEXT_VV_RM(vsadd_vv_b, 1)
++GEN_VEXT_VV_RM(vsadd_vv_h, 2)
++GEN_VEXT_VV_RM(vsadd_vv_w, 4)
++GEN_VEXT_VV_RM(vsadd_vv_d, 8)
 =20
- /* Vector Widening Integer Multiply-Add Instructions */
- RVVCALL(OPIVV3, vwmaccu_vv_b, WOP_UUU_B, H2, H1, H1, DO_MACC)
-@@ -1877,18 +1912,18 @@ RVVCALL(OPIVX3, vwmaccsu_vx_w, WOP_SSU_W, H8, H4, DO_=
-MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_b, WOP_SUS_B, H2, H1, DO_MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_h, WOP_SUS_H, H4, H2, DO_MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_w, WOP_SUS_W, H8, H4, DO_MACC)
--GEN_VEXT_VX(vwmaccu_vx_b)
--GEN_VEXT_VX(vwmaccu_vx_h)
--GEN_VEXT_VX(vwmaccu_vx_w)
--GEN_VEXT_VX(vwmacc_vx_b)
--GEN_VEXT_VX(vwmacc_vx_h)
--GEN_VEXT_VX(vwmacc_vx_w)
--GEN_VEXT_VX(vwmaccsu_vx_b)
--GEN_VEXT_VX(vwmaccsu_vx_h)
--GEN_VEXT_VX(vwmaccsu_vx_w)
--GEN_VEXT_VX(vwmaccus_vx_b)
--GEN_VEXT_VX(vwmaccus_vx_h)
--GEN_VEXT_VX(vwmaccus_vx_w)
-+GEN_VEXT_VX(vwmaccu_vx_b, 2)
-+GEN_VEXT_VX(vwmaccu_vx_h, 4)
-+GEN_VEXT_VX(vwmaccu_vx_w, 8)
-+GEN_VEXT_VX(vwmacc_vx_b, 2)
-+GEN_VEXT_VX(vwmacc_vx_h, 4)
-+GEN_VEXT_VX(vwmacc_vx_w, 8)
-+GEN_VEXT_VX(vwmaccsu_vx_b, 2)
-+GEN_VEXT_VX(vwmaccsu_vx_h, 4)
-+GEN_VEXT_VX(vwmaccsu_vx_w, 8)
-+GEN_VEXT_VX(vwmaccus_vx_b, 2)
-+GEN_VEXT_VX(vwmaccus_vx_h, 4)
-+GEN_VEXT_VX(vwmaccus_vx_w, 8)
+ RVVCALL(OPIVX2_RM, vsadd_vx_b, OP_SSS_B, H1, H1, sadd8)
+ RVVCALL(OPIVX2_RM, vsadd_vx_h, OP_SSS_H, H2, H2, sadd16)
+ RVVCALL(OPIVX2_RM, vsadd_vx_w, OP_SSS_W, H4, H4, sadd32)
+ RVVCALL(OPIVX2_RM, vsadd_vx_d, OP_SSS_D, H8, H8, sadd64)
+-GEN_VEXT_VX_RM(vsadd_vx_b)
+-GEN_VEXT_VX_RM(vsadd_vx_h)
+-GEN_VEXT_VX_RM(vsadd_vx_w)
+-GEN_VEXT_VX_RM(vsadd_vx_d)
++GEN_VEXT_VX_RM(vsadd_vx_b, 1)
++GEN_VEXT_VX_RM(vsadd_vx_h, 2)
++GEN_VEXT_VX_RM(vsadd_vx_w, 4)
++GEN_VEXT_VX_RM(vsadd_vx_d, 8)
 =20
- /* Vector Integer Merge and Move Instructions */
- #define GEN_VEXT_VMV_VV(NAME, ETYPE, H)                              \
+ static inline uint8_t ssubu8(CPURISCVState *env, int vxrm, uint8_t a, uint8_=
+t b)
+ {
+@@ -2368,19 +2376,19 @@ RVVCALL(OPIVV2_RM, vssubu_vv_b, OP_UUU_B, H1, H1, H1,=
+ ssubu8)
+ RVVCALL(OPIVV2_RM, vssubu_vv_h, OP_UUU_H, H2, H2, H2, ssubu16)
+ RVVCALL(OPIVV2_RM, vssubu_vv_w, OP_UUU_W, H4, H4, H4, ssubu32)
+ RVVCALL(OPIVV2_RM, vssubu_vv_d, OP_UUU_D, H8, H8, H8, ssubu64)
+-GEN_VEXT_VV_RM(vssubu_vv_b)
+-GEN_VEXT_VV_RM(vssubu_vv_h)
+-GEN_VEXT_VV_RM(vssubu_vv_w)
+-GEN_VEXT_VV_RM(vssubu_vv_d)
++GEN_VEXT_VV_RM(vssubu_vv_b, 1)
++GEN_VEXT_VV_RM(vssubu_vv_h, 2)
++GEN_VEXT_VV_RM(vssubu_vv_w, 4)
++GEN_VEXT_VV_RM(vssubu_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vssubu_vx_b, OP_UUU_B, H1, H1, ssubu8)
+ RVVCALL(OPIVX2_RM, vssubu_vx_h, OP_UUU_H, H2, H2, ssubu16)
+ RVVCALL(OPIVX2_RM, vssubu_vx_w, OP_UUU_W, H4, H4, ssubu32)
+ RVVCALL(OPIVX2_RM, vssubu_vx_d, OP_UUU_D, H8, H8, ssubu64)
+-GEN_VEXT_VX_RM(vssubu_vx_b)
+-GEN_VEXT_VX_RM(vssubu_vx_h)
+-GEN_VEXT_VX_RM(vssubu_vx_w)
+-GEN_VEXT_VX_RM(vssubu_vx_d)
++GEN_VEXT_VX_RM(vssubu_vx_b, 1)
++GEN_VEXT_VX_RM(vssubu_vx_h, 2)
++GEN_VEXT_VX_RM(vssubu_vx_w, 4)
++GEN_VEXT_VX_RM(vssubu_vx_d, 8)
+=20
+ static inline int8_t ssub8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
+ {
+@@ -2426,19 +2434,19 @@ RVVCALL(OPIVV2_RM, vssub_vv_b, OP_SSS_B, H1, H1, H1, =
+ssub8)
+ RVVCALL(OPIVV2_RM, vssub_vv_h, OP_SSS_H, H2, H2, H2, ssub16)
+ RVVCALL(OPIVV2_RM, vssub_vv_w, OP_SSS_W, H4, H4, H4, ssub32)
+ RVVCALL(OPIVV2_RM, vssub_vv_d, OP_SSS_D, H8, H8, H8, ssub64)
+-GEN_VEXT_VV_RM(vssub_vv_b)
+-GEN_VEXT_VV_RM(vssub_vv_h)
+-GEN_VEXT_VV_RM(vssub_vv_w)
+-GEN_VEXT_VV_RM(vssub_vv_d)
++GEN_VEXT_VV_RM(vssub_vv_b, 1)
++GEN_VEXT_VV_RM(vssub_vv_h, 2)
++GEN_VEXT_VV_RM(vssub_vv_w, 4)
++GEN_VEXT_VV_RM(vssub_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vssub_vx_b, OP_SSS_B, H1, H1, ssub8)
+ RVVCALL(OPIVX2_RM, vssub_vx_h, OP_SSS_H, H2, H2, ssub16)
+ RVVCALL(OPIVX2_RM, vssub_vx_w, OP_SSS_W, H4, H4, ssub32)
+ RVVCALL(OPIVX2_RM, vssub_vx_d, OP_SSS_D, H8, H8, ssub64)
+-GEN_VEXT_VX_RM(vssub_vx_b)
+-GEN_VEXT_VX_RM(vssub_vx_h)
+-GEN_VEXT_VX_RM(vssub_vx_w)
+-GEN_VEXT_VX_RM(vssub_vx_d)
++GEN_VEXT_VX_RM(vssub_vx_b, 1)
++GEN_VEXT_VX_RM(vssub_vx_h, 2)
++GEN_VEXT_VX_RM(vssub_vx_w, 4)
++GEN_VEXT_VX_RM(vssub_vx_d, 8)
+=20
+ /* Vector Single-Width Averaging Add and Subtract */
+ static inline uint8_t get_round(int vxrm, uint64_t v, uint8_t shift)
+@@ -2490,19 +2498,19 @@ RVVCALL(OPIVV2_RM, vaadd_vv_b, OP_SSS_B, H1, H1, H1, =
+aadd32)
+ RVVCALL(OPIVV2_RM, vaadd_vv_h, OP_SSS_H, H2, H2, H2, aadd32)
+ RVVCALL(OPIVV2_RM, vaadd_vv_w, OP_SSS_W, H4, H4, H4, aadd32)
+ RVVCALL(OPIVV2_RM, vaadd_vv_d, OP_SSS_D, H8, H8, H8, aadd64)
+-GEN_VEXT_VV_RM(vaadd_vv_b)
+-GEN_VEXT_VV_RM(vaadd_vv_h)
+-GEN_VEXT_VV_RM(vaadd_vv_w)
+-GEN_VEXT_VV_RM(vaadd_vv_d)
++GEN_VEXT_VV_RM(vaadd_vv_b, 1)
++GEN_VEXT_VV_RM(vaadd_vv_h, 2)
++GEN_VEXT_VV_RM(vaadd_vv_w, 4)
++GEN_VEXT_VV_RM(vaadd_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vaadd_vx_b, OP_SSS_B, H1, H1, aadd32)
+ RVVCALL(OPIVX2_RM, vaadd_vx_h, OP_SSS_H, H2, H2, aadd32)
+ RVVCALL(OPIVX2_RM, vaadd_vx_w, OP_SSS_W, H4, H4, aadd32)
+ RVVCALL(OPIVX2_RM, vaadd_vx_d, OP_SSS_D, H8, H8, aadd64)
+-GEN_VEXT_VX_RM(vaadd_vx_b)
+-GEN_VEXT_VX_RM(vaadd_vx_h)
+-GEN_VEXT_VX_RM(vaadd_vx_w)
+-GEN_VEXT_VX_RM(vaadd_vx_d)
++GEN_VEXT_VX_RM(vaadd_vx_b, 1)
++GEN_VEXT_VX_RM(vaadd_vx_h, 2)
++GEN_VEXT_VX_RM(vaadd_vx_w, 4)
++GEN_VEXT_VX_RM(vaadd_vx_d, 8)
+=20
+ static inline uint32_t aaddu32(CPURISCVState *env, int vxrm,
+                                uint32_t a, uint32_t b)
+@@ -2527,19 +2535,19 @@ RVVCALL(OPIVV2_RM, vaaddu_vv_b, OP_UUU_B, H1, H1, H1,=
+ aaddu32)
+ RVVCALL(OPIVV2_RM, vaaddu_vv_h, OP_UUU_H, H2, H2, H2, aaddu32)
+ RVVCALL(OPIVV2_RM, vaaddu_vv_w, OP_UUU_W, H4, H4, H4, aaddu32)
+ RVVCALL(OPIVV2_RM, vaaddu_vv_d, OP_UUU_D, H8, H8, H8, aaddu64)
+-GEN_VEXT_VV_RM(vaaddu_vv_b)
+-GEN_VEXT_VV_RM(vaaddu_vv_h)
+-GEN_VEXT_VV_RM(vaaddu_vv_w)
+-GEN_VEXT_VV_RM(vaaddu_vv_d)
++GEN_VEXT_VV_RM(vaaddu_vv_b, 1)
++GEN_VEXT_VV_RM(vaaddu_vv_h, 2)
++GEN_VEXT_VV_RM(vaaddu_vv_w, 4)
++GEN_VEXT_VV_RM(vaaddu_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vaaddu_vx_b, OP_UUU_B, H1, H1, aaddu32)
+ RVVCALL(OPIVX2_RM, vaaddu_vx_h, OP_UUU_H, H2, H2, aaddu32)
+ RVVCALL(OPIVX2_RM, vaaddu_vx_w, OP_UUU_W, H4, H4, aaddu32)
+ RVVCALL(OPIVX2_RM, vaaddu_vx_d, OP_UUU_D, H8, H8, aaddu64)
+-GEN_VEXT_VX_RM(vaaddu_vx_b)
+-GEN_VEXT_VX_RM(vaaddu_vx_h)
+-GEN_VEXT_VX_RM(vaaddu_vx_w)
+-GEN_VEXT_VX_RM(vaaddu_vx_d)
++GEN_VEXT_VX_RM(vaaddu_vx_b, 1)
++GEN_VEXT_VX_RM(vaaddu_vx_h, 2)
++GEN_VEXT_VX_RM(vaaddu_vx_w, 4)
++GEN_VEXT_VX_RM(vaaddu_vx_d, 8)
+=20
+ static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_=
+t b)
+ {
+@@ -2563,19 +2571,19 @@ RVVCALL(OPIVV2_RM, vasub_vv_b, OP_SSS_B, H1, H1, H1, =
+asub32)
+ RVVCALL(OPIVV2_RM, vasub_vv_h, OP_SSS_H, H2, H2, H2, asub32)
+ RVVCALL(OPIVV2_RM, vasub_vv_w, OP_SSS_W, H4, H4, H4, asub32)
+ RVVCALL(OPIVV2_RM, vasub_vv_d, OP_SSS_D, H8, H8, H8, asub64)
+-GEN_VEXT_VV_RM(vasub_vv_b)
+-GEN_VEXT_VV_RM(vasub_vv_h)
+-GEN_VEXT_VV_RM(vasub_vv_w)
+-GEN_VEXT_VV_RM(vasub_vv_d)
++GEN_VEXT_VV_RM(vasub_vv_b, 1)
++GEN_VEXT_VV_RM(vasub_vv_h, 2)
++GEN_VEXT_VV_RM(vasub_vv_w, 4)
++GEN_VEXT_VV_RM(vasub_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vasub_vx_b, OP_SSS_B, H1, H1, asub32)
+ RVVCALL(OPIVX2_RM, vasub_vx_h, OP_SSS_H, H2, H2, asub32)
+ RVVCALL(OPIVX2_RM, vasub_vx_w, OP_SSS_W, H4, H4, asub32)
+ RVVCALL(OPIVX2_RM, vasub_vx_d, OP_SSS_D, H8, H8, asub64)
+-GEN_VEXT_VX_RM(vasub_vx_b)
+-GEN_VEXT_VX_RM(vasub_vx_h)
+-GEN_VEXT_VX_RM(vasub_vx_w)
+-GEN_VEXT_VX_RM(vasub_vx_d)
++GEN_VEXT_VX_RM(vasub_vx_b, 1)
++GEN_VEXT_VX_RM(vasub_vx_h, 2)
++GEN_VEXT_VX_RM(vasub_vx_w, 4)
++GEN_VEXT_VX_RM(vasub_vx_d, 8)
+=20
+ static inline uint32_t asubu32(CPURISCVState *env, int vxrm,
+                                uint32_t a, uint32_t b)
+@@ -2600,19 +2608,19 @@ RVVCALL(OPIVV2_RM, vasubu_vv_b, OP_UUU_B, H1, H1, H1,=
+ asubu32)
+ RVVCALL(OPIVV2_RM, vasubu_vv_h, OP_UUU_H, H2, H2, H2, asubu32)
+ RVVCALL(OPIVV2_RM, vasubu_vv_w, OP_UUU_W, H4, H4, H4, asubu32)
+ RVVCALL(OPIVV2_RM, vasubu_vv_d, OP_UUU_D, H8, H8, H8, asubu64)
+-GEN_VEXT_VV_RM(vasubu_vv_b)
+-GEN_VEXT_VV_RM(vasubu_vv_h)
+-GEN_VEXT_VV_RM(vasubu_vv_w)
+-GEN_VEXT_VV_RM(vasubu_vv_d)
++GEN_VEXT_VV_RM(vasubu_vv_b, 1)
++GEN_VEXT_VV_RM(vasubu_vv_h, 2)
++GEN_VEXT_VV_RM(vasubu_vv_w, 4)
++GEN_VEXT_VV_RM(vasubu_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vasubu_vx_b, OP_UUU_B, H1, H1, asubu32)
+ RVVCALL(OPIVX2_RM, vasubu_vx_h, OP_UUU_H, H2, H2, asubu32)
+ RVVCALL(OPIVX2_RM, vasubu_vx_w, OP_UUU_W, H4, H4, asubu32)
+ RVVCALL(OPIVX2_RM, vasubu_vx_d, OP_UUU_D, H8, H8, asubu64)
+-GEN_VEXT_VX_RM(vasubu_vx_b)
+-GEN_VEXT_VX_RM(vasubu_vx_h)
+-GEN_VEXT_VX_RM(vasubu_vx_w)
+-GEN_VEXT_VX_RM(vasubu_vx_d)
++GEN_VEXT_VX_RM(vasubu_vx_b, 1)
++GEN_VEXT_VX_RM(vasubu_vx_h, 2)
++GEN_VEXT_VX_RM(vasubu_vx_w, 4)
++GEN_VEXT_VX_RM(vasubu_vx_d, 8)
+=20
+ /* Vector Single-Width Fractional Multiply with Rounding and Saturation */
+ static inline int8_t vsmul8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
+@@ -2707,19 +2715,19 @@ RVVCALL(OPIVV2_RM, vsmul_vv_b, OP_SSS_B, H1, H1, H1, =
+vsmul8)
+ RVVCALL(OPIVV2_RM, vsmul_vv_h, OP_SSS_H, H2, H2, H2, vsmul16)
+ RVVCALL(OPIVV2_RM, vsmul_vv_w, OP_SSS_W, H4, H4, H4, vsmul32)
+ RVVCALL(OPIVV2_RM, vsmul_vv_d, OP_SSS_D, H8, H8, H8, vsmul64)
+-GEN_VEXT_VV_RM(vsmul_vv_b)
+-GEN_VEXT_VV_RM(vsmul_vv_h)
+-GEN_VEXT_VV_RM(vsmul_vv_w)
+-GEN_VEXT_VV_RM(vsmul_vv_d)
++GEN_VEXT_VV_RM(vsmul_vv_b, 1)
++GEN_VEXT_VV_RM(vsmul_vv_h, 2)
++GEN_VEXT_VV_RM(vsmul_vv_w, 4)
++GEN_VEXT_VV_RM(vsmul_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vsmul_vx_b, OP_SSS_B, H1, H1, vsmul8)
+ RVVCALL(OPIVX2_RM, vsmul_vx_h, OP_SSS_H, H2, H2, vsmul16)
+ RVVCALL(OPIVX2_RM, vsmul_vx_w, OP_SSS_W, H4, H4, vsmul32)
+ RVVCALL(OPIVX2_RM, vsmul_vx_d, OP_SSS_D, H8, H8, vsmul64)
+-GEN_VEXT_VX_RM(vsmul_vx_b)
+-GEN_VEXT_VX_RM(vsmul_vx_h)
+-GEN_VEXT_VX_RM(vsmul_vx_w)
+-GEN_VEXT_VX_RM(vsmul_vx_d)
++GEN_VEXT_VX_RM(vsmul_vx_b, 1)
++GEN_VEXT_VX_RM(vsmul_vx_h, 2)
++GEN_VEXT_VX_RM(vsmul_vx_w, 4)
++GEN_VEXT_VX_RM(vsmul_vx_d, 8)
+=20
+ /* Vector Single-Width Scaling Shift Instructions */
+ static inline uint8_t
+@@ -2766,19 +2774,19 @@ RVVCALL(OPIVV2_RM, vssrl_vv_b, OP_UUU_B, H1, H1, H1, =
+vssrl8)
+ RVVCALL(OPIVV2_RM, vssrl_vv_h, OP_UUU_H, H2, H2, H2, vssrl16)
+ RVVCALL(OPIVV2_RM, vssrl_vv_w, OP_UUU_W, H4, H4, H4, vssrl32)
+ RVVCALL(OPIVV2_RM, vssrl_vv_d, OP_UUU_D, H8, H8, H8, vssrl64)
+-GEN_VEXT_VV_RM(vssrl_vv_b)
+-GEN_VEXT_VV_RM(vssrl_vv_h)
+-GEN_VEXT_VV_RM(vssrl_vv_w)
+-GEN_VEXT_VV_RM(vssrl_vv_d)
++GEN_VEXT_VV_RM(vssrl_vv_b, 1)
++GEN_VEXT_VV_RM(vssrl_vv_h, 2)
++GEN_VEXT_VV_RM(vssrl_vv_w, 4)
++GEN_VEXT_VV_RM(vssrl_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vssrl_vx_b, OP_UUU_B, H1, H1, vssrl8)
+ RVVCALL(OPIVX2_RM, vssrl_vx_h, OP_UUU_H, H2, H2, vssrl16)
+ RVVCALL(OPIVX2_RM, vssrl_vx_w, OP_UUU_W, H4, H4, vssrl32)
+ RVVCALL(OPIVX2_RM, vssrl_vx_d, OP_UUU_D, H8, H8, vssrl64)
+-GEN_VEXT_VX_RM(vssrl_vx_b)
+-GEN_VEXT_VX_RM(vssrl_vx_h)
+-GEN_VEXT_VX_RM(vssrl_vx_w)
+-GEN_VEXT_VX_RM(vssrl_vx_d)
++GEN_VEXT_VX_RM(vssrl_vx_b, 1)
++GEN_VEXT_VX_RM(vssrl_vx_h, 2)
++GEN_VEXT_VX_RM(vssrl_vx_w, 4)
++GEN_VEXT_VX_RM(vssrl_vx_d, 8)
+=20
+ static inline int8_t
+ vssra8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
+@@ -2825,19 +2833,19 @@ RVVCALL(OPIVV2_RM, vssra_vv_b, OP_SSS_B, H1, H1, H1, =
+vssra8)
+ RVVCALL(OPIVV2_RM, vssra_vv_h, OP_SSS_H, H2, H2, H2, vssra16)
+ RVVCALL(OPIVV2_RM, vssra_vv_w, OP_SSS_W, H4, H4, H4, vssra32)
+ RVVCALL(OPIVV2_RM, vssra_vv_d, OP_SSS_D, H8, H8, H8, vssra64)
+-GEN_VEXT_VV_RM(vssra_vv_b)
+-GEN_VEXT_VV_RM(vssra_vv_h)
+-GEN_VEXT_VV_RM(vssra_vv_w)
+-GEN_VEXT_VV_RM(vssra_vv_d)
++GEN_VEXT_VV_RM(vssra_vv_b, 1)
++GEN_VEXT_VV_RM(vssra_vv_h, 2)
++GEN_VEXT_VV_RM(vssra_vv_w, 4)
++GEN_VEXT_VV_RM(vssra_vv_d, 8)
+=20
+ RVVCALL(OPIVX2_RM, vssra_vx_b, OP_SSS_B, H1, H1, vssra8)
+ RVVCALL(OPIVX2_RM, vssra_vx_h, OP_SSS_H, H2, H2, vssra16)
+ RVVCALL(OPIVX2_RM, vssra_vx_w, OP_SSS_W, H4, H4, vssra32)
+ RVVCALL(OPIVX2_RM, vssra_vx_d, OP_SSS_D, H8, H8, vssra64)
+-GEN_VEXT_VX_RM(vssra_vx_b)
+-GEN_VEXT_VX_RM(vssra_vx_h)
+-GEN_VEXT_VX_RM(vssra_vx_w)
+-GEN_VEXT_VX_RM(vssra_vx_d)
++GEN_VEXT_VX_RM(vssra_vx_b, 1)
++GEN_VEXT_VX_RM(vssra_vx_h, 2)
++GEN_VEXT_VX_RM(vssra_vx_w, 4)
++GEN_VEXT_VX_RM(vssra_vx_d, 8)
+=20
+ /* Vector Narrowing Fixed-Point Clip Instructions */
+ static inline int8_t
+@@ -2900,16 +2908,16 @@ vnclip32(CPURISCVState *env, int vxrm, int64_t a, int=
+32_t b)
+ RVVCALL(OPIVV2_RM, vnclip_wv_b, NOP_SSS_B, H1, H2, H1, vnclip8)
+ RVVCALL(OPIVV2_RM, vnclip_wv_h, NOP_SSS_H, H2, H4, H2, vnclip16)
+ RVVCALL(OPIVV2_RM, vnclip_wv_w, NOP_SSS_W, H4, H8, H4, vnclip32)
+-GEN_VEXT_VV_RM(vnclip_wv_b)
+-GEN_VEXT_VV_RM(vnclip_wv_h)
+-GEN_VEXT_VV_RM(vnclip_wv_w)
++GEN_VEXT_VV_RM(vnclip_wv_b, 1)
++GEN_VEXT_VV_RM(vnclip_wv_h, 2)
++GEN_VEXT_VV_RM(vnclip_wv_w, 4)
+=20
+ RVVCALL(OPIVX2_RM, vnclip_wx_b, NOP_SSS_B, H1, H2, vnclip8)
+ RVVCALL(OPIVX2_RM, vnclip_wx_h, NOP_SSS_H, H2, H4, vnclip16)
+ RVVCALL(OPIVX2_RM, vnclip_wx_w, NOP_SSS_W, H4, H8, vnclip32)
+-GEN_VEXT_VX_RM(vnclip_wx_b)
+-GEN_VEXT_VX_RM(vnclip_wx_h)
+-GEN_VEXT_VX_RM(vnclip_wx_w)
++GEN_VEXT_VX_RM(vnclip_wx_b, 1)
++GEN_VEXT_VX_RM(vnclip_wx_h, 2)
++GEN_VEXT_VX_RM(vnclip_wx_w, 4)
+=20
+ static inline uint8_t
+ vnclipu8(CPURISCVState *env, int vxrm, uint16_t a, uint8_t b)
+@@ -2962,16 +2970,16 @@ vnclipu32(CPURISCVState *env, int vxrm, uint64_t a, u=
+int32_t b)
+ RVVCALL(OPIVV2_RM, vnclipu_wv_b, NOP_UUU_B, H1, H2, H1, vnclipu8)
+ RVVCALL(OPIVV2_RM, vnclipu_wv_h, NOP_UUU_H, H2, H4, H2, vnclipu16)
+ RVVCALL(OPIVV2_RM, vnclipu_wv_w, NOP_UUU_W, H4, H8, H4, vnclipu32)
+-GEN_VEXT_VV_RM(vnclipu_wv_b)
+-GEN_VEXT_VV_RM(vnclipu_wv_h)
+-GEN_VEXT_VV_RM(vnclipu_wv_w)
++GEN_VEXT_VV_RM(vnclipu_wv_b, 1)
++GEN_VEXT_VV_RM(vnclipu_wv_h, 2)
++GEN_VEXT_VV_RM(vnclipu_wv_w, 4)
+=20
+ RVVCALL(OPIVX2_RM, vnclipu_wx_b, NOP_UUU_B, H1, H2, vnclipu8)
+ RVVCALL(OPIVX2_RM, vnclipu_wx_h, NOP_UUU_H, H2, H4, vnclipu16)
+ RVVCALL(OPIVX2_RM, vnclipu_wx_w, NOP_UUU_W, H4, H8, vnclipu32)
+-GEN_VEXT_VX_RM(vnclipu_wx_b)
+-GEN_VEXT_VX_RM(vnclipu_wx_h)
+-GEN_VEXT_VX_RM(vnclipu_wx_w)
++GEN_VEXT_VX_RM(vnclipu_wx_b, 1)
++GEN_VEXT_VX_RM(vnclipu_wx_h, 2)
++GEN_VEXT_VX_RM(vnclipu_wx_w, 4)
+=20
+ /*
+  *** Vector Float Point Arithmetic Instructions
 --=20
 2.34.1
 
