@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nYcKd-0000H3-Us
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Mar 2022 19:29:59 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:34350)
+	id 1nYcKu-0000iI-AY
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Mar 2022 19:30:16 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:34498)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nYcKc-0000GI-Bl; Sun, 27 Mar 2022 19:29:58 -0400
-Received: from [2607:f8b0:4864:20::d2a] (port=46597
- helo=mail-io1-xd2a.google.com)
+ id 1nYcKs-0000gB-KH; Sun, 27 Mar 2022 19:30:14 -0400
+Received: from [2607:f8b0:4864:20::d32] (port=35358
+ helo=mail-io1-xd32.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nYcKa-0002wu-K3; Sun, 27 Mar 2022 19:29:57 -0400
-Received: by mail-io1-xd2a.google.com with SMTP id g21so1958891iom.13;
- Sun, 27 Mar 2022 16:29:55 -0700 (PDT)
+ id 1nYcKq-0003Bj-WE; Sun, 27 Mar 2022 19:30:14 -0400
+Received: by mail-io1-xd32.google.com with SMTP id p22so15175552iod.2;
+ Sun, 27 Mar 2022 16:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=OzOmbrkTBN9eZk5vG2KoFmFQ1wLMoN7NRIkJwnEq1BY=;
- b=lg+0OzjuVo45vEvI4WcUb+4Wj+FSRamt7kAn3IUIpoPNNIPWZchCjaM/NPHcNxSft5
- cmDSTz4QFZHqHhjQbb4U/coYtehS1G3b1gM0hoamno8qbXpg+e9IjVkkeSYwCISkYOhC
- ZVF5wMoxvAlmTEdUcXD8M8h4Kjuy6zPMSehoD/JNpARLhfrx0qZSTFUqls8BXcR25url
- fCk5j0XjDdM2TqhUP64zp5r9SDyZTWv4qHoHHsJ4QWLgIpwlmqqWllZIw8ZaQExgRdEn
- fLn7Z5djS0kScW2I1VDumhrO+Tf+ocNEdJmVixsXQk5qCPWSkzdAr4M9zdx2hVQvLSkA
- siAQ==
+ :cc; bh=vCkGbmiXRMtambl/Dpj3MrVN9F6TMmtxOwYQf0SiSdM=;
+ b=ktpWxGqye7esVLgvOUCv4h4GZ3fU1HaBN08uLifmVufFHLWf1Z2OvSK6JK2TZXDqB7
+ LvXOJhATuJE8050YSeCdbEPtuXYSowipqDUccY0Qnhlwf1IdPo3GQC8/HnuYz4Zk5j99
+ bCuRkBet7iTUNcJDwUT0IAqDOv4PmA/npSwbYmO1X9OWCzLIOZOH4T6sr5fUoaLb2n5f
+ p3bU4xdBKFO1Ib+fgko1xDHcGF4zO2qcnTkxmviG82y6qK0ERUSjNglJJxX3RiFU4wLF
+ 6Rm/eo3ZkiP69e6F8CVz3xn0B+oByjRc1Cv117bNj27ruTHRZXIC2TDbw2LKv5868FpI
+ hgJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=OzOmbrkTBN9eZk5vG2KoFmFQ1wLMoN7NRIkJwnEq1BY=;
- b=3Yk44P4yz/Y71cb8V7Qmr6Ogx5ijWrjU0XKzuDK2cgi/jDGzYhMqxrfBLOdyyII5Ou
- lXaTyQUSC3BCdepkTmi68O50DCGlE1UcKljP882ea8V+Ux6RUxzGGLDBbthhx4IRSz36
- QEOEnoP7bc6JkWCAscd2DaHiNbiGDgPkqqTyTjh6TNBzTEVvzshQJoErvjD6rbxyxT7S
- 7JxAIzU+Rm10ilU2kPLnojSV4jO68qNEevaWZIL5CBPv2WcDFS2t1eNg78AlbhTI/5tV
- mUBq9r4AZrvVp8Dk5/BjVPGI8K9Jy8FCfTnP0wahqtUlgeAHluXNKl/mJDxuVHvZZBCZ
- ppig==
-X-Gm-Message-State: AOAM531zp+YuRXF8YvYpkdeNimxi/qSlizOepj4t4wlZFJaDct3g9t6P
- JOBSlM4pdoeRVKe6E/3+CuiprfnpGl0tzXqI9nGJ3muAlW4ByQ==
-X-Google-Smtp-Source: ABdhPJxWl+dGCfnF1FYoOhoOV6JA2ML0NrPvkm0D5cKjOdEUdCiq7H7hEUsuGWw9fLSe2LNOcf63fH6VPnS2HCEVHSg=
-X-Received: by 2002:a05:6602:45b:b0:645:bdc2:fe13 with SMTP id
- e27-20020a056602045b00b00645bdc2fe13mr4961820iov.114.1648423794523; Sun, 27
- Mar 2022 16:29:54 -0700 (PDT)
+ bh=vCkGbmiXRMtambl/Dpj3MrVN9F6TMmtxOwYQf0SiSdM=;
+ b=DisYYn/3/Aty/yneh4KOyoSX3c/BFlHhNYE1/DgSB77MCsaKtutihPqIYlHZh7NqBk
+ wE1H1GNJLSw6QnTOl5Fadw9QXM6yLvspUdkb6B9XiHLeb+MUgI1Kl6Z1a2ZCoR0MIUPq
+ ZZQN+M1Mi/bPxjLLp2rthg191RoeZb1Zalev0XbAxHhFZ9BzDkivFbqlToCQrjnlZg6p
+ nCbFiUSR4ybpeFXfQe58mr8TlsCx7F7RKmdT5hL+CNN87naQMHdcPwYbf4OGgC8LnE6N
+ uK7AGQ2XlePjy1F+8rEbC3Yq2YYZWoOVVoTPe9o2MqxUtOdvL9SVQtyUOiZqnMiOX/jZ
+ 2sEw==
+X-Gm-Message-State: AOAM533rVUEegFTv+mqTErfmuNPGZVCdOFe1HmOtVQTeNHJ1kXld8xCE
+ IvC7ywgmkHKRbujWDgTK3YR3EPp+gVhcH6H/zsg=
+X-Google-Smtp-Source: ABdhPJzHO3Q+0EYOcYjpUF7jvWOzZCAvw31IEPoCyNEsQUte306p1U43UJFMyVC1JVlBcqaQ+EFNO7IedLxU4KhfcKw=
+X-Received: by 2002:a05:6638:134c:b0:321:3eb8:f68a with SMTP id
+ u12-20020a056638134c00b003213eb8f68amr11674205jad.66.1648423811644; Sun, 27
+ Mar 2022 16:30:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1648270894.git.research_trasio@irq.a4lg.com>
- <dee09d708405075420b29115c1e9e87910b8da55.1648270894.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <dee09d708405075420b29115c1e9e87910b8da55.1648270894.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1648270894.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Mar 2022 09:29:28 +1000
-Message-ID: <CAKmqyKPGkdOJAXZjSKvk23RaNY01ZpUziG7hCHyc+0YbOqzstQ@mail.gmail.com>
-Subject: Re: [PATCH (PING) 1/1] target/riscv: misa to ISA string conversion fix
+Date: Mon, 28 Mar 2022 09:29:45 +1000
+Message-ID: <CAKmqyKNhXjGX4PyTXTmyPArEfZeb4FgKX-6pjdwVk8avnN6cTw@mail.gmail.com>
+Subject: Re: [PATCH (PING) 0/1] target/riscv: misa to ISA string conversion fix
 To: Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Cc: Frank Chang <frank.chang@sifive.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d32
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -74,70 +74,92 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Mar 2022 23:29:58 -0000
+X-List-Received-Date: Sun, 27 Mar 2022 23:30:14 -0000
 
 On Sat, Mar 26, 2022 at 3:46 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
-> Some bits in RISC-V `misa' CSR should not be reflected in the ISA
-> string.  For instance, `S' and `U' (represents existence of supervisor
-> and user mode, respectively) in `misa' CSR must not be copied since
-> neither `S' nor `U' are valid single-letter extensions.
+> [This is the same patch as previous ones]
 
-Thanks for the patch.
+Hello,
+
+Thanks for the patch!
+
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2022-02/msg00098.html>
+>  (qemu-riscv only)
+
+This never made it to the QEMU mailing list
+
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2022-02/msg00097.html>
+>  (resent due to configuration error of my mail server; qemu-riscv only)
+
+and neither did this
 
 >
-> This commit restricts which bits to copy from `misa' CSR to ISA string
-> with another fix: `C' extension should be preceded by `L' extension.
+> I hope this is applied before the QEMU 7.0 release.
 
-The L extension has been removed, so it probably makes more sense to
-just remove it at this stage instead of fixing the order.
+Unfortunately you have missed the window for 7.0. This patch will need
+to be reviewed then applied for the next QEMU release.
 
->
-> It also clarifies that RISC-V extension order string is actually a
-> single-letter extension order list.
 >
 > Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-> ---
->  target/riscv/cpu.c | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..84877cf24a 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -34,7 +34,7 @@
+> S and U are misa bits but not extensions (instead, they are supported
+> privilege modes).  Thus, they should not be copied to the ISA string.
 >
->  /* RISC-V CPU definitions */
->
-> -static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
-> +static const char riscv_single_letter_exts[] = "IEMAFDQLCBJTPVNH";
+> I am truly surprised that this patchset is the THIRD attempt to fix this
+> longstanding problem.
 
-What about K?
+I'm sorry you feel this way, but this is the first time this patch has
+been sent to the list since 2019.
 
-Why not use IEMAFDQCBKJTPVNH instead?
+I'm not sure why (1) wasn't applied, but (2) and (3) don't appear to
+have been sent to the QEMU mailing list.
+
+The separate RISC-V mailing list is confusing, but patches should be
+sent to qemu-devel, as described at:
+https://wiki.qemu.org/Contribute/MailingLists
 
 Alistair
 
 >
->  const char * const riscv_int_regnames[] = {
->    "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
-> @@ -901,12 +901,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->  char *riscv_isa_string(RISCVCPU *cpu)
->  {
->      int i;
-> -    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) + 1;
-> +    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
->      char *isa_str = g_new(char, maxlen);
->      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
-> -    for (i = 0; i < sizeof(riscv_exts); i++) {
-> -        if (cpu->env.misa_ext & RV(riscv_exts[i])) {
-> -            *p++ = qemu_tolower(riscv_exts[i]);
-> +    for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
-> +        if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
-> +            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
->          }
->      }
->      *p = '\0';
+> (1) August 2019: by Palmer Dabbelt
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00165.html>
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00141.html>
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2019-08/msg00259.html>
+>
+> (2) April 2021: by Emmanuel Blot
+> <https://lists.nongnu.org/archive/html/qemu-riscv/2021-04/msg00248.html>
+>
+> (3) February 2022: by me (this patchset)
+>
+> I feel this is urgent to eliminate this bug now considering it required
+> a workaround to RISC-V Linux kernel as I pointed out:
+> <http://lists.infradead.org/pipermail/linux-riscv/2022-February/012252.html>
+>
+>
+> Though my patchset is first developed independently, this submitted
+> version is influenced by (2) Emmanuel Blot's patchset.  Thanks to this,
+> constant "[n]" can now be variable "[]".
+>
+> It also fixes an ordering issue where 'C' should be preceded by 'L'
+> (order: 'L' -> 'C') as per the RISC-V ISA Manual (version 20191213),
+> Table 27.1.
+>
+> It clarifies the role of `riscv_exts'.  It's a single-letter extrension
+> ordering list.
+>
+>
+>
+>
+> Tsukasa OI (1):
+>   target/riscv: misa to ISA string conversion fix
+>
+>  target/riscv/cpu.c | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+>
+> base-commit: f345abe36527a8b575482bb5a0616f43952bf1f4
 > --
 > 2.32.0
 >
