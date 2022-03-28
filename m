@@ -1,51 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nYdv4-0007Aa-Ot
-	for mharc-qemu-riscv@gnu.org; Sun, 27 Mar 2022 21:11:42 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:47962)
+	id 1nYdvT-0007fC-H6
+	for mharc-qemu-riscv@gnu.org; Sun, 27 Mar 2022 21:12:07 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:47992)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nYdv3-00078t-AH; Sun, 27 Mar 2022 21:11:41 -0400
-Received: from [2607:f8b0:4864:20::12d] (port=43902
- helo=mail-il1-x12d.google.com)
+ id 1nYdvS-0007d6-9T; Sun, 27 Mar 2022 21:12:06 -0400
+Received: from [2607:f8b0:4864:20::131] (port=39532
+ helo=mail-il1-x131.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nYdv1-00008O-Ly; Sun, 27 Mar 2022 21:11:41 -0400
-Received: by mail-il1-x12d.google.com with SMTP id d3so8937246ilr.10;
- Sun, 27 Mar 2022 18:11:39 -0700 (PDT)
+ id 1nYdvQ-0000A4-MJ; Sun, 27 Mar 2022 21:12:05 -0400
+Received: by mail-il1-x131.google.com with SMTP id y7so8939609ilv.6;
+ Sun, 27 Mar 2022 18:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WnPRm8LeSMCXxRdOBDwdcn6i2Dkrd2ics/7vBvBMYNM=;
- b=Eyriib2sGLuGS9QWeDnGhlCevQ3yDdDbHJ5IIFhgPYh8xug/tW5FJc6CaVn8q9BMTk
- P7xruwS0LP/4YDY3zca1xN9kfDjOrUqy8SXlc28BASLbe4JBEioSeRvzKzLycNSBZE5k
- ExIoUiSCIO+3Ieai62CS7XH3MfMyk7sd5VAh27Z2SmG02tVDr27Dv4ZRHttp/7vwaA/0
- K9+NghvrIPo5pu6P9nzBAzEQIxcbIeapCJkeaNy1b9GSukUF8nNTnChaCxM4qfprWCiW
- LSFzU/+OerVooQCeuY+7K5BDpKt/1BjvyXY1wxyEPW75z22yZrI821avGnwh4LIN5bKe
- pSGw==
+ :cc; bh=t9AcWXjhSPpsT02mESZyal9fBmFb/BrqYUmgJrCxeP0=;
+ b=BZfwdmM5jqIkT332B/tHo0OgC6Iun4FkC21GULKRphThvn5WBI33Qq0sOk0p6NrMvP
+ RtXPfbIuL7b3eYZftFRTI1P4PNEH7h0jTi38sBSpYuKmRCaEBW41hBcr5wkUME5KBdas
+ 8wHiD/KrMJ+G+rDxqL10dF9JHHu5H/uGJTbcqVhz3/jXWQf6AFrqagdypVIVwtUDAvsy
+ VUqtTzcCJ0pWcsBiR/Lst02Eq1bRoV416GJf/MtaEiXX7etouKvhNpG9/SarszkSSfV3
+ 7DGH5xVTSve5XybyxPRUucH3j+wLEpA8XScDpakekC/bmKVCFk4HQyOrmLQFpthn987A
+ eSWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WnPRm8LeSMCXxRdOBDwdcn6i2Dkrd2ics/7vBvBMYNM=;
- b=dyutmH8Hq539Xacez5pZHn0nh4Mnm1Hh2PtK+erXB3vokUXKge4Dd3r5X4re+kSwHO
- nCdRDyjobXkM2AJBMnJ+VQ4+US1Ns3psoDVvoG8mim/3f8oODNfQwHDoUC+Be0QzExs6
- JC9anmvelkjq7bhbL3xywR+DcUGzSgpj1T9mUd1djMt3lIGWBuHuflnnlkrfkMj0jTOw
- pAWUofGU7kh8hdHWihsi83HeAme7eMvJTJ0hHO+MfS8H5c2mRCeb2b00RzO5xOcdW3R4
- 9ij7jWfec5SkMh2OXx3t4FkFZu9whuhBzY//v0QiQa8sLySX4xLeWGe5WrQ9NqcRNA4m
- DYJA==
-X-Gm-Message-State: AOAM533FYLuI7S5jw5Jrfm4O5vhRhRgcI+aqTlephJZ25Vcybv+rKoIw
- gVKneL71M2GmyX1c/G20TbLJnolsU8/695JZ5Dw=
-X-Google-Smtp-Source: ABdhPJyHoTV2wSGgPw28ZXY6Eudwpf/p38PKIB+ZwttdFH53EeGrs1aNzT1WBJgdLGhd3nI2JKVEf0U6a2HqvQQlI5c=
-X-Received: by 2002:a05:6e02:219c:b0:2c9:a936:7a1 with SMTP id
- j28-20020a056e02219c00b002c9a93607a1mr2939970ila.55.1648429898221; Sun, 27
- Mar 2022 18:11:38 -0700 (PDT)
+ bh=t9AcWXjhSPpsT02mESZyal9fBmFb/BrqYUmgJrCxeP0=;
+ b=pI0k9vZd4ZZ9iqqlZEdeC0IhdDbBUDnKFTjfNqYrqnUZbAvRP38wQhaZonhltkVEzp
+ qmInCCyV4uQqNbOly707x22kJQ7KvK4Cf0AyKfa2qKjZzRJV7q55YeHwEdQmLUYySjwK
+ H/dhttdZ3wwQE6CGFNolmgmos1L0ZeGrn/Oi2nl14t4UKQenrHyHt3X1xdPFBWCsSFad
+ jTEfRIYM2wraz1V+XUhw2TAIfuig2Kgvhsf8Y8H9TNEzQ7ZuRc/7iX+s7206cmKjB7lP
+ LHz0Se4aUZ9HL1bs2HWlKG1YnQdv33g8hprGk+j3qZJ6ZCUt1xDSvp93UD/ZuHi4U1R/
+ fhKg==
+X-Gm-Message-State: AOAM530cU2kTRSZ/dhYIeS65CazVDdH87l82Yc1edwnTu9hLBaEpFHpP
+ euX+U1zw53S24u5qq/EAptm66wOgt82X42Q9k0VviJFApxA=
+X-Google-Smtp-Source: ABdhPJw9ERadzj5OZ0n6GpUNHq6OmvigeLIkAKn26s81czwjNVg//5lsJj3uS32Y8FTKDXePVsnX/iip7XWqHJSFeMY=
+X-Received: by 2002:a05:6e02:20ec:b0:2c6:158a:cb33 with SMTP id
+ q12-20020a056e0220ec00b002c6158acb33mr4603427ilv.113.1648429923214; Sun, 27
+ Mar 2022 18:12:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220325085902.29500-1-liweiwei@iscas.ac.cn>
- <20220325085902.29500-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220325085902.29500-2-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220325085902.29500-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Mar 2022 11:11:11 +1000
-Message-ID: <CAKmqyKOLdqCXc7TgS4Mnn1-Y231rRA8TuqffgfQThXDB5Yc8QA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: optimize helper for vmv<nr>r.v
+Date: Mon, 28 Mar 2022 11:11:37 +1000
+Message-ID: <CAKmqyKPv=G6o1hBqcUJ=guCaoROt6Bx60jXPEqknEHxm0wuj6A@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: optimize condition assign for scale < 0
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,10 +54,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::12d
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::131
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -79,126 +78,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2022 01:11:41 -0000
+X-List-Received-Date: Mon, 28 Mar 2022 01:12:06 -0000
 
-On Fri, Mar 25, 2022 at 7:01 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Fri, Mar 25, 2022 at 7:03 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> LEN is not used for GEN_VEXT_VMV_WHOLE macro, so vmv<nr>r.v can share
-> the same helper
+> for some cases, scale is always equal or less than 0, since lmul is not larger than 3
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/helper.h                   |  5 +----
->  target/riscv/insn_trans/trans_rvv.c.inc | 17 +++++----------
->  target/riscv/vector_helper.c            | 29 ++++++++++---------------
->  3 files changed, 18 insertions(+), 33 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
 >
-> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-> index 26bbab2fab..a669d0187b 100644
-> --- a/target/riscv/helper.h
-> +++ b/target/riscv/helper.h
-> @@ -1086,10 +1086,7 @@ DEF_HELPER_6(vcompress_vm_h, void, ptr, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_6(vcompress_vm_w, void, ptr, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_6(vcompress_vm_d, void, ptr, ptr, ptr, ptr, env, i32)
->
-> -DEF_HELPER_4(vmv1r_v, void, ptr, ptr, env, i32)
-> -DEF_HELPER_4(vmv2r_v, void, ptr, ptr, env, i32)
-> -DEF_HELPER_4(vmv4r_v, void, ptr, ptr, env, i32)
-> -DEF_HELPER_4(vmv8r_v, void, ptr, ptr, env, i32)
-> +DEF_HELPER_4(vmvr_v, void, ptr, ptr, env, i32)
->
->  DEF_HELPER_5(vzext_vf2_h, void, ptr, ptr, ptr, env, i32)
->  DEF_HELPER_5(vzext_vf2_w, void, ptr, ptr, ptr, env, i32)
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 2878ca3132..ec7c0e0d36 100644
+> index 4ea7e41e1a..2878ca3132 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -3695,7 +3695,7 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *a)
->   * Whole Vector Register Move Instructions ignore vtype and vl setting.
->   * Thus, we don't need to check vill bit. (Section 16.6)
->   */
-> -#define GEN_VMV_WHOLE_TRANS(NAME, LEN, SEQ)                             \
-> +#define GEN_VMV_WHOLE_TRANS(NAME, LEN)                             \
->  static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
->  {                                                                       \
->      if (require_rvv(s) &&                                               \
-> @@ -3710,13 +3710,8 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
->          } else {                                                        \
->              TCGLabel *over = gen_new_label();                           \
->              tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, maxsz, over);  \
-> -                                                                        \
-> -            static gen_helper_gvec_2_ptr * const fns[4] = {             \
-> -                gen_helper_vmv1r_v, gen_helper_vmv2r_v,                 \
-> -                gen_helper_vmv4r_v, gen_helper_vmv8r_v,                 \
-> -            };                                                          \
->              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2), \
-> -                               cpu_env, maxsz, maxsz, 0, fns[SEQ]);     \
-> +                               cpu_env, maxsz, maxsz, 0, gen_helper_vmvr_v); \
->              mark_vs_dirty(s);                                           \
->              gen_set_label(over);                                        \
->          }                                                               \
-> @@ -3725,10 +3720,10 @@ static bool trans_##NAME(DisasContext *s, arg_##NAME * a)               \
->      return false;                                                       \
+> @@ -1198,7 +1198,7 @@ GEN_LDST_WHOLE_TRANS(vs8r_v, 8, true)
+>  static inline uint32_t MAXSZ(DisasContext *s)
+>  {
+>      int scale = s->lmul - 3;
+> -    return scale < 0 ? s->cfg_ptr->vlen >> -scale : s->cfg_ptr->vlen << scale;
+> +    return s->cfg_ptr->vlen >> -scale;
 >  }
 >
-> -GEN_VMV_WHOLE_TRANS(vmv1r_v, 1, 0)
-> -GEN_VMV_WHOLE_TRANS(vmv2r_v, 2, 1)
-> -GEN_VMV_WHOLE_TRANS(vmv4r_v, 4, 2)
-> -GEN_VMV_WHOLE_TRANS(vmv8r_v, 8, 3)
-> +GEN_VMV_WHOLE_TRANS(vmv1r_v, 1)
-> +GEN_VMV_WHOLE_TRANS(vmv2r_v, 2)
-> +GEN_VMV_WHOLE_TRANS(vmv4r_v, 4)
-> +GEN_VMV_WHOLE_TRANS(vmv8r_v, 8)
+>  static bool opivv_check(DisasContext *s, arg_rmrr *a)
+> @@ -3597,8 +3597,7 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr *a)
 >
->  static bool int_ext_check(DisasContext *s, arg_rmr *a, uint8_t div)
->  {
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 3bd4aac9c9..1d4982ef7f 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -4888,25 +4888,18 @@ GEN_VEXT_VCOMPRESS_VM(vcompress_vm_w, uint32_t, H4)
->  GEN_VEXT_VCOMPRESS_VM(vcompress_vm_d, uint64_t, H8)
+>      if (a->vm && s->vl_eq_vlmax) {
+>          int scale = s->lmul - (s->sew + 3);
+> -        int vlmax = scale < 0 ?
+> -                       s->cfg_ptr->vlen >> -scale : s->cfg_ptr->vlen << scale;
+> +        int vlmax = s->cfg_ptr->vlen >> -scale;
+>          TCGv_i64 dest = tcg_temp_new_i64();
 >
->  /* Vector Whole Register Move */
-> -#define GEN_VEXT_VMV_WHOLE(NAME, LEN)                      \
-> -void HELPER(NAME)(void *vd, void *vs2, CPURISCVState *env, \
-> -                  uint32_t desc)                           \
-> -{                                                          \
-> -    /* EEW = 8 */                                          \
-> -    uint32_t maxsz = simd_maxsz(desc);                     \
-> -    uint32_t i = env->vstart;                              \
-> -                                                           \
-> -    memcpy((uint8_t *)vd + H1(i),                          \
-> -           (uint8_t *)vs2 + H1(i),                         \
-> -           maxsz - env->vstart);                           \
-> -                                                           \
-> -    env->vstart = 0;                                       \
-> -}
-> +void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
-> +{
-> +    /* EEW = 8 */
-> +    uint32_t maxsz = simd_maxsz(desc);
-> +    uint32_t i = env->vstart;
-> +
-> +    memcpy((uint8_t *)vd + H1(i),
-> +           (uint8_t *)vs2 + H1(i),
-> +           maxsz - env->vstart);
+>          if (a->rs1 == 0) {
+> @@ -3630,8 +3629,7 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr *a)
 >
-> -GEN_VEXT_VMV_WHOLE(vmv1r_v, 1)
-> -GEN_VEXT_VMV_WHOLE(vmv2r_v, 2)
-> -GEN_VEXT_VMV_WHOLE(vmv4r_v, 4)
-> -GEN_VEXT_VMV_WHOLE(vmv8r_v, 8)
-> +    env->vstart = 0;
-> +}
->
->  /* Vector Integer Extension */
->  #define GEN_VEXT_INT_EXT(NAME, ETYPE, DTYPE, HD, HS1)            \
+>      if (a->vm && s->vl_eq_vlmax) {
+>          int scale = s->lmul - (s->sew + 3);
+> -        int vlmax = scale < 0 ?
+> -                       s->cfg_ptr->vlen >> -scale : s->cfg_ptr->vlen << scale;
+> +        int vlmax = s->cfg_ptr->vlen >> -scale;
+>          if (a->rs1 >= vlmax) {
+>              tcg_gen_gvec_dup_imm(MO_64, vreg_ofs(s, a->rd),
+>                                   MAXSZ(s), MAXSZ(s), 0);
 > --
 > 2.17.1
 >
