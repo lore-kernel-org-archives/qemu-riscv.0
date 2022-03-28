@@ -1,35 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nYp9o-0003DO-MV
-	for mharc-qemu-riscv@gnu.org; Mon, 28 Mar 2022 09:11:40 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:53636)
+	id 1nYp9x-0003NW-Uw
+	for mharc-qemu-riscv@gnu.org; Mon, 28 Mar 2022 09:11:50 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:53660)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nYp9j-000350-09; Mon, 28 Mar 2022 09:11:35 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:63827
+ id 1nYp9o-0003DV-MN; Mon, 28 Mar 2022 09:11:40 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:63828
  helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nYp9h-0004Ud-4I; Mon, 28 Mar 2022 09:11:34 -0400
+ id 1nYp9m-0004V5-Q5; Mon, 28 Mar 2022 09:11:40 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id DB4DE300089;
- Mon, 28 Mar 2022 13:11:30 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 61401300089;
+ Mon, 28 Mar 2022 13:11:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1648473091;
- bh=8XjPTSCgvJ2zXdwJphhhu+q0qX8Ez19jJaKG41vPCNk=;
- h=From:To:Cc:Subject:Date:Message-Id:Mime-Version:
- Content-Transfer-Encoding;
- b=HQzco3LxVj6aQGzbVJsK4nheXqC8OEWfi0A1b0p6nSy8WmtjY9add1Mh0pxT3EeFP
- /g10CgZnGVX6DRXYxvYQzz5rjnOX3W/dfV42Lh5hPTded6YPo0Y0xo8+X8Bd49F/ak
- SyPsaFRGC/EVU6PcyfyVyonGO0oUVAQYcVH4dgfA=
+ s=2017s01; t=1648473096;
+ bh=kcy6GEq7QNynODPz1ApvBd8m9NHfvR1NF/yo9QPK0d4=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ Mime-Version:Content-Transfer-Encoding;
+ b=JjN9NH4NJicGT4S8PAjd0ff8+vHH9rbdkuL7+NfJHpusN/6eG3JVucbEgtL7Rk7pD
+ TQqZqa2jNY2pP8NmfFK1LSl7gtp/e/HLr2pBMAVWvgTMVYDpbSBaqzEL/AHhx1MKnB
+ MC9NI7LLjh7gK//1dBTRAJ7T6QHQ2efSRo0nvfbU=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 0/1] target/riscv: misa to ISA string conversion fix
-Date: Mon, 28 Mar 2022 22:11:22 +0900
-Message-Id: <cover.1648473008.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v2 1/1] target/riscv: misa to ISA string conversion fix
+Date: Mon, 28 Mar 2022 22:11:23 +0900
+Message-Id: <4a4c11213a161a7eedabe46abe58b351bb0e2ef2.1648473008.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1648473008.git.research_trasio@irq.a4lg.com>
+References: <cover.1648473008.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=153.120.152.154;
@@ -52,16 +54,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Mar 2022 13:11:35 -0000
+X-List-Received-Date: Mon, 28 Mar 2022 13:11:43 -0000
 
-[v1] https://lists.gnu.org/archive/html/qemu-devel/2022-03/msg06350.html
+Some bits in RISC-V `misa' CSR should not be reflected in the ISA
+string.  For instance, `S' and `U' (represents existence of supervisor
+and user mode, respectively) in `misa' CSR must not be copied since
+neither `S' nor `U' are valid single-letter extensions.
 
-S and U are misa bits but not extensions (instead, they are supported
-privilege modes).  Thus, they should not be copied to the ISA string.
-
-[CHANGES: v1 -> v2]
-
-I also removed almost all reserved/dropped single-letter "extensions"
+This commit also removes all reserved/dropped single-letter "extensions"
 from the list.
 
 -   "B": Not going to be a single-letter extension (misa.B is reserved).
@@ -71,19 +71,44 @@ from the list.
 -   "N": Dropped.
 -   "T": Dropped.
 
+It also clarifies that the variable `riscv_single_letter_exts' is a
+single-letter extension order list.
+
 Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-
-
-
-
-Tsukasa OI (1):
-  target/riscv: misa to ISA string conversion fix
-
+---
  target/riscv/cpu.c | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
-
-base-commit: 3d31fe4d662f13c70eb7e87f29513623ccd76322
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ddda4906ff..1f68c696eb 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -34,7 +34,7 @@
+ 
+ /* RISC-V CPU definitions */
+ 
+-static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
++static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+ 
+ const char * const riscv_int_regnames[] = {
+   "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
+@@ -901,12 +901,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+ char *riscv_isa_string(RISCVCPU *cpu)
+ {
+     int i;
+-    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) + 1;
++    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
+     char *isa_str = g_new(char, maxlen);
+     char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+-    for (i = 0; i < sizeof(riscv_exts); i++) {
+-        if (cpu->env.misa_ext & RV(riscv_exts[i])) {
+-            *p++ = qemu_tolower(riscv_exts[i]);
++    for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
++        if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
++            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
+         }
+     }
+     *p = '\0';
 -- 
 2.32.0
 
