@@ -1,68 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZEjG-00043J-VH
-	for mharc-qemu-riscv@gnu.org; Tue, 29 Mar 2022 12:29:58 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:39422)
+	id 1nZHy2-0005Vj-Da
+	for mharc-qemu-riscv@gnu.org; Tue, 29 Mar 2022 15:57:27 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:59972)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1nZEjE-00042j-TC; Tue, 29 Mar 2022 12:29:56 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:38044)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1nZEjB-00022J-Rn; Tue, 29 Mar 2022 12:29:55 -0400
-Received: from mailhub.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id C9ED64025F;
- Tue, 29 Mar 2022 18:29:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1648571389;
- bh=qE3OiJKrPwJ+8I6rGY74/OK07nzmeXcWe1n5Tt1cBGc=;
- h=Date:To:Cc:References:From:Subject:In-Reply-To:From;
- b=D8vAbWAvfpFOYlxUkapkgW5ucQvAaQgzdNKdlXTQRLYhP3+vMOBnrR7PWyFdeX9B3
- 0ITb6YpTFk+b+kgtQFa+WOgMYxLIKQYRIwW5vV7Zjh4IVnig9+z87ydvv01J3ZAlvO
- 61yF3GerjPUa/am8/Q8iW8bgwu+sGWGdcny7DECbBe5AXQgG2ebjxZfLywJGFGDy45
- 6kuhGkGxEvD/NSU+xjN0+MmzhZ9+8s4NXpGyaRVZqqo7xHgBF5gD/DG/4bq+c0q8Ak
- Lrxs6EhO96Zq/xYnaCVqAHEShRJBnlB3+lOQbfauofayJTz/Mcc/RVyty1TeNPlwS7
- XkucSyMJJJ3qQ==
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub.u-ga.fr (Postfix) with ESMTP id C785710005A;
- Tue, 29 Mar 2022 18:29:49 +0200 (CEST)
-Received: from [147.171.132.208] (palmier.tima.u-ga.fr [147.171.132.208])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 90161140057;
- Tue, 29 Mar 2022 18:29:49 +0200 (CEST)
-Message-ID: <0b23307b-5427-0882-9bc6-bd2bd22f0c3d@univ-grenoble-alpes.fr>
-Date: Tue, 29 Mar 2022 18:29:47 +0200
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nZHxw-0005Tm-Lb
+ for qemu-riscv@nongnu.org; Tue, 29 Mar 2022 15:57:21 -0400
+Received: from [2607:f8b0:4864:20::530] (port=42588
+ helo=mail-pg1-x530.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nZHxu-0004vD-Hl
+ for qemu-riscv@nongnu.org; Tue, 29 Mar 2022 15:57:20 -0400
+Received: by mail-pg1-x530.google.com with SMTP id o8so15703830pgf.9
+ for <qemu-riscv@nongnu.org>; Tue, 29 Mar 2022 12:57:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=U28UX+KknfBQMHJ0Njiwqq4sjqzE4xwH++gkC1d5ZC0=;
+ b=RDfC6St1RQYAE2YgbypIRJpVNG/elN6KtpMhY5Yq18iP2p6kEp7gwJA4NqRtb/x+vT
+ XT69LBgnOAref3as+gCgibk/MDkPu6QOpdB5Wuheu77O9nU9veXC1Tu5946r8WLurF86
+ qlfuPUeoeS8OcVcH7KjaE/K1f9teSLltQS+b8uw8rkj717ekNfN91kzLc06kyiyTHaM0
+ IciQQU/ElmdDIe00Efqah2FzYRbVTOwAzrNGKeWEhBkwgMfjd8uYP1QSzqWnEHyAeyU5
+ ZF8FQNhSw822tjdAN/lm1gVyX8FHN5tiQxtDmmzCjb8Qe6CWNKm8m7/iuO3dWe2EBacH
+ TdbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=U28UX+KknfBQMHJ0Njiwqq4sjqzE4xwH++gkC1d5ZC0=;
+ b=PHlWaj5QYpDSxvooHSrQSKJWIIv7+UTbOiPxZw7nZg+AFuud4o4LWei1JNU6GZdf7m
+ 1HXp+7Hb3duUUxNFB1/NmolJ4nvq8fsje00djO784uTaJXqx+MGVqepnjHcXJzF5KzMH
+ 9pccuPWNwxEmZv+BnrUGG/lW27yXyNUS/bLPULbhmo/sxgHfz2vKfa/bhe24sPoVONad
+ 8+m5jsNPBtWDvKUU76baJ7QLKSh5pz1aUAFXpPtQVBdCWoN+0s7AzW0VOoJtUmWUyMEo
+ yAiD5Lh1Bs9DONKD/xFS5fQgGb29/VwmN/YGLU+7AQkuHsFm3xR8wjS9JQumsfAt6vTb
+ Lc4g==
+X-Gm-Message-State: AOAM530LYwg7Qq5HIfyobY6SFxwR3bpuMf5X7ApJeRTkGFdFPvjW1r70
+ hydOg3cOwo3xKEflJMnJKErhFw==
+X-Google-Smtp-Source: ABdhPJwuQBGBLPub9kcAOs0mR2Xogq8hVJGFFI773s22IoDbqcHbpBHwt8zvS8qYnpw4GIJtP/1glQ==
+X-Received: by 2002:a65:5a06:0:b0:375:81c9:74b1 with SMTP id
+ y6-20020a655a06000000b0037581c974b1mr3184821pgs.122.1648583836214; 
+ Tue, 29 Mar 2022 12:57:16 -0700 (PDT)
+Received: from atishp.ba.rivosinc.com ([66.220.2.162])
+ by smtp.gmail.com with ESMTPSA id
+ c63-20020a624e42000000b004fa9ee41b7bsm19984251pfb.217.2022.03.29.12.57.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Mar 2022 12:57:15 -0700 (PDT)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Frank Chang <frank.chang@sifive.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Heiko Stubner <heiko@sntech.de>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v7] target/riscv: Add isa extenstion strings to the device tree
+Date: Tue, 29 Mar 2022 12:56:57 -0700
+Message-Id: <20220329195657.1725425-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: fr
-To: Tsukasa OI <research_trasio@irq.a4lg.com>,
- Alistair Francis <alistair23@gmail.com>, Frank Chang <frank.chang@sifive.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <cover.1648473008.git.research_trasio@irq.a4lg.com>
- <4a4c11213a161a7eedabe46abe58b351bb0e2ef2.1648473008.git.research_trasio@irq.a4lg.com>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: Re: [PATCH v2 1/1] target/riscv: misa to ISA string conversion fix
-In-Reply-To: <4a4c11213a161a7eedabe46abe58b351bb0e2ef2.1648473008.git.research_trasio@irq.a4lg.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (42)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::530
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,60 +83,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Mar 2022 16:29:57 -0000
+X-List-Received-Date: Tue, 29 Mar 2022 19:57:22 -0000
 
-Hello,
+The Linux kernel parses the ISA extensions from "riscv,isa" DT
+property. It used to parse only the single letter base extensions
+until now. A generic ISA extension parsing framework was proposed[1]
+recently that can parse multi-letter ISA extensions as well.
 
-Le 28/03/2022 à 15:11, Tsukasa OI a écrit :
-> Some bits in RISC-V `misa' CSR should not be reflected in the ISA
-> string.  For instance, `S' and `U' (represents existence of supervisor
-> and user mode, respectively) in `misa' CSR must not be copied since
-> neither `S' nor `U' are valid single-letter extensions.
-> 
-> This commit also removes all reserved/dropped single-letter "extensions"
-> from the list.
-> 
-> -   "B": Not going to be a single-letter extension (misa.B is reserved).
-> -   "J": Not going to be a single-letter extension (misa.J is reserved).
-> -   "K": Not going to be a single-letter extension (misa.K is reserved).
-> -   "L": Dropped.
-> -   "N": Dropped.
-> -   "T": Dropped.
-> 
-> It also clarifies that the variable `riscv_single_letter_exts' is a
-> single-letter extension order list.
-> 
-> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-> ---
->   target/riscv/cpu.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..1f68c696eb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -34,7 +34,7 @@
->   
->   /* RISC-V CPU definitions */
->   
-> -static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
-> +static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
->   
->   const char * const riscv_int_regnames[] = {
->     "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
-> @@ -901,12 +901,12 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
->   char *riscv_isa_string(RISCVCPU *cpu)
->   {
->       int i;
-> -    const size_t maxlen = sizeof("rv128") + sizeof(riscv_exts) + 1;
-> +    const size_t maxlen = sizeof("rv128") + sizeof(riscv_single_letter_exts);
->       char *isa_str = g_new(char, maxlen);
->       char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
+Generate the extended ISA string by appending the available ISA extensions
+to the "riscv,isa" string if it is enabled so that kernel can process it.
 
-To avoid one dependency on TARGET_LONG_BITS that is not necessary now that we
-have mxl, I would suggest to replace the previous line with:
-      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d",
-                                   1 << (4 + cpu->env.misa_mxl_max));
+[1] https://lkml.org/lkml/2022/2/15/263
 
-Frédéric
+Reviewed-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Tested-by: Bin Meng <bmeng.cn@gmail.com>
+Suggested-by: Heiko Stubner <heiko@sntech.de>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+
+Changes from v6->v7:
+1. Fixed indentation and typo.
+2. Added Reviewed-by tags.
+
+Changes from v5->v6:
+1. Improved commit message.
+2. Fixed a typo for Zfh.
+
+Changes from v4->v5:
+1. Fixed the order of Zxx extensions.
+2. Added a comment clearly describing the rules of extension order.
+
+Changes from v3->v4:
+1. Fixed the order of the extension names.
+2. Added all the available ISA extensions in Qemu.
+
+Changes from v2->v3:
+1. Used g_strconcat to replace snprintf & a max isa string length as
+suggested by Anup.
+2. I have not included the Tested-by Tag from Heiko because the
+implementation changed from v2 to v3.
+
+Changes from v1->v2:
+1. Improved the code redability by using arrays instead of individual check
+---
+ target/riscv/cpu.c | 60 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 198274fb34e5..86e48ff54dd1 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -34,6 +34,11 @@
+ 
+ /* RISC-V CPU definitions */
+ 
++struct isa_ext_data {
++    const char *name;
++    bool enabled;
++};
++
+ static const char riscv_exts[26] = "IEMAFDQCLBJTPVNSUHKORWXYZG";
+ 
+ const char * const riscv_int_regnames[] = {
+@@ -920,6 +925,60 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+     device_class_set_props(dc, riscv_cpu_properties);
+ }
+ 
++#define ISA_EDATA_ENTRY(name, prop) {#name, cpu->cfg.prop}
++
++static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
++{
++    char *old = *isa_str;
++    char *new = *isa_str;
++    int i;
++
++    /**
++     * Here are the ordering rules of extension naming defined by RISC-V
++     * specification :
++     * 1. All extensions should be separated from other multi-letter extensions
++     *    by an underscore.
++     * 2. The first letter following the 'Z' conventionally indicates the most
++     *    closely related alphabetical extension category, IMAFDQLCBKJTPVH.
++     *    If multiple 'Z' extensions are named, they should be ordered first
++     *    by category, then alphabetically within a category.
++     * 3. Standard supervisor-level extensions (starts with 'S') should be
++     *    listed after standard unprivileged extensions.  If multiple
++     *    supervisor-level extensions are listed, they should be ordered
++     *    alphabetically.
++     * 4. Non-standard extensions (starts with 'X') must be listed after all
++     *    standard extensions. They must be separated from other multi-letter
++     *    extensions by an underscore.
++     */
++    struct isa_ext_data isa_edata_arr[] = {
++        ISA_EDATA_ENTRY(zfh, ext_zfh),
++        ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
++        ISA_EDATA_ENTRY(zfinx, ext_zfinx),
++        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
++        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
++        ISA_EDATA_ENTRY(zdinx, ext_zdinx),
++        ISA_EDATA_ENTRY(zba, ext_zba),
++        ISA_EDATA_ENTRY(zbb, ext_zbb),
++        ISA_EDATA_ENTRY(zbc, ext_zbc),
++        ISA_EDATA_ENTRY(zbs, ext_zbs),
++        ISA_EDATA_ENTRY(zve32f, ext_zve32f),
++        ISA_EDATA_ENTRY(zve64f, ext_zve64f),
++        ISA_EDATA_ENTRY(svinval, ext_svinval),
++        ISA_EDATA_ENTRY(svnapot, ext_svnapot),
++        ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
++    };
++
++    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
++        if (isa_edata_arr[i].enabled) {
++            new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
++            g_free(old);
++            old = new;
++        }
++    }
++
++    *isa_str = new;
++}
++
+ char *riscv_isa_string(RISCVCPU *cpu)
+ {
+     int i;
+@@ -932,6 +991,7 @@ char *riscv_isa_string(RISCVCPU *cpu)
+         }
+     }
+     *p = '\0';
++    riscv_isa_string_ext(cpu, &isa_str, maxlen);
+     return isa_str;
+ }
+ 
+-- 
+2.25.1
+
 
