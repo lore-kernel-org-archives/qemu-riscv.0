@@ -1,27 +1,26 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXss-000716-12
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:10 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:51816)
+	id 1nZXst-000778-6i
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:11 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:51786)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsb-0006mJ-8G; Wed, 30 Mar 2022 08:56:53 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:40930)
+ id 1nZXsZ-0006l8-M2; Wed, 30 Mar 2022 08:56:52 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:40866)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsY-0004YY-0h; Wed, 30 Mar 2022 08:56:52 -0400
+ id 1nZXsX-0004Y8-GF; Wed, 30 Mar 2022 08:56:51 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 9794D21CC1;
- Wed, 30 Mar 2022 12:56:45 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 09B3621C38;
+ Wed, 30 Mar 2022 12:56:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1648645006;
+ s=mail; t=1648645004;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=AKvPP77QeCmqz1npcQBtAJ/AmH8Km0hFOkkSeWT72xg=;
- b=m/TBb0Jb44e1pZMczEMmZ7Hcczonlcd0cKMBYEwQTUURddUmT3Dxso5S61VxIoffUn/Vvg
- SJoP+D0STO7YQjwrRKUUEtp+jCWAgWB3ECqsnkSEUdcr/fiVTTxvsok3lIfWR66LYBiBoI
- VDdj8iy9KmSR/p2yvsMBic8Qdm3bClk=
+ content-transfer-encoding:content-transfer-encoding;
+ bh=CTHLxshGLn+LMFCmOT0tST5SI/piv8b6mpuMZAFlww0=;
+ b=bMijghb3ZxySJFZ5hguLZ1NJj61rRhufZGQ0OOc662vJmtougXTMoULm4QbNncYwsTKjWj
+ 5TohKjSz6kck9gbHVue+ljKHpJBNGPk4pA2rrNs7mAqxIqU0M661O+3kDeFI6Pwu8EVmBU
+ gNy56SQsG4mfwNpvyur3TEXUrkZclRQ=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
@@ -35,12 +34,10 @@ Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
  Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC PATCH 02/18] hw/cpu/cpus: introduce _cpus_ device
-Date: Wed, 30 Mar 2022 14:56:23 +0200
-Message-Id: <20220330125639.201937-3-damien.hedde@greensocs.com>
+Subject: [RFC PATCH 00/18] user-creatable cpu clusters
+Date: Wed, 30 Mar 2022 14:56:21 +0200
+Message-Id: <20220330125639.201937-1-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
-References: <20220330125639.201937-1-damien.hedde@greensocs.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
@@ -64,256 +61,91 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 12:56:59 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 12:56:53 -0000
 
-This object will be a _cpu-cluster_ generalization and
-is meant to allow create cpus of the same type.
+Hi,
 
-The main goal is that this object, on contrary to _cpu-cluster-_,
-can be used to dynamically create cpus: it does not rely on
-external code to populate the object with cpus.
+This series add devices to be able to user-create (coldplug) cpu
+clusters. The existing cpu cluster dictates how cpus are exposed
+in gdb, but it does not handle the cpu objects creation. This series
+adds a new device to handle both issues and adds support for two
+architectures: arm and riscv.
 
-Allowing the user to create a cpu cluster and each _cpu_
-separately would be hard because of the following reasons:
-+ cpu reset need to be handled
-+ instantiation and realize of cpu-cluster and the cpus
-  are interleaved
-+ cpu cluster must contains only identical cpus and it seems
-  difficult to check that at runtime.
-Therefore we add a new type solving all this constraints.
+Please look at patches 2 and 3 for more details about the new device.
 
-_cpu-cluster_ will be updated to inherit from this class
-in following commits.
+Last part concerning the riscv is rfc as I do non-backward compatible
+updates. I'm not sure what migration (or other) constraints we have
+on these machines and I probably need to make some changes to cope
+with them.
 
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
----
- include/hw/cpu/cpus.h |  71 +++++++++++++++++++++++
- hw/cpu/cpus.c         | 127 ++++++++++++++++++++++++++++++++++++++++++
- hw/cpu/meson.build    |   2 +-
- 3 files changed, 199 insertions(+), 1 deletion(-)
+This series almost deprecates the cpu-cluster type as all uses
+but one are replaced.
+
+It is organized as follows:
+
++ Patches 1 to 7 adds a new base device to replace cpu-cluster
+
++ Patches 8 and 9 adds an arm specific version and replace existing
+  clusters in the xlnx-zynqmp machine.
+
++ patches 10 to 17 updates the riscv_array. It was already used to
+  create cpus but was not a cpu cluster.
+
+Thanks for any comments,
+--
+Damien
+
+Damien Hedde (18):
+  define MAX_CLUSTERS in cpu.h instead of cluster.h
+  hw/cpu/cpus: introduce _cpus_ device
+  hw/cpu/cpus: prepare to handle cpu clusters
+  hw/cpu/cluster: make _cpu-cluster_ a subclass of _cpus_
+  gdbstub: deal with _cpus_ object instead of _cpu-cluster_
+  hw/cpu/cluster: remove cluster_id now that gdbstub is updated
+  hw/cpu/cpus: add a common start-powered-off property
+  hw/arm/arm_cpus: add arm_cpus device
+  hw/arm/xlnx-zynqmp: convert cpu clusters to arm_cpus
+  hw/riscv/riscv_hart: prepare transition to cpus
+  hw/riscv: prepare riscv_hart transition to cpus
+  hw/riscv/virt: prepare riscv_hart transition to cpus
+  hw/riscv/spike: prepare riscv_hart transition to cpus
+  hw/riscv/riscv_hart: use cpus as base class
+  hw/riscv/sifive_u&microchip_pfsoc: apply riscv_hart_array update
+  hw/riscv: update remaining machines due to riscv_hart_array update
+  hw/riscv/riscv_hart: remove temporary features
+  add myself as reviewer of the newly added _cpus_
+
+ include/hw/arm/arm_cpus.h          |  45 +++++++
+ include/hw/arm/xlnx-zynqmp.h       |   8 +-
+ include/hw/core/cpu.h              |   6 +
+ include/hw/cpu/cluster.h           |  26 ++--
+ include/hw/cpu/cpus.h              |  93 ++++++++++++++
+ include/hw/riscv/microchip_pfsoc.h |   2 -
+ include/hw/riscv/riscv_hart.h      |  25 +++-
+ include/hw/riscv/sifive_u.h        |   2 -
+ gdbstub.c                          |  12 +-
+ hw/arm/arm_cpus.c                  |  63 ++++++++++
+ hw/arm/xlnx-zynqmp.c               | 121 +++++++-----------
+ hw/cpu/cluster.c                   |  53 ++++----
+ hw/cpu/cpus.c                      | 195 +++++++++++++++++++++++++++++
+ hw/riscv/boot.c                    |   2 +-
+ hw/riscv/microchip_pfsoc.c         |  28 +----
+ hw/riscv/opentitan.c               |   4 +-
+ hw/riscv/riscv_hart.c              |  44 ++-----
+ hw/riscv/shakti_c.c                |   4 +-
+ hw/riscv/sifive_e.c                |   4 +-
+ hw/riscv/sifive_u.c                |  31 ++---
+ hw/riscv/spike.c                   |  18 +--
+ hw/riscv/virt.c                    |  79 +++++++-----
+ MAINTAINERS                        |   3 +
+ hw/arm/meson.build                 |   1 +
+ hw/cpu/meson.build                 |   2 +-
+ 25 files changed, 612 insertions(+), 259 deletions(-)
+ create mode 100644 include/hw/arm/arm_cpus.h
  create mode 100644 include/hw/cpu/cpus.h
+ create mode 100644 hw/arm/arm_cpus.c
  create mode 100644 hw/cpu/cpus.c
 
-diff --git a/include/hw/cpu/cpus.h b/include/hw/cpu/cpus.h
-new file mode 100644
-index 0000000000..c65f568ef8
---- /dev/null
-+++ b/include/hw/cpu/cpus.h
-@@ -0,0 +1,71 @@
-+/*
-+ * QEMU CPUs type
-+ *
-+ * Copyright (c) 2022 GreenSocs
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef HW_CPU_CPUS_H
-+#define HW_CPU_CPUS_H
-+
-+#include "qemu/typedefs.h"
-+#include "hw/qdev-core.h"
-+#include "qom/object.h"
-+
-+/*
-+ * This object represent several CPUs which are all identical.
-+ *
-+ * If CPUs are not identical (for example, Cortex-A53 and Cortex-A57 CPUs in an
-+ * Arm big.LITTLE system) they should be in different groups. If the CPUs do
-+ * not have the same view of memory (for example the main CPU and a management
-+ * controller processor) they should be in different groups.
-+ *
-+ * This is an abstract class, subclasses are supposed to be created on
-+ * per-architecture basis to handle the specifics of the cpu architecture.
-+ * Subclasses are meant to be user-creatable (for cold-plug).
-+ */
-+
-+#define TYPE_CPUS "cpus"
-+OBJECT_DECLARE_TYPE(CpusState, CpusClass, CPUS)
-+
-+/**
-+ * CpusState:
-+ * @cpu_type: The type of cpu.
-+ * @topology.cpus: The number of cpus in this group.
-+ *      Explicity put this field into a topology structure in
-+ *      order to eventually update this smoothly with a full
-+ *      CpuTopology structure in the future.
-+ * @cpus: Array of pointer to cpu objects.
-+ */
-+struct CpusState {
-+    /*< private >*/
-+    DeviceState parent_obj;
-+
-+    /*< public >*/
-+    char *cpu_type;
-+    struct {
-+        uint16_t cpus;
-+    } topology;
-+    CPUState **cpus;
-+};
-+
-+typedef void (*CpusConfigureCpu)(CpusState *s, CPUState *cpu, unsigned idx);
-+
-+/**
-+ * CpusClass:
-+ * @base_cpu_type: base cpu type accepted by this cpu group
-+ *     (the state cpu_type will be tested against it).
-+ * @configure_cpu: method to configure a cpu (called between
-+ *     cpu init and realize)
-+ * @skip_cpus_creation: CPUCLuster do not rely on creating
-+ *     cpus internally. This flag disables this feature.
-+ */
-+struct CpusClass {
-+    DeviceClass parent_class;
-+    const char *base_cpu_type;
-+    CpusConfigureCpu configure_cpu;
-+    bool skip_cpus_creation;
-+};
-+
-+#endif /* HW_CPU_CPUS_H */
-diff --git a/hw/cpu/cpus.c b/hw/cpu/cpus.c
-new file mode 100644
-index 0000000000..5fad1de2c7
---- /dev/null
-+++ b/hw/cpu/cpus.c
-@@ -0,0 +1,127 @@
-+/*
-+ * QEMU CPUs type
-+ *
-+ * Copyright (c) 2022 GreenSocs
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "hw/qdev-properties.h"
-+#include "qapi/error.h"
-+#include "qemu/module.h"
-+#include "qemu/cutils.h"
-+#include "hw/cpu/cpus.h"
-+#include "hw/core/cpu.h"
-+#include "hw/resettable.h"
-+#include "sysemu/reset.h"
-+
-+static Property cpus_properties[] = {
-+    DEFINE_PROP_STRING("cpu-type", CpusState, cpu_type),
-+    DEFINE_PROP_UINT16("num-cpus", CpusState, topology.cpus, 0),
-+    DEFINE_PROP_END_OF_LIST()
-+};
-+
-+static void cpus_reset(Object *obj)
-+{
-+    CpusState *s = CPUS(obj);
-+    for (unsigned i = 0; i < s->topology.cpus; i++) {
-+        cpu_reset(s->cpus[i]);
-+    }
-+}
-+
-+static void cpus_create_cpus(CpusState *s, Error **errp)
-+{
-+    Error *err = NULL;
-+    CpusClass *cgc = CPUS_GET_CLASS(s);
-+    s->cpus = g_new0(CPUState *, s->topology.cpus);
-+
-+    for (unsigned i = 0; i < s->topology.cpus; i++) {
-+        CPUState *cpu = CPU(object_new(s->cpu_type));
-+        s->cpus[i] = cpu;
-+
-+        /* set child property and release the initial ref */
-+        object_property_add_child(OBJECT(s), "cpu[*]", OBJECT(cpu));
-+        object_unref(OBJECT(cpu));
-+
-+        /* let subclass configure the cpu */
-+        if (cgc->configure_cpu) {
-+            cgc->configure_cpu(s, cpu, i);
-+        }
-+
-+        /* finally realize the cpu */
-+        qdev_realize(DEVICE(cpu), NULL, &err);
-+        if (err) {
-+            error_propagate(errp, err);
-+            return;
-+        }
-+    }
-+}
-+
-+static void cpus_realize(DeviceState *dev, Error **errp)
-+{
-+    CpusState *s = CPUS(dev);
-+    CpusClass *cgc = CPUS_GET_CLASS(s);
-+
-+    /* if subclass defined a base type, let's check it */
-+    if (cgc->base_cpu_type &&
-+        !object_class_dynamic_cast(object_class_by_name(s->cpu_type),
-+                                   cgc->base_cpu_type)) {
-+        error_setg(errp, "bad cpu-type '%s' (expected '%s')", s->cpu_type,
-+                   cgc->base_cpu_type);
-+        return;
-+    }
-+
-+    if (s->topology.cpus == 0) {
-+        error_setg(errp, "num-cpus is zero");
-+        return;
-+    }
-+
-+    /* create the cpus if needed */
-+    if (!cgc->skip_cpus_creation) {
-+        cpus_create_cpus(s, errp);
-+        qemu_register_reset(resettable_cold_reset_fn, s);
-+    }
-+}
-+
-+static void cpus_finalize(Object *obj)
-+{
-+    CpusState *s = CPUS(obj);
-+
-+    g_free(s->cpus);
-+}
-+
-+static void cpus_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+
-+    device_class_set_props(dc, cpus_properties);
-+    dc->realize = cpus_realize;
-+
-+    rc->phases.exit = cpus_reset;
-+
-+    /*
-+     * Subclasses are expected to be user-creatable.
-+     * They may provide support to hotplug cpus, but they are
-+     * not expected to be hotpluggable themselves.
-+     */
-+    dc->hotpluggable = false;
-+}
-+
-+static const TypeInfo cpus_type_info = {
-+    .name              = TYPE_CPUS,
-+    .parent            = TYPE_DEVICE,
-+    .abstract          = true,
-+    .instance_size     = sizeof(CpusState),
-+    .instance_finalize = cpus_finalize,
-+    .class_size        = sizeof(CpusClass),
-+    .class_init        = cpus_class_init,
-+};
-+
-+static void cpus_register_types(void)
-+{
-+    type_register_static(&cpus_type_info);
-+}
-+
-+type_init(cpus_register_types)
-diff --git a/hw/cpu/meson.build b/hw/cpu/meson.build
-index 9e52fee9e7..ca4dda4f88 100644
---- a/hw/cpu/meson.build
-+++ b/hw/cpu/meson.build
-@@ -1,4 +1,4 @@
--softmmu_ss.add(files('core.c', 'cluster.c'))
-+softmmu_ss.add(files('core.c', 'cluster.c', 'cpus.c'))
- 
- specific_ss.add(when: 'CONFIG_ARM11MPCORE', if_true: files('arm11mpcore.c'))
- specific_ss.add(when: 'CONFIG_REALVIEW', if_true: files('realview_mpcore.c'))
 -- 
 2.35.1
 
