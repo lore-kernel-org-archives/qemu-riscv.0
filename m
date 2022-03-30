@@ -1,60 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXtL-0000Fz-BG
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:39 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:52100)
+	id 1nZXto-0000pT-1b
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:58:08 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:48238)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXtD-0008FX-U5; Wed, 30 Mar 2022 08:57:31 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:41240)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXtC-0004bR-33; Wed, 30 Mar 2022 08:57:31 -0400
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 80A8E21EDA;
- Wed, 30 Mar 2022 12:56:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1648645016;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=U6XTnSySc1VPFdO0j6fRlkKZ8C5bePQAqffOUVTjrec=;
- b=3N71HHKtlg8nGTnSpit5vmnXB+ZUX1rYBY5FFvQBXRZngq8R4AgyXeXumUScnOPY+CFHHQ
- bQkbUOnkFEenTuo1KKFVNhtIn7W42HTzgcKOB3MM1jhLSt+3JQWzM31uFjUzgwVgioX6t8
- qTyq9S08zoOG9N/bvoDM8y+LVtQrciY=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
- Alistair Francis <Alistair.Francis@wdc.com>
-Subject: [RFC PATCH 16/18] hw/riscv: update remaining machines due to
- riscv_hart_array update
-Date: Wed, 30 Mar 2022 14:56:37 +0200
-Message-Id: <20220330125639.201937-17-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
-References: <20220330125639.201937-1-damien.hedde@greensocs.com>
+ (Exim 4.90_1) (envelope-from <phantom@zju.edu.cn>)
+ id 1nZXbG-0008M4-Df; Wed, 30 Mar 2022 08:39:00 -0400
+Received: from mail.zju.edu.cn ([61.164.42.155]:13242 helo=zju.edu.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <phantom@zju.edu.cn>)
+ id 1nZXb7-0003Z0-R7; Wed, 30 Mar 2022 08:38:54 -0400
+Received: by ajax-webmail-mail-app2 (Coremail) ; Wed, 30 Mar 2022 20:38:30
+ +0800 (GMT+08:00)
+X-Originating-IP: [10.190.67.184]
+Date: Wed, 30 Mar 2022 20:38:30 +0800 (GMT+08:00)
+X-CM-HeaderCharset: UTF-8
+From: phantom@zju.edu.cn
+To: "Idan Horowitz" <idan.horowitz@gmail.com>
+Cc: qemu-riscv@nongnu.org, Alistair.Francis@wdc.com, qemu-devel@nongnu.org
+Subject: Re: Re: [PATCH] target/riscv: Exit current TB after an sfence.vma
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.8 build 20200806(7a9be5e8)
+ Copyright (c) 2002-2022 www.mailtech.cn zju.edu.cn
+In-Reply-To: <CA+4MfEKzZStKBx3-FVm8uiyh=LhiWAXPvChxGyVD20sHkcQRSg@mail.gmail.com>
+References: <7f383fc2.81a2.17f93c0dad7.Coremail.phantom@zju.edu.cn>
+ <CAOnJCUJck5o_-cayf-=mccenoZH048+2zhGDGOoWKiVMUFWWmQ@mail.gmail.com>
+ <CA+4MfE+hFQhRYEgEXy-u10=MBhnmA5f7MdRFjW7Xc0dLPSiLXw@mail.gmail.com>
+ <CAOnJCU+ZMnLoi2GNDdKz24KJbHpEBQT1=Qo5LbSE1xz=WvwbrA@mail.gmail.com>
+ <CA+4MfEKzZStKBx3-FVm8uiyh=LhiWAXPvChxGyVD20sHkcQRSg@mail.gmail.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam: Yes
-Received-SPF: pass client-ip=5.135.226.135;
- envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+Message-ID: <621d67f0.257cf.17fdad5aa33.Coremail.phantom@zju.edu.cn>
+X-Coremail-Locale: en_US
+X-CM-TRANSID: by_KCgCXDxdGT0Ri7GTIAA--.18663W
+X-CM-SenderInfo: qssqjiatstq6lmxovvfxof0/1tbiAgIFAVZdtY9ZVwAAs7
+X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
+ CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
+ daVFxhVjvjDU=
+Received-SPF: pass client-ip=61.164.42.155; envelope-from=phantom@zju.edu.cn;
+ helo=zju.edu.cn
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 30 Mar 2022 08:58:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -66,121 +57,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 12:57:33 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 12:39:24 -0000
 
-virt & spike machines have multiple sockets (but they still put
-all cpus in the same default cluster). For these 2 machines
-we disable the clustering in the array in order to keep the
-behavior.
-
-opentitan, sifive_e and shakti_c, were using the default cluster
-too. But we can use the embedded cluster as it is equivalent.
-
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
----
- hw/riscv/opentitan.c | 4 ++--
- hw/riscv/shakti_c.c  | 4 ++--
- hw/riscv/sifive_e.c  | 4 ++--
- hw/riscv/spike.c     | 5 +++--
- hw/riscv/virt.c      | 5 +++--
- 5 files changed, 12 insertions(+), 10 deletions(-)
-
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 2eb7454d8a..4e90610f1d 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -132,10 +132,10 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
- 
-     object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
-                             &error_abort);
--    object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
-+    object_property_set_int(OBJECT(&s->cpus), "num-cpus", ms->smp.cpus,
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
--    riscv_hart_array_realize(&s->cpus, &error_abort);
-+    qdev_realize(DEVICE(&s->cpus), NULL, &error_abort);
- 
-     /* Boot ROM */
-     memory_region_init_rom(&s->rom, OBJECT(dev_soc), "riscv.lowrisc.ibex.rom",
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 93e0c8dd68..5158ea6e8b 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -108,7 +108,7 @@ static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
-     ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(dev);
-     MemoryRegion *system_memory = get_system_memory();
- 
--    riscv_hart_array_realize(&sss->cpus, &error_abort);
-+    qdev_realize(DEVICE(&sss->cpus), NULL, &error_abort);
- 
-     sss->plic = sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base,
-         (char *)SHAKTI_C_PLIC_HART_CONFIG, ms->smp.cpus, 0,
-@@ -171,7 +171,7 @@ static void shakti_c_soc_instance_init(Object *obj)
-      */
-     object_property_set_str(OBJECT(&sss->cpus), "cpu-type",
-                             TYPE_RISCV_CPU_SHAKTI_C, &error_abort);
--    object_property_set_int(OBJECT(&sss->cpus), "num-harts", 1,
-+    object_property_set_int(OBJECT(&sss->cpus), "num-cpus", 1,
-                             &error_abort);
- }
- 
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index 25ba0a8c85..c1e67c0f78 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -179,7 +179,7 @@ static void sifive_e_soc_init(Object *obj)
-     SiFiveESoCState *s = RISCV_E_SOC(obj);
- 
-     object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
--    object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
-+    object_property_set_int(OBJECT(&s->cpus), "num-cpus", ms->smp.cpus,
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x1004, &error_abort);
-     object_initialize_child(obj, "riscv.sifive.e.gpio0", &s->gpio,
-@@ -195,7 +195,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
- 
-     object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
-                             &error_abort);
--    riscv_hart_array_realize(&s->cpus, &error_abort);
-+    qdev_realize(DEVICE(&s->cpus), NULL, &error_abort);
- 
-     /* Mask ROM */
-     memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
-diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-index b75e3656e1..17bba3c7fa 100644
---- a/hw/riscv/spike.c
-+++ b/hw/riscv/spike.c
-@@ -228,9 +228,10 @@ static void spike_board_init(MachineState *machine)
-                                 machine->cpu_type, &error_abort);
-         object_property_set_int(OBJECT(&s->soc[i]), "hartid-base",
-                                 base_hartid, &error_abort);
--        object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
-+        object_property_set_int(OBJECT(&s->soc[i]), "num-cpus",
-                                 hart_count, &error_abort);
--        riscv_hart_array_realize(&s->soc[i], &error_abort);
-+        cpus_disable_clustering(CPUS(&s->soc[i]));
-+        qdev_realize(DEVICE(&s->soc[i]), NULL, &error_abort);
- 
-         /* Core Local Interruptor (timer and IPI) for each socket */
-         riscv_aclint_swi_create(
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 12036aa95b..c51b124330 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -1221,9 +1221,10 @@ static void virt_machine_init(MachineState *machine)
-                                 machine->cpu_type, &error_abort);
-         object_property_set_int(OBJECT(&s->soc[i]), "hartid-base",
-                                 base_hartid, &error_abort);
--        object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
-+        object_property_set_int(OBJECT(&s->soc[i]), "num-cpus",
-                                 hart_count, &error_abort);
--        riscv_hart_array_realize(&s->soc[i], &error_abort);
-+        cpus_disable_clustering(CPUS(&s->soc[i]));
-+        qdev_realize(DEVICE(&s->soc[i]), NULL, &error_abort);
- 
-         if (!kvm_enabled()) {
-             if (s->have_aclint) {
--- 
-2.35.1
-
+SSBhZ3JlZSB3aXRoIHlvdSBwYXJ0bHksIG15IHRlc3QgY2FzZSBpcyBhY3R1YWxseSBmcm9tIGxp
+bnV4IGtlcm5lbCwgSSBub3RpY2UgCnRoZSBzdHJhbmdlIHNmZW5jZS52bWEgYmVmb3JlIHdyaXRl
+IHNhdHAgZHVyaW5nIHdyaXRlIG91ciB0ZWFjaGluZyBrZXJuZWwuCkkgdGhpbmssIHRoZSBzdHJh
+bmdlIGNvZGUgaXMgdXNlZCB0byBieXBhc3MgdGhlIHFlbXUgYnVnIHRoYXQgSWRhbiBwYXRjaGVk
+LgpCZWNhdXNlIGluIGhhcmR3YXJlLCBpZiB0aGUgc3RhcCBpcyBlbXB0eSwgc2ZlbmNlLnZtYSB3
+aWxsIGRvIG5vdGhpbmcuCkFuZCB0aGF0J3Mgd2h5IG5vYm9keSByZXBvcnQgaXQuCkJlZm9yZSBw
+YXRjaCwgcWVtdSB3b24ndCBlbmQgYSBCQiBhZnRlciBzZmVuY2UgKGJ1dCBqdW1wIGFuZCBDU1Ig
+d3JpdGUgZG8pLgpTbywgdGhlIGtlcm5lbCBhdXRob3IgcmVvZGVyZWQgd3JpdGUgc3RhcCBhbmQg
+c2ZlbmNlLnZtYSB0byBtYWtlIHNmZW5jZS52bWEgCnBsYWNlIGluIHRoZSBzYW1lIEJCIHdpdGgg
+d3JpdGUgc2F0cCwgaW5zdGVhZCBvZiB0aGUgZm9sbG93aW5nIHdyaXRlIHN0dmVjLgooSWYgZG9u
+J3QgcmVvcmRlciwgc2ZlbmNlLnZtYSB3aWxsIHBsYWNlIGluIHRoZSBzYW1lIEJCIHdpdGggd3Jp
+dGUgc3R2ZWMsCnRoYXQgd2lsbCBjcmFzaCBrZXJuZWwsIHNlZSBteSBvcmlnaW4gYW5hbHlzaXMp
+LgoKSG93ZXZlciwgaW4gaGFyZHdhcmUsIHNpbmNlIHRsYiBpcyBlbXB0eSwgcHV0IHRoZSBmaXJz
+dCBzZmVuY2Uudm1hIGJlZm9yZSBvciAKYWZ0ZXIgd3JpdGUgc2F0cCBpcyBub3QgcmVhbGx5IG1h
+dHRlcnMuCkluIHFlbXUsIGFzIEF0aXNoJ3MgbG9nIHNob3duLCB3ZSBzaG91bGQgZG8gYSBpbXBs
+eSBpbnZpc2libGUgc2ZlbmNlLnZtYSBhZnRlcgp3cml0ZSBzdGFwIHRvIGludmFsaWQgcWVtdSdz
+IHRyYW5zbGF0aW9uIGNhY2hlLgoKSmlueWFuCgoKPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2VzLS0t
+LS0KPiBGcm9tOiAiSWRhbiBIb3Jvd2l0eiIgPGlkYW4uaG9yb3dpdHpAZ21haWwuY29tPgo+IFNl
+bnQgVGltZTogMjAyMi0wMy0zMCAxNTozNToxOSAoV2VkbmVzZGF5KQo+IFRvOiAiQXRpc2ggUGF0
+cmEiIDxhdGlzaHBAYXRpc2hwYXRyYS5vcmc+Cj4gQ2M6IHBoYW50b21Aemp1LmVkdS5jbiwgIm9w
+ZW4gbGlzdDpSSVNDLVYiIDxxZW11LXJpc2N2QG5vbmdudS5vcmc+LCAiQWxpc3RhaXIgRnJhbmNp
+cyIgPEFsaXN0YWlyLkZyYW5jaXNAd2RjLmNvbT4sICJxZW11LWRldmVsQG5vbmdudS5vcmcgRGV2
+ZWxvcGVycyIgPHFlbXUtZGV2ZWxAbm9uZ251Lm9yZz4KPiBTdWJqZWN0OiBSZTogW1BBVENIXSB0
+YXJnZXQvcmlzY3Y6IEV4aXQgY3VycmVudCBUQiBhZnRlciBhbiBzZmVuY2Uudm1hCj4gCj4gT24g
+V2VkLCAzMCBNYXIgMjAyMiBhdCAxMDoyOCwgQXRpc2ggUGF0cmEgPGF0aXNocEBhdGlzaHBhdHJh
+Lm9yZz4gd3JvdGU6Cj4gPgo+ID4gSSB0ZXN0ZWQgb24gdjUuMTcgYnVpbHQgZnJvbSBkZWZjb25m
+aWcgZm9yIHJ2NjQuCj4gPgo+ID4gSGVyZSBpcyB0aGUga2VybmVsIGNvZGUgZXhlY3V0aW5nIHNm
+ZW5jZS52bWEKPiA+IGh0dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y1LjE3L3NvdXJj
+ZS9hcmNoL3Jpc2N2L2tlcm5lbC9oZWFkLlMjTDEyMgo+ID4KPiAKPiBJIGJlbGlldmUgdGhpcyBp
+cyBhIGtlcm5lbCBidWcgYW5kIG5vdCBhIFFFTVUgb25lLiBUaGV5IHBlcmZvcm0gYQo+IHdyaXRl
+IHRvIHRoZSBTQVRQIHdpdGggdGhlIHNhbWUgQVNJRCBhcyB0aGUgb25lIHVzZWQgYmVmb3JlICgw
+KSBhbmQKPiB0aGVuIGV4cGVjdCBpdCB0byBiZSB1c2VkLCB3aXRob3V0IHBlcmZvcm1pbmcgYW4g
+c2ZlbmNlLnZtYSBmb2xsb3dpbmcKPiBpdC4KPiBUaGlzIHdhcyBleHBvc2VkIGJ5IG15IGNoYW5n
+ZSwgYXMgcHJldmlvdXNseSB0aGUgd3JpdGUgdG8gdGhlIHNhdHAgd2FzCj4gcGVyZm9ybWVkIGlu
+IHRoZSBzYW1lIFRCIGJsb2NrIGFzIHRoZSBzZmVuY2Uudm1hICpiZWZvcmUgaXQqLCB3aGljaAo+
+IG1lYW50IHRoZSBUTEIgd2FzIG5vdCBmaWxsZWQgaW4gYmV0d2VlbiB0aGUgcHJldmlvdXMgc2Zl
+bmNlIGFuZCB0aGUKPiB3cml0ZSB0byBTQVRQIGZvbGxvd2luZyBpdC4KPiBJIHdhcyBhYmxlIHRv
+IHJlcHJvZHVjZSB0aGUgaXNzdWUgd2l0aCB0aGUgRmVkb3JhIFJhd2hpZGUgaW1hZ2UgaW4gdGhl
+Cj4gd2lraSwgYW5kIEkgd2FzIGFibGUgdG8gcmVzb2x2ZSBpdCBieSBhcnRpZmljaWFsbHkgZm9y
+Y2luZyBhIFRMQiBmbHVzaAo+IGZvbGxvd2luZyBhbGwgd3JpdGVzIHRvIFNBVFAuCj4gSSB0aGlu
+ayB0aGUgY29ycmVjdCBjb3Vyc2Ugb2YgYWN0aW9uIGhlcmUgaXMgdG86Cj4gMS4gUmVwb3J0IHRo
+ZSBpc3N1ZSB0byB0aGUgbGludXgga2VybmVsIG1haWxpbmcgbGlzdCBhbmQvb3IgY29udHJpYnV0
+ZQo+IGEgcGF0Y2ggdGhhdCBhZGRzIHNhaWQgbWlzc2luZyBzZmVuY2Uudm1hIGZvbGxvd2luZyB0
+aGUgU0FUUCB3cml0ZS4KPiAoQXRpc2g6IEFyZSB5b3UgYWJsZSB0byB0ZXN0IGlmIGFkZGluZyBh
+biBzZmVuY2Uudm1hIGluIHlvdXIga2VybmVsCj4gYnVpbGQgZml4ZXMgdGhlIGlzc3VlPykKPiAy
+LiBSZXN0b3JlIHRoZSBwYXRjaAo+IAo+ID4KPiA+IC0tCj4gPiBSZWdhcmRzLAo+ID4gQXRpc2gK
+PiAKPiBJZGFuIEhvcm93aXR6Cg==
 
