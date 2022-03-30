@@ -1,64 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZa1W-0002iE-Lw
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 11:14:14 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:57072)
+	id 1nZauz-0000jd-G4
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 12:11:34 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:43348)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nZa1U-0002eo-Jd; Wed, 30 Mar 2022 11:14:12 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:58024 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nZa1R-0006Vy-G4; Wed, 30 Mar 2022 11:14:12 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowACHjTW3c0Rin32SAA--.40145S2;
- Wed, 30 Mar 2022 23:14:00 +0800 (CST)
-Subject: Re: [PATCH qemu v5 05/14] target/riscv: rvv: Add tail agnostic for
- vector load / store instructions
-To: eop Chen <eop.chen@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-References: <164845204233.25323.14607469451359734000-5@git.sr.ht>
- <7f3c995d-182f-f1b3-4e79-94f5b81e1be9@iscas.ac.cn>
- <BC7B9267-08F4-4CF0-9BAD-52CF8DA2DCC2@gmail.com>
- <5ce85a5a-8309-9016-b88f-69af545e4114@iscas.ac.cn>
- <91927009-7EA2-461A-ACD0-F3B8955BA982@sifive.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <58ef1d38-502a-4701-7ccf-ba10e2cc788d@iscas.ac.cn>
-Date: Wed, 30 Mar 2022 23:13:59 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <91927009-7EA2-461A-ACD0-F3B8955BA982@sifive.com>
-Content-Type: multipart/alternative;
- boundary="------------5E1452E7DE465A79D6B91C21"
-Content-Language: en-US
-X-CM-TRANSID: qwCowACHjTW3c0Rin32SAA--.40145S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFyrAr4UZry8GFy7Gw4DArb_yoW8uF43pa
- y5uw17JFs2qrWq9a1DCay7ZFWxuF43Gw4Yvry5t347J3y5G3y0yFWvyFWYyFW7tr97CF1j
- yw4jv34kuas8AFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvC14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
- 6r4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r1j6r18McIj6I8E
- 87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c0EjI
- I2zVCS5cI20VAGYxC7Mx8GjcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vIY487
- MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJV
- W8JwC20s026c02F40E14v26r106r1rMI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF
- 1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6x
- IIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAI
- cVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kf
- nxnUUI43ZEXa7VUjzBT5UUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1nZaur-0000hO-3t
+ for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 12:11:26 -0400
+Received: from [2607:f8b0:4864:20::1036] (port=39683
+ helo=mail-pj1-x1036.google.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
+ id 1nZauo-0000yZ-4K
+ for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 12:11:24 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ mr5-20020a17090b238500b001c67366ae93so244416pjb.4
+ for <qemu-riscv@nongnu.org>; Wed, 30 Mar 2022 09:11:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
+ h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
+ :content-transfer-encoding;
+ bh=jw7wT6++jG0iz2NYVWCZLA1Um2pypbGlGwKkqDs58aU=;
+ b=0oWfoiUP44lDLbxEP3vCm2yZf+Femrimg3Hcnv0Zv3wsZPplKsf25BXDe5JQmtZkZ/
+ cMAmv7nzR+TsMDc8lxphKa3rrsj9qVRJf8x45+0Iv69svWD38tCCAL4hcxwD2ML0SYad
+ MFLYiLwUOz1yPeRL/0mbfzaQMZzhHefwMvcxgSJxra7QdBlklvszodbZqLw/c6NYwRz7
+ ycFHQy9yyNMXYcBY4wpsV7P3b8Crn8pYH4fD7wHYChEVCmwf5s4QN8wLpNqpTYB0qJZF
+ 4AGOnYhKuinCCLE9T9Tlt7pbzvD5fkISwLfAmsOmUNlXVf3xgCyArXRnDbCRCxjmUcAD
+ MzTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
+ :mime-version:content-transfer-encoding;
+ bh=jw7wT6++jG0iz2NYVWCZLA1Um2pypbGlGwKkqDs58aU=;
+ b=CX5TyHQFojdgauN2D2zDz6A6He33R+bL6Pflnl0wy2aHhGgh0BH1Cik9p9qeTzx+Ct
+ lCr9ilHsjX/egLVsrAvU41jiRtXSo7sQ6UMLczgnfnFtsbsnclhCkIhS7Kw9+bh0zRWH
+ JFIfNwOnr4WOH5ufGdXPoSP+R3uyPE6iDCAI6kLXJ2+WjQ7qCS+d/Sbp/YHzeyCjTyl+
+ 0TEgXAXkX8l3HrYflGGOUxSZbfQipiQIyg7B7QN+WXcN+y+CSzPZGWtfikYao2oiQINY
+ xpr0NVpHkBcFEEGMDl9HHhSSP+wPuyrzRqgIo91N0vrpiy0McUGP4P7u7pWtE2dIqvbE
+ 2ybQ==
+X-Gm-Message-State: AOAM533C/c9cIcIgi47jvr4uVJVe+XutNLTMIY/G99AAMYZfeZafijD0
+ TLpaPspQ7xSqTiMx2YM1MaewdA==
+X-Google-Smtp-Source: ABdhPJwjLN1XHU4mev5VprJICApjc1bKOpgi66n37g9iNM0PrIs/f57WwIFPnyTpB+Wg+d7zJOU4hw==
+X-Received: by 2002:a17:902:a413:b0:156:15b:524a with SMTP id
+ p19-20020a170902a41300b00156015b524amr355671plq.106.1648656678681; 
+ Wed, 30 Mar 2022 09:11:18 -0700 (PDT)
+Received: from localhost ([12.3.194.138]) by smtp.gmail.com with ESMTPSA id
+ y14-20020a056a001c8e00b004fa829db45csm21273726pfw.218.2022.03.30.09.11.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Mar 2022 09:11:18 -0700 (PDT)
+Date: Wed, 30 Mar 2022 09:11:18 -0700 (PDT)
+X-Google-Original-Date: Wed, 30 Mar 2022 09:11:15 PDT (-0700)
+Subject: Re: Re: [PATCH] target/riscv: Exit current TB after an sfence.vma
+In-Reply-To: <621d67f0.257cf.17fdad5aa33.Coremail.phantom@zju.edu.cn>
+CC: idan.horowitz@gmail.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+From: Palmer Dabbelt <palmer@dabbelt.com>
+To: phantom@zju.edu.cn,         linux-riscv@lists.infradead.org
+Message-ID: <mhng-496f47ba-62ce-4d29-b75e-99410775b504@palmer-ri-x1c9>
+Mime-Version: 1.0 (MHng)
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::1036
+ (failed)
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=palmer@dabbelt.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
+ RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,276 +82,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 15:14:12 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 16:11:26 -0000
 
-This is a multi-part message in MIME format.
---------------5E1452E7DE465A79D6B91C21
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+[re-ordering the top post]
 
++linux-riscv, as this may very well be a kernel bug
 
-在 2022/3/30 下午6:02, eop Chen 写道:
+On Wed, 30 Mar 2022 05:38:30 PDT (-0700), phantom@zju.edu.cn wrote:
+>> -----Original Messages-----
+>> From: "Idan Horowitz" <idan.horowitz@gmail.com>
+>> Sent Time: 2022-03-30 15:35:19 (Wednesday)
+>> To: "Atish Patra" <atishp@atishpatra.org>
+>> Cc: phantom@zju.edu.cn, "open list:RISC-V" <qemu-riscv@nongnu.org>, "Alistair Francis" <Alistair.Francis@wdc.com>, "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+>> Subject: Re: [PATCH] target/riscv: Exit current TB after an sfence.vma
+>> 
+>> On Wed, 30 Mar 2022 at 10:28, Atish Patra <atishp@atishpatra.org> wrote:
+>> >
+>> > I tested on v5.17 built from defconfig for rv64.
+>> >
+>> > Here is the kernel code executing sfence.vma
+>> > https://elixir.bootlin.com/linux/v5.17/source/arch/riscv/kernel/head.S#L122
+>> >
+>> 
+>> I believe this is a kernel bug and not a QEMU one. They perform a
+>> write to the SATP with the same ASID as the one used before (0) and
+
+I seem to remember ASID 0 being a special one, with some global-ness, 
+but I couldn't find that in a quick poke into the spec.  As below, I'm 
+going to read through this a bit more...
+
+(Also, I haven't had any coffee yet)
+
+>> then expect it to be used, without performing an sfence.vma following
+>> it.
+>> This was exposed by my change, as previously the write to the satp was
+>> performed in the same TB block as the sfence.vma *before it*, which
+>> meant the TLB was not filled in between the previous sfence and the
+>> write to SATP following it.
+>> I was able to reproduce the issue with the Fedora Rawhide image in the
+>> wiki, and I was able to resolve it by artificially forcing a TLB flush
+>> following all writes to SATP.
+>> I think the correct course of action here is to:
+>> 1. Report the issue to the linux kernel mailing list and/or contribute
+>> a patch that adds said missing sfence.vma following the SATP write.
+>> (Atish: Are you able to test if adding an sfence.vma in your kernel
+>> build fixes the issue?)
+
+If it's a kernel bug we should fix it, but I'm not entirely convinced 
+that's the case.  I can confirm that the following makes Linux boot 
+again
+
+diff --git a/arch/riscv/kernel/head.S b/arch/riscv/kernel/head.S
+index ec07f991866a..83373c2bd7d0 100644
+--- a/arch/riscv/kernel/head.S
++++ b/arch/riscv/kernel/head.S
+@@ -121,6 +121,7 @@ relocate:
+        or a0, a0, a1
+        sfence.vma
+        csrw CSR_SATP, a0
++       sfence.vma
+ .align 2
+ 1:
+        /* Set trap vector to spin forever to help debug */
+
+It's been a while since I read through the rules here so I'm going to go 
+read them again, but IIRC that shouldn't be necessary: that first 
+sfence.vma should be sufficiently global to ensure all prior writes to 
+the page tables are visible, regardless of what's in SATP.  That said, I 
+remember there being a lot of subtly here in the spec wording so I'm 
+going to go read the spec again.
+
+>> 2. Restore the patch
+
+Presumably you mean "revert" here?  That might be the right way to go, 
+just to avoid breaking users (even if we fix the kernel bug, it'll take 
+a while to get everyone to update).  That said, this smells like the 
+sort of thing that's going to crop up at arbitrary times in dynamic 
+systems so while a revert looks like it'd work around the boot issue we 
+might be making more headaches for folks down the road.
+
+> I agree with you partly, my test case is actually from linux kernel, I notice 
+> the strange sfence.vma before write satp during write our teaching kernel.
+> I think, the strange code is used to bypass the qemu bug that Idan patched.
+> Because in hardware, if the stap is empty, sfence.vma will do nothing.
+> And that's why nobody report it.
+
+IIUC the sfence.vma before the SATP write is very explicitly necessary: 
+without that fence old mappings could be utilized directly after the 
+SATP write, so we might not even be able to fetch the next instruction.
+
+> Before patch, qemu won't end a BB after sfence (but jump and CSR write do).
+> So, the kernel author reodered write stap and sfence.vma to make sfence.vma 
+> place in the same BB with write satp, instead of the following write stvec.
+> (If don't reorder, sfence.vma will place in the same BB with write stvec,
+> that will crash kernel, see my origin analysis).
 >
->
->> Weiwei Li <liweiwei@iscas.ac.cn <mailto:liweiwei@iscas.ac.cn>> 於 
->> 2022年3月30日 下午4:27 寫道：
->> 在 2022/3/30 下午3:42, 陳約廷 写道:
->>>
->>>> Weiwei Li <liweiwei@iscas.ac.cn <mailto:liweiwei@iscas.ac.cn>> 於 
->>>> 2022年3月28日 下午7:56 寫道：
->>>>
->>>>
->>>> 在 2022/3/7 下午3:10, ~eopxd 写道:
->>>>> From: eopXD <eop.chen@sifive.com <mailto:eop.chen@sifive.com>>
->>
->> Another question: max_elems is equal to total_elems when lmul >= 0.
->>
->> So max_elems can be reused  here instead of caculating total_elems again.
->>
->>>
->>> I don’t understand your second question though. If nf = 3, there 
->>> will be 3 registers
->>> involved with the instruction (namely reg, reg+1, reg+2). Why do we 
->>> care about
->>> (reg+3)?
->>>
->> I just consider register group here. Reg, reg+1, reg+2 and reg+3 may 
->> belong to the same register group.
->>
->> Regards,
->>
->> Weiwei Li
->>
->
-> According to v-spec (under section 7.8):
->
->     Each field will be held in successively numbered vector register
->     groups. When EMUL>1
->      each field will occupy a vector register group held in multiple
->     successively numbered
->     vector registers, and the vector register group for each field
->     must follow the usual vector
->     register alignment constraints (e.g., when EMUL=2 and NFIELDS=4,
->     each field’s vector
->     register group must start at an even vector register, but does not
->     have to start at a multiple
->     of 8 vector register number).
->
->
-> I think the spec has explained itself that NFIELDS represents the 
-> number of register groups involved
-> in this instruction. Therefore in a register group of 4 (LMUL = m2), 
-> NFIELD should be no more than 2.
-> The `vlmax` here would be (VLEN * 4 / EEW). In this sense, if the `vl` 
-> provided for the vector instruction
-> is within the range 2 * vlmax / 4 <= vl <= 3 * vlmax / 4, the elements 
-> in the 4th register (namely reg+3)
-> will all be counted as tail elements.
->
-> I hope this answers your question.
+> However, in hardware, since tlb is empty, put the first sfence.vma before or 
+> after write satp is not really matters.
+> In qemu, as Atish's log shown, we should do a imply invisible sfence.vma after
+> write stap to invalid qemu's translation cache.
 
-OK, Thanks a lot. This truly answers my question, even though what I 
-really want to know is the case for EMUL=1, and NFIELDS=3.
-
-since NFIELDS represents the number of register groups, not take the 
-total of EMUL * NFIELDS into one register group ,
-
-so reg+3 should not take into tail elements for my case.
-
-Regards,
-
-Weiwei Li
-
->
-> Regards,
->
-> eop Chen
->
->
-
---------------5E1452E7DE465A79D6B91C21
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">在 2022/3/30 下午6:02, eop Chen 写道:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:91927009-7EA2-461A-ACD0-F3B8955BA982@sifive.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <br class="">
-      <div class="">
-      </div>
-      <div><br class="">
-        <blockquote type="cite" class="">
-          <div class="">Weiwei Li &lt;<a
-              href="mailto:liweiwei@iscas.ac.cn" class=""
-              moz-do-not-send="true">liweiwei@iscas.ac.cn</a>&gt; 於
-            2022年3月30日 下午4:27 寫道：</div>
-          <div class="">
-            <div class="">
-              <div class="moz-cite-prefix">在 2022/3/30 下午3:42, 陳約廷 写道:<br
-                  class="">
-              </div>
-              <blockquote type="cite"
-                cite="mid:BC7B9267-08F4-4CF0-9BAD-52CF8DA2DCC2@gmail.com"
-                class="">
-                <meta http-equiv="Content-Type" content="text/html;
-                  charset=UTF-8" class="">
-                <div class=""><br class="">
-                  <blockquote type="cite" class="">
-                    <div class="">Weiwei Li &lt;<a
-                        href="mailto:liweiwei@iscas.ac.cn" class=""
-                        moz-do-not-send="true">liweiwei@iscas.ac.cn</a>&gt;
-                      於 2022年3月28日 下午7:56 寫道：</div>
-                    <br class="Apple-interchange-newline">
-                    <div class="">
-                      <div class=""><br class="">
-                        在 2022/3/7 下午3:10, ~eopxd 写道:<br class="">
-                        <blockquote type="cite" class="">From: eopXD
-                          &lt;<a href="mailto:eop.chen@sifive.com"
-                            class="" moz-do-not-send="true">eop.chen@sifive.com</a>&gt;<br
-                            class="">
-                        </blockquote>
-                      </div>
-                    </div>
-                  </blockquote>
-                </div>
-              </blockquote>
-              <p class="">Another question: max_elems is equal to
-                total_elems when lmul &gt;= 0.</p>
-              <p class="">So max_elems can be reused  here instead of
-                caculating total_elems again.<br class="">
-              </p>
-              <blockquote type="cite"
-                cite="mid:BC7B9267-08F4-4CF0-9BAD-52CF8DA2DCC2@gmail.com"
-                class="">
-                <div class=""><br class="">
-                </div>
-                <div class="">I don’t understand your second question
-                  though. If nf = 3, there will be 3 registers</div>
-                <div class="">involved with the instruction (namely reg,
-                  reg+1, reg+2). Why do we care about</div>
-                <div class="">(reg+3)?</div>
-                <div class=""><br class="">
-                </div>
-              </blockquote>
-              <p class="">I just consider register group here. Reg,
-                reg+1, reg+2 and reg+3 may belong to the same register
-                group.</p>
-              <p class="">Regards,</p>
-              <p class="">Weiwei Li<br class="">
-              </p>
-            </div>
-          </div>
-        </blockquote>
-      </div>
-      <br class="">
-      <div class="">According to v-spec (under section 7.8):</div>
-      <div class=""><br class="">
-      </div>
-      <blockquote style="margin: 0 0 0 40px; border: none; padding:
-        0px;" class="">
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times">Each field will be held in
-              successively numbered vector register groups. When
-              EMUL&gt;1</font></span></div>
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times"> each field will occupy a vector
-              register group held in multiple successively numbered</font></span></div>
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times">vector registers, and the vector
-              register group for each field must follow the usual vector</font></span></div>
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times">register alignment constraints
-              (e.g., when EMUL=2 and NFIELDS=4, each field’s vector</font></span></div>
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times">register group must start at an even
-              vector register, but does not have to start at a multiple</font></span></div>
-        <div class=""><span style="color: rgb(36, 41, 47);
-            font-variant-ligatures: normal; orphans: 2; widows: 2;
-            text-decoration-thickness: initial; background-color:
-            rgba(255, 255, 255, 0); font-size: 14px;" class=""><font
-              class="" face="Times">of 8 vector register number).</font></span></div>
-      </blockquote>
-      <div class="">
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class=""><br class="">
-        </div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class="">I think the spec has explained itself that NFIELDS
-          represents the number of register groups involved</div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class="">in this instruction. Therefore in a register group of
-          4 (LMUL = m2), NFIELD should be no more than 2.</div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class="">The `vlmax` here would be (VLEN * 4 / EEW). In this
-          sense, if the `vl` provided for the vector instruction</div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class="">is within the range 2 * vlmax / 4 &lt;= vl &lt;= 3 *
-          vlmax / 4, the elements in the 4th register (namely reg+3)</div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class="">will all be counted as tail elements.</div>
-        <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-          class=""><br class="">
-        </div>
-      </div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class="">I hope this answers your question.</div>
-    </blockquote>
-    <p>OK, Thanks a lot. This truly answers my question, even though
-      what I really want to know is the case for EMUL=1, and NFIELDS=3.</p>
-    <p>since NFIELDS represents the number of register groups, not take
-      the total of EMUL * NFIELDS into one register group , <br>
-    </p>
-    <p>so reg+3 should not take into tail elements for my case.<br>
-    </p>
-    <p>Regards,</p>
-    <p>Weiwei Li<br>
-    </p>
-    <blockquote type="cite"
-      cite="mid:91927009-7EA2-461A-ACD0-F3B8955BA982@sifive.com">
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class=""><br class="">
-      </div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class="">Regards,</div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class=""><br class="">
-      </div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class="">eop Chen</div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class=""><br class="">
-      </div>
-      <div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"
-        class=""><br class="">
-      </div>
-    </blockquote>
-  </body>
-</html>
-
---------------5E1452E7DE465A79D6B91C21--
-
+The ISA manual is quite explicit about SATP not enforcing these 
+orderings.  If what I remember about ASID 0 is true then I do think we'd 
+need one, though, to avoid the aliasing -- hopefully I'll make a bit 
+more sense soon, though...
 
