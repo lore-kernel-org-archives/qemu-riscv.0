@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXtC-0008BP-TJ
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:30 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:52016)
+	id 1nZXtE-0008H1-AG
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:32 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:52056)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXtA-00082q-Cb; Wed, 30 Mar 2022 08:57:28 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:41120)
+ id 1nZXtC-00088Y-6p; Wed, 30 Mar 2022 08:57:30 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:41174)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXt8-0004aT-FO; Wed, 30 Mar 2022 08:57:28 -0400
+ id 1nZXtA-0004b1-Fk; Wed, 30 Mar 2022 08:57:29 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 25A9821EC7;
- Wed, 30 Mar 2022 12:56:52 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id EDFD821EC9;
+ Wed, 30 Mar 2022 12:56:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1648645012;
+ s=mail; t=1648645014;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=+4+3Sun2+SPi9wRQB2rZD5KPE6zlGnALJn1V8tn0rq4=;
- b=DvJTNMEViJAwS71iQx3dGKols78k+d1tfMegwp42eAAjjIXQGCuZZWPR7qnTu+8Yd1K61O
- tyX2BfGR+Y1ZzyeJXgPf+KnPZQAxTOiZmL1yz9VbtPQE3CWrczlLRlBgTC9aZlg6CkRnd6
- H1a8Y3BkFL+ay2ZXgKh27whATAAqrTA=
+ bh=EyTZ8CgHiE5Z4BgEF/1LTYkzku8ClDxFHoUWNpaJ2Hs=;
+ b=VUIyqxKGf/yeZBptq3T3YWxj4C3eGc4I1hnI/1RCe7WXHZfguzFv+FAmhhNojTAxSt/mu6
+ 97vkjK62gZiNgE1pBZtSWLTXN5rlv8Zbf7ytlJjlOXDlZR2RBD5B+HMDI+VIW5rR2j4bDR
+ ySa/y6ax1O6uEBknBOLYQ9+n/3Fw/As=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
@@ -36,9 +36,10 @@ Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
  Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [RFC PATCH 11/18] hw/riscv: prepare riscv_hart transition to cpus
-Date: Wed, 30 Mar 2022 14:56:32 +0200
-Message-Id: <20220330125639.201937-12-damien.hedde@greensocs.com>
+Subject: [RFC PATCH 13/18] hw/riscv/spike: prepare riscv_hart transition to
+ cpus
+Date: Wed, 30 Mar 2022 14:56:34 +0200
+Message-Id: <20220330125639.201937-14-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
 References: <20220330125639.201937-1-damien.hedde@greensocs.com>
@@ -65,118 +66,79 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 12:57:29 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 12:57:31 -0000
 
++ Use riscv_array_get_num_harts instead of accessing num_harts field.
 + Use riscv_array_get_hart instead of accessing harts field.
 + Use riscv_hart_array_realize instead of sysbus_realize.
 
-spike and virt machines will be handled separately in following
-commits.
-
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- hw/riscv/boot.c            | 2 +-
- hw/riscv/microchip_pfsoc.c | 4 ++--
- hw/riscv/opentitan.c       | 2 +-
- hw/riscv/shakti_c.c        | 2 +-
- hw/riscv/sifive_e.c        | 2 +-
- hw/riscv/sifive_u.c        | 8 ++++----
- 6 files changed, 10 insertions(+), 10 deletions(-)
+ hw/riscv/spike.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index cae74fcbcd..b21c8f6488 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -36,7 +36,7 @@
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index d059a67f9b..b75e3656e1 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -54,6 +54,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+     uint64_t addr, size;
+     unsigned long clint_addr;
+     int cpu, socket;
++    unsigned num_harts;
+     MachineState *mc = MACHINE(s);
+     uint32_t *clint_cells;
+     uint32_t cpu_phandle, intc_phandle, phandle = 1;
+@@ -97,10 +98,10 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+     for (socket = (riscv_socket_count(mc) - 1); socket >= 0; socket--) {
+         clust_name = g_strdup_printf("/cpus/cpu-map/cluster%d", socket);
+         qemu_fdt_add_subnode(fdt, clust_name);
++        num_harts = riscv_array_get_num_harts(&s->soc[socket]);
++        clint_cells =  g_new0(uint32_t, num_harts * 4);
  
- bool riscv_is_32bit(RISCVHartArrayState *harts)
- {
--    return harts->harts[0].env.misa_mxl_max == MXL_RV32;
-+    return riscv_array_get_hart(harts, 0)->env.misa_mxl_max == MXL_RV32;
+-        clint_cells =  g_new0(uint32_t, s->soc[socket].num_harts * 4);
+-
+-        for (cpu = s->soc[socket].num_harts - 1; cpu >= 0; cpu--) {
++        for (cpu = num_harts - 1; cpu >= 0; cpu--) {
+             cpu_phandle = phandle++;
+ 
+             cpu_name = g_strdup_printf("/cpus/cpu@%d",
+@@ -111,7 +112,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+             } else {
+                 qemu_fdt_setprop_string(fdt, cpu_name, "mmu-type", "riscv,sv48");
+             }
+-            name = riscv_isa_string(&s->soc[socket].harts[cpu]);
++            name = riscv_isa_string(riscv_array_get_hart(&s->soc[socket], cpu));
+             qemu_fdt_setprop_string(fdt, cpu_name, "riscv,isa", name);
+             g_free(name);
+             qemu_fdt_setprop_string(fdt, cpu_name, "compatible", "riscv");
+@@ -164,7 +165,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+         qemu_fdt_setprop_cells(fdt, clint_name, "reg",
+             0x0, clint_addr, 0x0, memmap[SPIKE_CLINT].size);
+         qemu_fdt_setprop(fdt, clint_name, "interrupts-extended",
+-            clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
++            clint_cells, num_harts * sizeof(uint32_t) * 4);
+         riscv_socket_fdt_write_id(mc, fdt, clint_name, socket);
+ 
+         g_free(clint_name);
+@@ -229,7 +230,7 @@ static void spike_board_init(MachineState *machine)
+                                 base_hartid, &error_abort);
+         object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+                                 hart_count, &error_abort);
+-        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
++        riscv_hart_array_realize(&s->soc[i], &error_abort);
+ 
+         /* Core Local Interruptor (timer and IPI) for each socket */
+         riscv_aclint_swi_create(
+@@ -311,7 +312,7 @@ static void spike_board_init(MachineState *machine)
+ 
+     /* initialize HTIF using symbols found in load_kernel */
+     htif_mm_init(system_memory, mask_rom,
+-                 &s->soc[0].harts[0].env, serial_hd(0),
++                 &riscv_array_get_hart(&s->soc[0], 0)->env, serial_hd(0),
+                  memmap[SPIKE_HTIF].base);
  }
  
- /*
-diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-index cafd1fc9ae..82547a53e6 100644
---- a/hw/riscv/microchip_pfsoc.c
-+++ b/hw/riscv/microchip_pfsoc.c
-@@ -190,8 +190,8 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
-     NICInfo *nd;
-     int i;
- 
--    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
--    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_abort);
-+    riscv_hart_array_realize(&s->e_cpus, &error_abort);
-+    riscv_hart_array_realize(&s->u_cpus, &error_abort);
-     /*
-      * The cluster must be realized after the RISC-V hart array container,
-      * as the container's CPU object is only created on realize, and the
-diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-index 833624d66c..2eb7454d8a 100644
---- a/hw/riscv/opentitan.c
-+++ b/hw/riscv/opentitan.c
-@@ -135,7 +135,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
-     object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
-                             &error_abort);
-     object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
--    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
-+    riscv_hart_array_realize(&s->cpus, &error_abort);
- 
-     /* Boot ROM */
-     memory_region_init_rom(&s->rom, OBJECT(dev_soc), "riscv.lowrisc.ibex.rom",
-diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
-index 90e2cf609f..93e0c8dd68 100644
---- a/hw/riscv/shakti_c.c
-+++ b/hw/riscv/shakti_c.c
-@@ -108,7 +108,7 @@ static void shakti_c_soc_state_realize(DeviceState *dev, Error **errp)
-     ShaktiCSoCState *sss = RISCV_SHAKTI_SOC(dev);
-     MemoryRegion *system_memory = get_system_memory();
- 
--    sysbus_realize(SYS_BUS_DEVICE(&sss->cpus), &error_abort);
-+    riscv_hart_array_realize(&sss->cpus, &error_abort);
- 
-     sss->plic = sifive_plic_create(shakti_c_memmap[SHAKTI_C_PLIC].base,
-         (char *)SHAKTI_C_PLIC_HART_CONFIG, ms->smp.cpus, 0,
-diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
-index dcb87b6cfd..25ba0a8c85 100644
---- a/hw/riscv/sifive_e.c
-+++ b/hw/riscv/sifive_e.c
-@@ -195,7 +195,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
- 
-     object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
-                             &error_abort);
--    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
-+    riscv_hart_array_realize(&s->cpus, &error_abort);
- 
-     /* Mask ROM */
-     memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
-diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-index 7fbc7dea42..c99e92a7eb 100644
---- a/hw/riscv/sifive_u.c
-+++ b/hw/riscv/sifive_u.c
-@@ -188,9 +188,9 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
-             } else {
-                 qemu_fdt_setprop_string(fdt, nodename, "mmu-type", "riscv,sv48");
-             }
--            isa = riscv_isa_string(&s->soc.u_cpus.harts[cpu - 1]);
-+            isa = riscv_isa_string(riscv_array_get_hart(&s->soc.u_cpus, cpu - 1));
-         } else {
--            isa = riscv_isa_string(&s->soc.e_cpus.harts[0]);
-+            isa = riscv_isa_string(riscv_array_get_hart(&s->soc.e_cpus, 0));
-         }
-         qemu_fdt_setprop_string(fdt, nodename, "riscv,isa", isa);
-         qemu_fdt_setprop_string(fdt, nodename, "compatible", "riscv");
-@@ -830,8 +830,8 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
-     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", s->cpu_type);
-     qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
- 
--    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
--    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_abort);
-+    riscv_hart_array_realize(&s->e_cpus, &error_abort);
-+    riscv_hart_array_realize(&s->u_cpus, &error_abort);
-     /*
-      * The cluster must be realized after the RISC-V hart array container,
-      * as the container's CPU object is only created on realize, and the
 -- 
 2.35.1
 
