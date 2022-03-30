@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXt0-0007Tc-DW
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:18 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:51866)
+	id 1nZXt1-0007XN-CE
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:19 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:51874)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXse-0006oT-Ai; Wed, 30 Mar 2022 08:56:59 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:41064)
+ id 1nZXsf-0006on-Ur; Wed, 30 Mar 2022 08:56:59 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:41062)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsb-0004Zg-Be; Wed, 30 Mar 2022 08:56:55 -0400
+ id 1nZXsb-0004Zh-TX; Wed, 30 Mar 2022 08:56:55 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 371AB21EC1;
- Wed, 30 Mar 2022 12:56:50 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id A5D9A20780;
+ Wed, 30 Mar 2022 12:56:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
  s=mail; t=1648645010;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=H96vv1RcBAGoFgvB1HCk9RCwLFA8TM2qjMuhFojhGew=;
- b=xfXg4bxk57Fa1BbhihiAaRZLREESNXaV9HG3/3R7a13lWAaTN5VjOk9u3RY9v+8rgwzRog
- XYL6DfT40i2BgxHkfDpAJnc/yTZPvK0Q2TOczMQe+MYZx8RFjdCld4P5FFEgnDfp9vjkKD
- jCINTVviGCrLGmbEedUh5BsdmGvc2K8=
+ bh=yAl9UmQScRePk2SVLTDCbmbb8crA3T3m5WK8Zes84L0=;
+ b=dfO7Ra3dxjxDgRm4zGt6tgvWY84pbYNMVI+E95RBI/Ir8ziXlohCAafkmv37SizYYv7f4n
+ bo8kjQnqwWaMS36AWqckCMc4iqbaw9BkxqV6nDFt4eWmBelMA3HSX/75F8gTUW+VIA1ZeM
+ Th2BdEQK2ixSbGnJUbUPaiz7xNxKEQY=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
@@ -35,9 +35,9 @@ Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
  Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC PATCH 08/18] hw/arm/arm_cpus: add arm_cpus device
-Date: Wed, 30 Mar 2022 14:56:29 +0200
-Message-Id: <20220330125639.201937-9-damien.hedde@greensocs.com>
+Subject: [RFC PATCH 07/18] hw/cpu/cpus: add a common start-powered-off property
+Date: Wed, 30 Mar 2022 14:56:28 +0200
+Message-Id: <20220330125639.201937-8-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
 References: <20220330125639.201937-1-damien.hedde@greensocs.com>
@@ -66,149 +66,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 30 Mar 2022 12:57:01 -0000
 
-This object can be used to create a group of homogeneous
-arm cpus.
+Can be used to initialize the same property on all
+cpus.
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- include/hw/arm/arm_cpus.h | 45 ++++++++++++++++++++++++++++
- hw/arm/arm_cpus.c         | 63 +++++++++++++++++++++++++++++++++++++++
- hw/arm/meson.build        |  1 +
- 3 files changed, 109 insertions(+)
- create mode 100644 include/hw/arm/arm_cpus.h
- create mode 100644 hw/arm/arm_cpus.c
+ include/hw/cpu/cpus.h | 3 +++
+ hw/cpu/cpus.c         | 5 +++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/include/hw/arm/arm_cpus.h b/include/hw/arm/arm_cpus.h
-new file mode 100644
-index 0000000000..8c540d9853
---- /dev/null
-+++ b/include/hw/arm/arm_cpus.h
-@@ -0,0 +1,45 @@
-+/*
-+ * ARM CPUs
-+ *
-+ * Copyright (c) 2022 Greensocs
-+ *
-+ * This work is licensed under the terms of the GNU GPLv2 or later.
-+ * See the COPYING file in the top-level directory.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef HW_ARM_CPUS_H
-+#define HW_ARM_CPUS_H
-+
-+#include "hw/cpu/cpus.h"
-+#include "target/arm/cpu.h"
-+
-+#define TYPE_ARM_CPUS "arm-cpus"
-+OBJECT_DECLARE_SIMPLE_TYPE(ArmCpusState, ARM_CPUS)
-+
-+/**
-+ * ArmCpusState:
-+ * @reset_hivecs: use to initialize cpu's reset-hivecs
-+ * @has_el3: use to initialize cpu's has_el3
-+ * @has_el2: use to initialize cpu's has_el2
-+ * @reset_cbar: use to initialize cpu's reset-cbar
-+ */
-+struct ArmCpusState {
-+    CpusState parent_obj;
-+
-+    bool reset_hivecs;
-+    bool has_el3;
-+    bool has_el2;
-+    uint64_t reset_cbar;
-+};
-+
-+/*
-+ * arm_cpus_get_cpu:
-+ * Helper to get an ArmCpu from the container.
-+ */
-+static inline ARMCPU *arm_cpus_get_cpu(ArmCpusState *s, unsigned i)
-+{
-+    return ARM_CPU(CPUS(s)->cpus[i]);
-+}
-+
-+#endif /* HW_ARM_CPUS_H */
-diff --git a/hw/arm/arm_cpus.c b/hw/arm/arm_cpus.c
-new file mode 100644
-index 0000000000..ed6483f45b
---- /dev/null
-+++ b/hw/arm/arm_cpus.c
-@@ -0,0 +1,63 @@
-+/*
-+ * ARM CPUs
-+ *
-+ * Copyright (c) 2022 Greensocs
-+ *
-+ * This work is licensed under the terms of the GNU GPLv2 or later.
-+ * See the COPYING file in the top-level directory.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "hw/arm/arm_cpus.h"
-+#include "hw/cpu/cpus.h"
-+#include "hw/qdev-properties.h"
-+#include "cpu.h"
-+
-+static Property arm_cpus_props[] = {
-+    /* FIXME: get the default values from the arm cpu object */
-+    DEFINE_PROP_BOOL("reset-hivecs", ArmCpusState, reset_hivecs, false),
-+    DEFINE_PROP_BOOL("has_el3", ArmCpusState, has_el3, false),
-+    DEFINE_PROP_BOOL("has_el2", ArmCpusState, has_el2, false),
-+    DEFINE_PROP_UINT64("reset-cbar", ArmCpusState, reset_cbar, 0),
-+    DEFINE_PROP_END_OF_LIST()
-+};
-+
-+static void arm_cpus_configure_cpu(CpusState *base, CPUState *cpu,
-+                                   unsigned i)
-+{
-+    ArmCpusState *s = ARM_CPUS(base);
-+    DeviceState *cpudev = DEVICE(cpu);
-+
-+    qdev_prop_set_uint32(cpudev, "core-count", base->topology.cpus);
-+    qdev_prop_set_bit(cpudev, "reset-hivecs", s->reset_hivecs);
-+    qdev_prop_set_bit(cpudev, "has_el3", s->has_el3);
-+    qdev_prop_set_bit(cpudev, "has_el2", s->has_el2);
-+    qdev_prop_set_uint64(cpudev, "reset-cbar", s->reset_cbar);
-+}
-+
-+static void arm_cpus_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    CpusClass *cc = CPUS_CLASS(klass);
-+
-+    device_class_set_props(dc, arm_cpus_props);
-+
-+    cc->configure_cpu = arm_cpus_configure_cpu;
-+    cc->base_cpu_type = TYPE_ARM_CPU;
-+}
-+
-+static const TypeInfo arm_cpus_info = {
-+    .name              = TYPE_ARM_CPUS,
-+    .parent            = TYPE_CPUS,
-+    .instance_size     = sizeof(ArmCpusState),
-+    .class_init        = arm_cpus_class_init,
-+};
-+
-+static void arm_cpus_register_types(void)
-+{
-+    type_register_static(&arm_cpus_info);
-+}
-+
-+type_init(arm_cpus_register_types)
-diff --git a/hw/arm/meson.build b/hw/arm/meson.build
-index 721a8eb8be..feeb301c09 100644
---- a/hw/arm/meson.build
-+++ b/hw/arm/meson.build
-@@ -58,5 +58,6 @@ arm_ss.add(when: 'CONFIG_FSL_IMX7', if_true: files('fsl-imx7.c', 'mcimx7d-sabre.
- arm_ss.add(when: 'CONFIG_ARM_SMMUV3', if_true: files('smmu-common.c', 'smmuv3.c'))
- arm_ss.add(when: 'CONFIG_FSL_IMX6UL', if_true: files('fsl-imx6ul.c', 'mcimx6ul-evk.c'))
- arm_ss.add(when: 'CONFIG_NRF51_SOC', if_true: files('nrf51_soc.c'))
-+arm_ss.add(files('arm_cpus.c'))
+diff --git a/include/hw/cpu/cpus.h b/include/hw/cpu/cpus.h
+index 295d7537e2..7e89a0d018 100644
+--- a/include/hw/cpu/cpus.h
++++ b/include/hw/cpu/cpus.h
+@@ -46,6 +46,8 @@ OBJECT_DECLARE_TYPE(CpusState, CpusClass, CPUS)
+  *      written before realize in order to enable/disable clustering.
+  * @cluster_index: The cluster ID. This value is for internal use only and
+  *      should not be exposed directly to the user or to the guest.
++ * @start_powered_off: Default start power state of all cpus
++ *     (can be modified on a per-cpu basis after realize).
+  */
+ struct CpusState {
+     /*< private >*/
+@@ -59,6 +61,7 @@ struct CpusState {
+     struct {
+         uint16_t cpus;
+     } topology;
++    bool start_powered_off;
+     CPUState **cpus;
+ };
  
- hw_arch += {'arm': arm_ss}
+diff --git a/hw/cpu/cpus.c b/hw/cpu/cpus.c
+index ed9402c100..d1fe80f0ab 100644
+--- a/hw/cpu/cpus.c
++++ b/hw/cpu/cpus.c
+@@ -27,6 +27,7 @@ static Property cpus_properties[] = {
+      * FIXME: remove this property to keep it internal ?
+      */
+     DEFINE_PROP_INT32("cluster-id", CpusState, cluster_index, -1),
++    DEFINE_PROP_BOOL("start-powered-off", CpusState, start_powered_off, false),
+     DEFINE_PROP_END_OF_LIST()
+ };
+ 
+@@ -71,6 +72,10 @@ static void cpus_create_cpus(CpusState *s, Error **errp)
+             cpu->cluster_index = s->cluster_index;
+         }
+ 
++        /* set power start state */
++        qdev_prop_set_bit(DEVICE(cpu), "start-powered-off",
++                          s->start_powered_off);
++
+         /* let subclass configure the cpu */
+         if (cgc->configure_cpu) {
+             cgc->configure_cpu(s, cpu, i);
 -- 
 2.35.1
 
