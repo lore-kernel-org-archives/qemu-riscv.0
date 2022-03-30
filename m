@@ -1,27 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXsv-0007G6-VE
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:14 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:51886)
+	id 1nZXt0-0007Tc-DW
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:18 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:51866)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsh-0006ph-TL; Wed, 30 Mar 2022 08:56:59 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:41116)
+ id 1nZXse-0006oT-Ai; Wed, 30 Mar 2022 08:56:59 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:41064)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsd-0004aK-Rh; Wed, 30 Mar 2022 08:56:59 -0400
+ id 1nZXsb-0004Zg-Be; Wed, 30 Mar 2022 08:56:55 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id C51E821EC4;
+ by beetle.greensocs.com (Postfix) with ESMTPS id 371AB21EC1;
  Wed, 30 Mar 2022 12:56:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1648645011;
+ s=mail; t=1648645010;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TgBVOB8eywUWF0TVbBTwx1TADUqjp1LphGlG4SRhzoM=;
- b=EIPsTyJwptR+MBsVJSBb8zWtDXhzw3/g17r84ODSRPLTULZ8yNe4fIjy3Gu5o7dIw6zLTY
- Tjz9rHmdKBZ8SRKUJ6E569IgmEKnxBr5ybdsI7rU5lC0fRmk0yJEI+1SmMt2hKpV48+hfJ
- a2x/o+AHkJWD/fbWZmrQJPsGyusps3Y=
+ bh=H96vv1RcBAGoFgvB1HCk9RCwLFA8TM2qjMuhFojhGew=;
+ b=xfXg4bxk57Fa1BbhihiAaRZLREESNXaV9HG3/3R7a13lWAaTN5VjOk9u3RY9v+8rgwzRog
+ XYL6DfT40i2BgxHkfDpAJnc/yTZPvK0Q2TOczMQe+MYZx8RFjdCld4P5FFEgnDfp9vjkKD
+ jCINTVviGCrLGmbEedUh5BsdmGvc2K8=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
@@ -35,9 +35,9 @@ Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
  Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC PATCH 09/18] hw/arm/xlnx-zynqmp: convert cpu clusters to arm_cpus
-Date: Wed, 30 Mar 2022 14:56:30 +0200
-Message-Id: <20220330125639.201937-10-damien.hedde@greensocs.com>
+Subject: [RFC PATCH 08/18] hw/arm/arm_cpus: add arm_cpus device
+Date: Wed, 30 Mar 2022 14:56:29 +0200
+Message-Id: <20220330125639.201937-9-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
 References: <20220330125639.201937-1-damien.hedde@greensocs.com>
@@ -64,244 +64,151 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 12:57:03 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 12:57:01 -0000
 
-qom-path of cpus are changed:
-+ "apu-cluster/apu-cpu[n]" to "apu/cpu[n]"
-+ "rpu-cluster/rpu-cpu[n]" to "rpu/cpu[n]"
+This object can be used to create a group of homogeneous
+arm cpus.
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- include/hw/arm/xlnx-zynqmp.h |   8 +--
- hw/arm/xlnx-zynqmp.c         | 121 +++++++++++++----------------------
- 2 files changed, 48 insertions(+), 81 deletions(-)
+ include/hw/arm/arm_cpus.h | 45 ++++++++++++++++++++++++++++
+ hw/arm/arm_cpus.c         | 63 +++++++++++++++++++++++++++++++++++++++
+ hw/arm/meson.build        |  1 +
+ 3 files changed, 109 insertions(+)
+ create mode 100644 include/hw/arm/arm_cpus.h
+ create mode 100644 hw/arm/arm_cpus.c
 
-diff --git a/include/hw/arm/xlnx-zynqmp.h b/include/hw/arm/xlnx-zynqmp.h
-index 9d9a9d0bf9..1bcc3f9356 100644
---- a/include/hw/arm/xlnx-zynqmp.h
-+++ b/include/hw/arm/xlnx-zynqmp.h
-@@ -31,7 +31,7 @@
- #include "hw/display/xlnx_dp.h"
- #include "hw/intc/xlnx-zynqmp-ipi.h"
- #include "hw/rtc/xlnx-zynqmp-rtc.h"
--#include "hw/cpu/cluster.h"
-+#include "hw/arm/arm_cpus.h"
- #include "target/arm/cpu.h"
- #include "qom/object.h"
- #include "net/can_emu.h"
-@@ -94,10 +94,8 @@ struct XlnxZynqMPState {
-     DeviceState parent_obj;
- 
-     /*< public >*/
--    CPUClusterState apu_cluster;
--    CPUClusterState rpu_cluster;
--    ARMCPU apu_cpu[XLNX_ZYNQMP_NUM_APU_CPUS];
--    ARMCPU rpu_cpu[XLNX_ZYNQMP_NUM_RPU_CPUS];
-+    ArmCpusState apu;
-+    ArmCpusState rpu;
-     GICState gic;
-     MemoryRegion gic_mr[XLNX_ZYNQMP_GIC_REGIONS][XLNX_ZYNQMP_GIC_ALIASES];
- 
-diff --git a/hw/arm/xlnx-zynqmp.c b/hw/arm/xlnx-zynqmp.c
-index 5bfe285a19..fa0c093733 100644
---- a/hw/arm/xlnx-zynqmp.c
-+++ b/hw/arm/xlnx-zynqmp.c
-@@ -25,6 +25,7 @@
- #include "sysemu/kvm.h"
- #include "sysemu/sysemu.h"
- #include "kvm_arm.h"
-+#include "hw/arm/arm_cpus.h"
- 
- #define GIC_NUM_SPI_INTR 160
- 
-@@ -201,7 +202,7 @@ static inline int arm_gic_ppi_index(int cpu_nr, int ppi_index)
- static void xlnx_zynqmp_create_rpu(MachineState *ms, XlnxZynqMPState *s,
-                                    const char *boot_cpu, Error **errp)
- {
--    int i;
-+    unsigned boot_idx;
-     int num_rpus = MIN(ms->smp.cpus - XLNX_ZYNQMP_NUM_APU_CPUS,
-                        XLNX_ZYNQMP_NUM_RPU_CPUS);
- 
-@@ -210,36 +211,21 @@ static void xlnx_zynqmp_create_rpu(MachineState *ms, XlnxZynqMPState *s,
-         return;
-     }
- 
--    object_initialize_child(OBJECT(s), "rpu-cluster", &s->rpu_cluster,
--                            TYPE_CPU_CLUSTER);
--    qdev_prop_set_uint32(DEVICE(&s->rpu_cluster), "cluster-id", 1);
--
--    for (i = 0; i < num_rpus; i++) {
--        const char *name;
--
--        object_initialize_child(OBJECT(&s->rpu_cluster), "rpu-cpu[*]",
--                                &s->rpu_cpu[i],
--                                ARM_CPU_TYPE_NAME("cortex-r5f"));
--
--        name = object_get_canonical_path_component(OBJECT(&s->rpu_cpu[i]));
--        if (strcmp(name, boot_cpu)) {
--            /*
--             * Secondary CPUs start in powered-down state.
--             */
--            object_property_set_bool(OBJECT(&s->rpu_cpu[i]),
--                                     "start-powered-off", true, &error_abort);
--        } else {
--            s->boot_cpu_ptr = &s->rpu_cpu[i];
--        }
--
--        object_property_set_bool(OBJECT(&s->rpu_cpu[i]), "reset-hivecs", true,
--                                 &error_abort);
--        if (!qdev_realize(DEVICE(&s->rpu_cpu[i]), NULL, errp)) {
--            return;
--        }
-+    /* apus are already created, rpus will have cluster-id 1 */
-+    object_initialize_child(OBJECT(s), "rpu", &s->rpu, TYPE_ARM_CPUS);
-+    qdev_prop_set_uint32(DEVICE(&s->rpu), "num-cpus", num_rpus);
-+    qdev_prop_set_string(DEVICE(&s->rpu), "cpu-type",
-+                         ARM_CPU_TYPE_NAME("cortex-r5f"));
-+    qdev_prop_set_bit(DEVICE(&s->rpu), "reset-hivecs", true);
-+    qdev_prop_set_bit(DEVICE(&s->rpu), "start-powered-off", true);
+diff --git a/include/hw/arm/arm_cpus.h b/include/hw/arm/arm_cpus.h
+new file mode 100644
+index 0000000000..8c540d9853
+--- /dev/null
++++ b/include/hw/arm/arm_cpus.h
+@@ -0,0 +1,45 @@
++/*
++ * ARM CPUs
++ *
++ * Copyright (c) 2022 Greensocs
++ *
++ * This work is licensed under the terms of the GNU GPLv2 or later.
++ * See the COPYING file in the top-level directory.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-+    qdev_realize(DEVICE(&s->rpu), NULL, &error_fatal);
++#ifndef HW_ARM_CPUS_H
++#define HW_ARM_CPUS_H
 +
-+    if (sscanf(boot_cpu, "rpu-cpu[%u]", &boot_idx) && boot_idx < num_rpus) {
-+        s->boot_cpu_ptr = arm_cpus_get_cpu(&s->rpu, boot_idx);
-+        object_property_set_bool(OBJECT(s->boot_cpu_ptr), "start-powered-on",
-+                                 true, &error_abort);
-     }
--
--    qdev_realize(DEVICE(&s->rpu_cluster), NULL, &error_fatal);
- }
++#include "hw/cpu/cpus.h"
++#include "target/arm/cpu.h"
++
++#define TYPE_ARM_CPUS "arm-cpus"
++OBJECT_DECLARE_SIMPLE_TYPE(ArmCpusState, ARM_CPUS)
++
++/**
++ * ArmCpusState:
++ * @reset_hivecs: use to initialize cpu's reset-hivecs
++ * @has_el3: use to initialize cpu's has_el3
++ * @has_el2: use to initialize cpu's has_el2
++ * @reset_cbar: use to initialize cpu's reset-cbar
++ */
++struct ArmCpusState {
++    CpusState parent_obj;
++
++    bool reset_hivecs;
++    bool has_el3;
++    bool has_el2;
++    uint64_t reset_cbar;
++};
++
++/*
++ * arm_cpus_get_cpu:
++ * Helper to get an ArmCpu from the container.
++ */
++static inline ARMCPU *arm_cpus_get_cpu(ArmCpusState *s, unsigned i)
++{
++    return ARM_CPU(CPUS(s)->cpus[i]);
++}
++
++#endif /* HW_ARM_CPUS_H */
+diff --git a/hw/arm/arm_cpus.c b/hw/arm/arm_cpus.c
+new file mode 100644
+index 0000000000..ed6483f45b
+--- /dev/null
++++ b/hw/arm/arm_cpus.c
+@@ -0,0 +1,63 @@
++/*
++ * ARM CPUs
++ *
++ * Copyright (c) 2022 Greensocs
++ *
++ * This work is licensed under the terms of the GNU GPLv2 or later.
++ * See the COPYING file in the top-level directory.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "qapi/error.h"
++#include "hw/arm/arm_cpus.h"
++#include "hw/cpu/cpus.h"
++#include "hw/qdev-properties.h"
++#include "cpu.h"
++
++static Property arm_cpus_props[] = {
++    /* FIXME: get the default values from the arm cpu object */
++    DEFINE_PROP_BOOL("reset-hivecs", ArmCpusState, reset_hivecs, false),
++    DEFINE_PROP_BOOL("has_el3", ArmCpusState, has_el3, false),
++    DEFINE_PROP_BOOL("has_el2", ArmCpusState, has_el2, false),
++    DEFINE_PROP_UINT64("reset-cbar", ArmCpusState, reset_cbar, 0),
++    DEFINE_PROP_END_OF_LIST()
++};
++
++static void arm_cpus_configure_cpu(CpusState *base, CPUState *cpu,
++                                   unsigned i)
++{
++    ArmCpusState *s = ARM_CPUS(base);
++    DeviceState *cpudev = DEVICE(cpu);
++
++    qdev_prop_set_uint32(cpudev, "core-count", base->topology.cpus);
++    qdev_prop_set_bit(cpudev, "reset-hivecs", s->reset_hivecs);
++    qdev_prop_set_bit(cpudev, "has_el3", s->has_el3);
++    qdev_prop_set_bit(cpudev, "has_el2", s->has_el2);
++    qdev_prop_set_uint64(cpudev, "reset-cbar", s->reset_cbar);
++}
++
++static void arm_cpus_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    CpusClass *cc = CPUS_CLASS(klass);
++
++    device_class_set_props(dc, arm_cpus_props);
++
++    cc->configure_cpu = arm_cpus_configure_cpu;
++    cc->base_cpu_type = TYPE_ARM_CPU;
++}
++
++static const TypeInfo arm_cpus_info = {
++    .name              = TYPE_ARM_CPUS,
++    .parent            = TYPE_CPUS,
++    .instance_size     = sizeof(ArmCpusState),
++    .class_init        = arm_cpus_class_init,
++};
++
++static void arm_cpus_register_types(void)
++{
++    type_register_static(&arm_cpus_info);
++}
++
++type_init(arm_cpus_register_types)
+diff --git a/hw/arm/meson.build b/hw/arm/meson.build
+index 721a8eb8be..feeb301c09 100644
+--- a/hw/arm/meson.build
++++ b/hw/arm/meson.build
+@@ -58,5 +58,6 @@ arm_ss.add(when: 'CONFIG_FSL_IMX7', if_true: files('fsl-imx7.c', 'mcimx7d-sabre.
+ arm_ss.add(when: 'CONFIG_ARM_SMMUV3', if_true: files('smmu-common.c', 'smmuv3.c'))
+ arm_ss.add(when: 'CONFIG_FSL_IMX6UL', if_true: files('fsl-imx6ul.c', 'mcimx6ul-evk.c'))
+ arm_ss.add(when: 'CONFIG_NRF51_SOC', if_true: files('nrf51_soc.c'))
++arm_ss.add(files('arm_cpus.c'))
  
- static void xlnx_zynqmp_create_bbram(XlnxZynqMPState *s, qemu_irq *gic)
-@@ -296,7 +282,8 @@ static void xlnx_zynqmp_create_apu_ctrl(XlnxZynqMPState *s, qemu_irq *gic)
-         g_autofree gchar *name = g_strdup_printf("cpu%d", i);
- 
-         object_property_set_link(OBJECT(&s->apu_ctrl), name,
--                                 OBJECT(&s->apu_cpu[i]), &error_abort);
-+                                 OBJECT(arm_cpus_get_cpu(&s->apu, i)),
-+                                 &error_abort);
-     }
- 
-     sysbus_realize(sbd, &error_fatal);
-@@ -349,15 +336,10 @@ static void xlnx_zynqmp_init(Object *obj)
-     int i;
-     int num_apus = MIN(ms->smp.cpus, XLNX_ZYNQMP_NUM_APU_CPUS);
- 
--    object_initialize_child(obj, "apu-cluster", &s->apu_cluster,
--                            TYPE_CPU_CLUSTER);
--    qdev_prop_set_uint32(DEVICE(&s->apu_cluster), "cluster-id", 0);
--
--    for (i = 0; i < num_apus; i++) {
--        object_initialize_child(OBJECT(&s->apu_cluster), "apu-cpu[*]",
--                                &s->apu_cpu[i],
--                                ARM_CPU_TYPE_NAME("cortex-a53"));
--    }
-+    object_initialize_child(obj, "apu", &s->apu, TYPE_ARM_CPUS);
-+    qdev_prop_set_uint32(DEVICE(&s->apu), "num-cpus", num_apus);
-+    qdev_prop_set_string(DEVICE(&s->apu), "cpu-type",
-+                         ARM_CPU_TYPE_NAME("cortex-a53"));
- 
-     object_initialize_child(obj, "gic", &s->gic, gic_class_name());
- 
-@@ -416,6 +398,7 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
-     MemoryRegion *system_memory = get_system_memory();
-     uint8_t i;
-     uint64_t ram_size;
-+    unsigned boot_idx;
-     int num_apus = MIN(ms->smp.cpus, XLNX_ZYNQMP_NUM_APU_CPUS);
-     const char *boot_cpu = s->boot_cpu ? s->boot_cpu : "apu-cpu[0]";
-     ram_addr_t ddr_low_size, ddr_high_size;
-@@ -474,34 +457,19 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
-     qdev_prop_set_bit(DEVICE(&s->gic),
-                       "has-virtualization-extensions", s->virt);
- 
--    qdev_realize(DEVICE(&s->apu_cluster), NULL, &error_fatal);
--
--    /* Realize APUs before realizing the GIC. KVM requires this.  */
--    for (i = 0; i < num_apus; i++) {
--        const char *name;
--
--        name = object_get_canonical_path_component(OBJECT(&s->apu_cpu[i]));
--        if (strcmp(name, boot_cpu)) {
--            /*
--             * Secondary CPUs start in powered-down state.
--             */
--            object_property_set_bool(OBJECT(&s->apu_cpu[i]),
--                                     "start-powered-off", true, &error_abort);
--        } else {
--            s->boot_cpu_ptr = &s->apu_cpu[i];
--        }
--
--        object_property_set_bool(OBJECT(&s->apu_cpu[i]), "has_el3", s->secure,
--                                 NULL);
--        object_property_set_bool(OBJECT(&s->apu_cpu[i]), "has_el2", s->virt,
--                                 NULL);
--        object_property_set_int(OBJECT(&s->apu_cpu[i]), "reset-cbar",
--                                GIC_BASE_ADDR, &error_abort);
--        object_property_set_int(OBJECT(&s->apu_cpu[i]), "core-count",
--                                num_apus, &error_abort);
--        if (!qdev_realize(DEVICE(&s->apu_cpu[i]), NULL, errp)) {
--            return;
--        }
-+    /* Realize APUs before realizing the GIC. KVM requires this. */
-+    qdev_prop_set_bit(DEVICE(&s->apu), "start-powered-off", true);
-+    qdev_prop_set_bit(DEVICE(&s->apu), "has_el3", s->secure);
-+    qdev_prop_set_bit(DEVICE(&s->apu), "has_el2", s->virt);
-+    qdev_prop_set_uint64(DEVICE(&s->apu), "reset-cbar", GIC_BASE_ADDR);
-+    if (!qdev_realize(DEVICE(&s->apu), NULL, errp)) {
-+        return;
-+    }
-+    /* ensure boot cpu will start */
-+    if (sscanf(boot_cpu, "apu-cpu[%u]", &boot_idx) && boot_idx < num_apus) {
-+        s->boot_cpu_ptr = arm_cpus_get_cpu(&s->apu, boot_idx);
-+        object_property_set_bool(OBJECT(s->boot_cpu_ptr), "start-powered-off",
-+                                 false, &error_abort);
-     }
- 
-     if (!sysbus_realize(SYS_BUS_DEVICE(&s->gic), errp)) {
-@@ -533,32 +501,33 @@ static void xlnx_zynqmp_realize(DeviceState *dev, Error **errp)
-     }
- 
-     for (i = 0; i < num_apus; i++) {
-+        ARMCPU *apu_cpu = arm_cpus_get_cpu(&s->apu, i);
-         qemu_irq irq;
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(&s->gic), i,
--                           qdev_get_gpio_in(DEVICE(&s->apu_cpu[i]),
-+                           qdev_get_gpio_in(DEVICE(apu_cpu),
-                                             ARM_CPU_IRQ));
-         sysbus_connect_irq(SYS_BUS_DEVICE(&s->gic), i + num_apus,
--                           qdev_get_gpio_in(DEVICE(&s->apu_cpu[i]),
-+                           qdev_get_gpio_in(DEVICE(apu_cpu),
-                                             ARM_CPU_FIQ));
-         sysbus_connect_irq(SYS_BUS_DEVICE(&s->gic), i + num_apus * 2,
--                           qdev_get_gpio_in(DEVICE(&s->apu_cpu[i]),
-+                           qdev_get_gpio_in(DEVICE(apu_cpu),
-                                             ARM_CPU_VIRQ));
-         sysbus_connect_irq(SYS_BUS_DEVICE(&s->gic), i + num_apus * 3,
--                           qdev_get_gpio_in(DEVICE(&s->apu_cpu[i]),
-+                           qdev_get_gpio_in(DEVICE(apu_cpu),
-                                             ARM_CPU_VFIQ));
-         irq = qdev_get_gpio_in(DEVICE(&s->gic),
-                                arm_gic_ppi_index(i, ARM_PHYS_TIMER_PPI));
--        qdev_connect_gpio_out(DEVICE(&s->apu_cpu[i]), GTIMER_PHYS, irq);
-+        qdev_connect_gpio_out(DEVICE(apu_cpu), GTIMER_PHYS, irq);
-         irq = qdev_get_gpio_in(DEVICE(&s->gic),
-                                arm_gic_ppi_index(i, ARM_VIRT_TIMER_PPI));
--        qdev_connect_gpio_out(DEVICE(&s->apu_cpu[i]), GTIMER_VIRT, irq);
-+        qdev_connect_gpio_out(DEVICE(apu_cpu), GTIMER_VIRT, irq);
-         irq = qdev_get_gpio_in(DEVICE(&s->gic),
-                                arm_gic_ppi_index(i, ARM_HYP_TIMER_PPI));
--        qdev_connect_gpio_out(DEVICE(&s->apu_cpu[i]), GTIMER_HYP, irq);
-+        qdev_connect_gpio_out(DEVICE(apu_cpu), GTIMER_HYP, irq);
-         irq = qdev_get_gpio_in(DEVICE(&s->gic),
-                                arm_gic_ppi_index(i, ARM_SEC_TIMER_PPI));
--        qdev_connect_gpio_out(DEVICE(&s->apu_cpu[i]), GTIMER_SEC, irq);
-+        qdev_connect_gpio_out(DEVICE(apu_cpu), GTIMER_SEC, irq);
- 
-         if (s->virt) {
-             irq = qdev_get_gpio_in(DEVICE(&s->gic),
+ hw_arch += {'arm': arm_ss}
 -- 
 2.35.1
 
