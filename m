@@ -1,26 +1,27 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZXst-000778-6i
+	id 1nZXst-00079d-O9
 	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 08:57:11 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:51786)
+Received: from eggs.gnu.org ([209.51.188.92]:51812)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsZ-0006l8-M2; Wed, 30 Mar 2022 08:56:52 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:40866)
+ id 1nZXsb-0006mC-1G; Wed, 30 Mar 2022 08:56:53 -0400
+Received: from beetle.greensocs.com ([5.135.226.135]:40980)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nZXsX-0004Y8-GF; Wed, 30 Mar 2022 08:56:51 -0400
+ id 1nZXsY-0004Yk-A9; Wed, 30 Mar 2022 08:56:52 -0400
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 09B3621C38;
- Wed, 30 Mar 2022 12:56:44 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id CE63B21C73;
+ Wed, 30 Mar 2022 12:56:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1648645004;
+ s=mail; t=1648645008;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=CTHLxshGLn+LMFCmOT0tST5SI/piv8b6mpuMZAFlww0=;
- b=bMijghb3ZxySJFZ5hguLZ1NJj61rRhufZGQ0OOc662vJmtougXTMoULm4QbNncYwsTKjWj
- 5TohKjSz6kck9gbHVue+ljKHpJBNGPk4pA2rrNs7mAqxIqU0M661O+3kDeFI6Pwu8EVmBU
- gNy56SQsG4mfwNpvyur3TEXUrkZclRQ=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=MCPBp1rxd0BRI6uj/DUHFvNtQuIDUwFbXBbxFs483vY=;
+ b=nKJcCtPaxEONZtKtaky16eXmfZBjJCFDMEzhFmw+sBkyt89HEW5sszhygVqDI71jsnF0N2
+ YxfX9oolBJ6A4PgC2KXPv6zotxOAM3xZOrQ5vuTK/8bt/1UrBAeb7mCVDoNVxEUTt8iMGd
+ g3TsB122VzbFlEAjD+Ezgc+DxC7mJH4=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
@@ -34,10 +35,13 @@ Cc: mark.burton@greensocs.com, Damien Hedde <damien.hedde@greensocs.com>,
  Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
  qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-Subject: [RFC PATCH 00/18] user-creatable cpu clusters
-Date: Wed, 30 Mar 2022 14:56:21 +0200
-Message-Id: <20220330125639.201937-1-damien.hedde@greensocs.com>
+Subject: [RFC PATCH 04/18] hw/cpu/cluster: make _cpu-cluster_ a subclass of
+ _cpus_
+Date: Wed, 30 Mar 2022 14:56:25 +0200
+Message-Id: <20220330125639.201937-5-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
+References: <20220330125639.201937-1-damien.hedde@greensocs.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
@@ -61,91 +65,174 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Mar 2022 12:56:53 -0000
+X-List-Received-Date: Wed, 30 Mar 2022 12:56:59 -0000
 
-Hi,
+Drop the cluster-id property as base class defines one.
+cluster_id field is temporarily kept until gdbstub
+is updated.
 
-This series add devices to be able to user-create (coldplug) cpu
-clusters. The existing cpu cluster dictates how cpus are exposed
-in gdb, but it does not handle the cpu objects creation. This series
-adds a new device to handle both issues and adds support for two
-architectures: arm and riscv.
+Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+---
+ include/hw/cpu/cluster.h | 17 ++++++++++--
+ hw/cpu/cluster.c         | 58 +++++++++++++++++++++-------------------
+ 2 files changed, 46 insertions(+), 29 deletions(-)
 
-Please look at patches 2 and 3 for more details about the new device.
-
-Last part concerning the riscv is rfc as I do non-backward compatible
-updates. I'm not sure what migration (or other) constraints we have
-on these machines and I probably need to make some changes to cope
-with them.
-
-This series almost deprecates the cpu-cluster type as all uses
-but one are replaced.
-
-It is organized as follows:
-
-+ Patches 1 to 7 adds a new base device to replace cpu-cluster
-
-+ Patches 8 and 9 adds an arm specific version and replace existing
-  clusters in the xlnx-zynqmp machine.
-
-+ patches 10 to 17 updates the riscv_array. It was already used to
-  create cpus but was not a cpu cluster.
-
-Thanks for any comments,
---
-Damien
-
-Damien Hedde (18):
-  define MAX_CLUSTERS in cpu.h instead of cluster.h
-  hw/cpu/cpus: introduce _cpus_ device
-  hw/cpu/cpus: prepare to handle cpu clusters
-  hw/cpu/cluster: make _cpu-cluster_ a subclass of _cpus_
-  gdbstub: deal with _cpus_ object instead of _cpu-cluster_
-  hw/cpu/cluster: remove cluster_id now that gdbstub is updated
-  hw/cpu/cpus: add a common start-powered-off property
-  hw/arm/arm_cpus: add arm_cpus device
-  hw/arm/xlnx-zynqmp: convert cpu clusters to arm_cpus
-  hw/riscv/riscv_hart: prepare transition to cpus
-  hw/riscv: prepare riscv_hart transition to cpus
-  hw/riscv/virt: prepare riscv_hart transition to cpus
-  hw/riscv/spike: prepare riscv_hart transition to cpus
-  hw/riscv/riscv_hart: use cpus as base class
-  hw/riscv/sifive_u&microchip_pfsoc: apply riscv_hart_array update
-  hw/riscv: update remaining machines due to riscv_hart_array update
-  hw/riscv/riscv_hart: remove temporary features
-  add myself as reviewer of the newly added _cpus_
-
- include/hw/arm/arm_cpus.h          |  45 +++++++
- include/hw/arm/xlnx-zynqmp.h       |   8 +-
- include/hw/core/cpu.h              |   6 +
- include/hw/cpu/cluster.h           |  26 ++--
- include/hw/cpu/cpus.h              |  93 ++++++++++++++
- include/hw/riscv/microchip_pfsoc.h |   2 -
- include/hw/riscv/riscv_hart.h      |  25 +++-
- include/hw/riscv/sifive_u.h        |   2 -
- gdbstub.c                          |  12 +-
- hw/arm/arm_cpus.c                  |  63 ++++++++++
- hw/arm/xlnx-zynqmp.c               | 121 +++++++-----------
- hw/cpu/cluster.c                   |  53 ++++----
- hw/cpu/cpus.c                      | 195 +++++++++++++++++++++++++++++
- hw/riscv/boot.c                    |   2 +-
- hw/riscv/microchip_pfsoc.c         |  28 +----
- hw/riscv/opentitan.c               |   4 +-
- hw/riscv/riscv_hart.c              |  44 ++-----
- hw/riscv/shakti_c.c                |   4 +-
- hw/riscv/sifive_e.c                |   4 +-
- hw/riscv/sifive_u.c                |  31 ++---
- hw/riscv/spike.c                   |  18 +--
- hw/riscv/virt.c                    |  79 +++++++-----
- MAINTAINERS                        |   3 +
- hw/arm/meson.build                 |   1 +
- hw/cpu/meson.build                 |   2 +-
- 25 files changed, 612 insertions(+), 259 deletions(-)
- create mode 100644 include/hw/arm/arm_cpus.h
- create mode 100644 include/hw/cpu/cpus.h
- create mode 100644 hw/arm/arm_cpus.c
- create mode 100644 hw/cpu/cpus.c
-
+diff --git a/include/hw/cpu/cluster.h b/include/hw/cpu/cluster.h
+index 09a2b86832..2125765f21 100644
+--- a/include/hw/cpu/cluster.h
++++ b/include/hw/cpu/cluster.h
+@@ -22,6 +22,7 @@
+ 
+ #include "hw/qdev-core.h"
+ #include "qom/object.h"
++#include "hw/cpu/cpus.h"
+ 
+ /*
+  * CPU Cluster type
+@@ -55,7 +56,7 @@
+  */
+ 
+ #define TYPE_CPU_CLUSTER "cpu-cluster"
+-OBJECT_DECLARE_SIMPLE_TYPE(CPUClusterState, CPU_CLUSTER)
++OBJECT_DECLARE_TYPE(CPUClusterState, CPUClusterClass, CPU_CLUSTER)
+ 
+ /**
+  * CPUClusterState:
+@@ -66,10 +67,22 @@ OBJECT_DECLARE_SIMPLE_TYPE(CPUClusterState, CPU_CLUSTER)
+  */
+ struct CPUClusterState {
+     /*< private >*/
+-    DeviceState parent_obj;
++    CpusState parent_obj;
+ 
+     /*< public >*/
+     uint32_t cluster_id;
+ };
+ 
++/**
++ * CPUClusterClass:
++ * @parent_realize: to store base class realize method
++ */
++struct CPUClusterClass {
++    /*< private >*/
++    CpusClass parent_class;
++
++    /*< public >*/
++    DeviceRealize parent_realize;
++};
++
+ #endif
+diff --git a/hw/cpu/cluster.c b/hw/cpu/cluster.c
+index e444b7c29d..3daf897bd9 100644
+--- a/hw/cpu/cluster.c
++++ b/hw/cpu/cluster.c
+@@ -20,50 +20,39 @@
+ 
+ #include "qemu/osdep.h"
+ #include "hw/cpu/cluster.h"
++#include "hw/cpu/cpus.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/core/cpu.h"
+ #include "qapi/error.h"
+ #include "qemu/module.h"
+ #include "qemu/cutils.h"
+ 
+-static Property cpu_cluster_properties[] = {
+-    DEFINE_PROP_UINT32("cluster-id", CPUClusterState, cluster_id, 0),
+-    DEFINE_PROP_END_OF_LIST()
+-};
+-
+-typedef struct CallbackData {
+-    CPUClusterState *cluster;
+-    int cpu_count;
+-} CallbackData;
+-
+ static int add_cpu_to_cluster(Object *obj, void *opaque)
+ {
+-    CallbackData *cbdata = opaque;
++    CpusState *base = CPUS(opaque);
+     CPUState *cpu = (CPUState *)object_dynamic_cast(obj, TYPE_CPU);
+ 
+     if (cpu) {
+-        cpu->cluster_index = cbdata->cluster->cluster_id;
+-        cbdata->cpu_count++;
++        cpu->cluster_index = base->cluster_index;
++        base->topology.cpus++;
+     }
+     return 0;
+ }
+ 
+ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
+ {
+-    /* Iterate through all our CPU children and set their cluster_index */
++    CPUClusterClass *ccc = CPU_CLUSTER_GET_CLASS(dev);
+     CPUClusterState *cluster = CPU_CLUSTER(dev);
++    CpusState *base = CPUS(dev);
+     Object *cluster_obj = OBJECT(dev);
+-    CallbackData cbdata = {
+-        .cluster = cluster,
+-        .cpu_count = 0,
+-    };
+ 
+-    if (cluster->cluster_id >= MAX_CLUSTERS) {
+-        error_setg(errp, "cluster-id must be less than %d", MAX_CLUSTERS);
+-        return;
+-    }
++    /* This is a special legacy case */
++    assert(base->topology.cpus == 0);
++    assert(base->cpu_type == NULL);
++    assert(base->is_cluster);
+ 
+-    object_child_foreach_recursive(cluster_obj, add_cpu_to_cluster, &cbdata);
++    /* Iterate through all our CPU children and set their cluster_index */
++    object_child_foreach_recursive(cluster_obj, add_cpu_to_cluster, base);
+ 
+     /*
+      * A cluster with no CPUs is a bug in the board/SoC code that created it;
+@@ -71,24 +60,39 @@ static void cpu_cluster_realize(DeviceState *dev, Error **errp)
+      * created the CPUs and parented them into the cluster object before
+      * realizing the cluster object.
+      */
+-    assert(cbdata.cpu_count > 0);
++    assert(base->topology.cpus > 0);
++
++    /* realize base class (will set cluster field to true) */
++    ccc->parent_realize(dev, errp);
++
++    /*
++     * Temporarily copy the cluster id from the base class as
++     * gdbstub still uses our field.
++     */
++    cluster->cluster_id = base->cluster_index;
+ }
+ 
+ static void cpu_cluster_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
++    CPUClusterClass *ccc = CPU_CLUSTER_CLASS(klass);
++    CpusClass *cc = CPUS_CLASS(klass);
+ 
+-    device_class_set_props(dc, cpu_cluster_properties);
+-    dc->realize = cpu_cluster_realize;
++    device_class_set_parent_realize(dc, cpu_cluster_realize,
++                                    &ccc->parent_realize);
+ 
+     /* This is not directly for users, CPU children must be attached by code */
+     dc->user_creatable = false;
++
++    /* Cpus are created by external code */
++    cc->skip_cpus_creation = true;
+ }
+ 
+ static const TypeInfo cpu_cluster_type_info = {
+     .name = TYPE_CPU_CLUSTER,
+-    .parent = TYPE_DEVICE,
++    .parent = TYPE_CPUS,
+     .instance_size = sizeof(CPUClusterState),
++    .class_size = sizeof(CPUClusterClass),
+     .class_init = cpu_cluster_class_init,
+ };
+ 
 -- 
 2.35.1
 
