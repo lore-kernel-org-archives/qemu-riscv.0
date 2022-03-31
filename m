@@ -1,67 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZiQP-0001VD-BK
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 20:12:29 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:36236)
+	id 1nZiU4-0004JD-LO
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 20:16:16 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:36756)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nZiQN-0001Qz-Gy; Wed, 30 Mar 2022 20:12:27 -0400
-Received: from [2607:f8b0:4864:20::d36] (port=43642
- helo=mail-io1-xd36.google.com)
+ id 1nZiTx-0004HX-8S; Wed, 30 Mar 2022 20:16:13 -0400
+Received: from [2607:f8b0:4864:20::d30] (port=46627
+ helo=mail-io1-xd30.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nZiQL-0007Cj-S7; Wed, 30 Mar 2022 20:12:27 -0400
-Received: by mail-io1-xd36.google.com with SMTP id 125so26794761iov.10;
- Wed, 30 Mar 2022 17:12:25 -0700 (PDT)
+ id 1nZiTs-0007qj-FW; Wed, 30 Mar 2022 20:16:08 -0400
+Received: by mail-io1-xd30.google.com with SMTP id g21so13598588iom.13;
+ Wed, 30 Mar 2022 17:16:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=JN1dXsM4+Z830jWO9bYcia6poDHQjJldQJbzXlWjlv0=;
- b=F4pTZWMG0+XW5nK6+ftuTyRqEg/M6SI3xXwc8iLfYVtATUVV7ZKHSP7Y0MKBgDzmmO
- dwNRSbSGHl0e81gXVWhm6f9C7lGiRBF2//hhvIfJ3gtGWPVAiGYMkf0AcTcDB5OdFB9q
- pe3vnVnKGuKvBukcDxuKLZzslKg5GmxFwvbeUBcU+Dkc852k4m5EUZqfVTR0Ylkl4CTB
- ynDy/H8V6AUfHSoSoQ21i4tUonkMhGLfZmn3uLGDfaRxLUn4HAPfT5upeHKKQr5ed9AZ
- 3AWJrrnM4WHG8hYxiQbq5vPy+qqEriovrcGJq/gXxjYTeF7p4OuU04x0YOZZxhfVuR+6
- QjVA==
+ :cc; bh=K8qERt5R7F2hK+J9vzyc16FKWVR/fWN92Sgap/dQ39E=;
+ b=CCyYh3x1FEqCgyi+uz7sZmVRjlyxsh4ryEYs3ixOyf4HpUXonSVILvJY/wTxD31mfO
+ a/xS/Jqp1C6JuQnjLkq7jbXPjjvYMbK5ntZqqraef56KgnmGNZHexPrtzejNUj/rL8cl
+ XRXPYLdZOWMmOfiby7xSTYMduZtuymiIr6Ui6ZqbgkuzKLnte2YFsjm0Zyr4lsoy2EbE
+ HKinqORd7HPju1/yo3w0HfU60RZfJpzt/AAQGsxO36/ko0n76NY8QoMBVqzW2qb7/T7w
+ 0turG8ByjDygxKisWRQkjFNEyvo94YeFAjEic9otj1TZ7ZEyiaOWAPFuyQf4SLX5DSFp
+ RYRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=JN1dXsM4+Z830jWO9bYcia6poDHQjJldQJbzXlWjlv0=;
- b=PrrjZDWeu1gIkFyRu3LSigoSZzjH/ikmFbVkDGLw3dYiaZerRIwkBaP1NuMAV5+d3r
- BfHsZ4cmab3bHyGKA+5X/fTKoCYzl4nG1TsQ9kGE6SvJPlnxiGjyRQrqaza0QSRZUZtP
- o66IY4qVpEGNDA84veTx37D24j7i+do8XsmmsEI65N3t9hce1torqMV3z2ubsjCo//Pz
- ruYyM8wFi5yrcT/sQiX0ID4W1DiNyLf7HldyUvj36tLayniW8tVRFklIGX5IkYe1eJm8
- bZuq5I1EfQGnL/Rgqf0GGoR3py1fXbgMPrXo+qKlyTXZJDVrSRBw61SiQcLvrtaae9p9
- BOuA==
-X-Gm-Message-State: AOAM5332Mt5CiciKYdDbrGXRmD3yIQXnKl2j0tf9ZFlfUiTV7x3M/TIu
- CakLw4R66Lf6MwXgM/HXbiQLbgyC2JaW5ua4fsc=
-X-Google-Smtp-Source: ABdhPJxIgc4/FpU2tHna+ZzAYMB3TfAwmHxkh80cVK0Pj6Mbqe8pdITYjUuFh/HfSG96Y0J2mBwuLl2Veu/lT99ZFYI=
-X-Received: by 2002:a05:6638:24c1:b0:323:61fc:a5c0 with SMTP id
- y1-20020a05663824c100b0032361fca5c0mr1461559jat.267.1648685544485; Wed, 30
- Mar 2022 17:12:24 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=K8qERt5R7F2hK+J9vzyc16FKWVR/fWN92Sgap/dQ39E=;
+ b=CU/Y/XgJW6b5V7zR0ERcD8muza+3VTlP5ISn57QfDTG56hOvworcrLNRijlPVrDL68
+ W5NOUDUnHZIw23C8WUHflz21+OoafpCv9No0ZdT6DVpbvNYS0VeLINC+3KvzCERvMe3j
+ BTNgWe7Q/PAjv+sxvPl9WQYWfQpujaF7ZzB/tBoLfVXZHw2v4tuDcHfafaKtBgjC21sz
+ NQYi4FmRhZlNbzFXWPgUbvq7GQDSbidTRYDLKnpiYB3J5FWcmwQPrdPHPmhMUkSLGMd2
+ Bl08cgAzguicHnorT9JDY4iA6A6EY+GzTddNwoe1eDKQpJ/X4zqRuFEpyKsNEkj/JhJj
+ ukqA==
+X-Gm-Message-State: AOAM533rfP3nxImWxcmAIk2mVWxpu42XXY1HqmHsFw0gkdxfvHun9JPE
+ GL4Q6LJhYtMDk+0TGtfoxVWYgDu8uWW9gc/l6kk=
+X-Google-Smtp-Source: ABdhPJzqi7+lUz3lb2Vuq6Oc8w2sk9TS3EfBQ4HvY35uJgIA73NJEjxbHDIoaqvYoF+L2pcbT90HH2m4K9qipR5j6t0=
+X-Received: by 2002:a02:a88f:0:b0:323:6ce5:fb36 with SMTP id
+ l15-20020a02a88f000000b003236ce5fb36mr1473949jam.21.1648685762830; Wed, 30
+ Mar 2022 17:16:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <164863587444.17401.9965527486691250478-0@git.sr.ht>
- <937de10f-be69-247b-562f-be34c17ca945@iscas.ac.cn>
-In-Reply-To: <937de10f-be69-247b-562f-be34c17ca945@iscas.ac.cn>
+References: <20220330021316.18223-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220330021316.18223-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 31 Mar 2022 10:11:58 +1000
-Message-ID: <CAKmqyKPtyKub=MChc_C7JpoXP7+bBwTSX_c4WhuRXaoWwWjehg@mail.gmail.com>
-Subject: Re: [PATCH qemu v7 00/14] Add tail agnostic behavior for rvv
- instructions
+Date: Thu, 31 Mar 2022 10:15:36 +1000
+Message-ID: <CAKmqyKNy2yjOjpofJQRepF=xtf8aBbw19P274EknWfXfoFO_+g@mail.gmail.com>
+Subject: Re: [RESEND PATCH] target/riscv: fix start byte for vmv<nf>r.v when
+ vstart != 0
 To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: "~eopxd" <yueh.ting.chen@gmail.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Frank Chang <frank.chang@sifive.com>,
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- eop Chen <eop.chen@sifive.com>
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d36
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d30
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -3
 X-Spam_score: -0.4
 X-Spam_bar: /
@@ -82,99 +78,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2022 00:12:28 -0000
+X-List-Received-Date: Thu, 31 Mar 2022 00:16:14 -0000
 
-On Wed, Mar 30, 2022 at 10:52 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Wed, Mar 30, 2022 at 12:14 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
+> The spec for vmv<nf>r.v says: 'the instructions operate as if EEW=SEW,
+> EMUL = NREG, effective length evl= EMUL * VLEN/SEW.'
 >
-> =E5=9C=A8 2022/3/30 =E4=B8=8B=E5=8D=886:24, ~eopxd =E5=86=99=E9=81=93:
-> > According to v-spec, tail agnostic behavior can be either kept as
-> > undisturbed or set elements' bits to all 1s. To distinguish the
-> > difference of tail policies, QEMU should be able to simulate the tail
-> > agnostic behavior as "set tail elements' bits to all 1s". An option
-> > 'rvv_ta_all_1s' is added to enable the behavior, it is default as
-> > disabled.
-> >
-> > There are multiple possibility for agnostic elements according to
-> > v-spec. The main intent of this patch-set tries to add option that
-> > can distinguish between tail policies. Setting agnostic elements to
-> > all 1s makes things simple and allow QEMU to express this.
-> >
-> > We may explore other possibility of agnostic behavior by adding
-> > other options in the future. Please understand that this patch-set
-> > is limited.
-> >
-> > v2 updates:
-> > - Addressed comments from Weiwei Li
-> > - Added commit tail agnostic on load / store instructions (which
-> >     I forgot to include into the patch-set)
-> >
-> > v3 updates:
-> > - Missed the very 1st commit, adding it back
-> >
-> > v4 updates:
-> > - Renamed vlmax to total_elems
-> > - Deal with tail element when vl_eq_vlmax =3D=3D true
-> >
-> > v5 updates:
-> > - Let `vext_get_total_elems` take `desc` and `esz`
-> > - Utilize `simd_maxsz(desc)` to get `vlenb`
-> > - Fix alignments to code
-> >
-> > v6 updates:
-> > - Fix `vext_get_total_elems`
-> >
-> > v7 updates:
-> > - Reuse `max_elems` for vector load / store helper functions. The
-> >     translation sets desc's `lmul` to `min(1, lmul)`, making
-> > `vext_max_elems`
-> >     equivalent to `vext_get_total_elems`.
-> >
-> > eopXD (14):
-> >    target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
-> >    target/riscv: rvv: Rename ambiguous esz
-> >    target/riscv: rvv: Early exit when vstart >=3D vl
-> >    target/riscv: rvv: Add tail agnostic for vv instructions
-> >    target/riscv: rvv: Add tail agnostic for vector load / store
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
-> >    target/riscv: rvv: Add tail agnostic for vector integer shift
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vector integer comparison
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vector integer merge and mo=
-ve
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vector floating-point
-> >      instructions
-> >    target/riscv: rvv: Add tail agnostic for vector reduction instructio=
-ns
-> >    target/riscv: rvv: Add tail agnostic for vector mask instructions
-> >    target/riscv: rvv: Add tail agnostic for vector permutation
-> >      instructions
-> >
-> >   target/riscv/cpu.c                      |    1 +
-> >   target/riscv/cpu.h                      |    2 +
-> >   target/riscv/cpu_helper.c               |    2 +
-> >   target/riscv/insn_trans/trans_rvv.c.inc |  164 +++
-> >   target/riscv/internals.h                |    5 +-
-> >   target/riscv/translate.c                |    2 +
-> >   target/riscv/vector_helper.c            | 1562 ++++++++++++++--------=
--
-> >   7 files changed, 1121 insertions(+), 617 deletions(-)
-> >
-> The patchset looks good to me.
+> So the start byte for vstart != 0 should take sew into account
+>
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Do you want to add a reviewed-by or acked-by tag?
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/vector_helper.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 >
-> Regards,
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 1d4982ef7f..b5fbdabbb1 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -4890,13 +4890,15 @@ GEN_VEXT_VCOMPRESS_VM(vcompress_vm_d, uint64_t, H8)
+>  /* Vector Whole Register Move */
+>  void HELPER(vmvr_v)(void *vd, void *vs2, CPURISCVState *env, uint32_t desc)
+>  {
+> -    /* EEW = 8 */
+> +    /* EEW = SEW */
+>      uint32_t maxsz = simd_maxsz(desc);
+> -    uint32_t i = env->vstart;
+> +    uint32_t sewb = 1 << FIELD_EX64(env->vtype, VTYPE, VSEW);
+> +    uint32_t startb = env->vstart * sewb;
+> +    uint32_t i = startb;
 >
-> Weiwei Li
+>      memcpy((uint8_t *)vd + H1(i),
+>             (uint8_t *)vs2 + H1(i),
+> -           maxsz - env->vstart);
+> +           maxsz - startb);
+>
+>      env->vstart = 0;
+>  }
+> --
+> 2.17.1
 >
 >
 
