@@ -1,77 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1na0sG-0004sD-PL
-	for mharc-qemu-riscv@gnu.org; Thu, 31 Mar 2022 15:54:28 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:37176)
+	id 1na32V-0002Ar-9i
+	for mharc-qemu-riscv@gnu.org; Thu, 31 Mar 2022 18:13:11 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:36580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1na0sF-0004pH-8l
- for qemu-riscv@nongnu.org; Thu, 31 Mar 2022 15:54:27 -0400
-Received: from [2607:f8b0:4864:20::631] (port=37396
- helo=mail-pl1-x631.google.com)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1na32P-00027j-Ry; Thu, 31 Mar 2022 18:13:08 -0400
+Received: from [2607:f8b0:4864:20::d2e] (port=36835
+ helo=mail-io1-xd2e.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1na0sD-0004oF-Gr
- for qemu-riscv@nongnu.org; Thu, 31 Mar 2022 15:54:26 -0400
-Received: by mail-pl1-x631.google.com with SMTP id e5so552906pls.4
- for <qemu-riscv@nongnu.org>; Thu, 31 Mar 2022 12:54:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
- h=date:subject:in-reply-to:cc:from:to:message-id:mime-version
- :content-transfer-encoding;
- bh=8uJ7V2Lk5b43qtRmyNKIxduM/i4ZvkhkfMVtcSMTHLc=;
- b=FU4YJeOWM6yJOftdRdppJkqAphiFFHBDWUUenEYTDla3AjR/9XyWUZ7NZrML9kP99Z
- rqVOzKX0OfynEviPak2SUeMa0Jxf+lrS9EClU7ZqMwKR3W/DNIVrESqbp+0eIEVkrIBM
- M2axkYIj+R7nx0w3lyY4eEihxCsjEfF2rwwm4ERkBmFL3F2/vYC+dG+rn5028ncqt8cj
- SlsMm9LggdTPgKMEVRPSqQNUJJCSU9RceECfCtuPpey4sagbpN/5/PCyVkitJ13aPlA3
- YdQ3O527QYaVl7OfKeTFGDfExvfTRBdEKXr5OeP9UNh/o1LsqwQB9z32d0VsYvZtWzn+
- VywQ==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1na32N-00008N-BN; Thu, 31 Mar 2022 18:13:05 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id b16so1204830ioz.3;
+ Thu, 31 Mar 2022 15:13:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=LGiLCSdDqf0Qc9gs/x29dNMZY61XRE1r90GaN1X6Zx8=;
+ b=LJFjktyDQr5Z+j10MzHSi4ZEMPleRmpAU+0ill0SBM2A/tlDXrQVLd5HgqSSC5SKcE
+ IYoLIRy/4zAIRJ4lUfKQdGby9EEDhrmuOSniNhmfdb6qjxqYfxTjNr+rDwLfIXmN7kMy
+ XQBJAiX7z6NvmKHTT1U3iNCY8JRSyAv3p43JnLI1BgT0b9mfvTjiUJ3gSe2eBxXsL9ZR
+ sb3f6zl4xkCUWPILs1uCfpzYuUERVcDIj5iIMn6AXWpwpHrmYrrVQz1mymBUNQD8ewa3
+ mc3j+nZh19FdEVzjUaOk1i7bi9Hc6F9XguKO5uKGDdi0v+5XpOk9oblf1cX/F6mVGzLE
+ h7UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:subject:in-reply-to:cc:from:to:message-id
- :mime-version:content-transfer-encoding;
- bh=8uJ7V2Lk5b43qtRmyNKIxduM/i4ZvkhkfMVtcSMTHLc=;
- b=MwM+KvimZUehhSSm8eLmawWem1BsLND+8St6HDSqpHj1EU5eAPLQ9BDs33WmQlUy6l
- 1ri1y+ev5Ye0MqPgYlRgTGdDnoggNHdIY4HgMg2N2MzLBww2r3fEttVPjso+5noWvYwf
- OHFoN3iyBaad7z6wH6xKKsO0dwHeRMpBtpgGo+ybqwf6z0EBfX3BbuASmgsbHPTVG+uU
- 0oSKY7sqhkWBLxsC6E0086cIbMDl+QPhhiwgEgnfPyBtWz3uTZ6gLAdNGeDmJCMFlsVs
- ekwJEvwItGKV2tpobY3yc8RT1tvQL895kDvY4D6Ut2GWBUSPVJ6XhV0TQgmnrEkUeX8G
- IVbg==
-X-Gm-Message-State: AOAM53318V+2CmwWH5JXSof8HTld5FlK19a0TUs4qYrpEqVOC3Kxktiu
- 9Q5tCd7fVqX4Y2MKfvUxztV24w==
-X-Google-Smtp-Source: ABdhPJw7JKGfhtf3xhglvwKuCf7tiq5byULmqZPX/onK7gDxOwmiShZCnNHHKkZbJwIlhjSsWTfaDg==
-X-Received: by 2002:a17:903:32c7:b0:154:4156:f384 with SMTP id
- i7-20020a17090332c700b001544156f384mr6965753plr.34.1648756463019; 
- Thu, 31 Mar 2022 12:54:23 -0700 (PDT)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net.
- [76.210.143.223]) by smtp.gmail.com with ESMTPSA id
- b10-20020a056a00114a00b004f784ba5e6asm323970pfm.17.2022.03.31.12.54.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 31 Mar 2022 12:54:22 -0700 (PDT)
-Date: Thu, 31 Mar 2022 12:54:22 -0700 (PDT)
-X-Google-Original-Date: Thu, 31 Mar 2022 12:54:20 PDT (-0700)
-Subject: Re: Re: [PATCH] target/riscv: Exit current TB after an sfence.vma
-In-Reply-To: <CAKmqyKMsG6d7jaS2gxXxh+qONWkWGbHFwLK9tYb2q7eeQe77uw@mail.gmail.com>
-CC: idan.horowitz@gmail.com, linux-riscv@lists.infradead.org,
- qemu-riscv@nongnu.org, 
- phantom@zju.edu.cn, Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: alistair23@gmail.com
-Message-ID: <mhng-beb640a4-0833-45b9-a57d-1e98464152f5@palmer-mbp2014>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::631
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=LGiLCSdDqf0Qc9gs/x29dNMZY61XRE1r90GaN1X6Zx8=;
+ b=2bMrArxJSBCWWl0w8Q4JinDKVKHcMhrxp+JkDAc7Clg5HZofMg8mZP28aLHNxviBI+
+ /eR+HwbCdbAfAg2LQufVGSMAcmsEviZb3wRSMeOFACb7UL0pbwZsF+rXbT5Y4ISFhVtY
+ AX7fvqUtBFU3GJ/3d4dtQVly+SXbql4+TYY2oXhPg2DLd2K6My1bYXrZVsYKEC4d8xDq
+ qi6YlkXWAuewT36GFuDKFltsuD+5fMHQfvrVj9GZI1sZv3lnMxyMnQ+4JwtFzPQtvZ/W
+ pcF81Arg77ax38s7Bb6/VxEnbnmPltsuM5d42R+7/d9XaD+YMll1BCw3amEUFZRWHAn6
+ OZag==
+X-Gm-Message-State: AOAM532PFpanB+sADDstzA+SC9uCwcYt3Ua6dZ8ljDD8hZ81wH2vqe+z
+ DJOcvSY7PyX7ChglqhiFn894qn78RkXLdLjHUg4E38wp4rjnsOiD
+X-Google-Smtp-Source: ABdhPJyLxVUnV0YB6rNNboSEAaxvke2mbm0qFuBwf1o8xvuEZIA2L38oupvGCISvLpBiFJpc7WsXeHdwt1zbyrwSx0w=
+X-Received: by 2002:a05:6638:3727:b0:323:acce:dd0c with SMTP id
+ k39-20020a056638372700b00323accedd0cmr2091671jav.267.1648764781196; Thu, 31
+ Mar 2022 15:13:01 -0700 (PDT)
+MIME-Version: 1.0
+References: <20220330165913.8836-1-palmer@rivosinc.com>
+In-Reply-To: <20220330165913.8836-1-palmer@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 1 Apr 2022 08:12:35 +1000
+Message-ID: <CAKmqyKOn6ABmA2SZgXvhMq=2q_m7faPYanDQcxhyGEx_34oFrw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Avoid leaking "no translation" TLB entries
+To: Palmer Dabbelt <palmer@rivosinc.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Atish Patra <atishp@rivosinc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::d2e
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=palmer@dabbelt.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -4
-X-Spam_score: -0.5
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
+X-Spam_score_int: -3
+X-Spam_score: -0.4
 X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, PDS_HP_HELO_NORDNS=0.659,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,62 +75,89 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2022 19:54:27 -0000
+X-List-Received-Date: Thu, 31 Mar 2022 22:13:09 -0000
 
-On Wed, 30 Mar 2022 22:13:39 PDT (-0700), alistair23@gmail.com wrote:
-> On Thu, Mar 31, 2022 at 2:36 PM Palmer Dabbelt <palmer@dabbelt.com> wrote:
->>
->> On Wed, 30 Mar 2022 20:23:21 PDT (-0700), alistair23@gmail.com wrote:
->> > On Thu, Mar 31, 2022 at 3:11 AM Idan Horowitz <idan.horowitz@gmail.com> wrote:
->> >>
->> >> On Wed, 30 Mar 2022 at 19:11, Palmer Dabbelt <palmer@dabbelt.com> wrote:
->> >> >
->> >> >
->> >> > Presumably you mean "revert" here?  That might be the right way to go,
->> >> > just to avoid breaking users (even if we fix the kernel bug, it'll take
->> >> > a while to get everyone to update).  That said, this smells like the
->> >> > sort of thing that's going to crop up at arbitrary times in dynamic
->> >> > systems so while a revert looks like it'd work around the boot issue we
->> >> > might be making more headaches for folks down the road.
->> >> >
->> >>
->> >> The opposite in fact, I did not suggest to revert it, but rather undo
->> >> the revert (as Alistair already removed it from the apply-next tree),
->> >> since my original patch fixes buggy behaviour that is blocking the
->> >> testing of some embedded software on QEMU.
->>
->> Ah, sorry -- the QEMU tree I was looking at still had the patch in
->> there, must have just been an old one.
->>
->> > So, this is a little tricky.
->> >
->> > We want to apply the fix, but that will break current users.
->> >
->> > Once the fix is merged into Linux we can apply it here. That should
->> > hopefully be right at the start of the 7.1 QEMU development window,
->> > which should give time for the fix to propagate into stable kernels
->> > and not break too many people by the time QEMU is released.
->>
->> If you think this is a Linux bug then that makes sense, but I think this
->> is a QEMU bug -- I sent a patch, not sure if it went through as it didn't
->> make it to lore.
+On Thu, Mar 31, 2022 at 3:11 AM Palmer Dabbelt <palmer@rivosinc.com> wrote:
 >
-> Ah whoops. I saw the patch but didn't read it, then I assumed it was a
-> Linux bug from your diff earlier.
-
-No problem, that was the first thing I sent in the morning so I doubt it 
-made any sense.
-
+> The ISA doesn't allow bare mappings to be cached, as the caches are
+> translations and bare mppings are not translated.  We cache these
+> translations in QEMU in order to utilize the TLB code, but that leaks
+> out to the guest.
 >
->>
->> I also think the bug will manifest without the TB exit patch, maybe in
->> single-step mode and definately if we happen to exit the TB at that
->> point for other reasons.  Assuming my reasoning is correct in that
->> patch, we may also be hitting this as arbitrary corruption anywhere.
->> I'd started to write up a "QEMU errata" Linux patch for this, but then
->> convinced myself that just adding the sfence.vma was insufficient.
->
-> Yeah, looking at it now I agree, I'll send a PR for 7.0.
+> Suggested-by: phantom@zju.edu.cn # no name in the From field
+> Fixes: 1e0d985fa9 ("target/riscv: Only flush TLB if SATP.ASID changes")
+> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 
 Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+> ---
+>
+> Another way to fix this would be to utilize a MMU index that cooresponds
+> to no ASID to hold these direct mappings, but given that we're not
+> currently taking advantage of ASIDs for translation performance that
+> would be a larger chunk of work.  This causes a Linux boot regression,
+> so the band-aid seems appropriate.
+>
+> I think the original version of this was also more broadly broken, in
+> that changing to ASID 0 would allow old mappings, but I might be missing
+> something there.  I seem to remember ASID 0 as having been special at
+> some point, but it's not in the ISA as it stands so maybe I'm just
+> crazy.
+>
+> This, when applied on top of Alistair's riscv-to-apply.next, boots my
+> for-next (which is very close to Linus' master).
+> ---
+>  target/riscv/csr.c | 14 ++++++++------
+>  1 file changed, 8 insertions(+), 6 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 0606cd0ea8..cabef5a20b 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1844,7 +1844,7 @@ static RISCVException read_satp(CPURISCVState *env, int csrno,
+>  static RISCVException write_satp(CPURISCVState *env, int csrno,
+>                                   target_ulong val)
+>  {
+> -    target_ulong vm, mask, asid;
+> +    target_ulong vm, mask;
+>
+>      if (!riscv_feature(env, RISCV_FEATURE_MMU)) {
+>          return RISCV_EXCP_NONE;
+> @@ -1853,20 +1853,22 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+>      if (riscv_cpu_mxl(env) == MXL_RV32) {
+>          vm = validate_vm(env, get_field(val, SATP32_MODE));
+>          mask = (val ^ env->satp) & (SATP32_MODE | SATP32_ASID | SATP32_PPN);
+> -        asid = (val ^ env->satp) & SATP32_ASID;
+>      } else {
+>          vm = validate_vm(env, get_field(val, SATP64_MODE));
+>          mask = (val ^ env->satp) & (SATP64_MODE | SATP64_ASID | SATP64_PPN);
+> -        asid = (val ^ env->satp) & SATP64_ASID;
+>      }
+>
+>      if (vm && mask) {
+>          if (env->priv == PRV_S && get_field(env->mstatus, MSTATUS_TVM)) {
+>              return RISCV_EXCP_ILLEGAL_INST;
+>          } else {
+> -            if (asid) {
+> -                tlb_flush(env_cpu(env));
+> -            }
+> +           /*
+> +            * The ISA defines SATP.MODE=Bare as "no translation", but we still
+> +            * pass these through QEMU's TLB emulation as it improves
+> +            * performance.  Flushing the TLB on SATP writes with paging
+> +            * enabled avoids leaking those invalid cached mappings.
+> +            */
+> +            tlb_flush(env_cpu(env));
+>              env->satp = val;
+>          }
+>      }
+> --
+> 2.34.1
+>
+>
 
