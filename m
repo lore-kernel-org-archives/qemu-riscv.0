@@ -1,71 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nZiG4-0005FH-1u
-	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 20:01:48 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:33840)
+	id 1nZiG6-0005MG-5n
+	for mharc-qemu-riscv@gnu.org; Wed, 30 Mar 2022 20:01:50 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:33918)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nZiFy-0004ze-QD
- for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 20:01:42 -0400
-Received: from [2607:f8b0:4864:20::102a] (port=46615
- helo=mail-pj1-x102a.google.com)
+ id 1nZiG2-00059z-FO
+ for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 20:01:46 -0400
+Received: from [2607:f8b0:4864:20::633] (port=44588
+ helo=mail-pl1-x633.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nZiFw-0005U2-M0
- for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 20:01:42 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- bx24-20020a17090af49800b001c6872a9e4eso1861704pjb.5
- for <qemu-riscv@nongnu.org>; Wed, 30 Mar 2022 17:01:40 -0700 (PDT)
+ id 1nZiG0-0005VZ-Jn
+ for qemu-riscv@nongnu.org; Wed, 30 Mar 2022 20:01:46 -0400
+Received: by mail-pl1-x633.google.com with SMTP id j8so11741519pll.11
+ for <qemu-riscv@nongnu.org>; Wed, 30 Mar 2022 17:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=7gDbHwKwxtrtA4jGmGdtT6CXmvVat9X7nhJ/2q8dc90=;
- b=ra6QVmkDop74yDuTBPgZ3Z5DV8A2FF7yump60mHtKvfF1ULzQlI9UEr6KGfAT9KfGy
- h+CezZA7rYEu3AmmIBMgZp3NuqbeuDJa46C6THtme/eAsSyOY/9TwrPPIaFjL1gi/QeF
- 2exM4GSxRnR8gD5KtRIjmiyvxf1Mcie4sTrF28Bp8WyND/UHs099VT5URHsRQid0aM7i
- LzR+gzbBwlpKnRKQPQagNQOiSSbAYgz8TRAGJmPkQhADSllo13JhNXn727o8rU7onwTC
- vButcrxd4Y6oFayK35qjadnUwzlah3bvJo7MP6HMYl48KsfQAPa8trhP1ekM0Cvqyfpj
- jSVw==
+ bh=xbGwjstWaIxAAQlaAtNpNCMeXbJHUqbcG4xt8oQ7u2E=;
+ b=aeV9sHSGU0kXYgjgSWv61aadyVnBCKKUkeh3ba59GituHUfbjL3c7eGqCMRfN14KTA
+ x8ioGtQW8SxcCgKwE7T8j5jv8nsUsxT13xcqCUfVRpUpyqMx9BG/Nd3uUc0R4glQR12T
+ sLwj3NJy9Yn7YzeiKfZf08RLpiz5jTMn1lGhWDKqEDR+xp5/XfnYGVQKnLVF3ATXwrBL
+ 8UZC+HKMzjHmFA/X4frLBCTRBvQbk9ab+kJJp2Pfx9/T69Zpi1qPKRULaMLDG0NoJP2e
+ khJxtMX6sYrZr0QpQq/Z0xXcVGRqqyOA/0FbwwNtz8CGlxhdf6g8VBwFSBTAIOhd2fbV
+ QDkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=7gDbHwKwxtrtA4jGmGdtT6CXmvVat9X7nhJ/2q8dc90=;
- b=vMkJ4ReRYzhnu5cCQlBwJrnDXO15nAgjOJYg42wFdjCZZgO/qeHi8s+O+QOngDhcEz
- DtOVYgJzIIEXqQG7yXirf1lgdh+arc7KayILh8HEpi+NescTOu1Jaw+0PILV2jZfl7XP
- d27wk46mN4ivHbJw4EGb7Dl4QoZAX7lp83Rowedv5OfPLibc79mAKXLJJoq47JLughvs
- xD5FEUQZiIo9j1UzSJmUW11JCFAttiw7l7IlL02hPOzbg7zqkMP+lvstpzbZOj91VCfN
- xM7wBTmYuwHXa2tPrNdbG3hBjMWbU0LwREtrUkZN4c18qdMFWgxM87wGZjAe3hkddMC+
- uqKA==
-X-Gm-Message-State: AOAM531UEG2V+Cr8YRsypBZjb0TNeEyR0BChwl5/Re3cKnX4gA7FcNEh
- x9dFP72x1yXXUfTTgA9B2eQMCg==
-X-Google-Smtp-Source: ABdhPJwYvSGrseg24S2jsPS6T4I5YxXp0TOdnLAGtudRpL0r3PeLNqICHSLig/ps0DhMgagFXPXXqA==
-X-Received: by 2002:a17:90b:f82:b0:1c6:58b9:bd36 with SMTP id
- ft2-20020a17090b0f8200b001c658b9bd36mr2678172pjb.141.1648684899465; 
- Wed, 30 Mar 2022 17:01:39 -0700 (PDT)
+ bh=xbGwjstWaIxAAQlaAtNpNCMeXbJHUqbcG4xt8oQ7u2E=;
+ b=2isir7JCjg1qplGIW/vnJYiLhNIc5A387qJxJOuaUitykxd3ilZIB749TAxMD0iLRo
+ q9HhVg4FoC5nt58Dx1TzOP2sDpFf7nyF4RGgjzoPcSrPOc10rQ/PWmzodYB1GcoStaEO
+ jJ6wwpNQdV/pbcbbA1UETmloP8Rylm7RmO8SZMiR07Iuu4pXjqudp6NM8dWAeSlpWIyx
+ UUW+DgakYrGZ8abrko2GxXLkev32Y3djCidYJgopuSU/TAIzvcffA1X+O8YQdjw2vMSE
+ eqc6ATUWPNz2DsVsVZQRxwLu4yeixixf8oUS0CV1wEJ3bEyAKAqOJPyUe/I2G6vA//oW
+ /cHQ==
+X-Gm-Message-State: AOAM533blPe6O8ArJHSQSCN01BrqsszqP/qp0eu/q/0MxpWkRQyLCxFH
+ +eD4ZBk+pxVx/dRwrGj1NDqK/w==
+X-Google-Smtp-Source: ABdhPJxSiruHKt0/gqZ55YHlCeLbk/rtvVQo8oZ2OkcIwger+KrUp4NQgoqYzznHmdvmbhHn+kWOrw==
+X-Received: by 2002:a17:90b:1bc6:b0:1c7:69d:e80f with SMTP id
+ oa6-20020a17090b1bc600b001c7069de80fmr2683665pjb.202.1648684903300; 
+ Wed, 30 Mar 2022 17:01:43 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- ij17-20020a17090af81100b001c67c964d93sm8891669pjb.2.2022.03.30.17.01.38
+ ij17-20020a17090af81100b001c67c964d93sm8891669pjb.2.2022.03.30.17.01.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Mar 2022 17:01:39 -0700 (PDT)
+ Wed, 30 Mar 2022 17:01:42 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
  Atish Patra <atishp@rivosinc.com>, Bin Meng <bin.meng@windriver.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
-Subject: [PATCH v7 02/12] target/riscv: Implement PMU CSR predicate function
- for S-mode
-Date: Wed, 30 Mar 2022 17:01:16 -0700
-Message-Id: <20220331000127.2107823-3-atishp@rivosinc.com>
+Subject: [PATCH v7 05/12] target/riscv: Implement mcountinhibit CSR
+Date: Wed, 30 Mar 2022 17:01:19 -0700
+Message-Id: <20220331000127.2107823-6-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220331000127.2107823-1-atishp@rivosinc.com>
 References: <20220331000127.2107823-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::102a
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::633
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=atishp@rivosinc.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -4
 X-Spam_score: -0.5
 X-Spam_bar: /
@@ -85,86 +83,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Mar 2022 00:01:43 -0000
+X-List-Received-Date: Thu, 31 Mar 2022 00:01:46 -0000
 
 From: Atish Patra <atish.patra@wdc.com>
 
-Currently, the predicate function for PMU related CSRs only works if
-virtualization is enabled. It also does not check mcounteren bits before
-before cycle/minstret/hpmcounterx access.
+As per the privilege specification v1.11, mcountinhibit allows to start/stop
+a pmu counter selectively.
 
-Support supervisor mode access in the predicate function as well.
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Atish Patra <atish.patra@wdc.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/csr.c | 51 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 51 insertions(+)
+ target/riscv/cpu.h      |  2 ++
+ target/riscv/cpu_bits.h |  4 ++++
+ target/riscv/csr.c      | 25 +++++++++++++++++++++++++
+ target/riscv/machine.c  |  1 +
+ 4 files changed, 32 insertions(+)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 47319dbce4b9..be826a19f68e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -269,6 +269,8 @@ struct CPUArchState {
+     target_ulong scounteren;
+     target_ulong mcounteren;
+ 
++    target_ulong mcountinhibit;
++
+     target_ulong sscratch;
+     target_ulong mscratch;
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index bb47cf7e77a2..48b39e6d52a7 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -367,6 +367,10 @@
+ #define CSR_MHPMCOUNTER29   0xb1d
+ #define CSR_MHPMCOUNTER30   0xb1e
+ #define CSR_MHPMCOUNTER31   0xb1f
++
++/* Machine counter-inhibit register */
++#define CSR_MCOUNTINHIBIT   0x320
++
+ #define CSR_MHPMEVENT3      0x323
+ #define CSR_MHPMEVENT4      0x324
+ #define CSR_MHPMEVENT5      0x325
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 254bab3715b7..914b3f96ef67 100644
+index e2d17b619877..bc093406a1d5 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -77,6 +77,57 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
+@@ -1403,6 +1403,28 @@ static RISCVException write_mtvec(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
  
-+    if (env->priv == PRV_S) {
-+        switch (csrno) {
-+        case CSR_CYCLE:
-+            if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-+                return RISCV_EXCP_ILLEGAL_INST;
-+            }
-+            break;
-+        case CSR_TIME:
-+            if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-+                return RISCV_EXCP_ILLEGAL_INST;
-+            }
-+            break;
-+        case CSR_INSTRET:
-+            if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-+                return RISCV_EXCP_ILLEGAL_INST;
-+            }
-+            break;
-+        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-+            ctr_index = csrno - CSR_CYCLE;
-+            if (!get_field(env->mcounteren, 1 << ctr_index)) {
-+                return RISCV_EXCP_ILLEGAL_INST;
-+            }
-+            break;
-+        }
-+        if (riscv_cpu_mxl(env) == MXL_RV32) {
-+            switch (csrno) {
-+            case CSR_CYCLEH:
-+                if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-+                    return RISCV_EXCP_ILLEGAL_INST;
-+                }
-+                break;
-+            case CSR_TIMEH:
-+                if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-+                    return RISCV_EXCP_ILLEGAL_INST;
-+                }
-+                break;
-+            case CSR_INSTRETH:
-+                if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-+                    return RISCV_EXCP_ILLEGAL_INST;
-+                }
-+                break;
-+            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-+                ctr_index = csrno - CSR_CYCLEH;
-+                if (!get_field(env->mcounteren, 1 << ctr_index)) {
-+                    return RISCV_EXCP_ILLEGAL_INST;
-+                }
-+                break;
-+            }
-+        }
++static RISCVException read_mcountinhibit(CPURISCVState *env, int csrno,
++                                         target_ulong *val)
++{
++    if (env->priv_ver < PRIV_VERSION_1_11_0) {
++        return RISCV_EXCP_ILLEGAL_INST;
 +    }
 +
-     if (riscv_cpu_virt_enabled(env)) {
-         switch (csrno) {
-         case CSR_CYCLE:
++    *val = env->mcountinhibit;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
++                                          target_ulong val)
++{
++    if (env->priv_ver < PRIV_VERSION_1_11_0) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    env->mcountinhibit = val;
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_mcounteren(CPURISCVState *env, int csrno,
+                                       target_ulong *val)
+ {
+@@ -3629,6 +3651,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,   read_zero },
+     [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,   read_zero },
+ 
++    [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",   any,    read_mcountinhibit,
++                                                       write_mcountinhibit },
++
+     [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_zero },
+     [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_zero },
+     [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_zero },
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 2a437b29a1ce..87cd55bfd3a7 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -330,6 +330,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.siselect, RISCVCPU),
+         VMSTATE_UINTTL(env.scounteren, RISCVCPU),
+         VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
++        VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
+         VMSTATE_UINTTL(env.sscratch, RISCVCPU),
+         VMSTATE_UINTTL(env.mscratch, RISCVCPU),
+         VMSTATE_UINT64(env.mfromhost, RISCVCPU),
 -- 
 2.25.1
 
