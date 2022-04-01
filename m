@@ -1,79 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1naGY8-0002mx-Pg
-	for mharc-qemu-riscv@gnu.org; Fri, 01 Apr 2022 08:38:45 -0400
-Received: from eggs.gnu.org ([209.51.188.92]:41820)
+	id 1naGse-0007Ry-Ql
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Apr 2022 08:59:56 -0400
+Received: from eggs.gnu.org ([209.51.188.92]:46606)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1naGY5-0002mA-Tq
- for qemu-riscv@nongnu.org; Fri, 01 Apr 2022 08:38:41 -0400
-Received: from [2607:f8b0:4864:20::229] (port=46873
- helo=mail-oi1-x229.google.com)
+ id 1naGsd-0007Qf-56
+ for qemu-riscv@nongnu.org; Fri, 01 Apr 2022 08:59:55 -0400
+Received: from [2607:f8b0:4864:20::c2a] (port=38887
+ helo=mail-oo1-xc2a.google.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1naGY4-0007JA-EM
- for qemu-riscv@nongnu.org; Fri, 01 Apr 2022 08:38:41 -0400
-Received: by mail-oi1-x229.google.com with SMTP id b188so2629894oia.13
- for <qemu-riscv@nongnu.org>; Fri, 01 Apr 2022 05:38:39 -0700 (PDT)
+ id 1naGsb-00036z-Fj
+ for qemu-riscv@nongnu.org; Fri, 01 Apr 2022 08:59:54 -0400
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ v19-20020a056820101300b0032488bb70f5so508732oor.5
+ for <qemu-riscv@nongnu.org>; Fri, 01 Apr 2022 05:59:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=message-id:date:mime-version:user-agent:subject:content-language:to
- :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=S39ASf82fmXmnHbixXsS4gBB+nFp64cArZTkdrClIHQ=;
- b=BtsWSLiumNCiuhRqLYTmOSo1iD4pi8fFem+qfzAEM/DcuJbfrbiB0tET9h0s/5lo8S
- QO+I/zO/A5fc4371t04sVN4LPbuCniqOuPYVCRIyOApfZEu2Wj92mq6lOIJrWtPwEK/N
- oLOSdqhXkiiJDAdrolkl7ve381S5zmNkCgZ/fEPIlVjGsX3SG6c/yimsSoIM9Uof8EZY
- 6Txxql+I43IjzHFoj+8w3eHCCuDWZLHajt/HKEXR7g4upbWxvIX5uoXdA3cvzNkS5xKj
- Y12uTURqdwdOLzwqTni8AmOu+cOIzPbPaMBLS3kxJeNi5alcd0EZeGHnkG2Q9vmYtw1W
- JxtA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=yF7C9gaOsw5q5PId/RPk9weVI8GZSE/i/UYTi79cArg=;
+ b=Fv9EPnrAA2w7zGLj+VSTHip02aJ3WndToaz3PLpV8oCsH46TIH8cn5g6q7lLNb9R/Y
+ 1wUh4QyIbv4fWeHrepGScG9nbBzw1zGeliONU3lVoU60wsxmt/QSoK5UCvh0CwPerYGi
+ ccQLPNTXkg4G2hrV+XhpuZOaBEmh8d2S2faufns3maDyZPkfPyvIM4IsBL7hHYPBpCvQ
+ EOtoGUVWrp4Y40Utqdmlw7TFNabUDba2PIcks01UeCVeWU2mQzyUxvFqCWwYllVQzGq3
+ br8B40lDZC6z6CYgjXRMbbEDWo7CfcFVWMFHbsqzoPrx9u1v+8vGKu1L61qT6kEUEMp0
+ Wuxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=S39ASf82fmXmnHbixXsS4gBB+nFp64cArZTkdrClIHQ=;
- b=VVwjYgs5k79GGnEnlXqpKHqRsGHC0fQtoDaFoIF0R8N8GUrYxcTwoHncuhmN2UPXXh
- rc7VvcsAKfXqvvPOTXVyNWuhETi779PSSmEnyMdH1ZNKKtjucJo6YlbqVdUd4hG1QlWe
- S0AoEftq+/nuhmQtNcD7joxfVRPuJSdy6IuiEcjogjASFOi3EIAUQVhRiv1A5H2yLyH9
- W84XyMgilTaE8FdIr1HPAUe5Uv9qIvEDx5GpWqCZFMCZLMOR4l3aI0bUYAaSD10/Q+CF
- mw7E5lqx95p1JkNAV5Dcv/8r7EQ4vE7BtPzeGEwP4SnEhJrySKuhVSN87qyJ2deaxS6P
- 9avQ==
-X-Gm-Message-State: AOAM530tdxsi1UGOnj77kirhPiK6FdKQSL3rFeNiMu8U2BX6tdJjAoBx
- uQk7SiiQhItH+aS0ZfpYWY9Tl6k/eAU5XYQTGj8=
-X-Google-Smtp-Source: ABdhPJxqK9lgD8FITKAK96lSH6N9pI25/akSnF1r4tnC0VCMpkI5jvcXld3eXSiCkXu86l/ZXoZSkQ==
-X-Received: by 2002:a05:6870:6097:b0:e1:a94d:9a38 with SMTP id
- t23-20020a056870609700b000e1a94d9a38mr2743731oae.191.1648816296484; 
- Fri, 01 Apr 2022 05:31:36 -0700 (PDT)
-Received: from [10.10.117.62] (fixed-187-188-190-73.totalplay.net.
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=yF7C9gaOsw5q5PId/RPk9weVI8GZSE/i/UYTi79cArg=;
+ b=CmR9MGicSN2Rv41+rPb0NmB3b6JILTQ8X+k5wTgXrw2f2UhUMaUm105M+srMTe1OPc
+ U9weOMC8Wqn1qtgpL64j8tmn8lyrp5QrJagDqlFIUj8gje869vuaEKwynF5bQWL6vJyM
+ pcG6SIsxGMR37Rhs26h6qynAuPspkr1GeBomhDT48mn2i7rOWqx5MTyHSriV6lVqabEQ
+ 5dt8PxhRl4ssXyXX5Hbvo/c0ib07hN/zmrU+ORYDqvCjXS3enLJHWElc7swZKzpVEHk1
+ Kbe2GZ3ccugB/kVJcSxbsWYL8bNv3RsSQjqSd+iVSlSBQT/NJPqYEyAD+OrayGzPYODL
+ Q+fA==
+X-Gm-Message-State: AOAM532OCsX+ru7zxQVUKqCJSkah2ps7b2yu7Jn+N9ljYUuPx5oLR2+f
+ rMHXvgV97L3LY9tMUr18l19dWQ==
+X-Google-Smtp-Source: ABdhPJwa/Q6VsR8hj8hy8guj5P+ot4ujgW1DYefmfwYdd0LLOBXN16YcbXRVZiICt8fZsaugisOIRw==
+X-Received: by 2002:a4a:5510:0:b0:328:faf7:9ed9 with SMTP id
+ e16-20020a4a5510000000b00328faf79ed9mr1806789oob.65.1648817992380; 
+ Fri, 01 Apr 2022 05:59:52 -0700 (PDT)
+Received: from localhost.localdomain (fixed-187-188-190-73.totalplay.net.
  [187.188.190.73]) by smtp.gmail.com with ESMTPSA id
- a15-20020a056870000f00b000de1ab6364dsm896310oaa.49.2022.04.01.05.31.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Apr 2022 05:31:35 -0700 (PDT)
-Message-ID: <58ea6c94-c308-a567-cb89-a2e2dd881402@linaro.org>
-Date: Fri, 1 Apr 2022 06:31:33 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH v2] target/riscv: Call probe_write() before atomic
- operations
-Content-Language: en-US
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>, bmeng.cn@gmail.com,
- alistair23@gmail.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>
-References: <20220401014920.1709379-1-alistair.francis@opensource.wdc.com>
+ h6-20020a9d7986000000b005ce0d5433cdsm1066665otm.15.2022.04.01.05.59.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Apr 2022 05:59:51 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220401014920.1709379-1-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::229
+To: qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ bin.meng@windriver.com
+Subject: [PATCH 1/2] target/riscv: Use cpu_loop_exit_restore directly from mmu
+ faults
+Date: Fri,  1 Apr 2022 06:59:47 -0600
+Message-Id: <20220401125948.79292-2-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220401125948.79292-1-richard.henderson@linaro.org>
+References: <20220401125948.79292-1-richard.henderson@linaro.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 2607:f8b0:4864:20::c2a
  (failed)
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x229.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oo1-xc2a.google.com
 X-Spam_score_int: -6
 X-Spam_score: -0.7
 X-Spam_bar: /
 X-Spam_report: (-0.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  PDS_HP_HELO_NORDNS=0.659, RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
@@ -89,28 +84,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Apr 2022 12:38:42 -0000
+X-List-Received-Date: Fri, 01 Apr 2022 12:59:55 -0000
 
-On 3/31/22 19:49, Alistair Francis wrote:
-> +void helper_atomic_check(CPURISCVState *env, target_ulong address,
-> +                         int mmu_idx)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    void *phost;
-> +    int ret = probe_access_flags(env, address, MMU_DATA_STORE, mmu_idx, false,
-> +                                 &phost, GETPC());
-> +
-> +    if (ret & TLB_MMIO) {
-> +        env->amo_store_fault = true;
-> +    }
-> +#endif
-> +}
+The riscv_raise_exception function stores its argument into
+exception_index and then exits to the main loop.  When we
+have already set exception_index, we can just exit directly.
 
-You've got to turn this off somewhere too.
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ target/riscv/cpu_helper.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-I've got a better solution for you, using TARGET_INSN_START_EXTRA_WORDS, which will handle 
-I/O regions as well.  I'll send it separately in a minute.
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 1c60fb2e80..126251d5da 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1150,7 +1150,7 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
+     env->badaddr = addr;
+     env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
+                             riscv_cpu_two_stage_lookup(mmu_idx);
+-    riscv_raise_exception(&cpu->env, cs->exception_index, retaddr);
++    cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
+ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+@@ -1175,7 +1175,7 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+     env->badaddr = addr;
+     env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
+                             riscv_cpu_two_stage_lookup(mmu_idx);
+-    riscv_raise_exception(env, cs->exception_index, retaddr);
++    cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
+ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+@@ -1311,7 +1311,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                             first_stage_error,
+                             riscv_cpu_virt_enabled(env) ||
+                                 riscv_cpu_two_stage_lookup(mmu_idx));
+-        riscv_raise_exception(env, cs->exception_index, retaddr);
++        cpu_loop_exit_restore(cs, retaddr);
+     }
+ 
+     return true;
+-- 
+2.25.1
 
-
-r~
 
