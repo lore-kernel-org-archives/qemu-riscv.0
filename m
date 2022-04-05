@@ -1,123 +1,123 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nbkhq-0000kE-Br
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Apr 2022 11:02:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44792)
+	id 1nbl3Y-00032Q-4w
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Apr 2022 11:25:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50788)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ani@anisinha.ca>) id 1nbkhn-0000j1-GK
- for qemu-riscv@nongnu.org; Tue, 05 Apr 2022 11:02:51 -0400
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e]:41783)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1nbl3V-00031b-KC
+ for qemu-riscv@nongnu.org; Tue, 05 Apr 2022 11:25:17 -0400
+Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934]:34305)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ani@anisinha.ca>) id 1nbkhe-0008Qo-P6
- for qemu-riscv@nongnu.org; Tue, 05 Apr 2022 11:02:51 -0400
-Received: by mail-ej1-x62e.google.com with SMTP id bh17so27327187ejb.8
- for <qemu-riscv@nongnu.org>; Tue, 05 Apr 2022 08:02:41 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <wlosh@bsdimp.com>) id 1nbl3N-0002VV-Di
+ for qemu-riscv@nongnu.org; Tue, 05 Apr 2022 11:25:17 -0400
+Received: by mail-ua1-x934.google.com with SMTP id s28so5486177uac.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Apr 2022 08:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=anisinha-ca.20210112.gappssmtp.com; s=20210112;
+ d=bsdimp-com.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/0EjTon8/xaxIiSgMdIStAZq4/XqBNOwQOhaTNVaNnA=;
- b=gxM18Njc5lBuWvyf/UopHykgg/wT9LXpe3uZY4444LpCsbwPftep3PldTChhEvuzI7
- 3Z1BS1iA6EgKNnBgJTYTBl4Qp+kJAfxprGjjccADhoUjX3tkHDkfa1+w7F6sijxjzQ1m
- Kiln5wtp3/2wCT2XZuQgaW6OYOZ29DIqnWlp7iJUYhqoqi8D4YaYKYE6Eh+pqoHOwt2h
- Snp5TDguHv2QA4Epb7Xd8/ABddNMCIRq9W+b16U2xTZpSQU3liPaIkcAidOEmtOux1+l
- eTrkvwFPHDsiIOIbVJOP22/U2rl6OOt5lT8/1aNJt0tQbtv76ePAchEKrCI+pstxAyFg
- eQkQ==
+ :cc; bh=EGvIZdlPUh0uarWKgqPhkhDPx2h8EaqN1k3vA/rmVCg=;
+ b=uBpjuCowE0Msd3PlsK3RG8PLGXia62Si08BZSZehcp9XbaG3ZZc07XK8LWTwCsCGoz
+ GPdY+VoptgKKKa9oYjktE3DXsa5QUTQ8OYBG7ryjddQOVa5lkx8Fkj2MeEyOu3o+cRAU
+ Y+PNbM38JmLQF+uO9LeydD6ZGFDDlCx587uOS/OA2W9cKgH1fNwtLrhwme/dSo1w8MDK
+ 7YrJ8NaEcKL/8sJRExc64YtSv4cYA31u9FeITLJpMHmHSKQzxaj/Zgw9a7cEc3oh+dce
+ VPvlQYC2bXlENlu/eFu89ia1mkQTizNRjvLwOE8iqh7M1mIXLAKBuKMLPw+doCq6DFDM
+ 3yPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/0EjTon8/xaxIiSgMdIStAZq4/XqBNOwQOhaTNVaNnA=;
- b=rl/2D7jCr7NYJTdGwd+TR/u8BB9/af3APXq0Xiy4wi5JnnvCG4XYfkrLNqRSr4mz/0
- w44mNE4oqcA5farUSFnyV24LSDSnX5OXQXsOIbhs+4qyUjmFCDr6WGmZGzNxpZkHSxfc
- rl5ftdtSYizimALPc4J/nFmyRujm6gzQQsZEZ9CAC0qPABEMt1siR9Q+sBHTpfx9HZED
- 5wf96Na0TtYcrKW2a4QBYW6L+Wfb3AucOvrtwou9YBpNdJGfvzJ9vtnQnKUnEPxuauQw
- GIuj2VSwMmAp92BReqG7sYyvuD/mmB12qJmYFAExZYRMtqkv4sw64Q0aPEYKBabjZPTs
- 4mfQ==
-X-Gm-Message-State: AOAM53051c3GIKX5ztZje0A1NZI9pHMKwf2X4ps5knj8yAquHxUgCXVF
- e82xIBeg9On/OcjrnPiZ5SCijtpOB2gIakE7jDC3Sw==
-X-Google-Smtp-Source: ABdhPJwykPAUFkWUGag0/3rrTydkYq593GC3Sc3LWYwGRyN5awpJLdRPc4vsTwtJfEX77MY4Fk463fAUdmP+W5FeVmc=
-X-Received: by 2002:a17:907:6e87:b0:6e7:f655:3b41 with SMTP id
- sh7-20020a1709076e8700b006e7f6553b41mr3914457ejc.704.1649170959456; Tue, 05
- Apr 2022 08:02:39 -0700 (PDT)
+ bh=EGvIZdlPUh0uarWKgqPhkhDPx2h8EaqN1k3vA/rmVCg=;
+ b=wPHu2TCjRSeuqnXZCiKTO6mEqHNYJA/s3TlWVGMQHrUgVGKcIooeOEG6cLeRXZgI46
+ S66P0GwT+YvzhT9sANq8vXc/2pDrLvsdvhA8PQllWAGKL8rs21TlkqhI8loTusP9jcRS
+ k5LD642NmIF6baEagvpWicQx2W6IJ91LDQQ58TzGZlUF1sp6XgrCaxief0VOgcdMp5TR
+ A9PVXVO/7pT3r2jNEoUuuJPD4FNbGdLY2rsahBb4acHOEGcfwmuy5PloaK++cqLbwkIE
+ 78vc3LCChpJojAGCO3iZqjoAouRUQSkwm75Lqh23JqEllo+Pba+iffFk8HUAT878DiBY
+ ft5A==
+X-Gm-Message-State: AOAM533CAOzA5JNZCa9xgcY72FMiQT216g2f8yoYyKwGSMvF7RWLryaM
+ hUcmTpaiGRYBXWUbSNqWO82HxaT0EIGBRlUQ5MyK3g==
+X-Google-Smtp-Source: ABdhPJxBU3zrUKPOdpDBwHyTLHPDGvYdFuXnPF7nhJiqpIrv5e27nd3/rigm+X3MM4x3DTElxfNfTUQj1FFAUTnObaI=
+X-Received: by 2002:a05:6102:2333:b0:325:b03e:aa4b with SMTP id
+ b19-20020a056102233300b00325b03eaa4bmr1338089vsa.68.1649172306864; Tue, 05
+ Apr 2022 08:25:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220323155743.1585078-1-marcandre.lureau@redhat.com>
  <20220323155743.1585078-33-marcandre.lureau@redhat.com>
 In-Reply-To: <20220323155743.1585078-33-marcandre.lureau@redhat.com>
-From: Ani Sinha <ani@anisinha.ca>
-Date: Tue, 5 Apr 2022 20:32:28 +0530
-Message-ID: <CAARzgwzXXKqhvP9CnST3iD_obfqCWn8Z+8WNcs0u-O_UGoM1-w@mail.gmail.com>
+From: Warner Losh <imp@bsdimp.com>
+Date: Tue, 5 Apr 2022 09:24:55 -0600
+Message-ID: <CANCZdfpPOBjX_SFd2Fd1q+9DTB7sOU=SFae4MEPisj7pUxYHyw@mail.gmail.com>
 Subject: Re: [PATCH 32/32] Remove qemu-common.h include from most units
-To: marcandre.lureau@redhat.com
-Cc: Aarushi Mehta <mehta.aaru20@gmail.com>, 
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+To: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>, Cameron Esfahani <dirty@apple.com>,
+ Roman Bolshakov <r.bolshakov@yadro.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, 
+ David Hildenbrand <david@redhat.com>, Igor Mammedov <imammedo@redhat.com>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, Kevin Wolf <kwolf@redhat.com>, 
+ Hanna Reitz <hreitz@redhat.com>, Aarushi Mehta <mehta.aaru20@gmail.com>, 
+ Julia Suvorova <jusual@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
+ Stefano Garzarella <sgarzare@redhat.com>, Kyle Evans <kevans@freebsd.org>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Yanan Wang <wangyanan55@huawei.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Greg Kurz <groug@kaod.org>, Christian Schoenebeck <qemu_oss@crudebyte.com>, 
  =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Alexander Bulekov <alxndr@bu.edu>, Alexander Graf <agraf@csgraf.de>,
- Alexey Kardashevskiy <aik@ozlabs.ru>, 
- Alistair Francis <alistair.francis@wdc.com>, Andrew Jeffery <andrew@aj.id.au>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- BALATON Zoltan <balaton@eik.bme.hu>, Bandan Das <bsd@redhat.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Bin Meng <bin.meng@windriver.com>, 
- Cameron Esfahani <dirty@apple.com>, Chris Wulff <crwulff@gmail.com>, 
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Christian Schoenebeck <qemu_oss@crudebyte.com>, 
- Colin Xu <colin.xu@intel.com>, Corey Minyard <minyard@acm.org>,
- Cornelia Huck <cohuck@redhat.com>, 
+ Michael Rolnik <mrolnik@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Helge Deller <deller@gmx.de>, 
  =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
  Daniel Henrique Barboza <danielhb413@gmail.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Darren Kenny <darren.kenny@oracle.com>,
  David Gibson <david@gibson.dropbear.id.au>, 
- David Hildenbrand <david@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
- Eric Auger <eric.auger@redhat.com>, Eric Farman <farman@linux.ibm.com>, 
- Fabien Chouteau <chouteau@adacore.com>, Fam Zheng <fam@euphon.net>,
- Gerd Hoffmann <kraxel@redhat.com>, 
- Greg Kurz <groug@kaod.org>, Halil Pasic <pasic@linux.ibm.com>,
- Hanna Reitz <hreitz@redhat.com>, 
- Havard Skinnemoen <hskinnemoen@google.com>, Helge Deller <deller@gmx.de>, 
+ Thomas Huth <huth@tuxfamily.org>, Laurent Vivier <laurent@vivier.eu>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Huacai Chen <chenhuacai@kernel.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Huacai Chen <chenhuacai@kernel.org>, Igor Mammedov <imammedo@redhat.com>, 
- Jagannathan Raman <jag.raman@oracle.com>, Jason Wang <jasowang@redhat.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joel Stanley <joel@jms.id.au>, 
- John G Johnson <john.g.johnson@oracle.com>, John Snow <jsnow@redhat.com>, 
- Julia Suvorova <jusual@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Jason Wang <jasowang@redhat.com>, Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+ Havard Skinnemoen <hskinnemoen@google.com>, Tyrone Ting <kfting@nuvoton.com>, 
+ Chris Wulff <crwulff@gmail.com>, Marek Vasut <marex@denx.de>,
+ BALATON Zoltan <balaton@eik.bme.hu>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ Jagannathan Raman <jag.raman@oracle.com>, 
+ John G Johnson <john.g.johnson@oracle.com>,
+ Alexey Kardashevskiy <aik@ozlabs.ru>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Cornelia Huck <cohuck@redhat.com>, 
+ Halil Pasic <pasic@linux.ibm.com>, Eric Farman <farman@linux.ibm.com>, 
+ Fabien Chouteau <chouteau@adacore.com>,
  KONRAD Frederic <frederic.konrad@adacore.com>, 
- Kamil Rytarowski <kamil@netbsd.org>, Kevin Wolf <kwolf@redhat.com>,
- Kyle Evans <kevans@freebsd.org>, 
- Laurent Vivier <laurent@vivier.eu>, Li Zhijian <lizhijian@fujitsu.com>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, 
- Marek Vasut <marex@denx.de>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Markus Armbruster <armbru@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>, 
- Michael Rolnik <mrolnik@gmail.com>, Michael Roth <michael.roth@amd.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Paolo Bonzini <pbonzini@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Qiuhao Li <Qiuhao.Li@outlook.com>, Reinoud Zandijk <reinoud@netbsd.org>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Roman Bolshakov <r.bolshakov@yadro.com>, 
- Stefan Berger <stefanb@linux.vnet.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, 
- Stefan Weil <sw@weilnetz.de>, Stefano Garzarella <sgarzare@redhat.com>, 
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Sunil Muthuswamy <sunilmut@microsoft.com>, 
- Taylor Simpson <tsimpson@quicinc.com>, Thomas Huth <huth@tuxfamily.org>, 
- Tyrone Ting <kfting@nuvoton.com>, Warner Losh <imp@bsdimp.com>, 
- Wenchao Wang <wenchao.wang@intel.com>, Yanan Wang <wangyanan55@huawei.com>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>, Zhang Chen <chen.zhang@intel.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, Eric Auger <eric.auger@redhat.com>, 
+ Taylor Simpson <tsimpson@quicinc.com>, Markus Armbruster <armbru@redhat.com>, 
+ Zhang Chen <chen.zhang@intel.com>, Li Zhijian <lizhijian@fujitsu.com>, 
+ Stefan Weil <sw@weilnetz.de>, Michael Roth <michael.roth@amd.com>,
+ Alexander Graf <agraf@csgraf.de>, 
+ Wenchao Wang <wenchao.wang@intel.com>, Colin Xu <colin.xu@intel.com>, 
+ Marcelo Tosatti <mtosatti@redhat.com>, Kamil Rytarowski <kamil@netbsd.org>, 
+ Reinoud Zandijk <reinoud@netbsd.org>, Sunil Muthuswamy <sunilmut@microsoft.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Ani Sinha <ani@anisinha.ca>, John Snow <jsnow@redhat.com>,
+ Andrew Jeffery <andrew@aj.id.au>, 
+ Joel Stanley <joel@jms.id.au>, Alexander Bulekov <alxndr@bu.edu>,
+ Bandan Das <bsd@redhat.com>, 
+ Darren Kenny <darren.kenny@oracle.com>, Qiuhao Li <Qiuhao.Li@outlook.com>, 
+ Corey Minyard <minyard@acm.org>, Fam Zheng <fam@euphon.net>, 
+ "open list:raw" <qemu-block@nongnu.org>, 
  "open list:ARM PrimeCell and..." <qemu-arm@nongnu.org>,
- "open list:Overall KVM CPUs" <kvm@vger.kernel.org>, 
+ "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>, 
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
  "open list:S390-ccw boot" <qemu-s390x@nongnu.org>, 
- "open list:X86 HAXM CPUs" <haxm-team@intel.com>,
- "open list:raw" <qemu-block@nongnu.org>, 
- "open list:sPAPR (pseries)" <qemu-ppc@nongnu.org>, qemu-devel@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000003679bd05dbe989a6"
-Received-SPF: none client-ip=2a00:1450:4864:20::62e;
- envelope-from=ani@anisinha.ca; helo=mail-ej1-x62e.google.com
+ "open list:Overall KVM CPUs" <kvm@vger.kernel.org>,
+ "open list:X86 HAXM CPUs" <haxm-team@intel.com>
+Content-Type: multipart/alternative; boundary="0000000000008648af05dbe9d998"
+Received-SPF: none client-ip=2607:f8b0:4864:20::934;
+ envelope-from=wlosh@bsdimp.com; helo=mail-ua1-x934.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -137,25 +137,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Apr 2022 15:02:51 -0000
+X-List-Received-Date: Tue, 05 Apr 2022 15:25:17 -0000
 
---0000000000003679bd05dbe989a6
+--0000000000008648af05dbe9d998
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 23, 2022 at 9:32 PM <marcandre.lureau@redhat.com> wrote:
+On Wed, Mar 23, 2022 at 10:02 AM <marcandre.lureau@redhat.com> wrote:
 
 > From: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 >
 > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-
-
-Empty patch descriptions are not a good idea. Please explain why this
-removal does not break things and maybe why the header got included
-initiatively.
-
-
 > ---
+>
+
+Reviewed by: Warner Losh <imp@bsdimp.com>
+
+(at least for the bsd-user changes)
+
+It might be a good idea to have a sentence or two about why this change is
+happening, since the 'title' covers the 'what is happening' well..
+
+Warner
+
+
+
 >  include/qemu-common.h                    | 9 ---------
 >  accel/hvf/hvf-all.c                      | 1 -
 >  accel/tcg/cpu-exec.c                     | 1 -
@@ -2955,30 +2961,440 @@ p)
 > @@ -19,7 +19,6 @@
 >   */
 >
->  #include "qemu/osde
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/sockets.h"
+>  #include "socket-helpers.h"
+>
+> diff --git a/tests/unit/test-clone-visitor.c
+> b/tests/unit/test-clone-visitor.c
+> index 5d48e125b8e4..ce67585305f6 100644
+> --- a/tests/unit/test-clone-visitor.c
+> +++ b/tests/unit/test-clone-visitor.c
+> @@ -9,7 +9,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/clone-visitor.h"
+>  #include "test-qapi-visit.h"
+>
+> diff --git a/tests/unit/test-forward-visitor.c
+> b/tests/unit/test-forward-visitor.c
+> index 348f7e4e81c8..01de15522711 100644
+> --- a/tests/unit/test-forward-visitor.c
+> +++ b/tests/unit/test-forward-visitor.c
+> @@ -9,7 +9,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/forward-visitor.h"
+>  #include "qapi/qobject-input-visitor.h"
+>  #include "qapi/error.h"
+> diff --git a/tests/unit/test-iov.c b/tests/unit/test-iov.c
+> index 5371066fb6a4..0d2ba9ba87d9 100644
+> --- a/tests/unit/test-iov.c
+> +++ b/tests/unit/test-iov.c
+> @@ -1,5 +1,4 @@
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/iov.h"
+>  #include "qemu/sockets.h"
+>
+> diff --git a/tests/unit/test-logging.c b/tests/unit/test-logging.c
+> index ccb819f193d9..05703a4e515f 100644
+> --- a/tests/unit/test-logging.c
+> +++ b/tests/unit/test-logging.c
+> @@ -27,7 +27,6 @@
+>  #include "qemu/osdep.h"
+>  #include <glib/gstdio.h>
+>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qemu/log.h"
+>
+> diff --git a/tests/unit/test-qmp-event.c b/tests/unit/test-qmp-event.c
+> index d58c3b78f208..7d961d716afb 100644
+> --- a/tests/unit/test-qmp-event.c
+> +++ b/tests/unit/test-qmp-event.c
+> @@ -13,7 +13,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/compat-policy.h"
+>  #include "qapi/error.h"
+>  #include "qapi/qmp/qbool.h"
+> diff --git a/tests/unit/test-qobject-input-visitor.c
+> b/tests/unit/test-qobject-input-visitor.c
+> index 22538f814099..aed08eaebcee 100644
+> --- a/tests/unit/test-qobject-input-visitor.c
+> +++ b/tests/unit/test-qobject-input-visitor.c
+> @@ -13,7 +13,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qapi/qapi-visit-introspect.h"
+>  #include "qapi/qobject-input-visitor.h"
+> diff --git a/tests/unit/test-qobject-output-visitor.c
+> b/tests/unit/test-qobject-output-visitor.c
+> index 6af4c33eec15..66b27fad66bb 100644
+> --- a/tests/unit/test-qobject-output-visitor.c
+> +++ b/tests/unit/test-qobject-output-visitor.c
+> @@ -12,7 +12,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qapi/qobject-output-visitor.h"
+>  #include "test-qapi-visit.h"
+> diff --git a/tests/unit/test-string-input-visitor.c
+> b/tests/unit/test-string-input-visitor.c
+> index 249faafc9d79..25094d3ffcef 100644
+> --- a/tests/unit/test-string-input-visitor.c
+> +++ b/tests/unit/test-string-input-visitor.c
+> @@ -12,7 +12,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qapi/string-input-visitor.h"
+>  #include "test-qapi-visit.h"
+> diff --git a/tests/unit/test-string-output-visitor.c
+> b/tests/unit/test-string-output-visitor.c
+> index e2bedc5c7c92..7ef305361eb7 100644
+> --- a/tests/unit/test-string-output-visitor.c
+> +++ b/tests/unit/test-string-output-visitor.c
+> @@ -12,7 +12,6 @@
+>
+>  #include "qemu/osdep.h"
+>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qapi/string-output-visitor.h"
+>  #include "test-qapi-visit.h"
+> diff --git a/tests/unit/test-thread-pool.c b/tests/unit/test-thread-pool.=
+c
+> index 70dc6314a1ef..6020e65d6986 100644
+> --- a/tests/unit/test-thread-pool.c
+> +++ b/tests/unit/test-thread-pool.c
+> @@ -1,5 +1,4 @@
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "block/aio.h"
+>  #include "block/thread-pool.h"
+>  #include "block/block.h"
+> diff --git a/tests/unit/test-util-sockets.c
+> b/tests/unit/test-util-sockets.c
+> index 896247e3ed36..63909ccb2b54 100644
+> --- a/tests/unit/test-util-sockets.c
+> +++ b/tests/unit/test-util-sockets.c
+> @@ -19,7 +19,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/sockets.h"
+>  #include "qapi/error.h"
+>  #include "socket-helpers.h"
+> diff --git a/tests/unit/test-visitor-serialization.c
+> b/tests/unit/test-visitor-serialization.c
+> index 462995864775..907263d0307c 100644
+> --- a/tests/unit/test-visitor-serialization.c
+> +++ b/tests/unit/test-visitor-serialization.c
+> @@ -14,7 +14,6 @@
+>  #include "qemu/osdep.h"
+>  #include <float.h>
+>
+> -#include "qemu-common.h"
+>  #include "test-qapi-visit.h"
+>  #include "qapi/error.h"
+>  #include "qapi/qmp/qjson.h"
+> diff --git a/tests/unit/test-xbzrle.c b/tests/unit/test-xbzrle.c
+> index 795d6f1cbabb..ef951b6e5405 100644
+> --- a/tests/unit/test-xbzrle.c
+> +++ b/tests/unit/test-xbzrle.c
+> @@ -11,7 +11,6 @@
+>   *
+>   */
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/cutils.h"
+>  #include "../migration/xbzrle.h"
+>
+> diff --git a/ui/gtk-clipboard.c b/ui/gtk-clipboard.c
+> index d58fd761abdf..8d8a636fd1fa 100644
+> --- a/ui/gtk-clipboard.c
+> +++ b/ui/gtk-clipboard.c
+> @@ -19,7 +19,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/main-loop.h"
+>
+>  #include "ui/gtk.h"
+> diff --git a/ui/keymaps.c b/ui/keymaps.c
+> index d4a647464bbf..6ceaa97085ab 100644
+> --- a/ui/keymaps.c
+> +++ b/ui/keymaps.c
+> @@ -23,7 +23,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/datadir.h"
+>  #include "keymaps.h"
+>  #include "trace.h"
+> diff --git a/ui/vdagent.c b/ui/vdagent.c
+> index 02861edfb13c..aa6167f0b492 100644
+> --- a/ui/vdagent.c
+> +++ b/ui/vdagent.c
+> @@ -1,6 +1,5 @@
+>  #include "qemu/osdep.h"
+>  #include "qapi/error.h"
+> -#include "include/qemu-common.h"
+>  #include "chardev/char.h"
+>  #include "qemu/buffer.h"
+>  #include "qemu/option.h"
+> diff --git a/ui/vnc-clipboard.c b/ui/vnc-clipboard.c
+> index d48f75eb1ab4..8aeadfaa218a 100644
+> --- a/ui/vnc-clipboard.c
+> +++ b/ui/vnc-clipboard.c
+> @@ -23,7 +23,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "vnc.h"
+>  #include "vnc-jobs.h"
+>
+> diff --git a/ui/vnc-enc-tight.c b/ui/vnc-enc-tight.c
+> index 7b86a4713dfd..5a4b8a4fc0f6 100644
+> --- a/ui/vnc-enc-tight.c
+> +++ b/ui/vnc-enc-tight.c
+> @@ -34,7 +34,7 @@
+>
+>  #ifdef CONFIG_VNC_PNG
+>  /* The following define is needed by pngconf.h. Otherwise it won't
+> compile,
+> -   because setjmp.h was already included by qemu-common.h. */
+> +   because setjmp.h was already included by osdep.h. */
+>  #define PNG_SKIP_SETJMP_CHECK
+>  #include <png.h>
+>  #endif
+> diff --git a/ui/vnc.c b/ui/vnc.c
+> index 5cbeebb8d1fd..6261d922953b 100644
+> --- a/ui/vnc.c
+> +++ b/ui/vnc.c
+> @@ -25,7 +25,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "vnc.h"
+>  #include "vnc-jobs.h"
+>  #include "trace.h"
+> diff --git a/util/aio-win32.c b/util/aio-win32.c
+> index 7aac89df3a30..44003d645ecd 100644
+> --- a/util/aio-win32.c
+> +++ b/util/aio-win32.c
+> @@ -16,7 +16,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "block/block.h"
+>  #include "qemu/main-loop.h"
+>  #include "qemu/queue.h"
+> diff --git a/util/coroutine-sigaltstack.c b/util/coroutine-sigaltstack.c
+> index e99b8a4f9c8c..e2690c5f4142 100644
+> --- a/util/coroutine-sigaltstack.c
+> +++ b/util/coroutine-sigaltstack.c
+> @@ -27,7 +27,6 @@
+>  #endif
+>  #include "qemu/osdep.h"
+>  #include <pthread.h>
+> -#include "qemu-common.h"
+>  #include "qemu/coroutine_int.h"
+>
+>  #ifdef CONFIG_SAFESTACK
+> diff --git a/util/coroutine-win32.c b/util/coroutine-win32.c
+> index de6bd4fd3e4e..c196f956d27e 100644
+> --- a/util/coroutine-win32.c
+> +++ b/util/coroutine-win32.c
+> @@ -23,7 +23,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/coroutine_int.h"
+>
+>  typedef struct
+> diff --git a/util/cutils.c b/util/cutils.c
+> index aaf2ced29142..a01a3a754049 100644
+> --- a/util/cutils.c
+> +++ b/util/cutils.c
+> @@ -26,7 +26,6 @@
+>  #include "qemu/host-utils.h"
+>  #include <math.h>
+>
+> -#include "qemu-common.h"
+>  #include "qemu/ctype.h"
+>  #include "qemu/cutils.h"
+>  #include "qemu/error-report.h"
+> diff --git a/util/event_notifier-posix.c b/util/event_notifier-posix.c
+> index 16294e98d434..8dc30c51414d 100644
+> --- a/util/event_notifier-posix.c
+> +++ b/util/event_notifier-posix.c
+> @@ -11,7 +11,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/cutils.h"
+>  #include "qemu/event_notifier.h"
+>  #include "qemu/main-loop.h"
+> diff --git a/util/event_notifier-win32.c b/util/event_notifier-win32.c
+> index 62c53b0a9909..9352da4699c7 100644
+> --- a/util/event_notifier-win32.c
+> +++ b/util/event_notifier-win32.c
+> @@ -11,7 +11,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/event_notifier.h"
+>  #include "qemu/main-loop.h"
+>
+> diff --git a/util/iov.c b/util/iov.c
+> index 58c7b3eeee5f..22d6996ccec0 100644
+> --- a/util/iov.c
+> +++ b/util/iov.c
+> @@ -17,7 +17,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/iov.h"
+>  #include "qemu/sockets.h"
+>  #include "qemu/cutils.h"
+> diff --git a/util/osdep.c b/util/osdep.c
+> index 97dc9bc65b45..1ea2398686ee 100644
+> --- a/util/osdep.c
+> +++ b/util/osdep.c
+> @@ -23,7 +23,6 @@
+>   */
+>  #include "qemu/osdep.h"
+>  #include "qapi/error.h"
+> -#include "qemu-common.h"
+>  #include "qemu/cutils.h"
+>  #include "qemu/sockets.h"
+>  #include "qemu/error-report.h"
+> diff --git a/util/oslib-posix.c b/util/oslib-posix.c
+> index fae25be3e779..c0125cd572ed 100644
+> --- a/util/oslib-posix.c
+> +++ b/util/oslib-posix.c
+> @@ -31,7 +31,6 @@
+>
+>  #include <glib/gprintf.h>
+>
+> -#include "qemu-common.h"
+>  #include "sysemu/sysemu.h"
+>  #include "trace.h"
+>  #include "qapi/error.h"
+> diff --git a/util/oslib-win32.c b/util/oslib-win32.c
+> index 91d2f45cfe1f..b69e50b3f182 100644
+> --- a/util/oslib-win32.c
+> +++ b/util/oslib-win32.c
+> @@ -32,7 +32,6 @@
+>
+>  #include "qemu/osdep.h"
+>  #include <windows.h>
+> -#include "qemu-common.h"
+>  #include "qapi/error.h"
+>  #include "qemu/main-loop.h"
+>  #include "trace.h"
+> diff --git a/util/qemu-coroutine-io.c b/util/qemu-coroutine-io.c
+> index 7f5839cb769e..d791932d63b9 100644
+> --- a/util/qemu-coroutine-io.c
+> +++ b/util/qemu-coroutine-io.c
+> @@ -23,7 +23,6 @@
+>   * THE SOFTWARE.
+>   */
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/sockets.h"
+>  #include "qemu/coroutine.h"
+>  #include "qemu/iov.h"
+> diff --git a/util/qemu-sockets.c b/util/qemu-sockets.c
+> index e8f45a7d30a5..13b5b197f9ea 100644
+> --- a/util/qemu-sockets.c
+> +++ b/util/qemu-sockets.c
+> @@ -21,7 +21,6 @@
+>  #include <linux/vm_sockets.h>
+>  #endif /* CONFIG_AF_VSOCK */
+>
+> -#include "qemu-common.h"
+>  #include "monitor/monitor.h"
+>  #include "qapi/clone-visitor.h"
+>  #include "qapi/error.h"
+> diff --git a/util/qemu-thread-win32.c b/util/qemu-thread-win32.c
+> index 52eb19f3511a..a2d5a6e8259f 100644
+> --- a/util/qemu-thread-win32.c
+> +++ b/util/qemu-thread-win32.c
+> @@ -12,7 +12,6 @@
+>   */
+>
+>  #include "qemu/osdep.h"
+> -#include "qemu-common.h"
+>  #include "qemu/thread.h"
+>  #include "qemu/notify.h"
+>  #include "qemu-thread-common.h"
+> diff --git a/target/xtensa/import_core.sh b/target/xtensa/import_core.sh
+> index df66d09393af..b4c15556c2c4 100755
+> --- a/target/xtensa/import_core.sh
+> +++ b/target/xtensa/import_core.sh
+> @@ -42,7 +42,6 @@ cat <<EOF > "${TARGET}.c"
+>  #include "qemu/osdep.h"
+>  #include "cpu.h"
+>  #include "exec/gdbstub.h"
+> -#include "qemu-common.h"
+>  #include "qemu/host-utils.h"
+>
+>  #include "core-$NAME/core-isa.h"
+> --
+> 2.35.1.273.ge6ebfd0e8cbb
+>
+>
 
---0000000000003679bd05dbe989a6
+--0000000000008648af05dbe9d998
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Wed, Mar 23, 2022 at 9:32 PM &lt;<a href=3D"mailto:marca=
-ndre.lureau@redhat.com">marcandre.lureau@redhat.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:=
-rgb(204,204,204)">From: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcan=
-dre.lureau@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt=
-;<br>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Mar 23, 2022 at 10:02 AM &lt;=
+<a href=3D"mailto:marcandre.lureau@redhat.com">marcandre.lureau@redhat.com<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">F=
+rom: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lureau@redhat.c=
+om" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;<br>
 <br>
 Signed-off-by: Marc-Andr=C3=A9 Lureau &lt;<a href=3D"mailto:marcandre.lurea=
-u@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;</blockq=
-uote><div dir=3D"auto"><br></div><div dir=3D"auto">Empty patch descriptions=
- are not a good idea. Please explain why this removal does not break things=
- and maybe why the header got included initiatively.</div><div dir=3D"auto"=
-><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
-8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-l=
-eft-color:rgb(204,204,204)" dir=3D"auto"><br>
----<br>
+u@redhat.com" target=3D"_blank">marcandre.lureau@redhat.com</a>&gt;<br>
+---<br></blockquote><div><br></div><div>Reviewed by: Warner Losh &lt;<a hre=
+f=3D"mailto:imp@bsdimp.com">imp@bsdimp.com</a>&gt;</div><div><br></div><div=
+>(at least for the bsd-user changes)</div><div><br></div><div>It might be a=
+ good idea to have a sentence or two about why this change is happening, si=
+nce the &#39;title&#39; covers the &#39;what is happening&#39; well..</div>=
+<div><br></div><div>Warner</div><div><br></div><div>=C2=A0</div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">
 =C2=A0include/qemu-common.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
  =C2=A0 =C2=A0 =C2=A0 | 9 ---------<br>
 =C2=A0accel/hvf/hvf-all.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
@@ -6023,7 +6439,420 @@ index ef31664d0224..0a9e090a68dd 100644<br>
 @@ -19,7 +19,6 @@<br>
 =C2=A0 */<br>
 <br>
-=C2=A0#include &quot;qemu/osde</blockquote></div></div>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+=C2=A0#include &quot;socket-helpers.h&quot;<br>
+<br>
+diff --git a/tests/unit/test-clone-visitor.c b/tests/unit/test-clone-visito=
+r.c<br>
+index 5d48e125b8e4..ce67585305f6 100644<br>
+--- a/tests/unit/test-clone-visitor.c<br>
++++ b/tests/unit/test-clone-visitor.c<br>
+@@ -9,7 +9,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/clone-visitor.h&quot;<br>
+=C2=A0#include &quot;test-qapi-visit.h&quot;<br>
+<br>
+diff --git a/tests/unit/test-forward-visitor.c b/tests/unit/test-forward-vi=
+sitor.c<br>
+index 348f7e4e81c8..01de15522711 100644<br>
+--- a/tests/unit/test-forward-visitor.c<br>
++++ b/tests/unit/test-forward-visitor.c<br>
+@@ -9,7 +9,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/forward-visitor.h&quot;<br>
+=C2=A0#include &quot;qapi/qobject-input-visitor.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+diff --git a/tests/unit/test-iov.c b/tests/unit/test-iov.c<br>
+index 5371066fb6a4..0d2ba9ba87d9 100644<br>
+--- a/tests/unit/test-iov.c<br>
++++ b/tests/unit/test-iov.c<br>
+@@ -1,5 +1,4 @@<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/iov.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+<br>
+diff --git a/tests/unit/test-logging.c b/tests/unit/test-logging.c<br>
+index ccb819f193d9..05703a4e515f 100644<br>
+--- a/tests/unit/test-logging.c<br>
++++ b/tests/unit/test-logging.c<br>
+@@ -27,7 +27,6 @@<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &lt;glib/gstdio.h&gt;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qemu/log.h&quot;<br>
+<br>
+diff --git a/tests/unit/test-qmp-event.c b/tests/unit/test-qmp-event.c<br>
+index d58c3b78f208..7d961d716afb 100644<br>
+--- a/tests/unit/test-qmp-event.c<br>
++++ b/tests/unit/test-qmp-event.c<br>
+@@ -13,7 +13,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/compat-policy.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/qmp/qbool.h&quot;<br>
+diff --git a/tests/unit/test-qobject-input-visitor.c b/tests/unit/test-qobj=
+ect-input-visitor.c<br>
+index 22538f814099..aed08eaebcee 100644<br>
+--- a/tests/unit/test-qobject-input-visitor.c<br>
++++ b/tests/unit/test-qobject-input-visitor.c<br>
+@@ -13,7 +13,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/qapi-visit-introspect.h&quot;<br>
+=C2=A0#include &quot;qapi/qobject-input-visitor.h&quot;<br>
+diff --git a/tests/unit/test-qobject-output-visitor.c b/tests/unit/test-qob=
+ject-output-visitor.c<br>
+index 6af4c33eec15..66b27fad66bb 100644<br>
+--- a/tests/unit/test-qobject-output-visitor.c<br>
++++ b/tests/unit/test-qobject-output-visitor.c<br>
+@@ -12,7 +12,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/qobject-output-visitor.h&quot;<br>
+=C2=A0#include &quot;test-qapi-visit.h&quot;<br>
+diff --git a/tests/unit/test-string-input-visitor.c b/tests/unit/test-strin=
+g-input-visitor.c<br>
+index 249faafc9d79..25094d3ffcef 100644<br>
+--- a/tests/unit/test-string-input-visitor.c<br>
++++ b/tests/unit/test-string-input-visitor.c<br>
+@@ -12,7 +12,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/string-input-visitor.h&quot;<br>
+=C2=A0#include &quot;test-qapi-visit.h&quot;<br>
+diff --git a/tests/unit/test-string-output-visitor.c b/tests/unit/test-stri=
+ng-output-visitor.c<br>
+index e2bedc5c7c92..7ef305361eb7 100644<br>
+--- a/tests/unit/test-string-output-visitor.c<br>
++++ b/tests/unit/test-string-output-visitor.c<br>
+@@ -12,7 +12,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/string-output-visitor.h&quot;<br>
+=C2=A0#include &quot;test-qapi-visit.h&quot;<br>
+diff --git a/tests/unit/test-thread-pool.c b/tests/unit/test-thread-pool.c<=
+br>
+index 70dc6314a1ef..6020e65d6986 100644<br>
+--- a/tests/unit/test-thread-pool.c<br>
++++ b/tests/unit/test-thread-pool.c<br>
+@@ -1,5 +1,4 @@<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;block/aio.h&quot;<br>
+=C2=A0#include &quot;block/thread-pool.h&quot;<br>
+=C2=A0#include &quot;block/block.h&quot;<br>
+diff --git a/tests/unit/test-util-sockets.c b/tests/unit/test-util-sockets.=
+c<br>
+index 896247e3ed36..63909ccb2b54 100644<br>
+--- a/tests/unit/test-util-sockets.c<br>
++++ b/tests/unit/test-util-sockets.c<br>
+@@ -19,7 +19,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;socket-helpers.h&quot;<br>
+diff --git a/tests/unit/test-visitor-serialization.c b/tests/unit/test-visi=
+tor-serialization.c<br>
+index 462995864775..907263d0307c 100644<br>
+--- a/tests/unit/test-visitor-serialization.c<br>
++++ b/tests/unit/test-visitor-serialization.c<br>
+@@ -14,7 +14,6 @@<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &lt;float.h&gt;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;test-qapi-visit.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qapi/qmp/qjson.h&quot;<br>
+diff --git a/tests/unit/test-xbzrle.c b/tests/unit/test-xbzrle.c<br>
+index 795d6f1cbabb..ef951b6e5405 100644<br>
+--- a/tests/unit/test-xbzrle.c<br>
++++ b/tests/unit/test-xbzrle.c<br>
+@@ -11,7 +11,6 @@<br>
+=C2=A0 *<br>
+=C2=A0 */<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/cutils.h&quot;<br>
+=C2=A0#include &quot;../migration/xbzrle.h&quot;<br>
+<br>
+diff --git a/ui/gtk-clipboard.c b/ui/gtk-clipboard.c<br>
+index d58fd761abdf..8d8a636fd1fa 100644<br>
+--- a/ui/gtk-clipboard.c<br>
++++ b/ui/gtk-clipboard.c<br>
+@@ -19,7 +19,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+<br>
+=C2=A0#include &quot;ui/gtk.h&quot;<br>
+diff --git a/ui/keymaps.c b/ui/keymaps.c<br>
+index d4a647464bbf..6ceaa97085ab 100644<br>
+--- a/ui/keymaps.c<br>
++++ b/ui/keymaps.c<br>
+@@ -23,7 +23,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/datadir.h&quot;<br>
+=C2=A0#include &quot;keymaps.h&quot;<br>
+=C2=A0#include &quot;trace.h&quot;<br>
+diff --git a/ui/vdagent.c b/ui/vdagent.c<br>
+index 02861edfb13c..aa6167f0b492 100644<br>
+--- a/ui/vdagent.c<br>
++++ b/ui/vdagent.c<br>
+@@ -1,6 +1,5 @@<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+-#include &quot;include/qemu-common.h&quot;<br>
+=C2=A0#include &quot;chardev/char.h&quot;<br>
+=C2=A0#include &quot;qemu/buffer.h&quot;<br>
+=C2=A0#include &quot;qemu/option.h&quot;<br>
+diff --git a/ui/vnc-clipboard.c b/ui/vnc-clipboard.c<br>
+index d48f75eb1ab4..8aeadfaa218a 100644<br>
+--- a/ui/vnc-clipboard.c<br>
++++ b/ui/vnc-clipboard.c<br>
+@@ -23,7 +23,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;vnc.h&quot;<br>
+=C2=A0#include &quot;vnc-jobs.h&quot;<br>
+<br>
+diff --git a/ui/vnc-enc-tight.c b/ui/vnc-enc-tight.c<br>
+index 7b86a4713dfd..5a4b8a4fc0f6 100644<br>
+--- a/ui/vnc-enc-tight.c<br>
++++ b/ui/vnc-enc-tight.c<br>
+@@ -34,7 +34,7 @@<br>
+<br>
+=C2=A0#ifdef CONFIG_VNC_PNG<br>
+=C2=A0/* The following define is needed by pngconf.h. Otherwise it won&#39;=
+t compile,<br>
+-=C2=A0 =C2=A0because setjmp.h was already included by qemu-common.h. */<br=
+>
++=C2=A0 =C2=A0because setjmp.h was already included by osdep.h. */<br>
+=C2=A0#define PNG_SKIP_SETJMP_CHECK<br>
+=C2=A0#include &lt;png.h&gt;<br>
+=C2=A0#endif<br>
+diff --git a/ui/vnc.c b/ui/vnc.c<br>
+index 5cbeebb8d1fd..6261d922953b 100644<br>
+--- a/ui/vnc.c<br>
++++ b/ui/vnc.c<br>
+@@ -25,7 +25,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;vnc.h&quot;<br>
+=C2=A0#include &quot;vnc-jobs.h&quot;<br>
+=C2=A0#include &quot;trace.h&quot;<br>
+diff --git a/util/aio-win32.c b/util/aio-win32.c<br>
+index 7aac89df3a30..44003d645ecd 100644<br>
+--- a/util/aio-win32.c<br>
++++ b/util/aio-win32.c<br>
+@@ -16,7 +16,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;block/block.h&quot;<br>
+=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+=C2=A0#include &quot;qemu/queue.h&quot;<br>
+diff --git a/util/coroutine-sigaltstack.c b/util/coroutine-sigaltstack.c<br=
+>
+index e99b8a4f9c8c..e2690c5f4142 100644<br>
+--- a/util/coroutine-sigaltstack.c<br>
++++ b/util/coroutine-sigaltstack.c<br>
+@@ -27,7 +27,6 @@<br>
+=C2=A0#endif<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &lt;pthread.h&gt;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/coroutine_int.h&quot;<br>
+<br>
+=C2=A0#ifdef CONFIG_SAFESTACK<br>
+diff --git a/util/coroutine-win32.c b/util/coroutine-win32.c<br>
+index de6bd4fd3e4e..c196f956d27e 100644<br>
+--- a/util/coroutine-win32.c<br>
++++ b/util/coroutine-win32.c<br>
+@@ -23,7 +23,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/coroutine_int.h&quot;<br>
+<br>
+=C2=A0typedef struct<br>
+diff --git a/util/cutils.c b/util/cutils.c<br>
+index aaf2ced29142..a01a3a754049 100644<br>
+--- a/util/cutils.c<br>
++++ b/util/cutils.c<br>
+@@ -26,7 +26,6 @@<br>
+=C2=A0#include &quot;qemu/host-utils.h&quot;<br>
+=C2=A0#include &lt;math.h&gt;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/ctype.h&quot;<br>
+=C2=A0#include &quot;qemu/cutils.h&quot;<br>
+=C2=A0#include &quot;qemu/error-report.h&quot;<br>
+diff --git a/util/event_notifier-posix.c b/util/event_notifier-posix.c<br>
+index 16294e98d434..8dc30c51414d 100644<br>
+--- a/util/event_notifier-posix.c<br>
++++ b/util/event_notifier-posix.c<br>
+@@ -11,7 +11,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/cutils.h&quot;<br>
+=C2=A0#include &quot;qemu/event_notifier.h&quot;<br>
+=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+diff --git a/util/event_notifier-win32.c b/util/event_notifier-win32.c<br>
+index 62c53b0a9909..9352da4699c7 100644<br>
+--- a/util/event_notifier-win32.c<br>
++++ b/util/event_notifier-win32.c<br>
+@@ -11,7 +11,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/event_notifier.h&quot;<br>
+=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+<br>
+diff --git a/util/iov.c b/util/iov.c<br>
+index 58c7b3eeee5f..22d6996ccec0 100644<br>
+--- a/util/iov.c<br>
++++ b/util/iov.c<br>
+@@ -17,7 +17,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/iov.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+=C2=A0#include &quot;qemu/cutils.h&quot;<br>
+diff --git a/util/osdep.c b/util/osdep.c<br>
+index 97dc9bc65b45..1ea2398686ee 100644<br>
+--- a/util/osdep.c<br>
++++ b/util/osdep.c<br>
+@@ -23,7 +23,6 @@<br>
+=C2=A0 */<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/cutils.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+=C2=A0#include &quot;qemu/error-report.h&quot;<br>
+diff --git a/util/oslib-posix.c b/util/oslib-posix.c<br>
+index fae25be3e779..c0125cd572ed 100644<br>
+--- a/util/oslib-posix.c<br>
++++ b/util/oslib-posix.c<br>
+@@ -31,7 +31,6 @@<br>
+<br>
+=C2=A0#include &lt;glib/gprintf.h&gt;<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;sysemu/sysemu.h&quot;<br>
+=C2=A0#include &quot;trace.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+diff --git a/util/oslib-win32.c b/util/oslib-win32.c<br>
+index 91d2f45cfe1f..b69e50b3f182 100644<br>
+--- a/util/oslib-win32.c<br>
++++ b/util/oslib-win32.c<br>
+@@ -32,7 +32,6 @@<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &lt;windows.h&gt;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+=C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+=C2=A0#include &quot;trace.h&quot;<br>
+diff --git a/util/qemu-coroutine-io.c b/util/qemu-coroutine-io.c<br>
+index 7f5839cb769e..d791932d63b9 100644<br>
+--- a/util/qemu-coroutine-io.c<br>
++++ b/util/qemu-coroutine-io.c<br>
+@@ -23,7 +23,6 @@<br>
+=C2=A0 * THE SOFTWARE.<br>
+=C2=A0 */<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/sockets.h&quot;<br>
+=C2=A0#include &quot;qemu/coroutine.h&quot;<br>
+=C2=A0#include &quot;qemu/iov.h&quot;<br>
+diff --git a/util/qemu-sockets.c b/util/qemu-sockets.c<br>
+index e8f45a7d30a5..13b5b197f9ea 100644<br>
+--- a/util/qemu-sockets.c<br>
++++ b/util/qemu-sockets.c<br>
+@@ -21,7 +21,6 @@<br>
+=C2=A0#include &lt;linux/vm_sockets.h&gt;<br>
+=C2=A0#endif /* CONFIG_AF_VSOCK */<br>
+<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;monitor/monitor.h&quot;<br>
+=C2=A0#include &quot;qapi/clone-visitor.h&quot;<br>
+=C2=A0#include &quot;qapi/error.h&quot;<br>
+diff --git a/util/qemu-thread-win32.c b/util/qemu-thread-win32.c<br>
+index 52eb19f3511a..a2d5a6e8259f 100644<br>
+--- a/util/qemu-thread-win32.c<br>
++++ b/util/qemu-thread-win32.c<br>
+@@ -12,7 +12,6 @@<br>
+=C2=A0 */<br>
+<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/thread.h&quot;<br>
+=C2=A0#include &quot;qemu/notify.h&quot;<br>
+=C2=A0#include &quot;qemu-thread-common.h&quot;<br>
+diff --git a/target/xtensa/import_core.sh b/target/xtensa/import_core.sh<br=
+>
+index df66d09393af..b4c15556c2c4 100755<br>
+--- a/target/xtensa/import_core.sh<br>
++++ b/target/xtensa/import_core.sh<br>
+@@ -42,7 +42,6 @@ cat &lt;&lt;EOF &gt; &quot;${TARGET}.c&quot;<br>
+=C2=A0#include &quot;qemu/osdep.h&quot;<br>
+=C2=A0#include &quot;cpu.h&quot;<br>
+=C2=A0#include &quot;exec/gdbstub.h&quot;<br>
+-#include &quot;qemu-common.h&quot;<br>
+=C2=A0#include &quot;qemu/host-utils.h&quot;<br>
+<br>
+=C2=A0#include &quot;core-$NAME/core-isa.h&quot;<br>
+-- <br>
+2.35.1.273.ge6ebfd0e8cbb<br>
+<br>
+</blockquote></div></div>
 
---0000000000003679bd05dbe989a6--
+--0000000000008648af05dbe9d998--
 
