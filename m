@@ -1,58 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nchwF-0000sD-Ij
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Apr 2022 02:17:43 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32820)
+	id 1ncieq-0002wQ-P8
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Apr 2022 03:03:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39176)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nchw1-0000pE-Rr; Fri, 08 Apr 2022 02:17:30 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:45771)
+ id 1ncieo-0002vR-08; Fri, 08 Apr 2022 03:03:46 -0400
+Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:35457)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nchvy-0004aH-4F; Fri, 08 Apr 2022 02:17:29 -0400
-Received: by mail-il1-x12c.google.com with SMTP id t4so5790014ilo.12;
- Thu, 07 Apr 2022 23:17:22 -0700 (PDT)
+ id 1nciel-0002wZ-SL; Fri, 08 Apr 2022 03:03:45 -0400
+Received: by mail-io1-xd34.google.com with SMTP id p135so3699466iod.2;
+ Fri, 08 Apr 2022 00:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=nQ4WHZWYKR8oxQ4XjqX5oEEa7vFfwyab6dIO0L3Hgbg=;
- b=XfTXW97pex3wrFylreDDV75EueWRZ+P/qSgjZH6VV3Y/ku9YijULX1VZFI7460k6fj
- QNv3dknP7PrPWxNZYNtbM/N1cQDM1KZ514trZorEsQ3zm2RGodU0pvxJUJCQ4SXwWx/T
- CxStIggqYUJH6hXl56Fo+EHBptYndxkbcf7gxeOOh/O9j5ZFX3HImVdDBAWsH1vz3UU1
- Ac+ono9NJos4wZpD3buKOpmHw64X7jHpXDsbwYvWyz/bWmsj+sCwhAvT9MLeTc/xuxiv
- DPra0DljzEa8fKSVNdlecH42jSHLL337CobiKZV2xk5RPq/wx9CAeUAzdGMVEzSumbPJ
- 2icw==
+ :cc; bh=LCPAuz+QsEndKWVu/jIvae5eXZjLeuoBcm4SM3MXEuw=;
+ b=JMGD8GqU56ypSGJ1RiGK9SZ9rBk9IzXJEvbOJYmU7UDdhB34VkvzOlSoTpl2kAuPQK
+ YOx+La+a699UX2WRbh/aN1clteba+Ij5iwOauCEORSJy00VwQ/kXkW2z0CJ2EoWdf9lx
+ dj1jqBbiWM6C2k9YoVzr0S1RxDAfgOVoagFHr+sILjKCmuCKlXuQiTkGIfAiQpMU8y/i
+ nwCMFIJbk0kAdzaCfdPE7K/3MhMwLqraj66r69mIh4i1+S6GaW86nbWDMo9NQ4bBQMPJ
+ 4bakA/b7A+4F+H4bwlvPEVuQn9wkjFcQWuOEyP06PDQE9OouCz5Cai48uqpwgcXGNiWW
+ saYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=nQ4WHZWYKR8oxQ4XjqX5oEEa7vFfwyab6dIO0L3Hgbg=;
- b=bs3uefBaP6iiUcMpNdWInoA/DH/xrrR91OrbdoIUeIqYBR7ibufym4a014DWrQ2Gpu
- Tw+k9yRTuZjsgGX7tSJHZPut/CnNZvz+JLI9MC2josQkzSZCDBQ+i0/do5QTJu69leJj
- AhLb6r2JinidMJwchFyehIaa7kaHwmcpsrV5I7q1DvlOIA1k7e9X9oLpCTVw+9Ptle1H
- mEAYR5X8j5uZvepafX7w3qEiVIpE3zQdQTqj5zmPz2m5cFBhBSL1JQKPVPnlGktC9mEA
- ldYIRdmMv3ahBirSw6fpsFHCQzLQ5ZphTZJ1TMqx8AZzRI4dkNBmKs26lrpJtIKk/pXp
- gAqQ==
-X-Gm-Message-State: AOAM5314Ztkem+2Tr+j7DkZyPuH2SwO0xljFq5di5q3433wm3xcuT/73
- uGpQ1I7lG0y57JcMA9PsE3LrNE/0j70c9sPB2KGqclHxNp734Q==
-X-Google-Smtp-Source: ABdhPJyFTloDMHVplm7LrvlLqwXMFUWLi+u9F5mXHG1UELS+9eXLheeY0yN5vhazkT6e15XADI5OZFlWFD0SrBqXns0=
-X-Received: by 2002:a05:6e02:219c:b0:2c9:a936:7a1 with SMTP id
- j28-20020a056e02219c00b002c9a93607a1mr7879529ila.55.1649398642035; Thu, 07
- Apr 2022 23:17:22 -0700 (PDT)
+ bh=LCPAuz+QsEndKWVu/jIvae5eXZjLeuoBcm4SM3MXEuw=;
+ b=0rr5+d7e+5FxGDeLSMb3xG1SFarTcuigd9L3VnY2w/1BpPEy247lyi4+X/tZfFDWFF
+ +HboLMIQBk0nxxppkt0ijKd7BN97cAa4zm/1yCDz17LaGrbo6PWBHlCNBOTDkeyz8WJn
+ M5nwgCJ0MJf3FIPv4K0nqdkvh/cMvuRh232vCFne8ybZ+EOFgS0/EqX9E6qyKEU5onEW
+ rHUuTIMXHFCXOwQtdQ/V1+kLoaBmUT8p8h3t9V06U26GyEoTnC2x4y7W9Tg83w/CXIjv
+ 886lwdkc8TAalsltYN870/yCf06xnX1AgZ4ClYZoLXtVHf2GVaIqjtteaxNQdDeFSHAP
+ 4Q5g==
+X-Gm-Message-State: AOAM531CG1PTlVY6QfTzyPUwm8epAEJT++tTntikqnaQWaC+tf13KKE6
+ LXjLm8ak1xt0W2xujpRrwcMjPYnS1PIVZfiK5a4=
+X-Google-Smtp-Source: ABdhPJzB2343u391tmMIZB51RsbWZPPHYtfaGcF+kAvx5Y4h0wbvQB/J4Lti/y2JFkLlLEDztzLz0N7xkUOEbwBhfIc=
+X-Received: by 2002:a05:6602:14cb:b0:646:4868:5fd with SMTP id
+ b11-20020a05660214cb00b00646486805fdmr7744439iow.31.1649401422359; Fri, 08
+ Apr 2022 00:03:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220401125948.79292-1-richard.henderson@linaro.org>
- <20220401125948.79292-3-richard.henderson@linaro.org>
-In-Reply-To: <20220401125948.79292-3-richard.henderson@linaro.org>
+References: <20220331000127.2107823-1-atishp@rivosinc.com>
+ <20220331000127.2107823-12-atishp@rivosinc.com>
+In-Reply-To: <20220331000127.2107823-12-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 8 Apr 2022 16:16:55 +1000
-Message-ID: <CAKmqyKNX_JyT0k92tKgZtiC9ZbLJVtZS2RXSoAQONnDg07dHsg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Mark amo insns during translation
-To: Richard Henderson <richard.henderson@linaro.org>
+Date: Fri, 8 Apr 2022 17:03:16 +1000
+Message-ID: <CAKmqyKMAmVjJ+EFJvb-3L9cCJgFZCfsu6ex47oMuShzxUJ+eMg@mail.gmail.com>
+Subject: Re: [PATCH v7 11/12] hw/riscv: virt: Add PMU DT node to the device
+ tree
+To: Atish Patra <atishp@rivosinc.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -73,240 +74,179 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Apr 2022 06:17:41 -0000
+X-List-Received-Date: Fri, 08 Apr 2022 07:03:46 -0000
 
-On Fri, Apr 1, 2022 at 11:04 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Mar 31, 2022 at 10:18 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> Atomic memory operations perform both reads and writes as part
-> of their implementation, but always raise write faults.
+> Qemu virt machine can support few cache events and cycle/instret counters.
+> It also supports counter overflow for these events.
 >
-> Use TARGET_INSN_START_EXTRA_WORDS to mark amo insns in the
-> opcode stream, and force the access type to write at the
-> point of raising the exception.
+> Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
+> capabilities. There are some dummy nodes added for testing as well.
 >
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.h                      | 15 ++++++
->  target/riscv/cpu.c                      |  3 ++
->  target/riscv/cpu_helper.c               | 62 +++++++++++++++++--------
->  target/riscv/translate.c                |  9 ++++
->  target/riscv/insn_trans/trans_rva.c.inc | 11 ++++-
->  5 files changed, 79 insertions(+), 21 deletions(-)
+>  hw/riscv/virt.c    | 28 +++++++++++++++++++++++
+>  target/riscv/cpu.c |  1 +
+>  target/riscv/pmu.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
+>  target/riscv/pmu.h |  1 +
+>  4 files changed, 87 insertions(+)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c069fe85fa..3de4da3fa1 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -290,6 +290,13 @@ struct CPUArchState {
->      /* True if in debugger mode.  */
->      bool debugger;
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index da50cbed43ec..13d61bf476ff 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -28,6 +28,7 @@
+>  #include "hw/qdev-properties.h"
+>  #include "hw/char/serial.h"
+>  #include "target/riscv/cpu.h"
+> +#include "target/riscv/pmu.h"
+>  #include "hw/riscv/riscv_hart.h"
+>  #include "hw/riscv/virt.h"
+>  #include "hw/riscv/boot.h"
+> @@ -687,6 +688,32 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
+>      aplic_phandles[socket] = aplic_s_phandle;
+>  }
 >
-> +    /*
-> +     * True if unwinding through an amo insn.  Used to transform a
-> +     * read fault into a store_amo fault; only valid immediately
-> +     * after cpu_restore_state().
-> +     */
-> +    bool unwind_amo;
+> +static void create_fdt_socket_pmu(RISCVVirtState *s,
+> +                                  int socket, uint32_t *phandle,
+> +                                  uint32_t *intc_phandles)
+> +{
+> +    int cpu;
+> +    char *pmu_name;
+> +    uint32_t *pmu_cells;
+> +    MachineState *mc = MACHINE(s);
+> +    RISCVCPU hart = s->soc[socket].harts[0];
 > +
->      /*
->       * CSRs for PointerMasking extension
->       */
-> @@ -517,6 +524,14 @@ FIELD(TB_FLAGS, XL, 20, 2)
->  FIELD(TB_FLAGS, PM_MASK_ENABLED, 22, 1)
->  FIELD(TB_FLAGS, PM_BASE_ENABLED, 23, 1)
->
-> +#ifndef CONFIG_USER_ONLY
-> +/*
-> + * RISC-V-specific extra insn start words:
-> + * 1: True if the instruction is AMO, false otherwise.
-> + */
-> +#define TARGET_INSN_START_EXTRA_WORDS 1
-> +#endif
+> +    pmu_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
 > +
->  #ifdef TARGET_RISCV32
->  #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
->  #else
+> +    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
+> +        pmu_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
+> +        pmu_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_PMU_OVF);
+> +    }
+> +
+> +    pmu_name = g_strdup_printf("/soc/pmu");
+> +    qemu_fdt_add_subnode(mc->fdt, pmu_name);
+> +    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
+> +    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
+> +
+> +    g_free(pmu_name);
+> +    g_free(pmu_cells);
+> +}
+> +
+>  static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>                                 bool is_32_bit, uint32_t *phandle,
+>                                 uint32_t *irq_mmio_phandle,
+> @@ -732,6 +759,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+>                      &intc_phandles[phandle_pos]);
+>              }
+>          }
+> +        create_fdt_socket_pmu(s, socket, phandle, intc_phandles);
+>      }
+>
+>      if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..3818d5ba80 100644
+> index 9715eed2fc4e..d834e58a8bcd 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -396,6 +396,9 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
->      } else {
->          env->pc = data[0];
->      }
-> +#ifndef CONFIG_USER_ONLY
-> +    env->unwind_amo = data[1];
-> +#endif
->  }
+> @@ -974,6 +974,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+>          ISA_EDATA_ENTRY(zbs, ext_zbs),
+>          ISA_EDATA_ENTRY(zve32f, ext_zve32f),
+>          ISA_EDATA_ENTRY(zve64f, ext_zve64f),
+> +        ISA_EDATA_ENTRY(sscofpmf, ext_sscofpmf),
+>          ISA_EDATA_ENTRY(svinval, ext_svinval),
+>          ISA_EDATA_ENTRY(svnapot, ext_svnapot),
+>          ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index 1c586770682b..f5e3e6d0281e 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -20,11 +20,68 @@
+>  #include "cpu.h"
+>  #include "pmu.h"
+>  #include "sysemu/cpu-timers.h"
+> +#include "sysemu/device_tree.h"
 >
->  static void riscv_cpu_reset(DeviceState *dev)
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 126251d5da..b5bbe6fc39 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1139,26 +1139,11 @@ void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      CPURISCVState *env = &cpu->env;
+>  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
+>  #define MAKE_32BIT_MASK(shift, length) \
+>          (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
 >
-> -    if (access_type == MMU_DATA_STORE) {
-> -        cs->exception_index = RISCV_EXCP_STORE_AMO_ACCESS_FAULT;
-> -    } else if (access_type == MMU_DATA_LOAD) {
-> -        cs->exception_index = RISCV_EXCP_LOAD_ACCESS_FAULT;
-> -    } else {
-> -        cs->exception_index = RISCV_EXCP_INST_ACCESS_FAULT;
-> +    cpu_restore_state(cs, retaddr, true);
-> +    if (env->unwind_amo) {
-> +        access_type = MMU_DATA_STORE;
->      }
->
-> -    env->badaddr = addr;
-> -    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
-> -                            riscv_cpu_two_stage_lookup(mmu_idx);
-> -    cpu_loop_exit_restore(cs, retaddr);
-> -}
-> -
-> -void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> -                                   MMUAccessType access_type, int mmu_idx,
-> -                                   uintptr_t retaddr)
-> -{
-> -    RISCVCPU *cpu = RISCV_CPU(cs);
-> -    CPURISCVState *env = &cpu->env;
->      switch (access_type) {
->      case MMU_INST_FETCH:
->          cs->exception_index = RISCV_EXCP_INST_ADDR_MIS;
-> @@ -1172,10 +1157,43 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
->      default:
->          g_assert_not_reached();
->      }
+> +/**
+> + * To keep it simple, any event can be mapped to any programmable counters in
+> + * QEMU. The generic cycle & instruction count events can also be monitored
+> + * using programmable counters. In that case, mcycle & minstret must continue
+> + * to provide the correct value as well. Heterogeneous PMU per hart is not
+> + * supported yet. Thus, number of counters are same across all harts.
+> + */
+> +void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name)
+> +{
+> +    uint32_t fdt_event_ctr_map[20] = {};
+> +    uint32_t cmask;
 > +
->      env->badaddr = addr;
->      env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
->                              riscv_cpu_two_stage_lookup(mmu_idx);
-> -    cpu_loop_exit_restore(cs, retaddr);
-> +    cpu_loop_exit(cs);
+> +    /* All the programmable counters can map to any event */
+> +    cmask = MAKE_32BIT_MASK(3, num_ctrs);
+> +
+> +   /**
+> +    * The event encoding is specified in the SBI specification
+> +    * Event idx is a 20bits wide number encoded as follows:
+> +    * event_idx[19:16] = type
+> +    * event_idx[15:0] = code
+> +    * The code field in cache events are encoded as follows:
+> +    * event_idx.code[15:3] = cache_id
+> +    * event_idx.code[2:1] = op_id
+> +    * event_idx.code[0:0] = result_id
+> +    */
+> +
+> +   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
+> +   fdt_event_ctr_map[0] = cpu_to_be32(0x00000001);
+> +   fdt_event_ctr_map[1] = cpu_to_be32(0x00000001);
+> +   fdt_event_ctr_map[2] = cpu_to_be32(cmask | 1 << 0);
+> +
+> +   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
+> +   fdt_event_ctr_map[3] = cpu_to_be32(0x00000002);
+> +   fdt_event_ctr_map[4] = cpu_to_be32(0x00000002);
+> +   fdt_event_ctr_map[5] = cpu_to_be32(cmask | 1 << 2);
+> +
+> +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) */
+> +   fdt_event_ctr_map[6] = cpu_to_be32(0x00010019);
+> +   fdt_event_ctr_map[7] = cpu_to_be32(0x00010019);
+> +   fdt_event_ctr_map[8] = cpu_to_be32(cmask);
+> +
+> +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01) */
+> +   fdt_event_ctr_map[9] = cpu_to_be32(0x0001001B);
+> +   fdt_event_ctr_map[10] = cpu_to_be32(0x0001001B);
+> +   fdt_event_ctr_map[11] = cpu_to_be32(cmask);
+> +
+> +   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) */
+> +   fdt_event_ctr_map[12] = cpu_to_be32(0x00010021);
+> +   fdt_event_ctr_map[13] = cpu_to_be32(0x00010021);
+> +   fdt_event_ctr_map[14] = cpu_to_be32(cmask);
+> +
+> +   /* This a OpenSBI specific DT property documented in OpenSBI docs */
+> +   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
+> +                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
 > +}
 > +
-> +void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
-> +                                   MMUAccessType access_type, int mmu_idx,
-> +                                   uintptr_t retaddr)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    cpu_restore_state(cs, retaddr, true);
-> +    if (env->unwind_amo) {
-> +        access_type = MMU_DATA_STORE;
-> +    }
-> +
-> +    switch (access_type) {
-> +    case MMU_INST_FETCH:
-> +        cs->exception_index = RISCV_EXCP_INST_ADDR_MIS;
-> +        break;
-> +    case MMU_DATA_LOAD:
-> +        cs->exception_index = RISCV_EXCP_LOAD_ADDR_MIS;
-> +        break;
-> +    case MMU_DATA_STORE:
-> +        cs->exception_index = RISCV_EXCP_STORE_AMO_ADDR_MIS;
-> +        break;
-> +    default:
-> +        g_assert_not_reached();
-> +    }
-> +
-> +    env->badaddr = addr;
-> +    env->two_stage_lookup = riscv_cpu_virt_enabled(env) ||
-> +                            riscv_cpu_two_stage_lookup(mmu_idx);
-> +    cpu_loop_exit(cs);
->  }
->
->  bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-> @@ -1307,11 +1325,15 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
->      } else if (probe) {
->          return false;
->      } else {
-> +        cpu_restore_state(cs, retaddr, true);
-> +        if (env->unwind_amo) {
-> +            access_type = MMU_DATA_STORE;
-> +        }
->          raise_mmu_exception(env, address, access_type, pmp_violation,
->                              first_stage_error,
->                              riscv_cpu_virt_enabled(env) ||
->                                  riscv_cpu_two_stage_lookup(mmu_idx));
-> -        cpu_loop_exit_restore(cs, retaddr);
-> +        cpu_loop_exit(cs);
->      }
->
->      return true;
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index fac998a6b5..ae4b0d1524 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -107,6 +107,10 @@ typedef struct DisasContext {
->      /* PointerMasking extension */
->      bool pm_mask_enabled;
->      bool pm_base_enabled;
-> +#ifndef CONFIG_USER_ONLY
-> +    /* TCG op of the current insn_start.  */
-> +    TCGOp *insn_start;
-> +#endif
->  } DisasContext;
->
->  static inline bool has_ext(DisasContext *ctx, uint32_t ext)
-> @@ -1105,7 +1109,12 @@ static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
+>  static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
 >  {
->      DisasContext *ctx = container_of(dcbase, DisasContext, base);
->
-> +#ifdef CONFIG_USER_ONLY
->      tcg_gen_insn_start(ctx->base.pc_next);
-> +#else
-> +    tcg_gen_insn_start(ctx->base.pc_next, 0);
-> +    ctx->insn_start = tcg_last_op();
-> +#endif
->  }
->
->  static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
-> diff --git a/target/riscv/insn_trans/trans_rva.c.inc b/target/riscv/insn_trans/trans_rva.c.inc
-> index 45db82c9be..66faa8f1da 100644
-> --- a/target/riscv/insn_trans/trans_rva.c.inc
-> +++ b/target/riscv/insn_trans/trans_rva.c.inc
-> @@ -37,6 +37,13 @@ static bool gen_lr(DisasContext *ctx, arg_atomic *a, MemOp mop)
->      return true;
->  }
->
-> +static void record_insn_start_amo(DisasContext *ctx)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    tcg_set_insn_start_param(ctx->insn_start, 1, 1);
-> +#endif
-> +}
-> +
->  static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
->  {
->      TCGv dest, src1, src2;
-> @@ -73,6 +80,7 @@ static bool gen_sc(DisasContext *ctx, arg_atomic *a, MemOp mop)
->       */
->      tcg_gen_movi_tl(load_res, -1);
->
-> +    record_insn_start_amo(ctx);
->      return true;
->  }
->
-> @@ -85,8 +93,9 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
->      TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
->
->      func(dest, src1, src2, ctx->mem_idx, mop);
-> -
->      gen_set_gpr(ctx, a->rd, dest);
-> +
-> +    record_insn_start_amo(ctx);
->      return true;
->  }
->
+>      if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
+> diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+> index 036653627f78..3004ce37b636 100644
+> --- a/target/riscv/pmu.h
+> +++ b/target/riscv/pmu.h
+> @@ -31,5 +31,6 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
+>  int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+>                                 uint32_t ctr_idx);
+>  int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
+> +void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pmu_name);
+>  int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+>                            uint32_t ctr_idx);
 > --
 > 2.25.1
 >
