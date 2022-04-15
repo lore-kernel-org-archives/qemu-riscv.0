@@ -1,59 +1,74 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nfGbY-00086a-5A
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 03:42:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37648)
+	id 1nfIOX-0000IL-QP
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 05:37:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33468)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nfGbS-000839-6Z; Fri, 15 Apr 2022 03:42:50 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:47056)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1nfGbP-0002cN-PA; Fri, 15 Apr 2022 03:42:49 -0400
-Received: from [192.168.13.13] (unknown [195.68.53.70])
- by beetle.greensocs.com (Postfix) with ESMTPSA id B6A5C20780;
- Fri, 15 Apr 2022 07:42:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1650008562;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4Jf8CpUkmHiCcLo2+5odi8xqtOjKp0Qem77ayfImucw=;
- b=tA1+CUyZnAxtRVi+jC0SYCaq5asK5MQYTl2DRuZyn4iqhwFyGZEgg1PsCpPHW74ftP39/U
- HwW+V98hUnwOvD+qjaLk+JwaEQ+SBhRG26YneSF1oPgHZtuNKaywxYssbgnOJrEE63gGmZ
- NNG4X00FbIH3buR6Ru15jU8p4xOzqU0=
-Message-ID: <7d1acb03-0a20-6641-16bf-198306c07c7b@greensocs.com>
-Date: Fri, 15 Apr 2022 09:42:40 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [RFC PATCH 00/18] user-creatable cpu clusters
-Content-Language: en-US-large
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nfIOW-0000HI-NG
+ for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 05:37:36 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:35683)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nfIOU-0003sS-L8
+ for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 05:37:36 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ i24-20020a17090adc1800b001cd5529465aso6715385pjv.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 Apr 2022 02:37:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=IUIhYAgNp3ZAaltX+7FMjUGoVw7YVo7fC+jUhc3JwGo=;
+ b=NhezoolD3dS+jvQMHuE3iyeuivkbrWptqfPwjoD7sGCW2dLe9nHNyrIR3bB4jY/Jnj
+ NYSYbSiQ717+Ensv6Wbbq3eN6fAAQe8rZnxteHno7Jyrk4nMFE0AYJpBiFdA0rErnk59
+ sdvJbavVv76U7GQTZh4d/T6v3n3dLqGz1c+5quJ+14e+uPgwthp8d37uTrNVyi/o/fbg
+ GvK2dL9v0rJCc0gcvKUE7ihDbkxDZ31eGp1V/0sl8tnZs/Ul0Jh40pjkYOFzZRCkut5d
+ VJga7IS7hqLnWLwIMir+elI53veR9KpjepWl9nixIx8T2hXAAMMGAZcFfnzMmzd+kFQZ
+ tS+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=IUIhYAgNp3ZAaltX+7FMjUGoVw7YVo7fC+jUhc3JwGo=;
+ b=Uq8MkhgElugbLx/3Q2632V/rZygf55RfA10dZdIsPriIbpT+aeKJRpzxUlZ49mYJIb
+ pHQRx6cpq9eSc/3GCxqc4yOtJGZnyW5LeOioyyocERsOUSp3tejvZJZHoNG/ujSJ0yUl
+ eFaeFA9v46BO0B0vYRS2Li19pgRIKGeQK9EGP86nmFTGNqYOPkmDpMcIaN+IDyhfSO0O
+ qfxAzdSaYu4lVm8nKt73dkxfyZXVuzMlqlNWGL47/pBIPQ6B9X4zGf1kYEXodtLU4iyB
+ zmJeAEueVUaHQ0cfa3Vfpw42aPb+Drqb8wtoEKDwV9u4Ls2heUrvIaZiVJ+SbNNrU0zh
+ ok/g==
+X-Gm-Message-State: AOAM530Lx/+s1XQAmfolcl12EAOtTHmchb5i6ZKePo17QxS18vB1NFnz
+ x5GwyMflB8Cxp96mN8VF4tteuA==
+X-Google-Smtp-Source: ABdhPJz3rBeYaGEGIxSr8nL54/QVBlSkeePLhsHhY6Lebic3QrDNAqkxfFLSBLF7PfTGKGpzRoW25w==
+X-Received: by 2002:a17:90a:d0c5:b0:1c9:ec78:18e5 with SMTP id
+ y5-20020a17090ad0c500b001c9ec7818e5mr3216640pjw.53.1650015453034; 
+ Fri, 15 Apr 2022 02:37:33 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ u7-20020aa78487000000b00505d9277cb3sm2260275pfn.38.2022.04.15.02.37.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Apr 2022 02:37:32 -0700 (PDT)
+From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
-Cc: mark.burton@greensocs.com, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <f4bug@amsat.org>, Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-References: <20220330125639.201937-1-damien.hedde@greensocs.com>
-From: Damien Hedde <damien.hedde@greensocs.com>
-In-Reply-To: <20220330125639.201937-1-damien.hedde@greensocs.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=5.135.226.135;
- envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
-X-Spam_score_int: 12
-X-Spam_score: 1.2
-X-Spam_bar: +
-X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] target/riscv: Support configuarable marchid, mvendorid,
+ mipid CSR values
+Date: Fri, 15 Apr 2022 17:37:16 +0800
+Message-Id: <20220415093727.15323-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.35.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x102d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,102 +81,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Apr 2022 07:42:52 -0000
+X-List-Received-Date: Fri, 15 Apr 2022 09:37:36 -0000
 
-Ping !
+From: Frank Chang <frank.chang@sifive.com>
 
-It would be nice to have some rough feedback about this series.
-I plan to submit it in 2 sub-series (riscv-array in a separate part) but 
-would like to know first if this direction looks ok to you ?
+Allow user to set core's marchid, mvendorid, mipid CSRs through
+-cpu command line option.
 
-Note that I'm a bit confused by the terminology. Should a "cluster" as 
-in "machine topology's cluster" be a 1-1 match with a gdb inferior ?
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ target/riscv/cpu.c |  4 ++++
+ target/riscv/cpu.h |  4 ++++
+ target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++----
+ 3 files changed, 42 insertions(+), 4 deletions(-)
 
-Thanks,
-Damien
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ddda4906ff..2eea0f9be7 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -786,6 +786,10 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+     DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+ 
++    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
++    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, 0),
++    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, 0),
++
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index c069fe85fa..3ab92deb4b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -370,6 +370,10 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+ 
++    uint32_t mvendorid;
++    uint64_t marchid;
++    uint64_t mipid;
++
+     /* Vendor-specific custom extensions */
+     bool ext_XVentanaCondOps;
+ 
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 341c2e6f23..9a02038adb 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -603,6 +603,36 @@ static RISCVException write_ignore(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
++                                     target_ulong *val)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    *val = cpu->cfg.mvendorid;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_marchid(CPURISCVState *env, int csrno,
++                                   target_ulong *val)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    *val = cpu->cfg.marchid;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException read_mipid(CPURISCVState *env, int csrno,
++                                 target_ulong *val)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    *val = cpu->cfg.mipid;
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_mhartid(CPURISCVState *env, int csrno,
+                                    target_ulong *val)
+ {
+@@ -3098,10 +3128,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
+ 
+     /* Machine Information Registers */
+-    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
+-    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
+-    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
+-    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
++    [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
++    [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
++    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
++    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
+ 
+     /* Machine Trap Setup */
+     [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
+-- 
+2.35.1
 
-On 3/30/22 14:56, Damien Hedde wrote:
-> Hi,
-> 
-> This series add devices to be able to user-create (coldplug) cpu
-> clusters. The existing cpu cluster dictates how cpus are exposed
-> in gdb, but it does not handle the cpu objects creation. This series
-> adds a new device to handle both issues and adds support for two
-> architectures: arm and riscv.
-> 
-> Please look at patches 2 and 3 for more details about the new device.
-> 
-> Last part concerning the riscv is rfc as I do non-backward compatible
-> updates. I'm not sure what migration (or other) constraints we have
-> on these machines and I probably need to make some changes to cope
-> with them.
-> 
-> This series almost deprecates the cpu-cluster type as all uses
-> but one are replaced.
-> 
-> It is organized as follows:
-> 
-> + Patches 1 to 7 adds a new base device to replace cpu-cluster
-> 
-> + Patches 8 and 9 adds an arm specific version and replace existing
->    clusters in the xlnx-zynqmp machine.
-> 
-> + patches 10 to 17 updates the riscv_array. It was already used to
->    create cpus but was not a cpu cluster.
-> 
-> Thanks for any comments,
-> --
-> Damien
-> 
-> Damien Hedde (18):
->    define MAX_CLUSTERS in cpu.h instead of cluster.h
->    hw/cpu/cpus: introduce _cpus_ device
->    hw/cpu/cpus: prepare to handle cpu clusters
->    hw/cpu/cluster: make _cpu-cluster_ a subclass of _cpus_
->    gdbstub: deal with _cpus_ object instead of _cpu-cluster_
->    hw/cpu/cluster: remove cluster_id now that gdbstub is updated
->    hw/cpu/cpus: add a common start-powered-off property
->    hw/arm/arm_cpus: add arm_cpus device
->    hw/arm/xlnx-zynqmp: convert cpu clusters to arm_cpus
->    hw/riscv/riscv_hart: prepare transition to cpus
->    hw/riscv: prepare riscv_hart transition to cpus
->    hw/riscv/virt: prepare riscv_hart transition to cpus
->    hw/riscv/spike: prepare riscv_hart transition to cpus
->    hw/riscv/riscv_hart: use cpus as base class
->    hw/riscv/sifive_u&microchip_pfsoc: apply riscv_hart_array update
->    hw/riscv: update remaining machines due to riscv_hart_array update
->    hw/riscv/riscv_hart: remove temporary features
->    add myself as reviewer of the newly added _cpus_
-> 
->   include/hw/arm/arm_cpus.h          |  45 +++++++
->   include/hw/arm/xlnx-zynqmp.h       |   8 +-
->   include/hw/core/cpu.h              |   6 +
->   include/hw/cpu/cluster.h           |  26 ++--
->   include/hw/cpu/cpus.h              |  93 ++++++++++++++
->   include/hw/riscv/microchip_pfsoc.h |   2 -
->   include/hw/riscv/riscv_hart.h      |  25 +++-
->   include/hw/riscv/sifive_u.h        |   2 -
->   gdbstub.c                          |  12 +-
->   hw/arm/arm_cpus.c                  |  63 ++++++++++
->   hw/arm/xlnx-zynqmp.c               | 121 +++++++-----------
->   hw/cpu/cluster.c                   |  53 ++++----
->   hw/cpu/cpus.c                      | 195 +++++++++++++++++++++++++++++
->   hw/riscv/boot.c                    |   2 +-
->   hw/riscv/microchip_pfsoc.c         |  28 +----
->   hw/riscv/opentitan.c               |   4 +-
->   hw/riscv/riscv_hart.c              |  44 ++-----
->   hw/riscv/shakti_c.c                |   4 +-
->   hw/riscv/sifive_e.c                |   4 +-
->   hw/riscv/sifive_u.c                |  31 ++---
->   hw/riscv/spike.c                   |  18 +--
->   hw/riscv/virt.c                    |  79 +++++++-----
->   MAINTAINERS                        |   3 +
->   hw/arm/meson.build                 |   1 +
->   hw/cpu/meson.build                 |   2 +-
->   25 files changed, 612 insertions(+), 259 deletions(-)
->   create mode 100644 include/hw/arm/arm_cpus.h
->   create mode 100644 include/hw/cpu/cpus.h
->   create mode 100644 hw/arm/arm_cpus.c
->   create mode 100644 hw/cpu/cpus.c
-> 
 
