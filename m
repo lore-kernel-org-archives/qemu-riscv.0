@@ -1,46 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nfYJO-0005MR-QF
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 22:37:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45932)
+	id 1nfYJQ-0005TW-Iq
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 22:37:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45944)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nfYJK-00059y-IN; Fri, 15 Apr 2022 22:37:18 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:57212 helo=cstnet.cn)
+ id 1nfYJL-0005B3-7j; Fri, 15 Apr 2022 22:37:19 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:57350 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nfYJF-0001Pf-KO; Fri, 15 Apr 2022 22:37:18 -0400
+ id 1nfYJH-0001QQ-5K; Fri, 15 Apr 2022 22:37:18 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAC34I7MK1pi9AtRAg--.25370S2;
- Sat, 16 Apr 2022 10:37:01 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAC34I7MK1pi9AtRAg--.25370S12;
+ Sat, 16 Apr 2022 10:37:08 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v10 00/14] support subsets of scalar crypto extension
-Date: Sat, 16 Apr 2022 10:35:35 +0800
-Message-Id: <20220416023549.28463-1-liweiwei@iscas.ac.cn>
+Subject: [PATCH v10 10/14] target/riscv: rvk: add support for sha512 related
+ instructions for RV64 in zknh extension
+Date: Sat, 16 Apr 2022 10:35:45 +0800
+Message-Id: <20220416023549.28463-11-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowAC34I7MK1pi9AtRAg--.25370S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAFy7KrW8KryrJr48Zr18Krg_yoWrAr1rpr
- 4rC3y5CrZ8J397Gryft3W8Ar15JF4rWr45Jws3J348J3y3JrWrJFZak3WYkF1UJF18Wr12
- 93Wjyr13ua1UAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUv214x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
- 7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
- 1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02
- 628vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
- 02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_
- GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
- CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAF
- wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa
- 7VUbXdbUUUUUU==
+In-Reply-To: <20220416023549.28463-1-liweiwei@iscas.ac.cn>
+References: <20220416023549.28463-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: qwCowAC34I7MK1pi9AtRAg--.25370S12
+X-Coremail-Antispam: 1UD129KBjvJXoWxGryDCw1DKF1UXF1rJw1kKrg_yoW5Zw4rpF
+ 18G34UWFWkJryfAasxtF15ZF43WFs7C3y5t3sxtwn5Ca15Ja1kG3yYk3yakrsFqF9FvFyY
+ kFWkAa45KrW0qwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+ 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+ C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+ 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+ 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
+ 0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
+ 0JUQSdkUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -63,111 +64,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2022 02:37:18 -0000
+X-List-Received-Date: Sat, 16 Apr 2022 02:37:19 -0000
 
-This patchset implements RISC-V scalar crypto extension v1.0.0 version instructions. 
-Partial instructions are reused from B-extension.
+ - add sha512sum0, sha512sig0, sha512sum1 and sha512sig1 instructions
 
-Specification:
-https://github.com/riscv/riscv-crypto
+Co-authored-by: Zewen Ye <lustrew@foxmail.com>
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/insn32.decode              |  5 +++
+ target/riscv/insn_trans/trans_rvk.c.inc | 53 +++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
 
-The port is available here:
-https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v10
-
-To test rvk implementation, specify cpu argument with 'zks=true,zkn=true' or "zbkb=true,zbkc=true,zbkx=true,zknd=true,zkne=true,zknh=true,zksed=true,zksh=true,zkr=true" to enable K-extension support. This implementation can pass the ACT tests for K with our extended act support for qemu (available at https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v10-with-act)
-
-Review status:
-patch 5 is reviewed by Philippe Mathieu-Daudé
-patch 1~11 and 13-14 are acked or reviewed by Alistair Francis
-patch 2~11 are reviewed by Richard Henderson
-
-v10:
-(only patch 12 is modified)
-* simplify the conditions for the check in seed function
-* add NULL check for ret_val in rmw_seed function
-* remain the change of MSECCFG_* to align with the added MSECCFG_*SEED
-
-v9:
-* check whether seed is accessed by a read-write instruction in helper_csrr.
-* fix disas for partial scalar crypto instructions
-* rebase on https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg00156.html
-
-v8:
-* replace large macro for trans function of sha256/512 instructions with parameters to gen_sha* function in patch 8,9,10
-* fix tcg_const_tl to tcg_constant_tl
-* fix rmw_seed function
-
-v7:
-* reuse gen_unary/gen_arith to simplify trans_* functions
-* replace DEF_HELPER_* with DEF_HEPER_FLAG_*
-* move aes64 related macros from patch 6 to patch 7
-* create common helper gen_aes32_sm4 for aes32 and sm4 related instructions
-* replace bs with shamt (bs << 3)
-* optimize trans function for sha256, sha512 and sm4 instructions to be generated inline
-
-v6:
-* add reviewed-by tags
-* rebase on upstream
-
-v5:
-* split the big patches
-
-v4:
-* drop "x-" in exposed properties
-* delete unrelated changes
-
-v3:
-* add extension check for SEED csr access
-
-v2:
-* optimize implementation for brev8, xperm, zip, unzip
-* use aes related sbox array from crypto/aes.h
-* move sm4_sbox to crypto/sm4.c, and share it with target/arm
-
-Weiwei Li (14):
-  target/riscv: rvk: add cfg properties for zbk* and zk*
-  target/riscv: rvk: add support for zbkb extension
-  target/riscv: rvk: add support for zbkc extension
-  target/riscv: rvk: add support for zbkx extension
-  crypto: move sm4_sbox from target/arm
-  target/riscv: rvk: add support for zknd/zkne extension in RV32
-  target/riscv: rvk: add support for zkne/zknd extension in RV64
-  target/riscv: rvk: add support for sha256 related instructions in zknh
-    extension
-  target/riscv: rvk: add support for sha512 related instructions for
-    RV32 in zknh extension
-  target/riscv: rvk: add support for sha512 related instructions for
-    RV64 in zknh extension
-  target/riscv: rvk: add support for zksed/zksh extension
-  target/riscv: rvk: add CSR support for Zkr
-  disas/riscv.c: rvk: add disas support for Zbk* and Zk* instructions
-  target/riscv: rvk: expose zbk* and zk* properties
-
- crypto/meson.build                      |   1 +
- crypto/sm4.c                            |  49 +++
- disas/riscv.c                           | 173 ++++++++++-
- include/crypto/sm4.h                    |   6 +
- target/arm/crypto_helper.c              |  36 +--
- target/riscv/bitmanip_helper.c          |  80 +++++
- target/riscv/cpu.c                      |  36 +++
- target/riscv/cpu.h                      |  13 +
- target/riscv/cpu_bits.h                 |   9 +
- target/riscv/crypto_helper.c            | 302 +++++++++++++++++++
- target/riscv/csr.c                      |  80 +++++
- target/riscv/helper.h                   |  22 ++
- target/riscv/insn32.decode              |  97 ++++--
- target/riscv/insn_trans/trans_rvb.c.inc | 116 +++++++-
- target/riscv/insn_trans/trans_rvk.c.inc | 380 ++++++++++++++++++++++++
- target/riscv/meson.build                |   3 +-
- target/riscv/op_helper.c                |   9 +
- target/riscv/pmp.h                      |   8 +-
- target/riscv/translate.c                |   8 +
- 19 files changed, 1357 insertions(+), 71 deletions(-)
- create mode 100644 crypto/sm4.c
- create mode 100644 include/crypto/sm4.h
- create mode 100644 target/riscv/crypto_helper.c
- create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
-
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 02a0c71890..d9ebb138d1 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -868,3 +868,8 @@ sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
+ sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
+ sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
+ sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
++# *** RV64 Zknh Standard Extension ***
++sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
++sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
++sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
++sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
+diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
+index bb89a53f52..b1ce4f27cf 100644
+--- a/target/riscv/insn_trans/trans_rvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvk.c.inc
+@@ -267,3 +267,56 @@ static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
+     REQUIRE_ZKNH(ctx);
+     return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64, 3, 6, 19);
+ }
++
++static bool gen_sha512_rv64(DisasContext *ctx, arg_r2 *a, DisasExtend ext,
++                            void (*func)(TCGv_i64, TCGv_i64, int64_t),
++                            int64_t num1, int64_t num2, int64_t num3)
++{
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, ext);
++    TCGv_i64 t0 = tcg_temp_new_i64();
++    TCGv_i64 t1 = tcg_temp_new_i64();
++    TCGv_i64 t2 = tcg_temp_new_i64();
++
++    tcg_gen_extu_tl_i64(t0, src1);
++    tcg_gen_rotri_i64(t1, t0, num1);
++    tcg_gen_rotri_i64(t2, t0, num2);
++    tcg_gen_xor_i64(t1, t1, t2);
++    func(t2, t0, num3);
++    tcg_gen_xor_i64(t1, t1, t2);
++    tcg_gen_trunc_i64_tl(dest, t1);
++
++    gen_set_gpr(ctx, a->rd, dest);
++    tcg_temp_free_i64(t0);
++    tcg_temp_free_i64(t1);
++    tcg_temp_free_i64(t2);
++    return true;
++}
++
++static bool trans_sha512sig0(DisasContext *ctx, arg_sha512sig0 *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_shri_i64, 1, 8, 7);
++}
++
++static bool trans_sha512sig1(DisasContext *ctx, arg_sha512sig1 *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_shri_i64, 19, 61, 6);
++}
++
++static bool trans_sha512sum0(DisasContext *ctx, arg_sha512sum0 *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 28, 34, 39);
++}
++
++static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 14, 18, 41);
++}
 -- 
 2.17.1
 
