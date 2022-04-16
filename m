@@ -1,58 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nfYWE-0003kU-1b
-	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 22:50:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47438)
+	id 1nfYWl-0004O9-4g
+	for mharc-qemu-riscv@gnu.org; Fri, 15 Apr 2022 22:51:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47532)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nfYW8-0003jJ-E2
- for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 22:50:35 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b]:36473)
+ id 1nfYWj-0004NC-Rb
+ for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 22:51:09 -0400
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e]:51165)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1nfYW6-0003M3-II
- for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 22:50:31 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id r66so9406388pgr.3
- for <qemu-riscv@nongnu.org>; Fri, 15 Apr 2022 19:50:28 -0700 (PDT)
+ id 1nfYWi-0003V6-AJ
+ for qemu-riscv@nongnu.org; Fri, 15 Apr 2022 22:51:09 -0400
+Received: by mail-pj1-x102e.google.com with SMTP id o5so8895115pjr.0
+ for <qemu-riscv@nongnu.org>; Fri, 15 Apr 2022 19:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=message-id:date:mime-version:user-agent:subject:content-language:to
  :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=b4bguhTjW+b5Asu527rfuN6CfaRQdYkMKK8zSVOczqs=;
- b=zMYmI4wDaatRAEVqxc7zSkZ/+0j1D4J5U4E2IMY4TCTnwVTku2z0rXuBN+94QWzbQC
- fWAbQuGq82JhwzsqXO6rTckXsNy3wGknl2TqyUTnSdJFvsUbprRw43xiZlj4htzq7ZDv
- j7GGeblwthzh+t9q+WHEd4GlxtlDoD7olSvicoe+nYjvj/NjGw/PVEC47b13ngSFOSa3
- fKmV8AqlRWrIAqbNiBSZ5micisC7I5Zz6IZQ6t0BCXYgr15BcYGONDPVxBZmcGHGqKbQ
- HupOcx5RRGl2fW06RYmtR5bqxGu6nXWVH7v300mPnarM3Z3W9jr/ye/nms/qUCMQnsO/
- DmSQ==
+ bh=OcSW40ivplWynaPtysiaX5v+rRRaY+4JHspclU179IQ=;
+ b=cCiEbW+JTk1XC3JypG/Y7YCa7QAJYkqlwfJZsdtRywdC2lZh39rBu0zD43yJSPgZwn
+ PIgw+C0ZACYJ1GVRGr9R261D63dsDm3+fTU8LMb7aoxnxYtnrD9oEKNicMG27snPu+5t
+ mNEzzR8c7CYDjkG4SmUSZq9sJdkKSvXuwl5t8KqYaplA3bw09MTMVAlD1KLwMwLyo/jY
+ giKHogS1t+lJJdhUyx3ezp7QsTgwyC/44qjsqyzCtzpOZD/dR7JKjzmAX27qirLkcuPx
+ /NhVI/QKOgzqdJHIksGHJc4uTDP7PpTLQNZBtdmhnXMPQBItRfly9cB/vc4grk4gPAX6
+ gvRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=b4bguhTjW+b5Asu527rfuN6CfaRQdYkMKK8zSVOczqs=;
- b=Q0+a8JmYYwcWGN6ymqe4bF29En0Pch7zpoYrxCjtQ9LIRfysMyBWfST2EKPSepCcHC
- /m4KB9HM5sZCLpe9gbKV6/SwJdhrihiogqhEgEv6coqLSJGuyl6Bef83Kx6FRKV1IfSC
- 27vL7HScnFMy64GNLPoRADkMzY5dN5Ygx9abmw8biFooOeIWjAHfukF8VWpLAjK9J8z9
- sy26OSYD96qD5HM102rw4KFcTUUnsCbhtA1voFSsiDNEb9lVdYk15Af81P8XTVwAPKtM
- yoLRr6Y+scxbC4uOwrQDI5wWhuNdTaV7XAYkaPWo+d2B/KZ7Nte0vHLrfy1phUy5KiSC
- CpqA==
-X-Gm-Message-State: AOAM533HAto4RPVWM2oRuY2coXRPy82zt1THkxBoqyGM4UGeHi7MbWGK
- QgbT7Yum71C6xkRykCLSpm1i4Q==
-X-Google-Smtp-Source: ABdhPJyEx5tW372KYt/ihZbUjFALT7h/391+v5PwHpk+AMQuEheVkaGqcGr0SKjjJLBWyLDFm0bQlw==
-X-Received: by 2002:a63:931e:0:b0:39d:9d36:545d with SMTP id
- b30-20020a63931e000000b0039d9d36545dmr1422273pge.511.1650077427951; 
- Fri, 15 Apr 2022 19:50:27 -0700 (PDT)
+ bh=OcSW40ivplWynaPtysiaX5v+rRRaY+4JHspclU179IQ=;
+ b=T2gzO3M95lETGDRtB8zU2OGgKAED2SpBrLH4VP+j+v9RVhAPwXzKzFNnS6dk0CkJz3
+ 1PoDoNmDziDODGMm0XnZBUS/cq7SnMQQaxr0ev6bDdQuHb5X6uyIjTdq6S6bN86KoxAk
+ Gn90wHmp7h7Qqx5xm+frOzZYYyQB1lBCPTb3pZ0rtPQv/sh+gVhCuwHc411shSvfoRQD
+ j/Ve9/P/e4JrehN+IAy/cMeFdq750zbSoOJMuaG///R34xRvvy3I7maGdl3Ak75kgm0l
+ 8rRHdtbgA6tNiXUKqkDqbR1TB5ufxtgFBCxR091bhm+QcMRuK2cyK9toXRh0KiANWeC4
+ TwAQ==
+X-Gm-Message-State: AOAM530EX77cg0O8gYN0LYk7HtZtPlx6H5/wM54DQFLdE7uEthTBF5Ud
+ UuKQn2jTr85GdVeZ5HA8lgHPnQ==
+X-Google-Smtp-Source: ABdhPJxiUZzRBHLi8iruQNkyFJgnV8lRTCM0IcGnrr/B+nEfrjeHtsNjuQWDO4DRGpfVs+okeIJyaQ==
+X-Received: by 2002:a17:902:edd1:b0:158:8318:b51e with SMTP id
+ q17-20020a170902edd100b001588318b51emr1852573plk.89.1650077467019; 
+ Fri, 15 Apr 2022 19:51:07 -0700 (PDT)
 Received: from [192.168.1.6] (174-21-142-130.tukw.qwest.net. [174.21.142.130])
  by smtp.gmail.com with ESMTPSA id
- l25-20020a635719000000b0039da6cdf82dsm5619278pgb.83.2022.04.15.19.50.27
+ c25-20020a62e819000000b0050a442a510bsm2928546pfi.31.2022.04.15.19.51.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Apr 2022 19:50:27 -0700 (PDT)
-Message-ID: <a169f2cc-a4b9-a4df-9f16-323206f1715e@linaro.org>
-Date: Fri, 15 Apr 2022 19:50:25 -0700
+ Fri, 15 Apr 2022 19:51:06 -0700 (PDT)
+Message-ID: <ce7d328a-276e-9dac-9784-9142b760902d@linaro.org>
+Date: Fri, 15 Apr 2022 19:51:04 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
-Subject: Re: [PATCH v10 06/14] target/riscv: rvk: add support for zknd/zkne
- extension in RV32
+Subject: Re: [PATCH v10 07/14] target/riscv: rvk: add support for zkne/zknd
+ extension in RV64
 Content-Language: en-US
 To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
  alistair.francis@wdc.com, bin.meng@windriver.com, qemu-riscv@nongnu.org,
@@ -60,13 +60,13 @@ To: Weiwei Li <liweiwei@iscas.ac.cn>, palmer@dabbelt.com,
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com
 References: <20220416023549.28463-1-liweiwei@iscas.ac.cn>
- <20220416023549.28463-7-liweiwei@iscas.ac.cn>
+ <20220416023549.28463-8-liweiwei@iscas.ac.cn>
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220416023549.28463-7-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220416023549.28463-8-liweiwei@iscas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -86,34 +86,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Apr 2022 02:50:36 -0000
+X-List-Received-Date: Sat, 16 Apr 2022 02:51:10 -0000
 
 On 4/15/22 19:35, Weiwei Li wrote:
-> +target_ulong HELPER(aes32esmi)(target_ulong rs1, target_ulong rs2,
-> +                               target_ulong shamt)
+> +target_ulong HELPER(aes64esm)(target_ulong rs1, target_ulong rs2)
 > +{
-> +    return aes32_operation(shamt, rs1, rs2, true, true);
+> +    return aes64_operation(rs1, rs2, true, true);
 > +}
 > +
-> +target_ulong HELPER(aes32esi)(target_ulong rs1, target_ulong rs2,
-> +                              target_ulong shamt)
+> +target_ulong HELPER(aes64es)(target_ulong rs1, target_ulong rs2)
 > +{
-> +    return aes32_operation(shamt, rs1, rs2, true, false);
+> +    return aes64_operation(rs1, rs2, true, false);
 > +}
 > +
-> +target_ulong HELPER(aes32dsmi)(target_ulong rs1, target_ulong rs2,
-> +                               target_ulong shamt)
+> +target_ulong HELPER(aes64ds)(target_ulong rs1, target_ulong rs2)
 > +{
-> +    return aes32_operation(shamt, rs1, rs2, false, true);
+> +    return aes64_operation(rs1, rs2, false, false);
 > +}
 > +
-> +target_ulong HELPER(aes32dsi)(target_ulong rs1, target_ulong rs2,
-> +                              target_ulong shamt)
+> +target_ulong HELPER(aes64dsm)(target_ulong rs1, target_ulong rs2)
 > +{
-> +    return aes32_operation(shamt, rs1, rs2, false, false);
+> +    return aes64_operation(rs1, rs2, false, true);
 > +}
 
-Missing REQUIRE_32BIT tests.
+Missing REQUIRE_64BIT tests.
+
 
 r~
 
