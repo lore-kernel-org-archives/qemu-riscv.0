@@ -1,65 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nggJl-0001vD-4e
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 01:22:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54190)
+	id 1nggOe-0004TZ-Ug
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 01:27:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56586)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nggJj-0001ur-1d; Tue, 19 Apr 2022 01:22:23 -0400
-Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:38651)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1nggOc-0004TD-44
+ for qemu-riscv@nongnu.org; Tue, 19 Apr 2022 01:27:27 -0400
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233]:42745)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nggJh-0008TY-9O; Tue, 19 Apr 2022 01:22:22 -0400
-Received: by mail-il1-x136.google.com with SMTP id i8so4822597ila.5;
- Mon, 18 Apr 2022 22:22:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1nggOa-00012N-Co
+ for qemu-riscv@nongnu.org; Tue, 19 Apr 2022 01:27:25 -0400
+Received: by mail-lj1-x233.google.com with SMTP id c15so19136747ljr.9
+ for <qemu-riscv@nongnu.org>; Mon, 18 Apr 2022 22:27:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QTllmhgtR+W6Rl26nsTbGlQAq4JYxrlSiJavVV8P3BA=;
- b=YDek01tKgst6w57+wPxbejkiz9fGwtYygVP0riqes5XKV3ep5yQEkeL4f4+YHXyHyw
- 3u/EeDW2xrkZ+JOnTNFVyP+8n36GufQlKUCIsXsXCFRVSZEIQYy9fbwLy2iBcP8P0tTX
- 3wnDOUCvgaNlka55pAHpp3ItFFk0qbwvHtCIX4aemybP9WjYWAym6Glu5EP3gce7MTX2
- tYPKTsjVkd43rdrGQE6m5NHNPpw/IMO2fUxXAF5X7hrdgGm5jEpXxkGMuNi8OXKhhlbh
- K7VHGnPlo3aXjg5pe9e4NaGTeDwx+ulfKLXO2iJgRv2wJtXfQwdokkyxO0wWl66oZhLv
- HsnA==
+ :cc; bh=Jqj1li+MsgmP3jKWAJ5hYiJHXYZPIfDTeD+YqdQSoyE=;
+ b=dqtBG6AV4L9QvFYwToI7W7en3zpip5XFVlFvlgrBSIDEPOEUpJReAx007RLDPQyjyy
+ vVY16u6FViCfHEFix0vPK8LRxcSg2RR+qRXXHhZ1zahHOSn8t+wOkYWtBljCSlgtB5Nv
+ dE7FW1v5zmrDtSS4vefmk3Zbt+ZK7a0kfnnamNNSP5SR/6V5bamqLz0hmozahToHZwpX
+ sNQDgNWrw/QrzQG6YkvjKbR/QdIlZbXxksXpTyAEarNouh7e0Du27EYl9OuQdT2IyNwr
+ +/pBD/RJFp4FjOHWKf/wNcwiV8RbB618br1aqV0yXkg1nZfKP1RXFPysXBHXsi2mK4S7
+ GmWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=QTllmhgtR+W6Rl26nsTbGlQAq4JYxrlSiJavVV8P3BA=;
- b=Xzc6p3iUfEm99ql/mQVcJjl26uRo3qIagBjipBPkrttTjAnEWQUGLSt/9Fx46ARDhn
- KRPCMP5JNsyCS57Dp/hWu8MYd7ZCtBM49/SYuFtYAvsGOcYKoensRex0SODNpMIqTCb0
- fYRtmCgIIkSA+FIXFVLPD+mfEf97brfnt0q0AdBt5/bYE0gluMxtecsQ+hHc4CNhMjGx
- wRyNbXDCnFqCMkwpOdXR/lxN2cXZycN00Q8mvnAPePKo82CnaCAoLK6/g2FA2MWQjyBQ
- 0hPZv71FZYDvGn2zLbXDZt0Jdsu1qNjtOueo7oG/q2xL+Ltcd/HXCjwzgP5xMQpNEo+l
- 9ycQ==
-X-Gm-Message-State: AOAM530ZvM+mDAer67ftS6sbd9IN2cXh1AwMZQqHiQS2sTbmjss74u+K
- oKIM1ehVr39WxqUH3JfZDejIWpqKezFdTikX20c=
-X-Google-Smtp-Source: ABdhPJzHdP1Bqn7lXp1n8dwPndsf7NVHxBTb/EU8cFwHgH5IhB9MdJFMEEKvP0jckqQCSVA6AaMoeKQj/2Jt0HnAYPE=
-X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
- u18-20020a926012000000b002bdfb5fd627mr5999874ilb.86.1650345737908; Mon, 18
- Apr 2022 22:22:17 -0700 (PDT)
+ bh=Jqj1li+MsgmP3jKWAJ5hYiJHXYZPIfDTeD+YqdQSoyE=;
+ b=6xfUPMPC0ZRBjvuEpqIwVwCaZ8KRHkktIQaujgUfqgyWB6scwa3QIjogXaVM3OOzDV
+ yL6/KgxEl+gm5YhilsGcmx7xQ7YzAgqXtOvtydtTtoa9vHFdtpu0vygiCdKfeWSTAe0R
+ zbKBCQYbGeiOjWDsg+a4e0h57p0C/jw3K9VXos7ICMUBTo99SldRaLjrCZtNe0stQs4D
+ IOAYSMWismQno7dLOeEk+LHJVs9rsUzbgBgSFf8VS6Wdm+YzzAZjMS2bravaB5wHlk2s
+ AOxKJCMbdEKjytrp9JCB2KaZCDAcWuraF13AVVQTGbzYHYbs+8tilYc+kRcOSX9Ra3c8
+ L6sw==
+X-Gm-Message-State: AOAM530XW0PbWaYReMPWVIbX/rmBCr/b5SbCrVkjB1Gaz6RYVht731GA
+ xcKj89UqVRKEGgcL2Bgfq/GfB8QdRju0wi6jKoiuOw==
+X-Google-Smtp-Source: ABdhPJwhHHb3GCpmY+rioiLoGzPH3su2OYBKr1cS5YBxemEeUXe0jR/cnFSBmGfvKzwn585v6Nhyi1fikGpZfIjd8m4=
+X-Received: by 2002:a05:651c:1784:b0:24b:ce8:528a with SMTP id
+ bn4-20020a05651c178400b0024b0ce8528amr9249431ljb.364.1650346041346; Mon, 18
+ Apr 2022 22:27:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220415093727.15323-1-frank.chang@sifive.com>
-In-Reply-To: <20220415093727.15323-1-frank.chang@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Apr 2022 15:21:52 +1000
-Message-ID: <CAKmqyKP=kgiH05o_h1FS=acz_fsU9QkvAQ-yHa05knrnh9H-Jg@mail.gmail.com>
+ <CAKmqyKP=kgiH05o_h1FS=acz_fsU9QkvAQ-yHa05knrnh9H-Jg@mail.gmail.com>
+In-Reply-To: <CAKmqyKP=kgiH05o_h1FS=acz_fsU9QkvAQ-yHa05knrnh9H-Jg@mail.gmail.com>
+From: Anup Patel <apatel@ventanamicro.com>
+Date: Tue, 19 Apr 2022 10:57:09 +0530
+Message-ID: <CAK9=C2UF4mR17a2---02==MaSZJLCS1Fnryd2yg_u45T9rm4mg@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: Support configuarable marchid, mvendorid,
  mipid CSR values
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Frank Chang <frank.chang@sifive.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Jim Shu <jim.shu@sifive.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Jim Shu <jim.shu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::233;
+ envelope-from=apatel@ventanamicro.com; helo=mail-lj1-x233.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -74,116 +78,127 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2022 05:22:23 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 05:27:27 -0000
 
-On Fri, Apr 15, 2022 at 7:37 PM <frank.chang@sifive.com> wrote:
+On Tue, Apr 19, 2022 at 10:52 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> On Fri, Apr 15, 2022 at 7:37 PM <frank.chang@sifive.com> wrote:
+> >
+> > From: Frank Chang <frank.chang@sifive.com>
+> >
+> > Allow user to set core's marchid, mvendorid, mipid CSRs through
+> > -cpu command line option.
+> >
+> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >  target/riscv/cpu.c |  4 ++++
+> >  target/riscv/cpu.h |  4 ++++
+> >  target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++----
+> >  3 files changed, 42 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > index ddda4906ff..2eea0f9be7 100644
+> > --- a/target/riscv/cpu.c
+> > +++ b/target/riscv/cpu.c
+> > @@ -786,6 +786,10 @@ static Property riscv_cpu_properties[] = {
+> >      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+> >      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+> >
+> > +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+> > +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, 0),
+> > +    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, 0),
 >
-> Allow user to set core's marchid, mvendorid, mipid CSRs through
-> -cpu command line option.
->
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> ---
->  target/riscv/cpu.c |  4 ++++
->  target/riscv/cpu.h |  4 ++++
->  target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++----
->  3 files changed, 42 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..2eea0f9be7 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -786,6 +786,10 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->
-> +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-> +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, 0),
-> +    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, 0),
+> Should we have non-zero defaults here?
 
-Should we have non-zero defaults here?
+To do that, we need mvendorid for QEMU RISC-V.
 
-Alistair
+The marchid and mipid can be based on the QEMU version number.
 
-> +
->      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
->      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
->      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index c069fe85fa..3ab92deb4b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -370,6 +370,10 @@ struct RISCVCPUConfig {
->      bool ext_zve32f;
->      bool ext_zve64f;
+Regards,
+Anup
+
 >
-> +    uint32_t mvendorid;
-> +    uint64_t marchid;
-> +    uint64_t mipid;
-> +
->      /* Vendor-specific custom extensions */
->      bool ext_XVentanaCondOps;
+> Alistair
 >
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 341c2e6f23..9a02038adb 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -603,6 +603,36 @@ static RISCVException write_ignore(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
-> +                                     target_ulong *val)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    *val = cpu->cfg.mvendorid;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_marchid(CPURISCVState *env, int csrno,
-> +                                   target_ulong *val)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    *val = cpu->cfg.marchid;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_mipid(CPURISCVState *env, int csrno,
-> +                                 target_ulong *val)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    *val = cpu->cfg.mipid;
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException read_mhartid(CPURISCVState *env, int csrno,
->                                     target_ulong *val)
->  {
-> @@ -3098,10 +3128,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
->
->      /* Machine Information Registers */
-> -    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
-> -    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
-> -    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
-> -    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
-> +    [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
-> +    [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
-> +    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
-> +    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
->
->      /* Machine Trap Setup */
->      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
-> --
-> 2.35.1
->
+> > +
+> >      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+> >      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+> >      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index c069fe85fa..3ab92deb4b 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -370,6 +370,10 @@ struct RISCVCPUConfig {
+> >      bool ext_zve32f;
+> >      bool ext_zve64f;
+> >
+> > +    uint32_t mvendorid;
+> > +    uint64_t marchid;
+> > +    uint64_t mipid;
+> > +
+> >      /* Vendor-specific custom extensions */
+> >      bool ext_XVentanaCondOps;
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 341c2e6f23..9a02038adb 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -603,6 +603,36 @@ static RISCVException write_ignore(CPURISCVState *env, int csrno,
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > +static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
+> > +                                     target_ulong *val)
+> > +{
+> > +    CPUState *cs = env_cpu(env);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
+> > +
+> > +    *val = cpu->cfg.mvendorid;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException read_marchid(CPURISCVState *env, int csrno,
+> > +                                   target_ulong *val)
+> > +{
+> > +    CPUState *cs = env_cpu(env);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
+> > +
+> > +    *val = cpu->cfg.marchid;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException read_mipid(CPURISCVState *env, int csrno,
+> > +                                 target_ulong *val)
+> > +{
+> > +    CPUState *cs = env_cpu(env);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
+> > +
+> > +    *val = cpu->cfg.mipid;
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >  static RISCVException read_mhartid(CPURISCVState *env, int csrno,
+> >                                     target_ulong *val)
+> >  {
+> > @@ -3098,10 +3128,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+> >      [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
+> >
+> >      /* Machine Information Registers */
+> > -    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
+> > -    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
+> > -    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
+> > -    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
+> > +    [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
+> > +    [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
+> > +    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
+> > +    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
+> >
+> >      /* Machine Trap Setup */
+> >      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
+> > --
+> > 2.35.1
+> >
+> >
 >
 
