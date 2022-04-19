@@ -1,43 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ngmYv-0003Lr-55
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 08:02:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45916)
+	id 1ngr4g-0008MG-I5
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 12:51:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58310)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1ngmYs-0003L6-P8; Tue, 19 Apr 2022 08:02:26 -0400
-Received: from atcsqr.andestech.com ([60.248.187.195]:40256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1ngr4f-0008Lt-85
+ for qemu-riscv@nongnu.org; Tue, 19 Apr 2022 12:51:33 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:53707)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
- id 1ngmYp-0002J5-Bz; Tue, 19 Apr 2022 08:02:25 -0400
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 23JC26CV019232;
- Tue, 19 Apr 2022 20:02:06 +0800 (+08)
- (envelope-from dylan@andestech.com)
-Received: from atctrx.andestech.com (10.0.12.164) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Tue, 19 Apr 2022
- 20:02:02 +0800
-From: Dylan Jhong <dylan@andestech.com>
-To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <bin.meng@windriver.com>,
- <alistair.francis@wdc.com>, <palmer@dabbelt.com>
-CC: <alankao@andestech.com>, <locus84@andestech.com>, <x5710999x@gmail.com>,
- Dylan Jhong <dylan@andestech.com>
-Subject: [PATCH] hw/riscv: boot: Support 64bit fdt address.
-Date: Tue, 19 Apr 2022 19:59:45 +0800
-Message-ID: <20220419115945.37945-1-dylan@andestech.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1ngr4c-0001Xx-Je
+ for qemu-riscv@nongnu.org; Tue, 19 Apr 2022 12:51:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1650387090;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=zBCOCZQgiMLLDxlC4rA2vN0Dk4Od1oV+ARld4Fb1mq8=;
+ b=dj+Y1cfAi5s5nn4MRdj4JVO96uYQZ2XqrcusBuqMC5FDpiggJIPhzgBzRicBSma5YzUzzI
+ iUzKz4YOPkgxWg47Wjf/v/UYWi6E8fGqSTLVbFGmEXrjOXpx+bxTPOOpmw6/fAFH08VdD2
+ pJOa/0LOAyQ4O55+NSyicXr5tDwiEJY=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-267-MVR-lL6XOzmKdQOMhyiL6w-1; Tue, 19 Apr 2022 12:51:27 -0400
+X-MC-Unique: MVR-lL6XOzmKdQOMhyiL6w-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 71212833964;
+ Tue, 19 Apr 2022 16:51:26 +0000 (UTC)
+Received: from redhat.com (unknown [10.33.36.155])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id BBAAD145B97F;
+ Tue, 19 Apr 2022 16:51:24 +0000 (UTC)
+Date: Tue, 19 Apr 2022 17:51:20 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Atish Patra <atishp@rivosinc.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
+Message-ID: <Yl7oiF7kUrIQ0qk5@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20220412021009.582424-1-atishp@rivosinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.12.164]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 23JC26CV019232
-Received-SPF: pass client-ip=60.248.187.195; envelope-from=dylan@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+In-Reply-To: <20220412021009.582424-1-atishp@rivosinc.com>
+User-Agent: Mutt/2.1.5 (2021-12-30)
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=berrange@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -50,93 +77,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2022 12:02:27 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 16:51:33 -0000
 
-The current riscv_load_fdt() forces fdt_load_addr to be placed at a dram address within 3GB,
-but not all platforms have dram_base within 3GB.
+On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
+> 
+> The RISC-V virt machine has helped RISC-V software eco system to evolve at a
+> rapid pace even in absense of the real hardware. It is definitely commendable.
+> However, the number of devices & commandline options keeps growing as a result
+> of that as well. That adds flexibility but will also become bit difficult
+> to manage in the future as more extension support will be added. As it is the
+> most commonly used qemu machine, it needs to support all kinds of device and
+> interrupts as well. Moreover, virt machine has limitations on the maximum
+> number of harts it can support because of all the MMIO devices it has to support.
+> 
+> The RISC-V IMSIC specification allows to develop machines completely relying
+> on MSI and don't care about the wired interrupts at all. It just requires
+> all the devices to be present behind a PCI bus or present themselves as platform
+> MSI device. The former is a more common scenario in x86 world where most
+> of the devices are behind PCI bus. As there is very limited MMIO device
+> support, it can also scale to very large number of harts.
+> 
+> That's why, this patch series introduces a minimalistic yet very extensible
+> forward looking machine called as "RISC-V Mini Computer" or "minic". The
+> idea is to build PC or server like systems with this machine. The machine can
+> work with or without virtio framework. The current implementation only
+> supports RV64. I am not sure if building a RV32 machine would be of interest
+> for such machines. The only mmio device it requires is clint to emulate
+> the mtimecmp.
 
-This patch adds an exception for dram base not within 3GB,
-which will place fdt at dram_end align 16MB.
+I would ask what you see as the long term future usage for 'virt' vs
+'minic' machine types ? Would you expect all existing users of 'virt'
+to ultimately switch to 'minic', or are there distinct non-overlapping
+use cases for 'virt' vs 'minic' such that both end up widely used ?
 
-riscv_setup_rom_reset_vec() also needs to be modified
+Is 'minic' intended to be able to mimic real physical hardware at all,
+or is it still intended as a purely virtual machine, like a 'virt-ng' ?
 
-Signed-off-by: Dylan Jhong <dylan@andestech.com>
----
- hw/riscv/boot.c         | 12 +++++++-----
- include/hw/riscv/boot.h |  4 ++--
- 2 files changed, 9 insertions(+), 7 deletions(-)
+Essentially 'virt' was positioned as the standard machine to use if
+you want to run a virtual machine, without any particular match to
+physical hardware. It feels like 'minic' is creating a second machine
+type to fill the same purpose, so how do users decide which to use ? 
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 519fa455a1..852aa92bbe 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -203,9 +203,9 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-     return *start + size;
- }
- 
--uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-+uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
- {
--    uint32_t temp, fdt_addr;
-+    uint64_t temp, fdt_addr;
-     hwaddr dram_end = dram_base + mem_size;
-     int ret, fdtsize = fdt_totalsize(fdt);
- 
-@@ -220,7 +220,7 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
-      * Thus, put it at an 16MB aligned address that less than fdt size from the
-      * end of dram or 3GB whichever is lesser.
-      */
--    temp = MIN(dram_end, 3072 * MiB);
-+    temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
-     fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 16 * MiB);
- 
-     ret = fdt_pack(fdt);
-@@ -276,13 +276,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
-                                hwaddr start_addr,
-                                hwaddr rom_base, hwaddr rom_size,
-                                uint64_t kernel_entry,
--                               uint32_t fdt_load_addr, void *fdt)
-+                               uint64_t fdt_load_addr, void *fdt)
- {
-     int i;
-     uint32_t start_addr_hi32 = 0x00000000;
-+    uint32_t fdt_load_addr_hi32 = 0x00000000;
- 
-     if (!riscv_is_32bit(harts)) {
-         start_addr_hi32 = start_addr >> 32;
-+        fdt_load_addr_hi32 = fdt_load_addr >> 32;
-     }
-     /* reset vector */
-     uint32_t reset_vec[10] = {
-@@ -295,7 +297,7 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
-         start_addr,                  /* start: .dword */
-         start_addr_hi32,
-         fdt_load_addr,               /* fdt_laddr: .dword */
--        0x00000000,
-+        fdt_load_addr_hi32,
-                                      /* fw_dyn: */
-     };
-     if (riscv_is_32bit(harts)) {
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index baff11dd8a..346441e369 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -48,12 +48,12 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
-                                symbol_fn_t sym_cb);
- hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
-                          uint64_t kernel_entry, hwaddr *start);
--uint32_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
-+uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
- void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
-                                hwaddr saddr,
-                                hwaddr rom_base, hwaddr rom_size,
-                                uint64_t kernel_entry,
--                               uint32_t fdt_load_addr, void *fdt);
-+                               uint64_t fdt_load_addr, void *fdt);
- void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
-                                   hwaddr rom_size,
-                                   uint32_t reset_vec_size,
+> "Naming is hard". I am not too attached with the name "minic". 
+> I just chose least bad one out of the few on my mind :). I am definitely
+> open to any other name as well. 
+> 
+> The other alternative to provide MSI only option to aia in the 
+> existing virt machine to build MSI only machines. This is certainly doable
+> and here is the patch that supports that kind of setup.
+> 
+> https://github.com/atishp04/qemu/tree/virt_imsic_only
+> 
+> However, it even complicates the virt machine even further with additional
+> command line option, branches in the code. I believe virt machine will become
+> very complex if we continue this path. I am interested to learn what everyone
+> else think.
+> 
+> It is needless to say that the current version of minic machine
+> is inspired from virt machine and tries to reuse as much as code possible.
+> The first patch in this series adds MSI support for serial-pci device so
+> console can work on such a machine. The 2nd patch moves some common functions
+> between minic and the virt machine to a helper file. The PATCH3 actually
+> implements the new minic machine.
+> 
+> I have not added the fw-cfg/flash support. We probably should add those
+> but I just wanted to start small and get the feedback first.
+> This is a work in progress and have few more TODO items before becoming the
+> new world order :)
+> 
+> 1. OpenSBI doesn't have PCI support. Thus, no console support for OpenSBI
+> for now.
+> 2. The ns16550 driver in OpenSBI also need to support MSI/MSI-X.
+> 3. Add MSI-X support for serial-pci device.
+> 
+> This series can boot Linux distros with the minic machine with or without virtio
+> devices with out-of-tree Linux kernel patches[1]. Here is an example commandline 
+> 
+> Without virtio devices (nvme, serial-pci & e1000e):
+> =====================================================
+> /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M minic -m 1G -smp 4 -nographic -nodefaults \
+> -display none -bios /scratch/workspace/opensbi/build/platform/generic/firmware/fw_dynamic.elf \
+> -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
+> -chardev stdio,mux=on,signal=off,id=charconsole0 \
+> -mon chardev=charconsole0,mode=readline \
+> -device pci-serial,msi=true,chardev=charconsole0 \
+> -drive id=disk3,file=/scratch/workspace/rootfs_images//fedora/Fedora-Developer-Rawhide-20211110.n.0-sda.raw,format=raw,if=none,id=drive-system-disk,cache=none,format=raw \
+> -device nvme,serial=deadbeef,drive=disk3 \
+> -netdev user,id=usernet,hostfwd=tcp::10000-:22 -device e1000e,netdev=usernet,bus=pcie.0 \
+> -append 'root=/dev/nvme0n1p2 rw loglevel=8 memblock=debug console=ttyS0 earlycon' -d in_asm -D log.txt -s
+> 
+> With virtio devices (virtio-scsi-pci, serial-pci & virtio-net-pci)
+> ==================================================================
+> /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M minic -m 1G -smp 4 -nographic -nodefaults \
+> -display none -bios /scratch/workspace/opensbi/build/platform/generic/firmware/fw_dynamic.elf \
+> -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
+> -chardev stdio,mux=on,signal=off,id=charconsole0 \
+> -mon chardev=charconsole0,mode=readline \
+> -device pci-serial,msi=true,chardev=charconsole0 \
+> -drive file=/scratch/workspace/rootfs_images//fedora/Fedora-Developer-Rawhide-20211110.n.0-sda.raw,format=raw,if=none,id=drive-system-disk,cache=none \
+> -device virtio-scsi-pci,id=scsi0 -device scsi-hd,bus=scsi0.0,drive=drive-system-disk,id=system-disk,bootindex=1 \
+> -netdev user,id=n1,hostfwd=tcp::10000-:22 -device virtio-net-pci,netdev=n1 \
+> -append 'root=/dev/sda2 rw loglevel=8 memblock=debug console=ttyS0 earlycon'
+> 
+> The objective of this series is to engage the community to solve this problem.
+> Please suggest if you have another alternatve solution.
+> 
+> [1] https://github.com/atishp04/linux/tree/msi_only_console 
+> 
+> Atish Patra (3):
+> serial: Enable MSI capablity and option
+> hw/riscv: virt: Move common functions to a separate helper file
+> hw/riscv: Create a new qemu machine for RISC-V
+> 
+> configs/devices/riscv64-softmmu/default.mak |   1 +
+> hw/char/serial-pci.c                        |  36 +-
+> hw/riscv/Kconfig                            |  11 +
+> hw/riscv/machine_helper.c                   | 417 +++++++++++++++++++
+> hw/riscv/meson.build                        |   2 +
+> hw/riscv/minic.c                            | 438 ++++++++++++++++++++
+> hw/riscv/virt.c                             | 403 ++----------------
+> include/hw/riscv/machine_helper.h           |  87 ++++
+> include/hw/riscv/minic.h                    |  65 +++
+> include/hw/riscv/virt.h                     |  13 -
+> 10 files changed, 1090 insertions(+), 383 deletions(-)
+> create mode 100644 hw/riscv/machine_helper.c
+> create mode 100644 hw/riscv/minic.c
+> create mode 100644 include/hw/riscv/machine_helper.h
+> create mode 100644 include/hw/riscv/minic.h
+> 
+> --
+> 2.25.1
+> 
+> 
+
+With regards,
+Daniel
 -- 
-2.34.1
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
