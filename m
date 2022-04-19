@@ -1,58 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ngdMP-0004ZV-68
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Apr 2022 22:12:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56846)
+	id 1ngfZz-0002NI-FF
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 00:35:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47964)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ngdMN-0004YN-HM; Mon, 18 Apr 2022 22:12:55 -0400
-Received: from mail-il1-x129.google.com ([2607:f8b0:4864:20::129]:41944)
+ id 1ngfZy-0002My-9C; Tue, 19 Apr 2022 00:35:06 -0400
+Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a]:33444)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ngdML-0006eT-Nh; Mon, 18 Apr 2022 22:12:55 -0400
-Received: by mail-il1-x129.google.com with SMTP id h4so9630580ilq.8;
- Mon, 18 Apr 2022 19:12:53 -0700 (PDT)
+ id 1ngfZw-0001XF-Mr; Tue, 19 Apr 2022 00:35:06 -0400
+Received: by mail-il1-x12a.google.com with SMTP id b5so9814350ile.0;
+ Mon, 18 Apr 2022 21:35:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Y4edJMCfgyfm9xk7faGRocyd4eC6y8lhlgia8Be5D08=;
- b=P7SnrgRWWvS3FcWL/mhwraz0wjx+YIlKQWbmvodrabNempDy5sNKsiUP1G3UIylqEo
- nRyUJ2JlZUZHD2XcY0sul9g6o2IMqdLkHMgEAfIvd0Rg4GiQzfKAX0X6vF1aIq4yGAih
- MzJlUdnHO6eWdRjUjtGIXBdRwcFCixtmeoTelxAJewXj8AVgTjvS8OtVP60ydNmg4BVC
- ZVgBjoAZEfomQqPdF+2Wl7Ody6/su9FyT9q+xl/E6GRjA5DBHOgn9U5N38jF8qT2emdq
- wwo7q0f6wv0IUZpSBxjonUQ1olEviTP23LMAbyOWL3nZCdjAlvMGUeDD5Z66Ah+2KesQ
- kklA==
+ :cc; bh=3jy5eE8kVpI/lftvBVmgsU8Chaa/OVlJQI4FFIM0A9U=;
+ b=UsFHLiTJCTtiMi2sv+zAiQMNQ/wSQd1gXxSR+tV+FPj2HmNGI+BRJ2WyJwDT/ehUFT
+ jhC1tgOxkoWSGYmcBl8YjKwZBKY/wvBEJ4Cgam4HBvKfofJciJ0/EtwOYnrycpa6tfd+
+ kN3k/Up5y4w7zP9VyVe8PPHUhlQv0u3VC/klVXT7EvC5dWO2f3l5t1ptCXiDd5l1pcF/
+ tfQUXa8cx9Z+6HlQptn1jodsqxbp9Her6xkZWRXIjSSM/XLehQA9omqoxZ/3L/4pcXZX
+ JAprZ5ebZf7F8AYh8x25322Vq6THgn+rbWkgcuBXqym4wNoSDwWVPLp+SpPc/v4wvGCT
+ ReUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Y4edJMCfgyfm9xk7faGRocyd4eC6y8lhlgia8Be5D08=;
- b=gyF9ofIrHX3U1/ui2YmcUswEsoQsVXYLV2c3E62Stb2G81RWDP6CVlAuMZ+hxNtr8Z
- CjHrXlmKn4DKZRIGaMHs9pszjWK1CH0wnxi+nYV1LdzL/jizV8Qnu7kGKHD61EBgM5nA
- JC9Rnp09rvqbgaqG8jpsJDi73Q8EpmjqAwQguH7SUNNWj92S9zksg5akzcRdFzxe8ilk
- nT6RpSPsrTOzt144lBxerJGUo2DkuMMnygBQn2HXyXc10lhmOJTodjPM+PATt2iEACZA
- wfYayfaZ8QerALWyXZAAClFBLNWEhkvzNuqmC02RG5H5O8jA5H4yr6oQ85s5KpROeool
- Pp9w==
-X-Gm-Message-State: AOAM530HmYP0AVSUMtSeuz9QBmz7TngwwEqLRxhFu8Ge2LMHUMWqaWtG
- O2tJX/gd0qm4yKQcDBwumVpJKnABfR49YsZVfow=
-X-Google-Smtp-Source: ABdhPJySrCaJLPFzo8liMuvrYvCaeRt3o7CLfo7IfAk7jx4yxHzjLTDDc6StFVXSFA36e25ZtFBp1aAT7sViVaZ8gfg=
-X-Received: by 2002:a92:cda4:0:b0:2cc:14ab:ceb7 with SMTP id
- g4-20020a92cda4000000b002cc14abceb7mr4850084ild.55.1650334372253; Mon, 18 Apr
- 2022 19:12:52 -0700 (PDT)
+ bh=3jy5eE8kVpI/lftvBVmgsU8Chaa/OVlJQI4FFIM0A9U=;
+ b=6ikETyr+YVVG9bBfPhRlcxZM0CuZLxVymln0Myry5rBTkXOLcZRUInIIghUALAOC7A
+ NG3itXW4BeU01bPrIRQEB7WhM2ZuNiWEAza5I6jNcXjQuWnA0rTbrmzEaUCAYbhVXN+A
+ cPG7RpsrBCy4nfYVTL81Alqhh44nsXRrIlYgQU+jNAphGQeT++F+h6jRN4edwRQvCf8W
+ 0vSIRLXbASO6AgqnumnxE9N8Jy9zf+qTuoF6lcz/ThO1+X08wNm0/xwA7ugviig+R4vj
+ t/OdTVl7Rvu2RWVYz1C+VgOqh4h82Nmyx1K3S0YllYNosgln39QrZT0mKf7fuAWDB9wf
+ xj6Q==
+X-Gm-Message-State: AOAM530ryh1cMLwjFPXAkLew33wi53PbsYQNw5hvu5V+ijEz1wJYk9RS
+ WJMLJB9zC1jaXy6N1Ppo3ksgJuKJFwZ2HG8h7DA=
+X-Google-Smtp-Source: ABdhPJzVWggctg4uCeUmBDzvUjtxJfRwJPWd9ETWCvPPV3g89egZLXOipjU0xHF0QpnvYMReixH/efhni3LkgnCAk9w=
+X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
+ u18-20020a926012000000b002bdfb5fd627mr5937520ilb.86.1650342903215; Mon, 18
+ Apr 2022 21:35:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220414155510.1364147-1-niklas.cassel@wdc.com>
-In-Reply-To: <20220414155510.1364147-1-niklas.cassel@wdc.com>
+References: <rq81o86n-17ps-92no-p65o-79o88476266@syhkavp.arg>
+In-Reply-To: <rq81o86n-17ps-92no-p65o-79o88476266@syhkavp.arg>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Apr 2022 12:12:26 +1000
-Message-ID: <CAKmqyKNq+1grM3L4LndO2fPUDGj89kTqQK_sqbeKQeOQKE5UTA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: fix DT property mmu-type when CPU mmu
- option is disabled
-To: Niklas Cassel <niklas.cassel@wdc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Tue, 19 Apr 2022 14:34:37 +1000
+Message-ID: <CAKmqyKMSLvVjHgiw2h3SwLVORVP-ZSBwUDaD+aTaxSr9=JJ_zg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/pmp: fix NAPOT range computation overflow
+To: Nicolas Pitre <nico@fluxnic.net>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::129;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x129.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -73,54 +72,54 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2022 02:12:55 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 04:35:06 -0000
 
-On Fri, Apr 15, 2022 at 1:56 AM Niklas Cassel via <qemu-devel@nongnu.org> wrote:
+On Sat, Apr 9, 2022 at 2:25 AM Nicolas Pitre <nico@fluxnic.net> wrote:
 >
-> The device tree property "mmu-type" is currently exported as either
-> "riscv,sv32" or "riscv,sv48".
+> There is an overflow with the current code where a pmpaddr value of
+> 0x1fffffff is decoded as sa=0 and ea=0 whereas it should be sa=0 and
+> ea=0xffffffff.
 >
-> However, the riscv cpu device tree binding [1] has a specific value
-> "riscv,none" for a HART without a MMU.
+> Fix that by simplifying the computation. There is in fact no need for
+> ctz64() nor special case for -1 to achieve proper results.
 >
-> Set the device tree property "mmu-type" to "riscv,none" when the CPU mmu
-> option is disabled using rv32,mmu=off or rv64,mmu=off.
->
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/riscv/cpus.yaml?h=v5.17
->
-> Signed-off-by: Niklas Cassel <niklas.cassel@wdc.com>
+> Signed-off-by: Nicolas Pitre <nico@fluxnic.net>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  hw/riscv/virt.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index da50cbed43..3be6be9ad3 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -230,8 +230,14 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
->          cpu_name = g_strdup_printf("/cpus/cpu@%d",
->              s->soc[socket].hartid_base + cpu);
->          qemu_fdt_add_subnode(mc->fdt, cpu_name);
-> -        qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> -            (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
-> +        if (riscv_feature(&s->soc[socket].harts[cpu].env,
-> +                          RISCV_FEATURE_MMU)) {
-> +            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> +                                    (is_32_bit) ? "riscv,sv32" : "riscv,sv48");
-> +        } else {
-> +            qemu_fdt_setprop_string(mc->fdt, cpu_name, "mmu-type",
-> +                                    "riscv,none");
-> +        }
->          name = riscv_isa_string(&s->soc[socket].harts[cpu]);
->          qemu_fdt_setprop_string(mc->fdt, cpu_name, "riscv,isa", name);
->          g_free(name);
-> --
-> 2.35.1
+> This is in fact the same patch I posted yesterday but turns out its
+> scope is far more important than I initially thought.
 >
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index 81b61bb65c..151da3fa08 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -141,17 +141,9 @@ static void pmp_decode_napot(target_ulong a, target_ulong *sa, target_ulong *ea)
+>         0111...1111   2^(XLEN+2)-byte NAPOT range
+>         1111...1111   Reserved
+>      */
+> -    if (a == -1) {
+> -        *sa = 0u;
+> -        *ea = -1;
+> -        return;
+> -    } else {
+> -        target_ulong t1 = ctz64(~a);
+> -        target_ulong base = (a & ~(((target_ulong)1 << t1) - 1)) << 2;
+> -        target_ulong range = ((target_ulong)1 << (t1 + 3)) - 1;
+> -        *sa = base;
+> -        *ea = base + range;
+> -    }
+> +    a = (a << 2) | 0x3;
+> +    *sa = a & (a + 1);
+> +    *ea = a | (a + 1);
+>  }
+>
+>  void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
 >
 
