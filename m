@@ -1,67 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nga8N-0007bW-SJ
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Apr 2022 18:46:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48578)
+	id 1ngczg-0008Eu-Sg
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Apr 2022 21:49:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53716)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nga8J-0007b1-HQ; Mon, 18 Apr 2022 18:46:12 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:44566)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nga8H-0001Ac-5B; Mon, 18 Apr 2022 18:46:11 -0400
-Received: by mail-io1-xd32.google.com with SMTP id e194so11361189iof.11;
- Mon, 18 Apr 2022 15:46:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=gOj+3XG1iO6QudcCY1Vq4DdlMszmKZ2F7GOCsAAe1hs=;
- b=MO2azu2S5fDhNwP40Uk1miaPf9Oqd8eHPQhXOC1Z+UMdS6a/WxJ0c5ihjI13kPjypC
- t8dLrdOx/Hm6YKPJ6ni4DBMTh42H50HGp6p5G9iakdBOUOdGBm3guSJZNzYpLBoDSxC9
- bM9ZL5GWilcBcHCK5K1t0K11dAl2VROd/mna/MRC/CzZ8qkJ87fBacUpAn2vI1EKb8vj
- 3LqtdHXQVUSN2NWCTjvuxVtJafgH0laU2W6lNQEHtvtSzaCgXUe98ooCCoiMKR/szUJ0
- 2gji0WurS2guKjlvsbqbNAfOyh3QS4hA8diDykjfiVzJYMX2wKViu13ihvQxm1NpeJX7
- N+bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=gOj+3XG1iO6QudcCY1Vq4DdlMszmKZ2F7GOCsAAe1hs=;
- b=eUyrpvQxnLhXC39VsbLPMAJhLA09cM3yAbIP9qPNUxx7s/1vbUQq3147icEZKorAH+
- DT+IJpboq6+uWe2ktAcyQnMBff3nttEdAkze1J0vRsCjhgnfSIkG2jPtvDvFAllBm9vw
- tJ2TC7C6wnx6944lG7lAe1ULCfHP+foohTIEleP0LGfPszUYFHT96Kn8ix8EVSkapGmK
- Em3yc4C//gmUCIuIFqcvmATSYjtR3aS0F+2D6vtH+xUtKPVSbhJt8l8jZ3XH+VyJubi3
- qA4DSfieUOJauUZ/Fj9bMEi386jtHIdxBjYF3I0OVq8JlQw1AlGyG8dVJJojmq3mN+6Q
- Z3Mw==
-X-Gm-Message-State: AOAM530lqJNR3PHb29wpeXN9MWht11CaXnpcFlCu0F7YDslR4hLg0OEa
- hbdWWxISbG92HLpoLLsHj3EBHrLWeSCvPeZRtP8=
-X-Google-Smtp-Source: ABdhPJxCUcjh3gVMmshrUkro3aM6D8VOfFBQE7H+ABRXMVtAfRCHOHli/5no+HxFnx1rHP9GpVvmqB+cFpNhF5A3TXA=
-X-Received: by 2002:a05:6638:d06:b0:326:ba0:347 with SMTP id
- q6-20020a0566380d0600b003260ba00347mr5911988jaj.68.1650321960080; Mon, 18 Apr
- 2022 15:46:00 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ngczc-0008D2-MY; Mon, 18 Apr 2022 21:49:24 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:51866 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ngczZ-0003Jh-NC; Mon, 18 Apr 2022 21:49:24 -0400
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowACnr0sPFV5iXeUSAw--.34873S7;
+ Tue, 19 Apr 2022 09:49:09 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v11 05/14] crypto: move sm4_sbox from target/arm
+Date: Tue, 19 Apr 2022 09:48:38 +0800
+Message-Id: <20220419014847.9722-6-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
+References: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
-References: <20220331000127.2107823-1-atishp@rivosinc.com>
- <20220331000127.2107823-9-atishp@rivosinc.com>
- <CAKmqyKMmY_nfFpO7r2F+VHjFgLTO3BtB7kgCJ=H9OYJfZ7L2+Q@mail.gmail.com>
- <CAHBxVyEa5Hc7NC57c02VRL9OkjgZ6kOwsPczpts7i6+JpQcsJQ@mail.gmail.com>
-In-Reply-To: <CAHBxVyEa5Hc7NC57c02VRL9OkjgZ6kOwsPczpts7i6+JpQcsJQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Apr 2022 08:45:34 +1000
-Message-ID: <CAKmqyKO8cpdfW3Y=62PYJJCS7e6yN96FYiyGYESeC8Tyq5EwyA@mail.gmail.com>
-Subject: Re: [PATCH v7 08/12] target/riscv: Add sscofpmf extension support
-To: Atish Kumar Patra <atishp@rivosinc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: rQCowACnr0sPFV5iXeUSAw--.34873S7
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF4kXr1UZr4ftw15Jry7KFg_yoW7uFyrpr
+ 15Gw1Sqr4rXrnrt39Iqr10yr48Ary0y3WYyw4xury8Zan7Gw4rJF9IyrW8GryUAr15CFy5
+ uF92yr15GF18Jr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPa14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+ 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+ C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+ 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+ 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxV
+ WUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU
+ OBTYUUUUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -75,338 +66,158 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Apr 2022 22:46:14 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 01:49:24 -0000
 
-On Sat, Apr 16, 2022 at 9:54 AM Atish Kumar Patra <atishp@rivosinc.com> wrote:
->
-> On Wed, Apr 13, 2022 at 12:08 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Thu, Mar 31, 2022 at 10:19 AM Atish Patra <atishp@rivosinc.com> wrote:
-> > >
-> > > The Sscofpmf ('Ss' for Privileged arch and Supervisor-level extensions,
-> > > and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
-> > > extension allows the perf to handle overflow interrupts and filtering
-> > > support. This patch provides a framework for programmable
-> > > counters to leverage the extension. As the extension doesn't have any
-> > > provision for the overflow bit for fixed counters, the fixed events
-> > > can also be monitoring using programmable counters. The underlying
-> > > counters for cycle and instruction counters are always running. Thus,
-> > > a separate timer device is programmed to handle the overflow.
-> > >
-> > > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > > ---
-> > >  target/riscv/cpu.c      |  11 ++
-> > >  target/riscv/cpu.h      |  25 +++
-> > >  target/riscv/cpu_bits.h |  55 +++++++
-> > >  target/riscv/csr.c      | 156 ++++++++++++++++--
-> > >  target/riscv/pmu.c      | 347 +++++++++++++++++++++++++++++++++++++++-
-> > >  target/riscv/pmu.h      |   7 +
-> > >  6 files changed, 590 insertions(+), 11 deletions(-)
-> > >
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index f63602828680..9715eed2fc4e 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -22,6 +22,7 @@
-> > >  #include "qemu/ctype.h"
-> > >  #include "qemu/log.h"
-> > >  #include "cpu.h"
-> > > +#include "pmu.h"
-> > >  #include "internals.h"
-> > >  #include "exec/exec-all.h"
-> > >  #include "qapi/error.h"
-> > > @@ -696,6 +697,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-> > >          set_misa(env, env->misa_mxl, ext);
-> > >      }
-> > >
-> > > +#ifndef CONFIG_USER_ONLY
-> > > +    if (cpu->cfg.pmu_num) {
-> > > +        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
-> > > +            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-> > > +                                          riscv_pmu_timer_cb, cpu);
-> > > +        }
-> > > +     }
-> > > +#endif
-> > > +
-> > >      riscv_cpu_register_gdb_regs_for_features(cs);
-> > >
-> > >      qemu_init_vcpu(cs);
-> > > @@ -795,6 +805,7 @@ static Property riscv_cpu_properties[] = {
-> > >      DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
-> > >      DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
-> > >      DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
-> > > +    DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
-> > >      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> > >      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> > >      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
-> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > > index 0fa15595fb37..a0e2279ea5e6 100644
-> > > --- a/target/riscv/cpu.h
-> > > +++ b/target/riscv/cpu.h
-> > > @@ -131,6 +131,8 @@ typedef struct PMUCTRState {
-> > >      /* Snapshort value of a counter in RV32 */
-> > >      target_ulong mhpmcounterh_prev;
-> > >      bool started;
-> > > +    /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
-> > > +    target_ulong irq_overflow_left;
-> > >  } PMUCTRState;
-> > >
-> > >  struct CPUArchState {
-> > > @@ -291,6 +293,9 @@ struct CPUArchState {
-> > >      /* PMU event selector configured values. First three are unused*/
-> > >      target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
-> > >
-> > > +    /* PMU event selector configured values for RV32*/
-> > > +    target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
-> > > +
-> > >      target_ulong sscratch;
-> > >      target_ulong mscratch;
-> > >
-> > > @@ -413,6 +418,7 @@ struct RISCVCPUConfig {
-> > >      bool ext_zhinxmin;
-> > >      bool ext_zve32f;
-> > >      bool ext_zve64f;
-> > > +    bool ext_sscofpmf;
-> > >
-> > >      /* Vendor-specific custom extensions */
-> > >      bool ext_XVentanaCondOps;
-> > > @@ -452,6 +458,12 @@ struct ArchCPU {
-> > >
-> > >      /* Configuration Settings */
-> > >      RISCVCPUConfig cfg;
-> > > +
-> > > +    QEMUTimer *pmu_timer;
-> > > +    /* A bitmask of Available programmable counters */
-> > > +    uint32_t pmu_avail_ctrs;
-> > > +    /* Mapping of events to counters */
-> > > +    GHashTable *pmu_event_ctr_map;
-> > >  };
-> > >
-> > >  static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
-> > > @@ -709,6 +721,19 @@ enum {
-> > >      CSR_TABLE_SIZE = 0x1000
-> > >  };
-> > >
-> > > +/**
-> > > + * The event id are encoded based on the encoding specified in the
-> > > + * SBI specification v0.3
-> > > + */
-> > > +
-> > > +enum riscv_pmu_event_idx {
-> > > +    RISCV_PMU_EVENT_HW_CPU_CYCLES = 0x01,
-> > > +    RISCV_PMU_EVENT_HW_INSTRUCTIONS = 0x02,
-> > > +    RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS = 0x10019,
-> > > +    RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS = 0x1001B,
-> > > +    RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS = 0x10021,
-> > > +};
-> > > +
-> > >  /* CSR function table */
-> > >  extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
-> > >
-> > > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> > > index 48b39e6d52a7..d0b53e5ea072 100644
-> > > --- a/target/riscv/cpu_bits.h
-> > > +++ b/target/riscv/cpu_bits.h
-> > > @@ -400,6 +400,37 @@
-> > >  #define CSR_MHPMEVENT29     0x33d
-> > >  #define CSR_MHPMEVENT30     0x33e
-> > >  #define CSR_MHPMEVENT31     0x33f
-> > > +
-> > > +#define CSR_MHPMEVENT3H     0x723
-> > > +#define CSR_MHPMEVENT4H     0x724
-> > > +#define CSR_MHPMEVENT5H     0x725
-> > > +#define CSR_MHPMEVENT6H     0x726
-> > > +#define CSR_MHPMEVENT7H     0x727
-> > > +#define CSR_MHPMEVENT8H     0x728
-> > > +#define CSR_MHPMEVENT9H     0x729
-> > > +#define CSR_MHPMEVENT10H    0x72a
-> > > +#define CSR_MHPMEVENT11H    0x72b
-> > > +#define CSR_MHPMEVENT12H    0x72c
-> > > +#define CSR_MHPMEVENT13H    0x72d
-> > > +#define CSR_MHPMEVENT14H    0x72e
-> > > +#define CSR_MHPMEVENT15H    0x72f
-> > > +#define CSR_MHPMEVENT16H    0x730
-> > > +#define CSR_MHPMEVENT17H    0x731
-> > > +#define CSR_MHPMEVENT18H    0x732
-> > > +#define CSR_MHPMEVENT19H    0x733
-> > > +#define CSR_MHPMEVENT20H    0x734
-> > > +#define CSR_MHPMEVENT21H    0x735
-> > > +#define CSR_MHPMEVENT22H    0x736
-> > > +#define CSR_MHPMEVENT23H    0x737
-> > > +#define CSR_MHPMEVENT24H    0x738
-> > > +#define CSR_MHPMEVENT25H    0x739
-> > > +#define CSR_MHPMEVENT26H    0x73a
-> > > +#define CSR_MHPMEVENT27H    0x73b
-> > > +#define CSR_MHPMEVENT28H    0x73c
-> > > +#define CSR_MHPMEVENT29H    0x73d
-> > > +#define CSR_MHPMEVENT30H    0x73e
-> > > +#define CSR_MHPMEVENT31H    0x73f
-> > > +
-> > >  #define CSR_MHPMCOUNTER3H   0xb83
-> > >  #define CSR_MHPMCOUNTER4H   0xb84
-> > >  #define CSR_MHPMCOUNTER5H   0xb85
-> > > @@ -461,6 +492,7 @@
-> > >  #define CSR_VSMTE           0x2c0
-> > >  #define CSR_VSPMMASK        0x2c1
-> > >  #define CSR_VSPMBASE        0x2c2
-> > > +#define CSR_SCOUNTOVF       0xda0
-> > >
-> > >  /* mstatus CSR bits */
-> > >  #define MSTATUS_UIE         0x00000001
-> > > @@ -635,6 +667,7 @@ typedef enum RISCVException {
-> > >  #define IRQ_VS_EXT                         10
-> > >  #define IRQ_M_EXT                          11
-> > >  #define IRQ_S_GEXT                         12
-> > > +#define IRQ_PMU_OVF                        13
-> > >  #define IRQ_LOCAL_MAX                      16
-> > >  #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
-> > >
-> > > @@ -652,11 +685,13 @@ typedef enum RISCVException {
-> > >  #define MIP_VSEIP                          (1 << IRQ_VS_EXT)
-> > >  #define MIP_MEIP                           (1 << IRQ_M_EXT)
-> > >  #define MIP_SGEIP                          (1 << IRQ_S_GEXT)
-> > > +#define MIP_LCOFIP                         (1 << IRQ_PMU_OVF)
-> > >
-> > >  /* sip masks */
-> > >  #define SIP_SSIP                           MIP_SSIP
-> > >  #define SIP_STIP                           MIP_STIP
-> > >  #define SIP_SEIP                           MIP_SEIP
-> > > +#define SIP_LCOFIP                         MIP_LCOFIP
-> > >
-> > >  /* MIE masks */
-> > >  #define MIE_SEIE                           (1 << IRQ_S_EXT)
-> > > @@ -804,4 +839,24 @@ typedef enum RISCVException {
-> > >  #define HVICTL_VALID_MASK                  \
-> > >      (HVICTL_VTI | HVICTL_IID | HVICTL_IPRIOM | HVICTL_IPRIO)
-> > >
-> > > +/* PMU related bits */
-> > > +#define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
-> > > +
-> > > +#define MHPMEVENT_BIT_OF                   BIT_ULL(63)
-> > > +#define MHPMEVENTH_BIT_OF                  BIT(31)
-> > > +#define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
-> > > +#define MHPMEVENTH_BIT_MINH                BIT(30)
-> > > +#define MHPMEVENT_BIT_SINH                 BIT_ULL(61)
-> > > +#define MHPMEVENTH_BIT_SINH                BIT(29)
-> > > +#define MHPMEVENT_BIT_UINH                 BIT_ULL(60)
-> > > +#define MHPMEVENTH_BIT_UINH                BIT(28)
-> > > +#define MHPMEVENT_BIT_VSINH                BIT_ULL(59)
-> > > +#define MHPMEVENTH_BIT_VSINH               BIT(27)
-> > > +#define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
-> > > +#define MHPMEVENTH_BIT_VUINH               BIT(26)
-> > > +
-> > > +#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
-> > > +#define MHPMEVENT_IDX_MASK                 0xFFFFF
-> > > +#define MHPMEVENT_SSCOF_RESVD              16
-> > > +
-> > >  #endif
-> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > > index 04796b99d0fe..519d6377fd9f 100644
-> > > --- a/target/riscv/csr.c
-> > > +++ b/target/riscv/csr.c
-> > > @@ -72,7 +72,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >      CPUState *cs = env_cpu(env);
-> > >      RISCVCPU *cpu = RISCV_CPU(cs);
-> > >      int ctr_index;
-> > > -    int base_csrno = CSR_HPMCOUNTER3;
-> > > +    int base_csrno = CSR_CYCLE;
-> > >      bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
-> > >
-> > >      if (rv32 && csrno >= CSR_CYCLEH) {
-> > > @@ -81,11 +81,18 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >      }
-> > >      ctr_index = csrno - base_csrno;
-> > >
-> > > -    if (!cpu->cfg.pmu_num || ctr_index >= (cpu->cfg.pmu_num)) {
-> > > +    if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-> > > +        (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
-> > > +        goto skip_ext_pmu_check;
-> > > +    }
-> > > +
-> > > +    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
-> > >          /* No counter is enabled in PMU or the counter is out of range */
-> > >          return RISCV_EXCP_ILLEGAL_INST;
-> > >      }
-> > >
-> > > +skip_ext_pmu_check:
-> > > +
-> > >      if (env->priv == PRV_S) {
-> > >          switch (csrno) {
-> > >          case CSR_CYCLE:
-> > > @@ -104,7 +111,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >              }
-> > >              break;
-> > >          case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> > > -            ctr_index = csrno - CSR_CYCLE;
-> > >              if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> > >                  return RISCV_EXCP_ILLEGAL_INST;
-> > >              }
-> > > @@ -128,7 +134,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >                  }
-> > >                  break;
-> > >              case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> > > -                ctr_index = csrno - CSR_CYCLEH;
-> > >                  if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> > >                      return RISCV_EXCP_ILLEGAL_INST;
-> > >                  }
-> > > @@ -158,7 +163,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >              }
-> > >              break;
-> > >          case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> > > -            ctr_index = csrno - CSR_CYCLE;
-> > >              if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> > >                   get_field(env->mcounteren, 1 << ctr_index)) {
-> > >                  return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > > @@ -186,7 +190,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
-> > >                  }
-> > >                  break;
-> > >              case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> > > -                ctr_index = csrno - CSR_CYCLEH;
-> > >                  if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> > >                       get_field(env->mcounteren, 1 << ctr_index)) {
-> > >                      return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > > @@ -238,6 +241,18 @@ static RISCVException mctr32(CPURISCVState *env, int csrno)
-> > >      return mctr(env, csrno);
-> > >  }
-> > >
-> > > +static RISCVException sscofpmf(CPURISCVState *env, int csrno)
-> > > +{
-> > > +    CPUState *cs = env_cpu(env);
-> > > +    RISCVCPU *cpu = RISCV_CPU(cs);
-> > > +
-> > > +    if (!cpu->cfg.ext_sscofpmf) {
-> > > +        return RISCV_EXCP_ILLEGAL_INST;
-> > > +    }
-> > > +
-> > > +    return RISCV_EXCP_NONE;
-> > > +}
-> > > +
-> > >  static RISCVException any(CPURISCVState *env, int csrno)
-> > >  {
-> > >      return RISCV_EXCP_NONE;
-> > > @@ -622,11 +637,36 @@ static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
-> > >  {
-> > >      int evt_index = csrno - CSR_MCOUNTINHIBIT;
-> > >
-> > > +    if (riscv_cpu_mxl(env) != MXL_RV32) {
-> >
-> > Is this right? What if the guest writes the high bytes first?
-> >
->
-> Most of the current software is implemented with lower bytes first.
-> But I understand your concern
-> that it doesn't provide any guarantee. We probably can have another
-> field that can track the order of the updates.
-> riscv_pmu_update_event_map will be only called when both lower/upper
-> half is complete.
+   - share it between target/arm and target/riscv
 
-Why can't you just update it on every write? Guest software should be
-setting the high bits to 0xFFFF_FFFF first to avoid any issues
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ crypto/meson.build         |  1 +
+ crypto/sm4.c               | 49 ++++++++++++++++++++++++++++++++++++++
+ include/crypto/sm4.h       |  6 +++++
+ target/arm/crypto_helper.c | 36 +---------------------------
+ 4 files changed, 57 insertions(+), 35 deletions(-)
+ create mode 100644 crypto/sm4.c
+ create mode 100644 include/crypto/sm4.h
 
-Alistair
+diff --git a/crypto/meson.build b/crypto/meson.build
+index 19c44bea89..b47352180f 100644
+--- a/crypto/meson.build
++++ b/crypto/meson.build
+@@ -40,6 +40,7 @@ if have_afalg
+ endif
+ crypto_ss.add(when: gnutls, if_true: files('tls-cipher-suites.c'))
+ 
++util_ss.add(files('sm4.c'))
+ util_ss.add(files('aes.c'))
+ util_ss.add(files('init.c'))
+ if gnutls.found()
+diff --git a/crypto/sm4.c b/crypto/sm4.c
+new file mode 100644
+index 0000000000..9f0cd452c7
+--- /dev/null
++++ b/crypto/sm4.c
+@@ -0,0 +1,49 @@
++/*
++ * QEMU crypto sm4 support
++ *
++ * Copyright (C) 2013 - 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Lesser General Public
++ * License as published by the Free Software Foundation; either
++ * version 2.1 of the License, or (at your option) any later version.
++ */
++
++#include "qemu/osdep.h"
++#include "crypto/sm4.h"
++
++uint8_t const sm4_sbox[] = {
++    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
++    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
++    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
++    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
++    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
++    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
++    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
++    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
++    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
++    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
++    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
++    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
++    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
++    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
++    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
++    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
++    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
++    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
++    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
++    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
++    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
++    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
++    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
++    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
++    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
++    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
++    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
++    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
++    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
++    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
++    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
++    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
++};
++
+diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
+new file mode 100644
+index 0000000000..9bd3ebc62e
+--- /dev/null
++++ b/include/crypto/sm4.h
+@@ -0,0 +1,6 @@
++#ifndef QEMU_SM4_H
++#define QEMU_SM4_H
++
++extern const uint8_t sm4_sbox[256];
++
++#endif
+diff --git a/target/arm/crypto_helper.c b/target/arm/crypto_helper.c
+index 28a84c2dbd..390020672a 100644
+--- a/target/arm/crypto_helper.c
++++ b/target/arm/crypto_helper.c
+@@ -15,6 +15,7 @@
+ #include "exec/helper-proto.h"
+ #include "tcg/tcg-gvec-desc.h"
+ #include "crypto/aes.h"
++#include "crypto/sm4.h"
+ #include "vec_internal.h"
+ 
+ union CRYPTO_STATE {
+@@ -694,41 +695,6 @@ DO_SM3TT(crypto_sm3tt2b, 3)
+ 
+ #undef DO_SM3TT
+ 
+-static uint8_t const sm4_sbox[] = {
+-    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
+-    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
+-    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
+-    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
+-    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
+-    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
+-    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
+-    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
+-    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
+-    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
+-    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
+-    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
+-    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
+-    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
+-    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
+-    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
+-    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
+-    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
+-    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
+-    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
+-    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
+-    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
+-    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
+-    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
+-    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
+-    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
+-    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
+-    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
+-    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
+-    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
+-    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
+-    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
+-};
+-
+ static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+ {
+     union CRYPTO_STATE d = { .l = { rn[0], rn[1] } };
+-- 
+2.17.1
 
->
->
-> > Alistair
 
