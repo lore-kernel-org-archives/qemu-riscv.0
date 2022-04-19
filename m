@@ -1,62 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ngjtS-00065N-DQ
-	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 05:11:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37118)
+	id 1ngmYv-0003Lr-55
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Apr 2022 08:02:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45916)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1ngjtP-0005tx-Nf; Tue, 19 Apr 2022 05:11:27 -0400
-Received: from beetle.greensocs.com ([5.135.226.135]:42110)
+ (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
+ id 1ngmYs-0003L6-P8; Tue, 19 Apr 2022 08:02:26 -0400
+Received: from atcsqr.andestech.com ([60.248.187.195]:40256)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <damien.hedde@greensocs.com>)
- id 1ngjtN-0008VD-Gy; Tue, 19 Apr 2022 05:11:27 -0400
-Received: from [192.168.13.13] (unknown [195.68.53.70])
- by beetle.greensocs.com (Postfix) with ESMTPSA id 9BF182077D;
- Tue, 19 Apr 2022 09:11:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
- s=mail; t=1650359478;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ST+lmAisDHRsCUDH1ysmZh88/xICcO+12Uu5E/D4wkQ=;
- b=Ds7q8B9+ecNGd5U9Ywk9QiF7mQeocVOq5uxdc3Op4esudzRf3LqHNJw8IzhjQ69XaRYyp2
- 7H02xulzm6oBb76f09cwnMRYqBq+jssl5uoIuhwDDnFPH8XAQ4qB3xNhyroSfawTDK3A99
- 4VpG+qaemphypzkG1PXW80D2BN1QhDg=
-Message-ID: <ad7c2dc1-9b4b-cd60-840b-075634272e5f@greensocs.com>
-Date: Tue, 19 Apr 2022 11:11:16 +0200
+ (Exim 4.90_1) (envelope-from <dylan@andestech.com>)
+ id 1ngmYp-0002J5-Bz; Tue, 19 Apr 2022 08:02:25 -0400
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 23JC26CV019232;
+ Tue, 19 Apr 2022 20:02:06 +0800 (+08)
+ (envelope-from dylan@andestech.com)
+Received: from atctrx.andestech.com (10.0.12.164) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Tue, 19 Apr 2022
+ 20:02:02 +0800
+From: Dylan Jhong <dylan@andestech.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <bin.meng@windriver.com>,
+ <alistair.francis@wdc.com>, <palmer@dabbelt.com>
+CC: <alankao@andestech.com>, <locus84@andestech.com>, <x5710999x@gmail.com>,
+ Dylan Jhong <dylan@andestech.com>
+Subject: [PATCH] hw/riscv: boot: Support 64bit fdt address.
+Date: Tue, 19 Apr 2022 19:59:45 +0800
+Message-ID: <20220419115945.37945-1-dylan@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [RFC PATCH 02/18] hw/cpu/cpus: introduce _cpus_ device
-Content-Language: en-US-large
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <philippe.mathieu.daude@gmail.com>, qemu-devel@nongnu.org
-Cc: mark.burton@greensocs.com, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <f4bug@amsat.org>, Peter Maydell <peter.maydell@linaro.org>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bin.meng@windriver.com>, Vijai Kumar K <vijai@behindbytes.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org
-References: <20220330125639.201937-1-damien.hedde@greensocs.com>
- <20220330125639.201937-3-damien.hedde@greensocs.com>
- <2ded9132-c2b5-c428-6554-98c71b50e8bb@gmail.com>
-From: Damien Hedde <damien.hedde@greensocs.com>
-In-Reply-To: <2ded9132-c2b5-c428-6554-98c71b50e8bb@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=5.135.226.135;
- envelope-from=damien.hedde@greensocs.com; helo=beetle.greensocs.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Type: text/plain
+X-Originating-IP: [10.0.12.164]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 23JC26CV019232
+Received-SPF: pass client-ip=60.248.187.195; envelope-from=dylan@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,81 +50,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2022 09:11:28 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 12:02:27 -0000
 
+The current riscv_load_fdt() forces fdt_load_addr to be placed at a dram address within 3GB,
+but not all platforms have dram_base within 3GB.
 
+This patch adds an exception for dram base not within 3GB,
+which will place fdt at dram_end align 16MB.
 
-On 4/16/22 19:52, Philippe Mathieu-Daudé wrote:
-> On 30/3/22 14:56, Damien Hedde wrote:
->> This object will be a _cpu-cluster_ generalization and
->> is meant to allow create cpus of the same type.
->>
->> The main goal is that this object, on contrary to _cpu-cluster-_,
->> can be used to dynamically create cpus: it does not rely on
->> external code to populate the object with cpus.
->>
->> Allowing the user to create a cpu cluster and each _cpu_
->> separately would be hard because of the following reasons:
->> + cpu reset need to be handled
->> + instantiation and realize of cpu-cluster and the cpus
->>    are interleaved
->> + cpu cluster must contains only identical cpus and it seems
->>    difficult to check that at runtime.
->> Therefore we add a new type solving all this constraints.
->>
->> _cpu-cluster_ will be updated to inherit from this class
->> in following commits.
->>
->> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
->> ---
->>   include/hw/cpu/cpus.h |  71 +++++++++++++++++++++++
->>   hw/cpu/cpus.c         | 127 ++++++++++++++++++++++++++++++++++++++++++
->>   hw/cpu/meson.build    |   2 +-
->>   3 files changed, 199 insertions(+), 1 deletion(-)
->>   create mode 100644 include/hw/cpu/cpus.h
->>   create mode 100644 hw/cpu/cpus.c
->>
->> diff --git a/include/hw/cpu/cpus.h b/include/hw/cpu/cpus.h
->> new file mode 100644
->> index 0000000000..c65f568ef8
->> --- /dev/null
->> +++ b/include/hw/cpu/cpus.h
->> @@ -0,0 +1,71 @@
->> +/*
->> + * QEMU CPUs type
->> + *
->> + * Copyright (c) 2022 GreenSocs
->> + *
->> + * SPDX-License-Identifier: GPL-2.0-or-later
->> + */
->> +
->> +#ifndef HW_CPU_CPUS_H
->> +#define HW_CPU_CPUS_H
->> +
->> +#include "qemu/typedefs.h"
->> +#include "hw/qdev-core.h"
->> +#include "qom/object.h"
->> +
->> +/*
->> + * This object represent several CPUs which are all identical.
-> 
-> Typo "represents".
-> 
->> + *
->> + * If CPUs are not identical (for example, Cortex-A53 and Cortex-A57 
->> CPUs in an
->> + * Arm big.LITTLE system) they should be in different groups. If the 
->> CPUs do
->> + * not have the same view of memory (for example the main CPU and a 
->> management
->> + * controller processor) they should be in different groups.
-> 
-> This description calls for a clearer CpusGroupState name instead
-> of CpusState (which confuses me with CPUState). Alternatively
-> CpusArrayState.
+riscv_setup_rom_reset_vec() also needs to be modified
 
-Your are right, I'll add the "group" suffix.
+Signed-off-by: Dylan Jhong <dylan@andestech.com>
+---
+ hw/riscv/boot.c         | 12 +++++++-----
+ include/hw/riscv/boot.h |  4 ++--
+ 2 files changed, 9 insertions(+), 7 deletions(-)
 
-Thanks,
-Damien
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 519fa455a1..852aa92bbe 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -203,9 +203,9 @@ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+     return *start + size;
+ }
+ 
+-uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
++uint64_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+ {
+-    uint32_t temp, fdt_addr;
++    uint64_t temp, fdt_addr;
+     hwaddr dram_end = dram_base + mem_size;
+     int ret, fdtsize = fdt_totalsize(fdt);
+ 
+@@ -220,7 +220,7 @@ uint32_t riscv_load_fdt(hwaddr dram_base, uint64_t mem_size, void *fdt)
+      * Thus, put it at an 16MB aligned address that less than fdt size from the
+      * end of dram or 3GB whichever is lesser.
+      */
+-    temp = MIN(dram_end, 3072 * MiB);
++    temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+     fdt_addr = QEMU_ALIGN_DOWN(temp - fdtsize, 16 * MiB);
+ 
+     ret = fdt_pack(fdt);
+@@ -276,13 +276,15 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+                                hwaddr start_addr,
+                                hwaddr rom_base, hwaddr rom_size,
+                                uint64_t kernel_entry,
+-                               uint32_t fdt_load_addr, void *fdt)
++                               uint64_t fdt_load_addr, void *fdt)
+ {
+     int i;
+     uint32_t start_addr_hi32 = 0x00000000;
++    uint32_t fdt_load_addr_hi32 = 0x00000000;
+ 
+     if (!riscv_is_32bit(harts)) {
+         start_addr_hi32 = start_addr >> 32;
++        fdt_load_addr_hi32 = fdt_load_addr >> 32;
+     }
+     /* reset vector */
+     uint32_t reset_vec[10] = {
+@@ -295,7 +297,7 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+         start_addr,                  /* start: .dword */
+         start_addr_hi32,
+         fdt_load_addr,               /* fdt_laddr: .dword */
+-        0x00000000,
++        fdt_load_addr_hi32,
+                                      /* fw_dyn: */
+     };
+     if (riscv_is_32bit(harts)) {
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index baff11dd8a..346441e369 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -48,12 +48,12 @@ target_ulong riscv_load_kernel(const char *kernel_filename,
+                                symbol_fn_t sym_cb);
+ hwaddr riscv_load_initrd(const char *filename, uint64_t mem_size,
+                          uint64_t kernel_entry, hwaddr *start);
+-uint32_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
++uint64_t riscv_load_fdt(hwaddr dram_start, uint64_t dram_size, void *fdt);
+ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+                                hwaddr saddr,
+                                hwaddr rom_base, hwaddr rom_size,
+                                uint64_t kernel_entry,
+-                               uint32_t fdt_load_addr, void *fdt);
++                               uint64_t fdt_load_addr, void *fdt);
+ void riscv_rom_copy_firmware_info(MachineState *machine, hwaddr rom_base,
+                                   hwaddr rom_size,
+                                   uint32_t reset_vec_size,
+-- 
+2.34.1
+
 
