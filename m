@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ngczo-0000B8-25
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Apr 2022 21:49:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53764)
+	id 1ngczy-0000ds-A7
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Apr 2022 21:49:46 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53832)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ngczd-0008DK-Tn; Mon, 18 Apr 2022 21:49:28 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:51838 helo=cstnet.cn)
+ id 1ngczt-0000X9-0M; Mon, 18 Apr 2022 21:49:41 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:51962 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ngczZ-0003JO-Ow; Mon, 18 Apr 2022 21:49:25 -0400
+ id 1ngczq-0003LA-Qr; Mon, 18 Apr 2022 21:49:40 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowACnr0sPFV5iXeUSAw--.34873S3;
- Tue, 19 Apr 2022 09:49:07 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowACnr0sPFV5iXeUSAw--.34873S11;
+ Tue, 19 Apr 2022 09:49:12 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v11 01/14] target/riscv: rvk: add cfg properties for zbk* and
- zk*
-Date: Tue, 19 Apr 2022 09:48:34 +0800
-Message-Id: <20220419014847.9722-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH v11 09/14] target/riscv: rvk: add support for sha512 related
+ instructions for RV32 in zknh extension
+Date: Tue, 19 Apr 2022 09:48:42 +0800
+Message-Id: <20220419014847.9722-10-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
 References: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowACnr0sPFV5iXeUSAw--.34873S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4rXr1DGw1rWr48WFg_yoW8Ar43pr
- WUGa1YyryDXF9rCw4fJFyjgF1rWwn3Ca4Iga9Fvrn3GrWxtrW3JF1qkw1UuF4Yga1rXFy3
- WF1qkFyjkF47Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUP014x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
- ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
- M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
- v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
- IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
- wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
- 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
- xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
- 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUjeWlDUU
- UUU==
+X-CM-TRANSID: rQCowACnr0sPFV5iXeUSAw--.34873S11
+X-Coremail-Antispam: 1UD129KBjvJXoWxXF45AF1rurWkAFyxGrW8Crg_yoWrKF43pF
+ 18K34UWF4kJFyrAay3tw15ZF43uFs7C3yjq3sxtwn5CFW5Ja1kG345C34a9rsxKF9FvFy5
+ AFWkCa45trWft3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4U
+ JVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx
+ 0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWU
+ JVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxV
+ A2Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAq
+ x4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r
+ 43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF
+ 7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14
+ v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuY
+ vjfUOBTYUUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,75 +64,142 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Apr 2022 01:49:28 -0000
+X-List-Received-Date: Tue, 19 Apr 2022 01:49:41 -0000
 
+ - add sha512sum0r, sha512sig0l, sha512sum1r, sha512sig1l, sha512sig0h and sha512sig1h instructions
+
+Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 23 +++++++++++++++++++++++
- target/riscv/cpu.h | 13 +++++++++++++
- 2 files changed, 36 insertions(+)
+ target/riscv/insn32.decode              |   6 ++
+ target/riscv/insn_trans/trans_rvk.c.inc | 100 ++++++++++++++++++++++++
+ 2 files changed, 106 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index faa41217d2..365bdd5fe5 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -611,6 +611,29 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             cpu->cfg.ext_zfinx = true;
-         }
- 
-+        if (cpu->cfg.ext_zk) {
-+            cpu->cfg.ext_zkn = true;
-+            cpu->cfg.ext_zkr = true;
-+            cpu->cfg.ext_zkt = true;
-+        }
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index db28ecdd2b..02a0c71890 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -862,3 +862,9 @@ sha256sig0  00 01000 00010 ..... 001 ..... 0010011 @r2
+ sha256sig1  00 01000 00011 ..... 001 ..... 0010011 @r2
+ sha256sum0  00 01000 00000 ..... 001 ..... 0010011 @r2
+ sha256sum1  00 01000 00001 ..... 001 ..... 0010011 @r2
++sha512sum0r 01 01000 ..... ..... 000 ..... 0110011 @r
++sha512sum1r 01 01001 ..... ..... 000 ..... 0110011 @r
++sha512sig0l 01 01010 ..... ..... 000 ..... 0110011 @r
++sha512sig0h 01 01110 ..... ..... 000 ..... 0110011 @r
++sha512sig1l 01 01011 ..... ..... 000 ..... 0110011 @r
++sha512sig1h 01 01111 ..... ..... 000 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
+index 531e2c7cb3..9ed057a153 100644
+--- a/target/riscv/insn_trans/trans_rvk.c.inc
++++ b/target/riscv/insn_trans/trans_rvk.c.inc
+@@ -178,3 +178,103 @@ static bool trans_sha256sum1(DisasContext *ctx, arg_sha256sum1 *a)
+     REQUIRE_ZKNH(ctx);
+     return gen_sha256(ctx, a, EXT_NONE, tcg_gen_rotri_i32, 6, 11, 25);
+ }
 +
-+        if (cpu->cfg.ext_zkn) {
-+            cpu->cfg.ext_zbkb = true;
-+            cpu->cfg.ext_zbkc = true;
-+            cpu->cfg.ext_zbkx = true;
-+            cpu->cfg.ext_zkne = true;
-+            cpu->cfg.ext_zknd = true;
-+            cpu->cfg.ext_zknh = true;
-+        }
++static bool gen_sha512_rv32(DisasContext *ctx, arg_r *a, DisasExtend ext,
++                            void (*func1)(TCGv_i64, TCGv_i64, int64_t),
++                            void (*func2)(TCGv_i64, TCGv_i64, int64_t),
++                            int64_t num1, int64_t num2, int64_t num3)
++{
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, ext);
++    TCGv src2 = get_gpr(ctx, a->rs2, ext);
++    TCGv_i64 t0 = tcg_temp_new_i64();
++    TCGv_i64 t1 = tcg_temp_new_i64();
++    TCGv_i64 t2 = tcg_temp_new_i64();
 +
-+        if (cpu->cfg.ext_zks) {
-+            cpu->cfg.ext_zbkb = true;
-+            cpu->cfg.ext_zbkc = true;
-+            cpu->cfg.ext_zbkx = true;
-+            cpu->cfg.ext_zksed = true;
-+            cpu->cfg.ext_zksh = true;
-+        }
++    tcg_gen_concat_tl_i64(t0, src1, src2);
++    func1(t1, t0, num1);
++    func2(t2, t0, num2);
++    tcg_gen_xor_i64(t1, t1, t2);
++    tcg_gen_rotri_i64(t2, t0, num3);
++    tcg_gen_xor_i64(t1, t1, t2);
++    tcg_gen_trunc_i64_tl(dest, t1);
 +
-         /* Set the ISA extensions, checks should have happened above */
-         if (cpu->cfg.ext_i) {
-             ext |= RVI;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index dd26b128a0..3064cb975e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -384,7 +384,20 @@ struct RISCVCPUConfig {
-     bool ext_zba;
-     bool ext_zbb;
-     bool ext_zbc;
-+    bool ext_zbkb;
-+    bool ext_zbkc;
-+    bool ext_zbkx;
-     bool ext_zbs;
-+    bool ext_zk;
-+    bool ext_zkn;
-+    bool ext_zknd;
-+    bool ext_zkne;
-+    bool ext_zknh;
-+    bool ext_zkr;
-+    bool ext_zks;
-+    bool ext_zksed;
-+    bool ext_zksh;
-+    bool ext_zkt;
-     bool ext_counters;
-     bool ext_ifencei;
-     bool ext_icsr;
++    gen_set_gpr(ctx, a->rd, dest);
++    tcg_temp_free_i64(t0);
++    tcg_temp_free_i64(t1);
++    tcg_temp_free_i64(t2);
++    return true;
++}
++
++static bool trans_sha512sum0r(DisasContext *ctx, arg_sha512sum0r *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
++                           tcg_gen_rotli_i64, 25, 30, 28);
++}
++
++static bool trans_sha512sum1r(DisasContext *ctx, arg_sha512sum1r *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
++                           tcg_gen_rotri_i64, 23, 14, 18);
++}
++
++static bool trans_sha512sig0l(DisasContext *ctx, arg_sha512sig0l *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotri_i64,
++                           tcg_gen_rotri_i64, 1, 7, 8);
++}
++
++static bool trans_sha512sig1l(DisasContext *ctx, arg_sha512sig1l *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64,
++                           tcg_gen_rotri_i64, 3, 6, 19);
++}
++
++static bool gen_sha512h_rv32(DisasContext *ctx, arg_r *a, DisasExtend ext,
++                             void (*func)(TCGv_i64, TCGv_i64, int64_t),
++                             int64_t num1, int64_t num2, int64_t num3)
++{
++    TCGv dest = dest_gpr(ctx, a->rd);
++    TCGv src1 = get_gpr(ctx, a->rs1, ext);
++    TCGv src2 = get_gpr(ctx, a->rs2, ext);
++    TCGv_i64 t0 = tcg_temp_new_i64();
++    TCGv_i64 t1 = tcg_temp_new_i64();
++    TCGv_i64 t2 = tcg_temp_new_i64();
++
++    tcg_gen_concat_tl_i64(t0, src1, src2);
++    func(t1, t0, num1);
++    tcg_gen_ext32u_i64(t2, t0);
++    tcg_gen_shri_i64(t2, t2, num2);
++    tcg_gen_xor_i64(t1, t1, t2);
++    tcg_gen_rotri_i64(t2, t0, num3);
++    tcg_gen_xor_i64(t1, t1, t2);
++    tcg_gen_trunc_i64_tl(dest, t1);
++
++    gen_set_gpr(ctx, a->rd, dest);
++    tcg_temp_free_i64(t0);
++    tcg_temp_free_i64(t1);
++    tcg_temp_free_i64(t2);
++    return true;
++}
++
++static bool trans_sha512sig0h(DisasContext *ctx, arg_sha512sig0h *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 1, 7, 8);
++}
++
++static bool trans_sha512sig1h(DisasContext *ctx, arg_sha512sig1h *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZKNH(ctx);
++    return gen_sha512h_rv32(ctx, a, EXT_NONE, tcg_gen_rotli_i64, 3, 6, 19);
++}
 -- 
 2.17.1
 
