@@ -1,70 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nh5le-0003uM-0F
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 04:32:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37076)
+	id 1nh70a-0001vm-CK
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 05:52:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51508)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nh5lb-0003q1-CA
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:32:51 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:41789)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1nh70Y-0001sj-6E; Wed, 20 Apr 2022 05:52:22 -0400
+Received: from mail-yb1-xb33.google.com ([2607:f8b0:4864:20::b33]:46025)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nh5lX-00059W-T4
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:32:49 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id c6so1299361edn.8
- for <qemu-riscv@nongnu.org>; Wed, 20 Apr 2022 01:32:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1nh70W-0000JH-JS; Wed, 20 Apr 2022 05:52:21 -0400
+Received: by mail-yb1-xb33.google.com with SMTP id s33so1837721ybi.12;
+ Wed, 20 Apr 2022 02:52:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1fKNXUXZRz/PYoNpYo2VE3nal8s20zk/bcSjxI36JEw=;
- b=U7cRKvLIBJuaeE3WtrRXneONDxdugTvNcLVsVHzmGPIpKk+Lffg4W3hsYCvY+vT2dP
- /HYcnrrtTYwyzScrUn1cCOK7CtskMSkGUIdKegimFLb7GktgZrXnQfWBTb2o3TsYTdtV
- 0zQrzJDg+JrNDnTx4Qt4xegNW+f6+PAEze19v34XxNrWV0QmaqeM5giC9guC0QLyaKQf
- fL6ziZJA8BRR5AoIiFpTBKA5eSP+4usgY11QNtT/VafIGGFPL7hE2XVtnlhhudM50Fin
- UbSrUmanluEdyCqroo0ENzOVa9JHbtk5+DPwQu/ieBa3YLglNp9qBW8Fgh2YJyXzGQKO
- GiuA==
+ :cc:content-transfer-encoding;
+ bh=iBK2bOUxv5gHrSa+JvDoseXoWah8GcHSYbLTQK8S7Lk=;
+ b=gy0FZCiZQ7aqJGQAqi5L+U9KBnzh1vAzDQSMEPYHX50HbKe8SYQSU0+txE6lnRpXHg
+ jr/pVGRanFKIy/UIuLXljfnoZbi7su0MQLcmw21ugVgbOQPJaLrPQw0xrzV8+70LxBjC
+ RGYzs11KaJeDDDkRFj37xwCTovPtSTaVAaAh9NX6i/zH3fVGutUBVqi+NGovggB1rAqL
+ UnNRSDubnet+QEbzSZj7G5vvyFmRTxi5u2Tdtw2I6wDpEbgPTNxUpQTFIAtk0ocoffj0
+ uYUmtWMqKjCAZfghp0uv2k9uJq8x/m3plaWEz+jNoAl24Pa7KSQN13kJpBExyCckfYLm
+ x47w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1fKNXUXZRz/PYoNpYo2VE3nal8s20zk/bcSjxI36JEw=;
- b=OHkWByFAlvT28W9J9U77yACz7ET/a1+HRj0Svs6mPOhCi09jN5Yox69/bAfTw+AZaz
- zfU+97NZdb2jf3pb+Bl95m9+qvnzWS/2ZarclY7Wmw96asxJTXiHa3ezgb+ElGOkJZ/g
- AEkaHjVfPoJhPGZOx2txbtYyCHCfiLWkaf1fhQD+LEj4EDt5ntBthM/vhbNmZkbJo6y/
- t8w2aW7/4WJORVC0/D1z5FzdN3B2kb63uh2+LIov5pR/gJQAJSfgy+pe5moNGcGkJ7Y5
- bbJFkmy59TpuWOORgJIUG9yx0fFVPceaDInH9SGAARot0NKFig+DVJ6x9VN1ZQq52Pya
- fdAQ==
-X-Gm-Message-State: AOAM531rKNHsK2vwJYZQ2fLU6Jr8Eh+lEJxCbZCi0kA7mwEmUVuAIwVK
- r3NQkCtBfIst/4mpkFBjOM/djpabW9elJ4CZ0XGdgA==
-X-Google-Smtp-Source: ABdhPJx+S2sBB7UrWtwYCuugcwgs8lYpb1/YWVkuKrLmpYj44b7bTbPyYRIjcnMlCDW9ip3nhIPj2nOoaht75ctUKTw=
-X-Received: by 2002:a05:6402:2747:b0:423:88ab:178f with SMTP id
- z7-20020a056402274700b0042388ab178fmr21708529edd.163.1650443566283; Wed, 20
- Apr 2022 01:32:46 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=iBK2bOUxv5gHrSa+JvDoseXoWah8GcHSYbLTQK8S7Lk=;
+ b=2q0K0l038F6vlphIQIE2Mx40ryQUexEzLXfBhh12vsuxzPSx6Sx/GwH9fo6549EbvQ
+ RvjcHkUPPsUIRfI8bhbfwsz9a2r0AqdYAHye6X0V4z74+xDcUQOCvGpTEd55GXAaKQFP
+ jOPndC4twG/SwRRiKkEsgZfx8dNINgxKvsbYoEY1MxWbuXQTh3u+wFdhwXIDVbXyMZN1
+ oeXaZA71Zx6DXKagahtz0Q3p/0509OCTwhzIlC8b6M+KbGWMU6VYyPTZ0nqvSoIDccc0
+ pI+D8lXFDTv9DWsSaGmUn27nIfu1Y+Ryv2AQUD6HsbeLVyl1PSbhsbuSrIWEZanj3xot
+ w/+A==
+X-Gm-Message-State: AOAM5309NDAZWf6nTSrVyDiabBL/6XxDX3qZimvLsoiwiAjCnPJdUcQ0
+ KVKGT8gUhNePTcsrgFaoP5LP1VTk51MwACJr6fo=
+X-Google-Smtp-Source: ABdhPJxgF6IPPm2zd5IIiW4RUXexBET3rah7VgIgdKkLJ1KesZPqVJF1OlTp7h1XJEWicSke3aZaRWon4HIjIrP+Qdg=
+X-Received: by 2002:a05:6902:1503:b0:644:c443:887f with SMTP id
+ q3-20020a056902150300b00644c443887fmr18664384ybu.104.1650448339280; Wed, 20
+ Apr 2022 02:52:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220415093727.15323-1-frank.chang@sifive.com>
- <CAKmqyKP=kgiH05o_h1FS=acz_fsU9QkvAQ-yHa05knrnh9H-Jg@mail.gmail.com>
- <CAK9=C2UF4mR17a2---02==MaSZJLCS1Fnryd2yg_u45T9rm4mg@mail.gmail.com>
- <CAE_xrPiK6uigny61dFOFcUiNN8w3ohOba0Vo26NSyQjOb30PSg@mail.gmail.com>
-In-Reply-To: <CAE_xrPiK6uigny61dFOFcUiNN8w3ohOba0Vo26NSyQjOb30PSg@mail.gmail.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 20 Apr 2022 16:32:35 +0800
-Message-ID: <CAE_xrPgo2MU4WnbQU27TwYFA6Pawn14Nyp0i8=FvFiG1wiH-xg@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Support configuarable marchid, mvendorid,
- mipid CSR values
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Alistair Francis <alistair23@gmail.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, 
+References: <20220315065529.62198-1-bmeng.cn@gmail.com>
+ <20220315065529.62198-3-bmeng.cn@gmail.com>
+ <CAKmqyKMoRqbfSsUNM1O1cQGHaL9rc6fsCqJxEktQNrgrLCimgA@mail.gmail.com>
+ <CAEUhbmX0SdEcD8UWJUmmPm2SubT6gd991jNMAZJA8WFbRsdoaQ@mail.gmail.com>
+In-Reply-To: <CAEUhbmX0SdEcD8UWJUmmPm2SubT6gd991jNMAZJA8WFbRsdoaQ@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 20 Apr 2022 17:52:07 +0800
+Message-ID: <CAEUhbmVrUMS638bbA+pnoHgeQdRc9KkBGb21wXD+2A8=RHbqwA@mail.gmail.com>
+Subject: Re: [PATCH v4 2/7] target/riscv: machine: Add debug state description
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Jim Shu <jim.shu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Content-Type: multipart/alternative; boundary="0000000000007d935c05dd11d67a"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=frank.chang@sifive.com; helo=mail-ed1-x52d.google.com
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b33;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -79,383 +76,80 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2022 08:32:52 -0000
+X-List-Received-Date: Wed, 20 Apr 2022 09:52:22 -0000
 
---0000000000007d935c05dd11d67a
-Content-Type: text/plain; charset="UTF-8"
+Hi Alistair,
 
-On Tue, Apr 19, 2022 at 2:00 PM Frank Chang <frank.chang@sifive.com> wrote:
+On Wed, Apr 20, 2022 at 3:33 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Wed, Apr 20, 2022 at 3:31 PM Alistair Francis <alistair23@gmail.com> w=
+rote:
+> >
+> > On Tue, Mar 15, 2022 at 5:17 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > From: Bin Meng <bin.meng@windriver.com>
+> > >
+> > > Add a subsection to machine.c to migrate debug CSR state.
+> > >
+> > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > ---
+> > >
+> > > (no changes since v2)
+> > >
+> > > Changes in v2:
+> > > - new patch: add debug state description
+> > >
+> > >  target/riscv/machine.c | 32 ++++++++++++++++++++++++++++++++
+> > >  1 file changed, 32 insertions(+)
+> > >
+> > > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > > index 5178b3fec9..4921dad09d 100644
+> > > --- a/target/riscv/machine.c
+> > > +++ b/target/riscv/machine.c
+> > > @@ -216,7 +216,38 @@ static const VMStateDescription vmstate_kvmtimer=
+ =3D {
+> > >          VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
+> > >          VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
+> > >          VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
+> > > +        VMSTATE_END_OF_LIST()
+> > > +    }
+> > > +};
+> > > +
+> > > +static bool debug_needed(void *opaque)
+> > > +{
+> > > +    RISCVCPU *cpu =3D opaque;
+> > > +    CPURISCVState *env =3D &cpu->env;
+> > > +
+> > > +    return riscv_feature(env, RISCV_FEATURE_DEBUG);
+> >
+> > This fails to build:
+> >
+> > ../target/riscv/machine.c: In function =E2=80=98debug_needed=E2=80=99:
+> > ../target/riscv/machine.c:228:31: error: =E2=80=98RISCV_FEATURE_DEBUG=
+=E2=80=99
+> > undeclared (first use in this function); did you mean
+> > =E2=80=98RISCV_FEATURE_EPMP=E2=80=99?
+> >  228 |     return riscv_feature(env, RISCV_FEATURE_DEBUG);
+> >      |                               ^~~~~~~~~~~~~~~~~~~
+> >      |                               RISCV_FEATURE_EPMP
+> > ../target/riscv/machine.c:228:31: note: each undeclared identifier is
+> > reported only once for each function it appears in
+> > ../target/riscv/machine.c:229:1: warning: control reaches end of
+> > non-void function [-Wreturn-type]
+> >  229 | }
+> >      | ^
+>
+> That's weird. Maybe it's out of sync or merge conflict? I will take a loo=
+k.
+>
 
-> On Tue, Apr 19, 2022 at 1:27 PM Anup Patel <apatel@ventanamicro.com>
-> wrote:
->
->> On Tue, Apr 19, 2022 at 10:52 AM Alistair Francis <alistair23@gmail.com>
->> wrote:
->> >
->> > On Fri, Apr 15, 2022 at 7:37 PM <frank.chang@sifive.com> wrote:
->> > >
->> > > From: Frank Chang <frank.chang@sifive.com>
->> > >
->> > > Allow user to set core's marchid, mvendorid, mipid CSRs through
->> > > -cpu command line option.
->> > >
->> > > Signed-off-by: Frank Chang <frank.chang@sifive.com>
->> > > Reviewed-by: Jim Shu <jim.shu@sifive.com>
->> > > ---
->> > >  target/riscv/cpu.c |  4 ++++
->> > >  target/riscv/cpu.h |  4 ++++
->> > >  target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++----
->> > >  3 files changed, 42 insertions(+), 4 deletions(-)
->> > >
->> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> > > index ddda4906ff..2eea0f9be7 100644
->> > > --- a/target/riscv/cpu.c
->> > > +++ b/target/riscv/cpu.c
->> > > @@ -786,6 +786,10 @@ static Property riscv_cpu_properties[] = {
->> > >      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->> > >      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->> > >
->> > > +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
->> > > +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, 0),
->> > > +    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, 0),
->> >
->> > Should we have non-zero defaults here?
->>
->> To do that, we need mvendorid for QEMU RISC-V.
->>
->> The marchid and mipid can be based on the QEMU version number.
->>
->> Regards,
->> Anup
->>
->
-> The original intention for this patch is to allow users to define
-> their own $mvendorid, $marchid, and $mipid through the command line
-> when they initiate QEMU.
->
-> If we want to provide the default values for QEMU RISC-V CPU,
-> just like what Anup said.
-> We need to define our own mvendorid, which should be a JEDEC manufacturer
-> ID.
-> (Perhaps it's fine to just give some random legal JEDEC manufacturer ID
-> as I don't think we would really want to spend the money on that.)
->
-> For $marchid and $mipid,
-> I agree that it could base on QEMU's version from the QEMU_FULL_VERSION
-> macro.
-> (and $marchid should have MSB set to 1 for open-source projects.)
->
+I rebased the v4 series on top of your riscv-to-apply.next branch,
+indeed there is a merge conflict of target/riscv/machine.c. After I
+resolved the conflict, the build succeeded.
 
-Sorry, I made a mistake.
-
-The MSB of $marchid should be cleared for open source projects:
-"Open-source project architecture IDs are allocated globally by the RISC-V
-Foundation, and have
-non-zero architecture IDs with a zero most-significant-bit (MSB).
-Commercial architecture IDs are
-allocated by each commercial vendor independently, but must have the MSB
-set and cannot contain
-zero in the remaining MXLEN-1 bits."
+I suspect you missed something during your handling of the merge conflict?
 
 Regards,
-Frank Chang
-
-
->
-> Regards,
-> Frank Chang
->
->
->>
->> >
->> > Alistair
->> >
->> > > +
->> > >      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
->> > >      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
->> > >      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
->> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> > > index c069fe85fa..3ab92deb4b 100644
->> > > --- a/target/riscv/cpu.h
->> > > +++ b/target/riscv/cpu.h
->> > > @@ -370,6 +370,10 @@ struct RISCVCPUConfig {
->> > >      bool ext_zve32f;
->> > >      bool ext_zve64f;
->> > >
->> > > +    uint32_t mvendorid;
->> > > +    uint64_t marchid;
->> > > +    uint64_t mipid;
->> > > +
->> > >      /* Vendor-specific custom extensions */
->> > >      bool ext_XVentanaCondOps;
->> > >
->> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> > > index 341c2e6f23..9a02038adb 100644
->> > > --- a/target/riscv/csr.c
->> > > +++ b/target/riscv/csr.c
->> > > @@ -603,6 +603,36 @@ static RISCVException write_ignore(CPURISCVState
->> *env, int csrno,
->> > >      return RISCV_EXCP_NONE;
->> > >  }
->> > >
->> > > +static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
->> > > +                                     target_ulong *val)
->> > > +{
->> > > +    CPUState *cs = env_cpu(env);
->> > > +    RISCVCPU *cpu = RISCV_CPU(cs);
->> > > +
->> > > +    *val = cpu->cfg.mvendorid;
->> > > +    return RISCV_EXCP_NONE;
->> > > +}
->> > > +
->> > > +static RISCVException read_marchid(CPURISCVState *env, int csrno,
->> > > +                                   target_ulong *val)
->> > > +{
->> > > +    CPUState *cs = env_cpu(env);
->> > > +    RISCVCPU *cpu = RISCV_CPU(cs);
->> > > +
->> > > +    *val = cpu->cfg.marchid;
->> > > +    return RISCV_EXCP_NONE;
->> > > +}
->> > > +
->> > > +static RISCVException read_mipid(CPURISCVState *env, int csrno,
->> > > +                                 target_ulong *val)
->> > > +{
->> > > +    CPUState *cs = env_cpu(env);
->> > > +    RISCVCPU *cpu = RISCV_CPU(cs);
->> > > +
->> > > +    *val = cpu->cfg.mipid;
->> > > +    return RISCV_EXCP_NONE;
->> > > +}
->> > > +
->> > >  static RISCVException read_mhartid(CPURISCVState *env, int csrno,
->> > >                                     target_ulong *val)
->> > >  {
->> > > @@ -3098,10 +3128,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE]
->> = {
->> > >      [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
->> > >
->> > >      /* Machine Information Registers */
->> > > -    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
->> > > -    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
->> > > -    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
->> > > -    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
->> > > +    [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
->> > > +    [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
->> > > +    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
->> > > +    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
->> > >
->> > >      /* Machine Trap Setup */
->> > >      [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,
->>  write_mstatus, NULL,
->> > > --
->> > > 2.35.1
->> > >
->> > >
->> >
->>
->
-
---0000000000007d935c05dd11d67a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Tue, Apr 19, 2022 at 2:00 PM Frank Cha=
-ng &lt;<a href=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com</a>=
-&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr">On Tue, Apr 19, 20=
-22 at 1:27 PM Anup Patel &lt;<a href=3D"mailto:apatel@ventanamicro.com" tar=
-get=3D"_blank">apatel@ventanamicro.com</a>&gt; wrote:<br></div><div class=
-=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Tue, =
-Apr 19, 2022 at 10:52 AM Alistair Francis &lt;<a href=3D"mailto:alistair23@=
-gmail.com" target=3D"_blank">alistair23@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; On Fri, Apr 15, 2022 at 7:37 PM &lt;<a href=3D"mailto:frank.chang@sifi=
-ve.com" target=3D"_blank">frank.chang@sifive.com</a>&gt; wrote:<br>
-&gt; &gt;<br>
-&gt; &gt; From: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" t=
-arget=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; &gt;<br>
-&gt; &gt; Allow user to set core&#39;s marchid, mvendorid, mipid CSRs throu=
-gh<br>
-&gt; &gt; -cpu command line option.<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifi=
-ve.com" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; &gt; Reviewed-by: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.com" ta=
-rget=3D"_blank">jim.shu@sifive.com</a>&gt;<br>
-&gt; &gt; ---<br>
-&gt; &gt;=C2=A0 target/riscv/cpu.c |=C2=A0 4 ++++<br>
-&gt; &gt;=C2=A0 target/riscv/cpu.h |=C2=A0 4 ++++<br>
-&gt; &gt;=C2=A0 target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++-=
----<br>
-&gt; &gt;=C2=A0 3 files changed, 42 insertions(+), 4 deletions(-)<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-&gt; &gt; index ddda4906ff..2eea0f9be7 100644<br>
-&gt; &gt; --- a/target/riscv/cpu.c<br>
-&gt; &gt; +++ b/target/riscv/cpu.c<br>
-&gt; &gt; @@ -786,6 +786,10 @@ static Property riscv_cpu_properties[] =3D {=
-<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_UINT16(&quot;vlen&quot;, RISCVCPU=
-, cfg.vlen, 128),<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_UINT16(&quot;elen&quot;, RISCVCPU=
-, cfg.elen, 64),<br>
-&gt; &gt;<br>
-&gt; &gt; +=C2=A0 =C2=A0 DEFINE_PROP_UINT32(&quot;mvendorid&quot;, RISCVCPU=
-, cfg.mvendorid, 0),<br>
-&gt; &gt; +=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;marchid&quot;, RISCVCPU, =
-cfg.marchid, 0),<br>
-&gt; &gt; +=C2=A0 =C2=A0 DEFINE_PROP_UINT64(&quot;mipid&quot;, RISCVCPU, cf=
-g.mipid, 0),<br>
-&gt;<br>
-&gt; Should we have non-zero defaults here?<br>
-<br>
-To do that, we need mvendorid for QEMU RISC-V.<br>
-<br>
-The marchid and mipid can be based on the QEMU version number.<br>
-<br>
-Regards,<br>
-Anup<br></blockquote><div><br></div><div>The original intention for this pa=
-tch is to allow users to define</div><div>their own $mvendorid, $marchid, a=
-nd $mipid through the command line</div><div>when they initiate QEMU.</div>=
-<div><br></div><div>If we want to provide the default values for QEMU RISC-=
-V CPU,</div><div>just like what Anup said.</div><div>We need to define our =
-own mvendorid, which should be a JEDEC manufacturer ID.</div><div>(Perhaps =
-it&#39;s fine to just give some random legal JEDEC manufacturer ID</div><di=
-v>as I don&#39;t think we would really want to spend the money on that.)</d=
-iv><div><br></div><div>For $marchid and $mipid,</div><div>I agree that it c=
-ould=C2=A0base on QEMU&#39;s version from the QEMU_FULL_VERSION macro.</div=
-><div>(and $marchid should have MSB set to 1 for open-source projects.)</di=
-v></div></div></blockquote><div><br></div><div>Sorry, I made a mistake.</di=
-v><div><br></div><div>The MSB of $marchid should be cleared for open source=
- projects:</div><div>&quot;Open-source project architecture IDs are allocat=
-ed globally by the RISC-V Foundation, and have<br>non-zero architecture IDs=
- with a zero most-significant-bit (MSB). Commercial architecture IDs are<br=
->allocated by each commercial vendor independently, but must have the MSB s=
-et and cannot contain<br>zero in the remaining MXLEN-1 bits.&quot;<br></div=
-><div><br></div><div>Regards,</div><div>Frank Chang</div><div>=C2=A0</div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div clas=
-s=3D"gmail_quote"><div><br></div><div>Regards,</div><div>Frank Chang</div><=
-div>=C2=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt;<br>
-&gt; Alistair<br>
-&gt;<br>
-&gt; &gt; +<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;svinval&quot;, RISCVCP=
-U, cfg.ext_svinval, false),<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;svnapot&quot;, RISCVCP=
-U, cfg.ext_svnapot, false),<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 DEFINE_PROP_BOOL(&quot;svpbmt&quot;, RISCVCPU=
-, cfg.ext_svpbmt, false),<br>
-&gt; &gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-&gt; &gt; index c069fe85fa..3ab92deb4b 100644<br>
-&gt; &gt; --- a/target/riscv/cpu.h<br>
-&gt; &gt; +++ b/target/riscv/cpu.h<br>
-&gt; &gt; @@ -370,6 +370,10 @@ struct RISCVCPUConfig {<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 bool ext_zve32f;<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 bool ext_zve64f;<br>
-&gt; &gt;<br>
-&gt; &gt; +=C2=A0 =C2=A0 uint32_t mvendorid;<br>
-&gt; &gt; +=C2=A0 =C2=A0 uint64_t marchid;<br>
-&gt; &gt; +=C2=A0 =C2=A0 uint64_t mipid;<br>
-&gt; &gt; +<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* Vendor-specific custom extensions */<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 bool ext_XVentanaCondOps;<br>
-&gt; &gt;<br>
-&gt; &gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-&gt; &gt; index 341c2e6f23..9a02038adb 100644<br>
-&gt; &gt; --- a/target/riscv/csr.c<br>
-&gt; &gt; +++ b/target/riscv/csr.c<br>
-&gt; &gt; @@ -603,6 +603,36 @@ static RISCVException write_ignore(CPURISCVS=
-tate *env, int csrno,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; &gt;=C2=A0 }<br>
-&gt; &gt;<br>
-&gt; &gt; +static RISCVException read_mvendorid(CPURISCVState *env, int csr=
-no,<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target=
-_ulong *val)<br>
-&gt; &gt; +{<br>
-&gt; &gt; +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-&gt; &gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 *val =3D cpu-&gt;cfg.mvendorid;<br>
-&gt; &gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; &gt; +}<br>
-&gt; &gt; +<br>
-&gt; &gt; +static RISCVException read_marchid(CPURISCVState *env, int csrno=
-,<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong =
-*val)<br>
-&gt; &gt; +{<br>
-&gt; &gt; +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-&gt; &gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 *val =3D cpu-&gt;cfg.marchid;<br>
-&gt; &gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; &gt; +}<br>
-&gt; &gt; +<br>
-&gt; &gt; +static RISCVException read_mipid(CPURISCVState *env, int csrno,<=
-br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong *val)<b=
-r>
-&gt; &gt; +{<br>
-&gt; &gt; +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-&gt; &gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt; &gt; +<br>
-&gt; &gt; +=C2=A0 =C2=A0 *val =3D cpu-&gt;cfg.mipid;<br>
-&gt; &gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; &gt; +}<br>
-&gt; &gt; +<br>
-&gt; &gt;=C2=A0 static RISCVException read_mhartid(CPURISCVState *env, int =
-csrno,<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ul=
-ong *val)<br>
-&gt; &gt;=C2=A0 {<br>
-&gt; &gt; @@ -3098,10 +3128,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SI=
-ZE] =3D {<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 [CSR_MINSTRETH] =3D { &quot;minstreth&quot;, =
-any32, read_instreth },<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* Machine Information Registers */<br>
-&gt; &gt; -=C2=A0 =C2=A0 [CSR_MVENDORID] =3D { &quot;mvendorid&quot;, any,=
-=C2=A0 =C2=A0read_zero=C2=A0 =C2=A0 },<br>
-&gt; &gt; -=C2=A0 =C2=A0 [CSR_MARCHID]=C2=A0 =C2=A0=3D { &quot;marchid&quot=
-;,=C2=A0 =C2=A0any,=C2=A0 =C2=A0read_zero=C2=A0 =C2=A0 },<br>
-&gt; &gt; -=C2=A0 =C2=A0 [CSR_MIMPID]=C2=A0 =C2=A0 =3D { &quot;mimpid&quot;=
-,=C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_zero=C2=A0 =C2=A0 },<br>
-&gt; &gt; -=C2=A0 =C2=A0 [CSR_MHARTID]=C2=A0 =C2=A0=3D { &quot;mhartid&quot=
-;,=C2=A0 =C2=A0any,=C2=A0 =C2=A0read_mhartid },<br>
-&gt; &gt; +=C2=A0 =C2=A0 [CSR_MVENDORID] =3D { &quot;mvendorid&quot;, any,=
-=C2=A0 =C2=A0read_mvendorid },<br>
-&gt; &gt; +=C2=A0 =C2=A0 [CSR_MARCHID]=C2=A0 =C2=A0=3D { &quot;marchid&quot=
-;,=C2=A0 =C2=A0any,=C2=A0 =C2=A0read_marchid=C2=A0 =C2=A0},<br>
-&gt; &gt; +=C2=A0 =C2=A0 [CSR_MIMPID]=C2=A0 =C2=A0 =3D { &quot;mimpid&quot;=
-,=C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_mipid=C2=A0 =C2=A0 =C2=A0},<br>
-&gt; &gt; +=C2=A0 =C2=A0 [CSR_MHARTID]=C2=A0 =C2=A0=3D { &quot;mhartid&quot=
-;,=C2=A0 =C2=A0any,=C2=A0 =C2=A0read_mhartid=C2=A0 =C2=A0},<br>
-&gt; &gt;<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 /* Machine Trap Setup */<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 [CSR_MSTATUS]=C2=A0 =C2=A0 =C2=A0=3D { &quot;=
-mstatus&quot;,=C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_mstatus,=C2=A0 =C2=A0 =C2=
-=A0write_mstatus, NULL,<br>
-&gt; &gt; --<br>
-&gt; &gt; 2.35.1<br>
-&gt; &gt;<br>
-&gt; &gt;<br>
-&gt;<br>
-</blockquote></div></div>
-</blockquote></div></div>
-
---0000000000007d935c05dd11d67a--
+Bin
 
