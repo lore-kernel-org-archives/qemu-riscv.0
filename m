@@ -1,102 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nh3Ha-0008SK-PK
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 01:53:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34076)
+	id 1nh4o9-0007fF-0K
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 03:31:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52388)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=1021dae20=alistair.francis@opensource.wdc.com>)
- id 1nh3HP-0008Ps-NT
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 01:53:34 -0400
-Received: from esa6.hgst.iphmx.com ([216.71.154.45]:11730)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=1021dae20=alistair.francis@opensource.wdc.com>)
- id 1nh3HN-0004Vv-0N
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 01:53:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1650434009; x=1681970009;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=54LNDcv7kZB26uhwQDpQcWJg6cxn2r4zaQ0u9RhnAYA=;
- b=Fjod7D0eoPXSAtW5ztnVPntmiaINQ10t7VCJTDxQ1lXUDBoP/Z8u5B3X
- 5TPIsylH4BuaS68lDs8IFmOGPmeA6mOZC/nM35JLHz+tucy8WieG0zpkj
- idMqmLXJWWWXgMzCfNSWoRE/r2k/C/K4kNQv27Lu3yK1hbp9Q8QkK7nn9
- cZnZ4iF3E62coWfOx9X5QqD9o9okRzuap1zPfLPB47JYo9MfP0ENo9BPO
- iDLAaGMe1W5orasWUlNDVBBAiVLU93ILFK2bsEBsnYRDd1OE6PuycdlBD
- 8qoNBdXxQmID1vnKej5DxQ11SIaZJvd0aZpDubj59vvhOCR+dcBybXIE8 A==;
-X-IronPort-AV: E=Sophos;i="5.90,274,1643644800"; d="scan'208";a="199228731"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 20 Apr 2022 13:53:28 +0800
-IronPort-SDR: srqzOYyzngnb52hpvbVWbTUvXk6mTuRoTXtgp5W2/Zgk/OZTzAI6lxj9ieSC7gY+3nDVtk6tL2
- Nm7rpWk6RjHJDdix+VX/VKpEa1es9oR2JUculrW9c+20s3tCPJUka9dCpIAvtWsjRcCHk4CB1V
- /cU0hHc2WwnpMcNrduqitjlzXo/0kCxQGLWFmMsq+B7I8R22PUu6b7aL4KlS0roVhl0+6K2gRe
- ckn06JILqzpcaaEEKDK2Bz2Lvw7znWfYKCqdzDa9QJSp9AqCqWpTAiQTohpx69WqfvCPqn678E
- 0P3IroqKr2TbwjWSuGSRCbw2
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 19 Apr 2022 22:24:32 -0700
-IronPort-SDR: LXPB6ned/WL0JGSXU+SSWpD692nVgGpYnpBE/VWMPtPiX8wQ2XyrX8E0Hhc8JSmDudNK75SeVc
- xlujdbq28Xe4XdSObG8tbJLvOolhigekiLJzxi+VUcN9JAELwPekiym8aPgFqVt0JVI8/JgRNR
- nUYMewIU//lMMxUOpMbL3a42RS78QLa4oj2bCAuUxvqKh3wGXqQE3R25SbFbEkMz+AA4GPcdhq
- vgFlJP2VDYevey8B2Ak4NjXgo1E0yOKjMe+CIffH32SfD4Hb+2jBCrmdNyXem8qL1/9XggEsll
- pMg=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 19 Apr 2022 22:53:28 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4KjqbW3QKqz1Rvlx
- for <qemu-riscv@nongnu.org>; Tue, 19 Apr 2022 22:53:27 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1650434006; x=1653026007; bh=54LNDcv7kZB26uhwQD
- pQcWJg6cxn2r4zaQ0u9RhnAYA=; b=BJ+huSzGbvFPyjR13/QkG6bmQiyzlY1olg
- P9fOn+QxTFuOVMowjaX9Oe56wqqoCN6JFsjfNgNLYqix2QA+blNULHukkgWK2MOj
- JPkV+Zh8otLWRPHgYenTOZpw49VoOwLn5HdyPJg7nA7rGP6YXBbYTU4C74UPVIWG
- T0WY7WT7RV/kmzRPqiUqIw/ycY1oJ99aqS0O7yOYYX9GG4oHEpu4j3pVafTc2vZl
- Mq+Lr4IrmwiPGy3M6i8wJcYM8V33qVFIxNT9Bt7rRVcjHy8dWAkseFEOGy9exCSx
- TzVc6NWEUR7zrfAnNTOY3HSK7+aAULqyO1iyLAnjHBRI3JrDhpVA==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id 3yrOv1R5w51D for <qemu-riscv@nongnu.org>;
- Tue, 19 Apr 2022 22:53:26 -0700 (PDT)
-Received: from toolbox.wdc.com (unknown [10.225.165.119])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4KjqbQ3JCnz1SVnx;
- Tue, 19 Apr 2022 22:53:22 -0700 (PDT)
-From: Alistair Francis <alistair.francis@opensource.wdc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair@alistair23.me>, alistair23@gmail.com,
- Bin Meng <bin.meng@windriver.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-arm@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, bmeng.cn@gmail.com,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Subject: [PATCH v4 6/6] hw/riscv: Enable TPM backends
-Date: Wed, 20 Apr 2022 15:52:48 +1000
-Message-Id: <20220420055248.960491-7-alistair.francis@opensource.wdc.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220420055248.960491-1-alistair.francis@opensource.wdc.com>
-References: <20220420055248.960491-1-alistair.francis@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nh4o7-0007ee-6G; Wed, 20 Apr 2022 03:31:23 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:38455)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nh4o5-0003s0-JL; Wed, 20 Apr 2022 03:31:22 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id n134so954709iod.5;
+ Wed, 20 Apr 2022 00:31:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=Q2o5q4uwRMTugBL1CvT39qNu67dYebsZ7yttp+TnEyM=;
+ b=RwMUOFuBk0H0aJoCYj+DPakuZLIG+nPVFTi+8D68mdTDz8dQVTXj2syXBu9ZgNdZVW
+ Yvbq0U4JxTeHADu6lAdueY4H9rt1H7bUimtKPIXvoo7AJhW98Tpc8j8ii/IMbw0WkgTf
+ W4t9XIgwL7Vwi4LxA3cZQmSlaNb/JeLijiQ0vynKjoYPyp11bLWWo17m1ExmiVB7Tt5N
+ gaODVIf/oxUYMBk87FVLNN9Ppxfivq+mxHKv30zxQ/P1GxLnlMiNLg48+sT9mND+i89x
+ ydy6QYP7VjJioeKnURwwJ3ceoqN6FfNPXdBzo7sQ7D7LgA+Yivla1oynfcme7knmhl82
+ gGCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=Q2o5q4uwRMTugBL1CvT39qNu67dYebsZ7yttp+TnEyM=;
+ b=WeersIU2Cc5opeOG7Hbbu0gDfVaRC5xP1G8E+jVstfEVZwDTr4S9BUtylJBaBm6b/4
+ utEdyl/PlXHSRDsZ9WPBkXILFmf6Wg9ndmJj2DaHDjn7majcvHsr8Jqh/r1Wl2iVKZms
+ AUrBIsTgrj0RU7w3VnEu1OjlNSp4rMb061PrxWmwDAP771rOxa8RDxxTIE4UUxOUdPkN
+ 3iKkiG0u57FiJ9tURrqlTArnM4YSXnvyiUXid+2ZnoHTbEIzNW/0G2SWJ8BXjW/wvwNa
+ k1Dk1eWG7l06xNj761U9wsir+xkHBoQN6LUDTKCUKbmzz4t5rUxUrb1l9x47ObiRgQK5
+ 6KBQ==
+X-Gm-Message-State: AOAM533HmxAj5lv0Vy8xLDpAtEY2chKvvr6lTb3L4+pwrnJ8nvbck8Q1
+ 0MvpYbrjd+Utua8UOTGSUv8GFQhWTLqwDEKe6cA=
+X-Google-Smtp-Source: ABdhPJxfmV9g5+na9m9WLXUjXoYa5quiOblKwui7z2ZXew2uaCxobPsT+9kwkrv0hzjJqjbV/OUXygp4NjubHuq4ILo=
+X-Received: by 2002:a05:6638:370c:b0:328:6ddf:8882 with SMTP id
+ k12-20020a056638370c00b003286ddf8882mr8425566jav.267.1650439880001; Wed, 20
+ Apr 2022 00:31:20 -0700 (PDT)
 MIME-Version: 1.0
+References: <20220315065529.62198-1-bmeng.cn@gmail.com>
+ <20220315065529.62198-3-bmeng.cn@gmail.com>
+In-Reply-To: <20220315065529.62198-3-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 20 Apr 2022 17:30:54 +1000
+Message-ID: <CAKmqyKMoRqbfSsUNM1O1cQGHaL9rc6fsCqJxEktQNrgrLCimgA@mail.gmail.com>
+Subject: Re: [PATCH v4 2/7] target/riscv: machine: Add debug state description
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.45;
- envelope-from=prvs=1021dae20=alistair.francis@opensource.wdc.com;
- helo=esa6.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,71 +75,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2022 05:53:38 -0000
+X-List-Received-Date: Wed, 20 Apr 2022 07:31:23 -0000
 
-From: Alistair Francis <alistair.francis@wdc.com>
+On Tue, Mar 15, 2022 at 5:17 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> From: Bin Meng <bin.meng@windriver.com>
+>
+> Add a subsection to machine.c to migrate debug CSR state.
+>
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>
+> (no changes since v2)
+>
+> Changes in v2:
+> - new patch: add debug state description
+>
+>  target/riscv/machine.c | 32 ++++++++++++++++++++++++++++++++
+>  1 file changed, 32 insertions(+)
+>
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 5178b3fec9..4921dad09d 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -216,7 +216,38 @@ static const VMStateDescription vmstate_kvmtimer =3D=
+ {
+>          VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
+>          VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
+>          VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
+> +        VMSTATE_END_OF_LIST()
+> +    }
+> +};
+> +
+> +static bool debug_needed(void *opaque)
+> +{
+> +    RISCVCPU *cpu =3D opaque;
+> +    CPURISCVState *env =3D &cpu->env;
+> +
+> +    return riscv_feature(env, RISCV_FEATURE_DEBUG);
 
-Imply the TPM sysbus devices. This allows users to add TPM devices to
-the RISC-V virt board.
+This fails to build:
 
-This was tested by first creating an emulated TPM device:
+../target/riscv/machine.c: In function =E2=80=98debug_needed=E2=80=99:
+../target/riscv/machine.c:228:31: error: =E2=80=98RISCV_FEATURE_DEBUG=E2=80=
+=99
+undeclared (first use in this function); did you mean
+=E2=80=98RISCV_FEATURE_EPMP=E2=80=99?
+ 228 |     return riscv_feature(env, RISCV_FEATURE_DEBUG);
+     |                               ^~~~~~~~~~~~~~~~~~~
+     |                               RISCV_FEATURE_EPMP
+../target/riscv/machine.c:228:31: note: each undeclared identifier is
+reported only once for each function it appears in
+../target/riscv/machine.c:229:1: warning: control reaches end of
+non-void function [-Wreturn-type]
+ 229 | }
+     | ^
 
-    swtpm socket --tpm2 -t -d --tpmstate dir=3D/tmp/tpm \
-        --ctrl type=3Dunixio,path=3Dswtpm-sock
+Alistair
 
-Then launching QEMU with:
-
-    -chardev socket,id=3Dchrtpm,path=3Dswtpm-sock \
-    -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm \
-    -device tpm-tis-device,tpmdev=3Dtpm0
-
-The TPM device can be seen in the memory tree and the generated device
-tree.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/942
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Edgar E. Iglesias <edgar.iglesias@amd.com>
----
- hw/riscv/virt.c  | 4 ++++
- hw/riscv/Kconfig | 1 +
- 2 files changed, 5 insertions(+)
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 6eed1f4d70..b62fd66a49 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -43,6 +43,7 @@
- #include "sysemu/device_tree.h"
- #include "sysemu/sysemu.h"
- #include "sysemu/kvm.h"
-+#include "sysemu/tpm.h"
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
-@@ -1612,6 +1613,9 @@ static void virt_machine_class_init(ObjectClass *oc=
-, void *data)
-     hc->plug =3D virt_machine_device_plug_cb;
-=20
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
-+#ifdef CONFIG_TPM
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
-+#endif
-=20
-     object_class_property_add_bool(oc, "aclint", virt_get_aclint,
-                                    virt_set_aclint);
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index da790f5936..79ff61c464 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -34,6 +34,7 @@ config RISCV_VIRT
-     imply PCI_DEVICES
-     imply VIRTIO_VGA
-     imply TEST_DEVICES
-+    imply TPM_TIS_SYSBUS
-     select RISCV_NUMA
-     select GOLDFISH_RTC
-     select MSI_NONBROKEN
---=20
-2.35.1
-
+> +}
+>
+> +static const VMStateDescription vmstate_debug_type2 =3D {
+> +    .name =3D "cpu/debug/type2",
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .fields =3D (VMStateField[]) {
+> +        VMSTATE_UINTTL(mcontrol, type2_trigger_t),
+> +        VMSTATE_UINTTL(maddress, type2_trigger_t),
+> +        VMSTATE_END_OF_LIST()
+> +   }
+> +};
+> +
+> +static const VMStateDescription vmstate_debug =3D {
+> +    .name =3D "cpu/debug",
+> +    .version_id =3D 1,
+> +    .minimum_version_id =3D 1,
+> +    .needed =3D debug_needed,
+> +    .fields =3D (VMStateField[]) {
+> +        VMSTATE_UINTTL(env.trigger_cur, RISCVCPU),
+> +        VMSTATE_STRUCT_ARRAY(env.type2_trig, RISCVCPU, TRIGGER_TYPE2_NUM=
+,
+> +                             0, vmstate_debug_type2, type2_trigger_t),
+>          VMSTATE_END_OF_LIST()
+>      }
+>  };
+> @@ -292,6 +323,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {
+>          &vmstate_pointermasking,
+>          &vmstate_rv128,
+>          &vmstate_kvmtimer,
+> +        &vmstate_debug,
+>          NULL
+>      }
+>  };
+> --
+> 2.25.1
+>
+>
 
