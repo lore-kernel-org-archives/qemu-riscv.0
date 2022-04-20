@@ -1,56 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nhJ0Q-00045r-2D
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 18:41:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47484)
+	id 1nhJ5F-0001Gx-JW
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 18:46:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48118)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nhJ0O-00040A-1O; Wed, 20 Apr 2022 18:41:00 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:44855)
+ id 1nhJ5E-0001GO-Dz; Wed, 20 Apr 2022 18:46:00 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:34801)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nhJ0M-00017k-AK; Wed, 20 Apr 2022 18:40:59 -0400
-Received: by mail-il1-x12c.google.com with SMTP id o5so1948131ils.11;
- Wed, 20 Apr 2022 15:40:57 -0700 (PDT)
+ id 1nhJ5C-0001nx-OP; Wed, 20 Apr 2022 18:46:00 -0400
+Received: by mail-io1-xd36.google.com with SMTP id i196so3494034ioa.1;
+ Wed, 20 Apr 2022 15:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7pGp/h59g4a5oO3qzs/3HLXwUSrsXiX9152ZJ92SLGk=;
- b=EEChALWbGMBXkmemqQ57SsH0lo5C1YCNx2Xl2vHzUU9Sy3UCEmX4FdzZjx/wjj/eV8
- 5MCO+F6iZ7WGSd1UahD1eZqukznMrFMYYBFGuKe427j0TvKDvFOq5eWInQdgUVJLGX7D
- R8NFHrO0E1rjN5y7941z1xdjNryMA+EIp8j/XwcEGD89iPFSehdUBLgfx2Dom092CTKI
- Mrp281wMiprfQy+UgxHCdUaoHR0S3wCSyM34jfhTEHTcOuOAMZQ/ABGxByxpfggMIdPO
- 3zP1z1pc7swWWX/9SBLljUiYwjA2AImZjWv793w0NfF173+saELafDvkyq4WYqgs3xBT
- KKuQ==
+ :cc:content-transfer-encoding;
+ bh=sQF5B/sx/UK8NNmSdSdi1tJIT4cDUaQcK7OnkqBFnRE=;
+ b=Sgq+DvumlkXYYIgbbOGJMRR8lFWU9VP98Tqfs2g8e/BxU0F5g6YgdBEfquTvZOW7yH
+ /z7iAH5WkmltbEWI12Djdc9LqQyFisw4PCgqYaun2I3zulGdleFTscxb26MxBSc8+TDU
+ Cd4oO9H5Dn94i/KcNuAb9VsNE1Lb7Eiw9a/7IzR5vCmLZ7/0iccNDpIt8hatu+Vn7gxu
+ lmNE/B6/1yJEfzVn6BQQK4oyIbqATSa0Pz273r4O/6nis4gQV/atyb2s66UK83gjo3mw
+ g89SBZE5QW3N60gHKbqeOEIdoeFtCwbqTimfNj/3BUQu2/V3i4SPNSrYZ5kXyYn0CPxJ
+ pQuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=7pGp/h59g4a5oO3qzs/3HLXwUSrsXiX9152ZJ92SLGk=;
- b=wuHgbnm5dMgfj/rLOlO/NemJaMO/Q6kYS4yyuhQW6iUgnGTYHu8+Cx0l0Bky4I8PB1
- NUHDp7pNF5ff6q1jO9zXM3ORGgfnh8qCGBsj4D2PD7rn/oDToK9qTQIAwcVhFFuIAxtR
- D/v0z8bX3daBPAP2FhLly39ePh13k+9/50kuf61PctWDdvVhL8OEs4ZYgWUNPfvknbJC
- a+JarHKM8VsBZ/nc/j4i8+bl2F0C3pAHDWhGrwmnjuS6IV1o1vhgS+x2MRlt0LUqgWEd
- Uzgqd1+g6FUV4eY3fkmbH9QKysCKFhqEDXcLb9z0MOI0A64q08H3AWcvjzNN0TaipyH7
- nR5Q==
-X-Gm-Message-State: AOAM531wxgqM0HB0+KYFxAFkNOZw6bjdnh5jBIOAyCOQjroNH6v7qN7F
- 6wNxoNu4e/E3LMJJevBYImEtW5iUTfN2fSr1DeM=
-X-Google-Smtp-Source: ABdhPJzjYEyLvPqApCcDGEg8H/BgHlqrCDucE2Y95cH/EUxLISsiRhHpaEXgLtgs62dmuIh+5gfk7HbxUp391VrbkKw=
-X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
- u18-20020a926012000000b002bdfb5fd627mr9840368ilb.86.1650494456877; Wed, 20
- Apr 2022 15:40:56 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=sQF5B/sx/UK8NNmSdSdi1tJIT4cDUaQcK7OnkqBFnRE=;
+ b=kJXXeXcrH8ITK7ePniPAvXFa7cJ8sVs+eXTr0BkTABCNvncP1tYYAsR047vAdVmrcO
+ FajMnvI4uXuZ/lZe0I5lh3+FjEEhXoxLjJx84La2R46FdX9yLxajL7OOdQi3Bvy9jXq0
+ VyYHEU1q2mUHFS5WyN1A5aEdaivdBzUU1t3EdRJGY6YsVNKse3PPq/pW8dWLyn/phYkL
+ l5uOx7Vc23alLw+0WBOLso+V8NPkH9qOreEsOA5uLOhaMeVxX4ByvZg5hs4EvDXLBibX
+ t+AxQw0SOskZ/HmmWTFwy+c50kRzoFfT6mXGvtouZTJcanhcgxW8I5Zi8l0ECDclrbT9
+ M/cQ==
+X-Gm-Message-State: AOAM532QFJ87pNIC5ESFDZE1szR5Af7wf0KzcEp72+90LsF8hpTzjD4z
+ LXjhOLCLr4T08zibb9kcAyLWtujanM+0c3BAB0ha9W0H320E93iC
+X-Google-Smtp-Source: ABdhPJylZEppHjuTPKJNCfjZdZJ4IZ4vrIfAHIAh7Fip7eZo0nL4lCAnkfdMo61TYzjAgW7aAZ7zFuE/5qNMyehJ/lY=
+X-Received: by 2002:a5d:948a:0:b0:64d:23a4:9afa with SMTP id
+ v10-20020a5d948a000000b0064d23a49afamr9860294ioj.114.1650494757231; Wed, 20
+ Apr 2022 15:45:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220420080901.14655-1-frank.chang@sifive.com>
-In-Reply-To: <20220420080901.14655-1-frank.chang@sifive.com>
+References: <20220315065529.62198-1-bmeng.cn@gmail.com>
+ <20220315065529.62198-3-bmeng.cn@gmail.com>
+ <CAKmqyKMoRqbfSsUNM1O1cQGHaL9rc6fsCqJxEktQNrgrLCimgA@mail.gmail.com>
+ <CAEUhbmX0SdEcD8UWJUmmPm2SubT6gd991jNMAZJA8WFbRsdoaQ@mail.gmail.com>
+ <CAEUhbmVrUMS638bbA+pnoHgeQdRc9KkBGb21wXD+2A8=RHbqwA@mail.gmail.com>
+In-Reply-To: <CAEUhbmVrUMS638bbA+pnoHgeQdRc9KkBGb21wXD+2A8=RHbqwA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Apr 2022 08:40:30 +1000
-Message-ID: <CAKmqyKMFWO+aJdAyKviysp7AzhAHnRw2KnqK=7UY6ZvrxZNtBg@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] Support ACLINT 32/64-bit mtimecmp/mtime read/write
- accesses
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Thu, 21 Apr 2022 08:45:31 +1000
+Message-ID: <CAKmqyKMUP8QL=D781FnOjDrLXBxor5Qz5uG35cCw=C7aOLh2Ww@mail.gmail.com>
+Subject: Re: [PATCH v4 2/7] target/riscv: machine: Add debug state description
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -71,60 +78,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2022 22:41:00 -0000
+X-List-Received-Date: Wed, 20 Apr 2022 22:46:00 -0000
 
-On Wed, Apr 20, 2022 at 6:09 PM <frank.chang@sifive.com> wrote:
+On Wed, Apr 20, 2022 at 7:52 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> Hi Alistair,
 >
-> This patchset makes ACLINT mtime to be writable as RISC-V privilege
-> spec defines that mtime is exposed as a memory-mapped machine-mode
-> read-write register. Also, mtimecmp and mtime should be 32/64-bit memory
-> accessible registers. ACLINT reset function is also added, which requires
-> mtime to be resetable if we need to support core power-gating feature in
-> the future.
+> On Wed, Apr 20, 2022 at 3:33 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> >
+> > On Wed, Apr 20, 2022 at 3:31 PM Alistair Francis <alistair23@gmail.com>=
+ wrote:
+> > >
+> > > On Tue, Mar 15, 2022 at 5:17 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > > >
+> > > > From: Bin Meng <bin.meng@windriver.com>
+> > > >
+> > > > Add a subsection to machine.c to migrate debug CSR state.
+> > > >
+> > > > Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> > > > Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> > > > ---
+> > > >
+> > > > (no changes since v2)
+> > > >
+> > > > Changes in v2:
+> > > > - new patch: add debug state description
+> > > >
+> > > >  target/riscv/machine.c | 32 ++++++++++++++++++++++++++++++++
+> > > >  1 file changed, 32 insertions(+)
+> > > >
+> > > > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > > > index 5178b3fec9..4921dad09d 100644
+> > > > --- a/target/riscv/machine.c
+> > > > +++ b/target/riscv/machine.c
+> > > > @@ -216,7 +216,38 @@ static const VMStateDescription vmstate_kvmtim=
+er =3D {
+> > > >          VMSTATE_UINT64(env.kvm_timer_time, RISCVCPU),
+> > > >          VMSTATE_UINT64(env.kvm_timer_compare, RISCVCPU),
+> > > >          VMSTATE_UINT64(env.kvm_timer_state, RISCVCPU),
+> > > > +        VMSTATE_END_OF_LIST()
+> > > > +    }
+> > > > +};
+> > > > +
+> > > > +static bool debug_needed(void *opaque)
+> > > > +{
+> > > > +    RISCVCPU *cpu =3D opaque;
+> > > > +    CPURISCVState *env =3D &cpu->env;
+> > > > +
+> > > > +    return riscv_feature(env, RISCV_FEATURE_DEBUG);
+> > >
+> > > This fails to build:
+> > >
+> > > ../target/riscv/machine.c: In function =E2=80=98debug_needed=E2=80=99=
+:
+> > > ../target/riscv/machine.c:228:31: error: =E2=80=98RISCV_FEATURE_DEBUG=
+=E2=80=99
+> > > undeclared (first use in this function); did you mean
+> > > =E2=80=98RISCV_FEATURE_EPMP=E2=80=99?
+> > >  228 |     return riscv_feature(env, RISCV_FEATURE_DEBUG);
+> > >      |                               ^~~~~~~~~~~~~~~~~~~
+> > >      |                               RISCV_FEATURE_EPMP
+> > > ../target/riscv/machine.c:228:31: note: each undeclared identifier is
+> > > reported only once for each function it appears in
+> > > ../target/riscv/machine.c:229:1: warning: control reaches end of
+> > > non-void function [-Wreturn-type]
+> > >  229 | }
+> > >      | ^
+> >
+> > That's weird. Maybe it's out of sync or merge conflict? I will take a l=
+ook.
+> >
 >
-> This patchset is the updated verion of:
-> https://patchew.org/QEMU/20220126095448.2964-1-frank.chang@sifive.com/
+> I rebased the v4 series on top of your riscv-to-apply.next branch,
+> indeed there is a merge conflict of target/riscv/machine.c. After I
+> resolved the conflict, the build succeeded.
 
-Thanks!
+Looking at this patch series RISCV_FEATURE_DEBUG is only defined in
+patch 4, it doesn't currently exist in the tree. I'm not sure how this
+can build.
 
-Applied to riscv-to-apply.next
+Are you sure you looked at just this patch and not the entire series?
+
+>
+> I suspect you missed something during your handling of the merge conflict=
+?
+
+That's entirely possible. Can you send a rebased version please
 
 Alistair
 
 >
-> Changelog:
->
-> v4:
->   * Replace the error log mask for invalid 8-byte timecmp_hi and time_hi
->     writes from LOG_UNIMP to LOG_GUEST_ERROR.
->
-> v3:
->   * Forbid 8-byte write access to timecmp_hi and time_hi.
->   * Add ACLINT reset function.
->
-> v2:
->   * Support 32/64-bit mtimecmp/mtime memory accesses.
->   * Add .impl.[min|max]_access_size declaration.
->
-> Frank Chang (3):
->   hw/intc: Add .impl.[min|max]_access_size declaration in RISC-V ACLINT
->   hw/intc: Support 32/64-bit mtimecmp and mtime accesses in RISC-V
->     ACLINT
->   hw/intc: Make RISC-V ACLINT mtime MMIO register writable
->
-> Jim Shu (1):
->   hw/intc: riscv_aclint: Add reset function of ACLINT devices
->
->  hw/intc/riscv_aclint.c         | 144 ++++++++++++++++++++++++++-------
->  include/hw/intc/riscv_aclint.h |   1 +
->  target/riscv/cpu.h             |   8 +-
->  target/riscv/cpu_helper.c      |   4 +-
->  4 files changed, 121 insertions(+), 36 deletions(-)
->
-> --
-> 2.35.1
->
->
+> Regards,
+> Bin
 
