@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nh5Oj-0001r9-GK
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 04:09:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59892)
+	id 1nh5Ol-0001tz-Jm
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 04:09:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59924)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nh5Og-0001nV-QS
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:09:10 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:38608)
+ id 1nh5Oj-0001rg-Vw
+ for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:09:14 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:51889)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nh5Oe-0001KB-79
- for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:09:09 -0400
-Received: by mail-pl1-x633.google.com with SMTP id n18so1124043plg.5
- for <qemu-riscv@nongnu.org>; Wed, 20 Apr 2022 01:09:07 -0700 (PDT)
+ id 1nh5Oi-0001Kg-Cb
+ for qemu-riscv@nongnu.org; Wed, 20 Apr 2022 04:09:13 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id bg24so1243045pjb.1
+ for <qemu-riscv@nongnu.org>; Wed, 20 Apr 2022 01:09:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Z9iGgyehXFFotQ+yNPADTnzkBzf01bwCukSA+wfvbAA=;
- b=Orgujn9b7FkS5okNtitVASYzucDosgl3UDXDfcW2VQO4YwrEurtu1LEIBz/u4NEWgi
- sGMc3ln+vOg8HKwPJZ6Le3yjSMeetwt9rhSKIB6XwCw0Hmww1V3D5gXbARkaMsGk3HYO
- jeGbatQ0cRZ1GYyuLL06V71eK5Aao8ql4Bdzg65G6GSR2YAVcio4uZprMZys4hnZVklc
- Pa4/Ms/CQusJXWsDiSEmptSNjJHtpeZ8l9her0ztD8yepGvDofzloPsqc1kznnkzCID+
- Jvn90of33SXrcwVkxlWRINRDW19xRcYueTTjcbjbArtP4Bga2OkdiuqhvvVS4hC5TZfw
- hdsQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=ovHygBMPOfLfcmuDDEiWLW9vnyb/lzx3CqcZGXCXoQg=;
+ b=OGz734JfLRBJyg73PF0Cs61co4UhumCC0eqYB+o9jA6DOvQN5r/LcMdXVS79l4nqNo
+ voHxyXFPvctKPm5iLrjx/n6g2GMJWQ+qbvwMq5P9OBiY/5dAmjgb46K2iGcmHkhNQDqv
+ lxr30iC92L3nbksYsm1L4PFqLnHm8n0w8zeITGFctuBhsA/ywyoWpgyHwZgoGO+LrO6A
+ ElynctgE/oRxD8n82lCfbt5l7/uMC6Dw6w+/xJe8jqCyXw+Ii0t2imOGYCxF3X+1yKwZ
+ rp0LY6bjdd4rzk5jG1ib89RSra/QlBLJzS5h8gCjFlRIqR8lG49Ks/mm5eEgtsXw78LI
+ 4JSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Z9iGgyehXFFotQ+yNPADTnzkBzf01bwCukSA+wfvbAA=;
- b=W6pjM5yEgwURP+tXY/P+loVodd3ldaSTmM7sppqMyRSXokgL05xg7LACYTWDBXOpLP
- R2KKQnJ6MZUzjIc0eyjPPh60pRpdYgCF0fpDqSGURcnMeDYRhG1IVDsi/CMdXkOkaD5j
- hS6VZRVmkplT8kMZjBY1OvDG+qmKRXefOwdl81gC96E3YHw3he063XQPpD7Wjr3oj2Uk
- ZNdBUXYKjpLW/stI6AInBFpvcA7pHWM9jmpW2CjEE+fb3264YxDRGIoET23Vj1FK6QXT
- 6SmMpLLf1r7vizrx2puj+33N3l1080xIAnRDaTJxKLEia2jjbsFGb5oatLNBqXne6J0H
- qJcQ==
-X-Gm-Message-State: AOAM5312iWWbokve43/HGx2vYgv0EWM9HN5Jgg6a2jnyBSZznknGOLh3
- IFCkeW/u2Wg89MBIsPksbu+EGw==
-X-Google-Smtp-Source: ABdhPJzKQZsC0qYGmQUyDJQAyHzkY0N/rS0t/KPFZIaphp5PLjQ22Q3wdhmTbRe6tWwS3uyH/9iEQA==
-X-Received: by 2002:a17:902:ba8c:b0:14f:d9b7:ab4 with SMTP id
- k12-20020a170902ba8c00b0014fd9b70ab4mr19748312pls.23.1650442146620; 
- Wed, 20 Apr 2022 01:09:06 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=ovHygBMPOfLfcmuDDEiWLW9vnyb/lzx3CqcZGXCXoQg=;
+ b=TS85ZuN6dkCP1w4UrTmwHYzJemb3Dn96Q3/E01pSTtmIebnDEltLJt3UC4u5uSsgev
+ D86dr2uqRzD7NfyBBWnLeRNLBHueSNfgn33tdK3Drkg23MckQupyBBdTzhbaPXoZD9ik
+ l/CeXexeH0RiEhnFToqSWR6qiLoGMZpoCrkvCkQxe34iuaYrdOUvyuxe5vwtJkDlx4ar
+ NVQJW2uErnaaNGSW3DNqym+8/pdr7G/mvoiV38Fof08qT4MQtDBPs5ZOBG0MSa/g2w+v
+ 7t1n7PU79BKhGuLFsaVJyKBleb5D+JC5K5jtlBKqwddIemNY6nKs/B45Txuixz8sSpI5
+ XO8A==
+X-Gm-Message-State: AOAM530uJ+2ULjW34SMBSMPxqSIMaNzfPFbYJoEIM9eS/vZhkVbPoKju
+ rmMzdozO3s1P0v+xmsRvYWAecQ==
+X-Google-Smtp-Source: ABdhPJxuWBD+EgjLXomTuoB0YUwMYajcg5zpVl/EXzE4Rs9ow2K+tZzTwqhHdueD8UEubX0sJhkgHw==
+X-Received: by 2002:a17:90b:4d88:b0:1d2:a753:479d with SMTP id
+ oj8-20020a17090b4d8800b001d2a753479dmr3097722pjb.12.1650442150980; 
+ Wed, 20 Apr 2022 01:09:10 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- g15-20020aa7818f000000b00505ce2e4640sm18554898pfi.100.2022.04.20.01.09.03
+ g15-20020aa7818f000000b00505ce2e4640sm18554898pfi.100.2022.04.20.01.09.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Apr 2022 01:09:04 -0700 (PDT)
+ Wed, 20 Apr 2022 01:09:10 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
-	Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v4 0/4] Support ACLINT 32/64-bit mtimecmp/mtime read/write
- accesses
-Date: Wed, 20 Apr 2022 16:08:56 +0800
-Message-Id: <20220420080901.14655-1-frank.chang@sifive.com>
+Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Jim Shu <jim.shu@sifive.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Anup Patel <anup.patel@wdc.com>
+Subject: [PATCH v4 1/4] hw/intc: Add .impl.[min|max]_access_size declaration
+ in RISC-V ACLINT
+Date: Wed, 20 Apr 2022 16:08:57 +0800
+Message-Id: <20220420080901.14655-2-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220420080901.14655-1-frank.chang@sifive.com>
+References: <20220420080901.14655-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,50 +81,39 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Apr 2022 08:09:11 -0000
+X-List-Received-Date: Wed, 20 Apr 2022 08:09:14 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
-This patchset makes ACLINT mtime to be writable as RISC-V privilege
-spec defines that mtime is exposed as a memory-mapped machine-mode
-read-write register. Also, mtimecmp and mtime should be 32/64-bit memory
-accessible registers. ACLINT reset function is also added, which requires
-mtime to be resetable if we need to support core power-gating feature in
-the future.
+If device's MemoryRegion doesn't have .impl.[min|max]_access_size
+declaration, the default access_size_min would be 1 byte and
+access_size_max would be 4 bytes (see: softmmu/memory.c).
+This will cause a 64-bit memory access to ACLINT to be splitted into
+two 32-bit memory accesses.
 
-This patchset is the updated verion of:
-https://patchew.org/QEMU/20220126095448.2964-1-frank.chang@sifive.com/
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ hw/intc/riscv_aclint.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Changelog:
-
-v4:
-  * Replace the error log mask for invalid 8-byte timecmp_hi and time_hi
-    writes from LOG_UNIMP to LOG_GUEST_ERROR.
-
-v3:
-  * Forbid 8-byte write access to timecmp_hi and time_hi.
-  * Add ACLINT reset function.
-
-v2:
-  * Support 32/64-bit mtimecmp/mtime memory accesses.
-  * Add .impl.[min|max]_access_size declaration.
-
-Frank Chang (3):
-  hw/intc: Add .impl.[min|max]_access_size declaration in RISC-V ACLINT
-  hw/intc: Support 32/64-bit mtimecmp and mtime accesses in RISC-V
-    ACLINT
-  hw/intc: Make RISC-V ACLINT mtime MMIO register writable
-
-Jim Shu (1):
-  hw/intc: riscv_aclint: Add reset function of ACLINT devices
-
- hw/intc/riscv_aclint.c         | 144 ++++++++++++++++++++++++++-------
- include/hw/intc/riscv_aclint.h |   1 +
- target/riscv/cpu.h             |   8 +-
- target/riscv/cpu_helper.c      |   4 +-
- 4 files changed, 121 insertions(+), 36 deletions(-)
-
---
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index e43b050e92..37e9ace801 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -208,6 +208,10 @@ static const MemoryRegionOps riscv_aclint_mtimer_ops = {
+     .valid = {
+         .min_access_size = 4,
+         .max_access_size = 8
++    },
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 8,
+     }
+ };
+ 
+-- 
 2.35.1
 
 
