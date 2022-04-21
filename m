@@ -1,61 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nhMPk-0006x9-Mh
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Apr 2022 22:19:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49498)
+	id 1nhPo2-0000KA-OJ
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Apr 2022 01:56:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46982)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nhMPi-0006uV-Hm; Wed, 20 Apr 2022 22:19:22 -0400
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:42591)
+ id 1nhPnz-0000Gw-Rw; Thu, 21 Apr 2022 01:56:40 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:39896)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nhMPg-0005Xh-Sd; Wed, 20 Apr 2022 22:19:22 -0400
-Received: by mail-yb1-xb2c.google.com with SMTP id p65so6205941ybp.9;
- Wed, 20 Apr 2022 19:19:19 -0700 (PDT)
+ id 1nhPny-0001pz-6g; Thu, 21 Apr 2022 01:56:39 -0400
+Received: by mail-pg1-x534.google.com with SMTP id q19so3773201pgm.6;
+ Wed, 20 Apr 2022 22:56:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/jDftP+xe+9OnkdBEuxvo6HXn+Khvm1C3VJUpuN6/TY=;
- b=fbxZE85w/o0YAtKSJU6Kmqj/yWhtyee4WFKUyPDvYMvECE1pLZ1QY6F4OxUCn8jGJj
- yPxo+h/xyP/Cyaz0gUSqjzfW29XRVwPzcq0vbX0EvKlKhpqXDenV8Bp3g0AWBUMksuI4
- I0GsaWcPwsyHVk+pJGJz2GVsw1GPjqNXN3K/tQDVfr+jyboS+ywsS7opppzXqlpcfJvM
- 4jL/6jktYuRzfBa6EsN8m6peWMb09D7fsnUnU14N+okEKfdkCN3DzjTIXuMBPu3HsFk8
- +T7rA0rc5VEA487+RPCcNFJYspSLzf+PZUxwcATjO7OYpjaeSNPaoWiNSPq4T33lCA70
- hUkw==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qHnzDGKqIh6N1cF4DxeQPk7+iSRYpnz5A7I979NUz/Q=;
+ b=azh2mIswGaLx4j5hZnATirQxHgXHFVm716mCX3eOZcb/ntC4qoW9f0NEumJqAcSYyW
+ c6knSx3c2w2fLb9lfxKCmd107ZareZBqRRNBb4fHYp0M1IFX19a/D2xx8aZOqC+mH9Xy
+ VEdCLoAIo9TMIGJ6aodio4UL4uHfgOFt6kQHMGv5zki+Ag9rB+3yVkO39D5qEda5l3+s
+ azqrCj+a/193Vm3KpAlx7l5CMzxB4j3shXLvSMHS2l+X6bk6/EFf/3z+jRW6XRVewWKf
+ qnAr3ncGcWmwDsU58O8ISuDV0dJB96DAWN4MyNOuqxBTeV24eKRJ0ZObywvq9mSs1GEq
+ 7ZPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/jDftP+xe+9OnkdBEuxvo6HXn+Khvm1C3VJUpuN6/TY=;
- b=03VFVe33wPFlpmNsYdVIz3BybeJOO0dOgcsrxicQGu2r1DjBGrSHNGEPEUh8Ejasnf
- VcnOYgrgG6sHAoMGz54vASJWqRkUcw+Y7b4w8AKEslmov6JH8tcIulbYMBSsGUC+YdRS
- ZioSsx1xF4ifL29KRPlnJ487zdHebHsqMKCuEXcjnT3emG7vIgo7DTSro0RFLa8hiAPo
- x8+U38Ox8Zc4Vp8RnYs1oEAKyq0xJh8f3T/DwIDdFhq4e1r+KvGD/2o6Fmk3Y9ETuPD/
- oSaLQ68sdei3xXbO1nz7vdE/8mXF5TAfB4Vwkd38AHJIiCEuiwa7YCnhXOpFKH4tuy5r
- 7DYw==
-X-Gm-Message-State: AOAM530i085/3OSvOh/pgAkJinXD4VyL9Y5owpC5zbGs2lQyudxUnKBR
- HyV3YL+Dx1wH6wyaFQah7l9BLqBaqSc2ZOrzeso=
-X-Google-Smtp-Source: ABdhPJxxio5Ls/wq/6tTkL2MBtmtjhzrcoLI9XMnASckMXygr94FTeNs6ZnnS0dpQKuE342o6jVH9ZMCAqq3Rc+FFS8=
-X-Received: by 2002:a05:6902:10c1:b0:63c:d3bf:59d2 with SMTP id
- w1-20020a05690210c100b0063cd3bf59d2mr22451288ybu.99.1650507559277; Wed, 20
- Apr 2022 19:19:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220420055248.960491-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220420055248.960491-1-alistair.francis@opensource.wdc.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=qHnzDGKqIh6N1cF4DxeQPk7+iSRYpnz5A7I979NUz/Q=;
+ b=tZruULg47vq8pKT8u/yPgxbei0XfCuxxjaqctV1o8Pb2ZS1Zpk6PP584ZbR6RLcADM
+ oia/nN7X/jsS1tzYpe3Y5N+9oVxEAaY8pcPomSafumaa0rhLFrIj8+Yaf8csnGvzlpAf
+ uttvsZHlUBNtw8mDrSAFczm8akqdYYmGAA9kraJasWusVgTmGn4jHQaJfEdziwwD/fX9
+ 1/kexLOv+jKc4NnXETFodNeZqmSfTIAFCTu3SnKgee1rnxMRvo4xeuBJcjdSvRXfB1Uk
+ XhCUeQwI7iuuwDnUXOXv1QydTV0LHF3mGT5Nn7gFsgIDVCKFe/2SFRuhes30LzVU9sPw
+ dwaQ==
+X-Gm-Message-State: AOAM532JYQJWwH6aqPhAqlpfdVkOQMcAQYU4y20NXATE1v5kmPtPLhdi
+ kMJZUXI5RCcEg7WAkcAY4zE=
+X-Google-Smtp-Source: ABdhPJwJR/9NNxf/r2b8DR1gkCSH7bt5VrWdwTTavEXgNMPTpNVKmbh/umfA2tELsvy2W/lZnlQV+g==
+X-Received: by 2002:a63:5fcb:0:b0:3aa:5209:471d with SMTP id
+ t194-20020a635fcb000000b003aa5209471dmr8298489pgb.36.1650520595912; 
+ Wed, 20 Apr 2022 22:56:35 -0700 (PDT)
+Received: from pek-vx-bsp2.wrs.com (unknown-176-192.windriver.com.
+ [147.11.176.192]) by smtp.gmail.com with ESMTPSA id
+ x16-20020a17090ab01000b001cd4989ff4bsm1169300pjq.18.2022.04.20.22.56.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Apr 2022 22:56:35 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 21 Apr 2022 10:19:07 +0800
-Message-ID: <CAEUhbmUGQ8Jo5zQkCo-4VMfFw6oO+6AUDROEk1H4WHJ-e9Dz+w@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] hw/riscv: Add TPM support to the virt board
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair@alistair23.me>,
- Alistair Francis <alistair23@gmail.com>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>,
- qemu-arm <qemu-arm@nongnu.org>, Peter Maydell <peter.maydell@linaro.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb2c.google.com
+To: Alistair Francis <alistair.francis@wdc.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH 1/2] hw/riscv: spike: Add '/chosen/stdout-path' in device tree
+ unconditionally
+Date: Thu, 21 Apr 2022 13:56:28 +0800
+Message-Id: <20220421055629.1177285-1-bmeng.cn@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,59 +76,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Apr 2022 02:19:22 -0000
+X-List-Received-Date: Thu, 21 Apr 2022 05:56:40 -0000
 
-On Wed, Apr 20, 2022 at 1:52 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> This series adds support for connecting TPM devices to the RISC-V virt
-> board. This is similar to how it works for the ARM virt board.
->
-> This was tested by first creating an emulated TPM device:
->
->     swtpm socket --tpm2 -t -d --tpmstate dir=/tmp/tpm \
->         --ctrl type=unixio,path=swtpm-sock
->
-> Then launching QEMU with:
->
->     -chardev socket,id=chrtpm,path=swtpm-sock \
->     -tpmdev emulator,id=tpm0,chardev=chrtpm \
->     -device tpm-tis-device,tpmdev=tpm0
->
-> The TPM device can be seen in the memory tree and the generated device
-> tree.
+From: Bin Meng <bin.meng@windriver.com>
 
-Please include a 'virt' board documentation update patch to mention
-above usage for TPM, or dynamically instantiated devices with TPM as
-an example.
+At present the adding '/chosen/stdout-path' property in device tree
+is determined by whether a kernel command line is provided, which is
+wrong. It should be added unconditionally.
 
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/942
->
-> Alistair Francis (6):
->   hw/riscv: virt: Add a machine done notifier
->   hw/core: Move the ARM sysbus-fdt to core
->   hw/riscv: virt: Create a platform bus
->   hw/riscv: virt: Add support for generating platform FDT entries
->   hw/riscv: virt: Add device plug support
->   hw/riscv: Enable TPM backends
->
->  include/hw/{arm => core}/sysbus-fdt.h |   0
->  include/hw/riscv/virt.h               |   8 +-
->  hw/arm/virt.c                         |   2 +-
->  hw/arm/xlnx-versal-virt.c             |   1 -
->  hw/{arm => core}/sysbus-fdt.c         |   2 +-
->  hw/riscv/virt.c                       | 312 +++++++++++++++++---------
->  hw/arm/meson.build                    |   1 -
->  hw/core/meson.build                   |   1 +
->  hw/riscv/Kconfig                      |   2 +
->  9 files changed, 221 insertions(+), 108 deletions(-)
->  rename include/hw/{arm => core}/sysbus-fdt.h (100%)
->  rename hw/{arm => core}/sysbus-fdt.c (99%)
->
+Fixes: 8d8897accb1c ("hw/riscv: spike: Allow using binary firmware as bios")
+Signed-off-by: Bin Meng <bin.meng@windriver.com>
+---
 
-Regards,
-Bin
+ hw/riscv/spike.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index d059a67f9b..1562b000bb 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -174,10 +174,11 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+ 
+     riscv_socket_fdt_write_distance_matrix(mc, fdt);
+ 
++    qemu_fdt_add_subnode(fdt, "/chosen");
++    qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
++
+     if (cmdline) {
+-        qemu_fdt_add_subnode(fdt, "/chosen");
+         qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+-        qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
+     }
+ }
+ 
+-- 
+2.25.1
+
 
