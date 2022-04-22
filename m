@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni2Hr-0000n1-0m
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:02:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48742)
+	id 1ni2Jt-0002Pc-H0
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:04:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48846)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2Hq-0000mp-30; Fri, 22 Apr 2022 19:02:02 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:46847)
+ id 1ni2Js-0002PQ-EQ; Fri, 22 Apr 2022 19:04:08 -0400
+Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:42871)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2Ho-0001Vw-4F; Fri, 22 Apr 2022 19:02:01 -0400
-Received: by mail-il1-x12c.google.com with SMTP id f5so5912824ilj.13;
- Fri, 22 Apr 2022 16:01:59 -0700 (PDT)
+ id 1ni2Jl-0001jS-Bg; Fri, 22 Apr 2022 19:04:02 -0400
+Received: by mail-io1-xd30.google.com with SMTP id c125so10097032iof.9;
+ Fri, 22 Apr 2022 16:04:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=MaYFCQnrZT94GwQbZDE4dKdgrAss/Ig6GEihpFEDcX8=;
- b=j4K8oBaHzA0WqQdvfv7F33/+a3ZO238rz8zdjN4AeiCsbv499D2CrEvNQ5EjcLPb1X
- fq3OKo9II/6FVQVTX2sY/H5p1LjsfGW3i+zVeo8zRQE82jtDi2PHVOfjlPpNipTdiqde
- eeSpD0Ca1Amq+TZlpeaZgvipREHZQQyW4wec/kdem7rDE8sFQcyIYk4DK2DbZOcjoVYY
- HgD2NA3ZqYs2mGs5ZANvCsoi5hL38tIVjPLjM/WFK8kpJFOcTsvPVZ0RSoCT/zNkWf8N
- qmDfQrqx82kB8PY/wl9WARqYo1rPTrDcp8z+wJLrkhJh/RSydUyiFsci0INV6G74mmAK
- M2rw==
+ :cc; bh=CCIWU3bBn/dtAiKJ8DuH4biuB0J0cPEXMVE8azYGF0E=;
+ b=mE6xsf7vgvd2aVP1z2ObpqXxdIsRnf/ImtMjEa0tjupFljUFMxvO0zWhfh3HteM+TO
+ Awn8Y97SQ4V516gcLyIfrWNvqEF0OI+TCZQ5XiCoRXLuUWszQHwtrtpilIct8v3xSSiN
+ 2ndBt28rNicC2mP9AAQqCFKyCN/9dGABJ2bb5Qpp67rkhbcQy/gELe1Ly7LJU6umZd0S
+ IH1lQfXA7Y0VISI6vNndOWpFx1A4ROYLf2FjV3KnbILYZj9pxBPhrhOxygaS6ahQkR1R
+ peGosf/Aoyi5DqMOK/z4ZpcmThl5+FcVaAnhU351uJYW6T4mfCPahyihuvK9XH1adqjz
+ uTEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=MaYFCQnrZT94GwQbZDE4dKdgrAss/Ig6GEihpFEDcX8=;
- b=mEe9XcfUHgOvoRmGAjoY9YlFLEJAdTfL4u08GVnlmTaz8Idyo9tcb2+p3uAI/5k2AJ
- cQJuuikiVBd08lxUg1SzPTe6geDUqWnk4QqHl9cFeRuvjgRAhKXNiaueqZPxfZMg3kb0
- fla5JmwDa/7lWv493fWBEzX5jIM7/tHQw2Vc0CxQHDuXQBBw5IrRIBkBxJZEkpKsazcF
- ZSGMiJAHTdAyGRgUM67e9+mOsZy+Lw8ekRjB/j5HadbKJcIdfrlt4PeiuASsukl/cCzi
- Fs/n9h6Dp0rxcd/sZ9sZLss5eAf+T/V2xXHDrqS5uD67Cv3kX9DK/jhg0OA/gpmP7ek4
- 463Q==
-X-Gm-Message-State: AOAM531qqiOPJRcQ87kNfI1iSG1a8FpLUci5jp9lC5uWk01tlBt71a1o
- osPIZz2tjUp9DZVp+YJtEIL4qDZ4lwHnj3ZvtLs=
-X-Google-Smtp-Source: ABdhPJwg0jbbcUYbl8ECD0kUo4awMlCVhZ1CTLqfm5nRIuWbZIOooQMRTxyIggzmXCJBNrWOD18EfZRKWFxaTpsLC90=
-X-Received: by 2002:a05:6e02:1e0a:b0:2cd:6f4d:ad5b with SMTP id
- g10-20020a056e021e0a00b002cd6f4dad5bmr2592447ila.113.1650668518461; Fri, 22
- Apr 2022 16:01:58 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=CCIWU3bBn/dtAiKJ8DuH4biuB0J0cPEXMVE8azYGF0E=;
+ b=IRDOq7lMR53LRBdh5SALpQBDHmklpMA+XA9xvPfFKBrtLf/LPnH9edvNCf9E8GPN/A
+ NjJjkgJ46PoRGoOgCeDON+kimqNVRW0N9jjr5g1/FTHHiJRQOTnlBI0asbMYJW6zPks5
+ 8KDcnQ7d5FRlEkB539YHhS1aTT10HkicnHn9Sq5Rt3b2kgDLgPi7nq9HsDToD1PxVadc
+ DCluFY6vz8cWRAtbIeZ5L8aqznG1GOcORSJsRW5Vay21V/1ZKhyy5E45sq3ZDjHWZh2t
+ PiXPlKNbuxOjHKFrws5tmg9o7/DD5YYqOKoBzvpJ7D2I/nHupCsViBuR3dFsz4gkUoZg
+ Nraw==
+X-Gm-Message-State: AOAM533A56syNIQdr52Wsq65GkuH22FRejS8aa61Hjw7lYUwGP38ii6Z
+ DCqL03ePZVHr+Vh3nGMMXGrDawlKLZ2G60UN0xYPKBeocUSetshx
+X-Google-Smtp-Source: ABdhPJxYHCtIg+tH2rXd0o6Rtk2uBC7zusVsRPHltrUUJUSxx2qIruwXMBrJPHDVBajOYD6CB+naywWV3AyF7QHKWxs=
+X-Received: by 2002:a05:6638:3724:b0:32a:ab86:3f9 with SMTP id
+ k36-20020a056638372400b0032aab8603f9mr3258461jav.267.1650668639869; Fri, 22
+ Apr 2022 16:03:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
+References: <20220421055629.1177285-1-bmeng.cn@gmail.com>
+ <20220421055629.1177285-2-bmeng.cn@gmail.com>
+In-Reply-To: <20220421055629.1177285-2-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Sat, 23 Apr 2022 09:01:32 +1000
-Message-ID: <CAKmqyKO4XgH06dmDzKv8hs29UX1wvhRdaAOsV0h7LkoFqw_qZg@mail.gmail.com>
-Subject: Re: [PATCH v11 00/14] support subsets of scalar crypto extension
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Sat, 23 Apr 2022 09:03:33 +1000
+Message-ID: <CAKmqyKPgrutUF8+uD0fW7xv=2pWBAvTs4hnp7NsLxPuW4t+uaA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv: Don't add empty bootargs to device tree
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
- lustrew@foxmail.com
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,136 +74,93 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2022 23:02:02 -0000
+X-List-Received-Date: Fri, 22 Apr 2022 23:04:08 -0000
 
-On Tue, Apr 19, 2022 at 11:58 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Thu, Apr 21, 2022 at 3:58 PM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> This patchset implements RISC-V scalar crypto extension v1.0.0 version in=
-structions.
-> Partial instructions are reused from B-extension.
+> From: Bin Meng <bin.meng@windriver.com>
 >
-> Specification:
-> https://github.com/riscv/riscv-crypto
+> Commit 7c28f4da20e5 ("RISC-V: Don't add NULL bootargs to device-tree")
+> tried to avoid adding *NULL* bootargs to device tree, but unfortunately
+> the changes were entirely useless, due to MachineState::kernel_cmdline
+> can't be NULL at all as the default value is given as an empty string.
+> (see hw/core/machine.c::machine_initfn()).
 >
-> The port is available here:
-> https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v11
+> Note the wording of *NULL* bootargs is wrong. It can't be NULL otherwise
+> a segfault had already been observed by dereferencing the NULL pointer.
+> It should be worded as *empty" bootargs.
 >
-> To test rvk implementation, specify cpu argument with 'zks=3Dtrue,zkn=3Dt=
-rue' or "zbkb=3Dtrue,zbkc=3Dtrue,zbkx=3Dtrue,zknd=3Dtrue,zkne=3Dtrue,zknh=
-=3Dtrue,zksed=3Dtrue,zksh=3Dtrue,zkr=3Dtrue" to enable K-extension support.=
- This implementation can pass the ACT tests for K with our extended act sup=
-port for qemu (available at https://github.com/plctlab/plct-qemu/tree/plct-=
-k-upstream-v11-with-act)
->
-> Review status:
-> patch 5 is reviewed by Philippe Mathieu-Daud=C3=A9
-> patch 1~11 and 13-14 are acked or reviewed by Alistair Francis
-> patch 2~11 are reviewed by Richard Henderson (fix new comments on patch 6=
- and 7)
->
-> v11:
-> * patch 6: add REQUIRE_32BIT to trans_* function for aes RV32 instruction
-> * patch 7: add REQUIRE_64BIT to trans_* function for aes RV64 instruction
->
-> v10:
-> (only patch 12 is modified)
-> * simplify the conditions for the check in seed function
-> * add NULL check for ret_val in rmw_seed function
-> * remain the change of MSECCFG_* to align with the added MSECCFG_*SEED
->
-> v9:
-> * check whether seed is accessed by a read-write instruction in helper_cs=
-rr.
-> * fix disas for partial scalar crypto instructions
-> * rebase on https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg0=
-0156.html
->
-> v8:
-> * replace large macro for trans function of sha256/512 instructions with =
-parameters to gen_sha* function in patch 8,9,10
-> * fix tcg_const_tl to tcg_constant_tl
-> * fix rmw_seed function
->
-> v7:
-> * reuse gen_unary/gen_arith to simplify trans_* functions
-> * replace DEF_HELPER_* with DEF_HEPER_FLAG_*
-> * move aes64 related macros from patch 6 to patch 7
-> * create common helper gen_aes32_sm4 for aes32 and sm4 related instructio=
-ns
-> * replace bs with shamt (bs << 3)
-> * optimize trans function for sha256, sha512 and sm4 instructions to be g=
-enerated inline
->
-> v6:
-> * add reviewed-by tags
-> * rebase on upstream
->
-> v5:
-> * split the big patches
->
-> v4:
-> * drop "x-" in exposed properties
-> * delete unrelated changes
->
-> v3:
-> * add extension check for SEED csr access
->
-> v2:
-> * optimize implementation for brev8, xperm, zip, unzip
-> * use aes related sbox array from crypto/aes.h
-> * move sm4_sbox to crypto/sm4.c, and share it with target/arm
->
-> Weiwei Li (14):
->   target/riscv: rvk: add cfg properties for zbk* and zk*
->   target/riscv: rvk: add support for zbkb extension
->   target/riscv: rvk: add support for zbkc extension
->   target/riscv: rvk: add support for zbkx extension
->   crypto: move sm4_sbox from target/arm
->   target/riscv: rvk: add support for zknd/zkne extension in RV32
->   target/riscv: rvk: add support for zkne/zknd extension in RV64
->   target/riscv: rvk: add support for sha256 related instructions in zknh
->     extension
->   target/riscv: rvk: add support for sha512 related instructions for
->     RV32 in zknh extension
->   target/riscv: rvk: add support for sha512 related instructions for
->     RV64 in zknh extension
->   target/riscv: rvk: add support for zksed/zksh extension
->   target/riscv: rvk: add CSR support for Zkr
->   disas/riscv.c: rvk: add disas support for Zbk* and Zk* instructions
->   target/riscv: rvk: expose zbk* and zk* properties
+> Fixes: 7c28f4da20e5 ("RISC-V: Don't add NULL bootargs to device-tree")
+> Signed-off-by: Bin Meng <bin.meng@windriver.com>
 
-Do you mind rebasing this on the latest master? Then I can merge it
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
 >
->  crypto/meson.build                      |   1 +
->  crypto/sm4.c                            |  49 +++
->  disas/riscv.c                           | 173 ++++++++++-
->  include/crypto/sm4.h                    |   6 +
->  target/arm/crypto_helper.c              |  36 +--
->  target/riscv/bitmanip_helper.c          |  80 +++++
->  target/riscv/cpu.c                      |  36 +++
->  target/riscv/cpu.h                      |  13 +
->  target/riscv/cpu_bits.h                 |   9 +
->  target/riscv/crypto_helper.c            | 302 ++++++++++++++++++
->  target/riscv/csr.c                      |  80 +++++
->  target/riscv/helper.h                   |  22 ++
->  target/riscv/insn32.decode              |  97 ++++--
->  target/riscv/insn_trans/trans_rvb.c.inc | 116 ++++++-
->  target/riscv/insn_trans/trans_rvk.c.inc | 391 ++++++++++++++++++++++++
->  target/riscv/meson.build                |   3 +-
->  target/riscv/op_helper.c                |   9 +
->  target/riscv/pmp.h                      |   8 +-
->  target/riscv/translate.c                |   8 +
->  19 files changed, 1368 insertions(+), 71 deletions(-)
->  create mode 100644 crypto/sm4.c
->  create mode 100644 include/crypto/sm4.h
->  create mode 100644 target/riscv/crypto_helper.c
->  create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+>  hw/riscv/microchip_pfsoc.c | 2 +-
+>  hw/riscv/sifive_u.c        | 2 +-
+>  hw/riscv/spike.c           | 2 +-
+>  hw/riscv/virt.c            | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
 >
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index cafd1fc9ae..10a5d0e501 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -571,7 +571,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>                                    "linux,initrd-end", end);
+>          }
+>
+> -        if (machine->kernel_cmdline) {
+> +        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
+>              qemu_fdt_setprop_string(machine->fdt, "/chosen",
+>                                      "bootargs", machine->kernel_cmdline);
+>          }
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 7fbc7dea42..cc8c7637cb 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -511,7 +511,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
+>      g_free(nodename);
+>
+>  update_bootargs:
+> -    if (cmdline) {
+> +    if (cmdline && *cmdline) {
+>          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+>      }
+>  }
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 1562b000bb..068ba3493e 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -177,7 +177,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
+>      qemu_fdt_add_subnode(fdt, "/chosen");
+>      qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
+>
+> -    if (cmdline) {
+> +    if (cmdline && *cmdline) {
+>          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
+>      }
+>  }
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index da50cbed43..a628a3abdf 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -998,7 +998,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
+>      create_fdt_flash(s, memmap);
+>
+>  update_bootargs:
+> -    if (cmdline) {
+> +    if (cmdline && *cmdline) {
+>          qemu_fdt_setprop_string(mc->fdt, "/chosen", "bootargs", cmdline);
+>      }
+>  }
 > --
-> 2.17.1
+> 2.25.1
 >
 >
 
