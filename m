@@ -1,68 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nhrbT-0007po-DM
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 07:37:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55688)
+	id 1ni2Hr-0000n1-0m
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:02:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ralf.ramsauer@oth-regensburg.de>)
- id 1nhrbM-0007kL-6Y; Fri, 22 Apr 2022 07:37:30 -0400
-Received: from mta02.hs-regensburg.de ([2001:638:a01:1096::12]:42772)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ni2Hq-0000mp-30; Fri, 22 Apr 2022 19:02:02 -0400
+Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:46847)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ralf.ramsauer@oth-regensburg.de>)
- id 1nhrbJ-0002p2-Hl; Fri, 22 Apr 2022 07:37:27 -0400
-Received: from E16S03.hs-regensburg.de (e16s03.hs-regensburg.de
- [IPv6:2001:638:a01:8013::93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client CN "E16S03", Issuer "E16S03" (not verified))
- by mta02.hs-regensburg.de (Postfix) with ESMTPS id 4KlC7D74Tgzxyt;
- Fri, 22 Apr 2022 13:37:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oth-regensburg.de;
- s=mta02-20211122; t=1650627433;
- bh=5PSR/UKyAzzjWCG/mukxhIzYBr84DO9hQFdRDp4xK7k=;
- h=Date:Subject:To:CC:References:From:In-Reply-To:From;
- b=uD+py59L3z6EG2KSgwUGL8ikDxr4xmg94JHtvIhwu1FKaLYMDiUNJZOF7nibjehIZ
- Zygk0ePPFIC9XHf/DI8qjGqAdwuQS7h2w+PQuXnzHgIt+aYErbWvmtaMDq5gTv7WSB
- 325NYnkpxFUXD34BNGqSZhOMV+XvPt5JFVqSIuUBMX/uIksXqAj4YBmh3SoRVS1CpU
- Q/yUurRA5Z1BMp7f+zKIiatgkoMOdnOXGPBQDf3oMqkkWPfjWFf869BRJPm6qXobmP
- PPlfFpwOct5w+wFT6e6EmKZqN3bqQUKsXFwzC3XVdY7Ivfcg75JgCYipPXSnni0JW4
- KfKkL5gp90yfA==
-Received: from [IPV6:2a02:810d:8fc0:44bc::cea3] (2001:638:a01:8013::138) by
- E16S03.hs-regensburg.de (2001:638:a01:8013::93) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.24; Fri, 22 Apr 2022 13:37:12 +0200
-Message-ID: <38fe04aa-17e8-591c-fa65-ee9d931ed45c@oth-regensburg.de>
-Date: Fri, 22 Apr 2022 13:37:11 +0200
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ni2Ho-0001Vw-4F; Fri, 22 Apr 2022 19:02:01 -0400
+Received: by mail-il1-x12c.google.com with SMTP id f5so5912824ilj.13;
+ Fri, 22 Apr 2022 16:01:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=MaYFCQnrZT94GwQbZDE4dKdgrAss/Ig6GEihpFEDcX8=;
+ b=j4K8oBaHzA0WqQdvfv7F33/+a3ZO238rz8zdjN4AeiCsbv499D2CrEvNQ5EjcLPb1X
+ fq3OKo9II/6FVQVTX2sY/H5p1LjsfGW3i+zVeo8zRQE82jtDi2PHVOfjlPpNipTdiqde
+ eeSpD0Ca1Amq+TZlpeaZgvipREHZQQyW4wec/kdem7rDE8sFQcyIYk4DK2DbZOcjoVYY
+ HgD2NA3ZqYs2mGs5ZANvCsoi5hL38tIVjPLjM/WFK8kpJFOcTsvPVZ0RSoCT/zNkWf8N
+ qmDfQrqx82kB8PY/wl9WARqYo1rPTrDcp8z+wJLrkhJh/RSydUyiFsci0INV6G74mmAK
+ M2rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=MaYFCQnrZT94GwQbZDE4dKdgrAss/Ig6GEihpFEDcX8=;
+ b=mEe9XcfUHgOvoRmGAjoY9YlFLEJAdTfL4u08GVnlmTaz8Idyo9tcb2+p3uAI/5k2AJ
+ cQJuuikiVBd08lxUg1SzPTe6geDUqWnk4QqHl9cFeRuvjgRAhKXNiaueqZPxfZMg3kb0
+ fla5JmwDa/7lWv493fWBEzX5jIM7/tHQw2Vc0CxQHDuXQBBw5IrRIBkBxJZEkpKsazcF
+ ZSGMiJAHTdAyGRgUM67e9+mOsZy+Lw8ekRjB/j5HadbKJcIdfrlt4PeiuASsukl/cCzi
+ Fs/n9h6Dp0rxcd/sZ9sZLss5eAf+T/V2xXHDrqS5uD67Cv3kX9DK/jhg0OA/gpmP7ek4
+ 463Q==
+X-Gm-Message-State: AOAM531qqiOPJRcQ87kNfI1iSG1a8FpLUci5jp9lC5uWk01tlBt71a1o
+ osPIZz2tjUp9DZVp+YJtEIL4qDZ4lwHnj3ZvtLs=
+X-Google-Smtp-Source: ABdhPJwg0jbbcUYbl8ECD0kUo4awMlCVhZ1CTLqfm5nRIuWbZIOooQMRTxyIggzmXCJBNrWOD18EfZRKWFxaTpsLC90=
+X-Received: by 2002:a05:6e02:1e0a:b0:2cd:6f4d:ad5b with SMTP id
+ g10-20020a056e021e0a00b002cd6f4dad5bmr2592447ila.113.1650668518461; Fri, 22
+ Apr 2022 16:01:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [EXT] Re: [PATCH v2] target/riscv: Fix incorrect PTE merge in
- walk_pte
-Content-Language: en-US
-To: Bin Meng <bmeng.cn@gmail.com>
-CC: Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
- <alistair.francis@wdc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, Stefan Huber
- <stefan.huber@oth-regensburg.de>, Richard Henderson
- <richard.henderson@linaro.org>, Bin Meng <bin.meng@windriver.com>, Konrad
- Schwarz <konrad.schwarz@siemens.com>
-References: <20220401122248.2792180-1-ralf.ramsauer@oth-regensburg.de>
- <20220404173417.2946065-1-ralf.ramsauer@oth-regensburg.de>
- <CAEUhbmXZo=RSGSOoJQRTfsRF8z3gEntgKZDNmptLsvja-z6u+w@mail.gmail.com>
- <CAEUhbmUTSX3EYu7=-S-o-iYxZzVbpkZWeLqnDTB-R9mUn20HDA@mail.gmail.com>
-From: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
-In-Reply-To: <CAEUhbmUTSX3EYu7=-S-o-iYxZzVbpkZWeLqnDTB-R9mUn20HDA@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [2001:638:a01:8013::138]
-X-ClientProxiedBy: E16S02.hs-regensburg.de (2001:638:a01:8013::92) To
- E16S03.hs-regensburg.de (2001:638:a01:8013::93)
-Received-SPF: pass client-ip=2001:638:a01:1096::12;
- envelope-from=ralf.ramsauer@oth-regensburg.de; helo=mta02.hs-regensburg.de
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+References: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220419014847.9722-1-liweiwei@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Sat, 23 Apr 2022 09:01:32 +1000
+Message-ID: <CAKmqyKO4XgH06dmDzKv8hs29UX1wvhRdaAOsV0h7LkoFqw_qZg@mail.gmail.com>
+Subject: Re: [PATCH v11 00/14] support subsets of scalar crypto extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
+ lustrew@foxmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,86 +78,136 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2022 11:37:32 -0000
+X-List-Received-Date: Fri, 22 Apr 2022 23:02:02 -0000
 
+On Tue, Apr 19, 2022 at 11:58 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>
+> This patchset implements RISC-V scalar crypto extension v1.0.0 version in=
+structions.
+> Partial instructions are reused from B-extension.
+>
+> Specification:
+> https://github.com/riscv/riscv-crypto
+>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v11
+>
+> To test rvk implementation, specify cpu argument with 'zks=3Dtrue,zkn=3Dt=
+rue' or "zbkb=3Dtrue,zbkc=3Dtrue,zbkx=3Dtrue,zknd=3Dtrue,zkne=3Dtrue,zknh=
+=3Dtrue,zksed=3Dtrue,zksh=3Dtrue,zkr=3Dtrue" to enable K-extension support.=
+ This implementation can pass the ACT tests for K with our extended act sup=
+port for qemu (available at https://github.com/plctlab/plct-qemu/tree/plct-=
+k-upstream-v11-with-act)
+>
+> Review status:
+> patch 5 is reviewed by Philippe Mathieu-Daud=C3=A9
+> patch 1~11 and 13-14 are acked or reviewed by Alistair Francis
+> patch 2~11 are reviewed by Richard Henderson (fix new comments on patch 6=
+ and 7)
+>
+> v11:
+> * patch 6: add REQUIRE_32BIT to trans_* function for aes RV32 instruction
+> * patch 7: add REQUIRE_64BIT to trans_* function for aes RV64 instruction
+>
+> v10:
+> (only patch 12 is modified)
+> * simplify the conditions for the check in seed function
+> * add NULL check for ret_val in rmw_seed function
+> * remain the change of MSECCFG_* to align with the added MSECCFG_*SEED
+>
+> v9:
+> * check whether seed is accessed by a read-write instruction in helper_cs=
+rr.
+> * fix disas for partial scalar crypto instructions
+> * rebase on https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg0=
+0156.html
+>
+> v8:
+> * replace large macro for trans function of sha256/512 instructions with =
+parameters to gen_sha* function in patch 8,9,10
+> * fix tcg_const_tl to tcg_constant_tl
+> * fix rmw_seed function
+>
+> v7:
+> * reuse gen_unary/gen_arith to simplify trans_* functions
+> * replace DEF_HELPER_* with DEF_HEPER_FLAG_*
+> * move aes64 related macros from patch 6 to patch 7
+> * create common helper gen_aes32_sm4 for aes32 and sm4 related instructio=
+ns
+> * replace bs with shamt (bs << 3)
+> * optimize trans function for sha256, sha512 and sm4 instructions to be g=
+enerated inline
+>
+> v6:
+> * add reviewed-by tags
+> * rebase on upstream
+>
+> v5:
+> * split the big patches
+>
+> v4:
+> * drop "x-" in exposed properties
+> * delete unrelated changes
+>
+> v3:
+> * add extension check for SEED csr access
+>
+> v2:
+> * optimize implementation for brev8, xperm, zip, unzip
+> * use aes related sbox array from crypto/aes.h
+> * move sm4_sbox to crypto/sm4.c, and share it with target/arm
+>
+> Weiwei Li (14):
+>   target/riscv: rvk: add cfg properties for zbk* and zk*
+>   target/riscv: rvk: add support for zbkb extension
+>   target/riscv: rvk: add support for zbkc extension
+>   target/riscv: rvk: add support for zbkx extension
+>   crypto: move sm4_sbox from target/arm
+>   target/riscv: rvk: add support for zknd/zkne extension in RV32
+>   target/riscv: rvk: add support for zkne/zknd extension in RV64
+>   target/riscv: rvk: add support for sha256 related instructions in zknh
+>     extension
+>   target/riscv: rvk: add support for sha512 related instructions for
+>     RV32 in zknh extension
+>   target/riscv: rvk: add support for sha512 related instructions for
+>     RV64 in zknh extension
+>   target/riscv: rvk: add support for zksed/zksh extension
+>   target/riscv: rvk: add CSR support for Zkr
+>   disas/riscv.c: rvk: add disas support for Zbk* and Zk* instructions
+>   target/riscv: rvk: expose zbk* and zk* properties
 
+Do you mind rebasing this on the latest master? Then I can merge it
 
-On 22/04/2022 04:54, Bin Meng wrote:
-> On Fri, Apr 22, 2022 at 10:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->>
->> On Tue, Apr 5, 2022 at 1:34 AM Ralf Ramsauer
->> <ralf.ramsauer@oth-regensburg.de> wrote:
->>>
->>> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
->>> case, walk_pte will erroneously merge them.
->>>
->>> Enforce the split up, by tracking the virtual base address.
->>>
->>> Let's say we have the mapping:
->>> 0x81200000 -> 0x89623000 (4K)
->>> 0x8120f000 -> 0x89624000 (4K)
->>>
->>> Before, walk_pte would have shown:
->>>
->>> vaddr            paddr            size             attr
->>> ---------------- ---------------- ---------------- -------
->>> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
->>>
->>> as it only checks for subsequent paddrs. With this patch, it becomes:
->>>
->>> vaddr            paddr            size             attr
->>> ---------------- ---------------- ---------------- -------
->>> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
->>> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
->>>
->>> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
->>> ---
->>>   target/riscv/monitor.c | 5 ++++-
->>>   1 file changed, 4 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
->>> index 7efb4b62c1..9dc4cb1156 100644
->>> --- a/target/riscv/monitor.c
->>> +++ b/target/riscv/monitor.c
->>> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->>>   {
->>>       hwaddr pte_addr;
->>>       hwaddr paddr;
->>> +    target_ulong last_start = -1;
->>>       target_ulong pgsize;
->>>       target_ulong pte;
->>>       int ptshift;
->>> @@ -116,7 +117,8 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->>>                    * contiguous mapped block details.
->>>                    */
->>
->> Please also update the comments above to mention the new case you added here.
+Alistair
 
-Shall I provide a v3? No problem, if that makes your life easier. 
-Otherwise, you could also squash attached comment on integration.
-
-Thanks
-   Ralf
-
-diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-index 02512ed48f..1cb0932e03 100644
---- a/target/riscv/monitor.c
-+++ b/target/riscv/monitor.c
-@@ -143,9 +143,9 @@ static void walk_pte(Monitor *mon, hwaddr base, 
-target_ulong start,
-                   * A leaf PTE has been found
-                   *
-                   * If current PTE's permission bits differ from the 
-last one,
--                 * or current PTE's ppn does not make a contiguous physical
--                 * address block together with the last one, print out 
-the last
--                 * contiguous mapped block details.
-+                * or the current PTE breaks up a contiguous virtual or
-+                * physical mapping, address block together with the 
-last one,
-+                * print out the last contiguous mapped block details.
-                   */
-                  if ((*last_attr != attr) ||
-                      (*last_paddr + *last_size != paddr) ||
+>
+>  crypto/meson.build                      |   1 +
+>  crypto/sm4.c                            |  49 +++
+>  disas/riscv.c                           | 173 ++++++++++-
+>  include/crypto/sm4.h                    |   6 +
+>  target/arm/crypto_helper.c              |  36 +--
+>  target/riscv/bitmanip_helper.c          |  80 +++++
+>  target/riscv/cpu.c                      |  36 +++
+>  target/riscv/cpu.h                      |  13 +
+>  target/riscv/cpu_bits.h                 |   9 +
+>  target/riscv/crypto_helper.c            | 302 ++++++++++++++++++
+>  target/riscv/csr.c                      |  80 +++++
+>  target/riscv/helper.h                   |  22 ++
+>  target/riscv/insn32.decode              |  97 ++++--
+>  target/riscv/insn_trans/trans_rvb.c.inc | 116 ++++++-
+>  target/riscv/insn_trans/trans_rvk.c.inc | 391 ++++++++++++++++++++++++
+>  target/riscv/meson.build                |   3 +-
+>  target/riscv/op_helper.c                |   9 +
+>  target/riscv/pmp.h                      |   8 +-
+>  target/riscv/translate.c                |   8 +
+>  19 files changed, 1368 insertions(+), 71 deletions(-)
+>  create mode 100644 crypto/sm4.c
+>  create mode 100644 include/crypto/sm4.h
+>  create mode 100644 target/riscv/crypto_helper.c
+>  create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+>
+> --
+> 2.17.1
+>
+>
 
