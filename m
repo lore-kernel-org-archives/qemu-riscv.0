@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni2Jt-0002Pc-H0
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:04:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48846)
+	id 1ni2Ln-0004gb-2o
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:06:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49082)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2Js-0002PQ-EQ; Fri, 22 Apr 2022 19:04:08 -0400
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:42871)
+ id 1ni2Ll-0004gB-Gn; Fri, 22 Apr 2022 19:06:05 -0400
+Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:45632)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2Jl-0001jS-Bg; Fri, 22 Apr 2022 19:04:02 -0400
-Received: by mail-io1-xd30.google.com with SMTP id c125so10097032iof.9;
- Fri, 22 Apr 2022 16:04:00 -0700 (PDT)
+ id 1ni2Lj-0002IF-RD; Fri, 22 Apr 2022 19:06:05 -0400
+Received: by mail-io1-xd36.google.com with SMTP id z19so5504759iof.12;
+ Fri, 22 Apr 2022 16:06:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CCIWU3bBn/dtAiKJ8DuH4biuB0J0cPEXMVE8azYGF0E=;
- b=mE6xsf7vgvd2aVP1z2ObpqXxdIsRnf/ImtMjEa0tjupFljUFMxvO0zWhfh3HteM+TO
- Awn8Y97SQ4V516gcLyIfrWNvqEF0OI+TCZQ5XiCoRXLuUWszQHwtrtpilIct8v3xSSiN
- 2ndBt28rNicC2mP9AAQqCFKyCN/9dGABJ2bb5Qpp67rkhbcQy/gELe1Ly7LJU6umZd0S
- IH1lQfXA7Y0VISI6vNndOWpFx1A4ROYLf2FjV3KnbILYZj9pxBPhrhOxygaS6ahQkR1R
- peGosf/Aoyi5DqMOK/z4ZpcmThl5+FcVaAnhU351uJYW6T4mfCPahyihuvK9XH1adqjz
- uTEg==
+ :cc; bh=7F9AG9ma4bzjuBiwdABwwb8ME9fek2vaq7tbYSOQjIk=;
+ b=VKq0rgjF/+pG4og8UKscN4jw6q2T36DinBc0YRYeGUf5uhWA5f2jEWXVjFUFkNM+oC
+ u/W6rbsOrdW8VoS3bSciHrjIfbIF6Iwtjk798pi4knC/LBMzro0FjUCpAFq48xmuRm+J
+ 7UAIs5bU91ztewSUX3J2wve5dPqq4TkWxjsCxSQgEOdSgo6ztueupuvl8gSXwaf83OuC
+ zyfAUHB2H7iUNRr+lORBLhTMU6uA86KVeSTLu7wMmdD3xOiMgzAU8lc3f+0OJK0NmqrG
+ AuSL7aaJV/f0CToWonWy85gKT9M/tTeSQ+DuLj5fFy2f1PI4LaK2anKzw9I9jOXv/APw
+ tZTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=CCIWU3bBn/dtAiKJ8DuH4biuB0J0cPEXMVE8azYGF0E=;
- b=IRDOq7lMR53LRBdh5SALpQBDHmklpMA+XA9xvPfFKBrtLf/LPnH9edvNCf9E8GPN/A
- NjJjkgJ46PoRGoOgCeDON+kimqNVRW0N9jjr5g1/FTHHiJRQOTnlBI0asbMYJW6zPks5
- 8KDcnQ7d5FRlEkB539YHhS1aTT10HkicnHn9Sq5Rt3b2kgDLgPi7nq9HsDToD1PxVadc
- DCluFY6vz8cWRAtbIeZ5L8aqznG1GOcORSJsRW5Vay21V/1ZKhyy5E45sq3ZDjHWZh2t
- PiXPlKNbuxOjHKFrws5tmg9o7/DD5YYqOKoBzvpJ7D2I/nHupCsViBuR3dFsz4gkUoZg
- Nraw==
-X-Gm-Message-State: AOAM533A56syNIQdr52Wsq65GkuH22FRejS8aa61Hjw7lYUwGP38ii6Z
- DCqL03ePZVHr+Vh3nGMMXGrDawlKLZ2G60UN0xYPKBeocUSetshx
-X-Google-Smtp-Source: ABdhPJxYHCtIg+tH2rXd0o6Rtk2uBC7zusVsRPHltrUUJUSxx2qIruwXMBrJPHDVBajOYD6CB+naywWV3AyF7QHKWxs=
-X-Received: by 2002:a05:6638:3724:b0:32a:ab86:3f9 with SMTP id
- k36-20020a056638372400b0032aab8603f9mr3258461jav.267.1650668639869; Fri, 22
- Apr 2022 16:03:59 -0700 (PDT)
+ bh=7F9AG9ma4bzjuBiwdABwwb8ME9fek2vaq7tbYSOQjIk=;
+ b=JYSxXgYDLwSp/AOWFUxbz8ItMT17m9phcwbRlSu81a3HbZA382lwhW8YCN7o8zQIl4
+ 4+ZKRMCdQARMlezZB/9zsB2l6L66WEyw33RIfo52jAOlQXJyp2J6tibhBnsttysa7WdE
+ tefSVmtfPJYQmkAEsWxnz1JbU4DBc8OH69PAKD0WucQabe7h/tVbD0zWEPHVolOk8U3O
+ CKTJNtcwJ2dn1Z0VCgCVVBEIdKPqJ27YSZp7mLM+84Nj2PG8XwZLaNNiC5B9Jg+c3itx
+ MF4c8jRY9TmNIRxhrymnDjprKsh2RtNxL7BdonBEUqgbm+Ec/7BQipqIe3CtcsF0YVKh
+ kB9g==
+X-Gm-Message-State: AOAM5323+SfXzgu6LcPdCyj7bfFBmovlFZGrnu4NfX7sC7Kv/raH238F
+ jN9tj73uCxI/vWxlR1J314b8sy8ScQbp3NLUBEI=
+X-Google-Smtp-Source: ABdhPJw68Ruv4faDxA5e72yFGSgc2DlEgg4X3tn6ZdF0Sm9mfuPpSit7Pu6gCQVP7KXtbUV7InXd4+Xtx+vtYnO6mu0=
+X-Received: by 2002:a05:6638:d06:b0:326:ba0:347 with SMTP id
+ q6-20020a0566380d0600b003260ba00347mr3031474jaj.68.1650668761846; Fri, 22 Apr
+ 2022 16:06:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220421055629.1177285-1-bmeng.cn@gmail.com>
- <20220421055629.1177285-2-bmeng.cn@gmail.com>
-In-Reply-To: <20220421055629.1177285-2-bmeng.cn@gmail.com>
+References: <20220422040436.2233-1-frank.chang@sifive.com>
+In-Reply-To: <20220422040436.2233-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Sat, 23 Apr 2022 09:03:33 +1000
-Message-ID: <CAKmqyKPgrutUF8+uD0fW7xv=2pWBAvTs4hnp7NsLxPuW4t+uaA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/riscv: Don't add empty bootargs to device tree
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Sat, 23 Apr 2022 09:05:35 +1000
+Message-ID: <CAKmqyKPEx1EYfsBba7TXPGbQsDGYV+qMToE2XKqAxBUu=JQopQ@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Support configuarable marchid,
+ mvendorid, mipid CSR values
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+ Bin Meng <bin.meng@windriver.com>, Jim Shu <jim.shu@sifive.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,24 +74,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2022 23:04:08 -0000
+X-List-Received-Date: Fri, 22 Apr 2022 23:06:06 -0000
 
-On Thu, Apr 21, 2022 at 3:58 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+On Fri, Apr 22, 2022 at 2:05 PM <frank.chang@sifive.com> wrote:
 >
-> From: Bin Meng <bin.meng@windriver.com>
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> Commit 7c28f4da20e5 ("RISC-V: Don't add NULL bootargs to device-tree")
-> tried to avoid adding *NULL* bootargs to device tree, but unfortunately
-> the changes were entirely useless, due to MachineState::kernel_cmdline
-> can't be NULL at all as the default value is given as an empty string.
-> (see hw/core/machine.c::machine_initfn()).
+> Allow user to set core's marchid, mvendorid, mipid CSRs through
+> -cpu command line option.
 >
-> Note the wording of *NULL* bootargs is wrong. It can't be NULL otherwise
-> a segfault had already been observed by dereferencing the NULL pointer.
-> It should be worded as *empty" bootargs.
+> The default values of marchid and mipid are built with QEMU's version
+> numbers.
 >
-> Fixes: 7c28f4da20e5 ("RISC-V: Don't add NULL bootargs to device-tree")
-> Signed-off-by: Bin Meng <bin.meng@windriver.com>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
 Thanks!
 
@@ -100,67 +98,111 @@ Applied to riscv-to-apply.next
 Alistair
 
 > ---
+>  target/riscv/cpu.c |  9 +++++++++
+>  target/riscv/cpu.h |  4 ++++
+>  target/riscv/csr.c | 38 ++++++++++++++++++++++++++++++++++----
+>  3 files changed, 47 insertions(+), 4 deletions(-)
 >
->  hw/riscv/microchip_pfsoc.c | 2 +-
->  hw/riscv/sifive_u.c        | 2 +-
->  hw/riscv/spike.c           | 2 +-
->  hw/riscv/virt.c            | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 0c774056c5..ace68ed855 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -34,6 +34,11 @@
 >
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index cafd1fc9ae..10a5d0e501 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -571,7 +571,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
->                                    "linux,initrd-end", end);
->          }
+>  /* RISC-V CPU definitions */
 >
-> -        if (machine->kernel_cmdline) {
-> +        if (machine->kernel_cmdline && *machine->kernel_cmdline) {
->              qemu_fdt_setprop_string(machine->fdt, "/chosen",
->                                      "bootargs", machine->kernel_cmdline);
->          }
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index 7fbc7dea42..cc8c7637cb 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -511,7 +511,7 @@ static void create_fdt(SiFiveUState *s, const MemMapEntry *memmap,
->      g_free(nodename);
+> +#define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
+> +                             (QEMU_VERSION_MINOR << 8)  | \
+> +                             (QEMU_VERSION_MICRO))
+> +#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
+> +
+>  static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
 >
->  update_bootargs:
-> -    if (cmdline) {
-> +    if (cmdline && *cmdline) {
->          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
->      }
+>  struct isa_ext_data {
+> @@ -810,6 +815,10 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+>      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+>
+> +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+> +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
+> +    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
+> +
+>      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+>      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+>      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 34c22d5d3b..46c66fbf8e 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -393,6 +393,10 @@ struct RISCVCPUConfig {
+>      bool ext_zve32f;
+>      bool ext_zve64f;
+>
+> +    uint32_t mvendorid;
+> +    uint64_t marchid;
+> +    uint64_t mipid;
+> +
+>      /* Vendor-specific custom extensions */
+>      bool ext_XVentanaCondOps;
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6ba85e7b5d..1c2d3f7193 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -612,6 +612,36 @@ static RISCVException write_ignore(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
 >  }
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 1562b000bb..068ba3493e 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -177,7 +177,7 @@ static void create_fdt(SpikeState *s, const MemMapEntry *memmap,
->      qemu_fdt_add_subnode(fdt, "/chosen");
->      qemu_fdt_setprop_string(fdt, "/chosen", "stdout-path", "/htif");
 >
-> -    if (cmdline) {
-> +    if (cmdline && *cmdline) {
->          qemu_fdt_setprop_string(fdt, "/chosen", "bootargs", cmdline);
->      }
->  }
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index da50cbed43..a628a3abdf 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -998,7 +998,7 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap,
->      create_fdt_flash(s, memmap);
+> +static RISCVException read_mvendorid(CPURISCVState *env, int csrno,
+> +                                     target_ulong *val)
+> +{
+> +    CPUState *cs = env_cpu(env);
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +    *val = cpu->cfg.mvendorid;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_marchid(CPURISCVState *env, int csrno,
+> +                                   target_ulong *val)
+> +{
+> +    CPUState *cs = env_cpu(env);
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +    *val = cpu->cfg.marchid;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_mipid(CPURISCVState *env, int csrno,
+> +                                 target_ulong *val)
+> +{
+> +    CPUState *cs = env_cpu(env);
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +    *val = cpu->cfg.mipid;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  static RISCVException read_mhartid(CPURISCVState *env, int csrno,
+>                                     target_ulong *val)
+>  {
+> @@ -3260,10 +3290,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_MINSTRETH] = { "minstreth", any32, read_instreth },
 >
->  update_bootargs:
-> -    if (cmdline) {
-> +    if (cmdline && *cmdline) {
->          qemu_fdt_setprop_string(mc->fdt, "/chosen", "bootargs", cmdline);
->      }
->  }
+>      /* Machine Information Registers */
+> -    [CSR_MVENDORID] = { "mvendorid", any,   read_zero    },
+> -    [CSR_MARCHID]   = { "marchid",   any,   read_zero    },
+> -    [CSR_MIMPID]    = { "mimpid",    any,   read_zero    },
+> -    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid },
+> +    [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
+> +    [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
+> +    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
+> +    [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
+>
+>      [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
+>                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
 > --
-> 2.25.1
+> 2.35.1
 >
 >
 
