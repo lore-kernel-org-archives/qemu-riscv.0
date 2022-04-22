@@ -1,58 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nhith-0002tC-Jg
-	for mharc-qemu-riscv@gnu.org; Thu, 21 Apr 2022 22:19:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44616)
+	id 1nhjQu-0006XK-DF
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Apr 2022 22:54:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47642)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nhitf-0002rd-UL; Thu, 21 Apr 2022 22:19:47 -0400
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:46712)
+ id 1nhjQs-0006X9-PO; Thu, 21 Apr 2022 22:54:06 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b]:33354)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nhite-0002QS-Fe; Thu, 21 Apr 2022 22:19:47 -0400
-Received: by mail-yb1-xb32.google.com with SMTP id b26so6355835ybj.13;
- Thu, 21 Apr 2022 19:19:45 -0700 (PDT)
+ id 1nhjQr-0006q5-9i; Thu, 21 Apr 2022 22:54:06 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id e30so5288281eda.0;
+ Thu, 21 Apr 2022 19:54:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=SiND2r5c6ThS1JyIBWyrP4Lrb7B3zGrsKactfu0OpG8=;
- b=Wsp+P1LKtXqZB9oBWj6sAkhGb6329XQ12XItUs/eXw9GjmMG8w7n3DKSkLD4Htp2g3
- Kuu/YJWA76/t9+wX/clufpcBTVWC4ZFLra9RDuv2yyrkoYq3ssEdLP6CSaCE1vTnVmcw
- IB2WOWIxqaaTRbPBZmU0WJzjvjJGLjPvv96VZvJ/3uRpEKgKqdq692XL+Ja6UnDNVsKD
- k/A0bVD+qmUiFCGESxmfMPgoiCnRXxU2XGc0g8MGGOlF+5RWuhhpGa6VinNLBnT46QWO
- 3ftcxQg3HQXlCegjsXd3JVnemrnu5ZTCod+UhjIVRw1gTbFxzFSO2JolBV9DaQ9jAUJL
- fVRA==
+ :cc; bh=58bVPIchb9GnwlvpO7uiVi8laO6UOzi/xkzrYmMDSWI=;
+ b=HrFIxYeL4oaSaAH5z7SYrZB9DrN+APXifDPqoPSA466+x4q9SLtS9NhZW0nzCbG4Sp
+ FFM1bo3/Efui8CpBiNHXmMCwwXZpAMGN7WSh6DcmgQ06mjc9ustJChueeiQnBx3XKoWX
+ K+MKw+66gzCpjxfVLvtyOLwqF+59bjw0+OIc7MKlf05vYuFbj+osip6tDKw7a+zKxaqW
+ njbhhyG9Y3h4TSvqo4fVSGyNwQ6q8tnjQ44YlM5DRkk/ZwBmaFiyKhh3J//FI+VYG1wp
+ Ich3/FV5rFG/uHdwwB8habEMaQpoon28uY97DTnzwBeMMCjWN+Ibua8HWYLp0zeqqQKZ
+ 6Qtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=SiND2r5c6ThS1JyIBWyrP4Lrb7B3zGrsKactfu0OpG8=;
- b=7y1SFh5qbeUnz7qAx3zmdy6HO5hupi9U5+cbtEjnOVeEKTTNs5zBy4LdTtzvXC8zzR
- o9tHo5H6L9f7oQrEmn62Oi7ed8amCoU5p2oFWeUptq+94N8DQCqx/YbK5Oru7hNizZYj
- LfF/1186BtidwNWm2Z4O2cEJeoKXPAjlTmnWsdl98aEzwPqF3Gxbp0dqxnp1VFg9FnQZ
- vUIHcV5bhH7Z+cOg0lUmDQY+e1L91syKUF3qfxEsevwPH6XvtD+d7BZ5k7WHctDBOtB9
- 2gcsxd49g/7Off4uJdqT2EknbD8VTNEMqtHusrD4swP78alpQk1oIe5H4/mwdFJt5p3T
- 1pKg==
-X-Gm-Message-State: AOAM532KF2zzmCTWx8qmWYiENlGVBoX3mB0zYjxhJV7VxAfbwScrUqm4
- K7cGtmbwLNq+cCmD784gvJ8SHo72zMMGZ8zIdgA=
-X-Google-Smtp-Source: ABdhPJyyBX5Z3tEaF4GOWR4cp6Ra0rTHXhO8CTZDgoMb47ey7ThFtccx3w3MeSjiYVkI3yTqHAwK2bM2dTsZfk88glg=
-X-Received: by 2002:a25:d244:0:b0:641:e40:4a37 with SMTP id
- j65-20020a25d244000000b006410e404a37mr2597045ybg.123.1650593985218; Thu, 21
- Apr 2022 19:19:45 -0700 (PDT)
+ bh=58bVPIchb9GnwlvpO7uiVi8laO6UOzi/xkzrYmMDSWI=;
+ b=HywEYZrdpyXovLRVhbigNzETlKjYL1UNtkicMlzxtQFVBo5GqM3SUM4LTNpR5I73Cc
+ TdFKx9eM4qY54OA1RKfdQs0GR9hQ05aUWM4hG+khztE4Bz6dClYroZtaXX5TrLYDJgd3
+ qD4d9T5i16Na4xZlWof1DDy9nxQlnhDhQd+KRhOnI/PgQwdLAMkiDMKptLYpQ+feDe15
+ qVVuLNBmh+cMIV0j1xBdg58h8tTbE0CrcARxQ6vq3o4gCVVyVwSwPPCspEEH5Li8FcCh
+ e3uDsW2W4e3gEE8mlkIOf77VeYkd9X7yaGRVGkZoLXX3DQr+EDF7qP/S1uiuGYhMZUgD
+ Ee8A==
+X-Gm-Message-State: AOAM533Z15tcPO1ei74jKogV9H/Fbhwfecv7ficB/MvcFu+EDSpBp04p
+ jt7DFHYyGuQzRN7YaG2kJUxHATYLfODIuPAZhnM=
+X-Google-Smtp-Source: ABdhPJxONbzPN0BrKfNpS3lmFxV0DnT7FMluLZZLnZ3SDd76lB5E66Mt7Z9BhdHYW03L1tfK5NjF7MhZKtNf5u7fCAM=
+X-Received: by 2002:a05:6402:442:b0:416:14b7:4d55 with SMTP id
+ p2-20020a056402044200b0041614b74d55mr2583047edw.183.1650596042622; Thu, 21
+ Apr 2022 19:54:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220416193034.538161-1-qemu@ben.fluff.org>
- <20220416193034.538161-5-qemu@ben.fluff.org>
-In-Reply-To: <20220416193034.538161-5-qemu@ben.fluff.org>
+References: <20220401122248.2792180-1-ralf.ramsauer@oth-regensburg.de>
+ <20220404173417.2946065-1-ralf.ramsauer@oth-regensburg.de>
+In-Reply-To: <20220404173417.2946065-1-ralf.ramsauer@oth-regensburg.de>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 22 Apr 2022 10:19:34 +0800
-Message-ID: <CAEUhbmUAYtS1bshMrVceWe_B=uWVacty0scHUv9MoAfBQxeMKQ@mail.gmail.com>
-Subject: Re: [PATCH 4/4] hw/riscv: use qemu_fdt_setprop_strings() in sifive_u.c
-To: Ben Dooks <qemu@ben.fluff.org>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Fri, 22 Apr 2022 10:53:50 +0800
+Message-ID: <CAEUhbmXZo=RSGSOoJQRTfsRF8z3gEntgKZDNmptLsvja-z6u+w@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Fix incorrect PTE merge in walk_pte
+To: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Stefan Huber <stefan.huber@oth-regensburg.de>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Bin Meng <bin.meng@windriver.com>, 
+ Konrad Schwarz <konrad.schwarz@siemens.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=bmeng.cn@gmail.com; helo=mail-yb1-xb32.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -72,24 +76,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2022 02:19:48 -0000
+X-List-Received-Date: Fri, 22 Apr 2022 02:54:07 -0000
 
-On Mon, Apr 18, 2022 at 5:13 AM Ben Dooks <qemu@ben.fluff.org> wrote:
+On Tue, Apr 5, 2022 at 1:34 AM Ralf Ramsauer
+<ralf.ramsauer@oth-regensburg.de> wrote:
 >
-> Use the qemu_fdt_setprop_strings() in sifve_u.c to simplify
-> the code.
+> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
+> case, walk_pte will erroneously merge them.
 >
-> Signed-off-by; Ben Dooks <qemu@ben.fluff.org>
-
-; should be replaced to :
-
-Not sure how you did that, but you can do with "git commit -s" and git
-will take care of the SoB tag.
-
+> Enforce the split up, by tracking the virtual base address.
+>
+> Let's say we have the mapping:
+> 0x81200000 -> 0x89623000 (4K)
+> 0x8120f000 -> 0x89624000 (4K)
+>
+> Before, walk_pte would have shown:
+>
+> vaddr            paddr            size             attr
+> ---------------- ---------------- ---------------- -------
+> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
+>
+> as it only checks for subsequent paddrs. With this patch, it becomes:
+>
+> vaddr            paddr            size             attr
+> ---------------- ---------------- ---------------- -------
+> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
+> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
+>
+> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
 > ---
->  hw/riscv/sifive_u.c | 20 +++++++-------------
->  1 file changed, 7 insertions(+), 13 deletions(-)
+>  target/riscv/monitor.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 >
+> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+> index 7efb4b62c1..9dc4cb1156 100644
+> --- a/target/riscv/monitor.c
+> +++ b/target/riscv/monitor.c
+> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>  {
+>      hwaddr pte_addr;
+>      hwaddr paddr;
+> +    target_ulong last_start = -1;
+>      target_ulong pgsize;
+>      target_ulong pte;
+>      int ptshift;
+> @@ -116,7 +117,8 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>                   * contiguous mapped block details.
+>                   */
+
+Please also update the comments above to mention the new case you added here.
+
+>                  if ((*last_attr != attr) ||
+> -                    (*last_paddr + *last_size != paddr)) {
+> +                    (*last_paddr + *last_size != paddr) ||
+> +                    (last_start + *last_size != start)) {
+>                      print_pte(mon, va_bits, *vbase, *pbase,
+>                                *last_paddr + *last_size - *pbase, *last_attr);
+>
+> @@ -125,6 +127,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>                      *last_attr = attr;
+>                  }
+>
+> +                last_start = start;
+>                  *last_paddr = paddr;
+>                  *last_size = pgsize;
+>              } else {
+> --
 
 Regards,
 Bin
