@@ -1,49 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni5cf-00007b-Md
+	id 1ni5cf-00008G-TZ
 	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:35:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39736)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39754)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5ca-0008KP-Qd; Fri, 22 Apr 2022 22:35:40 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:39820 helo=cstnet.cn)
+ id 1ni5cb-0008Kd-57; Fri, 22 Apr 2022 22:35:41 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:39800 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5cW-00058C-Bm; Fri, 22 Apr 2022 22:35:40 -0400
+ id 1ni5cW-000580-6h; Fri, 22 Apr 2022 22:35:40 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S7;
- Sat, 23 Apr 2022 10:35:28 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S4;
+ Sat, 23 Apr 2022 10:35:26 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 05/14] crypto: move sm4_sbox from target/arm
-Date: Sat, 23 Apr 2022 10:35:01 +0800
-Message-Id: <20220423023510.30794-6-liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 02/14] target/riscv: rvk: add support for zbkb extension
+Date: Sat, 23 Apr 2022 10:34:58 +0800
+Message-Id: <20220423023510.30794-3-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
 References: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S7
-X-Coremail-Antispam: 1UD129KBjvJXoW3WF4kXr1UZr4ftw15Jry7KFg_yoW7uFyrpr
- 15Gw1Sqr4rXrnrt39Iqr10yr48Ary0y3WYyw4xury8Zan7Gw4rJF9IyrW8GryUAr15CFy5
- uF92yr15GF18tr7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_
- Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
- IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
- Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
- xan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
- rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
- CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x02
- 67AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
- 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
- SdkUUUUU=
+X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S4
+X-Coremail-Antispam: 1UD129KBjvAXoW3tFWxGrW3JrWfWryrWryxAFb_yoW8Jrykto
+ W7Gw45Jrs3Gry3ua4fK3WUXry7Zr4j9as3Jw1Y93Wqga97XrWfKryDJws5Zw4rXry3KrWr
+ Ja97tFnxJwn5Wwnxn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+ AaLaJ3UjIYCTnIWjp_UUUOU7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
+ j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r15M28IrcIa0x
+ kI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
+ jcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
+ M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+ v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+ F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
+ IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAF
+ wI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc4
+ 0Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AK
+ xVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr
+ 1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbdOz7UU
+ UUU==
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -68,155 +65,374 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 23 Apr 2022 02:35:41 -0000
 
-   - share it between target/arm and target/riscv
+ - reuse partial instructions of zbb extension, update extension check for them
+ - add brev8, pack, packh, packw, unzip, zip instructions
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- crypto/meson.build         |  1 +
- crypto/sm4.c               | 49 ++++++++++++++++++++++++++++++++++++++
- include/crypto/sm4.h       |  6 +++++
- target/arm/crypto_helper.c | 36 +---------------------------
- 4 files changed, 57 insertions(+), 35 deletions(-)
- create mode 100644 crypto/sm4.c
- create mode 100644 include/crypto/sm4.h
+ target/riscv/bitmanip_helper.c          | 53 ++++++++++++++
+ target/riscv/helper.h                   |  3 +
+ target/riscv/insn32.decode              | 45 +++++++-----
+ target/riscv/insn_trans/trans_rvb.c.inc | 94 +++++++++++++++++++++----
+ target/riscv/translate.c                |  7 ++
+ 5 files changed, 174 insertions(+), 28 deletions(-)
 
-diff --git a/crypto/meson.build b/crypto/meson.build
-index 19c44bea89..b47352180f 100644
---- a/crypto/meson.build
-+++ b/crypto/meson.build
-@@ -40,6 +40,7 @@ if have_afalg
- endif
- crypto_ss.add(when: gnutls, if_true: files('tls-cipher-suites.c'))
+diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
+index f1b5e5549f..e003e8b25b 100644
+--- a/target/riscv/bitmanip_helper.c
++++ b/target/riscv/bitmanip_helper.c
+@@ -49,3 +49,56 @@ target_ulong HELPER(clmulr)(target_ulong rs1, target_ulong rs2)
  
-+util_ss.add(files('sm4.c'))
- util_ss.add(files('aes.c'))
- util_ss.add(files('init.c'))
- if gnutls.found()
-diff --git a/crypto/sm4.c b/crypto/sm4.c
-new file mode 100644
-index 0000000000..9f0cd452c7
---- /dev/null
-+++ b/crypto/sm4.c
-@@ -0,0 +1,49 @@
-+/*
-+ * QEMU crypto sm4 support
-+ *
-+ * Copyright (C) 2013 - 2018 Linaro Ltd <ard.biesheuvel@linaro.org>
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation; either
-+ * version 2.1 of the License, or (at your option) any later version.
-+ */
+     return result;
+ }
 +
-+#include "qemu/osdep.h"
-+#include "crypto/sm4.h"
++static inline target_ulong do_swap(target_ulong x, uint64_t mask, int shift)
++{
++    return ((x & mask) << shift) | ((x & ~mask) >> shift);
++}
 +
-+uint8_t const sm4_sbox[] = {
-+    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
-+    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
-+    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
-+    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
-+    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
-+    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
-+    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
-+    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
-+    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
-+    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
-+    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
-+    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
-+    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
-+    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
-+    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
-+    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
-+    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
-+    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
-+    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
-+    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
-+    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
-+    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
-+    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
-+    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
-+    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
-+    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
-+    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
-+    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
-+    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
-+    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
-+    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
-+    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
++target_ulong HELPER(brev8)(target_ulong rs1)
++{
++    target_ulong x = rs1;
++
++    x = do_swap(x, 0x5555555555555555ull, 1);
++    x = do_swap(x, 0x3333333333333333ull, 2);
++    x = do_swap(x, 0x0f0f0f0f0f0f0f0full, 4);
++    return x;
++}
++
++static const uint64_t shuf_masks[] = {
++    dup_const(MO_8, 0x44),
++    dup_const(MO_8, 0x30),
++    dup_const(MO_16, 0x0f00),
++    dup_const(MO_32, 0xff0000)
 +};
 +
-diff --git a/include/crypto/sm4.h b/include/crypto/sm4.h
-new file mode 100644
-index 0000000000..9bd3ebc62e
---- /dev/null
-+++ b/include/crypto/sm4.h
-@@ -0,0 +1,6 @@
-+#ifndef QEMU_SM4_H
-+#define QEMU_SM4_H
++static inline target_ulong do_shuf_stage(target_ulong src, uint64_t maskL,
++                                         uint64_t maskR, int shift)
++{
++    target_ulong x = src & ~(maskL | maskR);
 +
-+extern const uint8_t sm4_sbox[256];
++    x |= ((src << shift) & maskL) | ((src >> shift) & maskR);
++    return x;
++}
 +
-+#endif
-diff --git a/target/arm/crypto_helper.c b/target/arm/crypto_helper.c
-index 4c8fd34aec..d28690321f 100644
---- a/target/arm/crypto_helper.c
-+++ b/target/arm/crypto_helper.c
-@@ -15,6 +15,7 @@
- #include "exec/helper-proto.h"
- #include "tcg/tcg-gvec-desc.h"
- #include "crypto/aes.h"
-+#include "crypto/sm4.h"
- #include "vec_internal.h"
++target_ulong HELPER(unzip)(target_ulong rs1)
++{
++    target_ulong x = rs1;
++
++    x = do_shuf_stage(x, shuf_masks[0], shuf_masks[0] >> 1, 1);
++    x = do_shuf_stage(x, shuf_masks[1], shuf_masks[1] >> 2, 2);
++    x = do_shuf_stage(x, shuf_masks[2], shuf_masks[2] >> 4, 4);
++    x = do_shuf_stage(x, shuf_masks[3], shuf_masks[3] >> 8, 8);
++    return x;
++}
++
++target_ulong HELPER(zip)(target_ulong rs1)
++{
++    target_ulong x = rs1;
++
++    x = do_shuf_stage(x, shuf_masks[3], shuf_masks[3] >> 8, 8);
++    x = do_shuf_stage(x, shuf_masks[2], shuf_masks[2] >> 4, 4);
++    x = do_shuf_stage(x, shuf_masks[1], shuf_masks[1] >> 2, 2);
++    x = do_shuf_stage(x, shuf_masks[0], shuf_masks[0] >> 1, 1);
++    return x;
++}
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index a669d0187b..8a3a7615f2 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -66,6 +66,9 @@ DEF_HELPER_FLAGS_1(fclass_d, TCG_CALL_NO_RWG_SE, tl, i64)
+ /* Bitmanip */
+ DEF_HELPER_FLAGS_2(clmul, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, tl)
++DEF_HELPER_FLAGS_1(brev8, TCG_CALL_NO_RWG_SE, tl, tl)
++DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
++DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
  
- union CRYPTO_STATE {
-@@ -694,41 +695,6 @@ DO_SM3TT(crypto_sm3tt2b, 3)
+ /* Floating Point - Half Precision */
+ DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 1d3ff1efe1..fdceaf621a 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -717,8 +717,22 @@ sh2add_uw  0010000 .......... 100 ..... 0111011 @r
+ sh3add_uw  0010000 .......... 110 ..... 0111011 @r
+ slli_uw    00001 ............ 001 ..... 0011011 @sh
  
- #undef DO_SM3TT
+-# *** RV32 Zbb Standard Extension ***
++# *** RV32 Zbb/Zbkb Standard Extension ***
+ andn       0100000 .......... 111 ..... 0110011 @r
++rol        0110000 .......... 001 ..... 0110011 @r
++ror        0110000 .......... 101 ..... 0110011 @r
++rori       01100 ............ 101 ..... 0010011 @sh
++# The encoding for rev8 differs between RV32 and RV64.
++# rev8_32 denotes the RV32 variant.
++rev8_32    011010 011000 ..... 101 ..... 0010011 @r2
++# The encoding for zext.h differs between RV32 and RV64.
++# zext_h_32 denotes the RV32 variant.
++{
++  zext_h_32  0000100 00000 ..... 100 ..... 0110011 @r2
++  pack       0000100 ..... ..... 100 ..... 0110011 @r
++}
++xnor       0100000 .......... 100 ..... 0110011 @r
++# *** RV32 extra Zbb Standard Extension ***
+ clz        011000 000000 ..... 001 ..... 0010011 @r2
+ cpop       011000 000010 ..... 001 ..... 0010011 @r2
+ ctz        011000 000001 ..... 001 ..... 0010011 @r2
+@@ -728,23 +742,15 @@ min        0000101 .......... 100 ..... 0110011 @r
+ minu       0000101 .......... 101 ..... 0110011 @r
+ orc_b      001010 000111 ..... 101 ..... 0010011 @r2
+ orn        0100000 .......... 110 ..... 0110011 @r
+-# The encoding for rev8 differs between RV32 and RV64.
+-# rev8_32 denotes the RV32 variant.
+-rev8_32    011010 011000 ..... 101 ..... 0010011 @r2
+-rol        0110000 .......... 001 ..... 0110011 @r
+-ror        0110000 .......... 101 ..... 0110011 @r
+-rori       01100 ............ 101 ..... 0010011 @sh
+ sext_b     011000 000100 ..... 001 ..... 0010011 @r2
+ sext_h     011000 000101 ..... 001 ..... 0010011 @r2
+-xnor       0100000 .......... 100 ..... 0110011 @r
+-# The encoding for zext.h differs between RV32 and RV64.
+-# zext_h_32 denotes the RV32 variant.
+-zext_h_32  0000100 00000 ..... 100 ..... 0110011 @r2
++# *** RV32 extra Zbkb Standard Extension ***
++brev8      0110100 00111 ..... 101 ..... 0010011 @r2  #grevi
++packh      0000100  .......... 111 ..... 0110011 @r
++unzip      0000100 01111 ..... 101 ..... 0010011 @r2  #unshfl
++zip        0000100 01111 ..... 001 ..... 0010011 @r2  #shfl
  
--static uint8_t const sm4_sbox[] = {
--    0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7,
--    0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
--    0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3,
--    0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
--    0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a,
--    0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
--    0xe4, 0xb3, 0x1c, 0xa9, 0xc9, 0x08, 0xe8, 0x95,
--    0x80, 0xdf, 0x94, 0xfa, 0x75, 0x8f, 0x3f, 0xa6,
--    0x47, 0x07, 0xa7, 0xfc, 0xf3, 0x73, 0x17, 0xba,
--    0x83, 0x59, 0x3c, 0x19, 0xe6, 0x85, 0x4f, 0xa8,
--    0x68, 0x6b, 0x81, 0xb2, 0x71, 0x64, 0xda, 0x8b,
--    0xf8, 0xeb, 0x0f, 0x4b, 0x70, 0x56, 0x9d, 0x35,
--    0x1e, 0x24, 0x0e, 0x5e, 0x63, 0x58, 0xd1, 0xa2,
--    0x25, 0x22, 0x7c, 0x3b, 0x01, 0x21, 0x78, 0x87,
--    0xd4, 0x00, 0x46, 0x57, 0x9f, 0xd3, 0x27, 0x52,
--    0x4c, 0x36, 0x02, 0xe7, 0xa0, 0xc4, 0xc8, 0x9e,
--    0xea, 0xbf, 0x8a, 0xd2, 0x40, 0xc7, 0x38, 0xb5,
--    0xa3, 0xf7, 0xf2, 0xce, 0xf9, 0x61, 0x15, 0xa1,
--    0xe0, 0xae, 0x5d, 0xa4, 0x9b, 0x34, 0x1a, 0x55,
--    0xad, 0x93, 0x32, 0x30, 0xf5, 0x8c, 0xb1, 0xe3,
--    0x1d, 0xf6, 0xe2, 0x2e, 0x82, 0x66, 0xca, 0x60,
--    0xc0, 0x29, 0x23, 0xab, 0x0d, 0x53, 0x4e, 0x6f,
--    0xd5, 0xdb, 0x37, 0x45, 0xde, 0xfd, 0x8e, 0x2f,
--    0x03, 0xff, 0x6a, 0x72, 0x6d, 0x6c, 0x5b, 0x51,
--    0x8d, 0x1b, 0xaf, 0x92, 0xbb, 0xdd, 0xbc, 0x7f,
--    0x11, 0xd9, 0x5c, 0x41, 0x1f, 0x10, 0x5a, 0xd8,
--    0x0a, 0xc1, 0x31, 0x88, 0xa5, 0xcd, 0x7b, 0xbd,
--    0x2d, 0x74, 0xd0, 0x12, 0xb8, 0xe5, 0xb4, 0xb0,
--    0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e,
--    0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
--    0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20,
--    0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48,
--};
--
- static void do_crypto_sm4e(uint64_t *rd, uint64_t *rn, uint64_t *rm)
+-# *** RV64 Zbb Standard Extension (in addition to RV32 Zbb) ***
+-clzw       0110000 00000 ..... 001 ..... 0011011 @r2
+-ctzw       0110000 00001 ..... 001 ..... 0011011 @r2
+-cpopw      0110000 00010 ..... 001 ..... 0011011 @r2
++# *** RV64 Zbb/Zbkb Standard Extension (in addition to RV32 Zbb/Zbkb) ***
+ # The encoding for rev8 differs between RV32 and RV64.
+ # When executing on RV64, the encoding used in RV32 is an illegal
+ # instruction, so we use different handler functions to differentiate.
+@@ -755,7 +761,14 @@ rorw       0110000 .......... 101 ..... 0111011 @r
+ # The encoding for zext.h differs between RV32 and RV64.
+ # When executing on RV64, the encoding used in RV32 is an illegal
+ # instruction, so we use different handler functions to differentiate.
+-zext_h_64  0000100 00000 ..... 100 ..... 0111011 @r2
++{
++  zext_h_64  0000100 00000 ..... 100 ..... 0111011 @r2
++  packw      0000100 ..... ..... 100 ..... 0111011 @r
++}
++# *** RV64 extra Zbb Standard Extension (in addition to RV32 Zbb) ***
++clzw       0110000 00000 ..... 001 ..... 0011011 @r2
++ctzw       0110000 00001 ..... 001 ..... 0011011 @r2
++cpopw      0110000 00010 ..... 001 ..... 0011011 @r2
+ 
+ # *** RV32 Zbc Standard Extension ***
+ clmul      0000101 .......... 001 ..... 0110011 @r
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index e8519a6d69..f36577579d 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -1,5 +1,5 @@
+ /*
+- * RISC-V translation routines for the Zb[abcs] Standard Extension.
++ * RISC-V translation routines for the Zb[abcs] and Zbk[bcx] Standard Extension.
+  *
+  * Copyright (c) 2020 Kito Cheng, kito.cheng@sifive.com
+  * Copyright (c) 2020 Frank Chang, frank.chang@sifive.com
+@@ -42,6 +42,12 @@
+     }                                            \
+ } while (0)
+ 
++#define REQUIRE_ZBKB(ctx) do {                   \
++    if (!ctx->cfg_ptr->ext_zbkb) {               \
++        return false;                            \
++    }                                            \
++} while (0)
++
+ static void gen_clz(TCGv ret, TCGv arg1)
  {
-     union CRYPTO_STATE d = { .l = { rn[0], rn[1] } };
+     tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
+@@ -85,19 +91,19 @@ static bool trans_cpop(DisasContext *ctx, arg_cpop *a)
+ 
+ static bool trans_andn(DisasContext *ctx, arg_andn *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_logic(ctx, a, tcg_gen_andc_tl);
+ }
+ 
+ static bool trans_orn(DisasContext *ctx, arg_orn *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_logic(ctx, a, tcg_gen_orc_tl);
+ }
+ 
+ static bool trans_xnor(DisasContext *ctx, arg_xnor *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_logic(ctx, a, tcg_gen_eqv_tl);
+ }
+ 
+@@ -247,7 +253,7 @@ static void gen_rorw(TCGv ret, TCGv arg1, TCGv arg2)
+ 
+ static bool trans_ror(DisasContext *ctx, arg_ror *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotr_tl, gen_rorw, NULL);
+ }
+ 
+@@ -264,7 +270,7 @@ static void gen_roriw(TCGv ret, TCGv arg1, target_long shamt)
+ 
+ static bool trans_rori(DisasContext *ctx, arg_rori *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_shift_imm_fn_per_ol(ctx, a, EXT_NONE,
+                                    tcg_gen_rotri_tl, gen_roriw, NULL);
+ }
+@@ -289,7 +295,7 @@ static void gen_rolw(TCGv ret, TCGv arg1, TCGv arg2)
+ 
+ static bool trans_rol(DisasContext *ctx, arg_rol *a)
+ {
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_shift_per_ol(ctx, a, EXT_NONE, tcg_gen_rotl_tl, gen_rolw, NULL);
+ }
+ 
+@@ -301,14 +307,14 @@ static void gen_rev8_32(TCGv ret, TCGv src1)
+ static bool trans_rev8_32(DisasContext *ctx, arg_rev8_32 *a)
+ {
+     REQUIRE_32BIT(ctx);
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_unary(ctx, a, EXT_NONE, gen_rev8_32);
+ }
+ 
+ static bool trans_rev8_64(DisasContext *ctx, arg_rev8_64 *a)
+ {
+     REQUIRE_64BIT(ctx);
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     return gen_unary(ctx, a, EXT_NONE, tcg_gen_bswap_tl);
+ }
+ 
+@@ -403,7 +409,7 @@ static bool trans_cpopw(DisasContext *ctx, arg_cpopw *a)
+ static bool trans_rorw(DisasContext *ctx, arg_rorw *a)
+ {
+     REQUIRE_64BIT(ctx);
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     ctx->ol = MXL_RV32;
+     return gen_shift(ctx, a, EXT_NONE, gen_rorw, NULL);
+ }
+@@ -411,7 +417,7 @@ static bool trans_rorw(DisasContext *ctx, arg_rorw *a)
+ static bool trans_roriw(DisasContext *ctx, arg_roriw *a)
+ {
+     REQUIRE_64BIT(ctx);
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     ctx->ol = MXL_RV32;
+     return gen_shift_imm_fn(ctx, a, EXT_NONE, gen_roriw, NULL);
+ }
+@@ -419,7 +425,7 @@ static bool trans_roriw(DisasContext *ctx, arg_roriw *a)
+ static bool trans_rolw(DisasContext *ctx, arg_rolw *a)
+ {
+     REQUIRE_64BIT(ctx);
+-    REQUIRE_ZBB(ctx);
++    REQUIRE_EITHER_EXT(ctx, zbb, zbkb);
+     ctx->ol = MXL_RV32;
+     return gen_shift(ctx, a, EXT_NONE, gen_rolw, NULL);
+ }
+@@ -504,3 +510,67 @@ static bool trans_clmulr(DisasContext *ctx, arg_clmulh *a)
+     REQUIRE_ZBC(ctx);
+     return gen_arith(ctx, a, EXT_NONE, gen_helper_clmulr, NULL);
+ }
++
++static void gen_pack(TCGv ret, TCGv src1, TCGv src2)
++{
++    tcg_gen_deposit_tl(ret, src1, src2,
++                       TARGET_LONG_BITS / 2,
++                       TARGET_LONG_BITS / 2);
++}
++
++static void gen_packh(TCGv ret, TCGv src1, TCGv src2)
++{
++    TCGv t = tcg_temp_new();
++
++    tcg_gen_ext8u_tl(t, src2);
++    tcg_gen_deposit_tl(ret, src1, t, 8, TARGET_LONG_BITS - 8);
++    tcg_temp_free(t);
++}
++
++static void gen_packw(TCGv ret, TCGv src1, TCGv src2)
++{
++    TCGv t = tcg_temp_new();
++
++    tcg_gen_ext16s_tl(t, src2);
++    tcg_gen_deposit_tl(ret, src1, t, 16, TARGET_LONG_BITS - 16);
++    tcg_temp_free(t);
++}
++
++static bool trans_brev8(DisasContext *ctx, arg_brev8 *a)
++{
++    REQUIRE_ZBKB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, gen_helper_brev8);
++}
++
++static bool trans_pack(DisasContext *ctx, arg_pack *a)
++{
++    REQUIRE_ZBKB(ctx);
++    return gen_arith(ctx, a, EXT_NONE, gen_pack, NULL);
++}
++
++static bool trans_packh(DisasContext *ctx, arg_packh *a)
++{
++    REQUIRE_ZBKB(ctx);
++    return gen_arith(ctx, a, EXT_NONE, gen_packh, NULL);
++}
++
++static bool trans_packw(DisasContext *ctx, arg_packw *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZBKB(ctx);
++    return gen_arith(ctx, a, EXT_NONE, gen_packw, NULL);
++}
++
++static bool trans_unzip(DisasContext *ctx, arg_unzip *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZBKB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, gen_helper_unzip);
++}
++
++static bool trans_zip(DisasContext *ctx, arg_zip *a)
++{
++    REQUIRE_32BIT(ctx);
++    REQUIRE_ZBKB(ctx);
++    return gen_unary(ctx, a, EXT_NONE, gen_helper_zip);
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 6495726302..121ead7cfe 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -688,6 +688,13 @@ EX_SH(12)
+     }                                  \
+ } while (0)
+ 
++#define REQUIRE_EITHER_EXT(ctx, A, B) do {       \
++    if (!ctx->cfg_ptr->ext_##A &&      \
++        !ctx->cfg_ptr->ext_##B) {      \
++        return false;                            \
++    }                                            \
++} while (0)
++
+ static int ex_rvc_register(DisasContext *ctx, int reg)
+ {
+     return 8 + reg;
 -- 
 2.17.1
 
