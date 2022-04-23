@@ -1,73 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni2OT-0006bB-1G
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 19:08:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49276)
+	id 1ni5cb-0008LL-MG
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:35:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39670)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2OL-0006al-48; Fri, 22 Apr 2022 19:08:46 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:34357)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ni2OI-0002bC-At; Fri, 22 Apr 2022 19:08:44 -0400
-Received: by mail-io1-xd33.google.com with SMTP id i196so10128629ioa.1;
- Fri, 22 Apr 2022 16:08:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=StcNUHjgtj7f9ZmiCvSNOu4tXRYsBwlZSc9lwSdnLjM=;
- b=Nz54OdlVMc8D44IGu14P7pDZHl1NlTEIdT74s3C3NGmYs8F4kLz/xlngoInfAJaLCy
- jIxqBEzDjhQ9hk/KZAvy3x8Srryr59jTD5/bn2M8bzc+XcI8cpILZkdHfUnF6mXMD++H
- ma0uCbEEGmLNjH+ars7g12djwJ98QJuwbYh8mH8sHCLD5mhQFH5FXuY55+/T5RLKBCTf
- EJZlQmiRu40IQi+gvpwmHVN0WmwrTqDmGo4wRioZrS9hG/gwRcTmfdJqORKjRznaEsOc
- V/38PmIiPLCh4+ZXp8b4g0Aofm6mK6zl95TRYwUR7v1P3kyTwOVlqb8naar7K19gFjWj
- F5vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=StcNUHjgtj7f9ZmiCvSNOu4tXRYsBwlZSc9lwSdnLjM=;
- b=ZFVnluP5/oHmE9PA8aXNdllfGnHGF20MoJMLgHaJ0rHwiwXgP++9CfySxM+OYrmPAa
- PcnVZE0vNRQFIpafeZoTdcYbtQmiGIQpzYsrdExZWgdZQCaI2z33iGDz/e7QnjVz6Oft
- uB/Z9fV8aGuCn1o/GMh6kMnbGLH4GvbvLJ9yCsQ9xnlEiuRsTUCFnHStvxd2dbtwWfIu
- M/DTANgrIuhtRzUrxhk/WvE4jkc6kmlh2hiaUcosI6Vu6HypRZM1XR1/mK0o8bt38eAo
- WHn3z+3AcYVBXii7cdwLVh8KL6JAe9KdMWIl9/VVkf9BSW5X5tErYUM+gbackJ5tmXH9
- E7Ag==
-X-Gm-Message-State: AOAM531nv83tmWYLNivp57F7X3JwkLspehO6TezMpIP+gdrdjy21kB+e
- RwhweXdu2H7r9E+ACbT3W/AabpYQa7+IbP1APKw=
-X-Google-Smtp-Source: ABdhPJy/veYTETdZgb+k9aQ4UlfQZuCLzTGM3kA/gOzFeTgjDf/T/mxIafDf+o4w414L3315Rd245auxscN4+V+Lfpk=
-X-Received: by 2002:a05:6638:3724:b0:32a:ab86:3f9 with SMTP id
- k36-20020a056638372400b0032aab8603f9mr3265864jav.267.1650668920992; Fri, 22
- Apr 2022 16:08:40 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220401122248.2792180-1-ralf.ramsauer@oth-regensburg.de>
- <20220404173417.2946065-1-ralf.ramsauer@oth-regensburg.de>
- <CAEUhbmXZo=RSGSOoJQRTfsRF8z3gEntgKZDNmptLsvja-z6u+w@mail.gmail.com>
- <CAEUhbmUTSX3EYu7=-S-o-iYxZzVbpkZWeLqnDTB-R9mUn20HDA@mail.gmail.com>
- <38fe04aa-17e8-591c-fa65-ee9d931ed45c@oth-regensburg.de>
-In-Reply-To: <38fe04aa-17e8-591c-fa65-ee9d931ed45c@oth-regensburg.de>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Sat, 23 Apr 2022 09:08:15 +1000
-Message-ID: <CAKmqyKNtcV3MN0qzVEOgty=o137-QfYm4_c_hHmb1O9YfhSiQQ@mail.gmail.com>
-Subject: Re: [EXT] Re: [PATCH v2] target/riscv: Fix incorrect PTE merge in
- walk_pte
-To: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Stefan Huber <stefan.huber@oth-regensburg.de>, 
- Konrad Schwarz <konrad.schwarz@siemens.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ni5cZ-0008JX-1J; Fri, 22 Apr 2022 22:35:39 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:39818 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1ni5cW-00058A-75; Fri, 22 Apr 2022 22:35:38 -0400
+Received: from localhost.localdomain (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S6;
+ Sat, 23 Apr 2022 10:35:27 +0800 (CST)
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
+ luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 04/14] target/riscv: rvk: add support for zbkx extension
+Date: Sat, 23 Apr 2022 10:35:00 +0800
+Message-Id: <20220423023510.30794-5-liweiwei@iscas.ac.cn>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
+References: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S6
+X-Coremail-Antispam: 1UD129KBjvJXoWxCFy8Jr1DXFy3Zr1fGw1xKrg_yoWrGry5pF
+ 4SkrW5GFWUJrWfXa1SyF45G3W3Jrsagr17Zws3tw1kta15JFZ5tr1qkw43KF45JFn09r4j
+ 9a1DA34ay3y8Xa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_
+ Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
+ IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
+ Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
+ xan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
+ rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
+ CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
+ 67AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
+ 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
+ SdkUUUUU=
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -81,95 +63,118 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Apr 2022 23:08:48 -0000
+X-List-Received-Date: Sat, 23 Apr 2022 02:35:40 -0000
 
-On Fri, Apr 22, 2022 at 10:10 PM Ralf Ramsauer
-<ralf.ramsauer@oth-regensburg.de> wrote:
->
->
->
-> On 22/04/2022 04:54, Bin Meng wrote:
-> > On Fri, Apr 22, 2022 at 10:53 AM Bin Meng <bmeng.cn@gmail.com> wrote:
-> >>
-> >> On Tue, Apr 5, 2022 at 1:34 AM Ralf Ramsauer
-> >> <ralf.ramsauer@oth-regensburg.de> wrote:
-> >>>
-> >>> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
-> >>> case, walk_pte will erroneously merge them.
-> >>>
-> >>> Enforce the split up, by tracking the virtual base address.
-> >>>
-> >>> Let's say we have the mapping:
-> >>> 0x81200000 -> 0x89623000 (4K)
-> >>> 0x8120f000 -> 0x89624000 (4K)
-> >>>
-> >>> Before, walk_pte would have shown:
-> >>>
-> >>> vaddr            paddr            size             attr
-> >>> ---------------- ---------------- ---------------- -------
-> >>> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
-> >>>
-> >>> as it only checks for subsequent paddrs. With this patch, it becomes:
-> >>>
-> >>> vaddr            paddr            size             attr
-> >>> ---------------- ---------------- ---------------- -------
-> >>> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
-> >>> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
-> >>>
-> >>> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
-> >>> ---
-> >>>   target/riscv/monitor.c | 5 ++++-
-> >>>   1 file changed, 4 insertions(+), 1 deletion(-)
-> >>>
-> >>> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> >>> index 7efb4b62c1..9dc4cb1156 100644
-> >>> --- a/target/riscv/monitor.c
-> >>> +++ b/target/riscv/monitor.c
-> >>> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
-> >>>   {
-> >>>       hwaddr pte_addr;
-> >>>       hwaddr paddr;
-> >>> +    target_ulong last_start = -1;
-> >>>       target_ulong pgsize;
-> >>>       target_ulong pte;
-> >>>       int ptshift;
-> >>> @@ -116,7 +117,8 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
-> >>>                    * contiguous mapped block details.
-> >>>                    */
-> >>
-> >> Please also update the comments above to mention the new case you added here.
->
-> Shall I provide a v3? No problem, if that makes your life easier.
-> Otherwise, you could also squash attached comment on integration.
+ - add xperm4 and xperm8 instructions
 
-Yes, please submit a v3
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/bitmanip_helper.c          | 27 +++++++++++++++++++++++++
+ target/riscv/helper.h                   |  2 ++
+ target/riscv/insn32.decode              |  4 ++++
+ target/riscv/insn_trans/trans_rvb.c.inc | 18 +++++++++++++++++
+ 4 files changed, 51 insertions(+)
 
-Alistair
+diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
+index e003e8b25b..b99c4a39a1 100644
+--- a/target/riscv/bitmanip_helper.c
++++ b/target/riscv/bitmanip_helper.c
+@@ -102,3 +102,30 @@ target_ulong HELPER(zip)(target_ulong rs1)
+     x = do_shuf_stage(x, shuf_masks[0], shuf_masks[0] >> 1, 1);
+     return x;
+ }
++
++static inline target_ulong do_xperm(target_ulong rs1, target_ulong rs2,
++                                    uint32_t sz_log2)
++{
++    target_ulong r = 0;
++    target_ulong sz = 1LL << sz_log2;
++    target_ulong mask = (1LL << sz) - 1;
++    target_ulong pos;
++
++    for (int i = 0; i < TARGET_LONG_BITS; i += sz) {
++        pos = ((rs2 >> i) & mask) << sz_log2;
++        if (pos < sizeof(target_ulong) * 8) {
++            r |= ((rs1 >> pos) & mask) << i;
++        }
++    }
++    return r;
++}
++
++target_ulong HELPER(xperm4)(target_ulong rs1, target_ulong rs2)
++{
++    return do_xperm(rs1, rs2, 2);
++}
++
++target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
++{
++    return do_xperm(rs1, rs2, 3);
++}
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 8a3a7615f2..cfead7abfc 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -69,6 +69,8 @@ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ DEF_HELPER_FLAGS_1(brev8, TCG_CALL_NO_RWG_SE, tl, tl)
+ DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
+ DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
++DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
++DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
+ 
+ /* Floating Point - Half Precision */
+ DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 3a49acab37..75ffac9c81 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -776,6 +776,10 @@ clmulh     0000101 .......... 011 ..... 0110011 @r
+ # *** RV32 extra Zbc Standard Extension ***
+ clmulr     0000101 .......... 010 ..... 0110011 @r
+ 
++# *** RV32 Zbkx Standard Extension ***
++xperm4     0010100 .......... 010 ..... 0110011 @r
++xperm8     0010100 .......... 100 ..... 0110011 @r
++
+ # *** RV32 Zbs Standard Extension ***
+ bclr       0100100 .......... 001 ..... 0110011 @r
+ bclri      01001. ........... 001 ..... 0010011 @sh
+diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
+index 5a5751557d..e2b8329f1e 100644
+--- a/target/riscv/insn_trans/trans_rvb.c.inc
++++ b/target/riscv/insn_trans/trans_rvb.c.inc
+@@ -48,6 +48,12 @@
+     }                                            \
+ } while (0)
+ 
++#define REQUIRE_ZBKX(ctx) do {                   \
++    if (!ctx->cfg_ptr->ext_zbkx) {               \
++        return false;                            \
++    }                                            \
++} while (0)
++
+ static void gen_clz(TCGv ret, TCGv arg1)
+ {
+     tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
+@@ -574,3 +580,15 @@ static bool trans_zip(DisasContext *ctx, arg_zip *a)
+     REQUIRE_ZBKB(ctx);
+     return gen_unary(ctx, a, EXT_NONE, gen_helper_zip);
+ }
++
++static bool trans_xperm4(DisasContext *ctx, arg_xperm4 *a)
++{
++    REQUIRE_ZBKX(ctx);
++    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm4, NULL);
++}
++
++static bool trans_xperm8(DisasContext *ctx, arg_xperm8 *a)
++{
++    REQUIRE_ZBKX(ctx);
++    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm8, NULL);
++}
+-- 
+2.17.1
 
->
-> Thanks
->    Ralf
->
-> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> index 02512ed48f..1cb0932e03 100644
-> --- a/target/riscv/monitor.c
-> +++ b/target/riscv/monitor.c
-> @@ -143,9 +143,9 @@ static void walk_pte(Monitor *mon, hwaddr base,
-> target_ulong start,
->                    * A leaf PTE has been found
->                    *
->                    * If current PTE's permission bits differ from the
-> last one,
-> -                 * or current PTE's ppn does not make a contiguous physical
-> -                 * address block together with the last one, print out
-> the last
-> -                 * contiguous mapped block details.
-> +                * or the current PTE breaks up a contiguous virtual or
-> +                * physical mapping, address block together with the
-> last one,
-> +                * print out the last contiguous mapped block details.
->                    */
->                   if ((*last_attr != attr) ||
->                       (*last_paddr + *last_size != paddr) ||
->
 
