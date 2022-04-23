@@ -1,46 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni5cb-0008LL-MG
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:35:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39670)
+	id 1ni5cf-0008WF-27
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:35:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39728)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5cZ-0008JX-1J; Fri, 22 Apr 2022 22:35:39 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:39818 helo=cstnet.cn)
+ id 1ni5ca-0008K3-GA; Fri, 22 Apr 2022 22:35:40 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:39796 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5cW-00058A-75; Fri, 22 Apr 2022 22:35:38 -0400
+ id 1ni5cX-00057y-1R; Fri, 22 Apr 2022 22:35:40 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S6;
- Sat, 23 Apr 2022 10:35:27 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S3;
+ Sat, 23 Apr 2022 10:35:25 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 04/14] target/riscv: rvk: add support for zbkx extension
-Date: Sat, 23 Apr 2022 10:35:00 +0800
-Message-Id: <20220423023510.30794-5-liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 01/14] target/riscv: rvk: add cfg properties for zbk* and
+ zk*
+Date: Sat, 23 Apr 2022 10:34:57 +0800
+Message-Id: <20220423023510.30794-2-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
 References: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S6
-X-Coremail-Antispam: 1UD129KBjvJXoWxCFy8Jr1DXFy3Zr1fGw1xKrg_yoWrGry5pF
- 4SkrW5GFWUJrWfXa1SyF45G3W3Jrsagr17Zws3tw1kta15JFZ5tr1qkw43KF45JFn09r4j
- 9a1DA34ay3y8Xa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_
- Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
- IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
- Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
- xan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
- rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
- CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
- 67AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
- 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
- SdkUUUUU=
+X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF4rXr1DXrW3Ww4xCrg_yoW8Ar43pr
+ WDGa1YyrWDXF9rCw4fJFyjgF1rWwn3ua4Iga92yrn3GrW7KrW3JF1qkw1UuF4Yga1rJFy3
+ WF1qkFyUKF47Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPj14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVWxJVW8Jr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
+ e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+ 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+ jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
+ kIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AK
+ xVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrx
+ kI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v2
+ 6r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8Jw
+ CI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU86wZUUUU
+ U
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -65,115 +66,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sat, 23 Apr 2022 02:35:40 -0000
 
- - add xperm4 and xperm8 instructions
-
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/bitmanip_helper.c          | 27 +++++++++++++++++++++++++
- target/riscv/helper.h                   |  2 ++
- target/riscv/insn32.decode              |  4 ++++
- target/riscv/insn_trans/trans_rvb.c.inc | 18 +++++++++++++++++
- 4 files changed, 51 insertions(+)
+ target/riscv/cpu.c | 23 +++++++++++++++++++++++
+ target/riscv/cpu.h | 13 +++++++++++++
+ 2 files changed, 36 insertions(+)
 
-diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
-index e003e8b25b..b99c4a39a1 100644
---- a/target/riscv/bitmanip_helper.c
-+++ b/target/riscv/bitmanip_helper.c
-@@ -102,3 +102,30 @@ target_ulong HELPER(zip)(target_ulong rs1)
-     x = do_shuf_stage(x, shuf_masks[0], shuf_masks[0] >> 1, 1);
-     return x;
- }
-+
-+static inline target_ulong do_xperm(target_ulong rs1, target_ulong rs2,
-+                                    uint32_t sz_log2)
-+{
-+    target_ulong r = 0;
-+    target_ulong sz = 1LL << sz_log2;
-+    target_ulong mask = (1LL << sz) - 1;
-+    target_ulong pos;
-+
-+    for (int i = 0; i < TARGET_LONG_BITS; i += sz) {
-+        pos = ((rs2 >> i) & mask) << sz_log2;
-+        if (pos < sizeof(target_ulong) * 8) {
-+            r |= ((rs1 >> pos) & mask) << i;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ace68ed855..62a47c197b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -612,6 +612,29 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             cpu->cfg.ext_zfinx = true;
+         }
+ 
++        if (cpu->cfg.ext_zk) {
++            cpu->cfg.ext_zkn = true;
++            cpu->cfg.ext_zkr = true;
++            cpu->cfg.ext_zkt = true;
 +        }
-+    }
-+    return r;
-+}
 +
-+target_ulong HELPER(xperm4)(target_ulong rs1, target_ulong rs2)
-+{
-+    return do_xperm(rs1, rs2, 2);
-+}
++        if (cpu->cfg.ext_zkn) {
++            cpu->cfg.ext_zbkb = true;
++            cpu->cfg.ext_zbkc = true;
++            cpu->cfg.ext_zbkx = true;
++            cpu->cfg.ext_zkne = true;
++            cpu->cfg.ext_zknd = true;
++            cpu->cfg.ext_zknh = true;
++        }
 +
-+target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
-+{
-+    return do_xperm(rs1, rs2, 3);
-+}
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 8a3a7615f2..cfead7abfc 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -69,6 +69,8 @@ DEF_HELPER_FLAGS_2(clmulr, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_1(brev8, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
-+DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- 
- /* Floating Point - Half Precision */
- DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 3a49acab37..75ffac9c81 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -776,6 +776,10 @@ clmulh     0000101 .......... 011 ..... 0110011 @r
- # *** RV32 extra Zbc Standard Extension ***
- clmulr     0000101 .......... 010 ..... 0110011 @r
- 
-+# *** RV32 Zbkx Standard Extension ***
-+xperm4     0010100 .......... 010 ..... 0110011 @r
-+xperm8     0010100 .......... 100 ..... 0110011 @r
++        if (cpu->cfg.ext_zks) {
++            cpu->cfg.ext_zbkb = true;
++            cpu->cfg.ext_zbkc = true;
++            cpu->cfg.ext_zbkx = true;
++            cpu->cfg.ext_zksed = true;
++            cpu->cfg.ext_zksh = true;
++        }
 +
- # *** RV32 Zbs Standard Extension ***
- bclr       0100100 .......... 001 ..... 0110011 @r
- bclri      01001. ........... 001 ..... 0010011 @sh
-diff --git a/target/riscv/insn_trans/trans_rvb.c.inc b/target/riscv/insn_trans/trans_rvb.c.inc
-index 5a5751557d..e2b8329f1e 100644
---- a/target/riscv/insn_trans/trans_rvb.c.inc
-+++ b/target/riscv/insn_trans/trans_rvb.c.inc
-@@ -48,6 +48,12 @@
-     }                                            \
- } while (0)
- 
-+#define REQUIRE_ZBKX(ctx) do {                   \
-+    if (!ctx->cfg_ptr->ext_zbkx) {               \
-+        return false;                            \
-+    }                                            \
-+} while (0)
-+
- static void gen_clz(TCGv ret, TCGv arg1)
- {
-     tcg_gen_clzi_tl(ret, arg1, TARGET_LONG_BITS);
-@@ -574,3 +580,15 @@ static bool trans_zip(DisasContext *ctx, arg_zip *a)
-     REQUIRE_ZBKB(ctx);
-     return gen_unary(ctx, a, EXT_NONE, gen_helper_zip);
- }
-+
-+static bool trans_xperm4(DisasContext *ctx, arg_xperm4 *a)
-+{
-+    REQUIRE_ZBKX(ctx);
-+    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm4, NULL);
-+}
-+
-+static bool trans_xperm8(DisasContext *ctx, arg_xperm8 *a)
-+{
-+    REQUIRE_ZBKX(ctx);
-+    return gen_arith(ctx, a, EXT_NONE, gen_helper_xperm8, NULL);
-+}
+         /* Set the ISA extensions, checks should have happened above */
+         if (cpu->cfg.ext_i) {
+             ext |= RVI;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 46c66fbf8e..fe6c9a2c92 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -377,7 +377,20 @@ struct RISCVCPUConfig {
+     bool ext_zba;
+     bool ext_zbb;
+     bool ext_zbc;
++    bool ext_zbkb;
++    bool ext_zbkc;
++    bool ext_zbkx;
+     bool ext_zbs;
++    bool ext_zk;
++    bool ext_zkn;
++    bool ext_zknd;
++    bool ext_zkne;
++    bool ext_zknh;
++    bool ext_zkr;
++    bool ext_zks;
++    bool ext_zksed;
++    bool ext_zksh;
++    bool ext_zkt;
+     bool ext_counters;
+     bool ext_ifencei;
+     bool ext_icsr;
 -- 
 2.17.1
 
