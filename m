@@ -1,56 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni5kd-0006TE-CF
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:43:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40538)
+	id 1ni94u-0006ZZ-8P
+	for mharc-qemu-riscv@gnu.org; Sat, 23 Apr 2022 02:17:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56950)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5kb-0006MT-QV; Fri, 22 Apr 2022 22:43:57 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:40876 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5kY-0006Jc-J0; Fri, 22 Apr 2022 22:43:57 -0400
-Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S13;
- Sat, 23 Apr 2022 10:35:32 +0800 (CST)
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
- luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 11/14] target/riscv: rvk: add support for zksed/zksh
- extension
-Date: Sat, 23 Apr 2022 10:35:07 +0800
-Message-Id: <20220423023510.30794-12-liweiwei@iscas.ac.cn>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ni94U-0006Z8-V3; Sat, 23 Apr 2022 02:16:57 -0400
+Received: from mail-io1-xd2d.google.com ([2607:f8b0:4864:20::d2d]:37838)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ni94S-0000Fs-2m; Sat, 23 Apr 2022 02:16:41 -0400
+Received: by mail-io1-xd2d.google.com with SMTP id p21so10673687ioj.4;
+ Fri, 22 Apr 2022 23:16:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=nJsNUkPLub8bqWUYweitxrAbCeJkJlVSssqCJw+1Cb0=;
+ b=LhmSpEupvUAd2rRz03b9asWdZ3MtES8qD3og9976YTcPCg+xoPaQW4oVFjnluKxj6F
+ o88UG4jodYNqABBTigGHS93tLHEeEC+gtEBeJvhbqGKYU7gPG1AuXbzoMnP/ct8Mu1Lq
+ I/8Ttj1457MwtRvQQomkqWu1PuT7kKmygNrCxZT+WroM5nI3OZtfNtTjyHVmIbZ9MCAm
+ zslwHxRM5knF5HVAjZt+dXwvO1bV2gUtREetFN4nT7tVVLusxju5N7BEbAU0CZgmYuif
+ F5at3a/XG4qpUz3hHEcUF2uHHE5234zGfYR3RRlB+w7w39rOvsS8QqpoIjV2cDc0lh9q
+ 70VQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=nJsNUkPLub8bqWUYweitxrAbCeJkJlVSssqCJw+1Cb0=;
+ b=CacERck/tb/PfbJyc+0t7E0Cv9wX32HRqKus7kHFrjrHOboJEwq2q6yAbfWLZZcTjf
+ eP8Yha/JDM8GDb8SPpNs9ets9WGbRNYJ6f91IQsGFBz/nH35adOtAu0++f+sbf3+O1HJ
+ gCdtqn9UBtYWYEv9eWfoD7UqW5rOCUbHm+ZIjKFCM3jMrenIqfGeLgG6hZbmMmsAoHZB
+ ghq5w8drSJ37y2ceYpqA+bDACHVsEBNzCU8E1pyZEnGXVj4/wcA3adsX4mXkL03IdDlN
+ 3ESeqnzehDaaySCYqz+89mMCW0tFT2r7JOA6a3byM1iOmBN8/Df9LMlEubc/gU3Cqc8a
+ cGJw==
+X-Gm-Message-State: AOAM5319ekvU6H+Fhhm9XNGWHCLM1m7yTJP4sXURQp+Hf8rNcySF9ozj
+ odFsyzn3QZsMIebM+smtyugr6PG/rUZIHd7KiqA=
+X-Google-Smtp-Source: ABdhPJxVpDJv02Kr/MCG/Q3RtrqRu6WA2ydkPWmjYcLXB9FfMD0RBLYliuAJGMGRxSdWPZV6dOez7bpMfYDCw7+d6YE=
+X-Received: by 2002:a5d:948a:0:b0:64d:23a4:9afa with SMTP id
+ v10-20020a5d948a000000b0064d23a49afamr3439815ioj.114.1650694597332; Fri, 22
+ Apr 2022 23:16:37 -0700 (PDT)
+MIME-Version: 1.0
 References: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S13
-X-Coremail-Antispam: 1UD129KBjvJXoWxGFyUuw4ktr45Cr1kWFWrAFb_yoW7Jw15pF
- 1FkrW7CFW8JFyfZayftF15Z343Ars3uryjva9ay34rWayYq395Jw1jyw4akr45XFykur1j
- kayDAFyayF4Iq3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
- 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
- C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
- 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
- 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
- F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
- ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
- xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
- 0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
- 0JUQSdkUUUUU=
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Sat, 23 Apr 2022 16:16:11 +1000
+Message-ID: <CAKmqyKOL89zKRsPHLJDg6RyY4kOs161UUY_mR8=QfrWr7mpvZw@mail.gmail.com>
+Subject: Re: [PATCH v12 00/14] support subsets of scalar crypto extension
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>, luruibo2000@163.com, 
+ lustrew@foxmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2d;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -64,158 +78,141 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Apr 2022 02:43:58 -0000
+X-List-Received-Date: Sat, 23 Apr 2022 06:16:58 -0000
 
- - add sm3p0, sm3p1, sm4ed and sm4ks instructions
+On Sat, Apr 23, 2022 at 12:38 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>
+> This patchset implements RISC-V scalar crypto extension v1.0.0 version in=
+structions.
+> Partial instructions are reused from B-extension.
+>
+> Specification:
+> https://github.com/riscv/riscv-crypto
+>
+> The port is available here:
+> https://github.com/plctlab/plct-qemu/tree/plct-k-upstream-v12
+>
+> To test rvk implementation, specify cpu argument with 'zks=3Dtrue,zkn=3Dt=
+rue' or "zbkb=3Dtrue,zbkc=3Dtrue,zbkx=3Dtrue,zknd=3Dtrue,zkne=3Dtrue,zknh=
+=3Dtrue,zksed=3Dtrue,zksh=3Dtrue,zkr=3Dtrue" to enable K-extension support.=
+ This implementation can pass the ACT tests for K with our extended act sup=
+port for qemu (available at https://github.com/plctlab/plct-qemu/tree/plct-=
+k-upstream-v12-with-act)
+>
+> Review status:
+> patch 5 is reviewed by Philippe Mathieu-Daud=C3=A9
+> patch 1~14 are acked or reviewed by Alistair Francis
+> patch 2~11 are reviewed by Richard Henderson (fix new comments on patch 6=
+ and 7)
+>
+> v12:
+> * rebase on master and riscv-to-apply.next
+>
+> v11:
+> * patch 6: add REQUIRE_32BIT to trans_* function for aes RV32 instruction
+> * patch 7: add REQUIRE_64BIT to trans_* function for aes RV64 instruction
+>
+> v10:
+> (only patch 12 is modified)
+> * simplify the conditions for the check in seed function
+> * add NULL check for ret_val in rmw_seed function
+> * remain the change of MSECCFG_* to align with the added MSECCFG_*SEED
+>
+> v9:
+> * check whether seed is accessed by a read-write instruction in helper_cs=
+rr.
+> * fix disas for partial scalar crypto instructions
+> * rebase on https://lists.nongnu.org/archive/html/qemu-riscv/2022-03/msg0=
+0156.html
+>
+> v8:
+> * replace large macro for trans function of sha256/512 instructions with =
+parameters to gen_sha* function in patch 8,9,10
+> * fix tcg_const_tl to tcg_constant_tl
+> * fix rmw_seed function
+>
+> v7:
+> * reuse gen_unary/gen_arith to simplify trans_* functions
+> * replace DEF_HELPER_* with DEF_HEPER_FLAG_*
+> * move aes64 related macros from patch 6 to patch 7
+> * create common helper gen_aes32_sm4 for aes32 and sm4 related instructio=
+ns
+> * replace bs with shamt (bs << 3)
+> * optimize trans function for sha256, sha512 and sm4 instructions to be g=
+enerated inline
+>
+> v6:
+> * add reviewed-by tags
+> * rebase on upstream
+>
+> v5:
+> * split the big patches
+>
+> v4:
+> * drop "x-" in exposed properties
+> * delete unrelated changes
+>
+> v3:
+> * add extension check for SEED csr access
+>
+> v2:
+> * optimize implementation for brev8, xperm, zip, unzip
+> * use aes related sbox array from crypto/aes.h
+> * move sm4_sbox to crypto/sm4.c, and share it with target/arm
+>
+> Weiwei Li (14):
+>   target/riscv: rvk: add cfg properties for zbk* and zk*
+>   target/riscv: rvk: add support for zbkb extension
+>   target/riscv: rvk: add support for zbkc extension
+>   target/riscv: rvk: add support for zbkx extension
+>   crypto: move sm4_sbox from target/arm
+>   target/riscv: rvk: add support for zknd/zkne extension in RV32
+>   target/riscv: rvk: add support for zkne/zknd extension in RV64
+>   target/riscv: rvk: add support for sha256 related instructions in zknh
+>     extension
+>   target/riscv: rvk: add support for sha512 related instructions for
+>     RV32 in zknh extension
+>   target/riscv: rvk: add support for sha512 related instructions for
+>     RV64 in zknh extension
+>   target/riscv: rvk: add support for zksed/zksh extension
+>   target/riscv: rvk: add CSR support for Zkr
+>   disas/riscv.c: rvk: add disas support for Zbk* and Zk* instructions
+>   target/riscv: rvk: expose zbk* and zk* properties
 
-Co-authored-by: Ruibo Lu <luruibo2000@163.com>
-Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/crypto_helper.c            | 28 ++++++++++++
- target/riscv/helper.h                   |  3 ++
- target/riscv/insn32.decode              |  6 +++
- target/riscv/insn_trans/trans_rvk.c.inc | 58 +++++++++++++++++++++++++
- 4 files changed, 95 insertions(+)
+Thanks!
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-index cb4783a1e9..2ef30281b1 100644
---- a/target/riscv/crypto_helper.c
-+++ b/target/riscv/crypto_helper.c
-@@ -271,4 +271,32 @@ target_ulong HELPER(aes64im)(target_ulong rs1)
- 
-     return result;
- }
-+
-+target_ulong HELPER(sm4ed)(target_ulong rs1, target_ulong rs2,
-+                           target_ulong shamt)
-+{
-+    uint32_t sb_in = (uint8_t)(rs2 >> shamt);
-+    uint32_t sb_out = (uint32_t)sm4_sbox[sb_in];
-+
-+    uint32_t x = sb_out ^ (sb_out << 8) ^ (sb_out << 2) ^ (sb_out << 18) ^
-+                 ((sb_out & 0x3f) << 26) ^ ((sb_out & 0xC0) << 10);
-+
-+    uint32_t rotl = rol32(x, shamt);
-+
-+    return sext32_xlen(rotl ^ (uint32_t)rs1);
-+}
-+
-+target_ulong HELPER(sm4ks)(target_ulong rs1, target_ulong rs2,
-+                           target_ulong shamt)
-+{
-+    uint32_t sb_in = (uint8_t)(rs2 >> shamt);
-+    uint32_t sb_out = sm4_sbox[sb_in];
-+
-+    uint32_t x = sb_out ^ ((sb_out & 0x07) << 29) ^ ((sb_out & 0xFE) << 7) ^
-+                 ((sb_out & 0x01) << 23) ^ ((sb_out & 0xF8) << 13);
-+
-+    uint32_t rotl = rol32(x, shamt);
-+
-+    return sext32_xlen(rotl ^ (uint32_t)rs1);
-+}
- #undef sext32_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 56519fcc26..4ef3b2251d 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1126,3 +1126,6 @@ DEF_HELPER_FLAGS_2(aes64dsm, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_2(aes64ks2, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_2(aes64ks1i, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_1(aes64im, TCG_CALL_NO_RWG_SE, tl, tl)
-+
-+DEF_HELPER_FLAGS_3(sm4ed, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-+DEF_HELPER_FLAGS_3(sm4ks, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index d9ebb138d1..4033565393 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -873,3 +873,9 @@ sha512sig0  00 01000 00110 ..... 001 ..... 0010011 @r2
- sha512sig1  00 01000 00111 ..... 001 ..... 0010011 @r2
- sha512sum0  00 01000 00100 ..... 001 ..... 0010011 @r2
- sha512sum1  00 01000 00101 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksh Standard Extension ***
-+sm3p0       00 01000 01000 ..... 001 ..... 0010011 @r2
-+sm3p1       00 01000 01001 ..... 001 ..... 0010011 @r2
-+# *** RV32 Zksed Standard Extension ***
-+sm4ed       .. 11000 ..... ..... 000 ..... 0110011 @k_aes
-+sm4ks       .. 11010 ..... ..... 000 ..... 0110011 @k_aes
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-index 8274b5a364..90f4eeff60 100644
---- a/target/riscv/insn_trans/trans_rvk.c.inc
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -35,6 +35,18 @@
-     }                                           \
- } while (0)
- 
-+#define REQUIRE_ZKSED(ctx) do {                 \
-+    if (!ctx->cfg_ptr->ext_zksed) {             \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKSH(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zksh) {              \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
- static bool gen_aes32_sm4(DisasContext *ctx, arg_k_aes *a,
-                           void (*func)(TCGv, TCGv, TCGv, TCGv))
- {
-@@ -331,3 +343,49 @@ static bool trans_sha512sum1(DisasContext *ctx, arg_sha512sum1 *a)
-     REQUIRE_ZKNH(ctx);
-     return gen_sha512_rv64(ctx, a, EXT_NONE, tcg_gen_rotri_i64, 14, 18, 41);
- }
-+
-+/* SM3 */
-+static bool gen_sm3(DisasContext *ctx, arg_r2 *a, int32_t b, int32_t c)
-+{
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv_i32 t0 = tcg_temp_new_i32();
-+    TCGv_i32 t1 = tcg_temp_new_i32();
-+
-+    tcg_gen_trunc_tl_i32(t0, src1);
-+    tcg_gen_rotli_i32(t1, t0, b);
-+    tcg_gen_xor_i32(t1, t0, t1);
-+    tcg_gen_rotli_i32(t0, t0, c);
-+    tcg_gen_xor_i32(t1, t1, t0);
-+    tcg_gen_ext_i32_tl(dest, t1);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    tcg_temp_free_i32(t0);
-+    tcg_temp_free_i32(t1);
-+    return true;
-+}
-+
-+static bool trans_sm3p0(DisasContext *ctx, arg_sm3p0 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+    return gen_sm3(ctx, a, 9, 17);
-+}
-+
-+static bool trans_sm3p1(DisasContext *ctx, arg_sm3p1 *a)
-+{
-+    REQUIRE_ZKSH(ctx);
-+    return gen_sm3(ctx, a, 15, 23);
-+}
-+
-+/* SM4 */
-+static bool trans_sm4ed(DisasContext *ctx, arg_sm4ed *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_sm4ed);
-+}
-+
-+static bool trans_sm4ks(DisasContext *ctx, arg_sm4ks *a)
-+{
-+    REQUIRE_ZKSED(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_sm4ks);
-+}
--- 
-2.17.1
+Applied to riscv-to-apply.next
 
+Alistair
+
+>
+>  crypto/meson.build                      |   1 +
+>  crypto/sm4.c                            |  49 +++
+>  disas/riscv.c                           | 173 ++++++++++-
+>  include/crypto/sm4.h                    |   6 +
+>  target/arm/crypto_helper.c              |  36 +--
+>  target/riscv/bitmanip_helper.c          |  80 +++++
+>  target/riscv/cpu.c                      |  36 +++
+>  target/riscv/cpu.h                      |  13 +
+>  target/riscv/cpu_bits.h                 |   9 +
+>  target/riscv/crypto_helper.c            | 302 ++++++++++++++++++
+>  target/riscv/csr.c                      |  80 +++++
+>  target/riscv/helper.h                   |  22 ++
+>  target/riscv/insn32.decode              |  97 ++++--
+>  target/riscv/insn_trans/trans_rvb.c.inc | 116 ++++++-
+>  target/riscv/insn_trans/trans_rvk.c.inc | 391 ++++++++++++++++++++++++
+>  target/riscv/meson.build                |   3 +-
+>  target/riscv/op_helper.c                |   9 +
+>  target/riscv/pmp.h                      |   8 +-
+>  target/riscv/translate.c                |   8 +
+>  19 files changed, 1368 insertions(+), 71 deletions(-)
+>  create mode 100644 crypto/sm4.c
+>  create mode 100644 include/crypto/sm4.h
+>  create mode 100644 target/riscv/crypto_helper.c
+>  create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+>
+> --
+> 2.17.1
+>
+>
 
