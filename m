@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ni5ct-0000WI-QR
-	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:36:03 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39788)
+	id 1ni5d1-0000aE-M4
+	for mharc-qemu-riscv@gnu.org; Fri, 22 Apr 2022 22:36:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39848)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5cc-0008Oq-MO; Fri, 22 Apr 2022 22:35:42 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:39870 helo=cstnet.cn)
+ id 1ni5cv-0000Wg-Nt; Fri, 22 Apr 2022 22:36:05 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:39924 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ni5cX-00058W-MZ; Fri, 22 Apr 2022 22:35:42 -0400
+ id 1ni5cs-0005AW-V5; Fri, 22 Apr 2022 22:36:01 -0400
 Received: from localhost.localdomain (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S8;
- Sat, 23 Apr 2022 10:35:28 +0800 (CST)
+ by APP-03 (Coremail) with SMTP id rQCowABX0+DqZWNiSogjAA--.1876S15;
+ Sat, 23 Apr 2022 10:35:33 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: richard.henderson@linaro.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, lustrew@foxmail.com,
  luruibo2000@163.com, Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v12 06/14] target/riscv: rvk: add support for zknd/zkne
- extension in RV32
-Date: Sat, 23 Apr 2022 10:35:02 +0800
-Message-Id: <20220423023510.30794-7-liweiwei@iscas.ac.cn>
+Subject: [PATCH v12 13/14] disas/riscv.c: rvk: add disas support for Zbk* and
+ Zk* instructions
+Date: Sat, 23 Apr 2022 10:35:09 +0800
+Message-Id: <20220423023510.30794-14-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
 References: <20220423023510.30794-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S8
-X-Coremail-Antispam: 1UD129KBjvJXoWxuFWkXFW7XrW5KryDKw4xtFb_yoWfuw13pF
- 4fGrWUGF48JrWfAaySkF45Jr17ZF4fuF4UJw4fXr1kJa15tFZ5Jr1DK3y3KFs8JFykur1j
- 9a1DZFy2y3y0q3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUPI14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: rQCowABX0+DqZWNiSogjAA--.1876S15
+X-Coremail-Antispam: 1UD129KBjvJXoW3KFW7XFy7Kry3JrWfGFW3Wrg_yoWDAw4fpr
+ 15Xay5KFW0krWxX3WfZFWUZF95JFWUXF42qFWft3Z8G3y7Xw1rCry5ZwnIyFyvgrWYkr4x
+ uF47WF1FqF1xA3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUPq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
- 1UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_
- Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
- IIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
- Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
- xan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
- rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
- CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1I6r4UMIIF0xvE2Ix0cI8IcVCY1x02
- 67AKxVWxJVW8Jr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
- 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQ
- SdkUUUUU=
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
+ 4UJwA2z4x0Y4vEx4A2jsIE14v26F4j6r4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+ 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+ C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+ 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
+ 8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
+ 0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
+ 0JUQSdkUUUUU=
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -64,294 +64,318 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Apr 2022 02:35:43 -0000
+X-List-Received-Date: Sat, 23 Apr 2022 02:36:05 -0000
 
- - add aes32esmi, aes32esi, aes32dsmi and aes32dsi instructions
-
+Co-authored-by: Ruibo Lu <luruibo2000@163.com>
 Co-authored-by: Zewen Ye <lustrew@foxmail.com>
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/crypto_helper.c            | 105 ++++++++++++++++++++++++
- target/riscv/helper.h                   |   6 ++
- target/riscv/insn32.decode              |  11 +++
- target/riscv/insn_trans/trans_rvk.c.inc |  71 ++++++++++++++++
- target/riscv/meson.build                |   3 +-
- target/riscv/translate.c                |   1 +
- 6 files changed, 196 insertions(+), 1 deletion(-)
- create mode 100644 target/riscv/crypto_helper.c
- create mode 100644 target/riscv/insn_trans/trans_rvk.c.inc
+ disas/riscv.c | 173 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 172 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/crypto_helper.c b/target/riscv/crypto_helper.c
-new file mode 100644
-index 0000000000..220d51c742
---- /dev/null
-+++ b/target/riscv/crypto_helper.c
-@@ -0,0 +1,105 @@
-+/*
-+ * RISC-V Crypto Emulation Helpers for QEMU.
-+ *
-+ * Copyright (c) 2021 Ruibo Lu, luruibo2000@163.com
-+ * Copyright (c) 2021 Zewen Ye, lustrew@foxmail.com
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "cpu.h"
-+#include "exec/exec-all.h"
-+#include "exec/helper-proto.h"
-+#include "crypto/aes.h"
-+#include "crypto/sm4.h"
-+
-+#define AES_XTIME(a) \
-+    ((a << 1) ^ ((a & 0x80) ? 0x1b : 0))
-+
-+#define AES_GFMUL(a, b) (( \
-+    (((b) & 0x1) ? (a) : 0) ^ \
-+    (((b) & 0x2) ? AES_XTIME(a) : 0) ^ \
-+    (((b) & 0x4) ? AES_XTIME(AES_XTIME(a)) : 0) ^ \
-+    (((b) & 0x8) ? AES_XTIME(AES_XTIME(AES_XTIME(a))) : 0)) & 0xFF)
-+
-+static inline uint32_t aes_mixcolumn_byte(uint8_t x, bool fwd)
-+{
-+    uint32_t u;
-+
-+    if (fwd) {
-+        u = (AES_GFMUL(x, 3) << 24) | (x << 16) | (x << 8) |
-+            (AES_GFMUL(x, 2) << 0);
-+    } else {
-+        u = (AES_GFMUL(x, 0xb) << 24) | (AES_GFMUL(x, 0xd) << 16) |
-+            (AES_GFMUL(x, 0x9) << 8) | (AES_GFMUL(x, 0xe) << 0);
-+    }
-+    return u;
-+}
-+
-+#define sext32_xlen(x) (target_ulong)(int32_t)(x)
-+
-+static inline target_ulong aes32_operation(target_ulong shamt,
-+                                           target_ulong rs1, target_ulong rs2,
-+                                           bool enc, bool mix)
-+{
-+    uint8_t si = rs2 >> shamt;
-+    uint8_t so;
-+    uint32_t mixed;
-+    target_ulong res;
-+
-+    if (enc) {
-+        so = AES_sbox[si];
-+        if (mix) {
-+            mixed = aes_mixcolumn_byte(so, true);
-+        } else {
-+            mixed = so;
-+        }
-+    } else {
-+        so = AES_isbox[si];
-+        if (mix) {
-+            mixed = aes_mixcolumn_byte(so, false);
-+        } else {
-+            mixed = so;
-+        }
-+    }
-+    mixed = rol32(mixed, shamt);
-+    res = rs1 ^ mixed;
-+
-+    return sext32_xlen(res);
-+}
-+
-+target_ulong HELPER(aes32esmi)(target_ulong rs1, target_ulong rs2,
-+                               target_ulong shamt)
-+{
-+    return aes32_operation(shamt, rs1, rs2, true, true);
-+}
-+
-+target_ulong HELPER(aes32esi)(target_ulong rs1, target_ulong rs2,
-+                              target_ulong shamt)
-+{
-+    return aes32_operation(shamt, rs1, rs2, true, false);
-+}
-+
-+target_ulong HELPER(aes32dsmi)(target_ulong rs1, target_ulong rs2,
-+                               target_ulong shamt)
-+{
-+    return aes32_operation(shamt, rs1, rs2, false, true);
-+}
-+
-+target_ulong HELPER(aes32dsi)(target_ulong rs1, target_ulong rs2,
-+                              target_ulong shamt)
-+{
-+    return aes32_operation(shamt, rs1, rs2, false, false);
-+}
-+#undef sext32_xlen
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index cfead7abfc..3c4e7e6113 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1112,3 +1112,9 @@ DEF_HELPER_5(divu_i128, tl, env, tl, tl, tl, tl)
- DEF_HELPER_5(divs_i128, tl, env, tl, tl, tl, tl)
- DEF_HELPER_5(remu_i128, tl, env, tl, tl, tl, tl)
- DEF_HELPER_5(rems_i128, tl, env, tl, tl, tl, tl)
-+
-+/* Crypto functions */
-+DEF_HELPER_FLAGS_3(aes32esmi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-+DEF_HELPER_FLAGS_3(aes32esi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-+DEF_HELPER_FLAGS_3(aes32dsmi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-+DEF_HELPER_FLAGS_3(aes32dsi, TCG_CALL_NO_RWG_SE, tl, tl, tl, tl)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 75ffac9c81..0f2e661583 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -35,6 +35,7 @@
- %imm_b    31:s1 7:1 25:6 8:4     !function=ex_shift_1
- %imm_j    31:s1 12:8 20:1 21:10  !function=ex_shift_1
- %imm_u    12:s20                 !function=ex_shift_12
-+%imm_bs   30:2                   !function=ex_shift_3
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 03c8dc9961..7af6afc8fa 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -156,6 +156,8 @@ typedef enum {
+     rv_codec_css_swsp,
+     rv_codec_css_sdsp,
+     rv_codec_css_sqsp,
++    rv_codec_k_bs,
++    rv_codec_k_rnum,
+ } rv_codec;
  
- # Argument sets:
- &empty
-@@ -52,6 +53,7 @@
- &rmr       vm rd rs2
- &r2nfvm    vm rd rs1 nf
- &rnfvm     vm rd rs1 rs2 nf
-+&k_aes     shamt rs2 rs1 rd
+ typedef enum {
+@@ -521,6 +523,43 @@ typedef enum {
+     rv_op_bclr = 359,
+     rv_op_binv = 360,
+     rv_op_bext = 361,
++    rv_op_aes32esmi = 362,
++    rv_op_aes32esi = 363,
++    rv_op_aes32dsmi = 364,
++    rv_op_aes32dsi = 365,
++    rv_op_aes64ks1i = 366,
++    rv_op_aes64ks2 = 367,
++    rv_op_aes64im = 368,
++    rv_op_aes64esm = 369,
++    rv_op_aes64es = 370,
++    rv_op_aes64dsm = 371,
++    rv_op_aes64ds = 372,
++    rv_op_sha256sig0 = 373,
++    rv_op_sha256sig1 = 374,
++    rv_op_sha256sum0 = 375,
++    rv_op_sha256sum1 = 376,
++    rv_op_sha512sig0 = 377,
++    rv_op_sha512sig1 = 378,
++    rv_op_sha512sum0 = 379,
++    rv_op_sha512sum1 = 380,
++    rv_op_sha512sum0r = 381,
++    rv_op_sha512sum1r = 382,
++    rv_op_sha512sig0l = 383,
++    rv_op_sha512sig0h = 384,
++    rv_op_sha512sig1l = 385,
++    rv_op_sha512sig1h = 386,
++    rv_op_sm3p0 = 387,
++    rv_op_sm3p1 = 388,
++    rv_op_sm4ed = 389,
++    rv_op_sm4ks = 390,
++    rv_op_brev8 = 391,
++    rv_op_pack = 392,
++    rv_op_packh = 393,
++    rv_op_packw = 394,
++    rv_op_unzip = 395,
++    rv_op_zip = 396,
++    rv_op_xperm4 = 397,
++    rv_op_xperm8 = 398,
+ } rv_op;
  
- # Formats 32:
- @r       .......   ..... ..... ... ..... ....... &r                %rs2 %rs1 %rd
-@@ -89,6 +91,8 @@
- @sfence_vma ....... ..... .....   ... ..... ....... %rs2 %rs1
- @sfence_vm  ....... ..... .....   ... ..... ....... %rs1
+ /* structures */
+@@ -540,6 +579,8 @@ typedef struct {
+     uint8_t   succ;
+     uint8_t   aq;
+     uint8_t   rl;
++    uint8_t   bs;
++    uint8_t   rnum;
+ } rv_decode;
  
-+@k_aes   .. ..... ..... .....  ... ..... ....... &k_aes  shamt=%imm_bs   %rs2 %rs1 %rd
-+
- # Formats 64:
- @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
+ typedef struct {
+@@ -615,6 +656,8 @@ static const char rv_freg_name_sym[32][5] = {
+ #define rv_fmt_rd_rs2                 "O\t0,2"
+ #define rv_fmt_rs1_offset             "O\t1,o"
+ #define rv_fmt_rs2_offset             "O\t2,o"
++#define rv_fmt_rs1_rs2_bs             "O\t1,2,b"
++#define rv_fmt_rd_rs1_rnum            "O\t0,1,n"
  
-@@ -834,3 +838,10 @@ sfence_w_inval    0001100 00000 00000 000 00000 1110011
- sfence_inval_ir   0001100 00001 00000 000 00000 1110011
- hinval_vvma       0010011 ..... ..... 000 00000 1110011 @hfence_vvma
- hinval_gvma       0110011 ..... ..... 000 00000 1110011 @hfence_gvma
-+
-+# *** RV32 Zknd Standard Extension ***
-+aes32dsmi   .. 10111 ..... ..... 000 ..... 0110011 @k_aes
-+aes32dsi    .. 10101 ..... ..... 000 ..... 0110011 @k_aes
-+# *** RV32 Zkne Standard Extension ***
-+aes32esmi   .. 10011 ..... ..... 000 ..... 0110011 @k_aes
-+aes32esi    .. 10001 ..... ..... 000 ..... 0110011 @k_aes
-diff --git a/target/riscv/insn_trans/trans_rvk.c.inc b/target/riscv/insn_trans/trans_rvk.c.inc
-new file mode 100644
-index 0000000000..8d0b42106f
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvk.c.inc
-@@ -0,0 +1,71 @@
-+/*
-+ * RISC-V translation routines for the Zk[nd,ne,nh,sed,sh] Standard Extension.
-+ *
-+ * Copyright (c) 2021 Ruibo Lu, luruibo2000@163.com
-+ * Copyright (c) 2021 Zewen Ye, lustrew@foxmail.com
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZKND(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zknd) {              \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+#define REQUIRE_ZKNE(ctx) do {                  \
-+    if (!ctx->cfg_ptr->ext_zkne) {              \
-+        return false;                           \
-+    }                                           \
-+} while (0)
-+
-+static bool gen_aes32_sm4(DisasContext *ctx, arg_k_aes *a,
-+                          void (*func)(TCGv, TCGv, TCGv, TCGv))
-+{
-+    TCGv shamt = tcg_constant_tl(a->shamt);
-+    TCGv dest = dest_gpr(ctx, a->rd);
-+    TCGv src1 = get_gpr(ctx, a->rs1, EXT_NONE);
-+    TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
-+
-+    func(dest, src1, src2, shamt);
-+    gen_set_gpr(ctx, a->rd, dest);
-+    return true;
-+}
-+
-+static bool trans_aes32esmi(DisasContext *ctx, arg_aes32esmi *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNE(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_aes32esmi);
-+}
-+
-+static bool trans_aes32esi(DisasContext *ctx, arg_aes32esi *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKNE(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_aes32esi);
-+}
-+
-+static bool trans_aes32dsmi(DisasContext *ctx, arg_aes32dsmi *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKND(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_aes32dsmi);
-+}
-+
-+static bool trans_aes32dsi(DisasContext *ctx, arg_aes32dsi *a)
-+{
-+    REQUIRE_32BIT(ctx);
-+    REQUIRE_ZKND(ctx);
-+    return gen_aes32_sm4(ctx, a, gen_helper_aes32dsi);
-+}
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 2c20f3dd8e..096249f3a3 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -19,7 +19,8 @@ riscv_ss.add(files(
-   'vector_helper.c',
-   'bitmanip_helper.c',
-   'translate.c',
--  'm128_helper.c'
-+  'm128_helper.c',
-+  'crypto_helper.c'
- ))
- riscv_ss.add(when: 'CONFIG_KVM', if_true: files('kvm.c'), if_false: files('kvm-stub.c'))
+ /* pseudo-instruction constraints */
  
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 121ead7cfe..0cd1d9ee94 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1007,6 +1007,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvv.c.inc"
- #include "insn_trans/trans_rvb.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
-+#include "insn_trans/trans_rvk.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
- #include "insn_trans/trans_svinval.c.inc"
- #include "insn_trans/trans_xventanacondops.c.inc"
+@@ -766,6 +809,7 @@ static const rv_comp_data rvcp_csrrw[] = {
+     { rv_op_illegal, NULL }
+ };
+ 
++
+ static const rv_comp_data rvcp_csrrs[] = {
+     { rv_op_rdcycle, rvcc_rdcycle },
+     { rv_op_rdtime, rvcc_rdtime },
+@@ -1203,6 +1247,43 @@ const rv_opcode_data opcode_data[] = {
+     { "bclr", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+     { "binv", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
+     { "bext", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "aes32esmi", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "aes32esi", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "aes32dsmi", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "aes32dsi", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "aes64ks1i", rv_codec_k_rnum,  rv_fmt_rd_rs1_rnum, NULL, 0, 0, 0 },
++    { "aes64ks2", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "aes64im", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "aes64esm", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "aes64es", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "aes64dsm", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "aes64ds", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha256sig0", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sha256sig1", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sha256sum0", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sha256sum1", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sha512sig0", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sig1", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sum0", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sum1", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sum0r", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sum1r", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sig0l", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sig0h", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sig1l", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sha512sig1h", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "sm3p0", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sm3p1", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0 },
++    { "sm4ed", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "sm4ks", rv_codec_k_bs, rv_fmt_rs1_rs2_bs, NULL, 0, 0, 0 },
++    { "brev8", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
++    { "pack", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "packh", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "packw", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "unzip", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
++    { "zip", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 },
++    { "xperm4", rv_codec_r, rv_fmt_rd_rs1_rs2, NULL, 0, 0, 0 },
++    { "xperm8", rv_codec_r, rv_fmt_rd_rs1, NULL, 0, 0, 0 }
+ };
+ 
+ /* CSR names */
+@@ -1216,6 +1297,7 @@ static const char *csr_name(int csrno)
+     case 0x0003: return "fcsr";
+     case 0x0004: return "uie";
+     case 0x0005: return "utvec";
++    case 0x0015: return "seed";
+     case 0x0040: return "uscratch";
+     case 0x0041: return "uepc";
+     case 0x0042: return "ucause";
+@@ -1594,7 +1676,36 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 1:
+                 switch (((inst >> 27) & 0b11111)) {
+                 case 0b00000: op = rv_op_slli; break;
++                case 0b00001:
++                    switch (((inst >> 20) & 0b1111111)) {
++                    case 0b0001111: op = rv_op_zip; break;
++                    }
++                    break;
++                case 0b00010:
++                    switch (((inst >> 20) & 0b1111111)) {
++                    case 0b0000000: op = rv_op_sha256sum0; break;
++                    case 0b0000001: op = rv_op_sha256sum1; break;
++                    case 0b0000010: op = rv_op_sha256sig0; break;
++                    case 0b0000011: op = rv_op_sha256sig1; break;
++                    case 0b0000100: op = rv_op_sha512sum0; break;
++                    case 0b0000101: op = rv_op_sha512sum1; break;
++                    case 0b0000110: op = rv_op_sha512sig0; break;
++                    case 0b0000111: op = rv_op_sha512sig1; break;
++                    case 0b0001000: op = rv_op_sm3p0; break;
++                    case 0b0001001: op = rv_op_sm3p1; break;
++                    }
++                    break;
+                 case 0b00101: op = rv_op_bseti; break;
++                case 0b00110:
++                    switch (((inst >> 20) & 0b1111111)) {
++                    case 0b0000000: op = rv_op_aes64im; break;
++                    default:
++                        if (((inst >> 24) & 0b0111) == 0b001) {
++                            op = rv_op_aes64ks1i;
++                        }
++                        break;
++                     }
++                     break;
+                 case 0b01001: op = rv_op_bclri; break;
+                 case 0b01101: op = rv_op_binvi; break;
+                 case 0b01100:
+@@ -1615,13 +1726,20 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 5:
+                 switch (((inst >> 27) & 0b11111)) {
+                 case 0b00000: op = rv_op_srli; break;
++                case 0b00001:
++                    switch (((inst >> 20) & 0b1111111)) {
++                    case 0b0001111: op = rv_op_unzip; break;
++                    }
++                    break;
+                 case 0b00101: op = rv_op_orc_b; break;
+                 case 0b01000: op = rv_op_srai; break;
+                 case 0b01001: op = rv_op_bexti; break;
+                 case 0b01100: op = rv_op_rori; break;
+                 case 0b01101:
+                     switch ((inst >> 20) & 0b1111111) {
++                    case 0b0011000: op = rv_op_rev8; break;
+                     case 0b0111000: op = rv_op_rev8; break;
++                    case 0b0000111: op = rv_op_brev8; break;
+                     }
+                     break;
+                 }
+@@ -1742,8 +1860,11 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 36:
+                 switch ((inst >> 20) & 0b11111) {
+                 case 0: op = rv_op_zext_h; break;
++                default: op = rv_op_pack; break;
+                 }
+                 break;
++            case 39: op = rv_op_packh; break;
++
+             case 41: op = rv_op_clmul; break;
+             case 42: op = rv_op_clmulr; break;
+             case 43: op = rv_op_clmulh; break;
+@@ -1755,6 +1876,12 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 132: op = rv_op_sh2add; break;
+             case 134: op = rv_op_sh3add; break;
+             case 161: op = rv_op_bset; break;
++            case 162: op = rv_op_xperm4; break;
++            case 164: op = rv_op_xperm8; break;
++            case 200: op = rv_op_aes64es; break;
++            case 216: op = rv_op_aes64esm; break;
++            case 232: op = rv_op_aes64ds; break;
++            case 248: op = rv_op_aes64dsm; break;
+             case 256: op = rv_op_sub; break;
+             case 260: op = rv_op_xnor; break;
+             case 261: op = rv_op_sra; break;
+@@ -1762,9 +1889,24 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 263: op = rv_op_andn; break;
+             case 289: op = rv_op_bclr; break;
+             case 293: op = rv_op_bext; break;
++            case 320: op = rv_op_sha512sum0r; break;
++            case 328: op = rv_op_sha512sum1r; break;
++            case 336: op = rv_op_sha512sig0l; break;
++            case 344: op = rv_op_sha512sig1l; break;
++            case 368: op = rv_op_sha512sig0h; break;
++            case 376: op = rv_op_sha512sig1h; break;
+             case 385: op = rv_op_rol; break;
+-            case 386: op = rv_op_ror; break;
++            case 389: op = rv_op_ror; break;
+             case 417: op = rv_op_binv; break;
++            case 504: op = rv_op_aes64ks2; break;
++            }
++            switch ((inst >> 25) & 0b0011111) {
++            case 17: op = rv_op_aes32esi; break;
++            case 19: op = rv_op_aes32esmi; break;
++            case 21: op = rv_op_aes32dsi; break;
++            case 23: op = rv_op_aes32dsmi; break;
++            case 24: op = rv_op_sm4ed; break;
++            case 26: op = rv_op_sm4ks; break;
+             }
+             break;
+         case 13: op = rv_op_lui; break;
+@@ -1782,6 +1924,7 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 36:
+                 switch ((inst >> 20) & 0b11111) {
+                 case 0: op = rv_op_zext_h; break;
++                default: op = rv_op_packw; break;
+                 }
+                 break;
+             case 130: op = rv_op_sh1add_uw; break;
+@@ -2374,6 +2517,16 @@ static uint32_t operand_cimmq(rv_inst inst)
+         ((inst << 57) >> 62) << 6;
+ }
+ 
++static uint32_t operand_bs(rv_inst inst)
++{
++    return (inst << 32) >> 62;
++}
++
++static uint32_t operand_rnum(rv_inst inst)
++{
++    return (inst << 40) >> 60;
++}
++
+ /* decode operands */
+ 
+ static void decode_inst_operands(rv_decode *dec)
+@@ -2653,6 +2806,16 @@ static void decode_inst_operands(rv_decode *dec)
+         dec->rs2 = operand_crs2(inst);
+         dec->imm = operand_cimmsqsp(inst);
+         break;
++    case rv_codec_k_bs:
++        dec->rs1 = operand_rs1(inst);
++        dec->rs2 = operand_rs2(inst);
++        dec->bs = operand_bs(inst);
++        break;
++    case rv_codec_k_rnum:
++        dec->rd = operand_rd(inst);
++        dec->rs1 = operand_rs1(inst);
++        dec->rnum = operand_rnum(inst);
++        break;
+     };
+ }
+ 
+@@ -2812,6 +2975,14 @@ static void format_inst(char *buf, size_t buflen, size_t tab, rv_decode *dec)
+         case ')':
+             append(buf, ")", buflen);
+             break;
++        case 'b':
++            snprintf(tmp, sizeof(tmp), "%d", dec->bs);
++            append(buf, tmp, buflen);
++            break;
++        case 'n':
++            snprintf(tmp, sizeof(tmp), "%d", dec->rnum);
++            append(buf, tmp, buflen);
++            break;
+         case '0':
+             append(buf, rv_ireg_name_sym[dec->rd], buflen);
+             break;
 -- 
 2.17.1
 
