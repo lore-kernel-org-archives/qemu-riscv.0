@@ -1,41 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1niUi0-0001Cu-G5
-	for mharc-qemu-riscv@gnu.org; Sun, 24 Apr 2022 01:22:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55646)
+	id 1niUi2-0001Eu-4F
+	for mharc-qemu-riscv@gnu.org; Sun, 24 Apr 2022 01:22:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55662)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1niUhv-0001CD-PH; Sun, 24 Apr 2022 01:22:53 -0400
-Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:46828)
+ id 1niUhx-0001CI-BS; Sun, 24 Apr 2022 01:22:54 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:53433
+ helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1niUhs-0003oG-FP; Sun, 24 Apr 2022 01:22:51 -0400
+ id 1niUhv-0003oT-Mt; Sun, 24 Apr 2022 01:22:53 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id CC4B730008A;
- Sun, 24 Apr 2022 05:22:42 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 53D7330008B;
+ Sun, 24 Apr 2022 05:22:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1650777762;
- bh=L81EOlrmkMFiFDA8/pCxQzX0aZC1+igvOm6O8239aX8=;
+ s=2017s01; t=1650777768;
+ bh=dKbFrImL7VSqYkXRv8vbcKeRORfPMAodYyD+17ui7pI=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=oUNUAjUNIjG+4XHuRPgOl0+NI56rh2zNJz85HORqZtVO9OOnldBe9NF7cmeQSzDq7
- JH/xA7Shqy31F6qFGRrDykc4IIYF7ypxjvHkMzV4pIruREPDWLpHnYDB3At1kDQAy6
- wvRhAsSOy9cdXMh/rIthTFShMK1vyb6Ldj0gTsjo=
+ b=tFWH3XiVrlF3qBRDBi4uTQP7QDpwKmYVshH6GJvyeehgTTpfqlHbcWU2rq3Vl3kdZ
+ Ikya73J1FKy5XolJcXZAfPhNk41K4HUAM6WkOaE/f65iA/G69XecGqrIZTPxCsCbQb
+ 18DkuUNr0sd9Pc96oIK09PEwjJnqfiDeQ+sZTLV0=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 1/2] target/riscv: Tentatively remove Zhinx* from ISA
- extension string
-Date: Sun, 24 Apr 2022 14:22:35 +0900
-Message-Id: <cfda1d8da254f2e723e487f0c738c59d5891e492.1650777360.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH 2/2] target/riscv: Add short-isa-string option
+Date: Sun, 24 Apr 2022 14:22:36 +0900
+Message-Id: <51c9f2ce37e6d1483317710ddd1e14be74a61e69.1650777360.git.research_trasio@irq.a4lg.com>
 In-Reply-To: <cover.1650777360.git.research_trasio@irq.a4lg.com>
 References: <cover.1650777360.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
+Received-SPF: pass client-ip=153.120.152.154;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
@@ -55,32 +54,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Apr 2022 05:22:54 -0000
+X-List-Received-Date: Sun, 24 Apr 2022 05:22:55 -0000
 
-This commit disables ISA string conversion for Zhinx and Zhinxmin
-extensions for now.  Because extension category ordering of "H" is not
-ratified, their ordering is likely invalid.
+Because some operating systems don't correctly parse long ISA extension
+string, this commit adds short-isa-string boolean option to disable
+generating long ISA extension strings on Device Tree.
 
-Once "H"-extension ordering is determined, we can add Zhinx* again.
+Operating Systems which short-isa-string might be helpful:
+
+1.  Linux (5.17 or earlier)
+2.  FreeBSD (at least 14.0-CURRENT)
+3.  OpenBSD (at least current development version)
 
 Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 ---
- target/riscv/cpu.c | 2 --
- 1 file changed, 2 deletions(-)
+ target/riscv/cpu.c | 5 ++++-
+ target/riscv/cpu.h | 2 ++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0c774056c5..c765f7ff00 100644
+index c765f7ff00..9718cd0e7e 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -954,8 +954,6 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-         ISA_EDATA_ENTRY(zfh, ext_zfh),
-         ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
-         ISA_EDATA_ENTRY(zfinx, ext_zfinx),
--        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
--        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
-         ISA_EDATA_ENTRY(zdinx, ext_zdinx),
-         ISA_EDATA_ENTRY(zba, ext_zba),
-         ISA_EDATA_ENTRY(zbb, ext_zbb),
+@@ -834,6 +834,8 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
+ 
+     DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
++
++    DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+@@ -989,7 +991,8 @@ char *riscv_isa_string(RISCVCPU *cpu)
+         }
+     }
+     *p = '\0';
+-    riscv_isa_string_ext(cpu, &isa_str, maxlen);
++    if (!cpu->cfg.short_isa_string)
++        riscv_isa_string_ext(cpu, &isa_str, maxlen);
+     return isa_str;
+ }
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 34c22d5d3b..5b7fe32218 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -408,6 +408,8 @@ struct RISCVCPUConfig {
+     bool aia;
+     bool debug;
+     uint64_t resetvec;
++
++    bool short_isa_string;
+ };
+ 
+ typedef struct RISCVCPUConfig RISCVCPUConfig;
 -- 
 2.32.0
 
