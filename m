@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nizYC-0007cn-FN
+	id 1nizYC-0007de-Lk
 	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 10:18:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34414)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34360)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nizY4-0007HN-Q1; Mon, 25 Apr 2022 10:18:45 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:41746)
+ id 1nizY3-0007HJ-M7; Mon, 25 Apr 2022 10:18:45 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:41754)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nizY2-0003PN-3C; Mon, 25 Apr 2022 10:18:44 -0400
+ id 1nizY1-0003PS-Ri; Mon, 25 Apr 2022 10:18:43 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id A340711EE04;
- Mon, 25 Apr 2022 14:18:39 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 2EC0211EF53;
+ Mon, 25 Apr 2022 14:18:40 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Date: Mon, 25 Apr 2022 14:18:39 +0000
-Subject: [PATCH qemu 0/9] Add mask agnostic behavior for rvv instructions
-MIME-Version: 1.0
-Message-ID: <165089631935.4839.7564289944057093570-0@git.sr.ht>
+Subject: [PATCH qemu 4/9] target/riscv: rvv: Add mask agnostic for vector
+ integer shift instructions
+Message-ID: <165089631935.4839.7564289944057093570-4@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+In-Reply-To: <165089631935.4839.7564289944057093570-0@git.sr.ht>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 2
-X-Spam_score: 0.2
-X-Spam_bar: /
-X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 36
+X-Spam_score: 3.6
+X-Spam_bar: +++
+X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
+ FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -47,44 +48,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Apr 2022 14:18:45 -0000
+Date: Mon, 25 Apr 2022 14:18:47 -0000
+X-Original-Date: Thu, 17 Mar 2022 01:43:10 -0700
+X-List-Received-Date: Mon, 25 Apr 2022 14:18:47 -0000
 
-According to v-spec, agnostic elements can be either kept as undisturbed
-or set elements' bits to all 1s. To distinguish the difference of mask
-policies, QEMU should be able to simulate the mask agnostic behavior as
-"set masked-off elements' bits to all 1s". An option 'rvv_ma_all_1s' is
-added to enable the behavior, it is default as disabled.
+From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 
-This patch set is based on the patch set "Add tail agnostic behavior for
-rvv instructions".
-Based on: <164863587444.17401.9965527486691250478-0@git.sr.ht>
+Signed-off-by: eop Chen <eop.chen@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 1 +
+ target/riscv/vector_helper.c            | 9 +++++++++
+ 2 files changed, 10 insertions(+)
 
-Yueh-Ting (eop) Chen (9):
-  target/riscv: rvv: Add mask agnostic for vv instructions
-  target/riscv: rvv: Add mask agnostic for vector load / store
-    instructions
-  target/riscv: rvv: Add mask agnostic for vx instructions
-  target/riscv: rvv: Add mask agnostic for vector integer shift
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector integer comparison
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector fix-point arithmetic
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector floating-point
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector mask instructions
-  target/riscv: rvv: Add mask agnostic for vector permutation
-    instructions
-
- target/riscv/cpu.c                      |   1 +
- target/riscv/cpu.h                      |   2 +
- target/riscv/cpu_helper.c               |   2 +
- target/riscv/insn_trans/trans_rvv.c.inc |  32 +++++
- target/riscv/internals.h                |   5 +-
- target/riscv/translate.c                |   2 +
- target/riscv/vector_helper.c            | 159 ++++++++++++++++++++++--
- 7 files changed, 189 insertions(+), 14 deletions(-)
-
--- 
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
+s/trans_rvv.c.inc
+index e2bdfc0fae..a085ef2c29 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1935,6 +1935,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+         data =3D FIELD_DP32(data, VDATA, VTA, s->vta);               \
++        data =3D FIELD_DP32(data, VDATA, VMA, s->vma);               \
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+                            vreg_ofs(s, a->rs1),                    \
+                            vreg_ofs(s, a->rs2), cpu_env,           \
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 658ea0244d..269e40c251 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -1291,10 +1291,14 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,     =
+                     \
+     uint32_t esz =3D sizeof(TS1);                                           \
+     uint32_t total_elems =3D vext_get_total_elems(desc, esz);               \
+     uint32_t vta =3D vext_vta(desc);                                        \
++    uint32_t vma =3D vext_vma(desc);                                        \
+     uint32_t i;                                                           \
+                                                                           \
+     for (i =3D env->vstart; i < vl; i++) {                                  \
+         if (!vm && !vext_elem_mask(v0, i)) {                              \
++            /* set masked-off elements to 1s */                           \
++            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i, i * esz,         \
++                                             (i + 1) * esz);              \
+             continue;                                                     \
+         }                                                                 \
+         TS1 s1 =3D *((TS1 *)vs1 + HS1(i));                                  \
+@@ -1332,10 +1336,15 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1=
+,      \
+     uint32_t esz =3D sizeof(TD);                              \
+     uint32_t total_elems =3D vext_get_total_elems(desc, esz); \
+     uint32_t vta =3D vext_vta(desc);                          \
++    uint32_t vma =3D vext_vma(desc);                          \
+     uint32_t i;                                             \
+                                                             \
+     for (i =3D env->vstart; i < vl; i++) {                    \
+         if (!vm && !vext_elem_mask(v0, i)) {                \
++            /* set masked-off elements to 1s */             \
++            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i,    \
++                                             i * esz,       \
++                                             (i + 1) * esz);\
+             continue;                                       \
+         }                                                   \
+         TS2 s2 =3D *((TS2 *)vs2 + HS2(i));                    \
+--=20
 2.34.2
+
 
