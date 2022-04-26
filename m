@@ -1,71 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nj8vV-0004eF-Ar
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 20:19:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49328)
+	id 1njGrS-0005YD-U2
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Apr 2022 04:47:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42424)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nj8vT-0004cy-Lp; Mon, 25 Apr 2022 20:19:31 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:42666)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nj8vR-0004tI-L2; Mon, 25 Apr 2022 20:19:31 -0400
-Received: by mail-io1-xd35.google.com with SMTP id c125so17703160iof.9;
- Mon, 25 Apr 2022 17:19:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=l4iIYMxPsD8HGmHmAA9PSz57Jk3/CUaFWIO2uGxisRY=;
- b=nbElpkk4oUFT4PmQHzy5pj2XuWgIA/s49ksyQjjX47TpWRtlQGsphk4bWDnAIKlRdL
- tt9kHs0WVuwJcI9PfdJ7pxeY4Vl3mDUp0Eu8fSTq4FynKSiOdjJaylW4209doqYQPhDV
- u1zey6n3sYgBOnQC6j/SlAFzRMWqQTfqzDOfNVBEVCuqHEtzOQByHTpoE6nMqJz1cMZN
- 3eIXry4d5Y/lw/P4P+nGjo1QikF8EPkBGEUn46gFs86g49yKx4zX/SSxJyx48sYpXe0L
- Yb0MwkZbuywChARLBQoAdrD0M+U7KoY4U1sg9O9PHkJFyIurY07jw70g1H2QpA6rrauN
- jbFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=l4iIYMxPsD8HGmHmAA9PSz57Jk3/CUaFWIO2uGxisRY=;
- b=iFwnTLbsZ+Wh1cRz+6T5TdzhqYw1ry3ID6B4h/bK2qx5I77GgtKilVOwwLlI/AD/RU
- 7KH22obhubk2Arj6NIg74sP9jGX8wMpQQlpdSWQaKJA9Y6jlTO+ihzaJtZ6OChILXqq1
- hSP6GLXsLKtgofD7B+sgTJPY2dtKOHAQO/4HcTeEdpSzXIxq6AUzuj+e1jCQEbydrcDh
- qjZV0e/J0/eZfST8d1WcR/9WN4ZUWYJoJVT9/fp2YxMJM2vPjn5Zs+QFyN6xchlF8A/w
- xUjKAyJLB50b+SY4WF8KrlxpLgBPAEX7d4AVFSBtPDBd4kPebWETxk8QRu5Xj99mZiva
- eJxg==
-X-Gm-Message-State: AOAM530WJRHxR2xlYSoSwdo6BIVnvQmOf2/pqDqyU0XanlSo4XU/Zdf/
- CzR132zUTl8O11BFKcF5P9HEsDrOSpNuNp5eS7c=
-X-Google-Smtp-Source: ABdhPJzLHSwWxLvO296qVJZvLWwu1qUOOPgkfXV9vgpbfCUxBO+GBB9k+/ODUUG2hcsFxtKc4T27BP9DsbsjOQ/gVQM=
-X-Received: by 2002:a05:6638:14c1:b0:32a:aa03:93e1 with SMTP id
- l1-20020a05663814c100b0032aaa0393e1mr9134545jak.66.1650932366652; Mon, 25 Apr
- 2022 17:19:26 -0700 (PDT)
-MIME-Version: 1.0
-References: <164863587444.17401.9965527486691250478-0@git.sr.ht>
- <164863587444.17401.9965527486691250478-3@git.sr.ht>
-In-Reply-To: <164863587444.17401.9965527486691250478-3@git.sr.ht>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Apr 2022 10:19:00 +1000
-Message-ID: <CAKmqyKNJYbhc1VsDaNci8kMcPzh7Sz=JN6K73c340+K2D+Ks8g@mail.gmail.com>
-Subject: Re: [PATCH qemu v7 03/14] target/riscv: rvv: Early exit when vstart
- >= vl
-To: "~eopxd" <yueh.ting.chen@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- WeiWei Li <liweiwei@iscas.ac.cn>, Frank Chang <frank.chang@sifive.com>, 
- eop Chen <eop.chen@sifive.com>, Bin Meng <bin.meng@windriver.com>, 
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1njGrJ-0005Xq-7j; Tue, 26 Apr 2022 04:47:47 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:50442 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1njGrF-0008FQ-Hk; Tue, 26 Apr 2022 04:47:44 -0400
+Received: from [192.168.3.6] (unknown [180.156.147.178])
+ by APP-01 (Coremail) with SMTP id qwCowABHT4efsWdiUXL+AA--.24747S2;
+ Tue, 26 Apr 2022 16:47:27 +0800 (CST)
+Subject: Re: [PATCH qemu 1/9] target/riscv: rvv: Add mask agnostic for vv
+ instructions
+To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: WeiWei Li <liweiwei@iscas.ac.cn>, Frank Chang <frank.chang@sifive.com>,
+ eop Chen <eop.chen@sifive.com>, Bin Meng <bin.meng@windriver.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <165089631935.4839.7564289944057093570-1@git.sr.ht>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <9deca899-2041-2452-77e4-6fb8a58bc2b8@iscas.ac.cn>
+Date: Tue, 26 Apr 2022 16:47:27 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+MIME-Version: 1.0
+In-Reply-To: <165089631935.4839.7564289944057093570-1@git.sr.ht>
+Content-Type: multipart/alternative;
+ boundary="------------98C1135EBEB0B15547A5137E"
+Content-Language: en-US
+X-CM-TRANSID: qwCowABHT4efsWdiUXL+AA--.24747S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF4xWw1fGr1UKr13JFyrWFg_yoWxArWrpr
+ 48GrWxtrZxGFyfCw1fXF4UAr18Zrs5uw40kw4kuw4kuan5XrZ8XFZ8KF1xCFWUKF45Zr1F
+ 93WqyryY9395ZFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r106r15McIj6I8E
+ 87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c0EjI
+ I2zVCS5cI20VAGYxC7Mx8GjcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vIY487
+ MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr
+ I_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0E
+ wIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJV
+ W8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI
+ 42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JjjYL9UUUUU=
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,280 +69,386 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2022 00:19:32 -0000
+X-List-Received-Date: Tue, 26 Apr 2022 08:47:50 -0000
 
-On Wed, Mar 30, 2022 at 8:39 PM ~eopxd <eopxd@git.sr.ht> wrote:
+This is a multi-part message in MIME format.
+--------------98C1135EBEB0B15547A5137E
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+在 2022/3/17 下午3:26, ~eopxd 写道:
+> From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 >
-> From: eopXD <eop.chen@sifive.com>
->
-> According to v-spec (section 5.4):
-> When vstart =E2=89=A5 vl, there are no body elements, and no elements are
-> updated in any destination vector register group, including that
-> no tail elements are updated with agnostic values.
->
-> vmsbf.m, vmsif.m, vmsof.m, viota.m, vcompress instructions themselves
-> require vstart to be zero. So they don't need the early exit.
+> This is the first commit regarding the mask agnostic behavior.
+> Added option 'rvv_ma_all_1s' to enable the behavior, the option
+> is default to false.
 >
 > Signed-off-by: eop Chen <eop.chen@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
+>   target/riscv/cpu.c                      | 1 +
+>   target/riscv/cpu.h                      | 2 ++
+>   target/riscv/cpu_helper.c               | 2 ++
+>   target/riscv/insn_trans/trans_rvv.c.inc | 3 +++
+>   target/riscv/internals.h                | 5 +++--
+>   target/riscv/translate.c                | 2 ++
+>   target/riscv/vector_helper.c            | 8 ++++++++
+>   7 files changed, 21 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
-trans/trans_rvv.c.inc
-> index 275fded6e4..57953923d5 100644
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index cd4cf4b41e..2bf862a5e4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -811,6 +811,7 @@ static Property riscv_cpu_properties[] = {
+>   
+>       DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+>       DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
+> +    DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
+>       DEFINE_PROP_END_OF_LIST(),
+>   };
+>   
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 8c4a79b5a0..c76ded515b 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -370,6 +370,7 @@ struct RISCVCPUConfig {
+>       bool ext_zve32f;
+>       bool ext_zve64f;
+>       bool rvv_ta_all_1s;
+> +    bool rvv_ma_all_1s;
+>   
+>       /* Vendor-specific custom extensions */
+>       bool ext_XVentanaCondOps;
+> @@ -518,6 +519,7 @@ FIELD(TB_FLAGS, XL, 20, 2)
+>   FIELD(TB_FLAGS, PM_MASK_ENABLED, 22, 1)
+>   FIELD(TB_FLAGS, PM_BASE_ENABLED, 23, 1)
+>   FIELD(TB_FLAGS, VTA, 24, 1)
+> +FIELD(TB_FLAGS, VMA, 25, 1)
+>   
+>   #ifdef TARGET_RISCV32
+>   #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 2941c88c31..be94d82ff8 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -67,6 +67,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+>           flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+>           flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+>                       FIELD_EX64(env->vtype, VTYPE, VTA));
+> +        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
+> +                    FIELD_EX64(env->vtype, VTYPE, VMA));
+>       } else {
+>           flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+>       }
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 8d87501e03..4610107fb4 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -652,6 +652,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, =
-uint32_t data,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -818,6 +819,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t r=
-s1, uint32_t rs2,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -925,6 +927,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs=
-1, uint32_t vs2,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -1067,6 +1070,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, u=
-int32_t data,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -1216,6 +1220,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen=
-3Fn *gvec_fn,
->      }
->
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      if (a->vm && s->vl_eq_vlmax) {
->          gvec_fn(s->sew, vreg_ofs(s, a->rd),
-> @@ -1263,6 +1268,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, =
-uint32_t vs2, uint32_t vm,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -1427,6 +1433,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, =
-uint32_t vs2, uint32_t vm,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -1513,6 +1520,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmr=
-r *a,
->          uint32_t data =3D 0;
->          TCGLabel *over =3D gen_new_label();
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> @@ -1593,6 +1601,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmr=
-r *a,
->          uint32_t data =3D 0;
->          TCGLabel *over =3D gen_new_label();
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> @@ -1670,6 +1679,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
-*a)             \
->          };                                                         \
->          TCGLabel *over =3D gen_new_label();                          \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -1851,6 +1861,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
-*a)             \
->          };                                                         \
->          TCGLabel *over =3D gen_new_label();                          \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -2061,6 +2072,7 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_=
-v_v *a)
->              };
->              TCGLabel *over =3D gen_new_label();
->              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
->                                 cpu_env, s->cfg_ptr->vlen / 8,
-> @@ -2084,6 +2096,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_=
-v_x *a)
->          TCGv s1;
->          TCGLabel *over =3D gen_new_label();
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->          s1 =3D get_gpr(s, a->rs1, EXT_SIGN);
->
-> @@ -2139,6 +2152,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_=
-v_i *a)
->              };
->              TCGLabel *over =3D gen_new_label();
->              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->              s1 =3D tcg_constant_i64(simm);
->              dest =3D tcg_temp_new_ptr();
-> @@ -2291,6 +2305,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
-*a)             \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, RISCV_FRM_DYN);                              \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -2321,6 +2336,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, =
-uint32_t vs2,
->
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      dest =3D tcg_temp_new_ptr();
->      mask =3D tcg_temp_new_ptr();
-> @@ -2409,6 +2425,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
-*a)           \
->          TCGLabel *over =3D gen_new_label();                        \
->          gen_set_rm(s, RISCV_FRM_DYN);                            \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);        \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);\
->                                                                   \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);               \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
-> @@ -2483,6 +2500,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
-*a)             \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, RISCV_FRM_DYN);                              \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -2604,6 +2622,7 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
->          TCGLabel *over =3D gen_new_label();
->          gen_set_rm(s, rm);
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> @@ -2717,6 +2736,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfm=
-v_v_f *a)
->              };
->              TCGLabel *over =3D gen_new_label();
->              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->              t1 =3D tcg_temp_new_i64();
->              /* NaN-box f[rs1] */
-> @@ -2805,6 +2825,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
-a)              \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, FRM);                                        \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -2856,6 +2877,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
-a)              \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, RISCV_FRM_DYN);                              \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> @@ -2921,6 +2943,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
-a)              \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, FRM);                                        \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-> @@ -2974,6 +2997,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
-a)              \
->          TCGLabel *over =3D gen_new_label();                          \
->          gen_set_rm(s, FRM);                                        \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
->          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> @@ -3061,6 +3085,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)=
-                \
->          gen_helper_gvec_4_ptr *fn =3D gen_helper_##NAME;             \
->          TCGLabel *over =3D gen_new_label();                          \
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
->                                                                     \
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
->          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-> @@ -3229,6 +3254,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v =
-*a)
->          uint32_t data =3D 0;
->          TCGLabel *over =3D gen_new_label();
->          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
->          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-> @@ -3746,6 +3772,7 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a,=
- uint8_t seq)
->      gen_helper_gvec_3_ptr *fn;
->      TCGLabel *over =3D gen_new_label();
->      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
->
->      static gen_helper_gvec_3_ptr * const fns[6][4] =3D {
->          {
-> --
-> 2.34.1
->
->
+> @@ -1251,6 +1251,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
+>           data = FIELD_DP32(data, VDATA, VM, a->vm);
+>           data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+>           data = FIELD_DP32(data, VDATA, VTA, s->vta);
+> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);
+>           tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                              vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
+>                              cpu_env, s->cfg_ptr->vlen / 8,
+> @@ -1567,6 +1568,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+>           data = FIELD_DP32(data, VDATA, VM, a->vm);
+>           data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+>           data = FIELD_DP32(data, VDATA, VTA, s->vta);
+> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);
+>           tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                              vreg_ofs(s, a->rs1),
+>                              vreg_ofs(s, a->rs2),
+> @@ -1649,6 +1651,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+>           data = FIELD_DP32(data, VDATA, VM, a->vm);
+>           data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+>           data = FIELD_DP32(data, VDATA, VTA, s->vta);
+> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);
+>           tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
+>                              vreg_ofs(s, a->rs1),
+>                              vreg_ofs(s, a->rs2),
+> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+> index 512c6c30cf..00b72fd767 100644
+> --- a/target/riscv/internals.h
+> +++ b/target/riscv/internals.h
+> @@ -25,8 +25,9 @@
+>   FIELD(VDATA, VM, 0, 1)
+>   FIELD(VDATA, LMUL, 1, 3)
+>   FIELD(VDATA, VTA, 4, 1)
+> -FIELD(VDATA, NF, 5, 4)
+> -FIELD(VDATA, WD, 5, 1)
+> +FIELD(VDATA, VMA, 5, 1)
+> +FIELD(VDATA, NF, 6, 4)
+> +FIELD(VDATA, WD, 6, 1)
+>   
+>   /* float point classify helpers */
+>   target_ulong fclass_h(uint64_t frs1);
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 7775dade26..37893aa348 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -95,6 +95,7 @@ typedef struct DisasContext {
+>       int8_t lmul;
+>       uint8_t sew;
+>       uint8_t vta;
+> +    uint8_t vma;
+>       target_ulong vstart;
+>       bool vl_eq_vlmax;
+>       uint8_t ntemp;
+> @@ -1085,6 +1086,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>       ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+>       ctx->lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
+>       ctx->vta = FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_1s;
+> +    ctx->vma = FIELD_EX32(tb_flags, TB_FLAGS, VMA) && cpu->cfg.rvv_ma_all_1s;
+>       ctx->vstart = env->vstart;
+>       ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+>       ctx->misa_mxl_max = env->misa_mxl_max;
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index fbde0c9248..141a06ddf0 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -127,6 +127,11 @@ static inline uint32_t vext_vta(uint32_t desc)
+>       return FIELD_EX32(simd_data(desc), VDATA, VTA);
+>   }
+>   
+> +static inline uint32_t vext_vma(uint32_t desc)
+> +{
+> +    return FIELD_EX32(simd_data(desc), VDATA, VMA);
+> +}
+> +
+>   /*
+>    * Get the maximum number of elements can be operated.
+>    *
+> @@ -797,10 +802,13 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
+>       uint32_t vl = env->vl;
+>       uint32_t total_elems = vext_get_total_elems(desc, esz);
+>       uint32_t vta = vext_vta(desc);
+> +    uint32_t vma = vext_vma(desc);
+>       uint32_t i;
+>   
+>       for (i = env->vstart; i < vl; i++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+> +            /* set masked-off elements to 1s */
+> +            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i, i * esz, (i + 1) * esz);
+
+Similar to our last discussion,  vext_set_elems_1s_fns array can be 
+simplified to single vext_set_elems_1s,
+
+since the fourth argement can be used as the start offset.
+
+Another question, may be not related to this patchset, in section 3.4.3 
+of the spec:
+
+/"Mask destination tail elements are always treated as tail-agnostic, 
+regardless of the setting of vta."/
+
+What does "Mask destination tail elements" mean?
+
+Regards,
+
+Weiwei Li
+
+>               continue;
+>           }
+>           fn(vd, vs1, vs2, i);
+
+--------------98C1135EBEB0B15547A5137E
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">在 2022/3/17 下午3:26, ~eopxd 写道:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:165089631935.4839.7564289944057093570-1@git.sr.ht">
+      <pre class="moz-quote-pre" wrap="">From: Yueh-Ting (eop) Chen <a class="moz-txt-link-rfc2396E" href="mailto:eop.chen@sifive.com">&lt;eop.chen@sifive.com&gt;</a>
+
+This is the first commit regarding the mask agnostic behavior.
+Added option 'rvv_ma_all_1s' to enable the behavior, the option
+is default to false.
+
+Signed-off-by: eop Chen <a class="moz-txt-link-rfc2396E" href="mailto:eop.chen@sifive.com">&lt;eop.chen@sifive.com&gt;</a>
+Reviewed-by: Frank Chang <a class="moz-txt-link-rfc2396E" href="mailto:frank.chang@sifive.com">&lt;frank.chang@sifive.com&gt;</a>
+---
+ target/riscv/cpu.c                      | 1 +
+ target/riscv/cpu.h                      | 2 ++
+ target/riscv/cpu_helper.c               | 2 ++
+ target/riscv/insn_trans/trans_rvv.c.inc | 3 +++
+ target/riscv/internals.h                | 5 +++--
+ target/riscv/translate.c                | 2 ++
+ target/riscv/vector_helper.c            | 8 ++++++++
+ 7 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index cd4cf4b41e..2bf862a5e4 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -811,6 +811,7 @@ static Property riscv_cpu_properties[] = {
+ 
+     DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+     DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
++    DEFINE_PROP_BOOL("rvv_ma_all_1s", RISCVCPU, cfg.rvv_ma_all_1s, false),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 8c4a79b5a0..c76ded515b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -370,6 +370,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool rvv_ta_all_1s;
++    bool rvv_ma_all_1s;
+ 
+     /* Vendor-specific custom extensions */
+     bool ext_XVentanaCondOps;
+@@ -518,6 +519,7 @@ FIELD(TB_FLAGS, XL, 20, 2)
+ FIELD(TB_FLAGS, PM_MASK_ENABLED, 22, 1)
+ FIELD(TB_FLAGS, PM_BASE_ENABLED, 23, 1)
+ FIELD(TB_FLAGS, VTA, 24, 1)
++FIELD(TB_FLAGS, VMA, 25, 1)
+ 
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 2941c88c31..be94d82ff8 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -67,6 +67,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong *pc,
+         flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+         flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+                     FIELD_EX64(env-&gt;vtype, VTYPE, VTA));
++        flags = FIELD_DP32(flags, TB_FLAGS, VMA,
++                    FIELD_EX64(env-&gt;vtype, VTYPE, VMA));
+     } else {
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+     }
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 8d87501e03..4610107fb4 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1251,6 +1251,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn *gvec_fn,
+         data = FIELD_DP32(data, VDATA, VM, a-&gt;vm);
+         data = FIELD_DP32(data, VDATA, LMUL, s-&gt;lmul);
+         data = FIELD_DP32(data, VDATA, VTA, s-&gt;vta);
++        data = FIELD_DP32(data, VDATA, VMA, s-&gt;vma);
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a-&gt;rd), vreg_ofs(s, 0),
+                            vreg_ofs(s, a-&gt;rs1), vreg_ofs(s, a-&gt;rs2),
+                            cpu_env, s-&gt;cfg_ptr-&gt;vlen / 8,
+@@ -1567,6 +1568,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+         data = FIELD_DP32(data, VDATA, VM, a-&gt;vm);
+         data = FIELD_DP32(data, VDATA, LMUL, s-&gt;lmul);
+         data = FIELD_DP32(data, VDATA, VTA, s-&gt;vta);
++        data = FIELD_DP32(data, VDATA, VMA, s-&gt;vma);
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a-&gt;rd), vreg_ofs(s, 0),
+                            vreg_ofs(s, a-&gt;rs1),
+                            vreg_ofs(s, a-&gt;rs2),
+@@ -1649,6 +1651,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+         data = FIELD_DP32(data, VDATA, VM, a-&gt;vm);
+         data = FIELD_DP32(data, VDATA, LMUL, s-&gt;lmul);
+         data = FIELD_DP32(data, VDATA, VTA, s-&gt;vta);
++        data = FIELD_DP32(data, VDATA, VMA, s-&gt;vma);
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a-&gt;rd), vreg_ofs(s, 0),
+                            vreg_ofs(s, a-&gt;rs1),
+                            vreg_ofs(s, a-&gt;rs2),
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 512c6c30cf..00b72fd767 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -25,8 +25,9 @@
+ FIELD(VDATA, VM, 0, 1)
+ FIELD(VDATA, LMUL, 1, 3)
+ FIELD(VDATA, VTA, 4, 1)
+-FIELD(VDATA, NF, 5, 4)
+-FIELD(VDATA, WD, 5, 1)
++FIELD(VDATA, VMA, 5, 1)
++FIELD(VDATA, NF, 6, 4)
++FIELD(VDATA, WD, 6, 1)
+ 
+ /* float point classify helpers */
+ target_ulong fclass_h(uint64_t frs1);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 7775dade26..37893aa348 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -95,6 +95,7 @@ typedef struct DisasContext {
+     int8_t lmul;
+     uint8_t sew;
+     uint8_t vta;
++    uint8_t vma;
+     target_ulong vstart;
+     bool vl_eq_vlmax;
+     uint8_t ntemp;
+@@ -1085,6 +1086,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx-&gt;sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+     ctx-&gt;lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
+     ctx-&gt;vta = FIELD_EX32(tb_flags, TB_FLAGS, VTA) &amp;&amp; cpu-&gt;cfg.rvv_ta_all_1s;
++    ctx-&gt;vma = FIELD_EX32(tb_flags, TB_FLAGS, VMA) &amp;&amp; cpu-&gt;cfg.rvv_ma_all_1s;
+     ctx-&gt;vstart = env-&gt;vstart;
+     ctx-&gt;vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+     ctx-&gt;misa_mxl_max = env-&gt;misa_mxl_max;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index fbde0c9248..141a06ddf0 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -127,6 +127,11 @@ static inline uint32_t vext_vta(uint32_t desc)
+     return FIELD_EX32(simd_data(desc), VDATA, VTA);
+ }
+ 
++static inline uint32_t vext_vma(uint32_t desc)
++{
++    return FIELD_EX32(simd_data(desc), VDATA, VMA);
++}
++
+ /*
+  * Get the maximum number of elements can be operated.
+  *
+@@ -797,10 +802,13 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, void *vs2,
+     uint32_t vl = env-&gt;vl;
+     uint32_t total_elems = vext_get_total_elems(desc, esz);
+     uint32_t vta = vext_vta(desc);
++    uint32_t vma = vext_vma(desc);
+     uint32_t i;
+ 
+     for (i = env-&gt;vstart; i &lt; vl; i++) {
+         if (!vm &amp;&amp; !vext_elem_mask(v0, i)) {
++            /* set masked-off elements to 1s */
++            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i, i * esz, (i + 1) * esz);</pre>
+    </blockquote>
+    <p>Similar to our last discussion,  vext_set_elems_1s_fns array can
+      be simplified to single vext_set_elems_1s,<br>
+    </p>
+    <p>since the fourth argement can be used as the start offset. <br>
+    </p>
+    <p>Another question, may be not related to this patchset, in section
+      3.4.3 of the spec: <br>
+    </p>
+    <p><i>"Mask destination tail elements are always treated as
+        tail-agnostic, regardless of the setting of vta."</i></p>
+    <p>What does "Mask destination tail elements" mean?</p>
+    <p>Regards,</p>
+    <p>Weiwei Li<br>
+    </p>
+    <blockquote type="cite"
+      cite="mid:165089631935.4839.7564289944057093570-1@git.sr.ht">
+      <pre class="moz-quote-pre" wrap="">
+             continue;
+         }
+         fn(vd, vs1, vs2, i);
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------98C1135EBEB0B15547A5137E--
+
 
