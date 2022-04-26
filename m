@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1njUIz-0005cp-Jl
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Apr 2022 19:09:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45656)
+	id 1njUJ0-0005fE-8q
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Apr 2022 19:09:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45660)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1njUIy-0005Xm-2Z
+ id 1njUIy-0005Yy-Dj
  for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:12 -0400
-Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:35810)
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:37447)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1njUIv-0000JI-FH
- for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:11 -0400
-Received: by mail-pf1-x429.google.com with SMTP id t13so125151pfg.2
- for <qemu-riscv@nongnu.org>; Tue, 26 Apr 2022 16:09:08 -0700 (PDT)
+ id 1njUIw-0000Jd-Ca
+ for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:12 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ t11-20020a17090ad50b00b001d95bf21996so3490013pju.2
+ for <qemu-riscv@nongnu.org>; Tue, 26 Apr 2022 16:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=2z6E+i2W7q4DGbfz+2BceiqkjfpyfvQdMovsxCIo6Gc=;
- b=E5hnSRwRWrr3nkm9+47+PqA0WcWCj6xSvXnzsDyz/JBiB4ZkbJCdt/0UssuscODUyA
- D83dlLsv7lvLR3wFqxzqNSfvqVYCf7F8e8EUucNj64eVh/jrToHMcwyEP4p9/+A2YkH6
- KgehR9z+TWM4s2faPeQN3gO5iPu4MHMUrWCHs0aCvlDqP5mNJrSHd4Z3iM5RVrmcmFd3
- yxlQ4xQ6Mbz/PVL/BF6xiIJKedVLApCf3E5LENmUo51wpVfhbRtPmXPxs7cnylkEzgbd
- FazeMr7na8oY+FPOSGJpQCTsMH02qOjHgFTN9exBpAGoItSsLyqLWG2TVArI61EiPPbc
- UXTw==
+ bh=w2Awd7FgMhf9sRznkKZ1XajZQfx8WtTyYAHGIDlM0AY=;
+ b=wxfqWWpvN1YxK+oRZ8wNWnMp/FcPJphlsmJv7XZxXnFzxJjB0zk6SHfpsVOeTGp9yi
+ e4qgsfvWdDmBB3oP2QJ/AJBjZu2ySYjYs13t6RK93SFZnDTH9ESrNS4MrCBWVqkWmoNg
+ mcDR9IUdZafcxGfs/MPAoBN5jFI/F/CFRLatI0aMGZUQe/8d5+8DG60cJU7dwepSuqL1
+ ehf5mTUWXzsq04+3kKQNzTC5OeqBTttZv33gqWZoXHGWzODh0CANtwI1XsqirPMFDVWk
+ Iofa/PV+MamzG1J2nGszB/GuYTnupu/WyFc8BShsur50brysJcBquxu/HWLxwJuGOqKO
+ M95A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=2z6E+i2W7q4DGbfz+2BceiqkjfpyfvQdMovsxCIo6Gc=;
- b=RLXsXoCKVDrhq2/XYHK+y1B1i5ttiE6Iv6wmPsAvHW40uNOSGa7F8dcl/wrWopEmmN
- xUKA4B1himvT1QOR3pBx8QMt/CExA0nPnA1Bub36B1qiuBzym9SeOJ5VYHUqLUUwtez1
- vA1EI14XopHQil5oksDowXHwyllQpPXh4PHT4yDqV8xoUIZq7qUSwqM0JL65X7KiAZG0
- Gkzt5pcLgorL9lmjHIydlMij7r1GKuhU796QIS2wEvPH8cC2ID7lJafuPckrJzsHFt8e
- Pe6IQ5BoHZbFr6qaKrNNCFeUmZShxQOxiTAlHQj/KId51BQp7YjikwwT1opZma8lhhLI
- 6FAA==
-X-Gm-Message-State: AOAM530qYgD0uiVE2s7cKx2aqn+WIrT7H7J+263vEHYAbgrvNkY00MwI
- G/vGLtScpp9d7bVcssamtUixag==
-X-Google-Smtp-Source: ABdhPJyq6SogW4wE5jmL44OHBiiSFDBSfr8Ao5qCMICjQZog7cjvEOYtkjHRku3CLctIjrpYmXCV4g==
-X-Received: by 2002:a63:d13:0:b0:381:f043:c627 with SMTP id
- c19-20020a630d13000000b00381f043c627mr21643007pgl.168.1651014546902; 
- Tue, 26 Apr 2022 16:09:06 -0700 (PDT)
+ bh=w2Awd7FgMhf9sRznkKZ1XajZQfx8WtTyYAHGIDlM0AY=;
+ b=huYFppDm2GxStDSV45gOPevyuN9ghUAWGnq/5knPFcZgBUmLX4DAEpwCngbDDqVKQA
+ 8vu14m5tYu/Cjji+wcibyD86vxs+05ZCxY9Sb7HgrzJ8PfuzMvR6TGS5AoOsIt0cIbpv
+ D6jx5pzZNMLBmkjxL24yn9utx0Niq/SCJOu6cut/Y2v4Z+gSlaGwkK2q3E5L8+WDUirK
+ gZqxxxuj8r7jDWwf3wOJhMfVVDizxSx5e2p3mASFRyHjMz2EpT38Z1RM4aqX0wagJV84
+ k56Qy8zEqd9AZ4SCsFdd0OvmU2sGQ7PiF9rKh6XJy+scK5VJM+v6M8hmwgHQKbQ8bxze
+ 1hBw==
+X-Gm-Message-State: AOAM5332Us8uX649GRxRIJyDkazOVVMSHULk9XkZslUmlMk4DrRggAwu
+ t9yQeDUTDDTb1mCVi2GY0+9fpQ==
+X-Google-Smtp-Source: ABdhPJym/DVKE+RscdnKonNozF3dsbp0LmEoxRqYj29DzORz7FwBmKQ1tqXe0X3PtOZ9I0aU/6YEPg==
+X-Received: by 2002:a17:902:7ec1:b0:156:17a4:a2f8 with SMTP id
+ p1-20020a1709027ec100b0015617a4a2f8mr26351088plb.155.1651014548462; 
+ Tue, 26 Apr 2022 16:09:08 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- t29-20020a62d15d000000b0050d42864753sm7856490pfl.49.2022.04.26.16.09.05
+ t29-20020a62d15d000000b0050d42864753sm7856490pfl.49.2022.04.26.16.09.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Apr 2022 16:09:06 -0700 (PDT)
+ Tue, 26 Apr 2022 16:09:07 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>,
@@ -54,16 +55,16 @@ Cc: Atish Patra <atishp@rivosinc.com>,
  "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
  Juan Quintela <quintela@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2  4/5] target/riscv: Add stimecmp support
-Date: Tue, 26 Apr 2022 16:08:53 -0700
-Message-Id: <20220426230855.336292-5-atishp@rivosinc.com>
+Subject: [PATCH v2  5/5] target/riscv: Add vstimecmp support
+Date: Tue, 26 Apr 2022 16:08:54 -0700
+Message-Id: <20220426230855.336292-6-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220426230855.336292-1-atishp@rivosinc.com>
 References: <20220426230855.336292-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -84,127 +85,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Tue, 26 Apr 2022 23:09:12 -0000
 
-stimecmp allows the supervisor mode to update stimecmp CSR directly
-to program the next timer interrupt. This CSR is part of the Sstc
-extension which was ratified recently.
+vstimecmp CSR allows the guest OS or to program the next guest timer
+interrupt directly. Thus, hypervisor no longer need to inject the
+timer interrupt to the guest if vstimecmp is used. This was ratified
+as a part of the Sstc extension.
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu.c         |  8 ++++
- target/riscv/cpu.h         |  5 ++
- target/riscv/cpu_bits.h    |  4 ++
- target/riscv/csr.c         | 83 ++++++++++++++++++++++++++++++++
- target/riscv/machine.c     |  1 +
- target/riscv/meson.build   |  3 +-
- target/riscv/time_helper.c | 98 ++++++++++++++++++++++++++++++++++++++
- target/riscv/time_helper.h | 30 ++++++++++++
- 8 files changed, 231 insertions(+), 1 deletion(-)
- create mode 100644 target/riscv/time_helper.c
- create mode 100644 target/riscv/time_helper.h
+ target/riscv/cpu.h         |   3 ++
+ target/riscv/cpu_bits.h    |   4 ++
+ target/riscv/cpu_helper.c  |  11 ++--
+ target/riscv/csr.c         | 102 ++++++++++++++++++++++++++++++++++++-
+ target/riscv/machine.c     |   1 +
+ target/riscv/time_helper.c |  16 ++++++
+ 6 files changed, 132 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0c774056c5c3..6d16aeeacf0c 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -23,6 +23,7 @@
- #include "qemu/log.h"
- #include "cpu.h"
- #include "internals.h"
-+#include "time_helper.h"
- #include "exec/exec-all.h"
- #include "qapi/error.h"
- #include "qemu/error-report.h"
-@@ -777,7 +778,12 @@ static void riscv_cpu_init(Object *obj)
- #ifndef CONFIG_USER_ONLY
-     qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq,
-                       IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
-+
-+    if (cpu->cfg.ext_sstc) {
-+        riscv_timer_init(cpu);
-+    }
- #endif /* CONFIG_USER_ONLY */
-+
- }
- 
- static Property riscv_cpu_properties[] = {
-@@ -804,6 +810,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-+    DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
- 
-     DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-     DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-@@ -963,6 +970,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-         ISA_EDATA_ENTRY(zbs, ext_zbs),
-         ISA_EDATA_ENTRY(zve32f, ext_zve32f),
-         ISA_EDATA_ENTRY(zve64f, ext_zve64f),
-+        ISA_EDATA_ENTRY(sstc, ext_sstc),
-         ISA_EDATA_ENTRY(svinval, ext_svinval),
-         ISA_EDATA_ENTRY(svnapot, ext_svnapot),
-         ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1119d5201066..9a5e02f217ba 100644
+index 9a5e02f217ba..29d8ab1aaca6 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -276,6 +276,9 @@ struct CPUArchState {
-     uint64_t mfromhost;
-     uint64_t mtohost;
+@@ -278,6 +278,7 @@ struct CPUArchState {
  
-+    /* Sstc CSRs */
-+    uint64_t stimecmp;
-+
+     /* Sstc CSRs */
+     uint64_t stimecmp;
++    uint64_t vstimecmp;
+ 
      /* physical memory protection */
      pmp_table_t pmp_state;
-     target_ulong mseccfg;
-@@ -329,6 +332,7 @@ struct CPUArchState {
-     float_status fp_status;
+@@ -333,6 +334,8 @@ struct CPUArchState {
  
      /* Fields from here on are preserved across CPU reset. */
-+    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+     QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
++    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
++    bool vstime_irq;
  
      hwaddr kernel_addr;
      hwaddr fdt_addr;
-@@ -379,6 +383,7 @@ struct RISCVCPUConfig {
-     bool ext_counters;
-     bool ext_ifencei;
-     bool ext_icsr;
-+    bool ext_sstc;
-     bool ext_svinval;
-     bool ext_svnapot;
-     bool ext_svpbmt;
 diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 4a9e4f7d09d9..631b7c32b38f 100644
+index 631b7c32b38f..ce33bf8befbb 100644
 --- a/target/riscv/cpu_bits.h
 +++ b/target/riscv/cpu_bits.h
-@@ -212,6 +212,10 @@
- #define CSR_STVAL           0x143
- #define CSR_SIP             0x144
+@@ -269,6 +269,10 @@
+ #define CSR_VSIP            0x244
+ #define CSR_VSATP           0x280
  
-+/* Sstc supervisor CSRs */
-+#define CSR_STIMECMP        0x14D
-+#define CSR_STIMECMPH       0x15D
++/* Sstc virtual CSRs */
++#define CSR_VSTIMECMP       0x24D
++#define CSR_VSTIMECMPH      0x25D
 +
- /* Supervisor Protection and Translation */
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
+ #define CSR_MTINST          0x34a
+ #define CSR_MTVAL2          0x34b
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e1aa4f2097c1..2715021c022e 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -344,8 +344,9 @@ static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
+ {
+     uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
+     uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
++    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
+ 
+-    return (env->mip | vsgein) & env->mie;
++    return (env->mip | vsgein | vstip) & env->mie;
+ }
+ 
+ int riscv_cpu_mirq_pending(CPURISCVState *env)
+@@ -604,7 +605,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
+ {
+     CPURISCVState *env = &cpu->env;
+     CPUState *cs = CPU(cpu);
+-    uint64_t gein, vsgein = 0, old = env->mip;
++    uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
+     bool locked = false;
+ 
+     if (riscv_cpu_virt_enabled(env)) {
+@@ -612,6 +613,10 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
+         vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
+     }
+ 
++    /* No need to update mip for VSTIP */
++    mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
++    vstip = env->vstime_irq ? MIP_VSTIP : 0;
++
+     if (!qemu_mutex_iothread_locked()) {
+         locked = true;
+         qemu_mutex_lock_iothread();
+@@ -619,7 +624,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
+ 
+     env->mip = (env->mip & ~mask) | (value & mask);
+ 
+-    if (env->mip | vsgein) {
++    if (env->mip | vsgein | vstip) {
+         cpu_interrupt(cs, CPU_INTERRUPT_HARD);
+     } else {
+         cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6ba85e7b5da2..c51c05d2ea74 100644
+index c51c05d2ea74..c96c12a8ac74 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -21,6 +21,7 @@
- #include "qemu/log.h"
- #include "qemu/timer.h"
- #include "cpu.h"
-+#include "time_helper.h"
- #include "qemu/main-loop.h"
- #include "exec/exec-all.h"
- #include "sysemu/cpu-timers.h"
-@@ -537,6 +538,78 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+@@ -567,17 +567,100 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
      return RISCV_EXCP_NONE;
  }
  
-+static RISCVException sstc(CPURISCVState *env, int csrno)
++static RISCVException sstc_hmode(CPURISCVState *env, int csrno)
 +{
 +    CPUState *cs = env_cpu(env);
 +    RISCVCPU *cpu = RISCV_CPU(cs);
@@ -217,258 +201,190 @@ index 6ba85e7b5da2..c51c05d2ea74 100644
 +        return RISCV_EXCP_NONE;
 +    }
 +
-+    if (env->priv != PRV_S) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    /*
-+     * No need of separate function for rv32 as menvcfg stores both menvcfg
-+     * menvcfgh for RV32.
-+     */
-+    if (!(get_field(env->mcounteren, COUNTEREN_TM) &&
++    if (!(get_field(env->mcounteren, COUNTEREN_TM) &
 +          get_field(env->menvcfg, MENVCFG_STCE))) {
 +        return RISCV_EXCP_ILLEGAL_INST;
 +    }
 +
++    if (!(get_field(env->hcounteren, COUNTEREN_TM) &
++          get_field(env->henvcfg, HENVCFG_STCE))) {
++        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++    }
++
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
++static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,
 +                                    target_ulong *val)
 +{
-+    *val = env->stimecmp;
++    *val = env->vstimecmp;
++
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
++static RISCVException read_vstimecmph(CPURISCVState *env, int csrno,
 +                                    target_ulong *val)
 +{
-+    *val = env->stimecmp >> 32;
++    *val = env->vstimecmp >> 32;
++
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
++static RISCVException write_vstimecmp(CPURISCVState *env, int csrno,
 +                                    target_ulong val)
 +{
 +    RISCVCPU *cpu = env_archcpu(env);
 +
 +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        uint64_t stimecmp_hi = env->stimecmp >> 32;
-+        env->stimecmp = (stimecmp_hi << 32) | (val & 0xFFFFFFFF);
++        uint64_t vstimecmp_hi = env->vstimecmp >> 32;
++        env->vstimecmp = (vstimecmp_hi << 32) | (val & 0xFFFFFFFF);
 +    } else {
-+        env->stimecmp = val;
-+        riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
++        env->vstimecmp = val;
++        riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
++                                  env->htimedelta, MIP_VSTIP);
 +    }
 +
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
++static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
 +                                    target_ulong val)
 +{
 +    RISCVCPU *cpu = env_archcpu(env);
 +    uint64_t timer_val = 0;
 +
-+    timer_val = (uint64_t)val << 32 | (env->stimecmp & 0xFFFFFFFF);
-+    env->stimecmp = timer_val;
-+    riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
++    timer_val = (uint64_t)val << 32 | (env->vstimecmp & 0xFFFFFFFF);
++    env->vstimecmp = timer_val;
++    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
++                              env->htimedelta, MIP_VSTIP);
 +
 +    return RISCV_EXCP_NONE;
 +}
 +
- /* Machine constants */
- 
- #define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
-@@ -1515,6 +1588,12 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
-         new_val |= env->external_seip * MIP_SEIP;
-     }
- 
-+    if (cpu->cfg.ext_sstc && (env->priv == PRV_M) &&
-+        get_field(env->menvcfg, MENVCFG_STCE)) {
-+        /* sstc extension forbids STIP & VSTIP to be writeable in mip */
-+        mask = mask & ~(MIP_STIP | MIP_VSTIP);
+ static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
+                                     target_ulong *val)
+ {
+-    *val = env->stimecmp;
++    if (riscv_cpu_virt_enabled(env)) {
++        *val = env->vstimecmp;
++    } else {
++        *val = env->stimecmp;
 +    }
 +
-     if (mask) {
-         old_mip = riscv_cpu_update_mip(cpu, mask, (new_val & mask));
-     } else {
-@@ -3339,6 +3418,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_SCAUSE]   = { "scause",   smode, read_scause,   write_scause   },
-     [CSR_STVAL]    = { "stval",    smode, read_stval,   write_stval   },
-     [CSR_SIP]      = { "sip",      smode, NULL,    NULL, rmw_sip        },
-+    [CSR_STIMECMP] = { "stimecmp", sstc, read_stimecmp, write_stimecmp,
+     return RISCV_EXCP_NONE;
+ }
+ 
+ static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
+                                     target_ulong *val)
+ {
+-    *val = env->stimecmp >> 32;
++    if (riscv_cpu_virt_enabled(env)) {
++        *val = env->vstimecmp >> 32;
++    } else {
++        *val = env->stimecmp >> 32;
++    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -586,6 +669,10 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
+ {
+     RISCVCPU *cpu = env_archcpu(env);
+ 
++    if (riscv_cpu_virt_enabled(env)) {
++        return write_vstimecmp(env, csrno, val);
++    }
++
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+         uint64_t stimecmp_hi = env->stimecmp >> 32;
+         env->stimecmp = (stimecmp_hi << 32) | (val & 0xFFFFFFFF);
+@@ -603,6 +690,10 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+     RISCVCPU *cpu = env_archcpu(env);
+     uint64_t timer_val = 0;
+ 
++    if (riscv_cpu_virt_enabled(env)) {
++        return write_vstimecmph(env, csrno, val);
++    }
++
+     timer_val = (uint64_t)val << 32 | (env->stimecmp & 0xFFFFFFFF);
+     env->stimecmp = timer_val;
+     riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
+@@ -1603,6 +1694,7 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
+     if (csrno != CSR_HVIP) {
+         gin = get_field(env->hstatus, HSTATUS_VGEIN);
+         old_mip |= (env->hgeip & ((target_ulong)1 << gin)) ? MIP_VSEIP : 0;
++        old_mip |= env->vstime_irq ? MIP_VSTIP : 0;
+     }
+ 
+     if (ret_val) {
+@@ -3422,6 +3514,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+                                           .min_priv_ver = PRIV_VERSION_1_12_0 },
+     [CSR_STIMECMPH] = { "stimecmph", sstc, read_stimecmph, write_stimecmph,
+                                           .min_priv_ver = PRIV_VERSION_1_12_0 },
++    [CSR_VSTIMECMP] = { "vstimecmp", sstc_hmode, read_vstimecmp,
++                                          write_vstimecmp,
 +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-+    [CSR_STIMECMPH] = { "stimecmph", sstc, read_stimecmph, write_stimecmph,
++    [CSR_VSTIMECMPH] = { "vstimecmph", sstc_hmode, read_vstimecmph,
++                                          write_vstimecmph,
 +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
  
      /* Supervisor Protection and Translation */
      [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
 diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 14a3c1d775bc..e50d82a6085e 100644
+index e50d82a6085e..c3628c949640 100644
 --- a/target/riscv/machine.c
 +++ b/target/riscv/machine.c
-@@ -334,6 +334,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINTTL(env.mscratch, RISCVCPU),
-         VMSTATE_UINT64(env.mfromhost, RISCVCPU),
-         VMSTATE_UINT64(env.mtohost, RISCVCPU),
-+        VMSTATE_UINT64(env.stimecmp, RISCVCPU),
+@@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper = {
+         VMSTATE_UINTTL(env.hgeie, RISCVCPU),
+         VMSTATE_UINTTL(env.hgeip, RISCVCPU),
+         VMSTATE_UINT64(env.htimedelta, RISCVCPU),
++        VMSTATE_UINT64(env.vstimecmp, RISCVCPU),
  
-         VMSTATE_END_OF_LIST()
-     },
-diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-index 2c20f3dd8e9c..1243d019148e 100644
---- a/target/riscv/meson.build
-+++ b/target/riscv/meson.build
-@@ -29,7 +29,8 @@ riscv_softmmu_ss.add(files(
-   'pmp.c',
-   'debug.c',
-   'monitor.c',
--  'machine.c'
-+  'machine.c',
-+  'time_helper.c'
- ))
- 
- target_arch += {'riscv': riscv_ss}
+         VMSTATE_UINTTL(env.hvictl, RISCVCPU),
+         VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
 diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-new file mode 100644
-index 000000000000..f3fb5eac7b7b
---- /dev/null
+index f3fb5eac7b7b..8cce667dfd47 100644
+--- a/target/riscv/time_helper.c
 +++ b/target/riscv/time_helper.c
-@@ -0,0 +1,98 @@
-+/*
-+ * RISC-V timer helper implementation.
-+ *
-+ * Copyright (c) 2022 Rivos Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "cpu_bits.h"
-+#include "time_helper.h"
-+#include "hw/intc/riscv_aclint.h"
-+
-+static void riscv_stimer_cb(void *opaque)
+@@ -22,6 +22,14 @@
+ #include "time_helper.h"
+ #include "hw/intc/riscv_aclint.h"
+ 
++static void riscv_vstimer_cb(void *opaque)
 +{
 +    RISCVCPU *cpu = opaque;
-+    riscv_cpu_update_mip(cpu, MIP_STIP, BOOL_TO_MASK(1));
-+}
-+
-+/*
-+ * Called when timecmp is written to update the QEMU timer or immediately
-+ * trigger timer interrupt if mtimecmp <= current timer value.
-+ */
-+void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
-+                               uint64_t timecmp, uint64_t delta,
-+                               uint32_t timer_irq)
-+{
-+    uint64_t diff, ns_diff, next;
 +    CPURISCVState *env = &cpu->env;
-+    RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
-+    uint32_t timebase_freq = mtimer->timebase_freq;
-+    uint64_t rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
-+
-+    if (timecmp <= rtc_r) {
-+        /*
-+         * If we're setting an stimecmp value in the "past",
-+         * immediately raise the timer interrupt
-+         */
-+        riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
-+        return;
-+    }
-+
-+    /* Clear the [V]STIP bit in mip */
-+    riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
-+
-+    /* otherwise, set up the future timer interrupt */
-+    diff = timecmp - rtc_r;
-+    /* back to ns (note args switched in muldiv64) */
-+    ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-+
-+    /*
-+     * check if ns_diff overflowed and check if the addition would potentially
-+     * overflow
-+     */
-+    if ((NANOSECONDS_PER_SECOND > timebase_freq && ns_diff < diff) ||
-+        ns_diff > INT64_MAX) {
-+        next = INT64_MAX;
-+    } else {
-+        /*
-+         * as it is very unlikely qemu_clock_get_ns will return a value
-+         * greater than INT64_MAX, no additional check is needed for an
-+         * unsigned integer overflow.
-+         */
-+        next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns_diff;
-+        /*
-+         * if ns_diff is INT64_MAX next may still be outside the range
-+         * of a signed integer.
-+         */
-+        next = MIN(next, INT64_MAX);
-+    }
-+
-+    timer_mod(timer, next);
++    env->vstime_irq = 1;
++    riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));
 +}
 +
-+void riscv_timer_init(RISCVCPU *cpu)
-+{
-+    CPURISCVState *env;
-+
-+    if (!cpu) {
-+        return;
+ static void riscv_stimer_cb(void *opaque)
+ {
+     RISCVCPU *cpu = opaque;
+@@ -47,10 +55,16 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
+          * If we're setting an stimecmp value in the "past",
+          * immediately raise the timer interrupt
+          */
++        if (timer_irq == MIP_VSTIP) {
++            env->vstime_irq = 1;
++        }
+         riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
+         return;
+     }
+ 
++    if (timer_irq == MIP_VSTIP) {
++        env->vstime_irq = 0;
 +    }
-+
-+    env = &cpu->env;
-+    env->stimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb, cpu);
-+    env->stimecmp = 0;
-+
-+}
-diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h
-new file mode 100644
-index 000000000000..7b3cdcc35020
---- /dev/null
-+++ b/target/riscv/time_helper.h
-@@ -0,0 +1,30 @@
-+/*
-+ * RISC-V timer header file.
-+ *
-+ * Copyright (c) 2022 Rivos Inc.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef RISCV_TIME_HELPER_H
-+#define RISCV_TIME_HELPER_H
-+
-+#include "cpu.h"
-+#include "qemu/timer.h"
-+
-+void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
-+                               uint64_t timecmp, uint64_t delta,
-+                               uint32_t timer_irq);
-+void riscv_timer_init(RISCVCPU *cpu);
-+
-+#endif
+     /* Clear the [V]STIP bit in mip */
+     riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
+ 
+@@ -95,4 +109,6 @@ void riscv_timer_init(RISCVCPU *cpu)
+     env->stimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb, cpu);
+     env->stimecmp = 0;
+ 
++    env->vstimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_vstimer_cb, cpu);
++    env->vstimecmp = 0;
+ }
 -- 
 2.25.1
 
