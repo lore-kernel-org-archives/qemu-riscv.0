@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1njUIt-0005LK-Kk
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Apr 2022 19:09:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45538)
+	id 1njUIw-0005Qw-48
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Apr 2022 19:09:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45584)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1njUIr-0005Gj-V9
- for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:05 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:33348)
+ id 1njUIt-0005L5-Ta
+ for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:07 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:39663)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1njUIp-0000I4-OR
- for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:05 -0400
-Received: by mail-pf1-x431.google.com with SMTP id p12so151072pfn.0
- for <qemu-riscv@nongnu.org>; Tue, 26 Apr 2022 16:09:02 -0700 (PDT)
+ id 1njUIr-0000IW-BS
+ for qemu-riscv@nongnu.org; Tue, 26 Apr 2022 19:09:07 -0400
+Received: by mail-pg1-x533.google.com with SMTP id i62so90570pgd.6
+ for <qemu-riscv@nongnu.org>; Tue, 26 Apr 2022 16:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=jk8tA+yKf4FLJEbGZW6ag/0yVS0cS54zZ6lF4KTSGts=;
- b=JGJ4FmCajKcGKfZLzjjAo4gHp2myal7QYfgRAw77NcQo3suZ1rv/fmQrd7bs/gMvO4
- fsu23eP48QZ0yhdtbepEcAquR69GHPtmBx4iO7nmplwVGs1sdBkYNntalpJAj9atAlou
- ftH5jBI85nVrXphSMKZ3RbDD9U8u5WZfy+9uOUhzUv2Kbo8T/PDLhAUEWoFB2ZLHSdfl
- gYD1m/QnxMnlVsc5ERd2X7FtV+iWJwdR+k7jh19x+AZda9b0/RmZUu3ALjkfloHIQm+I
- YXLBbOuDGAArf0kOiAHm+OfcTCttU6lygd9qQ1bAHjl8oMedd5knygfPTp6Wc28Atuxm
- c+rA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=LdEjmljNRZQoLffMrBdqTb34Kjoj9AW0utDokXRYpVs=;
+ b=3X/TcEK4QMbY03XIF/HMNBGRbU8YFhl7fYPEgTSdpQ3QuO7tUqsR2OKhGXgPjRjVzo
+ YlsjSWwoBS3S8R0DwTIMFci8x21WVFZbZQinFOT7hb4C7oohw2ECFKTlRgff7Y7ha+vn
+ sU7EL5vcz9SiLwmoHTZmWgWQ9Uo1o6vk+QTyKfIaKlXJXntKbgFVjihJJHJ4c4DPmTaF
+ 0peRoVC2M80C9B0m8QhFr/l+TdlNXrvp6/Lmy6DBGViWsODoHRhuNkqJdzQqm65WkN+i
+ ukWiNCofCb+s5kTYN2sU99A49Tcopvkd2BFy/cJiyC1iHOc5DtOjp9fY9bl/U5V1Tq1t
+ gbkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=jk8tA+yKf4FLJEbGZW6ag/0yVS0cS54zZ6lF4KTSGts=;
- b=344DgCr+YaQtkOwagBiDBuD9H/btPDaSXvb9eohJN0aql8F6jMPR/c+K6bS6LpEjFp
- 0sJzEyop151oiMJvQgsrNYUgjZVQdeH5KdnNLbL64jjLFygB7SyAo6oTMn9o4vodieV4
- ng0BvQ5kKQU76xJr4xoIp0H73SLnpuzRJVrNwUMAnyO+kvV7z/DcVTY5/w1L7vfOv1Nr
- FNWayUv6OSlqh43gsXealzYGyCCkb4C/J4ObEt8HgUKbdgi/1MaIMAxtZbIRrVoRkzqK
- tRr+m7ASKcMLVl3TZAwFDyTruVXlUMxhzfsLBjF/ATqLrw2OBdsdFvZvHj7l7D+PcyOh
- e1rA==
-X-Gm-Message-State: AOAM533kHO1tbWdv5py7+jIa6TAeT7cRrhT1snARBXCuJm7qeSEkKfOm
- Nx8LBXl5pIri7CSbSJ/Wr3dUHQ==
-X-Google-Smtp-Source: ABdhPJxas2/7AoEOr3VO3X9Y4kLHrsSU4oAFjopy0KlLmcgmt7JGMkjUQwLLTqr08C4iPvWNdol7PQ==
-X-Received: by 2002:a05:6a00:e14:b0:4fe:3cdb:23f with SMTP id
- bq20-20020a056a000e1400b004fe3cdb023fmr26789024pfb.86.1651014541222; 
- Tue, 26 Apr 2022 16:09:01 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=LdEjmljNRZQoLffMrBdqTb34Kjoj9AW0utDokXRYpVs=;
+ b=4UvnGbOSEk45Pxs6ullwYZg7A6wgglE2/ckCDbGnoNOius7uKB3t0mxGuPDzRY1qOJ
+ LBfVkgaa9YgQZQ7irqvRqN02zlqGyro60CZrZSRkchjg+yUYKrK+wCTy1xjsQZfeFqSj
+ waYRZVuxQ/kPekKv4cTry3XBK+q7TE3nVV4rh77qDnCZER224airDEszDEhyKAzzdLSQ
+ a3R0zGal0ND4kAV22DGU6JvYjIUsQWwXt3AGaPeRyPrP9yZWfboQcKowG1mA8pZE+Pcw
+ T5aXmPr+saUKr+3x/sHzf8y9W2OzM+Vb+/d8YdHYHxTWITBsfDlPbyEcnyd0qmGe8mOn
+ +jww==
+X-Gm-Message-State: AOAM530rEvCgoVxcv3UytaG70cueR9E2PqNEUDChKu7DUU0F886W6w9v
+ wJkvL/qJb6rU+dzSD7UdZ6ySeg==
+X-Google-Smtp-Source: ABdhPJxoB0WOyReV7avIFHsHSpBOT0FV94fl1V+SyYHXNLig0LlOZ/MZu87nXpQlGbeDFa+FRneq1w==
+X-Received: by 2002:a05:6a00:1307:b0:4b0:b1c:6fd9 with SMTP id
+ j7-20020a056a00130700b004b00b1c6fd9mr26692973pfu.27.1651014544089; 
+ Tue, 26 Apr 2022 16:09:04 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- t29-20020a62d15d000000b0050d42864753sm7856490pfl.49.2022.04.26.16.09.00
+ t29-20020a62d15d000000b0050d42864753sm7856490pfl.49.2022.04.26.16.09.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Apr 2022 16:09:00 -0700 (PDT)
+ Tue, 26 Apr 2022 16:09:03 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Atish Patra <atishp@rivosinc.com>,
@@ -54,14 +54,16 @@ Cc: Atish Patra <atishp@rivosinc.com>,
  "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
  Juan Quintela <quintela@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2  0/5] Implement Sstc extension 
-Date: Tue, 26 Apr 2022 16:08:49 -0700
-Message-Id: <20220426230855.336292-1-atishp@rivosinc.com>
+Subject: [PATCH v2  2/5] migration: Add 64bit variable array data type
+Date: Tue, 26 Apr 2022 16:08:51 -0700
+Message-Id: <20220426230855.336292-3-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220426230855.336292-1-atishp@rivosinc.com>
+References: <20220426230855.336292-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x431.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,57 +82,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2022 23:09:06 -0000
+X-List-Received-Date: Tue, 26 Apr 2022 23:09:08 -0000
 
-This series implements Sstc extension[1] which was ratified recently.
+unsigned 64bit variable array data type support is missing.
+Add the required code to support it.
 
-The first patch is a prepartory patches while PATCH 2 adds stimecmp
-support while PATCH 3 adds vstimecmp support. This series is based on
-on top of upstream commit (faee5441a038).
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ include/migration/vmstate.h | 11 +++++++++++
+ migration/vmstate.c         |  2 ++
+ 2 files changed, 13 insertions(+)
 
-The series can also be found at
-https://github.com/atishp04/qemu/tree/sstc_v2
-
-It is tested on RV32 & RV64 with additional OpenSBI[2] & Linux kernel[3]
-patches.
-
-Changes from v1->v2:
-1. Rebased on the latest upstream commit.
-2. Replaced PATCH 1 with another patch where mtimer/timecmp is
-   moved from CPU to ACLINT.
-3. Added ACLINT migration support.
-
-[1] https://drive.google.com/file/d/1m84Re2yK8m_vbW7TspvevCDR82MOBaSX/view
-[2] https://github.com/atishp04/opensbi/tree/sstc_v2
-[3] https://github.com/atishp04/linux/tree/sstc_v3
-
-Atish Patra (5):
-hw/intc: Move mtimer/mtimecmp to aclint
-migration: Add 64bit variable array data type
-hw/intc: Support migration of aclint device
-target/riscv: Add stimecmp support
-target/riscv: Add vstimecmp support
-
-hw/intc/riscv_aclint.c         |  41 +++++---
-hw/timer/ibex_timer.c          |  20 ++--
-include/hw/intc/riscv_aclint.h |   2 +
-include/hw/timer/ibex_timer.h  |   2 +
-include/migration/vmstate.h    |  11 ++
-migration/vmstate.c            |   2 +
-target/riscv/cpu.c             |   8 ++
-target/riscv/cpu.h             |  10 +-
-target/riscv/cpu_bits.h        |   8 ++
-target/riscv/cpu_helper.c      |  11 +-
-target/riscv/csr.c             | 181 +++++++++++++++++++++++++++++++++
-target/riscv/machine.c         |   3 +-
-target/riscv/meson.build       |   3 +-
-target/riscv/time_helper.c     | 114 +++++++++++++++++++++
-target/riscv/time_helper.h     |  30 ++++++
-15 files changed, 415 insertions(+), 31 deletions(-)
-create mode 100644 target/riscv/time_helper.c
-create mode 100644 target/riscv/time_helper.h
-
---
+diff --git a/include/migration/vmstate.h b/include/migration/vmstate.h
+index ad24aa193451..d289caea0143 100644
+--- a/include/migration/vmstate.h
++++ b/include/migration/vmstate.h
+@@ -147,6 +147,7 @@ enum VMStateFlags {
+      * VMStateField.struct_version_id to tell which version of the
+      * structure we are referencing to use. */
+     VMS_VSTRUCT           = 0x8000,
++    VMS_VARRAY_UINT64     = 0x10000,
+ };
+ 
+ typedef enum {
+@@ -428,6 +429,16 @@ extern const VMStateInfo vmstate_info_qlist;
+     .offset     = vmstate_offset_pointer(_state, _field, _type),     \
+ }
+ 
++#define VMSTATE_VARRAY_UINT64(_field, _state, _field_num, _version, _info, _type) {\
++    .name       = (stringify(_field)),                               \
++    .version_id = (_version),                                        \
++    .num_offset = vmstate_offset_value(_state, _field_num, uint32_t),\
++    .info       = &(_info),                                          \
++    .size       = sizeof(_type),                                     \
++    .flags      = VMS_VARRAY_UINT64 | VMS_POINTER,                   \
++    .offset     = vmstate_offset_pointer(_state, _field, _type),     \
++}
++
+ #define VMSTATE_VARRAY_UINT16_ALLOC(_field, _state, _field_num, _version, _info, _type) {\
+     .name       = (stringify(_field)),                               \
+     .version_id = (_version),                                        \
+diff --git a/migration/vmstate.c b/migration/vmstate.c
+index 36ae8b9e1918..3cd5e37ebe2d 100644
+--- a/migration/vmstate.c
++++ b/migration/vmstate.c
+@@ -35,6 +35,8 @@ static int vmstate_n_elems(void *opaque, const VMStateField *field)
+         n_elems = *(int32_t *)(opaque + field->num_offset);
+     } else if (field->flags & VMS_VARRAY_UINT32) {
+         n_elems = *(uint32_t *)(opaque + field->num_offset);
++    } else if (field->flags & VMS_VARRAY_UINT64) {
++        n_elems = *(uint64_t *)(opaque + field->num_offset);
+     } else if (field->flags & VMS_VARRAY_UINT16) {
+         n_elems = *(uint16_t *)(opaque + field->num_offset);
+     } else if (field->flags & VMS_VARRAY_UINT8) {
+-- 
 2.25.1
 
 
