@@ -1,41 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nizYI-0007iw-Jm
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 10:19:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34460)
+	id 1nj8t8-0002rp-Q4
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 20:17:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49000)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nizY6-0007JR-1C; Mon, 25 Apr 2022 10:18:47 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:41758)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nizY4-0003Q6-8U; Mon, 25 Apr 2022 10:18:45 -0400
-Authentication-Results: mail-b.sr.ht; dkim=none 
-Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 69C9711EF86;
- Mon, 25 Apr 2022 14:18:40 +0000 (UTC)
-From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu 6/9] target/riscv: rvv: Add mask agnostic for vector
- fix-point arithmetic instructions
-Message-ID: <165089631935.4839.7564289944057093570-6@git.sr.ht>
-X-Mailer: git.sr.ht
-Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
-In-Reply-To: <165089631935.4839.7564289944057093570-0@git.sr.ht>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nj8t7-0002rT-HA; Mon, 25 Apr 2022 20:17:05 -0400
+Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:40456)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nj8t5-0004jw-Tu; Mon, 25 Apr 2022 20:17:05 -0400
+Received: by mail-io1-xd32.google.com with SMTP id 79so17706802iou.7;
+ Mon, 25 Apr 2022 17:17:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=cikaNgVlG8c11lBdeTBEBtH889WKsw17u50lC5+0pS8=;
+ b=AwMyFUt6udsvVhtiICFPfnQtW33ztsf0v21zxYEQijrM2O0dSvg/OTWlU+d5WlJjyO
+ xHvU7PXAWdH5XUivovZPZM+L2xdZ90v9JEp028saraq2fUwRNmz3PboCwHaHoEj8jURf
+ h+0ujGm/Wua6QMeTuQ50mNY6sAIp3tjDRW3NM11ioHrSD8FRF85RIfACPiu1z1UjcOd9
+ eduMKUsBKstEfwBEEwhDwKWtqLgF67FHW5RDz0JwlGLdH2LW01BCP0YUmsT/d/WGNbaL
+ DyQfX/G3MDPnUzh2GwRxG9q2Rwn5NZegHNY4oVk1JRyAE2qXds7MKMO/tlBOLn46uPfb
+ 0VOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=cikaNgVlG8c11lBdeTBEBtH889WKsw17u50lC5+0pS8=;
+ b=xKCS3MNldQa54X21yjOlWwdZvvXJcBIH+0s7H5pYbbTf2NDwZI0RH4t/WtC/LoRQm3
+ +/8liXqAyVAzRWKESLUsvQJNbIONUjOVwmUnkMDTPzxb+i9H8ZV7I2Uh/n1Gp0jVmGVW
+ /qN5ne96tTnmGwuh44WB+ny4fHMjyRg0m+N9kfX1zNgtD4i8+Cki2uTVLpjgM57W1quq
+ /+OqmSF/1/FB14DTVtVAYSxWGpn650bV5lmkuHC+iLsX0vhkQ7tpIG/1BZuSxICHvjQD
+ q4sg5V4Syhc0rsZj5qLnJIL9K0YMzJcNmguCJDMqCyxRfE1z3s4JUQdVujDatsYC/Lv5
+ AB2Q==
+X-Gm-Message-State: AOAM5322p5MlC55tsYjM8CRlGHrz7aDa8llleh6mbpNZ4weAeEjQWejE
+ W2HgvNLahEcxglQzXLdkUnI/iD9vKG8ToE1yPhc=
+X-Google-Smtp-Source: ABdhPJyHi1fV02PK82yrkPNhadZbi1EovolSMcX8Nu2DCY8FMPgCSqY8BQRuKAVeWIaWlGm0x812Dl5PEt6Ltug2dV8=
+X-Received: by 2002:a05:6638:1914:b0:32a:8804:da85 with SMTP id
+ p20-20020a056638191400b0032a8804da85mr8312466jal.212.1650932221914; Mon, 25
+ Apr 2022 17:17:01 -0700 (PDT)
 MIME-Version: 1.0
-Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
- helo=mail-b.sr.ht
-X-Spam_score_int: 36
-X-Spam_score: 3.6
-X-Spam_bar: +++
-X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+References: <CAKmqyKNtcV3MN0qzVEOgty=o137-QfYm4_c_hHmb1O9YfhSiQQ@mail.gmail.com>
+ <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
+In-Reply-To: <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 26 Apr 2022 10:16:36 +1000
+Message-ID: <CAKmqyKMVeoFWOkeX7bTNNudZbRF7n3O1kub0ZUCxOz=kTTZh+A@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: Fix incorrect PTE merge in walk_pte
+To: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Stefan Huber <stefan.huber@oth-regensburg.de>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Konrad Schwarz <konrad.schwarz@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -48,112 +74,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Mon, 25 Apr 2022 14:18:47 -0000
-X-Original-Date: Thu, 17 Mar 2022 01:52:54 -0700
-X-List-Received-Date: Mon, 25 Apr 2022 14:18:47 -0000
+X-List-Received-Date: Tue, 26 Apr 2022 00:17:05 -0000
 
-From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
+On Sun, Apr 24, 2022 at 7:59 AM Ralf Ramsauer
+<ralf.ramsauer@oth-regensburg.de> wrote:
+>
+> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
+> case, walk_pte will erroneously merge them.
+>
+> Enforce the split up, by tracking the virtual base address.
+>
+> Let's say we have the mapping:
+> 0x81200000 -> 0x89623000 (4K)
+> 0x8120f000 -> 0x89624000 (4K)
+>
+> Before, walk_pte would have shown:
+>
+> vaddr            paddr            size             attr
+> ---------------- ---------------- ---------------- -------
+> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
+>
+> as it only checks for subsequent paddrs. With this patch, it becomes:
+>
+> vaddr            paddr            size             attr
+> ---------------- ---------------- ---------------- -------
+> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
+> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
+>
+> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
 
-Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/vector_helper.c | 26 ++++++++++++++++----------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 2b341d6679..e266a8673c 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -2129,10 +2129,12 @@ static inline void
- vext_vv_rm_1(void *vd, void *v0, void *vs1, void *vs2,
-              CPURISCVState *env,
-              uint32_t vl, uint32_t vm, int vxrm,
--             opivv2_rm_fn *fn)
-+             opivv2_rm_fn *fn, uint32_t vma, uint32_t esz)
- {
-     for (uint32_t i =3D env->vstart; i < vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-+            /* set masked-off elements to 1s */
-+            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i, i * esz, (i + 1) * =
-esz);
-             continue;
-         }
-         fn(vd, vs1, vs2, i, env, vxrm);
-@@ -2150,23 +2152,24 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
-     uint32_t vl =3D env->vl;
-     uint32_t total_elems =3D vext_get_total_elems(desc, esz);
-     uint32_t vta =3D vext_vta(desc);
-+    uint32_t vma =3D vext_vma(desc);
-=20
-     switch (env->vxrm) {
-     case 0: /* rnu */
-         vext_vv_rm_1(vd, v0, vs1, vs2,
--                     env, vl, vm, 0, fn);
-+                     env, vl, vm, 0, fn, vma, esz);
-         break;
-     case 1: /* rne */
-         vext_vv_rm_1(vd, v0, vs1, vs2,
--                     env, vl, vm, 1, fn);
-+                     env, vl, vm, 1, fn, vma, esz);
-         break;
-     case 2: /* rdn */
-         vext_vv_rm_1(vd, v0, vs1, vs2,
--                     env, vl, vm, 2, fn);
-+                     env, vl, vm, 2, fn, vma, esz);
-         break;
-     default: /* rod */
-         vext_vv_rm_1(vd, v0, vs1, vs2,
--                     env, vl, vm, 3, fn);
-+                     env, vl, vm, 3, fn, vma, esz);
-         break;
-     }
-     /* set tail elements to 1s */
-@@ -2250,10 +2253,12 @@ static inline void
- vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
-              CPURISCVState *env,
-              uint32_t vl, uint32_t vm, int vxrm,
--             opivx2_rm_fn *fn)
-+             opivx2_rm_fn *fn, uint32_t vma, uint32_t esz)
- {
-     for (uint32_t i =3D env->vstart; i < vl; i++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-+            /* set masked-off elements to 1s */
-+            vext_set_elems_1s_fns[ctzl(esz)](vd, vma, i, i * esz, (i + 1) * =
-esz);
-             continue;
-         }
-         fn(vd, s1, vs2, i, env, vxrm);
-@@ -2271,23 +2276,24 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void=
- *vs2,
-     uint32_t vl =3D env->vl;
-     uint32_t total_elems =3D vext_get_total_elems(desc, esz);
-     uint32_t vta =3D vext_vta(desc);
-+    uint32_t vma =3D vext_vma(desc);
-=20
-     switch (env->vxrm) {
-     case 0: /* rnu */
-         vext_vx_rm_1(vd, v0, s1, vs2,
--                     env, vl, vm, 0, fn);
-+                     env, vl, vm, 0, fn, vma, esz);
-         break;
-     case 1: /* rne */
-         vext_vx_rm_1(vd, v0, s1, vs2,
--                     env, vl, vm, 1, fn);
-+                     env, vl, vm, 1, fn, vma, esz);
-         break;
-     case 2: /* rdn */
-         vext_vx_rm_1(vd, v0, s1, vs2,
--                     env, vl, vm, 2, fn);
-+                     env, vl, vm, 2, fn, vma, esz);
-         break;
-     default: /* rod */
-         vext_vx_rm_1(vd, v0, s1, vs2,
--                     env, vl, vm, 3, fn);
-+                     env, vl, vm, 3, fn, vma, esz);
-         break;
-     }
-     /* set tail elements to 1s */
---=20
-2.34.2
+Alistair
 
+> ---
+> [since v2: Adjust comment, rebased to latest master]
+>
+>  target/riscv/monitor.c | 11 +++++++----
+>  1 file changed, 7 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
+> index 7efb4b62c1..17e63fab00 100644
+> --- a/target/riscv/monitor.c
+> +++ b/target/riscv/monitor.c
+> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>  {
+>      hwaddr pte_addr;
+>      hwaddr paddr;
+> +    target_ulong last_start = -1;
+>      target_ulong pgsize;
+>      target_ulong pte;
+>      int ptshift;
+> @@ -111,12 +112,13 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>                   * A leaf PTE has been found
+>                   *
+>                   * If current PTE's permission bits differ from the last one,
+> -                 * or current PTE's ppn does not make a contiguous physical
+> -                 * address block together with the last one, print out the last
+> -                 * contiguous mapped block details.
+> +                 * or the current PTE breaks up a contiguous virtual or
+> +                 * physical mapping, address block together with the last one,
+> +                 * print out the last contiguous mapped block details.
+>                   */
+>                  if ((*last_attr != attr) ||
+> -                    (*last_paddr + *last_size != paddr)) {
+> +                    (*last_paddr + *last_size != paddr) ||
+> +                    (last_start + *last_size != start)) {
+>                      print_pte(mon, va_bits, *vbase, *pbase,
+>                                *last_paddr + *last_size - *pbase, *last_attr);
+>
+> @@ -125,6 +127,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
+>                      *last_attr = attr;
+>                  }
+>
+> +                last_start = start;
+>                  *last_paddr = paddr;
+>                  *last_size = pgsize;
+>              } else {
+> --
+> 2.36.0
+>
 
