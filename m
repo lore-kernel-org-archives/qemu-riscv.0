@@ -1,59 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nj8t8-0002rp-Q4
-	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 20:17:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49000)
+	id 1nj8vV-0004eF-Ar
+	for mharc-qemu-riscv@gnu.org; Mon, 25 Apr 2022 20:19:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49328)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nj8t7-0002rT-HA; Mon, 25 Apr 2022 20:17:05 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:40456)
+ id 1nj8vT-0004cy-Lp; Mon, 25 Apr 2022 20:19:31 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:42666)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nj8t5-0004jw-Tu; Mon, 25 Apr 2022 20:17:05 -0400
-Received: by mail-io1-xd32.google.com with SMTP id 79so17706802iou.7;
- Mon, 25 Apr 2022 17:17:02 -0700 (PDT)
+ id 1nj8vR-0004tI-L2; Mon, 25 Apr 2022 20:19:31 -0400
+Received: by mail-io1-xd35.google.com with SMTP id c125so17703160iof.9;
+ Mon, 25 Apr 2022 17:19:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cikaNgVlG8c11lBdeTBEBtH889WKsw17u50lC5+0pS8=;
- b=AwMyFUt6udsvVhtiICFPfnQtW33ztsf0v21zxYEQijrM2O0dSvg/OTWlU+d5WlJjyO
- xHvU7PXAWdH5XUivovZPZM+L2xdZ90v9JEp028saraq2fUwRNmz3PboCwHaHoEj8jURf
- h+0ujGm/Wua6QMeTuQ50mNY6sAIp3tjDRW3NM11ioHrSD8FRF85RIfACPiu1z1UjcOd9
- eduMKUsBKstEfwBEEwhDwKWtqLgF67FHW5RDz0JwlGLdH2LW01BCP0YUmsT/d/WGNbaL
- DyQfX/G3MDPnUzh2GwRxG9q2Rwn5NZegHNY4oVk1JRyAE2qXds7MKMO/tlBOLn46uPfb
- 0VOw==
+ :cc:content-transfer-encoding;
+ bh=l4iIYMxPsD8HGmHmAA9PSz57Jk3/CUaFWIO2uGxisRY=;
+ b=nbElpkk4oUFT4PmQHzy5pj2XuWgIA/s49ksyQjjX47TpWRtlQGsphk4bWDnAIKlRdL
+ tt9kHs0WVuwJcI9PfdJ7pxeY4Vl3mDUp0Eu8fSTq4FynKSiOdjJaylW4209doqYQPhDV
+ u1zey6n3sYgBOnQC6j/SlAFzRMWqQTfqzDOfNVBEVCuqHEtzOQByHTpoE6nMqJz1cMZN
+ 3eIXry4d5Y/lw/P4P+nGjo1QikF8EPkBGEUn46gFs86g49yKx4zX/SSxJyx48sYpXe0L
+ Yb0MwkZbuywChARLBQoAdrD0M+U7KoY4U1sg9O9PHkJFyIurY07jw70g1H2QpA6rrauN
+ jbFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cikaNgVlG8c11lBdeTBEBtH889WKsw17u50lC5+0pS8=;
- b=xKCS3MNldQa54X21yjOlWwdZvvXJcBIH+0s7H5pYbbTf2NDwZI0RH4t/WtC/LoRQm3
- +/8liXqAyVAzRWKESLUsvQJNbIONUjOVwmUnkMDTPzxb+i9H8ZV7I2Uh/n1Gp0jVmGVW
- /qN5ne96tTnmGwuh44WB+ny4fHMjyRg0m+N9kfX1zNgtD4i8+Cki2uTVLpjgM57W1quq
- /+OqmSF/1/FB14DTVtVAYSxWGpn650bV5lmkuHC+iLsX0vhkQ7tpIG/1BZuSxICHvjQD
- q4sg5V4Syhc0rsZj5qLnJIL9K0YMzJcNmguCJDMqCyxRfE1z3s4JUQdVujDatsYC/Lv5
- AB2Q==
-X-Gm-Message-State: AOAM5322p5MlC55tsYjM8CRlGHrz7aDa8llleh6mbpNZ4weAeEjQWejE
- W2HgvNLahEcxglQzXLdkUnI/iD9vKG8ToE1yPhc=
-X-Google-Smtp-Source: ABdhPJyHi1fV02PK82yrkPNhadZbi1EovolSMcX8Nu2DCY8FMPgCSqY8BQRuKAVeWIaWlGm0x812Dl5PEt6Ltug2dV8=
-X-Received: by 2002:a05:6638:1914:b0:32a:8804:da85 with SMTP id
- p20-20020a056638191400b0032a8804da85mr8312466jal.212.1650932221914; Mon, 25
- Apr 2022 17:17:01 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=l4iIYMxPsD8HGmHmAA9PSz57Jk3/CUaFWIO2uGxisRY=;
+ b=iFwnTLbsZ+Wh1cRz+6T5TdzhqYw1ry3ID6B4h/bK2qx5I77GgtKilVOwwLlI/AD/RU
+ 7KH22obhubk2Arj6NIg74sP9jGX8wMpQQlpdSWQaKJA9Y6jlTO+ihzaJtZ6OChILXqq1
+ hSP6GLXsLKtgofD7B+sgTJPY2dtKOHAQO/4HcTeEdpSzXIxq6AUzuj+e1jCQEbydrcDh
+ qjZV0e/J0/eZfST8d1WcR/9WN4ZUWYJoJVT9/fp2YxMJM2vPjn5Zs+QFyN6xchlF8A/w
+ xUjKAyJLB50b+SY4WF8KrlxpLgBPAEX7d4AVFSBtPDBd4kPebWETxk8QRu5Xj99mZiva
+ eJxg==
+X-Gm-Message-State: AOAM530WJRHxR2xlYSoSwdo6BIVnvQmOf2/pqDqyU0XanlSo4XU/Zdf/
+ CzR132zUTl8O11BFKcF5P9HEsDrOSpNuNp5eS7c=
+X-Google-Smtp-Source: ABdhPJzLHSwWxLvO296qVJZvLWwu1qUOOPgkfXV9vgpbfCUxBO+GBB9k+/ODUUG2hcsFxtKc4T27BP9DsbsjOQ/gVQM=
+X-Received: by 2002:a05:6638:14c1:b0:32a:aa03:93e1 with SMTP id
+ l1-20020a05663814c100b0032aaa0393e1mr9134545jak.66.1650932366652; Mon, 25 Apr
+ 2022 17:19:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKNtcV3MN0qzVEOgty=o137-QfYm4_c_hHmb1O9YfhSiQQ@mail.gmail.com>
- <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
-In-Reply-To: <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
+References: <164863587444.17401.9965527486691250478-0@git.sr.ht>
+ <164863587444.17401.9965527486691250478-3@git.sr.ht>
+In-Reply-To: <164863587444.17401.9965527486691250478-3@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 26 Apr 2022 10:16:36 +1000
-Message-ID: <CAKmqyKMVeoFWOkeX7bTNNudZbRF7n3O1kub0ZUCxOz=kTTZh+A@mail.gmail.com>
-Subject: Re: [PATCH v3] target/riscv: Fix incorrect PTE merge in walk_pte
-To: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Stefan Huber <stefan.huber@oth-regensburg.de>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Konrad Schwarz <konrad.schwarz@siemens.com>
+Date: Tue, 26 Apr 2022 10:19:00 +1000
+Message-ID: <CAKmqyKNJYbhc1VsDaNci8kMcPzh7Sz=JN6K73c340+K2D+Ks8g@mail.gmail.com>
+Subject: Re: [PATCH qemu v7 03/14] target/riscv: rvv: Early exit when vstart
+ >= vl
+To: "~eopxd" <yueh.ting.chen@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ WeiWei Li <liweiwei@iscas.ac.cn>, Frank Chang <frank.chang@sifive.com>, 
+ eop Chen <eop.chen@sifive.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,84 +78,280 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Apr 2022 00:17:05 -0000
+X-List-Received-Date: Tue, 26 Apr 2022 00:19:32 -0000
 
-On Sun, Apr 24, 2022 at 7:59 AM Ralf Ramsauer
-<ralf.ramsauer@oth-regensburg.de> wrote:
+On Wed, Mar 30, 2022 at 8:39 PM ~eopxd <eopxd@git.sr.ht> wrote:
 >
-> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
-> case, walk_pte will erroneously merge them.
+> From: eopXD <eop.chen@sifive.com>
 >
-> Enforce the split up, by tracking the virtual base address.
+> According to v-spec (section 5.4):
+> When vstart =E2=89=A5 vl, there are no body elements, and no elements are
+> updated in any destination vector register group, including that
+> no tail elements are updated with agnostic values.
 >
-> Let's say we have the mapping:
-> 0x81200000 -> 0x89623000 (4K)
-> 0x8120f000 -> 0x89624000 (4K)
+> vmsbf.m, vmsif.m, vmsof.m, viota.m, vcompress instructions themselves
+> require vstart to be zero. So they don't need the early exit.
 >
-> Before, walk_pte would have shown:
->
-> vaddr            paddr            size             attr
-> ---------------- ---------------- ---------------- -------
-> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
->
-> as it only checks for subsequent paddrs. With this patch, it becomes:
->
-> vaddr            paddr            size             attr
-> ---------------- ---------------- ---------------- -------
-> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
-> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
->
-> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
+> Signed-off-by: eop Chen <eop.chen@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
-> [since v2: Adjust comment, rebased to latest master]
+>  target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
 >
->  target/riscv/monitor.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 275fded6e4..57953923d5 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -652,6 +652,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, =
+uint32_t data,
 >
-> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> index 7efb4b62c1..17e63fab00 100644
-> --- a/target/riscv/monitor.c
-> +++ b/target/riscv/monitor.c
-> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->  {
->      hwaddr pte_addr;
->      hwaddr paddr;
-> +    target_ulong last_start = -1;
->      target_ulong pgsize;
->      target_ulong pte;
->      int ptshift;
-> @@ -111,12 +112,13 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->                   * A leaf PTE has been found
->                   *
->                   * If current PTE's permission bits differ from the last one,
-> -                 * or current PTE's ppn does not make a contiguous physical
-> -                 * address block together with the last one, print out the last
-> -                 * contiguous mapped block details.
-> +                 * or the current PTE breaks up a contiguous virtual or
-> +                 * physical mapping, address block together with the last one,
-> +                 * print out the last contiguous mapped block details.
->                   */
->                  if ((*last_attr != attr) ||
-> -                    (*last_paddr + *last_size != paddr)) {
-> +                    (*last_paddr + *last_size != paddr) ||
-> +                    (last_start + *last_size != start)) {
->                      print_pte(mon, va_bits, *vbase, *pbase,
->                                *last_paddr + *last_size - *pbase, *last_attr);
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
-> @@ -125,6 +127,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->                      *last_attr = attr;
->                  }
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -818,6 +819,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t r=
+s1, uint32_t rs2,
 >
-> +                last_start = start;
->                  *last_paddr = paddr;
->                  *last_size = pgsize;
->              } else {
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -925,6 +927,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs=
+1, uint32_t vs2,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1067,6 +1070,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, u=
+int32_t data,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1216,6 +1220,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen=
+3Fn *gvec_fn,
+>      }
+>
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      if (a->vm && s->vl_eq_vlmax) {
+>          gvec_fn(s->sew, vreg_ofs(s, a->rd),
+> @@ -1263,6 +1268,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2, uint32_t vm,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1427,6 +1433,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, =
+uint32_t vs2, uint32_t vm,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1513,6 +1520,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -1593,6 +1601,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -1670,6 +1679,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          };                                                         \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -1851,6 +1861,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          };                                                         \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2061,6 +2072,7 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_=
+v_v *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+>                                 cpu_env, s->cfg_ptr->vlen / 8,
+> @@ -2084,6 +2096,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_=
+v_x *a)
+>          TCGv s1;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          s1 =3D get_gpr(s, a->rs1, EXT_SIGN);
+>
+> @@ -2139,6 +2152,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_=
+v_i *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              s1 =3D tcg_constant_i64(simm);
+>              dest =3D tcg_temp_new_ptr();
+> @@ -2291,6 +2305,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2321,6 +2336,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -2409,6 +2425,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)           \
+>          TCGLabel *over =3D gen_new_label();                        \
+>          gen_set_rm(s, RISCV_FRM_DYN);                            \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);        \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);\
+>                                                                   \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);               \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
+> @@ -2483,6 +2500,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2604,6 +2622,7 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>          TCGLabel *over =3D gen_new_label();
+>          gen_set_rm(s, rm);
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -2717,6 +2736,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfm=
+v_v_f *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              t1 =3D tcg_temp_new_i64();
+>              /* NaN-box f[rs1] */
+> @@ -2805,6 +2825,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2856,6 +2877,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -2921,6 +2943,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2974,6 +2997,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -3061,6 +3085,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)=
+                \
+>          gen_helper_gvec_4_ptr *fn =3D gen_helper_##NAME;             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -3229,6 +3254,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v =
+*a)
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -3746,6 +3772,7 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a,=
+ uint8_t seq)
+>      gen_helper_gvec_3_ptr *fn;
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      static gen_helper_gvec_3_ptr * const fns[6][4] =3D {
+>          {
 > --
-> 2.36.0
+> 2.34.1
+>
 >
 
