@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1njrSg-0000tB-Am
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 19:52:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47582)
+	id 1njrYo-0003ry-0k
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 19:59:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48332)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1njrSe-0000rI-Ri; Wed, 27 Apr 2022 19:52:44 -0400
-Received: from mail-io1-xd32.google.com ([2607:f8b0:4864:20::d32]:40571)
+ id 1njrYm-0003qF-7u; Wed, 27 Apr 2022 19:59:04 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:43551)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1njrSd-0006D7-7t; Wed, 27 Apr 2022 19:52:44 -0400
-Received: by mail-io1-xd32.google.com with SMTP id f2so4646410ioh.7;
- Wed, 27 Apr 2022 16:52:42 -0700 (PDT)
+ id 1njrYk-0006vo-O7; Wed, 27 Apr 2022 19:59:03 -0400
+Received: by mail-il1-x12e.google.com with SMTP id d3so987756ilr.10;
+ Wed, 27 Apr 2022 16:59:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=njf4CNexuFqRr/KFKYQl1l2mMYC+UJ473atNUwxkbo4=;
- b=LCFlACeRmPt7xUqHWp03bRRkciJk5gCDJj0pZUx+rEEGBQwNqDKa/VVO6KQ+vQc0Sa
- d1Iu47J6MPfD8MKVSKq6SOBG8k2dO8quLfL94yA2l87lMGHOlPWnn9mednoKF41Yv226
- E/TbNjNspXWuSLEBAUX3rHV/MrLvqVej5r4/cyO1G9SNomalLaR7NF22F8pkXY6auVF1
- 6qAECNvhmmI98/J9hnGQNoBA1wW6l4JhlYULLppKE7lqFNvOe+iVathYHFE4XTnjkjAF
- /LS9UnmV8RSdQYkXRxdidqMIuUo4b0TAxG3iVRHeqT/en3jf57Ti+KPE7zvt2dRGF5/1
- 7kug==
+ :cc; bh=Rf5u64GBZNghiERYC9BS0l9Tc2Y7ScmOrjgNs7VgyJc=;
+ b=ItZyRhO/fy8Bp1sdq7FKVMOjDYyJqRNnOkTSlS1Xshpv5rI2YMW/bqrLaA2wID6L5z
+ TTHUXiidtRxhsJ6+zjkQYJ5dSVshbY774CBXZMYptC+CGG/aCIc9e64Y8eNPTJJY8g5l
+ 3u4F/vjK1ABKADhL/96ypjUPr+8UBlbGe4ZkhSZvon0lYnDsjJ0h6o/VAgbA1LXC6b9W
+ RK1h9zIivgR7Ai481CfmobjjLpzGoibeO23E0uGpIcQI0bCts8bOJPVR/wD8Xz5GXL4c
+ 3p5SiBuzNxKiLtm3eCj92OZonvLQoc+VJQlSJzHLVxY8nqFiFlOTqpdld/DxaJvAeYZX
+ RzwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=njf4CNexuFqRr/KFKYQl1l2mMYC+UJ473atNUwxkbo4=;
- b=4o2mDriGsCrMyw30yAPk7dNTkTKkOrKY6T9ozEiQji09yMw162JeveJgAEYHiiw0kC
- 57nlhbpPZ0ef28Iv1u6EDlbToS66qcAiIir1xJUNv/6yGafFbvDPxLrKpj2kunahJNV8
- 6Dit9p5R8zFenm9USvAwVrLxK89nNkcZOrPFrS/gY33xN7jPb5TaW/sPHUJWGyXSVpxH
- jFoDVtQuG3wsq7wpVvRgk0PVvmqQ7UgFWdpcygmVt6QSviRDdAfcpz+QkMI96Ev/oT/V
- eZj21dulh2UbHko6jUTHEdsy8tuU+31ehLUCcx1tUy27zJ+Z9zb7Bog3KVOI7mpZH2b1
- qi+Q==
-X-Gm-Message-State: AOAM530ArhASgKgXQ07IWXpAK+FHH+JZ4HH2P8cDXHmVHR/gBYeWJiWJ
- 4aMhPGgVH1Bfbtr/QbQYRgTMT9TQN5/Iu96xr9I=
-X-Google-Smtp-Source: ABdhPJzjFi4x1vZCCbIis0+1c7rbzWwyaDObcPBZBSOPi1msnGPzbowaGwD0XlESO/GGRXvU3Zxxe5O3/GG7r/pwGe8=
-X-Received: by 2002:a02:6f56:0:b0:32a:ff25:1fe3 with SMTP id
- b22-20020a026f56000000b0032aff251fe3mr6197860jae.21.1651103561766; Wed, 27
- Apr 2022 16:52:41 -0700 (PDT)
+ bh=Rf5u64GBZNghiERYC9BS0l9Tc2Y7ScmOrjgNs7VgyJc=;
+ b=7nSD9Pjl3asZjrLJbpLf5W4UhpKqLVSGgJ/NLAeAekPicNUfGKVwYathXkDB73jZjy
+ 2LqT2hwuEo1QLiv3MgalS2OqpHz5+5J5XQidpkyzKrjmcwQ+XWowgzvCw2cVik2jVRO+
+ qKMV6gYjRtiZXSMu95raEQUHjGcpjHDnhA0xIU2JyOTlvwY+0qkaY3fA39AcqbARfDkJ
+ pMJH1gRwsStJ4Rj3/E+D88M0/FN4cdzNNy8fNK1fhBBpyNitkZEAmy6jbVxb+TJu0TAv
+ BykqJMNalRM48sweri8KnMYT6VNM3456xOKjnNuEOykSzwgzLGYCvCy7yuIRo9ZriLvY
+ 3OOg==
+X-Gm-Message-State: AOAM533WFlTrwfUFTr4brMi/TnJDneS0H5Q6iU7WAucoZYlyaDfqFlfe
+ zfyyWxST1DdibS+FC7pAlL8TAdcQkC8+S2Hqx0U=
+X-Google-Smtp-Source: ABdhPJzzTIE+n4m0PA9e5uPBXFbbp9RLEyBxmM/NDIFzYj9Y+wBLeB0EBbWtu7p8+k9GkpTRUKZoWisPgEjzqyCyaU0=
+X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
+ u18-20020a926012000000b002bdfb5fd627mr12135926ilb.86.1651103940393; Wed, 27
+ Apr 2022 16:59:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAKmqyKNtcV3MN0qzVEOgty=o137-QfYm4_c_hHmb1O9YfhSiQQ@mail.gmail.com>
- <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
-In-Reply-To: <20220423215907.673663-1-ralf.ramsauer@oth-regensburg.de>
+References: <cover.1650777360.git.research_trasio@irq.a4lg.com>
+ <cfda1d8da254f2e723e487f0c738c59d5891e492.1650777360.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cfda1d8da254f2e723e487f0c738c59d5891e492.1650777360.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 28 Apr 2022 09:52:15 +1000
-Message-ID: <CAKmqyKM-2UFdz5NfMQff9Ye=+VwX+cQkfu6d9xx8FyCxWaYbnQ@mail.gmail.com>
-Subject: Re: [PATCH v3] target/riscv: Fix incorrect PTE merge in walk_pte
-To: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Thu, 28 Apr 2022 09:58:34 +1000
+Message-ID: <CAKmqyKOx2Q3vjK5b51y1yrKS=f+08qzQFvCiS0iuDqBQ0wo41g@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Tentatively remove Zhinx* from ISA
+ extension string
+To: Tsukasa OI <research_trasio@irq.a4lg.com>, liweiwei <liweiwei@iscas.ac.cn>
+Cc: Frank Chang <frank.chang@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Stefan Huber <stefan.huber@oth-regensburg.de>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Konrad Schwarz <konrad.schwarz@siemens.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d32;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,86 +73,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2022 23:52:45 -0000
+X-List-Received-Date: Wed, 27 Apr 2022 23:59:04 -0000
 
-On Sun, Apr 24, 2022 at 7:59 AM Ralf Ramsauer
-<ralf.ramsauer@oth-regensburg.de> wrote:
+On Sun, Apr 24, 2022 at 3:22 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
-> Two non-subsequent PTEs can be mapped to subsequent paddrs. In this
-> case, walk_pte will erroneously merge them.
+> This commit disables ISA string conversion for Zhinx and Zhinxmin
+> extensions for now.  Because extension category ordering of "H" is not
+> ratified, their ordering is likely invalid.
 >
-> Enforce the split up, by tracking the virtual base address.
+> Once "H"-extension ordering is determined, we can add Zhinx* again.
 >
-> Let's say we have the mapping:
-> 0x81200000 -> 0x89623000 (4K)
-> 0x8120f000 -> 0x89624000 (4K)
->
-> Before, walk_pte would have shown:
->
-> vaddr            paddr            size             attr
-> ---------------- ---------------- ---------------- -------
-> 0000000081200000 0000000089623000 0000000000002000 rwxu-ad
->
-> as it only checks for subsequent paddrs. With this patch, it becomes:
->
-> vaddr            paddr            size             attr
-> ---------------- ---------------- ---------------- -------
-> 0000000081200000 0000000089623000 0000000000001000 rwxu-ad
-> 000000008120f000 0000000089624000 0000000000001000 rwxu-ad
->
-> Signed-off-by: Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>
+> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 
-Thanks for the patch. It doesn't seem to have made it to the QEMU
-mailing list though. Do you mind re-sending it and checking to make
-sure it is sent to the mailing list?
+Weiwei Li does this sound alright to you?
 
 Alistair
 
 > ---
-> [since v2: Adjust comment, rebased to latest master]
+>  target/riscv/cpu.c | 2 --
+>  1 file changed, 2 deletions(-)
 >
->  target/riscv/monitor.c | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/monitor.c b/target/riscv/monitor.c
-> index 7efb4b62c1..17e63fab00 100644
-> --- a/target/riscv/monitor.c
-> +++ b/target/riscv/monitor.c
-> @@ -84,6 +84,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->  {
->      hwaddr pte_addr;
->      hwaddr paddr;
-> +    target_ulong last_start = -1;
->      target_ulong pgsize;
->      target_ulong pte;
->      int ptshift;
-> @@ -111,12 +112,13 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->                   * A leaf PTE has been found
->                   *
->                   * If current PTE's permission bits differ from the last one,
-> -                 * or current PTE's ppn does not make a contiguous physical
-> -                 * address block together with the last one, print out the last
-> -                 * contiguous mapped block details.
-> +                 * or the current PTE breaks up a contiguous virtual or
-> +                 * physical mapping, address block together with the last one,
-> +                 * print out the last contiguous mapped block details.
->                   */
->                  if ((*last_attr != attr) ||
-> -                    (*last_paddr + *last_size != paddr)) {
-> +                    (*last_paddr + *last_size != paddr) ||
-> +                    (last_start + *last_size != start)) {
->                      print_pte(mon, va_bits, *vbase, *pbase,
->                                *last_paddr + *last_size - *pbase, *last_attr);
->
-> @@ -125,6 +127,7 @@ static void walk_pte(Monitor *mon, hwaddr base, target_ulong start,
->                      *last_attr = attr;
->                  }
->
-> +                last_start = start;
->                  *last_paddr = paddr;
->                  *last_size = pgsize;
->              } else {
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 0c774056c5..c765f7ff00 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -954,8 +954,6 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+>          ISA_EDATA_ENTRY(zfh, ext_zfh),
+>          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+>          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> -        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
+> -        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
+>          ISA_EDATA_ENTRY(zdinx, ext_zdinx),
+>          ISA_EDATA_ENTRY(zba, ext_zba),
+>          ISA_EDATA_ENTRY(zbb, ext_zbb),
 > --
-> 2.36.0
+> 2.32.0
 >
 
