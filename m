@@ -1,50 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1njqeA-0002zg-1E
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 19:00:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39920)
+	id 1njqgv-0005pQ-D1
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 19:03:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40366)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1njqe8-0002wf-K1; Wed, 27 Apr 2022 19:00:32 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:38678)
+ id 1njqgq-0005n5-T4; Wed, 27 Apr 2022 19:03:20 -0400
+Received: from mail-il1-x136.google.com ([2607:f8b0:4864:20::136]:40757)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1njqe5-0007Uq-TZ; Wed, 27 Apr 2022 19:00:31 -0400
-Received: by mail-io1-xd35.google.com with SMTP id z18so4409108iob.5;
- Wed, 27 Apr 2022 16:00:29 -0700 (PDT)
+ id 1njqgl-0007kX-O4; Wed, 27 Apr 2022 19:03:20 -0400
+Received: by mail-il1-x136.google.com with SMTP id y16so923184ilc.7;
+ Wed, 27 Apr 2022 16:03:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=MjdIawdm5yfYFV3aXCJ5RrsO4vucv+u6NAs9aMRMCns=;
- b=pVM5wAH8gZWgyX5eNgk9KsuZpxIWytrH6A5/GKtK/3JCPyFteGOjpCDehW6E89RONH
- me+02FOau7/XL8mEZBWN1DOcmzyn71QN11y4W5B6R56M+4z5dq25uvUaiTghYlcdzCqG
- AcZnrFrPtM8MkRYTgv0f44U6M53XhngZV0jafelBvDNh1PNr4l8xRdr+jBwCEXefmZIJ
- mYX/aBHqebMk3tCPCk15R41oWoB61jaukp4fFFq5VHRm/Uil+lNckPNTpQRwZbfIBqeH
- /Pifh13ec1otlO7Ul9/4InpLOM/0do6k+BgWF1XsYxl8MW/TFPQPAJU3L1yujxWaA39o
- kFyQ==
+ :cc:content-transfer-encoding;
+ bh=xINonAF219Uk/my5+1gyAoMSe35dVnlZZZIHnXMyfRU=;
+ b=N5ax/MH0Tbt0THfKYy8MD25LN/RAjtytaAxJWQqEpgcwWXSxAuBxURq1fLEEc5Z/4Q
+ P5lpDacaHBqaxBGagg1Nm2CZlqB2lTM11oFZuO8mTTLJ34SDH/ojzaNap0NhLk0Sk5hg
+ 73hr+4Cr0hUZM3Y12lbP3ALy4ZdfwPZ4sU2NjMYfy4JXEWbFblKTp1Zrx4zsQU13EMTX
+ OUv9PivgI9sQxeCFKf2SjOqB2HYhpk0rpq7A406GmZP3txG7rqc+ZG2QlrYDR+LjKaze
+ 5mKHs6dGSKlyrRm57x0fpmOcb1j1YU5Wgm7K5+uzGogz3eAMsYKT3KGFn7Zl79H6YilX
+ c+8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=MjdIawdm5yfYFV3aXCJ5RrsO4vucv+u6NAs9aMRMCns=;
- b=ypsQQUejLb0iFh6GIubevqiom1XtOyR63cjsa0in0BcECEvH/yjX7yjLSd/UVOUaJK
- cEiZ34to+9bmq8PT8K1brnoqOBbm6ciwV+usmjlnPrudO86rgJ3Af/is0w+Ac7l254k5
- CMY/PunFc7BUuxFobFU0+L66g3DcmP2dgL2WAiR/ArkNadpxf8QZbQmb1FetukGIS0a0
- Nx9pvu28/1tmfa9S/vaHuzuVexqBXpgi1S3PiFwLe2BW8VQmRjpuKdBrJ3eOK2luY0iq
- Y+1ecWwiOAzFqvjOchn9SQ+UOX8t8zNxMc/cb4xwadBwZNX1fkoMNarxyVHBXbJZUE5h
- 7lTw==
-X-Gm-Message-State: AOAM533AP5D1ObdQUKeB7t9QzznuJ2/TIOASGOBz282JmoKE60A7RiF0
- M9O1sb9kmkYV1Dcgb0xs2nc+Q7QY4szYk0rhoxQ=
-X-Google-Smtp-Source: ABdhPJxoooDIEO69ejVucdkFh1+4FISq6pHLCJbsqwj9Pj6p3LvrJDYW12wWgHf371gDFdkKC4nO1nNJn4CDp+21YlI=
-X-Received: by 2002:a5d:924e:0:b0:649:af51:9c1a with SMTP id
- e14-20020a5d924e000000b00649af519c1amr12914012iol.203.1651100427377; Wed, 27
- Apr 2022 16:00:27 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=xINonAF219Uk/my5+1gyAoMSe35dVnlZZZIHnXMyfRU=;
+ b=4+X7YE10Kf03X7M0uAx6ohRkZUq+NtKYcp5vL3rbcKcd9yZCslJ1oIX9gpYTerMynN
+ 8BGJVFX20dP9pI9WEKtqU+ByvUJMqTL5BPSHsXjbKzs/zWyeQzqIAmWZ1idROXVdAUFp
+ 8/FDPr21bd6TRqOBE9V86IgZfSy4nTD7Mes4iJZMuw6XBQZI6Xn+6zqRi7oEJOXHKhWT
+ AQjqF/bGPQvPBgcOOWLpaU6Dx4hQjtmY9WA6rhv5F5TR3Y11L37lKFjsqo8Kv3kyVfaj
+ 9JY6616OWKwFwD050XC67coAneHkQwDoXg7XD+QHcDEpwq54P9TjDqT/Qwdg+hFWSh0d
+ Bbkw==
+X-Gm-Message-State: AOAM5327d3OOnjASWhJnoNnNd55RiQ3Sr80yKTOiZlWT1ovGTf74iKUQ
+ T/NLZm+M60Fhor+jKM9zURj6OTPAztIFM0fmcACYey3lSRwll0l3
+X-Google-Smtp-Source: ABdhPJxOa5MLvd3cBRTLNA7wQUG0kfqD2IC9q64ErsYWYoenb0c9OGTR6aeCpyjXa54Tq8muycSqnDAztZ0KG16VlkQ=
+X-Received: by 2002:a92:db0e:0:b0:2cc:2590:767b with SMTP id
+ b14-20020a92db0e000000b002cc2590767bmr12858095iln.260.1651100594459; Wed, 27
+ Apr 2022 16:03:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <165107198903.23549.13907705840662008250-0@git.sr.ht>
- <165107198903.23549.13907705840662008250-2@git.sr.ht>
-In-Reply-To: <165107198903.23549.13907705840662008250-2@git.sr.ht>
+ <165107198903.23549.13907705840662008250-3@git.sr.ht>
+In-Reply-To: <165107198903.23549.13907705840662008250-3@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 28 Apr 2022 09:00:01 +1000
-Message-ID: <CAKmqyKM2CMw8pgy4T7xbyU3asfapfa_bP6D6-0h6KtKWL4wzvQ@mail.gmail.com>
-Subject: Re: [PATCH qemu v10 02/14] target/riscv: rvv: Rename ambiguous esz
+Date: Thu, 28 Apr 2022 09:02:48 +1000
+Message-ID: <CAKmqyKOXDrAvARbUQsmJnRy-GzPgXENxhQZ9QPME2Uu0r3fVcw@mail.gmail.com>
+Subject: Re: [PATCH qemu v10 03/14] target/riscv: rvv: Early exit when vstart
+ >= vl
 To: "~eopxd" <yueh.ting.chen@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -53,8 +55,9 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::136;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x136.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -75,282 +78,278 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Apr 2022 23:00:33 -0000
+X-List-Received-Date: Wed, 27 Apr 2022 23:03:22 -0000
 
-On Thu, Apr 28, 2022 at 1:09 AM ~eopxd <eopxd@git.sr.ht> wrote:
+On Thu, Apr 28, 2022 at 1:06 AM ~eopxd <eopxd@git.sr.ht> wrote:
 >
 > From: eopXD <eop.chen@sifive.com>
 >
-> No functional change intended in this commit.
+> According to v-spec (section 5.4):
+> When vstart =E2=89=A5 vl, there are no body elements, and no elements are
+> updated in any destination vector register group, including that
+> no tail elements are updated with agnostic values.
+>
+> vmsbf.m, vmsif.m, vmsof.m, viota.m, vcompress instructions themselves
+> require vstart to be zero. So they don't need the early exit.
 >
 > Signed-off-by: eop Chen <eop.chen@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/vector_helper.c | 76 ++++++++++++++++++------------------
->  1 file changed, 38 insertions(+), 38 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++++
+>  1 file changed, 27 insertions(+)
 >
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index e94caf1a3c..d0452a7756 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -125,9 +125,9 @@ static inline int32_t vext_lmul(uint32_t desc)
->  /*
->   * Get the maximum number of elements can be operated.
->   *
-> - * esz: log2 of element size in bytes.
-> + * log2_esz: log2 of element size in bytes.
->   */
-> -static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
-> +static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
->  {
->      /*
->       * As simd_desc support at most 2048 bytes, the max vlen is 1024 bits.
-> @@ -136,7 +136,7 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
->      uint32_t vlenb = simd_maxsz(desc);
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+> index 275fded6e4..57953923d5 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -652,6 +652,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, =
+uint32_t data,
 >
->      /* Return VLMAX */
-> -    int scale = vext_lmul(desc) - esz;
-> +    int scale = vext_lmul(desc) - log2_esz;
->      return scale < 0 ? vlenb >> -scale : vlenb << scale;
->  }
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
-> @@ -231,11 +231,11 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->                   target_ulong stride, CPURISCVState *env,
->                   uint32_t desc, uint32_t vm,
->                   vext_ldst_elem_fn *ldst_elem,
-> -                 uint32_t esz, uintptr_t ra, MMUAccessType access_type)
-> +                 uint32_t log2_esz, uintptr_t ra, MMUAccessType access_type)
->  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
-> -    uint32_t max_elems = vext_max_elems(desc, esz);
-> +    uint32_t max_elems = vext_max_elems(desc, log2_esz);
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -818,6 +819,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t r=
+s1, uint32_t rs2,
 >
->      for (i = env->vstart; i < env->vl; i++, env->vstart++) {
->          if (!vm && !vext_elem_mask(v0, i)) {
-> @@ -244,7 +244,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->          k = 0;
->          while (k < nf) {
-> -            target_ulong addr = base + stride * i + (k << esz);
-> +            target_ulong addr = base + stride * i + (k << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
->          }
-> @@ -289,18 +289,18 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
->  /* unmasked unit-stride load and store operation*/
->  static void
->  vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-> -             vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
-> +             vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uint32_t evl,
->               uintptr_t ra, MMUAccessType access_type)
->  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
-> -    uint32_t max_elems = vext_max_elems(desc, esz);
-> +    uint32_t max_elems = vext_max_elems(desc, log2_esz);
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -925,6 +927,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs=
+1, uint32_t vs2,
 >
->      /* load bytes from guest memory */
->      for (i = env->vstart; i < evl; i++, env->vstart++) {
->          k = 0;
->          while (k < nf) {
-> -            target_ulong addr = base + ((i * nf + k) << esz);
-> +            target_ulong addr = base + ((i * nf + k) << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
->          }
-> @@ -399,12 +399,12 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->                  void *vs2, CPURISCVState *env, uint32_t desc,
->                  vext_get_index_addr get_index_addr,
->                  vext_ldst_elem_fn *ldst_elem,
-> -                uint32_t esz, uintptr_t ra, MMUAccessType access_type)
-> +                uint32_t log2_esz, uintptr_t ra, MMUAccessType access_type)
->  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
->      uint32_t vm = vext_vm(desc);
-> -    uint32_t max_elems = vext_max_elems(desc, esz);
-> +    uint32_t max_elems = vext_max_elems(desc, log2_esz);
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->      /* load bytes from guest memory */
->      for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-> @@ -414,7 +414,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1067,6 +1070,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, u=
+int32_t data,
 >
->          k = 0;
->          while (k < nf) {
-> -            abi_ptr addr = get_index_addr(base, i, vs2) + (k << esz);
-> +            abi_ptr addr = get_index_addr(base, i, vs2) + (k << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
->          }
-> @@ -480,13 +480,13 @@ static inline void
->  vext_ldff(void *vd, void *v0, target_ulong base,
->            CPURISCVState *env, uint32_t desc,
->            vext_ldst_elem_fn *ldst_elem,
-> -          uint32_t esz, uintptr_t ra)
-> +          uint32_t log2_esz, uintptr_t ra)
->  {
->      void *host;
->      uint32_t i, k, vl = 0;
->      uint32_t nf = vext_nf(desc);
->      uint32_t vm = vext_vm(desc);
-> -    uint32_t max_elems = vext_max_elems(desc, esz);
-> +    uint32_t max_elems = vext_max_elems(desc, log2_esz);
->      target_ulong addr, offset, remain;
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->      /* probe every access*/
-> @@ -494,12 +494,12 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->          if (!vm && !vext_elem_mask(v0, i)) {
->              continue;
->          }
-> -        addr = adjust_addr(env, base + i * (nf << esz));
-> +        addr = adjust_addr(env, base + i * (nf << log2_esz));
->          if (i == 0) {
-> -            probe_pages(env, addr, nf << esz, ra, MMU_DATA_LOAD);
-> +            probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
->          } else {
->              /* if it triggers an exception, no need to check watchpoint */
-> -            remain = nf << esz;
-> +            remain = nf << log2_esz;
->              while (remain > 0) {
->                  offset = -(addr | TARGET_PAGE_MASK);
->                  host = tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
-> @@ -536,7 +536,7 @@ ProbeSuccess:
->              continue;
->          }
->          while (k < nf) {
-> -            target_ulong addr = base + ((i * nf + k) << esz);
-> +            target_ulong addr = base + ((i * nf + k) << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
->          }
-> @@ -576,13 +576,13 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
->   */
->  static void
->  vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-> -                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra,
-> +                vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uintptr_t ra,
->                  MMUAccessType access_type)
->  {
->      uint32_t i, k, off, pos;
->      uint32_t nf = vext_nf(desc);
->      uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> -    uint32_t max_elems = vlenb >> esz;
-> +    uint32_t max_elems = vlenb >> log2_esz;
->
->      k = env->vstart / max_elems;
->      off = env->vstart % max_elems;
-> @@ -590,7 +590,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->      if (off) {
->          /* load/store rest of elements of current segment pointed by vstart */
->          for (pos = off; pos < max_elems; pos++, env->vstart++) {
-> -            target_ulong addr = base + ((pos + k * max_elems) << esz);
-> +            target_ulong addr = base + ((pos + k * max_elems) << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), pos + k * max_elems, vd, ra);
->          }
->          k++;
-> @@ -599,7 +599,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->      /* load/store elements for rest of segments */
->      for (; k < nf; k++) {
->          for (i = 0; i < max_elems; i++, env->vstart++) {
-> -            target_ulong addr = base + ((i + k * max_elems) << esz);
-> +            target_ulong addr = base + ((i + k * max_elems) << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->          }
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1216,6 +1220,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen=
+3Fn *gvec_fn,
 >      }
-> @@ -4691,11 +4691,11 @@ GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_h, uint16_t, H2)
->  GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4)
->  GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8)
 >
-> -#define GEN_VEXT_VSLIE1UP(ESZ, H)                                           \
-> -static void vslide1up_##ESZ(void *vd, void *v0, target_ulong s1, void *vs2, \
-> -                     CPURISCVState *env, uint32_t desc)                     \
-> +#define GEN_VEXT_VSLIE1UP(BITWIDTH, H)                                      \
-> +static void vslide1up_##BITWIDTH(void *vd, void *v0, target_ulong s1,       \
-> +                     void *vs2, CPURISCVState *env, uint32_t desc)          \
->  {                                                                           \
-> -    typedef uint##ESZ##_t ETYPE;                                            \
-> +    typedef uint##BITWIDTH##_t ETYPE;                                       \
->      uint32_t vm = vext_vm(desc);                                            \
->      uint32_t vl = env->vl;                                                  \
->      uint32_t i;                                                             \
-> @@ -4718,11 +4718,11 @@ GEN_VEXT_VSLIE1UP(16, H2)
->  GEN_VEXT_VSLIE1UP(32, H4)
->  GEN_VEXT_VSLIE1UP(64, H8)
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
-> -#define GEN_VEXT_VSLIDE1UP_VX(NAME, ESZ)                          \
-> +#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                     \
->  void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
->                    CPURISCVState *env, uint32_t desc)              \
->  {                                                                 \
-> -    vslide1up_##ESZ(vd, v0, s1, vs2, env, desc);                  \
-> +    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);             \
->  }
+>      if (a->vm && s->vl_eq_vlmax) {
+>          gvec_fn(s->sew, vreg_ofs(s, a->rd),
+> @@ -1263,6 +1268,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2, uint32_t vm,
 >
->  /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
-> @@ -4731,11 +4731,11 @@ GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_h, 16)
->  GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, 32)
->  GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, 64)
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
-> -#define GEN_VEXT_VSLIDE1DOWN(ESZ, H)                                          \
-> -static void vslide1down_##ESZ(void *vd, void *v0, target_ulong s1, void *vs2, \
-> -                       CPURISCVState *env, uint32_t desc)                     \
-> +#define GEN_VEXT_VSLIDE1DOWN(BITWIDTH, H)                                     \
-> +static void vslide1down_##BITWIDTH(void *vd, void *v0, target_ulong s1,       \
-> +                       void *vs2, CPURISCVState *env, uint32_t desc)          \
->  {                                                                             \
-> -    typedef uint##ESZ##_t ETYPE;                                              \
-> +    typedef uint##BITWIDTH##_t ETYPE;                                         \
->      uint32_t vm = vext_vm(desc);                                              \
->      uint32_t vl = env->vl;                                                    \
->      uint32_t i;                                                               \
-> @@ -4758,11 +4758,11 @@ GEN_VEXT_VSLIDE1DOWN(16, H2)
->  GEN_VEXT_VSLIDE1DOWN(32, H4)
->  GEN_VEXT_VSLIDE1DOWN(64, H8)
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1427,6 +1433,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, =
+uint32_t vs2, uint32_t vm,
 >
-> -#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, ESZ)                        \
-> +#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                   \
->  void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
->                    CPURISCVState *env, uint32_t desc)              \
->  {                                                                 \
-> -    vslide1down_##ESZ(vd, v0, s1, vs2, env, desc);                \
-> +    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
->  }
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->  /* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
-> @@ -4772,11 +4772,11 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, 32)
->  GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, 64)
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -1513,6 +1520,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->  /* Vector Floating-Point Slide Instructions */
-> -#define GEN_VEXT_VFSLIDE1UP_VF(NAME, ESZ)                     \
-> +#define GEN_VEXT_VFSLIDE1UP_VF(NAME, BITWIDTH)                \
->  void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
->                    CPURISCVState *env, uint32_t desc)          \
->  {                                                             \
-> -    vslide1up_##ESZ(vd, v0, s1, vs2, env, desc);              \
-> +    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);         \
->  }
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -1593,6 +1601,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmr=
+r *a,
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->  /* vfslide1up.vf vd, vs2, rs1, vm # vd[0]=f[rs1], vd[i+1] = vs2[i] */
-> @@ -4784,11 +4784,11 @@ GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_h, 16)
->  GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_w, 32)
->  GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_d, 64)
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -1670,6 +1679,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          };                                                         \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -1851,6 +1861,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          };                                                         \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2061,6 +2072,7 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_=
+v_v *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
-> -#define GEN_VEXT_VFSLIDE1DOWN_VF(NAME, ESZ)                   \
-> +#define GEN_VEXT_VFSLIDE1DOWN_VF(NAME, BITWIDTH)              \
->  void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
->                    CPURISCVState *env, uint32_t desc)          \
->  {                                                             \
-> -    vslide1down_##ESZ(vd, v0, s1, vs2, env, desc);            \
-> +    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);       \
->  }
+>              tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+>                                 cpu_env, s->cfg_ptr->vlen / 8,
+> @@ -2084,6 +2096,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_=
+v_x *a)
+>          TCGv s1;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 >
->  /* vfslide1down.vf vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=f[rs1] */
+>          s1 =3D get_gpr(s, a->rs1, EXT_SIGN);
+>
+> @@ -2139,6 +2152,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_=
+v_i *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              s1 =3D tcg_constant_i64(simm);
+>              dest =3D tcg_temp_new_ptr();
+> @@ -2291,6 +2305,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2321,6 +2336,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, =
+uint32_t vs2,
+>
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      dest =3D tcg_temp_new_ptr();
+>      mask =3D tcg_temp_new_ptr();
+> @@ -2409,6 +2425,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)           \
+>          TCGLabel *over =3D gen_new_label();                        \
+>          gen_set_rm(s, RISCV_FRM_DYN);                            \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);        \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);\
+>                                                                   \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);               \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
+> @@ -2483,6 +2500,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr =
+*a)             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2604,6 +2622,7 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+>          TCGLabel *over =3D gen_new_label();
+>          gen_set_rm(s, rm);
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -2717,6 +2736,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfm=
+v_v_f *a)
+>              };
+>              TCGLabel *over =3D gen_new_label();
+>              tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>              t1 =3D tcg_temp_new_i64();
+>              /* NaN-box f[rs1] */
+> @@ -2805,6 +2825,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2856,6 +2877,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, RISCV_FRM_DYN);                              \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -2921,6 +2943,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> @@ -2974,6 +2997,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *=
+a)              \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          gen_set_rm(s, FRM);                                        \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -3061,6 +3085,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)=
+                \
+>          gen_helper_gvec_4_ptr *fn =3D gen_helper_##NAME;             \
+>          TCGLabel *over =3D gen_new_label();                          \
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+> @@ -3229,6 +3254,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v =
+*a)
+>          uint32_t data =3D 0;
+>          TCGLabel *over =3D gen_new_label();
+>          tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>          data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+>          data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> @@ -3746,6 +3772,7 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a,=
+ uint8_t seq)
+>      gen_helper_gvec_3_ptr *fn;
+>      TCGLabel *over =3D gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
+> +    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+>
+>      static gen_helper_gvec_3_ptr * const fns[6][4] =3D {
+>          {
 > --
 > 2.34.2
 >
