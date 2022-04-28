@@ -1,64 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nju4T-0003sQ-3M
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 22:39:57 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41070)
+	id 1njuxr-0001J9-Qd
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Apr 2022 23:37:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48196)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nju4R-0003s9-6p; Wed, 27 Apr 2022 22:39:55 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:36756 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nju4O-0003TR-HA; Wed, 27 Apr 2022 22:39:54 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowACXKSBt_mlioeygAQ--.46165S2;
- Thu, 28 Apr 2022 10:39:42 +0800 (CST)
-Subject: Re: [PATCH 1/2] target/riscv: Tentatively remove Zhinx* from ISA
- extension string
-To: Alistair Francis <alistair23@gmail.com>,
- Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: Frank Chang <frank.chang@sifive.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-References: <cover.1650777360.git.research_trasio@irq.a4lg.com>
- <cfda1d8da254f2e723e487f0c738c59d5891e492.1650777360.git.research_trasio@irq.a4lg.com>
- <CAKmqyKOx2Q3vjK5b51y1yrKS=f+08qzQFvCiS0iuDqBQ0wo41g@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <c2a43c93-70a9-721b-d4ae-779a6b3cfd7a@iscas.ac.cn>
-Date: Thu, 28 Apr 2022 10:39:41 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1njuxp-0001GA-DJ; Wed, 27 Apr 2022 23:37:09 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:42326)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1njuxm-0002mG-2q; Wed, 27 Apr 2022 23:37:09 -0400
+Authentication-Results: mail-b.sr.ht; dkim=none 
+Received: from git.sr.ht (unknown [173.195.146.142])
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 0FB6C11EEFE;
+ Thu, 28 Apr 2022 03:37:03 +0000 (UTC)
+From: ~eopxd <eopxd@git.sr.ht>
+Date: Thu, 28 Apr 2022 03:37:02 +0000
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKOx2Q3vjK5b51y1yrKS=f+08qzQFvCiS0iuDqBQ0wo41g@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowACXKSBt_mlioeygAQ--.46165S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZrWUKw1kuFykKr45ur48Zwb_yoW8XFWkpr
- 4xKa4vkFyDJas5C3s7J34kWF4rWw1DWws7WwsFvwn3JrWayrWqyrs2kw48Xr4qyF97Ka4f
- Xw4jyr17Zrs3Ja7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxV
- WxJr0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07Al
- zVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
- 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
- zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
- 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j
- 6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcS
- sGvfC2KfnxnUUI43ZEXa7VUU6RRtUUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Subject: [PATCH qemu v11 00/15] Add tail agnostic behavior for rvv instructions
+Message-ID: <165111702275.848.16529145411603891061-0@git.sr.ht>
+X-Mailer: git.sr.ht
+Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
+ helo=mail-b.sr.ht
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,53 +47,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Apr 2022 02:39:55 -0000
+X-List-Received-Date: Thu, 28 Apr 2022 03:37:09 -0000
 
+According to v-spec, tail agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of tail policies, QEMU should be able to simulate the tail
+agnostic behavior as "set tail elements' bits to all 1s". An option
+'rvv_ta_all_1s' is added to enable the behavior, it is default as
+disabled.
 
-在 2022/4/28 上午7:58, Alistair Francis 写道:
-> On Sun, Apr 24, 2022 at 3:22 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
->> This commit disables ISA string conversion for Zhinx and Zhinxmin
->> extensions for now.  Because extension category ordering of "H" is not
->> ratified, their ordering is likely invalid.
->>
->> Once "H"-extension ordering is determined, we can add Zhinx* again.
->>
->> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-> Weiwei Li does this sound alright to you?
->
-> Alistair
+There are multiple possibility for agnostic elements according to
+v-spec. The main intent of this patch-set tries to add option that
+can distinguish between tail policies. Setting agnostic elements to
+all 1s makes things simple and allow QEMU to express this.
 
-Even though the rule says: "The first letter following the 'Z' 
-conventionally indicates the most closely
+We may explore other possibility of agnostic behavior by adding
+other options in the future. Please understand that this patch-set
+is limited.
 
-related alphabetical extension category, IMAFDQLCBKJTPVH", zhinx* is not 
-related to 'H' extension actually.
+v2 updates:
+- Addressed comments from Weiwei Li
+- Added commit tail agnostic on load / store instructions (which
+  I forgot to include into the patch-set)
 
-I think the most closely related alphabetical extension is 'F' extension.
+v3 updates:
+- Missed the very 1st commit, adding it back
 
-Regards,
+v4 updates:
+- Renamed vlmax to total_elems
+- Deal with tail element when vl_eq_vlmax == true
 
-Weiwei Li
+v5 updates:
+- Let `vext_get_total_elems` take `desc` and `esz`
+- Utilize `simd_maxsz(desc)` to get `vlenb`
+- Fix alignments to code
 
->> ---
->>   target/riscv/cpu.c | 2 --
->>   1 file changed, 2 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 0c774056c5..c765f7ff00 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -954,8 +954,6 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->>           ISA_EDATA_ENTRY(zfh, ext_zfh),
->>           ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->>           ISA_EDATA_ENTRY(zfinx, ext_zfinx),
->> -        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
->> -        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
->>           ISA_EDATA_ENTRY(zdinx, ext_zdinx),
->>           ISA_EDATA_ENTRY(zba, ext_zba),
->>           ISA_EDATA_ENTRY(zbb, ext_zbb),
->> --
->> 2.32.0
->>
+v6 updates:
+- Fix `vext_get_total_elems`
 
+v7 updates:
+- Reuse `max_elems` for vector load / store helper functions. The
+  translation sets desc's `lmul` to `min(1, lmul)`, making
+  `vext_max_elems` equivalent to `vext_get_total_elems`.
+
+v8 updates:
+- Simplify `vext_set_elems_1s`, don't need `vext_set_elems_1s_fns`
+- Fix `vext_get_total_elems`, it should derive upon EMUL instead
+  of LMUL
+
+v9 updates:
+- Let instructions that is tail agnostic regardless of vta respect the
+  option and not the vta.
+
+v10 updates:
+- Correct range to set element to 1s for load instructions
+
+v11 updates:
+- Separate addition of option 'rvv_ta_all_1s' as a new (last) commit
+- Add description to show intent of the option in first commit for the
+  optional tail agnostic behavior
+- Tag WeiWei as Reviewed-by for all commits
+- Tag Alistair as Reviewed-by for commit 01, 02
+- Tag Alistair as Acked-by for commit 03
+
+eopXD (15):
+  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
+  target/riscv: rvv: Rename ambiguous esz
+  target/riscv: rvv: Early exit when vstart >= vl
+  target/riscv: rvv: Add tail agnostic for vv instructions
+  target/riscv: rvv: Add tail agnostic for vector load / store
+    instructions
+  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
+  target/riscv: rvv: Add tail agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer merge and move
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector reduction instructions
+  target/riscv: rvv: Add tail agnostic for vector mask instructions
+  target/riscv: rvv: Add tail agnostic for vector permutation
+    instructions
+  target/riscv: rvv: Add option 'rvv_ta_all_1s' to enable optional tail
+    agnostic behavior
+
+ target/riscv/cpu.c                      |    1 +
+ target/riscv/cpu.h                      |    2 +
+ target/riscv/cpu_helper.c               |    2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |  176 +++
+ target/riscv/internals.h                |    6 +-
+ target/riscv/translate.c                |    4 +
+ target/riscv/vector_helper.c            | 1536 ++++++++++++++---------
+ 7 files changed, 1110 insertions(+), 617 deletions(-)
+
+-- 
+2.34.2
 
