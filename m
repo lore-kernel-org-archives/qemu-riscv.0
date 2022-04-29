@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nkSeA-00054H-6U
-	for mharc-qemu-riscv@gnu.org; Fri, 29 Apr 2022 11:35:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46384)
+	id 1nkSeB-00059m-Nb
+	for mharc-qemu-riscv@gnu.org; Fri, 29 Apr 2022 11:35:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46432)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nkSe5-0004wP-VV
- for qemu-riscv@nongnu.org; Fri, 29 Apr 2022 11:35:03 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034]:54886)
+ id 1nkSe9-00053T-ML
+ for qemu-riscv@nongnu.org; Fri, 29 Apr 2022 11:35:05 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436]:37462)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nkSe4-0007rS-5O
- for qemu-riscv@nongnu.org; Fri, 29 Apr 2022 11:35:01 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id fv2so7420071pjb.4
- for <qemu-riscv@nongnu.org>; Fri, 29 Apr 2022 08:34:59 -0700 (PDT)
+ id 1nkSe8-0007s2-0n
+ for qemu-riscv@nongnu.org; Fri, 29 Apr 2022 11:35:05 -0400
+Received: by mail-pf1-x436.google.com with SMTP id bo5so7228262pfb.4
+ for <qemu-riscv@nongnu.org>; Fri, 29 Apr 2022 08:35:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=bXKWBVY3NxhjMBRD0PC/DdAoXy9LX4hKbVNoVoEffA0=;
- b=W5KuxKSDyhDRnNq/qINQYZpdmdV5Kx1HeEi5I1sopMj2kE4QHctH1bjsqy5pKN9IqX
- aBfbFbWaqA5/N3UAFfGyzck5X9FIja2hGSu6GlM9d/ZtMugABcmDwkRt45EgdIyfKXTH
- COFMEIlcj2JXshLdSPmvc4q9Bxp45EpxVi0Sxl4xoYerwlfOygWgoaITt5Wb3pLiJFOl
- Zq4i6VHzfcV+i9bKFeW+3AMlKWZ/RT5dHH/28onHanNIW/Yzygu+y/ADYPSqe1KP5IFI
- LRQLMW3L9pL99/mg9nsC+tY5w5czqKmY2SIwor2dlyO5A8Az2mmw1Ixk9b+mwcNU5R7T
- AXSA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=Iph17vM5JKx2zwjUTuCtizhPT+K6iT4BbkNaUeHmZmk=;
+ b=pbVoXyPpz6u2GpHz6nk0NY2yd35Pcl2nKq8I+pW3/lAHkvbDOUo+zeHcqTvdhtvO4F
+ lHqBdc7Dgw11Z5KTSqcMdROARtteC6IrwCrslglxw1zAGBvdi7vGPrEpy+1s/PxNHt8+
+ /WjqlI6ifmRCvgCvZmqjo4fUpsjDHCoOr/O6hsADs/qlRtatiVeA3arnU4JTREU4kqQ/
+ nba/hqfHEK5ooI93NNv/ZSLzltk7T4vKUfRwAfldYiHf+beQBxD1fTo6tEv5XxohaQ/H
+ /yePhYtkoIAMcljjAuVhEeN07681uq1FdBs/ZrT9bBR5MgWjTmtLxmJqqpTtsoKzlk+u
+ SJ7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=bXKWBVY3NxhjMBRD0PC/DdAoXy9LX4hKbVNoVoEffA0=;
- b=K4ILnDxNpDL7MjG/NKZzBWmOM9eTEJMpKAxzX4JvvZVfNJd0qxwhl3de6PVAuCxpLp
- cM/TgiPrUl/RMJlQrAaVKPafj9EZCmBUUNUHSQCSnKRSYdrQ1JrLrn9YaOIQmwyMC/b2
- uq35qPvxFeW6p15vsr3tlLmty1VRrQUlOXL0Z7pki959IHcuI2obRRqohjc1Cfe+VX1K
- d+jbxb3t9POUJyFmtGrt72owrt2TaM+FzyR8BYdQYAKT+wdMOiPyXNQFhex3hT1sXSuP
- AMnDI68Z+cGW+Rmkob2Qqc2NFfujWdKR5So4snctD6z4Oxi2R3txeF59xeC3GtNZ5IQY
- OFkg==
-X-Gm-Message-State: AOAM5313jIZMXfk31O0kGpBAy+CaEu28EKrer9jS02av1HYuThjd95Dq
- LPu3Eik6HbVEiV8LP6WEgdv2tQ==
-X-Google-Smtp-Source: ABdhPJzJCwkqTaEk6L1bMMxAcp6g/OgJpmJJKo/gOtlQZeLBJhJUkyQo9GvPWXUj/cGYbnGD4vLGXw==
-X-Received: by 2002:a17:903:185:b0:15e:8bfa:ed63 with SMTP id
- z5-20020a170903018500b0015e8bfaed63mr85458plg.153.1651246498719; 
- Fri, 29 Apr 2022 08:34:58 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=Iph17vM5JKx2zwjUTuCtizhPT+K6iT4BbkNaUeHmZmk=;
+ b=FrrkzPaR6fJ0lT7Mlh95wZqxnJq6R2EWDe0rJX6y6gTaM2UMpt+4jCbQoeyA8BazCC
+ n+oSBU9tS3jquArZPECBeYETome4DB4DcRaNV66vqbY2jxgjRXDE0WJWUqC63AwUWkPJ
+ nSnzoCDTc2od2pKvmf5SiiWCLhnCPGW6Y6Uhw7il/430xhWpjEIhBW4fX/kv1QNts9pf
+ yMIqLOqIG+c+0ESc+DJD3NkObGrZLhBjbNijd284Z08KemIGeupHgzoFgiT38+l3AVTo
+ pqM3gvymtIPLJnAyE2rtyx41sGa0bg4IJTWGxBkaVYTBwZFZrejY9mzx5BexaSEvXvRM
+ h2yw==
+X-Gm-Message-State: AOAM530s69rmuZz4XhmBm6My4JL8WQ5V/WMsPTZFvC/lnCJ2+SPf8/DF
+ qfyTR4E9rLWfbGQVlZgHdgNGuQ==
+X-Google-Smtp-Source: ABdhPJwhecgxf5jmlYzSo1MdOmEWhZkEOfAzoEbiqR5gVRgboxsLXmBPzsOL0mstx31LTRRbpL2quw==
+X-Received: by 2002:a63:8c1:0:b0:3c1:7c1b:7084 with SMTP id
+ 184-20020a6308c1000000b003c17c1b7084mr6642934pgi.438.1651246502498; 
+ Fri, 29 Apr 2022 08:35:02 -0700 (PDT)
 Received: from anup-ubuntu64-vm.. ([122.167.97.237])
  by smtp.gmail.com with ESMTPSA id
- t13-20020a65608d000000b003c14af50606sm6439380pgu.30.2022.04.29.08.34.55
+ t13-20020a65608d000000b003c14af50606sm6439380pgu.30.2022.04.29.08.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Apr 2022 08:34:58 -0700 (PDT)
+ Fri, 29 Apr 2022 08:35:01 -0700 (PDT)
 From: Anup Patel <apatel@ventanamicro.com>
 To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -54,14 +54,17 @@ To: Peter Maydell <peter.maydell@linaro.org>,
 Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Anup Patel <apatel@ventanamicro.com>
-Subject: [PATCH 0/3] QEMU RISC-V priv spec version fixes
-Date: Fri, 29 Apr 2022 21:04:28 +0530
-Message-Id: <20220429153431.308829-1-apatel@ventanamicro.com>
+Subject: [PATCH 1/3] target/riscv: Don't force update priv spec version to
+ latest
+Date: Fri, 29 Apr 2022 21:04:29 +0530
+Message-Id: <20220429153431.308829-2-apatel@ventanamicro.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220429153431.308829-1-apatel@ventanamicro.com>
+References: <20220429153431.308829-1-apatel@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=apatel@ventanamicro.com; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,25 +84,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Apr 2022 15:35:03 -0000
+X-List-Received-Date: Fri, 29 Apr 2022 15:35:06 -0000
 
-This series covers few fixes discovered while trying to detect priv spec
-version on QEMU virt machine and QEMU sifive_u machine.
+The riscv_cpu_realize() sets priv spec verion to v1.12 when it is
+when "env->priv_ver == 0" (i.e. default v1.10) because the enum
+value of priv spec v1.10 is zero.
 
-These patches can also be found in riscv_priv_version_fixes_v1 branch at:
-https://github.com/avpatel/qemu.git
+Due to above issue, the sifive_u machine will see priv spec v1.12
+instead of priv spec v1.10.
 
-Anup Patel (3):
-  target/riscv: Don't force update priv spec version to latest
-  target/riscv: Add dummy mcountinhibit CSR for priv spec v1.11 or
-    higher
-  target/riscv: Consider priv spec version when generating ISA string
+To fix this issue, we set latest priv spec version (i.e. v1.12)
+for base rv64/rv32 cpu and riscv_cpu_realize() will override priv
+spec version only when "cpu->cfg.priv_spec != NULL".
 
- target/riscv/cpu.c      | 46 ++++++++++++++++++++++-------------------
- target/riscv/cpu_bits.h |  3 +++
- target/riscv/csr.c      |  2 ++
- 3 files changed, 30 insertions(+), 21 deletions(-)
+Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+---
+ target/riscv/cpu.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f0a702fee6..02ee7d45d8 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -169,6 +169,8 @@ static void rv64_base_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, MXL_RV64, 0);
++    /* Set latest version of privileged specification */
++    set_priv_version(env, PRIV_VERSION_1_12_0);
+ }
+ 
+ static void rv64_sifive_u_cpu_init(Object *obj)
+@@ -204,6 +206,8 @@ static void rv32_base_cpu_init(Object *obj)
+     CPURISCVState *env = &RISCV_CPU(obj)->env;
+     /* We set this in the realise function */
+     set_misa(env, MXL_RV32, 0);
++    /* Set latest version of privileged specification */
++    set_priv_version(env, PRIV_VERSION_1_12_0);
+ }
+ 
+ static void rv32_sifive_u_cpu_init(Object *obj)
+@@ -509,7 +513,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+     CPURISCVState *env = &cpu->env;
+     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+     CPUClass *cc = CPU_CLASS(mcc);
+-    int priv_version = 0;
++    int priv_version = -1;
+     Error *local_err = NULL;
+ 
+     cpu_exec_realizefn(cs, &local_err);
+@@ -533,10 +537,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         }
+     }
+ 
+-    if (priv_version) {
++    if (priv_version >= PRIV_VERSION_1_10_0) {
+         set_priv_version(env, priv_version);
+-    } else if (!env->priv_ver) {
+-        set_priv_version(env, PRIV_VERSION_1_12_0);
+     }
+ 
+     if (cpu->cfg.mmu) {
 -- 
 2.34.1
 
