@@ -1,40 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nlTyv-0006km-1x
-	for mharc-qemu-riscv@gnu.org; Mon, 02 May 2022 07:12:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45144)
+	id 1nlTyh-0006VL-VW
+	for mharc-qemu-riscv@gnu.org; Mon, 02 May 2022 07:12:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45048)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nlTyd-0006Mr-Tc; Mon, 02 May 2022 07:12:29 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:43532)
+ id 1nlTyW-0006Ln-1U; Mon, 02 May 2022 07:12:21 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:43514)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nlTyY-0004QS-0T; Mon, 02 May 2022 07:12:24 -0400
+ id 1nlTyO-0004PG-Gk; Mon, 02 May 2022 07:12:19 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id DF96D11F123;
- Mon,  2 May 2022 11:12:10 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id CE44F11EEDD;
+ Mon,  2 May 2022 11:12:09 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v13 08/15] target/riscv: rvv: Add tail agnostic for
- vector integer comparison instructions
-Message-ID: <165148992946.19543.7306630137674612238-8@git.sr.ht>
+Date: Mon, 02 May 2022 11:12:09 +0000
+MIME-Version: 1.0
+Subject: [PATCH qemu v13 00/15] Add tail agnostic behavior for rvv instructions
+Message-ID: <165148992946.19543.7306630137674612238-0@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
-In-Reply-To: <165148992946.19543.7306630137674612238-0@git.sr.ht>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 36
-X-Spam_score: 3.6
-X-Spam_bar: +++
-X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -48,77 +47,117 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Mon, 02 May 2022 11:12:29 -0000
-X-Original-Date: Mon, 07 Mar 2022 01:43:53 -0800
-X-List-Received-Date: Mon, 02 May 2022 11:12:29 -0000
+X-List-Received-Date: Mon, 02 May 2022 11:12:23 -0000
 
-From: eopXD <eop.chen@sifive.com>
+According to v-spec, tail agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of tail policies, QEMU should be able to simulate the tail
+agnostic behavior as "set tail elements' bits to all 1s". An option
+'rvv_ta_all_1s' is added to enable the behavior, it is default as
+disabled.
 
-Compares write mask registers, and so always operate under a tail-
-agnostic policy.
+There are multiple possibility for agnostic elements according to
+v-spec. The main intent of this patch-set tries to add option that
+can distinguish between tail policies. Setting agnostic elements to
+all 1s makes things simple and allow QEMU to express this.
 
-Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
----
- target/riscv/vector_helper.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+We may explore other possibility of agnostic behavior by adding
+other options in the future. Please understand that this patch-set
+is limited.
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index c1ae2ea2f1..ddaf364573 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -1373,6 +1373,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
- {                                                             \
-     uint32_t vm =3D vext_vm(desc);                              \
-     uint32_t vl =3D env->vl;                                    \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;        \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);              \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1384,6 +1386,13 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* mask destination register are always tail-agnostic */  \
-+    /* set tail elements to 1s */                             \
-+    if (vta_all_1s) {                                         \
-+        for (; i < total_elems; i++) {                        \
-+            vext_set_elem_mask(vd, i, 1);                     \
-+        }                                                     \
-+    }                                                         \
- }
-=20
- GEN_VEXT_CMP_VV(vmseq_vv_b, uint8_t,  H1, DO_MSEQ)
-@@ -1422,6 +1431,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,   \
- {                                                                   \
-     uint32_t vm =3D vext_vm(desc);                                    \
-     uint32_t vl =3D env->vl;                                          \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;              \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);                    \
-     uint32_t i;                                                     \
-                                                                     \
-     for (i =3D env->vstart; i < vl; i++) {                            \
-@@ -1433,6 +1444,13 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
- void *vs2,   \
-                 DO_OP(s2, (ETYPE)(target_long)s1));                 \
-     }                                                               \
-     env->vstart =3D 0;                                                \
-+    /* mask destination register are always tail-agnostic */        \
-+    /* set tail elements to 1s */                                   \
-+    if (vta_all_1s) {                                               \
-+        for (; i < total_elems; i++) {                              \
-+            vext_set_elem_mask(vd, i, 1);                           \
-+        }                                                           \
-+    }                                                               \
- }
-=20
- GEN_VEXT_CMP_VX(vmseq_vx_b, uint8_t,  H1, DO_MSEQ)
---=20
+v2 updates:
+- Addressed comments from Weiwei Li
+- Added commit tail agnostic on load / store instructions (which
+  I forgot to include into the patch-set)
+
+v3 updates:
+- Missed the very 1st commit, adding it back
+
+v4 updates:
+- Renamed vlmax to total_elems
+- Deal with tail element when vl_eq_vlmax == true
+
+v5 updates:
+- Let `vext_get_total_elems` take `desc` and `esz`
+- Utilize `simd_maxsz(desc)` to get `vlenb`
+- Fix alignments to code
+
+v6 updates:
+- Fix `vext_get_total_elems`
+
+v7 updates:
+- Reuse `max_elems` for vector load / store helper functions. The
+  translation sets desc's `lmul` to `min(1, lmul)`, making
+  `vext_max_elems` equivalent to `vext_get_total_elems`.
+
+v8 updates:
+- Simplify `vext_set_elems_1s`, don't need `vext_set_elems_1s_fns`
+- Fix `vext_get_total_elems`, it should derive upon EMUL instead
+  of LMUL
+
+v9 updates:
+- Let instructions that is tail agnostic regardless of vta respect the
+  option and not the vta.
+
+v10 updates:
+- Correct range to set element to 1s for load instructions
+
+v11 updates:
+- Separate addition of option 'rvv_ta_all_1s' as a new (last) commit
+- Add description to show intent of the option in first commit for the
+  optional tail agnostic behavior
+- Tag WeiWei as Reviewed-by for all commits
+- Tag Alistair as Reviewed-by for commit 01, 02
+- Tag Alistair as Acked-by for commit 03
+
+v12 updates:
+- Add missing space in WeiWei's "Reviewed-by" tag
+
+v13 updates:
+- Fix tail agnostic for vext_ldst_us. The function operates on input
+  parameter 'evl' rather than 'env->vl'.
+- Fix tail elements for vector segment load / store instructions
+  A vector segment load / store instruction may contain fractional
+  lmul with nf * lmul > 1. The rest of the elements in the last
+  register should be treated as tail elements.
+- Fix tail agnostic length for instructions with mask destination
+  register. Instructions with mask destination register should have
+  'vlen - vl' tail elements.
+
+eopXD (15):
+  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
+  target/riscv: rvv: Rename ambiguous esz
+  target/riscv: rvv: Early exit when vstart >= vl
+  target/riscv: rvv: Add tail agnostic for vv instructions
+  target/riscv: rvv: Add tail agnostic for vector load / store
+    instructions
+  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
+  target/riscv: rvv: Add tail agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer merge and move
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector reduction instructions
+  target/riscv: rvv: Add tail agnostic for vector mask instructions
+  target/riscv: rvv: Add tail agnostic for vector permutation
+    instructions
+  target/riscv: rvv: Add option 'rvv_ta_all_1s' to enable optional tail
+    agnostic behavior
+
+ target/riscv/cpu.c                      |    1 +
+ target/riscv/cpu.h                      |    2 +
+ target/riscv/cpu_helper.c               |    2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |  176 +++
+ target/riscv/internals.h                |    6 +-
+ target/riscv/translate.c                |    4 +
+ target/riscv/vector_helper.c            | 1558 ++++++++++++++---------
+ 7 files changed, 1132 insertions(+), 617 deletions(-)
+
+-- 
 2.34.2
-
 
