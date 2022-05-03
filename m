@@ -1,70 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nlmrk-0005vg-Vo
-	for mharc-qemu-riscv@gnu.org; Tue, 03 May 2022 03:22:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52248)
+	id 1nlulB-0006NK-UI
+	for mharc-qemu-riscv@gnu.org; Tue, 03 May 2022 11:48:21 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35326)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1nlmra-0005ss-EZ
- for qemu-riscv@nongnu.org; Tue, 03 May 2022 03:22:29 -0400
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:45881)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nlul9-0006HC-Ig
+ for qemu-riscv@nongnu.org; Tue, 03 May 2022 11:48:19 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c]:42531)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1nlmrX-00029l-Sn
- for qemu-riscv@nongnu.org; Tue, 03 May 2022 03:22:25 -0400
-Received: by mail-yb1-xb32.google.com with SMTP id v59so29669852ybi.12
- for <qemu-riscv@nongnu.org>; Tue, 03 May 2022 00:22:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=atishpatra.org; s=google;
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nlul7-0008EU-DK
+ for qemu-riscv@nongnu.org; Tue, 03 May 2022 11:48:18 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id ay15so4063679uab.9
+ for <qemu-riscv@nongnu.org>; Tue, 03 May 2022 08:48:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=MdoD5FIzDK+GyWTUyU01nSKHv1PSukoUcIhp+HRsIK8=;
- b=hjqWq2uvRJvoNbqq1/R/GEUZ+3RgbNWo+vkBvhDFewuovAmoJFYPZsvK2pd7v7KX3u
- P5+gKjURSvaHrXgxzq80WQD8Zei4SMwQ/IniNjz6JF9Ai4SKA6jPnSKg7WrricF787rk
- 6snfbIqkfMStd+saAwd/HE2kgKoRn867vOCB4=
+ :cc; bh=IMxsipmfnqaHF2LusZbyme+w8ARS9KQPxBpo2uE6984=;
+ b=NU482flteW/wZL1YhnDNSRpUDiBf5/FowNvuHHTH+LJ3kPr5OkH26ScGqm1oahyt57
+ fBJpZs3KQMPPWvCn2Mwi2/PHkbMfhSW6rcpONTC5kCpzyarx5iAEta0ovIaXYXxNs4n2
+ l/ded8fXpXvFf0QFGPD31n7ph+qZzPk3pXuDt7YqIGLMbtgYvlh0PburCDvC4cH4R3Nr
+ WQ4/pjJ5Mb95rIM/xVarxYVyl2asp3StLVAylBg8ti3NLwhEWwM1xdaBwzdT8giDI7nB
+ RGU+QzAbDR9ERYaRqrUMKe/AA0WGHciR+5J7PAyykhSxhPUMF320aiyUBR8GcaL6jOnG
+ DHFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=MdoD5FIzDK+GyWTUyU01nSKHv1PSukoUcIhp+HRsIK8=;
- b=xRty30uwK2PJahGfiHXsA0rvm/mzLpcPItb7BBAK7suGF1BynD5ll3ZYX9RQjNSud/
- Xz4qRPSqMccWj7d/mkHCbvm/YhKKBYWa5nZ348IEeyHtoELHPbQJrrFLb4phbKBrM+sQ
- lLY/xLyP2MfERTvIrMJs6ZCVqorm90K/s8J8dBnz+pLGlXlQTFKAv0qvJMNjM+nFU0Le
- tuqzB7HcJXAnNn7P+LJRXN7XG2bhFqDMOMRe31QTrpV4E71Aw/eafzR6TgnMXv17PjIU
- fJN1BdBEKPHa0pWahWuN4a5Ang2x73vTGCt5F9L4786Ah/e+nWyBTVRDaSkbShLaFjQQ
- ogew==
-X-Gm-Message-State: AOAM5320NYGSkBo/oNyoWiy4VOrzhtFXFQbCW6MrOcTZzm4lFT+g3MQE
- o6LnkCmAG/Q2oqU94aTacHi05+f6Uz3lNvGQqqFz
-X-Google-Smtp-Source: ABdhPJxgDbZdx94pbaCDxb7h/ghviP9+2q298R2YkBm+lP68XZs1jTJSDxAQyZ8uh/lyiIwz3G0CVjOEFFm4YfP3TNo=
-X-Received: by 2002:a25:d6d6:0:b0:645:de57:8058 with SMTP id
- n205-20020a25d6d6000000b00645de578058mr12955763ybg.69.1651562542395; Tue, 03
- May 2022 00:22:22 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=IMxsipmfnqaHF2LusZbyme+w8ARS9KQPxBpo2uE6984=;
+ b=pXyBA2Ek2zwWsXxGQkjRUfv0B5Iz2Q3v+1Uo0BUiVyy/5Lxsm7XskT+9luMQaS3deP
+ p8UMig/2M11WmPQJ4CoFmM9oSiaUSKTJ9fxDxSUxoMIlhAltzWXilxASDFqR91FBpT7S
+ 81uIuLmNDDKAWvKvbQtOoaZ2bVMnNDhvBO6NXeG4pY/3QRVbZqkB5eQa72UoYxeFjmS/
+ SknKiGNuO8n2xWMbB59EWcvV04wPoaDsFGu3Pp0v7vvsX6LcXtaMLvODw5PJMWdkhYs3
+ F4xO4q8YQOnR4Fa8f7Zuka0qMnzDbyoYfVb7P1wGtxlCkFAN2SX0H2er0dRxaLb2AZvt
+ CQcw==
+X-Gm-Message-State: AOAM530g6IjKp1VCEFKeI47iSzcurc/3Cjx7oaa3pQ61JnU1T/fNNwkS
+ 7xpFVr0zZG6KJDd/0Zo+slj36JGjs3+pxFQm
+X-Google-Smtp-Source: ABdhPJz9MFng195u5U9F/m5LQPH3lLzNgObzLh9A4R01HylQPpAshhFsUs/E7gL5NalwBi2s94xCaw==
+X-Received: by 2002:ab0:63d0:0:b0:365:1286:5266 with SMTP id
+ i16-20020ab063d0000000b0036512865266mr4713371uap.2.1651592895784; 
+ Tue, 03 May 2022 08:48:15 -0700 (PDT)
+Received: from mail-vs1-f47.google.com (mail-vs1-f47.google.com.
+ [209.85.217.47]) by smtp.gmail.com with ESMTPSA id
+ b8-20020ab05f88000000b003626f894df5sm2975222uaj.35.2022.05.03.08.48.14
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 May 2022 08:48:15 -0700 (PDT)
+Received: by mail-vs1-f47.google.com with SMTP id m62so16228017vsc.2
+ for <qemu-riscv@nongnu.org>; Tue, 03 May 2022 08:48:14 -0700 (PDT)
+X-Received: by 2002:a05:6102:22d9:b0:32c:d879:5cd6 with SMTP id
+ a25-20020a05610222d900b0032cd8795cd6mr5483321vsh.30.1651592894510; Tue, 03
+ May 2022 08:48:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220412021009.582424-1-atishp@rivosinc.com>
- <Yl7oiF7kUrIQ0qk5@redhat.com>
- <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
-In-Reply-To: <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
-From: Atish Patra <atishp@atishpatra.org>
-Date: Tue, 3 May 2022 00:22:11 -0700
-Message-ID: <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Atish Patra <atishp@rivosinc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb32.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <CAAFEQFEMjN1Tt1E4btKw1bQT3DEB7KkJsgh5-tDQvT1W1wHemA@mail.gmail.com>
+In-Reply-To: <CAAFEQFEMjN1Tt1E4btKw1bQT3DEB7KkJsgh5-tDQvT1W1wHemA@mail.gmail.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Tue, 3 May 2022 23:48:03 +0800
+X-Gmail-Original-Message-ID: <CANzO1D28bBwxaqbW=vtnS9N--ReaSo-y1_=iEyW=6MCRkBTS0A@mail.gmail.com>
+Message-ID: <CANzO1D28bBwxaqbW=vtnS9N--ReaSo-y1_=iEyW=6MCRkBTS0A@mail.gmail.com>
+Subject: Re: Modelling core local interrupts
+To: vysakh pillai <vysakhpillai@gmail.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000ca7aef05de1d6f03"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=frank.chang@sifive.com; helo=mail-ua1-x92c.google.com
+X-Spam_score_int: 0
+X-Spam_score: -0.1
+X-Spam_bar: /
+X-Spam_report: (-0.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ PDS_OTHER_BAD_TLD=1.997, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -77,257 +82,72 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2022 07:22:31 -0000
+X-List-Received-Date: Tue, 03 May 2022 15:48:19 -0000
 
-On Tue, Apr 19, 2022 at 5:26 PM Atish Patra <atishp@atishpatra.org> wrote:
->
-> On Tue, Apr 19, 2022 at 9:51 AM Daniel P. Berrang=C3=A9 <berrange@redhat.=
-com> wrote:
-> >
-> > On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
-> > >
-> > > The RISC-V virt machine has helped RISC-V software eco system to evol=
-ve at a
-> > > rapid pace even in absense of the real hardware. It is definitely com=
-mendable.
-> > > However, the number of devices & commandline options keeps growing as=
- a result
-> > > of that as well. That adds flexibility but will also become bit diffi=
-cult
-> > > to manage in the future as more extension support will be added. As i=
-t is the
-> > > most commonly used qemu machine, it needs to support all kinds of dev=
-ice and
-> > > interrupts as well. Moreover, virt machine has limitations on the max=
-imum
-> > > number of harts it can support because of all the MMIO devices it has=
- to support.
-> > >
-> > > The RISC-V IMSIC specification allows to develop machines completely =
-relying
-> > > on MSI and don't care about the wired interrupts at all. It just requ=
-ires
-> > > all the devices to be present behind a PCI bus or present themselves =
-as platform
-> > > MSI device. The former is a more common scenario in x86 world where m=
-ost
-> > > of the devices are behind PCI bus. As there is very limited MMIO devi=
-ce
-> > > support, it can also scale to very large number of harts.
-> > >
-> > > That's why, this patch series introduces a minimalistic yet very exte=
-nsible
-> > > forward looking machine called as "RISC-V Mini Computer" or "minic". =
-The
-> > > idea is to build PC or server like systems with this machine. The mac=
-hine can
-> > > work with or without virtio framework. The current implementation onl=
-y
-> > > supports RV64. I am not sure if building a RV32 machine would be of i=
-nterest
-> > > for such machines. The only mmio device it requires is clint to emula=
-te
-> > > the mtimecmp.
-> >
+--000000000000ca7aef05de1d6f03
+Content-Type: text/plain; charset="UTF-8"
 
-Any other thoughts ?
+On Fri, Apr 22, 2022 at 8:41 AM vysakh pillai <vysakhpillai@gmail.com>
+wrote:
 
-> > I would ask what you see as the long term future usage for 'virt' vs
-> > 'minic' machine types ? Would you expect all existing users of 'virt'
-> > to ultimately switch to 'minic', or are there distinct non-overlapping
-> > use cases for 'virt' vs 'minic' such that both end up widely used ?
-> >
+> Hi,
+> I am looking for some reference code that will let me hook up a peripheral
+> to the core local interrupt controller. I want to avoid going through the
+> PLIC for modeling some simpler peripherals that directly interrupt the CPU.
 >
-> Nope. I don't expect existing 'virt' users to switch to 'minic' as
-> they aim to cater to different users.
+> The polar fire SoC datasheet says " 48 interrupts from peripherals are
+> directly connected as Local interrupts to each processor core". But the
+> mpsoc machine model seems to be configuring everything via the PLIC. I also
+> could not find peripherals being connected to the CLIC in any other
+> machine model.
 >
-> Here are the major differences
-> 1. virt machine supports MMIO devices & wired interrupts. Minic doesn't
-> 2. virt machine doesn't support the MSI only option yet (can be added
-> though[1]). Minic does.
-> 3. Number of cpu supported by virt machine are limited because of the
-> MMIO devices. Minic can scale to very
-> large numbers of cpu.
-> 4. 'Minic' only supports PCI based MSI capable devices. Thus, MSI is a
-> mandatory requirement for 'minic' while
-> it is optional for 'virt'.
+> Is the CLIC currently not modelled in RISC-V QEMU? OR, does the PLIC model
+> behave similarly to CLIC in the current model?
 >
-> 'Minic' aims towards the users who want to create virtual machines
-> that are MSI based and don't care about
-> a million options that virt machines provide.  Virt machine is more
-> complex so that it can be flexible in terms of
-> what it supports. Minic is a minimalistic machine which doesn't need
-> to be expanded a lot in the future given that
-> most of the devices can be behind PCI.
+> Vysakh P Pillai
+> http://embeddedinn.xyz
 >
-> [1] https://github.com/atishp04/qemu/tree/virt_imsic_only
->
-> > Is 'minic' intended to be able to mimic real physical hardware at all,
-> > or is it still intended as a purely virtual machine, like a 'virt-ng' ?
-> >
->
-> Any future hardware that relies only on PCI-MSI based devices, they
-> can be created on top of minic.
-> At that point, minic will provide a useful abstract for all those
-> machines as well. minic doesn't need a virtio framework.
-> Thus, it can closely emulate such hardware as well.
->
-> > Essentially 'virt' was positioned as the standard machine to use if
-> > you want to run a virtual machine, without any particular match to
-> > physical hardware. It feels like 'minic' is creating a second machine
-> > type to fill the same purpose, so how do users decide which to use ?
-> >
->
-> I envision 'minic' to be a standard machine for a specific set of user
-> requirements (x86 style PCI based
-> machines). Virt machine will continue to be a standard machine for
-> more generic use cases with MMIO devices.
->
-> > > "Naming is hard". I am not too attached with the name "minic".
-> > > I just chose least bad one out of the few on my mind :). I am definit=
-ely
-> > > open to any other name as well.
-> > >
-> > > The other alternative to provide MSI only option to aia in the
-> > > existing virt machine to build MSI only machines. This is certainly d=
-oable
-> > > and here is the patch that supports that kind of setup.
-> > >
-> > > https://github.com/atishp04/qemu/tree/virt_imsic_only
-> > >
-> > > However, it even complicates the virt machine even further with addit=
-ional
-> > > command line option, branches in the code. I believe virt machine wil=
-l become
-> > > very complex if we continue this path. I am interested to learn what =
-everyone
-> > > else think.
-> > >
-> > > It is needless to say that the current version of minic machine
-> > > is inspired from virt machine and tries to reuse as much as code poss=
-ible.
-> > > The first patch in this series adds MSI support for serial-pci device=
- so
-> > > console can work on such a machine. The 2nd patch moves some common f=
-unctions
-> > > between minic and the virt machine to a helper file. The PATCH3 actua=
-lly
-> > > implements the new minic machine.
-> > >
-> > > I have not added the fw-cfg/flash support. We probably should add tho=
-se
-> > > but I just wanted to start small and get the feedback first.
-> > > This is a work in progress and have few more TODO items before becomi=
-ng the
-> > > new world order :)
-> > >
-> > > 1. OpenSBI doesn't have PCI support. Thus, no console support for Ope=
-nSBI
-> > > for now.
-> > > 2. The ns16550 driver in OpenSBI also need to support MSI/MSI-X.
-> > > 3. Add MSI-X support for serial-pci device.
-> > >
-> > > This series can boot Linux distros with the minic machine with or wit=
-hout virtio
-> > > devices with out-of-tree Linux kernel patches[1]. Here is an example =
-commandline
-> > >
-> > > Without virtio devices (nvme, serial-pci & e1000e):
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> > > /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M minic =
--m 1G -smp 4 -nographic -nodefaults \
-> > > -display none -bios /scratch/workspace/opensbi/build/platform/generic=
-/firmware/fw_dynamic.elf \
-> > > -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
-> > > -chardev stdio,mux=3Don,signal=3Doff,id=3Dcharconsole0 \
-> > > -mon chardev=3Dcharconsole0,mode=3Dreadline \
-> > > -device pci-serial,msi=3Dtrue,chardev=3Dcharconsole0 \
-> > > -drive id=3Ddisk3,file=3D/scratch/workspace/rootfs_images//fedora/Fed=
-ora-Developer-Rawhide-20211110.n.0-sda.raw,format=3Draw,if=3Dnone,id=3Ddriv=
-e-system-disk,cache=3Dnone,format=3Draw \
-> > > -device nvme,serial=3Ddeadbeef,drive=3Ddisk3 \
-> > > -netdev user,id=3Dusernet,hostfwd=3Dtcp::10000-:22 -device e1000e,net=
-dev=3Dusernet,bus=3Dpcie.0 \
-> > > -append 'root=3D/dev/nvme0n1p2 rw loglevel=3D8 memblock=3Ddebug conso=
-le=3DttyS0 earlycon' -d in_asm -D log.txt -s
-> > >
-> > > With virtio devices (virtio-scsi-pci, serial-pci & virtio-net-pci)
-> > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M minic =
--m 1G -smp 4 -nographic -nodefaults \
-> > > -display none -bios /scratch/workspace/opensbi/build/platform/generic=
-/firmware/fw_dynamic.elf \
-> > > -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
-> > > -chardev stdio,mux=3Don,signal=3Doff,id=3Dcharconsole0 \
-> > > -mon chardev=3Dcharconsole0,mode=3Dreadline \
-> > > -device pci-serial,msi=3Dtrue,chardev=3Dcharconsole0 \
-> > > -drive file=3D/scratch/workspace/rootfs_images//fedora/Fedora-Develop=
-er-Rawhide-20211110.n.0-sda.raw,format=3Draw,if=3Dnone,id=3Ddrive-system-di=
-sk,cache=3Dnone \
-> > > -device virtio-scsi-pci,id=3Dscsi0 -device scsi-hd,bus=3Dscsi0.0,driv=
-e=3Ddrive-system-disk,id=3Dsystem-disk,bootindex=3D1 \
-> > > -netdev user,id=3Dn1,hostfwd=3Dtcp::10000-:22 -device virtio-net-pci,=
-netdev=3Dn1 \
-> > > -append 'root=3D/dev/sda2 rw loglevel=3D8 memblock=3Ddebug console=3D=
-ttyS0 earlycon'
-> > >
-> > > The objective of this series is to engage the community to solve this=
- problem.
-> > > Please suggest if you have another alternatve solution.
-> > >
-> > > [1] https://github.com/atishp04/linux/tree/msi_only_console
-> > >
-> > > Atish Patra (3):
-> > > serial: Enable MSI capablity and option
-> > > hw/riscv: virt: Move common functions to a separate helper file
-> > > hw/riscv: Create a new qemu machine for RISC-V
-> > >
-> > > configs/devices/riscv64-softmmu/default.mak |   1 +
-> > > hw/char/serial-pci.c                        |  36 +-
-> > > hw/riscv/Kconfig                            |  11 +
-> > > hw/riscv/machine_helper.c                   | 417 +++++++++++++++++++
-> > > hw/riscv/meson.build                        |   2 +
-> > > hw/riscv/minic.c                            | 438 +++++++++++++++++++=
-+
-> > > hw/riscv/virt.c                             | 403 ++----------------
-> > > include/hw/riscv/machine_helper.h           |  87 ++++
-> > > include/hw/riscv/minic.h                    |  65 +++
-> > > include/hw/riscv/virt.h                     |  13 -
-> > > 10 files changed, 1090 insertions(+), 383 deletions(-)
-> > > create mode 100644 hw/riscv/machine_helper.c
-> > > create mode 100644 hw/riscv/minic.c
-> > > create mode 100644 include/hw/riscv/machine_helper.h
-> > > create mode 100644 include/hw/riscv/minic.h
-> > >
-> > > --
-> > > 2.25.1
-> > >
-> > >
-> >
-> > With regards,
-> > Daniel
-> > --
-> > |: https://berrange.com      -o-    https://www.flickr.com/photos/dberr=
-ange :|
-> > |: https://libvirt.org         -o-            https://fstop138.berrange=
-.com :|
-> > |: https://entangle-photo.org    -o-    https://www.instagram.com/dberr=
-ange :|
-> >
-> >
->
->
-> --
-> Regards,
-> Atish
 
+For CLIC, there was a RFC patchet modeling RISC-V CLIC v0.9:
+https://patchew.org/QEMU/20210409074857.166082-1-zhiwei_liu@c-sky.com/
 
+I'm not sure whether the author has any plan to upstream the newer version
+of the patchset.
 
---=20
 Regards,
-Atish
+Frank Chang
+
+--000000000000ca7aef05de1d6f03
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Apr 22, 2022 at 8:41 AM vysakh pi=
+llai &lt;<a href=3D"mailto:vysakhpillai@gmail.com">vysakhpillai@gmail.com</=
+a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
+4,204);padding-left:1ex"><div dir=3D"ltr">Hi,<div>I am looking for some ref=
+erence code that will let me hook up a=C2=A0peripheral to the core local in=
+terrupt controller. I want to avoid going through the PLIC for modeling som=
+e simpler peripherals that directly interrupt the CPU.=C2=A0</div><div><br>=
+</div><div>The polar fire SoC datasheet says &quot;<span style=3D"font-fami=
+ly:Calibri;font-size:11pt">=C2=A0</span><span style=3D"font-family:Calibri;=
+font-size:11pt">48 interrupts from peripherals are directly
+connected as Local interrupts to each processor core</span>&quot;. But the =
+mpsoc machine model seems to be configuring everything via the PLIC. I also=
+ could not find peripherals being connected to the CLIC in any other machin=
+e=C2=A0model.=C2=A0</div><div><br></div><div>Is the CLIC currently not mode=
+lled in RISC-V QEMU? OR, does the PLIC model behave similarly to CLIC=C2=A0=
+in the current model?</div><div><br clear=3D"all"><div><div dir=3D"ltr"><di=
+v dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr">Vysakh P Pillai<d=
+iv><a href=3D"http://embeddedinn.xyz" target=3D"_blank">http://embeddedinn.=
+xyz</a></div></div></div></div></div></div></div></div></div></div></blockq=
+uote><div><br></div><div>For CLIC, there was a RFC patchet=C2=A0modeling RI=
+SC-V CLIC v0.9:</div><div><a href=3D"https://patchew.org/QEMU/2021040907485=
+7.166082-1-zhiwei_liu@c-sky.com/">https://patchew.org/QEMU/20210409074857.1=
+66082-1-zhiwei_liu@c-sky.com/</a></div><div><br></div><div>I&#39;m not sure=
+ whether the author has any plan to upstream=C2=A0the newer version of the =
+patchset.</div><div><br></div><div>Regards,</div><div>Frank Chang=C2=A0</di=
+v></div></div>
+
+--000000000000ca7aef05de1d6f03--
 
