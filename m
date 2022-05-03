@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nlmjf-0007QI-HS
-	for mharc-qemu-riscv@gnu.org; Tue, 03 May 2022 03:14:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51142)
+	id 1nlmji-0007R9-8e
+	for mharc-qemu-riscv@gnu.org; Tue, 03 May 2022 03:14:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51146)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nlmjO-0007BZ-0R; Tue, 03 May 2022 03:13:58 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:43888)
+ id 1nlmjO-0007CJ-7Q; Tue, 03 May 2022 03:13:58 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:43892)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nlmjL-0000y2-UV; Tue, 03 May 2022 03:13:57 -0400
+ id 1nlmjM-0000yB-40; Tue, 03 May 2022 03:13:57 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 9648F11F0C2;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id E15DF11F0CE;
  Tue,  3 May 2022 07:13:50 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v14 05/15] target/riscv: rvv: Add tail agnostic for
- vector load / store instructions
-Message-ID: <165156202959.27941.9731161369415852149-5@git.sr.ht>
+Subject: [PATCH qemu v14 07/15] target/riscv: rvv: Add tail agnostic for
+ vector integer shift instructions
+Message-ID: <165156202959.27941.9731161369415852149-7@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165156202959.27941.9731161369415852149-0@git.sr.ht>
@@ -48,260 +48,99 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Tue, 03 May 2022 07:13:58 -0000
-X-Original-Date: Sun, 06 Mar 2022 23:10:25 -0800
-X-List-Received-Date: Tue, 03 May 2022 07:13:58 -0000
+Date: Tue, 03 May 2022 07:13:59 -0000
+X-Original-Date: Mon, 07 Mar 2022 01:38:18 -0800
+X-List-Received-Date: Tue, 03 May 2022 07:13:59 -0000
 
 From: eopXD <eop.chen@sifive.com>
-
-Destination register of unit-stride mask load and store instructions are
-always written with a tail-agnostic policy.
-
-A vector segment load / store instruction may contain fractional lmul
-with nf * lmul > 1. The rest of the elements in the last register should
-be treated as tail elements.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 11 +++++
- target/riscv/translate.c                |  2 +
- target/riscv/vector_helper.c            | 60 +++++++++++++++++++++++++
- 3 files changed, 73 insertions(+)
+ target/riscv/insn_trans/trans_rvv.c.inc | 11 +++++++++++
+ target/riscv/vector_helper.c            | 11 +++++++++++
+ 2 files changed, 22 insertions(+)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
 s/trans_rvv.c.inc
-index cc80bf00ff..99691f1b9f 100644
+index d15858fc6f..430847b0f9 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -711,6 +711,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint=
-8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
- }
+@@ -1858,6 +1858,16 @@ do_opivx_gvec_shift(DisasContext *s, arg_rmrr *a, GVec=
+Gen2sFn32 *gvec_fn,
+     }
 =20
-@@ -748,6 +749,7 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint=
-8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
- }
+     if (a->vm && s->vl_eq_vlmax) {
++        if (s->vta && s->lmul < 0) {
++            /*
++             * tail elements may pass vlmax when lmul < 0
++             * set tail elements to 1s
++             */
++            uint32_t vlenb =3D s->cfg_ptr->vlen >> 3;
++            tcg_gen_gvec_ori(s->sew, vreg_ofs(s, a->rd),
++                             vreg_ofs(s, a->rd), -1,
++                             vlenb, vlenb);
++        }
+         TCGv_i32 src1 =3D tcg_temp_new_i32();
 =20
-@@ -774,6 +776,8 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, =
-uint8_t eew)
-     /* EMUL =3D 1, NFIELDS =3D 1 */
-     data =3D FIELD_DP32(data, VDATA, LMUL, 0);
-     data =3D FIELD_DP32(data, VDATA, NF, 1);
-+    /* Mask destination register are always tail-agnostic */
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
- }
-=20
-@@ -791,6 +795,8 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, =
-uint8_t eew)
-     /* EMUL =3D 1, NFIELDS =3D 1 */
-     data =3D FIELD_DP32(data, VDATA, LMUL, 0);
-     data =3D FIELD_DP32(data, VDATA, NF, 1);
-+    /* Mask destination register are always tail-agnostic */
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
- }
-=20
-@@ -862,6 +868,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, u=
-int8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-=20
-@@ -891,6 +898,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, u=
-int8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     fn =3D fns[eew];
-     if (fn =3D=3D NULL) {
-         return false;
-@@ -991,6 +999,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, ui=
-nt8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-=20
-@@ -1043,6 +1052,7 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, =
-uint8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
- }
-=20
-@@ -1108,6 +1118,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uin=
-t8_t eew)
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-     return ldff_trans(a->rd, a->rs1, data, fn, s);
- }
-=20
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 7775dade26..58cbb6ded3 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -95,6 +95,7 @@ typedef struct DisasContext {
-     int8_t lmul;
-     uint8_t sew;
-     uint8_t vta;
-+    bool cfg_vta_all_1s;
-     target_ulong vstart;
-     bool vl_eq_vlmax;
-     uint8_t ntemp;
-@@ -1085,6 +1086,7 @@ static void riscv_tr_init_disas_context(DisasContextBas=
-e *dcbase, CPUState *cs)
-     ctx->sew =3D FIELD_EX32(tb_flags, TB_FLAGS, SEW);
-     ctx->lmul =3D sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
-     ctx->vta =3D FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_=
-1s;
-+    ctx->cfg_vta_all_1s =3D cpu->cfg.rvv_ta_all_1s;
-     ctx->vstart =3D env->vstart;
-     ctx->vl_eq_vlmax =3D FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
-     ctx->misa_mxl_max =3D env->misa_mxl_max;
+         tcg_gen_trunc_tl_i32(src1, get_gpr(s, a->rs1, EXT_NONE));
+@@ -1916,6 +1926,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
++        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);               \
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+                            vreg_ofs(s, a->rs1),                    \
+                            vreg_ofs(s, a->rs2), cpu_env,           \
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 79d4fca091..f1a0b4ced7 100644
+index e00f9353b9..c1ae2ea2f1 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -269,6 +269,9 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-     uint32_t i, k;
-     uint32_t nf =3D vext_nf(desc);
-     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
-+    uint32_t esz =3D 1 << log2_esz;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
-=20
-     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
-         if (!vm && !vext_elem_mask(v0, i)) {
-@@ -283,6 +286,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-         }
-     }
-     env->vstart =3D 0;
-+    /* set tail elements to 1s */
-+    for (k =3D 0; k < nf; ++k) {
-+        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-+                          (k * max_elems + max_elems) * esz);
-+    }
-+    if (nf * max_elems % total_elems !=3D 0) {
-+        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
-+        uint32_t registers_used =3D
-+            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-+        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-+                          registers_used * vlenb);
-+    }
+@@ -1273,6 +1273,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+                   \
+ {                                                                         \
+     uint32_t vm =3D vext_vm(desc);                                          \
+     uint32_t vl =3D env->vl;                                                \
++    uint32_t esz =3D sizeof(TS1);                                           \
++    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
++    uint32_t vta =3D vext_vta(desc);                                        \
+     uint32_t i;                                                           \
+                                                                           \
+     for (i =3D env->vstart; i < vl; i++) {                                  \
+@@ -1284,6 +1287,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+                   \
+         *((TS1 *)vd + HS1(i)) =3D OP(s2, s1 & MASK);                        \
+     }                                                                     \
+     env->vstart =3D 0;                                                      \
++    /* set tail elements to 1s */                                         \
++    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
  }
 =20
- #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
-@@ -328,6 +343,9 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *=
-env, uint32_t desc,
-     uint32_t i, k;
-     uint32_t nf =3D vext_nf(desc);
-     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
-+    uint32_t esz =3D 1 << log2_esz;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
-=20
-     /* load bytes from guest memory */
-     for (i =3D env->vstart; i < evl; i++, env->vstart++) {
-@@ -339,6 +357,18 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState =
-*env, uint32_t desc,
-         }
-     }
-     env->vstart =3D 0;
-+    /* set tail elements to 1s */
-+    for (k =3D 0; k < nf; ++k) {
-+        vext_set_elems_1s(vd, vta, (k * max_elems + evl) * esz,
-+                          (k * max_elems + max_elems) * esz);
-+    }
-+    if (nf * max_elems % total_elems !=3D 0) {
-+        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
-+        uint32_t registers_used =3D
-+            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-+        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-+                          registers_used * vlenb);
-+    }
+ GEN_VEXT_SHIFT_VV(vsll_vv_b, uint8_t,  uint8_t, H1, H1, DO_SLL, 0x7)
+@@ -1308,6 +1313,10 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
+      \
+ {                                                           \
+     uint32_t vm =3D vext_vm(desc);                            \
+     uint32_t vl =3D env->vl;                                  \
++    uint32_t esz =3D sizeof(TD);                              \
++    uint32_t total_elems =3D                                  \
++        vext_get_total_elems(env, desc, esz);               \
++    uint32_t vta =3D vext_vta(desc);                          \
+     uint32_t i;                                             \
+                                                             \
+     for (i =3D env->vstart; i < vl; i++) {                    \
+@@ -1318,6 +1327,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
+     \
+         *((TD *)vd + HD(i)) =3D OP(s2, s1 & MASK);            \
+     }                                                       \
+     env->vstart =3D 0;                                        \
++    /* set tail elements to 1s */                           \
++    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);\
  }
 =20
- /*
-@@ -438,6 +468,9 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     uint32_t nf =3D vext_nf(desc);
-     uint32_t vm =3D vext_vm(desc);
-     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
-+    uint32_t esz =3D 1 << log2_esz;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
-=20
-     /* load bytes from guest memory */
-     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
-@@ -453,6 +486,18 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-         }
-     }
-     env->vstart =3D 0;
-+    /* set tail elements to 1s */
-+    for (k =3D 0; k < nf; ++k) {
-+        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-+                          (k * max_elems + max_elems) * esz);
-+    }
-+    if (nf * max_elems % total_elems !=3D 0) {
-+        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
-+        uint32_t registers_used =3D
-+            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-+        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-+                          registers_used * vlenb);
-+    }
- }
-=20
- #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
-@@ -520,6 +565,9 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t nf =3D vext_nf(desc);
-     uint32_t vm =3D vext_vm(desc);
-     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
-+    uint32_t esz =3D 1 << log2_esz;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
-     target_ulong addr, offset, remain;
-=20
-     /* probe every access*/
-@@ -575,6 +623,18 @@ ProbeSuccess:
-         }
-     }
-     env->vstart =3D 0;
-+    /* set tail elements to 1s */
-+    for (k =3D 0; k < nf; ++k) {
-+        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-+                          (k * max_elems + max_elems) * esz);
-+    }
-+    if (nf * max_elems % total_elems !=3D 0) {
-+        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
-+        uint32_t registers_used =3D
-+            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-+        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-+                          registers_used * vlenb);
-+    }
- }
-=20
- #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
+ GEN_VEXT_SHIFT_VX(vsll_vx_b, uint8_t, int8_t, H1, H1, DO_SLL, 0x7)
 --=20
 2.34.2
 
