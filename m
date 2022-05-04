@@ -1,82 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nmBhp-0000B5-CO
-	for mharc-qemu-riscv@gnu.org; Wed, 04 May 2022 05:54:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57410)
+	id 1nmBnY-0006td-Nf
+	for mharc-qemu-riscv@gnu.org; Wed, 04 May 2022 05:59:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59146)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nmBhm-00008Y-M6
- for qemu-riscv@nongnu.org; Wed, 04 May 2022 05:53:59 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930]:35592)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nmBnP-0006qi-0Y; Wed, 04 May 2022 05:59:50 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:41662)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nmBhk-0004P8-KA
- for qemu-riscv@nongnu.org; Wed, 04 May 2022 05:53:58 -0400
-Received: by mail-ua1-x930.google.com with SMTP id x11so324217uao.2
- for <qemu-riscv@nongnu.org>; Wed, 04 May 2022 02:53:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nmBnN-0005i8-7k; Wed, 04 May 2022 05:59:46 -0400
+Received: by mail-il1-x12e.google.com with SMTP id z12so554933ilp.8;
+ Wed, 04 May 2022 02:59:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5UoUIVlpLpU7BDc9tti8/maQbpzOCC6LFBU1GDpGFhU=;
- b=iK7hWx4th84nPvQMomeSyfzG7ZIc+cmlOurmCOX1zOSiyoNAqMwBIRLprbVrQ5Ya4B
- T0IBXZBHmWVKkpcUrVogLK5hxEReF7IIYaSaHHrCYrDL35XTGCss6eNovlBZqE3eU1aL
- vEFEvN4hLzjMsykbesJ/rW1HyfokJ+fAniwlRnLRkREO8GiJqackpq81kBZrXYFA3JEk
- +st6ZDH+QsSqquECwfoYZRwL1hRHlKqiZimWzFX3/bdBBvoqQ/TfuEo8XbPgNXItdpKP
- XOCkBjIvpXWtv3qzk5tWPVq6jdRT3BViQZZ+JsCLQQCgMU7IMHZqrcfbeH7qoo47GAPS
- z46g==
+ :cc; bh=L775xIhyEtGdvtyJxtd6jZGnN+beuZ3L+Ykku/6ZhS4=;
+ b=b/6Cj/PWFcaHy/mGqMgq6/NWgD11mhEZcMTFqYs/wsCYdx7VGjdoqRFbhzo0ocrioq
+ vfR5ohKD5nvoL7lx5B2vlRpc7VgLQIJggUXm818fMzE46G1wLMegFVHfpUEb15WXsVhH
+ WcGFF9RyqFG9CeVbJrZppsBGecsYZQFSWB0xa0vt/+ZVL/c1BCnBZLqa5wbvX8yWtYDq
+ p/DNTsvVabY5t524gJ2khbr60P5q7h8HNQOwqxrfGIchm1Q49Uuk1qMnNRk9TrY6Kirw
+ KGTc0gXgGf03zpBhnkYUhsrYKmAc8/99O9rzORJRiLkx7Hes4/vN/5hZSjyau9JLnv3b
+ VYxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5UoUIVlpLpU7BDc9tti8/maQbpzOCC6LFBU1GDpGFhU=;
- b=dIZljQLryclvqnfZ3ATeMCc0HFIpbJMSAZ2sEGC5kOLkmh/DoeHlraube8D3EB6jK4
- tXsAss2TnMJtwR/FFP1hdXt2+h4TNKkq/Ezwo4vKX7BnrQBpYhMJvMEyBsrLxVFXxRq/
- xaFIJ0/WsRqxeIYRuLG5aflM3Qql/viejPqu+LOmg3ySIoRWJuqQ1FwLI0G8iRcmhDMa
- EDvCzCwqg5hs7WNlaRaqt+/iBmBlETK2kWyskr82CF/BB6qUELtK2i64XBAwbuXChjWH
- c7XvRbdEFI6hxUJoLW0pyopGVAlCynyZtpJyWcddYUnAGUV3Q14wiwqOGDZMoaryNB3k
- tjjw==
-X-Gm-Message-State: AOAM532xiUj/6h9EWtw5Lm6bcb5YB+kWHY7C3ECNo6wvSoJVdONQoVdu
- zE2O8lms3FM4zodKxsFT9QCmn+2VtaAm0MhK
-X-Google-Smtp-Source: ABdhPJzr+Aod2KylNZd73wHCrQnTKs2MpYEzV7sYRUd4zeFPzA2eVPDkO+8ZZEy3xMRYOamJPUjlww==
-X-Received: by 2002:a9f:3189:0:b0:35c:c458:ee11 with SMTP id
- v9-20020a9f3189000000b0035cc458ee11mr5899828uad.31.1651658033701; 
- Wed, 04 May 2022 02:53:53 -0700 (PDT)
-Received: from mail-vk1-f182.google.com (mail-vk1-f182.google.com.
- [209.85.221.182]) by smtp.gmail.com with ESMTPSA id
- w6-20020ab067c6000000b0036280b488c7sm4140861uar.16.2022.05.04.02.53.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 May 2022 02:53:52 -0700 (PDT)
-Received: by mail-vk1-f182.google.com with SMTP id o132so346911vko.11;
- Wed, 04 May 2022 02:53:52 -0700 (PDT)
-X-Received: by 2002:a1f:a3d7:0:b0:349:6b56:a90 with SMTP id
- m206-20020a1fa3d7000000b003496b560a90mr6764668vke.12.1651658031779; Wed, 04
- May 2022 02:53:51 -0700 (PDT)
+ bh=L775xIhyEtGdvtyJxtd6jZGnN+beuZ3L+Ykku/6ZhS4=;
+ b=dk33MQOet2q47Kv07+aak0oZb9Kmc+dVWFYWUhHdNvTGV/32cnn9oiOlgSs5BP7DYm
+ GUM9X12dPfLlbbMYmQ9EifVKEsBSPvyo2abr6DZXJs2pgvdGc2Wu0loOPl+83V32DIHe
+ bGvG2Lc2fCCZre8dBLmS+ZZpli+gl1y4cfG4G4TVyLhncLHFzzoVnCQChZIiWMpSyxLS
+ szape+dSqUQTQy4MLKYGUzwVX7CMQ2eJrQz+vUbMRUP0worj8PsCA3fkrxshtAGbabSQ
+ vdvbS7ZaFh4CId1yzmk9NJBKLmWZzXoCtmrDEMH7p5ikUm/UX4pocRPvVz0M4dlx3WEN
+ c7rg==
+X-Gm-Message-State: AOAM531DGSjcQT+Plr8kV4doHE2t8+FoZefbOa85jfTJ74c5WaolqMVC
+ FX9cBgSpkH2d4sXxtSS0aZ/sajt6SujrqmEQjU8=
+X-Google-Smtp-Source: ABdhPJxYE/lnRurGiC+eDeF/dwDe+W2neayf4gxOIOtQ8BwVCQNsaC1/Jh0oDWdIBWUwzFvBVGY7P0HfbBsYA01jfac=
+X-Received: by 2002:a92:6012:0:b0:2bd:fb5f:d627 with SMTP id
+ u18-20020a926012000000b002bdfb5fd627mr8238053ilb.86.1651658383466; Wed, 04
+ May 2022 02:59:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220429153431.308829-1-apatel@ventanamicro.com>
- <20220429153431.308829-3-apatel@ventanamicro.com>
-In-Reply-To: <20220429153431.308829-3-apatel@ventanamicro.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Wed, 4 May 2022 17:53:41 +0800
-X-Gmail-Original-Message-ID: <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
-Message-ID: <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
-Subject: Re: [PATCH 2/3] target/riscv: Add dummy mcountinhibit CSR for priv
- spec v1.11 or higher
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
+ <20220429153431.308829-4-apatel@ventanamicro.com>
+ <CANzO1D1M-wH-r-T58E9qJ7X5MTruiAXP87UdYikWanrXgswuJA@mail.gmail.com>
+ <CAAhSdy27e84WXJ8fKjzN9RxRoPvz5gmwUN3na2cMFGuJ5TpjAg@mail.gmail.com>
+In-Reply-To: <CAAhSdy27e84WXJ8fKjzN9RxRoPvz5gmwUN3na2cMFGuJ5TpjAg@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 4 May 2022 19:59:17 +1000
+Message-ID: <CAKmqyKOu+aaMwghrbpf7U_cK14N+AV0tkC=h2V1Mpd+7X1H16Q@mail.gmail.com>
+Subject: Re: [PATCH 3/3] target/riscv: Consider priv spec version when
+ generating ISA string
+To: Anup Patel <anup@brainfault.org>
+Cc: Frank Chang <frank.chang@sifive.com>, Anup Patel <apatel@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>
-Content-Type: multipart/alternative; boundary="000000000000465b2205de2c9ae9"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=frank.chang@sifive.com; helo=mail-ua1-x930.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,143 +79,123 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2022 09:54:00 -0000
+X-List-Received-Date: Wed, 04 May 2022 09:59:50 -0000
 
---000000000000465b2205de2c9ae9
-Content-Type: text/plain; charset="UTF-8"
+On Sat, Apr 30, 2022 at 2:31 PM Anup Patel <anup@brainfault.org> wrote:
+>
+> On Sat, Apr 30, 2022 at 8:39 AM Frank Chang <frank.chang@sifive.com> wrote:
+> >
+> > Hi Anup,
+> >
+> > If we want to limit the generated ISA string to/after a specific privilege spec version.
+> > Shouldn't we also check the privilege spec version when these extensions are enabled?
+> > Otherwise, it's possible that one extension is enabled,
+> > but the privilege spec version is smaller than the one in which the extension is supported.
+> > (This is possible if user specifies the privileged spec version through the command line.)
+> > The ISA string therefore won't include the enabled extension.
+>
+> This patch is only a temporary fix for the sifive_u machine where I am
+> seeing some
+> of these new extensions available in ISA string.
+>
+> We need a separate series to have the priv spec version influence
+> individual extension
+> enabling/disabling.
 
-Hi Anup,
+I agree with Frank, I think it makes more sense to just never enable
+the extension instead of not telling the guest it's enabled.
 
-I found that Atish has already submitted a patch to implement the
-mcountinhibit CSR:
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg879349.html
+Alistair
 
-Regards,
-Frank Chang
-
-On Fri, Apr 29, 2022 at 11:44 PM Anup Patel <apatel@ventanamicro.com> wrote:
-
-> The mcountinhibit CSR is mandatory for priv spec v1.11 or higher. For
-> implementation that don't want to implement can simply have a dummy
-> mcountinhibit which always zero.
 >
-> Fixes: a4b2fa433125 ("target/riscv: Introduce privilege version field in
-> the CSR ops.")
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> ---
->  target/riscv/cpu_bits.h | 3 +++
->  target/riscv/csr.c      | 2 ++
->  2 files changed, 5 insertions(+)
+> Regards,
+> Anup
 >
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 4d04b20d06..4a55c6a709 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -159,6 +159,9 @@
->  #define CSR_MTVEC           0x305
->  #define CSR_MCOUNTEREN      0x306
+> >
+> > Regards,
+> > Frank Chang
+> >
+> >
+> > On Fri, Apr 29, 2022 at 11:49 PM Anup Patel <apatel@ventanamicro.com> wrote:
+> >>
+> >> Most of the multi-letter extensions (such as Svpbmt, Svnapot, Svinval,
+> >> etc) are only available after Priv spec v1.12 so ISA string generation
+> >> should check the minimum required priv spec version for all extensions.
+> >>
+> >> Fixes: a775398be2e ("target/riscv: Add isa extenstion strings to the
+> >> device tree")
+> >> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> >> ---
+> >>  target/riscv/cpu.c | 36 +++++++++++++++++++-----------------
+> >>  1 file changed, 19 insertions(+), 17 deletions(-)
+> >>
+> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> >> index 02ee7d45d8..d8c88b96bc 100644
+> >> --- a/target/riscv/cpu.c
+> >> +++ b/target/riscv/cpu.c
+> >> @@ -44,6 +44,7 @@ static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+> >>  struct isa_ext_data {
+> >>      const char *name;
+> >>      bool enabled;
+> >> +    uint32_t min_priv_ver;
+> >>  };
+> >>
+> >>  const char * const riscv_int_regnames[] = {
+> >> @@ -974,7 +975,7 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
+> >>      device_class_set_props(dc, riscv_cpu_properties);
+> >>  }
+> >>
+> >> -#define ISA_EDATA_ENTRY(name, prop) {#name, cpu->cfg.prop}
+> >> +#define ISA_EDATA_ENTRY(name, prop, priv) {#name, cpu->cfg.prop, priv}
+> >>
+> >>  static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> >>  {
+> >> @@ -1000,25 +1001,26 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> >>       *    extensions by an underscore.
+> >>       */
+> >>      struct isa_ext_data isa_edata_arr[] = {
+> >> -        ISA_EDATA_ENTRY(zfh, ext_zfh),
+> >> -        ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+> >> -        ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> >> -        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
+> >> -        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
+> >> -        ISA_EDATA_ENTRY(zdinx, ext_zdinx),
+> >> -        ISA_EDATA_ENTRY(zba, ext_zba),
+> >> -        ISA_EDATA_ENTRY(zbb, ext_zbb),
+> >> -        ISA_EDATA_ENTRY(zbc, ext_zbc),
+> >> -        ISA_EDATA_ENTRY(zbs, ext_zbs),
+> >> -        ISA_EDATA_ENTRY(zve32f, ext_zve32f),
+> >> -        ISA_EDATA_ENTRY(zve64f, ext_zve64f),
+> >> -        ISA_EDATA_ENTRY(svinval, ext_svinval),
+> >> -        ISA_EDATA_ENTRY(svnapot, ext_svnapot),
+> >> -        ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> >> +        ISA_EDATA_ENTRY(zfh, ext_zfh, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zfhmin, ext_zfhmin, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zfinx, ext_zfinx, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zhinx, ext_zhinx, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zdinx, ext_zdinx, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zba, ext_zba, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zbb, ext_zbb, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zbc, ext_zbc, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zbs, ext_zbs, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zve32f, ext_zve32f, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(zve64f, ext_zve64f, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(svinval, ext_svinval, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(svnapot, ext_svnapot, PRIV_VERSION_1_12_0),
+> >> +        ISA_EDATA_ENTRY(svpbmt, ext_svpbmt, PRIV_VERSION_1_12_0),
+> >>      };
+> >>
+> >>      for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
+> >> -        if (isa_edata_arr[i].enabled) {
+> >> +        if (isa_edata_arr[i].enabled &&
+> >> +            cpu->env.priv_ver >= isa_edata_arr[i].min_priv_ver) {
+> >>              new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
+> >>              g_free(old);
+> >>              old = new;
+> >> --
+> >> 2.34.1
+> >>
+> >>
 >
-> +/* Machine Counter Setup */
-> +#define CSR_MCOUNTINHIBIT   0x320
-> +
->  /* 32-bit only */
->  #define CSR_MSTATUSH        0x310
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 2bf0a97196..e144ce7135 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3391,6 +3391,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MIE]         = { "mie",        any,   NULL,    NULL,    rmw_mie
->          },
->      [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,
->  write_mtvec       },
->      [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,
-> write_mcounteren  },
-> +    [CSR_MCOUNTINHIBIT] = { "mcountinhibit", any, read_zero, write_ignore,
-> +                                             .min_priv_ver =
-> PRIV_VERSION_1_11_0 },
->
->      [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,
-> write_mstatush    },
->
-> --
-> 2.34.1
->
->
->
-
---000000000000465b2205de2c9ae9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi Anup,<div><br></div><div>I found that Atish has already=
- submitted a patch to implement the mcountinhibit CSR:</div><div><a href=3D=
-"https://www.mail-archive.com/qemu-devel@nongnu.org/msg879349.html">https:/=
-/www.mail-archive.com/qemu-devel@nongnu.org/msg879349.html</a><br></div><di=
-v><br></div><div>Regards,</div><div>Frank Chang</div></div><br><div class=
-=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 29, 2022=
- at 11:44 PM Anup Patel &lt;<a href=3D"mailto:apatel@ventanamicro.com">apat=
-el@ventanamicro.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204)=
-;padding-left:1ex">The mcountinhibit CSR is mandatory for priv spec v1.11 o=
-r higher. For<br>
-implementation that don&#39;t want to implement can simply have a dummy<br>
-mcountinhibit which always zero.<br>
-<br>
-Fixes: a4b2fa433125 (&quot;target/riscv: Introduce privilege version field =
-in<br>
-the CSR ops.&quot;)<br>
-Signed-off-by: Anup Patel &lt;<a href=3D"mailto:apatel@ventanamicro.com" ta=
-rget=3D"_blank">apatel@ventanamicro.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/cpu_bits.h | 3 +++<br>
-=C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 | 2 ++<br>
-=C2=A02 files changed, 5 insertions(+)<br>
-<br>
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h<br>
-index 4d04b20d06..4a55c6a709 100644<br>
---- a/target/riscv/cpu_bits.h<br>
-+++ b/target/riscv/cpu_bits.h<br>
-@@ -159,6 +159,9 @@<br>
-=C2=A0#define CSR_MTVEC=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x305<br>
-=C2=A0#define CSR_MCOUNTEREN=C2=A0 =C2=A0 =C2=A0 0x306<br>
-<br>
-+/* Machine Counter Setup */<br>
-+#define CSR_MCOUNTINHIBIT=C2=A0 =C2=A00x320<br>
-+<br>
-=C2=A0/* 32-bit only */<br>
-=C2=A0#define CSR_MSTATUSH=C2=A0 =C2=A0 =C2=A0 =C2=A0 0x310<br>
-<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 2bf0a97196..e144ce7135 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -3391,6 +3391,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<br=
->
-=C2=A0 =C2=A0 =C2=A0[CSR_MIE]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;=
-mie&quot;,=C2=A0 =C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0NULL,=C2=A0 =C2=A0 N=
-ULL,=C2=A0 =C2=A0 rmw_mie=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MTVEC]=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;mtvec=
-&quot;,=C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_mtvec,=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0write_mtvec=C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MCOUNTEREN]=C2=A0 =3D { &quot;mcounteren&quot;, an=
-y,=C2=A0 =C2=A0read_mcounteren,=C2=A0 write_mcounteren=C2=A0 },<br>
-+=C2=A0 =C2=A0 [CSR_MCOUNTINHIBIT] =3D { &quot;mcountinhibit&quot;, any, re=
-ad_zero, write_ignore,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_11_0 },<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MSTATUSH]=C2=A0 =C2=A0 =3D { &quot;mstatush&quot;,=
-=C2=A0 =C2=A0any32, read_mstatush,=C2=A0 =C2=A0 write_mstatush=C2=A0 =C2=A0=
- },<br>
-<br>
--- <br>
-2.34.1<br>
-<br>
-<br>
-</blockquote></div>
-
---000000000000465b2205de2c9ae9--
 
