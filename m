@@ -1,64 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nmXvI-0001Mw-OT
-	for mharc-qemu-riscv@gnu.org; Thu, 05 May 2022 05:37:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43856)
+	id 1nmY96-0002mr-4h
+	for mharc-qemu-riscv@gnu.org; Thu, 05 May 2022 05:51:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47458)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nmXvF-0001Da-HZ; Thu, 05 May 2022 05:37:21 -0400
-Received: from mail-io1-xd34.google.com ([2607:f8b0:4864:20::d34]:33398)
+ id 1nmY92-0002kP-0Z; Thu, 05 May 2022 05:51:36 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:46599)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nmXvC-0001Th-Ux; Thu, 05 May 2022 05:37:21 -0400
-Received: by mail-io1-xd34.google.com with SMTP id i20so4165944ion.0;
- Thu, 05 May 2022 02:37:18 -0700 (PDT)
+ id 1nmY90-0005ds-HK; Thu, 05 May 2022 05:51:35 -0400
+Received: by mail-il1-x134.google.com with SMTP id f5so2488977ilj.13;
+ Thu, 05 May 2022 02:51:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=tvbGsMRIYBDsWoMkDclb3oF2OAh687Xz82crV3CPXQ8=;
- b=LgivHzTqEq9w+Z4FPMcInLR1w54LaNfM3RUKyrx0JJ8ha/xzKIF/DL4qYo9z/q+EAP
- tImnx+8sB8cQdimgALBGrjebK498faWSTWl/CRPpwH1zrLw77AAY5QIHh3E1WYlO8KaK
- sYY8HLuo5YMVov5RnlWYyo2Pik7GwbRS6hYniJ/Uwb+U/G7MTTBFD9y+rTxSFWjgZ21a
- B9rCWYDNd4NduW78yc6n812ekb/XRLvizRgTCiQO62tFJnWymMuZWKx+N7iZ9xww0CJV
- esPC9tqPlczzF7czKbAmaeSa6LduhHpWZa2741fLQnASXeEh/2Wu0hPPuO7Cv8qdOW1A
- Ukhw==
+ :cc; bh=Hi4fXnNdc64r9xFqzZ0Vb3zTAJaCbAOQ4TcQGgHhy3o=;
+ b=Wdw4DVDTvJogq9pImYXW8vjOJug7oSEn/LNmQEkeduvz9ZXNprn/QkD9f4RZDrqVwj
+ 4QagEGa+Pknhua0mtXjwq2dlzBRlZ+nmQl4EqyDpvMUSK9a71Y8Zp6plyIJHPSC2ZsvA
+ aF/Qr7Nr3XGe3o7Yt3CHtMw9mxJCVc1fB4a9iWFjh5Su8PWmJvcnKmd3vDoUW4hE5lw2
+ Z82BT+YGnHY+sATN5rEm66nJHzvbrZEWfJ/TgZC1fAyQcV2tuIYbHYDu2GA7dNJJ1NNJ
+ O51lIrhaCS/Dlin2pzsxn8GMen8SgfYug7cmvGITVqKBcOcwuChP6Ar2+afE8tnf6Bs6
+ HawQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=tvbGsMRIYBDsWoMkDclb3oF2OAh687Xz82crV3CPXQ8=;
- b=OD7RiNacBdODJ5YIOLBh1o4G4aFepuDDwATjEoTmWxJldxUbI0tUi/IsgnvzrLAg2L
- xxxjE79uQppRGLdlzw6DbV9h8a8jMEKS8Gf9ykGo9RTnX/dmiFwf8H2f/IpdyjArghNi
- SflXQxcaqCyZgSXiXvrJ9VVkP0qVhYIldJn5Hqt5LSGi+a3DbVKkL0npNP7uqSyILr9N
- QLyqLuS7piSh++reF6sbhaVfuvDm/6tlFcW3tU60QdZ6hPRbf1Rsv5GKPwYD23ngcjK3
- HOgy1DfWA9hA81E04FOEhpGKLTm+gE1YAGRxI8aPt9qfzWT+JkR35HReAalIUk4I48VU
- lscw==
-X-Gm-Message-State: AOAM5314aLNyTZupc+rPFwrF26zzgDz4sIgbBxuugfcUjuSuPshyUlL9
- hVzQisC6BPPLbhAlH9XeblCymhhoG6LsU7kcank=
-X-Google-Smtp-Source: ABdhPJxefbhEsXPKcJDir35SRnFuOp9nDh9kaLxvxLZTCiuabCUC3beUjioDvEucYS+kg63QnKM2toLx0dfD3uKgH/Q=
-X-Received: by 2002:a05:6602:2c07:b0:657:8347:d7c0 with SMTP id
- w7-20020a0566022c0700b006578347d7c0mr10135788iov.93.1651743437368; Thu, 05
- May 2022 02:37:17 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=Hi4fXnNdc64r9xFqzZ0Vb3zTAJaCbAOQ4TcQGgHhy3o=;
+ b=5Jl7+Y+h7Qtreg2ysw2CUoB9rbraW+7MWhCLuKRURIivhzfbillq+B1k0mla64YmkF
+ Y+Q8L9GZBhLSVtQwAZGdkkZ+Sg2XJbjSVdflpRxLaWqXccGCfnJy16ZzVeggqLdOiNzh
+ OA3vrN7Uqg5hgm5AW5MOfTBppmo2CKu9kaWdOW/he6IuDvQku9/jVpOzhLwz1DaDAn1H
+ dsX4qIhblp3FlwQfECcKqCFaYJYnzwTOgmWhj4VFqBB2/MDkgsLGLs4KO22Xh/C/rMEi
+ YMwZMWHk98O1Q+AeB0dugjiJQvjHfXtfh/vPBexfgaVzUQ0qIl32X7wwOeyHFBWQoqlb
+ 32dg==
+X-Gm-Message-State: AOAM533v0DlgKzOutS6Il25ZNOHPtwBSHl94qWNqAy2Rhvtrs+jgOGMp
+ 9YitXgVhwBsJ7AeAlze7VCRRLE97UCBJJIA0gZY=
+X-Google-Smtp-Source: ABdhPJze5DgTo9/XPR3Z/ww22bD+b8S+iQreZu2oVwREnpmXW60J+pDvLqW6qga4zLlbguTsu8ghspFQUYBG+F0EJbU=
+X-Received: by 2002:a05:6e02:10c1:b0:2cc:14ab:ceb7 with SMTP id
+ s1-20020a056e0210c100b002cc14abceb7mr10201512ilj.55.1651744293072; Thu, 05
+ May 2022 02:51:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220412021009.582424-1-atishp@rivosinc.com>
- <Yl7oiF7kUrIQ0qk5@redhat.com>
- <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
- <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
-In-Reply-To: <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
+References: <20220429033409.258707-1-apatel@ventanamicro.com>
+ <20220429033409.258707-3-apatel@ventanamicro.com>
+In-Reply-To: <20220429033409.258707-3-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 5 May 2022 19:36:51 +1000
-Message-ID: <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: Atish Patra <atishp@atishpatra.org>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Atish Patra <atishp@rivosinc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+Date: Thu, 5 May 2022 19:51:07 +1000
+Message-ID: <CAKmqyKMFVanzOMKPuo_i7hWZEJOmReBpp+wgqv3e2ExV2Jb-7g@mail.gmail.com>
+Subject: Re: [PATCH 2/4] target/riscv: Fix hstatus.GVA bit setting for traps
+ taken from HS-mode
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Atish Patra <atishp@atishpatra.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d34;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd34.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,294 +77,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2022 09:37:21 -0000
+X-List-Received-Date: Thu, 05 May 2022 09:51:36 -0000
 
-On Tue, May 3, 2022 at 5:57 PM Atish Patra <atishp@atishpatra.org> wrote:
+On Fri, Apr 29, 2022 at 1:38 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> On Tue, Apr 19, 2022 at 5:26 PM Atish Patra <atishp@atishpatra.org> wrote=
-:
-> >
-> > On Tue, Apr 19, 2022 at 9:51 AM Daniel P. Berrang=C3=A9 <berrange@redha=
-t.com> wrote:
-> > >
-> > > On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
-> > > >
-> > > > The RISC-V virt machine has helped RISC-V software eco system to ev=
-olve at a
-> > > > rapid pace even in absense of the real hardware. It is definitely c=
-ommendable.
-> > > > However, the number of devices & commandline options keeps growing =
-as a result
-> > > > of that as well. That adds flexibility but will also become bit dif=
-ficult
-> > > > to manage in the future as more extension support will be added. As=
- it is the
-> > > > most commonly used qemu machine, it needs to support all kinds of d=
-evice and
-> > > > interrupts as well. Moreover, virt machine has limitations on the m=
-aximum
-> > > > number of harts it can support because of all the MMIO devices it h=
-as to support.
-> > > >
-> > > > The RISC-V IMSIC specification allows to develop machines completel=
-y relying
-> > > > on MSI and don't care about the wired interrupts at all. It just re=
-quires
-> > > > all the devices to be present behind a PCI bus or present themselve=
-s as platform
-> > > > MSI device. The former is a more common scenario in x86 world where=
- most
-> > > > of the devices are behind PCI bus. As there is very limited MMIO de=
-vice
-> > > > support, it can also scale to very large number of harts.
-> > > >
-> > > > That's why, this patch series introduces a minimalistic yet very ex=
-tensible
-> > > > forward looking machine called as "RISC-V Mini Computer" or "minic"=
-. The
-> > > > idea is to build PC or server like systems with this machine. The m=
-achine can
-> > > > work with or without virtio framework. The current implementation o=
-nly
-> > > > supports RV64. I am not sure if building a RV32 machine would be of=
- interest
-> > > > for such machines. The only mmio device it requires is clint to emu=
-late
-> > > > the mtimecmp.
-> > >
+> Currently, QEMU does not set hstatus.GVA bit for traps taken from
+> HS-mode into HS-mode which breaks the Xvisor nested MMU test suite
+> on QEMU. This was working previously.
 >
-> Any other thoughts ?
-
-I don't *love* this idea. I think the virt machine is useful, but I'm
-not convinced we need a second one.
-
-This feels a little bit more like a "none" machine, as it contains
-just the bare minimum to work.
-
+> This patch updates riscv_cpu_do_interrupt() to fix the above issue.
 >
-> > > I would ask what you see as the long term future usage for 'virt' vs
-> > > 'minic' machine types ? Would you expect all existing users of 'virt'
-> > > to ultimately switch to 'minic', or are there distinct non-overlappin=
-g
-> > > use cases for 'virt' vs 'minic' such that both end up widely used ?
-> > >
-> >
-> > Nope. I don't expect existing 'virt' users to switch to 'minic' as
-> > they aim to cater to different users.
-> >
-> > Here are the major differences
-> > 1. virt machine supports MMIO devices & wired interrupts. Minic doesn't
+> Fixes: 86d0c457396b ("target/riscv: Fixup setting GVA")
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> ---
+>  target/riscv/cpu_helper.c | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e1aa4f2097..d83579accf 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1434,7 +1434,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                  /* Trap into HS mode */
+>                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
+>                  htval = env->guest_phys_fault_addr;
+> -                write_gva = false;
 
-This seems like the main difference
+This doesn't seem right.
 
-> > 2. virt machine doesn't support the MSI only option yet (can be added
-> > though[1]). Minic does.
+"Field GVA (Guest Virtual Address) is written by the implementation
+whenever a trap is taken
+into HS-mode. For any trap (breakpoint, address misaligned, access
+fault, page fault, or guest-
+page fault) that writes a guest virtual address to stval, GVA is set
+to 1. For any other trap into
+HS-mode, GVA is set to 0"
 
-This could be fixed
+So if we are trapping from HS to HS, the address in stval should not
+be a guest virtual address, at least in general.
 
-> > 3. Number of cpu supported by virt machine are limited because of the
-> > MMIO devices. Minic can scale to very
-> > large numbers of cpu.
-
-Similar to 1
-
-> > 4. 'Minic' only supports PCI based MSI capable devices. Thus, MSI is a
-> > mandatory requirement for 'minic' while
-> > it is optional for 'virt'.
-
-I'm not fully convinced we need this, but it also doesn't seem to cost
-us a lot in terms of maintenance. It would be beneficial if we could
-share a bit more of the code. Can we share the socket creation code as
-well?
-
-I don't like the name minic though. What about something like
-`virt-hpc`, `virt-pcie-minimal` or something like that? That way we
-indicate it's still a virt board
+We probably aren't correctly setting GVA if MPRV is set though, as
+then the page faults should be guest addresses. That's probably the
+issue you are seeing.
 
 Alistair
 
-> >
-> > 'Minic' aims towards the users who want to create virtual machines
-> > that are MSI based and don't care about
-> > a million options that virt machines provide.  Virt machine is more
-> > complex so that it can be flexible in terms of
-> > what it supports. Minic is a minimalistic machine which doesn't need
-> > to be expanded a lot in the future given that
-> > most of the devices can be behind PCI.
-> >
-> > [1] https://github.com/atishp04/qemu/tree/virt_imsic_only
-> >
-> > > Is 'minic' intended to be able to mimic real physical hardware at all=
-,
-> > > or is it still intended as a purely virtual machine, like a 'virt-ng'=
- ?
-> > >
-> >
-> > Any future hardware that relies only on PCI-MSI based devices, they
-> > can be created on top of minic.
-> > At that point, minic will provide a useful abstract for all those
-> > machines as well. minic doesn't need a virtio framework.
-> > Thus, it can closely emulate such hardware as well.
-> >
-> > > Essentially 'virt' was positioned as the standard machine to use if
-> > > you want to run a virtual machine, without any particular match to
-> > > physical hardware. It feels like 'minic' is creating a second machine
-> > > type to fill the same purpose, so how do users decide which to use ?
-> > >
-> >
-> > I envision 'minic' to be a standard machine for a specific set of user
-> > requirements (x86 style PCI based
-> > machines). Virt machine will continue to be a standard machine for
-> > more generic use cases with MMIO devices.
-> >
-> > > > "Naming is hard". I am not too attached with the name "minic".
-> > > > I just chose least bad one out of the few on my mind :). I am defin=
-itely
-> > > > open to any other name as well.
-> > > >
-> > > > The other alternative to provide MSI only option to aia in the
-> > > > existing virt machine to build MSI only machines. This is certainly=
- doable
-> > > > and here is the patch that supports that kind of setup.
-> > > >
-> > > > https://github.com/atishp04/qemu/tree/virt_imsic_only
-> > > >
-> > > > However, it even complicates the virt machine even further with add=
-itional
-> > > > command line option, branches in the code. I believe virt machine w=
-ill become
-> > > > very complex if we continue this path. I am interested to learn wha=
-t everyone
-> > > > else think.
-> > > >
-> > > > It is needless to say that the current version of minic machine
-> > > > is inspired from virt machine and tries to reuse as much as code po=
-ssible.
-> > > > The first patch in this series adds MSI support for serial-pci devi=
-ce so
-> > > > console can work on such a machine. The 2nd patch moves some common=
- functions
-> > > > between minic and the virt machine to a helper file. The PATCH3 act=
-ually
-> > > > implements the new minic machine.
-> > > >
-> > > > I have not added the fw-cfg/flash support. We probably should add t=
-hose
-> > > > but I just wanted to start small and get the feedback first.
-> > > > This is a work in progress and have few more TODO items before beco=
-ming the
-> > > > new world order :)
-> > > >
-> > > > 1. OpenSBI doesn't have PCI support. Thus, no console support for O=
-penSBI
-> > > > for now.
-> > > > 2. The ns16550 driver in OpenSBI also need to support MSI/MSI-X.
-> > > > 3. Add MSI-X support for serial-pci device.
-> > > >
-> > > > This series can boot Linux distros with the minic machine with or w=
-ithout virtio
-> > > > devices with out-of-tree Linux kernel patches[1]. Here is an exampl=
-e commandline
-> > > >
-> > > > Without virtio devices (nvme, serial-pci & e1000e):
-> > > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> > > > /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M mini=
-c -m 1G -smp 4 -nographic -nodefaults \
-> > > > -display none -bios /scratch/workspace/opensbi/build/platform/gener=
-ic/firmware/fw_dynamic.elf \
-> > > > -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
-> > > > -chardev stdio,mux=3Don,signal=3Doff,id=3Dcharconsole0 \
-> > > > -mon chardev=3Dcharconsole0,mode=3Dreadline \
-> > > > -device pci-serial,msi=3Dtrue,chardev=3Dcharconsole0 \
-> > > > -drive id=3Ddisk3,file=3D/scratch/workspace/rootfs_images//fedora/F=
-edora-Developer-Rawhide-20211110.n.0-sda.raw,format=3Draw,if=3Dnone,id=3Ddr=
-ive-system-disk,cache=3Dnone,format=3Draw \
-> > > > -device nvme,serial=3Ddeadbeef,drive=3Ddisk3 \
-> > > > -netdev user,id=3Dusernet,hostfwd=3Dtcp::10000-:22 -device e1000e,n=
-etdev=3Dusernet,bus=3Dpcie.0 \
-> > > > -append 'root=3D/dev/nvme0n1p2 rw loglevel=3D8 memblock=3Ddebug con=
-sole=3DttyS0 earlycon' -d in_asm -D log.txt -s
-> > > >
-> > > > With virtio devices (virtio-scsi-pci, serial-pci & virtio-net-pci)
-> > > > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > > > /scratch/workspace/qemu/build/qemu-system-riscv64 -cpu rv64 -M mini=
-c -m 1G -smp 4 -nographic -nodefaults \
-> > > > -display none -bios /scratch/workspace/opensbi/build/platform/gener=
-ic/firmware/fw_dynamic.elf \
-> > > > -kernel /scratch/workspace/linux/arch/riscv/boot/Image \
-> > > > -chardev stdio,mux=3Don,signal=3Doff,id=3Dcharconsole0 \
-> > > > -mon chardev=3Dcharconsole0,mode=3Dreadline \
-> > > > -device pci-serial,msi=3Dtrue,chardev=3Dcharconsole0 \
-> > > > -drive file=3D/scratch/workspace/rootfs_images//fedora/Fedora-Devel=
-oper-Rawhide-20211110.n.0-sda.raw,format=3Draw,if=3Dnone,id=3Ddrive-system-=
-disk,cache=3Dnone \
-> > > > -device virtio-scsi-pci,id=3Dscsi0 -device scsi-hd,bus=3Dscsi0.0,dr=
-ive=3Ddrive-system-disk,id=3Dsystem-disk,bootindex=3D1 \
-> > > > -netdev user,id=3Dn1,hostfwd=3Dtcp::10000-:22 -device virtio-net-pc=
-i,netdev=3Dn1 \
-> > > > -append 'root=3D/dev/sda2 rw loglevel=3D8 memblock=3Ddebug console=
-=3DttyS0 earlycon'
-> > > >
-> > > > The objective of this series is to engage the community to solve th=
-is problem.
-> > > > Please suggest if you have another alternatve solution.
-> > > >
-> > > > [1] https://github.com/atishp04/linux/tree/msi_only_console
-> > > >
-> > > > Atish Patra (3):
-> > > > serial: Enable MSI capablity and option
-> > > > hw/riscv: virt: Move common functions to a separate helper file
-> > > > hw/riscv: Create a new qemu machine for RISC-V
-> > > >
-> > > > configs/devices/riscv64-softmmu/default.mak |   1 +
-> > > > hw/char/serial-pci.c                        |  36 +-
-> > > > hw/riscv/Kconfig                            |  11 +
-> > > > hw/riscv/machine_helper.c                   | 417 +++++++++++++++++=
-++
-> > > > hw/riscv/meson.build                        |   2 +
-> > > > hw/riscv/minic.c                            | 438 +++++++++++++++++=
-+++
-> > > > hw/riscv/virt.c                             | 403 ++---------------=
--
-> > > > include/hw/riscv/machine_helper.h           |  87 ++++
-> > > > include/hw/riscv/minic.h                    |  65 +++
-> > > > include/hw/riscv/virt.h                     |  13 -
-> > > > 10 files changed, 1090 insertions(+), 383 deletions(-)
-> > > > create mode 100644 hw/riscv/machine_helper.c
-> > > > create mode 100644 hw/riscv/minic.c
-> > > > create mode 100644 include/hw/riscv/machine_helper.h
-> > > > create mode 100644 include/hw/riscv/minic.h
-> > > >
-> > > > --
-> > > > 2.25.1
-> > > >
-> > > >
-> > >
-> > > With regards,
-> > > Daniel
-> > > --
-> > > |: https://berrange.com      -o-    https://www.flickr.com/photos/dbe=
-rrange :|
-> > > |: https://libvirt.org         -o-            https://fstop138.berran=
-ge.com :|
-> > > |: https://entangle-photo.org    -o-    https://www.instagram.com/dbe=
-rrange :|
-> > >
-> > >
-> >
-> >
-> > --
-> > Regards,
-> > Atish
->
->
->
+>              }
+>              env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
+>          }
 > --
-> Regards,
-> Atish
+> 2.34.1
+>
 >
 
