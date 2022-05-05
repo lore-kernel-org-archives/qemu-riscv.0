@@ -1,69 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nmY96-0002mr-4h
-	for mharc-qemu-riscv@gnu.org; Thu, 05 May 2022 05:51:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47458)
+	id 1nmYLj-0006fE-Cv
+	for mharc-qemu-riscv@gnu.org; Thu, 05 May 2022 06:04:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49974)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nmY92-0002kP-0Z; Thu, 05 May 2022 05:51:36 -0400
-Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:46599)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nmY90-0005ds-HK; Thu, 05 May 2022 05:51:35 -0400
-Received: by mail-il1-x134.google.com with SMTP id f5so2488977ilj.13;
- Thu, 05 May 2022 02:51:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Hi4fXnNdc64r9xFqzZ0Vb3zTAJaCbAOQ4TcQGgHhy3o=;
- b=Wdw4DVDTvJogq9pImYXW8vjOJug7oSEn/LNmQEkeduvz9ZXNprn/QkD9f4RZDrqVwj
- 4QagEGa+Pknhua0mtXjwq2dlzBRlZ+nmQl4EqyDpvMUSK9a71Y8Zp6plyIJHPSC2ZsvA
- aF/Qr7Nr3XGe3o7Yt3CHtMw9mxJCVc1fB4a9iWFjh5Su8PWmJvcnKmd3vDoUW4hE5lw2
- Z82BT+YGnHY+sATN5rEm66nJHzvbrZEWfJ/TgZC1fAyQcV2tuIYbHYDu2GA7dNJJ1NNJ
- O51lIrhaCS/Dlin2pzsxn8GMen8SgfYug7cmvGITVqKBcOcwuChP6Ar2+afE8tnf6Bs6
- HawQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Hi4fXnNdc64r9xFqzZ0Vb3zTAJaCbAOQ4TcQGgHhy3o=;
- b=5Jl7+Y+h7Qtreg2ysw2CUoB9rbraW+7MWhCLuKRURIivhzfbillq+B1k0mla64YmkF
- Y+Q8L9GZBhLSVtQwAZGdkkZ+Sg2XJbjSVdflpRxLaWqXccGCfnJy16ZzVeggqLdOiNzh
- OA3vrN7Uqg5hgm5AW5MOfTBppmo2CKu9kaWdOW/he6IuDvQku9/jVpOzhLwz1DaDAn1H
- dsX4qIhblp3FlwQfECcKqCFaYJYnzwTOgmWhj4VFqBB2/MDkgsLGLs4KO22Xh/C/rMEi
- YMwZMWHk98O1Q+AeB0dugjiJQvjHfXtfh/vPBexfgaVzUQ0qIl32X7wwOeyHFBWQoqlb
- 32dg==
-X-Gm-Message-State: AOAM533v0DlgKzOutS6Il25ZNOHPtwBSHl94qWNqAy2Rhvtrs+jgOGMp
- 9YitXgVhwBsJ7AeAlze7VCRRLE97UCBJJIA0gZY=
-X-Google-Smtp-Source: ABdhPJze5DgTo9/XPR3Z/ww22bD+b8S+iQreZu2oVwREnpmXW60J+pDvLqW6qga4zLlbguTsu8ghspFQUYBG+F0EJbU=
-X-Received: by 2002:a05:6e02:10c1:b0:2cc:14ab:ceb7 with SMTP id
- s1-20020a056e0210c100b002cc14abceb7mr10201512ilj.55.1651744293072; Thu, 05
- May 2022 02:51:33 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220429033409.258707-1-apatel@ventanamicro.com>
- <20220429033409.258707-3-apatel@ventanamicro.com>
-In-Reply-To: <20220429033409.258707-3-apatel@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 5 May 2022 19:51:07 +1000
-Message-ID: <CAKmqyKMFVanzOMKPuo_i7hWZEJOmReBpp+wgqv3e2ExV2Jb-7g@mail.gmail.com>
-Subject: Re: [PATCH 2/4] target/riscv: Fix hstatus.GVA bit setting for traps
- taken from HS-mode
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1nmYLa-0006b4-C0
+ for qemu-riscv@nongnu.org; Thu, 05 May 2022 06:04:36 -0400
+Received: from us-smtp-delivery-74.mimecast.com ([170.10.129.74]:52770)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1nmYLU-00081K-Vz
+ for qemu-riscv@nongnu.org; Thu, 05 May 2022 06:04:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1651745065;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=E9FH101KTZZWIAvqn9LR0ITq56PtqC+GaTidZ4+S39Y=;
+ b=QkMAuLArUrSH+70EorGXwYgunh64xbXo32nI9QRApY/WF2gtCNuhrC9GuYW5tyIwiHasZ0
+ bBWFH7MJnrEpwjzKdWWSo5vtCO0nG3SkrErOGAmnoH6oBf1MIevKClEOh/5WJakL2Zi4R4
+ 6d+MDvhiuoRzrdE6o7MJdTb+DvKHG6s=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-55-CTCuYzOKPfemNrhJ68EZQg-1; Thu, 05 May 2022 06:04:19 -0400
+X-MC-Unique: CTCuYzOKPfemNrhJ68EZQg-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 14063801210;
+ Thu,  5 May 2022 10:04:19 +0000 (UTC)
+Received: from redhat.com (unknown [10.33.36.128])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 714E940CF8E7;
+ Thu,  5 May 2022 10:04:16 +0000 (UTC)
+Date: Thu, 5 May 2022 11:04:13 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Atish Patra <atishp@atishpatra.org>, Atish Patra <atishp@rivosinc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Atish Patra <atishp@atishpatra.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
+Message-ID: <YnOhHZGJphk30SmJ@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20220412021009.582424-1-atishp@rivosinc.com>
+ <Yl7oiF7kUrIQ0qk5@redhat.com>
+ <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
+ <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
+ <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
+User-Agent: Mutt/2.1.5 (2021-12-30)
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
+Received-SPF: pass client-ip=170.10.129.74; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-74.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -77,56 +81,103 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2022 09:51:36 -0000
+X-List-Received-Date: Thu, 05 May 2022 10:04:36 -0000
 
-On Fri, Apr 29, 2022 at 1:38 PM Anup Patel <apatel@ventanamicro.com> wrote:
->
-> Currently, QEMU does not set hstatus.GVA bit for traps taken from
-> HS-mode into HS-mode which breaks the Xvisor nested MMU test suite
-> on QEMU. This was working previously.
->
-> This patch updates riscv_cpu_do_interrupt() to fix the above issue.
->
-> Fixes: 86d0c457396b ("target/riscv: Fixup setting GVA")
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> ---
->  target/riscv/cpu_helper.c | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index e1aa4f2097..d83579accf 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1434,7 +1434,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                  /* Trap into HS mode */
->                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
->                  htval = env->guest_phys_fault_addr;
-> -                write_gva = false;
+On Thu, May 05, 2022 at 07:36:51PM +1000, Alistair Francis wrote:
+> On Tue, May 3, 2022 at 5:57 PM Atish Patra <atishp@atishpatra.org> wrote:
+> >
+> > On Tue, Apr 19, 2022 at 5:26 PM Atish Patra <atishp@atishpatra.org> wrote:
+> > >
+> > > On Tue, Apr 19, 2022 at 9:51 AM Daniel P. Berrangé <berrange@redhat.com> wrote:
+> > > >
+> > > > On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
+> > > > >
+> > > > > The RISC-V virt machine has helped RISC-V software eco system to evolve at a
+> > > > > rapid pace even in absense of the real hardware. It is definitely commendable.
+> > > > > However, the number of devices & commandline options keeps growing as a result
+> > > > > of that as well. That adds flexibility but will also become bit difficult
+> > > > > to manage in the future as more extension support will be added. As it is the
+> > > > > most commonly used qemu machine, it needs to support all kinds of device and
+> > > > > interrupts as well. Moreover, virt machine has limitations on the maximum
+> > > > > number of harts it can support because of all the MMIO devices it has to support.
+> > > > >
+> > > > > The RISC-V IMSIC specification allows to develop machines completely relying
+> > > > > on MSI and don't care about the wired interrupts at all. It just requires
+> > > > > all the devices to be present behind a PCI bus or present themselves as platform
+> > > > > MSI device. The former is a more common scenario in x86 world where most
+> > > > > of the devices are behind PCI bus. As there is very limited MMIO device
+> > > > > support, it can also scale to very large number of harts.
+> > > > >
+> > > > > That's why, this patch series introduces a minimalistic yet very extensible
+> > > > > forward looking machine called as "RISC-V Mini Computer" or "minic". The
+> > > > > idea is to build PC or server like systems with this machine. The machine can
+> > > > > work with or without virtio framework. The current implementation only
+> > > > > supports RV64. I am not sure if building a RV32 machine would be of interest
+> > > > > for such machines. The only mmio device it requires is clint to emulate
+> > > > > the mtimecmp.
+> > > >
+> >
+> > Any other thoughts ?
+> 
+> I don't *love* this idea. I think the virt machine is useful, but I'm
+> not convinced we need a second one.
+> 
+> This feels a little bit more like a "none" machine, as it contains
+> just the bare minimum to work.
+> 
+> >
+> > > > I would ask what you see as the long term future usage for 'virt' vs
+> > > > 'minic' machine types ? Would you expect all existing users of 'virt'
+> > > > to ultimately switch to 'minic', or are there distinct non-overlapping
+> > > > use cases for 'virt' vs 'minic' such that both end up widely used ?
+> > > >
+> > >
+> > > Nope. I don't expect existing 'virt' users to switch to 'minic' as
+> > > they aim to cater to different users.
+> > >
+> > > Here are the major differences
+> > > 1. virt machine supports MMIO devices & wired interrupts. Minic doesn't
+> 
+> This seems like the main difference
+> 
+> > > 2. virt machine doesn't support the MSI only option yet (can be added
+> > > though[1]). Minic does.
+> 
+> This could be fixed
+> 
+> > > 3. Number of cpu supported by virt machine are limited because of the
+> > > MMIO devices. Minic can scale to very
+> > > large numbers of cpu.
+> 
+> Similar to 1
+> 
+> > > 4. 'Minic' only supports PCI based MSI capable devices. Thus, MSI is a
+> > > mandatory requirement for 'minic' while
+> > > it is optional for 'virt'.
+> 
+> I'm not fully convinced we need this, but it also doesn't seem to cost
+> us a lot in terms of maintenance. It would be beneficial if we could
+> share a bit more of the code. Can we share the socket creation code as
+> well?
+> 
+> I don't like the name minic though. What about something like
+> `virt-hpc`, `virt-pcie-minimal` or something like that? That way we
+> indicate it's still a virt board
 
-This doesn't seem right.
+We're not versioning the 'virt' machine type right so. IOW, we've not
+made any promises about its long term featureset. 
 
-"Field GVA (Guest Virtual Address) is written by the implementation
-whenever a trap is taken
-into HS-mode. For any trap (breakpoint, address misaligned, access
-fault, page fault, or guest-
-page fault) that writes a guest virtual address to stval, GVA is set
-to 1. For any other trap into
-HS-mode, GVA is set to 0"
+If the virt machine type isn't the perfect match right now, should
+we change it, in a potentially incompatible way, to give us the right
+solution long term, rather than introducing a brand new machine type
+with significant overlap.
 
-So if we are trapping from HS to HS, the address in stval should not
-be a guest virtual address, at least in general.
 
-We probably aren't correctly setting GVA if MPRV is set though, as
-then the page faults should be guest addresses. That's probably the
-issue you are seeing.
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
-Alistair
-
->              }
->              env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
->          }
-> --
-> 2.34.1
->
->
 
