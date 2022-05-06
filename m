@@ -1,46 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nmjoo-0006GR-Lh
-	for mharc-qemu-riscv@gnu.org; Thu, 05 May 2022 18:19:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33118)
+	id 1nmp9y-000090-9h
+	for mharc-qemu-riscv@gnu.org; Fri, 06 May 2022 00:01:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46442)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nmjom-0006Eq-No
- for qemu-riscv@nongnu.org; Thu, 05 May 2022 18:19:28 -0400
-Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230]:45914)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nmp9s-00005c-Fb
+ for qemu-riscv@nongnu.org; Fri, 06 May 2022 00:01:36 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:34682)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nmjok-0003lT-CJ
- for qemu-riscv@nongnu.org; Thu, 05 May 2022 18:19:28 -0400
-Received: by mail-lj1-x230.google.com with SMTP id q14so7266040ljc.12
- for <qemu-riscv@nongnu.org>; Thu, 05 May 2022 15:19:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nmp9p-000565-QV
+ for qemu-riscv@nongnu.org; Fri, 06 May 2022 00:01:35 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id q23so8396806wra.1
+ for <qemu-riscv@nongnu.org>; Thu, 05 May 2022 21:01:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=T44pZVB4U9cM8ssUSCLDyYJBjsOMhUljwPIdmZvDgCw=;
- b=g6y8NXx0T5dSbxN9H89qPJd5B9PhhuP8aIET+D6t0MmV9bFWwcYudzxZEEbLJ9/OlQ
- EcTyXiggyhN4WwiFNB4hAmtTtQRQKR+IOkRubqgzNeLprJl6Bycf3FielkcijcJlmVrv
- 7UMLLt8ze0UHQ7bASxJdtAtpIzEcDtb2gRnSVzCKmQFkev7ZpAS5giElW9/arUwAMbr0
- BMlVBXxaDyBzTQvQd+ZoGy76u0wXmIRHk88q+/YLfI4SWpcH5t/HaG2jYruAzSJ3ToHQ
- 1E9I0r8qg4sJ7FLBkl/X9dnfpH8epjccR/7+hehUGeXir3lANEF0fBpEO78OZNbWOMdJ
- qY5w==
+ bh=+5Ot20dMZN3uAXz34xMPBwOYU9E02eZZOK440nsDlGw=;
+ b=6eljkoa3VSVaNvxeeksuPo2ALILasP8ZeiwQpF0HlC5m4zqNZidUn45VVecpSbAfPj
+ aKt0Q1F2T65iajiC68+HM67fOnBHwyxEmGfI5SxjebtovDfDCjl19p6kOYhbfV7u/4sz
+ MY9ard4+bfOUHnzxOJZIUFy3R7fICkMbksRr/2J7X8779LZiexRbKf12PsBYlqS35KDd
+ HOTJgZiFYv/384cEANsO6Z25URqQJ/C1vpZf7o2PSrs1pbra5EDMfX+Rq/jb2UjR5da8
+ ArQjVk2GNB6Adca2rGmWJIFy2nzLHB59tXvZ7qbiVfnPkALhU80fAQOTs26dk68XrCyA
+ GuGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=T44pZVB4U9cM8ssUSCLDyYJBjsOMhUljwPIdmZvDgCw=;
- b=fNEZJMl2TtFguCpp+r3v4N+ZFEAN5wEc+iue0QIoeYOUz/Q9bZRaJd3aJl65CTs9q6
- Vbbvo4ocA1KfMKBVV5zqDgo0JiNmI4ESIponyfoCUzKyZdOKsXlsA3WF1wGwYtoOX/pF
- SiVtVYw7FMxeXTyHe2sa+/fZOzc7Kyzi1NTWbVDLA5PyzPKFDlTh0Udclm9RDnaf7dHq
- hPCcnxx9KCBBI9UGI6SrkhgIobw20rRk7xFTBk9Prp399jUq1DAtrdtkkvdQOHRVH+14
- CGRPhZ/qs8fhQHMBSLA5Rb8w3RKwl043ZYqhs0DwQEC9SUSomMeyDGCnlgHcuA2k6Avj
- Atzw==
-X-Gm-Message-State: AOAM530/i5rFR5D5yRj99OrInA489lu+y2R7laecSKEYRaVZnnBB9D6a
- riQiG74R69sMZpu9sj8GJOqWIeXdn4crr6USL0pjeg==
-X-Google-Smtp-Source: ABdhPJzW1KfsYYsAjwjMEdW2YfqW0FugweHuHvchwUL8PxUdMqwsIX/PTUgwSS5Ch0VDDLeYTtIffGA9cjOM+KrM7sE=
-X-Received: by 2002:a05:651c:54a:b0:250:5b67:b7b6 with SMTP id
- q10-20020a05651c054a00b002505b67b7b6mr125700ljp.305.1651789164250; Thu, 05
- May 2022 15:19:24 -0700 (PDT)
+ bh=+5Ot20dMZN3uAXz34xMPBwOYU9E02eZZOK440nsDlGw=;
+ b=eU2s4E5IgvmP8+sj+5zFPIFRQYLzOaFAeUARx9NuubJwjJJAGld/OBk1wzAj+0qyn8
+ eIaZyXbyiaVA92Tksh6Jb0YR+zi72QeiusOyfmibdIs5DtQa8Vakpom7WG5WT03+OjVf
+ tp0ZUWncw2ncGJu/mBfd6bzy6MiW7iCWmQiKkcLmGYGFNVXVnCdGCLAdTMD7oTg8+pbz
+ RACwTGWQLyR7wTthJCRrVJ1oI1Ql/lqitYDqNiHDhDsTysJxaVa9JE6Q2USBdbhc8Vxk
+ XE2zG2hfBuTml/Zmw8nifG4lbdiDZkeJltGgZqYiBUGhl2bgt2OKzGj28+BUyPPC1/AH
+ VSlQ==
+X-Gm-Message-State: AOAM532jWRs31VhNlqV+jZ6hMBkTz57S1HDhr7zXjdCfl2EaiV3LsrWN
+ UrBGgY3SiuXkzoPnBaYrA6JgBnuR0XY0FSDV45Jl8A==
+X-Google-Smtp-Source: ABdhPJwCOkboBkK3j3HFmAnpZOdz0sTV9pxx0v1sZ6i97pfHRgOIdodSvquQvPuCGpcX+TORXLvI81SMk32lf9H4fk0=
+X-Received: by 2002:a5d:6d0d:0:b0:20c:530c:1681 with SMTP id
+ e13-20020a5d6d0d000000b0020c530c1681mr960883wrq.214.1651809691734; Thu, 05
+ May 2022 21:01:31 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220412021009.582424-1-atishp@rivosinc.com>
  <Yl7oiF7kUrIQ0qk5@redhat.com>
@@ -48,29 +48,29 @@ References: <20220412021009.582424-1-atishp@rivosinc.com>
  <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
  <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
  <YnOhHZGJphk30SmJ@redhat.com>
- <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
-In-Reply-To: <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Thu, 5 May 2022 15:19:13 -0700
-Message-ID: <CAHBxVyEOSMSZ9kbHYWXwJ5xYeG7PYA8kdejZ6tOfF=RXUfhfGA@mail.gmail.com>
+In-Reply-To: <YnOhHZGJphk30SmJ@redhat.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Fri, 6 May 2022 09:31:19 +0530
+Message-ID: <CAAhSdy2z7fEuh+MMgvy2r9EoRAaxnbosuA_gFSQn_g6_u5Zdaw@mail.gmail.com>
 Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: Alistair Francis <alistair23@gmail.com>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Atish Patra <atishp@atishpatra.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ Atish Patra <atishp@atishpatra.org>, 
+ Atish Patra <atishp@rivosinc.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::230;
- envelope-from=atishp@rivosinc.com; helo=mail-lj1-x230.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::42c;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,162 +83,153 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2022 22:19:28 -0000
+X-List-Received-Date: Fri, 06 May 2022 04:01:36 -0000
 
-On Thu, May 5, 2022 at 1:35 PM Alistair Francis <alistair23@gmail.com> wrot=
+On Thu, May 5, 2022 at 4:24 PM Daniel P. Berrang=C3=A9 <berrange@redhat.com=
+> wrote:
+>
+> On Thu, May 05, 2022 at 07:36:51PM +1000, Alistair Francis wrote:
+> > On Tue, May 3, 2022 at 5:57 PM Atish Patra <atishp@atishpatra.org> wrot=
 e:
->
-> On Thu, May 5, 2022 at 8:04 PM Daniel P. Berrang=C3=A9 <berrange@redhat.c=
-om> wrote:
-> >
-> > On Thu, May 05, 2022 at 07:36:51PM +1000, Alistair Francis wrote:
-> > > On Tue, May 3, 2022 at 5:57 PM Atish Patra <atishp@atishpatra.org> wr=
-ote:
+> > >
+> > > On Tue, Apr 19, 2022 at 5:26 PM Atish Patra <atishp@atishpatra.org> w=
+rote:
 > > > >
-> > > > On Tue, Apr 19, 2022 at 5:26 PM Atish Patra <atishp@atishpatra.org>=
- wrote:
+> > > > On Tue, Apr 19, 2022 at 9:51 AM Daniel P. Berrang=C3=A9 <berrange@r=
+edhat.com> wrote:
 > > > > >
-> > > > > On Tue, Apr 19, 2022 at 9:51 AM Daniel P. Berrang=C3=A9 <berrange=
-@redhat.com> wrote:
+> > > > > On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
 > > > > > >
-> > > > > > On Mon, Apr 11, 2022 at 07:10:06PM -0700, Atish Patra wrote:
-> > > > > > >
-> > > > > > > The RISC-V virt machine has helped RISC-V software eco system=
- to evolve at a
-> > > > > > > rapid pace even in absense of the real hardware. It is defini=
-tely commendable.
-> > > > > > > However, the number of devices & commandline options keeps gr=
-owing as a result
-> > > > > > > of that as well. That adds flexibility but will also become b=
-it difficult
-> > > > > > > to manage in the future as more extension support will be add=
-ed. As it is the
-> > > > > > > most commonly used qemu machine, it needs to support all kind=
-s of device and
-> > > > > > > interrupts as well. Moreover, virt machine has limitations on=
- the maximum
-> > > > > > > number of harts it can support because of all the MMIO device=
-s it has to support.
-> > > > > > >
-> > > > > > > The RISC-V IMSIC specification allows to develop machines com=
-pletely relying
-> > > > > > > on MSI and don't care about the wired interrupts at all. It j=
-ust requires
-> > > > > > > all the devices to be present behind a PCI bus or present the=
-mselves as platform
-> > > > > > > MSI device. The former is a more common scenario in x86 world=
- where most
-> > > > > > > of the devices are behind PCI bus. As there is very limited M=
-MIO device
-> > > > > > > support, it can also scale to very large number of harts.
-> > > > > > >
-> > > > > > > That's why, this patch series introduces a minimalistic yet v=
-ery extensible
-> > > > > > > forward looking machine called as "RISC-V Mini Computer" or "=
-minic". The
-> > > > > > > idea is to build PC or server like systems with this machine.=
- The machine can
-> > > > > > > work with or without virtio framework. The current implementa=
-tion only
-> > > > > > > supports RV64. I am not sure if building a RV32 machine would=
- be of interest
-> > > > > > > for such machines. The only mmio device it requires is clint =
-to emulate
-> > > > > > > the mtimecmp.
+> > > > > > The RISC-V virt machine has helped RISC-V software eco system t=
+o evolve at a
+> > > > > > rapid pace even in absense of the real hardware. It is definite=
+ly commendable.
+> > > > > > However, the number of devices & commandline options keeps grow=
+ing as a result
+> > > > > > of that as well. That adds flexibility but will also become bit=
+ difficult
+> > > > > > to manage in the future as more extension support will be added=
+. As it is the
+> > > > > > most commonly used qemu machine, it needs to support all kinds =
+of device and
+> > > > > > interrupts as well. Moreover, virt machine has limitations on t=
+he maximum
+> > > > > > number of harts it can support because of all the MMIO devices =
+it has to support.
 > > > > > >
-> > > >
-> > > > Any other thoughts ?
-> > >
-> > > I don't *love* this idea. I think the virt machine is useful, but I'm
-> > > not convinced we need a second one.
-> > >
-> > > This feels a little bit more like a "none" machine, as it contains
-> > > just the bare minimum to work.
-> > >
-> > > >
-> > > > > > I would ask what you see as the long term future usage for 'vir=
-t' vs
-> > > > > > 'minic' machine types ? Would you expect all existing users of =
-'virt'
-> > > > > > to ultimately switch to 'minic', or are there distinct non-over=
-lapping
-> > > > > > use cases for 'virt' vs 'minic' such that both end up widely us=
-ed ?
+> > > > > > The RISC-V IMSIC specification allows to develop machines compl=
+etely relying
+> > > > > > on MSI and don't care about the wired interrupts at all. It jus=
+t requires
+> > > > > > all the devices to be present behind a PCI bus or present thems=
+elves as platform
+> > > > > > MSI device. The former is a more common scenario in x86 world w=
+here most
+> > > > > > of the devices are behind PCI bus. As there is very limited MMI=
+O device
+> > > > > > support, it can also scale to very large number of harts.
 > > > > > >
+> > > > > > That's why, this patch series introduces a minimalistic yet ver=
+y extensible
+> > > > > > forward looking machine called as "RISC-V Mini Computer" or "mi=
+nic". The
+> > > > > > idea is to build PC or server like systems with this machine. T=
+he machine can
+> > > > > > work with or without virtio framework. The current implementati=
+on only
+> > > > > > supports RV64. I am not sure if building a RV32 machine would b=
+e of interest
+> > > > > > for such machines. The only mmio device it requires is clint to=
+ emulate
+> > > > > > the mtimecmp.
 > > > > >
-> > > > > Nope. I don't expect existing 'virt' users to switch to 'minic' a=
-s
-> > > > > they aim to cater to different users.
-> > > > >
-> > > > > Here are the major differences
-> > > > > 1. virt machine supports MMIO devices & wired interrupts. Minic d=
-oesn't
 > > >
-> > > This seems like the main difference
-> > >
-> > > > > 2. virt machine doesn't support the MSI only option yet (can be a=
-dded
-> > > > > though[1]). Minic does.
-> > >
-> > > This could be fixed
-> > >
-> > > > > 3. Number of cpu supported by virt machine are limited because of=
- the
-> > > > > MMIO devices. Minic can scale to very
-> > > > > large numbers of cpu.
-> > >
-> > > Similar to 1
-> > >
-> > > > > 4. 'Minic' only supports PCI based MSI capable devices. Thus, MSI=
- is a
-> > > > > mandatory requirement for 'minic' while
-> > > > > it is optional for 'virt'.
-> > >
-> > > I'm not fully convinced we need this, but it also doesn't seem to cos=
-t
-> > > us a lot in terms of maintenance. It would be beneficial if we could
-> > > share a bit more of the code. Can we share the socket creation code a=
-s
-> > > well?
-> > >
-> > > I don't like the name minic though. What about something like
-> > > `virt-hpc`, `virt-pcie-minimal` or something like that? That way we
-> > > indicate it's still a virt board
+> > > Any other thoughts ?
 > >
-> > We're not versioning the 'virt' machine type right so. IOW, we've not
-> > made any promises about its long term featureset.
+> > I don't *love* this idea. I think the virt machine is useful, but I'm
+> > not convinced we need a second one.
 > >
-> > If the virt machine type isn't the perfect match right now, should
-> > we change it, in a potentially incompatible way, to give us the right
-> > solution long term, rather than introducing a brand new machine type
-> > with significant overlap.
+> > This feels a little bit more like a "none" machine, as it contains
+> > just the bare minimum to work.
+> >
+> > >
+> > > > > I would ask what you see as the long term future usage for 'virt'=
+ vs
+> > > > > 'minic' machine types ? Would you expect all existing users of 'v=
+irt'
+> > > > > to ultimately switch to 'minic', or are there distinct non-overla=
+pping
+> > > > > use cases for 'virt' vs 'minic' such that both end up widely used=
+ ?
+> > > > >
+> > > >
+> > > > Nope. I don't expect existing 'virt' users to switch to 'minic' as
+> > > > they aim to cater to different users.
+> > > >
+> > > > Here are the major differences
+> > > > 1. virt machine supports MMIO devices & wired interrupts. Minic doe=
+sn't
+> >
+> > This seems like the main difference
+> >
+> > > > 2. virt machine doesn't support the MSI only option yet (can be add=
+ed
+> > > > though[1]). Minic does.
+> >
+> > This could be fixed
+> >
+> > > > 3. Number of cpu supported by virt machine are limited because of t=
+he
+> > > > MMIO devices. Minic can scale to very
+> > > > large numbers of cpu.
+> >
+> > Similar to 1
+> >
+> > > > 4. 'Minic' only supports PCI based MSI capable devices. Thus, MSI i=
+s a
+> > > > mandatory requirement for 'minic' while
+> > > > it is optional for 'virt'.
+> >
+> > I'm not fully convinced we need this, but it also doesn't seem to cost
+> > us a lot in terms of maintenance. It would be beneficial if we could
+> > share a bit more of the code. Can we share the socket creation code as
+> > well?
+> >
+> > I don't like the name minic though. What about something like
+> > `virt-hpc`, `virt-pcie-minimal` or something like that? That way we
+> > indicate it's still a virt board
 >
-> Even if we didn't worry about backwards compatibility the current virt
-> machine would still be what most users want. It's just a small number
-> of users who don't want MMIO devices and instead want to use PCIe for
-> everything. Realistically it's only HPC users who would want this type
-> of machine, at least that's my understanding.
+> We're not versioning the 'virt' machine type right so. IOW, we've not
+> made any promises about its long term featureset.
 >
+> If the virt machine type isn't the perfect match right now, should
+> we change it, in a potentially incompatible way, to give us the right
+> solution long term, rather than introducing a brand new machine type
+> with significant overlap.
 
-Yes. You are correct. Virt machine will continue to be useful for
-platforms with MMIO or wired irq devices.
-The new machine is more suitable for platforms where everything is
-behind PCI. HPC platforms certainly
-is one market segment. However, future RISC-V PCs (similar to x86 PCs)
-may also fall in this category.
+Versioning of "virt" machine has been a long pending item for enterprise
+class Guest/VM migration.
 
-> Alistair
+Since "virt" machine is QEMU RISC-V specific, we can do the following:
+1) Detailed documentation of "virt" machine layout along with versioning
+    in the QEMU documentation
+2) Re-structure "virt" machine implementation to support future changes
+    "virt" machine.
+
+Regards,
+Anup
+
 >
-> >
-> >
-> > With regards,
-> > Daniel
-> > --
-> > |: https://berrange.com      -o-    https://www.flickr.com/photos/dberr=
-ange :|
-> > |: https://libvirt.org         -o-            https://fstop138.berrange=
-.com :|
-> > |: https://entangle-photo.org    -o-    https://www.instagram.com/dberr=
-ange :|
-> >
+>
+> With regards,
+> Daniel
+> --
+> |: https://berrange.com      -o-    https://www.flickr.com/photos/dberran=
+ge :|
+> |: https://libvirt.org         -o-            https://fstop138.berrange.c=
+om :|
+> |: https://entangle-photo.org    -o-    https://www.instagram.com/dberran=
+ge :|
+>
+>
 
