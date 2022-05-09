@@ -1,68 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1no9aJ-00035V-6U
-	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 16:02:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43776)
+	id 1noAvo-0000Yi-DS
+	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 17:28:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58082)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no9aH-00034y-Nd
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 16:02:21 -0400
-Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d]:41960)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1noAvk-0000XT-E0
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 17:28:37 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d]:40547)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no9aG-0005mz-7U
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 16:02:21 -0400
-Received: by mail-yb1-xb2d.google.com with SMTP id s30so26941688ybi.8
- for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 13:02:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1noAvi-00018P-FC
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 17:28:36 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ iq2-20020a17090afb4200b001d93cf33ae9so420460pjb.5
+ for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 14:28:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=atishpatra.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qE4ERdu6cnODdKn6FhQv9w8Z6PxEzdHOvMSLHR/77/I=;
- b=sSh4/+RmE6jSJ0edhFcRMgBHEMyONcxvao8Tq5WDsPacFqkHRF6vhkPC48aPi0f3wW
- vpvIHK7a903crvyh1svn33q6BHAnUu79EnZt8DFP8mgJAAg3mOTSs02Qy+weztCY1ycH
- XHDnP59vmXiU6A1umz2W/3di8gghpCT8L6ccI=
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=rJEvylGX6XFsP6JM89wy/96G5JB+filiHmzriU7ed8Y=;
+ b=zwrOiXwOffmx/W++WX6vbg2dvUqyl9y4sQiGLyuN8RZu9zC8mH4CLPch7hUXVz6EWE
+ y7NOMnjBFb8JU3OVf50scQ41OgWnEb4Vzvg9qA32fuxsyoG4DstqIZY0t5qGOYRrJPrL
+ Nr4/AWhFdNNQlCttH5oKK8QE3clym9294z5yXqcOccLDCirV2x/KyVhXAinZZqf9yRFM
+ rWwcZi0nyDN78TkO0H1trvB8hIhfhGrru8lE+afaGr7+GzWXF4pnVVweI1JbC75aRJN6
+ oXtXk+FdJ0uynY+Q8kFa7iJoB75KXf+0j9AUF84Vu8oXZWv7GNHDgXWBXfKQ4h8jtfb7
+ RBVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=qE4ERdu6cnODdKn6FhQv9w8Z6PxEzdHOvMSLHR/77/I=;
- b=gVJ3W3I/6ruLB+pe7BisBxAdLdkqZ0UO6n+NloKk3hTjI2AZmkPKqZAmM/msZRfw6C
- J4FeVVo8dj7lUCLeaxJ5X3WzRigjk7Fn8nFiiGvfguMIIu4ITlxoUV1WtOsWQEbaviY7
- pGMXn1klUMHEqe3RMCZ6voUckB4UzIb4CZT1sACjM8eAkeuGX9MYReN8cTTtAj/DtPKH
- CU/3U4VV8FVamL76J3iTDbeuBq0wP1h2iwSg76QRcL3XJHIHod9bVE4bk7yzvYM6ys9O
- noT/MY81+gYXszE8kRyozWf2IpqC6AwNBA6w2Lbjpv45J+EXXntIUvIJmzlLxKVqxFOC
- WfKQ==
-X-Gm-Message-State: AOAM532A0D6WElOCJGQyrYIlNiN4xz6PXqnrwxEMo1qsqGVHZ0+gij6j
- EZFyd1zsTdV9QXnjcCbFsTvQm03ZwAwuxJFF9SYU
-X-Google-Smtp-Source: ABdhPJx1Jsgqcf31yBuaoFU0OqBEMWBhs0dTH2TDpSITzLZsGxzEXSWOV8T24w50gFQyvruxwLZsWFp6dzt/IrjAJto=
-X-Received: by 2002:a25:3fc5:0:b0:64b:3a:d29a with SMTP id
- m188-20020a253fc5000000b0064b003ad29amr1383670yba.236.1652126539045; 
- Mon, 09 May 2022 13:02:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220429153431.308829-1-apatel@ventanamicro.com>
- <20220429153431.308829-2-apatel@ventanamicro.com>
-In-Reply-To: <20220429153431.308829-2-apatel@ventanamicro.com>
-From: Atish Patra <atishp@atishpatra.org>
-Date: Mon, 9 May 2022 13:02:08 -0700
-Message-ID: <CAOnJCU+=V2Rm1SeJM58pmMFpQdnHq7dq4rjoMgWu_-gDJxYWmA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] target/riscv: Don't force update priv spec version to
- latest
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=rJEvylGX6XFsP6JM89wy/96G5JB+filiHmzriU7ed8Y=;
+ b=uyAmR0y+08Ypv7TvJ+JPAMHQvANJywVuhXeZV1EKoFP0zET5+xqd49H61mT+Rc8SPb
+ EhY4BcDIp4avyDScQcglTT0scZ6sMxiHComQCW+vAGXcuYjAJGykngv7i4EoLljqkZq7
+ RjbjMbpmfjFjo72BhUtd8RJ0bt7KVWYBaBzGBN0Ey4m+j5wmrfYFM73dzebNDwNMONau
+ 6OWavxDFailkouVkwruW6MpGJjHiB7czhaHO13r8luKJQPPlR7P/M50UFwPKoO7gLYQy
+ h4QwS3R/AzWn3XGnXwuu5FdZmzM3gwSMg/dlZzmPwHip1MDz89W39zobKLw7Kudc4+nT
+ FTuA==
+X-Gm-Message-State: AOAM531MGi7XKZ03Iaeir85qwTeg3Wafwyx2G/zOaoqa1G+ObxaZrzZW
+ IGRa7RmREsStwSUE63ZMbaETmA==
+X-Google-Smtp-Source: ABdhPJwB1TJfOqkKL/E9r/Ci9qZ/FwfUTGHY+ANVi2OLOro+089DsvlLxjaIPRZWcu3cY6SK4RukOw==
+X-Received: by 2002:a17:902:9a42:b0:158:bf91:ecec with SMTP id
+ x2-20020a1709029a4200b00158bf91ececmr17969506plv.115.1652131712517; 
+ Mon, 09 May 2022 14:28:32 -0700 (PDT)
+Received: from atishp.ba.rivosinc.com ([66.220.2.162])
+ by smtp.gmail.com with ESMTPSA id
+ n89-20020a17090a5ae200b001cd4989fecfsm164509pji.27.2022.05.09.14.28.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 May 2022 14:28:31 -0700 (PDT)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
- envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb2d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v3  0/3] Implement Sstc extension 
+Date: Mon,  9 May 2022 14:28:24 -0700
+Message-Id: <20220509212827.2057822-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x102d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,77 +79,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2022 20:02:21 -0000
+X-List-Received-Date: Mon, 09 May 2022 21:28:37 -0000
 
-On Fri, Apr 29, 2022 at 8:35 AM Anup Patel <apatel@ventanamicro.com> wrote:
->
-> The riscv_cpu_realize() sets priv spec verion to v1.12 when it is
-> when "env->priv_ver == 0" (i.e. default v1.10) because the enum
-> value of priv spec v1.10 is zero.
->
-> Due to above issue, the sifive_u machine will see priv spec v1.12
-> instead of priv spec v1.10.
->
-> To fix this issue, we set latest priv spec version (i.e. v1.12)
-> for base rv64/rv32 cpu and riscv_cpu_realize() will override priv
-> spec version only when "cpu->cfg.priv_spec != NULL".
->
-> Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> ---
->  target/riscv/cpu.c | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f0a702fee6..02ee7d45d8 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -169,6 +169,8 @@ static void rv64_base_cpu_init(Object *obj)
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
->      /* We set this in the realise function */
->      set_misa(env, MXL_RV64, 0);
-> +    /* Set latest version of privileged specification */
-> +    set_priv_version(env, PRIV_VERSION_1_12_0);
->  }
->
->  static void rv64_sifive_u_cpu_init(Object *obj)
-> @@ -204,6 +206,8 @@ static void rv32_base_cpu_init(Object *obj)
->      CPURISCVState *env = &RISCV_CPU(obj)->env;
->      /* We set this in the realise function */
->      set_misa(env, MXL_RV32, 0);
-> +    /* Set latest version of privileged specification */
-> +    set_priv_version(env, PRIV_VERSION_1_12_0);
->  }
->
->  static void rv32_sifive_u_cpu_init(Object *obj)
-> @@ -509,7 +513,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->      CPURISCVState *env = &cpu->env;
->      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
->      CPUClass *cc = CPU_CLASS(mcc);
-> -    int priv_version = 0;
-> +    int priv_version = -1;
->      Error *local_err = NULL;
->
->      cpu_exec_realizefn(cs, &local_err);
-> @@ -533,10 +537,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->          }
->      }
->
-> -    if (priv_version) {
-> +    if (priv_version >= PRIV_VERSION_1_10_0) {
->          set_priv_version(env, priv_version);
-> -    } else if (!env->priv_ver) {
-> -        set_priv_version(env, PRIV_VERSION_1_12_0);
->      }
->
->      if (cpu->cfg.mmu) {
-> --
-> 2.34.1
->
+This series implements Sstc extension[1] which was ratified recently.
 
+The first patch is a prepartory patches while PATCH 2 adds stimecmp
+support while PATCH 3 adds vstimecmp support. This series is based on
+on top of upstream commit (faee5441a038).
 
-Reviewed-by: Atish Patra <atishp@rivosinc.com>
--- 
-Regards,
-Atish
+The series can also be found at
+https://github.com/atishp04/qemu/tree/sstc_v3
+
+It is tested on RV32 & RV64 with latest OpenSBI & Linux kernel[2]
+patches. It does require the mcountinhibi support patch from PMU series[3]
+or dummy one from Anup's series [4]. Otherwise, OpenSBI doesn't detect v1.12
+priv version.
+
+Changes from v2->v3:
+1. Dropped generic migration code improvement patches.
+2. Removed the order constraints while updating stimecmp/vstimecmp.
+
+Changes from v1->v2:
+1. Rebased on the latest upstream commit.
+2. Replaced PATCH 1 with another patch where mtimer/timecmp is
+   moved from CPU to ACLINT.
+3. Added ACLINT migration support.
+
+[1] https://drive.google.com/file/d/1m84Re2yK8m_vbW7TspvevCDR82MOBaSX/view
+[2] https://github.com/atishp04/linux/tree/sstc_v3
+[3] https://github.com/atishp04/qemu/tree/riscv_pmu_v7
+[4] https://www.mail-archive.com/qemu-devel@nongnu.org/msg885157.html
+
+Atish Patra (3):
+hw/intc: Move mtimer/mtimecmp to aclint
+target/riscv: Add stimecmp support
+target/riscv: Add vstimecmp support
+
+hw/intc/riscv_aclint.c         |  41 +++++--
+hw/timer/ibex_timer.c          |  18 ++-
+include/hw/intc/riscv_aclint.h |   2 +
+include/hw/timer/ibex_timer.h  |   2 +
+target/riscv/cpu.c             |   8 ++
+target/riscv/cpu.h             |  14 ++-
+target/riscv/cpu_bits.h        |   8 ++
+target/riscv/cpu_helper.c      |  11 +-
+target/riscv/csr.c             | 200 +++++++++++++++++++++++++++++++++
+target/riscv/machine.c         |   7 +-
+target/riscv/meson.build       |   3 +-
+target/riscv/time_helper.c     | 114 +++++++++++++++++++
+target/riscv/time_helper.h     |  30 +++++
+13 files changed, 426 insertions(+), 32 deletions(-)
+create mode 100644 target/riscv/time_helper.c
+create mode 100644 target/riscv/time_helper.h
+
+--
+2.25.1
+
 
