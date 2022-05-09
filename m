@@ -1,71 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1no9T9-0000nd-If
-	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 15:54:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42398)
+	id 1no9aJ-00035V-6U
+	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 16:02:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43776)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no9T7-0000mm-VC
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:54:57 -0400
-Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133]:33940)
+ id 1no9aH-00034y-Nd
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 16:02:21 -0400
+Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d]:41960)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no9T6-0004cd-59
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:54:57 -0400
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-2f7c424c66cso157409307b3.1
- for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 12:54:55 -0700 (PDT)
+ id 1no9aG-0005mz-7U
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 16:02:21 -0400
+Received: by mail-yb1-xb2d.google.com with SMTP id s30so26941688ybi.8
+ for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 13:02:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=atishpatra.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9POuLCjJRKjPs4Qiw3GOb6CC+jq/9fZcHov7A6+j2gE=;
- b=uGDLkeMHEDSkUIsc9seaSzcPSGWJzWa0h/oIPM/kWfoue6xiGvO2aSjKuBa8TpfASp
- iM6N6MYY+NrdmnOFDS6xqHEG0uqtsayE97WWUz60zStIaQXouhxMl7ZvDdYaHwxbVTqJ
- 2Ylh8Av/SYfpIByXaPghatwbeOI41Cp3rSaQk=
+ :cc; bh=qE4ERdu6cnODdKn6FhQv9w8Z6PxEzdHOvMSLHR/77/I=;
+ b=sSh4/+RmE6jSJ0edhFcRMgBHEMyONcxvao8Tq5WDsPacFqkHRF6vhkPC48aPi0f3wW
+ vpvIHK7a903crvyh1svn33q6BHAnUu79EnZt8DFP8mgJAAg3mOTSs02Qy+weztCY1ycH
+ XHDnP59vmXiU6A1umz2W/3di8gghpCT8L6ccI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9POuLCjJRKjPs4Qiw3GOb6CC+jq/9fZcHov7A6+j2gE=;
- b=DvbFJXfa/iK7/bar0yxh7WeT1xHU2NJwOgPvlzJi1cGP07z9/9fVW6qkoxCyQjJJPH
- kl+nlmQl6icrzdPCepczl4Rsfd30P7qhTx0y3wsRauVgbkCgBzf6IsrHkcWypkNfsFZR
- fKD3CpCEY1J9D3NX5A9b9myoDVo4fqveEEi3X+dmtnTA3ewmUq0y+tAbtfPX7uu1ovZm
- GV6ohk6EKvrgpz98y3sob+BExkyQIV+p3NDOO5DWIbmywcLjyN9ykg7Dt3fz+x1gltu+
- sgd9pNcL9rOFqbIjwnTbTsA5OjaXwOYhDAvscX2JDofqA3BgQiUc/XWtVyFHieEATSCK
- KdeQ==
-X-Gm-Message-State: AOAM533V6zj1eaizQrTMk5oXupnfAO8MK2kIcO0y4Vr4gvXQum1XTApM
- YxXUpABYDcYx270CWjwUq1YnbudvLvhddDAZpO/e
-X-Google-Smtp-Source: ABdhPJzAw10aG1O6+EZhbMDYJn3J26SD/T4r4aRciiDNHhZUpxreFiIVTnoySWJcj7KIrzlwGy+RiYh1xAeLDcITb5Y=
-X-Received: by 2002:a05:690c:16:b0:2db:cfed:de0e with SMTP id
- bc22-20020a05690c001600b002dbcfedde0emr16141271ywb.271.1652126094803; Mon, 09
- May 2022 12:54:54 -0700 (PDT)
+ bh=qE4ERdu6cnODdKn6FhQv9w8Z6PxEzdHOvMSLHR/77/I=;
+ b=gVJ3W3I/6ruLB+pe7BisBxAdLdkqZ0UO6n+NloKk3hTjI2AZmkPKqZAmM/msZRfw6C
+ J4FeVVo8dj7lUCLeaxJ5X3WzRigjk7Fn8nFiiGvfguMIIu4ITlxoUV1WtOsWQEbaviY7
+ pGMXn1klUMHEqe3RMCZ6voUckB4UzIb4CZT1sACjM8eAkeuGX9MYReN8cTTtAj/DtPKH
+ CU/3U4VV8FVamL76J3iTDbeuBq0wP1h2iwSg76QRcL3XJHIHod9bVE4bk7yzvYM6ys9O
+ noT/MY81+gYXszE8kRyozWf2IpqC6AwNBA6w2Lbjpv45J+EXXntIUvIJmzlLxKVqxFOC
+ WfKQ==
+X-Gm-Message-State: AOAM532A0D6WElOCJGQyrYIlNiN4xz6PXqnrwxEMo1qsqGVHZ0+gij6j
+ EZFyd1zsTdV9QXnjcCbFsTvQm03ZwAwuxJFF9SYU
+X-Google-Smtp-Source: ABdhPJx1Jsgqcf31yBuaoFU0OqBEMWBhs0dTH2TDpSITzLZsGxzEXSWOV8T24w50gFQyvruxwLZsWFp6dzt/IrjAJto=
+X-Received: by 2002:a25:3fc5:0:b0:64b:3a:d29a with SMTP id
+ m188-20020a253fc5000000b0064b003ad29amr1383670yba.236.1652126539045; 
+ Mon, 09 May 2022 13:02:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220429153431.308829-1-apatel@ventanamicro.com>
- <20220429153431.308829-3-apatel@ventanamicro.com>
- <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
-In-Reply-To: <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
+ <20220429153431.308829-2-apatel@ventanamicro.com>
+In-Reply-To: <20220429153431.308829-2-apatel@ventanamicro.com>
 From: Atish Patra <atishp@atishpatra.org>
-Date: Mon, 9 May 2022 12:54:44 -0700
-Message-ID: <CAOnJCUKCXs29mimFY4-dvWguQyRJsOvAy5pVHm3Y5Dr65-AtOw@mail.gmail.com>
-Subject: Re: [PATCH 2/3] target/riscv: Add dummy mcountinhibit CSR for priv
- spec v1.11 or higher
-To: Frank Chang <frank.chang@sifive.com>
-Cc: Anup Patel <apatel@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>, Anup Patel <anup@brainfault.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Mon, 9 May 2022 13:02:08 -0700
+Message-ID: <CAOnJCU+=V2Rm1SeJM58pmMFpQdnHq7dq4rjoMgWu_-gDJxYWmA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Don't force update priv spec version to
+ latest
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Anup Patel <anup@brainfault.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
- envelope-from=atishp@atishpatra.org; helo=mail-yw1-x1133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
+ envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb2d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,74 +75,76 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2022 19:54:58 -0000
+X-List-Received-Date: Mon, 09 May 2022 20:02:21 -0000
 
-On Wed, May 4, 2022 at 2:53 AM Frank Chang <frank.chang@sifive.com> wrote:
+On Fri, Apr 29, 2022 at 8:35 AM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> Hi Anup,
+> The riscv_cpu_realize() sets priv spec verion to v1.12 when it is
+> when "env->priv_ver == 0" (i.e. default v1.10) because the enum
+> value of priv spec v1.10 is zero.
 >
-> I found that Atish has already submitted a patch to implement the mcountinhibit CSR:
-> https://www.mail-archive.com/qemu-devel@nongnu.org/msg879349.html
+> Due to above issue, the sifive_u machine will see priv spec v1.12
+> instead of priv spec v1.10.
+>
+> To fix this issue, we set latest priv spec version (i.e. v1.12)
+> for base rv64/rv32 cpu and riscv_cpu_realize() will override priv
+> spec version only when "cpu->cfg.priv_spec != NULL".
+>
+> Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f0a702fee6..02ee7d45d8 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -169,6 +169,8 @@ static void rv64_base_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+>      set_misa(env, MXL_RV64, 0);
+> +    /* Set latest version of privileged specification */
+> +    set_priv_version(env, PRIV_VERSION_1_12_0);
+>  }
+>
+>  static void rv64_sifive_u_cpu_init(Object *obj)
+> @@ -204,6 +206,8 @@ static void rv32_base_cpu_init(Object *obj)
+>      CPURISCVState *env = &RISCV_CPU(obj)->env;
+>      /* We set this in the realise function */
+>      set_misa(env, MXL_RV32, 0);
+> +    /* Set latest version of privileged specification */
+> +    set_priv_version(env, PRIV_VERSION_1_12_0);
+>  }
+>
+>  static void rv32_sifive_u_cpu_init(Object *obj)
+> @@ -509,7 +513,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      CPURISCVState *env = &cpu->env;
+>      RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
+>      CPUClass *cc = CPU_CLASS(mcc);
+> -    int priv_version = 0;
+> +    int priv_version = -1;
+>      Error *local_err = NULL;
+>
+>      cpu_exec_realizefn(cs, &local_err);
+> @@ -533,10 +537,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          }
+>      }
+>
+> -    if (priv_version) {
+> +    if (priv_version >= PRIV_VERSION_1_10_0) {
+>          set_priv_version(env, priv_version);
+> -    } else if (!env->priv_ver) {
+> -        set_priv_version(env, PRIV_VERSION_1_12_0);
+>      }
+>
+>      if (cpu->cfg.mmu) {
+> --
+> 2.34.1
 >
 
-Yeah. I think it depends on which series is merged first. The PMU
-series actually uses mcountinhibit.
-However, latest OpenSBI patches detect priv version v1.11 based on
-mcountinhibit presence.
-We need mcountinhibit support to test any v1.12 patches anyways.
 
-If PMU patches are merged first, we don't need this patch.
-
-> Regards,
-> Frank Chang
->
-> On Fri, Apr 29, 2022 at 11:44 PM Anup Patel <apatel@ventanamicro.com> wrote:
->>
->> The mcountinhibit CSR is mandatory for priv spec v1.11 or higher. For
->> implementation that don't want to implement can simply have a dummy
->> mcountinhibit which always zero.
->>
->> Fixes: a4b2fa433125 ("target/riscv: Introduce privilege version field in
->> the CSR ops.")
->> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
->> ---
->>  target/riscv/cpu_bits.h | 3 +++
->>  target/riscv/csr.c      | 2 ++
->>  2 files changed, 5 insertions(+)
->>
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index 4d04b20d06..4a55c6a709 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -159,6 +159,9 @@
->>  #define CSR_MTVEC           0x305
->>  #define CSR_MCOUNTEREN      0x306
->>
->> +/* Machine Counter Setup */
->> +#define CSR_MCOUNTINHIBIT   0x320
->> +
->>  /* 32-bit only */
->>  #define CSR_MSTATUSH        0x310
->>
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index 2bf0a97196..e144ce7135 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -3391,6 +3391,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->>      [CSR_MIE]         = { "mie",        any,   NULL,    NULL,    rmw_mie           },
->>      [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,       write_mtvec       },
->>      [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,  write_mcounteren  },
->> +    [CSR_MCOUNTINHIBIT] = { "mcountinhibit", any, read_zero, write_ignore,
->> +                                             .min_priv_ver = PRIV_VERSION_1_11_0 },
->>
->>      [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,    write_mstatush    },
->>
->> --
->> 2.34.1
->>
->>
-
-
+Reviewed-by: Atish Patra <atishp@rivosinc.com>
 -- 
 Regards,
 Atish
