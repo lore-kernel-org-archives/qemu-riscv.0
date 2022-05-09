@@ -1,53 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nnzcd-0004El-Sm
-	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 05:24:10 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35020)
+	id 1nnzpj-00022m-IS
+	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 05:37:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38542)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nnzca-0004EO-Vh; Mon, 09 May 2022 05:24:05 -0400
-Received: from mail-io1-xd30.google.com ([2607:f8b0:4864:20::d30]:43533)
+ id 1nnzpX-000217-Fn; Mon, 09 May 2022 05:37:31 -0400
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:34348)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nnzcZ-0000bJ-Bv; Mon, 09 May 2022 05:24:04 -0400
-Received: by mail-io1-xd30.google.com with SMTP id o190so14633376iof.10;
- Mon, 09 May 2022 02:24:02 -0700 (PDT)
+ id 1nnzpV-0002Wa-P7; Mon, 09 May 2022 05:37:27 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id r27so14679015iot.1;
+ Mon, 09 May 2022 02:37:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v2MzysXjxEYQ/MxcFGbjDThnNkiI9BKEBXsHlcbiLOc=;
- b=S1/QzwYM5pbi9eAB0DJkWY5MIHM38tmx8UsGHdMZC6gEqO266eAxlDuT4f+0iu9n0A
- C1VCCpuY4UPYu3qYPqrS6397R07b39vclYX0wDvHy9v/tD2BIpNev/g80AHu5gi7C3yy
- XWWHTiBYRAweXjhCpl/WHGDsJUOBBBYpO2ijrLNVk6XEp1Qm+DpvgxEXS3t/BP74wsl5
- d7qZ5MTdPpwtmd+f0citiYW2Gw5a1hfgwIwTSpGlDwv+5mFtpob3COe2zIIHSBqiZUL/
- UvVm7/r0m97wFuAugKh03SYbs/iMZbZ4RzaWVJ04zjGOXaOBriF8Zd7D8vIyHd7mZrXe
- jvUA==
+ :cc; bh=USepnwSZYd/p3ckpqZ1PumgUEOBX1C1Mr70dvmKOCMU=;
+ b=NCGKAyai+GNj/fudKbmEx8q2i2Yj4bfyjHuzuOz0QvIY54dlsJP6iFaKdPaDMyuocq
+ 5flSyXSjrz93vOyh61h9xV+eu4h0m0ESnQtW46zWEV2o7zvK6gif/eukf4NLGKc1In9a
+ cnm8xUi23zTbxJV5Nti3BbWrXNlrZbUJGSYI4doQhS1UOgE6GDZmJAuTGBL1wap/UJEt
+ Ev+AIrWS0XiQAJ3vxYtuYM8Z0hXzbGgolhmq4FWdzGLQ9khRT8Bc6G7WfDtrt6cWoKgK
+ GfB8tIEbwGHVmmpE33z8J6d795gvL/36nfqx7ohv/pFyV17rxWYRYivByOy13Qk8PehO
+ 5ZJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=v2MzysXjxEYQ/MxcFGbjDThnNkiI9BKEBXsHlcbiLOc=;
- b=kJ+vQBGjY7q5CPzKZJTCVGUBLq4FrnDKIi8hQ42iXMs6SZ4vOAy2L1sMG6PzGFDzJ5
- MDgPcpoVMWuVQLiDTVqBeZB/2zCrKa7EN4b+3xYR2MvPrArB5Ua52MVUlBnWmMR7kp6Q
- 1iL0jnlKMUpnktMVtDNxKoWQj9hCbPAKgZLUYS9wFFrqKiRGxl3UV6E0zQTs2Ifof0jV
- 1hkyO1K0kXhscQcYV5dEDR5A4ujL+K7sW5AB3PZrrjanzYoE90YXZY8jZiRE+0Oo7ut7
- F8RCBCXv04/tvCVYFW/Yik1awAuI+IMhTnRTkr5cHWJYh2ltEjD9hkAkHOYYCAoZFBu5
- g0tw==
-X-Gm-Message-State: AOAM533Eh+o6JgmQLIXgVQFNxZt0OwR0IqN0DwX2T+BscgHk0kgINWC/
- 2fdvQ4BgCulUj5Or/+NaTbSvCnMvhzVhiBDSrG4+HP5rIXShL8IhyRo=
-X-Google-Smtp-Source: ABdhPJyjXiDs5kiYK1Y4WihNkXKsSAq5k64nRjCL4OUZ5RSgZ2CE8em7g0S0bhHFH+s3omXlbWUUu6U/a+LWdMFWAvU=
-X-Received: by 2002:a05:6638:190a:b0:32b:95b7:4e64 with SMTP id
- p10-20020a056638190a00b0032b95b74e64mr6536604jal.212.1652088241915; Mon, 09
- May 2022 02:24:01 -0700 (PDT)
+ bh=USepnwSZYd/p3ckpqZ1PumgUEOBX1C1Mr70dvmKOCMU=;
+ b=B2wqq6oAfA6X3qGI7LHcMifGUilf8SpNNRCQaCmlvNz7AGYpni4cAUcPz+M1h4f1Ng
+ dtBDbXQ9CzBnfTwYyDxiuF4DVuj9p6Ee8Dh1DVH7m+L/+OzQwFofTULlYQmBnYqiIcyV
+ HlcHUYpSAKLSBgefEv2agIK24sSSwFIiDZMJR7FJj2T7TRlO8imILb+smAPxYDH/ZjHa
+ Te/ds1VYWiWJh8+UJlMOqHFQfPAdotmm9XV6hJugt9Xlusjni2iPZkjJgBfPPFvrzLGQ
+ nLuhAgfga9f3mP/LLXWoce2dHbTgs91Uzxx+v2+/yILc/FAp4BUIYNAxmLGJ7eqbanF/
+ V/cw==
+X-Gm-Message-State: AOAM5329nttqM8Rrd6yfld8d6xArMEmytDIlq7L4Xa/5pNlXX1wILaiH
+ t1vVuuUioiTEY4wmGcfOhcNatH7kWqImCC4DaXs=
+X-Google-Smtp-Source: ABdhPJwSclbDqwKvJ5c56VUQ7QO4DDo69f6YJ16KMDj9hvEkeCPNGN+PFc2ToWOYJuzglUMogl1JyvE2uAjMX7ezguI=
+X-Received: by 2002:a05:6638:dc7:b0:32b:a483:16b8 with SMTP id
+ m7-20020a0566380dc700b0032ba48316b8mr7070000jaj.66.1652089042873; Mon, 09 May
+ 2022 02:37:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220429033409.258707-1-apatel@ventanamicro.com>
- <20220429033409.258707-3-apatel@ventanamicro.com>
- <CAKmqyKMFVanzOMKPuo_i7hWZEJOmReBpp+wgqv3e2ExV2Jb-7g@mail.gmail.com>
- <CAK9=C2UBXfEoCEe1Nexa+v51ZxY7qd3xpJDd5x77L6FM8T2Qag@mail.gmail.com>
-In-Reply-To: <CAK9=C2UBXfEoCEe1Nexa+v51ZxY7qd3xpJDd5x77L6FM8T2Qag@mail.gmail.com>
+ <20220429033409.258707-4-apatel@ventanamicro.com>
+In-Reply-To: <20220429033409.258707-4-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 May 2022 11:23:35 +0200
-Message-ID: <CAKmqyKO3cqA+diXVuz8es_0FTiPJyufPpfTxQU_bqw6vHDdFQw@mail.gmail.com>
-Subject: Re: [PATCH 2/4] target/riscv: Fix hstatus.GVA bit setting for traps
- taken from HS-mode
+Date: Mon, 9 May 2022 11:36:56 +0200
+Message-ID: <CAKmqyKO_=Wsj+zrG96_rrd_N9rKcKrJZpJ9SmtP=Xg15GY88nA@mail.gmail.com>
+Subject: Re: [PATCH 3/4] target/riscv: Set [m|s]tval for both illegal and
+ virtual instruction traps
 To: Anup Patel <apatel@ventanamicro.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -57,8 +55,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Atish Patra <atishp@atishpatra.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d30;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,79 +77,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2022 09:24:05 -0000
+X-List-Received-Date: Mon, 09 May 2022 09:37:33 -0000
 
-On Thu, May 5, 2022 at 12:36 PM Anup Patel <apatel@ventanamicro.com> wrote:
+On Fri, Apr 29, 2022 at 5:36 AM Anup Patel <apatel@ventanamicro.com> wrote:>
+> Currently, the [m|s]tval CSRs are set with trapping instruction encoding
+> only for illegal instruction traps taken at the time of instruction
+> decoding.
 >
-> On Thu, May 5, 2022 at 3:21 PM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Fri, Apr 29, 2022 at 1:38 PM Anup Patel <apatel@ventanamicro.com> wrote:
-> > >
-> > > Currently, QEMU does not set hstatus.GVA bit for traps taken from
-> > > HS-mode into HS-mode which breaks the Xvisor nested MMU test suite
-> > > on QEMU. This was working previously.
-> > >
-> > > This patch updates riscv_cpu_do_interrupt() to fix the above issue.
-> > >
-> > > Fixes: 86d0c457396b ("target/riscv: Fixup setting GVA")
-> > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > > ---
-> > >  target/riscv/cpu_helper.c | 1 -
-> > >  1 file changed, 1 deletion(-)
-> > >
-> > > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > > index e1aa4f2097..d83579accf 100644
-> > > --- a/target/riscv/cpu_helper.c
-> > > +++ b/target/riscv/cpu_helper.c
-> > > @@ -1434,7 +1434,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
-> > >                  /* Trap into HS mode */
-> > >                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
-> > >                  htval = env->guest_phys_fault_addr;
-> > > -                write_gva = false;
-> >
-> > This doesn't seem right.
-> >
-> > "Field GVA (Guest Virtual Address) is written by the implementation
-> > whenever a trap is taken
-> > into HS-mode. For any trap (breakpoint, address misaligned, access
-> > fault, page fault, or guest-
-> > page fault) that writes a guest virtual address to stval, GVA is set
-> > to 1. For any other trap into
-> > HS-mode, GVA is set to 0"
-> >
-> > So if we are trapping from HS to HS, the address in stval should not
-> > be a guest virtual address, at least in general.
+> In RISC-V world, a valid instructions might also trap as illegal or
+> virtual instruction based to trapping bits in various CSRs (such as
+> mstatus.TVM or hstatus.VTVM).
 >
-> That's not correct. The HLV/HSV instructions executed by hypervisor
-> (HS-mode) take guest virtual address. These instructions can trap
-> from HS-mode to HS-mode.
+> We improve setting of [m|s]tval CSRs for all types of illegal and
+> virtual instruction traps.
+>
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 
-Ah, I forgot about those instructions, but still they are the
-exception. In general we would expect a trap from HS to HS to contain
-HS addresses. We should just handle the other cases specially
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c        |  2 ++
+>  target/riscv/cpu.h        |  8 +++++++-
+>  target/riscv/cpu_helper.c |  1 +
+>  target/riscv/translate.c  | 17 +++++++++++++----
+>  4 files changed, 23 insertions(+), 5 deletions(-)
 >
-> >
-> > We probably aren't correctly setting GVA if MPRV is set though, as
-> > then the page faults should be guest addresses. That's probably the
-> > issue you are seeing.
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index dff4606585..f0a702fee6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -406,6 +406,7 @@ void restore_state_to_opc(CPURISCVState *env, TranslationBlock *tb,
+>      } else {
+>          env->pc = data[0];
+>      }
+> +    env->bins = data[1];
+>  }
 >
-> The Xvisor nested MMU test-suit is broken on QEMU because it
-> uses HLV/HSV instructions in HS-mode.
+>  static void riscv_cpu_reset(DeviceState *dev)
+> @@ -445,6 +446,7 @@ static void riscv_cpu_reset(DeviceState *dev)
+>      env->mcause = 0;
+>      env->miclaim = MIP_SGEIP;
+>      env->pc = env->resetvec;
+> +    env->bins = 0;
+>      env->two_stage_lookup = false;
 >
-> Regards,
-> Anup
+>      /* Initialized default priorities of local interrupts. */
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index fe6c9a2c92..a55c918274 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -30,6 +30,12 @@
 >
-> >
-> > Alistair
-> >
-> > >              }
-> > >              env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
-> > >          }
-> > > --
-> > > 2.34.1
-> > >
-> > >
+>  #define TCG_GUEST_DEFAULT_MO 0
+>
+> +/*
+> + * RISC-V-specific extra insn start words:
+> + * 1: Original instruction opcode
+> + */
+> +#define TARGET_INSN_START_EXTRA_WORDS 1
+> +
+>  #define TYPE_RISCV_CPU "riscv-cpu"
+>
+>  #define RISCV_CPU_TYPE_SUFFIX "-" TYPE_RISCV_CPU
+> @@ -140,7 +146,7 @@ struct CPUArchState {
+>      target_ulong frm;
+>
+>      target_ulong badaddr;
+> -    uint32_t bins;
+> +    target_ulong bins;
+>
+>      target_ulong guest_phys_fault_addr;
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d83579accf..bba4fce777 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1371,6 +1371,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>              tval = env->badaddr;
+>              break;
+>          case RISCV_EXCP_ILLEGAL_INST:
+> +        case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
+>              tval = env->bins;
+>              break;
+>          default:
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 0cd1d9ee94..55a4713af2 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -107,6 +107,8 @@ typedef struct DisasContext {
+>      /* PointerMasking extension */
+>      bool pm_mask_enabled;
+>      bool pm_base_enabled;
+> +    /* TCG of the current insn_start */
+> +    TCGOp *insn_start;
+>  } DisasContext;
+>
+>  static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+> @@ -236,9 +238,6 @@ static void generate_exception_mtval(DisasContext *ctx, int excp)
+>
+>  static void gen_exception_illegal(DisasContext *ctx)
+>  {
+> -    tcg_gen_st_i32(tcg_constant_i32(ctx->opcode), cpu_env,
+> -                   offsetof(CPURISCVState, bins));
+> -
+>      generate_exception(ctx, RISCV_EXCP_ILLEGAL_INST);
+>  }
+>
+> @@ -1017,6 +1016,13 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>  /* Include decoders for factored-out extensions */
+>  #include "decode-XVentanaCondOps.c.inc"
+>
+> +static inline void decode_save_opc(DisasContext *ctx, target_ulong opc)
+> +{
+> +    assert(ctx->insn_start != NULL);
+> +    tcg_set_insn_start_param(ctx->insn_start, 1, opc);
+> +    ctx->insn_start = NULL;
+> +}
+> +
+>  static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>  {
+>      /*
+> @@ -1033,6 +1039,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>
+>      /* Check for compressed insn */
+>      if (extract16(opcode, 0, 2) != 3) {
+> +        decode_save_opc(ctx, opcode);
+>          if (!has_ext(ctx, RVC)) {
+>              gen_exception_illegal(ctx);
+>          } else {
+> @@ -1047,6 +1054,7 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
+>          opcode32 = deposit32(opcode32, 16, 16,
+>                               translator_lduw(env, &ctx->base,
+>                                               ctx->base.pc_next + 2));
+> +        decode_save_opc(ctx, opcode32);
+>          ctx->opcode = opcode32;
+>          ctx->pc_succ_insn = ctx->base.pc_next + 4;
+>
+> @@ -1113,7 +1121,8 @@ static void riscv_tr_insn_start(DisasContextBase *dcbase, CPUState *cpu)
+>  {
+>      DisasContext *ctx = container_of(dcbase, DisasContext, base);
+>
+> -    tcg_gen_insn_start(ctx->base.pc_next);
+> +    tcg_gen_insn_start(ctx->base.pc_next, 0);
+> +    ctx->insn_start = tcg_last_op();
+>  }
+>
+>  static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+> --
+> 2.34.1
+>
+>
 
