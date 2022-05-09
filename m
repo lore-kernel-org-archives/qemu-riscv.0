@@ -1,51 +1,53 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1no8or-0001yl-9l
-	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 15:13:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35488)
+	id 1no9T9-0000nd-If
+	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 15:54:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42398)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no8op-0001yF-Vp
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:13:20 -0400
-Received: from mail-yb1-xb32.google.com ([2607:f8b0:4864:20::b32]:42659)
+ id 1no9T7-0000mm-VC
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:54:57 -0400
+Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133]:33940)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1no8oo-0007Mc-1w
- for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:13:19 -0400
-Received: by mail-yb1-xb32.google.com with SMTP id i11so4703236ybq.9
- for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 12:13:17 -0700 (PDT)
+ id 1no9T6-0004cd-59
+ for qemu-riscv@nongnu.org; Mon, 09 May 2022 15:54:57 -0400
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-2f7c424c66cso157409307b3.1
+ for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 12:54:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=atishpatra.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9OqDkRRuvVTI2G4Jm93FQeyym7FQ71vx2PHKq8by+Ec=;
- b=KHE5KQLNvafD44CEMDsiNMDsvYWIRRWfVphhc0+lDgb8Qy5K0cF4IVnjwcOC7HA/D4
- UCaNRTA29U0pZbrrD9wcaj28/ldj7w2Zx2GfydUt4FyruIj4ab6TGMfQddYGCkAODIR2
- LP4K63ubYwKliqTXrwZzuQBn5pp54vhl9u0F8=
+ :cc; bh=9POuLCjJRKjPs4Qiw3GOb6CC+jq/9fZcHov7A6+j2gE=;
+ b=uGDLkeMHEDSkUIsc9seaSzcPSGWJzWa0h/oIPM/kWfoue6xiGvO2aSjKuBa8TpfASp
+ iM6N6MYY+NrdmnOFDS6xqHEG0uqtsayE97WWUz60zStIaQXouhxMl7ZvDdYaHwxbVTqJ
+ 2Ylh8Av/SYfpIByXaPghatwbeOI41Cp3rSaQk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9OqDkRRuvVTI2G4Jm93FQeyym7FQ71vx2PHKq8by+Ec=;
- b=2MntYULi2JvPRKz7AREddmE0ylKbbSOLYusbo2As1qQIHnwAQXVLGuJip3D1BUkDzv
- ltyxPsN1Mk5DHYia96m9wkugPy/MSq8p4nAvCzWbCUxCyVGUOlRT2xp4McTzLocqhvG4
- FJpvFomRMYr7mDDS6OztSQ4hvJUlpECLRvvFBaxc9cmnH+z/69sSAbrzw8/SZ+DJ42F0
- GJaSbMcIyes9QbA6ccYNht2qgspHocHV8wu/dnG+ob9bSitcef6C/jpVCLmkQ3D+fFpv
- EmqjDkzZRQs57Z2sqeNiDFXtbNkwJwYvTKKDfc7iuP9PWtLVp7QFBL542hsjTsB+yraL
- MX7A==
-X-Gm-Message-State: AOAM533n/+3X8gGopSDusLuRqQjOMubR8oZZblmeuHVa//qoCOkAogP9
- cfIw+JSlkL8KwP4pdZ649Uf+20m2yekVlwLeTmoz
-X-Google-Smtp-Source: ABdhPJyj1OFDeJa7TiMWgT4Meg7t7pqee5ERU/Wh12DXlpMQYSa+6a0xU+vXKPjJfOISKc2tLy9MA5OI3LFeoZN9r38=
-X-Received: by 2002:a25:9247:0:b0:645:ddd5:a182 with SMTP id
- e7-20020a259247000000b00645ddd5a182mr14460943ybo.289.1652123596522; Mon, 09
- May 2022 12:13:16 -0700 (PDT)
+ bh=9POuLCjJRKjPs4Qiw3GOb6CC+jq/9fZcHov7A6+j2gE=;
+ b=DvbFJXfa/iK7/bar0yxh7WeT1xHU2NJwOgPvlzJi1cGP07z9/9fVW6qkoxCyQjJJPH
+ kl+nlmQl6icrzdPCepczl4Rsfd30P7qhTx0y3wsRauVgbkCgBzf6IsrHkcWypkNfsFZR
+ fKD3CpCEY1J9D3NX5A9b9myoDVo4fqveEEi3X+dmtnTA3ewmUq0y+tAbtfPX7uu1ovZm
+ GV6ohk6EKvrgpz98y3sob+BExkyQIV+p3NDOO5DWIbmywcLjyN9ykg7Dt3fz+x1gltu+
+ sgd9pNcL9rOFqbIjwnTbTsA5OjaXwOYhDAvscX2JDofqA3BgQiUc/XWtVyFHieEATSCK
+ KdeQ==
+X-Gm-Message-State: AOAM533V6zj1eaizQrTMk5oXupnfAO8MK2kIcO0y4Vr4gvXQum1XTApM
+ YxXUpABYDcYx270CWjwUq1YnbudvLvhddDAZpO/e
+X-Google-Smtp-Source: ABdhPJzAw10aG1O6+EZhbMDYJn3J26SD/T4r4aRciiDNHhZUpxreFiIVTnoySWJcj7KIrzlwGy+RiYh1xAeLDcITb5Y=
+X-Received: by 2002:a05:690c:16:b0:2db:cfed:de0e with SMTP id
+ bc22-20020a05690c001600b002dbcfedde0emr16141271ywb.271.1652126094803; Mon, 09
+ May 2022 12:54:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220429033409.258707-1-apatel@ventanamicro.com>
- <20220429033409.258707-2-apatel@ventanamicro.com>
- <CANzO1D1RvmXF-BdZ1iMhwLwikcVveCYjtXtgT5KEcrXF++xXrA@mail.gmail.com>
-In-Reply-To: <CANzO1D1RvmXF-BdZ1iMhwLwikcVveCYjtXtgT5KEcrXF++xXrA@mail.gmail.com>
+References: <20220429153431.308829-1-apatel@ventanamicro.com>
+ <20220429153431.308829-3-apatel@ventanamicro.com>
+ <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
+In-Reply-To: <CANzO1D0DxbM=KAwU1E4ZpMfdBpojqX-5+tYGDmtKoQujScuC6A@mail.gmail.com>
 From: Atish Patra <atishp@atishpatra.org>
-Date: Mon, 9 May 2022 12:13:05 -0700
-Message-ID: <CAOnJCUKE2iAshXKvuiGPA+eK5fAO91FvR50OnV-=JKwztqFo7g@mail.gmail.com>
-Subject: Re: [PATCH 1/4] target/riscv: Fix csr number based privilege checking
+Date: Mon, 9 May 2022 12:54:44 -0700
+Message-ID: <CAOnJCUKCXs29mimFY4-dvWguQyRJsOvAy5pVHm3Y5Dr65-AtOw@mail.gmail.com>
+Subject: Re: [PATCH 2/3] target/riscv: Add dummy mcountinhibit CSR for priv
+ spec v1.11 or higher
 To: Frank Chang <frank.chang@sifive.com>
 Cc: Anup Patel <apatel@ventanamicro.com>,
  Peter Maydell <peter.maydell@linaro.org>, 
@@ -54,16 +56,16 @@ Cc: Anup Patel <apatel@ventanamicro.com>,
  Sagar Karandikar <sagark@eecs.berkeley.edu>, Anup Patel <anup@brainfault.org>, 
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000189ccd05de9900d5"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b32;
- envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb32.google.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
+ envelope-from=atishp@atishpatra.org; helo=mail-yw1-x1133.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,154 +78,75 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2022 19:13:20 -0000
+X-List-Received-Date: Mon, 09 May 2022 19:54:58 -0000
 
---000000000000189ccd05de9900d5
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, Apr 29, 2022 at 8:20 PM Frank Chang <frank.chang@sifive.com> wrote:
-
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+On Wed, May 4, 2022 at 2:53 AM Frank Chang <frank.chang@sifive.com> wrote:
 >
-> On Fri, Apr 29, 2022 at 11:34 AM Anup Patel <apatel@ventanamicro.com>
-> wrote:
+> Hi Anup,
 >
->> When hypervisor and VS CSRs are accessed from VS-mode or VU-mode,
->> the riscv_csrrw_check() function should generate virtual instruction
->> trap instead illegal instruction trap.
+> I found that Atish has already submitted a patch to implement the mcountinhibit CSR:
+> https://www.mail-archive.com/qemu-devel@nongnu.org/msg879349.html
+>
+
+Yeah. I think it depends on which series is merged first. The PMU
+series actually uses mcountinhibit.
+However, latest OpenSBI patches detect priv version v1.11 based on
+mcountinhibit presence.
+We need mcountinhibit support to test any v1.12 patches anyways.
+
+If PMU patches are merged first, we don't need this patch.
+
+> Regards,
+> Frank Chang
+>
+> On Fri, Apr 29, 2022 at 11:44 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >>
->> Fixes: 533c91e8f22c ("target/riscv: Use RISCVException enum for
->> CSR access")
+>> The mcountinhibit CSR is mandatory for priv spec v1.11 or higher. For
+>> implementation that don't want to implement can simply have a dummy
+>> mcountinhibit which always zero.
 >>
->
-This is not the correct Fixes tag. This patch just changed the error code
-to enum.
-The above said issue exists before this patch.
-
-I think the correct fix should be 0a42f4c44088 (" target/riscv: Fix CSR
-perm checking for HS mode"). No ?
-
-
-> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+>> Fixes: a4b2fa433125 ("target/riscv: Introduce privilege version field in
+>> the CSR ops.")
+>> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 >> ---
->>  target/riscv/csr.c | 8 ++++++--
->>  1 file changed, 6 insertions(+), 2 deletions(-)
+>>  target/riscv/cpu_bits.h | 3 +++
+>>  target/riscv/csr.c      | 2 ++
+>>  2 files changed, 5 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index 4d04b20d06..4a55c6a709 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -159,6 +159,9 @@
+>>  #define CSR_MTVEC           0x305
+>>  #define CSR_MCOUNTEREN      0x306
+>>
+>> +/* Machine Counter Setup */
+>> +#define CSR_MCOUNTINHIBIT   0x320
+>> +
+>>  /* 32-bit only */
+>>  #define CSR_MSTATUSH        0x310
 >>
 >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index 3500e07f92..2bf0a97196 100644
+>> index 2bf0a97196..e144ce7135 100644
 >> --- a/target/riscv/csr.c
 >> +++ b/target/riscv/csr.c
->> @@ -3139,7 +3139,7 @@ static inline RISCVException
->> riscv_csrrw_check(CPURISCVState *env,
->>      int read_only = get_field(csrno, 0xC00) == 3;
->>      int csr_min_priv = csr_ops[csrno].min_priv_ver;
->>  #if !defined(CONFIG_USER_ONLY)
->> -    int effective_priv = env->priv;
->> +    int csr_priv, effective_priv = env->priv;
+>> @@ -3391,6 +3391,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>>      [CSR_MIE]         = { "mie",        any,   NULL,    NULL,    rmw_mie           },
+>>      [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,       write_mtvec       },
+>>      [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,  write_mcounteren  },
+>> +    [CSR_MCOUNTINHIBIT] = { "mcountinhibit", any, read_zero, write_ignore,
+>> +                                             .min_priv_ver = PRIV_VERSION_1_11_0 },
 >>
->>      if (riscv_has_ext(env, RVH) &&
->>          env->priv == PRV_S &&
->> @@ -3152,7 +3152,11 @@ static inline RISCVException
->> riscv_csrrw_check(CPURISCVState *env,
->>          effective_priv++;
->>      }
+>>      [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,    write_mstatush    },
 >>
->> -    if (!env->debugger && (effective_priv < get_field(csrno, 0x300))) {
->> +    csr_priv = get_field(csrno, 0x300);
->> +    if (!env->debugger && (effective_priv < csr_priv)) {
->> +        if (csr_priv == (PRV_S + 1) && riscv_cpu_virt_enabled(env)) {
->> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
->> +        }
->>          return RISCV_EXCP_ILLEGAL_INST;
->>      }
->>  #endif
 >> --
 >> 2.34.1
 >>
 >>
->>
+
 
 -- 
 Regards,
 Atish
-
---000000000000189ccd05de9900d5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 29, 2022 at 8:20 PM Frank=
- Chang &lt;<a href=3D"mailto:frank.chang@sifive.com">frank.chang@sifive.com=
-</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-<div dir=3D"ltr"><div dir=3D"ltr"><img src=3D"https://ssl.gstatic.com/ui/v1=
-/icons/mail/images/cleardot.gif">Reviewed-by: Frank Chang &lt;<a href=3D"ma=
-ilto:frank.chang@sifive.com" target=3D"_blank">frank.chang@sifive.com</a>&g=
-t;</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr=
-">On Fri, Apr 29, 2022 at 11:34 AM Anup Patel &lt;<a href=3D"mailto:apatel@=
-ventanamicro.com" target=3D"_blank">apatel@ventanamicro.com</a>&gt; wrote:<=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">When hypervisor =
-and VS CSRs are accessed from VS-mode or VU-mode,<br>
-the riscv_csrrw_check() function should generate virtual instruction<br>
-trap instead illegal instruction trap.<br>
-<br>
-Fixes: 533c91e8f22c (&quot;target/riscv: Use RISCVException enum for<br>
-CSR access&quot;)<br></blockquote></div></div></blockquote><div><br></div><=
-div>This is not the correct Fixes tag. This patch just changed the error co=
-de to enum.<br>The above said issue exists before this patch.</div><div><br=
-></div><div>I think the correct fix should be=C2=A00a42f4c44088 (&quot; tar=
-get/riscv: Fix CSR perm checking for HS mode&quot;). No ?</div><div>=C2=A0<=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><di=
-v class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-Signed-off-by: Anup Patel &lt;<a href=3D"mailto:apatel@ventanamicro.com" ta=
-rget=3D"_blank">apatel@ventanamicro.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/csr.c | 8 ++++++--<br>
-=C2=A01 file changed, 6 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 3500e07f92..2bf0a97196 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -3139,7 +3139,7 @@ static inline RISCVException riscv_csrrw_check(CPURIS=
-CVState *env,<br>
-=C2=A0 =C2=A0 =C2=A0int read_only =3D get_field(csrno, 0xC00) =3D=3D 3;<br>
-=C2=A0 =C2=A0 =C2=A0int csr_min_priv =3D csr_ops[csrno].min_priv_ver;<br>
-=C2=A0#if !defined(CONFIG_USER_ONLY)<br>
--=C2=A0 =C2=A0 int effective_priv =3D env-&gt;priv;<br>
-+=C2=A0 =C2=A0 int csr_priv, effective_priv =3D env-&gt;priv;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0if (riscv_has_ext(env, RVH) &amp;&amp;<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;priv =3D=3D PRV_S &amp;&amp;<br>
-@@ -3152,7 +3152,11 @@ static inline RISCVException riscv_csrrw_check(CPURI=
-SCVState *env,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0effective_priv++;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-<br>
--=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; (effective_priv &lt; get_fi=
-eld(csrno, 0x300))) {<br>
-+=C2=A0 =C2=A0 csr_priv =3D get_field(csrno, 0x300);<br>
-+=C2=A0 =C2=A0 if (!env-&gt;debugger &amp;&amp; (effective_priv &lt; csr_pr=
-iv)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (csr_priv =3D=3D (PRV_S + 1) &amp;&amp; ris=
-cv_cpu_virt_enabled(env)) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_VIRT_INSTRUCTI=
-ON_FAULT;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_ILLEGAL_INST;<br>
-=C2=A0 =C2=A0 =C2=A0}<br>
-=C2=A0#endif<br>
--- <br>
-2.34.1<br>
-<br>
-<br>
-</blockquote></div></div>
-</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
- class=3D"gmail_signature"><div dir=3D"ltr">Regards,<div>Atish</div></div><=
-/div></div>
-
---000000000000189ccd05de9900d5--
 
