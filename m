@@ -1,57 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1no047-00087E-4y
-	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 05:52:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42694)
+	id 1no08x-00036n-49
+	for mharc-qemu-riscv@gnu.org; Mon, 09 May 2022 05:57:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43848)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1no03y-00085q-VK; Mon, 09 May 2022 05:52:23 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:43705)
+ id 1no08n-00033Z-UD; Mon, 09 May 2022 05:57:23 -0400
+Received: from mail-il1-x133.google.com ([2607:f8b0:4864:20::133]:35622)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1no03w-0004yW-9k; Mon, 09 May 2022 05:52:21 -0400
-Received: by mail-io1-xd33.google.com with SMTP id o190so14698149iof.10;
- Mon, 09 May 2022 02:52:17 -0700 (PDT)
+ id 1no08m-0005f1-5q; Mon, 09 May 2022 05:57:21 -0400
+Received: by mail-il1-x133.google.com with SMTP id 3so5969705ily.2;
+ Mon, 09 May 2022 02:57:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=7zdhBwpU96OGCH47JYXG18VWv/TAh8HCC+chtC5Cz0o=;
- b=AywzKIGsBqcv4cIT1A99LymxJ3GZJV9ouBYw4kk14J9DZvA40piu76PB83JEInTioM
- TG0mdpKF00U1b+YrVMYzrXt2t35LPbXGSOq72tJPU3QrRQa6iJI3yfeqixAxMTmcoDHv
- ab3qHu1CvXH43xqKnGqsJoYYWrjlM83UOS9FSeBYFjmEI8Wu5QaaTpuX0FXmusVbI9KN
- 0OJ33YHhym9rwZm69VqjJFfNmcP+DPkvJ3diF2imhQn9VwXK45d3R7f4wBO7PPThoAvX
- 85M8JlFucX3RvznwPibOiAF7aHNGgnUg313qjxr/EKmOj4DtCcRtaRBAKAOpLuR3o4fz
- jfJA==
+ :cc; bh=FioSF++qKSiqcZX+emU4552NsdiF+O8RRIul+idA1yA=;
+ b=I+UX6IyT4iuoDFcV6MH38g6NW3TFvITpIu4EESLeOKAKa04BOqNMhMeBuPOlyunWX/
+ ufoDWXNPqJ0ybrqhrSsPKuOmyggowv2iIS5F75jGaDCBLlyBkuPnRm9LNypo/v3/TAqD
+ Zy/Giwvqnel5mANHywaUwcF8mMqLRvSIc8DKixU8CMotQ2TscfozXTa7ZYD9+1sOPPBI
+ 9vnziYNYAqQY0MuCx1QvU+i1Dh0YFgQdO0zqT30tkSoQQVL9UJY91BSECYtXnAfNkweX
+ 03RJQDwTJlz041kPdKC4MBFQr2nYM9Yq3KO66gBuDNgmZ0AVt1KWO2mXgbrRF4A3JeE5
+ Qrlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=7zdhBwpU96OGCH47JYXG18VWv/TAh8HCC+chtC5Cz0o=;
- b=jTZ0xMu4ztLfFbZtES4p87oyy2DT7mrdbc8+JugW41nY1iU359PPpYw1OvYdp6bN/O
- 7++200zmt4UyrI5gP2XyoToo234IzY28dMpuKy1hZznEi67COi7Ag/11OOl+Pu289ca7
- KxU1NryzN2oUG+JBfSo9ZDUAagcApBH41J5HWpQSeXtsnJTr+iNEkUfx/vk95pKnhsMg
- 7/a2/HH8/Co3L6uy6cWDp1TW01RRTCLzxTVV0mSDWhvpQL/RKjJ69ZYQ0Vfpt/T0H+gn
- iB5TS0c7WpcyU4h1+5Wcypbn38fBIXy4zNn+z9PTQjFc0zgJz20qfh3Wuu0J7GYhqafB
- 3WRw==
-X-Gm-Message-State: AOAM532mGV5nW/Pc4BgwJterfWQOe0m4ihnuk2EnvHUVeb1fHm2xW2Ri
- tZ87xPUwZgnIYQ9u88cF5eax1GC88By3V6cdE4emR3+YGiYxxZtILlk=
-X-Google-Smtp-Source: ABdhPJyZnB1lzyGTsvsMVOxJIfJ3qAnpd5HDxdtCoe+xGEcdP0NPHxLwhj0arYBmfyEJkvldZqJIv/YdSwQDouUf7XU=
-X-Received: by 2002:a05:6638:dc7:b0:32b:a483:16b8 with SMTP id
- m7-20020a0566380dc700b0032ba48316b8mr7099000jaj.66.1652089937094; Mon, 09 May
- 2022 02:52:17 -0700 (PDT)
+ bh=FioSF++qKSiqcZX+emU4552NsdiF+O8RRIul+idA1yA=;
+ b=Q0UWyLf7U8OBDpQrVprQj0YuMU3EBQKh5O1aqu/jKEsvejqhqcUiddCbiwF4/usRNf
+ 1kjC64s+Qqh+NUDxFt0wNToOFU7XM2oFP+vQopgrcs/PIEzs8GnnE6zRiaX2lGKMNWK+
+ AqG9fgP+2vWKuai8s06xxvzF1qRuyYupc/iEFe7+N6s9vijHT5k0WQxXBP0gWpWI6yD2
+ QZtCQrCyi/4JGbi0tKarSfHqaxkTJKozvKmyCfh8mBxSt95V+xk49Ya2V+198OSVbwSf
+ X4qoD50R6NCY0w0PJ1B/nao4FbiS3gM/UsfqzmJUkWF4aJ9Aid+dfgn9eh9q5j+ryKel
+ 8QpA==
+X-Gm-Message-State: AOAM533kg5TeLPsDQKPaAjK3PxJSdncusTNOvWuS9Y5CHomRxGdH5UTz
+ TMy1ZsC0W0M8WMZPbBDfimNC4dzy3G2SG2KWMzY=
+X-Google-Smtp-Source: ABdhPJyKU4bfqmUM4FEyW5icPvE7vGhdiTdJ2k5PrsX96u9RKdWm4CODGDnnZeIE79UQKht18coJ0fO89sl0lM9XW0g=
+X-Received: by 2002:a05:6e02:151:b0:2cf:8c5d:2ca0 with SMTP id
+ j17-20020a056e02015100b002cf8c5d2ca0mr4660611ilr.86.1652090238714; Mon, 09
+ May 2022 02:57:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1650777360.git.research_trasio@irq.a4lg.com>
- <51c9f2ce37e6d1483317710ddd1e14be74a61e69.1650777360.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <51c9f2ce37e6d1483317710ddd1e14be74a61e69.1650777360.git.research_trasio@irq.a4lg.com>
+References: <165181414065.18540.14828125053334599921-0@git.sr.ht>
+In-Reply-To: <165181414065.18540.14828125053334599921-0@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 May 2022 11:51:50 +0200
-Message-ID: <CAKmqyKPw-qtNm3nnLx-ZtE2Z7P2K6E3AH3B633B4nYj2m_4fMw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Add short-isa-string option
-To: Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: Frank Chang <frank.chang@sifive.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Mon, 9 May 2022 11:56:52 +0200
+Message-ID: <CAKmqyKOX+r+tjkouzvQ21mbuhdwrXf3MV-Ya7vU3iu8_aTnzhQ@mail.gmail.com>
+Subject: Re: [PATCH qemu] target/riscv: rvv: Fix early exit condition for
+ whole register load/store
+To: "~eopxd" <yueh.ting.chen@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::133;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x133.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -72,71 +75,115 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2022 09:52:28 -0000
+X-List-Received-Date: Mon, 09 May 2022 09:57:27 -0000
 
-On Sun, Apr 24, 2022 at 7:22 AM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
+On Fri, May 6, 2022 at 7:17 AM ~eopxd <eopxd@git.sr.ht> wrote:
 >
-> Because some operating systems don't correctly parse long ISA extension
-> string, this commit adds short-isa-string boolean option to disable
-> generating long ISA extension strings on Device Tree.
+> From: eopXD <eop.chen@sifive.com>
 >
-> Operating Systems which short-isa-string might be helpful:
+> Vector whole register load instructions have EEW encoded in the opcode,
+> so we shouldn't take SEW here. Vector whole register store instructions
+> are always EEW=8.
 >
-> 1.  Linux (5.17 or earlier)
-> 2.  FreeBSD (at least 14.0-CURRENT)
-> 3.  OpenBSD (at least current development version)
->
-> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-> ---
->  target/riscv/cpu.c | 5 ++++-
->  target/riscv/cpu.h | 2 ++
->  2 files changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index c765f7ff00..9718cd0e7e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -834,6 +834,8 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> +
-> +    DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> @@ -989,7 +991,8 @@ char *riscv_isa_string(RISCVCPU *cpu)
->          }
->      }
->      *p = '\0';
-> -    riscv_isa_string_ext(cpu, &isa_str, maxlen);
-> +    if (!cpu->cfg.short_isa_string)
-> +        riscv_isa_string_ext(cpu, &isa_str, maxlen);
+> Signed-off-by: eop Chen <eop.chen@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
 
-I don't love this, the long strings are part of the ISA, it seems
-strange to add an option to disable them.
+Thanks!
 
-Can you provide more details on what this breaks?
+Applied to riscv-to-apply.next
 
 Alistair
 
->      return isa_str;
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 58 +++++++++++++------------
+>  1 file changed, 31 insertions(+), 27 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 90327509f7..391c61fe93 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -1118,10 +1118,10 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+>  typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
+>
+>  static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+> -                             gen_helper_ldst_whole *fn, DisasContext *s,
+> -                             bool is_store)
+> +                             uint32_t width, gen_helper_ldst_whole *fn,
+> +                             DisasContext *s, bool is_store)
+>  {
+> -    uint32_t evl = (s->cfg_ptr->vlen / 8) * nf / (1 << s->sew);
+> +    uint32_t evl = (s->cfg_ptr->vlen / 8) * nf / width;
+>      TCGLabel *over = gen_new_label();
+>      tcg_gen_brcondi_tl(TCG_COND_GEU, cpu_vstart, evl, over);
+>
+> @@ -1153,38 +1153,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+>   * load and store whole register instructions ignore vtype and vl setting.
+>   * Thus, we don't need to check vill bit. (Section 7.9)
+>   */
+> -#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF, IS_STORE)                      \
+> +#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF, WIDTH, IS_STORE)               \
+>  static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
+>  {                                                                         \
+>      if (require_rvv(s) &&                                                 \
+>          QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
+> -        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, gen_helper_##NAME, \
+> -                                s, IS_STORE);                             \
+> +        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, WIDTH,             \
+> +                                gen_helper_##NAME, s, IS_STORE);          \
+>      }                                                                     \
+>      return false;                                                         \
 >  }
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 34c22d5d3b..5b7fe32218 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -408,6 +408,8 @@ struct RISCVCPUConfig {
->      bool aia;
->      bool debug;
->      uint64_t resetvec;
+> -GEN_LDST_WHOLE_TRANS(vl1re8_v,  1, false)
+> -GEN_LDST_WHOLE_TRANS(vl1re16_v, 1, false)
+> -GEN_LDST_WHOLE_TRANS(vl1re32_v, 1, false)
+> -GEN_LDST_WHOLE_TRANS(vl1re64_v, 1, false)
+> -GEN_LDST_WHOLE_TRANS(vl2re8_v,  2, false)
+> -GEN_LDST_WHOLE_TRANS(vl2re16_v, 2, false)
+> -GEN_LDST_WHOLE_TRANS(vl2re32_v, 2, false)
+> -GEN_LDST_WHOLE_TRANS(vl2re64_v, 2, false)
+> -GEN_LDST_WHOLE_TRANS(vl4re8_v,  4, false)
+> -GEN_LDST_WHOLE_TRANS(vl4re16_v, 4, false)
+> -GEN_LDST_WHOLE_TRANS(vl4re32_v, 4, false)
+> -GEN_LDST_WHOLE_TRANS(vl4re64_v, 4, false)
+> -GEN_LDST_WHOLE_TRANS(vl8re8_v,  8, false)
+> -GEN_LDST_WHOLE_TRANS(vl8re16_v, 8, false)
+> -GEN_LDST_WHOLE_TRANS(vl8re32_v, 8, false)
+> -GEN_LDST_WHOLE_TRANS(vl8re64_v, 8, false)
+> -
+> -GEN_LDST_WHOLE_TRANS(vs1r_v, 1, true)
+> -GEN_LDST_WHOLE_TRANS(vs2r_v, 2, true)
+> -GEN_LDST_WHOLE_TRANS(vs4r_v, 4, true)
+> -GEN_LDST_WHOLE_TRANS(vs8r_v, 8, true)
+> +GEN_LDST_WHOLE_TRANS(vl1re8_v,  1, 1, false)
+> +GEN_LDST_WHOLE_TRANS(vl1re16_v, 1, 2, false)
+> +GEN_LDST_WHOLE_TRANS(vl1re32_v, 1, 4, false)
+> +GEN_LDST_WHOLE_TRANS(vl1re64_v, 1, 8, false)
+> +GEN_LDST_WHOLE_TRANS(vl2re8_v,  2, 1, false)
+> +GEN_LDST_WHOLE_TRANS(vl2re16_v, 2, 2, false)
+> +GEN_LDST_WHOLE_TRANS(vl2re32_v, 2, 4, false)
+> +GEN_LDST_WHOLE_TRANS(vl2re64_v, 2, 8, false)
+> +GEN_LDST_WHOLE_TRANS(vl4re8_v,  4, 1, false)
+> +GEN_LDST_WHOLE_TRANS(vl4re16_v, 4, 2, false)
+> +GEN_LDST_WHOLE_TRANS(vl4re32_v, 4, 4, false)
+> +GEN_LDST_WHOLE_TRANS(vl4re64_v, 4, 8, false)
+> +GEN_LDST_WHOLE_TRANS(vl8re8_v,  8, 1, false)
+> +GEN_LDST_WHOLE_TRANS(vl8re16_v, 8, 2, false)
+> +GEN_LDST_WHOLE_TRANS(vl8re32_v, 8, 4, false)
+> +GEN_LDST_WHOLE_TRANS(vl8re64_v, 8, 8, false)
 > +
-> +    bool short_isa_string;
->  };
+> +/*
+> + * The vector whole register store instructions are encoded similar to
+> + * unmasked unit-stride store of elements with EEW=8.
+> + */
+> +GEN_LDST_WHOLE_TRANS(vs1r_v, 1, 1, true)
+> +GEN_LDST_WHOLE_TRANS(vs2r_v, 2, 1, true)
+> +GEN_LDST_WHOLE_TRANS(vs4r_v, 4, 1, true)
+> +GEN_LDST_WHOLE_TRANS(vs8r_v, 8, 1, true)
 >
->  typedef struct RISCVCPUConfig RISCVCPUConfig;
+>  /*
+>   *** Vector Integer Arithmetic Instructions
 > --
-> 2.32.0
+> 2.34.2
 >
 
