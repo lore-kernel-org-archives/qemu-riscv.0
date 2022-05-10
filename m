@@ -1,75 +1,79 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noQMh-0008L9-A2
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 09:57:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43362)
+	id 1noS1Q-0003rQ-Vn
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 11:43:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44214)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1noJa1-0005td-3D
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 02:42:45 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:34611)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1noS1P-0003qc-B0
+ for qemu-riscv@nongnu.org; Tue, 10 May 2022 11:43:35 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:34587)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1noJZx-0008UB-KF
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 02:42:44 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- qe3-20020a17090b4f8300b001dc24e4da73so1134454pjb.1
- for <qemu-riscv@nongnu.org>; Mon, 09 May 2022 23:42:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=p8IhicH2gHlNfTgfegpg/zkoYnjoTUmLta4pv1eT89A=;
- b=3RjS+uB559RobrnJTnZJzqGKI0J6KC+cm30Yq7zeO/arm4HFBQY7/mTEgIOgi+7sT5
- Nwr4sodkiQ2zshXg1hANVZ58gXhL6x9CJ3wG/ggAAmFs7OWFBXXXdS6PqGihU+raoV6I
- qP0pmraFShH89yMp8ezGbvMV+st3uJOgv9i6zPGeeMfW9DcYCpLtUCxAqJtggBw03kJf
- Bk95825lsb7+q+YZUpF2sSf103Ga1cTY+75gDKkKJSy+V3cyeSH0DhWD9qr4Zq7iDfPp
- CtXgw+4mlTuJ3lyzzBy29nwBgzYGuxhVIWntErYRSv74+JrBrISZVM4cZYSgl2PNm8Jl
- 225Q==
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1noS1N-0000bT-K4
+ for qemu-riscv@nongnu.org; Tue, 10 May 2022 11:43:34 -0400
+Received: by mail-pl1-x634.google.com with SMTP id n8so17105538plh.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 May 2022 08:43:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=h0resYfk1K5yxJGjQaDEnfx5eDc62a6WGFOzhZ19oYg=;
+ b=yiGIFFJfh6zdFDTaTdsEqvgATfvVA9G3tCq84sLPelhj5WzibOuAKTixaonlO4wCtr
+ Qeo6Jyq/PR/0/AKxIufTti7fJ4SxO/7F21HaLQpB5hpXwI57uhIr9WTBfCvXsvOq22MA
+ fGnoAz6Ff5YmRVG6zT0uyR7tlq0mvCV8HbQOb4V9FaBCduhS5iapxnV1wrisxBwMHRRz
+ 6UOLPD5ij8KCicWiHj0bSOBRQ1UnILEx4aXaOYHJpv9XGU5pQuDR/Yup33U4lZr/lWso
+ OQ1Qt8Q/39Mf1HM9++5+Idz6arjRAg/+ydWA0Zd5cPc+eLaz6CPWf1FCfuJ2pirWVNeA
+ YQ+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=p8IhicH2gHlNfTgfegpg/zkoYnjoTUmLta4pv1eT89A=;
- b=PkgG/JL+NK/Abv+iMKafRX474yvc6bxY6jcgeisn7912A4jplyaz1sAlV+3WbZdznZ
- MSMcJZuJaCfGyi/Fxc911ndwZlosZMDHl3rwHE28tt5QrwC5vmtLhRPkpomEtORwcovo
- g4sKCMv+RTRMWlMK3YxcYvVEjc88AvK2uRHCsGT74OlOKYzzBXyVV8HefxHmdKQu5qe6
- sXDCS1Pgwfs6op1rbCx7Q6j933+TuzQFTwdZQikc2hXqxq3kf1xrIC76PmMlZ4RekQRc
- WOCwktVhooo0RAdoweWi3OyPhMim9U3idAc4wqDaN+rjPQQNL4CfyefB3biuNqfqbwtU
- Uw4w==
-X-Gm-Message-State: AOAM532a32+P9Hi69xdWWlkdvTFPQZmDo5P3tm//3g8ENwyhl/Qf1qtz
- yM6QornyBvAytZXBa8hFo2DM8A==
-X-Google-Smtp-Source: ABdhPJxxNdldJdu8+EgJJ+WvBCxyPZ/8SJWKmna/gbTi7E4zToXD4YHMR7yj4jcgwM1e/vUp5HnkRQ==
-X-Received: by 2002:a17:902:ec81:b0:15e:9cfc:a07a with SMTP id
- x1-20020a170902ec8100b0015e9cfca07amr19383196plg.62.1652164958169; 
- Mon, 09 May 2022 23:42:38 -0700 (PDT)
-Received: from daolu.ba.rivosinc.com ([66.220.2.162])
+ bh=h0resYfk1K5yxJGjQaDEnfx5eDc62a6WGFOzhZ19oYg=;
+ b=Uk2vkdicdr5k052F5oRWX1mwAesj1piqmnBNIUPFdwHnARpOwCqwc/+boh93QUGFU/
+ 9V46p2vSOwSe24hefETYsfjVIR8vHXrD9BDx/EurKroMfNjvPa672NwO+qlJmwX6KjGk
+ 8H/M/e8pvgzjCFn4hBn91I85layYCYVDxyTXy6r4ateYToJtRGVxeObSRd0FJXPxrRtz
+ X1zH2aObagDsKpAGALn9AA1EKHvfmLkuOJxyG7ho0tt8RZkMT/ilsg3drOCEjt4LEEFA
+ oDnGiP+z19HnROgFQDZXU4RgBw7ca+qcIsl+zbzxl9SWq57HCizZkRCr+TQ/NsTH2PfQ
+ cKoA==
+X-Gm-Message-State: AOAM530wC5Y3lSAJUfAoU/nbO2nGKqepThshCze9Ma73UJx9vSVIWujt
+ 5dcBW0SK3PIHwqwXjPKxR/qa8Q==
+X-Google-Smtp-Source: ABdhPJx8BNGYLFqpUK8Juc/m6CA71nrcLU4tcOR8IorxQJCLfjGA0utUvtv62bDrL6DwITgV1D4GDA==
+X-Received: by 2002:a17:903:11c7:b0:154:b936:d1d4 with SMTP id
+ q7-20020a17090311c700b00154b936d1d4mr21430830plh.78.1652197412119; 
+ Tue, 10 May 2022 08:43:32 -0700 (PDT)
+Received: from [192.168.1.6] ([71.212.142.129])
  by smtp.gmail.com with ESMTPSA id
- v13-20020a17090331cd00b0015e8d4eb247sm1078082ple.145.2022.05.09.23.42.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 May 2022 23:42:37 -0700 (PDT)
-From: Dao Lu <daolu@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Dao Lu <daolu@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ y25-20020a056a00181900b005082a7fd144sm11015138pfa.3.2022.05.10.08.43.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 May 2022 08:43:31 -0700 (PDT)
+Message-ID: <f9f7804f-76e1-da5c-600a-47b6df780e15@linaro.org>
+Date: Tue, 10 May 2022 08:43:29 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Subject: Re: [PATCH 1/1] Add Zihintpause support
+Content-Language: en-US
+To: Dao Lu <daolu@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH 0/1] Add Zihintpause support 
-Date: Mon,  9 May 2022 23:42:30 -0700
-Message-Id: <20220510064231.1384670-1-daolu@rivosinc.com>
-X-Mailer: git-send-email 2.36.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=daolu@rivosinc.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20220510064231.1384670-1-daolu@rivosinc.com>
+ <20220510064231.1384670-2-daolu@rivosinc.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20220510064231.1384670-2-daolu@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 10 May 2022 09:57:13 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,30 +85,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 06:42:45 -0000
+X-List-Received-Date: Tue, 10 May 2022 15:43:35 -0000
 
-This patch adds RISC-V Zihintpause support. The extension is set to be enabled
-by default and opcode has been added to insn32.decode.
+On 5/9/22 23:42, Dao Lu wrote:
+> +static bool trans_pause(DisasContext *ctx, arg_pause *a)
+> +{
+> +    REQUIRE_ZIHINTPAUSE(ctx);
+> +
+> +    /*
+> +     * PAUSE is a no-op in QEMU,
+> +     * however we need to clear the reservation
+> +     */
+> +    tcg_gen_movi_tl(load_res, -1);
 
-Added trans_pause for TCG to mainly be a no-op and break reservation.
+I recommend ending the TB and returning to the main loop.  When running in round-robin 
+mode, this will yield to the next cpu.
 
-The change can also be found in:
-https://github.com/dlu42/qemu/tree/zihintpause_support_v1
 
-Tested along with pause support added to cpu_relax function for linux, the
-changes I made to linux to test can be found here:
-https://github.com/dlu42/linux/tree/pause_support_v1
-
-Dao Lu (1):
-  Add Zihintpause support
-
- target/riscv/cpu.c                      |  2 ++
- target/riscv/cpu.h                      |  1 +
- target/riscv/insn32.decode              |  7 ++++++-
- target/riscv/insn_trans/trans_rvi.c.inc | 18 ++++++++++++++++++
- 4 files changed, 27 insertions(+), 1 deletion(-)
-
--- 
-2.36.0
-
+r~
 
