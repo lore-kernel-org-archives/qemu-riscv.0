@@ -1,39 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noUYv-0001rH-5Y
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 14:26:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35400)
+	id 1noUYx-00021m-Lc
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 14:26:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35402)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noUYm-0001mL-HH; Tue, 10 May 2022 14:26:12 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:44992)
+ id 1noUYm-0001mM-IC; Tue, 10 May 2022 14:26:12 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:44998)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noUYk-0003QU-FE; Tue, 10 May 2022 14:26:12 -0400
+ id 1noUYk-0003QX-EZ; Tue, 10 May 2022 14:26:12 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 068A411EFC9;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 7F13411F098;
  Tue, 10 May 2022 18:26:08 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Date: Tue, 10 May 2022 18:26:07 +0000
-Subject: [PATCH qemu v2 00/10] Add mask agnostic behavior for rvv instructions
-MIME-Version: 1.0
-Message-ID: <165220716770.22380.2493420346587893209-0@git.sr.ht>
+Subject: [PATCH qemu v2 03/10] target/riscv: rvv: Add mask agnostic for vx
+ instructions
+Message-ID: <165220716770.22380.2493420346587893209-3@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+In-Reply-To: <165220716770.22380.2493420346587893209-0@git.sr.ht>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 2
-X-Spam_score: 0.2
-X-Spam_bar: /
-X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 36
+X-Spam_score: 3.6
+X-Spam_bar: +++
+X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
+ FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -47,65 +48,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 18:26:14 -0000
+Date: Tue, 10 May 2022 18:26:16 -0000
+X-Original-Date: Thu, 17 Mar 2022 01:38:39 -0700
+X-List-Received-Date: Tue, 10 May 2022 18:26:16 -0000
 
-According to v-spec, mask agnostic behavior can be either kept as
-undisturbed or set elements' bits to all 1s. To distinguish the
-difference of mask policies, QEMU should be able to simulate the mask
-agnostic behavior as "set mask elements' bits to all 1s".
+From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 
-There are multiple possibility for agnostic elements according to
-v-spec. The main intent of this patch-set tries to add option that
-can distinguish between mask policies. Setting agnostic elements to
-all 1s allows QEMU to express this.
+Signed-off-by: eop Chen <eop.chen@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 2 ++
+ target/riscv/vector_helper.c            | 3 +++
+ 2 files changed, 5 insertions(+)
 
-The following instructions that are always unmasked and not affected:
-
-- Vector add-with-carry and subtract-with-borrow instructions
-- Vector merge and move instructions
-- Vector reduction instructions
-- Vector mask-register logical instructions
-- `vcompress`
-
-This patch set is based on v15 of patch set "Add tail agnostic behavior
-for
-rvv instructions".
-Based on: <165220137795.17881.11560413809338015947-0@git.sr.ht>
-
-v2 updates:
-- Rebase upon changes of the tail agnostic patch-set
-- Minor change for vector load/store instructions
-
-Yueh-Ting (eop) Chen (9):
-  target/riscv: rvv: Add mask agnostic for vv instructions
-  target/riscv: rvv: Add mask agnostic for vector load / store
-    instructions
-  target/riscv: rvv: Add mask agnostic for vx instructions
-  target/riscv: rvv: Add mask agnostic for vector integer shift
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector integer comparison
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector fix-point arithmetic
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector floating-point
-    instructions
-  target/riscv: rvv: Add mask agnostic for vector mask instructions
-  target/riscv: rvv: Add mask agnostic for vector permutation
-    instructions
-
-eopXD (1):
-  target/riscv: rvv: Add option 'rvv_ma_all_1s' to enable optional mask
-    agnostic behavior
-
- target/riscv/cpu.c                      |   1 +
- target/riscv/cpu.h                      |   2 +
- target/riscv/cpu_helper.c               |   2 +
- target/riscv/insn_trans/trans_rvv.c.inc |  32 +++++
- target/riscv/internals.h                |   5 +-
- target/riscv/translate.c                |   2 +
- target/riscv/vector_helper.c            | 152 ++++++++++++++++++++----
- 7 files changed, 171 insertions(+), 25 deletions(-)
-
--- 
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
+s/trans_rvv.c.inc
+index 9a2d54313a..de8dda31fe 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1316,6 +1316,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint=
+32_t vs2, uint32_t vm,
+     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+                                       s->cfg_ptr->vlen / 8, data));
+=20
+@@ -1493,6 +1494,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint=
+32_t vs2, uint32_t vm,
+     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+                                       s->cfg_ptr->vlen / 8, data));
+=20
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 89eea33eb3..98c9f21182 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -901,10 +901,13 @@ static void do_vext_vx(void *vd, void *v0, target_long =
+s1, void *vs2,
+     uint32_t vl =3D env->vl;
+     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
+     uint32_t vta =3D vext_vta(desc);
++    uint32_t vma =3D vext_vma(desc);
+     uint32_t i;
+=20
+     for (i =3D env->vstart; i < vl; i++) {
+         if (!vm && !vext_elem_mask(v0, i)) {
++            /* set masked-off elements to 1s */
++            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+             continue;
+         }
+         fn(vd, s1, vs2, i);
+--=20
 2.34.2
+
 
