@@ -1,68 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noTsW-0005ni-MI
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 13:42:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55164)
+	id 1noUYu-0001pU-Q6
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 14:26:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:35396)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1noTsP-0005ld-CD
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 13:42:26 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:39572)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1noTsC-0005bA-TN
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 13:42:17 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id r192so11036500pgr.6
- for <qemu-riscv@nongnu.org>; Tue, 10 May 2022 10:42:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=jLo1odo1nlis5qYHeLw0d3bpXDR71zsO7FQwD9J9Ol0=;
- b=z9QoR/xVwFwcCpg93GNeTm2PA3xqIjF6DW9xCJ57bPnxDQFlGFg0vu+ryeJi115GHk
- SevFXaBxcjSn6/mM7i+ha4VXvM+umnpBbBScsumPoPT7LtN4g+jlcfNqUmtEi8eY/Eqj
- NzMxzp9r7Mn1vb8guaKwFI/7rvQWKFqnb7oLVTvaat8EpjdibMaQa5tR/iUh/VJOxncE
- g1PQa69kVtyEr3cIZJcC9Lu/qZUWe8M/veWidwCgNSUIJr5ERtBmnnWOzim9LLruPkkW
- RzKIjqOD725K8tE8rXoF2vxP5Etz/S03zXBDlFC9AICkaRK2oxfVndB8I2T5izunbPUj
- NZXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=jLo1odo1nlis5qYHeLw0d3bpXDR71zsO7FQwD9J9Ol0=;
- b=P8ARiUAfq+ZAngAwpQfrXD78ntOPt0b+ZoJMTBjDMjOUOnm58AwSsKKOSEKxh4XZFo
- XVJI3YvXA8wsOCgHKk8K83/OSbwZIzANsq66TL/TT60ib/IQM3RYWLubAiIeVPlovGlK
- 0Vi0UlC/pReCjYJJCPzFciOqSMLAoBFIfU39iV/nQFuzohp0KPezVKxCWWT5z1ewHiuz
- 0qsHZcG32aIxcsWfTTe2aHOPUelcrccyRQEGmYxxtdOUQBcDVoxCEwS8TOeKM+TM6abZ
- r6fkV8RpetJezRNo63IqU15tiaAIsG3Xmj6dn6tJzRdAE1IKc+XjzKnlsq8EucJfD83f
- hsVA==
-X-Gm-Message-State: AOAM530NkcxqVrWQmjyRxBmAk/GSp4zqXMYHDpAHyoOqNoM+U6d5ehKC
- DK4DJ54CTU5LeK4Fqcm5JQbaor4XCW4OOtHxxt+I+w==
-X-Google-Smtp-Source: ABdhPJyZOwy/LDVZ/9KucdkDbc2n+b6334cqaXJnsuoOdsMb4a+ohtX0rUwxxG9GwcukaEwJCNk+OMBlnlIYN0TGNcA=
-X-Received: by 2002:a63:5564:0:b0:3ab:9d95:7a21 with SMTP id
- f36-20020a635564000000b003ab9d957a21mr17950039pgm.542.1652204530890; Tue, 10
- May 2022 10:42:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1noUYm-0001mJ-AX; Tue, 10 May 2022 14:26:12 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:44996)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1noUYk-0003QW-EP; Tue, 10 May 2022 14:26:11 -0400
+Authentication-Results: mail-b.sr.ht; dkim=none 
+Received: from git.sr.ht (unknown [173.195.146.142])
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 5141F11F04D;
+ Tue, 10 May 2022 18:26:08 +0000 (UTC)
+From: ~eopxd <eopxd@git.sr.ht>
+Subject: [PATCH qemu v2 02/10] target/riscv: rvv: Add mask agnostic for vector
+ load / store instructions
+Message-ID: <165220716770.22380.2493420346587893209-2@git.sr.ht>
+X-Mailer: git.sr.ht
+Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+In-Reply-To: <165220716770.22380.2493420346587893209-0@git.sr.ht>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20220510064231.1384670-1-daolu@rivosinc.com>
- <20220510064231.1384670-2-daolu@rivosinc.com>
- <f9f7804f-76e1-da5c-600a-47b6df780e15@linaro.org>
-In-Reply-To: <f9f7804f-76e1-da5c-600a-47b6df780e15@linaro.org>
-From: Dao Lu <daolu@rivosinc.com>
-Date: Tue, 10 May 2022 10:42:00 -0700
-Message-ID: <CAKh7v-Qz3S1z-MKYctAOf9VwxWL6i_nH-pPehxh2FdxAMHMQug@mail.gmail.com>
-Subject: Re: [PATCH 1/1] Add Zihintpause support
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Content-Type: multipart/alternative; boundary="00000000000029152d05deabd8b8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=daolu@rivosinc.com; helo=mail-pg1-x52c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
+ helo=mail-b.sr.ht
+X-Spam_score_int: 36
+X-Spam_score: 3.6
+X-Spam_bar: +++
+X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
+ FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,100 +48,186 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 17:42:26 -0000
+Date: Tue, 10 May 2022 18:26:14 -0000
+X-Original-Date: Thu, 17 Mar 2022 00:47:13 -0700
+X-List-Received-Date: Tue, 10 May 2022 18:26:14 -0000
 
---00000000000029152d05deabd8b8
-Content-Type: text/plain; charset="UTF-8"
+From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 
-Thanks Richard! I have fixed it following your advice:
+Signed-off-by: eop Chen <eop.chen@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc |  9 +++++++
+ target/riscv/vector_helper.c            | 35 +++++++++++++++++--------
+ 2 files changed, 33 insertions(+), 11 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvi.c.inc
-b/target/riscv/insn_trans/trans_rvi.c.inc
-index 528c30c9a2..acd2548e9b 100644
---- a/target/riscv/insn_trans/trans_rvi.c.inc
-+++ b/target/riscv/insn_trans/trans_rvi.c.inc
-@@ -808,9 +808,13 @@ static bool trans_pause(DisasContext *ctx, arg_pause
-*a)
-
-     /*
-      * PAUSE is a no-op in QEMU,
--     * however we need to clear the reservation
-+     * however we need to clear the reservation,
-+     * end the TB and return to main loop
-      */
-     tcg_gen_movi_tl(load_res, -1);
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    tcg_gen_exit_tb(NULL, 0);
-+    ctx->base.is_jmp = DISAS_NORETURN;
-
-     return true;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
+s/trans_rvv.c.inc
+index 63ddd54669..9a2d54313a 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -712,6 +712,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint=
+8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
  }
+=20
+@@ -750,6 +751,7 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint=
+8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+ }
+=20
+@@ -778,6 +780,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, =
+uint8_t eew)
+     data =3D FIELD_DP32(data, VDATA, NF, 1);
+     /* Mask destination register are always tail-agnostic */
+     data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+ }
+=20
+@@ -797,6 +800,7 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, =
+uint8_t eew)
+     data =3D FIELD_DP32(data, VDATA, NF, 1);
+     /* Mask destination register are always tail-agnostic */
+     data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+ }
+=20
+@@ -869,6 +873,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, u=
+int8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+=20
+@@ -899,6 +904,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, u=
+int8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     fn =3D fns[eew];
+     if (fn =3D=3D NULL) {
+         return false;
+@@ -1000,6 +1006,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, =
+uint8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+=20
+@@ -1053,6 +1060,7 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, =
+uint8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+ }
+=20
+@@ -1119,6 +1127,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uin=
+t8_t eew)
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     return ldff_trans(a->rd, a->rs1, data, fn, s);
+ }
+=20
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 934b283db2..89eea33eb3 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -282,14 +282,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+     uint32_t esz =3D 1 << log2_esz;
+     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
+     uint32_t vta =3D vext_vta(desc);
++    uint32_t vma =3D vext_vma(desc);
+=20
+     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
+-        if (!vm && !vext_elem_mask(v0, i)) {
+-            continue;
+-        }
+-
+         k =3D 0;
+         while (k < nf) {
++            if (!vm && !vext_elem_mask(v0, i)) {
++                /* set masked-off elements to 1s */
++                vext_set_elems_1s(vd, vma,(i + k * max_elems) * esz,
++                                  (i + k * max_elems + 1) * esz);
++                k++;
++                continue;
++            }
+             target_ulong addr =3D base + stride * i + (k << log2_esz);
+             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
+);
+             k++;
+@@ -481,15 +485,19 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+     uint32_t esz =3D 1 << log2_esz;
+     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
+     uint32_t vta =3D vext_vta(desc);
++    uint32_t vma =3D vext_vma(desc);
+=20
+     /* load bytes from guest memory */
+     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
+-        if (!vm && !vext_elem_mask(v0, i)) {
+-            continue;
+-        }
+-
+         k =3D 0;
+         while (k < nf) {
++            if (!vm && !vext_elem_mask(v0, i)) {
++                /* set masked-off elements to 1s */
++                vext_set_elems_1s(vd, vma,(i + k * max_elems) * esz,
++                                  (i + k * max_elems + 1) * esz);
++                k++;
++                continue;
++            }
+             abi_ptr addr =3D get_index_addr(base, i, vs2) + (k << log2_esz);
+             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
+);
+             k++;
+@@ -578,6 +586,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+     uint32_t esz =3D 1 << log2_esz;
+     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
+     uint32_t vta =3D vext_vta(desc);
++    uint32_t vma =3D vext_vma(desc);
+     target_ulong addr, offset, remain;
+=20
+     /* probe every access*/
+@@ -623,10 +632,14 @@ ProbeSuccess:
+     }
+     for (i =3D env->vstart; i < env->vl; i++) {
+         k =3D 0;
+-        if (!vm && !vext_elem_mask(v0, i)) {
+-            continue;
+-        }
+         while (k < nf) {
++            if (!vm && !vext_elem_mask(v0, i)) {
++                /* set masked-off elements to 1s */
++                vext_set_elems_1s(vd, vma,(i + k * max_elems) * esz,
++                                  (i + k * max_elems + 1) * esz);
++                k++;
++                continue;
++            }
+             target_ulong addr =3D base + ((i * nf + k) << log2_esz);
+             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
+);
+             k++;
+--=20
+2.34.2
 
-I will wait a bit to see if there are any more comments.
-
-On Tue, May 10, 2022 at 8:43 AM Richard Henderson <
-richard.henderson@linaro.org> wrote:
-
-> On 5/9/22 23:42, Dao Lu wrote:
-> > +static bool trans_pause(DisasContext *ctx, arg_pause *a)
-> > +{
-> > +    REQUIRE_ZIHINTPAUSE(ctx);
-> > +
-> > +    /*
-> > +     * PAUSE is a no-op in QEMU,
-> > +     * however we need to clear the reservation
-> > +     */
-> > +    tcg_gen_movi_tl(load_res, -1);
->
-> I recommend ending the TB and returning to the main loop.  When running in
-> round-robin
-> mode, this will yield to the next cpu.
->
->
-> r~
->
-
---00000000000029152d05deabd8b8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks Richard! I have fixed it following your advice:<div=
-><br></div><div>diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/targ=
-et/riscv/insn_trans/trans_rvi.c.inc<br>index 528c30c9a2..acd2548e9b 100644<=
-br>--- a/target/riscv/insn_trans/trans_rvi.c.inc<br>+++ b/target/riscv/insn=
-_trans/trans_rvi.c.inc<br>@@ -808,9 +808,13 @@ static bool trans_pause(Disa=
-sContext *ctx, arg_pause *a)<br><br>=C2=A0 =C2=A0 =C2=A0/*<br>=C2=A0 =C2=A0=
- =C2=A0 * PAUSE is a no-op in QEMU,<br>- =C2=A0 =C2=A0 * however we need to=
- clear the reservation<br>+ =C2=A0 =C2=A0 * however we need to clear the re=
-servation,<br>+ =C2=A0 =C2=A0 * end the TB and return to main loop<br>=C2=
-=A0 =C2=A0 =C2=A0 */<br>=C2=A0 =C2=A0 =C2=A0tcg_gen_movi_tl(load_res, -1);<=
-br>+ =C2=A0 =C2=A0gen_set_pc_imm(ctx, ctx-&gt;pc_succ_insn);<br>+ =C2=A0 =
-=C2=A0tcg_gen_exit_tb(NULL, 0);<br>+ =C2=A0 =C2=A0ctx-&gt;base.is_jmp =3D D=
-ISAS_NORETURN;<br><br>=C2=A0 =C2=A0 =C2=A0return true;<br>=C2=A0}<br></div>=
-<div><br></div><div>I will wait a bit to see if there are any more comments=
-.</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">On Tue, May 10, 2022 at 8:43 AM Richard Henderson &lt;<a href=3D"mai=
-lto:richard.henderson@linaro.org">richard.henderson@linaro.org</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 5/9/22 23:=
-42, Dao Lu wrote:<br>
-&gt; +static bool trans_pause(DisasContext *ctx, arg_pause *a)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 REQUIRE_ZIHINTPAUSE(ctx);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* PAUSE is a no-op in QEMU,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* however we need to clear the reservation<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 tcg_gen_movi_tl(load_res, -1);<br>
-<br>
-I recommend ending the TB and returning to the main loop.=C2=A0 When runnin=
-g in round-robin <br>
-mode, this will yield to the next cpu.<br>
-<br>
-<br>
-r~<br>
-</blockquote></div>
-
---00000000000029152d05deabd8b8--
 
