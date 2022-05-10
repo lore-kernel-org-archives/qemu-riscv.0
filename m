@@ -1,68 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noMrj-0003gy-EC
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 06:13:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35738)
+	id 1noMsq-0004fJ-RN
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 06:14:24 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36078)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1noMrc-0003f0-Ve; Tue, 10 May 2022 06:13:10 -0400
-Received: from mail-io1-xd36.google.com ([2607:f8b0:4864:20::d36]:41662)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1noMrb-0008OY-8e; Tue, 10 May 2022 06:13:08 -0400
-Received: by mail-io1-xd36.google.com with SMTP id z26so17987609iot.8;
- Tue, 10 May 2022 03:13:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uIGSIwsgHzPaNeLIC2Uz7U3aKKXgPLNod+GumiUhlJg=;
- b=p2fe75gKsSLoMvMyuZuZqf9p5UzWlFA/qVtKRKeTNOVnHdlhL6iJIGRBMCFvBoHxf7
- yAfw9OVmWIezonBIFE0eAigsPDLu3wjNhit+r6Kfg97Rje6A46vd+46cC/X8X2QWOHAD
- IG9uRQkstU9wO50OHRGLy7idik6ngWc0ze+Kj23s6NqOhBoPrRAOV+jiN3Czu0kBxVS3
- kOnM04inX3utxXR5c8EPRanuyl+//RqtNGU96Iz9NVlQ3Xtx+2rs7K0XkdaXu8aABshK
- UmzdGS8xguuaU9Z8WQy3grz0clt6XDfWC4TexFYN7rdPCAeRt4flTtbrVowhVgefQTXh
- yzjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=uIGSIwsgHzPaNeLIC2Uz7U3aKKXgPLNod+GumiUhlJg=;
- b=SUcSruP2pYKuo2a20UZMTcPbbA3q37DzY9iZ01YuVXE90Zl1tdQ1fTmzdVVos171qy
- wtPWBgBnt0/ksdRINv0Pd/tl9hfrb1P5X7Wnv+NlU6Wyxfl8HrnI5ofqzhfkj2tNSIMT
- swlSrenVaCa5mjiCLZ0jg2UwkDX7W2fe9ksJVPOu5JSOcWQ/2ptRPqVPP007DTUwyoyi
- JVQUTHPV2yvuUx8Gwmem2x69cignEOgTGAglXJB4fXZP7S/sFOxnQwraS6o+CXLeUh06
- UlHaG46NjgV2bsicK8JXzLGRg5y1OAR08khXzQW1q0drSBXV2TmiBmazIvDXXPKnj1pE
- gWpg==
-X-Gm-Message-State: AOAM530Y923m0cGTeWctXaNC9+/pyMTF3/PcjLpvsor8yeQok0epnMEA
- 0rqXBMRmZGrO+M4ZtsmEv0nqga7DFdtNj+rj9ps=
-X-Google-Smtp-Source: ABdhPJzRur0Uuk6LILU4TwtdXRuxAndJcEjoSwXLZ7X6HW6Yao03vgGhOy4oCN3InfSEgXbbIPRjqoBJNjEJFh5giVQ=
-X-Received: by 2002:a05:6638:dc7:b0:32b:a483:16b8 with SMTP id
- m7-20020a0566380dc700b0032ba48316b8mr9789512jaj.66.1652177585309; Tue, 10 May
- 2022 03:13:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1noMsn-0004b2-Hc; Tue, 10 May 2022 06:14:21 -0400
+Received: from zero.eik.bme.hu ([152.66.115.2]:52942)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1noMsk-00007p-8q; Tue, 10 May 2022 06:14:20 -0400
+Received: from zero.eik.bme.hu (blah.eik.bme.hu [152.66.115.182])
+ by localhost (Postfix) with SMTP id DDABA746324;
+ Tue, 10 May 2022 12:14:14 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id 84E0F7462D3; Tue, 10 May 2022 12:14:14 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 82D6074581A;
+ Tue, 10 May 2022 12:14:14 +0200 (CEST)
+Date: Tue, 10 May 2022 12:14:14 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Thomas Huth <thuth@redhat.com>
+cc: "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org, 
+ qemu-arm <qemu-arm@nongnu.org>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Fabiano Rosas <farosas@linux.ibm.com>, muriloo@linux.ibm.com, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <f4bug@amsat.org>, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>, mopsfelder@gmail.com, 
+ qemu-ppc@nongnu.org, =?ISO-8859-15?Q?C=E9dric_Le_Goater?= <clg@kaod.org>, 
+ qemu-RISC-V <qemu-riscv@nongnu.org>
+Subject: Re: QEMU 32-bit vs. 64-bit binaries
+In-Reply-To: <d1b04636-b1db-d13e-36b3-d45fb8cf9ad0@redhat.com>
+Message-ID: <fe30ac22-89fe-9f27-d37-278b95ae189@eik.bme.hu>
+References: <b31e3221-6dfd-de68-8dfc-177ded0b501e@ilande.co.uk>
+ <9ec244e0-4c7c-69ff-08f8-da451f6da449@linux.ibm.com>
+ <87sfpqaey7.fsf@linux.ibm.com>
+ <2ab9e2b3-5dba-4e18-ed2e-6063a2716f4c@ilande.co.uk>
+ <87ilql9xww.fsf@linux.ibm.com>
+ <ef8256fb-6e99-5f37-d5c5-67f9af4302b0@ilande.co.uk>
+ <472e45e8-319b-ad48-3afa-0dfa74e6ad20@redhat.com>
+ <877d6tzs2e.fsf@pond.sub.org>
+ <32e5877d-ba45-ac63-d24e-1f9f8676c6bb@redhat.com>
+ <CAFEAcA8Ff45KeuQm-v8MwXX_i+P51uF-ovpQvtGD3hx1bi3A9g@mail.gmail.com>
+ <Ynou3EnxfSmrzGT0@work-vm> <d1b04636-b1db-d13e-36b3-d45fb8cf9ad0@redhat.com>
 MIME-Version: 1.0
-References: <165156202959.27941.9731161369415852149-0@git.sr.ht>
- <165156202959.27941.9731161369415852149-15@git.sr.ht>
-In-Reply-To: <165156202959.27941.9731161369415852149-15@git.sr.ht>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 10 May 2022 12:12:39 +0200
-Message-ID: <CAKmqyKMdP+w2QpL2z7Ot=rnzNXDLNtqPfMP-rVwCK_MbayMKCA@mail.gmail.com>
-Subject: Re: [PATCH qemu v14 15/15] target/riscv: rvv: Add option
- 'rvv_ta_all_1s' to enable optional tail agnostic behavior
-To: "~eopxd" <yueh.ting.chen@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d36;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd36.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+X-Spam-Probability: 8%
+Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
+ helo=zero.eik.bme.hu
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,50 +69,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 10:13:10 -0000
+X-List-Received-Date: Tue, 10 May 2022 10:14:23 -0000
 
-On Tue, May 3, 2022 at 9:55 AM ~eopxd <eopxd@git.sr.ht> wrote:
+On Tue, 10 May 2022, Thomas Huth wrote:
+> On 10/05/2022 11.22, Dr. David Alan Gilbert wrote:
+>> * Peter Maydell (peter.maydell@linaro.org) wrote:
+>>> On Tue, 10 May 2022 at 10:01, Thomas Huth <thuth@redhat.com> wrote:
+>>>> 
+>>>> On 10/05/2022 10.54, Markus Armbruster wrote:
+>>>>> Thomas Huth <thuth@redhat.com> writes:
+>>>>> 
+>>>>> [...]
+>>>>> 
+>>>>>> I once suggested in the past already that we should maybe get rid of
+>>>>>> the 32-bit variants in case the 64-bit variant is a full superset, so
+>>>>>> we can save compile- and test times (which is quite a bit for QEMU),
+>>>>>> but I've been told that the 32-bit variants are mostly still required
+>>>>>> for supporting KVM on 32-bit host machines.
+>>>>> 
+>>>>> Do we still care for 32-bit host machines?
+>>>> 
+>>>> As long as the Linux kernel still supports 32-bit KVM virtualization, I
+>>>> think we have to keep the userspace around for that, too.
+>>>> 
+>>>> But I wonder why we're keeping qemu-system-arm around? 32-bit KVM support
+>>>> for ARM has been removed with Linux kernel 5.7 as far as I know, so I 
+>>>> think
+>>>> we could likely drop the qemu-system-arm nowadays, too? Peter, Richard,
+>>>> what's your opinion on this?
+>>> 
+>>> Two main reasons, I think:
+>>>   * command-line compatibility (ie there are lots of
+>>>     command lines out there using that binary name)
+>>>   * nobody has yet cared enough to come up with a plan for what
+>>>     we want to do differently for these 32-bit architectures,
+>>>     so the default is "keep doing what we always have"
+>>> 
+>>> In particular, I don't want to get rid of qemu-system-arm as the
+>>> *only* 32-bit target binary we drop. Either we stick with what
+>>> we have or we have a larger plan for sorting this out consistently
+>>> across target architectures.
+>> 
+>> To my mind, qemu-system-arm makes a lot of sense, and I'd rather see the
+>> 32 bit guests disappear from qemu-system-aarch64.
+>> It's difficult to justify to someone running their aarch virt stack why
+>> their binary has the security footprint that includes a camera or PDA.
 >
-> From: eopXD <eop.chen@sifive.com>
+> I'm not very familiar with KVM on ARM - but is it possible to use KVM there 
+> with an arbitrary machine? If that's the case, a user might want to use KVM 
+> on their 64-bit host to run a 32-bit guest machine, and then you need to keep 
+> the 32-bit machines in the -aarch64 binary.
 >
-> According to v-spec, tail agnostic behavior can be either kept as
-> undisturbed or set elements' bits to all 1s. To distinguish the
-> difference of tail policies, QEMU should be able to simulate the tail
-> agnostic behavior as "set tail elements' bits to all 1s".
->
-> There are multiple possibility for agnostic elements according to
-> v-spec. The main intent of this patch-set tries to add option that
-> can distinguish between tail policies. Setting agnostic elements to
-> all 1s allows QEMU to express this.
->
-> This commit adds option 'rvv_ta_all_1s' is added to enable the
-> behavior, it is default as disabled.
->
-> Signed-off-by: eop Chen <eop.chen@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Something like that is at least theoretically possible with ppc64, I think: 
+> Using KVM-PR, it should be possible to run a g3beige (i.e. 32-bit) machine on 
+> a 64-bit host. Not sure whether anybody has tried that in recent times (afaik 
+> KVM-PR is in a rather bad shape nowadays), but it might have been possible at 
+> one point in time in the past. (PPC folks, please correct me if I'm wrong)
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+https://www.talospace.com/2018/08/making-your-talos-ii-into-power-mac.html
 
-Alistair
-
-> ---
->  target/riscv/cpu.c | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ddda4906ff..cd4cf4b41e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -810,6 +810,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->
->      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> +    DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> --
-> 2.34.2
->
+Regards,
+BALATON Zoltan
 
