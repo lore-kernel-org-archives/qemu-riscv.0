@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noT3x-0008Fu-D3
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 12:50:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41792)
+	id 1noT3y-0008HX-1y
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 12:50:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41970)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noT3U-0007qR-2T; Tue, 10 May 2022 12:49:48 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:44948)
+ id 1noT3q-00086N-9J; Tue, 10 May 2022 12:50:10 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:44954)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noT3S-0005J6-ID; Tue, 10 May 2022 12:49:47 -0400
+ id 1noT3n-0005Ja-4h; Tue, 10 May 2022 12:50:09 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 9630011F0DC;
- Tue, 10 May 2022 16:49:39 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 2CC1E11F100;
+ Tue, 10 May 2022 16:49:40 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v15 08/15] target/riscv: rvv: Add tail agnostic for
- vector integer comparison instructions
-Message-ID: <165220137795.17881.11560413809338015947-8@git.sr.ht>
+Subject: [PATCH qemu v15 12/15] target/riscv: rvv: Add tail agnostic for
+ vector reduction instructions
+Message-ID: <165220137795.17881.11560413809338015947-12@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165220137795.17881.11560413809338015947-0@git.sr.ht>
@@ -48,77 +48,108 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Tue, 10 May 2022 16:49:51 -0000
-X-Original-Date: Mon, 07 Mar 2022 01:43:53 -0800
-X-List-Received-Date: Tue, 10 May 2022 16:49:51 -0000
+Date: Tue, 10 May 2022 16:50:11 -0000
+X-Original-Date: Mon, 07 Mar 2022 04:21:37 -0800
+X-List-Received-Date: Tue, 10 May 2022 16:50:11 -0000
 
 From: eopXD <eop.chen@sifive.com>
-
-Compares write mask registers, and so always operate under a tail-
-agnostic policy.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/vector_helper.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ target/riscv/vector_helper.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index cfc6bd146e..2ac0f99fcc 100644
+index 5acbe68b9b..a86b4a7771 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -1373,6 +1373,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
- {                                                             \
-     uint32_t vm =3D vext_vm(desc);                              \
-     uint32_t vl =3D env->vl;                                    \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;        \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);              \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1384,6 +1386,13 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* mask destination register are always tail-agnostic */  \
-+    /* set tail elements to 1s */                             \
-+    if (vta_all_1s) {                                         \
-+        for (; i < total_elems; i++) {                        \
-+            vext_set_elem_mask(vd, i, 1);                     \
-+        }                                                     \
-+    }                                                         \
+@@ -4537,6 +4537,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+   \
+ {                                                         \
+     uint32_t vm =3D vext_vm(desc);                          \
+     uint32_t vl =3D env->vl;                                \
++    uint32_t esz =3D sizeof(TD);                            \
++    uint32_t vlenb =3D simd_maxsz(desc);                    \
++    uint32_t vta =3D vext_vta(desc);                        \
+     uint32_t i;                                           \
+     TD s1 =3D  *((TD *)vs1 + HD(0));                        \
+                                                           \
+@@ -4549,6 +4552,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+   \
+     }                                                     \
+     *((TD *)vd + HD(0)) =3D s1;                             \
+     env->vstart =3D 0;                                      \
++    /* set tail elements to 1s */                         \
++    vext_set_elems_1s(vd, vta, esz, vlenb);               \
  }
 =20
- GEN_VEXT_CMP_VV(vmseq_vv_b, uint8_t,  H1, DO_MSEQ)
-@@ -1422,6 +1431,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,   \
- {                                                                   \
-     uint32_t vm =3D vext_vm(desc);                                    \
-     uint32_t vl =3D env->vl;                                          \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;              \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);                    \
-     uint32_t i;                                                     \
-                                                                     \
-     for (i =3D env->vstart; i < vl; i++) {                            \
-@@ -1433,6 +1444,13 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
- void *vs2,   \
-                 DO_OP(s2, (ETYPE)(target_long)s1));                 \
-     }                                                               \
-     env->vstart =3D 0;                                                \
-+    /* mask destination register are always tail-agnostic */        \
-+    /* set tail elements to 1s */                                   \
-+    if (vta_all_1s) {                                               \
-+        for (; i < total_elems; i++) {                              \
-+            vext_set_elem_mask(vd, i, 1);                           \
-+        }                                                           \
-+    }                                                               \
+ /* vd[0] =3D sum(vs1[0], vs2[*]) */
+@@ -4618,6 +4623,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+    \
+ {                                                          \
+     uint32_t vm =3D vext_vm(desc);                           \
+     uint32_t vl =3D env->vl;                                 \
++    uint32_t esz =3D sizeof(TD);                             \
++    uint32_t vlenb =3D simd_maxsz(desc);                     \
++    uint32_t vta =3D vext_vta(desc);                         \
+     uint32_t i;                                            \
+     TD s1 =3D  *((TD *)vs1 + HD(0));                         \
+                                                            \
+@@ -4630,6 +4638,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,       =
+    \
+     }                                                      \
+     *((TD *)vd + HD(0)) =3D s1;                              \
+     env->vstart =3D 0;                                       \
++    /* set tail elements to 1s */                          \
++    vext_set_elems_1s(vd, vta, esz, vlenb);                \
  }
 =20
- GEN_VEXT_CMP_VX(vmseq_vx_b, uint8_t,  H1, DO_MSEQ)
+ /* Unordered sum */
+@@ -4654,6 +4664,9 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *v=
+s1,
+ {
+     uint32_t vm =3D vext_vm(desc);
+     uint32_t vl =3D env->vl;
++    uint32_t esz =3D sizeof(uint32_t);
++    uint32_t vlenb =3D simd_maxsz(desc);
++    uint32_t vta =3D vext_vta(desc);
+     uint32_t i;
+     uint32_t s1 =3D  *((uint32_t *)vs1 + H4(0));
+=20
+@@ -4667,6 +4680,8 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *v=
+s1,
+     }
+     *((uint32_t *)vd + H4(0)) =3D s1;
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    vext_set_elems_1s(vd, vta, esz, vlenb);
+ }
+=20
+ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
+@@ -4674,6 +4689,9 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *v=
+s1,
+ {
+     uint32_t vm =3D vext_vm(desc);
+     uint32_t vl =3D env->vl;
++    uint32_t esz =3D sizeof(uint64_t);
++    uint32_t vlenb =3D simd_maxsz(desc);
++    uint32_t vta =3D vext_vta(desc);
+     uint32_t i;
+     uint64_t s1 =3D  *((uint64_t *)vs1);
+=20
+@@ -4687,6 +4705,8 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *v=
+s1,
+     }
+     *((uint64_t *)vd) =3D s1;
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    vext_set_elems_1s(vd, vta, esz, vlenb);
+ }
+=20
+ /*
 --=20
 2.34.2
 
