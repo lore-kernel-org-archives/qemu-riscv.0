@@ -1,81 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noMT4-0001IE-Va
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 05:47:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58030)
+	id 1noMUM-00035H-Rl
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 05:49:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1noMT2-0001C1-UD
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 05:47:44 -0400
-Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d]:35337)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1noMUK-0002zw-Ap; Tue, 10 May 2022 05:49:04 -0400
+Received: from mail-il1-x134.google.com ([2607:f8b0:4864:20::134]:44570)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1noMT1-0004Ld-75
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 05:47:44 -0400
-Received: by mail-yb1-xb2d.google.com with SMTP id w187so29678633ybe.2
- for <qemu-riscv@nongnu.org>; Tue, 10 May 2022 02:47:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1noMUI-0004Uv-C9; Tue, 10 May 2022 05:49:04 -0400
+Received: by mail-il1-x134.google.com with SMTP id o5so10974721ils.11;
+ Tue, 10 May 2022 02:49:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lq/3IIOrNje3xoyHhGdjCiJBDYsTG3+mTP6R1fJL3Nc=;
- b=Vfb3xmu1Z4lZ1jZ5yqRoUuU1DlBb4mtJqKpCNLGfBehL/PF9JzSW4AF/satVM9n41y
- ViThYCQpw9kjFifSO9hU1AkJSS6eCnCXlgWpZrAiuag7QPUxWooI+2+RTjyZViXkDniW
- 5+xc77wYhqBcgDMSj5C0+5xa8ivsbB4n1PGPI+ox0R4hgcDpyZ1JDOhIEZpqNLPowxSs
- DM8WS2wSzAMtUEZwupHLu0n7hUG8pLPLFy7YLLjm3K4EQDhf0gQM/aILiNf5i3TDtbSu
- hFhF6y1VGVqDzLtHwvkVY7SRNKliuz6F6w6tqSO9N4fqbvXhSNEM/DQ4I/vdpmB9qCJs
- r9Tw==
+ :cc; bh=RWuNUznst0CpulAIRjXImiKdGC17P981W3DSb61s2VQ=;
+ b=UdnI9iSy2rXHZ1Soyp1qn5fSJa+pohJv751/cxg104uWHDp340uvqcL8nNNGSK5HTx
+ womBdl5iRnTC59j5rfGl1UeVUblMixu0Io5Z3umVtVubkMIVwEsfN0QQVFZswxu3ZowS
+ PIY6Ai7DO1R5ceA3mrqO3lk1m0JS29OsBX9AOEYoe5dv/+E7tS2s/BfVr3BLtwyXxBp+
+ Wv074UQfTMkuy15ZG/4nl6PGhylySeWrNERV4v2JDiW60j7sAP3HO2pE9kMdqT0wgQ4l
+ F8CUFvNUVcrvKjMWQcI3rnD8+xd9bNqBhFK5+d5TeECVSJysggpJn7pBKlU5PMr7H1ZU
+ ixpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=lq/3IIOrNje3xoyHhGdjCiJBDYsTG3+mTP6R1fJL3Nc=;
- b=qFAEGife7b8AEMtcI1X/pYJ+WUYyM4aaJc5ldj6QbYR/7ykBoEH19QRYroDCGeQEzT
- O3oA4+I0DFo3l34r3ooHjwzleat7z8cP3WYgURzHEjIF2CLNL/Q5UPG9BAL5QUB7/nQy
- WDdMC3z2EQuYryF6QQZPJ3MbcPgxOHKFph3O8ZVsrujmKjpEBajddJ0a2NBiLHP5hwFy
- ffJPFKr0CIoavkM3a7aMH/lp1ZMsYCupOSD4EOOC8cEAjLnygcG9FV/XDCTc/amRHclS
- d3h9N4GsjsYkcXEE53qkw/KxOOj+y/O6X5MOSG3TFRZB4kHzLYgjvg/cNpPY1NaBJ9c4
- 8Yfw==
-X-Gm-Message-State: AOAM531njhypf5lrIwCTKBEOwR9KhEEqsVAZbbsWNjiSnKXX/TaO4mhV
- 2GDeo2xyrBpxtonnDyxQIk8/hYsI+oz9uBB7cAYbBA==
-X-Google-Smtp-Source: ABdhPJw44HyWdHosK8BJOAxREQy3iQw/AQulgE0BQ+SMGxCLFd0rmlWNKxMN6Z2TtrZMa5tq28RpjKJl/Uz2Rhh+GCs=
-X-Received: by 2002:a25:2fc2:0:b0:647:dcee:b2dd with SMTP id
- v185-20020a252fc2000000b00647dceeb2ddmr17093148ybv.288.1652176062130; Tue, 10
- May 2022 02:47:42 -0700 (PDT)
+ bh=RWuNUznst0CpulAIRjXImiKdGC17P981W3DSb61s2VQ=;
+ b=TjGi+tc3FOSKIFQIjQgZJ2BV/9VUkTYaDvLu86HbArzDU8mbTEN82R/ReLlQ6fyH+p
+ iq/dtuUsMwQlxpW6pNWZ2SSgjAYH3Y58xsYHVfzxfW5SuAT2BYmfVw94Pp/Q8E7/7iK5
+ f1yfVG++nGTtW0su+yuCzcIYLm2JPLfZtu/KWtgIywR/obDwFJPV4irPkPUMl9lMkEI3
+ 5kwcb2sgdDNktVNSF06VM8jyu7UnOH0FJ0JPhcp43Xn6WTBufw3GqGSZRJ5+YymD4Bx7
+ O7wHgs8YHjygV8Plz53WHLxZQ4j5akR+5+vl/Rde2pJ5loGXHMbghK3vy2zq/fIn6Bg+
+ yVtQ==
+X-Gm-Message-State: AOAM530uvIhwcVOzK4VoJD24kUCtQmccBBhSjIva4ji4C5zOdAZZCdGF
+ F9uel7Rpqo7An7gvkfNmiPNSoIUCrA+06CiY2zc=
+X-Google-Smtp-Source: ABdhPJyg259oJ+Dk1fgfO8BDQxNPgaZOZHQHTJlabeW2FPY6K1yNx20OC0Nfo0sMRkf8q4nv+yIDIcnKCuA9keSVKKw=
+X-Received: by 2002:a05:6e02:151:b0:2cf:8c5d:2ca0 with SMTP id
+ j17-20020a056e02015100b002cf8c5d2ca0mr7125567ilr.86.1652176140791; Tue, 10
+ May 2022 02:49:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <b31e3221-6dfd-de68-8dfc-177ded0b501e@ilande.co.uk>
- <9ec244e0-4c7c-69ff-08f8-da451f6da449@linux.ibm.com>
- <87sfpqaey7.fsf@linux.ibm.com>
- <2ab9e2b3-5dba-4e18-ed2e-6063a2716f4c@ilande.co.uk>
- <87ilql9xww.fsf@linux.ibm.com>
- <ef8256fb-6e99-5f37-d5c5-67f9af4302b0@ilande.co.uk>
- <472e45e8-319b-ad48-3afa-0dfa74e6ad20@redhat.com>
- <877d6tzs2e.fsf@pond.sub.org>
- <32e5877d-ba45-ac63-d24e-1f9f8676c6bb@redhat.com>
- <CAFEAcA8Ff45KeuQm-v8MwXX_i+P51uF-ovpQvtGD3hx1bi3A9g@mail.gmail.com>
- <Ynou3EnxfSmrzGT0@work-vm> <d1b04636-b1db-d13e-36b3-d45fb8cf9ad0@redhat.com>
-In-Reply-To: <d1b04636-b1db-d13e-36b3-d45fb8cf9ad0@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 10 May 2022 10:47:30 +0100
-Message-ID: <CAFEAcA9esRPKwHCwVjeuvjGAEo9E_zOffgOupn05N10ae+hadg@mail.gmail.com>
-Subject: Re: QEMU 32-bit vs. 64-bit binaries
-To: Thomas Huth <thuth@redhat.com>
-Cc: "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org, 
- qemu-arm <qemu-arm@nongnu.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Fabiano Rosas <farosas@linux.ibm.com>, 
- muriloo@linux.ibm.com, Paolo Bonzini <pbonzini@redhat.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>, mopsfelder@gmail.com,
- qemu-ppc@nongnu.org, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- qemu-RISC-V <qemu-riscv@nongnu.org>
+References: <165156202959.27941.9731161369415852149-0@git.sr.ht>
+ <165156202959.27941.9731161369415852149-9@git.sr.ht>
+In-Reply-To: <165156202959.27941.9731161369415852149-9@git.sr.ht>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 10 May 2022 11:48:34 +0200
+Message-ID: <CAKmqyKObF7Fpz5hxzWGSJ5biEoBkEQT1EtfezWk8p6Hm0-Oq1A@mail.gmail.com>
+Subject: Re: [PATCH qemu v14 09/15] target/riscv: rvv: Add tail agnostic for
+ vector integer merge and move instructions
+To: "~eopxd" <yueh.ting.chen@gmail.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::134;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x134.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -90,32 +76,208 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 09:47:45 -0000
+X-List-Received-Date: Tue, 10 May 2022 09:49:05 -0000
 
-On Tue, 10 May 2022 at 10:31, Thomas Huth <thuth@redhat.com> wrote:
-> On 10/05/2022 11.22, Dr. David Alan Gilbert wrote:
-> > To my mind, qemu-system-arm makes a lot of sense, and I'd rather see the
-> > 32 bit guests disappear from qemu-system-aarch64.
-> > It's difficult to justify to someone running their aarch virt stack why
-> > their binary has the security footprint that includes a camera or PDA.
+On Tue, May 3, 2022 at 10:27 AM ~eopxd <eopxd@git.sr.ht> wrote:
+>
+> From: eopXD <eop.chen@sifive.com>
+>
+> Signed-off-by: eop Chen <eop.chen@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 
-There's a lot of stuff you would want to chop out if you want
-a stripped-down "just for KVM" binary, though, and not all of
-it is 32-bit-related.  And unless you're chopping non-KVM
-machine types and devices out of qemu-system-aarch64 anyway,
-you need the 32-bit CPU support in there: we have a machine
-type which has both 64-bit and 32-bit CPUs in it.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-> I'm not very familiar with KVM on ARM - but is it possible to use KVM there
-> with an arbitrary machine? If that's the case, a user might want to use KVM
-> on their 64-bit host to run a 32-bit guest machine, and then you need to
-> keep the 32-bit machines in the -aarch64 binary.
+Alistair
 
-No, Arm KVM is pretty restrictive -- effectively you can only really
-use it with the 'virt' board. You can do a 32-bit guest, but you
-do that with qemu-system-aarch64 and telling the 64-bit vcpu
-"actually start with EL1 (guest kernel) in 32-bit mode".
-
-thanks
--- PMM
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 44 +++++++++++++++++++++++++
+>  target/riscv/vector_helper.c            | 20 +++++++++++
+>  2 files changed, 64 insertions(+)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 430847b0f9..46ee673040 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2123,11 +2123,22 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+>          /* vmv.v.v has rs2 = 0 and vm = 1 */
+>          vext_check_sss(s, a->rd, a->rs1, 0, 1)) {
+>          if (s->vl_eq_vlmax) {
+> +            if (s->vta && s->lmul < 0) {
+> +                /*
+> +                 * tail elements may pass vlmax when lmul < 0
+> +                 * set tail elements to 1s
+> +                 */
+> +                uint32_t vlenb = s->cfg_ptr->vlen >> 3;
+> +                tcg_gen_gvec_ori(s->sew, vreg_ofs(s, a->rd),
+> +                                 vreg_ofs(s, a->rd), -1,
+> +                                 vlenb, vlenb);
+> +            }
+>              tcg_gen_gvec_mov(s->sew, vreg_ofs(s, a->rd),
+>                               vreg_ofs(s, a->rs1),
+>                               MAXSZ(s), MAXSZ(s));
+>          } else {
+>              uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>              static gen_helper_gvec_2_ptr * const fns[4] = {
+>                  gen_helper_vmv_v_v_b, gen_helper_vmv_v_v_h,
+>                  gen_helper_vmv_v_v_w, gen_helper_vmv_v_v_d,
+> @@ -2163,6 +2174,16 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+>          s1 = get_gpr(s, a->rs1, EXT_SIGN);
+>
+>          if (s->vl_eq_vlmax) {
+> +            if (s->vta && s->lmul < 0) {
+> +                /*
+> +                 * tail elements may pass vlmax when lmul < 0
+> +                 * set tail elements to 1s
+> +                 */
+> +                uint32_t vlenb = s->cfg_ptr->vlen >> 3;
+> +                tcg_gen_gvec_ori(s->sew, vreg_ofs(s, a->rd),
+> +                                 vreg_ofs(s, a->rd), -1,
+> +                                 vlenb, vlenb);
+> +            }
+>              tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
+>                                  MAXSZ(s), MAXSZ(s), s1);
+>          } else {
+> @@ -2170,6 +2191,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+>              TCGv_i64 s1_i64 = tcg_temp_new_i64();
+>              TCGv_ptr dest = tcg_temp_new_ptr();
+>              uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>              static gen_helper_vmv_vx * const fns[4] = {
+>                  gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
+>                  gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
+> @@ -2200,6 +2222,16 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
+>          vext_check_ss(s, a->rd, 0, 1)) {
+>          int64_t simm = sextract64(a->rs1, 0, 5);
+>          if (s->vl_eq_vlmax) {
+> +            if (s->vta && s->lmul < 0) {
+> +                /*
+> +                 * tail elements may pass vlmax when lmul < 0
+> +                 * set tail elements to 1s
+> +                 */
+> +                uint32_t vlenb = s->cfg_ptr->vlen >> 3;
+> +                tcg_gen_gvec_ori(s->sew, vreg_ofs(s, a->rd),
+> +                                 vreg_ofs(s, a->rd), -1,
+> +                                 vlenb, vlenb);
+> +            }
+>              tcg_gen_gvec_dup_imm(s->sew, vreg_ofs(s, a->rd),
+>                                   MAXSZ(s), MAXSZ(s), simm);
+>              mark_vs_dirty(s);
+> @@ -2208,6 +2240,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i *a)
+>              TCGv_i64 s1;
+>              TCGv_ptr dest;
+>              uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>              static gen_helper_vmv_vx * const fns[4] = {
+>                  gen_helper_vmv_v_x_b, gen_helper_vmv_v_x_h,
+>                  gen_helper_vmv_v_x_w, gen_helper_vmv_v_x_d,
+> @@ -2780,6 +2813,16 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>          TCGv_i64 t1;
+>
+>          if (s->vl_eq_vlmax) {
+> +            if (s->vta && s->lmul < 0) {
+> +                /*
+> +                 * tail elements may pass vlmax when lmul < 0
+> +                 * set tail elements to 1s
+> +                 */
+> +                uint32_t vlenb = s->cfg_ptr->vlen >> 3;
+> +                tcg_gen_gvec_ori(s->sew, vreg_ofs(s, a->rd),
+> +                                 vreg_ofs(s, a->rd), -1,
+> +                                 vlenb, vlenb);
+> +            }
+>              t1 = tcg_temp_new_i64();
+>              /* NaN-box f[rs1] */
+>              do_nanbox(s, t1, cpu_fpr[a->rs1]);
+> @@ -2791,6 +2834,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_f *a)
+>              TCGv_ptr dest;
+>              TCGv_i32 desc;
+>              uint32_t data = FIELD_DP32(0, VDATA, LMUL, s->lmul);
+> +            data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>              static gen_helper_vmv_vx * const fns[3] = {
+>                  gen_helper_vmv_v_x_h,
+>                  gen_helper_vmv_v_x_w,
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index ddaf364573..87faf1770b 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -1971,6 +1971,9 @@ void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
+>                    uint32_t desc)                                     \
+>  {                                                                    \
+>      uint32_t vl = env->vl;                                           \
+> +    uint32_t esz = sizeof(ETYPE);                                    \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);     \
+> +    uint32_t vta = vext_vta(desc);                                   \
+>      uint32_t i;                                                      \
+>                                                                       \
+>      for (i = env->vstart; i < vl; i++) {                             \
+> @@ -1978,6 +1981,8 @@ void HELPER(NAME)(void *vd, void *vs1, CPURISCVState *env,           \
+>          *((ETYPE *)vd + H(i)) = s1;                                  \
+>      }                                                                \
+>      env->vstart = 0;                                                 \
+> +    /* set tail elements to 1s */                                    \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+>  }
+>
+>  GEN_VEXT_VMV_VV(vmv_v_v_b, int8_t,  H1)
+> @@ -1990,12 +1995,17 @@ void HELPER(NAME)(void *vd, uint64_t s1, CPURISCVState *env,         \
+>                    uint32_t desc)                                     \
+>  {                                                                    \
+>      uint32_t vl = env->vl;                                           \
+> +    uint32_t esz = sizeof(ETYPE);                                    \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);     \
+> +    uint32_t vta = vext_vta(desc);                                   \
+>      uint32_t i;                                                      \
+>                                                                       \
+>      for (i = env->vstart; i < vl; i++) {                             \
+>          *((ETYPE *)vd + H(i)) = (ETYPE)s1;                           \
+>      }                                                                \
+>      env->vstart = 0;                                                 \
+> +    /* set tail elements to 1s */                                    \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+>  }
+>
+>  GEN_VEXT_VMV_VX(vmv_v_x_b, int8_t,  H1)
+> @@ -2008,6 +2018,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
+>                    CPURISCVState *env, uint32_t desc)                 \
+>  {                                                                    \
+>      uint32_t vl = env->vl;                                           \
+> +    uint32_t esz = sizeof(ETYPE);                                    \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);     \
+> +    uint32_t vta = vext_vta(desc);                                   \
+>      uint32_t i;                                                      \
+>                                                                       \
+>      for (i = env->vstart; i < vl; i++) {                             \
+> @@ -2015,6 +2028,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,          \
+>          *((ETYPE *)vd + H(i)) = *(vt + H(i));                        \
+>      }                                                                \
+>      env->vstart = 0;                                                 \
+> +    /* set tail elements to 1s */                                    \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+>  }
+>
+>  GEN_VEXT_VMERGE_VV(vmerge_vvm_b, int8_t,  H1)
+> @@ -2027,6 +2042,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
+>                    void *vs2, CPURISCVState *env, uint32_t desc)      \
+>  {                                                                    \
+>      uint32_t vl = env->vl;                                           \
+> +    uint32_t esz = sizeof(ETYPE);                                    \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);     \
+> +    uint32_t vta = vext_vta(desc);                                   \
+>      uint32_t i;                                                      \
+>                                                                       \
+>      for (i = env->vstart; i < vl; i++) {                             \
+> @@ -2036,6 +2054,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,               \
+>          *((ETYPE *)vd + H(i)) = d;                                   \
+>      }                                                                \
+>      env->vstart = 0;                                                 \
+> +    /* set tail elements to 1s */                                    \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);         \
+>  }
+>
+>  GEN_VEXT_VMERGE_VX(vmerge_vxm_b, int8_t,  H1)
+> --
+> 2.34.2
+>
+>
 
