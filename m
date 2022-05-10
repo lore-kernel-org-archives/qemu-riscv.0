@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noT3p-00083j-CU
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 12:50:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41818)
+	id 1noT3q-00085C-0H
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 12:50:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noT3V-0007rR-O3; Tue, 10 May 2022 12:49:49 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:44950)
+ id 1noT3S-0007pX-0R; Tue, 10 May 2022 12:49:46 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:44938)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1noT3S-0005J9-NP; Tue, 10 May 2022 12:49:49 -0400
+ id 1noT3O-0005Hr-TL; Tue, 10 May 2022 12:49:45 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id E43CF11F0F2;
- Tue, 10 May 2022 16:49:39 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id CAFE511F098;
+ Tue, 10 May 2022 16:49:38 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v15 10/15] target/riscv: rvv: Add tail agnostic for
- vector fix-point arithmetic instructions
-Message-ID: <165220137795.17881.11560413809338015947-10@git.sr.ht>
+Subject: [PATCH qemu v15 03/15] target/riscv: rvv: Early exit when vstart >= vl
+MIME-Version: 1.0
+Message-ID: <165220137795.17881.11560413809338015947-3@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165220137795.17881.11560413809338015947-0@git.sr.ht>
@@ -27,7 +27,6 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
 X-Spam_score_int: 36
@@ -48,464 +47,272 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Tue, 10 May 2022 16:49:55 -0000
-X-Original-Date: Mon, 07 Mar 2022 02:04:21 -0800
-X-List-Received-Date: Tue, 10 May 2022 16:49:55 -0000
+Date: Tue, 10 May 2022 16:49:47 -0000
+X-Original-Date: Fri, 11 Mar 2022 22:28:22 -0800
+X-List-Received-Date: Tue, 10 May 2022 16:49:47 -0000
 
 From: eopXD <eop.chen@sifive.com>
+
+According to v-spec (section 5.4):
+When vstart =E2=89=A5 vl, there are no body elements, and no elements are
+updated in any destination vector register group, including that
+no tail elements are updated with agnostic values.
+
+vmsbf.m, vmsif.m, vmsof.m, viota.m, vcompress instructions themselves
+require vstart to be zero. So they don't need the early exit.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/vector_helper.c | 220 ++++++++++++++++++-----------------
- 1 file changed, 114 insertions(+), 106 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 27 +++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index b77d1d13ea..33578157c7 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -2105,10 +2105,12 @@ static inline void
- vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
-              CPURISCVState *env,
-              uint32_t desc,
--             opivv2_rm_fn *fn)
-+             opivv2_rm_fn *fn, uint32_t esz)
- {
-     uint32_t vm =3D vext_vm(desc);
-     uint32_t vl =3D env->vl;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
+s/trans_rvv.c.inc
+index 90327509f7..4d5dfa794a 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -652,6 +652,7 @@ static bool ldst_us_trans(uint32_t vd, uint32_t rs1, uint=
+32_t data,
 =20
-     switch (env->vxrm) {
-     case 0: /* rnu */
-@@ -2128,15 +2130,17 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
-                      env, vl, vm, 3, fn);
-         break;
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+=20
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -818,6 +819,7 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, =
+uint32_t rs2,
+=20
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+=20
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -925,6 +927,7 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, u=
+int32_t vs2,
+=20
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+=20
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -1067,6 +1070,7 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint3=
+2_t data,
+=20
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
+=20
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -1221,6 +1225,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn =
+*gvec_fn,
      }
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
- }
 =20
- /* generate helpers for fixed point instructions with OPIVV format */
--#define GEN_VEXT_VV_RM(NAME)                                    \
-+#define GEN_VEXT_VV_RM(NAME, ESZ)                               \
- void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,     \
-                   CPURISCVState *env, uint32_t desc)            \
- {                                                               \
-     vext_vv_rm_2(vd, v0, vs1, vs2, env, desc,                   \
--                 do_##NAME);                                    \
-+                 do_##NAME, ESZ);                               \
- }
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- static inline uint8_t saddu8(CPURISCVState *env, int vxrm, uint8_t a, uint8_=
-t b)
-@@ -2186,10 +2190,10 @@ RVVCALL(OPIVV2_RM, vsaddu_vv_b, OP_UUU_B, H1, H1, H1,=
- saddu8)
- RVVCALL(OPIVV2_RM, vsaddu_vv_h, OP_UUU_H, H2, H2, H2, saddu16)
- RVVCALL(OPIVV2_RM, vsaddu_vv_w, OP_UUU_W, H4, H4, H4, saddu32)
- RVVCALL(OPIVV2_RM, vsaddu_vv_d, OP_UUU_D, H8, H8, H8, saddu64)
--GEN_VEXT_VV_RM(vsaddu_vv_b)
--GEN_VEXT_VV_RM(vsaddu_vv_h)
--GEN_VEXT_VV_RM(vsaddu_vv_w)
--GEN_VEXT_VV_RM(vsaddu_vv_d)
-+GEN_VEXT_VV_RM(vsaddu_vv_b, 1)
-+GEN_VEXT_VV_RM(vsaddu_vv_h, 2)
-+GEN_VEXT_VV_RM(vsaddu_vv_w, 4)
-+GEN_VEXT_VV_RM(vsaddu_vv_d, 8)
+     if (a->vm && s->vl_eq_vlmax) {
+         gvec_fn(s->sew, vreg_ofs(s, a->rd),
+@@ -1268,6 +1273,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint=
+32_t vs2, uint32_t vm,
 =20
- typedef void opivx2_rm_fn(void *vd, target_long s1, void *vs2, int i,
-                           CPURISCVState *env, int vxrm);
-@@ -2222,10 +2226,12 @@ static inline void
- vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
-              CPURISCVState *env,
-              uint32_t desc,
--             opivx2_rm_fn *fn)
-+             opivx2_rm_fn *fn, uint32_t esz)
- {
-     uint32_t vm =3D vext_vm(desc);
-     uint32_t vl =3D env->vl;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
-     switch (env->vxrm) {
-     case 0: /* rnu */
-@@ -2245,25 +2251,27 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void=
- *vs2,
-                      env, vl, vm, 3, fn);
-         break;
-     }
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
- }
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -1432,6 +1438,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint=
+32_t vs2, uint32_t vm,
 =20
- /* generate helpers for fixed point instructions with OPIVX format */
--#define GEN_VEXT_VX_RM(NAME)                              \
-+#define GEN_VEXT_VX_RM(NAME, ESZ)                         \
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-         void *vs2, CPURISCVState *env, uint32_t desc)     \
- {                                                         \
-     vext_vx_rm_2(vd, v0, s1, vs2, env, desc,              \
--                 do_##NAME);                              \
-+                 do_##NAME, ESZ);                         \
- }
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vsaddu_vx_b, OP_UUU_B, H1, H1, saddu8)
- RVVCALL(OPIVX2_RM, vsaddu_vx_h, OP_UUU_H, H2, H2, saddu16)
- RVVCALL(OPIVX2_RM, vsaddu_vx_w, OP_UUU_W, H4, H4, saddu32)
- RVVCALL(OPIVX2_RM, vsaddu_vx_d, OP_UUU_D, H8, H8, saddu64)
--GEN_VEXT_VX_RM(vsaddu_vx_b)
--GEN_VEXT_VX_RM(vsaddu_vx_h)
--GEN_VEXT_VX_RM(vsaddu_vx_w)
--GEN_VEXT_VX_RM(vsaddu_vx_d)
-+GEN_VEXT_VX_RM(vsaddu_vx_b, 1)
-+GEN_VEXT_VX_RM(vsaddu_vx_h, 2)
-+GEN_VEXT_VX_RM(vsaddu_vx_w, 4)
-+GEN_VEXT_VX_RM(vsaddu_vx_d, 8)
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -1518,6 +1525,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+         uint32_t data =3D 0;
+         TCGLabel *over =3D gen_new_label();
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- static inline int8_t sadd8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
- {
-@@ -2309,19 +2317,19 @@ RVVCALL(OPIVV2_RM, vsadd_vv_b, OP_SSS_B, H1, H1, H1, =
-sadd8)
- RVVCALL(OPIVV2_RM, vsadd_vv_h, OP_SSS_H, H2, H2, H2, sadd16)
- RVVCALL(OPIVV2_RM, vsadd_vv_w, OP_SSS_W, H4, H4, H4, sadd32)
- RVVCALL(OPIVV2_RM, vsadd_vv_d, OP_SSS_D, H8, H8, H8, sadd64)
--GEN_VEXT_VV_RM(vsadd_vv_b)
--GEN_VEXT_VV_RM(vsadd_vv_h)
--GEN_VEXT_VV_RM(vsadd_vv_w)
--GEN_VEXT_VV_RM(vsadd_vv_d)
-+GEN_VEXT_VV_RM(vsadd_vv_b, 1)
-+GEN_VEXT_VV_RM(vsadd_vv_h, 2)
-+GEN_VEXT_VV_RM(vsadd_vv_w, 4)
-+GEN_VEXT_VV_RM(vsadd_vv_d, 8)
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+@@ -1598,6 +1606,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
+         uint32_t data =3D 0;
+         TCGLabel *over =3D gen_new_label();
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vsadd_vx_b, OP_SSS_B, H1, H1, sadd8)
- RVVCALL(OPIVX2_RM, vsadd_vx_h, OP_SSS_H, H2, H2, sadd16)
- RVVCALL(OPIVX2_RM, vsadd_vx_w, OP_SSS_W, H4, H4, sadd32)
- RVVCALL(OPIVX2_RM, vsadd_vx_d, OP_SSS_D, H8, H8, sadd64)
--GEN_VEXT_VX_RM(vsadd_vx_b)
--GEN_VEXT_VX_RM(vsadd_vx_h)
--GEN_VEXT_VX_RM(vsadd_vx_w)
--GEN_VEXT_VX_RM(vsadd_vx_d)
-+GEN_VEXT_VX_RM(vsadd_vx_b, 1)
-+GEN_VEXT_VX_RM(vsadd_vx_h, 2)
-+GEN_VEXT_VX_RM(vsadd_vx_w, 4)
-+GEN_VEXT_VX_RM(vsadd_vx_d, 8)
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+@@ -1675,6 +1684,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+         };                                                         \
+         TCGLabel *over =3D gen_new_label();                          \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -1856,6 +1866,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+         };                                                         \
+         TCGLabel *over =3D gen_new_label();                          \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -2066,6 +2077,7 @@ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v =
+*a)
+             };
+             TCGLabel *over =3D gen_new_label();
+             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- static inline uint8_t ssubu8(CPURISCVState *env, int vxrm, uint8_t a, uint8_=
-t b)
- {
-@@ -2370,19 +2378,19 @@ RVVCALL(OPIVV2_RM, vssubu_vv_b, OP_UUU_B, H1, H1, H1,=
- ssubu8)
- RVVCALL(OPIVV2_RM, vssubu_vv_h, OP_UUU_H, H2, H2, H2, ssubu16)
- RVVCALL(OPIVV2_RM, vssubu_vv_w, OP_UUU_W, H4, H4, H4, ssubu32)
- RVVCALL(OPIVV2_RM, vssubu_vv_d, OP_UUU_D, H8, H8, H8, ssubu64)
--GEN_VEXT_VV_RM(vssubu_vv_b)
--GEN_VEXT_VV_RM(vssubu_vv_h)
--GEN_VEXT_VV_RM(vssubu_vv_w)
--GEN_VEXT_VV_RM(vssubu_vv_d)
-+GEN_VEXT_VV_RM(vssubu_vv_b, 1)
-+GEN_VEXT_VV_RM(vssubu_vv_h, 2)
-+GEN_VEXT_VV_RM(vssubu_vv_w, 4)
-+GEN_VEXT_VV_RM(vssubu_vv_d, 8)
+             tcg_gen_gvec_2_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, a->rs1),
+                                cpu_env, s->cfg_ptr->vlen / 8,
+@@ -2089,6 +2101,7 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x =
+*a)
+         TCGv s1;
+         TCGLabel *over =3D gen_new_label();
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vssubu_vx_b, OP_UUU_B, H1, H1, ssubu8)
- RVVCALL(OPIVX2_RM, vssubu_vx_h, OP_UUU_H, H2, H2, ssubu16)
- RVVCALL(OPIVX2_RM, vssubu_vx_w, OP_UUU_W, H4, H4, ssubu32)
- RVVCALL(OPIVX2_RM, vssubu_vx_d, OP_UUU_D, H8, H8, ssubu64)
--GEN_VEXT_VX_RM(vssubu_vx_b)
--GEN_VEXT_VX_RM(vssubu_vx_h)
--GEN_VEXT_VX_RM(vssubu_vx_w)
--GEN_VEXT_VX_RM(vssubu_vx_d)
-+GEN_VEXT_VX_RM(vssubu_vx_b, 1)
-+GEN_VEXT_VX_RM(vssubu_vx_h, 2)
-+GEN_VEXT_VX_RM(vssubu_vx_w, 4)
-+GEN_VEXT_VX_RM(vssubu_vx_d, 8)
+         s1 =3D get_gpr(s, a->rs1, EXT_SIGN);
 =20
- static inline int8_t ssub8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
- {
-@@ -2428,19 +2436,19 @@ RVVCALL(OPIVV2_RM, vssub_vv_b, OP_SSS_B, H1, H1, H1, =
-ssub8)
- RVVCALL(OPIVV2_RM, vssub_vv_h, OP_SSS_H, H2, H2, H2, ssub16)
- RVVCALL(OPIVV2_RM, vssub_vv_w, OP_SSS_W, H4, H4, H4, ssub32)
- RVVCALL(OPIVV2_RM, vssub_vv_d, OP_SSS_D, H8, H8, H8, ssub64)
--GEN_VEXT_VV_RM(vssub_vv_b)
--GEN_VEXT_VV_RM(vssub_vv_h)
--GEN_VEXT_VV_RM(vssub_vv_w)
--GEN_VEXT_VV_RM(vssub_vv_d)
-+GEN_VEXT_VV_RM(vssub_vv_b, 1)
-+GEN_VEXT_VV_RM(vssub_vv_h, 2)
-+GEN_VEXT_VV_RM(vssub_vv_w, 4)
-+GEN_VEXT_VV_RM(vssub_vv_d, 8)
+@@ -2144,6 +2157,7 @@ static bool trans_vmv_v_i(DisasContext *s, arg_vmv_v_i =
+*a)
+             };
+             TCGLabel *over =3D gen_new_label();
+             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vssub_vx_b, OP_SSS_B, H1, H1, ssub8)
- RVVCALL(OPIVX2_RM, vssub_vx_h, OP_SSS_H, H2, H2, ssub16)
- RVVCALL(OPIVX2_RM, vssub_vx_w, OP_SSS_W, H4, H4, ssub32)
- RVVCALL(OPIVX2_RM, vssub_vx_d, OP_SSS_D, H8, H8, ssub64)
--GEN_VEXT_VX_RM(vssub_vx_b)
--GEN_VEXT_VX_RM(vssub_vx_h)
--GEN_VEXT_VX_RM(vssub_vx_w)
--GEN_VEXT_VX_RM(vssub_vx_d)
-+GEN_VEXT_VX_RM(vssub_vx_b, 1)
-+GEN_VEXT_VX_RM(vssub_vx_h, 2)
-+GEN_VEXT_VX_RM(vssub_vx_w, 4)
-+GEN_VEXT_VX_RM(vssub_vx_d, 8)
+             s1 =3D tcg_constant_i64(simm);
+             dest =3D tcg_temp_new_ptr();
+@@ -2296,6 +2310,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -2326,6 +2341,7 @@ static bool opfvf_trans(uint32_t vd, uint32_t rs1, uint=
+32_t vs2,
 =20
- /* Vector Single-Width Averaging Add and Subtract */
- static inline uint8_t get_round(int vxrm, uint64_t v, uint8_t shift)
-@@ -2492,19 +2500,19 @@ RVVCALL(OPIVV2_RM, vaadd_vv_b, OP_SSS_B, H1, H1, H1, =
-aadd32)
- RVVCALL(OPIVV2_RM, vaadd_vv_h, OP_SSS_H, H2, H2, H2, aadd32)
- RVVCALL(OPIVV2_RM, vaadd_vv_w, OP_SSS_W, H4, H4, H4, aadd32)
- RVVCALL(OPIVV2_RM, vaadd_vv_d, OP_SSS_D, H8, H8, H8, aadd64)
--GEN_VEXT_VV_RM(vaadd_vv_b)
--GEN_VEXT_VV_RM(vaadd_vv_h)
--GEN_VEXT_VV_RM(vaadd_vv_w)
--GEN_VEXT_VV_RM(vaadd_vv_d)
-+GEN_VEXT_VV_RM(vaadd_vv_b, 1)
-+GEN_VEXT_VV_RM(vaadd_vv_h, 2)
-+GEN_VEXT_VV_RM(vaadd_vv_w, 4)
-+GEN_VEXT_VV_RM(vaadd_vv_d, 8)
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vaadd_vx_b, OP_SSS_B, H1, H1, aadd32)
- RVVCALL(OPIVX2_RM, vaadd_vx_h, OP_SSS_H, H2, H2, aadd32)
- RVVCALL(OPIVX2_RM, vaadd_vx_w, OP_SSS_W, H4, H4, aadd32)
- RVVCALL(OPIVX2_RM, vaadd_vx_d, OP_SSS_D, H8, H8, aadd64)
--GEN_VEXT_VX_RM(vaadd_vx_b)
--GEN_VEXT_VX_RM(vaadd_vx_h)
--GEN_VEXT_VX_RM(vaadd_vx_w)
--GEN_VEXT_VX_RM(vaadd_vx_d)
-+GEN_VEXT_VX_RM(vaadd_vx_b, 1)
-+GEN_VEXT_VX_RM(vaadd_vx_h, 2)
-+GEN_VEXT_VX_RM(vaadd_vx_w, 4)
-+GEN_VEXT_VX_RM(vaadd_vx_d, 8)
+     dest =3D tcg_temp_new_ptr();
+     mask =3D tcg_temp_new_ptr();
+@@ -2414,6 +2430,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+          \
+         TCGLabel *over =3D gen_new_label();                        \
+         gen_set_rm(s, RISCV_FRM_DYN);                            \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);        \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);\
+                                                                  \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);               \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);           \
+@@ -2488,6 +2505,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -2609,6 +2627,7 @@ static bool do_opfv(DisasContext *s, arg_rmr *a,
+         TCGLabel *over =3D gen_new_label();
+         gen_set_rm(s, rm);
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- static inline uint32_t aaddu32(CPURISCVState *env, int vxrm,
-                                uint32_t a, uint32_t b)
-@@ -2529,19 +2537,19 @@ RVVCALL(OPIVV2_RM, vaaddu_vv_b, OP_UUU_B, H1, H1, H1,=
- aaddu32)
- RVVCALL(OPIVV2_RM, vaaddu_vv_h, OP_UUU_H, H2, H2, H2, aaddu32)
- RVVCALL(OPIVV2_RM, vaaddu_vv_w, OP_UUU_W, H4, H4, H4, aaddu32)
- RVVCALL(OPIVV2_RM, vaaddu_vv_d, OP_UUU_D, H8, H8, H8, aaddu64)
--GEN_VEXT_VV_RM(vaaddu_vv_b)
--GEN_VEXT_VV_RM(vaaddu_vv_h)
--GEN_VEXT_VV_RM(vaaddu_vv_w)
--GEN_VEXT_VV_RM(vaaddu_vv_d)
-+GEN_VEXT_VV_RM(vaaddu_vv_b, 1)
-+GEN_VEXT_VV_RM(vaaddu_vv_h, 2)
-+GEN_VEXT_VV_RM(vaaddu_vv_w, 4)
-+GEN_VEXT_VV_RM(vaaddu_vv_d, 8)
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+@@ -2722,6 +2741,7 @@ static bool trans_vfmv_v_f(DisasContext *s, arg_vfmv_v_=
+f *a)
+             };
+             TCGLabel *over =3D gen_new_label();
+             tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++            tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vaaddu_vx_b, OP_UUU_B, H1, H1, aaddu32)
- RVVCALL(OPIVX2_RM, vaaddu_vx_h, OP_UUU_H, H2, H2, aaddu32)
- RVVCALL(OPIVX2_RM, vaaddu_vx_w, OP_UUU_W, H4, H4, aaddu32)
- RVVCALL(OPIVX2_RM, vaaddu_vx_d, OP_UUU_D, H8, H8, aaddu64)
--GEN_VEXT_VX_RM(vaaddu_vx_b)
--GEN_VEXT_VX_RM(vaaddu_vx_h)
--GEN_VEXT_VX_RM(vaaddu_vx_w)
--GEN_VEXT_VX_RM(vaaddu_vx_d)
-+GEN_VEXT_VX_RM(vaaddu_vx_b, 1)
-+GEN_VEXT_VX_RM(vaaddu_vx_h, 2)
-+GEN_VEXT_VX_RM(vaaddu_vx_w, 4)
-+GEN_VEXT_VX_RM(vaaddu_vx_d, 8)
+             t1 =3D tcg_temp_new_i64();
+             /* NaN-box f[rs1] */
+@@ -2810,6 +2830,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, FRM);                                        \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -2861,6 +2882,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, RISCV_FRM_DYN);                              \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+@@ -2926,6 +2948,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, FRM);                                        \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+@@ -2979,6 +3002,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)  =
+            \
+         TCGLabel *over =3D gen_new_label();                          \
+         gen_set_rm(s, FRM);                                        \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
+         tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+@@ -3066,6 +3090,7 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)    =
+            \
+         gen_helper_gvec_4_ptr *fn =3D gen_helper_##NAME;             \
+         TCGLabel *over =3D gen_new_label();                          \
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);          \
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+                                                                    \
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+@@ -3234,6 +3259,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+         uint32_t data =3D 0;
+         TCGLabel *over =3D gen_new_label();
+         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++        tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- static inline int32_t asub32(CPURISCVState *env, int vxrm, int32_t a, int32_=
-t b)
- {
-@@ -2565,19 +2573,19 @@ RVVCALL(OPIVV2_RM, vasub_vv_b, OP_SSS_B, H1, H1, H1, =
-asub32)
- RVVCALL(OPIVV2_RM, vasub_vv_h, OP_SSS_H, H2, H2, H2, asub32)
- RVVCALL(OPIVV2_RM, vasub_vv_w, OP_SSS_W, H4, H4, H4, asub32)
- RVVCALL(OPIVV2_RM, vasub_vv_d, OP_SSS_D, H8, H8, H8, asub64)
--GEN_VEXT_VV_RM(vasub_vv_b)
--GEN_VEXT_VV_RM(vasub_vv_h)
--GEN_VEXT_VV_RM(vasub_vv_w)
--GEN_VEXT_VV_RM(vasub_vv_d)
-+GEN_VEXT_VV_RM(vasub_vv_b, 1)
-+GEN_VEXT_VV_RM(vasub_vv_h, 2)
-+GEN_VEXT_VV_RM(vasub_vv_w, 4)
-+GEN_VEXT_VV_RM(vasub_vv_d, 8)
+         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+@@ -3744,6 +3770,7 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a, uin=
+t8_t seq)
+     gen_helper_gvec_3_ptr *fn;
+     TCGLabel *over =3D gen_new_label();
+     tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
++    tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over);
 =20
- RVVCALL(OPIVX2_RM, vasub_vx_b, OP_SSS_B, H1, H1, asub32)
- RVVCALL(OPIVX2_RM, vasub_vx_h, OP_SSS_H, H2, H2, asub32)
- RVVCALL(OPIVX2_RM, vasub_vx_w, OP_SSS_W, H4, H4, asub32)
- RVVCALL(OPIVX2_RM, vasub_vx_d, OP_SSS_D, H8, H8, asub64)
--GEN_VEXT_VX_RM(vasub_vx_b)
--GEN_VEXT_VX_RM(vasub_vx_h)
--GEN_VEXT_VX_RM(vasub_vx_w)
--GEN_VEXT_VX_RM(vasub_vx_d)
-+GEN_VEXT_VX_RM(vasub_vx_b, 1)
-+GEN_VEXT_VX_RM(vasub_vx_h, 2)
-+GEN_VEXT_VX_RM(vasub_vx_w, 4)
-+GEN_VEXT_VX_RM(vasub_vx_d, 8)
-=20
- static inline uint32_t asubu32(CPURISCVState *env, int vxrm,
-                                uint32_t a, uint32_t b)
-@@ -2602,19 +2610,19 @@ RVVCALL(OPIVV2_RM, vasubu_vv_b, OP_UUU_B, H1, H1, H1,=
- asubu32)
- RVVCALL(OPIVV2_RM, vasubu_vv_h, OP_UUU_H, H2, H2, H2, asubu32)
- RVVCALL(OPIVV2_RM, vasubu_vv_w, OP_UUU_W, H4, H4, H4, asubu32)
- RVVCALL(OPIVV2_RM, vasubu_vv_d, OP_UUU_D, H8, H8, H8, asubu64)
--GEN_VEXT_VV_RM(vasubu_vv_b)
--GEN_VEXT_VV_RM(vasubu_vv_h)
--GEN_VEXT_VV_RM(vasubu_vv_w)
--GEN_VEXT_VV_RM(vasubu_vv_d)
-+GEN_VEXT_VV_RM(vasubu_vv_b, 1)
-+GEN_VEXT_VV_RM(vasubu_vv_h, 2)
-+GEN_VEXT_VV_RM(vasubu_vv_w, 4)
-+GEN_VEXT_VV_RM(vasubu_vv_d, 8)
-=20
- RVVCALL(OPIVX2_RM, vasubu_vx_b, OP_UUU_B, H1, H1, asubu32)
- RVVCALL(OPIVX2_RM, vasubu_vx_h, OP_UUU_H, H2, H2, asubu32)
- RVVCALL(OPIVX2_RM, vasubu_vx_w, OP_UUU_W, H4, H4, asubu32)
- RVVCALL(OPIVX2_RM, vasubu_vx_d, OP_UUU_D, H8, H8, asubu64)
--GEN_VEXT_VX_RM(vasubu_vx_b)
--GEN_VEXT_VX_RM(vasubu_vx_h)
--GEN_VEXT_VX_RM(vasubu_vx_w)
--GEN_VEXT_VX_RM(vasubu_vx_d)
-+GEN_VEXT_VX_RM(vasubu_vx_b, 1)
-+GEN_VEXT_VX_RM(vasubu_vx_h, 2)
-+GEN_VEXT_VX_RM(vasubu_vx_w, 4)
-+GEN_VEXT_VX_RM(vasubu_vx_d, 8)
-=20
- /* Vector Single-Width Fractional Multiply with Rounding and Saturation */
- static inline int8_t vsmul8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
-@@ -2709,19 +2717,19 @@ RVVCALL(OPIVV2_RM, vsmul_vv_b, OP_SSS_B, H1, H1, H1, =
-vsmul8)
- RVVCALL(OPIVV2_RM, vsmul_vv_h, OP_SSS_H, H2, H2, H2, vsmul16)
- RVVCALL(OPIVV2_RM, vsmul_vv_w, OP_SSS_W, H4, H4, H4, vsmul32)
- RVVCALL(OPIVV2_RM, vsmul_vv_d, OP_SSS_D, H8, H8, H8, vsmul64)
--GEN_VEXT_VV_RM(vsmul_vv_b)
--GEN_VEXT_VV_RM(vsmul_vv_h)
--GEN_VEXT_VV_RM(vsmul_vv_w)
--GEN_VEXT_VV_RM(vsmul_vv_d)
-+GEN_VEXT_VV_RM(vsmul_vv_b, 1)
-+GEN_VEXT_VV_RM(vsmul_vv_h, 2)
-+GEN_VEXT_VV_RM(vsmul_vv_w, 4)
-+GEN_VEXT_VV_RM(vsmul_vv_d, 8)
-=20
- RVVCALL(OPIVX2_RM, vsmul_vx_b, OP_SSS_B, H1, H1, vsmul8)
- RVVCALL(OPIVX2_RM, vsmul_vx_h, OP_SSS_H, H2, H2, vsmul16)
- RVVCALL(OPIVX2_RM, vsmul_vx_w, OP_SSS_W, H4, H4, vsmul32)
- RVVCALL(OPIVX2_RM, vsmul_vx_d, OP_SSS_D, H8, H8, vsmul64)
--GEN_VEXT_VX_RM(vsmul_vx_b)
--GEN_VEXT_VX_RM(vsmul_vx_h)
--GEN_VEXT_VX_RM(vsmul_vx_w)
--GEN_VEXT_VX_RM(vsmul_vx_d)
-+GEN_VEXT_VX_RM(vsmul_vx_b, 1)
-+GEN_VEXT_VX_RM(vsmul_vx_h, 2)
-+GEN_VEXT_VX_RM(vsmul_vx_w, 4)
-+GEN_VEXT_VX_RM(vsmul_vx_d, 8)
-=20
- /* Vector Single-Width Scaling Shift Instructions */
- static inline uint8_t
-@@ -2768,19 +2776,19 @@ RVVCALL(OPIVV2_RM, vssrl_vv_b, OP_UUU_B, H1, H1, H1, =
-vssrl8)
- RVVCALL(OPIVV2_RM, vssrl_vv_h, OP_UUU_H, H2, H2, H2, vssrl16)
- RVVCALL(OPIVV2_RM, vssrl_vv_w, OP_UUU_W, H4, H4, H4, vssrl32)
- RVVCALL(OPIVV2_RM, vssrl_vv_d, OP_UUU_D, H8, H8, H8, vssrl64)
--GEN_VEXT_VV_RM(vssrl_vv_b)
--GEN_VEXT_VV_RM(vssrl_vv_h)
--GEN_VEXT_VV_RM(vssrl_vv_w)
--GEN_VEXT_VV_RM(vssrl_vv_d)
-+GEN_VEXT_VV_RM(vssrl_vv_b, 1)
-+GEN_VEXT_VV_RM(vssrl_vv_h, 2)
-+GEN_VEXT_VV_RM(vssrl_vv_w, 4)
-+GEN_VEXT_VV_RM(vssrl_vv_d, 8)
-=20
- RVVCALL(OPIVX2_RM, vssrl_vx_b, OP_UUU_B, H1, H1, vssrl8)
- RVVCALL(OPIVX2_RM, vssrl_vx_h, OP_UUU_H, H2, H2, vssrl16)
- RVVCALL(OPIVX2_RM, vssrl_vx_w, OP_UUU_W, H4, H4, vssrl32)
- RVVCALL(OPIVX2_RM, vssrl_vx_d, OP_UUU_D, H8, H8, vssrl64)
--GEN_VEXT_VX_RM(vssrl_vx_b)
--GEN_VEXT_VX_RM(vssrl_vx_h)
--GEN_VEXT_VX_RM(vssrl_vx_w)
--GEN_VEXT_VX_RM(vssrl_vx_d)
-+GEN_VEXT_VX_RM(vssrl_vx_b, 1)
-+GEN_VEXT_VX_RM(vssrl_vx_h, 2)
-+GEN_VEXT_VX_RM(vssrl_vx_w, 4)
-+GEN_VEXT_VX_RM(vssrl_vx_d, 8)
-=20
- static inline int8_t
- vssra8(CPURISCVState *env, int vxrm, int8_t a, int8_t b)
-@@ -2827,19 +2835,19 @@ RVVCALL(OPIVV2_RM, vssra_vv_b, OP_SSS_B, H1, H1, H1, =
-vssra8)
- RVVCALL(OPIVV2_RM, vssra_vv_h, OP_SSS_H, H2, H2, H2, vssra16)
- RVVCALL(OPIVV2_RM, vssra_vv_w, OP_SSS_W, H4, H4, H4, vssra32)
- RVVCALL(OPIVV2_RM, vssra_vv_d, OP_SSS_D, H8, H8, H8, vssra64)
--GEN_VEXT_VV_RM(vssra_vv_b)
--GEN_VEXT_VV_RM(vssra_vv_h)
--GEN_VEXT_VV_RM(vssra_vv_w)
--GEN_VEXT_VV_RM(vssra_vv_d)
-+GEN_VEXT_VV_RM(vssra_vv_b, 1)
-+GEN_VEXT_VV_RM(vssra_vv_h, 2)
-+GEN_VEXT_VV_RM(vssra_vv_w, 4)
-+GEN_VEXT_VV_RM(vssra_vv_d, 8)
-=20
- RVVCALL(OPIVX2_RM, vssra_vx_b, OP_SSS_B, H1, H1, vssra8)
- RVVCALL(OPIVX2_RM, vssra_vx_h, OP_SSS_H, H2, H2, vssra16)
- RVVCALL(OPIVX2_RM, vssra_vx_w, OP_SSS_W, H4, H4, vssra32)
- RVVCALL(OPIVX2_RM, vssra_vx_d, OP_SSS_D, H8, H8, vssra64)
--GEN_VEXT_VX_RM(vssra_vx_b)
--GEN_VEXT_VX_RM(vssra_vx_h)
--GEN_VEXT_VX_RM(vssra_vx_w)
--GEN_VEXT_VX_RM(vssra_vx_d)
-+GEN_VEXT_VX_RM(vssra_vx_b, 1)
-+GEN_VEXT_VX_RM(vssra_vx_h, 2)
-+GEN_VEXT_VX_RM(vssra_vx_w, 4)
-+GEN_VEXT_VX_RM(vssra_vx_d, 8)
-=20
- /* Vector Narrowing Fixed-Point Clip Instructions */
- static inline int8_t
-@@ -2902,16 +2910,16 @@ vnclip32(CPURISCVState *env, int vxrm, int64_t a, int=
-32_t b)
- RVVCALL(OPIVV2_RM, vnclip_wv_b, NOP_SSS_B, H1, H2, H1, vnclip8)
- RVVCALL(OPIVV2_RM, vnclip_wv_h, NOP_SSS_H, H2, H4, H2, vnclip16)
- RVVCALL(OPIVV2_RM, vnclip_wv_w, NOP_SSS_W, H4, H8, H4, vnclip32)
--GEN_VEXT_VV_RM(vnclip_wv_b)
--GEN_VEXT_VV_RM(vnclip_wv_h)
--GEN_VEXT_VV_RM(vnclip_wv_w)
-+GEN_VEXT_VV_RM(vnclip_wv_b, 1)
-+GEN_VEXT_VV_RM(vnclip_wv_h, 2)
-+GEN_VEXT_VV_RM(vnclip_wv_w, 4)
-=20
- RVVCALL(OPIVX2_RM, vnclip_wx_b, NOP_SSS_B, H1, H2, vnclip8)
- RVVCALL(OPIVX2_RM, vnclip_wx_h, NOP_SSS_H, H2, H4, vnclip16)
- RVVCALL(OPIVX2_RM, vnclip_wx_w, NOP_SSS_W, H4, H8, vnclip32)
--GEN_VEXT_VX_RM(vnclip_wx_b)
--GEN_VEXT_VX_RM(vnclip_wx_h)
--GEN_VEXT_VX_RM(vnclip_wx_w)
-+GEN_VEXT_VX_RM(vnclip_wx_b, 1)
-+GEN_VEXT_VX_RM(vnclip_wx_h, 2)
-+GEN_VEXT_VX_RM(vnclip_wx_w, 4)
-=20
- static inline uint8_t
- vnclipu8(CPURISCVState *env, int vxrm, uint16_t a, uint8_t b)
-@@ -2964,16 +2972,16 @@ vnclipu32(CPURISCVState *env, int vxrm, uint64_t a, u=
-int32_t b)
- RVVCALL(OPIVV2_RM, vnclipu_wv_b, NOP_UUU_B, H1, H2, H1, vnclipu8)
- RVVCALL(OPIVV2_RM, vnclipu_wv_h, NOP_UUU_H, H2, H4, H2, vnclipu16)
- RVVCALL(OPIVV2_RM, vnclipu_wv_w, NOP_UUU_W, H4, H8, H4, vnclipu32)
--GEN_VEXT_VV_RM(vnclipu_wv_b)
--GEN_VEXT_VV_RM(vnclipu_wv_h)
--GEN_VEXT_VV_RM(vnclipu_wv_w)
-+GEN_VEXT_VV_RM(vnclipu_wv_b, 1)
-+GEN_VEXT_VV_RM(vnclipu_wv_h, 2)
-+GEN_VEXT_VV_RM(vnclipu_wv_w, 4)
-=20
- RVVCALL(OPIVX2_RM, vnclipu_wx_b, NOP_UUU_B, H1, H2, vnclipu8)
- RVVCALL(OPIVX2_RM, vnclipu_wx_h, NOP_UUU_H, H2, H4, vnclipu16)
- RVVCALL(OPIVX2_RM, vnclipu_wx_w, NOP_UUU_W, H4, H8, vnclipu32)
--GEN_VEXT_VX_RM(vnclipu_wx_b)
--GEN_VEXT_VX_RM(vnclipu_wx_h)
--GEN_VEXT_VX_RM(vnclipu_wx_w)
-+GEN_VEXT_VX_RM(vnclipu_wx_b, 1)
-+GEN_VEXT_VX_RM(vnclipu_wx_h, 2)
-+GEN_VEXT_VX_RM(vnclipu_wx_w, 4)
-=20
- /*
-  *** Vector Float Point Arithmetic Instructions
+     static gen_helper_gvec_3_ptr * const fns[6][4] =3D {
+         {
 --=20
 2.34.2
 
