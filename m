@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noMeH-0004dB-UP
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 05:59:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60590)
+	id 1noMgL-0005xt-Kw
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 06:01:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32870)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1noMe2-0004Y5-E1; Tue, 10 May 2022 05:59:11 -0400
-Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:43994)
+ id 1noMfv-0005rO-BK; Tue, 10 May 2022 06:01:06 -0400
+Received: from mail-il1-x131.google.com ([2607:f8b0:4864:20::131]:42544)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1noMe0-0005wG-FS; Tue, 10 May 2022 05:59:06 -0400
-Received: by mail-io1-xd33.google.com with SMTP id o190so17971827iof.10;
- Tue, 10 May 2022 02:59:03 -0700 (PDT)
+ id 1noMfs-0006Mc-Od; Tue, 10 May 2022 06:01:02 -0400
+Received: by mail-il1-x131.google.com with SMTP id r17so10999936iln.9;
+ Tue, 10 May 2022 03:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vjBwT8VXXzRvpJvLuntdlZ95BHsv2r4WD7cf6lAzP2g=;
- b=VC1QJm4/pKzHs9kyWyJdAT2hb1BgMVMQWQfsHPeIXumz/YbAeIndQz8SXJRhHU/EMz
- ptM9N38jn+t+C1dTEEO8L3LBUBWaIuxWZ3jkYdcT2XGSMXtGY4OqcHq7SSqqM24R3J7H
- ZlIBup3aPHwqtZlKxiVU/HsGD7Dcp1J2fFhaMrcFaCgcY8uEDznPEEZrh2409/gV8iKC
- XVbBfK3fqygXED5SUJU8O7Mm68nfGsXkSNQ3cKBK+J5hdDm5w0296zbbRqsz/iRwKKBK
- b2Qk5wTVbPZeybROxXCM48hdnWPs5wh/2PRR+hecOag3wQpTlmEWreshwMiTunTs8ylr
- D69w==
+ :cc; bh=43ifPbsI8SD2lhv4jAsz+sC0LFCIQL2Ivgu7m9u1TBs=;
+ b=RdCeiyS3pnnshQCX4qQ6BQVBDVSwIg6+Jlz4rtLH2tezJk+LHEFk1w4SIP7V1XA4tQ
+ tZ7T9xWNMiwyGyL+OzDGskyKnlsebMEm3mViTxrGARihI0uYVyJJ09gaNNAo0ZviotN5
+ sIrwo7w2LabbwNIJJdgnSXwuPhIY4+stA0eay/iTX1nKfxXGGwF2uNGinIDRudJrZgDx
+ bsJXK8h15I69Hn9QqrEIkyq/yIYMxe5iXiHQoGDc3sBQmjjQSbqzsB6CTC+oBu/8xzJj
+ y0sD/z1s2vbAIKmVJjsqEmxoMcUFSj+hh4S5j9PQa6HwpNXRKiDy5xsRtrK4CcS2n/xm
+ EaXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=vjBwT8VXXzRvpJvLuntdlZ95BHsv2r4WD7cf6lAzP2g=;
- b=Xd5PpwoDctDD1HcFEJIa4soC3R+kZR1m/BDHZ3jXrR8OlWhMlIC0d6H+rP08biS7d4
- s225slbdVN8qiLfNq0ByIQXLnS7shXWORRG1obTNn80y/9365WBWF1big0g6/TMi7jB1
- 76AZBiYcvB390+O81TMMUJa+YYHFiNFdO82wv8Jp66HWZsEXLVxD5CjOg7BTG7XXB9sq
- yV4B9lJMegtagy+6anXVhJh/fjtEUx+8wVKC12Fso2PE+Oi0U+SN33OdMmMvr4QtZxxr
- GxwdofgqSehjSq0eUPC+phsWk7vqN+IrIGug7gV+tdCCqdnX71kLeaFqKjygnzVE7fwV
- i7DA==
-X-Gm-Message-State: AOAM531tetPBzQROGltfSGxMr0qwoY6Q8RIDWt4A+KCFe8AamlDhmHAe
- /FjgU8QD9LpCQzygDfvCgsG0R6oZo9oWIxpuuDk=
-X-Google-Smtp-Source: ABdhPJxVuKkCiz/TiAtbWw6q5Wj+EDnHRCqrVTqZx0D5Hq5O8WcImuqHHZ7inLHxw3eGGUcUzjebQn6IquGnxFq0DMg=
-X-Received: by 2002:a05:6638:190a:b0:32b:95b7:4e64 with SMTP id
- p10-20020a056638190a00b0032b95b74e64mr9163482jal.212.1652176742966; Tue, 10
- May 2022 02:59:02 -0700 (PDT)
+ bh=43ifPbsI8SD2lhv4jAsz+sC0LFCIQL2Ivgu7m9u1TBs=;
+ b=ix3MtgCtTgjjF5W1Q+JDR+5FEjKElSJPNIbhWFGNC2Z6FPO+JyuZl6bpW/SJd7YOK8
+ PMDruyf4NFG8CxfDVS5+1I8aGMs2oOx8Sm0RdxGC58d1+4Tnf6voH76yNT8RyLmws7+a
+ zYmoyTgHZu+phBrZRHLmnPS/eUABBG7I4NTZVVhGn8UZWCUZNBjGJa3/4JyZvZu/mHsz
+ AwKyUCdoepVEKeN9Uq8uNQ28zq4Uq4/S3+yNWaXO8nNgt9H+H8oaUWlBFL25Bp0tUHu4
+ 0QLkCobJ4rsQQTqF6E7VsreI14oLBXkR7WYoeNJhxH/riNvADah+BzJu01OO6nhfQ4/H
+ ZSbw==
+X-Gm-Message-State: AOAM530zvVVB1Xpd+npf3HFCMWPoNVkYzyKSF3snY3RIZRnoTUToqeaQ
+ EbYXE42OA2sTHp5gde0nDZM6WJrodSzf5nJ7yYk=
+X-Google-Smtp-Source: ABdhPJx3SULEOY+oXMuApK0ZmkInm88vaz0DD7Shlf66DRhBYSzNWklNw82Y60yNPEgab9TpUxVmLeY+XWn09kyQkes=
+X-Received: by 2002:a05:6e02:10c1:b0:2cc:14ab:ceb7 with SMTP id
+ s1-20020a056e0210c100b002cc14abceb7mr8574828ilj.55.1652176859282; Tue, 10 May
+ 2022 03:00:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <165156202959.27941.9731161369415852149-0@git.sr.ht>
- <165156202959.27941.9731161369415852149-12@git.sr.ht>
-In-Reply-To: <165156202959.27941.9731161369415852149-12@git.sr.ht>
+ <165156202959.27941.9731161369415852149-13@git.sr.ht>
+In-Reply-To: <165156202959.27941.9731161369415852149-13@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 10 May 2022 11:58:36 +0200
-Message-ID: <CAKmqyKPJq4TSJtFGb2uHP5pmPY5BPWZkxLncFwU1FG8LZGJWpw@mail.gmail.com>
-Subject: Re: [PATCH qemu v14 12/15] target/riscv: rvv: Add tail agnostic for
- vector reduction instructions
+Date: Tue, 10 May 2022 12:00:32 +0200
+Message-ID: <CAKmqyKPhWnFtjdZVSncFch4=D4mK7vtxXTk2YjNCv3nYcj=w3Q@mail.gmail.com>
+Subject: Re: [PATCH qemu v14 13/15] target/riscv: rvv: Add tail agnostic for
+ vector mask instructions
 To: "~eopxd" <yueh.ting.chen@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -54,8 +54,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::131;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x131.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,11 +76,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 09:59:13 -0000
+X-List-Received-Date: Tue, 10 May 2022 10:01:26 -0000
 
-On Tue, May 3, 2022 at 9:30 AM ~eopxd <eopxd@git.sr.ht> wrote:
+On Tue, May 3, 2022 at 9:44 AM ~eopxd <eopxd@git.sr.ht> wrote:
 >
 > From: eopXD <eop.chen@sifive.com>
+>
+> The tail elements in the destination mask register are updated under
+> a tail-agnostic policy.
 >
 > Signed-off-by: eop Chen <eop.chen@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
@@ -91,89 +94,138 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/vector_helper.c | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
+>  target/riscv/insn_trans/trans_rvv.c.inc |  6 +++++
+>  target/riscv/vector_helper.c            | 30 +++++++++++++++++++++++++
+>  2 files changed, 36 insertions(+)
 >
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 86374f22c0..a27433b324 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -3211,6 +3211,8 @@ static bool trans_##NAME(DisasContext *s, arg_r *a)                \
+>          tcg_gen_brcond_tl(TCG_COND_GEU, cpu_vstart, cpu_vl, over); \
+>                                                                     \
+>          data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> +        data =                                                     \
+> +            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
+>          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                             vreg_ofs(s, a->rs1),                    \
+>                             vreg_ofs(s, a->rs2), cpu_env,           \
+> @@ -3315,6 +3317,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmr *a)              \
+>                                                                     \
+>          data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>          data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+> +        data =                                                     \
+> +            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
+>          tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd),                     \
+>                             vreg_ofs(s, 0), vreg_ofs(s, a->rs2),    \
+>                             cpu_env, s->cfg_ptr->vlen / 8,          \
+> @@ -3352,6 +3356,7 @@ static bool trans_viota_m(DisasContext *s, arg_viota_m *a)
+>
+>          data = FIELD_DP32(data, VDATA, VM, a->vm);
+>          data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> +        data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>          static gen_helper_gvec_3_ptr * const fns[4] = {
+>              gen_helper_viota_m_b, gen_helper_viota_m_h,
+>              gen_helper_viota_m_w, gen_helper_viota_m_d,
+> @@ -3381,6 +3386,7 @@ static bool trans_vid_v(DisasContext *s, arg_vid_v *a)
+>
+>          data = FIELD_DP32(data, VDATA, VM, a->vm);
+>          data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
+> +        data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>          static gen_helper_gvec_2_ptr * const fns[4] = {
+>              gen_helper_vid_v_b, gen_helper_vid_v_h,
+>              gen_helper_vid_v_w, gen_helper_vid_v_d,
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index f67ec1f249..a319cda969 100644
+> index a319cda969..dcb6d3538c 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -4537,6 +4537,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+> @@ -4719,6 +4719,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+>                    uint32_t desc)                          \
 >  {                                                         \
->      uint32_t vm = vext_vm(desc);                          \
 >      uint32_t vl = env->vl;                                \
-> +    uint32_t esz = sizeof(TD);                            \
-> +    uint32_t vlenb = simd_maxsz(desc);                    \
-> +    uint32_t vta = vext_vta(desc);                        \
+> +    uint32_t total_elems = env_archcpu(env)->cfg.vlen;    \
+> +    uint32_t vta_all_1s = vext_vta_all_1s(desc);          \
 >      uint32_t i;                                           \
->      TD s1 =  *((TD *)vs1 + HD(0));                        \
+>      int a, b;                                             \
 >                                                            \
-> @@ -4549,6 +4552,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+> @@ -4728,6 +4730,15 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+>          vext_set_elem_mask(vd, i, OP(b, a));              \
 >      }                                                     \
->      *((TD *)vd + HD(0)) = s1;                             \
 >      env->vstart = 0;                                      \
+> +    /* mask destination register are always tail-         \
+> +     * agnostic                                           \
+> +     */                                                   \
 > +    /* set tail elements to 1s */                         \
-> +    vext_set_elems_1s(vd, vta, esz, vlenb);               \
+> +    if (vta_all_1s) {                                     \
+> +        for (; i < total_elems; i++) {                    \
+> +            vext_set_elem_mask(vd, i, 1);                 \
+> +        }                                                 \
+> +    }                                                     \
 >  }
 >
->  /* vd[0] = sum(vs1[0], vs2[*]) */
-> @@ -4618,6 +4623,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
->  {                                                          \
->      uint32_t vm = vext_vm(desc);                           \
->      uint32_t vl = env->vl;                                 \
-> +    uint32_t esz = sizeof(TD);                             \
-> +    uint32_t vlenb = simd_maxsz(desc);                     \
-> +    uint32_t vta = vext_vta(desc);                         \
->      uint32_t i;                                            \
->      TD s1 =  *((TD *)vs1 + HD(0));                         \
->                                                             \
-> @@ -4630,6 +4638,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
->      }                                                      \
->      *((TD *)vd + HD(0)) = s1;                              \
->      env->vstart = 0;                                       \
-> +    /* set tail elements to 1s */                          \
-> +    vext_set_elems_1s(vd, vta, esz, vlenb);                \
->  }
->
->  /* Unordered sum */
-> @@ -4654,6 +4664,9 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
+>  #define DO_NAND(N, M)  (!(N & M))
+> @@ -4795,6 +4806,8 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
 >  {
 >      uint32_t vm = vext_vm(desc);
 >      uint32_t vl = env->vl;
-> +    uint32_t esz = sizeof(uint32_t);
-> +    uint32_t vlenb = simd_maxsz(desc);
-> +    uint32_t vta = vext_vta(desc);
->      uint32_t i;
->      uint32_t s1 =  *((uint32_t *)vs1 + H4(0));
+> +    uint32_t total_elems = env_archcpu(env)->cfg.vlen;
+> +    uint32_t vta_all_1s = vext_vta_all_1s(desc);
+>      int i;
+>      bool first_mask_bit = false;
 >
-> @@ -4667,6 +4680,8 @@ void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
+> @@ -4823,6 +4836,13 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
+>          }
 >      }
->      *((uint32_t *)vd + H4(0)) = s1;
 >      env->vstart = 0;
+> +    /* mask destination register are always tail-agnostic */
 > +    /* set tail elements to 1s */
-> +    vext_set_elems_1s(vd, vta, esz, vlenb);
+> +    if (vta_all_1s) {
+> +        for (; i < total_elems; i++) {
+> +            vext_set_elem_mask(vd, i, 1);
+> +        }
+> +    }
 >  }
 >
->  void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
-> @@ -4674,6 +4689,9 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
->  {
->      uint32_t vm = vext_vm(desc);
->      uint32_t vl = env->vl;
-> +    uint32_t esz = sizeof(uint64_t);
-> +    uint32_t vlenb = simd_maxsz(desc);
-> +    uint32_t vta = vext_vta(desc);
->      uint32_t i;
->      uint64_t s1 =  *((uint64_t *)vs1);
->
-> @@ -4687,6 +4705,8 @@ void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
->      }
->      *((uint64_t *)vd) = s1;
->      env->vstart = 0;
-> +    /* set tail elements to 1s */
-> +    vext_set_elems_1s(vd, vta, esz, vlenb);
+>  void HELPER(vmsbf_m)(void *vd, void *v0, void *vs2, CPURISCVState *env,
+> @@ -4850,6 +4870,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
+>  {                                                                         \
+>      uint32_t vm = vext_vm(desc);                                          \
+>      uint32_t vl = env->vl;                                                \
+> +    uint32_t esz = sizeof(ETYPE);                                         \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);          \
+> +    uint32_t vta = vext_vta(desc);                                        \
+>      uint32_t sum = 0;                                                     \
+>      int i;                                                                \
+>                                                                            \
+> @@ -4863,6 +4886,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
+>          }                                                                 \
+>      }                                                                     \
+>      env->vstart = 0;                                                      \
+> +    /* set tail elements to 1s */                                         \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
 >  }
 >
->  /*
+>  GEN_VEXT_VIOTA_M(viota_m_b, uint8_t,  H1)
+> @@ -4876,6 +4901,9 @@ void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
+>  {                                                                         \
+>      uint32_t vm = vext_vm(desc);                                          \
+>      uint32_t vl = env->vl;                                                \
+> +    uint32_t esz = sizeof(ETYPE);                                         \
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);          \
+> +    uint32_t vta = vext_vta(desc);                                        \
+>      int i;                                                                \
+>                                                                            \
+>      for (i = env->vstart; i < vl; i++) {                                  \
+> @@ -4885,6 +4913,8 @@ void HELPER(NAME)(void *vd, void *v0, CPURISCVState *env, uint32_t desc)  \
+>          *((ETYPE *)vd + H(i)) = i;                                        \
+>      }                                                                     \
+>      env->vstart = 0;                                                      \
+> +    /* set tail elements to 1s */                                         \
+> +    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+>  }
+>
+>  GEN_VEXT_VID_V(vid_v_b, uint8_t,  H1)
 > --
 > 2.34.2
 >
