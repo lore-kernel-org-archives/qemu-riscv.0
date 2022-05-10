@@ -1,78 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noS1Q-0003rQ-Vn
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 11:43:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44214)
+	id 1noT3T-0007qO-Oh
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 12:49:48 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41680)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1noS1P-0003qc-B0
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 11:43:35 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:34587)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1noS1N-0000bT-K4
- for qemu-riscv@nongnu.org; Tue, 10 May 2022 11:43:34 -0400
-Received: by mail-pl1-x634.google.com with SMTP id n8so17105538plh.1
- for <qemu-riscv@nongnu.org>; Tue, 10 May 2022 08:43:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=message-id:date:mime-version:user-agent:subject:content-language:to
- :cc:references:from:in-reply-to:content-transfer-encoding;
- bh=h0resYfk1K5yxJGjQaDEnfx5eDc62a6WGFOzhZ19oYg=;
- b=yiGIFFJfh6zdFDTaTdsEqvgATfvVA9G3tCq84sLPelhj5WzibOuAKTixaonlO4wCtr
- Qeo6Jyq/PR/0/AKxIufTti7fJ4SxO/7F21HaLQpB5hpXwI57uhIr9WTBfCvXsvOq22MA
- fGnoAz6Ff5YmRVG6zT0uyR7tlq0mvCV8HbQOb4V9FaBCduhS5iapxnV1wrisxBwMHRRz
- 6UOLPD5ij8KCicWiHj0bSOBRQ1UnILEx4aXaOYHJpv9XGU5pQuDR/Yup33U4lZr/lWso
- OQ1Qt8Q/39Mf1HM9++5+Idz6arjRAg/+ydWA0Zd5cPc+eLaz6CPWf1FCfuJ2pirWVNeA
- YQ+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=h0resYfk1K5yxJGjQaDEnfx5eDc62a6WGFOzhZ19oYg=;
- b=Uk2vkdicdr5k052F5oRWX1mwAesj1piqmnBNIUPFdwHnARpOwCqwc/+boh93QUGFU/
- 9V46p2vSOwSe24hefETYsfjVIR8vHXrD9BDx/EurKroMfNjvPa672NwO+qlJmwX6KjGk
- 8H/M/e8pvgzjCFn4hBn91I85layYCYVDxyTXy6r4ateYToJtRGVxeObSRd0FJXPxrRtz
- X1zH2aObagDsKpAGALn9AA1EKHvfmLkuOJxyG7ho0tt8RZkMT/ilsg3drOCEjt4LEEFA
- oDnGiP+z19HnROgFQDZXU4RgBw7ca+qcIsl+zbzxl9SWq57HCizZkRCr+TQ/NsTH2PfQ
- cKoA==
-X-Gm-Message-State: AOAM530wC5Y3lSAJUfAoU/nbO2nGKqepThshCze9Ma73UJx9vSVIWujt
- 5dcBW0SK3PIHwqwXjPKxR/qa8Q==
-X-Google-Smtp-Source: ABdhPJx8BNGYLFqpUK8Juc/m6CA71nrcLU4tcOR8IorxQJCLfjGA0utUvtv62bDrL6DwITgV1D4GDA==
-X-Received: by 2002:a17:903:11c7:b0:154:b936:d1d4 with SMTP id
- q7-20020a17090311c700b00154b936d1d4mr21430830plh.78.1652197412119; 
- Tue, 10 May 2022 08:43:32 -0700 (PDT)
-Received: from [192.168.1.6] ([71.212.142.129])
- by smtp.gmail.com with ESMTPSA id
- y25-20020a056a00181900b005082a7fd144sm11015138pfa.3.2022.05.10.08.43.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 May 2022 08:43:31 -0700 (PDT)
-Message-ID: <f9f7804f-76e1-da5c-600a-47b6df780e15@linaro.org>
-Date: Tue, 10 May 2022 08:43:29 -0700
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1noT3Q-0007pH-HH; Tue, 10 May 2022 12:49:44 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:44932)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1noT3O-0005Ho-Rb; Tue, 10 May 2022 12:49:44 -0400
+Authentication-Results: mail-b.sr.ht; dkim=none 
+Received: from git.sr.ht (unknown [173.195.146.142])
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 4CD9C11EFC9;
+ Tue, 10 May 2022 16:49:38 +0000 (UTC)
+From: ~eopxd <eopxd@git.sr.ht>
+Date: Tue, 10 May 2022 16:49:37 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [PATCH 1/1] Add Zihintpause support
-Content-Language: en-US
-To: Dao Lu <daolu@rivosinc.com>, qemu-devel@nongnu.org
+Subject: [PATCH qemu v15 00/15] Add tail agnostic behavior for rvv instructions
+Message-ID: <165220137795.17881.11560413809338015947-0@git.sr.ht>
+X-Mailer: git.sr.ht
+Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20220510064231.1384670-1-daolu@rivosinc.com>
- <20220510064231.1384670-2-daolu@rivosinc.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20220510064231.1384670-2-daolu@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
+ helo=mail-b.sr.ht
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,22 +47,126 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2022 15:43:35 -0000
+X-List-Received-Date: Tue, 10 May 2022 16:49:45 -0000
 
-On 5/9/22 23:42, Dao Lu wrote:
-> +static bool trans_pause(DisasContext *ctx, arg_pause *a)
-> +{
-> +    REQUIRE_ZIHINTPAUSE(ctx);
-> +
-> +    /*
-> +     * PAUSE is a no-op in QEMU,
-> +     * however we need to clear the reservation
-> +     */
-> +    tcg_gen_movi_tl(load_res, -1);
+According to v-spec, tail agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of tail policies, QEMU should be able to simulate the tail
+agnostic behavior as "set tail elements' bits to all 1s". An option
+'rvv_ta_all_1s' is added to enable the behavior, it is default as
+disabled.
 
-I recommend ending the TB and returning to the main loop.  When running in round-robin 
-mode, this will yield to the next cpu.
+There are multiple possibility for agnostic elements according to
+v-spec. The main intent of this patch-set tries to add option that
+can distinguish between tail policies. Setting agnostic elements to
+all 1s makes things simple and allow QEMU to express this.
 
+We may explore other possibility of agnostic behavior by adding
+other options in the future. Please understand that this patch-set
+is limited.
 
-r~
+v2 updates:
+- Addressed comments from Weiwei Li
+- Added commit tail agnostic on load / store instructions (which
+  I forgot to include into the patch-set)
+
+v3 updates:
+- Missed the very 1st commit, adding it back
+
+v4 updates:
+- Renamed vlmax to total_elems
+- Deal with tail element when vl_eq_vlmax == true
+
+v5 updates:
+- Let `vext_get_total_elems` take `desc` and `esz`
+- Utilize `simd_maxsz(desc)` to get `vlenb`
+- Fix alignments to code
+
+v6 updates:
+- Fix `vext_get_total_elems`
+
+v7 updates:
+- Reuse `max_elems` for vector load / store helper functions. The
+  translation sets desc's `lmul` to `min(1, lmul)`, making
+  `vext_max_elems` equivalent to `vext_get_total_elems`.
+
+v8 updates:
+- Simplify `vext_set_elems_1s`, don't need `vext_set_elems_1s_fns`
+- Fix `vext_get_total_elems`, it should derive upon EMUL instead
+  of LMUL
+
+v9 updates:
+- Let instructions that is tail agnostic regardless of vta respect the
+  option and not the vta.
+
+v10 updates:
+- Correct range to set element to 1s for load instructions
+
+v11 updates:
+- Separate addition of option 'rvv_ta_all_1s' as a new (last) commit
+- Add description to show intent of the option in first commit for the
+  optional tail agnostic behavior
+- Tag WeiWei as Reviewed-by for all commits
+- Tag Alistair as Reviewed-by for commit 01, 02
+- Tag Alistair as Acked-by for commit 03
+
+v12 updates:
+- Add missing space in WeiWei's "Reviewed-by" tag
+
+v13 updates:
+- Fix tail agnostic for vext_ldst_us. The function operates on input
+  parameter 'evl' rather than 'env->vl'.
+- Fix tail elements for vector segment load / store instructions
+  A vector segment load / store instruction may contain fractional
+  lmul with nf * lmul > 1. The rest of the elements in the last
+  register should be treated as tail elements.
+- Fix tail agnostic length for instructions with mask destination
+  register. Instructions with mask destination register should have
+  'vlen - vl' tail elements.
+
+v14 updates:
+- Pass lmul information to into vector helper function.
+  `vext_get_total_elems` needs it.
+
+v15 updates:
+- Rebase to latest `master`
+- Tag Alistair as Acked by for commit 04 ~ 14
+- Tag Alistair as Acked by for commit 15
+
+eopXD (15):
+  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
+  target/riscv: rvv: Rename ambiguous esz
+  target/riscv: rvv: Early exit when vstart >= vl
+  target/riscv: rvv: Add tail agnostic for vv instructions
+  target/riscv: rvv: Add tail agnostic for vector load / store
+    instructions
+  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
+  target/riscv: rvv: Add tail agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer merge and move
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector reduction instructions
+  target/riscv: rvv: Add tail agnostic for vector mask instructions
+  target/riscv: rvv: Add tail agnostic for vector permutation
+    instructions
+  target/riscv: rvv: Add option 'rvv_ta_all_1s' to enable optional tail
+    agnostic behavior
+
+ target/riscv/cpu.c                      |    1 +
+ target/riscv/cpu.h                      |    2 +
+ target/riscv/cpu_helper.c               |    2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |  179 +++
+ target/riscv/internals.h                |    6 +-
+ target/riscv/translate.c                |    4 +
+ target/riscv/vector_helper.c            | 1558 ++++++++++++++---------
+ 7 files changed, 1135 insertions(+), 617 deletions(-)
+
+-- 
+2.34.2
 
