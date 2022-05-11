@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nobln-0008WB-7X
-	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 22:08:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46566)
+	id 1nobnV-0001gi-Nm
+	for mharc-qemu-riscv@gnu.org; Tue, 10 May 2022 22:09:53 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46768)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1noblm-0008Vw-26; Tue, 10 May 2022 22:08:06 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:33662 helo=cstnet.cn)
+ id 1nobnU-0001gI-If; Tue, 10 May 2022 22:09:52 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84]:34022 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1noblj-0000Yp-Im; Tue, 10 May 2022 22:08:05 -0400
+ id 1nobnS-0000qC-8I; Tue, 10 May 2022 22:09:51 -0400
 Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowAC3Vhh+GntiHkKyBQ--.8561S2;
- Wed, 11 May 2022 10:07:58 +0800 (CST)
-Subject: Re: [PATCH qemu v2 03/10] target/riscv: rvv: Add mask agnostic for vx
- instructions
+ by APP-05 (Coremail) with SMTP id zQCowABHT5PqGntiXlayBQ--.35461S2;
+ Wed, 11 May 2022 10:09:47 +0800 (CST)
+Subject: Re: [PATCH qemu v2 04/10] target/riscv: rvv: Add mask agnostic for
+ vector integer shift instructions
 To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
-References: <165220716770.22380.2493420346587893209-3@git.sr.ht>
+References: <165220716770.22380.2493420346587893209-4@git.sr.ht>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <1c9215c5-4b7c-4183-8b1f-238ec0dd9574@iscas.ac.cn>
-Date: Wed, 11 May 2022 10:07:58 +0800
+Message-ID: <1ec3c59f-650b-35bd-0575-6cbef04ab97e@iscas.ac.cn>
+Date: Wed, 11 May 2022 10:09:46 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <165220716770.22380.2493420346587893209-3@git.sr.ht>
+In-Reply-To: <165220716770.22380.2493420346587893209-4@git.sr.ht>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: zQCowAC3Vhh+GntiHkKyBQ--.8561S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Zw4rJF43GFykAr1ftFy7Wrg_yoW8tr4xpr
- 48KrW29rZ8tFyxAw1fZF4UAr15Zan8Kw4jk3WkZws5u398XrsxXF4Dta1Ikry2y3ZxAr40
- k3WUZFZ3uanaqFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowABHT5PqGntiXlayBQ--.35461S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Zw4rJF43GrW3Gw4xCF4rXwb_yoW8tF4kpw
+ 4kKFWIqrZ3GFWfZ3WSvF4UZr15ZF45Gr4vkw1vvwn5X3yrJrs5ZF4qka1Ikry3JFy3uF1Y
+ 93WDurWS939aqFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
  1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
@@ -70,62 +70,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2022 02:08:06 -0000
+X-List-Received-Date: Wed, 11 May 2022 02:09:52 -0000
 
 
-在 2022/3/17 下午4:38, ~eopxd 写道:
+在 2022/3/17 下午4:43, ~eopxd 写道:
 > From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 >
 > Signed-off-by: eop Chen <eop.chen@sifive.com>
 > Reviewed-by: Frank Chang <frank.chang@sifive.com>
 > ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 2 ++
->   target/riscv/vector_helper.c            | 3 +++
->   2 files changed, 5 insertions(+)
+>   target/riscv/insn_trans/trans_rvv.c.inc | 1 +
+>   target/riscv/vector_helper.c            | 7 +++++++
+>   2 files changed, 8 insertions(+)
 
 Reviewed-by: Weiwei Li<liweiwei@iscas.ac.cn>
 
 Regards,
 Weiwei Li
 
+
 >
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 9a2d54313a..de8dda31fe 100644
+> index de8dda31fe..ffbbbf9b3a 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1316,6 +1316,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
->       data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
->       data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-> +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->       desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
->                                         s->cfg_ptr->vlen / 8, data));
->   
-> @@ -1493,6 +1494,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
->       data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
->       data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-> +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->       desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
->                                         s->cfg_ptr->vlen / 8, data));
->   
+> @@ -1946,6 +1946,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
+>           data = FIELD_DP32(data, VDATA, VM, a->vm);                 \
+>           data = FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
+>           data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
+> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
+>           tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
+>                              vreg_ofs(s, a->rs1),                    \
+>                              vreg_ofs(s, a->rs2), cpu_env,           \
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 89eea33eb3..98c9f21182 100644
+> index 98c9f21182..0583602528 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -901,10 +901,13 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
->       uint32_t vl = env->vl;
->       uint32_t total_elems = vext_get_total_elems(env, desc, esz);
->       uint32_t vta = vext_vta(desc);
-> +    uint32_t vma = vext_vma(desc);
->       uint32_t i;
->   
->       for (i = env->vstart; i < vl; i++) {
->           if (!vm && !vext_elem_mask(v0, i)) {
-> +            /* set masked-off elements to 1s */
-> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
->               continue;
->           }
->           fn(vd, s1, vs2, i);
+> @@ -1300,10 +1300,13 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,                          \
+>       uint32_t esz = sizeof(TS1);                                           \
+>       uint32_t total_elems = vext_get_total_elems(env, desc, esz);          \
+>       uint32_t vta = vext_vta(desc);                                        \
+> +    uint32_t vma = vext_vma(desc);                                        \
+>       uint32_t i;                                                           \
+>                                                                             \
+>       for (i = env->vstart; i < vl; i++) {                                  \
+>           if (!vm && !vext_elem_mask(v0, i)) {                              \
+> +            /* set masked-off elements to 1s */                           \
+> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
+>               continue;                                                     \
+>           }                                                                 \
+>           TS1 s1 = *((TS1 *)vs1 + HS1(i));                                  \
+> @@ -1341,10 +1344,14 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,      \
+>       uint32_t total_elems =                                  \
+>           vext_get_total_elems(env, desc, esz);               \
+>       uint32_t vta = vext_vta(desc);                          \
+> +    uint32_t vma = vext_vma(desc);                          \
+>       uint32_t i;                                             \
+>                                                               \
+>       for (i = env->vstart; i < vl; i++) {                    \
+>           if (!vm && !vext_elem_mask(v0, i)) {                \
+> +            /* set masked-off elements to 1s */             \
+> +            vext_set_elems_1s(vd, vma, i * esz,             \
+> +                              (i + 1) * esz);               \
+>               continue;                                       \
+>           }                                                   \
+>           TS2 s2 = *((TS2 *)vs2 + HS2(i));                    \
 
 
