@@ -1,39 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npTnz-0003IO-JT
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 07:49:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48126)
+	id 1npTo1-0003Lb-CB
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 07:50:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48124)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1npTny-0003Ht-2L; Fri, 13 May 2022 07:49:58 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:45378)
+ id 1npTny-0003Hs-0H; Fri, 13 May 2022 07:49:58 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:45382)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1npTnw-0000mw-4h; Fri, 13 May 2022 07:49:57 -0400
+ id 1npTnw-0000n4-75; Fri, 13 May 2022 07:49:57 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id E926811EFFE;
- Fri, 13 May 2022 11:49:54 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 4036B11F102;
+ Fri, 13 May 2022 11:49:55 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Date: Fri, 13 May 2022 11:49:54 +0000
-MIME-Version: 1.0
-Subject: [PATCH qemu v18 00/16] Add tail agnostic behavior for rvv instructions
-Message-ID: <165244259451.12806.1710403216414520477-0@git.sr.ht>
+Date: Thu, 12 May 2022 00:47:44 -0700
+Subject: [PATCH qemu v18 02/16] target/riscv: rvv: Prune redundant access_type
+ parameter passed
+Message-ID: <165244259451.12806.1710403216414520477-2@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+In-Reply-To: <165244259451.12806.1710403216414520477-0@git.sr.ht>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 2
-X-Spam_score: 0.2
-X-Spam_bar: /
-X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 15
+X-Spam_score: 1.5
+X-Spam_bar: +
+X-Spam_report: (1.5 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_24_48=1.34,
+ FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -49,142 +51,172 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 13 May 2022 11:49:58 -0000
 
-According to v-spec, tail agnostic behavior can be either kept as
-undisturbed or set elements' bits to all 1s. To distinguish the
-difference of tail policies, QEMU should be able to simulate the tail
-agnostic behavior as "set tail elements' bits to all 1s". An option
-'rvv_ta_all_1s' is added to enable the behavior, it is default as
-disabled.
+From: eopXD <eop.chen@sifive.com>
 
-There are multiple possibility for agnostic elements according to
-v-spec. The main intent of this patch-set tries to add option that
-can distinguish between tail policies. Setting agnostic elements to
-all 1s makes things simple and allow QEMU to express this.
+No functional change intended in this commit.
 
-We may explore other possibility of agnostic behavior by adding
-other options in the future. Please understand that this patch-set
-is limited.
+Signed-off-by: eop Chen <eop.chen@sifive.com>
+---
+ target/riscv/vector_helper.c | 35 ++++++++++++++++-------------------
+ 1 file changed, 16 insertions(+), 19 deletions(-)
 
-v2 updates:
-- Addressed comments from Weiwei Li
-- Added commit tail agnostic on load / store instructions (which
-  I forgot to include into the patch-set)
-
-v3 updates:
-- Missed the very 1st commit, adding it back
-
-v4 updates:
-- Renamed vlmax to total_elems
-- Deal with tail element when vl_eq_vlmax == true
-
-v5 updates:
-- Let `vext_get_total_elems` take `desc` and `esz`
-- Utilize `simd_maxsz(desc)` to get `vlenb`
-- Fix alignments to code
-
-v6 updates:
-- Fix `vext_get_total_elems`
-
-v7 updates:
-- Reuse `max_elems` for vector load / store helper functions. The
-  translation sets desc's `lmul` to `min(1, lmul)`, making
-  `vext_max_elems` equivalent to `vext_get_total_elems`.
-
-v8 updates:
-- Simplify `vext_set_elems_1s`, don't need `vext_set_elems_1s_fns`
-- Fix `vext_get_total_elems`, it should derive upon EMUL instead
-  of LMUL
-
-v9 updates:
-- Let instructions that is tail agnostic regardless of vta respect the
-  option and not the vta.
-
-v10 updates:
-- Correct range to set element to 1s for load instructions
-
-v11 updates:
-- Separate addition of option 'rvv_ta_all_1s' as a new (last) commit
-- Add description to show intent of the option in first commit for the
-  optional tail agnostic behavior
-- Tag WeiWei as Reviewed-by for all commits
-- Tag Alistair as Reviewed-by for commit 01, 02
-- Tag Alistair as Acked-by for commit 03
-
-v12 updates:
-- Add missing space in WeiWei's "Reviewed-by" tag
-
-v13 updates:
-- Fix tail agnostic for vext_ldst_us. The function operates on input
-  parameter 'evl' rather than 'env->vl'.
-- Fix tail elements for vector segment load / store instructions
-  A vector segment load / store instruction may contain fractional
-  lmul with nf * lmul > 1. The rest of the elements in the last
-  register should be treated as tail elements.
-- Fix tail agnostic length for instructions with mask destination
-  register. Instructions with mask destination register should have
-  'vlen - vl' tail elements.
-
-v14 updates:
-- Pass lmul information to into vector helper function.
-  `vext_get_total_elems` needs it.
-
-v15 updates:
-- Rebase to latest `master`
-- Tag Alistair as Acked by for commit 04 ~ 14
-- Tag Alistair as Acked by for commit 15
-
-v16 updates:
-- Fix bug, when encountering situation when lmul < 0 and vl_eq_vlmax,
-  the original version will override on `vd` but the computation will
-  override again, meaning the tail elements will not be set correctly.
-  Now, we don't use TCG functions if we are trying to simulate all 1s
-  for agnostic and use vector helpers instead.
-
-v17 updates:
-- Add "Prune access_type parameter" commit to cleanup vector load/
-  store functions. Then add parameter `is_load` in vector helper
-  functions to enable vta behavior in the commit for adding vta on
-  vector load/store functions.
-
-v18 updates:
-- Don't use `is_load` parameter in vector helper. Don't let vta pass
-   through in `trans_rvv.inc`
-
-eopXD (16):
-  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
-  target/riscv: rvv: Prune redundant access_type parameter passed
-  target/riscv: rvv: Rename ambiguous esz
-  target/riscv: rvv: Early exit when vstart >= vl
-  target/riscv: rvv: Add tail agnostic for vv instructions
-  target/riscv: rvv: Add tail agnostic for vector load / store
-    instructions
-  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
-  target/riscv: rvv: Add tail agnostic for vector integer shift
-    instructions
-  target/riscv: rvv: Add tail agnostic for vector integer comparison
-    instructions
-  target/riscv: rvv: Add tail agnostic for vector integer merge and move
-    instructions
-  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
-    instructions
-  target/riscv: rvv: Add tail agnostic for vector floating-point
-    instructions
-  target/riscv: rvv: Add tail agnostic for vector reduction instructions
-  target/riscv: rvv: Add tail agnostic for vector mask instructions
-  target/riscv: rvv: Add tail agnostic for vector permutation
-    instructions
-  target/riscv: rvv: Add option 'rvv_ta_all_1s' to enable optional tail
-    agnostic behavior
-
- target/riscv/cpu.c                      |    1 +
- target/riscv/cpu.h                      |    2 +
- target/riscv/cpu_helper.c               |    2 +
- target/riscv/insn_trans/trans_rvv.c.inc |   94 +-
- target/riscv/internals.h                |    6 +-
- target/riscv/translate.c                |    4 +
- target/riscv/vector_helper.c            | 1587 ++++++++++++++---------
- 7 files changed, 1053 insertions(+), 643 deletions(-)
-
--- 
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 85dd611cd9..60840325c4 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -231,7 +231,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+                  target_ulong stride, CPURISCVState *env,
+                  uint32_t desc, uint32_t vm,
+                  vext_ldst_elem_fn *ldst_elem,
+-                 uint32_t esz, uintptr_t ra, MMUAccessType access_type)
++                 uint32_t esz, uintptr_t ra)
+ {
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -259,7 +259,7 @@ void HELPER(NAME)(void *vd, void * v0, target_ulong base,=
+               \
+ {                                                                       \
+     uint32_t vm =3D vext_vm(desc);                                        \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,      \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
+ }
+=20
+ GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
+@@ -274,7 +274,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+               \
+ {                                                                       \
+     uint32_t vm =3D vext_vm(desc);                                        \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, STORE_FN,     \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
+ }
+=20
+ GEN_VEXT_ST_STRIDE(vsse8_v,  int8_t,  ste_b)
+@@ -290,7 +290,7 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
+ static void
+ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+              vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
+-             uintptr_t ra, MMUAccessType access_type)
++             uintptr_t ra)
+ {
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -319,14 +319,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulo=
+ng base,         \
+ {                                                                       \
+     uint32_t stride =3D vext_nf(desc) << ctzl(sizeof(ETYPE));             \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, false, LOAD_FN,   \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
+ }                                                                       \
+                                                                         \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
+                   CPURISCVState *env, uint32_t desc)                    \
+ {                                                                       \
+     vext_ldst_us(vd, base, env, desc, LOAD_FN,                          \
+-                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_LOAD); \
++                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                \
+ }
+=20
+ GEN_VEXT_LD_US(vle8_v,  int8_t,  lde_b)
+@@ -340,14 +340,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulo=
+ng base,          \
+ {                                                                        \
+     uint32_t stride =3D vext_nf(desc) << ctzl(sizeof(ETYPE));              \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,   \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                      \
+ }                                                                        \
+                                                                          \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                 \
+                   CPURISCVState *env, uint32_t desc)                     \
+ {                                                                        \
+     vext_ldst_us(vd, base, env, desc, STORE_FN,                          \
+-                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_STORE); \
++                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                 \
+ }
+=20
+ GEN_VEXT_ST_US(vse8_v,  int8_t,  ste_b)
+@@ -364,7 +364,7 @@ void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
+     /* evl =3D ceil(vl/8) */
+     uint8_t evl =3D (env->vl + 7) >> 3;
+     vext_ldst_us(vd, base, env, desc, lde_b,
+-                 0, evl, GETPC(), MMU_DATA_LOAD);
++                 0, evl, GETPC());
+ }
+=20
+ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
+@@ -373,7 +373,7 @@ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
+     /* evl =3D ceil(vl/8) */
+     uint8_t evl =3D (env->vl + 7) >> 3;
+     vext_ldst_us(vd, base, env, desc, ste_b,
+-                 0, evl, GETPC(), MMU_DATA_STORE);
++                 0, evl, GETPC());
+ }
+=20
+ /*
+@@ -399,7 +399,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+                 void *vs2, CPURISCVState *env, uint32_t desc,
+                 vext_get_index_addr get_index_addr,
+                 vext_ldst_elem_fn *ldst_elem,
+-                uint32_t esz, uintptr_t ra, MMUAccessType access_type)
++                uint32_t esz, uintptr_t ra)
+ {
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -427,7 +427,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+                  \
+                   void *vs2, CPURISCVState *env, uint32_t desc)            \
+ {                                                                          \
+     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,                \
+-                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD); \
++                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC());                \
+ }
+=20
+ GEN_VEXT_LD_INDEX(vlxei8_8_v,   int8_t,  idx_b, lde_b)
+@@ -453,7 +453,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+        \
+ {                                                                \
+     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,      \
+                     STORE_FN, ctzl(sizeof(ETYPE)),               \
+-                    GETPC(), MMU_DATA_STORE);                    \
++                    GETPC());                                    \
+ }
+=20
+ GEN_VEXT_ST_INDEX(vsxei8_8_v,   int8_t,  idx_b, ste_b)
+@@ -576,8 +576,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
+  */
+ static void
+ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t de=
+sc,
+-                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra,
+-                MMUAccessType access_type)
++                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra)
+ {
+     uint32_t i, k, off, pos;
+     uint32_t nf =3D vext_nf(desc);
+@@ -612,8 +611,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
+                   CPURISCVState *env, uint32_t desc) \
+ {                                                    \
+     vext_ldst_whole(vd, base, env, desc, LOAD_FN,    \
+-                    ctzl(sizeof(ETYPE)), GETPC(),    \
+-                    MMU_DATA_LOAD);                  \
++                    ctzl(sizeof(ETYPE)), GETPC());   \
+ }
+=20
+ GEN_VEXT_LD_WHOLE(vl1re8_v,  int8_t,  lde_b)
+@@ -638,8 +636,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
+                   CPURISCVState *env, uint32_t desc) \
+ {                                                    \
+     vext_ldst_whole(vd, base, env, desc, STORE_FN,   \
+-                    ctzl(sizeof(ETYPE)), GETPC(),    \
+-                    MMU_DATA_STORE);                 \
++                    ctzl(sizeof(ETYPE)), GETPC());   \
+ }
+=20
+ GEN_VEXT_ST_WHOLE(vs1r_v, int8_t, ste_b)
+--=20
 2.34.2
+
 
