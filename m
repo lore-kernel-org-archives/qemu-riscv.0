@@ -1,63 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1noz06-0004wC-IL
-	for mharc-qemu-riscv@gnu.org; Wed, 11 May 2022 22:56:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36186)
+	id 1np0jb-0006b3-OC
+	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 00:47:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50156)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1noz04-0004vH-Q2; Wed, 11 May 2022 22:56:24 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:42350 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1noz00-0008E6-W8; Wed, 11 May 2022 22:56:24 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowACXE+FFd3xi2YDGBQ--.48665S2;
- Thu, 12 May 2022 10:56:07 +0800 (CST)
-Subject: Re: [PATCH qemu v16 05/15] target/riscv: rvv: Add tail agnostic for
- vector load / store instructions
-To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
-References: <165228859378.22204.7336259119424019499-5@git.sr.ht>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <3cb8bd72-c732-2309-3750-dc8005b5efe6@iscas.ac.cn>
-Date: Thu, 12 May 2022 10:56:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1np0ja-0006am-4V
+ for qemu-riscv@nongnu.org; Thu, 12 May 2022 00:47:30 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:54067)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1np0jX-0007J4-IG
+ for qemu-riscv@nongnu.org; Thu, 12 May 2022 00:47:29 -0400
+Received: by mail-wm1-x329.google.com with SMTP id p189so2301485wmp.3
+ for <qemu-riscv@nongnu.org>; Wed, 11 May 2022 21:47:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Z+42IbvOYUtunHBsg2drNOygEAOK3Rk97AJems6Osfg=;
+ b=aSoeU1I+xbqTvMynDNZ3wEph6FDW7CxvxKr0NQWDmX6pgcPAgiLeLxrO8+LoMzDsya
+ J6ks06VJM8rQEzWsPijqpyjwKSJOpcFzBOhk9y3vwZ7RQxmbonKnxQvHtlIVZ0dEookD
+ qJVP7vLDS3Nnd82kDLQLTMQgeGiYWM5zvB27uF53/s9jMGNn1JxkxpS6L8sxlcFzjCzr
+ TH41GR1Y4BWhB+1Y9l5NxKn+x7WnuMOhZxTu9OGOEloXnd9aquu4kE+L4QsrzkrmaLw9
+ gh5jmv2dJuvgzY5xBzXWHlcNxyvwgHY2wlMwInBGb59ws3HAtgAwjTVSRjPXs5cQsj/1
+ gTjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Z+42IbvOYUtunHBsg2drNOygEAOK3Rk97AJems6Osfg=;
+ b=dR+rXhfzPaZhwtSfTxa8DZ3XwIC/Thh53C90vRsIJnLomn6xlEmWqEcWzeOjjkQZWv
+ QOZdwngS+ctu2/uuYYH3efFVSRKhFuQYhr/xp6rEhbLUeNVLXapbpwYgp+wCvl89ll/C
+ wNb3YZi54tGB0UgkGoxtKnR/gq01XIuS7FIwJopCu6wJyzfpO4vOb2W01Cu2GYZ+8vNZ
+ mnvxN7ZsX/9RgXrdtFfgsIhjykGH5CYq+QY/+mvwfWQy6sgOtzQiIOnAnjo19qk0i0gD
+ WAmJF0bQyOB+vCzjECc8zBnoplB22SU2ghC0SS9s2uXYJyXB0NFLujAyoDRcMQpUP22k
+ BeOQ==
+X-Gm-Message-State: AOAM530itI2U09HpFrDWQN0yWG50PAJT9aIoL2ivY2wrVnqENGNvLB2J
+ NFh2PruRIgu2ID09rxNXcAEK1aSDcu53As5X12NTBw==
+X-Google-Smtp-Source: ABdhPJzW7i6l2Yon4hs0L3fu7Ba9cwa2Yq6I6XNsoUZvCeKkaNLWBvx6h6rw0YpEry/gDRvb98K+qs5rrMXHk01RSFY=
+X-Received: by 2002:a05:600c:1e13:b0:394:5cdd:e8e6 with SMTP id
+ ay19-20020a05600c1e1300b003945cdde8e6mr7970505wmb.108.1652330844548; Wed, 11
+ May 2022 21:47:24 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <165228859378.22204.7336259119424019499-5@git.sr.ht>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: rQCowACXE+FFd3xi2YDGBQ--.48665S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3WF18ZFWxZry7uw18Wr17Wrg_yoWftw4Dpa
- y8GFWavrZ3tFWfZw1fXF4UZF18ZF4kKw1jkw1vyr1UWay8Gwn7XF4UKFW8Ary2yrs8Cr4F
- 9F1DZ398ua9YvFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
- JVWxJr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxV
- WxJr0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
- Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
- WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07Al
- zVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
- 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
- IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
- AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_
- Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoO
- J5UUUUU
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220509212827.2057822-1-atishp@rivosinc.com>
+ <20220509212827.2057822-3-atishp@rivosinc.com>
+In-Reply-To: <20220509212827.2057822-3-atishp@rivosinc.com>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 12 May 2022 10:17:12 +0530
+Message-ID: <CAAhSdy2yyaAWiws+BMJ9fJGNdEETTXk+42iPLdBWN+DqVZb_8w@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] target/riscv: Add stimecmp support
+To: Atish Patra <atishp@rivosinc.com>
+Cc: QEMU Developers <qemu-devel@nongnu.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::329;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,258 +74,414 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2022 02:56:25 -0000
+X-List-Received-Date: Thu, 12 May 2022 04:47:30 -0000
 
-
-在 2022/3/7 下午3:10, ~eopxd 写道:
-> From: eopXD <eop.chen@sifive.com>
+On Tue, May 10, 2022 at 3:03 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> Destination register of unit-stride mask load and store instructions are
-> always written with a tail-agnostic policy.
+> stimecmp allows the supervisor mode to update stimecmp CSR directly
+> to program the next timer interrupt. This CSR is part of the Sstc
+> extension which was ratified recently.
 >
-> A vector segment load / store instruction may contain fractional lmul
-> with nf * lmul > 1. The rest of the elements in the last register should
-> be treated as tail elements.
->
-> Signed-off-by: eop Chen <eop.chen@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 11 +++++
->   target/riscv/translate.c                |  2 +
->   target/riscv/vector_helper.c            | 60 +++++++++++++++++++++++++
->   3 files changed, 73 insertions(+)
+>  target/riscv/cpu.c         |  8 ++++
+>  target/riscv/cpu.h         |  7 +++
+>  target/riscv/cpu_bits.h    |  4 ++
+>  target/riscv/csr.c         | 92 +++++++++++++++++++++++++++++++++++
+>  target/riscv/machine.c     |  1 +
+>  target/riscv/meson.build   |  3 +-
+>  target/riscv/time_helper.c | 98 ++++++++++++++++++++++++++++++++++++++
+>  target/riscv/time_helper.h | 30 ++++++++++++
+>  8 files changed, 242 insertions(+), 1 deletion(-)
+>  create mode 100644 target/riscv/time_helper.c
+>  create mode 100644 target/riscv/time_helper.h
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index efdf5d6d81..1f3eeff9eb 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -711,6 +711,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
->   }
->   
-> @@ -748,6 +749,7 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
->   }
->   
-> @@ -774,6 +776,8 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
->       /* EMUL = 1, NFIELDS = 1 */
->       data = FIELD_DP32(data, VDATA, LMUL, 0);
->       data = FIELD_DP32(data, VDATA, NF, 1);
-> +    /* Mask destination register are always tail-agnostic */
-> +    data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
->   }
->   
-> @@ -791,6 +795,8 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
->       /* EMUL = 1, NFIELDS = 1 */
->       data = FIELD_DP32(data, VDATA, LMUL, 0);
->       data = FIELD_DP32(data, VDATA, NF, 1);
-> +    /* Mask destination register are always tail-agnostic */
-> +    data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
->       return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
->   }
->   
-> @@ -862,6 +868,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
->   }
->   
-> @@ -891,6 +898,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       fn = fns[eew];
->       if (fn == NULL) {
->           return false;
-> @@ -991,6 +999,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
->   }
->   
-> @@ -1043,6 +1052,7 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
->   }
->   
-> @@ -1108,6 +1118,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
->       data = FIELD_DP32(data, VDATA, VM, a->vm);
->       data = FIELD_DP32(data, VDATA, LMUL, emul);
->       data = FIELD_DP32(data, VDATA, NF, a->nf);
-> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
->       return ldff_trans(a->rd, a->rs1, data, fn, s);
->   }
->   
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 832353be54..384ffcc0fa 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -95,6 +95,7 @@ typedef struct DisasContext {
->       int8_t lmul;
->       uint8_t sew;
->       uint8_t vta;
-> +    bool cfg_vta_all_1s;
->       target_ulong vstart;
->       bool vl_eq_vlmax;
->       uint8_t ntemp;
-> @@ -1093,6 +1094,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
->       ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
->       ctx->lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
->       ctx->vta = FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_1s;
-> +    ctx->cfg_vta_all_1s = cpu->cfg.rvv_ta_all_1s;
->       ctx->vstart = env->vstart;
->       ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
->       ctx->misa_mxl_max = env->misa_mxl_max;
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 61c7074f6a..2a934748b3 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -269,6 +269,9 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->       uint32_t i, k;
->       uint32_t nf = vext_nf(desc);
->       uint32_t max_elems = vext_max_elems(desc, log2_esz);
-> +    uint32_t esz = 1 << log2_esz;
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta = vext_vta(desc);
->   
->       for (i = env->vstart; i < env->vl; i++, env->vstart++) {
->           if (!vm && !vext_elem_mask(v0, i)) {
-> @@ -283,6 +286,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->           }
->       }
->       env->vstart = 0;
-> +    /* set tail elements to 1s */
-> +    for (k = 0; k < nf; ++k) {
-> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> +                          (k * max_elems + max_elems) * esz);
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 19f4e8294042..d58dd2f857a7 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -23,6 +23,7 @@
+>  #include "qemu/log.h"
+>  #include "cpu.h"
+>  #include "internals.h"
+> +#include "time_helper.h"
+>  #include "exec/exec-all.h"
+>  #include "qapi/error.h"
+>  #include "qemu/error-report.h"
+> @@ -779,7 +780,12 @@ static void riscv_cpu_init(Object *obj)
+>  #ifndef CONFIG_USER_ONLY
+>      qdev_init_gpio_in(DEVICE(cpu), riscv_cpu_set_irq,
+>                        IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
+> +
+> +    if (cpu->cfg.ext_sstc) {
+> +        riscv_timer_init(cpu);
 > +    }
-> +    if (nf * max_elems % total_elems != 0) {
-> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +        uint32_t registers_used =
-> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> +                          registers_used * vlenb);
+>  #endif /* CONFIG_USER_ONLY */
+> +
+>  }
+>
+>  static Property riscv_cpu_properties[] = {
+> @@ -806,6 +812,7 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+>      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+>      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> +    DEFINE_PROP_BOOL("sstc", RISCVCPU, cfg.ext_sstc, true),
+>
+>      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+>      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
+> @@ -965,6 +972,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+>          ISA_EDATA_ENTRY(zbs, ext_zbs),
+>          ISA_EDATA_ENTRY(zve32f, ext_zve32f),
+>          ISA_EDATA_ENTRY(zve64f, ext_zve64f),
+> +        ISA_EDATA_ENTRY(sstc, ext_sstc),
+>          ISA_EDATA_ENTRY(svinval, ext_svinval),
+>          ISA_EDATA_ENTRY(svnapot, ext_svnapot),
+>          ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 1119d5201066..9a01e6d0f587 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -276,6 +276,11 @@ struct CPUArchState {
+>      uint64_t mfromhost;
+>      uint64_t mtohost;
+>
+> +    /* Sstc CSRs */
+> +    uint64_t stimecmp;
+> +    /* For RV32 only */
+> +    uint8_t stimecmp_wr_done;
+> +
+>      /* physical memory protection */
+>      pmp_table_t pmp_state;
+>      target_ulong mseccfg;
+> @@ -329,6 +334,7 @@ struct CPUArchState {
+>      float_status fp_status;
+>
+>      /* Fields from here on are preserved across CPU reset. */
+> +    QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+>
+>      hwaddr kernel_addr;
+>      hwaddr fdt_addr;
+> @@ -379,6 +385,7 @@ struct RISCVCPUConfig {
+>      bool ext_counters;
+>      bool ext_ifencei;
+>      bool ext_icsr;
+> +    bool ext_sstc;
+>      bool ext_svinval;
+>      bool ext_svnapot;
+>      bool ext_svpbmt;
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 4e5b630f5965..29d0e4a1be01 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -215,6 +215,10 @@
+>  #define CSR_STVAL           0x143
+>  #define CSR_SIP             0x144
+>
+> +/* Sstc supervisor CSRs */
+> +#define CSR_STIMECMP        0x14D
+> +#define CSR_STIMECMPH       0x15D
+> +
+>  /* Supervisor Protection and Translation */
+>  #define CSR_SPTBR           0x180
+>  #define CSR_SATP            0x180
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 245f007e66e1..8952d1308008 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -21,6 +21,7 @@
+>  #include "qemu/log.h"
+>  #include "qemu/timer.h"
+>  #include "cpu.h"
+> +#include "time_helper.h"
+>  #include "qemu/main-loop.h"
+>  #include "exec/exec-all.h"
+>  #include "sysemu/cpu-timers.h"
+> @@ -537,6 +538,87 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +static RISCVException sstc(CPURISCVState *env, int csrno)
+> +{
+> +    CPUState *cs = env_cpu(env);
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +
+> +    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
 > +    }
->   }
->   
->   #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
-> @@ -328,6 +343,9 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->       uint32_t i, k;
->       uint32_t nf = vext_nf(desc);
->       uint32_t max_elems = vext_max_elems(desc, log2_esz);
-> +    uint32_t esz = 1 << log2_esz;
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta = vext_vta(desc);
->   
->       /* load bytes from guest memory */
->       for (i = env->vstart; i < evl; i++, env->vstart++) {
-> @@ -339,6 +357,18 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->           }
->       }
->       env->vstart = 0;
-> +    /* set tail elements to 1s */
-> +    for (k = 0; k < nf; ++k) {
-> +        vext_set_elems_1s(vd, vta, (k * max_elems + evl) * esz,
-> +                          (k * max_elems + max_elems) * esz);
+> +
+> +    if (env->priv == PRV_M) {
+> +        return RISCV_EXCP_NONE;
 > +    }
-> +    if (nf * max_elems % total_elems != 0) {
-> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +        uint32_t registers_used =
-> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> +                          registers_used * vlenb);
+> +
+> +    if (env->priv != PRV_S) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
 > +    }
->   }
+> +
+> +    /*
+> +     * No need of separate function for rv32 as menvcfg stores both menvcfg
+> +     * menvcfgh for RV32.
+> +     */
+> +    if (!(get_field(env->mcounteren, COUNTEREN_TM) &&
+> +          get_field(env->menvcfg, MENVCFG_STCE))) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
+> +                                    target_ulong *val)
+> +{
+> +    *val = env->stimecmp;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
+> +                                    target_ulong *val)
+> +{
+> +    *val = env->stimecmp >> 32;
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
+> +        env->stimecmp = deposit64(env->stimecmp, 0, 32, (uint64_t)val);
+> +        env->stimecmp_wr_done |= 0x01;
+> +        if (env->stimecmp_wr_done != 0x03) {
+> +            return RISCV_EXCP_NONE;
+> +        } else {
+> +            env->stimecmp_wr_done = 0;
+> +        }
+> +    } else {
+> +        env->stimecmp = val;
+> +    }
+> +
+> +    riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+> +static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+> +                                    target_ulong val)
+> +{
+> +    RISCVCPU *cpu = env_archcpu(env);
+> +
+> +    env->stimecmp = deposit64(env->stimecmp, 32, 32, (uint64_t)val);
+> +    env->stimecmp_wr_done |= 0x02;
+> +    if (env->stimecmp_wr_done != 0x03) {
+> +        return RISCV_EXCP_NONE;
+> +    }
+> +    env->stimecmp_wr_done = 0;
+> +    riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
+> +
+> +    return RISCV_EXCP_NONE;
+> +}
+> +
+>  /* Machine constants */
+>
+>  #define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
+> @@ -1515,6 +1597,12 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
+>          new_val |= env->external_seip * MIP_SEIP;
+>      }
+>
+> +    if (cpu->cfg.ext_sstc && (env->priv == PRV_M) &&
+> +        get_field(env->menvcfg, MENVCFG_STCE)) {
+> +        /* sstc extension forbids STIP & VSTIP to be writeable in mip */
+> +        mask = mask & ~(MIP_STIP | MIP_VSTIP);
+> +    }
+> +
+>      if (mask) {
+>          old_mip = riscv_cpu_update_mip(cpu, mask, (new_val & mask));
+>      } else {
+> @@ -3341,6 +3429,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      [CSR_SCAUSE]   = { "scause",   smode, read_scause,   write_scause   },
+>      [CSR_STVAL]    = { "stval",    smode, read_stval,   write_stval   },
+>      [CSR_SIP]      = { "sip",      smode, NULL,    NULL, rmw_sip        },
+> +    [CSR_STIMECMP] = { "stimecmp", sstc, read_stimecmp, write_stimecmp,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +    [CSR_STIMECMPH] = { "stimecmph", sstc, read_stimecmph, write_stimecmph,
+> +                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
+>
+>      /* Supervisor Protection and Translation */
+>      [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index 7d85de0b1d49..ee02bfc18916 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -334,6 +334,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+>          VMSTATE_UINTTL(env.mscratch, RISCVCPU),
+>          VMSTATE_UINT64(env.mfromhost, RISCVCPU),
+>          VMSTATE_UINT64(env.mtohost, RISCVCPU),
+> +        VMSTATE_UINT64(env.stimecmp, RISCVCPU),
 
-Maybe there is similar question here. vd  is used as source not 
-destination for store.
+Please add stimecmp_wr_done to vmstate_riscv_cpu
 
-So we can only set the tail elements for load here.
-
-The same to other load&store functions.
+>
+>          VMSTATE_END_OF_LIST()
+>      },
+> diff --git a/target/riscv/meson.build b/target/riscv/meson.build
+> index 2c20f3dd8e9c..1243d019148e 100644
+> --- a/target/riscv/meson.build
+> +++ b/target/riscv/meson.build
+> @@ -29,7 +29,8 @@ riscv_softmmu_ss.add(files(
+>    'pmp.c',
+>    'debug.c',
+>    'monitor.c',
+> -  'machine.c'
+> +  'machine.c',
+> +  'time_helper.c'
+>  ))
+>
+>  target_arch += {'riscv': riscv_ss}
+> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> new file mode 100644
+> index 000000000000..f3fb5eac7b7b
+> --- /dev/null
+> +++ b/target/riscv/time_helper.c
+> @@ -0,0 +1,98 @@
+> +/*
+> + * RISC-V timer helper implementation.
+> + *
+> + * Copyright (c) 2022 Rivos Inc.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/log.h"
+> +#include "cpu_bits.h"
+> +#include "time_helper.h"
+> +#include "hw/intc/riscv_aclint.h"
+> +
+> +static void riscv_stimer_cb(void *opaque)
+> +{
+> +    RISCVCPU *cpu = opaque;
+> +    riscv_cpu_update_mip(cpu, MIP_STIP, BOOL_TO_MASK(1));
+> +}
+> +
+> +/*
+> + * Called when timecmp is written to update the QEMU timer or immediately
+> + * trigger timer interrupt if mtimecmp <= current timer value.
+> + */
+> +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
+> +                               uint64_t timecmp, uint64_t delta,
+> +                               uint32_t timer_irq)
+> +{
+> +    uint64_t diff, ns_diff, next;
+> +    CPURISCVState *env = &cpu->env;
+> +    RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
+> +    uint32_t timebase_freq = mtimer->timebase_freq;
+> +    uint64_t rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
+> +
+> +    if (timecmp <= rtc_r) {
+> +        /*
+> +         * If we're setting an stimecmp value in the "past",
+> +         * immediately raise the timer interrupt
+> +         */
+> +        riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
+> +        return;
+> +    }
+> +
+> +    /* Clear the [V]STIP bit in mip */
+> +    riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
+> +
+> +    /* otherwise, set up the future timer interrupt */
+> +    diff = timecmp - rtc_r;
+> +    /* back to ns (note args switched in muldiv64) */
+> +    ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
+> +
+> +    /*
+> +     * check if ns_diff overflowed and check if the addition would potentially
+> +     * overflow
+> +     */
+> +    if ((NANOSECONDS_PER_SECOND > timebase_freq && ns_diff < diff) ||
+> +        ns_diff > INT64_MAX) {
+> +        next = INT64_MAX;
+> +    } else {
+> +        /*
+> +         * as it is very unlikely qemu_clock_get_ns will return a value
+> +         * greater than INT64_MAX, no additional check is needed for an
+> +         * unsigned integer overflow.
+> +         */
+> +        next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns_diff;
+> +        /*
+> +         * if ns_diff is INT64_MAX next may still be outside the range
+> +         * of a signed integer.
+> +         */
+> +        next = MIN(next, INT64_MAX);
+> +    }
+> +
+> +    timer_mod(timer, next);
+> +}
+> +
+> +void riscv_timer_init(RISCVCPU *cpu)
+> +{
+> +    CPURISCVState *env;
+> +
+> +    if (!cpu) {
+> +        return;
+> +    }
+> +
+> +    env = &cpu->env;
+> +    env->stimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb, cpu);
+> +    env->stimecmp = 0;
+> +
+> +}
+> diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h
+> new file mode 100644
+> index 000000000000..7b3cdcc35020
+> --- /dev/null
+> +++ b/target/riscv/time_helper.h
+> @@ -0,0 +1,30 @@
+> +/*
+> + * RISC-V timer header file.
+> + *
+> + * Copyright (c) 2022 Rivos Inc.
+> + *
+> + * This program is free software; you can redistribute it and/or modify it
+> + * under the terms and conditions of the GNU General Public License,
+> + * version 2 or later, as published by the Free Software Foundation.
+> + *
+> + * This program is distributed in the hope it will be useful, but WITHOUT
+> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+> + * more details.
+> + *
+> + * You should have received a copy of the GNU General Public License along with
+> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+> + */
+> +
+> +#ifndef RISCV_TIME_HELPER_H
+> +#define RISCV_TIME_HELPER_H
+> +
+> +#include "cpu.h"
+> +#include "qemu/timer.h"
+> +
+> +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
+> +                               uint64_t timecmp, uint64_t delta,
+> +                               uint32_t timer_irq);
+> +void riscv_timer_init(RISCVCPU *cpu);
+> +
+> +#endif
+> --
+> 2.25.1
+>
+>
 
 Regards,
-
-Weiwei Li
-
->   
->   /*
-> @@ -438,6 +468,9 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->       uint32_t nf = vext_nf(desc);
->       uint32_t vm = vext_vm(desc);
->       uint32_t max_elems = vext_max_elems(desc, log2_esz);
-> +    uint32_t esz = 1 << log2_esz;
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta = vext_vta(desc);
->   
->       /* load bytes from guest memory */
->       for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-> @@ -453,6 +486,18 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->           }
->       }
->       env->vstart = 0;
-> +    /* set tail elements to 1s */
-> +    for (k = 0; k < nf; ++k) {
-> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> +                          (k * max_elems + max_elems) * esz);
-> +    }
-> +    if (nf * max_elems % total_elems != 0) {
-> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +        uint32_t registers_used =
-> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> +                          registers_used * vlenb);
-> +    }
->   }
->   
->   #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
-> @@ -520,6 +565,9 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->       uint32_t nf = vext_nf(desc);
->       uint32_t vm = vext_vm(desc);
->       uint32_t max_elems = vext_max_elems(desc, log2_esz);
-> +    uint32_t esz = 1 << log2_esz;
-> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
-> +    uint32_t vta = vext_vta(desc);
->       target_ulong addr, offset, remain;
->   
->       /* probe every access*/
-> @@ -575,6 +623,18 @@ ProbeSuccess:
->           }
->       }
->       env->vstart = 0;
-> +    /* set tail elements to 1s */
-> +    for (k = 0; k < nf; ++k) {
-> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
-> +                          (k * max_elems + max_elems) * esz);
-> +    }
-> +    if (nf * max_elems % total_elems != 0) {
-> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
-> +        uint32_t registers_used =
-> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
-> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
-> +                          registers_used * vlenb);
-> +    }
->   }
->   
->   #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
-
+Anup
 
