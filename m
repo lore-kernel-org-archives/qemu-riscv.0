@@ -1,73 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nouO3-00058l-TF
-	for mharc-qemu-riscv@gnu.org; Wed, 11 May 2022 18:00:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48206)
+	id 1noz06-0004wC-IL
+	for mharc-qemu-riscv@gnu.org; Wed, 11 May 2022 22:56:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36186)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nouNe-0004mb-PG
- for qemu-riscv@nongnu.org; Wed, 11 May 2022 18:00:28 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:34693)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nouNc-0006a9-7v
- for qemu-riscv@nongnu.org; Wed, 11 May 2022 18:00:26 -0400
-Received: by mail-pg1-x533.google.com with SMTP id g184so2939733pgc.1
- for <qemu-riscv@nongnu.org>; Wed, 11 May 2022 15:00:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=upDqeNl3pI+gZKwdfwq9ACZIdLHvAQS6K2z6WQevVWU=;
- b=DcMp1vm9SnYJCFC7qaNK1e94cg373jL/uP91JW3a5w/9Ew+YOJ9rohTibDsjCNW57j
- Ei0mqJF9rrCVX856zvYVXs1r/YTrNKYRXqNNXoyvrtnl1liqtwdvxRS1AX3DswEPbmBk
- 8ZXEiYZAF9DNBB38mC6sPypJUNZMgAbTN8OzNw2x/PEaiCYIutLUC9RTED3yBQSOBl2t
- KXsyhQYHj7tezjkNhDKFoMWQHs2obs3LmYKWj2YdbBIt/i6X3CfJvz2sbbpyWiJXdBlm
- 24tx2LQA0vnVOGTLQ1laMYlHl7imAJzdbGuEBXFxivu4YVhe/oGRGotpuglp1K7vyMH4
- 4MwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=upDqeNl3pI+gZKwdfwq9ACZIdLHvAQS6K2z6WQevVWU=;
- b=OI7GCV840rJG9ZhUi6CiyhRBZmw7JhE+W9ZC1UZixq74YgjgWkFgOHzlpFGHFsXyEv
- NNSub+xrX4K+cdpYEyDvqD+vq/aWdp5jG12IrzmVbe5a1qCPCdDZikM+U4lvcXXLIbTE
- 7RuCpr6utSHmBrU1H7UKsz3+4/00BG5Jhaz00xLcB0YQ5Tqad8Qlh73NHDN5a08P7Idi
- +HkvhXp1h4Qo/G0wl6wWM12lL2IBfeKvEKnbfT7k2PuW1bh9c3pGrafVQqKlqbAsHJw9
- VmR+MvtYtLnZ8yQMoqtMTorxnliJEc7mKYGiyy+C0maFwK/f4KT6h6Y4nDvqnLAVW3el
- VWzA==
-X-Gm-Message-State: AOAM532uHfMSq7zsmOYa3TpgvkUVaZqGdpUbcg3P/CfZCEQY4YmqUYiI
- Zvjnj5JBIyW/iNA72BIFqjs9Pg==
-X-Google-Smtp-Source: ABdhPJwtRxU/JDnYbZh7B77FUXAQbgTfPrtJ1WPasIeQIXTyU1BGrLM412d1gXLh6p9q2GIxTYNhIw==
-X-Received: by 2002:a63:db17:0:b0:3c1:dc15:7a6e with SMTP id
- e23-20020a63db17000000b003c1dc157a6emr23147917pgg.107.1652306423461; 
- Wed, 11 May 2022 15:00:23 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([66.220.2.162])
- by smtp.gmail.com with ESMTPSA id
- r23-20020a62e417000000b0050dc762816asm2261303pfh.68.2022.05.11.15.00.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 May 2022 15:00:22 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-To: linux-kernel@vger.kernel.org
-Cc: Atish Patra <atishp@rivosinc.com>,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1noz04-0004vH-Q2; Wed, 11 May 2022 22:56:24 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:42350 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1noz00-0008E6-W8; Wed, 11 May 2022 22:56:24 -0400
+Received: from [192.168.3.6] (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowACXE+FFd3xi2YDGBQ--.48665S2;
+ Thu, 12 May 2022 10:56:07 +0800 (CST)
+Subject: Re: [PATCH qemu v16 05/15] target/riscv: rvv: Add tail agnostic for
+ vector load / store instructions
+To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Subject: [PATCH v8 11/12] hw/riscv: virt: Add PMU DT node to the device tree
-Date: Wed, 11 May 2022 14:59:55 -0700
-Message-Id: <20220511215956.2351243-12-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220511215956.2351243-1-atishp@rivosinc.com>
-References: <20220511215956.2351243-1-atishp@rivosinc.com>
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+References: <165228859378.22204.7336259119424019499-5@git.sr.ht>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <3cb8bd72-c732-2309-3750-dc8005b5efe6@iscas.ac.cn>
+Date: Thu, 12 May 2022 10:56:05 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
+In-Reply-To: <165228859378.22204.7336259119424019499-5@git.sr.ht>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x533.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Language: en-US
+X-CM-TRANSID: rQCowACXE+FFd3xi2YDGBQ--.48665S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3WF18ZFWxZry7uw18Wr17Wrg_yoWftw4Dpa
+ y8GFWavrZ3tFWfZw1fXF4UZF18ZF4kKw1jkw1vyr1UWay8Gwn7XF4UKFW8Ary2yrs8Cr4F
+ 9F1DZ398ua9YvFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
+ JVWxJr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxV
+ WxJr0_GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+ Yx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
+ WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07Al
+ zVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+ 0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
+ IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
+ AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_
+ Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoO
+ J5UUUUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,173 +70,258 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2022 22:00:28 -0000
+X-List-Received-Date: Thu, 12 May 2022 02:56:25 -0000
 
-Qemu virt machine can support few cache events and cycle/instret counters.
-It also supports counter overflow for these events.
 
-Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
-capabilities. There are some dummy nodes added for testing as well.
+在 2022/3/7 下午3:10, ~eopxd 写道:
+> From: eopXD <eop.chen@sifive.com>
+>
+> Destination register of unit-stride mask load and store instructions are
+> always written with a tail-agnostic policy.
+>
+> A vector segment load / store instruction may contain fractional lmul
+> with nf * lmul > 1. The rest of the elements in the last register should
+> be treated as tail elements.
+>
+> Signed-off-by: eop Chen <eop.chen@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 11 +++++
+>   target/riscv/translate.c                |  2 +
+>   target/riscv/vector_helper.c            | 60 +++++++++++++++++++++++++
+>   3 files changed, 73 insertions(+)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index efdf5d6d81..1f3eeff9eb 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -711,6 +711,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+>   }
+>   
+> @@ -748,6 +749,7 @@ static bool st_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+>   }
+>   
+> @@ -774,6 +776,8 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
+>       /* EMUL = 1, NFIELDS = 1 */
+>       data = FIELD_DP32(data, VDATA, LMUL, 0);
+>       data = FIELD_DP32(data, VDATA, NF, 1);
+> +    /* Mask destination register are always tail-agnostic */
+> +    data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
+>       return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+>   }
+>   
+> @@ -791,6 +795,8 @@ static bool st_us_mask_op(DisasContext *s, arg_vsm_v *a, uint8_t eew)
+>       /* EMUL = 1, NFIELDS = 1 */
+>       data = FIELD_DP32(data, VDATA, LMUL, 0);
+>       data = FIELD_DP32(data, VDATA, NF, 1);
+> +    /* Mask destination register are always tail-agnostic */
+> +    data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
+>       return ldst_us_trans(a->rd, a->rs1, data, fn, s, true);
+>   }
+>   
+> @@ -862,6 +868,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+>   }
+>   
+> @@ -891,6 +898,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       fn = fns[eew];
+>       if (fn == NULL) {
+>           return false;
+> @@ -991,6 +999,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+>   }
+>   
+> @@ -1043,6 +1052,7 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+>   }
+>   
+> @@ -1108,6 +1118,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
+>       data = FIELD_DP32(data, VDATA, VM, a->vm);
+>       data = FIELD_DP32(data, VDATA, LMUL, emul);
+>       data = FIELD_DP32(data, VDATA, NF, a->nf);
+> +    data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>       return ldff_trans(a->rd, a->rs1, data, fn, s);
+>   }
+>   
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 832353be54..384ffcc0fa 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -95,6 +95,7 @@ typedef struct DisasContext {
+>       int8_t lmul;
+>       uint8_t sew;
+>       uint8_t vta;
+> +    bool cfg_vta_all_1s;
+>       target_ulong vstart;
+>       bool vl_eq_vlmax;
+>       uint8_t ntemp;
+> @@ -1093,6 +1094,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+>       ctx->sew = FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+>       ctx->lmul = sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
+>       ctx->vta = FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_1s;
+> +    ctx->cfg_vta_all_1s = cpu->cfg.rvv_ta_all_1s;
+>       ctx->vstart = env->vstart;
+>       ctx->vl_eq_vlmax = FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+>       ctx->misa_mxl_max = env->misa_mxl_max;
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 61c7074f6a..2a934748b3 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -269,6 +269,9 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>       uint32_t i, k;
+>       uint32_t nf = vext_nf(desc);
+>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+> +    uint32_t esz = 1 << log2_esz;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint32_t vta = vext_vta(desc);
+>   
+>       for (i = env->vstart; i < env->vl; i++, env->vstart++) {
+>           if (!vm && !vext_elem_mask(v0, i)) {
+> @@ -283,6 +286,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+>           }
+>       }
+>       env->vstart = 0;
+> +    /* set tail elements to 1s */
+> +    for (k = 0; k < nf; ++k) {
+> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
+> +                          (k * max_elems + max_elems) * esz);
+> +    }
+> +    if (nf * max_elems % total_elems != 0) {
+> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
+> +        uint32_t registers_used =
+> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+> +                          registers_used * vlenb);
+> +    }
+>   }
+>   
+>   #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
+> @@ -328,6 +343,9 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>       uint32_t i, k;
+>       uint32_t nf = vext_nf(desc);
+>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+> +    uint32_t esz = 1 << log2_esz;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint32_t vta = vext_vta(desc);
+>   
+>       /* load bytes from guest memory */
+>       for (i = env->vstart; i < evl; i++, env->vstart++) {
+> @@ -339,6 +357,18 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>           }
+>       }
+>       env->vstart = 0;
+> +    /* set tail elements to 1s */
+> +    for (k = 0; k < nf; ++k) {
+> +        vext_set_elems_1s(vd, vta, (k * max_elems + evl) * esz,
+> +                          (k * max_elems + max_elems) * esz);
+> +    }
+> +    if (nf * max_elems % total_elems != 0) {
+> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
+> +        uint32_t registers_used =
+> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+> +                          registers_used * vlenb);
+> +    }
+>   }
 
-Signed-off-by: Atish Patra <atish.patra@wdc.com>
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- hw/riscv/virt.c    | 28 +++++++++++++++++++++++
- target/riscv/cpu.c |  1 +
- target/riscv/pmu.c | 57 ++++++++++++++++++++++++++++++++++++++++++++++
- target/riscv/pmu.h |  1 +
- 4 files changed, 87 insertions(+)
+Maybe there is similar question here. vd  is used as source not 
+destination for store.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3326f4db96a2..1b17ba7f8059 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -29,6 +29,7 @@
- #include "hw/char/serial.h"
- #include "target/riscv/cpu.h"
- #include "hw/core/sysbus-fdt.h"
-+#include "target/riscv/pmu.h"
- #include "hw/riscv/riscv_hart.h"
- #include "hw/riscv/virt.h"
- #include "hw/riscv/boot.h"
-@@ -715,6 +716,32 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
-     aplic_phandles[socket] = aplic_s_phandle;
- }
- 
-+static void create_fdt_socket_pmu(RISCVVirtState *s,
-+                                  int socket, uint32_t *phandle,
-+                                  uint32_t *intc_phandles)
-+{
-+    int cpu;
-+    char *pmu_name;
-+    uint32_t *pmu_cells;
-+    MachineState *mc = MACHINE(s);
-+    RISCVCPU hart = s->soc[socket].harts[0];
-+
-+    pmu_cells = g_new0(uint32_t, s->soc[socket].num_harts * 2);
-+
-+    for (cpu = 0; cpu < s->soc[socket].num_harts; cpu++) {
-+        pmu_cells[cpu * 2 + 0] = cpu_to_be32(intc_phandles[cpu]);
-+        pmu_cells[cpu * 2 + 1] = cpu_to_be32(IRQ_PMU_OVF);
-+    }
-+
-+    pmu_name = g_strdup_printf("/soc/pmu");
-+    qemu_fdt_add_subnode(mc->fdt, pmu_name);
-+    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pmu");
-+    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
-+
-+    g_free(pmu_name);
-+    g_free(pmu_cells);
-+}
-+
- static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                                bool is_32_bit, uint32_t *phandle,
-                                uint32_t *irq_mmio_phandle,
-@@ -760,6 +787,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                     &intc_phandles[phandle_pos]);
-             }
-         }
-+        create_fdt_socket_pmu(s, socket, phandle, intc_phandles);
-     }
- 
-     if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a8f156a66eba..b51ad7496f71 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1032,6 +1032,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-         ISA_EDATA_ENTRY(zkt, ext_zkt),
-         ISA_EDATA_ENTRY(zve32f, ext_zve32f),
-         ISA_EDATA_ENTRY(zve64f, ext_zve64f),
-+        ISA_EDATA_ENTRY(sscofpmf, ext_sscofpmf),
-         ISA_EDATA_ENTRY(svinval, ext_svinval),
-         ISA_EDATA_ENTRY(svnapot, ext_svnapot),
-         ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 7bb85d8d6ad7..0163758297c4 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -20,11 +20,68 @@
- #include "cpu.h"
- #include "pmu.h"
- #include "sysemu/cpu-timers.h"
-+#include "sysemu/device_tree.h"
- 
- #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
- #define MAKE_32BIT_MASK(shift, length) \
-         (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
- 
-+/**
-+ * To keep it simple, any event can be mapped to any programmable counters in
-+ * QEMU. The generic cycle & instruction count events can also be monitored
-+ * using programmable counters. In that case, mcycle & minstret must continue
-+ * to provide the correct value as well. Heterogeneous PMU per hart is not
-+ * supported yet. Thus, number of counters are same across all harts.
-+ */
-+void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_name)
-+{
-+    uint32_t fdt_event_ctr_map[20] = {};
-+    uint32_t cmask;
-+
-+    /* All the programmable counters can map to any event */
-+    cmask = MAKE_32BIT_MASK(3, num_ctrs);
-+
-+   /**
-+    * The event encoding is specified in the SBI specification
-+    * Event idx is a 20bits wide number encoded as follows:
-+    * event_idx[19:16] = type
-+    * event_idx[15:0] = code
-+    * The code field in cache events are encoded as follows:
-+    * event_idx.code[15:3] = cache_id
-+    * event_idx.code[2:1] = op_id
-+    * event_idx.code[0:0] = result_id
-+    */
-+
-+   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
-+   fdt_event_ctr_map[0] = cpu_to_be32(0x00000001);
-+   fdt_event_ctr_map[1] = cpu_to_be32(0x00000001);
-+   fdt_event_ctr_map[2] = cpu_to_be32(cmask | 1 << 0);
-+
-+   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
-+   fdt_event_ctr_map[3] = cpu_to_be32(0x00000002);
-+   fdt_event_ctr_map[4] = cpu_to_be32(0x00000002);
-+   fdt_event_ctr_map[5] = cpu_to_be32(cmask | 1 << 2);
-+
-+   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[6] = cpu_to_be32(0x00010019);
-+   fdt_event_ctr_map[7] = cpu_to_be32(0x00010019);
-+   fdt_event_ctr_map[8] = cpu_to_be32(cmask);
-+
-+   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[9] = cpu_to_be32(0x0001001B);
-+   fdt_event_ctr_map[10] = cpu_to_be32(0x0001001B);
-+   fdt_event_ctr_map[11] = cpu_to_be32(cmask);
-+
-+   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) */
-+   fdt_event_ctr_map[12] = cpu_to_be32(0x00010021);
-+   fdt_event_ctr_map[13] = cpu_to_be32(0x00010021);
-+   fdt_event_ctr_map[14] = cpu_to_be32(cmask);
-+
-+   /* This a OpenSBI specific DT property documented in OpenSBI docs */
-+   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
-+                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
-+}
-+
- static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
- {
-     if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index 036653627f78..3004ce37b636 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -31,5 +31,6 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
- int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-                                uint32_t ctr_idx);
- int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
-+void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pmu_name);
- int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-                           uint32_t ctr_idx);
--- 
-2.25.1
+So we can only set the tail elements for load here.
+
+The same to other load&store functions.
+
+Regards,
+
+Weiwei Li
+
+>   
+>   /*
+> @@ -438,6 +468,9 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+>       uint32_t nf = vext_nf(desc);
+>       uint32_t vm = vext_vm(desc);
+>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+> +    uint32_t esz = 1 << log2_esz;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint32_t vta = vext_vta(desc);
+>   
+>       /* load bytes from guest memory */
+>       for (i = env->vstart; i < env->vl; i++, env->vstart++) {
+> @@ -453,6 +486,18 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+>           }
+>       }
+>       env->vstart = 0;
+> +    /* set tail elements to 1s */
+> +    for (k = 0; k < nf; ++k) {
+> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
+> +                          (k * max_elems + max_elems) * esz);
+> +    }
+> +    if (nf * max_elems % total_elems != 0) {
+> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
+> +        uint32_t registers_used =
+> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+> +                          registers_used * vlenb);
+> +    }
+>   }
+>   
+>   #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
+> @@ -520,6 +565,9 @@ vext_ldff(void *vd, void *v0, target_ulong base,
+>       uint32_t nf = vext_nf(desc);
+>       uint32_t vm = vext_vm(desc);
+>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+> +    uint32_t esz = 1 << log2_esz;
+> +    uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+> +    uint32_t vta = vext_vta(desc);
+>       target_ulong addr, offset, remain;
+>   
+>       /* probe every access*/
+> @@ -575,6 +623,18 @@ ProbeSuccess:
+>           }
+>       }
+>       env->vstart = 0;
+> +    /* set tail elements to 1s */
+> +    for (k = 0; k < nf; ++k) {
+> +        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
+> +                          (k * max_elems + max_elems) * esz);
+> +    }
+> +    if (nf * max_elems % total_elems != 0) {
+> +        uint32_t vlenb = env_archcpu(env)->cfg.vlen >> 3;
+> +        uint32_t registers_used =
+> +            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
+> +        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
+> +                          registers_used * vlenb);
+> +    }
+>   }
+>   
+>   #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
 
 
