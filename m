@@ -1,42 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1np6Qh-0001Jc-BM
-	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 06:52:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58722)
+	id 1np7oW-0006Jr-SW
+	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 08:21:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46540)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heiko@sntech.de>)
- id 1np6QM-0001Fu-VN; Thu, 12 May 2022 06:52:05 -0400
-Received: from gloria.sntech.de ([185.11.138.130]:60354)
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1np7oU-0006JL-D0
+ for qemu-riscv@nongnu.org; Thu, 12 May 2022 08:21:03 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:53432
+ helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heiko@sntech.de>)
- id 1np6QJ-0004bS-O5; Thu, 12 May 2022 06:52:02 -0400
-Received: from ip5b412258.dynamic.kabel-deutschland.de ([91.65.34.88]
- helo=diego.localnet)
- by gloria.sntech.de with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <heiko@sntech.de>)
- id 1np6Q9-0001XS-MS; Thu, 12 May 2022 12:51:49 +0200
-From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
-To: qemu-devel@nongnu.org
-Cc: Dao Lu <daolu@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Dao Lu <daolu@rivosinc.com>
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1np7oR-0003gu-Fr
+ for qemu-riscv@nongnu.org; Thu, 12 May 2022 08:21:02 -0400
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 0B6A5300089;
+ Thu, 12 May 2022 12:20:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
+ s=2017s01; t=1652358050;
+ bh=m+ifUnflp7CJuOKgvTtHqTbeH9ONtVqMwteKWip03tA=;
+ h=Message-ID:Date:Mime-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ b=o3va/6rUSuXmgmsKeQhZNtvOSreDgBxihCokQNd0jzwpYJPM5Y6uXHt8VgZuuRvzc
+ dPZFFTkaLVCWsCq6AW5eq6vnlYc6rQ0olpv+qC0XzlCs2rEDa4kDBoBUbVOuiXIFpg
+ iPD8cMqSK3Loyc1XPAir5/mNbYBIbOx/UQQmc7iA=
+Message-ID: <3eca76b7-9024-ab31-9306-c7a25a0779a7@irq.a4lg.com>
+Date: Thu, 12 May 2022 21:20:46 +0900
+Mime-Version: 1.0
 Subject: Re: [PATCH 1/1] Add Zihintpause support
-Date: Thu, 12 May 2022 12:51:48 +0200
-Message-ID: <2369175.jE0xQCEvom@diego>
-In-Reply-To: <20220510064231.1384670-2-daolu@rivosinc.com>
+Content-Language: en-US
+To: Dao Lu <daolu@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 References: <20220510064231.1384670-1-daolu@rivosinc.com>
  <20220510064231.1384670-2-daolu@rivosinc.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-Received-SPF: none client-ip=185.11.138.130; envelope-from=heiko@sntech.de;
- helo=gloria.sntech.de
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01,
- T_SPF_HELO_TEMPERROR=0.01 autolearn=ham autolearn_force=no
+From: Tsukasa OI <research_trasio@irq.a4lg.com>
+In-Reply-To: <20220510064231.1384670-2-daolu@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=153.120.152.154;
+ envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -49,20 +59,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2022 10:52:09 -0000
+X-List-Received-Date: Thu, 12 May 2022 12:21:03 -0000
 
-Am Dienstag, 10. Mai 2022, 08:42:31 CEST schrieb Dao Lu:
+On 2022/05/10 15:42, Dao Lu wrote:
 > Added support for RISC-V PAUSE instruction from Zihintpause extension, enabeld
 > by default.
 > 
 > Signed-off-by: Dao Lu <daolu@rivosinc.com>
-
-This patch with your fixup applied to it and of course
-a matching kernel:
-
-Tested-by: Heiko Stuebner <heiko@sntech.de>
-
-
 > ---
 >  target/riscv/cpu.c                      |  2 ++
 >  target/riscv/cpu.h                      |  1 +
@@ -79,6 +82,12 @@ Tested-by: Heiko Stuebner <heiko@sntech.de>
 >      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
 >      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
 > +    DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true),
+
+This is not your fault but mixed upper camel case and lower case is not a
+good situation (e.g. "Zihintpause" and "zba").  I will raise a separate
+issue on qemu-riscv mailing list (no changes requested).
+
+
 >      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
 >      DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
 >      DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
@@ -133,6 +142,14 @@ Tested-by: Heiko Stuebner <heiko@sntech.de>
 > +        return false;         \
 > +    }                         \
 > +} while (0)
+
+I think this macro is too much for one instruction.  How about expanding
+this on `trans_pause' function like `trans_fence_i'?
+
+Other than that, it LGTM.
+
+Tsukasa,
+
 > +
 >  static bool trans_illegal(DisasContext *ctx, arg_empty *a)
 >  {
@@ -156,9 +173,4 @@ Tested-by: Heiko Stuebner <heiko@sntech.de>
 >  
 >  static bool trans_fence(DisasContext *ctx, arg_fence *a)
 >  {
-> 
-
-
-
-
 
