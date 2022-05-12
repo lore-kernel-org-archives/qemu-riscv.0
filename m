@@ -1,22 +1,23 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1np49s-0004jm-Mb
-	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 04:26:54 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54016)
+	id 1np49y-0004me-JX
+	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 04:27:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53934)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1np49X-0004VK-5H; Thu, 12 May 2022 04:26:31 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:45222)
+ id 1np49U-0004Ou-EF; Thu, 12 May 2022 04:26:28 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:45210)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1np49T-0005PB-EI; Thu, 12 May 2022 04:26:30 -0400
+ id 1np49R-0005O0-1x; Thu, 12 May 2022 04:26:28 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 6F7C111F02E;
- Thu, 12 May 2022 08:26:21 +0000 (UTC)
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 0054C11EF1B;
+ Thu, 12 May 2022 08:26:19 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v17 07/16] target/riscv: rvv: Add tail agnostic for vx,
- vvm, vxm instructions
-Message-ID: <165234397852.32492.1203149738524050090-7@git.sr.ht>
+Date: Thu, 12 May 2022 00:47:44 -0700
+Subject: [PATCH qemu v17 02/16] target/riscv: rvv: Prune redundant access_type
+ parameter passed
+Message-ID: <165234397852.32492.1203149738524050090-2@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165234397852.32492.1203149738524050090-0@git.sr.ht>
@@ -30,11 +31,11 @@ Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 36
-X-Spam_score: 3.6
-X-Spam_bar: +++
-X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -48,589 +49,173 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Thu, 12 May 2022 08:26:31 -0000
-X-Original-Date: Sun, 06 Mar 2022 23:32:57 -0800
-X-List-Received-Date: Thu, 12 May 2022 08:26:31 -0000
+X-List-Received-Date: Thu, 12 May 2022 08:26:29 -0000
 
 From: eopXD <eop.chen@sifive.com>
 
-`vmadc` and `vmsbc` produces a mask value, they always operate with
-a tail agnostic policy.
+No functional change intended in this commit.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc |  13 +-
- target/riscv/internals.h                |   5 +-
- target/riscv/vector_helper.c            | 314 +++++++++++++-----------
- 3 files changed, 190 insertions(+), 142 deletions(-)
+ target/riscv/vector_helper.c | 35 ++++++++++++++++-------------------
+ 1 file changed, 16 insertions(+), 19 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
-s/trans_rvv.c.inc
-index 1f3eeff9eb..2a338f815e 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1294,6 +1294,8 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint=
-32_t vs2, uint32_t vm,
-=20
-     data =3D FIELD_DP32(data, VDATA, VM, vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
-                                       s->cfg_ptr->vlen / 8, data));
-=20
-@@ -1329,7 +1331,7 @@ do_opivx_gvec(DisasContext *s, arg_rmrr *a, GVecGen2sFn=
- *gvec_fn,
-         return false;
-     }
-=20
--    if (a->vm && s->vl_eq_vlmax) {
-+    if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-         TCGv_i64 src1 =3D tcg_temp_new_i64();
-=20
-         tcg_gen_ext_tl_i64(src1, get_gpr(s, a->rs1, EXT_SIGN));
-@@ -1459,6 +1461,8 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint=
-32_t vs2, uint32_t vm,
-=20
-     data =3D FIELD_DP32(data, VDATA, VM, vm);
-     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
-     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
-                                       s->cfg_ptr->vlen / 8, data));
-=20
-@@ -1487,7 +1491,7 @@ do_opivi_gvec(DisasContext *s, arg_rmrr *a, GVecGen2iFn=
- *gvec_fn,
-         return false;
-     }
-=20
--    if (a->vm && s->vl_eq_vlmax) {
-+    if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-         gvec_fn(s->sew, vreg_ofs(s, a->rd), vreg_ofs(s, a->rs2),
-                 extract_imm(s, a->rs1, imm_mode), MAXSZ(s), MAXSZ(s));
-         mark_vs_dirty(s);
-@@ -1541,6 +1545,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
-=20
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1622,6 +1627,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
-=20
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1700,6 +1706,9 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a) =
-            \
-                                                                    \
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);                 \
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);             \
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);               \
-+        data =3D                                                     \
-+            FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
-                            vreg_ofs(s, a->rs1),                    \
-                            vreg_ofs(s, a->rs2), cpu_env,           \
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 512c6c30cf..193ce57a6d 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -25,8 +25,9 @@
- FIELD(VDATA, VM, 0, 1)
- FIELD(VDATA, LMUL, 1, 3)
- FIELD(VDATA, VTA, 4, 1)
--FIELD(VDATA, NF, 5, 4)
--FIELD(VDATA, WD, 5, 1)
-+FIELD(VDATA, VTA_ALL_1S, 5, 1)
-+FIELD(VDATA, NF, 6, 4)
-+FIELD(VDATA, WD, 6, 1)
-=20
- /* float point classify helpers */
- target_ulong fclass_h(uint64_t frs1);
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 4e08fc3991..d4408d13c8 100644
+index 85dd611cd9..60840325c4 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -127,6 +127,11 @@ static inline uint32_t vext_vta(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, VTA);
- }
-=20
-+static inline uint32_t vext_vta_all_1s(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
-+}
-+
- /*
-  * Get the maximum number of elements can be operated.
-  *
-@@ -866,10 +871,12 @@ RVVCALL(OPIVX2, vrsub_vx_d, OP_SSS_D, H8, H8, DO_RSUB)
-=20
- static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
-                        CPURISCVState *env, uint32_t desc,
--                       opivx2_fn fn)
-+                       opivx2_fn fn, uint32_t esz)
+@@ -231,7 +231,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
+                  target_ulong stride, CPURISCVState *env,
+                  uint32_t desc, uint32_t vm,
+                  vext_ldst_elem_fn *ldst_elem,
+-                 uint32_t esz, uintptr_t ra, MMUAccessType access_type)
++                 uint32_t esz, uintptr_t ra)
  {
-     uint32_t vm =3D vext_vm(desc);
-     uint32_t vl =3D env->vl;
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-+    uint32_t vta =3D vext_vta(desc);
-     uint32_t i;
-=20
-     for (i =3D env->vstart; i < vl; i++) {
-@@ -879,30 +886,32 @@ static void do_vext_vx(void *vd, void *v0, target_long =
-s1, void *vs2,
-         fn(vd, s1, vs2, i);
-     }
-     env->vstart =3D 0;
-+    /* set tail elements to 1s */
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -259,7 +259,7 @@ void HELPER(NAME)(void *vd, void * v0, target_ulong base,=
+               \
+ {                                                                       \
+     uint32_t vm =3D vext_vm(desc);                                        \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,      \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
  }
 =20
- /* generate the helpers for OPIVX */
--#define GEN_VEXT_VX(NAME)                                 \
-+#define GEN_VEXT_VX(NAME, ESZ)                            \
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1,    \
-                   void *vs2, CPURISCVState *env,          \
-                   uint32_t desc)                          \
- {                                                         \
-     do_vext_vx(vd, v0, s1, vs2, env, desc,                \
--               do_##NAME);                                \
--}
--
--GEN_VEXT_VX(vadd_vx_b)
--GEN_VEXT_VX(vadd_vx_h)
--GEN_VEXT_VX(vadd_vx_w)
--GEN_VEXT_VX(vadd_vx_d)
--GEN_VEXT_VX(vsub_vx_b)
--GEN_VEXT_VX(vsub_vx_h)
--GEN_VEXT_VX(vsub_vx_w)
--GEN_VEXT_VX(vsub_vx_d)
--GEN_VEXT_VX(vrsub_vx_b)
--GEN_VEXT_VX(vrsub_vx_h)
--GEN_VEXT_VX(vrsub_vx_w)
--GEN_VEXT_VX(vrsub_vx_d)
-+               do_##NAME, ESZ);                           \
-+}
-+
-+GEN_VEXT_VX(vadd_vx_b, 1)
-+GEN_VEXT_VX(vadd_vx_h, 2)
-+GEN_VEXT_VX(vadd_vx_w, 4)
-+GEN_VEXT_VX(vadd_vx_d, 8)
-+GEN_VEXT_VX(vsub_vx_b, 1)
-+GEN_VEXT_VX(vsub_vx_h, 2)
-+GEN_VEXT_VX(vsub_vx_w, 4)
-+GEN_VEXT_VX(vsub_vx_d, 8)
-+GEN_VEXT_VX(vrsub_vx_b, 1)
-+GEN_VEXT_VX(vrsub_vx_h, 2)
-+GEN_VEXT_VX(vrsub_vx_w, 4)
-+GEN_VEXT_VX(vrsub_vx_d, 8)
+ GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
+@@ -274,7 +274,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+               \
+ {                                                                       \
+     uint32_t vm =3D vext_vm(desc);                                        \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, vm, STORE_FN,     \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
+ }
 =20
- void HELPER(vec_rsubs8)(void *d, void *a, uint64_t b, uint32_t desc)
+ GEN_VEXT_ST_STRIDE(vsse8_v,  int8_t,  ste_b)
+@@ -290,7 +290,7 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
+ static void
+ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+              vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
+-             uintptr_t ra, MMUAccessType access_type)
++             uintptr_t ra)
  {
-@@ -1030,30 +1039,30 @@ RVVCALL(OPIVX2, vwadd_wx_w, WOP_WSSS_W, H8, H4, DO_AD=
-D)
- RVVCALL(OPIVX2, vwsub_wx_b, WOP_WSSS_B, H2, H1, DO_SUB)
- RVVCALL(OPIVX2, vwsub_wx_h, WOP_WSSS_H, H4, H2, DO_SUB)
- RVVCALL(OPIVX2, vwsub_wx_w, WOP_WSSS_W, H8, H4, DO_SUB)
--GEN_VEXT_VX(vwaddu_vx_b)
--GEN_VEXT_VX(vwaddu_vx_h)
--GEN_VEXT_VX(vwaddu_vx_w)
--GEN_VEXT_VX(vwsubu_vx_b)
--GEN_VEXT_VX(vwsubu_vx_h)
--GEN_VEXT_VX(vwsubu_vx_w)
--GEN_VEXT_VX(vwadd_vx_b)
--GEN_VEXT_VX(vwadd_vx_h)
--GEN_VEXT_VX(vwadd_vx_w)
--GEN_VEXT_VX(vwsub_vx_b)
--GEN_VEXT_VX(vwsub_vx_h)
--GEN_VEXT_VX(vwsub_vx_w)
--GEN_VEXT_VX(vwaddu_wx_b)
--GEN_VEXT_VX(vwaddu_wx_h)
--GEN_VEXT_VX(vwaddu_wx_w)
--GEN_VEXT_VX(vwsubu_wx_b)
--GEN_VEXT_VX(vwsubu_wx_h)
--GEN_VEXT_VX(vwsubu_wx_w)
--GEN_VEXT_VX(vwadd_wx_b)
--GEN_VEXT_VX(vwadd_wx_h)
--GEN_VEXT_VX(vwadd_wx_w)
--GEN_VEXT_VX(vwsub_wx_b)
--GEN_VEXT_VX(vwsub_wx_h)
--GEN_VEXT_VX(vwsub_wx_w)
-+GEN_VEXT_VX(vwaddu_vx_b, 2)
-+GEN_VEXT_VX(vwaddu_vx_h, 4)
-+GEN_VEXT_VX(vwaddu_vx_w, 8)
-+GEN_VEXT_VX(vwsubu_vx_b, 2)
-+GEN_VEXT_VX(vwsubu_vx_h, 4)
-+GEN_VEXT_VX(vwsubu_vx_w, 8)
-+GEN_VEXT_VX(vwadd_vx_b, 2)
-+GEN_VEXT_VX(vwadd_vx_h, 4)
-+GEN_VEXT_VX(vwadd_vx_w, 8)
-+GEN_VEXT_VX(vwsub_vx_b, 2)
-+GEN_VEXT_VX(vwsub_vx_h, 4)
-+GEN_VEXT_VX(vwsub_vx_w, 8)
-+GEN_VEXT_VX(vwaddu_wx_b, 2)
-+GEN_VEXT_VX(vwaddu_wx_h, 4)
-+GEN_VEXT_VX(vwaddu_wx_w, 8)
-+GEN_VEXT_VX(vwsubu_wx_b, 2)
-+GEN_VEXT_VX(vwsubu_wx_h, 4)
-+GEN_VEXT_VX(vwsubu_wx_w, 8)
-+GEN_VEXT_VX(vwadd_wx_b, 2)
-+GEN_VEXT_VX(vwadd_wx_h, 4)
-+GEN_VEXT_VX(vwadd_wx_w, 8)
-+GEN_VEXT_VX(vwsub_wx_b, 2)
-+GEN_VEXT_VX(vwsub_wx_h, 4)
-+GEN_VEXT_VX(vwsub_wx_w, 8)
-=20
- /* Vector Integer Add-with-Carry / Subtract-with-Borrow Instructions */
- #define DO_VADC(N, M, C) (N + M + C)
-@@ -1064,6 +1073,10 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-                   CPURISCVState *env, uint32_t desc)          \
- {                                                             \
-     uint32_t vl =3D env->vl;                                    \
-+    uint32_t esz =3D sizeof(ETYPE);                             \
-+    uint32_t total_elems =3D                                    \
-+        vext_get_total_elems(env, desc, esz);                 \
-+    uint32_t vta =3D vext_vta(desc);                            \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1074,6 +1087,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
-         *((ETYPE *)vd + H(i)) =3D DO_OP(s2, s1, carry);         \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* set tail elements to 1s */                             \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);  \
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -319,14 +319,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulo=
+ng base,         \
+ {                                                                       \
+     uint32_t stride =3D vext_nf(desc) << ctzl(sizeof(ETYPE));             \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, false, LOAD_FN,   \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                     \
+ }                                                                       \
+                                                                         \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
+                   CPURISCVState *env, uint32_t desc)                    \
+ {                                                                       \
+     vext_ldst_us(vd, base, env, desc, LOAD_FN,                          \
+-                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_LOAD); \
++                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                \
  }
 =20
- GEN_VEXT_VADC_VVM(vadc_vvm_b, uint8_t,  H1, DO_VADC)
-@@ -1091,6 +1106,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,        \
+ GEN_VEXT_LD_US(vle8_v,  int8_t,  lde_b)
+@@ -340,14 +340,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulo=
+ng base,          \
+ {                                                                        \
+     uint32_t stride =3D vext_nf(desc) << ctzl(sizeof(ETYPE));              \
+     vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,   \
+-                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);      \
++                     ctzl(sizeof(ETYPE)), GETPC());                      \
+ }                                                                        \
+                                                                          \
+ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                 \
                    CPURISCVState *env, uint32_t desc)                     \
  {                                                                        \
-     uint32_t vl =3D env->vl;                                               \
-+    uint32_t esz =3D sizeof(ETYPE);                                        \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);         \
-+    uint32_t vta =3D vext_vta(desc);                                       \
-     uint32_t i;                                                          \
-                                                                          \
-     for (i =3D env->vstart; i < vl; i++) {                                 \
-@@ -1100,6 +1118,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,        \
-         *((ETYPE *)vd + H(i)) =3D DO_OP(s2, (ETYPE)(target_long)s1, carry);\
-     }                                                                    \
-     env->vstart =3D 0;                                          \
-+    /* set tail elements to 1s */                                        \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);             \
+     vext_ldst_us(vd, base, env, desc, STORE_FN,                          \
+-                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_STORE); \
++                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                 \
  }
 =20
- GEN_VEXT_VADC_VXM(vadc_vxm_b, uint8_t,  H1, DO_VADC)
-@@ -1122,6 +1142,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,   \
- {                                                             \
-     uint32_t vl =3D env->vl;                                    \
-     uint32_t vm =3D vext_vm(desc);                              \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;        \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);              \
-     uint32_t i;                                               \
-                                                               \
-     for (i =3D env->vstart; i < vl; i++) {                      \
-@@ -1131,6 +1153,13 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void =
-*vs2,   \
-         vext_set_elem_mask(vd, i, DO_OP(s2, s1, carry));      \
-     }                                                         \
-     env->vstart =3D 0;                                          \
-+    /* mask destination register are always tail-agnostic */  \
-+    /* set tail elements to 1s */                             \
-+    if (vta_all_1s) {                                         \
-+        for (; i < total_elems; i++) {                        \
-+            vext_set_elem_mask(vd, i, 1);                     \
-+        }                                                     \
-+    }                                                         \
+ GEN_VEXT_ST_US(vse8_v,  int8_t,  ste_b)
+@@ -364,7 +364,7 @@ void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
+     /* evl =3D ceil(vl/8) */
+     uint8_t evl =3D (env->vl + 7) >> 3;
+     vext_ldst_us(vd, base, env, desc, lde_b,
+-                 0, evl, GETPC(), MMU_DATA_LOAD);
++                 0, evl, GETPC());
  }
 =20
- GEN_VEXT_VMADC_VVM(vmadc_vvm_b, uint8_t,  H1, DO_MADC)
-@@ -1149,6 +1178,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-         \
- {                                                               \
-     uint32_t vl =3D env->vl;                                      \
-     uint32_t vm =3D vext_vm(desc);                                \
-+    uint32_t total_elems =3D env_archcpu(env)->cfg.vlen;          \
-+    uint32_t vta_all_1s =3D vext_vta_all_1s(desc);                \
-     uint32_t i;                                                 \
-                                                                 \
-     for (i =3D env->vstart; i < vl; i++) {                        \
-@@ -1158,6 +1189,13 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1,=
-          \
-                 DO_OP(s2, (ETYPE)(target_long)s1, carry));      \
-     }                                                           \
-     env->vstart =3D 0;                                            \
-+    /* mask destination register are always tail-agnostic */    \
-+    /* set tail elements to 1s */                               \
-+    if (vta_all_1s) {                                           \
-+        for (; i < total_elems; i++) {                          \
-+            vext_set_elem_mask(vd, i, 1);                       \
-+        }                                                       \
-+    }                                                           \
+ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
+@@ -373,7 +373,7 @@ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
+     /* evl =3D ceil(vl/8) */
+     uint8_t evl =3D (env->vl + 7) >> 3;
+     vext_ldst_us(vd, base, env, desc, ste_b,
+-                 0, evl, GETPC(), MMU_DATA_STORE);
++                 0, evl, GETPC());
  }
 =20
- GEN_VEXT_VMADC_VXM(vmadc_vxm_b, uint8_t,  H1, DO_MADC)
-@@ -1208,18 +1246,18 @@ RVVCALL(OPIVX2, vxor_vx_b, OP_SSS_B, H1, H1, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_h, OP_SSS_H, H2, H2, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_w, OP_SSS_W, H4, H4, DO_XOR)
- RVVCALL(OPIVX2, vxor_vx_d, OP_SSS_D, H8, H8, DO_XOR)
--GEN_VEXT_VX(vand_vx_b)
--GEN_VEXT_VX(vand_vx_h)
--GEN_VEXT_VX(vand_vx_w)
--GEN_VEXT_VX(vand_vx_d)
--GEN_VEXT_VX(vor_vx_b)
--GEN_VEXT_VX(vor_vx_h)
--GEN_VEXT_VX(vor_vx_w)
--GEN_VEXT_VX(vor_vx_d)
--GEN_VEXT_VX(vxor_vx_b)
--GEN_VEXT_VX(vxor_vx_h)
--GEN_VEXT_VX(vxor_vx_w)
--GEN_VEXT_VX(vxor_vx_d)
-+GEN_VEXT_VX(vand_vx_b, 1)
-+GEN_VEXT_VX(vand_vx_h, 2)
-+GEN_VEXT_VX(vand_vx_w, 4)
-+GEN_VEXT_VX(vand_vx_d, 8)
-+GEN_VEXT_VX(vor_vx_b, 1)
-+GEN_VEXT_VX(vor_vx_h, 2)
-+GEN_VEXT_VX(vor_vx_w, 4)
-+GEN_VEXT_VX(vor_vx_d, 8)
-+GEN_VEXT_VX(vxor_vx_b, 1)
-+GEN_VEXT_VX(vxor_vx_h, 2)
-+GEN_VEXT_VX(vxor_vx_w, 4)
-+GEN_VEXT_VX(vxor_vx_d, 8)
+ /*
+@@ -399,7 +399,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
+                 void *vs2, CPURISCVState *env, uint32_t desc,
+                 vext_get_index_addr get_index_addr,
+                 vext_ldst_elem_fn *ldst_elem,
+-                uint32_t esz, uintptr_t ra, MMUAccessType access_type)
++                uint32_t esz, uintptr_t ra)
+ {
+     uint32_t i, k;
+     uint32_t nf =3D vext_nf(desc);
+@@ -427,7 +427,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+                  \
+                   void *vs2, CPURISCVState *env, uint32_t desc)            \
+ {                                                                          \
+     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,                \
+-                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD); \
++                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC());                \
+ }
 =20
- /* Vector Single-Width Bit Shift Instructions */
- #define DO_SLL(N, M)  (N << (M))
-@@ -1473,22 +1511,22 @@ RVVCALL(OPIVX2, vmax_vx_b, OP_SSS_B, H1, H1, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_h, OP_SSS_H, H2, H2, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_w, OP_SSS_W, H4, H4, DO_MAX)
- RVVCALL(OPIVX2, vmax_vx_d, OP_SSS_D, H8, H8, DO_MAX)
--GEN_VEXT_VX(vminu_vx_b)
--GEN_VEXT_VX(vminu_vx_h)
--GEN_VEXT_VX(vminu_vx_w)
--GEN_VEXT_VX(vminu_vx_d)
--GEN_VEXT_VX(vmin_vx_b)
--GEN_VEXT_VX(vmin_vx_h)
--GEN_VEXT_VX(vmin_vx_w)
--GEN_VEXT_VX(vmin_vx_d)
--GEN_VEXT_VX(vmaxu_vx_b)
--GEN_VEXT_VX(vmaxu_vx_h)
--GEN_VEXT_VX(vmaxu_vx_w)
--GEN_VEXT_VX(vmaxu_vx_d)
--GEN_VEXT_VX(vmax_vx_b)
--GEN_VEXT_VX(vmax_vx_h)
--GEN_VEXT_VX(vmax_vx_w)
--GEN_VEXT_VX(vmax_vx_d)
-+GEN_VEXT_VX(vminu_vx_b, 1)
-+GEN_VEXT_VX(vminu_vx_h, 2)
-+GEN_VEXT_VX(vminu_vx_w, 4)
-+GEN_VEXT_VX(vminu_vx_d, 8)
-+GEN_VEXT_VX(vmin_vx_b, 1)
-+GEN_VEXT_VX(vmin_vx_h, 2)
-+GEN_VEXT_VX(vmin_vx_w, 4)
-+GEN_VEXT_VX(vmin_vx_d, 8)
-+GEN_VEXT_VX(vmaxu_vx_b, 1)
-+GEN_VEXT_VX(vmaxu_vx_h, 2)
-+GEN_VEXT_VX(vmaxu_vx_w, 4)
-+GEN_VEXT_VX(vmaxu_vx_d, 8)
-+GEN_VEXT_VX(vmax_vx_b, 1)
-+GEN_VEXT_VX(vmax_vx_h, 2)
-+GEN_VEXT_VX(vmax_vx_w, 4)
-+GEN_VEXT_VX(vmax_vx_d, 8)
+ GEN_VEXT_LD_INDEX(vlxei8_8_v,   int8_t,  idx_b, lde_b)
+@@ -453,7 +453,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base, =
+        \
+ {                                                                \
+     vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,      \
+                     STORE_FN, ctzl(sizeof(ETYPE)),               \
+-                    GETPC(), MMU_DATA_STORE);                    \
++                    GETPC());                                    \
+ }
 =20
- /* Vector Single-Width Integer Multiply Instructions */
- #define DO_MUL(N, M) (N * M)
-@@ -1632,22 +1670,22 @@ RVVCALL(OPIVX2, vmulhsu_vx_b, OP_SUS_B, H1, H1, do_mu=
-lhsu_b)
- RVVCALL(OPIVX2, vmulhsu_vx_h, OP_SUS_H, H2, H2, do_mulhsu_h)
- RVVCALL(OPIVX2, vmulhsu_vx_w, OP_SUS_W, H4, H4, do_mulhsu_w)
- RVVCALL(OPIVX2, vmulhsu_vx_d, OP_SUS_D, H8, H8, do_mulhsu_d)
--GEN_VEXT_VX(vmul_vx_b)
--GEN_VEXT_VX(vmul_vx_h)
--GEN_VEXT_VX(vmul_vx_w)
--GEN_VEXT_VX(vmul_vx_d)
--GEN_VEXT_VX(vmulh_vx_b)
--GEN_VEXT_VX(vmulh_vx_h)
--GEN_VEXT_VX(vmulh_vx_w)
--GEN_VEXT_VX(vmulh_vx_d)
--GEN_VEXT_VX(vmulhu_vx_b)
--GEN_VEXT_VX(vmulhu_vx_h)
--GEN_VEXT_VX(vmulhu_vx_w)
--GEN_VEXT_VX(vmulhu_vx_d)
--GEN_VEXT_VX(vmulhsu_vx_b)
--GEN_VEXT_VX(vmulhsu_vx_h)
--GEN_VEXT_VX(vmulhsu_vx_w)
--GEN_VEXT_VX(vmulhsu_vx_d)
-+GEN_VEXT_VX(vmul_vx_b, 1)
-+GEN_VEXT_VX(vmul_vx_h, 2)
-+GEN_VEXT_VX(vmul_vx_w, 4)
-+GEN_VEXT_VX(vmul_vx_d, 8)
-+GEN_VEXT_VX(vmulh_vx_b, 1)
-+GEN_VEXT_VX(vmulh_vx_h, 2)
-+GEN_VEXT_VX(vmulh_vx_w, 4)
-+GEN_VEXT_VX(vmulh_vx_d, 8)
-+GEN_VEXT_VX(vmulhu_vx_b, 1)
-+GEN_VEXT_VX(vmulhu_vx_h, 2)
-+GEN_VEXT_VX(vmulhu_vx_w, 4)
-+GEN_VEXT_VX(vmulhu_vx_d, 8)
-+GEN_VEXT_VX(vmulhsu_vx_b, 1)
-+GEN_VEXT_VX(vmulhsu_vx_h, 2)
-+GEN_VEXT_VX(vmulhsu_vx_w, 4)
-+GEN_VEXT_VX(vmulhsu_vx_d, 8)
+ GEN_VEXT_ST_INDEX(vsxei8_8_v,   int8_t,  idx_b, ste_b)
+@@ -576,8 +576,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
+  */
+ static void
+ vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t de=
+sc,
+-                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra,
+-                MMUAccessType access_type)
++                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra)
+ {
+     uint32_t i, k, off, pos;
+     uint32_t nf =3D vext_nf(desc);
+@@ -612,8 +611,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
+                   CPURISCVState *env, uint32_t desc) \
+ {                                                    \
+     vext_ldst_whole(vd, base, env, desc, LOAD_FN,    \
+-                    ctzl(sizeof(ETYPE)), GETPC(),    \
+-                    MMU_DATA_LOAD);                  \
++                    ctzl(sizeof(ETYPE)), GETPC());   \
+ }
 =20
- /* Vector Integer Divide Instructions */
- #define DO_DIVU(N, M) (unlikely(M =3D=3D 0) ? (__typeof(N))(-1) : N / M)
-@@ -1706,22 +1744,22 @@ RVVCALL(OPIVX2, vrem_vx_b, OP_SSS_B, H1, H1, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_h, OP_SSS_H, H2, H2, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_w, OP_SSS_W, H4, H4, DO_REM)
- RVVCALL(OPIVX2, vrem_vx_d, OP_SSS_D, H8, H8, DO_REM)
--GEN_VEXT_VX(vdivu_vx_b)
--GEN_VEXT_VX(vdivu_vx_h)
--GEN_VEXT_VX(vdivu_vx_w)
--GEN_VEXT_VX(vdivu_vx_d)
--GEN_VEXT_VX(vdiv_vx_b)
--GEN_VEXT_VX(vdiv_vx_h)
--GEN_VEXT_VX(vdiv_vx_w)
--GEN_VEXT_VX(vdiv_vx_d)
--GEN_VEXT_VX(vremu_vx_b)
--GEN_VEXT_VX(vremu_vx_h)
--GEN_VEXT_VX(vremu_vx_w)
--GEN_VEXT_VX(vremu_vx_d)
--GEN_VEXT_VX(vrem_vx_b)
--GEN_VEXT_VX(vrem_vx_h)
--GEN_VEXT_VX(vrem_vx_w)
--GEN_VEXT_VX(vrem_vx_d)
-+GEN_VEXT_VX(vdivu_vx_b, 1)
-+GEN_VEXT_VX(vdivu_vx_h, 2)
-+GEN_VEXT_VX(vdivu_vx_w, 4)
-+GEN_VEXT_VX(vdivu_vx_d, 8)
-+GEN_VEXT_VX(vdiv_vx_b, 1)
-+GEN_VEXT_VX(vdiv_vx_h, 2)
-+GEN_VEXT_VX(vdiv_vx_w, 4)
-+GEN_VEXT_VX(vdiv_vx_d, 8)
-+GEN_VEXT_VX(vremu_vx_b, 1)
-+GEN_VEXT_VX(vremu_vx_h, 2)
-+GEN_VEXT_VX(vremu_vx_w, 4)
-+GEN_VEXT_VX(vremu_vx_d, 8)
-+GEN_VEXT_VX(vrem_vx_b, 1)
-+GEN_VEXT_VX(vrem_vx_h, 2)
-+GEN_VEXT_VX(vrem_vx_w, 4)
-+GEN_VEXT_VX(vrem_vx_d, 8)
+ GEN_VEXT_LD_WHOLE(vl1re8_v,  int8_t,  lde_b)
+@@ -638,8 +636,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
+                   CPURISCVState *env, uint32_t desc) \
+ {                                                    \
+     vext_ldst_whole(vd, base, env, desc, STORE_FN,   \
+-                    ctzl(sizeof(ETYPE)), GETPC(),    \
+-                    MMU_DATA_STORE);                 \
++                    ctzl(sizeof(ETYPE)), GETPC());   \
+ }
 =20
- /* Vector Widening Integer Multiply Instructions */
- RVVCALL(OPIVV2, vwmul_vv_b, WOP_SSS_B, H2, H1, H1, DO_MUL)
-@@ -1752,15 +1790,15 @@ RVVCALL(OPIVX2, vwmulu_vx_w, WOP_UUU_W, H8, H4, DO_MU=
-L)
- RVVCALL(OPIVX2, vwmulsu_vx_b, WOP_SUS_B, H2, H1, DO_MUL)
- RVVCALL(OPIVX2, vwmulsu_vx_h, WOP_SUS_H, H4, H2, DO_MUL)
- RVVCALL(OPIVX2, vwmulsu_vx_w, WOP_SUS_W, H8, H4, DO_MUL)
--GEN_VEXT_VX(vwmul_vx_b)
--GEN_VEXT_VX(vwmul_vx_h)
--GEN_VEXT_VX(vwmul_vx_w)
--GEN_VEXT_VX(vwmulu_vx_b)
--GEN_VEXT_VX(vwmulu_vx_h)
--GEN_VEXT_VX(vwmulu_vx_w)
--GEN_VEXT_VX(vwmulsu_vx_b)
--GEN_VEXT_VX(vwmulsu_vx_h)
--GEN_VEXT_VX(vwmulsu_vx_w)
-+GEN_VEXT_VX(vwmul_vx_b, 2)
-+GEN_VEXT_VX(vwmul_vx_h, 4)
-+GEN_VEXT_VX(vwmul_vx_w, 8)
-+GEN_VEXT_VX(vwmulu_vx_b, 2)
-+GEN_VEXT_VX(vwmulu_vx_h, 4)
-+GEN_VEXT_VX(vwmulu_vx_w, 8)
-+GEN_VEXT_VX(vwmulsu_vx_b, 2)
-+GEN_VEXT_VX(vwmulsu_vx_h, 4)
-+GEN_VEXT_VX(vwmulsu_vx_w, 8)
-=20
- /* Vector Single-Width Integer Multiply-Add Instructions */
- #define OPIVV3(NAME, TD, T1, T2, TX1, TX2, HD, HS1, HS2, OP)   \
-@@ -1833,22 +1871,22 @@ RVVCALL(OPIVX3, vnmsub_vx_b, OP_SSS_B, H1, H1, DO_NMS=
-UB)
- RVVCALL(OPIVX3, vnmsub_vx_h, OP_SSS_H, H2, H2, DO_NMSUB)
- RVVCALL(OPIVX3, vnmsub_vx_w, OP_SSS_W, H4, H4, DO_NMSUB)
- RVVCALL(OPIVX3, vnmsub_vx_d, OP_SSS_D, H8, H8, DO_NMSUB)
--GEN_VEXT_VX(vmacc_vx_b)
--GEN_VEXT_VX(vmacc_vx_h)
--GEN_VEXT_VX(vmacc_vx_w)
--GEN_VEXT_VX(vmacc_vx_d)
--GEN_VEXT_VX(vnmsac_vx_b)
--GEN_VEXT_VX(vnmsac_vx_h)
--GEN_VEXT_VX(vnmsac_vx_w)
--GEN_VEXT_VX(vnmsac_vx_d)
--GEN_VEXT_VX(vmadd_vx_b)
--GEN_VEXT_VX(vmadd_vx_h)
--GEN_VEXT_VX(vmadd_vx_w)
--GEN_VEXT_VX(vmadd_vx_d)
--GEN_VEXT_VX(vnmsub_vx_b)
--GEN_VEXT_VX(vnmsub_vx_h)
--GEN_VEXT_VX(vnmsub_vx_w)
--GEN_VEXT_VX(vnmsub_vx_d)
-+GEN_VEXT_VX(vmacc_vx_b, 1)
-+GEN_VEXT_VX(vmacc_vx_h, 2)
-+GEN_VEXT_VX(vmacc_vx_w, 4)
-+GEN_VEXT_VX(vmacc_vx_d, 8)
-+GEN_VEXT_VX(vnmsac_vx_b, 1)
-+GEN_VEXT_VX(vnmsac_vx_h, 2)
-+GEN_VEXT_VX(vnmsac_vx_w, 4)
-+GEN_VEXT_VX(vnmsac_vx_d, 8)
-+GEN_VEXT_VX(vmadd_vx_b, 1)
-+GEN_VEXT_VX(vmadd_vx_h, 2)
-+GEN_VEXT_VX(vmadd_vx_w, 4)
-+GEN_VEXT_VX(vmadd_vx_d, 8)
-+GEN_VEXT_VX(vnmsub_vx_b, 1)
-+GEN_VEXT_VX(vnmsub_vx_h, 2)
-+GEN_VEXT_VX(vnmsub_vx_w, 4)
-+GEN_VEXT_VX(vnmsub_vx_d, 8)
-=20
- /* Vector Widening Integer Multiply-Add Instructions */
- RVVCALL(OPIVV3, vwmaccu_vv_b, WOP_UUU_B, H2, H1, H1, DO_MACC)
-@@ -1882,18 +1920,18 @@ RVVCALL(OPIVX3, vwmaccsu_vx_w, WOP_SSU_W, H8, H4, DO_=
-MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_b, WOP_SUS_B, H2, H1, DO_MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_h, WOP_SUS_H, H4, H2, DO_MACC)
- RVVCALL(OPIVX3, vwmaccus_vx_w, WOP_SUS_W, H8, H4, DO_MACC)
--GEN_VEXT_VX(vwmaccu_vx_b)
--GEN_VEXT_VX(vwmaccu_vx_h)
--GEN_VEXT_VX(vwmaccu_vx_w)
--GEN_VEXT_VX(vwmacc_vx_b)
--GEN_VEXT_VX(vwmacc_vx_h)
--GEN_VEXT_VX(vwmacc_vx_w)
--GEN_VEXT_VX(vwmaccsu_vx_b)
--GEN_VEXT_VX(vwmaccsu_vx_h)
--GEN_VEXT_VX(vwmaccsu_vx_w)
--GEN_VEXT_VX(vwmaccus_vx_b)
--GEN_VEXT_VX(vwmaccus_vx_h)
--GEN_VEXT_VX(vwmaccus_vx_w)
-+GEN_VEXT_VX(vwmaccu_vx_b, 2)
-+GEN_VEXT_VX(vwmaccu_vx_h, 4)
-+GEN_VEXT_VX(vwmaccu_vx_w, 8)
-+GEN_VEXT_VX(vwmacc_vx_b, 2)
-+GEN_VEXT_VX(vwmacc_vx_h, 4)
-+GEN_VEXT_VX(vwmacc_vx_w, 8)
-+GEN_VEXT_VX(vwmaccsu_vx_b, 2)
-+GEN_VEXT_VX(vwmaccsu_vx_h, 4)
-+GEN_VEXT_VX(vwmaccsu_vx_w, 8)
-+GEN_VEXT_VX(vwmaccus_vx_b, 2)
-+GEN_VEXT_VX(vwmaccus_vx_h, 4)
-+GEN_VEXT_VX(vwmaccus_vx_w, 8)
-=20
- /* Vector Integer Merge and Move Instructions */
- #define GEN_VEXT_VMV_VV(NAME, ETYPE, H)                              \
+ GEN_VEXT_ST_WHOLE(vs1r_v, int8_t, ste_b)
 --=20
 2.34.2
 
