@@ -1,38 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npRtS-0007Wh-SN
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:47:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50352)
+	id 1npRtZ-0007oH-9I
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:47:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50366)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRtR-0007Su-Ee; Fri, 13 May 2022 05:47:29 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:53432
- helo=mail-sender-0.a4lg.com)
+ id 1npRtW-0007hR-Vd; Fri, 13 May 2022 05:47:34 -0400
+Received: from mail-sender-0.a4lg.com
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48332)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRtP-00054f-K6; Fri, 13 May 2022 05:47:29 -0400
+ id 1npRtV-00054x-1R; Fri, 13 May 2022 05:47:34 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 5423C300089;
- Fri, 13 May 2022 09:47:25 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id CE21D300089;
+ Fri, 13 May 2022 09:47:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652435245;
- bh=0HgLZO4BtVFdU4tnF8DdA/gkMFfk00nDFMV7cnelZMU=;
- h=From:To:Cc:Subject:Date:Message-Id:Mime-Version:
- Content-Transfer-Encoding;
- b=BNDg3IUug+rTwqWat7/8cgvbReQ6JH8ZX+UHitMH3Fw4HiFUnqKkNilJdTLH7J7no
- +Ex0ItvXRUYPTCYIm3SbAgwVZ/iFU/AVTM/9v88AUbWNBSaNWZhhj0kk2C5io9y2bj
- SPd7RJnjOMHalN7onBfPXoZrINL6+eHrsqG7g4G4=
+ s=2017s01; t=1652435250;
+ bh=rTgW5DKz+aQMVezOvkK97+TFFW6TxR5YDqsChLPjdH0=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ Mime-Version:Content-Transfer-Encoding;
+ b=MIsiRIUYRtSlXDvWFsrqsXMtFhhzHzDRWoUYR0SZ6cs3mb0GkjBOAexQXwwhF2rtZ
+ jh1UjdWSbIctLATVepZ1uPVTVoEElmDp7cjTOrJQn3wuBpVDgMrx20nfF17OpT/y5p
+ vr9rHdmqyUZz23kV6poZpL8DmJgLWGUEwfEWFqQk=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 0/2] hw/riscv: Make CPU config error handling generous
-Date: Fri, 13 May 2022 18:47:17 +0900
-Message-Id: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH 1/2] target/riscv: Make CPU config error handling generous
+ (virt/spike)
+Date: Fri, 13 May 2022 18:47:18 +0900
+Message-Id: <a4641902664ac04020cd1e1273385ed578d8a7c7.1652435235.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=153.120.152.154;
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
@@ -52,74 +55,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2022 09:47:30 -0000
+X-List-Received-Date: Fri, 13 May 2022 09:47:35 -0000
 
-Hello,
+If specified CPU configuration is not valid, not just it prints error
+message, it aborts and generates core dumps (depends on the operating
+system).  This kind of error handling should be used only when a serious
+runtime error occurs.
 
-This patchset involves error handling on RISC-V CPU configuration error.
+This commit makes error handling on CPU configuration more generous on
+virt/spike machines.  It now just prints error message and quits (without
+coredumps and aborts).
 
-For instance:
+Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+---
+ hw/riscv/spike.c | 2 +-
+ hw/riscv/virt.c  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-    -cpu rv64,f=on,zfinx=on
-
-This is an example of invalid CPU configuration because "F" and "Zfinx"
-cannot coexist.  Detecting such error is a good thing.
-
-The bad thing is, it aborts when such invalid configuration is detected.
-I'm making changes to QEMU on Ubuntu 22.04 LTS but once I got a pop-up
-window asking whether to send a crash report.  Even if not, it generates
-core dumps.  That's not what I wanted.
-
-    Example of error message before this patchset:
-    Unexpected error in riscv_cpu_realize() at ../../../../src/qemu/target/riscv/cpu.c:718:
-    qemu-system-riscv64: 'Zfinx' cannot be supported together with 'F', 'D', 'Zfh', 'Zfhmin'
-    Aborted (core dumped)
-    $ (returns to shell but may show error report window on some OS)
-
-Such extreme error handling should be only used on serious runtime errors,
-not for minor user-configuration mistakes (that can be easily and *safely*
-detectable).
-
-    Example of error message after this patchset:
-    qemu-system-riscv64: 'Zfinx' cannot be supported together with 'F', 'D', 'Zfh', 'Zfhmin'
-    $ (returns to shell with error status [$?] of 1)
-
-This patchset resolves this problem on following machines, changing error
-handling structure from `error_abort' (aborts and generates core dumps
-[depends on OS] on error) to `error_fatal' (shows error message and quits
-with error status 1 on error):
-
--   spike (QEMU default)
--   virt
--   sifive_e
--   sifive_u
--   opentitan (RV32 only)
-
-`error_abort' on CPU realization exists on following machines:
-
--   shakti_c (RV64 only)
--   microchip-icicle-kit (RV64 only)
-
-...but since CPU realization on those machine currently never fails
-(because they require fixed CPU), I didn't touch those (may be a TODO).
-
-
-
-
-Tsukasa OI (2):
-  target/riscv: Make CPU config error handling generous (virt/spike)
-  target/riscv: Make CPU config error handling generous
-    (sifive_e/u/opentitan)
-
- hw/riscv/opentitan.c | 2 +-
- hw/riscv/sifive_e.c  | 2 +-
- hw/riscv/sifive_u.c  | 4 ++--
- hw/riscv/spike.c     | 2 +-
- hw/riscv/virt.c      | 2 +-
- 5 files changed, 6 insertions(+), 6 deletions(-)
-
-
-base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 068ba3493e..e41b6aa9f0 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -230,7 +230,7 @@ static void spike_board_init(MachineState *machine)
+                                 base_hartid, &error_abort);
+         object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+                                 hart_count, &error_abort);
+-        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
++        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+ 
+         /* Core Local Interruptor (timer and IPI) for each socket */
+         riscv_aclint_swi_create(
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 3326f4db96..244d6408b5 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1351,7 +1351,7 @@ static void virt_machine_init(MachineState *machine)
+                                 base_hartid, &error_abort);
+         object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+                                 hart_count, &error_abort);
+-        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
++        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+ 
+         if (!kvm_enabled()) {
+             if (s->have_aclint) {
 -- 
 2.34.1
 
