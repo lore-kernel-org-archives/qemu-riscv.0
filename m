@@ -1,40 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npTw4-0000OF-RX
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 07:58:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49732)
+	id 1npTwA-0000SA-Bt
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 07:58:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49730)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1npTvw-0000LW-Jl; Fri, 13 May 2022 07:58:12 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:45428)
+ id 1npTvw-0000LU-If; Fri, 13 May 2022 07:58:12 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:45424)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1npTvv-000286-0Z; Fri, 13 May 2022 07:58:12 -0400
+ id 1npTvv-000284-09; Fri, 13 May 2022 07:58:12 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id BC7BF11F102;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 832E011EFFE;
  Fri, 13 May 2022 11:58:09 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v4 02/10] target/riscv: rvv: Add mask agnostic for vector
- load / store instructions
-Message-ID: <165244308918.21805.1094821418229175817-2@git.sr.ht>
+Date: Fri, 13 May 2022 11:58:09 +0000
+Subject: [PATCH qemu v4 00/10] Add mask agnostic behavior for rvv instructions
+MIME-Version: 1.0
+Message-ID: <165244308918.21805.1094821418229175817-0@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
-In-Reply-To: <165244308918.21805.1094821418229175817-0@git.sr.ht>
 To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
  helo=mail-b.sr.ht
-X-Spam_score_int: 36
-X-Spam_score: 3.6
-X-Spam_bar: +++
-X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -48,150 +47,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Fri, 13 May 2022 11:58:16 -0000
-X-Original-Date: Thu, 17 Mar 2022 00:47:13 -0700
 X-List-Received-Date: Fri, 13 May 2022 11:58:16 -0000
 
-From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
+According to v-spec, mask agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of mask policies, QEMU should be able to simulate the mask
+agnostic behavior as "set mask elements' bits to all 1s".
 
-Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc |  5 ++++
- target/riscv/vector_helper.c            | 35 +++++++++++++++++--------
- 2 files changed, 29 insertions(+), 11 deletions(-)
+There are multiple possibility for agnostic elements according to
+v-spec. The main intent of this patch-set tries to add option that
+can distinguish between mask policies. Setting agnostic elements to
+all 1s allows QEMU to express this.
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
-s/trans_rvv.c.inc
-index df5a892150..a6daf20714 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -712,6 +712,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint=
-8_t eew)
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
- }
-=20
-@@ -777,6 +778,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, =
-uint8_t eew)
-     data =3D FIELD_DP32(data, VDATA, NF, 1);
-     /* Mask destination register are always tail-agnostic */
-     data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
-+    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
- }
-=20
-@@ -866,6 +868,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, u=
-int8_t eew)
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-=20
-@@ -996,6 +999,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, ui=
-nt8_t eew)
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
-=20
-@@ -1114,6 +1118,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uin=
-t8_t eew)
-     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
-     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
-     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-     return ldff_trans(a->rd, a->rs1, data, fn, s);
- }
-=20
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 6c55d5a750..5d392d084e 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -282,14 +282,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-     uint32_t esz =3D 1 << log2_esz;
-     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-     uint32_t vta =3D vext_vta(desc);
-+    uint32_t vma =3D vext_vma(desc);
-=20
-     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
--        if (!vm && !vext_elem_mask(v0, i)) {
--            continue;
--        }
--
-         k =3D 0;
-         while (k < nf) {
-+            if (!vm && !vext_elem_mask(v0, i)) {
-+                /* set masked-off elements to 1s */
-+                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-+                                  (i + k * max_elems + 1) * esz);
-+                k++;
-+                continue;
-+            }
-             target_ulong addr =3D base + stride * i + (k << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
-@@ -481,15 +485,19 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-     uint32_t esz =3D 1 << log2_esz;
-     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-     uint32_t vta =3D vext_vta(desc);
-+    uint32_t vma =3D vext_vma(desc);
-=20
-     /* load bytes from guest memory */
-     for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
--        if (!vm && !vext_elem_mask(v0, i)) {
--            continue;
--        }
--
-         k =3D 0;
-         while (k < nf) {
-+            if (!vm && !vext_elem_mask(v0, i)) {
-+                /* set masked-off elements to 1s */
-+                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-+                                  (i + k * max_elems + 1) * esz);
-+                k++;
-+                continue;
-+            }
-             abi_ptr addr =3D get_index_addr(base, i, vs2) + (k << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
-@@ -578,6 +586,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-     uint32_t esz =3D 1 << log2_esz;
-     uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
-     uint32_t vta =3D vext_vta(desc);
-+    uint32_t vma =3D vext_vma(desc);
-     target_ulong addr, offset, remain;
-=20
-     /* probe every access*/
-@@ -623,10 +632,14 @@ ProbeSuccess:
-     }
-     for (i =3D env->vstart; i < env->vl; i++) {
-         k =3D 0;
--        if (!vm && !vext_elem_mask(v0, i)) {
--            continue;
--        }
-         while (k < nf) {
-+            if (!vm && !vext_elem_mask(v0, i)) {
-+                /* set masked-off elements to 1s */
-+                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-+                                  (i + k * max_elems + 1) * esz);
-+                k++;
-+                continue;
-+            }
-             target_ulong addr =3D base + ((i * nf + k) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
---=20
+The following instructions that are always unmasked and not affected:
+
+- Vector add-with-carry and subtract-with-borrow instructions
+- Vector merge and move instructions
+- Vector reduction instructions
+- Vector mask-register logical instructions
+- `vcompress`
+
+This patch set is based on v17 of patch set "Add tail agnostic behavior
+for
+rvv instructions".
+Based on: <165244259451.12806.1710403216414520477-0@git.sr.ht>
+
+v2 updates:
+- Rebase upon changes of the tail agnostic patch-set
+- Minor change for vector load/store instructions
+
+v3 updates:
+- Rebase upon changes of the tail agnostic patch-set
+- Fix coding style, add missing space
+- Trigger `vma` when encountering vector load instructions and not in
+  vector stores
+
+v4 updates:
+- Rebase upon changes of the tail agnostic patch-set
+
+Yueh-Ting (eop) Chen (9):
+  target/riscv: rvv: Add mask agnostic for vv instructions
+  target/riscv: rvv: Add mask agnostic for vector load / store
+    instructions
+  target/riscv: rvv: Add mask agnostic for vx instructions
+  target/riscv: rvv: Add mask agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add mask agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add mask agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add mask agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add mask agnostic for vector mask instructions
+  target/riscv: rvv: Add mask agnostic for vector permutation
+    instructions
+
+eopXD (1):
+  target/riscv: rvv: Add option 'rvv_ma_all_1s' to enable optional mask
+    agnostic behavior
+
+ target/riscv/cpu.c                      |   1 +
+ target/riscv/cpu.h                      |   2 +
+ target/riscv/cpu_helper.c               |   2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |  28 +++++
+ target/riscv/internals.h                |   5 +-
+ target/riscv/translate.c                |   2 +
+ target/riscv/vector_helper.c            | 152 ++++++++++++++++++++----
+ 7 files changed, 167 insertions(+), 25 deletions(-)
+
+-- 
 2.34.2
-
 
