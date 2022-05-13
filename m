@@ -1,48 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npS11-0002e3-0e
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:55:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51990)
+	id 1npTnz-0003IO-JT
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 07:49:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npS0w-0002bR-TJ; Fri, 13 May 2022 05:55:15 -0400
-Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:48350)
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1npTny-0003Ht-2L; Fri, 13 May 2022 07:49:58 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:45378)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npS0u-00064j-3K; Fri, 13 May 2022 05:55:14 -0400
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 43521300089;
- Fri, 13 May 2022 09:55:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652435705;
- bh=V4cVH96UJivo0jLPTyerD2R6z183uES9sE9evDhwjsE=;
- h=Message-ID:Date:Mime-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type:Content-Transfer-Encoding;
- b=GqDgNIjkbfV9kdyFW06qkImf8ck0Fh+87UE4NbE58MFMxQojvKeITsfDOKLd/t08E
- ff3XFIW7zlOUVjBTeOS8W203W4sCT/L+EfNBpICWJ2RX7DPUo2veuFt/a7KthSth+M
- w99fPk5601hrH2hqxdftJzAqnkv27/t+wKCTSi48=
-Message-ID: <c944e2ce-1935-6622-11b2-7c500b6d1737@irq.a4lg.com>
-Date: Fri, 13 May 2022 18:55:02 +0900
-Mime-Version: 1.0
-Subject: Re: [RFC PATCH v4 1/4] target/riscv: Add smstateen support
-Content-Language: en-US
-To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: alistair.francis@wdc.com
-References: <20220513085125.403037-1-mchitale@ventanamicro.com>
- <20220513085125.403037-2-mchitale@ventanamicro.com>
-From: Tsukasa OI <research_trasio@irq.a4lg.com>
-In-Reply-To: <20220513085125.403037-2-mchitale@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1npTnw-0000mw-4h; Fri, 13 May 2022 07:49:57 -0400
+Authentication-Results: mail-b.sr.ht; dkim=none 
+Received: from git.sr.ht (unknown [173.195.146.142])
+ by mail-b.sr.ht (Postfix) with ESMTPSA id E926811EFFE;
+ Fri, 13 May 2022 11:49:54 +0000 (UTC)
+From: ~eopxd <eopxd@git.sr.ht>
+Date: Fri, 13 May 2022 11:49:54 +0000
+MIME-Version: 1.0
+Subject: [PATCH qemu v18 00/16] Add tail agnostic behavior for rvv instructions
+Message-ID: <165244259451.12806.1710403216414520477-0@git.sr.ht>
+X-Mailer: git.sr.ht
+Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
- envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
-X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
+ helo=mail-b.sr.ht
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_FORGED_REPLYTO=2.095,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -55,415 +47,144 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2022 09:55:16 -0000
+X-List-Received-Date: Fri, 13 May 2022 11:49:58 -0000
 
-On 2022/05/13 17:51, Mayuresh Chitale wrote:
-> Smstateen extension specifies a mechanism to close
-> the potential covert channels that could cause security issues.
-> 
-> This patch adds the CSRs defined in the specification and
-> the corresponding predicates and read/write functions.
-> 
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> ---
->  target/riscv/cpu.c      |   2 +
->  target/riscv/cpu.h      |   4 +
->  target/riscv/cpu_bits.h |  36 +++++++
->  target/riscv/csr.c      | 210 ++++++++++++++++++++++++++++++++++++++++
->  target/riscv/machine.c  |  21 ++++
->  5 files changed, 273 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 25a4ba3e22..3be2c644f9 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -870,6 +870,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> +    DEFINE_PROP_BOOL("smstateen", RISCVCPU, cfg.ext_smstateen, false),
->  
->      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> @@ -1062,6 +1063,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->          ISA_EDATA_ENTRY(svinval, ext_svinval),
->          ISA_EDATA_ENTRY(svnapot, ext_svnapot),
->          ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
-> +        ISA_EDATA_ENTRY(smstateen, ext_smstateen),
+According to v-spec, tail agnostic behavior can be either kept as
+undisturbed or set elements' bits to all 1s. To distinguish the
+difference of tail policies, QEMU should be able to simulate the tail
+agnostic behavior as "set tail elements' bits to all 1s". An option
+'rvv_ta_all_1s' is added to enable the behavior, it is default as
+disabled.
 
-isa_edata_arr must be arranged by canonical ordering.
-In this case, following comment (above those entries) applies:
+There are multiple possibility for agnostic elements according to
+v-spec. The main intent of this patch-set tries to add option that
+can distinguish between tail policies. Setting agnostic elements to
+all 1s makes things simple and allow QEMU to express this.
 
->      * 3. Standard supervisor-level extensions (starts with 'S') should be
->      *    listed after standard unprivileged extensions.  If multiple
->      *    supervisor-level extensions are listed, they should be ordered
->      *    alphabetically.
+We may explore other possibility of agnostic behavior by adding
+other options in the future. Please understand that this patch-set
+is limited.
 
-That means, you should put Smstateen extension line between zve64f and
-svinval.  Other than that, your changes looks good to me.
+v2 updates:
+- Addressed comments from Weiwei Li
+- Added commit tail agnostic on load / store instructions (which
+  I forgot to include into the patch-set)
 
-Thanks,
+v3 updates:
+- Missed the very 1st commit, adding it back
 
-Tsukasa
+v4 updates:
+- Renamed vlmax to total_elems
+- Deal with tail element when vl_eq_vlmax == true
 
->      };
->  
->      for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a55c918274..d6fdc63ff2 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -327,6 +327,9 @@ struct CPUArchState {
->  
->      /* CSRs for execution enviornment configuration */
->      uint64_t menvcfg;
-> +    uint64_t mstateen[SMSTATEEN_MAX_COUNT];
-> +    uint64_t hstateen[SMSTATEEN_MAX_COUNT];
-> +    uint64_t sstateen[SMSTATEEN_MAX_COUNT];
->      target_ulong senvcfg;
->      uint64_t henvcfg;
->  #endif
-> @@ -411,6 +414,7 @@ struct RISCVCPUConfig {
->      bool ext_zhinxmin;
->      bool ext_zve32f;
->      bool ext_zve64f;
-> +    bool ext_smstateen;
->  
->      uint32_t mvendorid;
->      uint64_t marchid;
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 4a55c6a709..2a3ef26d21 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -208,6 +208,12 @@
->  /* Supervisor Configuration CSRs */
->  #define CSR_SENVCFG         0x10A
->  
-> +/* Supervisor state CSRs */
-> +#define CSR_SSTATEEN0       0x10C
-> +#define CSR_SSTATEEN1       0x10D
-> +#define CSR_SSTATEEN2       0x10E
-> +#define CSR_SSTATEEN3       0x10F
-> +
->  /* Supervisor Trap Handling */
->  #define CSR_SSCRATCH        0x140
->  #define CSR_SEPC            0x141
-> @@ -257,6 +263,16 @@
->  #define CSR_HENVCFG         0x60A
->  #define CSR_HENVCFGH        0x61A
->  
-> +/* Hypervisor state CSRs */
-> +#define CSR_HSTATEEN0       0x60C
-> +#define CSR_HSTATEEN0H      0x61C
-> +#define CSR_HSTATEEN1       0x60D
-> +#define CSR_HSTATEEN1H      0x61D
-> +#define CSR_HSTATEEN2       0x60E
-> +#define CSR_HSTATEEN2H      0x61E
-> +#define CSR_HSTATEEN3       0x60F
-> +#define CSR_HSTATEEN3H      0x61F
-> +
->  /* Virtual CSRs */
->  #define CSR_VSSTATUS        0x200
->  #define CSR_VSIE            0x204
-> @@ -304,6 +320,26 @@
->  #define CSR_MENVCFG         0x30A
->  #define CSR_MENVCFGH        0x31A
->  
-> +/* Machine state CSRs */
-> +#define CSR_MSTATEEN0       0x30C
-> +#define CSR_MSTATEEN0H      0x31C
-> +#define CSR_MSTATEEN1       0x30D
-> +#define CSR_MSTATEEN1H      0x31D
-> +#define CSR_MSTATEEN2       0x30E
-> +#define CSR_MSTATEEN2H      0x31E
-> +#define CSR_MSTATEEN3       0x30F
-> +#define CSR_MSTATEEN3H      0x31F
-> +
-> +/* Common defines for all smstateen */
-> +#define SMSTATEEN_MAX_COUNT 4
-> +#define SMSTATEEN0_CS       0
-> +#define SMSTATEEN0_FCSR     0
-> +#define SMSTATEEN0_IMSIC    58
-> +#define SMSTATEEN0_AIA      59
-> +#define SMSTATEEN0_SVSLCT   60
-> +#define SMSTATEEN0_HSENVCFG 62
-> +#define SMSTATEEN_STATEN    63
-> +
->  /* Enhanced Physical Memory Protection (ePMP) */
->  #define CSR_MSECCFG         0x747
->  #define CSR_MSECCFGH        0x757
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index e144ce7135..fea5cdd178 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -247,6 +247,42 @@ static RISCVException hmode32(CPURISCVState *env, int csrno)
->  
->  }
->  
-> +static RISCVException mstateen(CPURISCVState *env, int csrno)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    if (!cpu->cfg.ext_smstateen) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return any(env, csrno);
-> +}
-> +
-> +static RISCVException hstateen(CPURISCVState *env, int csrno)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    if (!cpu->cfg.ext_smstateen) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return hmode(env, csrno);
-> +}
-> +
-> +static RISCVException sstateen(CPURISCVState *env, int csrno)
-> +{
-> +    CPUState *cs = env_cpu(env);
-> +    RISCVCPU *cpu = RISCV_CPU(cs);
-> +
-> +    if (!cpu->cfg.ext_smstateen) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    return smode(env, csrno);
-> +}
-> +
->  /* Checks if PointerMasking registers could be accessed */
->  static RISCVException pointer_masking(CPURISCVState *env, int csrno)
->  {
-> @@ -1574,6 +1610,129 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->  
-> +static inline void write_smstateen(CPURISCVState *env, uint64_t *reg,
-> +                                   uint64_t wr_mask, uint64_t new_val)
-> +{
-> +    *reg = (*reg & ~wr_mask) | (new_val & wr_mask);
-> +}
-> +
-> +static RISCVException read_mstateen(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->mstateen[csrno - CSR_MSTATEEN0];
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_mstateen(CPURISCVState *env, int csrno,
-> +                                     target_ulong new_val)
-> +{
-> +    uint64_t *reg;
-> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
-> +
-> +    reg = &env->mstateen[csrno - CSR_MSTATEEN0];
-> +    write_smstateen(env, reg, wr_mask, new_val);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_mstateenh(CPURISCVState *env, int csrno,
-> +                                     target_ulong *val)
-> +{
-> +    *val = env->mstateen[csrno - CSR_MSTATEEN0H] >> 32;
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_mstateenh(CPURISCVState *env, int csrno,
-> +                                      target_ulong new_val)
-> +{
-> +    uint64_t *reg;
-> +    uint64_t val;
-> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
-> +
-> +    reg = &env->mstateen[csrno - CSR_MSTATEEN0H];
-> +    val = (uint64_t)new_val << 32;
-> +    val |= *reg & 0xFFFFFFFF;
-> +    write_smstateen(env, reg, wr_mask, val);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_hstateen(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->hstateen[csrno - CSR_HSTATEEN0];
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_hstateen(CPURISCVState *env, int csrno,
-> +                                     target_ulong new_val)
-> +{
-> +    uint64_t *reg;
-> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
-> +    int index = csrno - CSR_HSTATEEN0;
-> +
-> +    reg = &env->hstateen[index];
-> +    wr_mask &= env->mstateen[index];
-> +    write_smstateen(env, reg, wr_mask, new_val);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_hstateenh(CPURISCVState *env, int csrno,
-> +                                     target_ulong *val)
-> +{
-> +    *val = env->hstateen[csrno - CSR_HSTATEEN0H] >> 32;
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_hstateenh(CPURISCVState *env, int csrno,
-> +                                      target_ulong new_val)
-> +{
-> +    uint64_t *reg;
-> +    uint64_t val;
-> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
-> +    int index = csrno - CSR_HSTATEEN0H;
-> +
-> +    reg = &env->hstateen[index];
-> +    val = (uint64_t)new_val << 32;
-> +    val |= *reg & 0xFFFFFFFF;
-> +    wr_mask &= env->mstateen[index];
-> +
-> +    write_smstateen(env, reg, wr_mask, val);
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_sstateen(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->sstateen[csrno - CSR_SSTATEEN0];
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_sstateen(CPURISCVState *env, int csrno,
-> +                                     target_ulong new_val)
-> +{
-> +    uint64_t *reg;
-> +    uint64_t wr_mask = 0;
-> +    int index = csrno - CSR_SSTATEEN0;
-> +    bool virt = riscv_cpu_virt_enabled(env);
-> +
-> +    reg = &env->sstateen[index];
-> +    if (virt) {
-> +        wr_mask &= env->mstateen[index];
-> +    } else {
-> +        wr_mask &= env->hstateen[index];
-> +    }
-> +    write_smstateen(env, reg, wr_mask, new_val);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->  static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
->                                  uint64_t *ret_val,
->                                  uint64_t new_val, uint64_t wr_mask)
-> @@ -3441,6 +3600,57 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
->                                            .min_priv_ver = PRIV_VERSION_1_12_0 },
->  
-> +    /* Smstateen extension CSRs */
-> +    [CSR_MSTATEEN0] = { "mstateen0", mstateen, read_mstateen, write_mstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN0H] = { "mstateen0h", mstateen, read_mstateenh,
-> +                          write_mstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN1] = { "mstateen1", mstateen, read_mstateen, write_mstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN1H] = { "mstateen1h", mstateen, read_mstateenh,
-> +                          write_mstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN2] = { "mstateen2", mstateen, read_mstateen, write_mstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN2H] = { "mstateen2h", mstateen, read_mstateenh,
-> +                          write_mstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN3] = { "mstateen3", mstateen, read_mstateen, write_mstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_MSTATEEN3H] = { "mstateen3h", mstateen, read_mstateenh,
-> +                          write_mstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +
-> +    [CSR_HSTATEEN0] = { "hstateen0", hstateen, read_hstateen, write_hstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN0H] = { "hstateen0h", hstateen, read_hstateenh,
-> +                          write_hstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN1] = { "hstateen1", hstateen, read_hstateen, write_hstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN1H] = { "hstateen1h", hstateen, read_hstateenh,
-> +                          write_hstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN2] = { "hstateen2", hstateen, read_hstateen, write_hstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN2H] = { "hstateen2h", hstateen, read_hstateenh,
-> +                          write_hstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN3] = { "hstateen3", hstateen, read_hstateen, write_hstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATEEN3H] = { "hstateen3h", hstateen, read_hstateenh,
-> +                          write_hstateenh,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +
-> +    [CSR_SSTATEEN0] = { "sstateen0", sstateen, read_sstateen, write_sstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_SSTATEEN1] = { "sstateen1", sstateen, read_sstateen, write_sstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_SSTATEEN2] = { "sstateen2", sstateen, read_sstateen, write_sstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_SSTATEEN3] = { "sstateen3", sstateen, read_sstateen, write_sstateen,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
->      /* Supervisor Trap Setup */
->      [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
->                                                read_sstatus_i128                 },
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 2a437b29a1..84a75dbb08 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -262,6 +262,26 @@ static int riscv_cpu_post_load(void *opaque, int version_id)
->      return 0;
->  }
->  
-> +static bool smstateen_needed(void *opaque)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +
-> +    return cpu->cfg.ext_smstateen;
-> +}
-> +
-> +static const VMStateDescription vmstate_smstateen = {
-> +    .name = "cpu/smtateen",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .needed = smstateen_needed,
-> +    .fields = (VMStateField[]) {
-> +        VMSTATE_UINT64_ARRAY(env.mstateen, RISCVCPU, 4),
-> +        VMSTATE_UINT64_ARRAY(env.hstateen, RISCVCPU, 4),
-> +        VMSTATE_UINT64_ARRAY(env.sstateen, RISCVCPU, 4),
-> +        VMSTATE_END_OF_LIST()
-> +    }
-> +};
-> +
->  static bool envcfg_needed(void *opaque)
->  {
->      RISCVCPU *cpu = opaque;
-> @@ -347,6 +367,7 @@ const VMStateDescription vmstate_riscv_cpu = {
->          &vmstate_kvmtimer,
->          &vmstate_envcfg,
->          &vmstate_debug,
-> +        &vmstate_smstateen,
->          NULL
->      }
->  };
+v5 updates:
+- Let `vext_get_total_elems` take `desc` and `esz`
+- Utilize `simd_maxsz(desc)` to get `vlenb`
+- Fix alignments to code
+
+v6 updates:
+- Fix `vext_get_total_elems`
+
+v7 updates:
+- Reuse `max_elems` for vector load / store helper functions. The
+  translation sets desc's `lmul` to `min(1, lmul)`, making
+  `vext_max_elems` equivalent to `vext_get_total_elems`.
+
+v8 updates:
+- Simplify `vext_set_elems_1s`, don't need `vext_set_elems_1s_fns`
+- Fix `vext_get_total_elems`, it should derive upon EMUL instead
+  of LMUL
+
+v9 updates:
+- Let instructions that is tail agnostic regardless of vta respect the
+  option and not the vta.
+
+v10 updates:
+- Correct range to set element to 1s for load instructions
+
+v11 updates:
+- Separate addition of option 'rvv_ta_all_1s' as a new (last) commit
+- Add description to show intent of the option in first commit for the
+  optional tail agnostic behavior
+- Tag WeiWei as Reviewed-by for all commits
+- Tag Alistair as Reviewed-by for commit 01, 02
+- Tag Alistair as Acked-by for commit 03
+
+v12 updates:
+- Add missing space in WeiWei's "Reviewed-by" tag
+
+v13 updates:
+- Fix tail agnostic for vext_ldst_us. The function operates on input
+  parameter 'evl' rather than 'env->vl'.
+- Fix tail elements for vector segment load / store instructions
+  A vector segment load / store instruction may contain fractional
+  lmul with nf * lmul > 1. The rest of the elements in the last
+  register should be treated as tail elements.
+- Fix tail agnostic length for instructions with mask destination
+  register. Instructions with mask destination register should have
+  'vlen - vl' tail elements.
+
+v14 updates:
+- Pass lmul information to into vector helper function.
+  `vext_get_total_elems` needs it.
+
+v15 updates:
+- Rebase to latest `master`
+- Tag Alistair as Acked by for commit 04 ~ 14
+- Tag Alistair as Acked by for commit 15
+
+v16 updates:
+- Fix bug, when encountering situation when lmul < 0 and vl_eq_vlmax,
+  the original version will override on `vd` but the computation will
+  override again, meaning the tail elements will not be set correctly.
+  Now, we don't use TCG functions if we are trying to simulate all 1s
+  for agnostic and use vector helpers instead.
+
+v17 updates:
+- Add "Prune access_type parameter" commit to cleanup vector load/
+  store functions. Then add parameter `is_load` in vector helper
+  functions to enable vta behavior in the commit for adding vta on
+  vector load/store functions.
+
+v18 updates:
+- Don't use `is_load` parameter in vector helper. Don't let vta pass
+   through in `trans_rvv.inc`
+
+eopXD (16):
+  target/riscv: rvv: Prune redundant ESZ, DSZ parameter passed
+  target/riscv: rvv: Prune redundant access_type parameter passed
+  target/riscv: rvv: Rename ambiguous esz
+  target/riscv: rvv: Early exit when vstart >= vl
+  target/riscv: rvv: Add tail agnostic for vv instructions
+  target/riscv: rvv: Add tail agnostic for vector load / store
+    instructions
+  target/riscv: rvv: Add tail agnostic for vx, vvm, vxm instructions
+  target/riscv: rvv: Add tail agnostic for vector integer shift
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer comparison
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector integer merge and move
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector fix-point arithmetic
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector floating-point
+    instructions
+  target/riscv: rvv: Add tail agnostic for vector reduction instructions
+  target/riscv: rvv: Add tail agnostic for vector mask instructions
+  target/riscv: rvv: Add tail agnostic for vector permutation
+    instructions
+  target/riscv: rvv: Add option 'rvv_ta_all_1s' to enable optional tail
+    agnostic behavior
+
+ target/riscv/cpu.c                      |    1 +
+ target/riscv/cpu.h                      |    2 +
+ target/riscv/cpu_helper.c               |    2 +
+ target/riscv/insn_trans/trans_rvv.c.inc |   94 +-
+ target/riscv/internals.h                |    6 +-
+ target/riscv/translate.c                |    4 +
+ target/riscv/vector_helper.c            | 1587 ++++++++++++++---------
+ 7 files changed, 1053 insertions(+), 643 deletions(-)
+
+-- 
+2.34.2
 
