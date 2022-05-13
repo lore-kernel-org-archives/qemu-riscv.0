@@ -1,73 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npF35-0004I2-2Q
-	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 16:04:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50426)
+	id 1npKAR-0005oL-MP
+	for mharc-qemu-riscv@gnu.org; Thu, 12 May 2022 21:32:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38340)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dylan@rivosinc.com>)
- id 1npDUE-0001Xt-6m
- for qemu-riscv@nongnu.org; Thu, 12 May 2022 14:24:30 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:33460)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dylan@rivosinc.com>)
- id 1npDUC-0006IU-BE
- for qemu-riscv@nongnu.org; Thu, 12 May 2022 14:24:29 -0400
-Received: by mail-pl1-x629.google.com with SMTP id d17so5749790plg.0
- for <qemu-riscv@nongnu.org>; Thu, 12 May 2022 11:24:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=avYUf2/iWu4OFYZWWIgFyzsfV2T6GMlWlHPCDUoW2N8=;
- b=AJmRq0o61BzXjSljMFuauSYqJNYCJbZgXXksDwXaOZrL9/E32bENDiTC2jr6NZR8vZ
- /jQ3BKOifD66CA1zGbjaiRwnHhgmfn7fcQZyKLy8kFQKzh5UglR+vXi6DA/WPZxf0Jt8
- hqh5YxkIyNcbCumloF8rAFK1NtjQveXXS0Sint2wIRvt8rLvlYv4p3XZRBnfD/Aw8lnR
- g/5ZNd/qGGaMOSTEw8l/dPm90C4SwuCKLENvjQrX8p0UlrJxZUIU23lqIBJZ2/9veHCW
- 1LUIYBQ14O0KCcFK7e5oa7QK46ftwKQishQGYtcTSiH4fh/QSeHx4ALHgx4UBWYSvr1T
- o2JA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=avYUf2/iWu4OFYZWWIgFyzsfV2T6GMlWlHPCDUoW2N8=;
- b=ZunLN4C2NdP9DWuoPNAZcx2wSFg8unJYPkW/oS1k/DySozXrEW5Stda4dbCBVccsTk
- AwRVJIzo2PF/AaIYzTgC1X6W2aaWWdOd86q8j9AwQ6yB5pc3vsuJnpF8aqet1OJXpHD6
- w9X7VeHDzAjJG3QMRjIF1DevkiN+zRxeLniHeJQOQh6ur3LnDny6s/zCLlr1t99kVuzA
- 2ryrlW7ScnfjBJCTqMxrDWHbxnVGA0A097gR4jiQC3ms4JVvEdzttj9gbKVlbpeJr0W0
- 6qPUf5aytB6srGmko9Hngc8N7vUCABjbOTG8Rqz9pbHTSV7wPA8UdxTlRrdsmWwUNzdZ
- y1KQ==
-X-Gm-Message-State: AOAM530CJQiR8Qt8Y5XhlZ9VUVOrWqTImPSIwyPmEmcprdwjbXefohxA
- 9NDU4EkxhV/SIif01YeSyiofdO+tznoVWHMw
-X-Google-Smtp-Source: ABdhPJzeZDPtzZklwtENkpPiFLB2bZgnLPnycMpf/tZABBVtRWmRDIIT82xOskfPnsVoGw8Rcnq4lg==
-X-Received: by 2002:a17:902:f612:b0:14c:e978:f99e with SMTP id
- n18-20020a170902f61200b0014ce978f99emr1115781plg.23.1652379866134; 
- Thu, 12 May 2022 11:24:26 -0700 (PDT)
-Received: from localhost.localdomain ([12.3.194.138])
- by smtp.gmail.com with ESMTPSA id
- x2-20020a170902820200b0015e8d4eb298sm193575pln.226.2022.05.12.11.24.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 May 2022 11:24:25 -0700 (PDT)
-From: Dylan Reid <dylan@rivosinc.com>
-X-Google-Original-From: Dylan Reid <dgreid@rivosinc.com>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, Dylan Reid <dgreid@rivosinc.com>
-Subject: [PATCH] hw/riscv: virt: Avoid double FDT platform node
-Date: Thu, 12 May 2022 18:21:03 +0000
-Message-Id: <20220512182103.408627-1-dgreid@rivosinc.com>
-X-Mailer: git-send-email 2.30.2
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1npKAQ-0005o5-4e; Thu, 12 May 2022 21:32:30 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:53916 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1npKAN-00030s-6t; Thu, 12 May 2022 21:32:29 -0400
+Received: from [192.168.3.6] (unknown [180.156.147.178])
+ by APP-03 (Coremail) with SMTP id rQCowAAH6XUgtX1iEsUNBg--.33491S2;
+ Fri, 13 May 2022 09:32:18 +0800 (CST)
+Subject: Re: [PATCH qemu v3 00/10] Add mask agnostic behavior for rvv
+ instructions
+To: ~eopxd <yueh.ting.chen@gmail.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
+ WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+References: <165234571195.20102.85010942779919381-0@git.sr.ht>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <5672f74a-dd86-6602-59ce-a688571631ce@iscas.ac.cn>
+Date: Fri, 13 May 2022 09:32:16 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
+In-Reply-To: <165234571195.20102.85010942779919381-0@git.sr.ht>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=dylan@rivosinc.com; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Language: en-US
+X-CM-TRANSID: rQCowAAH6XUgtX1iEsUNBg--.33491S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxJw4UKFyDGFW5Jw1DXF1xuFg_yoW5Gw4fpF
+ 40k3ZxJayrXFZrWw1Sgr48Cry5KFZ3Gr4rCFn7A34rt3y5t397tF1vy34j9FsrJF15ury2
+ 93Wjyr17ZanxAa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUkC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8JV
+ W8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+ W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
+ IcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
+ v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
+ c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
+ 0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_
+ Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UU
+ UUU
+X-Originating-IP: [180.156.147.178]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 12 May 2022 16:04:33 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,42 +70,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2022 18:24:30 -0000
+X-List-Received-Date: Fri, 13 May 2022 01:32:30 -0000
 
-When starting the virt machine with `-machine virt,aia=aplic-imsic`,
-both the imsic and aplic init code will add platform fdt nodes by
-calling `platform_bus_add_all_fdt_nodes`. This leads to an error at
-startup:
-```
-qemu_fdt_add_subnode: Failed to create subnode /platform@4000000: FDT_ERR_EXISTS
-```
 
-The call from `create_fdt_imsic` is not needed as an imsic is currently
-always combined with an aplic that will create the nodes.
+在 2022/5/12 下午4:55, ~eopxd 写道:
+> According to v-spec, mask agnostic behavior can be either kept as
+> undisturbed or set elements' bits to all 1s. To distinguish the
+> difference of mask policies, QEMU should be able to simulate the mask
+> agnostic behavior as "set mask elements' bits to all 1s".
+>
+> There are multiple possibility for agnostic elements according to
+> v-spec. The main intent of this patch-set tries to add option that
+> can distinguish between mask policies. Setting agnostic elements to
+> all 1s allows QEMU to express this.
+>
+> The following instructions that are always unmasked and not affected:
+>
+> - Vector add-with-carry and subtract-with-borrow instructions
+> - Vector merge and move instructions
+> - Vector reduction instructions
+> - Vector mask-register logical instructions
+> - `vcompress`
+>
+> This patch set is based on v17 of patch set "Add tail agnostic behavior
+> for
+> rvv instructions".
+> Based on: <165234397852.32492.1203149738524050090-0@git.sr.ht>
+>
+> v2 updates:
+> - Rebase upon changes of the tail agnostic patch-set
+> - Minor change for vector load/store instructions
+>
+> v3 updates:
+> - Rebase upon changes of the tail agnostic patch-set
+> - Fix coding style, add missing space
+> - Trigger `vma` when encountering vector load instructions and not in
+>    vector stores
 
-Fixes: 3029fab64309 ("hw/riscv: virt: Add support for generating platform FDT entries")
-Signed-off-by: Dylan Reid <dgreid@rivosinc.com>
----
- hw/riscv/virt.c | 5 -----
- 1 file changed, 5 deletions(-)
+Instead of add is_load in the helper functions, maybe it's better to 
+just not set vta and vma for
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 3326f4db96..d625f776a6 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -561,11 +561,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
-     }
-     qemu_fdt_setprop_cell(mc->fdt, imsic_name, "phandle", *msi_m_phandle);
- 
--    platform_bus_add_all_fdt_nodes(mc->fdt, imsic_name,
--                                   memmap[VIRT_PLATFORM_BUS].base,
--                                   memmap[VIRT_PLATFORM_BUS].size,
--                                   VIRT_PLATFORM_BUS_IRQ);
--
-     g_free(imsic_name);
- 
-     /* S-level IMSIC node */
--- 
-2.30.2
+vector store instructions in trans_rvv.
+
+Regards,
+
+Weiwei Li
+
+>
+> Yueh-Ting (eop) Chen (9):
+>    target/riscv: rvv: Add mask agnostic for vv instructions
+>    target/riscv: rvv: Add mask agnostic for vector load / store
+>      instructions
+>    target/riscv: rvv: Add mask agnostic for vx instructions
+>    target/riscv: rvv: Add mask agnostic for vector integer shift
+>      instructions
+>    target/riscv: rvv: Add mask agnostic for vector integer comparison
+>      instructions
+>    target/riscv: rvv: Add mask agnostic for vector fix-point arithmetic
+>      instructions
+>    target/riscv: rvv: Add mask agnostic for vector floating-point
+>      instructions
+>    target/riscv: rvv: Add mask agnostic for vector mask instructions
+>    target/riscv: rvv: Add mask agnostic for vector permutation
+>      instructions
+>
+> eopXD (1):
+>    target/riscv: rvv: Add option 'rvv_ma_all_1s' to enable optional mask
+>      agnostic behavior
+>
+>   target/riscv/cpu.c                      |   1 +
+>   target/riscv/cpu.h                      |   2 +
+>   target/riscv/cpu_helper.c               |   2 +
+>   target/riscv/insn_trans/trans_rvv.c.inc |  32 +++++
+>   target/riscv/internals.h                |   5 +-
+>   target/riscv/translate.c                |   2 +
+>   target/riscv/vector_helper.c            | 152 ++++++++++++++++++++----
+>   7 files changed, 171 insertions(+), 25 deletions(-)
+>
 
 
