@@ -1,38 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npRsM-00056t-0f
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:46:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50024)
+	id 1npRsN-0005A8-9T
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:46:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50038)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRsK-00051p-10; Fri, 13 May 2022 05:46:20 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:53432
- helo=mail-sender-0.a4lg.com)
+ id 1npRsL-00055G-Cb; Fri, 13 May 2022 05:46:21 -0400
+Received: from mail-sender-0.a4lg.com
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48250)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRsF-0004mO-Vl; Fri, 13 May 2022 05:46:19 -0400
+ id 1npRsJ-0004oC-Nd; Fri, 13 May 2022 05:46:21 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 80FFE300089;
- Fri, 13 May 2022 09:46:08 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 0F18130008A;
+ Fri, 13 May 2022 09:46:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652435168;
- bh=B7LTSaaTu/21PNbpmGJXTyanogzoM29EKfKxS3/w1Zc=;
- h=From:To:Cc:Subject:Date:Message-Id:Mime-Version:
- Content-Transfer-Encoding;
- b=W0RUHEdtJUqFxYHpe5zkIhwf+NqfDReBAGz5RtGUOwt1R03dSn8FPC3Z8YJzSABBv
- xCAG/IjJxSM/rD42+RUavBETZQMHNfCqxFfoWRIT0StWcAN3PjwR9kHfJ5cjNXWMlI
- kGs0CCPCkTAWkzzICUAqhBYbf5eLvm4gwubm55YU=
+ s=2017s01; t=1652435174;
+ bh=xe4ykRzpIkj6zsl5EFwXnj15ONcm5Zf0n3PT53Jqnso=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ Mime-Version:Content-Transfer-Encoding;
+ b=nlWVnwP73/NeYR9JZBboA4NtSd9Lws7nPRNM16mhgFGkYEbtuRq8v8WTj4HWSck4P
+ txrzbtTsrKqDS5sSAPD3bFfejD9CxZG6pk7HqdsSd9eATdWAyJ4QnhgLcMegZv5lCZ
+ xRS1xTRCuA1lIew+R0O3rv+YYFVIthnE4AvyGqoM=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 0/5] target/riscv: Enhanced ISA extension checks
-Date: Fri, 13 May 2022 18:45:45 +0900
-Message-Id: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH 1/5] target/riscv: Fix "G" extension expansion typing
+Date: Fri, 13 May 2022 18:45:46 +0900
+Message-Id: <07e4f9011587dc8023b616477ecdf02282fe6232.1652435138.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=153.120.152.154;
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
@@ -52,90 +54,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2022 09:46:20 -0000
+X-List-Received-Date: Fri, 13 May 2022 09:46:21 -0000
 
-Hello,
+Because ext_? members are in bool type, operator `&&' should be used
+instead of `&'.
 
-This is another patchset for RISC-V ISA extension / feature handling.
+Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+---
+ target/riscv/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Aside from coding style fix / refactoring patch (PATCH 1 and 5), this
-patchset contains two changes:
-
-
-
-1. "G" extension handling
-
-1.A. "G" extension expansion (PATCH 3)
-
-On ISA version 20190608 or later, "G" expands to "IMAFD_Zicsr_Zifencei",
-not just "IMAFD" (this is because "Zicsr" and "Zifencei" extensions are
-splitted from "I").  Because both "Zicsr" and "Zifencei" are enabled by
-default, it should be safe to change "G" extension expansion.
-
-1.B. Disable "G" by default (PATCH 2)
-
-This seems quite odd but I have a good reason.  While "G" is enabled by
-default, all "I", "M", "A", "F", "D", "Zicsr" and "Zifencei" are also
-enabled by default, making default "G" expansion useless.
-
-There's more.  If we want to change detailed configuration of a RV32/RV64
-CPU and want to disable some, for example, "F" and "D", we must also
-disable "G".  This is obviously bloat.
-
-This doesn't work:
-    -cpu rv64,f=off,d=off
-
-This does work (but bloat):
-    -cpu rv64,g=off,f=off,d=off
-
-Disabling "G" suppresses such problem and mostly harmless, too.
-
-
-
-2. Floating point arithmetic consistency (PATCH 4)
-
-With -cpu option, we can configure details of RISC-V CPU emulated by QEMU.
-However, we can set some invalid combinations that would make FP arithmetic
-effectively unusable (and invalid on RISC-V ISA specification).
-
--   F requires Zicsr
--   Zfinx requires Zicsr
--   Zfh/Zfhmin require F
--   D requires F
--   V requires D
-
-Reproducing this kind of problem requires manually disabling certain
-extensions (because all "Zicsr", "F" and "D" are enabled by default).  So,
-I consider that just making an error message (when unsatisfied) should be
-enough, not implying related extensions like "zk*" properties.
-
-
-Note that this checking only works on any, rv32 and rv64.  On other CPUs
-(for example, sifive-u54), it sets nonzero `misa' value on corresponding
-`set_misa' call (c.f. in rv64_sifive_u_cpu_init in target/riscv/cpu.c) and
-consistency checks are skipped (because nonzero `misa' value is set prior
-to RISC-V CPU realization process).
-
-I think we generally use generic "rv32" or "rv64" on heavy customizing so I
-don't think this is not a big problem.  Still, we could fix this later
-(e.g. by setting properties on CPU init function or by checking some
-consistency problems even if previously-set `misa' is nonzero).
-
-
-
-
-Tsukasa OI (5):
-  target/riscv: Fix "G" extension expansion typing
-  target/riscv: Disable "G" by default
-  target/riscv: Change "G" expansion
-  target/riscv: FP extension requirements
-  target/riscv: Move/refactor ISA extension checks
-
- target/riscv/cpu.c | 62 +++++++++++++++++++++++++++++++++-------------
- 1 file changed, 45 insertions(+), 17 deletions(-)
-
-
-base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ccacdee215..00bf26ec8b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -596,8 +596,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+ 
+-        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+-                                cpu->cfg.ext_a & cpu->cfg.ext_f &
++        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
++                                cpu->cfg.ext_a && cpu->cfg.ext_f &&
+                                 cpu->cfg.ext_d)) {
+             warn_report("Setting G will also set IMAFD");
+             cpu->cfg.ext_i = true;
 -- 
 2.34.1
 
