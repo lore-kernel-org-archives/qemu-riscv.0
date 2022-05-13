@@ -1,40 +1,40 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npRsb-0005oz-RK
-	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:46:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50122)
+	id 1npRsh-000672-0K
+	for mharc-qemu-riscv@gnu.org; Fri, 13 May 2022 05:46:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50172)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRsY-0005j9-Nw; Fri, 13 May 2022 05:46:34 -0400
-Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:48278)
+ id 1npRse-00060W-Mn; Fri, 13 May 2022 05:46:40 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:53432
+ helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1npRsX-0004xe-2m; Fri, 13 May 2022 05:46:34 -0400
+ id 1npRsc-0004zq-TC; Fri, 13 May 2022 05:46:40 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 96B2D300089;
- Fri, 13 May 2022 09:46:30 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 2D951300089;
+ Fri, 13 May 2022 09:46:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652435190;
- bh=aZvKqxv5fJFhTtqqop7Yca1WrEI6UPKDIqbgFaOlBqc=;
+ s=2017s01; t=1652435196;
+ bh=TLnUEwKN/kexjxeay7Y8S/KC+ywqS291/qPkVp5ueH8=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=OV7Efep83oZ3K31A/MEZZrT4OjommQ2K0LWt1C/hVijyTqn4r+WUvctKnndWdk7Yf
- nXy6ooWgtfmtqLux5YuN5lFGqREcKMTv33QMElUIVzSyfu/ALlHqwQhlSs0Aioh53c
- mG+vddZ2C/M45j7VwfCpTprkL9Gyy1KmuFTGzz/I=
+ b=sCL2ElUeiHtcWJDk1t0g8LwK3LKcEq3bZw6kaG7wNy05E00RXUDhaE62+y0oNxz8I
+ RrwY7tUlUoaZmlcaQ4tZeXtWn6l8feHMyaZNqVMauTkmYrGjb7OmLHKcKGmUZofU8C
+ 2UPsJ6sSWBkc6j3UWSeUGY6/+kXyLWCjr+FTuMTM=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 4/5] target/riscv: FP extension requirements
-Date: Fri, 13 May 2022 18:45:49 +0900
-Message-Id: <71a2459e99533ed8d548e79253100ed40da98b2d.1652435138.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH 5/5] target/riscv: Move/refactor ISA extension checks
+Date: Fri, 13 May 2022 18:45:50 +0900
+Message-Id: <f409b6e9d8930ca9687b3ea1b08cc2eaa92e42ac.1652435138.git.research_trasio@irq.a4lg.com>
 In-Reply-To: <cover.1652435138.git.research_trasio@irq.a4lg.com>
 References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
+Received-SPF: pass client-ip=153.120.152.154;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
@@ -54,64 +54,73 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2022 09:46:36 -0000
+X-List-Received-Date: Fri, 13 May 2022 09:46:41 -0000
 
-QEMU allowed inconsistent configurations that made floating point
-arithmetic effectively unusable.
-
-This commit adds certain checks for consistent FP arithmetic:
-
--   F requires Zicsr
--   Zfinx requires Zicsr
--   Zfh/Zfhmin require F
--   D requires F
--   V requires D
-
-Because F/D/Zicsr are enabled by default (and an error will not occur unless
-we manually disable one or more of prerequisites), this commit just enforces
-the user to give consistent combinations.
+We should separate "check" and "configure" steps as possible.
+This commit separates both steps except vector/Zfinx-related checks.
 
 Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 ---
- target/riscv/cpu.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ target/riscv/cpu.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 0854ca9103..5371b0fd17 100644
+index 5371b0fd17..f654a6727f 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -610,6 +610,31 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             cpu->cfg.ext_ifencei = true;
+@@ -635,11 +635,23 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
          }
  
-+        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-+            error_setg(errp, "F extension requires Zicsr");
++        if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
++            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
 +            return;
 +        }
 +
-+        if (cpu->cfg.ext_zfinx && !cpu->cfg.ext_icsr) {
-+            error_setg(errp, "Zfinx extension requires Zicsr");
-+            return;
-+        }
-+
-+        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-+            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-+            return;
-+        }
-+
-+        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-+            error_setg(errp, "D extension requires F extension");
-+            return;
-+        }
-+
-+        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-+            error_setg(errp, "V extension requires D extension");
-+            return;
-+        }
-+
++        /* Set the ISA extensions, checks should have happened above */
          if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
              cpu->cfg.ext_zhinxmin) {
              cpu->cfg.ext_zfinx = true;
+         }
+ 
++        if (cpu->cfg.ext_zfinx && !cpu->cfg.ext_f) {
++            error_setg(errp,
++                    "Zfinx cannot be supported together with F extension");
++            return;
++        }
++
+         if (cpu->cfg.ext_zk) {
+             cpu->cfg.ext_zkn = true;
+             cpu->cfg.ext_zkr = true;
+@@ -663,7 +675,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             cpu->cfg.ext_zksh = true;
+         }
+ 
+-        /* Set the ISA extensions, checks should have happened above */
+         if (cpu->cfg.ext_i) {
+             ext |= RVI;
+         }
+@@ -734,20 +745,9 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             }
+             set_vext_version(env, vext_version);
+         }
+-        if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
+-            error_setg(errp, "Zve32f/Zve64f extension depends upon RVF.");
+-            return;
+-        }
+         if (cpu->cfg.ext_j) {
+             ext |= RVJ;
+         }
+-        if (cpu->cfg.ext_zfinx && ((ext & (RVF | RVD)) || cpu->cfg.ext_zfh ||
+-                                   cpu->cfg.ext_zfhmin)) {
+-            error_setg(errp,
+-                    "'Zfinx' cannot be supported together with 'F', 'D', 'Zfh',"
+-                    " 'Zfhmin'");
+-            return;
+-        }
+ 
+         set_misa(env, env->misa_mxl, ext);
+     }
 -- 
 2.34.1
 
