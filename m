@@ -1,22 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nptYH-0007lB-SH
-	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 11:19:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45308)
+	id 1nptYI-0007m2-0o
+	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 11:19:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45366)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nptYF-0007gJ-I5; Sat, 14 May 2022 11:19:27 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:45662)
+ id 1nptYG-0007gv-MY; Sat, 14 May 2022 11:19:28 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:45666)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1nptYD-0004vJ-N6; Sat, 14 May 2022 11:19:27 -0400
+ id 1nptYD-0004vU-R6; Sat, 14 May 2022 11:19:28 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 5B72511EED7;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 9C61D11EF57;
  Sat, 14 May 2022 15:19:19 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v5 01/10] target/riscv: rvv: Add mask agnostic for vv
+Subject: [PATCH qemu v5 03/10] target/riscv: rvv: Add mask agnostic for vx
  instructions
-Message-ID: <165254155887.25600.7755640218424566161-1@git.sr.ht>
+Message-ID: <165254155887.25600.7755640218424566161-3@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165254155887.25600.7755640218424566161-0@git.sr.ht>
@@ -48,159 +48,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Sat, 14 May 2022 15:19:27 -0000
-X-Original-Date: Thu, 17 Mar 2022 00:26:23 -0700
-X-List-Received-Date: Sat, 14 May 2022 15:19:27 -0000
+Date: Sat, 14 May 2022 15:19:29 -0000
+X-Original-Date: Thu, 17 Mar 2022 01:38:39 -0700
+X-List-Received-Date: Sat, 14 May 2022 15:19:29 -0000
 
 From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
-
-According to v-spec, mask agnostic behavior can be either kept as
-undisturbed or set elements' bits to all 1s. To distinguish the
-difference of mask policies, QEMU should be able to simulate the mask
-agnostic behavior as "set mask elements' bits to all 1s".
-
-There are multiple possibility for agnostic elements according to
-v-spec. The main intent of this patch-set tries to add option that
-can distinguish between mask policies. Setting agnostic elements to
-all 1s allows QEMU to express this.
-
-This is the first commit regarding the optional mask agnostic
-behavior. Follow-up commits will add this optional behavior
-for all rvv instructions.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
 ---
- target/riscv/cpu.h                      | 2 ++
- target/riscv/cpu_helper.c               | 2 ++
- target/riscv/insn_trans/trans_rvv.c.inc | 3 +++
- target/riscv/internals.h                | 5 +++--
- target/riscv/translate.c                | 2 ++
- target/riscv/vector_helper.c            | 8 ++++++++
- 6 files changed, 20 insertions(+), 2 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 2 ++
+ target/riscv/vector_helper.c            | 3 +++
+ 2 files changed, 5 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 61552408b5..4bce3798fc 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -406,6 +406,7 @@ struct RISCVCPUConfig {
-     bool ext_zve32f;
-     bool ext_zve64f;
-     bool rvv_ta_all_1s;
-+    bool rvv_ma_all_1s;
-=20
-     uint32_t mvendorid;
-     uint64_t marchid;
-@@ -559,6 +560,7 @@ FIELD(TB_FLAGS, XL, 20, 2)
- FIELD(TB_FLAGS, PM_MASK_ENABLED, 22, 1)
- FIELD(TB_FLAGS, PM_BASE_ENABLED, 23, 1)
- FIELD(TB_FLAGS, VTA, 24, 1)
-+FIELD(TB_FLAGS, VMA, 25, 1)
-=20
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index c0641b63cc..ba66b70bd1 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -67,6 +67,8 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, target_ulong =
-*pc,
-         flags =3D FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-         flags =3D FIELD_DP32(flags, TB_FLAGS, VTA,
-                     FIELD_EX64(env->vtype, VTYPE, VTA));
-+        flags =3D FIELD_DP32(flags, TB_FLAGS, VMA,
-+                    FIELD_EX64(env->vtype, VTYPE, VMA));
-     } else {
-         flags =3D FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-     }
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
 s/trans_rvv.c.inc
-index 6e8ed7694c..df5a892150 100644
+index a6daf20714..a0ffb86974 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1243,6 +1243,7 @@ do_opivv_gvec(DisasContext *s, arg_rmrr *a, GVecGen3Fn =
-*gvec_fn,
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-         data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
-                            cpu_env, s->cfg_ptr->vlen / 8,
-@@ -1541,6 +1542,7 @@ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-         data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-@@ -1623,6 +1625,7 @@ static bool do_opiwv_widen(DisasContext *s, arg_rmrr *a,
-         data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-         data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-+        data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1),
-                            vreg_ofs(s, a->rs2),
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 193ce57a6d..5620fbffb6 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -26,8 +26,9 @@ FIELD(VDATA, VM, 0, 1)
- FIELD(VDATA, LMUL, 1, 3)
- FIELD(VDATA, VTA, 4, 1)
- FIELD(VDATA, VTA_ALL_1S, 5, 1)
--FIELD(VDATA, NF, 6, 4)
--FIELD(VDATA, WD, 6, 1)
-+FIELD(VDATA, VMA, 6, 1)
-+FIELD(VDATA, NF, 7, 4)
-+FIELD(VDATA, WD, 7, 1)
+@@ -1297,6 +1297,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint=
+32_t vs2, uint32_t vm,
+     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+                                       s->cfg_ptr->vlen / 8, data));
 =20
- /* float point classify helpers */
- target_ulong fclass_h(uint64_t frs1);
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 384ffcc0fa..c7e841da1c 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -95,6 +95,7 @@ typedef struct DisasContext {
-     int8_t lmul;
-     uint8_t sew;
-     uint8_t vta;
-+    uint8_t vma;
-     bool cfg_vta_all_1s;
-     target_ulong vstart;
-     bool vl_eq_vlmax;
-@@ -1094,6 +1095,7 @@ static void riscv_tr_init_disas_context(DisasContextBas=
-e *dcbase, CPUState *cs)
-     ctx->sew =3D FIELD_EX32(tb_flags, TB_FLAGS, SEW);
-     ctx->lmul =3D sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
-     ctx->vta =3D FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_=
-1s;
-+    ctx->vma =3D FIELD_EX32(tb_flags, TB_FLAGS, VMA) && cpu->cfg.rvv_ma_all_=
-1s;
-     ctx->cfg_vta_all_1s =3D cpu->cfg.rvv_ta_all_1s;
-     ctx->vstart =3D env->vstart;
-     ctx->vl_eq_vlmax =3D FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+@@ -1464,6 +1465,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint=
+32_t vs2, uint32_t vm,
+     data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
+     data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     data =3D FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++    data =3D FIELD_DP32(data, VDATA, VMA, s->vma);
+     desc =3D tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+                                       s->cfg_ptr->vlen / 8, data));
+=20
 diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 2afbac6e37..6c55d5a750 100644
+index 5d392d084e..7da3938905 100644
 --- a/target/riscv/vector_helper.c
 +++ b/target/riscv/vector_helper.c
-@@ -127,6 +127,11 @@ static inline uint32_t vext_vta(uint32_t desc)
-     return FIELD_EX32(simd_data(desc), VDATA, VTA);
- }
-=20
-+static inline uint32_t vext_vma(uint32_t desc)
-+{
-+    return FIELD_EX32(simd_data(desc), VDATA, VMA);
-+}
-+
- static inline uint32_t vext_vta_all_1s(uint32_t desc)
- {
-     return FIELD_EX32(simd_data(desc), VDATA, VTA_ALL_1S);
-@@ -811,10 +816,13 @@ static void do_vext_vv(void *vd, void *v0, void *vs1, v=
-oid *vs2,
+@@ -898,10 +898,13 @@ static void do_vext_vx(void *vd, void *v0, target_long =
+s1, void *vs2,
      uint32_t vl =3D env->vl;
      uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
      uint32_t vta =3D vext_vta(desc);
@@ -213,7 +103,7 @@ oid *vs2,
 +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
              continue;
          }
-         fn(vd, vs1, vs2, i);
+         fn(vd, s1, vs2, i);
 --=20
 2.34.2
 
