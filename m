@@ -1,69 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1npjc8-0003jd-Nm
-	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 00:42:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42668)
+	id 1nplHz-00077V-17
+	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 02:30:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58830)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1npjc7-0003j3-29
- for qemu-riscv@nongnu.org; Sat, 14 May 2022 00:42:47 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a]:38700)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1npjc1-0005HL-FP
- for qemu-riscv@nongnu.org; Sat, 14 May 2022 00:42:46 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 1-20020a05600c248100b00393fbf11a05so7899053wms.3
- for <qemu-riscv@nongnu.org>; Fri, 13 May 2022 21:42:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NGa8/lAVruqRrohx6drAhUywLz78+FcuUKt7Zac+oMk=;
- b=F+bi5uioQ6NBAXVZTOmxugE7cDf0OwPBZz1g7eeLZcGoEcK0VWl1a8ED3nxcP6styd
- mpXkznjLdFYaUBSXl2N6HH6tfpdtj4SBO1RtGFj5o7/8LGAyCJPijVmiltsgG1RE9Yh2
- LFR/d1IUbYugUbn6QrYZaxA4N6wqAXXl3sHqJRQRZ8IxYSVja9+9/ITmbeczsiFBwwtG
- KXzLIBLU6hhG2iXDU/RP+IpeQz2q8f8NDhqEbV0nCxKSUAUGoAyEkKoAjV3vPn4tyOny
- MIVxvGPAKe04FP0/BO3+80Nv1wPxXz4s1VAjKehbdEJlAR7k/JVqjuv0aOLam/bK6XoA
- qK+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NGa8/lAVruqRrohx6drAhUywLz78+FcuUKt7Zac+oMk=;
- b=IflQ+zFdJfgUXB2xwBo7VkfOfAIOXOnTMoZamNNL/97FYtGpLBYUxkc+1dt9Q5FUSx
- ulIzL91OhG5phO/pU9pl0/IyU/dyVJAdwVv7g2x1Q6GPuGBfqhKYcpYjcNtm8qj2i7id
- /PAwknbSb9o8xfqNIPUNcaDgzDbTEY4Yv9yL9WNMfqr6NCw3g3YMXObW+kTBbQQrKUKO
- ttYT4/rq/taaJZrqGj6LUHzeBipjX7Fydw+478WhAj2o4HkeFGMvXxhd2lgmj2X0TeZL
- aFR21+qRp7GGdTJEx+l8AZrz/xBayTylBBu/q0SCi06yPa6B5b3MiVU25cLM2fv3o9zo
- Z8TQ==
-X-Gm-Message-State: AOAM53318exhITL9HEcgW2M1K3P5oFvLcK76jycYFHugRaynPMAJE5Xg
- UciOrMsc5pW/zj5QqMYDqK/M3RgWLi+Hl+SOZ+L/Yw==
-X-Google-Smtp-Source: ABdhPJyYSqWSgsHWVnO0WFpF+Bgz/YLH/pg3TX49qJCNL7H+s16mPOHfV491YoowaIr4jZVLfaWm64knCBtWQyLHA1M=
-X-Received: by 2002:a05:600c:5113:b0:394:800c:4c36 with SMTP id
- o19-20020a05600c511300b00394800c4c36mr7412564wms.93.1652503358874; Fri, 13
- May 2022 21:42:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220513221458.1192933-1-atishp@rivosinc.com>
-In-Reply-To: <20220513221458.1192933-1-atishp@rivosinc.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Sat, 14 May 2022 10:12:27 +0530
-Message-ID: <CAAhSdy1pJXrxgsCgUFnVZenSXLpcf8CPSS7x39nv1-StZLgRKA@mail.gmail.com>
-Subject: Re: [PATCH] hw/intc: Pass correct hartid while updating mtimecmp
-To: Atish Patra <atishp@rivosinc.com>
-Cc: QEMU Developers <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, dylan@rivosinc.com,
- Bin Meng <bmeng.cn@gmail.com>, 
- Frank Chang <frank.chang@sifive.com>, Jim Shu <jim.shu@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::32a;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1nplHw-000766-R3; Sat, 14 May 2022 02:30:05 -0400
+Received: from mail-sender-0.a4lg.com
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48374)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1nplHu-0007fA-AM; Sat, 14 May 2022 02:30:04 -0400
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id DAA4B300089;
+ Sat, 14 May 2022 06:29:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
+ s=2017s01; t=1652509791;
+ bh=/P19jFyyWx9h+oEi/y9EZljCHmTyp1k3AEue49z7HHs=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ Mime-Version:Content-Transfer-Encoding;
+ b=U6MetrtygF/Jw6TwmpHAtbLNHtFR02lEM4Bu8OmKiZsFw7VnKgp1BYKYt22TFQB5O
+ i7vZ3tVaVlfU/aADIZesQVmgWP3imawp3U56bhOymBqldoMLnd/GIsVu4MmlTqT6VB
+ t50Yh7lmBUNDjqB8be5i6XcgIs0cB5+ikJuIO7c4=
+From: Tsukasa OI <research_trasio@irq.a4lg.com>
+To: Tsukasa OI <research_trasio@irq.a4lg.com>,
+ Alistair Francis <alistair23@gmail.com>,
+ Frank Chang <frank.chang@sifive.com>
+Cc: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Subject: [PATCH v2 0/2] hw/riscv: Make CPU config error handling generous
+Date: Sat, 14 May 2022 15:29:39 +0900
+Message-Id: <cover.1652509778.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
+ envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,45 +54,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2022 04:42:47 -0000
+X-List-Received-Date: Sat, 14 May 2022 06:30:06 -0000
 
-On Sat, May 14, 2022 at 3:45 AM Atish Patra <atishp@rivosinc.com> wrote:
->
-> timecmp update function should be invoked with hartid for which
-> timecmp is being updated. The following patch passes the incorrect
-> hartid to the update function.
->
-> Fixes: e2f01f3c2e13 ("hw/intc: Make RISC-V ACLINT mtime MMIO register writable")
->
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+c.f.
+<https://lists.gnu.org/archive/html/qemu-riscv/2022-05/msg00229.html>
 
-Looks good to me.
+This patchset is functionally equivalent to v1 but fixes commit titles.
 
-Reviewed-by: Anup Patel <anup@brainfault.org>
 
-Regards,
-Anup
 
-> ---
->  hw/intc/riscv_aclint.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> index 0412edc98257..e6bceceefdbc 100644
-> --- a/hw/intc/riscv_aclint.c
-> +++ b/hw/intc/riscv_aclint.c
-> @@ -233,7 +233,8 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
->                  continue;
->              }
->              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
-> -                                              i, env->timecmp);
-> +                                              mtimer->hartid_base + i,
-> +                                              env->timecmp);
->          }
->          return;
->      }
-> --
-> 2.25.1
->
->
+
+Tsukasa OI (2):
+  hw/riscv: Make CPU config error handling generous (virt/spike)
+  hw/riscv: Make CPU config error handling generous
+    (sifive_e/u/opentitan)
+
+ hw/riscv/opentitan.c | 2 +-
+ hw/riscv/sifive_e.c  | 2 +-
+ hw/riscv/sifive_u.c  | 4 ++--
+ hw/riscv/spike.c     | 2 +-
+ hw/riscv/virt.c      | 2 +-
+ 5 files changed, 6 insertions(+), 6 deletions(-)
+
+
+base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
+-- 
+2.34.1
+
 
