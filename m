@@ -1,37 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nplHz-00077V-17
-	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 02:30:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58830)
+	id 1nplI1-0007B1-Uw
+	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 02:30:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58866)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nplHw-000766-R3; Sat, 14 May 2022 02:30:05 -0400
+ id 1nplHy-000776-DH; Sat, 14 May 2022 02:30:06 -0400
 Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:48374)
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48394)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nplHu-0007fA-AM; Sat, 14 May 2022 02:30:04 -0400
+ id 1nplHw-0007gw-8m; Sat, 14 May 2022 02:30:06 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id DAA4B300089;
- Sat, 14 May 2022 06:29:50 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id EF16730008B;
+ Sat, 14 May 2022 06:30:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652509791;
- bh=/P19jFyyWx9h+oEi/y9EZljCHmTyp1k3AEue49z7HHs=;
+ s=2017s01; t=1652509802;
+ bh=lmO57I3TctRE+SEcYH+HjYkuRszpChWOaCw3cMLhwgo=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=U6MetrtygF/Jw6TwmpHAtbLNHtFR02lEM4Bu8OmKiZsFw7VnKgp1BYKYt22TFQB5O
- i7vZ3tVaVlfU/aADIZesQVmgWP3imawp3U56bhOymBqldoMLnd/GIsVu4MmlTqT6VB
- t50Yh7lmBUNDjqB8be5i6XcgIs0cB5+ikJuIO7c4=
+ b=CUDJkr7cQ115iXB6PjiZFEFTKe1enZUMJ7jU8Z6sG/pAGp0y5Qv+xjDV0EXQ2FYwD
+ 9m0be7RVRVkhulN1LEMzTpioJ9fFqgbbhpVXgD5VhWqW+GduzEUQmSxwMaTjXVno3Z
+ L8E+FaYtS+n4nNcDGo+UBWa2N3Puzdf1ogRgpybM=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 0/2] hw/riscv: Make CPU config error handling generous
-Date: Sat, 14 May 2022 15:29:39 +0900
-Message-Id: <cover.1652509778.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v2 2/2] hw/riscv: Make CPU config error handling generous
+ (sifive_e/u/opentitan)
+Date: Sat, 14 May 2022 15:29:41 +0900
+Message-Id: <09e61e58a7543da44bdb0e0f5368afc8903b4aa6.1652509778.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652509778.git.research_trasio@irq.a4lg.com>
 References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+ <cover.1652509778.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
@@ -54,30 +56,68 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 May 2022 06:30:06 -0000
+X-List-Received-Date: Sat, 14 May 2022 06:30:07 -0000
 
-c.f.
-<https://lists.gnu.org/archive/html/qemu-riscv/2022-05/msg00229.html>
+If specified CPU configuration is not valid, not just it prints error
+message, it aborts and generates core dumps (depends on the operating
+system).  This kind of error handling should be used only when a serious
+runtime error occurs.
 
-This patchset is functionally equivalent to v1 but fixes commit titles.
+This commit makes error handling on CPU configuration more generous on
+sifive_e/u and opentitan machines.  It now just prints error message and
+quits (without coredumps and aborts).
 
+This is separate from spike/virt because it involves different type
+(TYPE_RISCV_HART_ARRAY) on sifive_e/u and opentitan machines.
 
-
-
-Tsukasa OI (2):
-  hw/riscv: Make CPU config error handling generous (virt/spike)
-  hw/riscv: Make CPU config error handling generous
-    (sifive_e/u/opentitan)
-
+Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+---
  hw/riscv/opentitan.c | 2 +-
  hw/riscv/sifive_e.c  | 2 +-
  hw/riscv/sifive_u.c  | 4 ++--
- hw/riscv/spike.c     | 2 +-
- hw/riscv/virt.c      | 2 +-
- 5 files changed, 6 insertions(+), 6 deletions(-)
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-
-base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 2d401dcb23..4495a2c039 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -142,7 +142,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+     object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
+                             &error_abort);
+     object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
+-    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
++    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+ 
+     /* Boot ROM */
+     memory_region_init_rom(&s->rom, OBJECT(dev_soc), "riscv.lowrisc.ibex.rom",
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index dcb87b6cfd..d65d2fd869 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -195,7 +195,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
+ 
+     object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
+                             &error_abort);
+-    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
++    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+ 
+     /* Mask ROM */
+     memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index cc8c7637cb..a2495b5ae7 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -830,8 +830,8 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", s->cpu_type);
+     qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
+ 
+-    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+-    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_abort);
++    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_fatal);
++    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_fatal);
+     /*
+      * The cluster must be realized after the RISC-V hart array container,
+      * as the container's CPU object is only created on realize, and the
 -- 
 2.34.1
 
