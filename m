@@ -1,60 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqFNC-0002Xw-1c
-	for mharc-qemu-riscv@gnu.org; Sun, 15 May 2022 10:37:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37818)
+	id 1nqFV6-000809-J3
+	for mharc-qemu-riscv@gnu.org; Sun, 15 May 2022 10:45:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39042)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqFNA-0002XZ-O7; Sun, 15 May 2022 10:37:28 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:33634 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqFN8-00073j-4B; Sun, 15 May 2022 10:37:28 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAC3v4caEIFi+fgKBw--.6757S2;
- Sun, 15 May 2022 22:37:14 +0800 (CST)
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1nqFV1-0007zb-8b; Sun, 15 May 2022 10:45:36 -0400
+Received: from mail-sender-0.a4lg.com
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48490)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
+ id 1nqFUw-0000Wb-Ff; Sun, 15 May 2022 10:45:34 -0400
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 4F773300089;
+ Sun, 15 May 2022 14:45:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
+ s=2017s01; t=1652625920;
+ bh=MScmeQ+XDoeosLgefl1nfQ0+2TMf3yH5haXzW8IDIgA=;
+ h=Message-ID:Date:Mime-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ b=hmRzKsCx2pUqfMq7u1NmOg3StOwHm1Cn4GQdYV6s9mR/ugxR7hDGGPEOaK+39XlCc
+ 8w+ZmZAdAikXIRFuMoo1E+YZQep/zJzimkVE3aAWHD3xgQCfyCQsO+Wz+xmTUVdN+W
+ 6iHGp4U7fm+nOnAP+QkLTo0zON08MxTOW8mLqcXk=
+Message-ID: <cf6c14de-d373-a623-8e76-7dc18f621281@irq.a4lg.com>
+Date: Sun, 15 May 2022 23:45:18 +0900
+Mime-Version: 1.0
 Subject: Re: [PATCH v2 4/5] target/riscv: FP extension requirements
-To: Tsukasa OI <research_trasio@irq.a4lg.com>,
- Alistair Francis <alistair23@gmail.com>, Frank Chang <frank.chang@sifive.com>
+Content-Language: en-US
+To: Weiwei Li <liweiwei@iscas.ac.cn>, Alistair Francis
+ <alistair23@gmail.com>, Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
  <cover.1652583332.git.research_trasio@irq.a4lg.com>
  <00e7b1c6060dab32ac7d49813b1ca84d3eb63298.1652583332.git.research_trasio@irq.a4lg.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <be76b33b-4999-6760-cc78-2fb5109b50aa@iscas.ac.cn>
-Date: Sun, 15 May 2022 22:37:13 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <00e7b1c6060dab32ac7d49813b1ca84d3eb63298.1652583332.git.research_trasio@irq.a4lg.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ <be76b33b-4999-6760-cc78-2fb5109b50aa@iscas.ac.cn>
+From: Tsukasa OI <research_trasio@irq.a4lg.com>
+In-Reply-To: <be76b33b-4999-6760-cc78-2fb5109b50aa@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: qwCowAC3v4caEIFi+fgKBw--.6757S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7ZFW5AFyxArWrZFWDCr45ZFb_yoW8ur4Upr
- 4UGa90krWDJr17C3yfZF1jk3W5ur1ku3ySg39agw17WrW7Gr93Jw1vkw17WF4Fqws5Za1f
- uF1DWr1DursrCa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9014x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
- bIxvr21lc7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq
- 3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIda
- VFxhVjvjDU0xZFpf9x0JU2LvtUUUUU=
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
+ envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
+X-Spam_bar: --
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,81 +57,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2022 14:37:29 -0000
+X-List-Received-Date: Sun, 15 May 2022 14:45:39 -0000
 
+On 2022/05/15 23:37, Weiwei Li wrote:
+> 
+> 在 2022/5/15 上午10:56, Tsukasa OI 写道:
+>> QEMU allowed inconsistent configurations that made floating point
+>> arithmetic effectively unusable.
+>>
+>> This commit adds certain checks for consistent FP arithmetic:
+>>
+>> -   F requires Zicsr
+>> -   Zfinx requires Zicsr
+>> -   Zfh/Zfhmin require F
+>> -   D requires F
+>> -   V requires D
+> 
+> Why 'V requires D'? I know partial vector instructions require D, However,  I think they  just like c.fsd
+> 
+> instruction requires D, not 'C requires D' or 'D requires C'. Is there any rvv spec change I don't know?
 
-在 2022/5/15 上午10:56, Tsukasa OI 写道:
-> QEMU allowed inconsistent configurations that made floating point
-> arithmetic effectively unusable.
->
-> This commit adds certain checks for consistent FP arithmetic:
->
-> -   F requires Zicsr
-> -   Zfinx requires Zicsr
-> -   Zfh/Zfhmin require F
-> -   D requires F
-> -   V requires D
+I thought it was crystal-clear.
 
-Why 'V requires D'? I know partial vector instructions require D, 
-However,  I think they  just like c.fsd
+RISC-V "V" Vector Extension Version 1.0 (riscv-v-spec-1.0.pdf)
+18.3. V: Vector Extension for Application Processors
+Page 94:
 
-instruction requires D, not 'C requires D' or 'D requires C'. Is there 
-any rvv spec change I don't know?
+> The V extension requires the scalar processor implements the F and D
+> extensions, and implements all vector floating-point instructions
+> (Section Vector Floating-Point Instructions) for floating-point operands
+> with EEW=32 or EEW=64 (including widening instructions and conversions
+> between FP32 and FP64).
 
-Regards.
+c.f. <https://github.com/riscv/riscv-v-spec/releases/tag/v1.0>
 
-Weiwei Li
+Thanks,
 
->
-> Because F/D/Zicsr are enabled by default (and an error will not occur unless
-> we manually disable one or more of prerequisites), this commit just enforces
-> the user to give consistent combinations.
->
-> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-> ---
->   target/riscv/cpu.c | 25 +++++++++++++++++++++++++
->   1 file changed, 25 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 0854ca9103..f910a41407 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -610,11 +610,36 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->               cpu->cfg.ext_ifencei = true;
->           }
->   
-> +        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-> +            error_setg(errp, "F extension requires Zicsr");
-> +            return;
-> +        }
-> +
-> +        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-> +            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-> +            return;
-> +        }
-> +
-> +        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-> +            error_setg(errp, "D extension requires F extension");
-> +            return;
-> +        }
-> +
-> +        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-> +            error_setg(errp, "V extension requires D extension");
-> +            return;
-> +        }
-> +
->           if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
->               cpu->cfg.ext_zhinxmin) {
->               cpu->cfg.ext_zfinx = true;
->           }
->   
-> +        if (cpu->cfg.ext_zfinx && !cpu->cfg.ext_icsr) {
-> +            error_setg(errp, "Zfinx extension requires Zicsr");
-> +            return;
-> +        }
-> +
->           if (cpu->cfg.ext_zk) {
->               cpu->cfg.ext_zkn = true;
->               cpu->cfg.ext_zkr = true;
+Tsukasa
 
+> 
+> Regards.
+> 
+> Weiwei Li
+> 
+>>
+>> Because F/D/Zicsr are enabled by default (and an error will not occur unless
+>> we manually disable one or more of prerequisites), this commit just enforces
+>> the user to give consistent combinations.
+>>
+>> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+>> ---
+>>   target/riscv/cpu.c | 25 +++++++++++++++++++++++++
+>>   1 file changed, 25 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 0854ca9103..f910a41407 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -610,11 +610,36 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>>               cpu->cfg.ext_ifencei = true;
+>>           }
+>>   +        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
+>> +            error_setg(errp, "F extension requires Zicsr");
+>> +            return;
+>> +        }
+>> +
+>> +        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
+>> +            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
+>> +            return;
+>> +        }
+>> +
+>> +        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
+>> +            error_setg(errp, "D extension requires F extension");
+>> +            return;
+>> +        }
+>> +
+>> +        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
+>> +            error_setg(errp, "V extension requires D extension");
+>> +            return;
+>> +        }
+>> +
+>>           if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
+>>               cpu->cfg.ext_zhinxmin) {
+>>               cpu->cfg.ext_zfinx = true;
+>>           }
+>>   +        if (cpu->cfg.ext_zfinx && !cpu->cfg.ext_icsr) {
+>> +            error_setg(errp, "Zfinx extension requires Zicsr");
+>> +            return;
+>> +        }
+>> +
+>>           if (cpu->cfg.ext_zk) {
+>>               cpu->cfg.ext_zkn = true;
+>>               cpu->cfg.ext_zkr = true;
+> 
 
