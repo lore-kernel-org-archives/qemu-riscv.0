@@ -1,40 +1,41 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nq4Qp-0003eU-FI
-	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 22:56:31 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58104)
+	id 1nq4Qs-0003iF-Tv
+	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 22:56:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58120)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nq4Qn-0003dd-G9; Sat, 14 May 2022 22:56:29 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:53432
- helo=mail-sender-0.a4lg.com)
+ id 1nq4Qp-0003eW-Ft; Sat, 14 May 2022 22:56:31 -0400
+Received: from mail-sender-0.a4lg.com
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:48434)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nq4Qk-0005I5-5Q; Sat, 14 May 2022 22:56:28 -0400
+ id 1nq4Qn-0005IN-TS; Sat, 14 May 2022 22:56:31 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 04D8C300089;
- Sun, 15 May 2022 02:56:18 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 855DB30008A;
+ Sun, 15 May 2022 02:56:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652583379;
- bh=GaJdDHdgnpR0ABjDusdzHmy7p/jRmKE0H5TZ4zlfax4=;
+ s=2017s01; t=1652583384;
+ bh=9TRKppZCuWM+og3uS9Kog/rj7fGEgc51lArhHCk6kJo=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=ewwkhtQ2W4E7w5tNg7JWviDq1dtdQa1XCrq6PwvF8UoXsK6hJJZcaLI4R/5qheAeb
- TQsI4GF6tAv1nICXdPgFXA6rkHAuRA0yHWJ0qA96NdNW+IeBvJR4gqPz1xvLxdX3P1
- h3YSuAQc5GocH+BH2iCmTbWXA1X/B9Pt+T6vhpqo=
+ b=To6DKzl9W8BTeEMr1QeuhocP8oOtQ+rBGJp4AvS/1Ax783BmdTgHnzQZplTlrZiUy
+ gaAyEd5qBMgN9WKsIeYilrPVqQZe1H7fCyW/j7mC+HLQNbCK546WZzRoZiZs/m/1rI
+ T6CFgHOdrHLn+K5AdKDYU3QIiezjz35SL+ne83pw=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 0/5] target/riscv: Enhanced ISA extension checks
-Date: Sun, 15 May 2022 11:56:06 +0900
-Message-Id: <cover.1652583332.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v2 1/5] target/riscv: Fix coding style on "G" expansion
+Date: Sun, 15 May 2022 11:56:07 +0900
+Message-Id: <91633f8349253656dd08bc8dc36498a9c7538b10.1652583332.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652583332.git.research_trasio@irq.a4lg.com>
 References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+ <cover.1652583332.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=153.120.152.154;
+Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
  envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
@@ -54,36 +55,31 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2022 02:56:29 -0000
+X-List-Received-Date: Sun, 15 May 2022 02:56:33 -0000
 
-c.f.
-<https://lists.gnu.org/archive/html/qemu-riscv/2022-05/msg00221.html>
+Because ext_? members are boolean variables, operator `&&' should be
+used instead of `&'.
 
-I was obviously drunk when finalizing PATCH v1.
+Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+---
+ target/riscv/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-[BUGS in PATCH v1 (fixed in v2)]
-PATCH 1: My English was (or, "is"?) broken
-         (commit subject and message is rewritten)
-PATCH 4: Zfinx requirement test were in the wrong place
-PATCH 5: Zfinx/F exclusivity test was completely wrong
-         I meant Zfinx&&F but when finalizing my patchset, I somehow
-         changed this place to Zfinx&&!F.
-
-
-
-
-Tsukasa OI (5):
-  target/riscv: Fix coding style on "G" expansion
-  target/riscv: Disable "G" by default
-  target/riscv: Change "G" expansion
-  target/riscv: FP extension requirements
-  target/riscv: Move/refactor ISA extension checks
-
- target/riscv/cpu.c | 63 +++++++++++++++++++++++++++++++++-------------
- 1 file changed, 46 insertions(+), 17 deletions(-)
-
-
-base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index ccacdee215..00bf26ec8b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -596,8 +596,8 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+ 
+-        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
+-                                cpu->cfg.ext_a & cpu->cfg.ext_f &
++        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
++                                cpu->cfg.ext_a && cpu->cfg.ext_f &&
+                                 cpu->cfg.ext_d)) {
+             warn_report("Setting G will also set IMAFD");
+             cpu->cfg.ext_i = true;
 -- 
 2.34.1
 
