@@ -1,35 +1,35 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nq4Qt-0003kU-Kd
-	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 22:56:35 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58134)
+	id 1nq4R0-0003xp-Up
+	for mharc-qemu-riscv@gnu.org; Sat, 14 May 2022 22:56:44 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58172)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nq4Qr-0003fq-OL; Sat, 14 May 2022 22:56:33 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:53433
+ id 1nq4Qy-0003u4-DN; Sat, 14 May 2022 22:56:40 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:53434
  helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nq4Qq-0005It-8I; Sat, 14 May 2022 22:56:33 -0400
+ id 1nq4Qw-0005JM-PE; Sat, 14 May 2022 22:56:40 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 0F355300089;
- Sun, 15 May 2022 02:56:30 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 8E26C300089;
+ Sun, 15 May 2022 02:56:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1652583390;
- bh=iBuz9s2lVnC1Qr79+mx564AyUY+YXnNGXVW4c6ve6F8=;
+ s=2017s01; t=1652583395;
+ bh=6+nGTMnGzT+4YiTY9T3eWkIA/IB43U9AdVSwTusne2A=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=HD5dv8367S4x4ScTO4akMsL0tm4Sf/O2Bo15zN5F1fYMScSs7RY+Xw4StYyCnEGLB
- I1PJqUvRJCrO0mMdJujvO9jveRbIe/fJhWu5dVbVjf2U6XzHb0d4qH01Vlp55AxFxs
- FCkwa09siK5Ho3mona0L7QQkcc8PtUl0LhE9JK4Q=
+ b=o/jozdtqDoovuSM/WZHt8AV0jeNMpDriKZ2KN9TFz331dM6YrWiNF3n9VajFGTsjZ
+ DEyVUdiIIUw3LXxiO41/ZdvroVoGZ4V7Mic33cwGbO7zXvLPR9zHiAzk3TkhxF0yVj
+ cREuHNHDYVBMgGjKp3EuKO3N5oSM6MQsRzn66i+E=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>,
  Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 2/5] target/riscv: Disable "G" by default
-Date: Sun, 15 May 2022 11:56:08 +0900
-Message-Id: <cab7205f1d7668f642fa242386543334af6bc1bd.1652583332.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v2 3/5] target/riscv: Change "G" expansion
+Date: Sun, 15 May 2022 11:56:09 +0900
+Message-Id: <d1b5be550a2893a0fd32c928f832d2ff7bfafe35.1652583332.git.research_trasio@irq.a4lg.com>
 In-Reply-To: <cover.1652583332.git.research_trasio@irq.a4lg.com>
 References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
  <cover.1652583332.git.research_trasio@irq.a4lg.com>
@@ -55,30 +55,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 May 2022 02:56:34 -0000
+X-List-Received-Date: Sun, 15 May 2022 02:56:41 -0000
 
-Because "G" virtual extension expands to "IMAFD", we cannot separately
-disable extensions like "F" or "D" without disabling "G".  Because all
-"IMAFD" are enabled by default, it's harmless to disable "G" by default.
+On ISA version 20190608 or later, "G" expands to "IMAFD_Zicsr_Zifencei".
+Both "Zicsr" and "Zifencei" are enabled by default and "G" is supposed to
+be (virtually) enabled as well, it should be safe to change its expansion.
 
 Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 ---
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/cpu.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 00bf26ec8b..3ea68d5cd7 100644
+index 3ea68d5cd7..0854ca9103 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -812,7 +812,7 @@ static Property riscv_cpu_properties[] = {
-     /* Defaults for standard extensions */
-     DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
-     DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
--    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
-+    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
-     DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
-     DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
-     DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
+@@ -598,13 +598,16 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+ 
+         if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+                                 cpu->cfg.ext_a && cpu->cfg.ext_f &&
+-                                cpu->cfg.ext_d)) {
+-            warn_report("Setting G will also set IMAFD");
++                                cpu->cfg.ext_d &&
++                                cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
++            warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+             cpu->cfg.ext_i = true;
+             cpu->cfg.ext_m = true;
+             cpu->cfg.ext_a = true;
+             cpu->cfg.ext_f = true;
+             cpu->cfg.ext_d = true;
++            cpu->cfg.ext_icsr = true;
++            cpu->cfg.ext_ifencei = true;
+         }
+ 
+         if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
 -- 
 2.34.1
 
