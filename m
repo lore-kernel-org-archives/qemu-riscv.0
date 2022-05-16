@@ -1,58 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqk36-0008OF-Vr
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 19:23:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58518)
+	id 1nqk5H-0001jx-6W
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 19:25:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58704)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqk2u-0008MB-UQ; Mon, 16 May 2022 19:22:37 -0400
-Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:33562)
+ id 1nqk5F-0001jU-94; Mon, 16 May 2022 19:25:01 -0400
+Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:44860)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqk2t-0006oS-A1; Mon, 16 May 2022 19:22:36 -0400
-Received: by mail-io1-xd31.google.com with SMTP id q203so1854079iod.0;
- Mon, 16 May 2022 16:22:34 -0700 (PDT)
+ id 1nqk5D-0006xx-Px; Mon, 16 May 2022 19:25:00 -0400
+Received: by mail-io1-xd2f.google.com with SMTP id e194so17633966iof.11;
+ Mon, 16 May 2022 16:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=O2gCER8bI8bu7k24fhddFedq1ib4zZY8xb9hZyo0K2M=;
- b=dM6/IeHLhfNGJ8eloNAdSodMOitCCXhXN2UusSwWiEbAHUQxzfCca/dgEnPdrddH18
- JwepONBVS6W2HY6fiB0Luhe49FFZbEOydlYUHsBh0T3IzPT0z/ChBAbxUYPGRIMQIUKI
- ocmgJk0Y56SXQQ6oMcAD1yfWiE1yxLCZ6i5SUCKdVr+j8o3fB5Uf1WHga+voUrRqlKL2
- E5sH29twzBZh0bWAUmk2Qt6o4f74IxYTmdNij5y7VY16rWDkjcG7xHmL9392s/Z0potA
- wIKhoHPN5Fnl7B+li1DFl8NikG3Yc9TVEHNFywWu1sqSXMCKmFnsssVgLD3mt3AstwNS
- 1cFQ==
+ :cc; bh=wrFOZmnQxNRr75IOKtZIymKLep/buslz55oJFhc+6JQ=;
+ b=UCxSmTPR8OHtI/nLkE1dl695vQ2/0C+kseGBPcPM7Fq2cRjhqE4uzzdqzolwI2/st0
+ GorVUC807PJyPqaLGoXZbuFY88U8Iw+Jk0uOYuXJrN7eALOKL6ulgGvlDYCwxP30aOa1
+ X9QyoSReS86gb8XVHASbJIb1VayPZb8gWAKD3zPq8CQvR38rEtQPqOzYGiWjUo0jTSkm
+ 47mbDRIsI4qbOlfGyGJIxmV8dMOZAfqGLdgngc2kfD4x5dmw7TY4VHoeZ2x8e8pPZLXI
+ viqW/4xGki+9Bha1M+Lqvh4HAArSSIedGelSUyzMvDgNnfgqKK3E8uIC63bBeEJiE5Gr
+ MoGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=O2gCER8bI8bu7k24fhddFedq1ib4zZY8xb9hZyo0K2M=;
- b=NiE7AzgU4gEXQC65NS5sWI6yrWsNP7j9/lxRbDsC77FuByCR8uqYPXkLgHv+vKVL/r
- Z4CKltwOqEbIawl2gLsddaFFKcL8qgNXKcqvCj5ExOmufyqjtrr/louPK9/I7MRql+qH
- TXOBVlTJ5oFS2etgL2vTqAHi3zI59jz0kXaNtuJGHyDzQ+JAWZ+KewxD3klzT8lONaFG
- kQmm/6hCehflTflFIvDcR0FLfeGudEE5lLDd0Rs9qbHehbYkdCBPaf4UwY6iKNDnQcKs
- KROmJV5/jl98p0ZhXS56zsiz0m5JZz55eN74Qzv9Ce8RjKG4rHAAQeJzJ8CIJ32NdeTt
- Bbag==
-X-Gm-Message-State: AOAM5329VyAQy4cn25ScpB9/9i/uen7/E+PnzFsD3b2BnfcPxpX9dmm0
- gsKBuiZHSuUeIU7GgoZip9vd8SDmKjMY36GQbR8=
-X-Google-Smtp-Source: ABdhPJyRtN5oXHwLmzHBIg+eSE4jFjjqKwzniT53yUi1RZn9hsWao1syKTlE7vsT24AYD0K2cF77xI3QteU7YKjmGIU=
-X-Received: by 2002:a5d:948a:0:b0:64d:23a4:9afa with SMTP id
- v10-20020a5d948a000000b0064d23a49afamr9062732ioj.114.1652743353441; Mon, 16
- May 2022 16:22:33 -0700 (PDT)
+ bh=wrFOZmnQxNRr75IOKtZIymKLep/buslz55oJFhc+6JQ=;
+ b=np7A47Jx8VFCZqzf953K3dkg22XU+zeUF+B+wblrqzjJXfRCPULacW4438AQVIEJm7
+ G56shsEtPdSvSImy9f55tCSojqQmUyIEJolTG/XSmCTIPs8cwr49xWMlc+Ma0FgJjqSh
+ mlLNrGNOj5Q6VFtiFjl6+i0hPCoIqdHM707C5lVKlttCoRxCOGH3vV/444VYwSHLYSxX
+ X3WioW5ztVBLWhizfvl8Es1eVHVpxheCMg/AxYp7xJWJnbIv5r0v4/9BR6hM5fiFnUq+
+ 9r2pKKe+5JOETKlHMO2TCBqB7Pl/ufDPVSiHSEfN6Z6X7LujcyoleXmn0Pu5fPyI3BMH
+ ejCg==
+X-Gm-Message-State: AOAM533Ayh0un/OhouVm/zroJ2YYyMVY9p7TpID6RPw30upR3raMXAAV
+ mUDdvx2ocq019FdUj44UT9DpFnMSi/iVSXtvIyEphRnpP/M=
+X-Google-Smtp-Source: ABdhPJx4htkSEYaBEzZE9YoGvSLxoZtQKXr6Soz4ahPMjhF4b3ASyVu1FKyE6zQ8WpM4eG3uWjQnNm5x4OspQPIICw8=
+X-Received: by 2002:a05:6602:2c07:b0:657:8347:d7c0 with SMTP id
+ w7-20020a0566022c0700b006578347d7c0mr9303471iov.93.1652743498431; Mon, 16 May
+ 2022 16:24:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220512182103.408627-1-dgreid@rivosinc.com>
-In-Reply-To: <20220512182103.408627-1-dgreid@rivosinc.com>
+References: <20220511144528.393530-1-apatel@ventanamicro.com>
+ <20220511144528.393530-3-apatel@ventanamicro.com>
+In-Reply-To: <20220511144528.393530-3-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 May 2022 09:22:07 +1000
-Message-ID: <CAKmqyKPzTP6MxATeQ9iMmDsj1h1rU6PFPGSEbPZ9DH6DV76kmg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: virt: Avoid double FDT platform node
-To: Dylan Reid <dylan@rivosinc.com>
-Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Tue, 17 May 2022 09:24:32 +1000
+Message-ID: <CAKmqyKNcLwMzQ11aECavB1XrN2vrvmXjWxm1uKghoH+YR0eTsg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] target/riscv: Fix hstatus.GVA bit setting for
+ traps taken from HS-mode
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Dylan Reid <dgreid@rivosinc.com>
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -73,50 +77,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2022 23:22:38 -0000
+X-List-Received-Date: Mon, 16 May 2022 23:25:01 -0000
 
-On Fri, May 13, 2022 at 5:12 AM Dylan Reid <dylan@rivosinc.com> wrote:
+On Thu, May 12, 2022 at 12:49 AM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> When starting the virt machine with `-machine virt,aia=aplic-imsic`,
-> both the imsic and aplic init code will add platform fdt nodes by
-> calling `platform_bus_add_all_fdt_nodes`. This leads to an error at
-> startup:
-> ```
-> qemu_fdt_add_subnode: Failed to create subnode /platform@4000000: FDT_ERR_EXISTS
-> ```
+> Currently, QEMU does not set hstatus.GVA bit for traps taken from
+> HS-mode into HS-mode which breaks the Xvisor nested MMU test suite
+> on QEMU. This was working previously.
 >
-> The call from `create_fdt_imsic` is not needed as an imsic is currently
-> always combined with an aplic that will create the nodes.
+> This patch updates riscv_cpu_do_interrupt() to fix the above issue.
 >
-> Fixes: 3029fab64309 ("hw/riscv: virt: Add support for generating platform FDT entries")
-> Signed-off-by: Dylan Reid <dgreid@rivosinc.com>
+> Fixes: 86d0c457396b ("target/riscv: Fixup setting GVA")
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c | 5 -----
->  1 file changed, 5 deletions(-)
+>  target/riscv/cpu_helper.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 3326f4db96..d625f776a6 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -561,11 +561,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
->      }
->      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "phandle", *msi_m_phandle);
->
-> -    platform_bus_add_all_fdt_nodes(mc->fdt, imsic_name,
-> -                                   memmap[VIRT_PLATFORM_BUS].base,
-> -                                   memmap[VIRT_PLATFORM_BUS].size,
-> -                                   VIRT_PLATFORM_BUS_IRQ);
-> -
->      g_free(imsic_name);
->
->      /* S-level IMSIC node */
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e1aa4f2097..b16bfe0182 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1367,7 +1367,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          case RISCV_EXCP_INST_PAGE_FAULT:
+>          case RISCV_EXCP_LOAD_PAGE_FAULT:
+>          case RISCV_EXCP_STORE_PAGE_FAULT:
+> -            write_gva = true;
+> +            write_gva = env->two_stage_lookup;
+>              tval = env->badaddr;
+>              break;
+>          case RISCV_EXCP_ILLEGAL_INST:
+> @@ -1434,7 +1434,6 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                  /* Trap into HS mode */
+>                  env->hstatus = set_field(env->hstatus, HSTATUS_SPV, false);
+>                  htval = env->guest_phys_fault_addr;
+> -                write_gva = false;
+>              }
+>              env->hstatus = set_field(env->hstatus, HSTATUS_GVA, write_gva);
+>          }
 > --
-> 2.30.2
+> 2.34.1
 >
 >
 
