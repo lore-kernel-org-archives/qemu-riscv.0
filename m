@@ -1,57 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqk0g-0005GW-C2
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 19:20:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58034)
+	id 1nqk1B-0005v0-VI
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 19:20:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58186)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqk0d-0005FW-JK; Mon, 16 May 2022 19:20:16 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:33783)
+ id 1nqk1A-0005rx-Cn; Mon, 16 May 2022 19:20:48 -0400
+Received: from mail-il1-x12d.google.com ([2607:f8b0:4864:20::12d]:45855)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqk0c-0006EF-2m; Mon, 16 May 2022 19:20:15 -0400
-Received: by mail-il1-x12c.google.com with SMTP id i5so11602716ilv.0;
- Mon, 16 May 2022 16:20:10 -0700 (PDT)
+ id 1nqk18-0006RR-PS; Mon, 16 May 2022 19:20:48 -0400
+Received: by mail-il1-x12d.google.com with SMTP id e4so2331759ils.12;
+ Mon, 16 May 2022 16:20:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ffeV+cKKmHA0t3IQ4j95Jxfai9AQ/7UA0+r4BOgnX8w=;
- b=DALv/Uvu2M/1VLvyQq7dXgzLNb0XtC1FtPETgRQGDlxSa6yPCvDQvlEJDyzpXlbZ/T
- TyIwz6PG2Gu9XxEb/m7j33E6PnaPk/eHYMFkZTFFJxDu70XmW3+uYdHYLP0I3xl+mAVN
- 9eW443UE223LFB1vTYn5e4ipjoXEjtMXO5QlILHWsWxhUthBVMCnAkx8EVPRWbrt30Fm
- d9lfm8IR0Z7hFlSYzpdK1Rdb9YKKfvdWCppGq+GLvy1NGUjPsRl02RQ4Sg2moALCc7Me
- MtxgoNF9cR6kHgMayk6VUmkyVilAVUBVeJxslLNLxuePWHN3OussqT5Ci9WFeGBdYtlV
- rexQ==
+ :cc; bh=CIb0iZE3IChyYenSRF0h1ZzcuqxDmlEqVytPONWfDvI=;
+ b=oMkSCswr8xVLy9KQt8QaKRYZ4g4Ko3VwvPe45aFUd7ESTke1k+60xQoBAeSPOlgl+w
+ 4sesVJVx2huo9L1O3wDmXtJJ+dim7IR9XIexKVHxhs4wSJGbzJ6BqfBuE9NloqCFyIkv
+ BiS3FzH1q/2HcKHmxhFzE+LONKpw2sJmvT/QNN4pAWEU+sd2rnIB9CnORun2Rmi4lVLc
+ pWzuOS71VciX4PNhW+kAfyTBRlzyli3k2UoDFUQ8WR1qR1P3/crLgY+QubEymCPsnlQq
+ Vm8Fze6tz/bG4W4oE6NgrmeQgm2xgNF80XKFCddHnNsIHya1MGzWKlaHSmzc+yxiAJ6u
+ IMTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ffeV+cKKmHA0t3IQ4j95Jxfai9AQ/7UA0+r4BOgnX8w=;
- b=x8YqmxbpoDumrcv/Ah1QIcFkhbLFL5kwu/yeFBdoNJ9VGx3Ln/Yl88N5P90z4ppWEP
- EQ+7vA7rJBr+Xssnfcj9ukQVE9PwfF3nzFQa5fioCIhkbiH85ztFHUVx4tumImcORtni
- 0XySBVDdaW5vNaw6OqNPE1HdWT39BjxkuIPzeDMuTSSDDInByAlknDWr3zAPcXPwak2n
- V1idwqcC9xiSIJrG0zTJE6x1frsidQUy5vIfI5pk93G5S9i6uj7AqR4h5+DpbHXq3qT1
- rZsuCyQ/gAk1u1Gr8DqNITYHijrkkrJxOdfyWQrZhUmqiZaoQSWACLVs7BGPrbudJ6me
- 8eQw==
-X-Gm-Message-State: AOAM531AdXrBFmAiA95o/Ne0obXqnRfPXhmZzSpTnxpSIIAC09q5qJht
- Im58VTPa43+RXVZFobtHAvZXXOE45E4fXQkx7es=
-X-Google-Smtp-Source: ABdhPJzWeiwPVB681I7vVPXrhOalDFknAhwB3RA0jpEvgWBJo7BG5ohzmtF5xQssGT/sMxMVDkW52oEld4mz9WjuFhU=
-X-Received: by 2002:a05:6e02:2146:b0:2d1:261a:6578 with SMTP id
- d6-20020a056e02214600b002d1261a6578mr2932364ilv.55.1652743209754; Mon, 16 May
- 2022 16:20:09 -0700 (PDT)
+ bh=CIb0iZE3IChyYenSRF0h1ZzcuqxDmlEqVytPONWfDvI=;
+ b=naQFEHwI4HSukCCW61bDA06x0xIrQyceD93TLAaj+6up8e4E95SMlawprrF3jSG6PU
+ zKGNOwG/sH4PPyByhnnXMjvaQON1plES4h+OQwwJgw+Lqbj87fm1L5AIv+yj9Y06FMi5
+ F8+nx+nuZb50hitywRX6Gfh+EplvUIQxqEYL89IuK37A/uZJIM2m4BPmFUINNvqi134D
+ S0EralIzCT4aYfiGIglY+AReIEmwXudGDJBTtxvgfpht+95I/AnWc8CqrDPJiQrd2XSB
+ 8kf2GsgZMsbVyeZ5e6SqiYS0QSjfzby3ZvU9d0z1iEPx8piUIqsUk6CGazoCw+6wwZRU
+ UjuQ==
+X-Gm-Message-State: AOAM532PU0vOWe7GQoaRWATbx2Vfz33/n1XefJdce2LZkesFElIFjDH6
+ VsSuHXgv5jZLMcybH7IUdJg5uOX912BdHxpxLFEaRkV+EJY=
+X-Google-Smtp-Source: ABdhPJwgJRZXyiIaCXc+Fmt/w2c4KZR0jQLc0UPIDWgW9Ss2kamextF5lFW5ER05DWmEc2WOL6HzJaS0Fz3r5eE4p5s=
+X-Received: by 2002:a05:6e02:188f:b0:2d1:58f:41a6 with SMTP id
+ o15-20020a056e02188f00b002d1058f41a6mr7511356ilu.86.1652743245067; Mon, 16
+ May 2022 16:20:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1652181972.git.research_trasio@irq.a4lg.com>
- <7a988aedb249b6709f9ce5464ff359b60958ca54.1652181972.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <7a988aedb249b6709f9ce5464ff359b60958ca54.1652181972.git.research_trasio@irq.a4lg.com>
+ <7c1fe5f06b0a7646a47e9bcdddb1042bb60c69c8.1652181972.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <7c1fe5f06b0a7646a47e9bcdddb1042bb60c69c8.1652181972.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 May 2022 09:19:43 +1000
-Message-ID: <CAKmqyKO9CRvyTaqf36QSV6ffj=srLmUgjQL-28du=AO9K8rM8w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] target/riscv: Move Zhinx* extensions on ISA string
+Date: Tue, 17 May 2022 09:20:19 +1000
+Message-ID: <CAKmqyKPMnPKj-scsUhtbkX0cN0QCtWmfPiZJNXNp-QCD+JG3pA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] target/riscv: Add short-isa-string option
 To: Tsukasa OI <research_trasio@irq.a4lg.com>
 Cc: Frank Chang <frank.chang@sifive.com>, Weiwei Li <liweiwei@iscas.ac.cn>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12d;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -72,13 +72,22 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2022 23:20:17 -0000
+X-List-Received-Date: Mon, 16 May 2022 23:20:48 -0000
 
 On Tue, May 10, 2022 at 9:29 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
-> This commit moves ISA string conversion for Zhinx and Zhinxmin extensions.
-> Because extension category ordering of "H" is going to be after "V",
-> their ordering is going to be valid (on canonical order).
+> Because some operating systems don't correctly parse long ISA extension
+> string, this commit adds short-isa-string boolean option to disable
+> generating long ISA extension strings on Device Tree.
+>
+> For instance, enabling Zfinx and Zdinx extensions and booting Linux (5.17 or
+> earlier) with FPU support caused a kernel panic.
+>
+> Operating Systems which short-isa-string might be helpful:
+>
+> 1.  Linux (5.17 or earlier)
+> 2.  FreeBSD (at least 14.0-CURRENT)
+> 3.  OpenBSD (at least current development version)
 >
 > Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 
@@ -87,31 +96,46 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.c | 5 ++++-
+>  target/riscv/cpu.h | 2 ++
+>  2 files changed, 6 insertions(+), 1 deletion(-)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ccacdee215..9f38e56316 100644
+> index 9f38e56316..4db3dce25a 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -999,8 +999,6 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->          ISA_EDATA_ENTRY(zfh, ext_zfh),
->          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
-> -        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
-> -        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
->          ISA_EDATA_ENTRY(zdinx, ext_zdinx),
->          ISA_EDATA_ENTRY(zba, ext_zba),
->          ISA_EDATA_ENTRY(zbb, ext_zbb),
-> @@ -1021,6 +1019,8 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->          ISA_EDATA_ENTRY(zkt, ext_zkt),
->          ISA_EDATA_ENTRY(zve32f, ext_zve32f),
->          ISA_EDATA_ENTRY(zve64f, ext_zve64f),
-> +        ISA_EDATA_ENTRY(zhinx, ext_zhinx),
-> +        ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
->          ISA_EDATA_ENTRY(svinval, ext_svinval),
->          ISA_EDATA_ENTRY(svnapot, ext_svnapot),
->          ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
+> @@ -879,6 +879,8 @@ static Property riscv_cpu_properties[] = {
+>      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
+>
+>      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+> +
+> +    DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+>
+> @@ -1049,7 +1051,8 @@ char *riscv_isa_string(RISCVCPU *cpu)
+>          }
+>      }
+>      *p = '\0';
+> -    riscv_isa_string_ext(cpu, &isa_str, maxlen);
+> +    if (!cpu->cfg.short_isa_string)
+> +        riscv_isa_string_ext(cpu, &isa_str, maxlen);
+>      return isa_str;
+>  }
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index fe6c9a2c92..f5ff7294c6 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -425,6 +425,8 @@ struct RISCVCPUConfig {
+>      bool aia;
+>      bool debug;
+>      uint64_t resetvec;
+> +
+> +    bool short_isa_string;
+>  };
+>
+>  typedef struct RISCVCPUConfig RISCVCPUConfig;
 > --
 > 2.34.1
 >
