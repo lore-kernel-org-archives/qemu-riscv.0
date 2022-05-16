@@ -1,39 +1,39 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqehE-0004rG-Uv
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 13:39:52 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39966)
+	id 1nqeyt-0001SG-JZ
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 13:58:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45228)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <victor.colombo@eldorado.org.br>)
- id 1nqehD-0004oh-N5
- for qemu-riscv@nongnu.org; Mon, 16 May 2022 13:39:51 -0400
-Received: from [187.72.171.209] (port=33320 helo=outlook.eldorado.org.br)
+ id 1nqeys-0001Rt-5X; Mon, 16 May 2022 13:58:06 -0400
+Received: from [187.72.171.209] (port=11887 helo=outlook.eldorado.org.br)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <victor.colombo@eldorado.org.br>) id 1nqehB-00055J-4m
- for qemu-riscv@nongnu.org; Mon, 16 May 2022 13:39:50 -0400
+ (envelope-from <victor.colombo@eldorado.org.br>)
+ id 1nqeyp-0000IJ-Or; Mon, 16 May 2022 13:58:05 -0400
 Received: from p9ibm ([10.10.71.235]) by outlook.eldorado.org.br over TLS
  secured channel with Microsoft SMTPSVC(8.5.9600.16384); 
- Mon, 16 May 2022 14:22:33 -0300
+ Mon, 16 May 2022 14:56:54 -0300
 Received: from [127.0.0.1] (unknown [10.10.70.45])
- by p9ibm (Postfix) with ESMTPS id A9E84800048;
- Mon, 16 May 2022 14:22:33 -0300 (-03)
-Message-ID: <75b10b8f-b3e0-ca48-f5ef-bf8a4fc5c0ee@eldorado.org.br>
-Date: Mon, 16 May 2022 14:22:33 -0300
+ by p9ibm (Postfix) with ESMTPS id 984BB800048;
+ Mon, 16 May 2022 14:56:53 -0300 (-03)
+Message-ID: <71bd0408-40c8-bcee-7471-cc4aa8a2909e@eldorado.org.br>
+Date: Mon, 16 May 2022 14:56:53 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.1
-Subject: Re: [PATCH 1/5] target/riscv: Fix "G" extension expansion typing
+Subject: Re: [PATCH v2 1/5] target/riscv: Fix coding style on "G" expansion
 Content-Language: en-US
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>, Frank Chang <frank.chang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
- <07e4f9011587dc8023b616477ecdf02282fe6232.1652435138.git.research_trasio@irq.a4lg.com>
+ <cover.1652583332.git.research_trasio@irq.a4lg.com>
+ <91633f8349253656dd08bc8dc36498a9c7538b10.1652583332.git.research_trasio@irq.a4lg.com>
 From: =?UTF-8?Q?V=c3=adctor_Colombo?= <victor.colombo@eldorado.org.br>
-In-Reply-To: <07e4f9011587dc8023b616477ecdf02282fe6232.1652435138.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <91633f8349253656dd08bc8dc36498a9c7538b10.1652583332.git.research_trasio@irq.a4lg.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-OriginalArrivalTime: 16 May 2022 17:22:33.0895 (UTC)
- FILETIME=[87C76370:01D86949]
+X-OriginalArrivalTime: 16 May 2022 17:56:54.0012 (UTC)
+ FILETIME=[53B44BC0:01D8694E]
 X-Host-Lookup-Failed: Reverse DNS lookup failed for 187.72.171.209 (failed)
 Received-SPF: pass client-ip=187.72.171.209;
  envelope-from=victor.colombo@eldorado.org.br; helo=outlook.eldorado.org.br
@@ -55,13 +55,13 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 May 2022 17:39:52 -0000
+X-List-Received-Date: Mon, 16 May 2022 17:58:06 -0000
 
-On 13/05/2022 06:45, Tsukasa OI wrote:
+On 14/05/2022 23:56, Tsukasa OI wrote:
 > [E-MAIL EXTERNO] Não clique em links ou abra anexos, a menos que você possa confirmar o remetente e saber que o conteúdo é seguro. Em caso de e-mail suspeito entre imediatamente em contato com o DTI.
 > 
-> Because ext_? members are in bool type, operator `&&' should be used
-> instead of `&'.
+> Because ext_? members are boolean variables, operator `&&' should be
+> used instead of `&'.
 > 
 > Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 > ---
@@ -88,9 +88,11 @@ On 13/05/2022 06:45, Tsukasa OI wrote:
 > 
 > 
 
+Sorry, looks like I mistakenly reviewed v1 earlier
+
 Reviewed-by: Víctor Colombo <victor.colombo@eldorado.org.br>
 
---
+-- 
 Víctor Cora Colombo
 Instituto de Pesquisas ELDORADO
 Aviso Legal - Disclaimer <https://www.eldorado.org.br/disclaimer.html>
