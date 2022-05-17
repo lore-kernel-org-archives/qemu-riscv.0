@@ -1,57 +1,56 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqmTV-0007OE-4e
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 21:58:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49284)
+	id 1nqmn7-0006XW-RR
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 22:18:29 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51740)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqmTT-0007Nd-FB; Mon, 16 May 2022 21:58:11 -0400
-Received: from mail-il1-x12f.google.com ([2607:f8b0:4864:20::12f]:46638)
+ id 1nqmn5-0006WU-GG; Mon, 16 May 2022 22:18:27 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:41791)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqmTR-0005w3-OG; Mon, 16 May 2022 21:58:11 -0400
-Received: by mail-il1-x12f.google.com with SMTP id t2so8655515ilm.13;
- Mon, 16 May 2022 18:58:08 -0700 (PDT)
+ id 1nqmn3-0000cV-Pv; Mon, 16 May 2022 22:18:27 -0400
+Received: by mail-il1-x12e.google.com with SMTP id o16so3271719ilq.8;
+ Mon, 16 May 2022 19:18:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/g2TXVPDRYmRpvBauzYGvH2w25vpgaaS81H+rqF2E9I=;
- b=LmjEucmhsER3HnX0GXmSJoNS9JqyzmhPdbDQIxyOgMVKX5pFP+xjWGu1x5OtQ7ZGc7
- Dym78h58QIMZ0L9CmxdR40jUwDKF5n1BWfRus7Wi+q7YnEsbq2xAgzBNLUwkKeUAh34z
- thc7MM5kcmWOebdS5e+IT5TXaGtK5LgIX09/12eL6l3FbXsimdPOd62hF8L1FxSVM47v
- o0NxLXNyKxlNI+zsqeMQ/3Q6Hiw1GVnteCVRTz8otaQptLHv1Pbf0tUMbd8McDAJtucx
- pDdyhy3KYO/xC8ulp0dQif/jt/J3Z2rrs/YOzLKINmsYY5HXixbwa0/ikH8y5WAkn+yh
- P7Uw==
+ :cc; bh=aEwxJEDzXAkLHSRpsSsP4AqQJt4ah+Y+SL0xcwwUOvU=;
+ b=GDBdubkEMhW9NdXPPTwFzzGJN+CaPufh/TP96OgW7GFnLVHnhu9zy9Ul5j7nDkVf/l
+ +tAKX7VlO3qDaZBmzLdLnJrdxlRUFAKZCOkp6COrp5LwcgKvSFTSSicVdtbXtuCt3RIR
+ GQ5DTLynp7x8gExU6pMwN0GTk6KVl2PS+VxkDE6dESVjmMJxat/4N2+3b+E+Vd3thEPw
+ GXVsguk+wKk0yDrytm7SmhKmbQvkI3Px7vsPvsMNp7OFZaZTDMT/FxyaoBRU7UleVZJm
+ GBNX17cHRr7A6byOat7d8hR1peXX22pvyH4ASZk57ycWWXY4XL4K1FrwAgw5kO78kY6j
+ Zkaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/g2TXVPDRYmRpvBauzYGvH2w25vpgaaS81H+rqF2E9I=;
- b=Okq51rFPR/e/uC31HNxu8A7JkBiWmwKhYr+YhBGD4srnGeTWNUhqVJ76MS6odT5avW
- 7Fn/68ZYtMdXBQ3Y68Rj06FOCZ/DnpFpO6iOV8pt0bDjCoRwrgM92tFdpKIFxsOib/Pp
- T9+4QbxfXJFrYNTPg/6vBL/2Vu/BJhNSGK7wxqXMfkMa5t4hslJcznzCz14rUIpWmeTt
- p1loEqGMLUQCLqax4lpd4Uig4xjRH0YJBehkHID/0IseoUrnPp0DvT5ZOjVsqiwIbO/N
- 29tfgj2yPzt5EKWAoK/phO5Leyd8RjukFsA22pq/nMEs7YzLOcPwusdnCxVRuVA1dF0j
- XVmg==
-X-Gm-Message-State: AOAM531AO9j0mntT5I9OjpL93e35vWuBQozSkEmDS5ZGIVELWQ7tGa0B
- 9/EbOZOXkh55Ct3csSUFEc0y6UY+dSY9d/9qInc=
-X-Google-Smtp-Source: ABdhPJxjzXqM/z2Esz5ml2BBtm2lwDSOlCOcuzn+xI6Ne4nNNlLVern5QrDJHPkJB3HyDxQPp50f0bBJmyK46eGPJbo=
-X-Received: by 2002:a05:6e02:2146:b0:2d1:261a:6578 with SMTP id
- d6-20020a056e02214600b002d1261a6578mr3166186ilv.55.1652752688087; Mon, 16 May
- 2022 18:58:08 -0700 (PDT)
+ bh=aEwxJEDzXAkLHSRpsSsP4AqQJt4ah+Y+SL0xcwwUOvU=;
+ b=bvzoGr+a3Sr+F1t3hSKkawz7OIv9T8QoekC2OcL05/GXb3R3g1folJHTG1w+zO1Xi1
+ ZhQyXEXBYgIHDaq2sEyKMALx5JCdlaMdS3beI5knELOomysn3qBTCkuEfSk+dLpBEdSJ
+ FPoCKDjf2/G4Gvw3Py4U6+jN02xbZGAGkdrAQYKzORIE8C9/HNDwdVAEPeuhyD8bY+J3
+ YYBbhO2ECtqaA6ynK/haTpmKJoTV+vO3alO4+YICULw93wQatpiZaf8a+Y3x2x+rvq5t
+ peACRXyCQrZhtIaJ4ScsMuJ1SAmY8rlteSnxMe+HoUIYeO2Uv0cSIQabJhBJu3DMejA7
+ Q0hg==
+X-Gm-Message-State: AOAM5327QLfCBSUCgzy+rNRMpFQUUklNkemB9e66VOtM8xYo0JVYeP//
+ inMTYaTQSsPHGOcUK+++rpVjek0+UKsqNsPhlb8=
+X-Google-Smtp-Source: ABdhPJxW0bQnV99K28Nywwn+yOw8sjUVH/jm22h2tkvibOsaRKsoI8qoLXPkuLgmgQKv9N3F++RcankfVv1CUtWnosk=
+X-Received: by 2002:a05:6e02:170b:b0:2cf:9f8f:afdf with SMTP id
+ u11-20020a056e02170b00b002cf9f8fafdfmr10981056ill.260.1652753904189; Mon, 16
+ May 2022 19:18:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
- <cover.1652509778.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <cover.1652509778.git.research_trasio@irq.a4lg.com>
+References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652435138.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 May 2022 11:57:42 +1000
-Message-ID: <CAKmqyKMuj4VjiC0rcrsPB05CoA-3gCjkKjWRmowKN2nYjv0HEg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] hw/riscv: Make CPU config error handling generous
+Date: Tue, 17 May 2022 12:17:58 +1000
+Message-ID: <CAKmqyKPN14vxZwvT=Vt-tckN3=JOKQK8UoVxLza3XiJFyTq9QA@mail.gmail.com>
+Subject: Re: [PATCH 0/5] target/riscv: Enhanced ISA extension checks
 To: Tsukasa OI <research_trasio@irq.a4lg.com>
 Cc: Frank Chang <frank.chang@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12f;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -72,29 +71,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 01:58:11 -0000
+X-List-Received-Date: Tue, 17 May 2022 02:18:27 -0000
 
-On Sat, May 14, 2022 at 4:29 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
+On Fri, May 13, 2022 at 7:46 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
-> c.f.
-> <https://lists.gnu.org/archive/html/qemu-riscv/2022-05/msg00229.html>
+> Hello,
 >
-> This patchset is functionally equivalent to v1 but fixes commit titles.
+> This is another patchset for RISC-V ISA extension / feature handling.
+>
+> Aside from coding style fix / refactoring patch (PATCH 1 and 5), this
+> patchset contains two changes:
+>
+>
+>
+> 1. "G" extension handling
+>
+> 1.A. "G" extension expansion (PATCH 3)
+>
+> On ISA version 20190608 or later, "G" expands to "IMAFD_Zicsr_Zifencei",
+> not just "IMAFD" (this is because "Zicsr" and "Zifencei" extensions are
+> splitted from "I").  Because both "Zicsr" and "Zifencei" are enabled by
+> default, it should be safe to change "G" extension expansion.
+>
+> 1.B. Disable "G" by default (PATCH 2)
+>
+> This seems quite odd but I have a good reason.  While "G" is enabled by
+> default, all "I", "M", "A", "F", "D", "Zicsr" and "Zifencei" are also
+> enabled by default, making default "G" expansion useless.
+>
+> There's more.  If we want to change detailed configuration of a RV32/RV64
+> CPU and want to disable some, for example, "F" and "D", we must also
+> disable "G".  This is obviously bloat.
+>
+> This doesn't work:
+>     -cpu rv64,f=off,d=off
+>
+> This does work (but bloat):
+>     -cpu rv64,g=off,f=off,d=off
+>
+> Disabling "G" suppresses such problem and mostly harmless, too.
+>
+>
+>
+> 2. Floating point arithmetic consistency (PATCH 4)
+>
+> With -cpu option, we can configure details of RISC-V CPU emulated by QEMU.
+> However, we can set some invalid combinations that would make FP arithmetic
+> effectively unusable (and invalid on RISC-V ISA specification).
+>
+> -   F requires Zicsr
+> -   Zfinx requires Zicsr
+> -   Zfh/Zfhmin require F
+> -   D requires F
+> -   V requires D
+>
+> Reproducing this kind of problem requires manually disabling certain
+> extensions (because all "Zicsr", "F" and "D" are enabled by default).  So,
+> I consider that just making an error message (when unsatisfied) should be
+> enough, not implying related extensions like "zk*" properties.
+>
+>
+> Note that this checking only works on any, rv32 and rv64.  On other CPUs
+> (for example, sifive-u54), it sets nonzero `misa' value on corresponding
+> `set_misa' call (c.f. in rv64_sifive_u_cpu_init in target/riscv/cpu.c) and
+> consistency checks are skipped (because nonzero `misa' value is set prior
+> to RISC-V CPU realization process).
+>
+> I think we generally use generic "rv32" or "rv64" on heavy customizing so I
+> don't think this is not a big problem.  Still, we could fix this later
+> (e.g. by setting properties on CPU init function or by checking some
+> consistency problems even if previously-set `misa' is nonzero).
 >
 >
 >
 >
-> Tsukasa OI (2):
->   hw/riscv: Make CPU config error handling generous (virt/spike)
->   hw/riscv: Make CPU config error handling generous
->     (sifive_e/u/opentitan)
->
->  hw/riscv/opentitan.c | 2 +-
->  hw/riscv/sifive_e.c  | 2 +-
->  hw/riscv/sifive_u.c  | 4 ++--
->  hw/riscv/spike.c     | 2 +-
->  hw/riscv/virt.c      | 2 +-
->  5 files changed, 6 insertions(+), 6 deletions(-)
+> Tsukasa OI (5):
+>   target/riscv: Fix "G" extension expansion typing
+>   target/riscv: Disable "G" by default
+>   target/riscv: Change "G" expansion
+>   target/riscv: FP extension requirements
+>   target/riscv: Move/refactor ISA extension checks
 
 Thanks!
 
@@ -102,6 +158,9 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+>
+>  target/riscv/cpu.c | 62 +++++++++++++++++++++++++++++++++-------------
+>  1 file changed, 45 insertions(+), 17 deletions(-)
 >
 >
 > base-commit: 178bacb66d98d9ee7a702b9f2a4dfcd88b72a9ab
