@@ -1,59 +1,78 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqpLx-0000jL-8z
-	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 01:02:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43408)
+	id 1nqpNV-00025D-3p
+	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 01:04:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43574)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqpLv-0000iu-Fr; Tue, 17 May 2022 01:02:35 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:42436 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqpLs-0000iI-IS; Tue, 17 May 2022 01:02:35 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-05 (Coremail) with SMTP id zQCowACHjn5eLINiBa_tBw--.16903S2;
- Tue, 17 May 2022 13:02:22 +0800 (CST)
-Subject: Re: [PATCH 2/2] target/riscv: Run extension checks for all CPUs
-To: Alistair Francis <alistair.francis@opensource.wdc.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: bmeng.cn@gmail.com, palmer@dabbelt.com, alistair23@gmail.com
-References: <20220517041100.93045-1-alistair.francis@opensource.wdc.com>
- <20220517041100.93045-3-alistair.francis@opensource.wdc.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <f071a26d-224b-74e8-207d-dedd5c16ec01@iscas.ac.cn>
-Date: Tue, 17 May 2022 13:02:22 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nqpNT-00023n-AA; Tue, 17 May 2022 01:04:11 -0400
+Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:35821)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nqpNP-0000qM-MQ; Tue, 17 May 2022 01:04:10 -0400
+Received: by mail-io1-xd2a.google.com with SMTP id f4so18158360iov.2;
+ Mon, 16 May 2022 22:04:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=xoPVRMU0KZLThhMH4YMI64a9QxnB7RHON5csLUFuoDo=;
+ b=n/48Ikj8+juy4tVWF5pmu/HA7/tgrxCeoBcwjp70BlNboWMVWHj3r8hdW5+CKFqSsV
+ LkaD1FQKHSlLnSM3/yys656GD8UxFVm7R40UAlBH+IB2MQj1ZEuTzJAcCCa/mdnSL+iy
+ 678jTUYnA11tWHoDPD6k8Gl9d6Vr1Faco6b0nGlGveY9hFFa3O+xcqQKRskkVXdlT571
+ 2k7dYTqeI7tur1CUiaFNP9Lwe2IWntUGU97Wn28KRvZEdDl9+LTbSkjG80D+9YZaReEb
+ wJQ8qRhhSvAQgPYFaguc+vjuzdS6K/MGsKaLZ1ezUyJAnAKQy5I0rYhMcSTavpCaJSRp
+ lTzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=xoPVRMU0KZLThhMH4YMI64a9QxnB7RHON5csLUFuoDo=;
+ b=PK2/hMok+fV+M51btyEBfcF7VOt023MEmlqzgMskLDrYubEYzCZhlVsCFcRFrPPtrb
+ 9NUV/KumZracGe+JCo1IvC8W3BbWZiPEminMOwFZY6aV1BVkMHgsuAvsA1nkfbCrp/DH
+ cHLeE9IDUKtiH8GprMeoRwjLoa4eOjSkdwuq460CMr8z8Hch687ZHr9vwb2n9eglYapm
+ R0cEgJ9nkY3mT4rDD4Fs/6zcaicgTaHwc4sY0646IFYc315NM9+xn9M9E0u/cDQfNFiE
+ 6VGugJHQPFf6HM9fQNWoTmt5LgEY//WcLxu8m8E2m+MNWDBDlMAIe6b918eVrIzCojtF
+ /sIQ==
+X-Gm-Message-State: AOAM53073s1fVK7X29zDhUZrfXVk6zo86bvzOPVUii4AXTH6OOqCDk4B
+ 3fJwwzFHUuDDjK2f2SQQ6hFQ2Z+WWrWkZe+SsVA=
+X-Google-Smtp-Source: ABdhPJx+mzpXRL3hMko4P5jjwkNRDnDPRWJr0qXYr1eHmpbSqXM6dyOOoMmHKHpFd/pavJZiJlctR8y/AWdsUSzAiC0=
+X-Received: by 2002:a6b:e406:0:b0:657:baed:ec0b with SMTP id
+ u6-20020a6be406000000b00657baedec0bmr9703251iog.27.1652763844195; Mon, 16 May
+ 2022 22:04:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20220517041100.93045-3-alistair.francis@opensource.wdc.com>
-Content-Type: text/plain; charset=gbk; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowACHjn5eLINiBa_tBw--.16903S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxKw48tw1fAFWfArWUZrW5KFg_yoW7trW3pr
- 15Gws0krWDJw1UGw48XF1UK3W5ur1xZa4Iga90q3W3WrW2kry3Xr1kCw1UWF4Fgw4rXa1f
- WF13GF1qgrsrta7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9F14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
- bIxvr21lc7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Wr1j6rW3
- Jr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcS
- sGvfC2KfnxnUUI43ZEXa7VUjdHUDUUUUU==
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: 5
-X-Spam_score: 0.5
-X-Spam_bar: /
-X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, MIME_CHARSET_FARAWAY=2.45,
- NICE_REPLY_A=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+References: <20220412021009.582424-1-atishp@rivosinc.com>
+ <Yl7oiF7kUrIQ0qk5@redhat.com>
+ <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
+ <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
+ <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
+ <YnOhHZGJphk30SmJ@redhat.com>
+ <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
+ <YnTZP1iG+77Cugaq@redhat.com>
+ <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
+ <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
+In-Reply-To: <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 17 May 2022 15:03:38 +1000
+Message-ID: <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
+Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
+To: Atish Kumar Patra <atishp@rivosinc.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Atish Patra <atishp@atishpatra.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -67,214 +86,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 05:02:35 -0000
+X-List-Received-Date: Tue, 17 May 2022 05:04:11 -0000
 
-
-ÔÚ 2022/5/17 ÏÂÎç12:11, Alistair Francis Ð´µÀ:
-> From: Alistair Francis <alistair.francis@wdc.com>
+On Sat, May 7, 2022 at 6:30 AM Atish Kumar Patra <atishp@rivosinc.com> wrot=
+e:
 >
-> Instead of just running the extension checks for the base CPUs, instead
-> run them for all CPUs.
+> On Fri, May 6, 2022 at 4:00 AM Peter Maydell <peter.maydell@linaro.org> w=
+rote:
+> >
+> > On Fri, 6 May 2022 at 09:18, Daniel P. Berrang=C3=A9 <berrange@redhat.c=
+om> wrote:
+> > >
+> > > On Fri, May 06, 2022 at 06:34:47AM +1000, Alistair Francis wrote:
+> > > > Even if we didn't worry about backwards compatibility the current v=
+irt
+> > > > machine would still be what most users want. It's just a small numb=
+er
+> > > > of users who don't want MMIO devices and instead want to use PCIe f=
+or
+> > > > everything. Realistically it's only HPC users who would want this t=
+ype
+> > > > of machine, at least that's my understanding.
+> > >
+> > > I'm not so sure about that. Every other architecture has ended up
+> > > standardizing on PCI for general purpose virtual machines. IIRC,
+> > > aarch64 started off with MMIO, but switched to PCI as it matured.
+> > >
+> > > In terms of having VM mgmt tools "just work" for risc-v, I think
+> > > it will be very compelling for the general 'virt' machine to be
+> > > PCI based, otherwise all the assumptions about PCI in mgmt apps
+> > > are going to break requiring never ending riscv fixes.
+> >
+> > Mmm, my experience with aarch64 virt is that PCI is much nicer
+> > as a general preference. aarch64 virt has some MMIO devices
+> > for historical reasons and some because you can't reasonably
+> > do the necessary things with PCI, but I'm actively trying to
+> > push people who submit new MMIO device features for virt to
+> > try to use a PCI-based solution instead if they possibly can.
+
+Interesting...
+
+Ok, maybe calling this "virt-pcie" might be a good start, with the
+expectation to eventually replace the current virt with the new
+virt-pcie at some point.
+
+The other option would be to try and gradually change from the current
+virt machine to this new virt machine
+
+Alistair
+
+> >
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.c | 161 ++++++++++++++++++++++-----------------------
->   1 file changed, 80 insertions(+), 81 deletions(-)
+> Yeah. That was one of the primary goals of this series. If we have an
+> alternate PCI only machine,
+> folks will be more motivated to add only PCI based solutions in the
+> future. In that case, there will be minimal
+> or no change required to the machine code itself.
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 49b844535a..ee48a18ae4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -593,102 +593,101 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->       }
->       assert(env->misa_mxl_max == env->misa_mxl);
->   
-> -    /* If only MISA_EXT is unset for misa, then set it from properties */
-> -    if (env->misa_ext == 0) {
-> -        uint32_t ext = 0;
-> +    /* Do some ISA extension error checking */
-> +    if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-> +        error_setg(errp,
-> +                   "I and E extensions are incompatible");
-> +        return;
-> +    }
->   
-> -        /* Do some ISA extension error checking */
-> -        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
-> -            error_setg(errp,
-> -                       "I and E extensions are incompatible");
-> -            return;
-> -        }
-> +    if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
-> +        error_setg(errp,
-> +                   "Either I or E extension must be set");
-> +        return;
-> +    }
->   
-> -        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
-> -            error_setg(errp,
-> -                       "Either I or E extension must be set");
-> -            return;
-> -        }
-> +    if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
-> +                            cpu->cfg.ext_a && cpu->cfg.ext_f &&
-> +                            cpu->cfg.ext_d &&
-> +                            cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-> +        warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-> +        cpu->cfg.ext_i = true;
-> +        cpu->cfg.ext_m = true;
-> +        cpu->cfg.ext_a = true;
-> +        cpu->cfg.ext_f = true;
-> +        cpu->cfg.ext_d = true;
-> +        cpu->cfg.ext_icsr = true;
-> +        cpu->cfg.ext_ifencei = true;
-> +    }
-
-Maybe you can merge the changes from my first patch to here and put this 
-before the check on 'I' and 'E'.
-
-Regards,
-
-Weiwei Li
-
->   
-> -        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
-> -                                cpu->cfg.ext_a && cpu->cfg.ext_f &&
-> -                                cpu->cfg.ext_d &&
-> -                                cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-> -            warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-> -            cpu->cfg.ext_i = true;
-> -            cpu->cfg.ext_m = true;
-> -            cpu->cfg.ext_a = true;
-> -            cpu->cfg.ext_f = true;
-> -            cpu->cfg.ext_d = true;
-> -            cpu->cfg.ext_icsr = true;
-> -            cpu->cfg.ext_ifencei = true;
-> -        }
-> +    if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-> +        error_setg(errp, "F extension requires Zicsr");
-> +        return;
-> +    }
->   
-> -        if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-> -            error_setg(errp, "F extension requires Zicsr");
-> -            return;
-> -        }
-> +    if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-> +        return;
-> +    }
->   
-> -        if ((cpu->cfg.ext_zfh || cpu->cfg.ext_zfhmin) && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "Zfh/Zfhmin extensions require F extension");
-> -            return;
-> -        }
-> +    if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "D extension requires F extension");
-> +        return;
-> +    }
->   
-> -        if (cpu->cfg.ext_d && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "D extension requires F extension");
-> -            return;
-> -        }
-> +    if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-> +        error_setg(errp, "V extension requires D extension");
-> +        return;
-> +    }
->   
-> -        if (cpu->cfg.ext_v && !cpu->cfg.ext_d) {
-> -            error_setg(errp, "V extension requires D extension");
-> -            return;
-> -        }
-> +    if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
-> +        error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-> +        return;
-> +    }
-> +
-> +    if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> +        cpu->cfg.ext_zhinxmin) {
-> +        cpu->cfg.ext_zfinx = true;
-> +    }
->   
-> -        if ((cpu->cfg.ext_zve32f || cpu->cfg.ext_zve64f) && !cpu->cfg.ext_f) {
-> -            error_setg(errp, "Zve32f/Zve64f extensions require F extension");
-> +    if (cpu->cfg.ext_zfinx) {
-> +        if (!cpu->cfg.ext_icsr) {
-> +            error_setg(errp, "Zfinx extension requires Zicsr");
->               return;
->           }
-> -
-> -        /* Set the ISA extensions, checks should have happened above */
-> -        if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
-> -            cpu->cfg.ext_zhinxmin) {
-> -            cpu->cfg.ext_zfinx = true;
-> +        if (cpu->cfg.ext_f) {
-> +            error_setg(errp,
-> +                "Zfinx cannot be supported together with F extension");
-> +            return;
->           }
-> +    }
->   
-> -        if (cpu->cfg.ext_zfinx) {
-> -            if (!cpu->cfg.ext_icsr) {
-> -                error_setg(errp, "Zfinx extension requires Zicsr");
-> -                return;
-> -            }
-> -            if (cpu->cfg.ext_f) {
-> -                error_setg(errp,
-> -                    "Zfinx cannot be supported together with F extension");
-> -                return;
-> -            }
-> -        }
-> +    if (cpu->cfg.ext_zk) {
-> +        cpu->cfg.ext_zkn = true;
-> +        cpu->cfg.ext_zkr = true;
-> +        cpu->cfg.ext_zkt = true;
-> +    }
->   
-> -        if (cpu->cfg.ext_zk) {
-> -            cpu->cfg.ext_zkn = true;
-> -            cpu->cfg.ext_zkr = true;
-> -            cpu->cfg.ext_zkt = true;
-> -        }
-> +    if (cpu->cfg.ext_zkn) {
-> +        cpu->cfg.ext_zbkb = true;
-> +        cpu->cfg.ext_zbkc = true;
-> +        cpu->cfg.ext_zbkx = true;
-> +        cpu->cfg.ext_zkne = true;
-> +        cpu->cfg.ext_zknd = true;
-> +        cpu->cfg.ext_zknh = true;
-> +    }
->   
-> -        if (cpu->cfg.ext_zkn) {
-> -            cpu->cfg.ext_zbkb = true;
-> -            cpu->cfg.ext_zbkc = true;
-> -            cpu->cfg.ext_zbkx = true;
-> -            cpu->cfg.ext_zkne = true;
-> -            cpu->cfg.ext_zknd = true;
-> -            cpu->cfg.ext_zknh = true;
-> -        }
-> +    if (cpu->cfg.ext_zks) {
-> +        cpu->cfg.ext_zbkb = true;
-> +        cpu->cfg.ext_zbkc = true;
-> +        cpu->cfg.ext_zbkx = true;
-> +        cpu->cfg.ext_zksed = true;
-> +        cpu->cfg.ext_zksh = true;
-> +    }
->   
-> -        if (cpu->cfg.ext_zks) {
-> -            cpu->cfg.ext_zbkb = true;
-> -            cpu->cfg.ext_zbkc = true;
-> -            cpu->cfg.ext_zbkx = true;
-> -            cpu->cfg.ext_zksed = true;
-> -            cpu->cfg.ext_zksh = true;
-> -        }
-> +    /* If only MISA_EXT is unset for misa, then set it from properties */
-> +    if (env->misa_ext == 0) {
-> +        uint32_t ext = 0;
->   
->           if (cpu->cfg.ext_i) {
->               ext |= RVI;
-
+> Just for clarification: We can achieve the same with the current virt
+> machine. But it is already bloated with a bunch of MMIO devices
+> and will probably continue to do so because of its flexibility. In
+> addition to that, any real PCI based platform emulation can not reuse
+> the virt machine code which will result in more vendor specific
+> implementations in the future..
+>
+> > thanks
+> > -- PMM
 
