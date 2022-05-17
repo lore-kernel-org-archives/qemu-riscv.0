@@ -1,19 +1,18 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqm58-0005Qb-Lm
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 21:33:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46064)
+	id 1nqm6H-0007NG-BP
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 21:34:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46324)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqm56-0005KO-LI; Mon, 16 May 2022 21:33:00 -0400
-Received: from smtp23.cstnet.cn ([159.226.251.23]:32808 helo=cstnet.cn)
+ id 1nqm6F-0007HY-91; Mon, 16 May 2022 21:34:11 -0400
+Received: from smtp23.cstnet.cn ([159.226.251.23]:33132 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nqm53-00024p-23; Mon, 16 May 2022 21:33:00 -0400
+ id 1nqm6C-0002B9-R6; Mon, 16 May 2022 21:34:10 -0400
 Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-03 (Coremail) with SMTP id rQCowACHjWU7+4JiwB6DBw--.53549S2;
- Tue, 17 May 2022 09:32:44 +0800 (CST)
-Subject: Re: [PATCH 1/2] target/riscv: check 'I' and 'E' after checking 'G' in
- riscv_cpu_realize
+ by APP-03 (Coremail) with SMTP id rQCowABXEuCM+4JiVjyDBw--.57923S2;
+ Tue, 17 May 2022 09:34:05 +0800 (CST)
+Subject: Re: [PATCH 2/2] target/riscv: disable zb* extensions by default
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -23,34 +22,36 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?=
  <lazyparser@gmail.com>
 References: <20220516033357.12371-1-liweiwei@iscas.ac.cn>
- <CAKmqyKPOs+-ZfO6iuXWdZDCuBTgrQEb6ySf8NPUgb2OBKfp_8A@mail.gmail.com>
+ <20220516033357.12371-2-liweiwei@iscas.ac.cn>
+ <CAKmqyKNwjv1MwGqj7LP+jF5AKg8Cpvnwx5U8gKVASFRtCYFirQ@mail.gmail.com>
+ <CAKmqyKPrx3aEBjqcT4jOG3rfNfU7LCve3QywLVCBsCP-kLcr6A@mail.gmail.com>
 From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <37684438-0590-d676-ef26-18c00720666d@iscas.ac.cn>
-Date: Tue, 17 May 2022 09:32:43 +0800
+Message-ID: <703a183e-3d61-36f3-f5af-2bbd6d5467e1@iscas.ac.cn>
+Date: Tue, 17 May 2022 09:34:04 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKPOs+-ZfO6iuXWdZDCuBTgrQEb6ySf8NPUgb2OBKfp_8A@mail.gmail.com>
+In-Reply-To: <CAKmqyKPrx3aEBjqcT4jOG3rfNfU7LCve3QywLVCBsCP-kLcr6A@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-X-CM-TRANSID: rQCowACHjWU7+4JiwB6DBw--.53549S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7Kr1DGrWrAF13Gr1rJFb_yoW8uF4fpr
- 18Ga1YyFWDJF4UGw4aq3WUKF18Wr1xA34xW3ykX3WIgrsakrnrAr1qkw1jgF4Fv3WFqa1f
- CF1akr98CrsrAaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: rQCowABXEuCM+4JiVjyDBw--.57923S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFyruw4xtry3AFyDZr15twb_yoW8Kr1fpr
+ y5JFW7Kan5JryfC3y0yw1Dtr40k3W5K392q3yIv3ZrXrWfGrsxJF1kKanYkr47Ar48Zw4I
+ 9F43uF1SvrZIva7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9Y14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
- 0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
- bIxvr21lc7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4
- AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE
- 17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMI
- IF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq
- 3wCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIda
- VFxhVjvjDU0xZFpf9x0JU2fOwUUUUU=
+ 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+ 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+ 7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE
+ 67vIY487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7x
+ kEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E
+ 67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCw
+ CI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6Fyj6rWU
+ JwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCT
+ nIWIevJa73UjIFyTuYvjfUnXdbUUUUU
 X-Originating-IP: [180.156.147.178]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.23; envelope-from=liweiwei@iscas.ac.cn;
@@ -73,81 +74,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 01:33:01 -0000
+X-List-Received-Date: Tue, 17 May 2022 01:34:11 -0000
 
 
-在 2022/5/17 上午8:23, Alistair Francis 写道:
-> On Mon, May 16, 2022 at 1:36 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>   - setting ext_g will implicitly set ext_i
+在 2022/5/17 上午8:54, Alistair Francis 写道:
+> On Tue, May 17, 2022 at 10:33 AM Alistair Francis <alistair23@gmail.com> wrote:
+>> On Mon, May 16, 2022 at 1:34 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>>>   - enable zb* extensions by default will make cpu types(such as sifive-u34) implicitly support zb* extensions
+>> Agh, this is a pain.
 >>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   slirp              |  2 +-
->>   target/riscv/cpu.c | 23 ++++++++++++-----------
->>   2 files changed, 13 insertions(+), 12 deletions(-)
->>
->> diff --git a/slirp b/slirp
->> index 9d59bb775d..a88d9ace23 160000
->> --- a/slirp
->> +++ b/slirp
->> @@ -1 +1 @@
->> -Subproject commit 9d59bb775d6294c8b447a88512f7bb43f12a25a8
->> +Subproject commit a88d9ace234a24ce1c17189642ef9104799425e0
-> Looks like you accidentally included a submodule change
+>> Can you enable these by default for the base machines then? That way
+>> they will be enabled for the virt machine
+> Actually, come to think of it, we can probably just register the
+> riscv_cpu_properties for the base cpus. That way only those CPUs can
+> be configured by the user. Can you do that instead?
 >
 > Alistair
-
-Sorry. I'll fix this later.
+>
+Yeah, This is OK. I'll do this later.
 
 Regards,
 
 Weiwei Li
 
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index ccacdee215..b12f69c584 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -583,6 +583,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->>       if (env->misa_ext == 0) {
->>           uint32_t ext = 0;
+>> Alistair
 >>
->> +        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
->> +                                cpu->cfg.ext_a & cpu->cfg.ext_f &
->> +                                cpu->cfg.ext_d)) {
->> +            warn_report("Setting G will also set IMAFD");
->> +            cpu->cfg.ext_i = true;
->> +            cpu->cfg.ext_m = true;
->> +            cpu->cfg.ext_a = true;
->> +            cpu->cfg.ext_f = true;
->> +            cpu->cfg.ext_d = true;
->> +        }
->> +
->> +
->>           /* Do some ISA extension error checking */
->>           if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
->>               error_setg(errp,
->> @@ -596,17 +608,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->>               return;
->>           }
->>
->> -        if (cpu->cfg.ext_g && !(cpu->cfg.ext_i & cpu->cfg.ext_m &
->> -                                cpu->cfg.ext_a & cpu->cfg.ext_f &
->> -                                cpu->cfg.ext_d)) {
->> -            warn_report("Setting G will also set IMAFD");
->> -            cpu->cfg.ext_i = true;
->> -            cpu->cfg.ext_m = true;
->> -            cpu->cfg.ext_a = true;
->> -            cpu->cfg.ext_f = true;
->> -            cpu->cfg.ext_d = true;
->> -        }
->> -
->>           if (cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinx ||
->>               cpu->cfg.ext_zhinxmin) {
->>               cpu->cfg.ext_zfinx = true;
->> --
->> 2.17.1
->>
->>
+>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+>>> ---
+>>>   target/riscv/cpu.c | 8 ++++----
+>>>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index b12f69c584..a3a17323e7 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -847,13 +847,13 @@ static Property riscv_cpu_properties[] = {
+>>>       DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+>>>       DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+>>>
+>>> -    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+>>> -    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+>>> -    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
+>>> +    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, false),
+>>> +    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, false),
+>>> +    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, false),
+>>>       DEFINE_PROP_BOOL("zbkb", RISCVCPU, cfg.ext_zbkb, false),
+>>>       DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
+>>>       DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
+>>> -    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
+>>> +    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, false),
+>>>       DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
+>>>       DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
+>>>       DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
+>>> --
+>>> 2.17.1
+>>>
+>>>
 
 
