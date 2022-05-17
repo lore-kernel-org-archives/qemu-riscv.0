@@ -1,72 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nr4DC-0007hI-FZ
-	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 16:54:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57462)
+	id 1nr4pP-0001va-V4
+	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 17:34:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36168)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nr4DB-0007h6-Bd; Tue, 17 May 2022 16:54:33 -0400
-Received: from mail-il1-x12c.google.com ([2607:f8b0:4864:20::12c]:37654)
+ id 1nr4pO-0001v3-TB; Tue, 17 May 2022 17:34:02 -0400
+Received: from mail-il1-x12e.google.com ([2607:f8b0:4864:20::12e]:38400)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nr4D4-0002VI-3B; Tue, 17 May 2022 16:54:27 -0400
-Received: by mail-il1-x12c.google.com with SMTP id b11so181501ilr.4;
- Tue, 17 May 2022 13:54:25 -0700 (PDT)
+ id 1nr4pM-0008Ab-R8; Tue, 17 May 2022 17:34:02 -0400
+Received: by mail-il1-x12e.google.com with SMTP id i15so245395ilk.5;
+ Tue, 17 May 2022 14:34:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=+DHnimPwkwfEZWjk2imQyCkADHOh/gynavFbiUExZe0=;
- b=IRoQ/QPZb8V3iihgK275OywFj5iCyA4E9VNzX9RNKd+sy0hl9JikGtz1/rzJ4uP1sI
- LR/zLCw+CbTmV6HUzb6fNJm+xSSGmQTQ0hE6a6c//07jfAyobkUPYbw7wEKJsmmTXvCu
- 049bF5DA+il/C/3nHJjvYvchx5Iyolaj1mlWcJWxLjI7qmRUe35WP/RgtfxemFL7BPZw
- eF5ELIg1eJQB70BzcOkbCQD9FAkVDpzy8qGMydMBHw3RgLT/5VrqMPIPMbhU6ErfEMsW
- 2WLt6M11+Lfh4bpV+f6zpepl9gINzJ9TetdxxSGSGyyvIRpd1ZDsAeKgjUp9WPtPT7g4
- U20w==
+ :cc; bh=njmOWjFd1zNstZ2QQg05Jfyh1xdfTAEn6DOLdDeY9mc=;
+ b=GIblwptLqtwJSNRP8YMZAAQ2XsK4Gw6L7b3xWqhsbNi1eZIaS9dFH3pMdsnMO5o+X1
+ cpmJGXFKLEvclOG4QKJcLWFoQfydv9O22Y95zn5InoDZeXfnkhAt1+zhj5iKltN+muBU
+ MgT002ZAYMToR1NyurAHJWqgByizppqfh94Jl9aN7rG3ph6l3wqJbHjMIGorEPE5T2Mi
+ Hig5QImb5vSaQBjtDgKxkISz/j7OtM/eckx82JsdudC1ZYDzB54Va+ommH5BHVLaIQ68
+ 1cM1S493RBiBxvvHxswY/MO2Rs0Z/1dLm5+x5NQPBmszKdr8SA19p5zyQZgv2HPCyzfd
+ YiUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=+DHnimPwkwfEZWjk2imQyCkADHOh/gynavFbiUExZe0=;
- b=MPOLKCq9CinwD9RD5zc7mwVdQjbwr1VqNi/Nwsh10VPOpVRtTdvJ6SyrvCS1ISz6kc
- cYEParfeb5U0opcdtBo0UjbXL2gEcytE6Q+TgwdMekXgvL/sL4FELGJTpngmZUsGS5hf
- RhmGDSZdV/nDmvJ4pBk+tgBIoE2p2Q3IsTMMQYqUZqrCpWgZaUb6bYq+hVNnt0kxCnsX
- ZJxTwNSy1KOXM0+5KQnM474ikT81TAC00MHpLwKgnVA4RIlwDL/iiIRhuHeFvLm/XLKi
- 2e3ZdPnOwIuXY/T8w19PB1hVhueBmzR3D5JnJiha+vPQbNe9nmhy0oPfAgEIFAWsPsYX
- fGNg==
-X-Gm-Message-State: AOAM533oLq9MfeMBYsMKHGAGUG6hwbDhYENPj1Je8Meu7/4+c6SFEjCN
- nGtbRV5YXyF34FwbpbtamIiWvM0lloPq2RUDzkE=
-X-Google-Smtp-Source: ABdhPJwZbb3ua4NmYYeCJMLtomqkU/zAeiiia3gmhY9wEW8ddr0F+b++TN6gt+2Uba0j1h3rsA8hFhup5zXRo5JbTOI=
-X-Received: by 2002:a05:6e02:1986:b0:2cf:908d:3d0a with SMTP id
- g6-20020a056e02198600b002cf908d3d0amr12754458ilf.113.1652820864157; Tue, 17
- May 2022 13:54:24 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=njmOWjFd1zNstZ2QQg05Jfyh1xdfTAEn6DOLdDeY9mc=;
+ b=HxVmwJ4u3ve5T6o+8dnWYsF9K8nan4JFBjw6Sy4j4c3lgIqxMSCr9DdMOQQgeqrB4z
+ 4sFgxBUe0vEILDR6fXVeGhxcePjFsa5jVO/14ctQ+INyAj9+mWEKIC/DuVYrxVUDIbwM
+ FijVjbk0KAnCml5hyV+Eu42vMBC9RV/4emnzJvTmCDcauTSLJUKbqnchNXBxm3CsP2/e
+ 8MJMach+tBSoQreJVKULCaq4yamtbNtHBl/HIWy7NVXcfsoqjsJmPGhJySPdLk//xKhd
+ UIJgFXC157dbOMPLn/JzvnoYTFW0F+exdw3WtHcuHLJ5+H4dbefkPY+W8/XwM01SrBd9
+ 3I3Q==
+X-Gm-Message-State: AOAM532jMvFN3X+O4A0VsdBpDHA7cTqQwtc9hZZ6SCseFSU9jFR4qccG
+ NBu3+D48rLBhVN+FgE2dvYDBUp0GbFEQ5k417+E=
+X-Google-Smtp-Source: ABdhPJyi+XmrJZuaJS6/YhMQW/dKYHU2QhTVg12kxNcj3enaJYJ+bRB5yCutViXySBMrwVBACVF+mCdRtFSjE6EjlcI=
+X-Received: by 2002:a05:6e02:170b:b0:2cf:9f8f:afdf with SMTP id
+ u11-20020a056e02170b00b002cf9f8fafdfmr13231888ill.260.1652823239139; Tue, 17
+ May 2022 14:33:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <Yl7oiF7kUrIQ0qk5@redhat.com>
- <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
- <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
- <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
- <YnOhHZGJphk30SmJ@redhat.com>
- <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
- <YnTZP1iG+77Cugaq@redhat.com>
- <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
- <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
- <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
- <YoNiPw/3e+CY0v7o@redhat.com>
-In-Reply-To: <YoNiPw/3e+CY0v7o@redhat.com>
+References: <20220517072645.24938-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220517072645.24938-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 18 May 2022 06:53:57 +1000
-Message-ID: <CAKmqyKOC0Fgu7WUXRcAJZNmVR8GeiXHGh4K8fg+5_c+pvZR_7w@mail.gmail.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Atish Kumar Patra <atishp@rivosinc.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Atish Patra <atishp@atishpatra.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+Date: Wed, 18 May 2022 07:33:32 +1000
+Message-ID: <CAKmqyKO6y+t3AO3vZXc9LzF1MmrCzB6KTi1Yr0bs0JXJ+EFxcw@mail.gmail.com>
+Subject: Re: [PATCH v3] target/riscv: check 'I' and 'E' after checking 'G' in
+ riscv_cpu_realize
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12c;
- envelope-from=alistair23@gmail.com; helo=mail-il1-x12c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::12e;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x12e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -87,80 +75,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 20:54:33 -0000
+X-List-Received-Date: Tue, 17 May 2022 21:34:03 -0000
 
-On Tue, May 17, 2022 at 6:52 PM Daniel P. Berrang=C3=A9 <berrange@redhat.co=
-m> wrote:
+On Tue, May 17, 2022 at 5:28 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> On Tue, May 17, 2022 at 03:03:38PM +1000, Alistair Francis wrote:
-> > On Sat, May 7, 2022 at 6:30 AM Atish Kumar Patra <atishp@rivosinc.com> =
-wrote:
-> > >
-> > > On Fri, May 6, 2022 at 4:00 AM Peter Maydell <peter.maydell@linaro.or=
-g> wrote:
-> > > >
-> > > > On Fri, 6 May 2022 at 09:18, Daniel P. Berrang=C3=A9 <berrange@redh=
-at.com> wrote:
-> > > > >
-> > > > > On Fri, May 06, 2022 at 06:34:47AM +1000, Alistair Francis wrote:
-> > > > > > Even if we didn't worry about backwards compatibility the curre=
-nt virt
-> > > > > > machine would still be what most users want. It's just a small =
-number
-> > > > > > of users who don't want MMIO devices and instead want to use PC=
-Ie for
-> > > > > > everything. Realistically it's only HPC users who would want th=
-is type
-> > > > > > of machine, at least that's my understanding.
-> > > > >
-> > > > > I'm not so sure about that. Every other architecture has ended up
-> > > > > standardizing on PCI for general purpose virtual machines. IIRC,
-> > > > > aarch64 started off with MMIO, but switched to PCI as it matured.
-> > > > >
-> > > > > In terms of having VM mgmt tools "just work" for risc-v, I think
-> > > > > it will be very compelling for the general 'virt' machine to be
-> > > > > PCI based, otherwise all the assumptions about PCI in mgmt apps
-> > > > > are going to break requiring never ending riscv fixes.
-> > > >
-> > > > Mmm, my experience with aarch64 virt is that PCI is much nicer
-> > > > as a general preference. aarch64 virt has some MMIO devices
-> > > > for historical reasons and some because you can't reasonably
-> > > > do the necessary things with PCI, but I'm actively trying to
-> > > > push people who submit new MMIO device features for virt to
-> > > > try to use a PCI-based solution instead if they possibly can.
-> >
-> > Interesting...
-> >
-> > Ok, maybe calling this "virt-pcie" might be a good start, with the
-> > expectation to eventually replace the current virt with the new
-> > virt-pcie at some point.
+>  - setting ext_g will implicitly set ext_i
 >
-> Delaying the inevitable by leaving PCIE support in a separate
-> machine type initially is going to be more painful long term.
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> ---
+>  target/riscv/cpu.c | 26 +++++++++++++-------------
+>  1 file changed, 13 insertions(+), 13 deletions(-)
 >
-> > The other option would be to try and gradually change from the current
-> > virt machine to this new virt machine
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6d01569cad..1c76debb2b 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -583,19 +583,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>      if (env->misa_ext == 0) {
+>          uint32_t ext = 0;
 >
-> Yes, I really think the 'virt' machine type needs to aim for PCIE
-> support sooner rather than later, if RISC-V wants to get on part
-> with other architectures. The best time to have added PCIE support
-> to 'virt' was when it was first created, the next best time is now.
+> -        /* Do some ISA extension error checking */
 
-So maybe instead we lock in the current virt machine as the 7.1 virt
-machine for QEMU 7.1, then work on migrating to a PCIe only machine
-with versions (similar to the other archs)
+Can we leave this comment here? Otherwise:
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> -        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+> -            error_setg(errp,
+> -                       "I and E extensions are incompatible");
+> -            return;
+> -        }
+> -
+> -        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+> -            error_setg(errp,
+> -                       "Either I or E extension must be set");
+> -            return;
+> -        }
+> -
+>          if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+>                                  cpu->cfg.ext_a && cpu->cfg.ext_f &&
+>                                  cpu->cfg.ext_d &&
+> @@ -610,6 +597,19 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              cpu->cfg.ext_ifencei = true;
+>          }
 >
-> With regards,
-> Daniel
+> +        /* Do some ISA extension error checking */
+> +        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+> +            error_setg(errp,
+> +                       "I and E extensions are incompatible");
+> +            return;
+> +        }
+> +
+> +        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+> +            error_setg(errp,
+> +                       "Either I or E extension must be set");
+> +            return;
+> +        }
+> +
+>          if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
+>              error_setg(errp, "F extension requires Zicsr");
+>              return;
 > --
-> |: https://berrange.com      -o-    https://www.flickr.com/photos/dberran=
-ge :|
-> |: https://libvirt.org         -o-            https://fstop138.berrange.c=
-om :|
-> |: https://entangle-photo.org    -o-    https://www.instagram.com/dberran=
-ge :|
+> 2.17.1
+>
 >
 
