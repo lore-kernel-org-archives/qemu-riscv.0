@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqlAO-0006qt-FS
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 20:34:24 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40126)
+	id 1nqlCW-0000gx-KC
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 20:36:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40500)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqlAN-0006qf-0o; Mon, 16 May 2022 20:34:23 -0400
-Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:37401)
+ id 1nqlCV-0000gl-FQ; Mon, 16 May 2022 20:36:35 -0400
+Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:36602)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqlAL-0001NK-Cv; Mon, 16 May 2022 20:34:22 -0400
-Received: by mail-io1-xd2b.google.com with SMTP id m6so17800809iob.4;
- Mon, 16 May 2022 17:34:20 -0700 (PDT)
+ id 1nqlCT-0001uF-UZ; Mon, 16 May 2022 20:36:35 -0400
+Received: by mail-io1-xd29.google.com with SMTP id e15so17791759iob.3;
+ Mon, 16 May 2022 17:36:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=mF6mDAKFc77AYNNXA4OHnGa51omnsliyczJ7paY1mEI=;
- b=Za/1gTrCk97+tGggqjPdevz9ryPlTqwYvB9+PEw+rWAVlRbdSomICxSwvzbsHabDcV
- pejk8d9Xfufw7fMbjJEC/f1Xi5LiexEsqg1VGtjwLdbEbOLO515yRSp5gaYSpsZ1/5/P
- GrMBkv0gGqxV1JSDisDQ6L2I7f56G/ZFTAevbLmam3tSYd+Phrd2f31H336/poNFXL7V
- 5hMcN+EyLi3RXLqH36V0MJ2yLbPRoMZZT3leRedIA3pUOQl1rNbdbWxittLUtSopW6vH
- oLvy8XFeKzisl8XGmsp28PviL3iWRFboY5QoUMSU0u6Act4iVJdS7Oxz1ojD20nJRekU
- ieOg==
+ :cc; bh=+Tjezw1r+4C36O7qGAqZbpkDcW240KLtZXPo4/62zW4=;
+ b=oInIEpx1y51O/AadnyRjoirMOjqSjxNHAd8lcV+f/KP62XezL+JBZz45xoS7EqVglo
+ 0ifjQrxF9WaLoucbetmsQd8C7mFgvfXWvGlG6Ndnm07i4rbKq0jQOevHZS2rqS3YEgCk
+ c3spIx1kZf1oNVwcfwSx8HQG42n6wM+eEviX9iGM74nzVV/EYV0md7ubUvlGIaGeudUW
+ jNF9LmWaJ1JSjdVgCHvj/MNC8TbtB9w93vHbEdjbZtvNuDTpMTALtKXUHVx3gj7DmFid
+ At704wGfOzddNFzDRAW9y6lxI1f2WuFw4WmRVyL0IJYLl29l4H9Ar9my1pXaUKptQmJk
+ BYQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=mF6mDAKFc77AYNNXA4OHnGa51omnsliyczJ7paY1mEI=;
- b=h6ZTUB+sGrkWRm+kQDDODzMMEM/TukZnJdKNz3dGdnR9f4GuNGnxT8Bh1g2n7onE5M
- HWs/eE0IeatmNvOyh89/5ibC8KRnBCFAk0r7rLUcl1jamJTBFHuCqlvp316l/TzhiVAy
- Yyfuo9QYPAcTrLHVyeflKqDNqzkZFUEPedzitue1gfCtw0tuSv1vkMD7LXjKSt0gV9Zg
- l08+4rDoBKkvwrRYePjknJAx3MSRX0vHRJODfIi0CbC2Xv5mWDqHAsIFQwu/9fGep84v
- UoaZxbNkUOaByNZRR1WQAM21sU4Ka1vh1SC23fwBGRl7lTIYjgqPdK6eIFYJwACtlbFx
- Qi3Q==
-X-Gm-Message-State: AOAM532YXoDoUmLoh9UhOOSkscyol3aXgbxxx7B99N7YtyCH9f4/f/A4
- YfmdSw5FclaOY+izTWEVbFstbMxl5Ul+3ovF2S8=
-X-Google-Smtp-Source: ABdhPJxrx0xmFqpL6B4m1IYQyrByBn93U4ZY6777r/DIy2f67Dg/gUHdLxSLSem7alzIn6s/bw+ZniEua4fFXgA/hzI=
-X-Received: by 2002:a5d:9818:0:b0:65b:ae2:863e with SMTP id
- a24-20020a5d9818000000b0065b0ae2863emr9094746iol.31.1652747659022; Mon, 16
- May 2022 17:34:19 -0700 (PDT)
+ bh=+Tjezw1r+4C36O7qGAqZbpkDcW240KLtZXPo4/62zW4=;
+ b=DYNWSQecjHEhZ88S5AJkFhsYIH9whQVgSiCZll8z8sYzdpaED9Ip5MWDXU1GTIvaTW
+ VFTty5LVkobFdJryvcqV9IKoXiy1ghXlxWPIe6he1Do2pywBE44FWoGhsaSjmqYws031
+ V0WRqNQXcRRvQ/4VsdYARhj17KP5MCAAwdvkRPEXg1U4VOt2YidWbzCYyf0ObvkB3qc+
+ K0QwKYkimwpWqKmwCqgcY6fLMNPrDh6AhtH4GuHoXf7StOQDPC45bASKksJh7pZDYLRz
+ myerz5G5eTwweyiIKJtYWv3nvEDR+UXkoiH8FMnB4pZf+qwmebwZjt63k8eklBha0u6T
+ 4L2A==
+X-Gm-Message-State: AOAM531tEdRlUxc72w5nmTfL6UJHNzPQ+IoHR2rtgk52UwltBZU/faUk
+ 6ZOGCsHxQR9tTWXI/QNAX7BDZT8vYJ/eEAVze1U=
+X-Google-Smtp-Source: ABdhPJzh3rUBcW9w0crPCSxABThCYX7Khomy5jtaQKZbMyYjnso3RQXgOOIE7o2c5RmFjbzDfLx9fZ0Qr5bVEor7aXM=
+X-Received: by 2002:a05:6638:1442:b0:32e:2253:8e76 with SMTP id
+ l2-20020a056638144200b0032e22538e76mr5389360jad.21.1652747791974; Mon, 16 May
+ 2022 17:36:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220516033357.12371-1-liweiwei@iscas.ac.cn>
- <20220516033357.12371-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220516033357.12371-2-liweiwei@iscas.ac.cn>
+References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
+ <cover.1652509778.git.research_trasio@irq.a4lg.com>
+ <d17381d3ea4992808cf1894f379ca67220f61b45.1652509778.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <d17381d3ea4992808cf1894f379ca67220f61b45.1652509778.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 May 2022 10:33:53 +1000
-Message-ID: <CAKmqyKNwjv1MwGqj7LP+jF5AKg8Cpvnwx5U8gKVASFRtCYFirQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: disable zb* extensions by default
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+Date: Tue, 17 May 2022 10:36:06 +1000
+Message-ID: <CAKmqyKMGUBZq2WwHPFrbUwGEjsc1Brj5nonhSgFWjXq7=F25cA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] hw/riscv: Make CPU config error handling generous
+ (virt/spike)
+To: Tsukasa OI <research_trasio@irq.a4lg.com>
+Cc: Frank Chang <frank.chang@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -75,50 +74,57 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 00:34:23 -0000
+X-List-Received-Date: Tue, 17 May 2022 00:36:35 -0000
 
-On Mon, May 16, 2022 at 1:34 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Sat, May 14, 2022 at 4:29 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
->  - enable zb* extensions by default will make cpu types(such as sifive-u34) implicitly support zb* extensions
+> If specified CPU configuration is not valid, not just it prints error
+> message, it aborts and generates core dumps (depends on the operating
+> system).  This kind of error handling should be used only when a serious
+> runtime error occurs.
+>
+> This commit makes error handling on CPU configuration more generous on
+> virt/spike machines.  It now just prints error message and quits (without
+> coredumps and aborts).
+>
+> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 
-Agh, this is a pain.
-
-Can you enable these by default for the base machines then? That way
-they will be enabled for the virt machine
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 > ---
->  target/riscv/cpu.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  hw/riscv/spike.c | 2 +-
+>  hw/riscv/virt.c  | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b12f69c584..a3a17323e7 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -847,13 +847,13 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
->      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index 068ba3493e..e41b6aa9f0 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -230,7 +230,7 @@ static void spike_board_init(MachineState *machine)
+>                                  base_hartid, &error_abort);
+>          object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+>                                  hart_count, &error_abort);
+> -        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
+> +        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
 >
-> -    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-> -    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-> -    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-> +    DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, false),
-> +    DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, false),
-> +    DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, false),
->      DEFINE_PROP_BOOL("zbkb", RISCVCPU, cfg.ext_zbkb, false),
->      DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
->      DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
-> -    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
-> +    DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, false),
->      DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
->      DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
->      DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
+>          /* Core Local Interruptor (timer and IPI) for each socket */
+>          riscv_aclint_swi_create(
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 3326f4db96..244d6408b5 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1351,7 +1351,7 @@ static void virt_machine_init(MachineState *machine)
+>                                  base_hartid, &error_abort);
+>          object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
+>                                  hart_count, &error_abort);
+> -        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
+> +        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+>
+>          if (!kvm_enabled()) {
+>              if (s->have_aclint) {
 > --
-> 2.17.1
->
+> 2.34.1
 >
 
