@@ -1,73 +1,92 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqswc-0001Sp-N2
-	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 04:52:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57736)
+	id 1nqxL7-0007c3-WA
+	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 09:34:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41576)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1nqswT-0001SC-UV
- for qemu-riscv@nongnu.org; Tue, 17 May 2022 04:52:34 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:23749)
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1nqvUE-0007F6-8p
+ for qemu-riscv@nongnu.org; Tue, 17 May 2022 07:35:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:47645)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1nqswQ-0006AW-3z
- for qemu-riscv@nongnu.org; Tue, 17 May 2022 04:52:32 -0400
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1nqvUB-0002bv-Rc
+ for qemu-riscv@nongnu.org; Tue, 17 May 2022 07:35:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652777544;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=m9F5xLc60hhWhwq5kwE7Ef6WJP4Y+K7WeLiEjnbb3tI=;
- b=BuvR4/2BqSHK7QLXq3MjK9jymzbNJU2ySp7agBK+2Au2GnWB/0RmaVugcJcwYTFodMQdcT
- q/g3gc+7ZPZLa7tIstWB0YQnB17tAEcQqU0UpCvc32ADAa69tcxakIt2Sk88nAko7QLzTl
- wX3H9znLJthvfPplsp2PoZmGDOH7G9A=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ s=mimecast20190719; t=1652787330;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=U2sNmW1WDrxCrFdt15EmP2SLORxZfqnaK84wuaXPg8g=;
+ b=by8IUAFoyX9sndv02XSHO1B3y1L9suAWz9Nsx32BNEd6mXNf/LneAav0p3BpXSXDf6ltPi
+ lgBqZqF7aBlb4ZJfy9Ne819kzeY9tXtCf430dgp9vCrHJICY7jtV+4YtwryGYe38DBiJup
+ /sRRxHdvQA9jpfda/0dvTOQE9Y2yfJk=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-618-_BhGJs3VM-m16S84P9Wz5A-1; Tue, 17 May 2022 04:52:21 -0400
-X-MC-Unique: _BhGJs3VM-m16S84P9Wz5A-1
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A8102299E755;
- Tue, 17 May 2022 08:52:20 +0000 (UTC)
-Received: from redhat.com (unknown [10.33.36.190])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4C7995742E7;
- Tue, 17 May 2022 08:52:18 +0000 (UTC)
-Date: Tue, 17 May 2022 09:52:15 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Atish Kumar Patra <atishp@rivosinc.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Atish Patra <atishp@atishpatra.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-Message-ID: <YoNiPw/3e+CY0v7o@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <Yl7oiF7kUrIQ0qk5@redhat.com>
- <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
- <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
- <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
- <YnOhHZGJphk30SmJ@redhat.com>
- <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
- <YnTZP1iG+77Cugaq@redhat.com>
- <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
- <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
- <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
+ us-mta-582-u0v3dNF8OXCj01sP4WDPkw-1; Tue, 17 May 2022 07:35:29 -0400
+X-MC-Unique: u0v3dNF8OXCj01sP4WDPkw-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ s16-20020adfeb10000000b0020cc4e5e683so4595020wrn.6
+ for <qemu-riscv@nongnu.org>; Tue, 17 May 2022 04:35:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=U2sNmW1WDrxCrFdt15EmP2SLORxZfqnaK84wuaXPg8g=;
+ b=nNWLGAYbN1zwxoNRo7ExyMDoTkImAW2frZoiuy6Df8RLhsBXI27aIpFQ0Rr9NQaNEi
+ fm7Sa98vrBzb9kO4PfDDOSNAVxVwT/daBq2Ij/RHNZqwjkzrbqVXBlGdY9r8y7Y4iuwi
+ uo3JN0+PYMnCYJbQd4Lwh9KHWe31J+LSfTRXTK5Ino0Ci19oqIAXj+1gq6ApUhaLbrkT
+ OyWSVBNAL31ncoIOIIvzyLppp2GD0xi8He5v9Ew0AdeQqHhv+kv4MntI+MFauJeBx9Om
+ l3/FfVsK/tpXCUSyapUdvsBa0LJS0YSZc3t0G3TGiSllMTJZQssht1m9MhPZK5aMJTMb
+ 4phw==
+X-Gm-Message-State: AOAM530gLe8SJTfM82DlF32EPJXhgV7Y3VrayyFDI5ycHefaUC1BAPSo
+ RcPnLpGuUBmX+1+eMU6vLTMXvo3+hMt3+tl9IUyVDF6uynAAESq3BEtH6BMD3HsbxaWs1sjqLxJ
+ 5sl5p7UtfC7qArV8=
+X-Received: by 2002:a5d:4948:0:b0:20e:58f8:f4ce with SMTP id
+ r8-20020a5d4948000000b0020e58f8f4cemr2203831wrs.229.1652787328036; 
+ Tue, 17 May 2022 04:35:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzov3l5thqbX4p/2Jte29EPejPe9dYXkyXXVBITCoDrG0xBTUpYmFScaQ3anVw70pJXdL5XpA==
+X-Received: by 2002:a5d:4948:0:b0:20e:58f8:f4ce with SMTP id
+ r8-20020a5d4948000000b0020e58f8f4cemr2203780wrs.229.1652787327684; 
+ Tue, 17 May 2022 04:35:27 -0700 (PDT)
+Received: from fedora.redhat.com ([2001:8a0:f4d9:2101:a4fa:5f93:755f:6249])
+ by smtp.gmail.com with ESMTPSA id
+ m14-20020a5d64ae000000b0020d0fbf578esm4570177wrp.7.2022.05.17.04.35.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 May 2022 04:35:27 -0700 (PDT)
+From: Alberto Faria <afaria@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Andrew Jeffery <andrew@aj.id.au>, Peter Maydell <peter.maydell@linaro.org>,
+ qemu-block@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ qemu-ppc@nongnu.org, Eric Blake <eblake@redhat.com>,
+ Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>,
+ Hanna Reitz <hreitz@redhat.com>, John Snow <jsnow@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
+ qemu-riscv@nongnu.org,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Joel Stanley <joel@jms.id.au>, Stefan Weil <sw@weilnetz.de>,
+ Laurent Vivier <laurent@vivier.eu>, "Denis V. Lunev" <den@openvz.org>,
+ Juan Quintela <quintela@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, Greg Kurz <groug@kaod.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Kevin Wolf <kwolf@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org,
+ Fam Zheng <fam@euphon.net>, Alistair Francis <alistair@alistair23.me>,
+ Beniamino Galvani <b.galvani@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Alberto Faria <afaria@redhat.com>
+Subject: [PATCH 00/18] Make block-backend-io.h API more consistent
+Date: Tue, 17 May 2022 12:35:06 +0100
+Message-Id: <20220517113524.197910-1-afaria@redhat.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=afaria@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
-User-Agent: Mutt/2.2.1 (2022-02-19)
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=afaria@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -28
 X-Spam_score: -2.9
@@ -77,6 +96,7 @@ X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 17 May 2022 09:34:11 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,60 +108,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 08:52:34 -0000
+X-List-Received-Date: Tue, 17 May 2022 11:35:40 -0000
 
-On Tue, May 17, 2022 at 03:03:38PM +1000, Alistair Francis wrote:
-> On Sat, May 7, 2022 at 6:30 AM Atish Kumar Patra <atishp@rivosinc.com> wrote:
-> >
-> > On Fri, May 6, 2022 at 4:00 AM Peter Maydell <peter.maydell@linaro.org> wrote:
-> > >
-> > > On Fri, 6 May 2022 at 09:18, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> > > >
-> > > > On Fri, May 06, 2022 at 06:34:47AM +1000, Alistair Francis wrote:
-> > > > > Even if we didn't worry about backwards compatibility the current virt
-> > > > > machine would still be what most users want. It's just a small number
-> > > > > of users who don't want MMIO devices and instead want to use PCIe for
-> > > > > everything. Realistically it's only HPC users who would want this type
-> > > > > of machine, at least that's my understanding.
-> > > >
-> > > > I'm not so sure about that. Every other architecture has ended up
-> > > > standardizing on PCI for general purpose virtual machines. IIRC,
-> > > > aarch64 started off with MMIO, but switched to PCI as it matured.
-> > > >
-> > > > In terms of having VM mgmt tools "just work" for risc-v, I think
-> > > > it will be very compelling for the general 'virt' machine to be
-> > > > PCI based, otherwise all the assumptions about PCI in mgmt apps
-> > > > are going to break requiring never ending riscv fixes.
-> > >
-> > > Mmm, my experience with aarch64 virt is that PCI is much nicer
-> > > as a general preference. aarch64 virt has some MMIO devices
-> > > for historical reasons and some because you can't reasonably
-> > > do the necessary things with PCI, but I'm actively trying to
-> > > push people who submit new MMIO device features for virt to
-> > > try to use a PCI-based solution instead if they possibly can.
-> 
-> Interesting...
-> 
-> Ok, maybe calling this "virt-pcie" might be a good start, with the
-> expectation to eventually replace the current virt with the new
-> virt-pcie at some point.
+Adjust existing pairs of non-coroutine and coroutine functions to share
+the same calling convention, and add non-coroutine/coroutine
+counterparts where they don't exist.
 
-Delaying the inevitable by leaving PCIE support in a separate
-machine type initially is going to be more painful long term.
+Also make the non-coroutine versions generated_co_wrappers.
 
-> The other option would be to try and gradually change from the current
-> virt machine to this new virt machine
+This series sits on top of "[PATCH v2 00/10] Implement bdrv_{pread,
+pwrite, pwrite_sync, pwrite_zeroes}() using generated_co_wrapper":
 
-Yes, I really think the 'virt' machine type needs to aim for PCIE
-support sooner rather than later, if RISC-V wants to get on part
-with other architectures. The best time to have added PCIE support
-to 'virt' was when it was first created, the next best time is now.
+    https://lore.kernel.org/qemu-devel/20220513155418.2486450-1-afaria@redhat.com/
 
-With regards,
-Daniel
+Based-on: <20220513155418.2486450-1-afaria@redhat.com>
+
+Alberto Faria (18):
+  block: Make blk_{pread,pwrite}() return 0 on success
+  block: Add a 'flags' param to blk_pread()
+  block: Change blk_{pread,pwrite}() param order
+  block: Make 'bytes' param of blk_{pread,pwrite}() an int64_t
+  block: Make blk_co_pwrite() take a const buffer
+  block: Implement blk_{pread,pwrite}() using generated_co_wrapper
+  block: Add blk_{preadv,pwritev}()
+  block: Add blk_[co_]preadv_part()
+  block: Export blk_pwritev_part() in block-backend-io.h
+  block: Change blk_pwrite_compressed() param order
+  block: Add blk_co_pwrite_compressed()
+  block: Implement blk_pwrite_zeroes() using generated_co_wrapper
+  block: Implement blk_pdiscard() using generated_co_wrapper
+  block: Implement blk_flush() using generated_co_wrapper
+  block: Add blk_co_ioctl()
+  block: Add blk_co_truncate()
+  block: Reorganize some declarations in block-backend-io.h
+  block: Remove remaining unused symbols in coroutines.h
+
+ block.c                           |  10 +-
+ block/block-backend.c             | 150 ++++++++++++------------------
+ block/commit.c                    |   4 +-
+ block/coroutines.h                |  44 ---------
+ block/crypto.c                    |   2 +-
+ block/export/fuse.c               |   4 +-
+ block/meson.build                 |   1 +
+ block/parallels.c                 |   2 +-
+ block/qcow.c                      |  14 +--
+ block/qcow2.c                     |   4 +-
+ block/qed.c                       |   8 +-
+ block/vdi.c                       |   4 +-
+ block/vhdx.c                      |  20 ++--
+ block/vmdk.c                      |  10 +-
+ block/vpc.c                       |  12 +--
+ hw/arm/allwinner-h3.c             |   2 +-
+ hw/arm/aspeed.c                   |   2 +-
+ hw/block/block.c                  |   2 +-
+ hw/block/fdc.c                    |  20 ++--
+ hw/block/hd-geometry.c            |   2 +-
+ hw/block/m25p80.c                 |   2 +-
+ hw/block/nand.c                   |  47 +++++-----
+ hw/block/onenand.c                |  32 +++----
+ hw/block/pflash_cfi01.c           |   4 +-
+ hw/block/pflash_cfi02.c           |   4 +-
+ hw/ide/atapi.c                    |   4 +-
+ hw/misc/mac_via.c                 |   6 +-
+ hw/misc/sifive_u_otp.c            |  14 +--
+ hw/nvram/eeprom_at24c.c           |   8 +-
+ hw/nvram/spapr_nvram.c            |  16 ++--
+ hw/nvram/xlnx-bbram.c             |   4 +-
+ hw/nvram/xlnx-efuse.c             |   4 +-
+ hw/ppc/pnv_pnor.c                 |   6 +-
+ hw/sd/sd.c                        |   4 +-
+ include/sysemu/block-backend-io.h | 105 ++++++++++++---------
+ migration/block.c                 |   8 +-
+ nbd/server.c                      |   8 +-
+ qemu-img.c                        |  33 +++----
+ qemu-io-cmds.c                    |  20 ++--
+ tests/unit/test-block-iothread.c  | 141 ++++++++++++++++++++++++++--
+ 40 files changed, 433 insertions(+), 354 deletions(-)
+
 -- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+2.35.3
 
 
