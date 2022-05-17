@@ -1,59 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqlCW-0000gx-KC
-	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 20:36:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40500)
+	id 1nqlCx-0001Pp-QZ
+	for mharc-qemu-riscv@gnu.org; Mon, 16 May 2022 20:37:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40582)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqlCV-0000gl-FQ; Mon, 16 May 2022 20:36:35 -0400
-Received: from mail-io1-xd29.google.com ([2607:f8b0:4864:20::d29]:36602)
+ id 1nqlCw-0001MX-14; Mon, 16 May 2022 20:37:02 -0400
+Received: from mail-io1-xd2e.google.com ([2607:f8b0:4864:20::d2e]:39779)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nqlCT-0001uF-UZ; Mon, 16 May 2022 20:36:35 -0400
-Received: by mail-io1-xd29.google.com with SMTP id e15so17791759iob.3;
- Mon, 16 May 2022 17:36:32 -0700 (PDT)
+ id 1nqlCu-0001ws-Em; Mon, 16 May 2022 20:37:01 -0400
+Received: by mail-io1-xd2e.google.com with SMTP id e3so17771456ios.6;
+ Mon, 16 May 2022 17:36:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+Tjezw1r+4C36O7qGAqZbpkDcW240KLtZXPo4/62zW4=;
- b=oInIEpx1y51O/AadnyRjoirMOjqSjxNHAd8lcV+f/KP62XezL+JBZz45xoS7EqVglo
- 0ifjQrxF9WaLoucbetmsQd8C7mFgvfXWvGlG6Ndnm07i4rbKq0jQOevHZS2rqS3YEgCk
- c3spIx1kZf1oNVwcfwSx8HQG42n6wM+eEviX9iGM74nzVV/EYV0md7ubUvlGIaGeudUW
- jNF9LmWaJ1JSjdVgCHvj/MNC8TbtB9w93vHbEdjbZtvNuDTpMTALtKXUHVx3gj7DmFid
- At704wGfOzddNFzDRAW9y6lxI1f2WuFw4WmRVyL0IJYLl29l4H9Ar9my1pXaUKptQmJk
- BYQw==
+ :cc; bh=BbUqW6sYjIeAcBGZ8Yp3/yjoJBHGfHZy8K5t5TV7ZGw=;
+ b=HcwdyUBSRBejtWO/KM/Esjh5d4065Tq5cLfwEJfJdjS7ArI54el6lvZ9gJYESgMTAM
+ 3u0PSguZ7ELT0jDuEE/lj5Hn3YiXmZNLSwZPEqx0jQKNS4al3xhGdTThnnppNZt6t95H
+ zjXATzpVXqoSM0w7sNxu7sHwDeCHErm0gBNnLbDuYVS40jojRBUVmTY2z/zoG5x6yRrE
+ LILCY1W2r0FWWJ6ZqNilHmfmxsVGMV8/T60+4rOsc5KWxfrdfz3jn2v6gNlUUNftPzn6
+ FZoudN1p5fMtxlxMfM8g1UbhdZ9s4t/Ms8Kd2Rw+cJd/3E/6z8+yad4roYIYnmkoMx6H
+ Epaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+Tjezw1r+4C36O7qGAqZbpkDcW240KLtZXPo4/62zW4=;
- b=DYNWSQecjHEhZ88S5AJkFhsYIH9whQVgSiCZll8z8sYzdpaED9Ip5MWDXU1GTIvaTW
- VFTty5LVkobFdJryvcqV9IKoXiy1ghXlxWPIe6he1Do2pywBE44FWoGhsaSjmqYws031
- V0WRqNQXcRRvQ/4VsdYARhj17KP5MCAAwdvkRPEXg1U4VOt2YidWbzCYyf0ObvkB3qc+
- K0QwKYkimwpWqKmwCqgcY6fLMNPrDh6AhtH4GuHoXf7StOQDPC45bASKksJh7pZDYLRz
- myerz5G5eTwweyiIKJtYWv3nvEDR+UXkoiH8FMnB4pZf+qwmebwZjt63k8eklBha0u6T
- 4L2A==
-X-Gm-Message-State: AOAM531tEdRlUxc72w5nmTfL6UJHNzPQ+IoHR2rtgk52UwltBZU/faUk
- 6ZOGCsHxQR9tTWXI/QNAX7BDZT8vYJ/eEAVze1U=
-X-Google-Smtp-Source: ABdhPJzh3rUBcW9w0crPCSxABThCYX7Khomy5jtaQKZbMyYjnso3RQXgOOIE7o2c5RmFjbzDfLx9fZ0Qr5bVEor7aXM=
-X-Received: by 2002:a05:6638:1442:b0:32e:2253:8e76 with SMTP id
- l2-20020a056638144200b0032e22538e76mr5389360jad.21.1652747791974; Mon, 16 May
- 2022 17:36:31 -0700 (PDT)
+ bh=BbUqW6sYjIeAcBGZ8Yp3/yjoJBHGfHZy8K5t5TV7ZGw=;
+ b=mOxmasyPKNHDMXNrMRBKTAg8M0saT/b91zn3yzxzNmHlX5FUdiu5xGxqlYvORA/qgL
+ 5xBcjN7ORz0864d0MHbLPi897Uv9/gQH3Qr7YKYpU3Hai17rNBIVrIUknYZTBUBjvNqw
+ vRTWZpI9xH/Mnz4LLdkelrBuKL6I+OpBrJ2zG63yUTG7V9RsbpH6jVP81y3pO2f9rwoZ
+ dvOLZf59HajLySPuC9ZWH+pFda3vdtD30PBHirHj9kC3hExEZNW6JchtOYuwgQUwmpqH
+ QfFPjXpBs7i552UTOdLUWv0rLa3eJ1MD2WnsdQSW+eiABL+09ooI/VKrjAtwktSIxsAu
+ 0odg==
+X-Gm-Message-State: AOAM533sMl/H4Z04Nq0WHpvC4aubQXQKStfvkzVDcrXk92XL88oYJ6Ul
+ 7Ck7jjenbNs3z2ZfT/YPGLYbO9tbgJA4mRI5kgk=
+X-Google-Smtp-Source: ABdhPJxWO78Opj1xpNxXE/D4mfXN9TUrJcfEXRpkTrQpTZ5h+4H0njRy5fIlho+MGfhPnOKM/bmGWAT3Zwhayd5j600=
+X-Received: by 2002:a05:6638:dc7:b0:32b:a483:16b8 with SMTP id
+ m7-20020a0566380dc700b0032ba48316b8mr10647769jaj.66.1652747817556; Mon, 16
+ May 2022 17:36:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1652435235.git.research_trasio@irq.a4lg.com>
  <cover.1652509778.git.research_trasio@irq.a4lg.com>
- <d17381d3ea4992808cf1894f379ca67220f61b45.1652509778.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <d17381d3ea4992808cf1894f379ca67220f61b45.1652509778.git.research_trasio@irq.a4lg.com>
+ <09e61e58a7543da44bdb0e0f5368afc8903b4aa6.1652509778.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <09e61e58a7543da44bdb0e0f5368afc8903b4aa6.1652509778.git.research_trasio@irq.a4lg.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 May 2022 10:36:06 +1000
-Message-ID: <CAKmqyKMGUBZq2WwHPFrbUwGEjsc1Brj5nonhSgFWjXq7=F25cA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] hw/riscv: Make CPU config error handling generous
- (virt/spike)
+Date: Tue, 17 May 2022 10:36:31 +1000
+Message-ID: <CAKmqyKNJ6pyubqDDJJSaTVtvWqxV40jy6U1Nb0NjTGSQOCWLdA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] hw/riscv: Make CPU config error handling generous
+ (sifive_e/u/opentitan)
 To: Tsukasa OI <research_trasio@irq.a4lg.com>
 Cc: Frank Chang <frank.chang@sifive.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d29;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2e;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2e.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,9 +74,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 00:36:35 -0000
+X-List-Received-Date: Tue, 17 May 2022 00:37:02 -0000
 
-On Sat, May 14, 2022 at 4:29 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
+On Sat, May 14, 2022 at 4:30 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 >
 > If specified CPU configuration is not valid, not just it prints error
 > message, it aborts and generates core dumps (depends on the operating
@@ -84,8 +84,11 @@ On Sat, May 14, 2022 at 4:29 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
 > runtime error occurs.
 >
 > This commit makes error handling on CPU configuration more generous on
-> virt/spike machines.  It now just prints error message and quits (without
-> coredumps and aborts).
+> sifive_e/u and opentitan machines.  It now just prints error message and
+> quits (without coredumps and aborts).
+>
+> This is separate from spike/virt because it involves different type
+> (TYPE_RISCV_HART_ARRAY) on sifive_e/u and opentitan machines.
 >
 > Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 
@@ -94,36 +97,52 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/spike.c | 2 +-
->  hw/riscv/virt.c  | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  hw/riscv/opentitan.c | 2 +-
+>  hw/riscv/sifive_e.c  | 2 +-
+>  hw/riscv/sifive_u.c  | 4 ++--
+>  3 files changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index 068ba3493e..e41b6aa9f0 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -230,7 +230,7 @@ static void spike_board_init(MachineState *machine)
->                                  base_hartid, &error_abort);
->          object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
->                                  hart_count, &error_abort);
-> -        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
-> +        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+> index 2d401dcb23..4495a2c039 100644
+> --- a/hw/riscv/opentitan.c
+> +++ b/hw/riscv/opentitan.c
+> @@ -142,7 +142,7 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
+>      object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
+>                              &error_abort);
+>      object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
 >
->          /* Core Local Interruptor (timer and IPI) for each socket */
->          riscv_aclint_swi_create(
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 3326f4db96..244d6408b5 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1351,7 +1351,7 @@ static void virt_machine_init(MachineState *machine)
->                                  base_hartid, &error_abort);
->          object_property_set_int(OBJECT(&s->soc[i]), "num-harts",
->                                  hart_count, &error_abort);
-> -        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_abort);
-> +        sysbus_realize(SYS_BUS_DEVICE(&s->soc[i]), &error_fatal);
+>      /* Boot ROM */
+>      memory_region_init_rom(&s->rom, OBJECT(dev_soc), "riscv.lowrisc.ibex.rom",
+> diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+> index dcb87b6cfd..d65d2fd869 100644
+> --- a/hw/riscv/sifive_e.c
+> +++ b/hw/riscv/sifive_e.c
+> @@ -195,7 +195,7 @@ static void sifive_e_soc_realize(DeviceState *dev, Error **errp)
 >
->          if (!kvm_enabled()) {
->              if (s->have_aclint) {
+>      object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
+>                              &error_abort);
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_abort);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+>
+>      /* Mask ROM */
+>      memory_region_init_rom(&s->mask_rom, OBJECT(dev), "riscv.sifive.e.mrom",
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index cc8c7637cb..a2495b5ae7 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -830,8 +830,8 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+>      qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", s->cpu_type);
+>      qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
+>
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_abort);
+> -    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_abort);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->e_cpus), &error_fatal);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->u_cpus), &error_fatal);
+>      /*
+>       * The cluster must be realized after the RISC-V hart array container,
+>       * as the container's CPU object is only created on realize, and the
 > --
 > 2.34.1
 >
