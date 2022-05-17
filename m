@@ -1,64 +1,94 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nqxnh-0002h9-FI
-	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 10:03:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46614)
+	id 1nqy3Q-0000A5-KT
+	for mharc-qemu-riscv@gnu.org; Tue, 17 May 2022 10:20:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51130)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groug@kaod.org>) id 1nqxng-0002f2-1h
- for qemu-riscv@nongnu.org; Tue, 17 May 2022 10:03:48 -0400
-Received: from us-smtp-delivery-44.mimecast.com ([205.139.111.44]:26262)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groug@kaod.org>) id 1nqxnd-0003Pl-Cz
- for qemu-riscv@nongnu.org; Tue, 17 May 2022 10:03:47 -0400
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-490-zAzA9_BuNGSz5scdaBrptg-1; Tue, 17 May 2022 10:03:34 -0400
-X-MC-Unique: zAzA9_BuNGSz5scdaBrptg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9A6A72999B32;
- Tue, 17 May 2022 14:03:32 +0000 (UTC)
-Received: from bahia (unknown [10.39.192.143])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 77F9C14DE220;
- Tue, 17 May 2022 14:03:27 +0000 (UTC)
-Date: Tue, 17 May 2022 16:03:26 +0200
-From: Greg Kurz <groug@kaod.org>
-To: Alberto Faria <afaria@redhat.com>
-Cc: qemu-devel@nongnu.org, Andrew Jeffery <andrew@aj.id.au>, Peter Maydell
- <peter.maydell@linaro.org>, qemu-block@nongnu.org, Palmer Dabbelt
- <palmer@dabbelt.com>, Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?=
- <f4bug@amsat.org>, qemu-ppc@nongnu.org, Eric Blake <eblake@redhat.com>,
- Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>, Hanna Reitz
- <hreitz@redhat.com>, John Snow <jsnow@redhat.com>, Stefan Hajnoczi
- <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
- qemu-riscv@nongnu.org, =?UTF-8?B?Q8OpZHJpYw==?= Le Goater <clg@kaod.org>,
- Joel Stanley <joel@jms.id.au>, Stefan Weil <sw@weilnetz.de>, Laurent Vivier
- <laurent@vivier.eu>, "Denis V. Lunev" <den@openvz.org>, Juan Quintela
- <quintela@redhat.com>, "Dr. David Alan Gilbert" <dgilbert@redhat.com>, Niek
- Linnenbank <nieklinnenbank@gmail.com>, Daniel Henrique Barboza
- <danielhb413@gmail.com>, Kevin Wolf <kwolf@redhat.com>, "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org, Fam Zheng
- <fam@euphon.net>, Alistair Francis <alistair@alistair23.me>, Beniamino
- Galvani <b.galvani@gmail.com>, Bin Meng <bin.meng@windriver.com>, David
- Gibson <david@gibson.dropbear.id.au>
-Subject: Re: [PATCH 01/18] block: Make blk_{pread,pwrite}() return 0 on success
-Message-ID: <20220517160326.1f6f551f@bahia>
-In-Reply-To: <20220517113524.197910-2-afaria@redhat.com>
-References: <20220517113524.197910-1-afaria@redhat.com>
- <20220517113524.197910-2-afaria@redhat.com>
+ (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
+ id 1nqy3B-00005q-3x; Tue, 17 May 2022 10:19:50 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e]:37487)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <paolo.bonzini@gmail.com>)
+ id 1nqy39-0006Q2-Jo; Tue, 17 May 2022 10:19:48 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id g12so7300516edq.4;
+ Tue, 17 May 2022 07:19:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=697ZigkJFXSp40Ptzu/jWqVjxne9AOAKRj6OGmgvoyI=;
+ b=UTuMQkW2znzD5QGMUSqrTh5omN7OmUdiDsiu4v/NuJwPgEqpbl9CQiGJ+K8hj4KBeU
+ 1U5BLgcI0PbuF1xhDZRSYjQt9JUEfo2x6tECbtqXO5aX486UJ4N5k34TbAPAdaymDoJi
+ R1l5sr2PYHb5NH74Lr3i0LBiUD01Viw6s67Qfsvi8CwS74hZeb5ziDFAacXuHUKeH2fY
+ psdxRCr+EXG13iEIYntCoEW8kNsd3i+TKTvonmsm2yepIbNlrBTBiRHffZ76+fSKglRX
+ e+/7K0XK+PPCTMZs6XHYxNNTkhn1eRZ7V+L91T/INzkV6QaK3mWjQMwsDeDLZi8kd+PL
+ Ka1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=697ZigkJFXSp40Ptzu/jWqVjxne9AOAKRj6OGmgvoyI=;
+ b=Nldj/LEXxKwUMH+fNh4k3Y0U4TopCUQnGroA75DLZhfasaAUp8P9fbQnATH0zcmSXy
+ xNQ6FBPsC0tDXqsmjEmoN8M9DO80XuFgAqT5EBZiF1ZBVaz515OSORoSsQ6E4tVUntZU
+ HVlVScRq7GAp8b6kgjcy4q4gwYwYLxFLm5gHhXNe7KbTaSGH/76jCfzgSTipdHVqV8Z8
+ YLjh+9S1iVI3wOot+quo3E5aLfkd2pHg6DweWtt0u/K4slpm1oU5rOuh5nSn3es3Xr5q
+ VffcT67J5Qpct6kJ1fhSCGgz6uoY8Ka0/aO/GNMYNdmZrPxH/70d5El8rcQZr18Yu5qA
+ ljKA==
+X-Gm-Message-State: AOAM532DewmXgrZy4CAc8t7G2e3DsvorlJMChQae4gy/lb8y8s5rBOTj
+ BUcmwFTbyk7dhxJs/esYnDw=
+X-Google-Smtp-Source: ABdhPJwiAHiokerWbWJ5Qm/dSoZBo1KqrTMe23syqQVqme71FwSax0154L8altbhpcyeHrAaOwFXKw==
+X-Received: by 2002:a05:6402:690:b0:42a:cf15:c69a with SMTP id
+ f16-20020a056402069000b0042acf15c69amr1694426edy.416.1652797184902; 
+ Tue, 17 May 2022 07:19:44 -0700 (PDT)
+Received: from ?IPV6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
+ ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+ by smtp.googlemail.com with ESMTPSA id
+ a23-20020aa7cf17000000b0042ab02e3485sm3673562edy.44.2022.05.17.07.19.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 May 2022 07:19:44 -0700 (PDT)
+Sender: Paolo Bonzini <paolo.bonzini@gmail.com>
+Message-ID: <99c9d25e-a69a-1db9-6ec7-f3348ac691d4@redhat.com>
+Date: Tue, 17 May 2022 16:19:40 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.0
+Subject: Re: [PATCH 02/18] block: Add a 'flags' param to blk_pread()
+Content-Language: en-US
+To: Alberto Faria <afaria@redhat.com>, qemu-devel@nongnu.org
+Cc: Andrew Jeffery <andrew@aj.id.au>, Peter Maydell
+ <peter.maydell@linaro.org>, qemu-block@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
+ <f4bug@amsat.org>, qemu-ppc@nongnu.org, Eric Blake <eblake@redhat.com>,
+ Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>,
+ Hanna Reitz <hreitz@redhat.com>, John Snow <jsnow@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
+ qemu-riscv@nongnu.org, =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
+ Joel Stanley <joel@jms.id.au>, Stefan Weil <sw@weilnetz.de>,
+ Laurent Vivier <laurent@vivier.eu>, "Denis V. Lunev" <den@openvz.org>,
+ Juan Quintela <quintela@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, Greg Kurz <groug@kaod.org>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Kevin Wolf <kwolf@redhat.com>, "Edgar E. Iglesias"
+ <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org, Fam Zheng <fam@euphon.net>,
+ Alistair Francis <alistair@alistair23.me>,
+ Beniamino Galvani <b.galvani@gmail.com>, Bin Meng <bin.meng@windriver.com>,
+ David Gibson <david@gibson.dropbear.id.au>
+References: <20220517113524.197910-1-afaria@redhat.com>
+ <20220517113524.197910-3-afaria@redhat.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+In-Reply-To: <20220517113524.197910-3-afaria@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
-Received-SPF: softfail client-ip=205.139.111.44; envelope-from=groug@kaod.org;
- helo=us-smtp-delivery-44.mimecast.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=paolo.bonzini@gmail.com; helo=mail-ed1-x52e.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_LOW=-0.7,
- SPF_HELO_NONE=0.001, SPF_SOFTFAIL=0.665,
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -72,345 +102,28 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2022 14:03:48 -0000
+X-List-Received-Date: Tue, 17 May 2022 14:19:59 -0000
 
-On Tue, 17 May 2022 12:35:07 +0100
-Alberto Faria <afaria@redhat.com> wrote:
-
-> They currently return the value of their 'bytes' parameter on success.
+On 5/17/22 13:35, Alberto Faria wrote:
+> For consistency with other I/O functions, and in preparation to
+> implement it using generated_co_wrapper.
 > 
-> Make them return 0 instead, for consistency with other I/O functions and
-> in preparation to implement them using generated_co_wrapper. This also
-> makes it clear that short reads/writes are not possible.
+> Callers were updated using this Coccinelle script:
+> 
+>      @@ expression blk, offset, buf, bytes; @@
+>      - blk_pread(blk, offset, buf, bytes)
+>      + blk_pread(blk, offset, buf, bytes, 0)
+> 
+> It had no effect on hw/block/nand.c, presumably due to the #if, so that
+> file was updated manually.
+
+Whoa that's disgusting...
+
+> Overly-long lines were then fixed by hand.
 > 
 > Signed-off-by: Alberto Faria <afaria@redhat.com>
-> ---
->  block.c                          |  8 +++++---
->  block/block-backend.c            |  7 ++-----
->  block/qcow.c                     |  6 +++---
->  hw/block/m25p80.c                |  2 +-
->  hw/misc/mac_via.c                |  2 +-
->  hw/misc/sifive_u_otp.c           |  2 +-
->  hw/nvram/eeprom_at24c.c          |  4 ++--
->  hw/nvram/spapr_nvram.c           | 12 ++++++------
->  hw/ppc/pnv_pnor.c                |  2 +-
 
-For PPC and sPAPR parts
+Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
 
-Reviewed-by: Greg Kurz <groug@kaod.org>
-
->  qemu-img.c                       | 17 +++++++----------
->  qemu-io-cmds.c                   | 18 ++++++++++++------
->  tests/unit/test-block-iothread.c |  4 ++--
->  12 files changed, 43 insertions(+), 41 deletions(-)
-> 
-> diff --git a/block.c b/block.c
-> index 2c00dddd80..0fd830e2e2 100644
-> --- a/block.c
-> +++ b/block.c
-> @@ -1045,14 +1045,16 @@ static int find_image_format(BlockBackend *file, const char *filename,
->          return ret;
->      }
->  
-> -    drv = bdrv_probe_all(buf, ret, filename);
-> +    drv = bdrv_probe_all(buf, sizeof(buf), filename);
->      if (!drv) {
->          error_setg(errp, "Could not determine image format: No compatible "
->                     "driver found");
-> -        ret = -ENOENT;
-> +        *pdrv = NULL;
-> +        return -ENOENT;
->      }
-> +
->      *pdrv = drv;
-> -    return ret;
-> +    return 0;
->  }
->  
->  /**
-> diff --git a/block/block-backend.c b/block/block-backend.c
-> index e0e1aff4b1..c1c367bf9e 100644
-> --- a/block/block-backend.c
-> +++ b/block/block-backend.c
-> @@ -1577,19 +1577,16 @@ int blk_pread(BlockBackend *blk, int64_t offset, void *buf, int bytes)
->      ret = blk_do_preadv(blk, offset, bytes, &qiov, 0);
->      blk_dec_in_flight(blk);
->  
-> -    return ret < 0 ? ret : bytes;
-> +    return ret;
->  }
->  
->  int blk_pwrite(BlockBackend *blk, int64_t offset, const void *buf, int bytes,
->                 BdrvRequestFlags flags)
->  {
-> -    int ret;
->      QEMUIOVector qiov = QEMU_IOVEC_INIT_BUF(qiov, buf, bytes);
->      IO_OR_GS_CODE();
->  
-> -    ret = blk_pwritev_part(blk, offset, bytes, &qiov, 0, flags);
-> -
-> -    return ret < 0 ? ret : bytes;
-> +    return blk_pwritev_part(blk, offset, bytes, &qiov, 0, flags);
->  }
->  
->  int64_t blk_getlength(BlockBackend *blk)
-> diff --git a/block/qcow.c b/block/qcow.c
-> index c646d6b16d..25a43353c1 100644
-> --- a/block/qcow.c
-> +++ b/block/qcow.c
-> @@ -891,14 +891,14 @@ static int coroutine_fn qcow_co_create(BlockdevCreateOptions *opts,
->  
->      /* write all the data */
->      ret = blk_pwrite(qcow_blk, 0, &header, sizeof(header), 0);
-> -    if (ret != sizeof(header)) {
-> +    if (ret < 0) {
->          goto exit;
->      }
->  
->      if (qcow_opts->has_backing_file) {
->          ret = blk_pwrite(qcow_blk, sizeof(header),
->                           qcow_opts->backing_file, backing_filename_len, 0);
-> -        if (ret != backing_filename_len) {
-> +        if (ret < 0) {
->              goto exit;
->          }
->      }
-> @@ -908,7 +908,7 @@ static int coroutine_fn qcow_co_create(BlockdevCreateOptions *opts,
->           i++) {
->          ret = blk_pwrite(qcow_blk, header_size + BDRV_SECTOR_SIZE * i,
->                           tmp, BDRV_SECTOR_SIZE, 0);
-> -        if (ret != BDRV_SECTOR_SIZE) {
-> +        if (ret < 0) {
->              g_free(tmp);
->              goto exit;
->          }
-> diff --git a/hw/block/m25p80.c b/hw/block/m25p80.c
-> index 7d3d8b12e0..bd58c07bb6 100644
-> --- a/hw/block/m25p80.c
-> +++ b/hw/block/m25p80.c
-> @@ -1506,7 +1506,7 @@ static void m25p80_realize(SSIPeripheral *ss, Error **errp)
->          trace_m25p80_binding(s);
->          s->storage = blk_blockalign(s->blk, s->size);
->  
-> -        if (blk_pread(s->blk, 0, s->storage, s->size) != s->size) {
-> +        if (blk_pread(s->blk, 0, s->storage, s->size) < 0) {
->              error_setg(errp, "failed to read the initial flash content");
->              return;
->          }
-> diff --git a/hw/misc/mac_via.c b/hw/misc/mac_via.c
-> index 525e38ce93..0515d1818e 100644
-> --- a/hw/misc/mac_via.c
-> +++ b/hw/misc/mac_via.c
-> @@ -1030,7 +1030,7 @@ static void mos6522_q800_via1_realize(DeviceState *dev, Error **errp)
->          }
->  
->          len = blk_pread(v1s->blk, 0, v1s->PRAM, sizeof(v1s->PRAM));
-> -        if (len != sizeof(v1s->PRAM)) {
-> +        if (len < 0) {
->              error_setg(errp, "can't read PRAM contents");
->              return;
->          }
-> diff --git a/hw/misc/sifive_u_otp.c b/hw/misc/sifive_u_otp.c
-> index 6d5f84e6c2..535acde08b 100644
-> --- a/hw/misc/sifive_u_otp.c
-> +++ b/hw/misc/sifive_u_otp.c
-> @@ -240,7 +240,7 @@ static void sifive_u_otp_realize(DeviceState *dev, Error **errp)
->                  return;
->              }
->  
-> -            if (blk_pread(s->blk, 0, s->fuse, filesize) != filesize) {
-> +            if (blk_pread(s->blk, 0, s->fuse, filesize) < 0) {
->                  error_setg(errp, "failed to read the initial flash content");
->                  return;
->              }
-> diff --git a/hw/nvram/eeprom_at24c.c b/hw/nvram/eeprom_at24c.c
-> index 01a3093600..84acd71f5a 100644
-> --- a/hw/nvram/eeprom_at24c.c
-> +++ b/hw/nvram/eeprom_at24c.c
-> @@ -65,7 +65,7 @@ int at24c_eeprom_event(I2CSlave *s, enum i2c_event event)
->          DPRINTK("clear\n");
->          if (ee->blk && ee->changed) {
->              int len = blk_pwrite(ee->blk, 0, ee->mem, ee->rsize, 0);
-> -            if (len != ee->rsize) {
-> +            if (len < 0) {
->                  ERR(TYPE_AT24C_EE
->                          " : failed to write backing file\n");
->              }
-> @@ -165,7 +165,7 @@ void at24c_eeprom_reset(DeviceState *state)
->      if (ee->blk) {
->          int len = blk_pread(ee->blk, 0, ee->mem, ee->rsize);
->  
-> -        if (len != ee->rsize) {
-> +        if (len < 0) {
->              ERR(TYPE_AT24C_EE
->                      " : Failed initial sync with backing file\n");
->          }
-> diff --git a/hw/nvram/spapr_nvram.c b/hw/nvram/spapr_nvram.c
-> index 18b43be7f6..6000b945c3 100644
-> --- a/hw/nvram/spapr_nvram.c
-> +++ b/hw/nvram/spapr_nvram.c
-> @@ -103,7 +103,7 @@ static void rtas_nvram_store(PowerPCCPU *cpu, SpaprMachineState *spapr,
->  {
->      SpaprNvram *nvram = spapr->nvram;
->      hwaddr offset, buffer, len;
-> -    int alen;
-> +    int ret;
->      void *membuf;
->  
->      if ((nargs != 3) || (nret != 2)) {
-> @@ -128,9 +128,9 @@ static void rtas_nvram_store(PowerPCCPU *cpu, SpaprMachineState *spapr,
->  
->      membuf = cpu_physical_memory_map(buffer, &len, false);
->  
-> -    alen = len;
-> +    ret = 0;
->      if (nvram->blk) {
-> -        alen = blk_pwrite(nvram->blk, offset, membuf, len, 0);
-> +        ret = blk_pwrite(nvram->blk, offset, membuf, len, 0);
->      }
->  
->      assert(nvram->buf);
-> @@ -138,8 +138,8 @@ static void rtas_nvram_store(PowerPCCPU *cpu, SpaprMachineState *spapr,
->  
->      cpu_physical_memory_unmap(membuf, len, 0, len);
->  
-> -    rtas_st(rets, 0, (alen < len) ? RTAS_OUT_HW_ERROR : RTAS_OUT_SUCCESS);
-> -    rtas_st(rets, 1, (alen < 0) ? 0 : alen);
-> +    rtas_st(rets, 0, (ret < 0) ? RTAS_OUT_HW_ERROR : RTAS_OUT_SUCCESS);
-> +    rtas_st(rets, 1, (ret < 0) ? 0 : len);
->  }
->  
->  static void spapr_nvram_realize(SpaprVioDevice *dev, Error **errp)
-> @@ -181,7 +181,7 @@ static void spapr_nvram_realize(SpaprVioDevice *dev, Error **errp)
->      if (nvram->blk) {
->          int alen = blk_pread(nvram->blk, 0, nvram->buf, nvram->size);
->  
-> -        if (alen != nvram->size) {
-> +        if (alen < 0) {
->              error_setg(errp, "can't read spapr-nvram contents");
->              return;
->          }
-> diff --git a/hw/ppc/pnv_pnor.c b/hw/ppc/pnv_pnor.c
-> index 83ecccca28..1fb748afef 100644
-> --- a/hw/ppc/pnv_pnor.c
-> +++ b/hw/ppc/pnv_pnor.c
-> @@ -99,7 +99,7 @@ static void pnv_pnor_realize(DeviceState *dev, Error **errp)
->  
->          s->storage = blk_blockalign(s->blk, s->size);
->  
-> -        if (blk_pread(s->blk, 0, s->storage, s->size) != s->size) {
-> +        if (blk_pread(s->blk, 0, s->storage, s->size) < 0) {
->              error_setg(errp, "failed to read the initial flash content");
->              return;
->          }
-> diff --git a/qemu-img.c b/qemu-img.c
-> index 4cf4d2423d..9d98ef63ac 100644
-> --- a/qemu-img.c
-> +++ b/qemu-img.c
-> @@ -5120,30 +5120,27 @@ static int img_dd(int argc, char **argv)
->      in.buf = g_new(uint8_t, in.bsz);
->  
->      for (out_pos = 0; in_pos < size; block_count++) {
-> -        int in_ret, out_ret;
-> +        int bytes, in_ret, out_ret;
->  
-> -        if (in_pos + in.bsz > size) {
-> -            in_ret = blk_pread(blk1, in_pos, in.buf, size - in_pos);
-> -        } else {
-> -            in_ret = blk_pread(blk1, in_pos, in.buf, in.bsz);
-> -        }
-> +        bytes = (in_pos + in.bsz > size) ? size - in_pos : in.bsz;
-> +
-> +        in_ret = blk_pread(blk1, in_pos, in.buf, bytes);
->          if (in_ret < 0) {
->              error_report("error while reading from input image file: %s",
->                           strerror(-in_ret));
->              ret = -1;
->              goto out;
->          }
-> -        in_pos += in_ret;
-> -
-> -        out_ret = blk_pwrite(blk2, out_pos, in.buf, in_ret, 0);
-> +        in_pos += bytes;
->  
-> +        out_ret = blk_pwrite(blk2, out_pos, in.buf, bytes, 0);
->          if (out_ret < 0) {
->              error_report("error while writing to output image file: %s",
->                           strerror(-out_ret));
->              ret = -1;
->              goto out;
->          }
-> -        out_pos += out_ret;
-> +        out_pos += bytes;
->      }
->  
->  out:
-> diff --git a/qemu-io-cmds.c b/qemu-io-cmds.c
-> index 2f0d8ac25a..443f22c732 100644
-> --- a/qemu-io-cmds.c
-> +++ b/qemu-io-cmds.c
-> @@ -541,28 +541,34 @@ fail:
->  static int do_pread(BlockBackend *blk, char *buf, int64_t offset,
->                      int64_t bytes, int64_t *total)
->  {
-> +    int ret;
-> +
->      if (bytes > INT_MAX) {
->          return -ERANGE;
->      }
->  
-> -    *total = blk_pread(blk, offset, (uint8_t *)buf, bytes);
-> -    if (*total < 0) {
-> -        return *total;
-> +    ret = blk_pread(blk, offset, (uint8_t *)buf, bytes);
-> +    if (ret < 0) {
-> +        return ret;
->      }
-> +    *total = bytes;
->      return 1;
->  }
->  
->  static int do_pwrite(BlockBackend *blk, char *buf, int64_t offset,
->                       int64_t bytes, int flags, int64_t *total)
->  {
-> +    int ret;
-> +
->      if (bytes > INT_MAX) {
->          return -ERANGE;
->      }
->  
-> -    *total = blk_pwrite(blk, offset, (uint8_t *)buf, bytes, flags);
-> -    if (*total < 0) {
-> -        return *total;
-> +    ret = blk_pwrite(blk, offset, (uint8_t *)buf, bytes, flags);
-> +    if (ret < 0) {
-> +        return ret;
->      }
-> +    *total = bytes;
->      return 1;
->  }
->  
-> diff --git a/tests/unit/test-block-iothread.c b/tests/unit/test-block-iothread.c
-> index a5c163af7e..3c1a3f64a2 100644
-> --- a/tests/unit/test-block-iothread.c
-> +++ b/tests/unit/test-block-iothread.c
-> @@ -117,7 +117,7 @@ static void test_sync_op_blk_pread(BlockBackend *blk)
->  
->      /* Success */
->      ret = blk_pread(blk, 0, buf, sizeof(buf));
-> -    g_assert_cmpint(ret, ==, 512);
-> +    g_assert_cmpint(ret, ==, 0);
->  
->      /* Early error: Negative offset */
->      ret = blk_pread(blk, -2, buf, sizeof(buf));
-> @@ -131,7 +131,7 @@ static void test_sync_op_blk_pwrite(BlockBackend *blk)
->  
->      /* Success */
->      ret = blk_pwrite(blk, 0, buf, sizeof(buf), 0);
-> -    g_assert_cmpint(ret, ==, 512);
-> +    g_assert_cmpint(ret, ==, 0);
->  
->      /* Early error: Negative offset */
->      ret = blk_pwrite(blk, -2, buf, sizeof(buf), 0);
-
+Paolo
 
