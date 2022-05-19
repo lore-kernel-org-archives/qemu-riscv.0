@@ -1,83 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nrkhc-0004zv-4F
-	for mharc-qemu-riscv@gnu.org; Thu, 19 May 2022 14:16:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38284)
+	id 1nrn1Y-0000pl-7y
+	for mharc-qemu-riscv@gnu.org; Thu, 19 May 2022 16:45:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34238)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nrkhb-0004xm-0E
- for qemu-riscv@nongnu.org; Thu, 19 May 2022 14:16:47 -0400
-Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133]:37650)
+ (Exim 4.90_1) (envelope-from <dylan@rivosinc.com>)
+ id 1nrn1W-0000oj-CW
+ for qemu-riscv@nongnu.org; Thu, 19 May 2022 16:45:30 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032]:34449)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1nrkhW-0006hV-S7
- for qemu-riscv@nongnu.org; Thu, 19 May 2022 14:16:46 -0400
-Received: by mail-lf1-x133.google.com with SMTP id p4so9121036lfg.4
- for <qemu-riscv@nongnu.org>; Thu, 19 May 2022 11:16:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dylan@rivosinc.com>)
+ id 1nrn1U-00023G-6F
+ for qemu-riscv@nongnu.org; Thu, 19 May 2022 16:45:29 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ ob14-20020a17090b390e00b001dff2a43f8cso272260pjb.1
+ for <qemu-riscv@nongnu.org>; Thu, 19 May 2022 13:45:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=Zi30fcTYn1lOMCKTjoTWwTFuPrF6I6u26bHaiGANU7g=;
- b=0qrQvOnwmPKHAo3l0n9b6UT6CbiRVs4Za1Y1HFSL+eCiZzQVptr+w6CyYjCqaMLSD/
- 6Q6CIrTQTQJBzyhhYsd+DfP+E7WGHn1IoDBfoJzXPhJk6fX4sTQ9uUq3fd6plhfNATCn
- V1mgK9oZ1Nb3J7SYERsy25KovpxqKZV9cE/vbaEKOPhiIWjXkestybOd5l3XyTGO+zhk
- 0IMaXVSIfq8ZUr2YTl38KZ4v1HSp8ZBBXfq1g4bBgLQoisELKFVNQFkUTizoRnVM/78o
- D6G2UxdPO/DTB4pz/C07iJyoQUMP+/iQS46awF6Og3GLVor5EPbpc+hrDV28aYe0S0r1
- Ouzg==
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=h8DlWYA44S0oP/bz7EYgh16WwQxrQuTelIjXdqNLtU0=;
+ b=Z+RKzpa8Q9AV60rUFnfz9lGoC5Al1LENNO8EWGkNuCJN7qAoBxlKQFf/arNatMs2Q8
+ AmzCigkWwbGDqgLoMl3Qr+kWESO+m616C8fzmKzYEUaJNnD82tkxrMbusodhnBicB4yW
+ sHbM+JmovWuw29xhZ6WGo4Rp1+Thh9zIPzEXQxUKIk0BEBT1Jg0PchsnjyCjLAnuGeHJ
+ Ehy6pLh5mIJr1DdES+fzJtS4csj+osrJPFPXosTsB+VNp9+jS3MYtvT2RNv9zFXx1V3B
+ YrfcJP5yDK6mM8OssQ5CNCq0vF2ZcWFD51kUwuH9IH0q6EAWBlvNM5MTmgNtHcm1UR1U
+ 7kiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=Zi30fcTYn1lOMCKTjoTWwTFuPrF6I6u26bHaiGANU7g=;
- b=SH/1zjWjcgoFYMV+CYM8G51JDpBXmNLk2g7IdbQANVabwQVWPEoC3AJmueoh3JgqzJ
- enm/6J/Z259p8GGvrGEJHADibyGEwntE5N8X+M63cngYwS9PmvM4bd3NTX4Q8IyjphPd
- kbxi+0pJAK8irwnnpaRFHrAKlM1Q/blGIYgp6VulVYYQke53UWrvduu4OxNiRlRr9ULC
- avmSeEc4GD8i1BE7IwrqdpXiIxZVBETMWNMh7un5/fshpy63VT3hKFRhoxEm+Us2ANxH
- hX4gXbGs3UhDORIPFFcp1Mlav/8U5HfETS5XKVnuZffFZY0hMhE1fYyQ/VoZpHCCUfia
- DctA==
-X-Gm-Message-State: AOAM53033geQmWFjamKjBTUuEUVSJLzQRepSaFdIJzswIvzRbfIonrDi
- vu8ggzkOodR6Syx5FqXBBPBXsSly3+gMUhXB5mxQFQ==
-X-Google-Smtp-Source: ABdhPJyRlzVk+pDv5UjSnnkdLKzo6IAir8Rkq8n5Y2Jc8TLRZCxUDN1/3AlDZf6+LTt9tqr6v4wx7y6U/Qbxdhd5FnA=
-X-Received: by 2002:a05:6512:b1e:b0:44a:9b62:3201 with SMTP id
- w30-20020a0565120b1e00b0044a9b623201mr4356622lfu.42.1652984197425; Thu, 19
- May 2022 11:16:37 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=h8DlWYA44S0oP/bz7EYgh16WwQxrQuTelIjXdqNLtU0=;
+ b=OyrrXLwurFc+ORZwAF0cVmCUw2iHZGO2u6bNcOlip/l1PqA5ei8jMrCq4419iv7PmN
+ cb4t7Ix6+MfoUCSfHlj7921MLKiqPBJ/JdHGPd7A/jvqt0wLNR97nFN3n/6JXG7EBypQ
+ eJbQOUA+UH5n59bk8Ifq8xwIYV03sQflrS3j77jeux3OvtG4gdmilxnuxuc3yvZ5exXA
+ 3O+7ZYorDkGMu/yg8jOSmxJi+O8p3w+K5DsY3jR//JfevwR0EczoutMtyKM+EClFtfSR
+ Z5BgTP/o0qiF6dnrbGNuj8dp8drCVAXJOH3JdYYMgQTqplC2MOq19KajCmX3cd16xGbW
+ NYGQ==
+X-Gm-Message-State: AOAM532f9xTTmYm8hMnSaEMovDbLswhTZN7+2gjSDFOui6pYOI3GQS5m
+ XSCPBFF9se+c9YJAexpITZQYNQ==
+X-Google-Smtp-Source: ABdhPJyi248FFAwfnvRV7qdS57SDqO3Otct8AfaeneoUfeZTRKLCqTqWJpzttRvm0ljSfiql0eOdEg==
+X-Received: by 2002:a17:902:6b0b:b0:158:f889:edd9 with SMTP id
+ o11-20020a1709026b0b00b00158f889edd9mr6416932plk.122.1652993126409; 
+ Thu, 19 May 2022 13:45:26 -0700 (PDT)
+Received: from rivosinc.com ([12.3.194.138]) by smtp.gmail.com with ESMTPSA id
+ n1-20020a170902e54100b0015e8d4eb219sm4300664plf.99.2022.05.19.13.45.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 May 2022 13:45:25 -0700 (PDT)
+Date: Thu, 19 May 2022 20:45:22 +0000
+From: Dylan Reid <dylan@rivosinc.com>
+To: Anup Patel <anup@brainfault.org>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Dylan Reid <dgreid@rivosinc.com>
+Subject: Re: [PATCH] hw/riscv: virt: Avoid double FDT platform node
+Message-ID: <20220519204522.nckblef43pcl5x4k@rivosinc.com>
+References: <20220512182103.408627-1-dgreid@rivosinc.com>
+ <CAAhSdy2Uoj0jGXJn1W_Vhewi9BLSN+9zd003qUf_ugKpDd2ihg@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
- <YnOhHZGJphk30SmJ@redhat.com>
- <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
- <YnTZP1iG+77Cugaq@redhat.com>
- <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
- <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
- <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
- <YoNiPw/3e+CY0v7o@redhat.com>
- <CAKmqyKOC0Fgu7WUXRcAJZNmVR8GeiXHGh4K8fg+5_c+pvZR_7w@mail.gmail.com>
- <CAOnJCU+i3m5OjM-wBf+t58YP9k5Jd0VeBK_yoPSPtzoE68H2EQ@mail.gmail.com>
- <YoStifZ0sCQkjyik@redhat.com>
- <CAFEAcA_UGkVUzN1fsNuK8ErVKM4bPoo7hretpF3wPbbR0nLV3A@mail.gmail.com>
-In-Reply-To: <CAFEAcA_UGkVUzN1fsNuK8ErVKM4bPoo7hretpF3wPbbR0nLV3A@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Thu, 19 May 2022 11:16:25 -0700
-Message-ID: <CAHBxVyH3BMe=CAxPkUpKGmhhb3E+Q03uAkCBavbx=ACDqN1v_g@mail.gmail.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Atish Patra <atishp@atishpatra.org>, Alistair Francis <alistair23@gmail.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::133;
- envelope-from=atishp@rivosinc.com; helo=mail-lf1-x133.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAAhSdy2Uoj0jGXJn1W_Vhewi9BLSN+9zd003qUf_ugKpDd2ihg@mail.gmail.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=dylan@rivosinc.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -90,71 +82,59 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2022 18:16:47 -0000
+X-List-Received-Date: Thu, 19 May 2022 20:45:31 -0000
 
-On Wed, May 18, 2022 at 3:46 AM Peter Maydell <peter.maydell@linaro.org> wr=
-ote:
->
-> On Wed, 18 May 2022 at 09:25, Daniel P. Berrang=C3=A9 <berrange@redhat.co=
-m> wrote:
-> > The fact that RISC-V ecosystem is so young & has relatively few
-> > users, and even fewer expecting  long term stability, is precisely
-> > why we should just modify the existing 'virt' machine now rather
-> > than introducing a new 'virt-pcie'. We can afford to have the
-> > limited incompatibility in the short term given the small userbase.
-> > We went through this same exercise with aarch64 virt machine and
-> > despite the short term disruption, it was a good success IMHO to
-> > get it switched from MMIO to PCI, instead of having two machines
-> > in parallel long term.
->
-> The aarch64 virt board does still carry around the mmio devices,
-> though...it's just that we have pci as well now.
->
-> Personally I don't think that switching to a new machine type
-> is likely to help escape from the "bloat" problem, which arises
-> from two conflicting desires:
->
->  (1) people want this kind of board to be nice and small and
->      simple, with a minimal set of devices
->  (2) everybody has their own "but this specific one device is
->      really important and it should be in the minimal set"
->      (watchdog? acpi? ability to power the machine on and off?
->      second UART? i2c? etc etc etc)
->
+On Thu, May 19, 2022 at 08:34:06PM +0530, Anup Patel wrote:
+> On Fri, May 13, 2022 at 1:34 AM Dylan Reid <dylan@rivosinc.com> wrote:
+> >
+> > When starting the virt machine with `-machine virt,aia=aplic-imsic`,
+> > both the imsic and aplic init code will add platform fdt nodes by
+> > calling `platform_bus_add_all_fdt_nodes`. This leads to an error at
+> > startup:
+> > ```
+> > qemu_fdt_add_subnode: Failed to create subnode /platform@4000000: FDT_ERR_EXISTS
+> > ```
+> >
+> > The call from `create_fdt_imsic` is not needed as an imsic is currently
+> > always combined with an aplic that will create the nodes.
+> >
+> > Fixes: 3029fab64309 ("hw/riscv: virt: Add support for generating platform FDT entries")
+> > Signed-off-by: Dylan Reid <dgreid@rivosinc.com>
+> > ---
+> >  hw/riscv/virt.c | 5 -----
+> >  1 file changed, 5 deletions(-)
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 3326f4db96..d625f776a6 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -561,11 +561,6 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+> >      }
+> >      qemu_fdt_setprop_cell(mc->fdt, imsic_name, "phandle", *msi_m_phandle);
+> >
+> > -    platform_bus_add_all_fdt_nodes(mc->fdt, imsic_name,
+> > -                                   memmap[VIRT_PLATFORM_BUS].base,
+> > -                                   memmap[VIRT_PLATFORM_BUS].size,
+> > -                                   VIRT_PLATFORM_BUS_IRQ);
+> > -
+> 
+> This patch only fixes for the case where there is only one socket.
+> 
+> I had send-out a similar fix which also handles multi-socket case.
+> https://lore.kernel.org/all/20220511144528.393530-9-apatel@ventanamicro.com/
 
-Both acpi/device tree support should be there anyways.
-MMIO based reset will probably needed as well (I listed that earlier
-with mandatory MMIO devices)
+Thanks Anup, that looks good to me.
 
-AFAIK everything else can be PCIe based which the new board will mandate.
-It must strictly enforce the rules about what can be added to it. The
-bar to allow
-new MMIO devices must be very high and must have a wide range of usage.
-This will make life easier for the entire ecosystem as well. AFAIK,
-libvirt uses PCIe devices only to build VMs.
-
-I understand that is probably a big ask but if odd mmio devices sneak
-into this platform, then that defeats the purpose.
-On other hand, having a flag day for virt machines creates a lot of
-incompatibility for the users until everyone transitions.
-The transition also has to happen based on Qemu version as virt
-machine doesn't have any versioning right now.
-
-Do we make users' life difficult by having a flag date based on the
-Qemu version or take additional responsibility of maintaining another
-board ?
-I hope the new board will continue to be small so the maintenance
-burden is not too much. Personally, I feel the latter approach will
-have minimum inconvenience for everybody
-but I am okay with whatever is decided by the community.
-
-
-
-> So either your 'minimal' board is only serving a small subset
-> of the users who want a minimal board; or else it's not as
-> minimal as any of them would like; or else it acquires a
-> growing set of -machine options to turn various devices on
-> and off...
->
-> -- PMM
+> 
+> Regards,
+> Anup
+> 
+> 
+> >      g_free(imsic_name);
+> >
+> >      /* S-level IMSIC node */
+> > --
+> > 2.30.2
+> >
+> >
 
