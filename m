@@ -1,69 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nryjJ-0005nL-0G
-	for mharc-qemu-riscv@gnu.org; Fri, 20 May 2022 05:15:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56174)
+	id 1nsusg-0006pQ-6N
+	for mharc-qemu-riscv@gnu.org; Sun, 22 May 2022 19:21:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59376)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nryjH-0005lW-2j
- for qemu-riscv@nongnu.org; Fri, 20 May 2022 05:15:27 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:35712)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nsuse-0006la-AZ; Sun, 22 May 2022 19:21:00 -0400
+Received: from mail-il1-x132.google.com ([2607:f8b0:4864:20::132]:39572)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nryjC-0005gs-8A
- for qemu-riscv@nongnu.org; Fri, 20 May 2022 05:15:25 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id c14so7293623pfn.2
- for <qemu-riscv@nongnu.org>; Fri, 20 May 2022 02:15:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=fLIOYUINGMgAoD6vzi/tWdUgV9JUL3c//1txnO7Zitc=;
- b=P/q949ZvlZGhqCMBl8XtnrY7S+xiJ4p8XTo34Vb+Tf+jcBE5j2/7PoFcrbne8PzT/z
- iTsHRgxqSkrFkpkYifqtmLDOj0nw6BM8LEYIV2UEQL8VL30GK/EyFlJ44nQbnXF4a/8U
- OKE1RhMkQlFji8beAPdFaf1gx/8MIyRL6+BWx1Bd1CTcHSeoX/44JNejG2/WgPxINNoa
- md7/ZuT13R7mz+/KbXbvgwm+C5NF1PSVvviFHRfUmuAfukX0qEPuoLYrt6pZtzY0xWqZ
- dFoJdJm28YQUBjixcoq71/Qi7wr3aPSpQBIJi4PlDBVQnuZisWOyHA6cow4K+vGJgFO1
- ESOg==
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nsusc-0006q3-Gp; Sun, 22 May 2022 19:20:59 -0400
+Received: by mail-il1-x132.google.com with SMTP id e9so4309116ilq.6;
+ Sun, 22 May 2022 16:20:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+CqV0llBJvPs04wHfPIrl8i82qQH8Lj2z9c9MToRqng=;
+ b=ViwpxG4GpVPQKz3suZIW6FCiewhbbCmK9PnmAY/Tcxxhg72gHVSvqCtRmDhvmfh/8J
+ IDjcsqS5en1tpAEz/YVO9myFN61smAp1RooOYvaXAuTI/IeBgNh+cLrtU7+OJccVNzMj
+ YryVGEbYP2tmLBNUBmBoiFLB8tz+NNpYbqvqn0DcwP2PbRSjk+h++kA3oJEf3W6P2P2E
+ GaruINn9ow5l0FodR89WPam9fyYFXWuzwuRfYNp8AWiK2MICmQ7HlfKH2tl7y3AYaodQ
+ Li07paRmsvCw8A3WoPmlCdkeu8b92XyAeVY/J78WV69R6Y+YGvZ7j2gwWQaETu7IN6vc
+ B86w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=fLIOYUINGMgAoD6vzi/tWdUgV9JUL3c//1txnO7Zitc=;
- b=2emIzvbtcDEt1Vm5JMwqJEjR8OQhOZtdSG9edtujFDn1/9lVxSv06SczCIoGnZzBnT
- DmSRphwWAM5LHm//AiQSHyw648F5yQdmJn3CUu68vMrrGddCxFeN0h+o6cHG9oTh5Ide
- HOHXxD32vATAX4xiXu49sXDu86xXGpPW+oU5ZqILdXFa/rdODV+VosPQZ9t33fgUsHYU
- BxN9hSu94ZConalmLUIUODOxdx9fP9eHyJt/vUY/pSMSduVTmhRvbB/88esSq1aF+MEl
- 8bsRvmQZSPeTjr8ePDjCad5C8634sOrZIZqbpBFGglcNSrERw8+PXUoPIlsFBTGwWnIC
- /Egg==
-X-Gm-Message-State: AOAM533NT/6z0Ln/Wq0EHFOOT4xM+hQTrjgkThGNC0K+yO+5cdCVv2h7
- FFSLgiTCZHwrdm9q9Jp0uc1ssw==
-X-Google-Smtp-Source: ABdhPJxr6aGwm5te17lUrneUbEf3uX3tvzwF6ojLkaTp3ZLPcUSi5w1ywHwaQZJJiQjaqCIrIoq+5A==
-X-Received: by 2002:a63:9a11:0:b0:3a3:3a8a:1006 with SMTP id
- o17-20020a639a11000000b003a33a8a1006mr7745048pge.116.1653038118548; 
- Fri, 20 May 2022 02:15:18 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- t77-20020a635f50000000b003db8bc8db64sm4939141pgb.35.2022.05.20.02.15.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 May 2022 02:15:18 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
-Subject: [PATCH] target/riscv: Fix typo of mimpid cpu option
-Date: Fri, 20 May 2022 17:15:11 +0800
-Message-Id: <20220520091514.17866-1-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.35.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+CqV0llBJvPs04wHfPIrl8i82qQH8Lj2z9c9MToRqng=;
+ b=BhzKYS1U+s0Man3RavueE2LjNDrBmc1cYBSm2ZM5walmZ9ip0Xhfu9TYNwkEPxASsx
+ 1DuTpcAfri5hvJtd4tnk5SytNFgUBqq8jEQoaY71e2G8rvcdgHC2cz03QjDn1LUKRSUJ
+ zd8Og4DNjupWC7Frlzjr9KW9UlLTg1l6DxvDt8WH4S2bAEewAMuYkNsmFgqr7SogXX98
+ Ziye1iuqktMZd0C7pZk3XrL38rzlKvHYvU1H+/onXBylWREgtfFT5eJx9F+8nFE96QGO
+ P3upNirjLF8blRxRH1cFlLcHcboJGUg0Xm/3H87siX5HYO1YiSy8lksT8bH0cwTPsPNC
+ Rn4g==
+X-Gm-Message-State: AOAM533Od9jbpCDKeKfcKYl+9uPGOpiPSGCQV5C11d/1EuiBYDlmushz
+ jtI3FyYyWSHHg/TiG+LjHdSdvf7isCu/cPuDFtgwKnAMIBAJhphGOJw=
+X-Google-Smtp-Source: ABdhPJzxZmD9Lx83o8Q+tUYmnAOt+jTdHbvpF++/m0ISYD0esVQpkPIVQ2jvDq+QRL20gPyQNFAWLYTy4+/7vlGT+cU=
+X-Received: by 2002:a05:6e02:1986:b0:2cf:908d:3d0a with SMTP id
+ g6-20020a056e02198600b002cf908d3d0amr10140133ilf.113.1653261656165; Sun, 22
+ May 2022 16:20:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x42f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20220520091514.17866-1-frank.chang@sifive.com>
+In-Reply-To: <20220520091514.17866-1-frank.chang@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 23 May 2022 09:20:30 +1000
+Message-ID: <CAKmqyKMuFN_v3QMH8yatq035WH2F9Tg1DZmRms0F3=9CaatLZw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix typo of mimpid cpu option
+To: Frank Chang <frank.chang@sifive.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132;
+ envelope-from=alistair23@gmail.com; helo=mail-il1-x132.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,86 +72,100 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 May 2022 09:15:27 -0000
+X-List-Received-Date: Sun, 22 May 2022 23:21:00 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On Fri, May 20, 2022 at 7:16 PM <frank.chang@sifive.com> wrote:
+>
+> From: Frank Chang <frank.chang@sifive.com>
+>
+> "mimpid" cpu option was mistyped to "mipid".
+> Fixes commit: 9951ba94
 
-"mimpid" cpu option was mistyped to "mipid".
-Fixes commit: 9951ba94
+Can you use the `Fixes:` tag here instead (have a look in the QEMU log
+for examples).
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/cpu.c | 4 ++--
- target/riscv/cpu.h | 2 +-
- target/riscv/csr.c | 8 ++++----
- 3 files changed, 7 insertions(+), 7 deletions(-)
+>
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 6d01569cad..a1f847176e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -37,7 +37,7 @@
- #define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
-                              (QEMU_VERSION_MINOR << 8)  | \
-                              (QEMU_VERSION_MICRO))
--#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
-+#define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
- 
- static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
- 
-@@ -869,7 +869,7 @@ static Property riscv_cpu_properties[] = {
- 
-     DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-     DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
--    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
-+    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
- 
-     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f5ff7294c6..44975e3e5a 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -408,7 +408,7 @@ struct RISCVCPUConfig {
- 
-     uint32_t mvendorid;
-     uint64_t marchid;
--    uint64_t mipid;
-+    uint64_t mimpid;
- 
-     /* Vendor-specific custom extensions */
-     bool ext_XVentanaCondOps;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 4ea7df02c9..0d5bc2f41d 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -674,13 +674,13 @@ static RISCVException read_marchid(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
--static RISCVException read_mipid(CPURISCVState *env, int csrno,
--                                 target_ulong *val)
-+static RISCVException read_mimpid(CPURISCVState *env, int csrno,
-+                                  target_ulong *val)
- {
-     CPUState *cs = env_cpu(env);
-     RISCVCPU *cpu = RISCV_CPU(cs);
- 
--    *val = cpu->cfg.mipid;
-+    *val = cpu->cfg.mimpid;
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -3372,7 +3372,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Machine Information Registers */
-     [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
-     [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
--    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
-+    [CSR_MIMPID]    = { "mimpid",    any,   read_mimpid    },
-     [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
- 
-     [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
--- 
-2.35.1
+Otherwise:
 
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/cpu.c | 4 ++--
+>  target/riscv/cpu.h | 2 +-
+>  target/riscv/csr.c | 8 ++++----
+>  3 files changed, 7 insertions(+), 7 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6d01569cad..a1f847176e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -37,7 +37,7 @@
+>  #define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
+>                               (QEMU_VERSION_MINOR << 8)  | \
+>                               (QEMU_VERSION_MICRO))
+> -#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
+> +#define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+>
+>  static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+>
+> @@ -869,7 +869,7 @@ static Property riscv_cpu_properties[] = {
+>
+>      DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+>      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
+> -    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
+> +    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
+>
+>      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+>      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index f5ff7294c6..44975e3e5a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -408,7 +408,7 @@ struct RISCVCPUConfig {
+>
+>      uint32_t mvendorid;
+>      uint64_t marchid;
+> -    uint64_t mipid;
+> +    uint64_t mimpid;
+>
+>      /* Vendor-specific custom extensions */
+>      bool ext_XVentanaCondOps;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4ea7df02c9..0d5bc2f41d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -674,13 +674,13 @@ static RISCVException read_marchid(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> -static RISCVException read_mipid(CPURISCVState *env, int csrno,
+> -                                 target_ulong *val)
+> +static RISCVException read_mimpid(CPURISCVState *env, int csrno,
+> +                                  target_ulong *val)
+>  {
+>      CPUState *cs = env_cpu(env);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>
+> -    *val = cpu->cfg.mipid;
+> +    *val = cpu->cfg.mimpid;
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -3372,7 +3372,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      /* Machine Information Registers */
+>      [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
+>      [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
+> -    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
+> +    [CSR_MIMPID]    = { "mimpid",    any,   read_mimpid    },
+>      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
+>
+>      [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
+> --
+> 2.35.1
+>
+>
 
