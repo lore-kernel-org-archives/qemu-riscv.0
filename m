@@ -1,63 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntFPk-0005dP-0L
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:16:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47674)
+	id 1ntFlJ-0006ay-P3
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:38:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52738)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFPi-0005Xp-AZ; Mon, 23 May 2022 17:16:30 -0400
-Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:42698)
+ id 1ntFlH-0006aU-7c; Mon, 23 May 2022 17:38:47 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:45922)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFPg-00012v-9R; Mon, 23 May 2022 17:16:29 -0400
-Received: by mail-io1-xd35.google.com with SMTP id a10so16582270ioe.9;
- Mon, 23 May 2022 14:16:27 -0700 (PDT)
+ id 1ntFlE-0004jI-FN; Mon, 23 May 2022 17:38:46 -0400
+Received: by mail-io1-xd33.google.com with SMTP id d198so11598546iof.12;
+ Mon, 23 May 2022 14:38:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=bC4mRZTBRMiPw33yhVCueTcd4vYm/1+iEBSzgpWX1gQ=;
- b=Ukzwu1GD244mKy6LMRez1SGPPX8LAtrhVEtvr5MjaPRYJozSVtraDe2Z+jvmSrP55B
- vM9g0VWod1Xii/hC87NhW/IKRucwqb8ffzzqjlJcHPgYxT8ZNx+8rdYVmORfUCADrlVo
- L5qa4OWUPZNBleBWssCCnuX2SqsSj9csOc8mZm2fAjfOjnRr1bLpvTkEpgBrLY3GyuDy
- 4qxTi5WQJDo5PxFuT6x/R+aPUFYp9+YC+/7a0z5wNHcgaywD6fPhESK8khbsbo6m4DOM
- E3x3fTtIPdyoehVoMDpEJoQVM6E8EscYCE8qEZOTaH0XDyzmqigf5BS0Ir+A6ThPvuEM
- SNfg==
+ :cc; bh=UzNuN5D0NeRrTweGSJYOOS6H67b83X6RRiObW+ZPeSk=;
+ b=mlfwpghWz0y568X/ztL5L0u7VrCp/RaEJDWqL8ZOFu/HHU3kNaITekH2cDRm+Mer2f
+ Av3RMqK+vGnc1GywZQHlipF84T2y7J+dZsWq2augDmCBwLbecotXHKdwHX/ds+gKnDXe
+ VJ4px0oirSIY/Ap+rTTPfSsZmyj53Dz55yqn5RsAM9DM/SxhfLy/huDG/NNB0vgFZGLp
+ 7Dsqgy4hxDr4eppSlWw577/qlAbPgIQF6UZNqT9Lw3Lu/iONY0/rvhyLqyG7F7rRH5dY
+ odQpgPnD8O7lU+qcA0wUlvc39L81n1yDWAa2RFnkvY4aZmWaDeMbUWjG5KJjlAC0IAPG
+ 1Fdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=bC4mRZTBRMiPw33yhVCueTcd4vYm/1+iEBSzgpWX1gQ=;
- b=3d3iRUS36Yim9BBq6pUBc9wd1sJByoklNf4fdnm8bhCFsoa/CrIkPp8/NO98vzZjnk
- 3YZ++N/7gc5UIsfraCJJtPLix2Hxiw5aowUu3A7RxQQ6VfMzo6spb+Rob4IEOSCVy7WR
- QbFGqafRYoOdF/mAsIrH30vaME6cSiX7Jj+3NP+e8PZZMHqsmrPbU2bVShpOkk2h/6R8
- 7Xb8iTJgGL/MatZaKsjcVelpTbPM5zc9pZNY4pe9r3clSSK6vOa59OwjBT0XWyOHaLim
- kQoX+Dn4RckGxJTtqV+CLhNv6iREGKagD+nc+y2jTvINrbgRXDAyl/1lqMZ3nbCD6qcY
- K3lQ==
-X-Gm-Message-State: AOAM5302/qx4rwvuTJnBo9XULmRyOC1Fsm5VTB3oXluaTiOjY9MN4QSv
- 303I7L/iDGFOOyab4WH2ZTgr+/4pIYfWlPzpGYw=
-X-Google-Smtp-Source: ABdhPJzfMzlDRdmlc0vbWubkZ43caW0ZAq9h6haf3tmdQBTDMrHe1qDfKFdzr5O1vKh2z4LVEv/Y7F/HUQLUWfHrHbU=
-X-Received: by 2002:a05:6638:160d:b0:32b:d9d2:f2f2 with SMTP id
- x13-20020a056638160d00b0032bd9d2f2f2mr12155050jas.68.1653340585712; Mon, 23
- May 2022 14:16:25 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=UzNuN5D0NeRrTweGSJYOOS6H67b83X6RRiObW+ZPeSk=;
+ b=hNW7Ib5eIOhjT0qHJv+7Igz9dwbfn2CQIi1CJGkRAmz4nRCeH5gCKjdQua82Nb7xRn
+ GjZUBuK7DN+RHHZhQDOjRC1NJIONvs/fOHnnEof+MLQNaCXw0VKQOWej27h6LElnuCgT
+ 7vVX6eB4GKnm4WsymKvgd3ZqB4fAVmKxbVX6ckiLJ0lxJpuPCSv8rw53TyDpaVHrMN+S
+ sUMbZcEb+ij+c8TRmN9Pf4CxM3GBdNce8DE/6K+1H2tGEtCAtjvTqWM1uths9os2rzpS
+ tO2zXsgAr9QCGPGopNjqjTJSph8Nsa0EPoWTt00hqVBXOmcHSSs2kz5YqHLriFs4xSMH
+ Yjbw==
+X-Gm-Message-State: AOAM531l7k+EiyPiP2PeZH+1j1OIgAx8JJM+Rvzu3uJfADwnqJ/vP8RB
+ H5Lyd/ZvTgTkvsW7qU3DG9zlZ6kSk8swZDPgzx8=
+X-Google-Smtp-Source: ABdhPJwhA9qdeUbNI5Hg9EreCBMIhuKiIGohtCjFhR6AbzmuUh8w6n3q6QALokNPFNpVSoL1kxvlZ26SBAAnCXnmsJU=
+X-Received: by 2002:a05:6638:1411:b0:32e:c01f:e93e with SMTP id
+ k17-20020a056638141100b0032ec01fe93emr4307236jad.21.1653341919775; Mon, 23
+ May 2022 14:38:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220518015316.20504-1-liweiwei@iscas.ac.cn>
- <CAKmqyKNBQo91af1m5t_wDOVMeh=6uYD9Q+KugoTOQYzQJUtf5w@mail.gmail.com>
- <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
-In-Reply-To: <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
+References: <20220511144528.393530-1-apatel@ventanamicro.com>
+ <20220511144528.393530-5-apatel@ventanamicro.com>
+In-Reply-To: <20220511144528.393530-5-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 May 2022 07:15:59 +1000
-Message-ID: <CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: add support for zmmul extension v0.1
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
+Date: Tue, 24 May 2022 07:38:13 +1000
+Message-ID: <CAKmqyKMiwutFbkq4ZP+SRZ-9hTTN1NTnoGsipbXii_V2QeW8Rg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/8] target/riscv: Update [m|h]tinst CSR in
+ riscv_cpu_do_interrupt()
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,174 +77,320 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 21:16:30 -0000
+X-List-Received-Date: Mon, 23 May 2022 21:38:47 -0000
 
-On Mon, May 23, 2022 at 6:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Thu, May 12, 2022 at 12:47 AM Anup Patel <apatel@ventanamicro.com> wrote:
 >
+> We should write transformed instruction encoding of the trapped
+> instruction in [m|h]tinst CSR at time of taking trap as defined
+> by the RISC-V privileged specification v1.12.
 >
-> =E5=9C=A8 2022/5/23 =E4=B8=8B=E5=8D=882:34, Alistair Francis =E5=86=99=E9=
-=81=93:
-> > On Wed, May 18, 2022 at 11:54 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote=
-:
-> >>   - includes all multiplication operations for M extension
-> >>
-> >> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> >> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> >> ---
-> >>   target/riscv/cpu.c                      |  2 ++
-> >>   target/riscv/cpu.h                      |  1 +
-> >>   target/riscv/insn_trans/trans_rvm.c.inc | 18 ++++++++++++------
-> >>   3 files changed, 15 insertions(+), 6 deletions(-)
-> >>
-> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> >> index e373c61ba2..01b57d3784 100644
-> >> --- a/target/riscv/cpu.c
-> >> +++ b/target/riscv/cpu.c
-> >> @@ -903,6 +903,7 @@ static Property riscv_cpu_properties[] =3D {
-> >>
-> >>       /* These are experimental so mark with 'x-' */
-> >>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-> >> +    DEFINE_PROP_BOOL("x-zmmul", RISCVCPU, cfg.ext_zmmul, false),
-> > Is this really experimental?
-> >
-> > Alistair
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> ---
+>  target/riscv/cpu_helper.c | 168 +++++++++++++++++++++++++++++++++++++-
+>  target/riscv/instmap.h    |  41 ++++++++++
+>  2 files changed, 205 insertions(+), 4 deletions(-)
 >
-> I think it's experimental currently. The zmmul version in latest riscv
-> spec is v0.1, even though described as  v1.0 in spike README.
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d99fac9d2d..b24652eb8d 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -22,6 +22,7 @@
+>  #include "qemu/main-loop.h"
+>  #include "cpu.h"
+>  #include "exec/exec-all.h"
+> +#include "instmap.h"
+>  #include "tcg/tcg-op.h"
+>  #include "trace.h"
+>  #include "semihosting/common-semi.h"
+> @@ -1318,6 +1319,158 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>  }
+>  #endif /* !CONFIG_USER_ONLY */
+>
+> +static target_ulong riscv_transformed_insn(CPURISCVState *env,
+> +                                           target_ulong insn)
+> +{
+> +    target_ulong xinsn = 0;
+> +
+> +    /*
+> +     * Only Quadrant 0 and Quadrant 2 of RVC instruction space need to
+> +     * be uncompressed. The Quadrant 1 of RVC instruction space need
+> +     * not be transformed because these instructions won't generate
+> +     * any load/store trap.
+> +     */
+> +
+> +    if ((insn & 0x3) != 0x3) {
+> +        /* Transform 16bit instruction into 32bit instruction */
+> +        switch (GET_C_OP(insn)) {
+> +        case OPC_RISC_C_OP_QUAD0: /* Quadrant 0 */
+> +            switch (GET_C_FUNC(insn)) {
+> +            case OPC_RISC_C_FUNC_FLD_LQ:
+> +                if (riscv_cpu_xlen(env) != 128) { /* C.FLD (RV32/64) */
+> +                    xinsn = OPC_RISC_FLD;
+> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_LW: /* C.LW */
+> +                xinsn = OPC_RISC_LW;
+> +                xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
+> +                break;
+> +            case OPC_RISC_C_FUNC_FLW_LD:
+> +                if (riscv_cpu_xlen(env) == 32) { /* C.FLW (RV32) */
+> +                    xinsn = OPC_RISC_FLW;
+> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
+> +                } else { /* C.LD (RV64/RV128) */
+> +                    xinsn = OPC_RISC_LD;
+> +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_FSD_SQ:
+> +                if (riscv_cpu_xlen(env) != 128) { /* C.FSD (RV32/64) */
+> +                    xinsn = OPC_RISC_FSD;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_SW: /* C.SW */
+> +                xinsn = OPC_RISC_SW;
+> +                xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
+> +                break;
+> +            case OPC_RISC_C_FUNC_FSW_SD:
+> +                if (riscv_cpu_xlen(env) == 32) { /* C.FSW (RV32) */
+> +                    xinsn = OPC_RISC_FSW;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
+> +                } else { /* C.SD (RV64/RV128) */
+> +                    xinsn = OPC_RISC_SD;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
+> +                }
+> +                break;
+> +            default:
+> +                break;
+> +            }
+> +            break;
+> +        case OPC_RISC_C_OP_QUAD2: /* Quadrant 2 */
+> +            switch (GET_C_FUNC(insn)) {
+> +            case OPC_RISC_C_FUNC_FLDSP_LQSP:
+> +                if (riscv_cpu_xlen(env) != 128) { /* C.FLDSP (RV32/64) */
+> +                    xinsn = OPC_RISC_FLD;
+> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
 
-Hmm... Your right that it is only v0.1, but there is no indication of
-draft state in the RISC-V spec chapter on Zmmul
+Is this right?
 
->
-> Its specification status
-> (https://wiki.riscv.org/display/home/specification+status) is Freeze
-> Complete and TSC Sign-Off Voting.
->
-> And It's not in the ratified extension
-> list(https://wiki.riscv.org/display/home/recently+ratified+extensions).
->
-> Any status update I missed?
+Shouldn't this be the offset "between the faulting virtual address
+(written to mtval or stval) and the original virtual address"?
 
-Confusing. Ok, I guess let's leave it as experimental, we can always
-remove the `x-` easily :)
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_LWSP: /* C.LWSP */
+> +                xinsn = OPC_RISC_LW;
+> +                xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> +                xinsn = SET_RS1(xinsn, 2);
+> +                xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
+> +                break;
+> +            case OPC_RISC_C_FUNC_FLWSP_LDSP:
+> +                if (riscv_cpu_xlen(env) == 32) { /* C.FLWSP (RV32) */
+> +                    xinsn = OPC_RISC_FLW;
+> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
+> +                } else { /* C.LDSP (RV64/RV128) */
+> +                    xinsn = OPC_RISC_LD;
+> +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
+> +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_FSDSP_SQSP:
+> +                if (riscv_cpu_xlen(env) != 128) { /* C.FSDSP (RV32/64) */
+> +                    xinsn = OPC_RISC_FSD;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
+> +                }
+> +                break;
+> +            case OPC_RISC_C_FUNC_SWSP: /* C.SWSP */
+> +                xinsn = OPC_RISC_SW;
+> +                xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> +                xinsn = SET_RS1(xinsn, 2);
+> +                xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
+> +                break;
+> +            case 7:
+> +                if (riscv_cpu_xlen(env) == 32) { /* C.FSWSP (RV32) */
+> +                    xinsn = OPC_RISC_FSW;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
+> +                } else { /* C.SDSP (RV64/RV128) */
+> +                    xinsn = OPC_RISC_SD;
+> +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> +                    xinsn = SET_RS1(xinsn, 2);
+> +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
+> +                }
+> +                break;
+> +            default:
+> +                break;
+> +            }
+> +            break;
+> +        default:
+> +            break;
+> +        }
+> +
+> +        /*
+> +         * Clear Bit1 of transformed instruction to indicate that
+> +         * original insruction was a 16bit instruction
+> +         */
+> +        xinsn &= ~((target_ulong)0x2);
+> +    } else {
+> +        /* No need to transform 32bit (or wider) instructions */
 
->
-> Regards,
->
-> Weiwei Li
->
-> >>       /* ePMP 0.9.3 */
-> >>       DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> >>       DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
-> >> @@ -1027,6 +1028,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, =
-char **isa_str, int max_str_len)
-> >>        *    extensions by an underscore.
-> >>        */
-> >>       struct isa_ext_data isa_edata_arr[] =3D {
-> >> +        ISA_EDATA_ENTRY(zmmul, ext_zmmul),
-
-We should have some checks though. We don't want users to enable this
-and the multiply (M) extension
-
+From what I can tell we still need to transform 32-bit instructions as
+well, the "Addr. Offset" for example needs to be changed.
 
 Alistair
 
-> >>           ISA_EDATA_ENTRY(zfh, ext_zfh),
-> >>           ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
-> >>           ISA_EDATA_ENTRY(zfinx, ext_zfinx),
-> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> >> index f5ff7294c6..68177eae12 100644
-> >> --- a/target/riscv/cpu.h
-> >> +++ b/target/riscv/cpu.h
-> >> @@ -405,6 +405,7 @@ struct RISCVCPUConfig {
-> >>       bool ext_zhinxmin;
-> >>       bool ext_zve32f;
-> >>       bool ext_zve64f;
-> >> +    bool ext_zmmul;
-> >>
-> >>       uint32_t mvendorid;
-> >>       uint64_t marchid;
-> >> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/in=
-sn_trans/trans_rvm.c.inc
-> >> index 16b029edf0..ec7f705aab 100644
-> >> --- a/target/riscv/insn_trans/trans_rvm.c.inc
-> >> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
-> >> @@ -18,6 +18,12 @@
-> >>    * this program.  If not, see <http://www.gnu.org/licenses/>.
-> >>    */
-> >>
-> >> +#define REQUIRE_M_OR_ZMMUL(ctx) do {                      \
-> >> +    if (!ctx->cfg_ptr->ext_zmmul && !has_ext(ctx, RVM)) { \
-> >> +        return false;                                     \
-> >> +    }                                                     \
-> >> +} while (0)
-> >> +
-> >>   static void gen_mulhu_i128(TCGv r2, TCGv r3, TCGv al, TCGv ah, TCGv =
-bl, TCGv bh)
-> >>   {
-> >>       TCGv tmpl =3D tcg_temp_new();
-> >> @@ -65,7 +71,7 @@ static void gen_mul_i128(TCGv rl, TCGv rh,
-> >>
-> >>   static bool trans_mul(DisasContext *ctx, arg_mul *a)
-> >>   {
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128)=
-;
-> >>   }
-> >>
-> >> @@ -109,7 +115,7 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
-> >>
-> >>   static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
-> >>   {
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
-> >>                               gen_mulh_i128);
-> >>   }
-> >> @@ -161,7 +167,7 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv=
- arg2)
-> >>
-> >>   static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
-> >>   {
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu=
-_w,
-> >>                               gen_mulhsu_i128);
-> >>   }
-> >> @@ -176,7 +182,7 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
-> >>
-> >>   static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
-> >>   {
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       /* gen_mulh_w works for either sign as input. */
-> >>       return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
-> >>                               gen_mulhu_i128);
-> >> @@ -349,7 +355,7 @@ static bool trans_remu(DisasContext *ctx, arg_remu=
- *a)
-> >>   static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
-> >>   {
-> >>       REQUIRE_64_OR_128BIT(ctx);
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       ctx->ol =3D MXL_RV32;
-> >>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
-> >>   }
-> >> @@ -389,7 +395,7 @@ static bool trans_remuw(DisasContext *ctx, arg_rem=
-uw *a)
-> >>   static bool trans_muld(DisasContext *ctx, arg_muld *a)
-> >>   {
-> >>       REQUIRE_128BIT(ctx);
-> >> -    REQUIRE_EXT(ctx, RVM);
-> >> +    REQUIRE_M_OR_ZMMUL(ctx);
-> >>       ctx->ol =3D MXL_RV64;
-> >>       return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
-> >>   }
-> >> --
-> >> 2.17.1
-> >>
-> >>
+> +        xinsn = insn;
+> +    }
+> +
+> +    return xinsn;
+> +}
+> +
+>  /*
+>   * Handle Traps
+>   *
+> @@ -1340,6 +1493,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
+>      uint64_t deleg = async ? env->mideleg : env->medeleg;
+>      target_ulong tval = 0;
+> +    target_ulong tinst = 0;
+>      target_ulong htval = 0;
+>      target_ulong mtval2 = 0;
+>
+> @@ -1355,18 +1509,22 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      if (!async) {
+>          /* set tval to badaddr for traps with address information */
+>          switch (cause) {
+> -        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+>          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+> -        case RISCV_EXCP_INST_ADDR_MIS:
+> -        case RISCV_EXCP_INST_ACCESS_FAULT:
+>          case RISCV_EXCP_LOAD_ADDR_MIS:
+>          case RISCV_EXCP_STORE_AMO_ADDR_MIS:
+>          case RISCV_EXCP_LOAD_ACCESS_FAULT:
+>          case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
+> -        case RISCV_EXCP_INST_PAGE_FAULT:
+>          case RISCV_EXCP_LOAD_PAGE_FAULT:
+>          case RISCV_EXCP_STORE_PAGE_FAULT:
+> +            write_gva = env->two_stage_lookup;
+> +            tval = env->badaddr;
+> +            tinst = riscv_transformed_insn(env, env->bins);
+> +            break;
+> +        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> +        case RISCV_EXCP_INST_ADDR_MIS:
+> +        case RISCV_EXCP_INST_ACCESS_FAULT:
+> +        case RISCV_EXCP_INST_PAGE_FAULT:
+>              write_gva = env->two_stage_lookup;
+>              tval = env->badaddr;
+>              break;
+> @@ -1448,6 +1606,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          env->sepc = env->pc;
+>          env->stval = tval;
+>          env->htval = htval;
+> +        env->htinst = tinst;
+>          env->pc = (env->stvec >> 2 << 2) +
+>              ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
+>          riscv_cpu_set_mode(env, PRV_S);
+> @@ -1478,6 +1637,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          env->mepc = env->pc;
+>          env->mtval = tval;
+>          env->mtval2 = mtval2;
+> +        env->mtinst = tinst;
+>          env->pc = (env->mtvec >> 2 << 2) +
+>              ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
+>          riscv_cpu_set_mode(env, PRV_M);
+> diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
+> index 40b6d2b64d..f4ee686c78 100644
+> --- a/target/riscv/instmap.h
+> +++ b/target/riscv/instmap.h
+> @@ -316,6 +316,12 @@ enum {
+>  #define GET_RS2(inst)  extract32(inst, 20, 5)
+>  #define GET_RD(inst)   extract32(inst, 7, 5)
+>  #define GET_IMM(inst)  sextract64(inst, 20, 12)
+> +#define SET_RS1(inst, val)  deposit32(inst, 15, 5, val)
+> +#define SET_RS2(inst, val)  deposit32(inst, 20, 5, val)
+> +#define SET_RD(inst, val)   deposit32(inst, 7, 5, val)
+> +#define SET_I_IMM(inst, val)  deposit32(inst, 20, 12, val)
+> +#define SET_S_IMM(inst, val)  \
+> +    deposit32(deposit32(inst, 7, 5, val), 25, 7, (val) >> 5)
+>
+>  /* RVC decoding macros */
+>  #define GET_C_IMM(inst)             (extract32(inst, 2, 5) \
+> @@ -346,6 +352,8 @@ enum {
+>                                      | (extract32(inst, 5, 1) << 6))
+>  #define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
+>                                      | (extract16(inst, 5, 2) << 6))
+> +#define GET_C_SW_IMM(inst)          GET_C_LW_IMM(inst)
+> +#define GET_C_SD_IMM(inst)          GET_C_LD_IMM(inst)
+>  #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
+>                                      | (extract32(inst, 11, 1) << 4) \
+>                                      | (extract32(inst, 2, 1) << 5) \
+> @@ -366,4 +374,37 @@ enum {
+>  #define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
+>  #define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
+>
+> +#define GET_C_FUNC(inst)           extract32(inst, 13, 3)
+> +#define GET_C_OP(inst)             extract32(inst, 0, 2)
+> +
+> +enum {
+> +    /* RVC Quadrants */
+> +    OPC_RISC_C_OP_QUAD0 = 0x0,
+> +    OPC_RISC_C_OP_QUAD1 = 0x1,
+> +    OPC_RISC_C_OP_QUAD2 = 0x2
+> +};
+> +
+> +enum {
+> +    /* RVC Quadrant 0 */
+> +    OPC_RISC_C_FUNC_ADDI4SPN = 0x0,
+> +    OPC_RISC_C_FUNC_FLD_LQ = 0x1,
+> +    OPC_RISC_C_FUNC_LW = 0x2,
+> +    OPC_RISC_C_FUNC_FLW_LD = 0x3,
+> +    OPC_RISC_C_FUNC_FSD_SQ = 0x5,
+> +    OPC_RISC_C_FUNC_SW = 0x6,
+> +    OPC_RISC_C_FUNC_FSW_SD = 0x7
+> +};
+> +
+> +enum {
+> +    /* RVC Quadrant 2 */
+> +    OPC_RISC_C_FUNC_SLLI_SLLI64 = 0x0,
+> +    OPC_RISC_C_FUNC_FLDSP_LQSP = 0x1,
+> +    OPC_RISC_C_FUNC_LWSP = 0x2,
+> +    OPC_RISC_C_FUNC_FLWSP_LDSP = 0x3,
+> +    OPC_RISC_C_FUNC_JR_MV_EBREAK_JALR_ADD = 0x4,
+> +    OPC_RISC_C_FUNC_FSDSP_SQSP = 0x5,
+> +    OPC_RISC_C_FUNC_SWSP = 0x6,
+> +    OPC_RISC_C_FUNC_FSWSP_SDSP = 0x7
+> +};
+> +
+>  #endif
+> --
+> 2.34.1
+>
 >
 
