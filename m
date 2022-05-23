@@ -1,64 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntFtm-00064Y-At
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:47:34 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54346)
+	id 1ntFyi-0000LW-7e
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:52:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55126)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFtk-00063M-QF; Mon, 23 May 2022 17:47:32 -0400
-Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:36657)
+ id 1ntFyc-0000Kg-3I; Mon, 23 May 2022 17:52:35 -0400
+Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:42873)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFtV-0006Wn-JM; Mon, 23 May 2022 17:47:32 -0400
-Received: by mail-io1-xd2f.google.com with SMTP id n145so7089259iod.3;
- Mon, 23 May 2022 14:47:16 -0700 (PDT)
+ id 1ntFya-0007TJ-13; Mon, 23 May 2022 17:52:33 -0400
+Received: by mail-io1-xd2b.google.com with SMTP id a10so16658123ioe.9;
+ Mon, 23 May 2022 14:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ZrsbMYAsQUeay9G7OP9LAsE6yzqj7wzxhvLg4PAJn9M=;
- b=chRole6lMPiZuv9IuHWlg2x0nExsV/KOeGkmU0mqM0j8FKsyOA1y2PJTQoRFtjiKs9
- B5yHaFPjZoO7zQ5LY3eh+873EKVjioHkzQ65u0HKzoUnvr91e+XEsvMoWVKV7+pcHCdP
- cO/ZfndeZAAd3FMkPEmSvagHcM3BjCJTA48h0+szSO8FOWbyBh/nkYLz+wNIfqX8+1HJ
- UQ4KkT95o0GEMGT7ulyzByQumt2PPFu627osyY1IzVhRRdsjvgiEyVvJmvKN4yPtynX3
- q1A6nPZ2cxOIedUP4Ncl60VmiKqQ8fMdfNvaTQ+teZmPuJbNshgpwxH8IoW0O00uzIbs
- 8AhA==
+ :cc; bh=JvNoFbAPArw3M3BUkTp7tvRUH3qgucaaQPgtTpl80uA=;
+ b=b0MmsKKx1+Xpu3qnZ9QySO1ieF2rtsrrKTMoMYT3FawNq5RHc7Tx/S88wtKk3pzNit
+ pSEs4LxWPZ23oLJ+1f6PhWunDyuCsblI3OTCoYKqu9qAI1BwrpoHwnDWB3vyGW9rtyyT
+ RtrvJ/FK8aOVkdcEil+MhcCSLfP7etR2pCT18URRPY0wDYhzX7jGCce/agj1gLImlrcA
+ Ji4O8jU7zBynE0sse4SiEyGWN1Nzyi+POPTqmhn8DPobWj4GjvPNF30ovPD6UgLPZehk
+ I6hHUo3QGfhnQnnYrWAPBjgZjSgD5dzSPpIJqyRrVoc4VzJxI74lKTqAL+snmQYx0pBo
+ hreQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ZrsbMYAsQUeay9G7OP9LAsE6yzqj7wzxhvLg4PAJn9M=;
- b=bjBUs4tzRvMStUYI5WlHdHs5iNwnRMB5mnw4XuSonUPBlrV1xyAMIzR0Rap/B5xroa
- cQVVnnLmbnSFIXIV0ThAkbRN8n//+Th/7R+4vppU5lda0SxjoiCbiStetC/GX5alnOVK
- XvO1QjqUkRoB57yGlttOS7tRbW0HMjXvjajbCBoBNfpcvE+tsIof6557y6uZxWAwui0W
- J6Miw+874wWc9tyjbfG+SSjVaC8BMu9d4513Y6G3fz2paZjOOP+3jo4WzBBJshV8E+TB
- ylVCVW0HFVXJ05qVmo6IyX9K4xdFncPUxnckKHVBMLtK1N4n3ByhSE8a6q3FQedN3221
- yQxQ==
-X-Gm-Message-State: AOAM530khoGkNrhrAabbSlBAXHTbvFo9dz5yBDWkRhnlYYCbPAsxqKpd
- E46f9h1rvGlqpldnSukwIxRLKNTXlwSWtTO3a1g=
-X-Google-Smtp-Source: ABdhPJw3zEc4ndeTuV2yFUCvvruWLagSsunO1bieS+TvDc+hcO7jBuhFZTxyc6tHCUFV43gYj9o9hANvgiO7Kgl4Ob8=
-X-Received: by 2002:a05:6638:370b:b0:32e:a6ce:edcf with SMTP id
- k11-20020a056638370b00b0032ea6ceedcfmr8027934jav.267.1653342436174; Mon, 23
- May 2022 14:47:16 -0700 (PDT)
+ bh=JvNoFbAPArw3M3BUkTp7tvRUH3qgucaaQPgtTpl80uA=;
+ b=jl5LDe5jqvCMFe2Q/Fd3BXhn4EzHef1uoUW9orvgEo90TWqjf8dXaBiUsCm14tLUot
+ /aavh7+LYghw8Tbv4vMJQQ8HE2DTm9AhBljoL3VA6O5TJ8g8b3Hdpnt8+MxGMcYqpZq1
+ 88A5AdGD+VOxcse7TibFWAHecFhAGpK4KoFqGDud/S/unsBBgIp38RRajcWD/2XDm6Hq
+ jyJi9biSMjz/f/pSvFdA+mO3R4ZKx7Dx9/gZacxdOSDJh1krr1ztPZ9mbCjrUuRGbkMt
+ eeuSUbrMbyuJ1KbGkN9Mhv9BaShqh/hg7G6B2TYIY/ZDs2E/qs/r9XiivGMQvXbs7X8+
+ gDHQ==
+X-Gm-Message-State: AOAM530Go5zkuuKg1+ijnobVdieJt7qngXiMGq/UbxxVkITJsSpx4LQ4
+ ZZ210XipmQIdfddqRK5eaQ6/a2AJhdRdrZ7Zjto=
+X-Google-Smtp-Source: ABdhPJytv4zcAzy2f32EhFJTJUgJqdcfaVGBjDmLV8FSULaUhwqjdg5M5WVHLVlwKdjFWwlVxFDIcmjrLYwDlU5dzoA=
+X-Received: by 2002:a5d:9818:0:b0:65b:ae2:863e with SMTP id
+ a24-20020a5d9818000000b0065b0ae2863emr10845836iol.31.1653342750283; Mon, 23
+ May 2022 14:52:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220523153147.15371-1-frank.chang@sifive.com>
-In-Reply-To: <20220523153147.15371-1-frank.chang@sifive.com>
+References: <20220511144528.393530-1-apatel@ventanamicro.com>
+ <20220511144528.393530-8-apatel@ventanamicro.com>
+ <CAKmqyKN5U927XfL7n_8S=3ykMyHPLM_kyM9qfYV5dq_eSmoEfA@mail.gmail.com>
+ <CAAhSdy1SRGnG9An-hKHBaEzoG=0eSZQCwQDhoJ3J387Lwe5Pdg@mail.gmail.com>
+In-Reply-To: <CAAhSdy1SRGnG9An-hKHBaEzoG=0eSZQCwQDhoJ3J387Lwe5Pdg@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 May 2022 07:46:50 +1000
-Message-ID: <CAKmqyKPw5NTXTAu0bXCuXo6xL+GQ8d8h+AP9Dgqg1zqr9vK-CQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH v2] target/riscv: Fix typo of mimpid cpu option
-To: Frank Chang <frank.chang@sifive.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+Date: Tue, 24 May 2022 07:52:04 +1000
+Message-ID: <CAKmqyKMy66XQsgmAnMEEaYrH7k1g2MC6kHqrPaRWKxvSuOz3Xw@mail.gmail.com>
+Subject: Re: [PATCH v2 7/8] target/riscv: Force disable extensions if priv
+ spec version does not match
+To: Anup Patel <anup@brainfault.org>
+Cc: Anup Patel <apatel@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ Atish Patra <atishp@atishpatra.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -71,97 +80,101 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 21:47:33 -0000
+X-List-Received-Date: Mon, 23 May 2022 21:52:37 -0000
 
-On Tue, May 24, 2022 at 1:36 AM <frank.chang@sifive.com> wrote:
+On Fri, May 20, 2022 at 1:07 AM Anup Patel <anup@brainfault.org> wrote:
 >
-> From: Frank Chang <frank.chang@sifive.com>
+> On Tue, May 17, 2022 at 5:46 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Thu, May 12, 2022 at 12:52 AM Anup Patel <apatel@ventanamicro.com> wrote:
+> > >
+> > > We should disable extensions in riscv_cpu_realize() if minimum required
+> > > priv spec version is not satisfied. This also ensures that machines with
+> > > priv spec v1.11 (or lower) cannot enable H, V, and various multi-letter
+> > > extensions.
+> > >
+> > > Fixes: a775398be2e ("target/riscv: Add isa extenstion strings to the
+> > > device tree")
+> > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> >
+> > This will potentially confuse users as we just disable the extension
+> > without telling them.
+> >
+> > Could we not just leave this as is and let users specify the
+> > extensions they want? Then it's up to them to specify the correct
+> > combinations
 >
-> "mimpid" cpu option was mistyped to "mipid".
+> The ISA extensions are not independent of the Priv spec version.
 >
-> Fixes: 9951ba94 ("target/riscv: Support configuarable marchid, mvendorid, mipid CSR values")
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> For example, we have bits for Sstc, Svpbmt, and Zicbo[m|p|z] extensions
+> in xenvcfg CSRs which are only available for Priv v1.12 spec.
+>
+> We can't allow users to enable extensions which don't meet
+> the Priv spec version requirements.
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Fair point. Ok we should at least report a warning if any of these are
+set though
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 4 ++--
->  target/riscv/cpu.h | 2 +-
->  target/riscv/csr.c | 8 ++++----
->  3 files changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6d01569cad..a1f847176e 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -37,7 +37,7 @@
->  #define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
->                               (QEMU_VERSION_MINOR << 8)  | \
->                               (QEMU_VERSION_MICRO))
-> -#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
-> +#define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+> Regards,
+> Anup
 >
->  static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
->
-> @@ -869,7 +869,7 @@ static Property riscv_cpu_properties[] = {
->
->      DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
->      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-> -    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
-> +    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
->
->      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
->      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f5ff7294c6..44975e3e5a 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -408,7 +408,7 @@ struct RISCVCPUConfig {
->
->      uint32_t mvendorid;
->      uint64_t marchid;
-> -    uint64_t mipid;
-> +    uint64_t mimpid;
->
->      /* Vendor-specific custom extensions */
->      bool ext_XVentanaCondOps;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 4ea7df02c9..0d5bc2f41d 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -674,13 +674,13 @@ static RISCVException read_marchid(CPURISCVState *env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> -static RISCVException read_mipid(CPURISCVState *env, int csrno,
-> -                                 target_ulong *val)
-> +static RISCVException read_mimpid(CPURISCVState *env, int csrno,
-> +                                  target_ulong *val)
->  {
->      CPUState *cs = env_cpu(env);
->      RISCVCPU *cpu = RISCV_CPU(cs);
->
-> -    *val = cpu->cfg.mipid;
-> +    *val = cpu->cfg.mimpid;
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -3372,7 +3372,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      /* Machine Information Registers */
->      [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
->      [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
-> -    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
-> +    [CSR_MIMPID]    = { "mimpid",    any,   read_mimpid    },
->      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
->
->      [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
-> --
-> 2.35.1
->
->
+> >
+> > Alistair
+> >
+> > > ---
+> > >  target/riscv/cpu.c | 34 ++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 34 insertions(+)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index f3b61dfd63..25a4ba3e22 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -541,6 +541,40 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+> > >          set_priv_version(env, priv_version);
+> > >      }
+> > >
+> > > +    /* Force disable extensions if priv spec version does not match */
+> > > +    if (env->priv_ver < PRIV_VERSION_1_12_0) {
+> > > +        cpu->cfg.ext_h = false;
+> > > +        cpu->cfg.ext_v = false;
+> > > +        cpu->cfg.ext_zfh = false;
+> > > +        cpu->cfg.ext_zfhmin = false;
+> > > +        cpu->cfg.ext_zfinx = false;
+> > > +        cpu->cfg.ext_zhinx = false;
+> > > +        cpu->cfg.ext_zhinxmin = false;
+> > > +        cpu->cfg.ext_zdinx = false;
+> > > +        cpu->cfg.ext_zba = false;
+> > > +        cpu->cfg.ext_zbb = false;
+> > > +        cpu->cfg.ext_zbc = false;
+> > > +        cpu->cfg.ext_zbkb = false;
+> > > +        cpu->cfg.ext_zbkc = false;
+> > > +        cpu->cfg.ext_zbkx = false;
+> > > +        cpu->cfg.ext_zbs = false;
+> > > +        cpu->cfg.ext_zk = false;
+> > > +        cpu->cfg.ext_zkn = false;
+> > > +        cpu->cfg.ext_zknd = false;
+> > > +        cpu->cfg.ext_zkne = false;
+> > > +        cpu->cfg.ext_zknh = false;
+> > > +        cpu->cfg.ext_zkr = false;
+> > > +        cpu->cfg.ext_zks = false;
+> > > +        cpu->cfg.ext_zksed = false;
+> > > +        cpu->cfg.ext_zksh = false;
+> > > +        cpu->cfg.ext_zkt = false;
+> > > +        cpu->cfg.ext_zve32f = false;
+> > > +        cpu->cfg.ext_zve64f = false;
+> > > +        cpu->cfg.ext_svinval = false;
+> > > +        cpu->cfg.ext_svnapot = false;
+> > > +        cpu->cfg.ext_svpbmt = false;
+> > > +    }
+> > > +
+> > >      if (cpu->cfg.mmu) {
+> > >          riscv_set_feature(env, RISCV_FEATURE_MMU);
+> > >      }
+> > > --
+> > > 2.34.1
+> > >
+> > >
 
