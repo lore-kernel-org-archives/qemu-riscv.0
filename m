@@ -1,69 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntFmx-00007X-Ur
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:40:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53116)
+	id 1ntFtm-00064Y-At
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:47:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54346)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFms-0008SR-6c; Mon, 23 May 2022 17:40:26 -0400
-Received: from mail-io1-xd2a.google.com ([2607:f8b0:4864:20::d2a]:45922)
+ id 1ntFtk-00063M-QF; Mon, 23 May 2022 17:47:32 -0400
+Received: from mail-io1-xd2f.google.com ([2607:f8b0:4864:20::d2f]:36657)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFmp-00058J-3R; Mon, 23 May 2022 17:40:24 -0400
-Received: by mail-io1-xd2a.google.com with SMTP id d198so11602035iof.12;
- Mon, 23 May 2022 14:40:20 -0700 (PDT)
+ id 1ntFtV-0006Wn-JM; Mon, 23 May 2022 17:47:32 -0400
+Received: by mail-io1-xd2f.google.com with SMTP id n145so7089259iod.3;
+ Mon, 23 May 2022 14:47:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pUjqTbi3LnE3irwObyZh6joz8VYA+PW3Ldur0WaUFHE=;
- b=UY9VEAr5Aw5dfJD7HhcKziRpppKK6UB6ArKCFBhyiMm3zg9rL4CKOLGzd/m5k5UOTk
- N0fKiptYxo1xI8T0PIgDO5+eZ28RvGMUMU0DO3q47Km9RtL8vksb20paQVHvLxZ5ezqt
- x7Vungyq6ybhCbmQ1nUc1Wo2Oq2u2uE1OXpZ8JUuBwVs4g9OYAEHjDXIViEvIA+oxJMc
- BC67/UDPPpQBqV4XyDWybn6wEA3tGarl1ljmSAGjvonz93zV9O+OqM6MfRKakxLO6bUF
- xYjpf7/uWjTiEBNUYWF7PdAbGhMI/W8V+82mvesv8YH2+nEjI/+PB+sgW0XfYcIFdGcf
- AuQQ==
+ :cc; bh=ZrsbMYAsQUeay9G7OP9LAsE6yzqj7wzxhvLg4PAJn9M=;
+ b=chRole6lMPiZuv9IuHWlg2x0nExsV/KOeGkmU0mqM0j8FKsyOA1y2PJTQoRFtjiKs9
+ B5yHaFPjZoO7zQ5LY3eh+873EKVjioHkzQ65u0HKzoUnvr91e+XEsvMoWVKV7+pcHCdP
+ cO/ZfndeZAAd3FMkPEmSvagHcM3BjCJTA48h0+szSO8FOWbyBh/nkYLz+wNIfqX8+1HJ
+ UQ4KkT95o0GEMGT7ulyzByQumt2PPFu627osyY1IzVhRRdsjvgiEyVvJmvKN4yPtynX3
+ q1A6nPZ2cxOIedUP4Ncl60VmiKqQ8fMdfNvaTQ+teZmPuJbNshgpwxH8IoW0O00uzIbs
+ 8AhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=pUjqTbi3LnE3irwObyZh6joz8VYA+PW3Ldur0WaUFHE=;
- b=xlzlT7QHWJTYjZPWjhmTI6rrF7F6SFtwC0ybJqFEIjwDkfepU/0xOMxrKgdqfhjJpx
- f2+g6fsJZWOEFT7bQWTZ8bQrOcwpKBaEkTDFt3OZgTJGQbnI4vK1aXOU5DuSQhB1x3eU
- wrTry1FOWfp/iENmsza92rjwGASwOsxNuFZjUOOFCT0PDTw7WBz7tunp6ixE/U/vqr0A
- TwQ1Qrwn0TiEMLn1BaSXDRuQzR8Ugsn8yp0/lxdoWc30+NgEbKbofWgwxqlqv8dHhiu6
- e80oCKMK3uhGCMxgjSiVLbEq1z9tgNeNf60J2BV+L3AwevTw+eeNMvDEr+mNcDEMi2WJ
- zAoQ==
-X-Gm-Message-State: AOAM533QFYE2EwFGXqUaLi5Nt6yg1BsDJOxVlFnkUGq283QurkV2L4R0
- hYtZOAPsLxP8Gq7rmjC71WMg8nIY2L/cew4tj30=
-X-Google-Smtp-Source: ABdhPJwn6mkO+f3/HBVSF0kAPU6bGQ93a+zYZ8/sGTwoCdLE890s05MAj/gpkIryk73EzH/GpzvgVSDRjzDTB4OIudk=
-X-Received: by 2002:a05:6602:2019:b0:65e:5056:1df4 with SMTP id
- y25-20020a056602201900b0065e50561df4mr9033429iod.203.1653342019636; Mon, 23
- May 2022 14:40:19 -0700 (PDT)
+ bh=ZrsbMYAsQUeay9G7OP9LAsE6yzqj7wzxhvLg4PAJn9M=;
+ b=bjBUs4tzRvMStUYI5WlHdHs5iNwnRMB5mnw4XuSonUPBlrV1xyAMIzR0Rap/B5xroa
+ cQVVnnLmbnSFIXIV0ThAkbRN8n//+Th/7R+4vppU5lda0SxjoiCbiStetC/GX5alnOVK
+ XvO1QjqUkRoB57yGlttOS7tRbW0HMjXvjajbCBoBNfpcvE+tsIof6557y6uZxWAwui0W
+ J6Miw+874wWc9tyjbfG+SSjVaC8BMu9d4513Y6G3fz2paZjOOP+3jo4WzBBJshV8E+TB
+ ylVCVW0HFVXJ05qVmo6IyX9K4xdFncPUxnckKHVBMLtK1N4n3ByhSE8a6q3FQedN3221
+ yQxQ==
+X-Gm-Message-State: AOAM530khoGkNrhrAabbSlBAXHTbvFo9dz5yBDWkRhnlYYCbPAsxqKpd
+ E46f9h1rvGlqpldnSukwIxRLKNTXlwSWtTO3a1g=
+X-Google-Smtp-Source: ABdhPJw3zEc4ndeTuV2yFUCvvruWLagSsunO1bieS+TvDc+hcO7jBuhFZTxyc6tHCUFV43gYj9o9hANvgiO7Kgl4Ob8=
+X-Received: by 2002:a05:6638:370b:b0:32e:a6ce:edcf with SMTP id
+ k11-20020a056638370b00b0032ea6ceedcfmr8027934jav.267.1653342436174; Mon, 23
+ May 2022 14:47:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <165244259451.12806.1710403216414520477-0@git.sr.ht>
- <165244259451.12806.1710403216414520477-2@git.sr.ht>
-In-Reply-To: <165244259451.12806.1710403216414520477-2@git.sr.ht>
+References: <20220523153147.15371-1-frank.chang@sifive.com>
+In-Reply-To: <20220523153147.15371-1-frank.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 May 2022 07:39:53 +1000
-Message-ID: <CAKmqyKMt3REKjDG+-2b4506micZwYp5s=bSGYJr-gkujbyE9nw@mail.gmail.com>
-Subject: Re: [PATCH qemu v18 02/16] target/riscv: rvv: Prune redundant
- access_type parameter passed
-To: "~eopxd" <yueh.ting.chen@gmail.com>
+Date: Tue, 24 May 2022 07:46:50 +1000
+Message-ID: <CAKmqyKPw5NTXTAu0bXCuXo6xL+GQ8d8h+AP9Dgqg1zqr9vK-CQ@mail.gmail.com>
+Subject: Re: [RESEND PATCH v2] target/riscv: Fix typo of mimpid cpu option
+To: Frank Chang <frank.chang@sifive.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2a;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d2f;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd2f.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,175 +71,97 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 21:40:28 -0000
+X-List-Received-Date: Mon, 23 May 2022 21:47:33 -0000
 
-On Fri, May 13, 2022 at 9:50 PM ~eopxd <eopxd@git.sr.ht> wrote:
+On Tue, May 24, 2022 at 1:36 AM <frank.chang@sifive.com> wrote:
 >
-> From: eopXD <eop.chen@sifive.com>
+> From: Frank Chang <frank.chang@sifive.com>
 >
-> No functional change intended in this commit.
+> "mimpid" cpu option was mistyped to "mipid".
 >
-> Signed-off-by: eop Chen <eop.chen@sifive.com>
+> Fixes: 9951ba94 ("target/riscv: Support configuarable marchid, mvendorid, mipid CSR values")
+> Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
->  target/riscv/vector_helper.c | 35 ++++++++++++++++-------------------
->  1 file changed, 16 insertions(+), 19 deletions(-)
+>  target/riscv/cpu.c | 4 ++--
+>  target/riscv/cpu.h | 2 +-
+>  target/riscv/csr.c | 8 ++++----
+>  3 files changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 85dd611cd9..60840325c4 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -231,7 +231,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->                   target_ulong stride, CPURISCVState *env,
->                   uint32_t desc, uint32_t vm,
->                   vext_ldst_elem_fn *ldst_elem,
-> -                 uint32_t esz, uintptr_t ra, MMUAccessType access_type)
-> +                 uint32_t esz, uintptr_t ra)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6d01569cad..a1f847176e 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -37,7 +37,7 @@
+>  #define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
+>                               (QEMU_VERSION_MINOR << 8)  | \
+>                               (QEMU_VERSION_MICRO))
+> -#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
+> +#define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+>
+>  static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+>
+> @@ -869,7 +869,7 @@ static Property riscv_cpu_properties[] = {
+>
+>      DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+>      DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
+> -    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
+> +    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
+>
+>      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+>      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index f5ff7294c6..44975e3e5a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -408,7 +408,7 @@ struct RISCVCPUConfig {
+>
+>      uint32_t mvendorid;
+>      uint64_t marchid;
+> -    uint64_t mipid;
+> +    uint64_t mimpid;
+>
+>      /* Vendor-specific custom extensions */
+>      bool ext_XVentanaCondOps;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 4ea7df02c9..0d5bc2f41d 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -674,13 +674,13 @@ static RISCVException read_marchid(CPURISCVState *env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> -static RISCVException read_mipid(CPURISCVState *env, int csrno,
+> -                                 target_ulong *val)
+> +static RISCVException read_mimpid(CPURISCVState *env, int csrno,
+> +                                  target_ulong *val)
 >  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
-> @@ -259,7 +259,7 @@ void HELPER(NAME)(void *vd, void * v0, target_ulong base,               \
->  {                                                                       \
->      uint32_t vm = vext_vm(desc);                                        \
->      vext_ldst_stride(vd, v0, base, stride, env, desc, vm, LOAD_FN,      \
-> -                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
-> +                     ctzl(sizeof(ETYPE)), GETPC());                     \
+>      CPUState *cs = env_cpu(env);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>
+> -    *val = cpu->cfg.mipid;
+> +    *val = cpu->cfg.mimpid;
+>      return RISCV_EXCP_NONE;
 >  }
 >
->  GEN_VEXT_LD_STRIDE(vlse8_v,  int8_t,  lde_b)
-> @@ -274,7 +274,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
->  {                                                                       \
->      uint32_t vm = vext_vm(desc);                                        \
->      vext_ldst_stride(vd, v0, base, stride, env, desc, vm, STORE_FN,     \
-> -                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);     \
-> +                     ctzl(sizeof(ETYPE)), GETPC());                     \
->  }
+> @@ -3372,7 +3372,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>      /* Machine Information Registers */
+>      [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
+>      [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
+> -    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
+> +    [CSR_MIMPID]    = { "mimpid",    any,   read_mimpid    },
+>      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
 >
->  GEN_VEXT_ST_STRIDE(vsse8_v,  int8_t,  ste_b)
-> @@ -290,7 +290,7 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
->  static void
->  vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->               vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
-> -             uintptr_t ra, MMUAccessType access_type)
-> +             uintptr_t ra)
->  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
-> @@ -319,14 +319,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,         \
->  {                                                                       \
->      uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));             \
->      vext_ldst_stride(vd, v0, base, stride, env, desc, false, LOAD_FN,   \
-> -                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD);      \
-> +                     ctzl(sizeof(ETYPE)), GETPC());                     \
->  }                                                                       \
->                                                                          \
->  void HELPER(NAME)(void *vd, void *v0, target_ulong base,                \
->                    CPURISCVState *env, uint32_t desc)                    \
->  {                                                                       \
->      vext_ldst_us(vd, base, env, desc, LOAD_FN,                          \
-> -                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_LOAD); \
-> +                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                \
->  }
->
->  GEN_VEXT_LD_US(vle8_v,  int8_t,  lde_b)
-> @@ -340,14 +340,14 @@ void HELPER(NAME##_mask)(void *vd, void *v0, target_ulong base,          \
->  {                                                                        \
->      uint32_t stride = vext_nf(desc) << ctzl(sizeof(ETYPE));              \
->      vext_ldst_stride(vd, v0, base, stride, env, desc, false, STORE_FN,   \
-> -                     ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_STORE);      \
-> +                     ctzl(sizeof(ETYPE)), GETPC());                      \
->  }                                                                        \
->                                                                           \
->  void HELPER(NAME)(void *vd, void *v0, target_ulong base,                 \
->                    CPURISCVState *env, uint32_t desc)                     \
->  {                                                                        \
->      vext_ldst_us(vd, base, env, desc, STORE_FN,                          \
-> -                 ctzl(sizeof(ETYPE)), env->vl, GETPC(), MMU_DATA_STORE); \
-> +                 ctzl(sizeof(ETYPE)), env->vl, GETPC());                 \
->  }
->
->  GEN_VEXT_ST_US(vse8_v,  int8_t,  ste_b)
-> @@ -364,7 +364,7 @@ void HELPER(vlm_v)(void *vd, void *v0, target_ulong base,
->      /* evl = ceil(vl/8) */
->      uint8_t evl = (env->vl + 7) >> 3;
->      vext_ldst_us(vd, base, env, desc, lde_b,
-> -                 0, evl, GETPC(), MMU_DATA_LOAD);
-> +                 0, evl, GETPC());
->  }
->
->  void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
-> @@ -373,7 +373,7 @@ void HELPER(vsm_v)(void *vd, void *v0, target_ulong base,
->      /* evl = ceil(vl/8) */
->      uint8_t evl = (env->vl + 7) >> 3;
->      vext_ldst_us(vd, base, env, desc, ste_b,
-> -                 0, evl, GETPC(), MMU_DATA_STORE);
-> +                 0, evl, GETPC());
->  }
->
->  /*
-> @@ -399,7 +399,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->                  void *vs2, CPURISCVState *env, uint32_t desc,
->                  vext_get_index_addr get_index_addr,
->                  vext_ldst_elem_fn *ldst_elem,
-> -                uint32_t esz, uintptr_t ra, MMUAccessType access_type)
-> +                uint32_t esz, uintptr_t ra)
->  {
->      uint32_t i, k;
->      uint32_t nf = vext_nf(desc);
-> @@ -427,7 +427,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,                   \
->                    void *vs2, CPURISCVState *env, uint32_t desc)            \
->  {                                                                          \
->      vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,                \
-> -                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC(), MMU_DATA_LOAD); \
-> +                    LOAD_FN, ctzl(sizeof(ETYPE)), GETPC());                \
->  }
->
->  GEN_VEXT_LD_INDEX(vlxei8_8_v,   int8_t,  idx_b, lde_b)
-> @@ -453,7 +453,7 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong base,         \
->  {                                                                \
->      vext_ldst_index(vd, v0, base, vs2, env, desc, INDEX_FN,      \
->                      STORE_FN, ctzl(sizeof(ETYPE)),               \
-> -                    GETPC(), MMU_DATA_STORE);                    \
-> +                    GETPC());                                    \
->  }
->
->  GEN_VEXT_ST_INDEX(vsxei8_8_v,   int8_t,  idx_b, ste_b)
-> @@ -576,8 +576,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
->   */
->  static void
->  vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-> -                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra,
-> -                MMUAccessType access_type)
-> +                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra)
->  {
->      uint32_t i, k, off, pos;
->      uint32_t nf = vext_nf(desc);
-> @@ -612,8 +611,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
->                    CPURISCVState *env, uint32_t desc) \
->  {                                                    \
->      vext_ldst_whole(vd, base, env, desc, LOAD_FN,    \
-> -                    ctzl(sizeof(ETYPE)), GETPC(),    \
-> -                    MMU_DATA_LOAD);                  \
-> +                    ctzl(sizeof(ETYPE)), GETPC());   \
->  }
->
->  GEN_VEXT_LD_WHOLE(vl1re8_v,  int8_t,  lde_b)
-> @@ -638,8 +636,7 @@ void HELPER(NAME)(void *vd, target_ulong base,       \
->                    CPURISCVState *env, uint32_t desc) \
->  {                                                    \
->      vext_ldst_whole(vd, base, env, desc, STORE_FN,   \
-> -                    ctzl(sizeof(ETYPE)), GETPC(),    \
-> -                    MMU_DATA_STORE);                 \
-> +                    ctzl(sizeof(ETYPE)), GETPC());   \
->  }
->
->  GEN_VEXT_ST_WHOLE(vs1r_v, int8_t, ste_b)
+>      [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
 > --
-> 2.34.2
+> 2.35.1
 >
 >
 
