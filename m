@@ -1,64 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nt9pM-0004Fm-OZ
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 11:18:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57678)
+	id 1ntA2Q-0006Nh-E5
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 11:32:06 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33446)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nt9pL-0004AR-HS
- for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:18:35 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:42697)
+ id 1ntA2K-0006Ld-Uv
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:32:04 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633]:41882)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nt9pJ-0001oi-IE
- for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:18:34 -0400
-Received: by mail-pf1-x430.google.com with SMTP id y199so13982361pfb.9
- for <qemu-riscv@nongnu.org>; Mon, 23 May 2022 08:18:31 -0700 (PDT)
+ id 1ntA2H-0004NZ-3z
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:32:00 -0400
+Received: by mail-pl1-x633.google.com with SMTP id s14so13426056plk.8
+ for <qemu-riscv@nongnu.org>; Mon, 23 May 2022 08:31:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
  h=from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=a5XlyGgGUyxRxhc5UCrHgjGkBfg44+H9qGio3HRyORE=;
- b=Tk8hyUQQzow4SkR0iptagnizWiPHcIQeHjPM184E/RiVpSuiytwAXTtCZApx2iYAb2
- RzOvHnC6F5KUe7Y0IOt3OsBXEXNirf+qijHuPYh2zRn3Vva+oYM3Y/KTzgedO6XtwGnV
- O28I/1ptBiFyQXztm0pjiq5Fcq0NvsJDmsDLa+mz3AhUU/H7d/fX2rGoYAYuTxE1EeOh
- yQ5Fd3vzHNezaAK4KDxUBD8kmy9/QUO1FvuEkSPxDtbV2n1oSUO7TPE1EE4f88cypAbc
- EmjdXu4yKaJ5YIIYUiXH5bt3f+PAW0SFxTTRvz3NGP7UkmRQPv1TKCurQUglLjObiQe/
- NL7w==
+ bh=WiJzMuz84xw5wmmABM5sb4kbwcLrYRDhSlSku9cJw0g=;
+ b=kUYPhJtXF5kPrR4H1ahLcjqJNfpZ25m35YPoscLrYZaK8sykNQVo9KGvfEWaR2xKKm
+ loF2esAJd+lt2Nf0SKwSQbLUJBjsasB82Rpqa1Pu93a63NHyF0DZxE92tCxCzg+sNAMk
+ QIVnQHX417ShCPlmehna5W4WyTaHebvBcUqHhvnyaU8GIx3AKPW1q3/ES5ugIo1vWc1B
+ nwVlaAtT1SxNc/bj/pvIjgvPNz4JLRleVftpsGqwhFkQGx8zisNDkupf1XOG8En1mcG6
+ 5v9HuCl5hPECUZTJ5XS2Ox3vz/6ChefteCaJC4RtPW2e6qlFRPDA8VyRrxkohjM+ncYz
+ 678w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=a5XlyGgGUyxRxhc5UCrHgjGkBfg44+H9qGio3HRyORE=;
- b=jPGPC3ft8p9naqb9DFlorS6qs716Ylqup7yPXwif9BFLB7CCiITtQOYyXHZd5fr47J
- uEAeurgHC3iv7P+0geQc0hQC3poc2syPTwDR33mwDdNegsFOdHL7edSfarZ0T4z/v7Bi
- MlQXgns4g7+xucpSkSLdB5q7lCDGujkfb3CdosYP/QIwDycWq9MWp7THmAwm/yORgDEF
- fOb43CHqgmPe3HPpCCV4dHCIDedSWcKeqFgNLSSc0y2YPTubouKV1Rlc3OgBpBgNHsPj
- VddFyyBLeHaNMDCQHhOuGzrPbgx/4ZTNb/HAq2nJbhcn7OwFZNPPfzgta1VFNd1nm3Xu
- hZKQ==
-X-Gm-Message-State: AOAM53037o+J2eIyEYJMGHAY2zmWt/zaRItQna+DqQaxQHxpPRK5o1Tb
- XHpycahKQgZu2CZdU1TJaG48qA==
-X-Google-Smtp-Source: ABdhPJwkM/nt4lbz8ThGeuk0kqjz+xV7zYDXpil99a3zr1R+Ky4l8eN1PYO4Roi+UGf8dDt+HEWtqA==
-X-Received: by 2002:a05:6a00:885:b0:510:950f:f787 with SMTP id
- q5-20020a056a00088500b00510950ff787mr23721500pfj.83.1653319110866; 
- Mon, 23 May 2022 08:18:30 -0700 (PDT)
+ bh=WiJzMuz84xw5wmmABM5sb4kbwcLrYRDhSlSku9cJw0g=;
+ b=me6rgE0axQKU8o5YjHN5nkUiEAvU9PQ+HzXDeOipF/B67Jgz0j2n48Km7uu+pTZVGV
+ HuRC19qDEayKZh9AMOfLLPHqu3lrIYP4L2Dxkf2kGI+yJulvfMUniUIAwNKEGpDgqe28
+ kR5chCYFVDnoHmp5EvWdPdhu028xawg354W3XOgWBUJkwctHxtr4FS25vr5McnipvRvD
+ Qs9V6+BXpDswp34FvYJdtDoigqJW/PJvNAtDzhwppB6QHlfkU20xJTqi3xPh1cPx3sLP
+ ZnM4PAKD4mQv99jndR6ZqWfefo8Tv3zNkEK92RDCY3rJ7EPeNJTgVl+fVy1OIa6IPh/r
+ HLyg==
+X-Gm-Message-State: AOAM5334B8LwhV2EysVeb7sf2Fxz0Z19McV0WjHDUXZKW42vCr0OE/Zz
+ bH/fy/L/zt9nrkj9wwtgaC/nGQ==
+X-Google-Smtp-Source: ABdhPJy5KL4hlob/Hhg8wYV9bL05GVSh7ACauPuR3ykheubnat3vb4zgUXRQ3+VgGJS9z0eaCABySw==
+X-Received: by 2002:a17:90b:3908:b0:1df:56a8:aa with SMTP id
+ ob8-20020a17090b390800b001df56a800aamr26683379pjb.28.1653319912370; 
+ Mon, 23 May 2022 08:31:52 -0700 (PDT)
 Received: from hsinchu16.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- f28-20020aa79d9c000000b0050dc762818fsm7499442pfq.105.2022.05.23.08.18.28
+ s21-20020a639255000000b003f24a2be89asm4959507pgn.8.2022.05.23.08.31.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 May 2022 08:18:30 -0700 (PDT)
+ Mon, 23 May 2022 08:31:51 -0700 (PDT)
 From: frank.chang@sifive.com
 To: qemu-devel@nongnu.org
-Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: Frank Chang <frank.chang@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
-Subject: [PATCH v2] target/riscv: Fix typo of mimpid cpu option
-Date: Mon, 23 May 2022 23:18:23 +0800
-Message-Id: <20220523151825.7759-1-frank.chang@sifive.com>
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org
+Subject: [RESEND PATCH v2] target/riscv: Fix typo of mimpid cpu option
+Date: Mon, 23 May 2022 23:31:46 +0800
+Message-Id: <20220523153147.15371-1-frank.chang@sifive.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=frank.chang@sifive.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,7 +79,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 15:18:35 -0000
+X-List-Received-Date: Mon, 23 May 2022 15:32:05 -0000
 
 From: Frank Chang <frank.chang@sifive.com>
 
@@ -86,6 +87,7 @@ From: Frank Chang <frank.chang@sifive.com>
 
 Fixes: 9951ba94 ("target/riscv: Support configuarable marchid, mvendorid, mipid CSR values")
 Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
  target/riscv/cpu.c | 4 ++--
  target/riscv/cpu.h | 2 +-
