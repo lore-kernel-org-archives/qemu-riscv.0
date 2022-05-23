@@ -1,126 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntBHZ-0005VX-5K
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 12:51:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51564)
+	id 1ntFPk-0005dP-0L
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:16:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47674)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <i@zenithal.me>)
- id 1ntBHX-0005Uz-ND; Mon, 23 May 2022 12:51:47 -0400
-Received: from mail-os0jpn01on20726.outbound.protection.outlook.com
- ([2a01:111:f403:700c::726]:7270
- helo=JPN01-OS0-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <i@zenithal.me>)
- id 1ntBHU-0000eK-Fs; Mon, 23 May 2022 12:51:46 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CoQ3rO7DrsbHvTm/XleijO2cUq6VwNXm2d94wAM/nEi7lMQ9RAlsSlyDTdEjwN8CY9roZLYS4CnU01jie+nFgKWm6BnJyoalOvH69kJ/aCKEvJvjRGml/yBTsd5PnM4DYpvTm1EBP6EZ1NZQxULhcSJViATzACwJLR0ymtnDiXfwCSeZJqFLO/zssWI9LRmH7dzD22JtnnFmMlO+ZEj/smGF/2xc5F1ln+qj1TzDUbkJ+dbqrEIb1BqxyqkLUO5oNVgiDYtyE9h31OYFToB4w4xH6UHUR98tEPAa1ARkWRejl9mFRrf4FLUhY7sXOnUz5W2rHJZ6MiXGHliOhlWs0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PvYhhcq80NWuvH2BvGcAttULf3EY1ROv3/Ag0qBklLo=;
- b=OTkhonEsPU7VqjuKdyUJBfSO/+yFEHO0h2TkJzhwtjLBVEg+Acu3FH25xIoYDDcN40YIAa3NJ9cVophmfMbnVE1faEi2UzvC+3HiLHhVEErS3RHYgnj74hFCu0WU/O7fmFdQqKZO5DdXXVJKCz+l72UpfAy4nuGwGSMFjR/wvMakWzMKIKwxyMWLktNaGlXSxN6D3rjRjdMaqkidVhh2ttw7WQSyPmlcXJyP7F20ygItuyMalLgeW8hEt2zLKBU+PPMGRdxYSpmNmkUGCNXOefPUZKqvHCCt8WsBwR2Re7WI+e2c8bCMhnDh7a4qaDeiDvgG8VUf1mCVjn6M56HYhQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=zenithal.me; dmarc=pass action=none header.from=zenithal.me;
- dkim=pass header.d=zenithal.me; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zenithal.me;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PvYhhcq80NWuvH2BvGcAttULf3EY1ROv3/Ag0qBklLo=;
- b=h12AH1UjcEO/IdRlOlnx/fKmLj6elVJnkWDIdECCEJFZad7gUnhh7WbKYDp1hoHkPpAGwO2X0CmFAyEv94cNfqlt66Xd5PPNz9AUnAu7Q4nih9Fo5Vq93TpTszz3PIRboAfSYpav6EL6acOlEvQXyKJLW0KPaUMnLn9zkuIJBU0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=zenithal.me;
-Received: from OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:128::10)
- by OS3P286MB1735.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:1bd::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.14; Mon, 23 May
- 2022 16:51:33 +0000
-Received: from OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM
- ([fe80::499a:6af2:bb66:601f]) by OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM
- ([fe80::499a:6af2:bb66:601f%3]) with mapi id 15.20.5273.023; Mon, 23 May 2022
- 16:51:33 +0000
-Date: Tue, 24 May 2022 00:51:29 +0800
-From: "Hongren (Zenithal) Zheng" <i@zenithal.me>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Weiwei Li <liweiwei@iscas.ac.cn>, Tsukasa OI <research_trasio@irq.a4lg.com>
-Subject: Re: [PATCH] target/riscv: add zicsr/zifencei to isa_string
-Message-ID: <You7kV0J5GKcMWRP@Sun>
-References: <YoTqwpfrodveJ7CR@Sun>
- <CAKmqyKMRPmQVy7_6iWL9KT_S+uYY0Wzb2OZSEA86Y7outG2gHA@mail.gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKMRPmQVy7_6iWL9KT_S+uYY0Wzb2OZSEA86Y7outG2gHA@mail.gmail.com>
-X-Operating-System: Linux Sun 5.15.26
-X-Mailer: Mutt 2.2.1 (2022-02-19)
-X-ClientProxiedBy: HK2PR02CA0209.apcprd02.prod.outlook.com
- (2603:1096:201:20::21) To OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:604:128::10)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ntFPi-0005Xp-AZ; Mon, 23 May 2022 17:16:30 -0400
+Received: from mail-io1-xd35.google.com ([2607:f8b0:4864:20::d35]:42698)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ntFPg-00012v-9R; Mon, 23 May 2022 17:16:29 -0400
+Received: by mail-io1-xd35.google.com with SMTP id a10so16582270ioe.9;
+ Mon, 23 May 2022 14:16:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=bC4mRZTBRMiPw33yhVCueTcd4vYm/1+iEBSzgpWX1gQ=;
+ b=Ukzwu1GD244mKy6LMRez1SGPPX8LAtrhVEtvr5MjaPRYJozSVtraDe2Z+jvmSrP55B
+ vM9g0VWod1Xii/hC87NhW/IKRucwqb8ffzzqjlJcHPgYxT8ZNx+8rdYVmORfUCADrlVo
+ L5qa4OWUPZNBleBWssCCnuX2SqsSj9csOc8mZm2fAjfOjnRr1bLpvTkEpgBrLY3GyuDy
+ 4qxTi5WQJDo5PxFuT6x/R+aPUFYp9+YC+/7a0z5wNHcgaywD6fPhESK8khbsbo6m4DOM
+ E3x3fTtIPdyoehVoMDpEJoQVM6E8EscYCE8qEZOTaH0XDyzmqigf5BS0Ir+A6ThPvuEM
+ SNfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=bC4mRZTBRMiPw33yhVCueTcd4vYm/1+iEBSzgpWX1gQ=;
+ b=3d3iRUS36Yim9BBq6pUBc9wd1sJByoklNf4fdnm8bhCFsoa/CrIkPp8/NO98vzZjnk
+ 3YZ++N/7gc5UIsfraCJJtPLix2Hxiw5aowUu3A7RxQQ6VfMzo6spb+Rob4IEOSCVy7WR
+ QbFGqafRYoOdF/mAsIrH30vaME6cSiX7Jj+3NP+e8PZZMHqsmrPbU2bVShpOkk2h/6R8
+ 7Xb8iTJgGL/MatZaKsjcVelpTbPM5zc9pZNY4pe9r3clSSK6vOa59OwjBT0XWyOHaLim
+ kQoX+Dn4RckGxJTtqV+CLhNv6iREGKagD+nc+y2jTvINrbgRXDAyl/1lqMZ3nbCD6qcY
+ K3lQ==
+X-Gm-Message-State: AOAM5302/qx4rwvuTJnBo9XULmRyOC1Fsm5VTB3oXluaTiOjY9MN4QSv
+ 303I7L/iDGFOOyab4WH2ZTgr+/4pIYfWlPzpGYw=
+X-Google-Smtp-Source: ABdhPJzfMzlDRdmlc0vbWubkZ43caW0ZAq9h6haf3tmdQBTDMrHe1qDfKFdzr5O1vKh2z4LVEv/Y7F/HUQLUWfHrHbU=
+X-Received: by 2002:a05:6638:160d:b0:32b:d9d2:f2f2 with SMTP id
+ x13-20020a056638160d00b0032bd9d2f2f2mr12155050jas.68.1653340585712; Mon, 23
+ May 2022 14:16:25 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7388f06b-fe46-484f-e007-08da3cdc7da8
-X-MS-TrafficTypeDiagnostic: OS3P286MB1735:EE_
-X-Microsoft-Antispam-PRVS: <OS3P286MB17354D9DCABA7EC5B8AF012CBCD49@OS3P286MB1735.JPNP286.PROD.OUTLOOK.COM>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Xdf0Po34KjIaGDAhPCGs13N8Dcdi4OwlWu2TZga0lsdwDgoX7GkqPl3yVaRMuILb+zx/U+uWHO5Mr6b5luFtJEbq5E1pXcHh7Ycyvpxyk2DfGlyYJBPPH+6REq6xIUw7k56+EyTe1aOamRbqEJE09676f7T3QbNcmcXBmPZV3WPTOI3IMmwbu/i0aTXeBLMhliqOzK6Tc62vgJoXDCF/K4Sy0ftFSrxuEH6niCZc9JSs760QNNm3VdKNhZKr16EwMJmMLXyx7KdAEm9ogIAsXbUEiNZmVq1eVB8jOE9se+h82df0R/ueYEwktGPBeg8TwOnSFlQMdHd1De8/IoIoKKoATwrLxU57PLtlrFq8hab4kJlGz31Knsov3eJt8oJ8rDVTfYJC1V9PK0m7fGgweSgnOT+FC+KAYyfhH6QnasxhsphOXaid6Ax+0tqHuyIa/HvyxEGjfLulP0+xbBb6Uj8wguNyJ1O1arvgLFHJFggYpflpBRYT5iRoeZ7HcfRgKWrIA23LXY8fdX8/ziXv7zBSsBvouudK++PwwvnKZuOxgW/5tbbFGLqqbv217HnLk1J0SH4KqImk3ze7zDcr4auQwSKk7plgSeO5547c4CQQmBXBBWbuVIPue561O3ESSW8PQXUfAtWKJZTjTDvibZRGFwhx+Xv4IUnX3iwJqYP5bOrTVwpGvwzYs34eg5zrwAb4NiQ/8tO1D8UYFCnUjLhQ2QkUAdRWHwPWEOUrfVqGVwKvUW6F9IU5SDIIrPjAAGUGTraLh1tBUGnfs3iOHA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230001)(7916004)(346002)(39830400003)(366004)(396003)(136003)(376002)(966005)(66946007)(4326008)(66556008)(8936002)(508600001)(66476007)(316002)(786003)(6916009)(54906003)(8676002)(6486002)(186003)(83380400001)(5660300002)(6506007)(6512007)(6666004)(9686003)(2906002)(52116002)(53546011)(38100700002)(86362001)(41300700001)(41320700001)(33716001)(49092004);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Cvg4KyQA5GvsRT/2OiDeYEEeJ9fvF/Vd9e8bEBCEVhAFxSY3e2UnxF5Ak/1c?=
- =?us-ascii?Q?xwEbaJ/fc18Dn6LHsZF0LZDyJMsNyG6s/uNzFw9d3ZIHXB50QW4nY/yGU6Z0?=
- =?us-ascii?Q?k789Dob3ZEqL7pbRhdQfcUzNM54muGdFuYfKRn72/IfkeL6tb1JGmv1u7FoC?=
- =?us-ascii?Q?enEDTQPy0xgX380TJmuTjaYbSoVbAeI1a/izdqr8PiEo3swP1J53bHTnd2Hq?=
- =?us-ascii?Q?fPgO6yj+MjdsRxOnFuW5zhCsFinjaV35Kqud2Wy5pK8Xieh+kdFhXp3PNDfD?=
- =?us-ascii?Q?FJQA6BxzoXoNbQDwJYHnLOBw4di4e30PvVGU08jC1TjmZ5Mxz2blc1vKzfF9?=
- =?us-ascii?Q?8ttQ72MDYJZ7Yh/6lYkv2FYMhnvmS6kCrdgb9JLt+k+m4t6FIyqQADV1wU5m?=
- =?us-ascii?Q?NIi4GtUjeila1Du9FBrWBgOFJiwvEnC8Hj76NId07nVZvSpMMAkYu8dj33Qd?=
- =?us-ascii?Q?2iog9b/6O/5dXalCyINB9KncTIfMa3m0jkJzSKwoPSxBuIcnIr4nzBpzRO6p?=
- =?us-ascii?Q?/yWbRL/U/S/v5zD/q8KkGtbSFIfqUgmzw1top1O6ofJnw21kpaFhLYXO8xf7?=
- =?us-ascii?Q?pm3LJqid2hxG72Fb6tgnqcw3IMqXO7ZJvapueztB6Nyp3kaZQQZQ47dq6p08?=
- =?us-ascii?Q?uFfGt+mBa17OQiz9UgRu8ryDWRhkawQ/MW/rd5MAnxuGJRhTMwX/cj/TaXHI?=
- =?us-ascii?Q?7n74QROdc7ClxnFexpwXSMtOPaCCARzothwGAiNN64RAmKbZpYewkRSxZemE?=
- =?us-ascii?Q?z8tgkqAOXKMcszyaB+hdS3HayVTwiKnNrDs5u8uvteUcA/tycONCJS4Np7z+?=
- =?us-ascii?Q?KH84OfRC22KeE8U/JnrdK9dw6PrY5N84A5yAB6jOEtMAFRqxXY6s/fOYDHmA?=
- =?us-ascii?Q?MzFEUAvtfEXnRgsA3P+8WQeK+b8bK0oGIPDGVrgr4pl7PnSlaEktqVFuz1jv?=
- =?us-ascii?Q?Fp45mTVzkyB8rD1TfAFx5j/M6EkYdbKuPdike/Dpeeuyr223TnvC+HNwnQ3u?=
- =?us-ascii?Q?+9OW+Vsgn2FFax4S3YEBDcOYQQO9EsmoqGPifDQ/PIEqvs5Wsr0lDtIOHegp?=
- =?us-ascii?Q?W8XsMLI26ggj/kU4gZFIKadcq3ApNg0sVR0+9VDBZCCmF9RIAu/nZsV5J0xp?=
- =?us-ascii?Q?XjUABBcUh/8e1ZehU+ns6jU37rCtNu2/AuNOM5ozxMDvJcWLmVQPh/20AGw6?=
- =?us-ascii?Q?sMV5djawbe1jpTD2x9RpRza4jxTa8NQ//QCRaKr3N8GMKLoAC6SHtQSCO6et?=
- =?us-ascii?Q?T3jutkia7xS4trmw4WnfGAzrH1cA6qjv2lnTDjh8oETiM9PZHh3UyHDj9CwB?=
- =?us-ascii?Q?aXVuo1Q3R9UrbOKaHelUQWjrQCyd82V+V46zB5LW/y2tzEwZxH+SJUl15bbq?=
- =?us-ascii?Q?32etneJycRd/w2tVu0CeDUOdu2YKwCn/lb9DA4IUD+E1efDcgagRxTo+nihA?=
- =?us-ascii?Q?VNG8r82ffn6ByqkSPB9yqVTZL+prRvCr8p87YVNaWGCF/EymBsAWpXN4UGk2?=
- =?us-ascii?Q?NCp/mVEg42zLKSUs+iun7o7OsbO1jxSr1UPXc0wFc1CGmWC20vIjY4FQx6Qm?=
- =?us-ascii?Q?Xz2/6N3QztG9XvsFPtM63JphBXl8JztvuviSFSaUgEME88OWzQ7FGjl1Z9ze?=
- =?us-ascii?Q?Jq6DLFeVBsOFjgVrW1MbduNfv8RzaTLn7tVeGPqqi01PCQaWACw0xEG1+Hg4?=
- =?us-ascii?Q?j9Jma34idET28MmTFvc1Dzjbv1bJZCIM6dMu+pSi0PmnU4jpzdWLK65qPJdi?=
- =?us-ascii?Q?E+vpMKO5TA=3D=3D?=
-X-OriginatorOrg: zenithal.me
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7388f06b-fe46-484f-e007-08da3cdc7da8
-X-MS-Exchange-CrossTenant-AuthSource: OS3P286MB1400.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2022 16:51:32.6768 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 436d481c-43b1-4418-8d7f-84c1e4887cf0
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ndC0S1L8AUvLqr2En4R3ctsHmsRO0Onqzua2m+xhx9BK3Ne+W06Dv1rylF2oCtlD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3P286MB1735
-Received-SPF: pass client-ip=2a01:111:f403:700c::726;
- envelope-from=i@zenithal.me;
- helo=JPN01-OS0-obe.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220518015316.20504-1-liweiwei@iscas.ac.cn>
+ <CAKmqyKNBQo91af1m5t_wDOVMeh=6uYD9Q+KugoTOQYzQJUtf5w@mail.gmail.com>
+ <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
+In-Reply-To: <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 24 May 2022 07:15:59 +1000
+Message-ID: <CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: add support for zmmul extension v0.1
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d35;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd35.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,72 +78,174 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 16:51:47 -0000
+X-List-Received-Date: Mon, 23 May 2022 21:16:30 -0000
 
-On Mon, May 23, 2022 at 09:22:15AM +1000, Alistair Francis wrote:
-> On Wed, May 18, 2022 at 10:50 PM Hongren (Zenithal) Zheng <i@zenithal.me> wrote:
+On Mon, May 23, 2022 at 6:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+>
+>
+> =E5=9C=A8 2022/5/23 =E4=B8=8B=E5=8D=882:34, Alistair Francis =E5=86=99=E9=
+=81=93:
+> > On Wed, May 18, 2022 at 11:54 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote=
+:
+> >>   - includes all multiplication operations for M extension
+> >>
+> >> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> >> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> >> ---
+> >>   target/riscv/cpu.c                      |  2 ++
+> >>   target/riscv/cpu.h                      |  1 +
+> >>   target/riscv/insn_trans/trans_rvm.c.inc | 18 ++++++++++++------
+> >>   3 files changed, 15 insertions(+), 6 deletions(-)
+> >>
+> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> >> index e373c61ba2..01b57d3784 100644
+> >> --- a/target/riscv/cpu.c
+> >> +++ b/target/riscv/cpu.c
+> >> @@ -903,6 +903,7 @@ static Property riscv_cpu_properties[] =3D {
+> >>
+> >>       /* These are experimental so mark with 'x-' */
+> >>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
+> >> +    DEFINE_PROP_BOOL("x-zmmul", RISCVCPU, cfg.ext_zmmul, false),
+> > Is this really experimental?
 > >
-> > Zicsr/Zifencei is not in 'I' since ISA version 20190608,
-> > thus to fully express the capability of the CPU,
-> > they should be exposed in isa_string.
-> >
-> > Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
-> > ---
-> >  target/riscv/cpu.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 6d01569cad..61fa9b97a4 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -1027,6 +1027,8 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-> >       *    extensions by an underscore.
-> >       */
-> >      struct isa_ext_data isa_edata_arr[] = {
-> > +        ISA_EDATA_ENTRY(zicsr, ext_icsr),
-> > +        ISA_EDATA_ENTRY(zifencei, ext_ifencei),
-> 
-> Shouldn't we have a spec version check here?
+> > Alistair
+>
+> I think it's experimental currently. The zmmul version in latest riscv
+> spec is v0.1, even though described as  v1.0 in spike README.
 
-I think that can be done, but most of the time it is not necessary.
-For old specs, the "short-isa-string" can be a workaround.
+Hmm... Your right that it is only v0.1, but there is no indication of
+draft state in the RISC-V spec chapter on Zmmul
 
-This patch is actually a follow-up of "target/riscv: Change "G" expansion"
-https://github.com/alistair23/qemu/commit/72bd25b7b88d0536bfb5666990e296587d4057a5
-where "G" is expanded with "zicsr"/"zifencei" without checking
-unpriv spec version.
+>
+> Its specification status
+> (https://wiki.riscv.org/display/home/specification+status) is Freeze
+> Complete and TSC Sign-Off Voting.
+>
+> And It's not in the ratified extension
+> list(https://wiki.riscv.org/display/home/recently+ratified+extensions).
+>
+> Any status update I missed?
 
-From the summary from Kito from gnu toolchain
-https://lkml.org/lkml/2022/1/24/537
-we know that there are at least 3 formally released unpriv specs:
-2.2, 20190608 and 20191213, and frequent informal release from
-https://github.com/riscv/riscv-isa-manual/releases
+Confusing. Ok, I guess let's leave it as experimental, we can always
+remove the `x-` easily :)
 
-If we add a spec check, we need to add a PROP_STRING and
-and parse the version. We then need an enum like
-PRIV_VERSION_1_12_0 and we needs to g_strcmp0
-in riscv_cpu_realize, just as what priv spec had done.
+>
+> Regards,
+>
+> Weiwei Li
+>
+> >>       /* ePMP 0.9.3 */
+> >>       DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+> >>       DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
+> >> @@ -1027,6 +1028,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, =
+char **isa_str, int max_str_len)
+> >>        *    extensions by an underscore.
+> >>        */
+> >>       struct isa_ext_data isa_edata_arr[] =3D {
+> >> +        ISA_EDATA_ENTRY(zmmul, ext_zmmul),
 
-And we need to define a default unpriv spec version, which
-should be 20191213.
+We should have some checks though. We don't want users to enable this
+and the multiply (M) extension
 
-I can add a separate patch for it if you do think it is necessary.
 
-If the guest does want old spec version, I think the recently added
-"short-isa-string" option from Tsukasa OI is suitable.
-Instead of -cpu rv64,unpriv_spec=2.2 they can just use
--cpu rv64,short-isa-string=true to solve the issue.
+Alistair
 
-Cc Tsukasa OI
-
-> 
-> Alistair
-> 
-> >          ISA_EDATA_ENTRY(zfh, ext_zfh),
-> >          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
-> >          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
-> > --
-> > 2.35.1
-> >
-> >
+> >>           ISA_EDATA_ENTRY(zfh, ext_zfh),
+> >>           ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+> >>           ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> >> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >> index f5ff7294c6..68177eae12 100644
+> >> --- a/target/riscv/cpu.h
+> >> +++ b/target/riscv/cpu.h
+> >> @@ -405,6 +405,7 @@ struct RISCVCPUConfig {
+> >>       bool ext_zhinxmin;
+> >>       bool ext_zve32f;
+> >>       bool ext_zve64f;
+> >> +    bool ext_zmmul;
+> >>
+> >>       uint32_t mvendorid;
+> >>       uint64_t marchid;
+> >> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/in=
+sn_trans/trans_rvm.c.inc
+> >> index 16b029edf0..ec7f705aab 100644
+> >> --- a/target/riscv/insn_trans/trans_rvm.c.inc
+> >> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
+> >> @@ -18,6 +18,12 @@
+> >>    * this program.  If not, see <http://www.gnu.org/licenses/>.
+> >>    */
+> >>
+> >> +#define REQUIRE_M_OR_ZMMUL(ctx) do {                      \
+> >> +    if (!ctx->cfg_ptr->ext_zmmul && !has_ext(ctx, RVM)) { \
+> >> +        return false;                                     \
+> >> +    }                                                     \
+> >> +} while (0)
+> >> +
+> >>   static void gen_mulhu_i128(TCGv r2, TCGv r3, TCGv al, TCGv ah, TCGv =
+bl, TCGv bh)
+> >>   {
+> >>       TCGv tmpl =3D tcg_temp_new();
+> >> @@ -65,7 +71,7 @@ static void gen_mul_i128(TCGv rl, TCGv rh,
+> >>
+> >>   static bool trans_mul(DisasContext *ctx, arg_mul *a)
+> >>   {
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128)=
+;
+> >>   }
+> >>
+> >> @@ -109,7 +115,7 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
+> >>
+> >>   static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
+> >>   {
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
+> >>                               gen_mulh_i128);
+> >>   }
+> >> @@ -161,7 +167,7 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv=
+ arg2)
+> >>
+> >>   static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
+> >>   {
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu=
+_w,
+> >>                               gen_mulhsu_i128);
+> >>   }
+> >> @@ -176,7 +182,7 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
+> >>
+> >>   static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
+> >>   {
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       /* gen_mulh_w works for either sign as input. */
+> >>       return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
+> >>                               gen_mulhu_i128);
+> >> @@ -349,7 +355,7 @@ static bool trans_remu(DisasContext *ctx, arg_remu=
+ *a)
+> >>   static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
+> >>   {
+> >>       REQUIRE_64_OR_128BIT(ctx);
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       ctx->ol =3D MXL_RV32;
+> >>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
+> >>   }
+> >> @@ -389,7 +395,7 @@ static bool trans_remuw(DisasContext *ctx, arg_rem=
+uw *a)
+> >>   static bool trans_muld(DisasContext *ctx, arg_muld *a)
+> >>   {
+> >>       REQUIRE_128BIT(ctx);
+> >> -    REQUIRE_EXT(ctx, RVM);
+> >> +    REQUIRE_M_OR_ZMMUL(ctx);
+> >>       ctx->ol =3D MXL_RV64;
+> >>       return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
+> >>   }
+> >> --
+> >> 2.17.1
+> >>
+> >>
+>
 
