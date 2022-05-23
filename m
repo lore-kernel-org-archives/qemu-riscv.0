@@ -1,58 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nsuuM-00089o-FC
-	for mharc-qemu-riscv@gnu.org; Sun, 22 May 2022 19:22:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59672)
+	id 1nsvkC-0008I3-7g
+	for mharc-qemu-riscv@gnu.org; Sun, 22 May 2022 20:16:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36152)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nsuuL-00088p-8n; Sun, 22 May 2022 19:22:45 -0400
-Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:34497)
+ id 1nsvk9-0008Hf-C3; Sun, 22 May 2022 20:16:17 -0400
+Received: from mail-io1-xd31.google.com ([2607:f8b0:4864:20::d31]:37431)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nsuuJ-00077Y-O0; Sun, 22 May 2022 19:22:44 -0400
-Received: by mail-io1-xd2b.google.com with SMTP id z20so5206069iof.1;
- Sun, 22 May 2022 16:22:42 -0700 (PDT)
+ id 1nsvk7-00067r-P3; Sun, 22 May 2022 20:16:17 -0400
+Received: by mail-io1-xd31.google.com with SMTP id i74so7093077ioa.4;
+ Sun, 22 May 2022 17:16:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/AUg6vmvByxjRMMG6eH3crdN1nUWc7zB3TZQAxQ6NzQ=;
- b=lkQrHqyxMR+/HfYvIn+DwODmWRPI61d77CSwQhoJOxbUANAH/aBKEm6Dwpw4B4eUtY
- b6lpQBZs3dtU1KgChOxG6E9MBa7feCVu6fmXpzCWMnkRm2b6SvtR990ZyvcSsnOrjVW1
- cO2PhzDqluzVLUpIbSiJdrVMmPNiHtZDGPyEhIZYHfi2u4I9ktAQEG2iMdyJWC1+oJ8w
- btNryI8aHkRj4c0rCx9f8qUEfZ4iz/f3G/WoBpngYEP3SkXa01EBLKN0bPSoOoJ53cHv
- dCF1eLgAzQE/1LM12mxuAlv8I2IqSf9ALJS+VCWDImBSYJzP+p8tYxlb+HdxAse3Q+Yi
- GPJg==
+ :cc; bh=XW8bWKRtISZen4ZfhpNG8IM+ji//aOWufaFx4UH8KwY=;
+ b=gA8t7/DV+03tI0mrig8PgibQn56DI6GGYQayBD0s33qLDaoUDi0RaDwjxmEJWI3I2W
+ fYhuHvIMBGDxJgEY08XMoijqr4ujIZQxXni0Gq2KSFanZsDtfIOQc/GdlYnentJi6dNP
+ LHTyut2hYUA4o8bfLp7LOpIeTEd9SgyxcrWlHVxSzxQLOD5s3fAVn+kVmLGDeHP/d/ei
+ To0RrxSly5HivBYSqudbc6BNXJ5/Ggi/idkQ5ev29pZRpmlYtxi94pA9gQyIVR9Ovhhn
+ wMFKBSlrE8ztgwbkcoGFwX+q+4guG8jqQdEUqAHS8bD7Ysjjr/1dbwJavvfTv4eNAgaq
+ zElA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/AUg6vmvByxjRMMG6eH3crdN1nUWc7zB3TZQAxQ6NzQ=;
- b=6XHlLNUaziCihqi3JP/9nrCjSsNUT/R4px6FxFsjT+b6ZoknZL0Y4BAUPBwyzNdf9V
- 1J2s3Wr+AJpo/X7JnhevV6Sgxel9QbadxCCQMBdNtjw2GcKhgk/iXz6bKikvN0cWtu/H
- 5gjmhOo8Zg++vLD1H5WepdmJElAkTu8rnMS8KrRt6XTgyJg3deJG1ZwTr1IPFd3eEtgW
- mTIaakeo+9wXB40oK5El79CI4o+docyufK3yrgS+LHaA7upVXof3oHqdbJsWftuMI4Ae
- NDd18YwDhDSlKYZq4UI3BolEsPB74jSPDZbqlC8N6MVEj4KgiSZYFgmyfTQmPmJ10gww
- XjiA==
-X-Gm-Message-State: AOAM532RlL3nEHg4H+OVHSpWo9uJPDxv4rYeyj/37ti+gUQV4EwH/A/S
- GouPvdx8D13euEyjm6KRytyXt1Ull9q74mACN2MvL+Gk9A/szqda
-X-Google-Smtp-Source: ABdhPJy1xlGSs5xZklURdPIqrcWdhTGosbdXpPpgC009ZcmOBFlMySmtA9Dy7Wx5ZFnl3pgE/yRuBZ1e9JAvbN/+Tqk=
-X-Received: by 2002:a05:6602:2019:b0:65e:5056:1df4 with SMTP id
- y25-20020a056602201900b0065e50561df4mr7063619iod.203.1653261761336; Sun, 22
- May 2022 16:22:41 -0700 (PDT)
+ bh=XW8bWKRtISZen4ZfhpNG8IM+ji//aOWufaFx4UH8KwY=;
+ b=4QtP2bx5h7f5Tpiabt0S5yI6kzl5crrfD1ZcYhuLqHyoZHXYPmmAkA5M8ohYvglNrU
+ Bk4t+W0ACJpd+9GLoWEUyhJ5Ugnic++8UJ88A1lrzIkH0mVsb6nBJatSse4QdVxJJia0
+ U1HHf0o3ex+5zJadsmV4VPQV8xyH6jmZf2ixvjmyigib0L5OjQCa3xlykx848vRGG40i
+ J7DNNQNKXKq+X5tlGEEkXuUtOTFqw/RuiHA+vUhlBE5e/IIrd8OW60r58kzyzJVxHcZm
+ xHHYjRLTQOiKYXCH95NVi1erqf1lPC3PJ/gto66sMiUZjgeSxCZtIpGM6BmMnH2IlnDN
+ ZjGQ==
+X-Gm-Message-State: AOAM532ejkEg2Wuhca58vWp0LoDMFtpTDAtL1K579n9NYWGAi4hEtmPE
+ eAQd9wXNWpMXZuv+b6BBZuLUS3Os+EBbMnTRQ5U=
+X-Google-Smtp-Source: ABdhPJx3phA/rBdaeH3Jlhsb1tNtxCaEpu01uOGmvke3L0lWCoLLliHQWH6VKiEnLgkyY7JHfYrc1SoVLAd03BPZcm8=
+X-Received: by 2002:a5d:948a:0:b0:64d:23a4:9afa with SMTP id
+ v10-20020a5d948a000000b0064d23a49afamr9044434ioj.114.1653264974282; Sun, 22
+ May 2022 17:16:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <YoTqwpfrodveJ7CR@Sun>
-In-Reply-To: <YoTqwpfrodveJ7CR@Sun>
+References: <20220518012611.6772-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220518012611.6772-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 23 May 2022 09:22:15 +1000
-Message-ID: <CAKmqyKMRPmQVy7_6iWL9KT_S+uYY0Wzb2OZSEA86Y7outG2gHA@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: add zicsr/zifencei to isa_string
-To: "Hongren (Zenithal) Zheng" <i@zenithal.me>
+Date: Mon, 23 May 2022 10:15:48 +1000
+Message-ID: <CAKmqyKM=hAAROy+1Rov6iRtPmcBoZYj3HVhq8wRYhbBz0tp42g@mail.gmail.com>
+Subject: Re: [PATCH v4] target/riscv: check 'I' and 'E' after checking 'G' in
+ riscv_cpu_realize
+To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Weiwei Li <liweiwei@iscas.ac.cn>
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d31;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd31.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -73,39 +75,70 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 May 2022 23:22:45 -0000
+X-List-Received-Date: Mon, 23 May 2022 00:16:17 -0000
 
-On Wed, May 18, 2022 at 10:50 PM Hongren (Zenithal) Zheng <i@zenithal.me> wrote:
+On Wed, May 18, 2022 at 11:27 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Zicsr/Zifencei is not in 'I' since ISA version 20190608,
-> thus to fully express the capability of the CPU,
-> they should be exposed in isa_string.
+>  - setting ext_g will implicitly set ext_i
 >
-> Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
-> ---
->  target/riscv/cpu.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6d01569cad..61fa9b97a4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1027,6 +1027,8 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->       *    extensions by an underscore.
->       */
->      struct isa_ext_data isa_edata_arr[] = {
-> +        ISA_EDATA_ENTRY(zicsr, ext_icsr),
-> +        ISA_EDATA_ENTRY(zifencei, ext_ifencei),
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Shouldn't we have a spec version check here?
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
->          ISA_EDATA_ENTRY(zfh, ext_zfh),
->          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
+> ---
+>  target/riscv/cpu.c | 24 ++++++++++++------------
+>  1 file changed, 12 insertions(+), 12 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6d01569cad..e373c61ba2 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -584,18 +584,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          uint32_t ext = 0;
+>
+>          /* Do some ISA extension error checking */
+> -        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+> -            error_setg(errp,
+> -                       "I and E extensions are incompatible");
+> -            return;
+> -        }
+> -
+> -        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+> -            error_setg(errp,
+> -                       "Either I or E extension must be set");
+> -            return;
+> -        }
+> -
+>          if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+>                                  cpu->cfg.ext_a && cpu->cfg.ext_f &&
+>                                  cpu->cfg.ext_d &&
+> @@ -610,6 +598,18 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              cpu->cfg.ext_ifencei = true;
+>          }
+>
+> +        if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+> +            error_setg(errp,
+> +                       "I and E extensions are incompatible");
+> +            return;
+> +        }
+> +
+> +        if (!cpu->cfg.ext_i && !cpu->cfg.ext_e) {
+> +            error_setg(errp,
+> +                       "Either I or E extension must be set");
+> +            return;
+> +        }
+> +
+>          if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
+>              error_setg(errp, "F extension requires Zicsr");
+>              return;
 > --
-> 2.35.1
+> 2.17.1
 >
 >
 
