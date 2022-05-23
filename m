@@ -1,65 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nt38g-0002gm-CE
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 04:10:06 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49658)
+	id 1nt9pM-0004Fm-OZ
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 11:18:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57678)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nt38X-0002e6-RJ; Mon, 23 May 2022 04:10:03 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:48060 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1nt38P-00028M-P5; Mon, 23 May 2022 04:09:53 -0400
-Received: from [192.168.0.105] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAC3v4c8QYtiyhzSCQ--.51870S2;
- Mon, 23 May 2022 16:09:35 +0800 (CST)
-Subject: Re: [PATCH] target/riscv: add support for zmmul extension v0.1
-To: Alistair Francis <alistair23@gmail.com>, Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nt9pL-0004AR-HS
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:18:35 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:42697)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nt9pJ-0001oi-IE
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 11:18:34 -0400
+Received: by mail-pf1-x430.google.com with SMTP id y199so13982361pfb.9
+ for <qemu-riscv@nongnu.org>; Mon, 23 May 2022 08:18:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=a5XlyGgGUyxRxhc5UCrHgjGkBfg44+H9qGio3HRyORE=;
+ b=Tk8hyUQQzow4SkR0iptagnizWiPHcIQeHjPM184E/RiVpSuiytwAXTtCZApx2iYAb2
+ RzOvHnC6F5KUe7Y0IOt3OsBXEXNirf+qijHuPYh2zRn3Vva+oYM3Y/KTzgedO6XtwGnV
+ O28I/1ptBiFyQXztm0pjiq5Fcq0NvsJDmsDLa+mz3AhUU/H7d/fX2rGoYAYuTxE1EeOh
+ yQ5Fd3vzHNezaAK4KDxUBD8kmy9/QUO1FvuEkSPxDtbV2n1oSUO7TPE1EE4f88cypAbc
+ EmjdXu4yKaJ5YIIYUiXH5bt3f+PAW0SFxTTRvz3NGP7UkmRQPv1TKCurQUglLjObiQe/
+ NL7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=a5XlyGgGUyxRxhc5UCrHgjGkBfg44+H9qGio3HRyORE=;
+ b=jPGPC3ft8p9naqb9DFlorS6qs716Ylqup7yPXwif9BFLB7CCiITtQOYyXHZd5fr47J
+ uEAeurgHC3iv7P+0geQc0hQC3poc2syPTwDR33mwDdNegsFOdHL7edSfarZ0T4z/v7Bi
+ MlQXgns4g7+xucpSkSLdB5q7lCDGujkfb3CdosYP/QIwDycWq9MWp7THmAwm/yORgDEF
+ fOb43CHqgmPe3HPpCCV4dHCIDedSWcKeqFgNLSSc0y2YPTubouKV1Rlc3OgBpBgNHsPj
+ VddFyyBLeHaNMDCQHhOuGzrPbgx/4ZTNb/HAq2nJbhcn7OwFZNPPfzgta1VFNd1nm3Xu
+ hZKQ==
+X-Gm-Message-State: AOAM53037o+J2eIyEYJMGHAY2zmWt/zaRItQna+DqQaxQHxpPRK5o1Tb
+ XHpycahKQgZu2CZdU1TJaG48qA==
+X-Google-Smtp-Source: ABdhPJwkM/nt4lbz8ThGeuk0kqjz+xV7zYDXpil99a3zr1R+Ky4l8eN1PYO4Roi+UGf8dDt+HEWtqA==
+X-Received: by 2002:a05:6a00:885:b0:510:950f:f787 with SMTP id
+ q5-20020a056a00088500b00510950ff787mr23721500pfj.83.1653319110866; 
+ Mon, 23 May 2022 08:18:30 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ f28-20020aa79d9c000000b0050dc762818fsm7499442pfq.105.2022.05.23.08.18.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 May 2022 08:18:30 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: Frank Chang <frank.chang@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?=
- <lazyparser@gmail.com>
-References: <20220518015316.20504-1-liweiwei@iscas.ac.cn>
- <CAKmqyKNBQo91af1m5t_wDOVMeh=6uYD9Q+KugoTOQYzQJUtf5w@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
-Date: Mon, 23 May 2022 16:09:32 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v2] target/riscv: Fix typo of mimpid cpu option
+Date: Mon, 23 May 2022 23:18:23 +0800
+Message-Id: <20220523151825.7759-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKNBQo91af1m5t_wDOVMeh=6uYD9Q+KugoTOQYzQJUtf5w@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: qwCowAC3v4c8QYtiyhzSCQ--.51870S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZr4fZryxWry3KryUCw18Grg_yoWrKw4Upr
- W8GFW7AFs8tFySvayIyan0qF1xJanagw47t39ayw4kJayfKrWDCF1DK3yakr4UAFyv9r1j
- y3WjyFnxZ3y0qa7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI
- 0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y
- 0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
- WUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY6I8E87Iv67AKxVWUJVW8
- JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JUdHUDUUU
- UU=
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=frank.chang@sifive.com; helo=mail-pf1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,147 +78,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 08:10:05 -0000
+X-List-Received-Date: Mon, 23 May 2022 15:18:35 -0000
 
+From: Frank Chang <frank.chang@sifive.com>
 
-在 2022/5/23 下午2:34, Alistair Francis 写道:
-> On Wed, May 18, 2022 at 11:54 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>   - includes all multiplication operations for M extension
->>
->> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->> ---
->>   target/riscv/cpu.c                      |  2 ++
->>   target/riscv/cpu.h                      |  1 +
->>   target/riscv/insn_trans/trans_rvm.c.inc | 18 ++++++++++++------
->>   3 files changed, 15 insertions(+), 6 deletions(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index e373c61ba2..01b57d3784 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -903,6 +903,7 @@ static Property riscv_cpu_properties[] = {
->>
->>       /* These are experimental so mark with 'x-' */
->>       DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->> +    DEFINE_PROP_BOOL("x-zmmul", RISCVCPU, cfg.ext_zmmul, false),
-> Is this really experimental?
->
-> Alistair
+"mimpid" cpu option was mistyped to "mipid".
 
-I think it's experimental currently. The zmmul version in latest riscv 
-spec is v0.1, even though described as  v1.0 in spike README.
+Fixes: 9951ba94 ("target/riscv: Support configuarable marchid, mvendorid, mipid CSR values")
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/cpu.c | 4 ++--
+ target/riscv/cpu.h | 2 +-
+ target/riscv/csr.c | 8 ++++----
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
-Its specification status 
-(https://wiki.riscv.org/display/home/specification+status) is Freeze 
-Complete and TSC Sign-Off Voting.
-
-And It's not in the ratified extension 
-list(https://wiki.riscv.org/display/home/recently+ratified+extensions).
-
-Any status update I missed?
-
-Regards,
-
-Weiwei Li
-
->>       /* ePMP 0.9.3 */
->>       DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->>       DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->> @@ -1027,6 +1028,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->>        *    extensions by an underscore.
->>        */
->>       struct isa_ext_data isa_edata_arr[] = {
->> +        ISA_EDATA_ENTRY(zmmul, ext_zmmul),
->>           ISA_EDATA_ENTRY(zfh, ext_zfh),
->>           ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->>           ISA_EDATA_ENTRY(zfinx, ext_zfinx),
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index f5ff7294c6..68177eae12 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -405,6 +405,7 @@ struct RISCVCPUConfig {
->>       bool ext_zhinxmin;
->>       bool ext_zve32f;
->>       bool ext_zve64f;
->> +    bool ext_zmmul;
->>
->>       uint32_t mvendorid;
->>       uint64_t marchid;
->> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
->> index 16b029edf0..ec7f705aab 100644
->> --- a/target/riscv/insn_trans/trans_rvm.c.inc
->> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
->> @@ -18,6 +18,12 @@
->>    * this program.  If not, see <http://www.gnu.org/licenses/>.
->>    */
->>
->> +#define REQUIRE_M_OR_ZMMUL(ctx) do {                      \
->> +    if (!ctx->cfg_ptr->ext_zmmul && !has_ext(ctx, RVM)) { \
->> +        return false;                                     \
->> +    }                                                     \
->> +} while (0)
->> +
->>   static void gen_mulhu_i128(TCGv r2, TCGv r3, TCGv al, TCGv ah, TCGv bl, TCGv bh)
->>   {
->>       TCGv tmpl = tcg_temp_new();
->> @@ -65,7 +71,7 @@ static void gen_mul_i128(TCGv rl, TCGv rh,
->>
->>   static bool trans_mul(DisasContext *ctx, arg_mul *a)
->>   {
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128);
->>   }
->>
->> @@ -109,7 +115,7 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
->>
->>   static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
->>   {
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
->>                               gen_mulh_i128);
->>   }
->> @@ -161,7 +167,7 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv arg2)
->>
->>   static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
->>   {
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w,
->>                               gen_mulhsu_i128);
->>   }
->> @@ -176,7 +182,7 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
->>
->>   static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
->>   {
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       /* gen_mulh_w works for either sign as input. */
->>       return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
->>                               gen_mulhu_i128);
->> @@ -349,7 +355,7 @@ static bool trans_remu(DisasContext *ctx, arg_remu *a)
->>   static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
->>   {
->>       REQUIRE_64_OR_128BIT(ctx);
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       ctx->ol = MXL_RV32;
->>       return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
->>   }
->> @@ -389,7 +395,7 @@ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
->>   static bool trans_muld(DisasContext *ctx, arg_muld *a)
->>   {
->>       REQUIRE_128BIT(ctx);
->> -    REQUIRE_EXT(ctx, RVM);
->> +    REQUIRE_M_OR_ZMMUL(ctx);
->>       ctx->ol = MXL_RV64;
->>       return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
->>   }
->> --
->> 2.17.1
->>
->>
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 6d01569cad..a1f847176e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -37,7 +37,7 @@
+ #define RISCV_CPU_MARCHID   ((QEMU_VERSION_MAJOR << 16) | \
+                              (QEMU_VERSION_MINOR << 8)  | \
+                              (QEMU_VERSION_MICRO))
+-#define RISCV_CPU_MIPID     RISCV_CPU_MARCHID
++#define RISCV_CPU_MIMPID    RISCV_CPU_MARCHID
+ 
+ static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
+ 
+@@ -869,7 +869,7 @@ static Property riscv_cpu_properties[] = {
+ 
+     DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+     DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
+-    DEFINE_PROP_UINT64("mipid", RISCVCPU, cfg.mipid, RISCV_CPU_MIPID),
++    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
+ 
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index f5ff7294c6..44975e3e5a 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -408,7 +408,7 @@ struct RISCVCPUConfig {
+ 
+     uint32_t mvendorid;
+     uint64_t marchid;
+-    uint64_t mipid;
++    uint64_t mimpid;
+ 
+     /* Vendor-specific custom extensions */
+     bool ext_XVentanaCondOps;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 4ea7df02c9..0d5bc2f41d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -674,13 +674,13 @@ static RISCVException read_marchid(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
+-static RISCVException read_mipid(CPURISCVState *env, int csrno,
+-                                 target_ulong *val)
++static RISCVException read_mimpid(CPURISCVState *env, int csrno,
++                                  target_ulong *val)
+ {
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+ 
+-    *val = cpu->cfg.mipid;
++    *val = cpu->cfg.mimpid;
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -3372,7 +3372,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Machine Information Registers */
+     [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
+     [CSR_MARCHID]   = { "marchid",   any,   read_marchid   },
+-    [CSR_MIMPID]    = { "mimpid",    any,   read_mipid     },
++    [CSR_MIMPID]    = { "mimpid",    any,   read_mimpid    },
+     [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
+ 
+     [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
+-- 
+2.35.1
 
 
