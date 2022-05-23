@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntFyi-0000LW-7e
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 17:52:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:55126)
+	id 1ntG6w-00043j-7X
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 18:01:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56202)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFyc-0000Kg-3I; Mon, 23 May 2022 17:52:35 -0400
-Received: from mail-io1-xd2b.google.com ([2607:f8b0:4864:20::d2b]:42873)
+ id 1ntG6u-00043X-Uj; Mon, 23 May 2022 18:01:09 -0400
+Received: from mail-io1-xd33.google.com ([2607:f8b0:4864:20::d33]:42919)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ntFya-0007TJ-13; Mon, 23 May 2022 17:52:33 -0400
-Received: by mail-io1-xd2b.google.com with SMTP id a10so16658123ioe.9;
- Mon, 23 May 2022 14:52:31 -0700 (PDT)
+ id 1ntG6t-00009c-1T; Mon, 23 May 2022 18:01:08 -0400
+Received: by mail-io1-xd33.google.com with SMTP id a10so16676368ioe.9;
+ Mon, 23 May 2022 15:01:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=JvNoFbAPArw3M3BUkTp7tvRUH3qgucaaQPgtTpl80uA=;
- b=b0MmsKKx1+Xpu3qnZ9QySO1ieF2rtsrrKTMoMYT3FawNq5RHc7Tx/S88wtKk3pzNit
- pSEs4LxWPZ23oLJ+1f6PhWunDyuCsblI3OTCoYKqu9qAI1BwrpoHwnDWB3vyGW9rtyyT
- RtrvJ/FK8aOVkdcEil+MhcCSLfP7etR2pCT18URRPY0wDYhzX7jGCce/agj1gLImlrcA
- Ji4O8jU7zBynE0sse4SiEyGWN1Nzyi+POPTqmhn8DPobWj4GjvPNF30ovPD6UgLPZehk
- I6hHUo3QGfhnQnnYrWAPBjgZjSgD5dzSPpIJqyRrVoc4VzJxI74lKTqAL+snmQYx0pBo
- hreQ==
+ :cc; bh=CeuYfSrLWiwJnvUX76MniqXCcVgGeMnUPLL3TfZMk1I=;
+ b=V8mP5dNAiCc1Avmi8k2vHUwxV/M+kGYRPWID2te5He7bAaOM1gMyk2BQJlUn41/ZQL
+ DgHRCM8vr25kMn6dBgS4OJOhZvtPlwoFKRLgLqV/WflHXGhxISl0fDCnkoC0J9/CYP39
+ +t7SP++aJLrb+gmmOmJvJHoOXbSDslUKwzARbu+lclfCOeQk1LMC80/BvMvcZUYm71LU
+ nrE8uHRxqVxenb0rrZwlQidNzhOlfnDPYYzNPaGTbaizGmqbcMgHTA/DUCJJ4CCehZ96
+ K1djbPF8P3Q977zYFtLpWFR5Lce34cHVSRJm+c3H+dpJK9lMdY97xBXDt3elLmH6pksy
+ v6pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=JvNoFbAPArw3M3BUkTp7tvRUH3qgucaaQPgtTpl80uA=;
- b=jl5LDe5jqvCMFe2Q/Fd3BXhn4EzHef1uoUW9orvgEo90TWqjf8dXaBiUsCm14tLUot
- /aavh7+LYghw8Tbv4vMJQQ8HE2DTm9AhBljoL3VA6O5TJ8g8b3Hdpnt8+MxGMcYqpZq1
- 88A5AdGD+VOxcse7TibFWAHecFhAGpK4KoFqGDud/S/unsBBgIp38RRajcWD/2XDm6Hq
- jyJi9biSMjz/f/pSvFdA+mO3R4ZKx7Dx9/gZacxdOSDJh1krr1ztPZ9mbCjrUuRGbkMt
- eeuSUbrMbyuJ1KbGkN9Mhv9BaShqh/hg7G6B2TYIY/ZDs2E/qs/r9XiivGMQvXbs7X8+
- gDHQ==
-X-Gm-Message-State: AOAM530Go5zkuuKg1+ijnobVdieJt7qngXiMGq/UbxxVkITJsSpx4LQ4
- ZZ210XipmQIdfddqRK5eaQ6/a2AJhdRdrZ7Zjto=
-X-Google-Smtp-Source: ABdhPJytv4zcAzy2f32EhFJTJUgJqdcfaVGBjDmLV8FSULaUhwqjdg5M5WVHLVlwKdjFWwlVxFDIcmjrLYwDlU5dzoA=
-X-Received: by 2002:a5d:9818:0:b0:65b:ae2:863e with SMTP id
- a24-20020a5d9818000000b0065b0ae2863emr10845836iol.31.1653342750283; Mon, 23
- May 2022 14:52:30 -0700 (PDT)
+ bh=CeuYfSrLWiwJnvUX76MniqXCcVgGeMnUPLL3TfZMk1I=;
+ b=hxPp1GuF52+yw59hjXPl7NyCTJ88EGm9A40DqoUlksla35yktcVvqBhy2gQKk3kal3
+ 86HH/PQSvQU/Kzlr6uNz3dRxtqydLlB6CbpoO/iWgqtw0lmnHVfxtUeKhfaEqidhAOK3
+ 0oe0Z1FgqaKoScYOva7DC8IkurzmcfTxJ6pDywL0wz9r40qW+RoKj77O55Y4MaHflPUT
+ 7A/VHeM9aAA+VmBVmO5zAg+5PWelxVD6ALkO48TZQNRB+FEeLlAkPO+9UzD1MDgcL4io
+ V6+BeEy4bXsyrdQnF6b7Ikw4BxwoCWY4nCcEpa0cH8wiD75IoqNZvE+dWghhpbDw1cQZ
+ iNbA==
+X-Gm-Message-State: AOAM533RM85lKIXJ9CB7GlfMxOISzXTxr5roS4Zj9ufoltU5LnOFyAbF
+ EV3x5sRmvfCT3URXZ5mYyVW2cHmZEZ24oTZ5vmY=
+X-Google-Smtp-Source: ABdhPJx9CvFE1+CegYPxUMQhjbCdDBVW8EVrQBpuvoYEYKV//mm95ZDFfWv5OrF3sw9N1jXNPbE9fX5AiWWcOGGkmoQ=
+X-Received: by 2002:a05:6638:1411:b0:32e:c01f:e93e with SMTP id
+ k17-20020a056638141100b0032ec01fe93emr4337675jad.21.1653343265371; Mon, 23
+ May 2022 15:01:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220511144528.393530-1-apatel@ventanamicro.com>
- <20220511144528.393530-8-apatel@ventanamicro.com>
- <CAKmqyKN5U927XfL7n_8S=3ykMyHPLM_kyM9qfYV5dq_eSmoEfA@mail.gmail.com>
- <CAAhSdy1SRGnG9An-hKHBaEzoG=0eSZQCwQDhoJ3J387Lwe5Pdg@mail.gmail.com>
-In-Reply-To: <CAAhSdy1SRGnG9An-hKHBaEzoG=0eSZQCwQDhoJ3J387Lwe5Pdg@mail.gmail.com>
+References: <YoTqwpfrodveJ7CR@Sun>
+ <CAKmqyKMRPmQVy7_6iWL9KT_S+uYY0Wzb2OZSEA86Y7outG2gHA@mail.gmail.com>
+ <You7kV0J5GKcMWRP@Sun>
+In-Reply-To: <You7kV0J5GKcMWRP@Sun>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 24 May 2022 07:52:04 +1000
-Message-ID: <CAKmqyKMy66XQsgmAnMEEaYrH7k1g2MC6kHqrPaRWKxvSuOz3Xw@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] target/riscv: Force disable extensions if priv
- spec version does not match
-To: Anup Patel <anup@brainfault.org>
-Cc: Anup Patel <apatel@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Atish Patra <atishp@atishpatra.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Tue, 24 May 2022 08:00:39 +1000
+Message-ID: <CAKmqyKPRGLo5beAzopYRUKq72qrCRLdTr_bF-Nou5zXc9BRePA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: add zicsr/zifencei to isa_string
+To: "Hongren (Zenithal) Zheng" <i@zenithal.me>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Weiwei Li <liweiwei@iscas.ac.cn>, 
+ Tsukasa OI <research_trasio@irq.a4lg.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::d2b;
- envelope-from=alistair23@gmail.com; helo=mail-io1-xd2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::d33;
+ envelope-from=alistair23@gmail.com; helo=mail-io1-xd33.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,101 +76,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2022 21:52:37 -0000
+X-List-Received-Date: Mon, 23 May 2022 22:01:09 -0000
 
-On Fri, May 20, 2022 at 1:07 AM Anup Patel <anup@brainfault.org> wrote:
+On Tue, May 24, 2022 at 2:51 AM Hongren (Zenithal) Zheng <i@zenithal.me> wrote:
 >
-> On Tue, May 17, 2022 at 5:46 AM Alistair Francis <alistair23@gmail.com> wrote:
-> >
-> > On Thu, May 12, 2022 at 12:52 AM Anup Patel <apatel@ventanamicro.com> wrote:
+> On Mon, May 23, 2022 at 09:22:15AM +1000, Alistair Francis wrote:
+> > On Wed, May 18, 2022 at 10:50 PM Hongren (Zenithal) Zheng <i@zenithal.me> wrote:
 > > >
-> > > We should disable extensions in riscv_cpu_realize() if minimum required
-> > > priv spec version is not satisfied. This also ensures that machines with
-> > > priv spec v1.11 (or lower) cannot enable H, V, and various multi-letter
-> > > extensions.
+> > > Zicsr/Zifencei is not in 'I' since ISA version 20190608,
+> > > thus to fully express the capability of the CPU,
+> > > they should be exposed in isa_string.
 > > >
-> > > Fixes: a775398be2e ("target/riscv: Add isa extenstion strings to the
-> > > device tree")
-> > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > > Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
+> > > ---
+> > >  target/riscv/cpu.c | 2 ++
+> > >  1 file changed, 2 insertions(+)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index 6d01569cad..61fa9b97a4 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -1027,6 +1027,8 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
+> > >       *    extensions by an underscore.
+> > >       */
+> > >      struct isa_ext_data isa_edata_arr[] = {
+> > > +        ISA_EDATA_ENTRY(zicsr, ext_icsr),
+> > > +        ISA_EDATA_ENTRY(zifencei, ext_ifencei),
 > >
-> > This will potentially confuse users as we just disable the extension
-> > without telling them.
-> >
-> > Could we not just leave this as is and let users specify the
-> > extensions they want? Then it's up to them to specify the correct
-> > combinations
+> > Shouldn't we have a spec version check here?
 >
-> The ISA extensions are not independent of the Priv spec version.
+> I think that can be done, but most of the time it is not necessary.
+> For old specs, the "short-isa-string" can be a workaround.
 >
-> For example, we have bits for Sstc, Svpbmt, and Zicbo[m|p|z] extensions
-> in xenvcfg CSRs which are only available for Priv v1.12 spec.
+> This patch is actually a follow-up of "target/riscv: Change "G" expansion"
+> https://github.com/alistair23/qemu/commit/72bd25b7b88d0536bfb5666990e296587d4057a5
+> where "G" is expanded with "zicsr"/"zifencei" without checking
+> unpriv spec version.
 >
-> We can't allow users to enable extensions which don't meet
-> the Priv spec version requirements.
+> From the summary from Kito from gnu toolchain
+> https://lkml.org/lkml/2022/1/24/537
+> we know that there are at least 3 formally released unpriv specs:
+> 2.2, 20190608 and 20191213, and frequent informal release from
+> https://github.com/riscv/riscv-isa-manual/releases
+>
+> If we add a spec check, we need to add a PROP_STRING and
+> and parse the version. We then need an enum like
+> PRIV_VERSION_1_12_0 and we needs to g_strcmp0
+> in riscv_cpu_realize, just as what priv spec had done.
+>
+> And we need to define a default unpriv spec version, which
+> should be 20191213.
+>
+> I can add a separate patch for it if you do think it is necessary.
+>
+> If the guest does want old spec version, I think the recently added
+> "short-isa-string" option from Tsukasa OI is suitable.
+> Instead of -cpu rv64,unpriv_spec=2.2 they can just use
+> -cpu rv64,short-isa-string=true to solve the issue.
 
-Fair point. Ok we should at least report a warning if any of these are
-set though
+Ok, fair point
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 >
-> Regards,
-> Anup
+> Cc Tsukasa OI
 >
 > >
 > > Alistair
 > >
-> > > ---
-> > >  target/riscv/cpu.c | 34 ++++++++++++++++++++++++++++++++++
-> > >  1 file changed, 34 insertions(+)
-> > >
-> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > index f3b61dfd63..25a4ba3e22 100644
-> > > --- a/target/riscv/cpu.c
-> > > +++ b/target/riscv/cpu.c
-> > > @@ -541,6 +541,40 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-> > >          set_priv_version(env, priv_version);
-> > >      }
-> > >
-> > > +    /* Force disable extensions if priv spec version does not match */
-> > > +    if (env->priv_ver < PRIV_VERSION_1_12_0) {
-> > > +        cpu->cfg.ext_h = false;
-> > > +        cpu->cfg.ext_v = false;
-> > > +        cpu->cfg.ext_zfh = false;
-> > > +        cpu->cfg.ext_zfhmin = false;
-> > > +        cpu->cfg.ext_zfinx = false;
-> > > +        cpu->cfg.ext_zhinx = false;
-> > > +        cpu->cfg.ext_zhinxmin = false;
-> > > +        cpu->cfg.ext_zdinx = false;
-> > > +        cpu->cfg.ext_zba = false;
-> > > +        cpu->cfg.ext_zbb = false;
-> > > +        cpu->cfg.ext_zbc = false;
-> > > +        cpu->cfg.ext_zbkb = false;
-> > > +        cpu->cfg.ext_zbkc = false;
-> > > +        cpu->cfg.ext_zbkx = false;
-> > > +        cpu->cfg.ext_zbs = false;
-> > > +        cpu->cfg.ext_zk = false;
-> > > +        cpu->cfg.ext_zkn = false;
-> > > +        cpu->cfg.ext_zknd = false;
-> > > +        cpu->cfg.ext_zkne = false;
-> > > +        cpu->cfg.ext_zknh = false;
-> > > +        cpu->cfg.ext_zkr = false;
-> > > +        cpu->cfg.ext_zks = false;
-> > > +        cpu->cfg.ext_zksed = false;
-> > > +        cpu->cfg.ext_zksh = false;
-> > > +        cpu->cfg.ext_zkt = false;
-> > > +        cpu->cfg.ext_zve32f = false;
-> > > +        cpu->cfg.ext_zve64f = false;
-> > > +        cpu->cfg.ext_svinval = false;
-> > > +        cpu->cfg.ext_svnapot = false;
-> > > +        cpu->cfg.ext_svpbmt = false;
-> > > +    }
-> > > +
-> > >      if (cpu->cfg.mmu) {
-> > >          riscv_set_feature(env, RISCV_FEATURE_MMU);
-> > >      }
+> > >          ISA_EDATA_ENTRY(zfh, ext_zfh),
+> > >          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
+> > >          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
 > > > --
-> > > 2.34.1
+> > > 2.35.1
 > > >
 > > >
 
