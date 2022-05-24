@@ -1,78 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntWjg-0002dz-07
-	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 11:46:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44066)
+	id 1ntWli-00065Z-AM
+	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 11:48:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44572)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1ntWja-0002Wx-AL
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:46:11 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532]:38407)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1ntWjY-0006CA-1r
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:46:09 -0400
-Received: by mail-ed1-x532.google.com with SMTP id p26so23598435eds.5
- for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 08:46:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=references:user-agent:from:to:cc:subject:date:in-reply-to
- :message-id:mime-version:content-transfer-encoding;
- bh=sIbaY8ZKt1Z7HL5Scv272Yrd5GAJzQ+u1B+IktUW/Tw=;
- b=MHUDtgebx2pSsxKLs5gwbI2JVMqVrjP4KSSgGWseoBRb4xbeHsifMlkVaTifQyW2Zk
- UYZ7aU6zc0W4gjv9a9hGOzRiDk7yT+ucrRbwEaO45Mm5i/1Y/m30x6tWaNU6mgzhsGqU
- CapRApVxcQnCP2wsJWDP9kYZwuVoW5PgqGOGEul/b+ncIdgDV/E2IYMazXIfhnfvpifA
- AuqzQnn0Qg2ASU793722sf2/ahM0ITLw3ZFC08lKyoJgciY4aLnHhZ8Q9zpQFRdbHTwy
- SCugTY6tKOaPY/f9NUXK4hgvYMcTHFTdiF+3QwLR5kcyV45BrVeYshkjF038WNPkuRgq
- EYDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
- :in-reply-to:message-id:mime-version:content-transfer-encoding;
- bh=sIbaY8ZKt1Z7HL5Scv272Yrd5GAJzQ+u1B+IktUW/Tw=;
- b=NMxYjzCHcadeAznyTXQjdDPwKSMXpFWVnUK8enbJpGL4ZycBxnWTIVwXqf4g630lTs
- w4WRPzZbdkiJwznhQCH1PGVMsYVvUjanG+QbEP6tZPDCUyrYCfk1DuYteubfWaUNtIUV
- nrVegGjcOAQ1hU7jgwbeleWiAihXUK6QKSQdoOGease6N3T5LkMrC38OEK6ZSDgHfaKe
- fdO4AESaB2sfn5hkCN44/nepIJUOzBkPUQ0HxrEATh5P/H9sDQbJugw3QY9BcVORbamK
- pUcGOZNgwPuUhXXUF6Qfa/eTH7N+/xy9yCaaiWrAZ7RgGTRmaFdQmgisfUYH3c8JvSyN
- b2dg==
-X-Gm-Message-State: AOAM531zbcyhktdWANl1668N0JpBhFzKZ5BzH8hhsVru9VLWUsY/oS+u
- PZV7FD31hiY0EGMAa/MK060dsQ==
-X-Google-Smtp-Source: ABdhPJwc3Dyn5vh0V1l0ThTWqfiL+IUWpdSQbh237QyY1CmQ0ijvyDQSCeHrgd8evdcg2LwygBTmQQ==
-X-Received: by 2002:a05:6402:31e5:b0:42a:b724:c567 with SMTP id
- dy5-20020a05640231e500b0042ab724c567mr29469935edb.347.1653407165449; 
- Tue, 24 May 2022 08:46:05 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id
- jp10-20020a170906f74a00b006feec47dae9sm2012420ejb.157.2022.05.24.08.46.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 May 2022 08:46:04 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 0EA241FFBA;
- Tue, 24 May 2022 16:46:04 +0100 (BST)
-References: <20220524093141.91012-1-thuth@redhat.com>
-User-agent: mu4e 1.7.23; emacs 28.1.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Thomas Huth <thuth@redhat.com>
-Cc: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org, Wainer
- dos Santos Moschetta <wainersm@redhat.com>, Beraldo Leal
- <bleal@redhat.com>, qemu-riscv@nongnu.org
-Subject: Re: [PATCH] .gitlab-ci.d/container-cross: Fix RISC-V container
- dependencies / stages
-Date: Tue, 24 May 2022 16:45:58 +0100
-In-reply-to: <20220524093141.91012-1-thuth@redhat.com>
-Message-ID: <87czg36iis.fsf@linaro.org>
+ (Exim 4.90_1) (envelope-from <victor.colombo@eldorado.org.br>)
+ id 1ntWld-00060w-Jk; Tue, 24 May 2022 11:48:17 -0400
+Received: from [187.72.171.209] (port=47623 helo=outlook.eldorado.org.br)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <victor.colombo@eldorado.org.br>)
+ id 1ntWlb-0006N2-4U; Tue, 24 May 2022 11:48:16 -0400
+Received: from p9ibm ([10.10.71.235]) by outlook.eldorado.org.br over TLS
+ secured channel with Microsoft SMTPSVC(8.5.9600.16384); 
+ Tue, 24 May 2022 12:48:09 -0300
+Received: from [127.0.0.1] (unknown [10.10.70.45])
+ by p9ibm (Postfix) with ESMTPS id 732B58002AF;
+ Tue, 24 May 2022 12:48:09 -0300 (-03)
+Message-ID: <47f77b6c-58ff-db5a-cf11-13658dc185b9@eldorado.org.br>
+Date: Tue, 24 May 2022 12:48:09 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Subject: Re: [PATCH v2 2/5] target/riscv: Disable "G" by default
+Content-Language: en-US
+To: Tsukasa OI <research_trasio@irq.a4lg.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
+ <cover.1652583332.git.research_trasio@irq.a4lg.com>
+ <cab7205f1d7668f642fa242386543334af6bc1bd.1652583332.git.research_trasio@irq.a4lg.com>
+ <e803a275-c54b-bc9c-430a-1bbbf5b14115@eldorado.org.br>
+ <dbe0a9b9-00bc-870d-f678-13a45e5a3930@irq.a4lg.com>
+From: =?UTF-8?Q?V=c3=adctor_Colombo?= <victor.colombo@eldorado.org.br>
+In-Reply-To: <dbe0a9b9-00bc-870d-f678-13a45e5a3930@irq.a4lg.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-OriginalArrivalTime: 24 May 2022 15:48:09.0718 (UTC)
+ FILETIME=[AAF89160:01D86F85]
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 187.72.171.209 (failed)
+Received-SPF: pass client-ip=187.72.171.209;
+ envelope-from=victor.colombo@eldorado.org.br; helo=outlook.eldorado.org.br
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
+ PDS_HP_HELO_NORDNS=0.659, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -85,20 +56,84 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 15:46:12 -0000
+X-List-Received-Date: Tue, 24 May 2022 15:48:19 -0000
 
+On 24/05/2022 06:07, Tsukasa OI wrote:
+> On 2022/05/17 3:04, Víctor Colombo wrote:
+>> On 14/05/2022 23:56, Tsukasa OI wrote:
+>>> Because "G" virtual extension expands to "IMAFD", we cannot separately
+>>> disable extensions like "F" or "D" without disabling "G".  Because all
+>>> "IMAFD" are enabled by default, it's harmless to disable "G" by default.
+>>>
+>>> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+>>> ---
+>>>    target/riscv/cpu.c | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>> index 00bf26ec8b..3ea68d5cd7 100644
+>>> --- a/target/riscv/cpu.c
+>>> +++ b/target/riscv/cpu.c
+>>> @@ -812,7 +812,7 @@ static Property riscv_cpu_properties[] = {
+>>>        /* Defaults for standard extensions */
+>>>        DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
+>>>        DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
+>>> -    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
+>>> +    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
+>>>        DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
+>>>        DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
+>>>        DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
+>>> --
+>>> 2.34.1
+>>>
+>>>
+>>
+>> I think the logic looks ok, and (with my limited understanding of the
+>> code) I agree on the reasoning for the changes in patches 2 and 3.
+>> Just some clarification needed: where is the value of 'g' checked?
+>> can the behavior change in this patch cause a situation where
+>> IMAFD_Zicsr_Zifencei is set but 'g' is not, or does patch 3
+>> guarantee that in this case 'g' will be set?
+>>
+>>
+>> Thanks!
+>>
+> 
+> Probably too late to answer but on Alistair's riscv-to-apply.next tree...
+> 
+> target/riscv/cpu.c (19f13a9) line 599-611:
+> if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
+>                          cpu->cfg.ext_a && cpu->cfg.ext_f &&
+>                          cpu->cfg.ext_d &&
+>                          cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
+>      warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
+>      cpu->cfg.ext_i = true;
+>      cpu->cfg.ext_m = true;
+>      cpu->cfg.ext_a = true;
+>      cpu->cfg.ext_f = true;
+>      cpu->cfg.ext_d = true;
+>      cpu->cfg.ext_icsr = true;
+>      cpu->cfg.ext_ifencei = true;
+> }
+> 
+> This is the only place where "G" (ext_g) is read.  Here, if G is enabled
+> and not all IMAFD_Zicsr_Zifencei are enabled, it enables them with a
+> warning message.
+> 
+> So, even if "G" is disabled alone, it's harmless.  Note that
+> IMAFD_Zicsr_Zifencei are enabled by default.
+> 
+> Thanks,
+> Tsukasa
 
-Thomas Huth <thuth@redhat.com> writes:
+Hello!
+Thank you very much for the clarification, it was helpful.
+Still getting used to the riscv code base in QEMU
 
-> The "riscv64-debian-cross-container" job does not depend on any other
-> container job from the first stage, so we can move it to the first
-> stage, too.
->
-> The "riscv64-debian-test-cross-container" job needs the debian11
-> container, so we should add a proper "needs:" statement here.
+Best regards,
 
-Queued to testing/next, thanks.
-
---=20
-Alex Benn=C3=A9e
+-- 
+Víctor Cora Colombo
+Instituto de Pesquisas ELDORADO
+Aviso Legal - Disclaimer <https://www.eldorado.org.br/disclaimer.html>
 
