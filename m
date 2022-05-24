@@ -1,49 +1,96 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntWli-00065Z-AM
-	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 11:48:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44572)
+	id 1ntWtj-0008Ht-Mh
+	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 11:56:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47008)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <victor.colombo@eldorado.org.br>)
- id 1ntWld-00060w-Jk; Tue, 24 May 2022 11:48:17 -0400
-Received: from [187.72.171.209] (port=47623 helo=outlook.eldorado.org.br)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <victor.colombo@eldorado.org.br>)
- id 1ntWlb-0006N2-4U; Tue, 24 May 2022 11:48:16 -0400
-Received: from p9ibm ([10.10.71.235]) by outlook.eldorado.org.br over TLS
- secured channel with Microsoft SMTPSVC(8.5.9600.16384); 
- Tue, 24 May 2022 12:48:09 -0300
-Received: from [127.0.0.1] (unknown [10.10.70.45])
- by p9ibm (Postfix) with ESMTPS id 732B58002AF;
- Tue, 24 May 2022 12:48:09 -0300 (-03)
-Message-ID: <47f77b6c-58ff-db5a-cf11-13658dc185b9@eldorado.org.br>
-Date: Tue, 24 May 2022 12:48:09 -0300
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1ntWte-0008DO-6z
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:56:35 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:48104)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1ntWta-000831-Co
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:56:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1653407788;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=p9z539A01CntyWszl/+scH5Wk/FHqsaRZcJWhoUeVHs=;
+ b=fWf2iNoEzXS0TPRhph3IRHsI4k4I6aAiCm0kePj+BysyU7WnZO550eXI7BRlle44Wavqpj
+ B/bRbk8AjnaorAxUKz3Stq04tM1i1HfoDUun93LQjsaNmOBOIVWn53e2ltXybkLWXFasPD
+ +YUrTR6q/JRCcxgFwVKsHi632O/HUxk=
+Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
+ [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-433-4_3z26BVO1KxdMrTEv3pDQ-1; Tue, 24 May 2022 11:56:27 -0400
+X-MC-Unique: 4_3z26BVO1KxdMrTEv3pDQ-1
+Received: by mail-yw1-f199.google.com with SMTP id
+ 00721157ae682-2d7eaa730d9so156648257b3.13
+ for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 08:56:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:references:mime-version:in-reply-to:date
+ :message-id:subject:to:cc;
+ bh=p9z539A01CntyWszl/+scH5Wk/FHqsaRZcJWhoUeVHs=;
+ b=ObimzYrKAlaP3KMgsd42/4WYUAQknPyvHNe8oMU8sl+MnL5IxOve8pERQOLVU7MKpH
+ lCZO8R/3GktEI/aCzy4eR5mZeKlpYlCwi88XMMAj/asBksdnrf5AKoMa5XBdP/7zosIw
+ 0Oed/cYQTJD15GXiFv51xU9BscyJ9vaMQ3/S6ZoMxBS9/luyk2h2ymkMoclcbxsx/tyv
+ +r5wp6n3un0Y1mWofHsEkz8/4bO2ILyLFM0/s+vNhyDdqTYlhCStrY5ogilup9Stsjmd
+ 7tZ/quxKZI4/NbBdZwcoGn5jteh1v4TMe9WZRWyfb2QpQIYCdGOby2Hx+rQ+wRi2+QzD
+ dnUg==
+X-Gm-Message-State: AOAM531ahFuWOeWWdilTVm9SPHmMj+6s502unGkUCmsMhJJJuFizeeg9
+ xTnZRrWkpgQExzDIlkNoQ6pXDKErjFX4Hu/j5q+rev4vBW7ui5hta38ob/dfBtkbHOznNFuMe3m
+ BrhgToonExPVgAVGBv4Iekzu9kUrI5mU=
+X-Received: by 2002:a81:2fc5:0:b0:2fe:d7d1:4315 with SMTP id
+ v188-20020a812fc5000000b002fed7d14315mr29213509ywv.87.1653407786855; 
+ Tue, 24 May 2022 08:56:26 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxYAtSL5ly3qwTmSKsHsblvjZp8hx20KNjpC8agyFHAcPfJzLtt9w3C0q3j8n7Kdw9V1YeuT2XTh2SoClhpJHE=
+X-Received: by 2002:a81:2fc5:0:b0:2fe:d7d1:4315 with SMTP id
+ v188-20020a812fc5000000b002fed7d14315mr29213495ywv.87.1653407786660; Tue, 24
+ May 2022 08:56:26 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 24 May 2022 08:56:26 -0700
+From: Andrea Bolognani <abologna@redhat.com>
+References: <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
+ <YnTZP1iG+77Cugaq@redhat.com>
+ <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
+ <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
+ <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
+ <YoNiPw/3e+CY0v7o@redhat.com>
+ <CAKmqyKOC0Fgu7WUXRcAJZNmVR8GeiXHGh4K8fg+5_c+pvZR_7w@mail.gmail.com>
+ <CAOnJCU+i3m5OjM-wBf+t58YP9k5Jd0VeBK_yoPSPtzoE68H2EQ@mail.gmail.com>
+ <CAKmqyKO5sUspA5d57r62phQ7qpBs7A0S_3XdF+sLmUV5kKwZMg@mail.gmail.com>
+ <CAOnJCU+Pos0fTWj7C7rhVEa1QV7YsJa4MyO57CFMGFfs_hHR5A@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [PATCH v2 2/5] target/riscv: Disable "G" by default
-Content-Language: en-US
-To: Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
- <cover.1652583332.git.research_trasio@irq.a4lg.com>
- <cab7205f1d7668f642fa242386543334af6bc1bd.1652583332.git.research_trasio@irq.a4lg.com>
- <e803a275-c54b-bc9c-430a-1bbbf5b14115@eldorado.org.br>
- <dbe0a9b9-00bc-870d-f678-13a45e5a3930@irq.a4lg.com>
-From: =?UTF-8?Q?V=c3=adctor_Colombo?= <victor.colombo@eldorado.org.br>
-In-Reply-To: <dbe0a9b9-00bc-870d-f678-13a45e5a3930@irq.a4lg.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-OriginalArrivalTime: 24 May 2022 15:48:09.0718 (UTC)
- FILETIME=[AAF89160:01D86F85]
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 187.72.171.209 (failed)
-Received-SPF: pass client-ip=187.72.171.209;
- envelope-from=victor.colombo@eldorado.org.br; helo=outlook.eldorado.org.br
-X-Spam_score_int: -4
-X-Spam_score: -0.5
-X-Spam_bar: /
-X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- PDS_HP_HELO_NORDNS=0.659, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+In-Reply-To: <CAOnJCU+Pos0fTWj7C7rhVEa1QV7YsJa4MyO57CFMGFfs_hHR5A@mail.gmail.com>
+Date: Tue, 24 May 2022 08:56:26 -0700
+Message-ID: <CABJz62NR=6+k0AxZ4V35hXH=bUamZR4=f4wgDqcG8zm0e+KmHg@mail.gmail.com>
+Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
+To: Atish Patra <atishp@atishpatra.org>
+Cc: Alistair Francis <alistair23@gmail.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=abologna@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,84 +103,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 15:48:19 -0000
+X-List-Received-Date: Tue, 24 May 2022 15:56:35 -0000
 
-On 24/05/2022 06:07, Tsukasa OI wrote:
-> On 2022/05/17 3:04, Víctor Colombo wrote:
->> On 14/05/2022 23:56, Tsukasa OI wrote:
->>> Because "G" virtual extension expands to "IMAFD", we cannot separately
->>> disable extensions like "F" or "D" without disabling "G".  Because all
->>> "IMAFD" are enabled by default, it's harmless to disable "G" by default.
->>>
->>> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
->>> ---
->>>    target/riscv/cpu.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>> index 00bf26ec8b..3ea68d5cd7 100644
->>> --- a/target/riscv/cpu.c
->>> +++ b/target/riscv/cpu.c
->>> @@ -812,7 +812,7 @@ static Property riscv_cpu_properties[] = {
->>>        /* Defaults for standard extensions */
->>>        DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
->>>        DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
->>> -    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
->>> +    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
->>>        DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
->>>        DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
->>>        DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
->>> --
->>> 2.34.1
->>>
->>>
->>
->> I think the logic looks ok, and (with my limited understanding of the
->> code) I agree on the reasoning for the changes in patches 2 and 3.
->> Just some clarification needed: where is the value of 'g' checked?
->> can the behavior change in this patch cause a situation where
->> IMAFD_Zicsr_Zifencei is set but 'g' is not, or does patch 3
->> guarantee that in this case 'g' will be set?
->>
->>
->> Thanks!
->>
-> 
-> Probably too late to answer but on Alistair's riscv-to-apply.next tree...
-> 
-> target/riscv/cpu.c (19f13a9) line 599-611:
-> if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
->                          cpu->cfg.ext_a && cpu->cfg.ext_f &&
->                          cpu->cfg.ext_d &&
->                          cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
->      warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
->      cpu->cfg.ext_i = true;
->      cpu->cfg.ext_m = true;
->      cpu->cfg.ext_a = true;
->      cpu->cfg.ext_f = true;
->      cpu->cfg.ext_d = true;
->      cpu->cfg.ext_icsr = true;
->      cpu->cfg.ext_ifencei = true;
-> }
-> 
-> This is the only place where "G" (ext_g) is read.  Here, if G is enabled
-> and not all IMAFD_Zicsr_Zifencei are enabled, it enables them with a
-> warning message.
-> 
-> So, even if "G" is disabled alone, it's harmless.  Note that
-> IMAFD_Zicsr_Zifencei are enabled by default.
-> 
-> Thanks,
-> Tsukasa
+On Mon, May 23, 2022 at 08:16:40PM -0700, Atish Patra wrote:
+> On Sun, May 22, 2022 at 10:59 PM Alistair Francis <alistair23@gmail.com> wrote:
+> > On Wed, May 18, 2022 at 4:38 PM Atish Patra <atishp@atishpatra.org> wrote:
+> > > 1. virt machine is not well documented and already bloated. There is
+> > > no specification for virt machine as such.
+> > > Putting restrictions after a certain release will lead to confusion.
+> > > 2. Do we support existing MMIO devices after that specific version or not ?
+> >
+> > Yeah, so I guess this doesn't achieve the same outcome you want. I
+> > would say we would still include some MMIO devices, like UART for
+> > example.
+>
+> Why ? We can just rely on the pcie based uart (virtio-serial-pci or
+> serial-pci) should be enough.
+> The only MMIO devices that should be allowed are the ones that can't
+> be behind pcie.
 
-Hello!
-Thank you very much for the clarification, it was helpful.
-Still getting used to the riscv code base in QEMU
+IIRC virtio-serial is initialized too late to catch messages produced
+very early by the firmware (and possibly the kernel), which means
+it's okay for regular usage but not when trying to debug an entire
+class of boot issues.
 
-Best regards,
+Either way, it looks like you wouldn't be able to completely get rid
+of MMIO even if you introduced a new virt-pcie machine type. That's
+the same for the aarch64 virt machine. I agree with Dan that we
+should follow the example set by that architecture - it has worked
+out pretty well.
+
+If there is a desire to reduce the complexity of the "standard"
+machine type, can we just take the current virt machine type and
+rename it to something else? And have your simpler code take over the
+virt name? Sure, it will cause some pain in the short term, but the
+RISC-V ecosystem is still young enough for it to not be a deal
+breaker.
 
 -- 
-Víctor Cora Colombo
-Instituto de Pesquisas ELDORADO
-Aviso Legal - Disclaimer <https://www.eldorado.org.br/disclaimer.html>
+Andrea Bolognani / Red Hat / Virtualization
+
 
