@@ -1,57 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntTN4-0004xy-MV
-	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 08:10:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46318)
+	id 1ntTVv-0002K5-9r
+	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 08:19:51 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47996)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1ntTN2-0004tL-Ix
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 08:10:40 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c]:45572)
+ id 1ntTVr-0002I5-5h
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 08:19:47 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f]:54968)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1ntTN0-0006sw-HX
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 08:10:40 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id p10so6787494wrg.12
- for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 05:10:37 -0700 (PDT)
+ id 1ntTVp-0008Ss-5T
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 08:19:46 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id bg25so10470263wmb.4
+ for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 05:19:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=brainfault-org.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AzXZ0UGwJCBngpgI4uD8Azmg5dEBbjNzTqsntyumh3E=;
- b=zt19TAKGS29nj9f1IqibbAoDCuibCuEnY2uxGsd2ylIfPoWljMTUbAgA2YGf8Tr8uL
- IJFNZZMRUCz+XTyzy3IAXWxEVoHRanRpm4dF35E/Esdjc5IWLWO3TAvU9kXTnmd9q512
- NLS7dmY3vUVmkhu4vmF5vW6NEUXuhiCZUWBUjI0E/5qDZUstC8/uMg+1rgodkGBNOGWb
- ZyOdcs4CuCURiwsRK6nigXJSxiwIWXchCoeIFrMZslgv0BfeXkoAcQHDFlLLJjTDb+k5
- z/ZPTXSpXCPe9jbqKmjkl6hJc30EvvTem32yKi+hbYguy5NDu2AU0DAFy8bqlW4+Em1b
- 5dJA==
+ :cc; bh=opsmbS8/lE9VhOHP2bqRN8ou+aG/ZBawzggpDkdLzss=;
+ b=Uj6kfvc0/A+mky/x11mqG7esLIwvlAeWXNGsy4l0vST2VJUC6ftZz3gNoVUyZW0Bi7
+ XzKx0YqBkg/bGWqTKxglHFj5aFB5dCJdaDiVAeh2oCaAnvSvUNF1j5P5Y0TLv9WPRUW5
+ mtklD2vYoBzr92h6NN/Wp7oU5TM6ViWOXruxrT1KgsZyQwQFaFYBC3WWA+IUta+uNVPj
+ VB/9wAKWsM0GEyWP0VJJ4BJM0RZa9oyPbTQrQF1yDO9W5AqcF88IWPro3LoCg5uo/hY3
+ kjRhFaaq630lPrGrFiS0vPVw3Wl/LvdESVxotX945OkzIZT2ZrngnUkq6SI75ykrLL0N
+ 4cmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=AzXZ0UGwJCBngpgI4uD8Azmg5dEBbjNzTqsntyumh3E=;
- b=aogieir3AMBXkkOG1Xgk8oeYho85sbXRSc9uvk5NwtQUgsjpVtJspLQj1fyGPtsSgh
- bzzjrV1LcppY34SCwztYbFwKnKy53vYa1vxNdqALvkvORS7CnuME+m37LV11WYZyGflD
- XbdloIKeID0PG3HxU9cTZoCSza1pQsYXguKO04dr+eOBgL5U+tWfyio+25c27Euj+ZG1
- u3B/kdGn28fI5Ve/SqxpI6Kpx6SY8jJdXAppZpFxTaOU/xrgbP6NIaT2ZVB1qMlfs6l0
- 4hUVYwm859dqXA2NRl32snIQS9kceWpGOsH4ubX4MkudF1YVo+dZAlA4TxWKCI6JRtCM
- uVsw==
-X-Gm-Message-State: AOAM533y9qPQsrdJf3RpbV+waf/AtVCz/5Szw7uk6jT/Q4RjigDfTe0I
- tTA3+vziPwapfgTlfp2VZfbujuvhZFwruEVWu8IMQA==
-X-Google-Smtp-Source: ABdhPJzVz4OWO5u4A1821BG+t8orPZnkQ+O6wPQtwvwGJDa4mj890YntzLFurL2B76GM7sibH5xc98H6gPkSe9UXKDU=
-X-Received: by 2002:a05:6000:1f18:b0:20f:e61b:520e with SMTP id
- bv24-20020a0560001f1800b0020fe61b520emr6532049wrb.214.1653394236298; Tue, 24
- May 2022 05:10:36 -0700 (PDT)
+ bh=opsmbS8/lE9VhOHP2bqRN8ou+aG/ZBawzggpDkdLzss=;
+ b=LtJthfOwZOHHZlMpzCKC7ALd4W1IE1ArfZsLTUc8WeXPBkDQurpwjgjoH6r80LtkCI
+ E1HjvDXIml1MttxiOsWEhjnrlozxfuZ6Wcd18deSr2kNj5WoDRcll8AlwX2rDvCzl60X
+ GEXUa/DLyLhLp4+dfv25jPRLVh6pdM6t7WhCQQrzJW8xgzFCcPoRgtShgWy9Y5V9e70X
+ hLEzIgGPe9PePAH1LuJf7zwAbAwK6d0VwAksrRcAUHbs17TP+k+DgmVY6ue1GoQuGf5D
+ 2dYQ5g2EkDY8CEgBKbejsT9vL7GJbTMCq3+8mmvoZ8sBWshJ05hIB89FqajEseLLB84s
+ w4mw==
+X-Gm-Message-State: AOAM531kfboFB4WKd0ARTFI+BEhdC+t1u7hXfXW+uq1j4MTUtMcw13GJ
+ k8R63UBMFS1Kro5SIb3S//UWcicm+6VsnzT76ucbJw==
+X-Google-Smtp-Source: ABdhPJyBlVh6GiCqRwh5f3Gs08zmt71oxGJ/7P3IMCZfv9gdBOCqVMJUSfZ3426th3Jv3MHKGstmo3P+lhGi1RwbuKU=
+X-Received: by 2002:a05:600c:1d28:b0:397:65ab:4b3e with SMTP id
+ l40-20020a05600c1d2800b0039765ab4b3emr82773wms.137.1653394782298; Tue, 24 May
+ 2022 05:19:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220511144528.393530-1-apatel@ventanamicro.com>
- <20220511144528.393530-8-apatel@ventanamicro.com>
- <CAKmqyKN5U927XfL7n_8S=3ykMyHPLM_kyM9qfYV5dq_eSmoEfA@mail.gmail.com>
- <CAAhSdy1SRGnG9An-hKHBaEzoG=0eSZQCwQDhoJ3J387Lwe5Pdg@mail.gmail.com>
- <CAKmqyKMy66XQsgmAnMEEaYrH7k1g2MC6kHqrPaRWKxvSuOz3Xw@mail.gmail.com>
-In-Reply-To: <CAKmqyKMy66XQsgmAnMEEaYrH7k1g2MC6kHqrPaRWKxvSuOz3Xw@mail.gmail.com>
+ <20220511144528.393530-5-apatel@ventanamicro.com>
+ <CAKmqyKMiwutFbkq4ZP+SRZ-9hTTN1NTnoGsipbXii_V2QeW8Rg@mail.gmail.com>
+In-Reply-To: <CAKmqyKMiwutFbkq4ZP+SRZ-9hTTN1NTnoGsipbXii_V2QeW8Rg@mail.gmail.com>
 From: Anup Patel <anup@brainfault.org>
-Date: Tue, 24 May 2022 17:40:24 +0530
-Message-ID: <CAAhSdy0iP+js5JTSXBsD-O3KennBR++_v4z7m55bztEyrgwvPQ@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] target/riscv: Force disable extensions if priv
- spec version does not match
+Date: Tue, 24 May 2022 17:49:29 +0530
+Message-ID: <CAAhSdy2ziugYDsX7M+1LPciXsen_4D7HWo+7-Fuvy2d8TKEtOg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/8] target/riscv: Update [m|h]tinst CSR in
+ riscv_cpu_do_interrupt()
 To: Alistair Francis <alistair23@gmail.com>
 Cc: Anup Patel <apatel@ventanamicro.com>,
  Peter Maydell <peter.maydell@linaro.org>, 
@@ -62,14 +60,15 @@ Cc: Anup Patel <apatel@ventanamicro.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::42c;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x42c.google.com
+Received-SPF: none client-ip=2a00:1450:4864:20::32f;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ SPF_NONE=0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,44 +81,202 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 12:10:40 -0000
+X-List-Received-Date: Tue, 24 May 2022 12:19:48 -0000
 
-On Tue, May 24, 2022 at 3:22 AM Alistair Francis <alistair23@gmail.com> wrote:
+On Tue, May 24, 2022 at 3:08 AM Alistair Francis <alistair23@gmail.com> wrote:
 >
-> On Fri, May 20, 2022 at 1:07 AM Anup Patel <anup@brainfault.org> wrote:
+> On Thu, May 12, 2022 at 12:47 AM Anup Patel <apatel@ventanamicro.com> wrote:
 > >
-> > On Tue, May 17, 2022 at 5:46 AM Alistair Francis <alistair23@gmail.com> wrote:
-> > >
-> > > On Thu, May 12, 2022 at 12:52 AM Anup Patel <apatel@ventanamicro.com> wrote:
-> > > >
-> > > > We should disable extensions in riscv_cpu_realize() if minimum required
-> > > > priv spec version is not satisfied. This also ensures that machines with
-> > > > priv spec v1.11 (or lower) cannot enable H, V, and various multi-letter
-> > > > extensions.
-> > > >
-> > > > Fixes: a775398be2e ("target/riscv: Add isa extenstion strings to the
-> > > > device tree")
-> > > > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
-> > >
-> > > This will potentially confuse users as we just disable the extension
-> > > without telling them.
-> > >
-> > > Could we not just leave this as is and let users specify the
-> > > extensions they want? Then it's up to them to specify the correct
-> > > combinations
+> > We should write transformed instruction encoding of the trapped
+> > instruction in [m|h]tinst CSR at time of taking trap as defined
+> > by the RISC-V privileged specification v1.12.
 > >
-> > The ISA extensions are not independent of the Priv spec version.
+> > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> > ---
+> >  target/riscv/cpu_helper.c | 168 +++++++++++++++++++++++++++++++++++++-
+> >  target/riscv/instmap.h    |  41 ++++++++++
+> >  2 files changed, 205 insertions(+), 4 deletions(-)
 > >
-> > For example, we have bits for Sstc, Svpbmt, and Zicbo[m|p|z] extensions
-> > in xenvcfg CSRs which are only available for Priv v1.12 spec.
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index d99fac9d2d..b24652eb8d 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -22,6 +22,7 @@
+> >  #include "qemu/main-loop.h"
+> >  #include "cpu.h"
+> >  #include "exec/exec-all.h"
+> > +#include "instmap.h"
+> >  #include "tcg/tcg-op.h"
+> >  #include "trace.h"
+> >  #include "semihosting/common-semi.h"
+> > @@ -1318,6 +1319,158 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+> >  }
+> >  #endif /* !CONFIG_USER_ONLY */
 > >
-> > We can't allow users to enable extensions which don't meet
-> > the Priv spec version requirements.
+> > +static target_ulong riscv_transformed_insn(CPURISCVState *env,
+> > +                                           target_ulong insn)
+> > +{
+> > +    target_ulong xinsn = 0;
+> > +
+> > +    /*
+> > +     * Only Quadrant 0 and Quadrant 2 of RVC instruction space need to
+> > +     * be uncompressed. The Quadrant 1 of RVC instruction space need
+> > +     * not be transformed because these instructions won't generate
+> > +     * any load/store trap.
+> > +     */
+> > +
+> > +    if ((insn & 0x3) != 0x3) {
+> > +        /* Transform 16bit instruction into 32bit instruction */
+> > +        switch (GET_C_OP(insn)) {
+> > +        case OPC_RISC_C_OP_QUAD0: /* Quadrant 0 */
+> > +            switch (GET_C_FUNC(insn)) {
+> > +            case OPC_RISC_C_FUNC_FLD_LQ:
+> > +                if (riscv_cpu_xlen(env) != 128) { /* C.FLD (RV32/64) */
+> > +                    xinsn = OPC_RISC_FLD;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_LW: /* C.LW */
+> > +                xinsn = OPC_RISC_LW;
+> > +                xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> > +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_FLW_LD:
+> > +                if (riscv_cpu_xlen(env) == 32) { /* C.FLW (RV32) */
+> > +                    xinsn = OPC_RISC_FLW;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LW_IMM(insn));
+> > +                } else { /* C.LD (RV64/RV128) */
+> > +                    xinsn = OPC_RISC_LD;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_FSD_SQ:
+> > +                if (riscv_cpu_xlen(env) != 128) { /* C.FSD (RV32/64) */
+> > +                    xinsn = OPC_RISC_FSD;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_SW: /* C.SW */
+> > +                xinsn = OPC_RISC_SW;
+> > +                xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> > +                xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_FSW_SD:
+> > +                if (riscv_cpu_xlen(env) == 32) { /* C.FSW (RV32) */
+> > +                    xinsn = OPC_RISC_FSW;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SW_IMM(insn));
+> > +                } else { /* C.SD (RV64/RV128) */
+> > +                    xinsn = OPC_RISC_SD;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn = SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SD_IMM(insn));
+> > +                }
+> > +                break;
+> > +            default:
+> > +                break;
+> > +            }
+> > +            break;
+> > +        case OPC_RISC_C_OP_QUAD2: /* Quadrant 2 */
+> > +            switch (GET_C_FUNC(insn)) {
+> > +            case OPC_RISC_C_FUNC_FLDSP_LQSP:
+> > +                if (riscv_cpu_xlen(env) != 128) { /* C.FLDSP (RV32/64) */
+> > +                    xinsn = OPC_RISC_FLD;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
 >
-> Fair point. Ok we should at least report a warning if any of these are
-> set though
+> Is this right?
+>
+> Shouldn't this be the offset "between the faulting virtual address
+> (written to mtval or stval) and the original virtual address"?
 
-Okay, I will update this patch accordingly.
+Yes, it should be "Addr. Offset". I totally overlooked the "Addr. Offset"
+field.
+
+>
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_LWSP: /* C.LWSP */
+> > +                xinsn = OPC_RISC_LW;
+> > +                xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> > +                xinsn = SET_RS1(xinsn, 2);
+> > +                xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_FLWSP_LDSP:
+> > +                if (riscv_cpu_xlen(env) == 32) { /* C.FLWSP (RV32) */
+> > +                    xinsn = OPC_RISC_FLW;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LWSP_IMM(insn));
+> > +                } else { /* C.LDSP (RV64/RV128) */
+> > +                    xinsn = OPC_RISC_LD;
+> > +                    xinsn = SET_RD(xinsn, GET_C_RD(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
+> > +                    xinsn = SET_I_IMM(xinsn, GET_C_LDSP_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_FSDSP_SQSP:
+> > +                if (riscv_cpu_xlen(env) != 128) { /* C.FSDSP (RV32/64) */
+> > +                    xinsn = OPC_RISC_FSD;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
+> > +                }
+> > +                break;
+> > +            case OPC_RISC_C_FUNC_SWSP: /* C.SWSP */
+> > +                xinsn = OPC_RISC_SW;
+> > +                xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> > +                xinsn = SET_RS1(xinsn, 2);
+> > +                xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
+> > +                break;
+> > +            case 7:
+> > +                if (riscv_cpu_xlen(env) == 32) { /* C.FSWSP (RV32) */
+> > +                    xinsn = OPC_RISC_FSW;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SWSP_IMM(insn));
+> > +                } else { /* C.SDSP (RV64/RV128) */
+> > +                    xinsn = OPC_RISC_SD;
+> > +                    xinsn = SET_RS2(xinsn, GET_C_RS2(insn));
+> > +                    xinsn = SET_RS1(xinsn, 2);
+> > +                    xinsn = SET_S_IMM(xinsn, GET_C_SDSP_IMM(insn));
+> > +                }
+> > +                break;
+> > +            default:
+> > +                break;
+> > +            }
+> > +            break;
+> > +        default:
+> > +            break;
+> > +        }
+> > +
+> > +        /*
+> > +         * Clear Bit1 of transformed instruction to indicate that
+> > +         * original insruction was a 16bit instruction
+> > +         */
+> > +        xinsn &= ~((target_ulong)0x2);
+> > +    } else {
+> > +        /* No need to transform 32bit (or wider) instructions */
+>
+> From what I can tell we still need to transform 32-bit instructions as
+> well, the "Addr. Offset" for example needs to be changed.
+
+The "Addr. Offset" will be non-zero only for misaligned load/store
+traps but QEMU RISC-V does not take misaligned load/store traps
+so at least for QEMU RISC-V we should always set "Addr. Offset"
+to zero.
 
 Regards,
 Anup
@@ -127,64 +284,132 @@ Anup
 >
 > Alistair
 >
+> > +        xinsn = insn;
+> > +    }
+> > +
+> > +    return xinsn;
+> > +}
+> > +
+> >  /*
+> >   * Handle Traps
+> >   *
+> > @@ -1340,6 +1493,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >      target_ulong cause = cs->exception_index & RISCV_EXCP_INT_MASK;
+> >      uint64_t deleg = async ? env->mideleg : env->medeleg;
+> >      target_ulong tval = 0;
+> > +    target_ulong tinst = 0;
+> >      target_ulong htval = 0;
+> >      target_ulong mtval2 = 0;
 > >
-> > Regards,
-> > Anup
+> > @@ -1355,18 +1509,22 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >      if (!async) {
+> >          /* set tval to badaddr for traps with address information */
+> >          switch (cause) {
+> > -        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> >          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> >          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+> > -        case RISCV_EXCP_INST_ADDR_MIS:
+> > -        case RISCV_EXCP_INST_ACCESS_FAULT:
+> >          case RISCV_EXCP_LOAD_ADDR_MIS:
+> >          case RISCV_EXCP_STORE_AMO_ADDR_MIS:
+> >          case RISCV_EXCP_LOAD_ACCESS_FAULT:
+> >          case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
+> > -        case RISCV_EXCP_INST_PAGE_FAULT:
+> >          case RISCV_EXCP_LOAD_PAGE_FAULT:
+> >          case RISCV_EXCP_STORE_PAGE_FAULT:
+> > +            write_gva = env->two_stage_lookup;
+> > +            tval = env->badaddr;
+> > +            tinst = riscv_transformed_insn(env, env->bins);
+> > +            break;
+> > +        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> > +        case RISCV_EXCP_INST_ADDR_MIS:
+> > +        case RISCV_EXCP_INST_ACCESS_FAULT:
+> > +        case RISCV_EXCP_INST_PAGE_FAULT:
+> >              write_gva = env->two_stage_lookup;
+> >              tval = env->badaddr;
+> >              break;
+> > @@ -1448,6 +1606,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >          env->sepc = env->pc;
+> >          env->stval = tval;
+> >          env->htval = htval;
+> > +        env->htinst = tinst;
+> >          env->pc = (env->stvec >> 2 << 2) +
+> >              ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
+> >          riscv_cpu_set_mode(env, PRV_S);
+> > @@ -1478,6 +1637,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >          env->mepc = env->pc;
+> >          env->mtval = tval;
+> >          env->mtval2 = mtval2;
+> > +        env->mtinst = tinst;
+> >          env->pc = (env->mtvec >> 2 << 2) +
+> >              ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
+> >          riscv_cpu_set_mode(env, PRV_M);
+> > diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
+> > index 40b6d2b64d..f4ee686c78 100644
+> > --- a/target/riscv/instmap.h
+> > +++ b/target/riscv/instmap.h
+> > @@ -316,6 +316,12 @@ enum {
+> >  #define GET_RS2(inst)  extract32(inst, 20, 5)
+> >  #define GET_RD(inst)   extract32(inst, 7, 5)
+> >  #define GET_IMM(inst)  sextract64(inst, 20, 12)
+> > +#define SET_RS1(inst, val)  deposit32(inst, 15, 5, val)
+> > +#define SET_RS2(inst, val)  deposit32(inst, 20, 5, val)
+> > +#define SET_RD(inst, val)   deposit32(inst, 7, 5, val)
+> > +#define SET_I_IMM(inst, val)  deposit32(inst, 20, 12, val)
+> > +#define SET_S_IMM(inst, val)  \
+> > +    deposit32(deposit32(inst, 7, 5, val), 25, 7, (val) >> 5)
 > >
-> > >
-> > > Alistair
-> > >
-> > > > ---
-> > > >  target/riscv/cpu.c | 34 ++++++++++++++++++++++++++++++++++
-> > > >  1 file changed, 34 insertions(+)
-> > > >
-> > > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > > > index f3b61dfd63..25a4ba3e22 100644
-> > > > --- a/target/riscv/cpu.c
-> > > > +++ b/target/riscv/cpu.c
-> > > > @@ -541,6 +541,40 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-> > > >          set_priv_version(env, priv_version);
-> > > >      }
-> > > >
-> > > > +    /* Force disable extensions if priv spec version does not match */
-> > > > +    if (env->priv_ver < PRIV_VERSION_1_12_0) {
-> > > > +        cpu->cfg.ext_h = false;
-> > > > +        cpu->cfg.ext_v = false;
-> > > > +        cpu->cfg.ext_zfh = false;
-> > > > +        cpu->cfg.ext_zfhmin = false;
-> > > > +        cpu->cfg.ext_zfinx = false;
-> > > > +        cpu->cfg.ext_zhinx = false;
-> > > > +        cpu->cfg.ext_zhinxmin = false;
-> > > > +        cpu->cfg.ext_zdinx = false;
-> > > > +        cpu->cfg.ext_zba = false;
-> > > > +        cpu->cfg.ext_zbb = false;
-> > > > +        cpu->cfg.ext_zbc = false;
-> > > > +        cpu->cfg.ext_zbkb = false;
-> > > > +        cpu->cfg.ext_zbkc = false;
-> > > > +        cpu->cfg.ext_zbkx = false;
-> > > > +        cpu->cfg.ext_zbs = false;
-> > > > +        cpu->cfg.ext_zk = false;
-> > > > +        cpu->cfg.ext_zkn = false;
-> > > > +        cpu->cfg.ext_zknd = false;
-> > > > +        cpu->cfg.ext_zkne = false;
-> > > > +        cpu->cfg.ext_zknh = false;
-> > > > +        cpu->cfg.ext_zkr = false;
-> > > > +        cpu->cfg.ext_zks = false;
-> > > > +        cpu->cfg.ext_zksed = false;
-> > > > +        cpu->cfg.ext_zksh = false;
-> > > > +        cpu->cfg.ext_zkt = false;
-> > > > +        cpu->cfg.ext_zve32f = false;
-> > > > +        cpu->cfg.ext_zve64f = false;
-> > > > +        cpu->cfg.ext_svinval = false;
-> > > > +        cpu->cfg.ext_svnapot = false;
-> > > > +        cpu->cfg.ext_svpbmt = false;
-> > > > +    }
-> > > > +
-> > > >      if (cpu->cfg.mmu) {
-> > > >          riscv_set_feature(env, RISCV_FEATURE_MMU);
-> > > >      }
-> > > > --
-> > > > 2.34.1
-> > > >
-> > > >
+> >  /* RVC decoding macros */
+> >  #define GET_C_IMM(inst)             (extract32(inst, 2, 5) \
+> > @@ -346,6 +352,8 @@ enum {
+> >                                      | (extract32(inst, 5, 1) << 6))
+> >  #define GET_C_LD_IMM(inst)          ((extract16(inst, 10, 3) << 3) \
+> >                                      | (extract16(inst, 5, 2) << 6))
+> > +#define GET_C_SW_IMM(inst)          GET_C_LW_IMM(inst)
+> > +#define GET_C_SD_IMM(inst)          GET_C_LD_IMM(inst)
+> >  #define GET_C_J_IMM(inst)           ((extract32(inst, 3, 3) << 1) \
+> >                                      | (extract32(inst, 11, 1) << 4) \
+> >                                      | (extract32(inst, 2, 1) << 5) \
+> > @@ -366,4 +374,37 @@ enum {
+> >  #define GET_C_RS1S(inst)            (8 + extract16(inst, 7, 3))
+> >  #define GET_C_RS2S(inst)            (8 + extract16(inst, 2, 3))
+> >
+> > +#define GET_C_FUNC(inst)           extract32(inst, 13, 3)
+> > +#define GET_C_OP(inst)             extract32(inst, 0, 2)
+> > +
+> > +enum {
+> > +    /* RVC Quadrants */
+> > +    OPC_RISC_C_OP_QUAD0 = 0x0,
+> > +    OPC_RISC_C_OP_QUAD1 = 0x1,
+> > +    OPC_RISC_C_OP_QUAD2 = 0x2
+> > +};
+> > +
+> > +enum {
+> > +    /* RVC Quadrant 0 */
+> > +    OPC_RISC_C_FUNC_ADDI4SPN = 0x0,
+> > +    OPC_RISC_C_FUNC_FLD_LQ = 0x1,
+> > +    OPC_RISC_C_FUNC_LW = 0x2,
+> > +    OPC_RISC_C_FUNC_FLW_LD = 0x3,
+> > +    OPC_RISC_C_FUNC_FSD_SQ = 0x5,
+> > +    OPC_RISC_C_FUNC_SW = 0x6,
+> > +    OPC_RISC_C_FUNC_FSW_SD = 0x7
+> > +};
+> > +
+> > +enum {
+> > +    /* RVC Quadrant 2 */
+> > +    OPC_RISC_C_FUNC_SLLI_SLLI64 = 0x0,
+> > +    OPC_RISC_C_FUNC_FLDSP_LQSP = 0x1,
+> > +    OPC_RISC_C_FUNC_LWSP = 0x2,
+> > +    OPC_RISC_C_FUNC_FLWSP_LDSP = 0x3,
+> > +    OPC_RISC_C_FUNC_JR_MV_EBREAK_JALR_ADD = 0x4,
+> > +    OPC_RISC_C_FUNC_FSDSP_SQSP = 0x5,
+> > +    OPC_RISC_C_FUNC_SWSP = 0x6,
+> > +    OPC_RISC_C_FUNC_FSWSP_SDSP = 0x7
+> > +};
+> > +
+> >  #endif
+> > --
+> > 2.34.1
+> >
+> >
 
