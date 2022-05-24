@@ -1,49 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntQWF-0007E8-0Y
-	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 05:07:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37344)
+	id 1ntQtR-0004uC-Jr
+	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 05:32:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42278)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1ntQW8-00077J-3J; Tue, 24 May 2022 05:07:52 -0400
-Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:48952)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ntQtM-0004rq-5m
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 05:31:52 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:58741)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1ntQW4-0001NK-G0; Tue, 24 May 2022 05:07:51 -0400
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id E4994300089;
- Tue, 24 May 2022 09:07:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1653383258;
- bh=ojSMcEm9/W0pSbG06iEN8X9hnLeQSxdkgCSUkiYNn0Q=;
- h=Message-ID:Date:Mime-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type:Content-Transfer-Encoding;
- b=Lk+9ckRTY6Efjoh+8CIUPVHc+uuhGq8ACbj4nWLTt+0kMhotDlSrxyMojsxnY5AJs
- QqtTiEnVeuuvELG/I/9BzzCypLjmWaaALNeMbOGxfhNp9g9pjWngT1A/cojF+xwO2o
- V2WMvQkj9rTNQ1AXWob2KDYDa/k7sXNuaVH6iDIU=
-Message-ID: <dbe0a9b9-00bc-870d-f678-13a45e5a3930@irq.a4lg.com>
-Date: Tue, 24 May 2022 18:07:36 +0900
-Mime-Version: 1.0
-Subject: Re: [PATCH v2 2/5] target/riscv: Disable "G" by default
-Content-Language: en-US
-To: =?UTF-8?Q?V=c3=adctor_Colombo?= <victor.colombo@eldorado.org.br>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <cover.1652435138.git.research_trasio@irq.a4lg.com>
- <cover.1652583332.git.research_trasio@irq.a4lg.com>
- <cab7205f1d7668f642fa242386543334af6bc1bd.1652583332.git.research_trasio@irq.a4lg.com>
- <e803a275-c54b-bc9c-430a-1bbbf5b14115@eldorado.org.br>
-From: Tsukasa OI <research_trasio@irq.a4lg.com>
-In-Reply-To: <e803a275-c54b-bc9c-430a-1bbbf5b14115@eldorado.org.br>
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1ntQtJ-0005Qb-IU
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 05:31:50 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1653384709;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=91+1/G/0jIujtaA0K74LFBlXN9Q5WV1AKCVDf6cnkI8=;
+ b=GKwEir9xbaFYAEnFz0cVmDfCRYNTyfl5gI1LKZy/LFsdK4VGJ9MKyC9lx6GKp5bW9Ql11O
+ 07SSLMC+E35Lr5XzRz8davLOxn/ri6jlZXpVs/7nikUdDiloeCdPWqboWuzu7nY9nz7Q1i
+ k4ns+YM5e1R6C6yEoKJmTjyg/VD7JLk=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-126-0TCneGAIOyq4FOimmyCQrw-1; Tue, 24 May 2022 05:31:43 -0400
+X-MC-Unique: 0TCneGAIOyq4FOimmyCQrw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 41D42185A7A4;
+ Tue, 24 May 2022 09:31:43 +0000 (UTC)
+Received: from thuth.com (dhcp-192-183.str.redhat.com [10.33.192.183])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 62E8D492C3B;
+ Tue, 24 May 2022 09:31:42 +0000 (UTC)
+From: Thomas Huth <thuth@redhat.com>
+To: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+ qemu-devel@nongnu.org
+Cc: Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Beraldo Leal <bleal@redhat.com>, qemu-riscv@nongnu.org
+Subject: [PATCH] .gitlab-ci.d/container-cross: Fix RISC-V container
+ dependencies / stages
+Date: Tue, 24 May 2022 11:31:41 +0200
+Message-Id: <20220524093141.91012-1-thuth@redhat.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
- envelope-from=research_trasio@irq.a4lg.com; helo=mail-sender-0.a4lg.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -56,74 +66,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 09:07:54 -0000
+X-List-Received-Date: Tue, 24 May 2022 09:31:52 -0000
 
+The "riscv64-debian-cross-container" job does not depend on any other
+container job from the first stage, so we can move it to the first
+stage, too.
 
+The "riscv64-debian-test-cross-container" job needs the debian11
+container, so we should add a proper "needs:" statement here.
 
-On 2022/05/17 3:04, Víctor Colombo wrote:
-> On 14/05/2022 23:56, Tsukasa OI wrote:
->> Because "G" virtual extension expands to "IMAFD", we cannot separately
->> disable extensions like "F" or "D" without disabling "G".  Because all
->> "IMAFD" are enabled by default, it's harmless to disable "G" by default.
->>
->> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
->> ---
->>   target/riscv/cpu.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 00bf26ec8b..3ea68d5cd7 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -812,7 +812,7 @@ static Property riscv_cpu_properties[] = {
->>       /* Defaults for standard extensions */
->>       DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
->>       DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
->> -    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, true),
->> +    DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
->>       DEFINE_PROP_BOOL("m", RISCVCPU, cfg.ext_m, true),
->>       DEFINE_PROP_BOOL("a", RISCVCPU, cfg.ext_a, true),
->>       DEFINE_PROP_BOOL("f", RISCVCPU, cfg.ext_f, true),
->> -- 
->> 2.34.1
->>
->>
-> 
-> I think the logic looks ok, and (with my limited understanding of the
-> code) I agree on the reasoning for the changes in patches 2 and 3.
-> Just some clarification needed: where is the value of 'g' checked?
-> can the behavior change in this patch cause a situation where
-> IMAFD_Zicsr_Zifencei is set but 'g' is not, or does patch 3
-> guarantee that in this case 'g' will be set?
-> 
-> 
-> Thanks!
-> 
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ .gitlab-ci.d/container-cross.yml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Probably too late to answer but on Alistair's riscv-to-apply.next tree...
+diff --git a/.gitlab-ci.d/container-cross.yml b/.gitlab-ci.d/container-cross.yml
+index 26281ce4f9..f21d7a2a14 100644
+--- a/.gitlab-ci.d/container-cross.yml
++++ b/.gitlab-ci.d/container-cross.yml
+@@ -123,7 +123,7 @@ ppc64el-debian-cross-container:
+ 
+ riscv64-debian-cross-container:
+   extends: .container_job_template
+-  stage: containers-layer2
++  stage: containers
+   # as we are currently based on 'sid/unstable' we may break so...
+   allow_failure: true
+   variables:
+@@ -133,6 +133,7 @@ riscv64-debian-cross-container:
+ riscv64-debian-test-cross-container:
+   extends: .container_job_template
+   stage: containers-layer2
++  needs: ['amd64-debian11-container']
+   variables:
+     NAME: debian-riscv64-test-cross
+ 
+-- 
+2.27.0
 
-target/riscv/cpu.c (19f13a9) line 599-611:
-if (cpu->cfg.ext_g && !(cpu->cfg.ext_i && cpu->cfg.ext_m &&
-                        cpu->cfg.ext_a && cpu->cfg.ext_f &&
-                        cpu->cfg.ext_d &&
-                        cpu->cfg.ext_icsr && cpu->cfg.ext_ifencei)) {
-    warn_report("Setting G will also set IMAFD_Zicsr_Zifencei");
-    cpu->cfg.ext_i = true;
-    cpu->cfg.ext_m = true;
-    cpu->cfg.ext_a = true;
-    cpu->cfg.ext_f = true;
-    cpu->cfg.ext_d = true;
-    cpu->cfg.ext_icsr = true;
-    cpu->cfg.ext_ifencei = true;
-}
-
-This is the only place where "G" (ext_g) is read.  Here, if G is enabled
-and not all IMAFD_Zicsr_Zifencei are enabled, it enables them with a
-warning message.
-
-So, even if "G" is disabled alone, it's harmless.  Note that
-IMAFD_Zicsr_Zifencei are enabled by default.
-
-Thanks,
-Tsukasa
 
