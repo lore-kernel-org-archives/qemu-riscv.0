@@ -1,96 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntWtj-0008Ht-Mh
-	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 11:56:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47008)
+	id 1ntarh-0007LM-Bi
+	for mharc-qemu-riscv@gnu.org; Tue, 24 May 2022 16:10:49 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58782)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1ntWte-0008DO-6z
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:56:35 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:48104)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
- id 1ntWta-000831-Co
- for qemu-riscv@nongnu.org; Tue, 24 May 2022 11:56:32 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1653407788;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=p9z539A01CntyWszl/+scH5Wk/FHqsaRZcJWhoUeVHs=;
- b=fWf2iNoEzXS0TPRhph3IRHsI4k4I6aAiCm0kePj+BysyU7WnZO550eXI7BRlle44Wavqpj
- B/bRbk8AjnaorAxUKz3Stq04tM1i1HfoDUun93LQjsaNmOBOIVWn53e2ltXybkLWXFasPD
- +YUrTR6q/JRCcxgFwVKsHi632O/HUxk=
-Received: from mail-yw1-f199.google.com (mail-yw1-f199.google.com
- [209.85.128.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-433-4_3z26BVO1KxdMrTEv3pDQ-1; Tue, 24 May 2022 11:56:27 -0400
-X-MC-Unique: 4_3z26BVO1KxdMrTEv3pDQ-1
-Received: by mail-yw1-f199.google.com with SMTP id
- 00721157ae682-2d7eaa730d9so156648257b3.13
- for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 08:56:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1ntarN-0007DL-Sk
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 16:10:45 -0400
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d]:41854)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1ntarJ-0002ZC-OF
+ for qemu-riscv@nongnu.org; Tue, 24 May 2022 16:10:28 -0400
+Received: by mail-ej1-x62d.google.com with SMTP id ck4so33278469ejb.8
+ for <qemu-riscv@nongnu.org>; Tue, 24 May 2022 13:10:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Lnpx2w6hgRjk2fSwfipIkCFa5m7JWfQ2A6xJnvD2FYw=;
+ b=Yh5qA4u7s7/0c8tiYPea2gVhZ/hXkInrncZvAup4skkOQV3FP6I5K8OQusF44Odw0T
+ Int6U79Q2OBrYagr3ufumwESc38LguuVD8LKjFgZrKuLVM1Tm+OWG+5WkrH6vbBUOdeG
+ WQwyvbAQuJHI1S88A6nctejayNbbeHV4HuqrfxznKwpFIigCQCngQnwVvbHFp3gR+HcJ
+ 6maoSp2xfOrHx9ENXlxPWWW4YbBa1ksZ4hDPOsK261or1gXb+reD/90HZPRcTRCwvv0P
+ Uwt4EN+9HolV8B1Amu96Xyazm1DjsU4uf+bsJ7Ks7y4JetBmu2oVm9wewBOT2yWpb38z
+ l4Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:references:mime-version:in-reply-to:date
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=p9z539A01CntyWszl/+scH5Wk/FHqsaRZcJWhoUeVHs=;
- b=ObimzYrKAlaP3KMgsd42/4WYUAQknPyvHNe8oMU8sl+MnL5IxOve8pERQOLVU7MKpH
- lCZO8R/3GktEI/aCzy4eR5mZeKlpYlCwi88XMMAj/asBksdnrf5AKoMa5XBdP/7zosIw
- 0Oed/cYQTJD15GXiFv51xU9BscyJ9vaMQ3/S6ZoMxBS9/luyk2h2ymkMoclcbxsx/tyv
- +r5wp6n3un0Y1mWofHsEkz8/4bO2ILyLFM0/s+vNhyDdqTYlhCStrY5ogilup9Stsjmd
- 7tZ/quxKZI4/NbBdZwcoGn5jteh1v4TMe9WZRWyfb2QpQIYCdGOby2Hx+rQ+wRi2+QzD
- dnUg==
-X-Gm-Message-State: AOAM531ahFuWOeWWdilTVm9SPHmMj+6s502unGkUCmsMhJJJuFizeeg9
- xTnZRrWkpgQExzDIlkNoQ6pXDKErjFX4Hu/j5q+rev4vBW7ui5hta38ob/dfBtkbHOznNFuMe3m
- BrhgToonExPVgAVGBv4Iekzu9kUrI5mU=
-X-Received: by 2002:a81:2fc5:0:b0:2fe:d7d1:4315 with SMTP id
- v188-20020a812fc5000000b002fed7d14315mr29213509ywv.87.1653407786855; 
- Tue, 24 May 2022 08:56:26 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxYAtSL5ly3qwTmSKsHsblvjZp8hx20KNjpC8agyFHAcPfJzLtt9w3C0q3j8n7Kdw9V1YeuT2XTh2SoClhpJHE=
-X-Received: by 2002:a81:2fc5:0:b0:2fe:d7d1:4315 with SMTP id
- v188-20020a812fc5000000b002fed7d14315mr29213495ywv.87.1653407786660; Tue, 24
- May 2022 08:56:26 -0700 (PDT)
-Received: from 744723338238 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 24 May 2022 08:56:26 -0700
-From: Andrea Bolognani <abologna@redhat.com>
-References: <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
- <YnTZP1iG+77Cugaq@redhat.com>
- <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
- <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
- <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
- <YoNiPw/3e+CY0v7o@redhat.com>
- <CAKmqyKOC0Fgu7WUXRcAJZNmVR8GeiXHGh4K8fg+5_c+pvZR_7w@mail.gmail.com>
- <CAOnJCU+i3m5OjM-wBf+t58YP9k5Jd0VeBK_yoPSPtzoE68H2EQ@mail.gmail.com>
- <CAKmqyKO5sUspA5d57r62phQ7qpBs7A0S_3XdF+sLmUV5kKwZMg@mail.gmail.com>
- <CAOnJCU+Pos0fTWj7C7rhVEa1QV7YsJa4MyO57CFMGFfs_hHR5A@mail.gmail.com>
+ bh=Lnpx2w6hgRjk2fSwfipIkCFa5m7JWfQ2A6xJnvD2FYw=;
+ b=zdV7ok1a4eCz/5yKcY7O1/Stf1Dn6EDg3rRtjfMYHQRjQ6mMrmoK0ifngFAfOnbsyw
+ sQLnZSVeasCp890NKr+cMTf+Po2wbH1r9vec1rqQqnR/H5ogi3BhqKZ3sl2OxSKePAke
+ C3PDZKuHpmxjn4YhAQFxlhnz+8+oVNyccmmehrRAFuIsFMrErwV8EomPi64YaiZsiXvq
+ y7fTym0AFULcro9xbQY94Z3wok6wny8YfUj8o6xj4wJDgzD5R7SrfVR/UmJeZ9ivDyZ2
+ hoVVkuF6Uq1Vn2/PHNiKuMSdwnT5e1FkUTpu31tJwFCEkIEbGjYZu/GTVT+9IbA+9ED4
+ A1Qw==
+X-Gm-Message-State: AOAM533YT++bklfEbcdBdmH/dM97VMydOljXHw1FE9htU1sd8NEGP4+e
+ lxxkk/CqeezJsY+3QhF47+azcXJ69QioKPMOqxdFTg==
+X-Google-Smtp-Source: ABdhPJzYUff9q4FxBVc99bOobp9isNlHAMoZezDv6w/G4iGtQmyfziB6CtYqVtbb5VojbXBxgiX8sSXIO3I4vuqPFxU=
+X-Received: by 2002:a17:907:7248:b0:6fe:a121:d060 with SMTP id
+ ds8-20020a170907724800b006fea121d060mr22595069ejc.9.1653423024481; Tue, 24
+ May 2022 13:10:24 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAOnJCU+Pos0fTWj7C7rhVEa1QV7YsJa4MyO57CFMGFfs_hHR5A@mail.gmail.com>
-Date: Tue, 24 May 2022 08:56:26 -0700
-Message-ID: <CABJz62NR=6+k0AxZ4V35hXH=bUamZR4=f4wgDqcG8zm0e+KmHg@mail.gmail.com>
-Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
-To: Atish Patra <atishp@atishpatra.org>
-Cc: Alistair Francis <alistair23@gmail.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Atish Kumar Patra <atishp@rivosinc.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+References: <20220223090706.4888-1-damien.hedde@greensocs.com>
+ <20220223090706.4888-15-damien.hedde@greensocs.com>
+ <5eadd17a-9fb4-4a0a-2608-c2ca08b18645@gmail.com>
+In-Reply-To: <5eadd17a-9fb4-4a0a-2608-c2ca08b18645@gmail.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Wed, 25 May 2022 04:10:11 +0800
+Message-ID: <CALw707oqr+aYHo0BScJffcsSA7=wLdkDb2iXVVNEh-ghkxeDmQ@mail.gmail.com>
+Subject: Re: [PATCH v4 14/14] hw: set user_creatable on opentitan/sifive_e
+ devices
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Cc: Damien Hedde <damien.hedde@greensocs.com>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=abologna@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=abologna@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
+ mark.burton@greensocs.com, edgari@xilinx.com, 
+ Peter Maydell <peter.maydell@linaro.org>,
+ "open list:OpenTitan" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: multipart/alternative; boundary="00000000000009ca3905dfc78c55"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=jim.shu@sifive.com; helo=mail-ej1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,44 +84,148 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 15:56:35 -0000
+X-List-Received-Date: Tue, 24 May 2022 20:10:47 -0000
 
-On Mon, May 23, 2022 at 08:16:40PM -0700, Atish Patra wrote:
-> On Sun, May 22, 2022 at 10:59 PM Alistair Francis <alistair23@gmail.com> wrote:
-> > On Wed, May 18, 2022 at 4:38 PM Atish Patra <atishp@atishpatra.org> wrote:
-> > > 1. virt machine is not well documented and already bloated. There is
-> > > no specification for virt machine as such.
-> > > Putting restrictions after a certain release will lead to confusion.
-> > > 2. Do we support existing MMIO devices after that specific version or not ?
+--00000000000009ca3905dfc78c55
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Tested-by: Jim Shu <jim.shu@sifive.com>
+
+On Fri, Mar 4, 2022 at 11:23 PM Philippe Mathieu-Daud=C3=A9 <
+philippe.mathieu.daude@gmail.com> wrote:
+
+> On 23/2/22 10:07, Damien Hedde wrote:
+> > The devices are:
+> > + ibex-timer
+> > + ibex-uart
+> > + riscv.aclint.swi
+> > + riscv.aclint.mtimer
+> > + riscv.hart_array
+> > + riscv.sifive.e.prci
+> > + riscv.sifive.plic
+> > + riscv.sifive.uart
+> > + sifive_soc.gpio
+> > + unimplemented-device
 > >
-> > Yeah, so I guess this doesn't achieve the same outcome you want. I
-> > would say we would still include some MMIO devices, like UART for
-> > example.
+> > These devices are clean regarding error handling in realize.
+> >
+> > They are all sysbus devices, so setting user-creatable will only
+> > enable cold-plugging them on machine having explicitely allowed them
+> > (only _none_ machine does that).
+> >
+> > Note that this commit include the ricv_array which embeds cpus. There
 >
-> Why ? We can just rely on the pcie based uart (virtio-serial-pci or
-> serial-pci) should be enough.
-> The only MMIO devices that should be allowed are the ones that can't
-> be behind pcie.
+> Typo "includes" I guess.
+>
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org>
+>
+> > are some deep internal constraints about them: you cannot create more
+> > cpus than the machine's maxcpus. TCG accelerator's code will for exampl=
+e
+> > assert if a user try to create too many cpus.
+> >
+> > Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+> > ---
+> >
+> > I can also split this patch if you think it's better.
+> > But it is mostly a one-line fix per file.
+> >
+> > This patch requires first some cleanups in order to fix error errors
+> > and some more memory leaks that could happend in legit user-related
+> > life cycles: a miss-configuration should not be a fatal error anymore.
+> >
+> https://lore.kernel.org/qemu-devel/20220218164646.132112-1-damien.hedde@g=
+reensocs.com
+> > ---
+> >   hw/char/ibex_uart.c     | 1 +
+> >   hw/char/sifive_uart.c   | 1 +
+> >   hw/gpio/sifive_gpio.c   | 1 +
+> >   hw/intc/riscv_aclint.c  | 2 ++
+> >   hw/intc/sifive_plic.c   | 1 +
+> >   hw/misc/sifive_e_prci.c | 8 ++++++++
+> >   hw/misc/unimp.c         | 1 +
+> >   hw/riscv/riscv_hart.c   | 1 +
+> >   hw/timer/ibex_timer.c   | 1 +
+> >   9 files changed, 17 insertions(+)
+>
+>
 
-IIRC virtio-serial is initialized too late to catch messages produced
-very early by the firmware (and possibly the kernel), which means
-it's okay for regular usage but not when trying to debug an entire
-class of boot issues.
+--00000000000009ca3905dfc78c55
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Either way, it looks like you wouldn't be able to completely get rid
-of MMIO even if you introduced a new virt-pcie machine type. That's
-the same for the aarch64 virt machine. I agree with Dan that we
-should follow the example set by that architecture - it has worked
-out pretty well.
+<div dir=3D"ltr">Tested-by: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.co=
+m" target=3D"_blank">jim.shu@sifive.com</a>&gt;<br></div><br><div class=3D"=
+gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Mar 4, 2022 at 1=
+1:23 PM Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philippe.mathieu.=
+daude@gmail.com" target=3D"_blank">philippe.mathieu.daude@gmail.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On 23/2/=
+22 10:07, Damien Hedde wrote:<br>
+&gt; The devices are:<br>
+&gt; + ibex-timer<br>
+&gt; + ibex-uart<br>
+&gt; + riscv.aclint.swi<br>
+&gt; + riscv.aclint.mtimer<br>
+&gt; + riscv.hart_array<br>
+&gt; + riscv.sifive.e.prci<br>
+&gt; + riscv.sifive.plic<br>
+&gt; + riscv.sifive.uart<br>
+&gt; + sifive_soc.gpio<br>
+&gt; + unimplemented-device<br>
+&gt; <br>
+&gt; These devices are clean regarding error handling in realize.<br>
+&gt; <br>
+&gt; They are all sysbus devices, so setting user-creatable will only<br>
+&gt; enable cold-plugging them on machine having explicitely allowed them<b=
+r>
+&gt; (only _none_ machine does that).<br>
+&gt; <br>
+&gt; Note that this commit include the ricv_array which embeds cpus. There<=
+br>
+<br>
+Typo &quot;includes&quot; I guess.<br>
+<br>
+Reviewed-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug@amsat.=
+org" target=3D"_blank">f4bug@amsat.org</a>&gt;<br>
+<br>
+&gt; are some deep internal constraints about them: you cannot create more<=
+br>
+&gt; cpus than the machine&#39;s maxcpus. TCG accelerator&#39;s code will f=
+or example<br>
+&gt; assert if a user try to create too many cpus.<br>
+&gt; <br>
+&gt; Signed-off-by: Damien Hedde &lt;<a href=3D"mailto:damien.hedde@greenso=
+cs.com" target=3D"_blank">damien.hedde@greensocs.com</a>&gt;<br>
+&gt; ---<br>
+&gt; <br>
+&gt; I can also split this patch if you think it&#39;s better.<br>
+&gt; But it is mostly a one-line fix per file.<br>
+&gt; <br>
+&gt; This patch requires first some cleanups in order to fix error errors<b=
+r>
+&gt; and some more memory leaks that could happend in legit user-related<br=
+>
+&gt; life cycles: a miss-configuration should not be a fatal error anymore.=
+<br>
+&gt; <a href=3D"https://lore.kernel.org/qemu-devel/20220218164646.132112-1-=
+damien.hedde@greensocs.com" rel=3D"noreferrer" target=3D"_blank">https://lo=
+re.kernel.org/qemu-devel/20220218164646.132112-1-damien.hedde@greensocs.com=
+</a><br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0hw/char/ibex_uart.c=C2=A0 =C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/char/sifive_uart.c=C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/gpio/sifive_gpio.c=C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/intc/riscv_aclint.c=C2=A0 | 2 ++<br>
+&gt;=C2=A0 =C2=A0hw/intc/sifive_plic.c=C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/misc/sifive_e_prci.c | 8 ++++++++<br>
+&gt;=C2=A0 =C2=A0hw/misc/unimp.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/riscv/riscv_hart.c=C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A0hw/timer/ibex_timer.c=C2=A0 =C2=A0| 1 +<br>
+&gt;=C2=A0 =C2=A09 files changed, 17 insertions(+)<br>
+<br>
+</blockquote></div>
 
-If there is a desire to reduce the complexity of the "standard"
-machine type, can we just take the current virt machine type and
-rename it to something else? And have your simpler code take over the
-virt name? Sure, it will cause some pain in the short term, but the
-RISC-V ecosystem is still young enough for it to not be a deal
-breaker.
-
--- 
-Andrea Bolognani / Red Hat / Virtualization
-
+--00000000000009ca3905dfc78c55--
 
