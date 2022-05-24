@@ -1,67 +1,83 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntKEw-0002md-5a
-	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 22:25:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36196)
+	id 1ntL2b-0000hT-K7
+	for mharc-qemu-riscv@gnu.org; Mon, 23 May 2022 23:17:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42148)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ntKEu-0002mP-LE; Mon, 23 May 2022 22:25:40 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:58118 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1ntKEq-00076D-MM; Mon, 23 May 2022 22:25:40 -0400
-Received: from [192.168.3.6] (unknown [180.156.147.178])
- by APP-01 (Coremail) with SMTP id qwCowAC3vo4VQoxio83_CQ--.27078S2;
- Tue, 24 May 2022 10:25:26 +0800 (CST)
-Subject: Re: [PATCH] target/riscv: add support for zmmul extension v0.1
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V"
- <qemu-riscv@nongnu.org>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?=
- <lazyparser@gmail.com>
-References: <20220518015316.20504-1-liweiwei@iscas.ac.cn>
- <CAKmqyKNBQo91af1m5t_wDOVMeh=6uYD9Q+KugoTOQYzQJUtf5w@mail.gmail.com>
- <3ed635e4-5705-007c-be5c-edd07936758d@iscas.ac.cn>
- <CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <d1e5e7b3-f508-77c2-a95a-3e6feb98a230@iscas.ac.cn>
-Date: Tue, 24 May 2022 10:25:24 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1ntL2a-0000gY-5S
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 23:17:00 -0400
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36]:44760)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
+ id 1ntL2X-0006JS-O9
+ for qemu-riscv@nongnu.org; Mon, 23 May 2022 23:16:59 -0400
+Received: by mail-yb1-xb36.google.com with SMTP id p139so28680604ybc.11
+ for <qemu-riscv@nongnu.org>; Mon, 23 May 2022 20:16:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=atishpatra.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=1u0Z2bVhq0pp04kSfRgLAhi3mMIoxmNaBi919Dw0/BY=;
+ b=aEBgEaeyzkR2+xOLDO3QJOw2somqBNmT+lMmIaJrhuD/67GsWndvkf6mIQcQXvPBUI
+ xlNCenh1PbWYbdTR6aeSF15nfTZhuqexwATuDDc0Zh7Uj3rcUvnxb+jyjcseXGSit03Z
+ /I3gXqgc6utA5KYJcxl65gn1LkNP28GDG3WG4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=1u0Z2bVhq0pp04kSfRgLAhi3mMIoxmNaBi919Dw0/BY=;
+ b=gA3c8zLu1ftjj5klV+Dh74FcWLfFZhrglrMLVSfU5WUeuGhEIwcbRVKGltm9zDUAdj
+ KkXfYw0mVGT7eiXROwHyEfwDoAfdc7Bf16oUEVx3yPXa6I9ELHona78+/Bkb3GLBulw3
+ /aZ8xvgRDAcoSo70LudFbYXBJo1sOjQzGc+W4DgKNoJPl5w1hevoJPZg4m6sT7LiBe/V
+ n6KgpLgLP8bCMRJ0R+NjoA9/CBYhcFKP1qK2bOy6wqmnxvnyfekS1gMxzdEGwWL8Ae+D
+ BFOqkWdK65suSyLpTUmQwGYGjdoCgcMMCsngIIMAt5qClP8WdXNYTphKKm46/4gnqfpm
+ sEwQ==
+X-Gm-Message-State: AOAM530WQnbqLgjrAIKWkcCL7wlZXfXEwRKBezkEXtqdOqTFF3aSg/+4
+ mLH86bGZPiAzywobvrU1R5DEIhd4ZLnHkxxr73F+
+X-Google-Smtp-Source: ABdhPJxyRdb+uAXRfiXy9M3kRicV7C2LGGqU0M/mFY+oxqoRwQitVu4pTu7J683odoPTsTW4vFqgbQmfiefZLabajRg=
+X-Received: by 2002:a25:dfc9:0:b0:64f:6564:bb38 with SMTP id
+ w192-20020a25dfc9000000b0064f6564bb38mr16613357ybg.74.1653362210867; Mon, 23
+ May 2022 20:16:50 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------8F9916AEAE48DB5BC891310B"
-Content-Language: en-US
-X-CM-TRANSID: qwCowAC3vo4VQoxio83_CQ--.27078S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3WryDWFWfGr47Wry3Cry5twb_yoW7WFWfpF
- W8WryIyF4DtFyfAa97Jw4qqF18Gan3K3y7t39ayws5GF4fGrZ8ZF1DK3yakr15JFykZF1a
- v3WjyFnxZw4jva7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
- 1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487McIj6xIIjxv20xvE14v26r1j6r18McIj
- 6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lF7I21c
- 0EjII2zVCS5cI20VAGYxC7Mx8GjcxK6IxK0xIIj40E5I8CrwCYjI0SjxkI62AI1cAE67vI
- Y487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
- WUJVW8JwC20s026c02F40E14v26r106r1rMI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
- 67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
- IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1l
- IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWI
- evJa73UjIFyTuYvjfUeID7DUUUU
-X-Originating-IP: [180.156.147.178]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <Yl7oiF7kUrIQ0qk5@redhat.com>
+ <CAOnJCUJWX5wPXVNbgNirNgBhi-w39RgqFZMJgvZKTMGhrdLtFw@mail.gmail.com>
+ <CAOnJCUK9_qzOLr3GVdFTP95rs3avNE=7E2R27dADkMMsOhnGEQ@mail.gmail.com>
+ <CAKmqyKPy=abr_m_YSA2v-rVN8TdnsFX8uzUOpp0BpJkGj9yXMQ@mail.gmail.com>
+ <YnOhHZGJphk30SmJ@redhat.com>
+ <CAKmqyKMKxb81ZSpz-ncGc3fpt8f06EcEcXvtHjEpWLABXGT+uQ@mail.gmail.com>
+ <YnTZP1iG+77Cugaq@redhat.com>
+ <CAFEAcA_MncAJWUqG3yRVGMT0mXKvnBUqJLdoHwMdd=OW8fnodQ@mail.gmail.com>
+ <CAHBxVyH=7hX5mjWcUBODk_tNHoczefdkfS8dFcf6is=vpz=SZw@mail.gmail.com>
+ <CAKmqyKPK_F7Z4-tM9k8+3yXDdSTSFagieH23vqoW+TciXpnYqA@mail.gmail.com>
+ <YoNiPw/3e+CY0v7o@redhat.com>
+ <CAKmqyKOC0Fgu7WUXRcAJZNmVR8GeiXHGh4K8fg+5_c+pvZR_7w@mail.gmail.com>
+ <CAOnJCU+i3m5OjM-wBf+t58YP9k5Jd0VeBK_yoPSPtzoE68H2EQ@mail.gmail.com>
+ <CAKmqyKO5sUspA5d57r62phQ7qpBs7A0S_3XdF+sLmUV5kKwZMg@mail.gmail.com>
+In-Reply-To: <CAKmqyKO5sUspA5d57r62phQ7qpBs7A0S_3XdF+sLmUV5kKwZMg@mail.gmail.com>
+From: Atish Patra <atishp@atishpatra.org>
+Date: Mon, 23 May 2022 20:16:40 -0700
+Message-ID: <CAOnJCU+Pos0fTWj7C7rhVEa1QV7YsJa4MyO57CFMGFfs_hHR5A@mail.gmail.com>
+Subject: Re: [RFC 0/3] Introduce a new Qemu machine for RISC-V
+To: Alistair Francis <alistair23@gmail.com>
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Atish Kumar Patra <atishp@rivosinc.com>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Bin Meng <bin.meng@windriver.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=atishp@atishpatra.org; helo=mail-yb1-xb36.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,416 +90,219 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2022 02:25:41 -0000
+X-List-Received-Date: Tue, 24 May 2022 03:17:00 -0000
 
-This is a multi-part message in MIME format.
---------------8F9916AEAE48DB5BC891310B
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-
-在 2022/5/24 上午5:15, Alistair Francis 写道:
-> On Mon, May 23, 2022 at 6:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>
->> 在 2022/5/23 下午2:34, Alistair Francis 写道:
->>> On Wed, May 18, 2022 at 11:54 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->>>>    - includes all multiplication operations for M extension
->>>>
->>>> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
->>>> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
->>>> ---
->>>>    target/riscv/cpu.c                      |  2 ++
->>>>    target/riscv/cpu.h                      |  1 +
->>>>    target/riscv/insn_trans/trans_rvm.c.inc | 18 ++++++++++++------
->>>>    3 files changed, 15 insertions(+), 6 deletions(-)
->>>>
->>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>> index e373c61ba2..01b57d3784 100644
->>>> --- a/target/riscv/cpu.c
->>>> +++ b/target/riscv/cpu.c
->>>> @@ -903,6 +903,7 @@ static Property riscv_cpu_properties[] = {
->>>>
->>>>        /* These are experimental so mark with 'x-' */
->>>>        DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
->>>> +    DEFINE_PROP_BOOL("x-zmmul", RISCVCPU, cfg.ext_zmmul, false),
->>> Is this really experimental?
->>>
->>> Alistair
->> I think it's experimental currently. The zmmul version in latest riscv
->> spec is v0.1, even though described as  v1.0 in spike README.
-> Hmm... Your right that it is only v0.1, but there is no indication of
-> draft state in the RISC-V spec chapter on Zmmul
+On Sun, May 22, 2022 at 10:59 PM Alistair Francis <alistair23@gmail.com> wr=
+ote:
 >
->> Its specification status
->> (https://wiki.riscv.org/display/home/specification+status) is Freeze
->> Complete and TSC Sign-Off Voting.
->>
->> And It's not in the ratified extension
->> list(https://wiki.riscv.org/display/home/recently+ratified+extensions).
->>
->> Any status update I missed?
-> Confusing. Ok, I guess let's leave it as experimental, we can always
-> remove the `x-` easily :)
+> On Wed, May 18, 2022 at 4:38 PM Atish Patra <atishp@atishpatra.org> wrote=
+:
+> >
+> > On Tue, May 17, 2022 at 1:54 PM Alistair Francis <alistair23@gmail.com>=
+ wrote:
+> > >
+> > > On Tue, May 17, 2022 at 6:52 PM Daniel P. Berrang=C3=A9 <berrange@red=
+hat.com> wrote:
+> > > >
+> > > > On Tue, May 17, 2022 at 03:03:38PM +1000, Alistair Francis wrote:
+> > > > > On Sat, May 7, 2022 at 6:30 AM Atish Kumar Patra <atishp@rivosinc=
+.com> wrote:
+> > > > > >
+> > > > > > On Fri, May 6, 2022 at 4:00 AM Peter Maydell <peter.maydell@lin=
+aro.org> wrote:
+> > > > > > >
+> > > > > > > On Fri, 6 May 2022 at 09:18, Daniel P. Berrang=C3=A9 <berrang=
+e@redhat.com> wrote:
+> > > > > > > >
+> > > > > > > > On Fri, May 06, 2022 at 06:34:47AM +1000, Alistair Francis =
+wrote:
+> > > > > > > > > Even if we didn't worry about backwards compatibility the=
+ current virt
+> > > > > > > > > machine would still be what most users want. It's just a =
+small number
+> > > > > > > > > of users who don't want MMIO devices and instead want to =
+use PCIe for
+> > > > > > > > > everything. Realistically it's only HPC users who would w=
+ant this type
+> > > > > > > > > of machine, at least that's my understanding.
+> > > > > > > >
+> > > > > > > > I'm not so sure about that. Every other architecture has en=
+ded up
+> > > > > > > > standardizing on PCI for general purpose virtual machines. =
+IIRC,
+> > > > > > > > aarch64 started off with MMIO, but switched to PCI as it ma=
+tured.
+> > > > > > > >
+> > > > > > > > In terms of having VM mgmt tools "just work" for risc-v, I =
+think
+> > > > > > > > it will be very compelling for the general 'virt' machine t=
+o be
+> > > > > > > > PCI based, otherwise all the assumptions about PCI in mgmt =
+apps
+> > > > > > > > are going to break requiring never ending riscv fixes.
+> > > > > > >
+> > > > > > > Mmm, my experience with aarch64 virt is that PCI is much nice=
+r
+> > > > > > > as a general preference. aarch64 virt has some MMIO devices
+> > > > > > > for historical reasons and some because you can't reasonably
+> > > > > > > do the necessary things with PCI, but I'm actively trying to
+> > > > > > > push people who submit new MMIO device features for virt to
+> > > > > > > try to use a PCI-based solution instead if they possibly can.
+> > > > >
+> > > > > Interesting...
+> > > > >
+> > > > > Ok, maybe calling this "virt-pcie" might be a good start, with th=
+e
+> > > > > expectation to eventually replace the current virt with the new
+> > > > > virt-pcie at some point.
+> > > >
+> > > > Delaying the inevitable by leaving PCIE support in a separate
+> > > > machine type initially is going to be more painful long term.
+> > > >
+> > > > > The other option would be to try and gradually change from the cu=
+rrent
+> > > > > virt machine to this new virt machine
+> > > >
+> > > > Yes, I really think the 'virt' machine type needs to aim for PCIE
+> > > > support sooner rather than later, if RISC-V wants to get on part
+> > > > with other architectures. The best time to have added PCIE support
+> > > > to 'virt' was when it was first created, the next best time is now.
+> > >
+> > > So maybe instead we lock in the current virt machine as the 7.1 virt
+> > > machine for QEMU 7.1, then work on migrating to a PCIe only machine
+> > > with versions (similar to the other archs)
+> > >
+> >
+> > I am not quite sure what exactly you mean here. Do you mean to modify
+> > the current virt
+> > machine to be PCIE only after QEMU 7.1 or the new PCIE only machine
+> > (with the versioning)
+> > which will be the default machine in the future
 >
->> Regards,
->>
->> Weiwei Li
->>
->>>>        /* ePMP 0.9.3 */
->>>>        DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->>>>        DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->>>> @@ -1027,6 +1028,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->>>>         *    extensions by an underscore.
->>>>         */
->>>>        struct isa_ext_data isa_edata_arr[] = {
->>>> +        ISA_EDATA_ENTRY(zmmul, ext_zmmul),
-> We should have some checks though. We don't want users to enable this
-> and the multiply (M) extension
+> I mean that we call the current virt machine the virt machine for QEMU
+> 7.1. Then for future releases we can make breaking changes, where we
+> have the old 7.1 virt machine for backwards compatibility.
 >
+> >
+> > If you intend to say the former, few issues with that approach.
+> >
+> > 1. virt machine is not well documented and already bloated. There is
+> > no specification for virt machine as such.
+> > Putting restrictions after a certain release will lead to confusion.
+> > 2. Do we support existing MMIO devices after that specific version or n=
+ot ?
 >
-> Alistair
+> Yeah, so I guess this doesn't achieve the same outcome you want. I
+> would say we would still include some MMIO devices, like UART for
+> example.
+>
 
-Maybe we can add a check like this:
+Why ? We can just rely on the pcie based uart (virtio-serial-pci or
+serial-pci) should be enough.
+The only MMIO devices that should be allowed are the ones that can't
+be behind pcie.
 
-/* M + Zmmul = Zmmul */
-if (cpu->cfg.ext_m && cpu->cfg.ext_zmmul) {
-warn_report("Zmmul will override M");
-cpu->cfg.ext_m = false;
-}
+> But we could simplify things a bit. So for example maybe we could use
+> AIA by default and then remove the PLIC code. That would help cleanup
+> the board file. Then we could add a `msi-only` option that would be
+> similar to https://github.com/atishp04/qemu/commit/d7fc1c6aa7855b414b3484=
+672a076140166a2dcd.
+> But without the PLIC it should hopefully be cleaner
+>
+> We would need AIA ratified before we could remove the PLIC though.
+>
 
-It seems OK to enable both M and Zmmul in gnu toolchain. However, divide 
-operations
+And AIA patches available in the upstream Linux kernel.
+Even after that, can we just remove the PLIC ?
+That would mean everybody has to use the latest kernel with AIA
+support after that.
 
-will be disabled when Zmmul is enabled.
+> > 3. The user has to be aware of which version of virt machine it is
+> > running in order to test specific features (i.e. flash, reset, wired
+> > interrupts)
+>
+> That's true, but I think we are going to have this issue someday
+> anyway. We don't want to use the SiFive CLINT and PLIC forever,
+> eventually we will want to use the newer hardware.
+>
 
+Agreed. But It should be disabed by default at first. In the future it
+can be removed.
+Otherwise, we end up breaking a bunch of user configurations.
+
+> > 4. Based on the version of the virt machine, the command line options
+> > will change. This may also be confusing.
+> >
+> > On the other hand, the second approach will be much cleaner without
+> > any baggage. The RISC-V eco-system is still maturing and this is the
+> > right time
+> > to start something fresh. Let's call the new machine virt-pcie for
+> > now. Here are a few things that can be implemented for this machine.
+> >
+> > 1. It must support versioning and any changes to the machine code must
+> > modify the version of the machine.
+> > 2. It must only support MSI based PCIe devices. No support for wired in=
+terrupts.
+> >     The only allowed MMIO devices are
+> >            -- mtimer/mtimecmp (there is no other option provided in ISA=
+)
+> >            -- reset/rtc device (If there is a way we can emulate these
+> > two over PCIe, that would be great)
+> >            -- flash
+> > Beyond this, adding any other MMIO device must be strongly discouraged.
+> > 3. The virt-pcie machine must be well documented similar to a hardware
+> > specification (including address range, restrictions and
+> > implemented/allowed devices)
+> > 4. No dependence on virtio framework but must work with virtio-pcie bac=
+kend.
+> > 5. Migration must be supported.
+>
+> I'm on board with these! They would all be great to have.
+>
+> I'm open to a virt-pcie, but as others have pointed out it might be
+> easier to just make the switch now to the general board.
+>
+> > 6. No command line option is required.
+>
+> I don't see this being achievable unfortunately
+>
+
+I meant no command line configurability options for the machine
+itself. We probably should
+allow using different versions of the machine via command line.
+
+> > 7. Any other ?
+> >
+> > Once we have these policies in place, this can be the preferred virt
+> > machine and the current virt machine can be phased out or continue to
+> > co-exist
+> > as a more flexible experimental platform.
+> >
+> > Thoughts ?
+> >
+> > > Alistair
+> > >
+> > > >
+> > > > With regards,
+> > > > Daniel
+> > > > --
+> > > > |: https://berrange.com      -o-    https://www.flickr.com/photos/d=
+berrange :|
+> > > > |: https://libvirt.org         -o-            https://fstop138.berr=
+ange.com :|
+> > > > |: https://entangle-photo.org    -o-    https://www.instagram.com/d=
+berrange :|
+> > > >
+> >
+> >
+> >
+> > --
+> > Regards,
+> > Atish
+
+
+
+--=20
 Regards,
-
-Weiwei Li
-
->>>>            ISA_EDATA_ENTRY(zfh, ext_zfh),
->>>>            ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->>>>            ISA_EDATA_ENTRY(zfinx, ext_zfinx),
->>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>>> index f5ff7294c6..68177eae12 100644
->>>> --- a/target/riscv/cpu.h
->>>> +++ b/target/riscv/cpu.h
->>>> @@ -405,6 +405,7 @@ struct RISCVCPUConfig {
->>>>        bool ext_zhinxmin;
->>>>        bool ext_zve32f;
->>>>        bool ext_zve64f;
->>>> +    bool ext_zmmul;
->>>>
->>>>        uint32_t mvendorid;
->>>>        uint64_t marchid;
->>>> diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
->>>> index 16b029edf0..ec7f705aab 100644
->>>> --- a/target/riscv/insn_trans/trans_rvm.c.inc
->>>> +++ b/target/riscv/insn_trans/trans_rvm.c.inc
->>>> @@ -18,6 +18,12 @@
->>>>     * this program.  If not, see <http://www.gnu.org/licenses/>.
->>>>     */
->>>>
->>>> +#define REQUIRE_M_OR_ZMMUL(ctx) do {                      \
->>>> +    if (!ctx->cfg_ptr->ext_zmmul && !has_ext(ctx, RVM)) { \
->>>> +        return false;                                     \
->>>> +    }                                                     \
->>>> +} while (0)
->>>> +
->>>>    static void gen_mulhu_i128(TCGv r2, TCGv r3, TCGv al, TCGv ah, TCGv bl, TCGv bh)
->>>>    {
->>>>        TCGv tmpl = tcg_temp_new();
->>>> @@ -65,7 +71,7 @@ static void gen_mul_i128(TCGv rl, TCGv rh,
->>>>
->>>>    static bool trans_mul(DisasContext *ctx, arg_mul *a)
->>>>    {
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128);
->>>>    }
->>>>
->>>> @@ -109,7 +115,7 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
->>>>
->>>>    static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
->>>>    {
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
->>>>                                gen_mulh_i128);
->>>>    }
->>>> @@ -161,7 +167,7 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv arg2)
->>>>
->>>>    static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
->>>>    {
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w,
->>>>                                gen_mulhsu_i128);
->>>>    }
->>>> @@ -176,7 +182,7 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
->>>>
->>>>    static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
->>>>    {
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        /* gen_mulh_w works for either sign as input. */
->>>>        return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
->>>>                                gen_mulhu_i128);
->>>> @@ -349,7 +355,7 @@ static bool trans_remu(DisasContext *ctx, arg_remu *a)
->>>>    static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
->>>>    {
->>>>        REQUIRE_64_OR_128BIT(ctx);
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        ctx->ol = MXL_RV32;
->>>>        return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
->>>>    }
->>>> @@ -389,7 +395,7 @@ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
->>>>    static bool trans_muld(DisasContext *ctx, arg_muld *a)
->>>>    {
->>>>        REQUIRE_128BIT(ctx);
->>>> -    REQUIRE_EXT(ctx, RVM);
->>>> +    REQUIRE_M_OR_ZMMUL(ctx);
->>>>        ctx->ol = MXL_RV64;
->>>>        return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
->>>>    }
->>>> --
->>>> 2.17.1
->>>>
->>>>
-
---------------8F9916AEAE48DB5BC891310B
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">在 2022/5/24 上午5:15, Alistair Francis
-      写道:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">On Mon, May 23, 2022 at 6:10 PM Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-
-在 2022/5/23 下午2:34, Alistair Francis 写道:
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">On Wed, May 18, 2022 at 11:54 AM Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a> wrote:
-</pre>
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">  - includes all multiplication operations for M extension
-
-Signed-off-by: Weiwei Li <a class="moz-txt-link-rfc2396E" href="mailto:liweiwei@iscas.ac.cn">&lt;liweiwei@iscas.ac.cn&gt;</a>
-Signed-off-by: Junqiang Wang <a class="moz-txt-link-rfc2396E" href="mailto:wangjunqiang@iscas.ac.cn">&lt;wangjunqiang@iscas.ac.cn&gt;</a>
----
-  target/riscv/cpu.c                      |  2 ++
-  target/riscv/cpu.h                      |  1 +
-  target/riscv/insn_trans/trans_rvm.c.inc | 18 ++++++++++++------
-  3 files changed, 15 insertions(+), 6 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index e373c61ba2..01b57d3784 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -903,6 +903,7 @@ static Property riscv_cpu_properties[] = {
-
-      /* These are experimental so mark with 'x-' */
-      DEFINE_PROP_BOOL("x-j", RISCVCPU, cfg.ext_j, false),
-+    DEFINE_PROP_BOOL("x-zmmul", RISCVCPU, cfg.ext_zmmul, false),
-</pre>
-          </blockquote>
-          <pre class="moz-quote-pre" wrap="">Is this really experimental?
-
-Alistair
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-I think it's experimental currently. The zmmul version in latest riscv
-spec is v0.1, even though described as  v1.0 in spike README.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Hmm... Your right that it is only v0.1, but there is no indication of
-draft state in the RISC-V spec chapter on Zmmul
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Its specification status
-(<a class="moz-txt-link-freetext" href="https://wiki.riscv.org/display/home/specification+status">https://wiki.riscv.org/display/home/specification+status</a>) is Freeze
-Complete and TSC Sign-Off Voting.
-
-And It's not in the ratified extension
-list(<a class="moz-txt-link-freetext" href="https://wiki.riscv.org/display/home/recently+ratified+extensions">https://wiki.riscv.org/display/home/recently+ratified+extensions</a>).
-
-Any status update I missed?
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Confusing. Ok, I guess let's leave it as experimental, we can always
-remove the `x-` easily :)
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Regards,
-
-Weiwei Li
-
-</pre>
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">      /* ePMP 0.9.3 */
-      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
-@@ -1027,6 +1028,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-       *    extensions by an underscore.
-       */
-      struct isa_ext_data isa_edata_arr[] = {
-+        ISA_EDATA_ENTRY(zmmul, ext_zmmul),
-</pre>
-          </blockquote>
-        </blockquote>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-We should have some checks though. We don't want users to enable this
-and the multiply (M) extension
-
-
-Alistair
-</pre>
-    </blockquote>
-    <p>Maybe we can add a check like this:<font face="monospace"><span
-          style="color: #000000;"> <br>
-        </span></font></p>
-    <div style="color: #000000;background-color: #ffffff;font-family: 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback';font-weight: normal;font-size: 18px;line-height: 24px;white-space: pre;"><div><span style="color: #000000;">        </span><font color="#0e170a">/* M + Zmmul = Zmmul */</font></div><div><font color="#0e170a">        if (cpu-&gt;cfg.ext_m &amp;&amp; cpu-&gt;cfg.ext_zmmul) {</font></div><div><font color="#0e170a">            warn_report("Zmmul will override M");</font></div><div><font color="#0e170a">            cpu-&gt;cfg.ext_m = false;</font></div><div><font color="#0e170a">        }</font></div><div><span style="color: #000000;">
-</span></div></div>
-    <p><font face="monospace"><span style="color: #000000;"></span></font></p>
-    <p><font face="monospace"><span style="color: #000000;"></span></font></p>
-    <p><font face="monospace"><span style="color: #000000;">It seems OK
-          to enable both M and Zmmul in gnu toolchain. However, divide
-          operations</span></font></p>
-    <div>
-      <p><font face="monospace"><span style="color: #000000;">will be
-            disabled when Zmmul is enabled.</span></font></p>
-      <p><font face="monospace"><span style="color: #000000;">Regards,</span></font></p>
-      <p><font face="monospace"><span style="color: #000000;">Weiwei Li<br>
-          </span></font></p>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAKmqyKPBqGvvE1LLu3s3zHNYJqhT=OKD5tLU02gmKfPdsBcy8w@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">          ISA_EDATA_ENTRY(zfh, ext_zfh),
-          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
-          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f5ff7294c6..68177eae12 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -405,6 +405,7 @@ struct RISCVCPUConfig {
-      bool ext_zhinxmin;
-      bool ext_zve32f;
-      bool ext_zve64f;
-+    bool ext_zmmul;
-
-      uint32_t mvendorid;
-      uint64_t marchid;
-diff --git a/target/riscv/insn_trans/trans_rvm.c.inc b/target/riscv/insn_trans/trans_rvm.c.inc
-index 16b029edf0..ec7f705aab 100644
---- a/target/riscv/insn_trans/trans_rvm.c.inc
-+++ b/target/riscv/insn_trans/trans_rvm.c.inc
-@@ -18,6 +18,12 @@
-   * this program.  If not, see <a class="moz-txt-link-rfc2396E" href="http://www.gnu.org/licenses/">&lt;http://www.gnu.org/licenses/&gt;</a>.
-   */
-
-+#define REQUIRE_M_OR_ZMMUL(ctx) do {                      \
-+    if (!ctx-&gt;cfg_ptr-&gt;ext_zmmul &amp;&amp; !has_ext(ctx, RVM)) { \
-+        return false;                                     \
-+    }                                                     \
-+} while (0)
-+
-  static void gen_mulhu_i128(TCGv r2, TCGv r3, TCGv al, TCGv ah, TCGv bl, TCGv bh)
-  {
-      TCGv tmpl = tcg_temp_new();
-@@ -65,7 +71,7 @@ static void gen_mul_i128(TCGv rl, TCGv rh,
-
-  static bool trans_mul(DisasContext *ctx, arg_mul *a)
-  {
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, gen_mul_i128);
-  }
-
-@@ -109,7 +115,7 @@ static void gen_mulh_w(TCGv ret, TCGv s1, TCGv s2)
-
-  static bool trans_mulh(DisasContext *ctx, arg_mulh *a)
-  {
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      return gen_arith_per_ol(ctx, a, EXT_SIGN, gen_mulh, gen_mulh_w,
-                              gen_mulh_i128);
-  }
-@@ -161,7 +167,7 @@ static void gen_mulhsu_w(TCGv ret, TCGv arg1, TCGv arg2)
-
-  static bool trans_mulhsu(DisasContext *ctx, arg_mulhsu *a)
-  {
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      return gen_arith_per_ol(ctx, a, EXT_NONE, gen_mulhsu, gen_mulhsu_w,
-                              gen_mulhsu_i128);
-  }
-@@ -176,7 +182,7 @@ static void gen_mulhu(TCGv ret, TCGv s1, TCGv s2)
-
-  static bool trans_mulhu(DisasContext *ctx, arg_mulhu *a)
-  {
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      /* gen_mulh_w works for either sign as input. */
-      return gen_arith_per_ol(ctx, a, EXT_ZERO, gen_mulhu, gen_mulh_w,
-                              gen_mulhu_i128);
-@@ -349,7 +355,7 @@ static bool trans_remu(DisasContext *ctx, arg_remu *a)
-  static bool trans_mulw(DisasContext *ctx, arg_mulw *a)
-  {
-      REQUIRE_64_OR_128BIT(ctx);
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      ctx-&gt;ol = MXL_RV32;
-      return gen_arith(ctx, a, EXT_NONE, tcg_gen_mul_tl, NULL);
-  }
-@@ -389,7 +395,7 @@ static bool trans_remuw(DisasContext *ctx, arg_remuw *a)
-  static bool trans_muld(DisasContext *ctx, arg_muld *a)
-  {
-      REQUIRE_128BIT(ctx);
--    REQUIRE_EXT(ctx, RVM);
-+    REQUIRE_M_OR_ZMMUL(ctx);
-      ctx-&gt;ol = MXL_RV64;
-      return gen_arith(ctx, a, EXT_SIGN, tcg_gen_mul_tl, NULL);
-  }
---
-2.17.1
-
-
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-</pre>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------8F9916AEAE48DB5BC891310B--
-
+Atish
 
