@@ -1,37 +1,37 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ntnjT-0006A1-3q
-	for mharc-qemu-riscv@gnu.org; Wed, 25 May 2022 05:55:11 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39566)
+	id 1ntnjZ-0006C1-CQ
+	for mharc-qemu-riscv@gnu.org; Wed, 25 May 2022 05:55:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39524)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1ntnjP-00066G-Uv; Wed, 25 May 2022 05:55:08 -0400
+ id 1ntnjO-00066B-C7; Wed, 25 May 2022 05:55:08 -0400
 Received: from mail-sender-0.a4lg.com
- ([2401:2500:203:30b:4000:6bfe:4757:0]:49148)
+ ([2401:2500:203:30b:4000:6bfe:4757:0]:49130)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1ntnjM-0002aR-Nj; Wed, 25 May 2022 05:55:07 -0400
+ id 1ntnjL-0002YU-GN; Wed, 25 May 2022 05:55:06 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 8372730008B;
- Wed, 25 May 2022 09:55:02 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 81C01300089;
+ Wed, 25 May 2022 09:54:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1653472502;
- bh=67rPDAiiMvEDPbbVTsoA3204Mz7B1mKAW3WzsDE/Hjc=;
+ s=2017s01; t=1653472491;
+ bh=aPT907jUC1fOJnRcxI2P8RDobjdc7uAzY01nZ1acQ1g=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=bMGJLqypIJwo2d0bnLnuICd98OZ8lcxmvQs0u7rA2U9qbVMtKQctDq5EgFshKuFve
- zITZZot7wRxPH1O2N2wMd6IxTIiyJY1ETPnw35+NngxVQ/8hvMXmb6no+a63j1VCp7
- YsU5hAtJRv7sdee7lPjeUP2uRjI4LTirglmfG7pU=
+ b=tAXooULk68VTdqYlCHPrfPB7IbGMSh8pqxOn2yGJkV4ikH3zYWPuvSyqM6cXLN6Hc
+ hymktV/k8x1bi1PT53rrcW0BHgiSlSBqKeFCa8q+UsbKmOjwkCyYtmZrENr6jP/ZaU
+ VLV2U84eMdKQWGnr7rbh7Ax70epv4aAjdLD8rGj4=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v2 2/3] target/riscv: Make CPU property names lowercase
-Date: Wed, 25 May 2022 18:54:42 +0900
-Message-Id: <dd7579a2a8b81632827d42a137c7f7720cc7ab5f.1653472385.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <cover.1653472385.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v2 0/3] target/riscv: Make CPU property names lowercase (w/
+ capitalized aliases)
+Date: Wed, 25 May 2022 18:54:40 +0900
+Message-Id: <cover.1653472385.git.research_trasio@irq.a4lg.com>
+In-Reply-To: <cover.1652435208.git.research_trasio@irq.a4lg.com>
 References: <cover.1652435208.git.research_trasio@irq.a4lg.com>
- <cover.1653472385.git.research_trasio@irq.a4lg.com>
 Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2401:2500:203:30b:4000:6bfe:4757:0;
@@ -54,94 +54,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2022 09:55:09 -0000
+X-List-Received-Date: Wed, 25 May 2022 09:55:08 -0000
 
-Many CPU properties for RISC-V are in lowercase except those with
-"capitalized" (or CamelCase) names:
+v1:
+<https://lists.gnu.org/archive/html/qemu-riscv/2022-05/msg00227.html>
 
--   Counters
--   Zifencei
--   Zicsr
--   Zfh
--   Zfhmin
--   Zve32f
--   Zve64f
+Hello,
 
-This commit makes lowercase names primary but keeps capitalized names
-as aliases (for backward comatibility, but with deprecated status).
+This is a refined version of the patch to RISC-V CPU property names.
+See v1 for background.
 
-Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
----
- target/riscv/cpu.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
+[Changes: RFC PATCH (v1) -> PATCH v2]
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3f21563f2d..83262586e4 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -840,6 +840,10 @@ static void riscv_cpu_init(Object *obj)
- }
- 
- static Property riscv_cpu_properties[] = {
-+    /*
-+     * Names for ISA extensions and features should be in lowercase.
-+     */
-+
-     /* Base ISA and single-letter standard extensions */
-     DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
-     DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
-@@ -855,11 +859,11 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
- 
-     /* Standard unprivileged extensions */
--    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
--    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-+    DEFINE_PROP_BOOL("zicsr", RISCVCPU, cfg.ext_icsr, true),
-+    DEFINE_PROP_BOOL("zifencei", RISCVCPU, cfg.ext_ifencei, true),
- 
--    DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
--    DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-+    DEFINE_PROP_BOOL("zfh", RISCVCPU, cfg.ext_zfh, false),
-+    DEFINE_PROP_BOOL("zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-     DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
-     DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
-     DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
-@@ -884,8 +888,8 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
-     DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
- 
--    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
--    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-+    DEFINE_PROP_BOOL("zve32f", RISCVCPU, cfg.ext_zve32f, false),
-+    DEFINE_PROP_BOOL("zve64f", RISCVCPU, cfg.ext_zve64f, false),
- 
-     /* Standard supervisor-level extensions */
-     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-@@ -893,7 +897,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
- 
-     /* Base features */
--    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-+    DEFINE_PROP_BOOL("counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-@@ -922,6 +926,15 @@ static Property riscv_cpu_properties[] = {
-     /* Other options */
-     DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
- 
-+    /* Capitalized aliases (deprecated and will be removed) */
-+    DEFINE_PROP("Counters", RISCVCPU, cfg.ext_counters, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zifencei", RISCVCPU, cfg.ext_ifencei, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zicsr", RISCVCPU, cfg.ext_icsr, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zfh", RISCVCPU, cfg.ext_zfh, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zfhmin", RISCVCPU, cfg.ext_zfhmin, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zve32f", RISCVCPU, cfg.ext_zve32f, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zve64f", RISCVCPU, cfg.ext_zve64f, qdev_prop_bool, bool),
-+
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
+-   Reorganized all properties for clarity and extensibility
+    (PATCH 1/3, not actually a point of this patchset but worth doing)
+-   Reworded for correctness and clarity
+    (it's the first time for me to use Grammarly)
+-   Added a deprecation note to documentation (PATCH 3/3)
+
+[RFC: PATCH 3/3]
+
+1. Which is a better section to add a deprecation note?
+
+-   "System emulator command line arguments" or
+-   A new section under "Device options" (THIS PATCH)
+
+2. Is it okay to use the word "7.1" (an unreleased version number)?
+
+
+
+
+Tsukasa OI (3):
+  target/riscv: Reorganize riscv_cpu_properties
+  target/riscv: Make CPU property names lowercase
+  target/riscv: Deprecate capitalized property names
+
+ docs/about/deprecated.rst | 10 +++++
+ target/riscv/cpu.c        | 79 +++++++++++++++++++++++++--------------
+ 2 files changed, 61 insertions(+), 28 deletions(-)
+
+
+base-commit: 0cac736e73723850a99e5142e35d14d8f8efb232
 -- 
 2.34.1
 
