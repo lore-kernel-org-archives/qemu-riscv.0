@@ -1,77 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nuANq-0007er-Ij
-	for mharc-qemu-riscv@gnu.org; Thu, 26 May 2022 06:06:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49088)
+	id 1nuAPc-0001Vp-JG
+	for mharc-qemu-riscv@gnu.org; Thu, 26 May 2022 06:08:12 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49642)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nuANa-0007Wx-8v
- for qemu-riscv@nongnu.org; Thu, 26 May 2022 06:06:11 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:55210)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nuAPb-0001V5-W3
+ for qemu-riscv@nongnu.org; Thu, 26 May 2022 06:08:12 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329]:37471)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
- id 1nuANY-0000tJ-L4
- for qemu-riscv@nongnu.org; Thu, 26 May 2022 06:06:06 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id cv10so1329873pjb.4
- for <qemu-riscv@nongnu.org>; Thu, 26 May 2022 03:06:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nuAPY-0001GG-Gz
+ for qemu-riscv@nongnu.org; Thu, 26 May 2022 06:08:11 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ i9-20020a1c3b09000000b003974edd7c56so62556wma.2
+ for <qemu-riscv@nongnu.org>; Thu, 26 May 2022 03:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=LdhJ+CzqwO9act42e+Xaxnx8iyy+fkBBxBLgmWQJtgQ=;
- b=Vh4rBeHncB9dp6KVTnDRxwLLBVmQbFdHpi/+2q4Ho19sQqiIjD3rebIK8ASzTS4Nvw
- b/sJAARUR/WPMz9Ew3pDmuJV/cMub7Y7xNADQFeevkAajP3fffxeEotvNtv/PbKNCYD7
- YVv0OrQLi09Y/tKJ2Y/rZY0neqQtMaKePk1LJqqe5+qRg69zurkJECDJUDdckT8WgOl4
- 6H/khiFcSasnlDdFYtqnkHC5Ji9yFR9cVPQgWlJVe2CvKNe+ZzGGxZqQVOP8+VHyWOET
- CEW3eS+nQ/UTjPhG+S5ZV1HFP7MARV5Zw3nMwWmKKpcPGlhmlp5rAEHbAvgaKzF20wRY
- GJOQ==
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Mex3jujLcFnHOX0MHAdq1ojjhSaZFUjaYYrvdwZkXL0=;
+ b=IeDnkAFcO+lZOsReTVSfivd8O0/LR/mrtoCdFdrwtRLfYH8rs7NMuph467MMP/cq5E
+ UsYNCxrKb6xMBvo3gMS11JMiftpoBfjYXGtRdzaQ3qSIH5vMtt8nWu0V8fzZTgZXdM5t
+ xngZ2iFsgRGqJVYNEUI8Mtai0ffwveC3ulkI50V1aWM7XPmehI3MpPNb0EZA8B6gFbTD
+ jbHQCpGLVX7mhWivBlRIFohYNTfWc2mODzMjsKHhhh6DtDVWBV4AG7+ext82ZD+XzJDK
+ 9ae6YIpRvpf5oVl1HR6u4PMxKpEEoie7SrzGrVpzVGiY5Vn9HbntuInt1W46Aj7rxXs8
+ +Wcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=LdhJ+CzqwO9act42e+Xaxnx8iyy+fkBBxBLgmWQJtgQ=;
- b=8CENppieMjno5SNw7gMv57HfgrlZDUWmgNmUV3odHZpKVwQAndlOp7RNyJmgG+ZcGt
- 40ptR79+PJXUNwRnRmSxhNjLkIlf+fMiU4d0vPAATZ5V0mRlMNBZAkESytizBrFgJ67R
- 0Hw2FixnhUp/BfgEZm4AWB2761lyJT4O1DAC8gTemxjk/urJhKAWcwwBccUfTqhpWa95
- /VZgJl1onGSLKuRFZHgh+fD+S+6xAAg8ckGDvg3qA56Yg73UWEtq5bfooH7SZ4wNe68y
- OlOYMbHOqRQ146TJSUhZDRm8/JWTM2KYGN3M2tlo+SjjJ8HToqJ9aBcGyhAejuTl0yE6
- bOaQ==
-X-Gm-Message-State: AOAM5320kwCsZFQ7ZbSW22y1QSLtuqNCAsxHGgXmDx13EnmUrupqgzPM
- vscqWumnHe5PGe5/r1pftno8n49f41haCg==
-X-Google-Smtp-Source: ABdhPJyR2+IC2JnyWqD1D91aE7QlZAaCwEjL0+eFJWq7DkRJX9QBRE2B0bQNh44Ll3zXdLI0HI7wDQ==
-X-Received: by 2002:a17:902:bf04:b0:149:c5a5:5323 with SMTP id
- bi4-20020a170902bf0400b00149c5a55323mr37265235plb.97.1653559563812; 
- Thu, 26 May 2022 03:06:03 -0700 (PDT)
-Received: from anup-ubuntu64-vm.. ([171.76.94.60])
- by smtp.gmail.com with ESMTPSA id
- x26-20020aa793ba000000b0050dc76281e5sm1020126pff.191.2022.05.26.03.05.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 May 2022 03:06:03 -0700 (PDT)
-From: Anup Patel <apatel@ventanamicro.com>
-To: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>
-Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Anup Patel <apatel@ventanamicro.com>
-Subject: [PATCH v3 4/4] target/riscv: Force disable extensions if priv spec
- version does not match
-Date: Thu, 26 May 2022 15:35:36 +0530
-Message-Id: <20220526100536.49672-5-apatel@ventanamicro.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220526100536.49672-1-apatel@ventanamicro.com>
-References: <20220526100536.49672-1-apatel@ventanamicro.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Mex3jujLcFnHOX0MHAdq1ojjhSaZFUjaYYrvdwZkXL0=;
+ b=p69cCIIsQ6eGhy441R6b0QFVFzjHV5HPnG8BTBYB+P7/pIml7wIfOCtgEXVoQhSuO6
+ Qql1ObeKWiRJK/220/kCDQOS9P0EGPFysr06+VU6PaX4uLlnLaB9jI96a5E0pL8lJY5n
+ ef/IDzBMM28oRBwXa5Jpu7BNyyl4GnCjtT/VfNMLvLXEsypwwC0qHjbg0XNoLtufTe89
+ QQXu77No3f2VM9N+YhXVmKYmCohpbjai+nQK2105d0ToaWbn1qGnIg1rEmjDpQRhK30d
+ f20liN6xEa5dfKQi7eODByx4l53ArvcZ1fb1bNTB4vPtxmxcLEr4qniHkdiT5Nw8lZ7T
+ OkKA==
+X-Gm-Message-State: AOAM532AIH88VHtfop9AK9NQStofHMFiP0oBlt21dYvo+rjy7g17ea1/
+ M2VYI4w71UIJ97wkt+8PJK1RcBIv4jrd6HN7cFaTlA==
+X-Google-Smtp-Source: ABdhPJwV8Oo7ctLu9L2jSzpIUGh8R4Xr/2B0JI1AZhdpA11hLUw7Z4B6tf+aY7fQNI2Sxs06g8xQLkXqrwxkB5Nkt34=
+X-Received: by 2002:a05:600c:5112:b0:397:53f5:e15b with SMTP id
+ o18-20020a05600c511200b0039753f5e15bmr1635053wms.93.1653559686754; Thu, 26
+ May 2022 03:08:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x102c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220526084240.31298-1-nikita.shubin@maquefel.me>
+In-Reply-To: <20220526084240.31298-1-nikita.shubin@maquefel.me>
+From: Anup Patel <anup@brainfault.org>
+Date: Thu, 26 May 2022 15:37:54 +0530
+Message-ID: <CAAhSdy0YOp8RY+V1hzf9KcdpEnVZpB5PuuSODDgpQ41GChMjxA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix priv enum
+To: Nikita Shubin <nikita.shubin@maquefel.me>
+Cc: Atish Patra <atishp@rivosinc.com>, linux <linux@yadro.com>, 
+ Nikita Shubin <n.shubin@yadro.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ QEMU Developers <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: none client-ip=2a00:1450:4864:20::329;
+ envelope-from=anup@brainfault.org; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,119 +75,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2022 10:06:14 -0000
+X-List-Received-Date: Thu, 26 May 2022 10:08:12 -0000
 
-We should disable extensions in riscv_cpu_realize() if minimum required
-priv spec version is not satisfied. This also ensures that machines with
-priv spec v1.11 (or lower) cannot enable H, V, and various multi-letter
-extensions.
+On Thu, May 26, 2022 at 2:15 PM Nikita Shubin <nikita.shubin@maquefel.me> wrote:
+>
+> From: Nikita Shubin <n.shubin@yadro.com>
+>
+> Add PRIV_VERSION_UNKNOWN to enum, otherwise PRIV_VERSION_1_10_0 will
+> be overwritten to PRIV_VERSION_1_12_0 in riscv_cpu_realize.
+>
+> Fixes: a46d410c5c ("target/riscv: Define simpler privileged spec version numbering")
+> Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
 
-Fixes: a775398be2e ("target/riscv: Add isa extenstion strings to the
-device tree")
-Signed-off-by: Anup Patel <apatel@ventanamicro.com>
----
- target/riscv/cpu.c | 56 +++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 51 insertions(+), 5 deletions(-)
+This breaks the CSR ops table because with this patch most CSRs
+(not having explicit min_priv_version value) will be associated with
+an unknown priv spec version.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b086eb25da..e6e878ceb3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -43,9 +43,13 @@ static const char riscv_single_letter_exts[] = "IEMAFDQCPVH";
- 
- struct isa_ext_data {
-     const char *name;
--    bool enabled;
-+    int min_version;
-+    bool *enabled;
- };
- 
-+#define ISA_EDATA_ENTRY(name, prop) {#name, PRIV_VERSION_1_10_0, &cpu->cfg.prop}
-+#define ISA_EDATA_ENTRY2(name, min_ver, prop) {#name, min_ver, &cpu->cfg.prop}
-+
- const char * const riscv_int_regnames[] = {
-   "x0/zero", "x1/ra",  "x2/sp",  "x3/gp",  "x4/tp",  "x5/t0",   "x6/t1",
-   "x7/t2",   "x8/s0",  "x9/s1",  "x10/a0", "x11/a1", "x12/a2",  "x13/a3",
-@@ -513,8 +517,42 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     CPURISCVState *env = &cpu->env;
-     RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(dev);
-     CPUClass *cc = CPU_CLASS(mcc);
--    int priv_version = -1;
-+    int i, priv_version = -1;
-     Error *local_err = NULL;
-+    struct isa_ext_data isa_edata_arr[] = {
-+        ISA_EDATA_ENTRY2(h, PRIV_VERSION_1_12_0, ext_h),
-+        ISA_EDATA_ENTRY2(v, PRIV_VERSION_1_12_0, ext_v),
-+        ISA_EDATA_ENTRY2(zicsr, PRIV_VERSION_1_10_0, ext_icsr),
-+        ISA_EDATA_ENTRY2(zifencei, PRIV_VERSION_1_10_0, ext_ifencei),
-+        ISA_EDATA_ENTRY2(zfh, PRIV_VERSION_1_12_0, ext_zfh),
-+        ISA_EDATA_ENTRY2(zfhmin, PRIV_VERSION_1_12_0, ext_zfhmin),
-+        ISA_EDATA_ENTRY2(zfinx, PRIV_VERSION_1_12_0, ext_zfinx),
-+        ISA_EDATA_ENTRY2(zdinx, PRIV_VERSION_1_12_0, ext_zdinx),
-+        ISA_EDATA_ENTRY2(zba, PRIV_VERSION_1_12_0, ext_zba),
-+        ISA_EDATA_ENTRY2(zbb, PRIV_VERSION_1_12_0, ext_zbb),
-+        ISA_EDATA_ENTRY2(zbc, PRIV_VERSION_1_12_0, ext_zbc),
-+        ISA_EDATA_ENTRY2(zbkb, PRIV_VERSION_1_12_0, ext_zbkb),
-+        ISA_EDATA_ENTRY2(zbkc, PRIV_VERSION_1_12_0, ext_zbkc),
-+        ISA_EDATA_ENTRY2(zbkx, PRIV_VERSION_1_12_0, ext_zbkx),
-+        ISA_EDATA_ENTRY2(zbs, PRIV_VERSION_1_12_0, ext_zbs),
-+        ISA_EDATA_ENTRY2(zk, PRIV_VERSION_1_12_0, ext_zk),
-+        ISA_EDATA_ENTRY2(zkn, PRIV_VERSION_1_12_0, ext_zkn),
-+        ISA_EDATA_ENTRY2(zknd, PRIV_VERSION_1_12_0, ext_zknd),
-+        ISA_EDATA_ENTRY2(zkne, PRIV_VERSION_1_12_0, ext_zkne),
-+        ISA_EDATA_ENTRY2(zknh, PRIV_VERSION_1_12_0, ext_zknh),
-+        ISA_EDATA_ENTRY2(zkr, PRIV_VERSION_1_12_0, ext_zkr),
-+        ISA_EDATA_ENTRY2(zks, PRIV_VERSION_1_12_0, ext_zks),
-+        ISA_EDATA_ENTRY2(zksed, PRIV_VERSION_1_12_0, ext_zksed),
-+        ISA_EDATA_ENTRY2(zksh, PRIV_VERSION_1_12_0, ext_zksh),
-+        ISA_EDATA_ENTRY2(zkt, PRIV_VERSION_1_12_0, ext_zkt),
-+        ISA_EDATA_ENTRY2(zve32f, PRIV_VERSION_1_12_0, ext_zve32f),
-+        ISA_EDATA_ENTRY2(zve64f, PRIV_VERSION_1_12_0, ext_zve64f),
-+        ISA_EDATA_ENTRY2(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
-+        ISA_EDATA_ENTRY2(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
-+        ISA_EDATA_ENTRY2(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-+        ISA_EDATA_ENTRY2(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-+        ISA_EDATA_ENTRY2(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-+    };
- 
-     cpu_exec_realizefn(cs, &local_err);
-     if (local_err != NULL) {
-@@ -541,6 +579,16 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-         set_priv_version(env, priv_version);
-     }
- 
-+    /* Force disable extensions if priv spec version does not match */
-+    for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
-+        if (*isa_edata_arr[i].enabled &&
-+            (env->priv_ver < isa_edata_arr[i].min_version)) {
-+            *isa_edata_arr[i].enabled = false;
-+            warn_report("privilege spec version does not match for %s extension",
-+                        isa_edata_arr[i].name);
-+        }
-+    }
-+
-     if (cpu->cfg.mmu) {
-         riscv_set_feature(env, RISCV_FEATURE_MMU);
-     }
-@@ -1005,8 +1053,6 @@ static void riscv_cpu_class_init(ObjectClass *c, void *data)
-     device_class_set_props(dc, riscv_cpu_properties);
- }
- 
--#define ISA_EDATA_ENTRY(name, prop) {#name, cpu->cfg.prop}
--
- static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
- {
-     char *old = *isa_str;
-@@ -1064,7 +1110,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
-     };
- 
-     for (i = 0; i < ARRAY_SIZE(isa_edata_arr); i++) {
--        if (isa_edata_arr[i].enabled) {
-+        if (*isa_edata_arr[i].enabled) {
-             new = g_strconcat(old, "_", isa_edata_arr[i].name, NULL);
-             g_free(old);
-             old = new;
--- 
-2.34.1
+Please check "[PATCH v3 1/4] target/riscv: Don't force update priv spec
+version to latest" which I just sent.
 
+Thanks,
+Anup
+
+
+> ---
+>  target/riscv/cpu.h | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index f08c3e8813..1f1d6589a7 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -91,7 +91,8 @@ enum {
+>
+>  /* Privileged specification version */
+>  enum {
+> -    PRIV_VERSION_1_10_0 = 0,
+> +    PRIV_VERSION_UNKNOWN = 0,
+> +    PRIV_VERSION_1_10_0,
+>      PRIV_VERSION_1_11_0,
+>      PRIV_VERSION_1_12_0,
+>  };
+> --
+> 2.35.1
+>
+>
 
