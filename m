@@ -1,63 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nw1jZ-0007G8-Is
-	for mharc-qemu-riscv@gnu.org; Tue, 31 May 2022 09:16:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45798)
+	id 1nw6DQ-0002oV-ER
+	for mharc-qemu-riscv@gnu.org; Tue, 31 May 2022 14:03:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40940)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <robert.bu@gmail.com>)
- id 1nvvd5-0000wc-Jr
- for qemu-riscv@nongnu.org; Tue, 31 May 2022 02:45:23 -0400
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e]:45282)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nw6DO-0002kk-5w
+ for qemu-riscv@nongnu.org; Tue, 31 May 2022 14:03:34 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:34394)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <robert.bu@gmail.com>)
- id 1nvvd3-0008Bz-VJ
- for qemu-riscv@nongnu.org; Tue, 31 May 2022 02:45:23 -0400
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-300628e76f3so128750767b3.12
- for <qemu-riscv@nongnu.org>; Mon, 30 May 2022 23:45:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:from:date:message-id:subject:to:cc;
- bh=MIJJ2ytrYrApV4nTqihFyKY45gBwckDL+3oNhB/fuRw=;
- b=OoucIUHU/pPbM/oPXC5ME8qbZ/aVFp51aafaYSyKOyQRkmwQZxh6U4yRL6IC0BGVvf
- P/at7CcKhbfW1e1Y+pVXNePRA+GDjgZhT2kRfaMD8RbXPu4Gnpq7ZcdAAfuIfWF2z0mL
- l5xQEHN5gEl59XlEmv4Yg/6L15nsyqoAhipunsQOJUbeuAz/R0smiKf0sPONcHuBik1n
- H7j7or7DXJdQbolveUfI7pMXw1gJTrve0NX3pEQEsqaG6cEc1YfkZXhbOIYoL9W/kn5m
- rFvo6z5jJ1Hx2PM8lAaFjxjPXGrHWJRqZhnRAyg+fAZ/c+YDrzRbRU9zXPLtSKPCuuEJ
- 7Brg==
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1nw6DK-0003aa-WA
+ for qemu-riscv@nongnu.org; Tue, 31 May 2022 14:03:33 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id n8so13544586plh.1
+ for <qemu-riscv@nongnu.org>; Tue, 31 May 2022 11:03:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8piZKU/xCQQBfl87LVUfbrnS70UiGjhb6yXz25ReMYE=;
+ b=s5MxGNJWAoGE7TzfxhJDM9+hfWvXEGrvfgLQ9GdptEa9bz/J7o5IkkLsi+NTULYinf
+ 2EmgT+P2l9kqAYD1vZ1wFwDyFcVvXgq1142LjTbpoeOOyd4ohSzLAPmMdSM4ZcKOWpKf
+ DEogsyX+dxat+TAxCHZGruViZZiFujnYM3jrVZ5GUue+edlc6aLkd0Of8ltUs2tq9CNa
+ 3nmil9hoW1/Bk6/33f9vzSQo0JPjXNonBz9+qEgyo9hiVGJzdWpxR7B9lHrqoSA9DEV/
+ P8EE26YrCpU1AEGnfPMvaWMLNhMSotZT/A4riqxnE2L7ejUmEyqviZ7HTluhHIKkEqIH
+ qZlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
- bh=MIJJ2ytrYrApV4nTqihFyKY45gBwckDL+3oNhB/fuRw=;
- b=MyzY0YQlV/blX+H7Na+MA6H3aN47K3KGkXRnFhJBAKG0v5tYO34/NM6eIu+Qd4AInJ
- uzogSMt4zNusuOouXO9eLF2fakBJlq7RyJq2+fSTnjaU5BUzA689nFpo84r+fAnZpYot
- j/RMblgHnhGv6Ylg38daVudgkN5glnF6bPONQKxvifOi4xfN2t3PPrQLERjPDKZCVyzJ
- hmWFSIw+WVGDBWPBN8p7hF1eEovy7Guo67owE74ihXMGZ1p/bNX1uq5oeQmO9ijTYhny
- n9mpmqHzO6B+BauC2bMC4CboXiT7mVXRZwtlRgMqiyYIzWF+GaHRJIEtzRPrFZ34zhnj
- yRPg==
-X-Gm-Message-State: AOAM533xuMZVJZsNwmyJS3dzB1XtlNvw3oSLHeepQo9hqo1NStDPwfB8
- qeQ0AEnBC0G8v89ux0z/qTkgMLhlghFFXIsGihs=
-X-Google-Smtp-Source: ABdhPJy+AnR97c4z8bTV9jMBVav2mB5QMHu2OSuQnY5q5I8F4QdmcUbjGsciGvjzg79WUe9Fzup6IK5tmWZ+pnLDnsI=
-X-Received: by 2002:a05:690c:3a1:b0:2ff:1377:3b9 with SMTP id
- bh33-20020a05690c03a100b002ff137703b9mr62724190ywb.340.1653979520457; Mon, 30
- May 2022 23:45:20 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=8piZKU/xCQQBfl87LVUfbrnS70UiGjhb6yXz25ReMYE=;
+ b=CQG83eIk6vFaAc+0Bpc23pkGgpV2jHeLqwBtDVBe3/CBohdKMAoZ4gEqervLWz8B+d
+ KbFpmSr14MlC42fhj+psnu3q7zcphfpZtqJ1/R66TwAoxUCvPsbfL7cjA+uCbe2pf3AA
+ 1CkUffuZz4zs4DRBC7g8yRUIsWhon0qY8/nvcmRYe9D+DyC2W9EA1NG5XqlTORB7Za7Z
+ 34G/HyYHgrQOjHest1Df5T1XO9KVKl1kys1HEnzxg0THx1tckpIhByDnw7ACDPf9Da6Q
+ Url4VjaeHh3Gx9NBuwQ+zXvkpAanIWd7/BTaDYl/iPMpRDYJntYqRSbUpfrAzk6lKQps
+ kQJA==
+X-Gm-Message-State: AOAM533lB/DrzkNv4hBC8XVyR2em0zDzS/PeLyHo794pIcQbjxS7AgbY
+ tLX0pzaJ0tBfILhiPRBYwayCmQ==
+X-Google-Smtp-Source: ABdhPJykD9gZglr1RkqjvWu7YxxYW6wi7iW3eT7t+n3XK0TI1gRKi1a0qG7Ikhf6LQARfF44eIZycQ==
+X-Received: by 2002:a17:903:11d0:b0:155:c240:a2c0 with SMTP id
+ q16-20020a17090311d000b00155c240a2c0mr62005475plh.143.1654020208529; 
+ Tue, 31 May 2022 11:03:28 -0700 (PDT)
+Received: from atishp.ba.rivosinc.com ([66.220.2.162])
+ by smtp.gmail.com with ESMTPSA id
+ s12-20020a632c0c000000b003f5e0c264bcsm10746611pgs.66.2022.05.31.11.03.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 May 2022 11:03:27 -0700 (PDT)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v5  0/3] Implement Sstc extension 
+Date: Tue, 31 May 2022 11:03:18 -0700
+Message-Id: <20220531180321.34942-1-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Robert Bu <robert.bu@gmail.com>
-Date: Tue, 31 May 2022 14:45:09 +0800
-Message-ID: <CAMSqtnyQ3On5SA41kmWa7Eb1S-zvZfET9n8-fBPSV06ZrFRxYg@mail.gmail.com>
-Subject: [PATCH] qemu: riscv: rvv: fix vmv.v.x for RV32, el64, vl == vl_max
-To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com
-Cc: qemu-riscv@nongnu.org
-Content-Type: multipart/mixed; boundary="000000000000c87d5e05e0491d17"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=robert.bu@gmail.com; helo=mail-yw1-x112e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=atishp@rivosinc.com; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 31 May 2022 09:16:28 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,48 +78,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2022 06:45:23 -0000
+X-List-Received-Date: Tue, 31 May 2022 18:03:34 -0000
 
---000000000000c87d5e05e0491d17
-Content-Type: text/plain; charset="UTF-8"
+This series implements Sstc extension[1] which was ratified recently.
 
+The first patch is a prepartory patches while PATCH 2 adds stimecmp
+support while PATCH 3 adds vstimecmp support. This series is based on
+on top of upstream commit (faee5441a038).
 
+The series can also be found at
+https://github.com/atishp04/qemu/tree/sstc_v5
 
---000000000000c87d5e05e0491d17
-Content-Type: text/plain; charset="US-ASCII"; 
-	name="0001-qemu-riscv-rvv-fix-vmv.v.x-for-RV32-el64-vl-vl_max.patch"
-Content-Disposition: attachment; 
-	filename="0001-qemu-riscv-rvv-fix-vmv.v.x-for-RV32-el64-vl-vl_max.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_l3tsmvlz0>
-X-Attachment-Id: f_l3tsmvlz0
+It is tested on RV32 & RV64 with latest OpenSBI & Linux kernel[2]
+patches. It does require the mcountinhibit support patch from PMU series[3]
+or dummy one from Anup's series [4]. Otherwise, OpenSBI doesn't detect v1.12
+priv version.
 
-RnJvbSA2MTk4ZjU4N2YxNGY4NzczMzQzZGRlZDgzYjZjMGVkZmQ3ZGJmODhlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBSb2JlcnQgQnUgPHJvYmVydF9idUBnbWFpbC5jb20+CkRhdGU6
-IFdlZCwgMTggTWF5IDIwMjIgMDk6MDg6NTIgKzA4MDAKU3ViamVjdDogW1BBVENIXSBxZW11OiBy
-aXNjdjogcnZ2OiBmaXggdm12LnYueCBmb3IgUlYzMiwgZWw2NCwgdmwgPT0gdmxfbWF4CgpTaWdu
-ZWQtb2ZmLWJ5OiBSb2JlcnQgQnUgPHJvYmVydC5idUBnbWFpbC5jb20+Ci0tLQogdGFyZ2V0L3Jp
-c2N2L2luc25fdHJhbnMvdHJhbnNfcnZ2LmMuaW5jIHwgMTIgKysrKysrKysrKy0tCiAxIGZpbGUg
-Y2hhbmdlZCwgMTAgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90
-YXJnZXQvcmlzY3YvaW5zbl90cmFucy90cmFuc19ydnYuYy5pbmMgYi90YXJnZXQvcmlzY3YvaW5z
-bl90cmFucy90cmFuc19ydnYuYy5pbmMKaW5kZXggMzkxYzYxZmU5My4uNmIyN2Q4ZTkxZSAxMDA2
-NDQKLS0tIGEvdGFyZ2V0L3Jpc2N2L2luc25fdHJhbnMvdHJhbnNfcnZ2LmMuaW5jCisrKyBiL3Rh
-cmdldC9yaXNjdi9pbnNuX3RyYW5zL3RyYW5zX3J2di5jLmluYwpAQCAtMjA5Nyw4ICsyMDk3LDE2
-IEBAIHN0YXRpYyBib29sIHRyYW5zX3Ztdl92X3goRGlzYXNDb250ZXh0ICpzLCBhcmdfdm12X3Zf
-eCAqYSkKICAgICAgICAgczEgPSBnZXRfZ3ByKHMsIGEtPnJzMSwgRVhUX1NJR04pOwogCiAgICAg
-ICAgIGlmIChzLT52bF9lcV92bG1heCkgewotICAgICAgICAgICAgdGNnX2dlbl9ndmVjX2R1cF90
-bChzLT5zZXcsIHZyZWdfb2ZzKHMsIGEtPnJkKSwKLSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgTUFYU1oocyksIE1BWFNaKHMpLCBzMSk7CisgICAgICAgICAgICBpZiAoZ2V0X3hsKHMp
-ID09IE1YTF9SVjMyICYmIHMtPnNldyA9PSBNT182NCkgeworICAgICAgICAgICAgICAgIFRDR3Zf
-aTY0IHMxX2k2NCA9IHRjZ190ZW1wX25ld19pNjQoKTsKKyAgICAgICAgICAgICAgICB0Y2dfZ2Vu
-X2V4dF90bF9pNjQoczFfaTY0LCBzMSk7CisgICAgICAgICAgICAgICAgdGNnX2dlbl9ndmVjX2R1
-cF9pNjQocy0+c2V3LCB2cmVnX29mcyhzLCBhLT5yZCksCisgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgTUFYU1oocyksIE1BWFNaKHMpLCBzMV9pNjQpOworICAgICAgICAgICAg
-ICAgIHRjZ190ZW1wX2ZyZWVfaTY0KHMxX2k2NCk7CisgICAgICAgICAgICB9IGVsc2UgeworICAg
-ICAgICAgICAgICAgIHRjZ19nZW5fZ3ZlY19kdXBfdGwocy0+c2V3LCB2cmVnX29mcyhzLCBhLT5y
-ZCksCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBNQVhTWihzKSwgTUFYU1oo
-cyksIHMxKTsKKyAgICAgICAgICAgIH0KICAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgIFRD
-R3ZfaTMyIGRlc2M7CiAgICAgICAgICAgICBUQ0d2X2k2NCBzMV9pNjQgPSB0Y2dfdGVtcF9uZXdf
-aTY0KCk7Ci0tIAoyLjMxLjEKCg==
---000000000000c87d5e05e0491d17--
+Changes from v4->v5:
+1. Removed any ordering related flags and emulate the hardware more
+   closely. 
+
+Changes from v3->v4:
+1. Added [v]stimecmp_wr_done to the corresponding vmstate strucuture.
+
+Changes from v2->v3:
+1. Dropped generic migration code improvement patches.
+2. Removed the order constraints while updating stimecmp/vstimecmp.
+
+Changes from v1->v2:
+1. Rebased on the latest upstream commit.
+2. Replaced PATCH 1 with another patch where mtimer/timecmp is
+   moved from CPU to ACLINT.
+3. Added ACLINT migration support.
+
+[1] https://drive.google.com/file/d/1m84Re2yK8m_vbW7TspvevCDR82MOBaSX/view
+[2] https://github.com/atishp04/linux/tree/sstc_v4
+[3] https://github.com/atishp04/qemu/tree/riscv_pmu_v7
+[4] https://www.mail-archive.com/qemu-devel@nongnu.org/msg885157.html
+
+Atish Patra (3):
+hw/intc: Move mtimer/mtimecmp to aclint
+target/riscv: Add stimecmp support
+target/riscv: Add vstimecmp support
+
+hw/intc/riscv_aclint.c         |  41 +++++---
+hw/timer/ibex_timer.c          |  18 ++--
+include/hw/intc/riscv_aclint.h |   2 +
+include/hw/timer/ibex_timer.h  |   2 +
+target/riscv/cpu.c             |   8 ++
+target/riscv/cpu.h             |  11 +-
+target/riscv/cpu_bits.h        |   8 ++
+target/riscv/cpu_helper.c      |  11 +-
+target/riscv/csr.c             | 177 +++++++++++++++++++++++++++++++++
+target/riscv/machine.c         |   7 +-
+target/riscv/meson.build       |   3 +-
+target/riscv/time_helper.c     | 114 +++++++++++++++++++++
+target/riscv/time_helper.h     |  30 ++++++
+13 files changed, 400 insertions(+), 32 deletions(-)
+create mode 100644 target/riscv/time_helper.c
+create mode 100644 target/riscv/time_helper.h
+
+--
+2.25.1
+
 
