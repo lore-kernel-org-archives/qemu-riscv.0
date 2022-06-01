@@ -1,71 +1,98 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nw93v-0000Ok-J0
-	for mharc-qemu-riscv@gnu.org; Tue, 31 May 2022 17:05:59 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45950)
+	id 1nwDIB-0004Gy-LE
+	for mharc-qemu-riscv@gnu.org; Tue, 31 May 2022 21:36:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45644)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <abrestic@rivosinc.com>)
- id 1nw93s-0000Nh-LS
- for qemu-riscv@nongnu.org; Tue, 31 May 2022 17:05:58 -0400
-Received: from mail-qk1-x72f.google.com ([2607:f8b0:4864:20::72f]:38709)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <abrestic@rivosinc.com>)
- id 1nw93q-0005m9-Rv
- for qemu-riscv@nongnu.org; Tue, 31 May 2022 17:05:56 -0400
-Received: by mail-qk1-x72f.google.com with SMTP id p123so14116068qke.5
- for <qemu-riscv@nongnu.org>; Tue, 31 May 2022 14:05:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ye8xCwyuZUSR5LAVXT9k7eRWTSq5Jn5Xg6V04rS1bxY=;
- b=pQdjwUHfXY8jjcS/x2lDcY3HS3HcVIILZGUwXWfWctWocQEd0frI13IP+hJdZxJjES
- MLFKCUS/2bPWZvrhLmGQ9ARSw2s+fd/VUbWiHAXasJME7KsgtsI2t+POA0y5K0DyJaIU
- grQijTXlRzjp4epnuO6Ae34tb6J4AcZ4lr+4sy479Qz2oQ7DUpQATjDAgM/wvfmZJXH8
- h7goe8uasmiAeIBDmG0pxgOAPHZztQNx7n7Ee8qfoxkLKg1VPBu2uqbjpfY0U6kbN6a0
- JpHljRx7Q1cihSL6qQnB4Xrq/ehQHdIPCF4BJfm7Lmaeyk26DGFfPo+S1vYYG9steM1M
- iYeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ye8xCwyuZUSR5LAVXT9k7eRWTSq5Jn5Xg6V04rS1bxY=;
- b=rHJWX/pqT2uGU0HjcsyLsO+Ihec05LJgzbyzMSYG0Yt1+0L/OiAj6GJ3ejhn92tAf6
- QGLZySKSMMW25pfln+YWWURPuxfZrV3QIYrWsJ6O60jP1vXvv08XbG6Cjdnfxk0Hswx8
- fuTLXoxCOQF4e2J+yPxY72P2y81PoghV0HJ2Oon20RLvjFQTZjGHmT5SzYM8aunzlSUy
- oI9mrOwiVYJm2N0OcIb9FmQB1GZadFKmSgZxRzyYdE7l2BSQ6R8hB14kryLhNv9T/58O
- 77PzVnQOZ0MLzPTCRXhk3s9I2hPCUcscI1Bfom6ioAEwlDaBqK4Pf8YjTx4/ntG7lLDr
- VYWQ==
-X-Gm-Message-State: AOAM533FIqrM+VzYMixp8tvT9ZEthYid2VWQctVOXe2xXXDImx7MXjeL
- y66v4neeDX1DpqZViAX0HbMsCg==
-X-Google-Smtp-Source: ABdhPJws7NR+1rheyH5eJQBga7NsgVjQwsI7qBi+2lKx7BWnn+0D0g0bhSvFyIstzvJq5uCWVzq5cA==
-X-Received: by 2002:a37:a1c1:0:b0:6a3:4139:1397 with SMTP id
- k184-20020a37a1c1000000b006a341391397mr38775183qke.443.1654031152711; 
- Tue, 31 May 2022 14:05:52 -0700 (PDT)
-Received: from abrestic-xps.ba.rivosinc.com ([71.247.37.191])
- by smtp.gmail.com with ESMTPSA id
- c13-20020ac8054d000000b002f3e127be41sm9457674qth.20.2022.05.31.14.05.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 May 2022 14:05:52 -0700 (PDT)
-From: Andrew Bresticker <abrestic@rivosinc.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- Andrew Bresticker <abrestic@rivosinc.com>
-Subject: [PATCH] target/riscv: Wake on VS-level external interrupts
-Date: Tue, 31 May 2022 17:05:44 -0400
-Message-Id: <20220531210544.181322-1-abrestic@rivosinc.com>
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1)
+ (envelope-from <prvs=144e506c5=alistair.francis@opensource.wdc.com>)
+ id 1nwDI7-0004Cz-RK
+ for qemu-riscv@nongnu.org; Tue, 31 May 2022 21:36:57 -0400
+Received: from esa4.hgst.iphmx.com ([216.71.154.42]:17541)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=144e506c5=alistair.francis@opensource.wdc.com>)
+ id 1nwDI6-0005aC-0t
+ for qemu-riscv@nongnu.org; Tue, 31 May 2022 21:36:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1654047413; x=1685583413;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=OukH25Gcj4nFoBEfbxCTSATKh4p9aSC6BR5bVd73LfQ=;
+ b=nNd04JEiMe8L2aHqc4pIq3W9EVje2JO+q1zskFPJnwiVydb0r9JDUH2E
+ qc+/S8/MqZ9lVlFvJSeXR1iKHvDpR3U61ny77Hj40loMqVXhCVcgUvJ+6
+ ezPxTVDeE0Hp/ZZwObL48yGZM9DAbpAp9UbFdTU1TIcQDo/tSSMDmrzxX
+ K2Tz2/YaG0SmdM7cfIi6tRzxXCHjEiLAHAyw4sLob2Mgnv4/4BSg0LoHd
+ Ubypp9id5ZmGAQtsFQdkAIe7koBRI1UgP7DLE3vkh5Gohh1tloGI7dO3X
+ zf1GQDmZQZDTAo2nHjyjvUi2idBF5W3CthBwsyWzqjJ7NV6WGZ4VpjuoS g==;
+X-IronPort-AV: E=Sophos;i="5.91,266,1647273600"; d="scan'208";a="200696996"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 01 Jun 2022 09:36:40 +0800
+IronPort-SDR: jAJyLKxfmXaq+AHFCKt4ll+lTerkNp0Jr6SF8wKe8tJPU+Vz2myKzAb3m2bIt92yX7WHodWYuP
+ y3KsWpB5jbju71aV3Hw/4yRC6SdEVVx4Cx+xnx45ioGROy6YMxcaq/1ADl/uLVLfnc1KQe/E46
+ jaMAATUOsIWvWfSCL9OccwvvsZOoOlGjPyEPsE87yd/TKWkTHEPyYLXL0nhGf+rnIyj9pXldRA
+ s+QnDi97VUq8GDRUvHo7DcbyT3VZhgwbK0vYhwuVxFjYyd3N4tQ/B4W7fJoqt3/y9M/aS9TT+u
+ WuMgsVqgfo6X67+r3ZN++Ia1
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 31 May 2022 18:00:25 -0700
+IronPort-SDR: g4lBB/Mm3ycqzlgyJKmMfzxH9ADpfo4aDDOCB6j2b/utmUYdGoXYxjsEbY7d3NFgoZyaTcZzS8
+ rIYqmkfNOnPBkTHbuSZRQSHaWwEMrX+TNRbxHR0FUisxd6xjLQTamocV7Blv9lnPmi7a9Yy/ut
+ 39R2hvPHLUliUsp1vTSvwTqFqon6LG0oIaN1cXMvXbqYUT89pNVEh9uyz2UYxlG1EaSP392r5x
+ RrBpDDzUK1Ogn2ciLtvIQcWYtDZ8zE3fwXNRhdCeTzY12ZT78X2Z8tY/nLETJv7QD0dV6L+rMt
+ BEs=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 31 May 2022 18:36:41 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4LCWvr59Szz1SVp3
+ for <qemu-riscv@nongnu.org>; Tue, 31 May 2022 18:36:40 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1654047400;
+ x=1656639401; bh=OukH25Gcj4nFoBEfbxCTSATKh4p9aSC6BR5bVd73LfQ=; b=
+ oOIHZDgNr9Mjve3ABMezoipq1YrHqqfN0bstjiQFebwXfbGBV7jLnP6197NRQuWy
+ 7e1IXNuCTE6d7l8IL0Cea21VgcxJ7bTreY9mu9a1AD26LsbIjkNSQrmiky8vklFv
+ qUwpayCZR4X1rkY/WYpa7EAW5ETElso9qwFsupZPKjt+RHZMNeTGXmCgx4NJjhQV
+ 2qd2/fvWdPnPp/+1kMcbUeM+e808nHtiD08KSOJEe3kN8PTZEU8noeAeGuVJzw10
+ iwhHsgS4kDce/y7yQ/SnsWlqbDLf5UJPWJLzelPU609cLKS5yV1fz0eP6LMjR/D5
+ EJq8mW+ZQ4W7FtzxISWt1Q==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id Oh-t-Gz-PXFF for <qemu-riscv@nongnu.org>;
+ Tue, 31 May 2022 18:36:40 -0700 (PDT)
+Received: from toolbox.alistair23.me (unknown [10.225.165.8])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4LCWvl2slwz1Rvlc;
+ Tue, 31 May 2022 18:36:34 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: jiangyifei@huawei.com, limingwang@huawei.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: thuth@redhat.com, Bin Meng <bin.meng@windriver.com>, alistair23@gmail.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, bmeng.cn@gmail.com,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH] hw/intc: sifive_plic: Avoid overflowing the addr_config buffer
+Date: Wed,  1 Jun 2022 11:36:31 +1000
+Message-Id: <20220601013631.196854-1-alistair.francis@opensource.wdc.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72f;
- envelope-from=abrestic@rivosinc.com; helo=mail-qk1-x72f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.154.42;
+ envelope-from=prvs=144e506c5=alistair.francis@opensource.wdc.com;
+ helo=esa4.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,60 +105,74 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2022 21:05:59 -0000
+X-List-Received-Date: Wed, 01 Jun 2022 01:36:57 -0000
 
-Whether or not VSEIP is pending isn't reflected in env->mip and must
-instead be determined from hstatus.vgein and hgeip. As a result a
-CPU in WFI won't wake on a VSEIP, which violates the WFI behavior as
-specified in the privileged ISA. Just use riscv_cpu_all_pending()
-instead, which already accounts for VSEIP.
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Andrew Bresticker <abrestic@rivosinc.com>
+Since commit ad40be27 "target/riscv: Support start kernel directly by
+KVM" we have been overflowing the addr_config on "M,MS..."
+configurations, as reported https://gitlab.com/qemu-project/qemu/-/issues=
+/1050.
+
+This commit changes the loop in sifive_plic_create() from iterating over
+the number of harts to just iterating over the addr_config. The
+addr_config is based on the hart_config, and will contain interrup detail=
+s
+for all harts. This way we can't iterate past the end of addr_config.
+
+Fixes: ad40be27084536 ("target/riscv: Support start kernel directly by KV=
+M")
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1050
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c        | 2 +-
- target/riscv/cpu.h        | 1 +
- target/riscv/cpu_helper.c | 2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
+ hw/intc/sifive_plic.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a91253d4bd..c6cc08c355 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -391,7 +391,7 @@ static bool riscv_cpu_has_work(CPUState *cs)
-      * Definition of the WFI instruction requires it to ignore the privilege
-      * mode and delegation registers, but respect individual enables
-      */
--    return (env->mip & env->mie) != 0;
-+    return riscv_cpu_all_pending(env) != 0;
- #else
-     return true;
- #endif
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f08c3e8813..758ab6c90b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -488,6 +488,7 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
- int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
- int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);
- uint8_t riscv_cpu_default_priority(int irq);
-+uint64_t riscv_cpu_all_pending(CPURISCVState *env);
- int riscv_cpu_mirq_pending(CPURISCVState *env);
- int riscv_cpu_sirq_pending(CPURISCVState *env);
- int riscv_cpu_vsirq_pending(CPURISCVState *env);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index d99fac9d2d..16c6045459 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -340,7 +340,7 @@ static int riscv_cpu_pending_to_irq(CPURISCVState *env,
-     return best_irq;
- }
- 
--static uint64_t riscv_cpu_all_pending(CPURISCVState *env)
-+uint64_t riscv_cpu_all_pending(CPURISCVState *env)
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index eebbcf33d4..56d60e9ac9 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -431,7 +431,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *ha=
+rt_config,
+     uint32_t context_stride, uint32_t aperture_size)
  {
-     uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
-     uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
--- 
-2.25.1
+     DeviceState *dev =3D qdev_new(TYPE_SIFIVE_PLIC);
+-    int i, j =3D 0;
++    int i;
+     SiFivePLICState *plic;
+=20
+     assert(enable_stride =3D=3D (enable_stride & -enable_stride));
+@@ -451,18 +451,17 @@ DeviceState *sifive_plic_create(hwaddr addr, char *=
+hart_config,
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+=20
+     plic =3D SIFIVE_PLIC(dev);
+-    for (i =3D 0; i < num_harts; i++) {
+-        CPUState *cpu =3D qemu_get_cpu(hartid_base + i);
+=20
+-        if (plic->addr_config[j].mode =3D=3D PLICMode_M) {
+-            j++;
+-            qdev_connect_gpio_out(dev, num_harts + i,
++    for (i =3D 0; i < plic->num_addrs; i++) {
++        int cpu_num =3D plic->addr_config[i].hartid;
++        CPUState *cpu =3D qemu_get_cpu(hartid_base + cpu_num);
++
++        if (plic->addr_config[i].mode =3D=3D PLICMode_M) {
++            qdev_connect_gpio_out(dev, num_harts + cpu_num,
+                                   qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EX=
+T));
+         }
+-
+-        if (plic->addr_config[j].mode =3D=3D PLICMode_S) {
+-            j++;
+-            qdev_connect_gpio_out(dev, i,
++        if (plic->addr_config[i].mode =3D=3D PLICMode_S) {
++            qdev_connect_gpio_out(dev, cpu_num,
+                                   qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EX=
+T));
+         }
+     }
+--=20
+2.35.3
 
 
