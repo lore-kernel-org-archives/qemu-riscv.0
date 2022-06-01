@@ -1,65 +1,81 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nwFcK-0001K2-P7
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 00:05:56 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39398)
+	id 1nwOsG-0001zl-69
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 09:59:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40240)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nwFcI-0001Jk-UG; Wed, 01 Jun 2022 00:05:54 -0400
-Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232]:37670)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1nwOsF-0001xW-3A; Wed, 01 Jun 2022 09:58:59 -0400
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:46986)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nwFcH-0002Jv-05; Wed, 01 Jun 2022 00:05:54 -0400
-Received: by mail-oi1-x232.google.com with SMTP id s188so1125053oie.4;
- Tue, 31 May 2022 21:05:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
+ id 1nwOsD-0005gH-8I; Wed, 01 Jun 2022 09:58:58 -0400
+Received: by mail-wr1-x431.google.com with SMTP id d26so2463662wrb.13;
+ Wed, 01 Jun 2022 06:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rtv9VyKyMp/s5zyzM+YG7hW0IBsnu+5ga3Lr0f14M/8=;
- b=QgoEjNUk+tZYKdfdrjjqtRt20NR7e0+jSGoRaRovu5rmXmC50i/HSOJlxFvZJJeQJ4
- 3njC/93zEuXjooc+yFHxOId+F6rxlNBrxAUhulb1WGeiY4hN+FFUdAMzNjN9mcpeMama
- mm4l2KGozvwGYpHicQLEsGiNKpEaWBB40prBO2TPxETFsD1uU6K0BhMVFZEOhNdk6GG7
- VBFVtqKvpI0UTWdU5VRu0KZ0GXooGldJ+OASAyhOFXD0HVBwX5uIbjdMzYVR6qcUBz52
- p/vjLRsHLq2NHOkwm6jBFX/fyqlhGjQnctg9F0MPis1zlwSHR3lnxqWDguxYLpjWF0Ct
- t8hw==
+ h=sender:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=0jZy12IUXwWtor+oG1IlIHHVauVqeLvUb8eW0vlezeM=;
+ b=Eg3uamI0qjnQ74GQBcQfSVU/dxtbV5o56AyQOCwV7klormy+qIM0FkvgHcIq3GuUM0
+ oJVXA1SMyEm8Q+fdAOXq80Ok/CL92NCLxGYPLcxfXFT8FSHoX7n1w7WpwYMEZ4Fll6YZ
+ KfUPdbX2P09yqof+1rBF8AjkOcwW27p3VC9Sb6fETaGDPQXi+D0S4mB3yzRl5lpk8UBB
+ gXl60FQ/WVdTW+g6OGw6Ehq3phrcqB3KXq1wHqk7quGbuGI5lrcj63h5csPOV3cptBZr
+ eyRNuRQ22DaHCLqDkIFn/WmYx1MFf6ym6qHBdElSrOuHbBHZHbfexloKn/rI07iZMQUN
+ YoSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=rtv9VyKyMp/s5zyzM+YG7hW0IBsnu+5ga3Lr0f14M/8=;
- b=xGl5RZPEDzBrpApbZhtZjnjlsSZmqMBpFIC538JkWlamNjeTMEFPls4dz5o0swAjHu
- YQTj93Hkqm+ybIPl91nfs0rSTSY7uqP1vkhyLnXQ9p6y9Ie0a3OXlq0jVev/ORrUg6np
- I6KL0YPlPTTxDsf1/iDPdWigCoH2ARiyA5qoBNtsXtKbrv+whDASJOv8oBikas2r/Y59
- fx6Qc2HipV6GGVA49AWGknSRXcfrrvAnhY74Ak8Gybb5yDkUG5bnVUomfhW4qNBviMhl
- aRbwRfnGo+Y1zh3d0JWC4yMEhjqpK3BpHYRwkZBrypq2o/7uNmPfuBicLJMjj9uFdBge
- QCrQ==
-X-Gm-Message-State: AOAM531xfvmyEHlDJDhpcsqKYDn4eOPLRL6F9YHInHbKM7Y4piY/TBxp
- wGmeNZkW57TfDQkjq/qqYvRTNr/srM9LUSRvvGvtBRv7UzDHVA==
-X-Google-Smtp-Source: ABdhPJyH0iw/5W8aYsstx7C5MbKsQkXMBbUa+ij5Z/LYv+8YjFz+iklAMEQWzL07cksXnkOD3nNsXAtOLEXCek6Lhvw=
-X-Received: by 2002:a05:6808:19a6:b0:32b:90c4:d1af with SMTP id
- bj38-20020a05680819a600b0032b90c4d1afmr14298268oib.64.1654056351109; Tue, 31
- May 2022 21:05:51 -0700 (PDT)
+ h=x-gm-message-state:sender:message-id:date:mime-version:user-agent
+ :subject:content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=0jZy12IUXwWtor+oG1IlIHHVauVqeLvUb8eW0vlezeM=;
+ b=WDFGYYSKNqEqCuVmKdICtuBo2y7x2VWRegirMQrNmi4wer8kfPQXcQh9nq6yZMOkGG
+ eIpfhZAmUTgLavAdz1j3WJHDhvBj/pkqXWZSbOZS35rQPoe2dx6DI+Fnd8n0VAS3AP14
+ H5CEx7NLW7CMSIdhE/rRiI0sBK3pmCKnbc84ClGsMg6GCgAm2hgugQuas9alnmbRAd3m
+ oOH9Ye8P8B6ZSMWSHEbcHENMz4bMDQxAA6mzHgpN9aojWkgNTAp7EwIfOENNL/10sRe1
+ +R+Zv6IxyIbc+AtTIYmATL7lTCWc2PDMWgav9IUoXfPfWBywRIey6Xm5dkzgnHzjgkU8
+ Ax0Q==
+X-Gm-Message-State: AOAM533fsHOI+5dnTa9vRCOUcwyJ4T1Dr8sf3GMHefHbUFR1UDPSZ7CB
+ OtcvIp3TCO2mdVafxqZZBWI=
+X-Google-Smtp-Source: ABdhPJzGazLZcO8Uv+Y6J1xULASF2wm5QTJf7TRJLt8fp5ZMIXT+eKLMKHPyTr6IxbOgBRMs/3Aq9Q==
+X-Received: by 2002:a05:6000:388:b0:20e:7a31:8f5e with SMTP id
+ u8-20020a056000038800b0020e7a318f5emr50025179wrf.201.1654091933023; 
+ Wed, 01 Jun 2022 06:58:53 -0700 (PDT)
+Received: from [192.168.1.82] (26.red-83-50-226.dynamicip.rima-tde.net.
+ [83.50.226.26]) by smtp.gmail.com with ESMTPSA id
+ g20-20020a05600c4c9400b0039749b01ea7sm2439661wmp.32.2022.06.01.06.58.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Jun 2022 06:58:52 -0700 (PDT)
+Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
+ <philippe.mathieu.daude@gmail.com>
+Message-ID: <c8454b04-fbea-3750-3819-6f292b20de7b@amsat.org>
+Date: Wed, 1 Jun 2022 15:58:50 +0200
 MIME-Version: 1.0
-References: <cover.1652435208.git.research_trasio@irq.a4lg.com>
- <cover.1653472385.git.research_trasio@irq.a4lg.com>
- <3cc626d3c36935d7ad5b4573c6779f6ec88957ea.1653472385.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <3cc626d3c36935d7ad5b4573c6779f6ec88957ea.1653472385.git.research_trasio@irq.a4lg.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 1 Jun 2022 14:05:24 +1000
-Message-ID: <CAKmqyKP+ykfsCpNxJ9bAYryZmvgk-8MPsEFbNpK7n4cYON0BFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] target/riscv: Reorganize riscv_cpu_properties
-To: Tsukasa OI <research_trasio@irq.a4lg.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
- envelope-from=alistair23@gmail.com; helo=mail-oi1-x232.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.9.1
+Subject: Re: [PATCH] hw/intc: sifive_plic: Avoid overflowing the addr_config
+ buffer
+Content-Language: en-US
+To: Alistair Francis <alistair.francis@opensource.wdc.com>,
+ jiangyifei@huawei.com, limingwang@huawei.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: thuth@redhat.com, Bin Meng <bin.meng@windriver.com>,
+ alistair23@gmail.com, Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, bmeng.cn@gmail.com
+References: <20220601013631.196854-1-alistair.francis@opensource.wdc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
+In-Reply-To: <20220601013631.196854-1-alistair.francis@opensource.wdc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-wr1-x431.google.com
+X-Spam_score_int: -14
+X-Spam_score: -1.5
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,130 +88,69 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2022 04:05:55 -0000
+X-List-Received-Date: Wed, 01 Jun 2022 13:58:59 -0000
 
-On Wed, May 25, 2022 at 7:54 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
->
-> This commit reorganizes riscv_cpu_properties for clarity.
->
-> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+On 1/6/22 03:36, Alistair Francis wrote:
+> From: Alistair Francis <alistair.francis@wdc.com>
+> 
+> Since commit ad40be27 "target/riscv: Support start kernel directly by
+> KVM" we have been overflowing the addr_config on "M,MS..."
+> configurations, as reported https://gitlab.com/qemu-project/qemu/-/issues/1050.
+> 
+> This commit changes the loop in sifive_plic_create() from iterating over
+> the number of harts to just iterating over the addr_config. The
+> addr_config is based on the hart_config, and will contain interrup details
+> for all harts. This way we can't iterate past the end of addr_config.
+> 
+> Fixes: ad40be27084536 ("target/riscv: Support start kernel directly by KVM")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1050
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c | 64 +++++++++++++++++++++++++++-------------------
->  1 file changed, 37 insertions(+), 27 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index a91253d4bd..3f21563f2d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -840,7 +840,7 @@ static void riscv_cpu_init(Object *obj)
->  }
->
->  static Property riscv_cpu_properties[] = {
-> -    /* Defaults for standard extensions */
-> +    /* Base ISA and single-letter standard extensions */
->      DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
->      DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
->      DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
-> @@ -853,29 +853,17 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
->      DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
->      DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
-> -    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-> -    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+>   hw/intc/sifive_plic.c | 19 +++++++++----------
+>   1 file changed, 9 insertions(+), 10 deletions(-)
+> 
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index eebbcf33d4..56d60e9ac9 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -431,7 +431,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+>       uint32_t context_stride, uint32_t aperture_size)
+>   {
+>       DeviceState *dev = qdev_new(TYPE_SIFIVE_PLIC);
+> -    int i, j = 0;
+> +    int i;
+>       SiFivePLICState *plic;
+>   
+>       assert(enable_stride == (enable_stride & -enable_stride));
+> @@ -451,18 +451,17 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+>       sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+>   
+>       plic = SIFIVE_PLIC(dev);
+> -    for (i = 0; i < num_harts; i++) {
+> -        CPUState *cpu = qemu_get_cpu(hartid_base + i);
+>   
+> -        if (plic->addr_config[j].mode == PLICMode_M) {
+> -            j++;
+> -            qdev_connect_gpio_out(dev, num_harts + i,
+> +    for (i = 0; i < plic->num_addrs; i++) {
+> +        int cpu_num = plic->addr_config[i].hartid;
+> +        CPUState *cpu = qemu_get_cpu(hartid_base + cpu_num);
 > +
-> +    /* Standard unprivileged extensions */
->      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> +    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> +
->      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
->      DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-> -    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
-> -    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-> -    DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-> -    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+> +        if (plic->addr_config[i].mode == PLICMode_M) {
+> +            qdev_connect_gpio_out(dev, num_harts + cpu_num,
+>                                     qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
+>           }
 > -
-> -    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> -    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> -    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> -    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-> -
-> -    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-> -    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-> -    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
-> -
-> -    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-> -    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-> -    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
-> +    DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
-> +    DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
-> +    DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
-> +    DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
->
->      DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
->      DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-> @@ -884,6 +872,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
->      DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
->      DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
-> +
->      DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
->      DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
->      DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
-> @@ -895,10 +884,31 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
->      DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
->
-> -    DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
-> -    DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
-> -    DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
-> -    DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
-> +    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
-> +    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-> +
-> +    /* Standard supervisor-level extensions */
-> +    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-> +    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-> +    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
-> +
-> +    /* Base features */
-> +    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-> +    DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-> +    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> +    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> +
-> +    /* ISA specification / extension versions */
-> +    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> +    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> +
-> +    /* CPU parameters */
-> +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-> +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-> +    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
-> +    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> +    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> +    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->
->      /* Vendor-specific custom extensions */
->      DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
-> @@ -909,9 +919,9 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
->      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
->
-> -    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> -
-> +    /* Other options */
->      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
-> +
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
-> --
-> 2.34.1
->
+> -        if (plic->addr_config[j].mode == PLICMode_S) {
+> -            j++;
+> -            qdev_connect_gpio_out(dev, i,
+> +        if (plic->addr_config[i].mode == PLICMode_S) {
+> +            qdev_connect_gpio_out(dev, cpu_num,
+>                                     qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EXT));
+>           }
+>       }
+
+The logic is much easier to follow now, thanks.
+
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
