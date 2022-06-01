@@ -1,39 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nwWGI-000364-3X
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 17:52:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39814)
+	id 1nwWkR-0002v7-CC
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 18:23:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:37372)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
- id 1nwWGG-00035l-By; Wed, 01 Jun 2022 17:52:16 -0400
-Received: from mail-ej1-f51.google.com ([209.85.218.51]:42694)
+ id 1nwW46-0007h5-JI; Wed, 01 Jun 2022 17:39:42 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:36759)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
- id 1nwWGD-0006bv-BG; Wed, 01 Jun 2022 17:52:15 -0400
-Received: by mail-ej1-f51.google.com with SMTP id q1so6370768ejz.9;
- Wed, 01 Jun 2022 14:52:12 -0700 (PDT)
+ id 1nwW44-0002NH-Lh; Wed, 01 Jun 2022 17:39:42 -0400
+Received: by mail-ej1-x632.google.com with SMTP id gi33so6357964ejc.3;
+ Wed, 01 Jun 2022 14:39:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=fr4GBEbZseZJzdFyBzUEXksL59/qPACT2ggnGD50k4M=;
+ b=HKbvzfgw8vYW1O2ixOigaGEsrSffRpXLLmnWszLvYsCaTkndTksUsjQNrS5/rBO4dz
+ aDrlqFDKqlVxA3ffG6OY+/nh16bvbYqfhPeikUNRTy7cZnCErrQxDmcA9VUKaIb3Qa6i
+ 8vXaGdP4kNQONSF6TaqAT6C9VTFnhBLmuhnHHzfdvUCn3neqcRvSdQqXiwMctdHroCBu
+ LrO1zJtqG4AgQaFkYW/vzwgPnEq8tOOIsMdsNUM/z7p1oJwvepZmAW/vD33tK1Pi+MbJ
+ ezl2o6wkyzkBtf7z35zGfnHaXmPAZZz/jVQ77K+2exhZdfIkPzRyL9wWoms8gzQy5mVs
+ y1Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=QVXZ7+0gxaO8zbxOhTyIgE1+yDt0Hkw/teavgv/nUDU=;
- b=x8BqbXrfFDhq+IZw88dNtnK6Pui3ceRkmOeqNdecpU9hH+65z5EckQCXtojrSWhfft
- sSlgn240vYoabWYOYJtDvOvwukqn1h7KB+DrV7o9Q1Ujlc9f5d1LHJ9nr2F0uIBvsFEa
- NrU+eMMsGkGN0xlDclZgGwDkkCAJ+LKD0Mj1xzwkfBodCdFzHLGIf4gdhoKhwnChRLb+
- nz+UFwLeUilOS09kZeBa3KHOAeYcTdTETGnW2gvCa5vGJwFiQG4hyhdoEOkLq50ge66O
- YGR6Ai5EE6d85Ps1YQU3Oxk7gMZL7+PRjPK/P9eVcBGBt2+HMkZ30c2CxJ8jAKI5qNWs
- VYZg==
-X-Gm-Message-State: AOAM533x7fI8Sy08gdkkCmq3QbRQ9MPNViY+s0n1M9BGAVlDgQKN47+J
- OKI5XzHxmUbdIGaSrYQ2lxE=
-X-Google-Smtp-Source: ABdhPJyRyxqolyBJtoRl4wcuP1Aqr0mJYDXhSPwW/xkxF4NVrLZwBrMqAgHefj+FAnimEyC/DY751g==
-X-Received: by 2002:a17:907:7b8a:b0:707:59d4:14a3 with SMTP id
- ne10-20020a1709077b8a00b0070759d414a3mr1471830ejc.51.1654120331594; 
- Wed, 01 Jun 2022 14:52:11 -0700 (PDT)
+ bh=fr4GBEbZseZJzdFyBzUEXksL59/qPACT2ggnGD50k4M=;
+ b=v5fr8HPrTl07hms6X1NQfVLD42wU/b5/SH2vOUAgl6yBpKlPrCD88tS5+SchphfMPe
+ LE1GW9zemSyQtNlX62vR+AoOv++GbsVje0fVSPCTW5gRs3l1tw+bMX3SThnTRTLyEUGW
+ oo7MNB+10bDUxOJjAgGWBdmc92hExPNe4BDWmwZtj/8MaPL2eqf0CoC6xbyZoNMP4Q+/
+ SclblhH7Iif/j5rSo+hwXgDI2mwn+dmfNmhs53VCNb/cAPbGmCFHK+99cMMS6hXtN+4f
+ HgEporvWQvb4KTlpjyuOdy2t4wcf7yPZ1MPlkp+u9NIDfWvWYmtlw+3lHNIfV1+tZS7U
+ Cs7g==
+X-Gm-Message-State: AOAM5323LHMDv4WOAMSyCRlUEEy9bqvPcucoKfs9pWBv5uDm0AcKsZQS
+ Q4qfaXMWzsCBroeEJHZzY4+QlTFaMBHBaTlV
+X-Google-Smtp-Source: ABdhPJxAwt+3ZlbAyX5j8p6dX0oHkQ122yx3ZXyGWG0h3z+NT789P/G1G+GfQJRddOI5JeeD55rtGQ==
+X-Received: by 2002:a17:907:7f14:b0:6ff:2013:3e98 with SMTP id
+ qf20-20020a1709077f1400b006ff20133e98mr1364493ejc.73.1654119577515; 
+ Wed, 01 Jun 2022 14:39:37 -0700 (PDT)
 Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
  [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- z18-20020a1709063ad200b00703671ebe65sm1099887ejd.198.2022.06.01.14.52.10
+ h10-20020aa7de0a000000b0042dd1584e74sm1468381edv.90.2022.06.01.14.39.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jun 2022 14:52:11 -0700 (PDT)
-From: Christoph Muellner <cmuellner@gcc.gnu.org>
+ Wed, 01 Jun 2022 14:39:37 -0700 (PDT)
+From: Christoph Muellner <christophm30@gmail.com>
+X-Google-Original-From: Christoph Muellner <christoph.muellner@vrull.eu>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
@@ -42,22 +53,23 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
  Aaron Durbin <adurbin@rivosinc.com>
 Cc: Christoph Muellner <christoph.muellner@vrull.eu>
 Subject: [RFC PATCH] RISC-V: Add Zawrs ISA extension support
-Date: Wed,  1 Jun 2022 23:51:28 +0200
-Message-Id: <20220601215128.3983712-1-cmuellner@gcc.gnu.org>
+Date: Wed,  1 Jun 2022 23:39:33 +0200
+Message-Id: <20220601213933.3977831-1-christoph.muellner@vrull.eu>
 X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=209.85.218.51;
- envelope-from=christophm30@gmail.com; helo=mail-ej1-f51.google.com
-X-Spam_score_int: -11
-X-Spam_score: -1.2
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=christophm30@gmail.com; helo=mail-ej1-x632.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.249, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.249, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 01 Jun 2022 18:23:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,9 +81,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2022 21:52:16 -0000
-
-From: Christoph Muellner <christoph.muellner@vrull.eu>
+X-List-Received-Date: Wed, 01 Jun 2022 21:39:43 -0000
 
 This patch adds support for the Zawrs ISA extension.
 Given the current (incomplete) implementation of reservation sets
