@@ -1,65 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nwWkR-0002v7-CC
-	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 18:23:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37372)
+	id 1nwZHk-00060T-Cp
+	for mharc-qemu-riscv@gnu.org; Wed, 01 Jun 2022 21:06:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39342)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
- id 1nwW46-0007h5-JI; Wed, 01 Jun 2022 17:39:42 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632]:36759)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nwZHg-0005rR-JP; Wed, 01 Jun 2022 21:05:58 -0400
+Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a]:34647)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christophm30@gmail.com>)
- id 1nwW44-0002NH-Lh; Wed, 01 Jun 2022 17:39:42 -0400
-Received: by mail-ej1-x632.google.com with SMTP id gi33so6357964ejc.3;
- Wed, 01 Jun 2022 14:39:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nwZHd-00052y-Ur; Wed, 01 Jun 2022 21:05:55 -0400
+Received: by mail-oi1-x22a.google.com with SMTP id k187so4860939oif.1;
+ Wed, 01 Jun 2022 18:05:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=fr4GBEbZseZJzdFyBzUEXksL59/qPACT2ggnGD50k4M=;
- b=HKbvzfgw8vYW1O2ixOigaGEsrSffRpXLLmnWszLvYsCaTkndTksUsjQNrS5/rBO4dz
- aDrlqFDKqlVxA3ffG6OY+/nh16bvbYqfhPeikUNRTy7cZnCErrQxDmcA9VUKaIb3Qa6i
- 8vXaGdP4kNQONSF6TaqAT6C9VTFnhBLmuhnHHzfdvUCn3neqcRvSdQqXiwMctdHroCBu
- LrO1zJtqG4AgQaFkYW/vzwgPnEq8tOOIsMdsNUM/z7p1oJwvepZmAW/vD33tK1Pi+MbJ
- ezl2o6wkyzkBtf7z35zGfnHaXmPAZZz/jVQ77K+2exhZdfIkPzRyL9wWoms8gzQy5mVs
- y1Pg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8/0w2SktY8tfUNS6+DRb9v0kq0umzuoEBb0FsALn/BY=;
+ b=jxLXz2FEoPwl97aBmqHbG7b3P3Zk5mgyeH3hQUEDH85SEJmncYCA2nEn8TjikAF6Dc
+ 8ohdAqknooRhrdWbIhAU+2czdYqf4E4HBrqr8VliPqb6josWwmGdOyMJTXeF41uovhHL
+ dgKwhg9y3XEiZVULYmSG4MaXYsNTVuhy9svSE85L2rBsolnro9u4SZPILHcGash6IHnd
+ ILyaQOqzRAK20FODMuFxyyShUaMRXOZ0TMi3/e918qhk5Sc5kO9/1ab9gPGZ1+fi56by
+ t+jtpgelcfkoeKYkj//DnvgJhdE7m+0OFzLo0zQ0bq7byfzYsznYwvcQ4gys1MA63oA8
+ eg6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=fr4GBEbZseZJzdFyBzUEXksL59/qPACT2ggnGD50k4M=;
- b=v5fr8HPrTl07hms6X1NQfVLD42wU/b5/SH2vOUAgl6yBpKlPrCD88tS5+SchphfMPe
- LE1GW9zemSyQtNlX62vR+AoOv++GbsVje0fVSPCTW5gRs3l1tw+bMX3SThnTRTLyEUGW
- oo7MNB+10bDUxOJjAgGWBdmc92hExPNe4BDWmwZtj/8MaPL2eqf0CoC6xbyZoNMP4Q+/
- SclblhH7Iif/j5rSo+hwXgDI2mwn+dmfNmhs53VCNb/cAPbGmCFHK+99cMMS6hXtN+4f
- HgEporvWQvb4KTlpjyuOdy2t4wcf7yPZ1MPlkp+u9NIDfWvWYmtlw+3lHNIfV1+tZS7U
- Cs7g==
-X-Gm-Message-State: AOAM5323LHMDv4WOAMSyCRlUEEy9bqvPcucoKfs9pWBv5uDm0AcKsZQS
- Q4qfaXMWzsCBroeEJHZzY4+QlTFaMBHBaTlV
-X-Google-Smtp-Source: ABdhPJxAwt+3ZlbAyX5j8p6dX0oHkQ122yx3ZXyGWG0h3z+NT789P/G1G+GfQJRddOI5JeeD55rtGQ==
-X-Received: by 2002:a17:907:7f14:b0:6ff:2013:3e98 with SMTP id
- qf20-20020a1709077f1400b006ff20133e98mr1364493ejc.73.1654119577515; 
- Wed, 01 Jun 2022 14:39:37 -0700 (PDT)
-Received: from beast.fritz.box (62-178-148-172.cable.dynamic.surfer.at.
- [62.178.148.172]) by smtp.gmail.com with ESMTPSA id
- h10-20020aa7de0a000000b0042dd1584e74sm1468381edv.90.2022.06.01.14.39.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Jun 2022 14:39:37 -0700 (PDT)
-From: Christoph Muellner <christophm30@gmail.com>
-X-Google-Original-From: Christoph Muellner <christoph.muellner@vrull.eu>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- =?UTF-8?q?Heiko=20St=C3=BCbner?= <heiko.stuebner@vrull.eu>,
- Aaron Durbin <adurbin@rivosinc.com>
-Cc: Christoph Muellner <christoph.muellner@vrull.eu>
-Subject: [RFC PATCH] RISC-V: Add Zawrs ISA extension support
-Date: Wed,  1 Jun 2022 23:39:33 +0200
-Message-Id: <20220601213933.3977831-1-christoph.muellner@vrull.eu>
-X-Mailer: git-send-email 2.35.3
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=8/0w2SktY8tfUNS6+DRb9v0kq0umzuoEBb0FsALn/BY=;
+ b=RpvyA3jT2G4Yc46lL6Yet9i8LghOgX5faihuPm3R+ayL5qBGp626vXE/ftE2WP02k1
+ zKRSAYMQ8W98Vn5+qIA0eImWnYxBkl8CqHV+lPy2pp64g862NCkK0fBlDWDtdsdPbS+B
+ B1hC/RjrHS09b1sOvkf6vBasW5mMDBz82sr+nM5aGVG5brj+YrWjOe8yKzmT0CQVfQ3T
+ PCFzDvzM3l8gjpOQIYA/+xu/veFATJZV7Yt2cp8zZSe0CmYToTlWBSY5Lc0kcUw8HVrS
+ LlduWYeKQ1+ZvyrQapozxtY4quJZpYUUIdI0GBITJdD+/5XhBXhu8czgVG9yFp9NW+1L
+ vYWA==
+X-Gm-Message-State: AOAM531Dd9BaJHwOWKwxWZMeaUKTmXdHzwhX8VyDhyfkW9aKu17yODWH
+ ZxPU9nW2a9qD4uFGeYMvwoepcFOHNPa/C4fU03M=
+X-Google-Smtp-Source: ABdhPJyTbWAGIS/4G1r5LaCQpG7jyhDNCfuMo0uEoH7Wm5CjQp2EnNRhRTMrcYa3ntz58QsxRQ0WkFw6clAYDiwzNig=
+X-Received: by 2002:a05:6808:1817:b0:32b:6b00:e9a8 with SMTP id
+ bh23-20020a056808181700b0032b6b00e9a8mr1280057oib.278.1654131952247; Wed, 01
+ Jun 2022 18:05:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=christophm30@gmail.com; helo=mail-ej1-x632.google.com
+References: <20220601013631.196854-1-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220601013631.196854-1-alistair.francis@opensource.wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 2 Jun 2022 11:05:26 +1000
+Message-ID: <CAKmqyKN81LZDM6foB3_v742imQEHvkqk83AS4rUzvVTxo1BDBA@mail.gmail.com>
+Subject: Re: [PATCH] hw/intc: sifive_plic: Avoid overflowing the addr_config
+ buffer
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: Jiangyifei <jiangyifei@huawei.com>,
+ "limingwang (A)" <limingwang@huawei.com>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Thomas Huth <thuth@redhat.com>, 
+ Bin Meng <bin.meng@windriver.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
+ envelope-from=alistair23@gmail.com; helo=mail-oi1-x22a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -69,7 +65,6 @@ X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 01 Jun 2022 18:23:25 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,136 +76,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2022 21:39:43 -0000
+X-List-Received-Date: Thu, 02 Jun 2022 01:05:58 -0000
 
-This patch adds support for the Zawrs ISA extension.
-Given the current (incomplete) implementation of reservation sets
-there seems to be no way to provide a full emulation of the WRS
-instruction (wake on reservation set invalidation or timeout or
-interrupt). Therefore, we just pretend that an interrupt occured,
-exit the execution loop and finally continue execution.
+On Wed, Jun 1, 2022 at 11:36 AM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
+>
+> From: Alistair Francis <alistair.francis@wdc.com>
+>
+> Since commit ad40be27 "target/riscv: Support start kernel directly by
+> KVM" we have been overflowing the addr_config on "M,MS..."
+> configurations, as reported https://gitlab.com/qemu-project/qemu/-/issues/1050.
+>
+> This commit changes the loop in sifive_plic_create() from iterating over
+> the number of harts to just iterating over the addr_config. The
+> addr_config is based on the hart_config, and will contain interrup details
+> for all harts. This way we can't iterate past the end of addr_config.
+>
+> Fixes: ad40be27084536 ("target/riscv: Support start kernel directly by KVM")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1050
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
-The specification can be found here:
-https://github.com/riscv/riscv-zawrs/blob/main/zawrs.adoc
+Thanks!
 
-Note, that the Zawrs extension is not frozen or ratified yet.
-Therefore this patch is an RFC and not intended to get merged.
+Applied to riscv-to-apply.next
 
-Signed-off-by: Christoph Muellner <christoph.muellner@vrull.eu>
----
- target/riscv/cpu.c                          |  1 +
- target/riscv/cpu.h                          |  1 +
- target/riscv/insn32.decode                  |  3 ++
- target/riscv/insn_trans/trans_rvzawrs.c.inc | 48 +++++++++++++++++++++
- target/riscv/translate.c                    |  1 +
- 5 files changed, 54 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzawrs.c.inc
+Alistair
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a91253d4bd..3b43e5a03d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -877,6 +877,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
- 
-+    DEFINE_PROP_BOOL("zawrs", RISCVCPU, cfg.ext_zawrs, true),
-     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
-     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
-     DEFINE_PROP_BOOL("zbc", RISCVCPU, cfg.ext_zbc, true),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index f08c3e8813..2ef2efe22e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -380,6 +380,7 @@ struct RISCVCPUConfig {
-     bool ext_h;
-     bool ext_j;
-     bool ext_v;
-+    bool ext_zawrs;
-     bool ext_zba;
-     bool ext_zbb;
-     bool ext_zbc;
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 4033565393..ce20eab738 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -111,6 +111,9 @@ wfi         0001000    00101 00000 000 00000 1110011
- sfence_vma  0001001    ..... ..... 000 00000 1110011 @sfence_vma
- sfence_vm   0001000    00100 ..... 000 00000 1110011 @sfence_vm
- 
-+# *** Zawrs Instruction Extension ***
-+wrs         000000010000     ..... 000 00000 1110011 @sfence_vm
-+
- # *** RV32I Base Instruction Set ***
- lui      ....................       ..... 0110111 @u
- auipc    ....................       ..... 0010111 @u
-diff --git a/target/riscv/insn_trans/trans_rvzawrs.c.inc b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-new file mode 100644
-index 0000000000..38b71d0085
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzawrs.c.inc
-@@ -0,0 +1,48 @@
-+/*
-+ * RISC-V translation routines for the RISC-V Zawrs Extension.
-+ *
-+ * Copyright (c) 2022 Christoph Muellner, christoph.muellner@vrull.io
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZAWRS(ctx) do {         \
-+    if (!ctx->cfg_ptr->ext_zawrs) {     \
-+        return false;                   \
-+    }                                   \
-+} while (0)
-+
-+static bool trans_wrs(DisasContext *ctx, arg_sfence_vm *a)
-+{
-+    REQUIRE_ZAWRS(ctx);
-+
-+    /*
-+     * We may continue if one or more of the following conditions are met:
-+     * a) reservation set is invalid
-+     * b) rs1 != 0 and X(rs1) < time CSR
-+     * c) interrupt observed
-+     *
-+     * A reservation set can be invalidated by any store to a reserved
-+     * memory location. However, that's currently not implemented in QEMU.
-+     * So let's just exit the CPU loop and pretend that an interrupt occured.
-+     */
-+
-+    /* Clear the load reservation  (if any).  */
-+    tcg_gen_movi_tl(load_res, -1);
-+
-+    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-+    tcg_gen_exit_tb(NULL, 0);
-+    ctx->base.is_jmp = DISAS_NORETURN;
-+
-+    return true;
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 55a4713af2..3f0140d124 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1005,6 +1005,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvh.c.inc"
- #include "insn_trans/trans_rvv.c.inc"
- #include "insn_trans/trans_rvb.c.inc"
-+#include "insn_trans/trans_rvzawrs.c.inc"
- #include "insn_trans/trans_rvzfh.c.inc"
- #include "insn_trans/trans_rvk.c.inc"
- #include "insn_trans/trans_privileged.c.inc"
--- 
-2.35.3
-
+> ---
+>  hw/intc/sifive_plic.c | 19 +++++++++----------
+>  1 file changed, 9 insertions(+), 10 deletions(-)
+>
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index eebbcf33d4..56d60e9ac9 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -431,7 +431,7 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+>      uint32_t context_stride, uint32_t aperture_size)
+>  {
+>      DeviceState *dev = qdev_new(TYPE_SIFIVE_PLIC);
+> -    int i, j = 0;
+> +    int i;
+>      SiFivePLICState *plic;
+>
+>      assert(enable_stride == (enable_stride & -enable_stride));
+> @@ -451,18 +451,17 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
+>      sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+>
+>      plic = SIFIVE_PLIC(dev);
+> -    for (i = 0; i < num_harts; i++) {
+> -        CPUState *cpu = qemu_get_cpu(hartid_base + i);
+>
+> -        if (plic->addr_config[j].mode == PLICMode_M) {
+> -            j++;
+> -            qdev_connect_gpio_out(dev, num_harts + i,
+> +    for (i = 0; i < plic->num_addrs; i++) {
+> +        int cpu_num = plic->addr_config[i].hartid;
+> +        CPUState *cpu = qemu_get_cpu(hartid_base + cpu_num);
+> +
+> +        if (plic->addr_config[i].mode == PLICMode_M) {
+> +            qdev_connect_gpio_out(dev, num_harts + cpu_num,
+>                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
+>          }
+> -
+> -        if (plic->addr_config[j].mode == PLICMode_S) {
+> -            j++;
+> -            qdev_connect_gpio_out(dev, i,
+> +        if (plic->addr_config[i].mode == PLICMode_S) {
+> +            qdev_connect_gpio_out(dev, cpu_num,
+>                                    qdev_get_gpio_in(DEVICE(cpu), IRQ_S_EXT));
+>          }
+>      }
+> --
+> 2.35.3
+>
 
