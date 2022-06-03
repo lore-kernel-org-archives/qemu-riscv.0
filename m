@@ -1,34 +1,34 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nx5cR-0002zb-Vc
-	for mharc-qemu-riscv@gnu.org; Fri, 03 Jun 2022 07:37:32 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43150)
+	id 1nx5cZ-00030u-4l
+	for mharc-qemu-riscv@gnu.org; Fri, 03 Jun 2022 07:37:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43148)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nx5c6-0002uP-8u; Fri, 03 Jun 2022 07:37:15 -0400
-Received: from mail-sender.a4lg.com ([153.120.152.154]:64936
+ id 1nx5c6-0002uO-95; Fri, 03 Jun 2022 07:37:15 -0400
+Received: from mail-sender.a4lg.com ([153.120.152.154]:64935
  helo=mail-sender-0.a4lg.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <research_trasio@irq.a4lg.com>)
- id 1nx5bw-0002Wj-Tm; Fri, 03 Jun 2022 07:37:02 -0400
+ id 1nx5bv-0002P4-Jm; Fri, 03 Jun 2022 07:37:02 -0400
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id B644D30008B;
- Fri,  3 Jun 2022 11:36:58 +0000 (UTC)
+ by mail-sender-0.a4lg.com (Postfix) with ESMTPSA id 3D87D30008A;
+ Fri,  3 Jun 2022 11:36:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=irq.a4lg.com;
- s=2017s01; t=1654256218;
- bh=8Nn5Zhw/1XD5Dvkf9GOpgoxDYIXc9JhR0kUP1ltqkBE=;
+ s=2017s01; t=1654256213;
+ bh=O7IK/iMnBtS6hHzaRt9uvfbcYxRQwdSzDq9ixuFOjVA=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  Mime-Version:Content-Transfer-Encoding;
- b=KastIkm8U1E3OByu4Hd2UXJyUDcIvLAJmq1whTDq4YaT3ItZAYfwj9v7lQnDvdqjQ
- xY8GrnhQzO+zi6FGg9xhd/n8oE1+ci3nvcH+Y6QzAuYg1ZdqrdaDFmUjcrgzw5PP73
- JZpCLXIEUW9a6PJkL/n4rOdSWN/nouTE+YhOv0Vs=
+ b=GuV/5EnVxLcXTurvGqp69wk6wShMGqyXhBZJngwDuU1LY+MJroMTgclNZq+9BbfvE
+ /dlt/oYBs8AnW2/MYCtwE0saIikX8qkOKizz4vTc5BG00/LSq5dWgfJ9Q9TGsI764i
+ WpG0lNN/fVlB3QaG9UCQ2b3yin7qyDJOFeU7gxIU=
 From: Tsukasa OI <research_trasio@irq.a4lg.com>
 To: Tsukasa OI <research_trasio@irq.a4lg.com>,
  Alistair Francis <alistair23@gmail.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH v3 2/3] target/riscv: Make CPU property names lowercase
-Date: Fri,  3 Jun 2022 20:36:43 +0900
-Message-Id: <9c2b3ae5456566a098907e1e33c39c98b523ecea.1654256190.git.research_trasio@irq.a4lg.com>
+Subject: [PATCH v3 1/3] target/riscv: Reorganize riscv_cpu_properties
+Date: Fri,  3 Jun 2022 20:36:42 +0900
+Message-Id: <942cea1d0a0ec0ba2ba54df4c04693dfac75c331.1654256190.git.research_trasio@irq.a4lg.com>
 In-Reply-To: <cover.1654256190.git.research_trasio@irq.a4lg.com>
 References: <cover.1653472385.git.research_trasio@irq.a4lg.com>
  <cover.1654256190.git.research_trasio@irq.a4lg.com>
@@ -56,88 +56,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Fri, 03 Jun 2022 11:37:20 -0000
 
-Many CPU properties for RISC-V are in lowercase except those with
-"capitalized" (or CamelCase) names:
+Because many developers introduced new properties in various ways, the
+entire riscv_cpu_properties block is getting too complex.
 
--   Counters
--   Zifencei
--   Zicsr
--   Zfh
--   Zfhmin
--   Zve32f
--   Zve64f
-
-This commit makes lowercase names primary but keeps capitalized names
-as aliases (for backward compatibility, but with deprecated status).
+This commit reorganizes riscv_cpu_properties for clarity on future.
 
 Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
 ---
- target/riscv/cpu.c | 27 ++++++++++++++++++++-------
- 1 file changed, 20 insertions(+), 7 deletions(-)
+ target/riscv/cpu.c | 64 +++++++++++++++++++++++++++-------------------
+ 1 file changed, 37 insertions(+), 27 deletions(-)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3f21563f2d..83262586e4 100644
+index a91253d4bd..3f21563f2d 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -840,6 +840,10 @@ static void riscv_cpu_init(Object *obj)
+@@ -840,7 +840,7 @@ static void riscv_cpu_init(Object *obj)
  }
  
  static Property riscv_cpu_properties[] = {
-+    /*
-+     * Names for ISA extensions and features should be in lowercase.
-+     */
-+
-     /* Base ISA and single-letter standard extensions */
+-    /* Defaults for standard extensions */
++    /* Base ISA and single-letter standard extensions */
      DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
      DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
-@@ -855,11 +859,11 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("g", RISCVCPU, cfg.ext_g, false),
+@@ -853,29 +853,17 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+     DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
      DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
- 
-     /* Standard unprivileged extensions */
--    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+-    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
 -    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-+    DEFINE_PROP_BOOL("zicsr", RISCVCPU, cfg.ext_icsr, true),
-+    DEFINE_PROP_BOOL("zifencei", RISCVCPU, cfg.ext_ifencei, true),
++
++    /* Standard unprivileged extensions */
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
++    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
++
+     DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+     DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
+-    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
+-    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
+-    DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
+-    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
+-    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+-
+-    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
+-    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
+-    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
+-    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
+-
+-    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
+-    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
+-    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
+-
+-    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+-    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+-    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
++    DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
++    DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
++    DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
++    DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
  
--    DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
--    DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-+    DEFINE_PROP_BOOL("zfh", RISCVCPU, cfg.ext_zfh, false),
-+    DEFINE_PROP_BOOL("zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-     DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
-     DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
-     DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
-@@ -884,8 +888,8 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+@@ -884,6 +872,7 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("zbkc", RISCVCPU, cfg.ext_zbkc, false),
+     DEFINE_PROP_BOOL("zbkx", RISCVCPU, cfg.ext_zbkx, false),
+     DEFINE_PROP_BOOL("zbs", RISCVCPU, cfg.ext_zbs, true),
++
+     DEFINE_PROP_BOOL("zk", RISCVCPU, cfg.ext_zk, false),
+     DEFINE_PROP_BOOL("zkn", RISCVCPU, cfg.ext_zkn, false),
+     DEFINE_PROP_BOOL("zknd", RISCVCPU, cfg.ext_zknd, false),
+@@ -895,10 +884,31 @@ static Property riscv_cpu_properties[] = {
      DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
      DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
  
--    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
--    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-+    DEFINE_PROP_BOOL("zve32f", RISCVCPU, cfg.ext_zve32f, false),
-+    DEFINE_PROP_BOOL("zve64f", RISCVCPU, cfg.ext_zve64f, false),
+-    DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
+-    DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
+-    DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
+-    DEFINE_PROP_BOOL("zhinxmin", RISCVCPU, cfg.ext_zhinxmin, false),
++    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
++    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
++
++    /* Standard supervisor-level extensions */
++    DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
++    DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
++    DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
++
++    /* Base features */
++    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
++    DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
++    DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
++    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
++
++    /* ISA specification / extension versions */
++    DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
++    DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
++
++    /* CPU parameters */
++    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
++    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
++    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
++    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
++    DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
++    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
  
-     /* Standard supervisor-level extensions */
-     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-@@ -893,7 +897,7 @@ static Property riscv_cpu_properties[] = {
-     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
+     /* Vendor-specific custom extensions */
+     DEFINE_PROP_BOOL("xventanacondops", RISCVCPU, cfg.ext_XVentanaCondOps, false),
+@@ -909,9 +919,9 @@ static Property riscv_cpu_properties[] = {
+     DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
+     DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
  
-     /* Base features */
--    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-+    DEFINE_PROP_BOOL("counters", RISCVCPU, cfg.ext_counters, true),
-     DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-     DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-     DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-@@ -922,6 +926,15 @@ static Property riscv_cpu_properties[] = {
-     /* Other options */
+-    DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
+-
++    /* Other options */
      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
- 
-+    /* Capitalized aliases (deprecated and will be removed) */
-+    DEFINE_PROP("Counters", RISCVCPU, cfg.ext_counters, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zifencei", RISCVCPU, cfg.ext_ifencei, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zicsr", RISCVCPU, cfg.ext_icsr, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zfh", RISCVCPU, cfg.ext_zfh, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zfhmin", RISCVCPU, cfg.ext_zfhmin, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zve32f", RISCVCPU, cfg.ext_zve32f, qdev_prop_bool, bool),
-+    DEFINE_PROP("Zve64f", RISCVCPU, cfg.ext_zve64f, qdev_prop_bool, bool),
 +
      DEFINE_PROP_END_OF_LIST(),
  };
