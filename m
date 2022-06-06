@@ -1,58 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ny5qA-0002W5-3p
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 02:03:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38572)
+	id 1ny5r0-0003Md-DA
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 02:04:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38772)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ny5q3-0002RX-0y; Mon, 06 Jun 2022 02:03:44 -0400
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e]:45739)
+ id 1ny5qy-0003JE-Tc; Mon, 06 Jun 2022 02:04:40 -0400
+Received: from mail-oi1-x235.google.com ([2607:f8b0:4864:20::235]:36547)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1ny5q1-0007D9-EU; Mon, 06 Jun 2022 02:03:42 -0400
-Received: by mail-ot1-x32e.google.com with SMTP id
- a21-20020a9d4715000000b0060bfaac6899so1305868otf.12; 
- Sun, 05 Jun 2022 23:03:40 -0700 (PDT)
+ id 1ny5qx-0007Lj-AF; Mon, 06 Jun 2022 02:04:40 -0400
+Received: by mail-oi1-x235.google.com with SMTP id p129so13788105oig.3;
+ Sun, 05 Jun 2022 23:04:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=AgR3h019pUOoRboSvzSt+MYxJmAfH733xDP12woHTCA=;
- b=CELGmOVaek91/NjfQhbkYKh9pYhq3PRuEhWqvOGQc9+ZnxopY8EbxPQiK0JfCPhZhU
- Pr7Nk4jO3avpuj4j6ECyWqa986tDW403mp2QlIF4KVFLvJNq1CJiU+ZVv1mtXw5IdTnD
- r2nLQaGRN+U60QkntYSCgbddhHnwyLnEqTs46E06G36EESax7eXOC/vG4+uPqvrbKi9m
- t9djbdjV1JegEIkvWsYBTLatAaHDFETi9Lbx19Gy06PhQ52J4c8H/GqHOW+aqH+RyLJ9
- 6Q2mdMpu3Gk+KXuntGEVaevOh78Wfx72JynUoge83JFRFBIbiDzy/pWbbzWehtneCSmr
- hV0w==
+ :cc:content-transfer-encoding;
+ bh=3EuBslwTBf4/qlUKiEXSoVqa8EmunJTHNyf2DAAw5A4=;
+ b=D9V1dOIY9Ef+GbVhXfSpq0RBCz23OBVi1fuDPQ+djgVaNcl8uLtPYbfBeWVlXAWVCG
+ 0HpMwgoiZnVsBh1XsQcuMSPbNBZa2yuKuctyrTepCw/FRJ1fWWf8+Q0mDmqTu6kJbGuR
+ jcKW80tVk3PT2g20cQ5TmHMfzUP83oWwVRjDYj+PdF7zCO/anvStaY9Hvtke7YlOSQow
+ tZgezZTTT+N1vXZcKrlVm9cfzLOIiwPI7UQDZQ1jJdgL3eSOvtl7uJS3elqLelr+PjmK
+ 8Cm6mh/rpsBy0/wcFAI/k312oxy/lymlh/9tH4iFGPyMgAHsZQEpHSCobR09hBi/qNI8
+ khcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=AgR3h019pUOoRboSvzSt+MYxJmAfH733xDP12woHTCA=;
- b=HGijqWfj1ZebGoJD9PIwifxlHK8grmPsuvq9RjoTOePPfYOb1dX2OVXX9T4N2jL1v4
- dtYSmLOrOB/A0rVNeixGOSbFaVc00p30l6AlROoQ1eXrISCdO3osvR77L/0fKonX6ZMo
- gTjBAVFgJC3WHHayMO3c4LoG5Ex1tOt0Zt0aoHg43lOuDgAEsFRM9RuL7bw1MpjcQlvy
- y/pE4gvkr6l4MgKYBk6kU0Ls+D7QpHNuxVOi1mA9jDwLjuaYC+nLpREkf2emjFzmfdVR
- 8sGSLdvUCj/7WWy382qNfiMMku79TjEibJSjQ7iFOEwKPcQ0To2uOHIx0Lnrjv6ghfyc
- 036Q==
-X-Gm-Message-State: AOAM5321iJaGshsRoWthYBFdRxYsk5mzVIir/LVL6tJf7gQNWPMfhC+I
- pVPTFcc6ugpxFHzD5eLcKVHACoQgncbQbDGTdgNOUCCwXgKDVw==
-X-Google-Smtp-Source: ABdhPJzjNfRU1K9fa2eqZZgKKknfyrmATNP8xzbMPzo91R3UuPVXWJIwznNCBeRQqxRMqS/3ysgQBX35GB1MpZ4DiWA=
-X-Received: by 2002:a05:6830:448e:b0:60b:254e:7439 with SMTP id
- r14-20020a056830448e00b0060b254e7439mr9588571otv.338.1654495419326; Sun, 05
- Jun 2022 23:03:39 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=3EuBslwTBf4/qlUKiEXSoVqa8EmunJTHNyf2DAAw5A4=;
+ b=iegbEnTNJbWUK/l4KCMr8FayNjzCvLGBOUPXwhxIWO8FSY5fIdBYby44CPzaTP0n7q
+ MIRwgTlYY2rC1IEbcot2PYGkpyHZYjLxAaXPgBcvPVweMrPTKylZ7JGUmFbGXM8fbYU6
+ fONEJVya8/DNuWui3SvWzlw1BPBo4LtipVGGeOC0DFMfBIXC6SWSwwBcfaCsSvyMbm2c
+ QXXlPBMzeovC9WAowZDs6Yccba5i8zIw/V3yMYRv8/y/s5bd2eLeiCh6wGeKYWU4Wfvm
+ C+s0CyakzBtQ3vy3Lyy3kXvRdfnKQ6m+NpvEuZadHsiKOw3eaE4z/+GtAoxQQXKOAd2y
+ 3WgA==
+X-Gm-Message-State: AOAM531LDsCDQrLLjMCwpiqtuEWLCvuue920lpMg8DvetI9izaYAA/dX
+ G3L3zsMrGo6l0moBqeLU1fcvf2FeOU2Skw2Ibmw=
+X-Google-Smtp-Source: ABdhPJxi4aEXmnA0Tj2HJS9Im0iFqbDSWEAMemGniHQwu2XIBHQ8zmELaFYfDppCPdM6EgOFOaVBw79jlID5RfbbSS4=
+X-Received: by 2002:a05:6808:19a6:b0:32b:90c4:d1af with SMTP id
+ bj38-20020a05680819a600b0032b90c4d1afmr29022835oib.64.1654495477981; Sun, 05
+ Jun 2022 23:04:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1653472385.git.research_trasio@irq.a4lg.com>
- <cover.1654256190.git.research_trasio@irq.a4lg.com>
- <9c2b3ae5456566a098907e1e33c39c98b523ecea.1654256190.git.research_trasio@irq.a4lg.com>
-In-Reply-To: <9c2b3ae5456566a098907e1e33c39c98b523ecea.1654256190.git.research_trasio@irq.a4lg.com>
+References: <20220602155246.38837-1-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20220602155246.38837-1-frederic.petrot@univ-grenoble-alpes.fr>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 6 Jun 2022 16:03:13 +1000
-Message-ID: <CAKmqyKPY=YWaHkTgzxXQPYnu5eBSwZxvFYijK43tvTKueMPtCQ@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] target/riscv: Make CPU property names lowercase
-To: Tsukasa OI <research_trasio@irq.a4lg.com>
+Date: Mon, 6 Jun 2022 16:04:12 +1000
+Message-ID: <CAKmqyKNA5-f4M7NcH6M771s0UFB0eQeVMgvH6fgSvOYNDQs5HQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/debug.c: keep experimental rv128 support
+ working
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
- envelope-from=alistair23@gmail.com; helo=mail-ot1-x32e.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::235;
+ envelope-from=alistair23@gmail.com; helo=mail-oi1-x235.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -73,102 +77,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jun 2022 06:03:45 -0000
+X-List-Received-Date: Mon, 06 Jun 2022 06:04:41 -0000
 
-On Fri, Jun 3, 2022 at 9:37 PM Tsukasa OI <research_trasio@irq.a4lg.com> wrote:
+On Fri, Jun 3, 2022 at 1:55 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+<frederic.petrot@univ-grenoble-alpes.fr> wrote:
 >
-> Many CPU properties for RISC-V are in lowercase except those with
-> "capitalized" (or CamelCase) names:
+> Add an MXL_RV128 case in two switches so that no error is triggered when
+> using the -cpu x-rv128 option.
 >
-> -   Counters
-> -   Zifencei
-> -   Zicsr
-> -   Zfh
-> -   Zfhmin
-> -   Zve32f
-> -   Zve64f
->
-> This commit makes lowercase names primary but keeps capitalized names
-> as aliases (for backward compatibility, but with deprecated status).
->
-> Signed-off-by: Tsukasa OI <research_trasio@irq.a4lg.com>
+> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
+ble-alpes.fr>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 27 ++++++++++++++++++++-------
->  1 file changed, 20 insertions(+), 7 deletions(-)
+>  target/riscv/debug.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 3f21563f2d..83262586e4 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -840,6 +840,10 @@ static void riscv_cpu_init(Object *obj)
->  }
->
->  static Property riscv_cpu_properties[] = {
-> +    /*
-> +     * Names for ISA extensions and features should be in lowercase.
-> +     */
-> +
->      /* Base ISA and single-letter standard extensions */
->      DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
->      DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
-> @@ -855,11 +859,11 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
->
->      /* Standard unprivileged extensions */
-> -    DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> -    DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
-> +    DEFINE_PROP_BOOL("zicsr", RISCVCPU, cfg.ext_icsr, true),
-> +    DEFINE_PROP_BOOL("zifencei", RISCVCPU, cfg.ext_ifencei, true),
->
-> -    DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
-> -    DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
-> +    DEFINE_PROP_BOOL("zfh", RISCVCPU, cfg.ext_zfh, false),
-> +    DEFINE_PROP_BOOL("zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
->      DEFINE_PROP_BOOL("zfinx", RISCVCPU, cfg.ext_zfinx, false),
->      DEFINE_PROP_BOOL("zdinx", RISCVCPU, cfg.ext_zdinx, false),
->      DEFINE_PROP_BOOL("zhinx", RISCVCPU, cfg.ext_zhinx, false),
-> @@ -884,8 +888,8 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("zksh", RISCVCPU, cfg.ext_zksh, false),
->      DEFINE_PROP_BOOL("zkt", RISCVCPU, cfg.ext_zkt, false),
->
-> -    DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
-> -    DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-> +    DEFINE_PROP_BOOL("zve32f", RISCVCPU, cfg.ext_zve32f, false),
-> +    DEFINE_PROP_BOOL("zve64f", RISCVCPU, cfg.ext_zve64f, false),
->
->      /* Standard supervisor-level extensions */
->      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-> @@ -893,7 +897,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
->
->      /* Base features */
-> -    DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
-> +    DEFINE_PROP_BOOL("counters", RISCVCPU, cfg.ext_counters, true),
->      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->      DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> @@ -922,6 +926,15 @@ static Property riscv_cpu_properties[] = {
->      /* Other options */
->      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
->
-> +    /* Capitalized aliases (deprecated and will be removed) */
-> +    DEFINE_PROP("Counters", RISCVCPU, cfg.ext_counters, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zifencei", RISCVCPU, cfg.ext_ifencei, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zicsr", RISCVCPU, cfg.ext_icsr, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zfh", RISCVCPU, cfg.ext_zfh, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zfhmin", RISCVCPU, cfg.ext_zfhmin, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zve32f", RISCVCPU, cfg.ext_zve32f, qdev_prop_bool, bool),
-> +    DEFINE_PROP("Zve64f", RISCVCPU, cfg.ext_zve64f, qdev_prop_bool, bool),
-> +
->      DEFINE_PROP_END_OF_LIST(),
->  };
->
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 2f2a51c732..fc6e13222f 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -77,6 +77,7 @@ static inline target_ulong trigger_type(CPURISCVState *=
+env,
+>          tdata1 =3D RV32_TYPE(type);
+>          break;
+>      case MXL_RV64:
+> +    case MXL_RV128:
+>          tdata1 =3D RV64_TYPE(type);
+>          break;
+>      default:
+> @@ -123,6 +124,7 @@ static target_ulong tdata1_validate(CPURISCVState *en=
+v, target_ulong val,
+>          tdata1 =3D RV32_TYPE(t);
+>          break;
+>      case MXL_RV64:
+> +    case MXL_RV128:
+>          type =3D extract64(val, 60, 4);
+>          dmode =3D extract64(val, 59, 1);
+>          tdata1 =3D RV64_TYPE(t);
 > --
-> 2.34.1
+> 2.36.1
+>
 >
 
