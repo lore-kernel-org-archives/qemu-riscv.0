@@ -1,21 +1,22 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ny62I-0001em-4Q
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 02:16:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40398)
+	id 1ny62R-0001j1-3r
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 02:16:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40478)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1ny61x-0001YZ-Vt; Mon, 06 Jun 2022 02:16:10 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:48002)
+ id 1ny62A-0001aa-4h; Mon, 06 Jun 2022 02:16:16 -0400
+Received: from mail-b.sr.ht ([173.195.146.151]:48006)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1ny61n-0000h5-NC; Mon, 06 Jun 2022 02:15:55 -0400
+ id 1ny620-0000i7-7a; Mon, 06 Jun 2022 02:16:11 -0400
 Authentication-Results: mail-b.sr.ht; dkim=none 
 Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 05A8C11EF33;
+ by mail-b.sr.ht (Postfix) with ESMTPSA id 8C78F11EFCC;
  Mon,  6 Jun 2022 06:15:46 +0000 (UTC)
 From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v19 03/16] target/riscv: rvv: Rename ambiguous esz
-Message-ID: <165449614532.19704.7000832880482980398-3@git.sr.ht>
+Subject: [PATCH qemu v19 06/16] target/riscv: rvv: Add tail agnostic for
+ vector load / store instructions
+Message-ID: <165449614532.19704.7000832880482980398-6@git.sr.ht>
 X-Mailer: git.sr.ht
 Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
 In-Reply-To: <165449614532.19704.7000832880482980398-0@git.sr.ht>
@@ -47,305 +48,224 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Mon, 06 Jun 2022 06:16:17 -0000
-X-Original-Date: Wed, 09 Mar 2022 00:34:29 -0800
-X-List-Received-Date: Mon, 06 Jun 2022 06:16:17 -0000
+Date: Mon, 06 Jun 2022 06:16:18 -0000
+X-Original-Date: Sun, 06 Mar 2022 23:10:25 -0800
+X-List-Received-Date: Mon, 06 Jun 2022 06:16:18 -0000
 
 From: eopXD <yueh.ting.chen@gmail.com>
 
-No functional change intended in this commit.
+Destination register of unit-stride mask load and store instructions are
+always written with a tail-agnostic policy.
+
+A vector segment load / store instruction may contain fractional lmul
+with nf * lmul > 1. The rest of the elements in the last register should
+be treated as tail elements.
 
 Signed-off-by: eop Chen <eop.chen@sifive.com>
 Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/vector_helper.c | 76 ++++++++++++++++++------------------
- 1 file changed, 38 insertions(+), 38 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc |  6 +++
+ target/riscv/translate.c                |  2 +
+ target/riscv/vector_helper.c            | 60 +++++++++++++++++++++++++
+ 3 files changed, 68 insertions(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 60840325c4..3b79b9cbc2 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -125,9 +125,9 @@ static inline int32_t vext_lmul(uint32_t desc)
- /*
-  * Get the maximum number of elements can be operated.
-  *
-- * esz: log2 of element size in bytes.
-+ * log2_esz: log2 of element size in bytes.
-  */
--static inline uint32_t vext_max_elems(uint32_t desc, uint32_t esz)
-+static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
- {
-     /*
-      * As simd_desc support at most 2048 bytes, the max vlen is 1024 bits.
-@@ -136,7 +136,7 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint=
-32_t esz)
-     uint32_t vlenb =3D simd_maxsz(desc);
-=20
-     /* Return VLMAX */
--    int scale =3D vext_lmul(desc) - esz;
-+    int scale =3D vext_lmul(desc) - log2_esz;
-     return scale < 0 ? vlenb >> -scale : vlenb << scale;
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
+s/trans_rvv.c.inc
+index bf9886a93d..cd73fd6119 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -711,6 +711,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint=
+8_t eew)
+     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
++    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
  }
 =20
-@@ -231,11 +231,11 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-                  target_ulong stride, CPURISCVState *env,
-                  uint32_t desc, uint32_t vm,
-                  vext_ldst_elem_fn *ldst_elem,
--                 uint32_t esz, uintptr_t ra)
-+                 uint32_t log2_esz, uintptr_t ra)
- {
+@@ -774,6 +775,8 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, =
+uint8_t eew)
+     /* EMUL =3D 1, NFIELDS =3D 1 */
+     data =3D FIELD_DP32(data, VDATA, LMUL, 0);
+     data =3D FIELD_DP32(data, VDATA, NF, 1);
++    /* Mask destination register are always tail-agnostic */
++    data =3D FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
+     return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
+ }
+=20
+@@ -862,6 +865,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, u=
+int8_t eew)
+     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
++    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+=20
+@@ -991,6 +995,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, ui=
+nt8_t eew)
+     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
++    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+=20
+@@ -1108,6 +1113,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uin=
+t8_t eew)
+     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
+     data =3D FIELD_DP32(data, VDATA, LMUL, emul);
+     data =3D FIELD_DP32(data, VDATA, NF, a->nf);
++    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
+     return ldff_trans(a->rd, a->rs1, data, fn, s);
+ }
+=20
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 59f0ee9a50..b151c20674 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -95,6 +95,7 @@ typedef struct DisasContext {
+     int8_t lmul;
+     uint8_t sew;
+     uint8_t vta;
++    bool cfg_vta_all_1s;
+     target_ulong vstart;
+     bool vl_eq_vlmax;
+     uint8_t ntemp;
+@@ -1101,6 +1102,7 @@ static void riscv_tr_init_disas_context(DisasContextBas=
+e *dcbase, CPUState *cs)
+     ctx->sew =3D FIELD_EX32(tb_flags, TB_FLAGS, SEW);
+     ctx->lmul =3D sextract32(FIELD_EX32(tb_flags, TB_FLAGS, LMUL), 0, 3);
+     ctx->vta =3D FIELD_EX32(tb_flags, TB_FLAGS, VTA) && cpu->cfg.rvv_ta_all_=
+1s;
++    ctx->cfg_vta_all_1s =3D cpu->cfg.rvv_ta_all_1s;
+     ctx->vstart =3D env->vstart;
+     ctx->vl_eq_vlmax =3D FIELD_EX32(tb_flags, TB_FLAGS, VL_EQ_VLMAX);
+     ctx->misa_mxl_max =3D env->misa_mxl_max;
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 2248f0cbee..cb14c321ea 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -269,6 +269,9 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
      uint32_t i, k;
      uint32_t nf =3D vext_nf(desc);
--    uint32_t max_elems =3D vext_max_elems(desc, esz);
-+    uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
+     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
++    uint32_t esz =3D 1 << log2_esz;
++    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
++    uint32_t vta =3D vext_vta(desc);
 =20
      for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
          if (!vm && !vext_elem_mask(v0, i)) {
-@@ -244,7 +244,7 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
-=20
-         k =3D 0;
-         while (k < nf) {
--            target_ulong addr =3D base + stride * i + (k << esz);
-+            target_ulong addr =3D base + stride * i + (k << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
+@@ -283,6 +286,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
          }
-@@ -289,18 +289,18 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d)
- /* unmasked unit-stride load and store operation*/
- static void
- vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
--             vext_ldst_elem_fn *ldst_elem, uint32_t esz, uint32_t evl,
-+             vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uint32_t evl,
-              uintptr_t ra)
- {
+     }
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    for (k =3D 0; k < nf; ++k) {
++        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
++                          (k * max_elems + max_elems) * esz);
++    }
++    if (nf * max_elems % total_elems !=3D 0) {
++        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
++        uint32_t registers_used =3D
++            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
++        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
++                          registers_used * vlenb);
++    }
+ }
+=20
+ #define GEN_VEXT_LD_STRIDE(NAME, ETYPE, LOAD_FN)                        \
+@@ -328,6 +343,9 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *=
+env, uint32_t desc,
      uint32_t i, k;
      uint32_t nf =3D vext_nf(desc);
--    uint32_t max_elems =3D vext_max_elems(desc, esz);
-+    uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
+     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
++    uint32_t esz =3D 1 << log2_esz;
++    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
++    uint32_t vta =3D vext_vta(desc);
 =20
      /* load bytes from guest memory */
      for (i =3D env->vstart; i < evl; i++, env->vstart++) {
-         k =3D 0;
-         while (k < nf) {
--            target_ulong addr =3D base + ((i * nf + k) << esz);
-+            target_ulong addr =3D base + ((i * nf + k) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
+@@ -339,6 +357,18 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState =
+*env, uint32_t desc,
          }
-@@ -399,12 +399,12 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-                 void *vs2, CPURISCVState *env, uint32_t desc,
-                 vext_get_index_addr get_index_addr,
-                 vext_ldst_elem_fn *ldst_elem,
--                uint32_t esz, uintptr_t ra)
-+                uint32_t log2_esz, uintptr_t ra)
- {
-     uint32_t i, k;
+     }
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    for (k =3D 0; k < nf; ++k) {
++        vext_set_elems_1s(vd, vta, (k * max_elems + evl) * esz,
++                          (k * max_elems + max_elems) * esz);
++    }
++    if (nf * max_elems % total_elems !=3D 0) {
++        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
++        uint32_t registers_used =3D
++            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
++        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
++                          registers_used * vlenb);
++    }
+ }
+=20
+ /*
+@@ -438,6 +468,9 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
      uint32_t nf =3D vext_nf(desc);
      uint32_t vm =3D vext_vm(desc);
--    uint32_t max_elems =3D vext_max_elems(desc, esz);
-+    uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
+     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
++    uint32_t esz =3D 1 << log2_esz;
++    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
++    uint32_t vta =3D vext_vta(desc);
 =20
      /* load bytes from guest memory */
      for (i =3D env->vstart; i < env->vl; i++, env->vstart++) {
-@@ -414,7 +414,7 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
-=20
-         k =3D 0;
-         while (k < nf) {
--            abi_ptr addr =3D get_index_addr(base, i, vs2) + (k << esz);
-+            abi_ptr addr =3D get_index_addr(base, i, vs2) + (k << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
+@@ -453,6 +486,18 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
          }
-@@ -480,13 +480,13 @@ static inline void
- vext_ldff(void *vd, void *v0, target_ulong base,
-           CPURISCVState *env, uint32_t desc,
-           vext_ldst_elem_fn *ldst_elem,
--          uint32_t esz, uintptr_t ra)
-+          uint32_t log2_esz, uintptr_t ra)
- {
-     void *host;
-     uint32_t i, k, vl =3D 0;
+     }
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    for (k =3D 0; k < nf; ++k) {
++        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
++                          (k * max_elems + max_elems) * esz);
++    }
++    if (nf * max_elems % total_elems !=3D 0) {
++        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
++        uint32_t registers_used =3D
++            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
++        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
++                          registers_used * vlenb);
++    }
+ }
+=20
+ #define GEN_VEXT_LD_INDEX(NAME, ETYPE, INDEX_FN, LOAD_FN)                  \
+@@ -520,6 +565,9 @@ vext_ldff(void *vd, void *v0, target_ulong base,
      uint32_t nf =3D vext_nf(desc);
      uint32_t vm =3D vext_vm(desc);
--    uint32_t max_elems =3D vext_max_elems(desc, esz);
-+    uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
+     uint32_t max_elems =3D vext_max_elems(desc, log2_esz);
++    uint32_t esz =3D 1 << log2_esz;
++    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);
++    uint32_t vta =3D vext_vta(desc);
      target_ulong addr, offset, remain;
 =20
      /* probe every access*/
-@@ -494,12 +494,12 @@ vext_ldff(void *vd, void *v0, target_ulong base,
-         if (!vm && !vext_elem_mask(v0, i)) {
-             continue;
-         }
--        addr =3D adjust_addr(env, base + i * (nf << esz));
-+        addr =3D adjust_addr(env, base + i * (nf << log2_esz));
-         if (i =3D=3D 0) {
--            probe_pages(env, addr, nf << esz, ra, MMU_DATA_LOAD);
-+            probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
-         } else {
-             /* if it triggers an exception, no need to check watchpoint */
--            remain =3D nf << esz;
-+            remain =3D nf << log2_esz;
-             while (remain > 0) {
-                 offset =3D -(addr | TARGET_PAGE_MASK);
-                 host =3D tlb_vaddr_to_host(env, addr, MMU_DATA_LOAD,
-@@ -536,7 +536,7 @@ ProbeSuccess:
-             continue;
-         }
-         while (k < nf) {
--            target_ulong addr =3D base + ((i * nf + k) << esz);
-+            target_ulong addr =3D base + ((i * nf + k) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
-             k++;
-         }
-@@ -576,12 +576,12 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d)
-  */
- static void
- vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t de=
-sc,
--                vext_ldst_elem_fn *ldst_elem, uint32_t esz, uintptr_t ra)
-+                vext_ldst_elem_fn *ldst_elem, uint32_t log2_esz, uintptr_t r=
-a)
- {
-     uint32_t i, k, off, pos;
-     uint32_t nf =3D vext_nf(desc);
-     uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
--    uint32_t max_elems =3D vlenb >> esz;
-+    uint32_t max_elems =3D vlenb >> log2_esz;
-=20
-     k =3D env->vstart / max_elems;
-     off =3D env->vstart % max_elems;
-@@ -589,7 +589,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVStat=
-e *env, uint32_t desc,
-     if (off) {
-         /* load/store rest of elements of current segment pointed by vstart =
-*/
-         for (pos =3D off; pos < max_elems; pos++, env->vstart++) {
--            target_ulong addr =3D base + ((pos + k * max_elems) << esz);
-+            target_ulong addr =3D base + ((pos + k * max_elems) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), pos + k * max_elems, vd, =
-ra);
-         }
-         k++;
-@@ -598,7 +598,7 @@ vext_ldst_whole(void *vd, target_ulong base, CPURISCVStat=
-e *env, uint32_t desc,
-     /* load/store elements for rest of segments */
-     for (; k < nf; k++) {
-         for (i =3D 0; i < max_elems; i++, env->vstart++) {
--            target_ulong addr =3D base + ((i + k * max_elems) << esz);
-+            target_ulong addr =3D base + ((i + k * max_elems) << log2_esz);
-             ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra=
-);
+@@ -575,6 +623,18 @@ ProbeSuccess:
          }
      }
-@@ -4688,11 +4688,11 @@ GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_h, uint16_t, H2)
- GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_w, uint32_t, H4)
- GEN_VEXT_VSLIDEDOWN_VX(vslidedown_vx_d, uint64_t, H8)
-=20
--#define GEN_VEXT_VSLIE1UP(ESZ, H)                                           \
--static void vslide1up_##ESZ(void *vd, void *v0, target_ulong s1, void *vs2, \
--                     CPURISCVState *env, uint32_t desc)                     \
-+#define GEN_VEXT_VSLIE1UP(BITWIDTH, H)                                      \
-+static void vslide1up_##BITWIDTH(void *vd, void *v0, target_ulong s1,       \
-+                     void *vs2, CPURISCVState *env, uint32_t desc)          \
- {                                                                           \
--    typedef uint##ESZ##_t ETYPE;                                            \
-+    typedef uint##BITWIDTH##_t ETYPE;                                       \
-     uint32_t vm =3D vext_vm(desc);                                          =
-  \
-     uint32_t vl =3D env->vl;                                                =
-  \
-     uint32_t i;                                                             \
-@@ -4715,11 +4715,11 @@ GEN_VEXT_VSLIE1UP(16, H2)
- GEN_VEXT_VSLIE1UP(32, H4)
- GEN_VEXT_VSLIE1UP(64, H8)
-=20
--#define GEN_VEXT_VSLIDE1UP_VX(NAME, ESZ)                          \
-+#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                     \
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
-                   CPURISCVState *env, uint32_t desc)              \
- {                                                                 \
--    vslide1up_##ESZ(vd, v0, s1, vs2, env, desc);                  \
-+    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);             \
+     env->vstart =3D 0;
++    /* set tail elements to 1s */
++    for (k =3D 0; k < nf; ++k) {
++        vext_set_elems_1s(vd, vta, (k * max_elems + env->vl) * esz,
++                          (k * max_elems + max_elems) * esz);
++    }
++    if (nf * max_elems % total_elems !=3D 0) {
++        uint32_t vlenb =3D env_archcpu(env)->cfg.vlen >> 3;
++        uint32_t registers_used =3D
++            ((nf * max_elems) * esz + (vlenb - 1)) / vlenb;
++        vext_set_elems_1s(vd, vta, (nf * max_elems) * esz,
++                          registers_used * vlenb);
++    }
  }
 =20
- /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=3Dx[rs1], vd[i+1] =3D vs2[i] */
-@@ -4728,11 +4728,11 @@ GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_h, 16)
- GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_w, 32)
- GEN_VEXT_VSLIDE1UP_VX(vslide1up_vx_d, 64)
-=20
--#define GEN_VEXT_VSLIDE1DOWN(ESZ, H)                                        =
-  \
--static void vslide1down_##ESZ(void *vd, void *v0, target_ulong s1, void *vs2=
-, \
--                       CPURISCVState *env, uint32_t desc)                   =
-  \
-+#define GEN_VEXT_VSLIDE1DOWN(BITWIDTH, H)                                   =
-  \
-+static void vslide1down_##BITWIDTH(void *vd, void *v0, target_ulong s1,     =
-  \
-+                       void *vs2, CPURISCVState *env, uint32_t desc)        =
-  \
- {                                                                           =
-  \
--    typedef uint##ESZ##_t ETYPE;                                            =
-  \
-+    typedef uint##BITWIDTH##_t ETYPE;                                       =
-  \
-     uint32_t vm =3D vext_vm(desc);                                          =
-    \
-     uint32_t vl =3D env->vl;                                                =
-    \
-     uint32_t i;                                                             =
-  \
-@@ -4755,11 +4755,11 @@ GEN_VEXT_VSLIDE1DOWN(16, H2)
- GEN_VEXT_VSLIDE1DOWN(32, H4)
- GEN_VEXT_VSLIDE1DOWN(64, H8)
-=20
--#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, ESZ)                        \
-+#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                   \
- void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
-                   CPURISCVState *env, uint32_t desc)              \
- {                                                                 \
--    vslide1down_##ESZ(vd, v0, s1, vs2, env, desc);                \
-+    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
- }
-=20
- /* vslide1down.vx vd, vs2, rs1, vm # vd[i] =3D vs2[i+1], vd[vl-1]=3Dx[rs1] */
-@@ -4769,11 +4769,11 @@ GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_w, 32)
- GEN_VEXT_VSLIDE1DOWN_VX(vslide1down_vx_d, 64)
-=20
- /* Vector Floating-Point Slide Instructions */
--#define GEN_VEXT_VFSLIDE1UP_VF(NAME, ESZ)                     \
-+#define GEN_VEXT_VFSLIDE1UP_VF(NAME, BITWIDTH)                \
- void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-                   CPURISCVState *env, uint32_t desc)          \
- {                                                             \
--    vslide1up_##ESZ(vd, v0, s1, vs2, env, desc);              \
-+    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);         \
- }
-=20
- /* vfslide1up.vf vd, vs2, rs1, vm # vd[0]=3Df[rs1], vd[i+1] =3D vs2[i] */
-@@ -4781,11 +4781,11 @@ GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_h, 16)
- GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_w, 32)
- GEN_VEXT_VFSLIDE1UP_VF(vfslide1up_vf_d, 64)
-=20
--#define GEN_VEXT_VFSLIDE1DOWN_VF(NAME, ESZ)                   \
-+#define GEN_VEXT_VFSLIDE1DOWN_VF(NAME, BITWIDTH)              \
- void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2, \
-                   CPURISCVState *env, uint32_t desc)          \
- {                                                             \
--    vslide1down_##ESZ(vd, v0, s1, vs2, env, desc);            \
-+    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);       \
- }
-=20
- /* vfslide1down.vf vd, vs2, rs1, vm # vd[i] =3D vs2[i+1], vd[vl-1]=3Df[rs1] =
-*/
+ #define GEN_VEXT_LDFF(NAME, ETYPE, LOAD_FN)               \
 --=20
 2.34.2
 
