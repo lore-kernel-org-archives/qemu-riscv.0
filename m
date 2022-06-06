@@ -1,41 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1ny641-0002Fr-9K
-	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 02:18:09 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40704)
+	id 1ny77g-0003wm-33
+	for mharc-qemu-riscv@gnu.org; Mon, 06 Jun 2022 03:26:00 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:48342)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1ny62Z-0001kA-Ms; Mon, 06 Jun 2022 02:16:48 -0400
-Received: from mail-b.sr.ht ([173.195.146.151]:48026)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1ny62V-0000pB-KZ; Mon, 06 Jun 2022 02:16:38 -0400
-Authentication-Results: mail-b.sr.ht; dkim=none 
-Received: from git.sr.ht (unknown [173.195.146.142])
- by mail-b.sr.ht (Postfix) with ESMTPSA id 21ADB11F041;
- Mon,  6 Jun 2022 06:15:48 +0000 (UTC)
-From: ~eopxd <eopxd@git.sr.ht>
-Subject: [PATCH qemu v19 15/16] target/riscv: rvv: Add tail agnostic for
- vector permutation instructions
-Message-ID: <165449614532.19704.7000832880482980398-15@git.sr.ht>
-X-Mailer: git.sr.ht
-Reply-to: ~eopxd <yueh.ting.chen@gmail.com>
-In-Reply-To: <165449614532.19704.7000832880482980398-0@git.sr.ht>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>,
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ny77e-0003tf-7N; Mon, 06 Jun 2022 03:25:58 -0400
+Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229]:39735)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1ny77c-0002CC-Hr; Mon, 06 Jun 2022 03:25:57 -0400
+Received: by mail-oi1-x229.google.com with SMTP id s8so13352588oib.6;
+ Mon, 06 Jun 2022 00:25:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=hY/auDmxsbfSA+Ub2dBoocJSS+jXlXrI1/qvdyp/pxw=;
+ b=EjUotn1CF1rKaEwFiPmJ5Mf+shqKJIthijAObB9H0dqCy3ul9015K9J0ldDRt3MS/3
+ HESAYih8jxmgPQfGouveKLVsOK67R4Voh/HILo/EU+7fSmf7PtsKmx4P4PDxwEDUE9VW
+ 8tSaCq6qwoCgHTP5bToWcERDv+1uRh3+OcA8RZNsrTvF2KczLhkBEEidtQ3SN1XzHxf5
+ d9S5gxphSm85+oupjUce+gRcBr3vjw3B3Z8tbTblegWfv/IyeDs/QApYHTvFimhLoyTd
+ q3Zc5BdRUkx5dneKCURaSwJwqMo6lA9lCSdks11rVLdNHrxsBHm/WpKDiCrX5i1mIH3s
+ rKjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=hY/auDmxsbfSA+Ub2dBoocJSS+jXlXrI1/qvdyp/pxw=;
+ b=OaQQBzuB+lA9bPkziqHJiY+fcRLVWljHLGUZq9GrMWIsnuV2+yTyss1T9p32XVWcD7
+ HZ2Ie12Ir88lfPwmzJm1T6KvaSopltpP2+GqVRsPseeldSyuHtGyoZZF109/Jgg+Iv4y
+ uSgBMRgCRcyP5ndECrNDD9YCXuuF0KePRewZPD605AyL6vnPqR58JIt6Gq75fdP4VNtP
+ nakQgRMxcvgHG/1oZf2dMWkanD1BqUb1CGQnncvpSMdt27rwoWMKbHXv02RdVeNYgtYP
+ b/itoA6dQZsEo16vrwXRZE2xOp2ewBYocsx7AP6+S5AQOJPmSq4z1JNuZJG3/JPUakNT
+ FWBA==
+X-Gm-Message-State: AOAM530m5CAIFOVCz5IsAUtU6kD4st/kmalG51OavgXg0zuSdjRCr9rG
+ xEfbnPe9zdWnAaq1+1rO7Wm/Lcb4ObiNED4KWKI=
+X-Google-Smtp-Source: ABdhPJzfdnNSJ7prKNwf/bDPSF9Ayy5Wle20vbT63k3hSldZzJok5YbiR9MmQhCW6kQYl5GsXJTu2WLCoN49M2PPFrg=
+X-Received: by 2002:a05:6808:2126:b0:32e:a750:f8b4 with SMTP id
+ r38-20020a056808212600b0032ea750f8b4mr114567oiw.278.1654500354872; Mon, 06
+ Jun 2022 00:25:54 -0700 (PDT)
 MIME-Version: 1.0
-Received-SPF: pass client-ip=173.195.146.151; envelope-from=outgoing@sr.ht;
- helo=mail-b.sr.ht
-X-Spam_score_int: 36
-X-Spam_score: 3.6
-X-Spam_bar: +++
-X-Spam_report: (3.6 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- FREEMAIL_FORGED_REPLYTO=2.095, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+References: <20220602155246.38837-1-frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <20220602155246.38837-1-frederic.petrot@univ-grenoble-alpes.fr>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 6 Jun 2022 17:25:28 +1000
+Message-ID: <CAKmqyKP428vBu+4zRRV2RbpYyRT3fevrBMGxeSCuAQK9m1OdXg@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/debug.c: keep experimental rv128 support
+ working
+To: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
+ envelope-from=alistair23@gmail.com; helo=mail-oi1-x229.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -48,259 +77,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Date: Mon, 06 Jun 2022 06:17:03 -0000
-X-Original-Date: Mon, 07 Mar 2022 07:59:26 -0800
-X-List-Received-Date: Mon, 06 Jun 2022 06:17:03 -0000
+X-List-Received-Date: Mon, 06 Jun 2022 07:25:58 -0000
 
-From: eopXD <yueh.ting.chen@gmail.com>
+On Fri, Jun 3, 2022 at 1:55 AM Fr=C3=A9d=C3=A9ric P=C3=A9trot
+<frederic.petrot@univ-grenoble-alpes.fr> wrote:
+>
+> Add an MXL_RV128 case in two switches so that no error is triggered when
+> using the -cpu x-rv128 option.
+>
+> Signed-off-by: Fr=C3=A9d=C3=A9ric P=C3=A9trot <frederic.petrot@univ-greno=
+ble-alpes.fr>
 
-Signed-off-by: eop Chen <eop.chen@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc |  7 +++--
- target/riscv/vector_helper.c            | 40 +++++++++++++++++++++++++
- 2 files changed, 45 insertions(+), 2 deletions(-)
+Thanks!
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_tran=
-s/trans_rvv.c.inc
-index a94e634a6b..4f84d4878a 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3669,7 +3669,7 @@ static bool trans_vrgather_vx(DisasContext *s, arg_rmrr=
- *a)
-         return false;
-     }
-=20
--    if (a->vm && s->vl_eq_vlmax) {
-+    if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-         int scale =3D s->lmul - (s->sew + 3);
-         int vlmax =3D s->cfg_ptr->vlen >> -scale;
-         TCGv_i64 dest =3D tcg_temp_new_i64();
-@@ -3701,7 +3701,7 @@ static bool trans_vrgather_vi(DisasContext *s, arg_rmrr=
- *a)
-         return false;
-     }
-=20
--    if (a->vm && s->vl_eq_vlmax) {
-+    if (a->vm && s->vl_eq_vlmax && !(s->vta && s->lmul < 0)) {
-         int scale =3D s->lmul - (s->sew + 3);
-         int vlmax =3D s->cfg_ptr->vlen >> -scale;
-         if (a->rs1 >=3D vlmax) {
-@@ -3753,6 +3753,7 @@ static bool trans_vcompress_vm(DisasContext *s, arg_r *=
-a)
-         tcg_gen_brcondi_tl(TCG_COND_EQ, cpu_vl, 0, over);
-=20
-         data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+        data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-         tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                            vreg_ofs(s, a->rs1), vreg_ofs(s, a->rs2),
-                            cpu_env, s->cfg_ptr->vlen / 8,
-@@ -3853,6 +3854,8 @@ static bool int_ext_op(DisasContext *s, arg_rmr *a, uin=
-t8_t seq)
-     }
-=20
-     data =3D FIELD_DP32(data, VDATA, VM, a->vm);
-+    data =3D FIELD_DP32(data, VDATA, LMUL, s->lmul);
-+    data =3D FIELD_DP32(data, VDATA, VTA, s->vta);
-=20
-     tcg_gen_gvec_3_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),
-                        vreg_ofs(s, a->rs2), cpu_env,
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 5c2d1c02f4..2afbac6e37 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -4930,6 +4930,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
- {                                                                         \
-     uint32_t vm =3D vext_vm(desc);                                          \
-     uint32_t vl =3D env->vl;                                                \
-+    uint32_t esz =3D sizeof(ETYPE);                                         \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
-+    uint32_t vta =3D vext_vta(desc);                                        \
-     target_ulong offset =3D s1, i_min, i;                                   \
-                                                                           \
-     i_min =3D MAX(env->vstart, offset);                                     \
-@@ -4939,6 +4942,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
-         }                                                                 \
-         *((ETYPE *)vd + H(i)) =3D *((ETYPE *)vs2 + H(i - offset));          \
-     }                                                                     \
-+    /* set tail elements to 1s */                                         \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
-=20
- /* vslideup.vx vd, vs2, rs1, vm # vd[i+rs1] =3D vs2[i] */
-@@ -4954,6 +4959,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
-     uint32_t vlmax =3D vext_max_elems(desc, ctzl(sizeof(ETYPE)));           \
-     uint32_t vm =3D vext_vm(desc);                                          \
-     uint32_t vl =3D env->vl;                                                \
-+    uint32_t esz =3D sizeof(ETYPE);                                         \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
-+    uint32_t vta =3D vext_vta(desc);                                        \
-     target_ulong i_max, i;                                                \
-                                                                           \
-     i_max =3D MAX(MIN(s1 < vlmax ? vlmax - s1 : 0, vl), env->vstart);       \
-@@ -4970,6 +4978,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
-     }                                                                     \
-                                                                           \
-     env->vstart =3D 0;                                                      \
-+    /* set tail elements to 1s */                                         \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
-=20
- /* vslidedown.vx vd, vs2, rs1, vm # vd[i] =3D vs2[i+rs1] */
-@@ -4985,6 +4995,9 @@ static void vslide1up_##BITWIDTH(void *vd, void *v0, ta=
-rget_ulong s1,       \
-     typedef uint##BITWIDTH##_t ETYPE;                                       \
-     uint32_t vm =3D vext_vm(desc);                                          =
-  \
-     uint32_t vl =3D env->vl;                                                =
-  \
-+    uint32_t esz =3D sizeof(ETYPE);                                         =
-  \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          =
-  \
-+    uint32_t vta =3D vext_vta(desc);                                        =
-  \
-     uint32_t i;                                                             \
-                                                                             \
-     for (i =3D env->vstart; i < vl; i++) {                                  =
-  \
-@@ -4998,6 +5011,8 @@ static void vslide1up_##BITWIDTH(void *vd, void *v0, ta=
-rget_ulong s1,       \
-         }                                                                   \
-     }                                                                       \
-     env->vstart =3D 0;                                                      =
-  \
-+    /* set tail elements to 1s */                                           \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);                \
- }
-=20
- GEN_VEXT_VSLIE1UP(8,  H1)
-@@ -5025,6 +5040,9 @@ static void vslide1down_##BITWIDTH(void *vd, void *v0, =
-target_ulong s1,       \
-     typedef uint##BITWIDTH##_t ETYPE;                                       =
-  \
-     uint32_t vm =3D vext_vm(desc);                                          =
-    \
-     uint32_t vl =3D env->vl;                                                =
-    \
-+    uint32_t esz =3D sizeof(ETYPE);                                         =
-    \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          =
-    \
-+    uint32_t vta =3D vext_vta(desc);                                        =
-    \
-     uint32_t i;                                                             =
-  \
-                                                                             =
-  \
-     for (i =3D env->vstart; i < vl; i++) {                                  =
-    \
-@@ -5038,6 +5056,8 @@ static void vslide1down_##BITWIDTH(void *vd, void *v0, =
-target_ulong s1,       \
-         }                                                                   =
-  \
-     }                                                                       =
-  \
-     env->vstart =3D 0;                                                      =
-    \
-+    /* set tail elements to 1s */                                           =
-  \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);                =
-  \
- }
-=20
- GEN_VEXT_VSLIDE1DOWN(8,  H1)
-@@ -5091,6 +5111,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,               \
-     uint32_t vlmax =3D vext_max_elems(desc, ctzl(sizeof(TS2)));             \
-     uint32_t vm =3D vext_vm(desc);                                          \
-     uint32_t vl =3D env->vl;                                                \
-+    uint32_t esz =3D sizeof(TS2);                                           \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
-+    uint32_t vta =3D vext_vta(desc);                                        \
-     uint64_t index;                                                       \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -5106,6 +5129,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,               \
-         }                                                                 \
-     }                                                                     \
-     env->vstart =3D 0;                                                      \
-+    /* set tail elements to 1s */                                         \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
-=20
- /* vd[i] =3D (vs1[i] >=3D VLMAX) ? 0 : vs2[vs1[i]]; */
-@@ -5126,6 +5151,9 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
-     uint32_t vlmax =3D vext_max_elems(desc, ctzl(sizeof(ETYPE)));           \
-     uint32_t vm =3D vext_vm(desc);                                          \
-     uint32_t vl =3D env->vl;                                                \
-+    uint32_t esz =3D sizeof(ETYPE);                                         \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
-+    uint32_t vta =3D vext_vta(desc);                                        \
-     uint64_t index =3D s1;                                                  \
-     uint32_t i;                                                           \
-                                                                           \
-@@ -5140,6 +5168,8 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, =
-void *vs2,         \
-         }                                                                 \
-     }                                                                     \
-     env->vstart =3D 0;                                                      \
-+    /* set tail elements to 1s */                                         \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
-=20
- /* vd[i] =3D (x[rs1] >=3D VLMAX) ? 0 : vs2[rs1] */
-@@ -5154,6 +5184,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,               \
-                   CPURISCVState *env, uint32_t desc)                      \
- {                                                                         \
-     uint32_t vl =3D env->vl;                                                \
-+    uint32_t esz =3D sizeof(ETYPE);                                         \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz);          \
-+    uint32_t vta =3D vext_vta(desc);                                        \
-     uint32_t num =3D 0, i;                                                  \
-                                                                           \
-     for (i =3D env->vstart; i < vl; i++) {                                  \
-@@ -5164,6 +5197,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *=
-vs2,               \
-         num++;                                                            \
-     }                                                                     \
-     env->vstart =3D 0;                                                      \
-+    /* set tail elements to 1s */                                         \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
- }
-=20
- /* Compress into vd elements of vs2 where vs1 is enabled */
-@@ -5195,6 +5230,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       =
-          \
- {                                                                \
-     uint32_t vl =3D env->vl;                                       \
-     uint32_t vm =3D vext_vm(desc);                                 \
-+    uint32_t esz =3D sizeof(ETYPE);                                \
-+    uint32_t total_elems =3D vext_get_total_elems(env, desc, esz); \
-+    uint32_t vta =3D vext_vta(desc);                               \
-     uint32_t i;                                                  \
-                                                                  \
-     for (i =3D env->vstart; i < vl; i++) {                         \
-@@ -5204,6 +5242,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2,       =
-          \
-         *((ETYPE *)vd + HD(i)) =3D *((DTYPE *)vs2 + HS1(i));       \
-     }                                                            \
-     env->vstart =3D 0;                                             \
-+    /* set tail elements to 1s */                                \
-+    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);     \
- }
-=20
- GEN_VEXT_INT_EXT(vzext_vf2_h, uint16_t, uint8_t,  H2, H1)
---=20
-2.34.2
+Applied to riscv-to-apply.next
 
+Alistair
+
+> ---
+>  target/riscv/debug.c | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index 2f2a51c732..fc6e13222f 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -77,6 +77,7 @@ static inline target_ulong trigger_type(CPURISCVState *=
+env,
+>          tdata1 =3D RV32_TYPE(type);
+>          break;
+>      case MXL_RV64:
+> +    case MXL_RV128:
+>          tdata1 =3D RV64_TYPE(type);
+>          break;
+>      default:
+> @@ -123,6 +124,7 @@ static target_ulong tdata1_validate(CPURISCVState *en=
+v, target_ulong val,
+>          tdata1 =3D RV32_TYPE(t);
+>          break;
+>      case MXL_RV64:
+> +    case MXL_RV128:
+>          type =3D extract64(val, 60, 4);
+>          dmode =3D extract64(val, 59, 1);
+>          tdata1 =3D RV64_TYPE(t);
+> --
+> 2.36.1
+>
+>
 
