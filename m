@@ -1,68 +1,72 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nyjSz-0005Go-3m
-	for mharc-qemu-riscv@gnu.org; Tue, 07 Jun 2022 20:22:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48506)
+	id 1nymcw-0007ii-MJ
+	for mharc-qemu-riscv@gnu.org; Tue, 07 Jun 2022 23:45:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51554)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nyjSx-0005FZ-H3; Tue, 07 Jun 2022 20:22:31 -0400
-Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f]:33524)
+ (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
+ id 1nymcu-0007gu-Be
+ for qemu-riscv@nongnu.org; Tue, 07 Jun 2022 23:45:00 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c]:36607)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nyjSv-0000ho-Mg; Tue, 07 Jun 2022 20:22:31 -0400
-Received: by mail-oi1-x22f.google.com with SMTP id s124so7965950oia.0;
- Tue, 07 Jun 2022 17:22:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v8Hi6AfNh0Ek5WpkpKu6wxhjwh9zLpsCGWzb6Z9szEw=;
- b=XFRWXQm9uqJvDNJDDDbxEA3iON3o9q2qLItniJJlwHQ8Pr9365hxn7MQfdpGDeAKXv
- fV4phzuICB7muenxPkhMP9goSxF956iqE+qeImbx/u2Cjv7dWato0DnMDdsO86t0Te5S
- 52t64y+Ys5eRxSu2qOAWjEnAxRHcZVTpgfrpmN4YjcfwYu3x/SkAKubCE3Nfawyq50hi
- C847C1ccfnpZi3puQ2tTCX9YJJUGBadKAATnBhDhyCOLY3RKc5f4G52u1DUxhrhQt3GU
- ckhzJa+HveqK7EfSKY6lkl97urNqqk/JeK1hj4Wn40ChQQI/aqi489F+ZhoX+3fYE0bO
- 5XyA==
+ (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
+ id 1nymcs-00060m-Jm
+ for qemu-riscv@nongnu.org; Tue, 07 Jun 2022 23:45:00 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id u18so16541317plb.3
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jun 2022 20:44:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t/8m5suBi1R3jzjTjFMrS41uQao5H4WQ1lczme8ti8U=;
+ b=UT4LMP4I1zhgcEIg4bdaQZSn8vjSpcWhVX2N0nvmdzS2Hl7FHwyDGHSXjU/SvKTiVG
+ JXlNaM1r+r2TLGRD+xmUAKQV5RPPhXbceaTTJbCd5CYOkeCjDUt94WfkjSwBe1UoMtlR
+ ZNOCdpQ1wk0tr6gmWSdtfBtTluRwMuovNOvWMYi1rCn6jz3DDcKzFrdJpnXFSge4huNP
+ 4pECV2lHywBdvE7g4CmxwBB477+PREPianSItTrO9Yxp1kn2e5veqXwpNUAX+EzPe33s
+ M9zA2am4/9Ah1FeBk6o0c2QauA+OSkCH5fghLPOfmfZNTs4KT0t/Q+1VteeH6mYxA9W+
+ 1dHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=v8Hi6AfNh0Ek5WpkpKu6wxhjwh9zLpsCGWzb6Z9szEw=;
- b=UQCk6hyTeaKnJtiUgKqW/Ba/B7QqNhvyHYD5320dGKGP56s+ZNTK/MRcyrB1qpAzBH
- 9eclRq3QLhV4sthF97ZKFafLSa+HGJ5Ako/ezAQToQY3vOMgoaMomvah1KOLQXXNGEkL
- Wyt3GVedhxx4dafd2Ov/t0hU8V/srUEr8E/aThkVzRFYEy4EFXxvSoEs//kzlOIUuarW
- y2htc+UqJF8UG48hB3DKAha2QYdrvQs1BUWauPZjRM6FQi8d6tL3tPKllVXRuDrceYvg
- tIlRI6509mOihuSqU9+WvHg5TWjImZACGfs/W53Qi7/9xVUB6Lv/tw/5+rLJdK2CVhCm
- sYXA==
-X-Gm-Message-State: AOAM5328sknxeGRwLc5nSQvEPVOTCcq7WVzCleysYdUOmX5APkWy6mX8
- GXMC+pcIll13w948Vs2WB27TkrmlS6k2zsX4xvQ=
-X-Google-Smtp-Source: ABdhPJyGOFTjDql0SsEo47hyyXgcfB2HZ2TQnkrLv8Zbw0g0DesN5YQHMVatnBEM/xglwtZCokXCGbNIPZXPeUBgmNg=
-X-Received: by 2002:a54:4e8a:0:b0:32e:bdbb:c562 with SMTP id
- c10-20020a544e8a000000b0032ebdbbc562mr1024449oiy.64.1654647748196; Tue, 07
- Jun 2022 17:22:28 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=t/8m5suBi1R3jzjTjFMrS41uQao5H4WQ1lczme8ti8U=;
+ b=kmyJ7k6LzTGwwJElN538/42/YKzOzCb+Oeii4IgynyrcuNhXDyGBExy9gKxY/9oKGb
+ nc1wX/jInIR+OSl2EfmYlFkTZ3Dz1zgjpbjTw5i/5bUiuXj70SXQv+luzdBJwFVM4Kl2
+ D564L9i9H/S24xm9mmOPt4j7RRQCZ5/AYPLs05ivqLSlCjZmVCzlJD/NcgXON66W8Blf
+ QW0nf772+7Jc0ZKGmqFypZ6Pk0xBDW8kSmdXGYNKx/kAFdlX/D6PrV6lw4+orh2KT9QO
+ ATsZy8Id1KNg+8RDzIXPm5tTMg18U6MPfDerzm2eRPPr63kU5adFRZqZxC0Ljy3TS3Ee
+ 5Ksw==
+X-Gm-Message-State: AOAM5319kzAQ9SfvVWbEE5Fe4dX5cSmX0J4W90WNAbG61eWwdWpyR6j8
+ tqgCv1FNCLRhe6XhkclCPb9ZCA==
+X-Google-Smtp-Source: ABdhPJzO0zbUiARHT0DGTmFVAXkzWEgvwy/kRsiK0+Pmtd6eWfw/zlsnziwbAznZqerVJ81EOL2ClQ==
+X-Received: by 2002:a17:90a:468d:b0:1df:39da:322b with SMTP id
+ z13-20020a17090a468d00b001df39da322bmr35338551pjf.137.1654659896870; 
+ Tue, 07 Jun 2022 20:44:56 -0700 (PDT)
+Received: from daolu.ba.rivosinc.com ([66.220.2.162])
+ by smtp.gmail.com with ESMTPSA id
+ r2-20020a056a00216200b0051bd9981cacsm10258214pff.123.2022.06.07.20.44.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jun 2022 20:44:56 -0700 (PDT)
+From: Dao Lu <daolu@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Dao Lu <daolu@rivosinc.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v3 0/1] target/riscv: Add Zihintpause support
+Date: Tue,  7 Jun 2022 20:44:52 -0700
+Message-Id: <20220608034454.1528469-1-daolu@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220601013657.197358-1-alistair.francis@opensource.wdc.com>
- <CAEUhbmUzB6QgVS74x2mkoYV3nbcy5aZcJkwJy5pXRxUrb4gBUg@mail.gmail.com>
-In-Reply-To: <CAEUhbmUzB6QgVS74x2mkoYV3nbcy5aZcJkwJy5pXRxUrb4gBUg@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 8 Jun 2022 10:22:02 +1000
-Message-ID: <CAKmqyKO5CyQWx3VCQ4o9T+HCXKXi3Npef+pnoazFTsaXONHXXw@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Don't expose the CPU properties on names
- CPUs
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Alistair Francis <alistair.francis@opensource.wdc.com>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bin.meng@windriver.com>, Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
- envelope-from=alistair23@gmail.com; helo=mail-oi1-x22f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=daolu@rivosinc.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,231 +79,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2022 00:22:31 -0000
+X-List-Received-Date: Wed, 08 Jun 2022 03:45:00 -0000
 
-On Wed, Jun 8, 2022 at 9:27 AM Bin Meng <bmeng.cn@gmail.com> wrote:
->
-> On Wed, Jun 1, 2022 at 9:37 AM Alistair Francis
-> <alistair.francis@opensource.wdc.com> wrote:
-> >
-> > From: Alistair Francis <alistair.francis@wdc.com>
-> >
-> > There are currently two types of RISC-V CPUs:
-> >  - Generic CPUs (base or any) that allow complete custimisation
-> >  - "Named" CPUs that match existing hardware
-> >
-> > Users can use the base CPUs to custimise the extensions that they want, for
-> > example -cpu rv64,v=true.
-> >
-> > We originally exposed these as part of the named CPUs as well, but that was
-> > by accident.
-> >
-> > Exposing the CPU properties to named CPUs means that we accidently
-> > enable extensinos that don't exist on the CPUs by default. For example
->
-> typo: extensions
->
-> > the SiFive E CPU currently support the zba extension, which is a bug.
-> >
-> > This patch instead only expose the CPU extensions to the generic CPUs.
->
-> exposes
->
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  target/riscv/cpu.c | 57 +++++++++++++++++++++++++++++++++++++---------
-> >  1 file changed, 46 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index a91253d4bd..c0c0f7e71f 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -118,6 +118,8 @@ static const char * const riscv_intr_names[] = {
-> >      "reserved"
-> >  };
-> >
-> > +static void register_cpu_props(DeviceState *dev);
->
-> nits: please move the whole static function implementation here to
-> avoid the forward declaration
+This patch adds RISC-V Zihintpause support. The extension is set to be enabled
+by default and opcode has been added to insn32.decode.
 
-I did try that but the function relies on the `riscv_cpu_extensions`
-array, which is defined later so unless we move the properties up to
-the top of this file we need to have a declaration here. I think
-keeping the properties where they are makes sense as that follows the
-usual QEMU layout.
+Added trans_pause for TCG to mainly to break reservation and exit the TB.
 
-Alistair
+The change can also be found in:
+https://github.com/dlu42/qemu/tree/zihintpause_support_v1
 
->
-> > +
-> >  const char *riscv_cpu_get_trap_name(target_ulong cause, bool async)
-> >  {
-> >      if (async) {
-> > @@ -161,6 +163,7 @@ static void riscv_any_cpu_init(Object *obj)
-> >      set_misa(env, MXL_RV64, RVI | RVM | RVA | RVF | RVD | RVC | RVU);
-> >  #endif
-> >      set_priv_version(env, PRIV_VERSION_1_12_0);
-> > +    register_cpu_props(DEVICE(obj));
-> >  }
-> >
-> >  #if defined(TARGET_RISCV64)
-> > @@ -169,6 +172,7 @@ static void rv64_base_cpu_init(Object *obj)
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> >      /* We set this in the realise function */
-> >      set_misa(env, MXL_RV64, 0);
-> > +    register_cpu_props(DEVICE(obj));
-> >  }
-> >
-> >  static void rv64_sifive_u_cpu_init(Object *obj)
-> > @@ -181,9 +185,11 @@ static void rv64_sifive_u_cpu_init(Object *obj)
-> >  static void rv64_sifive_e_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > +    RISCVCPU *cpu = RISCV_CPU(obj);
-> > +
-> >      set_misa(env, MXL_RV64, RVI | RVM | RVA | RVC | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-> > +    cpu->cfg.mmu = false;
-> >  }
-> >
-> >  static void rv128_base_cpu_init(Object *obj)
-> > @@ -197,6 +203,7 @@ static void rv128_base_cpu_init(Object *obj)
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> >      /* We set this in the realise function */
-> >      set_misa(env, MXL_RV128, 0);
-> > +    register_cpu_props(DEVICE(obj));
-> >  }
-> >  #else
-> >  static void rv32_base_cpu_init(Object *obj)
-> > @@ -204,6 +211,7 @@ static void rv32_base_cpu_init(Object *obj)
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> >      /* We set this in the realise function */
-> >      set_misa(env, MXL_RV32, 0);
-> > +    register_cpu_props(DEVICE(obj));
-> >  }
-> >
-> >  static void rv32_sifive_u_cpu_init(Object *obj)
-> > @@ -216,27 +224,33 @@ static void rv32_sifive_u_cpu_init(Object *obj)
-> >  static void rv32_sifive_e_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > +    RISCVCPU *cpu = RISCV_CPU(obj);
-> > +
-> >      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVC | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-> > +    cpu->cfg.mmu = false;
-> >  }
-> >
-> >  static void rv32_ibex_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > +    RISCVCPU *cpu = RISCV_CPU(obj);
-> > +
-> >      set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> > -    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-> > -    qdev_prop_set_bit(DEVICE(obj), "x-epmp", true);
-> > +    cpu->cfg.mmu = false;
-> > +    cpu->cfg.epmp = true;
-> >  }
-> >
-> >  static void rv32_imafcu_nommu_cpu_init(Object *obj)
-> >  {
-> >      CPURISCVState *env = &RISCV_CPU(obj)->env;
-> > +    RISCVCPU *cpu = RISCV_CPU(obj);
-> > +
-> >      set_misa(env, MXL_RV32, RVI | RVM | RVA | RVF | RVC | RVU);
-> >      set_priv_version(env, PRIV_VERSION_1_10_0);
-> >      set_resetvec(env, DEFAULT_RSTVEC);
-> > -    qdev_prop_set_bit(DEVICE(obj), "mmu", false);
-> > +    cpu->cfg.mmu = false;
-> >  }
-> >  #endif
-> >
-> > @@ -249,6 +263,7 @@ static void riscv_host_cpu_init(Object *obj)
-> >  #elif defined(TARGET_RISCV64)
-> >      set_misa(env, MXL_RV64, 0);
-> >  #endif
-> > +    register_cpu_props(DEVICE(obj));
-> >  }
-> >  #endif
-> >
-> > @@ -831,6 +846,12 @@ static void riscv_cpu_init(Object *obj)
-> >  {
-> >      RISCVCPU *cpu = RISCV_CPU(obj);
-> >
-> > +    cpu->cfg.ext_counters = true;
-> > +    cpu->cfg.ext_ifencei = true;
-> > +    cpu->cfg.ext_icsr = true;
-> > +    cpu->cfg.mmu = true;
-> > +    cpu->cfg.pmp = true;
-> > +
-> >      cpu_set_cpustate_pointers(cpu);
-> >
-> >  #ifndef CONFIG_USER_ONLY
-> > @@ -839,7 +860,7 @@ static void riscv_cpu_init(Object *obj)
-> >  #endif /* CONFIG_USER_ONLY */
-> >  }
-> >
-> > -static Property riscv_cpu_properties[] = {
-> > +static Property riscv_cpu_extensions[] = {
-> >      /* Defaults for standard extensions */
-> >      DEFINE_PROP_BOOL("i", RISCVCPU, cfg.ext_i, true),
-> >      DEFINE_PROP_BOOL("e", RISCVCPU, cfg.ext_e, false),
-> > @@ -862,17 +883,12 @@ static Property riscv_cpu_properties[] = {
-> >      DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
-> >      DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
-> >      DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
-> > -    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> >
-> >      DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
-> >      DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
-> >      DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
-> >      DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
-> >
-> > -    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-> > -    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-> > -    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
-> > -
-> >      DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
-> >      DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
-> >      DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
-> > @@ -909,6 +925,25 @@ static Property riscv_cpu_properties[] = {
-> >      DEFINE_PROP_BOOL("x-epmp", RISCVCPU, cfg.epmp, false),
-> >      DEFINE_PROP_BOOL("x-aia", RISCVCPU, cfg.aia, false),
-> >
-> > +    DEFINE_PROP_END_OF_LIST(),
-> > +};
-> > +
-> > +static void register_cpu_props(DeviceState *dev)
-> > +{
-> > +    Property *prop;
-> > +
-> > +    for (prop = riscv_cpu_extensions; prop && prop->name; prop++) {
-> > +        qdev_property_add_static(dev, prop);
-> > +    }
-> > +}
-> > +
-> > +static Property riscv_cpu_properties[] = {
-> > +    DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
-> > +
-> > +    DEFINE_PROP_UINT32("mvendorid", RISCVCPU, cfg.mvendorid, 0),
-> > +    DEFINE_PROP_UINT64("marchid", RISCVCPU, cfg.marchid, RISCV_CPU_MARCHID),
-> > +    DEFINE_PROP_UINT64("mimpid", RISCVCPU, cfg.mimpid, RISCV_CPU_MIMPID),
-> > +
-> >      DEFINE_PROP_UINT64("resetvec", RISCVCPU, cfg.resetvec, DEFAULT_RSTVEC),
-> >
-> >      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
-> > --
->
-> Otherwise LGTM.
->
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
->
-> Regards,
-> Bin
+Tested along with pause support added to cpu_relax function for linux, the
+changes I made to linux to test can be found here:
+https://github.com/dlu42/linux/tree/pause_support_v1
+
+--------
+Changelog:
+
+v1 -> v2
+1. Pause now also exit the TB and return to main loop
+2. Move the REQUIRE_ZIHINTPAUSE macro inside the trans_pause function
+
+v2 -> v3
+No changes, v2 was lost from the list
+
+Dao Lu (1):
+  Add Zihintpause support
+
+ target/riscv/cpu.c                      |  2 ++
+ target/riscv/cpu.h                      |  1 +
+ target/riscv/insn32.decode              |  7 ++++++-
+ target/riscv/insn_trans/trans_rvi.c.inc | 18 ++++++++++++++++++
+ 4 files changed, 27 insertions(+), 1 deletion(-)
+
+-- 
+2.25.1
+
 
