@@ -1,68 +1,98 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nz0Og-0004a8-Uw
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 14:27:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:57822)
+	id 1nz5Od-00032r-QA
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 19:47:32 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50108)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1nz0Of-0004Zu-AR
- for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 14:27:13 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e]:41610)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <daolu@rivosinc.com>)
- id 1nz0Od-0006d4-Ex
- for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 14:27:13 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id e66so19655623pgc.8
- for <qemu-riscv@nongnu.org>; Wed, 08 Jun 2022 11:27:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=h+cK2bmHugVi2+Zcs8bL9KFSSMF+F4Jl0zV7svOxDIM=;
- b=EJm61z27vYcEiWeqINOKHTITI3pAZFnRK8wLWiIU0k/v4et9fUz2klZFfOF5x5iwvS
- awJjG1aUpx/rqHULdM/8nrfWiFghcqGqaHnQaJUFOLyL3Kl1xuekY1zBwk3vXdIYqQDD
- Q5eo2Qemi8SYbDMwNMcM7HoALv3boDacfXM8tFxR86swc8tGNZYt/l32OCAYndwoF9oA
- 8wgldVByXn1gNnbY+cp5XiToHqm5tMCx6bGwEa7X5FYaSfEjRSAjGnat+61td3AvGCJm
- l6FpPqRBwUhZCL118tVkmtdR1dmuVGX+r9O3Wsv7FpB1McxgBv87hwTLU8eJD+PbUYnS
- oT1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=h+cK2bmHugVi2+Zcs8bL9KFSSMF+F4Jl0zV7svOxDIM=;
- b=ktxkxNRUfUSn2oSwQ9jkgn/+zJVgRbhTdGraFEztDyGFZcZR6eJEk83TZjFcFj1snY
- IVVAdw6Q5NyjnIC6TwKBycd9c/13Y3zlbfvPGJxZ8jND6xJ8fNabFIQu90n5bZ2Cs3xE
- FLIDGWa0QaAVkzjpym1+7tyxOWhEL8vb+9XCv2YcGBA+O+RCTqMQoNulaHzfbJK2/dF/
- qj6iuusS97+YYC1S2/9+E+5P4JZgOIPWQchT0pKpnmJsLwOUdy/1U67sawb/DA4RqtD0
- e03zivcKhyqA0ZTgQjNZcZcDM6tFd5L9K9u4KW35LKxJl0nwtm7Zc0NN1b6JzaFOAr36
- ZYtw==
-X-Gm-Message-State: AOAM53344PSY3yHgYw/xwkghg11JHKhX37ql1KYDKMe4X/N7tk5lcyxP
- QvpyN+rVfY1PBkz31ny9isO88MTFxCQsrUBJmZg2kA==
-X-Google-Smtp-Source: ABdhPJzKe0RQHkJyJYeUe12TK04uAGsAP0s/tbtrhbNudqvu2dyjfYOdf273S5P4Of++fZ4EHAK9OquJ49jpQ0+Skl0=
-X-Received: by 2002:a05:6a00:2390:b0:51c:21e1:782 with SMTP id
- f16-20020a056a00239000b0051c21e10782mr15503004pfc.21.1654712829776; Wed, 08
- Jun 2022 11:27:09 -0700 (PDT)
+ (Exim 4.90_1)
+ (envelope-from <prvs=15114fb85=alistair.francis@opensource.wdc.com>)
+ id 1nz5OT-000328-Ls
+ for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 19:47:22 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:36737)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=15114fb85=alistair.francis@opensource.wdc.com>)
+ id 1nz5OQ-0001pF-Tv
+ for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 19:47:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1654732037; x=1686268037;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=w2k3+yROqoHmbdWyCpcM38o625k+olDaN84e7SOgEas=;
+ b=cqFgTnzPCTpIdeU2S9Z5v+Aiv5Do2wkeb9neGWXsPco2K+HwXeCUukYE
+ GAGmz9XzFT7xWtDKnKXjUPTAgBjQlI8U1WNQMGdA4MZc2xip6Cjy5qBDf
+ Y1qNZaqQUDiUZ5mcrVX4wakYc4pHnxslzoyzR9oUD/m5/hvbgClDnJZNb
+ tbc4LpSe2pJsxpUywTGt+hnQl3vhagqoRM82aHTZbyNqpLHSTQeTVqb38
+ xLSKy7agXCYW5cezzdv0a4x1H3h4vfxOnedRpdtcpX2oXcXRS+Jn7eNuA
+ eNkCY1opGdeSXkY9c9WWhxiQL1cPjiMY4whsCuPMkdSuSv9imidbUFDSe Q==;
+X-IronPort-AV: E=Sophos;i="5.91,287,1647273600"; d="scan'208";a="202644367"
+Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 09 Jun 2022 07:47:10 +0800
+IronPort-SDR: h6DfgQ4hAVWy6lE0oAsJJ2m9Ka6JujQOxo8O/SqXCkfSns6R6KLfAhIpmpgGx6F2mouj+n3HQY
+ yZg3UtJIW/s4xvaqtel2JvMUPfq9TXmtJidHZS9jZJd+HI4qF4C7MzTKIv8m+7cx8afMZCZdw1
+ MBNI2o2eHKf4xJ0BfIlMweP/PviRtfNBdP32PrB411eQ+X3teg9gYcFJD9VC2uFIhtggK77BVl
+ 6IJ8CNKpYkosxmypHYq3XFxCJ+FFnCSDQxosq7TgmRMLlZKo4wGpVAY+CqrVKevWNK5KPgbCRI
+ JAE1NeuGT/2DdFJWC7WXi/ET
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 08 Jun 2022 16:10:24 -0700
+IronPort-SDR: 0v5GbhJwoyBguvFkXEk466mcJblWgcKcVr57WLWt2GtDMFj4uOKS+hv0v8+Iq6agvgthpH+/Mf
+ ezxXginSIIabK3WhEsku0iigPkPQkKrr07p7Dz8QIcUS9PFtkidOLTq5xHOmVbGwSISFyamatS
+ 7Vy2DhwScm7sjdmLPNAlexRNG2yeLEsiX+L4Zbr+GtCLgIjgId09IOLSAgS70iOpVUX5dY5xfv
+ eD2prbLDD4f/cuV/eG6VORLVeT5TSUqvndw7nRmq4vQ4rypxuedehWRxXxtDUjGaQo6eHOND2f
+ fKU=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 08 Jun 2022 16:47:11 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4LJP5p4Kv3z1SVp2
+ for <qemu-riscv@nongnu.org>; Wed,  8 Jun 2022 16:47:10 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :x-mailer:message-id:date:subject:to:from; s=dkim; t=1654732029;
+ x=1657324030; bh=w2k3+yROqoHmbdWyCpcM38o625k+olDaN84e7SOgEas=; b=
+ QQezmAb2Qa7FwVoq+HK5BOBtm+w33N6EJ+2PfTlNL96oYKpFUB0X/jKde9StXrVB
+ Sg6AXA2QmuRbegL8llxE8D8HOaK+oMSy4xnMF7r7C/L5amZ/kQ0QxVeKfLB3UXtE
+ ar6qMwLkpeai3i2hHNTkGmfOv0mSyR4HPYrXPAUP5dNLEFZH2Isr2JKqz780FVMf
+ 15ZGLs38NArS0jYg0gIb9wG1o7C47D1rPpFG1mShoM+vY9CV0HSVDWxy61Z2LGoO
+ lY5yyC5VBKFaFAhn6wAxmjEX68A/GGcYFtqMXcvdV7ZAtqnr2Kjt6qQucDD4ecxQ
+ 45/4ZS5/ReEbT1MFXjCKIg==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id Rr8_3jVhOGot for <qemu-riscv@nongnu.org>;
+ Wed,  8 Jun 2022 16:47:09 -0700 (PDT)
+Received: from toolbox.wdc.com (unknown [10.225.165.12])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4LJP5k0njJz1Rvlc;
+ Wed,  8 Jun 2022 16:47:05 -0700 (PDT)
+From: Alistair Francis <alistair.francis@opensource.wdc.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Bin Meng <bin.meng@windriver.com>, bmeng.cn@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, alistair23@gmail.com,
+ Robert Bu <robert.bu@gmail.com>
+Subject: [PATCH] target/riscv: trans_rvv: Avoid assert for RV32 and e64
+Date: Thu,  9 Jun 2022 09:47:01 +1000
+Message-Id: <20220608234701.369536-1-alistair.francis@opensource.wdc.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20220608034454.1528469-1-daolu@rivosinc.com>
- <20220608034454.1528469-2-daolu@rivosinc.com>
-In-Reply-To: <20220608034454.1528469-2-daolu@rivosinc.com>
-From: Dao Lu <daolu@rivosinc.com>
-Date: Wed, 8 Jun 2022 11:26:59 -0700
-Message-ID: <CAKh7v-QoaNO57Pv-Z=qH_9WZaiYe5kyZk+W-Q6oBZeVud1Oncw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] target/riscv: Add Zihintpause support
-To: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Heiko Stuebner <heiko@sntech.de>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=daolu@rivosinc.com; helo=mail-pg1-x52e.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=15114fb85=alistair.francis@opensource.wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,104 +105,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2022 18:27:13 -0000
+X-List-Received-Date: Wed, 08 Jun 2022 23:47:26 -0000
 
-Please ignore, I have missed the commit message, will resend a v3.
+From: Alistair Francis <alistair.francis@wdc.com>
 
-Sorry about that.
-Dao
+When running a 32-bit guest, with a e64 vmv.v.x and vl_eq_vlmax set to
+true the `tcg_debug_assert(vece <=3D MO_32)` will be triggered inside
+tcg_gen_gvec_dup_i32().
 
-On Tue, Jun 7, 2022 at 8:44 PM Dao Lu <daolu@rivosinc.com> wrote:
->
-> Tested-by: Heiko Stuebner <heiko@sntech.de>
-> Signed-off-by: Dao Lu <daolu@rivosinc.com>
-> ---
->  target/riscv/cpu.c                      |  2 ++
->  target/riscv/cpu.h                      |  1 +
->  target/riscv/insn32.decode              |  7 ++++++-
->  target/riscv/insn_trans/trans_rvi.c.inc | 18 ++++++++++++++++++
->  4 files changed, 27 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ccacdee215..183fb37fdf 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -825,6 +825,7 @@ static Property riscv_cpu_properties[] = {
->      DEFINE_PROP_BOOL("Counters", RISCVCPU, cfg.ext_counters, true),
->      DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
->      DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
-> +    DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true),
->      DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
->      DEFINE_PROP_BOOL("Zfhmin", RISCVCPU, cfg.ext_zfhmin, false),
->      DEFINE_PROP_BOOL("Zve32f", RISCVCPU, cfg.ext_zve32f, false),
-> @@ -996,6 +997,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, char **isa_str, int max_str_len)
->       *    extensions by an underscore.
->       */
->      struct isa_ext_data isa_edata_arr[] = {
-> +        ISA_EDATA_ENTRY(zihintpause, ext_zihintpause),
->          ISA_EDATA_ENTRY(zfh, ext_zfh),
->          ISA_EDATA_ENTRY(zfhmin, ext_zfhmin),
->          ISA_EDATA_ENTRY(zfinx, ext_zfinx),
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index fe6c9a2c92..e466a04a59 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -394,6 +394,7 @@ struct RISCVCPUConfig {
->      bool ext_counters;
->      bool ext_ifencei;
->      bool ext_icsr;
-> +    bool ext_zihintpause;
->      bool ext_svinval;
->      bool ext_svnapot;
->      bool ext_svpbmt;
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 4033565393..595fdcdad8 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -149,7 +149,12 @@ srl      0000000 .....    ..... 101 ..... 0110011 @r
->  sra      0100000 .....    ..... 101 ..... 0110011 @r
->  or       0000000 .....    ..... 110 ..... 0110011 @r
->  and      0000000 .....    ..... 111 ..... 0110011 @r
-> -fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-> +
-> +{
-> +  pause  0000 0001   0000   00000 000 00000 0001111
-> +  fence  ---- pred:4 succ:4 ----- 000 ----- 0001111
-> +}
-> +
->  fence_i  ---- ----   ----   ----- 001 ----- 0001111
->  csrrw    ............     ..... 001 ..... 1110011 @csr
->  csrrs    ............     ..... 010 ..... 1110011 @csr
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index f1342f30f8..ca75e05f4b 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -796,6 +796,24 @@ static bool trans_srad(DisasContext *ctx, arg_srad *a)
->      return gen_shift(ctx, a, EXT_SIGN, tcg_gen_sar_tl, NULL);
->  }
->
-> +static bool trans_pause(DisasContext *ctx, arg_pause *a)
-> +{
-> +    if (!ctx->cfg_ptr->ext_zihintpause) {
-> +        return false;
-> +    }
-> +
-> +    /*
-> +     * PAUSE is a no-op in QEMU,
-> +     * however we need to clear the reservation,
-> +     * end the TB and return to main loop
-> +     */
-> +    tcg_gen_movi_tl(load_res, -1);
-> +    gen_set_pc_imm(ctx, ctx->pc_succ_insn);
-> +    tcg_gen_exit_tb(NULL, 0);
-> +    ctx->base.is_jmp = DISAS_NORETURN;
-> +
-> +    return true;
-> +}
->
->  static bool trans_fence(DisasContext *ctx, arg_fence *a)
->  {
-> --
-> 2.25.1
->
+This patch checks that condition and instead uses tcg_gen_gvec_dup_i64()
+is required.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1028
+Suggested-by: Robert Bu <robert.bu@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_=
+trans/trans_rvv.c.inc
+index 391c61fe93..6b27d8e91e 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -2097,8 +2097,16 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv=
+_v_x *a)
+         s1 =3D get_gpr(s, a->rs1, EXT_SIGN);
+=20
+         if (s->vl_eq_vlmax) {
+-            tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
+-                                MAXSZ(s), MAXSZ(s), s1);
++            if (get_xl(s) =3D=3D MXL_RV32 && s->sew =3D=3D MO_64) {
++                TCGv_i64 s1_i64 =3D tcg_temp_new_i64();
++                tcg_gen_ext_tl_i64(s1_i64, s1);
++                tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
++                                     MAXSZ(s), MAXSZ(s), s1_i64);
++                tcg_temp_free_i64(s1_i64);
++            } else {
++                tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
++                                    MAXSZ(s), MAXSZ(s), s1);
++            }
+         } else {
+             TCGv_i32 desc;
+             TCGv_i64 s1_i64 =3D tcg_temp_new_i64();
+--=20
+2.36.1
+
 
