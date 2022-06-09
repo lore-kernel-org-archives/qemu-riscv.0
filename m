@@ -1,74 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nz8fw-0007FQ-DU
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 23:17:36 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46402)
+	id 1nz8t7-0002b4-JD
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 23:31:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47414)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nz8fv-0007Dt-Ic
- for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 23:17:35 -0400
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431]:35781)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1nz8t5-0002a8-Ul
+ for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 23:31:12 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:47025)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nz8fs-0004vu-Kd
- for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 23:17:35 -0400
-Received: by mail-wr1-x431.google.com with SMTP id a15so22058870wrh.2
- for <qemu-riscv@nongnu.org>; Wed, 08 Jun 2022 20:17:31 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <apatel@ventanamicro.com>)
+ id 1nz8t4-0006ff-7B
+ for qemu-riscv@nongnu.org; Wed, 08 Jun 2022 23:31:11 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ k5-20020a17090a404500b001e8875e6242so9229411pjg.5
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jun 2022 20:31:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=PdFxZG9+PfTsMCWus8hNIRSWpSN6wJusipxVJX2hyDk=;
- b=o8cqmcY4a6JSgx96+qFjFPp/pbFczpWYsYML6SNz/MCpzR3Yt4Ih+1pmT9WZT9EcHg
- Lgt5JXccXhFRBppVTEcKLjoa0cSWvf34JkaA8tBHpcFp18mH92fQD+H1WvP1PYLaL7U0
- SLU4DMR6w43+CyttK6Y2ST48fret6OyvkcYbxtbKjaEa7IDZ4c1ahbbrBXZ5jYMXMteS
- 5gtC9fM5zghBN4/WP+fBN7T68kPPPOSvfoHIHz1lc5BHCNPhqYiOcXen/R5zvBVaHbRa
- ykcPEzODM6mQO2zaBouqtr2Oay+GzU+FIPGMpVKgwKXt/Dgmwa79ZPIG2fLD1rq+haVk
- ogDQ==
+ d=ventanamicro.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EXQhQ2o19G7pZvW7CPE6FiefuRjETdhvKk2mYZyEpxM=;
+ b=J230iWGD2h94NVu5aMbj/DPgRBG6lRLYsuTWt91OzjaEEU4fwyeQmT6qZ/qTuQk5g9
+ H1PYBIa19nplbU7Dr8DR31LgDq+HhqzKipveM8OmvBiKeA9MVQ8K/vo04DTF1uKqXPtt
+ UCFkoBaBpjUyJO28Q6N8RFSHwfLtvuIiMIVot/fl7+0AgHUyrn+vv8yD0fddl2Wk0tI2
+ Al7zoT6H2+jGJpovwtxFNj/dmx1vkphC9MXZO9ZixnPZJFcZnt4IvjX0uGEluBFrAT1W
+ 6WK3r86sZZ/aDh57pD181db7O7uOnkf7fV2X5Eq+NoGshaUDM+ks64dZDMJ4w7iiZtq/
+ vGVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=PdFxZG9+PfTsMCWus8hNIRSWpSN6wJusipxVJX2hyDk=;
- b=MEHCRHja5Xyq2bLXSmciwkfmIK/rygwhH/uaUHl4eerR7yGwKoYqdSrb4a8sSsYW3q
- J+yqXmxH6oZv2/t3ue2+nCdvGIkJNBA8W1/NZYVoCFrWvbILoJXQHHJ4Bgt0jEZ+ssW9
- B1U/tezUUh+hBKUMWv/O51okSTcv9iDFHv0MESR5xw/l1/kMQeQvsPlTFN0Z7QwgHFDP
- IvISGaDcvy4zcrTDEkQkHp9UukXqMn9bFgS2tANFAiCi2M6oUSTODSJVlfpi9qURuRUW
- 6FAaCkYiEdxoKN/sKFom1ErQx+PxE5ZD6gZN9dG5eCXgzlmTeo/sP1oo2YHIAA+SI291
- peOg==
-X-Gm-Message-State: AOAM5317OfuGBkz6ozbMLGBNnLxoIotRhQACRTQrA6RhIZEYNcrIwYyp
- Hr4fQnNkM/VcXMk9ztdTY+uA2X4NtM38FPFPXD3oww==
-X-Google-Smtp-Source: ABdhPJzIyjgyvQsau0w5ZPnlNWWjYZuiNWB7jtkA1MjH2my9BVsmX2y/E39SHF5Ilkp6BbN0jNM+TWqq/ztBsT2JdZM=
-X-Received: by 2002:a5d:6c6b:0:b0:1ea:77ea:dde8 with SMTP id
- r11-20020a5d6c6b000000b001ea77eadde8mr36504354wrz.690.1654744649614; Wed, 08
- Jun 2022 20:17:29 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220608161405.729964-1-apatel@ventanamicro.com>
- <20220608161405.729964-5-apatel@ventanamicro.com>
- <6455580a-7344-8531-cd2c-708f8ddfb04b@linaro.org>
-In-Reply-To: <6455580a-7344-8531-cd2c-708f8ddfb04b@linaro.org>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 9 Jun 2022 08:46:28 +0530
-Message-ID: <CAAhSdy1JeAuz0YtMdKQjeJHpEG5_BL35v+OWiGsiPn4WgAsOaQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/4] target/riscv: Force disable extensions if priv
- spec version does not match
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Anup Patel <apatel@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=EXQhQ2o19G7pZvW7CPE6FiefuRjETdhvKk2mYZyEpxM=;
+ b=bLBhWcsLkJAKWZagC1qpoEGRHqgkJePx2My1X/Uu7SEYFalPz8IFpmUTO384INijp3
+ beA8nEI/9+QsoC66aP4eU5sIxezSg+cjGKfftnvmiYoC16/j5QoFQzvc4vCDSIe67IMl
+ I1+HNAzE8BvQKHU5zOeqfdVkOEDzSlXs8SjsOf1GJ5/2YuVYMlS62VUC3YvxZCpWE611
+ Zjw3NXpaFR8E0a2ZIBSBV/HPv15wqYzOUATgxGalbfqQiNdTnfbial1qjfzR3BQcZfLy
+ k30c/JNdhUxUgU9+BSsw17lPeLX1kRNx09j80kVQUQqPPVSZOwTwtK5n2QvM0yGkQbkm
+ 7ZIA==
+X-Gm-Message-State: AOAM532+QGaB7/stgL4pqP0IfguOz4N8AMR/t1lmO7swzJSh7SLD1WDt
+ uIGqLOrqeU8gTEa2tdB1Yf4atQ==
+X-Google-Smtp-Source: ABdhPJxQbm/eIJupql6OkILm8UYIbxKATLh2EcRC7ynVIytuuG5oRDoS7NjVYDkRCqCVj0grlQ9M7Q==
+X-Received: by 2002:a17:90b:2404:b0:1e3:4db0:f32a with SMTP id
+ nr4-20020a17090b240400b001e34db0f32amr1249940pjb.201.1654745468589; 
+ Wed, 08 Jun 2022 20:31:08 -0700 (PDT)
+Received: from anup-ubuntu64-vm.. ([122.182.198.228])
+ by smtp.gmail.com with ESMTPSA id
+ ei13-20020a17090ae54d00b001e31c7aad6fsm15053964pjb.20.2022.06.08.20.31.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Jun 2022 20:31:08 -0700 (PDT)
+From: Anup Patel <apatel@ventanamicro.com>
+To: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Atish Patra <atishp@atishpatra.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::431;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x431.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Cc: Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Anup Patel <apatel@ventanamicro.com>
+Subject: [PATCH v5 0/4] QEMU RISC-V nested virtualization fixes
+Date: Thu,  9 Jun 2022 09:00:07 +0530
+Message-Id: <20220609033011.752714-1-apatel@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=apatel@ventanamicro.com; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,24 +82,60 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2022 03:17:35 -0000
+X-List-Received-Date: Thu, 09 Jun 2022 03:31:12 -0000
 
-On Wed, Jun 8, 2022 at 10:23 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 6/8/22 09:14, Anup Patel wrote:
-> > +    struct isa_ext_data isa_edata_arr[] = {
->
-> static const?
+This series does fixes and improvements to have nested virtualization
+on QEMU RISC-V.
 
-Using const is fine but we can't use "static const" because
-the "struct isa_ext_data" has a pointer to ext_xyz which
-is different for each CPU.
+These patches can also be found in riscv_nested_fixes_v5 branch at:
+https://github.com/avpatel/qemu.git
 
-Regards,
-Anup
+The RISC-V nested virtualization was tested on QEMU RISC-V using
+Xvisor RISC-V which has required hypervisor support to run another
+hypervisor as Guest/VM.
 
->
->
-> r~
+Changes since 4:
+ - Updated commit description in PATCH1, PATCH2, and PATCH4
+ - Use "const" for local array in PATCH5
+
+Changes since v3:
+ - Updated PATCH3 to set special pseudoinstructions in htinst for
+   guest page faults which result due to VS-stage page table walks
+ - Updated warning message in PATCH4
+
+Changes since v2:
+ - Dropped the patch which are already in Alistair's next branch
+ - Set "Addr. Offset" in the transformed instruction for PATCH3
+ - Print warning in riscv_cpu_realize() if we are disabling an
+   extension due to privilege spec verions mismatch for PATCH4
+
+Changes since v1:
+ - Set write_gva to env->two_stage_lookup which ensures that for
+   HS-mode to HS-mode trap write_gva is true only for HLV/HSV
+   instructions
+ - Included "[PATCH 0/3] QEMU RISC-V priv spec version fixes"
+   patches in this series for easy review
+ - Re-worked PATCH7 to force disable extensions if required
+   priv spec version is not staisfied
+ - Added new PATCH8 to fix "aia=aplic-imsic" mode of virt machine
+
+Anup Patel (4):
+  target/riscv: Don't force update priv spec version to latest
+  target/riscv: Add dummy mcountinhibit CSR for priv spec v1.11 or
+    higher
+  target/riscv: Update [m|h]tinst CSR in riscv_cpu_do_interrupt()
+  target/riscv: Force disable extensions if priv spec version does not
+    match
+
+ target/riscv/cpu.c        |  65 +++++++++--
+ target/riscv/cpu.h        |   3 +
+ target/riscv/cpu_bits.h   |   3 +
+ target/riscv/cpu_helper.c | 231 +++++++++++++++++++++++++++++++++++++-
+ target/riscv/csr.c        |   2 +
+ target/riscv/instmap.h    |  43 +++++++
+ 6 files changed, 333 insertions(+), 14 deletions(-)
+
+-- 
+2.34.1
+
 
