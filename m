@@ -1,76 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nzKuP-00011l-5C
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Jun 2022 12:21:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41064)
+	id 1nzRoT-0008Vk-6f
+	for mharc-qemu-riscv@gnu.org; Thu, 09 Jun 2022 19:43:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nzKuM-0000uP-RT
- for qemu-riscv@nongnu.org; Thu, 09 Jun 2022 12:21:18 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f]:52084)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nzRoR-0008VR-CM; Thu, 09 Jun 2022 19:43:39 -0400
+Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f]:38416)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1nzKuG-0002CJ-Rn
- for qemu-riscv@nongnu.org; Thu, 09 Jun 2022 12:21:18 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id z17so7847564wmi.1
- for <qemu-riscv@nongnu.org>; Thu, 09 Jun 2022 09:21:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1nzRoP-0004Dl-OF; Thu, 09 Jun 2022 19:43:39 -0400
+Received: by mail-ot1-x32f.google.com with SMTP id
+ c3-20020a9d6843000000b0060c2c63c337so1401411oto.5; 
+ Thu, 09 Jun 2022 16:43:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kvCp9Ti3iYX61KhF85MTGFcRglWIgqZxvtulohUisII=;
- b=BU21Kb14IXzaYZZypICuNrYUVBiP2kGeUXmrd5gm4XAh4O3+ATuQYFg2TZdxW9Ur7M
- AG7W3NyGO9G46TA5+r8P3OgY/NZ5GUTmMZaDtIy7tIc3ZgVzYBnlXNvcNKDnXTvQi3+c
- lrbAjYz95FHCoqIs3vCGPIpe3U5xawnbnxaD9pXif8N0KQTzyUDqO5H8Pq3dgbD1nmRz
- eGSL8BW4EBb5e0D1pMygIVq8BiWEuzducFvodErbL0ug0k2AO++gNoxbZAEPEiKstF8C
- z8ULb3+Fo5RjDmBivglIQC5slYMhTjsCxgqRcIwGnQZ1iaLVgTynm35ow5jsgpz8pO1z
- Gj1Q==
+ :cc; bh=+MKVbyJiIg9VO9382YHO/BuVJMdUH0lEIY/DAyV3uWE=;
+ b=l22P1eSfCWtG5LnZDJAw13I/hfEkwQnbfwrSQKhNl4TEJOM5SM9gXHTxG6MMKTWvZx
+ Lu/tUGYhZUT+4s9LTCc4N243Np9yk7Am8YkvAZvo/5eqnOMi4Jyi62pfPmoiAlqCTmea
+ NN7PuJE8ddEGuDEAz2WnNeCnEuT5fuGqfHwho0JwbcLvGe9cWncVwluKj79kA1HSrFgG
+ Wr+TmLOj8wTdU7iCavWZM8x1r1+mFTwliECA09fmlzA86k6MNT5/iU1imFEwzmD50dUM
+ fralw8zvmRvYo29tLsKx67gZxkdX7r9y8vo5I3LFISAgPQ8YlD//tsKdw6DxQdbUXan8
+ dZxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=kvCp9Ti3iYX61KhF85MTGFcRglWIgqZxvtulohUisII=;
- b=bsCOznitJQ854gnlwoM3dsFNMY85p4KNyD87meo6gDQtpyt2153jsC7qE0cMYA+/Ry
- L20JZH71UU85jlE+mhaFx5j+bTzdVYL8BuReF1g3PVIffLDXdoT+cXC/uXQY24egTIh8
- 7DI6lRBv42DAYTAv5D0axXj6VphSXafaYupI7w76FOm9JJLrIovpBLzJDC9NuKIuyQu2
- LKCXax+A2GaDo235zro3A3p5sbZ4KM+RoC9WwADNlDzyw0YYbnYXeZMHdlRyKL96eMNJ
- xvljzY61PC7bf0Cv1FHBW/qryHaN5qslTN8PZRDqoFcC302X8RcpYOwiQfKDNs4sXEbx
- P0Jw==
-X-Gm-Message-State: AOAM53001bESb/2tE40CNATBreF0ESyFdIuujGpFIEJTDjnkTYbiwDiH
- iqNflZXGIiruUvKqBqYBAEmgWkJmgf19quxmTNh7Kg==
-X-Google-Smtp-Source: ABdhPJwp9AwN9lS9HKfEPk6Ks+r/E1qN4YXpEic2pX8o52bvDdJZhydX/Eel1g1qFY1YEgWKkR/ZvqVU9jSGLcjZ/g4=
-X-Received: by 2002:a05:600c:1d23:b0:39c:4215:72f9 with SMTP id
- l35-20020a05600c1d2300b0039c421572f9mr4138941wms.137.1654791668799; Thu, 09
- Jun 2022 09:21:08 -0700 (PDT)
+ bh=+MKVbyJiIg9VO9382YHO/BuVJMdUH0lEIY/DAyV3uWE=;
+ b=AG2c7Arcc37BZSDvSnkj9m1gNKppk/HrO1QoTCp0m8vncjDsDFlzvjuYFaIvyH6U46
+ GRe1CWwVHSYWqhnCLgGNJ6WfDk/zKl4b90HS1f76TXdfth5Y6Ol2cD6SWu0Xcc8BKmyl
+ nvBi9ZSS/0Vza9SzxKy77enfMPin9WRUxeubE5GVCrsG8FfpiP1OYlT0i86ZdxjXTniG
+ pmOxH83YjhS1Gc0566FTFSE0cXCmxpYOpkIN6KN8Lwh0u5YaTv0BXaBGcM6RUmlPhDxE
+ Rvojri1J7rFHEBxru6KTRS42lDLCQ6vTgufGsatZcYMT121ppeO4V7rbHI2JBl9QEQ95
+ TnwQ==
+X-Gm-Message-State: AOAM530k07MrYAIrvaGVcuTQnNYOn6YjEVkB8yLLjQJE0yV966TfIikR
+ EWCy2CJB10K6oC57OWR+V6hiIiyUWOSnIkB2qXs=
+X-Google-Smtp-Source: ABdhPJwVVEHXp+7O5crogUZrlrKPTa+Cwec9pRItWrh674zi+99/vdkqYK7nwjqQnqwuKYC45UtlQOEGUHyHEIk8Z7M=
+X-Received: by 2002:a05:6830:448e:b0:60b:254e:7439 with SMTP id
+ r14-20020a056830448e00b0060b254e7439mr18242219otv.338.1654818215928; Thu, 09
+ Jun 2022 16:43:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220608161405.729964-1-apatel@ventanamicro.com>
- <20220608161405.729964-5-apatel@ventanamicro.com>
- <6455580a-7344-8531-cd2c-708f8ddfb04b@linaro.org>
- <CAAhSdy1JeAuz0YtMdKQjeJHpEG5_BL35v+OWiGsiPn4WgAsOaQ@mail.gmail.com>
- <8e48300c-9b30-728b-22ab-652476015975@linaro.org>
-In-Reply-To: <8e48300c-9b30-728b-22ab-652476015975@linaro.org>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 9 Jun 2022 21:50:56 +0530
-Message-ID: <CAAhSdy3jaAWotCRcyNDrvHBu5q-LE+N5YuC7-z92TUP5-6UY_Q@mail.gmail.com>
-Subject: Re: [PATCH v4 4/4] target/riscv: Force disable extensions if priv
- spec version does not match
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: Anup Patel <apatel@ventanamicro.com>,
- Peter Maydell <peter.maydell@linaro.org>, 
+References: <20220608234701.369536-1-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220608234701.369536-1-alistair.francis@opensource.wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 10 Jun 2022 09:43:09 +1000
+Message-ID: <CAKmqyKM+bJLTfhXTyRNddE=gEeWfTjw9-pQ1dozhRCS+NSbU4w@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: trans_rvv: Avoid assert for RV32 and e64
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ Bin Meng <bin.meng@windriver.com>, Bin Meng <bmeng.cn@gmail.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>, 
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- Atish Patra <atishp@atishpatra.org>, 
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Robert Bu <robert.bu@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::32f;
- envelope-from=anup@brainfault.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
+ envelope-from=alistair23@gmail.com; helo=mail-ot1-x32f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,32 +75,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2022 16:21:19 -0000
+X-List-Received-Date: Thu, 09 Jun 2022 23:43:39 -0000
 
-On Thu, Jun 9, 2022 at 7:28 PM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Thu, Jun 9, 2022 at 9:47 AM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
 >
-> On 6/8/22 20:16, Anup Patel wrote:
-> > On Wed, Jun 8, 2022 at 10:23 PM Richard Henderson
-> > <richard.henderson@linaro.org> wrote:
-> >>
-> >> On 6/8/22 09:14, Anup Patel wrote:
-> >>> +    struct isa_ext_data isa_edata_arr[] = {
-> >>
-> >> static const?
-> >
-> > Using const is fine but we can't use "static const" because
-> > the "struct isa_ext_data" has a pointer to ext_xyz which
-> > is different for each CPU.
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
-> Ah, I see.  Perhaps better to use offsetof then -- the data structure is not small...
+> When running a 32-bit guest, with a e64 vmv.v.x and vl_eq_vlmax set to
+> true the `tcg_debug_assert(vece <= MO_32)` will be triggered inside
+> tcg_gen_gvec_dup_i32().
+>
+> This patch checks that condition and instead uses tcg_gen_gvec_dup_i64()
+> is required.
+>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1028
+> Suggested-by: Robert Bu <robert.bu@gmail.com>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
-I agree. Using offsetof() is a much better approach.
+Thanks!
 
-Thanks,
-Anup
+Applied to riscv-to-apply.next
 
+Alistair
+
+> ---
+>  target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++++--
+>  1 file changed, 10 insertions(+), 2 deletions(-)
 >
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index 391c61fe93..6b27d8e91e 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -2097,8 +2097,16 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
+>          s1 = get_gpr(s, a->rs1, EXT_SIGN);
 >
-> r~
+>          if (s->vl_eq_vlmax) {
+> -            tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
+> -                                MAXSZ(s), MAXSZ(s), s1);
+> +            if (get_xl(s) == MXL_RV32 && s->sew == MO_64) {
+> +                TCGv_i64 s1_i64 = tcg_temp_new_i64();
+> +                tcg_gen_ext_tl_i64(s1_i64, s1);
+> +                tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
+> +                                     MAXSZ(s), MAXSZ(s), s1_i64);
+> +                tcg_temp_free_i64(s1_i64);
+> +            } else {
+> +                tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
+> +                                    MAXSZ(s), MAXSZ(s), s1);
+> +            }
+>          } else {
+>              TCGv_i32 desc;
+>              TCGv_i64 s1_i64 = tcg_temp_new_i64();
+> --
+> 2.36.1
+>
 
