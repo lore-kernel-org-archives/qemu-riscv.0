@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nz6eC-0006PS-Jg
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 21:07:40 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60224)
+	id 1nz6qU-0003tu-7W
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 21:20:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34002)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nz6e6-0006K7-Is; Wed, 08 Jun 2022 21:07:34 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:36440)
+ id 1nz6qR-0003ta-Iq; Wed, 08 Jun 2022 21:20:21 -0400
+Received: from mail-qt1-x834.google.com ([2607:f8b0:4864:20::834]:46941)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nz6e5-0003ve-4P; Wed, 08 Jun 2022 21:07:34 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id 15so19790550pfy.3;
- Wed, 08 Jun 2022 18:07:32 -0700 (PDT)
+ id 1nz6qP-0005pm-Av; Wed, 08 Jun 2022 21:20:18 -0400
+Received: by mail-qt1-x834.google.com with SMTP id j8so13429738qtn.13;
+ Wed, 08 Jun 2022 18:20:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=23Xs9Kakr4ozVjNYfk+AhDByJanSyoxp2JVmeFDxRww=;
- b=EZ995C9w7zBxMytuAGNm2bIBairnndbM//VnlF0GO+mhTDkq88GiOtDpIhWIA+Zd6k
- ugPEe+1vsV491AIEAC85nGDjrWppq8YyDj2CAtPhX7NkQqWOC0gez3E1omSPsknSfuHG
- N1tHDrGVv3ziZyHTkzXkTbe0Ky9I9JO44eALlDYAuycRLdcWudLUiOfODyso0tWb/s9U
- rQSMus1Bzzq/n9P9B0K0vP8QJ410NzV8hZxUPpCQq5G61uCi99bLAq7GDTOAbrl9e+Gq
- M0mhPJN1J5qCxr2I9jVuwW6hQMPtvuWpTlQ8MvICPgKSJeJdQuD9CDi8xf9Fv/Ud2geB
- SzWA==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=EEmtnEFwLTmyn1ltLw6Zztha5nqQ3keNRDRZzj7s/pY=;
+ b=mXB4aWHSLs7UE4Ntg/vibxpVmyoVRpyxri03ATp7wHCyoQlkLrgO18fBTr2IXwouhK
+ HSDKNoLjgNPvjzII6u4fTjmwu/I4xJlxo49ny16rqSW/hjOAm1/rq2t+t9JoC56CIr7h
+ cRHv5wcvid7cQRvdbbg1F7EUhFsgLCIgce8VUqu7JRt57QzaZZkPzYo2L5v/oBJa8ZHx
+ 4pN6sDoAvUTgBr/+JiDCkN4ypHo2EsSME4ekyZ0OjVabcZuaQQ3RSRtqU3iqTqhf8wYe
+ twkNaani0MnADDNAE1ZZuFOwTb/3Or8Rb8j0N8M7McMF3kD7UswLGOBY7Iu2UCSpROnq
+ QM8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=23Xs9Kakr4ozVjNYfk+AhDByJanSyoxp2JVmeFDxRww=;
- b=M3/uLtzBw6eR0o6tzP4y92zsWxfwNNM9TQW9X75Vw2gFjft8pmzx3OnopxIe1OvfGE
- 3ztnNl49yeMEvmqNsgZboL4ZBnTkblB288h8qOneiJGJyjl9TBnp2bCRpG8ZTsx3+42u
- 7W+AtxQNdMqfw46RZrNc14bChg/bam4RI39RGH+mOSc2EziATpYvAdbxs6N/kUIHuwIb
- 372MF0OVfW494aWjQB/77SjNKGz04TbdrLzvTDENkIY4A+wydI3rN6z7RLSPP/sodARk
- LW3N9b305lPaUuFOxw/NxWX2Jf/ICM9L+mUOmTybKMOHnekfpkOFkfYfyxZtSs+DoZAy
- QeVQ==
-X-Gm-Message-State: AOAM533v//8kTol4tIZw05hz7TuZNgy5b+pa7j5Txbi9jCsZ8C3HA8FD
- MoXwmDkOp3hbLANcUWt1FA12cKVpPBw=
-X-Google-Smtp-Source: ABdhPJyB4c3d39lrSZ2nsvq1TkytlCShq4eSKvw1gSHtfFhg08YOAY57ZzdWSaBRvaQDtTpoT/B4WA==
-X-Received: by 2002:a63:cd04:0:b0:3fa:1e2e:9720 with SMTP id
- i4-20020a63cd04000000b003fa1e2e9720mr31852104pgg.179.1654736851539; 
- Wed, 08 Jun 2022 18:07:31 -0700 (PDT)
-Received: from ubuntu.. (144.168.56.201.16clouds.com. [144.168.56.201])
- by smtp.gmail.com with ESMTPSA id
- d21-20020a170902f15500b001640e9f638esm15283402plb.51.2022.06.08.18.07.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jun 2022 18:07:31 -0700 (PDT)
-From: Bin Meng <bmeng.cn@gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Subject: [PATCH 3/3] target/riscv: Skip parsing extensions from properties for
- KVM
-Date: Thu,  9 Jun 2022 09:07:24 +0800
-Message-Id: <20220609010724.104033-3-bmeng.cn@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220609010724.104033-1-bmeng.cn@gmail.com>
-References: <20220609010724.104033-1-bmeng.cn@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=EEmtnEFwLTmyn1ltLw6Zztha5nqQ3keNRDRZzj7s/pY=;
+ b=u0h7kuYK46RP/vtdI5IKMuU8KyCb2bcm/0dduMgksWqeI81+8TpHvbcvl4/0bZlW+9
+ LJMZ4t5bkyORZWo3zZF6UWVqyLBwat2B/qrKWWn09mgrgSiNslV0whtM/54dwHGyq9qD
+ CTAJ/4ndwKgdk+C1ph+w5XS9Yg08V+0N3AqdXFEuOPwXrzYUlAdsL+OcnEx/8cBnGtFn
+ 3/S2npMIFCcmM2EGxUBoetmZRML6vo1gpuD29kZhCeHfRGedV21Lw09rxX62nuf1TLt6
+ wxWG1kHBD5pr7Q6I68DZFlJqlgKyEAbYy9YCsOHFObQMA2K1dxHWmCAmRxhmnEq+gQv+
+ XErQ==
+X-Gm-Message-State: AOAM53258S4rPD5DFOu5KsfHQpI8l5/iUAOZ/fVQflf+HydBh3KaEIz0
+ kXW1GRIWcW5GH/vryCtNO8sRkEdXSKQ/2SYvCzk=
+X-Google-Smtp-Source: ABdhPJyD17jN3+9UEwAeb/LkXWSiWR26cn/2afE7o0Mts7gPZV7ZgcSBl2WsZ3hGcSiQ/YDMUG9ekaCAaafyGzDzwek=
+X-Received: by 2002:ac8:7d55:0:b0:305:732:680b with SMTP id
+ h21-20020ac87d55000000b003050732680bmr3744165qtb.391.1654737615506; Wed, 08
+ Jun 2022 18:20:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42d.google.com
+References: <20220608161405.729964-1-apatel@ventanamicro.com>
+ <20220608161405.729964-2-apatel@ventanamicro.com>
+In-Reply-To: <20220608161405.729964-2-apatel@ventanamicro.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 9 Jun 2022 09:20:04 +0800
+Message-ID: <CAEUhbmXP4dKRdEFUMtk=ZBCrDVBxgNmfkNBitS3pj7+HoNmCYA@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] target/riscv: Don't force update priv spec version
+ to latest
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>, 
+ Atish Patra <atishp@atishpatra.org>, Anup Patel <anup@brainfault.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>, Atish Patra <atishp@rivosinc.com>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::834;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qt1-x834.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -77,36 +77,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2022 01:07:35 -0000
+X-List-Received-Date: Thu, 09 Jun 2022 01:20:21 -0000
 
-When running with accel=kvm, the extensions are actually told by
-KVM, so let's skip the parsing logic from properties for KVM.
+On Thu, Jun 9, 2022 at 12:15 AM Anup Patel <apatel@ventanamicro.com> wrote:
+>
+> The riscv_cpu_realize() sets priv spec verion to v1.12 when it is
 
-Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
----
+typo: version
 
- target/riscv/cpu.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+> when "env->priv_ver == 0" (i.e. default v1.10) because the enum
+> value of priv spec v1.10 is zero.
+>
+> Due to above issue, the sifive_u machine will see priv spec v1.12
+> instead of priv spec v1.10.
+>
+> To fix this issue, we set latest priv spec version (i.e. v1.12)
+> for base rv64/rv32 cpu and riscv_cpu_realize() will override priv
+> spec version only when "cpu->cfg.priv_spec != NULL".
+>
+> Fixes: 7100fe6c2441 ("target/riscv: Enable privileged spec version 1.12")
+> Signed-off-by: Anup Patel <apatel@ventanamicro.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Reviewed-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>  target/riscv/cpu.c | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 61d1737741..ff911017c3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -581,8 +581,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-     }
-     assert(env->misa_mxl_max == env->misa_mxl);
- 
--    /* If only MISA_EXT is unset for misa, then set it from properties */
--    if (env->misa_ext == 0) {
-+    /*
-+     * If only MISA_EXT is unset for misa, then set it from properties.
-+     * For KVM, misa is told by KVM so properties are ignored.
-+     */
-+    if (!kvm_enabled() && env->misa_ext == 0) {
-         uint32_t ext = 0;
- 
-         /* Do some ISA extension error checking */
--- 
-2.34.1
-
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
