@@ -1,61 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nz6e5-0006Fc-2b
-	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 21:07:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60198)
+	id 1nz6e6-0006JW-EP
+	for mharc-qemu-riscv@gnu.org; Wed, 08 Jun 2022 21:07:34 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60208)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nz6e3-0006Em-MK; Wed, 08 Jun 2022 21:07:31 -0400
-Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a]:44546)
+ id 1nz6e4-0006F2-Oo; Wed, 08 Jun 2022 21:07:32 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:40912)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1nz6e2-0003vE-BK; Wed, 08 Jun 2022 21:07:31 -0400
-Received: by mail-pf1-x42a.google.com with SMTP id g205so19757676pfb.11;
- Wed, 08 Jun 2022 18:07:29 -0700 (PDT)
+ id 1nz6e3-0003vR-ER; Wed, 08 Jun 2022 21:07:32 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id z17so19763764pff.7;
+ Wed, 08 Jun 2022 18:07:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rHcmEsakeCZlslxgbgX5SfRpLAh3w58Fl6RLeUaqs8Q=;
- b=U637VaTplb4xNq/s6xlYgV54EgO9PuzOwmD0td//YhxT75CaFzCZR3jhQeW5wueFYc
- lYt7URHkCoehD4FZseju8w1CkCbb3vKhx/r8ZyzdXhzJ7MGh46t9IyZ/UvR3ZlldAMht
- OLHWMcgPGhw8YyPg7FqNT7wdierDXFOE5Ii6zRweEoj7spTozZhMjca/YfMvhhc0lVbk
- AUyE7U/SgVQo5409Ui4gtdoXsRQptxDwjCNcF2FYs9Qd3r/5ZRby3WmLCUpIFmOCzqQW
- gI8R9lgIxSgtp9I3Fs6ZhgowgDWr0RccxEY0hdraP69nYrVaeqj6TvnY4n4uBxszMh+B
- AY5A==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=d50h+5jGj4e24nFRKaCEviZgpl92Jn3X66D2wtXCErc=;
+ b=VjFzKr9a3R9zzS2wkjCy+TnGJgbanOe40nD9g1LxV7PkAAdLJgo3hwfR3XK31dJhdZ
+ 56oQTzAj1DR1981d9glU8UcwMXheF9kYSkKFcnwuSAEiZ9lTNd7Rk1sAYIPTowXvW08X
+ pa+/Las7Pso+kSqD/62Ylt4rEQRsa0rVerTg/fFrZKox2CpuWTB09kfwkQC+Q98CKXj+
+ Dxu9OdeQCghzIFDyq2o1Q4ho7OuSlkEo6cyck7S2UXzEMrKhEVGTiQQ0BkPM9BVEGDpp
+ 7UVlrv6oO3BXbPj7FKVzC8oM7o3d4tJrFAJNJHbIAvHJ0iY1pZjIewGq2pfvIXE+0LX3
+ PMbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rHcmEsakeCZlslxgbgX5SfRpLAh3w58Fl6RLeUaqs8Q=;
- b=uyFShzp7ADERp041QFCXOXB+Xgn9XEcGfjCmVZi1I6xzCD2qI6DtuhF+swjojRbRnz
- qJ26Aw76fUUaMcxuRHz77QYhWpD40AHK8teV+GthzYLKo/clcwULfF46JNWieEXWmcCg
- Dn77NYaP8pOg1Op4bygMS6krsTe0gdpSExajoCV4bxkuupnAj6BdTriUTXFJ+XrD2x8o
- oqPxeMMAJNUnwV8PZ+igyVzJ98GwKIZT5qGIh7KBq9z3X3qq7SOlRlasO+7wkwtWbr8r
- eyGLp9thhXtsL3UW7pC+/UexcL0fmJfRTqwYGUBDFXm+p3yTeTSUkF/pxA1liXzYGV8s
- ydtQ==
-X-Gm-Message-State: AOAM532qz9wWpLNT09K2us+16j8syk6uGqQ+gcwnrOGp4QmqgY21xyDC
- JiysPTq95JlclJb9DioOVu8=
-X-Google-Smtp-Source: ABdhPJzv+LhXQRoziVDs3EOQiKC0Hwh80ZfqPtyaUohVuwtXIoTQOdieaZbanTA5r2Uro0TmcZC+sQ==
-X-Received: by 2002:a63:84c3:0:b0:3fc:8c46:2447 with SMTP id
- k186-20020a6384c3000000b003fc8c462447mr31760523pgd.285.1654736848341; 
- Wed, 08 Jun 2022 18:07:28 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=d50h+5jGj4e24nFRKaCEviZgpl92Jn3X66D2wtXCErc=;
+ b=XzNROTfrBk7XcWksYa4lWWieAujd6BX6W60R8oES9tbp9F0nmcH/w+mHsOvfxtSzUI
+ fU8XEMMvt0AdD++i2+Rbe4xMxAjjuCJkvJ86Is7Gh59Z5chzwCxcKflVAmJFFLTPzmo5
+ rA8rbed/vWMGqSQKuNPPqM4HE+D8q0ac87uRN+8o5bA3yZVTpM3SC+QBovDEnOTHsLe1
+ 193Y79Y7T01FN2tUtOdkFiDXrdnpvuI1kN6QeXv1kv9/6JQTVEom+bFU1hYEiHp6ypOx
+ og41sgjpN+2Egxige9xQq+zQz4D/MvcEaCh58r7Xm+BVf0gIja0/Wf9tMHRG87kMYnAa
+ fozg==
+X-Gm-Message-State: AOAM530SKRi4vpbjHIllcdVJHSGjEKAMHU2ruRCU/ZAh2s7H94tfCZzt
+ KWcrfYplJrzN6PqKioDBRjXCUPubyAE=
+X-Google-Smtp-Source: ABdhPJxxt8ycCXitE4SpOBbNAfo5KTESEsb6VufX0CXA582XMOuhOq36L9dlDmU7ZFde+oAqzIssCQ==
+X-Received: by 2002:a63:8348:0:b0:3fe:477d:a465 with SMTP id
+ h69-20020a638348000000b003fe477da465mr3264422pge.66.1654736849955; 
+ Wed, 08 Jun 2022 18:07:29 -0700 (PDT)
 Received: from ubuntu.. (144.168.56.201.16clouds.com. [144.168.56.201])
  by smtp.gmail.com with ESMTPSA id
- d21-20020a170902f15500b001640e9f638esm15283402plb.51.2022.06.08.18.07.26
+ d21-20020a170902f15500b001640e9f638esm15283402plb.51.2022.06.08.18.07.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jun 2022 18:07:27 -0700 (PDT)
+ Wed, 08 Jun 2022 18:07:29 -0700 (PDT)
 From: Bin Meng <bmeng.cn@gmail.com>
 To: Alistair Francis <alistair.francis@wdc.com>
 Cc: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Subject: [PATCH 1/3] target/riscv: Remove the redundant initialization of
- env->misa_mxl
-Date: Thu,  9 Jun 2022 09:07:22 +0800
-Message-Id: <20220609010724.104033-1-bmeng.cn@gmail.com>
+Subject: [PATCH 2/3] target/riscv: kvm: Set env->misa_ext_mask to the
+ supported value
+Date: Thu,  9 Jun 2022 09:07:23 +0800
+Message-Id: <20220609010724.104033-2-bmeng.cn@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220609010724.104033-1-bmeng.cn@gmail.com>
+References: <20220609010724.104033-1-bmeng.cn@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -75,31 +77,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2022 01:07:32 -0000
+X-List-Received-Date: Thu, 09 Jun 2022 01:07:33 -0000
 
-env->misa_mxl was already set in the RISC-V cpu init routine, and
-validated at the beginning of riscv_cpu_realize(). There is no need
-to do a redundant initialization later.
+env->misa_ext_mask might be set to the same value of env->misa_ext
+in riscv_cpu_realize() based on given properties, but it may differ
+from what KVM tells us.
+
+Let's set the correct env->misa_ext_mask in kvm_arch_init_vcpu().
 
 Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
- target/riscv/cpu.c | 2 +-
+ target/riscv/kvm.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index a91253d4bd..61d1737741 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -752,7 +752,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             ext |= RVJ;
-         }
- 
--        set_misa(env, env->misa_mxl, ext);
-+        env->misa_ext_mask = env->misa_ext = ext;
+diff --git a/target/riscv/kvm.c b/target/riscv/kvm.c
+index 70b4cff06f..c592980299 100644
+--- a/target/riscv/kvm.c
++++ b/target/riscv/kvm.c
+@@ -410,7 +410,7 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     if (ret) {
+         return ret;
      }
+-    env->misa_ext = isa;
++    env->misa_ext_mask = env->misa_ext = isa;
  
-     riscv_cpu_register_gdb_regs_for_features(cs);
+     return ret;
+ }
 -- 
 2.34.1
 
