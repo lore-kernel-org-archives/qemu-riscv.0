@@ -1,68 +1,70 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nzRoT-0008Vk-6f
-	for mharc-qemu-riscv@gnu.org; Thu, 09 Jun 2022 19:43:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:50046)
+	id 1nzWxp-0003Hp-62
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jun 2022 01:13:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39794)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nzRoR-0008VR-CM; Thu, 09 Jun 2022 19:43:39 -0400
-Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f]:38416)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nzWxn-0003Gu-H8
+ for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 01:13:39 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:39560)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1nzRoP-0004Dl-OF; Thu, 09 Jun 2022 19:43:39 -0400
-Received: by mail-ot1-x32f.google.com with SMTP id
- c3-20020a9d6843000000b0060c2c63c337so1401411oto.5; 
- Thu, 09 Jun 2022 16:43:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+MKVbyJiIg9VO9382YHO/BuVJMdUH0lEIY/DAyV3uWE=;
- b=l22P1eSfCWtG5LnZDJAw13I/hfEkwQnbfwrSQKhNl4TEJOM5SM9gXHTxG6MMKTWvZx
- Lu/tUGYhZUT+4s9LTCc4N243Np9yk7Am8YkvAZvo/5eqnOMi4Jyi62pfPmoiAlqCTmea
- NN7PuJE8ddEGuDEAz2WnNeCnEuT5fuGqfHwho0JwbcLvGe9cWncVwluKj79kA1HSrFgG
- Wr+TmLOj8wTdU7iCavWZM8x1r1+mFTwliECA09fmlzA86k6MNT5/iU1imFEwzmD50dUM
- fralw8zvmRvYo29tLsKx67gZxkdX7r9y8vo5I3LFISAgPQ8YlD//tsKdw6DxQdbUXan8
- dZxg==
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1nzWxk-0007Zw-9S
+ for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 01:13:37 -0400
+Received: by mail-pl1-x635.google.com with SMTP id o17so21938005pla.6
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jun 2022 22:13:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=u/vrdhjyLfaKj7Nv4G7Qd5U5Uphg/2yMjXcpJTdPxfY=;
+ b=SMjb/TD0Gd/romf3WBrsJnkjjoN5W9DBWPPAM8PQSh/zs7VYzJBCXTkibc5HWPAYf9
+ mq07C83kd9Hp0CLPu1Qi/+Aj45KSuM2J6Pc/wORWn2tiHN+/Vb9ety/4jfWXmcyaRFYd
+ /96wewUj23zqKrXJa+ITTySVIPIJaz5FQbVWE+/jrY8MB9ByBuv4iOSHyL4sR6UXPQgZ
+ s+1SSQvqjYvcMfExOZ6s25eMYAv0EvrrfucNqzUsvp3N1Z/E2cbZxvk6kIaYc3c1Pm9X
+ 9LDdZtlZdynLu39Qi6m0rPk9W6ams7lSqIcDpuihh4koB9fpQ0/EUclv3xW4V9fElxFs
+ O9Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+MKVbyJiIg9VO9382YHO/BuVJMdUH0lEIY/DAyV3uWE=;
- b=AG2c7Arcc37BZSDvSnkj9m1gNKppk/HrO1QoTCp0m8vncjDsDFlzvjuYFaIvyH6U46
- GRe1CWwVHSYWqhnCLgGNJ6WfDk/zKl4b90HS1f76TXdfth5Y6Ol2cD6SWu0Xcc8BKmyl
- nvBi9ZSS/0Vza9SzxKy77enfMPin9WRUxeubE5GVCrsG8FfpiP1OYlT0i86ZdxjXTniG
- pmOxH83YjhS1Gc0566FTFSE0cXCmxpYOpkIN6KN8Lwh0u5YaTv0BXaBGcM6RUmlPhDxE
- Rvojri1J7rFHEBxru6KTRS42lDLCQ6vTgufGsatZcYMT121ppeO4V7rbHI2JBl9QEQ95
- TnwQ==
-X-Gm-Message-State: AOAM530k07MrYAIrvaGVcuTQnNYOn6YjEVkB8yLLjQJE0yV966TfIikR
- EWCy2CJB10K6oC57OWR+V6hiIiyUWOSnIkB2qXs=
-X-Google-Smtp-Source: ABdhPJwVVEHXp+7O5crogUZrlrKPTa+Cwec9pRItWrh674zi+99/vdkqYK7nwjqQnqwuKYC45UtlQOEGUHyHEIk8Z7M=
-X-Received: by 2002:a05:6830:448e:b0:60b:254e:7439 with SMTP id
- r14-20020a056830448e00b0060b254e7439mr18242219otv.338.1654818215928; Thu, 09
- Jun 2022 16:43:35 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=u/vrdhjyLfaKj7Nv4G7Qd5U5Uphg/2yMjXcpJTdPxfY=;
+ b=MOcBzAZbrlucdLiGHpT2R1tuEFgT77Tqm0R3M2IOnGRMker8AmaQTs2MySN5DlgRY/
+ srm+OAMAtNiZ5gI/r5uEl3hHTLKQq6gsjihLK7/02TVE1EoTw+qoeL2RyJRYjWipHRDV
+ mLCEUiU5BhUQ92gF90+iorhNMbfzx0xCCGBpNheuwL5JPWgiDt5FZNh/fydrkB0k6Nt+
+ 7WGIqUiCk+hYTPH8vJJg48GSAoysLMMdgC9PfmOWEBkg4UGVjlibBiw9EmzOIoXCR2or
+ 80TkIvU3vIy8uuj6ufxTvZ/49FnXPdj+RzvsHkIp0naUH+0u4ngOW30hI86D6fywna4a
+ /fhQ==
+X-Gm-Message-State: AOAM530xrqUYctO4zrxtjnZuvgfZkDpUTdMLbBL8Z9V7RLnCIXps1a+i
+ zrzYVtsuq24wP/Sa5D9+y6Ongg==
+X-Google-Smtp-Source: ABdhPJyaPEDWwc8wv9pAxrMg70sg/4ffmkphCvNVOCAhxbctUXDPftpLTK8H0vwOzkuIBle2lEW2Qw==
+X-Received: by 2002:a17:902:e484:b0:164:1c:57a with SMTP id
+ i4-20020a170902e48400b00164001c057amr42993105ple.12.1654838012882; 
+ Thu, 09 Jun 2022 22:13:32 -0700 (PDT)
+Received: from hsinchu16.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ i13-20020a170902c94d00b0016362da9a03sm17853534pla.245.2022.06.09.22.13.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jun 2022 22:13:32 -0700 (PDT)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,
+	Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH 0/9] Improve RISC-V Debug support
+Date: Fri, 10 Jun 2022 13:13:17 +0800
+Message-Id: <20220610051328.7078-1-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20220608234701.369536-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220608234701.369536-1-alistair.francis@opensource.wdc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 10 Jun 2022 09:43:09 +1000
-Message-ID: <CAKmqyKM+bJLTfhXTyRNddE=gEeWfTjw9-pQ1dozhRCS+NSbU4w@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: trans_rvv: Avoid assert for RV32 and e64
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Bin Meng <bin.meng@windriver.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Robert Bu <robert.bu@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
- envelope-from=alistair23@gmail.com; helo=mail-ot1-x32f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,58 +77,40 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2022 23:43:39 -0000
+X-List-Received-Date: Fri, 10 Jun 2022 05:13:39 -0000
 
-On Thu, Jun 9, 2022 at 9:47 AM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
->
-> From: Alistair Francis <alistair.francis@wdc.com>
->
-> When running a 32-bit guest, with a e64 vmv.v.x and vl_eq_vlmax set to
-> true the `tcg_debug_assert(vece <= MO_32)` will be triggered inside
-> tcg_gen_gvec_dup_i32().
->
-> This patch checks that condition and instead uses tcg_gen_gvec_dup_i64()
-> is required.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/1028
-> Suggested-by: Robert Bu <robert.bu@gmail.com>
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+From: Frank Chang <frank.chang@sifive.com>
 
-Thanks!
+This patchset refactors RISC-V Debug support to allow more types of
+triggers to be extended.
 
-Applied to riscv-to-apply.next
+The initial support of type 6 trigger, which is similar to type 2
+trigger with additional functionality, is also introduced in this
+patchset.
 
-Alistair
+Frank Chang (9):
+  target/riscv: debug: Determine the trigger type from tdata1.type
+  target/riscv: debug: Introduce build_tdata1() to build tdata1 register
+    content
+  target/riscv: debug: Introduce tdata1, tdata2, and tdata3 CSRs
+  target/riscv: debug: Restrict the range of tselect value can be
+    written
+  target/riscv: debug: Introduce tinfo CSR
+  target/riscv: debug: Create common trigger actions function
+  target/riscv: debug: Check VU/VS modes for type 2 trigger
+  target/riscv: debug: Return 0 if previous value written to tselect >=
+    number of triggers
+  target/riscv: debug: Add initial support of type 6 trigger
 
-> ---
->  target/riscv/insn_trans/trans_rvv.c.inc | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 391c61fe93..6b27d8e91e 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2097,8 +2097,16 @@ static bool trans_vmv_v_x(DisasContext *s, arg_vmv_v_x *a)
->          s1 = get_gpr(s, a->rs1, EXT_SIGN);
->
->          if (s->vl_eq_vlmax) {
-> -            tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
-> -                                MAXSZ(s), MAXSZ(s), s1);
-> +            if (get_xl(s) == MXL_RV32 && s->sew == MO_64) {
-> +                TCGv_i64 s1_i64 = tcg_temp_new_i64();
-> +                tcg_gen_ext_tl_i64(s1_i64, s1);
-> +                tcg_gen_gvec_dup_i64(s->sew, vreg_ofs(s, a->rd),
-> +                                     MAXSZ(s), MAXSZ(s), s1_i64);
-> +                tcg_temp_free_i64(s1_i64);
-> +            } else {
-> +                tcg_gen_gvec_dup_tl(s->sew, vreg_ofs(s, a->rd),
-> +                                    MAXSZ(s), MAXSZ(s), s1);
-> +            }
->          } else {
->              TCGv_i32 desc;
->              TCGv_i64 s1_i64 = tcg_temp_new_i64();
-> --
-> 2.36.1
->
+ target/riscv/cpu.h      |   7 +-
+ target/riscv/cpu_bits.h |   1 +
+ target/riscv/csr.c      |  10 +-
+ target/riscv/debug.c    | 483 ++++++++++++++++++++++++++++++++--------
+ target/riscv/debug.h    |  55 +++--
+ target/riscv/machine.c  |  20 +-
+ 6 files changed, 445 insertions(+), 131 deletions(-)
+
+--
+2.36.1
+
 
