@@ -1,75 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1nzWyX-0003nT-3g
-	for mharc-qemu-riscv@gnu.org; Fri, 10 Jun 2022 01:14:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40128)
+	id 1nzciE-0000ea-Ly
+	for mharc-qemu-riscv@gnu.org; Fri, 10 Jun 2022 07:21:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57482)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nzWyC-0003Xj-5s
- for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 01:14:07 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:41627)
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nzciB-0000aS-54
+ for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 07:21:55 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a]:39925)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1nzWyA-0007ef-CY
- for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 01:14:03 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- l20-20020a17090a409400b001dd2a9d555bso1208340pjg.0
- for <qemu-riscv@nongnu.org>; Thu, 09 Jun 2022 22:14:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=tD61SCjoTInN3UAePz2cDVno5eOqaNgm6w/t33s37xY=;
- b=eBq7kGarI8rjiwAM0YjLNoSIk0zXvW4k+6upkcVVQjsUiLSpHkWvrHRU9ZX1tEsNi3
- +UMSEDrL/NJPdDF8jAxVINrED6DTlZrkSwBIZXuhlxrIt9Xrew/+7Z18gmPwICLLtusc
- 9+v8FBoEXtGiW7pUVhnFuyKysCKAaWK7/pDBRWtE9lpqdKayLs3r4N8Z6iQdFG5JOMf2
- 9cqJi4SjRMhG0rViOiRv+bEyn1SkgPHfFdyW/bRoNkAZ0Ggc51hBoeAW2w3yZ2UwaRjv
- EltJm8NFjzD5ocDkmb1VcB+UZhMi6Yh5DKdBLcUqb74Ih8hYWLWbiEVl1+sr5vWszjR4
- vJDA==
+ (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
+ id 1nzci8-0000fh-Ky
+ for qemu-riscv@nongnu.org; Fri, 10 Jun 2022 07:21:54 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id x17so36097416wrg.6
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jun 2022 04:21:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=YcDTCA5Oxbt4VzFMZQI/kw7Rh8m/mmg+sZ4G1+h9J0I=;
+ b=xbf0Br4iHDUxQVT15fBvvm4KozYzZu2NXQq7sb5/xczWoIbkniVja/MAeeJyq7Kl7A
+ y4/cnNxnC3+d3mKvJPz5LH7A+MlrpMbFMHneekuaF+B8CJb8ZeZlzQd1OZ/FMZCQMwDN
+ ub7q2FDprHqGwGa6PHgVwhHmtUN+vSUtmedmSnAQFgrByhpVUtEOwVfuV1ot8JG7Qfv2
+ IAdqvWbIruGpb0xofoiej7toEnjWn+9Xi4dMUftDrKn3mlSNFcQybl3xuspacl1db48k
+ KGFkqlwanWRqa4Pj2ULbcHgNIhziHVaJjVQ26vz7l0BKog+atv1eNiY7taiP0HmBe7SQ
+ cNtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=tD61SCjoTInN3UAePz2cDVno5eOqaNgm6w/t33s37xY=;
- b=w/lBecdoX9pMUqwK0hkibDkF8tqUTU/4OKwPyB6X6dF9wO/Py7SXze7dnkhjRwrLh9
- +dFsVt7POjFRnHw/1z/WSVDFx30CyG+4Oxhfkwvo3ENJvRu0h8Yhio8ceKEEVQauthRw
- 7Eini/uuVzd2NR6BWaqSIjZXgTWY2kjJeHRGDv+3WJTjZ/71WzCSL7rU/vwF3yGyXsTQ
- TD8nhkFORKtYnh8TEDFJgwODkKsYzfU3PjcFNvJWL1/Zx0DosM+sbWUcGzuvVcZKfE2l
- ziXwG2t56F7slSU3r4hmM0hfnX3W58v9mLmHb5y0m3F2GrlpyN5xOMGOUZ6wq8ifzK17
- 5nWw==
-X-Gm-Message-State: AOAM530iPRHx6ztZN6pcad0hr1rtIhWL7DCp6f5TN8z/vbl6E0c4UQS1
- TOTLVBBDk7gy6SYQx8UDDbu3aue8A3KKUQ==
-X-Google-Smtp-Source: ABdhPJzbPQdt6J5wI5EEourweV6GHl/FD+moMBNik/ZoJB4BIaicohdOAXGV+AS9E1Do8l3E+8FHUQ==
-X-Received: by 2002:a17:90a:e601:b0:1e8:ad01:1eaa with SMTP id
- j1-20020a17090ae60100b001e8ad011eaamr6890922pjy.81.1654838041182; 
- Thu, 09 Jun 2022 22:14:01 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- i13-20020a170902c94d00b0016362da9a03sm17853534pla.245.2022.06.09.22.13.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jun 2022 22:14:00 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH 9/9] target/riscv: debug: Add initial support of type 6 trigger
-Date: Fri, 10 Jun 2022 13:13:26 +0800
-Message-Id: <20220610051328.7078-10-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220610051328.7078-1-frank.chang@sifive.com>
-References: <20220610051328.7078-1-frank.chang@sifive.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=YcDTCA5Oxbt4VzFMZQI/kw7Rh8m/mmg+sZ4G1+h9J0I=;
+ b=63fGz7r1Ppcw8a+O5C3du8txbwr9Gd8r3n55NhdUwtPKgFaCc5h5Crw+Z/9SRSC/kS
+ oKkhwk/GuDb08pAqRl4nR4MLC8az3/Y6hzkuFBjliS74KtXhS6BmJIkeW+FivYJuxuqu
+ RR7RqTEBUcp6l8YXb8mXabSxlcruYZNnQuzENSDLJW+ec7+9c+68s5aHlQ+aWt4o0MJX
+ IMsGF4uypf353M++2RXNNohk8cTzUTiXRiIm1d88EYlPVSGKfj3yvfQ+5SIBeZJaXb+A
+ Dpk0JrrPhmicWYDlrsScBITxuFn0wJP3iaWMlPXzc8FYqY1K96GFu6Fn/MxIUFOet0LE
+ vIEg==
+X-Gm-Message-State: AOAM5334xlCwQRpkP9ql9sR7I1mqikLWr6Umh4ptu+sHlJl0Q4waYOOT
+ 076c22VaJnbbtwbalZjPWEGb+cHkrjvT+dU/kLSniw==
+X-Google-Smtp-Source: ABdhPJxF2jpdBgrgHWzo+uwGVHYPcNg3RNzYVYJzQgQIeFuW66cgUiOsYTl9GxiIEcasq8NglR1fFNnV6SzUV20L29M=
+X-Received: by 2002:a05:6000:1f18:b0:20f:e61b:520e with SMTP id
+ bv24-20020a0560001f1800b0020fe61b520emr43579383wrb.214.1654860110139; Fri, 10
+ Jun 2022 04:21:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <20220609033011.752714-4-apatel@ventanamicro.com>
+ <OSZP286MB1435EBB271F8E9EEF5E2EF95C6A69@OSZP286MB1435.JPNP286.PROD.OUTLOOK.COM>
+In-Reply-To: <OSZP286MB1435EBB271F8E9EEF5E2EF95C6A69@OSZP286MB1435.JPNP286.PROD.OUTLOOK.COM>
+From: Anup Patel <anup@brainfault.org>
+Date: Fri, 10 Jun 2022 16:51:37 +0530
+Message-ID: <CAAhSdy1zyiV9PgDCY+4ijrzfeAdJ44wfT0b5dY+NqXzieZo_KQ@mail.gmail.com>
+Subject: Re: [PATCH v5 3/4] target/riscv: Update [m|h]tinst CSR in
+ riscv_cpu_do_interrupt()
+To: dramforever <dramforever@live.com>
+Cc: Anup Patel <apatel@ventanamicro.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Atish Patra <atishp@atishpatra.org>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Peter Maydell <peter.maydell@linaro.org>,
+ QEMU Developers <qemu-devel@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: none client-ip=2a00:1450:4864:20::42a;
+ envelope-from=anup@brainfault.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,283 +80,156 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2022 05:14:07 -0000
+X-List-Received-Date: Fri, 10 Jun 2022 11:21:55 -0000
 
-From: Frank Chang <frank.chang@sifive.com>
+On Fri, Jun 10, 2022 at 3:00 PM dramforever <dramforever@live.com> wrote:
+>
+> Hi Anup Patel,
+>
+> I think there are some misunderstandings of the privileged spec with rega=
+rds to
+> [m|h]tinst handling. Here are some possible issues I've found:
+>
+> > +            case OPC_RISC_C_FUNC_FLD_LQ:
+> > +                if (riscv_cpu_xlen(env) !=3D 128) { /* C.FLD (RV32/64)=
+ */
+> > +                    xinsn =3D OPC_RISC_FLD;
+> > +                    xinsn =3D SET_RD(xinsn, GET_C_RS2S(insn));
+> > +                    xinsn =3D SET_RS1(xinsn, GET_C_RS1S(insn));
+> > +                    xinsn =3D SET_I_IMM(xinsn, GET_C_LD_IMM(insn));
+> > +                    xinsn_has_addr_offset =3D true;
+> > +                }
+> > +                break;
+>
+> The privileged spec requires that 'for basic loads and stores, the
+> transformations replace the instruction=E2=80=99s immediate offset fields=
+ with zero',
+> so this SET_I_IMM() line isn't necessary. Similarly for all the compresse=
+d
+> instruction cases, the SET_I_IMM() and SET_S_IMM() calls are all unnecess=
+ary.
 
-Type 6 trigger is similar to a type 2 trigger, but provides additional
-functionality and should be used instead of type 2 in newer
-implementations.
+Sure, I will update.
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
----
- target/riscv/debug.c | 174 ++++++++++++++++++++++++++++++++++++++++++-
- target/riscv/debug.h |  18 +++++
- 2 files changed, 188 insertions(+), 4 deletions(-)
+>
+> > +    } else {
+> > +        /* No need to transform 32bit (or wider) instructions */
+> > +        xinsn =3D insn;
+>
+> For AMO, lr, sc, and hypervisor load/store instructions, this is fine. Bu=
+t as
+> above, 32-bit integer load/store instructions and floating point load/sto=
+re
+> instructions need have their immediate fields cleared to zero.
 
-diff --git a/target/riscv/debug.c b/target/riscv/debug.c
-index 83b72fa1b9..43ee10c1c3 100644
---- a/target/riscv/debug.c
-+++ b/target/riscv/debug.c
-@@ -39,7 +39,7 @@
-  * - tdata3
-  * - tinfo
-  *
-- * The following triggers are implemented:
-+ * The following triggers are initialized by default:
-  *
-  * Index | Type |          tdata mapping | Description
-  * ------+------+------------------------+------------
-@@ -102,10 +102,12 @@ static trigger_action_t get_trigger_action(CPURISCVState *env,
-     case TRIGGER_TYPE_AD_MATCH:
-         action = (tdata1 & TYPE2_ACTION) >> 12;
-         break;
-+    case TRIGGER_TYPE_AD_MATCH6:
-+        action = (tdata1 & TYPE6_ACTION) >> 12;
-+        break;
-     case TRIGGER_TYPE_INST_CNT:
-     case TRIGGER_TYPE_INT:
-     case TRIGGER_TYPE_EXCP:
--    case TRIGGER_TYPE_AD_MATCH6:
-     case TRIGGER_TYPE_EXT_SRC:
-         qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
-                       trigger_type);
-@@ -380,6 +382,123 @@ static void type2_reg_write(CPURISCVState *env, target_ulong index,
-     return;
- }
- 
-+/* type 6 trigger */
-+
-+static inline bool type6_breakpoint_enabled(target_ulong ctrl)
-+{
-+    bool mode = !!(ctrl & (TYPE6_VU | TYPE6_VS | TYPE6_U | TYPE6_S | TYPE6_M));
-+    bool rwx = !!(ctrl & (TYPE6_LOAD | TYPE6_STORE | TYPE6_EXEC));
-+
-+    return mode && rwx;
-+}
-+
-+static target_ulong type6_mcontrol6_validate(CPURISCVState *env,
-+                                             target_ulong ctrl)
-+{
-+    target_ulong val;
-+    uint32_t size;
-+
-+    /* validate the generic part first */
-+    val = tdata1_validate(env, ctrl, TRIGGER_TYPE_AD_MATCH6);
-+
-+    /* validate unimplemented (always zero) bits */
-+    warn_always_zero_bit(ctrl, TYPE6_MATCH, "match");
-+    warn_always_zero_bit(ctrl, TYPE6_CHAIN, "chain");
-+    warn_always_zero_bit(ctrl, TYPE6_ACTION, "action");
-+    warn_always_zero_bit(ctrl, TYPE6_TIMING, "timing");
-+    warn_always_zero_bit(ctrl, TYPE6_SELECT, "select");
-+    warn_always_zero_bit(ctrl, TYPE6_HIT, "hit");
-+
-+    /* validate size encoding */
-+    size = extract32(ctrl, 16, 4);
-+    if (access_size[size] == -1) {
-+        qemu_log_mask(LOG_UNIMP, "access size %d is not supported, using SIZE_ANY\n",
-+                      size);
-+    } else {
-+        val |= (ctrl & TYPE6_SIZE);
-+    }
-+
-+    /* keep the mode and attribute bits */
-+    val |= (ctrl & (TYPE6_VU | TYPE6_VS | TYPE6_U | TYPE6_S | TYPE6_M |
-+                    TYPE6_LOAD | TYPE6_STORE | TYPE6_EXEC));
-+
-+    return val;
-+}
-+
-+static void type6_breakpoint_insert(CPURISCVState *env, target_ulong index)
-+{
-+    target_ulong ctrl = env->tdata1[index];
-+    target_ulong addr = env->tdata2[index];
-+    bool enabled = type6_breakpoint_enabled(ctrl);
-+    CPUState *cs = env_cpu(env);
-+    int flags = BP_CPU | BP_STOP_BEFORE_ACCESS;
-+    uint32_t size;
-+
-+    if (!enabled) {
-+        return;
-+    }
-+
-+    if (ctrl & TYPE6_EXEC) {
-+        cpu_breakpoint_insert(cs, addr, flags, &env->cpu_breakpoint[index]);
-+    }
-+
-+    if (ctrl & TYPE6_LOAD) {
-+        flags |= BP_MEM_READ;
-+    }
-+
-+    if (ctrl & TYPE6_STORE) {
-+        flags |= BP_MEM_WRITE;
-+    }
-+
-+    if (flags & BP_MEM_ACCESS) {
-+        size = extract32(ctrl, 16, 4);
-+        if (size != 0) {
-+            cpu_watchpoint_insert(cs, addr, size, flags,
-+                                  &env->cpu_watchpoint[index]);
-+        } else {
-+            cpu_watchpoint_insert(cs, addr, 8, flags,
-+                                  &env->cpu_watchpoint[index]);
-+        }
-+    }
-+}
-+
-+static void type6_breakpoint_remove(CPURISCVState *env, target_ulong index)
-+{
-+    type2_breakpoint_remove(env, index);
-+}
-+
-+static void type6_reg_write(CPURISCVState *env, target_ulong index,
-+                            int tdata_index, target_ulong val)
-+{
-+    target_ulong new_val;
-+
-+    switch (tdata_index) {
-+    case TDATA1:
-+        new_val = type6_mcontrol6_validate(env, val);
-+        if (new_val != env->tdata1[index]) {
-+            env->tdata1[index] = new_val;
-+            type6_breakpoint_remove(env, index);
-+            type6_breakpoint_insert(env, index);
-+        }
-+        break;
-+    case TDATA2:
-+        if (val != env->tdata2[index]) {
-+            env->tdata2[index] = val;
-+            type6_breakpoint_remove(env, index);
-+            type6_breakpoint_insert(env, index);
-+        }
-+        break;
-+    case TDATA3:
-+        qemu_log_mask(LOG_UNIMP,
-+                      "tdata3 is not supported for type 6 trigger\n");
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+
-+    return;
-+}
-+
- target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
- {
-     switch (tdata_index) {
-@@ -408,10 +527,12 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
-     case TRIGGER_TYPE_AD_MATCH:
-         type2_reg_write(env, env->trigger_cur, tdata_index, val);
-         break;
-+    case TRIGGER_TYPE_AD_MATCH6:
-+        type6_reg_write(env, env->trigger_cur, tdata_index, val);
-+        break;
-     case TRIGGER_TYPE_INST_CNT:
-     case TRIGGER_TYPE_INT:
-     case TRIGGER_TYPE_EXCP:
--    case TRIGGER_TYPE_AD_MATCH6:
-     case TRIGGER_TYPE_EXT_SRC:
-         qemu_log_mask(LOG_UNIMP, "trigger type: %d is not supported\n",
-                       trigger_type);
-@@ -427,7 +548,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
- target_ulong tinfo_csr_read(CPURISCVState *env)
- {
-     /* assume all triggers support the same types of triggers */
--    return BIT(TRIGGER_TYPE_AD_MATCH);
-+    return BIT(TRIGGER_TYPE_AD_MATCH) |
-+           BIT(TRIGGER_TYPE_AD_MATCH6);
- }
- 
- void riscv_cpu_debug_excp_handler(CPUState *cs)
-@@ -478,6 +600,24 @@ bool riscv_cpu_debug_check_breakpoint(CPUState *cs)
-                     }
-                 }
-                 break;
-+            case TRIGGER_TYPE_AD_MATCH6:
-+                ctrl = env->tdata1[i];
-+                pc = env->tdata2[i];
-+
-+                if ((ctrl & TYPE6_EXEC) && (bp->pc == pc)) {
-+                    if (riscv_cpu_virt_enabled(env)) {
-+                        /* check VU/VS bit against current privilege level */
-+                        if ((ctrl >> 23) & BIT(env->priv)) {
-+                            return true;
-+                        }
-+                    } else {
-+                        /* check U/S/M bit against current privilege level */
-+                        if ((ctrl >> 3) & BIT(env->priv)) {
-+                            return true;
-+                        }
-+                    }
-+                }
-+                break;
-             default:
-                 /* other trigger types are not supported or irrelevant */
-                 break;
-@@ -526,6 +666,32 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
-                 }
-             }
-             break;
-+        case TRIGGER_TYPE_AD_MATCH6:
-+            ctrl = env->tdata1[i];
-+            addr = env->tdata2[i];
-+            flags = 0;
-+
-+            if (ctrl & TYPE6_LOAD) {
-+                flags |= BP_MEM_READ;
-+            }
-+            if (ctrl & TYPE6_STORE) {
-+                flags |= BP_MEM_WRITE;
-+            }
-+
-+            if ((wp->flags & flags) && (wp->vaddr == addr)) {
-+                if (riscv_cpu_virt_enabled(env)) {
-+                    /* check VU/VS bit against current privilege level */
-+                    if ((ctrl >> 23) & BIT(env->priv)) {
-+                        return true;
-+                    }
-+                } else {
-+                    /* check U/S/M bit against current privilege level */
-+                    if ((ctrl >> 3) & BIT(env->priv)) {
-+                        return true;
-+                    }
-+                }
-+            }
-+            break;
-         default:
-             /* other trigger types are not supported */
-             break;
-diff --git a/target/riscv/debug.h b/target/riscv/debug.h
-index 0e4859cf74..a1226b4d29 100644
---- a/target/riscv/debug.h
-+++ b/target/riscv/debug.h
-@@ -85,6 +85,24 @@ typedef enum {
- #define TYPE2_HIT       BIT(20)
- #define TYPE2_SIZEHI    (0x3 << 21) /* RV64 only */
- 
-+/* mcontrol6 field masks */
-+
-+#define TYPE6_LOAD      BIT(0)
-+#define TYPE6_STORE     BIT(1)
-+#define TYPE6_EXEC      BIT(2)
-+#define TYPE6_U         BIT(3)
-+#define TYPE6_S         BIT(4)
-+#define TYPE6_M         BIT(6)
-+#define TYPE6_MATCH     (0xf << 7)
-+#define TYPE6_CHAIN     BIT(11)
-+#define TYPE6_ACTION    (0xf << 12)
-+#define TYPE6_SIZE      (0xf << 16)
-+#define TYPE6_TIMING    BIT(20)
-+#define TYPE6_SELECT    BIT(21)
-+#define TYPE6_HIT       BIT(22)
-+#define TYPE6_VU        BIT(23)
-+#define TYPE6_VS        BIT(24)
-+
- /* access size */
- enum {
-     SIZE_ANY = 0,
--- 
-2.36.1
+Okay, I will update.
 
+>
+> In addition, the various V-extension vector load/store instructions do no=
+t have
+> defined transformations, so they should show up in [m|h]tinst as all zero=
+s.
+
+Okay, I will update.
+
+>
+> > +    if (xinsn_has_addr_offset) {
+> > +        /*
+> > +         * The "Addr. Offset" field in transformed instruction is non-=
+zero
+> > +         * only for misaligned load/store traps which are very unlikel=
+y on
+> > +         * QEMU so for now always set "Addr. Offset" to zero.
+> > +         */
+> > +        xinsn =3D SET_RS1(xinsn, 0);
+> > +    }
+>
+> There seems to be two misconceptions here:
+>
+> Firstly, QEMU *does* raise address misaligned exceptions for misaligned a=
+tomic
+> accesses.
+>
+> However, if I understood correctly, the address misaligned exceptions are
+> irrelevant here because 'Addr. Offset' is only non-zero for a misaligned
+> accesses that faults but *not* due to an address misaligned exception.
+>
+> For example, if an ld instruction reads 8 bytes starting from 0xa00ffe, a=
+nd the
+> page 0xa00000 to 0xa00fff is mapped, but 0xa01000 to 0xa01fff is not, a l=
+oad
+> page fault is raised with [m|s]tval =3D 0xa01000, while the original virt=
+ual
+> address of the access is 0xa00ffe. The 'Addr. Offset' in this case is 2, =
+i.e.
+> the difference calculated with (0xa01000 - 0xa00ffe). This means that we =
+*do*
+> have to set 'Addr. Offset' *because* we handle some misaligned load/store
+> instructions.
+
+Well, I am aware of how "Addr. Offset" field is set but I was not aware tha=
+t
+QEMU generates misaligned exception in a specific case (i.e. misaligned
+atomic).
+
+I will update this patch to
+
+>
+> > @@ -1355,18 +1558,31 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+> >      if (!async) {
+> >          /* set tval to badaddr for traps with address information */
+> >          switch (cause) {
+> > -        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> >          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> >          case RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT:
+> > -        case RISCV_EXCP_INST_ADDR_MIS:
+> > -        case RISCV_EXCP_INST_ACCESS_FAULT:
+> >          case RISCV_EXCP_LOAD_ADDR_MIS:
+> >          case RISCV_EXCP_STORE_AMO_ADDR_MIS:
+> >          case RISCV_EXCP_LOAD_ACCESS_FAULT:
+> >          case RISCV_EXCP_STORE_AMO_ACCESS_FAULT:
+> > -        case RISCV_EXCP_INST_PAGE_FAULT:
+> >          case RISCV_EXCP_LOAD_PAGE_FAULT:
+> >          case RISCV_EXCP_STORE_PAGE_FAULT:
+> > +            write_gva =3D env->two_stage_lookup;
+> > +            tval =3D env->badaddr;
+> > +            if (env->two_stage_indirect_lookup) {
+> > +                /*
+> > +                 * special pseudoinstruction for G-stage fault taken w=
+hile
+> > +                 * doing VS-stage page table walk.
+> > +                 */
+> > +                tinst =3D (riscv_cpu_xlen(env) =3D=3D 32) ? 0x00002000=
+ : 0x00003000;
+> > +            } else {
+> > +                /* transformed instruction for all other load/store fa=
+ults */
+> > +                tinst =3D riscv_transformed_insn(env, env->bins);
+> > +            }
+> > +            break;
+> > +        case RISCV_EXCP_INST_GUEST_PAGE_FAULT:
+> > +        case RISCV_EXCP_INST_ADDR_MIS:
+> > +        case RISCV_EXCP_INST_ACCESS_FAULT:
+> > +        case RISCV_EXCP_INST_PAGE_FAULT:
+> >              write_gva =3D env->two_stage_lookup;
+> >              tval =3D env->badaddr;
+> >              break;
+>
+> Instruction guest-page faults should set [m|h]tinst to one of the
+> pseudoinstructions if env->two_stage_lookup is true. Otherwise it should =
+set
+> [m|h]tinst to zero.
+>
+> In any case, as this seems to be one of the first implementations of
+> [m|h]tinst, it might be worthwhile to confirm with the spec authors and c=
+larify
+> any unclear bits before this gets released.
+
+This is already handled because tinst is initialized to zero.
+
+Regards,
+Anup
+
+>
+> dramforever
 
