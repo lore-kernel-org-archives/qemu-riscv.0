@@ -1,62 +1,57 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o0XxH-0008Nl-5v
-	for mharc-qemu-riscv@gnu.org; Sun, 12 Jun 2022 20:29:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:56696)
+	id 1o0Y10-000421-2H
+	for mharc-qemu-riscv@gnu.org; Sun, 12 Jun 2022 20:33:10 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:57110)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1o0XxG-0008NX-0P; Sun, 12 Jun 2022 20:29:18 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:37715)
+ id 1o0Y0y-00040M-AB; Sun, 12 Jun 2022 20:33:08 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435]:38488)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1o0XxE-0003Km-Ha; Sun, 12 Jun 2022 20:29:17 -0400
-Received: by mail-pg1-x530.google.com with SMTP id h192so4203089pgc.4;
- Sun, 12 Jun 2022 17:29:15 -0700 (PDT)
+ id 1o0Y0u-0003v8-Ox; Sun, 12 Jun 2022 20:33:06 -0400
+Received: by mail-pf1-x435.google.com with SMTP id e11so4403309pfj.5;
+ Sun, 12 Jun 2022 17:33:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=hoWvhIBJmPArlqrvYazYx8szKvXFUAEXiZFrtkEYUYI=;
- b=E1VzcVko4R06PGzyKyvxvjhZPKcnPMBiyPUi6rk7+ux5b1k93R7F9cANQ1zW3A5CxD
- 9z8xJLYxs4ewP4GnpVE4g36vqb8uU+feF9L/oDOLXqlQVUIDuj6cTHsT2t7kvOrGcp+/
- SJEBkyaLkSZa150gVhyATZRnxRnoGW7SRi2v1yUUIIxSiTkuwtVF3TtZm/eNJh+I9MEe
- 9DVmlDl0oERYQIDgIpZmAXKuqCgBo/cvwxk/K7rh/Ms1CQGCoZ3Evi9fsCI72Qy3AFcX
- 5e7osgTb5hUXqeRJN1d3F66Rkcl4oNqRGdm4n4TsZfmIg/Vq4cUqXlEbSFJga+BVmnll
- n/JA==
+ :cc; bh=syQRzEQ+clGVmGE6aJAVSi3Xr/cIVNp/s11Ly2vDVgQ=;
+ b=htU987u0agV2KY67tpYuzahVfmg3k6ofKAhDN6YTNbrvl0/s97neE8OhPJn9el/i0+
+ hSydcSEt9n2NYrdmpR7QQH46D8tV8mffsD1x4Wt/rIPxgiSoQ2cTIZf5aIpBobvCVzLf
+ YS08rGXqihSLJ4PlogPxL15c14CVObqK/cJVhfENo1bAzzhBVYmHcx8x2YMivXST7Oxa
+ wLeKAyP425cHRRAT+dEUn49ZJuP17qaogwIal7sRmO3fupoHr2XS8RyHCY9Jm3wOs5aK
+ sNovxwNnVRduca4ghtrFbKJeMZne1kNhgb/tkvEkbASMpQsUYClVZR8VdFpqF3POaWf2
+ Ju0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=hoWvhIBJmPArlqrvYazYx8szKvXFUAEXiZFrtkEYUYI=;
- b=otQcULnVcD6Oe6n9Po0oL3p3+dQkp9deNtCIzNa8KSic9xd4FoOnROps3X7hhgD1J0
- dUswpe76C+6XdLexWrZ3ka1qddfMVhYTZb6DqS5xBv8x2csDn4Dxjvh21y9aA3awyoMc
- 5zZpJDZWT1Fz7NIJ0ZRQuTT0oaqMOYxdtw3y58olWxHWy+dAaW5KeC6l9p0C15TfcC2W
- g/1g2KBoHBfYjRWvZtfAogcLWXOwt7adFp570Yyk4ZWwXs/RUr621SMNBU72rGbM2Hbh
- ed1GEc3GGiQPpIXdxYmyrfo/5YQOFrGfSe3wExuBSlRJVAlKfibHT0chDL9GA0kzFQ0w
- poBQ==
-X-Gm-Message-State: AOAM530puEaw31KyEAz94WhfXZcRNKrHvBj6wM+rdIV6AtmbAhLzot7K
- BuJxC8v6b2Hc2gb0XYAAPBLnl9UBRgrz84ipSS84kWTuvIJz7cfc
-X-Google-Smtp-Source: ABdhPJxnYbZKZav/4xKinLDkAF8TYzh0cHcdgtrUo8gZoA/MI3z5/N09B2xQ+cI9s1zqRvzi4xMMPnMjG+7fD1gr6EI=
-X-Received: by 2002:a65:5385:0:b0:3fa:52e3:6468 with SMTP id
- x5-20020a655385000000b003fa52e36468mr49840262pgq.366.1655080154786; Sun, 12
- Jun 2022 17:29:14 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=syQRzEQ+clGVmGE6aJAVSi3Xr/cIVNp/s11Ly2vDVgQ=;
+ b=Q6XgwbJCsiD+n8mlCHCPr/cLe5JTxuGwW9b7Ay1Vexy+tYrM9sd/Dj5904zGurcL3c
+ OgwV4h3fUt0zgwoIXw9/7xf+Dcxdf69J2o7KZ8Cb9P/LTaE2r3HWTMRXVBLqaHtAPGXe
+ 4AViO0LTgVIFT26G4wN3UHDeFIJWxFhM7+FcTBMmQJD+MUD+Uza9QymZOuq0T7CAf5sR
+ Fvan2MUvmauFF8xA8gmY1IM9AKVZEocCcmNLG1Ur/yol2394O3qa0YnV8xgZClPqo9r6
+ K88esvCXn2kTPBTKD6WvULFRtIMJ74KAqkzxhVKR9Qe/cggD2vxNYk4VSz03BYpZcKi8
+ eq+Q==
+X-Gm-Message-State: AOAM533czJuas0ls+cQ3FpL9wSIRK19QQ7GepkUMAnCQlAeQ3Xg3tU9B
+ 0GyJTvOIv+3EXKlYePzlolftuEX3DPSWAz6RsRA=
+X-Google-Smtp-Source: ABdhPJwPBXpBJQaYdRLMCcLOicc3fkyZSABTrPkFm2Ooh3p9YQbb5iBlhMszkUKhM2i3TrAdXz2qXYQzXIXTYgefJSs=
+X-Received: by 2002:a65:5786:0:b0:3fd:7145:ceef with SMTP id
+ b6-20020a655786000000b003fd7145ceefmr38331536pgr.361.1655080383080; Sun, 12
+ Jun 2022 17:33:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220610165517.47517-1-victor.colombo@eldorado.org.br>
-In-Reply-To: <20220610165517.47517-1-victor.colombo@eldorado.org.br>
+References: <20220609010724.104033-1-bmeng.cn@gmail.com>
+In-Reply-To: <20220609010724.104033-1-bmeng.cn@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 Jun 2022 10:28:48 +1000
-Message-ID: <CAKmqyKOtwoeYJRKA29PC4e9UMbALyPBE_K+s7X_7S+-nCde-+A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Remove condition guarding register zero for
- auipc and lui
-To: =?UTF-8?Q?V=C3=ADctor_Colombo?= <victor.colombo@eldorado.org.br>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>
+Date: Mon, 13 Jun 2022 10:32:36 +1000
+Message-ID: <CAKmqyKPOj2YesmskC5q9Xai3D0edb6TzvxkfzdkK7tork3QAPw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Remove the redundant initialization of
+ env->misa_mxl
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,55 +72,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2022 00:29:18 -0000
+X-List-Received-Date: Mon, 13 Jun 2022 00:33:08 -0000
 
-On Sat, Jun 11, 2022 at 2:59 AM V=C3=ADctor Colombo
-<victor.colombo@eldorado.org.br> wrote:
+On Thu, Jun 9, 2022 at 11:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> Commit 57c108b8646 introduced gen_set_gpri(), which already contains
-> a check for if the destination register is 'zero'. The check in auipc
-> and lui are then redundant. This patch removes those checks.
+> env->misa_mxl was already set in the RISC-V cpu init routine, and
+> validated at the beginning of riscv_cpu_realize(). There is no need
+> to do a redundant initialization later.
 >
-> Signed-off-by: V=C3=ADctor Colombo <victor.colombo@eldorado.org.br>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> ---
+>
+>  target/riscv/cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index a91253d4bd..61d1737741 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -752,7 +752,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              ext |= RVJ;
+>          }
+>
+> -        set_misa(env, env->misa_mxl, ext);
+> +        env->misa_ext_mask = env->misa_ext = ext;
 
-Thanks!
-
-Applied to riscv-to-apply.next
+You're right that we don't need to set `misa_mxl`, but isn't it
+cleaner calling the helper function here instead of manually assigning
+it?
 
 Alistair
 
-> ---
->  target/riscv/insn_trans/trans_rvi.c.inc | 8 ++------
->  1 file changed, 2 insertions(+), 6 deletions(-)
+>      }
 >
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
-trans/trans_rvi.c.inc
-> index f1342f30f8..c190a59f22 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -32,17 +32,13 @@ static bool trans_c64_illegal(DisasContext *ctx, arg_=
-empty *a)
->
->  static bool trans_lui(DisasContext *ctx, arg_lui *a)
->  {
-> -    if (a->rd !=3D 0) {
-> -        gen_set_gpri(ctx, a->rd, a->imm);
-> -    }
-> +    gen_set_gpri(ctx, a->rd, a->imm);
->      return true;
->  }
->
->  static bool trans_auipc(DisasContext *ctx, arg_auipc *a)
->  {
-> -    if (a->rd !=3D 0) {
-> -        gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
-> -    }
-> +    gen_set_gpri(ctx, a->rd, a->imm + ctx->base.pc_next);
->      return true;
->  }
->
+>      riscv_cpu_register_gdb_regs_for_features(cs);
 > --
-> 2.25.1
+> 2.34.1
 >
 >
 
