@@ -1,49 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o1Leb-0007eN-UA
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Jun 2022 01:33:21 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40072)
+	id 1o1Lmi-0001ps-8r
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Jun 2022 01:41:52 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41322)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1o1LeY-0007dP-9Q; Wed, 15 Jun 2022 01:33:18 -0400
-Received: from mail-qv1-xf2a.google.com ([2607:f8b0:4864:20::f2a]:34445)
+ id 1o1LmT-0001o8-Cc; Wed, 15 Jun 2022 01:41:32 -0400
+Received: from mail-qk1-x736.google.com ([2607:f8b0:4864:20::736]:42660)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1o1LeV-0005f9-LG; Wed, 15 Jun 2022 01:33:18 -0400
-Received: by mail-qv1-xf2a.google.com with SMTP id t6so6638371qvh.1;
- Tue, 14 Jun 2022 22:33:14 -0700 (PDT)
+ id 1o1LmG-00036a-3F; Wed, 15 Jun 2022 01:41:28 -0400
+Received: by mail-qk1-x736.google.com with SMTP id 68so7993408qkk.9;
+ Tue, 14 Jun 2022 22:41:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5f4wSRzUVIs8bz3f2IrAJSikMvZmtadI9aVsYKO8B/Q=;
- b=aFszQsnO4dclGrBNFdrcty/CXYdthE8xXKtH5elhzm2G+78ankt4A8Rk5uRP6DJ/jl
- qGfj9nGIOSPXeNHD8NjRJeju0ic5Jm5zP5jA/K3C1fgvqqDc56bBgueJFsfCIsmP2ZFR
- cGm2lsgKkOHSGfkmP9hg6JzS8xLz/sC2JTZnB7RlOVdFweNLTwieAG83Tvkdw4/jrK0B
- xPIeTCGxrh1hUgB3AcIadRTsr4AlLPiom+o+C3OVFR0JPEiHULXFLvEMZi+XZyd74LRF
- l1Q1mZxSMsX32RAG11VOqUNz1bsosV+gCbggmtPMxskIN67IBwlXbXW2+ykPvLyHJZU9
- 5VEw==
+ :cc; bh=xX+L5VSKm0s7ZGEwVu5Wyxge9OemB5hSX9Z9Ah9/gZY=;
+ b=h3DJsljqVgJCK4EX7p4wdVEettwG23JFFzh2DJc0tO3Ldhl7/ndmFsZsNKhAgzU3ka
+ 7aXBt+BtAUHY+9RJMZywIk+9FybKszIsEZoAvvHWhy6FVBX1zgACq6EO1dhl28clrICr
+ k3Ihi9wPpnUMQkxzHnVfIG1i25bHRkYgIIQ8JMnzxqE5gWYlqYSZ1hwfgrNzXob2jpMD
+ gqmM9Arxh5/OwoAW//oW60xmVTGgcZWkRq5Ab804t0wAUrvUQPFVJ3UHyVX6EqJXRwNr
+ urSppp8PtQ403weCKih9BGdemqe500wmRJW4OWi3KKIPkmHBw4HyvxI4vT0UhLs8rJQs
+ ISkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=5f4wSRzUVIs8bz3f2IrAJSikMvZmtadI9aVsYKO8B/Q=;
- b=UU6QKfFQrfzLJMVXvRXF34hRTXoAXkQNtjBYzOcOm8JUbBO0yoh90uV1B1JmimuHNR
- ZMKIFsyzbQNZh+NJccaV4PDxn0G7G9E6KE+wB5jPy+vNCL7NWjI0WO4ozM75ENpQ7V0s
- VaXWNeJRaa9W1W7Db2xmvGtfwDN6Qbt0oThyJWVxeEMHzPu3QjEDiH08kZ5iRydFS76C
- venMgj0b1c9lMmaX/8hIqDwFUU9nZR5TJP4by6KSXzzF1LxXbNbV5GJUbsJ+9/zlKH3F
- ebEuq52LRRPfrRMq2AWyQ5DS9LynVyaRuSh6XhKguSEKZfveWXdGIT5VYFXgfzfA+/JS
- NeSw==
-X-Gm-Message-State: AJIora99SQvk/HPBnAo52HjQt1uAatvQQWn73s2wWnP9D48Dujhs+Gnj
- /Z5jtm1CxSqIbUYYPdV5w0LHGqCVCVaEw9/ClBM=
-X-Google-Smtp-Source: AGRyM1voLh2TKkbKvjm1YphX3c2WXL2w6fRRCjqc0lh6MnXZnYC+8NednbKClGfzu9j8wr3HgGK4x+yc+8q82utz6hE=
-X-Received: by 2002:a05:6214:d8d:b0:464:51cc:a552 with SMTP id
- e13-20020a0562140d8d00b0046451cca552mr6710853qve.122.1655271194063; Tue, 14
- Jun 2022 22:33:14 -0700 (PDT)
+ bh=xX+L5VSKm0s7ZGEwVu5Wyxge9OemB5hSX9Z9Ah9/gZY=;
+ b=1fFNInmHcTPVEwpAnfbiiEKnBI+Xb8m4fKpnSklO2+UrNNVzcWOzhyFK6ciQdCTceL
+ s7ExR63kSeUfmZ+gxAWNDkoG2nlNyQ6kr7iVWGHB8hdgsfvHD5am4CVlec+eir8AtquY
+ 1k3SBrrxCzt1oD8DU50kE90Mnf9TKp3zvgiK7Q9oVoxHXt6E10ltf/W0r4u6YJsXqLbS
+ S0IeR+VOzvrUQMmubUunUCBf/5uoPWNNJm0fYGiB+jgY8a77rvRZvTOdOGJ7Cm2yTVV5
+ UD8igjpprPL1jnRFa0Ah8AM1CoXL0i+WLwjz2bmyMfbMvrscBbJi3wSjR1cYyxu4lYzo
+ /PXg==
+X-Gm-Message-State: AOAM532skYjEWFtDy0SdqGczAjk5Z4ajKqLsQaYt11H6zQ8biouGxla9
+ uSikkApdz6olKPi4A2wW6ONIx97CVaHuKYpqdW8=
+X-Google-Smtp-Source: ABdhPJz1DYCxavA8EAJQx2dQ0neUvdoiaXlkM/22I0DQwCxvURrwuIwKw0T6KiYHxz23hjRbXOClbWYrQRJtnXT8gEs=
+X-Received: by 2002:a05:620a:683:b0:6a6:93aa:8559 with SMTP id
+ f3-20020a05620a068300b006a693aa8559mr7057891qkh.94.1655271672297; Tue, 14 Jun
+ 2022 22:41:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220610051328.7078-1-frank.chang@sifive.com>
  <20220610051328.7078-2-frank.chang@sifive.com>
 In-Reply-To: <20220610051328.7078-2-frank.chang@sifive.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 15 Jun 2022 13:33:02 +0800
-Message-ID: <CAEUhbmVgi+RiTahMiJjy0PoO-RFz7z4=xuRtAsfg+ecR8UR=UQ@mail.gmail.com>
+Date: Wed, 15 Jun 2022 13:41:00 +0800
+Message-ID: <CAEUhbmV9cc7uTOFfR765BGm4gmGTk9JXpo=pk9NdJ4UZ_=oucg@mail.gmail.com>
 Subject: Re: [PATCH 1/9] target/riscv: debug: Determine the trigger type from
  tdata1.type
 To: Frank Chang <frank.chang@sifive.com>
@@ -53,8 +53,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2a;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::736;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qk1-x736.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,7 +74,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2022 05:33:19 -0000
+X-List-Received-Date: Wed, 15 Jun 2022 05:41:35 -0000
 
 On Fri, Jun 10, 2022 at 1:20 PM <frank.chang@sifive.com> wrote:
 >
@@ -156,6 +156,10 @@ On Fri, Jun 10, 2022 at 1:20 PM <frank.chang@sifive.com> wrote:
 > +        return extract32(tdata1, 28, 4);
 > +    case MXL_RV64:
 > +        return extract64(tdata1, 60, 4);
+
+I guess we should add a "case MXL_RV128" here so that it won't break rv128.
+See commit d1d8541217ce8a23e9e751cd868c7d618817134a
+
 > +    default:
 > +        g_assert_not_reached();
 > +    }
@@ -264,9 +268,6 @@ On Fri, Jun 10, 2022 at 1:20 PM <frank.chang@sifive.com> wrote:
 > +    case TRIGGER_TYPE_NO_EXIST:
 > +    case TRIGGER_TYPE_UNAVAIL:
 > +        break;
-
-Should we log guest errors for these 2 types?
-
 > +    default:
 > +        g_assert_not_reached();
 > +    }
@@ -463,6 +464,10 @@ Should we log guest errors for these 2 types?
 >  #define RV64_TYPE_MASK  (0xfULL << 60)
 >  #define RV64_DMODE      BIT_ULL(59)
 > +#define RV64_DATA_MASK  0x7ffffffffffffff
+
+It looks the 2 macros added here were used in patch2, so please move
+the macro definition in patch 2.
+
 >
 >  /* mcontrol field masks */
 >
@@ -481,6 +486,6 @@ Should we log guest errors for these 2 types?
 >      }
 > --
 
-Overall LGTM,
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Regards,
+Bin
 
