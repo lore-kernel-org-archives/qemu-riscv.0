@@ -1,62 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o1aJ3-0001K8-DG
-	for mharc-qemu-riscv@gnu.org; Wed, 15 Jun 2022 17:12:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33596)
+	id 1o1fL4-0003ZZ-Hj
+	for mharc-qemu-riscv@gnu.org; Wed, 15 Jun 2022 22:34:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:58386)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nico@fluxnic.net>)
- id 1o1aJ1-0001I5-DS; Wed, 15 Jun 2022 17:12:03 -0400
-Received: from pb-smtp20.pobox.com ([173.228.157.52]:57458)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nico@fluxnic.net>)
- id 1o1aIz-0005R1-BQ; Wed, 15 Jun 2022 17:12:03 -0400
-Received: from pb-smtp20.pobox.com (unknown [127.0.0.1])
- by pb-smtp20.pobox.com (Postfix) with ESMTP id 1331A1A83BA;
- Wed, 15 Jun 2022 17:11:58 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=date:from
- :to:cc:subject:message-id:mime-version:content-type; s=sasl; bh=
- X2NeBToT0LEImInR0fiKCPjXexxbY8sZgQAWrigkCVc=; b=WLacvZPmlrijWCC9
- /8/hqdH/5UfDYU3LsznH3apTp9FpfpNomI1ku1LJUF7lOpLGJO+MnLgdX448XDKP
- aj6BQjTSAbSiNnybARQ6/p4rEX9IbxtmxTj8ZUwkpLP4soXOH2PSCjsd09D7w3n6
- u+ISFEu7znRwwh3h2sqj42vRkmQ=
-Received: from pb-smtp20.sea.icgroup.com (unknown [127.0.0.1])
- by pb-smtp20.pobox.com (Postfix) with ESMTP id 0BD891A83B9;
- Wed, 15 Jun 2022 17:11:58 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=fluxnic.net;
- h=date:from:to:cc:subject:message-id:mime-version:content-type;
- s=2016-12.pbsmtp; bh=X2NeBToT0LEImInR0fiKCPjXexxbY8sZgQAWrigkCVc=;
- b=LYTCHixJ/iXzag+JzmKGpQ58tvm0Sj2lfLGB6FdbgcGYc00PgA11zYWjsvuyb3jomei0Oua2uwSdI/m5IncM42D+btfHf1rdDUlAhXPVfbeokvkdn3LS4ZVVzOZkXl6uh22r5IolddL2IVgBgbxMUHFYgnQ9ytzOAkbqOZq2gYA=
-Received: from yoda.home (unknown [96.21.170.108])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by pb-smtp20.pobox.com (Postfix) with ESMTPSA id D7D5D1A83B7;
- Wed, 15 Jun 2022 17:11:53 -0400 (EDT)
- (envelope-from nico@fluxnic.net)
-Received: from xanadu.home (xanadu.home [192.168.2.2])
- by yoda.home (Postfix) with ESMTPSA id 70A862DF4B8;
- Wed, 15 Jun 2022 17:11:51 -0400 (EDT)
-Date: Wed, 15 Jun 2022 17:11:51 -0400 (EDT)
-From: Nicolas Pitre <nico@fluxnic.net>
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-cc: Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>
-Subject: [PATCH] target/riscv/pmp: guard against PMP ranges with a negative
- size
-Message-ID: <3oq0sqs1-67o0-145-5n1s-453o118804q@syhkavp.arg>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1o1fL2-0003V7-CT; Wed, 15 Jun 2022 22:34:28 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:43946)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1o1fKu-0004g3-0L; Wed, 15 Jun 2022 22:34:28 -0400
+Received: by mail-pf1-x434.google.com with SMTP id x4so256808pfj.10;
+ Wed, 15 Jun 2022 19:34:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=X0p+wGRDd7PzrbcSR+4itNhstkJw1K172Q5t+13xp1I=;
+ b=LqkA1P5x9xWXpkmF1gGixwClZz2u5Qz4D27Y9WzvnUC/EbZ4pqJiXDi5gj+Edjpv2P
+ WRjWEMGC46CO52pbuuTxA8sTLZ8iI+3lOzr5RQamniZr+lS7EzFDCKD+i2uMYAhis30i
+ i/il0M/L+mG8Wyqd+FyODRuTKS7AEsSjdR66u0QbvbR2OU/tSKejRdYixrLL00btZn29
+ 0RMnYUAVZil6UwV90mGQtjmbuvmsfrtQYEl5oBWzMUP43a0iMBT6QJYxTp6alNHfliWq
+ Gen9jzCKRD+TAUGVWIkmGnH0i4NzdNOd2bIFjMlhd/jwV+/jQmUAL99oLI26Q37C+leV
+ gPWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=X0p+wGRDd7PzrbcSR+4itNhstkJw1K172Q5t+13xp1I=;
+ b=wat6qe4fEIA12+EFaIRNL3Q6YvsW1PcSrzEpSIEQgnODdpDUQO0HiQ4F1amhygv2eH
+ tjtGKy+gKArF78umIIb8Gx16Kqao3fSVU67Mg/QpxAn4WU10HGzX2r1kzIdjZYcR6OSa
+ uksUrfa6aHt3GBf4H16y3upkvblIBVfP1pZsK0ahPYo/PbDSIBsQT4iIQPzv0FPLag6y
+ GLDG/8Z9nFxFS+CPxsAlWIxK0Z0SPPG19kcGGSp87RaKzfzOAGgLVPSMYULsgFjb4BwX
+ 9K+cwWyButtIw59FZfy41TyF2YYDHJPHJfq+U4ENlphTz4uGnP2ayBFCnSXnsS0Bib2D
+ SHaw==
+X-Gm-Message-State: AJIora/HjB+IlALcXjo5RB5RFjAHearEKimLdIjso4uvvp79v6HmHbve
+ +bJFkGlPmbe8OFy1XsVYcYCmrBj5uoGclCtGAeA=
+X-Google-Smtp-Source: AGRyM1vFToMtr0AoquCJvahFibByih0FDE4N8987wze6G5D5csDQnGJeSR9I+WL5tqGHn940xNcYZKHLNfVkM1Rxboc=
+X-Received: by 2002:a65:5385:0:b0:3fa:52e3:6468 with SMTP id
+ x5-20020a655385000000b003fa52e36468mr2501461pgq.366.1655346857826; Wed, 15
+ Jun 2022 19:34:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Pobox-Relay-ID: C8088CB4-ECEF-11EC-A7B3-C85A9F429DF0-78420484!pb-smtp20.pobox.com
-Received-SPF: pass client-ip=173.228.157.52; envelope-from=nico@fluxnic.net;
- helo=pb-smtp20.pobox.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
-X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20220609010724.104033-1-bmeng.cn@gmail.com>
+ <CAKmqyKPOj2YesmskC5q9Xai3D0edb6TzvxkfzdkK7tork3QAPw@mail.gmail.com>
+ <CAEUhbmVakz7sKACQgYO77mw7kw3WtAcxy4=0++BHfQyaCHCJ3Q@mail.gmail.com>
+In-Reply-To: <CAEUhbmVakz7sKACQgYO77mw7kw3WtAcxy4=0++BHfQyaCHCJ3Q@mail.gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 16 Jun 2022 12:33:51 +1000
+Message-ID: <CAKmqyKOJ5W4Z_sqx=NLkB4UmmhbpC9-nvGMR7yh9XoNJa03=Ug@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv: Remove the redundant initialization of
+ env->misa_mxl
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x434.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01, URIBL_CSS=0.1 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,52 +74,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2022 21:12:03 -0000
+X-List-Received-Date: Thu, 16 Jun 2022 02:34:28 -0000
 
-For a TOR entry to match, the stard address must be lower than the end
-address. Normally this is always the case, but correct code might still
-run into the following scenario:
+On Mon, Jun 13, 2022 at 10:30 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Mon, Jun 13, 2022 at 8:33 AM Alistair Francis <alistair23@gmail.com> wrote:
+> >
+> > On Thu, Jun 9, 2022 at 11:08 AM Bin Meng <bmeng.cn@gmail.com> wrote:
+> > >
+> > > env->misa_mxl was already set in the RISC-V cpu init routine, and
+> > > validated at the beginning of riscv_cpu_realize(). There is no need
+> > > to do a redundant initialization later.
+> > >
+> > > Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
+> > > ---
+> > >
+> > >  target/riscv/cpu.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> > > index a91253d4bd..61d1737741 100644
+> > > --- a/target/riscv/cpu.c
+> > > +++ b/target/riscv/cpu.c
+> > > @@ -752,7 +752,7 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+> > >              ext |= RVJ;
+> > >          }
+> > >
+> > > -        set_misa(env, env->misa_mxl, ext);
+> > > +        env->misa_ext_mask = env->misa_ext = ext;
+> >
+> > You're right that we don't need to set `misa_mxl`, but isn't it
+> > cleaner calling the helper function here instead of manually assigning
+> > it?
+> >
+>
+> There is no helper for assigning misa_ext only. Do you want a new
+> helper for that?
 
-Initial state:
+No, I don't think we need a new helper. I mean, is there any harm in
+just calling `set_misa()` even if that means we are performing a
+redundant operation?
 
-	pmpaddr3 = 0x2000	pmp3cfg = OFF
-	pmpaddr4 = 0x3000	pmp4cfg = TOR
+Alistair
 
-Execution:
-
-	1. write 0x40ff to pmpaddr3
-	2. write 0x32ff to pmpaddr4
-	3. set pmp3cfg to NAPOT with a read-modify-write on pmpcfg0
-	4. set pmp4cfg to NAPOT with a read-modify-write on pmpcfg1
-
-When (2) is emulated, a call to pmp_update_rule() creates a negative
-range for pmp4 as pmp4cfg is still set to TOR. And when (3) is emulated,
-a call to tlb_flush() is performed, causing pmp_get_tlb_size() to return
-a very creatively large TLB size for pmp4. This, in turn, may result in
-accesses to non-existent/unitialized memory regions and a fault, so that
-(4) ends up never being executed.
-
-This is in m-mode with MPRV unset, meaning that unlocked PMP entries
-should have no effect. Therefore such a behavior based on PMP content
-is very unexpected.
-
-Make sure no negative PMP range can be created, whether explicitly by
-the emulated code or implicitly like the above.
-
-Signed-off-by: Nicolas Pitre <nico@fluxnic.net>
-
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 151da3fa08..ea2b67d947 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -167,6 +167,9 @@ void pmp_update_rule_addr(CPURISCVState *env, uint32_t pmp_index)
-     case PMP_AMATCH_TOR:
-         sa = prev_addr << 2; /* shift up from [xx:0] to [xx+2:2] */
-         ea = (this_addr << 2) - 1u;
-+        if (sa > ea) {
-+            sa = ea = 0u;
-+        }
-         break;
- 
-     case PMP_AMATCH_NA4:
+>
+> Regards,
+> Bin
 
