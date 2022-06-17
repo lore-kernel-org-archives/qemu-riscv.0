@@ -1,43 +1,43 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o2JTq-0003QK-E7
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Jun 2022 17:26:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41210)
+	id 1o2Ju8-0006Co-TH
+	for mharc-qemu-riscv@gnu.org; Fri, 17 Jun 2022 17:53:28 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45580)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1o2JTo-0003Q7-Mc
- for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:26:12 -0400
-Received: from sender-of-o50.zoho.in ([103.117.158.50]:2172)
+ id 1o2Ju4-0006Bl-DF
+ for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:53:20 -0400
+Received: from sender-of-o50.zoho.in ([103.117.158.50]:2927)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1o2JTm-0004Ye-Hu
- for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:26:12 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1655501159; cv=none; d=zohomail.in; s=zohoarc; 
- b=IEjBrPIes3HmGSQagSWxktPTIsIx8vnGXwRn2cLnKCrrylN5zYHCkahR1xWWnibM4QeX66E9+TUo2ALke9oLhQ6nb0+Zbqh8OutT0GxtwBpW5tWZaRdgY3ONM+vp906ZSg1F7eidt8ydg5ODoqotDgYPsp/u3S/XucBc94uqWa4=
+ id 1o2Ju2-0005rr-7w
+ for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:53:20 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1655502791; cv=none; d=zohomail.in; s=zohoarc; 
+ b=eI7RIAvivd+F6jUfdy044zYSxMuHkDeKh+47sFfvoF6rQ0tG/KJB5moLPdoO/YmZ2Y9UCbKvCsDbpUk0TmBfL+WiJWR2P6xJt/brcClNEK2Yge5h3k8+EtR3AmAQr6MnxnfPdWhXWKLoOezX3Rd1i/kZPegTmHa09wOQDfw0bJg=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
- s=zohoarc; t=1655501159;
+ s=zohoarc; t=1655502791;
  h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=eqVyuoHMEJ2/QUN89WYYMjbOJOv3gRFbSc08yfsuU90=; 
- b=DYMfRI0SqU/SEhB3DfNBwlCENHqONYF9DpJcZDzgr+6ghb2Gn7kXB4fCWqa9JMFL7dse3mVuURS+OI/8DNS3Xset9Bvditn5n/Q6AVMRQmkLt9ZCxD9jXMPwXB5q5PsAH7w/Gzv+QnrAyed2pKgMAh4/kiE6+PIMutaGho/0gig=
+ bh=/V4L3jWumjS+vBgA+d/M+7x1rDxv1+agZXey7TPlorA=; 
+ b=HNBqa3Hm5+z9yn4Lgbw1g/SE+DTmZrw8f78BQQPlqCDCGux2614QJ/Kq1lHLkRz1koCGK2CFIiL7myjar52sXZtDDyerqF1h41DtFjdZGPi2i3OyBmubjZSiANV9+D3ctk4lHo5z2VoyA0elsWnrMDIL6q/9rbx1pY86XLibbB4=
 ARC-Authentication-Results: i=1; mx.zohomail.in;
  dkim=pass  header.i=behindbytes.com;
  spf=pass  smtp.mailfrom=vijai@behindbytes.com;
  dmarc=pass header.from=<vijai@behindbytes.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1655501159; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1655502791; 
  s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
  h=From:From:To:To:Cc:Cc:Message-ID:Subject:Subject:Date:Date:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
- bh=eqVyuoHMEJ2/QUN89WYYMjbOJOv3gRFbSc08yfsuU90=;
- b=ITkcd6qQTAKeuEl3z2ID/kovtpvYLslsoBKPUzJW556OOD4QKmEBgQioOwq7DzGB
- oydIyUv23ghcf71YnVQ3hwg6FywxjtulS2oSgizly1ZblJqwfmEVNBnvnFU/z2nH3xy
- nRr0oPSctudoPHaoOvVd8l++LTDP3z2MKLQvsbSk=
+ bh=/V4L3jWumjS+vBgA+d/M+7x1rDxv1+agZXey7TPlorA=;
+ b=rI6wEYi5g8juLUSfzcwUax39RnBpms+gWETthpaGV9XUygxGKnJ3O1QOs5HTRmVI
+ oO8z+rn4cE3zYsBmdImmAIXrz5rYRAriWKH7A4ApupjKFx0mBQ7GzNc30f3SPIbERM4
+ /0FMStKULSN0JUXRfYGvEbssLiOCk41DApAq7pj0=
 Received: from localhost.localdomain (49.207.195.97 [49.207.195.97]) by
- mx.zoho.in with SMTPS id 1655501157940266.5996757223719;
- Sat, 18 Jun 2022 02:55:57 +0530 (IST)
+ mx.zoho.in with SMTPS id 1655502789428493.55113414367486;
+ Sat, 18 Jun 2022 03:23:09 +0530 (IST)
 From: Vijai Kumar K <vijai@behindbytes.com>
 To: qemu-riscv@nongnu.org
 Cc: Vijai Kumar K <vijai@behindbytes.com>
-Message-ID: <20220617212542.59196-1-vijai@behindbytes.com>
-Subject: [PATCH] include/hw/char: QOMify shakti_uart
-Date: Sat, 18 Jun 2022 02:55:42 +0530
+Message-ID: <20220617215306.75384-1-vijai@behindbytes.com>
+Subject: [PATCH] include/hw/riscv: QOMify shakti_c
+Date: Sat, 18 Jun 2022 03:23:06 +0530
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -63,46 +63,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2022 21:26:12 -0000
+X-List-Received-Date: Fri, 17 Jun 2022 21:53:20 -0000
 
 Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
 ---
- include/hw/char/shakti_uart.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/hw/riscv/shakti_c.h | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/include/hw/char/shakti_uart.h b/include/hw/char/shakti_uart.h
-index 526c408233..2c305562e7 100644
---- a/include/hw/char/shakti_uart.h
-+++ b/include/hw/char/shakti_uart.h
-@@ -27,6 +27,7 @@
-=20
- #include "hw/sysbus.h"
- #include "chardev/char-fe.h"
+diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
+index daf0aae13f..2b50f1a2a7 100644
+--- a/include/hw/riscv/shakti_c.h
++++ b/include/hw/riscv/shakti_c.h
+@@ -1,7 +1,7 @@
+ /*
+  * Shakti C-class SoC emulation
+  *
+- * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com>
++ * Copyright (c) 2021-2022 Vijai Kumar K <vijai@behindbytes.com>
+  *
+  * This program is free software; you can redistribute it and/or modify it
+  * under the terms and conditions of the GNU General Public License,
+@@ -22,12 +22,12 @@
+ #include "hw/riscv/riscv_hart.h"
+ #include "hw/boards.h"
+ #include "hw/char/shakti_uart.h"
 +#include "qom/object.h"
 =20
- #define SHAKTI_UART_BAUD        0x00
- #define SHAKTI_UART_TX          0x04
-@@ -48,10 +49,9 @@
- #define SHAKTI_UART_CONTROL_DEFAULT 0x0100
+ #define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc"
+-#define RISCV_SHAKTI_SOC(obj) \
+-    OBJECT_CHECK(ShaktiCSoCState, (obj), TYPE_RISCV_SHAKTI_SOC)
++OBJECT_DECLARE_SIMPLE_TYPE(ShaktiCSoCState, RISCV_SHAKTI_SOC)
 =20
- #define TYPE_SHAKTI_UART "shakti-uart"
--#define SHAKTI_UART(obj) \
--    OBJECT_CHECK(ShaktiUartState, (obj), TYPE_SHAKTI_UART)
-+OBJECT_DECLARE_SIMPLE_TYPE(ShaktiUartState, SHAKTI_UART)
+-typedef struct ShaktiCSoCState {
++struct ShaktiCSoCState {
+     /*< private >*/
+     DeviceState parent_obj;
 =20
--typedef struct {
-+struct ShaktiUartState {
-     /* <private> */
-     SysBusDevice parent_obj;
+@@ -37,18 +37,18 @@ typedef struct ShaktiCSoCState {
+     ShaktiUartState uart;
+     MemoryRegion rom;
 =20
-@@ -69,6 +69,6 @@ typedef struct {
-     uint32_t uart_rx_threshold;
-=20
-     CharBackend chr;
--} ShaktiUartState;
+-} ShaktiCSoCState;
 +};
 =20
- #endif /* HW_SHAKTI_UART_H */
+ #define TYPE_RISCV_SHAKTI_MACHINE MACHINE_TYPE_NAME("shakti_c")
+-#define RISCV_SHAKTI_MACHINE(obj) \
+-    OBJECT_CHECK(ShaktiCMachineState, (obj), TYPE_RISCV_SHAKTI_MACHINE)
+-typedef struct ShaktiCMachineState {
++OBJECT_DECLARE_SIMPLE_TYPE(ShaktiCMachineState, RISCV_SHAKTI_MACHINE)
++
++struct ShaktiCMachineState {
+     /*< private >*/
+     MachineState parent_obj;
+=20
+     /*< public >*/
+     ShaktiCSoCState soc;
+-} ShaktiCMachineState;
++};
+=20
+ enum {
+     SHAKTI_C_ROM,
 --=20
 2.25.1
 
