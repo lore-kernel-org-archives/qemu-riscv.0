@@ -1,56 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o2Ju8-0006Co-TH
-	for mharc-qemu-riscv@gnu.org; Fri, 17 Jun 2022 17:53:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45580)
+	id 1o2eIu-0006tN-Ak
+	for mharc-qemu-riscv@gnu.org; Sat, 18 Jun 2022 15:40:20 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60014)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1o2Ju4-0006Bl-DF
- for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:53:20 -0400
-Received: from sender-of-o50.zoho.in ([103.117.158.50]:2927)
+ (Exim 4.90_1) (envelope-from <ben@fluff.org>)
+ id 1o2eIs-0006t4-D8; Sat, 18 Jun 2022 15:40:18 -0400
+Received: from test-v6.fluff.org ([2a01:4f8:222:2004::3]:50922
+ helo=hetzy.fluff.org)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vijai@behindbytes.com>)
- id 1o2Ju2-0005rr-7w
- for qemu-riscv@nongnu.org; Fri, 17 Jun 2022 17:53:20 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1655502791; cv=none; d=zohomail.in; s=zohoarc; 
- b=eI7RIAvivd+F6jUfdy044zYSxMuHkDeKh+47sFfvoF6rQ0tG/KJB5moLPdoO/YmZ2Y9UCbKvCsDbpUk0TmBfL+WiJWR2P6xJt/brcClNEK2Yge5h3k8+EtR3AmAQr6MnxnfPdWhXWKLoOezX3Rd1i/kZPegTmHa09wOQDfw0bJg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in;
- s=zohoarc; t=1655502791;
- h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To;
- bh=/V4L3jWumjS+vBgA+d/M+7x1rDxv1+agZXey7TPlorA=; 
- b=HNBqa3Hm5+z9yn4Lgbw1g/SE+DTmZrw8f78BQQPlqCDCGux2614QJ/Kq1lHLkRz1koCGK2CFIiL7myjar52sXZtDDyerqF1h41DtFjdZGPi2i3OyBmubjZSiANV9+D3ctk4lHo5z2VoyA0elsWnrMDIL6q/9rbx1pY86XLibbB4=
-ARC-Authentication-Results: i=1; mx.zohomail.in;
- dkim=pass  header.i=behindbytes.com;
- spf=pass  smtp.mailfrom=vijai@behindbytes.com;
- dmarc=pass header.from=<vijai@behindbytes.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1655502791; 
- s=yrk; d=behindbytes.com; i=vijai@behindbytes.com;
- h=From:From:To:To:Cc:Cc:Message-ID:Subject:Subject:Date:Date:MIME-Version:Content-Transfer-Encoding:Content-Type:Message-Id:Reply-To;
- bh=/V4L3jWumjS+vBgA+d/M+7x1rDxv1+agZXey7TPlorA=;
- b=rI6wEYi5g8juLUSfzcwUax39RnBpms+gWETthpaGV9XUygxGKnJ3O1QOs5HTRmVI
- oO8z+rn4cE3zYsBmdImmAIXrz5rYRAriWKH7A4ApupjKFx0mBQ7GzNc30f3SPIbERM4
- /0FMStKULSN0JUXRfYGvEbssLiOCk41DApAq7pj0=
-Received: from localhost.localdomain (49.207.195.97 [49.207.195.97]) by
- mx.zoho.in with SMTPS id 1655502789428493.55113414367486;
- Sat, 18 Jun 2022 03:23:09 +0530 (IST)
-From: Vijai Kumar K <vijai@behindbytes.com>
-To: qemu-riscv@nongnu.org
-Cc: Vijai Kumar K <vijai@behindbytes.com>
-Message-ID: <20220617215306.75384-1-vijai@behindbytes.com>
-Subject: [PATCH] include/hw/riscv: QOMify shakti_c
-Date: Sat, 18 Jun 2022 03:23:06 +0530
-X-Mailer: git-send-email 2.25.1
+ (Exim 4.90_1) (envelope-from <ben@fluff.org>)
+ id 1o2eIq-0002U0-91; Sat, 18 Jun 2022 15:40:18 -0400
+Received: from ben by hetzy.fluff.org with local (Exim 4.89)
+ (envelope-from <ben@fluff.org>)
+ id 1o2eIc-0008NW-BH; Sat, 18 Jun 2022 20:40:02 +0100
+Date: Sat, 18 Jun 2022 20:40:02 +0100
+From: Ben Dooks <ben@fluff.org>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Ben Dooks <qemu@ben.fluff.org>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH 4/4] hw/riscv: use qemu_fdt_setprop_strings() in sifive_u.c
+Message-ID: <20220618194002.tecvyvb3qdlijinm@hetzy.fluff.org>
+References: <20220416193034.538161-1-qemu@ben.fluff.org>
+ <20220416193034.538161-5-qemu@ben.fluff.org>
+ <CAEUhbmUAYtS1bshMrVceWe_B=uWVacty0scHUv9MoAfBQxeMKQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-ZohoMailClient: External
-Content-Type: text/plain; charset=utf8
-Received-SPF: pass client-ip=103.117.158.50;
- envelope-from=vijai@behindbytes.com; helo=sender-of-o50.zoho.in
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAEUhbmUAYtS1bshMrVceWe_B=uWVacty0scHUv9MoAfBQxeMKQ@mail.gmail.com>
+X-Disclaimer: These are my views alone.
+X-URL: http://www.fluff.org/
+User-Agent: NeoMutt/20170113 (1.7.2)
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: ben@fluff.org
+X-SA-Exim-Scanned: No (on hetzy.fluff.org); SAEximRunCond expanded to false
+Received-SPF: pass client-ip=2a01:4f8:222:2004::3; envelope-from=ben@fluff.org;
+ helo=hetzy.fluff.org
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -63,68 +55,26 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2022 21:53:20 -0000
+X-List-Received-Date: Sat, 18 Jun 2022 19:40:18 -0000
 
-Signed-off-by: Vijai Kumar K <vijai@behindbytes.com>
----
- include/hw/riscv/shakti_c.h | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+On Fri, Apr 22, 2022 at 10:19:34AM +0800, Bin Meng wrote:
+> On Mon, Apr 18, 2022 at 5:13 AM Ben Dooks <qemu@ben.fluff.org> wrote:
+> >
+> > Use the qemu_fdt_setprop_strings() in sifve_u.c to simplify
+> > the code.
+> >
+> > Signed-off-by; Ben Dooks <qemu@ben.fluff.org>
+> 
+> ; should be replaced to :
+> 
+> Not sure how you did that, but you can do with "git commit -s" and git
+> will take care of the SoB tag.
 
-diff --git a/include/hw/riscv/shakti_c.h b/include/hw/riscv/shakti_c.h
-index daf0aae13f..2b50f1a2a7 100644
---- a/include/hw/riscv/shakti_c.h
-+++ b/include/hw/riscv/shakti_c.h
-@@ -1,7 +1,7 @@
- /*
-  * Shakti C-class SoC emulation
-  *
-- * Copyright (c) 2021 Vijai Kumar K <vijai@behindbytes.com>
-+ * Copyright (c) 2021-2022 Vijai Kumar K <vijai@behindbytes.com>
-  *
-  * This program is free software; you can redistribute it and/or modify it
-  * under the terms and conditions of the GNU General Public License,
-@@ -22,12 +22,12 @@
- #include "hw/riscv/riscv_hart.h"
- #include "hw/boards.h"
- #include "hw/char/shakti_uart.h"
-+#include "qom/object.h"
-=20
- #define TYPE_RISCV_SHAKTI_SOC "riscv.shakti.cclass.soc"
--#define RISCV_SHAKTI_SOC(obj) \
--    OBJECT_CHECK(ShaktiCSoCState, (obj), TYPE_RISCV_SHAKTI_SOC)
-+OBJECT_DECLARE_SIMPLE_TYPE(ShaktiCSoCState, RISCV_SHAKTI_SOC)
-=20
--typedef struct ShaktiCSoCState {
-+struct ShaktiCSoCState {
-     /*< private >*/
-     DeviceState parent_obj;
-=20
-@@ -37,18 +37,18 @@ typedef struct ShaktiCSoCState {
-     ShaktiUartState uart;
-     MemoryRegion rom;
-=20
--} ShaktiCSoCState;
-+};
-=20
- #define TYPE_RISCV_SHAKTI_MACHINE MACHINE_TYPE_NAME("shakti_c")
--#define RISCV_SHAKTI_MACHINE(obj) \
--    OBJECT_CHECK(ShaktiCMachineState, (obj), TYPE_RISCV_SHAKTI_MACHINE)
--typedef struct ShaktiCMachineState {
-+OBJECT_DECLARE_SIMPLE_TYPE(ShaktiCMachineState, RISCV_SHAKTI_MACHINE)
-+
-+struct ShaktiCMachineState {
-     /*< private >*/
-     MachineState parent_obj;
-=20
-     /*< public >*/
-     ShaktiCSoCState soc;
--} ShaktiCMachineState;
-+};
-=20
- enum {
-     SHAKTI_C_ROM,
---=20
-2.25.1
+I'm used to adding them manually to git commit messages.
 
+-- 
+Ben Dooks, ben@fluff.org, http://www.fluff.org/ben/
+
+Large Hadron Colada: A large Pina Colada that makes the universe disappear.
 
 
