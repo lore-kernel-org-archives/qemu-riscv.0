@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o3Qde-0001Vh-TU
-	for mharc-qemu-riscv@gnu.org; Mon, 20 Jun 2022 19:16:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43866)
+	id 1o3Qdf-0001XO-Ai
+	for mharc-qemu-riscv@gnu.org; Mon, 20 Jun 2022 19:16:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43950)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1o3Qd9-00014y-A7
- for qemu-riscv@nongnu.org; Mon, 20 Jun 2022 19:16:27 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036]:51888)
+ id 1o3QdB-00017g-W2
+ for qemu-riscv@nongnu.org; Mon, 20 Jun 2022 19:16:31 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429]:36381)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1o3Qd5-0006TV-25
- for qemu-riscv@nongnu.org; Mon, 20 Jun 2022 19:16:26 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id f16so10070431pjj.1
- for <qemu-riscv@nongnu.org>; Mon, 20 Jun 2022 16:16:21 -0700 (PDT)
+ id 1o3Qd6-0006UD-48
+ for qemu-riscv@nongnu.org; Mon, 20 Jun 2022 19:16:29 -0400
+Received: by mail-pf1-x429.google.com with SMTP id u37so11489951pfg.3
+ for <qemu-riscv@nongnu.org>; Mon, 20 Jun 2022 16:16:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=808LrW18PslPgdr+wW1xtaax/PsEefYPayNn9gFhD6U=;
- b=uqfvcYWTcZ52puyNB5oEypt4Gpi2zXe6ZValGydG+s5QUsbbLne7hTP0irUC+VaVlG
- AYvLrBGrEVdkI4hkCXFw2ATd/GhwdjgcbYZFs200emp+aSId/ibCjDVzJ/5QDNGlyrZl
- DcrLY2ByRbodsTMkZxacGqv7DRnmhjrkhiOmkCsbYczACETt7cG5mino8wtcf9O4Cywa
- Dpe4DK/ef623hDvMXIJZbDHim64j3A9dF8JfuRH9vxfp2iIUmvc+a3HKPaGkz0pzZbBJ
- 2OyTnjt2F7bpfATnEVE98O0UZ5NU3SE6xUPPMHxQ+2QllNzuut3CEClLEQ6oUE1kthUz
- Nibg==
+ bh=tIH1EEG7EtXxeg8EKQDzrnnetP5eQ2wd1VrmEeP0jC4=;
+ b=gqZEfC/Fk7jHYg3dRLd+Zd2QKEtclr5teWCGZiAIIB5onJxYpaBpoJ+no1bRPo1gl4
+ slOA/LDac48ulQHfQfv3jBJ4yv5Y0Wnqeg3wIF1+ZK2bJbs0+ANGpLOlZ8hKqYQnnYy/
+ eRQteI6fKfFLjGS0jLYKwZc89FVnl5OMYwroNAQ4KMIzhaiOcutxox7F9VX9ipx+jhe0
+ s54BUSaLcjbRhGCjuAGRwQkpQQUJOF2C3kx4u5QqAEtJ5jS5yfWsID+LDWLdyUMlZn9t
+ lRoPJM+JGUm5yKTR8VIDB+fJG1bNufUE065aAVJcIx8Z8EDpVeYqvH8dla8VfdURu3r0
+ lGkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=808LrW18PslPgdr+wW1xtaax/PsEefYPayNn9gFhD6U=;
- b=PC1iFBL56cVd6tpcGkfU14bWrgIuBk43bvOeIGOhmK+BG6LnoG87Qn7d7TOIKZbdnl
- IEZrm64CtXKogBftjteFFpfHvO/PEq7XWNRoUk0jpEPkJYffZJob0Fl7w+Jp9If15IkZ
- f8bZx0YNLJG23O1eh7Hnw/lum++P9SqvV6gw6jc9Vc76meY6gZa7GhlZAmgBm/0Y1UiY
- jVzVAWLLaSEr30dtrgHsaGjyVf2yIu96XokuLtcLhL5GonkJm3NRc+/q8EKRVVz0MBon
- tSSIhiZoAASqKRgIA7IP6p9TcH/0qEtjc99AWWlcDWzZpq8ru1aCxEHvu0Pkwdo8atJ0
- JfFw==
-X-Gm-Message-State: AJIora8kjZVnscIYmCEpHQ+PynPGHlFwMfntTq/QMHeCS8GdV1RWJdKD
- 9koTPH1JlPh3QNEbs0phkieLwQ==
-X-Google-Smtp-Source: AGRyM1sdScaNr5J758Q76FjPS4TinX8BRmzR0HN9hMI1esH+7H4dGMCk5HuFlDf/3oufbj4e+Z/4HQ==
-X-Received: by 2002:a17:902:8ec9:b0:168:c341:847e with SMTP id
- x9-20020a1709028ec900b00168c341847emr25532266plo.170.1655766980275; 
- Mon, 20 Jun 2022 16:16:20 -0700 (PDT)
+ bh=tIH1EEG7EtXxeg8EKQDzrnnetP5eQ2wd1VrmEeP0jC4=;
+ b=NHIWklA2tr4Vimgr7b5TN4ezOTIxISGCFmwRJVkP55O48+pDwpbzfopf1pLBrfnpoE
+ 1XMd1XQ4FOra5PvgQwtOuccLTgq8qr4qxZJA0XAaMO6t6R+/jAl3s5DXFWDksAYWq+e0
+ 45eFoq7RtZIrUa7xFCjf1orK/Yea0HYkC1zxT6TEcd30NIPCQMa99IvwRslJimWnAXl7
+ 2nnHUj7Agu3kQtIepFnQheZLbLEAQVAaIoD8ZwB2ZenPVcpkERKQQ33MAoA4gzmQeKh/
+ HdIiFg5MyCLiTBaToivMK1sgZvi8UEj/pfETN7nA7qhM55HwtzEpmIzfN6RC6lW2XL1/
+ cF6g==
+X-Gm-Message-State: AJIora87dQ6ltKekcBhPm8S9WHgy0scM1AYvz6E1KR9DgghSzcVzJDsA
+ WuBjJSKxgJ4whZ1pZhYdq6l80w==
+X-Google-Smtp-Source: AGRyM1tSP0eQHOFm1fuWHxdrliupuhyqaYrIaKb970fEENW+Bd5OcZPxSxTtWYJCQqTUOo8HNVzVXw==
+X-Received: by 2002:a63:b00e:0:b0:40c:c685:d45 with SMTP id
+ h14-20020a63b00e000000b0040cc6850d45mr5341844pgf.494.1655766982331; 
+ Mon, 20 Jun 2022 16:16:22 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- p2-20020a170902a40200b0015e8d4eb285sm9191008plq.207.2022.06.20.16.16.19
+ p2-20020a170902a40200b0015e8d4eb285sm9191008plq.207.2022.06.20.16.16.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jun 2022 16:16:19 -0700 (PDT)
+ Mon, 20 Jun 2022 16:16:21 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Atish Patra <atishp@rivosinc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- frank.chang@sifive.com
-Subject: [PATCH v10 06/12] target/riscv: Add support for hpmcounters/hpmevents
-Date: Mon, 20 Jun 2022 16:15:56 -0700
-Message-Id: <20220620231603.2547260-7-atishp@rivosinc.com>
+Cc: Atish Patra <atishp@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, frank.chang@sifive.com
+Subject: [PATCH v10 08/12] target/riscv: Add sscofpmf extension support
+Date: Mon, 20 Jun 2022 16:15:58 -0700
+Message-Id: <20220620231603.2547260-9-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220620231603.2547260-1-atishp@rivosinc.com>
 References: <20220620231603.2547260-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1036.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,560 +80,918 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2022 23:16:28 -0000
+X-List-Received-Date: Mon, 20 Jun 2022 23:16:31 -0000
 
-From: Atish Patra <atish.patra@wdc.com>
+The Sscofpmf ('Ss' for Privileged arch and Supervisor-level extensions,
+and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
+extension allows the perf to handle overflow interrupts and filtering
+support. This patch provides a framework for programmable
+counters to leverage the extension. As the extension doesn't have any
+provision for the overflow bit for fixed counters, the fixed events
+can also be monitoring using programmable counters. The underlying
+counters for cycle and instruction counters are always running. Thus,
+a separate timer device is programmed to handle the overflow.
 
-With SBI PMU extension, user can use any of the available hpmcounters to
-track any perf events based on the value written to mhpmevent csr.
-Add read/write functionality for these csrs.
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 Signed-off-by: Atish Patra <atish.patra@wdc.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu.h     |  11 +
- target/riscv/csr.c     | 469 ++++++++++++++++++++++++++++-------------
- target/riscv/machine.c |   3 +
- 3 files changed, 331 insertions(+), 152 deletions(-)
+ target/riscv/cpu.c      |  11 ++
+ target/riscv/cpu.h      |  25 +++
+ target/riscv/cpu_bits.h |  55 +++++++
+ target/riscv/csr.c      | 165 ++++++++++++++++++-
+ target/riscv/machine.c  |   1 +
+ target/riscv/pmu.c      | 357 +++++++++++++++++++++++++++++++++++++++-
+ target/riscv/pmu.h      |   7 +
+ 7 files changed, 610 insertions(+), 11 deletions(-)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d12c6dc630ca..7d9e2aca12a9 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -22,6 +22,7 @@
+ #include "qemu/ctype.h"
+ #include "qemu/log.h"
+ #include "cpu.h"
++#include "pmu.h"
+ #include "internals.h"
+ #include "exec/exec-all.h"
+ #include "qapi/error.h"
+@@ -775,6 +776,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         set_misa(env, env->misa_mxl, ext);
+     }
+ 
++#ifndef CONFIG_USER_ONLY
++    if (cpu->cfg.pmu_num) {
++        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
++            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++                                          riscv_pmu_timer_cb, cpu);
++        }
++     }
++#endif
++
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+     qemu_init_vcpu(cs);
+@@ -879,6 +889,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
+     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
++    DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 0a916db9f614..199d0d570bdd 100644
+index 5c7acc055ac9..2222db193c3d 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -117,6 +117,8 @@ typedef struct CPUArchState CPURISCVState;
- #endif
+@@ -137,6 +137,8 @@ typedef struct PMUCTRState {
+     /* Snapshort value of a counter in RV32 */
+     target_ulong mhpmcounterh_prev;
+     bool started;
++    /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
++    target_ulong irq_overflow_left;
+ } PMUCTRState;
  
- #define RV_VLEN_MAX 1024
-+#define RV_MAX_MHPMEVENTS 29
-+#define RV_MAX_MHPMCOUNTERS 32
+ struct CPUArchState {
+@@ -297,6 +299,9 @@ struct CPUArchState {
+     /* PMU event selector configured values. First three are unused*/
+     target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
  
- FIELD(VTYPE, VLMUL, 0, 3)
- FIELD(VTYPE, VSEW, 3, 3)
-@@ -277,6 +279,15 @@ struct CPUArchState {
- 
-     target_ulong mcountinhibit;
- 
-+    /* PMU counter configured values */
-+    target_ulong mhpmcounter_val[RV_MAX_MHPMCOUNTERS];
-+
-+    /* for RV32 */
-+    target_ulong mhpmcounterh_val[RV_MAX_MHPMCOUNTERS];
-+
-+    /* PMU event selector configured values */
-+    target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
++    /* PMU event selector configured values for RV32*/
++    target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
 +
      target_ulong sscratch;
      target_ulong mscratch;
  
+@@ -433,6 +438,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool ext_zmmul;
++    bool ext_sscofpmf;
+     bool rvv_ta_all_1s;
+ 
+     uint32_t mvendorid;
+@@ -479,6 +485,12 @@ struct ArchCPU {
+ 
+     /* Configuration Settings */
+     RISCVCPUConfig cfg;
++
++    QEMUTimer *pmu_timer;
++    /* A bitmask of Available programmable counters */
++    uint32_t pmu_avail_ctrs;
++    /* Mapping of events to counters */
++    GHashTable *pmu_event_ctr_map;
+ };
+ 
+ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+@@ -738,6 +750,19 @@ enum {
+     CSR_TABLE_SIZE = 0x1000
+ };
+ 
++/**
++ * The event id are encoded based on the encoding specified in the
++ * SBI specification v0.3
++ */
++
++enum riscv_pmu_event_idx {
++    RISCV_PMU_EVENT_HW_CPU_CYCLES = 0x01,
++    RISCV_PMU_EVENT_HW_INSTRUCTIONS = 0x02,
++    RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS = 0x10019,
++    RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS = 0x1001B,
++    RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS = 0x10021,
++};
++
+ /* CSR function table */
+ extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index b3f7fa713000..d94abefdaa0f 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -400,6 +400,37 @@
+ #define CSR_MHPMEVENT29     0x33d
+ #define CSR_MHPMEVENT30     0x33e
+ #define CSR_MHPMEVENT31     0x33f
++
++#define CSR_MHPMEVENT3H     0x723
++#define CSR_MHPMEVENT4H     0x724
++#define CSR_MHPMEVENT5H     0x725
++#define CSR_MHPMEVENT6H     0x726
++#define CSR_MHPMEVENT7H     0x727
++#define CSR_MHPMEVENT8H     0x728
++#define CSR_MHPMEVENT9H     0x729
++#define CSR_MHPMEVENT10H    0x72a
++#define CSR_MHPMEVENT11H    0x72b
++#define CSR_MHPMEVENT12H    0x72c
++#define CSR_MHPMEVENT13H    0x72d
++#define CSR_MHPMEVENT14H    0x72e
++#define CSR_MHPMEVENT15H    0x72f
++#define CSR_MHPMEVENT16H    0x730
++#define CSR_MHPMEVENT17H    0x731
++#define CSR_MHPMEVENT18H    0x732
++#define CSR_MHPMEVENT19H    0x733
++#define CSR_MHPMEVENT20H    0x734
++#define CSR_MHPMEVENT21H    0x735
++#define CSR_MHPMEVENT22H    0x736
++#define CSR_MHPMEVENT23H    0x737
++#define CSR_MHPMEVENT24H    0x738
++#define CSR_MHPMEVENT25H    0x739
++#define CSR_MHPMEVENT26H    0x73a
++#define CSR_MHPMEVENT27H    0x73b
++#define CSR_MHPMEVENT28H    0x73c
++#define CSR_MHPMEVENT29H    0x73d
++#define CSR_MHPMEVENT30H    0x73e
++#define CSR_MHPMEVENT31H    0x73f
++
+ #define CSR_MHPMCOUNTER3H   0xb83
+ #define CSR_MHPMCOUNTER4H   0xb84
+ #define CSR_MHPMCOUNTER5H   0xb85
+@@ -461,6 +492,7 @@
+ #define CSR_VSMTE           0x2c0
+ #define CSR_VSPMMASK        0x2c1
+ #define CSR_VSPMBASE        0x2c2
++#define CSR_SCOUNTOVF       0xda0
+ 
+ /* Crypto Extension */
+ #define CSR_SEED            0x015
+@@ -638,6 +670,7 @@ typedef enum RISCVException {
+ #define IRQ_VS_EXT                         10
+ #define IRQ_M_EXT                          11
+ #define IRQ_S_GEXT                         12
++#define IRQ_PMU_OVF                        13
+ #define IRQ_LOCAL_MAX                      16
+ #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+ 
+@@ -655,11 +688,13 @@ typedef enum RISCVException {
+ #define MIP_VSEIP                          (1 << IRQ_VS_EXT)
+ #define MIP_MEIP                           (1 << IRQ_M_EXT)
+ #define MIP_SGEIP                          (1 << IRQ_S_GEXT)
++#define MIP_LCOFIP                         (1 << IRQ_PMU_OVF)
+ 
+ /* sip masks */
+ #define SIP_SSIP                           MIP_SSIP
+ #define SIP_STIP                           MIP_STIP
+ #define SIP_SEIP                           MIP_SEIP
++#define SIP_LCOFIP                         MIP_LCOFIP
+ 
+ /* MIE masks */
+ #define MIE_SEIE                           (1 << IRQ_S_EXT)
+@@ -813,4 +848,24 @@ typedef enum RISCVException {
+ #define SEED_OPST_WAIT                   (0b01 << 30)
+ #define SEED_OPST_ES16                   (0b10 << 30)
+ #define SEED_OPST_DEAD                   (0b11 << 30)
++/* PMU related bits */
++#define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
++
++#define MHPMEVENT_BIT_OF                   BIT_ULL(63)
++#define MHPMEVENTH_BIT_OF                  BIT(31)
++#define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
++#define MHPMEVENTH_BIT_MINH                BIT(30)
++#define MHPMEVENT_BIT_SINH                 BIT_ULL(61)
++#define MHPMEVENTH_BIT_SINH                BIT(29)
++#define MHPMEVENT_BIT_UINH                 BIT_ULL(60)
++#define MHPMEVENTH_BIT_UINH                BIT(28)
++#define MHPMEVENT_BIT_VSINH                BIT_ULL(59)
++#define MHPMEVENTH_BIT_VSINH               BIT(27)
++#define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
++#define MHPMEVENTH_BIT_VUINH               BIT(26)
++
++#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
++#define MHPMEVENT_IDX_MASK                 0xFFFFF
++#define MHPMEVENT_SSCOF_RESVD              16
++
+ #endif
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 94d39a4ce1c5..b931a3970e0f 100644
+index d65318dcc62d..2664ce265784 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -230,6 +230,15 @@ static RISCVException mctr(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_NONE;
+@@ -74,7 +74,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     int ctr_index;
+-    int base_csrno = CSR_HPMCOUNTER3;
++    int base_csrno = CSR_CYCLE;
+     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
+ 
+     if (rv32 && csrno >= CSR_CYCLEH) {
+@@ -83,11 +83,18 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     }
+     ctr_index = csrno - base_csrno;
+ 
+-    if (!cpu->cfg.pmu_num || ctr_index >= (cpu->cfg.pmu_num)) {
++    if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
++        (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
++        goto skip_ext_pmu_check;
++    }
++
++    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
+         /* No counter is enabled in PMU or the counter is out of range */
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
++skip_ext_pmu_check:
++
+     if (env->priv == PRV_S) {
+         switch (csrno) {
+         case CSR_CYCLE:
+@@ -106,7 +113,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            ctr_index = csrno - CSR_CYCLE;
+             if (!get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_ILLEGAL_INST;
+             }
+@@ -130,7 +136,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                ctr_index = csrno - CSR_CYCLEH;
+                 if (!get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_ILLEGAL_INST;
+                 }
+@@ -160,7 +165,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            ctr_index = csrno - CSR_CYCLE;
+             if (!get_field(env->hcounteren, 1 << ctr_index) &&
+                  get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -188,7 +192,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                ctr_index = csrno - CSR_CYCLEH;
+                 if (!get_field(env->hcounteren, 1 << ctr_index) &&
+                      get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -240,6 +243,18 @@ static RISCVException mctr32(CPURISCVState *env, int csrno)
+     return mctr(env, csrno);
  }
  
-+static RISCVException mctr32(CPURISCVState *env, int csrno)
++static RISCVException sscofpmf(CPURISCVState *env, int csrno)
 +{
-+    if (riscv_cpu_mxl(env) != MXL_RV32) {
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    if (!cpu->cfg.ext_sscofpmf) {
 +        return RISCV_EXCP_ILLEGAL_INST;
 +    }
 +
-+    return mctr(env, csrno);
++    return RISCV_EXCP_NONE;
 +}
 +
  static RISCVException any(CPURISCVState *env, int csrno)
  {
      return RISCV_EXCP_NONE;
-@@ -635,6 +644,75 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+@@ -663,9 +678,38 @@ static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int evt_index = csrno - CSR_MCOUNTINHIBIT;
++    uint64_t mhpmevt_val = val;
  
- #else /* CONFIG_USER_ONLY */
+     env->mhpmevent_val[evt_index] = val;
  
-+static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    int evt_index = csrno - CSR_MHPMEVENT3;
-+
-+    *val = env->mhpmevent_val[evt_index];
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    int evt_index = csrno - CSR_MHPMEVENT3;
-+
-+    env->mhpmevent_val[evt_index] = val;
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    int ctr_index = csrno - CSR_MHPMCOUNTER3 + 3;
-+
-+    env->mhpmcounter_val[ctr_index] = val;
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mhpmcounterh(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    int ctr_index = csrno - CSR_MHPMCOUNTER3H + 3;
-+
-+    env->mhpmcounterh_val[ctr_index] = val;
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int read_hpmcounter(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    int ctr_index;
-+
-+    if (csrno >= CSR_MCYCLE && csrno <= CSR_MHPMCOUNTER31) {
-+        ctr_index = csrno - CSR_MHPMCOUNTER3 + 3;
-+    } else if (csrno >= CSR_CYCLE && csrno <= CSR_HPMCOUNTER31) {
-+        ctr_index = csrno - CSR_HPMCOUNTER3 + 3;
-+    } else {
-+        return RISCV_EXCP_ILLEGAL_INST;
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpmevt_val = mhpmevt_val | ((uint64_t)env->mhpmeventh_val[evt_index] << 32);
 +    }
-+    *val = env->mhpmcounter_val[ctr_index];
++    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
 +
 +    return RISCV_EXCP_NONE;
 +}
 +
-+static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
++static int read_mhpmeventh(CPURISCVState *env, int csrno, target_ulong *val)
 +{
-+    int ctr_index;
++    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
 +
-+    if (csrno >= CSR_MCYCLEH && csrno <= CSR_MHPMCOUNTER31H) {
-+        ctr_index = csrno - CSR_MHPMCOUNTER3H + 3;
-+    } else if (csrno >= CSR_CYCLEH && csrno <= CSR_HPMCOUNTER31H) {
-+        ctr_index = csrno - CSR_HPMCOUNTER3H + 3;
-+    } else {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+    *val = env->mhpmcounterh_val[ctr_index];
++    *val = env->mhpmeventh_val[evt_index];
 +
 +    return RISCV_EXCP_NONE;
 +}
 +
++static int write_mhpmeventh(CPURISCVState *env, int csrno, target_ulong val)
++{
++    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
++    uint64_t mhpmevth_val = val;
++    uint64_t mhpmevt_val = env->mhpmevent_val[evt_index];
++
++    mhpmevt_val = mhpmevt_val | (mhpmevth_val << 32);
++    env->mhpmeventh_val[evt_index] = val;
++
++    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -673,12 +717,20 @@ static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int ctr_idx = csrno - CSR_MCYCLE;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t mhpmctr_val = val;
+ 
+     counter->mhpmcounter_val = val;
+     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+         counter->mhpmcounter_prev = get_ticks(false);
+-    } else {
++        if (ctr_idx > 2) {
++            if (riscv_cpu_mxl(env) == MXL_RV32) {
++                mhpmctr_val = mhpmctr_val |
++                              ((uint64_t)counter->mhpmcounterh_val << 32);
++            }
++            riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
++        }
++     } else {
+         /* Other counters can keep incrementing from the given value */
+         counter->mhpmcounter_prev = val;
+     }
+@@ -690,11 +742,17 @@ static int write_mhpmcounterh(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int ctr_idx = csrno - CSR_MCYCLEH;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t mhpmctr_val = counter->mhpmcounter_val;
++    uint64_t mhpmctrh_val = val;
+ 
+     counter->mhpmcounterh_val = val;
++    mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
+     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+         counter->mhpmcounterh_prev = get_ticks(true);
++        if (ctr_idx > 2) {
++            riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
++        }
+     } else {
+         counter->mhpmcounterh_prev = val;
+     }
+@@ -770,6 +828,32 @@ static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
+     return riscv_pmu_read_ctr(env, val, true, ctr_index);
+ }
+ 
++static int read_scountovf(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    int mhpmevt_start = CSR_MHPMEVENT3 - CSR_MCOUNTINHIBIT;
++    int i;
++    *val = 0;
++    target_ulong *mhpm_evt_val;
++    uint64_t of_bit_mask;
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpm_evt_val = env->mhpmeventh_val;
++        of_bit_mask = MHPMEVENTH_BIT_OF;
++    } else {
++        mhpm_evt_val = env->mhpmevent_val;
++        of_bit_mask = MHPMEVENT_BIT_OF;
++    }
++
++    for (i = mhpmevt_start; i < RV_MAX_MHPMEVENTS; i++) {
++        if ((get_field(env->mcounteren, BIT(i))) &&
++            (mhpm_evt_val[i] & of_bit_mask)) {
++                    *val |= BIT(i);
++            }
++    }
++
++    return RISCV_EXCP_NONE;
++}
 +
  static RISCVException read_time(CPURISCVState *env, int csrno,
                                  target_ulong *val)
  {
-@@ -3707,157 +3785,244 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase, write_spmbase },
+@@ -799,7 +883,8 @@ static RISCVException read_timeh(CPURISCVState *env, int csrno,
+ /* Machine constants */
  
-     /* Performance Counters */
--    [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_zero },
--    [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_zero },
--    [CSR_HPMCOUNTER5]    = { "hpmcounter5",    ctr,    read_zero },
--    [CSR_HPMCOUNTER6]    = { "hpmcounter6",    ctr,    read_zero },
--    [CSR_HPMCOUNTER7]    = { "hpmcounter7",    ctr,    read_zero },
--    [CSR_HPMCOUNTER8]    = { "hpmcounter8",    ctr,    read_zero },
--    [CSR_HPMCOUNTER9]    = { "hpmcounter9",    ctr,    read_zero },
--    [CSR_HPMCOUNTER10]   = { "hpmcounter10",   ctr,    read_zero },
--    [CSR_HPMCOUNTER11]   = { "hpmcounter11",   ctr,    read_zero },
--    [CSR_HPMCOUNTER12]   = { "hpmcounter12",   ctr,    read_zero },
--    [CSR_HPMCOUNTER13]   = { "hpmcounter13",   ctr,    read_zero },
--    [CSR_HPMCOUNTER14]   = { "hpmcounter14",   ctr,    read_zero },
--    [CSR_HPMCOUNTER15]   = { "hpmcounter15",   ctr,    read_zero },
--    [CSR_HPMCOUNTER16]   = { "hpmcounter16",   ctr,    read_zero },
--    [CSR_HPMCOUNTER17]   = { "hpmcounter17",   ctr,    read_zero },
--    [CSR_HPMCOUNTER18]   = { "hpmcounter18",   ctr,    read_zero },
--    [CSR_HPMCOUNTER19]   = { "hpmcounter19",   ctr,    read_zero },
--    [CSR_HPMCOUNTER20]   = { "hpmcounter20",   ctr,    read_zero },
--    [CSR_HPMCOUNTER21]   = { "hpmcounter21",   ctr,    read_zero },
--    [CSR_HPMCOUNTER22]   = { "hpmcounter22",   ctr,    read_zero },
--    [CSR_HPMCOUNTER23]   = { "hpmcounter23",   ctr,    read_zero },
--    [CSR_HPMCOUNTER24]   = { "hpmcounter24",   ctr,    read_zero },
--    [CSR_HPMCOUNTER25]   = { "hpmcounter25",   ctr,    read_zero },
--    [CSR_HPMCOUNTER26]   = { "hpmcounter26",   ctr,    read_zero },
--    [CSR_HPMCOUNTER27]   = { "hpmcounter27",   ctr,    read_zero },
--    [CSR_HPMCOUNTER28]   = { "hpmcounter28",   ctr,    read_zero },
--    [CSR_HPMCOUNTER29]   = { "hpmcounter29",   ctr,    read_zero },
--    [CSR_HPMCOUNTER30]   = { "hpmcounter30",   ctr,    read_zero },
--    [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_zero },
--
--    [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   mctr,   read_zero },
--    [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,   read_zero },
--    [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,   read_zero },
--
--    [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",   any,    read_mcountinhibit,
--                                                       write_mcountinhibit },
--
--    [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_zero },
--    [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_zero },
--    [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_zero },
--    [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_zero },
--    [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_zero },
--    [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_zero },
--    [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_zero },
--    [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_zero },
--    [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_zero },
--    [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_zero },
--    [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_zero },
--    [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_zero },
--    [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_zero },
--    [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_zero },
--    [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_zero },
--    [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_zero },
--    [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_zero },
--    [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_zero },
--    [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_zero },
--    [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_zero },
--    [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_zero },
--    [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_zero },
--    [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_zero },
--    [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_zero },
--    [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_zero },
--    [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_zero },
--    [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_zero },
--    [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_zero },
--    [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_zero },
--
--    [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER6H]   = { "hpmcounter6h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER7H]   = { "hpmcounter7h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER8H]   = { "hpmcounter8h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER9H]   = { "hpmcounter9h",   ctr32,  read_zero },
--    [CSR_HPMCOUNTER10H]  = { "hpmcounter10h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER11H]  = { "hpmcounter11h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER12H]  = { "hpmcounter12h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER13H]  = { "hpmcounter13h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER14H]  = { "hpmcounter14h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER15H]  = { "hpmcounter15h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER16H]  = { "hpmcounter16h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER17H]  = { "hpmcounter17h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER18H]  = { "hpmcounter18h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER19H]  = { "hpmcounter19h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER20H]  = { "hpmcounter20h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER21H]  = { "hpmcounter21h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER22H]  = { "hpmcounter22h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER23H]  = { "hpmcounter23h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER24H]  = { "hpmcounter24h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER25H]  = { "hpmcounter25h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER26H]  = { "hpmcounter26h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER27H]  = { "hpmcounter27h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER28H]  = { "hpmcounter28h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER29H]  = { "hpmcounter29h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER30H]  = { "hpmcounter30h",  ctr32,  read_zero },
--    [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_zero },
--
--    [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  any32,  read_zero },
--    [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", any32,  read_zero },
--    [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", any32,  read_zero },
--    [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", any32,  read_zero },
--    [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", any32,  read_zero },
--    [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", any32,  read_zero },
--    [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", any32,  read_zero },
--    [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", any32,  read_zero },
--    [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", any32,  read_zero },
--    [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", any32,  read_zero },
--    [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", any32,  read_zero },
--    [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", any32,  read_zero },
--    [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", any32,  read_zero },
--    [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", any32,  read_zero },
--    [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", any32,  read_zero },
--    [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", any32,  read_zero },
--    [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", any32,  read_zero },
--    [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", any32,  read_zero },
--    [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", any32,  read_zero },
--    [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", any32,  read_zero },
--    [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", any32,  read_zero },
--    [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", any32,  read_zero },
--    [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", any32,  read_zero },
-+    [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER5]    = { "hpmcounter5",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER6]    = { "hpmcounter6",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER7]    = { "hpmcounter7",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER8]    = { "hpmcounter8",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER9]    = { "hpmcounter9",    ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER10]   = { "hpmcounter10",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER11]   = { "hpmcounter11",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER12]   = { "hpmcounter12",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER13]   = { "hpmcounter13",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER14]   = { "hpmcounter14",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER15]   = { "hpmcounter15",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER16]   = { "hpmcounter16",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER17]   = { "hpmcounter17",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER18]   = { "hpmcounter18",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER19]   = { "hpmcounter19",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER20]   = { "hpmcounter20",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER21]   = { "hpmcounter21",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER22]   = { "hpmcounter22",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER23]   = { "hpmcounter23",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER24]   = { "hpmcounter24",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER25]   = { "hpmcounter25",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER26]   = { "hpmcounter26",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER27]   = { "hpmcounter27",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER28]   = { "hpmcounter28",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER29]   = { "hpmcounter29",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER30]   = { "hpmcounter30",   ctr,    read_hpmcounter },
-+    [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_hpmcounter },
+ #define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
+-#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP))
++#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP | \
++                                      MIP_LCOFIP))
+ #define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP))
+ #define HS_MODE_INTERRUPTS ((uint64_t)(MIP_SGEIP | VS_MODE_INTERRUPTS))
+ 
+@@ -840,7 +925,8 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
+ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+     SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
+-static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
++static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP |
++                                              SIP_LCOFIP;
+ static const target_ulong hip_writable_mask = MIP_VSSIP;
+ static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+ static const target_ulong vsip_writable_mask = MIP_VSSIP;
+@@ -4005,6 +4091,65 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
+                                                        write_mhpmevent },
+ 
++    [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT4H]    = { "mhpmevent4h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT5H]    = { "mhpmevent5h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT6H]    = { "mhpmevent6h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT7H]    = { "mhpmevent7h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT8H]    = { "mhpmevent8h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT9H]    = { "mhpmevent9h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT10H]   = { "mhpmevent10h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT11H]   = { "mhpmevent11h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT12H]   = { "mhpmevent12h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT13H]   = { "mhpmevent13h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT14H]   = { "mhpmevent14h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT15H]   = { "mhpmevent15h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT16H]   = { "mhpmevent16h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT17H]   = { "mhpmevent17h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT18H]   = { "mhpmevent18h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT19H]   = { "mhpmevent19h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT20H]   = { "mhpmevent20h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT21H]   = { "mhpmevent21h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT22H]   = { "mhpmevent22h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT23H]   = { "mhpmevent23h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT24H]   = { "mhpmevent24h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT25H]   = { "mhpmevent25h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT26H]   = { "mhpmevent26h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT27H]   = { "mhpmevent27h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT28H]   = { "mhpmevent28h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT29H]   = { "mhpmevent29h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT30H]   = { "mhpmevent30h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
++    [CSR_MHPMEVENT31H]   = { "mhpmevent31h",    sscofpmf,  read_mhpmeventh,
++                                                       write_mhpmeventh},
 +
-+    [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
-+    [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,    read_hpmcounter,
-+                                                       write_mhpmcounter },
+     [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
+     [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
+     [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_hpmcounterh },
+@@ -4093,5 +4238,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+                                                        write_mhpmcounterh },
+     [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
+                                                        write_mhpmcounterh },
++    [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf },
 +
-+    [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",  any, read_mcountinhibit,
-+                                                    write_mcountinhibit },
-+
-+    [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+    [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
-+                                                       write_mhpmevent },
-+
-+    [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER6H]   = { "hpmcounter6h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER7H]   = { "hpmcounter7h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER8H]   = { "hpmcounter8h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER9H]   = { "hpmcounter9h",   ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER10H]  = { "hpmcounter10h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER11H]  = { "hpmcounter11h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER12H]  = { "hpmcounter12h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER13H]  = { "hpmcounter13h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER14H]  = { "hpmcounter14h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER15H]  = { "hpmcounter15h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER16H]  = { "hpmcounter16h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER17H]  = { "hpmcounter17h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER18H]  = { "hpmcounter18h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER19H]  = { "hpmcounter19h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER20H]  = { "hpmcounter20h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER21H]  = { "hpmcounter21h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER22H]  = { "hpmcounter22h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER23H]  = { "hpmcounter23h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER24H]  = { "hpmcounter24h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER25H]  = { "hpmcounter25h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER26H]  = { "hpmcounter26h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER27H]  = { "hpmcounter27h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER28H]  = { "hpmcounter28h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER29H]  = { "hpmcounter29h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER30H]  = { "hpmcounter30h",  ctr32,  read_hpmcounterh },
-+    [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_hpmcounterh },
-+
-+    [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
-+    [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
-+                                                       write_mhpmcounterh },
  #endif /* !CONFIG_USER_ONLY */
  };
 diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 87cd55bfd3a7..99193c85bb97 100644
+index dc182ca81119..33ef9b8e9908 100644
 --- a/target/riscv/machine.c
 +++ b/target/riscv/machine.c
-@@ -331,6 +331,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINTTL(env.scounteren, RISCVCPU),
-         VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
-         VMSTATE_UINTTL(env.mcountinhibit, RISCVCPU),
-+        VMSTATE_UINTTL_ARRAY(env.mhpmcounter_val, RISCVCPU, RV_MAX_MHPMCOUNTERS),
-+        VMSTATE_UINTTL_ARRAY(env.mhpmcounterh_val, RISCVCPU, RV_MAX_MHPMCOUNTERS),
-+        VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
+@@ -355,6 +355,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
+                              vmstate_pmu_ctr_state, PMUCTRState),
+         VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
++        VMSTATE_UINTTL_ARRAY(env.mhpmeventh_val, RISCVCPU, RV_MAX_MHPMEVENTS),
          VMSTATE_UINTTL(env.sscratch, RISCVCPU),
          VMSTATE_UINTTL(env.mscratch, RISCVCPU),
          VMSTATE_UINT64(env.mfromhost, RISCVCPU),
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index 000fe8da45ef..34096941c0ce 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -19,14 +19,367 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "pmu.h"
++#include "sysemu/cpu-timers.h"
++
++#define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
++#define MAKE_32BIT_MASK(shift, length) \
++        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
++
++static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
++        !(cpu->pmu_avail_ctrs & BIT(ctr_idx))) {
++        return false;
++    } else {
++        return true;
++    }
++}
++
++static bool riscv_pmu_counter_enabled(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++
++    if (riscv_pmu_counter_valid(cpu, ctr_idx) &&
++        !get_field(env->mcountinhibit, BIT(ctr_idx))) {
++        return true;
++    } else {
++        return false;
++    }
++}
++
++static int riscv_pmu_incr_ctr_rv32(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++    target_ulong max_val = UINT32_MAX;
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    bool virt_on = riscv_cpu_virt_enabled(env);
++
++    /* Privilege mode filtering */
++    if ((env->priv == PRV_M &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_MINH)) ||
++        (env->priv == PRV_S && virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_VSINH)) ||
++        (env->priv == PRV_U && virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_VUINH)) ||
++        (env->priv == PRV_S && !virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_SINH)) ||
++        (env->priv == PRV_U && !virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_UINH))) {
++        return 0;
++    }
++
++    /* Handle the overflow scenario */
++    if (counter->mhpmcounter_val == max_val) {
++        if (counter->mhpmcounterh_val == max_val) {
++            counter->mhpmcounter_val = 0;
++            counter->mhpmcounterh_val = 0;
++            /* Generate interrupt only if OF bit is clear */
++            if (!(env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_OF)) {
++                env->mhpmeventh_val[ctr_idx] |= MHPMEVENTH_BIT_OF;
++                riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++            }
++        } else {
++            counter->mhpmcounterh_val++;
++        }
++    } else {
++        counter->mhpmcounter_val++;
++    }
++
++    return 0;
++}
++
++static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t max_val = UINT64_MAX;
++    bool virt_on = riscv_cpu_virt_enabled(env);
++
++    /* Privilege mode filtering */
++    if ((env->priv == PRV_M &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_MINH)) ||
++        (env->priv == PRV_S && virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VSINH)) ||
++        (env->priv == PRV_U && virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VUINH)) ||
++        (env->priv == PRV_S && !virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_SINH)) ||
++        (env->priv == PRV_U && !virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_UINH))) {
++        return 0;
++    }
++
++    /* Handle the overflow scenario */
++    if (counter->mhpmcounter_val == max_val) {
++        counter->mhpmcounter_val = 0;
++        /* Generate interrupt only if OF bit is clear */
++        if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
++            env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
++            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++        }
++    } else {
++        counter->mhpmcounter_val++;
++    }
++    return 0;
++}
++
++int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
++{
++    uint32_t ctr_idx;
++    int ret;
++    CPURISCVState *env = &cpu->env;
++    gpointer value;
++
++    value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                                GUINT_TO_POINTER(event_idx));
++    if (!value) {
++        return -1;
++    }
++
++    ctr_idx = GPOINTER_TO_UINT(value);
++    if (!riscv_pmu_counter_enabled(cpu, ctr_idx) ||
++        get_field(env->mcountinhibit, BIT(ctr_idx))) {
++        return -1;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        ret = riscv_pmu_incr_ctr_rv32(cpu, ctr_idx);
++    } else {
++        ret = riscv_pmu_incr_ctr_rv64(cpu, ctr_idx);
++    }
++
++    return ret;
++}
+ 
+ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr)
+ {
+-    return (target_ctr == 0) ? true : false;
++    RISCVCPU *cpu;
++    uint32_t event_idx;
++    uint32_t ctr_idx;
++
++    /* Fixed instret counter */
++    if (target_ctr == 2) {
++        return true;
++    }
++
++    cpu = RISCV_CPU(env_cpu(env));
++    event_idx = RISCV_PMU_EVENT_HW_INSTRUCTIONS;
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(event_idx)));
++    if (!ctr_idx) {
++        return false;
++    }
++
++    return target_ctr == ctr_idx ? true : false;
+ }
+ 
+ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
+ {
+-    return (target_ctr == 2) ? true : false;
++    RISCVCPU *cpu;
++    uint32_t event_idx;
++    uint32_t ctr_idx;
++
++    /* Fixed mcycle counter */
++    if (target_ctr == 0) {
++        return true;
++    }
++
++    cpu = RISCV_CPU(env_cpu(env));
++    event_idx = RISCV_PMU_EVENT_HW_CPU_CYCLES;
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(event_idx)));
++
++    /* Counter zero is not used for event_ctr_map */
++    if (!ctr_idx) {
++        return false;
++    }
++
++    return (target_ctr == ctr_idx) ? true : false;
++}
++
++static gboolean pmu_remove_event_map(gpointer key, gpointer value,
++                                     gpointer udata)
++{
++    return (GPOINTER_TO_UINT(value) == GPOINTER_TO_UINT(udata)) ? true : false;
++}
++
++static int64_t pmu_icount_ticks_to_ns(int64_t value)
++{
++    int64_t ret = 0;
++
++    if (icount_enabled()) {
++        ret = icount_to_ns(value);
++    } else {
++        ret = (NANOSECONDS_PER_SECOND / RISCV_TIMEBASE_FREQ) * value;
++    }
++
++    return ret;
++}
++
++int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
++                               uint32_t ctr_idx)
++{
++    uint32_t event_idx;
++    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
++
++    if (!riscv_pmu_counter_valid(cpu, ctr_idx)) {
++        return -1;
++    }
++
++    /**
++     * Expected mhpmevent value is zero for reset case. Remove the current
++     * mapping.
++     */
++    if (!value) {
++        g_hash_table_foreach_remove(cpu->pmu_event_ctr_map,
++                                    pmu_remove_event_map,
++                                    GUINT_TO_POINTER(ctr_idx));
++        return 0;
++    }
++
++    event_idx = value & MHPMEVENT_IDX_MASK;
++    if (g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                            GUINT_TO_POINTER(event_idx))) {
++        return 0;
++    }
++
++    switch (event_idx) {
++    case RISCV_PMU_EVENT_HW_CPU_CYCLES:
++    case RISCV_PMU_EVENT_HW_INSTRUCTIONS:
++    case RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS:
++    case RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS:
++    case RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS:
++        break;
++    default:
++        /* We don't support any raw events right now */
++        return -1;
++    }
++    g_hash_table_insert(cpu->pmu_event_ctr_map, GUINT_TO_POINTER(event_idx),
++                        GUINT_TO_POINTER(ctr_idx));
++
++    return 0;
++}
++
++static void pmu_timer_trigger_irq(RISCVCPU *cpu,
++                                  enum riscv_pmu_event_idx evt_idx)
++{
++    uint32_t ctr_idx;
++    CPURISCVState *env = &cpu->env;
++    PMUCTRState *counter;
++    target_ulong *mhpmevent_val;
++    uint64_t of_bit_mask;
++    int64_t irq_trigger_at;
++
++    if (evt_idx != RISCV_PMU_EVENT_HW_CPU_CYCLES &&
++        evt_idx != RISCV_PMU_EVENT_HW_INSTRUCTIONS) {
++        return;
++    }
++
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(evt_idx)));
++    if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
++        return;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpmevent_val = &env->mhpmeventh_val[ctr_idx];
++        of_bit_mask = MHPMEVENTH_BIT_OF;
++     } else {
++        mhpmevent_val = &env->mhpmevent_val[ctr_idx];
++        of_bit_mask = MHPMEVENT_BIT_OF;
++    }
++
++    counter = &env->pmu_ctrs[ctr_idx];
++    if (counter->irq_overflow_left > 0) {
++        irq_trigger_at = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
++                        counter->irq_overflow_left;
++        timer_mod_anticipate_ns(cpu->pmu_timer, irq_trigger_at);
++        counter->irq_overflow_left = 0;
++        return;
++    }
++
++    if (cpu->pmu_avail_ctrs & BIT(ctr_idx)) {
++        /* Generate interrupt only if OF bit is clear */
++        if (!(*mhpmevent_val & of_bit_mask)) {
++            *mhpmevent_val |= of_bit_mask;
++            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++        }
++    }
++}
++
++/* Timer callback for instret and cycle counter overflow */
++void riscv_pmu_timer_cb(void *priv)
++{
++    RISCVCPU *cpu = priv;
++
++    /* Timer event was triggered only for these events */
++    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES);
++    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
++}
++
++int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value, uint32_t ctr_idx)
++{
++    uint64_t overflow_delta, overflow_at;
++    int64_t overflow_ns, overflow_left = 0;
++    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++
++    if (!riscv_pmu_counter_valid(cpu, ctr_idx) || !cpu->cfg.ext_sscofpmf) {
++        return -1;
++    }
++
++    if (value) {
++        overflow_delta = UINT64_MAX - value + 1;
++    } else {
++        overflow_delta = UINT64_MAX;
++    }
++
++    /**
++     * QEMU supports only int64_t timers while RISC-V counters are uint64_t.
++     * Compute the leftover and save it so that it can be reprogrammed again
++     * when timer expires.
++     */
++    if (overflow_delta > INT64_MAX) {
++        overflow_left = overflow_delta - INT64_MAX;
++    }
++
++    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
++        overflow_ns = pmu_icount_ticks_to_ns((int64_t)overflow_delta);
++        overflow_left = pmu_icount_ticks_to_ns(overflow_left) ;
++    } else {
++        return -1;
++    }
++    overflow_at = (uint64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + overflow_ns;
++
++    if (overflow_at > INT64_MAX) {
++        overflow_left += overflow_at - INT64_MAX;
++        counter->irq_overflow_left = overflow_left;
++        overflow_at = INT64_MAX;
++    }
++    timer_mod_anticipate_ns(cpu->pmu_timer, overflow_at);
++
++    return 0;
++}
++
++
++int riscv_pmu_init(RISCVCPU *cpu, int num_counters)
++{
++    if (num_counters > (RV_MAX_MHPMCOUNTERS - 3)) {
++        return -1;
++    }
++
++    cpu->pmu_event_ctr_map = g_hash_table_new(g_direct_hash, g_direct_equal);
++    if (!cpu->pmu_event_ctr_map) {
++        /* PMU support can not be enabled */
++        qemu_log_mask(LOG_UNIMP, "PMU events can't be supported\n");
++        cpu->cfg.pmu_num = 0;
++        return -1;
++    }
++
++    /* Create a bitmask of available programmable counters */
++    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, num_counters);
++
++    return 0;
+ }
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index 58a5bc3a4089..036653627f78 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -26,3 +26,10 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr);
+ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env,
+                                   uint32_t target_ctr);
++void riscv_pmu_timer_cb(void *priv);
++int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
++int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
++                               uint32_t ctr_idx);
++int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
++int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
++                          uint32_t ctr_idx);
 -- 
 2.25.1
 
