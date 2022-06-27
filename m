@@ -1,59 +1,58 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o5pKr-0004qj-8L
-	for mharc-qemu-riscv@gnu.org; Mon, 27 Jun 2022 10:03:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:51438)
+	id 1o5pkV-00033w-Fb
+	for mharc-qemu-riscv@gnu.org; Mon, 27 Jun 2022 10:29:59 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:56370)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1o5pKp-0004p2-Ux; Mon, 27 Jun 2022 10:03:27 -0400
-Received: from mail-qv1-xf2f.google.com ([2607:f8b0:4864:20::f2f]:34579)
+ id 1o5pkT-00031X-0Q; Mon, 27 Jun 2022 10:29:57 -0400
+Received: from mail-qv1-xf2e.google.com ([2607:f8b0:4864:20::f2e]:41896)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
- id 1o5pKl-00070R-Vz; Mon, 27 Jun 2022 10:03:26 -0400
-Received: by mail-qv1-xf2f.google.com with SMTP id t16so14883039qvh.1;
- Mon, 27 Jun 2022 07:03:22 -0700 (PDT)
+ id 1o5pkR-0002T4-Cj; Mon, 27 Jun 2022 10:29:56 -0400
+Received: by mail-qv1-xf2e.google.com with SMTP id q4so14919175qvq.8;
+ Mon, 27 Jun 2022 07:29:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=hEKzFTDXl73R/avhdjm1AghHuuMtVzKGAZrRfKUqK/s=;
- b=mpepH2sxWEdtCGVMU07b37EG0MfMYj+hclhDCM++QoWVd+hV7qzU9Wv9WUFzn8StF/
- YW8p70msJQRNucGrWtxU8QxIRZ080FPbIY4RSNobaG77E2eHSixbR54Pr7oak4PNvlGT
- ci+QNLTLqelwO5T9vIcmUbeZVd7FT0j2uxQjC2xwxGdCMPzUqGXs2vb6B1DyrueCuZH/
- SGJ0ZZ+TS+O3TMfqSLlTGsckSXDbz5DNnK3KoXhGcyyhrN5jz4cdWAxHiyinU6LrjvwJ
- 6y2gD4oyZBJr7QWwov+MBg8PMEoh02pRDwds6TUY+f+X09hfy3LzjOjy1FSOWxNBR0+/
- Uarg==
+ :cc; bh=2NgUqvqHEeTrLEgVSWGWamO1AwSS+OIhS8h0F1XtfQo=;
+ b=ZNJ/RMbJbAupUedHgK4QhyQH+C1qfDa/Av5eoeUpAbqkSZvKkm9nqoPLt5uYvwowni
+ K/POTcB8RO2oupCltRo5DbH5NnFfBuOTbAMmVTxxeWW61PdFUgDVOhJkzfNacF55YiL4
+ nkTqwIWnhXvwavNo1rEfYiwfCl6XczgXVn5WoZceUZ1DgMI2XlZ4K56/UAwOgbIGVQL+
+ keRHogd8LzZ6DWbQ6SsndXFNGYrYOEZ1Y8bfA8ZHoN3JAV7VWkvc8gbUVchvzwf/NXkZ
+ Y6SsU4B/iH6kFxDUtUh/EJWPbk107Ovxey/2kdp9FZOjM6/zAfb00RLA4kuIe501innW
+ pKoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=hEKzFTDXl73R/avhdjm1AghHuuMtVzKGAZrRfKUqK/s=;
- b=U2LASUUw2x0ls2N5EOuY3YL70dgbGHHmBAiDgHgKVrTIpp/2XuCnTaYuCFqq3YeUeV
- qkcJs6N5l/9MGMlsSrcc0yUqApWRZdmI0JCrqbEX/lW6jsACOWMRz1YdhvzzwWLOOOEI
- m2j5lHJU8IjY4ybtASvlCq98KEZKY1WJhuo0SGpdWWKItLS/J2RCyE0kIxerI9z0k3p6
- eoPHuKieTJ9uI3F0wZ6ycrV2JZemsHMZCAZ1x5Z7BzsqhTE9EN3kXfHBTF1kSbMt3IBP
- W2nKmqBQ+RL6R7UHqCAEyzCfYIxvTjLvpy4gNvgvXzO1wFjg79oas8JLF0k8dsRPRaxe
- HGOg==
-X-Gm-Message-State: AJIora+tTAQRbXXECupqiRTaR3de1RXZMJNN/TyBcsceve2D5NGg4qKm
- 7yqqzuCh0QtOHzabHVhQ2D5l55zram2OqqYmV6A=
-X-Google-Smtp-Source: AGRyM1tMxOEJJ5bc4Ss5uxpIUn5NVB1eJmgVEHzOSOdZmr+l2JGaS+VoNKEYxkVYMJDQsc8/Ja5aYrMw8GOmtAnu9zw=
-X-Received: by 2002:a05:622a:14f:b0:31b:a118:8833 with SMTP id
- v15-20020a05622a014f00b0031ba1188833mr1080448qtw.543.1656338600550; Mon, 27
- Jun 2022 07:03:20 -0700 (PDT)
+ bh=2NgUqvqHEeTrLEgVSWGWamO1AwSS+OIhS8h0F1XtfQo=;
+ b=q2FJAnfD1+9WuoLN7fyXU60RpAI7wzaMQ5tQ1dg13QzQjF1+5uOoWNxJxw04oNnSqo
+ rrRrqmIitfk3D7G9ldQ3IpZq3yWuPqzkEP3FN18zh2KslzLWnExvidU/Q6iaZT9R4p09
+ StlIqVJ1HdrWLgEAI3TkrDAHePwWd/3orgxMbmQdqcV/rueJTM8O2MXW3/m5NVYw7bDF
+ UXk+FT2JtiKYytXOBDRtr1OjvmnqEY0L/JKuxarLEemgfpIQL8XXczxEGBZMZ8Esu7kY
+ vYID0Brp9ebDc+6DRPRvC7x4jLgJWxpkA45NgTanaaymY9861ieqK7rwcXGWXfIhGJK1
+ XzUA==
+X-Gm-Message-State: AJIora/Eg3i6Y6xp6MycATA8kt7AqAatHqJS5a9esHRXnJq+IATdgYQX
+ 5mv1Mqxs94+ECNpQS/9ENep7n3Yf3m1ARhJWhRs=
+X-Google-Smtp-Source: AGRyM1v1KaDKINCWktmli1IvafIJikpYVh4PIg1ioLdtn/N4EFvc7sbx2hLUyd/hD7KM2ts3rjekuPA4kHdg0sq954Q=
+X-Received: by 2002:a0c:cc0b:0:b0:470:b4f5:aae2 with SMTP id
+ r11-20020a0ccc0b000000b00470b4f5aae2mr6223447qvk.114.1656340194052; Mon, 27
+ Jun 2022 07:29:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220608062015.317894-1-alistair.francis@opensource.wdc.com>
-In-Reply-To: <20220608062015.317894-1-alistair.francis@opensource.wdc.com>
+References: <20220627094029.1379700-1-rpathak@ventanamicro.com>
+In-Reply-To: <20220627094029.1379700-1-rpathak@ventanamicro.com>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Mon, 27 Jun 2022 22:03:08 +0800
-Message-ID: <CAEUhbmW+4r75w0rL1=ho_28HyFWX-ZnnsXpC9-ZsOzrGZ9MDzg@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: boot: Reduce FDT address alignment constraints
-To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Date: Mon, 27 Jun 2022 22:29:42 +0800
+Message-ID: <CAEUhbmUcyDNN5APO4yXALposd8Vt6f5RV=t4_VfPL6bHnGkNUQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix user-mode build issue because mhartid
+To: Rahul Pathak <rpathak@ventanamicro.com>
 Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Bin Meng <bin.meng@windriver.com>, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair23@gmail.com>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Anup Patel <apatel@ventanamicro.com>, 
+ Rahul Pathak <rpathakmailbox@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2f;
- envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f2e;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qv1-xf2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -73,29 +72,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2022 14:03:28 -0000
+X-List-Received-Date: Mon, 27 Jun 2022 14:29:57 -0000
 
-On Wed, Jun 8, 2022 at 2:20 PM Alistair Francis
-<alistair.francis@opensource.wdc.com> wrote:
+On Mon, Jun 27, 2022 at 5:40 PM Rahul Pathak <rpathak@ventanamicro.com> wrote:
 >
-> From: Alistair Francis <alistair.francis@wdc.com>
+> mhartid csr is not available in user-mode code path and
+> user-mode build fails because of its reference in
+> riscv_cpu_realize function
 >
-> We previously stored the device tree at a 16MB alignment from the end of
-> memory (or 3GB). This means we need at least 16MB of memory to be able
-> to do this. We don't actually need the FDT to be 16MB aligned, so let's
-> drop it down to 2MB so that we can support systems with less memory,
-> while also allowing FDT size expansion.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/992
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+
+Normally a "Fixes" tag should be added, but see below:
+
+> Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
 > ---
->  hw/riscv/boot.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/riscv/cpu.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 >
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 0a794ef622..03f23d4b6d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -643,9 +643,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>          if (isa_ext_is_enabled(cpu, &isa_edata_arr[i]) &&
+>              (env->priv_ver < isa_edata_arr[i].min_version)) {
+>              isa_ext_update_enabled(cpu, &isa_edata_arr[i], false);
+> +#ifndef CONFIG_USER_ONLY
+>              warn_report("disabling %s extension for hart 0x%lx because "
+>                          "privilege spec version does not match",
+>                          isa_edata_arr[i].name, (unsigned long)env->mhartid);
 
-Reviewed-by: Bin Meng <bin.meng@windriver.com>
+I can't find this in the mainline codes, so I assume this code exists
+in Alistair's tree?
 
-Tested booting Linux 64-bit/32-bit v5.18 kernel, VxWorks 7
-64-bit/32-bit 22.06 release kernel
-Tested-by: Bin Meng <bin.meng@windriver.com>
+If that, please indicate in the commit message that this patch should
+be squashed into the offending commit in Alistair's tree.
+
+> +#else
+> +            warn_report("disabling %s extension for hart 0x%lx because "
+> +                        "privilege spec version does not match",
+> +                        isa_edata_arr[i].name);
+> +#endif
+
+Regards,
+Bin
 
