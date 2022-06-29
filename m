@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o6hGe-0003SJ-6x
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jun 2022 19:38:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54866)
+	id 1o6hJ8-00058s-MT
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jun 2022 19:41:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:55154)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1o6hGc-0003Ou-Et; Wed, 29 Jun 2022 19:38:42 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:38671)
+ id 1o6hJ6-00058N-LK; Wed, 29 Jun 2022 19:41:16 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533]:46691)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1o6hGa-00088U-AR; Wed, 29 Jun 2022 19:38:42 -0400
-Received: by mail-pl1-x630.google.com with SMTP id m14so15508198plg.5;
- Wed, 29 Jun 2022 16:38:39 -0700 (PDT)
+ id 1o6hJ4-0002Io-28; Wed, 29 Jun 2022 19:41:16 -0400
+Received: by mail-pg1-x533.google.com with SMTP id x8so12183689pgj.13;
+ Wed, 29 Jun 2022 16:41:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=WL5YzLGxB7WoB09Z/70FNm1qYiHGE3GxG4YOyBICXIc=;
- b=QwkpBWJdVixZ9bYmwEwkWXXsW6DLWU6A3lFlTqSCwkRwBNBARidxG4MP9eaTZCOqey
- MszY6pn9e6glSaXAdFh/mQF8z7bv5fVhU+dIdJ+syMikm3SxA1emDSyZjyXGBvhayj5b
- HazX1yYsxINulLkVct3c/3bmEuvCOXKw2aQqgjjFOITa0CIjwEHdiHB2xpfxkwhS/++M
- le438Qz2a0NbquhqMW0519b+5X5Ytbm/rtfI65b8SBMLGd+1N7VOm77tw0S0Cb7SacCy
- x27oJFBVutm33VUWnA5A1pPDpWkGvf2XNIbEYOImI/hvYWi5YobaDiPi4ZBcNDgVZ5kS
- QITw==
+ :cc; bh=aa1SrmRDMzKdUeUw7jPbWR8oelxZiYHE2cMIqqG4OW0=;
+ b=QUWkhVX2UZWtE1mfGo6SfFbTos6nsFPHaCv/FrmG5IzEPnYcucDLiJJYx/5gg2GHqA
+ QawBssbbZdtLsZDS6Xy1t5vXQ9G0J9clv+xCxMtWfZ1dTubXWyjwcsPpXSIlysda3jOd
+ tDrpPEncvm3Fjv4vSFQEb1VTVL45HGyzjDBS3VtCpjHhzHmcNu+qZGr+PS6bJe2gwjfJ
+ +qhHQzvCHLtyOL40xNfyANOY9sYpa9zXIXqHKprax/LUswO1Kav1ZcJHQlxc/6Zn9vsQ
+ 8jJlEb5wzafwol5lhG8LcgxBnna4OjTeXESnhfYE5HyGJdersUTvjtf9odjsxhBkC05E
+ /oxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=WL5YzLGxB7WoB09Z/70FNm1qYiHGE3GxG4YOyBICXIc=;
- b=gsV61NpTEZ5Zs43+eTWJc3qshu6H5WczigQ7qvatcTXIn9qwBzaiyhdGFphy1Kl0sx
- Wj+6MtRads+/raZsHH/aQ5OFE10DFB/13ndsuC7V+ovqkEXyNyr8uDYw3ixCTokNyhbk
- jRZhRELzv3Ju3CBQEh8SoU6Q8Qi5PrTApwX7Zwpya2FJMuXRWPEcvMQKRH5WoRAIAdpy
- ufDnznyOcKfq9syvxZZm4k2Nr+iEAmI/pPB204huI1yMOSzGsMANXk1emF8oCBehAnp/
- DhY1NK17kwrrJHEwHpbIFAzJTaI7K+BbACKJdXG5+IfGDc0nzSAYP7q5+bzLHBnKqdei
- kWoQ==
-X-Gm-Message-State: AJIora9BLh/WA1u8GPCGlJqH/gH9YQ5blBe8UDBs8roRcTxbCBjy90Bj
- 4gdwHjddYM3dr1esVZ1Hv4R8zDsITyRgQSiw38gfQnLDwk1nOA==
-X-Google-Smtp-Source: AGRyM1sV7ITnotlrPJdJYftnofjmDHcGWeRZhIv9TLjdZe7XBfUC4S1wjQAa/5wLhuvZ/7tB60Vz5PvdO5aoHCIItR8=
-X-Received: by 2002:a17:90b:218:b0:1ef:1440:ebe1 with SMTP id
- fy24-20020a17090b021800b001ef1440ebe1mr8425354pjb.166.1656545918510; Wed, 29
- Jun 2022 16:38:38 -0700 (PDT)
+ bh=aa1SrmRDMzKdUeUw7jPbWR8oelxZiYHE2cMIqqG4OW0=;
+ b=79/GWu7pW7zw7HRwAJNOJ/MUPBh2O1LLyi9JvHofIHwhaZ4XEBghbsw1hjLMFBpbBH
+ 4HZgalB0lcaHVxkhMNGQFcOYkNwWw9M+rEP+6OOLpvO6ZrMdlr9+2X3Le/oNgmMnO+dj
+ s32Rp5kncM1K2uU7TzKsl1N8GSh+uQcwCivZzxVSeW8ZLD0dFWMb4TYs6CjvatNYi7Zr
+ KxeyiwCIP/1TmvnKM8B+hrcKv2X302bWXsgEvuVMen9ItDKCBnk1hZlyYytjkAIeJGhL
+ fNltRhmKoDlMHVAam9E3FjHP/ag+I3I/f+GyM5hsh8w/xMaMXiqvSlFIHGrZJn8opAIF
+ YAzA==
+X-Gm-Message-State: AJIora8/9KTqKP+yNHdimWk7wid/w065xHydhKMcMviuzCpgk3W+vFAc
+ t5yqe9aowNNDBbZMbnf4JkfKYvhzl7h0qm7l2NU=
+X-Google-Smtp-Source: AGRyM1vkUGMd5f0Od1XUNB+rqSAfXmaJR4yv5kGq2DTAzQnl/ocGMm2qypkAWXVHy2m+fMohedYLSOeDByJv+42ue+8=
+X-Received: by 2002:a05:6a00:1307:b0:50d:b02e:11df with SMTP id
+ j7-20020a056a00130700b0050db02e11dfmr11510006pfu.4.1656546071558; Wed, 29 Jun
+ 2022 16:41:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220616031543.953776-1-apatel@ventanamicro.com>
- <20220616031543.953776-2-apatel@ventanamicro.com>
-In-Reply-To: <20220616031543.953776-2-apatel@ventanamicro.com>
+ <20220616031543.953776-3-apatel@ventanamicro.com>
+In-Reply-To: <20220616031543.953776-3-apatel@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 30 Jun 2022 09:38:11 +1000
-Message-ID: <CAKmqyKOGnZLzUFu4CCnhivzS6dDMzW8je5f3kb0UgYN27FTHHw@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Remove CSRs that set/clear an IMSIC
- interrupt file bits
+Date: Thu, 30 Jun 2022 09:40:44 +1000
+Message-ID: <CAKmqyKNUL4O+0bYjWSTXb5qDLTesVGUEW_hK=w3tLxe6Dqt_BQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Update default priority table for local
+ interrupts
 To: Anup Patel <apatel@ventanamicro.com>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>, 
@@ -55,8 +55,8 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,21 +77,18 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Jun 2022 23:38:42 -0000
+X-List-Received-Date: Wed, 29 Jun 2022 23:41:16 -0000
 
-On Thu, Jun 16, 2022 at 1:18 PM Anup Patel <apatel@ventanamicro.com> wrote:
+On Thu, Jun 16, 2022 at 1:17 PM Anup Patel <apatel@ventanamicro.com> wrote:
 >
-> Based on architecture review committee feedback, the [m|s|vs]seteienum,
-> [m|s|vs]clreienum, [m|s|vs]seteipnum, and [m|s|vs]clreipnum CSRs are
-> removed in the latest AIA draft v0.3.0 specification.
-> (Refer, https://github.com/riscv/riscv-aia/releases/tag/0.3.0-draft.31)
+> The latest AIA draft v0.3.0 defines a relatively simpler scheme for
+> default priority assignments where:
+> 1) local interrupts 24 to 31 and 48 to 63 are reserved for custom use
+>    and have implementation specific default priority.
+> 2) remaining local interrupts 0 to 23 and 32 to 47 have a recommended
+>    (not mandatory) priority assignments.
 >
-> These CSRs were mostly for software convenience and software can always
-> use [m|s|vs]iselect and [m|s|vs]ireg CSRs to update the IMSIC interrupt
-> file bits.
->
-> We update the IMSIC CSR emulation as-per above to match the latest AIA
-> draft specification.
+> We update the default priority table and hviprio mapping as-per above.
 >
 > Signed-off-by: Anup Patel <apatel@ventanamicro.com>
 
@@ -100,254 +97,195 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/cpu_bits.h |  24 +------
->  target/riscv/csr.c      | 150 +---------------------------------------
->  2 files changed, 6 insertions(+), 168 deletions(-)
+>  target/riscv/cpu_bits.h   |   2 +-
+>  target/riscv/cpu_helper.c | 134 ++++++++++++++++++--------------------
+>  2 files changed, 66 insertions(+), 70 deletions(-)
 >
 > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 4a55c6a709..01608f86e5 100644
+> index 01608f86e5..63ba867379 100644
 > --- a/target/riscv/cpu_bits.h
 > +++ b/target/riscv/cpu_bits.h
-> @@ -177,14 +177,8 @@
->  #define CSR_MIREG           0x351
+> @@ -773,7 +773,7 @@ typedef enum RISCVException {
+>  #define IPRIO_IRQ_BITS                     8
+>  #define IPRIO_MMAXIPRIO                    255
+>  #define IPRIO_DEFAULT_UPPER                4
+> -#define IPRIO_DEFAULT_MIDDLE               (IPRIO_DEFAULT_UPPER + 24)
+> +#define IPRIO_DEFAULT_MIDDLE               (IPRIO_DEFAULT_UPPER + 12)
+>  #define IPRIO_DEFAULT_M                    IPRIO_DEFAULT_MIDDLE
+>  #define IPRIO_DEFAULT_S                    (IPRIO_DEFAULT_M + 3)
+>  #define IPRIO_DEFAULT_SGEXT                (IPRIO_DEFAULT_S + 3)
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 3c8ebecf84..063a1403db 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -169,17 +169,17 @@ void riscv_cpu_update_mask(CPURISCVState *env)
+>   * 14 "
+>   * 15 "
+>   * 16 "
+> - * 18 Debug/trace interrupt
+> - * 20 (Reserved interrupt)
+> + * 17 "
+> + * 18 "
+> + * 19 "
+> + * 20 "
+> + * 21 "
+>   * 22 "
+> - * 24 "
+> - * 26 "
+> - * 28 "
+> - * 30 (Reserved for standard reporting of bus or system errors)
+> + * 23 "
+>   */
 >
->  /* Machine-Level Interrupts (AIA) */
-> -#define CSR_MTOPI           0xfb0
-> -
-> -/* Machine-Level IMSIC Interface (AIA) */
-> -#define CSR_MSETEIPNUM      0x358
-> -#define CSR_MCLREIPNUM      0x359
-> -#define CSR_MSETEIENUM      0x35a
-> -#define CSR_MCLREIENUM      0x35b
->  #define CSR_MTOPEI          0x35c
-> +#define CSR_MTOPI           0xfb0
+>  static const int hviprio_index2irq[] = {
+> -    0, 1, 4, 5, 8, 13, 14, 15, 16, 18, 20, 22, 24, 26, 28, 30 };
+> +    0, 1, 4, 5, 8, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+>  static const int hviprio_index2rdzero[] = {
+>      1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 >
->  /* Virtual Interrupts for Supervisor Level (AIA) */
->  #define CSR_MVIEN           0x308
-> @@ -224,14 +218,8 @@
->  #define CSR_SIREG           0x151
+> @@ -208,50 +208,60 @@ int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero)
+>   *  Default  |
+>   *  Priority | Major Interrupt Numbers
+>   * ----------------------------------------------------------------
+> - *  Highest  | 63 (3f), 62 (3e), 31 (1f), 30 (1e), 61 (3d), 60 (3c),
+> - *           | 59 (3b), 58 (3a), 29 (1d), 28 (1c), 57 (39), 56 (38),
+> - *           | 55 (37), 54 (36), 27 (1b), 26 (1a), 53 (35), 52 (34),
+> - *           | 51 (33), 50 (32), 25 (19), 24 (18), 49 (31), 48 (30)
+> + *  Highest  | 47, 23, 46, 45, 22, 44,
+> + *           | 43, 21, 42, 41, 20, 40
+>   *           |
+>   *           | 11 (0b),  3 (03),  7 (07)
+>   *           |  9 (09),  1 (01),  5 (05)
+>   *           | 12 (0c)
+>   *           | 10 (0a),  2 (02),  6 (06)
+>   *           |
+> - *           | 47 (2f), 46 (2e), 23 (17), 22 (16), 45 (2d), 44 (2c),
+> - *           | 43 (2b), 42 (2a), 21 (15), 20 (14), 41 (29), 40 (28),
+> - *           | 39 (27), 38 (26), 19 (13), 18 (12), 37 (25), 36 (24),
+> - *  Lowest   | 35 (23), 34 (22), 17 (11), 16 (10), 33 (21), 32 (20)
+> + *           | 39, 19, 38, 37, 18, 36,
+> + *  Lowest   | 35, 17, 34, 33, 16, 32
+>   * ----------------------------------------------------------------
+>   */
+>  static const uint8_t default_iprio[64] = {
+> - [63] = IPRIO_DEFAULT_UPPER,
+> - [62] = IPRIO_DEFAULT_UPPER + 1,
+> - [31] = IPRIO_DEFAULT_UPPER + 2,
+> - [30] = IPRIO_DEFAULT_UPPER + 3,
+> - [61] = IPRIO_DEFAULT_UPPER + 4,
+> - [60] = IPRIO_DEFAULT_UPPER + 5,
+> -
+> - [59] = IPRIO_DEFAULT_UPPER + 6,
+> - [58] = IPRIO_DEFAULT_UPPER + 7,
+> - [29] = IPRIO_DEFAULT_UPPER + 8,
+> - [28] = IPRIO_DEFAULT_UPPER + 9,
+> - [57] = IPRIO_DEFAULT_UPPER + 10,
+> - [56] = IPRIO_DEFAULT_UPPER + 11,
+> -
+> - [55] = IPRIO_DEFAULT_UPPER + 12,
+> - [54] = IPRIO_DEFAULT_UPPER + 13,
+> - [27] = IPRIO_DEFAULT_UPPER + 14,
+> - [26] = IPRIO_DEFAULT_UPPER + 15,
+> - [53] = IPRIO_DEFAULT_UPPER + 16,
+> - [52] = IPRIO_DEFAULT_UPPER + 17,
+> -
+> - [51] = IPRIO_DEFAULT_UPPER + 18,
+> - [50] = IPRIO_DEFAULT_UPPER + 19,
+> - [25] = IPRIO_DEFAULT_UPPER + 20,
+> - [24] = IPRIO_DEFAULT_UPPER + 21,
+> - [49] = IPRIO_DEFAULT_UPPER + 22,
+> - [48] = IPRIO_DEFAULT_UPPER + 23,
+> + /* Custom interrupts 48 to 63 */
+> + [63] = IPRIO_MMAXIPRIO,
+> + [62] = IPRIO_MMAXIPRIO,
+> + [61] = IPRIO_MMAXIPRIO,
+> + [60] = IPRIO_MMAXIPRIO,
+> + [59] = IPRIO_MMAXIPRIO,
+> + [58] = IPRIO_MMAXIPRIO,
+> + [57] = IPRIO_MMAXIPRIO,
+> + [56] = IPRIO_MMAXIPRIO,
+> + [55] = IPRIO_MMAXIPRIO,
+> + [54] = IPRIO_MMAXIPRIO,
+> + [53] = IPRIO_MMAXIPRIO,
+> + [52] = IPRIO_MMAXIPRIO,
+> + [51] = IPRIO_MMAXIPRIO,
+> + [50] = IPRIO_MMAXIPRIO,
+> + [49] = IPRIO_MMAXIPRIO,
+> + [48] = IPRIO_MMAXIPRIO,
+> +
+> + /* Custom interrupts 24 to 31 */
+> + [31] = IPRIO_MMAXIPRIO,
+> + [30] = IPRIO_MMAXIPRIO,
+> + [29] = IPRIO_MMAXIPRIO,
+> + [28] = IPRIO_MMAXIPRIO,
+> + [27] = IPRIO_MMAXIPRIO,
+> + [26] = IPRIO_MMAXIPRIO,
+> + [25] = IPRIO_MMAXIPRIO,
+> + [24] = IPRIO_MMAXIPRIO,
+> +
+> + [47] = IPRIO_DEFAULT_UPPER,
+> + [23] = IPRIO_DEFAULT_UPPER + 1,
+> + [46] = IPRIO_DEFAULT_UPPER + 2,
+> + [45] = IPRIO_DEFAULT_UPPER + 3,
+> + [22] = IPRIO_DEFAULT_UPPER + 4,
+> + [44] = IPRIO_DEFAULT_UPPER + 5,
+> +
+> + [43] = IPRIO_DEFAULT_UPPER + 6,
+> + [21] = IPRIO_DEFAULT_UPPER + 7,
+> + [42] = IPRIO_DEFAULT_UPPER + 8,
+> + [41] = IPRIO_DEFAULT_UPPER + 9,
+> + [20] = IPRIO_DEFAULT_UPPER + 10,
+> + [40] = IPRIO_DEFAULT_UPPER + 11,
 >
->  /* Supervisor-Level Interrupts (AIA) */
-> -#define CSR_STOPI           0xdb0
-> -
-> -/* Supervisor-Level IMSIC Interface (AIA) */
-> -#define CSR_SSETEIPNUM      0x158
-> -#define CSR_SCLREIPNUM      0x159
-> -#define CSR_SSETEIENUM      0x15a
-> -#define CSR_SCLREIENUM      0x15b
->  #define CSR_STOPEI          0x15c
-> +#define CSR_STOPI           0xdb0
+>   [11] = IPRIO_DEFAULT_M,
+>   [3]  = IPRIO_DEFAULT_M + 1,
+> @@ -267,33 +277,19 @@ static const uint8_t default_iprio[64] = {
+>   [2]  = IPRIO_DEFAULT_VS + 1,
+>   [6]  = IPRIO_DEFAULT_VS + 2,
 >
->  /* Supervisor-Level High-Half CSRs (AIA) */
->  #define CSR_SIEH            0x114
-> @@ -282,14 +270,8 @@
->  #define CSR_VSIREG          0x251
+> - [47] = IPRIO_DEFAULT_LOWER,
+> - [46] = IPRIO_DEFAULT_LOWER + 1,
+> - [23] = IPRIO_DEFAULT_LOWER + 2,
+> - [22] = IPRIO_DEFAULT_LOWER + 3,
+> - [45] = IPRIO_DEFAULT_LOWER + 4,
+> - [44] = IPRIO_DEFAULT_LOWER + 5,
+> -
+> - [43] = IPRIO_DEFAULT_LOWER + 6,
+> - [42] = IPRIO_DEFAULT_LOWER + 7,
+> - [21] = IPRIO_DEFAULT_LOWER + 8,
+> - [20] = IPRIO_DEFAULT_LOWER + 9,
+> - [41] = IPRIO_DEFAULT_LOWER + 10,
+> - [40] = IPRIO_DEFAULT_LOWER + 11,
+> -
+> - [39] = IPRIO_DEFAULT_LOWER + 12,
+> - [38] = IPRIO_DEFAULT_LOWER + 13,
+> - [19] = IPRIO_DEFAULT_LOWER + 14,
+> - [18] = IPRIO_DEFAULT_LOWER + 15,
+> - [37] = IPRIO_DEFAULT_LOWER + 16,
+> - [36] = IPRIO_DEFAULT_LOWER + 17,
+> -
+> - [35] = IPRIO_DEFAULT_LOWER + 18,
+> - [34] = IPRIO_DEFAULT_LOWER + 19,
+> - [17] = IPRIO_DEFAULT_LOWER + 20,
+> - [16] = IPRIO_DEFAULT_LOWER + 21,
+> - [33] = IPRIO_DEFAULT_LOWER + 22,
+> - [32] = IPRIO_DEFAULT_LOWER + 23,
+> + [39] = IPRIO_DEFAULT_LOWER,
+> + [19] = IPRIO_DEFAULT_LOWER + 1,
+> + [38] = IPRIO_DEFAULT_LOWER + 2,
+> + [37] = IPRIO_DEFAULT_LOWER + 3,
+> + [18] = IPRIO_DEFAULT_LOWER + 4,
+> + [36] = IPRIO_DEFAULT_LOWER + 5,
+> +
+> + [35] = IPRIO_DEFAULT_LOWER + 6,
+> + [17] = IPRIO_DEFAULT_LOWER + 7,
+> + [34] = IPRIO_DEFAULT_LOWER + 8,
+> + [33] = IPRIO_DEFAULT_LOWER + 9,
+> + [16] = IPRIO_DEFAULT_LOWER + 10,
+> + [32] = IPRIO_DEFAULT_LOWER + 11,
+>  };
 >
->  /* VS-Level Interrupts (H-extension with AIA) */
-> -#define CSR_VSTOPI          0xeb0
-> -
-> -/* VS-Level IMSIC Interface (H-extension with AIA) */
-> -#define CSR_VSSETEIPNUM     0x258
-> -#define CSR_VSCLREIPNUM     0x259
-> -#define CSR_VSSETEIENUM     0x25a
-> -#define CSR_VSCLREIENUM     0x25b
->  #define CSR_VSTOPEI         0x25c
-> +#define CSR_VSTOPI          0xeb0
->
->  /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
->  #define CSR_HIDELEGH        0x613
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 409a209f14..a4890ebc70 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1040,14 +1040,6 @@ static int aia_xlate_vs_csrno(CPURISCVState *env, int csrno)
->          return CSR_VSISELECT;
->      case CSR_SIREG:
->          return CSR_VSIREG;
-> -    case CSR_SSETEIPNUM:
-> -        return CSR_VSSETEIPNUM;
-> -    case CSR_SCLREIPNUM:
-> -        return CSR_VSCLREIPNUM;
-> -    case CSR_SSETEIENUM:
-> -        return CSR_VSSETEIENUM;
-> -    case CSR_SCLREIENUM:
-> -        return CSR_VSCLREIENUM;
->      case CSR_STOPEI:
->          return CSR_VSTOPEI;
->      default:
-> @@ -1202,124 +1194,6 @@ done:
->      return RISCV_EXCP_NONE;
->  }
->
-> -static int rmw_xsetclreinum(CPURISCVState *env, int csrno, target_ulong *val,
-> -                            target_ulong new_val, target_ulong wr_mask)
-> -{
-> -    int ret = -EINVAL;
-> -    bool set, pend, virt;
-> -    target_ulong priv, isel, vgein, xlen, nval, wmask;
-> -
-> -    /* Translate CSR number for VS-mode */
-> -    csrno = aia_xlate_vs_csrno(env, csrno);
-> -
-> -    /* Decode register details from CSR number */
-> -    virt = set = pend = false;
-> -    switch (csrno) {
-> -    case CSR_MSETEIPNUM:
-> -        priv = PRV_M;
-> -        set = true;
-> -        pend = true;
-> -        break;
-> -    case CSR_MCLREIPNUM:
-> -        priv = PRV_M;
-> -        pend = true;
-> -        break;
-> -    case CSR_MSETEIENUM:
-> -        priv = PRV_M;
-> -        set = true;
-> -        break;
-> -    case CSR_MCLREIENUM:
-> -        priv = PRV_M;
-> -        break;
-> -    case CSR_SSETEIPNUM:
-> -        priv = PRV_S;
-> -        set = true;
-> -        pend = true;
-> -        break;
-> -    case CSR_SCLREIPNUM:
-> -        priv = PRV_S;
-> -        pend = true;
-> -        break;
-> -    case CSR_SSETEIENUM:
-> -        priv = PRV_S;
-> -        set = true;
-> -        break;
-> -    case CSR_SCLREIENUM:
-> -        priv = PRV_S;
-> -        break;
-> -    case CSR_VSSETEIPNUM:
-> -        priv = PRV_S;
-> -        virt = true;
-> -        set = true;
-> -        pend = true;
-> -        break;
-> -    case CSR_VSCLREIPNUM:
-> -        priv = PRV_S;
-> -        virt = true;
-> -        pend = true;
-> -        break;
-> -    case CSR_VSSETEIENUM:
-> -        priv = PRV_S;
-> -        virt = true;
-> -        set = true;
-> -        break;
-> -    case CSR_VSCLREIENUM:
-> -        priv = PRV_S;
-> -        virt = true;
-> -        break;
-> -    default:
-> -         goto done;
-> -    };
-> -
-> -    /* IMSIC CSRs only available when machine implements IMSIC. */
-> -    if (!env->aia_ireg_rmw_fn[priv]) {
-> -        goto done;
-> -    }
-> -
-> -    /* Find the selected guest interrupt file */
-> -    vgein = (virt) ? get_field(env->hstatus, HSTATUS_VGEIN) : 0;
-> -
-> -    /* Selected guest interrupt file should be valid */
-> -    if (virt && (!vgein || env->geilen < vgein)) {
-> -        goto done;
-> -    }
-> -
-> -    /* Set/Clear CSRs always read zero */
-> -    if (val) {
-> -        *val = 0;
-> -    }
-> -
-> -    if (wr_mask) {
-> -        /* Get interrupt number */
-> -        new_val &= wr_mask;
-> -
-> -        /* Find target interrupt pending/enable register */
-> -        xlen = riscv_cpu_mxl_bits(env);
-> -        isel = (new_val / xlen);
-> -        isel *= (xlen / IMSIC_EIPx_BITS);
-> -        isel += (pend) ? ISELECT_IMSIC_EIP0 : ISELECT_IMSIC_EIE0;
-> -
-> -        /* Find the interrupt bit to be set/clear */
-> -        wmask = ((target_ulong)1) << (new_val % xlen);
-> -        nval = (set) ? wmask : 0;
-> -
-> -        /* Call machine specific IMSIC register emulation */
-> -        ret = env->aia_ireg_rmw_fn[priv](env->aia_ireg_rmw_fn_arg[priv],
-> -                                         AIA_MAKE_IREG(isel, priv, virt,
-> -                                                       vgein, xlen),
-> -                                         NULL, nval, wmask);
-> -    } else {
-> -        ret = 0;
-> -    }
-> -
-> -done:
-> -    if (ret) {
-> -        return (riscv_cpu_virt_enabled(env) && virt) ?
-> -               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -    return RISCV_EXCP_NONE;
-> -}
-> -
->  static int rmw_xtopei(CPURISCVState *env, int csrno, target_ulong *val,
->                        target_ulong new_val, target_ulong wr_mask)
->  {
-> @@ -3409,14 +3283,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MIREG]    = { "mireg",    aia_any,   NULL, NULL,    rmw_xireg },
->
->      /* Machine-Level Interrupts (AIA) */
-> -    [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
-> -
-> -    /* Machine-Level IMSIC Interface (AIA) */
-> -    [CSR_MSETEIPNUM] = { "mseteipnum", aia_any, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_MCLREIPNUM] = { "mclreipnum", aia_any, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_MSETEIENUM] = { "mseteienum", aia_any, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_MCLREIENUM] = { "mclreienum", aia_any, NULL, NULL, rmw_xsetclreinum },
->      [CSR_MTOPEI]     = { "mtopei",     aia_any, NULL, NULL, rmw_xtopei },
-> +    [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
->
->      /* Virtual Interrupts for Supervisor Level (AIA) */
->      [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
-> @@ -3464,14 +3332,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_SIREG]      = { "sireg",      aia_smode, NULL, NULL, rmw_xireg },
->
->      /* Supervisor-Level Interrupts (AIA) */
-> -    [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
-> -
-> -    /* Supervisor-Level IMSIC Interface (AIA) */
-> -    [CSR_SSETEIPNUM] = { "sseteipnum", aia_smode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_SCLREIPNUM] = { "sclreipnum", aia_smode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_SSETEIENUM] = { "sseteienum", aia_smode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_SCLREIENUM] = { "sclreienum", aia_smode, NULL, NULL, rmw_xsetclreinum },
->      [CSR_STOPEI]     = { "stopei",     aia_smode, NULL, NULL, rmw_xtopei },
-> +    [CSR_STOPI]      = { "stopi",      aia_smode, read_stopi },
->
->      /* Supervisor-Level High-Half CSRs (AIA) */
->      [CSR_SIEH]       = { "sieh",   aia_smode32, NULL, NULL, rmw_sieh },
-> @@ -3543,14 +3405,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL,      rmw_xireg },
->
->      /* VS-Level Interrupts (H-extension with AIA) */
-> -    [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
-> -
-> -    /* VS-Level IMSIC Interface (H-extension with AIA) */
-> -    [CSR_VSSETEIPNUM] = { "vsseteipnum", aia_hmode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_VSCLREIPNUM] = { "vsclreipnum", aia_hmode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_VSSETEIENUM] = { "vsseteienum", aia_hmode, NULL, NULL, rmw_xsetclreinum },
-> -    [CSR_VSCLREIENUM] = { "vsclreienum", aia_hmode, NULL, NULL, rmw_xsetclreinum },
->      [CSR_VSTOPEI]     = { "vstopei",     aia_hmode, NULL, NULL, rmw_xtopei },
-> +    [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
->
->      /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
->      [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL, rmw_hidelegh },
+>  uint8_t riscv_cpu_default_priority(int irq)
 > --
 > 2.34.1
 >
