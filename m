@@ -1,92 +1,92 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o6h9d-0003Qm-0B
-	for mharc-qemu-riscv@gnu.org; Wed, 29 Jun 2022 19:31:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53886)
+	id 1o6h9d-0003Rr-VL
+	for mharc-qemu-riscv@gnu.org; Wed, 29 Jun 2022 19:31:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53860)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=1723d02fc=alistair.francis@opensource.wdc.com>)
- id 1o6h9Z-0003Ph-Ac
- for qemu-riscv@nongnu.org; Wed, 29 Jun 2022 19:31:26 -0400
-Received: from esa4.hgst.iphmx.com ([216.71.154.42]:55901)
+ id 1o6h9X-0003Pb-P0
+ for qemu-riscv@nongnu.org; Wed, 29 Jun 2022 19:31:24 -0400
+Received: from esa6.hgst.iphmx.com ([216.71.154.45]:5333)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <prvs=1723d02fc=alistair.francis@opensource.wdc.com>)
- id 1o6h9W-0004OF-Pl
- for qemu-riscv@nongnu.org; Wed, 29 Jun 2022 19:31:25 -0400
+ id 1o6h9W-0004Nu-3b
+ for qemu-riscv@nongnu.org; Wed, 29 Jun 2022 19:31:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1656545482; x=1688081482;
+ t=1656545481; x=1688081481;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=xQvE5TkYu0BMIfKgSMMAq+k4C1izUhUSYHPNBq9gtLo=;
- b=LEFtxhZ0SLUCsmjenDa1KippVrsBDiouJ4GT4Qdb0tCDG+0BgURSlzUr
- nP5BjyQ99ovf2cakpHxjdBvT2Gwkp5objSuXezwxi+j8YWp/sqi5tk+Av
- sEh1capGoGr+1IHqUjlpUqZyVHJAVk5tXBxpL6sG8jOJcVI6vdLghDz4C
- lQxnpyg9rbhvkYVnb1v+LEbzeTW5TtkIYB2Y187eMbfPK73+PHnHOvB0d
- IWla3vhdS4nKkhTyvv2cC7qJBPx35LUsAAGeEvNS8qkxO/9zqF3aTjopG
- swSPGPcAmhtNCKtROcFJ7zn83AmEPlefCIid5hebe5pGVQ17VYICxWO2n g==;
-X-IronPort-AV: E=Sophos;i="5.92,232,1650902400"; d="scan'208";a="203108174"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
- ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 30 Jun 2022 07:31:15 +0800
-IronPort-SDR: qfBhlzEu4+ZeucqJEAqt9MWY7UYigtHsZ82YUR+d+as3Dgs1hcJpecvxgBfCLFX6Z48MekB44h
- rHEITZlGkEJ+ysvnR4egJArsM9BAfYA2FdkSxf/j+qV+1RBJPs9JnrX4IVsESu+orSfnaOfOcs
- 4jAUvcFg0D2vQp4l+4W0hX5rfXFxju19eGegNRiH+P96mTCPxzqVVWYDSeFeHvaj40c5BV8Pvk
- O79Q3uDyDSPdZj2n5LrQfpofeVUu7hdyOvd0lvzvVZN7Bm9wzSEwDYi/afbsx4dPN71gLHFBQC
- NhLlc7EqtY2FQAL7xTzlWXvf
+ bh=OLOOBif4pCDYgoFjEfB6Feh5vEd8rtZcstKimUQcuvU=;
+ b=SElNhOlkZwcKlmpL/7/p3OvTW4zMkrxkqq7VMl7jIm/jY1NNPs+8ZvS0
+ tXAZbyHGEOFAhqKm1/r50j2Axssmz46aHg4Zh7+fHD6lTBtrganv3BTiS
+ P+F8TGIG/eiKyfn/gEWkbL1Kt/RVdCyBv1SvBXf4p8m4KyztH+4DVpwpV
+ qx1a3yvvJzIE54VwkEq/0caWuxH2Yz8NSy8bBZFcUCBS6JwmQ3GBHsBUK
+ 1zXSf8MPjSUyNi8pAc+zdFWGMCo7hewlQvUbnzVHSHlrwODDvE7511DPR
+ m4Vt8e4TYxZELLLj14eWX/fAIhGFYtQZ4NTAtwBcMf7dDi84sqgiMX+w+ A==;
+X-IronPort-AV: E=Sophos;i="5.92,232,1650902400"; d="scan'208";a="205161718"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+ ([199.255.45.14])
+ by ob1.hgst.iphmx.com with ESMTP; 30 Jun 2022 07:31:18 +0800
+IronPort-SDR: urBZ3fpmlkT0+GmvwL0IwQC/CCCgWiWSvwvVKtHcZfrmFr19062s7jcBD1VdOxS/fhLRdERw5t
+ zr0liy4CrQotWJupZxGTLnLEuyTzKzOqptN5RNP+u8zZDSfFPfoNFsAeuWVWvAc9UtTMJj8r1k
+ UDqRja6vW1nKpIuVr+BQxqmFjwBoqTHGGc06vtA7xLspWAmlcI2luTxxW6qlDsxshIZz8pHo4+
+ tJoJJqVBEqjtJxs4kCG7yRWPkVeveSDljne7FabHYgObjDMz0a2bxJpSfmxNzgKMHZt6Kg+8Xe
+ VgBB4McjdGEMCSmLk/Dro5+Z
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
- by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 29 Jun 2022 15:48:53 -0700
-IronPort-SDR: AEdkqzrtX1WGPXyCFWJ6O50TGQp/Huc0eWNOgsq3wfPmaKiixOsFyPLF5hLT5Miv4MODT7abEb
- pvZGmM9nPig5ZZmtVIU6U92cRsbR0f3nYXVQSugbQIPE4uVnSh6NY3WdtH6BuVvxb6U9Dc/GCn
- vaGxFiyTh4lzBB3K2cXzc7rKqHdoawHHhE0Ghon0eKx6f3a4SLBAZxrBM90NU3xAbjIpT/MjIp
- /MDb6FkEmIiZ59653SO6YvmDOCf2zcF+pBi2MeBpzvqEdjtbFjpKAQhnSv90hyP5CLvCvSAID+
- ons=
+ by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 29 Jun 2022 15:53:37 -0700
+IronPort-SDR: EvAf0HCourqhqzg06kPftplHKzzIRl0AgQfqGGRHp74OC2MYz9akwpNPodk8h5zmsfn7XmLsc/
+ CDaDtwUiU7qWLZMgFe0RoyKJ1sjjoLSgLNB/F9WaGOZ/Yitp+VrTO9SCnCy3xUPSqnpLlCdUrV
+ N8opm0v0zaVdZX5ifuPhp/j1hCPKZs2A46is4bW40PsbTtDs719RhHBtFNRHfzvSLKJS1X6/bZ
+ yKzjYhzMi/RzF55i5eTI6ntt5uouIeF9g/pAXhdst8B3XUJSi2SWQ/cuQ0CPW/zLt4OkWOhwkY
+ me8=
 WDCIronportException: Internal
 Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
  by uls-op-cesaip01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 29 Jun 2022 16:31:15 -0700
+ 29 Jun 2022 16:31:18 -0700
 Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4LYHll10zcz1Rwnx
- for <qemu-riscv@nongnu.org>; Wed, 29 Jun 2022 16:31:15 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4LYHlp0QYBz1RtVk
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jun 2022 16:31:18 -0700 (PDT)
 Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
  reason="pass (just generated, assumed good)"
  header.d=opensource.wdc.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
  opensource.wdc.com; h=content-transfer-encoding:mime-version
  :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1656545469; x=1659137470; bh=xQvE5TkYu0BMIfKgSM
- MAq+k4C1izUhUSYHPNBq9gtLo=; b=db2eD4WoNQ8SQERhz0ETM8LXjtIyaWwshm
- c0xhUYCEROXCHsQFVaA1NMNL32TO2z/olrwnAYAHbFEEbEbvJ+huqjNl6TjMLF6p
- PPuKyCR91VSGZPlkNmZvcelUapMkO+jVJySmHBdD0qe8w9C+HlX//znPvkrivheN
- hhJnHJaYY7F4fGN0GjenYy+lWYTsoO9T3unqoFbz5wuejiB/GNfhM+LIMX5befl0
- s1HtSXPlTZKGQb7DtYARIBP5yVZyz4GScOBgqR7SQ9k5CJ/7T0P0Bz37qNwXnvB4
- uwqtuvbWLIQhdFVgxMAmbnQnWvdbkJAb8avJ80QeeyDiD38pl9tA==
+ :from; s=dkim; t=1656545472; x=1659137473; bh=OLOOBif4pCDYgoFjEf
+ B6Feh5vEd8rtZcstKimUQcuvU=; b=FjRR9h7oOxD3xyfcHBGp70X83aRcFFJBNy
+ /JRh1bSGZ5br6NQVxXh+qQ2NWzanqy9w/HW0heUtfuBjNl3Ct5QWuaiYUlplHLoR
+ u4eLIwFKZ9BE/Fx+KVtBTqwUXc/f2QAWPMldbx6/6M/Vu6Na8GCfee8p/QipS394
+ zlqIte2iazBF9gcZqj3T7TXN2i+9aklBWzzXED9CMItTzPNeqLAIWNZY69JCY91b
+ ZY1Gl9fr6T+ipno1FYUM6Xobu/8EmvKvYptbvDBlqgVSKIVcEIHJdrUrsSsdLjLg
+ 6NC2oUMu90Mx45kto1RH3emO0R9IKE/U+dWEvCRddX1IslD+1vqQ==
 X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
 Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
  by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id FWEdOQ96dKal for <qemu-riscv@nongnu.org>;
- Wed, 29 Jun 2022 16:31:09 -0700 (PDT)
+ port 10026) with ESMTP id vYMUJi2qjx2V for <qemu-riscv@nongnu.org>;
+ Wed, 29 Jun 2022 16:31:12 -0700 (PDT)
 Received: from toolbox.wdc.com (unknown [10.225.167.111])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4LYHlb6kWQz1Rw4L;
- Wed, 29 Jun 2022 16:31:07 -0700 (PDT)
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4LYHlf1P3yz1Rwnl;
+ Wed, 29 Jun 2022 16:31:09 -0700 (PDT)
 From: Alistair Francis <alistair.francis@opensource.wdc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>,
  alistair23@gmail.com, bmeng.cn@gmail.com
-Subject: [PATCH 1/2] target/riscv: Fixup MSECCFG minimum priv check
-Date: Thu, 30 Jun 2022 09:31:01 +1000
-Message-Id: <20220629233102.275181-2-alistair.francis@opensource.wdc.com>
+Subject: [PATCH 2/2] target/riscv: Ibex: Support priv version 1.11
+Date: Thu, 30 Jun 2022 09:31:02 +1000
+Message-Id: <20220629233102.275181-3-alistair.francis@opensource.wdc.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220629233102.275181-1-alistair.francis@opensource.wdc.com>
 References: <20220629233102.275181-1-alistair.francis@opensource.wdc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=216.71.154.42;
+Received-SPF: pass client-ip=216.71.154.45;
  envelope-from=prvs=1723d02fc=alistair.francis@opensource.wdc.com;
- helo=esa4.hgst.iphmx.com
+ helo=esa6.hgst.iphmx.com
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -110,38 +110,29 @@ X-List-Received-Date: Wed, 29 Jun 2022 23:31:26 -0000
 
 From: Alistair Francis <alistair.francis@wdc.com>
 
-There is nothing in the RISC-V spec that mandates version 1.12 is
-required for ePMP and there is currently hardware [1] that implements
-ePMP (a draft version though) with the 1.11 priv spec.
+The Ibex CPU supports version 1.11 of the priv spec [1], so let's
+correct that in QEMU as well.
 
 1: https://ibex-core.readthedocs.io/en/latest/01_overview/compliance.html
 
-Fixes: a4b2fa433125af0305b0695d7f8dda61db3364b0 target/riscv: Introduce p=
-rivilege version field in the CSR ops.
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c | 2 +-
+ target/riscv/cpu.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6dbe9b541f..6379bef5a5 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3561,7 +3561,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 05e6521351..178b4de51f 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -237,7 +237,7 @@ static void rv32_ibex_cpu_init(Object *obj)
+     RISCVCPU *cpu =3D RISCV_CPU(obj);
 =20
-     /* Physical Memory Protection */
-     [CSR_MSECCFG]    =3D { "mseccfg",  epmp, read_mseccfg, write_mseccfg=
-,
--                                     .min_priv_ver =3D PRIV_VERSION_1_12=
-_0 },
-+                                     .min_priv_ver =3D PRIV_VERSION_1_11=
-_0 },
-     [CSR_PMPCFG0]    =3D { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg =
- },
-     [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg =
- },
-     [CSR_PMPCFG2]    =3D { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg =
- },
+     set_misa(env, MXL_RV32, RVI | RVM | RVC | RVU);
+-    set_priv_version(env, PRIV_VERSION_1_10_0);
++    set_priv_version(env, PRIV_VERSION_1_11_0);
+     cpu->cfg.mmu =3D false;
+     cpu->cfg.epmp =3D true;
+ }
 --=20
 2.36.1
 
