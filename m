@@ -1,69 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o6nVS-0000UN-N4
-	for mharc-qemu-riscv@gnu.org; Thu, 30 Jun 2022 02:18:26 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:37254)
+	id 1o7FpX-0002iX-Kl
+	for mharc-qemu-riscv@gnu.org; Fri, 01 Jul 2022 08:33:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44384)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1o6nVQ-0000PX-Cg
- for qemu-riscv@nongnu.org; Thu, 30 Jun 2022 02:18:24 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:40803)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1o7FpG-0002d8-Iz; Fri, 01 Jul 2022 08:32:47 -0400
+Received: from mail-qt1-x834.google.com ([2607:f8b0:4864:20::834]:46733)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <anup@brainfault.org>)
- id 1o6nVH-00016t-Ub
- for qemu-riscv@nongnu.org; Thu, 30 Jun 2022 02:18:24 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id v9so10058399wrp.7
- for <qemu-riscv@nongnu.org>; Wed, 29 Jun 2022 23:18:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=brainfault-org.20210112.gappssmtp.com; s=20210112;
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1o7FpB-0005fl-LX; Fri, 01 Jul 2022 08:32:46 -0400
+Received: by mail-qt1-x834.google.com with SMTP id he28so274845qtb.13;
+ Fri, 01 Jul 2022 05:32:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=E7xM3OhE+t7tN4aI29+ux8cGB8TqHHI1AqNvnM/g4Iw=;
- b=KHh3G03m82tfwHCqyRAatA6FqopG6HeUF27wl5BzwLlBPQN3SmPX3Sm20Zv6deV7ML
- Ig+GZ+GxwSD3+FJ8SizoIL9T2JuwkgTi6QaAQPxVqrDj2wHl8BaXZVingUf3zSGhnC0I
- pxl0ljbPlNNUnMk2ii5PimXaVhk1NROCrIUVrwIK4usY61AnnzWWusZ6SsN4sLuhG0W2
- 39ybYL/xCtmG7J1q4cH6awDz/x3bRopKa+CTt5NVUg9mNER+aCJNSOtV78fpCBPHodf5
- Pz/pMIJZWq/nNdCvf8yrtr1HhJ7kv1nv13YIJ/outWMhoQ1Jx8o1ZXMriCsmy10Bl5Eq
- zhIA==
+ :cc; bh=YRhPIQeUa2h7UmE8hwiBhHgZdq9BaNu/fVo2x5VlOZE=;
+ b=pM3jB0+mAMp14fJ0FD+jEHd6l+vyZU3VQ7sjZGWVTmXmNbRRoK7FQ2u7R9w+lHGpTY
+ ceMQdsuwlMpTlj4rQ9KA7QdrZBqXkdllBtk8xSaNGH6eRCUOao4zG+8MJCcZTczgylkr
+ PXIIXIvJRKA1i2n7UFi6Ww6wqqy4taMy7VFqF/okgGWUCnCihRSiKzpDPog5S3kLyzL/
+ pw6BmvKevyh5Qn4yrKp9MmmDtgWcgx1BAs1hGwlpHud3VGdMYYKTzLbWre+Mkpv5kIvm
+ 8jmhj1yEy0sWT9lEOiiiaEk5rDs1d74Zbps+LsOtcPqRbuMF6l46/HfGhTUIzwDn0xWH
+ pkvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=E7xM3OhE+t7tN4aI29+ux8cGB8TqHHI1AqNvnM/g4Iw=;
- b=O9Z/Y1f5uhSUAAk123uqc/Cn3OiuRKJ3LGMtub5hpa+QFk2xjcAIYyuSeRKrlmcEa1
- erRlwaPuqVA+CkTjW8zbVjxj5hhwbEEHPpsdQq2q+CRNsll2PkCO4DPeo/rfr2JezDz0
- cU9dllCO/nC6dx+nNhPJzRqyaB7DP7Suf/DkV8+ZA6RtPPKVbR8t2gwOWiwYZ7Y84LCM
- 3yQvuVcJY+jhZbyQuSVO1kkC5D7a2UIAw/QNQ4m0Dk7WV23GwEplKAgGsnx4uA0ImC1M
- 9u7TD60UjRRDXD5ZmM+LkJy0UiqsycE7ECyp4q3xg4RNpGMrhxIyjny8hw7PDydFExWc
- bmZA==
-X-Gm-Message-State: AJIora8P9Q44vZMuP9lKbxqE5A68VXMX/c5PfQY7T4TxSJgyFmmBDxnC
- cuzXZI4+fgjsd8M1ShqhwCyinwcAekzXrt7NcCzYbg==
-X-Google-Smtp-Source: AGRyM1tLhu2yWSQo7PtcDy0OCeISMzvfDtF6t4bNTXVAIRWnDhArCthkmEUuP0ZhSSa3GbLE2kDEhYVS9nAC0XEloFY=
-X-Received: by 2002:adf:e402:0:b0:21b:a5ea:593f with SMTP id
- g2-20020adfe402000000b0021ba5ea593fmr6644283wrm.313.1656569893570; Wed, 29
- Jun 2022 23:18:13 -0700 (PDT)
+ bh=YRhPIQeUa2h7UmE8hwiBhHgZdq9BaNu/fVo2x5VlOZE=;
+ b=0ivg5cBD1AIJqER/FardznCiBn2fuQGmmogbOgZKB40RKOF5eVf/HNqPUSCIdaHre9
+ o/3My4/t88DPzw9Ik1uZMSWRyEu+dtdL4yVH/wrXP2fgVzMBXYV3fQ4JOAFqlMQ8t+de
+ b2tHuaiASIvrh28JH4T7Sd/WI7o2hbRUg5wiBvH4CiX6WkRQh3htGWdMYpK1Sh93oY44
+ 4zZhJQFybtIKYCR4VJ+0OO9esJybjVS98uKNZvQPkUQChbyEjEKeCAvMq404E6f07vwl
+ I9cOtJkLxK2z3deMLGt3fATd+904Kiodm8kVp7gJ8YtQPJk+7DrrjLnp0Ff2qt7HlJLs
+ a1cQ==
+X-Gm-Message-State: AJIora94QX+l2pdL4QYaufsu9Ph4YlnbxB7POeJPGDH1r5uOgdUsWKzY
+ g99LyQgKP49mBRckNGiW8YGAb3hIzKwTk+X+crw=
+X-Google-Smtp-Source: AGRyM1vWWNgaZIjod1Zl9WP8Ba69CqUvDjHnwMgmLh+7k//QAnzE0xVA/5Wm083jqU9yHECSgpe1oi9TZFvJbjk9kb4=
+X-Received: by 2002:ac8:7d52:0:b0:31d:2828:f with SMTP id
+ h18-20020ac87d52000000b0031d2828000fmr11218567qtb.391.1656678759704; 
+ Fri, 01 Jul 2022 05:32:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220630061150.905174-1-apatel@ventanamicro.com>
-In-Reply-To: <20220630061150.905174-1-apatel@ventanamicro.com>
-From: Anup Patel <anup@brainfault.org>
-Date: Thu, 30 Jun 2022 11:47:21 +0530
-Message-ID: <CAAhSdy2iTPwqzUAhV8s97k1d4sK-bne1z-T6pg__p3xfsUrdHg@mail.gmail.com>
-Subject: Re: [PATCH v9 0/2] QEMU RISC-V nested virtualization fixes
-To: Anup Patel <apatel@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <Alistair.Francis@wdc.com>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>, 
- Atish Patra <atishp@atishpatra.org>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
- QEMU Developers <qemu-devel@nongnu.org>
+References: <20220629233102.275181-1-alistair.francis@opensource.wdc.com>
+ <20220629233102.275181-2-alistair.francis@opensource.wdc.com>
+In-Reply-To: <20220629233102.275181-2-alistair.francis@opensource.wdc.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 1 Jul 2022 20:32:28 +0800
+Message-ID: <CAEUhbmV=j3jxUh+UiTGKtSZeXwBdhu+xeO3J_NFZT593TUPVHg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Fixup MSECCFG minimum priv check
+To: Alistair Francis <alistair.francis@opensource.wdc.com>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bin.meng@windriver.com>, 
+ Alistair Francis <alistair23@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: none client-ip=2a00:1450:4864:20::42f;
- envelope-from=anup@brainfault.org; helo=mail-wr1-x42f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::834;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-qt1-x834.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,79 +73,46 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2022 06:18:25 -0000
+X-List-Received-Date: Fri, 01 Jul 2022 12:32:48 -0000
 
-On Thu, Jun 30, 2022 at 11:42 AM Anup Patel <apatel@ventanamicro.com> wrote:
+On Thu, Jun 30, 2022 at 7:31 AM Alistair Francis
+<alistair.francis@opensource.wdc.com> wrote:
 >
-> This series does fixes and improvements to have nested virtualization
-> on QEMU RISC-V.
+> From: Alistair Francis <alistair.francis@wdc.com>
 >
-> These patches can also be found in riscv_nested_fixes_v9 branch at:
-> https://github.com/avpatel/qemu.git
+> There is nothing in the RISC-V spec that mandates version 1.12 is
+> required for ePMP and there is currently hardware [1] that implements
+> ePMP (a draft version though) with the 1.11 priv spec.
 >
-> The RISC-V nested virtualization was tested on QEMU RISC-V using
-> Xvisor RISC-V which has required hypervisor support to run another
-> hypervisor as Guest/VM.
+> 1: https://ibex-core.readthedocs.io/en/latest/01_overview/compliance.html
+>
+> Fixes: a4b2fa433125af0305b0695d7f8dda61db3364b0 target/riscv: Introduce privilege version field in the CSR ops.
 
-Changes since v8:
- - Drop first two patches because Alistair has already taken care of it.
- - Include instruction immediate offset in "Addr. Offset" for PATCH1
+The format is
 
-Regards,
-Anup
+Fixes: 12 digits commit id ("commit title")
 
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>  target/riscv/csr.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Changes since v7:
->  - Improve tinst "Addr. Offset" in PATCH3
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6dbe9b541f..6379bef5a5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3561,7 +3561,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
 >
-> Changes since v6:
->  - Droppred original PATCH1 and PATCH2 since these are already merged
->  - Added PATCH1 to revert dummy mcountinhibit CSR
->  - Added PATCH2 to fix minimum priv spec version for mcountinhibit CSR
->  - Fixed checkpatch error in PATCH3
->  - Fixed compile error in PATCH4
->
-> Changes since v5:
->  - Correctly set "Addr. Offset" for misaligned load/store traps in PATCH3
->  - Use offsetof() instead of pointer in PATCH4
->
-> Changes since v4:
->  - Updated commit description in PATCH1, PATCH2, and PATCH4
->  - Use "const" for local array in PATCH5
->
-> Changes since v3:
->  - Updated PATCH3 to set special pseudoinstructions in htinst for
->    guest page faults which result due to VS-stage page table walks
->  - Updated warning message in PATCH4
->
-> Changes since v2:
->  - Dropped the patch which are already in Alistair's next branch
->  - Set "Addr. Offset" in the transformed instruction for PATCH3
->  - Print warning in riscv_cpu_realize() if we are disabling an
->    extension due to privilege spec verions mismatch for PATCH4
->
-> Changes since v1:
->  - Set write_gva to env->two_stage_lookup which ensures that for
->    HS-mode to HS-mode trap write_gva is true only for HLV/HSV
->    instructions
->  - Included "[PATCH 0/3] QEMU RISC-V priv spec version fixes"
->    patches in this series for easy review
->  - Re-worked PATCH7 to force disable extensions if required
->    priv spec version is not staisfied
->  - Added new PATCH8 to fix "aia=aplic-imsic" mode of virt machine
->
-> Anup Patel (2):
->   target/riscv: Update [m|h]tinst CSR in riscv_cpu_do_interrupt()
->   target/riscv: Force disable extensions if priv spec version does not
->     match
->
->  target/riscv/cpu.c        | 150 ++++++++++++++---------
->  target/riscv/cpu.h        |   5 +
->  target/riscv/cpu_helper.c | 252 +++++++++++++++++++++++++++++++++++++-
->  target/riscv/instmap.h    |  45 +++++++
->  4 files changed, 390 insertions(+), 62 deletions(-)
->
+>      /* Physical Memory Protection */
+>      [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
+> -                                     .min_priv_ver = PRIV_VERSION_1_12_0 },
+> +                                     .min_priv_ver = PRIV_VERSION_1_11_0 },
+>      [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+>      [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+>      [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
 > --
-> 2.34.1
 >
+
+Other than that,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 
