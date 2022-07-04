@@ -1,107 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o8Mgu-00083z-PD
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Jul 2022 10:04:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45254)
+	id 1o8NrC-0008DX-Nc
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Jul 2022 11:19:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:47598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o8Mgt-0007uv-2I
- for qemu-riscv@nongnu.org; Mon, 04 Jul 2022 10:04:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:56057)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o8Mgp-0001ap-FZ
- for qemu-riscv@nongnu.org; Mon, 04 Jul 2022 10:04:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1656943478;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3YJBIQ3KZS2kosDWmEX4LYFVVC9WYJNZL4/cJiH+J70=;
- b=OwdfbKzy6qal4eYOfSoqVooYFvluX4j9N8N7ahOkDA4myopgQni/DSX60bQumph7AMA1Ah
- 8wzJnbwSWPcJVuAUbc6ZBIDRBLWpUOORQR9/V7KQgeUDVCWIjyKSPugqxBvg6abVeZzdIV
- 0uxd0T8fnV/3hI8Y9F+8NOFQ9Z7Nfyg=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-517-Mfy4CoQ0OX6x93gHCWFqOg-1; Mon, 04 Jul 2022 10:04:37 -0400
-X-MC-Unique: Mfy4CoQ0OX6x93gHCWFqOg-1
-Received: by mail-ed1-f70.google.com with SMTP id
- x21-20020a05640226d500b00435bd7f9367so7242044edd.8
- for <qemu-riscv@nongnu.org>; Mon, 04 Jul 2022 07:04:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=3YJBIQ3KZS2kosDWmEX4LYFVVC9WYJNZL4/cJiH+J70=;
- b=eR/tzFNM20XrJo/hjVSiEYFmJRrv9YrkQWkAdCwzYZXCYAK0sJtSafOlds8y4MlCsr
- CuhBQ3zfIo+aHf0qjSFVnEopHmiYh6mz2YllPGj4TFO34H8lF6sQhhlf720RqDCfAQKM
- oUXmATBG9ZE9Lkqv13aVGNAUV5ZwgP0iIjSE171QMVlnewxluDLwVFASD8YaQnuNMOde
- 21XlgZxZnCUSYqbaByoWQrs2Gy3zXpVQAun4Q5eQcWQ79S7cbGZuttFScUtUJBr34z62
- 7/etlWRNvy9W5mA0iDq4R1EA9lUgmxaWN67FdWV1OqhryehaaYLFuJT5wdsfyiQBsN81
- 35Sg==
-X-Gm-Message-State: AJIora9zsIHGLWlu+pPgYGOlpK3C7mt5sLvpzMenczAepoKWreeX35M+
- 9y91Q2Z0ti1cltl9xPy1n3Ac7GpG32Oqo8+ecRb8+OhaaTRv1BIWf8/8Ngs5r8+UbG/DqoeUzBq
- q3hN5FBO9XJL4+Wk=
-X-Received: by 2002:a17:906:938a:b0:726:942a:54ef with SMTP id
- l10-20020a170906938a00b00726942a54efmr29203701ejx.728.1656943476251; 
- Mon, 04 Jul 2022 07:04:36 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1s/GicAGvTpiV3kjhcv7yJDeUvdhmBy9WtOyWECzw09/mIgOpvVkDxMpJOuV5cIGetTnBeqgA==
-X-Received: by 2002:a17:906:938a:b0:726:942a:54ef with SMTP id
- l10-20020a170906938a00b00726942a54efmr29203661ejx.728.1656943475852; 
- Mon, 04 Jul 2022 07:04:35 -0700 (PDT)
-Received: from ?IPV6:2a02:8071:5056:d40:63e3:25a7:c1a1:4455?
- ([2a02:8071:5056:d40:63e3:25a7:c1a1:4455])
- by smtp.gmail.com with ESMTPSA id
- m18-20020a056402051200b0043a61f6c389sm1726951edv.4.2022.07.04.07.04.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Jul 2022 07:04:35 -0700 (PDT)
-Message-ID: <0b04e477-75ec-cf8d-04b0-e6c6653504ea@redhat.com>
-Date: Mon, 4 Jul 2022 16:04:33 +0200
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1o8NrB-0008DL-Lv; Mon, 04 Jul 2022 11:19:25 -0400
+Received: from smtp84.cstnet.cn ([159.226.251.84]:35660 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1o8Nr7-0001eQ-6T; Mon, 04 Jul 2022 11:19:25 -0400
+Received: from [192.168.0.138] (unknown [117.151.235.183])
+ by APP-05 (Coremail) with SMTP id zQCowACnx3zpBMNimutfCg--.40262S2;
+ Mon, 04 Jul 2022 23:19:06 +0800 (CST)
+Subject: Re: [PATCH v10 09/12] target/riscv: Simplify counter predicate
+ function
+To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ frank.chang@sifive.com
+References: <20220620231603.2547260-1-atishp@rivosinc.com>
+ <20220620231603.2547260-10-atishp@rivosinc.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <88b34ac2-c126-c4de-f238-f882d73365c6@iscas.ac.cn>
+Date: Mon, 4 Jul 2022 23:19:04 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [PATCH 02/18] block: Add a 'flags' param to blk_pread()
-To: Alberto Faria <afaria@redhat.com>, qemu-devel@nongnu.org
-Cc: Andrew Jeffery <andrew@aj.id.au>, Peter Maydell
- <peter.maydell@linaro.org>, qemu-block@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?=
- <f4bug@amsat.org>, qemu-ppc@nongnu.org, Eric Blake <eblake@redhat.com>,
- Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>,
- John Snow <jsnow@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Jeff Cody <codyprime@gmail.com>, qemu-riscv@nongnu.org,
- =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>,
- Joel Stanley <joel@jms.id.au>, Stefan Weil <sw@weilnetz.de>,
- Laurent Vivier <laurent@vivier.eu>, "Denis V. Lunev" <den@openvz.org>,
- Juan Quintela <quintela@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, Greg Kurz <groug@kaod.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Kevin Wolf <kwolf@redhat.com>, "Edgar E. Iglesias"
- <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org, Fam Zheng <fam@euphon.net>,
- Alistair Francis <alistair@alistair23.me>,
- Beniamino Galvani <b.galvani@gmail.com>, Bin Meng <bin.meng@windriver.com>,
- David Gibson <david@gibson.dropbear.id.au>
-References: <20220517113524.197910-1-afaria@redhat.com>
- <20220517113524.197910-3-afaria@redhat.com>
-From: Hanna Reitz <hreitz@redhat.com>
-In-Reply-To: <20220517113524.197910-3-afaria@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hreitz@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <20220620231603.2547260-10-atishp@rivosinc.com>
+Content-Type: multipart/alternative;
+ boundary="------------A97CE9A6DA9AF4F3631AE4DB"
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=hreitz@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
-X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-CM-TRANSID: zQCowACnx3zpBMNimutfCg--.40262S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtr4kAr1xAr1DZF4xXr13Arb_yoWxXw4fp3
+ W3tay3K392vrn8Ca9Fg3Z8Gr18ur97Way5Gw4rGayvkw45JF15W3WDur4jqas5tr90ywsF
+ 9w4Uua95Za1UX37anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvl14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j
+ 6r4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21lYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2
+ jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II
+ 8E6IAqYI8I648v4I1l7480Y4vEI4kI2Ix0rVAqx4xJMxk0xIA0c2IEe2xFo4CEbIxvr21l
+ c7CjxVAKzI0EY4vE52x082I5MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r
+ 4UMI8I3I0E5I8CrVAFwI0_JrI_JrWlx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF
+ 67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2I
+ x0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_WFyUJVCq3wCI42IY
+ 6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvj
+ DU0xZFpf9x0JUSsjbUUUUU=
+X-Originating-IP: [117.151.235.183]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: 5
+X-Spam_score: 0.5
+X-Spam_bar: /
+X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, HTML_MESSAGE=0.001,
+ MIME_CHARSET_FARAWAY=2.45, NICE_REPLY_A=-0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,54 +70,455 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2022 14:04:43 -0000
+X-List-Received-Date: Mon, 04 Jul 2022 15:19:25 -0000
 
-On 17.05.22 13:35, Alberto Faria wrote:
-> For consistency with other I/O functions, and in preparation to
-> implement it using generated_co_wrapper.
+This is a multi-part message in MIME format.
+--------------A97CE9A6DA9AF4F3631AE4DB
+Content-Type: text/plain; charset=gbk; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+在 2022/6/21 上午7:15, Atish Patra 写道:
+> All the hpmcounters and the fixed counters (CY, IR, TM) can be represented
+> as a unified counter. Thus, the predicate function doesn't need handle each
+> case separately.
 >
-> Callers were updated using this Coccinelle script:
+> Simplify the predicate function so that we just handle things differently
+> between RV32/RV64 and S/HS mode.
 >
->      @@ expression blk, offset, buf, bytes; @@
->      - blk_pread(blk, offset, buf, bytes)
->      + blk_pread(blk, offset, buf, bytes, 0)
->
-> It had no effect on hw/block/nand.c, presumably due to the #if, so that
-> file was updated manually.
->
-> Overly-long lines were then fixed by hand.
->
-> Signed-off-by: Alberto Faria <afaria@redhat.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   block.c                           |  2 +-
->   block/block-backend.c             |  5 +++--
->   block/commit.c                    |  2 +-
->   block/export/fuse.c               |  2 +-
->   hw/arm/allwinner-h3.c             |  2 +-
->   hw/arm/aspeed.c                   |  2 +-
->   hw/block/block.c                  |  2 +-
->   hw/block/fdc.c                    |  6 +++---
->   hw/block/hd-geometry.c            |  2 +-
->   hw/block/m25p80.c                 |  2 +-
->   hw/block/nand.c                   | 12 ++++++------
->   hw/block/onenand.c                | 12 ++++++------
->   hw/ide/atapi.c                    |  4 ++--
->   hw/misc/mac_via.c                 |  2 +-
->   hw/misc/sifive_u_otp.c            |  4 ++--
->   hw/nvram/eeprom_at24c.c           |  2 +-
->   hw/nvram/spapr_nvram.c            |  2 +-
->   hw/nvram/xlnx-bbram.c             |  2 +-
->   hw/nvram/xlnx-efuse.c             |  2 +-
->   hw/ppc/pnv_pnor.c                 |  2 +-
->   hw/sd/sd.c                        |  2 +-
->   include/sysemu/block-backend-io.h |  3 ++-
->   migration/block.c                 |  4 ++--
->   nbd/server.c                      |  4 ++--
->   qemu-img.c                        | 12 ++++++------
->   qemu-io-cmds.c                    |  2 +-
->   tests/unit/test-block-iothread.c  |  4 ++--
->   27 files changed, 52 insertions(+), 50 deletions(-)
+>   target/riscv/csr.c | 112 +++++----------------------------------------
+>   1 file changed, 11 insertions(+), 101 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 2664ce265784..9367e2af9b90 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -74,6 +74,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+>       CPUState *cs = env_cpu(env);
+>       RISCVCPU *cpu = RISCV_CPU(cs);
+>       int ctr_index;
+> +    target_ulong ctr_mask;
+>       int base_csrno = CSR_CYCLE;
+>       bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
+>   
+> @@ -82,122 +83,31 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+>           base_csrno += 0x80;
+>       }
+>       ctr_index = csrno - base_csrno;
+> +    ctr_mask = BIT(ctr_index);
+>   
+>       if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
+>           (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
+>           goto skip_ext_pmu_check;
+>       }
+>   
+> -    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
+> +    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & ctr_mask))) {
+>           /* No counter is enabled in PMU or the counter is out of range */
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+>   
+>   skip_ext_pmu_check:
+>   
+> -    if (env->priv == PRV_S) {
+> -        switch (csrno) {
+> -        case CSR_CYCLE:
+> -            if (!get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                return RISCV_EXCP_ILLEGAL_INST;
+> -            }
+> -            break;
+> -        case CSR_TIME:
+> -            if (!get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                return RISCV_EXCP_ILLEGAL_INST;
+> -            }
+> -            break;
+> -        case CSR_INSTRET:
+> -            if (!get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                return RISCV_EXCP_ILLEGAL_INST;
+> -            }
+> -            break;
+> -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+> -            if (!get_field(env->mcounteren, 1 << ctr_index)) {
+> -                return RISCV_EXCP_ILLEGAL_INST;
+> -            }
+> -            break;
+> -        }
+> -        if (rv32) {
+> -            switch (csrno) {
+> -            case CSR_CYCLEH:
+> -                if (!get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                    return RISCV_EXCP_ILLEGAL_INST;
+> -                }
+> -                break;
+> -            case CSR_TIMEH:
+> -                if (!get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                    return RISCV_EXCP_ILLEGAL_INST;
+> -                }
+> -                break;
+> -            case CSR_INSTRETH:
+> -                if (!get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                    return RISCV_EXCP_ILLEGAL_INST;
+> -                }
+> -                break;
+> -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+> -                if (!get_field(env->mcounteren, 1 << ctr_index)) {
+> -                    return RISCV_EXCP_ILLEGAL_INST;
+> -                }
+> -                break;
+> -            }
+> -        }
+> +    if (((env->priv == PRV_S) && (!get_field(env->mcounteren, ctr_mask))) ||
+> +       ((env->priv == PRV_U) && (!get_field(env->scounteren, ctr_mask)))) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+>       }
 
-Reviewed-by: Hanna Reitz <hreitz@redhat.com>
+Sorry. I didn't realize this simplification and sent a similar patch to 
+fix the problems in Xcounteren
+
+related check I found when I tried to learn the patchset for state 
+enable extension two days ago.
+
+I think there are several difference between our understanding, 
+following is my modifications:
+
++    if (csrno <= CSR_HPMCOUNTER31 && csrno >= CSR_CYCLE) {
++        field = 1 << (csrno - CSR_CYCLE);
++    } else if (riscv_cpu_mxl(env) == MXL_RV32 && csrno <= CSR_HPMCOUNTER31H &&
++               csrno >= CSR_CYCLEH) {
++        field = 1 << (csrno - CSR_CYCLEH);
++    }
++
++    if (env->priv < PRV_M && !get_field(env->mcounteren, field)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (riscv_cpu_virt_enabled(env) && !get_field(env->hcounteren, field)) {
++        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++    }
++
++    if (riscv_has_ext(env, RVS) && env->priv == PRV_U &&
++        !get_field(env->scounteren, field)) {
++        if (riscv_cpu_virt_enabled(env)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        } else {
++            return RISCV_EXCP_ILLEGAL_INST;
+          }
+      }
+
+
+1) For any less-privileged mode under M, illegal exception is raised if matching
+bit in mcounteren is zero.
+
+2) For VS/VU mode('H' extension is supported implicitly), virtual instruction
+exception is raised if matching bit in hcounteren is zero.
+
+3) scounteren csr only works in U/VU mode when 'S' extension is supported:
+    For U mode, illegal exception is raised if matching bit in scounteren is zero.
+    For VU mode, virtual instruction exception exception is raised if matching bit
+in scounteren is zero.
+
+Regards,
+Weiwei Li
+
+>   
+>       if (riscv_cpu_virt_enabled(env)) {
+> -        switch (csrno) {
+> -        case CSR_CYCLE:
+> -            if (!get_field(env->hcounteren, COUNTEREN_CY) &&
+> -                get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_TIME:
+> -            if (!get_field(env->hcounteren, COUNTEREN_TM) &&
+> -                get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_INSTRET:
+> -            if (!get_field(env->hcounteren, COUNTEREN_IR) &&
+> -                get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+> -            if (!get_field(env->hcounteren, 1 << ctr_index) &&
+> -                 get_field(env->mcounteren, 1 << ctr_index)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        }
+> -        if (rv32) {
+> -            switch (csrno) {
+> -            case CSR_CYCLEH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_CY) &&
+> -                    get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_TIMEH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_TM) &&
+> -                    get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_INSTRETH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_IR) &&
+> -                    get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+> -                if (!get_field(env->hcounteren, 1 << ctr_index) &&
+> -                     get_field(env->mcounteren, 1 << ctr_index)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            }
+> +        if (!get_field(env->mcounteren, ctr_mask)) {
+> +            /* The bit must be set in mcountern for HS mode access */
+> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +        } else if (!get_field(env->hcounteren, ctr_mask)) {
+> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>           }
+>       }
+>   #endif
+
+--------------A97CE9A6DA9AF4F3631AE4DB
+Content-Type: text/html; charset=gbk
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">在 2022/6/21 上午7:15, Atish Patra 写道:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20220620231603.2547260-10-atishp@rivosinc.com">
+      <pre class="moz-quote-pre" wrap="">All the hpmcounters and the fixed counters (CY, IR, TM) can be represented
+as a unified counter. Thus, the predicate function doesn't need handle each
+case separately.
+
+Simplify the predicate function so that we just handle things differently
+between RV32/RV64 and S/HS mode.
+
+Reviewed-by: Bin Meng <a class="moz-txt-link-rfc2396E" href="mailto:bmeng.cn@gmail.com">&lt;bmeng.cn@gmail.com&gt;</a>
+Acked-by: Alistair Francis <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>
+Signed-off-by: Atish Patra <a class="moz-txt-link-rfc2396E" href="mailto:atishp@rivosinc.com">&lt;atishp@rivosinc.com&gt;</a>
+---
+ target/riscv/csr.c | 112 +++++----------------------------------------
+ 1 file changed, 11 insertions(+), 101 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 2664ce265784..9367e2af9b90 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -74,6 +74,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     int ctr_index;
++    target_ulong ctr_mask;
+     int base_csrno = CSR_CYCLE;
+     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
+ 
+@@ -82,122 +83,31 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+         base_csrno += 0x80;
+     }
+     ctr_index = csrno - base_csrno;
++    ctr_mask = BIT(ctr_index);
+ 
+     if ((csrno &gt;= CSR_CYCLE &amp;&amp; csrno &lt;= CSR_INSTRET) ||
+         (csrno &gt;= CSR_CYCLEH &amp;&amp; csrno &lt;= CSR_INSTRETH)) {
+         goto skip_ext_pmu_check;
+     }
+ 
+-    if ((!cpu-&gt;cfg.pmu_num || !(cpu-&gt;pmu_avail_ctrs &amp; BIT(ctr_index)))) {
++    if ((!cpu-&gt;cfg.pmu_num || !(cpu-&gt;pmu_avail_ctrs &amp; ctr_mask))) {
+         /* No counter is enabled in PMU or the counter is out of range */
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+ skip_ext_pmu_check:
+ 
+-    if (env-&gt;priv == PRV_S) {
+-        switch (csrno) {
+-        case CSR_CYCLE:
+-            if (!get_field(env-&gt;mcounteren, COUNTEREN_CY)) {
+-                return RISCV_EXCP_ILLEGAL_INST;
+-            }
+-            break;
+-        case CSR_TIME:
+-            if (!get_field(env-&gt;mcounteren, COUNTEREN_TM)) {
+-                return RISCV_EXCP_ILLEGAL_INST;
+-            }
+-            break;
+-        case CSR_INSTRET:
+-            if (!get_field(env-&gt;mcounteren, COUNTEREN_IR)) {
+-                return RISCV_EXCP_ILLEGAL_INST;
+-            }
+-            break;
+-        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            if (!get_field(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {
+-                return RISCV_EXCP_ILLEGAL_INST;
+-            }
+-            break;
+-        }
+-        if (rv32) {
+-            switch (csrno) {
+-            case CSR_CYCLEH:
+-                if (!get_field(env-&gt;mcounteren, COUNTEREN_CY)) {
+-                    return RISCV_EXCP_ILLEGAL_INST;
+-                }
+-                break;
+-            case CSR_TIMEH:
+-                if (!get_field(env-&gt;mcounteren, COUNTEREN_TM)) {
+-                    return RISCV_EXCP_ILLEGAL_INST;
+-                }
+-                break;
+-            case CSR_INSTRETH:
+-                if (!get_field(env-&gt;mcounteren, COUNTEREN_IR)) {
+-                    return RISCV_EXCP_ILLEGAL_INST;
+-                }
+-                break;
+-            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                if (!get_field(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {
+-                    return RISCV_EXCP_ILLEGAL_INST;
+-                }
+-                break;
+-            }
+-        }
++    if (((env-&gt;priv == PRV_S) &amp;&amp; (!get_field(env-&gt;mcounteren, ctr_mask))) ||
++       ((env-&gt;priv == PRV_U) &amp;&amp; (!get_field(env-&gt;scounteren, ctr_mask)))) {
++        return RISCV_EXCP_ILLEGAL_INST;
+     }</pre>
+    </blockquote>
+    <p>Sorry. I didn't realize this simplification and sent a similar
+      patch to fix the problems in Xcounteren <br>
+    </p>
+    <p>related check I found when I tried to learn the patchset for
+      state enable extension two days ago. <br>
+    </p>
+    <p>I think there are several difference between our understanding,
+      following is my modifications:<br>
+    </p>
+    <pre>+    if (csrno &lt;= CSR_HPMCOUNTER31 &amp;&amp; csrno &gt;= CSR_CYCLE) {
++        field = 1 &lt;&lt; (csrno - CSR_CYCLE);
++    } else if (riscv_cpu_mxl(env) == MXL_RV32 &amp;&amp; csrno &lt;= CSR_HPMCOUNTER31H &amp;&amp;
++               csrno &gt;= CSR_CYCLEH) {
++        field = 1 &lt;&lt; (csrno - CSR_CYCLEH);
++    }
++
++    if (env-&gt;priv &lt; PRV_M &amp;&amp; !get_field(env-&gt;mcounteren, field)) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (riscv_cpu_virt_enabled(env) &amp;&amp; !get_field(env-&gt;hcounteren, field)) {
++        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++    }
++
++    if (riscv_has_ext(env, RVS) &amp;&amp; env-&gt;priv == PRV_U &amp;&amp;
++        !get_field(env-&gt;scounteren, field)) {
++        if (riscv_cpu_virt_enabled(env)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        } else {
++            return RISCV_EXCP_ILLEGAL_INST;
+         }
+     }
+
+
+1) For any less-privileged mode under M, illegal exception is raised if matching
+bit in mcounteren is zero.
+
+2) For VS/VU mode('H' extension is supported implicitly), virtual instruction
+exception is raised if matching bit in hcounteren is zero.
+
+3) scounteren csr only works in U/VU mode when 'S' extension is supported:
+   For U mode, illegal exception is raised if matching bit in scounteren is zero.
+   For VU mode, virtual instruction exception exception is raised if matching bit
+in scounteren is zero.
+
+Regards,
+Weiwei Li 
+</pre>
+    <blockquote type="cite"
+      cite="mid:20220620231603.2547260-10-atishp@rivosinc.com">
+      <pre class="moz-quote-pre" wrap="">
+ 
+     if (riscv_cpu_virt_enabled(env)) {
+-        switch (csrno) {
+-        case CSR_CYCLE:
+-            if (!get_field(env-&gt;hcounteren, COUNTEREN_CY) &amp;&amp;
+-                get_field(env-&gt;mcounteren, COUNTEREN_CY)) {
+-                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-            }
+-            break;
+-        case CSR_TIME:
+-            if (!get_field(env-&gt;hcounteren, COUNTEREN_TM) &amp;&amp;
+-                get_field(env-&gt;mcounteren, COUNTEREN_TM)) {
+-                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-            }
+-            break;
+-        case CSR_INSTRET:
+-            if (!get_field(env-&gt;hcounteren, COUNTEREN_IR) &amp;&amp;
+-                get_field(env-&gt;mcounteren, COUNTEREN_IR)) {
+-                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-            }
+-            break;
+-        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            if (!get_field(env-&gt;hcounteren, 1 &lt;&lt; ctr_index) &amp;&amp;
+-                 get_field(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {
+-                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-            }
+-            break;
+-        }
+-        if (rv32) {
+-            switch (csrno) {
+-            case CSR_CYCLEH:
+-                if (!get_field(env-&gt;hcounteren, COUNTEREN_CY) &amp;&amp;
+-                    get_field(env-&gt;mcounteren, COUNTEREN_CY)) {
+-                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-                }
+-                break;
+-            case CSR_TIMEH:
+-                if (!get_field(env-&gt;hcounteren, COUNTEREN_TM) &amp;&amp;
+-                    get_field(env-&gt;mcounteren, COUNTEREN_TM)) {
+-                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-                }
+-                break;
+-            case CSR_INSTRETH:
+-                if (!get_field(env-&gt;hcounteren, COUNTEREN_IR) &amp;&amp;
+-                    get_field(env-&gt;mcounteren, COUNTEREN_IR)) {
+-                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-                }
+-                break;
+-            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                if (!get_field(env-&gt;hcounteren, 1 &lt;&lt; ctr_index) &amp;&amp;
+-                     get_field(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {
+-                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-                }
+-                break;
+-            }
++        if (!get_field(env-&gt;mcounteren, ctr_mask)) {
++            /* The bit must be set in mcountern for HS mode access */
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++        } else if (!get_field(env-&gt;hcounteren, ctr_mask)) {
++            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+         }
+     }
+ #endif
+</pre>
+    </blockquote>
+  </body>
+</html>
+
+--------------A97CE9A6DA9AF4F3631AE4DB--
 
 
