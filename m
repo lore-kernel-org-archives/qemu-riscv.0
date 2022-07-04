@@ -1,100 +1,76 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o8Op1-0002pE-5l
-	for mharc-qemu-riscv@gnu.org; Mon, 04 Jul 2022 12:21:15 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36886)
+	id 1o8Szp-0005qT-3s
+	for mharc-qemu-riscv@gnu.org; Mon, 04 Jul 2022 16:48:41 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51264)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8Ooz-0002gm-Ed
- for qemu-riscv@nongnu.org; Mon, 04 Jul 2022 12:21:13 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:22619)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8Oow-0003PI-U3
- for qemu-riscv@nongnu.org; Mon, 04 Jul 2022 12:21:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1656951670;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dNG6EvBYvsu+Vu3UGBZ3dhBxzLsoA2k3lqqk942lSJw=;
- b=SqwXe816WqUjmmwOpsIcUdU0LkNM5MrnrXVozJXtF7m2TJfwE+DtbVL2/8JB4Gf2FUH5S6
- HkUA5PxHx1nvmVjpvAGd/vBvZbt2oIw7/pxhDHFPcrZUZEC9gPEVLZtWWbMzCgmJoSVZ1E
- qcgTluAuPiFnPqzZGUBpAF30GY+CK6I=
-Received: from mail-il1-f198.google.com (mail-il1-f198.google.com
- [209.85.166.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-77-5cdsB9vxNJ2auzJMmINZKg-1; Mon, 04 Jul 2022 12:21:01 -0400
-X-MC-Unique: 5cdsB9vxNJ2auzJMmINZKg-1
-Received: by mail-il1-f198.google.com with SMTP id
- j17-20020a056e02219100b002d955e89a54so4432121ila.11
- for <qemu-riscv@nongnu.org>; Mon, 04 Jul 2022 09:21:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <shorne@gmail.com>)
+ id 1o8SkQ-0006NG-FO; Mon, 04 Jul 2022 16:32:46 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630]:45602)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <shorne@gmail.com>)
+ id 1o8SkO-0005ig-P0; Mon, 04 Jul 2022 16:32:46 -0400
+Received: by mail-pl1-x630.google.com with SMTP id d5so9330826plo.12;
+ Mon, 04 Jul 2022 13:32:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=Nah4inMHP7Jt663zolAnZeMcm+3tMIIpWudIf33/EBE=;
+ b=CmyUwRqNJaA5apLApg26JjA6Y7VDllco1ia5ydGeGYQQh7IxC0gJqoTpR9gZNHNjY7
+ S1althdiFjK/sgjGCUURKC8gOfQD0GJ7rqljwlFk4xSH7gJs0negWgoCevAQpxmUOU2A
+ 1TrP627QpG2RcClBpyOB+/64UxkDCL9ntntNsxBIjGGUtRbeleHprilDZYC1zTyAfJsx
+ Sck5RUP8u3J8m9mLaApAEUrFUFl5fOjZogzcJrI8+kqfBLWyc8vOAlFj29qY8LshNv7V
+ Bf0tp4L1STo++s4hWwHAxe0n0l5AQhjK2ADFTHgWPvpZFz8k3CkwwmgdIoBwqx3476SW
+ Jyfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=dNG6EvBYvsu+Vu3UGBZ3dhBxzLsoA2k3lqqk942lSJw=;
- b=pHJXnz03DMr/c1RuQX0tVWFjRe4BD0bGdslf5PyfJCoRrEFt9SkBi2pXc0lTkE2RE5
- qlNBl00SoNNEgmO8bacF54742cXPH0WkZGDy5TzzI1SZEnu9+G/nMQIF10iDkc2xmJ1X
- P+nL+3x08NWBHMZPSodgAf6TCDctvAPEwXKynf305JpIXwtudmIfSyq1rjhYqod992J0
- OBi1XdfFy30OigRafnjcV7UGxkxGTNRiilrBnT81f+j9+b+qjEbfpJbYQmS8eZlPJiTb
- c4oXFfH5gMo5WjXBf5H0W6NjTJUxSb/bs3wUiqobmqhZL3k4IRQfHTF4v/io1B/mfwcC
- RJtw==
-X-Gm-Message-State: AJIora9Vw1tGZdeAcMi3KmS0QuQU+2ADqzmF41Z8mFW5ayscDXRZmQKt
- K4cbJuKjtuoRfPIeC+njx8IXgbohEVf4CoiUiuat1q17u5NKgRpE785B1N75QZdf9owu5qTqWAB
- 1FqT7kiyPq1WmGUcbw8foq4wMZ75G+S4=
-X-Received: by 2002:a92:cda5:0:b0:2d9:5bc5:6661 with SMTP id
- g5-20020a92cda5000000b002d95bc56661mr17833808ild.16.1656951661128; 
- Mon, 04 Jul 2022 09:21:01 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1s/+bFwP3NFLxCXEhXCB9tGBdMIf2+KPtL97PvzmTJwGF+P76N8wQkbecn53EgjuYLUeu309AQtlsK38/P5zxw=
-X-Received: by 2002:a92:cda5:0:b0:2d9:5bc5:6661 with SMTP id
- g5-20020a92cda5000000b002d95bc56661mr17833776ild.16.1656951660874; Mon, 04
- Jul 2022 09:21:00 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Nah4inMHP7Jt663zolAnZeMcm+3tMIIpWudIf33/EBE=;
+ b=gSr9K9NJ/qS1qFVNDteAyJF8i/k6dykDdhkwFymDqcdKf6DJi4ox5PrIh6PwXVNAvS
+ Qla/zUEbpbTKLnOasA38VT32Q5D9YCMqvqNYA4PdhzxfY9gww1rz8bYSaLHLAF5Lplhu
+ FljzJI4NEu+fueNh71wRmqnYj42YHViqE/SLV67izLvkMqFX5MPHueQCj2noiHv6V8xv
+ rb0FuG1DyVR6XACgbetQYhplM09riT4cSy1mDU16Fk4+hPrpGJZDd+SeIVSltJcFOqSf
+ 82P+ZpKEU3404vqtebHb9CeUUUOUH5rJK1WMhUIp4KODpZ6MIqPB+iFLCrWILs47S9n/
+ zLWA==
+X-Gm-Message-State: AJIora9nmn00xvYpEh8PTPpiQpEhiaMWCfcLDcsUWvltPEwv5AfuMrWn
+ mYtHFQf2TFJKLzY7XJ5/mkY=
+X-Google-Smtp-Source: AGRyM1u43xujI+aV4hwz1MPCSz5TcrI1sHpMwoQKZZj5xMLZ2La76gTvZKm6vqj5UWQcGQ3f9lT1fA==
+X-Received: by 2002:a17:90b:3842:b0:1ed:16aa:def6 with SMTP id
+ nl2-20020a17090b384200b001ed16aadef6mr39974438pjb.130.1656966763303; 
+ Mon, 04 Jul 2022 13:32:43 -0700 (PDT)
+Received: from localhost ([2409:10:24a0:4700:e8ad:216a:2a9d:6d0c])
+ by smtp.gmail.com with ESMTPSA id
+ r5-20020a17090b050500b001ec85441515sm13011217pjz.24.2022.07.04.13.32.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Jul 2022 13:32:42 -0700 (PDT)
+Date: Tue, 5 Jul 2022 05:32:41 +0900
+From: Stafford Horne <shorne@gmail.com>
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: QEMU Development <qemu-devel@nongnu.org>,
+ Openrisc <openrisc@lists.librecores.org>,
+ Laurent Vivier <lvivier@redhat.com>, Anup Patel <anup.patel@wdc.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ "open list:Goldfish RTC" <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH v2 03/11] goldfish_rtc: Add endianness property
+Message-ID: <YsNOaazY3HsxF+hj@antec>
+References: <20220703212823.10067-1-shorne@gmail.com>
+ <20220703212823.10067-4-shorne@gmail.com>
+ <272f1e82-ff1b-9a7a-931b-91472dd244bf@linaro.org>
 MIME-Version: 1.0
-References: <20220517113524.197910-1-afaria@redhat.com>
- <20220517113524.197910-2-afaria@redhat.com>
- <89089143-3f55-02c4-c881-95d356108569@redhat.com>
-In-Reply-To: <89089143-3f55-02c4-c881-95d356108569@redhat.com>
-From: Alberto Faria <afaria@redhat.com>
-Date: Mon, 4 Jul 2022 17:20:25 +0100
-Message-ID: <CAELaAXydmSu5EvAnbvVUcHW9dv2EN8p-DvEuyufQzhrO_V4AMg@mail.gmail.com>
-Subject: Re: [PATCH 01/18] block: Make blk_{pread,
- pwrite}() return 0 on success
-To: Hanna Reitz <hreitz@redhat.com>
-Cc: qemu-devel@nongnu.org, Andrew Jeffery <andrew@aj.id.au>, 
- Peter Maydell <peter.maydell@linaro.org>, qemu-block@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- qemu-ppc@nongnu.org, Eric Blake <eblake@redhat.com>, 
- Vladimir Sementsov-Ogievskiy <v.sementsov-og@mail.ru>,
- John Snow <jsnow@redhat.com>, 
- Stefan Hajnoczi <stefanha@redhat.com>, Jeff Cody <codyprime@gmail.com>,
- qemu-riscv@nongnu.org, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
- Joel Stanley <joel@jms.id.au>, Stefan Weil <sw@weilnetz.de>,
- Laurent Vivier <laurent@vivier.eu>, 
- "Denis V. Lunev" <den@openvz.org>, Juan Quintela <quintela@redhat.com>, 
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Niek Linnenbank <nieklinnenbank@gmail.com>, 
- Greg Kurz <groug@kaod.org>, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Kevin Wolf <kwolf@redhat.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-arm@nongnu.org,
- Fam Zheng <fam@euphon.net>, Alistair Francis <alistair@alistair23.me>,
- Beniamino Galvani <b.galvani@gmail.com>, 
- Bin Meng <bin.meng@windriver.com>, David Gibson <david@gibson.dropbear.id.au>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=afaria@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=afaria@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -28
-X-Spam_score: -2.9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <272f1e82-ff1b-9a7a-931b-91472dd244bf@linaro.org>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=shorne@gmail.com; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 04 Jul 2022 16:48:40 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -106,71 +82,61 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2022 16:21:13 -0000
+X-List-Received-Date: Mon, 04 Jul 2022 20:32:46 -0000
 
-On Mon, Jul 4, 2022 at 2:52 PM Hanna Reitz <hreitz@redhat.com> wrote:
-> There are a couple of places where you decided to replace =E2=80=9C*len=
-=E2=80=9D
-> variables that used to store the return value by a plain =E2=80=9Cret=E2=
-=80=9D. That
-> seems good to me, given how these functions no longer return length
-> values, but you haven=E2=80=99t done so consistently.  Below, I have note=
-d
-> places where this wasn=E2=80=99t done; I wonder why, but my R-b stands
-> regardless of whether you change them too or not.
+On Mon, Jul 04, 2022 at 03:29:57PM +0530, Richard Henderson wrote:
+> On 7/4/22 02:58, Stafford Horne wrote:
+> > -static const MemoryRegionOps goldfish_rtc_ops = {
+> > -    .read = goldfish_rtc_read,
+> > -    .write = goldfish_rtc_write,
+> > -    .endianness = DEVICE_NATIVE_ENDIAN,
+> > -    .valid = {
+> > -        .min_access_size = 4,
+> > -        .max_access_size = 4
+> > -    }
+> > +static const MemoryRegionOps goldfish_rtc_ops[3] = {
+> > +    [DEVICE_NATIVE_ENDIAN] = {
+> > +        .read = goldfish_rtc_read,
+> > +        .write = goldfish_rtc_write,
+> > +        .endianness = DEVICE_NATIVE_ENDIAN,
+> > +        .valid = {
+> > +            .min_access_size = 4,
+> > +            .max_access_size = 4
+> > +        }
+> > +    },
+> > +    [DEVICE_LITTLE_ENDIAN] = {
+> > +        .read = goldfish_rtc_read,
+> > +        .write = goldfish_rtc_write,
+> > +        .endianness = DEVICE_LITTLE_ENDIAN,
+> > +        .valid = {
+> > +            .min_access_size = 4,
+> > +            .max_access_size = 4
+> > +        }
+> > +    },
+> > +    [DEVICE_BIG_ENDIAN] = {
+> > +        .read = goldfish_rtc_read,
+> > +        .write = goldfish_rtc_write,
+> > +        .endianness = DEVICE_BIG_ENDIAN,
+> > +        .valid = {
+> > +            .min_access_size = 4,
+> > +            .max_access_size = 4
+> > +        }
+> > +    },
+> >   };
+> 
+> You don't need 3 copies, only big and little.
+> 
+> > +static Property goldfish_rtc_properties[] = {
+> > +    DEFINE_PROP_UINT8("endianness", GoldfishRTCState, endianness,
+> > +                      DEVICE_NATIVE_ENDIAN),
+> > +    DEFINE_PROP_END_OF_LIST(),
+> > +};
+> 
+> ... and I think the clear desire for default is little-endian.  I would make
+> the property be bool, and add a comment that this is only for m68k
+> compatibility, so don't use it in new code.
 
-Thanks, this was just an oversight on my part. I'll fix it.
+Yeah, that makes sense.
 
-> > diff --git a/qemu-img.c b/qemu-img.c
-> > index 4cf4d2423d..9d98ef63ac 100644
-> > --- a/qemu-img.c
-> > +++ b/qemu-img.c
-> > @@ -5120,30 +5120,27 @@ static int img_dd(int argc, char **argv)
-> >       in.buf =3D g_new(uint8_t, in.bsz);
-> >
-> >       for (out_pos =3D 0; in_pos < size; block_count++) {
-> > -        int in_ret, out_ret;
-> > +        int bytes, in_ret, out_ret;
-> >
-> > -        if (in_pos + in.bsz > size) {
-> > -            in_ret =3D blk_pread(blk1, in_pos, in.buf, size - in_pos);
-> > -        } else {
-> > -            in_ret =3D blk_pread(blk1, in_pos, in.buf, in.bsz);
-> > -        }
-> > +        bytes =3D (in_pos + in.bsz > size) ? size - in_pos : in.bsz;
-> > +
-> > +        in_ret =3D blk_pread(blk1, in_pos, in.buf, bytes);
-> >           if (in_ret < 0) {
-> >               error_report("error while reading from input image file: =
-%s",
-> >                            strerror(-in_ret));
-> >               ret =3D -1;
-> >               goto out;
-> >           }
-> > -        in_pos +=3D in_ret;
-> > -
-> > -        out_ret =3D blk_pwrite(blk2, out_pos, in.buf, in_ret, 0);
-> > +        in_pos +=3D bytes;
-> >
-> > +        out_ret =3D blk_pwrite(blk2, out_pos, in.buf, bytes, 0);
-> >           if (out_ret < 0) {
-> >               error_report("error while writing to output image file: %=
-s",
-> >                            strerror(-out_ret));
-> >               ret =3D -1;
-> >               goto out;
-> >           }
-> > -        out_pos +=3D out_ret;
-> > +        out_pos +=3D bytes;
-> >       }
-> >
-> >   out:
->
-> We could use this opportunity to drop in_ret and out_ret altogether (but
-> we can also decide not to).
-
-Dropping them sounds good to me.
-
-Alberto
-
+-Stafford
 
