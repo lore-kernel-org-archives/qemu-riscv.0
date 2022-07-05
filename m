@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o8lEu-0005UB-OV
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Jul 2022 12:17:28 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33798)
+	id 1o8lF5-0005ge-U6
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Jul 2022 12:17:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33922)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEn-0005PS-G3
- for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:17:22 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:37882)
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEz-0005aQ-F4
+ for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:17:34 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:41768)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEk-00066Q-05
- for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:17:19 -0400
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEw-000697-LS
+ for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:17:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657037837;
+ s=mimecast20190719; t=1657037849;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s5NFGNgolZ/YljHW0KwUSMv6ruJwU5YNYfxBcIZUuwM=;
- b=EHmIo+hFfpANJKUpJrDiC1RIzH5B/hw09YdEltVA02mD/EESxqOcVSVRBS0LARIhUyvvzH
- Q/JU0SJXJI/pSoA3pg2vbVjZdu8Lxz+PGroenAvKv7EgBOIaaP9XkhsHZils3wWQshOmiR
- 7PL/7Fy8O7QOwTgAiZHXTGM1jfJdpy0=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=uQ31Mqr3+L44dXIdkYrYq7URkNnq98G9mcflC8QTMPo=;
+ b=GFHWCC983AnhNXoYMjVkGAOptLYyP1gaC/1R3CqnNl03eyLemtUNUlV8trM1D5KoDDtMNb
+ gG7KYMeYM74iPQJITMM4W7LfmanVOgf7P7rgov2yBPcqSuXzWVUeHCdI1h77AzMpc40fzQ
+ i9HVqpm7lUDdVGJ0skuYNUlxm3CQxF0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-147-mDdAtetyNiShvKjXz3lyiw-1; Tue, 05 Jul 2022 12:17:11 -0400
-X-MC-Unique: mDdAtetyNiShvKjXz3lyiw-1
+ us-mta-507-1rG0WjcnMM2ciP70WaLBjg-1; Tue, 05 Jul 2022 12:17:26 -0400
+X-MC-Unique: 1rG0WjcnMM2ciP70WaLBjg-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
  [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 65C071C1395B;
- Tue,  5 Jul 2022 16:16:59 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 47AAD8F61CD;
+ Tue,  5 Jul 2022 16:17:06 +0000 (UTC)
 Received: from localhost.localdomain (unknown [10.39.192.13])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 5401E140EBE4;
- Tue,  5 Jul 2022 16:16:53 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BD656140EBE4;
+ Tue,  5 Jul 2022 16:16:59 +0000 (UTC)
 From: Alberto Faria <afaria@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Beniamino Galvani <b.galvani@gmail.com>,
@@ -59,10 +59,10 @@ Cc: Beniamino Galvani <b.galvani@gmail.com>,
  qemu-block@nongnu.org, "Denis V. Lunev" <den@openvz.org>,
  qemu-arm@nongnu.org, Alberto Faria <afaria@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH v2 13/18] block: Implement blk_pdiscard() using
+Subject: [PATCH v2 14/18] block: Implement blk_flush() using
  generated_co_wrapper
-Date: Tue,  5 Jul 2022 17:15:21 +0100
-Message-Id: <20220705161527.1054072-14-afaria@redhat.com>
+Date: Tue,  5 Jul 2022 17:15:22 +0100
+Message-Id: <20220705161527.1054072-15-afaria@redhat.com>
 In-Reply-To: <20220705161527.1054072-1-afaria@redhat.com>
 References: <20220705161527.1054072-1-afaria@redhat.com>
 MIME-Version: 1.0
@@ -89,75 +89,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jul 2022 16:17:23 -0000
+X-List-Received-Date: Tue, 05 Jul 2022 16:17:34 -0000
 
 Signed-off-by: Alberto Faria <afaria@redhat.com>
 Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
 Reviewed-by: Hanna Reitz <hreitz@redhat.com>
 ---
- block/block-backend.c             | 12 ------------
- block/coroutines.h                |  3 ---
- include/sysemu/block-backend-io.h |  3 ++-
- 3 files changed, 2 insertions(+), 16 deletions(-)
+ block/block-backend.c             | 11 -----------
+ block/coroutines.h                |  2 --
+ include/sysemu/block-backend-io.h |  2 +-
+ 3 files changed, 1 insertion(+), 14 deletions(-)
 
 diff --git a/block/block-backend.c b/block/block-backend.c
-index 8129259e50..823c98a031 100644
+index 823c98a031..0718441b37 100644
 --- a/block/block-backend.c
 +++ b/block/block-backend.c
-@@ -1715,18 +1715,6 @@ int coroutine_fn blk_co_pdiscard(BlockBackend *blk, int64_t offset,
+@@ -1756,17 +1756,6 @@ int coroutine_fn blk_co_flush(BlockBackend *blk)
      return ret;
  }
  
--int blk_pdiscard(BlockBackend *blk, int64_t offset, int64_t bytes)
+-int blk_flush(BlockBackend *blk)
 -{
 -    int ret;
--    IO_OR_GS_CODE();
 -
 -    blk_inc_in_flight(blk);
--    ret = blk_do_pdiscard(blk, offset, bytes);
+-    ret = blk_do_flush(blk);
 -    blk_dec_in_flight(blk);
 -
 -    return ret;
 -}
 -
- /* To be called between exactly one pair of blk_inc/dec_in_flight() */
- int coroutine_fn blk_co_do_flush(BlockBackend *blk)
+ void blk_drain(BlockBackend *blk)
  {
+     BlockDriverState *bs = blk_bs(blk);
 diff --git a/block/coroutines.h b/block/coroutines.h
-index 94fd283f62..2693ecabfb 100644
+index 2693ecabfb..7e94b9fa83 100644
 --- a/block/coroutines.h
 +++ b/block/coroutines.h
-@@ -110,9 +110,6 @@ nbd_do_establish_connection(BlockDriverState *bs, bool blocking, Error **errp);
+@@ -110,6 +110,4 @@ nbd_do_establish_connection(BlockDriverState *bs, bool blocking, Error **errp);
  int generated_co_wrapper
  blk_do_ioctl(BlockBackend *blk, unsigned long int req, void *buf);
  
--int generated_co_wrapper
--blk_do_pdiscard(BlockBackend *blk, int64_t offset, int64_t bytes);
+-int generated_co_wrapper blk_do_flush(BlockBackend *blk);
 -
- int generated_co_wrapper blk_do_flush(BlockBackend *blk);
- 
  #endif /* BLOCK_COROUTINES_H */
 diff --git a/include/sysemu/block-backend-io.h b/include/sysemu/block-backend-io.h
-index 5ce9b80023..5c56737453 100644
+index 5c56737453..e6af0d0ed0 100644
 --- a/include/sysemu/block-backend-io.h
 +++ b/include/sysemu/block-backend-io.h
-@@ -160,6 +160,8 @@ static inline int coroutine_fn blk_co_pwrite(BlockBackend *blk, int64_t offset,
-     return blk_co_pwritev(blk, offset, bytes, &qiov, flags);
- }
- 
-+int generated_co_wrapper blk_pdiscard(BlockBackend *blk, int64_t offset,
-+                                      int64_t bytes);
+@@ -165,8 +165,8 @@ int generated_co_wrapper blk_pdiscard(BlockBackend *blk, int64_t offset,
  int coroutine_fn blk_co_pdiscard(BlockBackend *blk, int64_t offset,
                                   int64_t bytes);
  
-@@ -173,7 +175,6 @@ int generated_co_wrapper blk_pwrite_compressed(BlockBackend *blk,
-                                                const void *buf);
- int coroutine_fn blk_co_pwrite_compressed(BlockBackend *blk, int64_t offset,
-                                           int64_t bytes, const void *buf);
--int blk_pdiscard(BlockBackend *blk, int64_t offset, int64_t bytes);
- int generated_co_wrapper blk_pwrite_zeroes(BlockBackend *blk, int64_t offset,
-                                            int64_t bytes,
-                                            BdrvRequestFlags flags);
++int generated_co_wrapper blk_flush(BlockBackend *blk);
+ int coroutine_fn blk_co_flush(BlockBackend *blk);
+-int blk_flush(BlockBackend *blk);
+ 
+ int blk_ioctl(BlockBackend *blk, unsigned long int req, void *buf);
+ 
 -- 
 2.36.1
 
