@@ -1,38 +1,38 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o8lEN-0004q7-Jh
-	for mharc-qemu-riscv@gnu.org; Tue, 05 Jul 2022 12:16:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33418)
+	id 1o8lET-0004vR-Az
+	for mharc-qemu-riscv@gnu.org; Tue, 05 Jul 2022 12:17:01 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33340)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEH-0004lk-7J
- for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:16:54 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:42900)
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEB-0004hn-SB
+ for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:16:45 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124]:28911)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lEF-0005wY-JH
- for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:16:48 -0400
+ (Exim 4.90_1) (envelope-from <afaria@redhat.com>) id 1o8lE9-0005v1-GQ
+ for qemu-riscv@nongnu.org; Tue, 05 Jul 2022 12:16:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657037807;
+ s=mimecast20190719; t=1657037800;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Yrczt18CIsKinv0djEnp9mUn3Lte5uVnCr+kSFyKa5M=;
- b=gdtkQ7JAqlQHUvbHFa8fvVAOWRVGm55pBPPXjwy+yoGnPtr3pzEmjrrVKJhtp4/Blm5/wG
- GTdkWTJroKSzpJIta1D2fTABPT9m0E5KYIvHSb6TBj87jySxTeix6EjFeooSHjVwFQAAgN
- MUme3yyLlEGTjrvl7YMW3CpiuWNPBTY=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=XPlxjSlgg4LjdkETGI4j9CGFdwg8O7yWt9R9YSzC6QQ=;
+ b=bklXeFNARlkcSwVFMeWcxwY3QMtPInFssnQS2VduRI8a5yT9jvQxSwN6SfDHJakCIlpP/I
+ dB+IWpaNB30sk9xC1QQMr+9XvFPsDZd66F7YeabOxTqg2020OEZx1SMBAH+oo/kR39OR1V
+ C96aB7BEDkP5aFrF/UXctG6kC1cxc9E=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-61-O0KD5JypNgmuMg1Sir-xoA-1; Tue, 05 Jul 2022 12:16:42 -0400
-X-MC-Unique: O0KD5JypNgmuMg1Sir-xoA-1
+ us-mta-615-flA4GdcUOimJA07mFFCWIQ-1; Tue, 05 Jul 2022 12:16:36 -0400
+X-MC-Unique: flA4GdcUOimJA07mFFCWIQ-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
  [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 49AA480390C;
- Tue,  5 Jul 2022 16:16:41 +0000 (UTC)
-Received: from localhost.localdomain (unknown [10.39.192.13])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C67131415116;
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6867C29DD9B6;
  Tue,  5 Jul 2022 16:16:35 +0000 (UTC)
+Received: from localhost.localdomain (unknown [10.39.192.13])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E574D140EBE4;
+ Tue,  5 Jul 2022 16:16:29 +0000 (UTC)
 From: Alberto Faria <afaria@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Beniamino Galvani <b.galvani@gmail.com>,
@@ -59,9 +59,10 @@ Cc: Beniamino Galvani <b.galvani@gmail.com>,
  qemu-block@nongnu.org, "Denis V. Lunev" <den@openvz.org>,
  qemu-arm@nongnu.org, Alberto Faria <afaria@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH v2 10/18] block: Change blk_pwrite_compressed() param order
-Date: Tue,  5 Jul 2022 17:15:18 +0100
-Message-Id: <20220705161527.1054072-11-afaria@redhat.com>
+Subject: [PATCH v2 09/18] block: Export blk_pwritev_part() in
+ block-backend-io.h
+Date: Tue,  5 Jul 2022 17:15:17 +0100
+Message-Id: <20220705161527.1054072-10-afaria@redhat.com>
 In-Reply-To: <20220705161527.1054072-1-afaria@redhat.com>
 References: <20220705161527.1054072-1-afaria@redhat.com>
 MIME-Version: 1.0
@@ -75,7 +76,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.082,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,76 +89,113 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jul 2022 16:16:54 -0000
+X-List-Received-Date: Tue, 05 Jul 2022 16:16:45 -0000
 
-Swap 'buf' and 'bytes' around for consistency with other I/O functions.
+Also convert it into a generated_co_wrapper.
 
 Signed-off-by: Alberto Faria <afaria@redhat.com>
 Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
 Reviewed-by: Hanna Reitz <hreitz@redhat.com>
 ---
- block/block-backend.c             | 4 ++--
- include/sysemu/block-backend-io.h | 4 ++--
- qemu-img.c                        | 2 +-
- qemu-io-cmds.c                    | 2 +-
- 4 files changed, 6 insertions(+), 6 deletions(-)
+ block/block-backend.c             | 14 --------------
+ block/coroutines.h                |  5 -----
+ include/sysemu/block-backend-io.h |  4 ++++
+ tests/unit/test-block-iothread.c  | 19 +++++++++++++++++++
+ 4 files changed, 23 insertions(+), 19 deletions(-)
 
 diff --git a/block/block-backend.c b/block/block-backend.c
-index 35bf35aadd..ddb1d4e179 100644
+index 3920e1f45e..35bf35aadd 100644
 --- a/block/block-backend.c
 +++ b/block/block-backend.c
-@@ -2324,8 +2324,8 @@ int coroutine_fn blk_co_pwrite_zeroes(BlockBackend *blk, int64_t offset,
-                           flags | BDRV_REQ_ZERO_WRITE);
+@@ -1407,20 +1407,6 @@ int coroutine_fn blk_co_pwritev(BlockBackend *blk, int64_t offset,
+     return blk_co_pwritev_part(blk, offset, bytes, qiov, 0, flags);
  }
  
--int blk_pwrite_compressed(BlockBackend *blk, int64_t offset, const void *buf,
--                          int64_t bytes)
-+int blk_pwrite_compressed(BlockBackend *blk, int64_t offset, int64_t bytes,
-+                          const void *buf)
- {
-     QEMUIOVector qiov = QEMU_IOVEC_INIT_BUF(qiov, buf, bytes);
-     IO_OR_GS_CODE();
+-static int coroutine_fn blk_pwritev_part(BlockBackend *blk, int64_t offset,
+-                                         int64_t bytes,
+-                                         QEMUIOVector *qiov, size_t qiov_offset,
+-                                         BdrvRequestFlags flags)
+-{
+-    int ret;
+-
+-    blk_inc_in_flight(blk);
+-    ret = blk_do_pwritev_part(blk, offset, bytes, qiov, qiov_offset, flags);
+-    blk_dec_in_flight(blk);
+-
+-    return ret;
+-}
+-
+ typedef struct BlkRwCo {
+     BlockBackend *blk;
+     int64_t offset;
+diff --git a/block/coroutines.h b/block/coroutines.h
+index 85423f8db6..94fd283f62 100644
+--- a/block/coroutines.h
++++ b/block/coroutines.h
+@@ -107,11 +107,6 @@ bdrv_common_block_status_above(BlockDriverState *bs,
+ int generated_co_wrapper
+ nbd_do_establish_connection(BlockDriverState *bs, bool blocking, Error **errp);
+ 
+-int generated_co_wrapper
+-blk_do_pwritev_part(BlockBackend *blk, int64_t offset, int64_t bytes,
+-                    QEMUIOVector *qiov, size_t qiov_offset,
+-                    BdrvRequestFlags flags);
+-
+ int generated_co_wrapper
+ blk_do_ioctl(BlockBackend *blk, unsigned long int req, void *buf);
+ 
 diff --git a/include/sysemu/block-backend-io.h b/include/sysemu/block-backend-io.h
-index 31ebd8b6cf..c64207cdcb 100644
+index 29954a466c..31ebd8b6cf 100644
 --- a/include/sysemu/block-backend-io.h
 +++ b/include/sysemu/block-backend-io.h
-@@ -168,8 +168,8 @@ int blk_flush(BlockBackend *blk);
+@@ -121,6 +121,10 @@ int generated_co_wrapper blk_preadv(BlockBackend *blk, int64_t offset,
+ int coroutine_fn blk_co_preadv(BlockBackend *blk, int64_t offset,
+                                int64_t bytes, QEMUIOVector *qiov,
+                                BdrvRequestFlags flags);
++int generated_co_wrapper blk_pwritev_part(BlockBackend *blk, int64_t offset,
++                                          int64_t bytes, QEMUIOVector *qiov,
++                                          size_t qiov_offset,
++                                          BdrvRequestFlags flags);
+ int coroutine_fn blk_co_pwritev_part(BlockBackend *blk, int64_t offset,
+                                      int64_t bytes,
+                                      QEMUIOVector *qiov, size_t qiov_offset,
+diff --git a/tests/unit/test-block-iothread.c b/tests/unit/test-block-iothread.c
+index 2fa1248445..274e9e3653 100644
+--- a/tests/unit/test-block-iothread.c
++++ b/tests/unit/test-block-iothread.c
+@@ -183,6 +183,21 @@ static void test_sync_op_blk_preadv_part(BlockBackend *blk)
+     g_assert_cmpint(ret, ==, -EIO);
+ }
  
- int blk_ioctl(BlockBackend *blk, unsigned long int req, void *buf);
- 
--int blk_pwrite_compressed(BlockBackend *blk, int64_t offset, const void *buf,
--                          int64_t bytes);
-+int blk_pwrite_compressed(BlockBackend *blk, int64_t offset, int64_t bytes,
-+                          const void *buf);
- int blk_pdiscard(BlockBackend *blk, int64_t offset, int64_t bytes);
- int blk_pwrite_zeroes(BlockBackend *blk, int64_t offset,
-                       int64_t bytes, BdrvRequestFlags flags);
-diff --git a/qemu-img.c b/qemu-img.c
-index df607a2a2e..7d4b33b3da 100644
---- a/qemu-img.c
-+++ b/qemu-img.c
-@@ -2114,7 +2114,7 @@ static int convert_do_copy(ImgConvertState *s)
- 
-     if (s->compressed && !s->ret) {
-         /* signal EOF to align */
--        ret = blk_pwrite_compressed(s->target, 0, NULL, 0);
-+        ret = blk_pwrite_compressed(s->target, 0, 0, NULL);
-         if (ret < 0) {
-             return ret;
-         }
-diff --git a/qemu-io-cmds.c b/qemu-io-cmds.c
-index c8cbaed0cd..952dc940f1 100644
---- a/qemu-io-cmds.c
-+++ b/qemu-io-cmds.c
-@@ -631,7 +631,7 @@ static int do_write_compressed(BlockBackend *blk, char *buf, int64_t offset,
-         return -ERANGE;
-     }
- 
--    ret = blk_pwrite_compressed(blk, offset, buf, bytes);
-+    ret = blk_pwrite_compressed(blk, offset, bytes, buf);
-     if (ret < 0) {
-         return ret;
-     }
++static void test_sync_op_blk_pwritev_part(BlockBackend *blk)
++{
++    uint8_t buf[512] = { 0 };
++    QEMUIOVector qiov = QEMU_IOVEC_INIT_BUF(qiov, buf, sizeof(buf));
++    int ret;
++
++    /* Success */
++    ret = blk_pwritev_part(blk, 0, sizeof(buf), &qiov, 0, 0);
++    g_assert_cmpint(ret, ==, 0);
++
++    /* Early error: Negative offset */
++    ret = blk_pwritev_part(blk, -2, sizeof(buf), &qiov, 0, 0);
++    g_assert_cmpint(ret, ==, -EIO);
++}
++
+ static void test_sync_op_load_vmstate(BdrvChild *c)
+ {
+     uint8_t buf[512];
+@@ -358,6 +373,10 @@ const SyncOpTest sync_op_tests[] = {
+         .name   = "/sync-op/preadv_part",
+         .fn     = NULL,
+         .blkfn  = test_sync_op_blk_preadv_part,
++    }, {
++        .name   = "/sync-op/pwritev_part",
++        .fn     = NULL,
++        .blkfn  = test_sync_op_blk_pwritev_part,
+     }, {
+         .name   = "/sync-op/load_vmstate",
+         .fn     = test_sync_op_load_vmstate,
 -- 
 2.36.1
 
