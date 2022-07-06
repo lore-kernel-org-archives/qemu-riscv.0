@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o90XH-0007SN-9p
-	for mharc-qemu-riscv@gnu.org; Wed, 06 Jul 2022 04:37:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52184)
+	id 1o91IR-0005Gv-Da
+	for mharc-qemu-riscv@gnu.org; Wed, 06 Jul 2022 05:26:14 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33596)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o90XE-0007Or-EC
- for qemu-riscv@nongnu.org; Wed, 06 Jul 2022 04:37:24 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:42347)
+ (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o91IL-00057z-Lh
+ for qemu-riscv@nongnu.org; Wed, 06 Jul 2022 05:26:06 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:48154)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o90XB-0001Bb-RL
- for qemu-riscv@nongnu.org; Wed, 06 Jul 2022 04:37:23 -0400
+ (Exim 4.90_1) (envelope-from <hreitz@redhat.com>) id 1o91IF-0000kU-T0
+ for qemu-riscv@nongnu.org; Wed, 06 Jul 2022 05:26:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657096641;
+ s=mimecast20190719; t=1657099558;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZCrblR5e75Sx5FizphwHPCHa4vRuYb/Ub/Stwr788FY=;
- b=ZocWAx0ejlGAzlP1l6e1FvZZn3d3ZpE/fJrWDWtWlsKGjMS+XUMKREQYiWsP5ZDL+FXaYw
- s12Mh7+pk5BgclKE2uwgNdnZ6ryFFP0x4wOG2IuYRlCRCpNqK564qPkqPwsxauKtwoKjea
- VlqeGhqj4vNG8lc3tGi+mRJKN6EBIek=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Z3KVOETwHBpgBlP/XTrW1zbDvukK5C5SpzilgdqqDrw=;
+ b=MowxF38MOjrOQ+TuIZY/A3pyT9XxNMWj1H6kJpe8fvfE9d/G5VOGOzoTRooktku/B++lFD
+ jOLoenBqUvQVxpFDSlFAWTS1i9wSW27rEDzenwIqwWGbf0sUR26GA9rUMkWXsSfn7vDV77
+ pLQMmvu2ZqXS5ImQEVOQUDomJXzyglE=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-470-5FSRdrlcNxmbAbPTMgqdkQ-1; Wed, 06 Jul 2022 04:37:19 -0400
-X-MC-Unique: 5FSRdrlcNxmbAbPTMgqdkQ-1
-Received: by mail-ej1-f70.google.com with SMTP id
- go10-20020a1709070d8a00b00722e8ee15b4so3573300ejc.22
- for <qemu-riscv@nongnu.org>; Wed, 06 Jul 2022 01:37:19 -0700 (PDT)
+ us-mta-626-yvQ6er0TMhi4IDTM8387Zw-1; Wed, 06 Jul 2022 05:25:57 -0400
+X-MC-Unique: yvQ6er0TMhi4IDTM8387Zw-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ n8-20020a05640205c800b00434fb0c150cso11113886edx.19
+ for <qemu-riscv@nongnu.org>; Wed, 06 Jul 2022 02:25:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
  :content-language:to:cc:references:from:in-reply-to
  :content-transfer-encoding;
- bh=ZCrblR5e75Sx5FizphwHPCHa4vRuYb/Ub/Stwr788FY=;
- b=MhMP68kzR1mn1FuRIpfNmRSSJqS6sW+rLpJ6dtrkTwjIyxiOWbou8XToQ9n1UOMz74
- W6YXPauCkYRQnrtIh8aXbQg2wa2PE02gRLEF9jObKX0s4o8RQK0TrAEp+u/MZlzEOyw/
- M5wJFVBqguAv1JgxlHNyoLFv2MI68O+mWM9eD76t9XnFuqBqWGq+XdmkNg0CzO6HWkWa
- b7LtWnfklw3+qLJKOgsrT3gvIX4UtdlhiLDY8n0XVawGwsT0dN8qAnq1dwDJVjwIS/gd
- Rmg3KP6CXtz/zZPq6wpYTsCV+iYigKJB56qdHpkoBShTk3/Pez97r1hdPbKdQckS/qkE
- /kNg==
-X-Gm-Message-State: AJIora92kEbh/jDHVqXoEeAoGU6huKTBO8iLJ4Or2lhraVfd3/YLN+aS
- oqTuypGz4rHFJYc2Mq5KfQQ5wQasPkDOtYsNGsU/hBpfYliczp0UDp/cVq/Nt0Py4nhQk1LyXc1
- mr5ZzUo2EUDwnB0U=
-X-Received: by 2002:a17:907:78ce:b0:726:a66e:eba1 with SMTP id
- kv14-20020a17090778ce00b00726a66eeba1mr36833112ejc.415.1657096638873; 
- Wed, 06 Jul 2022 01:37:18 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1tpoAx3JeURa60gKtgyp2NQ8Sq9WLvyQDxukCX0S2QItgGPcvBO9mCfqoztOn4N0+JjK5Rz1g==
-X-Received: by 2002:a17:907:78ce:b0:726:a66e:eba1 with SMTP id
- kv14-20020a17090778ce00b00726a66eeba1mr36833068ejc.415.1657096638595; 
- Wed, 06 Jul 2022 01:37:18 -0700 (PDT)
+ bh=Z3KVOETwHBpgBlP/XTrW1zbDvukK5C5SpzilgdqqDrw=;
+ b=4qe2yDLI/EtIFrkr7P6ySyGA399tycmSRF00KANANABXCdzFd0ft4cgTHl4SuGHMMP
+ FOQkoRW3XztF0dE2ifcPGZc8ISrhn6xmcVeWNsnqwF9n1NGlr2GT1+2W5HCf38heLuiM
+ 5XxG2Fjfly12Lip8/7FTVJEBdPSAvJx9OpgB20eDb7K5FN0UIjt22EPgw4lWGfn9kF5F
+ c93w5TYvyogxu2FNpmFGMdhoE//VATG1wuN6xe9xaqfFG5pB3TBaUBFzXTqdm9RQmoAA
+ 4IJTYGhmv4QOb0M2wUjJZGxnw5LwTGA7vIOCIHJSFYf78gPuXZr2HHvFOkkhDaUehp05
+ tfdg==
+X-Gm-Message-State: AJIora9ake8Aiutdkr0irouFDwUjppSClyFXCguF0g/EgQ3q8374ZEj2
+ ngwMnHt64Qm79PDekNtvW5FCFEv96kz0guj/ueLnkLVOwuPwV6MoqqpfVyzEYxjNEwYWoQQYj//
+ zCSxjnEbm4M7rhrA=
+X-Received: by 2002:a05:6402:40cb:b0:43a:8a99:225f with SMTP id
+ z11-20020a05640240cb00b0043a8a99225fmr2712415edb.414.1657099556729; 
+ Wed, 06 Jul 2022 02:25:56 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1us0GJlitB3X2tAD80PUBMzFeEaNAIYz6zQ7JX7QS8uxbilC2RZ3V7rjNLxjxwQsX2I4IIO7Q==
+X-Received: by 2002:a05:6402:40cb:b0:43a:8a99:225f with SMTP id
+ z11-20020a05640240cb00b0043a8a99225fmr2712360edb.414.1657099556446; 
+ Wed, 06 Jul 2022 02:25:56 -0700 (PDT)
 Received: from ?IPV6:2a02:8071:5056:d40:63e3:25a7:c1a1:4455?
  ([2a02:8071:5056:d40:63e3:25a7:c1a1:4455])
  by smtp.gmail.com with ESMTPSA id
- a4-20020a170906274400b00726b03f83a0sm12717489ejd.33.2022.07.06.01.37.15
+ b18-20020a1709063cb200b0072afb23fb9esm532601ejh.16.2022.07.06.02.25.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Jul 2022 01:37:18 -0700 (PDT)
-Message-ID: <a0c487f3-c111-44cc-0f4a-c1ecbe85d769@redhat.com>
-Date: Wed, 6 Jul 2022 10:37:14 +0200
+ Wed, 06 Jul 2022 02:25:56 -0700 (PDT)
+Message-ID: <4f6c4f22-d446-5fc9-d7e3-9fbd2bf32da4@redhat.com>
+Date: Wed, 6 Jul 2022 11:25:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
-Subject: Re: [PATCH v2 01/18] block: Make blk_{pread,pwrite}() return 0 on
- success
+Subject: Re: [PATCH v2 17/18] block: Reorganize some declarations in
+ block-backend-io.h
 To: Alberto Faria <afaria@redhat.com>, qemu-devel@nongnu.org
 Cc: Beniamino Galvani <b.galvani@gmail.com>,
  Juan Quintela <quintela@redhat.com>,
@@ -82,11 +82,12 @@ Cc: Beniamino Galvani <b.galvani@gmail.com>,
  qemu-riscv@nongnu.org, Greg Kurz <groug@kaod.org>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-block@nongnu.org,
- "Denis V. Lunev" <den@openvz.org>, qemu-arm@nongnu.org
+ "Denis V. Lunev" <den@openvz.org>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>
 References: <20220705161527.1054072-1-afaria@redhat.com>
- <20220705161527.1054072-2-afaria@redhat.com>
+ <20220705161527.1054072-18-afaria@redhat.com>
 From: Hanna Reitz <hreitz@redhat.com>
-In-Reply-To: <20220705161527.1054072-2-afaria@redhat.com>
+In-Reply-To: <20220705161527.1054072-18-afaria@redhat.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=hreitz@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -115,30 +116,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2022 08:37:24 -0000
+X-List-Received-Date: Wed, 06 Jul 2022 09:26:06 -0000
 
 On 05.07.22 18:15, Alberto Faria wrote:
-> They currently return the value of their 'bytes' parameter on success.
+> Keep generated_co_wrapper and coroutine_fn pairs together. This should
+> make it clear that each I/O function has these two versions.
 >
-> Make them return 0 instead, for consistency with other I/O functions and
-> in preparation to implement them using generated_co_wrapper. This also
-> makes it clear that short reads/writes are not possible.
+> Also move blk_co_{pread,pwrite}()'s implementations out of the header
+> file for consistency.
 >
 > Signed-off-by: Alberto Faria <afaria@redhat.com>
+> Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
 > ---
->   block.c                          |  8 +++++---
->   block/block-backend.c            |  7 ++-----
->   block/qcow.c                     |  6 +++---
->   hw/block/m25p80.c                |  2 +-
->   hw/misc/mac_via.c                |  4 ++--
->   hw/misc/sifive_u_otp.c           |  2 +-
->   hw/nvram/eeprom_at24c.c          |  8 ++++----
->   hw/nvram/spapr_nvram.c           | 14 +++++++-------
->   hw/ppc/pnv_pnor.c                |  2 +-
->   qemu-img.c                       | 25 +++++++++----------------
->   qemu-io-cmds.c                   | 18 ++++++++++++------
->   tests/unit/test-block-iothread.c |  4 ++--
->   12 files changed, 49 insertions(+), 51 deletions(-)
+>   block/block-backend.c             | 22 +++++++++
+>   include/sysemu/block-backend-io.h | 77 +++++++++++++------------------
+>   2 files changed, 54 insertions(+), 45 deletions(-)
 
 Reviewed-by: Hanna Reitz <hreitz@redhat.com>
 
