@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1o9jo2-0000nS-BL
-	for mharc-qemu-riscv@gnu.org; Fri, 08 Jul 2022 04:57:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60868)
+	id 1o9jo6-0000qG-2o
+	for mharc-qemu-riscv@gnu.org; Fri, 08 Jul 2022 04:57:50 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60930)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <kito.cheng@sifive.com>)
- id 1o9jo0-0000mC-W7
- for qemu-riscv@nongnu.org; Fri, 08 Jul 2022 04:57:45 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631]:40718)
+ id 1o9jo3-0000nv-2H
+ for qemu-riscv@nongnu.org; Fri, 08 Jul 2022 04:57:47 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434]:33590)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <kito.cheng@sifive.com>)
- id 1o9jny-0004Yn-Rl
- for qemu-riscv@nongnu.org; Fri, 08 Jul 2022 04:57:44 -0400
-Received: by mail-pl1-x631.google.com with SMTP id b2so15822640plx.7
- for <qemu-riscv@nongnu.org>; Fri, 08 Jul 2022 01:57:42 -0700 (PDT)
+ id 1o9jo1-0004Z1-Ft
+ for qemu-riscv@nongnu.org; Fri, 08 Jul 2022 04:57:46 -0400
+Received: by mail-pf1-x434.google.com with SMTP id n12so23076063pfq.0
+ for <qemu-riscv@nongnu.org>; Fri, 08 Jul 2022 01:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Jn+bFSsVswx38izVfqrD35XdPG8lzZ2KkKEOUOF9vuQ=;
- b=YeIE83IDvX89SfaqvQ4vyzcWOpWCHaS8pNykS6NFMMLP6cqLmlZh9pt/jrOUm2jUJ6
- VJnIAnwJ/If7wcVestPQSvW5nxncwEpTliAaoRiDl3d4Ilsz2SV8Nk+4QQpOPubOmcDr
- fXXFnjj5b6YEO58yUDqKCnhg3gfRFkQWTgfa/FYdtH3gyWs29KgInhWXJIByu5x66JjC
- nflkB4xKLMmofql6JiIYcKf3MVsMs10J7bxSY9/QiNLyca/NTwDK+YLutDTd8pGR4TIA
- dZeyD36U3wX8BxIJ1cxBUG8STHs6aOECOrgO5UhSP6JRa6PqbcooWqYiz0zOLBpYUiWC
- abZg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=5PrL/oC87hd+GhzRVKVTQDW5oEqqs+15Xg9mnkDlFt0=;
+ b=dMDeioEbYfMryko3uj6ttYPIFSVLSmxqCxiMviDF8JjyLiEhqLhq6cTCtMN2O4SSeX
+ sOVFWKSQOXtOob8CbNcvyFdgBz6fvFpWT3GPR38ET/fGMYIoyTYz2+SEIjP4dOSXwkww
+ Vy7CaTy+g8fGJ+fdL04OMV8FBvF0pBBQGFsI09zcu64JRtfED7unBnC6FggMoCM4YVpm
+ pwghcfpJIrLdopu7gMi1AooPHLtXPSHeMXVO1kyrWeYiLqGLKzEYgeh3agTITEJ17qfp
+ sdKmuY3A1ZrcpVbhVPxX/Tb8xammeTQ82BUpq0XywD1C/Shga4EWt34WxI0oE5iayKnv
+ Cbhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=Jn+bFSsVswx38izVfqrD35XdPG8lzZ2KkKEOUOF9vuQ=;
- b=V+zGmAon7Znqe52Ao3NFp7Dy++IDzKdBCMFJ2jB6A3S8rGmQXHQbRuWFvxU2P8T7mc
- DYwRdgSH2b74Hr8bRJOjLRq48q+qMNT6E1XrQwWflzzmPxQboZROZig5Pg3yIKm7jl9M
- qLG7nHk4KvOxV7BD3cS4mx3yb3t9Alc5FSyF/UN24gu60udFOy4mbKVzAFW1YYDow7Yu
- Itf9IYwYLm/6SwNFOJoE/BEUS0lyTZVAcY54/lV07LepYavlad0cRGK6Of5fe9gzrovG
- kuCquSwoGx/6w71s5jxjcTPV07/MERpstWxMQAQmJFkBVJWZGK7D8O4WAEbkbApf/peA
- vDPA==
-X-Gm-Message-State: AJIora+ZYh9LFSZBiwM2/QhQ8SW5hM7ooCcQiZbN6/CTcWxhON40O4Z1
- M+PGxLDCj5c5T5ECk+T/GO7h4w==
-X-Google-Smtp-Source: AGRyM1v4zuJGDtd1OBbT9t7Tbhsmp3tiKGxTNgyidT2mm+Q9EvZron5ps/U+aWYJ8waPgkAe9pouIg==
-X-Received: by 2002:a17:90a:a384:b0:1ef:da60:9577 with SMTP id
- x4-20020a17090aa38400b001efda609577mr7620589pjp.36.1657270660954; 
- Fri, 08 Jul 2022 01:57:40 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=5PrL/oC87hd+GhzRVKVTQDW5oEqqs+15Xg9mnkDlFt0=;
+ b=HYEqpmN6mlnWKXG8axHjT+SQe0L8wPj8Wf9b571y1jaT2afMfg+Zg+OUqt5KNyerfg
+ p3Fu8JSHZpY3daq1KH5estsXbCSwi7NTMnx4QSd/q1oMoJM6gH4/QE9EDh0Q2y6cT2TY
+ Mxob6fi8tRUdAzxpWeX4RhyMCRak33SJJco5ID/ur/lUEpNxgLeAWoTSKU2mZA6KIax6
+ 2VEmFs9YrHR+4VIX3794BaQDDa1BFvesmZ7GlE9G3s7A57LZYvzaIlKCE2ASKvvWqZuC
+ Fi1xOd8unlgrqWFwgcF7zehfG1xswjUPavRDHuPgdLrlIOIt94C7y9OUTJrNniTt9X6E
+ cOBw==
+X-Gm-Message-State: AJIora+1HqUoI8KyTjInyE9pjqxvDKMMUJBNzGjFevqBHhKMZg5qptn0
+ u26FStJZKlVCa7IuYk3jJ4ezGg==
+X-Google-Smtp-Source: AGRyM1vcv9uPnnbnlzJgmQkxKU8XSCoDmWt92ikDhCHhk6lERZiadav+KiIgSLJgda9nOL1kzPaM7w==
+X-Received: by 2002:a05:6a00:140f:b0:4e0:6995:9c48 with SMTP id
+ l15-20020a056a00140f00b004e069959c48mr2905983pfu.59.1657270663661; 
+ Fri, 08 Jul 2022 01:57:43 -0700 (PDT)
 Received: from hsinchu02.internal.sifive.com
  (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- k27-20020aa7999b000000b0052ab5740130sm71854pfh.37.2022.07.08.01.57.39
+ k27-20020aa7999b000000b0052ab5740130sm71854pfh.37.2022.07.08.01.57.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Jul 2022 01:57:40 -0700 (PDT)
+ Fri, 08 Jul 2022 01:57:43 -0700 (PDT)
 From: Kito Cheng <kito.cheng@sifive.com>
 To: alistair.francis@wdc.com, palmer@dabbelt.com, frank.chang@sifive.com,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org, liweiwei@iscas.ac.cn,
  richard.henderson@linaro.org
 Cc: Kito Cheng <kito.cheng@sifive.com>
-Subject: [PATCH 1/2] util/log: Add vu to dump content of vector unit
-Date: Fri,  8 Jul 2022 16:57:35 +0800
-Message-Id: <20220708085736.94546-1-kito.cheng@sifive.com>
+Subject: [PATCH 2/2] target/riscv: Implement dump content of vector register
+Date: Fri,  8 Jul 2022 16:57:36 +0800
+Message-Id: <20220708085736.94546-2-kito.cheng@sifive.com>
 X-Mailer: git-send-email 2.34.0
+In-Reply-To: <20220708085736.94546-1-kito.cheng@sifive.com>
+References: <20220708085736.94546-1-kito.cheng@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=kito.cheng@sifive.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=kito.cheng@sifive.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,79 +80,64 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2022 08:57:45 -0000
+X-List-Received-Date: Fri, 08 Jul 2022 08:57:47 -0000
 
-Add new option for -d vu to dump the content of vector unit, many target
-has vector register, but there is no easy way to dump the content, we
-use this on downstream for a while to help debug, and I feel that's
-really useful, so I think it would be great to upstream that to save debug time
-for other people :)
+Implement -d cpu,vu to dump content of vector register.
 
 Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
 ---
- accel/tcg/cpu-exec.c  | 3 +++
- include/hw/core/cpu.h | 2 ++
- include/qemu/log.h    | 1 +
- util/log.c            | 2 ++
- 4 files changed, 8 insertions(+)
+ target/riscv/cpu.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
-index a565a3f8ec..2cbec0a6ed 100644
---- a/accel/tcg/cpu-exec.c
-+++ b/accel/tcg/cpu-exec.c
-@@ -221,6 +221,9 @@ static inline void log_cpu_exec(target_ulong pc, CPUState *cpu,
-                 if (qemu_loglevel_mask(CPU_LOG_TB_FPU)) {
-                     flags |= CPU_DUMP_FPU;
-                 }
-+                if (qemu_loglevel_mask(CPU_LOG_TB_VU)) {
-+                    flags |= CPU_DUMP_VU;
-+                }
- #if defined(TARGET_I386)
-                 flags |= CPU_DUMP_CCOP;
- #endif
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 996f94059f..7a767e17cd 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -535,11 +535,13 @@ GuestPanicInformation *cpu_get_crash_info(CPUState *cpu);
-  * @CPU_DUMP_CODE:
-  * @CPU_DUMP_FPU: dump FPU register state, not just integer
-  * @CPU_DUMP_CCOP: dump info about TCG QEMU's condition code optimization state
-+ * @CPU_DUMP_VU: dump vector register state
-  */
- enum CPUDumpFlags {
-     CPU_DUMP_CODE = 0x00010000,
-     CPU_DUMP_FPU  = 0x00020000,
-     CPU_DUMP_CCOP = 0x00040000,
-+    CPU_DUMP_VU   = 0x00080000,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index c1b96da7da..97b289d277 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -72,6 +72,15 @@ const char * const riscv_fpr_regnames[] = {
+   "f30/ft10", "f31/ft11"
  };
  
- /**
-diff --git a/include/qemu/log.h b/include/qemu/log.h
-index c5643d8dd5..49bd0b0fbc 100644
---- a/include/qemu/log.h
-+++ b/include/qemu/log.h
-@@ -35,6 +35,7 @@ bool qemu_log_separate(void);
- /* LOG_STRACE is used for user-mode strace logging. */
- #define LOG_STRACE         (1 << 19)
- #define LOG_PER_THREAD     (1 << 20)
-+#define CPU_LOG_TB_VU      (1 << 21)
++const char * const riscv_vr_regnames[] = {
++  "v0",  "v1",  "v2",  "v3",  "v4",  "v5",
++  "v6",  "v7",  "v8",  "v9",  "v10", "v11",
++  "v12", "v13", "v14", "v15", "v16", "v17",
++  "v18", "v19", "v20", "v21", "v22", "v23",
++  "v24", "v25", "v26", "v27", "v28", "v29",
++  "v30", "v31"
++};
++
+ static const char * const riscv_excp_names[] = {
+     "misaligned_fetch",
+     "fault_fetch",
+@@ -375,6 +384,28 @@ static void riscv_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+             }
+         }
+     }
++    if (flags & CPU_DUMP_VU) {
++        int vlen = cpu->cfg.vlen;
++        int n_chunk = vlen / 64;
++        if (vlen == 32) {
++            for (i = 0; i < 32; i++) {
++                qemu_fprintf(f, "0x%08" PRIx64 "\n", env->vreg[i]);
++            }
++        } else {
++            for (i = 0; i < 32; i++) {
++                qemu_fprintf(f, " %-8s ",
++                             riscv_vr_regnames[i]);
++
++                int vec_reg_offset = i * vlen / 64;
++                qemu_fprintf(f, "0x");
++                for (int j = n_chunk - 1; j >= 0; --j) {
++                    qemu_fprintf(f, "%016" PRIx64,
++                                 env->vreg[vec_reg_offset + j]);
++                }
++                qemu_fprintf(f, "\n");
++            }
++        }
++    }
+ }
  
- /* Lock/unlock output. */
- 
-diff --git a/util/log.c b/util/log.c
-index d6eb0378c3..775d122c2e 100644
---- a/util/log.c
-+++ b/util/log.c
-@@ -441,6 +441,8 @@ const QEMULogItem qemu_log_items[] = {
- #ifdef CONFIG_PLUGIN
-     { CPU_LOG_PLUGIN, "plugin", "output from TCG plugins\n"},
- #endif
-+    { CPU_LOG_TB_VU, "vu",
-+      "include vector unit registers in the 'cpu' logging" },
-     { LOG_STRACE, "strace",
-       "log every user-mode syscall, its input, and its result" },
-     { LOG_PER_THREAD, "tid",
+ static void riscv_cpu_set_pc(CPUState *cs, vaddr value)
 -- 
 2.34.0
 
