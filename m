@@ -1,61 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oA7A4-0007AK-UT
-	for mharc-qemu-riscv@gnu.org; Sat, 09 Jul 2022 05:54:04 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59206)
+	id 1oAIsO-0007gI-Op
+	for mharc-qemu-riscv@gnu.org; Sat, 09 Jul 2022 18:24:36 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43568)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oA79y-00078L-J3; Sat, 09 Jul 2022 05:53:59 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:40462 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oA79v-00053X-Hm; Sat, 09 Jul 2022 05:53:58 -0400
-Received: from [192.168.0.104] (unknown [117.151.235.104])
- by APP-01 (Coremail) with SMTP id qwCowADns1grUMliOx8PDg--.41316S2;
- Sat, 09 Jul 2022 17:53:47 +0800 (CST)
-Subject: Re: [PATCH 2/2] target/riscv: Auto set elen from vector extension by
- default
-To: Weiwei Li <liweiwei@iscas.ac.cn>, Kito Cheng <kito.cheng@sifive.com>,
- alistair.francis@wdc.com, palmer@dabbelt.com, frank.chang@sifive.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20220708073943.54781-1-kito.cheng@sifive.com>
- <20220708073943.54781-2-kito.cheng@sifive.com>
- <8969069c-8005-7564-1d79-948e7e9ecfcb@iscas.ac.cn>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <650474c0-0d65-5f4a-017b-315f9f6d783d@iscas.ac.cn>
-Date: Sat, 9 Jul 2022 17:53:47 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1oAIsK-0007fk-7Y; Sat, 09 Jul 2022 18:24:32 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56]:50516)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1oAIsB-0003bP-BT; Sat, 09 Jul 2022 18:24:30 -0400
+Received: from mailhub.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 9A60440243;
+ Sun, 10 Jul 2022 00:24:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1657405456;
+ bh=TAAz3/NqUq5OEZdtYrPrYHHEXePTDxqnnpValXZH4UA=;
+ h=Date:To:References:From:Subject:In-Reply-To:From;
+ b=NL/lIWoYVm7B7d/yYhXbBkkXMX73XI/ZQ5NuvOW87mX19rx9k+Il24EnmgA46yReT
+ iwFOuzzF3gf/6kgU/bkTWMiUuGwe5bky0IKQGoWzXb5eZHbrK4EKBkjNjMGne9S1+p
+ +/KqHzk9LvJSENc5CoBInsTdeHPeNmpNUu2I67cb39AzBMg8eYrs47SYrWxGVw4Hck
+ fzk5zf0Pizc3CFRIxe6rqYy3PJZfzWcxp3iGOoe58J7aUarQo2qjPdE2rg7U8WAh/Q
+ 1qmPu8wQLDH3dKfpBJ9j+Ys3xsv8k006RADmRR6hje5vjjhpyLJ2F5ofWWej7bB5TX
+ UD/dwC2iQrjJw==
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhub.u-ga.fr (Postfix) with ESMTP id 97DBF10005A;
+ Sun, 10 Jul 2022 00:24:16 +0200 (CEST)
+Received: from [192.168.5.58] (unknown [37.72.194.135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 9DBE0140059;
+ Sun, 10 Jul 2022 00:24:08 +0200 (CEST)
+Message-ID: <032ab978-6fa6-4e42-b9cb-6ce6751f74c9@univ-grenoble-alpes.fr>
+Date: Sun, 10 Jul 2022 00:24:00 +0200
 MIME-Version: 1.0
-In-Reply-To: <8969069c-8005-7564-1d79-948e7e9ecfcb@iscas.ac.cn>
-Content-Type: text/plain; charset=utf-8; format=flowed
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: fr
+To: Weiwei Li <liweiwei@iscas.ac.cn>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ bin.meng@windriver.com
+References: <20220708150038.216575-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <96d10e26-9ab2-593d-fda7-40b14d706056@iscas.ac.cn>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+Subject: Re: [PATCH] target/riscv: fix right shifts shamt value for rv128c
+In-Reply-To: <96d10e26-9ab2-593d-fda7-40b14d706056@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: qwCowADns1grUMliOx8PDg--.41316S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGrWDWF15Zr4UAr17tFy8AFb_yoWrJFWxpr
- 4kJry5GryUJr1kJr17Jr1UJryUAr18J3WUGw48X3WUJr47Gr1jqr1DXr1qgr1UJr48Jr1U
- Jr1UJr1UZr4DJ37anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvj14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IY64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mxk0xIA0c2IEe2xFo4CE
- bIxvr21l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67
- AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r126r1DMIIY
- rxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14
- v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_WFyUJwCI42IY6I8E87Iv67AKxVWU
- JVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUF9
- a9DUUUU
-X-Originating-IP: [117.151.235.104]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (42)
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -69,88 +75,172 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jul 2022 09:54:00 -0000
+X-List-Received-Date: Sat, 09 Jul 2022 22:24:34 -0000
 
-
-在 2022/7/9 下午4:11, Weiwei Li 写道:
-> 在 2022/7/8 下午3:39, Kito Cheng 写道:
->> Default ELEN is setting to 64 for now, which is incorrect setting for
->> Zve32*, and spec has mention minimum VLEN and supported EEW in chapter
->> "Zve*: Vector Extensions for Embedded Processors" is 32 for Zve32.
+Le 09/07/2022 à 10:52, Weiwei Li a écrit :
+> 
+> 在 2022/7/8 下午11:00, Frédéric Pétrot 写道:
+>> For rv128c right shifts, the 6-bit shamt is sign extended to 7 bits.
 >>
->> ELEN actaully could be derived from which extensions are enabled,
->> so this patch set elen to 0 as auto detect, and keep the capability to
->> let user could configure that.
->>
->> Signed-off-by: Kito Cheng <kito.cheng@sifive.com>
+>> Signed-off-by: Frédéric Pétrot<frederic.petrot@univ-grenoble-alpes.fr>
 >> ---
->>   target/riscv/cpu.c | 16 +++++++++++++---
->>   1 file changed, 13 insertions(+), 3 deletions(-)
+>>   target/riscv/insn16.decode |  7 ++++---
+>>   disas/riscv.c              | 27 +++++++++++++++++++++------
+>>   target/riscv/translate.c   | 12 +++++++++++-
+>>   3 files changed, 36 insertions(+), 10 deletions(-)
 >>
->> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> index 487d0faa63..c1b96da7da 100644
->> --- a/target/riscv/cpu.c
->> +++ b/target/riscv/cpu.c
->> @@ -751,13 +751,22 @@ static void riscv_cpu_realize(DeviceState *dev, 
->> Error **errp)
->>                           "Vector extension ELEN must be power of 2");
->>                   return;
->>               }
->> -            if (cpu->cfg.elen > 64 || cpu->cfg.vlen < 8) {
->> +            if (cpu->cfg.elen == 0) {
->> +              if (cpu->cfg.ext_zve32f) {
->> +                cpu->cfg.elen = 32;
->> +              }
->> +              if (cpu->cfg.ext_zve64f || cpu->cfg.ext_v) {
->> +                cpu->cfg.elen = 64;
->> +              }
->
-> This code is in the "if(cpu->cfg.ext_v){...}",  so 
-> "cpu->cfg.ext_zve64f || cpu->cfg.ext_v" will always be true.
->
-> It can use "else ... " directly.
+>> diff --git a/target/riscv/insn16.decode b/target/riscv/insn16.decode
+>> index 02c8f61b48..ea3c5a0411 100644
+>> --- a/target/riscv/insn16.decode
+>> +++ b/target/riscv/insn16.decode
+>> @@ -31,7 +31,8 @@
+>>   %imm_cb        12:s1 5:2 2:1 10:2 3:2 !function=ex_shift_1
+>>   %imm_cj        12:s1 8:1 9:2 6:1 7:1 2:1 11:1 3:3 !function=ex_shift_1
+>>   
+>> -%shimm_6bit   12:1 2:5               !function=ex_rvc_shifti
+>> +%shlimm_6bit   12:1 2:5              !function=ex_rvc_shiftli
+>> +%shrimm_6bit   12:1 2:5              !function=ex_rvc_shiftri
+>>   %uimm_6bit_lq 2:4 12:1 6:1           !function=ex_shift_4
+>>   %uimm_6bit_ld 2:3 12:1 5:2           !function=ex_shift_3
+>>   %uimm_6bit_lw 2:2 12:1 4:3           !function=ex_shift_2
+> 
+> It's better to maintain the alignment here.
 
-Sorry, misunderstood the logic. It seems that we should set 
-cpu->cfg.elen=64 directly here.
+   Ooups! I'll do that.
 
-Regards,
+> 
+>> @@ -82,9 +83,9 @@
+>>   @c_addi16sp     ... .  ..... ..... .. &i imm=%imm_addi16sp rs1=2 rd=2
+>>   
+>>   @c_shift        ... . .. ... ..... .. \
+>> -                &shift rd=%rs1_3 rs1=%rs1_3 shamt=%shimm_6bit
+>> +                &shift rd=%rs1_3 rs1=%rs1_3 shamt=%shrimm_6bit
+>>   @c_shift2       ... . .. ... ..... .. \
+>> -                &shift rd=%rd rs1=%rd shamt=%shimm_6bit
+>> +                &shift rd=%rd rs1=%rd shamt=%shlimm_6bit
+>>   
+>>   @c_andi         ... . .. ... ..... .. &i imm=%imm_ci rs1=%rs1_3 rd=%rs1_3
+>>   
+>> diff --git a/disas/riscv.c b/disas/riscv.c
+>> index 7af6afc8fa..489c2ae5e8 100644
+>> --- a/disas/riscv.c
+>> +++ b/disas/riscv.c
+>> @@ -2402,10 +2402,25 @@ static int32_t operand_sbimm12(rv_inst inst)
+>>           ((inst << 56) >> 63) << 11;
+>>   }
+>>   
+>> -static uint32_t operand_cimmsh6(rv_inst inst)
+>> +static uint32_t operand_cimmshl6(rv_inst inst, rv_isa isa)
+>>   {
+>> -    return ((inst << 51) >> 63) << 5 |
+>> +    int imm = ((inst << 51) >> 63) << 5 |
+>>           (inst << 57) >> 59;
+>> +    if (isa == rv128) {
+>> +        imm = imm ? imm : 64;
+>> +    }
+>> +    return imm;
+>> +}
+>> +
+>> +static uint32_t operand_cimmshr6(rv_inst inst, rv_isa isa)
+>> +{
+>> +    int imm = ((inst << 51) >> 63) << 5 |
+>> +        (inst << 57) >> 59;
+>> +    if (isa == rv128) {
+>> +        imm = imm | (imm & 32) << 1;
+>> +        imm = imm ? imm : 64;
+>> +    }
+>> +    return imm;
+>>   }
+>>   
+>>   static int32_t operand_cimmi(rv_inst inst)
+>> @@ -2529,7 +2544,7 @@ static uint32_t operand_rnum(rv_inst inst)
+>>   
+>>   /* decode operands */
+>>   
+>> -static void decode_inst_operands(rv_decode *dec)
+>> +static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+>>   {
+>>       rv_inst inst = dec->inst;
+>>       dec->codec = opcode_data[dec->op].codec;
+>> @@ -2652,7 +2667,7 @@ static void decode_inst_operands(rv_decode *dec)
+>>       case rv_codec_cb_sh6:
+>>           dec->rd = dec->rs1 = operand_crs1rdq(inst) + 8;
+>>           dec->rs2 = rv_ireg_zero;
+>> -        dec->imm = operand_cimmsh6(inst);
+>> +        dec->imm = operand_cimmshr6(inst, isa);
+>>           break;
+>>       case rv_codec_ci:
+>>           dec->rd = dec->rs1 = operand_crs1rd(inst);
+>> @@ -2667,7 +2682,7 @@ static void decode_inst_operands(rv_decode *dec)
+>>       case rv_codec_ci_sh6:
+>>           dec->rd = dec->rs1 = operand_crs1rd(inst);
+>>           dec->rs2 = rv_ireg_zero;
+>> -        dec->imm = operand_cimmsh6(inst);
+>> +        dec->imm = operand_cimmshl6(inst, isa);
+>>           break;
+>>       case rv_codec_ci_16sp:
+>>           dec->rd = rv_ireg_sp;
+>> @@ -3193,7 +3208,7 @@ disasm_inst(char *buf, size_t buflen, rv_isa isa, uint64_t pc, rv_inst inst)
+>>       dec.pc = pc;
+>>       dec.inst = inst;
+>>       decode_inst_opcode(&dec, isa);
+>> -    decode_inst_operands(&dec);
+>> +    decode_inst_operands(&dec, isa);
+>>       decode_inst_decompress(&dec, isa);
+>>       decode_inst_lift_pseudo(&dec);
+>>       format_inst(buf, buflen, 16, &dec);
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index 63b04e8a94..af3a2cd68c 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -705,12 +705,22 @@ static int ex_rvc_register(DisasContext *ctx, int reg)
+>>       return 8 + reg;
+>>   }
+>>   
+>> -static int ex_rvc_shifti(DisasContext *ctx, int imm)
+>> +static int ex_rvc_shiftli(DisasContext *ctx, int imm)
+>>   {
+>>       /* For RV128 a shamt of 0 means a shift by 64. */
+>>       return imm ? imm : 64;
+>>   }
+>>   
+>> +static int ex_rvc_shiftri(DisasContext *ctx, int imm)
+>> +{
+>> +    /*
+>> +     * For RV128 a shamt of 0 means a shift by 64, furthermore, for right
+>> +     * shifts, the shamt is sign-extended.
+>> +     */
+>> +    imm = imm | (imm & 32) << 1;
+>> +    return imm ? imm : 64;
+>> +}
+>> +
+> 
+> This calculation didn't add limitation for only working in RV128, and may 
+> trigger fault in RV32/RV64,
+> 
+> such as following check in gen_shift_imm_fn:
+> 
+> if (a->shamt >= max_len) {
+> return false;
+> }
 
-Weiwei Li
+   Indeed! Thanks for pointing that mistake out.
+   Also 0 becoming 64 is a rv128 only thing, and a shamt of zero should be a
+   hint in rv64/rv32, so I believe the immediat should not be changed.
 
->> +            }
->> +            if (cpu->cfg.elen != 0 && (cpu->cfg.elen > 64 ||
->> +                                       cpu->cfg.elen < 8)) {
->>                   error_setg(errp,
->>                           "Vector extension implementation only 
->> supports ELEN "
->>                           "in the range [8, 64]");
->>                   return;
->>               }
->> -            if (cpu->cfg.vlen < cpu->cfg.elen) {
->> +            if (cpu->cfg.elen != 0 && cpu->cfg.vlen < cpu->cfg.elen) {
->
-> when cfg.elen is set to zero, it  will be changed to the auto detect 
-> value(32/64)  before this two check.
->
-> So this two modifications seem unnecessary.
->
+   Yours,
+   Frédéric
+
 > Regards,
->
 > Weiwei Li
->
->>                   error_setg(errp,
->>                           "Vector extension VLEN must be greater than 
->> or equal "
->>                           "to ELEN");
->> @@ -901,7 +910,8 @@ static Property riscv_cpu_extensions[] = {
->>       DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->>       DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
->>       DEFINE_PROP_UINT16("vlen", RISCVCPU, cfg.vlen, 128),
->> -    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 64),
->> +    /* elen = 0 means set from v or zve* extension */
->> +    DEFINE_PROP_UINT16("elen", RISCVCPU, cfg.elen, 0),
->>         DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
->>       DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
->
+>>   /* Include the auto-generated decoder for 32 bit insn */
+>>   #include "decode-insn32.c.inc"
+>>   
 
+-- 
++---------------------------------------------------------------------------+
+| Frédéric Pétrot,                            Pr. Grenoble INP-Ensimag/TIMA |
+| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
++---------------------------------------------------------------------------+
 
