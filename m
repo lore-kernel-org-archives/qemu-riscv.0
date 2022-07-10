@@ -1,46 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oASEk-0003rX-Sk
-	for mharc-qemu-riscv@gnu.org; Sun, 10 Jul 2022 04:24:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33884)
+	id 1oASEl-0003s7-GI
+	for mharc-qemu-riscv@gnu.org; Sun, 10 Jul 2022 04:24:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33892)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oASEj-0003qK-Da; Sun, 10 Jul 2022 04:24:17 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:36398 helo=cstnet.cn)
+ id 1oASEj-0003qL-FF; Sun, 10 Jul 2022 04:24:17 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:36416 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oASEg-0005eH-KT; Sun, 10 Jul 2022 04:24:16 -0400
+ id 1oASEg-0005eh-LZ; Sun, 10 Jul 2022 04:24:17 -0400
 Received: from liww-tm.www.tendawifi.com (unknown [117.151.235.104])
- by APP-01 (Coremail) with SMTP id qwCowAAnLASjjMpiF30+Dg--.38648S3;
- Sun, 10 Jul 2022 16:24:05 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowAAnLASjjMpiF30+Dg--.38648S7;
+ Sun, 10 Jul 2022 16:24:07 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH 1/6] target/riscv: add check for supported privilege modes
- conbinations
-Date: Sun, 10 Jul 2022 16:23:55 +0800
-Message-Id: <20220710082400.29224-2-liweiwei@iscas.ac.cn>
+Subject: [PATCH 5/6] target/riscv: fix checks in hmode/hmode32
+Date: Sun, 10 Jul 2022 16:23:59 +0800
+Message-Id: <20220710082400.29224-6-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220710082400.29224-1-liweiwei@iscas.ac.cn>
 References: <20220710082400.29224-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowAAnLASjjMpiF30+Dg--.38648S3
-X-Coremail-Antispam: 1UD129KBjvdXoWrKrWDCr4kuw1kKrWfAw15XFb_yoW3Awb_Gw
- 10gF97W34UXF1IkFWUAF4Yyr1fJ3ykurW0ga13tF4fGF9rW39xC3Z7Kr97JrW8CrWxuF93
- Aw1xJ343G3WUujkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbT8FF20E14v26ryj6rWUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUGwA2048vs2IY02
- 0Ec7CjxVAFwI0_JFI_Gr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
- x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
- e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
- 8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
- jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l4I
- 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
- xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
- AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8I
- cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
- 4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5SoXUUUUU
+X-CM-TRANSID: qwCowAAnLASjjMpiF30+Dg--.38648S7
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF48uF1rXry8trW8Zwb_yoW8Jw4kpr
+ 43u3y7Kr9xtasFvayxKr48Jr43AF47G3yUCw4Du3y8tF45A3y5tF1Dta1IvFykXFW8ur42
+ 9F4xCF1rZw47AaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
+ 6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
+ C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
+ 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwI
+ xGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480
+ Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7
+ IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k2
+ 6cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
+ AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUQSdkUUUUU=
 X-Originating-IP: [117.151.235.104]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -65,32 +64,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Sun, 10 Jul 2022 08:24:17 -0000
 
-- There are 3 suggested privilege modes conbinations listed in the spec:
-1) M, 2) M, U 3) M, S, U
+- It seems that there is no explicitly description about whether
+the Hypervisor CSRs requires S extension
+- Csrs only existed in RV32 will not trigger virtual instruction fault
+when not in RV32
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 ---
- target/riscv/cpu.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ target/riscv/csr.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 1bb3973806..0dad6906bc 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -636,6 +636,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             return;
-         }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 0d8e98b7a9..975007f1ac 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -311,8 +311,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
  
-+        if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
-+            error_setg(errp,
-+                       "Setting S extension without U extension is illegal");
-+            return;
-+        }
-+
-         if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-             error_setg(errp, "F extension requires Zicsr");
-             return;
+ static RISCVException hmode(CPURISCVState *env, int csrno)
+ {
+-    if (riscv_has_ext(env, RVS) &&
+-        riscv_has_ext(env, RVH)) {
++    if (riscv_has_ext(env, RVH)) {
+         /* Hypervisor extension is supported */
+         if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+             env->priv == PRV_M) {
+@@ -328,11 +327,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
+ static RISCVException hmode32(CPURISCVState *env, int csrno)
+ {
+     if (riscv_cpu_mxl(env) != MXL_RV32) {
+-        if (!riscv_cpu_virt_enabled(env)) {
+-            return RISCV_EXCP_ILLEGAL_INST;
+-        } else {
+-            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-        }
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     return hmode(env, csrno);
 -- 
 2.17.1
 
