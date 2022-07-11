@@ -1,51 +1,50 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oAlzM-00079u-VX
-	for mharc-qemu-riscv@gnu.org; Mon, 11 Jul 2022 01:29:45 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:46022)
+	id 1oAm07-0007KV-RH
+	for mharc-qemu-riscv@gnu.org; Mon, 11 Jul 2022 01:30:35 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46114)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oAlzJ-00079a-Cn; Mon, 11 Jul 2022 01:29:41 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:45008)
+ id 1oAlzj-0007Fr-Q4; Mon, 11 Jul 2022 01:30:08 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:45761)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oAlzF-0003CI-Qj; Mon, 11 Jul 2022 01:29:40 -0400
-Received: by mail-pg1-x536.google.com with SMTP id bf13so3811892pgb.11;
- Sun, 10 Jul 2022 22:29:34 -0700 (PDT)
+ id 1oAlzh-0003dj-Py; Mon, 11 Jul 2022 01:30:07 -0400
+Received: by mail-pl1-x634.google.com with SMTP id d5so3530650plo.12;
+ Sun, 10 Jul 2022 22:30:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=9H396+VUVaxNH7pJQTtc0cl6v9wma008IKJWE/uc/xw=;
- b=NARNUKRLiRXC3pcNjTqbv09uvG039ceAwmnWKFDQDkWpjTUkr+Y7VcsJCn90oBtH6U
- LNCoYPrOxrS4Fs8pF9pUTW840uMnHZ47Y8vg/e45nCl8C1ZMkbvsxA2EkMeLtGQivpeq
- po2p0x2BcI1p3cfjzbg0uYafqn72SXD0oTcTxepQLhaUlfFDxXq+buX03d5dj5nzHMNo
- Vi6pQybXchScQLq4uBEZaqCLzUEnxV4e8WPWOmzKK5aORlpRqGNNIWw2aI6xyZwSqoBz
- ClhMSHSZDCgGS882CrlU6D/zcPgXapiRGjVP/7bOlITfAhTIKm//ONsPuWM48knKWY1c
- 7Ckg==
+ :cc; bh=ywcHVC464EgeAGOMLDv1E1ff1J4xAakoYAfTFnhfesk=;
+ b=gR2kuAu2XnxpEgeJQn8LwTBueviaSQUud38A5z6KlPKzO9/9/5N2Lh1F872NFCxq+O
+ nEpwgUFkTbCHsrRuxoCz2krSxeRKmZwKP48403DFIblLCmswR7oYAW1tROf7CMh+TH50
+ OAHsQpZBEPbJg0CJVo50J7d1JZqgLqp+dlpj4eW6QZupohzo6l/YsoMzLT6i75/kWcwO
+ iHY2XT600gYaoPBS69Cl7ek7SwbtBmkoOUNqdR6dh5bno5tFUujjHw2kRgEjYhwGqHFA
+ tdTpSWdUZQMDPVRLrIfBAl+LvlhfDjqzhx6FEnRgdwShq899oTShdAcxBNrYkvslbQiI
+ HLsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=9H396+VUVaxNH7pJQTtc0cl6v9wma008IKJWE/uc/xw=;
- b=i2rA9WV/cmGjF9zcvlJBJOE+U7d0agVSbsbk7KGsbbG2iCpgM/RG2qO+WZDyeF1YYE
- rdrWvcFGzw+ATy+niQyigwqmc1/xSknB/GxNk+sbXSYfxAzYwIEhvoZHBNNYueOGvPxD
- mVPrEKMNHCnJZz4sR/TrBDYWfgoUE+HBxMmBy/U7jKnKmaI0UfpXrPAAgAHLMJmejo10
- X/O2B/6dzzxTa/0eEwwycg60IuB0606QsWRigj2zfeeu62R8mFBPPJzORnBZ6nLqHOLr
- DEXgV0K1FQuxtwymq/uAyL/H1tu8i2Vt/aGylPZT+E0M2gsVoHC274PT2NyEJEVOEIJU
- Ec/w==
-X-Gm-Message-State: AJIora8lPKgdXxsm8PTjU2/wxb4WBrSTrKtkb8wKutSLz7j0+QrZvHYH
- WzoUfSn9bFYkkvOPpNPZNGklc1I8dlcczpsHrUo=
-X-Google-Smtp-Source: AGRyM1vxTeBkTIRJbKKSfY/kiDMJ+zMlaW7NC1kp9iMtYeHmDZ5wdAGW6z6rGtaJWLA961hL1XBPnFFZV0VsKYvnChM=
-X-Received: by 2002:a05:6a00:1303:b0:528:2ed8:7e86 with SMTP id
- j3-20020a056a00130300b005282ed87e86mr16559532pfu.4.1657517372866; Sun, 10 Jul
- 2022 22:29:32 -0700 (PDT)
+ bh=ywcHVC464EgeAGOMLDv1E1ff1J4xAakoYAfTFnhfesk=;
+ b=xZr2gv9bVk9gAKjE8YPj7GIjq9cpNsrPrySXbInUmzltJOMzJEwqPEZ+xNopbufZGH
+ IzmgK/NQjjzbGf+M4UPxSY3ycE38m9AEdDEW/Rnxlk0BaFFF+seluCNFYF7q6X4zAn0P
+ +ojx+1ZSyZW6FnfGWi7xUyLTQWWl/c3UferlxflJGWpCSY/3JWVl0oR0lGKA2Uy4wHaK
+ DOx/VJHUFcBMKmeKe8SBSt9YrElDtSzwKjQ9ErDz+kPugv8G25PQDj+lVax1UihK9A79
+ xIUnxSw1tg0lSkxC/sWPrq1Y05rMeRf6s+KF06qyrM7ruKpnWTKwYlkRRm0FUwS3PiN3
+ gQxA==
+X-Gm-Message-State: AJIora+MHrEM+pZRUeVAZXnFocrPe3DaDTEV6Lh/QJ3XdS4vPifz0WWB
+ 3r94m0wIDqbkmkW/2PfWrJALoEVGfM/ZmAWe93k=
+X-Google-Smtp-Source: AGRyM1uukRiuLfIN1Qx06PjrdmQbrs1TAnXvnx1hnOV2tTqAqd7Uqu0G/CL1HlEyj56dC0YCimJwX7r2DZpN8tP+a3g=
+X-Received: by 2002:a17:902:b412:b0:16b:d846:77ee with SMTP id
+ x18-20020a170902b41200b0016bd84677eemr15790323plr.25.1657517402333; Sun, 10
+ Jul 2022 22:30:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220710082400.29224-1-liweiwei@iscas.ac.cn>
- <20220710082400.29224-2-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220710082400.29224-2-liweiwei@iscas.ac.cn>
+ <20220710082400.29224-3-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220710082400.29224-3-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 11 Jul 2022 15:29:06 +1000
-Message-ID: <CAKmqyKO6gss1cQ_pC0qr-Zx1vv3uJOodDyHyPD3V+ZdfCihHkw@mail.gmail.com>
-Subject: Re: [PATCH 1/6] target/riscv: add check for supported privilege modes
- conbinations
+Date: Mon, 11 Jul 2022 15:29:36 +1000
+Message-ID: <CAKmqyKOV6gzmj26nsr=4mZp4aukdskn0hBLU1Eo8JRKOhQSE-Q@mail.gmail.com>
+Subject: Re: [PATCH 2/6] target/riscv: H extension depends on I extension
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,8 +53,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,12 +75,11 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2022 05:29:42 -0000
+X-List-Received-Date: Mon, 11 Jul 2022 05:30:08 -0000
 
-On Sun, Jul 10, 2022 at 6:25 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Sun, Jul 10, 2022 at 6:24 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> - There are 3 suggested privilege modes conbinations listed in the spec:
-> 1) M, 2) M, U 3) M, S, U
+> - add check for "H depends on an I base integer ISA with 32 x registers"
 >
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
@@ -95,16 +93,16 @@ Alistair
 >  1 file changed, 6 insertions(+)
 >
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 1bb3973806..0dad6906bc 100644
+> index 0dad6906bc..4e40f26e13 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -636,6 +636,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+> @@ -642,6 +642,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
 >              return;
 >          }
 >
-> +        if (cpu->cfg.ext_s && !cpu->cfg.ext_u) {
+> +        if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
 > +            error_setg(errp,
-> +                       "Setting S extension without U extension is illegal");
+> +                       "H depends on an I base integer ISA with 32 x registers");
 > +            return;
 > +        }
 > +
