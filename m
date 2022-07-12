@@ -1,45 +1,46 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oB9SV-0003pf-Hx
+	id 1oB9SV-0003qI-T3
 	for mharc-qemu-riscv@gnu.org; Tue, 12 Jul 2022 02:33:23 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53642)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53648)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oB9SN-0003ZG-KK; Tue, 12 Jul 2022 02:33:15 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:53762 helo=cstnet.cn)
+ id 1oB9SN-0003Zn-RA; Tue, 12 Jul 2022 02:33:15 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:53808 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oB9SJ-0001bp-Cl; Tue, 12 Jul 2022 02:33:15 -0400
+ id 1oB9SK-0001ct-4r; Tue, 12 Jul 2022 02:33:15 -0400
 Received: from localhost.localdomain (unknown [180.156.173.38])
- by APP-01 (Coremail) with SMTP id qwCowADns1idFc1ijYPeDg--.64613S4;
- Tue, 12 Jul 2022 14:33:04 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowADns1idFc1ijYPeDg--.64613S8;
+ Tue, 12 Jul 2022 14:33:06 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 2/6] target/riscv: H extension depends on I extension
-Date: Tue, 12 Jul 2022 14:32:32 +0800
-Message-Id: <20220712063236.23834-3-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 6/6] target/riscv: simplify the check in hmode to resue the
+ check in riscv_csrrw_check
+Date: Tue, 12 Jul 2022 14:32:36 +0800
+Message-Id: <20220712063236.23834-7-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
 References: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
-X-CM-TRANSID: qwCowADns1idFc1ijYPeDg--.64613S4
-X-Coremail-Antispam: 1UD129KBjvdXoW7Xr4DZFW5XFyUKr1DtrWDArb_yoW3trc_Gr
- y0gFyfXw1UXF1xKFyUAFn8tr1rGay8Wr4vga1fJF45GryDWws3Aa4ktFs5Ar1xC3yxuF93
- Aa4fJ3y3GFyUCjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb-AFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
- 0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
- wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1l84
- ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
- Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrwCFx2
- IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
- 6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
- AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IY
- s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
- 0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUc6pPUUUUU=
+X-CM-TRANSID: qwCowADns1idFc1ijYPeDg--.64613S8
+X-Coremail-Antispam: 1UD129KBjvJXoW7uF13AF17uF48Jw4kGrW3Jrb_yoW5JryDpr
+ 4fC3y7Ga4kKrZ2ya9xKF1UXF45CF43GayUX3Wku3y8AF43Z3y09r98XF4FvF9xuryDursI
+ 9FWjyr1fAF4UAFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9E14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_
+ GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
+ 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+ 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+ 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20E
+ Y4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267
+ AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbmZX7UUUUU==
 X-Originating-IP: [180.156.173.38]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -62,34 +63,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2022 06:33:15 -0000
+X-List-Received-Date: Tue, 12 Jul 2022 06:33:16 -0000
 
-- add check for "H depends on an I base integer ISA with 32 x registers"
+Just add 1 to the effective privledge level when in HS mode, then reuse the check
+'effective_priv < csr_priv' in riscv_csrrw_check to replace the privilege level
+related check in hmode. Then, hmode will only check whether H extension is supported.
+
+when accessing Hypervior CSRs:
+   1) if access from M privilege level, the check of 'effective_priv < csr_priv'
+passes, returns hmode(...) which will return RISCV_EXCP_ILLEGAL_INST when H
+extension is not supported and return RISCV_EXCP_NONE otherwise.
+   2) if access from HS privilege level, effective_priv will add 1, the check
+passes too, also returns hmode(...) too.
+   3) if access from VS/VU privilege level, the check fails, and returns
+RISCV_EXCP_VIRT_INSTRUCTION_FAULT
+   4) if access from U privilege level, the check fails, and returns
+RISCV_EXCP_ILLEGAL_INST
 
 Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ target/riscv/csr.c | 18 +++++-------------
+ 1 file changed, 5 insertions(+), 13 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 36c1b26fb3..b8ce0959cb 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -732,6 +732,12 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
-             return;
-         }
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index deddeb100e..aa87698d1d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -312,13 +312,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
+ static RISCVException hmode(CPURISCVState *env, int csrno)
+ {
+     if (riscv_has_ext(env, RVH)) {
+-        /* Hypervisor extension is supported */
+-        if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+-            env->priv == PRV_M) {
+-            return RISCV_EXCP_NONE;
+-        } else {
+-            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-        }
++        return RISCV_EXCP_NONE;
+     }
  
-+        if (cpu->cfg.ext_h && !cpu->cfg.ext_i) {
-+            error_setg(errp,
-+                       "H depends on an I base integer ISA with 32 x registers");
-+            return;
-+        }
-+
-         if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
-             error_setg(errp, "F extension requires Zicsr");
-             return;
+     return RISCV_EXCP_ILLEGAL_INST;
+@@ -3280,13 +3274,11 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+ #if !defined(CONFIG_USER_ONLY)
+     int csr_priv, effective_priv = env->priv;
+ 
+-    if (riscv_has_ext(env, RVH) && env->priv == PRV_S) {
++    if (riscv_has_ext(env, RVH) && env->priv == PRV_S &&
++        !riscv_cpu_virt_enabled(env)) {
+         /*
+-         * We are in either HS or VS mode.
+-         * Add 1 to the effective privledge level to allow us to access the
+-         * Hypervisor CSRs. The `hmode` predicate will determine if access
+-         * should be allowed(HS) or if a virtual instruction exception should be
+-         * raised(VS).
++         * We are in HS mode. Add 1 to the effective privledge level to
++         * allow us to access the Hypervisor CSRs.
+          */
+         effective_priv++;
+     }
 -- 
 2.17.1
 
