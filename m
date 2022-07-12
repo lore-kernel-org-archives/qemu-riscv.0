@@ -1,42 +1,45 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oB9SO-0003bL-Hz
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Jul 2022 02:33:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53640)
+	id 1oB9SQ-0003fr-Ji
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Jul 2022 02:33:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53598)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oB9SN-0003Yw-DY; Tue, 12 Jul 2022 02:33:15 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:53760 helo=cstnet.cn)
+ id 1oB9SM-0003Wp-5w; Tue, 12 Jul 2022 02:33:14 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:53770 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oB9SJ-0001bq-CL; Tue, 12 Jul 2022 02:33:15 -0400
+ id 1oB9SJ-0001bw-C0; Tue, 12 Jul 2022 02:33:13 -0400
 Received: from localhost.localdomain (unknown [180.156.173.38])
- by APP-01 (Coremail) with SMTP id qwCowADns1idFc1ijYPeDg--.64613S2;
- Tue, 12 Jul 2022 14:33:03 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowADns1idFc1ijYPeDg--.64613S7;
+ Tue, 12 Jul 2022 14:33:06 +0800 (CST)
 From: Weiwei Li <liweiwei@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com,
  Weiwei Li <liweiwei@iscas.ac.cn>
-Subject: [PATCH v2 0/6] Improve the U/S/H extension related check
-Date: Tue, 12 Jul 2022 14:32:30 +0800
-Message-Id: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
+Subject: [PATCH v2 5/6] target/riscv: fix checks in hmode/hmode32
+Date: Tue, 12 Jul 2022 14:32:35 +0800
+Message-Id: <20220712063236.23834-6-liweiwei@iscas.ac.cn>
 X-Mailer: git-send-email 2.17.1
-X-CM-TRANSID: qwCowADns1idFc1ijYPeDg--.64613S2
-X-Coremail-Antispam: 1UD129KBjvdXoW7Xw4UAr15tr47XryUuFykXwb_yoWkAFc_WF
- y8WF9xXa40qa1UJayDAr13try7GrWrGF9rta12yr4j9Fy3WrykZr1DXrWUZr4UZ3yxKFna
- vrn3Ja4Skr1jkjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUbz8FF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJV
- W0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxG
- rwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4
- vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IY
- x2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26c
- xKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x02
- 67AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoOJ5UUUUU
+In-Reply-To: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
+References: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
+X-CM-TRANSID: qwCowADns1idFc1ijYPeDg--.64613S7
+X-Coremail-Antispam: 1UD129KBjvJXoW7KFy7CF1kXFyDCFWfWryrCrg_yoW8Aw15pr
+ 47u3yak34DJF9rAa97tF1UJw1UCF13W3yUCws7u3yxtF4rA3yYqF1qqw429FykXFWkur42
+ 9F1UCF1rZr47XaDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9K14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
+ kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
+ z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr
+ 1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_
+ GcWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
+ x0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8
+ JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr4
+ 1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+ 67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+ 8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAv
+ wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
+ v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUOBTYUUUUU
 X-Originating-IP: [180.156.173.38]
 X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
 Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
@@ -59,35 +62,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2022 06:33:15 -0000
+X-List-Received-Date: Tue, 12 Jul 2022 06:33:14 -0000
 
-This patchset tries to improve the U/S/H related check:
-* add check for the supported privilege modes conbinations: only supporting M,
-S mode is not a suggested combination
-* add check for "H extension depends on I extension"
-* add check for "H extension implicitly requires S mode"
-* add check for csrs only existed when U mode is supported
-* fix and simplify the checks in hmode/hmode32
+- add check for the implicit dependence between H and S
+- Csrs only existed in RV32 will not trigger virtual instruction fault
+when not in RV32
 
-Any suggestions are welcome.
+Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+---
+ target/riscv/cpu.c | 5 +++++
+ target/riscv/csr.c | 9 ++-------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-v2:
-* update patch 3 to make the newlines start at the same position as above line
-* update patch 5 to add check for "H extension implicitly requires S mode"
-
-Weiwei Li (6):
-  target/riscv: add check for supported privilege modes conbinations
-  target/riscv: H extension depends on I extension
-  target/riscv: fix checkpatch warning may triggered in csr_ops table
-  target/riscv: add check for csrs existed with U extension
-  target/riscv: fix checks in hmode/hmode32
-  target/riscv: simplify the check in hmode to resue the check in
-    riscv_csrrw_check
-
- target/riscv/cpu.c |  17 ++
- target/riscv/csr.c | 491 ++++++++++++++++++++++++---------------------
- 2 files changed, 279 insertions(+), 229 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index b8ce0959cb..455787a940 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -738,6 +738,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+             return;
+         }
+ 
++        if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
++            error_setg(errp, "H extension implicitly requires S-mode");
++            return;
++        }
++
+         if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
+             error_setg(errp, "F extension requires Zicsr");
+             return;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 1edeb69366..deddeb100e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -311,8 +311,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
+ 
+ static RISCVException hmode(CPURISCVState *env, int csrno)
+ {
+-    if (riscv_has_ext(env, RVS) &&
+-        riscv_has_ext(env, RVH)) {
++    if (riscv_has_ext(env, RVH)) {
+         /* Hypervisor extension is supported */
+         if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+             env->priv == PRV_M) {
+@@ -328,11 +327,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
+ static RISCVException hmode32(CPURISCVState *env, int csrno)
+ {
+     if (riscv_cpu_mxl(env) != MXL_RV32) {
+-        if (!riscv_cpu_virt_enabled(env)) {
+-            return RISCV_EXCP_ILLEGAL_INST;
+-        } else {
+-            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+-        }
++        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+     return hmode(env, csrno);
 -- 
 2.17.1
 
