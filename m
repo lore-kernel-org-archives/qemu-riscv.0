@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oB8Hk-00072p-TD
-	for mharc-qemu-riscv@gnu.org; Tue, 12 Jul 2022 01:18:13 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40614)
+	id 1oB8aQ-0004ui-4c
+	for mharc-qemu-riscv@gnu.org; Tue, 12 Jul 2022 01:37:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43798)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oB8Hh-00071K-Cv; Tue, 12 Jul 2022 01:18:09 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:40716)
+ id 1oB8aP-0004uV-8f; Tue, 12 Jul 2022 01:37:29 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432]:35559)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oB8He-0006jI-4M; Tue, 12 Jul 2022 01:18:07 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id b2so6300037plx.7;
- Mon, 11 Jul 2022 22:18:05 -0700 (PDT)
+ id 1oB8aN-0006r6-KC; Tue, 12 Jul 2022 01:37:28 -0400
+Received: by mail-pf1-x432.google.com with SMTP id x184so6597376pfx.2;
+ Mon, 11 Jul 2022 22:37:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=VdRvUvogtVrKHWxwrTowg5p+rLlqnZhKF+iSJnHzGns=;
- b=EXrTdkfu0xMbU57LlI87Bc9G+Q4Xc5Fwj+hQo0fglDoi3nSQH5yxGGTqxFkW3mvFu7
- 13fQSpyXTh04Zq6vV0OAEtORO9CaI4HM97X6KaX3IyYXrPu814vZg4GdCWF0ndOQvEPQ
- z9IFFGf6KJswR2MiNuOUGbhdVm9U1tISSEUZlTK+wh3F8A+Jrq33CW2a6TiJFmATgHxr
- mp29i6qbbPY1GEBIpRqtbU+o4wfBo8K8YSW1z2cwHKb81u3/j0mGJDtnOlK4Rprs8LCe
- IHK1yKHQYwzUxEjwplYA2AvoY5qB6jWSSTRnu1EiXl39QWq4j16gd0iSl9G/tBPIiU7E
- qEnQ==
+ :cc; bh=u3dRUI5Uc3csoy0U0HXbJw6qLQeCyDml2Iwd14WYkiw=;
+ b=f4i9zNj59Pa+vTc+tql0gJyVsV89YWjddTN6qCANCrfef+zvBHXno9nTkrBK1UQVOz
+ dhpyjoGAUI9uRsBqH3mvQ7npkYUhPWT7iYhaijccxwWyvVjXfSsInc8F8GsEHfgURV1C
+ HHn7pB53UezdAZojr4gheFrdBlx8bM3WcMDK420+vRUOBLAmyJwS8Overz/YBUMoIonh
+ KdR1szWHMP+ZgrMl1qgdD9JOXgRTmcoO1bzGNG8jd0eyZR6yS73z7GISB+BJOBIVVcGl
+ k0EbqRsddowRBZsu51NH/VQAx+DucXv5jbaxs34rk6AuXRrxy8jNyAXGGiWbtX6Pkqai
+ 75Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=VdRvUvogtVrKHWxwrTowg5p+rLlqnZhKF+iSJnHzGns=;
- b=ilDByzeZvRIl/IULg4zv9qlUPuQYox9UDz/gAqLiQn55AB94jwErJXU1FAFAzqRxnW
- fVdU3k4Qjg7k+oDiZfo04HsJHTDMHpSq3LQ/V2ZBPQnK4pRG87/nZNwr805jbGymvOua
- to/tz/pXIrKIWZC20zpRPxKq4umcYF/2gSU8NhvnEwaYN8nWAySiWjr3rDuZsv+WPAxI
- /8LIirIr4TeBIsv3/WHvCdjwBnhFlOnu+VPy5DlgHGAAR+QQrmU7PAy5UswHFZxxP7rO
- QF2cZLQL/veQJIZrRMitwiSBjXFosa6qhDs688UNouk0MMVQoul/0PpECVQXVbVakqVg
- Gl5w==
-X-Gm-Message-State: AJIora/gFOpY4Jcpr91WtOEW9CmNGoKVvGlSHoKv/UObWz3fRLYOJ3hb
- ZNBRlzBJBBQznlE4uBj82xZsCNJ+xrYH+2qBd2s=
-X-Google-Smtp-Source: AGRyM1tSWOSmMS5knEZTnprhgiI0RaiRZJ4GSaJZCYt4eT5Z1nuwPDK3XcGOibhNCgXiMQ2BkBw3RivgGnaCJfQZy6I=
-X-Received: by 2002:a17:902:f64b:b0:16c:6438:6999 with SMTP id
- m11-20020a170902f64b00b0016c64386999mr148419plg.25.1657603084217; Mon, 11 Jul
- 2022 22:18:04 -0700 (PDT)
+ bh=u3dRUI5Uc3csoy0U0HXbJw6qLQeCyDml2Iwd14WYkiw=;
+ b=DGz76H4af6qO8l3iwZdCX8oAKvAEG3RYOnQa8biYoAqhIMofODfPE8HI5fr04jSg+q
+ 22KDEnHjAfsP5C1VmNoRkPEpn+Ia5VzGTRr+2t1hfqTJf8EGS/pwMapICNk7XyxzpYV3
+ 9PgepnFAF3f/Nmq9AYDWTTdXK1GRAyD0B/qWfxeXDiW76jhjlsqC3EbNWd/gYMcpeQhF
+ FyFGeOt2G+aiz1JEzAXWeh29VZSr2CE5ZYJtH0RIx2N0KVhAUadbird+MBO2nQM4vZqK
+ QbpNjOAufOl1nHtCRUMw5d8QbEqRtAmHQSIdKSepR9KdMWLi0791yZsd87Sc5WeTHIR4
+ IrtA==
+X-Gm-Message-State: AJIora/q9gzHsOV0KOU01JDu3LTxOcRaP653vkVzfyrwFxWWBDSi1MPJ
+ W6EU33sY/MCRLAJAIavvY49IMNo3NxwkEBg67Ko=
+X-Google-Smtp-Source: AGRyM1u84bOkMvDqMZ+iSp7QMdtrdEep6VOFHD39i0lpnbLPbkHkiujRsf8rbG240oP4+f5M3cDwbuQCnBQpwB2xP6c=
+X-Received: by 2002:a63:1c4c:0:b0:412:6eef:f91a with SMTP id
+ c12-20020a631c4c000000b004126eeff91amr18807635pgm.361.1657604245787; Mon, 11
+ Jul 2022 22:37:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220710101546.3907-1-liweiwei@iscas.ac.cn>
 In-Reply-To: <20220710101546.3907-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 12 Jul 2022 15:17:37 +1000
-Message-ID: <CAKmqyKMrw59oEtVcFRnr1ofUV9C=qe_b1JZj=c_TriDQf2BnCQ@mail.gmail.com>
+Date: Tue, 12 Jul 2022 15:36:59 +1000
+Message-ID: <CAKmqyKNe8_2S70McaZRY2y+BUSqXVn+AB8GYq8WmsLRbznBVTw@mail.gmail.com>
 Subject: Re: [PATCH] target/riscv: move zmmul out of the experimental
  properties
 To: Weiwei Li <liweiwei@iscas.ac.cn>
@@ -53,8 +53,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -75,7 +75,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2022 05:18:10 -0000
+X-List-Received-Date: Tue, 12 Jul 2022 05:37:29 -0000
 
 On Sun, Jul 10, 2022 at 8:16 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
@@ -84,7 +84,9 @@ On Sun, Jul 10, 2022 at 8:16 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
