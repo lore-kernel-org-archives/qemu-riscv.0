@@ -1,48 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oD1Ji-0000ZV-7M
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 06:16:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34550)
+	id 1oD1Jk-0000aQ-9n
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 06:16:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34548)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1oD1Ja-0000Tu-AJ; Sun, 17 Jul 2022 06:15:54 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530]:46068)
+ id 1oD1Ja-0000Tt-7H; Sun, 17 Jul 2022 06:15:54 -0400
+Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:36498)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1oD1JY-00031a-Uh; Sun, 17 Jul 2022 06:15:54 -0400
-Received: by mail-ed1-x530.google.com with SMTP id g1so11648465edb.12;
- Sun, 17 Jul 2022 03:15:52 -0700 (PDT)
+ id 1oD1JY-00031E-Rz; Sun, 17 Jul 2022 06:15:53 -0400
+Received: by mail-ed1-x52d.google.com with SMTP id y8so11694756eda.3;
+ Sun, 17 Jul 2022 03:15:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=UfOO/hTvys/TnKLNR+hGbVw+ktHc3Sj0N3kM8gYQ9zo=;
- b=U77SK8pZ5ibHY5NFl8xGqLC0I8JlrrT00af6VOlRDJDmLw0ANu3ImTwblARZB+f21G
- 8y5W1RT1m2z7AG/swP905+iLuThjmZ+0L5z01KLycj6GVOvJur3nSbMgZ7nnUWh5Hp6n
- uPHZqH4ksyza+y1Q41wER5pkI+759UnnYdNzNKV2lSarFW+QNe5i/URcHM6Qf4lYeQav
- J4aYJswgUqf6l/6GdTROsvNYZ1DJaqZH1354A4vXZVNbln69XrIa3HgiuZcMvIIfEYip
- 8cJ0EemVRUZBVObN/ML0vgi3uGLmQW2/4N32W7nfHVLCFVBVMaPescHKZBN/+c6MhzHa
- KM7Q==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hw+mvHDpYJcTlOtg6FeFGsqdN8Va6xPaad2AgEpijDY=;
+ b=RxOfIIBcghwUIldZxV2vDClAu6LJLtPBgrK2oukQEdsFiuINMA5bfm0hox92gBeEC7
+ dHINIqPebXWrIRKb0aeFHquqS3ydModTlXbQ385HHSVsjE5PJ2r2kmaUSqoyjlsa3rdG
+ bXBpwZTNL34ThVD2urAb4rbZpw8AsSLuss3Y36wa9/rX9iNgX9UjIZQHXdh7vxFTUzX/
+ yvhnK/AF4Jayaady9i7ElCK7e147mciqG5Cg08UDVW3IBEWUx3m5iNN1yiFYgV4WyCGE
+ WRph6ej2kmKU4A+CgOMAGYFvVbAvTfVu7BWQe1Y8rSBwUwkPYm4v02RDlH21IB3mNQS8
+ QqkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=UfOO/hTvys/TnKLNR+hGbVw+ktHc3Sj0N3kM8gYQ9zo=;
- b=bAQmGVOup1BPXwI66sa4X48B1q3LmZ2eTnBrz6vuadfnurXlKcFpJO1NIA7Fd4t0Ql
- JWx7/IrTE2IFuh0ipKyD3enVQSNGDfF6x0n8tSnbjIR5CJ5lCdtQzqHFtEzm9Jnq+eY/
- 4+9ClCmYEy12eXN3l4lPzXx1jv2bd7DJ4D81dPQJRiC/GNInFLujfKvYs1AOC/Ad/sc7
- 9BgWI3XgV/5866SLi0PKCqezKkSdVaXFD9erzN1ULYLVWf5Rf/VtaTukFqz9cUZVWVct
- fVK7psT6uA7IXsl44hehgYowMJDyLWY/ZLu76QqvFoPL7pRyWQbRYwp/5c/AuTZ4G2Yd
- GKuw==
-X-Gm-Message-State: AJIora8pru2ywxRv59EyshBBAzeoZtWsI/pFj9tZGd6TzWdFfY67rB0p
- rhn21SMa8hVq+W0CYQTjINA=
-X-Google-Smtp-Source: AGRyM1u8chFR0JZKdVMxApaZUQzq0MdUMZlDfKcLXAV1JphV6xgi7OKZkwD51iMNRYp2mEXXxCCQsw==
-X-Received: by 2002:a05:6402:2553:b0:43a:caa2:4956 with SMTP id
- l19-20020a056402255300b0043acaa24956mr29930275edb.406.1658052951206; 
- Sun, 17 Jul 2022 03:15:51 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=hw+mvHDpYJcTlOtg6FeFGsqdN8Va6xPaad2AgEpijDY=;
+ b=FB4arJ5K1v6HQHOSoAdO9uvVcGi98Le5eambcXcNpiwQuw2mtMC8JITbp029cv2cmo
+ EPu+zGyK7NtHVFYJBJ/LZqfYtblQwfnnatqtjc2gmtRkarVbXLqszzhkTsGvRAb65PFy
+ w3OyGr8d9g+7KZa1tnjO7Fihlb7inuPudm6gXSuSjAe/m3hdRVBxYs5AWGetwuhpFiSj
+ ZqvDCQRwsatPu1EQURKAijLao1j8Yt/cV1kQzMQrCwtNKvgy+HYW0GGELt8TCKBuoTsq
+ pDox7o81VylOB6MvqWX15IHnDQKzivl/53bZs+xlxvVLdhsWuBED90zoiWSLgt4odZ5F
+ mpvQ==
+X-Gm-Message-State: AJIora/URXE4FOzZ8VwRLXhTA3+HsluC8fi/hGh32eOIUcjAQU6RMzqn
+ qYLoSiee0Mw+abJE3ckK0y8=
+X-Google-Smtp-Source: AGRyM1sDn/52eyhAH38SHqCDD5o2CM/V48EFis1rR0LjTOzK4zKAalEF/wnKh8FPLS7gx0l9kfMryQ==
+X-Received: by 2002:a05:6402:3705:b0:43a:214b:5f40 with SMTP id
+ ek5-20020a056402370500b0043a214b5f40mr29930616edb.83.1658052949240; 
+ Sun, 17 Jul 2022 03:15:49 -0700 (PDT)
 Received: from neptune.lab ([81.200.11.194])
  by smtp.googlemail.com with ESMTPSA id
- g21-20020a1709061e1500b00722f8d02928sm4249421ejj.174.2022.07.17.03.15.49
+ g21-20020a1709061e1500b00722f8d02928sm4249421ejj.174.2022.07.17.03.15.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Jul 2022 03:15:49 -0700 (PDT)
+ Sun, 17 Jul 2022 03:15:47 -0700 (PDT)
 From: Alexey Baturo <baturo.alexey@gmail.com>
 X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
 To: 
@@ -51,17 +51,14 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 1/1] target/riscv: Fix typo and restore Pointer Masking
- functionality for RISC-V
-Date: Sun, 17 Jul 2022 13:15:43 +0300
-Message-Id: <20220717101543.478533-2-space.monkey.delivers@gmail.com>
+Subject: [PATCH 0/1] Fix pointer masking functionality for RISC-V
+Date: Sun, 17 Jul 2022 13:15:42 +0300
+Message-Id: <20220717101543.478533-1-space.monkey.delivers@gmail.com>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220717101543.478533-1-space.monkey.delivers@gmail.com>
-References: <20220717101543.478533-1-space.monkey.delivers@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -85,24 +82,18 @@ X-List-Received-Date: Sun, 17 Jul 2022 10:15:55 -0000
 
 From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
----
+Hi,
+
+This patch fixes a typo which leads to broken pointer masking functionality for RISC-V.
+Thanks.
+
+Alexey Baturo (1):
+  target/riscv: Fix typo and restore Pointer Masking functionality for
+    RISC-V
+
  target/riscv/translate.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 63b04e8a94..86c19ea74e 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -544,7 +544,7 @@ static TCGv get_address(DisasContext *ctx, int rs1, int imm)
- 
-     tcg_gen_addi_tl(addr, src1, imm);
-     if (ctx->pm_mask_enabled) {
--        tcg_gen_and_tl(addr, addr, pm_mask);
-+        tcg_gen_andc_tl(addr, addr, pm_mask);
-     } else if (get_xl(ctx) == MXL_RV32) {
-         tcg_gen_ext32u_tl(addr, addr);
-     }
 -- 
 2.30.2
 
