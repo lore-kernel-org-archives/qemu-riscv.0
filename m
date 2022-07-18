@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oDN1R-00036k-Pt
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jul 2022 05:26:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:39252)
+	id 1oDNBu-0001kj-6q
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Jul 2022 05:37:26 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41046)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1oDN1Q-00034z-IM
- for qemu-riscv@nongnu.org; Mon, 18 Jul 2022 05:26:36 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630]:38462)
+ id 1oDNBs-0001kQ-Bj
+ for qemu-riscv@nongnu.org; Mon, 18 Jul 2022 05:37:24 -0400
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636]:35387)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1oDN1P-0007wo-1F
- for qemu-riscv@nongnu.org; Mon, 18 Jul 2022 05:26:36 -0400
-Received: by mail-ej1-x630.google.com with SMTP id l23so20119394ejr.5
- for <qemu-riscv@nongnu.org>; Mon, 18 Jul 2022 02:26:32 -0700 (PDT)
+ id 1oDNBo-00018M-JC
+ for qemu-riscv@nongnu.org; Mon, 18 Jul 2022 05:37:23 -0400
+Received: by mail-ej1-x636.google.com with SMTP id j22so20169179ejs.2
+ for <qemu-riscv@nongnu.org>; Mon, 18 Jul 2022 02:37:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=ventanamicro.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=u6TJH/WnifNVRQGE4Ljs8UTAmovN2IAX7KKhnHk93lk=;
- b=Z5PwMH3CSQVYhwrvFhQHlhEbSTmxf2pbJALbzIdKchICs2uRC/PBmTZxJQFG8r8dy5
- SHNJ3AyJttADdSYXViPxn4zQmMbBCccEdy95IolClLLsS3ksyuh/XMgXptXC3u8eaqPt
- UvruMn11VPyU2howRpj3l4sbJzo4QNEPnyJBef6PlSSShn3v9vK29H4mxKqpk/gyFvDY
- PLRRGBIHuAD8CZEG3zL8TuZMNnnrCZYRqC3gYzVU2+rYJ9zGB2Cs/UwCm19mPv0p6gnN
- sGjMebCCllix0tHfudkbAc1GOBeCsfOUJ5EBXuHvKJiNW3XxG4GwH4m1Q0IREvYf0qWj
- VD9Q==
+ bh=L7lIeXp7jX3pP5csSk4fWfxUEfYeop9zBL7ORE97oag=;
+ b=T0bEuNf9xd9XHq7iDEoUtzHXGkWT6B3XCiLJ5CS6tfO1ONMGc/tUrvdEPlfAEeDjVT
+ whZtGv88hh8w8TQR7yXyTgsbLh+u0rRGoMDEzwGXyfy1ocG6aoFG/6S10+/pgVPf2iRD
+ R2VXjBydd73Jg5+gIUbC2NdDJptW12Jp45KUSZrboDs78vtmsOKa3+eIv2PUFh60lYJh
+ cQ6CqPC5nip45Tc3UZTtWO64i7itY6bh1T73a3Dnni23AfEZBsbhn4ADRVFAnB5NMpOm
+ wkUaJeeCYnRzDXUki0JexSr3DgCjLBUn5/ILcHwefkD5DYmO2sitscCRppB1NnbDJ3ry
+ 4WnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=u6TJH/WnifNVRQGE4Ljs8UTAmovN2IAX7KKhnHk93lk=;
- b=3XR4oUY84N+Ou/eVGGPVSXPcbSo/igJar/Zt8sRmsxVEZoE7DRH5OteGSlaxWcLW+Y
- IJEMFDvR0u5rJwNOav7gdZl51rsqItkwLfNmx7thbmyGaxiu0Eo34BiZbUKaKaiRaHKv
- yo+tmdQmgF/ENXm3eKaXo9UsL5TPQU/ujV6+6vISd4GopWzymWLGKUh+DgpGzSPonBDq
- bh8d6z5jxpXQny7ofTwPt/79sKgay2W0Q3QK3zJJGsTelShpcmDZS04l+kalvVbWxZ83
- 3i/PHxl/ifm/Gbg8uGTAfg0ypzT/N7Ltc0WERxiGESe61bEwks7zR1jeOmUpRQdzT9ej
- aPcw==
-X-Gm-Message-State: AJIora+ogq1KllPsuxgBnES3mSHNIlnYnJFHbP2g5g19EFIHhLP8r2YB
- yRz5UxWvuOi5Ag0jFMDlRF6qhw==
-X-Google-Smtp-Source: AGRyM1sABLdz/Aa6PR537MWxcAfw0M+KuUOjX3BbRd95XVtc30zEGp2aPcml7ttwmzKHaU0WJqLKMA==
-X-Received: by 2002:a17:907:9710:b0:72b:3271:c9f with SMTP id
- jg16-20020a170907971000b0072b32710c9fmr24211775ejc.91.1658136391458; 
- Mon, 18 Jul 2022 02:26:31 -0700 (PDT)
+ bh=L7lIeXp7jX3pP5csSk4fWfxUEfYeop9zBL7ORE97oag=;
+ b=KeYESgYmSAIllyQXzM+2EzR8PqI4EMQy3tmWiQWC/uPaoZILHKE69JJ98hiol9+ZIK
+ cJa1hyebl6LltpDDu0WE2FjkBAtaoG1q2tUofaRRD5oqAT85snlcW5VZmhDHvYsAmFwK
+ /pEgwV5p2DPeHKNqjHAPL3+uekm0EN0WAJewMZD4GdQbYZtfBromorCnll2l44Zcq9lM
+ jCoH6rXlSvLtEWNHxayG9dGF/JpOO1KihldvjW9pqCtLipANBSUlD1yCvCBdgQa9SG02
+ peFGupRiryRxjAWfgb1sfijNQn+rX1kQAZ7TSB98s7O18YuLBbgEcpvAtZ/biB5lkns7
+ PYBg==
+X-Gm-Message-State: AJIora//Os6E2h+xqXDHjyw0kGz6xJYDBPLxzDJWKsVQrzdU/epB14K6
+ +cWDV+liDaJiGcHWbjtVhpsoyQ==
+X-Google-Smtp-Source: AGRyM1slyUMigGsHrgl9EAUVH5uKQ9A7czlz4tPVtEwUhItUCzBpzB4Zx6lrIUav2gFerNyEqcysCQ==
+X-Received: by 2002:a17:906:4313:b0:726:3b55:704b with SMTP id
+ j19-20020a170906431300b007263b55704bmr24849380ejm.398.1658137038684; 
+ Mon, 18 Jul 2022 02:37:18 -0700 (PDT)
 Received: from localhost (cst2-173-67.cust.vodafone.cz. [31.30.173.67])
  by smtp.gmail.com with ESMTPSA id
- ew11-20020a056402538b00b0043b4d43ebaasm5378234edb.58.2022.07.18.02.26.30
+ sa8-20020a170906eda800b00726dbb16b8dsm5239038ejb.65.2022.07.18.02.37.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Jul 2022 02:26:31 -0700 (PDT)
-Date: Mon, 18 Jul 2022 11:26:30 +0200
+ Mon, 18 Jul 2022 02:37:18 -0700 (PDT)
+Date: Mon, 18 Jul 2022 11:37:17 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  wangjunqiang@iscas.ac.cn, lazyparser@gmail.com
-Subject: Re: [PATCH v2 5/6] target/riscv: fix checks in hmode/hmode32
-Message-ID: <20220718092630.3gabgfcg74k5yvk7@kamzik>
+Subject: Re: [PATCH v2 6/6] target/riscv: simplify the check in hmode to
+ resue the check in riscv_csrrw_check
+Message-ID: <20220718093717.75s2hwfjh7gogrr3@kamzik>
 References: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
- <20220712063236.23834-6-liweiwei@iscas.ac.cn>
+ <20220712063236.23834-7-liweiwei@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220712063236.23834-6-liweiwei@iscas.ac.cn>
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x630.google.com
+In-Reply-To: <20220712063236.23834-7-liweiwei@iscas.ac.cn>
+Received-SPF: pass client-ip=2a00:1450:4864:20::636;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -81,70 +82,77 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2022 09:26:36 -0000
+X-List-Received-Date: Mon, 18 Jul 2022 09:37:24 -0000
 
 
-Same other $SUBJECT and comment suggestions as the previous patches.
+s/resue/reuse/ in $SUBJECT and capitalize 'simplify'
 
-On Tue, Jul 12, 2022 at 02:32:35PM +0800, Weiwei Li wrote:
-> - add check for the implicit dependence between H and S
-> - Csrs only existed in RV32 will not trigger virtual instruction fault
-> when not in RV32
+On Tue, Jul 12, 2022 at 02:32:36PM +0800, Weiwei Li wrote:
+> Just add 1 to the effective privledge level when in HS mode, then reuse the check
+> 'effective_priv < csr_priv' in riscv_csrrw_check to replace the privilege level
+> related check in hmode. Then, hmode will only check whether H extension is supported.
 
-I think I found the justification for this in 8.6.1 of the privileged
-spec, a pointer in the commit message would be good.
+Please wrap commit message lines around 74.
 
+> 
+> when accessing Hypervior CSRs:
+
+When
+
+>    1) if access from M privilege level, the check of 'effective_priv < csr_priv'
+> passes, returns hmode(...) which will return RISCV_EXCP_ILLEGAL_INST when H
+> extension is not supported and return RISCV_EXCP_NONE otherwise.
+>    2) if access from HS privilege level, effective_priv will add 1, the check
+> passes too, also returns hmode(...) too.
+>    3) if access from VS/VU privilege level, the check fails, and returns
+> RISCV_EXCP_VIRT_INSTRUCTION_FAULT
+>    4) if access from U privilege level, the check fails, and returns
+> RISCV_EXCP_ILLEGAL_INST
 > 
 > Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
 > Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/cpu.c | 5 +++++
->  target/riscv/csr.c | 9 ++-------
->  2 files changed, 7 insertions(+), 7 deletions(-)
+>  target/riscv/csr.c | 18 +++++-------------
+>  1 file changed, 5 insertions(+), 13 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b8ce0959cb..455787a940 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -738,6 +738,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              return;
->          }
->  
-> +        if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
-> +            error_setg(errp, "H extension implicitly requires S-mode");
-> +            return;
-> +        }
-> +
->          if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
->              error_setg(errp, "F extension requires Zicsr");
->              return;
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 1edeb69366..deddeb100e 100644
+> index deddeb100e..aa87698d1d 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -311,8 +311,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
->  
+> @@ -312,13 +312,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
 >  static RISCVException hmode(CPURISCVState *env, int csrno)
 >  {
-> -    if (riscv_has_ext(env, RVS) &&
-> -        riscv_has_ext(env, RVH)) {
-> +    if (riscv_has_ext(env, RVH)) {
->          /* Hypervisor extension is supported */
->          if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
->              env->priv == PRV_M) {
-> @@ -328,11 +327,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
->  static RISCVException hmode32(CPURISCVState *env, int csrno)
->  {
->      if (riscv_cpu_mxl(env) != MXL_RV32) {
-> -        if (!riscv_cpu_virt_enabled(env)) {
-> -            return RISCV_EXCP_ILLEGAL_INST;
+>      if (riscv_has_ext(env, RVH)) {
+> -        /* Hypervisor extension is supported */
+> -        if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
+> -            env->priv == PRV_M) {
+> -            return RISCV_EXCP_NONE;
 > -        } else {
 > -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
 > -        }
-> +        return RISCV_EXCP_ILLEGAL_INST;
+> +        return RISCV_EXCP_NONE;
 >      }
 >  
->      return hmode(env, csrno);
+>      return RISCV_EXCP_ILLEGAL_INST;
+> @@ -3280,13 +3274,11 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+>  #if !defined(CONFIG_USER_ONLY)
+>      int csr_priv, effective_priv = env->priv;
+>  
+> -    if (riscv_has_ext(env, RVH) && env->priv == PRV_S) {
+> +    if (riscv_has_ext(env, RVH) && env->priv == PRV_S &&
+> +        !riscv_cpu_virt_enabled(env)) {
+>          /*
+> -         * We are in either HS or VS mode.
+> -         * Add 1 to the effective privledge level to allow us to access the
+> -         * Hypervisor CSRs. The `hmode` predicate will determine if access
+> -         * should be allowed(HS) or if a virtual instruction exception should be
+> -         * raised(VS).
+> +         * We are in HS mode. Add 1 to the effective privledge level to
+> +         * allow us to access the Hypervisor CSRs.
+>           */
+>          effective_priv++;
+>      }
 > -- 
 > 2.17.1
 > 
