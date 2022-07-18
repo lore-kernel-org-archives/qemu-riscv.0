@@ -1,69 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oD1Jk-0000aQ-9n
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 06:16:07 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34548)
+	id 1oDEsb-0005Og-BE
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 20:44:57 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49742)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1oD1Ja-0000Tt-7H; Sun, 17 Jul 2022 06:15:54 -0400
-Received: from mail-ed1-x52d.google.com ([2a00:1450:4864:20::52d]:36498)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oDEsa-0005OS-DF; Sun, 17 Jul 2022 20:44:56 -0400
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c]:45738)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1oD1JY-00031E-Rz; Sun, 17 Jul 2022 06:15:53 -0400
-Received: by mail-ed1-x52d.google.com with SMTP id y8so11694756eda.3;
- Sun, 17 Jul 2022 03:15:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oDEsY-0007Y2-MG; Sun, 17 Jul 2022 20:44:56 -0400
+Received: by mail-pg1-x52c.google.com with SMTP id f65so9231383pgc.12;
+ Sun, 17 Jul 2022 17:44:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=hw+mvHDpYJcTlOtg6FeFGsqdN8Va6xPaad2AgEpijDY=;
- b=RxOfIIBcghwUIldZxV2vDClAu6LJLtPBgrK2oukQEdsFiuINMA5bfm0hox92gBeEC7
- dHINIqPebXWrIRKb0aeFHquqS3ydModTlXbQ385HHSVsjE5PJ2r2kmaUSqoyjlsa3rdG
- bXBpwZTNL34ThVD2urAb4rbZpw8AsSLuss3Y36wa9/rX9iNgX9UjIZQHXdh7vxFTUzX/
- yvhnK/AF4Jayaady9i7ElCK7e147mciqG5Cg08UDVW3IBEWUx3m5iNN1yiFYgV4WyCGE
- WRph6ej2kmKU4A+CgOMAGYFvVbAvTfVu7BWQe1Y8rSBwUwkPYm4v02RDlH21IB3mNQS8
- QqkQ==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=siiUxJutTDBRVQ7npCgj+XdjljJVq2ZM3zfVroDnvko=;
+ b=lr3KjxDhrCrwXWuz/S+pHDBtBMZkPDplpo4jI0FvU80vLPPzfJanbDyvxUlqSUJqEe
+ /P4OwejBXtPvO/VkDXsNmENJn5yHN5sR6+8enEUnVJAHx9A8bXp32QXaddp22dHQwvLa
+ otCcU7hgonzK5Ex0J85Um1mq1+5aRj2itV/xiLsbnQWEd2LSYnLiCJOrUc/41yrFdtl+
+ K2ghiHRhxYADdnuROTxi3c8JseV1Vy1AM1297/VBqe+BDe/S7GjezDQ+Ms3a56xqxnVO
+ jg6Wk0aI5LFR9D62JDBh6hHAiLoPTNZ9C8ZG0a0N72aSFqjBphVb3mC1hzlLOuxqki1b
+ Xbkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=hw+mvHDpYJcTlOtg6FeFGsqdN8Va6xPaad2AgEpijDY=;
- b=FB4arJ5K1v6HQHOSoAdO9uvVcGi98Le5eambcXcNpiwQuw2mtMC8JITbp029cv2cmo
- EPu+zGyK7NtHVFYJBJ/LZqfYtblQwfnnatqtjc2gmtRkarVbXLqszzhkTsGvRAb65PFy
- w3OyGr8d9g+7KZa1tnjO7Fihlb7inuPudm6gXSuSjAe/m3hdRVBxYs5AWGetwuhpFiSj
- ZqvDCQRwsatPu1EQURKAijLao1j8Yt/cV1kQzMQrCwtNKvgy+HYW0GGELt8TCKBuoTsq
- pDox7o81VylOB6MvqWX15IHnDQKzivl/53bZs+xlxvVLdhsWuBED90zoiWSLgt4odZ5F
- mpvQ==
-X-Gm-Message-State: AJIora/URXE4FOzZ8VwRLXhTA3+HsluC8fi/hGh32eOIUcjAQU6RMzqn
- qYLoSiee0Mw+abJE3ckK0y8=
-X-Google-Smtp-Source: AGRyM1sDn/52eyhAH38SHqCDD5o2CM/V48EFis1rR0LjTOzK4zKAalEF/wnKh8FPLS7gx0l9kfMryQ==
-X-Received: by 2002:a05:6402:3705:b0:43a:214b:5f40 with SMTP id
- ek5-20020a056402370500b0043a214b5f40mr29930616edb.83.1658052949240; 
- Sun, 17 Jul 2022 03:15:49 -0700 (PDT)
-Received: from neptune.lab ([81.200.11.194])
- by smtp.googlemail.com with ESMTPSA id
- g21-20020a1709061e1500b00722f8d02928sm4249421ejj.174.2022.07.17.03.15.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Jul 2022 03:15:47 -0700 (PDT)
-From: Alexey Baturo <baturo.alexey@gmail.com>
-X-Google-Original-From: Alexey Baturo <space.monkey.delivers@gmail.com>
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- space.monkey.delivers@gmail.com, kupokupokupopo@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH 0/1] Fix pointer masking functionality for RISC-V
-Date: Sun, 17 Jul 2022 13:15:42 +0300
-Message-Id: <20220717101543.478533-1-space.monkey.delivers@gmail.com>
-X-Mailer: git-send-email 2.30.2
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=siiUxJutTDBRVQ7npCgj+XdjljJVq2ZM3zfVroDnvko=;
+ b=b7+5q1in787XdGNFrQrvLoCT9NCYUPueUfb0jHch8KiN1RztZiR20wBO89znxFQU4m
+ yM3IqulSFCgJislrMa9dcd3/qxBg9HKPOtbE5VnAlF4Rcv4U1K34LlhL6ee1gRcGiDcw
+ bsN4OINiMw3akTlC/ZMdspVzgcu1c11ioKXRVFjQl6o6L5SmrHvzyRtARpxUe8F+qYL0
+ B16bWtThNHoYZdCGj8mYZ1LIqn+GzwLPtFab43akinFWT2jUNlrXqudqulcoXUbkV1Q/
+ vhzd1234cgUlGaDoKU8U04WI9Pl4N/RrBg8dVoxNdRRfjn2YD7VlyVeZleiLLg9u+gXP
+ I+OQ==
+X-Gm-Message-State: AJIora92GIT+ar1M7MoUuSwYT0Pf9CXqY9pHDhhSctTWrdFnKn5WyNYM
+ pbZ759GM+v5f6u/vkl8uiY3zwGRXpTN5L51sSbQ=
+X-Google-Smtp-Source: AGRyM1sMhtVAhI2yI8/UU/AeK8r2ee5AM0pWwbpnNucXq+J/vDl/XsNrn5AepU0jlIKCb69OMpXdw8JrLOawxX5/Ngc=
+X-Received: by 2002:a05:6a00:885:b0:510:950f:f787 with SMTP id
+ q5-20020a056a00088500b00510950ff787mr25204373pfj.83.1658105092427; Sun, 17
+ Jul 2022 17:44:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52d;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+References: <20220714180033.22385-1-palmer@rivosinc.com>
+In-Reply-To: <20220714180033.22385-1-palmer@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 18 Jul 2022 10:44:26 +1000
+Message-ID: <CAKmqyKP=uO6j7EoM5mVDgYAwHxfEjYT9iu5DaSiviMT4ScP1nA@mail.gmail.com>
+Subject: Re: [PATCH] RISC-V: Allow both Zmmul and M
+To: Palmer Dabbelt <palmer@rivosinc.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x52c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -78,23 +71,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jul 2022 10:15:55 -0000
+X-List-Received-Date: Mon, 18 Jul 2022 00:44:56 -0000
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
+On Fri, Jul 15, 2022 at 4:13 AM Palmer Dabbelt <palmer@rivosinc.com> wrote:
+>
+> We got to talking about how Zmmul and M interact with each other
+> https://github.com/riscv/riscv-isa-manual/issues/869 , and it turns out
+> that QEMU's behavior is slightly wrong: having Zmmul and M is a legal
+> combination, it just means that the multiplication instructions are
+> supported even when M is disabled at runtime via misa.
+>
+> This just stops overriding M from Zmmul, with that the other checks for
+> the multiplication instructions work as per the ISA.
+>
+> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
 
-Hi,
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-This patch fixes a typo which leads to broken pointer masking functionality for RISC-V.
-Thanks.
+Alistair
 
-Alexey Baturo (1):
-  target/riscv: Fix typo and restore Pointer Masking functionality for
-    RISC-V
-
- target/riscv/translate.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
--- 
-2.30.2
-
+> ---
+>  target/riscv/cpu.c | 5 -----
+>  1 file changed, 5 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index db2b8e4d30..cab74faaca 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -709,11 +709,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+>              cpu->cfg.ext_ifencei = true;
+>          }
+>
+> -        if (cpu->cfg.ext_m && cpu->cfg.ext_zmmul) {
+> -            warn_report("Zmmul will override M");
+> -            cpu->cfg.ext_m = false;
+> -        }
+> -
+>          if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
+>              error_setg(errp,
+>                         "I and E extensions are incompatible");
+> --
+> 2.34.1
+>
+>
 
