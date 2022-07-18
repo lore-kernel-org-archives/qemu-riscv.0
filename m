@@ -1,56 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oDFQb-0006iW-NV
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 21:20:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53698)
+	id 1oDFUd-0000Wc-B5
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 21:24:15 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54122)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDFQZ-0006gx-Ma; Sun, 17 Jul 2022 21:20:03 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b]:51140)
+ id 1oDFUb-0000TF-I0; Sun, 17 Jul 2022 21:24:13 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:41941)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDFQY-0004FJ-3x; Sun, 17 Jul 2022 21:20:03 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id a15so10446737pjs.0;
- Sun, 17 Jul 2022 18:20:01 -0700 (PDT)
+ id 1oDFUa-0004qi-1w; Sun, 17 Jul 2022 21:24:13 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ o31-20020a17090a0a2200b001ef7bd037bbso11258194pjo.0; 
+ Sun, 17 Jul 2022 18:24:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3jTjD2ES5JtLgCp5yeRBFz5zXh7/g8p/yqeuGiVdOe8=;
- b=lGeo8bfmeikQwwX1QvoLAYGRSn2knDUdeYpYBK6i/3ulnVQvs3aDZEnuAvCpzScdHi
- aVVY6kzXKhQ6p/qhPv/BYohkz4B719NwuLY8RUBKhx0QhK22qPNsL5jB+qvd7Nbe8a80
- TLhq3fyZaxXJ2gT+ulmtmqG5wbTveoxKs5qbs5isizUEZvuiL5EOHUmJKOFp5h0JtOA1
- nRWLkaRNG9slycm00mY6fH0jEC8eRwOCC6OmXTsqWCS3pEZIOMlgBQxIPzBzFkZEodLd
- uN4DDQEji0QaDDg4zdD16Z+b8HCQFKuDk7zYBlRfpWzAUB/bSM5sILnNhDkeYs7K1xKJ
- M0ZQ==
+ :cc:content-transfer-encoding;
+ bh=tWgNNwXM3G9VRblsenqCUfOOUktPXhDxtNTgmCngUxs=;
+ b=aUm4wnsDyYaTWr6DxaXmypooAJZ8M8XrBBTcXSqO074q7VDimSEZ7nUPrgjh+dabKg
+ zYDMWZeUqfX2KP6Dxa1f9dTIt9na2bbJ+S8R0ZEj5GFsd/40SaLu2pjCG5Iu4oGy4J0E
+ +kuMOrSFox4WsFCDBpwUAh1KGNmz8XZZuFdMVRi1n3sqH9cMwmcqDY94oEFfloJFJnDJ
+ 2ReR6KHIAOw2kGXCoIRFtUv8QhdQOtNGZzeJ7EVBHJo0VKt18So42y1ot2/M2V3xMq7C
+ kzSeHH6L8V2XNFve3mKW3XfCpPHBImju2NhAtmGQk9VqwEqmfMGgfrxeYtEqfbvZztb1
+ 6tUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3jTjD2ES5JtLgCp5yeRBFz5zXh7/g8p/yqeuGiVdOe8=;
- b=kOYJyIfEnSZK6Fs7O2Xet7IG3OJyHna4S3ghxUek9achEznwAwHtSdSFTdDbVrf/TC
- n/++y0hMJqSI+XYN9FjcpHrJapA6B42hLNqsl4LKXVe5kN51ueoJmhnLw6lmI38ZHUXf
- lZgUWIGJcp+d1lFZdD/HzWW6cIjWpojA7qgw7E2u2njrHlpuxzc7kPTSptOQHYH+CG5K
- T6lpm+aI4myoJsbUBWwte1AuNTp4lEVbGxM+3qH+rnlHyaeRp6e3P8LJ27fv3PCWW8qN
- hDQjZmQuh/Dpbf2v6IeSHy9YKS4re2sU+JN8q/sikRgVuciRDeK+6hzZWMmOjrE4HV5e
- BI9Q==
-X-Gm-Message-State: AJIora/ejQ9nJaCUkxgLVrjWSjgp+KbPxYcojaurlbTyzE+46YCpSaA+
- 8WmQ+q/2jgk27WrHxf516vu3qIT5GN4+fWk2420=
-X-Google-Smtp-Source: AGRyM1tmySQAFgQ7nSATXbVi3Ksr7I1ovqo777Igl/7l0XG8GizgyAtbO81gkmF1aciUtcSFZoXQgZYYIboXgxsFm4Y=
-X-Received: by 2002:a17:90a:e611:b0:1ef:92b6:d31 with SMTP id
- j17-20020a17090ae61100b001ef92b60d31mr35492879pjy.166.1658107200405; Sun, 17
- Jul 2022 18:20:00 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=tWgNNwXM3G9VRblsenqCUfOOUktPXhDxtNTgmCngUxs=;
+ b=6aAhpO4amlZ6/mZJfll7/8WiSg7x26RC1sWSGxGOWWBpEB7rBhW6O2OlDvp5V2gX0H
+ IGK2egfxS4j/oTNMpIkoNEJxm4yO3z7TKm/w9qgPHFJt3jwLla3KTwCEIIpwMP5VTLZg
+ kvUrRzlR3+QXQdwSgSjy1mmW0RU+3fkqeKse9/ARUlmKiymLV7VkpNVidfFo/DLpr7ir
+ XFTuLKgQNNKrykC+utJykzlWXO161nJHwTD0/NiMs4Eyto1o40jyMkJS9KiOSFrXSyz5
+ D64/jD3NKb4Fagu1hB2wZNX9XTx9PWKWi0mux6E7nstP7VJbjwTcyRggu67FIyBEv/x6
+ AVEw==
+X-Gm-Message-State: AJIora9I2r0UepUcv4LTaW7kLBEE1AE+djrGnX+7FdakHbv7pfjkL1V/
+ m0ayPXB1SHXjqpoDRKwzygYUzVV1z1aQegh1r2s=
+X-Google-Smtp-Source: AGRyM1vfbvLvPshGHVuzdlrA+hLmiWQDKZV8ChyKQhb0JfC2oXi5O2h3twmN9i5xsYOXWL3nKPt4uPIXETBpYQi1KPo=
+X-Received: by 2002:a17:90b:2096:b0:1f0:1c73:f62d with SMTP id
+ hb22-20020a17090b209600b001f01c73f62dmr29085422pjb.120.1658107450154; Sun, 17
+ Jul 2022 18:24:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220714180033.22385-1-palmer@rivosinc.com>
-In-Reply-To: <20220714180033.22385-1-palmer@rivosinc.com>
+References: <20220620231603.2547260-1-atishp@rivosinc.com>
+ <20220620231603.2547260-9-atishp@rivosinc.com>
+ <8991819.NyiUUSuA9g@diego>
+In-Reply-To: <8991819.NyiUUSuA9g@diego>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Jul 2022 11:19:34 +1000
-Message-ID: <CAKmqyKM78vOCmtQuWwKCnk3XYhS3sRjaCYCJh=iFF1G=FpLJZQ@mail.gmail.com>
-Subject: Re: [PATCH] RISC-V: Allow both Zmmul and M
-To: Palmer Dabbelt <palmer@rivosinc.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Date: Mon, 18 Jul 2022 11:23:44 +1000
+Message-ID: <CAKmqyKMpZSS+LbP2nYjc_gjNOq=DJCbHHMAaFJ8VgeOxX5Bsjw@mail.gmail.com>
+Subject: Re: [PATCH v10 08/12] target/riscv: Add sscofpmf extension support
+To: =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Atish Patra <atishp@rivosinc.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
+ Frank Chang <frank.chang@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102b.google.com
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -71,49 +78,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2022 01:20:03 -0000
+X-List-Received-Date: Mon, 18 Jul 2022 01:24:13 -0000
 
-On Fri, Jul 15, 2022 at 4:13 AM Palmer Dabbelt <palmer@rivosinc.com> wrote:
+On Thu, Jul 14, 2022 at 7:54 PM Heiko St=C3=BCbner <heiko@sntech.de> wrote:
 >
-> We got to talking about how Zmmul and M interact with each other
-> https://github.com/riscv/riscv-isa-manual/issues/869 , and it turns out
-> that QEMU's behavior is slightly wrong: having Zmmul and M is a legal
-> combination, it just means that the multiplication instructions are
-> supported even when M is disabled at runtime via misa.
+> Am Dienstag, 21. Juni 2022, 01:15:58 CEST schrieb Atish Patra:
+> > The Sscofpmf ('Ss' for Privileged arch and Supervisor-level extensions,
+> > and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
+> > extension allows the perf to handle overflow interrupts and filtering
+> > support. This patch provides a framework for programmable
+> > counters to leverage the extension. As the extension doesn't have any
+> > provision for the overflow bit for fixed counters, the fixed events
+> > can also be monitoring using programmable counters. The underlying
+> > counters for cycle and instruction counters are always running. Thus,
+> > a separate timer device is programmed to handle the overflow.
+> >
+> > Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
 >
-> This just stops overriding M from Zmmul, with that the other checks for
-> the multiplication instructions work as per the ISA.
->
-> Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+> it looks like patches 1-7 already landed in Qemu though I didn't
+> see any "applied" messages, so it took me a bit to realize that :-) .
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Argh, sorry! I must have forgotten to mention that.
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 5 -----
->  1 file changed, 5 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index db2b8e4d30..cab74faaca 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -709,11 +709,6 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              cpu->cfg.ext_ifencei = true;
->          }
 >
-> -        if (cpu->cfg.ext_m && cpu->cfg.ext_zmmul) {
-> -            warn_report("Zmmul will override M");
-> -            cpu->cfg.ext_m = false;
-> -        }
-> -
->          if (cpu->cfg.ext_i && cpu->cfg.ext_e) {
->              error_setg(errp,
->                         "I and E extensions are incompatible");
-> --
-> 2.34.1
+> In any case, I ran Atish's sample from the cover-letter with a matching
+> kernel nad got similar results as shown in the cover-letter.
+>
+> Tested-by: Heiko Stuebner <heiko@sntech.de>
+>
 >
 >
 
