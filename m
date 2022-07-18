@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oDFs8-0006el-3F
-	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 21:48:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:58026)
+	id 1oDHof-0006Jb-6b
+	for mharc-qemu-riscv@gnu.org; Sun, 17 Jul 2022 23:53:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:46670)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDFs1-0006d2-27; Sun, 17 Jul 2022 21:48:26 -0400
-Received: from mail-pf1-x42d.google.com ([2607:f8b0:4864:20::42d]:40530)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oDHod-0006HE-A7
+ for qemu-riscv@nongnu.org; Sun, 17 Jul 2022 23:53:03 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:39609)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDFrw-0000GE-9n; Sun, 17 Jul 2022 21:48:23 -0400
-Received: by mail-pf1-x42d.google.com with SMTP id y141so9415115pfb.7;
- Sun, 17 Jul 2022 18:48:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Ouw5XUfb0diOa/jMDUuWwor6t2qFp1Zuyo9YttJsEBw=;
- b=jlzDKEnZ4emeFCnXHe1zdWlJ3VoA47BrTko78XrZ1D8KDPjEeXMbOSPGZ8rHJFDhRa
- ZTYiUUYBnBH1gQludvABJdD22Jv5D8ln1aZlH4dVIAiuNlivS+uG5iI5udJu+wak5q17
- TXs10aVN4kXMSCSafyq4VNxoCK9ZN6JbAt7Si/Jso9/9GV4rAPk/JMcpHZ7CBABUqDE6
- JRUvlxndXiekSNzcbFXUoZCekhpXmmZfOMzW1E1BeAf9R4fGuR+Spi8+qn3ms4qZaHUp
- G5uXB1WIGMGox6P6moRoy4/y6iSnH7YDs6WRQy6/cWkR13D+GQpw1a8XM3xlhU2Ficmy
- XfZw==
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1oDHob-0002bb-3q
+ for qemu-riscv@nongnu.org; Sun, 17 Jul 2022 23:53:02 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ v4-20020a17090abb8400b001ef966652a3so16947149pjr.4
+ for <qemu-riscv@nongnu.org>; Sun, 17 Jul 2022 20:53:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sifive.com; s=google;
+ h=from:to:cc:subject:date:message-id;
+ bh=OSfNi9CRiDFuBtQzA4BMUUt8sk2+mA+9HeBF0nB1mxY=;
+ b=JkbsqjMpYmWF3SbMumaI4mWDRAsUXBkI9mJVGp7b72oBOdhw82B/W11tZI+U6tUgpo
+ oFTzCyFTL6UM2ieYB4iLPAz8aEXuKSi4ntufq8GD5uAALEtPKIaCMY/sPxA3+/CEotra
+ gpDRi0kvM6zx5fWNoudROErkQ2SyzrMLER3HqvSkheZ17aDO/WJQef2brrDh4pH80DuR
+ Gtsi15rvHvOmzok5D0OM9Bt2IFAQu1hNX360xKsD0tufgqljBzLuaxqVh3QCAQSmMhZZ
+ zcPfg+RWluiwphnOWsFDBLdycuZUPvvKirDf0UIdcAzRMAxXkCW7iSbYI9hRiivQVqgN
+ JE0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Ouw5XUfb0diOa/jMDUuWwor6t2qFp1Zuyo9YttJsEBw=;
- b=uatBXsoS2FY0AlcWqlYXhpmDfARpVeC/CxNhzGH4nz3vkwnb4Zy4RdsP5uEqZdp6LH
- PDKj3Nx+BMkYLV9GYiiWWdWeRtq0IpsNE7Gp+j+mEVVNgWhRprANDBTZiDAnOlxKw0UT
- gd8qXpI5jz4qc2CNYLu7/lOn9i6Y1BmebJY9ym4n9IFpw01bXC3hLREi49PE4ojvi8m5
- KatlvAYk+lFlxS+PRFFFE5cDM0qx9IF2sbki8tcj1RomAeZ8MBWdQJDmvMyU6JTWa8GE
- Monck++V3m5XVU6OowGm5p8OaM1FjHUKlnUB0xKNG8sLoUVEwBn+f5eZSrH0PTt7EHD7
- 92Pg==
-X-Gm-Message-State: AJIora9JEouwlTZt7YDybrR9kliwg5Jmr3hebHU53JFfP3u9I44ZI5Xv
- NPHsx+2x5h10G7Ih79chXiku9vtXWeoCv0sMkbI=
-X-Google-Smtp-Source: AGRyM1txJ862J4jA4cEkmKUp6wRAvKUvPvDP2nd7xGm2ofCXHA4idhi6fMMlN6efoSY0UYTDsFdui6U7bfzF8PCopqA=
-X-Received: by 2002:a65:6b8a:0:b0:3db:7dc5:fec2 with SMTP id
- d10-20020a656b8a000000b003db7dc5fec2mr22029039pgw.223.1658108898316; Sun, 17
- Jul 2022 18:48:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220712063236.23834-1-liweiwei@iscas.ac.cn>
- <20220712063236.23834-4-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220712063236.23834-4-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 18 Jul 2022 11:47:51 +1000
-Message-ID: <CAKmqyKPpxL+re3LFjSNvwB4sDG1=bzuovw3gOAWTF9QHWwQP0w@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] target/riscv: fix checkpatch warning may triggered
- in csr_ops table
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42d;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x42d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=OSfNi9CRiDFuBtQzA4BMUUt8sk2+mA+9HeBF0nB1mxY=;
+ b=er0sBpV1YdQ9JuHuzwv0PCD6Z9KT6mTL1dLpymyK28nJWlJJ5B2NfuDNfomCmYEKQk
+ 4Au8msz3Lhk36NkbCS/TvlooIT6C4ww5tFH8Sc0M4JGsd92/WhJDkgiw6XxSNeFNewBC
+ QyOtazagckq6FDY4AqfPyKWA3AQ9N/aQO41tm7NqW7+Q9DqLNLCr+pqwRq4x2CGCQamF
+ Bu6vYfjSPoFJysC/kWr1U00MJJ2kjPME6NDD2Ov8dGI/u0RozUYbwodrkUqQUP3a5Tv7
+ bEAncm681J8Ol8JlOKclvBfFcMlliEwoT+YamrmxgcqbLTEyWiJJqeJn+JGbgluaY2t6
+ Qtrw==
+X-Gm-Message-State: AJIora/D3hnycJnCjOsn7Q82KMC5WM2IauowRuwsCjmOo2Ax/W5bQSqB
+ 7EJVnbM//JwHKk3GoovwV5pwkA==
+X-Google-Smtp-Source: AGRyM1v8gLWfZ+AQ+vwRgFxW/yXBXBtYpQPZz9RhXFt9YPERmnm20AtpA9fm/us9sSnbow0f8t9i1g==
+X-Received: by 2002:a17:903:249:b0:16b:9cf3:596e with SMTP id
+ j9-20020a170903024900b0016b9cf3596emr25922243plh.60.1658116379034; 
+ Sun, 17 Jul 2022 20:52:59 -0700 (PDT)
+Received: from hsinchu25.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ ij8-20020a170902ab4800b0016c066e566bsm8041019plb.164.2022.07.17.20.52.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 Jul 2022 20:52:58 -0700 (PDT)
+From: Jim Shu <jim.shu@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Jim Shu <jim.shu@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Subject: [PATCH] target/riscv: Support SW update of PTE A/D bits and Ssptwad
+ extension
+Date: Mon, 18 Jul 2022 03:52:26 +0000
+Message-Id: <20220718035249.17440-1-jim.shu@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=jim.shu@sifive.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,663 +77,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2022 01:48:26 -0000
+X-List-Received-Date: Mon, 18 Jul 2022 03:53:03 -0000
 
-On Tue, Jul 12, 2022 at 4:41 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->
-> - fix the lines with over 80 characters
-> - fix the lines which is obviously misalgined with other lines
-> in same the group
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+RISC-V priv spec v1.12 permits 2 PTE-update schemes of A/D-bit
+(Access/Dirty bit): HW update or SW update. RISC-V profile defines the
+extension name 'Ssptwad' for HW update to PTE A/D bits.
+https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Current QEMU RISC-V implements HW update scheme, so this commit
+introduces SW update scheme to QEMU and uses the 'Ssptwad' extension
+as the CPU option to select 2 PTE-update schemes. QEMU RISC-V CPU still
+uses HW update scheme (ext_ssptwad=true) by default to keep the backward
+compatibility.
 
-Alistair
+SW update scheme implemention is based on priv spec v1.12:
+"When a virtual page is accessed and the A bit is clear, or is written
+and the D bit is clear, a page-fault exception (corresponding to the
+original access type) is raised."
 
-> ---
->  target/riscv/csr.c | 441 ++++++++++++++++++++++++---------------------
->  1 file changed, 234 insertions(+), 207 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 235f2a011e..7d4b6ceced 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3461,20 +3461,20 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_FRM]      = { "frm",      fs,     read_frm,     write_frm    },
->      [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
->      /* Vector CSRs */
-> -    [CSR_VSTART]   = { "vstart",   vs,    read_vstart,  write_vstart,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VXSAT]    = { "vxsat",    vs,    read_vxsat,   write_vxsat,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VXRM]     = { "vxrm",     vs,    read_vxrm,    write_vxrm,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VCSR]     = { "vcsr",     vs,    read_vcsr,    write_vcsr,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VL]       = { "vl",       vs,    read_vl,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VTYPE]    = { "vtype",    vs,    read_vtype,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VLENB]    = { "vlenb",    vs,    read_vlenb,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VL]       = { "vl",       vs,     read_vl,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VTYPE]    = { "vtype",    vs,     read_vtype,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
-> +    [CSR_VLENB]    = { "vlenb",    vs,     read_vlenb,
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0            },
->      /* User Timers and Counters */
->      [CSR_CYCLE]    = { "cycle",    ctr,    read_hpmcounter  },
->      [CSR_INSTRET]  = { "instret",  ctr,    read_hpmcounter  },
-> @@ -3493,10 +3493,14 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->
->  #if !defined(CONFIG_USER_ONLY)
->      /* Machine Timers and Counters */
-> -    [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter, write_mhpmcounter},
-> -    [CSR_MINSTRET]  = { "minstret",  any,   read_hpmcounter, write_mhpmcounter},
-> -    [CSR_MCYCLEH]   = { "mcycleh",   any32, read_hpmcounterh, write_mhpmcounterh},
-> -    [CSR_MINSTRETH] = { "minstreth", any32, read_hpmcounterh, write_mhpmcounterh},
-> +    [CSR_MCYCLE]    = { "mcycle",    any,   read_hpmcounter,
-> +                        write_mhpmcounter                    },
-> +    [CSR_MINSTRET]  = { "minstret",  any,   read_hpmcounter,
-> +                        write_mhpmcounter                    },
-> +    [CSR_MCYCLEH]   = { "mcycleh",   any32, read_hpmcounterh,
-> +                        write_mhpmcounterh                   },
-> +    [CSR_MINSTRETH] = { "minstreth", any32, read_hpmcounterh,
-> +                        write_mhpmcounterh                   },
->
->      /* Machine Information Registers */
->      [CSR_MVENDORID] = { "mvendorid", any,   read_mvendorid },
-> @@ -3505,23 +3509,25 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MHARTID]   = { "mhartid",   any,   read_mhartid   },
->
->      [CSR_MCONFIGPTR]  = { "mconfigptr", any,   read_zero,
-> -                                        .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0 },
->      /* Machine Trap Setup */
-> -    [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus,     write_mstatus, NULL,
-> -                                               read_mstatus_i128                   },
-> -    [CSR_MISA]        = { "misa",       any,   read_misa,        write_misa, NULL,
-> -                                               read_misa_i128                      },
-> -    [CSR_MIDELEG]     = { "mideleg",    any,   NULL,    NULL,    rmw_mideleg       },
-> -    [CSR_MEDELEG]     = { "medeleg",    any,   read_medeleg,     write_medeleg     },
-> -    [CSR_MIE]         = { "mie",        any,   NULL,    NULL,    rmw_mie           },
-> -    [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,       write_mtvec       },
-> -    [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,  write_mcounteren  },
-> -
-> -    [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,    write_mstatush    },
-> +    [CSR_MSTATUS]     = { "mstatus",    any,   read_mstatus, write_mstatus,
-> +                          NULL,                read_mstatus_i128           },
-> +    [CSR_MISA]        = { "misa",       any,   read_misa,    write_misa,
-> +                          NULL,                read_misa_i128              },
-> +    [CSR_MIDELEG]     = { "mideleg",    any,   NULL, NULL,   rmw_mideleg   },
-> +    [CSR_MEDELEG]     = { "medeleg",    any,   read_medeleg, write_medeleg },
-> +    [CSR_MIE]         = { "mie",        any,   NULL, NULL,   rmw_mie       },
-> +    [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,   write_mtvec   },
-> +    [CSR_MCOUNTEREN]  = { "mcounteren", any,   read_mcounteren,
-> +                          write_mcounteren                                 },
-> +
-> +    [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,
-> +                          write_mstatush                                   },
->
->      /* Machine Trap Handling */
-> -    [CSR_MSCRATCH] = { "mscratch", any,  read_mscratch,      write_mscratch, NULL,
-> -                                         read_mscratch_i128, write_mscratch_i128   },
-> +    [CSR_MSCRATCH] = { "mscratch", any,  read_mscratch, write_mscratch,
-> +                       NULL, read_mscratch_i128, write_mscratch_i128   },
->      [CSR_MEPC]     = { "mepc",     any,  read_mepc,     write_mepc     },
->      [CSR_MCAUSE]   = { "mcause",   any,  read_mcause,   write_mcause   },
->      [CSR_MTVAL]    = { "mtval",    any,  read_mtval,    write_mtval    },
-> @@ -3532,12 +3538,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_MIREG]    = { "mireg",    aia_any,   NULL, NULL,    rmw_xireg },
->
->      /* Machine-Level Interrupts (AIA) */
-> -    [CSR_MTOPEI]     = { "mtopei",     aia_any, NULL, NULL, rmw_xtopei },
-> -    [CSR_MTOPI]    = { "mtopi",    aia_any,   read_mtopi },
-> +    [CSR_MTOPEI]   = { "mtopei",   aia_any, NULL, NULL, rmw_xtopei },
-> +    [CSR_MTOPI]    = { "mtopi",    aia_any, read_mtopi },
->
->      /* Virtual Interrupts for Supervisor Level (AIA) */
-> -    [CSR_MVIEN]      = { "mvien", aia_any, read_zero, write_ignore },
-> -    [CSR_MVIP]       = { "mvip",  aia_any, read_zero, write_ignore },
-> +    [CSR_MVIEN]    = { "mvien",    aia_any, read_zero, write_ignore },
-> +    [CSR_MVIP]     = { "mvip",     aia_any, read_zero, write_ignore },
->
->      /* Machine-Level High-Half CSRs (AIA) */
->      [CSR_MIDELEGH] = { "midelegh", aia_any32, NULL, NULL, rmw_midelegh },
-> @@ -3548,33 +3554,34 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->
->      /* Execution environment configuration */
->      [CSR_MENVCFG]  = { "menvcfg",  any,   read_menvcfg,  write_menvcfg,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0              },
->      [CSR_MENVCFGH] = { "menvcfgh", any32, read_menvcfgh, write_menvcfgh,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0              },
->      [CSR_SENVCFG]  = { "senvcfg",  smode, read_senvcfg,  write_senvcfg,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0              },
->      [CSR_HENVCFG]  = { "henvcfg",  hmode, read_henvcfg, write_henvcfg,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0              },
->      [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh, write_henvcfgh,
-> -                                          .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                       .min_priv_ver = PRIV_VERSION_1_12_0              },
->
->      /* Supervisor Trap Setup */
-> -    [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus, NULL,
-> -                                              read_sstatus_i128                 },
-> -    [CSR_SIE]        = { "sie",        smode, NULL,   NULL,    rmw_sie          },
-> -    [CSR_STVEC]      = { "stvec",      smode, read_stvec,      write_stvec      },
-> -    [CSR_SCOUNTEREN] = { "scounteren", smode, read_scounteren, write_scounteren },
-> +    [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus,
-> +                         NULL,                read_sstatus_i128               },
-> +    [CSR_SIE]        = { "sie",        smode, NULL,   NULL,    rmw_sie        },
-> +    [CSR_STVEC]      = { "stvec",      smode, read_stvec,      write_stvec    },
-> +    [CSR_SCOUNTEREN] = { "scounteren", smode, read_scounteren,
-> +                         write_scounteren                                     },
->
->      /* Supervisor Trap Handling */
-> -    [CSR_SSCRATCH] = { "sscratch", smode, read_sscratch, write_sscratch, NULL,
-> -                                          read_sscratch_i128, write_sscratch_i128  },
-> +    [CSR_SSCRATCH] = { "sscratch", smode, read_sscratch, write_sscratch,
-> +                       NULL, read_sscratch_i128, write_sscratch_i128    },
->      [CSR_SEPC]     = { "sepc",     smode, read_sepc,     write_sepc     },
->      [CSR_SCAUSE]   = { "scause",   smode, read_scause,   write_scause   },
-> -    [CSR_STVAL]    = { "stval",    smode, read_stval,   write_stval   },
-> +    [CSR_STVAL]    = { "stval",    smode, read_stval,    write_stval    },
->      [CSR_SIP]      = { "sip",      smode, NULL,    NULL, rmw_sip        },
->
->      /* Supervisor Protection and Translation */
-> -    [CSR_SATP]     = { "satp",     smode, read_satp,    write_satp      },
-> +    [CSR_SATP]     = { "satp",     smode, read_satp,     write_satp     },
->
->      /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
->      [CSR_SISELECT]   = { "siselect",   aia_smode, NULL, NULL, rmw_xiselect },
-> @@ -3588,87 +3595,100 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_SIEH]       = { "sieh",   aia_smode32, NULL, NULL, rmw_sieh },
->      [CSR_SIPH]       = { "siph",   aia_smode32, NULL, NULL, rmw_siph },
->
-> -    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus,   write_hstatus,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg,   write_hedeleg,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_HSTATUS]     = { "hstatus",     hmode,   read_hstatus, write_hstatus,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HEDELEG]     = { "hedeleg",     hmode,   read_hedeleg, write_hedeleg,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
->      [CSR_HIDELEG]     = { "hideleg",     hmode,   NULL,   NULL, rmw_hideleg,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL,   rmw_hvip,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL,   rmw_hip,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HIE]         = { "hie",         hmode,   NULL,   NULL,    rmw_hie,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren, write_hcounteren,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HGEIE]       = { "hgeie",       hmode,   read_hgeie,       write_hgeie,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,     write_htval,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,    write_htinst,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HVIP]        = { "hvip",        hmode,   NULL,   NULL, rmw_hvip,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HIP]         = { "hip",         hmode,   NULL,   NULL, rmw_hip,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HIE]         = { "hie",         hmode,   NULL,   NULL, rmw_hie,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HCOUNTEREN]  = { "hcounteren",  hmode,   read_hcounteren,
-> +                          write_hcounteren,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HGEIE]       = { "hgeie",       hmode,   read_hgeie,   write_hgeie,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HTVAL]       = { "htval",       hmode,   read_htval,   write_htval,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HTINST]      = { "htinst",      hmode,   read_htinst,  write_htinst,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
->      [CSR_HGEIP]       = { "hgeip",       hmode,   read_hgeip,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,     write_hgatp,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta, write_htimedelta,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah, write_htimedeltah,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -
-> -    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,  write_vsstatus,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL,  rmw_vsip,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSIE]        = { "vsie",        hmode,   NULL,    NULL,    rmw_vsie ,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,    write_vstvec,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch, write_vsscratch,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,     write_vsepc,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,   write_vscause,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,    write_vstval,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,     write_vsatp,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -
-> -    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,    write_mtval2,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> -    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,    write_mtinst,
-> -                                         .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HGATP]       = { "hgatp",       hmode,   read_hgatp,   write_hgatp,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HTIMEDELTA]  = { "htimedelta",  hmode,   read_htimedelta,
-> +                          write_htimedelta,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_HTIMEDELTAH] = { "htimedeltah", hmode32, read_htimedeltah,
-> +                          write_htimedeltah,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +
-> +    [CSR_VSSTATUS]    = { "vsstatus",    hmode,   read_vsstatus,
-> +                          write_vsstatus,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSIP]        = { "vsip",        hmode,   NULL,    NULL, rmw_vsip,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSIE]        = { "vsie",        hmode,   NULL,    NULL, rmw_vsie ,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSTVEC]      = { "vstvec",      hmode,   read_vstvec,   write_vstvec,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSSCRATCH]   = { "vsscratch",   hmode,   read_vsscratch,
-> +                          write_vsscratch,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSEPC]       = { "vsepc",       hmode,   read_vsepc,    write_vsepc,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSCAUSE]     = { "vscause",     hmode,   read_vscause,  write_vscause,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSTVAL]      = { "vstval",      hmode,   read_vstval,   write_vstval,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,    write_vsatp,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +
-> +    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,   write_mtval2,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
-> +    [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,   write_mtinst,
-> +                          .min_priv_ver = PRIV_VERSION_1_12_0                },
->
->      /* Virtual Interrupts and Interrupt Priorities (H-extension with AIA) */
->      [CSR_HVIEN]       = { "hvien",       aia_hmode, read_zero, write_ignore },
-> -    [CSR_HVICTL]      = { "hvictl",      aia_hmode, read_hvictl, write_hvictl },
-> -    [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,   write_hviprio1 },
-> -    [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,   write_hviprio2 },
-> +    [CSR_HVICTL]      = { "hvictl",      aia_hmode, read_hvictl,
-> +                          write_hvictl                                      },
-> +    [CSR_HVIPRIO1]    = { "hviprio1",    aia_hmode, read_hviprio1,
-> +                          write_hviprio1                                    },
-> +    [CSR_HVIPRIO2]    = { "hviprio2",    aia_hmode, read_hviprio2,
-> +                          write_hviprio2                                    },
->
->      /*
->       * VS-Level Window to Indirectly Accessed Registers (H-extension with AIA)
->       */
-> -    [CSR_VSISELECT]   = { "vsiselect",   aia_hmode, NULL, NULL,      rmw_xiselect },
-> -    [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL,      rmw_xireg },
-> +    [CSR_VSISELECT]   = { "vsiselect",   aia_hmode, NULL, NULL,
-> +                          rmw_xiselect                                     },
-> +    [CSR_VSIREG]      = { "vsireg",      aia_hmode, NULL, NULL, rmw_xireg  },
->
->      /* VS-Level Interrupts (H-extension with AIA) */
->      [CSR_VSTOPEI]     = { "vstopei",     aia_hmode, NULL, NULL, rmw_xtopei },
->      [CSR_VSTOPI]      = { "vstopi",      aia_hmode, read_vstopi },
->
->      /* Hypervisor and VS-Level High-Half CSRs (H-extension with AIA) */
-> -    [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL, rmw_hidelegh },
-> -    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero, write_ignore },
-> +    [CSR_HIDELEGH]    = { "hidelegh",    aia_hmode32, NULL, NULL,
-> +                          rmw_hidelegh                                      },
-> +    [CSR_HVIENH]      = { "hvienh",      aia_hmode32, read_zero,
-> +                          write_ignore                                      },
->      [CSR_HVIPH]       = { "hviph",       aia_hmode32, NULL, NULL, rmw_hviph },
-> -    [CSR_HVIPRIO1H]   = { "hviprio1h",   aia_hmode32, read_hviprio1h, write_hviprio1h },
-> -    [CSR_HVIPRIO2H]   = { "hviprio2h",   aia_hmode32, read_hviprio2h, write_hviprio2h },
-> +    [CSR_HVIPRIO1H]   = { "hviprio1h",   aia_hmode32, read_hviprio1h,
-> +                          write_hviprio1h                                   },
-> +    [CSR_HVIPRIO2H]   = { "hviprio2h",   aia_hmode32, read_hviprio2h,
-> +                          write_hviprio2h                                   },
->      [CSR_VSIEH]       = { "vsieh",       aia_hmode32, NULL, NULL, rmw_vsieh },
->      [CSR_VSIPH]       = { "vsiph",       aia_hmode32, NULL, NULL, rmw_vsiph },
->
->      /* Physical Memory Protection */
->      [CSR_MSECCFG]    = { "mseccfg",  epmp, read_mseccfg, write_mseccfg,
-> -                                     .min_priv_ver = PRIV_VERSION_1_11_0 },
-> +                         .min_priv_ver = PRIV_VERSION_1_11_0           },
->      [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
->      [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
->      [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
-> @@ -3697,17 +3717,23 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_TDATA3]    =  { "tdata3",  debug, read_tdata,   write_tdata   },
->
->      /* User Pointer Masking */
-> -    [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,    write_umte    },
-> -    [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask, write_upmmask },
-> -    [CSR_UPMBASE] =    { "upmbase", pointer_masking, read_upmbase, write_upmbase },
-> +    [CSR_UMTE]    =    { "umte",    pointer_masking, read_umte,  write_umte },
-> +    [CSR_UPMMASK] =    { "upmmask", pointer_masking, read_upmmask,
-> +                         write_upmmask                                      },
-> +    [CSR_UPMBASE] =    { "upmbase", pointer_masking, read_upmbase,
-> +                         write_upmbase                                      },
->      /* Machine Pointer Masking */
-> -    [CSR_MMTE]    =    { "mmte",    pointer_masking, read_mmte,    write_mmte    },
-> -    [CSR_MPMMASK] =    { "mpmmask", pointer_masking, read_mpmmask, write_mpmmask },
-> -    [CSR_MPMBASE] =    { "mpmbase", pointer_masking, read_mpmbase, write_mpmbase },
-> +    [CSR_MMTE]    =    { "mmte",    pointer_masking, read_mmte,  write_mmte },
-> +    [CSR_MPMMASK] =    { "mpmmask", pointer_masking, read_mpmmask,
-> +                         write_mpmmask                                      },
-> +    [CSR_MPMBASE] =    { "mpmbase", pointer_masking, read_mpmbase,
-> +                         write_mpmbase                                      },
->      /* Supervisor Pointer Masking */
-> -    [CSR_SMTE]    =    { "smte",    pointer_masking, read_smte,    write_smte    },
-> -    [CSR_SPMMASK] =    { "spmmask", pointer_masking, read_spmmask, write_spmmask },
-> -    [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase, write_spmbase },
-> +    [CSR_SMTE]    =    { "smte",    pointer_masking, read_smte,  write_smte },
-> +    [CSR_SPMMASK] =    { "spmmask", pointer_masking, read_spmmask,
-> +                         write_spmmask                                      },
-> +    [CSR_SPMBASE] =    { "spmbase", pointer_masking, read_spmbase,
-> +                         write_spmbase                                      },
->
->      /* Performance Counters */
->      [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_hpmcounter },
-> @@ -3741,125 +3767,126 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_HPMCOUNTER31]   = { "hpmcounter31",   ctr,    read_hpmcounter },
->
->      [CSR_MHPMCOUNTER3]   = { "mhpmcounter3",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER4]   = { "mhpmcounter4",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER5]   = { "mhpmcounter5",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER6]   = { "mhpmcounter6",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER7]   = { "mhpmcounter7",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER8]   = { "mhpmcounter8",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER9]   = { "mhpmcounter9",   mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER10]  = { "mhpmcounter10",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER11]  = { "mhpmcounter11",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER12]  = { "mhpmcounter12",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER13]  = { "mhpmcounter13",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER14]  = { "mhpmcounter14",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER15]  = { "mhpmcounter15",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER16]  = { "mhpmcounter16",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER17]  = { "mhpmcounter17",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER18]  = { "mhpmcounter18",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER19]  = { "mhpmcounter19",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER20]  = { "mhpmcounter20",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER21]  = { "mhpmcounter21",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER22]  = { "mhpmcounter22",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER23]  = { "mhpmcounter23",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER24]  = { "mhpmcounter24",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER25]  = { "mhpmcounter25",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER26]  = { "mhpmcounter26",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER27]  = { "mhpmcounter27",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER28]  = { "mhpmcounter28",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER29]  = { "mhpmcounter29",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER30]  = { "mhpmcounter30",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->      [CSR_MHPMCOUNTER31]  = { "mhpmcounter31",  mctr,    read_hpmcounter,
-> -                                                       write_mhpmcounter },
-> +                             write_mhpmcounter                         },
->
->      [CSR_MCOUNTINHIBIT]  = { "mcountinhibit",  any, read_mcountinhibit,
-> -               write_mcountinhibit, .min_priv_ver = PRIV_VERSION_1_11_0  },
-> +                             write_mcountinhibit,
-> +                             .min_priv_ver = PRIV_VERSION_1_11_0       },
->
->      [CSR_MHPMEVENT3]     = { "mhpmevent3",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT4]     = { "mhpmevent4",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT5]     = { "mhpmevent5",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT6]     = { "mhpmevent6",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT7]     = { "mhpmevent7",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT8]     = { "mhpmevent8",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT9]     = { "mhpmevent9",     any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT10]    = { "mhpmevent10",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT11]    = { "mhpmevent11",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT12]    = { "mhpmevent12",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT13]    = { "mhpmevent13",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT14]    = { "mhpmevent14",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT15]    = { "mhpmevent15",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT16]    = { "mhpmevent16",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT17]    = { "mhpmevent17",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT18]    = { "mhpmevent18",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT19]    = { "mhpmevent19",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT20]    = { "mhpmevent20",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT21]    = { "mhpmevent21",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT22]    = { "mhpmevent22",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT23]    = { "mhpmevent23",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT24]    = { "mhpmevent24",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT25]    = { "mhpmevent25",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT26]    = { "mhpmevent26",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT27]    = { "mhpmevent27",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT28]    = { "mhpmevent28",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT29]    = { "mhpmevent29",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT30]    = { "mhpmevent30",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->      [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
-> -                                                       write_mhpmevent },
-> +                             write_mhpmevent                           },
->
->      [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
->      [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
-> @@ -3892,62 +3919,62 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->      [CSR_HPMCOUNTER31H]  = { "hpmcounter31h",  ctr32,  read_hpmcounterh },
->
->      [CSR_MHPMCOUNTER3H]  = { "mhpmcounter3h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER4H]  = { "mhpmcounter4h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER5H]  = { "mhpmcounter5h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER6H]  = { "mhpmcounter6h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER7H]  = { "mhpmcounter7h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER8H]  = { "mhpmcounter8h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER9H]  = { "mhpmcounter9h",  mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER10H] = { "mhpmcounter10h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER11H] = { "mhpmcounter11h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER12H] = { "mhpmcounter12h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER13H] = { "mhpmcounter13h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER14H] = { "mhpmcounter14h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER15H] = { "mhpmcounter15h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER16H] = { "mhpmcounter16h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER17H] = { "mhpmcounter17h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER18H] = { "mhpmcounter18h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER19H] = { "mhpmcounter19h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER20H] = { "mhpmcounter20h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER21H] = { "mhpmcounter21h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER22H] = { "mhpmcounter22h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER23H] = { "mhpmcounter23h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER24H] = { "mhpmcounter24h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER25H] = { "mhpmcounter25h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER26H] = { "mhpmcounter26h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER27H] = { "mhpmcounter27h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER28H] = { "mhpmcounter28h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER29H] = { "mhpmcounter29h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER30H] = { "mhpmcounter30h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->      [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
-> -                                                       write_mhpmcounterh },
-> +                             write_mhpmcounterh                         },
->  #endif /* !CONFIG_USER_ONLY */
->  };
-> --
-> 2.17.1
->
->
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+---
+ target/riscv/cpu.c        | 2 ++
+ target/riscv/cpu.h        | 1 +
+ target/riscv/cpu_helper.c | 9 +++++++++
+ 3 files changed, 12 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 1bb3973806..1d38c1c1d2 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -857,6 +857,7 @@ static void riscv_cpu_init(Object *obj)
+ 
+     cpu->cfg.ext_ifencei = true;
+     cpu->cfg.ext_icsr = true;
++    cpu->cfg.ext_ssptwad = true;
+     cpu->cfg.mmu = true;
+     cpu->cfg.pmp = true;
+ 
+@@ -900,6 +901,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("svinval", RISCVCPU, cfg.ext_svinval, false),
+     DEFINE_PROP_BOOL("svnapot", RISCVCPU, cfg.ext_svnapot, false),
+     DEFINE_PROP_BOOL("svpbmt", RISCVCPU, cfg.ext_svpbmt, false),
++    DEFINE_PROP_BOOL("ssptwad", RISCVCPU, cfg.ext_ssptwad, true),
+ 
+     DEFINE_PROP_BOOL("zba", RISCVCPU, cfg.ext_zba, true),
+     DEFINE_PROP_BOOL("zbb", RISCVCPU, cfg.ext_zbb, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 5c7acc055a..2eee59af98 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -433,6 +433,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool ext_zmmul;
++    bool ext_ssptwad;
+     bool rvv_ta_all_1s;
+ 
+     uint32_t mvendorid;
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 59b3680b1b..a8607c0d7b 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -981,6 +981,15 @@ restart:
+ 
+             /* Page table updates need to be atomic with MTTCG enabled */
+             if (updated_pte != pte) {
++                if (!cpu->cfg.ext_ssptwad) {
++                    /*
++                     * If A/D bits are managed by SW, HW just raises the
++                     * page fault exception corresponding to the original
++                     * access type when A/D bits need to be updated.
++                     */
++                    return TRANSLATE_FAIL;
++                }
++
+                 /*
+                  * - if accessed or dirty bits need updating, and the PTE is
+                  *   in RAM, then we do so atomically with a compare and swap.
+-- 
+2.17.1
+
 
