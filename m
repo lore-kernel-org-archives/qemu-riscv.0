@@ -1,51 +1,49 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oDZt2-0000qY-EM
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jul 2022 19:10:48 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44280)
+	id 1oDb23-0004DJ-Qc
+	for mharc-qemu-riscv@gnu.org; Mon, 18 Jul 2022 20:24:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52094)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDZt0-0000ot-DZ; Mon, 18 Jul 2022 19:10:46 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:41899)
+ id 1oDb22-0004D6-Py; Mon, 18 Jul 2022 20:24:10 -0400
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430]:43572)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oDZsy-0006ni-RX; Mon, 18 Jul 2022 19:10:46 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- g4-20020a17090a290400b001f1f2b7379dso783606pjd.0; 
- Mon, 18 Jul 2022 16:10:43 -0700 (PDT)
+ id 1oDb20-0007So-Mg; Mon, 18 Jul 2022 20:24:10 -0400
+Received: by mail-pf1-x430.google.com with SMTP id b9so12092767pfp.10;
+ Mon, 18 Jul 2022 17:24:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bZ2R7avgs1JfeV+HXMQdIL7tlDWUcDEEYyfmzT99d38=;
- b=ChPidpo/JYvE52Du3cieulYpv8wqtTvIx3O03C2ESqGFihvjFfo2A2ZkcgAJtwTBh8
- ZsP0YVMjK8f11nrhlvSVofcGQTkXokikua2EBvt1FM/ME5bfhEkt+VjpK18/Ndec3eBN
- YifuyWc2PvCzV4ijeybQtN7LTprtZ8a7X3Hz4HDLsXLtXzyJzWCosYkXsIPXjxchRK0l
- BzQUQZvGqeFkSj3u7dqMt/QUPxBIGdnh2LCyeGEi6HyhQ8Yz84aSEbX5WUe+obpnV2Bu
- VDTg16UtMRRn7xighOJt9nA/RNB7dJ1O1KDv0ZQ+PLCvvayrTSSqHETbtb6BMJ+BeLcS
- YjXg==
+ :cc; bh=2RYaVqsWYKi7vZojfcQH1kVo4AmTPs1FpVLB9ZEoC3U=;
+ b=NgA089cmYnOEeJihY92ffxTjqMLQMGE9BZzBE5ejlepNhBSU9gDInEGkido+Jg7ddX
+ cu8DsC0JwYhXSPRNLzpaccWh0ESQEDRij75/K90zEekB9Lw3Cxy8r1qYAqiscLsOUuF4
+ BgH5+L857KIKPjzN6pLiu7owBI36jAyOZNm2CPEriBsCbDWQyliS+OvVECAuurTXTshW
+ zAn+xoCNe8A+rGuLSDToVSdzYPWDaoph+Zv2Ab7yKMMQ6DBzo9v6M0c/DJFprfadMceb
+ QEDd4MbBMWkNdimeDeBgx2BqSSAZie7kHCEwsIH7KXK+sBRY32Ylabek2kd9iYeH8bo5
+ 6dLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=bZ2R7avgs1JfeV+HXMQdIL7tlDWUcDEEYyfmzT99d38=;
- b=HLgbsaK3Fx2MViK2As+jRkRnBLB/+2gdm/F7pYOR5DpVC+wprPo4lrI9emsBK5G8rF
- zS2O0MmpocHEMb0BzjSEaEvcL07fq0UkxsoK4/oYVpvS7Q06DPpXxXE/3TRrLvCNglw2
- 6B69Ii7cXE1fdFV9Wd/6VvC4DY0xcrvVycdgJ2/sLucow+T0Rkaui/jUOilah5HlocTs
- d65v8kks1Ldj6o6g3ImJcfJkXtUq9yi4Qlll6giWZvGhk+1Pv+EE4O97NrYKnwMAtHFi
- W+Ev+WtFEgADg1xrQK0JsFKVf0oXWYwRwAMGmuASxGQQzRUEkopzFbXHGSrDNf4A14Eq
- qa9Q==
-X-Gm-Message-State: AJIora+UthfDSeCYLNTzlU2MLroQeNhbvu555zZ5Fqf85J4scyNw+Oj+
- wk/u+86SlS4thIkMn8TxDVQq7dyAkMyt0wZVqYA=
-X-Google-Smtp-Source: AGRyM1uOFANOPdzRlOXZkfe9NdRKFtC7WbT/1dp/8V/5ZqOWOUZbgC6AhrgO2tYZcL1tzQBf7zJ+3VTBRbRZZWQfnFI=
-X-Received: by 2002:a17:902:690a:b0:16c:f877:d89d with SMTP id
- j10-20020a170902690a00b0016cf877d89dmr4308010plk.25.1658185842031; Mon, 18
- Jul 2022 16:10:42 -0700 (PDT)
+ bh=2RYaVqsWYKi7vZojfcQH1kVo4AmTPs1FpVLB9ZEoC3U=;
+ b=0buABCOrl0zNV7g8Dwe46F2FsOjKvzYHk8gVkVjNlUZiybGwgPMwe/bJQspGOcVoEc
+ xmY+G+Umluu0OvRTeYFYchj4/CUYDrSx3AIr3rjvsrDdxQnuQco7SkkjAs0r+Os6PTw3
+ R6AYALGVmghfgwTKAgSTURUxvpeDpnAX4GQyg4WgdZ7fPDSd6zFKufV7nZUHQ9Z+nT3H
+ dNYg85F23pSa+FaNH6BWbq5yPDrshkG8muvThWNIWGrNa+5K79hv61Q1zU3R+zz5k7MH
+ lYTD28qhJAysOAVIMgRlzMXI+BjTmRnUk+k6je2drBho7tVDZTUlCcnQ3PyS+bTTxfh+
+ x9+Q==
+X-Gm-Message-State: AJIora8nq277Y7sbPqF/U0cCbmX50fMCwa7vJM9diu29IsCQRYKpr22O
+ 6QYvqfywy5+4jPYAcHH6TRpSjmMT+OwXbi8eq84=
+X-Google-Smtp-Source: AGRyM1vTA+ZSZcCx1jTB2ZCg14UrvnU49RrR2c/rKoYvXiJou/E+Gz7tvsXxwnvu9S13Vk/eL1PKAyx91lQmsbl9Ftc=
+X-Received: by 2002:a65:6b8a:0:b0:3db:7dc5:fec2 with SMTP id
+ d10-20020a656b8a000000b003db7dc5fec2mr26078826pgw.223.1658190246896; Mon, 18
+ Jul 2022 17:24:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220718130955.11899-1-liweiwei@iscas.ac.cn>
- <20220718130955.11899-6-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220718130955.11899-6-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220718130955.11899-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Jul 2022 09:10:15 +1000
-Message-ID: <CAKmqyKPyG=A3+T=wLjEFHaHDu1MuYPxhA3KT-HqPAuKTKXh0jw@mail.gmail.com>
-Subject: Re: [PATCH V3 5/6] target/riscv: Fix checks in hmode/hmode32
+Date: Tue, 19 Jul 2022 10:23:40 +1000
+Message-ID: <CAKmqyKNivL5AVHSbL8JuaxOv9fv3y0Mo3TN0TpPB6Rt7+XWbvw@mail.gmail.com>
+Subject: Re: [PATCH V3 0/6] Improve the U/S/H extension related check
 To: Weiwei Li <liweiwei@iscas.ac.cn>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,8 +52,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  wangjunqiang <wangjunqiang@iscas.ac.cn>, 
  =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,72 +74,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2022 23:10:46 -0000
+X-List-Received-Date: Tue, 19 Jul 2022 00:24:11 -0000
 
-On Mon, Jul 18, 2022 at 11:13 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Mon, Jul 18, 2022 at 11:10 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Add check for the implicit dependence between H and S
+> This patchset tries to improve the U/S/H related check:
+> * add check for the supported privilege modes conbinations: only supporting M,
+> S mode is not a suggested combination
+> * add check for "H extension depends on I extension"
+> * add check for "H extension implicitly requires S mode"
+> * add check for csrs only existed when U mode is supported
+> * fix and simplify the checks in hmode/hmode32
 >
-> Csrs only existed in RV32 will not trigger virtual instruction fault
-> when not in RV32 based on section 8.6.1 of riscv-privileged spec
-> (draft-20220717)
+> Any suggestions are welcome.
 >
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> v3:
+> * Fix the issues suggested by Andrew Jones in commit messages
+>
+> v2:
+> * update patch 3 to make the newlines start at the same position as above line
+> * update patch 5 to add check for "H extension implicitly requires S mode"
+>
+> Weiwei Li (6):
+>   target/riscv: Add check for supported privilege mode combinations
+>   target/riscv: H extension depends on I extension
+>   target/riscv: Fix checkpatch warning may triggered in csr_ops table
+>   target/riscv: Add check for csrs existed with U extension
+>   target/riscv: Fix checks in hmode/hmode32
+>   target/riscv: Simplify the check in hmode to resue the check in
+>     riscv_csrrw_check
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c | 5 +++++
->  target/riscv/csr.c | 9 ++-------
->  2 files changed, 7 insertions(+), 7 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index b8ce0959cb..455787a940 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -738,6 +738,11 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
->              return;
->          }
+>  target/riscv/cpu.c |  17 ++
+>  target/riscv/csr.c | 490 ++++++++++++++++++++++++---------------------
+>  2 files changed, 278 insertions(+), 229 deletions(-)
 >
-> +        if (cpu->cfg.ext_h && !cpu->cfg.ext_s) {
-> +            error_setg(errp, "H extension implicitly requires S-mode");
-> +            return;
-> +        }
-> +
->          if (cpu->cfg.ext_f && !cpu->cfg.ext_icsr) {
->              error_setg(errp, "F extension requires Zicsr");
->              return;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5c69dc838c..cf15aa67b7 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -311,8 +311,7 @@ static int aia_smode32(CPURISCVState *env, int csrno)
->
->  static RISCVException hmode(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_has_ext(env, RVS) &&
-> -        riscv_has_ext(env, RVH)) {
-> +    if (riscv_has_ext(env, RVH)) {
->          /* Hypervisor extension is supported */
->          if ((env->priv == PRV_S && !riscv_cpu_virt_enabled(env)) ||
->              env->priv == PRV_M) {
-> @@ -328,11 +327,7 @@ static RISCVException hmode(CPURISCVState *env, int csrno)
->  static RISCVException hmode32(CPURISCVState *env, int csrno)
->  {
->      if (riscv_cpu_mxl(env) != MXL_RV32) {
-> -        if (!riscv_cpu_virt_enabled(env)) {
-> -            return RISCV_EXCP_ILLEGAL_INST;
-> -        } else {
-> -            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> -        }
-> +        return RISCV_EXCP_ILLEGAL_INST;
->      }
->
->      return hmode(env, csrno);
 > --
 > 2.17.1
 >
