@@ -1,63 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oDbeV-0008Cd-RY
-	for mharc-qemu-riscv@gnu.org; Mon, 18 Jul 2022 21:03:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35710)
+	id 1oDh5q-0007HV-TP
+	for mharc-qemu-riscv@gnu.org; Tue, 19 Jul 2022 02:52:31 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:39868)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oDbeU-0008C4-DU; Mon, 18 Jul 2022 21:03:54 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:52702 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oDbeE-0006mu-Tk; Mon, 18 Jul 2022 21:03:50 -0400
-Received: from [192.168.3.6] (unknown [180.156.173.38])
- by APP-01 (Coremail) with SMTP id qwCowAB3fATdAtZiMgF0EQ--.58790S2;
- Tue, 19 Jul 2022 09:03:26 +0800 (CST)
-Subject: Re: [RFC PATCH v5 1/4] target/riscv: Add smstateen support
-To: Mayuresh Chitale <mchitale@ventanamicro.com>,
- Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20220603160425.3667456-1-mchitale@ventanamicro.com>
- <20220603160425.3667456-2-mchitale@ventanamicro.com>
- <43569e92.214c.181be6c8e52.Coremail.angell1518@163.com>
- <746ba0e1f67cafde5fae05725ccef0587de67ad3.camel@ventanamicro.com>
- <fb974b62-030d-5244-f3ce-21c23900a4bf@iscas.ac.cn>
- <de6ec0491d6b6ef9804718dce86b3d157ff191fd.camel@ventanamicro.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <57a6eab3-f166-bb25-6f4a-a62362faab3c@iscas.ac.cn>
-Date: Tue, 19 Jul 2022 09:03:25 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oDh5o-0007H2-Sg; Tue, 19 Jul 2022 02:52:28 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:36683)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oDh5m-0001OF-JJ; Tue, 19 Jul 2022 02:52:28 -0400
+Received: by mail-pf1-x431.google.com with SMTP id g126so12706689pfb.3;
+ Mon, 18 Jul 2022 23:52:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=K9uqlrNX7/eDPYZGMikMHKWClczTCUhUJYuLLCQiTH0=;
+ b=I/VQmFuF73ZFljq3UkWoJd2/YdtUUrLFlogTBkTdNhPE61yZjwYyJLZje0lGZPQ0ZL
+ HEV/wTXGsbfiFwp1Uk2J/B/bO0mmVoD4+MMxgBsoxIK5/UWPvocDqFG3gQGJb/SErc9f
+ yvMsWxGZ33ZgV3uC/M4MXiNB/NyNvCgYVhURNB2bZmq+n801dlzI3Kg6kSlWRClX9umT
+ IHS6bCLXWqnrgje6I/1PoKzr8Gsdepz0CweQ0yTNKn42Gn/BisFBN4ToWZnY5A91MUeC
+ CuCdbKA4wL+HLR/sn1BQKy5xOlH5ykPrK0rIYvMywEDp5WXV6NQojyo0kHor0kzTgOSF
+ xIeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=K9uqlrNX7/eDPYZGMikMHKWClczTCUhUJYuLLCQiTH0=;
+ b=DnSnfLg/PssxaMhNrSskelV+J1g9f5RomULozbXgPUNMh3GYu7CkC3fttgShxGKxSV
+ 6+B00kvi2JcT40xcZjWTWFcw+5EPMbqh2odgS1dSHPrZGIU/fknGGLOtxs3OUWSc6Gm0
+ u+WH0jyH0g2AGJnwzbS95OCBNKGlhCVptSeNqly3CxqdBdSbK6SZjW63516omAQXjmpk
+ Wu/NbVWajEYsnMZ/2kN9WzYpEe2bI5of6ue4Wu8ZYAu+Hsb3yXINQjmWSDSwptC8QLYk
+ 77Xv8lhyq9kb3W4U0Wlz/hOU61FVQzAj21bnotf5HCDxBR/WPypY91QnyLSac1ytpgQX
+ 1Z/Q==
+X-Gm-Message-State: AJIora8Z7OLKA6q3HZVL1KeAQ4P8Z3iNZsyxssIclWZsxtSHZI+DaKS4
+ 5taWxjVyCL49UMG9TTecoHlt2Z9YVqkXRAWi/QA=
+X-Google-Smtp-Source: AGRyM1uD3ieCn5qLxoanJfzloTTlhfjaGpQULD1YrjQn+au61FCAfTfEwNw8/nJV08n5/rBK3kur88K4fDkiTt+NcUQ=
+X-Received: by 2002:a65:6b8a:0:b0:3db:7dc5:fec2 with SMTP id
+ d10-20020a656b8a000000b003db7dc5fec2mr27135291pgw.223.1658213544206; Mon, 18
+ Jul 2022 23:52:24 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <de6ec0491d6b6ef9804718dce86b3d157ff191fd.camel@ventanamicro.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: qwCowAB3fATdAtZiMgF0EQ--.58790S2
-X-Coremail-Antispam: 1UD129KBjvAXoW3KFWDAr1DJF1fJFy8CF17KFg_yoW8AryUKo
- W8tr1fArs5Gr1UAF1DA3yqqr1Fvw4DJr4kZry3Crs7Kr1xtw4jyr4UKry5AF48GrWYgr47
- Aa4xJF15CF48WF15n29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
- AaLaJ3UjIYCTnIWjp_UUUYr7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xva
- j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2
- x7M28EF7xvwVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8
- JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267AKxVW8JV
- W8Jr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
- 2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
- W8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07AlzVAY
- IcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
- v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkG
- c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
- 0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_
- Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfU5WlkUU
- UUU
-X-Originating-IP: [180.156.173.38]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
+References: <20220713090613.204046-1-bmeng.cn@gmail.com>
+In-Reply-To: <20220713090613.204046-1-bmeng.cn@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 Jul 2022 16:51:57 +1000
+Message-ID: <CAKmqyKN6ebD4yLKKkW5EcdauvpZB1Sig=w9zg+pbYoEkc2duSw@mail.gmail.com>
+Subject: Re: [PATCH] roms/opensbi: Upgrade from v1.0 to v1.1
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -71,534 +71,146 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2022 01:03:54 -0000
+X-List-Received-Date: Tue, 19 Jul 2022 06:52:29 -0000
 
+On Wed, Jul 13, 2022 at 7:06 PM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> Upgrade OpenSBI from v1.0 to v1.1 and the pre-built bios images.
+>
+> The v1.1 release includes the following commits:
+>
+> 5b99603 lib: utils/ipi: Fix size check in aclint_mswi_cold_init()
+> 6dde435 lib: utils/sys: Extend HTIF library to allow custom base address
+> 8257262 platform: sifive_fu740: do not use a global in da9063_reset/shutdown
+> fb688d9 platform: sifive_fu740: fix reset when watchdog is running
+> 5d025eb lib: fix pointer of type 'void *' used in arithmetic
+> 632f593 lib: sbi: Map only the counters enabled in hardware
+> 3b7c204 lib: sbi: Disable interrupt during config matching
+> a26dc60 lib: sbi: Disable interrupt and inhibit counting in M-mode during init
+> 5d53b55 Makefile: fix build with binutils 2.38
+> 6ad8917 lib: fix compilation when strings.h is included
+> ce4c018 lib: utils/serial: Round UART8250 baud rate divisor to nearest integer
+> 01250d0 include: sbi: Add AIA related CSR defines
+> 8f96070 lib: sbi: Detect AIA CSRs at boot-time
+> 65b4c7c lib: sbi: Use AIA CSRs for local interrupts when available
+> 222132f lib: sbi: Add sbi_trap_set_external_irqfn() API
+> 5f56314 lib: utils/irqchip: Allow multiple FDT irqchip drivers
+> 1050940 include: sbi: Introduce nascent_init() platform callback
+> 55e79f8 lib: sbi: Enable mie.MEIE bit for IPIs based on external interrupts.
+> 9f73669 lib: utils/irqchip: Add IMSIC library
+> 811da5c lib: utils/irqchip: Add FDT based driver for IMSIC
+> 7127aaa lib: utils: Disable appropriate IMSIC DT nodes in fdt_fixups()
+> 9979265 lib: utils/irqchip: Add APLIC initialization library
+> 3461219 lib: utils/irqchip: Add FDT based driver for APLIC
+> 8e2ef4f lib: utils: Disable appropriate APLIC DT nodes in fdt_fixups()
+> 3a69cc1 lib: sbi: fix typo in is_region_subset
+> f2ccf2f lib: sbi: verbose sbi_domain_root_add_memregion
+> f3f4604 lib: sbi: Add a simple external interrupt handling framework
+> 4998a71 lib: utils: serial: Initial commit of xlnx-uartlite
+> 2dfbd3c lib: pmp_set/pmp_get moved errors from runtime to compile time
+> b6b7220 firmware: Fix code for accessing hart_count and stack_size
+> d552fc8 lib: Add error messages via conditional compilation for the future
+> 555bdb1 include: Use static asserts for SBI_PLATFORM_xxx_OFFSET defines
+> 1b42d3a include: Use static asserts for SBI_SCRATCH_xxx_OFFSET defines
+> 7924a0b include: Use static asserts for FW_DYNAMIC_INFO_xxx_OFFSET defines
+> 722f80d include: Add defines for [m|h|s]envcfg CSRs
+> 31fecad lib: sbi: Detect menvcfg CSR at boot time
+> 47d6765 lib: sbi: Enable Zicbo[m|z] extensions in the menvcfg CSR
+> 794986f lib: sbi: Enable Svpbmt extension in the menvcfg CSR
+> 499601a lib: sbi: Add Smstateen extension defines
+> d44568a lib: sbi: Detect Smstateen CSRs at boot-time
+> 3383d6a lib: irqchip/imsic: configure mstateen
+> 5c5cbb5 lib: utils/serial: support 'reg-offset' property
+> c1e47d0 include: correct the definition of MSTATUS_VS
+> 9cd95e1 lib: sbi/hart: preserve csr validation value
+> 4035ae9 docs: pmu: Improve the PMU DT bindings
+> d62f6da lib: sbi: Implement Sstc extension
+> 474a9d4 lib: sbi: Fix mstatus_init() for RV32 when Sscofpmf is not available
+> e576b3e include: sbi: Define SBI_PMU_HW_EVENT_MAX to 256
+> b0c9df5 lib: sbi: Fix mhpmeventh access for rv32 in absence of sscofpmf
+> 1a754bb lib: sbi: Detect and print privileged spec version
+> 5a6be99 lib: sbi: Remove 's' and 'u' from misa_string() output
+> 5b8b377 lib: sbi: Update the name of ISA string printed at boot time
+> d4b563c lib: sbi: Remove MCOUNTEREN and SCOUNTEREN hart features
+> dbc3d8f lib: sbi: Remove MCOUNTINHIBT hart feature
+> 97a17c2 lib: sbi: Remove MENVCFG hart feature
+> a6ab94f lib: sbi: Fix AIA feature detection
+> cad6c91 lib: sbi: Convert hart features into hart extensions
+> be4903a lib: sbi: Detect hart features only once for each hart
+> 994ace3 lib: sbi: Add sbi_hart_update_extension() function
+> 023f0ad lib: sbi_platform: Add callback to populate HART extensions
+> f726f2d Makefile: Allow generated C source to be anywhere in build directory
+> 7fb474b Makefile: Add support for generating C array at compile time
+> 73cf511 lib: utils/reset: Generate FDT reset driver list at compile-time
+> 1e62705 lib: utils/serial: Generate FDT serial driver list at compile-time
+> bfeb305 lib: utils/timer: Generate FDT timer driver list at compile-time
+> 3a69d12 lib: utils/irqchip: Generate FDT irqchip driver list at compile-time
+> 4ee0c57 lib: utils/ipi: Generate FDT ipi driver list at compile-time
+> 998ed43 lib: utils/i2c: Generate FDT i2c adapter driver list at compile-time
+> 4eacd82 lib: utils/gpio: Generate FDT gpio driver list at compile-time
+> a3a3c60 platform: generic: Generate platform override module list at compile-time
+> 9a7a677 platform: generic: Move Sifive platform overrides into own directory
+> 851c14d lib: utils/irqchip: fix typo when checking for CPU node
+> 90a9dd2 lib: utils/fdt: introduce fdt_node_is_enabled()
+> 616da52 lib: utils: check if CPU node is enabled
+> 575bb4e platform: generic: check if CPU node is enabled
+> 1bc67db lib: utils/fdt: rename fdt_parse_max_hart_id
+> f067bb8 lib: sbi: fix system_opcode_insn
+> fab0379 lib: utils/fdt: Require match data to be const
+> 295e5f3 lib: sbi_timer: Drop unnecessary get_platform_ticks wrapper
+> ff65bfe lib: sbi_illegal_insn: Constify illegal_insn_table
+> cb8271c lib: sbi_illegal_insn: Add emulation for fence.tso
+> adc3388 lib: sbi_trap: Redirect exception based on hedeleg
+> ce1d618 platform: generic: add overrides for vendor extensions
+> b20ed9f lib: sbi_hsm: Call a device hook during hart resume
+> 79e42eb lib: sbi_hsm: Assume a consistent resume address
+> 2ea7799 lib: irqchip/plic: Constify plic_data pointers
+> 8c362e7 lib: irqchip/plic: Factor out a context init function
+> 415ecf2 lib: irqchip/plic: Add context save/restore helpers
+> 2b79b69 lib: irqchip/plic: Add priority save/restore helpers
+> 69be3df lib: utils/irqchip: Add FDT wrappers for PLIC save/restore functions
+> 5e56758 lib: utils/irqchip: Add wrapper for T-HEAD PLIC delegation
+> 9dc5ec5 platform: Add HSM implementation for Allwinner D1
+> 551c70c include: sbi: Add mtinst/htinst psuedoinstructions
+> 187127f lib: sbi: Fixup tinst for exceptions in sbi_misaligned_*()
+> a07402a lib: sbi: Fix tval and tinst for sbi_get_insn()
+> c653001 lib: utils: Remove CSRs that set/clear an IMSIC interrupt file bits
+> 7738345 lib: utils/timer: Add a separate compatible for the D1 CLINT
+> d76a196 lib: irqchip/plic: fix typo in plic_warm_irqchip_init
+> 6f1fe98 lib: utils/timer: Remove Allwinner D1 CLINT compatibles
+> c6fdbcf include: sbi: Change spec version to 1.0
+> 3f66465 lib: pmu: allow to use the highest available counter
+> 4489876 include: Bump-up version to 1.1
+>
+> Signed-off-by: Bin Meng <bmeng.cn@gmail.com>
 
-在 2022/7/18 下午11:37, Mayuresh Chitale 写道:
-> On Fri, 2022-07-08 at 07:44 +0800, Weiwei Li wrote:
->> 在 2022/7/8 上午12:53, Mayuresh Chitale 写道:
->>> On Sat, 2022-07-02 at 18:19 +0800, angell1518 wrote:
->>>> At 2022-06-04 00:04:22, "Mayuresh Chitale" <
->>>> mchitale@ventanamicro.com
->>>>> wrote:
->>>>> Smstateen extension specifies a mechanism to close
->>>>> the potential covert channels that could cause security issues.
->>>>>
->>>>> This patch adds the CSRs defined in the specification and
->>>>> the corresponding predicates and read/write functions.
->>>>>
->>>>> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
->>>>> ---
->>>>> target/riscv/cpu.c      |   2 +
->>>>> target/riscv/cpu.h      |   4 +
->>>>> target/riscv/cpu_bits.h |  36 +++++++
->>>>> target/riscv/csr.c      | 210
->>>> ++++++++++++++++++++++++++++++++++++++++
->>>>> target/riscv/machine.c  |  21 ++++
->>>>> 5 files changed, 273 insertions(+)
->>>>>
->>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->>>>> index e6e878ceb3..2d65ccd90f 100644
->>>>> --- a/target/riscv/cpu.c
->>>>> +++ b/target/riscv/cpu.c
->>>>> @@ -913,6 +913,7 @@ static Property riscv_cpu_properties[] = {
->>>>>       DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
->>>>>       DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
->>>>>       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
->>>>> +    DEFINE_PROP_BOOL("smstateen", RISCVCPU, cfg.ext_smstateen,
->>>> false),
->>>>>       DEFINE_PROP_STRING("priv_spec", RISCVCPU, cfg.priv_spec),
->>>>>       DEFINE_PROP_STRING("vext_spec", RISCVCPU, cfg.vext_spec),
->>>>> @@ -1104,6 +1105,7 @@ static void riscv_isa_string_ext(RISCVCPU
->>>> *cpu, char **isa_str, int max_str_len)
->>>>>           ISA_EDATA_ENTRY(zve64f, ext_zve64f),
->>>>>           ISA_EDATA_ENTRY(zhinx, ext_zhinx),
->>>>>           ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
->>>>> +        ISA_EDATA_ENTRY(smstateen, ext_smstateen),
->>>>>           ISA_EDATA_ENTRY(svinval, ext_svinval),
->>>>>           ISA_EDATA_ENTRY(svnapot, ext_svnapot),
->>>>>           ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
->>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>>>> index f08c3e8813..1c269b77bd 100644
->>>>> --- a/target/riscv/cpu.h
->>>>> +++ b/target/riscv/cpu.h
->>>>> @@ -327,6 +327,9 @@ struct CPUArchState {
->>>>>
->>>>>       /* CSRs for execution enviornment configuration */
->>>>>       uint64_t menvcfg;
->>>>> +    uint64_t mstateen[SMSTATEEN_MAX_COUNT];
->>>>> +    uint64_t hstateen[SMSTATEEN_MAX_COUNT];
->>>>> +    uint64_t sstateen[SMSTATEEN_MAX_COUNT];
->>>>>       target_ulong senvcfg;
->>>>>       uint64_t henvcfg;
->>>>> #endif
->>>>> @@ -411,6 +414,7 @@ struct RISCVCPUConfig {
->>>>>       bool ext_zhinxmin;
->>>>>       bool ext_zve32f;
->>>>>       bool ext_zve64f;
->>>>> +    bool ext_smstateen;
->>>>>
->>>>>       uint32_t mvendorid;
->>>>>       uint64_t marchid;
->>>>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->>>>> index 4a55c6a709..2a3ef26d21 100644
->>>>> --- a/target/riscv/cpu_bits.h
->>>>> +++ b/target/riscv/cpu_bits.h
->>>>> @@ -208,6 +208,12 @@
->>>>> /* Supervisor Configuration CSRs */
->>>>> #define CSR_SENVCFG         0x10A
->>>>>
->>>>> +/* Supervisor state CSRs */
->>>>> +#define CSR_SSTATEEN0       0x10C
->>>>> +#define CSR_SSTATEEN1       0x10D
->>>>> +#define CSR_SSTATEEN2       0x10E
->>>>> +#define CSR_SSTATEEN3       0x10F
->>>>> +
->>>>> /* Supervisor Trap Handling */
->>>>> #define CSR_SSCRATCH        0x140
->>>>> #define CSR_SEPC            0x141
->>>>> @@ -257,6 +263,16 @@
->>>>> #define CSR_HENVCFG         0x60A
->>>>> #define CSR_HENVCFGH        0x61A
->>>>>
->>>>> +/* Hypervisor state CSRs */
->>>>> +#define CSR_HSTATEEN0       0x60C
->>>>> +#define CSR_HSTATEEN0H      0x61C
->>>>> +#define CSR_HSTATEEN1       0x60D
->>>>> +#define CSR_HSTATEEN1H      0x61D
->>>>> +#define CSR_HSTATEEN2       0x60E
->>>>> +#define CSR_HSTATEEN2H      0x61E
->>>>> +#define CSR_HSTATEEN3       0x60F
->>>>> +#define CSR_HSTATEEN3H      0x61F
->>>>> +
->>>>> /* Virtual CSRs */
->>>>> #define CSR_VSSTATUS        0x200
->>>>> #define CSR_VSIE            0x204
->>>>> @@ -304,6 +320,26 @@
->>>>> #define CSR_MENVCFG         0x30A
->>>>> #define CSR_MENVCFGH        0x31A
->>>>>
->>>>> +/* Machine state CSRs */
->>>>> +#define CSR_MSTATEEN0       0x30C
->>>>> +#define CSR_MSTATEEN0H      0x31C
->>>>> +#define CSR_MSTATEEN1       0x30D
->>>>> +#define CSR_MSTATEEN1H      0x31D
->>>>> +#define CSR_MSTATEEN2       0x30E
->>>>> +#define CSR_MSTATEEN2H      0x31E
->>>>> +#define CSR_MSTATEEN3       0x30F
->>>>> +#define CSR_MSTATEEN3H      0x31F
->>>>> +
->>>>> +/* Common defines for all smstateen */
->>>>> +#define SMSTATEEN_MAX_COUNT 4
->>>>> +#define SMSTATEEN0_CS       0
->>>>> +#define SMSTATEEN0_FCSR     0
->>>>> +#define SMSTATEEN0_IMSIC    58
->>>>> +#define SMSTATEEN0_AIA      59
->>>>> +#define SMSTATEEN0_SVSLCT   60
->>>>> +#define SMSTATEEN0_HSENVCFG 62
->>>>> +#define SMSTATEEN_STATEN    63
->>>>> +
->>>>> /* Enhanced Physical Memory Protection (ePMP) */
->>>>> #define CSR_MSECCFG         0x747
->>>>> #define CSR_MSECCFGH        0x757
->>>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>>> index 409a209f14..324fefce59 100644
->>>>> --- a/target/riscv/csr.c
->>>>> +++ b/target/riscv/csr.c
->>>>> @@ -247,6 +247,42 @@ static RISCVException
->>>>> hmode32(CPURISCVState
->>>> *env, int csrno)
->>>>> }
->>>>>
->>>>> +static RISCVException mstateen(CPURISCVState *env, int csrno)
->>>>> +{
->>>>> +    CPUState *cs = env_cpu(env);
->>>>> +    RISCVCPU *cpu = RISCV_CPU(cs);
->>>>> +
->>>>> +    if (!cpu->cfg.ext_smstateen) {
->>>>> +        return RISCV_EXCP_ILLEGAL_INST;
->>>>> +    }
->>>>> +
->>>>> +    return any(env, csrno);
->>>>> +}
->>>>> +
->>>>> +static RISCVException hstateen(CPURISCVState *env, int csrno)
->>>>> +{
->>>>> +    CPUState *cs = env_cpu(env);
->>>>> +    RISCVCPU *cpu = RISCV_CPU(cs);
->>>>> +
->>>>> +    if (!cpu->cfg.ext_smstateen) {
->>>>> +        return RISCV_EXCP_ILLEGAL_INST;
->>>>> +    }
->>>>> +
->>>>> +    return hmode(env, csrno);
->>>>> +}
->>>>> +
->>>> I think we should take the stateen bit(bit 63) for matching
->>>> mstateen
->>>> into consideration here.
->>>> Similar to following sstateen function.
->>> ok.
->>>
->>>>> +static RISCVException sstateen(CPURISCVState *env, int csrno)
->>>>> +{
->>>>> +    CPUState *cs = env_cpu(env);
->>>>> +    RISCVCPU *cpu = RISCV_CPU(cs);
->>>>> +
->>>>> +    if (!cpu->cfg.ext_smstateen) {
->>>>> +        return RISCV_EXCP_ILLEGAL_INST;
->>>>> +    }
->>>>> +
->>>>> +    return smode(env, csrno);
->>>>> +}
->>>>> +
->>>>> /* Checks if PointerMasking registers could be accessed */
->>>>> static RISCVException pointer_masking(CPURISCVState *env, int
->>>> csrno)
->>>>> {
->>>>> @@ -1574,6 +1610,129 @@ static RISCVException
->>>> write_henvcfgh(CPURISCVState *env, int csrno,
->>>>>       return RISCV_EXCP_NONE;
->>>>> }
->>>>>
->>>>> +static inline void write_smstateen(CPURISCVState *env,
->>>>> uint64_t
->>>> *reg,
->>>>> +                                   uint64_t wr_mask, uint64_t
->>>> new_val)
->>>>> +{
->>>>> +    *reg = (*reg & ~wr_mask) | (new_val & wr_mask);
->>>>> +}
->>>>> +
->>>>> +static RISCVException read_mstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                    target_ulong *val)
->>>>> +{
->>>>> +    *val = env->mstateen[csrno - CSR_MSTATEEN0];
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException write_mstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                     target_ulong new_val)
->>>>> +{
->>>>> +    uint64_t *reg;
->>>>> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
->>>>> +
->>>>> +    reg = &env->mstateen[csrno - CSR_MSTATEEN0];
->>>>> +    write_smstateen(env, reg, wr_mask, new_val);
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException read_mstateenh(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                     target_ulong *val)
->>>>> +{
->>>>> +    *val = env->mstateen[csrno - CSR_MSTATEEN0H] >> 32;
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException write_mstateenh(CPURISCVState *env, int
->>>> csrno,
->>>>> +                                      target_ulong new_val)
->>>>> +{
->>>>> +    uint64_t *reg;
->>>>> +    uint64_t val;
->>>>> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
->>>>> +
->>>>> +    reg = &env->mstateen[csrno - CSR_MSTATEEN0H];
->>>>> +    val = (uint64_t)new_val << 32;
->>>>> +    val |= *reg & 0xFFFFFFFF;
->>>>> +    write_smstateen(env, reg, wr_mask, val);
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException read_hstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                    target_ulong *val)
->>>>> +{
->>>>> +    *val = env->hstateen[csrno - CSR_HSTATEEN0];
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>> I think we should also take mstateen into consideration here just
->>>> like the following write function.
->>>> As the spec said, If we set certain bit in the matching mstateen
->>>> csr
->>>> to zero, the same bit in hstateen should be read-only zero.
->>>> However, writes to mstateen will not affect the value in matching
->>>> hstateen directly in current implementation,
->>>> so if we read hstateen just immediately after write zero to
->>>> certain
->>>> bit of mstateen, the same bit  read from hstateen may not be
->>>> zero.
->>> I need to check this but as per my understanding this it is the
->>> responsibility of the software to clear the corresponding
->>> hstateen/stateen bits.
->> I have sent a issue for how the hstateen/sstateen become read-only
->> zero
->> for zero bits in mstateen:
->>
->> https://github.com/riscv/riscv-state-enable/issues/9
-> Thanks for the information. I think as per the dicussion on the above
-> issue it looks like the current implementation is also valid.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-I think the way to implement the read-only zero is unspecified. However, 
-the read out value  for
+Alistair
 
-the read-only zero fields  should be zero.
-
-Regards,
-
-Weiwei Li
-
->> Regards,
->>
->> Weiwei Li
->>
->>>> similar to read function of sstateen.
->>>>> +static RISCVException write_hstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                     target_ulong new_val)
->>>>> +{
->>>>> +    uint64_t *reg;
->>>>> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
->>>>> +    int index = csrno - CSR_HSTATEEN0;
->>>>> +
->>>>> +    reg = &env->hstateen[index];
->>>>> +    wr_mask &= env->mstateen[index];
->>>>> +    write_smstateen(env, reg, wr_mask, new_val);
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException read_hstateenh(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                     target_ulong *val)
->>>>> +{
->>>>> +    *val = env->hstateen[csrno - CSR_HSTATEEN0H] >> 32;
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException write_hstateenh(CPURISCVState *env, int
->>>> csrno,
->>>>> +                                      target_ulong new_val)
->>>>> +{
->>>>> +    uint64_t *reg;
->>>>> +    uint64_t val;
->>>>> +    uint64_t wr_mask = 1UL << SMSTATEEN_STATEN;
->>>>> +    int index = csrno - CSR_HSTATEEN0H;
->>>>> +
->>>>> +    reg = &env->hstateen[index];
->>>>> +    val = (uint64_t)new_val << 32;
->>>>> +    val |= *reg & 0xFFFFFFFF;
->>>>> +    wr_mask &= env->mstateen[index];
->>>>> +
->>>>> +    write_smstateen(env, reg, wr_mask, val);
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException read_sstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                    target_ulong *val)
->>>>> +{
->>>>> +    *val = env->sstateen[csrno - CSR_SSTATEEN0];
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> +static RISCVException write_sstateen(CPURISCVState *env, int
->>>>> csrno,
->>>>> +                                     target_ulong new_val)
->>>>> +{
->>>>> +    uint64_t *reg;
->>>>> +    uint64_t wr_mask = 0;
->>>>> +    int index = csrno - CSR_SSTATEEN0;
->>>>> +    bool virt = riscv_cpu_virt_enabled(env);
->>>>> +
->>>>> +    reg = &env->sstateen[index];
->>>>> +    if (virt) {
->>>>> +        wr_mask &= env->mstateen[index];
->>>>> +    } else {
->>>>> +        wr_mask &= env->hstateen[index];
->>>>> +    }
->>>> Why this? I think hstateen works in virt mode, so this may be:
->>>> if (virt) {
->>>>     wr_mask &= env->mstateen[index] & env->hstateen[index];;
->>>> } else {
->>>>     wr_mask &= env->mstateen[index];
->>>> }
->>>>> +    write_smstateen(env, reg, wr_mask, new_val);
->>>>> +
->>>>> +    return RISCV_EXCP_NONE;
->>>>> +}
->>>>> +
->>>>> static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
->>>>>                                   uint64_t *ret_val,
->>>>>                                   uint64_t new_val, uint64_t
->>>>> wr_mask)
->>>>> @@ -3441,6 +3600,57 @@ riscv_csr_operations
->>>>> csr_ops[CSR_TABLE_SIZE]
->>>> = {
->>>>>       [CSR_HENVCFGH] = { "henvcfgh", hmode32, read_henvcfgh,
->>>> write_henvcfgh,
->>>>>                                             .min_priv_ver =
->>>> PRIV_VERSION_1_12_0 },
->>>>> +    /* Smstateen extension CSRs */
->>>>> +    [CSR_MSTATEEN0] = { "mstateen0", mstateen, read_mstateen,
->>>> write_mstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN0H] = { "mstateen0h", mstateen,
->>>>> read_mstateenh,
->>>>> +                          write_mstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN1] = { "mstateen1", mstateen, read_mstateen,
->>>> write_mstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>> It seems unreasonable for mstateen1~3 to share the same
->>>> read/write
->>>> function with mstateen0 ,
->>>> since their field mask is different.
->>>> Similar to sstateen1~3 and hstateen1~3
->>> I will fix it in the next version.
->>>> Regards,
->>>> Weiwei Li
->>>>> +    [CSR_MSTATEEN1H] = { "mstateen1h", mstateen,
->>>>> read_mstateenh,
->>>>> +                          write_mstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN2] = { "mstateen2", mstateen, read_mstateen,
->>>> write_mstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN2H] = { "mstateen2h", mstateen,
->>>>> read_mstateenh,
->>>>> +                          write_mstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN3] = { "mstateen3", mstateen, read_mstateen,
->>>> write_mstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_MSTATEEN3H] = { "mstateen3h", mstateen,
->>>>> read_mstateenh,
->>>>> +                          write_mstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +
->>>>> +    [CSR_HSTATEEN0] = { "hstateen0", hstateen, read_hstateen,
->>>> write_hstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN0H] = { "hstateen0h", hstateen,
->>>>> read_hstateenh,
->>>>> +                          write_hstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN1] = { "hstateen1", hstateen, read_hstateen,
->>>> write_hstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN1H] = { "hstateen1h", hstateen,
->>>>> read_hstateenh,
->>>>> +                          write_hstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN2] = { "hstateen2", hstateen, read_hstateen,
->>>> write_hstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN2H] = { "hstateen2h", hstateen,
->>>>> read_hstateenh,
->>>>> +                          write_hstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN3] = { "hstateen3", hstateen, read_hstateen,
->>>> write_hstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_HSTATEEN3H] = { "hstateen3h", hstateen,
->>>>> read_hstateenh,
->>>>> +                          write_hstateenh,
->>>>> +                          .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +
->>>>> +    [CSR_SSTATEEN0] = { "sstateen0", sstateen, read_sstateen,
->>>> write_sstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_SSTATEEN1] = { "sstateen1", sstateen, read_sstateen,
->>>> write_sstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_SSTATEEN2] = { "sstateen2", sstateen, read_sstateen,
->>>> write_sstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>> +    [CSR_SSTATEEN3] = { "sstateen3", sstateen, read_sstateen,
->>>> write_sstateen,
->>>>> +                         .min_priv_ver = PRIV_VERSION_1_12_0
->>>>> },
->>>>>       /* Supervisor Trap Setup */
->>>>>       [CSR_SSTATUS]    = { "sstatus",    smode,
->>>> read_sstatus,    write_sstatus, NULL,
->>>>>                                                 read_sstatus_i12
->>>>> 8
->>>>                },
->>>>> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
->>>>> index 2a437b29a1..84a75dbb08 100644
->>>>> --- a/target/riscv/machine.c
->>>>> +++ b/target/riscv/machine.c
->>>>> @@ -262,6 +262,26 @@ static int riscv_cpu_post_load(void
->>>>> *opaque,
->>>> int version_id)
->>>>>       return 0;
->>>>> }
->>>>>
->>>>> +static bool smstateen_needed(void *opaque)
->>>>> +{
->>>>> +    RISCVCPU *cpu = opaque;
->>>>> +
->>>>> +    return cpu->cfg.ext_smstateen;
->>>>> +}
->>>>> +
->>>>> +static const VMStateDescription vmstate_smstateen = {
->>>>> +    .name = "cpu/smtateen",
->>>>> +    .version_id = 1,
->>>>> +    .minimum_version_id = 1,
->>>>> +    .needed = smstateen_needed,
->>>>> +    .fields = (VMStateField[]) {
->>>>> +        VMSTATE_UINT64_ARRAY(env.mstateen, RISCVCPU, 4),
->>>>> +        VMSTATE_UINT64_ARRAY(env.hstateen, RISCVCPU, 4),
->>>>> +        VMSTATE_UINT64_ARRAY(env.sstateen, RISCVCPU, 4),
->>>>> +        VMSTATE_END_OF_LIST()
->>>>> +    }
->>>>> +};
->>>>> +
->>>>> static bool envcfg_needed(void *opaque)
->>>>> {
->>>>>       RISCVCPU *cpu = opaque;
->>>>> @@ -347,6 +367,7 @@ const VMStateDescription vmstate_riscv_cpu
->>>>> = {
->>>>>           &vmstate_kvmtimer,
->>>>>           &vmstate_envcfg,
->>>>>           &vmstate_debug,
->>>>> +        &vmstate_smstateen,
->>>>>           NULL
->>>>>       }
->>>>> };
->>>>> -- 
->>>>> 2.25.1
->>>>>
-
+> ---
+> please pull the full contents from https://github.com/lbmeng/qemu/ opensbi branch
+>
+>  .../opensbi-riscv32-generic-fw_dynamic.bin    | Bin 108504 -> 117704 bytes
+>  .../opensbi-riscv64-generic-fw_dynamic.bin    | Bin 105296 -> 115344 bytes
+>  roms/opensbi                                  |   2 +-
+>  3 files changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin
+> index dba8e8655f..81bab1adc9 100644
+> Binary files a/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv32-generic-fw_dynamic.bin differ
+> diff --git a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin
+> index f223e56991..5eb0a74326 100644
+> Binary files a/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin and b/pc-bios/opensbi-riscv64-generic-fw_dynamic.bin differ
+> diff --git a/roms/opensbi b/roms/opensbi
+> index 48f91ee9c9..4489876e93 160000
+> --- a/roms/opensbi
+> +++ b/roms/opensbi
+> @@ -1 +1 @@
+> -Subproject commit 48f91ee9c960f048c4a7d1da4447d31e04931e38
+> +Subproject commit 4489876e933d8ba0d8bc6c64bae71e295d45faac
+> --
+> 2.34.1
+>
+>
 
