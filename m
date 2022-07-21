@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oEJsE-0003Yw-Om
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Jul 2022 20:17:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:32784)
+	id 1oEJvp-0005L1-Ch
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Jul 2022 20:20:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33438)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oEJsC-0003Xu-Us; Wed, 20 Jul 2022 20:17:00 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e]:43592)
+ id 1oEJvn-0005JZ-Hx; Wed, 20 Jul 2022 20:20:43 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c]:41768)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oEJsB-00015K-9A; Wed, 20 Jul 2022 20:17:00 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- o5-20020a17090a3d4500b001ef76490983so3778748pjf.2; 
- Wed, 20 Jul 2022 17:16:58 -0700 (PDT)
+ id 1oEJvl-0001mB-UI; Wed, 20 Jul 2022 20:20:43 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id l124so253158pfl.8;
+ Wed, 20 Jul 2022 17:20:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1K6+ttFpGGG7RPEnh7CQy9IG1o+sBsWXznemD4+17H4=;
- b=CaZmAxzrJknogWSEyjJ9IjKnC0dGNVNdAHFcDoa7BZk3TPGfwADVX4fIsrD6/T+4FW
- 0P90WPlH+8OHHhRmuYVSq5Zw9TTiMh5Jf+euQKm6HnOcQbBlbnx3E9KivUnuyeBp60YQ
- ZDd2Bx3z2RSFdp9nzhLckr0wo6HSQId91gbPyEjMIUsYBFZB80hRoBl/qvcdrRIqiG1X
- 0j/xwJTK+uDaaqPyWMKbEtgCD+/tJYqtB+i5eMPYG+bWsVt/U58oEuBiDPCAe6GRbnKc
- DEo3o5CW2ej+GsjRmLJxpyY0oBAvTl6irTwep1N4YES7JgsTZrCH6tyN8kyCGzg3oNNf
- Rgbw==
+ :cc; bh=x2FBdvZkAudmWOCw/Jvmdu4nbVLuiInyBGrOEu0Mckk=;
+ b=O3/tc4KCz3J2V5TYis57vflfI6cuugMv9JzoLVCMW7/eZSUBfUFga+gB+RWiFi9/Wd
+ 9icrjiUVYVezUntDaJ4lMo3YQc4lDqe9ybyYBn/r63sAO+31XhnPAym5biOIOJAFtkda
+ fFEEe5RM09qPJpBC06pIIepjE2/rZuEd0e9pHzkio6yc1Nir8IQHeI5SAVeOw2WuBzMP
+ sNgvwTHXPRt4dzgtnumFtZwniCauAax1MOE2MpoSfwI7D42FJF/uhsoKCVI7KbtV8GQn
+ NZQpCCEM7B0hqUM7frRZzoU+CDjFlfS7FrHryeyi85MmIG1LJwL53GpbcM1VjiHIdgO6
+ 2tVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=1K6+ttFpGGG7RPEnh7CQy9IG1o+sBsWXznemD4+17H4=;
- b=Xv+hEHP5/k4jcSYqxfxz07ctKdPhxL6zEMV4/q89r+s9OUjbZvBvnejQ3YqqR4/+Bp
- 4THpAebhLxJAUXi48AnIMUdrszepLK9HOIjuwNzg+RFodIMUxGOJ0IIyl2EX5AryTWaL
- RRhcYk/tcsEBQWhsYQpFtp+yNGEy6xQg9vJu1lEtPR39yRNO5rS3YgVCGaku790DFRjr
- 2LeiOzOBwEvr4hB1VsAFBnNTtpbnwq9ijemtFE8nEHaoXYeyXGnNcUbg/epUnzkVMQWm
- A8diNb2X8FLWYVdRH5edicu2bKEkUQBxGokTkcdTTvElg2NGMbhNJHoziVpwVe670wvk
- zH4A==
-X-Gm-Message-State: AJIora+P0Xk7We0XTF/DNL/YTwQfaHQLwesmJwA1PxJDLN6eRG+BI/x2
- Lk28uZq2tM2kkqc/7rXDW1rEbbcFCNfEKh4lzco=
-X-Google-Smtp-Source: AGRyM1svwXLlKCpdh4LVKymFMmK19qGI7FprPcXrgLF43QXFsmJhbOSJ1q6cL35OKRh1yxKG9vYicsjwHj1XDStFo20=
-X-Received: by 2002:a17:903:2290:b0:16c:33f5:a978 with SMTP id
- b16-20020a170903229000b0016c33f5a978mr41672463plh.121.1658362617510; Wed, 20
- Jul 2022 17:16:57 -0700 (PDT)
+ bh=x2FBdvZkAudmWOCw/Jvmdu4nbVLuiInyBGrOEu0Mckk=;
+ b=6J8+sDhg0fR97JIytFNMSKJ07QLkJ2mVLMmuahto3LorH7n4GKejMAjy47VzxdrAuq
+ gF99yIVK5ctPuXsphpbjoGsQTQ6580LXQi4c7rJj9R0rfhyic5vykyhjaQPpLOfQ+9Jj
+ gUqsvWFoNJO6dKcWmjc5GgRUnw6iNxgEmuUJCYDdP5mA7NfTDOFOAQPtv7LR9fvj/O5+
+ xwyQe9zEl8S8i1UShu8wWBt0Ei1Bct1g2UsFUO2HAtkncYMyxiSkqnN+4kDK3GW+ZwGp
+ ODhqBv4qhEuYaXR/eqBJ8bZsfnbrJMZqlypHopU/f4bygBI4/Ln2gWcNUnaKhsuVHnZt
+ Tf5g==
+X-Gm-Message-State: AJIora9SHr9c1wk21YdpbJEc98GmMOgy9Xryzhy0+cBwlG+9rL275QxC
+ 0D83imb6vvUnlwtrhfoNR9eYiaXP5XpSM7SxJdk=
+X-Google-Smtp-Source: AGRyM1tTSh/VlqChEGmmwqjGVowNgw7F8iZm+nmZRBJjkmPUlhmnv5U2j5hZiY2gUBJXDXjs8BCAE16ZOyf0zTMsCIc=
+X-Received: by 2002:a65:6b8a:0:b0:3db:7dc5:fec2 with SMTP id
+ d10-20020a656b8a000000b003db7dc5fec2mr34887464pgw.223.1658362840030; Wed, 20
+ Jul 2022 17:20:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <165570784143.17634.35095816584573691-0@git.sr.ht>
- <165570784143.17634.35095816584573691-5@git.sr.ht>
-In-Reply-To: <165570784143.17634.35095816584573691-5@git.sr.ht>
+ <165570784143.17634.35095816584573691-6@git.sr.ht>
+In-Reply-To: <165570784143.17634.35095816584573691-6@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Jul 2022 10:16:31 +1000
-Message-ID: <CAKmqyKPWpG481OvHeL1vUp4m007=reGit5UuJbqV3OfjiySDOA@mail.gmail.com>
-Subject: Re: [PATCH qemu v6 05/10] target/riscv: rvv: Add mask agnostic for
- vector integer comparison instructions
+Date: Thu, 21 Jul 2022 10:20:13 +1000
+Message-ID: <CAKmqyKN6=9SAoSc+oLQu+f9==m09TbXsBZ-KxHw8mCGuA+G4RQ@mail.gmail.com>
+Subject: Re: [PATCH qemu v6 06/10] target/riscv: rvv: Add mask agnostic for
+ vector fix-point arithmetic instructions
 To: "~eopxd" <yueh.ting.chen@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -55,8 +54,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=alistair23@gmail.com; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,9 +76,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2022 00:17:01 -0000
+X-List-Received-Date: Thu, 21 Jul 2022 00:20:43 -0000
 
-On Mon, Jun 20, 2022 at 5:08 PM ~eopxd <eopxd@git.sr.ht> wrote:
+On Mon, Jun 20, 2022 at 4:56 PM ~eopxd <eopxd@git.sr.ht> wrote:
 >
 > From: Yueh-Ting (eop) Chen <eop.chen@sifive.com>
 >
@@ -92,61 +91,99 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc |  1 +
->  target/riscv/vector_helper.c            | 10 ++++++++++
->  2 files changed, 11 insertions(+)
+>  target/riscv/vector_helper.c | 26 ++++++++++++++++----------
+>  1 file changed, 16 insertions(+), 10 deletions(-)
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 83b85bb851..e6aa5295a1 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1718,6 +1718,7 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)             \
->          data = FIELD_DP32(data, VDATA, VTA, s->vta);               \
->          data =                                                     \
->              FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);\
-> +        data = FIELD_DP32(data, VDATA, VMA, s->vma);               \
->          tcg_gen_gvec_4_ptr(vreg_ofs(s, a->rd), vreg_ofs(s, 0),     \
->                             vreg_ofs(s, a->rs1),                    \
->                             vreg_ofs(s, a->rs2), cpu_env,           \
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index d1daa764b7..07ce671879 100644
+> index 07ce671879..597fa9c752 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -1404,12 +1404,17 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,   \
->      uint32_t vl = env->vl;                                    \
->      uint32_t total_elems = env_archcpu(env)->cfg.vlen;        \
->      uint32_t vta_all_1s = vext_vta_all_1s(desc);              \
-> +    uint32_t vma = vext_vma(desc);                            \
->      uint32_t i;                                               \
->                                                                \
->      for (i = env->vstart; i < vl; i++) {                      \
->          ETYPE s1 = *((ETYPE *)vs1 + H(i));                    \
->          ETYPE s2 = *((ETYPE *)vs2 + H(i));                    \
->          if (!vm && !vext_elem_mask(v0, i)) {                  \
-> +            /* set masked-off elements to 1s */               \
-> +            if (vma) {                                        \
-> +                vext_set_elem_mask(vd, i, 1);                 \
-> +            }                                                 \
->              continue;                                         \
->          }                                                     \
->          vext_set_elem_mask(vd, i, DO_OP(s2, s1));             \
-> @@ -1462,11 +1467,16 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,   \
->      uint32_t vl = env->vl;                                          \
->      uint32_t total_elems = env_archcpu(env)->cfg.vlen;              \
->      uint32_t vta_all_1s = vext_vta_all_1s(desc);                    \
-> +    uint32_t vma = vext_vma(desc);                                  \
->      uint32_t i;                                                     \
->                                                                      \
->      for (i = env->vstart; i < vl; i++) {                            \
->          ETYPE s2 = *((ETYPE *)vs2 + H(i));                          \
->          if (!vm && !vext_elem_mask(v0, i)) {                        \
-> +            /* set masked-off elements to 1s */                     \
-> +            if (vma) {                                              \
-> +                vext_set_elem_mask(vd, i, 1);                       \
-> +            }                                                       \
->              continue;                                               \
->          }                                                           \
->          vext_set_elem_mask(vd, i,                                   \
+> @@ -2129,10 +2129,12 @@ static inline void
+>  vext_vv_rm_1(void *vd, void *v0, void *vs1, void *vs2,
+>               CPURISCVState *env,
+>               uint32_t vl, uint32_t vm, int vxrm,
+> -             opivv2_rm_fn *fn)
+> +             opivv2_rm_fn *fn, uint32_t vma, uint32_t esz)
+>  {
+>      for (uint32_t i = env->vstart; i < vl; i++) {
+>          if (!vm && !vext_elem_mask(v0, i)) {
+> +            /* set masked-off elements to 1s */
+> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+>              continue;
+>          }
+>          fn(vd, vs1, vs2, i, env, vxrm);
+> @@ -2150,23 +2152,24 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+>      uint32_t vl = env->vl;
+>      uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+>      uint32_t vta = vext_vta(desc);
+> +    uint32_t vma = vext_vma(desc);
+>
+>      switch (env->vxrm) {
+>      case 0: /* rnu */
+>          vext_vv_rm_1(vd, v0, vs1, vs2,
+> -                     env, vl, vm, 0, fn);
+> +                     env, vl, vm, 0, fn, vma, esz);
+>          break;
+>      case 1: /* rne */
+>          vext_vv_rm_1(vd, v0, vs1, vs2,
+> -                     env, vl, vm, 1, fn);
+> +                     env, vl, vm, 1, fn, vma, esz);
+>          break;
+>      case 2: /* rdn */
+>          vext_vv_rm_1(vd, v0, vs1, vs2,
+> -                     env, vl, vm, 2, fn);
+> +                     env, vl, vm, 2, fn, vma, esz);
+>          break;
+>      default: /* rod */
+>          vext_vv_rm_1(vd, v0, vs1, vs2,
+> -                     env, vl, vm, 3, fn);
+> +                     env, vl, vm, 3, fn, vma, esz);
+>          break;
+>      }
+>      /* set tail elements to 1s */
+> @@ -2250,10 +2253,12 @@ static inline void
+>  vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
+>               CPURISCVState *env,
+>               uint32_t vl, uint32_t vm, int vxrm,
+> -             opivx2_rm_fn *fn)
+> +             opivx2_rm_fn *fn, uint32_t vma, uint32_t esz)
+>  {
+>      for (uint32_t i = env->vstart; i < vl; i++) {
+>          if (!vm && !vext_elem_mask(v0, i)) {
+> +            /* set masked-off elements to 1s */
+> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+>              continue;
+>          }
+>          fn(vd, s1, vs2, i, env, vxrm);
+> @@ -2271,23 +2276,24 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
+>      uint32_t vl = env->vl;
+>      uint32_t total_elems = vext_get_total_elems(env, desc, esz);
+>      uint32_t vta = vext_vta(desc);
+> +    uint32_t vma = vext_vma(desc);
+>
+>      switch (env->vxrm) {
+>      case 0: /* rnu */
+>          vext_vx_rm_1(vd, v0, s1, vs2,
+> -                     env, vl, vm, 0, fn);
+> +                     env, vl, vm, 0, fn, vma, esz);
+>          break;
+>      case 1: /* rne */
+>          vext_vx_rm_1(vd, v0, s1, vs2,
+> -                     env, vl, vm, 1, fn);
+> +                     env, vl, vm, 1, fn, vma, esz);
+>          break;
+>      case 2: /* rdn */
+>          vext_vx_rm_1(vd, v0, s1, vs2,
+> -                     env, vl, vm, 2, fn);
+> +                     env, vl, vm, 2, fn, vma, esz);
+>          break;
+>      default: /* rod */
+>          vext_vx_rm_1(vd, v0, s1, vs2,
+> -                     env, vl, vm, 3, fn);
+> +                     env, vl, vm, 3, fn, vma, esz);
+>          break;
+>      }
+>      /* set tail elements to 1s */
 > --
 > 2.34.2
 >
