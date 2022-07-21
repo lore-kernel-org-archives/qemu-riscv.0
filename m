@@ -1,60 +1,61 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oELyg-0005Cc-Jr
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Jul 2022 22:31:50 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49664)
+	id 1oENrP-0000bI-QJ
+	for mharc-qemu-riscv@gnu.org; Thu, 21 Jul 2022 00:32:27 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34746)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oELyd-0005As-HC; Wed, 20 Jul 2022 22:31:47 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e]:44903)
+ id 1oENrO-0000as-25; Thu, 21 Jul 2022 00:32:26 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534]:35704)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oELya-00043v-SA; Wed, 20 Jul 2022 22:31:46 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id q5so501311plr.11;
- Wed, 20 Jul 2022 19:31:43 -0700 (PDT)
+ id 1oENrM-0004Hw-8u; Thu, 21 Jul 2022 00:32:25 -0400
+Received: by mail-pg1-x534.google.com with SMTP id r186so586855pgr.2;
+ Wed, 20 Jul 2022 21:32:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=s1WNcyYa4BddjaL9iPfXG+ZHXAhJrqaNHYeGKvxu4hU=;
- b=IapxxpWPhrwsO26KKUhc+b3dOOhFWyYGaQMEhaph0IouXJseCD2Pnmzl3nK1tq7tXm
- hTsdrR0CwI0prycNTuLZAjiaSA21KygsnUiS4XW4QgCFVIvmk1hmX9gbNxU91fjFUnXw
- itw5adaC4Gtq+LeW/5Tzz0cSssbRXoTWWXZ5wnthhc5knj37nIQZZ9qGXKC++HZQw9vI
- NsWzfqzWbZiZb+SuiTm+0T0qJsfFeXFAFxWs9baElnrjywqH2KBv86BuJvOvmLSwdjfY
- shOmNo3n4iFxkBEicVzWSqqiuGH7Q+B3UMNY80Wd/XRa7R/gwbMKsW3J6LsOb437xcKp
- C60w==
+ :cc; bh=Mce4u4KH4w2co1sCQyVfouU18ixZ8+mugryseGudSBs=;
+ b=NyCnLywz7tY7c+f2va3JYP+ml8PBKm28wgBp0mZibr1AGWkQ3OqquljjfxgIdNj6Ex
+ buT54GV7S0dVrWzCbZmiUS8hOn5XyWRJOyOM5UWa+LRb3XfoUYKvprdK0U7LgUNSiOgd
+ rfe/sVMgLo63M0Xd0AGGpsELv6Hqu9e/Ovzr5Uuqt+XMu0kbvK7bxVSvQTb80+7Hu2si
+ Butja2qPsOJP2NLrAHA1A+wdkFK3WtyClNDESG6nonOQPfFYhPRw4djYzy6NX3jNgSqR
+ DxFmIXC4rT23UZqfU8+2PCV5gEyQ5G7MY7Vithopjw3iUX03G6ZeXEe7apHVE+iJDh02
+ qdew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=s1WNcyYa4BddjaL9iPfXG+ZHXAhJrqaNHYeGKvxu4hU=;
- b=ZICgamHNVcpkMwwy9DoWmm+DaEkJk1oBostfErHuGorwiHtO2qIZ72dOdQTGYl2Q2g
- vnjgGX+pezMeUJ1U7SYdmULc6H23DdfVus7gidZ9iNN2LhZqUqwVXgaF106ImxoZDKlx
- 25JJS15HrR2cNO8KC2YlxNbqtMU8xxD6U/GFDKO8wHn/j8+WtI0wlQUymQDiTsMpPb6Q
- 7PvdmbWDQt1EARsMK0y4B7Jr5FRMxbx0WqAghUK9GAlCTdtnmtLUSwUxzyBfGL+D+rf6
- Gv72y/NdaGKJl323E4mW32TjGjt7XyW9MIu+7p/nbHVI6y5z/ATxmePh4Zn23Dfk0Jbl
- p5rg==
-X-Gm-Message-State: AJIora/z2llkS4V6cWRFfniVTOnrXeZPlIdHjNAN198w2WnAptDvMptD
- uPgrZ8GLNAJZu6KeAWF6+DR95MdUFaTb+cJpnoM=
-X-Google-Smtp-Source: AGRyM1uDdwpZxT4IXzlNC5EjAQuEnXGHqdPIJyCNNKUi1mDsmo5k6uS+2UCP+5F7tk8WhzFL4T6iI2VAHC8NyJ92TvU=
-X-Received: by 2002:a17:90b:3103:b0:1f2:1464:9622 with SMTP id
- gc3-20020a17090b310300b001f214649622mr8784483pjb.166.1658370702710; Wed, 20
- Jul 2022 19:31:42 -0700 (PDT)
+ bh=Mce4u4KH4w2co1sCQyVfouU18ixZ8+mugryseGudSBs=;
+ b=0X4WTFb8M0Tbit8lSq9IegGfqzTUrPi3tICUBhO4T2pxFL4vH5+m7EEy8D0+c4wB3v
+ lUcs9tXPAtLX8neYDGcghs1HodFzkR3hoM6VK5xhULgvYUk8hPRmrqRash3uKpWdOj5n
+ uztfIBJ6Ko+o3JSu6kWSl7NdRJKtQ3vjaZgK9CjJxRvf0FTb7HPAuObtmaZd4Jhmqfwt
+ EqfKuvnIVI3/OpLQTYPhUSIObGB4mKPjlKsY622JDVsrm8pbACi+mJ6DoiqkbIuhOH9S
+ XuC9qRys4yLXo/9pl/ZGwPCAZF+2AwI4s/6J+1dH1en6dlqOKqoNvw4Eh2xfQzbvIISb
+ UTjw==
+X-Gm-Message-State: AJIora+o2Ic0o2p0LWh0EI9CR3G5LRoYN2y65z9+IwNLS2DcJHbGJPOf
+ rh0TTgdbw/pa7YOZybacAMNr/TeUMBp+Q2LeVLs=
+X-Google-Smtp-Source: AGRyM1td8HC1/8XrFm1G2QZvwrcAeCkUXwteEe+X2JngiUwKTrOnWRs7vaeVqS20G5eY1BZORzQFK2dohg++p4GotSk=
+X-Received: by 2002:a05:6a02:313:b0:416:73c:507c with SMTP id
+ bn19-20020a056a02031300b00416073c507cmr36246517pgb.366.1658377942530; Wed, 20
+ Jul 2022 21:32:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <165570784143.17634.35095816584573691-0@git.sr.ht>
-In-Reply-To: <165570784143.17634.35095816584573691-0@git.sr.ht>
+References: <20220702134149.14384-1-liweiwei@iscas.ac.cn>
+In-Reply-To: <20220702134149.14384-1-liweiwei@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Jul 2022 12:31:16 +1000
-Message-ID: <CAKmqyKMkEgBE0P-FhurdD_25LrUmc3DXY5bChTZb6vxT73=PGg@mail.gmail.com>
-Subject: Re: [PATCH qemu v6 00/10] Add mask agnostic behavior for rvv
- instructions
-To: "~eopxd" <yueh.ting.chen@gmail.com>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+Date: Thu, 21 Jul 2022 14:31:56 +1000
+Message-ID: <CAKmqyKNoijHZENxw4dtAK9BfA_-kT8vShrKaC6oero8K4BUCjQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix csr check for cycle{h}, instret{h},
+ time{h}, hpmcounter3~31{h}
+To: Weiwei Li <liweiwei@iscas.ac.cn>, Atish Patra <atishp@rivosinc.com>, 
+ Atish Patra <atishp@atishpatra.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
- WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ wangjunqiang <wangjunqiang@iscas.ac.cn>, 
+ =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -75,86 +76,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2022 02:31:47 -0000
+X-List-Received-Date: Thu, 21 Jul 2022 04:32:26 -0000
 
-On Mon, Jun 20, 2022 at 4:56 PM ~eopxd <eopxd@git.sr.ht> wrote:
+On Sat, Jul 2, 2022 at 11:42 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> According to v-spec, mask agnostic behavior can be either kept as
-> undisturbed or set elements' bits to all 1s. To distinguish the
-> difference of mask policies, QEMU should be able to simulate the mask
-> agnostic behavior as "set mask elements' bits to all 1s".
+> - improve the field extract progress
+> - add stand-alone check for mcuonteren when in less-privileged mode
+> - add check for scounteren when 'S' is enabled and current priv is PRV_U
 >
-> There are multiple possibility for agnostic elements according to
-> v-spec. The main intent of this patch-set tries to add option that
-> can distinguish between mask policies. Setting agnostic elements to
-> all 1s allows QEMU to express this.
->
-> The following instructions that are always unmasked and not affected:
->
-> - Vector add-with-carry and subtract-with-borrow instructions
-> - Vector merge and move instructions
-> - Vector reduction instructions
-> - Vector mask-register logical instructions
-> - `vcompress`
->
-> v2 updates:
-> - Rebase upon changes of the tail agnostic patch-set
-> - Minor change for vector load/store instructions
->
-> v3 updates:
-> - Rebase upon changes of the tail agnostic patch-set
-> - Fix coding style, add missing space
-> - Trigger `vma` when encountering vector load instructions and not in
->   vector stores
->
-> v4 updates:
-> - Rebase upon changes of the tail agnostic patch-set
->
-> v5 updates:
-> - Tag WeiWei as Reviewed-by for this patch-set
->
-> v6 updates:
-> - Now that the tail agnostic patch-set has been merged, this
->   patch-set no longer depends on it. Rebased to latest master.
->
-> Yueh-Ting (eop) Chen (9):
->   target/riscv: rvv: Add mask agnostic for vv instructions
->   target/riscv: rvv: Add mask agnostic for vector load / store
->     instructions
->   target/riscv: rvv: Add mask agnostic for vx instructions
->   target/riscv: rvv: Add mask agnostic for vector integer shift
->     instructions
->   target/riscv: rvv: Add mask agnostic for vector integer comparison
->     instructions
->   target/riscv: rvv: Add mask agnostic for vector fix-point arithmetic
->     instructions
->   target/riscv: rvv: Add mask agnostic for vector floating-point
->     instructions
->   target/riscv: rvv: Add mask agnostic for vector mask instructions
->   target/riscv: rvv: Add mask agnostic for vector permutation
->     instructions
->
-> eopXD (1):
->   target/riscv: rvv: Add option 'rvv_ma_all_1s' to enable optional mask
->     agnostic behavior
+> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
+> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
 
-Thanks!
-
-Applied to riscv-to-apply.next
++ Atish
 
 Alistair
 
+> ---
+>  target/riscv/csr.c | 76 ++++++++++++++--------------------------------
+>  1 file changed, 22 insertions(+), 54 deletions(-)
 >
->  target/riscv/cpu.c                      |   1 +
->  target/riscv/cpu.h                      |   2 +
->  target/riscv/cpu_helper.c               |   2 +
->  target/riscv/insn_trans/trans_rvv.c.inc |  28 +++++
->  target/riscv/internals.h                |   5 +-
->  target/riscv/translate.c                |   2 +
->  target/riscv/vector_helper.c            | 152 ++++++++++++++++++++----
->  7 files changed, 167 insertions(+), 25 deletions(-)
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 6dbe9b541f..a4719cbf35 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -72,66 +72,34 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+>  #if !defined(CONFIG_USER_ONLY)
+>      CPUState *cs = env_cpu(env);
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+> +    uint32_t field = 0;
 >
+>      if (!cpu->cfg.ext_counters) {
+>          /* The Counters extensions is not enabled */
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>
+> -    if (riscv_cpu_virt_enabled(env)) {
+> -        switch (csrno) {
+> -        case CSR_CYCLE:
+> -            if (!get_field(env->hcounteren, COUNTEREN_CY) &&
+> -                get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_TIME:
+> -            if (!get_field(env->hcounteren, COUNTEREN_TM) &&
+> -                get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_INSTRET:
+> -            if (!get_field(env->hcounteren, COUNTEREN_IR) &&
+> -                get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+> -            if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3)) &&
+> -                get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3))) {
+> -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -            }
+> -            break;
+> -        }
+> -        if (riscv_cpu_mxl(env) == MXL_RV32) {
+> -            switch (csrno) {
+> -            case CSR_CYCLEH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_CY) &&
+> -                    get_field(env->mcounteren, COUNTEREN_CY)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_TIMEH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_TM) &&
+> -                    get_field(env->mcounteren, COUNTEREN_TM)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_INSTRETH:
+> -                if (!get_field(env->hcounteren, COUNTEREN_IR) &&
+> -                    get_field(env->mcounteren, COUNTEREN_IR)) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+> -                if (!get_field(env->hcounteren, 1 << (csrno - CSR_HPMCOUNTER3H)) &&
+> -                    get_field(env->mcounteren, 1 << (csrno - CSR_HPMCOUNTER3H))) {
+> -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> -                }
+> -                break;
+> -            }
+> +    if (csrno <= CSR_HPMCOUNTER31 && csrno >= CSR_CYCLE) {
+> +        field = 1 << (csrno - CSR_CYCLE);
+> +    } else if (riscv_cpu_mxl(env) == MXL_RV32 && csrno <= CSR_HPMCOUNTER31H &&
+> +               csrno >= CSR_CYCLEH) {
+> +        field = 1 << (csrno - CSR_CYCLEH);
+> +    }
+> +
+> +    if (env->priv < PRV_M && !get_field(env->mcounteren, field)) {
+> +        return RISCV_EXCP_ILLEGAL_INST;
+> +    }
+> +
+> +    if (riscv_cpu_virt_enabled(env) && !get_field(env->hcounteren, field)) {
+> +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +    }
+> +
+> +    if (riscv_has_ext(env, RVS) && env->priv == PRV_U &&
+> +        !get_field(env->scounteren, field)) {
+> +        if (riscv_cpu_virt_enabled(env)) {
+> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> +        } else {
+> +            return RISCV_EXCP_ILLEGAL_INST;
+>          }
+>      }
+>  #endif
 > --
-> 2.34.2
+> 2.17.1
+>
 >
 
