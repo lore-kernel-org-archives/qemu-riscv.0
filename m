@@ -1,51 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oEJn3-0006ke-NY
-	for mharc-qemu-riscv@gnu.org; Wed, 20 Jul 2022 20:11:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:60044)
+	id 1oEJo3-00082u-VS
+	for mharc-qemu-riscv@gnu.org; Wed, 20 Jul 2022 20:12:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:60186)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oEJn1-0006i5-J2; Wed, 20 Jul 2022 20:11:39 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:45862)
+ id 1oEJo2-00080q-6G; Wed, 20 Jul 2022 20:12:42 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635]:39585)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oEJmz-0000CP-OF; Wed, 20 Jul 2022 20:11:39 -0400
-Received: by mail-pg1-x536.google.com with SMTP id f65so108767pgc.12;
- Wed, 20 Jul 2022 17:11:37 -0700 (PDT)
+ id 1oEJo0-0000LN-MB; Wed, 20 Jul 2022 20:12:41 -0400
+Received: by mail-pl1-x635.google.com with SMTP id c6so293238pla.6;
+ Wed, 20 Jul 2022 17:12:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=n+qkLWUQHXIAddHuSQDjYvVd24HFUXkzy6VK1qwSBcA=;
- b=ND/OboeuWnYkYLGr19yAF/x80ZGcEVOCM6jKfvmoBW91K8GauHZ59phWjHq7TNWp4y
- x2KGf5VtmedS5rZnnxbPSDbovMmIkk0dx+JEFKOkAfJRg+W751rI97WD/NMfRsvYmqN2
- A7jRxxIdG+aYkh98KldWi3nQi0OJ6IrLadMf7UPnl4EB+kd5y10Qh2MByUu1ZqaY6zS+
- Yrx0duLdB7hcmpVV1+m5bsDyHDhyxbymNJfQRP7Ud4poXAawqMfmMHSfzlKg9eYjQlEV
- Kk63fXVfjMLLs3RjJeY0WYTWU51pVh4+3GlN1wxnzG+1VKvOWkAGH2zW1khSv0kRfPXj
- eV3g==
+ :cc; bh=4EYb3WSO0T0R6BQ3bckP/hIITj/h0vCuQWagmV+gxq4=;
+ b=Kl4sHMDZulEwY5HkE9KlrRkNgdv9yQ0dsMD4uX2UfiF38iQVshM28tmw/QXMpnGJwA
+ ptONgwKBk4NDmPFRM41O6wInEIpP6T/fG68Su7OAQAR3TSw2ka/yA0rGaJA+K6976VNP
+ +ekND6PwxHLGsavAaSFrhThDMnuf3S9jfm/47033Q6H7la8q49nV8d9CVxQYpRjjffOZ
+ eIUodsgx6pdxPXuHvMxdb25Rs7A3T0TMQN5kL97PBLjroPTczpdAyFS1AK/VU9qqrtJX
+ SsBQ0ZkpzHK/Gcs84ufCrlLAgg1V/+byUMAxs0aMWLTsdjaiq9I5tblVhyLyYoPzqEAN
+ CLaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=n+qkLWUQHXIAddHuSQDjYvVd24HFUXkzy6VK1qwSBcA=;
- b=L93sGBXbrJW3VfKcO++PytgoEyDwA6soEdoVfuCdZPLiBM+1gR6qhGTWVRqANDwTHw
- qEWdcSU9Ri9Q6E8exK1tynvqvLNgYq70rqXvRjte2Moj+WnSJptXAiSfRIuf9ooxslGu
- BCStPdUckIPdcMry2lCBc85O8gZ+ghO3zkdrQ1QqzHXyUIny43W5eWWyfX/lsQf6tSYu
- FJeyM5XjYYtaZd19SmJEPmyNXXBmbbVsDNwP08yLfQvMQCeW8sAQh4HGF5b4kOp3b3eK
- nyR2G/MRalM3hZ2/u3IbuS8awD/vrkcmc09ArGqL2gvXIhDa6EaYAqtLJZGwoQH8usJM
- TmNw==
-X-Gm-Message-State: AJIora+lZUO5PJwAIVZyMipFt4zmyqUeGcBUmQmnNYjae6sqZHQQ8E39
- J1iq60vBlCObvdzPEOiUVLYPku5F7INkCfy7LBM=
-X-Google-Smtp-Source: AGRyM1u8a8MsvqdSHI3FAADGBNsTC2KeYU/njsR5GB8qYOyUaGEl4tdQDP7zQWJufUTBPUYelNda2nzuovzM19cVURY=
-X-Received: by 2002:a63:1c4c:0:b0:412:6eef:f91a with SMTP id
- c12-20020a631c4c000000b004126eeff91amr35165743pgm.361.1658362295697; Wed, 20
- Jul 2022 17:11:35 -0700 (PDT)
+ bh=4EYb3WSO0T0R6BQ3bckP/hIITj/h0vCuQWagmV+gxq4=;
+ b=ct4a2xw9oSRYHuhW07PNucqNvWmJMe2wM5Q++XxCZzFbmBx2or7wwkQwedKZvPsUKF
+ 3HGvOJM5x83ktembzo4LCJ+gagGpmG+4lAWs3dvcMcAf4BbmBv8f2xv4xJxQePD0fJN7
+ FmmY0J5LJ/KFNWsvkaCc9gz48GIZr4SUgEOws13evVbJnWnZ46DCGjk7I7UD1Y0YVeGY
+ TrPC7ao+GStTZQ+Rlc8F4vapQls1PwTgnbGdjDV3z8BHji0agt8g3vad3SmwJg1gRzgG
+ 0Sw40SP+3oz3dtlADSwy/Drc1QkpcWKT9/jjVyXddX2K47b1ID3Um3VXWqbVXIWVO6ev
+ Lwow==
+X-Gm-Message-State: AJIora8drzHjSZpcpLGYoepmylwpnOLYF5Vrk1ocwTBH8Ry+THjub4ZC
+ JEHogje1X2jZ73VeUXWC3XcyA2vHsISniL43FjU=
+X-Google-Smtp-Source: AGRyM1t30/i5+byz3tUzmZwAKdji03VR85ZViG1NBL4pK3mq6XoXaQ8P6yaiLMUBgsJxOjj9QorvrqLPQa4mouNW+IA=
+X-Received: by 2002:a17:902:690a:b0:16c:f877:d89d with SMTP id
+ j10-20020a170902690a00b0016cf877d89dmr14558233plk.25.1658362359018; Wed, 20
+ Jul 2022 17:12:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <165570784143.17634.35095816584573691-0@git.sr.ht>
- <165570784143.17634.35095816584573691-2@git.sr.ht>
-In-Reply-To: <165570784143.17634.35095816584573691-2@git.sr.ht>
+ <165570784143.17634.35095816584573691-3@git.sr.ht>
+In-Reply-To: <165570784143.17634.35095816584573691-3@git.sr.ht>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 21 Jul 2022 10:11:09 +1000
-Message-ID: <CAKmqyKObyZ+ZTXA56oozoqL3ZVYQUyAbavt2GQfcdRrFHBb9kg@mail.gmail.com>
-Subject: Re: [PATCH qemu v6 02/10] target/riscv: rvv: Add mask agnostic for
- vector load / store instructions
+Date: Thu, 21 Jul 2022 10:12:12 +1000
+Message-ID: <CAKmqyKP=gv49cq_a6oScLYgmyQwsLQq7rPg1-vZN7+kB2WbcPw@mail.gmail.com>
+Subject: Re: [PATCH qemu v6 03/10] target/riscv: rvv: Add mask agnostic for vx
+ instructions
 To: "~eopxd" <yueh.ting.chen@gmail.com>
 Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
@@ -54,8 +54,8 @@ Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  Bin Meng <bin.meng@windriver.com>, Frank Chang <frank.chang@sifive.com>, 
  WeiWei Li <liweiwei@iscas.ac.cn>, eop Chen <eop.chen@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,7 +76,7 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2022 00:11:40 -0000
+X-List-Received-Date: Thu, 21 Jul 2022 00:12:43 -0000
 
 On Mon, Jun 20, 2022 at 4:51 PM ~eopxd <eopxd@git.sr.ht> wrote:
 >
@@ -91,131 +91,48 @@ Acked-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  target/riscv/insn_trans/trans_rvv.c.inc |  5 ++++
->  target/riscv/vector_helper.c            | 35 +++++++++++++++++--------
->  2 files changed, 29 insertions(+), 11 deletions(-)
+>  target/riscv/insn_trans/trans_rvv.c.inc | 2 ++
+>  target/riscv/vector_helper.c            | 3 +++
+>  2 files changed, 5 insertions(+)
 >
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 5ec113f6fd..0627eda0c0 100644
+> index 0627eda0c0..07d86551a9 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -712,6 +712,7 @@ static bool ld_us_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
->      data = FIELD_DP32(data, VDATA, LMUL, emul);
->      data = FIELD_DP32(data, VDATA, NF, a->nf);
+> @@ -1301,6 +1301,7 @@ static bool opivx_trans(uint32_t vd, uint32_t rs1, uint32_t vs2, uint32_t vm,
+>      data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
 >      data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>      data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
 > +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->      return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
->  }
+>      desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+>                                        s->cfg_ptr->vlen / 8, data));
 >
-> @@ -777,6 +778,7 @@ static bool ld_us_mask_op(DisasContext *s, arg_vlm_v *a, uint8_t eew)
->      data = FIELD_DP32(data, VDATA, NF, 1);
->      /* Mask destination register are always tail-agnostic */
->      data = FIELD_DP32(data, VDATA, VTA, s->cfg_vta_all_1s);
-> +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->      return ldst_us_trans(a->rd, a->rs1, data, fn, s, false);
->  }
->
-> @@ -866,6 +868,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->      data = FIELD_DP32(data, VDATA, LMUL, emul);
->      data = FIELD_DP32(data, VDATA, NF, a->nf);
+> @@ -1468,6 +1469,7 @@ static bool opivi_trans(uint32_t vd, uint32_t imm, uint32_t vs2, uint32_t vm,
+>      data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
 >      data = FIELD_DP32(data, VDATA, VTA, s->vta);
+>      data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
 > +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->      return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
->  }
->
-> @@ -996,6 +999,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
->      data = FIELD_DP32(data, VDATA, LMUL, emul);
->      data = FIELD_DP32(data, VDATA, NF, a->nf);
->      data = FIELD_DP32(data, VDATA, VTA, s->vta);
-> +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->      return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
->  }
->
-> @@ -1114,6 +1118,7 @@ static bool ldff_op(DisasContext *s, arg_r2nfvm *a, uint8_t eew)
->      data = FIELD_DP32(data, VDATA, LMUL, emul);
->      data = FIELD_DP32(data, VDATA, NF, a->nf);
->      data = FIELD_DP32(data, VDATA, VTA, s->vta);
-> +    data = FIELD_DP32(data, VDATA, VMA, s->vma);
->      return ldff_trans(a->rd, a->rs1, data, fn, s);
->  }
+>      desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlen / 8,
+>                                        s->cfg_ptr->vlen / 8, data));
 >
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index de895050e0..e3810d2bc3 100644
+> index e3810d2bc3..6be3c4e739 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -283,14 +283,18 @@ vext_ldst_stride(void *vd, void *v0, target_ulong base,
->      uint32_t esz = 1 << log2_esz;
+> @@ -899,10 +899,13 @@ static void do_vext_vx(void *vd, void *v0, target_long s1, void *vs2,
+>      uint32_t vl = env->vl;
 >      uint32_t total_elems = vext_get_total_elems(env, desc, esz);
 >      uint32_t vta = vext_vta(desc);
 > +    uint32_t vma = vext_vma(desc);
+>      uint32_t i;
 >
->      for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            continue;
-> -        }
-> -
->          k = 0;
->          while (k < nf) {
-> +            if (!vm && !vext_elem_mask(v0, i)) {
-> +                /* set masked-off elements to 1s */
-> +                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-> +                                  (i + k * max_elems + 1) * esz);
-> +                k++;
-> +                continue;
-> +            }
->              target_ulong addr = base + stride * i + (k << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
-> @@ -482,15 +486,19 @@ vext_ldst_index(void *vd, void *v0, target_ulong base,
->      uint32_t esz = 1 << log2_esz;
->      uint32_t total_elems = vext_get_total_elems(env, desc, esz);
->      uint32_t vta = vext_vta(desc);
-> +    uint32_t vma = vext_vma(desc);
->
->      /* load bytes from guest memory */
->      for (i = env->vstart; i < env->vl; i++, env->vstart++) {
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            continue;
-> -        }
-> -
->          k = 0;
->          while (k < nf) {
-> +            if (!vm && !vext_elem_mask(v0, i)) {
-> +                /* set masked-off elements to 1s */
-> +                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-> +                                  (i + k * max_elems + 1) * esz);
-> +                k++;
-> +                continue;
-> +            }
->              abi_ptr addr = get_index_addr(base, i, vs2) + (k << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
-> @@ -579,6 +587,7 @@ vext_ldff(void *vd, void *v0, target_ulong base,
->      uint32_t esz = 1 << log2_esz;
->      uint32_t total_elems = vext_get_total_elems(env, desc, esz);
->      uint32_t vta = vext_vta(desc);
-> +    uint32_t vma = vext_vma(desc);
->      target_ulong addr, offset, remain;
->
->      /* probe every access*/
-> @@ -624,10 +633,14 @@ ProbeSuccess:
->      }
->      for (i = env->vstart; i < env->vl; i++) {
->          k = 0;
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            continue;
-> -        }
->          while (k < nf) {
-> +            if (!vm && !vext_elem_mask(v0, i)) {
-> +                /* set masked-off elements to 1s */
-> +                vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-> +                                  (i + k * max_elems + 1) * esz);
-> +                k++;
-> +                continue;
-> +            }
->              target_ulong addr = base + ((i * nf + k) << log2_esz);
->              ldst_elem(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
->              k++;
+>      for (i = env->vstart; i < vl; i++) {
+>          if (!vm && !vext_elem_mask(v0, i)) {
+> +            /* set masked-off elements to 1s */
+> +            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);
+>              continue;
+>          }
+>          fn(vd, s1, vs2, i);
 > --
 > 2.34.2
 >
