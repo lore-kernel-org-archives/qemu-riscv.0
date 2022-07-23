@@ -1,72 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oFB3K-0003Y3-74
-	for mharc-qemu-riscv@gnu.org; Sat, 23 Jul 2022 05:04:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47492)
+	id 1oFBfW-0002fO-7T
+	for mharc-qemu-riscv@gnu.org; Sat, 23 Jul 2022 05:43:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53006)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oFB3E-0003Uo-J0
- for qemu-riscv@nongnu.org; Sat, 23 Jul 2022 05:03:56 -0400
-Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629]:34342)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1oFBfU-0002f2-Db
+ for qemu-riscv@nongnu.org; Sat, 23 Jul 2022 05:43:28 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533]:36421)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oFB3C-00044u-K9
- for qemu-riscv@nongnu.org; Sat, 23 Jul 2022 05:03:56 -0400
-Received: by mail-pl1-x629.google.com with SMTP id z3so6403839plb.1
- for <qemu-riscv@nongnu.org>; Sat, 23 Jul 2022 02:03:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1oFBfS-0004Z4-K2
+ for qemu-riscv@nongnu.org; Sat, 23 Jul 2022 05:43:28 -0400
+Received: by mail-ed1-x533.google.com with SMTP id c12so962410ede.3
+ for <qemu-riscv@nongnu.org>; Sat, 23 Jul 2022 02:43:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=2VB0kZZuiqwzOpHPYpegCzSrqhCZ6EF2Vl2tI+gaJ74=;
- b=T6YSUCxvkiomgA03Eatr1qidrah0qe+46NwlPaVhaZOrdNr5bKbEyb0DUA37mko8Pt
- 57YFqdh2c/P3VQ+40TDVsAyagbYghbwiY3rXD8bny9JKquIE4yB9sDT3HPgKZ9zVorWU
- JOrAAviUlQEzqgQXizMIePDiqsxTl1jZTZvTKhmwFk7IcC/Ff/p3lYmv6D2Jo/6gGVte
- o6ZWajiVFe/oBC2xBC7dyDqBATtrXmwVFopMmqeo/pfiaI9JUti4hjQoZ9h3sh/kWbWu
- elAndD06y4czMPiQZIhjCOx0JODlGG+LSruB6/wwYHTxV1cj8epxd099lfU7+LWRgeen
- vnmw==
+ d=ventanamicro.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=ffHabsiMlXNwoM965pA456V2X+9On0E0OZY7hx1m624=;
+ b=doXVFIO16rSkgsMkloM7korx4AQSgd/yGjPIJzCRAukhhZm5uSW7GLgcYORuGB4pUB
+ ecJciQN2fH051bmIsCDTbwz0E8NvqLonSzLMb6T15S/pzfKqe4DC4m7f5LnYcyhSgFwo
+ FyCbZA/BsD5aa7kfb9zzpL9q7NsoI3k25ws3AjdQQdr25fAzr5if1u9++H0SH3knmoLB
+ it1FdWUpUaYl+UNaBVf+icei7eYKVKxQdTF/uPa9Sy4rzsnWQ6CWY03XxWoJ7nx0bgW7
+ wa/WOJKh/d6gdRXiY5bM3rjqESRkH+/0EjVEeRLmjc9FVgGKYg4Q+0ECX41TpOVLFFfD
+ KXSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=2VB0kZZuiqwzOpHPYpegCzSrqhCZ6EF2Vl2tI+gaJ74=;
- b=HbS+xnF9i9zkgK/F03gujODdE5bCeJZAnYAqhNkBbhL0EGpSojAL+O0aMtbA3v1DlF
- SF9ROboy6wxY8GDGZRMH1+Rv9zrUBiXid9r6iZztpAdVOHYYGWRCRlJsNFTBmu15UQ+j
- bJ40zJDAPMoBB1MKmeH5DUvqVb5XVUpwQCPEnvWo4PAHhvUB80xLk0WwRTJLi0PC9G3g
- +1Lg1wIKvy7I+vBqasnv+jH+524gBbHsBsujaWYxjzhZ4Wr+96zsI0fE6e8sHC1CJ0tl
- qIYIWabvfSQjqNuhV9Fx9RdxZdseN3Qhqfq2jPHlsHHhz+MAb2wml865iar6zcO/zYhG
- CJXw==
-X-Gm-Message-State: AJIora/ILPl3AZmGzGaBz2UOSedjO5FSVfq8pgFOPJc2hftgVRrMWE+/
- jDxOt8sFw0SblahFvVPb/4jfPg==
-X-Google-Smtp-Source: AGRyM1uWcKhyaacIfC6bzwTMIV9EzOJaBXUOrjE0wbUJ8fANVbuj2fgpWxyFgOxLvT3oKLc5dQCIxg==
-X-Received: by 2002:a17:90b:380f:b0:1f0:27dd:656e with SMTP id
- mq15-20020a17090b380f00b001f027dd656emr22168934pjb.48.1658567032477; 
- Sat, 23 Jul 2022 02:03:52 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([66.220.2.162])
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=ffHabsiMlXNwoM965pA456V2X+9On0E0OZY7hx1m624=;
+ b=GsiCNhFhiXYTJMAi2wsnCHX5IQ7hHMUyGcYc+fLNSHIHvixa+pC1D5yCCFGXIjkORm
+ ODNMaxyoWUbGFnxYX73lv/uihj/E0HXjMsaaOz0InKvgiy0Nh2qpmby/GGxwgP7IF8yN
+ YUUJPYjk0uA/TvPLeoinlgsVGfIp+XoUitRdvcyRGpJdPNSKPDFJwU8H/HZ7GUVHOKA3
+ 5wCRiNr4krp1Tr5RCYv0XXVQzaMdDb5/eiuo4bHf1hJ8IVAqBUUgyL8iOnxqykF2qauG
+ TDUVLK3luUSJ4sEv92wS78ASxgmR5tgJRQy3LRaY0CMSNjqkLtpePb7DPmL+CrZxhg7T
+ Yn3Q==
+X-Gm-Message-State: AJIora+xl/7FDQa2F3/Ov4sG2UkNBBFhP+rFJeQAMlYBuc1ayBI3hh85
+ t8gPoSE+VSyLafMywwwKSvE6Rg==
+X-Google-Smtp-Source: AGRyM1sghCwqr1FRdNGmTDj8gFdi7Be7oiAx01XFpeXds1MwtaGxlJbZcxBIs10B7MdyqQ2d/IP3AQ==
+X-Received: by 2002:a05:6402:5191:b0:43b:d047:dcb5 with SMTP id
+ q17-20020a056402519100b0043bd047dcb5mr3642743edd.390.1658569404249; 
+ Sat, 23 Jul 2022 02:43:24 -0700 (PDT)
+Received: from localhost (cst2-173-67.cust.vodafone.cz. [31.30.173.67])
  by smtp.gmail.com with ESMTPSA id
- v12-20020aa799cc000000b00528f9597fb3sm5372661pfi.197.2022.07.23.02.03.51
+ k20-20020a17090632d400b0072f32a84e75sm2914279ejk.110.2022.07.23.02.43.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Jul 2022 02:03:52 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH] hw/intc: sifive_plic: Fix multi-socket plic configuraiton
-Date: Sat, 23 Jul 2022 02:03:35 -0700
-Message-Id: <20220723090335.671105-1-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.25.1
+ Sat, 23 Jul 2022 02:43:23 -0700 (PDT)
+Date: Sat, 23 Jul 2022 11:43:23 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Atish Patra <atishp@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Anup Patel <anup@brainfault.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v6  1/3] hw/intc: Move mtimer/mtimecmp to aclint
+Message-ID: <20220723094323.f3rsmdqwf7mno6wu@kamzik>
+References: <20220722010046.343744-1-atishp@rivosinc.com>
+ <20220722010046.343744-2-atishp@rivosinc.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x629.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220722010046.343744-2-atishp@rivosinc.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x533.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,41 +82,120 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jul 2022 09:03:56 -0000
+X-List-Received-Date: Sat, 23 Jul 2022 09:43:28 -0000
 
-Since commit 40244040a7ac, multi-socket configuration with plic is
-broken as the hartid for second socket is calculated incorrectly.
-The hartid stored in addr_config already includes the offset
-for the base hartid for that socket. Adding it again would lead
-to segfault while creating the plic device for the virt machine.
-qdev_connect_gpio_out was also invoked with incorrect number of gpio
-lines.
+On Thu, Jul 21, 2022 at 06:00:44PM -0700, Atish Patra wrote:
+> Historically, The mtime/mtimecmp has been part of the CPU because
+> they are per hart entities. However, they actually belong to aclint
+> which is a MMIO device.
+> 
+> Move them to the ACLINT device. This also emulates the real hardware
+> more closely.
+> 
+> Reviewed-by: Anup Patel <anup@brainfault.org>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>  hw/intc/riscv_aclint.c         | 41 ++++++++++++++++++++++++----------
+>  hw/timer/ibex_timer.c          | 18 ++++++---------
+>  include/hw/intc/riscv_aclint.h |  2 ++
+>  include/hw/timer/ibex_timer.h  |  2 ++
+>  target/riscv/cpu.h             |  2 --
+>  target/riscv/machine.c         |  5 ++---
+>  6 files changed, 42 insertions(+), 28 deletions(-)
+> 
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index e7942c4e5a32..47f355224612 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -32,6 +32,7 @@
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "qemu/timer.h"
+>  #include "hw/irq.h"
+> +#include "migration/vmstate.h"
+>  
+>  typedef struct riscv_aclint_mtimer_callback {
+>      RISCVAclintMTimerState *s;
+> @@ -65,8 +66,8 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+>  
+>      uint64_t rtc_r = cpu_riscv_read_rtc(mtimer);
+>  
+> -    cpu->env.timecmp = value;
+> -    if (cpu->env.timecmp <= rtc_r) {
+> +    mtimer->timecmp[hartid] = value;
+> +    if (mtimer->timecmp[hartid] <= rtc_r) {
+>          /*
+>           * If we're setting an MTIMECMP value in the "past",
+>           * immediately raise the timer interrupt
+> @@ -77,7 +78,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+>  
+>      /* otherwise, set up the future timer interrupt */
+>      qemu_irq_lower(mtimer->timer_irqs[hartid - mtimer->hartid_base]);
+> -    diff = cpu->env.timecmp - rtc_r;
+> +    diff = mtimer->timecmp[hartid] - rtc_r;
+>      /* back to ns (note args switched in muldiv64) */
+>      uint64_t ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
+>  
+> @@ -102,7 +103,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+>          next = MIN(next, INT64_MAX);
+>      }
+>  
+> -    timer_mod(cpu->env.timer, next);
+> +    timer_mod(mtimer->timers[hartid], next);
+>  }
+>  
+>  /*
+> @@ -133,11 +134,11 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
+>                            "aclint-mtimer: invalid hartid: %zu", hartid);
+>          } else if ((addr & 0x7) == 0) {
+>              /* timecmp_lo for RV32/RV64 or timecmp for RV64 */
+> -            uint64_t timecmp = env->timecmp;
+> +            uint64_t timecmp = mtimer->timecmp[hartid];
+>              return (size == 4) ? (timecmp & 0xFFFFFFFF) : timecmp;
+>          } else if ((addr & 0x7) == 4) {
+>              /* timecmp_hi */
+> -            uint64_t timecmp = env->timecmp;
+> +            uint64_t timecmp = mtimer->timecmp[hartid];
+>              return (timecmp >> 32) & 0xFFFFFFFF;
+>          } else {
+>              qemu_log_mask(LOG_UNIMP,
+> @@ -177,7 +178,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+>          } else if ((addr & 0x7) == 0) {
+>              if (size == 4) {
+>                  /* timecmp_lo for RV32/RV64 */
+> -                uint64_t timecmp_hi = env->timecmp >> 32;
+> +                uint64_t timecmp_hi = mtimer->timecmp[hartid] >> 32;
+>                  riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
+>                      timecmp_hi << 32 | (value & 0xFFFFFFFF));
+>              } else {
+> @@ -188,7 +189,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+>          } else if ((addr & 0x7) == 4) {
+>              if (size == 4) {
+>                  /* timecmp_hi for RV32/RV64 */
+> -                uint64_t timecmp_lo = env->timecmp;
+> +                uint64_t timecmp_lo = mtimer->timecmp[hartid];
+>                  riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
+>                      value << 32 | (timecmp_lo & 0xFFFFFFFF));
+>              } else {
+> @@ -234,7 +235,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+>              }
+>              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
+>                                                mtimer->hartid_base + i,
+> -                                              env->timecmp);
+> +                                              mtimer->timecmp[i]);
+>          }
+>          return;
+>      }
+> @@ -284,6 +285,8 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
+>      s->timer_irqs = g_new(qemu_irq, s->num_harts);
+>      qdev_init_gpio_out(dev, s->timer_irqs, s->num_harts);
+>  
+> +    s->timers = g_malloc0(s->num_harts * sizeof(QEMUTimer));
 
-Fixes: 40244040a7ac (hw/intc: sifive_plic: Avoid overflowing the addr_config buffer)
+It looks like we're overallocating the space here, since we want an
+array of QEMUTimer pointers, not QEMUTimer objects. Also, QEMU
+prefers g_new to g_malloc (see docs/devel/style.rst).
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- hw/intc/sifive_plic.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
-index 56d60e9ac935..fdac028a521f 100644
---- a/hw/intc/sifive_plic.c
-+++ b/hw/intc/sifive_plic.c
-@@ -454,10 +454,10 @@ DeviceState *sifive_plic_create(hwaddr addr, char *hart_config,
- 
-     for (i = 0; i < plic->num_addrs; i++) {
-         int cpu_num = plic->addr_config[i].hartid;
--        CPUState *cpu = qemu_get_cpu(hartid_base + cpu_num);
-+        CPUState *cpu = qemu_get_cpu(cpu_num);
- 
-         if (plic->addr_config[i].mode == PLICMode_M) {
--            qdev_connect_gpio_out(dev, num_harts + cpu_num,
-+            qdev_connect_gpio_out(dev, cpu_num,
-                                   qdev_get_gpio_in(DEVICE(cpu), IRQ_M_EXT));
-         }
-         if (plic->addr_config[i].mode == PLICMode_S) {
--- 
-2.25.1
-
+Thanks,
+drew
 
