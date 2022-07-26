@@ -1,71 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oGSSb-0001g0-H9
-	for mharc-qemu-riscv@gnu.org; Tue, 26 Jul 2022 17:51:25 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:47836)
+	id 1oGSuN-0002E8-BD
+	for mharc-qemu-riscv@gnu.org; Tue, 26 Jul 2022 18:20:07 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52388)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1oGSSZ-0001fb-CP
- for qemu-riscv@nongnu.org; Tue, 26 Jul 2022 17:51:23 -0400
-Received: from mail-yw1-x1133.google.com ([2607:f8b0:4864:20::1133]:45902)
+ id 1oGSuL-0002Dr-Vt
+ for qemu-riscv@nongnu.org; Tue, 26 Jul 2022 18:20:06 -0400
+Received: from mail-yw1-x112c.google.com ([2607:f8b0:4864:20::112c]:38845)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@atishpatra.org>)
- id 1oGSSX-00015L-6v
- for qemu-riscv@nongnu.org; Tue, 26 Jul 2022 17:51:23 -0400
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-31bf3656517so156595057b3.12
- for <qemu-riscv@nongnu.org>; Tue, 26 Jul 2022 14:51:19 -0700 (PDT)
+ id 1oGSuJ-0005qA-QQ
+ for qemu-riscv@nongnu.org; Tue, 26 Jul 2022 18:20:05 -0400
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-31f41584236so49005387b3.5
+ for <qemu-riscv@nongnu.org>; Tue, 26 Jul 2022 15:20:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=atishpatra.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=YydpgrxDW5FnuWQpSXFhFRvKWyeb+vea0xnBM5Q2B9k=;
- b=oedFiu8fkFrH0o9wCxLFFZ6fcLQuAUNRfPzvZtdxJsOkexCLv+ggZWAsgYlWw1r/Ms
- nzXuOaO7H8gUsJgncXxOvSC73sn1BGn7PnlrAb0Ghm16IiEkWLJo4K4xjbUM/mL+bjDH
- 8CrOSxLiGDj1iV/PzlYnKj9dB0Vd7C9EulTOA=
+ bh=ff0EmoBWsKehtfpC4cZ0EIhZAbeTHKeYEx4dzJyiKXc=;
+ b=bG7yrSj9W/zn7luDvAViFO16od7edxZ0VS202ieh8oueaZfzDszPABuQcJCtj+S5iJ
+ RD2eNAu0KZYFq7hh1uMFAwHLUHXxiwJM6RnjV+rX2h40/wbdrNswMKTsL1f8VaPLeQey
+ U5Di4HCZJKUg97bJzupQT+6l5082L97bzhwiw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=YydpgrxDW5FnuWQpSXFhFRvKWyeb+vea0xnBM5Q2B9k=;
- b=WSakbHoFczXFKLviQm1upBpx58vmO3Ht70sCZc+4U6uSezXOs+Q2RGlFTjz2qZ1GGe
- EdSrEJWnPGQWcYS1D+I26c/yk5A+sdyYGIyKKJ/ptQCBqSVKrhdeLitZRKe0/1NeTvmQ
- 2pBc93ZpQrMBgLXOlq1+EMsIQC/v73wSbA1bPutWXDLsiPge7CRBMGAhj3/nlTENLxri
- XV6S6sEGfI7q2PaMkfJYhZ3rNQE+UbcjU4ZFbDizPqTA+3kCDvWWkXVPHft1yWJYsBcT
- UR2vEVun9t1wnuuzOT9WOv/pf4svXz3SJKB9MzZgUOS3etcxk1jDNtwskotv2nNLjcY8
- GuUw==
-X-Gm-Message-State: AJIora/1NhgVIHf0/oUQf08MvdEFAP9ShzbIMNSsTy9unsr0O95mP3gc
- 1VuBVf3nanLWuTnPYqHgIMu5iai2Ni9GAGjaEa31
-X-Google-Smtp-Source: AGRyM1tpgv4ZXF7lapS4/JdDieY93f+5T0eCPugN6KEcT7VED3oZPGclbzsAe22eUg0K0VVJft54DQbrrI0OCN0hqL4=
-X-Received: by 2002:a0d:d753:0:b0:31f:4e9f:a9ff with SMTP id
- z80-20020a0dd753000000b0031f4e9fa9ffmr3825554ywd.194.1658872278973; Tue, 26
- Jul 2022 14:51:18 -0700 (PDT)
+ bh=ff0EmoBWsKehtfpC4cZ0EIhZAbeTHKeYEx4dzJyiKXc=;
+ b=bFzcQIFeeLlFGb2HuuOIBKecwf2YvVLxvNtlnYDyT1uPmfqV95I6oYVoEvca+Kkcr6
+ FoMIqFcxJIdMTZ40Z1bgUhMTtY62okBY8u8HxNVXEXoaMI3aGSsu+g97zjfYwiZbOiLs
+ gZK+QhpPwLrXct/7u9674Q/fiKc0oqtNu+F6/nwuQnyXF+ZiKn5OzNG2SOWlXKV/Pfd2
+ SJmW3m0Ziahqzq7gVnDpBjEEOyzU+x6yeG+w0JZr0ySnORZaenr/pLDJf/09aovyiIcQ
+ ldaa/I59tEdfifUqQoSOuhG+hDmlpy8hcvWCLglVVwrPov9KxzFaVdkxtx2lBn2W7tJ3
+ C7Dw==
+X-Gm-Message-State: AJIora8qXeYZM2uSFbXiWpPN+CGe/LdLVvY51xV+Z+bbnBbOf89S4kVq
+ teO3VLrNTI0BoZ/vQIGD4r/VZUbYIoZwrIV7cMPq
+X-Google-Smtp-Source: AGRyM1vfH3CMPc5TaYPAGjnn+OZ45XHNEHVPMop6P7Mn2+VsajHcqiBHqSmZQTwJd1vO/nkKyURxTtK1kCzuYntW8y8=
+X-Received: by 2002:a81:5d55:0:b0:31c:dce7:96c9 with SMTP id
+ r82-20020a815d55000000b0031cdce796c9mr16666875ywb.519.1658874002497; Tue, 26
+ Jul 2022 15:20:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220620231603.2547260-1-atishp@rivosinc.com>
- <20220620231603.2547260-12-atishp@rivosinc.com>
- <4485024.MHq7AAxBmi@diego>
-In-Reply-To: <4485024.MHq7AAxBmi@diego>
+ <20220620231603.2547260-5-atishp@rivosinc.com>
+ <f9b33706-4630-1f9b-a190-29e64d630e0a@iscas.ac.cn>
+ <be29c8d6-9099-70cf-6a7c-d1ab0dba066d@iscas.ac.cn>
+ <CAHBxVyF7GfA+Mk=nA9Lss76xAQ5YdwLkvN=g+bxKjFe9JyatKw@mail.gmail.com>
+ <f4e87280-54bd-34dc-4c94-358146af8f20@iscas.ac.cn>
+In-Reply-To: <f4e87280-54bd-34dc-4c94-358146af8f20@iscas.ac.cn>
 From: Atish Patra <atishp@atishpatra.org>
-Date: Tue, 26 Jul 2022 14:51:08 -0700
-Message-ID: <CAOnJCUJ=3X-nNhfRW8LDiLRLnKrb2WyCT=pVYevDttwGcyauuw@mail.gmail.com>
-Subject: Re: [PATCH v10 11/12] hw/riscv: virt: Add PMU DT node to the device
- tree
-To: =?UTF-8?Q?Heiko_St=C3=BCbner?= <heiko@sntech.de>
-Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Atish Patra <atishp@rivosinc.com>, Bin Meng <bin.meng@windriver.com>, 
+Date: Tue, 26 Jul 2022 15:19:51 -0700
+Message-ID: <CAOnJCUKiEd6nhVe78tKh11CgMuxZzsMQ4GftHwkD1Y4gLepQPg@mail.gmail.com>
+Subject: Re: [PATCH v10 04/12] target/riscv: pmu: Make number of counters
+ configurable
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: Atish Kumar Patra <atishp@rivosinc.com>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>,
  Frank Chang <frank.chang@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1133;
- envelope-from=atishp@atishpatra.org; helo=mail-yw1-x1133.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112c;
+ envelope-from=atishp@atishpatra.org; helo=mail-yw1-x112c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,206 +82,248 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2022 21:51:23 -0000
+X-List-Received-Date: Tue, 26 Jul 2022 22:20:06 -0000
 
-On Thu, Jul 14, 2022 at 3:27 AM Heiko St=C3=BCbner <heiko@sntech.de> wrote:
+On Tue, Jul 5, 2022 at 1:20 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 >
-> Hi Atish,
 >
-> Am Dienstag, 21. Juni 2022, 01:16:01 CEST schrieb Atish Patra:
-> > Qemu virt machine can support few cache events and cycle/instret counte=
-rs.
-> > It also supports counter overflow for these events.
+> =E5=9C=A8 2022/7/5 =E4=B8=8B=E5=8D=883:51, Atish Kumar Patra =E5=86=99=E9=
+=81=93:
+> > On Mon, Jul 4, 2022 at 5:38 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+> >>
+> >> =E5=9C=A8 2022/7/4 =E4=B8=8B=E5=8D=8811:26, Weiwei Li =E5=86=99=E9=81=
+=93:
+> >>> =E5=9C=A8 2022/6/21 =E4=B8=8A=E5=8D=887:15, Atish Patra =E5=86=99=E9=
+=81=93:
+> >>>> The RISC-V privilege specification provides flexibility to implement
+> >>>> any number of counters from 29 programmable counters. However, the Q=
+EMU
+> >>>> implements all the counters.
+> >>>>
+> >>>> Make it configurable through pmu config parameter which now will
+> >>>> indicate
+> >>>> how many programmable counters should be implemented by the cpu.
+> >>>>
+> >>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> >>>> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> >>>> Signed-off-by: Atish Patra <atish.patra@wdc.com>
+> >>>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> >>>> ---
+> >>>>    target/riscv/cpu.c |  3 +-
+> >>>>    target/riscv/cpu.h |  2 +-
+> >>>>    target/riscv/csr.c | 94 ++++++++++++++++++++++++++++++-----------=
+-----
+> >>>>    3 files changed, 63 insertions(+), 36 deletions(-)
+> >>>>
+> >>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> >>>> index 1b57b3c43980..d12c6dc630ca 100644
+> >>>> --- a/target/riscv/cpu.c
+> >>>> +++ b/target/riscv/cpu.c
+> >>>> @@ -851,7 +851,6 @@ static void riscv_cpu_init(Object *obj)
+> >>>>    {
+> >>>>        RISCVCPU *cpu =3D RISCV_CPU(obj);
+> >>>>    -    cpu->cfg.ext_pmu =3D true;
+> >>>>        cpu->cfg.ext_ifencei =3D true;
+> >>>>        cpu->cfg.ext_icsr =3D true;
+> >>>>        cpu->cfg.mmu =3D true;
+> >>>> @@ -879,7 +878,7 @@ static Property riscv_cpu_extensions[] =3D {
+> >>>>        DEFINE_PROP_BOOL("u", RISCVCPU, cfg.ext_u, true),
+> >>>>        DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
+> >>>>        DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
+> >>>> -    DEFINE_PROP_BOOL("pmu", RISCVCPU, cfg.ext_pmu, true),
+> >>>> +    DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
+> >>> I think It's better to add  a check on cfg.pmu_num to  <=3D 29.
+> >>>
+> >> OK, I find this check in the following patch.
+> >>>>        DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true)=
+,
+> >>>>        DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+> >>>>        DEFINE_PROP_BOOL("Zfh", RISCVCPU, cfg.ext_zfh, false),
+> >>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >>>> index 252c30a55d78..ffee54ea5c27 100644
+> >>>> --- a/target/riscv/cpu.h
+> >>>> +++ b/target/riscv/cpu.h
+> >>>> @@ -397,7 +397,6 @@ struct RISCVCPUConfig {
+> >>>>        bool ext_zksed;
+> >>>>        bool ext_zksh;
+> >>>>        bool ext_zkt;
+> >>>> -    bool ext_pmu;
+> >>>>        bool ext_ifencei;
+> >>>>        bool ext_icsr;
+> >>>>        bool ext_svinval;
+> >>>> @@ -421,6 +420,7 @@ struct RISCVCPUConfig {
+> >>>>        /* Vendor-specific custom extensions */
+> >>>>        bool ext_XVentanaCondOps;
+> >>>>    +    uint8_t pmu_num;
+> >>>>        char *priv_spec;
+> >>>>        char *user_spec;
+> >>>>        char *bext_spec;
+> >>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> >>>> index 0ca05c77883c..b4a8e15f498f 100644
+> >>>> --- a/target/riscv/csr.c
+> >>>> +++ b/target/riscv/csr.c
+> >>>> @@ -73,9 +73,17 @@ static RISCVException ctr(CPURISCVState *env, int
+> >>>> csrno)
+> >>>>        CPUState *cs =3D env_cpu(env);
+> >>>>        RISCVCPU *cpu =3D RISCV_CPU(cs);
+> >>>>        int ctr_index;
+> >>>> +    int base_csrno =3D CSR_HPMCOUNTER3;
+> >>>> +    bool rv32 =3D riscv_cpu_mxl(env) =3D=3D MXL_RV32 ? true : false=
+;
+> >>>>    -    if (!cpu->cfg.ext_pmu) {
+> >>>> -        /* The PMU extension is not enabled */
+> >>>> +    if (rv32 && csrno >=3D CSR_CYCLEH) {
+> >>>> +        /* Offset for RV32 hpmcounternh counters */
+> >>>> +        base_csrno +=3D 0x80;
+> >>>> +    }
+> >>>> +    ctr_index =3D csrno - base_csrno;
+> >>>> +
+> >>>> +    if (!cpu->cfg.pmu_num || ctr_index >=3D (cpu->cfg.pmu_num)) {
+> >>>> +        /* No counter is enabled in PMU or the counter is out of
+> >>>> range */
+> >>> I seems unnecessary to add '!cpu->cfg.pmu_num ' here, 'ctr_index >=3D
+> >>> (cpu->cfg.pmu_num)' is true
+> > The check is improved in the following patches as well.
 > >
-> > Add a DT node so that OpenSBI/Linux kernel is aware of the virt machine
-> > capabilities. There are some dummy nodes added for testing as well.
-> >
-> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> > Signed-off-by: Atish Patra <atish.patra@wdc.com>
-> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > ---
+> Do you mean 'if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs &
+> ctr_mask)))'  in patch 9 ?
 >
-> > +static void create_fdt_socket_pmu(RISCVVirtState *s,
-> > +                                  int socket, uint32_t *phandle,
-> > +                                  uint32_t *intc_phandles)
-> > +{
-> > +    int cpu;
-> > +    char *pmu_name;
-> > +    uint32_t *pmu_cells;
-> > +    MachineState *mc =3D MACHINE(s);
-> > +    RISCVCPU hart =3D s->soc[socket].harts[0];
-> > +
-> > +    pmu_cells =3D g_new0(uint32_t, s->soc[socket].num_harts * 2);
-> > +
-> > +    for (cpu =3D 0; cpu < s->soc[socket].num_harts; cpu++) {
-> > +        pmu_cells[cpu * 2 + 0] =3D cpu_to_be32(intc_phandles[cpu]);
-> > +        pmu_cells[cpu * 2 + 1] =3D cpu_to_be32(IRQ_PMU_OVF);
-> > +    }
-> > +
-> > +    pmu_name =3D g_strdup_printf("/soc/pmu");
-> > +    qemu_fdt_add_subnode(mc->fdt, pmu_name);
-> > +    qemu_fdt_setprop_string(mc->fdt, pmu_name, "compatible", "riscv,pm=
-u");
->
-> Where is the binding document for this?
->
-> As the comment below states the "riscv,event-to-mhpmcounters" property
-> is opensbi-specific and gets removed in the opensbi stage, but that still
-> leaves the pmu node in it and from the version I found, Rob wasn't overly
-> happy with the compatible [0]. Did this get addressed?
+> In this condition, '!cpu->cfg.pmu_num' seems unnecessary too.
 >
 
-This is OpenSBI specific binding.
-https://github.com/riscv-software-src/opensbi/blob/master/docs/pmu_support.=
-md
+Yes. I will remove it.
 
-Linux kernel doesn't use binding anymore. The earlier version patches
-relied on the DT binding.
-However, based on the feedback it was removed.
-
-OpenSBI should delete the node and the interrupt-extended property
-deletion is necessary at this point.
-
+> Regards,
 >
-> Thanks
-> Heiko
+> Weiwei Li
 >
->
-> [0] https://lore.kernel.org/all/YXhPqfpXh1VZN07T@robh.at.kernel.org/
->
->
->
-> > +    riscv_pmu_generate_fdt_node(mc->fdt, hart.cfg.pmu_num, pmu_name);
-> > +
-> > +    g_free(pmu_name);
-> > +    g_free(pmu_cells);
-> > +}
-> > +
-> >  static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *m=
-emmap,
-> >                                 bool is_32_bit, uint32_t *phandle,
-> >                                 uint32_t *irq_mmio_phandle,
-> > @@ -759,6 +786,7 @@ static void create_fdt_sockets(RISCVVirtState *s, c=
-onst MemMapEntry *memmap,
-> >                      &intc_phandles[phandle_pos]);
-> >              }
-> >          }
-> > +        create_fdt_socket_pmu(s, socket, phandle, intc_phandles);
-> >      }
-> >
-> >      if (s->aia_type =3D=3D VIRT_AIA_TYPE_APLIC_IMSIC) {
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 7d9e2aca12a9..69bbd9fff4e1 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -1110,6 +1110,7 @@ static void riscv_isa_string_ext(RISCVCPU *cpu, c=
-har **isa_str, int max_str_len)
-> >          ISA_EDATA_ENTRY(zve64f, ext_zve64f),
-> >          ISA_EDATA_ENTRY(zhinx, ext_zhinx),
-> >          ISA_EDATA_ENTRY(zhinxmin, ext_zhinxmin),
-> > +        ISA_EDATA_ENTRY(sscofpmf, ext_sscofpmf),
-> >          ISA_EDATA_ENTRY(svinval, ext_svinval),
-> >          ISA_EDATA_ENTRY(svnapot, ext_svnapot),
-> >          ISA_EDATA_ENTRY(svpbmt, ext_svpbmt),
-> > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> > index 34096941c0ce..59feb3c243dd 100644
-> > --- a/target/riscv/pmu.c
-> > +++ b/target/riscv/pmu.c
-> > @@ -20,11 +20,68 @@
-> >  #include "cpu.h"
-> >  #include "pmu.h"
-> >  #include "sysemu/cpu-timers.h"
-> > +#include "sysemu/device_tree.h"
-> >
-> >  #define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
-> >  #define MAKE_32BIT_MASK(shift, length) \
-> >          (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
-> >
-> > +/**
-> > + * To keep it simple, any event can be mapped to any programmable coun=
-ters in
-> > + * QEMU. The generic cycle & instruction count events can also be moni=
-tored
-> > + * using programmable counters. In that case, mcycle & minstret must c=
-ontinue
-> > + * to provide the correct value as well. Heterogeneous PMU per hart is=
- not
-> > + * supported yet. Thus, number of counters are same across all harts.
-> > + */
-> > +void riscv_pmu_generate_fdt_node(void *fdt, int num_ctrs, char *pmu_na=
-me)
-> > +{
-> > +    uint32_t fdt_event_ctr_map[20] =3D {};
-> > +    uint32_t cmask;
-> > +
-> > +    /* All the programmable counters can map to any event */
-> > +    cmask =3D MAKE_32BIT_MASK(3, num_ctrs);
-> > +
-> > +   /**
-> > +    * The event encoding is specified in the SBI specification
-> > +    * Event idx is a 20bits wide number encoded as follows:
-> > +    * event_idx[19:16] =3D type
-> > +    * event_idx[15:0] =3D code
-> > +    * The code field in cache events are encoded as follows:
-> > +    * event_idx.code[15:3] =3D cache_id
-> > +    * event_idx.code[2:1] =3D op_id
-> > +    * event_idx.code[0:0] =3D result_id
-> > +    */
-> > +
-> > +   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
-> > +   fdt_event_ctr_map[0] =3D cpu_to_be32(0x00000001);
-> > +   fdt_event_ctr_map[1] =3D cpu_to_be32(0x00000001);
-> > +   fdt_event_ctr_map[2] =3D cpu_to_be32(cmask | 1 << 0);
-> > +
-> > +   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
-> > +   fdt_event_ctr_map[3] =3D cpu_to_be32(0x00000002);
-> > +   fdt_event_ctr_map[4] =3D cpu_to_be32(0x00000002);
-> > +   fdt_event_ctr_map[5] =3D cpu_to_be32(cmask | 1 << 2);
-> > +
-> > +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) =
-*/
-> > +   fdt_event_ctr_map[6] =3D cpu_to_be32(0x00010019);
-> > +   fdt_event_ctr_map[7] =3D cpu_to_be32(0x00010019);
-> > +   fdt_event_ctr_map[8] =3D cpu_to_be32(cmask);
-> > +
-> > +   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01)=
- */
-> > +   fdt_event_ctr_map[9] =3D cpu_to_be32(0x0001001B);
-> > +   fdt_event_ctr_map[10] =3D cpu_to_be32(0x0001001B);
-> > +   fdt_event_ctr_map[11] =3D cpu_to_be32(cmask);
-> > +
-> > +   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) =
-*/
-> > +   fdt_event_ctr_map[12] =3D cpu_to_be32(0x00010021);
-> > +   fdt_event_ctr_map[13] =3D cpu_to_be32(0x00010021);
-> > +   fdt_event_ctr_map[14] =3D cpu_to_be32(cmask);
-> > +
-> > +   /* This a OpenSBI specific DT property documented in OpenSBI docs *=
-/
-> > +   qemu_fdt_setprop(fdt, pmu_name, "riscv,event-to-mhpmcounters",
-> > +                    fdt_event_ctr_map, sizeof(fdt_event_ctr_map));
-> > +}
-> > +
-> >  static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
-> >  {
-> >      if (ctr_idx < 3 || ctr_idx >=3D RV_MAX_MHPMCOUNTERS ||
-> > diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-> > index 036653627f78..3004ce37b636 100644
-> > --- a/target/riscv/pmu.h
-> > +++ b/target/riscv/pmu.h
-> > @@ -31,5 +31,6 @@ int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
-> >  int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-> >                                 uint32_t ctr_idx);
-> >  int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_i=
-dx);
-> > +void riscv_pmu_generate_fdt_node(void *fdt, int num_counters, char *pm=
-u_name);
-> >  int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-> >                            uint32_t ctr_idx);
-> >
->
->
->
+> >> Typo.  I -> It
+> >>> when cpu->cfg.pmu_num is zero if the problem for base_csrno is fixed.
+> >>>
+> >>> Ragards,
+> >>>
+> >>> Weiwei Li
+> >>>
+> >>>>            return RISCV_EXCP_ILLEGAL_INST;
+> >>>>        }
+> >>>>    @@ -103,7 +111,7 @@ static RISCVException ctr(CPURISCVState *env,
+> >>>> int csrno)
+> >>>>                }
+> >>>>                break;
+> >>>>            }
+> >>>> -        if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> >>>> +        if (rv32) {
+> >>>>                switch (csrno) {
+> >>>>                case CSR_CYCLEH:
+> >>>>                    if (!get_field(env->mcounteren, COUNTEREN_CY)) {
+> >>>> @@ -158,7 +166,7 @@ static RISCVException ctr(CPURISCVState *env, in=
+t
+> >>>> csrno)
+> >>>>                }
+> >>>>                break;
+> >>>>            }
+> >>>> -        if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> >>>> +        if (rv32) {
+> >>>>                switch (csrno) {
+> >>>>                case CSR_CYCLEH:
+> >>>>                    if (!get_field(env->hcounteren, COUNTEREN_CY) &&
+> >>>> @@ -202,6 +210,26 @@ static RISCVException ctr32(CPURISCVState *env,
+> >>>> int csrno)
+> >>>>    }
+> >>>>      #if !defined(CONFIG_USER_ONLY)
+> >>>> +static RISCVException mctr(CPURISCVState *env, int csrno)
+> >>>> +{
+> >>>> +    CPUState *cs =3D env_cpu(env);
+> >>>> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> >>>> +    int ctr_index;
+> >>>> +    int base_csrno =3D CSR_MHPMCOUNTER3;
+> >>>> +
+> >>>> +    if ((riscv_cpu_mxl(env) =3D=3D MXL_RV32) && csrno >=3D CSR_MCYC=
+LEH) {
+> >>>> +        /* Offset for RV32 mhpmcounternh counters */
+> >>>> +        base_csrno +=3D 0x80;
+> >>>> +    }
+> >>>> +    ctr_index =3D csrno - base_csrno;
+> >>>> +    if (!cpu->cfg.pmu_num || ctr_index >=3D cpu->cfg.pmu_num) {
+> >>>> +        /* The PMU is not enabled or counter is out of range*/
+> >>>> +        return RISCV_EXCP_ILLEGAL_INST;
+> >>>> +    }
+> >>>> +
+> >>>> +    return RISCV_EXCP_NONE;
+> >>>> +}
+> >>>> +
+> >>>>    static RISCVException any(CPURISCVState *env, int csrno)
+> >>>>    {
+> >>>>        return RISCV_EXCP_NONE;
+> >>>> @@ -3687,35 +3715,35 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE]=
+ =3D {
+> >>>>        [CSR_HPMCOUNTER30]   =3D { "hpmcounter30",   ctr, read_zero }=
+,
+> >>>>        [CSR_HPMCOUNTER31]   =3D { "hpmcounter31",   ctr, read_zero }=
+,
+> >>>>    -    [CSR_MHPMCOUNTER3]   =3D { "mhpmcounter3",   any, read_zero =
+},
+> >>>> -    [CSR_MHPMCOUNTER4]   =3D { "mhpmcounter4",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER5]   =3D { "mhpmcounter5",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER6]   =3D { "mhpmcounter6",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER7]   =3D { "mhpmcounter7",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER8]   =3D { "mhpmcounter8",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER9]   =3D { "mhpmcounter9",   any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER10]  =3D { "mhpmcounter10",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER11]  =3D { "mhpmcounter11",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER12]  =3D { "mhpmcounter12",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER13]  =3D { "mhpmcounter13",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER14]  =3D { "mhpmcounter14",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER15]  =3D { "mhpmcounter15",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER16]  =3D { "mhpmcounter16",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER17]  =3D { "mhpmcounter17",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER18]  =3D { "mhpmcounter18",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER19]  =3D { "mhpmcounter19",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER20]  =3D { "mhpmcounter20",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER21]  =3D { "mhpmcounter21",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER22]  =3D { "mhpmcounter22",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER23]  =3D { "mhpmcounter23",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER24]  =3D { "mhpmcounter24",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER25]  =3D { "mhpmcounter25",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER26]  =3D { "mhpmcounter26",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER27]  =3D { "mhpmcounter27",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER28]  =3D { "mhpmcounter28",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER29]  =3D { "mhpmcounter29",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER30]  =3D { "mhpmcounter30",  any, read_zero },
+> >>>> -    [CSR_MHPMCOUNTER31]  =3D { "mhpmcounter31",  any, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER3]   =3D { "mhpmcounter3",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER4]   =3D { "mhpmcounter4",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER5]   =3D { "mhpmcounter5",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER6]   =3D { "mhpmcounter6",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER7]   =3D { "mhpmcounter7",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER8]   =3D { "mhpmcounter8",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER9]   =3D { "mhpmcounter9",   mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER10]  =3D { "mhpmcounter10",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER11]  =3D { "mhpmcounter11",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER12]  =3D { "mhpmcounter12",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER13]  =3D { "mhpmcounter13",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER14]  =3D { "mhpmcounter14",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER15]  =3D { "mhpmcounter15",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER16]  =3D { "mhpmcounter16",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER17]  =3D { "mhpmcounter17",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER18]  =3D { "mhpmcounter18",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER19]  =3D { "mhpmcounter19",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER20]  =3D { "mhpmcounter20",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER21]  =3D { "mhpmcounter21",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER22]  =3D { "mhpmcounter22",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER23]  =3D { "mhpmcounter23",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER24]  =3D { "mhpmcounter24",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER25]  =3D { "mhpmcounter25",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER26]  =3D { "mhpmcounter26",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER27]  =3D { "mhpmcounter27",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER28]  =3D { "mhpmcounter28",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER29]  =3D { "mhpmcounter29",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER30]  =3D { "mhpmcounter30",  mctr, read_zero },
+> >>>> +    [CSR_MHPMCOUNTER31]  =3D { "mhpmcounter31",  mctr, read_zero },
+> >>>>          [CSR_MHPMEVENT3]     =3D { "mhpmevent3",     any, read_zero=
+ },
+> >>>>        [CSR_MHPMEVENT4]     =3D { "mhpmevent4",     any, read_zero }=
+,
 >
 >
 
