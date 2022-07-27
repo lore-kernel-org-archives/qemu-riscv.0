@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oGarC-0002lF-Dg
-	for mharc-qemu-riscv@gnu.org; Wed, 27 Jul 2022 02:49:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38442)
+	id 1oGarE-0002pM-Ru
+	for mharc-qemu-riscv@gnu.org; Wed, 27 Jul 2022 02:49:25 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38498)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oGarB-0002jv-IB
- for qemu-riscv@nongnu.org; Wed, 27 Jul 2022 02:49:21 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:43777)
+ id 1oGarD-0002mZ-LO
+ for qemu-riscv@nongnu.org; Wed, 27 Jul 2022 02:49:23 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:39810)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oGar9-0003Cj-8E
- for qemu-riscv@nongnu.org; Wed, 27 Jul 2022 02:49:21 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- o5-20020a17090a3d4500b001ef76490983so1240270pjf.2
- for <qemu-riscv@nongnu.org>; Tue, 26 Jul 2022 23:49:18 -0700 (PDT)
+ id 1oGarB-0003DE-O9
+ for qemu-riscv@nongnu.org; Wed, 27 Jul 2022 02:49:23 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id iw1so1300221plb.6
+ for <qemu-riscv@nongnu.org>; Tue, 26 Jul 2022 23:49:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=MpimQ6+09mUVE4WvHhBVGuIpQQ7ydg8M7uYBdweOsYc=;
- b=pijkmxZy8s8zrRZbkSPyFG7CCSyEX18mlsWIRjdMM1wjeSHFuZHWppaTBkTl04Fqcn
- lz/+90qfMOoW9yUIDAQ4q6lWzPH0QX5mkiZKJlgGo/Z3xdUuc+P0LQYRaAcuzdgB+dE6
- zo7Qor8v3yiuNkks5/MFh3Uxty+mlXi5CLqag1puFmsn/CaCgYwJ/kkyMObwwttnibuG
- Dr0wVQRMAhBV5W2qZblZtRERzHfpjWlcRwA0shyVT82s9DXk4GrJdOOJC311IkX+MQj5
- xyx92i/Q+BQups05xsu8nLVuKk34pUenf/SEUZ+fWLdF1U6hCvuN8btiySWEFVuMQlFP
- k0Qg==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=D/VjWM0J+rR8xAS7iOwrdTtOwWSXtXsbBRJhDPNIvng=;
+ b=gOTuAx2tajc3qycqZeZANfS5QeYtFCI7+KSldqV1FNJ7r0oDD+02q6D/YWY9iijWb+
+ Ol8FGm7yn8/UCwdGJSzTPmOu/WSeCURpTak008GQcsXagmFkV56JtfSViIMdWTUxFRtp
+ 4FhL9R7FJRjKzyAW8QM21tCx7zAYqZBHbMdoejMXao6DkNkqtDERulwquQSvkil3sV0L
+ w1JaooLU2j3LdVFWdBIGBusxkL4vLs9ZmwzssNcevwdHUhbCDKyGEmTBTFcVs0fKHX9q
+ 8Ur3zFqjw2LLnt4l7CtQAMDOB7tT/WU0O0y3kDlEfKxATxpBB2pK2bOo273NmMn/iE7G
+ 6gow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=MpimQ6+09mUVE4WvHhBVGuIpQQ7ydg8M7uYBdweOsYc=;
- b=vWEDYM/opIexHafpXQNEGJKkusZitzhbxHC7GGNLft835JPjtj2sSbunHVZJTfoBex
- AoVK+Wa51OWNZ0iHAaObod077hpvX6mRGmuyyek6VzLGUOTcqz6JIXPZ/kck1x1VAAAs
- h5n2F+0BQ+gidpQn1mflf675W/mkerPrM6zkK6UCBrbDhecLmjJ95yat+9N06UwUs4JU
- GflBfqSBz97SMXA5NyKFJgC3rVYXRVxT7OUYOVtuco1fEFmhp2OizMGYoUjRJ+EgBjWT
- VWYSnYOykTBVZEw5+8vMP6FuSAjwacbFEmBEAXiONEj6esEPq+EGBSlyuflFKxRv+YeV
- Bgvg==
-X-Gm-Message-State: AJIora/UzRonr/14NAUWIZHArAeOTDiKR1Rz1FGG1zCicakwfdoHM1jP
- YJzFw9ocOcmTdziNZExQ5fX8lA==
-X-Google-Smtp-Source: AGRyM1vYkSBow1RzYOU4ZmafMZpVQv+5T7/WEvo0d8ZG08Rbw/qjkAxos+I6VoAMCGTbFofw+P6xkQ==
-X-Received: by 2002:a17:902:ced1:b0:16d:6b7c:2f2f with SMTP id
- d17-20020a170902ced100b0016d6b7c2f2fmr14123782plg.107.1658904557425; 
- Tue, 26 Jul 2022 23:49:17 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=D/VjWM0J+rR8xAS7iOwrdTtOwWSXtXsbBRJhDPNIvng=;
+ b=SNoIyeRo8VALXhjoGdOkBQ9i4vf1ZdhmEqMpcXnl0Iue88Ba9iqcD8wdpMJO1Cd33Z
+ 0cOpdNXnPZIgy8Bv0rfDkN8P7o2Jy609y+8HAFkH4AOI/PdyO/MQP9GsfgjzTdU9jgXI
+ KRzkYCGWxyFt8LuZs/+1zKZHGHa3ztltcC9Ufc0HHHETwiObcZUDSExQQNkEvlPPEpUS
+ /g8eQxwg40+569WLq9eL6wNPP/F0w4kZiwzgwrpLEGuZVNuxsh/BBYv95o+73mx2dqnr
+ 8WRpkvZJIvr2O+1SEjLE3qvS20M0mCVPMZ9QGqrGEENtBey5FKBAJskjpd6UQmxDLdD8
+ qRKA==
+X-Gm-Message-State: AJIora/MD9xVEo99Er45Dm6heqPDGzqsBm/z8RRiv1pN/x15lsME9bFv
+ k85NH+1w9o6k3ItI/BcE22P1EQ==
+X-Google-Smtp-Source: AGRyM1vlglq5nzuBnJPE3u71PsCQHUhaBno+XcIsMHeNgXyrZBP0LMuye8o5UhWmVZMiyf85onxAVA==
+X-Received: by 2002:a17:902:c40c:b0:16d:b4c9:c360 with SMTP id
+ k12-20020a170902c40c00b0016db4c9c360mr883722plk.26.1658904560428; 
+ Tue, 26 Jul 2022 23:49:20 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a170902ab9000b0016d2d2c7df1sm12764851plr.188.2022.07.26.23.49.16
+ f16-20020a170902ab9000b0016d2d2c7df1sm12764851plr.188.2022.07.26.23.49.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Jul 2022 23:49:17 -0700 (PDT)
+ Tue, 26 Jul 2022 23:49:20 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
+Cc: Atish Patra <atish.patra@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
+ Heiko Stuebner <heiko@sntech.de>, Atish Patra <atishp@rivosinc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v11 0/6] Improve PMU support
-Date: Tue, 26 Jul 2022 23:49:07 -0700
-Message-Id: <20220727064913.1041427-1-atishp@rivosinc.com>
+Subject: [PATCH v11 3/6] target/riscv: Add few cache related PMU events
+Date: Tue, 26 Jul 2022 23:49:10 -0700
+Message-Id: <20220727064913.1041427-4-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220727064913.1041427-1-atishp@rivosinc.com>
+References: <20220727064913.1041427-1-atishp@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=atishp@rivosinc.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -80,147 +81,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2022 06:49:22 -0000
+X-List-Received-Date: Wed, 27 Jul 2022 06:49:24 -0000
 
-The latest version of the SBI specification includes a Performance Monitoring
-Unit(PMU) extension[1] which allows the supervisor to start/stop/configure
-various PMU events. The Sscofpmf ('Ss' for Privileged arch and Supervisor-level
-extensions, and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
-extension[2] allows the perf like tool to handle overflow interrupts and
-filtering support.
+From: Atish Patra <atish.patra@wdc.com>
 
-This series implements remaining PMU infrastructure to support
-PMU in virt machine. The first seven patches from the original series
-have been merged already.
+Qemu can monitor the following cache related PMU events through
+tlb_fill functions.
 
-This will allow us to add any PMU events in future.
-Currently, this series enables the following omu events.
-1. cycle count
-2. instruction count
-3. DTLB load/store miss
-4. ITLB prefetch miss
+1. DTLB load/store miss
+3. ITLB prefetch miss
 
-The first two are computed using host ticks while last three are counted during
-cpu_tlb_fill. We can do both sampling and count from guest userspace.
-This series has been tested on both RV64 and RV32. Both Linux[3] and Opensbi[4]
-patches are required to get the perf working.
+Increment the PMU counter in tlb_fill function.
 
-Here is an output of perf stat/report while running hackbench with latest
-OpenSBI & Linux kernel.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Tested-by: Heiko Stuebner <heiko@sntech.de>
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ target/riscv/cpu_helper.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-Perf stat:
-==========
-[root@fedora-riscv ~]# perf stat -e cycles -e instructions -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses \
-> perf bench sched messaging -g 1 -l 10
-# Running 'sched/messaging' benchmark:
-# 20 sender and receiver processes per group
-# 1 groups == 40 processes run
-
-     Total time: 0.265 [sec]
-
- Performance counter stats for 'perf bench sched messaging -g 1 -l 10':
-
-     4,167,825,362      cycles                                                      
-     4,166,609,256      instructions              #    1.00  insn per cycle         
-         3,092,026      dTLB-load-misses                                            
-           258,280      dTLB-store-misses                                           
-         2,068,966      iTLB-load-misses                                            
-
-       0.585791767 seconds time elapsed
-
-       0.373802000 seconds user
-       1.042359000 seconds sys
-
-Perf record:
-============
-[root@fedora-riscv ~]# perf record -e cycles -e instructions \
-> -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 10000 \
-> perf bench sched messaging -g 1 -l 10
-# Running 'sched/messaging' benchmark:
-# 20 sender and receiver processes per group
-# 1 groups == 40 processes run
-
-     Total time: 1.397 [sec]
-[ perf record: Woken up 10 times to write data ]
-Check IO/CPU overload!
-[ perf record: Captured and wrote 8.211 MB perf.data (214486 samples) ]
-
-[root@fedora-riscv riscv]# perf report
-Available samples                                                               
-107K cycles                                                                    ◆
-107K instructions                                                              ▒
-250 dTLB-load-misses                                                           ▒
-13 dTLB-store-misses                                                           ▒
-172 iTLB-load-misses      
-..
-
-Changes from v10->v11:
-1. Rebased on top of the master where first 7 patches were already merged.
-2. Removed unnecessary additional check in ctr predicate function.
-3. Removed unnecessary priv version checks in mcountinhibit read/write. 
-4. Added Heiko's reviewed-by/tested-by tags.
-
-Changes from v8->v9:
-1. Added the write_done flags to the vmstate.
-2. Fixed the hpmcounter read access from M-mode.
-
-Changes from v7->v8:
-1. Removeding ordering constraints for mhpmcounter & mhpmevent.
-
-Changes from v6->v7:
-1. Fixed all the compilation errors for the usermode.
-
-Changes from v5->v6:
-1. Fixed compilation issue with PATCH 1.
-2. Addressed other comments.
-
-Changes from v4->v5:
-1. Rebased on top of the -next with following patches.
-   - isa extension
-   - priv 1.12 spec
-2. Addressed all the comments on v4
-3. Removed additional isa-ext DT node in favor of riscv,isa string update
-
-Changes from v3->v4:
-1. Removed the dummy events from pmu DT node.
-2. Fixed pmu_avail_counters mask generation.
-3. Added a patch to simplify the predicate function for counters. 
-
-Changes from v2->v3:
-1. Addressed all the comments on PATCH1-4.
-2. Split patch1 into two separate patches.
-3. Added explicit comments to explain the event types in DT node.
-4. Rebased on latest Qemu.
-
-Changes from v1->v2:
-1. Dropped the ACks from v1 as signficant changes happened after v1.
-2. sscofpmf support.
-3. A generic counter management framework.
-
-[1] https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.adoc
-[2] https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edit
-[3] https://github.com/atishp04/qemu/tree/riscv_pmu_v11
-
-Atish Patra (6):
-target/riscv: Add sscofpmf extension support
-target/riscv: Simplify counter predicate function
-target/riscv: Add few cache related PMU events
-hw/riscv: virt: Add PMU DT node to the device tree
-target/riscv: Update the privilege field for sscofpmf CSRs
-target/riscv: Remove additional priv version check for mcountinhibit
-
-hw/riscv/virt.c           |  28 +++
-target/riscv/cpu.c        |  12 ++
-target/riscv/cpu.h        |  25 +++
-target/riscv/cpu_bits.h   |  55 +++++
-target/riscv/cpu_helper.c |  25 +++
-target/riscv/csr.c        | 314 ++++++++++++++++++-----------
-target/riscv/machine.c    |   1 +
-target/riscv/pmu.c        | 414 +++++++++++++++++++++++++++++++++++++-
-target/riscv/pmu.h        |   8 +
-9 files changed, 763 insertions(+), 119 deletions(-)
-
---
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 59b3680b1b23..37afb4e0cc72 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -21,10 +21,12 @@
+ #include "qemu/log.h"
+ #include "qemu/main-loop.h"
+ #include "cpu.h"
++#include "pmu.h"
+ #include "exec/exec-all.h"
+ #include "tcg/tcg-op.h"
+ #include "trace.h"
+ #include "semihosting/common-semi.h"
++#include "cpu_bits.h"
+ 
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -1176,6 +1178,28 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
++
++static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type)
++{
++    enum riscv_pmu_event_idx pmu_event_type;
++
++    switch (access_type) {
++    case MMU_INST_FETCH:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
++        break;
++    case MMU_DATA_LOAD:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS;
++        break;
++    case MMU_DATA_STORE:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
++        break;
++    default:
++        return;
++    }
++
++    riscv_pmu_incr_ctr(cpu, pmu_event_type);
++}
++
+ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr)
+@@ -1272,6 +1296,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             }
+         }
+     } else {
++        pmu_tlb_fill_incr_ctr(cpu, access_type);
+         /* Single stage lookup */
+         ret = get_physical_address(env, &pa, &prot, address, NULL,
+                                    access_type, mmu_idx, true, false, false);
+-- 
 2.25.1
 
 
