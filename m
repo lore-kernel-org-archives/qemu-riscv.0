@@ -1,60 +1,65 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oITk5-0000Td-1K
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Aug 2022 07:37:49 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:35372)
+	id 1oIZ4k-0004Wj-IW
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Aug 2022 13:19:30 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59238)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oITk3-0000T3-J8
- for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:37:47 -0400
-Received: from mail-yb1-xb2e.google.com ([2607:f8b0:4864:20::b2e]:45763)
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1oIZ4j-0004Tw-15
+ for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 13:19:29 -0400
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:38731)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oITk1-0007AR-NU
- for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:37:47 -0400
-Received: by mail-yb1-xb2e.google.com with SMTP id e127so17705503yba.12
- for <qemu-riscv@nongnu.org>; Mon, 01 Aug 2022 04:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=HaAXL/qO9BHNnDeVfHOncjqYo30Q5/KoR/nNrpYAUlI=;
- b=RR626BnnnUqVpHR4u/9Y42KwEPCx4LhSwEEihKPew0M+c1ck/T30rngFX8Xl0+MGaU
- qeJGNr4YfASuVOnIlT8QueH3Hg5mD+4JbrahCQPCrWaAnb9iaMmDKJz9iVz8poYvYtXV
- TU5M6NQKsG7G1UrsB2bsrMWNy3YzEq9SPDHsw3TVYaNF2cFrlfrkhtcfM/aVh+QNTkDn
- uzXybcXTkHiJzpmNVB+0lEQkKiTbokXt0kIk/Uin26tLVHYtW0C9xbNAiwVFjVo1KDqO
- JrOtBpRk10uHpNGtum2erWWooejtJhKI08UwIj8i/3GnYvl+DPpFJ2PtPGJcgJQ+r3jL
- 7IVg==
+ (Exim 4.90_1) (envelope-from <mchitale@ventanamicro.com>)
+ id 1oIZ4h-0006ed-9S
+ for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 13:19:28 -0400
+Received: by mail-pj1-x102a.google.com with SMTP id
+ w17-20020a17090a8a1100b001f326c73df6so11194533pjn.3
+ for <qemu-riscv@nongnu.org>; Mon, 01 Aug 2022 10:19:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=BG2/EJD+6HV5FB++n4qJwmQEgdX/cuw2hxxj6JjR4pk=;
+ b=Mz2a0kvic3jazrwxvgZjzOvYzh9hHMGbBG+ocysPjElo0Zm0qZroYk/xW8q1suzlku
+ R0XOH9wkIT+nDmIn3BLOMnnU7YLt3GfSb1giQM5qWAZBfjTSYQNBRdaZc1H0YKdA98KY
+ 6SD2dGfsvCxDpX65lCJHoSm8JUaFBY/JCACQ213YVvkzk10Tq/9N+v/jPTIoodZ9Zbzx
+ CtyB0Qf4Q3GMx8AkX3tSl8fdlzjr2J4WqtIy1g9tVqv7tPVj5iBG+LQn6S2NjLJoAZSQ
+ QcULcOTKGNrxIjBMxIPp8rknAkqQEnbKl4WjLsigi/PQ6XMBcV7QHzFk5vzze+JU7Rs0
+ w2vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=HaAXL/qO9BHNnDeVfHOncjqYo30Q5/KoR/nNrpYAUlI=;
- b=dN2H2QRW7nicISSdafMdN3Vs2NVD3RyynpqAEq9XnXlencWsEcPMPb4priLP2bZsW7
- X7JDP/h8q9mkOD8HqpqV3SakV5jkDmhs+UYBCg010DQ5eRabuOUn9YltbBn6ukwrlrO5
- qQuL6yvS4g5ZpSAwA1ObXdlhu7sx/o0B4ve57nMDt1QkosKHWN5D2OqB4curiMC4p5af
- HSU24yF/lAc16W6sJaHdhFVJ5fhTJ7eCnjkC4RyReAUcCxpNeqL8LiASHIu2JtvcnQcs
- VRw1dRj6IrvQzicFlcfDBz8aJGn35WrEA7WnI280ndvcU/9cIpPlCjOqhj6BJ5XWx5VO
- r+Wg==
-X-Gm-Message-State: ACgBeo3bZ7cz7GGH5kHsM7bC7/jV+5HB0cTD2IxKQ0tolokwusqbjqkQ
- ZJp9/eja5FPOLCR3KXO0CQtW8xPAw7NeGpnNqISfTw==
-X-Google-Smtp-Source: AA6agR6Z5TlEZnAxPWKzmpS4DYlbytdppR3LZ21+jql0m8y8qd3Xx8AuTYnc9ADY6mdVrbBMrybDeMQm8RUiLZk6aPs=
-X-Received: by 2002:a5b:7c6:0:b0:670:6ba6:d046 with SMTP id
- t6-20020a5b07c6000000b006706ba6d046mr10603556ybq.140.1659353864693; Mon, 01
- Aug 2022 04:37:44 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=BG2/EJD+6HV5FB++n4qJwmQEgdX/cuw2hxxj6JjR4pk=;
+ b=w0DotvT1bInDn6jwHWx7ol+eUQ0iVZfnEkSg4k7azSbg6FD71cuoYRgqGkwFznCcUD
+ 3GZYgYBiiq/44KPrJ9DFC8D8AqfoXIQjjDqn1G3qvafaA2D1aKx7hpQ4KipToAig2+vW
+ WlYVDrnngp2Fd7VwyloVW12UOJFTZcn6qa1SuoAXILFOnyi31ePigllPclG4Pjldp6C+
+ JeR+8sEORrUatpaPGUYQ1zL40Kw8v4d/qbo4eZHbs6erStafUQMJk4Ia96wzDdo8LkE1
+ icAKKNSnMMefmU1TjssXWo+8JS0MSg3GSLSbtMaKtnCYrxp7v7c2RqV/Jz27YdVAmrW2
+ 6ZWw==
+X-Gm-Message-State: ACgBeo3+eQpT8hN1n5T1Ay1p3gfQyPBpJnRHd63SXUr1O7TDexrxBaKz
+ D9l1pdJJSa5J/ECF01j2ApGkKQ==
+X-Google-Smtp-Source: AA6agR6YxRvkzIuEQi9SOWNmdYBmHL+gp5v77Y3W2SqViJrqknsKOg2WLzW4F+g2CSUZDaHeqtLrKA==
+X-Received: by 2002:a17:90a:1d0:b0:1ec:7066:49b8 with SMTP id
+ 16-20020a17090a01d000b001ec706649b8mr20537652pjd.163.1659374365184; 
+ Mon, 01 Aug 2022 10:19:25 -0700 (PDT)
+Received: from ThinkPad-T490.dc1.ventanamicro.com ([122.176.236.198])
+ by smtp.googlemail.com with ESMTPSA id
+ i10-20020a056a00004a00b0052ab602a7d0sm1709942pfk.100.2022.08.01.10.19.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Aug 2022 10:19:24 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+	alistair.francis@wdc.com
+Subject: [PATCH v7 0/4] RISC-V Smstateen support
+Date: Mon,  1 Aug 2022 22:48:39 +0530
+Message-Id: <20220801171843.72986-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220727223905.624285-1-qemu@ben.fluff.org>
- <20220727223905.624285-6-qemu@ben.fluff.org>
-In-Reply-To: <20220727223905.624285-6-qemu@ben.fluff.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 1 Aug 2022 12:37:33 +0100
-Message-ID: <CAFEAcA9DADLZaSrRmRLXxex6V1ewbi8zV+ey9NLv0JNPJOc9hw@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] hw/arm: change to use qemu_fdt_setprop_strings()
-To: Ben Dooks <qemu@ben.fluff.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm@nongnu.org, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2e;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2e.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=mchitale@ventanamicro.com; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,142 +79,65 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2022 11:37:47 -0000
+X-List-Received-Date: Mon, 01 Aug 2022 17:19:29 -0000
 
-On Wed, 27 Jul 2022 at 23:44, Ben Dooks <qemu@ben.fluff.org> wrote:
->
-> Change to using qemu_fdt_setprop_strings() instead of using
-> \0 separated string arrays.
->
-> Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
-> ---
->  hw/arm/boot.c             |  8 +++---
->  hw/arm/virt.c             | 28 +++++++++------------
->  hw/arm/xlnx-versal-virt.c | 51 ++++++++++++++++-----------------------
->  3 files changed, 37 insertions(+), 50 deletions(-)
->
-> diff --git a/hw/arm/boot.c b/hw/arm/boot.c
-> index ada2717f76..bf29b7ae60 100644
-> --- a/hw/arm/boot.c
-> +++ b/hw/arm/boot.c
-> @@ -490,11 +490,11 @@ static void fdt_add_psci_node(void *fdt)
->      qemu_fdt_add_subnode(fdt, "/psci");
->      if (armcpu->psci_version >= QEMU_PSCI_VERSION_0_2) {
->          if (armcpu->psci_version < QEMU_PSCI_VERSION_1_0) {
-> -            const char comp[] = "arm,psci-0.2\0arm,psci";
-> -            qemu_fdt_setprop(fdt, "/psci", "compatible", comp, sizeof(comp));
-> +            qemu_fdt_setprop_strings(fdt, "/psci", "compatible",
-> +                                     "arm,psci-0.2", "arm,psci");
+This series adds support for the Smstateen specification which provides
+a mechanism plug potential covert channels which are opened by extensions that
+add to processor state that may not get context-switched. Currently access to
+*envcfg registers and floating point(fcsr) is controlled via smstateen.
 
-I think you may have some stray trailing whitespace here.
-checkpatch should be able to tell you.
+These patches can also be found on riscv_smstateen_v7 branch at:
+https://github.com/mdchitale/qemu.git
 
-> @@ -858,8 +855,8 @@ static void create_uart(const VirtMachineState *vms, int uart,
->      nodename = g_strdup_printf("/pl011@%" PRIx64, base);
->      qemu_fdt_add_subnode(ms->fdt, nodename);
->      /* Note that we can't use setprop_string because of the embedded NUL */
+Changes in v7:
+- Update smstateen check as per discussion on the following issue:
+  https://github.com/riscv/riscv-state-enable/issues/9
+- Drop the smstateen AIA patch for now.
+- Indentation and other fixes
 
-With this change, this comment becomes obsolete, and we should delete it too.
+Changes in v6:
+- Sync with latest riscv-to-apply.next
+- Make separate read/write ops for m/h/s/stateen1/2/3 regs
+- Add check for mstateen.staten when reading or using h/s/stateen regs
+- Add smstateen fcsr check for all floating point operations
+- Move knobs to enable smstateen in a separate patch.
 
-> -    qemu_fdt_setprop(ms->fdt, nodename, "compatible",
-> -                         compat, sizeof(compat));
-> +    qemu_fdt_setprop_strings(ms->fdt, nodename, "compatible",
-> +                             "arm,pl011", "arm,primecell");
->      qemu_fdt_setprop_sized_cells(ms->fdt, nodename, "reg",
->                                       2, base, 2, size);
->      qemu_fdt_setprop_cells(ms->fdt, nodename, "interrupts",
+Changes in v5:
+- Fix the order in which smstateen extension is added to the
+  isa_edata_arr as
+described in rule #3 the comment.
 
+Changes in v4:
+- Fix build issue with riscv32/riscv64-linux-user targets
 
+Changes in v3:
+- Fix coding style issues
+- Fix *stateen0h index calculation
 
-> @@ -285,8 +280,6 @@ static void fdt_add_gem_nodes(VersalVirt *s)
->
->  static void fdt_add_zdma_nodes(VersalVirt *s)
->  {
-> -    const char clocknames[] = "clk_main\0clk_apb";
-> -    const char compat[] = "xlnx,zynqmp-dma-1.0";
+Changes in v2:
+- Make h/s/envcfg bits in m/h/stateen registers as writeable by default.
 
-This looks suspiciously like a pre-existing bug to me.
-Alaistair, Edgar -- shouldn't this be a NUL-separated
-'compatible' string, rather than a comma-separated one?
+Anup Patel (1):
+  target/riscv: Force disable extensions if priv spec version does not
+    match
 
->      int i;
->
->      for (i = XLNX_VERSAL_NR_ADMAS - 1; i >= 0; i--) {
-> @@ -298,22 +291,21 @@ static void fdt_add_zdma_nodes(VersalVirt *s)
->          qemu_fdt_setprop_cell(s->fdt, name, "xlnx,bus-width", 64);
->          qemu_fdt_setprop_cells(s->fdt, name, "clocks",
->                                 s->phandle.clk_25Mhz, s->phandle.clk_25Mhz);
-> -        qemu_fdt_setprop(s->fdt, name, "clock-names",
-> -                         clocknames, sizeof(clocknames));
-> +        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-> +                                 "clk_main", "clk_apb");
->          qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
->                                 GIC_FDT_IRQ_TYPE_SPI, VERSAL_ADMA_IRQ_0 + i,
->                                 GIC_FDT_IRQ_FLAGS_LEVEL_HI);
->          qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
->                                       2, addr, 2, 0x1000);
-> -        qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-> +        qemu_fdt_setprop_string(s->fdt, name, "compatible",
-> +                                "xlnx,zynqmp-dma-1.0");
->          g_free(name);
->      }
->  }
->
->  static void fdt_add_sd_nodes(VersalVirt *s)
->  {
-> -    const char clocknames[] = "clk_xin\0clk_ahb";
-> -    const char compat[] = "arasan,sdhci-8.9a";
+Mayuresh Chitale (4):
+  target/riscv: Add smstateen support
+  target/riscv: smstateen check for h/senvcfg
+  target/riscv: smstateen check for fcsr
+  target/riscv: smstateen knobs
 
-Ditto here...
+ roms/opensbi                              |   2 +-
+ target/riscv/cpu.c                        |   2 +
+ target/riscv/cpu.h                        |   4 +
+ target/riscv/cpu_bits.h                   |  37 ++
+ target/riscv/csr.c                        | 463 +++++++++++++++++++++-
+ target/riscv/insn_trans/trans_rvf.c.inc   |  40 +-
+ target/riscv/insn_trans/trans_rvzfh.c.inc |  12 +
+ target/riscv/machine.c                    |  21 +
+ 8 files changed, 576 insertions(+), 5 deletions(-)
 
->      int i;
->
->      for (i = ARRAY_SIZE(s->soc.pmc.iou.sd) - 1; i >= 0; i--) {
-> @@ -324,22 +316,21 @@ static void fdt_add_sd_nodes(VersalVirt *s)
->
->          qemu_fdt_setprop_cells(s->fdt, name, "clocks",
->                                 s->phandle.clk_25Mhz, s->phandle.clk_25Mhz);
-> -        qemu_fdt_setprop(s->fdt, name, "clock-names",
-> -                         clocknames, sizeof(clocknames));
-> +        qemu_fdt_setprop_strings(s->fdt, name, "clock-names",
-> +                                 "clk_xin", "clk_ahb");
->          qemu_fdt_setprop_cells(s->fdt, name, "interrupts",
->                                 GIC_FDT_IRQ_TYPE_SPI, VERSAL_SD0_IRQ_0 + i * 2,
->                                 GIC_FDT_IRQ_FLAGS_LEVEL_HI);
->          qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
->                                       2, addr, 2, MM_PMC_SD0_SIZE);
-> -        qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-> +        qemu_fdt_setprop_string(s->fdt, name, "compatible",
-> +                                "arasan,sdhci-8.9a");
->          g_free(name);
->      }
->  }
->
->  static void fdt_add_rtc_node(VersalVirt *s)
->  {
-> -    const char compat[] = "xlnx,zynqmp-rtc";
+-- 
+2.25.1
 
-...and here.
-
-> -    const char interrupt_names[] = "alarm\0sec";
->      char *name = g_strdup_printf("/rtc@%x", MM_PMC_RTC);
->
->      qemu_fdt_add_subnode(s->fdt, name);
-> @@ -349,11 +340,11 @@ static void fdt_add_rtc_node(VersalVirt *s)
->                             GIC_FDT_IRQ_FLAGS_LEVEL_HI,
->                             GIC_FDT_IRQ_TYPE_SPI, VERSAL_RTC_SECONDS_IRQ,
->                             GIC_FDT_IRQ_FLAGS_LEVEL_HI);
-> -    qemu_fdt_setprop(s->fdt, name, "interrupt-names",
-> -                     interrupt_names, sizeof(interrupt_names));
-> +    qemu_fdt_setprop_strings(s->fdt, name, "interrupt-names",
-> +                             "alarm", "sec");
->      qemu_fdt_setprop_sized_cells(s->fdt, name, "reg",
->                                   2, MM_PMC_RTC, 2, MM_PMC_RTC_SIZE);
-> -    qemu_fdt_setprop(s->fdt, name, "compatible", compat, sizeof(compat));
-> +    qemu_fdt_setprop_string(s->fdt, name, "compatible", "xlnx,zynqmp-rtc");
->      g_free(name);
->  }
-
-thanks
--- PMM
 
