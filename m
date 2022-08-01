@@ -1,60 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oITd8-0002q5-Ex
-	for mharc-qemu-riscv@gnu.org; Mon, 01 Aug 2022 07:30:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:34148)
+	id 1oITdf-0003EF-Ss
+	for mharc-qemu-riscv@gnu.org; Mon, 01 Aug 2022 07:31:11 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:34290)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oITd7-0002p7-0m
- for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:30:37 -0400
-Received: from mail-yw1-x112c.google.com ([2607:f8b0:4864:20::112c]:44986)
+ id 1oITdd-00037s-Qn
+ for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:31:09 -0400
+Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f]:46689)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oITd4-000684-EH
- for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:30:36 -0400
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-31f661b3f89so105451337b3.11
- for <qemu-riscv@nongnu.org>; Mon, 01 Aug 2022 04:30:33 -0700 (PDT)
+ id 1oITda-0006B7-1V
+ for qemu-riscv@nongnu.org; Mon, 01 Aug 2022 07:31:09 -0400
+Received: by mail-yb1-xb2f.google.com with SMTP id j63so18377046ybb.13
+ for <qemu-riscv@nongnu.org>; Mon, 01 Aug 2022 04:31:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=/L1qr9Ix5S1as0QZJQfgkZUpxnGlzUboUyuGZUd6m8A=;
- b=Arhx7VRslJnvU5jxnFKxvvTKsX/7R4EyGD1fANcgrMwJSwavG2HxKd4tSz2mF7j7mq
- 2XKLd2Nr+2mtYyC0d4oUONkKIXlT9gVLPHQyjFgz+oRtDtUaMPdsyd9l0wLbkeDgHylE
- FTkmSHq2xusFXMi8EilrkcU9boKdW6XNfsS1q7Hg9QZS2xVeDzUHF4ZgG3YCzeE+PgMl
- 42U4odnfxxPP5uC5+/+ApPNT4P3tC5hPiUAesk8zN4zcAwlqECVLTKa6emPan1f4gGwo
- d9pgLQjy/StaKSLLbhIfltKa9FpakzSoYO375eIL1Cuy5tpK7NT23kiRWdKp6AwOwtwQ
- cpiw==
+ bh=sfMvC1fmM99uQNOPXZ6oX6GZ/7gfkj3DTq9Wq3MObkU=;
+ b=nF8h7HZP8TFNl0JFcQ/onEkOFOMx+y5ev32NeAzJ7/7rF4ezEdXbUhXYVP0V4eJ0TK
+ bsHdn/+sW1YIlhr2jFoUk8tTtOAQeQNnXRVnvV2pKoJs/CzF5WWvwBQ9x5XFbBCWtWOh
+ 0zp4YM/Ne8jZVJEXd1f6ka8ug57RClqKbhv4O1lpxt8QAJDb1IIgExd3s6scHrM+t4aF
+ u4V5sWgAj9L5H31HltmlE8vHIni7igK6s8adhZjo8yBI+nalfxayVC3Ttwgfvu9jfqHl
+ 4W2Q5KWma2Pqgp/Roe8NNGepcHqqGe9bA5ymZnHrY+vPcLaeQixmrNx/i4LtknQmtyqp
+ EfGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=/L1qr9Ix5S1as0QZJQfgkZUpxnGlzUboUyuGZUd6m8A=;
- b=c73mm6CXPfHShMeLN10+uRj6onbJk3m+TuWjD20QayJU5guBjPKMnMEBhwjpQoKOYe
- Wc17UQBNUxc/sMyzaqHRbNjO5Nw6EMdMB+U6TFY3TiPnswqvf0g2/IEOo9VIORpp3LpE
- Y4DaURUxX+VVjSF5s+Trw/SLBjT0entKDP2A3p8W1URUiOPEs4+tHdgu38mZZaModNaJ
- X8KvRY7ildNeJad9pCiYSPs+pO9ecaS+kLjxFTn9uKUIMqFBAiGbcYgg/wLr5m5oHoPv
- ZM7jVkC7PU6CyGNbnT25sLu+pXdEfjSfdJo+e5YexuRVZQSre+3iPvSXc838udDcDjzA
- OCjA==
-X-Gm-Message-State: ACgBeo0bM7Qv3Ty29U2TBeShmABi6iKwP8NGPWjhiBLyZ3+OeanAeVTS
- yeffGDePj45Iq2N4jqkaLt/Fu9hRfaN94JEI55sSTw==
-X-Google-Smtp-Source: AA6agR6B1TBv4nVDR7VVgdrLlsQJ+gdXZ6FT8pPsQqg/8PphtRqWN2a3pPmjDSSh2r4i+jU4IyYzLcLphbDks8cZIQo=
-X-Received: by 2002:a81:106:0:b0:2d0:e682:8a7a with SMTP id
- 6-20020a810106000000b002d0e6828a7amr12686674ywb.257.1659353433230; Mon, 01
- Aug 2022 04:30:33 -0700 (PDT)
+ bh=sfMvC1fmM99uQNOPXZ6oX6GZ/7gfkj3DTq9Wq3MObkU=;
+ b=5y+TD5lF95tSBehuiLl5fNk1LB2RTzLLh6TFZh7tOKaoFY7bdLPLudwwRxkM4wBAJt
+ +kPcGdt/usZkZu1nyC8eLKHKugqP1qKpTtdMGNdK9cjPSF8mlO2d54XKahslo62KHccg
+ 9TkACIpbzaWQqjH4D/rOrbTQxGHKHVj3jHxVYdZ9DqvpB3EEmO0oBmPPQm9fvuDmxrsh
+ N3LdaMieKLS8ozdgbAGJ4TJ4EqVvqhhHfwDY2GFvxWXSB7t6RN28KnWJvCeUWfBRtyJG
+ E0AGG2Gg6d4/njc25z0bM78lGCUedgcVKXoqdH/NzoYHkEPr8/D6NWrxF1jS6bqapZn/
+ gQeg==
+X-Gm-Message-State: ACgBeo1LXnYWYisjfBCAJA8XHAjU9lYgy6aeHH2PFwDwEsFAr9QxzkTP
+ 8wE+127KQlrO3FwnLXT/19wPch4upr7ZyZc8hovCEg==
+X-Google-Smtp-Source: AA6agR5Tt2UEpAe7tNj/VUIKuenfBZH85WAMurnDF5WF5B6eWrM+pnZZ+C0xhiMZIYfmya4Y6JC81ip1v5TmYYNmWt8=
+X-Received: by 2002:a5b:7c6:0:b0:670:6ba6:d046 with SMTP id
+ t6-20020a5b07c6000000b006706ba6d046mr10583789ybq.140.1659353465054; Mon, 01
+ Aug 2022 04:31:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220727223905.624285-1-qemu@ben.fluff.org>
- <20220727223905.624285-4-qemu@ben.fluff.org>
-In-Reply-To: <20220727223905.624285-4-qemu@ben.fluff.org>
+ <20220727223905.624285-5-qemu@ben.fluff.org>
+In-Reply-To: <20220727223905.624285-5-qemu@ben.fluff.org>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 1 Aug 2022 12:30:22 +0100
-Message-ID: <CAFEAcA9QxwtyB1muGCJh9THdGCu3gEvFAqemvYMUHca6Z1PvAg@mail.gmail.com>
-Subject: Re: [PATCH v3 3/5] hw/core: use qemu_fdt_setprop_strings()
+Date: Mon, 1 Aug 2022 12:30:54 +0100
+Message-ID: <CAFEAcA8JLLcPfMSfnKhsZdtXzWCkfLEFrzwL0BVh9+4ncZCTDQ@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] hw/mips: use qemu_fdt_setprop_strings()
 To: Ben Dooks <qemu@ben.fluff.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Alistair Francis <Alistair.Francis@wdc.com>, qemu-arm@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112c;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -74,16 +73,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2022 11:30:37 -0000
+X-List-Received-Date: Mon, 01 Aug 2022 11:31:10 -0000
 
-On Wed, 27 Jul 2022 at 23:39, Ben Dooks <qemu@ben.fluff.org> wrote:
+On Wed, 27 Jul 2022 at 23:40, Ben Dooks <qemu@ben.fluff.org> wrote:
 >
-> Change to using the qemu_fdt_setprop_strings() helper in
-> hw/core code.
+> Change to using qemu_fdt_setprop_strings() helper in hw/mips.
 >
 > Signed-off-by: Ben Dooks <qemu@ben.fluff.org>
 > ---
-
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
 thanks
