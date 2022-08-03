@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oJLcX-0000Iz-KR
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 17:09:37 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49662)
+	id 1oJLeb-0001zJ-3N
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 17:11:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:50282)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJLcV-0000Ip-GS
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 17:09:35 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030]:52921)
+ id 1oJLeW-0001xq-BD
+ for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 17:11:42 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531]:36587)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJLcS-0002x0-2I
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 17:09:35 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id ha11so17885681pjb.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Aug 2022 14:09:31 -0700 (PDT)
+ id 1oJLeT-0003Qj-UC
+ for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 17:11:40 -0400
+Received: by mail-pg1-x531.google.com with SMTP id s206so16214113pgs.3
+ for <qemu-riscv@nongnu.org>; Wed, 03 Aug 2022 14:11:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=EnvekbMMffrQdWpRsGlrVRjoL+KVGraVLCP/5qQFtQI=;
- b=VKwwK67n5+kNir0gKsElfB80051Y/77xmahCzkSbW6ErSzGvoZEMv8zmbFn/t7Zs3g
- yZYVvi13jnlniA+M7Eem5z9BNFbzpcpJWhoPtXE8qD2Q4VrunYArA0CU53uSo9L9Z9TW
- 9jsJXnQdi3enT31XKUISrxVFJtvcUfJmYHpSWLWtUHpc+kvjZn03gMFHpymgZe8rxCkG
- BxJU9P6QN6pnmwIAPRDV4ppKCORrydO6QIE1+2KIGT+1HwX3MBb75T65VQBuN1TWHJTQ
- udjWyiHprBRa4fK7cLn9aj4d8gNvvy1V5x4R//uQTUJwvKMz/AaXmMTXlN22JYi8fmnD
- bF1w==
+ bh=3GlXPH1lg5pd8Hg7NqkvfxO4LUduXMYAGkSrZlZkKmU=;
+ b=jdHG+ww0A8Tr9qvP01mRWaFaYAYEpbGbY9DPfGuLWlcfOlROZVTjGKrdDXO631qHrS
+ X4D2IGsjG+WUe87jChpENe8EmzqkLZ3/2qwhVzbe+WvsGXMrAjEUls0s3jvh8fdEUeV4
+ 9B3Tr6yN7ChprWXyiLDWLNPywjv1TmAb6Uxj6NgICdIR3Cu2HvValdRzZ33FJdi2pnWL
+ LWbq47kpHRR0wO/dogcmo7P1OdEu020mbyWn9ugPt1VJU7wc/ZHGvVICaKr3r/BrsVef
+ hALOchwQxDemYuUoxYgIAsTifj1k7Oe+9+q0OyqxfczukO1HtzbutlAfm8Bsyvt84CtM
+ OTHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=EnvekbMMffrQdWpRsGlrVRjoL+KVGraVLCP/5qQFtQI=;
- b=lamdRArQI8owqZA8/oKU++J7r99gT/jznzlxwH9z9uFvD+fAP90z+L9f/UaHCKIQhS
- jn2M29tD+oojgw0vf8P2XG6KTmp2oM1qqfKzsxNXvpSx3AUdAbbhMyzP+bciFgzHiTqV
- M+LwLwBpqMdtPpUt8EiL0LCRGaLdKZD16hiC2q4GuiP1ThS1dbBTLSWYN4FU28RldY5T
- sKK46aPk02anM5z/ApT2zs7ZgwTQkt1jvaQ/zWZaxhuNV+fjoQUSlZ3Vc8+eWB76LX0y
- dWzzdZzAhKr4itj2Xd31gsOaMuc/Qibin1HW72VP33txmOe7SMtma9XKizipQou0THOH
- jpLA==
-X-Gm-Message-State: ACgBeo2v5IAYNotwQwW+5zGRWIFAawLfLxO97/Y9tNgJ653oKq5A7uap
- oOQCgZZnkMzsbeEtlo+r85yKZPgPDHGw1/MTGBcXww==
-X-Google-Smtp-Source: AA6agR7pu5QzlJ8sQwzFLh+qqVkbJse1N6AOUimnVS3tJ2SmZQhjK4eWHmEnPl2vKaYkDRaeLPE1Reh3KOG09//AVs8=
-X-Received: by 2002:a17:90a:9409:b0:1f0:e171:f2bd with SMTP id
- r9-20020a17090a940900b001f0e171f2bdmr6541780pjo.245.1659560970410; Wed, 03
- Aug 2022 14:09:30 -0700 (PDT)
+ bh=3GlXPH1lg5pd8Hg7NqkvfxO4LUduXMYAGkSrZlZkKmU=;
+ b=xxU9mcUwcDeGv0loChTlJ7oUnJvv1jTljecRUpsvQeAijJ1Dv6wO3RAOysLnETjz1x
+ RtwFhnhfmcpyfrGFz3t6aohjBrdZs0xJ1jG/GNzL4NY7ew2HRVSfUD0FJSgbzbFflURV
+ qRA77DxbLPW7qtR8p2u6O1jUiSlxyc1LNy18ZTfklOSOg5++vSWQwP3wP5JnpliDIJgt
+ 1rQphvxe5bMeYFzFNd6gkBlf33qjgjkvf5bGCp+e3+8/O6LRmOjf5S40T93wJr8EBWiy
+ w5ypCCK2OYTPtQq7JlaSKRf0crimmA0O7/4z7cfMROZulhW83T/eHrtc2Ftgbhhmj6bq
+ EKLA==
+X-Gm-Message-State: ACgBeo2gfrTCpfC2VwlCYQBYxvTmtJwAvvZ0xOw+7GVP70Ls6mB82pEQ
+ RmRlt5SrZKE/u6DKkpKFJ8fJGk0AbNftYfrZgJOoAg==
+X-Google-Smtp-Source: AA6agR4CVoCYcLjmFx/Sih2rpgv3q9Ehb8W1cAVcGkOsH+A8q3iQpYgI9BIiN0pRWo6KxYKX2zHmanW2aIGArDXXSxw=
+X-Received: by 2002:a65:578f:0:b0:41c:62a0:6b61 with SMTP id
+ b15-20020a65578f000000b0041c62a06b61mr8216993pgr.88.1659561094932; Wed, 03
+ Aug 2022 14:11:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220803082516.2271344-1-atishp@rivosinc.com>
  <20220803082516.2271344-3-atishp@rivosinc.com>
- <df4920d6-aee6-df87-2793-50c33a418244@iscas.ac.cn>
-In-Reply-To: <df4920d6-aee6-df87-2793-50c33a418244@iscas.ac.cn>
+ <57873d3b-dd78-2bcc-7e28-a7aec0bbf24e@codethink.co.uk>
+In-Reply-To: <57873d3b-dd78-2bcc-7e28-a7aec0bbf24e@codethink.co.uk>
 From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Wed, 3 Aug 2022 14:09:19 -0700
-Message-ID: <CAHBxVyGdAfXKZbwisRfZuvn=dEBL2Ta4At13M0VDLMDsxMdLWA@mail.gmail.com>
+Date: Wed, 3 Aug 2022 14:11:24 -0700
+Message-ID: <CAHBxVyG1Ltbs-QW11T6+Z6Va=aqUGMjS_bn3zQnyOJ3eaJvMOg@mail.gmail.com>
 Subject: Re: [PATCH v7 2/3] target/riscv: Add stimecmp support
-To: Weiwei Li <liweiwei@iscas.ac.cn>
+To: Ben Dooks <ben.dooks@codethink.co.uk>
 Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000001ff8b805e55ca6e7"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1030.google.com
+Content-Type: multipart/alternative; boundary="0000000000008bfe1305e55cada8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=atishp@rivosinc.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -76,17 +76,14 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2022 21:09:35 -0000
+X-List-Received-Date: Wed, 03 Aug 2022 21:11:43 -0000
 
---0000000000001ff8b805e55ca6e7
+--0000000000008bfe1305e55cada8
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 3, 2022 at 1:42 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+On Wed, Aug 3, 2022 at 3:26 AM Ben Dooks <ben.dooks@codethink.co.uk> wrote:
 
->
-> =E5=9C=A8 2022/8/3 =E4=B8=8B=E5=8D=884:25, Atish Patra =E5=86=99=E9=81=93=
-:
+> On 03/08/2022 09:25, Atish Patra wrote:
 > > stimecmp allows the supervisor mode to update stimecmp CSR directly
 > > to program the next timer interrupt. This CSR is part of the Sstc
 > > extension which was ratified recently.
@@ -99,8 +96,7 @@ On Wed, Aug 3, 2022 at 1:42 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 > >   target/riscv/csr.c         | 81 +++++++++++++++++++++++++++++++
 > >   target/riscv/machine.c     |  1 +
 > >   target/riscv/meson.build   |  3 +-
-> >   target/riscv/time_helper.c | 98 +++++++++++++++++++++++++++++++++++++=
-+
+> >   target/riscv/time_helper.c | 98 ++++++++++++++++++++++++++++++++++++++
 > >   target/riscv/time_helper.h | 30 ++++++++++++
 > >   8 files changed, 233 insertions(+), 1 deletion(-)
 > >   create mode 100644 target/riscv/time_helper.c
@@ -118,10 +114,8 @@ On Wed, Aug 3, 2022 at 1:42 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 > >   #include "exec/exec-all.h"
 > >   #include "qapi/error.h"
 > >   #include "qemu/error-report.h"
-> > @@ -99,6 +100,7 @@ static const struct isa_ext_data isa_edata_arr[] =3D=
- {
-> >       ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f)=
-,
+> > @@ -99,6 +100,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+> >       ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f),
 > >       ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
 > >       ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0,
 > ext_zhinxmin),
@@ -130,8 +124,7 @@ On Wed, Aug 3, 2022 at 1:42 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 > ext_svinval),
 > >       ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0,
 > ext_svnapot),
-> >       ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt)=
-,
+> >       ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
 > > @@ -675,6 +677,13 @@ static void riscv_cpu_realize(DeviceState *dev,
 > Error **errp)
 > >
@@ -144,17 +137,6 @@ On Wed, Aug 3, 2022 at 1:42 AM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
 > > +#endif /* CONFIG_USER_ONLY */
 > > +
 > > +
->
-> multi blink line here.
->
->
-Fixed it.
-
-
-> Regards,
->
-> Weiwei Li
->
 > >       /* Validate that MISA_MXL is set properly. */
 > >       switch (env->misa_mxl_max) {
 > >   #ifdef TARGET_RISCV64
@@ -167,8 +149,8 @@ Fixed it.
 > > +
 > >   }
 > >
-> >   static Property riscv_cpu_extensions[] =3D {
-> > @@ -995,6 +1006,7 @@ static Property riscv_cpu_extensions[] =3D {
+> >   static Property riscv_cpu_extensions[] = {
+> > @@ -995,6 +1006,7 @@ static Property riscv_cpu_extensions[] = {
 > >       DEFINE_PROP_BOOL("Zve64f", RISCVCPU, cfg.ext_zve64f, false),
 > >       DEFINE_PROP_BOOL("mmu", RISCVCPU, cfg.mmu, true),
 > >       DEFINE_PROP_BOOL("pmp", RISCVCPU, cfg.pmp, true),
@@ -240,338 +222,52 @@ Fixed it.
 > >
 > > +static RISCVException sstc(CPURISCVState *env, int csrno)
 > > +{
-> > +    CPUState *cs =3D env_cpu(env);
-> > +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> > +    CPUState *cs = env_cpu(env);
+> > +    RISCVCPU *cpu = RISCV_CPU(cs);
 > > +
 > > +    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
 > > +        return RISCV_EXCP_ILLEGAL_INST;
 > > +    }
 > > +
-> > +    if (env->priv =3D=3D PRV_M) {
+> > +    if (env->priv == PRV_M) {
 > > +        return RISCV_EXCP_NONE;
 > > +    }
 > > +
-> > +    if (env->priv !=3D PRV_S) {
+> > +    if (env->priv != PRV_S) {
 > > +        return RISCV_EXCP_ILLEGAL_INST;
 > > +    }
-> > +
 >
-> This check seems unnecessary here. Stimecmp is a S mode  csr. So any
-> priv less than S
->
-> mode will trigger exception in csrrw related check and cannot reach here.
+> These seem to be checking env->priv twice, wouldnt
+> one check for nv->priv != PRV_S be sufficient?
 >
 >
-Yeah. We can remove it.
+nope as we need to allow the access from M-mode unconditionally.
+But we can remove the non-Smode check as suggested by Weiwei.
 
 
-> And maybe we need call smode predicate for it in this function.
 >
+> --
+> Ben Dooks                               http://www.codethink.co.uk/
+> Senior Engineer                         Codethink - Providing Genius
 >
-You mean at the end instead of returning RISCV_EXCP_NONE ? We can do that.
-
-
-> > +    /*
-> > +     * No need of separate function for rv32 as menvcfg stores both
-> menvcfg
-> > +     * menvcfgh for RV32.
-> > +     */
-> > +    if (!(get_field(env->mcounteren, COUNTEREN_TM) &&
-> > +          get_field(env->menvcfg, MENVCFG_STCE))) {
-> > +        return RISCV_EXCP_ILLEGAL_INST;
-> > +    }
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
-> > +                                    target_ulong *val)
-> > +{
-> > +    *val =3D env->stimecmp;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
-> > +                                    target_ulong *val)
-> > +{
-> > +    *val =3D env->stimecmp >> 32;
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
-> > +                                    target_ulong val)
-> > +{
-> > +    RISCVCPU *cpu =3D env_archcpu(env);
-> > +
-> > +    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
-> > +        env->stimecmp =3D deposit64(env->stimecmp, 0, 32, (uint64_t)va=
-l);
-> > +    } else {
-> > +        env->stimecmp =3D val;
-> > +    }
-> > +
-> > +    riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0,
-> MIP_STIP);
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
-> > +                                    target_ulong val)
-> > +{
-> > +    RISCVCPU *cpu =3D env_archcpu(env);
-> > +
-> > +    env->stimecmp =3D deposit64(env->stimecmp, 32, 32, (uint64_t)val);
-> > +    riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0,
-> MIP_STIP);
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> >   /* Machine constants */
-> >
-> >   #define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP=
-))
-> > @@ -1719,6 +1790,12 @@ static RISCVException rmw_mip64(CPURISCVState
-> *env, int csrno,
-> >           new_val |=3D env->external_seip * MIP_SEIP;
-> >       }
-> >
-> > +    if (cpu->cfg.ext_sstc && (env->priv =3D=3D PRV_M) &&
-> > +        get_field(env->menvcfg, MENVCFG_STCE)) {
-> > +        /* sstc extension forbids STIP & VSTIP to be writeable in mip =
-*/
-> > +        mask =3D mask & ~(MIP_STIP | MIP_VSTIP);
-> > +    }
-> > +
-> >       if (mask) {
-> >           old_mip =3D riscv_cpu_update_mip(cpu, mask, (new_val & mask))=
-;
-> >       } else {
-> > @@ -3584,6 +3661,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
-> >       [CSR_SCAUSE]   =3D { "scause",   smode, read_scause,   write_scau=
-se
->  },
-> >       [CSR_STVAL]    =3D { "stval",    smode, read_stval,    write_stva=
-l
->   },
-> >       [CSR_SIP]      =3D { "sip",      smode, NULL,    NULL, rmw_sip
->   },
-> > +    [CSR_STIMECMP] =3D { "stimecmp", sstc, read_stimecmp, write_stimec=
-mp,
-> > +                                          .min_priv_ver =3D
-> PRIV_VERSION_1_12_0 },
-> > +    [CSR_STIMECMPH] =3D { "stimecmph", sstc, read_stimecmph,
-> write_stimecmph,
-> > +                                          .min_priv_ver =3D
-> PRIV_VERSION_1_12_0 },
-> >
-> >       /* Supervisor Protection and Translation */
-> >       [CSR_SATP]     =3D { "satp",     smode, read_satp,     write_satp
->  },
-> > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> > index b508b042cb73..622fface484e 100644
-> > --- a/target/riscv/machine.c
-> > +++ b/target/riscv/machine.c
-> > @@ -359,6 +359,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {
-> >           VMSTATE_UINTTL(env.mscratch, RISCVCPU),
-> >           VMSTATE_UINT64(env.mfromhost, RISCVCPU),
-> >           VMSTATE_UINT64(env.mtohost, RISCVCPU),
-> > +        VMSTATE_UINT64(env.stimecmp, RISCVCPU),
-> >
-> >           VMSTATE_END_OF_LIST()
-> >       },
-> > diff --git a/target/riscv/meson.build b/target/riscv/meson.build
-> > index 2c1975e72c4e..24893c614ee4 100644
-> > --- a/target/riscv/meson.build
-> > +++ b/target/riscv/meson.build
-> > @@ -31,7 +31,8 @@ riscv_softmmu_ss.add(files(
-> >     'debug.c',
-> >     'monitor.c',
-> >     'machine.c',
-> > -  'pmu.c'
-> > +  'pmu.c',
-> > +  'time_helper.c'
-> >   ))
-> >
-> >   target_arch +=3D {'riscv': riscv_ss}
-> > diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> > new file mode 100644
-> > index 000000000000..f3fb5eac7b7b
-> > --- /dev/null
-> > +++ b/target/riscv/time_helper.c
-> > @@ -0,0 +1,98 @@
-> > +/*
-> > + * RISC-V timer helper implementation.
-> > + *
-> > + * Copyright (c) 2022 Rivos Inc.
-> > + *
-> > + * This program is free software; you can redistribute it and/or modif=
-y
-> it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
-> > + *
-> > + * This program is distributed in the hope it will be useful, but
-> WITHOUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
-or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-> License for
-> > + * more details.
-> > + *
-> > + * You should have received a copy of the GNU General Public License
-> along with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "qemu/log.h"
-> > +#include "cpu_bits.h"
-> > +#include "time_helper.h"
-> > +#include "hw/intc/riscv_aclint.h"
-> > +
-> > +static void riscv_stimer_cb(void *opaque)
-> > +{
-> > +    RISCVCPU *cpu =3D opaque;
-> > +    riscv_cpu_update_mip(cpu, MIP_STIP, BOOL_TO_MASK(1));
-> > +}
-> > +
-> > +/*
-> > + * Called when timecmp is written to update the QEMU timer or
-> immediately
-> > + * trigger timer interrupt if mtimecmp <=3D current timer value.
-> > + */
-> > +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
-> > +                               uint64_t timecmp, uint64_t delta,
-> > +                               uint32_t timer_irq)
-> > +{
-> > +    uint64_t diff, ns_diff, next;
-> > +    CPURISCVState *env =3D &cpu->env;
-> > +    RISCVAclintMTimerState *mtimer =3D env->rdtime_fn_arg;
-> > +    uint32_t timebase_freq =3D mtimer->timebase_freq;
-> > +    uint64_t rtc_r =3D env->rdtime_fn(env->rdtime_fn_arg) + delta;
-> > +
-> > +    if (timecmp <=3D rtc_r) {
-> > +        /*
-> > +         * If we're setting an stimecmp value in the "past",
-> > +         * immediately raise the timer interrupt
-> > +         */
-> > +        riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
-> > +        return;
-> > +    }
-> > +
-> > +    /* Clear the [V]STIP bit in mip */
-> > +    riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
-> > +
-> > +    /* otherwise, set up the future timer interrupt */
-> > +    diff =3D timecmp - rtc_r;
-> > +    /* back to ns (note args switched in muldiv64) */
-> > +    ns_diff =3D muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
-> > +
-> > +    /*
-> > +     * check if ns_diff overflowed and check if the addition would
-> potentially
-> > +     * overflow
-> > +     */
-> > +    if ((NANOSECONDS_PER_SECOND > timebase_freq && ns_diff < diff) ||
-> > +        ns_diff > INT64_MAX) {
-> > +        next =3D INT64_MAX;
-> > +    } else {
-> > +        /*
-> > +         * as it is very unlikely qemu_clock_get_ns will return a valu=
-e
-> > +         * greater than INT64_MAX, no additional check is needed for a=
-n
-> > +         * unsigned integer overflow.
-> > +         */
-> > +        next =3D qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns_diff;
-> > +        /*
-> > +         * if ns_diff is INT64_MAX next may still be outside the range
-> > +         * of a signed integer.
-> > +         */
-> > +        next =3D MIN(next, INT64_MAX);
-> > +    }
-> > +
-> > +    timer_mod(timer, next);
-> > +}
-> > +
-> > +void riscv_timer_init(RISCVCPU *cpu)
-> > +{
-> > +    CPURISCVState *env;
-> > +
-> > +    if (!cpu) {
-> > +        return;
-> > +    }
-> > +
-> > +    env =3D &cpu->env;
-> > +    env->stimer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb,
-> cpu);
-> > +    env->stimecmp =3D 0;
-> > +
-> > +}
-> > diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h
-> > new file mode 100644
-> > index 000000000000..7b3cdcc35020
-> > --- /dev/null
-> > +++ b/target/riscv/time_helper.h
-> > @@ -0,0 +1,30 @@
-> > +/*
-> > + * RISC-V timer header file.
-> > + *
-> > + * Copyright (c) 2022 Rivos Inc.
-> > + *
-> > + * This program is free software; you can redistribute it and/or modif=
-y
-> it
-> > + * under the terms and conditions of the GNU General Public License,
-> > + * version 2 or later, as published by the Free Software Foundation.
-> > + *
-> > + * This program is distributed in the hope it will be useful, but
-> WITHOUT
-> > + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY =
-or
-> > + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-> License for
-> > + * more details.
-> > + *
-> > + * You should have received a copy of the GNU General Public License
-> along with
-> > + * this program.  If not, see <http://www.gnu.org/licenses/>.
-> > + */
-> > +
-> > +#ifndef RISCV_TIME_HELPER_H
-> > +#define RISCV_TIME_HELPER_H
-> > +
-> > +#include "cpu.h"
-> > +#include "qemu/timer.h"
-> > +
-> > +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
-> > +                               uint64_t timecmp, uint64_t delta,
-> > +                               uint32_t timer_irq);
-> > +void riscv_timer_init(RISCVCPU *cpu);
-> > +
-> > +#endif
->
+> https://www.codethink.co.uk/privacy.html
 >
 
---0000000000001ff8b805e55ca6e7
+--0000000000008bfe1305e55cada8
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 3, 2022 at 1:42 AM Weiwei=
- Li &lt;<a href=3D"mailto:liweiwei@iscas.ac.cn">liweiwei@iscas.ac.cn</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-=E5=9C=A8 2022/8/3 =E4=B8=8B=E5=8D=884:25, Atish Patra =E5=86=99=E9=81=93:<=
-br>
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Aug 3, 2022 at 3:26 AM Ben Do=
+oks &lt;<a href=3D"mailto:ben.dooks@codethink.co.uk">ben.dooks@codethink.co=
+.uk</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
+in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
+x">On 03/08/2022 09:25, Atish Patra wrote:<br>
 &gt; stimecmp allows the supervisor mode to update stimecmp CSR directly<br=
 >
 &gt; to program the next timer interrupt. This CSR is part of the Sstc<br>
 &gt; extension which was ratified recently.<br>
-&gt;<br>
+&gt; <br>
 &gt; Signed-off-by: Atish Patra &lt;<a href=3D"mailto:atishp@rivosinc.com" =
 target=3D"_blank">atishp@rivosinc.com</a>&gt;<br>
 &gt; ---<br>
@@ -590,7 +286,7 @@ target=3D"_blank">atishp@rivosinc.com</a>&gt;<br>
 &gt;=C2=A0 =C2=A08 files changed, 233 insertions(+), 1 deletion(-)<br>
 &gt;=C2=A0 =C2=A0create mode 100644 target/riscv/time_helper.c<br>
 &gt;=C2=A0 =C2=A0create mode 100644 target/riscv/time_helper.h<br>
-&gt;<br>
+&gt; <br>
 &gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
 &gt; index d4635c7df46b..e0c3e786849f 100644<br>
 &gt; --- a/target/riscv/cpu.c<br>
@@ -631,15 +327,6 @@ rror **errp)<br>
 &gt; +#endif /* CONFIG_USER_ONLY */<br>
 &gt; +<br>
 &gt; +<br>
-<br>
-multi blink line here.<br>
-<br></blockquote><div><br></div><div>Fixed it.</div><div>=C2=A0</div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">
-Regards,<br>
-<br>
-Weiwei Li<br>
-<br>
 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Validate that MISA_MXL is set properly. *=
 /<br>
 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0switch (env-&gt;misa_mxl_max) {<br>
@@ -754,362 +441,26 @@ nv, int csrno,<br>
 &gt; +=C2=A0 =C2=A0 if (env-&gt;priv !=3D PRV_S) {<br>
 &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
 &gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
 <br>
-This check seems unnecessary here. Stimecmp is a S mode=C2=A0 csr. So any <=
-br>
-priv less than S<br>
+These seem to be checking env-&gt;priv twice, wouldnt<br>
+one check for nv-&gt;priv !=3D PRV_S be sufficient?<br>
+<br></blockquote><div><br></div><div>nope as we need to allow the access fr=
+om M-mode unconditionally.=C2=A0</div><div>But we can remove the non-Smode =
+check as suggested by Weiwei.</div><div>=C2=A0</div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex">
 <br>
-mode will trigger exception in csrrw related check and cannot reach here.<b=
-r>
-<br></blockquote><div><br></div><div>Yeah. We can remove it.=C2=A0</div><di=
-v>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-And maybe we need call smode predicate for it in this function.<br>
-<br></blockquote><div><br></div><div>You mean at the end instead of returni=
-ng=C2=A0RISCV_EXCP_NONE ? We can do that.</div><div>=C2=A0<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex">
-&gt; +=C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* No need of separate function for rv32 as menvcf=
-g stores both menvcfg<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* menvcfgh for RV32.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 if (!(get_field(env-&gt;mcounteren, COUNTEREN_TM) &amp;=
-&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;menvcfg, MENVCFG=
-_STCE))) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static RISCVException read_stimecmp(CPURISCVState *env, int csrno,<br=
->
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *val)=
+-- <br>
+Ben Dooks=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://www.codethin=
+k.co.uk/" rel=3D"noreferrer" target=3D"_blank">http://www.codethink.co.uk/<=
+/a><br>
+Senior Engineer=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Codethink - Providing Genius<br>
 <br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 *val =3D env-&gt;stimecmp;<br>
-&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static RISCVException read_stimecmph(CPURISCVState *env, int csrno,<b=
-r>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *val)=
-<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 *val =3D env-&gt;stimecmp &gt;&gt; 32;<br>
-&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static RISCVException write_stimecmp(CPURISCVState *env, int csrno,<b=
-r>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<=
-br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D env_archcpu(env);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;stimecmp =3D deposit64(env-&gt;st=
-imecmp, 0, 32, (uint64_t)val);<br>
-&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;stimecmp =3D val;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 riscv_timer_write_timecmp(cpu, env-&gt;stimer, env-&gt;=
-stimecmp, 0, MIP_STIP);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static RISCVException write_stimecmph(CPURISCVState *env, int csrno,<=
-br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<=
-br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D env_archcpu(env);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 env-&gt;stimecmp =3D deposit64(env-&gt;stimecmp, 32, 32=
-, (uint64_t)val);<br>
-&gt; +=C2=A0 =C2=A0 riscv_timer_write_timecmp(cpu, env-&gt;stimer, env-&gt;=
-stimecmp, 0, MIP_STIP);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0/* Machine constants */<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0#define M_MODE_INTERRUPTS=C2=A0 ((uint64_t)(MIP_MSIP | MIP=
-_MTIP | MIP_MEIP))<br>
-&gt; @@ -1719,6 +1790,12 @@ static RISCVException rmw_mip64(CPURISCVState *=
-env, int csrno,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0new_val |=3D env-&gt;external_=
-seip * MIP_SEIP;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; +=C2=A0 =C2=A0 if (cpu-&gt;cfg.ext_sstc &amp;&amp; (env-&gt;priv =3D=
-=3D PRV_M) &amp;&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;menvcfg, MENVCFG_STCE))=
- {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* sstc extension forbids STIP &amp; VSTI=
-P to be writeable in mip */<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mask =3D mask &amp; ~(MIP_STIP | MIP_VSTI=
-P);<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (mask) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0old_mip =3D riscv_cpu_update_m=
-ip(cpu, mask, (new_val &amp; mask));<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
-&gt; @@ -3584,6 +3661,10 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
-=3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_SCAUSE]=C2=A0 =C2=A0=3D { &quot;scause&=
-quot;,=C2=A0 =C2=A0smode, read_scause,=C2=A0 =C2=A0write_scause=C2=A0 =C2=
-=A0},<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_STVAL]=C2=A0 =C2=A0 =3D { &quot;stval&q=
-uot;,=C2=A0 =C2=A0 smode, read_stval,=C2=A0 =C2=A0 write_stval=C2=A0 =C2=A0=
- },<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_SIP]=C2=A0 =C2=A0 =C2=A0 =3D { &quot;si=
-p&quot;,=C2=A0 =C2=A0 =C2=A0 smode, NULL,=C2=A0 =C2=A0 NULL, rmw_sip=C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 },<br>
-&gt; +=C2=A0 =C2=A0 [CSR_STIMECMP] =3D { &quot;stimecmp&quot;, sstc, read_s=
-timecmp, write_stimecmp,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 .min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
-&gt; +=C2=A0 =C2=A0 [CSR_STIMECMPH] =3D { &quot;stimecmph&quot;, sstc, read=
-_stimecmph, write_stimecmph,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 .min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Supervisor Protection and Translation */<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_SATP]=C2=A0 =C2=A0 =C2=A0=3D { &quot;sa=
-tp&quot;,=C2=A0 =C2=A0 =C2=A0smode, read_satp,=C2=A0 =C2=A0 =C2=A0write_sat=
-p=C2=A0 =C2=A0 =C2=A0},<br>
-&gt; diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
-&gt; index b508b042cb73..622fface484e 100644<br>
-&gt; --- a/target/riscv/machine.c<br>
-&gt; +++ b/target/riscv/machine.c<br>
-&gt; @@ -359,6 +359,7 @@ const VMStateDescription vmstate_riscv_cpu =3D {<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.mscratch, R=
-ISCVCPU),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mfromhost, =
-RISCVCPU),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.mtohost, RI=
-SCVCPU),<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.stimecmp, RISCVCPU),<b=
-r>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_END_OF_LIST()<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-&gt; diff --git a/target/riscv/meson.build b/target/riscv/meson.build<br>
-&gt; index 2c1975e72c4e..24893c614ee4 100644<br>
-&gt; --- a/target/riscv/meson.build<br>
-&gt; +++ b/target/riscv/meson.build<br>
-&gt; @@ -31,7 +31,8 @@ riscv_softmmu_ss.add(files(<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;debug.c&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;monitor.c&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&#39;machine.c&#39;,<br>
-&gt; -=C2=A0 &#39;pmu.c&#39;<br>
-&gt; +=C2=A0 &#39;pmu.c&#39;,<br>
-&gt; +=C2=A0 &#39;time_helper.c&#39;<br>
-&gt;=C2=A0 =C2=A0))<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0target_arch +=3D {&#39;riscv&#39;: riscv_ss}<br>
-&gt; diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c<b=
-r>
-&gt; new file mode 100644<br>
-&gt; index 000000000000..f3fb5eac7b7b<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/target/riscv/time_helper.c<br>
-&gt; @@ -0,0 +1,98 @@<br>
-&gt; +/*<br>
-&gt; + * RISC-V timer helper implementation.<br>
-&gt; + *<br>
-&gt; + * Copyright (c) 2022 Rivos Inc.<br>
-&gt; + *<br>
-&gt; + * This program is free software; you can redistribute it and/or modi=
-fy it<br>
-&gt; + * under the terms and conditions of the GNU General Public License,<=
-br>
-&gt; + * version 2 or later, as published by the Free Software Foundation.<=
-br>
-&gt; + *<br>
-&gt; + * This program is distributed in the hope it will be useful, but WIT=
-HOUT<br>
-&gt; + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY=
- or<br>
-&gt; + * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public=
- License for<br>
-&gt; + * more details.<br>
-&gt; + *<br>
-&gt; + * You should have received a copy of the GNU General Public License =
-along with<br>
-&gt; + * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/=
-licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses=
-/</a>&gt;.<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +#include &quot;qemu/osdep.h&quot;<br>
-&gt; +#include &quot;qemu/log.h&quot;<br>
-&gt; +#include &quot;cpu_bits.h&quot;<br>
-&gt; +#include &quot;time_helper.h&quot;<br>
-&gt; +#include &quot;hw/intc/riscv_aclint.h&quot;<br>
-&gt; +<br>
-&gt; +static void riscv_stimer_cb(void *opaque)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D opaque;<br>
-&gt; +=C2=A0 =C2=A0 riscv_cpu_update_mip(cpu, MIP_STIP, BOOL_TO_MASK(1));<b=
-r>
-&gt; +}<br>
-&gt; +<br>
-&gt; +/*<br>
-&gt; + * Called when timecmp is written to update the QEMU timer or immedia=
-tely<br>
-&gt; + * trigger timer interrupt if mtimecmp &lt;=3D current timer value.<b=
-r>
-&gt; + */<br>
-&gt; +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t timecmp, uint64_t delta,=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t timer_irq)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 uint64_t diff, ns_diff, next;<br>
-&gt; +=C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
-&gt; +=C2=A0 =C2=A0 RISCVAclintMTimerState *mtimer =3D env-&gt;rdtime_fn_ar=
-g;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t timebase_freq =3D mtimer-&gt;timebase_freq;<br=
->
-&gt; +=C2=A0 =C2=A0 uint64_t rtc_r =3D env-&gt;rdtime_fn(env-&gt;rdtime_fn_=
-arg) + delta;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (timecmp &lt;=3D rtc_r) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* If we&#39;re setting an stimecmp =
-value in the &quot;past&quot;,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* immediately raise the timer inter=
-rupt<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 riscv_cpu_update_mip(cpu, timer_irq, BOOL=
-_TO_MASK(1));<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* Clear the [V]STIP bit in mip */<br>
-&gt; +=C2=A0 =C2=A0 riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));<=
-br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* otherwise, set up the future timer interrupt */<br>
-&gt; +=C2=A0 =C2=A0 diff =3D timecmp - rtc_r;<br>
-&gt; +=C2=A0 =C2=A0 /* back to ns (note args switched in muldiv64) */<br>
-&gt; +=C2=A0 =C2=A0 ns_diff =3D muldiv64(diff, NANOSECONDS_PER_SECOND, time=
-base_freq);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* check if ns_diff overflowed and check if the ad=
-dition would potentially<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* overflow<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 if ((NANOSECONDS_PER_SECOND &gt; timebase_freq &amp;&am=
-p; ns_diff &lt; diff) ||<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ns_diff &gt; INT64_MAX) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 next =3D INT64_MAX;<br>
-&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* as it is very unlikely qemu_clock=
-_get_ns will return a value<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* greater than INT64_MAX, no additi=
-onal check is needed for an<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* unsigned integer overflow.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 next =3D qemu_clock_get_ns(QEMU_CLOCK_VIR=
-TUAL) + ns_diff;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* if ns_diff is INT64_MAX next may =
-still be outside the range<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* of a signed integer.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 next =3D MIN(next, INT64_MAX);<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 timer_mod(timer, next);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +void riscv_timer_init(RISCVCPU *cpu)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 CPURISCVState *env;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (!cpu) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 env =3D &amp;cpu-&gt;env;<br>
-&gt; +=C2=A0 =C2=A0 env-&gt;stimer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL, &am=
-p;riscv_stimer_cb, cpu);<br>
-&gt; +=C2=A0 =C2=A0 env-&gt;stimecmp =3D 0;<br>
-&gt; +<br>
-&gt; +}<br>
-&gt; diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h<b=
-r>
-&gt; new file mode 100644<br>
-&gt; index 000000000000..7b3cdcc35020<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/target/riscv/time_helper.h<br>
-&gt; @@ -0,0 +1,30 @@<br>
-&gt; +/*<br>
-&gt; + * RISC-V timer header file.<br>
-&gt; + *<br>
-&gt; + * Copyright (c) 2022 Rivos Inc.<br>
-&gt; + *<br>
-&gt; + * This program is free software; you can redistribute it and/or modi=
-fy it<br>
-&gt; + * under the terms and conditions of the GNU General Public License,<=
-br>
-&gt; + * version 2 or later, as published by the Free Software Foundation.<=
-br>
-&gt; + *<br>
-&gt; + * This program is distributed in the hope it will be useful, but WIT=
-HOUT<br>
-&gt; + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY=
- or<br>
-&gt; + * FITNESS FOR A PARTICULAR PURPOSE.=C2=A0 See the GNU General Public=
- License for<br>
-&gt; + * more details.<br>
-&gt; + *<br>
-&gt; + * You should have received a copy of the GNU General Public License =
-along with<br>
-&gt; + * this program.=C2=A0 If not, see &lt;<a href=3D"http://www.gnu.org/=
-licenses/" rel=3D"noreferrer" target=3D"_blank">http://www.gnu.org/licenses=
-/</a>&gt;.<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +#ifndef RISCV_TIME_HELPER_H<br>
-&gt; +#define RISCV_TIME_HELPER_H<br>
-&gt; +<br>
-&gt; +#include &quot;cpu.h&quot;<br>
-&gt; +#include &quot;qemu/timer.h&quot;<br>
-&gt; +<br>
-&gt; +void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t timecmp, uint64_t delta,=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t timer_irq);<br>
-&gt; +void riscv_timer_init(RISCVCPU *cpu);<br>
-&gt; +<br>
-&gt; +#endif<br>
-<br>
+<a href=3D"https://www.codethink.co.uk/privacy.html" rel=3D"noreferrer" tar=
+get=3D"_blank">https://www.codethink.co.uk/privacy.html</a><br>
 </blockquote></div></div>
 
---0000000000001ff8b805e55ca6e7--
+--0000000000008bfe1305e55cada8--
 
