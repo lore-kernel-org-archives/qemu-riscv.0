@@ -1,73 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oJ9hG-0002h5-L3
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 04:25:42 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41396)
+	id 1oJ9nx-0001hm-9G
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 04:32:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:42624)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJ9h4-0002XN-Qb
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 04:25:31 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:37645)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJ9h2-00063r-DL
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 04:25:30 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- v16-20020a17090abb9000b001f25244c65dso1269268pjr.2
- for <qemu-riscv@nongnu.org>; Wed, 03 Aug 2022 01:25:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc;
- bh=b38lbf26Xj3NEUnNprf3GDaaxAPB/P16DK4vovVjcpw=;
- b=U9CX2CIM8zI/hTm6YGKTvdK49bQpRMw9O9riOt0GP8fro28Tkx9+WlzQMACLkhl/EU
- vTNxTEsH+tZ65Yc4xW9B8b+yAfgBnAa8HsMgfmWg/KwnQl8F8COiU2NsK0f4dQZjVgAP
- popme0emU9BmBlIPIYRqJXBdePxfLErX0tb95tLHwGEHfLpeWT/kcnqrpy/n3hkLvfoY
- hrzzzVm8g6Mj0VT8SdSRvHVPVdkySCxECGYN/M3LZX8J7DcLgi/VOt5A/ViGeWwM2WJ9
- JJUFa4Pe9mLNf0VY7+Y8wg+W4ZTRfswUSmpi1/5sLhkaPLHkQ4qDSxCQ3KG866tSQoBS
- rx7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc;
- bh=b38lbf26Xj3NEUnNprf3GDaaxAPB/P16DK4vovVjcpw=;
- b=kTCoEXgf3vEuSq9F7aMRzHPCD8QD/xC4byZv7vmTBaVvfGRDw/rcYKo/Efrxgf2pVZ
- NCCwu4Dxvs3+BI0v2FMWMU3WsUHSmXbHzvfG3OLkCcq0GYRdRFxGkNkOswvqjFMh/T5t
- jmQAN0nw9Jad4ZIgj+A6aZpcLLGZX5vm5xZGzFatIh+kiMXl6DQ/EEzNsNRVMvwITSAp
- 51eCkaDMQb0Exc3Cc0xm9tyujDRp3wy/wfyq1qxys6jI9woublG6bS4aEb5u44/2wMfD
- bnpwy0cAJ1fsT7VZxHuSIHWmr2xcYmcJGXina4m57FwIm34XFy+MhPlugsTkx5j6qHmq
- buYQ==
-X-Gm-Message-State: ACgBeo1gW7Zvc7ri7pXPNdVHPUqDr4LY0iOIKfHWDZrjeG4Hz/Wb2niS
- zDvWEl7lAy6qi1WWUsdQO6hhlw==
-X-Google-Smtp-Source: AA6agR6LlZmXNNWlLeanQFiJWN1146YNssetTJIMYYYCKq7ROsa5BNHHXB2CSkd2jjyZxkm9xuqO+A==
-X-Received: by 2002:a17:903:228f:b0:16f:1b48:230c with SMTP id
- b15-20020a170903228f00b0016f1b48230cmr343283plh.78.1659515124962; 
- Wed, 03 Aug 2022 01:25:24 -0700 (PDT)
-Received: from atishp.ba.rivosinc.com ([66.220.2.162])
- by smtp.gmail.com with ESMTPSA id
- r63-20020a17090a43c500b001f260b1954bsm961997pjg.13.2022.08.03.01.25.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Aug 2022 01:25:24 -0700 (PDT)
-From: Atish Patra <atishp@rivosinc.com>
-To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1oJ9nq-0001ew-Pf; Wed, 03 Aug 2022 04:32:33 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:49684 helo=cstnet.cn)
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <liweiwei@iscas.ac.cn>)
+ id 1oJ9no-0007HC-CC; Wed, 03 Aug 2022 04:32:30 -0400
+Received: from [192.168.3.6] (unknown [116.224.155.20])
+ by APP-01 (Coremail) with SMTP id qwCowACX3JySMupiPpHYBQ--.28427S2;
+ Wed, 03 Aug 2022 16:32:18 +0800 (CST)
+Subject: Re: [PATCH v7 3/4] target/riscv: smstateen check for fcsr
+To: Mayuresh Chitale <mchitale@ventanamicro.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v7  0/3] Implement Sstc extension 
-Date: Wed,  3 Aug 2022 01:25:13 -0700
-Message-Id: <20220803082516.2271344-1-atishp@rivosinc.com>
-X-Mailer: git-send-email 2.25.1
+Cc: alistair.francis@wdc.com
+References: <20220801171843.72986-1-mchitale@ventanamicro.com>
+ <20220801171843.72986-4-mchitale@ventanamicro.com>
+From: Weiwei Li <liweiwei@iscas.ac.cn>
+Message-ID: <c5d8304d-315c-bf5b-f63c-2d38348fdf4c@iscas.ac.cn>
+Date: Wed, 3 Aug 2022 16:32:18 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
+In-Reply-To: <20220801171843.72986-4-mchitale@ventanamicro.com>
+Content-Type: text/plain; charset=gbk; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Content-Language: en-US
+X-CM-TRANSID: qwCowACX3JySMupiPpHYBQ--.28427S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxtF1DJF1rKr1kGFyxKry3Arb_yoW7Aryfp3
+ y8GF43C3s5JryIva1fJFn8JF9xtws7G3yIk3Zrtw1kXanrKrWFgF4kK347Kr17XFy8Wr1S
+ vayj9FnxCr47AFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9I14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+ 4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+ Yx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbV
+ WUJVW8JwACjcxG0xvEwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7I2V7IY0VAS07Al
+ zVAYIcxG8wCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x
+ 0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2
+ zVAF1VAY17CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF
+ 4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrJr0_
+ WFyUJwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJb
+ IYCTnIWIevJa73UjIFyTuYvjfU8TmhUUUUU
+X-Originating-IP: [116.224.155.20]
+X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21; envelope-from=liweiwei@iscas.ac.cn;
+ helo=cstnet.cn
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, MIME_CHARSET_FARAWAY=2.45,
+ NICE_REPLY_A=-0.001, RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,70 +67,197 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2022 08:25:32 -0000
+X-List-Received-Date: Wed, 03 Aug 2022 08:32:34 -0000
 
-This series implements Sstc extension[1] which was ratified recently.
 
-The first patch is a prepartory patches while PATCH 2 adds stimecmp
-support while PATCH 3 adds vstimecmp support. This series is based on
-on top of upstream commit (faee5441a038).
+ÔÚ 2022/8/2 ÉÏÎç1:18, Mayuresh Chitale Ð´µÀ:
+> If smstateen is implemented and sstateen0.fcsr is clear then the
+> floating point operations must return illegal instruction exception.
 
-The series can also be found at
-https://github.com/atishp04/qemu/tree/sstc_v7
+I think this is not correct. The exception for float point operations 
+must be illegal instruction exception
 
-It is tested on RV32 & RV64 with latest OpenSBI & Linux kernel[2]
-patches.
+if FCSR is not existed(that is misa.F is zero and Zfinx is not 
+supported). However, when FCSR is exsited,
 
-Changes from v6->v7:
-1. Replaced g_malloc0 with g_new0.
-2. Removed the over allocation for the timers.
+the final exception should be decided by current privilege level and the 
+stateen related csr values just
 
-Changes from v5->v6:
-1. Rebased on top of the latest HEAD commit.
+like the access control of FCSR.
 
-Changes from v4->v5:
-1. Removed any ordering related flags and emulate the hardware more
-   closely. 
+Regards,
 
-Changes from v3->v4:
-1. Added [v]stimecmp_wr_done to the corresponding vmstate strucuture.
+Weiwei Li
 
-Changes from v2->v3:
-1. Dropped generic migration code improvement patches.
-2. Removed the order constraints while updating stimecmp/vstimecmp.
-
-Changes from v1->v2:
-1. Rebased on the latest upstream commit.
-2. Replaced PATCH 1 with another patch where mtimer/timecmp is
-   moved from CPU to ACLINT.
-3. Added ACLINT migration support.
-
-[1] https://drive.google.com/file/d/1m84Re2yK8m_vbW7TspvevCDR82MOBaSX/view
-[2] https://github.com/atishp04/linux/tree/sstc_v7
-
-Atish Patra (3):
-hw/intc: Move mtimer/mtimecmp to aclint
-target/riscv: Add stimecmp support
-target/riscv: Add vstimecmp support
-
-hw/intc/riscv_aclint.c         |  41 +++++---
-hw/timer/ibex_timer.c          |  18 ++--
-include/hw/intc/riscv_aclint.h |   2 +
-include/hw/timer/ibex_timer.h  |   2 +
-target/riscv/cpu.c             |  12 +++
-target/riscv/cpu.h             |  11 +-
-target/riscv/cpu_bits.h        |   8 ++
-target/riscv/cpu_helper.c      |  11 +-
-target/riscv/csr.c             | 177 +++++++++++++++++++++++++++++++++
-target/riscv/machine.c         |   7 +-
-target/riscv/meson.build       |   3 +-
-target/riscv/time_helper.c     | 114 +++++++++++++++++++++
-target/riscv/time_helper.h     |  30 ++++++
-13 files changed, 404 insertions(+), 32 deletions(-)
-create mode 100644 target/riscv/time_helper.c
-create mode 100644 target/riscv/time_helper.h
-
---
-2.25.1
+>
+> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> ---
+>   target/riscv/csr.c                        | 23 +++++++++++++
+>   target/riscv/insn_trans/trans_rvf.c.inc   | 40 +++++++++++++++++++++--
+>   target/riscv/insn_trans/trans_rvzfh.c.inc | 12 +++++++
+>   3 files changed, 72 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 011d6c5976..0512391220 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -79,6 +79,10 @@ static RISCVException fs(CPURISCVState *env, int csrno)
+>           !RISCV_CPU(env_cpu(env))->cfg.ext_zfinx) {
+>           return RISCV_EXCP_ILLEGAL_INST;
+>       }
+> +
+> +    if (!env->debugger && !riscv_cpu_fp_enabled(env)) {
+> +        return smstateen_acc_ok(env, 0, SMSTATEEN0_FCSR);
+> +    }
+>   #endif
+>       return RISCV_EXCP_NONE;
+>   }
+> @@ -1866,6 +1870,9 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+>                                         target_ulong new_val)
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+>   
+>       return write_mstateen(env, csrno, wr_mask, new_val);
+>   }
+> @@ -1914,6 +1921,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>       return write_mstateenh(env, csrno, wr_mask, new_val);
+>   }
+>   
+> @@ -1963,6 +1974,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>       return write_hstateen(env, csrno, wr_mask, new_val);
+>   }
+>   
+> @@ -2014,6 +2029,10 @@ static RISCVException write_hstateen0h(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>       return write_hstateenh(env, csrno, wr_mask, new_val);
+>   }
+>   
+> @@ -2073,6 +2092,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
+>   {
+>       uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+>   
+> +    if (!riscv_has_ext(env, RVF)) {
+> +        wr_mask |= SMSTATEEN0_FCSR;
+> +    }
+> +
+>       return write_sstateen(env, csrno, wr_mask, new_val);
+>   }
+>   
+> diff --git a/target/riscv/insn_trans/trans_rvf.c.inc b/target/riscv/insn_trans/trans_rvf.c.inc
+> index a1d3eb52ad..ce8a0cc34b 100644
+> --- a/target/riscv/insn_trans/trans_rvf.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvf.c.inc
+> @@ -24,9 +24,43 @@
+>               return false; \
+>   } while (0)
+>   
+> -#define REQUIRE_ZFINX_OR_F(ctx) do {\
+> -    if (!ctx->cfg_ptr->ext_zfinx) { \
+> -        REQUIRE_EXT(ctx, RVF); \
+> +#ifndef CONFIG_USER_ONLY
+> +static inline bool smstateen_check(DisasContext *ctx, int index)
+> +{
+> +    CPUState *cpu = ctx->cs;
+> +    CPURISCVState *env = cpu->env_ptr;
+> +    uint64_t stateen = env->mstateen[index];
+> +
+> +    if (!ctx->cfg_ptr->ext_smstateen || env->priv == PRV_M) {
+> +        return true;
+> +    }
+> +
+> +    if (ctx->virt_enabled) {
+> +        stateen &= env->hstateen[index];
+> +    }
+> +
+> +    if (env->priv == PRV_U && has_ext(ctx, RVS)) {
+> +        stateen &= env->sstateen[index];
+> +    }
+> +
+> +    if (!(stateen & SMSTATEEN0_FCSR)) {
+> +        return false;
+> +    }
+> +
+> +    return true;
+> +}
+> +#else
+> +#define smstateen_check(ctx, index) (true)
+> +#endif
+> +
+> +#define REQUIRE_ZFINX_OR_F(ctx) do { \
+> +    if (!has_ext(ctx, RVF)) { \
+> +        if (!ctx->cfg_ptr->ext_zfinx) { \
+> +            return false; \
+> +        } \
+> +        if (!smstateen_check(ctx, 0)) { \
+> +            return false; \
+> +        } \
+>       } \
+>   } while (0)
+>   
+> diff --git a/target/riscv/insn_trans/trans_rvzfh.c.inc b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> index 5d07150cd0..44d962c920 100644
+> --- a/target/riscv/insn_trans/trans_rvzfh.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvzfh.c.inc
+> @@ -20,18 +20,27 @@
+>       if (!ctx->cfg_ptr->ext_zfh) {      \
+>           return false;         \
+>       }                         \
+> +    if (!smstateen_check(ctx, 0)) { \
+> +        return false; \
+> +    } \
+>   } while (0)
+>   
+>   #define REQUIRE_ZHINX_OR_ZFH(ctx) do { \
+>       if (!ctx->cfg_ptr->ext_zhinx && !ctx->cfg_ptr->ext_zfh) { \
+>           return false;                  \
+>       }                                  \
+> +    if (!smstateen_check(ctx, 0)) { \
+> +        return false; \
+> +    } \
+>   } while (0)
+>   
+>   #define REQUIRE_ZFH_OR_ZFHMIN(ctx) do {       \
+>       if (!(ctx->cfg_ptr->ext_zfh || ctx->cfg_ptr->ext_zfhmin)) { \
+>           return false;                         \
+>       }                                         \
+> +    if (!smstateen_check(ctx, 0)) { \
+> +        return false; \
+> +    } \
+>   } while (0)
+>   
+>   #define REQUIRE_ZFH_OR_ZFHMIN_OR_ZHINX_OR_ZHINXMIN(ctx) do { \
+> @@ -39,6 +48,9 @@
+>             ctx->cfg_ptr->ext_zhinx || ctx->cfg_ptr->ext_zhinxmin)) {     \
+>           return false;                                        \
+>       }                                                        \
+> +    if (!smstateen_check(ctx, 0)) { \
+> +        return false; \
+> +    } \
+>   } while (0)
+>   
+>   static bool trans_flh(DisasContext *ctx, arg_flh *a)
 
 
