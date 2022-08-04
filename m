@@ -1,72 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oJPsz-0002xc-1Z
-	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 21:42:53 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41124)
+	id 1oJPt1-0002zv-Ld
+	for mharc-qemu-riscv@gnu.org; Wed, 03 Aug 2022 21:42:55 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41182)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJPsy-0002xN-8m
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 21:42:52 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:45791)
+ id 1oJPt0-0002xv-5O
+ for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 21:42:54 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:44720)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oJPsw-0000Wu-AI
- for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 21:42:51 -0400
-Received: by mail-pl1-x634.google.com with SMTP id w7so17992135ply.12
- for <qemu-riscv@nongnu.org>; Wed, 03 Aug 2022 18:42:49 -0700 (PDT)
+ id 1oJPsw-0000X5-Tw
+ for qemu-riscv@nongnu.org; Wed, 03 Aug 2022 21:42:53 -0400
+Received: by mail-pf1-x431.google.com with SMTP id h28so11704989pfq.11
+ for <qemu-riscv@nongnu.org>; Wed, 03 Aug 2022 18:42:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc;
- bh=phPq4eHYg8emfMZOmprTVXMWB1LvPj/rRYu3fgcFsGQ=;
- b=JzyoEXhB+a8zg9kLyUYA39oI/dN0Ul6v7RM27jm9mMkO5dQHjF4EhU+vlhJJ+9EZET
- HbhA7d3P/yVTpayDCub3/EKP2yaAD5nA2AmmnHlXlC/AUzRi6pG+jfndIkFm2z3cQ5Y4
- JSmMEIZ0ah20G79IQ/rimKtPqIGXnBo3kdSP1QP19Um2RlrPR715tajDXUN+vpNjbukw
- kEqYzDZqU5RE9c5yf60QKgiTG2WXuuqAPWcGxm8N9TRjKMf2MtyUec3iP1ULKH/Xa6VI
- 8y6oA+VUqpQfQy7jzPvtC+fMcTtmYi8ThhWrXEAsZIzyAhEF46syCGvtlpKnia0TPjTw
- IqbA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc;
+ bh=yqFL3XWjqlrMAYFofhsb+vhYAWbOFm6JfDPSQsN8zoE=;
+ b=KN4RAsGFPzcVZvVMqOhDCR+YfQopxE6k7rly6Kw5tXPfOSi1jXdRdE+Zm3/lyZLlZ5
+ mp6z/i43To4IuUZ5/vF2JbwXVHpYjll2x5ip6dVStXfh+ejWqjUQ9lQhQp4uptU9bagy
+ hXIOT7A3IPrGoOLRjQaIUG423Q01W72vrXSn19HDl+0xvQDbuNQRgrQEA7kNZJ3sRVMm
+ cmHFZk9H0x8OhsjC5SLOb5uTHibICqkcz6PuUPA2El9FxUZxQF13JAX00GhI1aCHsA6k
+ nAkc5DKeIsTe4kOZypadCGM4F6bgba3s29X7KdHjTEN1DipIgRkFVkGqXlQYcAqBkSXz
+ TdWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc;
- bh=phPq4eHYg8emfMZOmprTVXMWB1LvPj/rRYu3fgcFsGQ=;
- b=Jpf0vhf5fTRmdLLN2wNiymaNjF3ZYnnvJALjhTVmfV8jjdftyoylRLFP4NUs5myC1Y
- fhTdQtGDporOXlwDCFObb+ASxJn3TTFTHHE5gMWixrmqo5CrU+DNPcZfo1oovLrstXUY
- LUvkwtjduunc+x9g1nrEvLeHISX0vnLpr0VSJp5ZTR5HfIfY1BRe6M7cRYbyxfnfGWJd
- zHi6Mu3riBY+TYuQ9wLz3Sexs2ThYMpanlHHLMWdrEUrOlpGp2Yd/ng64w6+GwLrjKtu
- mVGGR0mDBWWfThq6q23pq2gJvqEoPtyByBL9Z6WYrOEnJMX9ZOijBxgzZ9h7q5ZKAm57
- fQ7w==
-X-Gm-Message-State: ACgBeo1/bZAeD5li/GeOrOhgjCW7VctIv2IV6/WDroibDm+Z6T1stt0J
- 7HTeSPwCtDsztSPhga6FxefiLA==
-X-Google-Smtp-Source: AA6agR4/n81jkrhz5Q9Aby5bl6C2rbT4eavzu5yL+khhbGY+9GEsxJ5RhpjZ2PJ+vRiqP3XmENWq3w==
-X-Received: by 2002:a17:902:f30c:b0:16d:a79c:4aed with SMTP id
- c12-20020a170902f30c00b0016da79c4aedmr28554753ple.23.1659577368416; 
- Wed, 03 Aug 2022 18:42:48 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+ bh=yqFL3XWjqlrMAYFofhsb+vhYAWbOFm6JfDPSQsN8zoE=;
+ b=KBOiH5kxmokwl0YZ5jsClwQ2452LsYrXkLF5KvI41b6SEozheOle86Iw+GLeUPXsQB
+ rtkCzz0j0/yzy/tdkAcQdncPzycH6KTrjwxucb46NNMhyDy/aXLcYbhmQVjUbLNGp8EO
+ N6u4Fri+3pnCP5EHMnaBZhdbpjSJI92mSDsQhu+VBvG1He265aCG6n9/CpHtYXNQ7YQU
+ 19r7cj3MeArg8RHrWw7IxRmza849xAaVttOfjCsvJTtGTh+XZ+otMHoDHsnYZ/h7tAnH
+ 94yTcWcvxwOBDVz2C+sATqxPsqqSBxtWg8Q2M4hr1vPmS0Mw5adGx84ehMOXrtETRqcT
+ uE+w==
+X-Gm-Message-State: ACgBeo04+PnlNPBs7QNiu3/CLCNkXOvlp3xpTvPhtsKZ0wtbhRfIBA6m
+ LQRvdolkurzAvg4J0ZkfJeNPSg==
+X-Google-Smtp-Source: AA6agR43kr9ewDV2CQy649TYdDiIc7VQMNssHUbjE6KOjVeRQxxx5ECO/rl2mqhabiyAFiH2uvVP6A==
+X-Received: by 2002:a63:a557:0:b0:41c:d5ce:85c8 with SMTP id
+ r23-20020a63a557000000b0041cd5ce85c8mr84752pgu.72.1659577369536; 
+ Wed, 03 Aug 2022 18:42:49 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- l1-20020a170902ec0100b0016784c93f23sm1981921pld.197.2022.08.03.18.42.47
+ l1-20020a170902ec0100b0016784c93f23sm1981921pld.197.2022.08.03.18.42.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Aug 2022 18:42:47 -0700 (PDT)
+ Wed, 03 Aug 2022 18:42:48 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
+Cc: Atish Patra <atishp@rivosinc.com>, Anup Patel <anup@brainfault.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
  Alistair Francis <Alistair.Francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v8  0/3] Implement Sstc extension 
-Date: Wed,  3 Aug 2022 18:42:37 -0700
-Message-Id: <20220804014240.2514957-1-atishp@rivosinc.com>
+Subject: [PATCH v8  1/3] hw/intc: Move mtimer/mtimecmp to aclint
+Date: Wed,  3 Aug 2022 18:42:38 -0700
+Message-Id: <20220804014240.2514957-2-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220804014240.2514957-1-atishp@rivosinc.com>
+References: <20220804014240.2514957-1-atishp@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,75 +82,299 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2022 01:42:52 -0000
+X-List-Received-Date: Thu, 04 Aug 2022 01:42:54 -0000
 
-This series implements Sstc extension[1] which was ratified recently.
+Historically, The mtime/mtimecmp has been part of the CPU because
+they are per hart entities. However, they actually belong to aclint
+which is a MMIO device.
 
-The first patch is a prepartory patches while PATCH 2 adds stimecmp
-support while PATCH 3 adds vstimecmp support. This series is based on
-on top of upstream commit (faee5441a038).
+Move them to the ACLINT device. This also emulates the real hardware
+more closely.
 
-The series can also be found at
-https://github.com/atishp04/qemu/tree/sstc_v8
+Reviewed-by: Anup Patel <anup@brainfault.org>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ hw/intc/riscv_aclint.c         | 41 ++++++++++++++++++++++++----------
+ hw/timer/ibex_timer.c          | 18 ++++++---------
+ include/hw/intc/riscv_aclint.h |  2 ++
+ include/hw/timer/ibex_timer.h  |  2 ++
+ target/riscv/cpu.h             |  2 --
+ target/riscv/machine.c         |  5 ++---
+ 6 files changed, 42 insertions(+), 28 deletions(-)
 
-It is tested on RV32 & RV64 with latest OpenSBI & Linux kernel[2]
-patches.
-
-Changes from v7->v8:
-1. Removed redundant blank lines.
-2. Invoke smode & hmode predicate function from sstc related predicate
-   functions.
-
-Changes from v6->v7:
-1. Replaced g_malloc0 with g_new0.
-2. Removed the over allocation for the timers.
-
-Changes from v5->v6:
-1. Rebased on top of the latest HEAD commit.
-
-Changes from v4->v5:
-1. Removed any ordering related flags and emulate the hardware more
-   closely. 
-
-Changes from v3->v4:
-1. Added [v]stimecmp_wr_done to the corresponding vmstate strucuture.
-
-Changes from v2->v3:
-1. Dropped generic migration code improvement patches.
-2. Removed the order constraints while updating stimecmp/vstimecmp.
-
-Changes from v1->v2:
-1. Rebased on the latest upstream commit.
-2. Replaced PATCH 1 with another patch where mtimer/timecmp is
-   moved from CPU to ACLINT.
-3. Added ACLINT migration support.
-
-[1] https://drive.google.com/file/d/1m84Re2yK8m_vbW7TspvevCDR82MOBaSX/view
-[2] https://github.com/atishp04/linux/tree/sstc_v8
-
-Atish Patra (3):
-hw/intc: Move mtimer/mtimecmp to aclint
-target/riscv: Add stimecmp support
-target/riscv: Add vstimecmp support
-
-hw/intc/riscv_aclint.c         |  41 +++++---
-hw/timer/ibex_timer.c          |  18 ++--
-include/hw/intc/riscv_aclint.h |   2 +
-include/hw/timer/ibex_timer.h  |   2 +
-target/riscv/cpu.c             |   9 ++
-target/riscv/cpu.h             |  11 ++-
-target/riscv/cpu_bits.h        |   8 ++
-target/riscv/cpu_helper.c      |  11 ++-
-target/riscv/csr.c             | 175 +++++++++++++++++++++++++++++++++
-target/riscv/machine.c         |   7 +-
-target/riscv/meson.build       |   3 +-
-target/riscv/time_helper.c     | 114 +++++++++++++++++++++
-target/riscv/time_helper.h     |  30 ++++++
-13 files changed, 399 insertions(+), 32 deletions(-)
-create mode 100644 target/riscv/time_helper.c
-create mode 100644 target/riscv/time_helper.h
-
---
+diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+index e7942c4e5a32..a125c73d535c 100644
+--- a/hw/intc/riscv_aclint.c
++++ b/hw/intc/riscv_aclint.c
+@@ -32,6 +32,7 @@
+ #include "hw/intc/riscv_aclint.h"
+ #include "qemu/timer.h"
+ #include "hw/irq.h"
++#include "migration/vmstate.h"
+ 
+ typedef struct riscv_aclint_mtimer_callback {
+     RISCVAclintMTimerState *s;
+@@ -65,8 +66,8 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+ 
+     uint64_t rtc_r = cpu_riscv_read_rtc(mtimer);
+ 
+-    cpu->env.timecmp = value;
+-    if (cpu->env.timecmp <= rtc_r) {
++    mtimer->timecmp[hartid] = value;
++    if (mtimer->timecmp[hartid] <= rtc_r) {
+         /*
+          * If we're setting an MTIMECMP value in the "past",
+          * immediately raise the timer interrupt
+@@ -77,7 +78,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+ 
+     /* otherwise, set up the future timer interrupt */
+     qemu_irq_lower(mtimer->timer_irqs[hartid - mtimer->hartid_base]);
+-    diff = cpu->env.timecmp - rtc_r;
++    diff = mtimer->timecmp[hartid] - rtc_r;
+     /* back to ns (note args switched in muldiv64) */
+     uint64_t ns_diff = muldiv64(diff, NANOSECONDS_PER_SECOND, timebase_freq);
+ 
+@@ -102,7 +103,7 @@ static void riscv_aclint_mtimer_write_timecmp(RISCVAclintMTimerState *mtimer,
+         next = MIN(next, INT64_MAX);
+     }
+ 
+-    timer_mod(cpu->env.timer, next);
++    timer_mod(mtimer->timers[hartid], next);
+ }
+ 
+ /*
+@@ -133,11 +134,11 @@ static uint64_t riscv_aclint_mtimer_read(void *opaque, hwaddr addr,
+                           "aclint-mtimer: invalid hartid: %zu", hartid);
+         } else if ((addr & 0x7) == 0) {
+             /* timecmp_lo for RV32/RV64 or timecmp for RV64 */
+-            uint64_t timecmp = env->timecmp;
++            uint64_t timecmp = mtimer->timecmp[hartid];
+             return (size == 4) ? (timecmp & 0xFFFFFFFF) : timecmp;
+         } else if ((addr & 0x7) == 4) {
+             /* timecmp_hi */
+-            uint64_t timecmp = env->timecmp;
++            uint64_t timecmp = mtimer->timecmp[hartid];
+             return (timecmp >> 32) & 0xFFFFFFFF;
+         } else {
+             qemu_log_mask(LOG_UNIMP,
+@@ -177,7 +178,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+         } else if ((addr & 0x7) == 0) {
+             if (size == 4) {
+                 /* timecmp_lo for RV32/RV64 */
+-                uint64_t timecmp_hi = env->timecmp >> 32;
++                uint64_t timecmp_hi = mtimer->timecmp[hartid] >> 32;
+                 riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
+                     timecmp_hi << 32 | (value & 0xFFFFFFFF));
+             } else {
+@@ -188,7 +189,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+         } else if ((addr & 0x7) == 4) {
+             if (size == 4) {
+                 /* timecmp_hi for RV32/RV64 */
+-                uint64_t timecmp_lo = env->timecmp;
++                uint64_t timecmp_lo = mtimer->timecmp[hartid];
+                 riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu), hartid,
+                     value << 32 | (timecmp_lo & 0xFFFFFFFF));
+             } else {
+@@ -234,7 +235,7 @@ static void riscv_aclint_mtimer_write(void *opaque, hwaddr addr,
+             }
+             riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
+                                               mtimer->hartid_base + i,
+-                                              env->timecmp);
++                                              mtimer->timecmp[i]);
+         }
+         return;
+     }
+@@ -284,6 +285,8 @@ static void riscv_aclint_mtimer_realize(DeviceState *dev, Error **errp)
+     s->timer_irqs = g_new(qemu_irq, s->num_harts);
+     qdev_init_gpio_out(dev, s->timer_irqs, s->num_harts);
+ 
++    s->timers = g_new0(QEMUTimer *, s->num_harts);
++    s->timecmp = g_new0(uint64_t, s->num_harts);
+     /* Claim timer interrupt bits */
+     for (i = 0; i < s->num_harts; i++) {
+         RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
+@@ -310,6 +313,18 @@ static void riscv_aclint_mtimer_reset_enter(Object *obj, ResetType type)
+     riscv_aclint_mtimer_write(mtimer, mtimer->time_base, 0, 8);
+ }
+ 
++static const VMStateDescription vmstate_riscv_mtimer = {
++    .name = "riscv_mtimer",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (VMStateField[]) {
++            VMSTATE_VARRAY_UINT32(timecmp, RISCVAclintMTimerState,
++                                  num_harts, 0,
++                                  vmstate_info_uint64, uint64_t),
++            VMSTATE_END_OF_LIST()
++        }
++};
++
+ static void riscv_aclint_mtimer_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+@@ -317,6 +332,7 @@ static void riscv_aclint_mtimer_class_init(ObjectClass *klass, void *data)
+     device_class_set_props(dc, riscv_aclint_mtimer_properties);
+     ResettableClass *rc = RESETTABLE_CLASS(klass);
+     rc->phases.enter = riscv_aclint_mtimer_reset_enter;
++    dc->vmsd = &vmstate_riscv_mtimer;
+ }
+ 
+ static const TypeInfo riscv_aclint_mtimer_info = {
+@@ -336,6 +352,7 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
+ {
+     int i;
+     DeviceState *dev = qdev_new(TYPE_RISCV_ACLINT_MTIMER);
++    RISCVAclintMTimerState *s = RISCV_ACLINT_MTIMER(dev);
+ 
+     assert(num_harts <= RISCV_ACLINT_MAX_HARTS);
+     assert(!(addr & 0x7));
+@@ -366,11 +383,11 @@ DeviceState *riscv_aclint_mtimer_create(hwaddr addr, hwaddr size,
+             riscv_cpu_set_rdtime_fn(env, cpu_riscv_read_rtc, dev);
+         }
+ 
+-        cb->s = RISCV_ACLINT_MTIMER(dev);
++        cb->s = s;
+         cb->num = i;
+-        env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++        s->timers[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+                                   &riscv_aclint_mtimer_cb, cb);
+-        env->timecmp = 0;
++        s->timecmp[i] = 0;
+ 
+         qdev_connect_gpio_out(dev, i,
+                               qdev_get_gpio_in(DEVICE(rvcpu), IRQ_M_TIMER));
+diff --git a/hw/timer/ibex_timer.c b/hw/timer/ibex_timer.c
+index 8c2ca364daab..d8b8e4e1f602 100644
+--- a/hw/timer/ibex_timer.c
++++ b/hw/timer/ibex_timer.c
+@@ -60,8 +60,6 @@ static uint64_t cpu_riscv_read_rtc(uint32_t timebase_freq)
+ 
+ static void ibex_timer_update_irqs(IbexTimerState *s)
+ {
+-    CPUState *cs = qemu_get_cpu(0);
+-    RISCVCPU *cpu = RISCV_CPU(cs);
+     uint64_t value = s->timer_compare_lower0 |
+                          ((uint64_t)s->timer_compare_upper0 << 32);
+     uint64_t next, diff;
+@@ -73,9 +71,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+     }
+ 
+     /* Update the CPUs mtimecmp */
+-    cpu->env.timecmp = value;
++    s->mtimecmp = value;
+ 
+-    if (cpu->env.timecmp <= now) {
++    if (s->mtimecmp <= now) {
+         /*
+          * If the mtimecmp was in the past raise the interrupt now.
+          */
+@@ -91,7 +89,7 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+     qemu_irq_lower(s->m_timer_irq);
+     qemu_set_irq(s->irq, false);
+ 
+-    diff = cpu->env.timecmp - now;
++    diff = s->mtimecmp - now;
+     next = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
+                                  muldiv64(diff,
+                                           NANOSECONDS_PER_SECOND,
+@@ -99,9 +97,9 @@ static void ibex_timer_update_irqs(IbexTimerState *s)
+ 
+     if (next < qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL)) {
+         /* We overflowed the timer, just set it as large as we can */
+-        timer_mod(cpu->env.timer, 0x7FFFFFFFFFFFFFFF);
++        timer_mod(s->mtimer, 0x7FFFFFFFFFFFFFFF);
+     } else {
+-        timer_mod(cpu->env.timer, next);
++        timer_mod(s->mtimer, next);
+     }
+ }
+ 
+@@ -120,11 +118,9 @@ static void ibex_timer_reset(DeviceState *dev)
+ {
+     IbexTimerState *s = IBEX_TIMER(dev);
+ 
+-    CPUState *cpu = qemu_get_cpu(0);
+-    CPURISCVState *env = cpu->env_ptr;
+-    env->timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++    s->mtimer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+                               &ibex_timer_cb, s);
+-    env->timecmp = 0;
++    s->mtimecmp = 0;
+ 
+     s->timer_ctrl = 0x00000000;
+     s->timer_cfg0 = 0x00010000;
+diff --git a/include/hw/intc/riscv_aclint.h b/include/hw/intc/riscv_aclint.h
+index 26d4048687fb..693415eb6def 100644
+--- a/include/hw/intc/riscv_aclint.h
++++ b/include/hw/intc/riscv_aclint.h
+@@ -32,6 +32,8 @@ typedef struct RISCVAclintMTimerState {
+     /*< private >*/
+     SysBusDevice parent_obj;
+     uint64_t time_delta;
++    uint64_t *timecmp;
++    QEMUTimer **timers;
+ 
+     /*< public >*/
+     MemoryRegion mmio;
+diff --git a/include/hw/timer/ibex_timer.h b/include/hw/timer/ibex_timer.h
+index 1a0a28d5fab5..41f5c82a920b 100644
+--- a/include/hw/timer/ibex_timer.h
++++ b/include/hw/timer/ibex_timer.h
+@@ -33,6 +33,8 @@ OBJECT_DECLARE_SIMPLE_TYPE(IbexTimerState, IBEX_TIMER)
+ struct IbexTimerState {
+     /* <private> */
+     SysBusDevice parent_obj;
++    uint64_t mtimecmp;
++    QEMUTimer *mtimer; /* Internal timer for M-mode interrupt */
+ 
+     /* <public> */
+     MemoryRegion mmio;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 4be4b82a837d..0fae1569945c 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -308,7 +308,6 @@ struct CPUArchState {
+     /* temporary htif regs */
+     uint64_t mfromhost;
+     uint64_t mtohost;
+-    uint64_t timecmp;
+ 
+     /* physical memory protection */
+     pmp_table_t pmp_state;
+@@ -363,7 +362,6 @@ struct CPUArchState {
+     float_status fp_status;
+ 
+     /* Fields from here on are preserved across CPU reset. */
+-    QEMUTimer *timer; /* Internal timer */
+ 
+     hwaddr kernel_addr;
+     hwaddr fdt_addr;
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index dc182ca81119..b508b042cb73 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -307,8 +307,8 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
+ 
+ const VMStateDescription vmstate_riscv_cpu = {
+     .name = "cpu",
+-    .version_id = 3,
+-    .minimum_version_id = 3,
++    .version_id = 4,
++    .minimum_version_id = 4,
+     .post_load = riscv_cpu_post_load,
+     .fields = (VMStateField[]) {
+         VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
+@@ -359,7 +359,6 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_UINTTL(env.mscratch, RISCVCPU),
+         VMSTATE_UINT64(env.mfromhost, RISCVCPU),
+         VMSTATE_UINT64(env.mtohost, RISCVCPU),
+-        VMSTATE_UINT64(env.timecmp, RISCVCPU),
+ 
+         VMSTATE_END_OF_LIST()
+     },
+-- 
 2.25.1
 
 
