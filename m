@@ -1,67 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oJpUT-0007oM-QB
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Aug 2022 01:03:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36112)
+	id 1oJzeU-0007Pt-MB
+	for mharc-qemu-riscv@gnu.org; Fri, 05 Aug 2022 11:54:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36092)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oJpUT-0007oA-3U; Fri, 05 Aug 2022 01:03:17 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:36797)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oJzeT-0007P9-N7
+ for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 11:54:17 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:36717)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oJpUR-0007R9-JO; Fri, 05 Aug 2022 01:03:16 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id g12so1328212pfb.3;
- Thu, 04 Aug 2022 22:03:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=S0jaJYTzdSXQAfbsOrO00P4PMzlN0Ny7QaAIjtt59Yk=;
- b=Fet/GHcjvxsILX6nfarixdz9x2UaWLz0+Vd7Cm/3glfl56Er6PK2dAWLxnnH5mNTAs
- bWGYBr/RsYjGsKi3X9uCr1R3iQooZlWPgyTvbK2bAC0YnZVDN1+vVpQH4RchgmdPAArQ
- ho6GWZZSZkRkCTZrOI1mqLifNDPO/fkaSrm7qyvSz3GVA9C7UyQu05EkJeZ13HH266iS
- 1OeqQH6jU73xdrsTDDiRl6TsiR7Sy5aBYYQA59tnqWAlPEhc78CvwJPI7rT8wVeTqGm1
- p1G9ARfAZoEkm7iWbB+HoeHsigE1i4ZqdRdlbj4Gm3u3tCeaZR5ZHbMLEvRcuIYhnz+q
- Nc1w==
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oJzeR-0004mv-UV
+ for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 11:54:17 -0400
+Received: by mail-wr1-x429.google.com with SMTP id j7so3733899wrh.3
+ for <qemu-riscv@nongnu.org>; Fri, 05 Aug 2022 08:54:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=conchuod.ie; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=i/2Te5aPkzaGgF6Yd5Elo1dMRE7ml/rzKBW+IcYIQIQ=;
+ b=VrlJVqeBIviU6PDcuhASVU+PYr58lUA7zKvCXG4hq0NjWrBEuNKkixiE7cmHwuF6Gs
+ iDg5tSHKkKaqj3gpe1kFfxPlKTf1FBNUK+SVnL/U1ObCsQ9cNOGU40liD3ih3HYhfWIW
+ K2o2Q7gsA2Sq3L5/XJUpUhfkZITJN5B++Fbaod7CqVCDdR4agQtnow1IVbbBEiIGCYZr
+ HDtka7hvt9hPNgKm3IiemK6f/4vnDxVrs8JS9uaWgrhPHrlIbR7VOYulLOIKoIH0ffcN
+ 62NuT50CcEb2IdBr6Yfe0FX4ZrNTIthyKqXyvYU9WZ90d0mReaLCgz0pWDGN4FubbKaX
+ Qa6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=S0jaJYTzdSXQAfbsOrO00P4PMzlN0Ny7QaAIjtt59Yk=;
- b=0r3wRO3v23aBH026QStvBFTQHnaUw7nH5XDBdKmXyyr4KtuunHaMpYwep71a8jAuzK
- AO/QtvwEV1hZps6gi+uAY7h5xsT5bk+L+JKMbVyue1AWcZCYsZel5qV+mrTWwaxo4UBv
- x9OJZ7iDvb+uTZoYovQIFovN9uh8I5LwMlxhVSNPvMEtN4ksW3wevvgCJmaGnKR2H34V
- sfiwIUDY4b0NJwp6Vimo1G8P9wCP5HiclkeQ0CrJKHx/VG+bO6ZBsgSbfUa9R3t0CGri
- IRj1gcyNs43sfTNWmSg3jP75iBE9tMOGmPsps2dp769FwWPUvil0vMLKhfK3hw7xicID
- Vv6g==
-X-Gm-Message-State: ACgBeo1dPhDIDCOQCi9fBfrTLRtyw0KKECZ1Q3dpcrpTohGnUBExSniF
- aLrif7YdKMBZUQxpFZmEKRhcalc0h7yamvBpsnY=
-X-Google-Smtp-Source: AA6agR6MANdnjG9Ojn2aEe332F0W9a6/7zUGIHPnZiTjdpT9kM7bfxD1+LRHWEauIysds4WrtkBhESJaxQD7MuRTp48=
-X-Received: by 2002:a63:87c2:0:b0:41c:d5c0:294c with SMTP id
- i185-20020a6387c2000000b0041cd5c0294cmr4387475pge.366.1659675793767; Thu, 04
- Aug 2022 22:03:13 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=i/2Te5aPkzaGgF6Yd5Elo1dMRE7ml/rzKBW+IcYIQIQ=;
+ b=JQT3CAcDd0PgzlgXkegEDGFXXotkA8u3n9CBKehLqczsaBJlqTTSAP0qsOET2lYuMV
+ q9wTf6ZXOTrcbbPN64B8wwlrAbkSlmkzHMG/jx3tUsvAJNTR9jDBDc6+OoTL5EdxadYP
+ m+jyPtDR496h1EhzuoB+yA6C9IwyNJ6cGEudFrTUwf5Q0Xuz9GBNQSL5rjfZYW8yNHAW
+ M+MLfPeRQSs5BmYSN7jUqfAcYHngZNPd2uSinxX1+0MPnO3y4zZTMVwztRIdEq0tGnLt
+ lXDgIyl0/kRYKjodgt9MmNwTputZOlbjfBkQV5KssN8WE0CEiDYoAoKJkMCMHphN4siR
+ 8AsA==
+X-Gm-Message-State: ACgBeo1KD5j5BBTsSWV9HVLwddXccAqZ3mjgWLk0cXrk/InahGpK6Nrm
+ BKUew0Gr/UpPeOoHf73V5ubKEQ==
+X-Google-Smtp-Source: AA6agR4ir/WJ2OZJuENnbVRZfcwfwGcqTB5otlRWWDzRBQGL7k/gziveqr6hVWSoTgd1c4r4WJQk8Q==
+X-Received: by 2002:adf:d1c2:0:b0:220:762f:fc64 with SMTP id
+ b2-20020adfd1c2000000b00220762ffc64mr4864194wrd.253.1659714853733; 
+ Fri, 05 Aug 2022 08:54:13 -0700 (PDT)
+Received: from henark71.. ([93.107.66.220]) by smtp.gmail.com with ESMTPSA id
+ t10-20020a5d49ca000000b0021d6dad334bsm4133543wrs.4.2022.08.05.08.54.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Aug 2022 08:54:13 -0700 (PDT)
+From: Conor Dooley <mail@conchuod.ie>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: Rob Herring <robh@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ linux-riscv@lists.infradead.org
+Subject: [PATCH 0/5] QEMU: Fix RISC-V virt & spike machines' dtbs
+Date: Fri,  5 Aug 2022 16:54:00 +0100
+Message-Id: <20220805155405.1504081-1-mail@conchuod.ie>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-References: <20220803123652.3700-1-liweiwei@iscas.ac.cn>
-In-Reply-To: <20220803123652.3700-1-liweiwei@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 5 Aug 2022 15:02:47 +1000
-Message-ID: <CAKmqyKNznWT4wTktbpD=Q5FqJ=4FxZ+uk0R+3-91K_dCH08Zag@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix priority of csr related check in
- riscv_csrrw_check
-To: Weiwei Li <liweiwei@iscas.ac.cn>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- wangjunqiang <wangjunqiang@iscas.ac.cn>, 
- =?UTF-8?B?V2VpIFd1ICjlkLTkvJ8p?= <lazyparser@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x42f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=mail@conchuod.ie; helo=mail-wr1-x429.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -76,98 +76,50 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2022 05:03:17 -0000
+X-List-Received-Date: Fri, 05 Aug 2022 15:54:17 -0000
 
-On Wed, Aug 3, 2022 at 10:56 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
->
-> Normally, riscv_csrrw_check is called when executing Zicsr instructions.
-> And we can only do access control for existed CSRs. So the priority of
-> CSR related check, from highest to lowest, should be as follows:
-> 1) check whether Zicsr is supported: raise RISCV_EXCP_ILLEGAL_INST if not
-> 2) check whether csr is existed: raise RISCV_EXCP_ILLEGAL_INST if not
-> 3) do access control: raise RISCV_EXCP_ILLEGAL_INST or RISCV_EXCP_VIRT_
-> INSTRUCTION_FAULT if not allowed
->
-> The predicates contain parts of function of both 2) and 3), So they need
-> to be placed in the middle of riscv_csrrw_check
->
-> Signed-off-by: Weiwei Li <liweiwei@iscas.ac.cn>
-> Signed-off-by: Junqiang Wang <wangjunqiang@iscas.ac.cn>
+From: Conor Dooley <conor.dooley@microchip.com>
 
-Thanks!
+The device trees produced automatically for the virt and spike machines
+fail dt-validate on several grounds. Some of these need to be fixed in
+the linux kernel's dt-bindings, but others are caused by bugs in QEMU.
+Patch one of this series is lifted from an earlier submission by Palmer
+that seems to have got lost by the wayside somewhere along the way,
+hence the rather out of date email used for Palmer [0].
 
-Applied to riscv-to-apply.next
+I mostly opted for what appeared to be the smallest change that would
+fix the warnings, partly due to my inexperience with the QEMU codebase.
+A "sister" patchset for the kernel will clear the remaining warnings.
 
-Alistair
+Thanks to Rob for reporting these issues [1],
+Conor.
 
-> ---
->  target/riscv/csr.c | 44 +++++++++++++++++++++++++-------------------
->  1 file changed, 25 insertions(+), 19 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 0fb042b2fd..d81f466c80 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -3270,6 +3270,30 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->      /* check privileges and return RISCV_EXCP_ILLEGAL_INST if check fails */
->      int read_only = get_field(csrno, 0xC00) == 3;
->      int csr_min_priv = csr_ops[csrno].min_priv_ver;
-> +
-> +    /* ensure the CSR extension is enabled. */
-> +    if (!cpu->cfg.ext_icsr) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    if (env->priv_ver < csr_min_priv) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    /* check predicate */
-> +    if (!csr_ops[csrno].predicate) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    if (write_mask && read_only) {
-> +        return RISCV_EXCP_ILLEGAL_INST;
-> +    }
-> +
-> +    RISCVException ret = csr_ops[csrno].predicate(env, csrno);
-> +    if (ret != RISCV_EXCP_NONE) {
-> +        return ret;
-> +    }
-> +
->  #if !defined(CONFIG_USER_ONLY)
->      int csr_priv, effective_priv = env->priv;
->
-> @@ -3290,25 +3314,7 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
->  #endif
-> -    if (write_mask && read_only) {
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -
-> -    /* ensure the CSR extension is enabled. */
-> -    if (!cpu->cfg.ext_icsr) {
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -
-> -    /* check predicate */
-> -    if (!csr_ops[csrno].predicate) {
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -
-> -    if (env->priv_ver < csr_min_priv) {
-> -        return RISCV_EXCP_ILLEGAL_INST;
-> -    }
-> -
-> -    return csr_ops[csrno].predicate(env, csrno);
-> +    return RISCV_EXCP_NONE;
->  }
->
->  static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-> --
-> 2.17.1
->
->
+To reproduce the errors:
+./build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu.dtb
+dt-validate -p /path/to/linux/kernel/Documentation/devicetree/bindings/processed-schema.json qemu.dtb
+(The processed schema needs to be generated first)
+
+0 - https://lore.kernel.org/qemu-devel/20190813225307.5792-1-palmer@sifive.com/
+1 - https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
+
+Conor Dooley (4):
+  hw/riscv: virt: fix uart node name
+  hw/riscv: virt: Fix the plic's address cells
+  hw/riscv: virt: fix syscon subnode paths
+  hw/core: fix platform bus node name
+
+Palmer Dabbelt (1):
+  target/riscv: Ignore the S and U letters when formatting ISA strings
+
+ hw/core/sysbus-fdt.c    |  2 +-
+ hw/riscv/virt.c         | 10 +++++++---
+ include/hw/riscv/virt.h |  1 +
+ target/riscv/cpu.c      | 18 +++++++++++++++++-
+ 4 files changed, 26 insertions(+), 5 deletions(-)
+
+
+base-commit: 2480f3bbd03814b0651a1f74959f5c6631ee5819
+-- 
+2.37.1
+
 
