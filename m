@@ -1,64 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oJzed-0007j6-6H
-	for mharc-qemu-riscv@gnu.org; Fri, 05 Aug 2022 11:54:27 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36250)
+	id 1oK0CC-0008TW-Nr
+	for mharc-qemu-riscv@gnu.org; Fri, 05 Aug 2022 12:29:08 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43258)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oJzec-0007gg-CT
- for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 11:54:26 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435]:40779)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oK0CA-0008T1-U3
+ for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 12:29:06 -0400
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429]:39614)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oJzeX-0004nq-DE
- for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 11:54:26 -0400
-Received: by mail-wr1-x435.google.com with SMTP id l22so3708967wrz.7
- for <qemu-riscv@nongnu.org>; Fri, 05 Aug 2022 08:54:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oK0C9-0002Yz-6c
+ for qemu-riscv@nongnu.org; Fri, 05 Aug 2022 12:29:06 -0400
+Received: by mail-wr1-x429.google.com with SMTP id h13so3813423wrf.6
+ for <qemu-riscv@nongnu.org>; Fri, 05 Aug 2022 09:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=conchuod.ie; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc;
- bh=Eq72lhYwpcj2Y9+DftRcCgBYVb7rhM8mwuz/pv5YLJM=;
- b=df02Xw2L5M+frsgdBTHZhAB+RpXKmP47teE/tjHduOX5y9wo3GaKeXdV4xT2ToFUU7
- 4PQzHwai241o9INpIDbGQxiJDcEBqL442po0XSgX//1aT712qM2uholsa9UDqeBBYqEV
- c1ZgWhWK79TYtP306g3O7vwcd2y+p8VzSx0FZ0IBIsZadWp9YnBP3dqT4eLVyyHX6zcm
- wgK8P2DB9htiONcb0h8+MaYNmFhF1S5OJm+QPHw+ICYA1QhATFphfMpdoarSaZKxBf6g
- bV73Dav0P1c9jReYFwbSsPZLZjw9kh1OAFUQuilGc2dAhtfMCng0C5YZWTo4qt5ic7p2
- p7Uw==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=er0g7uHt/REArzX+ze5K8GPRuPY+Jxgp51y8SELP3FM=;
+ b=EbOTl21mdJTL1GSzLoH5mndTGZ7rvd3Xg13P4ZKyz1HCSdoZ+u7F/xmaKdmhUrrJYR
+ ArAdrwc4a1//4AnluZSlFDO6+T3WonDWZ7YJAoV50fmI/J5ExQUtkLJKbPjLjsScuXwe
+ WN1Qs3sMEseZZVv/O9h179kGKXIXUaZ7acdsR24+fFhX69GI2nTzP/kZtlcjr7KN9DOZ
+ vFaNNYQYq6E/a41Mn8Y+odfAkjrhdjCAvuuGk00A/HgX+GlhAhe93bBVZfYbqTMm1ZFx
+ Vpkg4f2wo26DXiVBb+vHMqHogYZl59hldL5jGPOYrirc97C0RUGdzYLF2J//OSiPFvsa
+ 0YFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
- bh=Eq72lhYwpcj2Y9+DftRcCgBYVb7rhM8mwuz/pv5YLJM=;
- b=Ve2LKLR9ZNtBsNHROAw9BliopmAxPJQn8GvOVPfb8vuLL7ciSH+A7JpX9RZko+O0CG
- 5eVvQyiRuoBWdzu5Odb+jPk2EIVQ2zOR+oVf9PA0mW/8RDiUFH3laZN/ptK6fNZSSnTy
- JK+/A5KwIhVX4NQJ48IjslhFCQlfIuHiGCuPviaxgISZcMSoOkRs1dwJA5cBdoYxcE2S
- u+QGxEoyw7GZDt+va3FklL0ko6SQQsEPgXZiU0AI6/YLVx9IQ5VXyZpaNDkVglKcq7NF
- l4BB0XJ0qnIIuV7ZDlaSwZdqK2DbvTipVM17EB6gawW7jaPsp1RtKcgw30wUgvm8l10F
- KYJw==
-X-Gm-Message-State: ACgBeo1OLxZZPeoF57XXfBHs59k4AK8urF6z69nvRYunQB4xJgBN81ly
- wLcUSm4BtTBAcfG/eSkESmFrQg==
-X-Google-Smtp-Source: AA6agR7miAqKtaiHBM5V5kg4ARTL8teYh/JTGjpAcnh9MVfvzICJUWVCq3N9ZPJld7V9cI9+X61IQg==
-X-Received: by 2002:a05:6000:1102:b0:220:5c10:5cbe with SMTP id
- z2-20020a056000110200b002205c105cbemr4922998wrw.359.1659714860091; 
- Fri, 05 Aug 2022 08:54:20 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=er0g7uHt/REArzX+ze5K8GPRuPY+Jxgp51y8SELP3FM=;
+ b=wjnfHfVr1CmZ0qJtkPw0HM6o3Zz6hJf8IGB91R7VMyCFQpQjyGfwQSgrjllagEpz+Z
+ YaSAnfzUUDUUOKDEz3bfttaLqikkf4qpQ4HLebRmVCe6wWn1MorfqKDjTbQxxR0kmsgN
+ BxLnJOsOKDJeKajFreChmeC+ORLZw4GhszytN5E2kFbs99FCxF8sK1xkB7VHZYlMj5wQ
+ BIVNpNtoythDiJBIz3hGjtFDpmRXeMG2nobQnVTQ6nsDMNER5WnWGtrHWPtjIDiayc1b
+ nnAeOvISoTrKDcJtjQzxnX1QQZ622BVPRTAyMlN9mnmPgV/dckoVSL673JYJx/jBPJqB
+ kkSg==
+X-Gm-Message-State: ACgBeo3z7Q4qKLR7ReyiybxLc5WDQn5vnRTJEEHktmwhgyhxCzYf5gFJ
+ cGU1zBVWfRPOTVudIUlXJjlzFg==
+X-Google-Smtp-Source: AA6agR5PYR+Wl+0VOlguEQQuXuRRJGr8efSXklKvUOQvZ7GXAI/mg5rEbgBwI6yH/e0BdmhHI1txbw==
+X-Received: by 2002:a05:6000:1542:b0:220:603d:ec93 with SMTP id
+ 2-20020a056000154200b00220603dec93mr5044554wry.73.1659716943539; 
+ Fri, 05 Aug 2022 09:29:03 -0700 (PDT)
 Received: from henark71.. ([93.107.66.220]) by smtp.gmail.com with ESMTPSA id
- t10-20020a5d49ca000000b0021d6dad334bsm4133543wrs.4.2022.08.05.08.54.19
+ b10-20020a056000054a00b00220633d96f2sm5210086wrf.72.2022.08.05.09.29.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Aug 2022 08:54:19 -0700 (PDT)
+ Fri, 05 Aug 2022 09:29:03 -0700 (PDT)
 From: Conor Dooley <mail@conchuod.ie>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: Rob Herring <robh@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- linux-riscv@lists.infradead.org
-Subject: [PATCH 3/5] hw/riscv: virt: Fix the plic's address cells
-Date: Fri,  5 Aug 2022 16:54:03 +0100
-Message-Id: <20220805155405.1504081-4-mail@conchuod.ie>
+To: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Albert Ou <aou@eecs.berkeley.edu>
+Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
+ Anup Patel <anup@brainfault.org>,
+ Conor Dooley <conor.dooley@microchip.com>, Guo Ren <guoren@kernel.org>,
+ Sagar Kadam <sagar.kadam@sifive.com>, linux-kernel@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-riscv@lists.infradead.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH 0/3] Fix dt-validate issues on qemu dtbdumps due to dt-bindings
+Date: Fri,  5 Aug 2022 17:28:42 +0100
+Message-Id: <20220805162844.1554247-1-mail@conchuod.ie>
 X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220805155405.1504081-1-mail@conchuod.ie>
-References: <20220805155405.1504081-1-mail@conchuod.ie>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=mail@conchuod.ie; helo=mail-wr1-x435.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=mail@conchuod.ie; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,51 +81,45 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2022 15:54:26 -0000
+X-List-Received-Date: Fri, 05 Aug 2022 16:29:07 -0000
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-When optional AIA PLIC support was added the to the virt machine, the
-address cells property was removed leading the issues with dt-validate
-on a dump from the virt machine:
-/stuff/qemu/qemu.dtb: plic@c000000: '#address-cells' is a required property
-        From schema: /stuff/linux/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
-Add back the property to suppress the warning.
+The device trees produced automatically for the virt and spike machines
+fail dt-validate on several grounds. Some of these need to be fixed in
+the linux kernel's dt-bindings, but others are caused by bugs in QEMU.
 
-Reported-by: Rob Herring <robh@kernel.org>
-Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-Fixes: e6faee6585 ("hw/riscv: virt: Add optional AIA APLIC support to virt machine")
-Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
----
- hw/riscv/virt.c         | 2 ++
- include/hw/riscv/virt.h | 1 +
- 2 files changed, 3 insertions(+)
+Patches been sent that fix the QEMU issues [0], but a couple of them
+need to be fixed in the kernel's dt-bindings. The first patches add
+compatibles for "riscv,{clint,plic}0" which are present in drivers and
+the auto generated QEMU dtbs. The final patch adds some new ISA strings
+which needs scruitiny from someone with more knowledge about what ISA
+extension strings should be reported in a dt than I have.
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 6c61a406c4..8b2978076e 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -465,6 +465,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
-     qemu_fdt_add_subnode(mc->fdt, plic_name);
-     qemu_fdt_setprop_cell(mc->fdt, plic_name,
-         "#interrupt-cells", FDT_PLIC_INT_CELLS);
-+    qemu_fdt_setprop_cell(mc->fdt, plic_name,
-+        "#address-cells", FDT_PLIC_ADDR_CELLS);
-     qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
-                                   (char **)&plic_compat,
-                                   ARRAY_SIZE(plic_compat));
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 984e55c77f..be4ab8fe7f 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -111,6 +111,7 @@ enum {
- 
- #define FDT_PCI_ADDR_CELLS    3
- #define FDT_PCI_INT_CELLS     1
-+#define FDT_PLIC_ADDR_CELLS   0
- #define FDT_PLIC_INT_CELLS    1
- #define FDT_APLIC_INT_CELLS   2
- #define FDT_IMSIC_INT_CELLS   0
+Thanks to Rob Herring for reporting these issues [1],
+Conor.
+
+To reproduce the errors:
+./build/qemu-system-riscv64 -nographic -machine virt,dumpdtb=qemu.dtb
+dt-validate -p /path/to/linux/kernel/Documentation/devicetree/bindings/processed-schema.json qemu.dtb
+(The processed schema needs to be generated first)
+
+0 - https://lore.kernel.org/linux-riscv/20220805155405.1504081-1-mail@conchuod.ie
+1 - https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
+
+Conor Dooley (3):
+  dt-bindings: timer: sifive,clint: add legacy riscv compatible
+  dt-bindings: interrupt-controller: sifive,plic: add legacy riscv
+    compatible
+  dt-bindings: riscv: add new riscv,isa strings for emulators
+
+ .../sifive,plic-1.0.0.yaml                     |  5 +++++
+ .../devicetree/bindings/riscv/cpus.yaml        |  2 ++
+ .../bindings/timer/sifive,clint.yaml           | 18 ++++++++++++------
+ 3 files changed, 19 insertions(+), 6 deletions(-)
+
+
+base-commit: 42d670bda02fdba0f3944c92f545984501e5788d
 -- 
 2.37.1
 
