@@ -1,52 +1,51 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oKpAE-00006U-7x
-	for mharc-qemu-riscv@gnu.org; Sun, 07 Aug 2022 18:54:30 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59720)
+	id 1oKpBF-0001Rf-LA
+	for mharc-qemu-riscv@gnu.org; Sun, 07 Aug 2022 18:55:33 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59848)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oKpAC-00005T-9J; Sun, 07 Aug 2022 18:54:28 -0400
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f]:46010)
+ id 1oKpBE-0001Q9-55; Sun, 07 Aug 2022 18:55:32 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:33743)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oKpAA-00024H-Ek; Sun, 07 Aug 2022 18:54:27 -0400
-Received: by mail-pf1-x42f.google.com with SMTP id z187so6674447pfb.12;
- Sun, 07 Aug 2022 15:54:25 -0700 (PDT)
+ id 1oKpBC-0002Si-I3; Sun, 07 Aug 2022 18:55:31 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id w10so7107214plq.0;
+ Sun, 07 Aug 2022 15:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=43oYjQak69cnmr5Xx/vXh1gHTmr9iNtXaxQK+muUYYU=;
- b=KvGN2K7swFbeuQIbSlviMmEPo0nwIHFD4it3ZK1jHFkL0Hq7cdFXkOEHPdj3Gy/yl8
- phNJh/j1405m7JNK9/v5VOk3DZxrjx7No0EGyeakivCVhb/FOI0d4JV4urRhlJ/kpwtp
- yy6KTPOejyJ38gZhPwQie2JXLr/JI99v2uyDNMUCGeEu3mV7f/+qlUC1n1aCqTEIBuy0
- e7+tdH5q1vcg3cIUQwHWVxNS56/jwiweKiOcdfcC69xVeJ61ht0D61FTEvqAA13H1bXY
- uc5UafhTmvgW6T1N/nwERpzfSGKOELu77y54x7wRtVNaQl1FmbX6y1fIz5Owu3EvmUyF
- znwQ==
+ bh=FgYajevSy5JJOV/dvjp7vruzarNh37WfAGf2aLFXqgE=;
+ b=ACcFkSGhwqsqXioVrnxFq+RHZwtSA3xfQ79I7MuOg3je8Uo8iu29m3bFj3LxCAbnzw
+ Yn0JKEb+bYOZFF+p14jUyWBSnlMtB9HwEC5eaEGz5/Rmwr5sg4SCNNZc83pOihcjCuBS
+ Nbd051rtoMLWuW1zXCH4+kNJxnZT9+/jM/OSRrcSHnbD/IPRa3Z6fs/bYaTZnIrr8Nmn
+ 6Zp+TdarbryM4360O6H0LtSF2X/NHPmcHxrZhBM0mUfj2veudWxkAXGUIAbHMUyIVZDo
+ K9QjLWBfzRTNEl8pPdsRa6FzH3JY+GI4iap68m0g/fpE2lbFxHMvlgNdM7ohys3UFdV9
+ 4ioA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=43oYjQak69cnmr5Xx/vXh1gHTmr9iNtXaxQK+muUYYU=;
- b=2bMuVJDKyY8VbWIRaiX0rPVRQOduFs3PQCmH7BmMCJy4Kk0oPT4JTyUvTjtgsDG070
- 52AVxUcuyvebrkKnW07K98RNbKagVJJlOuNDMwo37QF3Ts5amN5CQncZlz1Ntli7M6EE
- 2ryWEDL732xCjmgCv57OP1MTm8Cltlbbzr90voRdJQVbfcs8Xl+FGfoJ56m8RP1AAus3
- ZgiMvABjVd1wQcqMwKyY8orAaUW3t7uQijydto08AwAKRW4itHvy/Zq5m5rYEl+hg8rN
- D1SF47uwIpsjU6MyFXYt/TFaQ8BGhkhiW5yg4wO6h7z5q9nzXbKaGhe4q3c3kc048a3p
- L/AQ==
-X-Gm-Message-State: ACgBeo1J77r2QpjBooQkR1xdnuMUih5eAH47MWOGRoqPFQXo+Q26iSQ6
- hOEC8mvPKih3FaHw6TPPLUj/CHrG8689UOzWgoY=
-X-Google-Smtp-Source: AA6agR6iKY1N6dLXfYAISVMIhHFtzbZ3dlNMytM1cpy71UCmt3XYEGVW8tQ5poHoTcvWnRwLpiSnWnmX+aqjc1X6auA=
-X-Received: by 2002:a63:5f49:0:b0:41d:85a1:c4da with SMTP id
- t70-20020a635f49000000b0041d85a1c4damr1729915pgb.366.1659912864354; Sun, 07
- Aug 2022 15:54:24 -0700 (PDT)
+ bh=FgYajevSy5JJOV/dvjp7vruzarNh37WfAGf2aLFXqgE=;
+ b=6MZuG0SjUSP5bnqZPmw4OLLkqXq9/RjisryEx3Uj4g3X3X4bgMB2706j2kbTwGUoHs
+ Lwm4QLs3pIetr5+ATgVri9jpeNOpCZdf4XHW5uql0VIik/lFrcSW/A8mIFyNYuLXDaOA
+ Q8GLauCiJkQ6zhzc7aEWXxM7rKh1ByZbSIUJSjpbA1Q5jjkamIbBZ26Bw/STVMNHPmVk
+ CcuMqLQYjpnLDgfcsNovb2el5wyo5vdVigDgIBGDKSRUUHueJ7DP6AvP80dGYDx0WYv8
+ 6sVZniONt44mqewAuN77mYipGOI/KfrEIzJ6ve4YUP9rLgyYGk2Do1T42BtgKuxUyEPc
+ LAmQ==
+X-Gm-Message-State: ACgBeo19WPGx6XbHYBkH5CL3OD9S58u2IliRQNb+1pB9wvyZvuCVbkXJ
+ a9nlotgG8VjfRXsuKkUU77LpYsjScn972h5j4s0=
+X-Google-Smtp-Source: AA6agR4Mgwjx8G9tE8+yz7IcX0GIElOKLyDRRuqBHhObSd0d30OhHfKYgCPcdYjlc65+6MWSnTlph9piLPmCczZqlUs=
+X-Received: by 2002:a17:90a:b391:b0:1f3:6c3:392c with SMTP id
+ e17-20020a17090ab39100b001f306c3392cmr26040074pjr.166.1659912928746; Sun, 07
+ Aug 2022 15:55:28 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220805155405.1504081-1-mail@conchuod.ie>
- <20220805155405.1504081-2-mail@conchuod.ie>
-In-Reply-To: <20220805155405.1504081-2-mail@conchuod.ie>
+ <20220805155405.1504081-4-mail@conchuod.ie>
+In-Reply-To: <20220805155405.1504081-4-mail@conchuod.ie>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Aug 2022 08:53:58 +1000
-Message-ID: <CAKmqyKOORP+ciE0ZybCbtqFV5N4g6B8J2JwSrn0fen0zd9RfUg@mail.gmail.com>
-Subject: Re: [PATCH 1/5] target/riscv: Ignore the S and U letters when
- formatting ISA strings
+Date: Mon, 8 Aug 2022 08:55:02 +1000
+Message-ID: <CAKmqyKPv52ZkoJsEqHRJSnQS+ojQehY+PX0e0FN3xSFBYOMPYQ@mail.gmail.com>
+Subject: Re: [PATCH 3/5] hw/riscv: virt: Fix the plic's address cells
 To: Conor Dooley <mail@conchuod.ie>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -54,11 +53,10 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Conor Dooley <conor.dooley@microchip.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- linux-riscv <linux-riscv@lists.infradead.org>, 
- Palmer Dabbelt <palmer@sifive.com>
+ linux-riscv <linux-riscv@lists.infradead.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=alistair23@gmail.com; helo=mail-pf1-x42f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -79,59 +77,58 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Aug 2022 22:54:28 -0000
+X-List-Received-Date: Sun, 07 Aug 2022 22:55:33 -0000
 
-On Sat, Aug 6, 2022 at 2:08 AM Conor Dooley <mail@conchuod.ie> wrote:
+On Sat, Aug 6, 2022 at 2:11 AM Conor Dooley <mail@conchuod.ie> wrote:
 >
-> From: Palmer Dabbelt <palmer@sifive.com>
+> From: Conor Dooley <conor.dooley@microchip.com>
 >
-> The ISA strings we're providing from QEMU aren't actually legal RISC-V
-> ISA strings, as both S and U cannot exist as single-letter extensions
-> and must instead be multi-letter strings.  We're still using the ISA
-> strings inside QEMU to track the availiable extensions, so just strip
-> out the S and U extensions when formatting ISA strings.
+> When optional AIA PLIC support was added the to the virt machine, the
+> address cells property was removed leading the issues with dt-validate
+> on a dump from the virt machine:
+> /stuff/qemu/qemu.dtb: plic@c000000: '#address-cells' is a required property
+>         From schema: /stuff/linux/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+> Add back the property to suppress the warning.
 >
-> Signed-off-by: Palmer Dabbelt <palmer@sifive.com>
-> [Conor: rebased on 7.1.0-rc1 & slightly tweaked the commit message]
+> Reported-by: Rob Herring <robh@kernel.org>
+> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
+> Fixes: e6faee6585 ("hw/riscv: virt: Add optional AIA APLIC support to virt machine")
 > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
->  target/riscv/cpu.c | 18 +++++++++++++++++-
->  1 file changed, 17 insertions(+), 1 deletion(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index ac6f82ebd0..95fdc03b3d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1122,7 +1122,23 @@ char *riscv_isa_string(RISCVCPU *cpu)
->      char *p = isa_str + snprintf(isa_str, maxlen, "rv%d", TARGET_LONG_BITS);
->      for (i = 0; i < sizeof(riscv_single_letter_exts) - 1; i++) {
->          if (cpu->env.misa_ext & RV(riscv_single_letter_exts[i])) {
-> -            *p++ = qemu_tolower(riscv_single_letter_exts[i]);
 
-riscv_single_letter_exts doesn't contain S or U, is this patch still required?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
-> +            char lower = qemu_tolower(riscv_single_letter_exts[i]);
-> +            switch (lower) {
-> +                case 's':
-> +                case 'u':
-> +                    /*
-> +                    * The 's' and 'u' letters shouldn't show up in ISA strings as
-> +                    * they're not extensions, but they should show up in MISA.
-> +                    * Since we use these letters interally as a pseudo ISA string
-> +                    * to set MISA it's easier to just strip them out when
-> +                    * formatting the ISA string.
-> +                    */
-> +                    break;
-> +
-> +                default:
-> +                    *p++ = lower;
-> +                    break;
-> +            }
->          }
->      }
->      *p = '\0';
+> ---
+>  hw/riscv/virt.c         | 2 ++
+>  include/hw/riscv/virt.h | 1 +
+>  2 files changed, 3 insertions(+)
+>
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 6c61a406c4..8b2978076e 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -465,6 +465,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+>      qemu_fdt_add_subnode(mc->fdt, plic_name);
+>      qemu_fdt_setprop_cell(mc->fdt, plic_name,
+>          "#interrupt-cells", FDT_PLIC_INT_CELLS);
+> +    qemu_fdt_setprop_cell(mc->fdt, plic_name,
+> +        "#address-cells", FDT_PLIC_ADDR_CELLS);
+>      qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
+>                                    (char **)&plic_compat,
+>                                    ARRAY_SIZE(plic_compat));
+> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+> index 984e55c77f..be4ab8fe7f 100644
+> --- a/include/hw/riscv/virt.h
+> +++ b/include/hw/riscv/virt.h
+> @@ -111,6 +111,7 @@ enum {
+>
+>  #define FDT_PCI_ADDR_CELLS    3
+>  #define FDT_PCI_INT_CELLS     1
+> +#define FDT_PLIC_ADDR_CELLS   0
+>  #define FDT_PLIC_INT_CELLS    1
+>  #define FDT_APLIC_INT_CELLS   2
+>  #define FDT_IMSIC_INT_CELLS   0
 > --
 > 2.37.1
 >
