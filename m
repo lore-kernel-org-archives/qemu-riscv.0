@@ -1,51 +1,52 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oKpBF-0001Rf-LA
-	for mharc-qemu-riscv@gnu.org; Sun, 07 Aug 2022 18:55:33 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:59848)
+	id 1oKpBj-0002Fn-1w
+	for mharc-qemu-riscv@gnu.org; Sun, 07 Aug 2022 18:56:03 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59914)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oKpBE-0001Q9-55; Sun, 07 Aug 2022 18:55:32 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:33743)
+ id 1oKpBh-0002Cf-0Y; Sun, 07 Aug 2022 18:56:01 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c]:46842)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oKpBC-0002Si-I3; Sun, 07 Aug 2022 18:55:31 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id w10so7107214plq.0;
- Sun, 07 Aug 2022 15:55:29 -0700 (PDT)
+ id 1oKpBf-0002Tr-C3; Sun, 07 Aug 2022 18:56:00 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ q7-20020a17090a7a8700b001f300db8677so7510020pjf.5; 
+ Sun, 07 Aug 2022 15:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=FgYajevSy5JJOV/dvjp7vruzarNh37WfAGf2aLFXqgE=;
- b=ACcFkSGhwqsqXioVrnxFq+RHZwtSA3xfQ79I7MuOg3je8Uo8iu29m3bFj3LxCAbnzw
- Yn0JKEb+bYOZFF+p14jUyWBSnlMtB9HwEC5eaEGz5/Rmwr5sg4SCNNZc83pOihcjCuBS
- Nbd051rtoMLWuW1zXCH4+kNJxnZT9+/jM/OSRrcSHnbD/IPRa3Z6fs/bYaTZnIrr8Nmn
- 6Zp+TdarbryM4360O6H0LtSF2X/NHPmcHxrZhBM0mUfj2veudWxkAXGUIAbHMUyIVZDo
- K9QjLWBfzRTNEl8pPdsRa6FzH3JY+GI4iap68m0g/fpE2lbFxHMvlgNdM7ohys3UFdV9
- 4ioA==
+ bh=J35VYfb/k+UHn3LPA5cvyRwQTefgVmN3WoLJbDt7REk=;
+ b=X7HrpkbtFlnom2BYDhOHN1/hcm5nT8vTY9GfQkTFJ6w1muRYq5d6B7NHusUJL7HALl
+ oN5DhwJ+p1vg1/hdLhzym/7R0sUOG1L3wNcqxGx6HaG6nQ7SmMMbcp/pNRDBil2Pb+qO
+ My6fxbo4SsnC5MMUZMPB9bM/DsrxCVh4ktVP7ToiWlluVg0ZxCmAb0prkGevw1ua4/ET
+ 4BpOwxdjKfNtW9QK/mYAmHuZz2ST5OLSwbNAx+yu6jHGwx7IwHoQrGcUG3IpBt2x0r6+
+ T/w6nv2ObzbL06Ko+oMUjkvGsyyILXL7K/sRAlx/Y2zPLC3koFKUnpVPoarOzhAL7jXn
+ aR5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=FgYajevSy5JJOV/dvjp7vruzarNh37WfAGf2aLFXqgE=;
- b=6MZuG0SjUSP5bnqZPmw4OLLkqXq9/RjisryEx3Uj4g3X3X4bgMB2706j2kbTwGUoHs
- Lwm4QLs3pIetr5+ATgVri9jpeNOpCZdf4XHW5uql0VIik/lFrcSW/A8mIFyNYuLXDaOA
- Q8GLauCiJkQ6zhzc7aEWXxM7rKh1ByZbSIUJSjpbA1Q5jjkamIbBZ26Bw/STVMNHPmVk
- CcuMqLQYjpnLDgfcsNovb2el5wyo5vdVigDgIBGDKSRUUHueJ7DP6AvP80dGYDx0WYv8
- 6sVZniONt44mqewAuN77mYipGOI/KfrEIzJ6ve4YUP9rLgyYGk2Do1T42BtgKuxUyEPc
- LAmQ==
-X-Gm-Message-State: ACgBeo19WPGx6XbHYBkH5CL3OD9S58u2IliRQNb+1pB9wvyZvuCVbkXJ
- a9nlotgG8VjfRXsuKkUU77LpYsjScn972h5j4s0=
-X-Google-Smtp-Source: AA6agR4Mgwjx8G9tE8+yz7IcX0GIElOKLyDRRuqBHhObSd0d30OhHfKYgCPcdYjlc65+6MWSnTlph9piLPmCczZqlUs=
-X-Received: by 2002:a17:90a:b391:b0:1f3:6c3:392c with SMTP id
- e17-20020a17090ab39100b001f306c3392cmr26040074pjr.166.1659912928746; Sun, 07
- Aug 2022 15:55:28 -0700 (PDT)
+ bh=J35VYfb/k+UHn3LPA5cvyRwQTefgVmN3WoLJbDt7REk=;
+ b=K02yV+8xvX/vqcQZHZKe79vsHVbiIlc2OZxx3unXoCWhdl3fkO5AlJJRgrrVwira+7
+ wlBNsBesile2+77ZTG0EVQC3kz7rrf7gL3OFsV48WZGIF7oLAuEMiixLknySkgVWG1KJ
+ URDbF6fpzNalZ+gJo8dbN0l8NjWAz2cgxw1YdobnJTKTjgpO14V5ICgKuoI3868qR/hg
+ dT37p6xurE5Z9qMMxv7L4paaJ5OGZA/gKevF5l1XngBdLDHJKHGz3N7w6vhV3K8j9fzJ
+ /8rho2rZZE7FgKz1XTK3mOrlrfkGC8ndNQYRHSqTG7XJEpMY0TbtDLMpHGOpy3I61LaE
+ d7og==
+X-Gm-Message-State: ACgBeo1hLpi3ybQYeTVlHwFsdTesZ0vr82MCx3tKk+XTLHf65/2hv4Gp
+ 9F8MqE3H0FibwIBnyOxVO3S/E4f4FciwnBg6Omo=
+X-Google-Smtp-Source: AA6agR5vRb9tdgQsI3Fu1w/08lyVQregHr4zyKnVRFkyDEFtxF1wZXMQ5+F/Emzi2XElDWvHoW82YDNkH5B3UtZktuQ=
+X-Received: by 2002:a17:902:e5c8:b0:16f:1511:7575 with SMTP id
+ u8-20020a170902e5c800b0016f15117575mr16374823plf.83.1659912957399; Sun, 07
+ Aug 2022 15:55:57 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220805155405.1504081-1-mail@conchuod.ie>
- <20220805155405.1504081-4-mail@conchuod.ie>
-In-Reply-To: <20220805155405.1504081-4-mail@conchuod.ie>
+ <20220805155405.1504081-3-mail@conchuod.ie>
+In-Reply-To: <20220805155405.1504081-3-mail@conchuod.ie>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 8 Aug 2022 08:55:02 +1000
-Message-ID: <CAKmqyKPv52ZkoJsEqHRJSnQS+ojQehY+PX0e0FN3xSFBYOMPYQ@mail.gmail.com>
-Subject: Re: [PATCH 3/5] hw/riscv: virt: Fix the plic's address cells
+Date: Mon, 8 Aug 2022 08:55:31 +1000
+Message-ID: <CAKmqyKOipk6L56xFYO52JXrW2DFjbfrtXvdm+6=Wjh2H5rxx-Q@mail.gmail.com>
+Subject: Re: [PATCH 2/5] hw/riscv: virt: fix uart node name
 To: Conor Dooley <mail@conchuod.ie>
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -55,8 +56,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
  linux-riscv <linux-riscv@lists.infradead.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -77,22 +78,21 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Aug 2022 22:55:33 -0000
+X-List-Received-Date: Sun, 07 Aug 2022 22:56:01 -0000
 
-On Sat, Aug 6, 2022 at 2:11 AM Conor Dooley <mail@conchuod.ie> wrote:
+On Sat, Aug 6, 2022 at 2:01 AM Conor Dooley <mail@conchuod.ie> wrote:
 >
 > From: Conor Dooley <conor.dooley@microchip.com>
 >
-> When optional AIA PLIC support was added the to the virt machine, the
-> address cells property was removed leading the issues with dt-validate
-> on a dump from the virt machine:
-> /stuff/qemu/qemu.dtb: plic@c000000: '#address-cells' is a required property
->         From schema: /stuff/linux/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
-> Add back the property to suppress the warning.
+> "uart" is not a node name that complies with the dt-schema.
+> Change the node name to "serial" to ix warnings seen during
+> dt-validate on a dtbdump of the virt machine such as:
+> /stuff/qemu/qemu.dtb: uart@10000000: $nodename:0: 'uart@10000000' does not match '^serial(@.*)?$'
+>         From schema: /stuff/linux/Documentation/devicetree/bindings/serial/8250.yaml
 >
 > Reported-by: Rob Herring <robh@kernel.org>
 > Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-> Fixes: e6faee6585 ("hw/riscv: virt: Add optional AIA APLIC support to virt machine")
+> Fixes: 04331d0b56 ("RISC-V VirtIO Machine")
 > Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
@@ -100,35 +100,22 @@ Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Alistair
 
 > ---
->  hw/riscv/virt.c         | 2 ++
->  include/hw/riscv/virt.h | 1 +
->  2 files changed, 3 insertions(+)
+>  hw/riscv/virt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 6c61a406c4..8b2978076e 100644
+> index bc424dd2f5..6c61a406c4 100644
 > --- a/hw/riscv/virt.c
 > +++ b/hw/riscv/virt.c
-> @@ -465,6 +465,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
->      qemu_fdt_add_subnode(mc->fdt, plic_name);
->      qemu_fdt_setprop_cell(mc->fdt, plic_name,
->          "#interrupt-cells", FDT_PLIC_INT_CELLS);
-> +    qemu_fdt_setprop_cell(mc->fdt, plic_name,
-> +        "#address-cells", FDT_PLIC_ADDR_CELLS);
->      qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
->                                    (char **)&plic_compat,
->                                    ARRAY_SIZE(plic_compat));
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index 984e55c77f..be4ab8fe7f 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -111,6 +111,7 @@ enum {
+> @@ -917,7 +917,7 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
+>      char *name;
+>      MachineState *mc = MACHINE(s);
 >
->  #define FDT_PCI_ADDR_CELLS    3
->  #define FDT_PCI_INT_CELLS     1
-> +#define FDT_PLIC_ADDR_CELLS   0
->  #define FDT_PLIC_INT_CELLS    1
->  #define FDT_APLIC_INT_CELLS   2
->  #define FDT_IMSIC_INT_CELLS   0
+> -    name = g_strdup_printf("/soc/uart@%lx", (long)memmap[VIRT_UART0].base);
+> +    name = g_strdup_printf("/soc/serial@%lx", (long)memmap[VIRT_UART0].base);
+>      qemu_fdt_add_subnode(mc->fdt, name);
+>      qemu_fdt_setprop_string(mc->fdt, name, "compatible", "ns16550a");
+>      qemu_fdt_setprop_cells(mc->fdt, name, "reg",
 > --
 > 2.37.1
 >
