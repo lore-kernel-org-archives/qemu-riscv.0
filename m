@@ -1,157 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oL5OV-0004RU-5Z
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Aug 2022 12:14:19 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:48862)
+	id 1oL6RI-000523-FO
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Aug 2022 13:21:16 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:33256)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oL5OT-0004Oh-Iq; Mon, 08 Aug 2022 12:14:17 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123]:43715)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oL5OP-0002yi-SN; Mon, 08 Aug 2022 12:14:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1659975253; x=1691511253;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=TGri49NmiBwHC5oXXFJ4ItOQxdnonoIWczQwV+GrjZ0=;
- b=kMyuoNdMR7O47fYrru388sv/IN8NW57NXCFqsZrtxxvMuqfH9E9YvEX5
- xztFa5I5FTvGWW4ILG5yK1bW40Rylx10ft1PdIe+bbs4ifVL2rAsCCTK+
- vBL8OuOfqam0bcOR4yf/bu+dv3DjPTbIjXO9BJxBYEUx2+jVqiQa2hY3V
- T8DH1A9tJ4MAlreX55tDvrM+Oi8AyOKq+zOxOPn5KtSoo4nBe6ZmeAWTT
- 9dkuz01VNnQxuRnk2eRZaepYZtH+eNcCT9ZXOXuLqpH1hxtgPnSyj+G5l
- Jgkgy05lFBtRtlWtgxNoR6I/Z/bd1xJTJ+P7fdYoRMdu6kLib9+ZtpANb g==;
-X-IronPort-AV: E=Sophos;i="5.93,222,1654585200"; d="scan'208";a="108069050"
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa6.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 08 Aug 2022 09:14:09 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.28; Mon, 8 Aug 2022 09:14:07 -0700
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.87.71) with Microsoft SMTP Server
- (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.17 via Frontend
- Transport; Mon, 8 Aug 2022 09:14:05 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eb7pjwwso6yw9EFmeE3bS8ejIOe9K7BrImyJUs4HEBrZVN73F91/iue6DG6ba/GF0sZHt5XYPna9+HA3HNmy3Bq01IB8qxEFea6K3dTGqWamdPNFRASXkKg9mk8CxXMz+HN/UwMVz3UMF8eJpspHHTk8IZ+lpCjKBpJsn//v2bxeJKVQJyD5JELuEFN34tbDWa2uj5/RhgoCT/zvuua8lCG/9LfnUfDSGaKbjg88O8WJXKO1WYJRoV8ZuXfXp1RrbfflKpwckAdGloYuoIFyQvZoGiX1vR7Iba7kDdDckRnmmkcZCSfOCb/ndKVeAUUAAHQVicTveCU1s+BV8QTRmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TGri49NmiBwHC5oXXFJ4ItOQxdnonoIWczQwV+GrjZ0=;
- b=numyfkfDgCuccecgg5xqCt2y49qb2OsIAF964yj9JPCbLZic/R/7jOaroK/EXbd53IMdkM++pEbpjNhkA3saqo0PF8QITmK+Mms6dqTUG8z2e92unaChyaJAP3EKLQhf0Us6Dtv8AsGo0ZCqn+U814a9h++KvezjQsvmuM8ok7SwFonIy68eDrSew06XBrz2xolFzaAcrTVwKQ0VZlsGX7W0PngtGcGToX2IfW31Z3JG69bj+AWYFQhENXQPmF5vJ0JOSiXU5T1R0VafY9COZWlM+17hBr1LXawB8Ul1w5xKBeDzDjQObPrvXbKLSFDrwTdJvcn1hgCStbAc2FLdgQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1oL6RC-0004yY-TN
+ for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 13:21:11 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:55248)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1oL6R9-0004hM-TZ
+ for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 13:21:10 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id b4so9395817pji.4
+ for <qemu-riscv@nongnu.org>; Mon, 08 Aug 2022 10:21:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector2-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TGri49NmiBwHC5oXXFJ4ItOQxdnonoIWczQwV+GrjZ0=;
- b=DaIyu0YN1bl8kZ9zNqFKezfW0AizhgDL4Wfz971KTUpKxITSc/9e0GXOSpQu8tXjoByRTBZ/n7MsK6PicpZk+z/xwvHX7Wc/aIupwQkodrNb2fGTjI5GzRLJdIgM+YhYwUL/GmpIw66yn1CblXmz1niGPKpZwAjLFRTB27rOVFI=
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com (2603:10b6:303:99::15)
- by SN6PR11MB2959.namprd11.prod.outlook.com (2603:10b6:805:db::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.16; Mon, 8 Aug
- 2022 16:14:03 +0000
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::ac89:75cd:26e0:51c3]) by CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::ac89:75cd:26e0:51c3%8]) with mapi id 15.20.5504.020; Mon, 8 Aug 2022
- 16:14:03 +0000
-From: <Conor.Dooley@microchip.com>
-To: <research_trasio@irq.a4lg.com>, <mail@conchuod.ie>, <palmer@dabbelt.com>, 
- <alistair.francis@wdc.com>, <bin.meng@windriver.com>
-CC: <robh@kernel.org>, <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>,
- <linux-riscv@lists.infradead.org>, <palmer@sifive.com>
-Subject: Re: [PATCH 1/5] target/riscv: Ignore the S and U letters when
- formatting ISA strings
-Thread-Topic: [PATCH 1/5] target/riscv: Ignore the S and U letters when
- formatting ISA strings
-Thread-Index: AQHYqOO1TG25AQQCRk+oHxWTs2yK5a2lHi0AgAATygA=
-Date: Mon, 8 Aug 2022 16:14:02 +0000
-Message-ID: <fe4bc495-14a3-205d-480d-083c2a81fd13@microchip.com>
-References: <20220805155405.1504081-1-mail@conchuod.ie>
- <20220805155405.1504081-2-mail@conchuod.ie>
- <0f453024-1d1e-105d-855b-234c3c8fedbb@irq.a4lg.com>
-In-Reply-To: <0f453024-1d1e-105d-855b-234c3c8fedbb@irq.a4lg.com>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 0cc7b991-2713-4456-f39f-08da795902ae
-x-ms-traffictypediagnostic: SN6PR11MB2959:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 0httaRZxLixktlkn8qfslrPyydN1GpQABZcrGJOkvjvhNP3zgVyzU1iBsO7Wit+GR4YCaCAaI11tSBUqMgOSiPlZlD2Dj/98jrXRZHb989kUQAWJtBoN3V+V8c0T2gWrrJ9TV/qjnaYpvoWl8mWfyQPgN5IS91Hs+BZ/W+DjiEM3lDQ2GOBnLEOhJmbXiadh3JSB29wvqstKGXybsP0PzsswEzJyrE6i6+C9kE6+xwN9p9SKuqPT9l26ozgo6AwRciUYzqbA7FI/idtnO6M3NZ+FcQFMvWEQxEVCLB08BHqI6upkrdZV4RP/rS92Zukh+8+GEiaDryvdE/B1jC/8vhUQYYdbHeH+VjxgDIkvw18nbtFI5E1C4uGryGY8qhpxwZm/fQf4YZwsrXGwMeInGLc6QhjqmuJezvhQnwKAl3NS7armBViEQN6uLWjgMGwxgy2o/jzjCesqKEUsAFjMuR3O9si07ScawidrlhvIZk01QSeUjIyOfTQzvDGa9LAx8UM9HAxBK+vGc25DF2izT2idpeyWpBioX0NXjS18q5wPYj6Rg3stSbfNd2lIis+nFBXQ+surdz66kpxS2wCrnbpdhV3VUAwp8EuwUOi6GyKHjBD+hgXWzZdfLDU+C0X6OAqIAhmt2mAqCiQkQzNUnihwzg5i6l+leKqJQHI8ew0BgnWgxin3BDbboxxGN6Y7Yqa5eaegk0/oBn3vn3GhpAmRGOLw7HhpSC4cRwN6gTY+u7v41tGs6rChiW4LeMx5XCtGryz3O6q7e0RvJHQi8zIKQ3c7gXzG15uN/g95jnZ6nDXKw2XzRC9iln9JxGgzTDvUrK4nx7MCMPMNC6c0tHsGugO+UrqnhJTKG+Yb1nnzrrAXS9+joxChUHdg0tnC
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CO1PR11MB5154.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(136003)(346002)(366004)(376002)(396003)(39860400002)(4326008)(8676002)(91956017)(66946007)(66556008)(66476007)(76116006)(64756008)(5660300002)(316002)(66446008)(7416002)(2906002)(8936002)(122000001)(38100700002)(38070700005)(41300700001)(36756003)(31696002)(478600001)(71200400001)(6486002)(110136005)(54906003)(26005)(86362001)(83380400001)(53546011)(6506007)(6512007)(186003)(2616005)(31686004)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VWRIZER5ajFqZ3lCdDN1WWNXd0MzS1dENWpHU212dXNFOUgxeTg1emxpWXcz?=
- =?utf-8?B?SS9uVjJUN0dzOS9wRWg1Q3dvVWRtU29qK3Q0TnBhdnVKS1BEMnZuMC82clp5?=
- =?utf-8?B?RVZLWjRwUVA3Wk1KalhvTGw0cnBHdGJDNFpDaEVKbkFQZFE5NkQrOC9GbGk4?=
- =?utf-8?B?Z0VTUFBNV2d5eVNjZWoyVmNwL0Vod0J5VjdjSUJGQ1IvOG9tSTcwSUMxSEs3?=
- =?utf-8?B?ZnVSa3pKT0c0ODdBMUQzU3Z1cklhM0ZkT21xVkZsdTNycWVVSjhsVUpYYUN4?=
- =?utf-8?B?SHFyQkxOdXlTY3hERDJ5TEZQbTg0T29MMUNxQ2JiTHpTSHkvNzJOVU50eWNl?=
- =?utf-8?B?ZFRIeEcwTzRKUmJiOTdSZHRRZnEvTnNxaGpHRFdiMElwTEpGKzZ2MytBQTF1?=
- =?utf-8?B?ODYyZi8yUXRadmJlVHRhYlZCMGRyblJONm1BNitzcnRjR1V1aDlpM3hvSUdi?=
- =?utf-8?B?Y3BXcEdEeE5VRjNpTGhxQnVRVjBndXFLaXkrb3I4N040eUhwaEd5TWZhbU1S?=
- =?utf-8?B?VUVYbDBYeFd2dHNmS2JCOVU5OTB3ZHRvTGw4Nnd1MkhJTVQzSWF2VmxuTGRI?=
- =?utf-8?B?TUlKZHVxZjVYSnI1bDAvem04Z0o2TSszNE1CcWxvRW5sRmx1cWVhN1lnMW50?=
- =?utf-8?B?ajJYSzcrTWtKZkg0MTBRSU44QmlacVp4TVZWcVdSbVE2Q1pTZ3pRR0s1S0gr?=
- =?utf-8?B?VDhjWGU2QXl2Qmw2bVBGK1ZiZnZvYk9YYlRyNllmY3Zsc0pQcmRJSWQ4Q0Y5?=
- =?utf-8?B?aHRzQjZ1SHZtQTdpRzR6YURVUGR2NW1tRThIaDhyZlVSckdMeWdsbEJpVTkz?=
- =?utf-8?B?YWh6ajlJOVp5bjQ5Y0dOc2hmakQ5YjhrOUdkK2tuS2tXN1IzQ2hpUU5vUnZl?=
- =?utf-8?B?L253OWhLTWtMK3Y0NGI1R0xmaCtSbHRqYzJYd0U3NWhnSUt4c1RxOXZLYUM2?=
- =?utf-8?B?S1pwbnNBZUtPSkxWSW9JVFdsYlNTTXRSNWVOWEpQZHF5Znk3N21UenVhMzd3?=
- =?utf-8?B?REZaK3VSWUtnMG1zL2hVSm5heDA1VHVEaDM1dzZoL0tNSzV4T2Y2MXowMkYw?=
- =?utf-8?B?U1JEbyttWWRHeWJtT1NkTGVmVjhydWE5cXh0bmwrU0FqL0tCQXNEUEtabUJz?=
- =?utf-8?B?aXd1VitSZHNYeXBSZzlYRkhFOXJmTnhpOTVpQ3Mxd3dZUHZ0QldhTzlManpn?=
- =?utf-8?B?MXE5Q253MHBNakpIUkkrbEZsekpFdnBDQVFvYUJWK0lRdGR5THNRUEM2dXJL?=
- =?utf-8?B?THNnU1hlaUV1ajl4WlhrT1ZVY1JvaDY2S0NqU3RPNW5yL2g3WGY1QUdsYmJp?=
- =?utf-8?B?Q0J0eVB1cUs4OE1XTUFFUzBLZk1VeU1CampyN2dUSHJLRmdBMFJTTzhvQWFz?=
- =?utf-8?B?UmFwK0VhVUVmQkRHL3dhQ0FhQWszVzNSdG5Lb2crWEsxSjBGWkwzbE8yaCtz?=
- =?utf-8?B?MndFTHRXTUFwUTdNbjVKL0phNUgrU0hsZ21CVTE5MmVMQ3pUR0wwKy91QU00?=
- =?utf-8?B?c05ubUdONDhUWGRGa24wYzJzdE1rS25tQmt0aU5aS0ZXTHlvVlZDVnl5STZE?=
- =?utf-8?B?QXR4OVQwQmlCdEJTQlljR3JENjd6Sm1ZQnZqckpqN2hHNUg1Y1oySjB4bU45?=
- =?utf-8?B?V1RPV0NuWUVER1NpUVFiTC9uTDlWdEZrUjNYcythN2xRVlBtZlczNEhFd3RB?=
- =?utf-8?B?YVdjNVJiaEIxb3pUVThHOTNmM0NoZ0NuM1YvbXVTRFVpQnBScCt1VHg1b3Rr?=
- =?utf-8?B?VFdycWNkdDMzaHNXRTVpNlAra01CT0hyUmxsRlA4WEJMcDh3dE9mRmY0MktZ?=
- =?utf-8?B?M05QTlNwWTg0QXpIbEZpdWJuZ2tKaCtmUHZBb1RPeUpEVVE1UWtIa0FaSUNP?=
- =?utf-8?B?SEpwOTUvd2w0R0gxUStRZ2lRbm14MmRIWmVlNGZoMUVubWZOdmk5VDZSSkhm?=
- =?utf-8?B?V0QxK2ExTmhnVWtXbTVpSVJkRHpVemtHQ3k4SzJRTCszbW5veUFZU2tBK2RL?=
- =?utf-8?B?Si9zQzJrcEhaVkZzZlB4SVJiRUlOQUpLZ1luejNWZmtFb2Q2cFFZdUk2QmZw?=
- =?utf-8?B?L0tsbU5GUkJEdSthdzh0M3RsYVZzdVBJK1lEUTg4cU5KTHNZK0VZSXN4TVAz?=
- =?utf-8?Q?BdsUXJVAL2B42mCGVMUgDr3h2?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <1B189610C02BF945BE75E9732EB60672@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=tViUXqtVlEtIcRhKVxunCcBkR6Y/V7elu9ceNg5z3UE=;
+ b=1m2j6Rcw7Ch9aZd+Wq1pzJkm7h3QJ1ZiutTWd/GAioMisdfzeE6e0c7+rAr6gP8Q/C
+ jZdVuorUq07KLsrDf5xdFzQtcSjLasslYCkUwInRnLVU98gX4gWgE1trmbuYnQMLMWzH
+ njI+LJfyyy9cQZsRDAiEAgGno7TwKkZ6jywFItzWZUP9XuRRwct8jAdeyfNtVh8nuPD4
+ HJ8rQj9ec7CazZbgzCEiIkOabA04xHDjOVBKmg3xRBlmG57YMicm/yj5DKJoVISX9PJO
+ XTCmgh6V1HsCtZLkwH87XJlYvEEhUaDW7gT0M0TR3HcyQCQn9I4hzi3wN3e+BQmBD3gb
+ g2Tg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=tViUXqtVlEtIcRhKVxunCcBkR6Y/V7elu9ceNg5z3UE=;
+ b=ljDLtm2sLGxNjIkyFkjALsf3Lb4Pz1CvrY2iwhqCcms/OxN1Sn6+/Oz8kZnla6A1Ui
+ rVltop9HyBZiXgtkgPH0kTdyQ/MU/PvkrVc7FKdeF9GEC/yovn2njyJTSyrOQqZ9/2H8
+ dUodpmqXEqA3aYPZmu3PkHN44TI3CT/MZzMsBys+DhVr7SHRtNm1sjdiaVUGJ6Nq7XkJ
+ 8BlEfty3IIxCHZVedSY83jsAz3Xt8CT4kQ9Bl3MTbfiG5DCDSPeJcp5DIuedNOj2y/XV
+ 9mUlUin971K9NzWFjJCaDvM2U/BdKBqhjec+/P6QtJ/2PAyZbpZnOIryIekk3vl93Ib4
+ EqfQ==
+X-Gm-Message-State: ACgBeo3ovV8gcWHdKuJPa/tLUUdxi4EEx0ojOK5H+fd5GgVBXTTm4bzp
+ L5/uFLZTay4zQcXpWtRzn/AdJMySQQgAVNI1ml2lyg==
+X-Google-Smtp-Source: AA6agR49asHQQIvrfgSw+MCVcbJtuOj6YXc+A5HGkTrsBGPU+23Mi9bvbIqKV6v11XHuIpj6V+7S2SG+5t1kJ/ggVQA=
+X-Received: by 2002:a17:902:7845:b0:16e:ea31:3354 with SMTP id
+ e5-20020a170902784500b0016eea313354mr19153697pln.17.1659979265134; Mon, 08
+ Aug 2022 10:21:05 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5154.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0cc7b991-2713-4456-f39f-08da795902ae
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Aug 2022 16:14:02.9948 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: qDQYIBRoDy9nzjdpbPIacpTkYpI0uXygkQwDi+58v8v55wd3ROzqKoLxews4YwDQy/2cFUgXxc0LbuMQwXsGbVKqLHKz9a2Y/0IB7S5mUSc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2959
-Received-SPF: pass client-ip=68.232.154.123;
- envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+References: <20220804014240.2514957-1-atishp@rivosinc.com>
+ <20220804014240.2514957-4-atishp@rivosinc.com>
+ <c8406f96-4bf7-aee0-71f0-3758c6ed4c97@iscas.ac.cn>
+In-Reply-To: <c8406f96-4bf7-aee0-71f0-3758c6ed4c97@iscas.ac.cn>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Mon, 8 Aug 2022 10:20:54 -0700
+Message-ID: <CAHBxVyE+mHSaDHEOS+4RwL+qCY4WLNuxUguSmL5p9m-OkbMQCA@mail.gmail.com>
+Subject: Re: [PATCH v8 3/3] target/riscv: Add vstimecmp support
+To: Weiwei Li <liweiwei@iscas.ac.cn>
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="0000000000006ee78405e5be0a71"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -165,36 +76,826 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2022 16:14:17 -0000
+X-List-Received-Date: Mon, 08 Aug 2022 17:21:12 -0000
 
-T24gMDgvMDgvMjAyMiAxNjowMywgVHN1a2FzYSBPSSB3cm90ZToNCj4gSSBhZ3JlZSB3aXRoIEFs
-aXN0YWlyLiAgKipJKiogcmVtb3ZlZCAnUycgYW5kICdVJyBmcm9tIHRoZSBJU0Egc3RyaW5nDQo+
-IGFuZCBpdCBzaG91bGQgYmUgd29ya2luZyBpbiB0aGUgbGF0ZXN0IGRldmVsb3BtZW50IGJyYW5j
-aCAoSSB0ZXN0ZWQpLg0KDQpZZWFoLCBJIHNhdyB3aGF0IHlvdSBhcyBJIGxvb2tlZCBhdCB0aGUg
-Y29tbWl0IGxvZyB3aGlsZSB0cnlpbmcgdG8NCnVuZGVyc3RhbmQgd2h5IHRoZXJlIHdlcmUgaW52
-YWxpZCBzdHJpbmdzIGFwcGVhcmluZyB3aGVuIHRoZSBjb2RlDQpsb29rZWQgbGlrZSBpdCB3YXMg
-aW1wb3NzaWJsZS4gQ2VydGFpbmx5IEkgZm91bmQgaXQgdmVyeSB2ZXJ5IG9kZC4NCkkgZGlkbid0
-IGp1c3QgcmV2aXZlIGEgMiB5ZWFyIG9sZCBwYXRjaCB3aXRob3V0IHRha2luZyBhIGxvb2sgYXQN
-CnRoZSBjb2RlLg0KDQoNCj4gQmVzaWRlcywgdGhpcyBmdW5jdGlvbiBhbG9uZSBnZW5lcmF0ZXMg
-dGhlIElTQSBzdHJpbmcgZm9yIERUQiBhbmQNCj4gdGhlcmUncyBubyB3YXkgc3VjaCBJU0Egc3Ry
-aW5ncyB3aXRoIGludmFsaWQgJ1MnIGFuZCAnVScgY2FuIGJlDQo+IGdlbmVyYXRlZC4gIEl0J3Mg
-ZGVmaW5pdGVseSBhIGJlaGF2aW9yIG9mIFFFTVUgNy4wIG9yIGJlZm9yZS4NCg0KSG1tLCBpdCB3
-b3VsZCBzZWVtIHRoYXQgeW91J3JlIHJpZ2h0IC0gSSBoYXZlIHJldGVzdGVkIG9uIGEgZnJlc2gN
-CmNsb25lLiBJIGRpZCBjaGVja291dCB2Ny4xLjAtcmMxIGJlZm9yZSBydW5uaW5nIHRoZSBmaXJz
-dCBidWlsZCB0aGF0DQpJIHNhdyB0aGUgaW52YWxpZCBzdHJpbmcgb24gYXMgSSdkIGJlZW4gb24g
-c29tZSBoYWNrZWQgdXAgJiBmb3NzaWxpc2VkDQp2ZXJzaW9uIHByaW9yIHRvIHRoYXQuIFBlcmhh
-cHMgc29tZSBidWlsZCBhcnRpZmFjdHMgd2VyZSBub3QgY29ycmVjdGx5DQpyZW1vdmVkLCBjb25z
-aWRlciBtZSBxdWl0ZSBjb25mdXNlZCEgSSBkbyByZWNhbGwgdGhlIGNvbmZpZ3VyZSBzY3JpcHQN
-CnNheWluZyBzb21ldGhpbmcgYWJvdXQgbXkgYnVpbGQgZGlyZWN0b3J5IHdoZW4gSSBraWNrZWQg
-aXQgb2ZmLCBzbw0KaXQgaXMgbGlrZWx5IGRvd24gdG8gdGhhdC4NCg0KVW5mb3J0dW5hdGVseSBt
-eSBiYXNoIGhpc3RvcnkgaXMgb3V0IG9mIG9yZGVyIHNvIEkgd2lsbCBub3QgYmUgYWJsZSB0bw0K
-cmVwbGljYXRlIHRoZSBjb25kaXRpb25zLCBoYXZpbmcgbWFueSB0ZXJtaW5hbHMgb3BlbiBkb2Vz
-IGhhdmUgaXQncw0KZG93bnNpZGVzLg0KDQo+IFBsZWFzZS4gUGxlYXNlIG1ha2Ugc3VyZSB0aGF0
-IHlvdSBhcmUgdGVzdGluZyB0aGUgcmlnaHQgdmVyc2lvbiBvZiBRRU1VLg0KDQpIZWguIFBsZWFz
-ZSwgcGxlYXNlIGdpdmUgbWUgc29tZSBhbGxvd2FuY2UgZm9yIHJlYXNvbmFibHkgYmVsaWV2aW5n
-IEkNCndhcyBpbiBmYWN0IG9uIHRoZSBsYXRlc3QgcWVtdS9tYXN0ZXIgYWZ0ZXIgY2hlY2tpbmcg
-aXQgb3V0IGFuZCBidWlsZGluZyENCg0KSSBndWVzcyB0aGlzIHBhdGNoIGNhbiB0aGVuIGJlIHNh
-ZmVseSBpZ25vcmVkIDopDQpHbGFkIHRvIGhhdmUgY2xlYXJlZCB0aGlzIHVwIGFzIEkgd2FzIHJh
-dGhlciBjb25mdXNlZCBieSB3aGF0IEkgc2F3Lg0KVGhhbmtzIFRzdWthc2EvQWxpc3RhaXIuDQoN
-Cg==
+--0000000000006ee78405e5be0a71
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Aug 7, 2022 at 6:50 PM Weiwei Li <liweiwei@iscas.ac.cn> wrote:
+
+>
+> =E5=9C=A8 2022/8/4 =E4=B8=8A=E5=8D=889:42, Atish Patra =E5=86=99=E9=81=93=
+:
+> > vstimecmp CSR allows the guest OS or to program the next guest timer
+> > interrupt directly. Thus, hypervisor no longer need to inject the
+> > timer interrupt to the guest if vstimecmp is used. This was ratified
+> > as a part of the Sstc extension.
+> >
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> >   target/riscv/cpu.h         |   4 ++
+> >   target/riscv/cpu_bits.h    |   4 ++
+> >   target/riscv/cpu_helper.c  |  11 ++--
+> >   target/riscv/csr.c         | 102 ++++++++++++++++++++++++++++++++++++=
+-
+> >   target/riscv/machine.c     |   1 +
+> >   target/riscv/time_helper.c |  16 ++++++
+> >   6 files changed, 133 insertions(+), 5 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 4cda2905661e..1fd382b2717f 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -312,6 +312,8 @@ struct CPUArchState {
+> >       /* Sstc CSRs */
+> >       uint64_t stimecmp;
+> >
+> > +    uint64_t vstimecmp;
+> > +
+> >       /* physical memory protection */
+> >       pmp_table_t pmp_state;
+> >       target_ulong mseccfg;
+> > @@ -366,6 +368,8 @@ struct CPUArchState {
+> >
+> >       /* Fields from here on are preserved across CPU reset. */
+> >       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
+> > +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
+> > +    bool vstime_irq;
+> >
+> >       hwaddr kernel_addr;
+> >       hwaddr fdt_addr;
+> > diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> > index ac17cf1515c0..095dab19f512 100644
+> > --- a/target/riscv/cpu_bits.h
+> > +++ b/target/riscv/cpu_bits.h
+> > @@ -257,6 +257,10 @@
+> >   #define CSR_VSIP            0x244
+> >   #define CSR_VSATP           0x280
+> >
+> > +/* Sstc virtual CSRs */
+> > +#define CSR_VSTIMECMP       0x24D
+> > +#define CSR_VSTIMECMPH      0x25D
+> > +
+> >   #define CSR_MTINST          0x34a
+> >   #define CSR_MTVAL2          0x34b
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 650574accf0a..1e4faa84e839 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -345,8 +345,9 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env)
+> >   {
+> >       uint32_t gein =3D get_field(env->hstatus, HSTATUS_VGEIN);
+> >       uint64_t vsgein =3D (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0=
+;
+> > +    uint64_t vstip =3D (env->vstime_irq) ? MIP_VSTIP : 0;
+> >
+> > -    return (env->mip | vsgein) & env->mie;
+> > +    return (env->mip | vsgein | vstip) & env->mie;
+> >   }
+> >
+> >   int riscv_cpu_mirq_pending(CPURISCVState *env)
+> > @@ -605,7 +606,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu,
+> uint64_t mask, uint64_t value)
+> >   {
+> >       CPURISCVState *env =3D &cpu->env;
+> >       CPUState *cs =3D CPU(cpu);
+> > -    uint64_t gein, vsgein =3D 0, old =3D env->mip;
+> > +    uint64_t gein, vsgein =3D 0, vstip =3D 0, old =3D env->mip;
+> >       bool locked =3D false;
+> >
+> >       if (riscv_cpu_virt_enabled(env)) {
+> > @@ -613,6 +614,10 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu,
+> uint64_t mask, uint64_t value)
+> >           vsgein =3D (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
+> >       }
+> >
+> > +    /* No need to update mip for VSTIP */
+> > +    mask =3D ((mask =3D=3D MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
+> > +    vstip =3D env->vstime_irq ? MIP_VSTIP : 0;
+> > +
+> >       if (!qemu_mutex_iothread_locked()) {
+> >           locked =3D true;
+> >           qemu_mutex_lock_iothread();
+> > @@ -620,7 +625,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu,
+> uint64_t mask, uint64_t value)
+> >
+> >       env->mip =3D (env->mip & ~mask) | (value & mask);
+> >
+> > -    if (env->mip | vsgein) {
+> > +    if (env->mip | vsgein | vstip) {
+> >           cpu_interrupt(cs, CPU_INTERRUPT_HARD);
+> >       } else {
+> >           cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index e18b000700e4..9da4d6515e7b 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -829,17 +829,100 @@ static RISCVException sstc(CPURISCVState *env,
+> int csrno)
+> >       return smode(env, csrno);
+> >   }
+> >
+> > +static RISCVException sstc_hmode(CPURISCVState *env, int csrno)
+> > +{
+> > +    CPUState *cs =3D env_cpu(env);
+> > +    RISCVCPU *cpu =3D RISCV_CPU(cs);
+> > +
+> > +    if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    if (env->priv =3D=3D PRV_M) {
+> > +        return RISCV_EXCP_NONE;
+> > +    }
+> > +
+> > +    if (!(get_field(env->mcounteren, COUNTEREN_TM) &
+> > +          get_field(env->menvcfg, MENVCFG_STCE))) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    }
+> > +
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        if (!(get_field(env->hcounteren, COUNTEREN_TM) &
+> > +              get_field(env->henvcfg, HENVCFG_STCE))) {
+> > +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+> > +        }
+> > +    }
+> > +
+>
+> I think this check on hcounteren and henvcfg should be added to sstc
+> predicate, not here.
+>
+> Even though hcounteren and henvcfg finally controls the access of
+> vstimecmp, however
+>
+>
+We don't need to check hcounteren while accessing scountern. Thus it will
+be an unnecessary
+check there. Predicate function check should do the required sanity check
+required only for that specific CSR.
+That's why, I think it is the correct place.
+
+
+> it controls it via stimecmp.
+>
+> > +    return hmode(env, csrno);
+> > +}
+> > +
+> > +static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,
+> > +                                    target_ulong *val)
+> > +{
+> > +    *val =3D env->vstimecmp;
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException read_vstimecmph(CPURISCVState *env, int csrno,
+> > +                                    target_ulong *val)
+> > +{
+> > +    *val =3D env->vstimecmp >> 32;
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException write_vstimecmp(CPURISCVState *env, int csrno,
+> > +                                    target_ulong val)
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> > +        env->vstimecmp =3D deposit64(env->vstimecmp, 0, 32,
+> (uint64_t)val);
+> > +    } else {
+> > +        env->vstimecmp =3D val;
+> > +    }
+> > +
+> > +    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
+> > +                              env->htimedelta, MIP_VSTIP);
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> > +static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
+> > +                                    target_ulong val)
+> > +{
+> > +    RISCVCPU *cpu =3D env_archcpu(env);
+> > +
+> > +    env->vstimecmp =3D deposit64(env->vstimecmp, 32, 32, (uint64_t)val=
+);
+> > +    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
+> > +                              env->htimedelta, MIP_VSTIP);
+> > +
+> > +    return RISCV_EXCP_NONE;
+> > +}
+> > +
+> >   static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
+> >                                       target_ulong *val)
+> >   {
+> > -    *val =3D env->stimecmp;
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        *val =3D env->vstimecmp;
+> > +    } else {
+> > +        *val =3D env->stimecmp;
+> > +    }
+> > +
+> >       return RISCV_EXCP_NONE;
+> >   }
+> >
+> >   static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
+> >                                       target_ulong *val)
+> >   {
+> > -    *val =3D env->stimecmp >> 32;
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        *val =3D env->vstimecmp >> 32;
+> > +    } else {
+> > +        *val =3D env->stimecmp >> 32;
+> > +    }
+> > +
+> >       return RISCV_EXCP_NONE;
+> >   }
+> >
+> > @@ -848,6 +931,10 @@ static RISCVException write_stimecmp(CPURISCVState
+> *env, int csrno,
+> >   {
+> >       RISCVCPU *cpu =3D env_archcpu(env);
+> >
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        return write_vstimecmp(env, csrno, val);
+> > +    }
+> > +
+> >       if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
+> >           env->stimecmp =3D deposit64(env->stimecmp, 0, 32, (uint64_t)v=
+al);
+> >       } else {
+> > @@ -864,6 +951,10 @@ static RISCVException write_stimecmph(CPURISCVStat=
+e
+> *env, int csrno,
+> >   {
+> >       RISCVCPU *cpu =3D env_archcpu(env);
+> >
+> > +    if (riscv_cpu_virt_enabled(env)) {
+> > +        return write_vstimecmph(env, csrno, val);
+> > +    }
+> > +
+> >       env->stimecmp =3D deposit64(env->stimecmp, 32, 32, (uint64_t)val)=
+;
+> >       riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0,
+> MIP_STIP);
+> >
+> > @@ -1801,6 +1892,7 @@ static RISCVException rmw_mip64(CPURISCVState
+> *env, int csrno,
+> >       if (csrno !=3D CSR_HVIP) {
+> >           gin =3D get_field(env->hstatus, HSTATUS_VGEIN);
+> >           old_mip |=3D (env->hgeip & ((target_ulong)1 << gin)) ? MIP_VS=
+EIP
+> : 0;
+> > +        old_mip |=3D env->vstime_irq ? MIP_VSTIP : 0;
+> >       }
+> >
+> >       if (ret_val) {
+> > @@ -3661,6 +3753,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {
+> >                                             .min_priv_ver =3D
+> PRIV_VERSION_1_12_0 },
+> >       [CSR_STIMECMPH] =3D { "stimecmph", sstc, read_stimecmph,
+> write_stimecmph,
+> >                                             .min_priv_ver =3D
+> PRIV_VERSION_1_12_0 },
+> > +    [CSR_VSTIMECMP] =3D { "vstimecmp", sstc_hmode, read_vstimecmp,
+> > +                                          write_vstimecmp,
+>
+> Please align with last line. The same to other similar lines.
+>
+>
+Sure. I will fix that.
+
+
+> Regards,
+>
+> Weiwei Li
+>
+> > +                                          .min_priv_ver =3D
+> PRIV_VERSION_1_12_0 },
+> > +    [CSR_VSTIMECMPH] =3D { "vstimecmph", sstc_hmode, read_vstimecmph,
+> > +                                          write_vstimecmph,
+> > +                                          .min_priv_ver =3D
+> PRIV_VERSION_1_12_0 },
+> >
+> >       /* Supervisor Protection and Translation */
+> >       [CSR_SATP]     =3D { "satp",     smode, read_satp,     write_satp
+>  },
+> > diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> > index 622fface484e..4ba55705d147 100644
+> > --- a/target/riscv/machine.c
+> > +++ b/target/riscv/machine.c
+> > @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =3D {
+> >           VMSTATE_UINTTL(env.hgeie, RISCVCPU),
+> >           VMSTATE_UINTTL(env.hgeip, RISCVCPU),
+> >           VMSTATE_UINT64(env.htimedelta, RISCVCPU),
+> > +        VMSTATE_UINT64(env.vstimecmp, RISCVCPU),
+> >
+> >           VMSTATE_UINTTL(env.hvictl, RISCVCPU),
+> >           VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
+> > diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> > index f3fb5eac7b7b..8cce667dfd47 100644
+> > --- a/target/riscv/time_helper.c
+> > +++ b/target/riscv/time_helper.c
+> > @@ -22,6 +22,14 @@
+> >   #include "time_helper.h"
+> >   #include "hw/intc/riscv_aclint.h"
+> >
+> > +static void riscv_vstimer_cb(void *opaque)
+> > +{
+> > +    RISCVCPU *cpu =3D opaque;
+> > +    CPURISCVState *env =3D &cpu->env;
+> > +    env->vstime_irq =3D 1;
+> > +    riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));
+> > +}
+> > +
+> >   static void riscv_stimer_cb(void *opaque)
+> >   {
+> >       RISCVCPU *cpu =3D opaque;
+> > @@ -47,10 +55,16 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu,
+> QEMUTimer *timer,
+> >            * If we're setting an stimecmp value in the "past",
+> >            * immediately raise the timer interrupt
+> >            */
+> > +        if (timer_irq =3D=3D MIP_VSTIP) {
+> > +            env->vstime_irq =3D 1;
+> > +        }
+> >           riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
+> >           return;
+> >       }
+> >
+> > +    if (timer_irq =3D=3D MIP_VSTIP) {
+> > +        env->vstime_irq =3D 0;
+> > +    }
+> >       /* Clear the [V]STIP bit in mip */
+> >       riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
+> >
+> > @@ -95,4 +109,6 @@ void riscv_timer_init(RISCVCPU *cpu)
+> >       env->stimer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb=
+,
+> cpu);
+> >       env->stimecmp =3D 0;
+> >
+> > +    env->vstimer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_vstimer_c=
+b,
+> cpu);
+> > +    env->vstimecmp =3D 0;
+> >   }
+>
+>
+
+--0000000000006ee78405e5be0a71
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Sun, Aug 7, 2022 at 6:50 PM Weiwei=
+ Li &lt;<a href=3D"mailto:liweiwei@iscas.ac.cn">liweiwei@iscas.ac.cn</a>&gt=
+; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+=E5=9C=A8 2022/8/4 =E4=B8=8A=E5=8D=889:42, Atish Patra =E5=86=99=E9=81=93:<=
+br>
+&gt; vstimecmp CSR allows the guest OS or to program the next guest timer<b=
+r>
+&gt; interrupt directly. Thus, hypervisor no longer need to inject the<br>
+&gt; timer interrupt to the guest if vstimecmp is used. This was ratified<b=
+r>
+&gt; as a part of the Sstc extension.<br>
+&gt;<br>
+&gt; Signed-off-by: Atish Patra &lt;<a href=3D"mailto:atishp@rivosinc.com" =
+target=3D"_blank">atishp@rivosinc.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
+=A0 =C2=A04 ++<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_bits.h=C2=A0 =C2=A0 |=C2=A0 =C2=A04 ++<br=
+>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_helper.c=C2=A0 |=C2=A0 11 ++--<br>
+&gt;=C2=A0 =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 102 =
+++++++++++++++++++++++++++++++++++++-<br>
+&gt;=C2=A0 =C2=A0target/riscv/machine.c=C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A01 =
++<br>
+&gt;=C2=A0 =C2=A0target/riscv/time_helper.c |=C2=A0 16 ++++++<br>
+&gt;=C2=A0 =C2=A06 files changed, 133 insertions(+), 5 deletions(-)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
+&gt; index 4cda2905661e..1fd382b2717f 100644<br>
+&gt; --- a/target/riscv/cpu.h<br>
+&gt; +++ b/target/riscv/cpu.h<br>
+&gt; @@ -312,6 +312,8 @@ struct CPUArchState {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Sstc CSRs */<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t stimecmp;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 uint64_t vstimecmp;<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* physical memory protection */<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pmp_table_t pmp_state;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong mseccfg;<br>
+&gt; @@ -366,6 +368,8 @@ struct CPUArchState {<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Fields from here on are preserved across =
+CPU reset. */<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0QEMUTimer *stimer; /* Internal timer for S-m=
+ode interrupt */<br>
+&gt; +=C2=A0 =C2=A0 QEMUTimer *vstimer; /* Internal timer for VS-mode inter=
+rupt */<br>
+&gt; +=C2=A0 =C2=A0 bool vstime_irq;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0hwaddr kernel_addr;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0hwaddr fdt_addr;<br>
+&gt; diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h<br>
+&gt; index ac17cf1515c0..095dab19f512 100644<br>
+&gt; --- a/target/riscv/cpu_bits.h<br>
+&gt; +++ b/target/riscv/cpu_bits.h<br>
+&gt; @@ -257,6 +257,10 @@<br>
+&gt;=C2=A0 =C2=A0#define CSR_VSIP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+0x244<br>
+&gt;=C2=A0 =C2=A0#define CSR_VSATP=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+0x280<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +/* Sstc virtual CSRs */<br>
+&gt; +#define CSR_VSTIMECMP=C2=A0 =C2=A0 =C2=A0 =C2=A00x24D<br>
+&gt; +#define CSR_VSTIMECMPH=C2=A0 =C2=A0 =C2=A0 0x25D<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0#define CSR_MTINST=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x34a=
+<br>
+&gt;=C2=A0 =C2=A0#define CSR_MTVAL2=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x34b=
+<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+&gt; index 650574accf0a..1e4faa84e839 100644<br>
+&gt; --- a/target/riscv/cpu_helper.c<br>
+&gt; +++ b/target/riscv/cpu_helper.c<br>
+&gt; @@ -345,8 +345,9 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env)=
+<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint32_t gein =3D get_field(env-&gt;hstatus,=
+ HSTATUS_VGEIN);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0uint64_t vsgein =3D (env-&gt;hgeip &amp; (1U=
+LL &lt;&lt; gein)) ? MIP_VSEIP : 0;<br>
+&gt; +=C2=A0 =C2=A0 uint64_t vstip =3D (env-&gt;vstime_irq) ? MIP_VSTIP : 0=
+;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 return (env-&gt;mip | vsgein) &amp; env-&gt;mie;<br>
+&gt; +=C2=A0 =C2=A0 return (env-&gt;mip | vsgein | vstip) &amp; env-&gt;mie=
+;<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0int riscv_cpu_mirq_pending(CPURISCVState *env)<br>
+&gt; @@ -605,7 +606,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint6=
+4_t mask, uint64_t value)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0CPUState *cs =3D CPU(cpu);<br>
+&gt; -=C2=A0 =C2=A0 uint64_t gein, vsgein =3D 0, old =3D env-&gt;mip;<br>
+&gt; +=C2=A0 =C2=A0 uint64_t gein, vsgein =3D 0, vstip =3D 0, old =3D env-&=
+gt;mip;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool locked =3D false;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; @@ -613,6 +614,10 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint=
+64_t mask, uint64_t value)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0vsgein =3D (env-&gt;hgeip &amp=
+; (1ULL &lt;&lt; gein)) ? MIP_VSEIP : 0;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 /* No need to update mip for VSTIP */<br>
+&gt; +=C2=A0 =C2=A0 mask =3D ((mask =3D=3D MIP_VSTIP) &amp;&amp; env-&gt;vs=
+time_irq) ? 0 : mask;<br>
+&gt; +=C2=A0 =C2=A0 vstip =3D env-&gt;vstime_irq ? MIP_VSTIP : 0;<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (!qemu_mutex_iothread_locked()) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0locked =3D true;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_mutex_lock_iothread();<br=
+>
+&gt; @@ -620,7 +625,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint6=
+4_t mask, uint64_t value)<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;mip =3D (env-&gt;mip &amp; ~mask) | =
+(value &amp; mask);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 if (env-&gt;mip | vsgein) {<br>
+&gt; +=C2=A0 =C2=A0 if (env-&gt;mip | vsgein | vstip) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_interrupt(cs, CPU_INTERRUP=
+T_HARD);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cpu_reset_interrupt(cs, CPU_IN=
+TERRUPT_HARD);<br>
+&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+&gt; index e18b000700e4..9da4d6515e7b 100644<br>
+&gt; --- a/target/riscv/csr.c<br>
+&gt; +++ b/target/riscv/csr.c<br>
+&gt; @@ -829,17 +829,100 @@ static RISCVException sstc(CPURISCVState *env, =
+int csrno)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return smode(env, csrno);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +static RISCVException sstc_hmode(CPURISCVState *env, int csrno)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (!cpu-&gt;cfg.ext_sstc || !env-&gt;rdtime_fn) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV_M) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (!(get_field(env-&gt;mcounteren, COUNTEREN_TM) &amp;=
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;menvcfg, MENVCFG=
+_STCE))) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!(get_field(env-&gt;hcounteren, COUNT=
+EREN_TM) &amp;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;he=
+nvcfg, HENVCFG_STCE))) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_VIRT_INST=
+RUCTION_FAULT;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+<br>
+I think this check on hcounteren and henvcfg should be added to sstc <br>
+predicate, not here.<br>
+<br>
+Even though hcounteren and henvcfg finally controls the access of=C2=A0 <br=
+>
+vstimecmp, however<br>
+<br></blockquote><div><br></div><div>We don&#39;t need to check hcounteren =
+while accessing scountern. Thus it will be an unnecessary</div><div>check t=
+here. Predicate function check should do the required sanity check required=
+ only for that specific CSR.</div><div>That&#39;s why, I think it is the co=
+rrect place.</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">
+it controls it via stimecmp.<br>
+<br>
+&gt; +=C2=A0 =C2=A0 return hmode(env, csrno);<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,<b=
+r>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *val)=
+<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 *val =3D env-&gt;vstimecmp;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static RISCVException read_vstimecmph(CPURISCVState *env, int csrno,<=
+br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *val)=
+<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 *val =3D env-&gt;vstimecmp &gt;&gt; 32;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static RISCVException write_vstimecmp(CPURISCVState *env, int csrno,<=
+br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<=
+br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D env_archcpu(env);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vstimecmp =3D deposit64(env-&gt;v=
+stimecmp, 0, 32, (uint64_t)val);<br>
+&gt; +=C2=A0 =C2=A0 } else {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vstimecmp =3D val;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 riscv_timer_write_timecmp(cpu, env-&gt;vstimer, env-&gt=
+;vstimecmp,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;htimedelta, MIP_VSTIP);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,=
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong val)<=
+br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D env_archcpu(env);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 env-&gt;vstimecmp =3D deposit64(env-&gt;vstimecmp, 32, =
+32, (uint64_t)val);<br>
+&gt; +=C2=A0 =C2=A0 riscv_timer_write_timecmp(cpu, env-&gt;vstimer, env-&gt=
+;vstimecmp,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;htimedelta, MIP_VSTIP);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return RISCV_EXCP_NONE;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0static RISCVException read_stimecmp(CPURISCVState *env, in=
+t csrno,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target=
+_ulong *val)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; -=C2=A0 =C2=A0 *val =3D env-&gt;stimecmp;<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D env-&gt;vstimecmp;<br>
+&gt; +=C2=A0 =C2=A0 } else {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D env-&gt;stimecmp;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0static RISCVException read_stimecmph(CPURISCVState *env, i=
+nt csrno,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target=
+_ulong *val)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; -=C2=A0 =C2=A0 *val =3D env-&gt;stimecmp &gt;&gt; 32;<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D env-&gt;vstimecmp &gt;&gt; 32;<b=
+r>
+&gt; +=C2=A0 =C2=A0 } else {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 *val =3D env-&gt;stimecmp &gt;&gt; 32;<br=
+>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_NONE;<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -848,6 +931,10 @@ static RISCVException write_stimecmp(CPURISCVStat=
+e *env, int csrno,<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D env_archcpu(env);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return write_vstimecmp(env, csrno, val);<=
+br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br=
+>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;stimecmp =3D deposit64=
+(env-&gt;stimecmp, 0, 32, (uint64_t)val);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
+&gt; @@ -864,6 +951,10 @@ static RISCVException write_stimecmph(CPURISCVSta=
+te *env, int csrno,<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D env_archcpu(env);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return write_vstimecmph(env, csrno, val);=
+<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;stimecmp =3D deposit64(env-&gt;stime=
+cmp, 32, 32, (uint64_t)val);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_timer_write_timecmp(cpu, env-&gt;stime=
+r, env-&gt;stimecmp, 0, MIP_STIP);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -1801,6 +1892,7 @@ static RISCVException rmw_mip64(CPURISCVState *e=
+nv, int csrno,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (csrno !=3D CSR_HVIP) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0gin =3D get_field(env-&gt;hsta=
+tus, HSTATUS_VGEIN);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0old_mip |=3D (env-&gt;hgeip &a=
+mp; ((target_ulong)1 &lt;&lt; gin)) ? MIP_VSEIP : 0;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 old_mip |=3D env-&gt;vstime_irq ? MIP_VST=
+IP : 0;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (ret_val) {<br>
+&gt; @@ -3661,6 +3753,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+=3D {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_STIMECMPH] =3D { &quot;stimecmph&quot;,=
+ sstc, read_stimecmph, write_stimecmph,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
+&gt; +=C2=A0 =C2=A0 [CSR_VSTIMECMP] =3D { &quot;vstimecmp&quot;, sstc_hmode=
+, read_vstimecmp,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 write_vstimecmp,<br>
+<br>
+Please align with last line. The same to other similar lines.<br>
+<br></blockquote><div><br></div><div>Sure. I will fix that.</div><div>=C2=
+=A0<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+Regards,<br>
+<br>
+Weiwei Li<br>
+<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 .min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
+&gt; +=C2=A0 =C2=A0 [CSR_VSTIMECMPH] =3D { &quot;vstimecmph&quot;, sstc_hmo=
+de, read_vstimecmph,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 write_vstimecmph,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 .min_priv_ver =3D PRIV_VERSION_1_12_0 },<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Supervisor Protection and Translation */<=
+br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_SATP]=C2=A0 =C2=A0 =C2=A0=3D { &quot;sa=
+tp&quot;,=C2=A0 =C2=A0 =C2=A0smode, read_satp,=C2=A0 =C2=A0 =C2=A0write_sat=
+p=C2=A0 =C2=A0 =C2=A0},<br>
+&gt; diff --git a/target/riscv/machine.c b/target/riscv/machine.c<br>
+&gt; index 622fface484e..4ba55705d147 100644<br>
+&gt; --- a/target/riscv/machine.c<br>
+&gt; +++ b/target/riscv/machine.c<br>
+&gt; @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper =3D {<=
+br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.hgeie, RISC=
+VCPU),<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.hgeip, RISC=
+VCPU),<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT64(env.htimedelta,=
+ RISCVCPU),<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VMSTATE_UINT64(env.vstimecmp, RISCVCPU),<=
+br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINTTL(env.hvictl, RIS=
+CVCPU),<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0VMSTATE_UINT8_ARRAY(env.hvipri=
+o, RISCVCPU, 64),<br>
+&gt; diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c<b=
+r>
+&gt; index f3fb5eac7b7b..8cce667dfd47 100644<br>
+&gt; --- a/target/riscv/time_helper.c<br>
+&gt; +++ b/target/riscv/time_helper.c<br>
+&gt; @@ -22,6 +22,14 @@<br>
+&gt;=C2=A0 =C2=A0#include &quot;time_helper.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;hw/intc/riscv_aclint.h&quot;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +static void riscv_vstimer_cb(void *opaque)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 RISCVCPU *cpu =3D opaque;<br>
+&gt; +=C2=A0 =C2=A0 CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+&gt; +=C2=A0 =C2=A0 env-&gt;vstime_irq =3D 1;<br>
+&gt; +=C2=A0 =C2=A0 riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));<=
+br>
+&gt; +}<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0static void riscv_stimer_cb(void *opaque)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D opaque;<br>
+&gt; @@ -47,10 +55,16 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMU=
+Timer *timer,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * If we&#39;re setting an sti=
+mecmp value in the &quot;past&quot;,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * immediately raise the timer=
+ interrupt<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (timer_irq =3D=3D MIP_VSTIP) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vstime_irq =3D 1;<b=
+r>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_cpu_update_mip(cpu, time=
+r_irq, BOOL_TO_MASK(1));<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 if (timer_irq =3D=3D MIP_VSTIP) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;vstime_irq =3D 0;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Clear the [V]STIP bit in mip */<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO=
+_MASK(0));<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -95,4 +109,6 @@ void riscv_timer_init(RISCVCPU *cpu)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;stimer =3D timer_new_ns(QEMU_CLOCK_V=
+IRTUAL, &amp;riscv_stimer_cb, cpu);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0env-&gt;stimecmp =3D 0;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +=C2=A0 =C2=A0 env-&gt;vstimer =3D timer_new_ns(QEMU_CLOCK_VIRTUAL, &a=
+mp;riscv_vstimer_cb, cpu);<br>
+&gt; +=C2=A0 =C2=A0 env-&gt;vstimecmp =3D 0;<br>
+&gt;=C2=A0 =C2=A0}<br>
+<br>
+</blockquote></div></div>
+
+--0000000000006ee78405e5be0a71--
 
