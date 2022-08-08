@@ -1,47 +1,47 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oL9zK-0008Og-8d
-	for mharc-qemu-riscv@gnu.org; Mon, 08 Aug 2022 17:08:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54230)
+	id 1oL9zO-0008Q4-UW
+	for mharc-qemu-riscv@gnu.org; Mon, 08 Aug 2022 17:08:42 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54174)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oL9z9-0008I5-Im
- for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 17:08:31 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332]:56087)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oL9z7-0008EV-Kx
+ for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 17:08:25 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f]:33650)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oL9z7-0006LQ-WC
- for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 17:08:27 -0400
-Received: by mail-wm1-x332.google.com with SMTP id b6so5361378wmq.5
- for <qemu-riscv@nongnu.org>; Mon, 08 Aug 2022 14:08:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oL9z5-0006Kk-P8
+ for qemu-riscv@nongnu.org; Mon, 08 Aug 2022 17:08:25 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id v3so12287006wrp.0
+ for <qemu-riscv@nongnu.org>; Mon, 08 Aug 2022 14:08:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=conchuod.ie; s=google;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc;
- bh=VJdQR/zkeKenpTuqia/TTJ9m1dTc7j3X6f24wA4YnSA=;
- b=JddNGHWDeeejm2RIJHx/iBhnK4ZsV/U8akRmYUJecC0+M88okiM7FdxKpDerVLuNZc
- 1JG+i4WUzOgZrGF+yyP6S57mck6D9oX/fbsVbYaWJHNAkElO6FRIp4kQpmBbZb30XIfs
- hTwJeoc3LWLOAw35qTX/r5jXgXmDphAHNcPwDQXL+DF31qcn4eQOsrAVr7PVgB+bX0fV
- tR/ZuFBfr4iYtniDLQZA5ci6fscCF4+d1TOPdDrq57vlQ84qFeWpe/mJrPvFpsZf9guO
- zksAIlJB4tZu1PolizuifoqLskduaHL7MWM6UFMUw4tvoIXxcJMCGvwmdwJlPPhN7fNn
- 8nmw==
+ bh=dLryJLbtmt3A1NXYGrZiCtyybRqEmFe4aX4c5ZR/V+k=;
+ b=XaYbCDvok/GvxFa0f5R6nAc+lfRixiYd9G7yozDXN/kSc7eZH9qvkEGMaxHGlYAnyF
+ Dkp8ApN+dMiEubPdhMLBOAH/sZZX/7kq1lqi6+4BVy0AsLt5H62S7NvF/s+inzuYAz48
+ uE+NTLBwmcDmvjPCNz+VqkzXreiVpewG1s1gbmJvp05B6Y2ZUBIFWeOcQO7irHyvh6Ui
+ UniFy+OX97ziDqcSI0loms89zlnCRIMA4QdeVlcmh9tlXwrL1Qu4SEPA/Esu/5h8dany
+ CzOBksHoYoIr5g4mygXSVF5FJ4ACFNWAcRLN2B3CaPGHiy/lm5nwnvq4y3mYIR3XBJ2a
+ rdnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
- bh=VJdQR/zkeKenpTuqia/TTJ9m1dTc7j3X6f24wA4YnSA=;
- b=3HaA7lV8FkMsGmpuZ6N5RGFCqblyZRrzxn+wRW0r8LYUPYmliv7F0D230J3G+wYDbV
- 9jZDMGjmlwCMRaXcRINByxCKpdksxcrf71LpMoujlNJuxYiMJJpqBwfBDFYLkk8qT9Z7
- g/4wkXqojpq4TBo4EtIJvKMo+QRJGC/8Ii9VL7e3NB+VISBrzMnAZmuP9qxfNW7j8a8D
- pprxaaQOzyym2OkSzCWZKq3BG2R0a2RCq8mb6qovbq6SUZgBrH7BAgA+HZBQMTAwj5mL
- mpowYZh1Vy6WzbiN9rjQV7SLwxRlQE0E9g90Em4gP6bM+I+8J4NhqrN6qIcv23P7LtsW
- Nh9Q==
-X-Gm-Message-State: ACgBeo3FDkMQ+j05Xp1erX/m3uXVNuXme6Hw0FpiaTVu/mUbWqE6hBS1
- K/qvb3i7BUCrYAB0KpfY/Px6JA==
-X-Google-Smtp-Source: AA6agR46x1AlO/jiQSG57WcvYDDMG3jH+AztYwAsHFqxHQo4Ry3vl3BYbmunOzGYbCe7dbvp/9A6JQ==
-X-Received: by 2002:a05:600c:21d4:b0:3a3:150a:7ed2 with SMTP id
- x20-20020a05600c21d400b003a3150a7ed2mr13800655wmj.166.1659992904355; 
- Mon, 08 Aug 2022 14:08:24 -0700 (PDT)
+ bh=dLryJLbtmt3A1NXYGrZiCtyybRqEmFe4aX4c5ZR/V+k=;
+ b=ixKE92iYOU+ZmgOLaFY3VtnGO+oPPzHC/ZvYPI5tBaWrmrm76NK3IpmowM8GtSkvu+
+ 5BKLBrPlzWzYjuUFcX+WAar9FjAXxQerLWIXY7JYzJwNSRnHLNYCYEadi/DHh0FpWnSC
+ fX5eBH8EskvCSK2Zm36oLM1gWrWw2BWtuVyL3RNtL28h7ETOCfJs51DkFdkTfQlKpLYu
+ 0p5KxT5pMT0QslkdgpF4DPrbVW1bGhBQxvwHCwnVQLjDAuAQTi7mnzJlBXaD01dW8zOE
+ L0iCFuBEu7TNO0fmtoK9NDD+lAXT7A3h5pdFKYB0D4VnDEbQALXz7A/xpbAo33kdbLwm
+ T/+g==
+X-Gm-Message-State: ACgBeo3nfZ3UAJCHD+ofYSMIDlm3NDbpNYUgXHR+/gs1A9E9epiEk+ts
+ 2FcVmHyNTHfOgUjj0teOgZ8OrA==
+X-Google-Smtp-Source: AA6agR7pnInZsNd3ZsPBnPPgDBz/r5knM7XTF8qQgzFc4K+jCnSOxE+F5iQ58xcJVE5RYKbsiUkpzw==
+X-Received: by 2002:a05:6000:156b:b0:222:c789:cb2d with SMTP id
+ 11-20020a056000156b00b00222c789cb2dmr5262920wrz.197.1659992902355; 
+ Mon, 08 Aug 2022 14:08:22 -0700 (PDT)
 Received: from henark71.. ([109.76.58.63]) by smtp.gmail.com with ESMTPSA id
- i17-20020a05600c355100b003a2e92edeccsm19811955wmq.46.2022.08.08.14.08.23
+ i17-20020a05600c355100b003a2e92edeccsm19811955wmq.46.2022.08.08.14.08.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Aug 2022 14:08:23 -0700 (PDT)
+ Mon, 08 Aug 2022 14:08:21 -0700 (PDT)
 From: Conor Dooley <mail@conchuod.ie>
 To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -49,16 +49,16 @@ To: Palmer Dabbelt <palmer@dabbelt.com>,
 Cc: Rob Herring <robh@kernel.org>, Conor Dooley <conor.dooley@microchip.com>,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  linux-riscv@lists.infradead.org
-Subject: [PATCH v2 4/4] hw/core: fix platform bus node name
-Date: Mon,  8 Aug 2022 22:06:44 +0100
-Message-Id: <20220808210643.2192602-5-mail@conchuod.ie>
+Subject: [PATCH v2 2/4] hw/riscv: virt: Fix the plic's address cells
+Date: Mon,  8 Aug 2022 22:06:42 +0100
+Message-Id: <20220808210643.2192602-3-mail@conchuod.ie>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220808210643.2192602-1-mail@conchuod.ie>
 References: <20220808210643.2192602-1-mail@conchuod.ie>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=mail@conchuod.ie; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=mail@conchuod.ie; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,38 +78,52 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2022 21:08:31 -0000
+X-List-Received-Date: Mon, 08 Aug 2022 21:08:26 -0000
 
 From: Conor Dooley <conor.dooley@microchip.com>
 
-"platform" is not a valid name for a bus node in dt-schema, so warnings
-can be see in dt-validate on a dump of the riscv virt dtb:
+When optional AIA PLIC support was added the to the virt machine, the
+address cells property was removed leading the issues with dt-validate
+on a dump from the virt machine:
+/stuff/qemu/qemu.dtb: plic@c000000: '#address-cells' is a required property
+        From schema: /stuff/linux/Documentation/devicetree/bindings/interrupt-controller/sifive,plic-1.0.0.yaml
+Add back the property to suppress the warning.
 
-/stuff/qemu/qemu.dtb: platform@4000000: $nodename:0: 'platform@4000000' does not match '^([a-z][a-z0-9\\-]+-bus|bus|soc|axi|ahb|apb)(@[0-9a-f]+)?$'
-        From schema: /home/conor/.local/lib/python3.9/site-packages/dtschema/schemas/simple-bus.yaml
-"platform-bus" is a valid name, so use that instead.
-
-CC: Rob Herring <robh@kernel.org>
-Fixes: 11d306b9df ("hw/arm/sysbus-fdt: helpers for platform bus nodes addition")
+Reported-by: Rob Herring <robh@kernel.org>
+Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
+Fixes: e6faee6585 ("hw/riscv: virt: Add optional AIA APLIC support to virt machine")
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
 ---
- hw/core/sysbus-fdt.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/riscv/virt.c         | 2 ++
+ include/hw/riscv/virt.h | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
-index 19d22cbe73..edb0c49b19 100644
---- a/hw/core/sysbus-fdt.c
-+++ b/hw/core/sysbus-fdt.c
-@@ -539,7 +539,7 @@ void platform_bus_add_all_fdt_nodes(void *fdt, const char *intc, hwaddr addr,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 6c61a406c4..8b2978076e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -465,6 +465,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+     qemu_fdt_add_subnode(mc->fdt, plic_name);
+     qemu_fdt_setprop_cell(mc->fdt, plic_name,
+         "#interrupt-cells", FDT_PLIC_INT_CELLS);
++    qemu_fdt_setprop_cell(mc->fdt, plic_name,
++        "#address-cells", FDT_PLIC_ADDR_CELLS);
+     qemu_fdt_setprop_string_array(mc->fdt, plic_name, "compatible",
+                                   (char **)&plic_compat,
+                                   ARRAY_SIZE(plic_compat));
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 984e55c77f..be4ab8fe7f 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -111,6 +111,7 @@ enum {
  
-     assert(fdt);
- 
--    node = g_strdup_printf("/platform@%"PRIx64, addr);
-+    node = g_strdup_printf("/platform-bus@%"PRIx64, addr);
- 
-     /* Create a /platform node that we can put all devices into */
-     qemu_fdt_add_subnode(fdt, node);
+ #define FDT_PCI_ADDR_CELLS    3
+ #define FDT_PCI_INT_CELLS     1
++#define FDT_PLIC_ADDR_CELLS   0
+ #define FDT_PLIC_INT_CELLS    1
+ #define FDT_APLIC_INT_CELLS   2
+ #define FDT_IMSIC_INT_CELLS   0
 -- 
 2.37.1
 
