@@ -1,64 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oLRUB-00033F-Ou
-	for mharc-qemu-riscv@gnu.org; Tue, 09 Aug 2022 11:49:46 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41812)
+	id 1oLRUU-00034d-Id
+	for mharc-qemu-riscv@gnu.org; Tue, 09 Aug 2022 11:49:58 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41236)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
- id 1oLQ2H-0001Pr-FO
- for qemu-riscv@nongnu.org; Tue, 09 Aug 2022 10:16:52 -0400
-Received: from mail-il1-f175.google.com ([209.85.166.175]:36749)
+ id 1oLQ0I-0000Fk-7S
+ for qemu-riscv@nongnu.org; Tue, 09 Aug 2022 10:14:42 -0400
+Received: from mail-io1-f53.google.com ([209.85.166.53]:36411)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <robherring2@gmail.com>)
- id 1oLQ2B-0000AU-VC
- for qemu-riscv@nongnu.org; Tue, 09 Aug 2022 10:16:43 -0400
-Received: by mail-il1-f175.google.com with SMTP id s16so6573011ilp.3
- for <qemu-riscv@nongnu.org>; Tue, 09 Aug 2022 07:16:37 -0700 (PDT)
+ id 1oLQ0G-00085l-L7
+ for qemu-riscv@nongnu.org; Tue, 09 Aug 2022 10:14:41 -0400
+Received: by mail-io1-f53.google.com with SMTP id q124so9665032iod.3
+ for <qemu-riscv@nongnu.org>; Tue, 09 Aug 2022 07:14:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
- bh=Q9mXyBIsDcHFkxvhhPAewKIvUVNC7xu4zQ9cHub7pU8=;
- b=HQmVmL2pjXWP1BBRH425sPVVd7sKS+dFmCJ+zlwO81hhwxRN5U1S3LmUQJOjI0YKCf
- 2LeRApwCtcP3cammTBIoD40iXTohcLTkbR6foegAXeETbwxmObewcvf+MppsAS9UQf7F
- 2//nwf6+2OFMAIsroYAVxzezO7B8OCUj4HoqdZE1ZMIhkYRv2XR0l6wAUkxGJqRsBnIe
- fFdSDVZtiA0A2kaOBor8OVj2q8m0SkBydaR4AIGMOvYhSEJdS2v87zeu4THRczML/WQk
- j30SX5vCQW2UmmCFPebDJUS45XOwThu9UTvK9GIxHnDr0fbaxkAPj3bxJY/FNsqbg4g5
- c/oQ==
-X-Gm-Message-State: ACgBeo3LIgVSFD3WGnIyRjFYqOtgEa57GVFGw3cBXgpGqNWBYsAjiIBB
- dJaw8B4wiaF6Qm4Wy6CBSg==
-X-Google-Smtp-Source: AA6agR5sKNiD1jY7asRAYAJjA4Ioov1LBgXDA+f5syLv9nnxp52HOBVCeed/e86Hnn99NJMdjRx1Dw==
-X-Received: by 2002:a92:c247:0:b0:2df:2e4d:5930 with SMTP id
- k7-20020a92c247000000b002df2e4d5930mr10661115ilo.229.1660054596321; 
- Tue, 09 Aug 2022 07:16:36 -0700 (PDT)
+ bh=Qgyr+32CceGsT0l+h5ryRLscX/cbGb6A+xgqfxNnSjE=;
+ b=Dq1WRGtCdWlKH0Aw4NTAadmAbcssZH/q70kKNqXsvNmZQdmYOf4RxKt0952gQMx7hw
+ ATRX+WeheicnlGU39uly9nopn/3A4Aer8mKL+L8lq8a1gXLmowV6zYGInhaApeg0jEJu
+ COXoLVVxY7lHQXHA8acmUPLF/QxG1vjUZ4Hy1WLjtX/HDz4Wz5cFwLG75zdtH6Uvy2ca
+ +6vFdZKObeG82aA/nkPEDrRt6EblLG+nzUJletZHC70bUwwvb9ss25BkvsgDEFj45NpH
+ jnjBnFTWWki1ivZ+28nPtgtPIqXFhK+MFAMakZVQr92ACELECd+80qQe4knpgOhr2uU+
+ 3KBg==
+X-Gm-Message-State: ACgBeo3FtwmFsqKxjMfVHotPeUAmrYnd80slgDfsrMuI25ALEaEqf1h6
+ U2jeSRTntBKOjtVYHsa/tw==
+X-Google-Smtp-Source: AA6agR4Ha6qVwthQuAETuobnGoOie1LPqRZXH3lXZnPOwMUi0rO7JQSfIeH7D7YvlZQ/DynOPNiZxw==
+X-Received: by 2002:a05:6638:1386:b0:342:8d69:71c2 with SMTP id
+ w6-20020a056638138600b003428d6971c2mr10163189jad.315.1660054479123; 
+ Tue, 09 Aug 2022 07:14:39 -0700 (PDT)
 Received: from robh.at.kernel.org ([64.188.179.248])
  by smtp.gmail.com with ESMTPSA id
- b16-20020a05660214d000b00684a7617f14sm1144598iow.10.2022.08.09.07.16.33
+ c20-20020a0566022d1400b0068226bcb7aasm1151011iow.38.2022.08.09.07.14.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Aug 2022 07:16:35 -0700 (PDT)
-Received: (nullmailer pid 1749632 invoked by uid 1000);
- Tue, 09 Aug 2022 14:16:32 -0000
-Date: Tue, 9 Aug 2022 08:16:32 -0600
+ Tue, 09 Aug 2022 07:14:38 -0700 (PDT)
+Received: (nullmailer pid 1746668 invoked by uid 1000);
+ Tue, 09 Aug 2022 14:14:36 -0000
+Date: Tue, 9 Aug 2022 08:14:36 -0600
 From: Rob Herring <robh@kernel.org>
-To: Conor Dooley <mail@conchuod.ie>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paul Walmsley <paul.walmsley@sifive.com>,
- Albert Ou <aou@eecs.berkeley.edu>, Daniel Lezcano <daniel.lezcano@linaro.org>,
- Anup Patel <anup@brainfault.org>, Conor Dooley <conor.dooley@microchip.com>,
- Guo Ren <guoren@kernel.org>, Sagar Kadam <sagar.kadam@sifive.com>,
+To: Conor.Dooley@microchip.com
+Cc: jrtc27@jrtc27.com, tglx@linutronix.de, maz@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, palmer@dabbelt.com,
+ paul.walmsley@sifive.com, aou@eecs.berkeley.edu, daniel.lezcano@linaro.org,
+ anup@brainfault.org, guoren@kernel.org, sagar.kadam@sifive.com,
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
  linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org
-Subject: Re: [PATCH 1/3] dt-bindings: timer: sifive,clint: add legacy riscv
- compatible
-Message-ID: <20220809141632.GB1706120-robh@kernel.org>
+Subject: Re: [PATCH 0/3] Fix dt-validate issues on qemu dtbdumps due to
+ dt-bindings
+Message-ID: <20220809141436.GA1706120-robh@kernel.org>
 References: <20220805162844.1554247-1-mail@conchuod.ie>
- <20220805162844.1554247-2-mail@conchuod.ie>
+ <YvGBYKZyW0B2/wSr@Jessicas-MacBook-Pro>
+ <94fe7e46-6156-1cc5-a4dc-1eee78e99bc4@microchip.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220805162844.1554247-2-mail@conchuod.ie>
-Received-SPF: pass client-ip=209.85.166.175;
- envelope-from=robherring2@gmail.com; helo=mail-il1-f175.google.com
+In-Reply-To: <94fe7e46-6156-1cc5-a4dc-1eee78e99bc4@microchip.com>
+Received-SPF: pass client-ip=209.85.166.53; envelope-from=robherring2@gmail.com;
+ helo=mail-io1-f53.google.com
 X-Spam_score_int: -11
 X-Spam_score: -1.2
 X-Spam_bar: -
@@ -68,7 +67,7 @@ X-Spam_report: (-1.2 / 5.0 requ) BAYES_00=-1.9, FREEMAIL_ENVFROM_END_DIGIT=0.25,
  RCVD_IN_MSPIKE_H2=-0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Tue, 09 Aug 2022 11:49:25 -0400
+X-Mailman-Approved-At: Tue, 09 Aug 2022 11:49:16 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,59 +79,56 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2022 14:17:06 -0000
+X-List-Received-Date: Tue, 09 Aug 2022 14:14:42 -0000
 
-On Fri, Aug 05, 2022 at 05:28:43PM +0100, Conor Dooley wrote:
-> From: Conor Dooley <conor.dooley@microchip.com>
+On Mon, Aug 08, 2022 at 10:01:11PM +0000, Conor.Dooley@microchip.com wrote:
+> On 08/08/2022 22:34, Jessica Clarke wrote:
+> > On Fri, Aug 05, 2022 at 05:28:42PM +0100, Conor Dooley wrote:
+> >> From: Conor Dooley <conor.dooley@microchip.com>
+> >>
+> >> The device trees produced automatically for the virt and spike machines
+> >> fail dt-validate on several grounds. Some of these need to be fixed in
+> >> the linux kernel's dt-bindings, but others are caused by bugs in QEMU.
+> >>
+> >> Patches been sent that fix the QEMU issues [0], but a couple of them
+> >> need to be fixed in the kernel's dt-bindings. The first patches add
+> >> compatibles for "riscv,{clint,plic}0" which are present in drivers and
+> >> the auto generated QEMU dtbs.
+> > 
+> > IMO the correct thing is to have QEMU use a qemu,plicX rather than to
+> > weaken the requirement that a non-generic compatible be used. Otherwise
+> > you end up with QEMU using something that's marked as deprecated and
+> > either the warning remains and annoys people still or it becomes too
+> > weak and people ignore it when creating real hardware.
 > 
-> While "real" hardware might not use the compatible string "riscv,clint0"
-> it is present in the driver & QEMU uses it for automatically generated
-> virt machine dtbs. To avoid dt-validate problems with QEMU produced
-> dtbs, such as the following, add it to the binding.
+> It's already in a driver so I figure it should be in the bindings too.
 > 
-> riscv-virt.dtb: clint@2000000: compatible:0: 'sifive,clint0' is not one of ['sifive,fu540-c000-clint', 'starfive,jh7100-clint', 'canaan,k210-clint']
-> 
-> Reported-by: Rob Herring <robh@kernel.org>
-> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
->  .../bindings/timer/sifive,clint.yaml           | 18 ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/timer/sifive,clint.yaml b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-> index e64f46339079..9fcf20942582 100644
-> --- a/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-> +++ b/Documentation/devicetree/bindings/timer/sifive,clint.yaml
-> @@ -22,12 +22,18 @@ description:
->  
->  properties:
->    compatible:
-> -    items:
-> -      - enum:
-> -          - sifive,fu540-c000-clint
-> -          - starfive,jh7100-clint
-> -          - canaan,k210-clint
-> -      - const: sifive,clint0
-> +    oneOf:
-> +      - items:
-> +          - enum:
-> +              - sifive,fu540-c000-clint
-> +              - starfive,jh7100-clint
-> +              - canaan,k210-clint
-> +          - const: sifive,clint0
-> +      - items:
-> +          - const: sifive,clint0
-> +          - const: riscv,clint0
-> +        deprecated: true
-> +        description: For legacy systems & the qemu virt machine only
+> In arm's virt.c they use the generic gic compatible & I don't see any
+> evidence of other archs using "qemu,foo" bindings. I suppose there's
+> always the option of just removing the "riscv,plic0" from the riscv's
+> virt.c
 
-I would drop 'legacy systems'.
+I think we're pretty much stuck with what's in use already.
 
->  
->      description:
->        Should be "<vendor>,<chip>-clint" and "sifive,clint<version>".
-> -- 
-> 2.37.1
-> 
-> 
+I'm on the fence whether to mark it deprecated though if there is no 
+plan to 'fix' it. Doesn't really matter until the tools can selectively 
+remove deprecated properties from validation.
+
+> >> The final patch adds some new ISA strings
+> >> which needs scruitiny from someone with more knowledge about what ISA
+> >> extension strings should be reported in a dt than I have.
+> > 
+> > Listing every possible ISA string supported by the Linux kernel really
+> > is not going to scale...
+
+How does the kernel scale? (No need to answer)
+
+> Yeah, totally correct there. Case for adding a regex I suppose, but I
+> am not sure how to go about handling the multi-letter extensions or
+> if parsing them is required from a binding compliance point of view.
+> Hoping for some input from Palmer really.
+
+Yeah, looks like a regex pattern is needed.
+
+Rob
 
