@@ -1,62 +1,101 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oLvmY-0002QT-6x
-	for mharc-qemu-riscv@gnu.org; Wed, 10 Aug 2022 20:10:38 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44550)
+	id 1oLwWy-0001XC-I9
+	for mharc-qemu-riscv@gnu.org; Wed, 10 Aug 2022 20:58:37 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:32968)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oLvmW-0002QG-BL; Wed, 10 Aug 2022 20:10:36 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84]:45452 helo=cstnet.cn)
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <liweiwei@iscas.ac.cn>)
- id 1oLvmS-0006WS-VG; Wed, 10 Aug 2022 20:10:36 -0400
-Received: from [192.168.3.6] (unknown [116.224.155.20])
- by APP-05 (Coremail) with SMTP id zQCowABHaX7uSPRie+7rFw--.22181S2;
- Thu, 11 Aug 2022 08:10:23 +0800 (CST)
-Subject: Re: [PATCH v9 3/3] target/riscv: Add vstimecmp support
-To: Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
-References: <20220810184548.3620153-1-atishp@rivosinc.com>
- <20220810184548.3620153-4-atishp@rivosinc.com>
-From: Weiwei Li <liweiwei@iscas.ac.cn>
-Message-ID: <9170b9c7-fcf7-88b4-31ae-fdab496439b0@iscas.ac.cn>
-Date: Thu, 11 Aug 2022 08:10:22 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ (Exim 4.90_1)
+ (envelope-from <prvs=2146f6254=wilfred.mallawa@opensource.wdc.com>)
+ id 1oLuiz-0000ec-BL
+ for qemu-riscv@nongnu.org; Wed, 10 Aug 2022 19:02:53 -0400
+Received: from esa5.hgst.iphmx.com ([216.71.153.144]:4527)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <prvs=2146f6254=wilfred.mallawa@opensource.wdc.com>)
+ id 1oLuix-0004SW-41
+ for qemu-riscv@nongnu.org; Wed, 10 Aug 2022 19:02:53 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1660172569; x=1691708569;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=bJEhpj9iCpmqZwzHRzxHSu1nlyr9NSdi6/fTLMOczEs=;
+ b=QcBvvzdwXs393NLzXTdHGdh+o7NwbRfg1YprELImtIHoWyabITLvWqni
+ 1LIsRoJd8UaAA+SDvWN1BkuyD5E254ymLwnt2R+2fqtxDySgpd50bURtm
+ o2sX+4UlZ+KpeOKCQ6R9q2utCbJB9RCR5XVGLTwSHcHfZPYNqz4AP1Tt9
+ QmQcLQ55GGjO0MiYUNR0SPOwSaSgRtDk+8zSvcBzLphTkvKivmkHjoHRD
+ smBmnV5gOzimyuoHSvdvuZAFCEoB/CqOjpddoeMTZoOwLbUT8zCG7V793
+ UkiePnFRv4DDFsezOEcop8mncDSG98llGM7qZmfhMgxt7INGM6VyQENuh g==;
+X-IronPort-AV: E=Sophos;i="5.93,228,1654531200"; d="scan'208";a="208385270"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+ ([199.255.45.15])
+ by ob1.hgst.iphmx.com with ESMTP; 11 Aug 2022 07:02:41 +0800
+IronPort-SDR: 2msi51jk4xCH3TAcEPIu7WYvvCKnAcr3tzMF6vbu1Nh+aadUAh/gZGallwqheSDjVcXYV0/ECA
+ 7499zzuBUa+lSI7Dph0Nri/u7cJtx12oyIOcT0fdq0E/nSom2O6pu1+ceAVKr7TWDAIR25SK5m
+ 8pvd4VWoyPk86bB6Xyl0dGQp1jixKLOM8kyQeayN+pCAGE4icwYMsNVYVfSKbU52f0kb7g/knV
+ NFdZyMl87Q1X14IZkjyE82xs9t83CpnpAC67GpCE5l4d/iMGSklxHouDp/UjT5Vvjfhbau5DF3
+ /0p4hbh9qcIFXFBod9Ivm1xz
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+ by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 10 Aug 2022 15:18:17 -0700
+IronPort-SDR: D1Av2z60O56ZLc6GaUyRDvGEmHDKKauBWfRftJ7dydrVsVkCEJFgfMUJicpltdvWi1RJJVNwt7
+ w18r+/tKjR09zv73gxRwwc7qtyZehKBjwamsOyVg1C8vLDJEZopCMKGEGEqEXayo13ynvr60TH
+ CUaWOMEQyiDg6PurYnTCzbtP8ey4VMxPNUvoT0GiAV6i+yME5kk9y4Eg0PuGzYnBHppIMIk+Te
+ V2N7jGJqmRmO0XHDMRKr2OMlW4g3DrtXg2LaxUBxVkiMZaNoHOFzziOlCmt/6qrFw/xsR8A5uE
+ yTQ=
+WDCIronportException: Internal
+Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
+ by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 10 Aug 2022 16:02:43 -0700
+Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4M357Q07sJz1Rwnl
+ for <qemu-riscv@nongnu.org>; Wed, 10 Aug 2022 16:02:42 -0700 (PDT)
+Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
+ reason="pass (just generated, assumed good)"
+ header.d=opensource.wdc.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+ opensource.wdc.com; h=content-transfer-encoding:mime-version
+ :references:in-reply-to:x-mailer:message-id:date:subject:to
+ :from; s=dkim; t=1660172561; x=1662764562; bh=bJEhpj9iCpmqZwzHRz
+ xHSu1nlyr9NSdi6/fTLMOczEs=; b=OLsNJfEQsdB0nOPKKSN4xrj8EqY84BTnq5
+ XZu8rDO7hwn7Q8ZYuckKwu8oMFq8ma8LHz05cNPpWWhNQFRDHfQ72wkBDQTDGeg9
+ p80HVi8Bpfz1WGEAbft+QXnwM4PwkSunJX9r3mmfrCv7Vjv8YszOV0deROig0r8y
+ Pyl+Xb0PcafAUldZNaDrX1uTdvJr33utCbwirTd3DHZISfMeLNx4Ga+6v5vdmgRC
+ F5dkpcgxliDkw84vZ/doSiXb10Q4E24sm0qQul0O7B9GEYFTezuC7PHLD16ZIp7U
+ kRHoMkH6j/0OvdGCUiFzgPPtsr/yHO4RQEtbV9OsoHKAa98DkQug==
+X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
+Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
+ by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
+ port 10026) with ESMTP id TnIUifJcs2iR for <qemu-riscv@nongnu.org>;
+ Wed, 10 Aug 2022 16:02:41 -0700 (PDT)
+Received: from fedora.home (unknown [10.225.165.24])
+ by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4M357L5JRNz1RtVk;
+ Wed, 10 Aug 2022 16:02:38 -0700 (PDT)
+From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+To: Alistair.Francis@wdc.com,
+	qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org,
+	Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Subject: [PATCH 2/3] hw/ssi: fixup coverity issue
+Date: Thu, 11 Aug 2022 09:02:00 +1000
+Message-Id: <20220810230200.149398-2-wilfred.mallawa@opensource.wdc.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20220810230200.149398-1-wilfred.mallawa@opensource.wdc.com>
+References: <20220810230200.149398-1-wilfred.mallawa@opensource.wdc.com>
 MIME-Version: 1.0
-In-Reply-To: <20220810184548.3620153-4-atishp@rivosinc.com>
-Content-Type: text/plain; charset=gbk; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
-X-CM-TRANSID: zQCowABHaX7uSPRie+7rFw--.22181S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3KFW7Cw1rKry8urWkJr1xAFb_yoWDXry3pF
- WkC39xKay3tFZrZ3Z3trn8GwnYyw4UKan8Wws7CFWrAFs8GrW5GF1DK3ZrAFs5WFWDWr4F
- vF1Fkr1Ykw40vFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvE14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r1I6r4UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4j6r
- 4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcVAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCYjI0SjxkI62AI1cAE67vI
- Y487MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
- WUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
- 67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
- IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1l
- IxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWI
- evJa73UjIFyTuYvjfU8VbyDUUUU
-X-Originating-IP: [116.224.155.20]
-X-CM-SenderInfo: 5olzvxxzhlqxpvfd2hldfou0/
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=liweiwei@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: 5
-X-Spam_score: 0.5
-X-Spam_bar: /
-X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, MIME_CHARSET_FARAWAY=2.45,
- NICE_REPLY_A=-0.001, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=216.71.153.144;
+ envelope-from=prvs=2146f6254=wilfred.mallawa@opensource.wdc.com;
+ helo=esa5.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01,
+ UPPERCASE_50_75=0.008 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 10 Aug 2022 20:58:36 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,317 +107,309 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2022 00:10:36 -0000
+X-List-Received-Date: Wed, 10 Aug 2022 23:02:53 -0000
 
+From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
-ÔÚ 2022/8/11 ÉÏÎç2:45, Atish Patra Ð´µÀ:
-> vstimecmp CSR allows the guest OS or to program the next guest timer
-> interrupt directly. Thus, hypervisor no longer need to inject the
-> timer interrupt to the guest if vstimecmp is used. This was ratified
-> as a part of the Sstc extension.
->
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
->   target/riscv/cpu.h         |  4 ++
->   target/riscv/cpu_bits.h    |  4 ++
->   target/riscv/cpu_helper.c  | 11 +++--
->   target/riscv/csr.c         | 88 ++++++++++++++++++++++++++++++++++++--
->   target/riscv/machine.c     |  1 +
->   target/riscv/time_helper.c | 16 +++++++
->   6 files changed, 118 insertions(+), 6 deletions(-)
+This patch addresses the coverity issues specified in [1],
+as suggested, `FIELD_DP32()`/`FIELD_EX32()` macros have been
+implemented to clean up the code.
 
-LGTM.
+Additionally, the `EVENT_ENABLE` register is correctly updated
+to addr of `0x34`.
 
-Reviewed-by: Weiwei Li <liweiwei@iscas.ac.cn>
+[1] https://www.mail-archive.com/qemu-devel@nongnu.org/msg887713.html
 
-Regards,
-Weiwei Li
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 4cda2905661e..1fd382b2717f 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -312,6 +312,8 @@ struct CPUArchState {
->       /* Sstc CSRs */
->       uint64_t stimecmp;
->   
-> +    uint64_t vstimecmp;
-> +
->       /* physical memory protection */
->       pmp_table_t pmp_state;
->       target_ulong mseccfg;
-> @@ -366,6 +368,8 @@ struct CPUArchState {
->   
->       /* Fields from here on are preserved across CPU reset. */
->       QEMUTimer *stimer; /* Internal timer for S-mode interrupt */
-> +    QEMUTimer *vstimer; /* Internal timer for VS-mode interrupt */
-> +    bool vstime_irq;
->   
->       hwaddr kernel_addr;
->       hwaddr fdt_addr;
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index ac17cf1515c0..095dab19f512 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -257,6 +257,10 @@
->   #define CSR_VSIP            0x244
->   #define CSR_VSATP           0x280
->   
-> +/* Sstc virtual CSRs */
-> +#define CSR_VSTIMECMP       0x24D
-> +#define CSR_VSTIMECMPH      0x25D
-> +
->   #define CSR_MTINST          0x34a
->   #define CSR_MTVAL2          0x34b
->   
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 650574accf0a..1e4faa84e839 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -345,8 +345,9 @@ uint64_t riscv_cpu_all_pending(CPURISCVState *env)
->   {
->       uint32_t gein = get_field(env->hstatus, HSTATUS_VGEIN);
->       uint64_t vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
-> +    uint64_t vstip = (env->vstime_irq) ? MIP_VSTIP : 0;
->   
-> -    return (env->mip | vsgein) & env->mie;
-> +    return (env->mip | vsgein | vstip) & env->mie;
->   }
->   
->   int riscv_cpu_mirq_pending(CPURISCVState *env)
-> @@ -605,7 +606,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->   {
->       CPURISCVState *env = &cpu->env;
->       CPUState *cs = CPU(cpu);
-> -    uint64_t gein, vsgein = 0, old = env->mip;
-> +    uint64_t gein, vsgein = 0, vstip = 0, old = env->mip;
->       bool locked = false;
->   
->       if (riscv_cpu_virt_enabled(env)) {
-> @@ -613,6 +614,10 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->           vsgein = (env->hgeip & (1ULL << gein)) ? MIP_VSEIP : 0;
->       }
->   
-> +    /* No need to update mip for VSTIP */
-> +    mask = ((mask == MIP_VSTIP) && env->vstime_irq) ? 0 : mask;
-> +    vstip = env->vstime_irq ? MIP_VSTIP : 0;
-> +
->       if (!qemu_mutex_iothread_locked()) {
->           locked = true;
->           qemu_mutex_lock_iothread();
-> @@ -620,7 +625,7 @@ uint64_t riscv_cpu_update_mip(RISCVCPU *cpu, uint64_t mask, uint64_t value)
->   
->       env->mip = (env->mip & ~mask) | (value & mask);
->   
-> -    if (env->mip | vsgein) {
-> +    if (env->mip | vsgein | vstip) {
->           cpu_interrupt(cs, CPU_INTERRUPT_HARD);
->       } else {
->           cpu_reset_interrupt(cs, CPU_INTERRUPT_HARD);
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 9079d988ba08..38bb46db8f99 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -808,6 +808,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
->   {
->       CPUState *cs = env_cpu(env);
->       RISCVCPU *cpu = RISCV_CPU(cs);
-> +    bool hmode_check = false;
->   
->       if (!cpu->cfg.ext_sstc || !env->rdtime_fn) {
->           return RISCV_EXCP_ILLEGAL_INST;
-> @@ -826,7 +827,18 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
->           return RISCV_EXCP_ILLEGAL_INST;
->       }
->   
-> -    return smode(env, csrno);
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        if (!(get_field(env->hcounteren, COUNTEREN_TM) &
-> +              get_field(env->henvcfg, HENVCFG_STCE))) {
-> +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> +        }
-> +    }
-> +
-> +    if ((csrno == CSR_VSTIMECMP) || (csrno == CSR_VSTIMECMPH)) {
-> +        hmode_check = true;
-> +    }
-> +
-> +    return hmode_check ? hmode(env, csrno) : smode(env, csrno);
->   }
->   
->   static RISCVException sstc_32(CPURISCVState *env, int csrno)
-> @@ -838,17 +850,72 @@ static RISCVException sstc_32(CPURISCVState *env, int csrno)
->       return sstc(env, csrno);
->   }
->   
-> +static RISCVException read_vstimecmp(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->vstimecmp;
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException read_vstimecmph(CPURISCVState *env, int csrno,
-> +                                    target_ulong *val)
-> +{
-> +    *val = env->vstimecmp >> 32;
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_vstimecmp(CPURISCVState *env, int csrno,
-> +                                    target_ulong val)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +
-> +    if (riscv_cpu_mxl(env) == MXL_RV32) {
-> +        env->vstimecmp = deposit64(env->vstimecmp, 0, 32, (uint64_t)val);
-> +    } else {
-> +        env->vstimecmp = val;
-> +    }
-> +
-> +    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-> +                              env->htimedelta, MIP_VSTIP);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
-> +static RISCVException write_vstimecmph(CPURISCVState *env, int csrno,
-> +                                    target_ulong val)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
-> +
-> +    env->vstimecmp = deposit64(env->vstimecmp, 32, 32, (uint64_t)val);
-> +    riscv_timer_write_timecmp(cpu, env->vstimer, env->vstimecmp,
-> +                              env->htimedelta, MIP_VSTIP);
-> +
-> +    return RISCV_EXCP_NONE;
-> +}
-> +
->   static RISCVException read_stimecmp(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> -    *val = env->stimecmp;
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        *val = env->vstimecmp;
-> +    } else {
-> +        *val = env->stimecmp;
-> +    }
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
->   static RISCVException read_stimecmph(CPURISCVState *env, int csrno,
->                                       target_ulong *val)
->   {
-> -    *val = env->stimecmp >> 32;
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        *val = env->vstimecmp >> 32;
-> +    } else {
-> +        *val = env->stimecmp >> 32;
-> +    }
-> +
->       return RISCV_EXCP_NONE;
->   }
->   
-> @@ -857,6 +924,10 @@ static RISCVException write_stimecmp(CPURISCVState *env, int csrno,
->   {
->       RISCVCPU *cpu = env_archcpu(env);
->   
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        return write_vstimecmp(env, csrno, val);
-> +    }
-> +
->       if (riscv_cpu_mxl(env) == MXL_RV32) {
->           env->stimecmp = deposit64(env->stimecmp, 0, 32, (uint64_t)val);
->       } else {
-> @@ -873,6 +944,10 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
->   {
->       RISCVCPU *cpu = env_archcpu(env);
->   
-> +    if (riscv_cpu_virt_enabled(env)) {
-> +        return write_vstimecmph(env, csrno, val);
-> +    }
-> +
->       env->stimecmp = deposit64(env->stimecmp, 32, 32, (uint64_t)val);
->       riscv_timer_write_timecmp(cpu, env->stimer, env->stimecmp, 0, MIP_STIP);
->   
-> @@ -1810,6 +1885,7 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
->       if (csrno != CSR_HVIP) {
->           gin = get_field(env->hstatus, HSTATUS_VGEIN);
->           old_mip |= (env->hgeip & ((target_ulong)1 << gin)) ? MIP_VSEIP : 0;
-> +        old_mip |= env->vstime_irq ? MIP_VSTIP : 0;
->       }
->   
->       if (ret_val) {
-> @@ -3670,6 +3746,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->                          .min_priv_ver = PRIV_VERSION_1_12_0 },
->       [CSR_STIMECMPH] = { "stimecmph", sstc_32, read_stimecmph, write_stimecmph,
->                           .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_VSTIMECMP] = { "vstimecmp", sstc, read_vstimecmp,
-> +                        write_vstimecmp,
-> +                        .min_priv_ver = PRIV_VERSION_1_12_0 },
-> +    [CSR_VSTIMECMPH] = { "vstimecmph", sstc_32, read_vstimecmph,
-> +                         write_vstimecmph,
-> +                         .min_priv_ver = PRIV_VERSION_1_12_0 },
->   
->       /* Supervisor Protection and Translation */
->       [CSR_SATP]     = { "satp",     smode, read_satp,     write_satp     },
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index 622fface484e..4ba55705d147 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -92,6 +92,7 @@ static const VMStateDescription vmstate_hyper = {
->           VMSTATE_UINTTL(env.hgeie, RISCVCPU),
->           VMSTATE_UINTTL(env.hgeip, RISCVCPU),
->           VMSTATE_UINT64(env.htimedelta, RISCVCPU),
-> +        VMSTATE_UINT64(env.vstimecmp, RISCVCPU),
->   
->           VMSTATE_UINTTL(env.hvictl, RISCVCPU),
->           VMSTATE_UINT8_ARRAY(env.hviprio, RISCVCPU, 64),
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index f3fb5eac7b7b..8cce667dfd47 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -22,6 +22,14 @@
->   #include "time_helper.h"
->   #include "hw/intc/riscv_aclint.h"
->   
-> +static void riscv_vstimer_cb(void *opaque)
-> +{
-> +    RISCVCPU *cpu = opaque;
-> +    CPURISCVState *env = &cpu->env;
-> +    env->vstime_irq = 1;
-> +    riscv_cpu_update_mip(cpu, MIP_VSTIP, BOOL_TO_MASK(1));
-> +}
-> +
->   static void riscv_stimer_cb(void *opaque)
->   {
->       RISCVCPU *cpu = opaque;
-> @@ -47,10 +55,16 @@ void riscv_timer_write_timecmp(RISCVCPU *cpu, QEMUTimer *timer,
->            * If we're setting an stimecmp value in the "past",
->            * immediately raise the timer interrupt
->            */
-> +        if (timer_irq == MIP_VSTIP) {
-> +            env->vstime_irq = 1;
-> +        }
->           riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(1));
->           return;
->       }
->   
-> +    if (timer_irq == MIP_VSTIP) {
-> +        env->vstime_irq = 0;
-> +    }
->       /* Clear the [V]STIP bit in mip */
->       riscv_cpu_update_mip(cpu, timer_irq, BOOL_TO_MASK(0));
->   
-> @@ -95,4 +109,6 @@ void riscv_timer_init(RISCVCPU *cpu)
->       env->stimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_stimer_cb, cpu);
->       env->stimecmp = 0;
->   
-> +    env->vstimer = timer_new_ns(QEMU_CLOCK_VIRTUAL, &riscv_vstimer_cb, cpu);
-> +    env->vstimecmp = 0;
->   }
+Fixes: Coverity CID 1488107
+
+Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+---
+ hw/ssi/ibex_spi_host.c | 141 +++++++++++++++++++++++------------------
+ 1 file changed, 78 insertions(+), 63 deletions(-)
+
+diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
+index 601041d719..8c35bfa95f 100644
+--- a/hw/ssi/ibex_spi_host.c
++++ b/hw/ssi/ibex_spi_host.c
+@@ -93,7 +93,7 @@ REG32(ERROR_STATUS, 0x30)
+     FIELD(ERROR_STATUS, CMDINVAL, 3, 1)
+     FIELD(ERROR_STATUS, CSIDINVAL, 4, 1)
+     FIELD(ERROR_STATUS, ACCESSINVAL, 5, 1)
+-REG32(EVENT_ENABLE, 0x30)
++REG32(EVENT_ENABLE, 0x34)
+     FIELD(EVENT_ENABLE, RXFULL, 0, 1)
+     FIELD(EVENT_ENABLE, TXEMPTY, 1, 1)
+     FIELD(EVENT_ENABLE, RXWM, 2, 1)
+@@ -108,18 +108,20 @@ static inline uint8_t div4_round_up(uint8_t dividen=
+d)
+=20
+ static void ibex_spi_rxfifo_reset(IbexSPIHostState *s)
+ {
++    uint32_t data =3D s->regs[IBEX_SPI_HOST_STATUS];
+     /* Empty the RX FIFO and assert RXEMPTY */
+     fifo8_reset(&s->rx_fifo);
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_RXFULL_MASK;
+-    s->regs[IBEX_SPI_HOST_STATUS] |=3D R_STATUS_RXEMPTY_MASK;
++    data =3D FIELD_DP32(data, STATUS, RXEMPTY, 1);
++    s->regs[IBEX_SPI_HOST_STATUS] =3D data;
+ }
+=20
+ static void ibex_spi_txfifo_reset(IbexSPIHostState *s)
+ {
++    uint32_t data =3D s->regs[IBEX_SPI_HOST_STATUS];
+     /* Empty the TX FIFO and assert TXEMPTY */
+     fifo8_reset(&s->tx_fifo);
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_TXFULL_MASK;
+-    s->regs[IBEX_SPI_HOST_STATUS] |=3D R_STATUS_TXEMPTY_MASK;
++    data =3D FIELD_DP32(data, STATUS, TXEMPTY, 1);
++    s->regs[IBEX_SPI_HOST_STATUS] =3D data;
+ }
+=20
+ static void ibex_spi_host_reset(DeviceState *dev)
+@@ -162,37 +164,41 @@ static void ibex_spi_host_reset(DeviceState *dev)
+  */
+ static void ibex_spi_host_irq(IbexSPIHostState *s)
+ {
+-    bool error_en =3D s->regs[IBEX_SPI_HOST_INTR_ENABLE]
+-                    & R_INTR_ENABLE_ERROR_MASK;
+-    bool event_en =3D s->regs[IBEX_SPI_HOST_INTR_ENABLE]
+-                    & R_INTR_ENABLE_SPI_EVENT_MASK;
+-    bool err_pending =3D s->regs[IBEX_SPI_HOST_INTR_STATE]
+-                        & R_INTR_STATE_ERROR_MASK;
+-    bool status_pending =3D s->regs[IBEX_SPI_HOST_INTR_STATE]
+-                        & R_INTR_STATE_SPI_EVENT_MASK;
++    bool error_en =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_ENABLE],
++                               INTR_ENABLE, ERROR);
++
++    bool event_en =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_ENABLE],
++                               INTR_ENABLE, SPI_EVENT);
++
++    bool err_pending =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_STATE],
++                                  INTR_STATE, ERROR);
++
++    bool status_pending =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_STATE]=
+,
++                                     INTR_STATE, SPI_EVENT);
++
+     int err_irq =3D 0, event_irq =3D 0;
+=20
+     /* Error IRQ enabled and Error IRQ Cleared */
+     if (error_en && !err_pending) {
+         /* Event enabled, Interrupt Test Error */
+-        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_ERROR_MASK) {
++        if (FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_TEST], INTR_TEST,  ERR=
+OR)) {
+             err_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+-                    &  R_ERROR_ENABLE_CMDBUSY_MASK) &&
+-                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+-                    & R_ERROR_STATUS_CMDBUSY_MASK) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_ENABLE],
++                              ERROR_ENABLE,  CMDBUSY) &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_STATUS],
++                               ERROR_STATUS,  CMDBUSY)) {
+             /* Wrote to COMMAND when not READY */
+             err_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+-                    &  R_ERROR_ENABLE_CMDINVAL_MASK) &&
+-                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+-                    & R_ERROR_STATUS_CMDINVAL_MASK) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_ENABLE],
++                              ERROR_ENABLE,  CMDINVAL)  &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_STATUS],
++                               ERROR_STATUS,  CMDINVAL)) {
+             /* Invalid command segment */
+             err_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_ERROR_ENABLE]
+-                    & R_ERROR_ENABLE_CSIDINVAL_MASK) &&
+-                    s->regs[IBEX_SPI_HOST_ERROR_STATUS]
+-                    & R_ERROR_STATUS_CSIDINVAL_MASK) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_ENABLE],
++                              ERROR_ENABLE,  CSIDINVAL) &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_ERROR_STATUS],
++                               ERROR_STATUS,  CSIDINVAL)) {
+             /* Invalid value for CSID */
+             err_irq =3D 1;
+         }
+@@ -204,22 +210,26 @@ static void ibex_spi_host_irq(IbexSPIHostState *s)
+=20
+     /* Event IRQ Enabled and Event IRQ Cleared */
+     if (event_en && !status_pending) {
+-        if (s->regs[IBEX_SPI_HOST_INTR_TEST] & R_INTR_TEST_SPI_EVENT_MAS=
+K) {
++        if (FIELD_EX32(s->regs[IBEX_SPI_HOST_INTR_TEST],
++                       INTR_STATE,  SPI_EVENT)) {
+             /* Event enabled, Interrupt Test Event */
+             event_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+-                    & R_EVENT_ENABLE_READY_MASK) &&
+-                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK=
+)) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_EVENT_ENABLE],
++                              EVENT_ENABLE,  READY) &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS],
++                               STATUS, READY)) {
+             /* SPI Host ready for next command */
+             event_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+-                    & R_EVENT_ENABLE_TXEMPTY_MASK) &&
+-                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_TXEMPTY_MA=
+SK)) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_EVENT_ENABLE],
++                              EVENT_ENABLE,  TXEMPTY) &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS],
++                               STATUS,  TXEMPTY)) {
+             /* SPI TXEMPTY, TXFIFO drained */
+             event_irq =3D 1;
+-        } else if ((s->regs[IBEX_SPI_HOST_EVENT_ENABLE]
+-                    & R_EVENT_ENABLE_RXFULL_MASK) &&
+-                    (s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_RXFULL_MAS=
+K)) {
++        } else if (FIELD_EX32(s->regs[IBEX_SPI_HOST_EVENT_ENABLE],
++                              EVENT_ENABLE,  RXFULL) &&
++                    FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS],
++                               STATUS,  RXFULL)) {
+             /* SPI RXFULL, RXFIFO  full */
+             event_irq =3D 1;
+         }
+@@ -232,10 +242,11 @@ static void ibex_spi_host_irq(IbexSPIHostState *s)
+=20
+ static void ibex_spi_host_transfer(IbexSPIHostState *s)
+ {
+-    uint32_t rx, tx;
++    uint32_t rx, tx, data;
+     /* Get num of one byte transfers */
+-    uint8_t segment_len =3D ((s->regs[IBEX_SPI_HOST_COMMAND] & R_COMMAND=
+_LEN_MASK)
+-                          >> R_COMMAND_LEN_SHIFT);
++    uint8_t segment_len =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_COMMAND],
++                                     COMMAND,  LEN);
++
+     while (segment_len > 0) {
+         if (fifo8_is_empty(&s->tx_fifo)) {
+             /* Assert Stall */
+@@ -262,22 +273,23 @@ static void ibex_spi_host_transfer(IbexSPIHostState=
+ *s)
+         --segment_len;
+     }
+=20
++    data =3D s->regs[IBEX_SPI_HOST_STATUS];
+     /* Assert Ready */
+-    s->regs[IBEX_SPI_HOST_STATUS] |=3D R_STATUS_READY_MASK;
++    data =3D FIELD_DP32(data, STATUS, READY, 1);
+     /* Set RXQD */
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_RXQD_MASK;
+-    s->regs[IBEX_SPI_HOST_STATUS] |=3D (R_STATUS_RXQD_MASK
+-                                    & div4_round_up(segment_len));
++    data =3D FIELD_DP32(data, STATUS, RXQD, div4_round_up(segment_len));
+     /* Set TXQD */
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_TXQD_MASK;
+-    s->regs[IBEX_SPI_HOST_STATUS] |=3D (fifo8_num_used(&s->tx_fifo) / 4)
+-                                    & R_STATUS_TXQD_MASK;
++    data =3D FIELD_DP32(data, STATUS, TXQD, fifo8_num_used(&s->tx_fifo) =
+/ 4);
+     /* Clear TXFULL */
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_TXFULL_MASK;
+-    /* Assert TXEMPTY and drop remaining bytes that exceed segment_len *=
+/
+-    ibex_spi_txfifo_reset(s);
++    data =3D FIELD_DP32(data, STATUS, TXFULL, 0);
+     /* Reset RXEMPTY */
+-    s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_RXEMPTY_MASK;
++    data =3D FIELD_DP32(data, STATUS, RXEMPTY, 0);
++    /* Set TXEMPTY */
++    data =3D FIELD_DP32(data, STATUS, TXEMPTY, 1);
++    /* Drop remaining bytes that exceed segment_len */
++    ibex_spi_txfifo_reset(s);
++    /* Update register status */
++    s->regs[IBEX_SPI_HOST_STATUS] =3D data;
+=20
+     ibex_spi_host_irq(s);
+ }
+@@ -340,7 +352,7 @@ static void ibex_spi_host_write(void *opaque, hwaddr =
+addr,
+ {
+     IbexSPIHostState *s =3D opaque;
+     uint32_t val32 =3D val64;
+-    uint32_t shift_mask =3D 0xff;
++    uint32_t shift_mask =3D 0xff, data;
+     uint8_t txqd_len;
+=20
+     trace_ibex_spi_host_write(addr, size, val64);
+@@ -397,21 +409,23 @@ static void ibex_spi_host_write(void *opaque, hwadd=
+r addr,
+         s->regs[addr] =3D val32;
+=20
+         /* STALL, IP not enabled */
+-        if (!(s->regs[IBEX_SPI_HOST_CONTROL] & R_CONTROL_SPIEN_MASK)) {
++        if (!(FIELD_EX32(s->regs[IBEX_SPI_HOST_CONTROL],
++                         CONTROL, SPIEN))) {
+             return;
+         }
+=20
+         /* SPI not ready, IRQ Error */
+-        if (!(s->regs[IBEX_SPI_HOST_STATUS] & R_STATUS_READY_MASK)) {
++        if (!(FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS],
++                         STATUS, READY))) {
+             s->regs[IBEX_SPI_HOST_ERROR_STATUS] |=3D R_ERROR_STATUS_CMDB=
+USY_MASK;
+             ibex_spi_host_irq(s);
+             return;
+         }
++
+         /* Assert Not Ready */
+         s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_READY_MASK;
+=20
+-        if (((val32 & R_COMMAND_DIRECTION_MASK) >> R_COMMAND_DIRECTION_S=
+HIFT)
+-            !=3D BIDIRECTIONAL_TRANSFER) {
++        if (FIELD_EX32(val32, COMMAND, DIRECTION) !=3D BIDIRECTIONAL_TRA=
+NSFER) {
+                 qemu_log_mask(LOG_UNIMP,
+                           "%s: Rx Only/Tx Only are not supported\n", __f=
+unc__);
+         }
+@@ -452,8 +466,8 @@ static void ibex_spi_host_write(void *opaque, hwaddr =
+addr,
+                 return;
+             }
+             /* Byte ordering is set by the IP */
+-            if ((s->regs[IBEX_SPI_HOST_STATUS] &
+-                R_STATUS_BYTEORDER_MASK) =3D=3D 0) {
++            if (FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS], STATUS,
++                           BYTEORDER) =3D=3D 0) {
+                 /* LE: LSB transmitted first (default for ibex processor=
+) */
+                 shift_mask =3D 0xff << (i * 8);
+             } else {
+@@ -465,17 +479,18 @@ static void ibex_spi_host_write(void *opaque, hwadd=
+r addr,
+             fifo8_push(&s->tx_fifo, (val32 & shift_mask) >> (i * 8));
+         }
+=20
++        data =3D s->regs[IBEX_SPI_HOST_STATUS];
+         /* Reset TXEMPTY */
+-        s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_TXEMPTY_MASK;
++        data =3D FIELD_DP32(data, STATUS, TXEMPTY, 0);
+         /* Update TXQD */
+-        txqd_len =3D (s->regs[IBEX_SPI_HOST_STATUS] &
+-                    R_STATUS_TXQD_MASK) >> R_STATUS_TXQD_SHIFT;
++        txqd_len =3D FIELD_EX32(s->regs[IBEX_SPI_HOST_STATUS], STATUS, T=
+XQD);
+         /* Partial bytes (size < 4) are padded, in words. */
+         txqd_len +=3D 1;
+-        s->regs[IBEX_SPI_HOST_STATUS] &=3D ~R_STATUS_TXQD_MASK;
+-        s->regs[IBEX_SPI_HOST_STATUS] |=3D txqd_len;
++        data =3D FIELD_DP32(data, STATUS, TXQD, txqd_len);
+         /* Assert Ready */
+-        s->regs[IBEX_SPI_HOST_STATUS] |=3D R_STATUS_READY_MASK;
++        data =3D FIELD_DP32(data, STATUS, READY, 1);
++        /* Update register status */
++        s->regs[IBEX_SPI_HOST_STATUS] =3D data;
+         break;
+     case IBEX_SPI_HOST_ERROR_ENABLE:
+         s->regs[addr] =3D val32;
+--=20
+2.37.1
 
 
