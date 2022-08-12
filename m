@@ -1,62 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oMVTR-0006oY-N1
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 10:17:17 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:38652)
+	id 1oMVV8-000827-Ep
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 10:19:04 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:38826)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
- id 1oMVTQ-0006nK-A5
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 10:17:16 -0400
-Received: from mail-yb1-xb29.google.com ([2607:f8b0:4864:20::b29]:39504)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1oMVUl-0007yD-Hw
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 10:18:44 -0400
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b]:40808)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
- id 1oMVTO-0004VR-2x
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 10:17:15 -0400
-Received: by mail-yb1-xb29.google.com with SMTP id k12so1689828ybk.6
- for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 07:17:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1oMVUj-0004aa-Lz
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 10:18:39 -0400
+Received: by mail-yb1-xb2b.google.com with SMTP id 123so1690846ybv.7
+ for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 07:18:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc;
- bh=3+aA7zar9aQ0yilm0GnctDmWKyuqcNep+BC9yckPE/Q=;
- b=OyyOWHGNFPr3y/isZUBuk1ogZTgU4PTJh/E783b7fpScplbc/4oMi47WQZSrNoyUXx
- kqEvLek5xHFZHHzu/gMiWyODcMAfO/uNtoEhJ9YyB1JKLU4N0GUWZM1Wzx/jbXy2QEJW
- nf1rW4qvuaJ5WOM/9a9P6z3aqRCqI88c6T1B27sGaKIHt3o04C6Ib6CLCwysNm+79KtD
- 8lQZpGdZtkXavUdhGybERdRTWKEOGEviqlGA7BEy1wJo+Qw22YW7OTVY425ounBmEeZs
- Xv9y+GmTPNXlJ2lzE68uYAOz/TgtGlzH5JWztqQcB69tOm37dLZmuS3SiOxu6HmcWwHA
- UfYg==
+ bh=aZuoj+N1RHsoVrh3/zFHoD3KQhFxD2ezVPsDRIU9ByQ=;
+ b=ft6t93PQFxTWd8OJbiCy9NxmdDvx3t2fVK6wPBEbLnO34t1ZKufKv8o5slSvxQw4n8
+ 1tHBUGDO7fVAR41bypg9Yh2uJ2COXfxsF+kebLVfFfVB5xsNml13WfX9pQ8KErXXkGg9
+ Jgln2T8KeyZXhhRcfvyMn1mzfYGtyHhKpiZBKLkH72qs61EaSQpZ17SBwxk68qANUyil
+ nA2VPRFF3087KnVlSYAh7+OawpmmiNMGvCmF1aj0rdJtpbhh+vUh0w3vGJOrUJ+PMkx8
+ tk++ZXgtgJtCgt+JJhfTEqmQH373W+x4ipbrbaBQSGidpL99tj/g5dBQffPHiWLBIGNw
+ 972w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc;
- bh=3+aA7zar9aQ0yilm0GnctDmWKyuqcNep+BC9yckPE/Q=;
- b=AhbTZqqtGiEec0SBulE+B8vVLiAYNEDlpH8HJZlkRWudocQT3E92SoCSt3MZwQA0dt
- i2QGoryoSldilaQyXulFy4QZOakkce9eovzhiZvEJxSRC4tdqiuzb1keB8tbibf+t4kh
- a/j+nNcosF4nLzhsEHEWOExnWnkzEBFRSzxU4gNFyxvAcrSwNigjTD8nvPuDHc50Fr6F
- OmUURAYHy+YHxR5XXMTHoYpzzUBmdOGHVSP9hqIkMCxSwYyxKo+M3rWMCF4fu4CnGKQt
- IfO7wr/s5maZoW8pnZVmchlLWfe5jSXElIc/g0pffFpiQJEWnrh+jwrz9o91dCpgksts
- jniA==
-X-Gm-Message-State: ACgBeo3tddSl+pNG9WA23Ksl3v8bnSO7r9OMQWvUUhm35jJiofakuPUV
- IkxBrcUzBjfZppguti9AFYuu3bvx2XsEz4w/qgX6IQ==
-X-Google-Smtp-Source: AA6agR5Qn+j4bxxCUvbpUCf7OqFG/c39hgGCJWR7HuDZUgB+vPv69YHY4dQ+p7Jx+t0q9sz0VgzYiGDleTAZVSm3S2o=
-X-Received: by 2002:a25:73c8:0:b0:67b:9efb:fedf with SMTP id
- o191-20020a2573c8000000b0067b9efbfedfmr3582178ybc.517.1660313831974; Fri, 12
- Aug 2022 07:17:11 -0700 (PDT)
+ bh=aZuoj+N1RHsoVrh3/zFHoD3KQhFxD2ezVPsDRIU9ByQ=;
+ b=tKstHt2KLqGtbRl1W0anBRrSedjydsU4ZIxgjqiasVGWbmI72q4awaHfJ+wzxw4aVh
+ ut1Yr7u228SERsr5gln9Q/L3fFcLbHBzSkbgvvpbkTIPQ14kz9PLyczeBctBRoRkyFBP
+ B2TJaLjKdLpT8K0A8Pm9kp9NdWVk14TDr5u/kfymiHOo5neOKYZOPCx7KImIFixlFRdz
+ dfnELzn75K0c9CU9zvxQEjTcfM/ADUjOeU4w/RQvhsrTF4IZGo2InDGny7gct29jjh2z
+ zNAr3EdkgcZatbhiEBiNeBX14WNBeZ/hYRArJHgc3jf55qVQyKOmDgGwcTfek39iECpQ
+ ti1Q==
+X-Gm-Message-State: ACgBeo225b49JJw0p/v7VfsN225KEzYOcZYAWq5pYsj/oEMKFnbWBiSz
+ 4CaRRve47Vet2GOSp3a2xAPLlYY9AvFBqWeVa+WTFQ==
+X-Google-Smtp-Source: AA6agR6VSVyYnHQ2zjkeg/sg4J3yf+Zljs69wQRuQruS603C7Smd7eAavoBwau0ueinVrX79/sQ7JZ0vnigZ29R4idw=
+X-Received: by 2002:a25:9a06:0:b0:676:4585:3df7 with SMTP id
+ x6-20020a259a06000000b0067645853df7mr3796081ybn.193.1660313916623; Fri, 12
+ Aug 2022 07:18:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
- <20220812131304.1674484-2-philipp.tomsich@vrull.eu>
- <CAFEAcA9tQDu_4N+6QKhX66R5PtddXWkL-zmn1vDTDdQceCtHdA@mail.gmail.com>
-In-Reply-To: <CAFEAcA9tQDu_4N+6QKhX66R5PtddXWkL-zmn1vDTDdQceCtHdA@mail.gmail.com>
-From: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Date: Fri, 12 Aug 2022 16:17:00 +0200
-Message-ID: <CAAeLtUDmvuje+cLB6j+_JjUt3TQaEoJYRypjd=dMNwkFsD0sDA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: fence: reconcile with specification
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- qemu-riscv@nongnu.org
+ <20220812140103.3lbh45oidiw2fhsf@kamzik>
+ <CAAeLtUDbVwvQzr9u+D2KH6qBoiu4ikEbf3aVahbmK_i=6gEM7A@mail.gmail.com>
+In-Reply-To: <CAAeLtUDbVwvQzr9u+D2KH6qBoiu4ikEbf3aVahbmK_i=6gEM7A@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 12 Aug 2022 15:18:25 +0100
+Message-ID: <CAFEAcA9Br-7mxsN-y7FciW8k=jtG2vhrf4tiO80bVcFBrCdUuA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: fence.i: update decode pattern
+To: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Andrew Jones <ajones@ventanamicro.com>, qemu-devel@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b29;
- envelope-from=philipp.tomsich@vrull.eu; helo=mail-yb1-xb29.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -76,93 +76,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2022 14:17:16 -0000
+X-List-Received-Date: Fri, 12 Aug 2022 14:18:44 -0000
 
-Happy to lower it back into the decode file.
-However, I initially pulled it up into the trans-function to more
-closely match the ISA specification: there is only one FENCE
-instruction with 3 arguments (FM, PRED, and SUCC).
-One might argue that the decode table for "RV32I Base Instruction Set"
-in the specification lists FENCE.TSO as a separate instruction, but
-the normative text doesn't (and FENCE overlaps FENCE.TSO in the
-tabular representation) =E2=80=94 so I would consider the table as
-informative.
-
-I'll wait until we see what consensus emerges from the discussion.
-
-Philipp.
-
-On Fri, 12 Aug 2022 at 15:21, Peter Maydell <peter.maydell@linaro.org> wrot=
+On Fri, 12 Aug 2022 at 15:11, Philipp Tomsich <philipp.tomsich@vrull.eu> wr=
+ote:
+>
+> On Fri, 12 Aug 2022 at 16:01, Andrew Jones <ajones@ventanamicro.com> wrot=
 e:
+> >
+> > > Update the decode pattern to reflect the specification.
+> >
+> > I got hung-up on this for a bit since there isn't any "must-be-0" field=
+s,
 >
-> On Fri, 12 Aug 2022 at 14:17, Philipp Tomsich <philipp.tomsich@vrull.eu> =
-wrote:
-> >
-> > Our decoding of fence-instructions is problematic in respect to the
-> > RISC-V ISA specification:
-> > - rs and rd are ignored, but need to be 0
-> > - fm is ignored
-> >
-> > This change adjusts the decode pattern to enfore rs and rd being 0,
-> > and validates the fm-field (together with pred/succ for FENCE.TSO) to
-> > determine whether a reserved instruction is specified.
-> >
-> > While the specification allows UNSPECIFIED behaviour for reserved
-> > instructions, we now always raise an illegal instruction exception.
-> >
-> > Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> >
-> > ---
-> >
-> >  target/riscv/insn32.decode              |  2 +-
-> >  target/riscv/insn_trans/trans_rvi.c.inc | 19 ++++++++++++++++++-
-> >  2 files changed, 19 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> > index 089128c3dc..4e53df1b62 100644
-> > --- a/target/riscv/insn32.decode
-> > +++ b/target/riscv/insn32.decode
-> > @@ -150,7 +150,7 @@ srl      0000000 .....    ..... 101 ..... 0110011 @=
-r
-> >  sra      0100000 .....    ..... 101 ..... 0110011 @r
-> >  or       0000000 .....    ..... 110 ..... 0110011 @r
-> >  and      0000000 .....    ..... 111 ..... 0110011 @r
-> > -fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
-> > +fence    fm:4 pred:4 succ:4 00000 000 00000 0001111
-> >  fence_i  000000000000     00000 001 00000 0001111
-> >  csrrw    ............     ..... 001 ..... 1110011 @csr
-> >  csrrs    ............     ..... 010 ..... 1110011 @csr
-> > diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/ins=
-n_trans/trans_rvi.c.inc
-> > index ca8e3d1ea1..515bb3b22a 100644
-> > --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> > +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> > @@ -795,7 +795,24 @@ static bool trans_srad(DisasContext *ctx, arg_srad=
- *a)
-> >
-> >  static bool trans_fence(DisasContext *ctx, arg_fence *a)
-> >  {
-> > -    /* FENCE is a full memory barrier. */
-> > +    switch (a->fm) {
-> > +    case 0b0000:
-> > +         /* normal fence */
-> > +         break;
-> > +
-> > +    case 0b0001:
-> > +         /* FENCE.TSO requires PRED and SUCC to be RW */
-> > +         if (a->pred !=3D 0xb0011 || a->succ !=3D 0b0011) {
-> > +            return false;
-> > +         }
-> > +         break;
-> > +
-> > +    default:
-> > +        /* reserved for future use */
-> > +        return false;
-> > +    }
+> Please refer to '=E2=80=9CZifencei=E2=80=9D Instruction-Fetch Fence, Vers=
+ion 2.0' in
+> the specification.
+> The encoding diagram clearly states 0 for imm[11:0], 0 for rs1 and 0 for =
+rd.
 >
-> I think it would be neater to do this decode in the
-> .decode file, rather than by hand in the trans function.
->
-> thanks
-> -- PMM
+> However, there is an explanatory paragraph below (unfortunately, it is
+> not clear whether this is normative or informative):
+
+> > The unused fields in the FENCE.I instruction, imm[11:0], rs1, and rd, a=
+re reserved for finer-grain fences in future extensions. For forward compat=
+ibility, base implementations shall ignore these fields, and standard softw=
+are shall zero these fields.
+
+That's pretty clear that this patch is wrong, then -- QEMU
+is an implementation, and so we must ignore these fields.
+Otherwise when a future version of the spec defines a finer-grain
+fence instruction in this part of the encoding space, older
+QEMU will incorrectly make software that uses it crash.
+
+If you think the spec is insufficiently clear about whether that
+is normative then that would be something to raise with the
+spec authors, preferably before anybody builds hardware that
+enforces must-be-zeroes on these fields...
+
+thanks
+-- PMM
 
