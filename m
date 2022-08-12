@@ -1,67 +1,71 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oMSqR-0001Re-Mv
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 07:28:51 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:33010)
+	id 1oMUTW-0002tI-8H
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 09:13:18 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53340)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oMSqQ-0001PF-8X
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 07:28:50 -0400
-Received: from mail-yb1-xb2c.google.com ([2607:f8b0:4864:20::b2c]:42551)
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1oMUTU-0002ou-M6
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 09:13:16 -0400
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:46684)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1oMSqG-000056-KO
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 07:28:49 -0400
-Received: by mail-yb1-xb2c.google.com with SMTP id 199so1005519ybl.9
- for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 04:28:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=g3wO+MInPhXOJJuApiOb69B9Nmg/XgtAZTT79PQbkC4=;
- b=vIbPPDBp/rsiVOCtZ0rwe1nqmd8fjqqdW2BNM34TzIGS6bONbdx3ujlg1w1rGOODn0
- zdAF32v7+sGEh03BnW9KcHwr4yQ7cCXWfqDgrhGAJrZOVgVjilqGCYAa/3OwBhJk+n5u
- y09qiBmveUXcYcJRxndLku4fBS5BvEhp+XPwNQVaKlQFFdzvCcqvVabCkynBd8J8/Sjj
- ViC8KqjpkOylbcWr7zhwy+/qbenS4aTbSlnu+9//wT+RfhUnJjzwyh4FvS7bbyNM53Hi
- YahRtG8an0B0yBIHkByLQ4mZMG1+Al1VvQZ18DnXl2bvV+Ai8T6dYi/xa1rX/nSqAsW+
- GY1w==
+ (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
+ id 1oMUTP-0001gB-Cc
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 09:13:12 -0400
+Received: by mail-lf1-x12e.google.com with SMTP id d14so1265729lfl.13
+ for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 06:13:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=G2ccjmIp6atruoW2ZvRqasw1JxhdqSA37dPC/fmGkN8=;
+ b=a0SC+Tkzw6gNnQCK2W5t0qt67iIowkEg4RSKvCXaFuOUWwlM/3as+3KRJhMbapnQmg
+ /RglGYWXbse6kT5nPojulievlUXVJXpwwyqsrvEZFsK1+wOHDS/4XBhAxmaaiKDdiF8V
+ rLKbt6efPpP/x6AzKBCA7SjB4nmyqtNt6CFNgQEQHt1YY2xbW3PdHMCIg6dKYL7AaUpT
+ TPuhq3k/+JHRZoXlx8u9VOhzYfrcuoMg+gLKOEzSIXNIN5f3kYt8DVReIVLiK2+5Nh9M
+ yIsnPZ+wDkaXQAEbqaS7EkXPM2UJcDioIgkek5PbjWf2Yg//DGsBmXR3TiZeLncXZ8V9
+ kwyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=g3wO+MInPhXOJJuApiOb69B9Nmg/XgtAZTT79PQbkC4=;
- b=SZlGf4Re9/LrFqkt8e0I18jE2NTd/w9SzsHZV4UkDSYIWba5l2KrRHztzJb1ou7Jz8
- yhRcCzUWKjw4iLXwT+V4o6MCficVIdrywRJ3h/hmLtyNqpk7hn2WI0Go2MdiNsEerjeR
- pRvkqCgD4To22jZLtxGDGEmHb2FjLqFINgk67OlK2VjRLH3mstxsse++HyliJMCLaPBM
- f9oASJrEaGGw/RVxbHvDxS6GaL5YVr29d7IB+NBf9C/hYQuJNyvprv2MmcIH2l2PfLVC
- ff6gEtzBXn5iCtPhNtct7o5SQxI4Gtz4qas8bhr1dwE/lItKVw0+xfnTe+1Kw+tNB4TT
- Cjeg==
-X-Gm-Message-State: ACgBeo3sRetoXlPZbVYCdSAW7yoY2Vxz3mnMSqTmsxtnZOKl1mzjHoo7
- H5Z7oDU5pPL9uGgmS6DCRlY+LFpQe/EG9vfaNY4wIA==
-X-Google-Smtp-Source: AA6agR6gztmtwvBGmjrpMLy97Hfq4TyWBW7QRvKHssg2CS2kA7aOAH6B9ZtubDP1SZ15jJZY5zYeX/FUXslYhhUp3mw=
-X-Received: by 2002:a25:3d0:0:b0:67c:2231:65e with SMTP id
- 199-20020a2503d0000000b0067c2231065emr2806450ybd.67.1660303719579; 
- Fri, 12 Aug 2022 04:28:39 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=G2ccjmIp6atruoW2ZvRqasw1JxhdqSA37dPC/fmGkN8=;
+ b=EF+KhlZEyfCcFlymUx9+vBVghHkxH7OA03GW7+qWvEtGT6DbSgF+iDR9aEesFCXSW5
+ hFJv+7tD8HWIMlwcvAIGJYaFiHP3o2ybeancruChAk/J3q+Jij5+45lLJUU43iMcCdEs
+ 3pkfdkwejbELaqWEnOotB88l1030ZSlv2+1rj6fFRtCiSHeGdHSVLB1DUSrdn+e+EmCk
+ fRrXFYbUG1ZEzaQknKwdemF4BodZMDjWLE0ZpTGIPGJT0EIyP9uSbO9fBOFOLrcdaeLq
+ 9mxIRGXrf+dizuXcaySJKf5MCziZTEvutyO4YkD9+qXzFMZytQz8ZbsGWOq75MUY68wT
+ 9Zdw==
+X-Gm-Message-State: ACgBeo3HNt/SCDR8ysEQiMxlz42qhzczJHURplDAeTz0UNWyUuJZjzKg
+ IZGOaYDVUpaBJJkL1aBEcVO6Gg==
+X-Google-Smtp-Source: AA6agR4Nl9J8wZ0vEbKXhyKq4P9PuIfoYEten8SNxnyJ2F+DnHHwkme4JuvBeoFgaM+MGraWEa2dUQ==
+X-Received: by 2002:ac2:4f03:0:b0:481:5092:ec8f with SMTP id
+ k3-20020ac24f03000000b004815092ec8fmr1343806lfr.35.1660309989218; 
+ Fri, 12 Aug 2022 06:13:09 -0700 (PDT)
+Received: from ubuntu-focal.. ([2a01:4f9:3a:1e26::2])
+ by smtp.gmail.com with ESMTPSA id
+ f8-20020a2eb5a8000000b0025e72aae6bdsm356151ljn.28.2022.08.12.06.13.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Aug 2022 06:13:08 -0700 (PDT)
+From: Philipp Tomsich <philipp.tomsich@vrull.eu>
+To: qemu-devel@nongnu.org
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH 1/2] target/riscv: fence.i: update decode pattern
+Date: Fri, 12 Aug 2022 15:13:03 +0200
+Message-Id: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
-In-Reply-To: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Fri, 12 Aug 2022 12:28:28 +0100
-Message-ID: <CAFEAcA91NRxn5OedUx0pLp1ThO4jLjmRMRbnL3zPRXq4g68qAA@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Make semihosting configurable for all privilege
- modes
-To: Furquan Shaikh <furquan@rivosinc.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2c;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2c.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
+ envelope-from=philipp.tomsich@vrull.eu; helo=mail-lf1-x12e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,43 +78,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2022 11:28:50 -0000
+X-List-Received-Date: Fri, 12 Aug 2022 13:13:17 -0000
 
-On Thu, 11 Aug 2022 at 21:47, Furquan Shaikh <furquan@rivosinc.com> wrote:
->
-> Unlike ARM, RISC-V does not define a separate breakpoint type for
-> semihosting. Instead, it is entirely ABI. Thus, we need an option
-> to allow users to configure what the ebreak behavior should be for
-> different privilege levels - M, S, U, VS, VU. As per the RISC-V
-> privilege specification[1], ebreak traps into the execution
-> environment. However, RISC-V debug specification[2] provides
-> ebreak{m,s,u,vs,vu} configuration bits to allow ebreak behavior to
-> be configured to trap into debug mode instead. This change adds
-> settable properties for RISC-V CPUs - `ebreakm`, `ebreaks`, `ebreaku`,
-> `ebreakvs` and `ebreakvu` to allow user to configure whether qemu
-> should treat ebreak as semihosting traps or trap according to the
-> privilege specification.
->
-> [1] https://github.com/riscv/riscv-isa-manual/releases/download/draft-20220723-10eea63/riscv-privileged.pdf
-> [2] https://github.com/riscv/riscv-debug-spec/blob/release/riscv-debug-release.pdf
+The RISC-V specification specifies imm12, rs1 and rd to be all-zeros,
+so we can't ignore these bits when decoding into fence.i.
 
-As a general rule we don't allow userspace to make semihosting
-calls, as a (rather weak) attempt at fencing off unprivileged
-guest code from being able to scribble all over the host
-filesystem. We should try to be consistent across architectures
-about that, and in particular about how we enable it.
+Update the decode pattern to reflect the specification.
 
-I have a half-finished patchset where I was planning to add
-a --semihosting-config userspace-enable=on option or similar
-to that effect.
+Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+---
 
-It sounds like these ebreak bits are somewhat architectural,
-so maybe they make sense as a riscv specific thing, but we
-should consider how they ought to interact with the general
-behaviour of semihosting. As it stands in QEMU today, we
-(at least in theory) ought not to permit userspace to make
-semihosting ebreak calls at all I think.
+ target/riscv/insn32.decode | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-thanks
--- PMM
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 014127d066..089128c3dc 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -151,7 +151,7 @@ sra      0100000 .....    ..... 101 ..... 0110011 @r
+ or       0000000 .....    ..... 110 ..... 0110011 @r
+ and      0000000 .....    ..... 111 ..... 0110011 @r
+ fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
+-fence_i  ---- ----   ----   ----- 001 ----- 0001111
++fence_i  000000000000     00000 001 00000 0001111
+ csrrw    ............     ..... 001 ..... 1110011 @csr
+ csrrs    ............     ..... 010 ..... 1110011 @csr
+ csrrc    ............     ..... 011 ..... 1110011 @csr
+-- 
+2.34.1
+
 
