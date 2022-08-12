@@ -1,64 +1,66 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oMUTW-0002tI-8H
+	id 1oMUTW-0002tt-Eg
 	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 09:13:18 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53340)
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53336)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
- id 1oMUTU-0002ou-M6
+ id 1oMUTU-0002os-LV
  for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 09:13:16 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e]:46684)
+Received: from mail-lj1-x22e.google.com ([2a00:1450:4864:20::22e]:45838)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philipp.tomsich@vrull.eu>)
- id 1oMUTP-0001gB-Cc
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 09:13:12 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id d14so1265729lfl.13
- for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 06:13:10 -0700 (PDT)
+ id 1oMUTP-0001gG-TQ
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 09:13:14 -0400
+Received: by mail-lj1-x22e.google.com with SMTP id y23so888866ljh.12
+ for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 06:13:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vrull.eu; s=google;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc;
- bh=G2ccjmIp6atruoW2ZvRqasw1JxhdqSA37dPC/fmGkN8=;
- b=a0SC+Tkzw6gNnQCK2W5t0qt67iIowkEg4RSKvCXaFuOUWwlM/3as+3KRJhMbapnQmg
- /RglGYWXbse6kT5nPojulievlUXVJXpwwyqsrvEZFsK1+wOHDS/4XBhAxmaaiKDdiF8V
- rLKbt6efPpP/x6AzKBCA7SjB4nmyqtNt6CFNgQEQHt1YY2xbW3PdHMCIg6dKYL7AaUpT
- TPuhq3k/+JHRZoXlx8u9VOhzYfrcuoMg+gLKOEzSIXNIN5f3kYt8DVReIVLiK2+5Nh9M
- yIsnPZ+wDkaXQAEbqaS7EkXPM2UJcDioIgkek5PbjWf2Yg//DGsBmXR3TiZeLncXZ8V9
- kwyA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc;
+ bh=ixI1TlD3gg+it4H/Ncl3Spin19APaasX6jZ6LF0hhFg=;
+ b=fxJ1nkf6BiZg51l1xsdgQNR3SBur+cY2xlpc7pLmchN5XOR2U1Pn1rATR0eUydsL8M
+ iuAHiYngAYnSMyjxCrqCIdC/rHjNZMQQ7+tOzGeodusvJ34iKAcz1yk1r+XhYxYc56No
+ 13XTmecrMOUx5dxmPQr+PGs6LdBh4nw2KgHNuDpkVDXyCrR3wYpDWTj4uGCS3zm04pVh
+ VcoyxGXCLzdzaERE+roKi7VdnruPh5BGz4ZYmRty9KOubxQ8j/sEZmliVSB5puTNPbHM
+ XWel5mdOoxRhKH/4pY0uyXd3VQCiIqVrOyCJOcCvltYsAQZzInWvJG9aoHTjVvDxgfhl
+ iPig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc;
- bh=G2ccjmIp6atruoW2ZvRqasw1JxhdqSA37dPC/fmGkN8=;
- b=EF+KhlZEyfCcFlymUx9+vBVghHkxH7OA03GW7+qWvEtGT6DbSgF+iDR9aEesFCXSW5
- hFJv+7tD8HWIMlwcvAIGJYaFiHP3o2ybeancruChAk/J3q+Jij5+45lLJUU43iMcCdEs
- 3pkfdkwejbELaqWEnOotB88l1030ZSlv2+1rj6fFRtCiSHeGdHSVLB1DUSrdn+e+EmCk
- fRrXFYbUG1ZEzaQknKwdemF4BodZMDjWLE0ZpTGIPGJT0EIyP9uSbO9fBOFOLrcdaeLq
- 9mxIRGXrf+dizuXcaySJKf5MCziZTEvutyO4YkD9+qXzFMZytQz8ZbsGWOq75MUY68wT
- 9Zdw==
-X-Gm-Message-State: ACgBeo3HNt/SCDR8ysEQiMxlz42qhzczJHURplDAeTz0UNWyUuJZjzKg
- IZGOaYDVUpaBJJkL1aBEcVO6Gg==
-X-Google-Smtp-Source: AA6agR4Nl9J8wZ0vEbKXhyKq4P9PuIfoYEten8SNxnyJ2F+DnHHwkme4JuvBeoFgaM+MGraWEa2dUQ==
-X-Received: by 2002:ac2:4f03:0:b0:481:5092:ec8f with SMTP id
- k3-20020ac24f03000000b004815092ec8fmr1343806lfr.35.1660309989218; 
- Fri, 12 Aug 2022 06:13:09 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+ bh=ixI1TlD3gg+it4H/Ncl3Spin19APaasX6jZ6LF0hhFg=;
+ b=njecW+OoNyoig08BgJiDxlWWiTFsFSrGiOc8lKXRjPvMewA7KldkyxCEPpJXTx4rVi
+ C5a4LNxsk1HDXGfg2xI0J3DMUZIfgPbtfso3Dl7l6hpuSKAoNkpCaInYX02j88mK8xgH
+ GR2FhebfqTe1NIIx5HkMEXl4re6bDoY0GbekndCx1ZznwN3B4LuyxNChP1fFzt8u4Kpe
+ wj07oFtwoW2FsdM91MqZvIaGBaDclH4oQqzKcQ3RTqve+h9KWHIk5WgWHD9OMmDXX9Xo
+ IZ5P4l2Y9j5D0CowOXguZYvx9G22uuWZqP+kvkYyaVzaR2o1B0gWWVGDZ+vg+me23ZEB
+ N0Sg==
+X-Gm-Message-State: ACgBeo2/NJ2wQAZlezq20akMiiHRN9j4XcNTTaCCRb48/HuX4HTs5jCs
+ mPGPuIuI49fIBbofb+vhgAoO6g==
+X-Google-Smtp-Source: AA6agR7DyrGf5J9fcKw/vaWH3B5rZzoVSdtwRWHNmB+0/LA7MXkKcxLVaKaL4eMI21QOPvJrg0DfEw==
+X-Received: by 2002:a05:651c:2120:b0:25e:5145:38b0 with SMTP id
+ a32-20020a05651c212000b0025e514538b0mr1222012ljq.191.1660309990243; 
+ Fri, 12 Aug 2022 06:13:10 -0700 (PDT)
 Received: from ubuntu-focal.. ([2a01:4f9:3a:1e26::2])
  by smtp.gmail.com with ESMTPSA id
- f8-20020a2eb5a8000000b0025e72aae6bdsm356151ljn.28.2022.08.12.06.13.07
+ f8-20020a2eb5a8000000b0025e72aae6bdsm356151ljn.28.2022.08.12.06.13.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Aug 2022 06:13:08 -0700 (PDT)
+ Fri, 12 Aug 2022 06:13:09 -0700 (PDT)
 From: Philipp Tomsich <philipp.tomsich@vrull.eu>
 To: qemu-devel@nongnu.org
 Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Alistair Francis <alistair.francis@wdc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH 1/2] target/riscv: fence.i: update decode pattern
-Date: Fri, 12 Aug 2022 15:13:03 +0200
-Message-Id: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
+Subject: [PATCH 2/2] target/riscv: fence: reconcile with specification
+Date: Fri, 12 Aug 2022 15:13:04 +0200
+Message-Id: <20220812131304.1674484-2-philipp.tomsich@vrull.eu>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
+References: <20220812131304.1674484-1-philipp.tomsich@vrull.eu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=philipp.tomsich@vrull.eu; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22e;
+ envelope-from=philipp.tomsich@vrull.eu; helo=mail-lj1-x22e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -78,32 +80,71 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2022 13:13:17 -0000
+X-List-Received-Date: Fri, 12 Aug 2022 13:13:16 -0000
 
-The RISC-V specification specifies imm12, rs1 and rd to be all-zeros,
-so we can't ignore these bits when decoding into fence.i.
+Our decoding of fence-instructions is problematic in respect to the
+RISC-V ISA specification:
+- rs and rd are ignored, but need to be 0
+- fm is ignored
 
-Update the decode pattern to reflect the specification.
+This change adjusts the decode pattern to enfore rs and rd being 0,
+and validates the fm-field (together with pred/succ for FENCE.TSO) to
+determine whether a reserved instruction is specified.
+
+While the specification allows UNSPECIFIED behaviour for reserved
+instructions, we now always raise an illegal instruction exception.
 
 Signed-off-by: Philipp Tomsich <philipp.tomsich@vrull.eu>
+
 ---
 
- target/riscv/insn32.decode | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ target/riscv/insn32.decode              |  2 +-
+ target/riscv/insn_trans/trans_rvi.c.inc | 19 ++++++++++++++++++-
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 014127d066..089128c3dc 100644
+index 089128c3dc..4e53df1b62 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -151,7 +151,7 @@ sra      0100000 .....    ..... 101 ..... 0110011 @r
+@@ -150,7 +150,7 @@ srl      0000000 .....    ..... 101 ..... 0110011 @r
+ sra      0100000 .....    ..... 101 ..... 0110011 @r
  or       0000000 .....    ..... 110 ..... 0110011 @r
  and      0000000 .....    ..... 111 ..... 0110011 @r
- fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
--fence_i  ---- ----   ----   ----- 001 ----- 0001111
-+fence_i  000000000000     00000 001 00000 0001111
+-fence    ---- pred:4 succ:4 ----- 000 ----- 0001111
++fence    fm:4 pred:4 succ:4 00000 000 00000 0001111
+ fence_i  000000000000     00000 001 00000 0001111
  csrrw    ............     ..... 001 ..... 1110011 @csr
  csrrs    ............     ..... 010 ..... 1110011 @csr
- csrrc    ............     ..... 011 ..... 1110011 @csr
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index ca8e3d1ea1..515bb3b22a 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -795,7 +795,24 @@ static bool trans_srad(DisasContext *ctx, arg_srad *a)
+ 
+ static bool trans_fence(DisasContext *ctx, arg_fence *a)
+ {
+-    /* FENCE is a full memory barrier. */
++    switch (a->fm) {
++    case 0b0000:
++         /* normal fence */
++         break;
++
++    case 0b0001:
++         /* FENCE.TSO requires PRED and SUCC to be RW */
++         if (a->pred != 0xb0011 || a->succ != 0b0011) {
++            return false;
++         }
++         break;
++
++    default:
++        /* reserved for future use */
++        return false;
++    }
++
++    /* We implement FENCE(.TSO) is a full memory barrier. */
+     tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+     return true;
+ }
 -- 
 2.34.1
 
