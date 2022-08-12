@@ -1,65 +1,63 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oMdeE-0003p3-Ir
-	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 19:00:58 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:52736)
+	id 1oMdoF-000087-6g
+	for mharc-qemu-riscv@gnu.org; Fri, 12 Aug 2022 19:11:19 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:53620)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1oMdeA-0003nb-Hu
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 19:00:54 -0400
-Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431]:36357)
+ (Exim 4.90_1) (envelope-from <furquan@rivosinc.com>)
+ id 1oMdoD-00007O-KT
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 19:11:17 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029]:34682)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@dabbelt.com>)
- id 1oMde7-0002Lw-Nx
- for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 19:00:54 -0400
-Received: by mail-pf1-x431.google.com with SMTP id a22so1557408pfg.3
- for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 16:00:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <furquan@rivosinc.com>)
+ id 1oMdoB-0003fa-Cj
+ for qemu-riscv@nongnu.org; Fri, 12 Aug 2022 19:11:17 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ c19-20020a17090ae11300b001f2f94ed5c6so8083144pjz.1
+ for <qemu-riscv@nongnu.org>; Fri, 12 Aug 2022 16:11:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dabbelt-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:from:to:cc;
- bh=k6yWT/0OjMT08JWrp5IdU9/chuuVGBhkOndCfNLMzYY=;
- b=yLsgRIRwA8ZiH4+lGdH6RRS5ILYT+orT7GeS21/wHoWZ8ZUt5l/J1W2vNdZPcHIDku
- JLBDyE6yd6mqOn8IxccJ27Ly01t0Lm+UXmlsX5CuEuuBquJd4oYmCWN/jTi6MtilqJ4R
- RN/S5dnc8+h+tqSxXpFhP2xXu9a0PDdcA9rLpNSGXhHy8Ti0RHNOeh4NE97+KfqhU8jP
- p4rITjJfdGxe8kSpEmx6egLLGYzUFPizMbZKinQ6qywVWiXe3TFAUlrRrHfpRGDCTTz8
- 5coK/0HuRmLTTLH83qM07Tv7Fmuka2tymI+KPUC5AIql4ysW3nY+ap9wrd1e3vsguMRt
- ZwjA==
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=734bPX7Wfy2HBMau1MFdwdsHB1iSWmvZT49RXJ21gWE=;
+ b=q+HEzPI10LWnrlm8qVVFmu3VNSgjGj9IxFLWUAAI6Df72Ti+nwjHgGlaIRd2Pi5Sc4
+ ZbKg2CFslhlylgXv2RVz91ZTlfbOdloKb0j9nh9pxYNQR8Ni3iZGgVgBqdgumfAtzLyC
+ IgvLOROTo7bkssFrlrnryIKEtRiTgiRVfQk9nnWlI972wN8Myx1B7tW3UteEF39SEVGl
+ cPC9OH+2nigaIOvlBUtnBxSJM3byVYfN6x/KkVcN3CFQ2NFjuvHlMIuhL4oF6lNetBCk
+ 4/Chsqar4SKnqbUr5NSUGDhxRGc1++GflQZk4LwjbQ/0catIqL9h0P4isvhfhfH4b3fi
+ zpBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:to:from:cc
- :in-reply-to:subject:date:x-gm-message-state:from:to:cc;
- bh=k6yWT/0OjMT08JWrp5IdU9/chuuVGBhkOndCfNLMzYY=;
- b=RdcTpVDlVe5QRL5K82OaALdyIyIM8zfCSORyOi7gXUG8y/twYZjDDBpyiWq2S7Ai3U
- QsVGdeUO44uMSVZvcioKZeP4u/HycsvK9BjxL7DSrh4WHK/DjmoUlr5AZYdPFfb5zmZU
- DbeHDtxcqW1NNgchtTU77Z693o5vqSSI9QmG1x4RPeH4Wc54pvFOksGtpgExBPLq1S+8
- M4W87tpuw56N7E52iAxIAJS6ID+Fq2bPJRaNsUUsvmcGAbrQjbz8XSRUSK7DbpiOV+kF
- EHFiIovaG2+HKddkUVWh6hzchrker+DCpYTPxCTzkoLiY3iS5sz2y16ukG2xFFbegvgK
- Ircg==
-X-Gm-Message-State: ACgBeo0aCUkhPyhLLc3DyCEcno8Gi6PGVIR8upZKMMKwWSHFBOa54nUt
- XXM1g3NvRXC+m8F9Ppp58niuEA==
-X-Google-Smtp-Source: AA6agR6YU7Kq1IN6evLerwH3DeoTNNMprVg4VlHypyA9pq6EZ+iEt6VZLA/JHoYU6S51Ntyif6ktZg==
-X-Received: by 2002:a05:6a00:4306:b0:52e:3bdc:2635 with SMTP id
- cb6-20020a056a00430600b0052e3bdc2635mr5939200pfb.79.1660345249567; 
- Fri, 12 Aug 2022 16:00:49 -0700 (PDT)
-Received: from localhost ([50.221.140.186]) by smtp.gmail.com with ESMTPSA id
- q200-20020a632ad1000000b0041c30def5e8sm1843735pgq.33.2022.08.12.16.00.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Aug 2022 16:00:48 -0700 (PDT)
-Date: Fri, 12 Aug 2022 16:00:48 -0700 (PDT)
-X-Google-Original-Date: Fri, 12 Aug 2022 16:00:44 PDT (-0700)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=734bPX7Wfy2HBMau1MFdwdsHB1iSWmvZT49RXJ21gWE=;
+ b=T+Vx5FDpATpw682BqQXN/ju2SPYmZlS7dXSocSiYs/0qEOaibPLAA+RuXSOfrEhRNv
+ cS+JWysYQU2/8dsyL76vBLLMe4rVF8/LnydLPveUfkIKFRtVKnb4Wh5NsMRPTnHyHuLB
+ q3zuoMp87rois5BZno5U7o4eH1OoI5gRPyrSK0uwVBc2mlwWJobYDw+W/PnYW+vZ/psf
+ FAa3/8d4eUc54tZvQzNvxPCiPpEjyepm7ZXFn7O4zO7Lyeeb0TBxLndEfJTAgnDFC3p8
+ rzixZBRp1ncKhms6Vh+siSxYgwfmSqj8lM6ZwX1BWsauxOJI7oST+zxa6n+00siFegUn
+ j/Jw==
+X-Gm-Message-State: ACgBeo2CneQMjgbXUPe3mur0Oi+qoSzK4usRZ/24/H7a4bQH5NIplQ3s
+ uSk6FI2gr30FIjUKKqN98MkwcBY5x9d5c2QUuPos8Q==
+X-Google-Smtp-Source: AA6agR7CSVbDNi5/xdRZ1DgB4o2IQWdqN+Z4ApQWNTfVDOWZdxyVgecqX0331Ofrc0pjzcajiP93jc7uVtGl8N40l8I=
+X-Received: by 2002:a17:902:7293:b0:16f:17c3:e809 with SMTP id
+ d19-20020a170902729300b0016f17c3e809mr6246377pll.158.1660345873511; Fri, 12
+ Aug 2022 16:11:13 -0700 (PDT)
+MIME-Version: 1.0
+References: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
+ <CAFEAcA91NRxn5OedUx0pLp1ThO4jLjmRMRbnL3zPRXq4g68qAA@mail.gmail.com>
+In-Reply-To: <CAFEAcA91NRxn5OedUx0pLp1ThO4jLjmRMRbnL3zPRXq4g68qAA@mail.gmail.com>
+From: Furquan Shaikh <furquan@rivosinc.com>
+Date: Fri, 12 Aug 2022 16:11:02 -0700
+Message-ID: <CA+tJHD7=yATD-uyDt5HR7h5icry5pjYYBpkUq7wkZGcsAZjO7A@mail.gmail.com>
 Subject: Re: [PATCH] riscv: Make semihosting configurable for all privilege
  modes
-In-Reply-To: <CA+tJHD7L3Jxp06O1bAxsy_Z+qkUvUVNOhoXJM_PL6rxx1FsAAQ@mail.gmail.com>
-CC: ajones@ventanamicro.com, Alistair Francis <Alistair.Francis@wdc.com>,
- bin.meng@windriver.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-From: Palmer Dabbelt <palmer@dabbelt.com>
-To: furquan@rivosinc.com
-Message-ID: <mhng-2b0bb7a1-581d-4c56-88bc-d5b548520df1@palmer-ri-x1c9>
-Mime-Version: 1.0 (MHng)
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
- envelope-from=palmer@dabbelt.com; helo=mail-pf1-x431.google.com
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=furquan@rivosinc.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,165 +76,62 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2022 23:00:56 -0000
+X-List-Received-Date: Fri, 12 Aug 2022 23:11:17 -0000
 
-On Fri, 12 Aug 2022 15:05:08 PDT (-0700), furquan@rivosinc.com wrote:
-> On Fri, Aug 12, 2022 at 4:04 AM Andrew Jones <ajones@ventanamicro.com> wrote:
->>
->> On Thu, Aug 11, 2022 at 01:41:04PM -0700, Furquan Shaikh wrote:
->> > Unlike ARM, RISC-V does not define a separate breakpoint type for
->> > semihosting. Instead, it is entirely ABI. Thus, we need an option
->> > to allow users to configure what the ebreak behavior should be for
->> > different privilege levels - M, S, U, VS, VU. As per the RISC-V
->> > privilege specification[1], ebreak traps into the execution
->> > environment. However, RISC-V debug specification[2] provides
->> > ebreak{m,s,u,vs,vu} configuration bits to allow ebreak behavior to
->> > be configured to trap into debug mode instead. This change adds
->> > settable properties for RISC-V CPUs - `ebreakm`, `ebreaks`, `ebreaku`,
->> > `ebreakvs` and `ebreakvu` to allow user to configure whether qemu
->> > should treat ebreak as semihosting traps or trap according to the
->> > privilege specification.
->> >
->> > [1] https://github.com/riscv/riscv-isa-manual/releases/download/draft-20220723-10eea63/riscv-privileged.pdf
->> > [2] https://github.com/riscv/riscv-debug-spec/blob/release/riscv-debug-release.pdf
->> >
->> > Signed-off-by: Furquan Shaikh <furquan@rivosinc.com>
->> > ---
->> >  target/riscv/cpu.c        |  8 ++++++++
->> >  target/riscv/cpu.h        |  7 +++++++
->> >  target/riscv/cpu_helper.c | 26 +++++++++++++++++++++++++-
->> >  3 files changed, 40 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
->> > index ac6f82ebd0..082194652b 100644
->> > --- a/target/riscv/cpu.c
->> > +++ b/target/riscv/cpu.c
->> > @@ -953,6 +953,14 @@ static Property riscv_cpu_properties[] = {
->> >      DEFINE_PROP_BOOL("short-isa-string", RISCVCPU,
->> > cfg.short_isa_string, false),
->> >
->> >      DEFINE_PROP_BOOL("rvv_ta_all_1s", RISCVCPU, cfg.rvv_ta_all_1s, false),
->> > +
->> > +    /* Debug spec */
->> > +    DEFINE_PROP_BOOL("ebreakm", RISCVCPU, cfg.ebreakm, true),
->> > +    DEFINE_PROP_BOOL("ebreaks", RISCVCPU, cfg.ebreaks, false),
->> > +    DEFINE_PROP_BOOL("ebreaku", RISCVCPU, cfg.ebreaku, false),
->> > +    DEFINE_PROP_BOOL("ebreakvs", RISCVCPU, cfg.ebreakvs, false),
->> > +    DEFINE_PROP_BOOL("ebreakvu", RISCVCPU, cfg.ebreakvu, false),
->> > +
->> >      DEFINE_PROP_END_OF_LIST(),
->> >  };
->> >
->> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> > index 5c7acc055a..eee8e487a6 100644
->> > --- a/target/riscv/cpu.h
->> > +++ b/target/riscv/cpu.h
->> > @@ -454,6 +454,13 @@ struct RISCVCPUConfig {
->> >      bool epmp;
->> >      bool aia;
->> >      bool debug;
->> > +
->> > +    /* Debug spec */
->> > +    bool ebreakm;
->> > +    bool ebreaks;
->> > +    bool ebreaku;
->> > +    bool ebreakvs;
->> > +    bool ebreakvu;
->>
->> There's only five of these, so having each separate probably makes the
->> most sense, but I wanted to point out that we could keep the properties
->> independent booleans, as we should, but still consolidate the values
->> into a single bitmap like we did for the sve vq bitmap for arm (see
->> cpu_arm_get/set_vq). Maybe worth considering?
+On Fri, Aug 12, 2022 at 4:28 AM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> Thanks for the review and feedback, Andrew! I gave your suggestion a
-> try and updated the independent booleans to a single bitmap. It works,
-> but I am not sure if we really need all that additional code for this.
-> Like you mentioned, it is just five of these and having independent
-> booleans isn't too bad. If you or others feel strongly about switching
-> this to a bitmap, I can push a revised patchset. Else, I will keep the
-> change as is.
+> On Thu, 11 Aug 2022 at 21:47, Furquan Shaikh <furquan@rivosinc.com> wrote:
+> >
+> > Unlike ARM, RISC-V does not define a separate breakpoint type for
+> > semihosting. Instead, it is entirely ABI. Thus, we need an option
+> > to allow users to configure what the ebreak behavior should be for
+> > different privilege levels - M, S, U, VS, VU. As per the RISC-V
+> > privilege specification[1], ebreak traps into the execution
+> > environment. However, RISC-V debug specification[2] provides
+> > ebreak{m,s,u,vs,vu} configuration bits to allow ebreak behavior to
+> > be configured to trap into debug mode instead. This change adds
+> > settable properties for RISC-V CPUs - `ebreakm`, `ebreaks`, `ebreaku`,
+> > `ebreakvs` and `ebreakvu` to allow user to configure whether qemu
+> > should treat ebreak as semihosting traps or trap according to the
+> > privilege specification.
+> >
+> > [1] https://github.com/riscv/riscv-isa-manual/releases/download/draft-20220723-10eea63/riscv-privileged.pdf
+> > [2] https://github.com/riscv/riscv-debug-spec/blob/release/riscv-debug-release.pdf
 >
->>
->> >      uint64_t resetvec;
->> >
->> >      bool short_isa_string;
->> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
->> > index 59b3680b1b..be09abbe27 100644
->> > --- a/target/riscv/cpu_helper.c
->> > +++ b/target/riscv/cpu_helper.c
->> > @@ -1314,6 +1314,30 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr
->> > address, int size,
->> >
->> >      return true;
->> >  }
->> > +
->> > +static bool semihosting_enabled(RISCVCPU *cpu)
->> > +{
->> > +    CPURISCVState *env = &cpu->env;
->> > +
->> > +    switch (env->priv) {
->> > +    case PRV_M:
->> > +        return cpu->cfg.ebreakm;
->> > +    case PRV_S:
->> > +        if (riscv_cpu_virt_enabled(env)) {
->> > +            return cpu->cfg.ebreakvs;
->> > +        } else {
->> > +            return cpu->cfg.ebreaks;
->> > +        }
->> > +    case PRV_U:
->> > +        if (riscv_cpu_virt_enabled(env)) {
->> > +            return cpu->cfg.ebreakvu;
->> > +        } else {
->> > +            return cpu->cfg.ebreaku;
->> > +        }
->> > +    }
->> > +
->> > +    return false;
->> > +}
->> >  #endif /* !CONFIG_USER_ONLY */
->> >
->> >  /*
->> > @@ -1342,7 +1366,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->> >      target_ulong mtval2 = 0;
->> >
->> >      if  (cause == RISCV_EXCP_SEMIHOST) {
->> > -        if (env->priv >= PRV_S) {
->> > +        if (semihosting_enabled(cpu)) {
->> >              do_common_semihosting(cs);
->> >              env->pc += 4;
->> >              return;
->> > --
->> > 2.34.1
->> >
->>
->> Bitmap or no bitmap,
->>
->> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+> As a general rule we don't allow userspace to make semihosting
+> calls, as a (rather weak) attempt at fencing off unprivileged
+> guest code from being able to scribble all over the host
+> filesystem. We should try to be consistent across architectures
+> about that, and in particular about how we enable it.
+>
+> I have a half-finished patchset where I was planning to add
+> a --semihosting-config userspace-enable=on option or similar
+> to that effect.
+>
+> It sounds like these ebreak bits are somewhat architectural,
+> so maybe they make sense as a riscv specific thing, but we
+> should consider how they ought to interact with the general
+> behaviour of semihosting. As it stands in QEMU today, we
+> (at least in theory) ought not to permit userspace to make
+> semihosting ebreak calls at all I think.
 
-Reviewed-by: Palmer Dabbelt <palmer@rivosinc.com>
+Thanks for the feedback, Peter. IIUC, the option that you are planning
+to add "--semihosting-config userspace-enable=on" would allow
+userspace to make semihosting calls on all architectures. The ebreak
+bits here are risc-v specific and hence this change adds it as a
+property for RISC-V CPUs. I agree with you that we should be
+consistent about how we enable semihosting behavior within qemu.
+Without seeing more details of how the config you plan to implement
+works, it might be difficult to say how both these fit together. But,
+just based on the above understanding, I am thinking we can use the
+generic semihosting-config as the top-level config to allow
+non-supervisor semihosting. Once your change is ready, we can apply
+the additional restriction that these RISC-V ebreak bits for user mode
+be settable only if the top-level config is enabled. There are other
+ways of handling this too. I am new here and still learning, so open
+to any ideas that might make this integration easier.
 
-Also no strong feelings on the bitmap, but I do like the feature.  When 
-using an external JTAG debugger to talk to a this would probably be 
-configured via something like GDB's monitor commands.  We could probably 
-hook this up to QEMU's monitor as well, but doing it this way seems 
-easier to implement and use.
-
-We should document it, though.  Maybe just something like this?
-
-diff --git a/qemu-options.hx b/qemu-options.hx
-index 3f23a42fa8..f9444a1e4b 100644
---- a/qemu-options.hx
-+++ b/qemu-options.hx
-@@ -4635,7 +4635,9 @@ SRST
-     open/read/write/seek/select. Tensilica baremetal libc for ISS and
-     linux platform "sim" use this interface.
-
--    On RISC-V this implements the standard semihosting API, version 0.2.
-+    On RISC-V this implements the standard semihosting API, version 0.2.  See
-+    the ebreak{m,s,u,vs,vu} CPU properties to control which modes treat
-+    breakpoints as semihosting calls.
-
-     ``target=native|gdb|auto``
-         Defines where the semihosting calls will be addressed, to QEMU
+>
+> thanks
+> -- PMM
 
