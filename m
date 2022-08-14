@@ -1,59 +1,67 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNLbV-0007Si-6X
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 17:57:05 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43480)
+	id 1oNLiY-0002qe-Vp
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 18:04:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44456)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLbS-0007QX-BB; Sun, 14 Aug 2022 17:57:02 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:43521)
+ id 1oNLiX-0002pg-IJ; Sun, 14 Aug 2022 18:04:21 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:39441)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLbQ-00061x-1s; Sun, 14 Aug 2022 17:57:01 -0400
-Received: by mail-pl1-x634.google.com with SMTP id 17so4965863plj.10;
- Sun, 14 Aug 2022 14:56:59 -0700 (PDT)
+ id 1oNLiW-00071y-3W; Sun, 14 Aug 2022 18:04:21 -0400
+Received: by mail-pg1-x530.google.com with SMTP id q16so5167981pgq.6;
+ Sun, 14 Aug 2022 15:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=F2VVVARx8da+hxKJOa6EOkdIYxHeee8wAtbMYD8USas=;
- b=hjHbOUW4EtmSD/mzt58GHJnEv8SUHHqEXWLbxWtQmg7H27JVpRaFe41+czJtkPuYK0
- RXeU0GQjpUsS7K/xWJcnfFFomIvHJ6kV7EComEcNku8fwmgC4PCUhxDUjQf1DS68R6F/
- HuyvIS3uzguzDBvIYloGpHellfxVO1uVqaZYvUOXJXFMM4tFg6Sphemw3VKhCbz/kl9m
- fPjeA2RS+yMvVJxQU7fO4he9bXHHCppkuluz3Xmx4LHtoZT7SJJokjeTuA3NbTque9pX
- VZ7jnggW6VRTvfgeqaBCeeT564VpcG31UEpsiY5PjUL5Ei/IPG3GmgKtqBO7p76B/J/t
- YXzA==
+ bh=4WfhNVhg/3o92hdrwCSbq1sqzxV8oKxnricLFRZ13fU=;
+ b=lUC2xhka8OxPOofGquGkmZTU0yDfixxRuMz95FtogAIUFlAcxINXLJD3HsT8nVE5yF
+ 9DOrLF5XWdP7eOoUVDUoCpaxKp8/MAykabm4MUBwv+dzIfQLzxpi9NxGiQBujVBwnOPR
+ HsDQa2hCACdPzadZWHlHZsvfDBU0sjoaC6M3wKdgwKEdwICxo/sBvvrwbd4i5XYhoMJw
+ 7BIKTEq7HUtuhE0N6cKXmei/DxrsnVoi0P701n950J+v0UUDV5KU6ZyBvfzZl87MvG3b
+ PE9VzTmz35VuZf/UYosm2WgRxVUofxtVUj1Je3AtHYEh6ct1RRE4ovaWX7mV+d5Zx9Ve
+ +Vyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=F2VVVARx8da+hxKJOa6EOkdIYxHeee8wAtbMYD8USas=;
- b=I6roo/lYgI4qBeyKg3krv6+Kf74/dkkH6vn44Yco7Cc2+7KIjRDlz2FyHtTYj/WxIp
- WWeFI5NQKGFdIvyICORmw6NskeLdlNy2FR7ZE7OXgOfGecknLvIeICKdqxDPr2Ugg+oo
- LOn8GntmNj+ecNnwO/fSICDceiPxGzJV5bZlqkyv8vLCE/Bkw/uaND0dyAIX1jSVDaJ+
- zcL5eKJSUjxOfO3MNF1cKc0qTlf6WKcAhdi4pUOgbGkFaEg4LOv2uVkDemyJeK6d2Cg2
- CYVC0O3jlWJwJTL0ly9BLtabXbjz86jIsMclDc/CGCXrIcTHjxem+n0qH/ymosc0TRdB
- 8VsA==
-X-Gm-Message-State: ACgBeo2OZM0zwITTYol3oki0TwyyAdix42pt6DEysS6uTHGCJ0IcembL
- Avyhsl8SUVtIv1YTWUmHPaFVWRzWu0oQNv3SCrA=
-X-Google-Smtp-Source: AA6agR7WmpWe5AMQiU/Sp0i9QrmXLP0zuorzWXdl8WYDj9oJB+y66xQJHsh4RvsBuk0akXog6mo+GXEOe09i0rEBnZw=
-X-Received: by 2002:a17:902:e5c8:b0:16f:1511:7575 with SMTP id
- u8-20020a170902e5c800b0016f15117575mr14140309plf.83.1660514218282; Sun, 14
- Aug 2022 14:56:58 -0700 (PDT)
+ bh=4WfhNVhg/3o92hdrwCSbq1sqzxV8oKxnricLFRZ13fU=;
+ b=mqGdq1Ba0fp1vnAK0Gn0xCZmFOHQrZ98pV12Sa17lisKDdipNAFZWtRoKSomHhH7uy
+ GkRveY8mEHHV6jAyLAxjkBpDL6Uc/nfLoHn75lyYmCZLm1/1Aygg8T4gUWp9mLxy4HY5
+ fV7Ez0Hjid2o6OPYdoEyJFlIY+JYZ1j09dNMvQlL8oWQCvFsnMzs/ZKz8Ouje62Q/r3S
+ GG+MvjfY5Vk+t+0fBB3+kmp4sqzXjSStHINguJVSOWxhPgneF16PBMI9YPr6hfIkLnDo
+ p0TEKY90sJ6xr6AxW6Y910fUWx/RFdZzyCaSrW2xzux2pEWNUDijeDXD5wTxYJexzWMn
+ mAtg==
+X-Gm-Message-State: ACgBeo3JVN2JEuHh6yRKLWMu6MnT+eqQWpPp3tE5CsB/B4Ldmu2cA9OT
+ yTPa9vHHNoZQfzmh1j6BRuX+5mvSxQ6Wm721gz0=
+X-Google-Smtp-Source: AA6agR44Qnl88gPRH4e8ML1zH2qYqKzg8Db/lTNmUvscmGemZxZfpS0DjKmTg3w2gEUKhwohdVhyu1neb2jChvdeEi4=
+X-Received: by 2002:a05:6a00:4306:b0:52e:3bdc:2635 with SMTP id
+ cb6-20020a056a00430600b0052e3bdc2635mr13561642pfb.79.1660514658406; Sun, 14
+ Aug 2022 15:04:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220810230200.149398-1-wilfred.mallawa@opensource.wdc.com>
- <20220810230200.149398-3-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20220810230200.149398-3-wilfred.mallawa@opensource.wdc.com>
+References: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
+ <37244ef8-d2f1-038a-8a51-01d9f62fbe2c@linaro.org>
+ <f977101c-bdc0-3b24-5fad-a75b07b5dac7@linaro.org>
+ <CA+tJHD4MC9xjVkDAg6QZ3Yq2L-cKDQkofQyGjX67cD_qxbCf1g@mail.gmail.com>
+ <804cd7cd-e83c-2b89-f2ba-cc2ca5c7f835@linaro.org>
+ <CA+tJHD6gNrtcrZ9bkDet8NuiR8mcSQfeN-Rk3dtm3LmeakKnvQ@mail.gmail.com>
+ <CAFEAcA--QMVgw0ZH6S3=jHsazM-AJQX45Hm+aJ+EhDhDrzNubA@mail.gmail.com>
+In-Reply-To: <CAFEAcA--QMVgw0ZH6S3=jHsazM-AJQX45Hm+aJ+EhDhDrzNubA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Aug 2022 07:56:32 +1000
-Message-ID: <CAKmqyKMOssiAVBZfZqK2-dyL8Hx8b7mT=feZZwh6sdMazzEw2w@mail.gmail.com>
-Subject: Re: [PATCH 3/3] hw/ssi: fixup/add rw1c functionality
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Date: Mon, 15 Aug 2022 08:03:52 +1000
+Message-ID: <CAKmqyKPcr=umn4zUpxNFwBJ8MuuRkdwH5KpDgDiHHn8YMiaj4g@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Make semihosting configurable for all privilege
+ modes
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: Furquan Shaikh <furquan@rivosinc.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=alistair23@gmail.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,113 +82,34 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Aug 2022 21:57:02 -0000
+X-List-Received-Date: Sun, 14 Aug 2022 22:04:21 -0000
 
-On Thu, Aug 11, 2022 at 11:05 AM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Sat, Aug 13, 2022 at 8:20 PM Peter Maydell <peter.maydell@linaro.org> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> On Sat, 13 Aug 2022 at 01:53, Furquan Shaikh <furquan@rivosinc.com> wrote:
+> > I ran into a problem when I was testing a project (with a microkernel
+> > in M-mode and tasks in U-mode) that uses semihosting for debugging.
+> > The semihosting worked fine for M-mode but not in U-mode. As I started
+> > digging into this, I realized that this is because qemu restricts
+> > semihosting to only M and S modes.
 >
-> This patch adds the `rw1c` functionality to the respective
-> registers. The status fields are cleared when the respective
-> field is set.
->
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Right. We should fix this by having a generic works-for-all-architectures
+> semihosting config knob, because this is not a riscv specific problem,
+> and we already have issues with different target architectures
+> developing their own solutions to things.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+I agree with Peter here. I don't see a strong use case for a RISC-V
+specific fine grained control. A user can either enable/disable
+semihosting for privilege or usermodes (with Peter's patchset). That
+seems like enough configuration options, it is unlikely that someone
+will need semihosting only available to S-mode for example.
 
 Alistair
 
-> ---
->  hw/ssi/ibex_spi_host.c         | 36 +++++++++++++++++++++++++++++++---
->  include/hw/ssi/ibex_spi_host.h |  4 ++--
->  2 files changed, 35 insertions(+), 5 deletions(-)
 >
-> diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
-> index 8c35bfa95f..935372506c 100644
-> --- a/hw/ssi/ibex_spi_host.c
-> +++ b/hw/ssi/ibex_spi_host.c
-> @@ -352,7 +352,7 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->  {
->      IbexSPIHostState *s = opaque;
->      uint32_t val32 = val64;
-> -    uint32_t shift_mask = 0xff, data;
-> +    uint32_t shift_mask = 0xff, data = 0;
->      uint8_t txqd_len;
+> I'll see if I can dig out the half-done patchset I had for this.
 >
->      trace_ibex_spi_host_write(addr, size, val64);
-> @@ -362,7 +362,17 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->
->      switch (addr) {
->      /* Skipping any R/O registers */
-> -    case IBEX_SPI_HOST_INTR_STATE...IBEX_SPI_HOST_INTR_ENABLE:
-> +    case IBEX_SPI_HOST_INTR_STATE:
-> +        /* rw1c status register */
-> +        if (FIELD_EX32(val32, INTR_STATE, ERROR)) {
-> +            data = FIELD_DP32(data, INTR_STATE, ERROR, 0);
-> +        }
-> +        if (FIELD_EX32(val32, INTR_STATE, SPI_EVENT)) {
-> +            data = FIELD_DP32(data, INTR_STATE, SPI_EVENT, 0);
-> +        }
-> +        s->regs[addr] = data;
-> +        break;
-> +    case IBEX_SPI_HOST_INTR_ENABLE:
->          s->regs[addr] = val32;
->          break;
->      case IBEX_SPI_HOST_INTR_TEST:
-> @@ -506,7 +516,27 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
->       *  When an error occurs, the corresponding bit must be cleared
->       *  here before issuing any further commands
->       */
-> -        s->regs[addr] = val32;
-> +        data = s->regs[addr];
-> +        /* rw1c status register */
-> +        if (FIELD_EX32(val32, ERROR_STATUS, CMDBUSY)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, CMDBUSY, 0);
-> +        }
-> +        if (FIELD_EX32(val32, ERROR_STATUS, OVERFLOW)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, OVERFLOW, 0);
-> +        }
-> +        if (FIELD_EX32(val32, ERROR_STATUS, UNDERFLOW)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, UNDERFLOW, 0);
-> +        }
-> +        if (FIELD_EX32(val32, ERROR_STATUS, CMDINVAL)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, CMDINVAL, 0);
-> +        }
-> +        if (FIELD_EX32(val32, ERROR_STATUS, CSIDINVAL)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, CSIDINVAL, 0);
-> +        }
-> +        if (FIELD_EX32(val32, ERROR_STATUS, ACCESSINVAL)) {
-> +            data = FIELD_DP32(data, ERROR_STATUS, ACCESSINVAL, 0);
-> +        }
-> +        s->regs[addr] = data;
->          break;
->      case IBEX_SPI_HOST_EVENT_ENABLE:
->      /* Controls which classes of SPI events raise an interrupt. */
-> diff --git a/include/hw/ssi/ibex_spi_host.h b/include/hw/ssi/ibex_spi_host.h
-> index 3fedcb6805..1f6d077766 100644
-> --- a/include/hw/ssi/ibex_spi_host.h
-> +++ b/include/hw/ssi/ibex_spi_host.h
-> @@ -40,7 +40,7 @@
->      OBJECT_CHECK(IbexSPIHostState, (obj), TYPE_IBEX_SPI_HOST)
->
->  /* SPI Registers */
-> -#define IBEX_SPI_HOST_INTR_STATE         (0x00 / 4)  /* rw */
-> +#define IBEX_SPI_HOST_INTR_STATE         (0x00 / 4)  /* rw1c */
->  #define IBEX_SPI_HOST_INTR_ENABLE        (0x04 / 4)  /* rw */
->  #define IBEX_SPI_HOST_INTR_TEST          (0x08 / 4)  /* wo */
->  #define IBEX_SPI_HOST_ALERT_TEST         (0x0c / 4)  /* wo */
-> @@ -54,7 +54,7 @@
->  #define IBEX_SPI_HOST_TXDATA             (0x28 / 4)
->
->  #define IBEX_SPI_HOST_ERROR_ENABLE       (0x2c / 4)  /* rw */
-> -#define IBEX_SPI_HOST_ERROR_STATUS       (0x30 / 4)  /* rw */
-> +#define IBEX_SPI_HOST_ERROR_STATUS       (0x30 / 4)  /* rw1c */
->  #define IBEX_SPI_HOST_EVENT_ENABLE       (0x34 / 4)  /* rw */
->
->  /* FIFO Len in Bytes */
-> --
-> 2.37.1
->
+> thanks
+> -- PMM
 >
 
