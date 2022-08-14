@@ -1,59 +1,60 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNLpr-0006nN-6n
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 18:11:55 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:45164)
+	id 1oNLvt-00018d-DR
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 18:18:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:45728)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLpo-0006mc-Vc; Sun, 14 Aug 2022 18:11:52 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:46675)
+ id 1oNLvr-00017f-7v; Sun, 14 Aug 2022 18:18:07 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529]:35585)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLpn-00084m-8I; Sun, 14 Aug 2022 18:11:52 -0400
-Received: by mail-pg1-x530.google.com with SMTP id d71so5155596pgc.13;
- Sun, 14 Aug 2022 15:11:50 -0700 (PDT)
+ id 1oNLvp-0000MB-Qa; Sun, 14 Aug 2022 18:18:06 -0400
+Received: by mail-pg1-x529.google.com with SMTP id r69so5192825pgr.2;
+ Sun, 14 Aug 2022 15:18:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=zAhET6z5N2XidWfz15xrB/NRIRmqyE5mv4wgO5rIah8=;
- b=oQPyc2u1RTPRQgHlwaMZWFz4CIpuhnov+rGIiPyJcyfCuROIWvqcaGR9hsqpO1SPX5
- eW+C+LaYn5aP4C7NMEF8txAwgb5NqacidN6oJiKdPzsVrRyUELeBhbD6WqbyVUIb5ZJE
- WXBGJ9Hed7f+loE0D3q/BYZz2sXz4VjwDy6Pey7FyLCis54qVVvpgRqWC1FucnfDpTrP
- Q3f+R1xqZQCWEGwYRBbiSeP57tP0uGbD9Jda8y/0EHoeAKpQKy/PMZsgQ7Nkwtx00aOx
- tkxpRfXM9uZFMY40WgUXl7YIOcQXTH3Y1flOyh3zuCne+W6R4eVs77Sjo8VpGihakS3o
- f7Bw==
+ bh=oDK//oKeGGAa4dISJl3jxebXhxktXlGKNbhgeWT6O8E=;
+ b=alErDjNRAeM7/0pohtkoGwBl6ndP67TSpdbdSWK4smywz2fl/OgXmA/pDGVXUr0ta+
+ 4P8s/6/4apZSfZ6FPw8xvl1Omn8DuRAdAuUF4H5NNDTEbBV5i4lP5fAoa728shYEZSrN
+ VPYugKawLAf98QA5Ig+FCwhP0sny8+FtZ8t9Ia7VPVNvfrJaJxUPYkv9RR5HeevfAcwS
+ VorxFEQ9KTigDJytEBygR8OFBrjASe2ZLKLUvYErFtT/foRNhqDySJdCKzWJnzwMoCLL
+ N/+B+UjDDV/WC5NT1+VuZq00/ngFAVqeuvuUw3/f9s0WSyUv0qCpiCE1Y7FYQG+b4n/g
+ L1Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=zAhET6z5N2XidWfz15xrB/NRIRmqyE5mv4wgO5rIah8=;
- b=FDfjBwvDMLHnjhtCEacfR9VLJELabRvc69WCu+UOutIx9tTmbLTvWRHqUzgsSERz5L
- inAKBxEEEioLFBRS1rCUTZqNTA0OYpvi5a3PLhDLuxO4p6rPKdie3QjB6+GgQN66QGj6
- h18H/A0djmW9SYq1harSAr/Y53BFfNOR6OfNHMnh8FN62XaPx213tk2Of9tnzHc6Qokw
- lOlLQeXVcocWQNMEByCwWPkdVJkWfL6ciyxOwChptQYTKeWA1TkGMlBIe2J8Yv30WO0F
- gs74J4UApKlHeaJLAQySf3baDG+eYBF+S/nVgzbB/zKJSB32PS53gWRr0Cz0gGxLEb6L
- nVhw==
-X-Gm-Message-State: ACgBeo22ijIDYzmWw54xtFqm/G1vGuwVl7yqpVKsEBxdWA8ZVMi4sb0y
- MXISI577HkllXkli2Yj3DctxeYwFLHOfRQMAI5g=
-X-Google-Smtp-Source: AA6agR7wl/vR9A4x5LuBdLAodFaW0vNUEGsmc/wBZvfBIvcQ2TP/VQxtsC14/+A19lsOeiBH956aQMbndDiHSmC+m1Y=
-X-Received: by 2002:a63:1e10:0:b0:41d:f6f6:49cc with SMTP id
- e16-20020a631e10000000b0041df6f649ccmr11126697pge.223.1660515109531; Sun, 14
- Aug 2022 15:11:49 -0700 (PDT)
+ bh=oDK//oKeGGAa4dISJl3jxebXhxktXlGKNbhgeWT6O8E=;
+ b=7Wcp3ji3ohiHzRnEOKOdHFoz49rRZ/ysmOB5Uj6WUDMfSNwqLQRw/iTJWAygClS89F
+ bNLsac+LL0XMZu47HX/1UyeUNQsqcMhIirhN3bNuiPZTbCqENc0faq/2+jXtUeKj9M+9
+ NaeKADku2QcDbPhEhmBm2bJ4f6GPzmDIEE5U7qQrQSIMuBIhuGzKkz8KsZBf6zWK5dNS
+ gCOiisLtWApzuMBfQP/BQPk5yKyNHXry0eFldmyJpx3f03d9pBQDHjXw/SC53m3zEJcM
+ x07UkRJEsWi4EvB8DAPHh94FtNzTgMZxCqQ9E364VIW5W5mYw8JTh6YzVhNJKc2KcBV0
+ XnbA==
+X-Gm-Message-State: ACgBeo0REsni7LuWh647HjFjQOjUIapDpsh7jLSFLIkSXXOR/EpubzBF
+ TVVbde7p2aHLl9RlbT17gqQPPC+Td7B5PCLKwoU=
+X-Google-Smtp-Source: AA6agR5qq8bOnIZHkTJMPk+XG7XNTpsKi0AawfIaSeeZZ72vNJBt2YEvELi3WYngW/sv4W6d0pSOxXw5QCBrkoRQg/c=
+X-Received: by 2002:a63:5f49:0:b0:41d:85a1:c4da with SMTP id
+ t70-20020a635f49000000b0041d85a1c4damr11283104pgb.366.1660515483908; Sun, 14
+ Aug 2022 15:18:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220812005229.358850-1-wilfred.mallawa@opensource.wdc.com>
-In-Reply-To: <20220812005229.358850-1-wilfred.mallawa@opensource.wdc.com>
+References: <20220802233307.2106839-1-atishp@rivosinc.com>
+ <20220802233307.2106839-7-atishp@rivosinc.com>
+In-Reply-To: <20220802233307.2106839-7-atishp@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Aug 2022 08:11:23 +1000
-Message-ID: <CAKmqyKNOdVCA1KqEu3u_fijzEXLdyPTJmUqZoLYOozMXiv_XTA@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: opentitan: bump opentitan version
-To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-Cc: Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Wilfred Mallawa <wilfred.mallawa@wdc.com>
+Date: Mon, 15 Aug 2022 08:17:37 +1000
+Message-ID: <CAKmqyKOz80wpv1uPaccYiGLGkXes78+h8ooSXuqzAnDNZtmp2w@mail.gmail.com>
+Subject: Re: [PATCH v12 6/6] target/riscv: Remove additional priv version
+ check for mcountinhibit
+To: Atish Patra <atishp@rivosinc.com>
+Cc: "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
+ Heiko Stuebner <heiko@sntech.de>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -74,115 +75,53 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Aug 2022 22:11:53 -0000
+X-List-Received-Date: Sun, 14 Aug 2022 22:18:07 -0000
 
-On Fri, Aug 12, 2022 at 10:54 AM Wilfred Mallawa
-<wilfred.mallawa@opensource.wdc.com> wrote:
+On Wed, Aug 3, 2022 at 9:34 AM Atish Patra <atishp@rivosinc.com> wrote:
 >
-> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> With .min_priv_version, additiona priv version check is uncessary
+> for mcountinhibit read/write functions.
 >
-> The following patch updates opentitan to match the new configuration,
-> as per, lowRISC/opentitan@217a0168ba118503c166a9587819e3811eeb0c0c
->
-> Note: with this patch we now skip the usage of the opentitan
-> `boot_rom`. The Opentitan boot rom contains hw verification
-> for devies which we are currently not supporting in qemu. As of now,
-> the `boot_rom` has no major significance, however, would be good to
-> support in the future.
->
-> Tested by running utests from the latest tock [1]
-> (that supports this version of OT).
->
-> [1] https://github.com/tock/tock/pull/3056
->
-> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+> Reviewed-by: Heiko Stuebner <heiko@sntech.de>
+> Tested-by: Heiko Stuebner <heiko@sntech.de>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/opentitan.c         | 12 ++++++++----
->  include/hw/riscv/opentitan.h | 11 ++++++-----
->  2 files changed, 14 insertions(+), 9 deletions(-)
+>  target/riscv/csr.c | 8 --------
+>  1 file changed, 8 deletions(-)
 >
-> diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
-> index 4495a2c039..af13dbe3b1 100644
-> --- a/hw/riscv/opentitan.c
-> +++ b/hw/riscv/opentitan.c
-> @@ -29,9 +29,9 @@
->  #include "sysemu/sysemu.h"
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 8753280e95b2..67367e678f38 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -1489,10 +1489,6 @@ static RISCVException write_mtvec(CPURISCVState *env, int csrno,
+>  static RISCVException read_mcountinhibit(CPURISCVState *env, int csrno,
+>                                           target_ulong *val)
+>  {
+> -    if (env->priv_ver < PRIV_VERSION_1_11_0) {
+> -        return RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -
+>      *val = env->mcountinhibit;
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -1503,10 +1499,6 @@ static RISCVException write_mcountinhibit(CPURISCVState *env, int csrno,
+>      int cidx;
+>      PMUCTRState *counter;
 >
->  static const MemMapEntry ibex_memmap[] = {
-> -    [IBEX_DEV_ROM] =            {  0x00008000, 16 * KiB },
-> -    [IBEX_DEV_RAM] =            {  0x10000000,  0x10000 },
-> -    [IBEX_DEV_FLASH] =          {  0x20000000,  0x80000 },
-> +    [IBEX_DEV_ROM] =            {  0x00008000,   0x8000 },
-> +    [IBEX_DEV_RAM] =            {  0x10000000,  0x20000 },
-> +    [IBEX_DEV_FLASH] =          {  0x20000000,  0x100000 },
->      [IBEX_DEV_UART] =           {  0x40000000,  0x1000  },
->      [IBEX_DEV_GPIO] =           {  0x40040000,  0x1000  },
->      [IBEX_DEV_SPI_DEVICE] =     {  0x40050000,  0x1000  },
-> @@ -40,6 +40,7 @@ static const MemMapEntry ibex_memmap[] = {
->      [IBEX_DEV_TIMER] =          {  0x40100000,  0x1000  },
->      [IBEX_DEV_SENSOR_CTRL] =    {  0x40110000,  0x1000  },
->      [IBEX_DEV_OTP_CTRL] =       {  0x40130000,  0x4000  },
-> +    [IBEX_DEV_LC_CTRL] =        {  0x40140000,  0x1000  },
->      [IBEX_DEV_USBDEV] =         {  0x40150000,  0x1000  },
->      [IBEX_DEV_SPI_HOST0] =      {  0x40300000,  0x1000  },
->      [IBEX_DEV_SPI_HOST1] =      {  0x40310000,  0x1000  },
-> @@ -141,7 +142,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->                              &error_abort);
->      object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
->                              &error_abort);
-> -    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x8080, &error_abort);
-> +    object_property_set_int(OBJECT(&s->cpus), "resetvec", 0x20000490,
-> +                            &error_abort);
->      sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+> -    if (env->priv_ver < PRIV_VERSION_1_11_0) {
+> -        return RISCV_EXCP_ILLEGAL_INST;
+> -    }
+> -
+>      env->mcountinhibit = val;
 >
->      /* Boot ROM */
-> @@ -253,6 +255,8 @@ static void lowrisc_ibex_soc_realize(DeviceState *dev_soc, Error **errp)
->          memmap[IBEX_DEV_SENSOR_CTRL].base, memmap[IBEX_DEV_SENSOR_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.otp_ctrl",
->          memmap[IBEX_DEV_OTP_CTRL].base, memmap[IBEX_DEV_OTP_CTRL].size);
-> +    create_unimplemented_device("riscv.lowrisc.ibex.lc_ctrl",
-> +        memmap[IBEX_DEV_LC_CTRL].base, memmap[IBEX_DEV_LC_CTRL].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.pwrmgr",
->          memmap[IBEX_DEV_PWRMGR].base, memmap[IBEX_DEV_PWRMGR].size);
->      create_unimplemented_device("riscv.lowrisc.ibex.rstmgr",
-> diff --git a/include/hw/riscv/opentitan.h b/include/hw/riscv/opentitan.h
-> index 68892cd8e5..26d960f288 100644
-> --- a/include/hw/riscv/opentitan.h
-> +++ b/include/hw/riscv/opentitan.h
-> @@ -74,6 +74,7 @@ enum {
->      IBEX_DEV_TIMER,
->      IBEX_DEV_SENSOR_CTRL,
->      IBEX_DEV_OTP_CTRL,
-> +    IBEX_DEV_LC_CTRL,
->      IBEX_DEV_PWRMGR,
->      IBEX_DEV_RSTMGR,
->      IBEX_DEV_CLKMGR,
-> @@ -105,11 +106,11 @@ enum {
->      IBEX_UART0_RX_BREAK_ERR_IRQ   = 6,
->      IBEX_UART0_RX_TIMEOUT_IRQ     = 7,
->      IBEX_UART0_RX_PARITY_ERR_IRQ  = 8,
-> -    IBEX_TIMER_TIMEREXPIRED0_0    = 126,
-> -    IBEX_SPI_HOST0_ERR_IRQ        = 150,
-> -    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 151,
-> -    IBEX_SPI_HOST1_ERR_IRQ        = 152,
-> -    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 153,
-> +    IBEX_TIMER_TIMEREXPIRED0_0    = 127,
-> +    IBEX_SPI_HOST0_ERR_IRQ        = 151,
-> +    IBEX_SPI_HOST0_SPI_EVENT_IRQ  = 152,
-> +    IBEX_SPI_HOST1_ERR_IRQ        = 153,
-> +    IBEX_SPI_HOST1_SPI_EVENT_IRQ  = 154,
->  };
->
->  #endif
+>      /* Check if any other counter is also monitoring cycles/instructions */
 > --
-> 2.37.1
+> 2.25.1
 >
 >
 
