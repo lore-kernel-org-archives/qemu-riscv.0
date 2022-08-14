@@ -1,67 +1,62 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNLiY-0002qe-Vp
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 18:04:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:44456)
+	id 1oNLmi-0005AY-Jw
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 18:08:40 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:44876)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLiX-0002pg-IJ; Sun, 14 Aug 2022 18:04:21 -0400
-Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:39441)
+ id 1oNLmh-0005AE-ES; Sun, 14 Aug 2022 18:08:39 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:37783)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLiW-00071y-3W; Sun, 14 Aug 2022 18:04:21 -0400
-Received: by mail-pg1-x530.google.com with SMTP id q16so5167981pgq.6;
- Sun, 14 Aug 2022 15:04:19 -0700 (PDT)
+ id 1oNLmf-0007g8-78; Sun, 14 Aug 2022 18:08:39 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ w11-20020a17090a380b00b001f73f75a1feso12958675pjb.2; 
+ Sun, 14 Aug 2022 15:08:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=4WfhNVhg/3o92hdrwCSbq1sqzxV8oKxnricLFRZ13fU=;
- b=lUC2xhka8OxPOofGquGkmZTU0yDfixxRuMz95FtogAIUFlAcxINXLJD3HsT8nVE5yF
- 9DOrLF5XWdP7eOoUVDUoCpaxKp8/MAykabm4MUBwv+dzIfQLzxpi9NxGiQBujVBwnOPR
- HsDQa2hCACdPzadZWHlHZsvfDBU0sjoaC6M3wKdgwKEdwICxo/sBvvrwbd4i5XYhoMJw
- 7BIKTEq7HUtuhE0N6cKXmei/DxrsnVoi0P701n950J+v0UUDV5KU6ZyBvfzZl87MvG3b
- PE9VzTmz35VuZf/UYosm2WgRxVUofxtVUj1Je3AtHYEh6ct1RRE4ovaWX7mV+d5Zx9Ve
- +Vyg==
+ bh=ro2stHgi8BOAIGgwouACsaDd7+/jJW9Ps3DwLW8JM2s=;
+ b=D+SxGQlDteJz662bi4tqHWWvtnOFCwVZLZ0xEkm+KxD4skmPHFx7x6InpIDCxwJuXV
+ f3OX02w4HV7MoTe6KGBloGOQ7sGyQOMKv5NXg9Vz+ZS5V1HYJAhY3EqKYfs3ZtPIsz8V
+ NzvSoki8IofIu3L42x8Pb2xLNnWp2FKVdhDRvW5iKR43OObLzXsxulKjf8uoQSvvcBD4
+ 1m/H6r1lfwrtaAZjiJd/bo+KpZhsepjKMXYPIDmU0ctZbDyqCJtX1a1LhgewoDXScbIL
+ YFN+wt9dLbzz14IXaEvKBQpPU76hJlw17OlhB4hOpNQgqEwi+OgQBn2YSWV6JKKiVcsV
+ ZIsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=4WfhNVhg/3o92hdrwCSbq1sqzxV8oKxnricLFRZ13fU=;
- b=mqGdq1Ba0fp1vnAK0Gn0xCZmFOHQrZ98pV12Sa17lisKDdipNAFZWtRoKSomHhH7uy
- GkRveY8mEHHV6jAyLAxjkBpDL6Uc/nfLoHn75lyYmCZLm1/1Aygg8T4gUWp9mLxy4HY5
- fV7Ez0Hjid2o6OPYdoEyJFlIY+JYZ1j09dNMvQlL8oWQCvFsnMzs/ZKz8Ouje62Q/r3S
- GG+MvjfY5Vk+t+0fBB3+kmp4sqzXjSStHINguJVSOWxhPgneF16PBMI9YPr6hfIkLnDo
- p0TEKY90sJ6xr6AxW6Y910fUWx/RFdZzyCaSrW2xzux2pEWNUDijeDXD5wTxYJexzWMn
- mAtg==
-X-Gm-Message-State: ACgBeo3JVN2JEuHh6yRKLWMu6MnT+eqQWpPp3tE5CsB/B4Ldmu2cA9OT
- yTPa9vHHNoZQfzmh1j6BRuX+5mvSxQ6Wm721gz0=
-X-Google-Smtp-Source: AA6agR44Qnl88gPRH4e8ML1zH2qYqKzg8Db/lTNmUvscmGemZxZfpS0DjKmTg3w2gEUKhwohdVhyu1neb2jChvdeEi4=
-X-Received: by 2002:a05:6a00:4306:b0:52e:3bdc:2635 with SMTP id
- cb6-20020a056a00430600b0052e3bdc2635mr13561642pfb.79.1660514658406; Sun, 14
- Aug 2022 15:04:18 -0700 (PDT)
+ bh=ro2stHgi8BOAIGgwouACsaDd7+/jJW9Ps3DwLW8JM2s=;
+ b=FfBLAl7rPvCzn8w3JwJKwEqYxzIdSp7pua7G88nmdCVa5fKBWpcKZrikxB6o2mjg3e
+ jOuWUBuKxpDZaItXV0RgrtiUJ0f7layeFETD+Cx8IfNvOxsHlpgN42KG5bE3AzfzSg5k
+ LbitLqsOpm1wdHYkcOmFVn2cFGLoQqlcObmHc9EW2CWnhfCIAIl7NSFQsvPxn8PebisM
+ bmmM7gOlVHFVfjBA+GdTKTk6jN1hukboXkBii3kLjwdEDLtFrBCDCPwUbr1jwArnGIIR
+ dC2KGa0lkBfZFyMvDV74DD2qv9l+UDknCWZHLANhyh4FEwpCtDPm/VtMcfuLAaVaoQou
+ DluA==
+X-Gm-Message-State: ACgBeo2tHRaxIccunH5i9fG4PNiW+QtUiy92dcRtKH6F0R2TuOJuNq6q
+ TC8iBBrB8PNwmM+HdH2zmffj6EzfJMFIrMxT7BQ=
+X-Google-Smtp-Source: AA6agR6WyVFcO7WEtq0qupTKRd+cm9GhLy895RGz2k4deycxUfyewBmhITYw4qo2bdCeACb6GG2p9ZjJ/FKA9XAt+bU=
+X-Received: by 2002:a17:90a:b391:b0:1f3:6c3:392c with SMTP id
+ e17-20020a17090ab39100b001f306c3392cmr24618524pjr.166.1660514915452; Sun, 14
+ Aug 2022 15:08:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
- <37244ef8-d2f1-038a-8a51-01d9f62fbe2c@linaro.org>
- <f977101c-bdc0-3b24-5fad-a75b07b5dac7@linaro.org>
- <CA+tJHD4MC9xjVkDAg6QZ3Yq2L-cKDQkofQyGjX67cD_qxbCf1g@mail.gmail.com>
- <804cd7cd-e83c-2b89-f2ba-cc2ca5c7f835@linaro.org>
- <CA+tJHD6gNrtcrZ9bkDet8NuiR8mcSQfeN-Rk3dtm3LmeakKnvQ@mail.gmail.com>
- <CAFEAcA--QMVgw0ZH6S3=jHsazM-AJQX45Hm+aJ+EhDhDrzNubA@mail.gmail.com>
-In-Reply-To: <CAFEAcA--QMVgw0ZH6S3=jHsazM-AJQX45Hm+aJ+EhDhDrzNubA@mail.gmail.com>
+References: <20220813135127.2971754-1-mail@conchuod.ie>
+In-Reply-To: <20220813135127.2971754-1-mail@conchuod.ie>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Aug 2022 08:03:52 +1000
-Message-ID: <CAKmqyKPcr=umn4zUpxNFwBJ8MuuRkdwH5KpDgDiHHn8YMiaj4g@mail.gmail.com>
-Subject: Re: [PATCH] riscv: Make semihosting configurable for all privilege
- modes
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Furquan Shaikh <furquan@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
+Date: Mon, 15 Aug 2022 08:08:09 +1000
+Message-ID: <CAKmqyKMoQgpEcKSLuLrTT-bbeiwzySNSaeHt12Ou+wuHf7xzpQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: fix kernel panics due to
+ missing peripherals
+To: Conor Dooley <mail@conchuod.ie>
+Cc: Bin Meng <bin.meng@windriver.com>,
+ Conor Dooley <conor.dooley@microchip.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
- envelope-from=alistair23@gmail.com; helo=mail-pg1-x530.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=alistair23@gmail.com; helo=mail-pj1-x1035.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -82,34 +77,258 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Aug 2022 22:04:21 -0000
+X-List-Received-Date: Sun, 14 Aug 2022 22:08:39 -0000
 
-On Sat, Aug 13, 2022 at 8:20 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Sat, Aug 13, 2022 at 11:51 PM Conor Dooley <mail@conchuod.ie> wrote:
 >
-> On Sat, 13 Aug 2022 at 01:53, Furquan Shaikh <furquan@rivosinc.com> wrote:
-> > I ran into a problem when I was testing a project (with a microkernel
-> > in M-mode and tasks in U-mode) that uses semihosting for debugging.
-> > The semihosting worked fine for M-mode but not in U-mode. As I started
-> > digging into this, I realized that this is because qemu restricts
-> > semihosting to only M and S modes.
+> From: Conor Dooley <conor.dooley@microchip.com>
 >
-> Right. We should fix this by having a generic works-for-all-architectures
-> semihosting config knob, because this is not a riscv specific problem,
-> and we already have issues with different target architectures
-> developing their own solutions to things.
+> Booting using "Direct Kernel Boot" for PolarFire SoC & skipping u-boot
+> entirely is probably not advisable, but it does at least show signs of
+> life. Recent Linux kernel versions make use of peripherals that are
+> missing definitions in QEMU and lead to kernel panics. These issues
+> almost certain rear their head for other methods of booting, but I was
+> unable to figure out a suitable HSS version that is recent enough to
+> support these peripherals & works with QEMU.
+>
+> With these peripherals added, booting a kernel with the following hangs
+> hangs waiting for the system controller's hwrng, but the kernel no
+> longer panics. With the Linux driver for hwrng disabled, it boots to
+> console.
+>
+> qemu-system-riscv64 -M microchip-icicle-kit \
+>         -m 2G -smp 5 \
+>         -kernel $(vmlinux_bin) \
+>         -dtb  $(dtb)\
+>         -initrd $(initramfs) \
+>         -display none -serial null \
+>         -serial stdio
+>
+> More peripherals are added than strictly required to fix the panics in
+> the hopes of avoiding a replication of this problem in the future.
+> Some of the peripherals which are in the device tree for recent kernels
+> are implemented in the FPGA fabric. The eMMC/SD mux, which exists as
+> an unimplemented device is replaced by a wider entry. This updated
+> entry covers both the mux & the remainder of the FPGA fabric connected
+> to the MSS using Fabric Interrconnect (FIC) 3.
+>
+> Link: https://github.com/polarfire-soc/icicle-kit-reference-design#fabric-memory-map
+> Link: https://ww1.microchip.com/downloads/aemDocuments/documents/FPGA/ProductDocuments/SupportingCollateral/V1_4_Register_Map.zip
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+> QEMU support for PolarFire SoC seems to be fairly out of date at this
+> point. Running with a recent HSS, U-Boot etc doesn't work, partly due
+> to the unimplemented cache controller that the HSS tries to read from
+> (it needs to know the ways configuration now) and the rest seems to be
+> down to 64 bit address DMA to the sd card (not 100% on that yet).
+> There's some patches floating around internally that supposedly fixed
+> things for QEMU v6.something but I could not replicate & they're fairly
+> conflicty at this point. Plan is to clean them up, but no point sitting
+> on this patch until then as I have no ETA for that at this point.
 
-I agree with Peter here. I don't see a strong use case for a RISC-V
-specific fine grained control. A user can either enable/disable
-semihosting for privilege or usermodes (with Peter's patchset). That
-seems like enough configuration options, it is unlikely that someone
-will need semihosting only available to S-mode for example.
+Awesome! It is great to see Microchip supporting open source projects
+
+>
+> CC: Bin Meng <bin.meng@windriver.com>
+> CC: Palmer Dabbelt <palmer@dabbelt.com>
+> CC: Alistair Francis <alistair.francis@wdc.com>
+> CC: Conor Dooley <conor.dooley@microchip.com>
+> CC: qemu-riscv@nongnu.org
+> CC: qemu-devel@nongnu.org
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  hw/riscv/microchip_pfsoc.c         | 67 +++++++++++++++++++++++++++---
+>  include/hw/riscv/microchip_pfsoc.h | 14 ++++++-
+>  2 files changed, 74 insertions(+), 7 deletions(-)
 >
-> I'll see if I can dig out the half-done patchset I had for this.
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 10a5d0e501..eb90a99660 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -100,8 +100,11 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
+>      [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,  0x2000000 },
+>      [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,  0x4000000 },
+>      [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,     0x1000 },
+> +    [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,     0x1000 },
+>      [MICROCHIP_PFSOC_SYSREG] =          { 0x20002000,     0x2000 },
+> +    [MICROCHIP_PFSOC_AXISW] =           { 0x20004000,     0x1000 },
+>      [MICROCHIP_PFSOC_MPUCFG] =          { 0x20005000,     0x1000 },
+> +    [MICROCHIP_PFSOC_FMETER] =          { 0x20006000,     0x1000 },
+>      [MICROCHIP_PFSOC_DDR_SGMII_PHY] =   { 0x20007000,     0x1000 },
+>      [MICROCHIP_PFSOC_EMMC_SD] =         { 0x20008000,     0x1000 },
+>      [MICROCHIP_PFSOC_DDR_CFG] =         { 0x20080000,    0x40000 },
+> @@ -109,19 +112,28 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
+>      [MICROCHIP_PFSOC_MMUART2] =         { 0x20102000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART3] =         { 0x20104000,     0x1000 },
+>      [MICROCHIP_PFSOC_MMUART4] =         { 0x20106000,     0x1000 },
+> +    [MICROCHIP_PFSOC_WDOG1] =           { 0x20101000,     0x1000 },
+> +    [MICROCHIP_PFSOC_WDOG2] =           { 0x20103000,     0x1000 },
+> +    [MICROCHIP_PFSOC_WDOG3] =           { 0x20105000,     0x1000 },
+> +    [MICROCHIP_PFSOC_WDOG4] =           { 0x20106000,     0x1000 },
+>      [MICROCHIP_PFSOC_SPI0] =            { 0x20108000,     0x1000 },
+>      [MICROCHIP_PFSOC_SPI1] =            { 0x20109000,     0x1000 },
+> +    [MICROCHIP_PFSOC_I2C0] =            { 0x2010a000,     0x1000 },
+>      [MICROCHIP_PFSOC_I2C1] =            { 0x2010b000,     0x1000 },
+> +    [MICROCHIP_PFSOC_CAN0] =            { 0x2010c000,     0x1000 },
+> +    [MICROCHIP_PFSOC_CAN1] =            { 0x2010d000,     0x1000 },
+>      [MICROCHIP_PFSOC_GEM0] =            { 0x20110000,     0x2000 },
+>      [MICROCHIP_PFSOC_GEM1] =            { 0x20112000,     0x2000 },
+>      [MICROCHIP_PFSOC_GPIO0] =           { 0x20120000,     0x1000 },
+>      [MICROCHIP_PFSOC_GPIO1] =           { 0x20121000,     0x1000 },
+>      [MICROCHIP_PFSOC_GPIO2] =           { 0x20122000,     0x1000 },
+> +    [MICROCHIP_PFSOC_RTC] =             { 0x20124000,     0x1000 },
+>      [MICROCHIP_PFSOC_ENVM_CFG] =        { 0x20200000,     0x1000 },
+>      [MICROCHIP_PFSOC_ENVM_DATA] =       { 0x20220000,    0x20000 },
+> +    [MICROCHIP_PFSOC_USB] =             { 0x20201000,     0x1000 },
+>      [MICROCHIP_PFSOC_QSPI_XIP] =        { 0x21000000,  0x1000000 },
+>      [MICROCHIP_PFSOC_IOSCB] =           { 0x30000000, 0x10000000 },
+> -    [MICROCHIP_PFSOC_EMMC_SD_MUX] =     { 0x4f000000,        0x4 },
+> +    [MICROCHIP_PFSOC_FABRIC_FIC3] =     { 0x40000000, 0x20000000 },
+>      [MICROCHIP_PFSOC_DRAM_LO] =         { 0x80000000, 0x40000000 },
+>      [MICROCHIP_PFSOC_DRAM_LO_ALIAS] =   { 0xc0000000, 0x40000000 },
+>      [MICROCHIP_PFSOC_DRAM_HI] =       { 0x1000000000,        0x0 },
+> @@ -292,11 +304,21 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
+>                      memmap[MICROCHIP_PFSOC_SYSREG].base);
 >
-> thanks
-> -- PMM
+> +    /* AXISW */
+> +    create_unimplemented_device("microchip.pfsoc.axisw",
+> +        memmap[MICROCHIP_PFSOC_AXISW].base,
+> +        memmap[MICROCHIP_PFSOC_AXISW].size);
+> +
+>      /* MPUCFG */
+>      create_unimplemented_device("microchip.pfsoc.mpucfg",
+>          memmap[MICROCHIP_PFSOC_MPUCFG].base,
+>          memmap[MICROCHIP_PFSOC_MPUCFG].size);
+>
+> +    /* FMETER */
+> +    create_unimplemented_device("microchip.pfsoc.fmeter",
+> +        memmap[MICROCHIP_PFSOC_FMETER].base,
+> +        memmap[MICROCHIP_PFSOC_FMETER].size);
+> +
+>      /* DDR SGMII PHY */
+>      sysbus_realize(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), errp);
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddr_sgmii_phy), 0,
+> @@ -336,6 +358,23 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>          qdev_get_gpio_in(DEVICE(s->plic), MICROCHIP_PFSOC_MMUART4_IRQ),
+>          serial_hd(4));
+>
+> +    /* Watchdogs */
+> +    create_unimplemented_device("microchip.pfsoc.watchdog0",
+> +        memmap[MICROCHIP_PFSOC_WDOG0].base,
+> +        memmap[MICROCHIP_PFSOC_WDOG0].size);
+> +    create_unimplemented_device("microchip.pfsoc.watchdog1",
+> +        memmap[MICROCHIP_PFSOC_WDOG1].base,
+> +        memmap[MICROCHIP_PFSOC_WDOG1].size);
+> +    create_unimplemented_device("microchip.pfsoc.watchdog2",
+> +        memmap[MICROCHIP_PFSOC_WDOG2].base,
+> +        memmap[MICROCHIP_PFSOC_WDOG2].size);
+> +    create_unimplemented_device("microchip.pfsoc.watchdog3",
+> +        memmap[MICROCHIP_PFSOC_WDOG3].base,
+> +        memmap[MICROCHIP_PFSOC_WDOG3].size);
+> +    create_unimplemented_device("microchip.pfsoc.watchdog4",
+> +        memmap[MICROCHIP_PFSOC_WDOG4].base,
+> +        memmap[MICROCHIP_PFSOC_WDOG4].size);
+> +
+>      /* SPI */
+>      create_unimplemented_device("microchip.pfsoc.spi0",
+>          memmap[MICROCHIP_PFSOC_SPI0].base,
+> @@ -344,11 +383,27 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>          memmap[MICROCHIP_PFSOC_SPI1].base,
+>          memmap[MICROCHIP_PFSOC_SPI1].size);
+>
+> -    /* I2C1 */
+> +    /* I2C */
+> +    create_unimplemented_device("microchip.pfsoc.i2c0",
+> +        memmap[MICROCHIP_PFSOC_I2C0].base,
+> +        memmap[MICROCHIP_PFSOC_I2C0].size);
+>      create_unimplemented_device("microchip.pfsoc.i2c1",
+>          memmap[MICROCHIP_PFSOC_I2C1].base,
+>          memmap[MICROCHIP_PFSOC_I2C1].size);
+>
+> +    /* CAN */
+> +    create_unimplemented_device("microchip.pfsoc.can0",
+> +        memmap[MICROCHIP_PFSOC_CAN0].base,
+> +        memmap[MICROCHIP_PFSOC_CAN0].size);
+> +    create_unimplemented_device("microchip.pfsoc.can1",
+> +        memmap[MICROCHIP_PFSOC_CAN1].base,
+> +        memmap[MICROCHIP_PFSOC_CAN1].size);
+> +
+> +    /* USB */
+> +    create_unimplemented_device("microchip.pfsoc.usb",
+> +        memmap[MICROCHIP_PFSOC_USB].base,
+> +        memmap[MICROCHIP_PFSOC_USB].size);
+> +
+>      /* GEMs */
+>
+>      nd = &nd_table[0];
+> @@ -402,10 +457,10 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>      sysbus_mmio_map(SYS_BUS_DEVICE(&s->ioscb), 0,
+>                      memmap[MICROCHIP_PFSOC_IOSCB].base);
+>
+> -    /* eMMC/SD mux */
+> -    create_unimplemented_device("microchip.pfsoc.emmc_sd_mux",
+> -        memmap[MICROCHIP_PFSOC_EMMC_SD_MUX].base,
+> -        memmap[MICROCHIP_PFSOC_EMMC_SD_MUX].size);
+> +    /* FPGA Fabric */
+> +    create_unimplemented_device("microchip.pfsoc.fabricfic3",
+> +        memmap[MICROCHIP_PFSOC_FABRIC_FIC3].base,
+> +        memmap[MICROCHIP_PFSOC_FABRIC_FIC3].size);
+>
+>      /* QSPI Flash */
+>      memory_region_init_rom(qspi_xip_mem, OBJECT(dev),
+> diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+> index a0673f5f59..a757b240e0 100644
+> --- a/include/hw/riscv/microchip_pfsoc.h
+> +++ b/include/hw/riscv/microchip_pfsoc.h
+> @@ -88,8 +88,11 @@ enum {
+>      MICROCHIP_PFSOC_L2LIM,
+>      MICROCHIP_PFSOC_PLIC,
+>      MICROCHIP_PFSOC_MMUART0,
+> +    MICROCHIP_PFSOC_WDOG0,
+>      MICROCHIP_PFSOC_SYSREG,
+> +    MICROCHIP_PFSOC_AXISW,
+>      MICROCHIP_PFSOC_MPUCFG,
+> +    MICROCHIP_PFSOC_FMETER,
+>      MICROCHIP_PFSOC_DDR_SGMII_PHY,
+>      MICROCHIP_PFSOC_EMMC_SD,
+>      MICROCHIP_PFSOC_DDR_CFG,
+> @@ -97,19 +100,28 @@ enum {
+>      MICROCHIP_PFSOC_MMUART2,
+>      MICROCHIP_PFSOC_MMUART3,
+>      MICROCHIP_PFSOC_MMUART4,
+> +    MICROCHIP_PFSOC_WDOG1,
+> +    MICROCHIP_PFSOC_WDOG2,
+> +    MICROCHIP_PFSOC_WDOG3,
+> +    MICROCHIP_PFSOC_WDOG4,
+>      MICROCHIP_PFSOC_SPI0,
+>      MICROCHIP_PFSOC_SPI1,
+> +    MICROCHIP_PFSOC_I2C0,
+>      MICROCHIP_PFSOC_I2C1,
+> +    MICROCHIP_PFSOC_CAN0,
+> +    MICROCHIP_PFSOC_CAN1,
+>      MICROCHIP_PFSOC_GEM0,
+>      MICROCHIP_PFSOC_GEM1,
+>      MICROCHIP_PFSOC_GPIO0,
+>      MICROCHIP_PFSOC_GPIO1,
+>      MICROCHIP_PFSOC_GPIO2,
+> +    MICROCHIP_PFSOC_RTC,
+>      MICROCHIP_PFSOC_ENVM_CFG,
+>      MICROCHIP_PFSOC_ENVM_DATA,
+> +    MICROCHIP_PFSOC_USB,
+>      MICROCHIP_PFSOC_QSPI_XIP,
+>      MICROCHIP_PFSOC_IOSCB,
+> -    MICROCHIP_PFSOC_EMMC_SD_MUX,
+> +    MICROCHIP_PFSOC_FABRIC_FIC3,
+>      MICROCHIP_PFSOC_DRAM_LO,
+>      MICROCHIP_PFSOC_DRAM_LO_ALIAS,
+>      MICROCHIP_PFSOC_DRAM_HI,
+> --
+> 2.37.1
+>
 >
 
