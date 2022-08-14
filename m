@@ -1,63 +1,59 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNLaS-0006g7-RZ
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 17:56:00 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:43336)
+	id 1oNLbV-0007Si-6X
+	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 17:57:05 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:43480)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLaN-0006fo-LX; Sun, 14 Aug 2022 17:55:56 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035]:35452)
+ id 1oNLbS-0007QX-BB; Sun, 14 Aug 2022 17:57:02 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634]:43521)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1oNLaM-0005yu-1J; Sun, 14 Aug 2022 17:55:55 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- o3-20020a17090a0a0300b001f7649cd317so12974504pjo.0; 
- Sun, 14 Aug 2022 14:55:52 -0700 (PDT)
+ id 1oNLbQ-00061x-1s; Sun, 14 Aug 2022 17:57:01 -0400
+Received: by mail-pl1-x634.google.com with SMTP id 17so4965863plj.10;
+ Sun, 14 Aug 2022 14:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=GBxN+sPBU9Sl/lscOMy1MjZne9FQGdwFrSHvq8m8+nI=;
- b=oBjLax2Hb1iTZPLfIi6JtGAJb3V4i6Nmq7wzQOfrLjsD+q6Mzj1wTHKEIkXx6/bfGw
- xXtYOh0qMRjjXRJOMFSvDWydVdoTBPBMOHs9meNINibjj1ITFQPa8Kgelm5wuldYYr+o
- 3/cjBDEhOdY5Hs6ayChQ9USXPc6ve4g8U4Lo/p9ZvjmMHmCm4tOBJPq+uW4byCgwE6PO
- SCrhgjq4JVHtpN+qk9WMRfZ3S6IROjdoHsoM/dkyByPnrHj2isRvLT5JXu867nG+RYZ9
- mJPyaud49gPuX7pfk0gaev37694oe0W9oKlHqwQL/r+v4G/hXvgnN6t4TFhq6do8kWuQ
- 8ayw==
+ bh=F2VVVARx8da+hxKJOa6EOkdIYxHeee8wAtbMYD8USas=;
+ b=hjHbOUW4EtmSD/mzt58GHJnEv8SUHHqEXWLbxWtQmg7H27JVpRaFe41+czJtkPuYK0
+ RXeU0GQjpUsS7K/xWJcnfFFomIvHJ6kV7EComEcNku8fwmgC4PCUhxDUjQf1DS68R6F/
+ HuyvIS3uzguzDBvIYloGpHellfxVO1uVqaZYvUOXJXFMM4tFg6Sphemw3VKhCbz/kl9m
+ fPjeA2RS+yMvVJxQU7fO4he9bXHHCppkuluz3Xmx4LHtoZT7SJJokjeTuA3NbTque9pX
+ VZ7jnggW6VRTvfgeqaBCeeT564VpcG31UEpsiY5PjUL5Ei/IPG3GmgKtqBO7p76B/J/t
+ YXzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=GBxN+sPBU9Sl/lscOMy1MjZne9FQGdwFrSHvq8m8+nI=;
- b=t/B20ymJl6OsEiEjNUqeAdeqpFzzaONbDZISDstLygH5k/pSNxyU+RRA512fRZW8fS
- Mq5iXDj+QJ4j8qAcZAPgCJW8QHo8hzVccCE4eLSkJ04M3m8hqNRg2bNN0C8o4fWvcnzM
- 1hsnyTeMzXEiG55SYFXDdVddEXTTN0YOEnIylNezxKpK/uk9sIEA0KNpCeqVq1aK9Cr/
- JrneLl2pVWKNBZGkRnRC9p1ehtyRccotrE+vEsY3trXO5pjF+JCz4Z3mPSA6H9bVkERC
- kHMGErOEg5xdf8Qd4Vov9cTpSH6+9n5SvfbOw60rVos1cEubUqtrPwFXPY4dMiV4oLWH
- EPzg==
-X-Gm-Message-State: ACgBeo0OQxRRn6eFEjtObC3SOb/3u0r3Cm5WNY0mNxRMNVtjS0niNixM
- tg5ZT4N1auiHgkDx4PMm8qiMG7okh84EWNBNmfg=
-X-Google-Smtp-Source: AA6agR5gG7rPAnxy+e9v42mucMt3OdSKehsj7JfSJQua93wDgp2dXsWTI7YBZmeXcc2Pm1Ol8QQ/bP6gC+xAJWmpUvU=
-X-Received: by 2002:a17:902:d4c1:b0:16f:8311:54bc with SMTP id
- o1-20020a170902d4c100b0016f831154bcmr13270201plg.25.1660514151794; Sun, 14
- Aug 2022 14:55:51 -0700 (PDT)
+ bh=F2VVVARx8da+hxKJOa6EOkdIYxHeee8wAtbMYD8USas=;
+ b=I6roo/lYgI4qBeyKg3krv6+Kf74/dkkH6vn44Yco7Cc2+7KIjRDlz2FyHtTYj/WxIp
+ WWeFI5NQKGFdIvyICORmw6NskeLdlNy2FR7ZE7OXgOfGecknLvIeICKdqxDPr2Ugg+oo
+ LOn8GntmNj+ecNnwO/fSICDceiPxGzJV5bZlqkyv8vLCE/Bkw/uaND0dyAIX1jSVDaJ+
+ zcL5eKJSUjxOfO3MNF1cKc0qTlf6WKcAhdi4pUOgbGkFaEg4LOv2uVkDemyJeK6d2Cg2
+ CYVC0O3jlWJwJTL0ly9BLtabXbjz86jIsMclDc/CGCXrIcTHjxem+n0qH/ymosc0TRdB
+ 8VsA==
+X-Gm-Message-State: ACgBeo2OZM0zwITTYol3oki0TwyyAdix42pt6DEysS6uTHGCJ0IcembL
+ Avyhsl8SUVtIv1YTWUmHPaFVWRzWu0oQNv3SCrA=
+X-Google-Smtp-Source: AA6agR7WmpWe5AMQiU/Sp0i9QrmXLP0zuorzWXdl8WYDj9oJB+y66xQJHsh4RvsBuk0akXog6mo+GXEOe09i0rEBnZw=
+X-Received: by 2002:a17:902:e5c8:b0:16f:1511:7575 with SMTP id
+ u8-20020a170902e5c800b0016f15117575mr14140309plf.83.1660514218282; Sun, 14
+ Aug 2022 14:56:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220810184612.157317-1-mail@conchuod.ie>
- <20220810184612.157317-4-mail@conchuod.ie>
-In-Reply-To: <20220810184612.157317-4-mail@conchuod.ie>
+References: <20220810230200.149398-1-wilfred.mallawa@opensource.wdc.com>
+ <20220810230200.149398-3-wilfred.mallawa@opensource.wdc.com>
+In-Reply-To: <20220810230200.149398-3-wilfred.mallawa@opensource.wdc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 15 Aug 2022 07:55:25 +1000
-Message-ID: <CAKmqyKMUZQ-XXxED=2-QQcQsbh270=Q4ODwfZn4qNuiUj15AWw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] hw/riscv: virt: fix syscon subnode paths
-To: Conor Dooley <mail@conchuod.ie>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Rob Herring <robh@kernel.org>, 
- Conor Dooley <conor.dooley@microchip.com>, Jessica Clarke <jrtc27@jrtc27.com>, 
+Date: Mon, 15 Aug 2022 07:56:32 +1000
+Message-ID: <CAKmqyKMOssiAVBZfZqK2-dyL8Hx8b7mT=feZZwh6sdMazzEw2w@mail.gmail.com>
+Subject: Re: [PATCH 3/3] hw/ssi: fixup/add rw1c functionality
+To: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:RISC-V" <qemu-riscv@nongnu.org>, 
  "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- linux-riscv <linux-riscv@lists.infradead.org>
+ Wilfred Mallawa <wilfred.mallawa@wdc.com>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=alistair23@gmail.com; helo=mail-pj1-x1035.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -78,82 +74,111 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Aug 2022 21:55:57 -0000
+X-List-Received-Date: Sun, 14 Aug 2022 21:57:02 -0000
 
-On Thu, Aug 11, 2022 at 5:06 AM Conor Dooley <mail@conchuod.ie> wrote:
+On Thu, Aug 11, 2022 at 11:05 AM Wilfred Mallawa
+<wilfred.mallawa@opensource.wdc.com> wrote:
 >
-> From: Conor Dooley <conor.dooley@microchip.com>
+> From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 >
-> The reset and poweroff features of the syscon were originally added to
-> top level, which is a valid path for a syscon subnode. Subsequently a
-> reorganisation was carried out while implementing NUMA in which the
-> subnodes were moved into the /soc node. As /soc is a "simple-bus", this
-> path is invalid, and so dt-validate produces the following warnings:
+> This patch adds the `rw1c` functionality to the respective
+> registers. The status fields are cleared when the respective
+> field is set.
 >
-> /stuff/qemu/qemu.dtb: soc: poweroff: {'value': [[21845]], 'offset': [[0]], 'regmap': [[4]], 'compatible': ['syscon-poweroff']} should not be valid under {'type': 'object'}
->         From schema: /home/conor/.local/lib/python3.9/site-packages/dtschema/schemas/simple-bus.yaml
-> /stuff/qemu/qemu.dtb: soc: reboot: {'value': [[30583]], 'offset': [[0]], 'regmap': [[4]], 'compatible': ['syscon-reboot']} should not be valid under {'type': 'object'}
->         From schema: /home/conor/.local/lib/python3.9/site-packages/dtschema/schemas/simple-bus.yaml
->
-> Move the syscon subnodes back to the top level and silence the warnings.
->
-> Reported-by: Rob Herring <robh@kernel.org>
-> Link: https://lore.kernel.org/linux-riscv/20220803170552.GA2250266-robh@kernel.org/
-> Fixes: 18df0b4695 ("hw/riscv: virt: Allow creating multiple NUMA sockets")
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
-> I dropped your R-b Alistair intentionally.
-> Tested both Linux and FreeBSD:
-> [    0.073406] device: 'poweroff': device_add
-> [    0.073441] bus: 'platform': add device poweroff
-> [    0.502347] bus: 'platform': add driver syscon-poweroff
-> [    0.502379] bus: 'platform': __driver_probe_device: matched device poweroff with driver syscon-poweroff
-> [    0.502397] bus: 'platform': really_probe: probing driver syscon-poweroff with device poweroff
-> [    0.502423] syscon-poweroff poweroff: no pinctrl handle
-> [    0.502681] syscon-poweroff poweroff: pm_power_off already claimed for sbi_srst_power_off
-> [    0.503333] syscon-poweroff: probe of poweroff failed with error -16
-> [    0.073629] device: 'reboot': device_add
-> [    0.073664] bus: 'platform': add device reboot
-> [    0.500640] bus: 'platform': add driver syscon-reboot
-> [    0.500673] bus: 'platform': __driver_probe_device: matched device reboot with driver syscon-reboot
-> [    0.500694] bus: 'platform': really_probe: probing driver syscon-reboot with device reboot
-> [    0.500725] syscon-reboot reboot: no pinctrl handle
-> [    0.502168] driver: 'syscon-reboot': driver_bound: bound to device 'reboot'
-> [    0.502242] bus: 'platform': really_probe: bound device reboot to driver syscon-reboot
+>  hw/ssi/ibex_spi_host.c         | 36 +++++++++++++++++++++++++++++++---
+>  include/hw/ssi/ibex_spi_host.h |  4 ++--
+>  2 files changed, 35 insertions(+), 5 deletions(-)
 >
-> syscon_power0: <Syscon poweroff> on ofwbus0
-> syscon_power1: <Syscon reboot> on ofwbus0
-> ---
->  hw/riscv/virt.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
+> index 8c35bfa95f..935372506c 100644
+> --- a/hw/ssi/ibex_spi_host.c
+> +++ b/hw/ssi/ibex_spi_host.c
+> @@ -352,7 +352,7 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
+>  {
+>      IbexSPIHostState *s = opaque;
+>      uint32_t val32 = val64;
+> -    uint32_t shift_mask = 0xff, data;
+> +    uint32_t shift_mask = 0xff, data = 0;
+>      uint8_t txqd_len;
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 8b2978076e..6f0fd1541b 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -896,7 +896,7 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
->      test_phandle = qemu_fdt_get_phandle(mc->fdt, name);
->      g_free(name);
+>      trace_ibex_spi_host_write(addr, size, val64);
+> @@ -362,7 +362,17 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
 >
-> -    name = g_strdup_printf("/soc/reboot");
-> +    name = g_strdup_printf("/reboot");
->      qemu_fdt_add_subnode(mc->fdt, name);
->      qemu_fdt_setprop_string(mc->fdt, name, "compatible", "syscon-reboot");
->      qemu_fdt_setprop_cell(mc->fdt, name, "regmap", test_phandle);
-> @@ -904,7 +904,7 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
->      qemu_fdt_setprop_cell(mc->fdt, name, "value", FINISHER_RESET);
->      g_free(name);
+>      switch (addr) {
+>      /* Skipping any R/O registers */
+> -    case IBEX_SPI_HOST_INTR_STATE...IBEX_SPI_HOST_INTR_ENABLE:
+> +    case IBEX_SPI_HOST_INTR_STATE:
+> +        /* rw1c status register */
+> +        if (FIELD_EX32(val32, INTR_STATE, ERROR)) {
+> +            data = FIELD_DP32(data, INTR_STATE, ERROR, 0);
+> +        }
+> +        if (FIELD_EX32(val32, INTR_STATE, SPI_EVENT)) {
+> +            data = FIELD_DP32(data, INTR_STATE, SPI_EVENT, 0);
+> +        }
+> +        s->regs[addr] = data;
+> +        break;
+> +    case IBEX_SPI_HOST_INTR_ENABLE:
+>          s->regs[addr] = val32;
+>          break;
+>      case IBEX_SPI_HOST_INTR_TEST:
+> @@ -506,7 +516,27 @@ static void ibex_spi_host_write(void *opaque, hwaddr addr,
+>       *  When an error occurs, the corresponding bit must be cleared
+>       *  here before issuing any further commands
+>       */
+> -        s->regs[addr] = val32;
+> +        data = s->regs[addr];
+> +        /* rw1c status register */
+> +        if (FIELD_EX32(val32, ERROR_STATUS, CMDBUSY)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, CMDBUSY, 0);
+> +        }
+> +        if (FIELD_EX32(val32, ERROR_STATUS, OVERFLOW)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, OVERFLOW, 0);
+> +        }
+> +        if (FIELD_EX32(val32, ERROR_STATUS, UNDERFLOW)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, UNDERFLOW, 0);
+> +        }
+> +        if (FIELD_EX32(val32, ERROR_STATUS, CMDINVAL)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, CMDINVAL, 0);
+> +        }
+> +        if (FIELD_EX32(val32, ERROR_STATUS, CSIDINVAL)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, CSIDINVAL, 0);
+> +        }
+> +        if (FIELD_EX32(val32, ERROR_STATUS, ACCESSINVAL)) {
+> +            data = FIELD_DP32(data, ERROR_STATUS, ACCESSINVAL, 0);
+> +        }
+> +        s->regs[addr] = data;
+>          break;
+>      case IBEX_SPI_HOST_EVENT_ENABLE:
+>      /* Controls which classes of SPI events raise an interrupt. */
+> diff --git a/include/hw/ssi/ibex_spi_host.h b/include/hw/ssi/ibex_spi_host.h
+> index 3fedcb6805..1f6d077766 100644
+> --- a/include/hw/ssi/ibex_spi_host.h
+> +++ b/include/hw/ssi/ibex_spi_host.h
+> @@ -40,7 +40,7 @@
+>      OBJECT_CHECK(IbexSPIHostState, (obj), TYPE_IBEX_SPI_HOST)
 >
-> -    name = g_strdup_printf("/soc/poweroff");
-> +    name = g_strdup_printf("/poweroff");
->      qemu_fdt_add_subnode(mc->fdt, name);
->      qemu_fdt_setprop_string(mc->fdt, name, "compatible", "syscon-poweroff");
->      qemu_fdt_setprop_cell(mc->fdt, name, "regmap", test_phandle);
+>  /* SPI Registers */
+> -#define IBEX_SPI_HOST_INTR_STATE         (0x00 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_INTR_STATE         (0x00 / 4)  /* rw1c */
+>  #define IBEX_SPI_HOST_INTR_ENABLE        (0x04 / 4)  /* rw */
+>  #define IBEX_SPI_HOST_INTR_TEST          (0x08 / 4)  /* wo */
+>  #define IBEX_SPI_HOST_ALERT_TEST         (0x0c / 4)  /* wo */
+> @@ -54,7 +54,7 @@
+>  #define IBEX_SPI_HOST_TXDATA             (0x28 / 4)
+>
+>  #define IBEX_SPI_HOST_ERROR_ENABLE       (0x2c / 4)  /* rw */
+> -#define IBEX_SPI_HOST_ERROR_STATUS       (0x30 / 4)  /* rw */
+> +#define IBEX_SPI_HOST_ERROR_STATUS       (0x30 / 4)  /* rw1c */
+>  #define IBEX_SPI_HOST_EVENT_ENABLE       (0x34 / 4)  /* rw */
+>
+>  /* FIFO Len in Bytes */
 > --
 > 2.37.1
 >
