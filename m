@@ -1,75 +1,64 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNjIi-0001bK-IH
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 19:15:16 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:54764)
+	id 1oNjob-0005D9-Lz
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 19:48:13 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:59192)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
- id 1oNjIg-0001a8-4o; Mon, 15 Aug 2022 19:15:14 -0400
-Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a]:33474)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oNjoa-0005Cx-Jg; Mon, 15 Aug 2022 19:48:12 -0400
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535]:34668)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jcmvbkbc@gmail.com>)
- id 1oNjIe-0001bN-1c; Mon, 15 Aug 2022 19:15:13 -0400
-Received: by mail-vk1-xa2a.google.com with SMTP id r4so4421256vkf.0;
- Mon, 15 Aug 2022 16:15:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1oNjoZ-0006Qm-1c; Mon, 15 Aug 2022 19:48:12 -0400
+Received: by mail-pg1-x535.google.com with SMTP id 12so7831855pga.1;
+ Mon, 15 Aug 2022 16:48:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc;
- bh=1p30cTHaDHwD3tSkpCHUqDSGnIBEry22la+MZDLe2QE=;
- b=QpeHYiSfjc0RfUXDTcFFJbmXhDW5Atha1lUgiAFk08pgPrAIvFpi4aWFhziG4MArSH
- rTqZjfPrUgJp5DYwtQXc5jKFH/PdHHAW+6qXk3D4Jpas4tQ1xcwm38lHaNTr5a8v1W5+
- fjblPy3CmO8lLIBzg0A3Z9aO/f3UTKusU26IgbUcC4lLH4EypS6W2CSl0hiZdsXNOKQ7
- S51bkOXsit0IA3BJM+q0NWriwXJI2g9IZIk3fGTYlruFv0rni94Xrl3ccxVdohTqULyd
- MSGtTp6SUf0dvsu/OeQp8YKRgsmwo4kVcZZQj2C4uW/W2iol+jdo8eJsitqdCAWwDkZ6
- 4baA==
+ bh=47OFDDtteS0niVKTMTzCSGHpbnd4rcvMQMfO9K8kgAg=;
+ b=SKaIyL1i3KAT0saBsJdnHrYvqwWaIkwrPYQz01ymw55PKGQPsGsiQAsnWBKTTJUVbS
+ 7Yv4ggDr4O6O3F26OEXlvk5RIRl/TcKaFuRpR7DyTgVfgYcGHD4fLbB7Q6OIzHyNiwsH
+ VMSYDIbJ75pmelDSZg19TfXfrnxRZ7ly5B+UnwT94AIF90pgAwBp90SsOqmgOdOpus2G
+ tcAFQeANyNlHpRehnoA2N+SRuLKhMk8g4Fpvq9i39+Z2pd2n+FC8+2HipYGsw7JT/1Eu
+ uGDoe4Uz42wtlX5lBv8zMRuwixhk0XfiwChXHQRhNiexgkuAfCMkiYcWJQg5kBHwMguj
+ Qrjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc;
- bh=1p30cTHaDHwD3tSkpCHUqDSGnIBEry22la+MZDLe2QE=;
- b=hVyN/ztJXHXD9Ya0430QYDUSTCCskIknVGrGJUuI7I9F0ijyntbsOIJlCURV9a+nSz
- 5/BOC8Yyljooz0RkTFECIBV/4TA/QUxX0sRGs/sSUmy/t/0Rn41P9nhSbhIh8ggMlwGl
- c87uuUFE9vBGNo/19k6+GlTk69hZg4s0kajaK/g1LWeTdPwv19nAJQoHT4fafMDu+EPb
- AuBoospb5cyQlv8ywcBpJ/eGBZm6yv0WRcB8TnG++8UCUsgGhd19RKV6bE6DCL5ZMK3r
- TmmZb+tEQ1A2CwqcafDAPX2+TlOR6hS9lbkX0b70mb8sJ+rNujkRIJw0/Ocu0sp/70na
- zluw==
-X-Gm-Message-State: ACgBeo3CcJOhhyjRaIHiSKsw3slbUbGsunijy35EFsTwPnuyJtB6Uuna
- 7yFUN/Ns0KmDC4wSkHUPtHF5dl4Lb4YdnhIvvqg=
-X-Google-Smtp-Source: AA6agR7sdJxpn4iBDV36au4BAIv/LrJGW3rDhg/l6Jr9L6KO9mbxxnzQaBK/Vv0AlaJd0ORH5jgY6QobctFNen4BEBc=
-X-Received: by 2002:a05:6122:ca3:b0:378:cf0d:b458 with SMTP id
- ba35-20020a0561220ca300b00378cf0db458mr7534274vkb.15.1660605308334; Mon, 15
- Aug 2022 16:15:08 -0700 (PDT)
+ bh=47OFDDtteS0niVKTMTzCSGHpbnd4rcvMQMfO9K8kgAg=;
+ b=Cb1RuVOo9DFmKs8TmcTJAFHnZrHV6h+sMqkoi/pomL8FN2shbh5zuJ9gok6Y9QLQB/
+ q/DPWgC4wgaRHScDEaimd6za0pyBKV/005GG7zCnre5SNwDWjoBeWUkFb/0A9+HSAXbQ
+ 0Y2crqtdDP3red+0VO3uwFulFT+6Q67KVZH6QFuSZlTsVUQZbQXzPXFddDt0bEk57CeB
+ YHGVn2SVnnQw0BFnLffmvGP+AbtXuw848nvk/3gDQQJqhbkJtc+Y88c53m3hvPYfgTlM
+ UXOLIx+P8AmpF6IpLENOBsiyKYy/v8Sn2OWfM+m5RWl5HeUx0zNySBB6CN9h+tQpwn9Y
+ X7rA==
+X-Gm-Message-State: ACgBeo02uEBVRCsH1q1LSIFOasN26HApHphvAUFKf8/wA4TwK8j58hzS
+ +PbXhbRLbMcFF0Erl6ppSZNs4MVRUieguhYS6k1ffvih/8aveOKN
+X-Google-Smtp-Source: AA6agR52QP3syNsTFMtmgbdgYoouiOU5RhJRU0ncw24tR3ew4IiWmw+KnCyDP5nEXmHEIUaTwAeQKDGSC/6+JhUrmVU=
+X-Received: by 2002:a63:f14c:0:b0:41a:b83d:a636 with SMTP id
+ o12-20020a63f14c000000b0041ab83da636mr15526488pgk.361.1660607288696; Mon, 15
+ Aug 2022 16:48:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220815190303.2061559-1-peter.maydell@linaro.org>
- <20220815190303.2061559-7-peter.maydell@linaro.org>
-In-Reply-To: <20220815190303.2061559-7-peter.maydell@linaro.org>
-From: Max Filippov <jcmvbkbc@gmail.com>
-Date: Mon, 15 Aug 2022 16:15:19 -0700
-Message-ID: <CAMo8BfLzPLit=fyN9Q4fUbrucWrewmPnsNx8JiH3gZwVQ8aHxw@mail.gmail.com>
-Subject: Re: [PATCH 6/7] target/xtensa: Honour -semihosting-config userspace=on
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>, 
- Stefan Pejic <stefan.pejic@syrmia.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Furquan Shaikh <furquan@rivosinc.com>
+References: <20220815174138.19766-1-coder@frtk.ru>
+In-Reply-To: <20220815174138.19766-1-coder@frtk.ru>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 16 Aug 2022 09:47:42 +1000
+Message-ID: <CAKmqyKN7XuiwjdXNAXz7JgQvBcA2MjV=FqczqtEqhN2xVF6VQA@mail.gmail.com>
+Subject: Re: [PATCH] hw/riscv: Setting address of vector reset is improved
+To: Maksim Perov <coder@frtk.ru>
+Cc: "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
- envelope-from=jcmvbkbc@gmail.com; helo=mail-vk1-xa2a.google.com
-X-Spam_score_int: 4
-X-Spam_score: 0.4
-X-Spam_bar: /
-X-Spam_report: (0.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- FROM_LOCAL_NOVOWEL=0.5, HK_RANDOM_ENVFROM=0.998, HK_RANDOM_FROM=0.998,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=alistair23@gmail.com; helo=mail-pg1-x535.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,29 +71,49 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2022 23:15:15 -0000
+X-List-Received-Date: Mon, 15 Aug 2022 23:48:12 -0000
 
-On Mon, Aug 15, 2022 at 12:03 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+On Tue, Aug 16, 2022 at 6:15 AM Maksim Perov <coder@frtk.ru> wrote:
 >
-> Honour the commandline -semihosting-config userspace=on option,
-> instead of always permitting userspace semihosting calls in system
-> emulation mode, by passing the correct value to the is_userspace
-> argument of semihosting_enabled().
+> Previously address is set by default value 0x1000 which is hardcoded in target/riscv/cpu_bits.h
+> If add to new RISC-V Machine in which ROM area is not based on 0x1000 address than there is problem of running simulation
 >
-> Note that this is a behaviour change: if the user wants to
-> do semihosting calls from userspace they must now specifically
-> enable them on the command line.
->
-> xtensa semihosting is not implemented for linux-user builds.
->
-> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> Signed-off-by: Maksim Perov <coder@frtk.ru>
 > ---
->  target/xtensa/translate.c | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+>  hw/riscv/boot.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 06b4fc5ac3..5e2438d39a 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -327,6 +327,10 @@ void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts
+>      riscv_rom_copy_firmware_info(machine, rom_base, rom_size, sizeof(reset_vec),
+>                                   kernel_entry);
+>
+> +    /* change reset vector address */
+> +    for (i = 0; i < harts->num_harts; i++) {
+> +        harts->harts[i].env.resetvec = rom_base;
+> +    }
 
-Acked-by: Max Filippov <jcmvbkbc@gmail.com>
+Thanks for the patch!
 
--- 
-Thanks.
--- Max
+We don't want to do this though. The reset vector is part of the
+hardware design, we don't want to change the reset vector based on the
+software that is loaded.
+
+The reset vector is exposed as a property (resetvec) and can be
+configured from a board. You could also configure it from the command
+line if you wanted to (although it might be overridden, I haven't
+checked).
+
+Alistair
+
+>      return;
+>  }
+>
+> --
+> 2.17.1
+>
+>
 
