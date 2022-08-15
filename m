@@ -1,98 +1,77 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNQcI-0004gS-Hl
-	for mharc-qemu-riscv@gnu.org; Sun, 14 Aug 2022 23:18:14 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:53728)
+	id 1oNTWQ-0007GM-Dc
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 02:24:22 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:51210)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=219596703=wilfred.mallawa@opensource.wdc.com>)
- id 1oNQcB-0004Z0-Ge
- for qemu-riscv@nongnu.org; Sun, 14 Aug 2022 23:18:09 -0400
-Received: from esa2.hgst.iphmx.com ([68.232.143.124]:63401)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=219596703=wilfred.mallawa@opensource.wdc.com>)
- id 1oNQc1-0007Sq-CV
- for qemu-riscv@nongnu.org; Sun, 14 Aug 2022 23:18:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1660533477; x=1692069477;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=MdQobky66vKbHGU/y2zi8zZA1scl005jHEY18jAZWQg=;
- b=Sgx9glAwVf7w8vhlHQSxtuknwR/2HHPkIj6PuJFQphd60jT0jvGCWNMX
- uySOaZ+yeEtJcX1SkfJWt6fdEMaWjIu49Njtsxy4PifjjXqfhaIQpryZa
- 3kUp6ACiI6aNh1Cv1V3H9va7d2toJwNDGvLjo4/ogKb1Rih361ioLBtaW
- tp888TFgfYCbH13TBAjxksoq55LIpBekOF8jnTE9F7XRgdv8P0sgKbLvS
- jNY+y8+hT/XLKwHr5worcf+CXEEvAmSPb5sMRA2lEQbXvVzdpxEs0qAv3
- b72CPHwIRySnXORRvV72SrT6ELqS53uIOm6e5rEDanhwPHdOgHjyQF8dL A==;
-X-IronPort-AV: E=Sophos;i="5.93,237,1654531200"; d="scan'208";a="312972252"
-Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
- ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 15 Aug 2022 11:17:54 +0800
-IronPort-SDR: n6ohjwCWG5oDui2JeEY5BY2Lw4fe8ZCBwD7VtFwVX49GZkhzR9DO0Ho9Pl3vbW1ARzr0McVhdG
- 4z43J+BGC5Jib6UlctfvxKouAhe39EaIMewpWWS3Y2JC409J6G+jbX1bMcq7J5jcr+xaEtOlw9
- jBP+WS/V3zphcz82LLv4TMM6PKhBuU2C8VO67Ei1TDcso/sKmEfELsEQmjbjSPjUlQKjNekTZI
- WbEBQ6rF6G06gpB2Vqal4FMQdb2mLdWAusHwsLHxRdtBTzlJukieersukxK9T1+uuwgqHwVFiy
- lOrv6KruZdauSFX4oeoUXkWn
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 14 Aug 2022 19:38:43 -0700
-IronPort-SDR: lfx261ERxBS7FVpiEWzmocJQ53WendH0YwQBc55EL4tMOsmIdEI10iLFJBtkFQSp8alx0HMpYL
- MWk5qG+SctQ0hnBfxzFqtnystuneAfIS+ZOsNXSjkLdu77CNQP7m06x2Phx4tachus33KgzhRB
- /9mZ2mQe1oBDMTCkoqQkienSaNLeOkQrcP87jeEtLyxrL6PEsdPEboUvSIRG8ntRIAq65iK05F
- sOKUu4goN70NDJnBoQ8ymjT0HyvfY4C9oCDWk4BttsudEybKyTFqpjq4FT93Cwvy4VPnzDSppV
- HyI=
-WDCIronportException: Internal
-Received: from usg-ed-osssrv.wdc.com ([10.3.10.180])
- by uls-op-cesaip02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 14 Aug 2022 20:17:54 -0700
-Received: from usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTP id 4M5fc16d6Dz1Rw4L
- for <qemu-riscv@nongnu.org>; Sun, 14 Aug 2022 20:17:53 -0700 (PDT)
-Authentication-Results: usg-ed-osssrv.wdc.com (amavisd-new); dkim=pass
- reason="pass (just generated, assumed good)"
- header.d=opensource.wdc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
- opensource.wdc.com; h=content-transfer-encoding:mime-version
- :references:in-reply-to:x-mailer:message-id:date:subject:to
- :from; s=dkim; t=1660533473; x=1663125474; bh=MdQobky66vKbHGU/y2
- zi8zZA1scl005jHEY18jAZWQg=; b=saNCRPPmJf+X9QKgQUB35vObqRxbzAqT/r
- B1HaWcDHnwAG02MZ39FHlGB+bx7lsgJe5xTPEP88oip9iO4eHRt/zrMjuRQIf8TF
- S3FoQZmrmtDH95jR/KHQM95ja1YOt+WdkxpxebgmdE+Nj/eJMg70nhzeS2n8nxbP
- 2I4RdviqgjO0Rqe3oTxk7+tkbVIGpYT1VcDvFGmZpxc/x/oqmSABEKlaSOelEI2k
- CIlt2XC+BaqerZCP9CMn5RZex5z3ybWFH1HCVgBQ7u+kN9nW8kcY/8h7LrBqiW76
- 4MpuFsmsWCvCt5kFvqMQ+POeaUd5liAKU82ErD2RlY1yu/QCcKDQ==
-X-Virus-Scanned: amavisd-new at usg-ed-osssrv.wdc.com
-Received: from usg-ed-osssrv.wdc.com ([127.0.0.1])
- by usg-ed-osssrv.wdc.com (usg-ed-osssrv.wdc.com [127.0.0.1]) (amavisd-new,
- port 10026) with ESMTP id 2_SrP2dVT__x for <qemu-riscv@nongnu.org>;
- Sun, 14 Aug 2022 20:17:53 -0700 (PDT)
-Received: from fedora.home (unknown [10.225.165.28])
- by usg-ed-osssrv.wdc.com (Postfix) with ESMTPSA id 4M5fbz2sXZz1RtVk;
- Sun, 14 Aug 2022 20:17:51 -0700 (PDT)
-From: Wilfred Mallawa <wilfred.mallawa@opensource.wdc.com>
-To: Alistair.Francis@wdc.com,
-	qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org,
-	Wilfred Mallawa <wilfred.mallawa@wdc.com>
-Subject: [PATCH v2 4/4] hw/ssi: ibex_spi: update reg addr
-Date: Mon, 15 Aug 2022 13:16:25 +1000
-Message-Id: <20220815031624.170857-5-wilfred.mallawa@opensource.wdc.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220815031624.170857-1-wilfred.mallawa@opensource.wdc.com>
-References: <20220815031624.170857-1-wilfred.mallawa@opensource.wdc.com>
+ (Exim 4.90_1) (envelope-from <furquan@rivosinc.com>)
+ id 1oNTWO-0007FM-OG
+ for qemu-riscv@nongnu.org; Mon, 15 Aug 2022 02:24:20 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530]:37437)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <furquan@rivosinc.com>)
+ id 1oNTWM-0007ke-VW
+ for qemu-riscv@nongnu.org; Mon, 15 Aug 2022 02:24:20 -0400
+Received: by mail-pg1-x530.google.com with SMTP id bh13so5802755pgb.4
+ for <qemu-riscv@nongnu.org>; Sun, 14 Aug 2022 23:24:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=o2xWr1+n7Kt42+dlH3e2BIes24KNG/pmkB6btjXvSkk=;
+ b=PXrQlceKjUFu1FvIuox2GrH9nDHKLBMqFYZagtZzgHDZgPelqRhMzRPNknTyO/fwcF
+ lBXzKQMy+054Q3P3jhOcx4gSL2s9BgCyjvBVbRRPMT3EYc3IDu+BG3/nrmPKkMrJUQdJ
+ QSMrfXdLM9/xS48Ayy6yWxYkMyzsL3A5uHKO+qqSNUCsUKY1eNuG87++HQ2IHlQZPngx
+ EEBqZxKHeeBf0C/BEPx900b/baeSNB4JgJ1wN3So8WaozIO3SOo4Kp2LDJBd99ur23FJ
+ a79WGHpa8FPN01zYxpaCYNLz6346aOb6Ib24iJdmJPYFU+mA+bkNmZyykBwcHY7SBxhl
+ 0fCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=o2xWr1+n7Kt42+dlH3e2BIes24KNG/pmkB6btjXvSkk=;
+ b=lAIL0bDUW/Eb/9CxAxdfkmo9JYPpfefymjrAmW40taRCituNewLMOJYsr5cxVfZgSm
+ yDEY9RsF8o5QMb9H/5SoaI6r1cgkL61/JznSMxX9Vz0m9Sb8XVsk4rMXqnNq1Z/2yVgP
+ yK/FrDuk9U2NQKnjhf+bv4FC8a4DwF8hwyX9U1pSnaKDhdtg6MScQqQXV6yt0dYU2N/a
+ nCw+dUr6F/CCNsU4Ercl4Z2e1bUYnaM9vWVdqyO4dNPiQZZ3weO1pRBbPs6U4wULcEV9
+ f/5C501ubQAO7q/L6smkgLTe9gE7h/7ZjSA3iKv54qMevKglCDQyuQpW/IcQ9iMYGCk/
+ QJcg==
+X-Gm-Message-State: ACgBeo0DClMeOsRsuuy+8JpuSh0YK2FkMkpbUhZswzSBV+xOKctkwMl+
+ VoW6hN/YU4tmmoCq2M1iy04mQRT+R6QZGVpnJQKOQg==
+X-Google-Smtp-Source: AA6agR5TCi02SDuhcX7XAA8xi23yU7njS4ds1jDODTaRGzJ2xvMIQHOObRHDdbq8VA470ExHLlSTN/PZIiMCnBFZmsg=
+X-Received: by 2002:a05:6a00:b82:b0:52f:518f:fe6c with SMTP id
+ g2-20020a056a000b8200b0052f518ffe6cmr15141447pfj.80.1660544656924; Sun, 14
+ Aug 2022 23:24:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=68.232.143.124;
- envelope-from=prvs=219596703=wilfred.mallawa@opensource.wdc.com;
- helo=esa2.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+References: <CA+tJHD7FcrBTetGRO0vZn-XGPmZmQraMrw1dw9ia6jzHQniB0w@mail.gmail.com>
+ <37244ef8-d2f1-038a-8a51-01d9f62fbe2c@linaro.org>
+ <f977101c-bdc0-3b24-5fad-a75b07b5dac7@linaro.org>
+ <CA+tJHD4MC9xjVkDAg6QZ3Yq2L-cKDQkofQyGjX67cD_qxbCf1g@mail.gmail.com>
+ <804cd7cd-e83c-2b89-f2ba-cc2ca5c7f835@linaro.org>
+ <CA+tJHD6gNrtcrZ9bkDet8NuiR8mcSQfeN-Rk3dtm3LmeakKnvQ@mail.gmail.com>
+ <CAFEAcA--QMVgw0ZH6S3=jHsazM-AJQX45Hm+aJ+EhDhDrzNubA@mail.gmail.com>
+ <CAKmqyKPcr=umn4zUpxNFwBJ8MuuRkdwH5KpDgDiHHn8YMiaj4g@mail.gmail.com>
+In-Reply-To: <CAKmqyKPcr=umn4zUpxNFwBJ8MuuRkdwH5KpDgDiHHn8YMiaj4g@mail.gmail.com>
+From: Furquan Shaikh <furquan@rivosinc.com>
+Date: Sun, 14 Aug 2022 23:24:05 -0700
+Message-ID: <CA+tJHD4wsGD_EYrR9Lvpjh8dwFAx1eskxv9JS2mhxiLfFedFiA@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Make semihosting configurable for all privilege
+ modes
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ "open list:RISC-V" <qemu-riscv@nongnu.org>, 
+ "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=furquan@rivosinc.com; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001, T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,34 +84,44 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2022 03:18:13 -0000
+X-List-Received-Date: Mon, 15 Aug 2022 06:24:21 -0000
 
-From: Wilfred Mallawa <wilfred.mallawa@wdc.com>
+On Sun, Aug 14, 2022 at 3:04 PM Alistair Francis <alistair23@gmail.com> wrote:
+>
+> On Sat, Aug 13, 2022 at 8:20 PM Peter Maydell <peter.maydell@linaro.org> wrote:
+> >
+> > On Sat, 13 Aug 2022 at 01:53, Furquan Shaikh <furquan@rivosinc.com> wrote:
+> > > I ran into a problem when I was testing a project (with a microkernel
+> > > in M-mode and tasks in U-mode) that uses semihosting for debugging.
+> > > The semihosting worked fine for M-mode but not in U-mode. As I started
+> > > digging into this, I realized that this is because qemu restricts
+> > > semihosting to only M and S modes.
+> >
+> > Right. We should fix this by having a generic works-for-all-architectures
+> > semihosting config knob, because this is not a riscv specific problem,
+> > and we already have issues with different target architectures
+> > developing their own solutions to things.
+>
+> I agree with Peter here. I don't see a strong use case for a RISC-V
+> specific fine grained control. A user can either enable/disable
+> semihosting for privilege or usermodes (with Peter's patchset). That
+> seems like enough configuration options, it is unlikely that someone
+> will need semihosting only available to S-mode for example.
 
-Updates the `EVENT_ENABLE` register to offset `0x34` as per
-OpenTitan spec [1].
+Sounds good. Thanks for the feedback. I can continue with the changes
+that Peter has.
 
-[1] https://docs.opentitan.org/hw/ip/spi_host/doc/#Reg_event_enable
+>
+> Alistair
+>
+> >
+> > I'll see if I can dig out the half-done patchset I had for this.
 
-Signed-off-by: Wilfred Mallawa <wilfred.mallawa@wdc.com>
----
- hw/ssi/ibex_spi_host.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Let me know if you want to collaborate on this to get this to
+completion. Thanks!
 
-diff --git a/hw/ssi/ibex_spi_host.c b/hw/ssi/ibex_spi_host.c
-index 19dd094d76..3b8dcbce05 100644
---- a/hw/ssi/ibex_spi_host.c
-+++ b/hw/ssi/ibex_spi_host.c
-@@ -93,7 +93,7 @@ REG32(ERROR_STATUS, 0x30)
-     FIELD(ERROR_STATUS, CMDINVAL, 3, 1)
-     FIELD(ERROR_STATUS, CSIDINVAL, 4, 1)
-     FIELD(ERROR_STATUS, ACCESSINVAL, 5, 1)
--REG32(EVENT_ENABLE, 0x30)
-+REG32(EVENT_ENABLE, 0x34)
-     FIELD(EVENT_ENABLE, RXFULL, 0, 1)
-     FIELD(EVENT_ENABLE, TXEMPTY, 1, 1)
-     FIELD(EVENT_ENABLE, RXWM, 2, 1)
---=20
-2.37.1
-
+> >
+> > thanks
+> > -- PMM
+> >
 
