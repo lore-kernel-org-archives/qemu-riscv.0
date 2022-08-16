@@ -1,168 +1,75 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oO5Rs-0006Ef-4a
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 18:54:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:40570)
+	id 1oO5uM-0002tt-LB
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 19:23:39 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49302)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oO5Rq-0006EU-SN
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 18:54:10 -0400
-Received: from esa.microchip.iphmx.com ([68.232.154.123]:13715)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <Conor.Dooley@microchip.com>)
- id 1oO5Re-0000no-2B
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 18:54:09 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1660690437; x=1692226437;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=+b19+IdbgRCLtY1QaX7waWDK239EdZaGHrdvvCIWSeI=;
- b=EnBOXRKG1P6KhViCoWR2E1rqU5/zHArjckci1eQa/flPCu8/L4b4pT22
- UN7J7oGiQki+OuCHV8kpboWcyxFH6+qvdCb/Gil0j4/vvlqGv2X+UnbN7
- VRuJJf/2QAlb7RkK0ARvfQvMqi5lVpOw8ScIht4FsYJWkmTmMZfK/hr5D
- eyrS1KHV5Gi19dpa2G1i1FK6HXS88ygCg7qXK2H5gGTw+xGy5ETkcZeFj
- Sg6FhSZ0BlOMc7tPANN2LdJTZPELBKAp9QzNyB5Xa5vLg33Y8/wPGcMlX
- +Hm8+yy5qKH0XMwiwVME7xRI48eMdjt7HE+DgSoJsjEnYCOblUdy03xeS A==;
-X-IronPort-AV: E=Sophos;i="5.93,242,1654585200"; d="scan'208";a="172756857"
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256;
- 16 Aug 2022 15:53:53 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.12; Tue, 16 Aug 2022 15:53:53 -0700
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.87.72) with Microsoft SMTP Server
- (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.12 via Frontend
- Transport; Tue, 16 Aug 2022 15:53:53 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HUc1d0dZK6bMbKrUCy97YD8QmP211DTHWWNWQzrKHRa3ploGyDVzG5D9IK62xYHnX1QGG6Fon5y7YIscLdL5PC360Wx3s/9+sAFgxtu73CNzxMvYE426XScaNRR6aKH+sQbav+TcFun1dPDnKEO9MxzU4n3AES8RlGxeQ3PYxC+Bn/0PVTGZzqqz/mllUCsrph+c41Isro6XqaSXMiEaa0UqUKL2Y9vR06VRKubEWBdE1PyI6hcqm8OMeCR8dTIKnCRtPZxjf+ii2oLrFiSHonJH5D9ujD+CaMgrzFz6QtefE55nRTuWzK0uoR0/2JxLvaUF+UXI1KBzFqab2wV20A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+b19+IdbgRCLtY1QaX7waWDK239EdZaGHrdvvCIWSeI=;
- b=nKhmovuRKuhpij6xET3NQrnjG/mtnLgfFUlYgU1BhdAZjq7Snxw1qZ2Mt8PvetGQsgDDiWFfSoK333rzmnhXegoIaxYw0baBtUYmr5rV8yNobt2iCPcwd0QsUUsLdS0Fke/mIJqSYLRn5cKFhNqn0c7UaqXFIllOLwc9TpILqBtGuXyssb3PRo9oxcmfpUjVqbGVrVka6rwqVf3WN5EKBWkuYAp6jbdPQgoTcI3aFjjz7dbdsQfv19wwLitEs+lX+D4UzL7M0x+aVuw+9ZQzU5j5PFOWovF2Y8HNXxW99MHwtGMx7UD6OXVJ9g7cjKHWF4rKxPsNKnTvivdaV2F0KQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=microchip.com; dmarc=pass action=none
- header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1oO5uI-0002pf-FC
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:34 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033]:45054)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1oO5uE-0007h4-74
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:33 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ e8-20020a17090a280800b001f2fef7886eso300655pjd.3
+ for <qemu-riscv@nongnu.org>; Tue, 16 Aug 2022 16:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector2-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+b19+IdbgRCLtY1QaX7waWDK239EdZaGHrdvvCIWSeI=;
- b=qxbNYeLxLaruxKNHEQv7ZyI4zoKpA1Y92yfayEyUv1dudBdMSvGBCpX5BNKjlTHYKKnlh/W2/T2gugDwCjfDojhR44pJh0+k9g5vTFgNnv4RCOFYpLfZh8+tbm6Z0rS0qb5x7Das8LU4dUtq7Y4d32/T7085xkPBlitwLxY9WzE=
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com (2603:10b6:303:99::15)
- by BYAPR11MB3045.namprd11.prod.outlook.com (2603:10b6:a03:88::33)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.11; Tue, 16 Aug
- 2022 22:53:46 +0000
-Received: from CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::ac89:75cd:26e0:51c3]) by CO1PR11MB5154.namprd11.prod.outlook.com
- ([fe80::ac89:75cd:26e0:51c3%8]) with mapi id 15.20.5525.011; Tue, 16 Aug 2022
- 22:53:45 +0000
-From: <Conor.Dooley@microchip.com>
-To: <ajones@ventanamicro.com>
-CC: <jrtc27@jrtc27.com>, <palmer@dabbelt.com>, <robh@kernel.org>,
- <tglx@linutronix.de>, <maz@kernel.org>, <krzysztof.kozlowski+dt@linaro.org>,
- <paul.walmsley@sifive.com>, <aou@eecs.berkeley.edu>,
- <daniel.lezcano@linaro.org>, <anup@brainfault.org>, <guoren@kernel.org>,
- <sagar.kadam@sifive.com>, <linux-kernel@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
- <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH 0/3] Fix dt-validate issues on qemu dtbdumps due to
- dt-bindings
-Thread-Topic: [PATCH 0/3] Fix dt-validate issues on qemu dtbdumps due to
- dt-bindings
-Thread-Index: AQHYqOiQvE59vmIAhkiZ1sZQKraNy62li3AAgAAHfICAAQ/4AIAAST8AgAl5hICAATtPgIAAk0yA
-Date: Tue, 16 Aug 2022 22:53:45 +0000
-Message-ID: <5abe9b30-274a-8f36-0797-cc0e981c3f70@microchip.com>
-References: <20220805162844.1554247-1-mail@conchuod.ie>
- <YvGBYKZyW0B2/wSr@Jessicas-MacBook-Pro>
- <94fe7e46-6156-1cc5-a4dc-1eee78e99bc4@microchip.com>
- <20220809141436.GA1706120-robh@kernel.org>
- <61829ccd-20d7-e2f0-0a6b-bcd0e076b9ea@microchip.com>
- <1d94e18d-7f51-0619-95a9-6ca5fa7d9671@microchip.com>
- <20220816140633.pkjws7n3qxsescjh@kamzik>
-In-Reply-To: <20220816140633.pkjws7n3qxsescjh@kamzik>
-Accept-Language: en-IE, en-US
-Content-Language: en-IE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=microchip.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ade2dc78-3a0c-4923-7636-08da7fda2ce5
-x-ms-traffictypediagnostic: BYAPR11MB3045:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 7knpef0snTCWqqqFKJQ/gd4lYgn6piZ44qQ5KEY+spAere8oDAKsfdaK34GdymEzk7UEBnVshdPKdW9cim9xhItqZ+iSFtkk/ctWkopSsc7Y0zENuQAlwbHWEGOGVqspvklvQH041v8Lg7taGrXBjl4Pgqss2jvAOT+14158bJcrLyfGE1rgaE78H11huo2TVTraFFij6D0HNMBLulEjenX84tBXAtAmneRqPhYLO1MzrPM967Hltbh6hSLjKr7fZpmuOFX52r8+6DJqhm0xRUnn1PUD9Ta9mN9DPRXlez3hmF8VZw1gzOSSQu45JN7WzJ3Q3vtMszHilj1s9yi7sgATuho4yaPnVujc5/AfZmNnmj4xbkZacusvs/73uYVHeH9NOMQpRs5eHQsDdhhrMYeKNrnoCWE9jh4Qx2e0dGSOAGSqiZfiAAA8EUYKl1ylSDUWKBMncfug/9p645raPrS64HG8jFiEXG8N8B3EPoyuZDX/OJvHKKrqETXOAR+fmv6hkVvneTdvi1fTw/TW3+2x5blsHzSJLoTBbkjlaXb+JkGy4I3nk9AswEYBzfBzrlbVpqAAjgyaZ+T/c7CpntM1XKo5pwUMWpy+5IURLgoIOgd1pDdbbzyZd112Ei1akh4rZnzN8bp2Fzc+lhqx2Z9VtSidcKmHyUrcbtCC2eY/Sh8By5gIUC0hZkqnpw48jBm7Z28/KmzltveO8PMCTYKRlS3642OZUSg6Z9Kx6/0M9pZ369+9LsFIR0n03dM/VNnXND48U2WVlvqXmN360BlRyPLCIV+qMi441YIOk0GCWswu6imFadwqpltin2s8i8pUZglkzXZnU9ifnooNPS1dJf3/begXQgYt4eGVXFnnDHi2G3gO73twnqcr5LGZfcf27Zo+OuTlKger07w9M9B9Q1SWIPUGQ4KhGyEXXlU=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CO1PR11MB5154.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(136003)(39860400002)(346002)(366004)(396003)(376002)(966005)(53546011)(38100700002)(4326008)(316002)(64756008)(8676002)(66556008)(6916009)(83380400001)(478600001)(36756003)(66946007)(31686004)(91956017)(66446008)(54906003)(6486002)(76116006)(31696002)(26005)(86362001)(7416002)(15650500001)(5660300002)(8936002)(2906002)(6512007)(6506007)(2616005)(122000001)(71200400001)(41300700001)(66476007)(38070700005)(186003)(45980500001)(43740500002)(569394003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TVZ0WFRCWXJxM2lvRUpocUU5UUxsc0xrWmRoOWZRa2w3MnpQbmZZYk5TQmd4?=
- =?utf-8?B?K0Mvc0F5TStBdnFQZko0eXg4ZFVGaHFPR2FFTW5UWElMVTVxeXBnYU40dFpY?=
- =?utf-8?B?MWhDamhzMWY3Z0QrSlRWSit6WmNaY3BoYmVTVXVvTE1rTXk4Q2p0aDJaOFRK?=
- =?utf-8?B?cDhsZjE0bHl2Tno1YW93ZmNsdmZCVE9mMFZYVjErbm1lYktVZ3lpQ2diU2Np?=
- =?utf-8?B?MVdUNE9wTVQwOVByQ0krZjMwdUkwakpaQVE1VWcvQ2hQVFRNZWdNTlJKTkI2?=
- =?utf-8?B?MTRKVFg2NmlCUENReDdmYzNpMDJ2eWI4MVNjQ0hHWVdOb2ZqT09OcStJd29B?=
- =?utf-8?B?ZnFoNDVTV214SjYxNExQN1RrcTRnSUQ4K0tYY0tLN09IRzZzWXViYVNuSzN6?=
- =?utf-8?B?am5sNk5YS0xZckdJbDBwSzZkRWRIaVA1ZFlQNjR3alhzOFBNZUNQaEhEUHhM?=
- =?utf-8?B?cVo3a2dnODhER0hNamVrUjFqNHZsVXlsZmpqa1FRemkrbFBGaUZ2UWFJaDdr?=
- =?utf-8?B?bmhNd3dUS2ttY0NlVm9uQzNkZmxRR3J3amdNM0hJQkVITUh5V3FTYVVXUVBD?=
- =?utf-8?B?eEhsUWxLblhDOFhpU2FYRUxLdjhDanhrLytjWEZReGVIdnBDbUFYQXRDbW5C?=
- =?utf-8?B?dzROVkFZNkxLNUhTZDVNRlRpUzhvNmdZUzlwdjFLaThoRkVnRHFTdHNwalJ3?=
- =?utf-8?B?Ly9GZjJmcGgvcFVlZ2ZYNmVqU25KZXFqeVlKZ2NRajM3VDRnQ2NSN2hEWmZN?=
- =?utf-8?B?N0lqY1p3bGFheU56R2FDaGF6NGQwTUhTQVIreXV4S0ZCOEs3aVVjQ24zbUg1?=
- =?utf-8?B?UVArcTBCVVNQbGJPbERkRE8xaWFKSzZrT2ZqY2gvREFoWFNpckhaVTZVbjdw?=
- =?utf-8?B?SkhZUDdWRnZVTEVSM0MxY2RGK3NrdzFDdldoeE11WU1aSldiNUFEMk8wL1Mr?=
- =?utf-8?B?dE5ndkJBVzRva0tiOWpWaG5mUVRSTjYvbkdKcjgzSHB1dGlWak00eUJDSjBX?=
- =?utf-8?B?Y2FSNnZMUmtXVGZxNXQ4STNJRmIyajExSDFOVFNNWDBaeCtoWkxvSTF4RFpj?=
- =?utf-8?B?UXpqckZqb2FvNHJLOW5hbWpCUHorK2ZkMFlNeGZYVzZzWWdvVlJ1amcxV1I5?=
- =?utf-8?B?YUFGZ0hkWVZ6T2Y4Z3JrUTZvVFdBdVFvTmJiam83M1VCNE1QWjFFMnZOeUxU?=
- =?utf-8?B?U3RBZGh4M3ZJbVRiN1ZpeUthQnlnTCtPRUprMHhzNG81MEZBazFqcnA1VEZ1?=
- =?utf-8?B?WnNUVG1CaEJOK0lUaWk0OGFBbTA2UmI3VDMzVjlhZnAxa1RWdEVROGlFUVlL?=
- =?utf-8?B?a1JSY0ppMGY5Ni9nV2V2ZWxLYk94cGtWUTV1b25TZi9mUDdTSERSVFI3WXF1?=
- =?utf-8?B?N09kM3haU0dSUXo5VmY0Z0V6MndSdDEzMWdoOUZMWEl2MHc1MlllejRrc0cv?=
- =?utf-8?B?Yzg4N0ppdUdYL3Vma0N1dFVYUUNZcVRiN2xhZkpneS9MVjRhZFhmZ1EzVVpp?=
- =?utf-8?B?UEpRN01uVkJ5OUxjNFYvVkZXZXJtWE1jRnk0dVFXOEZSQng4NzhnK2ptb2R2?=
- =?utf-8?B?RjNVVUF4L3dKNmtPclJDR3F1NVlMalVPMHlCdUNJV1JUNlduRDM3b0ZJWUdm?=
- =?utf-8?B?b3QreG1JSWNBalZzY3RXRWdYMDB4UWFpYzJ2MDBaN2pXN24xMDIwN21NTExG?=
- =?utf-8?B?alRHU1BVZHBFcDNyQ1NZOGhKTTd2czFHbzlCREQvNzFlZWRCckVibkRXUmZK?=
- =?utf-8?B?WW9ya04waTNKcEN1SkVId0N2SVFnK01hSmt6SnllVkMxb0VDc01QY2t0WjNT?=
- =?utf-8?B?UVYvNEhmWjQyRDhTamlwLzZMQnVsY0dGejU5UGVHUVpkRHdhQVBUWkE0R2FL?=
- =?utf-8?B?RndSOGxIbEdYazlwaWt6aUd1UmQzRkdobGV5RlZxYUlrdTluNE9iU0Y5bS96?=
- =?utf-8?B?MDdkbldZSGFWWVF5OVVDTFZmbGhkT05UVk5BQzVORDRBMEhMNDZLN0Q5SjZM?=
- =?utf-8?B?endWc01YTEIvQUdLMnRhZ3BaNndQbGMwbUhYUXYwVllKTjZzczNpenRNQ2Vs?=
- =?utf-8?B?Mk01MlFJWC9EZ3dtL1duS1VndWtWRVhPVi94UEtoQ0puU0t2ZHZkNHR1MzA5?=
- =?utf-8?Q?LZGoSzHoHaBgyjgqU1IFKbqsV?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <E62FCB742EE149419E87DFA7EAF97E4F@namprd11.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc;
+ bh=2RQY2PMbqeY+eU2iiX/iGsLruq1+WXCg25dgUg5qqlo=;
+ b=BKkAVu18Vu0A0fV5pWD3UIIeSdCfisQUKaMGWaue7TMHwBTDWOppMgVj/uviw90g/V
+ zrZhVxv5yfud2uu4T1sQFkhluGNJPUUIAY/tT+I8MT3rXdnYcgvoBZBXgiyA3VLvmnZa
+ vezFWUzbWJ10rwdL8F/s9TYvt/NOIQuyVEvcLSj4cuCYL/wJBr7LHpQ3o4cQnFGZILfy
+ k5HiyZuEnJqLtA6YIzrr0cCAqyDQBgtrCcjFloWblv3LovfUnLcZtyY8GdxPZ97uTDBX
+ dFSveoADOsqU9MYjZmma8dQAjNvsSjG96AhWEj/dvgnMuKze4OTABZxWHyYLhZJ8bJ+z
+ zCKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+ bh=2RQY2PMbqeY+eU2iiX/iGsLruq1+WXCg25dgUg5qqlo=;
+ b=iZ/wcLlyvmKGXhCoYeW+bdBPbzzhwnwkGqKfucSAEadFQaMbOoGsNSP59ZOZ0n497C
+ OXz53qgoSu6sSFBboOH52PR4W0uoI8MCJK96YPs5EFqKJwqf6RV6Ua15KsfEYutEfgoP
+ 6JTio+puNBY9xYq6B0gtJPsEqDDoybq9CJeDZNzEC2Kmf4v02pdqY6W54XFY1UuJ91+N
+ bKHVmfRr28u9AQVQVKsJvsb2Lf0QxGGV/dCVvy4TFFXIU5fxILXdflQaddFOdRZISy7z
+ j2Qa2tQATPNvsEZJ/WaR9d4L0uiGe+yy5bSwH5YZiEVnXDFFIrb8KcJ6ldefQ1mOdqBn
+ KY1A==
+X-Gm-Message-State: ACgBeo1fDgiw34LotdWS3fnYydnXDdq8ABIFYM9GiqTgDsh1JBieqk3D
+ XIKPT0RRzGMxbmsgAgTWMfBmJXlcsajIiQ==
+X-Google-Smtp-Source: AA6agR6jeIArwaumic6reyPZLkGg8QLUhsQp7USQuNjZEd+tmO9To3xMb11ohc20rJvhHRYbAuVFFA==
+X-Received: by 2002:a17:902:7b87:b0:172:8ae9:2015 with SMTP id
+ w7-20020a1709027b8700b001728ae92015mr3765463pll.112.1660692207476; 
+ Tue, 16 Aug 2022 16:23:27 -0700 (PDT)
+Received: from atishp.ba.rivosinc.com ([66.220.2.162])
+ by smtp.gmail.com with ESMTPSA id
+ p4-20020a17090a2c4400b001eafa265869sm78608pjm.56.2022.08.16.16.23.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Aug 2022 16:23:27 -0700 (PDT)
+From: Atish Patra <atishp@rivosinc.com>
+To: qemu-devel@nongnu.org
+Cc: Atish Patra <atishp@rivosinc.com>, Heiko Stuebner <heiko@sntech.de>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Atish Patra <atish.patra@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v13 1/6] target/riscv: Add sscofpmf extension support
+Date: Tue, 16 Aug 2022 16:23:16 -0700
+Message-Id: <20220816232321.558250-2-atishp@rivosinc.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220816232321.558250-1-atishp@rivosinc.com>
+References: <20220816232321.558250-1-atishp@rivosinc.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB5154.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ade2dc78-3a0c-4923-7636-08da7fda2ce5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Aug 2022 22:53:45.9023 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: UJQxIoxkm6/N7nzOFy0kJPFmxLDQFh7Dj02rWHuFSmt9irGWGMx2rFJBFe3isJiTpH99Pzhlkz7LW/2kuryxhXRiE70KTuYkHt6LaVmA7Yc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR11MB3045
-Received-SPF: pass client-ip=68.232.154.123;
- envelope-from=Conor.Dooley@microchip.com; helo=esa.microchip.iphmx.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x1033.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001,
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -175,109 +82,930 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2022 22:54:11 -0000
+X-List-Received-Date: Tue, 16 Aug 2022 23:23:34 -0000
 
-SGV5IERyZXcsDQpUaGFua3MgZm9yIHBpcGluZyB1cC4NCg0KT24gMTYvMDgvMjAyMiAxNTowNiwg
-QW5kcmV3IEpvbmVzIHdyb3RlOg0KPiBbWW91IGRvbid0IG9mdGVuIGdldCBlbWFpbCBmcm9tIGFq
-b25lc0B2ZW50YW5hbWljcm8uY29tLiBMZWFybiB3aHkgdGhpcyBpcyBpbXBvcnRhbnQgYXQgaHR0
-cHM6Ly9ha2EubXMvTGVhcm5BYm91dFNlbmRlcklkZW50aWZpY2F0aW9uIF0NCj4gDQo+IEVYVEVS
-TkFMIEVNQUlMOiBEbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3Mg
-eW91IGtub3cgdGhlIGNvbnRlbnQgaXMgc2FmZQ0KPiANCj4gT24gTW9uLCBBdWcgMTUsIDIwMjIg
-YXQgMDc6MTg6MDJQTSArMDAwMCwgQ29ub3IuRG9vbGV5QG1pY3JvY2hpcC5jb20gd3JvdGU6DQo+
-PiBBbnkgdGFrZXJzIG9uIHRyYXNoaW5nIG15IHJlZ2V4PyBPdGhlcndpc2UgSSdsbCBqdXN0IHN1
-Ym1pdA0KPj4gYSB2MiB3aXRoIHRoZSByZWdleCBhbmQgaXQgY2FuIGJlIHNoYXQgb24gdGhlcmUg
-aW5zdGVhZCA6KQ0KPj4NCj4+IE9uIDA5LzA4LzIwMjIgMTk6MzYsIENvbm9yIERvb2xleSB3cm90
-ZToNCj4+PiBPbiAwOS8wOC8yMDIyIDE1OjE0LCBSb2IgSGVycmluZyB3cm90ZToNCj4+Pj4gT24g
-TW9uLCBBdWcgMDgsIDIwMjIgYXQgMTA6MDE6MTFQTSArMDAwMCwgQ29ub3IuRG9vbGV5QG1pY3Jv
-Y2hpcC5jb20gd3JvdGU6DQo+Pj4+PiBPbiAwOC8wOC8yMDIyIDIyOjM0LCBKZXNzaWNhIENsYXJr
-ZSB3cm90ZToNCj4+Pj4+PiBPbiBGcmksIEF1ZyAwNSwgMjAyMiBhdCAwNToyODo0MlBNICswMTAw
-LCBDb25vciBEb29sZXkgd3JvdGU6DQo+Pj4+Pj4+IEZyb206IENvbm9yIERvb2xleSA8Y29ub3Iu
-ZG9vbGV5QG1pY3JvY2hpcC5jb20+DQo+Pj4+Pj4+IFRoZSBmaW5hbCBwYXRjaCBhZGRzIHNvbWUg
-bmV3IElTQSBzdHJpbmdzDQo+Pj4+Pj4+IHdoaWNoIG5lZWRzIHNjcnVpdGlueSBmcm9tIHNvbWVv
-bmUgd2l0aCBtb3JlIGtub3dsZWRnZSBhYm91dCB3aGF0IElTQQ0KPj4+Pj4+PiBleHRlbnNpb24g
-c3RyaW5ncyBzaG91bGQgYmUgcmVwb3J0ZWQgaW4gYSBkdCB0aGFuIEkgaGF2ZS4NCj4+Pj4+Pg0K
-Pj4+Pj4+IExpc3RpbmcgZXZlcnkgcG9zc2libGUgSVNBIHN0cmluZyBzdXBwb3J0ZWQgYnkgdGhl
-IExpbnV4IGtlcm5lbCByZWFsbHkNCj4+Pj4+PiBpcyBub3QgZ29pbmcgdG8gc2NhbGUuLi4NCj4+
-Pj4NCj4+Pj4gSG93IGRvZXMgdGhlIGtlcm5lbCBzY2FsZT8gKE5vIG5lZWQgdG8gYW5zd2VyKQ0K
-Pj4+Pg0KPj4+Pj4gWWVhaCwgdG90YWxseSBjb3JyZWN0IHRoZXJlLiBDYXNlIGZvciBhZGRpbmcg
-YSByZWdleCBJIHN1cHBvc2UsIGJ1dCBJDQo+Pj4+PiBhbSBub3Qgc3VyZSBob3cgdG8gZ28gYWJv
-dXQgaGFuZGxpbmcgdGhlIG11bHRpLWxldHRlciBleHRlbnNpb25zIG9yDQo+Pj4+PiBpZiBwYXJz
-aW5nIHRoZW0gaXMgcmVxdWlyZWQgZnJvbSBhIGJpbmRpbmcgY29tcGxpYW5jZSBwb2ludCBvZiB2
-aWV3Lg0KPj4+Pj4gSG9waW5nIGZvciBzb21lIGlucHV0IGZyb20gUGFsbWVyIHJlYWxseS4NCj4+
-Pj4NCj4+Pj4gWWVhaCwgbG9va3MgbGlrZSBhIHJlZ2V4IHBhdHRlcm4gaXMgbmVlZGVkLg0KPj4+
-DQo+Pj4gSSBzdGFydGVkIHBvdHRlcmluZyBhd2F5IGF0IHRoaXMgYnV0IEkgaGF2ZSBhcnJpdmVk
-IGF0Og0KPj4+IHJ2NjRpbWFmP2Q/Yz9oPyhfeltpbWFmZHFjYnZraF0oW2Etel0pKikqJA0KPiAN
-Cj4gRG9uJ3QgZm9yZ2V0IHRoZSBeIGF0IHRoZSBzdGFydC4NCj4gDQo+IERvIHdlIG5lZWQgdG8g
-d29ycnkgYWJvdXQgb3B0aW9uYWwgbWFqb3IgYW5kIG1pbm9yIHZlcnNpb24gbnVtYmVycz8NCj4g
-T3IgY2hlY2sgdGhhdCBaIG5hbWVzIGhhdmUgYXQgbGVhc3Qgb25lIGNoYXJhY3RlciBmb2xsb3dp
-bmcgdGhlIGNhdGVnb3J5DQo+IGNoYXJhY3Rlcj8gQWN0dWFsbHksIHRoZSBmaXJzdCBsZXR0ZXIg
-YWZ0ZXIgWiBiZWluZyBhIGNhdGVnb3J5IGlzIG9ubHkgYQ0KPiBjb252ZW50aW9uLiBNYXliZSB3
-ZSBkb24ndCB3YW50IHRvIGVuZm9yY2UgdGhhdC4gV2hhdCBhYm91dCBYIGV4dGVuc2lvbnM/DQoN
-CkZvciB0aGUgY2hhcmFjdGVyIGFmdGVyIFosIEkgdGhpbmsgd2UgY291bGQgb3BlcmF0ZSBvbiB0
-aGUgYXNzdW1wdGlvbg0KdGhhdCB0aGF0J3MgYSBjb252ZW50aW9uIHVudGlsIHRoaW5ncyBjaGFu
-Z2UuIFRoZSByZWdleCBpc250IHNldCBpbg0Kc3RvbmUgZm9yZXZlci4NCldpdGggeCwgaXQgYmVj
-b21lcyAtIHdoaWNoIHRvIG1lIG1ha2VzIGJhZCB3b3JzZToNCl5ydjY0aW1hZj9kP3E/Yz9iP3Y/
-az9oPyg/Oig/Ol96W2ltYWZkcWNidmtoXXxfeCkoPzpbYS16XSkqKSokDQoNCmFuZCB0aGVuIGZv
-ciB0aGUgdmVyc2lvbiBudW1iZXJzIGl0IGJlY29tZXMgY29tcGxldGVseSBhd2Z1bC4NCkknZCBh
-cmd1ZSB0aGF0IGlmIHdlIGFyZSBnb2luZyB0byBzdXBwb3J0IHRob3NlLCB0aGVuIHdlIHNob3Vs
-ZA0KZG8gdGhhdCBhcyBhbm90aGVyIHJlZ2V4LiBXZSBhcmUgYWxyZWFkeSBmb3JjaW5nIGxvd2Vy
-IGNhc2UgaW4NCnRoZXNlIElTQSBzdHJpbmdzIC0gaXMgdGhlcmUgYW4gYWN0dWFsIGJlbmVmaXQg
-aW4gYWRkaW5nIHRoZQ0KbnVtYmVycywgb3IgbWlnaHQgd2Ugd2FudCB0byAiZW5jb3VyYWdlIiBy
-ZW1vdmluZyB0aG9zZSB0b28/DQoNCkkgaG9wZSBJIGFtIG1pc3Npbmcgc29tZXRoaW5nLCBhcyBt
-eSByZWdleCBmb28gaXNuJ3QgdGhhdCBnb29kLCB0bw0KZW5mb3JjZSB0aGUgb3JkZXJpbmcgJiB0
-aGUgbnVtYmVycyAtIGV2ZW4gZm9yIHRoZSBzaW1wbGUgY2FzZSBvZiB0aGUNCm1ham9yIG51bWJl
-ciBvbmx5LCB3ZSdkIG5lZWQgdG8gY29udmVydCAiZj8iIHRvICIoPzpmXGQrKT8iIGFuZCBzbw0K
-b24gZm9yIGV2ZXJ5IHNpbmdsZSBleHRlbnNpb24uIEkgZG9uJ3QgdGhpbmsgd2UgcmVkdWNlIHRo
-YXQgZWl0aGVyDQphcyB3ZSB3YW50IHRvIGVuZm9yY2UgdGhlIG9yZGVyaW5nLg0KDQpGb3IgdGhl
-IG1pbm9yIHZlcnNpb25zIGl0IGdvZXMgdG8gIig/OmZcZCtwXGQrKT8iLiBBdCB0aGF0IHBvaW50
-IEkNCmRvbid0IHRoaW5rIHdlIGFyZSBhZGRpbmcgYW55IHZhbHVlIGJ1dCB3L2UsIHdobyBhbSBJ
-IHRvIGRlY2lkZS4NClRoYXQgYmFsbG9vbmVkIG91dCB0byAxOTQgY2hhcmFjdGVycyBmb3IgbWUu
-IEkgdGhlbiBkZWNpZGVkIHRvIGhhdmUNCmEgYml0IG9mIGZ1biwgYW5kIGp1c3QgZG8gYm90aCBu
-dW1iZXIgc2V0cyBhcyBhIG9uZWxpbmVyLCB1c2luZw0Kc29tZSBuYW1lZCBtYXRjaCBncm91cHMu
-IFRoYXQgd2FzIGFib3V0IDI1NSBjaGFyYWN0ZXJzLiDwn5iNDQpBbnl3YXksIGR0LXNjaGVtYSBo
-YWQgYSBwYW5pYyBhdHRhY2sgYXQgc29tZXRoaW5nIEkgd2FzIGRvaW5nDQpzbyBJIHRoaW5rIHRo
-YXQgL21heS8gYmUgYSBiYWQgaWRlYS4NCg0KSSB2b3RlIGZvciBhbGxvdyB0aGUgeCBleHRlbnNp
-b25zLCBrZWVwIHRoZSBjb252ZW50aW9uIGZvciBzdGFuZGFyZA0KZXh0ZW5zaW9ucyAmIHJldmlz
-aXQgdGhpcyBpbiB0aGUgZnV0dXJlIGlmIG5lZWRlZC4uLg0KDQpUaGFua3MsDQpDb25vci4NCg0K
-DQo+IA0KPiBUaGFua3MsDQo+IGRyZXcNCj4gDQo+Pj4NCj4+PiBJIHN1c3BlY3QgdGhhdCBiZWZv
-cmUgImg/IiB0aGVyZSBzaG91bGQgYmUgbW9yZSBzaW5nbGUgbGV0dGVyDQo+Pj4gZXh0ZW5zaW9u
-cyBhZGRlZCBmb3IgY29tcGxldGVuZXNzIHNha2UuIFNvIHRoZW4gaXQnZCBibG9hdCBvdXQgdG86
-DQo+Pj4gcnY2NGltYWY/ZD9xP2M/Yj92P2s/aD8oX3pbaW1hZmRxY2J2a2hdKFthLXpdKSopKiQN
-Cj4+Pg0KPj4+IEkgY2hlY2tlZCBhIGNvdXBsZSBkaWZmZXJlbnQgImJhZCIgaXNhIHN0cmluZ3Mg
-YWdhaW5zdCBpdCBhbmQNCj4+PiBub3RoaW5nIHdlbnQgdXAgaW4gZmxhbWVzIGJ1dCBteSByZWdl
-eCBza2lsbHMgYXJlIGZhciBmcm9tIGdyZWF0DQo+Pj4gc28gSSdtIHN1cmUgdGhlcmUncyBiZXR0
-ZXIgd2F5cyB0byByZXByZXNlbnQgdGhpcy4NCj4+Pg0KPj4+IEFueXdheXMsIHRoaXMgcGF0dGVy
-biBpcyBiYXNlZCBvbiBteSB1bmRlcnN0YW5kaW5nIHRoYXQ6DQo+Pj4gLSB0aGUgc2luZ2xlIGxl
-dHRlciBvcmRlciBpcyBmaXhlZCAmIHdlIGRvbid0IGNhcmUgYWJvdXQgdGhpbmdzIHRoYXQNCj4+
-PiAgIGNhbid0IGV2ZW4gZG8gImltYSINCj4+PiAtIHRoZSBtdWx0aSBsZXR0ZXIgZXh0ZW5zaW9u
-cyBhcmUgYWxsIGluIGEgIl96PGZvbz4iIGZvcm1hdCB3aGVyZSB0aGUNCj4+PiAgIGZpcnN0IGxl
-dHRlciBvZiA8Zm9vPiBpcyBhIHZhbGlkIHNpbmdsZSBsZXR0ZXIgZXh0ZW5zaW9uDQo+Pj4gLSB3
-ZSBkb24ndCBjYXJlIGFib3V0IHRoZSBlIGV4dGVuc2lvbiBmcm9tIGFuIE9TIFBvViAodGhpcyBj
-b3VsZCBiZSBhDQo+Pj4gICB2ZXJ5IGZsYXdlZCB0YWtlLi4uKQ0KPj4+IC0gYWZ0ZXIgdGhlIGZp
-cnN0IHR3byBjaGFycywgdGhlIGV4dGVuc2lvbiBuYW1lIGNvdWxkIGJlIGFuIGVuZ2xpc2gNCj4+
-PiAgIHdvcmQgKGlmZW5jZWkgYW55b25lPykgc28gaXQncyBub3Qgd29ydGggcmVzdHJpY3Rpbmcg
-dGhlIGNoYXJzZXQNCj4+PiAtIHRoYXQgYXR0ZW1wdGluZyB0byB2YWxpZGF0ZSB0aGUgY29udGVu
-dHMgb2YgdGhlIG11bHRpbGV0dGVyIGV4dGVuc2lvbnMNCj4+PiAgIHdpdGggZHQtdmFsaWRhdGUg
-YmV5b25kIHRoZSBmb3JtYXR0aW5nIGlzIGEgZnV0aWxlLCBtYXNzaXZlbHkgdmVyYm9zZQ0KPj4+
-ICAgb3IgdW53aWVsZHkgZXhlcmNpc2UgYXQgYmVzdA0KPj4+DQo+Pj4gU29tZSBvciBhbGwgb2Yg
-dGhvc2UgYXNzdW1wdGlvbnMgY291bGQgYmUgdmVyeSB2ZXJ5IHdyb25nIHNvIGlmIHtzb21lb25l
-LA0KPj4+IGFueW9uZX0gd2FudHMgdG8gY29ycmVjdCBtZSAtIGZlZWwgKioqbW9yZSoqKiB0aGFu
-IGZyZWUuLg0KPj4+DQo+Pj4gVGhhbmtzLA0KPj4+IENvbm9yLg0KPj4+DQo+Pj4gcGF0Y2ggd291
-bGQgdGhlbiBsb29rIGxpa2U6DQo+Pj4NCj4+PiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9k
-ZXZpY2V0cmVlL2JpbmRpbmdzL3Jpc2N2L2NwdXMueWFtbCBiL0RvY3VtZW50YXRpb24vZGV2aWNl
-dHJlZS9iaW5kaW5ncy9yaXNjdi9jcHVzLnlhbWwNCj4+PiBpbmRleCBkNjMyYWM3NjUzMmUuLjFl
-NTRlNzc0NjE5MCAxMDA2NDQNCj4+PiAtLS0gYS9Eb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmlu
-ZGluZ3MvcmlzY3YvY3B1cy55YW1sDQo+Pj4gKysrIGIvRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVl
-L2JpbmRpbmdzL3Jpc2N2L2NwdXMueWFtbA0KPj4+IEBAIC03NCw5ICs3NCw3IEBAIHByb3BlcnRp
-ZXM6DQo+Pj4gICAgICAgIGluc2Vuc2l0aXZlLCBsZXR0ZXJzIGluIHRoZSByaXNjdixpc2Egc3Ry
-aW5nIG11c3QgYmUgYWxsDQo+Pj4gICAgICAgIGxvd2VyY2FzZSB0byBzaW1wbGlmeSBwYXJzaW5n
-Lg0KPj4+ICAgICAgJHJlZjogIi9zY2hlbWFzL3R5cGVzLnlhbWwjL2RlZmluaXRpb25zL3N0cmlu
-ZyINCj4+PiAtICAgIGVudW06DQo+Pj4gLSAgICAgIC0gcnY2NGltYWMNCj4+PiAtICAgICAgLSBy
-djY0aW1hZmRjDQo+Pj4gKyAgICBwYXR0ZXJuOiBydjY0aW1hZj9kP3E/Yz9iP3Y/az9oPyhfeltp
-bWFmZHFjYnZraF0oW2Etel0pKikqJA0KPj4+DQo+Pj4gICAgIyBSSVNDLVYgcmVxdWlyZXMgJ3Rp
-bWViYXNlLWZyZXF1ZW5jeScgaW4gL2NwdXMsIHNvIGRpc2FsbG93IGl0IGhlcmUNCj4+PiAgICB0
-aW1lYmFzZS1mcmVxdWVuY3k6IGZhbHNlDQo+Pg0KPiANCj4gX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gbGludXgtcmlzY3YgbWFpbGluZyBsaXN0DQo+
-IGxpbnV4LXJpc2N2QGxpc3RzLmluZnJhZGVhZC5vcmcNCj4gaHR0cDovL2xpc3RzLmluZnJhZGVh
-ZC5vcmcvbWFpbG1hbi9saXN0aW5mby9saW51eC1yaXNjdg0KDQo=
+The Sscofpmf ('Ss' for Privileged arch and Supervisor-level extensions,
+and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
+extension allows the perf to handle overflow interrupts and filtering
+support. This patch provides a framework for programmable
+counters to leverage the extension. As the extension doesn't have any
+provision for the overflow bit for fixed counters, the fixed events
+can also be monitoring using programmable counters. The underlying
+counters for cycle and instruction counters are always running. Thus,
+a separate timer device is programmed to handle the overflow.
+
+Tested-by: Heiko Stuebner <heiko@sntech.de>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ target/riscv/cpu.c      |  12 ++
+ target/riscv/cpu.h      |  25 +++
+ target/riscv/cpu_bits.h |  55 +++++++
+ target/riscv/csr.c      | 166 ++++++++++++++++++-
+ target/riscv/machine.c  |   1 +
+ target/riscv/pmu.c      | 357 +++++++++++++++++++++++++++++++++++++++-
+ target/riscv/pmu.h      |   7 +
+ 7 files changed, 612 insertions(+), 11 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2498b93105fd..d11113fbaae0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -22,6 +22,7 @@
+ #include "qemu/ctype.h"
+ #include "qemu/log.h"
+ #include "cpu.h"
++#include "pmu.h"
+ #include "internals.h"
+ #include "time_helper.h"
+ #include "exec/exec-all.h"
+@@ -100,6 +101,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zve64f, true, PRIV_VERSION_1_12_0, ext_zve64f),
+     ISA_EXT_DATA_ENTRY(zhinx, true, PRIV_VERSION_1_12_0, ext_zhinx),
+     ISA_EXT_DATA_ENTRY(zhinxmin, true, PRIV_VERSION_1_12_0, ext_zhinxmin),
++    ISA_EXT_DATA_ENTRY(sscofpmf, true, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sstc, true, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+@@ -890,6 +892,15 @@ static void riscv_cpu_realize(DeviceState *dev, Error **errp)
+         set_misa(env, env->misa_mxl, ext);
+     }
+ 
++#ifndef CONFIG_USER_ONLY
++    if (cpu->cfg.pmu_num) {
++        if (!riscv_pmu_init(cpu, cpu->cfg.pmu_num) && cpu->cfg.ext_sscofpmf) {
++            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
++                                          riscv_pmu_timer_cb, cpu);
++        }
++     }
++#endif
++
+     riscv_cpu_register_gdb_regs_for_features(cs);
+ 
+     qemu_init_vcpu(cs);
+@@ -994,6 +1005,7 @@ static Property riscv_cpu_extensions[] = {
+     DEFINE_PROP_BOOL("v", RISCVCPU, cfg.ext_v, false),
+     DEFINE_PROP_BOOL("h", RISCVCPU, cfg.ext_h, true),
+     DEFINE_PROP_UINT8("pmu-num", RISCVCPU, cfg.pmu_num, 16),
++    DEFINE_PROP_BOOL("sscofpmf", RISCVCPU, cfg.ext_sscofpmf, false),
+     DEFINE_PROP_BOOL("Zifencei", RISCVCPU, cfg.ext_ifencei, true),
+     DEFINE_PROP_BOOL("Zicsr", RISCVCPU, cfg.ext_icsr, true),
+     DEFINE_PROP_BOOL("Zihintpause", RISCVCPU, cfg.ext_zihintpause, true),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 1fd382b2717f..42edfa4558d0 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -137,6 +137,8 @@ typedef struct PMUCTRState {
+     /* Snapshort value of a counter in RV32 */
+     target_ulong mhpmcounterh_prev;
+     bool started;
++    /* Value beyond UINT32_MAX/UINT64_MAX before overflow interrupt trigger */
++    target_ulong irq_overflow_left;
+ } PMUCTRState;
+ 
+ struct CPUArchState {
+@@ -302,6 +304,9 @@ struct CPUArchState {
+     /* PMU event selector configured values. First three are unused*/
+     target_ulong mhpmevent_val[RV_MAX_MHPMEVENTS];
+ 
++    /* PMU event selector configured values for RV32*/
++    target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
++
+     target_ulong sscratch;
+     target_ulong mscratch;
+ 
+@@ -446,6 +451,7 @@ struct RISCVCPUConfig {
+     bool ext_zve32f;
+     bool ext_zve64f;
+     bool ext_zmmul;
++    bool ext_sscofpmf;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
+ 
+@@ -493,6 +499,12 @@ struct ArchCPU {
+ 
+     /* Configuration Settings */
+     RISCVCPUConfig cfg;
++
++    QEMUTimer *pmu_timer;
++    /* A bitmask of Available programmable counters */
++    uint32_t pmu_avail_ctrs;
++    /* Mapping of events to counters */
++    GHashTable *pmu_event_ctr_map;
+ };
+ 
+ static inline int riscv_has_ext(CPURISCVState *env, target_ulong ext)
+@@ -753,6 +765,19 @@ enum {
+     CSR_TABLE_SIZE = 0x1000
+ };
+ 
++/**
++ * The event id are encoded based on the encoding specified in the
++ * SBI specification v0.3
++ */
++
++enum riscv_pmu_event_idx {
++    RISCV_PMU_EVENT_HW_CPU_CYCLES = 0x01,
++    RISCV_PMU_EVENT_HW_INSTRUCTIONS = 0x02,
++    RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS = 0x10019,
++    RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS = 0x1001B,
++    RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS = 0x10021,
++};
++
+ /* CSR function table */
+ extern riscv_csr_operations csr_ops[CSR_TABLE_SIZE];
+ 
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 095dab19f512..7be12cac2ee6 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -390,6 +390,37 @@
+ #define CSR_MHPMEVENT29     0x33d
+ #define CSR_MHPMEVENT30     0x33e
+ #define CSR_MHPMEVENT31     0x33f
++
++#define CSR_MHPMEVENT3H     0x723
++#define CSR_MHPMEVENT4H     0x724
++#define CSR_MHPMEVENT5H     0x725
++#define CSR_MHPMEVENT6H     0x726
++#define CSR_MHPMEVENT7H     0x727
++#define CSR_MHPMEVENT8H     0x728
++#define CSR_MHPMEVENT9H     0x729
++#define CSR_MHPMEVENT10H    0x72a
++#define CSR_MHPMEVENT11H    0x72b
++#define CSR_MHPMEVENT12H    0x72c
++#define CSR_MHPMEVENT13H    0x72d
++#define CSR_MHPMEVENT14H    0x72e
++#define CSR_MHPMEVENT15H    0x72f
++#define CSR_MHPMEVENT16H    0x730
++#define CSR_MHPMEVENT17H    0x731
++#define CSR_MHPMEVENT18H    0x732
++#define CSR_MHPMEVENT19H    0x733
++#define CSR_MHPMEVENT20H    0x734
++#define CSR_MHPMEVENT21H    0x735
++#define CSR_MHPMEVENT22H    0x736
++#define CSR_MHPMEVENT23H    0x737
++#define CSR_MHPMEVENT24H    0x738
++#define CSR_MHPMEVENT25H    0x739
++#define CSR_MHPMEVENT26H    0x73a
++#define CSR_MHPMEVENT27H    0x73b
++#define CSR_MHPMEVENT28H    0x73c
++#define CSR_MHPMEVENT29H    0x73d
++#define CSR_MHPMEVENT30H    0x73e
++#define CSR_MHPMEVENT31H    0x73f
++
+ #define CSR_MHPMCOUNTER3H   0xb83
+ #define CSR_MHPMCOUNTER4H   0xb84
+ #define CSR_MHPMCOUNTER5H   0xb85
+@@ -451,6 +482,7 @@
+ #define CSR_VSMTE           0x2c0
+ #define CSR_VSPMMASK        0x2c1
+ #define CSR_VSPMBASE        0x2c2
++#define CSR_SCOUNTOVF       0xda0
+ 
+ /* Crypto Extension */
+ #define CSR_SEED            0x015
+@@ -628,6 +660,7 @@ typedef enum RISCVException {
+ #define IRQ_VS_EXT                         10
+ #define IRQ_M_EXT                          11
+ #define IRQ_S_GEXT                         12
++#define IRQ_PMU_OVF                        13
+ #define IRQ_LOCAL_MAX                      16
+ #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+ 
+@@ -645,11 +678,13 @@ typedef enum RISCVException {
+ #define MIP_VSEIP                          (1 << IRQ_VS_EXT)
+ #define MIP_MEIP                           (1 << IRQ_M_EXT)
+ #define MIP_SGEIP                          (1 << IRQ_S_GEXT)
++#define MIP_LCOFIP                         (1 << IRQ_PMU_OVF)
+ 
+ /* sip masks */
+ #define SIP_SSIP                           MIP_SSIP
+ #define SIP_STIP                           MIP_STIP
+ #define SIP_SEIP                           MIP_SEIP
++#define SIP_LCOFIP                         MIP_LCOFIP
+ 
+ /* MIE masks */
+ #define MIE_SEIE                           (1 << IRQ_S_EXT)
+@@ -803,4 +838,24 @@ typedef enum RISCVException {
+ #define SEED_OPST_WAIT                   (0b01 << 30)
+ #define SEED_OPST_ES16                   (0b10 << 30)
+ #define SEED_OPST_DEAD                   (0b11 << 30)
++/* PMU related bits */
++#define MIE_LCOFIE                         (1 << IRQ_PMU_OVF)
++
++#define MHPMEVENT_BIT_OF                   BIT_ULL(63)
++#define MHPMEVENTH_BIT_OF                  BIT(31)
++#define MHPMEVENT_BIT_MINH                 BIT_ULL(62)
++#define MHPMEVENTH_BIT_MINH                BIT(30)
++#define MHPMEVENT_BIT_SINH                 BIT_ULL(61)
++#define MHPMEVENTH_BIT_SINH                BIT(29)
++#define MHPMEVENT_BIT_UINH                 BIT_ULL(60)
++#define MHPMEVENTH_BIT_UINH                BIT(28)
++#define MHPMEVENT_BIT_VSINH                BIT_ULL(59)
++#define MHPMEVENTH_BIT_VSINH               BIT(27)
++#define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
++#define MHPMEVENTH_BIT_VUINH               BIT(26)
++
++#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
++#define MHPMEVENT_IDX_MASK                 0xFFFFF
++#define MHPMEVENT_SSCOF_RESVD              16
++
+ #endif
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 132feb90e6ef..886695221956 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -75,7 +75,7 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     CPUState *cs = env_cpu(env);
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     int ctr_index;
+-    int base_csrno = CSR_HPMCOUNTER3;
++    int base_csrno = CSR_CYCLE;
+     bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
+ 
+     if (rv32 && csrno >= CSR_CYCLEH) {
+@@ -84,11 +84,18 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+     }
+     ctr_index = csrno - base_csrno;
+ 
+-    if (!cpu->cfg.pmu_num || ctr_index >= (cpu->cfg.pmu_num)) {
++    if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
++        (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
++        goto skip_ext_pmu_check;
++    }
++
++    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index)))) {
+         /* No counter is enabled in PMU or the counter is out of range */
+         return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
++skip_ext_pmu_check:
++
+     if (env->priv == PRV_S) {
+         switch (csrno) {
+         case CSR_CYCLE:
+@@ -107,7 +114,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            ctr_index = csrno - CSR_CYCLE;
+             if (!get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_ILLEGAL_INST;
+             }
+@@ -131,7 +137,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                ctr_index = csrno - CSR_CYCLEH;
+                 if (!get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_ILLEGAL_INST;
+                 }
+@@ -161,7 +166,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+             }
+             break;
+         case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
+-            ctr_index = csrno - CSR_CYCLE;
+             if (!get_field(env->hcounteren, 1 << ctr_index) &&
+                  get_field(env->mcounteren, 1 << ctr_index)) {
+                 return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -189,7 +193,6 @@ static RISCVException ctr(CPURISCVState *env, int csrno)
+                 }
+                 break;
+             case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
+-                ctr_index = csrno - CSR_CYCLEH;
+                 if (!get_field(env->hcounteren, 1 << ctr_index) &&
+                      get_field(env->mcounteren, 1 << ctr_index)) {
+                     return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+@@ -241,6 +244,18 @@ static RISCVException mctr32(CPURISCVState *env, int csrno)
+     return mctr(env, csrno);
+ }
+ 
++static RISCVException sscofpmf(CPURISCVState *env, int csrno)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    if (!cpu->cfg.ext_sscofpmf) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException any(CPURISCVState *env, int csrno)
+ {
+     return RISCV_EXCP_NONE;
+@@ -671,9 +686,39 @@ static int read_mhpmevent(CPURISCVState *env, int csrno, target_ulong *val)
+ static int write_mhpmevent(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int evt_index = csrno - CSR_MCOUNTINHIBIT;
++    uint64_t mhpmevt_val = val;
+ 
+     env->mhpmevent_val[evt_index] = val;
+ 
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpmevt_val = mhpmevt_val |
++                      ((uint64_t)env->mhpmeventh_val[evt_index] << 32);
++    }
++    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++
++    return RISCV_EXCP_NONE;
++}
++
++static int read_mhpmeventh(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
++
++    *val = env->mhpmeventh_val[evt_index];
++
++    return RISCV_EXCP_NONE;
++}
++
++static int write_mhpmeventh(CPURISCVState *env, int csrno, target_ulong val)
++{
++    int evt_index = csrno - CSR_MHPMEVENT3H + 3;
++    uint64_t mhpmevth_val = val;
++    uint64_t mhpmevt_val = env->mhpmevent_val[evt_index];
++
++    mhpmevt_val = mhpmevt_val | (mhpmevth_val << 32);
++    env->mhpmeventh_val[evt_index] = val;
++
++    riscv_pmu_update_event_map(env, mhpmevt_val, evt_index);
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -681,12 +726,20 @@ static int write_mhpmcounter(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int ctr_idx = csrno - CSR_MCYCLE;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t mhpmctr_val = val;
+ 
+     counter->mhpmcounter_val = val;
+     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+         counter->mhpmcounter_prev = get_ticks(false);
+-    } else {
++        if (ctr_idx > 2) {
++            if (riscv_cpu_mxl(env) == MXL_RV32) {
++                mhpmctr_val = mhpmctr_val |
++                              ((uint64_t)counter->mhpmcounterh_val << 32);
++            }
++            riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
++        }
++     } else {
+         /* Other counters can keep incrementing from the given value */
+         counter->mhpmcounter_prev = val;
+     }
+@@ -698,11 +751,17 @@ static int write_mhpmcounterh(CPURISCVState *env, int csrno, target_ulong val)
+ {
+     int ctr_idx = csrno - CSR_MCYCLEH;
+     PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t mhpmctr_val = counter->mhpmcounter_val;
++    uint64_t mhpmctrh_val = val;
+ 
+     counter->mhpmcounterh_val = val;
++    mhpmctr_val = mhpmctr_val | (mhpmctrh_val << 32);
+     if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
+         riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
+         counter->mhpmcounterh_prev = get_ticks(true);
++        if (ctr_idx > 2) {
++            riscv_pmu_setup_timer(env, mhpmctr_val, ctr_idx);
++        }
+     } else {
+         counter->mhpmcounterh_prev = val;
+     }
+@@ -778,6 +837,32 @@ static int read_hpmcounterh(CPURISCVState *env, int csrno, target_ulong *val)
+     return riscv_pmu_read_ctr(env, val, true, ctr_index);
+ }
+ 
++static int read_scountovf(CPURISCVState *env, int csrno, target_ulong *val)
++{
++    int mhpmevt_start = CSR_MHPMEVENT3 - CSR_MCOUNTINHIBIT;
++    int i;
++    *val = 0;
++    target_ulong *mhpm_evt_val;
++    uint64_t of_bit_mask;
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpm_evt_val = env->mhpmeventh_val;
++        of_bit_mask = MHPMEVENTH_BIT_OF;
++    } else {
++        mhpm_evt_val = env->mhpmevent_val;
++        of_bit_mask = MHPMEVENT_BIT_OF;
++    }
++
++    for (i = mhpmevt_start; i < RV_MAX_MHPMEVENTS; i++) {
++        if ((get_field(env->mcounteren, BIT(i))) &&
++            (mhpm_evt_val[i] & of_bit_mask)) {
++                    *val |= BIT(i);
++            }
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_time(CPURISCVState *env, int csrno,
+                                 target_ulong *val)
+ {
+@@ -957,7 +1042,8 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+ /* Machine constants */
+ 
+ #define M_MODE_INTERRUPTS  ((uint64_t)(MIP_MSIP | MIP_MTIP | MIP_MEIP))
+-#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP))
++#define S_MODE_INTERRUPTS  ((uint64_t)(MIP_SSIP | MIP_STIP | MIP_SEIP | \
++                                      MIP_LCOFIP))
+ #define VS_MODE_INTERRUPTS ((uint64_t)(MIP_VSSIP | MIP_VSTIP | MIP_VSEIP))
+ #define HS_MODE_INTERRUPTS ((uint64_t)(MIP_SGEIP | VS_MODE_INTERRUPTS))
+ 
+@@ -998,7 +1084,8 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
+ static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+     SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+     SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
+-static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP;
++static const target_ulong sip_writable_mask = SIP_SSIP | MIP_USIP | MIP_UEIP |
++                                              SIP_LCOFIP;
+ static const target_ulong hip_writable_mask = MIP_VSSIP;
+ static const target_ulong hvip_writable_mask = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP;
+ static const target_ulong vsip_writable_mask = MIP_VSSIP;
+@@ -4067,6 +4154,65 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_MHPMEVENT31]    = { "mhpmevent31",    any,    read_mhpmevent,
+                              write_mhpmevent                           },
+ 
++    [CSR_MHPMEVENT3H]    = { "mhpmevent3h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT4H]    = { "mhpmevent4h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT5H]    = { "mhpmevent5h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT6H]    = { "mhpmevent6h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT7H]    = { "mhpmevent7h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT8H]    = { "mhpmevent8h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT9H]    = { "mhpmevent9h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT10H]   = { "mhpmevent10h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT11H]   = { "mhpmevent11h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT12H]   = { "mhpmevent12h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT13H]   = { "mhpmevent13h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT14H]   = { "mhpmevent14h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT15H]   = { "mhpmevent15h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT16H]   = { "mhpmevent16h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT17H]   = { "mhpmevent17h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT18H]   = { "mhpmevent18h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT19H]   = { "mhpmevent19h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT20H]   = { "mhpmevent20h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT21H]   = { "mhpmevent21h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT22H]   = { "mhpmevent22h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT23H]   = { "mhpmevent23h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT24H]   = { "mhpmevent24h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT25H]   = { "mhpmevent25h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT26H]   = { "mhpmevent26h",    sscofpmf,  read_mhpmeventh,
++                              write_mhpmeventh                          },
++    [CSR_MHPMEVENT27H]   = { "mhpmevent27h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT28H]   = { "mhpmevent28h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT29H]   = { "mhpmevent29h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT30H]   = { "mhpmevent30h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++    [CSR_MHPMEVENT31H]   = { "mhpmevent31h",    sscofpmf,  read_mhpmeventh,
++                             write_mhpmeventh                           },
++
+     [CSR_HPMCOUNTER3H]   = { "hpmcounter3h",   ctr32,  read_hpmcounterh },
+     [CSR_HPMCOUNTER4H]   = { "hpmcounter4h",   ctr32,  read_hpmcounterh },
+     [CSR_HPMCOUNTER5H]   = { "hpmcounter5h",   ctr32,  read_hpmcounterh },
+@@ -4155,5 +4301,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+                              write_mhpmcounterh                         },
+     [CSR_MHPMCOUNTER31H] = { "mhpmcounter31h", mctr32,  read_hpmcounterh,
+                              write_mhpmcounterh                         },
++    [CSR_SCOUNTOVF]      = { "scountovf", sscofpmf,  read_scountovf },
++
+ #endif /* !CONFIG_USER_ONLY */
+ };
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 4ba55705d147..41098f6ad03a 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -356,6 +356,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
+                              vmstate_pmu_ctr_state, PMUCTRState),
+         VMSTATE_UINTTL_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
++        VMSTATE_UINTTL_ARRAY(env.mhpmeventh_val, RISCVCPU, RV_MAX_MHPMEVENTS),
+         VMSTATE_UINTTL(env.sscratch, RISCVCPU),
+         VMSTATE_UINTTL(env.mscratch, RISCVCPU),
+         VMSTATE_UINT64(env.mfromhost, RISCVCPU),
+diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+index 000fe8da45ef..f380fd10f1a6 100644
+--- a/target/riscv/pmu.c
++++ b/target/riscv/pmu.c
+@@ -19,14 +19,367 @@
+ #include "qemu/osdep.h"
+ #include "cpu.h"
+ #include "pmu.h"
++#include "sysemu/cpu-timers.h"
++
++#define RISCV_TIMEBASE_FREQ 1000000000 /* 1Ghz */
++#define MAKE_32BIT_MASK(shift, length) \
++        (((uint32_t)(~0UL) >> (32 - (length))) << (shift))
++
++static bool riscv_pmu_counter_valid(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    if (ctr_idx < 3 || ctr_idx >= RV_MAX_MHPMCOUNTERS ||
++        !(cpu->pmu_avail_ctrs & BIT(ctr_idx))) {
++        return false;
++    } else {
++        return true;
++    }
++}
++
++static bool riscv_pmu_counter_enabled(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++
++    if (riscv_pmu_counter_valid(cpu, ctr_idx) &&
++        !get_field(env->mcountinhibit, BIT(ctr_idx))) {
++        return true;
++    } else {
++        return false;
++    }
++}
++
++static int riscv_pmu_incr_ctr_rv32(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++    target_ulong max_val = UINT32_MAX;
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    bool virt_on = riscv_cpu_virt_enabled(env);
++
++    /* Privilege mode filtering */
++    if ((env->priv == PRV_M &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_MINH)) ||
++        (env->priv == PRV_S && virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_VSINH)) ||
++        (env->priv == PRV_U && virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_VUINH)) ||
++        (env->priv == PRV_S && !virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_SINH)) ||
++        (env->priv == PRV_U && !virt_on &&
++        (env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_UINH))) {
++        return 0;
++    }
++
++    /* Handle the overflow scenario */
++    if (counter->mhpmcounter_val == max_val) {
++        if (counter->mhpmcounterh_val == max_val) {
++            counter->mhpmcounter_val = 0;
++            counter->mhpmcounterh_val = 0;
++            /* Generate interrupt only if OF bit is clear */
++            if (!(env->mhpmeventh_val[ctr_idx] & MHPMEVENTH_BIT_OF)) {
++                env->mhpmeventh_val[ctr_idx] |= MHPMEVENTH_BIT_OF;
++                riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++            }
++        } else {
++            counter->mhpmcounterh_val++;
++        }
++    } else {
++        counter->mhpmcounter_val++;
++    }
++
++    return 0;
++}
++
++static int riscv_pmu_incr_ctr_rv64(RISCVCPU *cpu, uint32_t ctr_idx)
++{
++    CPURISCVState *env = &cpu->env;
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++    uint64_t max_val = UINT64_MAX;
++    bool virt_on = riscv_cpu_virt_enabled(env);
++
++    /* Privilege mode filtering */
++    if ((env->priv == PRV_M &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_MINH)) ||
++        (env->priv == PRV_S && virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VSINH)) ||
++        (env->priv == PRV_U && virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_VUINH)) ||
++        (env->priv == PRV_S && !virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_SINH)) ||
++        (env->priv == PRV_U && !virt_on &&
++        (env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_UINH))) {
++        return 0;
++    }
++
++    /* Handle the overflow scenario */
++    if (counter->mhpmcounter_val == max_val) {
++        counter->mhpmcounter_val = 0;
++        /* Generate interrupt only if OF bit is clear */
++        if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
++            env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
++            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++        }
++    } else {
++        counter->mhpmcounter_val++;
++    }
++    return 0;
++}
++
++int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
++{
++    uint32_t ctr_idx;
++    int ret;
++    CPURISCVState *env = &cpu->env;
++    gpointer value;
++
++    value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                                GUINT_TO_POINTER(event_idx));
++    if (!value) {
++        return -1;
++    }
++
++    ctr_idx = GPOINTER_TO_UINT(value);
++    if (!riscv_pmu_counter_enabled(cpu, ctr_idx) ||
++        get_field(env->mcountinhibit, BIT(ctr_idx))) {
++        return -1;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        ret = riscv_pmu_incr_ctr_rv32(cpu, ctr_idx);
++    } else {
++        ret = riscv_pmu_incr_ctr_rv64(cpu, ctr_idx);
++    }
++
++    return ret;
++}
+ 
+ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr)
+ {
+-    return (target_ctr == 0) ? true : false;
++    RISCVCPU *cpu;
++    uint32_t event_idx;
++    uint32_t ctr_idx;
++
++    /* Fixed instret counter */
++    if (target_ctr == 2) {
++        return true;
++    }
++
++    cpu = RISCV_CPU(env_cpu(env));
++    event_idx = RISCV_PMU_EVENT_HW_INSTRUCTIONS;
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(event_idx)));
++    if (!ctr_idx) {
++        return false;
++    }
++
++    return target_ctr == ctr_idx ? true : false;
+ }
+ 
+ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
+ {
+-    return (target_ctr == 2) ? true : false;
++    RISCVCPU *cpu;
++    uint32_t event_idx;
++    uint32_t ctr_idx;
++
++    /* Fixed mcycle counter */
++    if (target_ctr == 0) {
++        return true;
++    }
++
++    cpu = RISCV_CPU(env_cpu(env));
++    event_idx = RISCV_PMU_EVENT_HW_CPU_CYCLES;
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(event_idx)));
++
++    /* Counter zero is not used for event_ctr_map */
++    if (!ctr_idx) {
++        return false;
++    }
++
++    return (target_ctr == ctr_idx) ? true : false;
++}
++
++static gboolean pmu_remove_event_map(gpointer key, gpointer value,
++                                     gpointer udata)
++{
++    return (GPOINTER_TO_UINT(value) == GPOINTER_TO_UINT(udata)) ? true : false;
++}
++
++static int64_t pmu_icount_ticks_to_ns(int64_t value)
++{
++    int64_t ret = 0;
++
++    if (icount_enabled()) {
++        ret = icount_to_ns(value);
++    } else {
++        ret = (NANOSECONDS_PER_SECOND / RISCV_TIMEBASE_FREQ) * value;
++    }
++
++    return ret;
++}
++
++int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
++                               uint32_t ctr_idx)
++{
++    uint32_t event_idx;
++    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
++
++    if (!riscv_pmu_counter_valid(cpu, ctr_idx)) {
++        return -1;
++    }
++
++    /*
++     * Expected mhpmevent value is zero for reset case. Remove the current
++     * mapping.
++     */
++    if (!value) {
++        g_hash_table_foreach_remove(cpu->pmu_event_ctr_map,
++                                    pmu_remove_event_map,
++                                    GUINT_TO_POINTER(ctr_idx));
++        return 0;
++    }
++
++    event_idx = value & MHPMEVENT_IDX_MASK;
++    if (g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                            GUINT_TO_POINTER(event_idx))) {
++        return 0;
++    }
++
++    switch (event_idx) {
++    case RISCV_PMU_EVENT_HW_CPU_CYCLES:
++    case RISCV_PMU_EVENT_HW_INSTRUCTIONS:
++    case RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS:
++    case RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS:
++    case RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS:
++        break;
++    default:
++        /* We don't support any raw events right now */
++        return -1;
++    }
++    g_hash_table_insert(cpu->pmu_event_ctr_map, GUINT_TO_POINTER(event_idx),
++                        GUINT_TO_POINTER(ctr_idx));
++
++    return 0;
++}
++
++static void pmu_timer_trigger_irq(RISCVCPU *cpu,
++                                  enum riscv_pmu_event_idx evt_idx)
++{
++    uint32_t ctr_idx;
++    CPURISCVState *env = &cpu->env;
++    PMUCTRState *counter;
++    target_ulong *mhpmevent_val;
++    uint64_t of_bit_mask;
++    int64_t irq_trigger_at;
++
++    if (evt_idx != RISCV_PMU_EVENT_HW_CPU_CYCLES &&
++        evt_idx != RISCV_PMU_EVENT_HW_INSTRUCTIONS) {
++        return;
++    }
++
++    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
++                               GUINT_TO_POINTER(evt_idx)));
++    if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
++        return;
++    }
++
++    if (riscv_cpu_mxl(env) == MXL_RV32) {
++        mhpmevent_val = &env->mhpmeventh_val[ctr_idx];
++        of_bit_mask = MHPMEVENTH_BIT_OF;
++     } else {
++        mhpmevent_val = &env->mhpmevent_val[ctr_idx];
++        of_bit_mask = MHPMEVENT_BIT_OF;
++    }
++
++    counter = &env->pmu_ctrs[ctr_idx];
++    if (counter->irq_overflow_left > 0) {
++        irq_trigger_at = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) +
++                        counter->irq_overflow_left;
++        timer_mod_anticipate_ns(cpu->pmu_timer, irq_trigger_at);
++        counter->irq_overflow_left = 0;
++        return;
++    }
++
++    if (cpu->pmu_avail_ctrs & BIT(ctr_idx)) {
++        /* Generate interrupt only if OF bit is clear */
++        if (!(*mhpmevent_val & of_bit_mask)) {
++            *mhpmevent_val |= of_bit_mask;
++            riscv_cpu_update_mip(cpu, MIP_LCOFIP, BOOL_TO_MASK(1));
++        }
++    }
++}
++
++/* Timer callback for instret and cycle counter overflow */
++void riscv_pmu_timer_cb(void *priv)
++{
++    RISCVCPU *cpu = priv;
++
++    /* Timer event was triggered only for these events */
++    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES);
++    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
++}
++
++int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value, uint32_t ctr_idx)
++{
++    uint64_t overflow_delta, overflow_at;
++    int64_t overflow_ns, overflow_left = 0;
++    RISCVCPU *cpu = RISCV_CPU(env_cpu(env));
++    PMUCTRState *counter = &env->pmu_ctrs[ctr_idx];
++
++    if (!riscv_pmu_counter_valid(cpu, ctr_idx) || !cpu->cfg.ext_sscofpmf) {
++        return -1;
++    }
++
++    if (value) {
++        overflow_delta = UINT64_MAX - value + 1;
++    } else {
++        overflow_delta = UINT64_MAX;
++    }
++
++    /*
++     * QEMU supports only int64_t timers while RISC-V counters are uint64_t.
++     * Compute the leftover and save it so that it can be reprogrammed again
++     * when timer expires.
++     */
++    if (overflow_delta > INT64_MAX) {
++        overflow_left = overflow_delta - INT64_MAX;
++    }
++
++    if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
++        riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
++        overflow_ns = pmu_icount_ticks_to_ns((int64_t)overflow_delta);
++        overflow_left = pmu_icount_ticks_to_ns(overflow_left) ;
++    } else {
++        return -1;
++    }
++    overflow_at = (uint64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + overflow_ns;
++
++    if (overflow_at > INT64_MAX) {
++        overflow_left += overflow_at - INT64_MAX;
++        counter->irq_overflow_left = overflow_left;
++        overflow_at = INT64_MAX;
++    }
++    timer_mod_anticipate_ns(cpu->pmu_timer, overflow_at);
++
++    return 0;
++}
++
++
++int riscv_pmu_init(RISCVCPU *cpu, int num_counters)
++{
++    if (num_counters > (RV_MAX_MHPMCOUNTERS - 3)) {
++        return -1;
++    }
++
++    cpu->pmu_event_ctr_map = g_hash_table_new(g_direct_hash, g_direct_equal);
++    if (!cpu->pmu_event_ctr_map) {
++        /* PMU support can not be enabled */
++        qemu_log_mask(LOG_UNIMP, "PMU events can't be supported\n");
++        cpu->cfg.pmu_num = 0;
++        return -1;
++    }
++
++    /* Create a bitmask of available programmable counters */
++    cpu->pmu_avail_ctrs = MAKE_32BIT_MASK(3, num_counters);
++
++    return 0;
+ }
+diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+index 58a5bc3a4089..036653627f78 100644
+--- a/target/riscv/pmu.h
++++ b/target/riscv/pmu.h
+@@ -26,3 +26,10 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+                                         uint32_t target_ctr);
+ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env,
+                                   uint32_t target_ctr);
++void riscv_pmu_timer_cb(void *priv);
++int riscv_pmu_init(RISCVCPU *cpu, int num_counters);
++int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
++                               uint32_t ctr_idx);
++int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
++int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
++                          uint32_t ctr_idx);
+-- 
+2.25.1
+
 
