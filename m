@@ -1,67 +1,68 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oO5uS-0002xx-43
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 19:23:44 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:49222)
+	id 1oO5uT-0002ze-L1
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 19:23:45 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:49324)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oO5uG-0002pA-NE
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:34 -0400
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a]:36813)
+ id 1oO5uJ-0002qG-3U
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:35 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b]:39638)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oO5uC-0007gx-V4
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:32 -0400
-Received: by mail-pj1-x102a.google.com with SMTP id
- r14-20020a17090a4dce00b001faa76931beso304409pjl.1
- for <qemu-riscv@nongnu.org>; Tue, 16 Aug 2022 16:23:27 -0700 (PDT)
+ id 1oO5uF-0007hS-Lq
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 19:23:34 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id d10so10556693plr.6
+ for <qemu-riscv@nongnu.org>; Tue, 16 Aug 2022 16:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc;
- bh=sTup4VV/u0r80RwDu0jpxutnOePECPuysMHa3xKomXk=;
- b=FBhQ0de8IUwNumccT70jWU1uxtNIWa4YnYwDItc+HRbyKpxWbVXA47P4LBUebytVVT
- ExUV3m0MGoHo6xjq/o1unXWgEAdzCWxYj+4D+pxs7WFYsBsfxRaG+QFNMJOKKI7bRxLy
- jZnv9Bfx1DLWZQDK89ssOzlApuiD/2F67NXtKKt+IoYv2it+XypJbX0ogcz9XwpI7qNx
- Gp1QJZPEPSBuQ7Yz/ucXdLEkEFTgTl0MgM+T60snA9P+u+UH0bSZbtd6nbNq+Yge6m1d
- 41c9VfV1ZYF44RZQi18LEs2bpt8UsD4L1gs42k/jqafeV7w6inob0rhiLFTCuahAn+TD
- Y8zA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc;
+ bh=vv26pdib1adNyStVwEuJL+bIguhGfeKKu6J55bI+kLI=;
+ b=5UHep+Qp8gzdJAHFAF62nKbyJ6BHhLK39hKyGkrAnKwJ22P4CDahcIuN6d44O21lZc
+ BV4bfpE93XHaVb3R9EsmKCD/xyb4wnglsfRW0Gg+qjv94NjSIVI/sLQtgqSfcbXeutrr
+ C36crq1vqJI/sAOsHf+kyvGwEU1I03vODjSnM6JLwyO2IsFxtR6M1CfFM5lBm8wjn1cL
+ rw0htQAdsjyypP2/igbRpHZUuoc1Clx8e7gxlRywVtepubz8TgGoLP3gfkvBSCHekZPx
+ hRckaT4s0YuSuiqD51qcORLqm6PGR+T0srn4rL8TCkdjLdhV2QasVgHv5rJv0SAhv8T0
+ eMPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc;
- bh=sTup4VV/u0r80RwDu0jpxutnOePECPuysMHa3xKomXk=;
- b=e6pc1Lv/3AJTH+F9labRy79h0F1n4UQd5g9wovHaJI6BxBBPoRRuRYGt0enRUr8jIy
- gqKM1rozj6dK4ghvqUEwdMe67dJWeyKNpGvcZ+pYix/LqcIEMmH93cxjFTEiSP/ODBlg
- Sr5d2KTZV6NgRv9K7fW8gHPXVyng6DK2E/Lffg00OHVSJj6o22VyaomQf6QxwhIeZbpJ
- K5WrfmiQC/K/oK2IoauOHB93PbNLy2fJF9md5cnIkgVn3LJaqyRPCOYmXei9lXezqhWi
- Wa0ajT9dAz2FI6+BNvt8FoFF3mdgmPEHK69cBNLhRz/MVsoTSk3gud47kYUSOw3H3Wx2
- jlUQ==
-X-Gm-Message-State: ACgBeo3+eVS2nZCu7H/E/ottzEJbWZMipgYlc3IKFvGW4DcrH9x4qFh7
- fGS8pzoaY9Z1HWkw4yxSX4ev5Q==
-X-Google-Smtp-Source: AA6agR5PaRA+9nIN/4B1HW+Cu6gNIfB5ZLERByYvU8l1k9OPOLq5q2eh38PJZHPfh8oboVUnvHhuiA==
-X-Received: by 2002:a17:902:854b:b0:170:d646:d69 with SMTP id
- d11-20020a170902854b00b00170d6460d69mr24181470plo.135.1660692206587; 
- Tue, 16 Aug 2022 16:23:26 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
+ bh=vv26pdib1adNyStVwEuJL+bIguhGfeKKu6J55bI+kLI=;
+ b=FVD1Esl1XvOWwka5X+zbiwwJJ/5l7K1dJMFBgswWJ46XOP16dK0mRF0b2BAkQgq/Ld
+ r1uk7rvSGlZxFudIoPOMLagwkcgBQ1Rh6tyAVpKZsT8nKeAPz9mAXY/MWBiZlohW91VO
+ vsCxYIVVZYAdzLLAKUo3t3rs7x772klZyR7E+1PSVqha4XkgrNXdR8NIdwPc1bcBkCZ8
+ HCRv5W5WFfhn/jZFUUBAmLzGYwY7ShEV4GmWIopqgt0cVf5okCBKB1LO1OLBpCu7GDyI
+ ifpXxoW2kB013Cz+PhSIrenO09t9t0eeA1oDjc59aIzBlRJVr6Y4ld+RKp7vcyUTqsJn
+ ejZg==
+X-Gm-Message-State: ACgBeo2leakFyNHpWwEgmLCZ8P8af1n1lO0s/m5Upn9J3ynVo1sDSSZ0
+ vniQ+Lx/KJkW/sInu//KnULRUQ==
+X-Google-Smtp-Source: AA6agR6OUjPcb3+bwqXheAplv37xAaoTu3igdNs8DYeYlFAXp4aLfRX73CGfZAYzg5AcsH+z/FBbmw==
+X-Received: by 2002:a17:902:ea0d:b0:170:cabd:b28 with SMTP id
+ s13-20020a170902ea0d00b00170cabd0b28mr24036565plg.115.1660692209374; 
+ Tue, 16 Aug 2022 16:23:29 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([66.220.2.162])
  by smtp.gmail.com with ESMTPSA id
- p4-20020a17090a2c4400b001eafa265869sm78608pjm.56.2022.08.16.16.23.25
+ p4-20020a17090a2c4400b001eafa265869sm78608pjm.56.2022.08.16.16.23.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Aug 2022 16:23:26 -0700 (PDT)
+ Tue, 16 Aug 2022 16:23:29 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
 To: qemu-devel@nongnu.org
-Cc: Atish Patra <atishp@rivosinc.com>,
+Cc: Atish Patra <atish.patra@wdc.com>,
  Alistair Francis <alistair.francis@wdc.com>,
+ Heiko Stuebner <heiko@sntech.de>, Atish Patra <atishp@rivosinc.com>,
  Bin Meng <bin.meng@windriver.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org
-Subject: [PATCH v13 0/6] Improve PMU support
-Date: Tue, 16 Aug 2022 16:23:15 -0700
-Message-Id: <20220816232321.558250-1-atishp@rivosinc.com>
+Subject: [PATCH v13 3/6] target/riscv: Add few cache related PMU events
+Date: Tue, 16 Aug 2022 16:23:18 -0700
+Message-Id: <20220816232321.558250-4-atishp@rivosinc.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220816232321.558250-1-atishp@rivosinc.com>
+References: <20220816232321.558250-1-atishp@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=atishp@rivosinc.com; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=atishp@rivosinc.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -81,159 +82,82 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2022 23:23:34 -0000
+X-List-Received-Date: Tue, 16 Aug 2022 23:23:36 -0000
 
-The latest version of the SBI specification includes a Performance Monitoring
-Unit(PMU) extension[1] which allows the supervisor to start/stop/configure
-various PMU events. The Sscofpmf ('Ss' for Privileged arch and Supervisor-level
-extensions, and 'cofpmf' for Count OverFlow and Privilege Mode Filtering)
-extension[2] allows the perf like tool to handle overflow interrupts and
-filtering support.
+From: Atish Patra <atish.patra@wdc.com>
 
-This series implements remaining PMU infrastructure to support
-PMU in virt machine. The first seven patches from the original series
-have been merged already.
+Qemu can monitor the following cache related PMU events through
+tlb_fill functions.
 
-This will allow us to add any PMU events in future.
-Currently, this series enables the following omu events.
-1. cycle count
-2. instruction count
-3. DTLB load/store miss
-4. ITLB prefetch miss
+1. DTLB load/store miss
+3. ITLB prefetch miss
 
-The first two are computed using host ticks while last three are counted during
-cpu_tlb_fill. We can do both sampling and count from guest userspace.
-This series has been tested on both RV64 and RV32. Both Linux[3] and Opensbi[4]
-patches are required to get the perf working.
+Increment the PMU counter in tlb_fill function.
 
-Here is an output of perf stat/report while running hackbench with latest
-OpenSBI & Linux kernel.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Tested-by: Heiko Stuebner <heiko@sntech.de>
+Signed-off-by: Atish Patra <atish.patra@wdc.com>
+Signed-off-by: Atish Patra <atishp@rivosinc.com>
+---
+ target/riscv/cpu_helper.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-Perf stat:
-==========
-[root@fedora-riscv ~]# perf stat -e cycles -e instructions -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses \
-> perf bench sched messaging -g 1 -l 10
-# Running 'sched/messaging' benchmark:
-# 20 sender and receiver processes per group
-# 1 groups == 40 processes run
-
-     Total time: 0.265 [sec]
-
- Performance counter stats for 'perf bench sched messaging -g 1 -l 10':
-
-     4,167,825,362      cycles                                                      
-     4,166,609,256      instructions              #    1.00  insn per cycle         
-         3,092,026      dTLB-load-misses                                            
-           258,280      dTLB-store-misses                                           
-         2,068,966      iTLB-load-misses                                            
-
-       0.585791767 seconds time elapsed
-
-       0.373802000 seconds user
-       1.042359000 seconds sys
-
-Perf record:
-============
-[root@fedora-riscv ~]# perf record -e cycles -e instructions \
-> -e dTLB-load-misses -e dTLB-store-misses -e iTLB-load-misses -c 10000 \
-> perf bench sched messaging -g 1 -l 10
-# Running 'sched/messaging' benchmark:
-# 20 sender and receiver processes per group
-# 1 groups == 40 processes run
-
-     Total time: 1.397 [sec]
-[ perf record: Woken up 10 times to write data ]
-Check IO/CPU overload!
-[ perf record: Captured and wrote 8.211 MB perf.data (214486 samples) ]
-
-[root@fedora-riscv riscv]# perf report
-Available samples                                                               
-107K cycles                                                                    ◆
-107K instructions                                                              ▒
-250 dTLB-load-misses                                                           ▒
-13 dTLB-store-misses                                                           ▒
-172 iTLB-load-misses      
-..
-
-Changes from v12->v13:
-1. Rebased on top of the apply-next.
-2. Addressed comments about space & comment block.
-
-Changes from v11->v12:
-1. Rebased on top of the apply-next.
-2. Aligned the write function & .min_priv to the previous line.
-3. Fixed the FDT generations for multi-socket scenario.
-4. Dropped interrupt property from the DT.
-5. Generate illegal instruction fault instead of virtual instruction fault
-   for VS/VU access while mcounteren is not set.
-
-Changes from v10->v11:
-1. Rebased on top of the master where first 7 patches were already merged.
-2. Removed unnecessary additional check in ctr predicate function.
-3. Removed unnecessary priv version checks in mcountinhibit read/write. 
-4. Added Heiko's reviewed-by/tested-by tags.
-
-Changes from v8->v9:
-1. Added the write_done flags to the vmstate.
-2. Fixed the hpmcounter read access from M-mode.
-
-Changes from v7->v8:
-1. Removeding ordering constraints for mhpmcounter & mhpmevent.
-
-Changes from v6->v7:
-1. Fixed all the compilation errors for the usermode.
-
-Changes from v5->v6:
-1. Fixed compilation issue with PATCH 1.
-2. Addressed other comments.
-
-Changes from v4->v5:
-1. Rebased on top of the -next with following patches.
-   - isa extension
-   - priv 1.12 spec
-2. Addressed all the comments on v4
-3. Removed additional isa-ext DT node in favor of riscv,isa string update
-
-Changes from v3->v4:
-1. Removed the dummy events from pmu DT node.
-2. Fixed pmu_avail_counters mask generation.
-3. Added a patch to simplify the predicate function for counters. 
-
-Changes from v2->v3:
-1. Addressed all the comments on PATCH1-4.
-2. Split patch1 into two separate patches.
-3. Added explicit comments to explain the event types in DT node.
-4. Rebased on latest Qemu.
-
-Changes from v1->v2:
-1. Dropped the ACks from v1 as signficant changes happened after v1.
-2. sscofpmf support.
-3. A generic counter management framework.
-
-[1] https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/riscv-sbi.adoc
-[2] https://drive.google.com/file/d/171j4jFjIkKdj5LWcExphq4xG_2sihbfd/edit
-[3] https://github.com/atishp04/qemu/tree/riscv_pmu_v13
-
-Atish Patra (6):
-target/riscv: Add sscofpmf extension support
-target/riscv: Simplify counter predicate function
-target/riscv: Add few cache related PMU events
-hw/riscv: virt: Add PMU DT node to the device tree
-target/riscv: Update the privilege field for sscofpmf CSRs
-target/riscv: Remove additional priv version check for mcountinhibit
-
-hw/riscv/virt.c           |  16 ++
-target/riscv/cpu.c        |  12 ++
-target/riscv/cpu.h        |  25 +++
-target/riscv/cpu_bits.h   |  55 +++++
-target/riscv/cpu_helper.c |  25 +++
-target/riscv/csr.c        | 312 +++++++++++++++++-----------
-target/riscv/machine.c    |   1 +
-target/riscv/pmu.c        | 414 +++++++++++++++++++++++++++++++++++++-
-target/riscv/pmu.h        |   8 +
-9 files changed, 749 insertions(+), 119 deletions(-)
-
---
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 1e4faa84e839..81948b37dd9a 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -21,11 +21,13 @@
+ #include "qemu/log.h"
+ #include "qemu/main-loop.h"
+ #include "cpu.h"
++#include "pmu.h"
+ #include "exec/exec-all.h"
+ #include "instmap.h"
+ #include "tcg/tcg-op.h"
+ #include "trace.h"
+ #include "semihosting/common-semi.h"
++#include "cpu_bits.h"
+ 
+ int riscv_cpu_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -1188,6 +1190,28 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+     cpu_loop_exit_restore(cs, retaddr);
+ }
+ 
++
++static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type)
++{
++    enum riscv_pmu_event_idx pmu_event_type;
++
++    switch (access_type) {
++    case MMU_INST_FETCH:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
++        break;
++    case MMU_DATA_LOAD:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS;
++        break;
++    case MMU_DATA_STORE:
++        pmu_event_type = RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
++        break;
++    default:
++        return;
++    }
++
++    riscv_pmu_incr_ctr(cpu, pmu_event_type);
++}
++
+ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+                         MMUAccessType access_type, int mmu_idx,
+                         bool probe, uintptr_t retaddr)
+@@ -1286,6 +1310,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+             }
+         }
+     } else {
++        pmu_tlb_fill_incr_ctr(cpu, access_type);
+         /* Single stage lookup */
+         ret = get_physical_address(env, &pa, &prot, address, NULL,
+                                    access_type, mmu_idx, true, false, false);
+-- 
 2.25.1
 
 
