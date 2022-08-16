@@ -1,75 +1,69 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNkZ1-0008NQ-AK
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 20:36:12 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36238)
+	id 1oNkdi-00021p-9B
+	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 20:41:02 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:36770)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oNkYv-0008Ir-Kz; Mon, 15 Aug 2022 20:36:06 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:41492)
+ id 1oNkdg-00021Z-9B; Mon, 15 Aug 2022 20:41:00 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:43999)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oNkYu-0004W3-B9; Mon, 15 Aug 2022 20:36:05 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id 202so7896521pgc.8;
- Mon, 15 Aug 2022 17:36:03 -0700 (PDT)
+ id 1oNkdY-0005CU-Vl; Mon, 15 Aug 2022 20:40:57 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id v4so3568192pgi.10;
+ Mon, 15 Aug 2022 17:40:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :sender:from:to:cc;
- bh=QE/9zaBaF5F3Z7zm+3XawoZwRFsR9FjiJhlar80nXaY=;
- b=GJ/E3j7cJvqHbAfvEiCmLtt/DKIol+QqbaqLtTQseb5KGVXUOC7mdcwXJEoeMYEBwi
- pssN8KgzzlqiS+1hopRozMbCi0OPgbBkqJ3am9KKqDZmRXb3POzhd8+pGXns7nTfmSSK
- 6W3z53XAZ3yHOmtbD7TRgGX/0H/OmB9T+2+9IR6UKljLWteWYtRhdqJUE++ELu38PLAx
- MRKYf11QjQGQxv3EKNFF7iyCB0Ls+vDYd8XEf+AcHN859eKYDBQhug6eFJmpeaA49Mj4
- c2k9WBjQCxONt+/5uV7fvvCILe2SYDg0vcCEUmHLLnjGPAa2qujPoUBYyjUwFzNPfGAr
- zzMQ==
+ bh=J6f11DgnWZirsI1b7TR73AYFU7NhDmCvX40Nsg9x+mY=;
+ b=ndyDnOsmK1aMZ9XAY5ooMsuhksfYB2r8LWcLhXWjAQhfQbCLykRhFHwA1RVrPei8tq
+ 28iJjkoQ2n/9Oq9ys9ETc3/AzZ5MwsMBGmpBu3ZeH1dX6Lyx09EPMfYtd+tcGr1U2BhA
+ YvDA9AP5jNfeYMiCfDmpKT8zJatuubfSXHO2sdCScgJ0PpER10R70oYqsPKi6kiMlM8m
+ TuzHuerjgDuUcp5uIzGlM70nRmmVKR8sWTRxnicHSkVecEhycpOVSJKvwXUcHkOXyIY9
+ WLK7W8utOuC3H4GwGuuDNfyzBAjnsNDvQvjOgd4b85KasXPCEiN9tnh6Ct6VCxA+NE0v
+ gkmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :sender:x-gm-message-state:from:to:cc;
- bh=QE/9zaBaF5F3Z7zm+3XawoZwRFsR9FjiJhlar80nXaY=;
- b=rwqumCpjyk2RaaaQhGkLCFhyvEDsUzaOCQkfDhg8w7UPViFdA2MYX6vZIhkz1euqVz
- zzab1BXTYVwe4H5C31Z/64CZqBfmzq3AyI+dvN5gRVDyXns9sqafEh3S2LKCKs8OHHKr
- XGg7UAPHX6lN0PvHO7RsRm/iz6Omxqor7Up9JluBcgXWHoMZhCR6/I/IlxEkG2t0s64Q
- ji7dX8WFcQewjg5f3QYtlidvQ+huu62M5RxSLt587FXdV94IxmRDP3vGN4xk15jB8HEE
- jljwOd9tqnGRDUSfbf/FN0429Z4D2Xc20qYn7L8dF7Q1jgxyRDO+M0j934a+N4r9sRWT
- Y/sQ==
-X-Gm-Message-State: ACgBeo0IUF9LlbNRtfkS0p5vmTx1ncOrLBSgd+/5h+IwloLytrUu8DKX
- G0JgikeXrCVlWizp6AnCGtU=
-X-Google-Smtp-Source: AA6agR7CCRrGYasklM4iFsXHXJzChnMwctQDqoOZKxc6zJCn3QybU7f/vpu5k/djBA+I8tQD8iFIYg==
-X-Received: by 2002:a05:6a00:2409:b0:534:98c0:e53a with SMTP id
- z9-20020a056a00240900b0053498c0e53amr12159441pfh.11.1660610162312; 
- Mon, 15 Aug 2022 17:36:02 -0700 (PDT)
+ bh=J6f11DgnWZirsI1b7TR73AYFU7NhDmCvX40Nsg9x+mY=;
+ b=zDJQcNEFy45VhKC1LGRK7ksZh94HFTolQigcAGQzYajMIy/gGyqxMOuYErxDPidqmz
+ LLe+QtB4FK/VHibvfGjA5BuCrMm1V2AjzVaD9d9AXv/0hRP2ikRITpx8rknQmeKMyuFc
+ Y+kW/csx5+144+2O+5dxfYBzu5JJoJ54k2IWEAkFMz/fCwhFlZvdIooU0jJQFbgH0VNi
+ 6Lrb5FJeeEVBimVfKEnANLXdoZT2frL+18eOp4vllyCR14P02cyIlA3mBRpOeBfCTXMT
+ FaahNdeA8fta2D32igF/RLyKQFVsdpW2XHsfLIBuPWNv+tdVWILj8Iv07B06weYU49ff
+ SZZA==
+X-Gm-Message-State: ACgBeo2+CCkvO7xLfhicDtRUCnRCo5NW6GfeZ2FTbaanAyyrsqB4ksMq
+ 4GDPnarWjaoT9h3tUAMcuU4=
+X-Google-Smtp-Source: AA6agR4dIuMTYdJvrxN4ijTGuFNauBMmXNcN54Z1lVvEvnHNVl3PlOX4wWkLLLGVu4Zia5OTAoSVpg==
+X-Received: by 2002:a63:f916:0:b0:41c:1149:3263 with SMTP id
+ h22-20020a63f916000000b0041c11493263mr15474785pgi.104.1660610450086; 
+ Mon, 15 Aug 2022 17:40:50 -0700 (PDT)
 Received: from [192.168.1.115] ([185.126.107.38])
  by smtp.gmail.com with ESMTPSA id
- o14-20020a65614e000000b0040d1eb90d67sm6296479pgv.93.2022.08.15.17.35.57
+ b17-20020a170902d51100b0016d763967f8sm7648771plg.107.2022.08.15.17.40.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Aug 2022 17:36:01 -0700 (PDT)
+ Mon, 15 Aug 2022 17:40:49 -0700 (PDT)
 Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
  <philippe.mathieu.daude@gmail.com>
-Message-ID: <5f5cc9f0-65b5-20dc-eba4-b6895a58de4e@amsat.org>
-Date: Tue, 16 Aug 2022 02:35:55 +0200
+Message-ID: <d87035e7-2ed5-317e-2c35-daaa5f0a0cc4@amsat.org>
+Date: Tue, 16 Aug 2022 02:40:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
  Gecko/20100101 Thunderbird/91.12.0
-Subject: Re: [PATCH 6/7] target/xtensa: Honour -semihosting-config userspace=on
+Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: fix kernel panics due to
+ missing peripherals
 Content-Language: en-US
-To: Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, =?UTF-8?Q?Alex_Benn=c3=a9e?=
- <alex.bennee@linaro.org>, Laurent Vivier <laurent@vivier.eu>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Stefan Pejic <stefan.pejic@syrmia.com>, Chris Wulff <crwulff@gmail.com>,
- Marek Vasut <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Furquan Shaikh <furquan@rivosinc.com>
-References: <20220815190303.2061559-1-peter.maydell@linaro.org>
- <20220815190303.2061559-7-peter.maydell@linaro.org>
+To: Conor.Dooley@microchip.com, alistair23@gmail.com, mail@conchuod.ie
+Cc: bin.meng@windriver.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, =?UTF-8?Q?C=c3=a9dric_Le_Goat?=
+ =?UTF-8?Q?er?= <clg@kaod.org>
+References: <20220813135127.2971754-1-mail@conchuod.ie>
+ <CAKmqyKMoQgpEcKSLuLrTT-bbeiwzySNSaeHt12Ou+wuHf7xzpQ@mail.gmail.com>
+ <2dd018bb-3026-49a9-3938-3bff62a31179@microchip.com>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <20220815190303.2061559-7-peter.maydell@linaro.org>
+In-Reply-To: <2dd018bb-3026-49a9-3938-3bff62a31179@microchip.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
@@ -94,24 +88,38 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2022 00:36:07 -0000
+X-List-Received-Date: Tue, 16 Aug 2022 00:41:00 -0000
 
-On 15/8/22 21:03, Peter Maydell wrote:
-> Honour the commandline -semihosting-config userspace=on option,
-> instead of always permitting userspace semihosting calls in system
-> emulation mode, by passing the correct value to the is_userspace
-> argument of semihosting_enabled().
-> 
-> Note that this is a behaviour change: if the user wants to
-> do semihosting calls from userspace they must now specifically
-> enable them on the command line.
-> 
-> xtensa semihosting is not implemented for linux-user builds.
-> 
-> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
-> ---
->   target/xtensa/translate.c | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
+Hi Conor,
 
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+On 15/8/22 00:48, Conor.Dooley@microchip.com wrote:
+> On 14/08/2022 23:08, Alistair Francis wrote:
+>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+>>
+>> On Sat, Aug 13, 2022 at 11:51 PM Conor Dooley <mail@conchuod.ie> wrote:
+>>> QEMU support for PolarFire SoC seems to be fairly out of date at this
+>>> point. Running with a recent HSS, U-Boot etc doesn't work, partly due
+>>> to the unimplemented cache controller that the HSS tries to read from
+>>> (it needs to know the ways configuration now) and the rest seems to be
+>>> down to 64 bit address DMA to the sd card (not 100% on that yet).
+>>> There's some patches floating around internally that supposedly fixed
+>>> things for QEMU v6.something but I could not replicate & they're fairly
+>>> conflicty at this point. Plan is to clean them up, but no point sitting
+>>> on this patch until then as I have no ETA for that at this point.
+>>
+>> Awesome! It is great to see Microchip supporting open source projects
+> 
+> Better late than never ehh..
+> As I said, no ETA yet as I don't know just how far off the sd card stuff
+> is, but it's in the todo pile. In the meantime, I'll keep an eye out here
+> which I am ~certain we haven't been doing so far. I've added QEMU stuff
+> to my build/test scripts now that I've got the direct kernel boot working
+> for me so hopefully once things get fixed, they'll stay that way.
+
+Please Cc me and Cédric in your future posts regarding SD card, or open
+a GitLab issue describing the problem.
+
+Regards,
+
+Phil.
 
