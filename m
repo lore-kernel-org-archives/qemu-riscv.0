@@ -1,68 +1,84 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNrBd-0003js-Ht
-	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 03:40:29 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:42616)
+	id 1oNsI1-0003x3-U7
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 04:51:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:54708)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oNrBY-0003ho-Pi
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 03:40:25 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536]:46752)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1oNsHz-0003vs-Vg
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 04:51:09 -0400
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b]:44017)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1oNrBV-0005U0-E4
- for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 03:40:24 -0400
-Received: by mail-pg1-x536.google.com with SMTP id d71so8551058pgc.13
- for <qemu-riscv@nongnu.org>; Tue, 16 Aug 2022 00:40:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20210112.gappssmtp.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=ymPL6R/7hhQxMF8ZNEadR4cmLBuGjEyRhfwfsCxxdlQ=;
- b=VUMhh0LgprH/jQjM4T6LIRHFBmXIenpoWzJDNTsD46u+Z619IAzwKfqxBD/T62XwKX
- wwOa0SgocgnMQILd7CGutuv653tQKgBLk/J7b5+bI1OCJixKvW6H9UVH3IkVsGMCrPnV
- EO4RmJYnE1TJbD1/cFHrpmyO9a29JeDqj1m3bNmbDiTThOe+e2CWwu3uVWCfHtqazB8z
- 8iwema2ldMMeSOO2xwSaQay03/ZllqIiSXB63XKBuI6SDZxDPb98WnqsVaPdYALMK+aO
- +amIR3/bGHxH2uWarw488DvU6p7b6VjdZpODNjtBF+2Ow1GryjD0u83PW6axy5V4eLPh
- XqaA==
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1oNsHy-0007Ag-C2
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 04:51:07 -0400
+Received: by mail-wm1-x32b.google.com with SMTP id
+ ay39-20020a05600c1e2700b003a5503a80cfso5043536wmb.2
+ for <qemu-riscv@nongnu.org>; Tue, 16 Aug 2022 01:51:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:from:to:cc;
+ bh=DmvxusCTC3J2nD2S/wyLAY2fo9yz8hBxorV9F1mSXMI=;
+ b=HAXfa6MSFdCXiQ2yVhpsmw+lcYJR/MHFdFaOojM3R6j2ba1Q1ufjdy/CYsDrAGbEts
+ grcQKY7yeXAhwCuMwD3lLswLRIfvDYgsRgvA154vdxOEJZQeWDFRxvPGqmBss6OS+C/y
+ H6yO7TBCmt608b62QuibbOCbldh8nhJU8u20TUyRjufj1UKHleY0RUTibHRUc/GzKf/c
+ gNJAvFuD4u+DOIoPDnuTchZOmqxylPtM9vPdoTU467Gh5oH/RsxJEbv1lyqLWE40qwtH
+ FRVpdvpTNt87YDiNSKMmR5RD2apvv8iwsetQEro9t6vXRcfq6Ikr3qP5vJfZDPDDwrB0
+ Zz5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=ymPL6R/7hhQxMF8ZNEadR4cmLBuGjEyRhfwfsCxxdlQ=;
- b=L0P524bFTxwjK3G7Mu63rPtr5igUdopGRbpkr0WZLTtFvSqBLKutFOsq7ntFB4ERZw
- h3iGsArzYAeZ7GVcwrO7zwEE+vSrhSW2hsessfUIDaEediEKYyQJHh3SQLRQ/IaGBZc0
- +0geMYAVmLovCYpQ+LJJB4hC2dLcXM3/KriktAg+vMMFvA9TV9WJjoQ7ou4iGBCEbh1X
- zjEkGIogOKkRlPHyhEHdSjp8fE0R9LrPqdjQXSNL0FIP0jAkwvcZPUGQqSTntSmKDXWY
- 5ReIGi87uhYoQHRmvmYTheQzobyJ7g8kiEGdY7XPEsXoN6OGO41hoXdKHpwMUlq14auT
- 3rww==
-X-Gm-Message-State: ACgBeo2qO0HdTvf4RnxdE7dq6s8/jbcOasHLgbsd6QLb90S+TV96mcVs
- t+/44hBaANka3udJbXMl81RUtKLdvsrakNPgAT91XQ==
-X-Google-Smtp-Source: AA6agR5ZTaDV6LZCNJuDMj5JxWCNLXdzSYzlqbJSppfVeW2oVIuq3Eso0Dlh2NUxPm6UzmRrQ4jEIMMk29x/qky8YgQ=
-X-Received: by 2002:a62:38d8:0:b0:52d:1496:6775 with SMTP id
- f207-20020a6238d8000000b0052d14966775mr20199063pfa.15.1660635616700; Tue, 16
- Aug 2022 00:40:16 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:in-reply-to:date
+ :subject:cc:to:from:user-agent:references:x-gm-message-state:from:to
+ :cc; bh=DmvxusCTC3J2nD2S/wyLAY2fo9yz8hBxorV9F1mSXMI=;
+ b=tZz7yXSWX/ArSpC2aUm1jrg2WFnDiAspva6qitTqzAIUpp0vwFpHbnvzcsPDE6oSqo
+ XUoo1EE45N9QENFPXxs9M7j/23EmQYgWF7K4EEjJLbTxZd0vXAK1cvxM0wkGVs628592
+ 0Goqctaqhis2i3nxIUm8I7nW30jJpUI0eeWmJcJyw5V9jjnNRZXlPea8fmLYahgt19PR
+ iuQRWIkNoWEc96z8Hmu3Z80HUD0h0Q14/AK/4T57fEdLZZtlG4Sv8eyjhEzSC/7GsQpn
+ Zi8bZs4yWbGQWqNYB+bH0/OF9ouT3+afJ130VJdxYsGOcR5zhu3cxIo7yTU5K9bEEpEm
+ Um2A==
+X-Gm-Message-State: ACgBeo2izZoNZNMnvco6KQ5hdEtXBP0e1UpFDTscbEw2+KLMVwSsY3j4
+ KO/+xW/oWSuF8igSqtx1mWGPwg==
+X-Google-Smtp-Source: AA6agR6rdIM6U12Rmok5uOTP4Ibf4YpsACj1ftMdX11CWbBjf2pw+bNNDxQ1MThrlnAU2RBrkf0gww==
+X-Received: by 2002:a05:600c:a43:b0:3a4:d07e:1151 with SMTP id
+ c3-20020a05600c0a4300b003a4d07e1151mr19014646wmq.169.1660639864800; 
+ Tue, 16 Aug 2022 01:51:04 -0700 (PDT)
+Received: from zen.linaroharston ([185.81.254.11])
+ by smtp.gmail.com with ESMTPSA id
+ l4-20020a5d4bc4000000b0021e6277bc50sm11717580wrt.36.2022.08.16.01.51.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Aug 2022 01:51:03 -0700 (PDT)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 6A53A1FFB7;
+ Tue, 16 Aug 2022 09:51:03 +0100 (BST)
+References: <20220815190303.2061559-1-peter.maydell@linaro.org>
+ <20220815190303.2061559-2-peter.maydell@linaro.org>
+User-agent: mu4e 1.8.9; emacs 28.1.91
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <f4bug@amsat.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar
+ Rikalo <aleksandar.rikalo@syrmia.com>, Stefan Pejic
+ <stefan.pejic@syrmia.com>, Chris Wulff <crwulff@gmail.com>, Marek Vasut
+ <marex@denx.de>, Palmer Dabbelt <palmer@dabbelt.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>, Max
+ Filippov <jcmvbkbc@gmail.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Furquan Shaikh <furquan@rivosinc.com>
+Subject: Re: [PATCH 1/7] semihosting: Allow optional use of semihosting from
+ userspace
+Date: Tue, 16 Aug 2022 09:50:57 +0100
+In-reply-to: <20220815190303.2061559-2-peter.maydell@linaro.org>
+Message-ID: <87v8qsbmh4.fsf@linaro.org>
 MIME-Version: 1.0
-References: <20220802233307.2106839-1-atishp@rivosinc.com>
- <20220802233307.2106839-3-atishp@rivosinc.com>
- <20220815075417.nhfdzw3b5ysygct3@kamzik>
-In-Reply-To: <20220815075417.nhfdzw3b5ysygct3@kamzik>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Tue, 16 Aug 2022 00:39:55 -0700
-Message-ID: <CAHBxVyHpdK1cKRfP6VDmDg72OCHwZwfmw6XtxR35rDkND0rX-w@mail.gmail.com>
-Subject: Re: [PATCH v12 2/6] target/riscv: Simplify counter predicate function
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, Bin Meng <bmeng.cn@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000000904df05e656dc57"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x536.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -76,439 +92,42 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2022 07:40:26 -0000
+X-List-Received-Date: Tue, 16 Aug 2022 08:51:09 -0000
 
---0000000000000904df05e656dc57
-Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Aug 15, 2022 at 12:54 AM Andrew Jones <ajones@ventanamicro.com>
-wrote:
+Peter Maydell <peter.maydell@linaro.org> writes:
 
-> On Tue, Aug 02, 2022 at 04:33:03PM -0700, Atish Patra wrote:
-> > All the hpmcounters and the fixed counters (CY, IR, TM) can be
-> represented
-> > as a unified counter. Thus, the predicate function doesn't need handle
-> each
-> > case separately.
-> >
-> > Simplify the predicate function so that we just handle things differently
-> > between RV32/RV64 and S/HS mode.
-> >
-> > Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> > Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > ---
-> >  target/riscv/csr.c | 110 ++++-----------------------------------------
-> >  1 file changed, 9 insertions(+), 101 deletions(-)
-> >
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index 9b45c49ab45f..6690b72ea0e7 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -74,6 +74,7 @@ static RISCVException ctr(CPURISCVState *env, int
-> csrno)
-> >      CPUState *cs = env_cpu(env);
-> >      RISCVCPU *cpu = RISCV_CPU(cs);
-> >      int ctr_index;
-> > +    target_ulong ctr_mask;
-> >      int base_csrno = CSR_CYCLE;
-> >      bool rv32 = riscv_cpu_mxl(env) == MXL_RV32 ? true : false;
-> >
-> > @@ -82,122 +83,29 @@ static RISCVException ctr(CPURISCVState *env, int
-> csrno)
-> >          base_csrno += 0x80;
-> >      }
-> >      ctr_index = csrno - base_csrno;
-> > +    ctr_mask = BIT(ctr_index);
-> >
-> >      if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-> >          (csrno >= CSR_CYCLEH && csrno <= CSR_INSTRETH)) {
-> >          goto skip_ext_pmu_check;
-> >      }
-> >
-> > -    if ((!cpu->cfg.pmu_num || !(cpu->pmu_avail_ctrs & BIT(ctr_index))))
-> {
-> > +    if (!(cpu->pmu_avail_ctrs & ctr_mask)) {
-> >          /* No counter is enabled in PMU or the counter is out of range
-> */
-> >          return RISCV_EXCP_ILLEGAL_INST;
-> >      }
-> >
-> >  skip_ext_pmu_check:
-> >
-> > -    if (env->priv == PRV_S) {
-> > -        switch (csrno) {
-> > -        case CSR_CYCLE:
-> > -            if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> > -                return RISCV_EXCP_ILLEGAL_INST;
-> > -            }
-> > -            break;
-> > -        case CSR_TIME:
-> > -            if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> > -                return RISCV_EXCP_ILLEGAL_INST;
-> > -            }
-> > -            break;
-> > -        case CSR_INSTRET:
-> > -            if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> > -                return RISCV_EXCP_ILLEGAL_INST;
-> > -            }
-> > -            break;
-> > -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> > -            if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> > -                return RISCV_EXCP_ILLEGAL_INST;
-> > -            }
-> > -            break;
-> > -        }
-> > -        if (rv32) {
-> > -            switch (csrno) {
-> > -            case CSR_CYCLEH:
-> > -                if (!get_field(env->mcounteren, COUNTEREN_CY)) {
-> > -                    return RISCV_EXCP_ILLEGAL_INST;
-> > -                }
-> > -                break;
-> > -            case CSR_TIMEH:
-> > -                if (!get_field(env->mcounteren, COUNTEREN_TM)) {
-> > -                    return RISCV_EXCP_ILLEGAL_INST;
-> > -                }
-> > -                break;
-> > -            case CSR_INSTRETH:
-> > -                if (!get_field(env->mcounteren, COUNTEREN_IR)) {
-> > -                    return RISCV_EXCP_ILLEGAL_INST;
-> > -                }
-> > -                break;
-> > -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> > -                if (!get_field(env->mcounteren, 1 << ctr_index)) {
-> > -                    return RISCV_EXCP_ILLEGAL_INST;
-> > -                }
-> > -                break;
-> > -            }
-> > -        }
-> > +    if (((env->priv == PRV_S) && (!get_field(env->mcounteren,
-> ctr_mask))) ||
-> > +       ((env->priv == PRV_U) && (!get_field(env->scounteren,
-> ctr_mask)))) {
->     ^ there should be another space here
+> Currently our semihosting implementations generally prohibit use of
+> semihosting calls in system emulation from the guest userspace.  This
+> is a very long standing behaviour justified originally "to provide
+> some semblance of security" (since code with access to the
+> semihosting ABI can do things like read and write arbitrary files on
+> the host system).  However, it is sometimes useful to be able to run
+> trusted guest code which performs semihosting calls from guest
+> userspace, notably for test code.  Add a command line suboption to
+> the existing semihosting-config option group so that you can
+> explicitly opt in to semihosting from guest userspace with
+>  -semihosting-config userspace=3Don
 >
-> > +        return RISCV_EXCP_ILLEGAL_INST;
-> >      }
-> >
-> >      if (riscv_cpu_virt_enabled(env)) {
-> > -        switch (csrno) {
-> > -        case CSR_CYCLE:
-> > -            if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-> > -                get_field(env->mcounteren, COUNTEREN_CY)) {
-> > -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -            }
-> > -            break;
-> > -        case CSR_TIME:
-> > -            if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-> > -                get_field(env->mcounteren, COUNTEREN_TM)) {
-> > -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -            }
-> > -            break;
-> > -        case CSR_INSTRET:
-> > -            if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-> > -                get_field(env->mcounteren, COUNTEREN_IR)) {
-> > -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -            }
-> > -            break;
-> > -        case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:
-> > -            if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> > -                 get_field(env->mcounteren, 1 << ctr_index)) {
-> > -                return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -            }
-> > -            break;
-> > -        }
-> > -        if (rv32) {
-> > -            switch (csrno) {
-> > -            case CSR_CYCLEH:
-> > -                if (!get_field(env->hcounteren, COUNTEREN_CY) &&
-> > -                    get_field(env->mcounteren, COUNTEREN_CY)) {
-> > -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -                }
-> > -                break;
-> > -            case CSR_TIMEH:
-> > -                if (!get_field(env->hcounteren, COUNTEREN_TM) &&
-> > -                    get_field(env->mcounteren, COUNTEREN_TM)) {
-> > -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -                }
-> > -                break;
-> > -            case CSR_INSTRETH:
-> > -                if (!get_field(env->hcounteren, COUNTEREN_IR) &&
-> > -                    get_field(env->mcounteren, COUNTEREN_IR)) {
-> > -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -                }
-> > -                break;
-> > -            case CSR_HPMCOUNTER3H...CSR_HPMCOUNTER31H:
-> > -                if (!get_field(env->hcounteren, 1 << ctr_index) &&
-> > -                     get_field(env->mcounteren, 1 << ctr_index)) {
-> > -                    return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > -                }
-> > -                break;
-> > -            }
-> > +        if (!get_field(env->hcounteren, ctr_mask) &&
-> > +           get_field(env->mcounteren, ctr_mask)) {
->      ^ and here
-> > +            return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> >          }
-> >      }
-> >  #endif
-> > --
-> > 2.25.1
-> >
-> >
+> (There is no equivalent option for the user-mode emulator, because
+> there by definition all code runs in userspace and has access to
+> semihosting already.)
 >
+> This commit adds the infrastructure for the command line option and
+> adds a bool 'is_user' parameter to the function
+> semihosting_userspace_enabled() that target code can use to check
+> whether it should be permitting the semihosting call for userspace.
+> It mechanically makes all the callsites pass 'false', so they
+> continue checking "is semihosting enabled in general".  Subsequent
+> commits will make each target that implements semihosting honour the
+> userspace=3Don option by passing the correct value and removing
+> whatever "don't do this for userspace" checking they were doing by
+> hand.
 >
-Fixed.Thanks.
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 
+Acked-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-> Thanks,
-> drew
->
-
---0000000000000904df05e656dc57
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Aug 15, 2022 at 12:54 AM Andr=
-ew Jones &lt;<a href=3D"mailto:ajones@ventanamicro.com">ajones@ventanamicro=
-.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">On Tue, Aug 02, 2022 at 04:33:03PM -0700, Atish Patra wrote:<br>
-&gt; All the hpmcounters and the fixed counters (CY, IR, TM) can be represe=
-nted<br>
-&gt; as a unified counter. Thus, the predicate function doesn&#39;t need ha=
-ndle each<br>
-&gt; case separately.<br>
-&gt; <br>
-&gt; Simplify the predicate function so that we just handle things differen=
-tly<br>
-&gt; between RV32/RV64 and S/HS mode.<br>
-&gt; <br>
-&gt; Reviewed-by: Bin Meng &lt;<a href=3D"mailto:bmeng.cn@gmail.com" target=
-=3D"_blank">bmeng.cn@gmail.com</a>&gt;<br>
-&gt; Acked-by: Alistair Francis &lt;<a href=3D"mailto:alistair.francis@wdc.=
-com" target=3D"_blank">alistair.francis@wdc.com</a>&gt;<br>
-&gt; Signed-off-by: Atish Patra &lt;<a href=3D"mailto:atishp@rivosinc.com" =
-target=3D"_blank">atishp@rivosinc.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/csr.c | 110 ++++-----------------------------------=
-------<br>
-&gt;=C2=A0 1 file changed, 9 insertions(+), 101 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-&gt; index 9b45c49ab45f..6690b72ea0e7 100644<br>
-&gt; --- a/target/riscv/csr.c<br>
-&gt; +++ b/target/riscv/csr.c<br>
-&gt; @@ -74,6 +74,7 @@ static RISCVException ctr(CPURISCVState *env, int cs=
-rno)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 CPUState *cs =3D env_cpu(env);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 RISCVCPU *cpu =3D RISCV_CPU(cs);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 int ctr_index;<br>
-&gt; +=C2=A0 =C2=A0 target_ulong ctr_mask;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 int base_csrno =3D CSR_CYCLE;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 bool rv32 =3D riscv_cpu_mxl(env) =3D=3D MXL_RV32 ?=
- true : false;<br>
-&gt;=C2=A0 <br>
-&gt; @@ -82,122 +83,29 @@ static RISCVException ctr(CPURISCVState *env, int=
- csrno)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 base_csrno +=3D 0x80;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ctr_index =3D csrno - base_csrno;<br>
-&gt; +=C2=A0 =C2=A0 ctr_mask =3D BIT(ctr_index);<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if ((csrno &gt;=3D CSR_CYCLE &amp;&amp; csrno &lt;=
-=3D CSR_INSTRET) ||<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 (csrno &gt;=3D CSR_CYCLEH &amp;&amp;=
- csrno &lt;=3D CSR_INSTRETH)) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto skip_ext_pmu_check;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 <br>
-&gt; -=C2=A0 =C2=A0 if ((!cpu-&gt;cfg.pmu_num || !(cpu-&gt;pmu_avail_ctrs &=
-amp; BIT(ctr_index)))) {<br>
-&gt; +=C2=A0 =C2=A0 if (!(cpu-&gt;pmu_avail_ctrs &amp; ctr_mask)) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* No counter is enabled in PMU or t=
-he counter is out of range */<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 skip_ext_pmu_check:<br>
-&gt;=C2=A0 <br>
-&gt; -=C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV_S) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (csrno) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_CYCLE:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;mcou=
-nteren, COUNTEREN_CY)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_TIME:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;mcou=
-nteren, COUNTEREN_TM)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_INSTRET:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;mcou=
-nteren, COUNTEREN_IR)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:<=
-br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;mcou=
-nteren, 1 &lt;&lt; ctr_index)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (rv32) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (csrno) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_CYCLEH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;mcounteren, COUNTEREN_CY)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_TIMEH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;mcounteren, COUNTEREN_TM)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_INSTRETH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;mcounteren, COUNTEREN_IR)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_HPMCOUNTER3H...CSR=
-_HPMCOUNTER31H:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 if (((env-&gt;priv =3D=3D PRV_S) &amp;&amp; (!get_field=
-(env-&gt;mcounteren, ctr_mask))) ||<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0((env-&gt;priv =3D=3D PRV_U) &amp;&amp; (!=
-get_field(env-&gt;scounteren, ctr_mask)))) {<br>
-=C2=A0 =C2=A0 ^ there should be another space here<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_virt_enabled(env)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (csrno) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_CYCLE:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;hcou=
-nteren, COUNTEREN_CY) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env=
--&gt;mcounteren, COUNTEREN_CY)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_TIME:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;hcou=
-nteren, COUNTEREN_TM) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env=
--&gt;mcounteren, COUNTEREN_TM)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_INSTRET:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;hcou=
-nteren, COUNTEREN_IR) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env=
--&gt;mcounteren, COUNTEREN_IR)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_HPMCOUNTER3...CSR_HPMCOUNTER31:<=
-br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;hcou=
-nteren, 1 &lt;&lt; ctr_index) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0get_fie=
-ld(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_=
-EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (rv32) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (csrno) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_CYCLEH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;hcounteren, COUNTEREN_CY) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- get_field(env-&gt;mcounteren, COUNTEREN_CY)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_TIMEH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;hcounteren, COUNTEREN_TM) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- get_field(env-&gt;mcounteren, COUNTEREN_TM)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_INSTRETH:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;hcounteren, COUNTEREN_IR) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- get_field(env-&gt;mcounteren, COUNTEREN_IR)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 case CSR_HPMCOUNTER3H...CSR=
-_HPMCOUNTER31H:<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_fiel=
-d(env-&gt;hcounteren, 1 &lt;&lt; ctr_index) &amp;&amp;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0get_field(env-&gt;mcounteren, 1 &lt;&lt; ctr_index)) {<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (!get_field(env-&gt;hcounteren, ctr_ma=
-sk) &amp;&amp;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0get_field(env-&gt;mcounteren=
-, ctr_mask)) {<br>
-=C2=A0 =C2=A0 =C2=A0^ and here<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_VIRT_INST=
-RUCTION_FAULT;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt;=C2=A0 #endif<br>
-&gt; -- <br>
-&gt; 2.25.1<br>
-&gt; <br>
-&gt;<br>
-<br></blockquote><div><br></div><div>Fixed.Thanks.</div><div>=C2=A0</div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">
-Thanks,<br>
-drew<br>
-</blockquote></div></div>
-
---0000000000000904df05e656dc57--
+--=20
+Alex Benn=C3=A9e
 
