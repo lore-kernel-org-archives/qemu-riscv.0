@@ -1,81 +1,73 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oNkdi-00021p-9B
-	for mharc-qemu-riscv@gnu.org; Mon, 15 Aug 2022 20:41:02 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36770)
+	id 1oNobC-00010u-RJ
+	for mharc-qemu-riscv@gnu.org; Tue, 16 Aug 2022 00:54:43 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:40912)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oNkdg-00021Z-9B; Mon, 15 Aug 2022 20:41:00 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a]:43999)
+ (Exim 4.90_1) (envelope-from <rpathak@ventanamicro.com>)
+ id 1oNob4-0000vO-TM
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 00:54:35 -0400
+Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031]:41713)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philippe.mathieu.daude@gmail.com>)
- id 1oNkdY-0005CU-Vl; Mon, 15 Aug 2022 20:40:57 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id v4so3568192pgi.10;
- Mon, 15 Aug 2022 17:40:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:from:to:cc;
- bh=J6f11DgnWZirsI1b7TR73AYFU7NhDmCvX40Nsg9x+mY=;
- b=ndyDnOsmK1aMZ9XAY5ooMsuhksfYB2r8LWcLhXWjAQhfQbCLykRhFHwA1RVrPei8tq
- 28iJjkoQ2n/9Oq9ys9ETc3/AzZ5MwsMBGmpBu3ZeH1dX6Lyx09EPMfYtd+tcGr1U2BhA
- YvDA9AP5jNfeYMiCfDmpKT8zJatuubfSXHO2sdCScgJ0PpER10R70oYqsPKi6kiMlM8m
- TuzHuerjgDuUcp5uIzGlM70nRmmVKR8sWTRxnicHSkVecEhycpOVSJKvwXUcHkOXyIY9
- WLK7W8utOuC3H4GwGuuDNfyzBAjnsNDvQvjOgd4b85KasXPCEiN9tnh6Ct6VCxA+NE0v
- gkmQ==
+ (Exim 4.90_1) (envelope-from <rpathak@ventanamicro.com>)
+ id 1oNob2-0006Qn-Mz
+ for qemu-riscv@nongnu.org; Tue, 16 Aug 2022 00:54:33 -0400
+Received: by mail-pj1-x1031.google.com with SMTP id
+ t2-20020a17090a4e4200b001f21572f3a4so8609277pjl.0
+ for <qemu-riscv@nongnu.org>; Mon, 15 Aug 2022 21:54:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=XClOkMYp4meiZVZn9OyxrTE/25f1RnPYRz3qYkkgnfs=;
+ b=GG1xCqudSUn7z0M4PlPS1PrXURcu1F59LdPpMrN5ZbF0nmt2pck+8M41U8t/Iq0Cx2
+ 1x8AhFf7AvDlegv1o2e3zPlAxe1k3KRw7r6QUrGy20K1O8QnHUeQG9HsA1BKoaV57PFC
+ vASFi9fApivG2mqaZraEYcEoQ79PkSdjlh0fPU3l9aB69HLX19mwK5z65TtX/0L+A5gV
+ xvGUa6UqGDjsWqu4barFV39BAN4EjWsC2VlOsuzw25PHBp2tSmNqRhS3rEGNJf+eRND7
+ aPBSlNm85IKOB/nWz9HXIHJBdYTzCvcI9LtS9BpTkHz2XEpAf0U0QIUYh6SoMDA9e5/D
+ tqjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:x-gm-message-state:from:to:cc;
- bh=J6f11DgnWZirsI1b7TR73AYFU7NhDmCvX40Nsg9x+mY=;
- b=zDJQcNEFy45VhKC1LGRK7ksZh94HFTolQigcAGQzYajMIy/gGyqxMOuYErxDPidqmz
- LLe+QtB4FK/VHibvfGjA5BuCrMm1V2AjzVaD9d9AXv/0hRP2ikRITpx8rknQmeKMyuFc
- Y+kW/csx5+144+2O+5dxfYBzu5JJoJ54k2IWEAkFMz/fCwhFlZvdIooU0jJQFbgH0VNi
- 6Lrb5FJeeEVBimVfKEnANLXdoZT2frL+18eOp4vllyCR14P02cyIlA3mBRpOeBfCTXMT
- FaahNdeA8fta2D32igF/RLyKQFVsdpW2XHsfLIBuPWNv+tdVWILj8Iv07B06weYU49ff
- SZZA==
-X-Gm-Message-State: ACgBeo2+CCkvO7xLfhicDtRUCnRCo5NW6GfeZ2FTbaanAyyrsqB4ksMq
- 4GDPnarWjaoT9h3tUAMcuU4=
-X-Google-Smtp-Source: AA6agR4dIuMTYdJvrxN4ijTGuFNauBMmXNcN54Z1lVvEvnHNVl3PlOX4wWkLLLGVu4Zia5OTAoSVpg==
-X-Received: by 2002:a63:f916:0:b0:41c:1149:3263 with SMTP id
- h22-20020a63f916000000b0041c11493263mr15474785pgi.104.1660610450086; 
- Mon, 15 Aug 2022 17:40:50 -0700 (PDT)
-Received: from [192.168.1.115] ([185.126.107.38])
- by smtp.gmail.com with ESMTPSA id
- b17-20020a170902d51100b0016d763967f8sm7648771plg.107.2022.08.15.17.40.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Aug 2022 17:40:49 -0700 (PDT)
-Sender: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?=
- <philippe.mathieu.daude@gmail.com>
-Message-ID: <d87035e7-2ed5-317e-2c35-daaa5f0a0cc4@amsat.org>
-Date: Tue, 16 Aug 2022 02:40:44 +0200
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=XClOkMYp4meiZVZn9OyxrTE/25f1RnPYRz3qYkkgnfs=;
+ b=n+mRxu38loZ2uetu0sOo/MtV37HQ1GK9RiuqecEjfmam6vn7lC2kcJjRn8ua68jqus
+ /wTBYMfW32F408yLqrzme7M7pYTE8QcLNrMjYuVnLJuW3Kud43g0uR/uEmmOeb1Y5sRK
+ GlVOtMfhae9EXVJllkEm8F5Uuz3De7TeO5Pz98yv1WwOA123nNB9s98IkuytR+AFhUpP
+ Rqgry9HhYBAC/lwmhdLOoW5PljLGrPL5qaCE4fdeOeH2v5CISsmSjFy5l6AkZ9eAxNcw
+ Pcp3mwykcmxJC1iehoPBA3E3yECCl0QZWpx0gK9UnthKlTTneBtAQlxENpnRAGDOSFjH
+ XpTA==
+X-Gm-Message-State: ACgBeo2QXsycTQ+QbPlW/VnU/PNrIOnoVwcmw3ZS329AdTr76dVAgFsN
+ SkI6mU+BsZR3mhpVTu/JATFopAsuyvm+eA==
+X-Google-Smtp-Source: AA6agR4pUoqiysJjttXUdGDh1eyCIQ2iuYtpty/JMw4aKkpVUXw3kCAiu8hUvVNlHV7+7BSIFfcvCg==
+X-Received: by 2002:a17:903:124f:b0:171:4c36:a6ab with SMTP id
+ u15-20020a170903124f00b001714c36a6abmr20288608plh.141.1660625669718; 
+ Mon, 15 Aug 2022 21:54:29 -0700 (PDT)
+Received: from rpathak-ThinkPad-T490.dc1.ventanamicro.com
+ ([2405:201:1010:106f:421f:cf5e:cdcb:f0c8])
+ by smtp.googlemail.com with ESMTPSA id
+ g132-20020a62528a000000b0052dd9dbe291sm7350417pfb.105.2022.08.15.21.54.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Aug 2022 21:54:29 -0700 (PDT)
+From: Rahul Pathak <rpathak@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: rpathak@ventanamicro.com, alistair.francis@wdc.com, bin.meng@windriver.com,
+ anup@brainfault.org
+Subject: [PATCH v1] target/riscv: Add xicondops in ISA entry
+Date: Tue, 16 Aug 2022 10:24:08 +0530
+Message-Id: <20220816045408.1231135-1-rpathak@ventanamicro.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.12.0
-Subject: Re: [PATCH] hw/riscv: microchip_pfsoc: fix kernel panics due to
- missing peripherals
-Content-Language: en-US
-To: Conor.Dooley@microchip.com, alistair23@gmail.com, mail@conchuod.ie
-Cc: bin.meng@windriver.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, =?UTF-8?Q?C=c3=a9dric_Le_Goat?=
- =?UTF-8?Q?er?= <clg@kaod.org>
-References: <20220813135127.2971754-1-mail@conchuod.ie>
- <CAKmqyKMoQgpEcKSLuLrTT-bbeiwzySNSaeHt12Ou+wuHf7xzpQ@mail.gmail.com>
- <2dd018bb-3026-49a9-3938-3bff62a31179@microchip.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>
-In-Reply-To: <2dd018bb-3026-49a9-3938-3bff62a31179@microchip.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=philippe.mathieu.daude@gmail.com; helo=mail-pg1-x52a.google.com
-X-Spam_score_int: -14
-X-Spam_score: -1.5
-X-Spam_bar: -
-X-Spam_report: (-1.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.249,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.249, NICE_REPLY_A=-0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
+ envelope-from=rpathak@ventanamicro.com; helo=mail-pj1-x1031.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=no autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -88,38 +80,33 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2022 00:41:00 -0000
+X-List-Received-Date: Tue, 16 Aug 2022 04:54:39 -0000
 
-Hi Conor,
+XVentanaCondOps is Ventana custom extension. Add
+its extension entry in the ISA Ext array
 
-On 15/8/22 00:48, Conor.Dooley@microchip.com wrote:
-> On 14/08/2022 23:08, Alistair Francis wrote:
->> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
->>
->> On Sat, Aug 13, 2022 at 11:51 PM Conor Dooley <mail@conchuod.ie> wrote:
->>> QEMU support for PolarFire SoC seems to be fairly out of date at this
->>> point. Running with a recent HSS, U-Boot etc doesn't work, partly due
->>> to the unimplemented cache controller that the HSS tries to read from
->>> (it needs to know the ways configuration now) and the rest seems to be
->>> down to 64 bit address DMA to the sd card (not 100% on that yet).
->>> There's some patches floating around internally that supposedly fixed
->>> things for QEMU v6.something but I could not replicate & they're fairly
->>> conflicty at this point. Plan is to clean them up, but no point sitting
->>> on this patch until then as I have no ETA for that at this point.
->>
->> Awesome! It is great to see Microchip supporting open source projects
-> 
-> Better late than never ehh..
-> As I said, no ETA yet as I don't know just how far off the sd card stuff
-> is, but it's in the todo pile. In the meantime, I'll keep an eye out here
-> which I am ~certain we haven't been doing so far. I've added QEMU stuff
-> to my build/test scripts now that I've got the direct kernel boot working
-> for me so hopefully once things get fixed, they'll stay that way.
+Signed-off-by: Rahul Pathak <rpathak@ventanamicro.com>
+---
 
-Please Cc me and Cédric in your future posts regarding SD card, or open
-a GitLab issue describing the problem.
+This patch is based on branch riscv-to-apply.next (Alistair qemu tree)
+Based on top commit: f2a91d8b78
 
-Regards,
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Phil.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2498b93105..27d10bd6a6 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -104,6 +104,7 @@ static const struct isa_ext_data isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, true, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, true, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, true, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(xventanacondops, true, PRIV_VERSION_1_12_0, ext_XVentanaCondOps),
+ };
+ 
+ static bool isa_ext_is_enabled(RISCVCPU *cpu,
+-- 
+2.34.1
+
 
