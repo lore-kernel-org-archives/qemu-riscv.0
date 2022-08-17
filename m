@@ -1,45 +1,48 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oOKyu-0007Vi-Rs
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Aug 2022 11:29:22 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:41488)
+	id 1oOKyx-0007Wy-8w
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Aug 2022 11:29:23 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:41498)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liuyang22@iscas.ac.cn>)
- id 1oODmz-0000xh-Sq; Wed, 17 Aug 2022 03:48:35 -0400
-Received: from smtp21.cstnet.cn ([159.226.251.21]:44406 helo=cstnet.cn)
+ id 1oODn0-0000xo-R5; Wed, 17 Aug 2022 03:48:35 -0400
+Received: from smtp21.cstnet.cn ([159.226.251.21]:44434 helo=cstnet.cn)
  by eggs.gnu.org with esmtp (Exim 4.90_1)
  (envelope-from <liuyang22@iscas.ac.cn>)
- id 1oODmw-0006CR-P1; Wed, 17 Aug 2022 03:48:33 -0400
+ id 1oODmx-0006D4-8U; Wed, 17 Aug 2022 03:48:34 -0400
 Received: from localhost.localdomain (unknown [182.37.30.21])
- by APP-01 (Coremail) with SMTP id qwCowACHaVpBnfxix+3RCQ--.34174S2;
- Wed, 17 Aug 2022 15:48:18 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowACHaVpBnfxix+3RCQ--.34174S3;
+ Wed, 17 Aug 2022 15:48:24 +0800 (CST)
 From: Yang Liu <liuyang22@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: wangjunqiang@iscas.ac.cn, lazyparser@gmail.com, liweiwei@iscas.ac.cn,
  Yang Liu <liuyang22@iscas.ac.cn>
-Subject: [PATCH 1/2] target/riscv: rvv-1.0: Simplify vfwredsum code
-Date: Wed, 17 Aug 2022 15:48:01 +0800
-Message-Id: <20220817074802.20765-1-liuyang22@iscas.ac.cn>
+Subject: [PATCH 2/2] target/riscv: rvv-1.0: vf[w]redsum distinguish between
+ ordered/unordered
+Date: Wed, 17 Aug 2022 15:48:02 +0800
+Message-Id: <20220817074802.20765-2-liuyang22@iscas.ac.cn>
 X-Mailer: git-send-email 2.30.1 (Apple Git-130)
+In-Reply-To: <20220817074802.20765-1-liuyang22@iscas.ac.cn>
+References: <20220817074802.20765-1-liuyang22@iscas.ac.cn>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qwCowACHaVpBnfxix+3RCQ--.34174S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxAw4UCr17uF47GF4rZF1rCrg_yoW5Ar15pa
- 1fKrW2gw4FqF4fGw1rJw1DJr1Uur1DK3W8Cw1UK3ZYva98urZ8uryDK34xZFy5GrW7Ar1Y
- ya1SyFWava1xXFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUkC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWUJVWUGwAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
- 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr
- 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
- rcIFxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14
- v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkG
- c2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI
- 0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6Fyj6rWUJwCI42IY6I8E87Iv67AKxVWUJVW8
- JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUo-BMDU
- UUU
+X-CM-TRANSID: qwCowACHaVpBnfxix+3RCQ--.34174S3
+X-Coremail-Antispam: 1UD129KBjvJXoW3Jw1UWFy5XF1kGF43Wr1Utrb_yoWxCr4xpF
+ 4Utr17Zr47CrW7Xa4rtrs8ArWUWr4vgw45CFZIqFnxWay7JFZ5CasF9r47tFWDJFZ7A34U
+ W3WkAr9xA3s3Wa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUBl14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWUJVWUGwAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+ x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84
+ ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0DM2vY
+ z4IE04k24VAvwVAKI4IrM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
+ 02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVWUJVW8JwAm72CE
+ 4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7Mx
+ AIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_
+ Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwI
+ xGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWx
+ JwCI42IY6xAIw20EY4v20xvaj40_JFI_Gr1lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcV
+ C2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbo7K3UUUUU==
 X-Originating-IP: [182.37.30.21]
 X-CM-SenderInfo: 5olx5tdqjsjq5lvft2wodfhubq/
 Received-SPF: pass client-ip=159.226.251.21;
@@ -65,86 +68,133 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 X-List-Received-Date: Wed, 17 Aug 2022 07:48:35 -0000
 
-Remove duplicate code by wrapping vfwredsum_vs's OP function.
+Starting with RVV1.0, the original vf[w]redsum_vs instruction was renamed
+to vf[w]redusum_vs. The distinction between ordered and unordered is also
+more consistent with other instructions, although there is no difference
+in implementation between the two for QEMU.
 
 Signed-off-by: Yang Liu <liuyang22@iscas.ac.cn>
 ---
- target/riscv/vector_helper.c | 56 +++++++-----------------------------
- 1 file changed, 10 insertions(+), 46 deletions(-)
+ target/riscv/helper.h                   | 15 ++++++++++-----
+ target/riscv/insn32.decode              |  6 ++++--
+ target/riscv/insn_trans/trans_rvv.c.inc |  6 ++++--
+ target/riscv/vector_helper.c            | 19 +++++++++++++------
+ 4 files changed, 31 insertions(+), 15 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index a96fc49c71..fd83c0b20b 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -4655,58 +4655,22 @@ GEN_VEXT_FRED(vfredmin_vs_h, uint16_t, uint16_t, H2, H2, float16_minimum_number)
- GEN_VEXT_FRED(vfredmin_vs_w, uint32_t, uint32_t, H4, H4, float32_minimum_number)
- GEN_VEXT_FRED(vfredmin_vs_d, uint64_t, uint64_t, H8, H8, float64_minimum_number)
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 4ef3b2251d..a03014fe67 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1009,9 +1009,12 @@ DEF_HELPER_6(vwredsum_vs_b, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vwredsum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vwredsum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
  
--/* Vector Widening Floating-Point Reduction Instructions */
--/* Unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
--void HELPER(vfwredsum_vs_h)(void *vd, void *v0, void *vs1,
--                            void *vs2, CPURISCVState *env, uint32_t desc)
-+/* Vector Widening Floating-Point Add Instructions */
-+static uint32_t fwadd16(uint32_t a, uint16_t b, float_status *s)
- {
--    uint32_t vm = vext_vm(desc);
--    uint32_t vl = env->vl;
--    uint32_t esz = sizeof(uint32_t);
--    uint32_t vlenb = simd_maxsz(desc);
--    uint32_t vta = vext_vta(desc);
--    uint32_t i;
--    uint32_t s1 =  *((uint32_t *)vs1 + H4(0));
--
--    for (i = env->vstart; i < vl; i++) {
--        uint16_t s2 = *((uint16_t *)vs2 + H2(i));
--        if (!vm && !vext_elem_mask(v0, i)) {
--            continue;
--        }
--        s1 = float32_add(s1, float16_to_float32(s2, true, &env->fp_status),
--                         &env->fp_status);
--    }
--    *((uint32_t *)vd + H4(0)) = s1;
--    env->vstart = 0;
--    /* set tail elements to 1s */
--    vext_set_elems_1s(vd, vta, esz, vlenb);
-+    return float32_add(a, float16_to_float32(b, true, s), s);
+-DEF_HELPER_6(vfredsum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+-DEF_HELPER_6(vfredsum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
+-DEF_HELPER_6(vfredsum_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredusum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredusum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredusum_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredosum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredosum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfredosum_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfredmax_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfredmax_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfredmax_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
+@@ -1019,8 +1022,10 @@ DEF_HELPER_6(vfredmin_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfredmin_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vfredmin_vs_d, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+-DEF_HELPER_6(vfwredsum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
+-DEF_HELPER_6(vfwredsum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfwredusum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfwredusum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfwredosum_vs_h, void, ptr, ptr, ptr, ptr, env, i32)
++DEF_HELPER_6(vfwredosum_vs_w, void, ptr, ptr, ptr, ptr, env, i32)
+ 
+ DEF_HELPER_6(vmand_mm, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vmnand_mm, void, ptr, ptr, ptr, ptr, env, i32)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 4033565393..2873a7ae04 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -659,11 +659,13 @@ vredmax_vs      000111 . ..... ..... 010 ..... 1010111 @r_vm
+ vwredsumu_vs    110000 . ..... ..... 000 ..... 1010111 @r_vm
+ vwredsum_vs     110001 . ..... ..... 000 ..... 1010111 @r_vm
+ # Vector ordered and unordered reduction sum
+-vfredsum_vs     0000-1 . ..... ..... 001 ..... 1010111 @r_vm
++vfredusum_vs    000001 . ..... ..... 001 ..... 1010111 @r_vm
++vfredosum_vs    000011 . ..... ..... 001 ..... 1010111 @r_vm
+ vfredmin_vs     000101 . ..... ..... 001 ..... 1010111 @r_vm
+ vfredmax_vs     000111 . ..... ..... 001 ..... 1010111 @r_vm
+ # Vector widening ordered and unordered float reduction sum
+-vfwredsum_vs    1100-1 . ..... ..... 001 ..... 1010111 @r_vm
++vfwredusum_vs   110001 . ..... ..... 001 ..... 1010111 @r_vm
++vfwredosum_vs   110011 . ..... ..... 001 ..... 1010111 @r_vm
+ vmand_mm        011001 - ..... ..... 010 ..... 1010111 @r
+ vmnand_mm       011101 - ..... ..... 010 ..... 1010111 @r
+ vmandn_mm       011000 - ..... ..... 010 ..... 1010111 @r
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 6c091824b6..9c9de17f8a 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -3112,7 +3112,8 @@ static bool freduction_check(DisasContext *s, arg_rmrr *a)
+            require_zve64f(s);
  }
  
--void HELPER(vfwredsum_vs_w)(void *vd, void *v0, void *vs1,
--                            void *vs2, CPURISCVState *env, uint32_t desc)
-+static uint64_t fwadd32(uint64_t a, uint32_t b, float_status *s)
- {
--    uint32_t vm = vext_vm(desc);
--    uint32_t vl = env->vl;
--    uint32_t esz = sizeof(uint64_t);
--    uint32_t vlenb = simd_maxsz(desc);
--    uint32_t vta = vext_vta(desc);
--    uint32_t i;
--    uint64_t s1 =  *((uint64_t *)vs1);
--
--    for (i = env->vstart; i < vl; i++) {
--        uint32_t s2 = *((uint32_t *)vs2 + H4(i));
--        if (!vm && !vext_elem_mask(v0, i)) {
--            continue;
--        }
--        s1 = float64_add(s1, float32_to_float64(s2, &env->fp_status),
--                         &env->fp_status);
--    }
--    *((uint64_t *)vd) = s1;
--    env->vstart = 0;
--    /* set tail elements to 1s */
--    vext_set_elems_1s(vd, vta, esz, vlenb);
-+    return float64_add(a, float32_to_float64(b, s), s);
+-GEN_OPFVV_TRANS(vfredsum_vs, freduction_check)
++GEN_OPFVV_TRANS(vfredusum_vs, freduction_check)
++GEN_OPFVV_TRANS(vfredosum_vs, freduction_check)
+ GEN_OPFVV_TRANS(vfredmax_vs, freduction_check)
+ GEN_OPFVV_TRANS(vfredmin_vs, freduction_check)
+ 
+@@ -3124,7 +3125,8 @@ static bool freduction_widen_check(DisasContext *s, arg_rmrr *a)
+            (s->sew != MO_8);
  }
  
-+/* Vector Widening Floating-Point Reduction Instructions */
-+/* Unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
-+GEN_VEXT_FRED(vfwredsum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
-+GEN_VEXT_FRED(vfwredsum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
-+
+-GEN_OPFVV_WIDEN_TRANS(vfwredsum_vs, freduction_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwredusum_vs, freduction_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwredosum_vs, freduction_widen_check)
+ 
  /*
   *** Vector Mask Operations
-  */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index fd83c0b20b..d87f79ad82 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -4641,9 +4641,14 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
+ }
+ 
+ /* Unordered sum */
+-GEN_VEXT_FRED(vfredsum_vs_h, uint16_t, uint16_t, H2, H2, float16_add)
+-GEN_VEXT_FRED(vfredsum_vs_w, uint32_t, uint32_t, H4, H4, float32_add)
+-GEN_VEXT_FRED(vfredsum_vs_d, uint64_t, uint64_t, H8, H8, float64_add)
++GEN_VEXT_FRED(vfredusum_vs_h, uint16_t, uint16_t, H2, H2, float16_add)
++GEN_VEXT_FRED(vfredusum_vs_w, uint32_t, uint32_t, H4, H4, float32_add)
++GEN_VEXT_FRED(vfredusum_vs_d, uint64_t, uint64_t, H8, H8, float64_add)
++
++/* Ordered sum */
++GEN_VEXT_FRED(vfredosum_vs_h, uint16_t, uint16_t, H2, H2, float16_add)
++GEN_VEXT_FRED(vfredosum_vs_w, uint32_t, uint32_t, H4, H4, float32_add)
++GEN_VEXT_FRED(vfredosum_vs_d, uint64_t, uint64_t, H8, H8, float64_add)
+ 
+ /* Maximum value */
+ GEN_VEXT_FRED(vfredmax_vs_h, uint16_t, uint16_t, H2, H2, float16_maximum_number)
+@@ -4667,9 +4672,11 @@ static uint64_t fwadd32(uint64_t a, uint32_t b, float_status *s)
+ }
+ 
+ /* Vector Widening Floating-Point Reduction Instructions */
+-/* Unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
+-GEN_VEXT_FRED(vfwredsum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
+-GEN_VEXT_FRED(vfwredsum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
++/* Ordered/unordered reduce 2*SEW = 2*SEW + sum(promote(SEW)) */
++GEN_VEXT_FRED(vfwredusum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
++GEN_VEXT_FRED(vfwredusum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
++GEN_VEXT_FRED(vfwredosum_vs_h, uint32_t, uint16_t, H4, H2, fwadd16)
++GEN_VEXT_FRED(vfwredosum_vs_w, uint64_t, uint32_t, H8, H4, fwadd32)
+ 
+ /*
+  *** Vector Mask Operations
 -- 
 2.30.1 (Apple Git-130)
 
