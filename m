@@ -1,55 +1,55 @@
 Received: from list by lists.gnu.org with archive (Exim 4.90_1)
-	id 1oOPJJ-0003od-0j
-	for mharc-qemu-riscv@gnu.org; Wed, 17 Aug 2022 16:06:41 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10]:36032)
+	id 1oOPJl-0004oP-2U
+	for mharc-qemu-riscv@gnu.org; Wed, 17 Aug 2022 16:07:09 -0400
+Received: from eggs.gnu.org ([2001:470:142:3::10]:52982)
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oOPJH-0003kb-99
- for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 16:06:39 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:34375)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oOPJj-0004kB-Rn
+ for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 16:07:07 -0400
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432]:36513)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oOPJF-0000Ou-DB
- for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 16:06:39 -0400
-Received: by mail-wr1-x432.google.com with SMTP id a4so5673905wrq.1
- for <qemu-riscv@nongnu.org>; Wed, 17 Aug 2022 13:06:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mail@conchuod.ie>) id 1oOPJi-0000T6-1V
+ for qemu-riscv@nongnu.org; Wed, 17 Aug 2022 16:07:07 -0400
+Received: by mail-wr1-x432.google.com with SMTP id j7so17424582wrh.3
+ for <qemu-riscv@nongnu.org>; Wed, 17 Aug 2022 13:07:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=conchuod.ie; s=google;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc; bh=UZTpqupSKgkBpic1kmmbE38yTznkCK+owr7ALBSIpuo=;
- b=ONnvtXExatPGAC8/eknlabIqwuQUJitqFeDU6iyKVknhYq9mRJVUgaW2s/7WFWlzn3
- 4I6bO7BksmXFUVOTQo+3EgPrXJ1lC68V8OUxM9/0Le5LasHeV74Ro+BAK0z6yqUH3qOh
- OGjdiUMOpNCZIbN0TFs3JxCRuWhZyPiuau7oARVBknRBZVZwveudnn/hhBflTdlfwJp0
- zqRdtz4HOAEoctXS5iQSbg7kxevpTwPaVWymxqfPoCEqyegAyKI9KFrcg7pFAndgC119
- hZjazVmD1acGyLfeqZ9w7H37fQt5bDzqX+p2MWPJsdllwftjSVTbRklc2TSA5JFPeOTb
- NWvQ==
+ :from:to:cc; bh=B62d/4sJXmri44gHYwQ72W46oaIsl+XdBEnlOkM1PHU=;
+ b=JCGzxJkhrzEuo9lQLIBPfriafnUTtMKhcXyomBG1zeRPPUlTkwDKY5JRBY+EDYavmF
+ BsdQGNi8C55VRRp77LZ8wlt4703ixan9kmNazqozc+kwPgnT8zB4aPQ051E6JW9XP2RI
+ NHUCTUehoNye9Lg8oIapURtqtL5zok3j3zJ5bip5b5e7iW8FXqtoXRwoi7cwkJkMEDl8
+ /aBf00PGTBcXpy0j6P8J1vs//QIOKYOSMSfBM1qxzYvJP9xzTg0Opow4VDXIRmeHgDNB
+ 7ZQ5Hrr5PmhpnYcZBqHOh3nkar8K4lT548wgQS5ScJd1/z0T8tFiNSDIUoEYgf6o9+5O
+ udIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc;
- bh=UZTpqupSKgkBpic1kmmbE38yTznkCK+owr7ALBSIpuo=;
- b=cN/8BSX848NMO1FuKWxfi5f68Y4Ga7wi42gL4ByDmHiwU84adjC9b8QILQjYjAPsWs
- zpFxRXNmAmjuFzkW1KEMRIlF/r8WYYNsmcthA4RdZIS85vKuG4JwN3AMjQwB3fy3s1Cf
- YnrLMM+xft0D7CsUomKnKkSwRji6dzGbRC76cmReDuexzyrkuEmIWdKZjaZCmbxwUjnK
- hA5CLSBwWACn3y7ybh+u1VSC5gBMj5EJc7Hza+Gx/pYzRS7xyQslNtLAlMn+HYc4tcz0
- dRGRrZqlyrW5VVNnuSz6d9+KYqXE4tPQp2xRfpD8FH7A1bN262Zfab3+v7j1OdXl32be
- h/jA==
-X-Gm-Message-State: ACgBeo0g/bvA8lElgRe0J5y19ZYqZBqr74GTfNPz5OuOYqLxTslcjxTZ
- WnTSoBNuq5wvjs+FOFzIiHd5rw==
-X-Google-Smtp-Source: AA6agR7BOt9pNzRcWHTxtpR3HtOvdldpTzvhVKO4AviCyWyAqHC7IF3syom/zJ4M5uYixXaWEpe8vA==
-X-Received: by 2002:a5d:64e9:0:b0:220:7dd7:63eb with SMTP id
- g9-20020a5d64e9000000b002207dd763ebmr15274129wri.590.1660766796102; 
- Wed, 17 Aug 2022 13:06:36 -0700 (PDT)
+ bh=B62d/4sJXmri44gHYwQ72W46oaIsl+XdBEnlOkM1PHU=;
+ b=V/SpjQiQM2/zDfekizdkuXdenDbGLvKN1uNArvFCDyM0i4AjRosB+9gHKOqWK96vIP
+ bSKH+silSJ4lANTWCCjFLi6SRLzTFfk0GyDyC6njtOlx4q62vnszFrY1PIkKt+J0lOJr
+ crVYRT3A97w9312/xs7cpswzWgr5rSwv25vG4NbmOgrv7N8kOuAYOQUruvaDFMSs4O/C
+ yV/57HKHQqK2TxFPKc3lwpDP8roicrSg+/bDLlAYi8DDwCPrL7vlShRBxT9mYwEIrC5H
+ rv+iX3IBBylPU5f1R2iiyVbyPjfbDXh46N08hAK5UmoJaLbaDCCDB+S+UwDg8CeCNOAT
+ kpww==
+X-Gm-Message-State: ACgBeo2V1QblIGl3MDVr2b4d565ISqA3z3ruPpac1iPoLOqWfOQHPuRP
+ puFYNa9sh7DXpe7YWWTn583t6w==
+X-Google-Smtp-Source: AA6agR7qoZmJnmLkrdfATQ1ZiPYo4Z3sqFiUIuZIK+EsCYgIyc4Zluwktxa718RJyfLz+JhYNmY+1Q==
+X-Received: by 2002:a5d:47c6:0:b0:225:fd3:f0c0 with SMTP id
+ o6-20020a5d47c6000000b002250fd3f0c0mr6828257wrc.308.1660766824704; 
+ Wed, 17 Aug 2022 13:07:04 -0700 (PDT)
 Received: from [192.168.2.222] ([109.76.58.63])
  by smtp.gmail.com with ESMTPSA id
- x9-20020a05600c178900b003a4efb794d7sm3065988wmo.36.2022.08.17.13.06.34
+ q6-20020a1ce906000000b003a342933727sm3106958wmc.3.2022.08.17.13.07.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Aug 2022 13:06:35 -0700 (PDT)
-Message-ID: <0046d59c-6736-09c2-199d-3661e58c2928@conchuod.ie>
-Date: Wed, 17 Aug 2022 21:06:33 +0100
+ Wed, 17 Aug 2022 13:07:04 -0700 (PDT)
+Message-ID: <9a4eabe8-6fcf-f146-7803-3f8e0fcb29e9@conchuod.ie>
+Date: Wed, 17 Aug 2022 21:07:03 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 0/4] Fix dt-validate issues on qemu dtbdumps due to
+Subject: Re: [PATCH v2 0/4] Fix dt-validate issues on qemu dtbdumps due to
  dt-bindings
 Content-Language: en-US
 To: Thomas Gleixner <tglx@linutronix.de>, Marc Zyngier <maz@kernel.org>,
@@ -64,8 +64,9 @@ Cc: Daniel Lezcano <daniel.lezcano@linaro.org>,
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
  linux-riscv@lists.infradead.org, qemu-riscv@nongnu.org
 References: <20220817200531.988850-1-mail@conchuod.ie>
+ <20220817200531.988850-6-mail@conchuod.ie>
 From: Conor Dooley <mail@conchuod.ie>
-In-Reply-To: <20220817200531.988850-1-mail@conchuod.ie>
+In-Reply-To: <20220817200531.988850-6-mail@conchuod.ie>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::432;
@@ -89,9 +90,9 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2022 20:06:39 -0000
+X-List-Received-Date: Wed, 17 Aug 2022 20:07:08 -0000
 
-Please ignore this series, I accidentally had too much in the folder.
+Please also ignore this series, I accidentally had too much in the folder.
 
 On 17/08/2022 21:05, Conor Dooley wrote:
 > From: Conor Dooley <conor.dooley@microchip.com>
